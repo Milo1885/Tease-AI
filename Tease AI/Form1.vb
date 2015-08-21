@@ -426,6 +426,14 @@ Public Class Form1
     Public Contact3PicsCount As Integer
     Public Group As String = "D"
 
+    Dim CustomTask As Boolean
+    Dim CustomTaskFirst As Boolean
+    Dim CustomTaskText As String
+    Dim CustomTaskTextFirst As String
+    Dim CustomTaskActive As Boolean
+
+
+
 
 
     Private Const DISABLE_SOUNDS As Integer = 21
@@ -595,6 +603,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         CBTBallsFirst = True
         CBTCockFirst = True
+        CustomTaskFirst = True
 
         CoInternetSetFeatureEnabled(DISABLE_SOUNDS, SET_FEATURE_ON_PROCESS, True)
 
@@ -2538,13 +2547,15 @@ DebugAwarenessStep2:
 
 
 
-        If CBTCockFlag = True Or CBTBallsFlag = True Then
+        If CBTCockFlag = True Or CBTBallsFlag = True Or CustomTask = True Then
             Dim CBTStop As Integer = randomizer.Next(1, 101)
             If CBTStop < 30 Then
                 CBTCockFlag = False
                 CBTBallsFlag = False
+                CustomTask = False
                 CBTBallsFirst = True
                 CBTCockFirst = True
+                CustomTaskFirst = True
                 ScriptTick = 3
                 ScriptTimer.Start()
             End If
@@ -2556,6 +2567,10 @@ DebugAwarenessStep2:
 
         If CBTBallsFlag = True Then
             CBTBalls()
+        End If
+
+        If CustomTask = True Then
+            RunCustomTask()
         End If
 
         Return
@@ -3347,6 +3362,41 @@ AcceptAnswer:
 
 
 
+    Public Sub RunCustomTask()
+
+
+
+        Dim CustomReader As New StreamReader(CustomTaskTextFirst)
+
+        If CustomTaskFirst = False Then
+            CustomReader = New StreamReader(CustomTaskText)
+        End If
+
+        Dim CustomList As New List(Of String)
+        While CustomReader.Peek <> -1
+            CustomList.Add(CustomReader.ReadLine())
+        End While
+        CustomReader.Close()
+        CustomReader.Dispose()
+
+
+
+        Try
+            CustomList = FilterList(CustomList)
+            DomTask = CustomList(randomizer.Next(0, CustomList.Count))
+        Catch
+            DomTask = "ERROR: Tease AI did not return a valid Custom Task line"
+        End Try
+
+        CustomTaskFirst = False
+
+
+
+        TypingDelayGeneric()
+
+    End Sub
+
+
     Public Sub RunFileText()
 
 
@@ -3362,7 +3412,7 @@ AcceptAnswer:
 
         'Debug.Print("CBTCockFlag = " & CBTCockFlag)
         'Debug.Print("CBTBallsFlag = " & CBTBallsFlag)
-        If CBTCockFlag = True Or CBTBallsFlag = True Then Return
+        If CBTCockFlag = True Or CBTBallsFlag = True Or CustomTask = True Then Return
 
         'Debug.Print("WritingTaskFlag = " & WritingTaskFlag)
         If WritingTaskFlag = True Then Return
@@ -4508,6 +4558,11 @@ NoResponse:
                     CBTBalls()
                 End If
 
+                If CustomTaskActive = True Then
+                    CustomTaskActive = False
+                    RunCustomTask()
+                End If
+
                 If YesOrNo = False Then
                     ScriptTick = randomizer.Next(4, 9)
                     If RapidFire = True Then ScriptTick = 1
@@ -4879,14 +4934,16 @@ NullResponseLine2:
 
 
 
-                If CBTCockFlag = True Or CBTBallsFlag = True Then
+                If CBTCockFlag = True Or CBTBallsFlag = True Or CustomTask = True Then
                     Dim CBTStop As Integer = randomizer.Next(1, 101)
                     'Debug.Print("CBTSTop = " & CBTStop)
                     If CBTStop < 30 Then
                         CBTCockFlag = False
                         CBTBallsFlag = False
+                        CustomTask = False
                         CBTBallsFirst = True
                         CBTCockFirst = True
+                        CustomTaskFirst = True
                     End If
                 End If
 
@@ -4896,6 +4953,10 @@ NullResponseLine2:
 
                 If CBTBallsFlag = True Then
                     CBTBalls()
+                End If
+
+                If CustomTask = True Then
+                    RunCustomTask()
                 End If
 
                 If YesOrNo = False And Responding = False Then
@@ -7843,6 +7904,34 @@ RinseLatherRepeat:
 
         End If
 
+        If StringClean.Contains("@CustomTask(") Then
+
+            Dim WriteFlag As String = StringClean
+            Dim WriteStart As Integer
+            WriteStart = WriteFlag.IndexOf("@CustomTask(") + 12
+            WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
+            WriteFlag = WriteFlag.Split(")")(0)
+            WriteFlag = WriteFlag.Replace("@CustomTask(", "")
+
+
+            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & WriteFlag & "_First.txt") And _
+                File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & WriteFlag & ".txt") Then
+                CustomTask = True
+                CustomTaskActive = True
+                CustomTaskText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & WriteFlag & ".txt"
+                CustomTaskTextFirst = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & WriteFlag & "_First.txt"
+
+
+
+            End If
+
+
+            StringClean = StringClean.Replace("@CustomTask(" & WriteFlag & ")", "")
+
+        End If
+
+
+
 
         If StringClean.Contains("@SetFlag") Then
             Debug.Print("SetFlag called")
@@ -9671,6 +9760,7 @@ OrgasmDecided:
 
                 CBTCockFlag = False
                 CBTBallsFlag = False
+                CustomTask = False
                 SubEdging = False
                 SubHoldingEdge = False
                 EdgeTauntTimer.Stop()
@@ -9704,6 +9794,7 @@ OrgasmDecided:
 
                 CBTCockFlag = False
                 CBTBallsFlag = False
+                CustomTask = False
                 SubEdging = False
                 SubHoldingEdge = False
                 StrokeTimer.Stop()
@@ -9860,8 +9951,8 @@ OrgasmDecided:
             SubStroking = False
             SubHoldingEdge = True
             EdgeTauntTimer.Stop()
-            DomChat = "#HoldTheEdge"
-            TypingDelay()
+            'DomChat = "#HoldTheEdge"
+            'TypingDelay()
 
             HoldEdgeTick = HoldEdgeChance
 
@@ -9906,8 +9997,8 @@ OrgasmDecided:
             SubEdging = False
             SubStroking = False
             EdgeTauntTimer.Stop()
-            DomChat = "#StopStrokingEdge"
-            TypingDelay()
+            'DomChat = "#StopStrokingEdge"
+            'TypingDelay()
 
             Do
                 Application.DoEvents()
