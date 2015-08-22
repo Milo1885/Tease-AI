@@ -977,4 +977,7 @@ Special thanks to Triple Alfa, whose insight has been invaluable every step of t
   <metadata name="BWCreateURLFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>183, 56</value>
   </metadata>
+  <metadata name="TTDir.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>334, 56</value>
+  </metadata>
 </root>

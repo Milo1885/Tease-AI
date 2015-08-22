@@ -3,7 +3,11 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 43
 
-08/21 1:24 am - Added Chastity state toggle to Misc tab in Settings menu
+08/21 2:05 am - Added ToolTips to Domme, Contact1, Contact2 and Contact3 Image Directory labels. When the user hovers the mouse over these labels, the full path to whatever folder they had selected will be displayed in the tooltip. This is to give the user a way to view long paths since the available space is somewhat limited.
+
+                Added buttons to Contact1, Contact2 and Contact3 in the Glitter tab that allows the user to clear a previously set image directory.
+
+08/21 1:24 am - Added Chastity state toggle to Misc tab in Settings menu.
 
 08/21 11:36 pm - Added System Keywords #CBTBallsCount and #CBTCockCount. These words are replaced with an integer representing the number of times those routines have been called. These can be used in Operations as well.
 

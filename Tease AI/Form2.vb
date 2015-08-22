@@ -12071,4 +12071,56 @@ NextURL:
 
 
     End Sub
+
+    Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact1ImageDir.MouseHover
+        If LBLContact1ImageDir.Text <> Nothing = True And LBLContact1ImageDir.Text <> "No path selected" Then
+            TTDir.SetToolTip(LBLContact1ImageDir, LBLContact1ImageDir.Text)
+        Else
+            TTDir.SetToolTip(LBLContact1ImageDir, "No path selected")
+        End If
+    End Sub
+
+    Private Sub LBLContact2ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact2ImageDir.MouseHover
+        If LBLContact2ImageDir.Text <> Nothing = True And LBLContact2ImageDir.Text <> "No path selected" Then
+            TTDir.SetToolTip(LBLContact2ImageDir, LBLContact2ImageDir.Text)
+        Else
+            TTDir.SetToolTip(LBLContact2ImageDir, "No path selected")
+        End If
+    End Sub
+
+    Private Sub LBLContact3ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact3ImageDir.MouseHover
+        If LBLContact3ImageDir.Text <> Nothing = True And LBLContact3ImageDir.Text <> "No path selected" Then
+            TTDir.SetToolTip(LBLContact3ImageDir, LBLContact3ImageDir.Text)
+        Else
+            TTDir.SetToolTip(LBLContact3ImageDir, "No path selected")
+        End If
+    End Sub
+
+    Private Sub LBLDomImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLDomImageDir.MouseEnter
+        If LBLDomImageDir.Text <> Nothing = True And LBLDomImageDir.Text <> "No path selected" Then
+            TTDir.SetToolTip(LBLDomImageDir, LBLDomImageDir.Text)
+        Else
+            TTDir.SetToolTip(LBLDomImageDir, "No path selected")
+        End If
+    End Sub
+
+
+
+    Private Sub Button14_Click_1(sender As System.Object, e As System.EventArgs) Handles Button14.Click
+        LBLContact1ImageDir.Text = "No path selected"
+        My.Settings.Contact1ImageDir = "No path selected"
+        My.Settings.Save()
+    End Sub
+
+    Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
+        LBLContact2ImageDir.Text = "No path selected"
+        My.Settings.Contact2ImageDir = "No path selected"
+        My.Settings.Save()
+    End Sub
+
+    Private Sub Button12_Click_1(sender As System.Object, e As System.EventArgs) Handles Button12.Click
+        LBLContact3ImageDir.Text = "No path selected"
+        My.Settings.Contact3ImageDir = "No path selected"
+        My.Settings.Save()
+    End Sub
 End Class

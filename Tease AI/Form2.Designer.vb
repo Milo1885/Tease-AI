@@ -22,6 +22,7 @@ Partial Class FrmSettings
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmSettings))
         Me.SettingsPanel = New System.Windows.Forms.Panel()
         Me.SettingsTabs = New System.Windows.Forms.TabControl()
@@ -850,6 +851,10 @@ Partial Class FrmSettings
         Me.Label50 = New System.Windows.Forms.Label()
         Me.TabPage25 = New System.Windows.Forms.TabPage()
         Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.GroupBox33 = New System.Windows.Forms.GroupBox()
+        Me.Button11 = New System.Windows.Forms.Button()
+        Me.LBLChastityState = New System.Windows.Forms.Label()
+        Me.Label120 = New System.Windows.Forms.Label()
         Me.GroupBox27 = New System.Windows.Forms.GroupBox()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.LBLSesSpace = New System.Windows.Forms.Label()
@@ -899,10 +904,10 @@ Partial Class FrmSettings
         Me.BWRefreshURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
-        Me.GroupBox33 = New System.Windows.Forms.GroupBox()
-        Me.Label120 = New System.Windows.Forms.Label()
-        Me.LBLChastityState = New System.Windows.Forms.Label()
-        Me.Button11 = New System.Windows.Forms.Button()
+        Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -1109,6 +1114,7 @@ Partial Class FrmSettings
         Me.GroupBox34.SuspendLayout
         Me.TabPage25.SuspendLayout
         Me.Panel11.SuspendLayout
+        Me.GroupBox33.SuspendLayout
         Me.GroupBox27.SuspendLayout
         Me.GroupBox20.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1116,7 +1122,6 @@ Partial Class FrmSettings
         Me.TabPage5.SuspendLayout
         Me.Panel5.SuspendLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox33.SuspendLayout
         Me.SuspendLayout
         '
         'SettingsPanel
@@ -8468,6 +8473,7 @@ Partial Class FrmSettings
         'GBGlitter1
         '
         Me.GBGlitter1.BackColor = System.Drawing.Color.LightGray
+        Me.GBGlitter1.Controls.Add(Me.Button14)
         Me.GBGlitter1.Controls.Add(Me.Button2)
         Me.GBGlitter1.Controls.Add(Me.LBLContact1ImageDir)
         Me.GBGlitter1.Controls.Add(Me.BTNGlitter1)
@@ -8491,9 +8497,9 @@ Partial Class FrmSettings
         Me.Button2.ForeColor = System.Drawing.Color.Black
         Me.Button2.Location = New System.Drawing.Point(9, 93)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(204, 22)
+        Me.Button2.Size = New System.Drawing.Size(160, 22)
         Me.Button2.TabIndex = 177
-        Me.Button2.Text = "Set Contact 1 Images Directory"
+        Me.Button2.Text = "Set Contact1 Images Directory"
         Me.Button2.UseVisualStyleBackColor = false
         '
         'LBLContact1ImageDir
@@ -8594,6 +8600,7 @@ Partial Class FrmSettings
         'GBGlitter3
         '
         Me.GBGlitter3.BackColor = System.Drawing.Color.LightGray
+        Me.GBGlitter3.Controls.Add(Me.Button12)
         Me.GBGlitter3.Controls.Add(Me.Button10)
         Me.GBGlitter3.Controls.Add(Me.LBLContact3ImageDir)
         Me.GBGlitter3.Controls.Add(Me.BTNGlitter3)
@@ -8617,9 +8624,9 @@ Partial Class FrmSettings
         Me.Button10.ForeColor = System.Drawing.Color.Black
         Me.Button10.Location = New System.Drawing.Point(9, 93)
         Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(204, 22)
+        Me.Button10.Size = New System.Drawing.Size(160, 22)
         Me.Button10.TabIndex = 179
-        Me.Button10.Text = "Set Contact 3 Images Directory"
+        Me.Button10.Text = "Set Contact3 Images Directory"
         Me.Button10.UseVisualStyleBackColor = false
         '
         'LBLContact3ImageDir
@@ -8720,6 +8727,7 @@ Partial Class FrmSettings
         'GBGlitter2
         '
         Me.GBGlitter2.BackColor = System.Drawing.Color.LightGray
+        Me.GBGlitter2.Controls.Add(Me.Button13)
         Me.GBGlitter2.Controls.Add(Me.Button8)
         Me.GBGlitter2.Controls.Add(Me.LBLContact2ImageDir)
         Me.GBGlitter2.Controls.Add(Me.BTNGlitter2)
@@ -8743,9 +8751,9 @@ Partial Class FrmSettings
         Me.Button8.ForeColor = System.Drawing.Color.Black
         Me.Button8.Location = New System.Drawing.Point(9, 93)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(204, 22)
+        Me.Button8.Size = New System.Drawing.Size(160, 22)
         Me.Button8.TabIndex = 179
-        Me.Button8.Text = "Set Contact 2 Images Directory"
+        Me.Button8.Text = "Set Contact2 Images Directory"
         Me.Button8.UseVisualStyleBackColor = false
         '
         'LBLContact2ImageDir
@@ -11174,6 +11182,52 @@ Partial Class FrmSettings
         Me.Panel11.Size = New System.Drawing.Size(708, 437)
         Me.Panel11.TabIndex = 92
         '
+        'GroupBox33
+        '
+        Me.GroupBox33.Controls.Add(Me.Button11)
+        Me.GroupBox33.Controls.Add(Me.LBLChastityState)
+        Me.GroupBox33.Controls.Add(Me.Label120)
+        Me.GroupBox33.Location = New System.Drawing.Point(420, 155)
+        Me.GroupBox33.Name = "GroupBox33"
+        Me.GroupBox33.Size = New System.Drawing.Size(277, 107)
+        Me.GroupBox33.TabIndex = 177
+        Me.GroupBox33.TabStop = false
+        Me.GroupBox33.Text = "System States"
+        '
+        'Button11
+        '
+        Me.Button11.Location = New System.Drawing.Point(161, 33)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(99, 23)
+        Me.Button11.TabIndex = 177
+        Me.Button11.Text = "Toggle"
+        Me.Button11.UseVisualStyleBackColor = true
+        '
+        'LBLChastityState
+        '
+        Me.LBLChastityState.BackColor = System.Drawing.Color.LightGray
+        Me.LBLChastityState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChastityState.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLChastityState.ForeColor = System.Drawing.Color.Red
+        Me.LBLChastityState.Location = New System.Drawing.Point(120, 33)
+        Me.LBLChastityState.Name = "LBLChastityState"
+        Me.LBLChastityState.Size = New System.Drawing.Size(37, 23)
+        Me.LBLChastityState.TabIndex = 3
+        Me.LBLChastityState.Text = "OFF"
+        Me.LBLChastityState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label120
+        '
+        Me.Label120.BackColor = System.Drawing.Color.LightGray
+        Me.Label120.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label120.Location = New System.Drawing.Point(17, 33)
+        Me.Label120.Name = "Label120"
+        Me.Label120.Size = New System.Drawing.Size(98, 23)
+        Me.Label120.TabIndex = 2
+        Me.Label120.Text = "CHASTITY"
+        Me.Label120.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'GroupBox27
         '
         Me.GroupBox27.Controls.Add(Me.Button6)
@@ -11587,51 +11641,41 @@ Partial Class FrmSettings
         'BWCreateURLFiles
         '
         '
-        'GroupBox33
+        'Button12
         '
-        Me.GroupBox33.Controls.Add(Me.Button11)
-        Me.GroupBox33.Controls.Add(Me.LBLChastityState)
-        Me.GroupBox33.Controls.Add(Me.Label120)
-        Me.GroupBox33.Location = New System.Drawing.Point(420, 155)
-        Me.GroupBox33.Name = "GroupBox33"
-        Me.GroupBox33.Size = New System.Drawing.Size(277, 107)
-        Me.GroupBox33.TabIndex = 177
-        Me.GroupBox33.TabStop = false
-        Me.GroupBox33.Text = "System States"
+        Me.Button12.BackColor = System.Drawing.Color.LightGray
+        Me.Button12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Button12.ForeColor = System.Drawing.Color.Black
+        Me.Button12.Location = New System.Drawing.Point(174, 93)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(39, 22)
+        Me.Button12.TabIndex = 180
+        Me.Button12.Text = "Clear"
+        Me.Button12.UseVisualStyleBackColor = false
         '
-        'Label120
+        'Button13
         '
-        Me.Label120.BackColor = System.Drawing.Color.LightGray
-        Me.Label120.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label120.Location = New System.Drawing.Point(17, 33)
-        Me.Label120.Name = "Label120"
-        Me.Label120.Size = New System.Drawing.Size(98, 23)
-        Me.Label120.TabIndex = 2
-        Me.Label120.Text = "CHASTITY"
-        Me.Label120.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.Button13.BackColor = System.Drawing.Color.LightGray
+        Me.Button13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Button13.ForeColor = System.Drawing.Color.Black
+        Me.Button13.Location = New System.Drawing.Point(174, 93)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(39, 22)
+        Me.Button13.TabIndex = 181
+        Me.Button13.Text = "Clear"
+        Me.Button13.UseVisualStyleBackColor = false
         '
-        'LBLChastityState
+        'Button14
         '
-        Me.LBLChastityState.BackColor = System.Drawing.Color.LightGray
-        Me.LBLChastityState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLChastityState.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLChastityState.ForeColor = System.Drawing.Color.Red
-        Me.LBLChastityState.Location = New System.Drawing.Point(120, 33)
-        Me.LBLChastityState.Name = "LBLChastityState"
-        Me.LBLChastityState.Size = New System.Drawing.Size(37, 23)
-        Me.LBLChastityState.TabIndex = 3
-        Me.LBLChastityState.Text = "OFF"
-        Me.LBLChastityState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Button11
-        '
-        Me.Button11.Location = New System.Drawing.Point(161, 33)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(99, 23)
-        Me.Button11.TabIndex = 177
-        Me.Button11.Text = "Toggle"
-        Me.Button11.UseVisualStyleBackColor = true
+        Me.Button14.BackColor = System.Drawing.Color.LightGray
+        Me.Button14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Button14.ForeColor = System.Drawing.Color.Black
+        Me.Button14.Location = New System.Drawing.Point(174, 93)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(39, 22)
+        Me.Button14.TabIndex = 181
+        Me.Button14.Text = "Clear"
+        Me.Button14.UseVisualStyleBackColor = false
         '
         'FrmSettings
         '
@@ -11910,6 +11954,7 @@ Partial Class FrmSettings
         Me.GroupBox34.ResumeLayout(false)
         Me.TabPage25.ResumeLayout(false)
         Me.Panel11.ResumeLayout(false)
+        Me.GroupBox33.ResumeLayout(false)
         Me.GroupBox27.ResumeLayout(false)
         Me.GroupBox27.PerformLayout
         Me.GroupBox20.ResumeLayout(false)
@@ -11921,7 +11966,6 @@ Partial Class FrmSettings
         Me.Panel5.ResumeLayout(false)
         Me.Panel5.PerformLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox33.ResumeLayout(false)
         Me.ResumeLayout(false)
 
 End Sub
@@ -12805,4 +12849,8 @@ End Sub
     Friend WithEvents Button11 As System.Windows.Forms.Button
     Friend WithEvents LBLChastityState As System.Windows.Forms.Label
     Friend WithEvents Label120 As System.Windows.Forms.Label
+    Friend WithEvents TTDir As System.Windows.Forms.ToolTip
+    Friend WithEvents Button12 As System.Windows.Forms.Button
+    Friend WithEvents Button14 As System.Windows.Forms.Button
+    Friend WithEvents Button13 As System.Windows.Forms.Button
 End Class
