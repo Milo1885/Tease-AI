@@ -7456,6 +7456,9 @@ StatusUpdateEnd:
         StringClean = StringClean.Replace("#GlitterContact3", FrmSettings.TBGlitter3.Text)
         StringClean = StringClean.Replace("#Contact3", FrmSettings.TBGlitter3.Text)
 
+        StringClean = StringClean.Replace("#CBTCockCount", CBTCockCount)
+        StringClean = StringClean.Replace("#CBTBallsCount", CBTBallsCount)
+
         Debug.Print("Test")
 
         If My.Settings.OrgasmsLocked = True Then
@@ -7546,6 +7549,8 @@ StatusUpdateEnd:
             If TempVal < 3 Then TempVal = 3
             StringClean = StringClean.Replace("#RNDNumber", TempVal)
         End If
+
+
 
         'If PreCleanString.Contains("@CockSizeSmall") Then
         'If FrmSettings.CockSizeNumBox.Value < 6 Then
