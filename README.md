@@ -1,7 +1,7 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
-# Changelog:
+# Changelog - Patch 43
 
 08/21 1:24 am - Added Chastity state toggle to Misc tab in Settings menu
 
