@@ -4198,17 +4198,28 @@ TryNextWithTease:
                         DomPic = _ImageFileNames(FileCount)
 
                         If DomTask.Contains("@Contact1") Then
-                            DomPic = Contact1Pics(Contact1PicsCount)
+                            Try
+                                DomPic = Contact1Pics(Contact1PicsCount)
+                            Catch
+                                DomPic = _ImageFileNames(FileCount)
+                            End Try
                         End If
 
                         If DomTask.Contains("@Contact2") Then
-                            DomPic = Contact2Pics(Contact2PicsCount)
+                            Try
+                                DomPic = Contact2Pics(Contact2PicsCount)
+                            Catch
+                                DomPic = _ImageFileNames(FileCount)
+                            End Try
                         End If
 
                         If DomTask.Contains("@Contact3") Then
-                            DomPic = Contact3Pics(Contact3PicsCount)
+                            Try
+                                DomPic = Contact3Pics(Contact3PicsCount)
+                            Catch
+                                DomPic = _ImageFileNames(FileCount)
+                            End Try
                         End If
-
 
                     End If
                     ' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -4667,6 +4678,8 @@ NoResponse:
 
         If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
+        Dim ShowPicture As Boolean = False
+
         ' Let the program know that the domme is currently typing
         DomTypeCheck = True
 
@@ -4714,6 +4727,135 @@ NullResponseLine:
                 PictureStrip.Items(2).Enabled = False
                 PictureStrip.Items(3).Enabled = False
                 PictureStrip.Items(4).Enabled = False
+
+                If GlitterTease = True And JustShowedBlogImage = False Then GoTo TryNextWithTease
+
+
+                If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
+                    And SlideshowLoaded = True And Not DomTask.Contains("@ShowButtImage") And Not DomTask.Contains("@ShowBoobsImage") And LockImage = False And CustomSlideshow = False And RapidFire = False Then
+                    If SubStroking = False Or SubEdging = True Or SubHoldingEdge = True Then
+                        ' Begin Next Button
+
+                        ' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+TryNextWithTease:
+
+                        Dim TeaseDirection As Integer = randomizer.Next(1, 101)
+
+                        'Debug.Print("TeaseDirection = " & TeaseDirection)
+
+                        If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
+
+                            FileCount -= 1
+                            If FileCount < 0 Then
+                                FileCount = 0
+                            End If
+
+                            If DomTask.Contains("@Contact1") Then
+                                Contact1PicsCount -= 1
+                                If Contact1PicsCount < 0 Then
+                                    Contact1PicsCount = 0
+                                End If
+                            End If
+
+                            If DomTask.Contains("@Contact2") Then
+                                Contact2PicsCount -= 1
+                                If Contact2PicsCount < 0 Then
+                                    Contact2PicsCount = 0
+                                End If
+                            End If
+
+                            If DomTask.Contains("@Contact3") Then
+                                Contact3PicsCount -= 1
+                                If Contact3PicsCount < 0 Then
+                                    Contact3PicsCount = 0
+                                End If
+                            End If
+
+                        Else
+
+
+                            FileCount += 1
+                            If FileCount > FileCountMax Then
+                                FileCount = FileCountMax
+                            End If
+
+                            If DomTask.Contains("@Contact1") Then
+                                Contact1PicsCount += 1
+                                Try
+                                    If Contact1PicsCount > Contact1Pics.Count - 1 Then
+                                        Contact1PicsCount = Contact1Pics.Count - 1
+                                    End If
+                                Catch
+                                End Try
+                            End If
+
+                            If DomTask.Contains("@Contact2") Then
+                                Contact2PicsCount += 1
+                                Try
+                                    If Contact2PicsCount > Contact2Pics.Count - 1 Then
+                                        Contact2PicsCount = Contact2Pics.Count - 1
+                                    End If
+                                Catch
+                                End Try
+                            End If
+
+                            If DomTask.Contains("@Contact3") Then
+                                Contact3PicsCount += 1
+                                Try
+                                    If Contact3PicsCount > Contact3Pics.Count - 1 Then
+                                        Contact3PicsCount = Contact3Pics.Count - 1
+                                    End If
+                                Catch
+                                End Try
+                            End If
+
+                        End If
+
+                        ' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+                        If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNextWithTease
+
+                        DomPic = _ImageFileNames(FileCount)
+
+                        If DomChat.Contains("@Contact1") Then
+                            Try
+                                DomPic = Contact1Pics(Contact1PicsCount)
+                            Catch
+                                DomPic = _ImageFileNames(FileCount)
+                            End Try
+                        End If
+
+                        If DomChat.Contains("@Contact2") Then
+                            Try
+                                DomPic = Contact2Pics(Contact2PicsCount)
+                            Catch
+                                DomPic = _ImageFileNames(FileCount)
+                            End Try
+                        End If
+
+                        If DomChat.Contains("@Contact3") Then
+                            Try
+                                DomPic = Contact3Pics(Contact3PicsCount)
+                            Catch
+                                DomPic = _ImageFileNames(FileCount)
+                            End Try
+                        End If
+
+                    End If
+                    ' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+                    If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
+
+
+                    ' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+                    ShowPicture = True
+
+                    ' End Next Button
+                    'On Error GoTo TryNextWithTease
+                    'On Error Resume Next
+                    ' End Next Button
+                End If
 
                 If DomChat.Contains("@WritingTask(") Then
                     Dim WriteFlag As String = DomTask
@@ -4899,7 +5041,39 @@ NullResponseLine:
 
                 SubWroteLast = False
 
+                If ShowPicture = True Then
+                    ' Try
+                    ' Not mainPictureBox Is Nothing Then
+                    'mainPictureBox.Image.Dispose()
+                    'mainPictureBox.Image = Nothing
+                    'GC.Collect()
+                    'End If
+                    ' Catch
+                    'End Try
 
+                    ClearMainPictureBox()
+
+                    Try
+                        'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+                        mainPictureBox.Image = Image.FromFile(DomPic)
+                        ShowImageInfo()
+                    Catch
+                        ' GoTo TryNextWithTease
+                    End Try
+                    If FrmSettings.landscapeCheckBox.Checked = True Then
+                        If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
+                            mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
+                        Else
+                            mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+                        End If
+                    Else
+                        mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+                    End If
+
+                    mainPictureBox.Refresh()
+                    mainPictureBox.Invalidate()
+                    ShowPicture = False
+                End If
 
                 If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
                     DomChat = StripFormat(DomChat)

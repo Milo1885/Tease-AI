@@ -3,9 +3,13 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 43
 
+08/21 3:14 am - Domme and Contact slideshow images now change during Multiple Choice branches and Responses.
+
+Added error handling for when the program tries to call a Contact slideshow that has not been set in the Contact's Image Directory section in the Glitter tab. 
+
 08/21 2:05 am - Added ToolTips to Domme, Contact1, Contact2 and Contact3 Image Directory labels. When the user hovers the mouse over these labels, the full path to whatever folder they had selected will be displayed in the tooltip. This is to give the user a way to view long paths since the available space is somewhat limited.
 
-                Added buttons to Contact1, Contact2 and Contact3 in the Glitter tab that allows the user to clear a previously set image directory.
+Added buttons to Contact1, Contact2 and Contact3 in the Glitter tab that allows the user to clear a previously set image directory.
 
 08/21 1:24 am - Added Chastity state toggle to Misc tab in Settings menu.
 
