@@ -899,6 +899,10 @@ Partial Class FrmSettings
         Me.BWRefreshURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
+        Me.GroupBox33 = New System.Windows.Forms.GroupBox()
+        Me.Label120 = New System.Windows.Forms.Label()
+        Me.LBLChastityState = New System.Windows.Forms.Label()
+        Me.Button11 = New System.Windows.Forms.Button()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -1112,6 +1116,7 @@ Partial Class FrmSettings
         Me.TabPage5.SuspendLayout
         Me.Panel5.SuspendLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox33.SuspendLayout
         Me.SuspendLayout
         '
         'SettingsPanel
@@ -8280,7 +8285,7 @@ Partial Class FrmSettings
         '
         'CBGlitterFeedOff
         '
-        Me.CBGlitterFeedOff.AutoSize = True
+        Me.CBGlitterFeedOff.AutoSize = true
         Me.CBGlitterFeedOff.Location = New System.Drawing.Point(149, 34)
         Me.CBGlitterFeedOff.Name = "CBGlitterFeedOff"
         Me.CBGlitterFeedOff.Size = New System.Drawing.Size(39, 17)
@@ -11157,6 +11162,7 @@ Partial Class FrmSettings
         '
         Me.Panel11.BackColor = System.Drawing.Color.LightGray
         Me.Panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel11.Controls.Add(Me.GroupBox33)
         Me.Panel11.Controls.Add(Me.GroupBox27)
         Me.Panel11.Controls.Add(Me.GroupBox20)
         Me.Panel11.Controls.Add(Me.WebToy)
@@ -11581,6 +11587,52 @@ Partial Class FrmSettings
         'BWCreateURLFiles
         '
         '
+        'GroupBox33
+        '
+        Me.GroupBox33.Controls.Add(Me.Button11)
+        Me.GroupBox33.Controls.Add(Me.LBLChastityState)
+        Me.GroupBox33.Controls.Add(Me.Label120)
+        Me.GroupBox33.Location = New System.Drawing.Point(420, 155)
+        Me.GroupBox33.Name = "GroupBox33"
+        Me.GroupBox33.Size = New System.Drawing.Size(277, 107)
+        Me.GroupBox33.TabIndex = 177
+        Me.GroupBox33.TabStop = false
+        Me.GroupBox33.Text = "System States"
+        '
+        'Label120
+        '
+        Me.Label120.BackColor = System.Drawing.Color.LightGray
+        Me.Label120.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label120.Location = New System.Drawing.Point(17, 33)
+        Me.Label120.Name = "Label120"
+        Me.Label120.Size = New System.Drawing.Size(98, 23)
+        Me.Label120.TabIndex = 2
+        Me.Label120.Text = "CHASTITY"
+        Me.Label120.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLChastityState
+        '
+        Me.LBLChastityState.BackColor = System.Drawing.Color.LightGray
+        Me.LBLChastityState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChastityState.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLChastityState.ForeColor = System.Drawing.Color.Red
+        Me.LBLChastityState.Location = New System.Drawing.Point(120, 33)
+        Me.LBLChastityState.Name = "LBLChastityState"
+        Me.LBLChastityState.Size = New System.Drawing.Size(37, 23)
+        Me.LBLChastityState.TabIndex = 3
+        Me.LBLChastityState.Text = "OFF"
+        Me.LBLChastityState.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Button11
+        '
+        Me.Button11.Location = New System.Drawing.Point(161, 33)
+        Me.Button11.Name = "Button11"
+        Me.Button11.Size = New System.Drawing.Size(99, 23)
+        Me.Button11.TabIndex = 177
+        Me.Button11.Text = "Toggle"
+        Me.Button11.UseVisualStyleBackColor = true
+        '
         'FrmSettings
         '
         Me.AllowDrop = true
@@ -11869,6 +11921,7 @@ Partial Class FrmSettings
         Me.Panel5.ResumeLayout(false)
         Me.Panel5.PerformLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox33.ResumeLayout(false)
         Me.ResumeLayout(false)
 
 End Sub
@@ -12748,4 +12801,8 @@ End Sub
     Friend WithEvents CBGlitterFeedScripts As System.Windows.Forms.RadioButton
     Friend WithEvents CBGlitterFeed As System.Windows.Forms.RadioButton
     Friend WithEvents Label118 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox33 As System.Windows.Forms.GroupBox
+    Friend WithEvents Button11 As System.Windows.Forms.Button
+    Friend WithEvents LBLChastityState As System.Windows.Forms.Label
+    Friend WithEvents Label120 As System.Windows.Forms.Label
 End Class

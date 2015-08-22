@@ -1256,6 +1256,14 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             FrmSettings.GBGlitter3.Text = "Contact 3"
         End If
 
+        If My.Settings.Chastity = False Then
+            FrmSettings.LBLChastityState.Text = "OFF"
+            FrmSettings.LBLChastityState.ForeColor = Color.Red
+        Else
+            FrmSettings.LBLChastityState.Text = "ON"
+            FrmSettings.LBLChastityState.ForeColor = Color.Green
+        End If
+
         FormLoading = False
 
         Debug.Print("Form1 Loading Finished")
@@ -10108,12 +10116,16 @@ OrgasmDecided:
         If StringClean.Contains("@ChastityOn") Then
             My.Settings.Chastity = True
             My.Settings.Save()
+            FrmSettings.LBLChastityState.Text = "ON"
+            FrmSettings.LBLChastityState.ForeColor = Color.Green
             StringClean = StringClean.Replace("@ChastityOn", "")
         End If
 
         If StringClean.Contains("@ChastityOff") Then
             My.Settings.Chastity = False
             My.Settings.Save()
+            FrmSettings.LBLChastityState.Text = "OFF"
+            FrmSettings.LBLChastityState.ForeColor = Color.Red
             StringClean = StringClean.Replace("@ChastityOff", "")
         End If
 

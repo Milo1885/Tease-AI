@@ -12050,4 +12050,25 @@ NextURL:
         My.Settings.CBGlitterFeedOff = CBGlitterFeedOff.Checked
         My.Settings.Save()
     End Sub
+
+    Private Sub Button11_Click_1(sender As System.Object, e As System.EventArgs) Handles Button11.Click
+
+        If MsgBox("This will change the Chastity state of Tease AI. Depending on the Personality or Scripts used so far, this could cause unexpected behavior or break certain scripts." & Environment.NewLine _
+                  & Environment.NewLine & "It is recommended to only change this state if you are otherwise stuck. Are you sure you wish to change the Chastity state?", vbYesNo, "Warning!") = MsgBoxResult.Yes Then
+            If My.Settings.Chastity = True Then
+                My.Settings.Chastity = False
+                LBLChastityState.Text = "OFF"
+                LBLChastityState.ForeColor = Color.Red
+            Else
+                My.Settings.Chastity = True
+                LBLChastityState.Text = "ON"
+                LBLChastityState.ForeColor = Color.Green
+            End If
+            My.Settings.Save()
+        Else
+            Return
+        End If
+
+
+    End Sub
 End Class
