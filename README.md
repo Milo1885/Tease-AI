@@ -3,6 +3,15 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 43
 
+08/23 11:20 am - Added Command @RoundVar. Syntax: @RoundVar[VarName]=[Value to round by]
+
+For example, @RoundVar[Edges]=[5] would round the variable "Edges" to the nearest 5, and automatically set "Edges" that the new rounded value.
+
+Added System Keywords #RandomRound5, #RandomRound10 and #RandomRound100
+
+These work just like the current #Random Keyword, but will automatically round the result to the value specified. For example, #RandomRound10(10, 100) will only produce a result like 10, 20, 30...etc
+
+
 08/22 3:14 am - Domme and Contact slideshow images now change during Multiple Choice branches and Responses.
 
 Added error handling for when the program tries to call a Contact slideshow that has not been set in the Contact's Image Directory section in the Glitter tab. 

@@ -7568,9 +7568,9 @@ StatusUpdateEnd:
         End If
 
         StringClean = StringClean.Replace("#SubName", subName.Text)
-
+        Debug.Print("StringClean = " & StringClean)
         StringClean = StringClean.Replace("#DomName", domName.Text)
-
+        Debug.Print("StringClean = " & StringClean)
         StringClean = StringClean.Replace("#DomHonorific", FrmSettings.TBHonorific.Text)
 
         StringClean = StringClean.Replace("#DomAge", FrmSettings.domageNumBox.Value)
@@ -7648,6 +7648,62 @@ StatusUpdateEnd:
         Else
             StringClean = StringClean.Replace("#OrgasmLockDate", "later")
         End If
+
+        If StringClean.Contains("#RandomRound100(") Then
+            Debug.Print("Random Stringlean called - " & StringClean)
+            Dim RandInt As Integer
+            Dim CheckFlag As String = StringClean & " some test garbage"
+            Dim CFIndex As Integer = StringClean.IndexOf("#RandomRound100(") + 16
+            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
+            CheckFlag = CheckFlag.Split(")")(0)
+            CheckFlag = CheckFlag.Replace("#RandomRound100(", "")
+            CheckFlag = CheckFlag.Replace(", ", ",")
+            CheckFlag = CheckFlag.Replace(" ,", ",")
+            Dim FlagArray() As String = CheckFlag.Split(",")
+            RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
+            RandInt = 100 * Math.Round(RandInt / 100)
+            StringClean = StringClean.Replace("#RandomRound100(" & FlagArray(0) & "," & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#RandomRound100(" & FlagArray(0) & " ," & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#RandomRound100(" & FlagArray(0) & ", " & FlagArray(1) & ")", RandInt)
+        End If
+
+        If StringClean.Contains("#RandomRound10(") Then
+            Debug.Print("Random Stringlean called - " & StringClean)
+            Dim RandInt As Integer
+            Dim CheckFlag As String = StringClean & " some test garbage"
+            Dim CFIndex As Integer = StringClean.IndexOf("#RandomRound10(") + 15
+            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
+            CheckFlag = CheckFlag.Split(")")(0)
+            CheckFlag = CheckFlag.Replace("#RandomRound10(", "")
+            CheckFlag = CheckFlag.Replace(", ", ",")
+            CheckFlag = CheckFlag.Replace(" ,", ",")
+            Dim FlagArray() As String = CheckFlag.Split(",")
+            RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
+            RandInt = 10 * Math.Round(RandInt / 10)
+            StringClean = StringClean.Replace("#RandomRound10(" & FlagArray(0) & "," & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#RandomRound10(" & FlagArray(0) & " ," & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#RandomRound10(" & FlagArray(0) & ", " & FlagArray(1) & ")", RandInt)
+        End If
+
+
+        If StringClean.Contains("#RandomRound5(") Then
+            Debug.Print("Random Stringlean called - " & StringClean)
+            Dim RandInt As Integer
+            Dim CheckFlag As String = StringClean & " some test garbage"
+            Dim CFIndex As Integer = StringClean.IndexOf("#RandomRound5(") + 14
+            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
+            CheckFlag = CheckFlag.Split(")")(0)
+            CheckFlag = CheckFlag.Replace("#RandomRound5(", "")
+            CheckFlag = CheckFlag.Replace(", ", ",")
+            CheckFlag = CheckFlag.Replace(" ,", ",")
+            Dim FlagArray() As String = CheckFlag.Split(",")
+            RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
+            RandInt = 5 * Math.Round(RandInt / 5)
+            StringClean = StringClean.Replace("#RandomRound5(" & FlagArray(0) & "," & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#RandomRound5(" & FlagArray(0) & " ," & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#RandomRound5(" & FlagArray(0) & ", " & FlagArray(1) & ")", RandInt)
+        End If
+
 
         If StringClean.Contains("#Random(") Then
             Debug.Print("Random Stringlean called - " & StringClean)
@@ -9033,10 +9089,75 @@ OrgasmDecided:
 
         End If
 
+        If StringClean.Contains("@RoundVar") Then
 
+            Do
+
+                Dim SCSetVar As String() = Split(StringClean)
+                Dim SCGotVar As String = "Null"
+
+                For i As Integer = 0 To SCSetVar.Length - 1
+                    If SCSetVar(i).Contains("@RoundVar") Then
+                        'Debug.Print("@SetVar SCSetVar(i) = " & SCSetVar(i))
+                        SCGotVar = SCSetVar(i)
+                        SCSetVar(i) = ""
+                        StringClean = Join(SCSetVar)
+                        'Debug.Print("@SetVar SCSetVar Joined StringClean = " & StringClean)
+                        Exit For
+                    End If
+                Next
+
+                SCGotVar = SCGotVar.Replace("@RoundVar[", "")
+
+                Dim SCGotVarSplit As String() = Split(SCGotVar, "]")
+
+                Dim VarName As String = SCGotVarSplit(0)
+                'Debug.Print("@SetVar VarName = " & VarName)
+
+
+                Dim Val1 As Integer
+
+
+                Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
+                'Debug.Print("VarCheck = " & VarCheck)
+                If File.Exists(VarCheck) Then
+                    'Debug.Print("VarCheck Exists")
+                    Dim VarReader As New StreamReader(VarCheck)
+                    Val1 = Val(VarReader.ReadLine())
+                    VarReader.Close()
+                    VarReader.Dispose()
+                End If
+
+                ' Stored variable now set as Val1
+
+
+
+                SCGotVarSplit(0) = ""
+
+                SCGotVar = Join(SCGotVarSplit)
+                'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
+
+                SCGotVar = SCGotVar.Replace("=[", "")
+                SCGotVar = SCGotVar.Replace(" ", "")
+
+                Dim VarValue As Integer = Val(SCGotVar)
+
+                Val1 = VarValue * Math.Round(Val1 / VarValue)
+
+               
+
+                'Debug.Print("@SetVar VarValue = " & VarValue)
+
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName, Val1, False)
+
+            Loop Until Not StringClean.Contains("@RoundVar")
+
+        End If
 
 
         If StringClean.Contains("@ChangeVar") Then
+
+            Debug.Print("CHangeVar Stringclean = " & StringClean)
 
             Do
 
