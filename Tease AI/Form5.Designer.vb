@@ -45,7 +45,7 @@ Partial Class frmApps
         Me.MouseYLbl = New System.Windows.Forms.Label()
         Me.Label84 = New System.Windows.Forms.Label()
         Me.Button51 = New System.Windows.Forms.Button()
-        Me.Button47 = New System.Windows.Forms.Button()
+        Me.BTNRun = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -143,6 +143,9 @@ Partial Class frmApps
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
+        Me.BTNReset = New System.Windows.Forms.Button()
+        Me.Button31 = New System.Windows.Forms.Button()
+        Me.Button32 = New System.Windows.Forms.Button()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -171,6 +174,9 @@ Partial Class frmApps
         '
         Me.PNLAppHome.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(170, Byte), Integer))
         Me.PNLAppHome.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLAppHome.Controls.Add(Me.Button32)
+        Me.PNLAppHome.Controls.Add(Me.Button31)
+        Me.PNLAppHome.Controls.Add(Me.BTNReset)
         Me.PNLAppHome.Controls.Add(Me.Label2)
         Me.PNLAppHome.Controls.Add(Me.Button17)
         Me.PNLAppHome.Controls.Add(Me.Label15)
@@ -192,7 +198,7 @@ Partial Class frmApps
         Me.PNLAppHome.Controls.Add(Me.MouseYLbl)
         Me.PNLAppHome.Controls.Add(Me.Label84)
         Me.PNLAppHome.Controls.Add(Me.Button51)
-        Me.PNLAppHome.Controls.Add(Me.Button47)
+        Me.PNLAppHome.Controls.Add(Me.BTNRun)
         Me.PNLAppHome.Controls.Add(Me.Button6)
         Me.PNLAppHome.Controls.Add(Me.Label11)
         Me.PNLAppHome.Controls.Add(Me.Label10)
@@ -380,7 +386,7 @@ Partial Class frmApps
         Me.Button2.BackColor = System.Drawing.Color.SteelBlue
         Me.Button2.Font = New System.Drawing.Font("Wingdings", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(109, 443)
+        Me.Button2.Location = New System.Drawing.Point(14, 319)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(46, 31)
         Me.Button2.TabIndex = 165
@@ -393,7 +399,7 @@ Partial Class frmApps
         '
         Me.CBDebugAwareness.AutoSize = True
         Me.CBDebugAwareness.ForeColor = System.Drawing.Color.White
-        Me.CBDebugAwareness.Location = New System.Drawing.Point(144, 407)
+        Me.CBDebugAwareness.Location = New System.Drawing.Point(68, 357)
         Me.CBDebugAwareness.Name = "CBDebugAwareness"
         Me.CBDebugAwareness.Size = New System.Drawing.Size(113, 17)
         Me.CBDebugAwareness.TabIndex = 163
@@ -405,7 +411,7 @@ Partial Class frmApps
         '
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(169, 432)
+        Me.Label7.Location = New System.Drawing.Point(140, 283)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(64, 28)
         Me.Label7.TabIndex = 151
@@ -418,7 +424,7 @@ Partial Class frmApps
         Me.Button36.BackColor = System.Drawing.Color.SteelBlue
         Me.Button36.Font = New System.Drawing.Font("Webdings", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
         Me.Button36.ForeColor = System.Drawing.Color.White
-        Me.Button36.Location = New System.Drawing.Point(165, 463)
+        Me.Button36.Location = New System.Drawing.Point(16, 356)
         Me.Button36.Name = "Button36"
         Me.Button36.Size = New System.Drawing.Size(46, 31)
         Me.Button36.TabIndex = 162
@@ -465,19 +471,19 @@ Partial Class frmApps
         Me.Button51.UseVisualStyleBackColor = False
         Me.Button51.Visible = False
         '
-        'Button47
+        'BTNRun
         '
-        Me.Button47.BackColor = System.Drawing.Color.SteelBlue
-        Me.Button47.Enabled = False
-        Me.Button47.Font = New System.Drawing.Font("Wingdings", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.Button47.ForeColor = System.Drawing.Color.White
-        Me.Button47.Location = New System.Drawing.Point(9, 440)
-        Me.Button47.Name = "Button47"
-        Me.Button47.Size = New System.Drawing.Size(46, 31)
-        Me.Button47.TabIndex = 159
-        Me.Button47.TabStop = False
-        Me.Button47.Text = "1"
-        Me.Button47.UseVisualStyleBackColor = False
+        Me.BTNRun.BackColor = System.Drawing.Color.SteelBlue
+        Me.BTNRun.Enabled = False
+        Me.BTNRun.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRun.ForeColor = System.Drawing.Color.White
+        Me.BTNRun.Location = New System.Drawing.Point(9, 447)
+        Me.BTNRun.Name = "BTNRun"
+        Me.BTNRun.Size = New System.Drawing.Size(57, 24)
+        Me.BTNRun.TabIndex = 159
+        Me.BTNRun.TabStop = False
+        Me.BTNRun.Text = "Run"
+        Me.BTNRun.UseVisualStyleBackColor = False
         '
         'Button6
         '
@@ -485,7 +491,7 @@ Partial Class frmApps
         Me.Button6.Enabled = False
         Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button6.ForeColor = System.Drawing.Color.White
-        Me.Button6.Location = New System.Drawing.Point(48, 444)
+        Me.Button6.Location = New System.Drawing.Point(12, 281)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(129, 32)
         Me.Button6.TabIndex = 16
@@ -1605,6 +1611,48 @@ Partial Class frmApps
         Me.Label25.Text = "Playlists"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'BTNReset
+        '
+        Me.BTNReset.BackColor = System.Drawing.Color.SteelBlue
+        Me.BTNReset.Enabled = False
+        Me.BTNReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNReset.ForeColor = System.Drawing.Color.White
+        Me.BTNReset.Location = New System.Drawing.Point(177, 447)
+        Me.BTNReset.Name = "BTNReset"
+        Me.BTNReset.Size = New System.Drawing.Size(57, 24)
+        Me.BTNReset.TabIndex = 188
+        Me.BTNReset.TabStop = False
+        Me.BTNReset.Text = "Reset"
+        Me.BTNReset.UseVisualStyleBackColor = False
+        '
+        'Button31
+        '
+        Me.Button31.BackColor = System.Drawing.Color.SteelBlue
+        Me.Button31.Enabled = False
+        Me.Button31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button31.ForeColor = System.Drawing.Color.White
+        Me.Button31.Location = New System.Drawing.Point(65, 447)
+        Me.Button31.Name = "Button31"
+        Me.Button31.Size = New System.Drawing.Size(57, 24)
+        Me.Button31.TabIndex = 189
+        Me.Button31.TabStop = False
+        Me.Button31.Text = "Suspend"
+        Me.Button31.UseVisualStyleBackColor = False
+        '
+        'Button32
+        '
+        Me.Button32.BackColor = System.Drawing.Color.SteelBlue
+        Me.Button32.Enabled = False
+        Me.Button32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button32.ForeColor = System.Drawing.Color.White
+        Me.Button32.Location = New System.Drawing.Point(121, 447)
+        Me.Button32.Name = "Button32"
+        Me.Button32.Size = New System.Drawing.Size(57, 24)
+        Me.Button32.TabIndex = 190
+        Me.Button32.TabStop = False
+        Me.Button32.Text = "Resume"
+        Me.Button32.UseVisualStyleBackColor = False
+        '
         'frmApps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1612,14 +1660,14 @@ Partial Class frmApps
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(246, 530)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.PNLAppRandomizer)
-        Me.Controls.Add(Me.PNLHypnoGen)
-        Me.Controls.Add(Me.AppPanelVitalSub)
-        Me.Controls.Add(Me.AppPanelGlitter)
         Me.Controls.Add(Me.PNLAppHome)
         Me.Controls.Add(Me.PNLLazySub)
         Me.Controls.Add(Me.PNLWishList)
         Me.Controls.Add(Me.PNLPlaylist)
+        Me.Controls.Add(Me.PNLAppRandomizer)
+        Me.Controls.Add(Me.PNLHypnoGen)
+        Me.Controls.Add(Me.AppPanelVitalSub)
+        Me.Controls.Add(Me.AppPanelGlitter)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -1668,7 +1716,7 @@ Partial Class frmApps
     Friend WithEvents MouseYLbl As System.Windows.Forms.Label
     Friend WithEvents Label84 As System.Windows.Forms.Label
     Friend WithEvents Button51 As System.Windows.Forms.Button
-    Friend WithEvents Button47 As System.Windows.Forms.Button
+    Friend WithEvents BTNRun As System.Windows.Forms.Button
     Friend WithEvents Button6 As System.Windows.Forms.Button
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
@@ -1774,4 +1822,7 @@ Partial Class frmApps
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Button30 As System.Windows.Forms.Button
     Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents BTNReset As System.Windows.Forms.Button
+    Friend WithEvents Button32 As System.Windows.Forms.Button
+    Friend WithEvents Button31 As System.Windows.Forms.Button
 End Class

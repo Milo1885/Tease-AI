@@ -62,8 +62,8 @@ Public Class Form1
 
     Dim HandleScriptText As String
     Dim ChatString As String
-    Dim DomTask As String
-    Dim DomChat As String
+    Public DomTask As String
+    Public DomChat As String
     Dim TypeDelay As Integer
     Dim TempVal As Integer
     Dim NullResponse As Boolean
@@ -132,7 +132,7 @@ Public Class Form1
 
     Dim PreCleanString As String
 
-    Dim DomTypeCheck As Boolean
+    Public DomTypeCheck As Boolean
     Dim TypeToggle As Boolean
     Dim IsTyping As Boolean
     Dim SubWroteLast As Boolean
@@ -1270,9 +1270,87 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
     End Sub
 
-    Private Sub sendButton_BindingContextChanged(sender As Object, e As System.EventArgs) Handles sendButton.BindingContextChanged
+    Public Sub ResetButton()
+
+        ScriptTimer.Stop()
+
+        DomTask = "<b>Tease AI has been reset</b>"
+        DomChat = "<b>Tease AI has been reset</b>"
+
+        If File.Exists(Application.StartupPath & "\System\Metronome") Then
+            File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
+            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
+        End If
+
+        If Directory.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\") Then
+            My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
+        End If
+
+        System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\")
+
+        FrmWritingTask.Visible = False
+        StopMetronome = True
+
+        
+
+        CBTBallsFirst = True
+        CBTCockFirst = True
+        CustomTaskFirst = True
+
+        VideoType = "General"
+
+        UpdatesTick = 120
+        UpdatesTimer.Start()
+
+        GlitterNC1 = "DeepPink"
+        GlitterNC2 = "Green"
+        GlitterNC3 = "Firebrick"
+
+        Me.ActiveControl = Me.chatBox
+
+        StrokePaceInt = 1
+        StrokePaceRight = True
+        StrokePaceTimer.Start()
+
+        DommeMood = randomizer.Next(5, 8)
+
+        PictureStrip.Items(0).Enabled = False
+        PictureStrip.Items(1).Enabled = False
+        PictureStrip.Items(2).Enabled = False
+        PictureStrip.Items(3).Enabled = False
+        PictureStrip.Items(4).Enabled = False
+
+        JustShowedBlogImage = False
+
+        SaidHello = False
+        SubWroteLast = False
+        WritingTaskFlag = False
+
+        OrgasmYesNo = False
+
+        ShowModule = False
+        BookmarkLink = False
+        BookmarkModule = False
+        YesOrNo = False
+
+        StartStrokingCount = 0
+
+
+        StrokeTauntVal = -1
+
+
+        TeaseTimer.Stop()
+
+        mainPictureBox.Image = Nothing
+        SlideshowLoaded = False
+
+
+
+
 
     End Sub
+
+    
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sendButton.Click
 
@@ -1484,6 +1562,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
                     SaidHello = True
                     BeforeTease = True
+                    frmApps.BTNReset.Enabled = True
+                    frmApps.BTNRun.Enabled = False
+
 
                     If FrmSettings.CBTeaseLengthDD.Checked = True Then
 
@@ -4112,7 +4193,8 @@ SkipGotoSearch:
 
 
                 If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
-                    And SlideshowLoaded = True And Not DomTask.Contains("@ShowButtImage") And Not DomTask.Contains("@ShowBoobsImage") And LockImage = False And CustomSlideshow = False And RapidFire = False Then
+                    And SlideshowLoaded = True And Not DomTask.Contains("@ShowButtImage") And Not DomTask.Contains("@ShowBoobsImage") And LockImage = False And CustomSlideshow = False And RapidFire = False _
+                    And UCase(DomTask) <> "<B>TEASE AI HAS BEEN RESET</B>" Then
                     If SubStroking = False Or SubEdging = True Or SubHoldingEdge = True Then
                         ' Begin Next Button
 
@@ -4363,6 +4445,8 @@ NullResponse:
                 DomTask = DomTask.Replace(": d", ": D")
 
                 If NullResponse = False And DomTask <> "" Then
+
+                    If UCase(DomTask) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomTask = "<b>Tease AI has been reset</b>"
 
                     ' Add timestamps to domme response if the option is checked in the menu
                     If FrmSettings.timestampCheckBox.Checked = True Then
@@ -4732,7 +4816,8 @@ NullResponseLine:
 
 
                 If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
-                    And SlideshowLoaded = True And Not DomTask.Contains("@ShowButtImage") And Not DomTask.Contains("@ShowBoobsImage") And LockImage = False And CustomSlideshow = False And RapidFire = False Then
+                    And SlideshowLoaded = True And Not DomTask.Contains("@ShowButtImage") And Not DomTask.Contains("@ShowBoobsImage") And LockImage = False And CustomSlideshow = False And RapidFire = False _
+                    And UCase(DomChat) <> "<B>TEASE AI HAS BEEN RESET</B>" Then
                     If SubStroking = False Or SubEdging = True Or SubHoldingEdge = True Then
                         ' Begin Next Button
 
@@ -4976,6 +5061,8 @@ TryNextWithTease:
 
 
                 If NullResponse = True Or DomChat = "" Or DomChat Is Nothing Then GoTo NullResponseLine2
+
+                If UCase(DomChat) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomChat = "<b>Tease AI has been reset</b>"
 
                 ' Add timestamps to domme response if the option is checked in the menu
                 If FrmSettings.timestampCheckBox.Checked = True Then

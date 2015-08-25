@@ -465,7 +465,7 @@ Public Class frmApps
     End Sub
 
 
-    Private Sub Button47_Click(sender As System.Object, e As System.EventArgs) Handles Button47.Click
+    Private Sub Button47_Click(sender As System.Object, e As System.EventArgs) Handles BTNRun.Click
 
         If Form1.OpenScriptDialog.ShowDialog() = DialogResult.OK Then
 
@@ -858,7 +858,7 @@ Public Class frmApps
 
     End Sub
 
-  
+
 
 
     Private Sub Button35_Click_3(sender As System.Object, e As System.EventArgs) Handles Button35.Click
@@ -883,7 +883,7 @@ Public Class frmApps
         Button1.Enabled = True
         Button4.Enabled = True
         Button42.Enabled = True
-        Button47.Enabled = True
+        BTNRun.Enabled = True
         Button19.Enabled = True
         Button28.Enabled = True
         Button17.Enabled = True
@@ -1076,6 +1076,21 @@ Public Class frmApps
         End Try
 
         Form1.sendButton.PerformClick()
+
+    End Sub
+
+    Private Sub Button29_Click(sender As System.Object, e As System.EventArgs) Handles BTNReset.Click
+
+        Form1.StopEverything()
+        Form1.ResetButton()
+
+        If Form1.DomTypeCheck = False Then
+            Form1.DomTask = "<b>Tease AI has been reset</b>"
+            Form1.TypingDelayGeneric()
+        End If
+
+        BTNReset.Enabled = False
+        BTNRun.Enabled = True
 
     End Sub
 End Class
