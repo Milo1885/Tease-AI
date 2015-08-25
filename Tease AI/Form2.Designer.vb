@@ -908,6 +908,10 @@ Partial Class FrmSettings
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.Button16 = New System.Windows.Forms.Button()
+        Me.Label121 = New System.Windows.Forms.Label()
+        Me.Label122 = New System.Windows.Forms.Label()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -8252,6 +8256,10 @@ Partial Class FrmSettings
         'PNLGlitter
         '
         Me.PNLGlitter.BackColor = System.Drawing.Color.LightGray
+        Me.PNLGlitter.Controls.Add(Me.Button15)
+        Me.PNLGlitter.Controls.Add(Me.Button16)
+        Me.PNLGlitter.Controls.Add(Me.Label121)
+        Me.PNLGlitter.Controls.Add(Me.Label122)
         Me.PNLGlitter.Controls.Add(Me.GBGlitterD)
         Me.PNLGlitter.Controls.Add(Me.GBGlitter1)
         Me.PNLGlitter.Controls.Add(Me.GBGlitter3)
@@ -8859,7 +8867,7 @@ Partial Class FrmSettings
         Me.GroupBox26.ForeColor = System.Drawing.Color.Black
         Me.GroupBox26.Location = New System.Drawing.Point(7, 303)
         Me.GroupBox26.Name = "GroupBox26"
-        Me.GroupBox26.Size = New System.Drawing.Size(692, 92)
+        Me.GroupBox26.Size = New System.Drawing.Size(654, 92)
         Me.GroupBox26.TabIndex = 148
         Me.GroupBox26.TabStop = false
         Me.GroupBox26.Text = "Description"
@@ -8871,7 +8879,7 @@ Partial Class FrmSettings
         Me.LblGlitterSettingsDescription.ForeColor = System.Drawing.Color.Black
         Me.LblGlitterSettingsDescription.Location = New System.Drawing.Point(6, 16)
         Me.LblGlitterSettingsDescription.Name = "LblGlitterSettingsDescription"
-        Me.LblGlitterSettingsDescription.Size = New System.Drawing.Size(680, 73)
+        Me.LblGlitterSettingsDescription.Size = New System.Drawing.Size(642, 73)
         Me.LblGlitterSettingsDescription.TabIndex = 62
         Me.LblGlitterSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
     "n."
@@ -8882,7 +8890,7 @@ Partial Class FrmSettings
         Me.Button19.BackColor = System.Drawing.Color.Crimson
         Me.Button19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Button19.ForeColor = System.Drawing.Color.White
-        Me.Button19.Location = New System.Drawing.Point(583, 16)
+        Me.Button19.Location = New System.Drawing.Point(427, 60)
         Me.Button19.Name = "Button19"
         Me.Button19.Size = New System.Drawing.Size(100, 26)
         Me.Button19.TabIndex = 144
@@ -11677,6 +11685,64 @@ Partial Class FrmSettings
         Me.Button14.Text = "Clear"
         Me.Button14.UseVisualStyleBackColor = false
         '
+        'Button15
+        '
+        Me.Button15.BackColor = System.Drawing.Color.LightGray
+        Me.Button15.BackgroundImage = CType(resources.GetObject("Button15.BackgroundImage"),System.Drawing.Image)
+        Me.Button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button15.FlatAppearance.BorderSize = 0
+        Me.Button15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+        Me.Button15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button15.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Button15.ForeColor = System.Drawing.Color.Black
+        Me.Button15.Location = New System.Drawing.Point(670, 366)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(30, 26)
+        Me.Button15.TabIndex = 163
+        Me.Button15.UseVisualStyleBackColor = False
+        '
+        'Button16
+        '
+        Me.Button16.BackColor = System.Drawing.Color.LightGray
+        Me.Button16.BackgroundImage = CType(resources.GetObject("Button16.BackgroundImage"), System.Drawing.Image)
+        Me.Button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button16.FlatAppearance.BorderSize = 0
+        Me.Button16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+        Me.Button16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.Button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button16.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button16.ForeColor = System.Drawing.Color.Black
+        Me.Button16.Location = New System.Drawing.Point(667, 324)
+        Me.Button16.Name = "Button16"
+        Me.Button16.Size = New System.Drawing.Size(30, 26)
+        Me.Button16.TabIndex = 164
+        Me.Button16.UseVisualStyleBackColor = False
+        '
+        'Label121
+        '
+        Me.Label121.AutoSize = True
+        Me.Label121.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label121.ForeColor = System.Drawing.Color.Black
+        Me.Label121.Location = New System.Drawing.Point(669, 352)
+        Me.Label121.Name = "Label121"
+        Me.Label121.Size = New System.Drawing.Size(27, 13)
+        Me.Label121.TabIndex = 166
+        Me.Label121.Text = "load"
+        Me.Label121.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label122
+        '
+        Me.Label122.AutoSize = True
+        Me.Label122.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label122.ForeColor = System.Drawing.Color.Black
+        Me.Label122.Location = New System.Drawing.Point(667, 313)
+        Me.Label122.Name = "Label122"
+        Me.Label122.Size = New System.Drawing.Size(30, 13)
+        Me.Label122.TabIndex = 165
+        Me.Label122.Text = "save"
+        Me.Label122.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'FrmSettings
         '
         Me.AllowDrop = true
@@ -11848,6 +11914,7 @@ Partial Class FrmSettings
         Me.TabControl1.ResumeLayout(false)
         Me.TabPage22.ResumeLayout(false)
         Me.PNLGlitter.ResumeLayout(false)
+        Me.PNLGlitter.PerformLayout
         Me.GBGlitterD.ResumeLayout(false)
         Me.GBGlitterD.PerformLayout
         CType(Me.GlitterSlider,System.ComponentModel.ISupportInitialize).EndInit
@@ -12853,4 +12920,8 @@ End Sub
     Friend WithEvents Button12 As System.Windows.Forms.Button
     Friend WithEvents Button14 As System.Windows.Forms.Button
     Friend WithEvents Button13 As System.Windows.Forms.Button
+    Friend WithEvents Button15 As System.Windows.Forms.Button
+    Friend WithEvents Button16 As System.Windows.Forms.Button
+    Friend WithEvents Label121 As System.Windows.Forms.Label
+    Friend WithEvents Label122 As System.Windows.Forms.Label
 End Class
