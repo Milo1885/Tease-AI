@@ -3,7 +3,9 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 43
 
-08/25 1:40 am - Added Save and Load options in Glitter tab that allows users to create and load custom settings for Glitter
+08/25 2:07 am - Fixed bug that happened when the user asked to speed up from the slowest speed or slow down from the fastest speed. These requests should now be handled correctly.
+
+08/25 1:40 am - Added Save and Load options in Glitter tab that allows users to create and load custom settings for Glitter.
 
 08/23 11:20 am - Added Command @RoundVar. Syntax: @RoundVar[VarName]=[Value to round by]
 

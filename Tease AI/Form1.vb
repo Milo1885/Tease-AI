@@ -8427,7 +8427,7 @@ RinseLatherRepeat:
         If StringClean.Contains("@StrokeFaster") Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Faster")
-                StrokePace = StrokePace - 10
+                StrokePace = StrokePace - 20
                 If StrokePace < 10 Then StrokePace = 10
                 If File.Exists(Application.StartupPath & "\System\Metronome") Then
                     File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
@@ -8445,7 +8445,7 @@ RinseLatherRepeat:
         If StringClean.Contains("@StrokeSlower") Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Slower")
-                StrokePace = StrokePace + 10
+                StrokePace = StrokePace + 20
                 If StrokePace > 100 Then StrokePace = 100
                 If File.Exists(Application.StartupPath & "\System\Metronome") Then
                     File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
@@ -11075,7 +11075,7 @@ VTSkip:
 
             Else
 
-                If StrokePace > 99 Then
+                If StrokePace < 11 Then
                     ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpMAX.txt"
                     StringClean = ResponseClean(StringClean)
 
@@ -11123,7 +11123,7 @@ VTSkip:
 
             Else
 
-                If StrokePace < 11 Then
+                If StrokePace > 99 Then
                     ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownMIN.txt"
                     StringClean = ResponseClean(StringClean)
 
