@@ -120,6 +120,7 @@ Partial Class Form1
         Me.Contact2Timer = New System.Windows.Forms.Timer(Me.components)
         Me.Contact3Timer = New System.Windows.Forms.Timer(Me.components)
         Me.UpdateStageTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.WMPTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -879,6 +880,10 @@ Partial Class Form1
         '
         Me.UpdateStageTimer.Interval = 1000
         '
+        'WMPTimer
+        '
+        Me.WMPTimer.Interval = 1000
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1035,5 +1040,6 @@ Partial Class Form1
     Friend WithEvents Contact2Timer As System.Windows.Forms.Timer
     Friend WithEvents Contact3Timer As System.Windows.Forms.Timer
     Friend WithEvents UpdateStageTimer As System.Windows.Forms.Timer
+    Friend WithEvents WMPTimer As System.Windows.Forms.Timer
 
 End Class

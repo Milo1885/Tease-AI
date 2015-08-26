@@ -432,7 +432,8 @@ Public Class Form1
     Dim CustomTaskTextFirst As String
     Dim CustomTaskActive As Boolean
 
-
+    Dim SubtitleCount As Integer
+    Dim VidFile As String
 
 
 
@@ -1263,6 +1264,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             FrmSettings.LBLChastityState.Text = "ON"
             FrmSettings.LBLChastityState.ForeColor = Color.Green
         End If
+
+        WMPTimer.Start()
 
         FormLoading = False
 
@@ -5575,6 +5578,8 @@ TryPrevious:
 
         If (OpenFileDialog2.ShowDialog = Windows.Forms.DialogResult.OK) Then
 
+
+
             DomWMP.Visible = True
             DomWMP.stretchToFit = True
 
@@ -5597,6 +5602,7 @@ TryPrevious:
             ' If FrmSettings.VLC169Radio.Checked = True Then domVLC.video.crop = "16:9"
 
             DomWMP.URL = OpenFileDialog2.FileName
+         
         End If
     End Sub
 
@@ -17229,7 +17235,6 @@ TryNext:
     End Sub
 
 
-
     Private Sub DomWMP_PlayStateChange(sender As Object, e As AxWMPLib._WMPOCXEvents_PlayStateChangeEvent) Handles DomWMP.PlayStateChange
 
         If (DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped) Then
@@ -18799,4 +18804,53 @@ TryNext:
             StatusUpdatePost()
         End If
     End Sub
+
+
+
+    Private Sub WMPTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WMPTimer.Tick
+
+        If DomTypeCheck = True Or DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped Or DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused Then Return
+
+        Debug.Print("New movie loaded: " & DomWMP.URL.ToString)
+
+        VidFile = Path.GetFileName(DomWMP.URL.ToString)
+
+        Dim VidSplit As String() = VidFile.Split(".")
+        VidFile = ""
+        For i As Integer = 0 To VidSplit.Count - 2
+            VidFile = VidFile + VidSplit(i)
+        Next
+        Debug.Print(VidFile)
+
+        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Scripts\" & VidFile & ".txt") Then
+            Dim SubCheck As String()
+            Dim PlayPos As Integer
+            Dim WMPPos As Integer = Math.Ceiling(DomWMP.Ctlcontrols.currentPosition)
+
+            Dim SubList As New List(Of String)
+            SubList = Txt2List(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Scripts\" & VidFile & ".txt")
+
+            If Not SubList Is Nothing Then
+                For i As Integer = 0 To SubList.Count - 1
+                    SubCheck = SubList(i).Split("]")
+                    SubCheck(0) = SubCheck(0).Replace("[", "")
+                    Dim SubCheck2 As String() = SubCheck(0).Split(":")
+
+                    PlayPos = SubCheck2(0) * 3600
+                    PlayPos += SubCheck2(1) * 60
+                    PlayPos += SubCheck2(2)
+
+                    If WMPPos = PlayPos Then
+                        DomTask = SubCheck(1)
+                        TypingDelayGeneric()
+                        Debug.Print(SubList(i))
+                    End If
+                Next
+            End If
+        End If
+
+
+    End Sub
+
+    
 End Class

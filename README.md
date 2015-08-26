@@ -3,6 +3,16 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 44
 
+08/25 10:40 pm - Added ability for domme to read from a script in time with videos. When a user plays any video (it doesn't matter where the video is located or how it was called), the program checks to see if a script with the same name as the video is located in [Personality]\Video\Scripts. For example, if a use opens a video file named Shower-Lesbians.mp4, Tease AI will look for Shower-Lesbians.txt. If no script is found, the video will simply play as usual. Scripts should look something like this:
+
+[00:00:10] I'm looking forward to this
+[00:00:18] You're probably not though lol
+[00:00:42] It's gonna be so fucking hot when they get in the shower
+[00:01:32] Fuck, not even two minutes in and I'm already turned on #EmoteFlustered
+etc
+
+Timestamps are denoted by "hours:minutes:seconds". So when the video reaches 10 seconds, the domme will say "I'm looking forward to this", and so on. This can be used in conjunction with other instances the domme shows you videos as well. A timestamped message will not be displayed if the domme is already typing at that moment in the video. This not only applies to things she says outside of the video script, but in cases where timestamps are too close together and the domme walks over the next thing she was about to say.
+
 08/25 7:41 pm - Added Commands @ApathyLevelUp and @ApathyLevelDown. These commands alter the domme's Apathy level for the duration of the session.
 
 08/25 10:40 am - Added Reset button to Apps window. The Reset button is enabled once a tease session starts. When the user clicks "Reset", the program will stop and revert to its initial state before greeting the domme. 
