@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 44
 
+08/25 7:47 am - Added the ability to Suspend and Resume session states
+
 08/25 11:12 pm - Fixed bug that prevented the domme's slideshow from changing during the Taunt cycle.
 
 08/25 10:40 pm - Added ability for domme to read from a script in time with videos. When a user plays any video (it doesn't matter where the video is located or how it was called), the program checks to see if a script with the same name as the video is located in [Personality]\Video\Scripts. For example, if a use opens a video file named Shower-Lesbians.mp4, Tease AI will look for Shower-Lesbians.txt. If no script is found, the video will simply play as usual. Scripts should look something like this:

@@ -921,7 +921,7 @@ Partial Class Form1
         Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Tease A.I. - PATCH 44"
+        Me.Text = "Tease A.I. - PATCH 45"
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
