@@ -5828,6 +5828,8 @@ TryNextWithTease:
 
                     If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNextWithTease
 
+                    DomPic = _ImageFileNames(FileCount)
+
                     ' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
                     If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
