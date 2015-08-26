@@ -1347,8 +1347,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         mainPictureBox.Image = Nothing
         SlideshowLoaded = False
 
-
-
+        FrmSettings.domlevelNumBox.Value = My.Settings.DomLevel
+        FrmSettings.NBEmpathy.Value = My.Settings.DomEmpathy
 
 
     End Sub
@@ -1565,8 +1565,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
                     SaidHello = True
                     BeforeTease = True
-                    frmApps.BTNReset.Enabled = True
-                    frmApps.BTNRun.Enabled = False
+                    
 
 
                     If FrmSettings.CBTeaseLengthDD.Checked = True Then
@@ -17242,7 +17241,7 @@ TryNext:
         If (DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped) Then
             'Debug.Print("WMP Stopped Called")
 
-            
+
 
 
 
@@ -17254,7 +17253,7 @@ TryNext:
                 mainPictureBox.Visible = True
                 DomWMP.Visible = False
 
-            
+
 
                 If RandomizerVideoTease = True Then
                     ScriptTimer.Stop()
@@ -17275,7 +17274,7 @@ TryNext:
                 AvoidTheEdgeTaunts.Stop()
                 VideoTease = False
                 SubStroking = False
-            
+
 
                 Debug.Print("TempStrokeTauntVal = " & TempStrokeTauntVal)
                 Debug.Print("TempFileText = " & TempFileText)
@@ -18853,6 +18852,929 @@ TryNext:
 
 
     End Sub
+
+
+
+    Public Sub SuspendSession()
+
+
+        Dim SettingsPath As String = Application.StartupPath & "\System\"
+        Dim SettingsList As New List(Of String)
+        SettingsList.Clear()
+
+
+        SettingsList.Add("Personality: " & FrmSettings.dompersonalityComboBox.Text)
+        SettingsList.Add("ScriptOperator: " & ScriptOperator)
+        SettingsList.Add("ScriptCompare: " & ScriptCompare)
+        SettingsList.Add("DomTyping: " & DomTyping)
+        SettingsList.Add("CheckYes: " & CheckYes)
+        SettingsList.Add("CheckNo: " & CheckNo)
+        SettingsList.Add("Playlist: " & Playlist)
+
+        SettingsList.Add("PlaylistCurrent: " & PlaylistCurrent)
+        SettingsList.Add("SubInChastity: " & SubInChastity)
+        SettingsList.Add("FormLoading: " & FormLoading)
+        SettingsList.Add("RandomDelay: " & RandomDelay)
+        SettingsList.Add("Responding: " & Responding)
+        SettingsList.Add("ScriptLineVal: " & ScriptLineVal)
+        SettingsList.Add("StrokeTauntVal: " & StrokeTauntVal)
+        SettingsList.Add("ThoughtTauntVal: " & ThoughtTauntVal)
+        SettingsList.Add("ModuleTauntVal: " & ModuleTauntVal)
+        SettingsList.Add("FileText: " & FileText)
+        SettingsList.Add("TempStrokeTauntVal: " & TempStrokeTauntVal)
+        SettingsList.Add("TempFileText: " & TempFileText)
+        SettingsList.Add("ModText: " & ModText)
+        SettingsList.Add("TeaseTick: " & TeaseTick)
+        SettingsList.Add("StrokeTauntCount: " & StrokeTauntCount)
+        SettingsList.Add("TauntTextTotal: " & TauntTextTotal)
+        'SettingsList.Add("TauntLines: " & TauntLines)
+        SettingsList.Add("StrokeFilter: " & StrokeFilter)
+        SettingsList.Add("ScriptTick: " & ScriptTick)
+        SettingsList.Add("StringLength: " & StringLength)
+        SettingsList.Add("FileGoto: " & FileGoto)
+        SettingsList.Add("SkipGotoLine: " & SkipGotoLine)
+        SettingsList.Add("HandleScriptText: " & HandleScriptText)
+        SettingsList.Add("ChatString: " & ChatString)
+        SettingsList.Add("DomTask: " & DomTask)
+        SettingsList.Add("DomChat: " & DomChat)
+        SettingsList.Add("TypeDelay: " & TypeDelay)
+        SettingsList.Add("TempVal: " & TempVal)
+        SettingsList.Add("NullResponse: " & NullResponse)
+        SettingsList.Add("CleanFlag: " & CleanFlag)
+        SettingsList.Add("DebugAwarenessLine: " & DebugAwarenessLine)
+        SettingsList.Add("TagCount: " & TagCount)
+        SettingsList.Add("LocalTagCount: " & LocalTagCount)
+        SettingsList.Add("OrgasmResult: " & OrgasmResult)
+        SettingsList.Add("BeggedOrgasmDecision: " & BeggedOrgasmDecision)
+        SettingsList.Add("TeaseOver: " & TeaseOver)
+        SettingsList.Add("TaskFile: " & TaskFile)
+        SettingsList.Add("TaskText: " & TaskText)
+        SettingsList.Add("TaskTextDir: " & TaskTextDir)
+        SettingsList.Add("ResponseFile: " & ResponseFile)
+        SettingsList.Add("ResponseLine: " & ResponseLine)
+        SettingsList.Add("CBTCockActive: " & CBTCockActive)
+        SettingsList.Add("CBTBallsActive: " & CBTBallsActive)
+        SettingsList.Add("CBTCockFlag: " & CBTCockFlag)
+        SettingsList.Add("CBTBallsFlag: " & CBTBallsFlag)
+        SettingsList.Add("CBTBallsFirst: " & CBTBallsFirst)
+        SettingsList.Add("CBTCockFirst: " & CBTCockFirst)
+        SettingsList.Add("CBTBallsCount: " & CBTBallsCount)
+        SettingsList.Add("CBTCockCount: " & CBTCockCount)
+        SettingsList.Add("ThoughtCount: " & ThoughtCount)
+        SettingsList.Add("GotoDommeLevel: " & GotoDommeLevel)
+        SettingsList.Add("DommeMood: " & DommeMood)
+        SettingsList.Add("AFK: " & AFK)
+        SettingsList.Add("HypnoGen: " & HypnoGen)
+        SettingsList.Add("Induction: " & Induction)
+        SettingsList.Add("TempHypno: " & TempHypno)
+        SettingsList.Add("DomColor: " & DomColor)
+        SettingsList.Add("SubColor: " & SubColor)
+        SettingsList.Add("StrokeCycle: " & StrokeCycle)
+        SettingsList.Add("StrokeTick: " & StrokeTick)
+        SettingsList.Add("StrokeTauntTick: " & StrokeTauntTick)
+        SettingsList.Add("StrokePaceRight: " & StrokePaceRight)
+        SettingsList.Add("StrokePace: " & StrokePace)
+        SettingsList.Add("AudibleTick: " & AudibleTick)
+        SettingsList.Add("StrokeTimeTotal: " & StrokeTimeTotal)
+        SettingsList.Add("HoldEdgeTime: " & HoldEdgeTime)
+        SettingsList.Add("HoldEdgeTimeTotal: " & HoldEdgeTimeTotal)
+        SettingsList.Add("EdgeTauntInt: " & EdgeTauntInt)
+        SettingsList.Add("DelayTick: " & DelayTick)
+        SettingsList.Add("DelayFlag: " & DelayFlag)
+        SettingsList.Add("PreCleanString: " & PreCleanString)
+        SettingsList.Add("DomTypeCheck: " & DomTypeCheck)
+        SettingsList.Add("TypeToggle: " & TypeToggle)
+        SettingsList.Add("IsTyping: " & IsTyping)
+        SettingsList.Add("SubWroteLast: " & SubWroteLast)
+        SettingsList.Add("YesOrNo: " & YesOrNo)
+        SettingsList.Add("GotoFlag: " & GotoFlag)
+        SettingsList.Add("LoopAnswer: " & LoopAnswer)
+        SettingsList.Add("CBT: " & CBT)
+        SettingsList.Add("NoEdge: " & NoEdge)
+        SettingsList.Add("RunningScript: " & RunningScript)
+        SettingsList.Add("RePound: " & RePound)
+        SettingsList.Add("BeforeTease: " & BeforeTease)
+        SettingsList.Add("SubStroking: " & SubStroking)
+        SettingsList.Add("SubEdging: " & SubEdging)
+        SettingsList.Add("SubHoldingEdge: " & SubHoldingEdge)
+        SettingsList.Add("SubCBT: " & SubCBT)
+        SettingsList.Add("EndTease: " & EndTease)
+        SettingsList.Add("ShowThought: " & ShowThought)
+        SettingsList.Add("ShowEdgeThought: " & ShowEdgeThought)
+        SettingsList.Add("ShowModule: " & ShowModule)
+        SettingsList.Add("ModuleEnd: " & ModuleEnd)
+        SettingsList.Add("DivideText: " & DivideText)
+        SettingsList.Add("HoldEdgeTick: " & HoldEdgeTick)
+        SettingsList.Add("HoldEdgeChance: " & HoldEdgeChance)
+        SettingsList.Add("EdgeHold: " & EdgeHold)
+        SettingsList.Add("EdgeNoHold: " & EdgeNoHold)
+        SettingsList.Add("EdgeToRuin: " & EdgeToRuin)
+        SettingsList.Add("EdgeToRuinSecret: " & EdgeToRuinSecret)
+        SettingsList.Add("LongEdge: " & LongEdge)
+        SettingsList.Add("AskedToGiveUp: " & AskedToGiveUp)
+        SettingsList.Add("AskedToGiveUpSection: " & AskedToGiveUpSection)
+        SettingsList.Add("SubGaveUp: " & SubGaveUp)
+        SettingsList.Add("AskedToSpeedUp: " & AskedToSpeedUp)
+        SettingsList.Add("AskedToSlowDown: " & AskedToSlowDown)
+        SettingsList.Add("ThoughtEnd: " & ThoughtEnd)
+        SettingsList.Add("VTLength: " & VTLength)
+        SettingsList.Add("DommeVideo: " & DommeVideo)
+        SettingsList.Add("VideoType: " & VideoType)
+        SettingsList.Add("CensorshipGame: " & CensorshipGame)
+        SettingsList.Add("CensorshipTick: " & CensorshipTick)
+        SettingsList.Add("CensorDuration: " & CensorDuration)
+        SettingsList.Add("AvoidTheEdgeGame: " & AvoidTheEdgeGame)
+        SettingsList.Add("AvoidTheEdgeTick: " & AvoidTheEdgeTick)
+        SettingsList.Add("AvoidTheEdgeTimerTick: " & AvoidTheEdgeTimerTick)
+        SettingsList.Add("AvoidTheEdgeDuration: " & AvoidTheEdgeDuration)
+        SettingsList.Add("AvoidTheEdgeStroking: " & AvoidTheEdgeStroking)
+        SettingsList.Add("AtECountdown: " & AtECountdown)
+        SettingsList.Add("VTPath: " & VTPath)
+        SettingsList.Add("NoVideo: " & NoVideo)
+        SettingsList.Add("NoSpecialVideo: " & NoSpecialVideo)
+        SettingsList.Add("VideoCheck: " & VideoCheck)
+        SettingsList.Add("VideoTease: " & VideoTease)
+        SettingsList.Add("RLGLGame: " & RLGLGame)
+        SettingsList.Add("RLGLStroking: " & RLGLStroking)
+        SettingsList.Add("RLGLTick: " & RLGLTick)
+        SettingsList.Add("RedLight: " & RedLight)
+        SettingsList.Add("RLGLTauntTick: " & RLGLTauntTick)
+        SettingsList.Add("RandomizerVideo: " & RandomizerVideo)
+        SettingsList.Add("RandomizerVideoTease: " & RandomizerVideoTease)
+        SettingsList.Add("ScriptVideoTease: " & ScriptVideoTease)
+        SettingsList.Add("ScriptVideoTeaseFlag: " & ScriptVideoTeaseFlag)
+        SettingsList.Add("VideoTauntTick: " & VideoTauntTick)
+        SettingsList.Add("SlideshowLoaded: " & SlideshowLoaded)
+        SettingsList.Add("RefreshVideoTotal: " & RefreshVideoTotal)
+        SettingsList.Add("GlitterImageAV: " & GlitterImageAV)
+        SettingsList.Add("GlitterNCDomme: " & GlitterNCDomme)
+        SettingsList.Add("GlitterNC1: " & GlitterNC1)
+        SettingsList.Add("GlitterNC2: " & GlitterNC2)
+        SettingsList.Add("GlitterNC3: " & GlitterNC3)
+        SettingsList.Add("GlitterTempColor: " & GlitterTempColor)
+        SettingsList.Add("UpdatesTick: " & UpdatesTick)
+        SettingsList.Add("UpdatingPost: " & UpdatingPost)
+        SettingsList.Add("UpdateStage: " & UpdateStage)
+        SettingsList.Add("UpdateStageTick: " & UpdateStageTick)
+        SettingsList.Add("StatusText: " & StatusText)
+        SettingsList.Add("ContactNumber: " & ContactNumber)
+        SettingsList.Add("ContactTick: " & ContactTick)
+        SettingsList.Add("ContactFlag: " & ContactFlag)
+        SettingsList.Add("StatusText1: " & StatusText1)
+        SettingsList.Add("StatusText2: " & StatusText2)
+        SettingsList.Add("StatusText3: " & StatusText3)
+        SettingsList.Add("StatusChance1: " & StatusChance1)
+        SettingsList.Add("StatusChance2: " & StatusChance2)
+        SettingsList.Add("StatusChance3: " & StatusChance3)
+        SettingsList.Add("Update1: " & Update1)
+        SettingsList.Add("Update2: " & Update2)
+        SettingsList.Add("Update3: " & Update3)
+        SettingsList.Add("LastSuccessfulImage: " & LastSuccessfulImage)
+        SettingsList.Add("GetFolder: " & GetFolder)
+        SettingsList.Add("FileCount: " & FileCount)
+        SettingsList.Add("FileCountMax: " & FileCountMax)
+        'SettingsList.Add("_ImageFileNames: " & _ImageFileNames)
+        SettingsList.Add("_CurrentImage: " & _CurrentImage)
+        SettingsList.Add("WithTeaseImgDir: " & WithTeaseImgDir)
+        SettingsList.Add("ApproveImage: " & ApproveImage)
+        SettingsList.Add("WIExit: " & WIExit)
+        'SettingsList.Add("RecentSlideshows: " & RecentSlideshows)
+        SettingsList.Add("MainPictureImage: " & MainPictureImage)
+        SettingsList.Add("DomPic: " & DomPic)
+        SettingsList.Add("LockImage: " & LockImage)
+        'SettingsList.Add("LocalTagImageList: " & LocalTagImageList)
+        SettingsList.Add("Crazy: " & Crazy)
+        SettingsList.Add("Vulgar: " & Vulgar)
+        SettingsList.Add("Supremacist: " & Supremacist)
+        SettingsList.Add("CockSize: " & CockSize)
+        SettingsList.Add("TempDick: " & TempDick)
+        SettingsList.Add("PetName: " & PetName)
+        SettingsList.Add("PetName2: " & PetName2)
+        SettingsList.Add("TauntText: " & TauntText)
+        SettingsList.Add("ScriptCount: " & ScriptCount)
+        SettingsList.Add("TempScriptCount: " & TempScriptCount)
+        SettingsList.Add("TauntTextCount: " & TauntTextCount)
+        SettingsList.Add("StartIndex: " & StartIndex)
+        SettingsList.Add("EndIndex: " & EndIndex)
+        SettingsList.Add("SlideshowTimerTick: " & SlideshowTimerTick)
+        SettingsList.Add("ReadBlog: " & ReadBlog)
+        SettingsList.Add("ReadBlogRate: " & ReadBlogRate)
+        SettingsList.Add("SearchImageBlog: " & SearchImageBlog)
+        SettingsList.Add("FoundString: " & FoundString)
+        SettingsList.Add("WebImage: " & WebImage)
+        'SettingsList.Add("WebImageLines: " & WebImageLines)
+        SettingsList.Add("WebImageLine: " & WebImageLine)
+        SettingsList.Add("WebImageLineTotal: " & WebImageLineTotal)
+        SettingsList.Add("WebImagePath: " & WebImagePath)
+        SettingsList.Add("ImageUrlFilePath: " & ImageUrlFilePath)
+        SettingsList.Add("ImageUrlFileIndex: " & ImageUrlFileIndex)
+        SettingsList.Add("ReaderString: " & ReaderString)
+        SettingsList.Add("ReaderStringTotal: " & ReaderStringTotal)
+        SettingsList.Add("StrokePaceInt: " & StrokePaceInt)
+        SettingsList.Add("LastScriptCountdown: " & LastScriptCountdown)
+        SettingsList.Add("LastScript: " & LastScript)
+        SettingsList.Add("JustShowedBlogImage: " & JustShowedBlogImage)
+        SettingsList.Add("SaidHello: " & SaidHello)
+        SettingsList.Add("StopMetronome: " & StopMetronome)
+        SettingsList.Add("AvgEdgeStroking: " & AvgEdgeStroking)
+        SettingsList.Add("AvgEdgeNoTouch: " & AvgEdgeNoTouch)
+        SettingsList.Add("EdgeCountTick: " & EdgeCountTick)
+        SettingsList.Add("AvgEdgeStrokingFlag: " & AvgEdgeStrokingFlag)
+        SettingsList.Add("AvgEdgeCount: " & AvgEdgeCount)
+        SettingsList.Add("AvgEdgeCountRest: " & AvgEdgeCountRest)
+        SettingsList.Add("EdgeTickCheck: " & EdgeTickCheck)
+        SettingsList.Add("EdgeNOT: " & EdgeNOT)
+        SettingsList.Add("AlreadyStrokingEdge: " & AlreadyStrokingEdge)
+        SettingsList.Add("WritingTaskLinesAmount: " & WritingTaskLinesAmount)
+        SettingsList.Add("WritingTaskLinesWritten: " & WritingTaskLinesWritten)
+        SettingsList.Add("WritingTaskLinesRemaining: " & WritingTaskLinesRemaining)
+        SettingsList.Add("WritingTaskMistakesAllowed: " & WritingTaskMistakesAllowed)
+        SettingsList.Add("WritingTaskMistakesMade: " & WritingTaskMistakesMade)
+        SettingsList.Add("WritingTaskFlag: " & WritingTaskFlag)
+        SettingsList.Add("FirstRound: " & FirstRound)
+        SettingsList.Add("StartStrokingCount: " & StartStrokingCount)
+        SettingsList.Add("TeaseJOI: " & TeaseJOI)
+        SettingsList.Add("TeaseVideo: " & TeaseVideo)
+        SettingsList.Add("TnAPath: " & TnAPath)
+        'SettingsList.Add("TnAList: " & TnAList)
+        'SettingsList.Add("BoobList: " & BoobList)
+        'SettingsList.Add("AssList: " & AssList)
+        SettingsList.Add("AssImage: " & AssImage)
+        SettingsList.Add("BoobImage: " & BoobImage)
+        SettingsList.Add("FoundTag: " & FoundTag)
+        SettingsList.Add("TagGarment: " & TagGarment)
+        SettingsList.Add("TagUnderwear: " & TagUnderwear)
+        SettingsList.Add("TagTattoo: " & TagTattoo)
+        SettingsList.Add("TagSexToy: " & TagSexToy)
+        SettingsList.Add("TagFurniture: " & TagFurniture)
+        SettingsList.Add("ImportKeyword: " & ImportKeyword)
+        SettingsList.Add("BookmarkModule: " & BookmarkModule)
+        SettingsList.Add("BookmarkModuleFile: " & BookmarkModuleFile)
+        SettingsList.Add("BookmarkModuleLine: " & BookmarkModuleLine)
+        SettingsList.Add("BookmarkLink: " & BookmarkLink)
+        SettingsList.Add("BookmarkLinkFile: " & BookmarkLinkFile)
+        SettingsList.Add("BookmarkLinkLine: " & BookmarkLinkLine)
+        SettingsList.Add("WaitTick: " & WaitTick)
+        SettingsList.Add("OrgasmDenied: " & OrgasmDenied)
+        SettingsList.Add("OrgasmAllowed: " & OrgasmAllowed)
+        SettingsList.Add("OrgasmRuined: " & OrgasmRuined)
+        SettingsList.Add("StupidTick: " & StupidTick)
+        SettingsList.Add("StupidFlag: " & StupidFlag)
+        SettingsList.Add("CaloriesConsumed: " & CaloriesConsumed)
+        SettingsList.Add("CaloriesGoal: " & CaloriesGoal)
+        SettingsList.Add("GoldTokens: " & GoldTokens)
+        SettingsList.Add("SilverTokens: " & SilverTokens)
+        SettingsList.Add("BronzeTokens: " & BronzeTokens)
+        SettingsList.Add("EdgeFound: " & EdgeFound)
+        SettingsList.Add("OrgasmYesNo: " & OrgasmYesNo)
+        SettingsList.Add("VTFlag: " & VTFlag)
+        SettingsList.Add("DomPersonality: " & DomPersonality)
+        'SettingsList.Add("UpdateList: " & UpdateList)
+        SettingsList.Add("GlitterDocument: " & GlitterDocument)
+        SettingsList.Add("CustomSlideshow: " & CustomSlideshow)
+        SettingsList.Add("CustomSlideshowTick: " & CustomSlideshowTick)
+        'SettingsList.Add("CustomSlideshowList: " & CustomSlideshowList)
+        SettingsList.Add("ImageString: " & ImageString)
+        SettingsList.Add("RapidFire: " & RapidFire)
+        SettingsList.Add("GlitterTease: " & GlitterTease)
+        SettingsList.Add("AddContactTick: " & AddContactTick)
+        'SettingsList.Add("Contact1Pics: " & Contact1Pics)
+        'SettingsList.Add("Contact2Pics: " & Contact2Pics)
+        'SettingsList.Add("Contact3Pics: " & Contact3Pics)
+        SettingsList.Add("Contact1PicsCount: " & Contact1PicsCount)
+        SettingsList.Add("Contact2PicsCount: " & Contact2PicsCount)
+        SettingsList.Add("Contact3PicsCount: " & Contact3PicsCount)
+        SettingsList.Add("Group: " & Group)
+        SettingsList.Add("CustomTask: " & CustomTask)
+        SettingsList.Add("CustomTaskFirst: " & CustomTaskFirst)
+        SettingsList.Add("CustomTaskText: " & CustomTaskText)
+        SettingsList.Add("CustomTaskTextFirst: " & CustomTaskTextFirst)
+        SettingsList.Add("CustomTaskActive: " & CustomTaskActive)
+        SettingsList.Add("SubtitleCount: " & SubtitleCount)
+        SettingsList.Add("VidFile: " & VidFile)
+
+        SettingsList.Add("Timer1 Enabled: " & Timer1.Enabled)
+        SettingsList.Add("SendTimerTimer Enabled: " & SendTimer.Enabled)
+        SettingsList.Add("IsTypingTimer Enabled: " & IsTypingTimer.Enabled)
+        SettingsList.Add("StrokeTimer Enabled: " & StrokeTimer.Enabled)
+        SettingsList.Add("StrokeTauntTimer Enabled: " & StrokeTauntTimer.Enabled)
+        SettingsList.Add("DelayTimer Enabled: " & DelayTimer.Enabled)
+        SettingsList.Add("CensorshipTimer Enabled: " & CensorshipTimer.Enabled)
+        SettingsList.Add("AudibleMetronome Enabled: " & AudibleMetronome.Enabled)
+        SettingsList.Add("ContactTimer Enabled: " & ContactTimer.Enabled)
+        SettingsList.Add("CustomeSlideshowTimer Enabled: " & CustomSlideshowTimer.Enabled)
+        SettingsList.Add("RLGLTimer Enabled: " & RLGLTimer.Enabled)
+        SettingsList.Add("StrokeTimeTotalTimer Enabled: " & StrokeTimeTotalTimer.Enabled)
+        SettingsList.Add("EdgeCountTimer Enabled: " & EdgeCountTimer.Enabled)
+        SettingsList.Add("TnASlides Enabled: " & TnASlides.Enabled)
+        SettingsList.Add("SlideshowTimer Enabled: " & SlideshowTimer.Enabled)
+        SettingsList.Add("WaitTimer Enabled: " & WaitTimer.Enabled)
+        SettingsList.Add("StupidTimer Enabled: " & StupidTimer.Enabled)
+        SettingsList.Add("VideoTauntTimer Enabled: " & VideoTauntTimer.Enabled)
+        SettingsList.Add("RLGLTauntTimer Enabled: " & RLGLTauntTimer.Enabled)
+        SettingsList.Add("AvoidTheEdgeTauntsTimer Enabled: " & AvoidTheEdgeTaunts.Enabled)
+        SettingsList.Add("TeaseTimer Enabled: " & TeaseTimer.Enabled)
+        SettingsList.Add("UpdatesTimer Enabled: " & UpdatesTimer.Enabled)
+        SettingsList.Add("AvoidTheEdgeTimer Enabled: " & AvoidTheEdge.Enabled)
+        SettingsList.Add("AvoidTheEdgeResumeTimer Enabled: " & AvoidTheEdgeResume.Enabled)
+        SettingsList.Add("StrokePaceTimer Enabled: " & StrokePaceTimer.Enabled)
+        SettingsList.Add("EdgeTauntTimer Enabled: " & EdgeTauntTimer.Enabled)
+        SettingsList.Add("HoldEdgeTimer Enabled: " & HoldEdgeTimer.Enabled)
+        SettingsList.Add("HoldEdgeTauntTimer Enabled: " & HoldEdgeTauntTimer.Enabled)
+        SettingsList.Add("Contact1Timer Enabled: " & Contact1Timer.Enabled)
+        SettingsList.Add("Contact2Timer Enabled: " & Contact2Timer.Enabled)
+        SettingsList.Add("Contact3Timer Enabled: " & Contact3Timer.Enabled)
+        SettingsList.Add("UpdateStageTimer Enabled: " & UpdateStageTimer.Enabled)
+        SettingsList.Add("WMPTimer Enabled: " & WMPTimer.Enabled)
+
+        'SettingsList.Add("PlaylistFile: " & PlaylistFile)
+
+        SettingsList.Add("Chat: " & Chat)
+
+        If mainPictureBox.Visible = True Then
+            SettingsList.Add("MainWindow: Image")
+        Else
+            SettingsList.Add("MainWindow: Video")
+        End If
+
+        SettingsList.Add("DomWMP URL: " & DomWMP.URL)
+        SettingsList.Add("DomWMP Position: " & DomWMP.Ctlcontrols.currentPosition)
+        SettingsList.Add("DomWMP PlayState: " & DomWMP.playState)
+
+        ' WMPLib.WMPPlayState.wmppsStopped)
+
+        Dim SettingsString As String = ""
+
+        For i As Integer = 0 To SettingsList.Count - 1
+            SettingsString = SettingsString & SettingsList(i)
+            If i <> SettingsList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+        Next
+
+        My.Computer.FileSystem.WriteAllText(SettingsPath & "SavedState.txt", SettingsString, False)
+
+        If PlaylistFile.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To PlaylistFile.Count - 1
+                SettingsString = SettingsString & PlaylistFile(i)
+                If i <> PlaylistFile.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusPlayListFile.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusPlayListFile.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusPlayListFile.txt")
+        End If
+
+        If TauntLines.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To TauntLines.Count - 1
+                SettingsString = SettingsString & TauntLines(i)
+                If i <> TauntLines.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusTauntLines.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusTauntLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusTauntLines.txt")
+        End If
+
+        If _ImageFileNames.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To _ImageFileNames.Count - 1
+                SettingsString = SettingsString & _ImageFileNames(i)
+                If i <> _ImageFileNames.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "Sus_ImageFileNames.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "Sus_ImageFileNames.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "Sus_ImageFileNames.txt")
+        End If
+
+        If RecentSlideshows.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To RecentSlideshows.Count - 1
+                SettingsString = SettingsString & RecentSlideshows(i)
+                If i <> RecentSlideshows.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusRecentSlideshows.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusRecentSlideshows.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusRecentSlideshows.txt")
+        End If
+
+        If LocalTagImageList.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To LocalTagImageList.Count - 1
+                SettingsString = SettingsString & LocalTagImageList(i)
+                If i <> LocalTagImageList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusLocalTagImageList.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusLocalTagImageList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusLocalTagImageList.txt")
+        End If
+
+        If WebImageLines.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To WebImageLines.Count - 1
+                SettingsString = SettingsString & WebImageLines(i)
+                If i <> WebImageLines.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusWebImageLines.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusWebImageLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusWebImageLines.txt")
+        End If
+
+        If TnAList.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To TnAList.Count - 1
+                SettingsString = SettingsString & TnAList(i)
+                If i <> TnAList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusTnAList.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusTnAList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusTnAList.txt")
+        End If
+
+        If BoobList.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To BoobList.Count - 1
+                SettingsString = SettingsString & BoobList(i)
+                If i <> BoobList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusBoobList.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusBoobList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusBoobList.txt")
+        End If
+
+        If AssList.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To AssList.Count - 1
+                SettingsString = SettingsString & AssList(i)
+                If i <> AssList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusAssList.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusAssList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusAssList.txt")
+        End If
+
+        If UpdateList.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To UpdateList.Count - 1
+                SettingsString = SettingsString & UpdateList(i)
+                If i <> UpdateList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusUpdateList.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusUpdateList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusUpdateList.txt")
+        End If
+
+        If CustomSlideshowList.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To CustomSlideshowList.Count - 1
+                SettingsString = SettingsString & CustomSlideshowList(i)
+                If i <> CustomSlideshowList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusCustomSlideshowList.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusCustomSlideshowList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusCustomSlideshowList.txt")
+        End If
+
+        If Contact1Pics.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To Contact1Pics.Count - 1
+                SettingsString = SettingsString & Contact1Pics(i)
+                If i <> Contact1Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusContact1Pics.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusContact1Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusContact1Pics.txt")
+        End If
+
+        If Contact2Pics.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To Contact2Pics.Count - 1
+                SettingsString = SettingsString & Contact2Pics(i)
+                If i <> Contact2Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusContact2Pics.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusContact2Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusContact2Pics.txt")
+        End If
+
+        If Contact3Pics.Count > 0 Then
+            SettingsString = ""
+            For i As Integer = 0 To Contact3Pics.Count - 1
+                SettingsString = SettingsString & Contact3Pics(i)
+                If i <> Contact3Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusContact3Pics.txt", SettingsString, False)
+        Else
+            If File.Exists(SettingsPath & "SusContact3Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusContact3Pics.txt")
+        End If
+
+
+
+
+    End Sub
+
+    Public Sub ResumeSession()
+
+        Dim SettingsPath As String = Application.StartupPath & "\System\"
+        Dim SettingsList As New List(Of String)
+
+        Try
+            Dim SettingsReader As New StreamReader(Application.StartupPath & "\System\" & "SavedState.txt")
+            While SettingsReader.Peek <> -1
+                SettingsList.Add(SettingsReader.ReadLine())
+            End While
+            SettingsReader.Close()
+            SettingsReader.Dispose()
+        Catch ex As Exception
+            MessageBox.Show(Me, "SavedState.txt could not be read!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            Return
+        End Try
+
+
+        FrmSettings.dompersonalityComboBox.Text = SettingsList(0).Replace("Personality: ", "")
+
+        ScriptOperator = SettingsList(1).Replace("ScriptOperator: ", "")
+        ScriptCompare = SettingsList(2).Replace("ScriptCompare: ", "")
+        DomTyping = SettingsList(3).Replace("DomTyping: ", "")
+        CheckYes = SettingsList(4).Replace("CheckYes: ", "")
+        CheckNo = SettingsList(5).Replace("CheckNo: ", "")
+        Playlist = SettingsList(6).Replace("Playlist: ", "")
+        PlaylistCurrent = SettingsList(7).Replace("PlaylistCurrent: ", "")
+        SubInChastity = SettingsList(8).Replace("SubInChastity: ", "")
+        FormLoading = SettingsList(9).Replace("FormLoading: ", "")
+        RandomDelay = SettingsList(10).Replace("RandomDelay: ", "")
+        Responding = SettingsList(11).Replace("Responding: ", "")
+        ScriptLineVal = SettingsList(12).Replace("ScriptLineVal: ", "")
+        StrokeTauntVal = SettingsList(13).Replace("StrokeTauntVal: ", "")
+        ThoughtTauntVal = SettingsList(14).Replace("ThoughtTauntVal: ", "")
+        ModuleTauntVal = SettingsList(15).Replace("ModuleTauntVal: ", "")
+        FileText = SettingsList(16).Replace("FileText: ", "")
+        TempStrokeTauntVal = SettingsList(17).Replace("TempStrokeTauntVal: ", "")
+        TempFileText = SettingsList(18).Replace("TempFileText: ", "")
+        ModText = SettingsList(19).Replace("ModText: ", "")
+        TeaseTick = SettingsList(20).Replace("TeaseTick: ", "")
+        StrokeTauntCount = SettingsList(21).Replace("StrokeTauntCount: ", "")
+        TauntTextTotal = SettingsList(22).Replace("TauntTextTotal: ", "")
+        StrokeFilter = SettingsList(23).Replace("StrokeFilter: ", "")
+        ScriptTick = SettingsList(24).Replace("ScriptTick: ", "")
+        StringLength = SettingsList(25).Replace("StringLength: ", "")
+        FileGoto = SettingsList(26).Replace("FileGoto: ", "")
+        SkipGotoLine = SettingsList(27).Replace("SkipGotoLine: ", "")
+        HandleScriptText = SettingsList(28).Replace("HandleScriptText: ", "")
+        ChatString = SettingsList(29).Replace("ChatString: ", "")
+        DomTask = SettingsList(30).Replace("DomTask: ", "")
+        DomChat = SettingsList(31).Replace("DomChat: ", "")
+        TypeDelay = SettingsList(32).Replace("TypeDelay: ", "")
+        TempVal = SettingsList(33).Replace("TempVal: ", "")
+        NullResponse = SettingsList(34).Replace("NullResponse: ", "")
+        CleanFlag = SettingsList(35).Replace("CleanFlag: ", "")
+        DebugAwarenessLine = SettingsList(36).Replace("DebugAwarenessLine: ", "")
+        TagCount = SettingsList(37).Replace("TagCount: ", "")
+        LocalTagCount = SettingsList(38).Replace("LocalTagCount: ", "")
+        OrgasmResult = SettingsList(39).Replace("OrgasmResult: ", "")
+        BeggedOrgasmDecision = SettingsList(40).Replace("BeggedOrgasmDecision: ", "")
+        TeaseOver = SettingsList(41).Replace("TeaseOver: ", "")
+        TaskFile = SettingsList(42).Replace("TaskFile: ", "")
+        TaskText = SettingsList(43).Replace("TaskText: ", "")
+        TaskTextDir = SettingsList(44).Replace("TaskTextDir: ", "")
+        ResponseFile = SettingsList(45).Replace("ResponseFile: ", "")
+        ResponseLine = SettingsList(46).Replace("ResponseLine: ", "")
+        CBTCockActive = SettingsList(47).Replace("CBTCockActive: ", "")
+        CBTBallsActive = SettingsList(48).Replace("CBTBallsActive: ", "")
+        CBTCockFlag = SettingsList(49).Replace("CBTCockFlag: ", "")
+        CBTBallsFlag = SettingsList(50).Replace("CBTBallsFlag: ", "")
+        CBTBallsFirst = SettingsList(51).Replace("CBTBallsFirst: ", "")
+        CBTCockFirst = SettingsList(52).Replace("CBTCockFirst: ", "")
+        CBTBallsCount = SettingsList(53).Replace("CBTBallsCount: ", "")
+        CBTCockCount = SettingsList(54).Replace("CBTCockCount: ", "")
+        ThoughtCount = SettingsList(55).Replace("ThoughtCount: ", "")
+        GotoDommeLevel = SettingsList(56).Replace("GotoDommeLevel: ", "")
+        DommeMood = SettingsList(57).Replace("DommeMood: ", "")
+        AFK = SettingsList(58).Replace("AFK: ", "")
+        HypnoGen = SettingsList(59).Replace("HypnoGen: ", "")
+        Induction = SettingsList(60).Replace("Induction: ", "")
+        TempHypno = SettingsList(61).Replace("TempHypno: ", "")
+        DomColor = SettingsList(62).Replace("DomColor: ", "")
+        SubColor = SettingsList(63).Replace("SubColor: ", "")
+        StrokeCycle = SettingsList(64).Replace("StrokeCycle: ", "")
+        StrokeTick = SettingsList(65).Replace("StrokeTick: ", "")
+        StrokeTauntTick = SettingsList(66).Replace("StrokeTauntTick: ", "")
+        StrokePaceRight = SettingsList(67).Replace("StrokePaceRight: ", "")
+        StrokePace = SettingsList(68).Replace("StrokePace: ", "")
+        AudibleTick = SettingsList(69).Replace("AudibleTick: ", "")
+        StrokeTimeTotal = SettingsList(70).Replace("StrokeTimeTotal: ", "")
+        HoldEdgeTime = SettingsList(71).Replace("HoldEdgeTime: ", "")
+        HoldEdgeTimeTotal = SettingsList(72).Replace("HoldEdgeTimeTotal: ", "")
+        EdgeTauntInt = SettingsList(73).Replace("EdgeTauntInt: ", "")
+        DelayTick = SettingsList(74).Replace("DelayTick: ", "")
+        DelayFlag = SettingsList(75).Replace("DelayFlag: ", "")
+        PreCleanString = SettingsList(76).Replace("PreCleanString: ", "")
+        DomTypeCheck = SettingsList(77).Replace("DomTypeCheck: ", "")
+        TypeToggle = SettingsList(78).Replace("TypeToggle: ", "")
+        IsTyping = SettingsList(79).Replace("IsTyping: ", "")
+        SubWroteLast = SettingsList(80).Replace("SubWroteLast: ", "")
+        YesOrNo = SettingsList(81).Replace("YesOrNo: ", "")
+        GotoFlag = SettingsList(82).Replace("GotoFlag: ", "")
+        LoopAnswer = SettingsList(83).Replace("LoopAnswer: ", "")
+        CBT = SettingsList(84).Replace("CBT: ", "")
+        NoEdge = SettingsList(85).Replace("NoEdge: ", "")
+        RunningScript = SettingsList(86).Replace("RunningScript: ", "")
+        RePound = SettingsList(87).Replace("RePound: ", "")
+        BeforeTease = SettingsList(88).Replace("BeforeTease: ", "")
+        SubStroking = SettingsList(89).Replace("SubStroking: ", "")
+        SubEdging = SettingsList(90).Replace("SubEdging: ", "")
+        SubHoldingEdge = SettingsList(91).Replace("SubHoldingEdge: ", "")
+        SubCBT = SettingsList(92).Replace("SubCBT: ", "")
+        EndTease = SettingsList(93).Replace("EndTease: ", "")
+        ShowThought = SettingsList(94).Replace("ShowThought: ", "")
+        ShowEdgeThought = SettingsList(95).Replace("ShowEdgeThought: ", "")
+        ShowModule = SettingsList(96).Replace("ShowModule: ", "")
+        ModuleEnd = SettingsList(97).Replace("ModuleEnd: ", "")
+        DivideText = SettingsList(98).Replace("DivideText: ", "")
+        HoldEdgeTick = SettingsList(99).Replace("HoldEdgeTick: ", "")
+        HoldEdgeChance = SettingsList(100).Replace("HoldEdgeChance: ", "")
+        EdgeHold = SettingsList(101).Replace("EdgeHold: ", "")
+        EdgeNoHold = SettingsList(102).Replace("EdgeNoHold: ", "")
+        EdgeToRuin = SettingsList(103).Replace("EdgeToRuin: ", "")
+        EdgeToRuinSecret = SettingsList(104).Replace("EdgeToRuinSecret: ", "")
+        LongEdge = SettingsList(105).Replace("LongEdge: ", "")
+        AskedToGiveUp = SettingsList(106).Replace("AskedToGiveUp: ", "")
+        AskedToGiveUpSection = SettingsList(107).Replace("AskedToGiveUpSection: ", "")
+        SubGaveUp = SettingsList(108).Replace("SubGaveUp: ", "")
+        AskedToSpeedUp = SettingsList(109).Replace("AskedToSpeedUp: ", "")
+        AskedToSlowDown = SettingsList(110).Replace("AskedToSlowDown: ", "")
+        ThoughtEnd = SettingsList(111).Replace("ThoughtEnd: ", "")
+        VTLength = SettingsList(112).Replace("VTLength: ", "")
+        DommeVideo = SettingsList(113).Replace("DommeVideo: ", "")
+        VideoType = SettingsList(114).Replace("VideoType: ", "")
+        CensorshipGame = SettingsList(115).Replace("CensorshipGame: ", "")
+        CensorshipTick = SettingsList(116).Replace("CensorshipTick: ", "")
+        CensorDuration = SettingsList(117).Replace("CensorDuration: ", "")
+        AvoidTheEdgeGame = SettingsList(118).Replace("AvoidTheEdgeGame: ", "")
+        AvoidTheEdgeTick = SettingsList(119).Replace("AvoidTheEdgeTick: ", "")
+        AvoidTheEdgeTimerTick = SettingsList(120).Replace("AvoidTheEdgeTimerTick: ", "")
+        AvoidTheEdgeDuration = SettingsList(121).Replace("AvoidTheEdgeDuration: ", "")
+        AvoidTheEdgeStroking = SettingsList(122).Replace("AvoidTheEdgeStroking: ", "")
+        AtECountdown = SettingsList(123).Replace("AtECountdown: ", "")
+        VTPath = SettingsList(124).Replace("VTPath: ", "")
+        NoVideo = SettingsList(125).Replace("NoVideo: ", "")
+        NoSpecialVideo = SettingsList(126).Replace("NoSpecialVideo: ", "")
+        VideoCheck = SettingsList(127).Replace("VideoCheck: ", "")
+        VideoTease = SettingsList(128).Replace("VideoTease: ", "")
+        RLGLGame = SettingsList(129).Replace("RLGLGame: ", "")
+        RLGLStroking = SettingsList(130).Replace("RLGLStroking: ", "")
+        RLGLTick = SettingsList(131).Replace("RLGLTick: ", "")
+        RedLight = SettingsList(132).Replace("RedLight: ", "")
+        RLGLTauntTick = SettingsList(133).Replace("RLGLTauntTick: ", "")
+        RandomizerVideo = SettingsList(134).Replace("RandomizerVideo: ", "")
+        RandomizerVideoTease = SettingsList(135).Replace("RandomizerVideoTease: ", "")
+        ScriptVideoTease = SettingsList(136).Replace("ScriptVideoTease: ", "")
+        ScriptVideoTeaseFlag = SettingsList(137).Replace("ScriptVideoTeaseFlag: ", "")
+        VideoTauntTick = SettingsList(138).Replace("VideoTauntTick: ", "")
+        SlideshowLoaded = SettingsList(139).Replace("SlideshowLoaded: ", "")
+        RefreshVideoTotal = SettingsList(140).Replace("RefreshVideoTotal: ", "")
+        GlitterImageAV = SettingsList(141).Replace("GlitterImageAV: ", "")
+        GlitterNCDomme = SettingsList(142).Replace("GlitterNCDomme: ", "")
+        GlitterNC1 = SettingsList(143).Replace("GlitterNC1: ", "")
+        GlitterNC2 = SettingsList(144).Replace("GlitterNC2: ", "")
+        GlitterNC3 = SettingsList(145).Replace("GlitterNC3: ", "")
+        GlitterTempColor = SettingsList(146).Replace("GlitterTempColor: ", "")
+        UpdatesTick = SettingsList(147).Replace("UpdatesTick: ", "")
+        UpdatingPost = SettingsList(148).Replace("UpdatingPost: ", "")
+        UpdateStage = SettingsList(149).Replace("UpdateStage: ", "")
+        UpdateStageTick = SettingsList(150).Replace("UpdateStageTick: ", "")
+        StatusText = SettingsList(151).Replace("StatusText: ", "")
+        ContactNumber = SettingsList(152).Replace("ContactNumber: ", "")
+        ContactTick = SettingsList(153).Replace("ContactTick: ", "")
+        ContactFlag = SettingsList(154).Replace("ContactFlag: ", "")
+        StatusText1 = SettingsList(155).Replace("StatusText1: ", "")
+        StatusText2 = SettingsList(156).Replace("StatusText2: ", "")
+        StatusText3 = SettingsList(157).Replace("StatusText3: ", "")
+        StatusChance1 = SettingsList(158).Replace("StatusChance1: ", "")
+        StatusChance2 = SettingsList(159).Replace("StatusChance2: ", "")
+        StatusChance3 = SettingsList(160).Replace("StatusChance3: ", "")
+        Update1 = SettingsList(161).Replace("Update1: ", "")
+        Update2 = SettingsList(162).Replace("Update2: ", "")
+        Update3 = SettingsList(163).Replace("Update3: ", "")
+        LastSuccessfulImage = SettingsList(164).Replace("LastSuccessfulImage: ", "")
+        GetFolder = SettingsList(165).Replace("GetFolder: ", "")
+        FileCount = SettingsList(166).Replace("FileCount: ", "")
+        FileCountMax = SettingsList(167).Replace("FileCountMax: ", "")
+        _CurrentImage = SettingsList(168).Replace("_CurrentImage: ", "")
+        WithTeaseImgDir = SettingsList(169).Replace("WithTeaseImgDir: ", "")
+        ApproveImage = SettingsList(170).Replace("ApproveImage: ", "")
+        WIExit = SettingsList(171).Replace("WIExit: ", "")
+        MainPictureImage = SettingsList(172).Replace("MainPictureImage: ", "")
+        DomPic = SettingsList(173).Replace("DomPic: ", "")
+        LockImage = SettingsList(174).Replace("LockImage: ", "")
+        Crazy = SettingsList(175).Replace("Crazy: ", "")
+        Vulgar = SettingsList(176).Replace("Vulgar: ", "")
+        Supremacist = SettingsList(177).Replace("Supremacist: ", "")
+        CockSize = SettingsList(178).Replace("CockSize: ", "")
+        TempDick = SettingsList(179).Replace("TempDick: ", "")
+        PetName = SettingsList(180).Replace("PetName: ", "")
+        PetName2 = SettingsList(181).Replace("PetName2: ", "")
+        TauntText = SettingsList(182).Replace("TauntText: ", "")
+        ScriptCount = SettingsList(183).Replace("ScriptCount: ", "")
+        TempScriptCount = SettingsList(184).Replace("TempScriptCount: ", "")
+        TauntTextCount = SettingsList(185).Replace("TauntTextCount: ", "")
+        StartIndex = SettingsList(186).Replace("StartIndex: ", "")
+        EndIndex = SettingsList(187).Replace("EndIndex: ", "")
+        SlideshowTimerTick = SettingsList(188).Replace("SlideshowTimerTick: ", "")
+        ReadBlog = SettingsList(189).Replace("ReadBlog: ", "")
+        ReadBlogRate = SettingsList(190).Replace("ReadBlogRate: ", "")
+        SearchImageBlog = SettingsList(191).Replace("SearchImageBlog: ", "")
+        FoundString = SettingsList(192).Replace("FoundString: ", "")
+        WebImage = SettingsList(193).Replace("WebImage: ", "")
+        WebImageLine = SettingsList(194).Replace("WebImageLine: ", "")
+        WebImageLineTotal = SettingsList(195).Replace("WebImageLineTotal: ", "")
+        WebImagePath = SettingsList(196).Replace("WebImagePath: ", "")
+        ImageUrlFilePath = SettingsList(197).Replace("ImageUrlFilePath: ", "")
+        ImageUrlFileIndex = SettingsList(198).Replace("ImageUrlFileIndex: ", "")
+        ReaderString = SettingsList(199).Replace("ReaderString: ", "")
+        ReaderStringTotal = SettingsList(200).Replace("ReaderStringTotal: ", "")
+        StrokePaceInt = SettingsList(201).Replace("StrokePaceInt: ", "")
+        LastScriptCountdown = SettingsList(202).Replace("LastScriptCountdown: ", "")
+        LastScript = SettingsList(203).Replace("LastScript: ", "")
+        JustShowedBlogImage = SettingsList(204).Replace("JustShowedBlogImage: ", "")
+        SaidHello = SettingsList(205).Replace("SaidHello: ", "")
+        StopMetronome = SettingsList(206).Replace("StopMetronome: ", "")
+        AvgEdgeStroking = SettingsList(207).Replace("AvgEdgeStroking: ", "")
+        AvgEdgeNoTouch = SettingsList(208).Replace("AvgEdgeNoTouch: ", "")
+        EdgeCountTick = SettingsList(209).Replace("EdgeCountTick: ", "")
+        AvgEdgeStrokingFlag = SettingsList(210).Replace("AvgEdgeStrokingFlag: ", "")
+        AvgEdgeCount = SettingsList(211).Replace("AvgEdgeCount: ", "")
+        AvgEdgeCountRest = SettingsList(212).Replace("AvgEdgeCountRest: ", "")
+        EdgeTickCheck = SettingsList(213).Replace("EdgeTickCheck: ", "")
+        EdgeNOT = SettingsList(214).Replace("EdgeNOT: ", "")
+        AlreadyStrokingEdge = SettingsList(215).Replace("AlreadyStrokingEdge: ", "")
+        WritingTaskLinesAmount = SettingsList(216).Replace("WritingTaskLinesAmount: ", "")
+        WritingTaskLinesWritten = SettingsList(217).Replace("WritingTaskLinesWritten: ", "")
+        WritingTaskLinesRemaining = SettingsList(218).Replace("WritingTaskLinesRemaining: ", "")
+        WritingTaskMistakesAllowed = SettingsList(219).Replace("WritingTaskMistakesAllowed: ", "")
+        WritingTaskMistakesMade = SettingsList(220).Replace("WritingTaskMistakesMade: ", "")
+        WritingTaskFlag = SettingsList(221).Replace("WritingTaskFlag: ", "")
+        FirstRound = SettingsList(222).Replace("FirstRound: ", "")
+        StartStrokingCount = SettingsList(223).Replace("StartStrokingCount: ", "")
+        TeaseJOI = SettingsList(224).Replace("TeaseJOI: ", "")
+        TeaseVideo = SettingsList(225).Replace("TeaseVideo: ", "")
+        TnAPath = SettingsList(226).Replace("TnAPath: ", "")
+        AssImage = SettingsList(227).Replace("AssImage: ", "")
+        BoobImage = SettingsList(228).Replace("BoobImage: ", "")
+        FoundTag = SettingsList(229).Replace("FoundTag: ", "")
+        TagGarment = SettingsList(230).Replace("TagGarment: ", "")
+        TagUnderwear = SettingsList(231).Replace("TagUnderwear: ", "")
+        TagTattoo = SettingsList(232).Replace("TagTattoo: ", "")
+        TagSexToy = SettingsList(233).Replace("TagSexToy: ", "")
+        TagFurniture = SettingsList(234).Replace("TagFurniture: ", "")
+        ImportKeyword = SettingsList(235).Replace("ImportKeyword: ", "")
+        BookmarkModule = SettingsList(236).Replace("BookmarkModule: ", "")
+        BookmarkModuleFile = SettingsList(237).Replace("BookmarkModuleFile: ", "")
+        BookmarkModuleLine = SettingsList(238).Replace("BookmarkModuleLine: ", "")
+        BookmarkLink = SettingsList(239).Replace("BookmarkLink: ", "")
+        BookmarkLinkFile = SettingsList(240).Replace("BookmarkLinkFile: ", "")
+        BookmarkLinkLine = SettingsList(241).Replace("BookmarkLinkLine: ", "")
+        WaitTick = SettingsList(242).Replace("WaitTick: ", "")
+        OrgasmDenied = SettingsList(243).Replace("OrgasmDenied: ", "")
+        OrgasmAllowed = SettingsList(244).Replace("OrgasmAllowed: ", "")
+        OrgasmRuined = SettingsList(245).Replace("OrgasmRuined: ", "")
+        StupidTick = SettingsList(246).Replace("StupidTick: ", "")
+        StupidFlag = SettingsList(247).Replace("StupidFlag: ", "")
+        CaloriesConsumed = SettingsList(248).Replace("CaloriesConsumed: ", "")
+        CaloriesGoal = SettingsList(249).Replace("CaloriesGoal: ", "")
+        GoldTokens = SettingsList(250).Replace("GoldTokens: ", "")
+        SilverTokens = SettingsList(251).Replace("SilverTokens: ", "")
+        BronzeTokens = SettingsList(252).Replace("BronzeTokens: ", "")
+        EdgeFound = SettingsList(253).Replace("EdgeFound: ", "")
+        OrgasmYesNo = SettingsList(254).Replace("OrgasmYesNo: ", "")
+        VTFlag = SettingsList(255).Replace("VTFlag: ", "")
+        DomPersonality = SettingsList(256).Replace("DomPersonality: ", "")
+        GlitterDocument = SettingsList(257).Replace("GlitterDocument: ", "")
+        CustomSlideshow = SettingsList(258).Replace("CustomSlideshow: ", "")
+        CustomSlideshowTick = SettingsList(259).Replace("CustomSlideshowTick: ", "")
+        ImageString = SettingsList(260).Replace("ImageString: ", "")
+        RapidFire = SettingsList(261).Replace("RapidFire: ", "")
+        GlitterTease = SettingsList(262).Replace("GlitterTease: ", "")
+        AddContactTick = SettingsList(263).Replace("AddContactTick: ", "")
+        Contact1PicsCount = SettingsList(264).Replace("Contact1PicsCount: ", "")
+        Contact2PicsCount = SettingsList(265).Replace("Contact2PicsCount: ", "")
+        Contact3PicsCount = SettingsList(266).Replace("Contact3PicsCount: ", "")
+        Group = SettingsList(267).Replace("Group: ", "")
+        CustomTask = SettingsList(268).Replace("CustomTask: ", "")
+        CustomTaskFirst = SettingsList(269).Replace("CustomTaskFirst: ", "")
+        CustomTaskText = SettingsList(270).Replace("CustomTaskText: ", "")
+        CustomTaskTextFirst = SettingsList(271).Replace("CustomTaskTextFirst: ", "")
+        CustomTaskActive = SettingsList(272).Replace("CustomTaskActive: ", "")
+        SubtitleCount = SettingsList(273).Replace("SubtitleCount: ", "")
+        VidFile = SettingsList(274).Replace("VidFile: ", "")
+
+
+        Timer1.Enabled = SettingsList(275).Replace("Timer1 Enabled: ", "")
+        SendTimer.Enabled = SettingsList(276).Replace("SendTimerTimer Enabled: ", "")
+        IsTypingTimer.Enabled = SettingsList(277).Replace("IsTypingTimer Enabled: ", "")
+        StrokeTimer.Enabled = SettingsList(278).Replace("StrokeTimer Enabled: ", "")
+        StrokeTauntTimer.Enabled = SettingsList(279).Replace("StrokeTauntTimer Enabled: ", "")
+        DelayTimer.Enabled = SettingsList(280).Replace("DelayTimer Enabled: ", "")
+        CensorshipTimer.Enabled = SettingsList(281).Replace("CensorshipTimer Enabled: ", "")
+        AudibleMetronome.Enabled = SettingsList(282).Replace("AudibleMetronome Enabled: ", "")
+        ContactTimer.Enabled = SettingsList(283).Replace("ContactTimer Enabled: ", "")
+        CustomSlideshowTimer.Enabled = SettingsList(284).Replace("CustomeSlideshowTimer Enabled: ", "")
+        RLGLTimer.Enabled = SettingsList(285).Replace("RLGLTimer Enabled: ", "")
+        StrokeTimeTotalTimer.Enabled = SettingsList(286).Replace("StrokeTimeTotalTimer Enabled: ", "")
+        EdgeCountTimer.Enabled = SettingsList(287).Replace("EdgeCountTimer Enabled: ", "")
+        TnASlides.Enabled = SettingsList(288).Replace("TnASlides Enabled: ", "")
+        SlideshowTimer.Enabled = SettingsList(289).Replace("SlideshowTimer Enabled: ", "")
+        WaitTimer.Enabled = SettingsList(290).Replace("WaitTimer Enabled: ", "")
+        StupidTimer.Enabled = SettingsList(291).Replace("StupidTimer Enabled: ", "")
+        VideoTauntTimer.Enabled = SettingsList(292).Replace("VideoTauntTimer Enabled: ", "")
+        RLGLTauntTimer.Enabled = SettingsList(293).Replace("RLGLTauntTimer Enabled: ", "")
+        AvoidTheEdgeTaunts.Enabled = SettingsList(294).Replace("AvoidTheEdgeTauntsTimer Enabled: ", "")
+        TeaseTimer.Enabled = SettingsList(295).Replace("TeaseTimer Enabled: ", "")
+        UpdatesTimer.Enabled = SettingsList(296).Replace("UpdatesTimer Enabled: ", "")
+        AvoidTheEdge.Enabled = SettingsList(297).Replace("AvoidTheEdgeTimer Enabled: ", "")
+        AvoidTheEdgeResume.Enabled = SettingsList(298).Replace("AvoidTheEdgeResumeTimer Enabled: ", "")
+        StrokePaceTimer.Enabled = SettingsList(299).Replace("StrokePaceTimer Enabled: ", "")
+        EdgeTauntTimer.Enabled = SettingsList(300).Replace("EdgeTauntTimer Enabled: ", "")
+        HoldEdgeTimer.Enabled = SettingsList(301).Replace("HoldEdgeTimer Enabled: ", "")
+        HoldEdgeTauntTimer.Enabled = SettingsList(302).Replace("HoldEdgeTauntTimer Enabled: ", "")
+        Contact1Timer.Enabled = SettingsList(303).Replace("Contact1Timer Enabled: ", "")
+        Contact2Timer.Enabled = SettingsList(304).Replace("Contact2Timer Enabled: ", "")
+        Contact3Timer.Enabled = SettingsList(305).Replace("Contact3Timer Enabled: ", "")
+        UpdateStageTimer.Enabled = SettingsList(306).Replace("UpdateStageTimer Enabled: ", "")
+        WMPTimer.Enabled = SettingsList(307).Replace("WMPTimer Enabled: ", "")
+        Chat = SettingsList(308).Replace("Chat: ", "")
+
+        If SettingsList(309).Replace("MainWindow: ", "") = "Image" Then
+            mainPictureBox.Visible = True
+        Else
+            DomWMP.Visible = True
+            DomWMP.stretchToFit = True
+            mainPictureBox.Visible = False
+            DomWMP.URL = SettingsList(310).Replace("DomWMP URL: ", "")
+            DomWMP.Ctlcontrols.currentPosition = SettingsList(311).Replace("DomWMP Position: ", "")
+            If SettingsList(312).Replace("DomWMP PlayState: ", "") = "1" Then DomWMP.Ctlcontrols.stop()
+            If SettingsList(312).Replace("DomWMP PlayState: ", "") = "2" Then DomWMP.Ctlcontrols.pause()
+            If SettingsList(312).Replace("DomWMP PlayState: ", "") = "3" Then DomWMP.Ctlcontrols.play()
+        End If
+
+        SettingsList.Add("DomWMP PlayState = " & DomWMP.playState)
+
+        ' WMPLib.WMPPlayState.wmppsStopped)
+
+        If File.Exists(SettingsPath & "SusPlayListFile.txt") Then PlaylistFile = Txt2List(SettingsPath & "SusPlayListFile.txt")
+        If File.Exists(SettingsPath & "SusTauntLines.txt") Then TauntLines = Txt2List(SettingsPath & "SusTauntLines.txt")
+        If File.Exists(SettingsPath & "Sus_ImageFileNames.txt") Then _ImageFileNames = Txt2List(SettingsPath & "Sus_ImageFileNames.txt")
+        If File.Exists(SettingsPath & "SusRecentSlideshows.txt") Then RecentSlideshows = Txt2List(SettingsPath & "SusRecentSlideshows.txt")
+        If File.Exists(SettingsPath & "SusLocalTagImageList.txt") Then LocalTagImageList = Txt2List(SettingsPath & "SusLocalTagImageList.txt")
+        If File.Exists(SettingsPath & "SusWebImageLines.txt") Then WebImageLines = Txt2List(SettingsPath & "SusWebImageLines.txt")
+        If File.Exists(SettingsPath & "SusTnAList.txt") Then TnAList = Txt2List(SettingsPath & "SusTnAList.txt")
+        If File.Exists(SettingsPath & "SusBoobList.txt") Then BoobList = Txt2List(SettingsPath & "SusBoobList.txt")
+        If File.Exists(SettingsPath & "SusAssList.txt") Then AssList = Txt2List(SettingsPath & "SusAssList.txt")
+        If File.Exists(SettingsPath & "SusUpdateList.txt") Then UpdateList = Txt2List(SettingsPath & "SusUpdateList.txt")
+        If File.Exists(SettingsPath & "SusCustomSlideshowList.txt") Then CustomSlideshowList = Txt2List(SettingsPath & "SusCustomSlideshowList.txt")
+        If File.Exists(SettingsPath & "SusContact1Pics.txt") Then Contact1Pics = Txt2List(SettingsPath & "SusContact1Pics.txt")
+        If File.Exists(SettingsPath & "SusContact2Pics.txt") Then Contact2Pics = Txt2List(SettingsPath & "SusContact2Pics.txt")
+        If File.Exists(SettingsPath & "SusContact3Pics.txt") Then Contact3Pics = Txt2List(SettingsPath & "Contact3Pics.txt")
+
+        If SlideshowLoaded = True Then
+            If File.Exists(_ImageFileNames(FileCount)) Then mainPictureBox.Load(_ImageFileNames(FileCount))
+        End If
+
+        ChatText.DocumentText = Chat
+        While ChatText.ReadyState <> WebBrowserReadyState.Complete
+            Application.DoEvents()
+        End While
+        ScrollChatDown()
+
+        If My.Settings.UI768 = True Then
+            If PNLMediaBar.Visible = True Then
+                ChatText.Location = New Point(0, 29)
+            Else
+                ChatText.Location = New Point(0, 0)
+            End If
+            ChatText.Width = 683
+        End If
+
+        If My.Settings.LargeUI = True Then
+            If PNLMediaBar.Visible = True Then
+                ChatText.Location = New Point(0, 29)
+            Else
+                ChatText.Location = New Point(0, 0)
+            End If
+            ChatText.Width = 1089
+        End If
+
+        If My.Settings.SmallUI = True Then
+            If PNLMediaBar.Visible = True Then
+                ChatText.Location = New Point(0, 29)
+            Else
+                ChatText.Location = New Point(0, 0)
+            End If
+            ChatText.Width = 839
+        End If
+
+        ScrollChatDown()
+
+    End Sub
+
 
     
 End Class

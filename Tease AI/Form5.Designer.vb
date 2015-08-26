@@ -144,8 +144,9 @@ Partial Class frmApps
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.BTNReset = New System.Windows.Forms.Button()
-        Me.Button31 = New System.Windows.Forms.Button()
-        Me.Button32 = New System.Windows.Forms.Button()
+        Me.BTNSuspend = New System.Windows.Forms.Button()
+        Me.BTNResume = New System.Windows.Forms.Button()
+        Me.Button29 = New System.Windows.Forms.Button()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -174,8 +175,8 @@ Partial Class frmApps
         '
         Me.PNLAppHome.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(170, Byte), Integer))
         Me.PNLAppHome.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLAppHome.Controls.Add(Me.Button32)
-        Me.PNLAppHome.Controls.Add(Me.Button31)
+        Me.PNLAppHome.Controls.Add(Me.BTNResume)
+        Me.PNLAppHome.Controls.Add(Me.BTNSuspend)
         Me.PNLAppHome.Controls.Add(Me.BTNReset)
         Me.PNLAppHome.Controls.Add(Me.Label2)
         Me.PNLAppHome.Controls.Add(Me.Button17)
@@ -206,6 +207,7 @@ Partial Class frmApps
         Me.PNLAppHome.Controls.Add(Me.Button42)
         Me.PNLAppHome.Controls.Add(Me.BTNHomeVitalSub)
         Me.PNLAppHome.Controls.Add(Me.Button23)
+        Me.PNLAppHome.Controls.Add(Me.Button29)
         Me.PNLAppHome.Location = New System.Drawing.Point(0, 47)
         Me.PNLAppHome.Name = "PNLAppHome"
         Me.PNLAppHome.Size = New System.Drawing.Size(250, 485)
@@ -1625,33 +1627,47 @@ Partial Class frmApps
         Me.BTNReset.Text = "Reset"
         Me.BTNReset.UseVisualStyleBackColor = False
         '
-        'Button31
+        'BTNSuspend
         '
-        Me.Button31.BackColor = System.Drawing.Color.SteelBlue
-        Me.Button31.Enabled = False
-        Me.Button31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button31.ForeColor = System.Drawing.Color.White
-        Me.Button31.Location = New System.Drawing.Point(65, 447)
-        Me.Button31.Name = "Button31"
-        Me.Button31.Size = New System.Drawing.Size(57, 24)
-        Me.Button31.TabIndex = 189
-        Me.Button31.TabStop = False
-        Me.Button31.Text = "Suspend"
-        Me.Button31.UseVisualStyleBackColor = False
+        Me.BTNSuspend.BackColor = System.Drawing.Color.SteelBlue
+        Me.BTNSuspend.Enabled = False
+        Me.BTNSuspend.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSuspend.ForeColor = System.Drawing.Color.White
+        Me.BTNSuspend.Location = New System.Drawing.Point(65, 447)
+        Me.BTNSuspend.Name = "BTNSuspend"
+        Me.BTNSuspend.Size = New System.Drawing.Size(57, 24)
+        Me.BTNSuspend.TabIndex = 189
+        Me.BTNSuspend.TabStop = False
+        Me.BTNSuspend.Text = "Suspend"
+        Me.BTNSuspend.UseVisualStyleBackColor = False
         '
-        'Button32
+        'BTNResume
         '
-        Me.Button32.BackColor = System.Drawing.Color.SteelBlue
-        Me.Button32.Enabled = False
-        Me.Button32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button32.ForeColor = System.Drawing.Color.White
-        Me.Button32.Location = New System.Drawing.Point(121, 447)
-        Me.Button32.Name = "Button32"
-        Me.Button32.Size = New System.Drawing.Size(57, 24)
-        Me.Button32.TabIndex = 190
-        Me.Button32.TabStop = False
-        Me.Button32.Text = "Resume"
-        Me.Button32.UseVisualStyleBackColor = False
+        Me.BTNResume.BackColor = System.Drawing.Color.SteelBlue
+        Me.BTNResume.Enabled = False
+        Me.BTNResume.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNResume.ForeColor = System.Drawing.Color.White
+        Me.BTNResume.Location = New System.Drawing.Point(121, 447)
+        Me.BTNResume.Name = "BTNResume"
+        Me.BTNResume.Size = New System.Drawing.Size(57, 24)
+        Me.BTNResume.TabIndex = 190
+        Me.BTNResume.TabStop = False
+        Me.BTNResume.Text = "Resume"
+        Me.BTNResume.UseVisualStyleBackColor = False
+        '
+        'Button29
+        '
+        Me.Button29.BackColor = System.Drawing.Color.SteelBlue
+        Me.Button29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button29.ForeColor = System.Drawing.Color.White
+        Me.Button29.Location = New System.Drawing.Point(6, 399)
+        Me.Button29.Name = "Button29"
+        Me.Button29.Size = New System.Drawing.Size(57, 24)
+        Me.Button29.TabIndex = 191
+        Me.Button29.TabStop = False
+        Me.Button29.Text = "Run"
+        Me.Button29.UseVisualStyleBackColor = False
+        Me.Button29.Visible = False
         '
         'frmApps
         '
@@ -1823,6 +1839,7 @@ Partial Class frmApps
     Friend WithEvents Button30 As System.Windows.Forms.Button
     Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents BTNReset As System.Windows.Forms.Button
-    Friend WithEvents Button32 As System.Windows.Forms.Button
-    Friend WithEvents Button31 As System.Windows.Forms.Button
+    Friend WithEvents BTNResume As System.Windows.Forms.Button
+    Friend WithEvents BTNSuspend As System.Windows.Forms.Button
+    Friend WithEvents Button29 As System.Windows.Forms.Button
 End Class

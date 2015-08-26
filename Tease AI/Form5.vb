@@ -884,6 +884,9 @@ Public Class frmApps
         Button4.Enabled = True
         Button42.Enabled = True
         BTNRun.Enabled = True
+        BTNSuspend.Enabled = True
+        BTNResume.Enabled = True
+        BTNReset.Enabled = True
         Button19.Enabled = True
         Button28.Enabled = True
         Button17.Enabled = True
@@ -1081,6 +1084,11 @@ Public Class frmApps
 
     Private Sub Button29_Click(sender As System.Object, e As System.EventArgs) Handles BTNReset.Click
 
+        If Form1.SaidHello = False Then
+            MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            Return
+        End If
+
         Form1.StopEverything()
         Form1.ResetButton()
 
@@ -1089,8 +1097,86 @@ Public Class frmApps
             Form1.TypingDelayGeneric()
         End If
 
-        BTNReset.Enabled = False
-        BTNRun.Enabled = True
+
+
+
+    End Sub
+
+    Private Sub Button29_Click_1(sender As System.Object, e As System.EventArgs) Handles Button29.Click
+
+        Dim ParseList As New List(Of String)
+        Dim NewLine As String
+        Dim NewLine2 As String
+        Dim SettingsString As String = ""
+        ParseList = Form1.Txt2List("G:\Temp\vars.txt")
+
+        For i As Integer = 0 To ParseList.Count - 1
+            Dim ParseSplit As String() = ParseList(i).Split(":")
+            'For j As Integer = 0 To ParseSplit.Count - 1
+            'Debug.Print(j & " " & ParseSplit(j))
+            'Next
+            Dim dafuq As String = ParseSplit(1)
+            Dim ParseSplit2 As String() = ParseSplit(1).Split
+            For j As Integer = 0 To ParseSplit2.Count - 1
+                Debug.Print(j & " " & ParseSplit2(j))
+            Next
+            'FrmSettings.dompersonalityComboBox.Text = SettingsList(0).Replace("Personality: ", "")
+            Dim CurVar As String = ParseSplit2(1).Replace(" ", "")
+            'Dim NewLine As String = "SettingsList.Add(""" & CurVar & ": "" & " & CurVar & ")"
+            NewLine = CurVar & " = SettingsList("
+            NewLine2 = ").Replace(""" & CurVar & ": "", """")"
+            ParseList(i) = NewLine
+            'Next
+
+            'For i As Integer = 0 To ParseList.Count - 1
+            SettingsString = SettingsString & NewLine & i & NewLine2
+            If i <> ParseList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+        Next
+        My.Computer.FileSystem.WriteAllText("G:\Temp\NewVars.txt", SettingsString, False)
+
+    End Sub
+
+    Private Sub Button31_Click(sender As System.Object, e As System.EventArgs) Handles BTNSuspend.Click
+
+        If Form1.SaidHello = False Then
+            MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            Return
+        End If
+
+
+        If File.Exists(Application.StartupPath & "\System\SavedState.txt") Then
+            Dim Result As Integer = MessageBox.Show(Me, "A previous saved state already exists!" & Environment.NewLine & Environment.NewLine & _
+                                                   "Do you wish to overwrite it?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+            If Result = DialogResult.No Then
+                Return
+            End If
+        End If
+
+        Try
+            Form1.SuspendSession()
+        Catch
+        End Try
+
+        MessageBox.Show(Me, "Session state has been saved successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+    End Sub
+
+    Private Sub Button32_Click(sender As System.Object, e As System.EventArgs) Handles BTNResume.Click
+
+        If Not File.Exists(Application.StartupPath & "\System\" & "SavedState.txt") Then
+            MessageBox.Show(Me, "SavedState.txt could not be found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            Return
+        End If
+
+        If Form1.SaidHello = True Then
+            Dim Result As Integer = MessageBox.Show(Me, "Resuming a previous state will cause you to lose your progress in this session!" & Environment.NewLine & Environment.NewLine & _
+                                                   "Do you wish to proceed?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+            If Result = DialogResult.No Then
+                Return
+            End If
+        End If
+
+        Form1.ResumeSession()
 
     End Sub
 End Class
