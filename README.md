@@ -3,7 +3,9 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 44
 
-08/25 10:40 am - Added Reset button to Appa window. The Reset button is enabled once a tease session starts. When the user clicks "Reset", the program will stop and revert to its initial state before greeting the domme. 
+08/25 7:41 pm - Added Commands @ApathyLevelUp and @ApathyLevelDown. These commands alter the domme's Apathy level for the duration of the session.
+
+08/25 10:40 am - Added Reset button to Apps window. The Reset button is enabled once a tease session starts. When the user clicks "Reset", the program will stop and revert to its initial state before greeting the domme. 
 
 Minor tweaks to presentation and functionality of options at the bottom of the Apps window, as well as preparation for Suspend and Resume features. 
 

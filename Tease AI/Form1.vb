@@ -9703,11 +9703,25 @@ OrgasmDecided:
             StringClean = StringClean.Replace("@DommeLevelDown", "")
         End If
 
+        If StringClean.Contains("@ApathyLevelDown") Then
+            If FrmSettings.NBEmpathy.Value > 1 Then
+                FrmSettings.NBEmpathy.Value -= 1
+            End If
+            StringClean = StringClean.Replace("@ApathyLevelDown", "")
+        End If
+
         If StringClean.Contains("@DommeLevelUp") Then
             If FrmSettings.domlevelNumBox.Value < 5 Then
                 FrmSettings.domlevelNumBox.Value += 1
             End If
             StringClean = StringClean.Replace("@DommeLevelUp", "")
+        End If
+
+        If StringClean.Contains("@ApathyLevelUp") Then
+            If FrmSettings.NBEmpathy.Value < 5 Then
+                FrmSettings.NBEmpathy.Value += 1
+            End If
+            StringClean = StringClean.Replace("@ApathyLevelUp", "")
         End If
 
         If StringClean.Contains("@ShowHardcoreImage") Then
