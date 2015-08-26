@@ -5,6 +5,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 08/25 10:40 pm - Added ability for domme to read from a script in time with videos. When a user plays any video (it doesn't matter where the video is located or how it was called), the program checks to see if a script with the same name as the video is located in [Personality]\Video\Scripts. For example, if a use opens a video file named Shower-Lesbians.mp4, Tease AI will look for Shower-Lesbians.txt. If no script is found, the video will simply play as usual. Scripts should look something like this:
 
+(BITBUCKET NOTE - The timestamps below should be on separate lines, I don't know why they were formatted as a single line here)
+
 [00:00:10] I'm looking forward to this
 [00:00:18] You're probably not though lol
 [00:00:42] It's gonna be so fucking hot when they get in the shower
