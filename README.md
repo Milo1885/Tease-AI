@@ -1,7 +1,7 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
-# Bitbucket note - I haven't pushed a new build in a while because I was waiting to finish Risky Pick. All the work I've done in the meantime has grown so massive that I'm scared of losing it, so I'm going to go ahead and push this build through. Ricky Pick is functional, but does not include the script necessary to make it run will still needs some work, so if you do compile this, don't press "play" in there for now  
+# Bitbucket note - I haven't pushed a new build in a while because I was waiting to finish Risky Pick. All the work I've done in the meantime has grown so massive that I'm scared of losing it, so I'm going to go ahead and push this build through. Risky Pick is functional, but does not include the script necessary to make it run will still needs some work, so if you do compile this, don't press "play" in there for now  
 
 # Changelog - Patch 45
 
