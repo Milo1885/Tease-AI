@@ -24,6 +24,9 @@ Partial Class frmApps
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmApps))
         Me.PNLAppHome = New System.Windows.Forms.Panel()
+        Me.BTNResume = New System.Windows.Forms.Button()
+        Me.BTNSuspend = New System.Windows.Forms.Button()
+        Me.BTNReset = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -53,6 +56,7 @@ Partial Class frmApps
         Me.Button42 = New System.Windows.Forms.Button()
         Me.BTNHomeVitalSub = New System.Windows.Forms.Button()
         Me.Button23 = New System.Windows.Forms.Button()
+        Me.Button29 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.AppPanelGlitter = New System.Windows.Forms.Panel()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
@@ -143,10 +147,6 @@ Partial Class frmApps
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
-        Me.BTNReset = New System.Windows.Forms.Button()
-        Me.BTNSuspend = New System.Windows.Forms.Button()
-        Me.BTNResume = New System.Windows.Forms.Button()
-        Me.Button29 = New System.Windows.Forms.Button()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -212,6 +212,48 @@ Partial Class frmApps
         Me.PNLAppHome.Name = "PNLAppHome"
         Me.PNLAppHome.Size = New System.Drawing.Size(250, 485)
         Me.PNLAppHome.TabIndex = 160
+        '
+        'BTNResume
+        '
+        Me.BTNResume.BackColor = System.Drawing.Color.SteelBlue
+        Me.BTNResume.Enabled = False
+        Me.BTNResume.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNResume.ForeColor = System.Drawing.Color.White
+        Me.BTNResume.Location = New System.Drawing.Point(121, 447)
+        Me.BTNResume.Name = "BTNResume"
+        Me.BTNResume.Size = New System.Drawing.Size(57, 24)
+        Me.BTNResume.TabIndex = 190
+        Me.BTNResume.TabStop = False
+        Me.BTNResume.Text = "Resume"
+        Me.BTNResume.UseVisualStyleBackColor = False
+        '
+        'BTNSuspend
+        '
+        Me.BTNSuspend.BackColor = System.Drawing.Color.SteelBlue
+        Me.BTNSuspend.Enabled = False
+        Me.BTNSuspend.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSuspend.ForeColor = System.Drawing.Color.White
+        Me.BTNSuspend.Location = New System.Drawing.Point(65, 447)
+        Me.BTNSuspend.Name = "BTNSuspend"
+        Me.BTNSuspend.Size = New System.Drawing.Size(57, 24)
+        Me.BTNSuspend.TabIndex = 189
+        Me.BTNSuspend.TabStop = False
+        Me.BTNSuspend.Text = "Suspend"
+        Me.BTNSuspend.UseVisualStyleBackColor = False
+        '
+        'BTNReset
+        '
+        Me.BTNReset.BackColor = System.Drawing.Color.SteelBlue
+        Me.BTNReset.Enabled = False
+        Me.BTNReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNReset.ForeColor = System.Drawing.Color.White
+        Me.BTNReset.Location = New System.Drawing.Point(177, 447)
+        Me.BTNReset.Name = "BTNReset"
+        Me.BTNReset.Size = New System.Drawing.Size(57, 24)
+        Me.BTNReset.TabIndex = 188
+        Me.BTNReset.TabStop = False
+        Me.BTNReset.Text = "Reset"
+        Me.BTNReset.UseVisualStyleBackColor = False
         '
         'Label2
         '
@@ -576,6 +618,19 @@ Partial Class frmApps
         Me.Button23.Size = New System.Drawing.Size(48, 48)
         Me.Button23.TabIndex = 0
         Me.Button23.UseVisualStyleBackColor = False
+        '
+        'Button29
+        '
+        Me.Button29.BackColor = System.Drawing.Color.SteelBlue
+        Me.Button29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button29.ForeColor = System.Drawing.Color.White
+        Me.Button29.Location = New System.Drawing.Point(9, 420)
+        Me.Button29.Name = "Button29"
+        Me.Button29.Size = New System.Drawing.Size(57, 24)
+        Me.Button29.TabIndex = 191
+        Me.Button29.TabStop = False
+        Me.Button29.Text = "Run"
+        Me.Button29.UseVisualStyleBackColor = False
         '
         'Button5
         '
@@ -1613,62 +1668,6 @@ Partial Class frmApps
         Me.Label25.Text = "Playlists"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'BTNReset
-        '
-        Me.BTNReset.BackColor = System.Drawing.Color.SteelBlue
-        Me.BTNReset.Enabled = False
-        Me.BTNReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNReset.ForeColor = System.Drawing.Color.White
-        Me.BTNReset.Location = New System.Drawing.Point(177, 447)
-        Me.BTNReset.Name = "BTNReset"
-        Me.BTNReset.Size = New System.Drawing.Size(57, 24)
-        Me.BTNReset.TabIndex = 188
-        Me.BTNReset.TabStop = False
-        Me.BTNReset.Text = "Reset"
-        Me.BTNReset.UseVisualStyleBackColor = False
-        '
-        'BTNSuspend
-        '
-        Me.BTNSuspend.BackColor = System.Drawing.Color.SteelBlue
-        Me.BTNSuspend.Enabled = False
-        Me.BTNSuspend.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNSuspend.ForeColor = System.Drawing.Color.White
-        Me.BTNSuspend.Location = New System.Drawing.Point(65, 447)
-        Me.BTNSuspend.Name = "BTNSuspend"
-        Me.BTNSuspend.Size = New System.Drawing.Size(57, 24)
-        Me.BTNSuspend.TabIndex = 189
-        Me.BTNSuspend.TabStop = False
-        Me.BTNSuspend.Text = "Suspend"
-        Me.BTNSuspend.UseVisualStyleBackColor = False
-        '
-        'BTNResume
-        '
-        Me.BTNResume.BackColor = System.Drawing.Color.SteelBlue
-        Me.BTNResume.Enabled = False
-        Me.BTNResume.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNResume.ForeColor = System.Drawing.Color.White
-        Me.BTNResume.Location = New System.Drawing.Point(121, 447)
-        Me.BTNResume.Name = "BTNResume"
-        Me.BTNResume.Size = New System.Drawing.Size(57, 24)
-        Me.BTNResume.TabIndex = 190
-        Me.BTNResume.TabStop = False
-        Me.BTNResume.Text = "Resume"
-        Me.BTNResume.UseVisualStyleBackColor = False
-        '
-        'Button29
-        '
-        Me.Button29.BackColor = System.Drawing.Color.SteelBlue
-        Me.Button29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button29.ForeColor = System.Drawing.Color.White
-        Me.Button29.Location = New System.Drawing.Point(6, 399)
-        Me.Button29.Name = "Button29"
-        Me.Button29.Size = New System.Drawing.Size(57, 24)
-        Me.Button29.TabIndex = 191
-        Me.Button29.TabStop = False
-        Me.Button29.Text = "Run"
-        Me.Button29.UseVisualStyleBackColor = False
-        Me.Button29.Visible = False
-        '
         'frmApps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1676,14 +1675,14 @@ Partial Class frmApps
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(246, 530)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.PNLAppHome)
-        Me.Controls.Add(Me.PNLLazySub)
-        Me.Controls.Add(Me.PNLWishList)
-        Me.Controls.Add(Me.PNLPlaylist)
         Me.Controls.Add(Me.PNLAppRandomizer)
         Me.Controls.Add(Me.PNLHypnoGen)
         Me.Controls.Add(Me.AppPanelVitalSub)
         Me.Controls.Add(Me.AppPanelGlitter)
+        Me.Controls.Add(Me.PNLAppHome)
+        Me.Controls.Add(Me.PNLLazySub)
+        Me.Controls.Add(Me.PNLWishList)
+        Me.Controls.Add(Me.PNLPlaylist)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False

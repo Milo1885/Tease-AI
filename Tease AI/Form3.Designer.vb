@@ -230,6 +230,125 @@ Partial Class FrmCardList
         Me.BronzeN1 = New System.Windows.Forms.Label()
         Me.BronzeQ1 = New System.Windows.Forms.Label()
         Me.BronzeP1 = New System.Windows.Forms.PictureBox()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.WBRiskyChat = New System.Windows.Forms.WebBrowser()
+        Me.Panel47 = New System.Windows.Forms.Panel()
+        Me.LBLRisk7 = New System.Windows.Forms.Label()
+        Me.LBLRisk55 = New System.Windows.Forms.Label()
+        Me.LBLRisk50 = New System.Windows.Forms.Label()
+        Me.LBLRisk1 = New System.Windows.Forms.Label()
+        Me.LBLRisk60 = New System.Windows.Forms.Label()
+        Me.LBLRisk25 = New System.Windows.Forms.Label()
+        Me.LBLRisk75 = New System.Windows.Forms.Label()
+        Me.LBLRisk2 = New System.Windows.Forms.Label()
+        Me.LBLRisk3 = New System.Windows.Forms.Label()
+        Me.LBLRisk30 = New System.Windows.Forms.Label()
+        Me.LBLRisk80 = New System.Windows.Forms.Label()
+        Me.LBLRisk4 = New System.Windows.Forms.Label()
+        Me.LBLRisk5 = New System.Windows.Forms.Label()
+        Me.LBLRisk40 = New System.Windows.Forms.Label()
+        Me.LBLRisk85 = New System.Windows.Forms.Label()
+        Me.LBLRisk65 = New System.Windows.Forms.Label()
+        Me.LBLRisk10 = New System.Windows.Forms.Label()
+        Me.LBLRisk90 = New System.Windows.Forms.Label()
+        Me.LBLRisk15 = New System.Windows.Forms.Label()
+        Me.LBLRisk95 = New System.Windows.Forms.Label()
+        Me.LBLRisk12 = New System.Windows.Forms.Label()
+        Me.LBLRisk20 = New System.Windows.Forms.Label()
+        Me.LBLRisk70 = New System.Windows.Forms.Label()
+        Me.LBLRisk100 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel40 = New System.Windows.Forms.Panel()
+        Me.BTNRisk24 = New System.Windows.Forms.Button()
+        Me.Risk24 = New System.Windows.Forms.Label()
+        Me.Panel41 = New System.Windows.Forms.Panel()
+        Me.BTNRisk23 = New System.Windows.Forms.Button()
+        Me.Risk23 = New System.Windows.Forms.Label()
+        Me.Panel42 = New System.Windows.Forms.Panel()
+        Me.BTNRisk22 = New System.Windows.Forms.Button()
+        Me.Risk22 = New System.Windows.Forms.Label()
+        Me.Panel43 = New System.Windows.Forms.Panel()
+        Me.BTNRisk21 = New System.Windows.Forms.Button()
+        Me.Risk21 = New System.Windows.Forms.Label()
+        Me.Panel45 = New System.Windows.Forms.Panel()
+        Me.BTNRisk20 = New System.Windows.Forms.Button()
+        Me.Risk20 = New System.Windows.Forms.Label()
+        Me.Panel46 = New System.Windows.Forms.Panel()
+        Me.BTNRisk19 = New System.Windows.Forms.Button()
+        Me.Risk19 = New System.Windows.Forms.Label()
+        Me.Panel30 = New System.Windows.Forms.Panel()
+        Me.BTNRisk18 = New System.Windows.Forms.Button()
+        Me.Risk18 = New System.Windows.Forms.Label()
+        Me.Panel31 = New System.Windows.Forms.Panel()
+        Me.BTNRisk17 = New System.Windows.Forms.Button()
+        Me.Risk17 = New System.Windows.Forms.Label()
+        Me.Panel36 = New System.Windows.Forms.Panel()
+        Me.BTNRisk16 = New System.Windows.Forms.Button()
+        Me.Risk16 = New System.Windows.Forms.Label()
+        Me.Panel37 = New System.Windows.Forms.Panel()
+        Me.BTNRisk15 = New System.Windows.Forms.Button()
+        Me.Risk15 = New System.Windows.Forms.Label()
+        Me.Panel38 = New System.Windows.Forms.Panel()
+        Me.BTNRisk14 = New System.Windows.Forms.Button()
+        Me.Risk14 = New System.Windows.Forms.Label()
+        Me.Panel39 = New System.Windows.Forms.Panel()
+        Me.BTNRisk13 = New System.Windows.Forms.Button()
+        Me.Risk13 = New System.Windows.Forms.Label()
+        Me.Panel20 = New System.Windows.Forms.Panel()
+        Me.BTNRisk12 = New System.Windows.Forms.Button()
+        Me.Risk12 = New System.Windows.Forms.Label()
+        Me.Panel25 = New System.Windows.Forms.Panel()
+        Me.BTNRisk11 = New System.Windows.Forms.Button()
+        Me.Risk11 = New System.Windows.Forms.Label()
+        Me.Panel26 = New System.Windows.Forms.Panel()
+        Me.BTNRisk10 = New System.Windows.Forms.Button()
+        Me.Risk10 = New System.Windows.Forms.Label()
+        Me.Panel27 = New System.Windows.Forms.Panel()
+        Me.BTNRisk9 = New System.Windows.Forms.Button()
+        Me.Risk9 = New System.Windows.Forms.Label()
+        Me.Panel28 = New System.Windows.Forms.Panel()
+        Me.BTNRisk8 = New System.Windows.Forms.Button()
+        Me.Risk8 = New System.Windows.Forms.Label()
+        Me.Panel29 = New System.Windows.Forms.Panel()
+        Me.BTNRisk7 = New System.Windows.Forms.Button()
+        Me.Risk7 = New System.Windows.Forms.Label()
+        Me.Panel18 = New System.Windows.Forms.Panel()
+        Me.BTNRisk6 = New System.Windows.Forms.Button()
+        Me.Risk6 = New System.Windows.Forms.Label()
+        Me.Panel19 = New System.Windows.Forms.Panel()
+        Me.BTNRisk5 = New System.Windows.Forms.Button()
+        Me.Risk5 = New System.Windows.Forms.Label()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.BTNRisk4 = New System.Windows.Forms.Button()
+        Me.Risk4 = New System.Windows.Forms.Label()
+        Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.BTNRisk3 = New System.Windows.Forms.Button()
+        Me.Risk3 = New System.Windows.Forms.Label()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.BTNRisk2 = New System.Windows.Forms.Button()
+        Me.Risk2 = New System.Windows.Forms.Label()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.BTNRisk1 = New System.Windows.Forms.Button()
+        Me.Risk1 = New System.Windows.Forms.Label()
+        Me.Panel48 = New System.Windows.Forms.Panel()
+        Me.LblRiskMinPot = New System.Windows.Forms.Label()
+        Me.LBLRiskMaxPot = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.LBLRiskTokens = New System.Windows.Forms.Label()
+        Me.LBLPick6 = New System.Windows.Forms.Label()
+        Me.LBLPick5 = New System.Windows.Forms.Label()
+        Me.LBLPick4 = New System.Windows.Forms.Label()
+        Me.LBLPick3 = New System.Windows.Forms.Label()
+        Me.LBLPick2 = New System.Windows.Forms.Label()
+        Me.LBLPick1 = New System.Windows.Forms.Label()
+        Me.BTNPickIt = New System.Windows.Forms.Button()
+        Me.BTNRiskIt = New System.Windows.Forms.Button()
+        Me.PBRiskyPic = New System.Windows.Forms.PictureBox()
+        Me.BTNRiskyPlay = New System.Windows.Forms.Button()
+        Me.Panel49 = New System.Windows.Forms.Panel()
+        Me.LblRiskType = New System.Windows.Forms.Label()
         Me.CardTimer = New System.Windows.Forms.Timer(Me.components)
         Me.SlotTimer1 = New System.Windows.Forms.Timer(Me.components)
         Me.SlotTImer2 = New System.Windows.Forms.Timer(Me.components)
@@ -237,6 +356,7 @@ Partial Class FrmCardList
         Me.ShuffleTimer = New System.Windows.Forms.Timer(Me.components)
         Me.BoosterTimer = New System.Windows.Forms.Timer(Me.components)
         Me.CardRevealTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.TimerRiskyFlash = New System.Windows.Forms.Timer(Me.components)
         Me.TCGames.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         CType(Me.GameWMP, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -342,12 +462,44 @@ Partial Class FrmCardList
         CType(Me.BronzeP3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BronzeP2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BronzeP1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage5.SuspendLayout()
+        Me.Panel47.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel40.SuspendLayout()
+        Me.Panel41.SuspendLayout()
+        Me.Panel42.SuspendLayout()
+        Me.Panel43.SuspendLayout()
+        Me.Panel45.SuspendLayout()
+        Me.Panel46.SuspendLayout()
+        Me.Panel30.SuspendLayout()
+        Me.Panel31.SuspendLayout()
+        Me.Panel36.SuspendLayout()
+        Me.Panel37.SuspendLayout()
+        Me.Panel38.SuspendLayout()
+        Me.Panel39.SuspendLayout()
+        Me.Panel20.SuspendLayout()
+        Me.Panel25.SuspendLayout()
+        Me.Panel26.SuspendLayout()
+        Me.Panel27.SuspendLayout()
+        Me.Panel28.SuspendLayout()
+        Me.Panel29.SuspendLayout()
+        Me.Panel18.SuspendLayout()
+        Me.Panel19.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        Me.Panel12.SuspendLayout()
+        Me.Panel8.SuspendLayout()
+        Me.Panel7.SuspendLayout()
+        Me.Panel48.SuspendLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PBRiskyPic, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel49.SuspendLayout()
         Me.SuspendLayout()
         '
         'TCGames
         '
         Me.TCGames.Controls.Add(Me.TabPage3)
         Me.TCGames.Controls.Add(Me.TabPage2)
+        Me.TCGames.Controls.Add(Me.TabPage5)
         Me.TCGames.Controls.Add(Me.TabPage4)
         Me.TCGames.Controls.Add(Me.TabPage1)
         Me.TCGames.Location = New System.Drawing.Point(-1, 0)
@@ -2701,6 +2853,1472 @@ Partial Class FrmCardList
         Me.BronzeP1.TabIndex = 0
         Me.BronzeP1.TabStop = False
         '
+        'TabPage5
+        '
+        Me.TabPage5.BackColor = System.Drawing.Color.DimGray
+        Me.TabPage5.Controls.Add(Me.WBRiskyChat)
+        Me.TabPage5.Controls.Add(Me.Panel47)
+        Me.TabPage5.Controls.Add(Me.Panel2)
+        Me.TabPage5.Controls.Add(Me.Panel48)
+        Me.TabPage5.Controls.Add(Me.Panel49)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(1075, 698)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Risky Pick"
+        '
+        'WBRiskyChat
+        '
+        Me.WBRiskyChat.Location = New System.Drawing.Point(16, 578)
+        Me.WBRiskyChat.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.WBRiskyChat.Name = "WBRiskyChat"
+        Me.WBRiskyChat.Size = New System.Drawing.Size(879, 99)
+        Me.WBRiskyChat.TabIndex = 12
+        '
+        'Panel47
+        '
+        Me.Panel47.BackColor = System.Drawing.Color.Khaki
+        Me.Panel47.Controls.Add(Me.LBLRisk7)
+        Me.Panel47.Controls.Add(Me.LBLRisk55)
+        Me.Panel47.Controls.Add(Me.LBLRisk50)
+        Me.Panel47.Controls.Add(Me.LBLRisk1)
+        Me.Panel47.Controls.Add(Me.LBLRisk60)
+        Me.Panel47.Controls.Add(Me.LBLRisk25)
+        Me.Panel47.Controls.Add(Me.LBLRisk75)
+        Me.Panel47.Controls.Add(Me.LBLRisk2)
+        Me.Panel47.Controls.Add(Me.LBLRisk3)
+        Me.Panel47.Controls.Add(Me.LBLRisk30)
+        Me.Panel47.Controls.Add(Me.LBLRisk80)
+        Me.Panel47.Controls.Add(Me.LBLRisk4)
+        Me.Panel47.Controls.Add(Me.LBLRisk5)
+        Me.Panel47.Controls.Add(Me.LBLRisk40)
+        Me.Panel47.Controls.Add(Me.LBLRisk85)
+        Me.Panel47.Controls.Add(Me.LBLRisk65)
+        Me.Panel47.Controls.Add(Me.LBLRisk10)
+        Me.Panel47.Controls.Add(Me.LBLRisk90)
+        Me.Panel47.Controls.Add(Me.LBLRisk15)
+        Me.Panel47.Controls.Add(Me.LBLRisk95)
+        Me.Panel47.Controls.Add(Me.LBLRisk12)
+        Me.Panel47.Controls.Add(Me.LBLRisk20)
+        Me.Panel47.Controls.Add(Me.LBLRisk70)
+        Me.Panel47.Controls.Add(Me.LBLRisk100)
+        Me.Panel47.Location = New System.Drawing.Point(9, 420)
+        Me.Panel47.Name = "Panel47"
+        Me.Panel47.Size = New System.Drawing.Size(893, 135)
+        Me.Panel47.TabIndex = 9
+        '
+        'LBLRisk7
+        '
+        Me.LBLRisk7.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk7.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk7.Location = New System.Drawing.Point(7, 106)
+        Me.LBLRisk7.Name = "LBLRisk7"
+        Me.LBLRisk7.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk7.TabIndex = 30
+        Me.LBLRisk7.Text = "7 Edges"
+        Me.LBLRisk7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk55
+        '
+        Me.LBLRisk55.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk55.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk55.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk55.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk55.Location = New System.Drawing.Point(451, 40)
+        Me.LBLRisk55.Name = "LBLRisk55"
+        Me.LBLRisk55.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk55.TabIndex = 14
+        Me.LBLRisk55.Text = "55 Edges"
+        Me.LBLRisk55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk50
+        '
+        Me.LBLRisk50.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk50.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk50.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk50.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk50.Location = New System.Drawing.Point(599, 40)
+        Me.LBLRisk50.Name = "LBLRisk50"
+        Me.LBLRisk50.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk50.TabIndex = 16
+        Me.LBLRisk50.Text = "50 Edges"
+        Me.LBLRisk50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk1
+        '
+        Me.LBLRisk1.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk1.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk1.Location = New System.Drawing.Point(748, 106)
+        Me.LBLRisk1.Name = "LBLRisk1"
+        Me.LBLRisk1.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk1.TabIndex = 29
+        Me.LBLRisk1.Text = "1 Edge"
+        Me.LBLRisk1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk60
+        '
+        Me.LBLRisk60.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk60.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk60.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk60.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk60.Location = New System.Drawing.Point(303, 40)
+        Me.LBLRisk60.Name = "LBLRisk60"
+        Me.LBLRisk60.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk60.TabIndex = 12
+        Me.LBLRisk60.Text = "60 Edges"
+        Me.LBLRisk60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk25
+        '
+        Me.LBLRisk25.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk25.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk25.Location = New System.Drawing.Point(155, 73)
+        Me.LBLRisk25.Name = "LBLRisk25"
+        Me.LBLRisk25.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk25.TabIndex = 28
+        Me.LBLRisk25.Text = "25 Edges"
+        Me.LBLRisk25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk75
+        '
+        Me.LBLRisk75.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk75.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk75.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk75.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk75.Location = New System.Drawing.Point(747, 7)
+        Me.LBLRisk75.Name = "LBLRisk75"
+        Me.LBLRisk75.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk75.TabIndex = 27
+        Me.LBLRisk75.Text = "75 Edges"
+        Me.LBLRisk75.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk2
+        '
+        Me.LBLRisk2.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk2.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk2.Location = New System.Drawing.Point(599, 106)
+        Me.LBLRisk2.Name = "LBLRisk2"
+        Me.LBLRisk2.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk2.TabIndex = 26
+        Me.LBLRisk2.Text = "2 Edges"
+        Me.LBLRisk2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk3
+        '
+        Me.LBLRisk3.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk3.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk3.Location = New System.Drawing.Point(451, 106)
+        Me.LBLRisk3.Name = "LBLRisk3"
+        Me.LBLRisk3.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk3.TabIndex = 25
+        Me.LBLRisk3.Text = "3 Edges"
+        Me.LBLRisk3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk30
+        '
+        Me.LBLRisk30.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk30.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk30.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk30.Location = New System.Drawing.Point(7, 73)
+        Me.LBLRisk30.Name = "LBLRisk30"
+        Me.LBLRisk30.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk30.TabIndex = 24
+        Me.LBLRisk30.Text = "30 Edges"
+        Me.LBLRisk30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk80
+        '
+        Me.LBLRisk80.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk80.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk80.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk80.Location = New System.Drawing.Point(599, 7)
+        Me.LBLRisk80.Name = "LBLRisk80"
+        Me.LBLRisk80.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk80.TabIndex = 23
+        Me.LBLRisk80.Text = "80 Edges"
+        Me.LBLRisk80.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk4
+        '
+        Me.LBLRisk4.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk4.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk4.Location = New System.Drawing.Point(303, 106)
+        Me.LBLRisk4.Name = "LBLRisk4"
+        Me.LBLRisk4.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk4.TabIndex = 22
+        Me.LBLRisk4.Text = "4 Edges"
+        Me.LBLRisk4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk5
+        '
+        Me.LBLRisk5.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk5.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk5.Location = New System.Drawing.Point(155, 106)
+        Me.LBLRisk5.Name = "LBLRisk5"
+        Me.LBLRisk5.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk5.TabIndex = 21
+        Me.LBLRisk5.Text = "5 Edges"
+        Me.LBLRisk5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk40
+        '
+        Me.LBLRisk40.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk40.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk40.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk40.Location = New System.Drawing.Point(747, 40)
+        Me.LBLRisk40.Name = "LBLRisk40"
+        Me.LBLRisk40.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk40.TabIndex = 20
+        Me.LBLRisk40.Text = "40 Edges"
+        Me.LBLRisk40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk85
+        '
+        Me.LBLRisk85.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk85.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk85.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk85.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk85.Location = New System.Drawing.Point(451, 7)
+        Me.LBLRisk85.Name = "LBLRisk85"
+        Me.LBLRisk85.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk85.TabIndex = 19
+        Me.LBLRisk85.Text = "85 Edges"
+        Me.LBLRisk85.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk65
+        '
+        Me.LBLRisk65.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk65.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk65.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk65.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk65.Location = New System.Drawing.Point(155, 40)
+        Me.LBLRisk65.Name = "LBLRisk65"
+        Me.LBLRisk65.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk65.TabIndex = 18
+        Me.LBLRisk65.Text = "65 Edges"
+        Me.LBLRisk65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk10
+        '
+        Me.LBLRisk10.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk10.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk10.Location = New System.Drawing.Point(747, 73)
+        Me.LBLRisk10.Name = "LBLRisk10"
+        Me.LBLRisk10.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk10.TabIndex = 17
+        Me.LBLRisk10.Text = "10 Edges"
+        Me.LBLRisk10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk90
+        '
+        Me.LBLRisk90.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk90.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk90.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk90.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk90.Location = New System.Drawing.Point(303, 7)
+        Me.LBLRisk90.Name = "LBLRisk90"
+        Me.LBLRisk90.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk90.TabIndex = 15
+        Me.LBLRisk90.Text = "90 Edges"
+        Me.LBLRisk90.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk15
+        '
+        Me.LBLRisk15.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk15.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk15.Location = New System.Drawing.Point(452, 73)
+        Me.LBLRisk15.Name = "LBLRisk15"
+        Me.LBLRisk15.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk15.TabIndex = 13
+        Me.LBLRisk15.Text = "15 Edges"
+        Me.LBLRisk15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk95
+        '
+        Me.LBLRisk95.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk95.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk95.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk95.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk95.Location = New System.Drawing.Point(155, 7)
+        Me.LBLRisk95.Name = "LBLRisk95"
+        Me.LBLRisk95.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk95.TabIndex = 11
+        Me.LBLRisk95.Text = "95 Edges"
+        Me.LBLRisk95.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk12
+        '
+        Me.LBLRisk12.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk12.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk12.Location = New System.Drawing.Point(599, 73)
+        Me.LBLRisk12.Name = "LBLRisk12"
+        Me.LBLRisk12.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk12.TabIndex = 10
+        Me.LBLRisk12.Text = "12 Edges"
+        Me.LBLRisk12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk20
+        '
+        Me.LBLRisk20.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk20.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk20.Location = New System.Drawing.Point(303, 73)
+        Me.LBLRisk20.Name = "LBLRisk20"
+        Me.LBLRisk20.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk20.TabIndex = 9
+        Me.LBLRisk20.Text = "20 Edges"
+        Me.LBLRisk20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk70
+        '
+        Me.LBLRisk70.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk70.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk70.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk70.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk70.Location = New System.Drawing.Point(7, 40)
+        Me.LBLRisk70.Name = "LBLRisk70"
+        Me.LBLRisk70.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk70.TabIndex = 8
+        Me.LBLRisk70.Text = "70 Edges"
+        Me.LBLRisk70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRisk100
+        '
+        Me.LBLRisk100.BackColor = System.Drawing.Color.Black
+        Me.LBLRisk100.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLRisk100.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRisk100.ForeColor = System.Drawing.Color.White
+        Me.LBLRisk100.Location = New System.Drawing.Point(7, 7)
+        Me.LBLRisk100.Name = "LBLRisk100"
+        Me.LBLRisk100.Size = New System.Drawing.Size(139, 23)
+        Me.LBLRisk100.TabIndex = 7
+        Me.LBLRisk100.Text = "100 Edges"
+        Me.LBLRisk100.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.Black
+        Me.Panel2.Controls.Add(Me.Panel40)
+        Me.Panel2.Controls.Add(Me.Panel41)
+        Me.Panel2.Controls.Add(Me.Panel42)
+        Me.Panel2.Controls.Add(Me.Panel43)
+        Me.Panel2.Controls.Add(Me.Panel45)
+        Me.Panel2.Controls.Add(Me.Panel46)
+        Me.Panel2.Controls.Add(Me.Panel30)
+        Me.Panel2.Controls.Add(Me.Panel31)
+        Me.Panel2.Controls.Add(Me.Panel36)
+        Me.Panel2.Controls.Add(Me.Panel37)
+        Me.Panel2.Controls.Add(Me.Panel38)
+        Me.Panel2.Controls.Add(Me.Panel39)
+        Me.Panel2.Controls.Add(Me.Panel20)
+        Me.Panel2.Controls.Add(Me.Panel25)
+        Me.Panel2.Controls.Add(Me.Panel26)
+        Me.Panel2.Controls.Add(Me.Panel27)
+        Me.Panel2.Controls.Add(Me.Panel28)
+        Me.Panel2.Controls.Add(Me.Panel29)
+        Me.Panel2.Controls.Add(Me.Panel18)
+        Me.Panel2.Controls.Add(Me.Panel19)
+        Me.Panel2.Controls.Add(Me.Panel11)
+        Me.Panel2.Controls.Add(Me.Panel12)
+        Me.Panel2.Controls.Add(Me.Panel8)
+        Me.Panel2.Controls.Add(Me.Panel7)
+        Me.Panel2.Location = New System.Drawing.Point(9, 16)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(893, 398)
+        Me.Panel2.TabIndex = 6
+        '
+        'Panel40
+        '
+        Me.Panel40.BackColor = System.Drawing.Color.Gray
+        Me.Panel40.Controls.Add(Me.BTNRisk24)
+        Me.Panel40.Controls.Add(Me.Risk24)
+        Me.Panel40.Location = New System.Drawing.Point(744, 301)
+        Me.Panel40.Name = "Panel40"
+        Me.Panel40.Size = New System.Drawing.Size(145, 93)
+        Me.Panel40.TabIndex = 30
+        '
+        'BTNRisk24
+        '
+        Me.BTNRisk24.Enabled = False
+        Me.BTNRisk24.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk24.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk24.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk24.Name = "BTNRisk24"
+        Me.BTNRisk24.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk24.TabIndex = 0
+        Me.BTNRisk24.Text = "24"
+        Me.BTNRisk24.UseVisualStyleBackColor = True
+        '
+        'Risk24
+        '
+        Me.Risk24.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk24.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk24.Location = New System.Drawing.Point(4, 66)
+        Me.Risk24.Name = "Risk24"
+        Me.Risk24.Size = New System.Drawing.Size(139, 23)
+        Me.Risk24.TabIndex = 6
+        Me.Risk24.Text = "?????"
+        Me.Risk24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel41
+        '
+        Me.Panel41.BackColor = System.Drawing.Color.Gray
+        Me.Panel41.Controls.Add(Me.BTNRisk23)
+        Me.Panel41.Controls.Add(Me.Risk23)
+        Me.Panel41.Location = New System.Drawing.Point(596, 301)
+        Me.Panel41.Name = "Panel41"
+        Me.Panel41.Size = New System.Drawing.Size(145, 93)
+        Me.Panel41.TabIndex = 29
+        '
+        'BTNRisk23
+        '
+        Me.BTNRisk23.Enabled = False
+        Me.BTNRisk23.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk23.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk23.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk23.Name = "BTNRisk23"
+        Me.BTNRisk23.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk23.TabIndex = 0
+        Me.BTNRisk23.Text = "23"
+        Me.BTNRisk23.UseVisualStyleBackColor = True
+        '
+        'Risk23
+        '
+        Me.Risk23.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk23.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk23.Location = New System.Drawing.Point(3, 66)
+        Me.Risk23.Name = "Risk23"
+        Me.Risk23.Size = New System.Drawing.Size(139, 23)
+        Me.Risk23.TabIndex = 6
+        Me.Risk23.Text = "?????"
+        Me.Risk23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel42
+        '
+        Me.Panel42.BackColor = System.Drawing.Color.Gray
+        Me.Panel42.Controls.Add(Me.BTNRisk22)
+        Me.Panel42.Controls.Add(Me.Risk22)
+        Me.Panel42.Location = New System.Drawing.Point(448, 301)
+        Me.Panel42.Name = "Panel42"
+        Me.Panel42.Size = New System.Drawing.Size(145, 93)
+        Me.Panel42.TabIndex = 28
+        '
+        'BTNRisk22
+        '
+        Me.BTNRisk22.Enabled = False
+        Me.BTNRisk22.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk22.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk22.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk22.Name = "BTNRisk22"
+        Me.BTNRisk22.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk22.TabIndex = 0
+        Me.BTNRisk22.Text = "22"
+        Me.BTNRisk22.UseVisualStyleBackColor = True
+        '
+        'Risk22
+        '
+        Me.Risk22.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk22.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk22.Location = New System.Drawing.Point(4, 66)
+        Me.Risk22.Name = "Risk22"
+        Me.Risk22.Size = New System.Drawing.Size(139, 23)
+        Me.Risk22.TabIndex = 6
+        Me.Risk22.Text = "?????"
+        Me.Risk22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel43
+        '
+        Me.Panel43.BackColor = System.Drawing.Color.Gray
+        Me.Panel43.Controls.Add(Me.BTNRisk21)
+        Me.Panel43.Controls.Add(Me.Risk21)
+        Me.Panel43.Location = New System.Drawing.Point(300, 301)
+        Me.Panel43.Name = "Panel43"
+        Me.Panel43.Size = New System.Drawing.Size(145, 93)
+        Me.Panel43.TabIndex = 27
+        '
+        'BTNRisk21
+        '
+        Me.BTNRisk21.Enabled = False
+        Me.BTNRisk21.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk21.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk21.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk21.Name = "BTNRisk21"
+        Me.BTNRisk21.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk21.TabIndex = 0
+        Me.BTNRisk21.Text = "21"
+        Me.BTNRisk21.UseVisualStyleBackColor = True
+        '
+        'Risk21
+        '
+        Me.Risk21.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk21.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk21.Location = New System.Drawing.Point(3, 66)
+        Me.Risk21.Name = "Risk21"
+        Me.Risk21.Size = New System.Drawing.Size(139, 23)
+        Me.Risk21.TabIndex = 6
+        Me.Risk21.Text = "?????"
+        Me.Risk21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel45
+        '
+        Me.Panel45.BackColor = System.Drawing.Color.Gray
+        Me.Panel45.Controls.Add(Me.BTNRisk20)
+        Me.Panel45.Controls.Add(Me.Risk20)
+        Me.Panel45.Location = New System.Drawing.Point(152, 301)
+        Me.Panel45.Name = "Panel45"
+        Me.Panel45.Size = New System.Drawing.Size(145, 93)
+        Me.Panel45.TabIndex = 26
+        '
+        'BTNRisk20
+        '
+        Me.BTNRisk20.Enabled = False
+        Me.BTNRisk20.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk20.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk20.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk20.Name = "BTNRisk20"
+        Me.BTNRisk20.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk20.TabIndex = 0
+        Me.BTNRisk20.Text = "20"
+        Me.BTNRisk20.UseVisualStyleBackColor = True
+        '
+        'Risk20
+        '
+        Me.Risk20.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk20.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk20.Location = New System.Drawing.Point(4, 66)
+        Me.Risk20.Name = "Risk20"
+        Me.Risk20.Size = New System.Drawing.Size(139, 23)
+        Me.Risk20.TabIndex = 6
+        Me.Risk20.Text = "?????"
+        Me.Risk20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel46
+        '
+        Me.Panel46.BackColor = System.Drawing.Color.Gray
+        Me.Panel46.Controls.Add(Me.BTNRisk19)
+        Me.Panel46.Controls.Add(Me.Risk19)
+        Me.Panel46.Location = New System.Drawing.Point(4, 301)
+        Me.Panel46.Name = "Panel46"
+        Me.Panel46.Size = New System.Drawing.Size(145, 93)
+        Me.Panel46.TabIndex = 25
+        '
+        'BTNRisk19
+        '
+        Me.BTNRisk19.Enabled = False
+        Me.BTNRisk19.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk19.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk19.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk19.Name = "BTNRisk19"
+        Me.BTNRisk19.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk19.TabIndex = 0
+        Me.BTNRisk19.Text = "19"
+        Me.BTNRisk19.UseVisualStyleBackColor = True
+        '
+        'Risk19
+        '
+        Me.Risk19.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk19.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk19.Location = New System.Drawing.Point(3, 66)
+        Me.Risk19.Name = "Risk19"
+        Me.Risk19.Size = New System.Drawing.Size(139, 23)
+        Me.Risk19.TabIndex = 6
+        Me.Risk19.Text = "?????"
+        Me.Risk19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel30
+        '
+        Me.Panel30.BackColor = System.Drawing.Color.Gray
+        Me.Panel30.Controls.Add(Me.BTNRisk18)
+        Me.Panel30.Controls.Add(Me.Risk18)
+        Me.Panel30.Location = New System.Drawing.Point(744, 202)
+        Me.Panel30.Name = "Panel30"
+        Me.Panel30.Size = New System.Drawing.Size(145, 93)
+        Me.Panel30.TabIndex = 24
+        '
+        'BTNRisk18
+        '
+        Me.BTNRisk18.Enabled = False
+        Me.BTNRisk18.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk18.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk18.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk18.Name = "BTNRisk18"
+        Me.BTNRisk18.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk18.TabIndex = 0
+        Me.BTNRisk18.Text = "18"
+        Me.BTNRisk18.UseVisualStyleBackColor = True
+        '
+        'Risk18
+        '
+        Me.Risk18.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk18.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk18.Location = New System.Drawing.Point(4, 66)
+        Me.Risk18.Name = "Risk18"
+        Me.Risk18.Size = New System.Drawing.Size(139, 23)
+        Me.Risk18.TabIndex = 6
+        Me.Risk18.Text = "?????"
+        Me.Risk18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel31
+        '
+        Me.Panel31.BackColor = System.Drawing.Color.Gray
+        Me.Panel31.Controls.Add(Me.BTNRisk17)
+        Me.Panel31.Controls.Add(Me.Risk17)
+        Me.Panel31.Location = New System.Drawing.Point(596, 202)
+        Me.Panel31.Name = "Panel31"
+        Me.Panel31.Size = New System.Drawing.Size(145, 93)
+        Me.Panel31.TabIndex = 23
+        '
+        'BTNRisk17
+        '
+        Me.BTNRisk17.Enabled = False
+        Me.BTNRisk17.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk17.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk17.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk17.Name = "BTNRisk17"
+        Me.BTNRisk17.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk17.TabIndex = 0
+        Me.BTNRisk17.Text = "17"
+        Me.BTNRisk17.UseVisualStyleBackColor = True
+        '
+        'Risk17
+        '
+        Me.Risk17.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk17.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk17.Location = New System.Drawing.Point(3, 66)
+        Me.Risk17.Name = "Risk17"
+        Me.Risk17.Size = New System.Drawing.Size(139, 23)
+        Me.Risk17.TabIndex = 6
+        Me.Risk17.Text = "?????"
+        Me.Risk17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel36
+        '
+        Me.Panel36.BackColor = System.Drawing.Color.Gray
+        Me.Panel36.Controls.Add(Me.BTNRisk16)
+        Me.Panel36.Controls.Add(Me.Risk16)
+        Me.Panel36.Location = New System.Drawing.Point(448, 202)
+        Me.Panel36.Name = "Panel36"
+        Me.Panel36.Size = New System.Drawing.Size(145, 93)
+        Me.Panel36.TabIndex = 22
+        '
+        'BTNRisk16
+        '
+        Me.BTNRisk16.Enabled = False
+        Me.BTNRisk16.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk16.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk16.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk16.Name = "BTNRisk16"
+        Me.BTNRisk16.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk16.TabIndex = 0
+        Me.BTNRisk16.Text = "16"
+        Me.BTNRisk16.UseVisualStyleBackColor = True
+        '
+        'Risk16
+        '
+        Me.Risk16.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk16.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk16.Location = New System.Drawing.Point(4, 66)
+        Me.Risk16.Name = "Risk16"
+        Me.Risk16.Size = New System.Drawing.Size(139, 23)
+        Me.Risk16.TabIndex = 6
+        Me.Risk16.Text = "?????"
+        Me.Risk16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel37
+        '
+        Me.Panel37.BackColor = System.Drawing.Color.Gray
+        Me.Panel37.Controls.Add(Me.BTNRisk15)
+        Me.Panel37.Controls.Add(Me.Risk15)
+        Me.Panel37.Location = New System.Drawing.Point(300, 202)
+        Me.Panel37.Name = "Panel37"
+        Me.Panel37.Size = New System.Drawing.Size(145, 93)
+        Me.Panel37.TabIndex = 21
+        '
+        'BTNRisk15
+        '
+        Me.BTNRisk15.BackColor = System.Drawing.Color.Transparent
+        Me.BTNRisk15.Enabled = False
+        Me.BTNRisk15.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk15.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk15.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk15.Name = "BTNRisk15"
+        Me.BTNRisk15.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk15.TabIndex = 0
+        Me.BTNRisk15.Text = "15"
+        Me.BTNRisk15.UseVisualStyleBackColor = False
+        '
+        'Risk15
+        '
+        Me.Risk15.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk15.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk15.Location = New System.Drawing.Point(3, 66)
+        Me.Risk15.Name = "Risk15"
+        Me.Risk15.Size = New System.Drawing.Size(139, 23)
+        Me.Risk15.TabIndex = 6
+        Me.Risk15.Text = "?????"
+        Me.Risk15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel38
+        '
+        Me.Panel38.BackColor = System.Drawing.Color.Gray
+        Me.Panel38.Controls.Add(Me.BTNRisk14)
+        Me.Panel38.Controls.Add(Me.Risk14)
+        Me.Panel38.Location = New System.Drawing.Point(152, 202)
+        Me.Panel38.Name = "Panel38"
+        Me.Panel38.Size = New System.Drawing.Size(145, 93)
+        Me.Panel38.TabIndex = 20
+        '
+        'BTNRisk14
+        '
+        Me.BTNRisk14.Enabled = False
+        Me.BTNRisk14.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk14.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk14.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk14.Name = "BTNRisk14"
+        Me.BTNRisk14.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk14.TabIndex = 0
+        Me.BTNRisk14.Text = "14"
+        Me.BTNRisk14.UseVisualStyleBackColor = True
+        '
+        'Risk14
+        '
+        Me.Risk14.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk14.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk14.Location = New System.Drawing.Point(4, 66)
+        Me.Risk14.Name = "Risk14"
+        Me.Risk14.Size = New System.Drawing.Size(139, 23)
+        Me.Risk14.TabIndex = 6
+        Me.Risk14.Text = "?????"
+        Me.Risk14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel39
+        '
+        Me.Panel39.BackColor = System.Drawing.Color.Gray
+        Me.Panel39.Controls.Add(Me.BTNRisk13)
+        Me.Panel39.Controls.Add(Me.Risk13)
+        Me.Panel39.Location = New System.Drawing.Point(4, 202)
+        Me.Panel39.Name = "Panel39"
+        Me.Panel39.Size = New System.Drawing.Size(145, 93)
+        Me.Panel39.TabIndex = 19
+        '
+        'BTNRisk13
+        '
+        Me.BTNRisk13.Enabled = False
+        Me.BTNRisk13.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk13.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk13.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk13.Name = "BTNRisk13"
+        Me.BTNRisk13.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk13.TabIndex = 0
+        Me.BTNRisk13.Text = "13"
+        Me.BTNRisk13.UseVisualStyleBackColor = True
+        '
+        'Risk13
+        '
+        Me.Risk13.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk13.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk13.Location = New System.Drawing.Point(3, 66)
+        Me.Risk13.Name = "Risk13"
+        Me.Risk13.Size = New System.Drawing.Size(139, 23)
+        Me.Risk13.TabIndex = 6
+        Me.Risk13.Text = "?????"
+        Me.Risk13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel20
+        '
+        Me.Panel20.BackColor = System.Drawing.Color.Gray
+        Me.Panel20.Controls.Add(Me.BTNRisk12)
+        Me.Panel20.Controls.Add(Me.Risk12)
+        Me.Panel20.Location = New System.Drawing.Point(744, 103)
+        Me.Panel20.Name = "Panel20"
+        Me.Panel20.Size = New System.Drawing.Size(145, 93)
+        Me.Panel20.TabIndex = 18
+        '
+        'BTNRisk12
+        '
+        Me.BTNRisk12.Enabled = False
+        Me.BTNRisk12.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk12.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk12.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk12.Name = "BTNRisk12"
+        Me.BTNRisk12.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk12.TabIndex = 7
+        Me.BTNRisk12.Text = "12"
+        Me.BTNRisk12.UseVisualStyleBackColor = True
+        '
+        'Risk12
+        '
+        Me.Risk12.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk12.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk12.Location = New System.Drawing.Point(4, 66)
+        Me.Risk12.Name = "Risk12"
+        Me.Risk12.Size = New System.Drawing.Size(139, 23)
+        Me.Risk12.TabIndex = 6
+        Me.Risk12.Text = "?????"
+        Me.Risk12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel25
+        '
+        Me.Panel25.BackColor = System.Drawing.Color.Gray
+        Me.Panel25.Controls.Add(Me.BTNRisk11)
+        Me.Panel25.Controls.Add(Me.Risk11)
+        Me.Panel25.Location = New System.Drawing.Point(596, 103)
+        Me.Panel25.Name = "Panel25"
+        Me.Panel25.Size = New System.Drawing.Size(145, 93)
+        Me.Panel25.TabIndex = 17
+        '
+        'BTNRisk11
+        '
+        Me.BTNRisk11.Enabled = False
+        Me.BTNRisk11.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk11.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk11.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk11.Name = "BTNRisk11"
+        Me.BTNRisk11.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk11.TabIndex = 0
+        Me.BTNRisk11.Text = "11"
+        Me.BTNRisk11.UseVisualStyleBackColor = True
+        '
+        'Risk11
+        '
+        Me.Risk11.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk11.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk11.Location = New System.Drawing.Point(3, 66)
+        Me.Risk11.Name = "Risk11"
+        Me.Risk11.Size = New System.Drawing.Size(139, 23)
+        Me.Risk11.TabIndex = 6
+        Me.Risk11.Text = "?????"
+        Me.Risk11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel26
+        '
+        Me.Panel26.BackColor = System.Drawing.Color.Gray
+        Me.Panel26.Controls.Add(Me.BTNRisk10)
+        Me.Panel26.Controls.Add(Me.Risk10)
+        Me.Panel26.Location = New System.Drawing.Point(448, 103)
+        Me.Panel26.Name = "Panel26"
+        Me.Panel26.Size = New System.Drawing.Size(145, 93)
+        Me.Panel26.TabIndex = 16
+        '
+        'BTNRisk10
+        '
+        Me.BTNRisk10.Enabled = False
+        Me.BTNRisk10.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk10.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk10.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk10.Name = "BTNRisk10"
+        Me.BTNRisk10.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk10.TabIndex = 0
+        Me.BTNRisk10.Text = "10"
+        Me.BTNRisk10.UseVisualStyleBackColor = True
+        '
+        'Risk10
+        '
+        Me.Risk10.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk10.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk10.Location = New System.Drawing.Point(4, 66)
+        Me.Risk10.Name = "Risk10"
+        Me.Risk10.Size = New System.Drawing.Size(139, 23)
+        Me.Risk10.TabIndex = 6
+        Me.Risk10.Text = "?????"
+        Me.Risk10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel27
+        '
+        Me.Panel27.BackColor = System.Drawing.Color.Gray
+        Me.Panel27.Controls.Add(Me.BTNRisk9)
+        Me.Panel27.Controls.Add(Me.Risk9)
+        Me.Panel27.Location = New System.Drawing.Point(300, 103)
+        Me.Panel27.Name = "Panel27"
+        Me.Panel27.Size = New System.Drawing.Size(145, 93)
+        Me.Panel27.TabIndex = 15
+        '
+        'BTNRisk9
+        '
+        Me.BTNRisk9.Enabled = False
+        Me.BTNRisk9.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk9.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk9.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk9.Name = "BTNRisk9"
+        Me.BTNRisk9.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk9.TabIndex = 0
+        Me.BTNRisk9.Text = "9"
+        Me.BTNRisk9.UseVisualStyleBackColor = True
+        '
+        'Risk9
+        '
+        Me.Risk9.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk9.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk9.Location = New System.Drawing.Point(3, 66)
+        Me.Risk9.Name = "Risk9"
+        Me.Risk9.Size = New System.Drawing.Size(139, 23)
+        Me.Risk9.TabIndex = 6
+        Me.Risk9.Text = "?????"
+        Me.Risk9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel28
+        '
+        Me.Panel28.BackColor = System.Drawing.Color.Gray
+        Me.Panel28.Controls.Add(Me.BTNRisk8)
+        Me.Panel28.Controls.Add(Me.Risk8)
+        Me.Panel28.Location = New System.Drawing.Point(152, 103)
+        Me.Panel28.Name = "Panel28"
+        Me.Panel28.Size = New System.Drawing.Size(145, 93)
+        Me.Panel28.TabIndex = 14
+        '
+        'BTNRisk8
+        '
+        Me.BTNRisk8.Enabled = False
+        Me.BTNRisk8.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk8.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk8.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk8.Name = "BTNRisk8"
+        Me.BTNRisk8.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk8.TabIndex = 0
+        Me.BTNRisk8.Text = "8"
+        Me.BTNRisk8.UseVisualStyleBackColor = True
+        '
+        'Risk8
+        '
+        Me.Risk8.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk8.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk8.Location = New System.Drawing.Point(4, 66)
+        Me.Risk8.Name = "Risk8"
+        Me.Risk8.Size = New System.Drawing.Size(139, 23)
+        Me.Risk8.TabIndex = 6
+        Me.Risk8.Text = "?????"
+        Me.Risk8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel29
+        '
+        Me.Panel29.BackColor = System.Drawing.Color.Gray
+        Me.Panel29.Controls.Add(Me.BTNRisk7)
+        Me.Panel29.Controls.Add(Me.Risk7)
+        Me.Panel29.Location = New System.Drawing.Point(4, 103)
+        Me.Panel29.Name = "Panel29"
+        Me.Panel29.Size = New System.Drawing.Size(145, 93)
+        Me.Panel29.TabIndex = 13
+        '
+        'BTNRisk7
+        '
+        Me.BTNRisk7.Enabled = False
+        Me.BTNRisk7.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk7.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk7.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk7.Name = "BTNRisk7"
+        Me.BTNRisk7.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk7.TabIndex = 0
+        Me.BTNRisk7.Text = "7"
+        Me.BTNRisk7.UseVisualStyleBackColor = True
+        '
+        'Risk7
+        '
+        Me.Risk7.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk7.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk7.Location = New System.Drawing.Point(3, 66)
+        Me.Risk7.Name = "Risk7"
+        Me.Risk7.Size = New System.Drawing.Size(139, 23)
+        Me.Risk7.TabIndex = 6
+        Me.Risk7.Text = "?????"
+        Me.Risk7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel18
+        '
+        Me.Panel18.BackColor = System.Drawing.Color.Gray
+        Me.Panel18.Controls.Add(Me.BTNRisk6)
+        Me.Panel18.Controls.Add(Me.Risk6)
+        Me.Panel18.Location = New System.Drawing.Point(744, 4)
+        Me.Panel18.Name = "Panel18"
+        Me.Panel18.Size = New System.Drawing.Size(145, 93)
+        Me.Panel18.TabIndex = 12
+        '
+        'BTNRisk6
+        '
+        Me.BTNRisk6.Enabled = False
+        Me.BTNRisk6.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk6.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk6.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk6.Name = "BTNRisk6"
+        Me.BTNRisk6.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk6.TabIndex = 0
+        Me.BTNRisk6.Text = "6"
+        Me.BTNRisk6.UseVisualStyleBackColor = True
+        '
+        'Risk6
+        '
+        Me.Risk6.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk6.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk6.Location = New System.Drawing.Point(4, 66)
+        Me.Risk6.Name = "Risk6"
+        Me.Risk6.Size = New System.Drawing.Size(139, 23)
+        Me.Risk6.TabIndex = 6
+        Me.Risk6.Text = "?????"
+        Me.Risk6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel19
+        '
+        Me.Panel19.BackColor = System.Drawing.Color.Gray
+        Me.Panel19.Controls.Add(Me.BTNRisk5)
+        Me.Panel19.Controls.Add(Me.Risk5)
+        Me.Panel19.Location = New System.Drawing.Point(596, 4)
+        Me.Panel19.Name = "Panel19"
+        Me.Panel19.Size = New System.Drawing.Size(145, 93)
+        Me.Panel19.TabIndex = 11
+        '
+        'BTNRisk5
+        '
+        Me.BTNRisk5.Enabled = False
+        Me.BTNRisk5.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk5.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk5.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk5.Name = "BTNRisk5"
+        Me.BTNRisk5.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk5.TabIndex = 0
+        Me.BTNRisk5.Text = "5"
+        Me.BTNRisk5.UseVisualStyleBackColor = True
+        '
+        'Risk5
+        '
+        Me.Risk5.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk5.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk5.Location = New System.Drawing.Point(3, 66)
+        Me.Risk5.Name = "Risk5"
+        Me.Risk5.Size = New System.Drawing.Size(139, 23)
+        Me.Risk5.TabIndex = 6
+        Me.Risk5.Text = "?????"
+        Me.Risk5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel11
+        '
+        Me.Panel11.BackColor = System.Drawing.Color.Gray
+        Me.Panel11.Controls.Add(Me.BTNRisk4)
+        Me.Panel11.Controls.Add(Me.Risk4)
+        Me.Panel11.Location = New System.Drawing.Point(448, 4)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(145, 93)
+        Me.Panel11.TabIndex = 10
+        '
+        'BTNRisk4
+        '
+        Me.BTNRisk4.Enabled = False
+        Me.BTNRisk4.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk4.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk4.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk4.Name = "BTNRisk4"
+        Me.BTNRisk4.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk4.TabIndex = 0
+        Me.BTNRisk4.Text = "4"
+        Me.BTNRisk4.UseVisualStyleBackColor = True
+        '
+        'Risk4
+        '
+        Me.Risk4.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk4.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk4.Location = New System.Drawing.Point(4, 66)
+        Me.Risk4.Name = "Risk4"
+        Me.Risk4.Size = New System.Drawing.Size(139, 23)
+        Me.Risk4.TabIndex = 6
+        Me.Risk4.Text = "?????"
+        Me.Risk4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel12
+        '
+        Me.Panel12.BackColor = System.Drawing.Color.Gray
+        Me.Panel12.Controls.Add(Me.BTNRisk3)
+        Me.Panel12.Controls.Add(Me.Risk3)
+        Me.Panel12.Location = New System.Drawing.Point(300, 4)
+        Me.Panel12.Name = "Panel12"
+        Me.Panel12.Size = New System.Drawing.Size(145, 93)
+        Me.Panel12.TabIndex = 9
+        '
+        'BTNRisk3
+        '
+        Me.BTNRisk3.BackColor = System.Drawing.Color.Transparent
+        Me.BTNRisk3.Enabled = False
+        Me.BTNRisk3.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk3.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk3.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk3.Name = "BTNRisk3"
+        Me.BTNRisk3.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk3.TabIndex = 0
+        Me.BTNRisk3.Text = "3"
+        Me.BTNRisk3.UseVisualStyleBackColor = False
+        '
+        'Risk3
+        '
+        Me.Risk3.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk3.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk3.Location = New System.Drawing.Point(3, 66)
+        Me.Risk3.Name = "Risk3"
+        Me.Risk3.Size = New System.Drawing.Size(139, 23)
+        Me.Risk3.TabIndex = 6
+        Me.Risk3.Text = "?????"
+        Me.Risk3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.Gray
+        Me.Panel8.Controls.Add(Me.BTNRisk2)
+        Me.Panel8.Controls.Add(Me.Risk2)
+        Me.Panel8.Location = New System.Drawing.Point(152, 4)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(145, 93)
+        Me.Panel8.TabIndex = 8
+        '
+        'BTNRisk2
+        '
+        Me.BTNRisk2.Enabled = False
+        Me.BTNRisk2.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk2.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk2.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk2.Name = "BTNRisk2"
+        Me.BTNRisk2.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk2.TabIndex = 0
+        Me.BTNRisk2.Text = "2"
+        Me.BTNRisk2.UseVisualStyleBackColor = True
+        '
+        'Risk2
+        '
+        Me.Risk2.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk2.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk2.Location = New System.Drawing.Point(4, 66)
+        Me.Risk2.Name = "Risk2"
+        Me.Risk2.Size = New System.Drawing.Size(139, 23)
+        Me.Risk2.TabIndex = 6
+        Me.Risk2.Text = "?????"
+        Me.Risk2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel7
+        '
+        Me.Panel7.BackColor = System.Drawing.Color.Gray
+        Me.Panel7.Controls.Add(Me.BTNRisk1)
+        Me.Panel7.Controls.Add(Me.Risk1)
+        Me.Panel7.Location = New System.Drawing.Point(4, 4)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(145, 93)
+        Me.Panel7.TabIndex = 7
+        '
+        'BTNRisk1
+        '
+        Me.BTNRisk1.Enabled = False
+        Me.BTNRisk1.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRisk1.ForeColor = System.Drawing.Color.Black
+        Me.BTNRisk1.Location = New System.Drawing.Point(3, 3)
+        Me.BTNRisk1.Name = "BTNRisk1"
+        Me.BTNRisk1.Size = New System.Drawing.Size(139, 60)
+        Me.BTNRisk1.TabIndex = 0
+        Me.BTNRisk1.Text = "1"
+        Me.BTNRisk1.UseVisualStyleBackColor = True
+        '
+        'Risk1
+        '
+        Me.Risk1.BackColor = System.Drawing.Color.DarkGray
+        Me.Risk1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Risk1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Risk1.ForeColor = System.Drawing.Color.DarkGray
+        Me.Risk1.Location = New System.Drawing.Point(3, 66)
+        Me.Risk1.Name = "Risk1"
+        Me.Risk1.Size = New System.Drawing.Size(139, 23)
+        Me.Risk1.TabIndex = 6
+        Me.Risk1.Text = "?????"
+        Me.Risk1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel48
+        '
+        Me.Panel48.BackColor = System.Drawing.Color.Black
+        Me.Panel48.Controls.Add(Me.LblRiskMinPot)
+        Me.Panel48.Controls.Add(Me.LBLRiskMaxPot)
+        Me.Panel48.Controls.Add(Me.Label25)
+        Me.Panel48.Controls.Add(Me.Label23)
+        Me.Panel48.Controls.Add(Me.PictureBox4)
+        Me.Panel48.Controls.Add(Me.LBLRiskTokens)
+        Me.Panel48.Controls.Add(Me.LBLPick6)
+        Me.Panel48.Controls.Add(Me.LBLPick5)
+        Me.Panel48.Controls.Add(Me.LBLPick4)
+        Me.Panel48.Controls.Add(Me.LBLPick3)
+        Me.Panel48.Controls.Add(Me.LBLPick2)
+        Me.Panel48.Controls.Add(Me.LBLPick1)
+        Me.Panel48.Controls.Add(Me.BTNPickIt)
+        Me.Panel48.Controls.Add(Me.BTNRiskIt)
+        Me.Panel48.Controls.Add(Me.PBRiskyPic)
+        Me.Panel48.Controls.Add(Me.BTNRiskyPlay)
+        Me.Panel48.Location = New System.Drawing.Point(908, 16)
+        Me.Panel48.Name = "Panel48"
+        Me.Panel48.Size = New System.Drawing.Size(159, 671)
+        Me.Panel48.TabIndex = 11
+        '
+        'LblRiskMinPot
+        '
+        Me.LblRiskMinPot.BackColor = System.Drawing.Color.Black
+        Me.LblRiskMinPot.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblRiskMinPot.ForeColor = System.Drawing.Color.White
+        Me.LblRiskMinPot.Location = New System.Drawing.Point(8, 427)
+        Me.LblRiskMinPot.Name = "LblRiskMinPot"
+        Me.LblRiskMinPot.Size = New System.Drawing.Size(139, 28)
+        Me.LblRiskMinPot.TabIndex = 247
+        Me.LblRiskMinPot.Text = "N/A"
+        Me.LblRiskMinPot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLRiskMaxPot
+        '
+        Me.LBLRiskMaxPot.BackColor = System.Drawing.Color.Black
+        Me.LBLRiskMaxPot.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRiskMaxPot.ForeColor = System.Drawing.Color.White
+        Me.LBLRiskMaxPot.Location = New System.Drawing.Point(8, 364)
+        Me.LBLRiskMaxPot.Name = "LBLRiskMaxPot"
+        Me.LBLRiskMaxPot.Size = New System.Drawing.Size(139, 28)
+        Me.LBLRiskMaxPot.TabIndex = 246
+        Me.LBLRiskMaxPot.Text = "N/A"
+        Me.LBLRiskMaxPot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label25
+        '
+        Me.Label25.BackColor = System.Drawing.Color.Black
+        Me.Label25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.ForeColor = System.Drawing.Color.White
+        Me.Label25.Location = New System.Drawing.Point(8, 404)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(139, 23)
+        Me.Label25.TabIndex = 245
+        Me.Label25.Text = "Minimum Pot"
+        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label23
+        '
+        Me.Label23.BackColor = System.Drawing.Color.Black
+        Me.Label23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.White
+        Me.Label23.Location = New System.Drawing.Point(8, 341)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(139, 23)
+        Me.Label23.TabIndex = 244
+        Me.Label23.Text = "Maximum Pot"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.BackColor = System.Drawing.Color.Black
+        Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
+        Me.PictureBox4.Location = New System.Drawing.Point(24, 560)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(28, 28)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox4.TabIndex = 243
+        Me.PictureBox4.TabStop = False
+        '
+        'LBLRiskTokens
+        '
+        Me.LBLRiskTokens.BackColor = System.Drawing.Color.Black
+        Me.LBLRiskTokens.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRiskTokens.ForeColor = System.Drawing.Color.White
+        Me.LBLRiskTokens.Location = New System.Drawing.Point(58, 560)
+        Me.LBLRiskTokens.Name = "LBLRiskTokens"
+        Me.LBLRiskTokens.Size = New System.Drawing.Size(85, 28)
+        Me.LBLRiskTokens.TabIndex = 242
+        Me.LBLRiskTokens.Text = "100"
+        Me.LBLRiskTokens.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLPick6
+        '
+        Me.LBLPick6.Font = New System.Drawing.Font("Erbos Draco 1st Open NBP", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLPick6.ForeColor = System.Drawing.Color.White
+        Me.LBLPick6.Location = New System.Drawing.Point(86, 291)
+        Me.LBLPick6.Name = "LBLPick6"
+        Me.LBLPick6.Size = New System.Drawing.Size(57, 40)
+        Me.LBLPick6.TabIndex = 19
+        Me.LBLPick6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLPick5
+        '
+        Me.LBLPick5.Font = New System.Drawing.Font("Erbos Draco 1st Open NBP", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLPick5.ForeColor = System.Drawing.Color.White
+        Me.LBLPick5.Location = New System.Drawing.Point(86, 251)
+        Me.LBLPick5.Name = "LBLPick5"
+        Me.LBLPick5.Size = New System.Drawing.Size(57, 40)
+        Me.LBLPick5.TabIndex = 18
+        Me.LBLPick5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLPick4
+        '
+        Me.LBLPick4.Font = New System.Drawing.Font("Erbos Draco 1st Open NBP", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLPick4.ForeColor = System.Drawing.Color.White
+        Me.LBLPick4.Location = New System.Drawing.Point(86, 213)
+        Me.LBLPick4.Name = "LBLPick4"
+        Me.LBLPick4.Size = New System.Drawing.Size(57, 40)
+        Me.LBLPick4.TabIndex = 17
+        Me.LBLPick4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLPick3
+        '
+        Me.LBLPick3.Font = New System.Drawing.Font("Erbos Draco 1st Open NBP", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLPick3.ForeColor = System.Drawing.Color.White
+        Me.LBLPick3.Location = New System.Drawing.Point(23, 291)
+        Me.LBLPick3.Name = "LBLPick3"
+        Me.LBLPick3.Size = New System.Drawing.Size(57, 40)
+        Me.LBLPick3.TabIndex = 16
+        Me.LBLPick3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLPick2
+        '
+        Me.LBLPick2.Font = New System.Drawing.Font("Erbos Draco 1st Open NBP", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLPick2.ForeColor = System.Drawing.Color.White
+        Me.LBLPick2.Location = New System.Drawing.Point(23, 251)
+        Me.LBLPick2.Name = "LBLPick2"
+        Me.LBLPick2.Size = New System.Drawing.Size(57, 40)
+        Me.LBLPick2.TabIndex = 15
+        Me.LBLPick2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLPick1
+        '
+        Me.LBLPick1.Font = New System.Drawing.Font("Erbos Draco 1st Open NBP", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLPick1.ForeColor = System.Drawing.Color.White
+        Me.LBLPick1.Location = New System.Drawing.Point(23, 213)
+        Me.LBLPick1.Name = "LBLPick1"
+        Me.LBLPick1.Size = New System.Drawing.Size(57, 40)
+        Me.LBLPick1.TabIndex = 14
+        Me.LBLPick1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'BTNPickIt
+        '
+        Me.BTNPickIt.BackColor = System.Drawing.Color.Green
+        Me.BTNPickIt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNPickIt.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNPickIt.ForeColor = System.Drawing.Color.White
+        Me.BTNPickIt.Location = New System.Drawing.Point(8, 505)
+        Me.BTNPickIt.Name = "BTNPickIt"
+        Me.BTNPickIt.Size = New System.Drawing.Size(143, 34)
+        Me.BTNPickIt.TabIndex = 13
+        Me.BTNPickIt.Text = "ACCEPT OFFER"
+        Me.BTNPickIt.UseVisualStyleBackColor = False
+        Me.BTNPickIt.Visible = False
+        '
+        'BTNRiskIt
+        '
+        Me.BTNRiskIt.BackColor = System.Drawing.Color.Red
+        Me.BTNRiskIt.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRiskIt.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRiskIt.ForeColor = System.Drawing.Color.White
+        Me.BTNRiskIt.Location = New System.Drawing.Point(8, 466)
+        Me.BTNRiskIt.Name = "BTNRiskIt"
+        Me.BTNRiskIt.Size = New System.Drawing.Size(143, 34)
+        Me.BTNRiskIt.TabIndex = 12
+        Me.BTNRiskIt.Text = "DECLINE OFFER"
+        Me.BTNRiskIt.UseVisualStyleBackColor = False
+        Me.BTNRiskIt.Visible = False
+        '
+        'PBRiskyPic
+        '
+        Me.PBRiskyPic.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PBRiskyPic.Location = New System.Drawing.Point(8, 4)
+        Me.PBRiskyPic.Name = "PBRiskyPic"
+        Me.PBRiskyPic.Size = New System.Drawing.Size(143, 198)
+        Me.PBRiskyPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PBRiskyPic.TabIndex = 11
+        Me.PBRiskyPic.TabStop = False
+        '
+        'BTNRiskyPlay
+        '
+        Me.BTNRiskyPlay.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRiskyPlay.Location = New System.Drawing.Point(8, 601)
+        Me.BTNRiskyPlay.Name = "BTNRiskyPlay"
+        Me.BTNRiskyPlay.Size = New System.Drawing.Size(143, 60)
+        Me.BTNRiskyPlay.TabIndex = 10
+        Me.BTNRiskyPlay.Text = "PLAY"
+        Me.BTNRiskyPlay.UseVisualStyleBackColor = True
+        '
+        'Panel49
+        '
+        Me.Panel49.BackColor = System.Drawing.Color.Black
+        Me.Panel49.Controls.Add(Me.LblRiskType)
+        Me.Panel49.Location = New System.Drawing.Point(9, 561)
+        Me.Panel49.Name = "Panel49"
+        Me.Panel49.Size = New System.Drawing.Size(893, 127)
+        Me.Panel49.TabIndex = 13
+        '
+        'LblRiskType
+        '
+        Me.LblRiskType.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.LblRiskType.Location = New System.Drawing.Point(7, -2)
+        Me.LblRiskType.Name = "LblRiskType"
+        Me.LblRiskType.Size = New System.Drawing.Size(879, 16)
+        Me.LblRiskType.TabIndex = 0
+        Me.LblRiskType.Text = "Opponent is typing..."
+        Me.LblRiskType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.LblRiskType.Visible = False
+        '
         'CardTimer
         '
         Me.CardTimer.Interval = 1000
@@ -2728,6 +4346,10 @@ Partial Class FrmCardList
         'CardRevealTimer
         '
         Me.CardRevealTimer.Interval = 1000
+        '
+        'TimerRiskyFlash
+        '
+        Me.TimerRiskyFlash.Interval = 333
         '
         'FrmCardList
         '
@@ -2846,6 +4468,37 @@ Partial Class FrmCardList
         CType(Me.BronzeP3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BronzeP2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BronzeP1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage5.ResumeLayout(False)
+        Me.Panel47.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel40.ResumeLayout(False)
+        Me.Panel41.ResumeLayout(False)
+        Me.Panel42.ResumeLayout(False)
+        Me.Panel43.ResumeLayout(False)
+        Me.Panel45.ResumeLayout(False)
+        Me.Panel46.ResumeLayout(False)
+        Me.Panel30.ResumeLayout(False)
+        Me.Panel31.ResumeLayout(False)
+        Me.Panel36.ResumeLayout(False)
+        Me.Panel37.ResumeLayout(False)
+        Me.Panel38.ResumeLayout(False)
+        Me.Panel39.ResumeLayout(False)
+        Me.Panel20.ResumeLayout(False)
+        Me.Panel25.ResumeLayout(False)
+        Me.Panel26.ResumeLayout(False)
+        Me.Panel27.ResumeLayout(False)
+        Me.Panel28.ResumeLayout(False)
+        Me.Panel29.ResumeLayout(False)
+        Me.Panel18.ResumeLayout(False)
+        Me.Panel19.ResumeLayout(False)
+        Me.Panel11.ResumeLayout(False)
+        Me.Panel12.ResumeLayout(False)
+        Me.Panel8.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel48.ResumeLayout(False)
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PBRiskyPic, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel49.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -3062,4 +4715,124 @@ Partial Class FrmCardList
     Friend WithEvents Label21 As System.Windows.Forms.Label
     Friend WithEvents Label20 As System.Windows.Forms.Label
     Friend WithEvents CardRevealTimer As System.Windows.Forms.Timer
+    Friend WithEvents TabPage5 As System.Windows.Forms.TabPage
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents Panel7 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk1 As System.Windows.Forms.Button
+    Friend WithEvents Risk1 As System.Windows.Forms.Label
+    Friend WithEvents Panel11 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk4 As System.Windows.Forms.Button
+    Friend WithEvents Risk4 As System.Windows.Forms.Label
+    Friend WithEvents Panel12 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk3 As System.Windows.Forms.Button
+    Friend WithEvents Risk3 As System.Windows.Forms.Label
+    Friend WithEvents Panel8 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk2 As System.Windows.Forms.Button
+    Friend WithEvents Risk2 As System.Windows.Forms.Label
+    Friend WithEvents Panel18 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk6 As System.Windows.Forms.Button
+    Friend WithEvents Risk6 As System.Windows.Forms.Label
+    Friend WithEvents Panel19 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk5 As System.Windows.Forms.Button
+    Friend WithEvents Risk5 As System.Windows.Forms.Label
+    Friend WithEvents Panel40 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk24 As System.Windows.Forms.Button
+    Friend WithEvents Risk24 As System.Windows.Forms.Label
+    Friend WithEvents Panel41 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk23 As System.Windows.Forms.Button
+    Friend WithEvents Risk23 As System.Windows.Forms.Label
+    Friend WithEvents Panel42 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk22 As System.Windows.Forms.Button
+    Friend WithEvents Risk22 As System.Windows.Forms.Label
+    Friend WithEvents Panel43 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk21 As System.Windows.Forms.Button
+    Friend WithEvents Risk21 As System.Windows.Forms.Label
+    Friend WithEvents Panel45 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk20 As System.Windows.Forms.Button
+    Friend WithEvents Risk20 As System.Windows.Forms.Label
+    Friend WithEvents Panel46 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk19 As System.Windows.Forms.Button
+    Friend WithEvents Risk19 As System.Windows.Forms.Label
+    Friend WithEvents Panel30 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk18 As System.Windows.Forms.Button
+    Friend WithEvents Risk18 As System.Windows.Forms.Label
+    Friend WithEvents Panel31 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk17 As System.Windows.Forms.Button
+    Friend WithEvents Risk17 As System.Windows.Forms.Label
+    Friend WithEvents Panel36 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk16 As System.Windows.Forms.Button
+    Friend WithEvents Risk16 As System.Windows.Forms.Label
+    Friend WithEvents Panel37 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk15 As System.Windows.Forms.Button
+    Friend WithEvents Risk15 As System.Windows.Forms.Label
+    Friend WithEvents Panel38 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk14 As System.Windows.Forms.Button
+    Friend WithEvents Risk14 As System.Windows.Forms.Label
+    Friend WithEvents Panel39 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk13 As System.Windows.Forms.Button
+    Friend WithEvents Risk13 As System.Windows.Forms.Label
+    Friend WithEvents Panel20 As System.Windows.Forms.Panel
+    Friend WithEvents Risk12 As System.Windows.Forms.Label
+    Friend WithEvents Panel25 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk11 As System.Windows.Forms.Button
+    Friend WithEvents Risk11 As System.Windows.Forms.Label
+    Friend WithEvents Panel26 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk10 As System.Windows.Forms.Button
+    Friend WithEvents Risk10 As System.Windows.Forms.Label
+    Friend WithEvents Panel27 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk9 As System.Windows.Forms.Button
+    Friend WithEvents Risk9 As System.Windows.Forms.Label
+    Friend WithEvents Panel28 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk8 As System.Windows.Forms.Button
+    Friend WithEvents Risk8 As System.Windows.Forms.Label
+    Friend WithEvents Panel29 As System.Windows.Forms.Panel
+    Friend WithEvents BTNRisk7 As System.Windows.Forms.Button
+    Friend WithEvents Risk7 As System.Windows.Forms.Label
+    Friend WithEvents BTNRisk12 As System.Windows.Forms.Button
+    Friend WithEvents Panel47 As System.Windows.Forms.Panel
+    Friend WithEvents LBLRisk12 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk20 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk70 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk100 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk7 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk1 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk25 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk75 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk2 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk3 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk30 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk80 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk4 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk5 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk40 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk85 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk65 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk10 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk50 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk90 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk55 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk15 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk60 As System.Windows.Forms.Label
+    Friend WithEvents LBLRisk95 As System.Windows.Forms.Label
+    Friend WithEvents BTNRiskyPlay As System.Windows.Forms.Button
+    Friend WithEvents Panel48 As System.Windows.Forms.Panel
+    Friend WithEvents WBRiskyChat As System.Windows.Forms.WebBrowser
+    Friend WithEvents BTNPickIt As System.Windows.Forms.Button
+    Friend WithEvents BTNRiskIt As System.Windows.Forms.Button
+    Friend WithEvents PBRiskyPic As System.Windows.Forms.PictureBox
+    Friend WithEvents Panel49 As System.Windows.Forms.Panel
+    Friend WithEvents LBLPick6 As System.Windows.Forms.Label
+    Friend WithEvents LBLPick5 As System.Windows.Forms.Label
+    Friend WithEvents LBLPick4 As System.Windows.Forms.Label
+    Friend WithEvents LBLPick3 As System.Windows.Forms.Label
+    Friend WithEvents LBLPick2 As System.Windows.Forms.Label
+    Friend WithEvents LBLPick1 As System.Windows.Forms.Label
+    Friend WithEvents LblRiskType As System.Windows.Forms.Label
+    Friend WithEvents PictureBox4 As System.Windows.Forms.PictureBox
+    Friend WithEvents LBLRiskTokens As System.Windows.Forms.Label
+    Friend WithEvents TimerRiskyFlash As System.Windows.Forms.Timer
+    Friend WithEvents LblRiskMinPot As System.Windows.Forms.Label
+    Friend WithEvents LBLRiskMaxPot As System.Windows.Forms.Label
+    Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents Label23 As System.Windows.Forms.Label
 End Class

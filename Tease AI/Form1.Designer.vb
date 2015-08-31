@@ -121,6 +121,21 @@ Partial Class Form1
         Me.Contact3Timer = New System.Windows.Forms.Timer(Me.components)
         Me.UpdateStageTimer = New System.Windows.Forms.Timer(Me.components)
         Me.WMPTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.TeaseAINotify = New System.Windows.Forms.NotifyIcon(Me.components)
+        Me.TeaseAIMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.GamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SlotsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MatchGameToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RiskyPickToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExchangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CollectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MilovanaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenBetaThreadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BugReportThreadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WebteasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AllAndEverythingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -136,6 +151,7 @@ Partial Class Form1
         CType(Me.subAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PictureStrip.SuspendLayout()
         Me.PNLGlitter.SuspendLayout()
+        Me.TeaseAIMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'domName
@@ -884,6 +900,100 @@ Partial Class Form1
         '
         Me.WMPTimer.Interval = 1000
         '
+        'TeaseAINotify
+        '
+        Me.TeaseAINotify.ContextMenuStrip = Me.TeaseAIMenu
+        Me.TeaseAINotify.Icon = CType(resources.GetObject("TeaseAINotify.Icon"), System.Drawing.Icon)
+        Me.TeaseAINotify.Text = "Tease AI"
+        Me.TeaseAINotify.Visible = True
+        '
+        'TeaseAIMenu
+        '
+        Me.TeaseAIMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GamesToolStripMenuItem, Me.MilovanaToolStripMenuItem, Me.ToolStripMenuItem7, Me.ExitToolStripMenuItem})
+        Me.TeaseAIMenu.Name = "TeaseAIMenu"
+        Me.TeaseAIMenu.Size = New System.Drawing.Size(155, 114)
+        Me.TeaseAIMenu.Text = "Tease AI"
+        '
+        'GamesToolStripMenuItem
+        '
+        Me.GamesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SlotsToolStripMenuItem, Me.MatchGameToolStripMenuItem, Me.RiskyPickToolStripMenuItem, Me.ExchangeToolStripMenuItem, Me.CollectionToolStripMenuItem})
+        Me.GamesToolStripMenuItem.Name = "GamesToolStripMenuItem"
+        Me.GamesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GamesToolStripMenuItem.Text = "Games"
+        '
+        'SlotsToolStripMenuItem
+        '
+        Me.SlotsToolStripMenuItem.Name = "SlotsToolStripMenuItem"
+        Me.SlotsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SlotsToolStripMenuItem.Text = "Slots"
+        '
+        'MatchGameToolStripMenuItem
+        '
+        Me.MatchGameToolStripMenuItem.Name = "MatchGameToolStripMenuItem"
+        Me.MatchGameToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MatchGameToolStripMenuItem.Text = "Match Game"
+        '
+        'RiskyPickToolStripMenuItem
+        '
+        Me.RiskyPickToolStripMenuItem.Name = "RiskyPickToolStripMenuItem"
+        Me.RiskyPickToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RiskyPickToolStripMenuItem.Text = "Risky Pick"
+        '
+        'ExchangeToolStripMenuItem
+        '
+        Me.ExchangeToolStripMenuItem.Name = "ExchangeToolStripMenuItem"
+        Me.ExchangeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExchangeToolStripMenuItem.Text = "Exchange"
+        '
+        'CollectionToolStripMenuItem
+        '
+        Me.CollectionToolStripMenuItem.Name = "CollectionToolStripMenuItem"
+        Me.CollectionToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CollectionToolStripMenuItem.Text = "Collection"
+        '
+        'ToolStripMenuItem7
+        '
+        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
+        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(154, 22)
+        Me.ToolStripMenuItem7.Text = "________________"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'MilovanaToolStripMenuItem
+        '
+        Me.MilovanaToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenBetaThreadToolStripMenuItem, Me.BugReportThreadToolStripMenuItem, Me.WebteasesToolStripMenuItem, Me.AllAndEverythingToolStripMenuItem})
+        Me.MilovanaToolStripMenuItem.Name = "MilovanaToolStripMenuItem"
+        Me.MilovanaToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.MilovanaToolStripMenuItem.Text = "Milovana"
+        '
+        'OpenBetaThreadToolStripMenuItem
+        '
+        Me.OpenBetaThreadToolStripMenuItem.Name = "OpenBetaThreadToolStripMenuItem"
+        Me.OpenBetaThreadToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.OpenBetaThreadToolStripMenuItem.Text = "Open Beta Thread"
+        '
+        'BugReportThreadToolStripMenuItem
+        '
+        Me.BugReportThreadToolStripMenuItem.Name = "BugReportThreadToolStripMenuItem"
+        Me.BugReportThreadToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.BugReportThreadToolStripMenuItem.Text = "Bug Report Thread"
+        '
+        'WebteasesToolStripMenuItem
+        '
+        Me.WebteasesToolStripMenuItem.Name = "WebteasesToolStripMenuItem"
+        Me.WebteasesToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.WebteasesToolStripMenuItem.Text = "Webteases"
+        '
+        'AllAndEverythingToolStripMenuItem
+        '
+        Me.AllAndEverythingToolStripMenuItem.Name = "AllAndEverythingToolStripMenuItem"
+        Me.AllAndEverythingToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.AllAndEverythingToolStripMenuItem.Text = "Forum"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -940,6 +1050,7 @@ Partial Class Form1
         CType(Me.subAvatar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PictureStrip.ResumeLayout(False)
         Me.PNLGlitter.ResumeLayout(False)
+        Me.TeaseAIMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1041,5 +1152,20 @@ Partial Class Form1
     Friend WithEvents Contact3Timer As System.Windows.Forms.Timer
     Friend WithEvents UpdateStageTimer As System.Windows.Forms.Timer
     Friend WithEvents WMPTimer As System.Windows.Forms.Timer
+    Friend WithEvents TeaseAINotify As System.Windows.Forms.NotifyIcon
+    Friend WithEvents TeaseAIMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents GamesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SlotsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MatchGameToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RiskyPickToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExchangeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CollectionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem7 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MilovanaToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpenBetaThreadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BugReportThreadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents WebteasesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AllAndEverythingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

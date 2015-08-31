@@ -4,7 +4,7 @@ Imports System.IO
 
 Public Class frmApps
 
-
+    Public ResetFlag As Boolean
 
     Private Sub CLBExercise_DragLeave(sender As Object, e As System.EventArgs) Handles CLBExercise.DoubleClick
         CLBExercise.Items.Remove(CLBExercise.SelectedItem)
@@ -1092,6 +1092,9 @@ Public Class frmApps
         Form1.StopEverything()
         Form1.ResetButton()
 
+        ResetFlag = True
+        Form1.ResumeSession()
+
         If Form1.DomTypeCheck = False Then
             Form1.DomTask = "<b>Tease AI has been reset</b>"
             Form1.TypingDelayGeneric()
@@ -1104,35 +1107,39 @@ Public Class frmApps
 
     Private Sub Button29_Click_1(sender As System.Object, e As System.EventArgs) Handles Button29.Click
 
-        Dim ParseList As New List(Of String)
-        Dim NewLine As String
-        Dim NewLine2 As String
-        Dim SettingsString As String = ""
-        ParseList = Form1.Txt2List("G:\Temp\vars.txt")
 
-        For i As Integer = 0 To ParseList.Count - 1
-            Dim ParseSplit As String() = ParseList(i).Split(":")
-            'For j As Integer = 0 To ParseSplit.Count - 1
-            'Debug.Print(j & " " & ParseSplit(j))
-            'Next
-            Dim dafuq As String = ParseSplit(1)
-            Dim ParseSplit2 As String() = ParseSplit(1).Split
-            For j As Integer = 0 To ParseSplit2.Count - 1
-                Debug.Print(j & " " & ParseSplit2(j))
-            Next
-            'FrmSettings.dompersonalityComboBox.Text = SettingsList(0).Replace("Personality: ", "")
-            Dim CurVar As String = ParseSplit2(1).Replace(" ", "")
-            'Dim NewLine As String = "SettingsList.Add(""" & CurVar & ": "" & " & CurVar & ")"
-            NewLine = CurVar & " = SettingsList("
-            NewLine2 = ").Replace(""" & CurVar & ": "", """")"
-            ParseList(i) = NewLine
-            'Next
 
-            'For i As Integer = 0 To ParseList.Count - 1
-            SettingsString = SettingsString & NewLine & i & NewLine2
-            If i <> ParseList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-        Next
-        My.Computer.FileSystem.WriteAllText("G:\Temp\NewVars.txt", SettingsString, False)
+
+        Form1.GetBlogImageTest()
+
+
+
+
+        '###ParseList
+
+        'Dim ParseList As New List(Of String)
+        'Dim NewLine As String
+        'Dim NewLine2 As String
+        'Dim SettingsString As String = ""
+        'ParseList = Form1.Txt2List("G:\Temp\vars.txt")
+
+        'For i As Integer = 0 To ParseList.Count - 1
+        'Dim ParseSplit As String() = ParseList(i).Split(":")
+        'Dim dafuq As String = ParseSplit(1)
+        'Dim ParseSplit2 As String() = ParseSplit(1).Split
+        'For j As Integer = 0 To ParseSplit2.Count - 1
+        'Debug.Print(j & " " & ParseSplit2(j))
+        'Next
+        'Dim CurVar As String = ParseSplit2(1).Replace(" ", "")
+        'NewLine = CurVar & " = SettingsList("
+        'NewLine2 = ").Replace(""" & CurVar & ": "", """")"
+        'ParseList(i) = NewLine
+        'SettingsString = SettingsString & NewLine & i & NewLine2
+        'If i <> ParseList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+        'Next
+        'My.Computer.FileSystem.WriteAllText("G:\Temp\NewVars.txt", SettingsString, False)
+        '### ParseList
+
 
     End Sub
 
@@ -1155,6 +1162,7 @@ Public Class frmApps
         Try
             Form1.SuspendSession()
         Catch
+            MessageBox.Show(Me, "An error occurred and the state did not save correctly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
         End Try
 
         MessageBox.Show(Me, "Session state has been saved successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)

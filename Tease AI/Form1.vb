@@ -436,6 +436,12 @@ Public Class Form1
     Dim VidFile As String
 
 
+    Public RiskyDeal As Boolean
+    Public RiskyDelay As Boolean
+
+    Public TempGif As Image
+    Dim original As Image
+    Dim resized As Image
 
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -453,7 +459,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
   
 
-
+    
            
 
 
@@ -463,10 +469,33 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 
+        mainPictureBox.Image = Nothing
+        Debug.Print("Here?")
+
+        'mainPictureBox.Image.Dispose()
+
+
+
+        'TempGif.Dispose()
+        'original.Dispose()
+        'resized.Dispose()
+
+        Try
+            GC.Collect()
+        Catch
+        End Try
+
+
+
         If File.Exists(Application.StartupPath & "\System\Metronome") Then
             File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
         End If
+
+        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        End If
+
 
         Try
             For Each prog As Process In Process.GetProcesses
@@ -520,8 +549,20 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         End
 
+        TeaseAINotify.Visible = False
+        TeaseAINotify.Icon = Nothing
+        TeaseAINotify.Dispose()
 
 
+        System.Windows.Forms.Application.DoEvents()
+
+    End Sub
+
+    Protected Overrides Sub OnClosing(ByVal e As System.ComponentModel.CancelEventArgs)
+
+        TeaseAINotify.Visible = False
+
+        TeaseAINotify.Dispose()
 
     End Sub
 
@@ -533,6 +574,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
     Private Sub Form1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 
         Debug.Print("Form 2 Opened")
+
+      
 
         FormLoading = True
 
@@ -1190,9 +1233,25 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined.ToString()
 
         If CompareDates(My.Settings.DateStamp) <> 0 Then
-            MessageBox.Show(Me, "You've received 5 Bronze tokens!", "Daily Login Bonus", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            Dim LoginChance As Integer = randomizer.Next(1, 101)
+            Dim LoginAmt As Integer
+
+            If LoginChance = 100 Then LoginAmt = 100
+            If LoginChance < 100 Then LoginAmt = 50
+            If LoginChance < 91 Then LoginAmt = 25
+            If LoginChance < 76 Then LoginAmt = 10
+            If LoginChance < 51 Then LoginAmt = 5
+
+
+
+            TeaseAINotify.BalloonTipText = "Tease AI daily login bonus:" & Environment.NewLine & Environment.NewLine & "You've received " & LoginAmt & " tokens!"
+            TeaseAINotify.Text = "Tease AI"
+            TeaseAINotify.ShowBalloonTip(5000)
+
+            'MessageBox.Show(Me, "You've received 5 Bronze tokens!", "Daily Login Bonus", MessageBoxButtons.OK, MessageBoxIcon.Information)
             My.Settings.DateStamp = FormatDateTime(Now, DateFormat.ShortDate)
-            BronzeTokens += 5
+            BronzeTokens += LoginAmt
             SaveTokens()
         End If
 
@@ -1266,6 +1325,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End If
 
         WMPTimer.Start()
+
+        frmApps.ResetFlag = True
+        SuspendSession()
 
         FormLoading = False
 
@@ -1357,6 +1419,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sendButton.Click
 
+
+
+        
+
         Dim CheckSpace As String = chatBox.Text
 
         CheckSpace = CheckSpace.Replace(" ", "")
@@ -1387,7 +1453,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             While ChatText.ReadyState <> WebBrowserReadyState.Complete
                 Application.DoEvents()
             End While
-          ScrollChatDown()
+            ScrollChatDown()
 
             chatBox.Text = ""
 
@@ -1417,7 +1483,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             While ChatText.ReadyState <> WebBrowserReadyState.Complete
                 Application.DoEvents()
             End While
-           ScrollChatDown()
+            ScrollChatDown()
 
 
         Else
@@ -1429,7 +1495,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             While ChatText.ReadyState <> WebBrowserReadyState.Complete
                 Application.DoEvents()
             End While
-         ScrollChatDown()
+            ScrollChatDown()
 
         End If
 
@@ -1462,7 +1528,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             ChatText.Width = 839
         End If
 
-       ScrollChatDown()
+        ScrollChatDown()
 
         If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
 
@@ -1472,7 +1538,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             While ChatText.ReadyState <> WebBrowserReadyState.Complete
                 Application.DoEvents()
             End While
-          ScrollChatDown()
+            ScrollChatDown()
         End If
 
 
@@ -1565,7 +1631,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
                     SaidHello = True
                     BeforeTease = True
-                    
+
 
 
                     If FrmSettings.CBTeaseLengthDD.Checked = True Then
@@ -3514,6 +3580,8 @@ AcceptAnswer:
         If CensorshipGame = True Or RLGLGame = True Or AvoidTheEdgeStroking = True Or SubEdging = True Or SubHoldingEdge = True Then Return
         'If SearchImageBlog = True Then Return
 
+        If RiskyDelay = True Then Return
+
         'Debug.Print("RunFileText " & StrokeTauntVal)
 
         StrokeTauntVal += 1
@@ -4116,7 +4184,7 @@ SkipGotoSearch:
             Else
                 Timer1.Stop()
                 'Debug.Print("NullCommand DomTask = " & DomTask)
-               
+                If RiskyDeal = True Then FrmCardList.LblRiskType.Visible = True
                 If NullResponse = False Then
                     IsTyping = True
                     Dim TypingName As String = domName.Text
@@ -4151,6 +4219,7 @@ SkipGotoSearch:
                 TypeToggle = 0
                 Timer1.Stop()
                 IsTyping = False
+                If RiskyDeal = True Then FrmCardList.LblRiskType.Visible = False
 
                 PictureStrip.Items(0).Enabled = False
                 PictureStrip.Items(1).Enabled = False
@@ -4376,6 +4445,8 @@ NullResponse:
 
                 'SaveBlogImage.Text = ""
 
+                'If RiskyDeal = True Then Me.Focus()
+
                 Do
                     DomTask = PoundClean(DomTask)
                     DomTask = CommandClean(DomTask)
@@ -4466,6 +4537,10 @@ NullResponse:
                         End While
                         ScrollChatDown()
 
+                        If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
+                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomTask & "<br></font></body>"
+
+
                     Else
 
 
@@ -4482,6 +4557,9 @@ NullResponse:
                             Application.DoEvents()
                         End While
                         ScrollChatDown()
+
+                        If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
+                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomTask & "<br></font></body>"
 
                     End If
 
@@ -4539,7 +4617,12 @@ NullResponse:
 
                     Try
                         'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
-                        mainPictureBox.Image = Image.FromFile(DomPic)
+                        If RiskyDeal = True Then
+                            FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
+                        Else
+                            mainPictureBox.Image = Image.FromFile(DomPic)
+                        End If
+
                         ShowImageInfo()
                     Catch
                         ' GoTo TryNextWithTease
@@ -4671,7 +4754,14 @@ NoResponse:
                 If YesOrNo = False Then
                     ScriptTick = randomizer.Next(4, 9)
                     If RapidFire = True Then ScriptTick = 1
+                    If RiskyDeal = True Then ScriptTick = 2
                     ScriptTimer.Start()
+                End If
+
+                If YesOrNo = True And RiskyDeal = True Then
+                    FrmCardList.BTNPickIt.Visible = True
+                    FrmCardList.BTNRiskIt.Visible = True
+                    FrmCardList.ClearCaseLabelsOffer()
                 End If
 
                 GotoFlag = False
@@ -4774,7 +4864,10 @@ NoResponse:
             If TypeDelay > 0 Then
                 TypeDelay -= 1
             Else
+
                 SendTimer.Stop()
+
+                If RiskyDeal = True Then FrmCardList.LblRiskType.Visible = True
                 IsTyping = True
                 Dim TypingName As String = domName.Text
                 If DomChat.Contains("@Contact1") Then TypingName = FrmSettings.TBGlitter1.Text
@@ -4804,6 +4897,8 @@ NoResponse:
                 TypeToggle = 0
                 SendTimer.Stop()
                 IsTyping = False
+
+                If RiskyDeal = True Then FrmCardList.LblRiskType.Visible = False
 
 NullResponseLine:
 
@@ -5082,6 +5177,9 @@ TryNextWithTease:
                     End While
                     ScrollChatDown()
 
+                    If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
+              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomTask & "<br></font></body>"
+
                 Else
 
 
@@ -5093,6 +5191,9 @@ TryNextWithTease:
                         Application.DoEvents()
                     End While
                     ScrollChatDown()
+
+                    If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
+              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomTask & "<br></font></body>"
 
                 End If
 
@@ -5232,6 +5333,7 @@ NullResponseLine2:
 
                 If YesOrNo = False And Responding = False Then
                     ScriptTick = randomizer.Next(4, 9)
+                    If RiskyDeal = True Then ScriptTick = 2
                     ScriptTimer.Start()
                 End If
 
@@ -7904,6 +8006,20 @@ StatusUpdateEnd:
         'PreCleanString = PreCleanString.Remove(0, 2)
         'End If
         'End If
+
+
+        StringClean = StringClean.Replace("#RP_ChosenCase", FrmCardList.RiskyPickNumber)
+        StringClean = StringClean.Replace("#RP_RespondCase", FrmCardList.RiskyResponse)
+        'StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.RiskyCase)
+        If FrmCardList.RiskyPickCount = 0 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick1.Text)
+        If FrmCardList.RiskyPickCount = 1 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick2.Text)
+        If FrmCardList.RiskyPickCount = 2 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick3.Text)
+        If FrmCardList.RiskyPickCount = 3 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick4.Text)
+        If FrmCardList.RiskyPickCount = 4 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick5.Text)
+        If FrmCardList.RiskyPickCount = 5 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick6.Text)
+        StringClean = StringClean.Replace("#RP_EdgeOffer", FrmCardList.RiskyEdgeOffer)
+        StringClean = StringClean.Replace("#RP_TokenOffer", FrmCardList.RiskyTokenOffer)
+
 
         Return StringClean
 
@@ -11272,6 +11388,64 @@ VTSkip:
         End If
 
 
+        If StringClean.Contains("@PlayRiskyPick") Then
+            RiskyDeal = True
+            'FrmCardList.RiskyRound += 1
+            FrmCardList.InitializeRiskyDeal()
+            StringClean = StringClean.Replace("@PlayRiskyPick", "")
+            'Debug.Print("NullResponse Called")
+        End If
+
+        If StringClean.Contains("@ChooseRiskyPick") Then
+            RiskyDelay = True
+            If FrmCardList.BTNRisk1.Text <> "" Then FrmCardList.BTNRisk1.Enabled = True
+            If FrmCardList.BTNRisk2.Text <> "" Then FrmCardList.BTNRisk2.Enabled = True
+            If FrmCardList.BTNRisk3.Text <> "" Then FrmCardList.BTNRisk3.Enabled = True
+            If FrmCardList.BTNRisk4.Text <> "" Then FrmCardList.BTNRisk4.Enabled = True
+            If FrmCardList.BTNRisk5.Text <> "" Then FrmCardList.BTNRisk5.Enabled = True
+            If FrmCardList.BTNRisk6.Text <> "" Then FrmCardList.BTNRisk6.Enabled = True
+            If FrmCardList.BTNRisk7.Text <> "" Then FrmCardList.BTNRisk7.Enabled = True
+            If FrmCardList.BTNRisk8.Text <> "" Then FrmCardList.BTNRisk8.Enabled = True
+            If FrmCardList.BTNRisk9.Text <> "" Then FrmCardList.BTNRisk9.Enabled = True
+            If FrmCardList.BTNRisk10.Text <> "" Then FrmCardList.BTNRisk10.Enabled = True
+
+            If FrmCardList.BTNRisk11.Text <> "" Then FrmCardList.BTNRisk11.Enabled = True
+            If FrmCardList.BTNRisk12.Text <> "" Then FrmCardList.BTNRisk12.Enabled = True
+            If FrmCardList.BTNRisk13.Text <> "" Then FrmCardList.BTNRisk13.Enabled = True
+            If FrmCardList.BTNRisk14.Text <> "" Then FrmCardList.BTNRisk14.Enabled = True
+            If FrmCardList.BTNRisk15.Text <> "" Then FrmCardList.BTNRisk15.Enabled = True
+            If FrmCardList.BTNRisk16.Text <> "" Then FrmCardList.BTNRisk16.Enabled = True
+            If FrmCardList.BTNRisk17.Text <> "" Then FrmCardList.BTNRisk17.Enabled = True
+            If FrmCardList.BTNRisk18.Text <> "" Then FrmCardList.BTNRisk18.Enabled = True
+            If FrmCardList.BTNRisk19.Text <> "" Then FrmCardList.BTNRisk19.Enabled = True
+            If FrmCardList.BTNRisk20.Text <> "" Then FrmCardList.BTNRisk20.Enabled = True
+
+            If FrmCardList.BTNRisk21.Text <> "" Then FrmCardList.BTNRisk21.Enabled = True
+            If FrmCardList.BTNRisk22.Text <> "" Then FrmCardList.BTNRisk22.Enabled = True
+            If FrmCardList.BTNRisk23.Text <> "" Then FrmCardList.BTNRisk23.Enabled = True
+            If FrmCardList.BTNRisk24.Text <> "" Then FrmCardList.BTNRisk24.Enabled = True
+
+            FrmCardList.RiskyChoiceCount = 0
+            FrmCardList.RiskyRound += 1
+            FrmCardList.RiskyPickCount = 0
+            FrmCardList.RiskyChoices.Clear()
+            'FrmCardList.Show()
+            'FrmCardList.TCGames.SelectTab(4)
+            'FrmCardList.Focus()
+
+            StringClean = StringClean.Replace("@ChooseRiskyPick", "")
+            'Debug.Print("NullResponse Called")
+        End If
+
+
+        If StringClean.Contains("@CheckRiskyPick") Then
+            'FrmCardList.Focus()
+            FrmCardList.CheckRiskyPick()
+            StringClean = StringClean.Replace("@CheckRiskyPick", "")
+            'Debug.Print("NullResponse Called")
+        End If
+
+
         Return StringClean
 
     End Function
@@ -14551,6 +14725,7 @@ VTSkip:
 
 
         ClearMainPictureBox()
+
         mainPictureBox.Load(FoundString)
         ShowImageInfo()
         
@@ -14961,12 +15136,38 @@ AlreadySeen:
         ClearMainPictureBox()
 
 
-
+        
 
         Try
 
             JustShowedBlogImage = True
-            mainPictureBox.Load(FoundString)
+
+            If UCase(FoundString).Contains(".GIF") Then
+
+                If FoundString.Contains("\") Then
+                    TempGif = Image.FromFile(FoundString)
+                End If
+
+                If FoundString.Contains("/") Then
+                    mainPictureBox.Image.Dispose()
+                    mainPictureBox.Image = Nothing
+                    If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+                        My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+                    End If
+                    My.Computer.Network.DownloadFile(FoundString, Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+                    TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+                End If
+                mainPictureBox.Image = TempGif
+            Else
+
+                mainPictureBox.Load(FoundString)
+                TempGif.Dispose()
+                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+                End If
+            End If
+
+
             mainPictureBox.Refresh()
             ShowImageInfo()
 
@@ -14987,6 +15188,12 @@ AlreadySeen:
 
             End If
 
+            Try
+                GC.Collect()
+            Catch ex As Exception
+
+            End Try
+
             PictureStrip.Items(0).Enabled = True
             PictureStrip.Items(1).Enabled = True
             PictureStrip.Items(2).Enabled = True
@@ -15002,6 +15209,27 @@ AlreadySeen:
 
 
     End Sub
+
+    Public Sub GetBlogImageTest()
+
+        Dim TempURL As String = "http://38.media.tumblr.com/edb7f636b5cb0fe60b58bcede48207c0/tumblr_nrye15neo21u4yrcfo1_500.gif"
+        mainPictureBox.Image.Dispose()
+        mainPictureBox.Image = Nothing
+
+        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        End If
+        My.Computer.Network.DownloadFile(TempURL, Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        mainPictureBox.Image = TempGif
+        'Dim TempGif As New Image.fromfile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'Image(TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif"))
+
+        'Dim TempGif As Bitmap = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'mainPictureBox.Image = TempGif
+
+    End Sub
+
 
     Public Sub GetLocalImage()
 
@@ -15083,9 +15311,43 @@ AlreadySeen:
 
         ClearMainPictureBox()
 
+        ' ### 0000000000000000000
+
+        If UCase(FoundString).Contains(".GIF") Then
+
+            Debug.Print("GIF Found")
+
+            If FoundString.Contains("\") Then
+                TempGif = Image.FromFile(FoundString)
+            End If
+
+            If FoundString.Contains("/") Then
+                mainPictureBox.Image.Dispose()
+                mainPictureBox.Image = Nothing
+
+                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+                End If
+                My.Computer.Network.DownloadFile(FoundString, Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+                TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+            End If
+
+            mainPictureBox.Image = TempGif
+        Else
+            Debug.Print("Gif Not found")
+            mainPictureBox.Load(FoundString)
+            TempGif.Dispose()
+            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+            End If
+        End If
 
 
-        mainPictureBox.Load(FoundString)
+        Try
+            GC.Collect()
+        Catch
+        End Try
+        'mainPictureBox.Load(FoundString)
         ShowImageInfo()
       
 
@@ -17531,12 +17793,19 @@ TryNext:
         FrmCardList.GoldN5.Text = FrmSettings.GN5.Text
         FrmCardList.GoldN6.Text = FrmSettings.GN6.Text
 
-        FrmCardList.GoldP1.Load(My.Settings.GP1)
-        FrmCardList.GoldP2.Load(My.Settings.GP2)
-        FrmCardList.GoldP3.Load(My.Settings.GP3)
-        FrmCardList.GoldP4.Load(My.Settings.GP4)
-        FrmCardList.GoldP5.Load(My.Settings.GP5)
-        FrmCardList.GoldP6.Load(My.Settings.GP6)
+        FrmCardList.GoldP1.Image = Image.FromFile(My.Settings.GP1)
+        FrmCardList.GoldP2.Image = Image.FromFile(My.Settings.GP2)
+        FrmCardList.GoldP3.Image = Image.FromFile(My.Settings.GP3)
+        FrmCardList.GoldP4.Image = Image.FromFile(My.Settings.GP4)
+        FrmCardList.GoldP5.Image = Image.FromFile(My.Settings.GP5)
+        FrmCardList.GoldP6.Image = Image.FromFile(My.Settings.GP6)
+
+        'FrmCardList.GoldP1.Load(My.Settings.GP1)
+        'FrmCardList.GoldP2.Load(My.Settings.GP2)
+        'FrmCardList.GoldP3.Load(My.Settings.GP3)
+        'FrmCardList.GoldP4.Load(My.Settings.GP4)
+        'FrmCardList.GoldP5.Load(My.Settings.GP5)
+        'FrmCardList.GoldP6.Load(My.Settings.GP6)
 
         FrmCardList.SilverN1.Text = FrmSettings.SN1.Text
         FrmCardList.SilverN2.Text = FrmSettings.SN2.Text
@@ -17545,12 +17814,21 @@ TryNext:
         FrmCardList.SilverN5.Text = FrmSettings.SN5.Text
         FrmCardList.SilverN6.Text = FrmSettings.SN6.Text
 
-        FrmCardList.SilverP1.Load(My.Settings.SP1)
-        FrmCardList.SilverP2.Load(My.Settings.SP2)
-        FrmCardList.SilverP3.Load(My.Settings.SP3)
-        FrmCardList.SilverP4.Load(My.Settings.SP4)
-        FrmCardList.SilverP5.Load(My.Settings.SP5)
-        FrmCardList.SilverP6.Load(My.Settings.SP6)
+
+        FrmCardList.SilverP1.Image = Image.FromFile(My.Settings.SP1)
+        FrmCardList.SilverP2.Image = Image.FromFile(My.Settings.SP2)
+        FrmCardList.SilverP3.Image = Image.FromFile(My.Settings.SP3)
+        FrmCardList.SilverP4.Image = Image.FromFile(My.Settings.SP4)
+        FrmCardList.SilverP5.Image = Image.FromFile(My.Settings.SP5)
+        FrmCardList.SilverP6.Image = Image.FromFile(My.Settings.SP6)
+
+
+        'FrmCardList.SilverP1.Load(My.Settings.SP1)
+        'FrmCardList.SilverP2.Load(My.Settings.SP2)
+        'FrmCardList.SilverP3.Load(My.Settings.SP3)
+        'FrmCardList.SilverP4.Load(My.Settings.SP4)
+        'FrmCardList.SilverP5.Load(My.Settings.SP5)
+        'FrmCardList.SilverP6.Load(My.Settings.SP6)
 
         FrmCardList.BronzeN1.Text = FrmSettings.BN1.Text
         FrmCardList.BronzeN2.Text = FrmSettings.BN2.Text
@@ -17559,12 +17837,18 @@ TryNext:
         FrmCardList.BronzeN5.Text = FrmSettings.BN5.Text
         FrmCardList.BronzeN6.Text = FrmSettings.BN6.Text
 
-        FrmCardList.BronzeP1.Load(My.Settings.BP1)
-        FrmCardList.BronzeP2.Load(My.Settings.BP2)
-        FrmCardList.BronzeP3.Load(My.Settings.BP3)
-        FrmCardList.BronzeP4.Load(My.Settings.BP4)
-        FrmCardList.BronzeP5.Load(My.Settings.BP5)
-        FrmCardList.BronzeP6.Load(My.Settings.BP6)
+        'FrmCardList.BronzeP1.Load(My.Settings.BP1)
+        FrmCardList.BronzeP1.Image = Image.FromFile(My.Settings.BP1)
+        FrmCardList.BronzeP2.Image = Image.FromFile(My.Settings.BP2)
+        FrmCardList.BronzeP3.Image = Image.FromFile(My.Settings.BP3)
+        FrmCardList.BronzeP4.Image = Image.FromFile(My.Settings.BP4)
+        FrmCardList.BronzeP5.Image = Image.FromFile(My.Settings.BP5)
+        FrmCardList.BronzeP6.Image = Image.FromFile(My.Settings.BP6)
+        'FrmCardList.BronzeP2.Load(My.Settings.BP2)
+        'FrmCardList.BronzeP3.Load(My.Settings.BP3)
+        'FrmCardList.BronzeP4.Load(My.Settings.BP4)
+        'FrmCardList.BronzeP5.Load(My.Settings.BP5)
+        'FrmCardList.BronzeP6.Load(My.Settings.BP6)
 
 
 
@@ -18376,6 +18660,7 @@ TryNext:
         If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
         mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+        If RiskyDeal = True Then FrmCardList.PBRiskyPic.Image = Image.FromFile(_ImageFileNames(FileCount))
         ShowImageInfo()
 
         If FrmSettings.landscapeCheckBox.Checked = True Then
@@ -18455,7 +18740,7 @@ TryNext:
         Try
 
             'mainPictureBox.Image.Dispose()
-            'mainPictureBox.Image = Nothing
+            mainPictureBox.Image = Nothing
             GC.Collect()
 
         Catch ex As Exception
@@ -18548,8 +18833,9 @@ TryNext:
 
         ImageString = CustomSlideshowList(randomizer.Next(0, CustomSlideshowList.Count))
 
-        Dim original As Image = Image.FromFile(ImageString)
-        Dim resized As Image = ResizeImage(original, New Size(mainPictureBox.Width, mainPictureBox.Height))
+
+        original = Image.FromFile(ImageString)
+        resized = ResizeImage(original, New Size(mainPictureBox.Width, mainPictureBox.Height))
 
         mainPictureBox.Image = resized
 
@@ -19210,7 +19496,18 @@ TryNext:
             If i <> SettingsList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
         Next
 
-        My.Computer.FileSystem.WriteAllText(SettingsPath & "SavedState.txt", SettingsString, False)
+        Dim ResumeState As String
+        Dim ResumePrefix As String
+
+        If frmApps.ResetFlag = False Then
+            ResumeState = "SavedState.txt"
+            ResumePrefix = "Sus"
+        Else
+            ResumeState = "ResetState.txt"
+            ResumePrefix = "Res"
+        End If
+
+        My.Computer.FileSystem.WriteAllText(SettingsPath & ResumeState, SettingsString, False)
 
         If PlaylistFile.Count > 0 Then
             SettingsString = ""
@@ -19218,9 +19515,9 @@ TryNext:
                 SettingsString = SettingsString & PlaylistFile(i)
                 If i <> PlaylistFile.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusPlayListFile.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "PlayListFile.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusPlayListFile.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusPlayListFile.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "PlayListFile.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "PlayListFile.txt")
         End If
 
         If TauntLines.Count > 0 Then
@@ -19229,9 +19526,9 @@ TryNext:
                 SettingsString = SettingsString & TauntLines(i)
                 If i <> TauntLines.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusTauntLines.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "TauntLines.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusTauntLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusTauntLines.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "TauntLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "TauntLines.txt")
         End If
 
         If _ImageFileNames.Count > 0 Then
@@ -19240,9 +19537,9 @@ TryNext:
                 SettingsString = SettingsString & _ImageFileNames(i)
                 If i <> _ImageFileNames.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "Sus_ImageFileNames.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "_ImageFileNames.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "Sus_ImageFileNames.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "Sus_ImageFileNames.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "_ImageFileNames.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "_ImageFileNames.txt")
         End If
 
         If RecentSlideshows.Count > 0 Then
@@ -19251,9 +19548,9 @@ TryNext:
                 SettingsString = SettingsString & RecentSlideshows(i)
                 If i <> RecentSlideshows.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusRecentSlideshows.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "RecentSlideshows.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusRecentSlideshows.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusRecentSlideshows.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "RecentSlideshows.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "RecentSlideshows.txt")
         End If
 
         If LocalTagImageList.Count > 0 Then
@@ -19262,9 +19559,9 @@ TryNext:
                 SettingsString = SettingsString & LocalTagImageList(i)
                 If i <> LocalTagImageList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusLocalTagImageList.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "LocalTagImageList.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusLocalTagImageList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusLocalTagImageList.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "LocalTagImageList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "LocalTagImageList.txt")
         End If
 
         If WebImageLines.Count > 0 Then
@@ -19273,9 +19570,9 @@ TryNext:
                 SettingsString = SettingsString & WebImageLines(i)
                 If i <> WebImageLines.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusWebImageLines.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "WebImageLines.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusWebImageLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusWebImageLines.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "WebImageLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "WebImageLines.txt")
         End If
 
         If TnAList.Count > 0 Then
@@ -19284,9 +19581,9 @@ TryNext:
                 SettingsString = SettingsString & TnAList(i)
                 If i <> TnAList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusTnAList.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "TnAList.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusTnAList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusTnAList.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "TnAList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "TnAList.txt")
         End If
 
         If BoobList.Count > 0 Then
@@ -19295,9 +19592,9 @@ TryNext:
                 SettingsString = SettingsString & BoobList(i)
                 If i <> BoobList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusBoobList.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "BoobList.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusBoobList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusBoobList.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "BoobList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "BoobList.txt")
         End If
 
         If AssList.Count > 0 Then
@@ -19306,9 +19603,9 @@ TryNext:
                 SettingsString = SettingsString & AssList(i)
                 If i <> AssList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusAssList.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "AssList.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusAssList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusAssList.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "AssList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "AssList.txt")
         End If
 
         If UpdateList.Count > 0 Then
@@ -19317,9 +19614,9 @@ TryNext:
                 SettingsString = SettingsString & UpdateList(i)
                 If i <> UpdateList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusUpdateList.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "UpdateList.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusUpdateList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusUpdateList.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "UpdateList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "UpdateList.txt")
         End If
 
         If CustomSlideshowList.Count > 0 Then
@@ -19328,9 +19625,9 @@ TryNext:
                 SettingsString = SettingsString & CustomSlideshowList(i)
                 If i <> CustomSlideshowList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusCustomSlideshowList.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "CustomSlideshowList.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusCustomSlideshowList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusCustomSlideshowList.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "CustomSlideshowList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "CustomSlideshowList.txt")
         End If
 
         If Contact1Pics.Count > 0 Then
@@ -19339,9 +19636,9 @@ TryNext:
                 SettingsString = SettingsString & Contact1Pics(i)
                 If i <> Contact1Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusContact1Pics.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "Contact1Pics.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusContact1Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusContact1Pics.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "Contact1Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "Contact1Pics.txt")
         End If
 
         If Contact2Pics.Count > 0 Then
@@ -19350,9 +19647,9 @@ TryNext:
                 SettingsString = SettingsString & Contact2Pics(i)
                 If i <> Contact2Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusContact2Pics.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "Contact2Pics.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusContact2Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusContact2Pics.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "Contact2Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "Contact2Pics.txt")
         End If
 
         If Contact3Pics.Count > 0 Then
@@ -19361,12 +19658,12 @@ TryNext:
                 SettingsString = SettingsString & Contact3Pics(i)
                 If i <> Contact3Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
             Next
-            My.Computer.FileSystem.WriteAllText(SettingsPath & "SusContact3Pics.txt", SettingsString, False)
+            My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "Contact3Pics.txt", SettingsString, False)
         Else
-            If File.Exists(SettingsPath & "SusContact3Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & "SusContact3Pics.txt")
+            If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "Contact3Pics.txt")
         End If
 
-
+        frmApps.ResetFlag = False
 
 
     End Sub
@@ -19376,15 +19673,26 @@ TryNext:
         Dim SettingsPath As String = Application.StartupPath & "\System\"
         Dim SettingsList As New List(Of String)
 
+        Dim ResumeState As String
+        Dim ResumePrefix As String
+
+        If frmApps.ResetFlag = False Then
+            ResumeState = "SavedState.txt"
+            ResumePrefix = "Sus"
+        Else
+            ResumeState = "ResetState.txt"
+            ResumePrefix = "Res"
+        End If
+
         Try
-            Dim SettingsReader As New StreamReader(Application.StartupPath & "\System\" & "SavedState.txt")
+            Dim SettingsReader As New StreamReader(Application.StartupPath & "\System\" & ResumeState)
             While SettingsReader.Peek <> -1
                 SettingsList.Add(SettingsReader.ReadLine())
             End While
             SettingsReader.Close()
             SettingsReader.Dispose()
         Catch ex As Exception
-            MessageBox.Show(Me, "SavedState.txt could not be read!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            MessageBox.Show(Me, ResumeState & " could not be read!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             Return
         End Try
 
@@ -19719,20 +20027,22 @@ TryNext:
 
         ' WMPLib.WMPPlayState.wmppsStopped)
 
-        If File.Exists(SettingsPath & "SusPlayListFile.txt") Then PlaylistFile = Txt2List(SettingsPath & "SusPlayListFile.txt")
-        If File.Exists(SettingsPath & "SusTauntLines.txt") Then TauntLines = Txt2List(SettingsPath & "SusTauntLines.txt")
-        If File.Exists(SettingsPath & "Sus_ImageFileNames.txt") Then _ImageFileNames = Txt2List(SettingsPath & "Sus_ImageFileNames.txt")
-        If File.Exists(SettingsPath & "SusRecentSlideshows.txt") Then RecentSlideshows = Txt2List(SettingsPath & "SusRecentSlideshows.txt")
-        If File.Exists(SettingsPath & "SusLocalTagImageList.txt") Then LocalTagImageList = Txt2List(SettingsPath & "SusLocalTagImageList.txt")
-        If File.Exists(SettingsPath & "SusWebImageLines.txt") Then WebImageLines = Txt2List(SettingsPath & "SusWebImageLines.txt")
-        If File.Exists(SettingsPath & "SusTnAList.txt") Then TnAList = Txt2List(SettingsPath & "SusTnAList.txt")
-        If File.Exists(SettingsPath & "SusBoobList.txt") Then BoobList = Txt2List(SettingsPath & "SusBoobList.txt")
-        If File.Exists(SettingsPath & "SusAssList.txt") Then AssList = Txt2List(SettingsPath & "SusAssList.txt")
-        If File.Exists(SettingsPath & "SusUpdateList.txt") Then UpdateList = Txt2List(SettingsPath & "SusUpdateList.txt")
-        If File.Exists(SettingsPath & "SusCustomSlideshowList.txt") Then CustomSlideshowList = Txt2List(SettingsPath & "SusCustomSlideshowList.txt")
-        If File.Exists(SettingsPath & "SusContact1Pics.txt") Then Contact1Pics = Txt2List(SettingsPath & "SusContact1Pics.txt")
-        If File.Exists(SettingsPath & "SusContact2Pics.txt") Then Contact2Pics = Txt2List(SettingsPath & "SusContact2Pics.txt")
-        If File.Exists(SettingsPath & "SusContact3Pics.txt") Then Contact3Pics = Txt2List(SettingsPath & "Contact3Pics.txt")
+
+
+        If File.Exists(SettingsPath & ResumePrefix & "PlayListFile.txt") Then PlaylistFile = Txt2List(SettingsPath & ResumePrefix & "PlayListFile.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "TauntLines.txt") Then TauntLines = Txt2List(SettingsPath & ResumePrefix & "TauntLines.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "_ImageFileNames.txt") Then _ImageFileNames = Txt2List(SettingsPath & ResumePrefix & "_ImageFileNames.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "RecentSlideshows.txt") Then RecentSlideshows = Txt2List(SettingsPath & ResumePrefix & "RecentSlideshows.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "LocalTagImageList.txt") Then LocalTagImageList = Txt2List(SettingsPath & ResumePrefix & "LocalTagImageList.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "WebImageLines.txt") Then WebImageLines = Txt2List(SettingsPath & ResumePrefix & "WebImageLines.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "TnAList.txt") Then TnAList = Txt2List(SettingsPath & ResumePrefix & "TnAList.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "BoobList.txt") Then BoobList = Txt2List(SettingsPath & ResumePrefix & "BoobList.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "AssList.txt") Then AssList = Txt2List(SettingsPath & ResumePrefix & "AssList.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "UpdateList.txt") Then UpdateList = Txt2List(SettingsPath & ResumePrefix & "UpdateList.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "CustomSlideshowList.txt") Then CustomSlideshowList = Txt2List(SettingsPath & ResumePrefix & "CustomSlideshowList.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "Contact1Pics.txt") Then Contact1Pics = Txt2List(SettingsPath & ResumePrefix & "Contact1Pics.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "Contact2Pics.txt") Then Contact2Pics = Txt2List(SettingsPath & ResumePrefix & "Contact2Pics.txt")
+        If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then Contact3Pics = Txt2List(SettingsPath & "Contact3Pics.txt")
 
         If SlideshowLoaded = True Then
             If File.Exists(_ImageFileNames(FileCount)) Then mainPictureBox.Load(_ImageFileNames(FileCount))
@@ -19773,8 +20083,61 @@ TryNext:
 
         ScrollChatDown()
 
+        frmApps.ResetFlag = False
+
     End Sub
 
 
     
+    Private Sub SlotsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SlotsToolStripMenuItem.Click
+        FrmCardList.TCGames.SelectTab(0)
+        FrmCardList.Show()
+        FrmCardList.Focus()
+    End Sub
+
+    Private Sub MatchGameToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MatchGameToolStripMenuItem.Click
+        FrmCardList.TCGames.SelectTab(1)
+        FrmCardList.Show()
+        FrmCardList.Focus()
+    End Sub
+
+    Private Sub RiskyPickToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RiskyPickToolStripMenuItem.Click
+        FrmCardList.TCGames.SelectTab(2)
+        FrmCardList.Show()
+        FrmCardList.Focus()
+    End Sub
+
+    Private Sub ExchangeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ExchangeToolStripMenuItem.Click
+        FrmCardList.TCGames.SelectTab(3)
+        FrmCardList.Show()
+        FrmCardList.Focus()
+    End Sub
+
+    Private Sub CollectionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CollectionToolStripMenuItem.Click
+        FrmCardList.TCGames.SelectTab(4)
+        FrmCardList.Show()
+        FrmCardList.Focus()
+    End Sub
+
+    Private Sub ExitToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
+        Me.Dispose()
+
+    End Sub
+
+    Private Sub OpenBetaThreadToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OpenBetaThreadToolStripMenuItem.Click
+        Process.Start("https://milovana.com/forum/viewtopic.php?f=2&t=15776")
+    End Sub
+
+    Private Sub BugReportThreadToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BugReportThreadToolStripMenuItem.Click
+        Process.Start("https://milovana.com/forum/viewtopic.php?f=2&t=16203")
+    End Sub
+
+    Private Sub WebteasesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles WebteasesToolStripMenuItem.Click
+        Process.Start("https://milovana.com/webteases/")
+    End Sub
+
+    Private Sub AllAndEverythingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AllAndEverythingToolStripMenuItem.Click
+        Process.Start("https://milovana.com/forum/")
+    End Sub
 End Class

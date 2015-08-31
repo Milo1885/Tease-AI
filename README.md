@@ -1,6 +1,35 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+# Bitbucket note - I haven't pushed a new build in a while because I was waiting to finish Risky Pick. All the work I've done in the meantime has grown so massive that I'm scared of losing it, so I'm going to go ahead and push this build through. Ricky Pick is functional, but does not include the script necessary to make it run will still needs some work, so if you do compile this, don't press "play" in there for now  
+
+# Changelog - Patch 45
+
+Added new game Risky Pick
+
+Added Tease AI icon to icon tray
+
+Daily Login bonus message now appears as a taskbar notification rather than a pop-up
+
+Daily login bonus now randomly gives 5, 10, 25, 50 or 100 tokens. Higher amounts have a harder percent chance to get
+
+Added Context menu to Tease AI icon
+
+ Games -> One click access to Slots, Match Game, Risky Pick, Exchange and Collection
+ Milovana -> Quick links to Open Beta thread, Bug Report Thread, Webteases and Forum through user's default browser
+ Exit -> Terminate the program 
+ 
+Reset feature greatly improved, should be much more stable
+
+Improved handling of animated gifs that appear in the main picture window
+
+Improved Image handling across the board to cut down on GDI errors and reduce memory usage as much as possible
+
+Card Images set in Apps->Games tab can now be dragged from local or online images. In either case, a resized image of that card will be created in [root]\Images\Cards, which the program will use for those card images to ensure that each card is the exact size needed by the picture box, and not wasting memory by scaling down a larger image
+
+Fixed bug that caused program to crash when switching to Match Game tab in Games window
+
+
 # Changelog - Patch 44
 
 08/25 7:47 am - Added the ability to Suspend and Resume session states

@@ -524,60 +524,78 @@ Public Class FrmSettings
 
 
         If File.Exists(My.Settings.BP1) Then
-            BP1.Load(My.Settings.BP1)
+            BP1.Image = Image.FromFile(My.Settings.BP1)
+            ' BP1.Load(My.Settings.BP1)
         End If
         If File.Exists(My.Settings.BP2) Then
-            BP2.Load(My.Settings.BP2)
+            BP2.Image = Image.FromFile(My.Settings.BP2)
+            'BP2.Load(My.Settings.BP2)
         End If
         If File.Exists(My.Settings.BP3) Then
-            BP3.Load(My.Settings.BP3)
+            BP3.Image = Image.FromFile(My.Settings.BP3)
+            'BP3.Load(My.Settings.BP3)
         End If
         If File.Exists(My.Settings.BP4) Then
-            BP4.Load(My.Settings.BP4)
+            BP4.Image = Image.FromFile(My.Settings.BP4)
+            'BP4.Load(My.Settings.BP4)
         End If
         If File.Exists(My.Settings.BP5) Then
-            BP5.Load(My.Settings.BP5)
+            BP5.Image = Image.FromFile(My.Settings.BP5)
+            'BP5.Load(My.Settings.BP5)
         End If
         If File.Exists(My.Settings.BP6) Then
-            BP6.Load(My.Settings.BP6)
+            BP6.Image = Image.FromFile(My.Settings.BP6)
+            'BP6.Load(My.Settings.BP6)
         End If
 
         If File.Exists(My.Settings.SP1) Then
-            SP1.Load(My.Settings.SP1)
+            SP1.Image = Image.FromFile(My.Settings.SP1)
+            'SP1.Load(My.Settings.SP1)
         End If
         If File.Exists(My.Settings.SP2) Then
-            SP2.Load(My.Settings.SP2)
+            SP2.Image = Image.FromFile(My.Settings.SP2)
+            'SP2.Load(My.Settings.SP2)
         End If
         If File.Exists(My.Settings.SP3) Then
-            SP3.Load(My.Settings.SP3)
+            SP3.Image = Image.FromFile(My.Settings.SP3)
+            'SP3.Load(My.Settings.SP3)
         End If
         If File.Exists(My.Settings.SP4) Then
-            SP4.Load(My.Settings.SP4)
+            SP4.Image = Image.FromFile(My.Settings.SP4)
+            'SP4.Load(My.Settings.SP4)
         End If
         If File.Exists(My.Settings.SP5) Then
-            SP5.Load(My.Settings.SP5)
+            SP5.Image = Image.FromFile(My.Settings.SP5)
+            'SP5.Load(My.Settings.SP5)
         End If
         If File.Exists(My.Settings.SP6) Then
-            SP6.Load(My.Settings.SP6)
+            SP6.Image = Image.FromFile(My.Settings.SP6)
+            'SP6.Load(My.Settings.SP6)
         End If
 
         If File.Exists(My.Settings.GP1) Then
-            GP1.Load(My.Settings.GP1)
+            GP1.Image = Image.FromFile(My.Settings.GP1)
+            'GP1.Load(My.Settings.GP1)
         End If
         If File.Exists(My.Settings.GP2) Then
-            GP2.Load(My.Settings.GP2)
+            GP2.Image = Image.FromFile(My.Settings.GP2)
+            'GP2.Load(My.Settings.GP2)
         End If
         If File.Exists(My.Settings.GP3) Then
-            GP3.Load(My.Settings.GP3)
+            GP3.Image = Image.FromFile(My.Settings.GP3)
+            'GP3.Load(My.Settings.GP3)
         End If
         If File.Exists(My.Settings.GP4) Then
-            GP4.Load(My.Settings.GP4)
+            GP4.Image = Image.FromFile(My.Settings.GP4)
+            'GP4.Load(My.Settings.GP4)
         End If
         If File.Exists(My.Settings.GP5) Then
-            GP5.Load(My.Settings.GP5)
+            GP5.Image = Image.FromFile(My.Settings.GP5)
+            'GP5.Load(My.Settings.GP5)
         End If
         If File.Exists(My.Settings.GP6) Then
-            GP6.Load(My.Settings.GP6)
+            GP6.Image = Image.FromFile(My.Settings.GP6)
+            'GP6.Load(My.Settings.GP6)
         End If
 
         If File.Exists(My.Settings.CardBack) Then
@@ -9439,51 +9457,156 @@ WhyUMakeMeDoDis:
         End If
     End Sub
 
+    Public Sub AutosizeImage(ByVal ImagePath As String, ByVal picBox As PictureBox, Optional ByVal pSizeMode As PictureBoxSizeMode = PictureBoxSizeMode.CenterImage)
+        Try
+            picBox.Image = Nothing
+            picBox.SizeMode = pSizeMode
+            If System.IO.File.Exists(ImagePath) Then
+                Dim imgOrg As Bitmap
+                Dim imgShow As Bitmap
+                Dim g As Graphics
+                Dim divideBy, divideByH, divideByW As Double
+                imgOrg = DirectCast(Bitmap.FromFile(ImagePath), Bitmap)
+
+                divideByW = imgOrg.Width / picBox.Width
+                divideByH = imgOrg.Height / picBox.Height
+                If divideByW > 1 Or divideByH > 1 Then
+                    If divideByW > divideByH Then
+                        divideBy = divideByW
+                    Else
+                        divideBy = divideByH
+                    End If
+
+                    imgShow = New Bitmap(CInt(CDbl(imgOrg.Width) / divideBy), CInt(CDbl(imgOrg.Height) / divideBy))
+                    imgShow.SetResolution(imgOrg.HorizontalResolution, imgOrg.VerticalResolution)
+                    g = Graphics.FromImage(imgShow)
+                    g.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+                    g.DrawImage(imgOrg, New Rectangle(0, 0, CInt(CDbl(imgOrg.Width) / divideBy), CInt(CDbl(imgOrg.Height) / divideBy)), 0, 0, imgOrg.Width, imgOrg.Height, GraphicsUnit.Pixel)
+                    g.Dispose()
+                Else
+                    imgShow = New Bitmap(imgOrg.Width, imgOrg.Height)
+                    imgShow.SetResolution(imgOrg.HorizontalResolution, imgOrg.VerticalResolution)
+                    g = Graphics.FromImage(imgShow)
+                    g.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+                    g.DrawImage(imgOrg, New Rectangle(0, 0, imgOrg.Width, imgOrg.Height), 0, 0, imgOrg.Width, imgOrg.Height, GraphicsUnit.Pixel)
+                    g.Dispose()
+                End If
+                imgOrg.Dispose()
+
+                picBox.Image = imgShow
+            Else
+                picBox.Image = Nothing
+            End If
+
+
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+
+    End Sub
+
+
+    Private Function CardType(ByVal CardExtension As String) As String
+
+        Dim SaveExtension As String
+
+        SaveExtension = "bmp"
+        If UCase(Path.GetFileName(CardExtension)).Contains(".GIF") Then SaveExtension = "gif"
+        If UCase(Path.GetFileName(CardExtension)).Contains(".PNG") Then SaveExtension = "png"
+        If UCase(Path.GetFileName(CardExtension)).Contains(".JPG") Then SaveExtension = "jpg"
+        If UCase(Path.GetFileName(CardExtension)).Contains(".jpeg") Then SaveExtension = "jpeg"
+
+        Return SaveExtension
+
+    End Function
+
     Private Sub BP1_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles BP1.DragDrop
+
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             BP1.Image.Dispose()
-            'BP1.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        BP1.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.BronzeP1, PictureBoxSizeMode.StretchImage)
+
+        'Dim CardExt As String = CardType((CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString))
+
+        FrmCardList.BronzeP1.Image.Save(Application.StartupPath & "\Images\Cards\CardBP1.bmp")
+
         Try
-            BP1.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.BP1 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            BP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP1.bmp")
+            My.Settings.BP1 = Application.StartupPath & "\Images\Cards\CardBP1.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
         End Try
+
     End Sub
 
 
     Private Sub BP1_Click(sender As System.Object, e As System.EventArgs) Handles BP1.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 BP1.Image.Dispose()
-                'BP1.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            BP1.Load(OpenFileDialog1.FileName)
-            My.Settings.BP1 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            BP1.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardBP1.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardBP1.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardBP1.bmp")
+            resizedcard.Dispose()
+
+            Try
+                BP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP1.bmp")
+                My.Settings.BP1 = Application.StartupPath & "\Images\Cards\CardBP1.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
     Private Sub BP2_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles BP2.DragDrop
+
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             BP2.Image.Dispose()
-            'BP2.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        BP2.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.BronzeP2, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.BronzeP2.Image.Save(Application.StartupPath & "\Images\Cards\CardBP2.bmp")
+
         Try
-            BP2.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.BP2 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            BP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP2.bmp")
+            My.Settings.BP2 = Application.StartupPath & "\Images\Cards\CardBP2.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
         End Try
+
     End Sub
 
     Private Sub BP2_Click(sender As System.Object, e As System.EventArgs) Handles BP2.Click
@@ -9501,15 +9624,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub BP3_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles BP3.DragDrop
+          If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             BP3.Image.Dispose()
-            'BP3.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        BP3.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.BronzeP3, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.BronzeP3.Image.Save(Application.StartupPath & "\Images\Cards\CardBP3.bmp")
+
         Try
-            BP3.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.BP3 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            BP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP3.bmp")
+            My.Settings.BP3 = Application.StartupPath & "\Images\Cards\CardBP3.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9531,15 +9664,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub BP4_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles BP4.DragDrop
+          If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             BP4.Image.Dispose()
-            'BP4.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        BP4.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.BronzeP4, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.BronzeP4.Image.Save(Application.StartupPath & "\Images\Cards\CardBP4.bmp")
+
         Try
-            BP4.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.BP4 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            BP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP4.bmp")
+            My.Settings.BP4 = Application.StartupPath & "\Images\Cards\CardBP4.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9561,15 +9704,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub BP5_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles BP5.DragDrop
+           If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             BP5.Image.Dispose()
-            'BP5.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        BP5.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.BronzeP5, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.BronzeP5.Image.Save(Application.StartupPath & "\Images\Cards\CardBP5.bmp")
+
         Try
-            BP5.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.BP5 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            BP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP5.bmp")
+            My.Settings.BP5 = Application.StartupPath & "\Images\Cards\CardBP5.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9591,15 +9744,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub BP6_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles BP6.DragDrop
+           If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             BP6.Image.Dispose()
-            'BP6.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        BP6.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.BronzeP6, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.BronzeP6.Image.Save(Application.StartupPath & "\Images\Cards\CardBP6.bmp")
+
         Try
-            BP6.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.BP6 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            BP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP6.bmp")
+            My.Settings.BP6 = Application.StartupPath & "\Images\Cards\CardBP6.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9627,15 +9790,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub SP1_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles SP1.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             SP1.Image.Dispose()
-            'SP1.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        SP1.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.SilverP1, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.SilverP1.Image.Save(Application.StartupPath & "\Images\Cards\CardSP1.bmp")
+
         Try
-            SP1.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.SP1 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            SP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP1.bmp")
+            My.Settings.SP1 = Application.StartupPath & "\Images\Cards\CardSP1.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9657,15 +9830,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub SP2_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles SP2.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             SP2.Image.Dispose()
-            'SP2.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        SP2.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.SilverP2, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.SilverP2.Image.Save(Application.StartupPath & "\Images\Cards\CardSP2.bmp")
+
         Try
-            SP2.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.SP2 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            SP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP2.bmp")
+            My.Settings.SP2 = Application.StartupPath & "\Images\Cards\CardSP2.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9686,15 +9869,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub SP3_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles SP3.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             SP3.Image.Dispose()
-            'SP3.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        SP3.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.SilverP3, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.SilverP3.Image.Save(Application.StartupPath & "\Images\Cards\CardSP3.bmp")
+
         Try
-            SP3.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.SP3 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            SP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP3.bmp")
+            My.Settings.SP3 = Application.StartupPath & "\Images\Cards\CardSP3.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9716,15 +9909,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub SP4_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles SP4.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             SP4.Image.Dispose()
-            'SP4.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        SP4.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.SilverP4, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.SilverP4.Image.Save(Application.StartupPath & "\Images\Cards\CardSP4.bmp")
+
         Try
-            SP4.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.SP4 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            SP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP4.bmp")
+            My.Settings.SP4 = Application.StartupPath & "\Images\Cards\CardSP4.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9746,15 +9949,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub SP5_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles SP5.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             SP5.Image.Dispose()
-            'SP5.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        SP5.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.SilverP5, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.SilverP5.Image.Save(Application.StartupPath & "\Images\Cards\CardSP5.bmp")
+
         Try
-            SP5.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.SP5 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            SP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP5.bmp")
+            My.Settings.SP5 = Application.StartupPath & "\Images\Cards\CardSP5.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9776,15 +9989,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub SP6_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles SP6.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             SP6.Image.Dispose()
-            'SP6.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        SP6.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.SilverP6, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.SilverP6.Image.Save(Application.StartupPath & "\Images\Cards\CardSP6.bmp")
+
         Try
-            SP6.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.SP6 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            SP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP6.bmp")
+            My.Settings.SP6 = Application.StartupPath & "\Images\Cards\CardSP6.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9806,15 +10029,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub GP1_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles GP1.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             GP1.Image.Dispose()
-            'GP1.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        GP1.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.GoldP1, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.GoldP1.Image.Save(Application.StartupPath & "\Images\Cards\CardGP1.bmp")
+
         Try
-            GP1.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.GP1 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            GP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP1.bmp")
+            My.Settings.GP1 = Application.StartupPath & "\Images\Cards\CardGP1.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9842,15 +10075,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub GP2_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles GP2.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             GP2.Image.Dispose()
-            'GP2.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        GP2.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.GoldP2, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.GoldP2.Image.Save(Application.StartupPath & "\Images\Cards\CardGP2.bmp")
+
         Try
-            GP2.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.GP2 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            GP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP2.bmp")
+            My.Settings.GP2 = Application.StartupPath & "\Images\Cards\CardGP2.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9872,15 +10115,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub GP3_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles GP3.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             GP3.Image.Dispose()
-            'GP3.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        GP3.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.GoldP3, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.GoldP3.Image.Save(Application.StartupPath & "\Images\Cards\CardGP3.bmp")
+
         Try
-            GP3.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.GP3 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            GP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP3.bmp")
+            My.Settings.GP3 = Application.StartupPath & "\Images\Cards\CardGP3.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9901,15 +10154,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub GP4_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles GP4.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             GP4.Image.Dispose()
-            'GP4.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        GP4.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.GoldP4, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.GoldP4.Image.Save(Application.StartupPath & "\Images\Cards\CardGP4.bmp")
+
         Try
-            GP4.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.GP4 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            GP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP4.bmp")
+            My.Settings.GP4 = Application.StartupPath & "\Images\Cards\CardGP4.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9931,15 +10194,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub GP5_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles GP5.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             GP5.Image.Dispose()
-            'GP5.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        GP5.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.GoldP5, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.GoldP5.Image.Save(Application.StartupPath & "\Images\Cards\CardGP5.bmp")
+
         Try
-            GP5.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.GP5 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            GP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP5.bmp")
+            My.Settings.GP5 = Application.StartupPath & "\Images\Cards\CardGP5.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
@@ -9961,15 +10234,25 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub GP6_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles GP6.DragDrop
+        If FrmCardList.Visible = True Then FrmCardList.Dispose()
+        FrmCardList.ClearAllCards()
+
         Try
             GP6.Image.Dispose()
-            'GP6.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        GP6.Image = Nothing
+        GC.Collect()
+
+        AutosizeImage(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString, FrmCardList.GoldP6, PictureBoxSizeMode.StretchImage)
+
+
+
+        FrmCardList.GoldP6.Image.Save(Application.StartupPath & "\Images\Cards\CardGP6.bmp")
+
         Try
-            GP6.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
-            My.Settings.GP6 = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+            GP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP6.bmp")
+            My.Settings.GP6 = Application.StartupPath & "\Images\Cards\CardGP6.bmp"
             My.Settings.Save()
         Catch ex As Exception
             MessageBox.Show("Error Doing Drag/Drop")
