@@ -281,25 +281,6 @@
 
  If you simply wish to activate all scripts you meet the requirements for, then click "Select Available".</value>
   </data>
-  <data name="Button46.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAMnSURBVFhHxZddSzJBGIafH9dRdNSP0TJSiqKo1Czty8AIBS1TSkLwIIosj/qik4oIITKCwkQN
-        QWKae+FZdt1Zq1fzDS60nZnnvnZmd2cl/IXD4T5JQlKWVP8YZCCrTwtfW1sbWF9fryYSiWYqlRLpdPpP
-        QQaykCmzByGwy+Fer7cnIGtra+tTZmdpdXX1DQd8Pp+Ym5vrCSwhs8u0srJSxdTgoKrzd9zd3Qm5nso2
-        O5CFTGTT8vJyRwKNRkPUajVxeHgo/H6/sk8rLIBsWlpa6liAKZVKIhaLKfsZYQFkUygU+pVAMpkUp6en
-        4uzsTBSLRZMAc3FxIYLBoHI8YAFk0+Li4o8E9vb2xMvLizJQxfv7u9jf31fWYgFk08LCQluB+fl5cXV1
-        pQxpR6VSEdlsVlmTBZBNgUDAVgDHbm9vTYVvbm7Ezs4O1k/rY2xjLi8vMb2WegwLIJvkGdoK5PN5vSim
-        FOvf2scY/Pz8LOLxuKVPKyyAbJIPIKWAfEiIer2uFcZnNBo1tTNox214dHT069sQ2ST/UQqcnJzoZ3Z8
-        fGxqM9LJgwjZNDs7qxTgK/7j46PtLfUvsACyaWZmxiKAQD77+/t70+BuwALIpunpaYtAJBLRBc7Pz02D
-        uwELIJumpqYsAnKv1gVwSxkHdwMWQDZNTk5aBOT9qa09BJ6enkyDuwELIJsmJiaUF+HDw4M+C5gRY1un
-        sACyaXx8XClwcHCgC1xfX5va2oE6RnnUVvXBcWTT2NiYUgDL8Pr6qhfK5XKmdjsKhYI+5vHx0VIXsACy
-        yePxKAUAjnMxgG0Ym1NrPyB3NtOm1e7pyQLIJrfbbSsA8KZjlCiXy9q7AHY6vNfhE8HY/bgPLuBMJqOs
-        B1gA2TQ6OtpWAGBfx/PeKGIHRLa3t5V1GBZANo2MjHwrAOT7m/ZQMp6pEcwM1h9LoRpvhAWQTS6X60cC
-        DPphy8XUM3ZrbQcLIJuGh4d/JdANWADZNDQ09IY3nP/xw0Rml8npdO5ubGw0IYGGXoCszc3NT5mdJYfD
-        MSCvxrrcAZuYll6ALGTK7EHtF7L80i9JS6o9Aln9RERf5BhRBXCxJfEAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="PictureBox13.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAJkAAAAPCAYAAAD3Y23kAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8

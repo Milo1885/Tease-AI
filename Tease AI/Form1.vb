@@ -11467,6 +11467,26 @@ VTSkip:
             'Debug.Print("NullResponse Called")
         End If
 
+        If StringClean.Contains("@PayoutRisky") Then
+            If FrmSettings.CBGameSounds.Checked = True And File.Exists(Application.StartupPath & "\Audio\System\PayoutSmall.wav") Then
+                FrmCardList.GameWMP.settings.setMode("loop", False)
+                FrmCardList.GameWMP.settings.volume = 20
+                FrmCardList.GameWMP.URL = Application.StartupPath & "\Audio\System\PayoutSmall.wav"
+            End If
+            BronzeTokens += FrmCardList.TokensPaid
+            FrmCardList.LBLRiskTokens.Text = BronzeTokens
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\RP_Edges", FrmCardList.EdgesOwed, False)
+            StringClean = StringClean.Replace("@PayoutRisky", "")
+        End If
+
+        If StringClean.Contains("@CloseRiskyPick") Then
+            FrmCardList.CloseRiskyPick()
+            StringClean = StringClean.Replace("@CloseRiskyPick", "")
+        End If
+
+
+        
+
         Return StringClean
 
     End Function

@@ -32,6 +32,8 @@ Card Images set in Apps->Games tab can now be dragged from local or online image
 
 Fixed bug that caused program to crash when switching to Match Game tab in Games window
 
+Removed button in the Images tab that no longer served a function
+
 
 # Changelog - Patch 44
 

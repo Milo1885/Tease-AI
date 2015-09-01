@@ -5477,6 +5477,8 @@ skipdispose:
         Else
             BTNRiskIt.Visible = False
             BTNPickIt.Visible = False
+            EdgesOwed = RiskyEdgeOffer
+            TokensPaid = RiskyTokenOffer
         End If
     End Sub
 
@@ -5698,5 +5700,100 @@ skipdispose:
 
 
     End Sub
+
+
+    Public Sub CloseRiskyPick()
+
+        ClearCaseLabelsOffer()
+
+        BTNRisk1.Enabled = False
+        BTNRisk2.Enabled = False
+        BTNRisk3.Enabled = False
+        BTNRisk4.Enabled = False
+        BTNRisk5.Enabled = False
+        BTNRisk6.Enabled = False
+        BTNRisk7.Enabled = False
+        BTNRisk8.Enabled = False
+        BTNRisk9.Enabled = False
+        BTNRisk10.Enabled = False
+        BTNRisk11.Enabled = False
+        BTNRisk12.Enabled = False
+        BTNRisk13.Enabled = False
+        BTNRisk14.Enabled = False
+        BTNRisk15.Enabled = False
+        BTNRisk16.Enabled = False
+        BTNRisk17.Enabled = False
+        BTNRisk18.Enabled = False
+        BTNRisk19.Enabled = False
+        BTNRisk20.Enabled = False
+        BTNRisk21.Enabled = False
+        BTNRisk22.Enabled = False
+        BTNRisk23.Enabled = False
+        BTNRisk24.Enabled = False
+
+        BTNRisk1.Text = "1"
+        BTNRisk2.Text = "2"
+        BTNRisk3.Text = "3"
+        BTNRisk4.Text = "4"
+        BTNRisk5.Text = "5"
+        BTNRisk6.Text = "6"
+        BTNRisk7.Text = "7"
+        BTNRisk8.Text = "8"
+        BTNRisk9.Text = "9"
+        BTNRisk10.Text = "10"
+        BTNRisk11.Text = "11"
+        BTNRisk12.Text = "12"
+        BTNRisk13.Text = "13"
+        BTNRisk14.Text = "14"
+        BTNRisk15.Text = "15"
+        BTNRisk16.Text = "16"
+        BTNRisk17.Text = "17"
+        BTNRisk18.Text = "18"
+        BTNRisk19.Text = "19"
+        BTNRisk20.Text = "20"
+        BTNRisk21.Text = "21"
+        BTNRisk22.Text = "22"
+        BTNRisk23.Text = "23"
+        BTNRisk24.Text = "24"
+
+        LBLRisk100.ForeColor = Color.White
+        LBLRisk95.ForeColor = Color.White
+        LBLRisk90.ForeColor = Color.White
+        LBLRisk85.ForeColor = Color.White
+        LBLRisk80.ForeColor = Color.White
+        LBLRisk75.ForeColor = Color.White
+        LBLRisk70.ForeColor = Color.White
+        LBLRisk65.ForeColor = Color.White
+        LBLRisk60.ForeColor = Color.White
+        LBLRisk55.ForeColor = Color.White
+        LBLRisk50.ForeColor = Color.White
+        LBLRisk40.ForeColor = Color.White
+        LBLRisk30.ForeColor = Color.White
+        LBLRisk25.ForeColor = Color.White
+        LBLRisk20.ForeColor = Color.White
+        LBLRisk15.ForeColor = Color.White
+        LBLRisk12.ForeColor = Color.White
+        LBLRisk10.ForeColor = Color.White
+        LBLRisk7.ForeColor = Color.White
+        LBLRisk5.ForeColor = Color.White
+        LBLRisk4.ForeColor = Color.White
+        LBLRisk3.ForeColor = Color.White
+        LBLRisk2.ForeColor = Color.White
+        LBLRisk1.ForeColor = Color.White
+
+        WBRiskyChat.DocumentText = ""
+        LBLRiskMaxPot.Text = "N/A"
+        LblRiskMinPot.Text = "N/A"
+        BTNRiskIt.Visible = False
+        BTNPickIt.Visible = False
+        BTNRiskIt.Text = "DECLINE OFFER"
+        BTNPickIt.Text = "ACCEPT OFFER"
+
+
+
+
+
+    End Sub
+
 
 End Class
