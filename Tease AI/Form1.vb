@@ -438,10 +438,13 @@ Public Class Form1
 
     Public RiskyDeal As Boolean
     Public RiskyDelay As Boolean
+    Public FinalRiskyPick As Boolean
 
     Public TempGif As Image
     Dim original As Image
     Dim resized As Image
+
+
 
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -4761,7 +4764,8 @@ NoResponse:
                 If YesOrNo = True And RiskyDeal = True Then
                     FrmCardList.BTNPickIt.Visible = True
                     FrmCardList.BTNRiskIt.Visible = True
-                    FrmCardList.ClearCaseLabelsOffer()
+                    FrmCardList.HighlightCaseLabelsOffer()
+
                 End If
 
                 GotoFlag = False
@@ -4804,7 +4808,7 @@ NoResponse:
 
 
 
-                End If
+            End If
         End If
 
     End Sub
@@ -5178,7 +5182,7 @@ TryNextWithTease:
                     ScrollChatDown()
 
                     If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
-              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomTask & "<br></font></body>"
+              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomChat & "<br></font></body>"
 
                 Else
 
@@ -5193,7 +5197,7 @@ TryNextWithTease:
                     ScrollChatDown()
 
                     If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
-              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomTask & "<br></font></body>"
+              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomChat & "<br></font></body>"
 
                 End If
 
@@ -8016,9 +8020,11 @@ StatusUpdateEnd:
         If FrmCardList.RiskyPickCount = 2 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick3.Text)
         If FrmCardList.RiskyPickCount = 3 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick4.Text)
         If FrmCardList.RiskyPickCount = 4 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick5.Text)
-        If FrmCardList.RiskyPickCount = 5 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick6.Text)
+        If FrmCardList.RiskyPickCount > 4 Then StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.LBLPick6.Text)
         StringClean = StringClean.Replace("#RP_EdgeOffer", FrmCardList.RiskyEdgeOffer)
         StringClean = StringClean.Replace("#RP_TokenOffer", FrmCardList.RiskyTokenOffer)
+        StringClean = StringClean.Replace("#RP_EdgesOwed", FrmCardList.EdgesOwed)
+        StringClean = StringClean.Replace("#RP_TokensPaid", FrmCardList.TokensPaid)
 
 
         Return StringClean
@@ -11429,6 +11435,7 @@ VTSkip:
             FrmCardList.RiskyRound += 1
             FrmCardList.RiskyPickCount = 0
             FrmCardList.RiskyChoices.Clear()
+            FrmCardList.ClearCaseLabelsOffer()
             'FrmCardList.Show()
             'FrmCardList.TCGames.SelectTab(4)
             'FrmCardList.Focus()
@@ -11445,6 +11452,20 @@ VTSkip:
             'Debug.Print("NullResponse Called")
         End If
 
+        If StringClean.Contains("@FinalRiskyPick") Then
+            'FrmCardList.Focus()
+            FrmCardList.BTNRiskIt.Text = "LAST CASE"
+            FrmCardList.BTNPickIt.Text = "MY CASE"
+            StringClean = StringClean.Replace("@FinalRiskyPick", "")
+            'Debug.Print("NullResponse Called")
+        End If
+
+        If StringClean.Contains("@ClearRiskyLabels") Then
+            'FrmCardList.Focus()
+            FrmCardList.ClearCaseLabelsOffer()
+            StringClean = StringClean.Replace("@ClearRiskyLabels", "")
+            'Debug.Print("NullResponse Called")
+        End If
 
         Return StringClean
 

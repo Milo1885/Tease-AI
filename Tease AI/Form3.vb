@@ -137,6 +137,9 @@ Public Class FrmCardList
 
     Public RiskyCase As String
 
+    Public EdgesOwed As Integer
+    Public TokensPaid As Integer
+
     Dim CardImage1 As Image
     Dim CardImage2 As Image
     Dim CardImage3 As Image
@@ -4477,6 +4480,325 @@ skipdispose:
 
     End Sub
 
+    Public Sub RevealUserCase()
+
+
+
+        BTNRisk1.Text = ""
+        BTNRisk2.Text = ""
+        BTNRisk3.Text = ""
+        BTNRisk4.Text = ""
+        BTNRisk5.Text = ""
+        BTNRisk6.Text = ""
+        BTNRisk7.Text = ""
+        BTNRisk8.Text = ""
+        BTNRisk9.Text = ""
+        BTNRisk10.Text = ""
+        BTNRisk11.Text = ""
+        BTNRisk12.Text = ""
+        BTNRisk13.Text = ""
+        BTNRisk14.Text = ""
+        BTNRisk15.Text = ""
+        BTNRisk16.Text = ""
+        BTNRisk17.Text = ""
+        BTNRisk18.Text = ""
+        BTNRisk19.Text = ""
+        BTNRisk20.Text = ""
+        BTNRisk21.Text = ""
+        BTNRisk22.Text = ""
+        BTNRisk23.Text = ""
+        BTNRisk24.Text = ""
+
+        If BTNRiskyPlay.Text = "1" Then BTNRisk1.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "2" Then BTNRisk2.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "3" Then BTNRisk3.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "4" Then BTNRisk4.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "5" Then BTNRisk5.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "6" Then BTNRisk6.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "7" Then BTNRisk7.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "8" Then BTNRisk8.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "9" Then BTNRisk9.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "10" Then BTNRisk10.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "11" Then BTNRisk11.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "12" Then BTNRisk12.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "13" Then BTNRisk13.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "14" Then BTNRisk14.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "15" Then BTNRisk15.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "16" Then BTNRisk16.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "17" Then BTNRisk17.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "18" Then BTNRisk18.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "19" Then BTNRisk19.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "20" Then BTNRisk20.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "21" Then BTNRisk21.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "22" Then BTNRisk22.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "23" Then BTNRisk23.Text = BTNRiskyPlay.Text
+        If BTNRiskyPlay.Text = "24" Then BTNRisk24.Text = BTNRiskyPlay.Text
+
+        LBLPick1.ForeColor = Color.Black
+        LBLPick2.ForeColor = Color.Black
+        LBLPick3.ForeColor = Color.Black
+        LBLPick4.ForeColor = Color.Black
+        LBLPick5.ForeColor = Color.Black
+        LBLPick6.ForeColor = Color.Black
+
+        LBLPick1.Text = BTNRiskyPlay.Text
+        LBLPick2.Text = BTNRiskyPlay.Text
+        LBLPick3.Text = BTNRiskyPlay.Text
+        LBLPick4.Text = BTNRiskyPlay.Text
+        LBLPick5.Text = BTNRiskyPlay.Text
+        LBLPick6.Text = BTNRiskyPlay.Text
+
+
+        ClearCaseLabelsOffer()
+
+        If BTNRisk1.Text <> "" Then
+            Risk1.ForeColor = Color.Black
+            Risk1.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+
+        If BTNRisk2.Text <> "" Then
+            Risk2.ForeColor = Color.Black
+            Risk2.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk3.Text <> "" Then
+            Risk3.ForeColor = Color.Black
+            Risk3.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk4.Text <> "" Then
+            Risk4.ForeColor = Color.Black
+            Risk4.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk5.Text <> "" Then
+            Risk5.ForeColor = Color.Black
+            Risk5.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk6.Text <> "" Then
+            Risk6.ForeColor = Color.Black
+            Risk6.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk7.Text <> "" Then
+            Risk7.ForeColor = Color.Black
+            Risk7.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk8.Text <> "" Then
+            Risk8.ForeColor = Color.Black
+            Risk8.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk9.Text <> "" Then
+            Risk9.ForeColor = Color.Black
+            Risk9.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk10.Text <> "" Then
+            Risk10.ForeColor = Color.Black
+            Risk10.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk11.Text <> "" Then
+            Risk11.ForeColor = Color.Black
+            Risk11.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk12.Text <> "" Then
+            Risk12.ForeColor = Color.Black
+            Risk12.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk13.Text <> "" Then
+            Risk13.ForeColor = Color.Black
+            Risk13.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk14.Text <> "" Then
+            Risk14.ForeColor = Color.Black
+            Risk14.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk15.Text <> "" Then
+            Risk15.ForeColor = Color.Black
+            Risk15.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk16.Text <> "" Then
+            Risk16.ForeColor = Color.Black
+            Risk16.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk17.Text <> "" Then
+            Risk17.ForeColor = Color.Black
+            Risk17.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk18.Text <> "" Then
+            Risk18.ForeColor = Color.Black
+            Risk18.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk19.Text <> "" Then
+            Risk19.ForeColor = Color.Black
+            Risk19.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk20.Text <> "" Then
+            Risk20.ForeColor = Color.Black
+            Risk20.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk21.Text <> "" Then
+            Risk21.ForeColor = Color.Black
+            Risk21.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk22.Text <> "" Then
+            Risk22.ForeColor = Color.Black
+            Risk22.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk23.Text <> "" Then
+            Risk23.ForeColor = Color.Black
+            Risk23.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+        If BTNRisk24.Text <> "" Then
+            Risk24.ForeColor = Color.Black
+            Risk24.Text = RiskyShuffled(RiskyPickNumber - 1)
+        End If
+
+        EdgesOwed = Val(RiskyShuffled(RiskyPickNumber - 1))
+        TokensPaid = 1000 / EdgesOwed
+        TokensPaid = Math.Ceiling(TokensPaid)
+
+
+
+    End Sub
+
+    Public Sub RevealLastCase()
+
+
+        LBLPick1.ForeColor = Color.Black
+        LBLPick2.ForeColor = Color.Black
+        LBLPick3.ForeColor = Color.Black
+        LBLPick4.ForeColor = Color.Black
+        LBLPick5.ForeColor = Color.Black
+        LBLPick6.ForeColor = Color.Black
+
+        ClearCaseLabelsOffer()
+
+        If BTNRisk1.Text <> "" Then
+            Risk1.ForeColor = Color.Black
+            Risk1.Text = RiskyShuffled(0)
+            EdgesOwed = Val(Risk1.Text)
+        End If
+
+        If BTNRisk2.Text <> "" Then
+            Risk2.ForeColor = Color.Black
+            Risk2.Text = RiskyShuffled(1)
+            EdgesOwed = Val(Risk2.Text)
+        End If
+        If BTNRisk3.Text <> "" Then
+            Risk3.ForeColor = Color.Black
+            Risk3.Text = RiskyShuffled(2)
+            EdgesOwed = Val(Risk3.Text)
+        End If
+        If BTNRisk4.Text <> "" Then
+            Risk4.ForeColor = Color.Black
+            Risk4.Text = RiskyShuffled(3)
+            EdgesOwed = Val(Risk4.Text)
+        End If
+        If BTNRisk5.Text <> "" Then
+            Risk5.ForeColor = Color.Black
+            Risk5.Text = RiskyShuffled(4)
+            EdgesOwed = Val(Risk5.Text)
+        End If
+        If BTNRisk6.Text <> "" Then
+            Risk6.ForeColor = Color.Black
+            Risk6.Text = RiskyShuffled(5)
+            EdgesOwed = Val(Risk6.Text)
+        End If
+        If BTNRisk7.Text <> "" Then
+            Risk7.ForeColor = Color.Black
+            Risk7.Text = RiskyShuffled(6)
+            EdgesOwed = Val(Risk7.Text)
+        End If
+        If BTNRisk8.Text <> "" Then
+            Risk8.ForeColor = Color.Black
+            Risk8.Text = RiskyShuffled(7)
+            EdgesOwed = Val(Risk8.Text)
+        End If
+        If BTNRisk9.Text <> "" Then
+            Risk9.ForeColor = Color.Black
+            Risk9.Text = RiskyShuffled(8)
+            EdgesOwed = Val(Risk9.Text)
+        End If
+        If BTNRisk10.Text <> "" Then
+            Risk10.ForeColor = Color.Black
+            Risk10.Text = RiskyShuffled(9)
+            EdgesOwed = Val(Risk10.Text)
+        End If
+        If BTNRisk11.Text <> "" Then
+            Risk11.ForeColor = Color.Black
+            Risk11.Text = RiskyShuffled(10)
+            EdgesOwed = Val(Risk11.Text)
+        End If
+        If BTNRisk12.Text <> "" Then
+            Risk12.ForeColor = Color.Black
+            Risk12.Text = RiskyShuffled(11)
+            EdgesOwed = Val(Risk12.Text)
+        End If
+        If BTNRisk13.Text <> "" Then
+            Risk13.ForeColor = Color.Black
+            Risk13.Text = RiskyShuffled(12)
+            EdgesOwed = Val(Risk13.Text)
+        End If
+        If BTNRisk14.Text <> "" Then
+            Risk14.ForeColor = Color.Black
+            Risk14.Text = RiskyShuffled(13)
+            EdgesOwed = Val(Risk14.Text)
+        End If
+        If BTNRisk15.Text <> "" Then
+            Risk15.ForeColor = Color.Black
+            Risk15.Text = RiskyShuffled(14)
+            EdgesOwed = Val(Risk15.Text)
+        End If
+        If BTNRisk16.Text <> "" Then
+            Risk16.ForeColor = Color.Black
+            Risk16.Text = RiskyShuffled(15)
+            EdgesOwed = Val(Risk16.Text)
+        End If
+        If BTNRisk17.Text <> "" Then
+            Risk17.ForeColor = Color.Black
+            Risk17.Text = RiskyShuffled(16)
+            EdgesOwed = Val(Risk17.Text)
+        End If
+        If BTNRisk18.Text <> "" Then
+            Risk18.ForeColor = Color.Black
+            Risk18.Text = RiskyShuffled(17)
+            EdgesOwed = Val(Risk18.Text)
+        End If
+        If BTNRisk19.Text <> "" Then
+            Risk19.ForeColor = Color.Black
+            Risk19.Text = RiskyShuffled(18)
+            EdgesOwed = Val(Risk19.Text)
+        End If
+        If BTNRisk20.Text <> "" Then
+            Risk20.ForeColor = Color.Black
+            Risk20.Text = RiskyShuffled(19)
+            EdgesOwed = Val(Risk20.Text)
+        End If
+        If BTNRisk21.Text <> "" Then
+            Risk21.ForeColor = Color.Black
+            Risk21.Text = RiskyShuffled(20)
+            EdgesOwed = Val(Risk21.Text)
+        End If
+        If BTNRisk22.Text <> "" Then
+            Risk22.ForeColor = Color.Black
+            Risk22.Text = RiskyShuffled(21)
+            EdgesOwed = Val(Risk22.Text)
+        End If
+        If BTNRisk23.Text <> "" Then
+            Risk23.ForeColor = Color.Black
+            Risk23.Text = RiskyShuffled(22)
+            EdgesOwed = Val(Risk23.Text)
+        End If
+        If BTNRisk24.Text <> "" Then
+            Risk24.ForeColor = Color.Black
+            Risk24.Text = RiskyShuffled(23)
+            EdgesOwed = Val(Risk24.Text)
+        End If
+
+
+        TokensPaid = 1000 / EdgesOwed
+        TokensPaid = Math.Ceiling(TokensPaid)
+
+
+
+    End Sub
+
 
     Private Sub Button1_Click_3(sender As System.Object, e As System.EventArgs) Handles BTNRiskyPlay.Click
 
@@ -5136,15 +5458,26 @@ skipdispose:
     Private Sub BTNRiskIt_Click(sender As System.Object, e As System.EventArgs) Handles BTNRiskIt.Click
         Form1.chatBox.Text = "Risk it"
         Form1.sendButton.PerformClick()
-        BTNRiskIt.Visible = False
-        BTNPickIt.Visible = False
+        If BTNRiskIt.Text = "LAST CASE" Then
+            BTNRiskIt.Visible = True
+            BTNPickIt.Visible = False
+        Else
+            BTNRiskIt.Visible = False
+            BTNPickIt.Visible = False
+        End If
+      
     End Sub
 
     Private Sub BTNPickIt_Click(sender As System.Object, e As System.EventArgs) Handles BTNPickIt.Click
         Form1.chatBox.Text = "Pick it"
         Form1.sendButton.PerformClick()
-        BTNRiskIt.Visible = False
-        BTNPickIt.Visible = False
+        If BTNPickIt.Text = "MY CASE" Then
+            BTNRiskIt.Visible = False
+            BTNPickIt.Visible = True
+        Else
+            BTNRiskIt.Visible = False
+            BTNPickIt.Visible = False
+        End If
     End Sub
 
     Public Sub ClearCaseLabels()
@@ -5176,32 +5509,62 @@ skipdispose:
 
     End Sub
 
+    Public Sub HighlightCaseLabelsOffer()
+
+        Risk1.ForeColor = Color.DimGray
+        Risk2.ForeColor = Color.DimGray
+        Risk3.ForeColor = Color.DimGray
+        Risk4.ForeColor = Color.DimGray
+        Risk5.ForeColor = Color.DimGray
+        Risk6.ForeColor = Color.DimGray
+        Risk7.ForeColor = Color.DimGray
+        Risk8.ForeColor = Color.DimGray
+        Risk9.ForeColor = Color.DimGray
+        Risk10.ForeColor = Color.DimGray
+        Risk11.ForeColor = Color.DimGray
+        Risk12.ForeColor = Color.DimGray
+        Risk13.ForeColor = Color.DimGray
+        Risk14.ForeColor = Color.DimGray
+        Risk15.ForeColor = Color.DimGray
+        Risk16.ForeColor = Color.DimGray
+        Risk17.ForeColor = Color.DimGray
+        Risk18.ForeColor = Color.DimGray
+        Risk19.ForeColor = Color.DimGray
+        Risk20.ForeColor = Color.DimGray
+        Risk21.ForeColor = Color.DimGray
+        Risk22.ForeColor = Color.DimGray
+        Risk23.ForeColor = Color.DimGray
+        Risk24.ForeColor = Color.DimGray
+
+
+    End Sub
+
     Public Sub ClearCaseLabelsOffer()
 
-        LBLRisk100.ForeColor = Color.DimGray
-        LBLRisk95.ForeColor = Color.DimGray
-        LBLRisk90.ForeColor = Color.DimGray
-        LBLRisk85.ForeColor = Color.DimGray
-        LBLRisk80.ForeColor = Color.DimGray
-        LBLRisk75.ForeColor = Color.DimGray
-        LBLRisk70.ForeColor = Color.DimGray
-        LBLRisk60.ForeColor = Color.DimGray
-        LBLRisk50.ForeColor = Color.DimGray
-        LBLRisk40.ForeColor = Color.DimGray
-        LBLRisk30.ForeColor = Color.DimGray
-        LBLRisk25.ForeColor = Color.DimGray
-        LBLRisk20.ForeColor = Color.DimGray
-        LBLRisk15.ForeColor = Color.DimGray
-        LBLRisk10.ForeColor = Color.DimGray
-        LBLRisk5.ForeColor = Color.DimGray
-        LBLRisk3.ForeColor = Color.DimGray
-        LBLRisk1.ForeColor = Color.DimGray
-        LBLRisk12.ForeColor = Color.DimGray
-        LBLRisk55.ForeColor = Color.DimGray
-        LBLRisk65.ForeColor = Color.DimGray
-        LBLRisk4.ForeColor = Color.DimGray
-        LBLRisk2.ForeColor = Color.DimGray
-        LBLRisk7.ForeColor = Color.DimGray
+        Risk1.ForeColor = Color.DarkGray
+        Risk2.ForeColor = Color.DarkGray
+        Risk3.ForeColor = Color.DarkGray
+        Risk4.ForeColor = Color.DarkGray
+        Risk5.ForeColor = Color.DarkGray
+        Risk6.ForeColor = Color.DarkGray
+        Risk7.ForeColor = Color.DarkGray
+        Risk8.ForeColor = Color.DarkGray
+        Risk9.ForeColor = Color.DarkGray
+        Risk10.ForeColor = Color.DarkGray
+        Risk11.ForeColor = Color.DarkGray
+        Risk12.ForeColor = Color.DarkGray
+        Risk13.ForeColor = Color.DarkGray
+        Risk14.ForeColor = Color.DarkGray
+        Risk15.ForeColor = Color.DarkGray
+        Risk16.ForeColor = Color.DarkGray
+        Risk17.ForeColor = Color.DarkGray
+        Risk18.ForeColor = Color.DarkGray
+        Risk19.ForeColor = Color.DarkGray
+        Risk20.ForeColor = Color.DarkGray
+        Risk21.ForeColor = Color.DarkGray
+        Risk22.ForeColor = Color.DarkGray
+        Risk23.ForeColor = Color.DarkGray
+        Risk24.ForeColor = Color.DarkGray
 
     End Sub
 
