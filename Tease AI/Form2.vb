@@ -1224,10 +1224,10 @@ Public Class FrmSettings
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Try
                 GlitterAV.Image.Dispose()
-                'GlitterAV.Image = Nothing
-                GC.Collect()
             Catch
             End Try
+            GlitterAV.Image = Nothing
+            GC.Collect()
             GlitterAV.Load(OpenFileDialog1.FileName)
             My.Settings.GlitterAV = OpenFileDialog1.FileName
             My.Settings.Save()
@@ -1237,10 +1237,10 @@ Public Class FrmSettings
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Try
                 GlitterAV1.Image.Dispose()
-                'GlitterAV1.Image = Nothing
-                GC.Collect()
             Catch
             End Try
+            GlitterAV1.Image = Nothing
+            GC.Collect()
             GlitterAV1.Load(OpenFileDialog1.FileName)
             My.Settings.GlitterAV1 = OpenFileDialog1.FileName
             My.Settings.Save()
@@ -1250,10 +1250,10 @@ Public Class FrmSettings
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Try
                 GlitterAV2.Image.Dispose()
-                ' GlitterAV2.Image = Nothing
-                GC.Collect()
             Catch
             End Try
+            GlitterAV2.Image = Nothing
+            GC.Collect()
             GlitterAV2.Load(OpenFileDialog1.FileName)
             My.Settings.GlitterAV2 = OpenFileDialog1.FileName
             My.Settings.Save()
@@ -1263,10 +1263,10 @@ Public Class FrmSettings
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Try
                 GlitterAV3.Image.Dispose()
-                'GlitterAV3.Image = Nothing
-                GC.Collect()
             Catch
             End Try
+            GlitterAV3.Image = Nothing
+            GC.Collect()
             GlitterAV3.Load(OpenFileDialog1.FileName)
             My.Settings.GlitterAV3 = OpenFileDialog1.FileName
             My.Settings.Save()
@@ -2122,10 +2122,10 @@ Public Class FrmSettings
 
             Try
                 WebPictureBox.Image.Dispose()
-                ' WebPictureBox.Image = Nothing
-                GC.Collect()
             Catch
             End Try
+            WebPictureBox.Image = Nothing
+            GC.Collect()
 
             WebPictureBox.Load(Form1.WebImageLines(0))
 
@@ -2165,11 +2165,11 @@ TryNextImage:
 
         Try
             WebPictureBox.Image.Dispose()
-            'WebPictureBox.Image = Nothing
-            GC.Collect()
         Catch
         End Try
 
+        WebPictureBox.Image = Nothing
+        GC.Collect()
         Try
             WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
             LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
@@ -2195,11 +2195,11 @@ trypreviousimage:
 
         Try
             WebPictureBox.Image.Dispose()
-            'WebPictureBox.Image = Nothing
-            GC.Collect()
         Catch
         End Try
 
+        WebPictureBox.Image = Nothing
+        GC.Collect()
         Try
             WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
             LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
@@ -2422,11 +2422,11 @@ Scrape:
 
                     Try
                         WebPictureBox.Image.Dispose()
-                        'WebPictureBox.Image = Nothing
-                        GC.Collect()
                     Catch
                     End Try
 
+                    WebPictureBox.Image = Nothing
+                    GC.Collect()
                     WebPictureBox.Load(node.InnerXml)
 
                     Do
@@ -2922,10 +2922,10 @@ NextURL:
 
                 Try
                     WebPictureBox.Image.Dispose()
-                    'WebPictureBox.Image = Nothing
-                    GC.Collect()
                 Catch
                 End Try
+                WebPictureBox.Image = Nothing
+                GC.Collect()
 
                 WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
                 LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
@@ -2940,11 +2940,10 @@ NextURL:
 
                 Try
                     WebPictureBox.Image.Dispose()
-                    'WebPictureBox.Image = Nothing
-                    GC.Collect()
                 Catch
                 End Try
-
+                WebPictureBox.Image = Nothing
+                GC.Collect()
                 WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
                 LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
         End Select
@@ -3483,10 +3482,11 @@ NextURL:
 
             Try
                 ImageTagPictureBox.Image.Dispose()
-                'ImageTagPictureBox.Image = Nothing
-                GC.Collect()
             Catch
             End Try
+
+            ImageTagPictureBox.Image = Nothing
+            GC.Collect()
 
             ImageTagPictureBox.Load(ImageTagDir(0))
             CurrentImageTagImage = ImageTagDir(0)
@@ -3684,10 +3684,12 @@ NextURL:
 
                 Try
                     ImageTagPictureBox.Image.Dispose()
-                    'ImageTagPictureBox.Image = Nothing
-                    GC.Collect()
                 Catch
                 End Try
+
+                ImageTagPictureBox.Image = Nothing
+                GC.Collect()
+
                 Debug.Print("find")
                 ImageTagPictureBox.Load(ImageTagDir(0))
                 CurrentImageTagImage = ImageTagDir(0)
@@ -4150,10 +4152,11 @@ NextURL:
 
         Try
             ImageTagPictureBox.Image.Dispose()
-            'ImageTagPictureBox.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+
+        ImageTagPictureBox.Image = Nothing
+        GC.Collect()
 
         ImageTagPictureBox.Load(ImageTagDir(ImageTagCount))
         CurrentImageTagImage = ImageTagDir(ImageTagCount)
@@ -4370,10 +4373,11 @@ NextURL:
 
         Try
             ImageTagPictureBox.Image.Dispose()
-            'ImageTagPictureBox.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+
+        ImageTagPictureBox.Image = Nothing
+        GC.Collect()
 
         ImageTagPictureBox.Load(ImageTagDir(ImageTagCount))
         CurrentImageTagImage = ImageTagDir(ImageTagCount)
@@ -5196,10 +5200,11 @@ NextURL:
 
         Try
             WebPictureBox.Image.Dispose()
-            'WebPictureBox.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+
+        WebPictureBox.Image = Nothing
+        GC.Collect()
 
         WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
 
@@ -10276,11 +10281,14 @@ WhyUMakeMeDoDis:
 
     Private Sub CardBack_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles CardBack.DragDrop
         Try
-            CardBack.Image.Dispose()
-            'CardBack.Image = Nothing
+
             GC.Collect()
         Catch
         End Try
+
+        CardBack.Image.Dispose()
+        CardBack.Image = Nothing
+
         Try
             CardBack.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
             My.Settings.CardBack = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
@@ -10294,10 +10302,10 @@ WhyUMakeMeDoDis:
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Try
                 CardBack.Image.Dispose()
-                'CardBack.Image = Nothing
-                GC.Collect()
             Catch
             End Try
+            CardBack.Image = Nothing
+            GC.Collect()
             CardBack.Load(OpenFileDialog1.FileName)
             My.Settings.CardBack = OpenFileDialog1.FileName
             My.Settings.Save()
@@ -11003,10 +11011,10 @@ WhyUMakeMeDoDis:
     Private Sub TextBox2_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBWishlistURL.TextChanged
         Try
             WishlistPreview.Image.Dispose()
-            'WishlistPreview.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+        WishlistPreview.Image = Nothing
+        GC.Collect()
         Try
             WishlistPreview.Load(TBWishlistURL.Text)
         Catch ex As Exception
@@ -11045,10 +11053,12 @@ WhyUMakeMeDoDis:
 
         Try
             WishlistPreview.Image.Dispose()
-            'WishlistPreview.Image = Nothing
-            GC.Collect()
         Catch
         End Try
+
+        WishlistPreview.Image = Nothing
+        GC.Collect()
+
         Try
             WishlistPreview.Load(TBWishlistURL.Text)
         Catch ex As Exception

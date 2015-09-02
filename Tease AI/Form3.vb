@@ -1169,149 +1169,148 @@ Card9:
 
         If M1A.Enabled = True Then
             Try
-                M1A.Image = Nothing
-                'M1A.Image.Dispose()
+                M1A.Image.Dispose()
             Catch
             End Try
+            M1A.Image = Nothing
             M1A.Load(CardBackImage)
         End If
         If M2A.Enabled = True Then
             Try
-                M2A.Image = Nothing
-                'M2A.Image.Dispose()
+                M2A.Image.Dispose()
             Catch
             End Try
+            M2A.Image = Nothing
             M2A.Load(CardBackImage)
         End If
         If M3A.Enabled = True Then
             Try
-                M3A.Image = Nothing
-                'M3A.Image.Dispose()
+                M3A.Image.Dispose()
             Catch
             End Try
+            M3A.Image = Nothing
             M3A.Load(CardBackImage)
         End If
         If M4A.Enabled = True Then
             Try
-                M4A.Image = Nothing
-                'M4A.Image.Dispose()
-
+                M4A.Image.Dispose()
             Catch
             End Try
+            M4A.Image = Nothing
             M4A.Load(CardBackImage)
         End If
         If M5A.Enabled = True Then
             Try
-                M5A.Image = Nothing
-                'M5A.Image.Dispose()
+                M5A.Image.Dispose()
             Catch
             End Try
+            M5A.Image = Nothing
             M5A.Load(CardBackImage)
         End If
         If M6A.Enabled = True Then
             Try
-                M6A.Image = Nothing
-                'M6A.Image.Dispose()
+                M6A.Image.Dispose()
             Catch
             End Try
+            M6A.Image = Nothing
             M6A.Load(CardBackImage)
         End If
 
         If M1B.Enabled = True Then
             Try
-                M1B.Image = Nothing
-                'M1B.Image.Dispose()
+                M1B.Image.Dispose()
             Catch
             End Try
+            M1B.Image = Nothing
             M1B.Load(CardBackImage)
         End If
         If M2B.Enabled = True Then
             Try
-                M2B.Image = Nothing
-                'M2B.Image.Dispose()
+                M2B.Image.Dispose()
             Catch
             End Try
+            M2B.Image = Nothing
             M2B.Load(CardBackImage)
         End If
         If M3B.Enabled = True Then
             Try
-                M3B.Image = Nothing
-                'M3B.Image.Dispose()
+                M3B.Image.Dispose()
             Catch
             End Try
+            M3B.Image = Nothing
             M3B.Load(CardBackImage)
         End If
         If M4B.Enabled = True Then
             Try
-                M4B.Image = Nothing
-                'M4B.Image.Dispose()
+                M4B.Image.Dispose()
             Catch
             End Try
+            M4B.Image = Nothing
             M4B.Load(CardBackImage)
         End If
         If M5B.Enabled = True Then
             Try
-                M5B.Image = Nothing
-                'M5B.Image.Dispose()
+                M5B.Image.Dispose()
             Catch
             End Try
+            M5B.Image = Nothing
             M5B.Load(CardBackImage)
         End If
         If M6B.Enabled = True Then
             Try
-                M6B.Image = Nothing
-                'M6B.Image.Dispose()
+                M6B.Image.Dispose()
             Catch
             End Try
+            M6B.Image = Nothing
             M6B.Load(CardBackImage)
         End If
 
         If M1C.Enabled = True Then
             Try
-                M1C.Image = Nothing
-                'M1C.Image.Dispose()
+                M1C.Image.Dispose()
             Catch
             End Try
+            M1C.Image = Nothing
             M1C.Load(CardBackImage)
         End If
         If M2C.Enabled = True Then
             Try
-                M2C.Image = Nothing
-                'M2C.Image.Dispose()
+                M2C.Image.Dispose()
             Catch
             End Try
+            M2C.Image = Nothing
             M2C.Load(CardBackImage)
         End If
         If M3C.Enabled = True Then
             Try
-                M3C.Image = Nothing
-                'M3C.Image.Dispose()
+                M3C.Image.Dispose()
             Catch
             End Try
+            M3C.Image = Nothing
             M3C.Load(CardBackImage)
         End If
         If M4C.Enabled = True Then
             Try
-                M4C.Image = Nothing
-                'M4C.Image.Dispose()
+                M4C.Image.Dispose()
             Catch
             End Try
+            M4C.Image = Nothing
             M4C.Load(CardBackImage)
         End If
         If M5C.Enabled = True Then
             Try
-                M5C.Image = Nothing
-                'M5C.Image.Dispose()
+                M5C.Image.Dispose()
             Catch
             End Try
+            M5C.Image = Nothing
             M5C.Load(CardBackImage)
         End If
         If M6C.Enabled = True Then
             Try
-                M6C.Image = Nothing
-                'M6C.Image.Dispose()
+                M6C.Image.Dispose()
             Catch
             End Try
+            M6C.Image = Nothing
             M6C.Load(CardBackImage)
         End If
 
@@ -1958,20 +1957,31 @@ Card9:
             SlotBetTemp = Val(LBLSlotBet.Text)
         End If
 
-        'Slot1.Image.Dispose()
+        Try
+            Slot1.Image.Dispose()
+        Catch
+        End Try
         Slot1.Image = Nothing
 
-        'Slot2.Image.Dispose()
+        Try
+            Slot2.Image.Dispose()
+        Catch
+        End Try
         Slot2.Image = Nothing
 
-        'Slot3.Image.Dispose()
+        Try
+            Slot3.Image.Dispose()
+        Catch
+        End Try
         Slot3.Image = Nothing
 
-        'GC.Collect()
+        GC.Collect()
 
         SlotTimer1.Start()
         SlotTImer2.Start()
         SlotTimer3.Start()
+
+
 
 
     End Sub
@@ -1981,12 +1991,12 @@ Card9:
         SlotTick1 -= 1
 
         Slot1Val = randomizer.Next(0, 18)
-        Try
-            'Slot1.Image.Dispose()
-            Slot1.Image = Nothing
-            GC.Collect()
+         Try
+            Slot1.Image.Dispose()
         Catch
         End Try
+        Slot1.Image = Nothing
+        GC.Collect()
         Slot1.Load(SlotList(Slot1Val))
 
         If SlotTick1 < 1 Then
@@ -2010,12 +2020,12 @@ Card9:
         SlotTick2 -= 1
 
         Slot2Val = randomizer.Next(0, 18)
-        Try
-            'Slot2.Image.Dispose()
-            Slot2.Image = Nothing
-            GC.Collect()
+          Try
+            Slot2.Image.Dispose()
         Catch
         End Try
+        Slot2.Image = Nothing
+        GC.Collect()
         Slot2.Load(SlotList(Slot2Val))
 
         If SlotTick2 < 1 Then
@@ -2036,11 +2046,11 @@ Card9:
 
         Slot3Val = randomizer.Next(0, 18)
         Try
-            'Slot3.Image.Dispose()
-            Slot3.Image = Nothing
-            GC.Collect()
+            Slot3.Image.Dispose()
         Catch
         End Try
+        Slot3.Image = Nothing
+        GC.Collect()
         Slot3.Load(SlotList(Slot3Val))
 
         If SlotTick3 < 1 Then
@@ -2208,28 +2218,46 @@ Card9:
     Public Sub ClearSlots()
 
         Try
-            'Slot1.Image.Dispose()
-            Slot1.Image = Nothing
-
-            'Slot2.Image.Dispose()
-            Slot2.Image = Nothing
-
-            'Slot3.Image.Dispose()
-            Slot3.Image = Nothing
-
-            'SlotLeft1.Image.Dispose()
-            SlotLeft1.Image = Nothing
-
-            'SlotLeft2.Image.Dispose()
-            SlotLeft2.Image = Nothing
-
-            'SlotRight1.Image.Dispose()
-            SlotRight1.Image = Nothing
-
-            'SlotRight2.Image.Dispose()
-            SlotRight2.Image = Nothing
+            Slot1.Image.Dispose()
         Catch
         End Try
+        Slot1.Image = Nothing
+
+        Try
+            Slot2.Image.Dispose()
+        Catch
+        End Try
+        Slot2.Image = Nothing
+
+        Try
+            Slot3.Image.Dispose()
+        Catch
+        End Try
+        Slot3.Image = Nothing
+
+        Try
+            SlotLeft1.Image.Dispose()
+        Catch
+        End Try
+        SlotLeft1.Image = Nothing
+
+        Try
+            SlotLeft2.Image.Dispose()
+        Catch
+        End Try
+        SlotLeft2.Image = Nothing
+
+        Try
+            SlotRight1.Image.Dispose()
+        Catch
+        End Try
+        SlotRight1.Image = Nothing
+
+        Try
+            SlotRight2.Image.Dispose()
+        Catch
+        End Try
+        SlotRight2.Image = Nothing
 
         Try
             GC.Collect()
@@ -2371,69 +2399,108 @@ Card9:
     Public Sub ClearMatchCache()
 
 
-        GoTo skipdispose
+
         Try
             M1A.Image.Dispose()
+        Catch
+        End Try
+        Try
             M2A.Image.Dispose()
+        Catch
+        End Try
+        Try
             M3A.Image.Dispose()
+        Catch
+        End Try
+        Try
             M4A.Image.Dispose()
+        Catch
+        End Try
+        Try
             M5A.Image.Dispose()
+        Catch
+        End Try
+        Try
             M6A.Image.Dispose()
         Catch
         End Try
 
         Try
             M1B.Image.Dispose()
+        Catch
+        End Try
+        Try
             M2B.Image.Dispose()
+        Catch
+        End Try
+        Try
             M3B.Image.Dispose()
+        Catch
+        End Try
+        Try
             M4B.Image.Dispose()
+        Catch
+        End Try
+        Try
             M5B.Image.Dispose()
+        Catch
+        End Try
+        Try
             M6B.Image.Dispose()
         Catch
         End Try
 
         Try
             M1C.Image.Dispose()
+        Catch
+        End Try
+        Try
             M2C.Image.Dispose()
+        Catch
+        End Try
+        Try
             M3C.Image.Dispose()
+        Catch
+        End Try
+        Try
             M4C.Image.Dispose()
+        Catch
+        End Try
+        Try
             M5C.Image.Dispose()
+        Catch
+        End Try
+        Try
             M6C.Image.Dispose()
         Catch
         End Try
 
-skipdispose:
 
-
-        'Try
         M1A.Image = Nothing
         M2A.Image = Nothing
         M3A.Image = Nothing
         M4A.Image = Nothing
         M5A.Image = Nothing
         M6A.Image = Nothing
-        'Catch
-        'End Try
+      
 
-        'Try
+
         M1B.Image = Nothing
         M2B.Image = Nothing
         M3B.Image = Nothing
         M4B.Image = Nothing
         M5B.Image = Nothing
         M6B.Image = Nothing
-        'Catch
-        'End Try
+     
 
-        'Try
+
         M1C.Image = Nothing
         M2C.Image = Nothing
         M3C.Image = Nothing
         M4C.Image = Nothing
         M5C.Image = Nothing
         M6C.Image = Nothing
-        'Catch
-        ' End Try
+      
 
      
 
@@ -2513,11 +2580,12 @@ skipdispose:
 
             If File.Exists(My.Settings.CardBack) Then
                 Try
-                    'BoosterBack.Image.Dispose()
-                    BoosterBack.Image = Nothing
-                    GC.Collect()
+                    BoosterBack.Image.Dispose()
                 Catch
                 End Try
+
+                BoosterBack.Image = Nothing
+                GC.Collect()
 
                 BoosterBack.Load(My.Settings.CardBack)
             Else
@@ -2835,35 +2903,30 @@ skipdispose:
 
 
         Try
-            'Booster1.Image.Dispose()
-            Booster1.Image = Nothing
+            Booster1.Image.Dispose()
         Catch
         End Try
-
+        Booster1.Image = Nothing
         Try
-            'Booster2.Image.Dispose()
-            Booster2.Image = Nothing
+            Booster2.Image.Dispose()
         Catch
         End Try
-
+        Booster2.Image = Nothing
         Try
-            'Booster3.Image.Dispose()
-            Booster3.Image = Nothing
+            Booster3.Image.Dispose()
         Catch
         End Try
-
+        Booster3.Image = Nothing
         Try
-            'Booster4.Image.Dispose()
-            Booster4.Image = Nothing
+            Booster4.Image.Dispose()
         Catch
         End Try
-
+        Booster4.Image = Nothing
         Try
-            'Booster5.Image.Dispose()
-            Booster5.Image = Nothing
+            Booster5.Image.Dispose()
         Catch
         End Try
-
+        Booster5.Image = Nothing
         Try
             GC.Collect()
         Catch

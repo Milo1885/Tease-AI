@@ -475,8 +475,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         mainPictureBox.Image = Nothing
         Debug.Print("Here?")
 
-        'mainPictureBox.Image.Dispose()
-
+        
 
 
         'TempGif.Dispose()
@@ -4607,14 +4606,7 @@ NullResponse:
 
 
                 If ShowPicture = True Then
-                    ' Try
-                    ' Not mainPictureBox Is Nothing Then
-                    'mainPictureBox.Image.Dispose()
-                    'mainPictureBox.Image = Nothing
-                    'GC.Collect()
-                    'End If
-                    ' Catch
-                    'End Try
+                 
 
                     ClearMainPictureBox()
 
@@ -5236,14 +5228,7 @@ TryNextWithTease:
                 SubWroteLast = False
 
                 If ShowPicture = True Then
-                    ' Try
-                    ' Not mainPictureBox Is Nothing Then
-                    'mainPictureBox.Image.Dispose()
-                    'mainPictureBox.Image = Nothing
-                    'GC.Collect()
-                    'End If
-                    ' Catch
-                    'End Try
+                 
 
                     ClearMainPictureBox()
 
@@ -5503,14 +5488,6 @@ NullResponseLine2:
 
             ClearMainPictureBox()
 
-            ' If Not mainPictureBox Is Nothing Then
-            'Try
-            'mainPictureBox.Image.Dispose()
-            'mainPictureBox.Image = Nothing
-            'GC.Collect()
-            ' Catch
-            'End Try
-            'End If
 
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
@@ -5566,14 +5543,6 @@ TryNext:
 
         If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNext
 
-        ' Try
-        'If Not mainPictureBox Is Nothing Then
-        'mainPictureBox.Image.Dispose()
-        'mainPictureBox.Image = Nothing
-        'GC.Collect()
-        'End If
-        'Catch
-        'End Try
 
         ClearMainPictureBox()
 
@@ -5629,14 +5598,6 @@ TryPrevious:
 
         If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryPrevious
 
-        ' Try
-        'If Not mainPictureBox Is Nothing Then
-        'mainPictureBox.Image.Dispose()
-        'mainPictureBox.Image = Nothing
-        'GC.Collect()
-        'End If
-        'Catch
-        'End Try
 
         ClearMainPictureBox()
 
@@ -7626,12 +7587,14 @@ StatusUpdateEnd:
 
     Private Sub domAvatar_Click(sender As System.Object, e As System.EventArgs) Handles domAvatar.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
             Try
                 domAvatar.Image.Dispose()
-                domAvatar.Image = Nothing
-                GC.Collect()
             Catch
             End Try
+            domAvatar.Image = Nothing
+            GC.Collect()
+           
 
             domAvatar.Load(OpenFileDialog1.FileName)
             My.Settings.DomAvatarSave = OpenFileDialog1.FileName
@@ -7643,10 +7606,10 @@ StatusUpdateEnd:
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Try
                 subAvatar.Image.Dispose()
-                subAvatar.Image = Nothing
-                GC.Collect()
             Catch
             End Try
+            subAvatar.Image = Nothing
+            GC.Collect()
             subAvatar.Load(OpenFileDialog1.FileName)
             My.Settings.SubAvatarSave = OpenFileDialog1.FileName
             My.Settings.Save()
@@ -10686,12 +10649,7 @@ OrgasmDecided:
             Debug.Print("FoundString = " & FoundString)
 
             If Not mainPictureBox Is Nothing Then
-                Try
-                    mainPictureBox.Image.Dispose()
-                    mainPictureBox.Image = Nothing
-                    GC.Collect()
-                Catch
-                End Try
+                ClearMainPictureBox()
                 Do
                     Application.DoEvents()
                 Loop Until mainPictureBox.Image Is Nothing
@@ -15183,30 +15141,13 @@ AlreadySeen:
 
             JustShowedBlogImage = True
 
-            If UCase(FoundString).Contains(".GIF") Then
 
-                If FoundString.Contains("\") Then
-                    TempGif = Image.FromFile(FoundString)
-                End If
-
-                If FoundString.Contains("/") Then
-                    mainPictureBox.Image.Dispose()
-                    mainPictureBox.Image = Nothing
-                    If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-                        My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-                    End If
-                    My.Computer.Network.DownloadFile(FoundString, Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-                    TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-                End If
-                mainPictureBox.Image = TempGif
+            If FoundString.Contains("/") Then
+                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
             Else
-
-                mainPictureBox.Load(FoundString)
-                TempGif.Dispose()
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-                End If
+                mainPictureBox.Image = Image.FromFile(FoundString)
             End If
+
 
 
             mainPictureBox.Refresh()
@@ -15254,8 +15195,8 @@ AlreadySeen:
     Public Sub GetBlogImageTest()
 
         Dim TempURL As String = "http://38.media.tumblr.com/edb7f636b5cb0fe60b58bcede48207c0/tumblr_nrye15neo21u4yrcfo1_500.gif"
-        mainPictureBox.Image.Dispose()
-        mainPictureBox.Image = Nothing
+        ClearMainPictureBox()
+
 
         If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
@@ -15354,34 +15295,37 @@ AlreadySeen:
 
         ' ### 0000000000000000000
 
-        If UCase(FoundString).Contains(".GIF") Then
+        mainPictureBox.Image = Image.FromFile(FoundString)
 
-            Debug.Print("GIF Found")
 
-            If FoundString.Contains("\") Then
-                TempGif = Image.FromFile(FoundString)
-            End If
+        'If UCase(FoundString).Contains(".GIF") Then
 
-            If FoundString.Contains("/") Then
-                mainPictureBox.Image.Dispose()
-                mainPictureBox.Image = Nothing
+        'Debug.Print("GIF Found")
 
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-                End If
-                My.Computer.Network.DownloadFile(FoundString, Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-                TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-            End If
+        'If FoundString.Contains("\") Then
+        'TempGif = Image.FromFile(FoundString)
+        'End If
 
-            mainPictureBox.Image = TempGif
-        Else
-            Debug.Print("Gif Not found")
-            mainPictureBox.Load(FoundString)
-            TempGif.Dispose()
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-            End If
-        End If
+        'If FoundString.Contains("/") Then
+        'mainPictureBox.Image.Dispose()
+        'mainPictureBox.Image = Nothing
+
+        'If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+        'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'End If
+        'My.Computer.Network.DownloadFile(FoundString, Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'End If
+
+        'mainPictureBox.Image = TempGif
+        'Else
+        'Debug.Print("Gif Not found")
+        'mainPictureBox.Load(FoundString)
+        'TempGif.Dispose()
+        'If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+        'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'End If
+        'End If
 
 
         Try
@@ -15390,7 +15334,7 @@ AlreadySeen:
         End Try
         'mainPictureBox.Load(FoundString)
         ShowImageInfo()
-      
+
 
 
     End Sub
@@ -16473,14 +16417,7 @@ TryNext:
 
             If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNext
 
-            'Try
-            'If Not mainPictureBox Is Nothing Then
-            'mainPictureBox.Image.Dispose()
-            'mainPictureBox.Image = Nothing
-            ' GC.Collect()
-            ' End If
-            ' Catch
-            ' End Try
+          
 
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
@@ -17302,14 +17239,7 @@ TryNext:
 
             ClearMainPictureBox()
 
-            'If Not mainPictureBox Is Nothing Then
-            'Try
-            'mainPictureBox.Image.Dispose()
-            ' mainPictureBox.Image = Nothing
-            ' GC.Collect()
-            'Catch
-            ' End Try
-            ' End If
+           
 
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
@@ -17474,14 +17404,7 @@ TryNext:
 
                 ClearMainPictureBox()
 
-                'If Not mainPictureBox Is Nothing Then
-                'Try
-                'mainPictureBox.Image.Dispose()
-                'mainPictureBox.Image = Nothing
-                ' GC.Collect()
-                'Catch
-                'End Try
-                ' End If
+             
 
                 If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
@@ -18687,14 +18610,7 @@ TryNext:
         End If
 
         FileCount = 0
-        ' If Not mainPictureBox Is Nothing Then
-        'Try
-        'mainPictureBox.Image.Dispose()
-        'mainPictureBox.Image = Nothing
-        'GC.Collect()
-        'Catch
-        ' End Try
-        'End If
+      
 
         ClearMainPictureBox()
 
@@ -18778,14 +18694,16 @@ TryNext:
 
     Public Sub ClearMainPictureBox()
 
+
         Try
-
-            'mainPictureBox.Image.Dispose()
-            mainPictureBox.Image = Nothing
-            GC.Collect()
-
-        Catch ex As Exception
+            mainPictureBox.Image.Dispose()
+        Catch
         End Try
+
+        mainPictureBox.Image = Nothing
+        GC.Collect()
+
+
 
     End Sub
 
