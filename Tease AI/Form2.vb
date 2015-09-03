@@ -599,7 +599,7 @@ Public Class FrmSettings
         End If
 
         If File.Exists(My.Settings.CardBack) Then
-            CardBack.Load(My.Settings.CardBack)
+            CardBack.Image = Image.FromFile(My.Settings.CardBack)
         End If
 
         NBNextImageChance.Value = My.Settings.NextImageChance
@@ -1215,7 +1215,7 @@ Public Class FrmSettings
 #Region "Glitter"
     Private Sub GlitterAV_Click(sender As System.Object, e As System.EventArgs)
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-            GlitterAV.Load(OpenFileDialog1.FileName)
+            GlitterAV.Image = Image.FromFile(OpenFileDialog1.FileName)
             My.Settings.GlitterAV = OpenFileDialog1.FileName
             My.Settings.Save()
         End If
@@ -1228,7 +1228,7 @@ Public Class FrmSettings
             End Try
             GlitterAV.Image = Nothing
             GC.Collect()
-            GlitterAV.Load(OpenFileDialog1.FileName)
+            GlitterAV.Image = Image.FromFile(OpenFileDialog1.FileName)
             My.Settings.GlitterAV = OpenFileDialog1.FileName
             My.Settings.Save()
         End If
@@ -1241,7 +1241,7 @@ Public Class FrmSettings
             End Try
             GlitterAV1.Image = Nothing
             GC.Collect()
-            GlitterAV1.Load(OpenFileDialog1.FileName)
+            GlitterAV1.Image = Image.FromFile(OpenFileDialog1.FileName)
             My.Settings.GlitterAV1 = OpenFileDialog1.FileName
             My.Settings.Save()
         End If
@@ -1254,7 +1254,7 @@ Public Class FrmSettings
             End Try
             GlitterAV2.Image = Nothing
             GC.Collect()
-            GlitterAV2.Load(OpenFileDialog1.FileName)
+            GlitterAV2.Image = Image.FromFile(OpenFileDialog1.FileName)
             My.Settings.GlitterAV2 = OpenFileDialog1.FileName
             My.Settings.Save()
         End If
@@ -1267,7 +1267,7 @@ Public Class FrmSettings
             End Try
             GlitterAV3.Image = Nothing
             GC.Collect()
-            GlitterAV3.Load(OpenFileDialog1.FileName)
+            GlitterAV3.Image = Image.FromFile(OpenFileDialog1.FileName)
             My.Settings.GlitterAV3 = OpenFileDialog1.FileName
             My.Settings.Save()
         End If
@@ -2127,7 +2127,11 @@ Public Class FrmSettings
             WebPictureBox.Image = Nothing
             GC.Collect()
 
-            WebPictureBox.Load(Form1.WebImageLines(0))
+            Try
+                WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(0))))
+            Catch
+                MessageBox.Show(Me, "Failed to load URL File image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End Try
 
             Form1.WebImageFile.Close()
             Form1.WebImageFile.Dispose()
@@ -2171,7 +2175,7 @@ TryNextImage:
         WebPictureBox.Image = Nothing
         GC.Collect()
         Try
-            WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
+            WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
             LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
         Catch ex As Exception
             GoTo trynextimage
@@ -2201,7 +2205,7 @@ trypreviousimage:
         WebPictureBox.Image = Nothing
         GC.Collect()
         Try
-            WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
+            WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
             LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
         Catch ex As Exception
             GoTo trypreviousimage
@@ -2427,7 +2431,7 @@ Scrape:
 
                     WebPictureBox.Image = Nothing
                     GC.Collect()
-                    WebPictureBox.Load(node.InnerXml)
+                    WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(node.InnerXml)))
 
                     Do
                         Application.DoEvents()
@@ -2927,7 +2931,7 @@ NextURL:
                 WebPictureBox.Image = Nothing
                 GC.Collect()
 
-                WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
+                WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
                 LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
             Case 120 'Scrolling up
                 Form1.WebImageLine -= 1
@@ -2944,7 +2948,7 @@ NextURL:
                 End Try
                 WebPictureBox.Image = Nothing
                 GC.Collect()
-                WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
+                WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
                 LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
         End Select
 
@@ -3488,7 +3492,7 @@ NextURL:
             ImageTagPictureBox.Image = Nothing
             GC.Collect()
 
-            ImageTagPictureBox.Load(ImageTagDir(0))
+            ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
             CurrentImageTagImage = ImageTagDir(0)
 
             If File.Exists(TagImageFolder & "\ImageTags.txt") Then
@@ -3691,7 +3695,9 @@ NextURL:
                 GC.Collect()
 
                 Debug.Print("find")
-                ImageTagPictureBox.Load(ImageTagDir(0))
+                ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
+
+
                 CurrentImageTagImage = ImageTagDir(0)
 
 
@@ -4158,7 +4164,10 @@ NextURL:
         ImageTagPictureBox.Image = Nothing
         GC.Collect()
 
-        ImageTagPictureBox.Load(ImageTagDir(ImageTagCount))
+        ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
+
+
+
         CurrentImageTagImage = ImageTagDir(ImageTagCount)
 
         If ImageTagCount = ImageTagDir.Count - 1 Then BTNTagNext.Enabled = False
@@ -4379,7 +4388,7 @@ NextURL:
         ImageTagPictureBox.Image = Nothing
         GC.Collect()
 
-        ImageTagPictureBox.Load(ImageTagDir(ImageTagCount))
+        ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
         CurrentImageTagImage = ImageTagDir(ImageTagCount)
 
         If ImageTagCount = 0 Then BTNTagPrevious.Enabled = False
@@ -5206,7 +5215,7 @@ NextURL:
         WebPictureBox.Image = Nothing
         GC.Collect()
 
-        WebPictureBox.Load(Form1.WebImageLines(Form1.WebImageLine))
+        WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
 
         Debug.Print(Form1.WebImageLines(Form1.WebImageLine))
 
@@ -8040,7 +8049,9 @@ WhyUMakeMeDoDis:
                 Return
             End If
 
-            Form1.mainPictureBox.Load(LocalImageTagDir(0))
+            Form1.mainPictureBox.Image = Image.FromFile(LocalImageTagDir(0))
+
+
             CurrentLocalImageTagImage = LocalImageTagDir(0)
 
 
@@ -8079,7 +8090,7 @@ WhyUMakeMeDoDis:
         SetLocalImageTags()
 
         LocalImageTagCount += 1
-        Form1.mainPictureBox.Load(LocalImageTagDir(LocalImageTagCount))
+        Form1.mainPictureBox.Image = Image.FromFile(LocalImageTagDir(LocalImageTagCount))
         CurrentLocalImageTagImage = LocalImageTagDir(LocalImageTagCount)
 
         If LocalImageTagCount = LocalImageTagDir.Count - 1 Then BTNLocalTagNext.Enabled = False
@@ -9206,7 +9217,7 @@ WhyUMakeMeDoDis:
         SetLocalImageTags()
 
         LocalImageTagCount -= 1
-        Form1.mainPictureBox.Load(LocalImageTagDir(LocalImageTagCount))
+        Form1.mainPictureBox.Image = Image.FromFile(LocalImageTagDir(LocalImageTagCount))
         CurrentLocalImageTagImage = LocalImageTagDir(LocalImageTagCount)
 
         If LocalImageTagCount = 0 Then BTNLocalTagPrevious.Enabled = False
@@ -9267,7 +9278,9 @@ WhyUMakeMeDoDis:
                     Return
                 End If
 
-                Form1.mainPictureBox.Load(LocalImageTagDir(0))
+                Form1.mainPictureBox.Image = Image.FromFile(LocalImageTagDir(0))
+
+
                 CurrentLocalImageTagImage = LocalImageTagDir(0)
 
 
@@ -11016,9 +11029,9 @@ WhyUMakeMeDoDis:
         WishlistPreview.Image = Nothing
         GC.Collect()
         Try
-            WishlistPreview.Load(TBWishlistURL.Text)
-        Catch ex As Exception
-
+            WishlistPreview.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(TBWishlistURL.Text)))
+        Catch
+            MessageBox.Show(Me, "Failed to load Wishlist preview image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         End Try
     End Sub
 
@@ -11060,7 +11073,7 @@ WhyUMakeMeDoDis:
         GC.Collect()
 
         Try
-            WishlistPreview.Load(TBWishlistURL.Text)
+            WishlistPreview.Image = Image.FromFile(TBWishlistURL.Text)
         Catch ex As Exception
             MessageBox.Show(Me, "Tease AI cannot locate the image URL provided! Please make sure it is a valid address and you are connected to the internet!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             Return
@@ -12556,28 +12569,28 @@ NextURL:
                 GlitterSlider3.Value = SettingsList(24).Replace("Contact 3 Post Frequency: ", "")
 
                 Try
-                    GlitterAV.Load(SettingsList(25).Replace("Domme AV: ", ""))
+                    GlitterAV.Image = Image.FromFile(SettingsList(25).Replace("Domme AV: ", ""))
                     My.Settings.GlitterAV = SettingsList(25).Replace("Domme AV: ", "")
                     My.Settings.Save()
                 Catch
                 End Try
 
                 Try
-                    GlitterAV1.Load(SettingsList(26).Replace("Contact 1 AV: ", ""))
+                    GlitterAV1.Image = Image.FromFile(SettingsList(26).Replace("Contact 1 AV: ", ""))
                     My.Settings.GlitterAV1 = SettingsList(26).Replace("Contact 1 AV: ", "")
                     My.Settings.Save()
                 Catch
                 End Try
 
                 Try
-                    GlitterAV2.Load(SettingsList(27).Replace("Contact 2 AV: ", ""))
+                    GlitterAV2.Image = Image.FromFile(SettingsList(27).Replace("Contact 2 AV: ", ""))
                     My.Settings.GlitterAV2 = SettingsList(27).Replace("Contact 2 AV: ", "")
                     My.Settings.Save()
                 Catch
                 End Try
 
                 Try
-                    GlitterAV3.Load(SettingsList(28).Replace("Contact 3 AV: ", ""))
+                    GlitterAV3.Image = Image.FromFile(SettingsList(28).Replace("Contact 3 AV: ", ""))
                     My.Settings.GlitterAV3 = SettingsList(28).Replace("Contact 3 AV: ", "")
                     My.Settings.Save()
                 Catch

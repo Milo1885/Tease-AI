@@ -655,8 +655,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
     
 
-        If File.Exists(My.Settings.DomAvatarSave) Then domAvatar.Load(My.Settings.DomAvatarSave)
-        If File.Exists(My.Settings.SubAvatarSave) Then subAvatar.Load(My.Settings.SubAvatarSave)
+        If File.Exists(My.Settings.DomAvatarSave) Then domAvatar.Image = Image.FromFile(My.Settings.DomAvatarSave)
+        If File.Exists(My.Settings.SubAvatarSave) Then subAvatar.Image = Image.FromFile(My.Settings.SubAvatarSave)
 
 
         For Each comboitem As String In My.Settings.RecentSlideshows
@@ -719,10 +719,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         If My.Settings.CBCensorConstant = True Then FrmSettings.CBCensorConstant.Checked = True
 
-        If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Load(My.Settings.GlitterAV)
-        If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Load(My.Settings.GlitterAV1)
-        If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Load(My.Settings.GlitterAV2)
-        If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Load(My.Settings.GlitterAV3)
+        If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Image = Image.FromFile(My.Settings.GlitterAV)
+        If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Image = Image.FromFile(My.Settings.GlitterAV1)
+        If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Image = Image.FromFile(My.Settings.GlitterAV2)
+        If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Image = Image.FromFile(My.Settings.GlitterAV3)
 
 
 
@@ -7596,7 +7596,7 @@ StatusUpdateEnd:
             GC.Collect()
            
 
-            domAvatar.Load(OpenFileDialog1.FileName)
+            domAvatar.Image = Image.FromFile(OpenFileDialog1.FileName)
             My.Settings.DomAvatarSave = OpenFileDialog1.FileName
             My.Settings.Save()
         End If
@@ -7610,7 +7610,7 @@ StatusUpdateEnd:
             End Try
             subAvatar.Image = Nothing
             GC.Collect()
-            subAvatar.Load(OpenFileDialog1.FileName)
+            subAvatar.Image = Image.FromFile(OpenFileDialog1.FileName)
             My.Settings.SubAvatarSave = OpenFileDialog1.FileName
             My.Settings.Save()
         End If
@@ -8576,7 +8576,7 @@ RinseLatherRepeat:
             ImageClean = ImageClean.Replace("\\", "\")
             ClearMainPictureBox()
             Try
-                mainPictureBox.Load(ImageClean)
+                mainPictureBox.Image = Image.FromFile(ImageClean)
             Catch
                 MessageBox.Show(Me, "\" & ImageS(0) & " was not found in " & Application.StartupPath & "\Images!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             End Try
@@ -9774,7 +9774,7 @@ OrgasmDecided:
             JustShowedBlogImage = True
             GetTnAList()
             ClearMainPictureBox()
-            mainPictureBox.Load(AssList(randomizer.Next(0, AssList.Count)))
+            mainPictureBox.Image = Image.FromFile(AssList(randomizer.Next(0, AssList.Count)))
             ShowImageInfo()
             StringClean = StringClean.Replace("@ShowButtImage", "")
         End If
@@ -9783,7 +9783,7 @@ OrgasmDecided:
             JustShowedBlogImage = True
             GetTnAList()
             ClearMainPictureBox()
-            mainPictureBox.Load(BoobList(randomizer.Next(0, BoobList.Count)))
+            mainPictureBox.Image = Image.FromFile(BoobList(randomizer.Next(0, BoobList.Count)))
             ShowImageInfo()
             StringClean = StringClean.Replace("@ShowBoobsImage", "")
         End If
@@ -10431,7 +10431,7 @@ OrgasmDecided:
             JustShowedBlogImage = True
 
             ClearMainPictureBox()
-            mainPictureBox.Load(FoundString)
+            mainPictureBox.Image = Image.FromFile(FoundString)
             ShowImageInfo()
 
 
@@ -10657,7 +10657,7 @@ OrgasmDecided:
 
             mainPictureBox.BackgroundImage = Nothing
             mainPictureBox.Refresh()
-            mainPictureBox.Load(Application.StartupPath & "\Images\System\Black.jpg")
+            mainPictureBox.Image = Image.FromFile(Application.StartupPath & "\Images\System\Black.jpg")
 
             If FrmSettings.CBDomDel.Checked = True Then
                 Try
@@ -14725,7 +14725,16 @@ VTSkip:
 
         ClearMainPictureBox()
 
-        mainPictureBox.Load(FoundString)
+        If FoundString.Contains("/") Then
+            Try
+                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
+            Catch
+                MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End Try
+        Else
+            mainPictureBox.Image = Image.FromFile(FoundString)
+        End If
+
         ShowImageInfo()
         
 
@@ -15143,7 +15152,11 @@ AlreadySeen:
 
 
             If FoundString.Contains("/") Then
-                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
+                Try
+                    mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
+                Catch
+                    MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End Try
             Else
                 mainPictureBox.Image = Image.FromFile(FoundString)
             End If
@@ -16647,14 +16660,14 @@ TryNext:
 
         If TnARandom < 51 Then
 
-            mainPictureBox.Load(BoobList(randomizer.Next(0, BoobList.Count)))
+            mainPictureBox.Image = Image.FromFile(BoobList(randomizer.Next(0, BoobList.Count)))
             ShowImageInfo()
             BoobImage = True
             AssImage = False
 
         Else
 
-            mainPictureBox.Load(AssList(randomizer.Next(0, AssList.Count)))
+            mainPictureBox.Image = Image.FromFile(AssList(randomizer.Next(0, AssList.Count)))
             ShowImageInfo()
             BoobImage = False
             AssImage = True
@@ -17637,7 +17650,7 @@ TryNext:
         ImageClean = ImageClean.Replace("\\", "\")
         ClearMainPictureBox()
         Try
-            mainPictureBox.Load(ImageClean)
+            mainPictureBox.Image = Image.FromFile(ImageClean)
         Catch
             MessageBox.Show(Me, "\" & ImageS(0) & " was not found in " & Application.StartupPath & "\Images!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
         End Try
@@ -20004,7 +20017,7 @@ TryNext:
         If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then Contact3Pics = Txt2List(SettingsPath & "Contact3Pics.txt")
 
         If SlideshowLoaded = True Then
-            If File.Exists(_ImageFileNames(FileCount)) Then mainPictureBox.Load(_ImageFileNames(FileCount))
+            If File.Exists(_ImageFileNames(FileCount)) Then mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
         End If
 
         ChatText.DocumentText = Chat

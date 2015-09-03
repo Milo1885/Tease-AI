@@ -26,6 +26,7 @@ Public Class FrmCardList
     Dim SlotBetTemp As Integer
 
     Dim MatchList As New List(Of String)
+    Dim CompareList As New List(Of String)
 
     Dim Pair1 As String
     Dim Pair2 As String
@@ -140,15 +141,15 @@ Public Class FrmCardList
     Public EdgesOwed As Integer
     Public TokensPaid As Integer
 
-    Dim CardImage1 As Image
-    Dim CardImage2 As Image
-    Dim CardImage3 As Image
-    Dim CardImage4 As Image
-    Dim CardImage5 As Image
-    Dim CardImage6 As Image
-    Dim CardImage7 As Image
-    Dim CardImage8 As Image
-    Dim CardImage9 As Image
+    Public CardImage1 As Image
+    Public CardImage2 As Image
+    Public CardImage3 As Image
+    Public CardImage4 As Image
+    Public CardImage5 As Image
+    Public CardImage6 As Image
+    Public CardImage7 As Image
+    Public CardImage8 As Image
+    Public CardImage9 As Image
 
 
     Private Declare Function mciSendString Lib "winmm.dll" Alias "mciSendStringA" _
@@ -165,26 +166,26 @@ Public Class FrmCardList
 
         ClearMatchCache()
 
-        M1A.Load(CardBackImage)
-        M2A.Load(CardBackImage)
-        M3A.Load(CardBackImage)
-        M4A.Load(CardBackImage)
-        M5A.Load(CardBackImage)
-        M6A.Load(CardBackImage)
+        M1A.Image = Image.FromFile(CardBackImage)
+        M2A.Image = Image.FromFile(CardBackImage)
+        M3A.Image = Image.FromFile(CardBackImage)
+        M4A.Image = Image.FromFile(CardBackImage)
+        M5A.Image = Image.FromFile(CardBackImage)
+        M6A.Image = Image.FromFile(CardBackImage)
 
-        M1B.Load(CardBackImage)
-        M2B.Load(CardBackImage)
-        M3B.Load(CardBackImage)
-        M4B.Load(CardBackImage)
-        M5B.Load(CardBackImage)
-        M6B.Load(CardBackImage)
+        M1B.Image = Image.FromFile(CardBackImage)
+        M2B.Image = Image.FromFile(CardBackImage)
+        M3B.Image = Image.FromFile(CardBackImage)
+        M4B.Image = Image.FromFile(CardBackImage)
+        M5B.Image = Image.FromFile(CardBackImage)
+        M6B.Image = Image.FromFile(CardBackImage)
 
-        M1C.Load(CardBackImage)
-        M2C.Load(CardBackImage)
-        M3C.Load(CardBackImage)
-        M4C.Load(CardBackImage)
-        M5C.Load(CardBackImage)
-        M6C.Load(CardBackImage)
+        M1C.Image = Image.FromFile(CardBackImage)
+        M2C.Image = Image.FromFile(CardBackImage)
+        M3C.Image = Image.FromFile(CardBackImage)
+        M4C.Image = Image.FromFile(CardBackImage)
+        M5C.Image = Image.FromFile(CardBackImage)
+        M6C.Image = Image.FromFile(CardBackImage)
 
     End Sub
 
@@ -999,6 +1000,7 @@ Card9:
             'MatchList.Remove(MatchList(CardVal))
 
             MatchList.Clear()
+            CompareList.Clear()
 
             MatchList.Add(Pair1)
             MatchList.Add(Pair1)
@@ -1018,6 +1020,38 @@ Card9:
             MatchList.Add(Pair8)
             MatchList.Add(Pair9)
             MatchList.Add(Pair9)
+
+            CompareList.Add(Pair1)
+            CompareList.Add(Pair1)
+            CompareList.Add(Pair2)
+            CompareList.Add(Pair2)
+            CompareList.Add(Pair3)
+            CompareList.Add(Pair3)
+            CompareList.Add(Pair4)
+            CompareList.Add(Pair4)
+            CompareList.Add(Pair5)
+            CompareList.Add(Pair5)
+            CompareList.Add(Pair6)
+            CompareList.Add(Pair6)
+            CompareList.Add(Pair7)
+            CompareList.Add(Pair7)
+            CompareList.Add(Pair8)
+            CompareList.Add(Pair8)
+            CompareList.Add(Pair9)
+            CompareList.Add(Pair9)
+
+            'CardImage1 = CardImage(Pair1)
+            'CardImage2 = CardImage(Pair2)
+            'CardImage3 = CardImage(Pair3)
+            'CardImage4 = CardImage(Pair4)
+            'CardImage5 = CardImage(Pair5)
+            'CardImage6 = CardImage(Pair6)
+            'CardImage7 = CardImage(Pair7)
+            'CardImage8 = CardImage(Pair8)
+            'CardImage9 = CardImage(Pair9)
+
+
+
 
             For I As Integer = 0 To MatchList.Count - 1
                 Debug.Print(MatchList(I))
@@ -1078,26 +1112,26 @@ Card9:
 
 
 
-            M1A.Load(CardBackImage)
-            M2A.Load(CardBackImage)
-            M3A.Load(CardBackImage)
-            M4A.Load(CardBackImage)
-            M5A.Load(CardBackImage)
-            M6A.Load(CardBackImage)
+            M1A.Image = Image.FromFile(CardBackImage)
+            M2A.Image = Image.FromFile(CardBackImage)
+            M3A.Image = Image.FromFile(CardBackImage)
+            M4A.Image = Image.FromFile(CardBackImage)
+            M5A.Image = Image.FromFile(CardBackImage)
+            M6A.Image = Image.FromFile(CardBackImage)
 
-            M1B.Load(CardBackImage)
-            M2B.Load(CardBackImage)
-            M3B.Load(CardBackImage)
-            M4B.Load(CardBackImage)
-            M5B.Load(CardBackImage)
-            M6B.Load(CardBackImage)
+            M1B.Image = Image.FromFile(CardBackImage)
+            M2B.Image = Image.FromFile(CardBackImage)
+            M3B.Image = Image.FromFile(CardBackImage)
+            M4B.Image = Image.FromFile(CardBackImage)
+            M5B.Image = Image.FromFile(CardBackImage)
+            M6B.Image = Image.FromFile(CardBackImage)
 
-            M1C.Load(CardBackImage)
-            M2C.Load(CardBackImage)
-            M3C.Load(CardBackImage)
-            M4C.Load(CardBackImage)
-            M5C.Load(CardBackImage)
-            M6C.Load(CardBackImage)
+            M1C.Image = Image.FromFile(CardBackImage)
+            M2C.Image = Image.FromFile(CardBackImage)
+            M3C.Image = Image.FromFile(CardBackImage)
+            M4C.Image = Image.FromFile(CardBackImage)
+            M5C.Image = Image.FromFile(CardBackImage)
+            M6C.Image = Image.FromFile(CardBackImage)
 
 
             LBLMatchChance.Text = MatchChance & " Chances Left"
@@ -1169,155 +1203,155 @@ Card9:
 
         If M1A.Enabled = True Then
             Try
-                M1A.Image.Dispose()
+                ' M1A.Image.Dispose()
             Catch
             End Try
             M1A.Image = Nothing
-            M1A.Load(CardBackImage)
+            M1A.Image = Image.FromFile(CardBackImage)
         End If
         If M2A.Enabled = True Then
             Try
-                M2A.Image.Dispose()
+                'M2A.Image.Dispose()
             Catch
             End Try
             M2A.Image = Nothing
-            M2A.Load(CardBackImage)
+            M2A.Image = Image.FromFile(CardBackImage)
         End If
         If M3A.Enabled = True Then
             Try
-                M3A.Image.Dispose()
+                'M3A.Image.Dispose()
             Catch
             End Try
             M3A.Image = Nothing
-            M3A.Load(CardBackImage)
+            M3A.Image = Image.FromFile(CardBackImage)
         End If
         If M4A.Enabled = True Then
             Try
-                M4A.Image.Dispose()
+                'M4A.Image.Dispose()
             Catch
             End Try
             M4A.Image = Nothing
-            M4A.Load(CardBackImage)
+            M4A.Image = Image.FromFile(CardBackImage)
         End If
         If M5A.Enabled = True Then
             Try
-                M5A.Image.Dispose()
+                ' M5A.Image.Dispose()
             Catch
             End Try
             M5A.Image = Nothing
-            M5A.Load(CardBackImage)
+            M5A.Image = Image.FromFile(CardBackImage)
         End If
         If M6A.Enabled = True Then
             Try
-                M6A.Image.Dispose()
+                ' M6A.Image.Dispose()
             Catch
             End Try
             M6A.Image = Nothing
-            M6A.Load(CardBackImage)
+            M6A.Image = Image.FromFile(CardBackImage)
         End If
 
         If M1B.Enabled = True Then
             Try
-                M1B.Image.Dispose()
+                ' M1B.Image.Dispose()
             Catch
             End Try
             M1B.Image = Nothing
-            M1B.Load(CardBackImage)
+            M1B.Image = Image.FromFile(CardBackImage)
         End If
         If M2B.Enabled = True Then
             Try
-                M2B.Image.Dispose()
+                'M2B.Image.Dispose()
             Catch
             End Try
             M2B.Image = Nothing
-            M2B.Load(CardBackImage)
+            M2B.Image = Image.FromFile(CardBackImage)
         End If
         If M3B.Enabled = True Then
             Try
-                M3B.Image.Dispose()
+                'M3B.Image.Dispose()
             Catch
             End Try
             M3B.Image = Nothing
-            M3B.Load(CardBackImage)
+            M3B.Image = Image.FromFile(CardBackImage)
         End If
         If M4B.Enabled = True Then
             Try
-                M4B.Image.Dispose()
+                ' M4B.Image.Dispose()
             Catch
             End Try
             M4B.Image = Nothing
-            M4B.Load(CardBackImage)
+            M4B.Image = Image.FromFile(CardBackImage)
         End If
         If M5B.Enabled = True Then
             Try
-                M5B.Image.Dispose()
+                'M5B.Image.Dispose()
             Catch
             End Try
             M5B.Image = Nothing
-            M5B.Load(CardBackImage)
+            M5B.Image = Image.FromFile(CardBackImage)
         End If
         If M6B.Enabled = True Then
             Try
-                M6B.Image.Dispose()
+                'M6B.Image.Dispose()
             Catch
             End Try
             M6B.Image = Nothing
-            M6B.Load(CardBackImage)
+            M6B.Image = Image.FromFile(CardBackImage)
         End If
 
         If M1C.Enabled = True Then
             Try
-                M1C.Image.Dispose()
+                'M1C.Image.Dispose()
             Catch
             End Try
             M1C.Image = Nothing
-            M1C.Load(CardBackImage)
+            M1C.Image = Image.FromFile(CardBackImage)
         End If
         If M2C.Enabled = True Then
             Try
-                M2C.Image.Dispose()
+                ' M2C.Image.Dispose()
             Catch
             End Try
             M2C.Image = Nothing
-            M2C.Load(CardBackImage)
+            M2C.Image = Image.FromFile(CardBackImage)
         End If
         If M3C.Enabled = True Then
             Try
-                M3C.Image.Dispose()
+                'M3C.Image.Dispose()
             Catch
             End Try
             M3C.Image = Nothing
-            M3C.Load(CardBackImage)
+            M3C.Image = Image.FromFile(CardBackImage)
         End If
         If M4C.Enabled = True Then
             Try
-                M4C.Image.Dispose()
+                ' M4C.Image.Dispose()
             Catch
             End Try
             M4C.Image = Nothing
-            M4C.Load(CardBackImage)
+            M4C.Image = Image.FromFile(CardBackImage)
         End If
         If M5C.Enabled = True Then
             Try
-                M5C.Image.Dispose()
+                'M5C.Image.Dispose()
             Catch
             End Try
             M5C.Image = Nothing
-            M5C.Load(CardBackImage)
+            M5C.Image = Image.FromFile(CardBackImage)
         End If
         If M6C.Enabled = True Then
             Try
-                M6C.Image.Dispose()
+                'M6C.Image.Dispose()
             Catch
             End Try
             M6C.Image = Nothing
-            M6C.Load(CardBackImage)
+            M6C.Image = Image.FromFile(CardBackImage)
         End If
 
-        Try
-            GC.Collect()
-        Catch
-        End Try
+        'Try
+        'GC.Collect()
+        'Catch
+        'End Try
 
         If MatchChance = 0 Then
 
@@ -1417,6 +1451,20 @@ Card9:
 
     End Sub
 
+    Public Sub RemindCards()
+
+        CardImage1 = CardImage(Pair1)
+        CardImage2 = CardImage(Pair2)
+        CardImage3 = CardImage(Pair3)
+        CardImage4 = CardImage(Pair4)
+        CardImage5 = CardImage(Pair5)
+        CardImage6 = CardImage(Pair6)
+        CardImage7 = CardImage(Pair7)
+        CardImage8 = CardImage(Pair8)
+        CardImage9 = CardImage(Pair9)
+
+    End Sub
+
     Private Sub M1A_Click(sender As System.Object, e As System.EventArgs) Handles M1A.Click
 
 
@@ -1424,19 +1472,32 @@ Card9:
 
         PlayCardFlip()
 
+        'RemindCards()
 
-
+        If CardImage1 Is Nothing Or CardImage2 Is Nothing Or CardImage3 Is Nothing Or CardImage4 Is Nothing Or CardImage5 Is Nothing Or CardImage6 Is Nothing Or CardImage7 Is Nothing Or _
+            CardImage8 Is Nothing Or CardImage9 Is Nothing Then
+            MsgBox("Nothing here!")
+        End If
+        If Match1A = CompareList(0) Or Match1A = CompareList(1) Then M1A.Image = CardImage1
+        If Match1A = CompareList(2) Or Match1A = CompareList(3) Then M1A.Image = CardImage2
+        If Match1A = CompareList(4) Or Match1A = CompareList(5) Then M1A.Image = CardImage3
+        If Match1A = CompareList(6) Or Match1A = CompareList(7) Then M1A.Image = CardImage4
+        If Match1A = CompareList(8) Or Match1A = CompareList(9) Then M1A.Image = CardImage5
+        If Match1A = CompareList(10) Or Match1A = CompareList(11) Then M1A.Image = CardImage6
+        If Match1A = CompareList(12) Or Match1A = CompareList(13) Then M1A.Image = CardImage7
+        If Match1A = CompareList(14) Or Match1A = CompareList(15) Then M1A.Image = CardImage8
+        If Match1A = CompareList(16) Or Match1A = CompareList(17) Then M1A.Image = CardImage9
 
 
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M1A.Load(Match1A)
+            'M1A.Load(Match1A)
             Match1 = Match1A
             M1A.Enabled = False
             MatchTemp = "M1A"
         Else
             MatchPhase = 0
-            M1A.Load(Match1A)
+            'M1A.Load(Match1A)
             Match2 = Match1A
             If Match1 = Match2 Then
                 M1A.Enabled = False
@@ -1453,15 +1514,26 @@ Card9:
 
         PlayCardFlip()
 
+        'RemindCards()
+
+
+        If Match2A = CompareList(0) Or Match2A = CompareList(1) Then M2A.Image = CardImage1
+        If Match2A = CompareList(2) Or Match2A = CompareList(3) Then M2A.Image = CardImage2
+        If Match2A = CompareList(4) Or Match2A = CompareList(5) Then M2A.Image = CardImage3
+        If Match2A = CompareList(6) Or Match2A = CompareList(7) Then M2A.Image = CardImage4
+        If Match2A = CompareList(8) Or Match2A = CompareList(9) Then M2A.Image = CardImage5
+        If Match2A = CompareList(10) Or Match2A = CompareList(11) Then M2A.Image = CardImage6
+        If Match2A = CompareList(12) Or Match2A = CompareList(13) Then M2A.Image = CardImage7
+        If Match2A = CompareList(14) Or Match2A = CompareList(15) Then M2A.Image = CardImage8
+        If Match2A = CompareList(16) Or Match2A = CompareList(17) Then M2A.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M2A.Load(Match2A)
             Match1 = Match2A
             M2A.Enabled = False
             MatchTemp = "M2A"
         Else
             MatchPhase = 0
-            M2A.Load(Match2A)
             Match2 = Match2A
             If Match1 = Match2 Then
                 M2A.Enabled = False
@@ -1478,15 +1550,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match3A = CompareList(0) Or Match3A = CompareList(1) Then M3A.Image = CardImage1
+        If Match3A = CompareList(2) Or Match3A = CompareList(3) Then M3A.Image = CardImage2
+        If Match3A = CompareList(4) Or Match3A = CompareList(5) Then M3A.Image = CardImage3
+        If Match3A = CompareList(6) Or Match3A = CompareList(7) Then M3A.Image = CardImage4
+        If Match3A = CompareList(8) Or Match3A = CompareList(9) Then M3A.Image = CardImage5
+        If Match3A = CompareList(10) Or Match3A = CompareList(11) Then M3A.Image = CardImage6
+        If Match3A = CompareList(12) Or Match3A = CompareList(13) Then M3A.Image = CardImage7
+        If Match3A = CompareList(14) Or Match3A = CompareList(15) Then M3A.Image = CardImage8
+        If Match3A = CompareList(16) Or Match3A = CompareList(17) Then M3A.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M3A.Load(Match3A)
             Match1 = Match3A
             M3A.Enabled = False
             MatchTemp = "M3A"
         Else
             MatchPhase = 0
-            M3A.Load(Match3A)
             Match2 = Match3A
             If Match1 = Match2 Then
                 M3A.Enabled = False
@@ -1503,15 +1585,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match4A = CompareList(0) Or Match4A = CompareList(1) Then M4A.Image = CardImage1
+        If Match4A = CompareList(2) Or Match4A = CompareList(3) Then M4A.Image = CardImage2
+        If Match4A = CompareList(4) Or Match4A = CompareList(5) Then M4A.Image = CardImage3
+        If Match4A = CompareList(6) Or Match4A = CompareList(7) Then M4A.Image = CardImage4
+        If Match4A = CompareList(8) Or Match4A = CompareList(9) Then M4A.Image = CardImage5
+        If Match4A = CompareList(10) Or Match4A = CompareList(11) Then M4A.Image = CardImage6
+        If Match4A = CompareList(12) Or Match4A = CompareList(13) Then M4A.Image = CardImage7
+        If Match4A = CompareList(14) Or Match4A = CompareList(15) Then M4A.Image = CardImage8
+        If Match4A = CompareList(16) Or Match4A = CompareList(17) Then M4A.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M4A.Load(Match4A)
             Match1 = Match4A
             M4A.Enabled = False
             MatchTemp = "M4A"
         Else
             MatchPhase = 0
-            M4A.Load(Match4A)
             Match2 = Match4A
             If Match1 = Match2 Then
                 M4A.Enabled = False
@@ -1528,15 +1620,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match5A = CompareList(0) Or Match5A = CompareList(1) Then M5A.Image = CardImage1
+        If Match5A = CompareList(2) Or Match5A = CompareList(3) Then M5A.Image = CardImage2
+        If Match5A = CompareList(4) Or Match5A = CompareList(5) Then M5A.Image = CardImage3
+        If Match5A = CompareList(6) Or Match5A = CompareList(7) Then M5A.Image = CardImage4
+        If Match5A = CompareList(8) Or Match5A = CompareList(9) Then M5A.Image = CardImage5
+        If Match5A = CompareList(10) Or Match5A = CompareList(11) Then M5A.Image = CardImage6
+        If Match5A = CompareList(12) Or Match5A = CompareList(13) Then M5A.Image = CardImage7
+        If Match5A = CompareList(14) Or Match5A = CompareList(15) Then M5A.Image = CardImage8
+        If Match5A = CompareList(16) Or Match5A = CompareList(17) Then M5A.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M5A.Load(Match5A)
             Match1 = Match5A
             M5A.Enabled = False
             MatchTemp = "M5A"
         Else
             MatchPhase = 0
-            M5A.Load(Match5A)
             Match2 = Match5A
             If Match1 = Match2 Then
                 M5A.Enabled = False
@@ -1553,15 +1655,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match6A = CompareList(0) Or Match6A = CompareList(1) Then M6A.Image = CardImage1
+        If Match6A = CompareList(2) Or Match6A = CompareList(3) Then M6A.Image = CardImage2
+        If Match6A = CompareList(4) Or Match6A = CompareList(5) Then M6A.Image = CardImage3
+        If Match6A = CompareList(6) Or Match6A = CompareList(7) Then M6A.Image = CardImage4
+        If Match6A = CompareList(8) Or Match6A = CompareList(9) Then M6A.Image = CardImage5
+        If Match6A = CompareList(10) Or Match6A = CompareList(11) Then M6A.Image = CardImage6
+        If Match6A = CompareList(12) Or Match6A = CompareList(13) Then M6A.Image = CardImage7
+        If Match6A = CompareList(14) Or Match6A = CompareList(15) Then M6A.Image = CardImage8
+        If Match6A = CompareList(16) Or Match6A = CompareList(17) Then M6A.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M6A.Load(Match6A)
             Match1 = Match6A
             M6A.Enabled = False
             MatchTemp = "M6A"
         Else
             MatchPhase = 0
-            M6A.Load(Match6A)
             Match2 = Match6A
             If Match1 = Match2 Then
                 M6A.Enabled = False
@@ -1579,15 +1691,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match1B = CompareList(0) Or Match1B = CompareList(1) Then M1B.Image = CardImage1
+        If Match1B = CompareList(2) Or Match1B = CompareList(3) Then M1B.Image = CardImage2
+        If Match1B = CompareList(4) Or Match1B = CompareList(5) Then M1B.Image = CardImage3
+        If Match1B = CompareList(6) Or Match1B = CompareList(7) Then M1B.Image = CardImage4
+        If Match1B = CompareList(8) Or Match1B = CompareList(9) Then M1B.Image = CardImage5
+        If Match1B = CompareList(10) Or Match1B = CompareList(11) Then M1B.Image = CardImage6
+        If Match1B = CompareList(12) Or Match1B = CompareList(13) Then M1B.Image = CardImage7
+        If Match1B = CompareList(14) Or Match1B = CompareList(15) Then M1B.Image = CardImage8
+        If Match1B = CompareList(16) Or Match1B = CompareList(17) Then M1B.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M1B.Load(Match1B)
             Match1 = Match1B
             M1B.Enabled = False
             MatchTemp = "M1B"
         Else
             MatchPhase = 0
-            M1B.Load(Match1B)
             Match2 = Match1B
             If Match1 = Match2 Then
                 M1B.Enabled = False
@@ -1604,15 +1726,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match2B = CompareList(0) Or Match2B = CompareList(1) Then M2B.Image = CardImage1
+        If Match2B = CompareList(2) Or Match2B = CompareList(3) Then M2B.Image = CardImage2
+        If Match2B = CompareList(4) Or Match2B = CompareList(5) Then M2B.Image = CardImage3
+        If Match2B = CompareList(6) Or Match2B = CompareList(7) Then M2B.Image = CardImage4
+        If Match2B = CompareList(8) Or Match2B = CompareList(9) Then M2B.Image = CardImage5
+        If Match2B = CompareList(10) Or Match2B = CompareList(11) Then M2B.Image = CardImage6
+        If Match2B = CompareList(12) Or Match2B = CompareList(13) Then M2B.Image = CardImage7
+        If Match2B = CompareList(14) Or Match2B = CompareList(15) Then M2B.Image = CardImage8
+        If Match2B = CompareList(16) Or Match2B = CompareList(17) Then M2B.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M2B.Load(Match2B)
             Match1 = Match2B
             M2B.Enabled = False
             MatchTemp = "M2B"
         Else
             MatchPhase = 0
-            M2B.Load(Match2B)
             Match2 = Match2B
             If Match1 = Match2 Then
                 M2B.Enabled = False
@@ -1629,15 +1761,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match3B = CompareList(0) Or Match3B = CompareList(1) Then M3B.Image = CardImage1
+        If Match3B = CompareList(2) Or Match3B = CompareList(3) Then M3B.Image = CardImage2
+        If Match3B = CompareList(4) Or Match3B = CompareList(5) Then M3B.Image = CardImage3
+        If Match3B = CompareList(6) Or Match3B = CompareList(7) Then M3B.Image = CardImage4
+        If Match3B = CompareList(8) Or Match3B = CompareList(9) Then M3B.Image = CardImage5
+        If Match3B = CompareList(10) Or Match3B = CompareList(11) Then M3B.Image = CardImage6
+        If Match3B = CompareList(12) Or Match3B = CompareList(13) Then M3B.Image = CardImage7
+        If Match3B = CompareList(14) Or Match3B = CompareList(15) Then M3B.Image = CardImage8
+        If Match3B = CompareList(16) Or Match3B = CompareList(17) Then M3B.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M3B.Load(Match3B)
             Match1 = Match3B
             M3B.Enabled = False
             MatchTemp = "M3B"
         Else
             MatchPhase = 0
-            M3B.Load(Match3B)
             Match2 = Match3B
             If Match1 = Match2 Then
                 M3B.Enabled = False
@@ -1654,15 +1796,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match4B = CompareList(0) Or Match4B = CompareList(1) Then M4B.Image = CardImage1
+        If Match4B = CompareList(2) Or Match4B = CompareList(3) Then M4B.Image = CardImage2
+        If Match4B = CompareList(4) Or Match4B = CompareList(5) Then M4B.Image = CardImage3
+        If Match4B = CompareList(6) Or Match4B = CompareList(7) Then M4B.Image = CardImage4
+        If Match4B = CompareList(8) Or Match4B = CompareList(9) Then M4B.Image = CardImage5
+        If Match4B = CompareList(10) Or Match4B = CompareList(11) Then M4B.Image = CardImage6
+        If Match4B = CompareList(12) Or Match4B = CompareList(13) Then M4B.Image = CardImage7
+        If Match4B = CompareList(14) Or Match4B = CompareList(15) Then M4B.Image = CardImage8
+        If Match4B = CompareList(16) Or Match4B = CompareList(17) Then M4B.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M4B.Load(Match4B)
             Match1 = Match4B
             M4B.Enabled = False
             MatchTemp = "M4B"
         Else
             MatchPhase = 0
-            M4B.Load(Match4B)
             Match2 = Match4B
             If Match1 = Match2 Then
                 M4B.Enabled = False
@@ -1679,15 +1831,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match5B = CompareList(0) Or Match5B = CompareList(1) Then M5B.Image = CardImage1
+        If Match5B = CompareList(2) Or Match5B = CompareList(3) Then M5B.Image = CardImage2
+        If Match5B = CompareList(4) Or Match5B = CompareList(5) Then M5B.Image = CardImage3
+        If Match5B = CompareList(6) Or Match5B = CompareList(7) Then M5B.Image = CardImage4
+        If Match5B = CompareList(8) Or Match5B = CompareList(9) Then M5B.Image = CardImage5
+        If Match5B = CompareList(10) Or Match5B = CompareList(11) Then M5B.Image = CardImage6
+        If Match5B = CompareList(12) Or Match5B = CompareList(13) Then M5B.Image = CardImage7
+        If Match5B = CompareList(14) Or Match5B = CompareList(15) Then M5B.Image = CardImage8
+        If Match5B = CompareList(16) Or Match5B = CompareList(17) Then M5B.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M5B.Load(Match5B)
             Match1 = Match5B
             M5B.Enabled = False
             MatchTemp = "M5B"
         Else
             MatchPhase = 0
-            M5B.Load(Match5B)
             Match2 = Match5B
             If Match1 = Match2 Then
                 M5B.Enabled = False
@@ -1704,15 +1866,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match6B = CompareList(0) Or Match6B = CompareList(1) Then M6B.Image = CardImage1
+        If Match6B = CompareList(2) Or Match6B = CompareList(3) Then M6B.Image = CardImage2
+        If Match6B = CompareList(4) Or Match6B = CompareList(5) Then M6B.Image = CardImage3
+        If Match6B = CompareList(6) Or Match6B = CompareList(7) Then M6B.Image = CardImage4
+        If Match6B = CompareList(8) Or Match6B = CompareList(9) Then M6B.Image = CardImage5
+        If Match6B = CompareList(10) Or Match6B = CompareList(11) Then M6B.Image = CardImage6
+        If Match6B = CompareList(12) Or Match6B = CompareList(13) Then M6B.Image = CardImage7
+        If Match6B = CompareList(14) Or Match6B = CompareList(15) Then M6B.Image = CardImage8
+        If Match6B = CompareList(16) Or Match6B = CompareList(17) Then M6B.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M6B.Load(Match6B)
             Match1 = Match6B
             M6B.Enabled = False
             MatchTemp = "M6B"
         Else
             MatchPhase = 0
-            M6B.Load(Match6B)
             Match2 = Match6B
             If Match1 = Match2 Then
                 M6B.Enabled = False
@@ -1730,15 +1902,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match1C = CompareList(0) Or Match1C = CompareList(1) Then M1C.Image = CardImage1
+        If Match1C = CompareList(2) Or Match1C = CompareList(3) Then M1C.Image = CardImage2
+        If Match1C = CompareList(4) Or Match1C = CompareList(5) Then M1C.Image = CardImage3
+        If Match1C = CompareList(6) Or Match1C = CompareList(7) Then M1C.Image = CardImage4
+        If Match1C = CompareList(8) Or Match1C = CompareList(9) Then M1C.Image = CardImage5
+        If Match1C = CompareList(10) Or Match1C = CompareList(11) Then M1C.Image = CardImage6
+        If Match1C = CompareList(12) Or Match1C = CompareList(13) Then M1C.Image = CardImage7
+        If Match1C = CompareList(14) Or Match1C = CompareList(15) Then M1C.Image = CardImage8
+        If Match1C = CompareList(16) Or Match1C = CompareList(17) Then M1C.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M1C.Load(Match1C)
             Match1 = Match1C
             M1C.Enabled = False
             MatchTemp = "M1C"
         Else
             MatchPhase = 0
-            M1C.Load(Match1C)
             Match2 = Match1C
             If Match1 = Match2 Then
                 M1C.Enabled = False
@@ -1755,15 +1937,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match2C = CompareList(0) Or Match2C = CompareList(1) Then M2C.Image = CardImage1
+        If Match2C = CompareList(2) Or Match2C = CompareList(3) Then M2C.Image = CardImage2
+        If Match2C = CompareList(4) Or Match2C = CompareList(5) Then M2C.Image = CardImage3
+        If Match2C = CompareList(6) Or Match2C = CompareList(7) Then M2C.Image = CardImage4
+        If Match2C = CompareList(8) Or Match2C = CompareList(9) Then M2C.Image = CardImage5
+        If Match2C = CompareList(10) Or Match2C = CompareList(11) Then M2C.Image = CardImage6
+        If Match2C = CompareList(12) Or Match2C = CompareList(13) Then M2C.Image = CardImage7
+        If Match2C = CompareList(14) Or Match2C = CompareList(15) Then M2C.Image = CardImage8
+        If Match2C = CompareList(16) Or Match2C = CompareList(17) Then M2C.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M2C.Load(Match2C)
             Match1 = Match2C
             M2C.Enabled = False
             MatchTemp = "M2C"
         Else
             MatchPhase = 0
-            M2C.Load(Match2C)
             Match2 = Match2C
             If Match1 = Match2 Then
                 M2C.Enabled = False
@@ -1780,15 +1972,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match3C = CompareList(0) Or Match3C = CompareList(1) Then M3C.Image = CardImage1
+        If Match3C = CompareList(2) Or Match3C = CompareList(3) Then M3C.Image = CardImage2
+        If Match3C = CompareList(4) Or Match3C = CompareList(5) Then M3C.Image = CardImage3
+        If Match3C = CompareList(6) Or Match3C = CompareList(7) Then M3C.Image = CardImage4
+        If Match3C = CompareList(8) Or Match3C = CompareList(9) Then M3C.Image = CardImage5
+        If Match3C = CompareList(10) Or Match3C = CompareList(11) Then M3C.Image = CardImage6
+        If Match3C = CompareList(12) Or Match3C = CompareList(13) Then M3C.Image = CardImage7
+        If Match3C = CompareList(14) Or Match3C = CompareList(15) Then M3C.Image = CardImage8
+        If Match3C = CompareList(16) Or Match3C = CompareList(17) Then M3C.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M3C.Load(Match3C)
             Match1 = Match3C
             M3C.Enabled = False
             MatchTemp = "M3C"
         Else
             MatchPhase = 0
-            M3C.Load(Match3C)
             Match2 = Match3C
             If Match1 = Match2 Then
                 M3C.Enabled = False
@@ -1805,15 +2007,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match4C = CompareList(0) Or Match4C = CompareList(1) Then M4C.Image = CardImage1
+        If Match4C = CompareList(2) Or Match4C = CompareList(3) Then M4C.Image = CardImage2
+        If Match4C = CompareList(4) Or Match4C = CompareList(5) Then M4C.Image = CardImage3
+        If Match4C = CompareList(6) Or Match4C = CompareList(7) Then M4C.Image = CardImage4
+        If Match4C = CompareList(8) Or Match4C = CompareList(9) Then M4C.Image = CardImage5
+        If Match4C = CompareList(10) Or Match4C = CompareList(11) Then M4C.Image = CardImage6
+        If Match4C = CompareList(12) Or Match4C = CompareList(13) Then M4C.Image = CardImage7
+        If Match4C = CompareList(14) Or Match4C = CompareList(15) Then M4C.Image = CardImage8
+        If Match4C = CompareList(16) Or Match4C = CompareList(17) Then M4C.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M4C.Load(Match4C)
             Match1 = Match4C
             M4C.Enabled = False
             MatchTemp = "M4C"
         Else
             MatchPhase = 0
-            M4C.Load(Match4C)
             Match2 = Match4C
             If Match1 = Match2 Then
                 M4C.Enabled = False
@@ -1830,15 +2042,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match5C = CompareList(0) Or Match5C = CompareList(1) Then M5C.Image = CardImage1
+        If Match5C = CompareList(2) Or Match5C = CompareList(3) Then M5C.Image = CardImage2
+        If Match5C = CompareList(4) Or Match5C = CompareList(5) Then M5C.Image = CardImage3
+        If Match5C = CompareList(6) Or Match5C = CompareList(7) Then M5C.Image = CardImage4
+        If Match5C = CompareList(8) Or Match5C = CompareList(9) Then M5C.Image = CardImage5
+        If Match5C = CompareList(10) Or Match5C = CompareList(11) Then M5C.Image = CardImage6
+        If Match5C = CompareList(12) Or Match5C = CompareList(13) Then M5C.Image = CardImage7
+        If Match5C = CompareList(14) Or Match5C = CompareList(15) Then M5C.Image = CardImage8
+        If Match5C = CompareList(16) Or Match5C = CompareList(17) Then M5C.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M5C.Load(Match5C)
             Match1 = Match5C
             M5C.Enabled = False
             MatchTemp = "M5C"
         Else
             MatchPhase = 0
-            M5C.Load(Match5C)
             Match2 = Match5C
             If Match1 = Match2 Then
                 M5C.Enabled = False
@@ -1855,15 +2077,25 @@ Card9:
 
         PlayCardFlip()
 
+
+
+        If Match6C = CompareList(0) Or Match6C = CompareList(1) Then M6C.Image = CardImage1
+        If Match6C = CompareList(2) Or Match6C = CompareList(3) Then M6C.Image = CardImage2
+        If Match6C = CompareList(4) Or Match6C = CompareList(5) Then M6C.Image = CardImage3
+        If Match6C = CompareList(6) Or Match6C = CompareList(7) Then M6C.Image = CardImage4
+        If Match6C = CompareList(8) Or Match6C = CompareList(9) Then M6C.Image = CardImage5
+        If Match6C = CompareList(10) Or Match6C = CompareList(11) Then M6C.Image = CardImage6
+        If Match6C = CompareList(12) Or Match6C = CompareList(13) Then M6C.Image = CardImage7
+        If Match6C = CompareList(14) Or Match6C = CompareList(15) Then M6C.Image = CardImage8
+        If Match6C = CompareList(16) Or Match6C = CompareList(17) Then M6C.Image = CardImage9
+
         If MatchPhase = 0 Then
             MatchPhase = 1
-            M6C.Load(Match6C)
             Match1 = Match6C
             M6C.Enabled = False
             MatchTemp = "M6C"
         Else
             MatchPhase = 0
-            M6C.Load(Match6C)
             Match2 = Match6C
             If Match1 = Match2 Then
                 M6C.Enabled = False
@@ -1997,7 +2229,7 @@ Card9:
         End Try
         Slot1.Image = Nothing
         GC.Collect()
-        Slot1.Load(SlotList(Slot1Val))
+        Slot1.Image = Image.FromFile(SlotList(Slot1Val))
 
         If SlotTick1 < 1 Then
             SlotTimer1.Stop()
@@ -2026,7 +2258,7 @@ Card9:
         End Try
         Slot2.Image = Nothing
         GC.Collect()
-        Slot2.Load(SlotList(Slot2Val))
+        Slot2.Image = Image.FromFile(SlotList(Slot2Val))
 
         If SlotTick2 < 1 Then
             SlotTImer2.Stop()
@@ -2051,7 +2283,7 @@ Card9:
         End Try
         Slot3.Image = Nothing
         GC.Collect()
-        Slot3.Load(SlotList(Slot3Val))
+        Slot3.Image = Image.FromFile(SlotList(Slot3Val))
 
         If SlotTick3 < 1 Then
             SlotTimer3.Stop()
@@ -2192,9 +2424,9 @@ Card9:
 
 
 
-        Slot1.Load(SlotList(randomizer.Next(0, SlotList.Count)))
-        Slot2.Load(SlotList(randomizer.Next(0, SlotList.Count)))
-        Slot3.Load(SlotList(randomizer.Next(0, SlotList.Count)))
+        Slot1.Image = Image.FromFile(SlotList(randomizer.Next(0, SlotList.Count)))
+        Slot2.Image = Image.FromFile(SlotList(randomizer.Next(0, SlotList.Count)))
+        Slot3.Image = Image.FromFile(SlotList(randomizer.Next(0, SlotList.Count)))
 
 
 
@@ -2206,10 +2438,10 @@ Card9:
             SlotImage = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\_CardBackPicture.png"
         End If
 
-        SlotLeft2.Load(SlotImage)
-        SlotLeft1.Load(SlotImage)
-        SlotRight1.Load(SlotImage)
-        SlotRight2.Load(SlotImage)
+        SlotLeft2.Image = Image.FromFile(SlotImage)
+        SlotLeft1.Image = Image.FromFile(SlotImage)
+        SlotRight1.Image = Image.FromFile(SlotImage)
+        SlotRight2.Image = Image.FromFile(SlotImage)
 
         LBLSlotTokens.Text = Form1.BronzeTokens
 
@@ -2587,9 +2819,9 @@ Card9:
                 BoosterBack.Image = Nothing
                 GC.Collect()
 
-                BoosterBack.Load(My.Settings.CardBack)
+                BoosterBack.Image = Image.FromFile(My.Settings.CardBack)
             Else
-                BoosterBack.Load(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\_CardBackPicture.png")
+                BoosterBack.Image = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\_CardBackPicture.png")
             End If
             LBLExchangeBronze.Text = Form1.BronzeTokens
             LBLExchangeSilver.Text = Form1.SilverTokens
@@ -2623,7 +2855,7 @@ Card9:
 
             If GoldQ1.Text <> 0 Then
                 GoldN1.Text = FrmSettings.GN1.Text
-                GoldP1.Load(My.Settings.GP1)
+                GoldP1.Image = Image.FromFile(My.Settings.GP1)
                 GoldP1.Visible = True
             Else
                 GoldP1.Visible = False
@@ -2632,7 +2864,7 @@ Card9:
 
             If GoldQ2.Text <> 0 Then
                 GoldN2.Text = FrmSettings.GN2.Text
-                GoldP2.Load(My.Settings.GP2)
+                GoldP2.Image = Image.FromFile(My.Settings.GP2)
                 GoldP2.Visible = True
             Else
                 GoldP2.Visible = False
@@ -2641,7 +2873,7 @@ Card9:
 
             If GoldQ3.Text <> 0 Then
                 GoldN3.Text = FrmSettings.GN3.Text
-                GoldP3.Load(My.Settings.GP3)
+                GoldP3.Image = Image.FromFile(My.Settings.GP3)
                 GoldP3.Visible = True
             Else
                 GoldP3.Visible = False
@@ -2650,7 +2882,7 @@ Card9:
 
             If GoldQ4.Text <> 0 Then
                 GoldN4.Text = FrmSettings.GN4.Text
-                GoldP4.Load(My.Settings.GP4)
+                GoldP4.Image = Image.FromFile(My.Settings.GP4)
                 GoldP4.Visible = True
             Else
                 GoldP4.Visible = False
@@ -2659,7 +2891,7 @@ Card9:
 
             If GoldQ5.Text <> 0 Then
                 GoldN5.Text = FrmSettings.GN5.Text
-                GoldP5.Load(My.Settings.GP5)
+                GoldP5.Image = Image.FromFile(My.Settings.GP5)
                 GoldP5.Visible = True
             Else
                 GoldP5.Visible = False
@@ -2668,7 +2900,7 @@ Card9:
 
             If GoldQ6.Text <> 0 Then
                 GoldN6.Text = FrmSettings.GN6.Text
-                GoldP6.Load(My.Settings.GP6)
+                GoldP6.Image = Image.FromFile(My.Settings.GP6)
                 GoldP6.Visible = True
             Else
                 GoldP6.Visible = False
@@ -2678,7 +2910,7 @@ Card9:
 
             If SilverQ1.Text <> 0 Then
                 SilverN1.Text = FrmSettings.SN1.Text
-                SilverP1.Load(My.Settings.SP1)
+                SilverP1.Image = Image.FromFile(My.Settings.SP1)
                 SilverP1.Visible = True
             Else
                 SilverP1.Visible = False
@@ -2687,7 +2919,7 @@ Card9:
 
             If SilverQ2.Text <> 0 Then
                 SilverN2.Text = FrmSettings.SN2.Text
-                SilverP2.Load(My.Settings.SP2)
+                SilverP2.Image = Image.FromFile(My.Settings.SP2)
                 SilverP2.Visible = True
             Else
                 SilverP2.Visible = False
@@ -2696,7 +2928,7 @@ Card9:
 
             If SilverQ3.Text <> 0 Then
                 SilverN3.Text = FrmSettings.SN3.Text
-                SilverP3.Load(My.Settings.SP3)
+                SilverP3.Image = Image.FromFile(My.Settings.SP3)
                 SilverP3.Visible = True
             Else
                 SilverP3.Visible = False
@@ -2705,7 +2937,7 @@ Card9:
 
             If SilverQ4.Text <> 0 Then
                 SilverN4.Text = FrmSettings.SN4.Text
-                SilverP4.Load(My.Settings.SP4)
+                SilverP4.Image = Image.FromFile(My.Settings.SP4)
                 SilverP4.Visible = True
             Else
                 SilverP4.Visible = False
@@ -2714,7 +2946,7 @@ Card9:
 
             If SilverQ5.Text <> 0 Then
                 SilverN5.Text = FrmSettings.SN5.Text
-                SilverP5.Load(My.Settings.SP5)
+                SilverP5.Image = Image.FromFile(My.Settings.SP5)
                 SilverP5.Visible = True
             Else
                 SilverP5.Visible = False
@@ -2723,7 +2955,7 @@ Card9:
 
             If SilverQ6.Text <> 0 Then
                 SilverN6.Text = FrmSettings.SN6.Text
-                SilverP6.Load(My.Settings.SP6)
+                SilverP6.Image = Image.FromFile(My.Settings.SP6)
                 SilverP6.Visible = True
             Else
                 SilverP6.Visible = False
@@ -2733,7 +2965,7 @@ Card9:
 
             If BronzeQ1.Text <> 0 Then
                 BronzeN1.Text = FrmSettings.BN1.Text
-                BronzeP1.Load(My.Settings.BP1)
+                BronzeP1.Image = Image.FromFile(My.Settings.BP1)
                 BronzeP1.Visible = True
             Else
                 BronzeP1.Visible = False
@@ -2742,7 +2974,7 @@ Card9:
 
             If BronzeQ2.Text <> 0 Then
                 BronzeN2.Text = FrmSettings.BN2.Text
-                BronzeP2.Load(My.Settings.BP2)
+                BronzeP2.Image = Image.FromFile(My.Settings.BP2)
                 BronzeP2.Visible = True
             Else
                 BronzeP2.Visible = False
@@ -2751,7 +2983,7 @@ Card9:
 
             If BronzeQ3.Text <> 0 Then
                 BronzeN3.Text = FrmSettings.BN3.Text
-                BronzeP3.Load(My.Settings.BP3)
+                BronzeP3.Image = Image.FromFile(My.Settings.BP3)
                 BronzeP3.Visible = True
             Else
                 BronzeP3.Visible = False
@@ -2760,7 +2992,7 @@ Card9:
 
             If BronzeQ4.Text <> 0 Then
                 BronzeN4.Text = FrmSettings.BN4.Text
-                BronzeP4.Load(My.Settings.BP4)
+                BronzeP4.Image = Image.FromFile(My.Settings.BP4)
                 BronzeP4.Visible = True
             Else
                 BronzeP4.Visible = False
@@ -2769,7 +3001,7 @@ Card9:
 
             If BronzeQ5.Text <> 0 Then
                 BronzeN5.Text = FrmSettings.BN5.Text
-                BronzeP5.Load(My.Settings.BP5)
+                BronzeP5.Image = Image.FromFile(My.Settings.BP5)
                 BronzeP5.Visible = True
             Else
                 BronzeP5.Visible = False
@@ -2778,7 +3010,7 @@ Card9:
 
             If BronzeQ6.Text <> 0 Then
                 BronzeN6.Text = FrmSettings.BN6.Text
-                BronzeP6.Load(My.Settings.BP6)
+                BronzeP6.Image = Image.FromFile(My.Settings.BP6)
                 BronzeP6.Visible = True
             Else
                 BronzeP6.Visible = False
@@ -2849,6 +3081,8 @@ Card9:
             M4C.Enabled = True
             M5C.Enabled = True
             M6C.Enabled = True
+
+            RemindCards()
         End If
 
 
@@ -2975,32 +3209,32 @@ Card9:
                 Booster1Plate.BackColor = Color.Peru
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster1.Load(BoosterListBronze(0))
+                    Booster1.Image = Image.FromFile(BoosterListBronze(0))
                     Booster1Name.Text = FrmSettings.BN1.Text
                     My.Settings.B1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster1.Load(BoosterListBronze(1))
+                    Booster1.Image = Image.FromFile(BoosterListBronze(1))
                     Booster1Name.Text = FrmSettings.BN2.Text
                     My.Settings.B2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster1.Load(BoosterListBronze(2))
+                    Booster1.Image = Image.FromFile(BoosterListBronze(2))
                     Booster1Name.Text = FrmSettings.BN3.Text
                     My.Settings.B3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster1.Load(BoosterListBronze(3))
+                    Booster1.Image = Image.FromFile(BoosterListBronze(3))
                     Booster1Name.Text = FrmSettings.BN4.Text
                     My.Settings.B4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster1.Load(BoosterListBronze(4))
+                    Booster1.Image = Image.FromFile(BoosterListBronze(4))
                     Booster1Name.Text = FrmSettings.BN5.Text
                     My.Settings.B5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster1.Load(BoosterListBronze(5))
+                    Booster1.Image = Image.FromFile(BoosterListBronze(5))
                     Booster1Name.Text = FrmSettings.BN6.Text
                     My.Settings.B6 += 1
                 End If
@@ -3011,32 +3245,32 @@ Card9:
                 Booster1Plate.BackColor = Color.Silver
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster1.Load(BoosterListSilver(0))
+                    Booster1.Image = Image.FromFile(BoosterListSilver(0))
                     Booster1Name.Text = FrmSettings.SN1.Text
                     My.Settings.S1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster1.Load(BoosterListSilver(1))
+                    Booster1.Image = Image.FromFile(BoosterListSilver(1))
                     Booster1Name.Text = FrmSettings.SN2.Text
                     My.Settings.S2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster1.Load(BoosterListSilver(2))
+                    Booster1.Image = Image.FromFile(BoosterListSilver(2))
                     Booster1Name.Text = FrmSettings.SN3.Text
                     My.Settings.S3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster1.Load(BoosterListSilver(3))
+                    Booster1.Image = Image.FromFile(BoosterListSilver(3))
                     Booster1Name.Text = FrmSettings.SN4.Text
                     My.Settings.S4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster1.Load(BoosterListSilver(4))
+                    Booster1.Image = Image.FromFile(BoosterListSilver(4))
                     Booster1Name.Text = FrmSettings.SN5.Text
                     My.Settings.S5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster1.Load(BoosterListSilver(5))
+                    Booster1.Image = Image.FromFile(BoosterListSilver(5))
                     Booster1Name.Text = FrmSettings.SN6.Text
                     My.Settings.S6 += 1
                 End If
@@ -3047,32 +3281,32 @@ Card9:
                 Booster1Plate.BackColor = Color.Gold
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster1.Load(BoosterListGold(0))
+                    Booster1.Image = Image.FromFile(BoosterListGold(0))
                     Booster1Name.Text = FrmSettings.GN1.Text
                     My.Settings.G1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster1.Load(BoosterListGold(1))
+                    Booster1.Image = Image.FromFile(BoosterListGold(1))
                     Booster1Name.Text = FrmSettings.GN2.Text
                     My.Settings.G2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster1.Load(BoosterListGold(2))
+                    Booster1.Image = Image.FromFile(BoosterListGold(2))
                     Booster1Name.Text = FrmSettings.GN3.Text
                     My.Settings.G3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster1.Load(BoosterListGold(3))
+                    Booster1.Image = Image.FromFile(BoosterListGold(3))
                     Booster1Name.Text = FrmSettings.GN4.Text
                     My.Settings.G4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster1.Load(BoosterListGold(4))
+                    Booster1.Image = Image.FromFile(BoosterListGold(4))
                     Booster1Name.Text = FrmSettings.GN5.Text
                     My.Settings.G5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster1.Load(BoosterListGold(5))
+                    Booster1.Image = Image.FromFile(BoosterListGold(5))
                     Booster1Name.Text = FrmSettings.GN6.Text
                     My.Settings.G6 += 1
                 End If
@@ -3090,32 +3324,32 @@ Card9:
                 Booster2Plate.BackColor = Color.Peru
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster2.Load(BoosterListBronze(0))
+                    Booster2.Image = Image.FromFile(BoosterListBronze(0))
                     Booster2Name.Text = FrmSettings.BN1.Text
                     My.Settings.B1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster2.Load(BoosterListBronze(1))
+                    Booster2.Image = Image.FromFile(BoosterListBronze(1))
                     Booster2Name.Text = FrmSettings.BN2.Text
                     My.Settings.B2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster2.Load(BoosterListBronze(2))
+                    Booster2.Image = Image.FromFile(BoosterListBronze(2))
                     Booster2Name.Text = FrmSettings.BN3.Text
                     My.Settings.B3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster2.Load(BoosterListBronze(3))
+                    Booster2.Image = Image.FromFile(BoosterListBronze(3))
                     Booster2Name.Text = FrmSettings.BN4.Text
                     My.Settings.B4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster2.Load(BoosterListBronze(4))
+                    Booster2.Image = Image.FromFile(BoosterListBronze(4))
                     Booster2Name.Text = FrmSettings.BN5.Text
                     My.Settings.B5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster2.Load(BoosterListBronze(5))
+                    Booster2.Image = Image.FromFile(BoosterListBronze(5))
                     Booster2Name.Text = FrmSettings.BN6.Text
                     My.Settings.B6 += 1
                 End If
@@ -3126,32 +3360,32 @@ Card9:
                 Booster2Plate.BackColor = Color.Silver
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster2.Load(BoosterListSilver(0))
+                    Booster2.Image = Image.FromFile(BoosterListSilver(0))
                     Booster2Name.Text = FrmSettings.SN1.Text
                     My.Settings.S1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster2.Load(BoosterListSilver(1))
+                    Booster2.Image = Image.FromFile(BoosterListSilver(1))
                     Booster2Name.Text = FrmSettings.SN2.Text
                     My.Settings.S2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster2.Load(BoosterListSilver(2))
+                    Booster2.Image = Image.FromFile(BoosterListSilver(2))
                     Booster2Name.Text = FrmSettings.SN3.Text
                     My.Settings.S3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster2.Load(BoosterListSilver(3))
+                    Booster2.Image = Image.FromFile(BoosterListSilver(3))
                     Booster2Name.Text = FrmSettings.SN4.Text
                     My.Settings.S4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster2.Load(BoosterListSilver(4))
+                    Booster2.Image = Image.FromFile(BoosterListSilver(4))
                     Booster2Name.Text = FrmSettings.SN5.Text
                     My.Settings.S5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster2.Load(BoosterListSilver(5))
+                    Booster2.Image = Image.FromFile(BoosterListSilver(5))
                     Booster2Name.Text = FrmSettings.SN6.Text
                     My.Settings.S6 += 1
                 End If
@@ -3162,32 +3396,32 @@ Card9:
                 Booster2Plate.BackColor = Color.Gold
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster2.Load(BoosterListGold(0))
+                    Booster2.Image = Image.FromFile(BoosterListGold(0))
                     Booster2Name.Text = FrmSettings.GN1.Text
                     My.Settings.G1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster2.Load(BoosterListGold(1))
+                    Booster2.Image = Image.FromFile(BoosterListGold(1))
                     Booster2Name.Text = FrmSettings.GN2.Text
                     My.Settings.G2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster2.Load(BoosterListGold(2))
+                    Booster2.Image = Image.FromFile(BoosterListGold(2))
                     Booster2Name.Text = FrmSettings.GN3.Text
                     My.Settings.G3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster2.Load(BoosterListGold(3))
+                    Booster2.Image = Image.FromFile(BoosterListGold(3))
                     Booster2Name.Text = FrmSettings.GN4.Text
                     My.Settings.G4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster2.Load(BoosterListGold(4))
+                    Booster2.Image = Image.FromFile(BoosterListGold(4))
                     Booster2Name.Text = FrmSettings.GN5.Text
                     My.Settings.G5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster2.Load(BoosterListGold(5))
+                    Booster2.Image = Image.FromFile(BoosterListGold(5))
                     Booster2Name.Text = FrmSettings.GN6.Text
                     My.Settings.G6 += 1
                 End If
@@ -3204,32 +3438,32 @@ Card9:
                 Booster3Plate.BackColor = Color.Peru
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster3.Load(BoosterListBronze(0))
+                    Booster3.Image = Image.FromFile(BoosterListBronze(0))
                     Booster3Name.Text = FrmSettings.BN1.Text
                     My.Settings.B1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster3.Load(BoosterListBronze(1))
+                    Booster3.Image = Image.FromFile(BoosterListBronze(1))
                     Booster3Name.Text = FrmSettings.BN2.Text
                     My.Settings.B2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster3.Load(BoosterListBronze(2))
+                    Booster3.Image = Image.FromFile(BoosterListBronze(2))
                     Booster3Name.Text = FrmSettings.BN3.Text
                     My.Settings.B3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster3.Load(BoosterListBronze(3))
+                    Booster3.Image = Image.FromFile(BoosterListBronze(3))
                     Booster3Name.Text = FrmSettings.BN4.Text
                     My.Settings.B4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster3.Load(BoosterListBronze(4))
+                    Booster3.Image = Image.FromFile(BoosterListBronze(4))
                     Booster3Name.Text = FrmSettings.BN5.Text
                     My.Settings.B5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster3.Load(BoosterListBronze(5))
+                    Booster3.Image = Image.FromFile(BoosterListBronze(5))
                     Booster3Name.Text = FrmSettings.BN6.Text
                     My.Settings.B6 += 1
                 End If
@@ -3240,32 +3474,32 @@ Card9:
                 Booster3Plate.BackColor = Color.Silver
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster3.Load(BoosterListSilver(0))
+                    Booster3.Image = Image.FromFile(BoosterListSilver(0))
                     Booster3Name.Text = FrmSettings.SN1.Text
                     My.Settings.S1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster3.Load(BoosterListSilver(1))
+                    Booster3.Image = Image.FromFile(BoosterListSilver(1))
                     Booster3Name.Text = FrmSettings.SN2.Text
                     My.Settings.S2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster3.Load(BoosterListSilver(2))
+                    Booster3.Image = Image.FromFile(BoosterListSilver(2))
                     Booster3Name.Text = FrmSettings.SN3.Text
                     My.Settings.S3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster3.Load(BoosterListSilver(3))
+                    Booster3.Image = Image.FromFile(BoosterListSilver(3))
                     Booster3Name.Text = FrmSettings.SN4.Text
                     My.Settings.S4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster3.Load(BoosterListSilver(4))
+                    Booster3.Image = Image.FromFile(BoosterListSilver(4))
                     Booster3Name.Text = FrmSettings.SN5.Text
                     My.Settings.S5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster3.Load(BoosterListSilver(5))
+                    Booster3.Image = Image.FromFile(BoosterListSilver(5))
                     Booster3Name.Text = FrmSettings.SN6.Text
                     My.Settings.S6 += 1
                 End If
@@ -3276,32 +3510,32 @@ Card9:
                 Booster3Plate.BackColor = Color.Gold
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster3.Load(BoosterListGold(0))
+                    Booster3.Image = Image.FromFile(BoosterListGold(0))
                     Booster3Name.Text = FrmSettings.GN1.Text
                     My.Settings.G1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster3.Load(BoosterListGold(1))
+                    Booster3.Image = Image.FromFile(BoosterListGold(1))
                     Booster3Name.Text = FrmSettings.GN2.Text
                     My.Settings.G2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster3.Load(BoosterListGold(2))
+                    Booster3.Image = Image.FromFile(BoosterListGold(2))
                     Booster3Name.Text = FrmSettings.GN3.Text
                     My.Settings.G3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster3.Load(BoosterListGold(3))
+                    Booster3.Image = Image.FromFile(BoosterListGold(3))
                     Booster3Name.Text = FrmSettings.GN4.Text
                     My.Settings.G4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster3.Load(BoosterListGold(4))
+                    Booster3.Image = Image.FromFile(BoosterListGold(4))
                     Booster3Name.Text = FrmSettings.GN5.Text
                     My.Settings.G5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster3.Load(BoosterListGold(5))
+                    Booster3.Image = Image.FromFile(BoosterListGold(5))
                     Booster3Name.Text = FrmSettings.GN6.Text
                     My.Settings.G6 += 1
                 End If
@@ -3318,32 +3552,32 @@ Card9:
                 Booster4Plate.BackColor = Color.Peru
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster4.Load(BoosterListBronze(0))
+                    Booster4.Image = Image.FromFile(BoosterListBronze(0))
                     Booster4Name.Text = FrmSettings.BN1.Text
                     My.Settings.B1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster4.Load(BoosterListBronze(1))
+                    Booster4.Image = Image.FromFile(BoosterListBronze(1))
                     Booster4Name.Text = FrmSettings.BN2.Text
                     My.Settings.B2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster4.Load(BoosterListBronze(2))
+                    Booster4.Image = Image.FromFile(BoosterListBronze(2))
                     Booster4Name.Text = FrmSettings.BN3.Text
                     My.Settings.B3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster4.Load(BoosterListBronze(3))
+                    Booster4.Image = Image.FromFile(BoosterListBronze(3))
                     Booster4Name.Text = FrmSettings.BN4.Text
                     My.Settings.B4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster4.Load(BoosterListBronze(4))
+                    Booster4.Image = Image.FromFile(BoosterListBronze(4))
                     Booster4Name.Text = FrmSettings.BN5.Text
                     My.Settings.B5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster4.Load(BoosterListBronze(5))
+                    Booster4.Image = Image.FromFile(BoosterListBronze(5))
                     Booster4Name.Text = FrmSettings.BN6.Text
                     My.Settings.B6 += 1
                 End If
@@ -3354,32 +3588,32 @@ Card9:
                 Booster4Plate.BackColor = Color.Silver
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster4.Load(BoosterListSilver(0))
+                    Booster4.Image = Image.FromFile(BoosterListSilver(0))
                     Booster4Name.Text = FrmSettings.SN1.Text
                     My.Settings.S1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster4.Load(BoosterListSilver(1))
+                    Booster4.Image = Image.FromFile(BoosterListSilver(1))
                     Booster4Name.Text = FrmSettings.SN2.Text
                     My.Settings.S2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster4.Load(BoosterListSilver(2))
+                    Booster4.Image = Image.FromFile(BoosterListSilver(2))
                     Booster4Name.Text = FrmSettings.SN3.Text
                     My.Settings.S3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster4.Load(BoosterListSilver(3))
+                    Booster4.Image = Image.FromFile(BoosterListSilver(3))
                     Booster4Name.Text = FrmSettings.SN4.Text
                     My.Settings.S4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster4.Load(BoosterListSilver(4))
+                    Booster4.Image = Image.FromFile(BoosterListSilver(4))
                     Booster4Name.Text = FrmSettings.SN5.Text
                     My.Settings.S5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster4.Load(BoosterListSilver(5))
+                    Booster4.Image = Image.FromFile(BoosterListSilver(5))
                     Booster4Name.Text = FrmSettings.SN6.Text
                     My.Settings.S6 += 1
                 End If
@@ -3390,32 +3624,32 @@ Card9:
                 Booster4Plate.BackColor = Color.Gold
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster4.Load(BoosterListGold(0))
+                    Booster4.Image = Image.FromFile(BoosterListGold(0))
                     Booster4Name.Text = FrmSettings.GN1.Text
                     My.Settings.G1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster4.Load(BoosterListGold(1))
+                    Booster4.Image = Image.FromFile(BoosterListGold(1))
                     Booster4Name.Text = FrmSettings.GN2.Text
                     My.Settings.G2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster4.Load(BoosterListGold(2))
+                    Booster4.Image = Image.FromFile(BoosterListGold(2))
                     Booster4Name.Text = FrmSettings.GN3.Text
                     My.Settings.G3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster4.Load(BoosterListGold(3))
+                    Booster4.Image = Image.FromFile(BoosterListGold(3))
                     Booster4Name.Text = FrmSettings.GN4.Text
                     My.Settings.G4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster4.Load(BoosterListGold(4))
+                    Booster4.Image = Image.FromFile(BoosterListGold(4))
                     Booster4Name.Text = FrmSettings.GN5.Text
                     My.Settings.G5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster4.Load(BoosterListGold(5))
+                    Booster4.Image = Image.FromFile(BoosterListGold(5))
                     Booster4Name.Text = FrmSettings.GN6.Text
                     My.Settings.G6 += 1
                 End If
@@ -3432,32 +3666,32 @@ Card9:
                 Booster5Plate.BackColor = Color.Peru
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster5.Load(BoosterListBronze(0))
+                    Booster5.Image = Image.FromFile(BoosterListBronze(0))
                     Booster5Name.Text = FrmSettings.BN1.Text
                     My.Settings.B1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster5.Load(BoosterListBronze(1))
+                    Booster5.Image = Image.FromFile(BoosterListBronze(1))
                     Booster5Name.Text = FrmSettings.BN2.Text
                     My.Settings.B2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster5.Load(BoosterListBronze(2))
+                    Booster5.Image = Image.FromFile(BoosterListBronze(2))
                     Booster5Name.Text = FrmSettings.BN3.Text
                     My.Settings.B3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster5.Load(BoosterListBronze(3))
+                    Booster5.Image = Image.FromFile(BoosterListBronze(3))
                     Booster5Name.Text = FrmSettings.BN4.Text
                     My.Settings.B4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster5.Load(BoosterListBronze(4))
+                    Booster5.Image = Image.FromFile(BoosterListBronze(4))
                     Booster5Name.Text = FrmSettings.BN5.Text
                     My.Settings.B5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster5.Load(BoosterListBronze(5))
+                    Booster5.Image = Image.FromFile(BoosterListBronze(5))
                     Booster5Name.Text = FrmSettings.BN6.Text
                     My.Settings.B6 += 1
                 End If
@@ -3468,32 +3702,32 @@ Card9:
                 Booster5Plate.BackColor = Color.Silver
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster5.Load(BoosterListSilver(0))
+                    Booster5.Image = Image.FromFile(BoosterListSilver(0))
                     Booster5Name.Text = FrmSettings.SN1.Text
                     My.Settings.S1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster5.Load(BoosterListSilver(1))
+                    Booster5.Image = Image.FromFile(BoosterListSilver(1))
                     Booster5Name.Text = FrmSettings.SN2.Text
                     My.Settings.S2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster5.Load(BoosterListSilver(2))
+                    Booster5.Image = Image.FromFile(BoosterListSilver(2))
                     Booster5Name.Text = FrmSettings.SN3.Text
                     My.Settings.S3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster5.Load(BoosterListSilver(3))
+                    Booster5.Image = Image.FromFile(BoosterListSilver(3))
                     Booster5Name.Text = FrmSettings.SN4.Text
                     My.Settings.S4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster5.Load(BoosterListSilver(4))
+                    Booster5.Image = Image.FromFile(BoosterListSilver(4))
                     Booster5Name.Text = FrmSettings.SN5.Text
                     My.Settings.S5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster5.Load(BoosterListSilver(5))
+                    Booster5.Image = Image.FromFile(BoosterListSilver(5))
                     Booster5Name.Text = FrmSettings.SN6.Text
                     My.Settings.S6 += 1
                 End If
@@ -3504,32 +3738,32 @@ Card9:
                 Booster5Plate.BackColor = Color.Gold
                 ColorVal = randomizer.Next(1, 7)
                 If ColorVal = 1 Then
-                    Booster5.Load(BoosterListGold(0))
+                    Booster5.Image = Image.FromFile(BoosterListGold(0))
                     Booster5Name.Text = FrmSettings.GN1.Text
                     My.Settings.G1 += 1
                 End If
                 If ColorVal = 2 Then
-                    Booster5.Load(BoosterListGold(1))
+                    Booster5.Image = Image.FromFile(BoosterListGold(1))
                     Booster5Name.Text = FrmSettings.GN2.Text
                     My.Settings.G2 += 1
                 End If
                 If ColorVal = 3 Then
-                    Booster5.Load(BoosterListGold(2))
+                    Booster5.Image = Image.FromFile(BoosterListGold(2))
                     Booster5Name.Text = FrmSettings.GN3.Text
                     My.Settings.G3 += 1
                 End If
                 If ColorVal = 4 Then
-                    Booster5.Load(BoosterListGold(3))
+                    Booster5.Image = Image.FromFile(BoosterListGold(3))
                     Booster5Name.Text = FrmSettings.GN4.Text
                     My.Settings.G4 += 1
                 End If
                 If ColorVal = 5 Then
-                    Booster5.Load(BoosterListGold(4))
+                    Booster5.Image = Image.FromFile(BoosterListGold(4))
                     Booster5Name.Text = FrmSettings.GN5.Text
                     My.Settings.G5 += 1
                 End If
                 If ColorVal = 6 Then
-                    Booster5.Load(BoosterListGold(5))
+                    Booster5.Image = Image.FromFile(BoosterListGold(5))
                     Booster5Name.Text = FrmSettings.GN6.Text
                     My.Settings.G6 += 1
                 End If
@@ -3652,37 +3886,37 @@ Card9:
 
         If TempVal = 1 Then
             My.Settings.S1 += 1
-            ExchangeCard.Load(SilverDraw(0))
+            ExchangeCard.Image = Image.FromFile(SilverDraw(0))
             ExchangeName.Text = FrmSettings.SN1.Text
         End If
 
         If TempVal = 2 Then
             My.Settings.S2 += 1
-            ExchangeCard.Load(SilverDraw(1))
+            ExchangeCard.Image = Image.FromFile(SilverDraw(1))
             ExchangeName.Text = FrmSettings.SN2.Text
         End If
 
         If TempVal = 3 Then
             My.Settings.S3 += 1
-            ExchangeCard.Load(SilverDraw(2))
+            ExchangeCard.Image = Image.FromFile(SilverDraw(2))
             ExchangeName.Text = FrmSettings.SN3.Text
         End If
 
         If TempVal = 4 Then
             My.Settings.S4 += 1
-            ExchangeCard.Load(SilverDraw(3))
+            ExchangeCard.Image = Image.FromFile(SilverDraw(3))
             ExchangeName.Text = FrmSettings.SN4.Text
         End If
 
         If TempVal = 5 Then
             My.Settings.S5 += 1
-            ExchangeCard.Load(SilverDraw(4))
+            ExchangeCard.Image = Image.FromFile(SilverDraw(4))
             ExchangeName.Text = FrmSettings.SN5.Text
         End If
 
         If TempVal = 6 Then
             My.Settings.S6 += 1
-            ExchangeCard.Load(SilverDraw(5))
+            ExchangeCard.Image = Image.FromFile(SilverDraw(5))
             ExchangeName.Text = FrmSettings.SN6.Text
         End If
 
@@ -3758,37 +3992,37 @@ Card9:
 
         If TempVal = 1 Then
             My.Settings.G1 += 1
-            ExchangeCard.Load(GoldDraw(0))
+            ExchangeCard.Image = Image.FromFile(GoldDraw(0))
             ExchangeName.Text = FrmSettings.GN1.Text
         End If
 
         If TempVal = 2 Then
             My.Settings.G2 += 1
-            ExchangeCard.Load(GoldDraw(1))
+            ExchangeCard.Image = Image.FromFile(GoldDraw(1))
             ExchangeName.Text = FrmSettings.GN2.Text
         End If
 
         If TempVal = 3 Then
             My.Settings.G3 += 1
-            ExchangeCard.Load(GoldDraw(2))
+            ExchangeCard.Image = Image.FromFile(GoldDraw(2))
             ExchangeName.Text = FrmSettings.GN3.Text
         End If
 
         If TempVal = 4 Then
             My.Settings.G4 += 1
-            ExchangeCard.Load(GoldDraw(3))
+            ExchangeCard.Image = Image.FromFile(GoldDraw(3))
             ExchangeName.Text = FrmSettings.GN4.Text
         End If
 
         If TempVal = 5 Then
             My.Settings.G5 += 1
-            ExchangeCard.Load(GoldDraw(4))
+            ExchangeCard.Image = Image.FromFile(GoldDraw(4))
             ExchangeName.Text = FrmSettings.GN5.Text
         End If
 
         If TempVal = 6 Then
             My.Settings.G6 += 1
-            ExchangeCard.Load(GoldDraw(5))
+            ExchangeCard.Image = Image.FromFile(GoldDraw(5))
             ExchangeName.Text = FrmSettings.GN6.Text
         End If
 
@@ -3944,14 +4178,8 @@ Card9:
 
         If ProtoImage.Contains("\") Then
             original = Image.FromFile(ProtoImage)
-        End If
-
-        If ProtoImage.Contains("/") Then
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\CardImage.bmp") Then
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\CardImage.bmp")
-            End If
-            My.Computer.Network.DownloadFile(ProtoImage, Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\CardImage.bmp")
-            original = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\CardImage.bmp")
+        Else
+            original = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(ProtoImage)))
         End If
 
         Dim resized As Image = Form1.ResizeImage(original, New Size(M1A.Width, M1A.Height))
