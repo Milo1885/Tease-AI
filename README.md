@@ -1,7 +1,7 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
-9/04 6:24 am - Improved function of the @Goto Command. Using a @Goto Command such as @Goto(This Line) will go to (This Line) as usual. but you can enter multiple lines separated by commas, such as @Goto(This Line, That Line, That Line Over There). In this case, the script will randomly jump to one of the lines specified, so there's an equal chance of Tease AI moving to (This Line), (That Line) or (That Line Over There) 
+9/04 6:24 am - Improved function of the @Goto Command. Using a @Goto Command such as @Goto(This Line) will go to (This Line) as usual. but you can enter multiple lines separated by commas, such as @Goto(This Line, That Line, That Line Over There). In this case, the script will randomly jump to one of the lines specified, so there's an equal chance of Tease AI moving to (This Line), (That Line) or (That Line Over There).
 
 9/03 3:02 am - Finished image handling tweaks for Patch 45
 
