@@ -3314,8 +3314,16 @@ AcceptAnswer:
             Dim GotoIndex As Integer = TempGoto.IndexOf("@Goto(") + 6
             TempGoto = TempGoto.Substring(GotoIndex, TempGoto.Length - GotoIndex)
             TempGoto = TempGoto.Split(")")(0)
-
             FileGoto = TempGoto
+
+            Dim StripGoto As String = FileGoto
+
+            If TempGoto.Contains(",") Then
+                TempGoto = TempGoto.Replace(", ", ",")
+                Dim GotoSplit As String() = TempGoto.Split(",")
+                Dim GotoTemp As Integer = randomizer.Next(0, GotoSplit.Count)
+                FileGoto = GotoSplit(GotoTemp)
+            End If
         
 
             If File.Exists(FileText) Then
@@ -3326,10 +3334,11 @@ AcceptAnswer:
                     gotolines.Add(ioFile2.ReadLine())
                 End While
 
-                If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
+                If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
+                'If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
                 Debug.Print(FileGoto)
 
-                DomChat = DomChat.Replace("@Goto" & FileGoto, "")
+                DomChat = DomChat.Replace("@Goto" & StripGoto, "")
                 Do
                     gotoline += 1
 
@@ -4071,6 +4080,21 @@ AcceptAnswer:
         FileGoto = TempGoto
 
 
+        Dim StripGoto As String = FileGoto
+        
+
+
+
+        If TempGoto.Contains(",") Then
+            Debug.Print("Multiple Goto")
+            TempGoto = TempGoto.Replace(", ", ",")
+            Dim GotoSplit As String() = TempGoto.Split(",")
+            Dim GotoTemp As Integer = randomizer.Next(0, GotoSplit.Count)
+            FileGoto = GotoSplit(GotoTemp)
+            Debug.Print("FileGoto = " & FileGoto)
+        End If
+
+
 SkipGotoSearch:
 
         'Debug.Print("GetGoto() Domtask R2 = " & FileGoto)
@@ -4087,9 +4111,15 @@ SkipGotoSearch:
                 CountGotoLines += 1
             End While
 
-            If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
+            If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
             Debug.Print(FileGoto)
-            DomTask = DomTask.Replace("@Goto" & FileGoto, "")
+            Debug.Print(StripGoto)
+            DomTask = DomTask.Replace("@Goto" & StripGoto, "")
+
+            'If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
+
+            'DomTask = DomTask.Replace("@Goto" & StripGoto, "")
+          
 
             Dim gotoline As Integer
             Do
@@ -4164,7 +4194,7 @@ SkipGotoSearch:
         If frmApps.CBHypnoGenNoText.Checked = True And HypnoGen = True Then NullResponse = True
         If DomTask.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
 
-        Debug.Print("Nullresponse = " & NullResponse)
+        'Debug.Print("Nullresponse = " & NullResponse)
         If DomTask.Contains("@NullResponse") Then NullResponse = True
 
         If NullResponse = True Then
@@ -5282,7 +5312,7 @@ NullResponseLine2:
                     End If
                 End If
 
-                Debug.Print("NullResponse = " & NullResponse)
+                'Debug.Print("NullResponse = " & NullResponse)
 
                 NullResponse = False
                 DomTypeCheck = False
@@ -9760,8 +9790,10 @@ OrgasmDecided:
 
 
         If StringClean.Contains("@EndTease") Then
-            TeaseOver = True
-            SaidHello = False
+            StopEverything()
+            ResetButton()
+            frmApps.ResetFlag = True
+            ResumeSession()
             StringClean = StringClean.Replace("@EndTease", "")
         End If
 
@@ -11425,7 +11457,7 @@ VTSkip:
             'Debug.Print("NullResponse Called")
         End If
 
-        If StringClean.Contains("@PayoutRisky") Then
+        If StringClean.Contains("@RiskyPayout") Then
             If FrmSettings.CBGameSounds.Checked = True And File.Exists(Application.StartupPath & "\Audio\System\PayoutSmall.wav") Then
                 FrmCardList.GameWMP.settings.setMode("loop", False)
                 FrmCardList.GameWMP.settings.volume = 20
@@ -11434,13 +11466,36 @@ VTSkip:
             BronzeTokens += FrmCardList.TokensPaid
             FrmCardList.LBLRiskTokens.Text = BronzeTokens
             My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\RP_Edges", FrmCardList.EdgesOwed, False)
-            StringClean = StringClean.Replace("@PayoutRisky", "")
+            StringClean = StringClean.Replace("@RiskyPayout", "")
         End If
 
         If StringClean.Contains("@CloseRiskyPick") Then
             FrmCardList.CloseRiskyPick()
             StringClean = StringClean.Replace("@CloseRiskyPick", "")
         End If
+
+        If StringClean.Contains("@RevealLastCase") Then
+            FrmCardList.RevealLastCase()
+            StringClean = StringClean.Replace("@RevealLastCase", "")
+        End If
+
+        If StringClean.Contains("@RevealUserCase") Then
+            FrmCardList.RevealUserCase()
+            StringClean = StringClean.Replace("@RevealUserCase", "")
+        End If
+
+        If StringClean.Contains("@RiskyState") Then
+            If FrmCardList.RiskyState = True Then
+                FileGoto = "(Risky Game)"
+            Else
+                FileGoto = "(Risky Tease)"
+            End If
+            SkipGotoLine = True
+            GetGoto()
+            StringClean = StringClean.Replace("@RiskyState", "")
+        End If
+
+
 
 
         

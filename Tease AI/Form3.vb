@@ -111,7 +111,7 @@ Public Class FrmCardList
     Dim fileName1 As String
 
 
-
+    Public RiskyState As Boolean
 
     Public RiskyDeck As New List(Of String)
     Public RiskyShuffled As New List(Of String)
@@ -4287,6 +4287,7 @@ Card9:
         If BTNRisk1.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 1
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(0)
 
         BTNRisk1.BackColor = Color.Khaki
         Risk1.Text = RiskyShuffled(0)
@@ -4304,6 +4305,7 @@ Card9:
         If BTNRisk2.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 2
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(1)
 
         BTNRisk2.BackColor = Color.Khaki
         Risk2.Text = RiskyShuffled(1)
@@ -4321,6 +4323,7 @@ Card9:
         If BTNRisk3.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 3
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(2)
 
         BTNRisk3.BackColor = Color.Khaki
         Risk3.Text = RiskyShuffled(2)
@@ -4338,6 +4341,7 @@ Card9:
         If BTNRisk4.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 4
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(3)
 
         BTNRisk4.BackColor = Color.Khaki
         Risk4.Text = RiskyShuffled(3)
@@ -4355,6 +4359,7 @@ Card9:
         If BTNRisk5.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 5
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(4)
 
         BTNRisk5.BackColor = Color.Khaki
         Risk5.Text = RiskyShuffled(4)
@@ -4372,6 +4377,7 @@ Card9:
         If BTNRisk6.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 6
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(5)
 
         BTNRisk6.BackColor = Color.Khaki
         Risk6.Text = RiskyShuffled(5)
@@ -4389,6 +4395,7 @@ Card9:
         If BTNRisk7.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 7
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(6)
 
         BTNRisk7.BackColor = Color.Khaki
         Risk7.Text = RiskyShuffled(6)
@@ -4406,6 +4413,7 @@ Card9:
         If BTNRisk8.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 8
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(7)
 
         BTNRisk8.BackColor = Color.Khaki
         Risk8.Text = RiskyShuffled(7)
@@ -4423,6 +4431,7 @@ Card9:
         If BTNRisk9.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 9
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(8)
 
         BTNRisk9.BackColor = Color.Khaki
         Risk9.Text = RiskyShuffled(8)
@@ -4440,6 +4449,7 @@ Card9:
         If BTNRisk10.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 10
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(9)
 
         BTNRisk10.BackColor = Color.Khaki
         Risk10.Text = RiskyShuffled(9)
@@ -4459,6 +4469,7 @@ Card9:
         If BTNRisk11.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 11
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(10)
 
         BTNRisk11.BackColor = Color.Khaki
         Risk11.Text = RiskyShuffled(10)
@@ -4476,6 +4487,7 @@ Card9:
         If BTNRisk12.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 12
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(11)
 
         BTNRisk12.BackColor = Color.Khaki
         Risk12.Text = RiskyShuffled(11)
@@ -4493,6 +4505,7 @@ Card9:
         If BTNRisk13.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 13
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(12)
 
         BTNRisk13.BackColor = Color.Khaki
         Risk13.Text = RiskyShuffled(12)
@@ -4510,6 +4523,7 @@ Card9:
         If BTNRisk14.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 14
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(13)
 
         BTNRisk14.BackColor = Color.Khaki
         Risk14.Text = RiskyShuffled(13)
@@ -4527,6 +4541,7 @@ Card9:
         If BTNRisk15.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 15
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(14)
 
         BTNRisk15.BackColor = Color.Khaki
         Risk15.Text = RiskyShuffled(14)
@@ -4544,6 +4559,7 @@ Card9:
         If BTNRisk16.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 16
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(15)
 
         BTNRisk16.BackColor = Color.Khaki
         Risk16.Text = RiskyShuffled(15)
@@ -4561,6 +4577,7 @@ Card9:
         If BTNRisk17.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 17
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(16)
 
         BTNRisk17.BackColor = Color.Khaki
         Risk17.Text = RiskyShuffled(16)
@@ -4578,6 +4595,7 @@ Card9:
         If BTNRisk18.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 18
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(17)
 
         BTNRisk18.BackColor = Color.Khaki
         Risk18.Text = RiskyShuffled(17)
@@ -4595,6 +4613,7 @@ Card9:
         If BTNRisk19.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 19
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(18)
 
         BTNRisk19.BackColor = Color.Khaki
         Risk19.Text = RiskyShuffled(18)
@@ -4612,6 +4631,7 @@ Card9:
         If BTNRisk20.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 20
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(19)
 
         BTNRisk20.BackColor = Color.Khaki
         Risk20.Text = RiskyShuffled(19)
@@ -4629,6 +4649,7 @@ Card9:
         If BTNRisk21.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 21
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(20)
 
         BTNRisk21.BackColor = Color.Khaki
         Risk21.Text = RiskyShuffled(20)
@@ -4646,6 +4667,7 @@ Card9:
         If BTNRisk22.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 22
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(21)
 
         BTNRisk22.BackColor = Color.Khaki
         Risk22.Text = RiskyShuffled(21)
@@ -4663,6 +4685,7 @@ Card9:
         If BTNRisk23.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 23
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(22)
 
         BTNRisk23.BackColor = Color.Khaki
         Risk23.Text = RiskyShuffled(22)
@@ -4680,6 +4703,7 @@ Card9:
         If BTNRisk24.BackColor = Color.Khaki Then Return
 
         If RiskyRound = 0 Then RiskyPickNumber = 24
+        If RiskyRound = 0 Then RiskyCase = RiskyShuffled(23)
 
         BTNRisk24.BackColor = Color.Khaki
         Risk24.Text = RiskyShuffled(23)
@@ -5108,6 +5132,7 @@ Card9:
             Return
         End If
 
+        RiskyState = True
         Form1.RiskyDeal = True
 
         BTNRiskyPlay.Text = ""
@@ -6085,6 +6110,30 @@ Card9:
 
 
     End Sub
+
+    'Public Sub PickedMyCase()
+
+    'EdgesOwed = Val(RiskyCase)
+    'TokensPaid = 1000 / EdgesOwed
+    'TokensPaid = Math.Ceiling(TokensPaid)
+
+
+
+    'End Sub
+
+    'Public Sub PickedLastCase()
+
+
+
+    'EdgesOwed = Val(RiskyCase)
+    'TokensPaid = 1000 / EdgesOwed
+    'TokensPaid = Math.Ceiling(TokensPaid)
+
+
+
+    'End Sub
+
+
 
 
 End Class

@@ -631,6 +631,7 @@ Partial Class frmApps
         Me.Button29.TabStop = False
         Me.Button29.Text = "Run"
         Me.Button29.UseVisualStyleBackColor = False
+        Me.Button29.Visible = False
         '
         'Button5
         '
@@ -1675,14 +1676,14 @@ Partial Class frmApps
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(246, 530)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.PNLAppRandomizer)
-        Me.Controls.Add(Me.PNLHypnoGen)
-        Me.Controls.Add(Me.AppPanelVitalSub)
-        Me.Controls.Add(Me.AppPanelGlitter)
         Me.Controls.Add(Me.PNLAppHome)
         Me.Controls.Add(Me.PNLLazySub)
         Me.Controls.Add(Me.PNLWishList)
         Me.Controls.Add(Me.PNLPlaylist)
+        Me.Controls.Add(Me.PNLAppRandomizer)
+        Me.Controls.Add(Me.PNLHypnoGen)
+        Me.Controls.Add(Me.AppPanelVitalSub)
+        Me.Controls.Add(Me.AppPanelGlitter)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
