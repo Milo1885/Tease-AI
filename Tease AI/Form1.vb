@@ -437,6 +437,7 @@ Public Class Form1
 
 
     Public RiskyDeal As Boolean
+    Public RiskyEdges As Boolean
     Public RiskyDelay As Boolean
     Public FinalRiskyPick As Boolean
 
@@ -12930,7 +12931,7 @@ VTSkip:
         Do
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@InterruptLongEdge") Then
-                If LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Then
+                If LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or TeaseTick < 1 Or RiskyEdges = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))

@@ -1,6 +1,8 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+9/05 5:36 am - Tease AI will no longer call Long Edge Interrupts during End scripts
+
 9/05 3:25 am - Added Language option in Misc tab to switch Settings UI between English and German. Added German translations to General Settings provided by Ambossli. This will be a slow and steady process, but I will get translations added in various patches moving forward as I receive and are able to implement them
 
 9/04 6:24 am - Improved function of the @Goto Command. Using a @Goto Command such as @Goto(This Line) will go to (This Line) as usual. but you can enter multiple lines separated by commas, such as @Goto(This Line, That Line, That Line Over There). In this case, the script will randomly jump to one of the lines specified, so there's an equal chance of Tease AI moving to (This Line), (That Line) or (That Line Over There).

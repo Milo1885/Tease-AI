@@ -5127,6 +5127,13 @@ Card9:
             Return
         End If
 
+        If Form1.RiskyEdges = True Then
+            MessageBox.Show(Me, "You still owe edges from your previous game!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            Return
+        End If
+
+
+
         If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\Risky Pick\Risky Pick.txt") Then
             MessageBox.Show(Me, "Risky Pick.txt was not found in \Games\Risky Pick!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             Return
@@ -6104,6 +6111,9 @@ Card9:
         BTNPickIt.Visible = False
         BTNRiskIt.Text = "DECLINE OFFER"
         BTNPickIt.Text = "ACCEPT OFFER"
+
+        Form1.RiskyDeal = False
+        Form1.RiskyEdges = True
 
         Me.Close()
 
