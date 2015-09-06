@@ -6105,6 +6105,9 @@ Card9:
         BTNRiskIt.Text = "DECLINE OFFER"
         BTNPickIt.Text = "ACCEPT OFFER"
 
+        Me.Close()
+
+
 
 
 

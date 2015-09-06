@@ -703,6 +703,8 @@ Public Class FrmSettings
         LBLContact2ImageDir.Text = My.Settings.Contact2ImageDir
         LBLContact3ImageDir.Text = My.Settings.Contact3ImageDir
 
+        If My.Settings.TeaseAILanguage = "English" Then EnglishMenu()
+        If My.Settings.TeaseAILanguage = "German" Then GermanMenu()
 
         FrmSettingsLoading = False
 
@@ -3105,48 +3107,74 @@ NextURL:
 
     Private Sub timestampCheckBox_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles timestampCheckBox.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, a timestamp will appear with each message you and the domme send."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird mit jeder Nachricht die du oder die Domina sendet ein Zeitstempel angezeigt"
     End Sub
 
     Private Sub shownamesCheckBox_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles shownamesCheckBox.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, the names of you and the domme will appear with every message you send. If it is unselected, names will only appear when you were not the last one to type."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird mit jeder Nachricht die du oder die  Domina sendet der Name angezeigt. Wenn dies deaktiviert ist," _
+            & " Namen werden nur erscheinen wenn du nicht der letzte warst, der geschrieben hat."
+
     End Sub
 
 
     Private Sub typeinstantlyCheckBox_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles typeinstantlyCheckBox.MouseHover
         LBLGeneralSettingsDescription.Text = "This program simulates a chat environment, so a brief delay appears before each post the domme makes. This delay is determined by the length of what she is saying and will " _
             & "be accompanied by the text ""[Dom Name] is typing..."" for added effect. When this is unselected, the typing delay is removed and the domme's messages become instantaneous."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Dieses Programm simuliert eine Chat Umgebung, daher erscheint eine kurze Verzögerung vor jedem Beitrag den die Domina macht. Diese Verzögerung hängt von der Länge ab, was sie schreibt und wird begleitet mit dem text „[Dom Name] is typing…"" für einen besseren Effekt. Wenn dies deaktiviert ist, ist die „Tippen"" Verzögerung entfernt und die Domina Beiträge erschein sofort"
+
     End Sub
 
     Private Sub CBLockWindow_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBLockWindow.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, the splitter between the chat window and image window cannot be adjusted."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, kann der Teilungsbalken zwischen Chat Fenster und Bildfenster nicht verstellt werden."
+
     End Sub
 
     Private Sub CBBlogImageWindow_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBBlogImageWindow.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, any blog images the domme shows you will automatically be saved to ""[root folder]\Images\Session Images\""."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird jedes Blog Bild, welches die Domina dir zeigt automatisch gespeichert in „…\Tease AI Open Beta\Images\Session Images\"""
     End Sub
 
     Private Sub landscapeCheckBox_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles landscapeCheckBox.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, images that appear in the main window will be stretched to fit the screen if their width is greater than their height."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, werden die Bilder(welche Angezeigt werden) gestreckt, wenn ihre Breite größer als ihre Höhe ist"
     End Sub
     Private Sub CBImageInfo_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBImageInfo.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, the local filepath or URL address of each image displayed in the main window will appear in the upper left hand corner of the screen."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird der Lokale Dateipfad oder die URL-Adresse von jedem Bild in der oberen linken Ecke des Bildschirms angezeigt."
     End Sub
 
     Private Sub BTNDomImageDir_MouseHover(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.MouseHover
         LBLGeneralSettingsDescription.Text = "Use this button to select a directory containing several image set folders of the same model you're using as your domme. Once a valid directory has been set, any time" _
             & " you say hello to the domme, one of those folders will automatically be selected at random and used for the slideshow."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre Bildersets von dem selben Model enthält, die du als Domina benutzt. Nachdem einmal ein gültiges Verzeichnis gesetzt wurde, wird nachdem du Hello zu der Domina gesagt hast, automatisch zufällig eine Diashow ausgewählt."
     End Sub
 
     Private Sub offRadio_MouseHover(sender As System.Object, e As System.EventArgs) Handles offRadio.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is set, any slideshow you have selected will not advance during the tease. Use the Previous and Next buttons on the Media Bar to change the images."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird jede Diashow nicht automatisch die Bilder wechseln. Nutze die Vor- und Zurückschaltflächen in der media bar um die Bilder zu wechseln"
     End Sub
 
     Private Sub timedRadio_MouseHover(sender As System.Object, e As System.EventArgs) Handles timedRadio.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is set, any slideshow you have selected will advance the image every number of seconds displayed in the box to the right of this option."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
     End Sub
 
     Private Sub SlideshowNumBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles slideshowNumBox.MouseHover
         LBLGeneralSettingsDescription.Text = "The number of seconds between image changes when the ""Timed"" slideshow option is checked."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
     End Sub
 
     Private Sub Radio_LostFocus(sender As Object, e As System.EventArgs) Handles teaseRadio.LostFocus, offRadio.LostFocus, timedRadio.LostFocus
@@ -3159,40 +3187,58 @@ NextURL:
     Private Sub teaseRadio_MouseHover(sender As System.Object, e As System.EventArgs) Handles teaseRadio.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is set, any slideshow you have selected will advance automatically when the domme types. The slideshow may move forward or backward, but will not loop either" _
             & " direction. You can change the odds of which way the slideshow will move in the Ranges tab. This is the default slideshow mode for Tease AI."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird die Diashow automatisch die Bilder wechseln wenn die Domina schreibt. Die Diashow kann vorwärts oder rückwärts laufen, aber wird keine Richtung wiederholen. Du kannst die Wahrscheinlichkeit in welche Richtung die Diashow läuft im Wertebereichs „Reiter"" ändern. Dies ist der Standart Diashow modus in Tease AI "
     End Sub
 
 
     Private Sub CBMetronome_CheckedChanged_1(sender As System.Object, e As System.EventArgs)
         LBLGeneralSettingsDescription.Text = "When this is selected, the silent metronome located above the sub avatar will activate any time you are instructed to stroke."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
     End Sub
 
     Private Sub CBSettingsPause_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBSettingsPause.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, the program will pause any time the settings menu is open and resume once it is closed."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird das Programm immer in Pause springen solange das Einstellungsmenü geöffnet ist."
     End Sub
 
     Private Sub BTNDomColor_MouseHover(sender As Object, e As System.EventArgs) Handles BTNDomColor.MouseHover
         LBLGeneralSettingsDescription.Text = "This button allows you to change the color of the domme's name as it appears in the chat window. A preview will appear in the text box next to this button once a color has been selected."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Diese Schaltfläche erlaubt dir die Farbe  des Domina Namens zu ändern in der er im Chat Fenster angezeigt wird. Eine Vorschau wird in der Textbox neben dieser Schaltfläche angezeigt, nachdem eine Farbe ausgewählt wurde."
     End Sub
 
     Private Sub BTNSubColor_MouseHover(sender As Object, e As System.EventArgs) Handles BTNSubColor.MouseHover
         LBLGeneralSettingsDescription.Text = "This button allows you to change the color of your name as it appears in the chat window. A preview will appear in the text box next to this button once a color has been selected."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Diese Schaltfläche erlaubt dir die Farbe  des Sklaven Namens zu ändern in der er im Chat Fenster angezeigt wird. Eine Vorschau wird in der Textbox neben dieser Schaltfläche angezeigt, nachdem eine Farbe ausgewählt wurde."
     End Sub
 
     Private Sub LBLDomColor_Click(sender As System.Object, e As System.EventArgs) Handles LBLDomColor.MouseHover
         LBLGeneralSettingsDescription.Text = "After clicking the ""Domme Name Color"" button to the left, a preview of the selected color will appear here."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Nachdem Klicken der Schaltfläche ""Domina Farbe für Namen"" zur linken, eine Vorschau der ausgewählten Farbe erscheint hier"
     End Sub
 
     Private Sub LBLSubColor_Click(sender As System.Object, e As System.EventArgs) Handles LBLSubColor.MouseHover
         LBLGeneralSettingsDescription.Text = "After clicking the ""Sub Name Color"" button to the left, a preview of the selected color will appear here."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Nachdem Klicken der Schaltfläche ""Sklaven Farbe für Namen"" zur linken, eine Vorschau der ausgewählten Farbe erscheint hier"
     End Sub
 
     Private Sub CBDomDel_Click(sender As System.Object, e As System.EventArgs) Handles CBDomDel.MouseHover
         LBLGeneralSettingsDescription.Text = "When this box is checked, the domme will be able to permanently delete media from your hard drive when such Commands are used in scripts." & Environment.NewLine & _
             Environment.NewLine & "When this box is NOT checked, media will not actually be deleted. Images will still disappear from the window, but they will not be deleted from the hard drive."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, ist die Domina dazu in der Lage Medien permanent von deiner Festplatte zu löschen, wenn solche Kommandos in dem Script genutzt werden. Wenn dies deaktiviert ist, werden Bilder vom Bildschirm verschwinden, aber nicht von der Festplatte gelöscht."
     End Sub
 
     Private Sub GBGeneralSettings_MouseHover(sender As Object, e As System.EventArgs) Handles GBGeneralSettings.MouseEnter, PNLGeneralSettings.MouseEnter
         LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
     End Sub
 
     Private Sub domlevelNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.LostFocus
@@ -4516,6 +4562,8 @@ NextURL:
     Private Sub CBSlideshowSubDir_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBSlideshowSubDir.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, the program will include all subdirectories when you select a folder for slideshow images. When it is unselected, only the images in the top " & _
             "level of the folder will be used."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird das Programm alle Unterordner mit einbeziehn wenn du ein Ordner für Diashow bilder gewählt hast. Wenn dies deaktiviert ist. Werden nur Bilder des ausgewählten Ordners benutzt"
     End Sub
 
     Private Sub CBSlideshowRandom_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBSlideshowRandom.LostFocus
@@ -4529,38 +4577,55 @@ NextURL:
 
     Private Sub CBSlideshowRandom_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBSlideshowRandom.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, the slideshow will display images randomly. When it is unselected, it will display images in order of their filename."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, werden Diashow Bilder zufällig angezeigt. Wenn dies deaktiviert ist, werden die Bilder in Reihenfolge ihrer Dateinamen gezeigt."
     End Sub
 
     Private Sub CBAutosaveChatlog_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBAutosaveChatlog.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, the program will save a chatlog called ""Autosave.html"" any time you or the domme post a message. This log is overwritten each time, so it will only display " & _
             "a record of the current session. This log can be found in the ""Chatlogs"" directory in the root folder of the program."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, speichert das Programm einen Chatlog („Autosave.html"") immer wenn du oder die Domina eine Nachricht senden. Dieses Log wird jedes Mal überschrieben, so das es nur die Aktuelle Session aufnimmt/anzeigt. Dieses Log befindet sich im Ordner „Chatlogs"" in dem Tease AI Ordner."
+
     End Sub
 
     Private Sub CBSaveChatlogExit_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBSaveChatlogExit.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, a unique chatlog that includes the date and time will be created whenever you exit the program. This log can be found in the ""Chatlogs"" directory in " & _
             "the root folder of the program."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, speichert das Programm einen einzigartigen Chatlog, der Datum und Zeit beinhaltet, immer dann wenn du das Programm beendest. Dieses Log befindet sich im Ordner „Chatlogs"" in dem Tease AI Ordner."
     End Sub
 
     Private Sub CBJackInTheBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBAuditStartup.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is checked, the program will automatically audit all scripts in the current domme's directory and fix common errors."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird das Programm automatisch alle Scripts im domina Ordner prüfen und häufige Fehler beheben"
     End Sub
 
     Private Sub TBSafeword_MouseHover(sender As System.Object, e As System.EventArgs) Handles TBSafeword.MouseHover
         LBLGeneralSettingsDescription.Text = "Use this to set the word you would like to use as your safeword. When used by itself during interaction with the domme, it will stop all activity and begin an Interrupt" _
             & " script where the domme makes sure you're okay to continue."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Gebe hier dein Safeword ein, welches alle Aktivitäten der Domina stopt, bis sie sicher ist, das du weiter machen kannst."
     End Sub
 
     Private Sub TTSCheckbox_MouseHover(sender As System.Object, e As System.EventArgs) Handles TTSCheckBox.MouseHover
         LBLGeneralSettingsDescription.Text = "When this is selected, the domme will ""speak"" her lines using whichever TTS voice you have selected. This setting must be manually checked to make the most out of the" _
             & " Hypnotic Guide app. For privacy reasons, this setting will not be saved through multiple uses of the program. It must be selected each time you start Tease AI and wish to use it."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies Aktiviert ist, wird die Domina ihre Zeilen ""sprechen"" mit welcher TTS stimme du gewählt hast. Diese Einstellung muss Manuel gewählt werden um das meiste aus der Hypnotic Guide app zu machen. Wegen der  Privatsphäre wird diese Einstellung nicht gespeichert, sondern muss bei jedem Start von Tease AI gesondert gewählt werden."
     End Sub
 
     Private Sub TTSComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles TTSComboBox.MouseHover
         LBLGeneralSettingsDescription.Text = "Make a selection from the Text-to-Speech voices installed on your computer."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
     End Sub
 
     Private Sub GBGeneralSystem_MouseEnter(sender As System.Object, e As System.EventArgs) Handles GBGeneralSystem.MouseEnter
         LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
+
+        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
     End Sub
 
 
@@ -12697,8 +12762,130 @@ NextURL:
 
     End Sub
 
-    
+    Public Sub EnglishMenu()
+
+        LBLGeneralSettings.Text = "General Settings"
+
+        GBGeneralSettings.Text = "Chat Window"
+
+        timestampCheckBox.Text = "Show Timestamps"
+        shownamesCheckBox.Text = "Always Show Names"
+        typeinstantlyCheckBox.Text = "Domme Types Instantly"
+        CBLockWindow.Text = "Disable Chat Window Resize"
+
+        GBDommeFont.Text = "Domme Font Settings"
+        BTNDomColor.Text = "Domme Name Color"
+        LBLDomColor.Text = "Preview"
+
+        GBSubFont.Text = "Sub Font Settings"
+        BTNSubColor.Text = "Sub Name Color"
+        LBLSubColor.Text = "Preview"
+
+        GBGeneralImages.Text = "Images"
+
+        CBBlogImageWindow.Text = "Save Blog Images From Session"
+        CBSlideshowSubDir.Text = "Slideshow Includes Subdirectories"
+        CBSlideshowRandom.Text = "Display Slideshow Pictures Randomly"
+        landscapeCheckBox.Text = "Stretch Landscape Images"
+        CBImageInfo.Text = "Display Image Information"
+
+        GBDommeImages.Text = "Domme Images Directory"
+        BTNDomImageDir.Text = "Set Domme Images Directory"
+
+        GBSlideshowOptions.Text = "Slideshow Options"
+        offRadio.Text = "Manual"
+        teaseRadio.Text = "Tease"
+
+        GBGeneralSystem.Text = "System"
+        CBAuditStartup.Text = "Audit Scripts on Startup"
+        CBSettingsPause.Text = "Pause Program When Settings Menu is Visible"
+        CBAutosaveChatlog.Text = "Autosave Chatlog"
+        CBSaveChatlogExit.Text = "Save Unique Chatlog on Exit"
+        CBDomDel.Text = "Allow Domme to Delete Local Media"
+
+        GBSafeword.Text = "Safeword"
+        LBLSafeword.Text = "Enter a safeword that will stop all activity until the domme is sure you're able to continue."
+
+        GBGeneralTextToSpeech.Text = "Text to Speech"
+        TTSCheckBox.Text = "Enable"
+
+        GBGeneralDesc.Text = "Description"
+        LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
+
+    End Sub
+
+    Public Sub GermanMenu()
+
+
+        LBLGeneralSettings.Text = "Allgemeine Einstellung"
+
+        GBGeneralSettings.Text = "Chat Fenster"
+
+        timestampCheckBox.Text = "Zeige Zeitstempel"
+        shownamesCheckBox.Text = "Zeige immer die Namen"
+        typeinstantlyCheckBox.Text = "Domina Schreibt sofort"
+        CBLockWindow.Text = "Deaktiviere Chat Fenster Größen Änderung"
+
+        GBDommeFont.Text = "Domina Schrift Einstellungen"
+        BTNDomColor.Text = "Domina Farbe für Namen"
+        LBLDomColor.Text = "Vorschau"
+
+        GBSubFont.Text = "Sklaven Schrift Einstellungen"
+        BTNSubColor.Text = "Sklaven Farbe für Namen"
+        LBLSubColor.Text = "Vorschau"
+
+        GBGeneralImages.Text = "Bilder"
+
+        CBBlogImageWindow.Text = "Speichere Blog Bilder von Sitzung"
+        CBSlideshowSubDir.Text = "Diashows enthalten Unterordner"
+        CBSlideshowRandom.Text = "Zeige Diashow Bilder zufällig"
+        landscapeCheckBox.Text = "Strecke „Landschaftsbilder"""
+        CBImageInfo.Text = "Zeige Bild Informationen"
+
+        GBDommeImages.Text = "Domina Bilder Ordner"
+        BTNDomImageDir.Text = "Wähle Domina Bilder Speicherpfad"
+
+        GBSlideshowOptions.Text = "Diashow Einstellungen"
+        offRadio.Text = "Handbetrieb"
+        teaseRadio.Text = "Automatic"
+
+        GBGeneralSystem.Text = "System"
+        CBAuditStartup.Text = "Prüfen der Scripts beim Starten"
+        CBSettingsPause.Text = "Pause wenn Einstellungsmenü geöffnet ist"
+        CBAutosaveChatlog.Text = "Autospeichern des Chatverlaufs"
+        CBSaveChatlogExit.Text = "Speichert beim beenden einzigartigen Chatverlauf"
+        CBDomDel.Text = "Erlaube Domina Lokale Medien zu löschen"
+
+        GBSafeword.Text = "Safeword"
+        LBLSafeword.Text = "Gebe hier dein Safeword ein, welches alle Aktivitäten der Domina stopt, bis sie sicher ist, das du weiter machen kannst."
+
+        GBGeneralTextToSpeech.Text = "Text zu Sprache"
+        TTSCheckBox.Text = "Aktivieren"
+
+        GBGeneralDesc.Text = "Beschreibung"
+        LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
+
+    End Sub
 
 
    
+    Private Sub RBGerman_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RBGerman.CheckedChanged, RBEnglish.CheckedChanged
+
+        If FrmSettingsLoading = False Then
+
+            If RBGerman.Checked = True Then
+                GermanMenu()
+                My.Settings.TeaseAILanguage = "German"
+            End If
+
+            If RBEnglish.Checked = True Then
+                EnglishMenu()
+                My.Settings.TeaseAILanguage = "English"
+            End If
+
+            My.Settings.Save()
+
+        End If
+
+    End Sub
 End Class
