@@ -12824,14 +12824,14 @@ NextURL:
         timestampCheckBox.Text = "Zeige Zeitstempel"
         shownamesCheckBox.Text = "Zeige immer die Namen"
         typeinstantlyCheckBox.Text = "Domina Schreibt sofort"
-        CBLockWindow.Text = "Deaktiviere Chat Fenster Größen Änderung"
+        CBLockWindow.Text = "Deaktiviere Chat Fenster Verstellung"
 
         GBDommeFont.Text = "Domina Schrift Einstellungen"
-        BTNDomColor.Text = "Domina Farbe für Namen"
+        BTNDomColor.Text = "Domina Farbe"
         LBLDomColor.Text = "Vorschau"
 
         GBSubFont.Text = "Sklaven Schrift Einstellungen"
-        BTNSubColor.Text = "Sklaven Farbe für Namen"
+        BTNSubColor.Text = "Sklaven Farbe"
         LBLSubColor.Text = "Vorschau"
 
         GBGeneralImages.Text = "Bilder"
@@ -12846,21 +12846,21 @@ NextURL:
         BTNDomImageDir.Text = "Wähle Domina Bilder Speicherpfad"
 
         GBSlideshowOptions.Text = "Diashow Einstellungen"
-        offRadio.Text = "Handbetrieb"
-        teaseRadio.Text = "Automatic"
+        offRadio.Text = "Manual"
+        teaseRadio.Text = "Tease"
 
         GBGeneralSystem.Text = "System"
         CBAuditStartup.Text = "Prüfen der Scripts beim Starten"
         CBSettingsPause.Text = "Pause wenn Einstellungsmenü geöffnet ist"
         CBAutosaveChatlog.Text = "Autospeichern des Chatverlaufs"
-        CBSaveChatlogExit.Text = "Speichert beim beenden einzigartigen Chatverlauf"
+        CBSaveChatlogExit.Text = "Speichert beim beenden einen Chatverlauf"
         CBDomDel.Text = "Erlaube Domina Lokale Medien zu löschen"
 
         GBSafeword.Text = "Safeword"
         LBLSafeword.Text = "Gebe hier dein Safeword ein, welches alle Aktivitäten der Domina stopt, bis sie sicher ist, das du weiter machen kannst."
 
         GBGeneralTextToSpeech.Text = "Text zu Sprache"
-        TTSCheckBox.Text = "Aktivieren"
+        TTSCheckBox.Text = "Aktiv"
 
         GBGeneralDesc.Text = "Beschreibung"
         LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."

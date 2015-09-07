@@ -857,6 +857,9 @@ Partial Class FrmSettings
         Me.Label50 = New System.Windows.Forms.Label()
         Me.TabPage25 = New System.Windows.Forms.TabPage()
         Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.GroupBox62 = New System.Windows.Forms.GroupBox()
+        Me.RBGerman = New System.Windows.Forms.RadioButton()
+        Me.RBEnglish = New System.Windows.Forms.RadioButton()
         Me.GroupBox33 = New System.Windows.Forms.GroupBox()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.LBLChastityState = New System.Windows.Forms.Label()
@@ -911,9 +914,6 @@ Partial Class FrmSettings
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
-        Me.GroupBox62 = New System.Windows.Forms.GroupBox()
-        Me.RBEnglish = New System.Windows.Forms.RadioButton()
-        Me.RBGerman = New System.Windows.Forms.RadioButton()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -1120,6 +1120,7 @@ Partial Class FrmSettings
         Me.GroupBox34.SuspendLayout
         Me.TabPage25.SuspendLayout
         Me.Panel11.SuspendLayout
+        Me.GroupBox62.SuspendLayout
         Me.GroupBox33.SuspendLayout
         Me.GroupBox27.SuspendLayout
         Me.GroupBox20.SuspendLayout
@@ -1128,7 +1129,6 @@ Partial Class FrmSettings
         Me.TabPage5.SuspendLayout
         Me.Panel5.SuspendLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox62.SuspendLayout
         Me.SuspendLayout
         '
         'SettingsPanel
@@ -1203,26 +1203,26 @@ Partial Class FrmSettings
         Me.GBDommeImages.Name = "GBDommeImages"
         Me.GBDommeImages.Size = New System.Drawing.Size(210, 74)
         Me.GBDommeImages.TabIndex = 156
-        Me.GBDommeImages.TabStop = False
+        Me.GBDommeImages.TabStop = false
         Me.GBDommeImages.Text = "Domme Images Directory"
         '
         'BTNDomImageDir
         '
         Me.BTNDomImageDir.BackColor = System.Drawing.Color.LightGray
-        Me.BTNDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.BTNDomImageDir.ForeColor = System.Drawing.Color.Black
         Me.BTNDomImageDir.Location = New System.Drawing.Point(6, 17)
         Me.BTNDomImageDir.Name = "BTNDomImageDir"
         Me.BTNDomImageDir.Size = New System.Drawing.Size(198, 22)
         Me.BTNDomImageDir.TabIndex = 17
         Me.BTNDomImageDir.Text = "Set Domme Images Directory"
-        Me.BTNDomImageDir.UseVisualStyleBackColor = False
+        Me.BTNDomImageDir.UseVisualStyleBackColor = false
         '
         'LBLDomImageDir
         '
         Me.LBLDomImageDir.BackColor = System.Drawing.Color.Transparent
         Me.LBLDomImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBLDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLDomImageDir.ForeColor = System.Drawing.Color.Black
         Me.LBLDomImageDir.Location = New System.Drawing.Point(6, 45)
         Me.LBLDomImageDir.Name = "LBLDomImageDir"
@@ -1241,32 +1241,32 @@ Partial Class FrmSettings
         Me.GBGeneralTextToSpeech.Name = "GBGeneralTextToSpeech"
         Me.GBGeneralTextToSpeech.Size = New System.Drawing.Size(259, 49)
         Me.GBGeneralTextToSpeech.TabIndex = 0
-        Me.GBGeneralTextToSpeech.TabStop = False
+        Me.GBGeneralTextToSpeech.TabStop = false
         Me.GBGeneralTextToSpeech.Text = "Text to Speech"
         '
         'TTSCheckBox
         '
-        Me.TTSCheckBox.AutoSize = True
+        Me.TTSCheckBox.AutoSize = true
         Me.TTSCheckBox.ForeColor = System.Drawing.Color.Black
         Me.TTSCheckBox.Location = New System.Drawing.Point(7, 20)
         Me.TTSCheckBox.Name = "TTSCheckBox"
         Me.TTSCheckBox.Size = New System.Drawing.Size(59, 17)
         Me.TTSCheckBox.TabIndex = 28
-        Me.TTSCheckBox.TabStop = False
+        Me.TTSCheckBox.TabStop = false
         Me.TTSCheckBox.Text = "Enable"
-        Me.TTSCheckBox.UseVisualStyleBackColor = True
+        Me.TTSCheckBox.UseVisualStyleBackColor = true
         '
         'TTSComboBox
         '
         Me.TTSComboBox.BackColor = System.Drawing.SystemColors.Window
         Me.TTSComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.TTSComboBox.ForeColor = System.Drawing.SystemColors.WindowText
-        Me.TTSComboBox.FormattingEnabled = True
+        Me.TTSComboBox.FormattingEnabled = true
         Me.TTSComboBox.Location = New System.Drawing.Point(72, 18)
         Me.TTSComboBox.Name = "TTSComboBox"
         Me.TTSComboBox.Size = New System.Drawing.Size(178, 21)
         Me.TTSComboBox.TabIndex = 29
-        Me.TTSComboBox.TabStop = False
+        Me.TTSComboBox.TabStop = false
         '
         'GBSlideshowOptions
         '
@@ -1280,13 +1280,13 @@ Partial Class FrmSettings
         Me.GBSlideshowOptions.Name = "GBSlideshowOptions"
         Me.GBSlideshowOptions.Size = New System.Drawing.Size(210, 49)
         Me.GBSlideshowOptions.TabIndex = 155
-        Me.GBSlideshowOptions.TabStop = False
+        Me.GBSlideshowOptions.TabStop = false
         Me.GBSlideshowOptions.Text = "Slideshow Options"
         '
         'slideshowNumBox
         '
         Me.slideshowNumBox.BackColor = System.Drawing.Color.White
-        Me.slideshowNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.slideshowNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.slideshowNumBox.ForeColor = System.Drawing.Color.Black
         Me.slideshowNumBox.Location = New System.Drawing.Point(93, 18)
         Me.slideshowNumBox.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
@@ -1298,40 +1298,40 @@ Partial Class FrmSettings
         '
         'teaseRadio
         '
-        Me.teaseRadio.AutoSize = True
-        Me.teaseRadio.Checked = True
-        Me.teaseRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.teaseRadio.AutoSize = true
+        Me.teaseRadio.Checked = true
+        Me.teaseRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.teaseRadio.ForeColor = System.Drawing.Color.Black
         Me.teaseRadio.Location = New System.Drawing.Point(149, 19)
         Me.teaseRadio.Name = "teaseRadio"
         Me.teaseRadio.Size = New System.Drawing.Size(55, 17)
         Me.teaseRadio.TabIndex = 21
-        Me.teaseRadio.TabStop = True
+        Me.teaseRadio.TabStop = true
         Me.teaseRadio.Text = "Tease"
-        Me.teaseRadio.UseVisualStyleBackColor = True
+        Me.teaseRadio.UseVisualStyleBackColor = true
         '
         'offRadio
         '
-        Me.offRadio.AutoSize = True
-        Me.offRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.offRadio.AutoSize = true
+        Me.offRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.offRadio.ForeColor = System.Drawing.Color.Black
         Me.offRadio.Location = New System.Drawing.Point(6, 19)
         Me.offRadio.Name = "offRadio"
         Me.offRadio.Size = New System.Drawing.Size(60, 17)
         Me.offRadio.TabIndex = 18
         Me.offRadio.Text = "Manual"
-        Me.offRadio.UseVisualStyleBackColor = True
+        Me.offRadio.UseVisualStyleBackColor = true
         '
         'timedRadio
         '
-        Me.timedRadio.AutoSize = True
-        Me.timedRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.timedRadio.AutoSize = true
+        Me.timedRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.timedRadio.ForeColor = System.Drawing.Color.Black
         Me.timedRadio.Location = New System.Drawing.Point(72, 21)
         Me.timedRadio.Name = "timedRadio"
         Me.timedRadio.Size = New System.Drawing.Size(14, 13)
         Me.timedRadio.TabIndex = 19
-        Me.timedRadio.UseVisualStyleBackColor = True
+        Me.timedRadio.UseVisualStyleBackColor = true
         '
         'GBSafeword
         '
@@ -1343,7 +1343,7 @@ Partial Class FrmSettings
         Me.GBSafeword.Name = "GBSafeword"
         Me.GBSafeword.Size = New System.Drawing.Size(259, 74)
         Me.GBSafeword.TabIndex = 0
-        Me.GBSafeword.TabStop = False
+        Me.GBSafeword.TabStop = false
         Me.GBSafeword.Text = "Safeword"
         '
         'LBLSafeword
@@ -1352,7 +1352,7 @@ Partial Class FrmSettings
         Me.LBLSafeword.Name = "LBLSafeword"
         Me.LBLSafeword.Size = New System.Drawing.Size(225, 29)
         Me.LBLSafeword.TabIndex = 0
-        Me.LBLSafeword.Text = "Enter a safeword that will stop all activity until the domme is sure you're able " & _
+        Me.LBLSafeword.Text = "Enter a safeword that will stop all activity until the domme is sure you're able "& _ 
     "to continue."
         Me.LBLSafeword.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -1376,72 +1376,72 @@ Partial Class FrmSettings
         Me.GBGeneralSystem.Name = "GBGeneralSystem"
         Me.GBGeneralSystem.Size = New System.Drawing.Size(259, 140)
         Me.GBGeneralSystem.TabIndex = 0
-        Me.GBGeneralSystem.TabStop = False
+        Me.GBGeneralSystem.TabStop = false
         Me.GBGeneralSystem.Text = "System"
         '
         'CBAuditStartup
         '
-        Me.CBAuditStartup.AutoSize = True
+        Me.CBAuditStartup.AutoSize = true
         Me.CBAuditStartup.ForeColor = System.Drawing.Color.Black
         Me.CBAuditStartup.Location = New System.Drawing.Point(7, 19)
         Me.CBAuditStartup.Name = "CBAuditStartup"
         Me.CBAuditStartup.Size = New System.Drawing.Size(137, 17)
         Me.CBAuditStartup.TabIndex = 26
-        Me.CBAuditStartup.TabStop = False
+        Me.CBAuditStartup.TabStop = false
         Me.CBAuditStartup.Text = "Audit Scripts on Startup"
-        Me.CBAuditStartup.UseVisualStyleBackColor = True
+        Me.CBAuditStartup.UseVisualStyleBackColor = true
         '
         'CBDomDel
         '
-        Me.CBDomDel.AutoSize = True
+        Me.CBDomDel.AutoSize = true
         Me.CBDomDel.ForeColor = System.Drawing.Color.Black
         Me.CBDomDel.Location = New System.Drawing.Point(7, 110)
         Me.CBDomDel.Name = "CBDomDel"
         Me.CBDomDel.Size = New System.Drawing.Size(197, 17)
         Me.CBDomDel.TabIndex = 27
-        Me.CBDomDel.TabStop = False
+        Me.CBDomDel.TabStop = false
         Me.CBDomDel.Text = "Allow Domme to Delete Local Media"
-        Me.CBDomDel.UseVisualStyleBackColor = True
+        Me.CBDomDel.UseVisualStyleBackColor = true
         '
         'CBSettingsPause
         '
-        Me.CBSettingsPause.AutoSize = True
+        Me.CBSettingsPause.AutoSize = true
         Me.CBSettingsPause.ForeColor = System.Drawing.Color.Black
         Me.CBSettingsPause.Location = New System.Drawing.Point(7, 41)
         Me.CBSettingsPause.Name = "CBSettingsPause"
         Me.CBSettingsPause.Size = New System.Drawing.Size(244, 17)
         Me.CBSettingsPause.TabIndex = 22
-        Me.CBSettingsPause.TabStop = False
+        Me.CBSettingsPause.TabStop = false
         Me.CBSettingsPause.Text = "Pause Program When Settings Menu is Visible"
-        Me.CBSettingsPause.UseVisualStyleBackColor = True
+        Me.CBSettingsPause.UseVisualStyleBackColor = true
         '
         'CBSaveChatlogExit
         '
-        Me.CBSaveChatlogExit.AutoSize = True
-        Me.CBSaveChatlogExit.Checked = True
+        Me.CBSaveChatlogExit.AutoSize = true
+        Me.CBSaveChatlogExit.Checked = true
         Me.CBSaveChatlogExit.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CBSaveChatlogExit.ForeColor = System.Drawing.Color.Black
         Me.CBSaveChatlogExit.Location = New System.Drawing.Point(7, 87)
         Me.CBSaveChatlogExit.Name = "CBSaveChatlogExit"
         Me.CBSaveChatlogExit.Size = New System.Drawing.Size(162, 17)
         Me.CBSaveChatlogExit.TabIndex = 25
-        Me.CBSaveChatlogExit.TabStop = False
+        Me.CBSaveChatlogExit.TabStop = false
         Me.CBSaveChatlogExit.Text = "Save Unique Chatlog on Exit"
-        Me.CBSaveChatlogExit.UseVisualStyleBackColor = True
+        Me.CBSaveChatlogExit.UseVisualStyleBackColor = true
         '
         'CBAutosaveChatlog
         '
-        Me.CBAutosaveChatlog.AutoSize = True
-        Me.CBAutosaveChatlog.Checked = True
+        Me.CBAutosaveChatlog.AutoSize = true
+        Me.CBAutosaveChatlog.Checked = true
         Me.CBAutosaveChatlog.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CBAutosaveChatlog.ForeColor = System.Drawing.Color.Black
         Me.CBAutosaveChatlog.Location = New System.Drawing.Point(7, 64)
         Me.CBAutosaveChatlog.Name = "CBAutosaveChatlog"
         Me.CBAutosaveChatlog.Size = New System.Drawing.Size(110, 17)
         Me.CBAutosaveChatlog.TabIndex = 24
-        Me.CBAutosaveChatlog.TabStop = False
+        Me.CBAutosaveChatlog.TabStop = false
         Me.CBAutosaveChatlog.Text = "Autosave Chatlog"
-        Me.CBAutosaveChatlog.UseVisualStyleBackColor = True
+        Me.CBAutosaveChatlog.UseVisualStyleBackColor = true
         '
         'GBGeneralImages
         '
@@ -1454,83 +1454,83 @@ Partial Class FrmSettings
         Me.GBGeneralImages.Name = "GBGeneralImages"
         Me.GBGeneralImages.Size = New System.Drawing.Size(210, 140)
         Me.GBGeneralImages.TabIndex = 0
-        Me.GBGeneralImages.TabStop = False
+        Me.GBGeneralImages.TabStop = false
         Me.GBGeneralImages.Text = "Images"
         '
         'CBImageInfo
         '
-        Me.CBImageInfo.AutoSize = True
+        Me.CBImageInfo.AutoSize = true
         Me.CBImageInfo.ForeColor = System.Drawing.Color.Black
         Me.CBImageInfo.Location = New System.Drawing.Point(6, 110)
         Me.CBImageInfo.Name = "CBImageInfo"
         Me.CBImageInfo.Size = New System.Drawing.Size(147, 17)
         Me.CBImageInfo.TabIndex = 16
-        Me.CBImageInfo.TabStop = False
+        Me.CBImageInfo.TabStop = false
         Me.CBImageInfo.Text = "Display Image Information"
-        Me.CBImageInfo.UseVisualStyleBackColor = True
+        Me.CBImageInfo.UseVisualStyleBackColor = true
         '
         'CBSlideshowRandom
         '
-        Me.CBSlideshowRandom.AutoSize = True
+        Me.CBSlideshowRandom.AutoSize = true
         Me.CBSlideshowRandom.ForeColor = System.Drawing.Color.Black
         Me.CBSlideshowRandom.Location = New System.Drawing.Point(6, 64)
         Me.CBSlideshowRandom.Name = "CBSlideshowRandom"
         Me.CBSlideshowRandom.Size = New System.Drawing.Size(202, 17)
         Me.CBSlideshowRandom.TabIndex = 14
-        Me.CBSlideshowRandom.TabStop = False
+        Me.CBSlideshowRandom.TabStop = false
         Me.CBSlideshowRandom.Text = "Display Slideshow Pictures Randomly"
-        Me.CBSlideshowRandom.UseVisualStyleBackColor = True
+        Me.CBSlideshowRandom.UseVisualStyleBackColor = true
         '
         'landscapeCheckBox
         '
-        Me.landscapeCheckBox.AutoSize = True
+        Me.landscapeCheckBox.AutoSize = true
         Me.landscapeCheckBox.ForeColor = System.Drawing.Color.Black
         Me.landscapeCheckBox.Location = New System.Drawing.Point(6, 87)
         Me.landscapeCheckBox.Name = "landscapeCheckBox"
         Me.landscapeCheckBox.Size = New System.Drawing.Size(153, 17)
         Me.landscapeCheckBox.TabIndex = 15
-        Me.landscapeCheckBox.TabStop = False
+        Me.landscapeCheckBox.TabStop = false
         Me.landscapeCheckBox.Text = "Stretch Landscape Images"
-        Me.landscapeCheckBox.UseVisualStyleBackColor = True
+        Me.landscapeCheckBox.UseVisualStyleBackColor = true
         '
         'CBBlogImageWindow
         '
-        Me.CBBlogImageWindow.AutoSize = True
-        Me.CBBlogImageWindow.Checked = True
+        Me.CBBlogImageWindow.AutoSize = true
+        Me.CBBlogImageWindow.Checked = true
         Me.CBBlogImageWindow.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CBBlogImageWindow.ForeColor = System.Drawing.Color.Black
         Me.CBBlogImageWindow.Location = New System.Drawing.Point(6, 18)
         Me.CBBlogImageWindow.Name = "CBBlogImageWindow"
         Me.CBBlogImageWindow.Size = New System.Drawing.Size(178, 17)
         Me.CBBlogImageWindow.TabIndex = 12
-        Me.CBBlogImageWindow.TabStop = False
+        Me.CBBlogImageWindow.TabStop = false
         Me.CBBlogImageWindow.Text = "Save Blog Images From Session"
-        Me.CBBlogImageWindow.UseVisualStyleBackColor = True
+        Me.CBBlogImageWindow.UseVisualStyleBackColor = true
         '
         'CBSlideshowSubDir
         '
-        Me.CBSlideshowSubDir.AutoSize = True
-        Me.CBSlideshowSubDir.Checked = True
+        Me.CBSlideshowSubDir.AutoSize = true
+        Me.CBSlideshowSubDir.Checked = true
         Me.CBSlideshowSubDir.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CBSlideshowSubDir.ForeColor = System.Drawing.Color.Black
         Me.CBSlideshowSubDir.Location = New System.Drawing.Point(6, 41)
         Me.CBSlideshowSubDir.Name = "CBSlideshowSubDir"
         Me.CBSlideshowSubDir.Size = New System.Drawing.Size(187, 17)
         Me.CBSlideshowSubDir.TabIndex = 13
-        Me.CBSlideshowSubDir.TabStop = False
+        Me.CBSlideshowSubDir.TabStop = false
         Me.CBSlideshowSubDir.Text = "Slideshow Includes Subdirectories"
-        Me.CBSlideshowSubDir.UseVisualStyleBackColor = True
+        Me.CBSlideshowSubDir.UseVisualStyleBackColor = true
         '
         'PictureBox2
         '
         Me.PictureBox2.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
+        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"),System.Drawing.Image)
         Me.PictureBox2.Location = New System.Drawing.Point(9, 6)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(160, 19)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox2.TabIndex = 148
-        Me.PictureBox2.TabStop = False
+        Me.PictureBox2.TabStop = false
         '
         'GBGeneralDesc
         '
@@ -1541,19 +1541,19 @@ Partial Class FrmSettings
         Me.GBGeneralDesc.Name = "GBGeneralDesc"
         Me.GBGeneralDesc.Size = New System.Drawing.Size(692, 114)
         Me.GBGeneralDesc.TabIndex = 0
-        Me.GBGeneralDesc.TabStop = False
+        Me.GBGeneralDesc.TabStop = false
         Me.GBGeneralDesc.Text = "Description"
         '
         'LBLGeneralSettingsDescription
         '
         Me.LBLGeneralSettingsDescription.BackColor = System.Drawing.Color.Transparent
-        Me.LBLGeneralSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLGeneralSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLGeneralSettingsDescription.ForeColor = System.Drawing.Color.Black
         Me.LBLGeneralSettingsDescription.Location = New System.Drawing.Point(6, 16)
         Me.LBLGeneralSettingsDescription.Name = "LBLGeneralSettingsDescription"
         Me.LBLGeneralSettingsDescription.Size = New System.Drawing.Size(680, 73)
         Me.LBLGeneralSettingsDescription.TabIndex = 0
-        Me.LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio" & _
+        Me.LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
     "n."
         Me.LBLGeneralSettingsDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -1571,7 +1571,7 @@ Partial Class FrmSettings
         Me.GBGeneralSettings.Name = "GBGeneralSettings"
         Me.GBGeneralSettings.Size = New System.Drawing.Size(211, 274)
         Me.GBGeneralSettings.TabIndex = 0
-        Me.GBGeneralSettings.TabStop = False
+        Me.GBGeneralSettings.TabStop = false
         Me.GBGeneralSettings.Text = "Chat Window"
         '
         'GBSubFont
@@ -1585,26 +1585,26 @@ Partial Class FrmSettings
         Me.GBSubFont.Name = "GBSubFont"
         Me.GBSubFont.Size = New System.Drawing.Size(200, 77)
         Me.GBSubFont.TabIndex = 0
-        Me.GBSubFont.TabStop = False
+        Me.GBSubFont.TabStop = false
         Me.GBSubFont.Text = "Sub Font Settings"
         '
         'BTNSubColor
         '
         Me.BTNSubColor.BackColor = System.Drawing.Color.LightGray
-        Me.BTNSubColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSubColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.BTNSubColor.ForeColor = System.Drawing.Color.Black
         Me.BTNSubColor.Location = New System.Drawing.Point(6, 19)
         Me.BTNSubColor.Name = "BTNSubColor"
         Me.BTNSubColor.Size = New System.Drawing.Size(110, 25)
         Me.BTNSubColor.TabIndex = 8
         Me.BTNSubColor.Text = "Sub Name Color"
-        Me.BTNSubColor.UseVisualStyleBackColor = False
+        Me.BTNSubColor.UseVisualStyleBackColor = false
         '
         'LBLSubColor
         '
         Me.LBLSubColor.BackColor = System.Drawing.Color.White
         Me.LBLSubColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBLSubColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLSubColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLSubColor.ForeColor = System.Drawing.Color.Black
         Me.LBLSubColor.Location = New System.Drawing.Point(120, 20)
         Me.LBLSubColor.Name = "LBLSubColor"
@@ -1616,7 +1616,7 @@ Partial Class FrmSettings
         'NBFontSize
         '
         Me.NBFontSize.BackColor = System.Drawing.Color.White
-        Me.NBFontSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NBFontSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.NBFontSize.ForeColor = System.Drawing.Color.Black
         Me.NBFontSize.Location = New System.Drawing.Point(147, 47)
         Me.NBFontSize.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -1629,7 +1629,7 @@ Partial Class FrmSettings
         'Label2
         '
         Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label2.ForeColor = System.Drawing.Color.Black
         Me.Label2.Location = New System.Drawing.Point(117, 45)
         Me.Label2.Name = "Label2"
@@ -1640,7 +1640,7 @@ Partial Class FrmSettings
         '
         'FontComboBox
         '
-        Me.FontComboBox.FormattingEnabled = True
+        Me.FontComboBox.FormattingEnabled = true
         Me.FontComboBox.Location = New System.Drawing.Point(6, 46)
         Me.FontComboBox.Name = "FontComboBox"
         Me.FontComboBox.Size = New System.Drawing.Size(110, 21)
@@ -1657,26 +1657,26 @@ Partial Class FrmSettings
         Me.GBDommeFont.Name = "GBDommeFont"
         Me.GBDommeFont.Size = New System.Drawing.Size(200, 77)
         Me.GBDommeFont.TabIndex = 0
-        Me.GBDommeFont.TabStop = False
+        Me.GBDommeFont.TabStop = false
         Me.GBDommeFont.Text = "Domme Font Settings"
         '
         'BTNDomColor
         '
         Me.BTNDomColor.BackColor = System.Drawing.Color.LightGray
-        Me.BTNDomColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNDomColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.BTNDomColor.ForeColor = System.Drawing.Color.Black
         Me.BTNDomColor.Location = New System.Drawing.Point(6, 19)
         Me.BTNDomColor.Name = "BTNDomColor"
         Me.BTNDomColor.Size = New System.Drawing.Size(110, 25)
         Me.BTNDomColor.TabIndex = 5
         Me.BTNDomColor.Text = "Domme Name Color"
-        Me.BTNDomColor.UseVisualStyleBackColor = False
+        Me.BTNDomColor.UseVisualStyleBackColor = false
         '
         'LBLDomColor
         '
         Me.LBLDomColor.BackColor = System.Drawing.Color.White
         Me.LBLDomColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBLDomColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLDomColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLDomColor.ForeColor = System.Drawing.Color.Black
         Me.LBLDomColor.Location = New System.Drawing.Point(120, 20)
         Me.LBLDomColor.Name = "LBLDomColor"
@@ -1687,7 +1687,7 @@ Partial Class FrmSettings
         '
         'FontComboBoxD
         '
-        Me.FontComboBoxD.FormattingEnabled = True
+        Me.FontComboBoxD.FormattingEnabled = true
         Me.FontComboBoxD.Location = New System.Drawing.Point(6, 46)
         Me.FontComboBoxD.Name = "FontComboBoxD"
         Me.FontComboBoxD.Size = New System.Drawing.Size(110, 21)
@@ -1696,7 +1696,7 @@ Partial Class FrmSettings
         'NBFontSizeD
         '
         Me.NBFontSizeD.BackColor = System.Drawing.Color.White
-        Me.NBFontSizeD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.NBFontSizeD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.NBFontSizeD.ForeColor = System.Drawing.Color.Black
         Me.NBFontSizeD.Location = New System.Drawing.Point(147, 47)
         Me.NBFontSizeD.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -1709,7 +1709,7 @@ Partial Class FrmSettings
         'Label7
         '
         Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label7.ForeColor = System.Drawing.Color.Black
         Me.Label7.Location = New System.Drawing.Point(117, 45)
         Me.Label7.Name = "Label7"
@@ -1720,60 +1720,60 @@ Partial Class FrmSettings
         '
         'CBLockWindow
         '
-        Me.CBLockWindow.AutoSize = True
+        Me.CBLockWindow.AutoSize = true
         Me.CBLockWindow.ForeColor = System.Drawing.Color.Black
         Me.CBLockWindow.Location = New System.Drawing.Point(6, 87)
         Me.CBLockWindow.Name = "CBLockWindow"
         Me.CBLockWindow.Size = New System.Drawing.Size(163, 17)
         Me.CBLockWindow.TabIndex = 4
-        Me.CBLockWindow.TabStop = False
+        Me.CBLockWindow.TabStop = false
         Me.CBLockWindow.Text = "Disable Chat Window Resize"
-        Me.CBLockWindow.UseVisualStyleBackColor = True
+        Me.CBLockWindow.UseVisualStyleBackColor = true
         '
         'typeinstantlyCheckBox
         '
-        Me.typeinstantlyCheckBox.AutoSize = True
+        Me.typeinstantlyCheckBox.AutoSize = true
         Me.typeinstantlyCheckBox.ForeColor = System.Drawing.Color.Black
         Me.typeinstantlyCheckBox.Location = New System.Drawing.Point(6, 64)
         Me.typeinstantlyCheckBox.Name = "typeinstantlyCheckBox"
         Me.typeinstantlyCheckBox.Size = New System.Drawing.Size(136, 17)
         Me.typeinstantlyCheckBox.TabIndex = 3
-        Me.typeinstantlyCheckBox.TabStop = False
+        Me.typeinstantlyCheckBox.TabStop = false
         Me.typeinstantlyCheckBox.Text = "Domme Types Instantly"
-        Me.typeinstantlyCheckBox.UseVisualStyleBackColor = True
+        Me.typeinstantlyCheckBox.UseVisualStyleBackColor = true
         '
         'timestampCheckBox
         '
-        Me.timestampCheckBox.AutoSize = True
-        Me.timestampCheckBox.Checked = True
+        Me.timestampCheckBox.AutoSize = true
+        Me.timestampCheckBox.Checked = true
         Me.timestampCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.timestampCheckBox.ForeColor = System.Drawing.Color.Black
         Me.timestampCheckBox.Location = New System.Drawing.Point(6, 18)
         Me.timestampCheckBox.Name = "timestampCheckBox"
         Me.timestampCheckBox.Size = New System.Drawing.Size(112, 17)
         Me.timestampCheckBox.TabIndex = 1
-        Me.timestampCheckBox.TabStop = False
+        Me.timestampCheckBox.TabStop = false
         Me.timestampCheckBox.Text = "Show Timestamps"
-        Me.timestampCheckBox.UseVisualStyleBackColor = True
+        Me.timestampCheckBox.UseVisualStyleBackColor = true
         '
         'shownamesCheckBox
         '
-        Me.shownamesCheckBox.AutoSize = True
-        Me.shownamesCheckBox.Checked = True
+        Me.shownamesCheckBox.AutoSize = true
+        Me.shownamesCheckBox.Checked = true
         Me.shownamesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.shownamesCheckBox.ForeColor = System.Drawing.Color.Black
         Me.shownamesCheckBox.Location = New System.Drawing.Point(6, 41)
         Me.shownamesCheckBox.Name = "shownamesCheckBox"
         Me.shownamesCheckBox.Size = New System.Drawing.Size(125, 17)
         Me.shownamesCheckBox.TabIndex = 2
-        Me.shownamesCheckBox.TabStop = False
+        Me.shownamesCheckBox.TabStop = false
         Me.shownamesCheckBox.Text = "Always Show Names"
-        Me.shownamesCheckBox.UseVisualStyleBackColor = True
+        Me.shownamesCheckBox.UseVisualStyleBackColor = true
         '
         'LBLGeneralSettings
         '
         Me.LBLGeneralSettings.BackColor = System.Drawing.Color.Transparent
-        Me.LBLGeneralSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLGeneralSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLGeneralSettings.ForeColor = System.Drawing.Color.Black
         Me.LBLGeneralSettings.Location = New System.Drawing.Point(7, 6)
         Me.LBLGeneralSettings.Name = "LBLGeneralSettings"
@@ -11270,6 +11270,39 @@ Partial Class FrmSettings
         Me.Panel11.Size = New System.Drawing.Size(708, 437)
         Me.Panel11.TabIndex = 92
         '
+        'GroupBox62
+        '
+        Me.GroupBox62.Controls.Add(Me.RBGerman)
+        Me.GroupBox62.Controls.Add(Me.RBEnglish)
+        Me.GroupBox62.Location = New System.Drawing.Point(420, 268)
+        Me.GroupBox62.Name = "GroupBox62"
+        Me.GroupBox62.Size = New System.Drawing.Size(277, 159)
+        Me.GroupBox62.TabIndex = 178
+        Me.GroupBox62.TabStop = false
+        Me.GroupBox62.Text = "Language"
+        '
+        'RBGerman
+        '
+        Me.RBGerman.AutoSize = true
+        Me.RBGerman.Location = New System.Drawing.Point(161, 36)
+        Me.RBGerman.Name = "RBGerman"
+        Me.RBGerman.Size = New System.Drawing.Size(65, 17)
+        Me.RBGerman.TabIndex = 1
+        Me.RBGerman.Text = "Deutsch"
+        Me.RBGerman.UseVisualStyleBackColor = true
+        '
+        'RBEnglish
+        '
+        Me.RBEnglish.AutoSize = true
+        Me.RBEnglish.Checked = true
+        Me.RBEnglish.Location = New System.Drawing.Point(17, 35)
+        Me.RBEnglish.Name = "RBEnglish"
+        Me.RBEnglish.Size = New System.Drawing.Size(59, 17)
+        Me.RBEnglish.TabIndex = 0
+        Me.RBEnglish.TabStop = true
+        Me.RBEnglish.Text = "English"
+        Me.RBEnglish.UseVisualStyleBackColor = true
+        '
         'GroupBox33
         '
         Me.GroupBox33.Controls.Add(Me.Button11)
@@ -11677,7 +11710,7 @@ Partial Class FrmSettings
         Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label41.Location = New System.Drawing.Point(35, 297)
         Me.Label41.Name = "Label41"
-        Me.Label41.Size = New System.Drawing.Size(638, 84)
+        Me.Label41.Size = New System.Drawing.Size(638, 120)
         Me.Label41.TabIndex = 172
         Me.Label41.Text = resources.GetString("Label41.Text")
         Me.Label41.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -11728,39 +11761,6 @@ Partial Class FrmSettings
         '
         'BWCreateURLFiles
         '
-        '
-        'GroupBox62
-        '
-        Me.GroupBox62.Controls.Add(Me.RBGerman)
-        Me.GroupBox62.Controls.Add(Me.RBEnglish)
-        Me.GroupBox62.Location = New System.Drawing.Point(420, 268)
-        Me.GroupBox62.Name = "GroupBox62"
-        Me.GroupBox62.Size = New System.Drawing.Size(277, 159)
-        Me.GroupBox62.TabIndex = 178
-        Me.GroupBox62.TabStop = false
-        Me.GroupBox62.Text = "Language"
-        '
-        'RBEnglish
-        '
-        Me.RBEnglish.AutoSize = true
-        Me.RBEnglish.Checked = true
-        Me.RBEnglish.Location = New System.Drawing.Point(17, 35)
-        Me.RBEnglish.Name = "RBEnglish"
-        Me.RBEnglish.Size = New System.Drawing.Size(59, 17)
-        Me.RBEnglish.TabIndex = 0
-        Me.RBEnglish.TabStop = true
-        Me.RBEnglish.Text = "English"
-        Me.RBEnglish.UseVisualStyleBackColor = true
-        '
-        'RBGerman
-        '
-        Me.RBGerman.AutoSize = true
-        Me.RBGerman.Location = New System.Drawing.Point(161, 36)
-        Me.RBGerman.Name = "RBGerman"
-        Me.RBGerman.Size = New System.Drawing.Size(65, 17)
-        Me.RBGerman.TabIndex = 1
-        Me.RBGerman.Text = "Deutsch"
-        Me.RBGerman.UseVisualStyleBackColor = true
         '
         'FrmSettings
         '
@@ -12040,6 +12040,8 @@ Partial Class FrmSettings
         Me.GroupBox34.ResumeLayout(false)
         Me.TabPage25.ResumeLayout(false)
         Me.Panel11.ResumeLayout(false)
+        Me.GroupBox62.ResumeLayout(false)
+        Me.GroupBox62.PerformLayout
         Me.GroupBox33.ResumeLayout(false)
         Me.GroupBox27.ResumeLayout(false)
         Me.GroupBox27.PerformLayout
@@ -12052,8 +12054,6 @@ Partial Class FrmSettings
         Me.Panel5.ResumeLayout(false)
         Me.Panel5.PerformLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox62.ResumeLayout(false)
-        Me.GroupBox62.PerformLayout
         Me.ResumeLayout(false)
 
 End Sub

@@ -1,6 +1,8 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+9/06 2:46 am - Fixed issue where domme would accept a user's message as the answer to a question she was in the middle of typing
+
 9/05 5:36 am - Tease AI will no longer call Long Edge Interrupts during End scripts
 
 9/05 3:25 am - Added Language option in Misc tab to switch Settings UI between English and German. Added German translations to General Settings provided by Ambossli. This will be a slow and steady process, but I will get translations added in various patches moving forward as I receive and are able to implement them

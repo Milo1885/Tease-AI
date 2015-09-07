@@ -2429,12 +2429,14 @@ DebugAwareness:
         If YesOrNo = True And SubEdging = True Then GoTo EdgeSkip
         If YesOrNo = True And SubHoldingEdge = True Then GoTo EdgeSkip
 
-        If YesOrNo = True And OrgasmYesNo = False Then
+        If YesOrNo = True And OrgasmYesNo = False And DomTypeCheck = False Then
             YesOrNoQuestions()
             Return
         End If
 
 EdgeSkip:
+
+        Debug.Print("Before Dom Response, YesOrNo = " & YesOrNo)
 
         DomResponse()
 
@@ -4938,6 +4940,22 @@ NullResponseLine:
 
                 If GlitterTease = True And JustShowedBlogImage = False Then GoTo TryNextWithTease
 
+                If DomChat.Contains("@ShowHardcoreImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowSoftcoreImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowLesbianImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowBlowjobImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowFemdomImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowLezdomImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowHentaiImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowGayImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowMaledomImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowCaptionsImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowGeneralImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowLocalImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@ShowBlogImage") Then JustShowedBlogImage = True
+                If DomChat.Contains("@NewBlogImage") Then JustShowedBlogImage = True
+
 
                 If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
                     And SlideshowLoaded = True And Not DomTask.Contains("@ShowButtImage") And Not DomTask.Contains("@ShowBoobsImage") And LockImage = False And CustomSlideshow = False And RapidFire = False _
@@ -5320,6 +5338,8 @@ NullResponseLine2:
                 StringLength = 20
 
                 If SubStroking = False Then StopMetronome = True
+
+                If TempScriptCount = 0 Then JustShowedBlogImage = False
 
                 If CBTCockActive = True Then CBTCockActive = False
                 If CBTBallsActive = True Then CBTBallsActive = False
