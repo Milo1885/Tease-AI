@@ -2374,6 +2374,9 @@ Card9:
 
             LBLSlotTokens.Text = Form1.BronzeTokens
 
+            My.Settings.BronzeTokens = Form1.BronzeTokens
+            My.Settings.Save()
+
 
 
         End If
@@ -5132,12 +5135,19 @@ Card9:
             Return
         End If
 
-
+        If Form1.BronzeTokens < 100 Then
+            MessageBox.Show(Me, "It costs 100 Bronze Tokens to play Risky Pick!", "Not enough Tokens!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            Return
+        End If
 
         If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\Risky Pick\Risky Pick.txt") Then
             MessageBox.Show(Me, "Risky Pick.txt was not found in \Games\Risky Pick!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             Return
         End If
+
+        Form1.BronzeTokens -= 100
+        My.Settings.BronzeTokens = Form1.BronzeTokens
+        My.Settings.Save()
 
         RiskyState = True
         Form1.RiskyDeal = True
@@ -5390,29 +5400,29 @@ Card9:
            
 
             If RiskyChoices(RiskyPickCount - 1) = LBLRisk100.Text Then RiskyResponse = "#RP_100Edge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk95.Text Then RiskyResponse = "#RP_HighEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk90.Text Then RiskyResponse = "#RP_HighEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk85.Text Then RiskyResponse = "#RP_HighEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk80.Text Then RiskyResponse = "#RP_HighEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk75.Text Then RiskyResponse = "#RP_HighEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk70.Text Then RiskyResponse = "#RP_HighEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk60.Text Then RiskyResponse = "#RP_MediumEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk50.Text Then RiskyResponse = "#RP_MediumEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk40.Text Then RiskyResponse = "#RP_MediumEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk30.Text Then RiskyResponse = "#RP_MediumEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk25.Text Then RiskyResponse = "#RP_MediumEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk20.Text Then RiskyResponse = "#RP_LowEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk15.Text Then RiskyResponse = "#RP_LowEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk10.Text Then RiskyResponse = "#RP_LowEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk5.Text Then RiskyResponse = "#RP_LowEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk3.Text Then RiskyResponse = "#RP_LowEdge"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk95.Text Then RiskyResponse = "#RP_FirstRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk90.Text Then RiskyResponse = "#RP_FirstRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk85.Text Then RiskyResponse = "#RP_FirstRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk80.Text Then RiskyResponse = "#RP_FirstRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk75.Text Then RiskyResponse = "#RP_FirstRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk70.Text Then RiskyResponse = "#RP_SecondRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk60.Text Then RiskyResponse = "#RP_SecondRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk50.Text Then RiskyResponse = "#RP_SecondRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk40.Text Then RiskyResponse = "#RP_SecondRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk30.Text Then RiskyResponse = "#RP_ThirdRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk25.Text Then RiskyResponse = "#RP_ThirdRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk20.Text Then RiskyResponse = "#RP_ThirdRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk15.Text Then RiskyResponse = "#RP_ThirdRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk10.Text Then RiskyResponse = "#RP_ThirdRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk5.Text Then RiskyResponse = "#RP_FourthRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk3.Text Then RiskyResponse = "#RP_FourthRow"
             If RiskyChoices(RiskyPickCount - 1) = LBLRisk1.Text Then RiskyResponse = "#RP_1Edge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk12.Text Then RiskyResponse = "#RP_LowEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk55.Text Then RiskyResponse = "#RP_MediumEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk65.Text Then RiskyResponse = "#RP_MediumEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk4.Text Then RiskyResponse = "#RP_LowEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk2.Text Then RiskyResponse = "#RP_LowEdge"
-            If RiskyChoices(RiskyPickCount - 1) = LBLRisk7.Text Then RiskyResponse = "#RP_LowEdge"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk12.Text Then RiskyResponse = "#RP_ThirdRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk55.Text Then RiskyResponse = "#RP_SecondRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk65.Text Then RiskyResponse = "#RP_SecondRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk4.Text Then RiskyResponse = "#RP_FourthRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk2.Text Then RiskyResponse = "#RP_FourthRow"
+            If RiskyChoices(RiskyPickCount - 1) = LBLRisk7.Text Then RiskyResponse = "#RP_FourthRow"
 
 
             If RiskyRound = 1 Or RiskyRound = 2 Then

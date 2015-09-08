@@ -8054,6 +8054,10 @@ StatusUpdateEnd:
         StringClean = StringClean.Replace("#RP_EdgesOwed", FrmCardList.EdgesOwed)
         StringClean = StringClean.Replace("#RP_TokensPaid", FrmCardList.TokensPaid)
 
+        StringClean = StringClean.Replace("#BronzeTokens", BronzeTokens)
+        StringClean = StringClean.Replace("#SilverTokens", SilverTokens)
+        StringClean = StringClean.Replace("#GoldTokens", GoldTokens)
+
 
         Return StringClean
 
