@@ -416,11 +416,11 @@ Public Class Form1
 
     Dim RapidFire As Boolean
 
-    Dim GlitterTease As Boolean
+    Public GlitterTease As Boolean
     Dim AddContactTick As Integer
-    Dim Contact1Pics As New List(Of String)
-    Dim Contact2Pics As New List(Of String)
-    Dim Contact3Pics As New List(Of String)
+    Public Contact1Pics As New List(Of String)
+    Public Contact2Pics As New List(Of String)
+    Public Contact3Pics As New List(Of String)
     Public Contact1PicsCount As Integer
     Public Contact2PicsCount As Integer
     Public Contact3PicsCount As Integer
@@ -3309,6 +3309,7 @@ AcceptAnswer:
 
         'Debug.Print("GetGotoChat() Chat FileText = " & FileText)
 
+
         If InStr(UCase(DomChat), UCase("@Goto")) <> 0 Then
 
             DomTypeCheck = True
@@ -4073,7 +4074,13 @@ AcceptAnswer:
 
         'Debug.Print("SkipGotoLine = " & SkipGotoLine)
 
-        If GotoDommeLevel = True Or SkipGotoLine = True Then GoTo SkipGotoSearch
+        Dim StripGoto As String
+
+        If GotoDommeLevel = True Or SkipGotoLine = True Then
+            StripGoto = FileGoto
+            GoTo SkipGotoSearch
+        End If
+
 
 
         Dim TempGoto As String = DomTask & " some garbage"
@@ -4083,7 +4090,7 @@ AcceptAnswer:
         FileGoto = TempGoto
 
 
-        Dim StripGoto As String = FileGoto
+        StripGoto = FileGoto
         
 
 
@@ -5281,9 +5288,16 @@ TryNextWithTease:
 
                     ClearMainPictureBox()
 
+                    
+
+
                     Try
                         'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
-                        mainPictureBox.Image = Image.FromFile(DomPic)
+                        If RiskyDeal = True Then
+                            FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
+                        Else
+                            mainPictureBox.Image = Image.FromFile(DomPic)
+                        End If
                         ShowImageInfo()
                     Catch
                         ' GoTo TryNextWithTease

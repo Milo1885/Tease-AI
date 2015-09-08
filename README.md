@@ -1,6 +1,8 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+9/08 5:02 am - Fixed bug where Tease AI would crash trying to pull images from Contact Image Directories that were not set
+
 9/06 2:46 am - Fixed issue where domme would accept a user's message as the answer to a question she was in the middle of typing
 
 9/05 5:36 am - Tease AI will no longer call Long Edge Interrupts during End scripts

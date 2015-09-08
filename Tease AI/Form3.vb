@@ -4290,7 +4290,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(0)
 
         BTNRisk1.BackColor = Color.Khaki
-        Risk1.Text = RiskyShuffled(0)
+        If RiskyRound > 0 Then Risk1.Text = RiskyShuffled(0)
         RiskyChoices.Add(RiskyShuffled(0))
         RiskyChoiceCount += 1
 
@@ -4308,7 +4308,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(1)
 
         BTNRisk2.BackColor = Color.Khaki
-        Risk2.Text = RiskyShuffled(1)
+        If RiskyRound > 0 Then Risk2.Text = RiskyShuffled(1)
         RiskyChoices.Add(RiskyShuffled(1))
         RiskyChoiceCount += 1
 
@@ -4326,7 +4326,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(2)
 
         BTNRisk3.BackColor = Color.Khaki
-        Risk3.Text = RiskyShuffled(2)
+        If RiskyRound > 0 Then Risk3.Text = RiskyShuffled(2)
         RiskyChoices.Add(RiskyShuffled(2))
         RiskyChoiceCount += 1
 
@@ -4344,7 +4344,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(3)
 
         BTNRisk4.BackColor = Color.Khaki
-        Risk4.Text = RiskyShuffled(3)
+        If RiskyRound > 0 Then Risk4.Text = RiskyShuffled(3)
         RiskyChoices.Add(RiskyShuffled(3))
         RiskyChoiceCount += 1
 
@@ -4362,7 +4362,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(4)
 
         BTNRisk5.BackColor = Color.Khaki
-        Risk5.Text = RiskyShuffled(4)
+        If RiskyRound > 0 Then Risk5.Text = RiskyShuffled(4)
         RiskyChoices.Add(RiskyShuffled(4))
         RiskyChoiceCount += 1
 
@@ -4380,7 +4380,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(5)
 
         BTNRisk6.BackColor = Color.Khaki
-        Risk6.Text = RiskyShuffled(5)
+        If RiskyRound > 0 Then Risk6.Text = RiskyShuffled(5)
         RiskyChoices.Add(RiskyShuffled(5))
         RiskyChoiceCount += 1
 
@@ -4398,7 +4398,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(6)
 
         BTNRisk7.BackColor = Color.Khaki
-        Risk7.Text = RiskyShuffled(6)
+        If RiskyRound > 0 Then Risk7.Text = RiskyShuffled(6)
         RiskyChoices.Add(RiskyShuffled(6))
         RiskyChoiceCount += 1
 
@@ -4416,7 +4416,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(7)
 
         BTNRisk8.BackColor = Color.Khaki
-        Risk8.Text = RiskyShuffled(7)
+        If RiskyRound > 0 Then Risk8.Text = RiskyShuffled(7)
         RiskyChoices.Add(RiskyShuffled(7))
         RiskyChoiceCount += 1
 
@@ -4434,7 +4434,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(8)
 
         BTNRisk9.BackColor = Color.Khaki
-        Risk9.Text = RiskyShuffled(8)
+        If RiskyRound > 0 Then Risk9.Text = RiskyShuffled(8)
         RiskyChoices.Add(RiskyShuffled(8))
         RiskyChoiceCount += 1
 
@@ -4452,7 +4452,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(9)
 
         BTNRisk10.BackColor = Color.Khaki
-        Risk10.Text = RiskyShuffled(9)
+        If RiskyRound > 0 Then Risk10.Text = RiskyShuffled(9)
         RiskyChoices.Add(RiskyShuffled(9))
         RiskyChoiceCount += 1
 
@@ -4472,7 +4472,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(10)
 
         BTNRisk11.BackColor = Color.Khaki
-        Risk11.Text = RiskyShuffled(10)
+        If RiskyRound > 0 Then Risk11.Text = RiskyShuffled(10)
         RiskyChoices.Add(RiskyShuffled(10))
         RiskyChoiceCount += 1
 
@@ -4490,7 +4490,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(11)
 
         BTNRisk12.BackColor = Color.Khaki
-        Risk12.Text = RiskyShuffled(11)
+        If RiskyRound > 0 Then Risk12.Text = RiskyShuffled(11)
         RiskyChoices.Add(RiskyShuffled(11))
         RiskyChoiceCount += 1
 
@@ -4508,7 +4508,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(12)
 
         BTNRisk13.BackColor = Color.Khaki
-        Risk13.Text = RiskyShuffled(12)
+        If RiskyRound > 0 Then Risk13.Text = RiskyShuffled(12)
         RiskyChoices.Add(RiskyShuffled(12))
         RiskyChoiceCount += 1
 
@@ -4526,7 +4526,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(13)
 
         BTNRisk14.BackColor = Color.Khaki
-        Risk14.Text = RiskyShuffled(13)
+        If RiskyRound > 0 Then Risk14.Text = RiskyShuffled(13)
         RiskyChoices.Add(RiskyShuffled(13))
         RiskyChoiceCount += 1
 
@@ -4544,7 +4544,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(14)
 
         BTNRisk15.BackColor = Color.Khaki
-        Risk15.Text = RiskyShuffled(14)
+        If RiskyRound > 0 Then Risk15.Text = RiskyShuffled(14)
         RiskyChoices.Add(RiskyShuffled(14))
         RiskyChoiceCount += 1
 
@@ -4562,7 +4562,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(15)
 
         BTNRisk16.BackColor = Color.Khaki
-        Risk16.Text = RiskyShuffled(15)
+        If RiskyRound > 0 Then Risk16.Text = RiskyShuffled(15)
         RiskyChoices.Add(RiskyShuffled(15))
         RiskyChoiceCount += 1
 
@@ -4580,7 +4580,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(16)
 
         BTNRisk17.BackColor = Color.Khaki
-        Risk17.Text = RiskyShuffled(16)
+        If RiskyRound > 0 Then Risk17.Text = RiskyShuffled(16)
         RiskyChoices.Add(RiskyShuffled(16))
         RiskyChoiceCount += 1
 
@@ -4598,7 +4598,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(17)
 
         BTNRisk18.BackColor = Color.Khaki
-        Risk18.Text = RiskyShuffled(17)
+        If RiskyRound > 0 Then Risk18.Text = RiskyShuffled(17)
         RiskyChoices.Add(RiskyShuffled(17))
         RiskyChoiceCount += 1
 
@@ -4616,7 +4616,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(18)
 
         BTNRisk19.BackColor = Color.Khaki
-        Risk19.Text = RiskyShuffled(18)
+        If RiskyRound > 0 Then Risk19.Text = RiskyShuffled(18)
         RiskyChoices.Add(RiskyShuffled(18))
         RiskyChoiceCount += 1
 
@@ -4634,7 +4634,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(19)
 
         BTNRisk20.BackColor = Color.Khaki
-        Risk20.Text = RiskyShuffled(19)
+        If RiskyRound > 0 Then Risk20.Text = RiskyShuffled(19)
         RiskyChoices.Add(RiskyShuffled(19))
         RiskyChoiceCount += 1
 
@@ -4652,7 +4652,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(20)
 
         BTNRisk21.BackColor = Color.Khaki
-        Risk21.Text = RiskyShuffled(20)
+        If RiskyRound > 0 Then Risk21.Text = RiskyShuffled(20)
         RiskyChoices.Add(RiskyShuffled(20))
         RiskyChoiceCount += 1
 
@@ -4670,7 +4670,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(21)
 
         BTNRisk22.BackColor = Color.Khaki
-        Risk22.Text = RiskyShuffled(21)
+        If RiskyRound > 0 Then Risk22.Text = RiskyShuffled(21)
         RiskyChoices.Add(RiskyShuffled(21))
         RiskyChoiceCount += 1
 
@@ -4688,7 +4688,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(22)
 
         BTNRisk23.BackColor = Color.Khaki
-        Risk23.Text = RiskyShuffled(22)
+        If RiskyRound > 0 Then Risk23.Text = RiskyShuffled(22)
         RiskyChoices.Add(RiskyShuffled(22))
         RiskyChoiceCount += 1
 
@@ -4706,7 +4706,7 @@ Card9:
         If RiskyRound = 0 Then RiskyCase = RiskyShuffled(23)
 
         BTNRisk24.BackColor = Color.Khaki
-        Risk24.Text = RiskyShuffled(23)
+        If RiskyRound > 0 Then Risk24.Text = RiskyShuffled(23)
         RiskyChoices.Add(RiskyShuffled(23))
         RiskyChoiceCount += 1
 

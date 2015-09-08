@@ -12490,18 +12490,21 @@ NextURL:
         LBLContact1ImageDir.Text = "No path selected"
         My.Settings.Contact1ImageDir = "No path selected"
         My.Settings.Save()
+        Form1.Contact1Pics.Clear()
     End Sub
 
     Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
         LBLContact2ImageDir.Text = "No path selected"
         My.Settings.Contact2ImageDir = "No path selected"
         My.Settings.Save()
+        Form1.Contact2Pics.Clear()
     End Sub
 
     Private Sub Button12_Click_1(sender As System.Object, e As System.EventArgs) Handles Button12.Click
         LBLContact3ImageDir.Text = "No path selected"
         My.Settings.Contact3ImageDir = "No path selected"
         My.Settings.Save()
+        Form1.Contact3Pics.Clear()
     End Sub
 
     Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click
