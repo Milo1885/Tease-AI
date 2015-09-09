@@ -1187,4 +1187,102 @@ Public Class frmApps
         Form1.ResumeSession()
 
     End Sub
+
+    Private Sub CBHideShortcuts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBHideShortcuts.CheckedChanged
+        If Form1.FormLoading = False Then
+            GetShortcutChecked()
+            My.Settings.ShowShortcuts = CBHideShortcuts.Checked
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Public Sub GetShortcutChecked()
+
+        If CBHideShortcuts.Checked = True Then
+            TBShortYes.Visible = False
+            TBShortNo.Visible = False
+            TBShortEdge.Visible = False
+            TBShortSpeedUp.Visible = False
+            TBShortSlowDown.Visible = False
+            TBShortStop.Visible = False
+            TBShortStroke.Visible = False
+            TBShortCum.Visible = False
+            TBShortGreet.Visible = False
+            TBShortSafeword.Visible = False
+
+        Else
+
+            TBShortYes.Visible = True
+            TBShortNo.Visible = True
+            TBShortEdge.Visible = True
+            TBShortSpeedUp.Visible = True
+            TBShortSlowDown.Visible = True
+            TBShortStop.Visible = True
+            TBShortStroke.Visible = True
+            TBShortCum.Visible = True
+            TBShortGreet.Visible = True
+            TBShortSafeword.Visible = True
+
+        End If
+
+    End Sub
+
+    Private Sub CBShortcuts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBShortcuts.CheckedChanged
+        If Form1.FormLoading = False Then
+            My.Settings.Shortcuts = CBShortcuts.Checked
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Private Sub TBShortYes_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortYes.LostFocus
+        My.Settings.ShortYes = TBShortYes.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortNo_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortNo.LostFocus
+        My.Settings.ShortNo = TBShortNo.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortEdge_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortEdge.LostFocus
+        My.Settings.ShortEdge = TBShortEdge.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortSpeedUp_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSpeedUp.LostFocus
+        My.Settings.ShortSpeedUp = TBShortSpeedUp.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortSlowDown_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSlowDown.LostFocus
+        My.Settings.ShortSlowDown = TBShortSlowDown.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortStop_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStop.LostFocus
+        My.Settings.ShortStop = TBShortStop.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortStroke_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStroke.LostFocus
+        My.Settings.ShortStroke = TBShortStroke.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortCum_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortCum.LostFocus
+        My.Settings.ShortCum = TBShortCum.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortGreet_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortGreet.LostFocus
+        My.Settings.ShortGreet = TBShortGreet.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortSafeword_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSafeword.LostFocus
+        My.Settings.ShortSafeword = TBShortSafeword.Text
+        My.Settings.Save()
+    End Sub
+
+    
 End Class

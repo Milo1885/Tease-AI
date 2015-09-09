@@ -1092,5 +1092,41 @@
     <Setting Name="TeaseAILanguage" Type="System.String" Scope="User">
       <Value Profile="(Default)">English</Value>
     </Setting>
+    <Setting Name="Shortcuts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ShowShortcuts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShortYes" Type="System.String" Scope="User">
+      <Value Profile="(Default)">y</Value>
+    </Setting>
+    <Setting Name="ShortNo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">n</Value>
+    </Setting>
+    <Setting Name="ShortEdge" Type="System.String" Scope="User">
+      <Value Profile="(Default)">e</Value>
+    </Setting>
+    <Setting Name="ShortSpeedUp" Type="System.String" Scope="User">
+      <Value Profile="(Default)">su</Value>
+    </Setting>
+    <Setting Name="ShortSlowDown" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sd</Value>
+    </Setting>
+    <Setting Name="ShortStop" Type="System.String" Scope="User">
+      <Value Profile="(Default)">s</Value>
+    </Setting>
+    <Setting Name="ShortStroke" Type="System.String" Scope="User">
+      <Value Profile="(Default)">stroke</Value>
+    </Setting>
+    <Setting Name="ShortCum" Type="System.String" Scope="User">
+      <Value Profile="(Default)">c</Value>
+    </Setting>
+    <Setting Name="ShortGreet" Type="System.String" Scope="User">
+      <Value Profile="(Default)">hi</Value>
+    </Setting>
+    <Setting Name="ShortSafeword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">red</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

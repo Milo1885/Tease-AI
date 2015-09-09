@@ -4400,6 +4400,150 @@ Namespace My
                 Me("TeaseAILanguage") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property Shortcuts() As Boolean
+            Get
+                Return CType(Me("Shortcuts"),Boolean)
+            End Get
+            Set
+                Me("Shortcuts") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ShowShortcuts() As Boolean
+            Get
+                Return CType(Me("ShowShortcuts"),Boolean)
+            End Get
+            Set
+                Me("ShowShortcuts") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("y")>  _
+        Public Property ShortYes() As String
+            Get
+                Return CType(Me("ShortYes"),String)
+            End Get
+            Set
+                Me("ShortYes") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("n")>  _
+        Public Property ShortNo() As String
+            Get
+                Return CType(Me("ShortNo"),String)
+            End Get
+            Set
+                Me("ShortNo") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("e")>  _
+        Public Property ShortEdge() As String
+            Get
+                Return CType(Me("ShortEdge"),String)
+            End Get
+            Set
+                Me("ShortEdge") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("su")>  _
+        Public Property ShortSpeedUp() As String
+            Get
+                Return CType(Me("ShortSpeedUp"),String)
+            End Get
+            Set
+                Me("ShortSpeedUp") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("sd")>  _
+        Public Property ShortSlowDown() As String
+            Get
+                Return CType(Me("ShortSlowDown"),String)
+            End Get
+            Set
+                Me("ShortSlowDown") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("s")>  _
+        Public Property ShortStop() As String
+            Get
+                Return CType(Me("ShortStop"),String)
+            End Get
+            Set
+                Me("ShortStop") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("stroke")>  _
+        Public Property ShortStroke() As String
+            Get
+                Return CType(Me("ShortStroke"),String)
+            End Get
+            Set
+                Me("ShortStroke") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("c")>  _
+        Public Property ShortCum() As String
+            Get
+                Return CType(Me("ShortCum"),String)
+            End Get
+            Set
+                Me("ShortCum") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("hi")>  _
+        Public Property ShortGreet() As String
+            Get
+                Return CType(Me("ShortGreet"),String)
+            End Get
+            Set
+                Me("ShortGreet") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("red")>  _
+        Public Property ShortSafeword() As String
+            Get
+                Return CType(Me("ShortSafeword"),String)
+            End Get
+            Set
+                Me("ShortSafeword") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

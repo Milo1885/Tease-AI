@@ -1336,6 +1336,21 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         frmApps.ResetFlag = True
         SuspendSession()
 
+        frmApps.CBShortcuts.Checked = My.Settings.Shortcuts
+        frmApps.CBHideShortcuts.Checked = My.Settings.ShowShortcuts
+        frmApps.GetShortcutChecked()
+
+        frmApps.TBShortYes.Text = My.Settings.ShortYes
+        frmApps.TBShortNo.Text = My.Settings.ShortNo
+        frmApps.TBShortEdge.Text = My.Settings.ShortEdge
+        frmApps.TBShortSpeedUp.Text = My.Settings.ShortSpeedUp
+        frmApps.TBShortSlowDown.Text = My.Settings.ShortSlowDown
+        frmApps.TBShortStop.Text = My.Settings.ShortStop
+        frmApps.TBShortStroke.Text = My.Settings.ShortStroke
+        frmApps.TBShortCum.Text = My.Settings.ShortCum
+        frmApps.TBShortGreet.Text = My.Settings.ShortGreet
+        frmApps.TBShortSafeword.Text = My.Settings.ShortSafeword
+
         FormLoading = False
 
         Debug.Print("Form1 Loading Finished")
@@ -1443,6 +1458,22 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End If
 
         ChatString = chatBox.Text
+
+        If frmApps.CBShortcuts.Checked = True Then
+
+            If UCase(ChatString) = UCase(frmApps.TBShortYes.Text) Then ChatString = "Yes " & FrmSettings.TBHonorific.Text
+            If UCase(ChatString) = UCase(frmApps.TBShortNo.Text) Then ChatString = "No " & FrmSettings.TBHonorific.Text
+            If UCase(ChatString) = UCase(frmApps.TBShortEdge.Text) Then ChatString = "On the edge"
+            If UCase(ChatString) = UCase(frmApps.TBShortSpeedUp.Text) Then ChatString = "Let me speed up"
+            If UCase(ChatString) = UCase(frmApps.TBShortSlowDown.Text) Then ChatString = "Let me slow down"
+            If UCase(ChatString) = UCase(frmApps.TBShortStop.Text) Then ChatString = "Let me stop"
+            If UCase(ChatString) = UCase(frmApps.TBShortStroke.Text) Then ChatString = "May I start stroking?"
+            If UCase(ChatString) = UCase(frmApps.TBShortCum.Text) Then ChatString = "Please let me cum!"
+            If UCase(ChatString) = UCase(frmApps.TBShortGreet.Text) Then ChatString = "Hello " & FrmSettings.TBHonorific.Text
+            If UCase(ChatString) = UCase(frmApps.TBShortSafeword.Text) Then ChatString = FrmSettings.TBSafeword.Text
+
+        End If
+
 
         chatBox.Text = ""
 
