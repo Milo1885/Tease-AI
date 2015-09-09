@@ -445,6 +445,10 @@ Public Class Form1
     Dim original As Image
     Dim resized As Image
 
+    Dim SysMes As Boolean
+    Dim EmoMes As Boolean
+
+
 
 
     Private Const DISABLE_SOUNDS As Integer = 21
@@ -1342,8 +1346,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         ScriptTimer.Stop()
 
-        DomTask = "<b>Tease AI has been reset</b>"
-        DomChat = "<b>Tease AI has been reset</b>"
+        DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
+        DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
 
         If File.Exists(Application.StartupPath & "\System\Metronome") Then
             File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
@@ -4234,11 +4238,21 @@ SkipGotoSearch:
                     If DomTask.Contains("@Contact2") Then TypingName = FrmSettings.TBGlitter2.Text
                     If DomTask.Contains("@Contact3") Then TypingName = FrmSettings.TBGlitter3.Text
                     'If TypingName <> domName.Text Then JustShowedBlogImage = True
-                    ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-                    While ChatText.ReadyState <> WebBrowserReadyState.Complete
-                        Application.DoEvents()
-                    End While
-                    ScrollChatDown()
+
+                    If DomTask.Contains("@EmoteMessage") Then EmoMes = True
+
+                    If Not DomTask.Contains("@SystemMessage") Then
+                        ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
+                        While ChatText.ReadyState <> WebBrowserReadyState.Complete
+                            Application.DoEvents()
+                        End While
+                        ScrollChatDown()
+                    Else
+                        SysMes = True
+                        TypeDelay = 0
+                    End If
+
+                   
                 End If
                 TypeToggle = 1
                 StringLength = DomTask.Length
@@ -4256,6 +4270,7 @@ SkipGotoSearch:
 
             If TypeDelay > 0 Then
                 TypeDelay -= 1
+                If DomTask.Contains("@SystemMessage") Then TypeDelay = 0
 
             Else
                 TypeToggle = 0
@@ -4527,41 +4542,69 @@ NullResponse:
                     DomTask = DomTask.Replace(ParenReg.Match(DomTask).Value(), "")
                 End If
 
-                If FrmSettings.LCaseCheckBox.Checked = True Then DomTask = LCase(DomTask)
-                If FrmSettings.CBMeMyMine.Checked = True Then
-                    Dim MeArray() As String = Split(DomTask)
-                    For i As Integer = MeArray.Length - 1 To 0 Step -1
-                        If UCase(MeArray(i)) = "ME" Then MeArray(i) = "Me"
-                        If UCase(MeArray(i)) = "MY" Then MeArray(i) = "My"
-                        If UCase(MeArray(i)) = "MINE" Then MeArray(i) = "Mine"
-                        If UCase(MeArray(i)) = "I" Then MeArray(i) = "I"
-                        If UCase(MeArray(i)) = "I'D" Then MeArray(i) = "I'd"
-                        If UCase(MeArray(i)) = "I'M" Then MeArray(i) = "I'm"
-                        If UCase(MeArray(i)) = "I'LL" Then MeArray(i) = "I'll"
-                        If UCase(MeArray(i)) = "YOU" Then MeArray(i) = "you"
-                        If UCase(MeArray(i)) = "YOUR" Then MeArray(i) = "your"
-                        If UCase(MeArray(i)) = "YOURS" Then MeArray(i) = "yours"
-                        If UCase(MeArray(i)) = "YOU'RE" Then MeArray(i) = "you're"
-                        If UCase(MeArray(i)) = "YOU'D" Then MeArray(i) = "you'd"
-                        If UCase(MeArray(i)) = "YOU'LL" Then MeArray(i) = "you'll"
-                    Next
-                    DomTask = Join(MeArray)
+                If SysMes = False And EmoMes = False Then
+
+                    If FrmSettings.LCaseCheckBox.Checked = True Then DomTask = LCase(DomTask)
+                    If FrmSettings.CBMeMyMine.Checked = True Then
+                        Dim MeArray() As String = Split(DomTask)
+                        For i As Integer = MeArray.Length - 1 To 0 Step -1
+                            If UCase(MeArray(i)) = "ME" Then MeArray(i) = "Me"
+                            If UCase(MeArray(i)) = "MY" Then MeArray(i) = "My"
+                            If UCase(MeArray(i)) = "MINE" Then MeArray(i) = "Mine"
+                            If UCase(MeArray(i)) = "I" Then MeArray(i) = "I"
+                            If UCase(MeArray(i)) = "I'D" Then MeArray(i) = "I'd"
+                            If UCase(MeArray(i)) = "I'M" Then MeArray(i) = "I'm"
+                            If UCase(MeArray(i)) = "I'LL" Then MeArray(i) = "I'll"
+                            If UCase(MeArray(i)) = "YOU" Then MeArray(i) = "you"
+                            If UCase(MeArray(i)) = "YOUR" Then MeArray(i) = "your"
+                            If UCase(MeArray(i)) = "YOURS" Then MeArray(i) = "yours"
+                            If UCase(MeArray(i)) = "YOU'RE" Then MeArray(i) = "you're"
+                            If UCase(MeArray(i)) = "YOU'D" Then MeArray(i) = "you'd"
+                            If UCase(MeArray(i)) = "YOU'LL" Then MeArray(i) = "you'll"
+                        Next
+                        DomTask = Join(MeArray)
+                    End If
+                    If FrmSettings.apostropheCheckBox.Checked = True Then DomTask = DomTask.Replace("'", "")
+                    If FrmSettings.commaCheckBox.Checked = True Then DomTask = DomTask.Replace(",", "")
+                    If FrmSettings.periodCheckBox.Checked = True Then DomTask = DomTask.Replace(".", "")
+
+                    Try
+                        DomTask = DomTask.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
+                    Catch
+                    End Try
+
+                    DomTask = DomTask.Replace(":d", ":D")
+                    DomTask = DomTask.Replace(": d", ": D")
+
                 End If
-                If FrmSettings.apostropheCheckBox.Checked = True Then DomTask = DomTask.Replace("'", "")
-                If FrmSettings.commaCheckBox.Checked = True Then DomTask = DomTask.Replace(",", "")
-                If FrmSettings.periodCheckBox.Checked = True Then DomTask = DomTask.Replace(".", "")
-
-                Try
-                    DomTask = DomTask.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
-                Catch
-                End Try
-
-                DomTask = DomTask.Replace(":d", ":D")
-                DomTask = DomTask.Replace(": d", ": D")
 
                 If NullResponse = False And DomTask <> "" Then
 
                     If UCase(DomTask) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomTask = "<b>Tease AI has been reset</b>"
+
+
+                    If SysMes = True Then
+                        Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & DomTask & "</b><br></font></body>"
+                        SysMes = False
+                        ChatText.DocumentText = Chat
+                        While ChatText.ReadyState <> WebBrowserReadyState.Complete
+                            Application.DoEvents()
+                        End While
+                        ScrollChatDown()
+                        GoTo EndSysMes
+                    End If
+
+                    If EmoMes = True Then
+                        Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""" & _
+           TypeColor & """><b><i>" & DomTask & "</i></b><br></font></body>"
+                        EmoMes = False
+                        ChatText.DocumentText = Chat
+                        While ChatText.ReadyState <> WebBrowserReadyState.Complete
+                            Application.DoEvents()
+                        End While
+                        ScrollChatDown()
+                        GoTo EndSysMes
+                    End If
 
                     ' Add timestamps to domme response if the option is checked in the menu
                     If FrmSettings.timestampCheckBox.Checked = True Then
@@ -4605,6 +4648,8 @@ NullResponse:
 
                     End If
 
+EndSysMes:
+
                     If My.Settings.UI768 = True Then
                         If PNLMediaBar.Visible = True Then
                             ChatText.Location = New Point(0, 29)
@@ -4646,7 +4691,7 @@ NullResponse:
 
 
                 If ShowPicture = True Then
-                 
+
 
                     ClearMainPictureBox()
 
@@ -4840,7 +4885,7 @@ NoResponse:
 
 
 
-            End If
+                End If
         End If
 
     End Sub
@@ -4909,11 +4954,20 @@ NoResponse:
                 If DomChat.Contains("@Contact1") Then TypingName = FrmSettings.TBGlitter1.Text
                 If DomChat.Contains("@Contact2") Then TypingName = FrmSettings.TBGlitter2.Text
                 If DomChat.Contains("@Contact3") Then TypingName = FrmSettings.TBGlitter3.Text
-                ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-                While ChatText.ReadyState <> WebBrowserReadyState.Complete
-                    Application.DoEvents()
-                End While
-                ScrollChatDown()
+
+                If DomChat.Contains("@EmoteMessage") Then EmoMes = True
+
+                If Not DomChat.Contains("@SystemMessage") Then
+                    ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
+                    While ChatText.ReadyState <> WebBrowserReadyState.Complete
+                        Application.DoEvents()
+                    End While
+                    ScrollChatDown()
+                Else
+                    SysMes = True
+                    TypeDelay = 0
+                End If
+
                 TypeToggle = 1
                 StringLength = DomChat.Length
                 If DivideText = True Then
@@ -4928,7 +4982,7 @@ NoResponse:
 
             If TypeDelay > 0 Then
                 TypeDelay -= 1
-
+                If DomChat.Contains("@SystemMessage") Then TypeDelay = 0
             Else
                 TypeToggle = 0
                 SendTimer.Stop()
@@ -5176,42 +5230,71 @@ TryNextWithTease:
 
                 ' #######################
 
-                If FrmSettings.LCaseCheckBox.Checked = True Then DomChat = LCase(DomChat)
-                If FrmSettings.CBMeMyMine.Checked = True Then
-                    Dim MeArray() As String = Split(DomChat)
-                    For i As Integer = MeArray.Length - 1 To 0 Step -1
-                        If UCase(MeArray(i)) = "ME" Then MeArray(i) = "Me"
-                        If UCase(MeArray(i)) = "MY" Then MeArray(i) = "My"
-                        If UCase(MeArray(i)) = "MINE" Then MeArray(i) = "Mine"
-                        If UCase(MeArray(i)) = "I" Then MeArray(i) = "I"
-                        If UCase(MeArray(i)) = "I'D" Then MeArray(i) = "I'd"
-                        If UCase(MeArray(i)) = "I'M" Then MeArray(i) = "I'm"
-                        If UCase(MeArray(i)) = "I'LL" Then MeArray(i) = "I'll"
-                        If UCase(MeArray(i)) = "YOU" Then MeArray(i) = "you"
-                        If UCase(MeArray(i)) = "YOUR" Then MeArray(i) = "your"
-                        If UCase(MeArray(i)) = "YOURS" Then MeArray(i) = "yours"
-                        If UCase(MeArray(i)) = "YOU'RE" Then MeArray(i) = "you're"
-                        If UCase(MeArray(i)) = "YOU'D" Then MeArray(i) = "you'd"
-                        If UCase(MeArray(i)) = "YOU'LL" Then MeArray(i) = "you'll"
-                    Next
-                    DomChat = Join(MeArray)
+                If SysMes = False And EmoMes = False Then
+
+                    If FrmSettings.LCaseCheckBox.Checked = True Then DomChat = LCase(DomChat)
+                    If FrmSettings.CBMeMyMine.Checked = True Then
+                        Dim MeArray() As String = Split(DomChat)
+                        For i As Integer = MeArray.Length - 1 To 0 Step -1
+                            If UCase(MeArray(i)) = "ME" Then MeArray(i) = "Me"
+                            If UCase(MeArray(i)) = "MY" Then MeArray(i) = "My"
+                            If UCase(MeArray(i)) = "MINE" Then MeArray(i) = "Mine"
+                            If UCase(MeArray(i)) = "I" Then MeArray(i) = "I"
+                            If UCase(MeArray(i)) = "I'D" Then MeArray(i) = "I'd"
+                            If UCase(MeArray(i)) = "I'M" Then MeArray(i) = "I'm"
+                            If UCase(MeArray(i)) = "I'LL" Then MeArray(i) = "I'll"
+                            If UCase(MeArray(i)) = "YOU" Then MeArray(i) = "you"
+                            If UCase(MeArray(i)) = "YOUR" Then MeArray(i) = "your"
+                            If UCase(MeArray(i)) = "YOURS" Then MeArray(i) = "yours"
+                            If UCase(MeArray(i)) = "YOU'RE" Then MeArray(i) = "you're"
+                            If UCase(MeArray(i)) = "YOU'D" Then MeArray(i) = "you'd"
+                            If UCase(MeArray(i)) = "YOU'LL" Then MeArray(i) = "you'll"
+                        Next
+                        DomChat = Join(MeArray)
+                    End If
+                    If FrmSettings.apostropheCheckBox.Checked = True Then DomChat = DomChat.Replace("'", "")
+                    If FrmSettings.commaCheckBox.Checked = True Then DomChat = DomChat.Replace(",", "")
+                    If FrmSettings.periodCheckBox.Checked = True Then DomChat = DomChat.Replace(".", "")
+
+                    Try
+                        DomChat = DomChat.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
+                    Catch
+                    End Try
+
+                    DomChat = DomChat.Replace(":d", ":D")
+                    DomChat = DomChat.Replace(": d", ": D")
+
                 End If
-                If FrmSettings.apostropheCheckBox.Checked = True Then DomChat = DomChat.Replace("'", "")
-                If FrmSettings.commaCheckBox.Checked = True Then DomChat = DomChat.Replace(",", "")
-                If FrmSettings.periodCheckBox.Checked = True Then DomChat = DomChat.Replace(".", "")
 
-                Try
-                    DomChat = DomChat.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
-                Catch
-                End Try
-
-                DomChat = DomChat.Replace(":d", ":D")
-                DomChat = DomChat.Replace(": d", ": D")
 
 
                 If NullResponse = True Or DomChat = "" Or DomChat Is Nothing Then GoTo NullResponseLine2
 
                 If UCase(DomChat) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomChat = "<b>Tease AI has been reset</b>"
+
+
+                If SysMes = True Then
+                    Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & DomChat & "</b><br></font></body>"
+                    SysMes = False
+                    ChatText.DocumentText = Chat
+                    While ChatText.ReadyState <> WebBrowserReadyState.Complete
+                        Application.DoEvents()
+                    End While
+                    ScrollChatDown()
+                    GoTo EndSysMes
+                End If
+
+                If EmoMes = True Then
+                    Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""" & _
+              TypeColor & """><b><i>" & DomChat & "</i></b><br></font></body>"
+                    EmoMes = False
+                    ChatText.DocumentText = Chat
+                    While ChatText.ReadyState <> WebBrowserReadyState.Complete
+                        Application.DoEvents()
+                    End While
+                    ScrollChatDown()
+                    GoTo EndSysMes
+                End If
 
                 ' Add timestamps to domme response if the option is checked in the menu
                 If FrmSettings.timestampCheckBox.Checked = True Then
@@ -5249,6 +5332,8 @@ TryNextWithTease:
 
                 End If
 
+EndSysMes:
+
                 If My.Settings.UI768 = True Then
                     If PNLMediaBar.Visible = True Then
                         ChatText.Location = New Point(0, 29)
@@ -5284,11 +5369,11 @@ TryNextWithTease:
                 SubWroteLast = False
 
                 If ShowPicture = True Then
-                 
+
 
                     ClearMainPictureBox()
 
-                    
+
 
 
                     Try
@@ -5428,7 +5513,7 @@ NullResponseLine2:
 
                 End If
 
-            End If
+                End If
         End If
 
     End Sub
@@ -11534,8 +11619,13 @@ VTSkip:
             StringClean = StringClean.Replace("@RiskyState", "")
         End If
 
+        If StringClean.Contains("@SystemMessage ") Then
+            StringClean = StringClean.Replace("@SystemMessage ", "")
+        End If
 
-
+        If StringClean.Contains("@EmoteMessage ") Then
+            StringClean = StringClean.Replace("@EmoteMessage ", "")
+        End If
 
         
 
