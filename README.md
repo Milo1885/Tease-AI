@@ -1,11 +1,13 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+9/09 12:35 pm - Finished new Glitter implementation
+
 9/09 10:16 am - Improved Lazy Sub. Enhance the overall aesthetics as well as adding the option to set keyboard shortcuts for each of the Lazy Sub buttons
 
 9/09 4:35 am - Added Command @Call() - This Command allows you to leave the linear script you're in and begin running another script in the location specified. 
 
-For example, @Call(Modules\PicturesSolo_85.txt) would immediately move the domme to the first line of that script and the program would continue from there. You can specifiy any location you like, as long as it exists in the currently Presonality's directories, eg @Call(Custom\My Username\Ballbreaker_1.txt)
+For example, @Call(Modules\PicturesSolo_85.txt) would immediately move the domme to the first line of that script and the program would continue from there. You can specifiy any location you like, as long as it exists in the currently Personality's directories, eg @Call(Custom\My Username\Ballbreaker_1.txt)
 
 You can also use a comma to specify a specific line to start from:
 

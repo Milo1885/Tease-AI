@@ -129,13 +129,14 @@ Partial Class Form1
         Me.RiskyPickToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExchangeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CollectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MilovanaToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenBetaThreadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.BugReportThreadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WebteasesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AllAndEverythingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DommeTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -911,57 +912,45 @@ Partial Class Form1
         '
         Me.TeaseAIMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GamesToolStripMenuItem, Me.MilovanaToolStripMenuItem, Me.ToolStripMenuItem7, Me.ExitToolStripMenuItem})
         Me.TeaseAIMenu.Name = "TeaseAIMenu"
-        Me.TeaseAIMenu.Size = New System.Drawing.Size(155, 114)
+        Me.TeaseAIMenu.Size = New System.Drawing.Size(155, 92)
         Me.TeaseAIMenu.Text = "Tease AI"
         '
         'GamesToolStripMenuItem
         '
         Me.GamesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SlotsToolStripMenuItem, Me.MatchGameToolStripMenuItem, Me.RiskyPickToolStripMenuItem, Me.ExchangeToolStripMenuItem, Me.CollectionToolStripMenuItem})
         Me.GamesToolStripMenuItem.Name = "GamesToolStripMenuItem"
-        Me.GamesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GamesToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
         Me.GamesToolStripMenuItem.Text = "Games"
         '
         'SlotsToolStripMenuItem
         '
         Me.SlotsToolStripMenuItem.Name = "SlotsToolStripMenuItem"
-        Me.SlotsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SlotsToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.SlotsToolStripMenuItem.Text = "Slots"
         '
         'MatchGameToolStripMenuItem
         '
         Me.MatchGameToolStripMenuItem.Name = "MatchGameToolStripMenuItem"
-        Me.MatchGameToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MatchGameToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.MatchGameToolStripMenuItem.Text = "Match Game"
         '
         'RiskyPickToolStripMenuItem
         '
         Me.RiskyPickToolStripMenuItem.Name = "RiskyPickToolStripMenuItem"
-        Me.RiskyPickToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RiskyPickToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.RiskyPickToolStripMenuItem.Text = "Risky Pick"
         '
         'ExchangeToolStripMenuItem
         '
         Me.ExchangeToolStripMenuItem.Name = "ExchangeToolStripMenuItem"
-        Me.ExchangeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExchangeToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.ExchangeToolStripMenuItem.Text = "Exchange"
         '
         'CollectionToolStripMenuItem
         '
         Me.CollectionToolStripMenuItem.Name = "CollectionToolStripMenuItem"
-        Me.CollectionToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CollectionToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.CollectionToolStripMenuItem.Text = "Collection"
-        '
-        'ToolStripMenuItem7
-        '
-        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
-        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(154, 22)
-        Me.ToolStripMenuItem7.Text = "________________"
-        '
-        'ExitToolStripMenuItem
-        '
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
-        Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'MilovanaToolStripMenuItem
         '
@@ -993,6 +982,22 @@ Partial Class Form1
         Me.AllAndEverythingToolStripMenuItem.Name = "AllAndEverythingToolStripMenuItem"
         Me.AllAndEverythingToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.AllAndEverythingToolStripMenuItem.Text = "Forum"
+        '
+        'ToolStripMenuItem7
+        '
+        Me.ToolStripMenuItem7.Name = "ToolStripMenuItem7"
+        Me.ToolStripMenuItem7.Size = New System.Drawing.Size(154, 22)
+        Me.ToolStripMenuItem7.Text = "________________"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'DommeTimer
+        '
+        Me.DommeTimer.Interval = 1000
         '
         'Form1
         '
@@ -1167,5 +1172,6 @@ Partial Class Form1
     Friend WithEvents BugReportThreadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents WebteasesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AllAndEverythingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DommeTimer As System.Windows.Forms.Timer
 
 End Class

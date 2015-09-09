@@ -612,37 +612,37 @@
     <value>736, 56</value>
   </metadata>
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>162, 95</value>
+    <value>280, 95</value>
   </metadata>
   <metadata name="UpdatesTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>724, 95</value>
+    <value>842, 95</value>
   </metadata>
   <metadata name="GetColor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>709, 17</value>
   </metadata>
   <metadata name="AvoidTheEdge.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>852, 95</value>
+    <value>1101, 95</value>
   </metadata>
   <metadata name="AvoidTheEdgeResume.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>982, 95</value>
+    <value>1231, 95</value>
   </metadata>
   <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1155, 95</value>
+    <value>1404, 95</value>
   </metadata>
   <metadata name="WebImageFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1292, 95</value>
-  </metadata>
-  <metadata name="StrokePaceTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1457, 95</value>
-  </metadata>
-  <metadata name="EdgeTauntTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 134</value>
   </metadata>
+  <metadata name="StrokePaceTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>182, 134</value>
+  </metadata>
+  <metadata name="EdgeTauntTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>451, 134</value>
+  </metadata>
   <metadata name="HoldEdgeTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>158, 134</value>
+    <value>592, 134</value>
   </metadata>
   <metadata name="HoldEdgeTauntTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>294, 134</value>
+    <value>728, 134</value>
   </metadata>
   <data name="PictureBox11.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -738,19 +738,19 @@ To use this software, you must agree to the following terms and conditions:
     <value>1401, 56</value>
   </metadata>
   <metadata name="StupidTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1508, 56</value>
-  </metadata>
-  <metadata name="VideoTauntTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 95</value>
   </metadata>
+  <metadata name="VideoTauntTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>135, 95</value>
+  </metadata>
   <metadata name="TeaseTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>611, 95</value>
+    <value>729, 95</value>
   </metadata>
   <metadata name="RLGLTauntTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>304, 95</value>
+    <value>422, 95</value>
   </metadata>
   <metadata name="AvoidTheEdgeTaunts.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>445, 95</value>
+    <value>563, 95</value>
   </metadata>
   <data name="subAvatar.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -857,28 +857,28 @@ To use this software, you must agree to the following terms and conditions:
     <value>443, 56</value>
   </metadata>
   <metadata name="BWSlideshow.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>461, 134</value>
+    <value>895, 134</value>
   </metadata>
   <metadata name="Contact1Timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>586, 134</value>
+    <value>1020, 134</value>
   </metadata>
   <metadata name="Contact2Timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>717, 134</value>
+    <value>1151, 134</value>
   </metadata>
   <metadata name="Contact3Timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>848, 134</value>
+    <value>970, 95</value>
   </metadata>
   <metadata name="UpdateStageTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>979, 134</value>
+    <value>1282, 134</value>
   </metadata>
   <metadata name="WMPTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1132, 134</value>
+    <value>1435, 134</value>
   </metadata>
   <metadata name="TeaseAINotify.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1244, 134</value>
+    <value>17, 173</value>
   </metadata>
   <metadata name="TeaseAIMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1371, 134</value>
+    <value>144, 173</value>
   </metadata>
   <data name="TeaseAINotify.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -939,6 +939,9 @@ To use this software, you must agree to the following terms and conditions:
         AAAAAAAA/////////////////////w==
 </value>
   </data>
+  <metadata name="DommeTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>325, 134</value>
+  </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>175</value>
   </metadata>

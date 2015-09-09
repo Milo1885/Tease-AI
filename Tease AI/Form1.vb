@@ -448,6 +448,11 @@ Public Class Form1
     Dim SysMes As Boolean
     Dim EmoMes As Boolean
 
+    Dim Contact1Edge As Boolean
+    Dim Contact2Edge As Boolean
+    Dim Contact3Edge As Boolean
+
+
 
 
 
@@ -2183,6 +2188,18 @@ NoRepeatFiles:
                     SubStroking = False
                     EdgeTauntTimer.Stop()
                     DomChat = "#StopStrokingEdge"
+                    If Contact1Edge = True Then
+                        DomChat = "@Contact1 #StopStrokingEdge"
+                        Contact1Edge = False
+                    End If
+                    If Contact2Edge = True Then
+                        DomChat = "@Contact2 #StopStrokingEdge"
+                        Contact2Edge = False
+                    End If
+                    If Contact3Edge = True Then
+                        DomChat = "@Contact3 #StopStrokingEdge"
+                        Contact3Edge = False
+                    End If
                     TypingDelay()
                     Return
 
@@ -2375,6 +2392,18 @@ NoRepeatOFiles:
                     SubEdging = False
                     SubStroking = False
                     DomChat = "#StopStrokingEdge"
+                    If Contact1Edge = True Then
+                        DomChat = "@Contact1 #StopStrokingEdge"
+                        Contact1Edge = False
+                    End If
+                    If Contact2Edge = True Then
+                        DomChat = "@Contact2 #StopStrokingEdge"
+                        Contact2Edge = False
+                    End If
+                    If Contact3Edge = True Then
+                        DomChat = "@Contact3 #StopStrokingEdge"
+                        Contact3Edge = False
+                    End If
                     TypingDelay()
 
                     Do
@@ -2803,6 +2832,19 @@ FoundResponse:
         If DomChat = "NULL" Then
             DomChat = ""
             Return
+        End If
+
+        If Not Group.Contains("D") And Not DomChat.Contains("@Contact1") And Not DomChat.Contains("@Contact2") And Not DomChat.Contains("@Contact3") Then
+
+            Dim GroupList As New List(Of String)
+            GroupList.Clear()
+
+            If Group.Contains("1") Then GroupList.Add("@Contact1 ")
+            If Group.Contains("2") Then GroupList.Add("@Contact2 ")
+            If Group.Contains("3") Then GroupList.Add("@Contact3 ")
+
+            DomChat = GroupList(randomizer.Next(0, GroupList.Count)) & DomChat
+
         End If
 
         TypingDelay()
@@ -9000,6 +9042,7 @@ RinseLatherRepeat:
         End If
 
         If StringClean.Contains("@EdgeToRuinNoHoldSecret") Then
+            ContactEdgeCheck(StringClean)
             If SubStroking = True Then AlreadyStrokingEdge = True
             GetEdgeTickCheck()
             SubStroking = True
@@ -9020,6 +9063,7 @@ RinseLatherRepeat:
         End If
 
         If StringClean.Contains("@EdgeToRuinHoldSecret") Then
+            ContactEdgeCheck(StringClean)
             If SubStroking = True Then AlreadyStrokingEdge = True
             GetEdgeTickCheck()
             SubStroking = True
@@ -9040,6 +9084,7 @@ RinseLatherRepeat:
         End If
 
         If StringClean.Contains("@EdgeToRuinSecret") Then
+            ContactEdgeCheck(StringClean)
             If SubStroking = True Then AlreadyStrokingEdge = True
             GetEdgeTickCheck()
             SubStroking = True
@@ -9059,6 +9104,7 @@ RinseLatherRepeat:
         End If
 
         If StringClean.Contains("@EdgeToRuinNoHold") Then
+            ContactEdgeCheck(StringClean)
             If SubStroking = True Then AlreadyStrokingEdge = True
             GetEdgeTickCheck()
             SubStroking = True
@@ -9078,6 +9124,7 @@ RinseLatherRepeat:
         End If
 
         If StringClean.Contains("@EdgeToRuinHold") Then
+            ContactEdgeCheck(StringClean)
             If SubStroking = True Then AlreadyStrokingEdge = True
             GetEdgeTickCheck()
             SubStroking = True
@@ -9097,6 +9144,7 @@ RinseLatherRepeat:
         End If
 
         If StringClean.Contains("@EdgeToRuin") Then
+            ContactEdgeCheck(StringClean)
             If SubStroking = True Then AlreadyStrokingEdge = True
             GetEdgeTickCheck()
             SubStroking = True
@@ -9115,6 +9163,7 @@ RinseLatherRepeat:
         End If
 
         If StringClean.Contains("@EdgeNoHold") Then
+            ContactEdgeCheck(StringClean)
             If SubStroking = True Then AlreadyStrokingEdge = True
             GetEdgeTickCheck()
             SubStroking = True
@@ -9133,6 +9182,7 @@ RinseLatherRepeat:
         End If
 
         If StringClean.Contains("@EdgeHold") Then
+            ContactEdgeCheck(StringClean)
             If SubStroking = True Then AlreadyStrokingEdge = True
             GetEdgeTickCheck()
             SubStroking = True
@@ -9151,6 +9201,7 @@ RinseLatherRepeat:
         End If
 
         If StringClean.Contains("@Edge") Then
+            ContactEdgeCheck(StringClean)
             If SubStroking = True Then AlreadyStrokingEdge = True
             GetEdgeTickCheck()
             SubStroking = True
@@ -10786,6 +10837,18 @@ OrgasmDecided:
                 SubStroking = False
                 EdgeTauntTimer.Stop()
                 DomChat = "#StopStrokingEdge"
+                If Contact1Edge = True Then
+                    DomChat = "@Contact1 #StopStrokingEdge"
+                    Contact1Edge = False
+                End If
+                If Contact2Edge = True Then
+                    DomChat = "@Contact2 #StopStrokingEdge"
+                    Contact2Edge = False
+                End If
+                If Contact3Edge = True Then
+                    DomChat = "@Contact3 #StopStrokingEdge"
+                    Contact3Edge = False
+                End If
                 TypingDelay()
 
             End If
@@ -11469,6 +11532,12 @@ OrgasmDecided:
             StringClean = StringClean.Replace("@RemoveContact3", "")
         End If
 
+        If StringClean.Contains("@AddDomme") Or StringClean.Contains("@RemoveDomme") Then
+            AddContactTick = 2
+            DommeTimer.Start()
+            StringClean = StringClean.Replace("@AddDomme", "")
+            StringClean = StringClean.Replace("@RemoveDomme", "")
+        End If
 
 
         If StringClean.Contains("@NullResponse") Then
@@ -11766,6 +11835,16 @@ VTSkip:
     Public Sub CommandCleanBookmark()
 
     End Sub
+
+
+    Public Function ContactEdgeCheck(ByVal EdgeCheck As String)
+        If EdgeCheck.Contains("@Contact1") Then Contact1Edge = True
+        If EdgeCheck.Contains("@Contact2") Then Contact2Edge = True
+        If EdgeCheck.Contains("@Contact3") Then Contact3Edge = True
+    End Function
+
+
+   
 
     Public Sub EdgePace()
 
@@ -16041,6 +16120,18 @@ NoRepeatFiles:
             SubStroking = False
             OrgasmYesNo = False
             DomTask = "#StopStroking"
+            If Contact1Edge = True Then
+                DomTask = "@Contact1 #StopStroking"
+                Contact1Edge = False
+            End If
+            If Contact2Edge = True Then
+                DomTask = "@Contact2 #StopStroking"
+                Contact2Edge = False
+            End If
+            If Contact3Edge = True Then
+                DomTask = "@Contact3 #StopStroking"
+                Contact3Edge = False
+            End If
             TypingDelayGeneric()
             Return
 
@@ -16234,7 +16325,14 @@ NoRepeatOFiles:
 
         If EdgeTauntInt < 1 Then
 
-            Dim EdgeTaunt As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\HoldTheEdge\HoldTheEdge.txt")
+            Dim EdgeTaunt As StreamReader
+
+            If GlitterTease = False Then
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Edge\HoldTheEdge.txt")
+            Else
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Edge\GroupHoldTheEdge.txt")
+            End If
+
             Dim ETLines As New List(Of String)
 
             While EdgeTaunt.Peek <> -1
@@ -19370,6 +19468,35 @@ TryNext:
 
     End Sub
 
+    Private Sub DommeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DommeTimer.Tick
+
+        AddContactTick -= 1
+
+        If AddContactTick < 1 Then
+            Contact1Timer.Stop()
+            If Not Group.Contains("D") Then
+                Group = Group & "D"
+                If Group = "D" Then GlitterTease = False
+                Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & domName.Text & " has joined the chat room</b>" & "<br></font></body>"
+                ChatText.DocumentText = Chat
+                While ChatText.ReadyState <> WebBrowserReadyState.Complete
+                    Application.DoEvents()
+                End While
+                ScrollChatDown()
+            Else
+                Group = Group.Replace("D", "")
+                GlitterTease = True
+                Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & domName.Text & " has left the chat room</b>" & "<br></font></body>"
+                ChatText.DocumentText = Chat
+                While ChatText.ReadyState <> WebBrowserReadyState.Complete
+                    Application.DoEvents()
+                End While
+                ScrollChatDown()
+            End If
+        End If
+
+    End Sub
+
     Private Sub UpdateStageTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateStageTimer.Tick
         UpdateStageTick -= 1
         If UpdateStageTick < 1 Then
@@ -20426,4 +20553,6 @@ TryNext:
     Private Sub AllAndEverythingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AllAndEverythingToolStripMenuItem.Click
         Process.Start("https://milovana.com/forum/")
     End Sub
+
+   
 End Class
