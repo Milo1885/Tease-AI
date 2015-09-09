@@ -3024,8 +3024,45 @@ FoundState:
             End While
         End If
 
+        While DomResponse.Peek <> -1
+            DRLineTotal += 1
+            DRLines.Add(DomResponse.ReadLine())
+            If DRLines(DRLineTotal) = "[All]" Then
+                AddResponse = True
+            End If
+            If DRLines(DRLineTotal) = "[All End]" Then
+                AddResponse = False
+            End If
+            If AddResponse = False Or DRLines(DRLineTotal) = "[All]" Then
+                DRLines.Remove(DRLines(DRLineTotal))
+                DRLineTotal -= 1
+            End If
+        End While
+
+
         DomResponse.Close()
         DomResponse.Dispose()
+
+
+        Dim DomResponseAll As New StreamReader(ResponseFile)
+
+        While DomResponseAll.Peek <> -1
+            DRLineTotal += 1
+            DRLines.Add(DomResponseAll.ReadLine())
+            If DRLines(DRLineTotal) = "[All]" Then
+                AddResponse = True
+            End If
+            If DRLines(DRLineTotal) = "[All End]" Then
+                AddResponse = False
+            End If
+            If AddResponse = False Or DRLines(DRLineTotal) = "[All]" Then
+                DRLines.Remove(DRLines(DRLineTotal))
+                DRLineTotal -= 1
+            End If
+        End While
+
+        DomResponseAll.Close()
+        DomResponseAll.Dispose()
 
         ' ###########
 

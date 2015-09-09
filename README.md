@@ -1,6 +1,8 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+9/09 3:52 am - Added new parseable section for Response files, [All] [All End] - Tease AI will always add lines between [All] and [All End] and will use them regardless of what state the program is in. This can be useful for adding a few generic responses that can go with any situation, or creating Response files that just contain [All][All End] to respond to very specific words or ideas
+
 9/09 1:39 am - Added Command @SystemMessage - When this Command is used, the "Domme is typing" will not appear. Instead the text will be output to the screen by itself in bold, blue letters. This is useful for system type messages such as "@SystemMessage #DomName has logged off"
 
 Added Command @EmoteMessage - When this Command is used, "Domme is typing" will still appear, but the message will appear by itself in the Domme's color in italics. For example, "@EmoteMessage #DomName laughs" will output "Emma laughs", and it will be italicized to represent an emote. This is useful for creating a more chat like experience
