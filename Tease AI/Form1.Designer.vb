@@ -903,6 +903,7 @@ Partial Class Form1
         '
         'TeaseAINotify
         '
+        Me.TeaseAINotify.BalloonTipTitle = "Tease AI"
         Me.TeaseAINotify.ContextMenuStrip = Me.TeaseAIMenu
         Me.TeaseAINotify.Icon = CType(resources.GetObject("TeaseAINotify.Icon"), System.Drawing.Icon)
         Me.TeaseAINotify.Text = "Tease AI"

@@ -1257,7 +1257,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 
-            TeaseAINotify.BalloonTipText = "Tease AI daily login bonus:" & Environment.NewLine & Environment.NewLine & "You've received " & LoginAmt & " tokens!"
+            TeaseAINotify.BalloonTipText = "Daily login bonus: You've received " & LoginAmt & " tokens!"
             TeaseAINotify.Text = "Tease AI"
             TeaseAINotify.ShowBalloonTip(5000)
 

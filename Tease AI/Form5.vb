@@ -1108,9 +1108,11 @@ Public Class frmApps
     Private Sub Button29_Click_1(sender As System.Object, e As System.EventArgs) Handles Button29.Click
 
 
+        Form1.TeaseAINotify.BalloonTipText = "Daily login bonus: You've received 100 tokens!"
+        Form1.TeaseAINotify.Text = "Tease AI"
+        Form1.TeaseAINotify.ShowBalloonTip(5000)
 
-
-        Form1.GetBlogImageTest()
+        'Form1.GetBlogImageTest()
 
 
 
