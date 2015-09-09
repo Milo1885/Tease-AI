@@ -11664,9 +11664,71 @@ VTSkip:
             StringClean = StringClean.Replace("@EmoteMessage ", "")
         End If
 
-        
+        If StringClean.Contains("@Call(") Then
 
-        Return StringClean
+            Dim CheckFlag As String = StringClean & " some test garbage"
+            Dim CFIndex As Integer = StringClean.IndexOf("@Call(") + 6
+            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
+            CheckFlag = CheckFlag.Split(")")(0)
+            CheckFlag = CheckFlag.Replace("@Call(", "")
+            Dim CallReplace As String = CheckFlag
+
+            If CheckFlag.Contains(",") Then
+
+                CheckFlag = CheckFlag.Replace(", ", ",")
+                CheckFlag = CheckFlag.Replace(" ,", ",")
+                Dim CallSplit As String() = CheckFlag.Split(",")
+                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CallSplit(0)
+                FileGoto = CallSplit(1)
+                SkipGotoLine = True
+                GetGoto()
+
+            Else
+
+                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag
+                StrokeTauntVal = -1
+
+            End If
+
+            StringClean = StringClean.Replace("@Call(" & CallReplace & ")", "")
+
+        End If
+
+
+        If StringClean.Contains("@CallRandom(") Then
+
+            Dim CheckFlag As String = StringClean & " some test garbage"
+            Dim CFIndex As Integer = StringClean.IndexOf("@CallRandom(") + 12
+            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
+            CheckFlag = CheckFlag.Split(")")(0)
+            CheckFlag = CheckFlag.Replace("@CallRandom(", "")
+            Dim CallReplace As String = CheckFlag
+
+            If Not Directory.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag) Then
+                MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not exist!" & Environment.NewLine & Environment.NewLine & _
+                                Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Else
+                Dim RandomFile As New List(Of String)
+                RandomFile.Clear()
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    RandomFile.Add(foundFile)
+                Next
+                If RandomFile.Count < 1 Then
+                    MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine & _
+                               Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Else
+                    FileText = RandomFile(randomizer.Next(0, RandomFile.Count))
+                    StrokeTauntVal = -1
+                End If
+            End If
+            StringClean = StringClean.Replace("@CallRandom(" & CallReplace & ")", "")
+        End If
+
+
+
+
+
+            Return StringClean
 
     End Function
 

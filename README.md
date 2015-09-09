@@ -1,6 +1,18 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+9/09 4:35 am - Added Command @Call() - This Command allows you to leave the linear script you're in and begin running another script in the location specified. 
+
+For example, @Call(Modules\PicturesSolo_85.txt) would immediately move the domme to the first line of that script and the program would continue from there. You can specifiy any location you like, as long as it exists in the currently Presonality's directories, eg @Call(Custom\My Username\Ballbreaker_1.txt)
+
+You can also use a comma to specify a specific line to start from:
+
+For example, @Call(Custom\My Username\Ballbreaker_1.txt, Made Domme Angry) would move to the file [Personality]\Custom\My Username\Ballbreaker_1.txt and begin from the line (Made Domme Angry). When using a comma to specify location to jump to, make sure that you do not put it in its own set of parentheses, just the location word or phrase only 
+
+Added Command @CallRandom() - This Command allows you to leave the linear script you're in and begin running a random script from the directory specified.
+
+For example, @CallRandom(Custom\UserName) would move to the directory [Personality]\Custom\My Username\ and randomly select a script located there. It would start at the first line of that script and move forward from there. When using @CallRandom(), you cannot use a comma to specify a specific jumping point as you can with @Call()
+
 9/09 3:52 am - Added new parseable section for Response files, [All] [All End] - Tease AI will always add lines between [All] and [All End] and will use them regardless of what state the program is in. This can be useful for adding a few generic responses that can go with any situation, or creating Response files that just contain [All][All End] to respond to very specific words or ideas
 
 9/09 1:39 am - Added Command @SystemMessage - When this Command is used, the "Domme is typing" will not appear. Instead the text will be output to the screen by itself in bold, blue letters. This is useful for system type messages such as "@SystemMessage #DomName has logged off"
