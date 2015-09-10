@@ -4544,6 +4544,18 @@ Namespace My
                 Me("ShortSafeword") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property Patch45Tokens() As Boolean
+            Get
+                Return CType(Me("Patch45Tokens"),Boolean)
+            End Get
+            Set
+                Me("Patch45Tokens") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

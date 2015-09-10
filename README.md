@@ -60,6 +60,8 @@ Added Context menu to Tease AI icon
  
 Reset feature greatly improved, should be much more stable
 
+Fixed issue where Tease AI would only flash blog images when called from Response files
+
 Improved handling of animated gifs that appear in the main picture window
 
 Improved Image handling across the board to cut down on GDI errors and reduce memory usage as much as possible

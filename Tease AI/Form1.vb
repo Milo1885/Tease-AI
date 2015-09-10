@@ -452,6 +452,10 @@ Public Class Form1
     Dim Contact2Edge As Boolean
     Dim Contact3Edge As Boolean
 
+    Dim Contact1Stroke As Boolean
+    Dim Contact2Stroke As Boolean
+    Dim Contact3Stroke As Boolean
+
 
 
 
@@ -1204,6 +1208,13 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         GoldTokens = My.Settings.GoldTokens
         SilverTokens = My.Settings.SilverTokens
         BronzeTokens = My.Settings.BronzeTokens
+
+        If My.Settings.Patch45Tokens = False Then
+            BronzeTokens += 100
+            My.Settings.Patch45Tokens = True
+            My.Settings.BronzeTokens = BronzeTokens
+            My.Settings.Save()
+        End If
 
         If BronzeTokens < 0 Then
             BronzeTokens = 0
@@ -2095,6 +2106,18 @@ WritingTaskLine:
                     SubHoldingEdge = True
                     EdgeTauntTimer.Stop()
                     DomChat = "#HoldTheEdge"
+                    If Contact1Edge = True Then
+                        DomChat = "@Contact1 #HoldTheEdge"
+                        Contact1Edge = False
+                    End If
+                    If Contact2Edge = True Then
+                        DomChat = "@Contact2 #HoldTheEdge"
+                        Contact2Edge = False
+                    End If
+                    If Contact3Edge = True Then
+                        DomChat = "@Contact3 #HoldTheEdge"
+                        Contact3Edge = False
+                    End If
                     TypingDelay()
 
                     HoldEdgeTick = HoldEdgeChance
@@ -2268,6 +2291,18 @@ NoRepeatRFiles:
                 EdgeTauntTimer.Stop()
                 OrgasmYesNo = False
                 DomChat = "#RuinYourOrgasm"
+                If Contact1Edge = True Then
+                    DomChat = "@Contact1 #RuinYourOrgasm"
+                    Contact1Edge = False
+                End If
+                If Contact2Edge = True Then
+                    DomChat = "@Contact2 #RuinYourOrgasm"
+                    Contact2Edge = False
+                End If
+                If Contact3Edge = True Then
+                    DomChat = "@Contact3 #RuinYourOrgasm"
+                    Contact3Edge = False
+                End If
                 TypingDelay()
                 Return
 
@@ -2371,6 +2406,18 @@ NoRepeatOFiles:
                 EdgeTauntTimer.Stop()
                 OrgasmYesNo = False
                 DomChat = "#CumForMe"
+                If Contact1Edge = True Then
+                    DomChat = "@Contact1 #CumForMe"
+                    Contact1Edge = False
+                End If
+                If Contact2Edge = True Then
+                    DomChat = "@Contact2 #CumForMe"
+                    Contact2Edge = False
+                End If
+                If Contact3Edge = True Then
+                    DomChat = "@Contact3 #CumForMe"
+                    Contact3Edge = False
+                End If
                 TypingDelay()
                 Return
 
@@ -8941,6 +8988,9 @@ RinseLatherRepeat:
                 Catch
                 End Try
             End If
+            If StringClean.Contains("@Contact1") Then Contact1Stroke = True
+            If StringClean.Contains("@Contact2") Then Contact2Stroke = True
+            If StringClean.Contains("@Contact3") Then Contact3Stroke = True
             AskedToGiveUpSection = False
             AskedToSpeedUp = False
             AskedToSlowDown = False
@@ -9012,6 +9062,18 @@ RinseLatherRepeat:
                 Catch
                 End Try
             End If
+            If Contact1Stroke = True Then
+                StringClean = StringClean & "@Contact1"
+                Contact1Stroke = False
+            End If
+            If Contact2Stroke = True Then
+                StringClean = StringClean & "@Contact2"
+                Contact2Stroke = False
+            End If
+            If Contact3Stroke = True Then
+                StringClean = StringClean & "@Contact3"
+                Contact3Stroke = False
+            End If
             AskedToSpeedUp = False
             AskedToSlowDown = False
             SubStroking = False
@@ -9059,6 +9121,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            DisableContactStroke()
             StringClean = StringClean.Replace("@EdgeToRuinNoHoldSecret", "")
         End If
 
@@ -9080,6 +9143,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            DisableContactStroke()
             StringClean = StringClean.Replace("@EdgeToRuinHoldSecret", "")
         End If
 
@@ -9100,6 +9164,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            DisableContactStroke()
             StringClean = StringClean.Replace("@EdgeToRuinSecret", "")
         End If
 
@@ -9120,6 +9185,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            DisableContactStroke()
             StringClean = StringClean.Replace("@EdgeToRuinNoHold", "")
         End If
 
@@ -9140,6 +9206,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            DisableContactStroke()
             StringClean = StringClean.Replace("@EdgeToRuinHold", "")
         End If
 
@@ -9159,6 +9226,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            DisableContactStroke()
             StringClean = StringClean.Replace("@EdgeToRuin", "")
         End If
 
@@ -9178,6 +9246,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            DisableContactStroke()
             StringClean = StringClean.Replace("@EdgeNoHold", "")
         End If
 
@@ -9197,6 +9266,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            DisableContactStroke()
             StringClean = StringClean.Replace("@EdgeHold", "")
         End If
 
@@ -9215,6 +9285,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            DisableContactStroke()
             StringClean = StringClean.Replace("@Edge", "")
         End If
 
@@ -9596,7 +9667,7 @@ OrgasmDecided:
 
                 Val1 = VarValue * Math.Round(Val1 / VarValue)
 
-               
+
 
                 'Debug.Print("@SetVar VarValue = " & VarValue)
 
@@ -10799,6 +10870,18 @@ OrgasmDecided:
                     My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
                 End If
                 DomChat = "#HoldTheEdge"
+                If Contact1Stroke = True Then
+                    DomChat = "@Contact1 #HoldTheEdge"
+                    Contact1Stroke = False
+                End If
+                If Contact2Stroke = True Then
+                    DomChat = "@Contact2 #HoldTheEdge"
+                    Contact2Stroke = False
+                End If
+                If Contact3Stroke = True Then
+                    DomChat = "@Contact3 #HoldTheEdge"
+                    Contact3Stroke = False
+                End If
                 TypingDelay()
 
                 HoldEdgeTick = HoldEdgeChance
@@ -10837,17 +10920,17 @@ OrgasmDecided:
                 SubStroking = False
                 EdgeTauntTimer.Stop()
                 DomChat = "#StopStrokingEdge"
-                If Contact1Edge = True Then
+                If Contact1Stroke = True Then
                     DomChat = "@Contact1 #StopStrokingEdge"
-                    Contact1Edge = False
+                    Contact1Stroke = False
                 End If
-                If Contact2Edge = True Then
+                If Contact2Stroke = True Then
                     DomChat = "@Contact2 #StopStrokingEdge"
-                    Contact2Edge = False
+                    Contact2Stroke = False
                 End If
-                If Contact3Edge = True Then
+                If Contact3Stroke = True Then
                     DomChat = "@Contact3 #StopStrokingEdge"
-                    Contact3Edge = False
+                    Contact3Stroke = False
                 End If
                 TypingDelay()
 
@@ -11018,6 +11101,15 @@ OrgasmDecided:
             FrmCardList.UpdateBronzeTokens()
             MessageBox.Show(Me, domName.Text & " has given you 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
             StringClean = StringClean.Replace("@Add50Tokens", "")
+        End If
+
+        If StringClean.Contains("@Remove100Tokens") Then
+            BronzeTokens -= 100
+            My.Settings.BronzeTokens = BronzeTokens
+            My.Settings.Save()
+            FrmCardList.UpdateBronzeTokens()
+            MessageBox.Show(Me, domName.Text & " has taken 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            StringClean = StringClean.Replace("@@Remove100Tokens", "")
         End If
 
 
@@ -11828,7 +11920,7 @@ VTSkip:
 
 
 
-            Return StringClean
+        Return StringClean
 
     End Function
 
@@ -11842,6 +11934,12 @@ VTSkip:
         If EdgeCheck.Contains("@Contact2") Then Contact2Edge = True
         If EdgeCheck.Contains("@Contact3") Then Contact3Edge = True
     End Function
+
+    Public Sub DisableContactStroke()
+        Contact1Stroke = False
+        Contact2Stroke = False
+        Contact3Stroke = False
+    End Sub
 
 
    
@@ -16202,6 +16300,18 @@ NoRepeatRFiles:
             EdgeToRuinSecret = False
             OrgasmYesNo = False
             DomChat = "#RuinYourOrgasm"
+            If Contact1Edge = True Then
+                DomChat = "@Contact1 #RuinYourOrgasm"
+                Contact1Edge = False
+            End If
+            If Contact2Edge = True Then
+                DomChat = "@Contact2 #RuinYourOrgasm"
+                Contact2Edge = False
+            End If
+            If Contact3Edge = True Then
+                DomChat = "@Contact3 #RuinYourOrgasm"
+                Contact3Edge = False
+            End If
             TypingDelay()
             Return
 
@@ -16306,6 +16416,18 @@ NoRepeatOFiles:
             OrgasmYesNo = False
             'OrgasmAllowed = False
             DomChat = "#CumForMe"
+            If Contact1Edge = True Then
+                DomChat = "@Contact1 #CumForMe"
+                Contact1Edge = False
+            End If
+            If Contact2Edge = True Then
+                DomChat = "@Contact2 #CumForMe"
+                Contact2Edge = False
+            End If
+            If Contact3Edge = True Then
+                DomChat = "@Contact3 #CumForMe"
+                Contact3Edge = False
+            End If
             TypingDelay()
             Return
 
