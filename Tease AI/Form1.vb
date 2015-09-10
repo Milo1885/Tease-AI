@@ -2881,18 +2881,7 @@ FoundResponse:
             Return
         End If
 
-        If Not Group.Contains("D") And Not DomChat.Contains("@Contact1") And Not DomChat.Contains("@Contact2") And Not DomChat.Contains("@Contact3") Then
-
-            Dim GroupList As New List(Of String)
-            GroupList.Clear()
-
-            If Group.Contains("1") Then GroupList.Add("@Contact1 ")
-            If Group.Contains("2") Then GroupList.Add("@Contact2 ")
-            If Group.Contains("3") Then GroupList.Add("@Contact3 ")
-
-            DomChat = GroupList(randomizer.Next(0, GroupList.Count)) & DomChat
-
-        End If
+        
 
         TypingDelay()
 
@@ -4368,6 +4357,16 @@ SkipGotoSearch:
         'Debug.Print("Nullresponse = " & NullResponse)
         If DomTask.Contains("@NullResponse") Then NullResponse = True
 
+        If Not Group.Contains("D") And Not DomTask.Contains("@Contact1") And Not DomTask.Contains("@Contact2") And Not DomTask.Contains("@Contact3") Then
+            Dim GroupList As New List(Of String)
+            GroupList.Clear()
+            If Group.Contains("1") Then GroupList.Add("@Contact1 ")
+            If Group.Contains("2") Then GroupList.Add("@Contact2 ")
+            If Group.Contains("3") Then GroupList.Add("@Contact3 ")
+            DomTask = DomTask & GroupList(randomizer.Next(0, GroupList.Count))
+        End If
+
+
         If NullResponse = True Then
             Timer1.Stop()
             GoTo NullResponse
@@ -4473,6 +4472,8 @@ SkipGotoSearch:
                 'Debug.Print("SubStroking = " & SubStroking)
                 'Debug.Print("SubEdging  = " & SubEdging)
                 'Debug.Print("SubHoldingEdge = " & SubHoldingEdge)
+
+
 
                 If GlitterTease = True And JustShowedBlogImage = False Then GoTo TryNextWithTease
 
@@ -5084,6 +5085,15 @@ NoResponse:
 
         If DomChat.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
         If DomChat.Contains("@NullResponse") Then NullResponse = True
+
+        If Not Group.Contains("D") And Not DomChat.Contains("@Contact1") And Not DomChat.Contains("@Contact2") And Not DomChat.Contains("@Contact3") Then
+            Dim GroupList As New List(Of String)
+            GroupList.Clear()
+            If Group.Contains("1") Then GroupList.Add("@Contact1 ")
+            If Group.Contains("2") Then GroupList.Add("@Contact2 ")
+            If Group.Contains("3") Then GroupList.Add("@Contact3 ")
+            DomChat = DomChat & GroupList(randomizer.Next(0, GroupList.Count))
+        End If
 
         If NullResponse = True Then
             SendTimer.Stop()
