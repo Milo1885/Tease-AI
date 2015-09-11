@@ -456,7 +456,10 @@ Public Class Form1
     Dim Contact2Stroke As Boolean
     Dim Contact3Stroke As Boolean
 
-
+    Dim ReturnFileText As String
+    Dim ReturnStrokeTauntVal As String
+    Dim ReturnSubState As String
+    Dim ReturnFlag As Boolean
 
 
 
@@ -3860,6 +3863,7 @@ AcceptAnswer:
             Debug.Print("CHeck")
 
             If lines(line) = "@End" Then
+                If RiskyEdges = True Then RiskyEdges = False
                 If LastScript = True Then
                     LastScript = False
                     EndTease = True
@@ -3878,9 +3882,25 @@ AcceptAnswer:
                     DomWMP.Ctlcontrols.stop()
                     frmApps.BTNHypnoGenStart.Text = "Guide Me!"
                 End If
-                'If AvoidTheEdgeStroking = True Then
-                'DomWMP.Ctlcontrols.play()
-                'End If
+                If ReturnFlag = True Then
+                    ReturnFlag = False
+                    FileText = ReturnFileText
+                    StrokeTauntVal = ReturnStrokeTauntVal
+                    If ReturnSubState = "Stroking" Then
+                        DomTask = "Get back to stroking @StartStroking"
+                    End If
+                    If ReturnSubState = "Edging" Or ReturnSubState = "HoldingTheEdge" Then
+                        DomTask = "Start getting yourself to the edge again @Edge"
+                        SubStroking = True
+                    End If
+                    If ReturnSubState = "CBTBalls" Then
+                        DomTask = "Now let's get back to busting those #Balls @CBTBalls"
+                    End If
+                    If ReturnSubState = "CBTCock" Then
+                        DomTask = "Now let's get back to abusing that #Cock @CBTCock"
+                    End If
+                    TypingDelayGeneric()
+                End If
                 ScriptTimer.Stop()
                 Return
             End If
@@ -3897,8 +3917,8 @@ AcceptAnswer:
                 ScriptTimer.Stop()
             End If
 
-            If RunningScript = False And AvoidTheEdgeGame = False Then
-                Debug.Print("Is this being called?")
+            If RunningScript = False And AvoidTheEdgeGame = False And ReturnFlag = False Then
+                Debug.Print("End Check StrokeTauntVal = " & StrokeTauntVal)
                 If lines(line + 1) = "@End" Then 'Or lines(line + 1) = "@Thought" Then
                     ' If ShowThought = True Or ShowEdgeThought = True Then ThoughtEnd = True
                     Debug.Print("And this??")
@@ -11750,6 +11770,9 @@ VTSkip:
         If StringClean.Contains("@PlayRiskyPick") Then
             RiskyDeal = True
             'FrmCardList.RiskyRound += 1
+            FrmCardList.TCGames.SelectTab(2)
+            FrmCardList.Show()
+            FrmCardList.Focus()
             FrmCardList.InitializeRiskyDeal()
             StringClean = StringClean.Replace("@PlayRiskyPick", "")
             'Debug.Print("NullResponse Called")
@@ -11853,6 +11876,7 @@ VTSkip:
             Else
                 FileGoto = "(Risky Tease)"
             End If
+            FrmCardList.RiskyState = False
             SkipGotoLine = True
             GetGoto()
             StringClean = StringClean.Replace("@RiskyState", "")
@@ -11864,6 +11888,43 @@ VTSkip:
 
         If StringClean.Contains("@EmoteMessage ") Then
             StringClean = StringClean.Replace("@EmoteMessage ", "")
+        End If
+
+        If StringClean.Contains("@CallReturn(") Then
+
+            ReturnFileText = FileText
+            ReturnStrokeTauntVal = StrokeTauntVal
+            GetSubState()
+            ReturnFlag = True
+
+            Dim CheckFlag As String = StringClean & " some test garbage"
+            Dim CFIndex As Integer = StringClean.IndexOf("@CallReturn(") + 12
+            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
+            CheckFlag = CheckFlag.Split(")")(0)
+            CheckFlag = CheckFlag.Replace("@CallReturn(", "")
+            Dim CallReplace As String = CheckFlag
+
+            If CheckFlag.Contains(",") Then
+
+                CheckFlag = CheckFlag.Replace(", ", ",")
+                CheckFlag = CheckFlag.Replace(" ,", ",")
+                Dim CallSplit As String() = CheckFlag.Split(",")
+                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CallSplit(0)
+                FileGoto = CallSplit(1)
+                SkipGotoLine = True
+                GetGoto()
+
+            Else
+
+                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag
+                StrokeTauntVal = -1
+
+            End If
+            ScriptTick = 4
+            ScriptTimer.Start()
+
+            StringClean = StringClean.Replace("@CallReturn(" & CallReplace & ")", "")
+
         End If
 
         If StringClean.Contains("@Call(") Then
@@ -11951,7 +12012,21 @@ VTSkip:
         Contact3Stroke = False
     End Sub
 
+    Public Sub GetSubState()
 
+        ReturnSubState = "Rest"
+        If SubStroking = True Then ReturnSubState = "Stroking"
+        If SubEdging = True Then ReturnSubState = "Edging"
+        If SubHoldingEdge = True Then ReturnSubState = "Holding The Edge"
+        If CBTBallsActive = True Then ReturnSubState = "CBTBalls"
+        If CBTCockActive = True Then ReturnSubState = "CBTCock"
+        If CensorshipGame = True Then ReturnSubState = "Censorship Sucks"
+        If AvoidTheEdgeGame = True Then ReturnSubState = "Avoid The Edge"
+        If RLGLGame = True Then ReturnSubState = "RLGL"
+
+
+
+    End Sub
    
 
     Public Sub EdgePace()
@@ -20032,6 +20107,27 @@ TryNext:
         SettingsList.Add("DomWMP Position: " & DomWMP.Ctlcontrols.currentPosition)
         SettingsList.Add("DomWMP PlayState: " & DomWMP.playState)
 
+        SettingsList.Add("RiskyDeal: " & RiskyDeal)
+        SettingsList.Add("RiskyEdges: " & RiskyEdges)
+        SettingsList.Add("RiskyDelay: " & RiskyDelay)
+        SettingsList.Add("FinalRiskyPick: " & FinalRiskyPick)
+
+        SettingsList.Add("SysMes: " & SysMes)
+        SettingsList.Add("EmoMes: " & EmoMes)
+
+        SettingsList.Add("Contact1Edge: " & Contact1Edge)
+        SettingsList.Add("Contact2Edge: " & Contact2Edge)
+        SettingsList.Add("Contact3Edge: " & Contact3Edge)
+
+        SettingsList.Add("Contact1Stroke: " & Contact1Stroke)
+        SettingsList.Add("Contact2Stroke: " & Contact2Stroke)
+        SettingsList.Add("Contact3Stroke: " & Contact3Stroke)
+
+        SettingsList.Add("ReturnFileText: " & ReturnFileText)
+        SettingsList.Add("ReturnStrokeTauntVal: " & ReturnStrokeTauntVal)
+        SettingsList.Add("ReturnSubState: " & ReturnSubState)
+        SettingsList.Add("ReturnFlag: " & ReturnFlag)
+
         ' WMPLib.WMPPlayState.wmppsStopped)
 
         Dim SettingsString As String = ""
@@ -20519,7 +20615,6 @@ TryNext:
         SubtitleCount = SettingsList(273).Replace("SubtitleCount: ", "")
         VidFile = SettingsList(274).Replace("VidFile: ", "")
 
-
         Timer1.Enabled = SettingsList(275).Replace("Timer1 Enabled: ", "")
         SendTimer.Enabled = SettingsList(276).Replace("SendTimerTimer Enabled: ", "")
         IsTypingTimer.Enabled = SettingsList(277).Replace("IsTypingTimer Enabled: ", "")
@@ -20568,9 +20663,24 @@ TryNext:
             If SettingsList(312).Replace("DomWMP PlayState: ", "") = "3" Then DomWMP.Ctlcontrols.play()
         End If
 
-        SettingsList.Add("DomWMP PlayState = " & DomWMP.playState)
 
-        ' WMPLib.WMPPlayState.wmppsStopped)
+        RiskyDeal = SettingsList(313).Replace("RiskyDeal: ", "")
+        RiskyEdges = SettingsList(314).Replace("RiskyEdges: ", "")
+        RiskyDelay = SettingsList(315).Replace("RiskyDelay: ", "")
+        FinalRiskyPick = SettingsList(316).Replace("FinalRiskyPick: ", "")
+        SysMes = SettingsList(317).Replace("SysMes: ", "")
+        EmoMes = SettingsList(318).Replace("EmoMes: ", "")
+        Contact1Edge = SettingsList(319).Replace("Contact1Edge: ", "")
+        Contact2Edge = SettingsList(320).Replace("Contact2Edge: ", "")
+        Contact3Edge = SettingsList(321).Replace("Contact3Edge: ", "")
+        Contact1Stroke = SettingsList(322).Replace("Contact1Stroke: ", "")
+        Contact2Stroke = SettingsList(323).Replace("Contact2Stroke: ", "")
+        Contact3Stroke = SettingsList(324).Replace("Contact3Stroke: ", "")
+        ReturnFileText = SettingsList(325).Replace("ReturnFileText: ", "")
+        ReturnStrokeTauntVal = SettingsList(326).Replace("ReturnStrokeTauntVal: ", "")
+        ReturnSubState = SettingsList(327).Replace("ReturnSubState: ", "")
+        ReturnFlag = SettingsList(328).Replace("ReturnFlag: ", "")
+
 
 
 

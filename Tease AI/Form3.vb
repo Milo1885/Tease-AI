@@ -4990,68 +4990,68 @@ Card9:
         If BTNRisk1.Text <> "" Then
             Risk1.ForeColor = Color.Black
             Risk1.Text = RiskyShuffled(0)
-            EdgesOwed = Val(Risk1.Text)
+            EdgesOwed = Val(RiskyShuffled(0))
         End If
 
         If BTNRisk2.Text <> "" Then
             Risk2.ForeColor = Color.Black
             Risk2.Text = RiskyShuffled(1)
-            EdgesOwed = Val(Risk2.Text)
+            EdgesOwed = Val(RiskyShuffled(1))
         End If
         If BTNRisk3.Text <> "" Then
             Risk3.ForeColor = Color.Black
             Risk3.Text = RiskyShuffled(2)
-            EdgesOwed = Val(Risk3.Text)
+            EdgesOwed = Val(RiskyShuffled(2))
         End If
         If BTNRisk4.Text <> "" Then
             Risk4.ForeColor = Color.Black
             Risk4.Text = RiskyShuffled(3)
-            EdgesOwed = Val(Risk4.Text)
+            EdgesOwed = Val(RiskyShuffled(3))
         End If
         If BTNRisk5.Text <> "" Then
             Risk5.ForeColor = Color.Black
             Risk5.Text = RiskyShuffled(4)
-            EdgesOwed = Val(Risk5.Text)
+            EdgesOwed = Val(RiskyShuffled(4))
         End If
         If BTNRisk6.Text <> "" Then
             Risk6.ForeColor = Color.Black
             Risk6.Text = RiskyShuffled(5)
-            EdgesOwed = Val(Risk6.Text)
+            EdgesOwed = Val(RiskyShuffled(5))
         End If
         If BTNRisk7.Text <> "" Then
             Risk7.ForeColor = Color.Black
             Risk7.Text = RiskyShuffled(6)
-            EdgesOwed = Val(Risk7.Text)
+            EdgesOwed = Val(RiskyShuffled(6))
         End If
         If BTNRisk8.Text <> "" Then
             Risk8.ForeColor = Color.Black
             Risk8.Text = RiskyShuffled(7)
-            EdgesOwed = Val(Risk8.Text)
+            EdgesOwed = Val(RiskyShuffled(7))
         End If
         If BTNRisk9.Text <> "" Then
             Risk9.ForeColor = Color.Black
             Risk9.Text = RiskyShuffled(8)
-            EdgesOwed = Val(Risk9.Text)
+            EdgesOwed = Val(RiskyShuffled(8))
         End If
         If BTNRisk10.Text <> "" Then
             Risk10.ForeColor = Color.Black
             Risk10.Text = RiskyShuffled(9)
-            EdgesOwed = Val(Risk10.Text)
+            EdgesOwed = Val(RiskyShuffled(9))
         End If
         If BTNRisk11.Text <> "" Then
             Risk11.ForeColor = Color.Black
             Risk11.Text = RiskyShuffled(10)
-            EdgesOwed = Val(Risk11.Text)
+            EdgesOwed = Val(RiskyShuffled(10))
         End If
         If BTNRisk12.Text <> "" Then
             Risk12.ForeColor = Color.Black
             Risk12.Text = RiskyShuffled(11)
-            EdgesOwed = Val(Risk12.Text)
+            EdgesOwed = Val(RiskyShuffled(11))
         End If
         If BTNRisk13.Text <> "" Then
             Risk13.ForeColor = Color.Black
             Risk13.Text = RiskyShuffled(12)
-            EdgesOwed = Val(Risk13.Text)
+            EdgesOwed = Val(RiskyShuffled(12))
         End If
         If BTNRisk14.Text <> "" Then
             Risk14.ForeColor = Color.Black
@@ -5061,53 +5061,83 @@ Card9:
         If BTNRisk15.Text <> "" Then
             Risk15.ForeColor = Color.Black
             Risk15.Text = RiskyShuffled(14)
-            EdgesOwed = Val(Risk15.Text)
+            EdgesOwed = Val(RiskyShuffled(14))
         End If
         If BTNRisk16.Text <> "" Then
             Risk16.ForeColor = Color.Black
             Risk16.Text = RiskyShuffled(15)
-            EdgesOwed = Val(Risk16.Text)
+            EdgesOwed = Val(RiskyShuffled(15))
         End If
         If BTNRisk17.Text <> "" Then
             Risk17.ForeColor = Color.Black
             Risk17.Text = RiskyShuffled(16)
-            EdgesOwed = Val(Risk17.Text)
+            EdgesOwed = Val(RiskyShuffled(16))
         End If
         If BTNRisk18.Text <> "" Then
             Risk18.ForeColor = Color.Black
             Risk18.Text = RiskyShuffled(17)
-            EdgesOwed = Val(Risk18.Text)
+            EdgesOwed = Val(RiskyShuffled(17))
         End If
         If BTNRisk19.Text <> "" Then
             Risk19.ForeColor = Color.Black
             Risk19.Text = RiskyShuffled(18)
-            EdgesOwed = Val(Risk19.Text)
+            EdgesOwed = Val(RiskyShuffled(18))
         End If
         If BTNRisk20.Text <> "" Then
             Risk20.ForeColor = Color.Black
             Risk20.Text = RiskyShuffled(19)
-            EdgesOwed = Val(Risk20.Text)
+            EdgesOwed = Val(RiskyShuffled(19))
         End If
         If BTNRisk21.Text <> "" Then
             Risk21.ForeColor = Color.Black
             Risk21.Text = RiskyShuffled(20)
-            EdgesOwed = Val(Risk21.Text)
+            EdgesOwed = Val(RiskyShuffled(20))
         End If
         If BTNRisk22.Text <> "" Then
             Risk22.ForeColor = Color.Black
             Risk22.Text = RiskyShuffled(21)
-            EdgesOwed = Val(Risk22.Text)
+            EdgesOwed = Val(RiskyShuffled(21))
         End If
         If BTNRisk23.Text <> "" Then
             Risk23.ForeColor = Color.Black
             Risk23.Text = RiskyShuffled(22)
-            EdgesOwed = Val(Risk23.Text)
+            EdgesOwed = Val(RiskyShuffled(22))
         End If
         If BTNRisk24.Text <> "" Then
             Risk24.ForeColor = Color.Black
             Risk24.Text = RiskyShuffled(23)
-            EdgesOwed = Val(Risk24.Text)
+            EdgesOwed = Val(RiskyShuffled(23))
         End If
+
+        Debug.Print("EDGES OWED = " & EdgesOwed)
+
+        'If LBLRisk100.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 100 Then EdgesOwed = 100
+        'If LBLRisk95.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 95 Then EdgesOwed = 95
+        'If LBLRisk90.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 90 Then EdgesOwed = 90
+        'If LBLRisk85.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 85 Then EdgesOwed = 85
+        'If LBLRisk80.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 80 Then EdgesOwed = 80
+        'If LBLRisk75.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 75 Then EdgesOwed = 75
+
+        'If LBLRisk70.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 70 Then EdgesOwed = 70
+        'If LBLRisk65.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 65 Then EdgesOwed = 65
+        'If LBLRisk60.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 60 Then EdgesOwed = 60
+        'If LBLRisk55.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 55 Then EdgesOwed = 55
+        'If LBLRisk50.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 50 Then EdgesOwed = 50
+        'If LBLRisk40.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 40 Then EdgesOwed = 40
+
+        'If LBLRisk30.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 30 Then EdgesOwed = 30
+        'If LBLRisk25.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 25 Then EdgesOwed = 25
+        'If LBLRisk20.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 20 Then EdgesOwed = 20
+        'If LBLRisk15.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 15 Then EdgesOwed = 15
+        'If LBLRisk12.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 12 Then EdgesOwed = 12
+        'If LBLRisk10.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 10 Then EdgesOwed = 10
+
+        'If LBLRisk7.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 7 Then EdgesOwed = 7
+        'If LBLRisk5.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 5 Then EdgesOwed = 5
+        'If LBLRisk4.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 4 Then EdgesOwed = 4
+        'If LBLRisk3.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 3 Then EdgesOwed = 3
+        'If LBLRisk2.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 2 Then EdgesOwed = 2
+        'If LBLRisk1.ForeColor = Color.White And Val(RiskyShuffled(RiskyPickNumber - 1)) <> 1 Then EdgesOwed = 1
 
 
         TokensPaid = 1000 / EdgesOwed

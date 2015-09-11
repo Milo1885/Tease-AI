@@ -1,6 +1,11 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+
+# Changelog - Patch 45
+
+9/11 12:29 pm - Various bugfixes and tweaks in preparation of Patch 45
+
 9/09 12:35 pm - Finished new Glitter implementation
 
 9/09 10:16 am - Improved Lazy Sub. Enhance the overall aesthetics as well as adding the option to set keyboard shortcuts for each of the Lazy Sub buttons
@@ -38,11 +43,6 @@ Added Command @EmoteMessage - When this Command is used, "Domme is typing" will 
 9/03 3:02 am - Finished image handling tweaks for Patch 45
 
 9/01 2:04 - More Risky Pick work done
-
-# Bitbucket note - I haven't pushed a new build in a while because I was waiting to finish Risky Pick. All the work I've done in the meantime has grown so massive that I'm scared of losing it, so I'm going to go ahead and push this build through. Risky Pick is functional, but does not include the script necessary to make it run as it still needs some work, so if you do compile this, don't press "play" in there for now  
-
-
-# Changelog - Patch 45
 
 Added new game Risky Pick
 
