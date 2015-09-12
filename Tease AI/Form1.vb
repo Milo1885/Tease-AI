@@ -10131,8 +10131,6 @@ OrgasmDecided:
         End If
 
 
-
-
         If StringClean.Contains("@EndTease") Then
             StopEverything()
             ResetButton()
@@ -10150,7 +10148,13 @@ OrgasmDecided:
             JustShowedBlogImage = True
             GetTnAList()
             ClearMainPictureBox()
-            mainPictureBox.Image = Image.FromFile(AssList(randomizer.Next(0, AssList.Count)))
+            Dim ButtPic As String = BoobList(randomizer.Next(0, BoobList.Count))
+
+            If ButtPic.Contains("\") Then
+                mainPictureBox.Image = Image.FromFile(ButtPic)
+            Else
+                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(ButtPic)))
+            End If
             ShowImageInfo()
             StringClean = StringClean.Replace("@ShowButtImage", "")
         End If
@@ -10159,7 +10163,14 @@ OrgasmDecided:
             JustShowedBlogImage = True
             GetTnAList()
             ClearMainPictureBox()
-            mainPictureBox.Image = Image.FromFile(BoobList(randomizer.Next(0, BoobList.Count)))
+            Dim BoobPic As String = BoobList(randomizer.Next(0, BoobList.Count))
+
+            If BoobPic.Contains("\") Then
+                mainPictureBox.Image = Image.FromFile(BoobPic)
+            Else
+                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(BoobPic)))
+            End If
+
             ShowImageInfo()
             StringClean = StringClean.Replace("@ShowBoobsImage", "")
         End If

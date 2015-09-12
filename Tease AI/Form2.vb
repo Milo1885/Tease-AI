@@ -9694,15 +9694,33 @@ WhyUMakeMeDoDis:
 
     Private Sub BP2_Click(sender As System.Object, e As System.EventArgs) Handles BP2.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 BP2.Image.Dispose()
-                'BP2.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            BP2.Load(OpenFileDialog1.FileName)
-            My.Settings.BP2 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            BP2.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardBP2.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardBP2.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardBP2.bmp")
+            resizedcard.Dispose()
+
+            Try
+                BP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP2.bmp")
+                My.Settings.BP2 = Application.StartupPath & "\Images\Cards\CardBP2.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -9734,15 +9752,33 @@ WhyUMakeMeDoDis:
 
     Private Sub BP3_Click(sender As System.Object, e As System.EventArgs) Handles BP3.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 BP3.Image.Dispose()
-                'BP3.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            BP3.Load(OpenFileDialog1.FileName)
-            My.Settings.BP3 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            BP3.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardBP3.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardBP3.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardBP3.bmp")
+            resizedcard.Dispose()
+
+            Try
+                BP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP3.bmp")
+                My.Settings.BP3 = Application.StartupPath & "\Images\Cards\CardBP3.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -9774,15 +9810,33 @@ WhyUMakeMeDoDis:
 
     Private Sub BP4_Click(sender As System.Object, e As System.EventArgs) Handles BP4.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 BP4.Image.Dispose()
-                'BP4.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            BP4.Load(OpenFileDialog1.FileName)
-            My.Settings.BP4 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            BP4.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardBP4.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardBP4.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardBP4.bmp")
+            resizedcard.Dispose()
+
+            Try
+                BP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP4.bmp")
+                My.Settings.BP4 = Application.StartupPath & "\Images\Cards\CardBP4.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -9814,15 +9868,33 @@ WhyUMakeMeDoDis:
 
     Private Sub BP5_Click(sender As System.Object, e As System.EventArgs) Handles BP5.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 BP5.Image.Dispose()
-                'BP5.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            BP5.Load(OpenFileDialog1.FileName)
-            My.Settings.BP5 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            BP5.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardBP5.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardBP5.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardBP5.bmp")
+            resizedcard.Dispose()
+
+            Try
+                BP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP5.bmp")
+                My.Settings.BP5 = Application.StartupPath & "\Images\Cards\CardBP5.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -9854,15 +9926,33 @@ WhyUMakeMeDoDis:
 
     Private Sub BP6_Click(sender As System.Object, e As System.EventArgs) Handles BP6.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 BP6.Image.Dispose()
-                'BP6.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            BP6.Load(OpenFileDialog1.FileName)
-            My.Settings.BP6 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            BP6.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardBP6.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardBP6.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardBP6.bmp")
+            resizedcard.Dispose()
+
+            Try
+                BP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP6.bmp")
+                My.Settings.BP6 = Application.StartupPath & "\Images\Cards\CardBP6.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -9900,15 +9990,33 @@ WhyUMakeMeDoDis:
 
     Private Sub SP1_Click(sender As System.Object, e As System.EventArgs) Handles SP1.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 SP1.Image.Dispose()
-                'SP1.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            SP1.Load(OpenFileDialog1.FileName)
-            My.Settings.SP1 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            SP1.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardSP1.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardSP1.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardSP1.bmp")
+            resizedcard.Dispose()
+
+            Try
+                SP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP1.bmp")
+                My.Settings.SP1 = Application.StartupPath & "\Images\Cards\CardSP1.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -9939,15 +10047,33 @@ WhyUMakeMeDoDis:
     End Sub
     Private Sub SP2_Click(sender As System.Object, e As System.EventArgs) Handles SP2.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 SP2.Image.Dispose()
-                'SP2.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            SP2.Load(OpenFileDialog1.FileName)
-            My.Settings.SP2 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            SP2.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardSP2.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardSP2.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardSP2.bmp")
+            resizedcard.Dispose()
+
+            Try
+                SP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP2.bmp")
+                My.Settings.SP2 = Application.StartupPath & "\Images\Cards\CardSP2.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -9979,15 +10105,33 @@ WhyUMakeMeDoDis:
 
     Private Sub SP3_Click(sender As System.Object, e As System.EventArgs) Handles SP3.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 SP3.Image.Dispose()
-                'SP3.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            SP3.Load(OpenFileDialog1.FileName)
-            My.Settings.SP3 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            SP3.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardSP3.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardSP3.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardSP3.bmp")
+            resizedcard.Dispose()
+
+            Try
+                SP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP3.bmp")
+                My.Settings.SP3 = Application.StartupPath & "\Images\Cards\CardSP3.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -10019,15 +10163,33 @@ WhyUMakeMeDoDis:
 
     Private Sub SP4_Click(sender As System.Object, e As System.EventArgs) Handles SP4.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 SP4.Image.Dispose()
-                'SP4.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            SP4.Load(OpenFileDialog1.FileName)
-            My.Settings.SP4 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            SP4.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardSP4.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardSP4.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardSP4.bmp")
+            resizedcard.Dispose()
+
+            Try
+                SP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP4.bmp")
+                My.Settings.SP4 = Application.StartupPath & "\Images\Cards\CardSP4.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -10059,15 +10221,33 @@ WhyUMakeMeDoDis:
 
     Private Sub SP5_Click(sender As System.Object, e As System.EventArgs) Handles SP5.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 SP5.Image.Dispose()
-                'SP5.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            SP5.Load(OpenFileDialog1.FileName)
-            My.Settings.SP5 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            SP5.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardSP5.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardSP5.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardSP5.bmp")
+            resizedcard.Dispose()
+
+            Try
+                SP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP5.bmp")
+                My.Settings.SP5 = Application.StartupPath & "\Images\Cards\CardSP5.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -10099,15 +10279,33 @@ WhyUMakeMeDoDis:
 
     Private Sub SP6_Click(sender As System.Object, e As System.EventArgs) Handles SP6.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 SP6.Image.Dispose()
-                'SP6.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            SP6.Load(OpenFileDialog1.FileName)
-            My.Settings.SP6 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            SP6.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardSP6.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardSP6.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardSP6.bmp")
+            resizedcard.Dispose()
+
+            Try
+                SP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP6.bmp")
+                My.Settings.SP6 = Application.StartupPath & "\Images\Cards\CardSP6.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -10139,15 +10337,33 @@ WhyUMakeMeDoDis:
 
     Private Sub GP1_Click(sender As System.Object, e As System.EventArgs) Handles GP1.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 GP1.Image.Dispose()
-                'GP1.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            GP1.Load(OpenFileDialog1.FileName)
-            My.Settings.GP1 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            GP1.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardGP1.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardGP1.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardGP1.bmp")
+            resizedcard.Dispose()
+
+            Try
+                GP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP1.bmp")
+                My.Settings.GP1 = Application.StartupPath & "\Images\Cards\CardGP1.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -10185,15 +10401,33 @@ WhyUMakeMeDoDis:
 
     Private Sub GP2_Click(sender As System.Object, e As System.EventArgs) Handles GP2.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 GP2.Image.Dispose()
-                'GP2.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            GP2.Load(OpenFileDialog1.FileName)
-            My.Settings.GP2 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            GP2.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardGP2.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardGP2.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardGP2.bmp")
+            resizedcard.Dispose()
+
+            Try
+                GP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP2.bmp")
+                My.Settings.GP2 = Application.StartupPath & "\Images\Cards\CardGP2.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -10224,15 +10458,33 @@ WhyUMakeMeDoDis:
     End Sub
     Private Sub GP3_Click(sender As System.Object, e As System.EventArgs) Handles GP3.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 GP3.Image.Dispose()
-                'GP3.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            GP3.Load(OpenFileDialog1.FileName)
-            My.Settings.GP3 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            GP3.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardGP3.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardGP3.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardGP3.bmp")
+            resizedcard.Dispose()
+
+            Try
+                GP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP3.bmp")
+                My.Settings.GP3 = Application.StartupPath & "\Images\Cards\CardGP3.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -10264,15 +10516,33 @@ WhyUMakeMeDoDis:
 
     Private Sub GP4_Click(sender As System.Object, e As System.EventArgs) Handles GP4.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 GP4.Image.Dispose()
-                'GP4.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            GP4.Load(OpenFileDialog1.FileName)
-            My.Settings.GP4 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            GP4.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardGP4.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardGP4.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardGP4.bmp")
+            resizedcard.Dispose()
+
+            Try
+                GP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP4.bmp")
+                My.Settings.GP4 = Application.StartupPath & "\Images\Cards\CardGP4.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -10304,15 +10574,33 @@ WhyUMakeMeDoDis:
 
     Private Sub GP5_Click(sender As System.Object, e As System.EventArgs) Handles GP5.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 GP5.Image.Dispose()
-                'GP5.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            GP5.Load(OpenFileDialog1.FileName)
-            My.Settings.GP5 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            GP5.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardGP5.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardGP5.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardGP5.bmp")
+            resizedcard.Dispose()
+
+            Try
+                GP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP5.bmp")
+                My.Settings.GP5 = Application.StartupPath & "\Images\Cards\CardGP5.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
@@ -10344,15 +10632,33 @@ WhyUMakeMeDoDis:
 
     Private Sub GP6_Click(sender As System.Object, e As System.EventArgs) Handles GP6.Click
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+
+            FrmCardList.ClearAllCards()
+
             Try
                 GP6.Image.Dispose()
-                'GP6.Image = Nothing
-                GC.Collect()
             Catch
             End Try
-            GP6.Load(OpenFileDialog1.FileName)
-            My.Settings.GP6 = OpenFileDialog1.FileName
-            My.Settings.Save()
+            GP6.Image = Nothing
+            GC.Collect()
+
+            Dim originalcard As Image = Image.FromFile(OpenFileDialog1.FileName)
+            Dim resizedcard As Image = Form1.ResizeImage(originalcard, New Size(120, 165))
+            originalcard.Dispose()
+
+            If File.Exists(Application.StartupPath & "\Images\Cards\CardGP6.bmp") Then
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Images\Cards\CardGP6.bmp")
+            End If
+            resizedcard.Save(Application.StartupPath & "\Images\Cards\CardGP6.bmp")
+            resizedcard.Dispose()
+
+            Try
+                GP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP6.bmp")
+                My.Settings.GP6 = Application.StartupPath & "\Images\Cards\CardGP6.bmp"
+                My.Settings.Save()
+            Catch ex As Exception
+                MessageBox.Show("An error occurred - Card did not save correctly")
+            End Try
         End If
     End Sub
 
