@@ -611,7 +611,7 @@ Partial Class Form1
         Me.PNLTerms.Controls.Add(Me.Label85)
         Me.PNLTerms.Location = New System.Drawing.Point(0, 0)
         Me.PNLTerms.Name = "PNLTerms"
-        Me.PNLTerms.Size = New System.Drawing.Size(10, 1044)
+        Me.PNLTerms.Size = New System.Drawing.Size(1378, 1044)
         Me.PNLTerms.TabIndex = 162
         '
         'Label86
@@ -922,10 +922,10 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1374, 1012)
+        Me.Controls.Add(Me.PNLTerms)
         Me.Controls.Add(Me.LBLAMPM)
         Me.Controls.Add(Me.LBLDate)
         Me.Controls.Add(Me.LBLTime)
-        Me.Controls.Add(Me.PNLTerms)
         Me.Controls.Add(Me.PNLGlitter)
         Me.Controls.Add(Me.PNLFileTransfer)
         Me.Controls.Add(Me.domName)
