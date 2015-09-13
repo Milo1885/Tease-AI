@@ -1368,6 +1368,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         AdjustWindow()
 
+        TeaseAIClock.Start()
+
         FormLoading = False
 
         Debug.Print("Form1 Loading Finished")
@@ -18869,7 +18871,7 @@ TryNext:
 
 
 
-    Private Sub Button2_Click_1(sender As System.Object, e As System.EventArgs) Handles BTN1080.Click
+    Private Sub Button2_Click_1(sender As System.Object, e As System.EventArgs)
 
         If My.Settings.LargeUI = True Then Return
 
@@ -18883,7 +18885,7 @@ TryNext:
         ScrollChatDown()
     End Sub
 
-    Private Sub Button1_Click_2(sender As System.Object, e As System.EventArgs) Handles BTNCompact.Click
+    Private Sub Button1_Click_2(sender As System.Object, e As System.EventArgs)
 
         If My.Settings.SmallUI = True Then Return
 
@@ -18898,7 +18900,7 @@ TryNext:
 
     End Sub
 
-    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles BTN768.Click
+    Private Sub Button3_Click(sender As System.Object, e As System.EventArgs)
 
         If My.Settings.UI768 = True Then Return
 
@@ -20624,11 +20626,13 @@ TryNext:
 
         'PNLHope.Location = New Point(779, 214)
 
+        BTNShowHideApps.Location = New Point(10, Me.Height - 292)
+
         subName.Location = New Point(10, Me.Height - 69)
         subAvatar.Location = New Point(10, Me.Height - 258)
 
-        PNLGlitter.Height = Me.Height - 563
-        StatusUpdates.Height = Me.Height - 558
+        PNLGlitter.Height = Me.Height - 597
+        StatusUpdates.Height = Me.Height - 602
 
         DomWMP.Location = New Point(0, 0)
         DomWMP.Width = SplitContainer1.Width
@@ -20653,4 +20657,11 @@ TryNext:
 
 
 
+    Private Sub TeaseAIClock_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseAIClock.Tick
+
+        LBLTime.Text = Format(Now, "h:mm")
+        LBLAMPM.Text = Format(Now, "tt")
+        LBLDate.Text = Format(Now, "Long Date")
+
+    End Sub
 End Class

@@ -99,9 +99,6 @@ Partial Class Form1
         Me.ContactTimer = New System.Windows.Forms.Timer(Me.components)
         Me.BTNShowHideApps = New System.Windows.Forms.Button()
         Me.AudibleMetronome = New System.Windows.Forms.Timer(Me.components)
-        Me.BTNCompact = New System.Windows.Forms.Button()
-        Me.BTN1080 = New System.Windows.Forms.Button()
-        Me.BTN768 = New System.Windows.Forms.Button()
         Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
         Me.PNLGlitter = New System.Windows.Forms.Panel()
         Me.BWGlitter = New System.ComponentModel.BackgroundWorker()
@@ -128,6 +125,10 @@ Partial Class Form1
         Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DommeTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.TeaseAIClock = New System.Windows.Forms.Timer(Me.components)
+        Me.LBLTime = New System.Windows.Forms.Label()
+        Me.LBLDate = New System.Windows.Forms.Label()
+        Me.LBLAMPM = New System.Windows.Forms.Label()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -490,7 +491,7 @@ Partial Class Form1
         Me.sendButton.BackColor = System.Drawing.Color.SteelBlue
         Me.sendButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.sendButton.ForeColor = System.Drawing.Color.White
-        Me.sendButton.Location = New System.Drawing.Point(83, 474)
+        Me.sendButton.Location = New System.Drawing.Point(83, 309)
         Me.sendButton.Name = "sendButton"
         Me.sendButton.Size = New System.Drawing.Size(50, 24)
         Me.sendButton.TabIndex = 147
@@ -610,7 +611,7 @@ Partial Class Form1
         Me.PNLTerms.Controls.Add(Me.Label85)
         Me.PNLTerms.Location = New System.Drawing.Point(0, 0)
         Me.PNLTerms.Name = "PNLTerms"
-        Me.PNLTerms.Size = New System.Drawing.Size(1376, 1044)
+        Me.PNLTerms.Size = New System.Drawing.Size(10, 1044)
         Me.PNLTerms.TabIndex = 162
         '
         'Label86
@@ -712,7 +713,7 @@ Partial Class Form1
         '
         'BTNShowHideApps
         '
-        Me.BTNShowHideApps.BackColor = System.Drawing.Color.Transparent
+        Me.BTNShowHideApps.BackColor = System.Drawing.Color.SteelBlue
         Me.BTNShowHideApps.Cursor = System.Windows.Forms.Cursors.Hand
         Me.BTNShowHideApps.FlatAppearance.BorderColor = System.Drawing.Color.SteelBlue
         Me.BTNShowHideApps.FlatAppearance.BorderSize = 0
@@ -721,9 +722,9 @@ Partial Class Form1
         Me.BTNShowHideApps.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNShowHideApps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNShowHideApps.ForeColor = System.Drawing.Color.White
-        Me.BTNShowHideApps.Location = New System.Drawing.Point(10, 230)
+        Me.BTNShowHideApps.Location = New System.Drawing.Point(17, 639)
         Me.BTNShowHideApps.Name = "BTNShowHideApps"
-        Me.BTNShowHideApps.Size = New System.Drawing.Size(250, 27)
+        Me.BTNShowHideApps.Size = New System.Drawing.Size(250, 24)
         Me.BTNShowHideApps.TabIndex = 163
         Me.BTNShowHideApps.Text = "Hide Apps"
         Me.BTNShowHideApps.UseVisualStyleBackColor = False
@@ -731,44 +732,6 @@ Partial Class Form1
         'AudibleMetronome
         '
         Me.AudibleMetronome.Interval = 30
-        '
-        'BTNCompact
-        '
-        Me.BTNCompact.BackColor = System.Drawing.Color.White
-        Me.BTNCompact.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNCompact.ForeColor = System.Drawing.Color.SteelBlue
-        Me.BTNCompact.Location = New System.Drawing.Point(93, 263)
-        Me.BTNCompact.Name = "BTNCompact"
-        Me.BTNCompact.Size = New System.Drawing.Size(84, 25)
-        Me.BTNCompact.TabIndex = 164
-        Me.BTNCompact.Text = "Compact"
-        Me.BTNCompact.UseVisualStyleBackColor = False
-        '
-        'BTN1080
-        '
-        Me.BTN1080.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(170, Byte), Integer))
-        Me.BTN1080.FlatAppearance.BorderSize = 2
-        Me.BTN1080.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTN1080.ForeColor = System.Drawing.Color.White
-        Me.BTN1080.Location = New System.Drawing.Point(176, 263)
-        Me.BTN1080.Name = "BTN1080"
-        Me.BTN1080.Size = New System.Drawing.Size(84, 25)
-        Me.BTN1080.TabIndex = 165
-        Me.BTN1080.Text = "1080"
-        Me.BTN1080.UseVisualStyleBackColor = False
-        '
-        'BTN768
-        '
-        Me.BTN768.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(170, Byte), Integer))
-        Me.BTN768.FlatAppearance.BorderSize = 2
-        Me.BTN768.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTN768.ForeColor = System.Drawing.Color.White
-        Me.BTN768.Location = New System.Drawing.Point(10, 263)
-        Me.BTN768.Name = "BTN768"
-        Me.BTN768.Size = New System.Drawing.Size(84, 25)
-        Me.BTN768.TabIndex = 768
-        Me.BTN768.Text = "768"
-        Me.BTN768.UseVisualStyleBackColor = False
         '
         'StatusUpdates
         '
@@ -914,6 +877,43 @@ Partial Class Form1
         '
         Me.DommeTimer.Interval = 1000
         '
+        'TeaseAIClock
+        '
+        Me.TeaseAIClock.Interval = 1000
+        '
+        'LBLTime
+        '
+        Me.LBLTime.BackColor = System.Drawing.Color.Transparent
+        Me.LBLTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLTime.ForeColor = System.Drawing.Color.White
+        Me.LBLTime.Location = New System.Drawing.Point(10, 232)
+        Me.LBLTime.Name = "LBLTime"
+        Me.LBLTime.Size = New System.Drawing.Size(250, 36)
+        Me.LBLTime.TabIndex = 771
+        Me.LBLTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLDate
+        '
+        Me.LBLDate.BackColor = System.Drawing.Color.Transparent
+        Me.LBLDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLDate.ForeColor = System.Drawing.Color.White
+        Me.LBLDate.Location = New System.Drawing.Point(12, 269)
+        Me.LBLDate.Name = "LBLDate"
+        Me.LBLDate.Size = New System.Drawing.Size(248, 21)
+        Me.LBLDate.TabIndex = 772
+        Me.LBLDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLAMPM
+        '
+        Me.LBLAMPM.BackColor = System.Drawing.Color.Transparent
+        Me.LBLAMPM.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLAMPM.ForeColor = System.Drawing.Color.White
+        Me.LBLAMPM.Location = New System.Drawing.Point(173, 243)
+        Me.LBLAMPM.Name = "LBLAMPM"
+        Me.LBLAMPM.Size = New System.Drawing.Size(40, 24)
+        Me.LBLAMPM.TabIndex = 773
+        Me.LBLAMPM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -922,11 +922,11 @@ Partial Class Form1
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1374, 1012)
+        Me.Controls.Add(Me.LBLAMPM)
+        Me.Controls.Add(Me.LBLDate)
+        Me.Controls.Add(Me.LBLTime)
         Me.Controls.Add(Me.PNLTerms)
         Me.Controls.Add(Me.PNLGlitter)
-        Me.Controls.Add(Me.BTN768)
-        Me.Controls.Add(Me.BTN1080)
-        Me.Controls.Add(Me.BTNCompact)
         Me.Controls.Add(Me.PNLFileTransfer)
         Me.Controls.Add(Me.domName)
         Me.Controls.Add(Me.subAvatar)
@@ -1039,9 +1039,6 @@ Partial Class Form1
     Friend WithEvents ContactTimer As System.Windows.Forms.Timer
     Friend WithEvents BTNShowHideApps As System.Windows.Forms.Button
     Friend WithEvents AudibleMetronome As System.Windows.Forms.Timer
-    Friend WithEvents BTNCompact As System.Windows.Forms.Button
-    Friend WithEvents BTN1080 As System.Windows.Forms.Button
-    Friend WithEvents BTN768 As System.Windows.Forms.Button
     Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
     Friend WithEvents PNLGlitter As System.Windows.Forms.Panel
     Friend WithEvents BWGlitter As System.ComponentModel.BackgroundWorker
@@ -1071,5 +1068,9 @@ Partial Class Form1
     Friend WithEvents DommeTimer As System.Windows.Forms.Timer
     Friend WithEvents PNLMediaBar As System.Windows.Forms.Panel
     Friend WithEvents PNLHope As System.Windows.Forms.Panel
+    Friend WithEvents TeaseAIClock As System.Windows.Forms.Timer
+    Friend WithEvents LBLTime As System.Windows.Forms.Label
+    Friend WithEvents LBLDate As System.Windows.Forms.Label
+    Friend WithEvents LBLAMPM As System.Windows.Forms.Label
 
 End Class
