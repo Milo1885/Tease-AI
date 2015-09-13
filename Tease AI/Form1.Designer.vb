@@ -611,7 +611,7 @@ Partial Class Form1
         Me.PNLTerms.Controls.Add(Me.Label85)
         Me.PNLTerms.Location = New System.Drawing.Point(0, 0)
         Me.PNLTerms.Name = "PNLTerms"
-        Me.PNLTerms.Size = New System.Drawing.Size(1378, 1044)
+        Me.PNLTerms.Size = New System.Drawing.Size(10, 1044)
         Me.PNLTerms.TabIndex = 162
         '
         'Label86

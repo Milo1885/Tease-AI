@@ -1289,4 +1289,251 @@ Public Class frmApps
     End Sub
 
     
+    Private Sub Button31_Click_1(sender As System.Object, e As System.EventArgs) Handles Button31.Click
+        
+        ColorBlue()
+
+    End Sub
+
+    Public Sub ColorBlue()
+        Try
+            Form1.BackgroundImage.Dispose()
+        Catch
+        End Try
+        Form1.BackgroundImage = Nothing
+        Form1.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\TAIBack.png")
+
+        Form1.subName.BackColor = Color.SteelBlue
+        Form1.BTNShowHideApps.BackColor = Color.SteelBlue
+        Form1.domName.BackColor = Color.SteelBlue
+
+        Form1.browsefolderButton.BackColor = Color.SteelBlue
+        Form1.PNLMediaBar.BackColor = Color.SteelBlue
+        Form1.PNLHope.BackColor = Color.SteelBlue
+        Form1.PNLChatBox.BackColor = Color.SteelBlue
+
+        Form1.previousButton.BackColor = Color.SteelBlue
+        Form1.nextButton.BackColor = Color.SteelBlue
+        Form1.BTNLoadVideo.BackColor = Color.SteelBlue
+        Form1.BTNVideoControls.BackColor = Color.SteelBlue
+
+        Form1.MediaButton.BackColor = Color.SteelBlue
+        Form1.SaveBlogImage.BackColor = Color.SteelBlue
+        Form1.SettingsButton.BackColor = Color.SteelBlue
+
+        Me.BackColor = Color.SteelBlue
+        PNLAppHome.BackColor = Color.SteelBlue
+        Button5.BackColor = Color.SteelBlue
+
+        BTNRun.BackColor = Color.SteelBlue
+        BTNSuspend.BackColor = Color.SteelBlue
+        BTNResume.BackColor = Color.SteelBlue
+        BTNReset.BackColor = Color.SteelBlue
+
+        FrmWritingTask.PNLWritingTask.BackColor = Color.SteelBlue
+
+        Form1.SplitContainer1.Panel2.BackColor = Color.SteelBlue
+
+        PNLLazySub.BackColor = Color.SteelBlue
+        Label27.ForeColor = Color.SteelBlue
+        Panel1.BackColor = Color.SteelBlue
+        LBLWishListName.ForeColor = Color.SteelBlue
+        Panel2.BackColor = Color.SteelBlue
+        PNLPlaylist.BackColor = Color.SteelBlue
+        PNLAppRandomizer.BackColor = Color.SteelBlue
+        PictureBox3.BackColor = Color.SteelBlue
+
+
+
+
+
+
+
+
+        My.Settings.UIColor = ""
+        My.Settings.Save()
+    End Sub
+
+    Private Sub Button32_Click_1(sender As System.Object, e As System.EventArgs) Handles Button32.Click
+
+        ColorPurple()
+
+    End Sub
+
+    Public Sub ColorPurple()
+
+        Try
+            Form1.BackgroundImage.Dispose()
+        Catch
+        End Try
+        Form1.BackgroundImage = Nothing
+        Form1.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\TAIBackPurple.png")
+
+        Form1.subName.BackColor = Color.DarkMagenta
+        Form1.BTNShowHideApps.BackColor = Color.DarkMagenta
+        Form1.domName.BackColor = Color.DarkMagenta
+
+        Form1.browsefolderButton.BackColor = Color.DarkMagenta
+        Form1.PNLMediaBar.BackColor = Color.DarkMagenta
+        Form1.PNLHope.BackColor = Color.DarkMagenta
+        Form1.PNLChatBox.BackColor = Color.DarkMagenta
+
+        Form1.previousButton.BackColor = Color.DarkMagenta
+        Form1.nextButton.BackColor = Color.DarkMagenta
+        Form1.BTNLoadVideo.BackColor = Color.DarkMagenta
+        Form1.BTNVideoControls.BackColor = Color.DarkMagenta
+
+        Form1.MediaButton.BackColor = Color.DarkMagenta
+        Form1.SaveBlogImage.BackColor = Color.DarkMagenta
+        Form1.SettingsButton.BackColor = Color.DarkMagenta
+
+        Me.BackColor = Color.DarkMagenta
+        PNLAppHome.BackColor = Color.DarkMagenta
+        Button5.BackColor = Color.DarkMagenta
+
+        Form1.SplitContainer1.Panel2.BackColor = Color.DarkMagenta
+
+        BTNRun.BackColor = Color.DarkMagenta
+        BTNSuspend.BackColor = Color.DarkMagenta
+        BTNResume.BackColor = Color.DarkMagenta
+        BTNReset.BackColor = Color.DarkMagenta
+
+        FrmWritingTask.PNLWritingTask.BackColor = Color.DarkMagenta
+
+
+        PNLLazySub.BackColor = Color.DarkMagenta
+        Label27.ForeColor = Color.DarkMagenta
+        Panel1.BackColor = Color.DarkMagenta
+        LBLWishListName.ForeColor = Color.DarkMagenta
+        Panel2.BackColor = Color.DarkMagenta
+        PNLPlaylist.BackColor = Color.DarkMagenta
+        PNLAppRandomizer.BackColor = Color.DarkMagenta
+        PictureBox3.BackColor = Color.DarkMagenta
+
+        My.Settings.UIColor = "Purple"
+        My.Settings.Save()
+
+    End Sub
+
+    Private Sub Button34_Click(sender As System.Object, e As System.EventArgs) Handles Button34.Click
+
+        ColorBlack()
+
+    End Sub
+
+    Public Sub ColorBlack()
+
+        Try
+            Form1.BackgroundImage.Dispose()
+        Catch
+        End Try
+        Form1.BackgroundImage = Nothing
+        Form1.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\TAIBackGray.png")
+
+        Form1.subName.BackColor = Color.Black
+        Form1.BTNShowHideApps.BackColor = Color.Black
+        Form1.domName.BackColor = Color.Black
+
+        Form1.browsefolderButton.BackColor = Color.Black
+        Form1.PNLMediaBar.BackColor = Color.Black
+        Form1.PNLHope.BackColor = Color.Black
+        Form1.PNLChatBox.BackColor = Color.Black
+
+        Form1.previousButton.BackColor = Color.Black
+        Form1.nextButton.BackColor = Color.Black
+        Form1.BTNLoadVideo.BackColor = Color.Black
+        Form1.BTNVideoControls.BackColor = Color.Black
+
+        Form1.MediaButton.BackColor = Color.Black
+        Form1.SaveBlogImage.BackColor = Color.Black
+        Form1.SettingsButton.BackColor = Color.Black
+
+        Me.BackColor = Color.Black
+        PNLAppHome.BackColor = Color.Black
+        Button5.BackColor = Color.Black
+
+        Form1.SplitContainer1.Panel2.BackColor = Color.Black
+
+        BTNRun.BackColor = Color.Black
+        BTNSuspend.BackColor = Color.Black
+        BTNResume.BackColor = Color.Black
+        BTNReset.BackColor = Color.Black
+
+        FrmWritingTask.PNLWritingTask.BackColor = Color.Black
+
+        PNLLazySub.BackColor = Color.Black
+        Label27.ForeColor = Color.Black
+        Panel1.BackColor = Color.Black
+        LBLWishListName.ForeColor = Color.Black
+        Panel2.BackColor = Color.Black
+        PNLPlaylist.BackColor = Color.Black
+        PNLAppRandomizer.BackColor = Color.Black
+        PictureBox3.BackColor = Color.Black
+
+        My.Settings.UIColor = "Gray"
+        My.Settings.Save()
+
+    End Sub
+
+    Private Sub Button33_Click(sender As System.Object, e As System.EventArgs) Handles Button33.Click
+      
+        ColorRed()
+
+    End Sub
+
+
+    Public Sub ColorRed()
+
+        Try
+            Form1.BackgroundImage.Dispose()
+        Catch
+        End Try
+        Form1.BackgroundImage = Nothing
+        Form1.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\TAIBackRed.png")
+
+        Form1.subName.BackColor = Color.Firebrick
+        Form1.BTNShowHideApps.BackColor = Color.Firebrick
+        Form1.domName.BackColor = Color.Firebrick
+
+        Form1.browsefolderButton.BackColor = Color.Firebrick
+        Form1.PNLMediaBar.BackColor = Color.Firebrick
+        Form1.PNLHope.BackColor = Color.Firebrick
+        Form1.PNLChatBox.BackColor = Color.Firebrick
+
+        Form1.previousButton.BackColor = Color.Firebrick
+        Form1.nextButton.BackColor = Color.Firebrick
+        Form1.BTNLoadVideo.BackColor = Color.Firebrick
+        Form1.BTNVideoControls.BackColor = Color.Firebrick
+
+        Form1.MediaButton.BackColor = Color.Firebrick
+        Form1.SaveBlogImage.BackColor = Color.Firebrick
+        Form1.SettingsButton.BackColor = Color.Firebrick
+
+        Me.BackColor = Color.Firebrick
+        PNLAppHome.BackColor = Color.Firebrick
+        Button5.BackColor = Color.Firebrick
+
+        Form1.SplitContainer1.Panel2.BackColor = Color.Firebrick
+
+        BTNRun.BackColor = Color.Firebrick
+        BTNSuspend.BackColor = Color.Firebrick
+        BTNResume.BackColor = Color.Firebrick
+        BTNReset.BackColor = Color.Firebrick
+
+        FrmWritingTask.PNLWritingTask.BackColor = Color.Firebrick
+
+        PNLLazySub.BackColor = Color.Firebrick
+        Label27.ForeColor = Color.Firebrick
+        Panel1.BackColor = Color.Firebrick
+        LBLWishListName.ForeColor = Color.Firebrick
+        Panel2.BackColor = Color.Firebrick
+        PNLPlaylist.BackColor = Color.Firebrick
+        PNLAppRandomizer.BackColor = Color.Firebrick
+        PictureBox3.BackColor = Color.Firebrick
+
+        My.Settings.UIColor = "Red"
+        My.Settings.Save()
+
+    End Sub
+
 End Class

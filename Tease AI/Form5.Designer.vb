@@ -159,6 +159,10 @@ Partial Class frmApps
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
+        Me.Button31 = New System.Windows.Forms.Button()
+        Me.Button32 = New System.Windows.Forms.Button()
+        Me.Button33 = New System.Windows.Forms.Button()
+        Me.Button34 = New System.Windows.Forms.Button()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -187,6 +191,10 @@ Partial Class frmApps
         '
         Me.PNLAppHome.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(170, Byte), Integer))
         Me.PNLAppHome.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLAppHome.Controls.Add(Me.Button33)
+        Me.PNLAppHome.Controls.Add(Me.Button34)
+        Me.PNLAppHome.Controls.Add(Me.Button32)
+        Me.PNLAppHome.Controls.Add(Me.Button31)
         Me.PNLAppHome.Controls.Add(Me.BTNResume)
         Me.PNLAppHome.Controls.Add(Me.BTNSuspend)
         Me.PNLAppHome.Controls.Add(Me.BTNReset)
@@ -636,7 +644,7 @@ Partial Class frmApps
         Me.Button29.BackColor = System.Drawing.Color.SteelBlue
         Me.Button29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button29.ForeColor = System.Drawing.Color.White
-        Me.Button29.Location = New System.Drawing.Point(9, 420)
+        Me.Button29.Location = New System.Drawing.Point(176, 271)
         Me.Button29.Name = "Button29"
         Me.Button29.Size = New System.Drawing.Size(57, 24)
         Me.Button29.TabIndex = 191
@@ -1110,6 +1118,7 @@ Partial Class frmApps
         '
         'Label20
         '
+        Me.Label20.BackColor = System.Drawing.Color.Transparent
         Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.ForeColor = System.Drawing.Color.White
         Me.Label20.Location = New System.Drawing.Point(9, 38)
@@ -1121,6 +1130,7 @@ Partial Class frmApps
         '
         'Label19
         '
+        Me.Label19.BackColor = System.Drawing.Color.Transparent
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.White
         Me.Label19.Location = New System.Drawing.Point(9, 188)
@@ -1132,6 +1142,7 @@ Partial Class frmApps
         '
         'Label18
         '
+        Me.Label18.BackColor = System.Drawing.Color.Transparent
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label18.ForeColor = System.Drawing.Color.White
         Me.Label18.Location = New System.Drawing.Point(9, 302)
@@ -1221,6 +1232,7 @@ Partial Class frmApps
         '
         'Label17
         '
+        Me.Label17.BackColor = System.Drawing.Color.Transparent
         Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.White
         Me.Label17.Location = New System.Drawing.Point(8, 10)
@@ -1343,6 +1355,7 @@ Partial Class frmApps
         '
         'LBLWishlistSilver
         '
+        Me.LBLWishlistSilver.BackColor = System.Drawing.Color.Transparent
         Me.LBLWishlistSilver.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLWishlistSilver.ForeColor = System.Drawing.Color.White
         Me.LBLWishlistSilver.Location = New System.Drawing.Point(121, 5)
@@ -1365,6 +1378,7 @@ Partial Class frmApps
         '
         'LBLWishlistBronze
         '
+        Me.LBLWishlistBronze.BackColor = System.Drawing.Color.Transparent
         Me.LBLWishlistBronze.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLWishlistBronze.ForeColor = System.Drawing.Color.White
         Me.LBLWishlistBronze.Location = New System.Drawing.Point(38, 5)
@@ -1387,6 +1401,7 @@ Partial Class frmApps
         '
         'LBLWishlistGold
         '
+        Me.LBLWishlistGold.BackColor = System.Drawing.Color.Transparent
         Me.LBLWishlistGold.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLWishlistGold.ForeColor = System.Drawing.Color.White
         Me.LBLWishlistGold.Location = New System.Drawing.Point(199, 5)
@@ -1429,6 +1444,7 @@ Partial Class frmApps
         '
         'LBLWishlistDom
         '
+        Me.LBLWishlistDom.BackColor = System.Drawing.Color.Transparent
         Me.LBLWishlistDom.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLWishlistDom.ForeColor = System.Drawing.Color.White
         Me.LBLWishlistDom.Location = New System.Drawing.Point(14, 14)
@@ -1838,6 +1854,54 @@ Partial Class frmApps
         Me.Label25.Text = "Playlists"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Button31
+        '
+        Me.Button31.BackColor = System.Drawing.Color.SteelBlue
+        Me.Button31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button31.ForeColor = System.Drawing.Color.White
+        Me.Button31.Location = New System.Drawing.Point(9, 420)
+        Me.Button31.Name = "Button31"
+        Me.Button31.Size = New System.Drawing.Size(57, 24)
+        Me.Button31.TabIndex = 192
+        Me.Button31.TabStop = False
+        Me.Button31.UseVisualStyleBackColor = False
+        '
+        'Button32
+        '
+        Me.Button32.BackColor = System.Drawing.Color.DarkMagenta
+        Me.Button32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button32.ForeColor = System.Drawing.Color.White
+        Me.Button32.Location = New System.Drawing.Point(65, 420)
+        Me.Button32.Name = "Button32"
+        Me.Button32.Size = New System.Drawing.Size(57, 24)
+        Me.Button32.TabIndex = 193
+        Me.Button32.TabStop = False
+        Me.Button32.UseVisualStyleBackColor = False
+        '
+        'Button33
+        '
+        Me.Button33.BackColor = System.Drawing.Color.Firebrick
+        Me.Button33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button33.ForeColor = System.Drawing.Color.White
+        Me.Button33.Location = New System.Drawing.Point(177, 420)
+        Me.Button33.Name = "Button33"
+        Me.Button33.Size = New System.Drawing.Size(57, 24)
+        Me.Button33.TabIndex = 195
+        Me.Button33.TabStop = False
+        Me.Button33.UseVisualStyleBackColor = False
+        '
+        'Button34
+        '
+        Me.Button34.BackColor = System.Drawing.Color.Black
+        Me.Button34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button34.ForeColor = System.Drawing.Color.White
+        Me.Button34.Location = New System.Drawing.Point(121, 420)
+        Me.Button34.Name = "Button34"
+        Me.Button34.Size = New System.Drawing.Size(57, 24)
+        Me.Button34.TabIndex = 194
+        Me.Button34.TabStop = False
+        Me.Button34.UseVisualStyleBackColor = False
+        '
         'frmApps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2024,4 +2088,8 @@ Partial Class frmApps
     Friend WithEvents CBHideShortcuts As System.Windows.Forms.CheckBox
     Friend WithEvents CBShortcuts As System.Windows.Forms.CheckBox
     Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents Button33 As System.Windows.Forms.Button
+    Friend WithEvents Button34 As System.Windows.Forms.Button
+    Friend WithEvents Button32 As System.Windows.Forms.Button
+    Friend WithEvents Button31 As System.Windows.Forms.Button
 End Class

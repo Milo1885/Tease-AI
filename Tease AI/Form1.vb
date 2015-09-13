@@ -1370,6 +1370,12 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         TeaseAIClock.Start()
 
+        If My.Settings.UIColor = "" Then frmApps.ColorBlue()
+        If My.Settings.UIColor = "Purple" Then frmApps.ColorPurple()
+        If My.Settings.UIColor = "Black" Then frmApps.ColorBlack()
+        If My.Settings.UIColor = "Red" Then frmApps.ColorRed()
+
+
         FormLoading = False
 
         Debug.Print("Form1 Loading Finished")
