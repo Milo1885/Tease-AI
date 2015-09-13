@@ -1,6 +1,13 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+
+# Changelog - Patch 46
+
+09/13 7:22 am - Tease AI can now be resized by the user and will scale automatically. 768, Compact and 1080 Buttons are now defunct
+
+
+
 # Changelog - Patch 45 Hotfix
 
 9/12 3:39 am - Fixed bug that caused "URL Formats are not supported" error when trying to view Boobs or Butts images from URL Files. 

@@ -461,7 +461,9 @@ Public Class Form1
     Dim ReturnSubState As String
     Dim ReturnFlag As Boolean
 
+    Public SessionEdges As Integer
 
+    Dim WindowCheck As Boolean
 
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -620,20 +622,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End If
 
 
-        If My.Settings.LargeUI = True Then
-            LargeUI()
-            PNLChatBox.Location = New Point(0, 214)
-        End If
-
-        If My.Settings.SmallUI = True Then
-            SmallUI()
-            PNLChatBox.Location = New Point(0, 172)
-        End If
-
-        If My.Settings.UI768 = True Then
-            UI768()
-            PNLChatBox.Location = New Point(0, 173)
-        End If
+       
 
 
         FrmSettings.Show()
@@ -1370,6 +1359,15 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         frmApps.TBShortGreet.Text = My.Settings.ShortGreet
         frmApps.TBShortSafeword.Text = My.Settings.ShortSafeword
 
+        If My.Settings.WindowWidth = 0 Or My.Settings.WindowHeight = 0 Then
+            Me.WindowState = FormWindowState.Maximized
+        Else
+            Me.Width = My.Settings.WindowWidth
+            Me.Height = My.Settings.WindowHeight
+        End If
+
+        AdjustWindow()
+
         FormLoading = False
 
         Debug.Print("Form1 Loading Finished")
@@ -1559,21 +1557,21 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
         If My.Settings.UI768 = True Then
-            If PNLMediaBar.Visible = True Then
-                ChatText.Location = New Point(0, 29)
-            Else
-                ChatText.Location = New Point(0, 0)
-            End If
-            ChatText.Width = 683
+            'If PNLMediaBar.Visible = True Then
+            'ChatText.Location = New Point(0, 29)
+            'Else
+            '   ChatText.Location = New Point(0, 0)
+            'End If
+            ChatText.Width = SplitContainer1.Width - 3
         End If
 
         If My.Settings.LargeUI = True Then
-            If PNLMediaBar.Visible = True Then
-                ChatText.Location = New Point(0, 29)
-            Else
-                ChatText.Location = New Point(0, 0)
-            End If
-            ChatText.Width = 1089
+            'If PNLMediaBar.Visible = True Then
+            'ChatText.Location = New Point(0, 29)
+            'Else
+            'ChatText.Location = New Point(0, 0)
+            'End If
+            'ChatText.Width = 1089
         End If
 
         If My.Settings.SmallUI = True Then
@@ -1582,7 +1580,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             Else
                 ChatText.Location = New Point(0, 0)
             End If
-            ChatText.Width = 839
+            ChatText.Width = SplitContainer1.Width - 3
         End If
 
         ScrollChatDown()
@@ -4834,7 +4832,7 @@ EndSysMes:
                         Else
                             ChatText.Location = New Point(0, 0)
                         End If
-                        ChatText.Width = 683
+                        ChatText.Width = SplitContainer1.Width - 3
                     End If
 
                     If My.Settings.LargeUI = True Then
@@ -4843,7 +4841,7 @@ EndSysMes:
                         Else
                             ChatText.Location = New Point(0, 0)
                         End If
-                        ChatText.Width = 1089
+                        ChatText.Width = SplitContainer1.Width - 3
                     End If
 
                     If My.Settings.SmallUI = True Then
@@ -4852,7 +4850,7 @@ EndSysMes:
                         Else
                             ChatText.Location = New Point(0, 0)
                         End If
-                        ChatText.Width = 839
+                        ChatText.Width = SplitContainer1.Width - 3
                     End If
 
                     ScrollChatDown()
@@ -5527,7 +5525,7 @@ EndSysMes:
                     Else
                         ChatText.Location = New Point(0, 0)
                     End If
-                    ChatText.Width = 683
+                    ChatText.Width = SplitContainer1.Width - 3
                 End If
 
                 If My.Settings.LargeUI = True Then
@@ -5536,7 +5534,7 @@ EndSysMes:
                     Else
                         ChatText.Location = New Point(0, 0)
                     End If
-                    ChatText.Width = 1089
+                    ChatText.Width = SplitContainer1.Width - 3
                 End If
 
                 If My.Settings.SmallUI = True Then
@@ -5545,7 +5543,7 @@ EndSysMes:
                     Else
                         ChatText.Location = New Point(0, 0)
                     End If
-                    ChatText.Width = 839
+                    ChatText.Width = SplitContainer1.Width - 3
                 End If
 
                 ScrollChatDown()
@@ -8330,6 +8328,8 @@ StatusUpdateEnd:
         StringClean = StringClean.Replace("#SilverTokens", SilverTokens)
         StringClean = StringClean.Replace("#GoldTokens", GoldTokens)
 
+        StringClean = StringClean.Replace("#SessionEdges", SessionEdges)
+
 
         Return StringClean
 
@@ -9152,6 +9152,7 @@ RinseLatherRepeat:
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
             DisableContactStroke()
+            SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinNoHoldSecret", "")
         End If
 
@@ -9174,6 +9175,7 @@ RinseLatherRepeat:
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
             DisableContactStroke()
+            SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinHoldSecret", "")
         End If
 
@@ -9195,6 +9197,7 @@ RinseLatherRepeat:
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
             DisableContactStroke()
+            SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinSecret", "")
         End If
 
@@ -9216,6 +9219,7 @@ RinseLatherRepeat:
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
             DisableContactStroke()
+            SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinNoHold", "")
         End If
 
@@ -9237,6 +9241,7 @@ RinseLatherRepeat:
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
             DisableContactStroke()
+            SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinHold", "")
         End If
 
@@ -9257,6 +9262,7 @@ RinseLatherRepeat:
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
             DisableContactStroke()
+            SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuin", "")
         End If
 
@@ -9277,6 +9283,7 @@ RinseLatherRepeat:
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
             DisableContactStroke()
+            SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeNoHold", "")
         End If
 
@@ -9297,6 +9304,7 @@ RinseLatherRepeat:
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
             DisableContactStroke()
+            SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeHold", "")
         End If
 
@@ -9316,6 +9324,7 @@ RinseLatherRepeat:
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
             DisableContactStroke()
+            SessionEdges += 1
             StringClean = StringClean.Replace("@Edge", "")
         End If
 
@@ -18697,290 +18706,9 @@ TryNext:
 
 
 
-    Public Sub LargeUI()
+   
 
-        BTN768.BackColor = Color.SteelBlue
-        BTNCompact.BackColor = Color.SteelBlue
-        BTN1080.BackColor = Color.White
-
-        BTN768.ForeColor = Color.White
-        BTNCompact.ForeColor = Color.White
-        BTN1080.ForeColor = Color.SteelBlue
-
-        BTN768.Font = New Font(BTN768.Font.FontFamily, BTN768.Font.Size, FontStyle.Regular)
-        BTNCompact.Font = New Font(BTNCompact.Font.FontFamily, BTNCompact.Font.Size, FontStyle.Regular)
-        BTN1080.Font = New Font(BTN1080.Font.FontFamily, BTN1080.Font.Size, FontStyle.Bold)
-
-        PNLGlitter.Height = 449
-        StatusUpdates.Height = 444
-
-        SP1.Visible = True
-        SP2.Visible = True
-        SP3.Visible = True
-        SP4.Visible = True
-        SP5.Visible = True
-        SP6.Visible = True
-        SP7.Visible = True
-        SP8.Visible = True
-        SP9.Visible = True
-        SP10.Visible = True
-
-        subName.Location = New Point(10, 977)
-        SplitContainer1.Height = 988
-        SplitContainer1.Width = 1092
-
-        subAvatar.Location = New Point(10, 791)
-        Me.Height = 1044
-        Me.Width = 1384
-
-        Try
-            Me.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\LargeBack.png")
-        Catch ex As Exception
-        End Try
-
-
-        If PNLMediaBar.Visible = True Then
-            ChatText.Location = New Point(0, 29)
-        Else
-            ChatText.Location = New Point(0, 0)
-        End If
-        ChatText.Width = 1089
-
-        ImageFolderComboBox.Width = 716
-
-        previousButton.Location = New Point(779, -4)
-        nextButton.Location = New Point(836, -4)
-        BTNLoadVideo.Location = New Point(893, -4)
-        BTNVideoControls.Location = New Point(969, -4)
-
-        If PNLMediaBar.Visible = True Then
-            PNLChatBox.Location = New Point(0, ChatText.Height + 23)
-        Else
-            PNLChatBox.Location = New Point(0, ChatText.Height - 6)
-        End If
-
-        DomWMP.Location = New Point(0, 0)
-        DomWMP.Width = SplitContainer1.Width
-        ' DomWMP.Height = SplitContainer1.Panel1.Height
-
-        If BTNVideoControls.Text = "Show Video Controls" Then
-            DomWMP.Height = SplitContainer1.Panel1.Height + 60
-        Else
-            DomWMP.Height = SplitContainer1.Panel1.Height
-        End If
-
-        DomWMP.stretchToFit = True
-
-        mainPictureBox.Location = New Point(0, 0)
-        mainPictureBox.Width = SplitContainer1.Width
-        mainPictureBox.Height = SplitContainer1.Panel1.Height
-
-        chatBox.Width = 768
-        chatBox.Location = New Point(5, 6)
-
-        MediaButton.Location = New Point(782, -1)
-        SaveBlogImage.Location = New Point(896, -1)
-        SettingsButton.Location = New Point(972, -1)
-
-      
-
-    End Sub
-
-    Public Sub SmallUI()
-
-        BTN768.BackColor = Color.SteelBlue
-        BTNCompact.BackColor = Color.White
-        BTN1080.BackColor = Color.SteelBlue
-
-        BTN768.ForeColor = Color.White
-        BTNCompact.ForeColor = Color.SteelBlue
-        BTN1080.ForeColor = Color.White
-
-        BTN768.Font = New Font(BTN768.Font.FontFamily, BTN768.Font.Size, FontStyle.Regular)
-        BTNCompact.Font = New Font(BTNCompact.Font.FontFamily, BTNCompact.Font.Size, FontStyle.Bold)
-        BTN1080.Font = New Font(BTN1080.Font.FontFamily, BTN1080.Font.Size, FontStyle.Regular)
-
-
-        PNLGlitter.Height = 297
-        StatusUpdates.Height = 292
-
-
-
-
-
-
-
-        SP1.Visible = False
-        SP2.Visible = False
-        SP3.Visible = False
-        SP4.Visible = False
-        SP5.Visible = False
-        SP6.Visible = False
-        SP7.Visible = False
-        SP8.Visible = False
-        SP9.Visible = False
-        SP10.Visible = False
-
-
-
-        subName.Location = New Point(10, 791)
-        SplitContainer1.Height = 802
-        SplitContainer1.Width = 843
-        subAvatar.Location = New Point(10, 603)
-        Me.Height = 856
-        Me.Width = 1134
-        Try
-            Me.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\SmallBack.png")
-        Catch ex As Exception
-        End Try
-
-
-        If PNLMediaBar.Visible = True Then
-            ChatText.Location = New Point(0, 29)
-        Else
-            ChatText.Location = New Point(0, 0)
-        End If
-        ChatText.Width = 839
-
-        ImageFolderComboBox.Width = 466
-
-        previousButton.Location = New Point(529, -4)
-        nextButton.Location = New Point(586, -4)
-        BTNLoadVideo.Location = New Point(643, -4)
-        BTNVideoControls.Location = New Point(719, -4)
-
-        If PNLMediaBar.Visible = True Then
-            PNLChatBox.Location = New Point(0, ChatText.Height + 23)
-        Else
-            PNLChatBox.Location = New Point(0, ChatText.Height - 6)
-        End If
-
-
-        'DomWMP.Width = 843
-        DomWMP.Location = New Point(0, 0)
-        DomWMP.Width = SplitContainer1.Width
-        ' DomWMP.Height = SplitContainer1.Panel1.Height
-
-        If BTNVideoControls.Text = "Show Video Controls" Then
-            DomWMP.Height = SplitContainer1.Panel1.Height + 60
-        Else
-            DomWMP.Height = SplitContainer1.Panel1.Height
-        End If
-
-        DomWMP.stretchToFit = True
-
-
-
-
-
-
-
-        mainPictureBox.Location = New Point(0, 0)
-        mainPictureBox.Width = SplitContainer1.Width
-        mainPictureBox.Height = SplitContainer1.Panel1.Height
-
-
-        chatBox.Width = 519
-        chatBox.Location = New Point(5, 6)
-
-        MediaButton.Location = New Point(530, -1)
-        SaveBlogImage.Location = New Point(644, -1)
-        SettingsButton.Location = New Point(720, -1)
-
-    
-
-
-
-    End Sub
-
-    Public Sub UI768()
-
-        BTN768.BackColor = Color.White
-        BTNCompact.BackColor = Color.SteelBlue
-        BTN1080.BackColor = Color.SteelBlue
-
-        BTN768.ForeColor = Color.SteelBlue
-        BTNCompact.ForeColor = Color.White
-        BTN1080.ForeColor = Color.White
-
-        BTN768.Font = New Font(BTN768.Font.FontFamily, BTN768.Font.Size, FontStyle.Bold)
-        BTNCompact.Font = New Font(BTNCompact.Font.FontFamily, BTNCompact.Font.Size, FontStyle.Regular)
-        BTN1080.Font = New Font(BTN1080.Font.FontFamily, BTN1080.Font.Size, FontStyle.Regular)
-
-        PNLGlitter.Height = 171
-        StatusUpdates.Height = 166
-
-        SP1.Visible = False
-        SP2.Visible = False
-        SP3.Visible = False
-        SP4.Visible = False
-        SP5.Visible = False
-        SP6.Visible = False
-        SP7.Visible = False
-        SP8.Visible = False
-        SP9.Visible = False
-        SP10.Visible = False
-
-        subName.Location = New Point(10, 665)
-        subAvatar.Location = New Point(10, 477)
-        SplitContainer1.Height = 676
-        SplitContainer1.Width = 685
-        'subAvatar.Visible = True
-        Me.Height = 734
-        Me.Width = 978
-
-        Try
-            Me.BackgroundImage = Nothing
-            GC.Collect()
-        Catch ex As Exception
-        End Try
-
-        If PNLMediaBar.Visible = True Then
-            ChatText.Location = New Point(0, 29)
-        Else
-            ChatText.Location = New Point(0, 0)
-        End If
-        ChatText.Width = 683
-
-        ImageFolderComboBox.Width = 307
-
-        previousButton.Location = New Point(370, -4)
-        nextButton.Location = New Point(427, -4)
-        BTNLoadVideo.Location = New Point(484, -4)
-        BTNVideoControls.Location = New Point(560, -4)
-
-        If PNLMediaBar.Visible = True Then
-            PNLChatBox.Location = New Point(0, ChatText.Height + 23)
-        Else
-            PNLChatBox.Location = New Point(0, ChatText.Height - 6)
-        End If
-
-        DomWMP.Location = New Point(0, 0)
-        DomWMP.Width = SplitContainer1.Width
-        ' DomWMP.Height = SplitContainer1.Panel1.Height
-
-        If BTNVideoControls.Text = "Show Video Controls" Then
-            DomWMP.Height = SplitContainer1.Panel1.Height + 60
-        Else
-            DomWMP.Height = SplitContainer1.Panel1.Height
-        End If
-
-        DomWMP.stretchToFit = True
-
-        mainPictureBox.Location = New Point(0, 0)
-        mainPictureBox.Width = SplitContainer1.Width
-        mainPictureBox.Height = SplitContainer1.Panel1.Height
-
-        chatBox.Width = 359
-        chatBox.Location = New Point(5, 6)
-
-        MediaButton.Location = New Point(370, -1)
-        SaveBlogImage.Location = New Point(484, -1)
-        SettingsButton.Location = New Point(560, -1)
-
-    
-
-    End Sub
+ 
 
 
 
@@ -19119,9 +18847,11 @@ TryNext:
     Private Sub BTNShowHideApps_Click(sender As System.Object, e As System.EventArgs) Handles BTNShowHideApps.Click
         If frmApps.Visible = True Then
             frmApps.Visible = False
+            chatBox.Focus()
             BTNShowHideApps.Text = "Show Apps"
         Else
             frmApps.Show()
+            chatBox.Focus()
             BTNShowHideApps.Text = "Hide Apps"
         End If
     End Sub
@@ -19143,7 +18873,7 @@ TryNext:
 
         If My.Settings.LargeUI = True Then Return
 
-        LargeUI()
+        'LargeUI()
         'Form1.PNLChatBox.Location = New Point(0, 214)
         My.Settings.LargeUI = True
         My.Settings.SmallUI = False
@@ -19157,7 +18887,7 @@ TryNext:
 
         If My.Settings.SmallUI = True Then Return
 
-        SmallUI()
+        'SmallUI()
         'Form1.PNLChatBox.Location = New Point(0, 172)
         My.Settings.LargeUI = False
         My.Settings.SmallUI = True
@@ -19172,7 +18902,7 @@ TryNext:
 
         If My.Settings.UI768 = True Then Return
 
-        UI768()
+        'UI768()
         'Form1.PNLChatBox.Location = New Point(0, 173)
         My.Settings.LargeUI = False
         My.Settings.SmallUI = False
@@ -20726,7 +20456,7 @@ TryNext:
             Else
                 ChatText.Location = New Point(0, 0)
             End If
-            ChatText.Width = 683
+            ChatText.Width = SplitContainer1.Width - 3
         End If
 
         If My.Settings.LargeUI = True Then
@@ -20735,7 +20465,7 @@ TryNext:
             Else
                 ChatText.Location = New Point(0, 0)
             End If
-            ChatText.Width = 1089
+            ChatText.Width = SplitContainer1.Width - 3
         End If
 
         If My.Settings.SmallUI = True Then
@@ -20744,7 +20474,7 @@ TryNext:
             Else
                 ChatText.Location = New Point(0, 0)
             End If
-            ChatText.Width = 839
+            ChatText.Width = SplitContainer1.Width - 3
         End If
 
         ScrollChatDown()
@@ -20807,5 +20537,120 @@ TryNext:
         Process.Start("https://milovana.com/forum/")
     End Sub
 
-   
+    Private Sub Form1_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseClick
+        If SplitContainer1.Width + 270 > Me.Width Then AdjustWindow()
+    End Sub
+
+
+
+    Private Sub Form1_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
+        If Me.WindowState = FormWindowState.Maximized Then
+            WindowCheck = True
+            AdjustWindow()
+        End If
+
+        If Me.WindowState = FormWindowState.Normal And WindowCheck = True Then
+            WindowCheck = False
+            AdjustWindow()
+        End If
+
+    End Sub
+
+    ' Private Sub Form1_SizeChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.SizeChanged
+    '    If Me.WindowState = FormWindowState.Maximized Then
+    '       AdjustWindow()
+    '  End If
+    'End Sub
+
+
+    Private Sub Form1_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd
+        AdjustWindow()
+    End Sub
+
+
+
+
+    Public Sub AdjustWindow()
+
+        If Me.Height < 734 Or Me.Width < 978 Then
+            Me.Height = 734
+            Me.Width = 978
+        End If
+
+        SplitContainer1.Height = Me.Height - 58
+        SplitContainer1.Width = Me.Width - 296
+
+        mainPictureBox.Location = New Point(0, 0)
+        mainPictureBox.Width = SplitContainer1.Width
+        mainPictureBox.Height = SplitContainer1.Panel1.Height
+
+        If PNLMediaBar.Visible = True Then
+            ChatText.Location = New Point(0, 30)
+        Else
+            ChatText.Location = New Point(0, 0)
+        End If
+
+        ChatText.Width = SplitContainer1.Width - 3
+
+        PNLMediaBar.Width = SplitContainer1.Width - 365
+        ImageFolderComboBox.Width = SplitContainer1.Width - 378
+
+        previousButton.Location = New Point(SplitContainer1.Width - 314, -4)
+        nextButton.Location = New Point(SplitContainer1.Width - 257, -4)
+        BTNLoadVideo.Location = New Point(SplitContainer1.Width - 200, -4)
+        BTNVideoControls.Location = New Point(SplitContainer1.Width - 124, -4)
+
+
+        chatBox.Width = SplitContainer1.Width - 324
+        chatBox.Location = New Point(3, 6)
+
+        MediaButton.Location = New Point(0, 0)
+        SaveBlogImage.Location = New Point(114, 0)
+        SettingsButton.Location = New Point(190, 0)
+
+
+        PNLChatBox.Width = SplitContainer1.Width - 318
+
+        BTNVideoControls.BringToFront()
+
+
+        If PNLMediaBar.Visible = True Then
+            PNLChatBox.Location = New Point(2, ChatText.Height + 30)
+            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height + 29)
+        Else
+            PNLChatBox.Location = New Point(2, ChatText.Height - 11)
+            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height - 12)
+        End If
+
+        'PNLHope.Location = New Point(779, 214)
+
+        subName.Location = New Point(10, Me.Height - 69)
+        subAvatar.Location = New Point(10, Me.Height - 258)
+
+        PNLGlitter.Height = Me.Height - 563
+        StatusUpdates.Height = Me.Height - 558
+
+        DomWMP.Location = New Point(0, 0)
+        DomWMP.Width = SplitContainer1.Width
+
+        My.Settings.WindowHeight = Me.Height
+        My.Settings.WindowWidth = Me.Width
+        My.Settings.Save()
+
+    End Sub
+
+    Private Sub SplitContainer1_SplitterMoved(sender As Object, e As System.Windows.Forms.SplitterEventArgs) Handles SplitContainer1.SplitterMoved
+        If PNLMediaBar.Visible = True Then
+            PNLChatBox.Location = New Point(2, ChatText.Height + 30)
+            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height + 29)
+        Else
+            PNLChatBox.Location = New Point(2, ChatText.Height - 11)
+            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height - 12)
+        End If
+    End Sub
+
+
+
+
+
 End Class

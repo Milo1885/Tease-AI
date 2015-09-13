@@ -4556,6 +4556,30 @@ Namespace My
                 Me("Patch45Tokens") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property WindowHeight() As Integer
+            Get
+                Return CType(Me("WindowHeight"),Integer)
+            End Get
+            Set
+                Me("WindowHeight") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property WindowWidth() As Integer
+            Get
+                Return CType(Me("WindowWidth"),Integer)
+            End Get
+            Set
+                Me("WindowWidth") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
