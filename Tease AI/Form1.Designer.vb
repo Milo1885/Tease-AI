@@ -129,6 +129,7 @@ Partial Class Form1
         Me.LBLTime = New System.Windows.Forms.Label()
         Me.LBLDate = New System.Windows.Forms.Label()
         Me.LBLAMPM = New System.Windows.Forms.Label()
+        Me.tmrResize = New System.Windows.Forms.Timer(Me.components)
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -162,7 +163,7 @@ Partial Class Form1
         '
         'chatBox
         '
-        Me.chatBox.Location = New System.Drawing.Point(3, 6)
+        Me.chatBox.Location = New System.Drawing.Point(3, 4)
         Me.chatBox.Name = "chatBox"
         Me.chatBox.Size = New System.Drawing.Size(768, 20)
         Me.chatBox.TabIndex = 1
@@ -611,7 +612,7 @@ Partial Class Form1
         Me.PNLTerms.Controls.Add(Me.Label85)
         Me.PNLTerms.Location = New System.Drawing.Point(0, 0)
         Me.PNLTerms.Name = "PNLTerms"
-        Me.PNLTerms.Size = New System.Drawing.Size(10, 1044)
+        Me.PNLTerms.Size = New System.Drawing.Size(1378, 1044)
         Me.PNLTerms.TabIndex = 162
         '
         'Label86
@@ -914,12 +915,15 @@ Partial Class Form1
         Me.LBLAMPM.TabIndex = 773
         Me.LBLAMPM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'tmrResize
+        '
+        Me.tmrResize.Interval = 250
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1374, 1012)
         Me.Controls.Add(Me.PNLTerms)
@@ -942,7 +946,7 @@ Partial Class Form1
         Me.Name = "Form1"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Tease A.I. - PATCH 46"
+        Me.Text = "Tease A.I. - PATCH 47"
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -1072,5 +1076,6 @@ Partial Class Form1
     Friend WithEvents LBLTime As System.Windows.Forms.Label
     Friend WithEvents LBLDate As System.Windows.Forms.Label
     Friend WithEvents LBLAMPM As System.Windows.Forms.Label
+    Friend WithEvents tmrResize As System.Windows.Forms.Timer
 
 End Class

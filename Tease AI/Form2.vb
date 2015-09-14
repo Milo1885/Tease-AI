@@ -92,7 +92,9 @@ Public Class FrmSettings
         BP6.AllowDrop = True
 
        
-
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking installed voices..."
+        FrmSplash.Refresh()
 
 
         Dim oSpeech As New System.Speech.Synthesis.SpeechSynthesizer()
@@ -109,21 +111,9 @@ Public Class FrmSettings
         oSpeech.Dispose()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
+        FrmSplash.Refresh()
 
         Dim PersonType As String
 
@@ -160,6 +150,10 @@ Public Class FrmSettings
             End Try
         End If
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking URL Files..."
+        FrmSplash.Refresh()
+
         If File.Exists(Application.StartupPath & "\Images\System\URLFileCheckList.cld") Then
             URLFileList.Items.Clear()
             Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Open)
@@ -194,6 +188,9 @@ Public Class FrmSettings
         End If
 
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking Local Image settings..."
+        FrmSplash.Refresh()
 
         LBLIHardcore.Text = My.Settings.IHardcore
         LBLISoftcore.Text = My.Settings.ISoftcore
@@ -352,18 +349,22 @@ Public Class FrmSettings
 
         Debug.Print("FrmSettingsLoading = " & FrmSettingsLoading)
 
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking installed fonts..."
+        FrmSplash.Refresh()
+
         BindCombo()
         BindCombo2()
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking available scripts..."
+        FrmSplash.Refresh()
 
         Try
             CLBStartList.Items.Clear()
 
-
-
             InitializeStartScripts()
-
-
 
             InitializeModuleScripts()
 
@@ -371,11 +372,35 @@ Public Class FrmSettings
             InitializeLinkScripts()
             InitializeEndScripts()
 
-
-
             StartTab()
         Catch
         End Try
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Populating available voices..."
+        FrmSplash.Refresh()
+
+        Dim voicecheck As Integer
+        Dim voices = Fringe.GetInstalledVoices()
+        For Each v As InstalledVoice In voices
+            Debug.Print("Voice " & v.ToString())
+            voicecheck += 1
+            TTSComboBox.Items.Add(v.VoiceInfo.Name)
+            TTSComboBox.Text = v.VoiceInfo.Name
+        Next
+        If voicecheck = 0 Then
+            TTSComboBox.Text = "No voices installed"
+            TTSComboBox.Enabled = False
+            TTSCheckBox.Checked = False
+            TTSCheckBox.Enabled = False
+        End If
+
+        Debug.Print("Voicecheck = " & voicecheck)
+
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Sub settings..."
+        FrmSplash.Refresh()
 
 
         If My.Settings.CBTCock = True Then
@@ -434,6 +459,10 @@ Public Class FrmSettings
             CBSubPierced.Checked = False
         End If
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Domme settings..."
+        FrmSplash.Refresh()
+
         domlevelNumBox.Value = My.Settings.DomLevel
 
         If domlevelNumBox.Value = 1 Then DomLevelDescLabel.Text = "Gentle"
@@ -452,22 +481,7 @@ Public Class FrmSettings
 
 
 
-        Dim voicecheck As Integer
-        Dim voices = Fringe.GetInstalledVoices()
-        For Each v As InstalledVoice In voices
-            Debug.Print("Voice " & v.ToString())
-            voicecheck += 1
-            TTSComboBox.Items.Add(v.VoiceInfo.Name)
-            TTSComboBox.Text = v.VoiceInfo.Name
-        Next
-        If voicecheck = 0 Then
-            TTSComboBox.Text = "No voices installed"
-            TTSComboBox.Enabled = False
-            TTSCheckBox.Checked = False
-            TTSCheckBox.Enabled = False
-        End If
-
-        Debug.Print("Voicecheck = " & voicecheck)
+     
 
         CBRangeOrgasm.Checked = My.Settings.RangeOrgasm
         CBRangeRuin.Checked = My.Settings.RangeRuin
@@ -499,6 +513,10 @@ Public Class FrmSettings
         End If
 
         TBSafeword.Text = My.Settings.Safeword
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading card images..."
+        FrmSplash.Refresh()
 
         BN1.Text = My.Settings.BN1
         BN2.Text = My.Settings.BN2
@@ -602,6 +620,10 @@ Public Class FrmSettings
             CardBack.Image = Image.FromFile(My.Settings.CardBack)
         End If
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking user settings..."
+        FrmSplash.Refresh()
+
         NBNextImageChance.Value = My.Settings.NextImageChance
 
         CBEdgeUseAvg.Checked = My.Settings.CBEdgeUseAvg
@@ -665,7 +687,9 @@ Public Class FrmSettings
         'If My.Settings.SlideshowMode = "Manual" Then offRadio.Checked = True
         'If My.Settings.SlideshowMode = "Timer" Then timedRadio.Checked = True
 
-
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Auditing scripts..."
+        FrmSplash.Refresh()
 
         CBAuditStartup.Checked = My.Settings.AuditStartup
 
@@ -679,7 +703,16 @@ Public Class FrmSettings
         CBBallsToPussy.Checked = My.Settings.BallsToPussy
 
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Calculating space of saved session images..."
+        FrmSplash.Refresh()
+
         CalculateSessionImages()
+
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Settings Menu options..."
+        FrmSplash.Refresh()
 
         SaveSettingsDialog.InitialDirectory = Application.StartupPath & "\System"
         OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\System"

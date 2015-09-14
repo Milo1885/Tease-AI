@@ -1922,6 +1922,7 @@ Partial Class frmApps
         Me.MaximizeBox = False
         Me.Name = "frmApps"
         Me.Text = "Apps"
+        Me.TopMost = True
         Me.PNLAppHome.ResumeLayout(False)
         Me.PNLAppHome.PerformLayout()
         Me.AppPanelGlitter.ResumeLayout(False)

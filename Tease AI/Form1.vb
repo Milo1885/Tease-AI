@@ -470,8 +470,21 @@ Public Class Form1
     Dim StrokeSlower As Boolean
     Dim StrokeSlowest As Boolean
 
+    Dim InputFlag As Boolean
+    Dim InputString As String
+
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
+
+    Private Const MyFormWd As Long = 5000
+    Private Const MyFormHt As Long = 6000
+
+    Private Declare Function GetKeyState _
+         Lib "user32" _
+         (ByVal nVirtKey As Long) As Integer
+    Private Const VK_LBUTTON = &H1
+    'flag True when resizing being processed
+    Private bResize As Boolean
 
    
 
@@ -605,13 +618,21 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         FormLoading = True
 
+        FrmSplash.Show()
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking orgasm limit..."     ' 1
+        FrmSplash.Refresh()
+
         If My.Settings.OrgasmLockDate = Nothing Then My.Settings.OrgasmLockDate = FormatDateTime(Now, DateFormat.ShortDate)
         My.Settings.Save()
         Debug.Print("OrgasmLockDate = " & My.Settings.OrgasmLockDate)
 
    
 
-
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Clearing Metronome settings..."
+        FrmSplash.Refresh()
 
 
         If File.Exists(Application.StartupPath & "\System\Metronome") Then
@@ -619,9 +640,11 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
         End If
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking terms and conditions..."
+        FrmSplash.Refresh()
+
         frmApps.Show()
-
-
         If My.Settings.TCAgreed = True Then
             frmApps.ClearAgree()
         End If
@@ -651,6 +674,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         StrokeTimeTotal = My.Settings.StrokeTimeTotal
         StrokeTimeTotalTimer.Start()
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Calculating total stroke time..."
+        FrmSplash.Refresh()
+
         Dim STT As TimeSpan = TimeSpan.FromSeconds(StrokeTimeTotal)
         FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{0:0000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
 
@@ -665,10 +692,17 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         CoInternetSetFeatureEnabled(DISABLE_SOUNDS, SET_FEATURE_ON_PROCESS, True)
 
     
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Domme and Sub avatar images..."
+        FrmSplash.Refresh()
 
         If File.Exists(My.Settings.DomAvatarSave) Then domAvatar.Image = Image.FromFile(My.Settings.DomAvatarSave)
         If File.Exists(My.Settings.SubAvatarSave) Then subAvatar.Image = Image.FromFile(My.Settings.SubAvatarSave)
 
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking recent slideshows..."
+        FrmSplash.Refresh()
 
         For Each comboitem As String In My.Settings.RecentSlideshows
             ImageFolderComboBox.Items.Add(comboitem)
@@ -682,6 +716,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         Chat = ""
         IsTypingTimer.Start()
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking local videos..."
+        FrmSplash.Refresh()
 
         FrmSettings.LblVideoHardCore.Text = My.Settings.VideoHardcore
         FrmSettings.LblVideoSoftCore.Text = My.Settings.VideoSoftcore
@@ -730,13 +768,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         If My.Settings.CBCensorConstant = True Then FrmSettings.CBCensorConstant.Checked = True
 
-        If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Image = Image.FromFile(My.Settings.GlitterAV)
-        If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Image = Image.FromFile(My.Settings.GlitterAV1)
-        If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Image = Image.FromFile(My.Settings.GlitterAV2)
-        If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Image = Image.FromFile(My.Settings.GlitterAV3)
-
-
-
         HardCoreVideoTotal()
         SoftcoreVideoTotal()
         LesbianVideoTotal()
@@ -758,6 +789,19 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         GeneralDVideoTotal()
 
         VideoType = "General"
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Glitter avatar images..."
+        FrmSplash.Refresh()
+
+        If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Image = Image.FromFile(My.Settings.GlitterAV)
+        If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Image = Image.FromFile(My.Settings.GlitterAV1)
+        If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Image = Image.FromFile(My.Settings.GlitterAV2)
+        If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Image = Image.FromFile(My.Settings.GlitterAV3)
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Glitter settings..."
+        FrmSplash.Refresh()
 
         UpdatesTick = 120
         UpdatesTimer.Start()
@@ -872,7 +916,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 
-
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading names..."
+        FrmSplash.Refresh()
 
 
 
@@ -888,6 +934,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSettings.petnameBox6.Text = My.Settings.pnSetting6
         FrmSettings.petnameBox7.Text = My.Settings.pnSetting7
         FrmSettings.petnameBox8.Text = My.Settings.pnSetting8
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading General settings..."
+        FrmSplash.Refresh()
 
         If My.Settings.CBTimeStamps = True Then
             FrmSettings.timestampCheckBox.Checked = True
@@ -965,7 +1015,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             FrmSettings.CBImageInfo.Checked = False
         End If
 
-
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Domme settings..."
+        FrmSplash.Refresh()
 
         FrmSettings.domageNumBox.Value = My.Settings.DomAge
 
@@ -1097,6 +1149,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         Debug.Print("Find Exception end")
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking Glitter scripts..."
+        FrmSplash.Refresh()
+
         FrmSettings.LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
 
         Try
@@ -1122,7 +1178,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSettings.NBWritingTaskMin.Value = My.Settings.NBWritingTaskMin
         FrmSettings.NBWritingTaskMax.Value = My.Settings.NBWritingTaskMax
 
-
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Image settings..."
+        FrmSplash.Refresh()
 
         If My.Settings.CBBnBLocal = True Then FrmSettings.CBBnBLocal.Checked = True
         If My.Settings.CBBnBURL = True Then FrmSettings.CBBnBURL.Checked = True
@@ -1136,6 +1194,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         If My.Settings.CBEnableBnB = True Then FrmSettings.CBEnableBnB.Checked = True
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Sub settings..."
+        FrmSplash.Refresh()
 
         FrmSettings.CockSizeNumBox.Value = My.Settings.SubCockSize
         FrmSettings.subAgeNumBox.Value = My.Settings.SubAge
@@ -1158,6 +1219,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         Else
             FrmSettings.CBHonorificCapitalized.Checked = False
         End If
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Range settings..."
+        FrmSplash.Refresh()
 
         FrmSettings.SliderSTF.Value = My.Settings.TimerSTF
         If FrmSettings.SliderSTF.Value = 1 Then FrmSettings.LBLStf.Text = "Preoccupied"
@@ -1184,6 +1249,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSettings.FontComboBox.Text = My.Settings.SubFont
         FrmSettings.NBFontSize.Text = My.Settings.SubFontSize
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Configuring media player..."
+        FrmSplash.Refresh()
+
         DomWMP.Height = SplitContainer1.Panel1.Height + 60
 
         If My.Settings.DomAVStretch = False Then domAvatar.SizeMode = PictureBoxSizeMode.Zoom
@@ -1194,7 +1263,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         BTNFileTransferOpen.Visible = False
         BTNFIleTransferDismiss.Visible = False
 
-
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Initializing Games window..."
+        FrmSplash.Refresh()
 
 
         Try
@@ -1238,6 +1309,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         DommeMood = randomizer.Next(5, 8)
 
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking previous orgasms..."
+        FrmSplash.Refresh()
+
         If My.Settings.LastOrgasm = Nothing Then
             My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
             My.Settings.Save()
@@ -1251,6 +1326,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End If
 
         FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined.ToString()
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking current date..."
+        FrmSplash.Refresh()
 
         If CompareDates(My.Settings.DateStamp) <> 0 Then
 
@@ -1284,6 +1363,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End If
         Debug.Print("Test?")
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Calculating average edge information..."
+        FrmSplash.Refresh()
+
         AvgEdgeStroking = My.Settings.AvgEdgeStroking
         AvgEdgeNoTouch = My.Settings.AvgEdgeNoTouch
         AvgEdgeCount = My.Settings.AvgEdgeCount
@@ -1312,13 +1395,25 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         PictureStrip.Items(3).Enabled = False
         PictureStrip.Items(4).Enabled = False
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Domme Personality..."
+        FrmSplash.Refresh()
+
         DomPersonality = FrmSettings.dompersonalityComboBox.Text
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Clearing temporary flags..."
+        FrmSplash.Refresh()
 
         If Directory.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\") Then
             My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
         End If
 
         System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\")
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
+        FrmSplash.Refresh()
 
         GetContact1Pics()
         GetContact2Pics()
@@ -1346,6 +1441,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         WMPTimer.Start()
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Preparing Reset state..."
+        FrmSplash.Refresh()
+
         frmApps.ResetFlag = True
         SuspendSession()
 
@@ -1364,6 +1463,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         frmApps.TBShortGreet.Text = My.Settings.ShortGreet
         frmApps.TBShortSafeword.Text = My.Settings.ShortSafeword
 
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking saved dimensions..."
+        FrmSplash.Refresh()
+
         If My.Settings.WindowWidth = 0 Or My.Settings.WindowHeight = 0 Then
             Me.WindowState = FormWindowState.Maximized
         Else
@@ -1375,13 +1478,32 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         TeaseAIClock.Start()
 
-        If My.Settings.UIColor = "" Then frmApps.ColorBlue()
-        If My.Settings.UIColor = "Purple" Then frmApps.ColorPurple()
-        If My.Settings.UIColor = "Black" Then frmApps.ColorBlack()
-        If My.Settings.UIColor = "Red" Then frmApps.ColorRed()
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Loading theme..."
+        FrmSplash.Refresh()
+
+
+        Try
+            If My.Settings.UIColor = "" Then frmApps.ColorBlue()
+            If My.Settings.UIColor = "Purple" Then frmApps.ColorPurple()
+            If My.Settings.UIColor = "Black" Then frmApps.ColorBlack()
+            If My.Settings.UIColor = "Red" Then frmApps.ColorRed()
+        Catch
+            frmApps.ColorBlue()
+        End Try
 
 
         FormLoading = False
+
+
+
+        FrmSplash.Close()
+        FrmSplash.Dispose()
+
+
+        Me.Left = (Screen.PrimaryScreen.WorkingArea.Width - Me.Width) / 2
+3:
+        Me.Top = (Screen.PrimaryScreen.WorkingArea.Height - Me.Height) / 2
 
         Debug.Print("Form1 Loading Finished")
 
@@ -2548,7 +2670,10 @@ NoPlaylistModuleFile:
 
 DebugAwareness:
 
-
+        If InputFlag = True And DomTypeCheck = False Then
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & InputString, ChatString, False)
+            InputFlag = False
+        End If
 
         ' If the domme is waiting for a response, go straight to this sub-routine instead
         If YesOrNo = True And SubEdging = True Then GoTo EdgeSkip
@@ -3760,6 +3885,8 @@ AcceptAnswer:
         'If SearchImageBlog = True Then Return
 
         If RiskyDelay = True Then Return
+
+        If InputFlag = True Then Return
 
         'Debug.Print("RunFileText " & StrokeTauntVal)
 
@@ -8053,12 +8180,24 @@ StatusUpdateEnd:
             ChatText.Location = New Point(0, 0)
             ChatText.Height = ChatText.Height + 29
 
+            browsefolderButton.Visible = False
+            previousButton.Visible = False
+            nextButton.Visible = False
+            BTNLoadVideo.Visible = False
+            BTNVideoControls.Visible = False
 
         Else
+
             PNLMediaBar.Visible = True
             MediaButton.Text = "Hide Media Panel"
             ChatText.Location = New Point(0, 29)
             ChatText.Height = ChatText.Height - 29
+
+            browsefolderButton.Visible = True
+            previousButton.Visible = True
+            nextButton.Visible = True
+            BTNLoadVideo.Visible = True
+            BTNVideoControls.Visible = True
 
         End If
 
@@ -8662,6 +8801,26 @@ RinseLatherRepeat:
             End If
             StringClean = StringClean.Replace("@CheckFlag", "")
         End If
+
+
+        If StringClean.Contains("@InputVar[") Then
+
+
+            Dim CheckFlag As String = StringClean & " some test garbage"
+
+            Dim CFIndex As Integer = StringClean.IndexOf("@InputVar[") + 10
+
+            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
+
+            CheckFlag = CheckFlag.Split("]")(0)
+            CheckFlag = CheckFlag.Replace("@InputVar[", "")
+
+            InputString = CheckFlag
+            InputFlag = True
+
+            StringClean = StringClean.Replace("@InputVar[" & CheckFlag & "]", "")
+        End If
+
 
         If StringClean.Contains("@Glitter(") Then
 
@@ -9951,38 +10110,42 @@ OrgasmDecided:
 
         If StringClean.Contains("@ShowVar") Then
 
-            Do
+            Dim CheckFlag As String = StringClean & " some test garbage"
 
-                Dim SCShowVar As String() = Split(StringClean)
-                Dim SCGotVar As String = "Null"
+            Dim VarSplit As String() = CheckFlag.Split("]")
 
-                For i As Integer = 0 To SCShowVar.Length - 1
-                    If SCShowVar(i).Contains("@ShowVar") Then
-                        'Debug.Print("@SetVar SCSetVar(i) = " & SCShowVar(i))
-                        SCGotVar = SCShowVar(i)
-                        SCGotVar = SCGotVar.Replace("@ShowVar[", "")
-                        SCGotVar = SCGotVar.Replace("]", "")
-                        Dim VarValue As Integer = 0
-                        Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVar
-                        'Debug.Print("VarCheck = " & VarCheck)
-                        If File.Exists(VarCheck) Then
-                            'Debug.Print("VarCheck Exists")
-                            Dim VarReader As New StreamReader(VarCheck)
-                            VarValue = Val(VarReader.ReadLine())
-                            VarReader.Close()
-                            VarReader.Dispose()
-                        Else
-                            VarValue = 0
-                        End If
-                        SCShowVar(i) = VarValue.ToString()
+            For i As Integer = 0 To VarSplit.Count - 1
 
-                        StringClean = Join(SCShowVar)
-                        'Debug.Print("@SetVar SCSetVar Joined StringClean = " & StringClean)
-                        Exit For
+                Debug.Print("Varsplit(" & i & ") = " & VarSplit(i))
+                If VarSplit(i).Contains("@ShowVar[") Then
+
+                    Dim CFIndex As Integer = VarSplit(i).IndexOf("@ShowVar[") + 9
+                    CheckFlag = VarSplit(i).Substring(CFIndex, VarSplit(i).Length - CFIndex).Replace("@ShowVar[", "")
+
+                    Dim VarValue As String
+                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & CheckFlag
+                    Debug.Print("VarCheck = " & VarCheck)
+                    If File.Exists(VarCheck) Then
+                        'Debug.Print("VarCheck Exists")
+                        Dim VarReader As New StreamReader(VarCheck)
+                        VarValue = VarReader.ReadLine()
+                        VarReader.Close()
+                        VarReader.Dispose()
+                    Else
+                        VarValue = "0"
                     End If
-                Next
+                    Debug.Print("CheckFlag = " & CheckFlag)
+                    VarSplit(i) = VarSplit(i).Replace("@ShowVar[" & CheckFlag, VarValue)
+                    Debug.Print("Final Varsplit(" & i & ") = " & VarSplit(i))
+                End If
 
-            Loop Until Not StringClean.Contains("@ShowVar")
+            Next
+
+            CheckFlag = Join(VarSplit, Nothing)
+
+            CheckFlag = CheckFlag.Replace(" some test garbage", "")
+
+            StringClean = CheckFlag
 
         End If
 
@@ -19853,6 +20016,13 @@ TryNext:
         SettingsList.Add("ReturnSubState: " & ReturnSubState)
         SettingsList.Add("ReturnFlag: " & ReturnFlag)
 
+        SettingsList.Add("SessionEdges: " & SessionEdges)
+        SettingsList.Add("WindowCheck: " & WindowCheck)
+        SettingsList.Add("StrokeFaster: " & StrokeFaster)
+        SettingsList.Add("StrokeFastest: " & StrokeFastest)
+        SettingsList.Add("StrokeSlower: " & StrokeSlower)
+        SettingsList.Add("StrokeSlowest: " & StrokeSlowest)
+
         ' WMPLib.WMPPlayState.wmppsStopped)
 
         Dim SettingsString As String = ""
@@ -20406,8 +20576,12 @@ TryNext:
         ReturnSubState = SettingsList(327).Replace("ReturnSubState: ", "")
         ReturnFlag = SettingsList(328).Replace("ReturnFlag: ", "")
 
-
-
+        SessionEdges = SettingsList(329).Replace("SessionEdges: ", "")
+        WindowCheck = SettingsList(330).Replace("WindowCheck: ", "")
+        StrokeFaster = SettingsList(331).Replace("StrokeFaster: ", "")
+        StrokeFastest = SettingsList(332).Replace("StrokeFastest: ", "")
+        StrokeSlower = SettingsList(333).Replace("StrokeSlower: ", "")
+        StrokeSlowest = SettingsList(334).Replace("StrokeSlowest: ", "")
 
         If File.Exists(SettingsPath & ResumePrefix & "PlayListFile.txt") Then PlaylistFile = Txt2List(SettingsPath & ResumePrefix & "PlayListFile.txt")
         If File.Exists(SettingsPath & ResumePrefix & "TauntLines.txt") Then TauntLines = Txt2List(SettingsPath & ResumePrefix & "TauntLines.txt")
@@ -20538,6 +20712,8 @@ TryNext:
             AdjustWindow()
         End If
 
+        'AdjustWindow()
+
     End Sub
 
     ' Private Sub Form1_SizeChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.SizeChanged
@@ -20586,7 +20762,7 @@ TryNext:
 
 
         chatBox.Width = SplitContainer1.Width - 324
-        chatBox.Location = New Point(3, 6)
+        'chatBox.Location = New Point(3, 5)
 
         MediaButton.Location = New Point(0, 0)
         SaveBlogImage.Location = New Point(114, 0)
@@ -20599,11 +20775,11 @@ TryNext:
 
 
         If PNLMediaBar.Visible = True Then
-            PNLChatBox.Location = New Point(2, ChatText.Height + 30)
+            PNLChatBox.Location = New Point(2, ChatText.Height + 31)
             PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height + 29)
         Else
-            PNLChatBox.Location = New Point(2, ChatText.Height - 11)
-            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height - 12)
+            PNLChatBox.Location = New Point(2, ChatText.Height + 4)
+            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height)
         End If
 
         'PNLHope.Location = New Point(779, 214)
@@ -20704,5 +20880,72 @@ TryNext:
         End If
 
     End Sub
+
+    Private Sub Form_Resize()
+        'if handling resizing...
+        If bResize Then Exit Sub
+        Select Case Me.WindowState
+            Case vbMinimizedNoFocus
+                Exit Sub
+            Case vbMinimizedFocus
+                Exit Sub
+            Case vbNormal
+                'if left mouse button down...
+                If GetKeyState(VK_LBUTTON) < 0 Then
+                    'let timer handle fix
+                    With Me.tmrResize
+                        .Enabled = False 'disable timer
+                        Application.DoEvents() 'let screen catch up
+                        .Enabled = True 're-enable timer
+                    End With
+                    Exit Sub
+                End If
+                'if too small...
+                If Me.Width < MyFormWd _
+                   Or Me.Height < MyFormHt Then
+                    With Me.tmrResize 'smooth w/timer
+                        .Enabled = False 'turn timer off
+                        Application.DoEvents() 'screen catch up
+                        .Enabled = True 'restart timer
+                    End With
+                    Exit Sub 'let timer do work
+                End If
+        End Select
+        '
+        'other control arrangement code goes here.
+        '
+    End Sub
+
+    Private Sub tmrResize_Timer()
+        '
+        ' Exit if Mouse pick button still down 
+        '
+        If GetKeyState(VK_LBUTTON) < 0 Then Exit Sub
+        '
+        'turn off timer
+        '
+        Me.tmrResize.Enabled = False
+        '
+        'do nothing if minimized
+        '
+        If Me.WindowState = vbMinimizedFocus Or Me.WindowState = vbMinimizedNoFocus Then
+            Exit Sub
+        End If
+        '
+        'resize to minimum dims
+        '
+        bResize = True 'block resize envent
+        If Me.Width < MyFormWd Then
+            Me.Width = MyFormWd
+        End If
+        If Me.Height < MyFormHt Then
+            Me.Height = MyFormHt
+        End If
+        bResize = False 'unblock resize event
+        Call Form_Resize() 'now process all resizing
+    End Sub
+
+  
+
 
 End Class

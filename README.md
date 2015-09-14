@@ -2,6 +2,27 @@
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
 
+# Changelog - Patch 47
+
+9/14 1:09 pm - Added Command @InputVar[] - When this Command is used in Linear scripts, the domme will wait for a response from the user and save it as the variable listed in brackets. For example:
+
+I was wondering #SubName
+What's your favorite movie? @InputVar[FavoriteMovie]
+Yeah, that's a good one
+
+This will save the user's input inside a variable file called "FavoriteMovie" to [Personality]\System\Variables, similar to @SetVar[]
+
+9/14 1:00 pm - Improved the @ShowVar[] Command - @ShowVar can now display strings as well as integers, and multiple @ShowVar[] Commands can now be used in the same line. For example:
+
+You know something #SubName
+I agree that @ShowVar[FavoriteMovie] was a pretty good movie, but @ShowVar[FavoriteBand] is terrible
+Your tastes are all over the place
+ 
+9/14 11:57 am - Added Splash Screen that displays what operations Tease AI is carrying out as it's starting up
+
+Changed App Windows state to "Always on Top"
+
+
 # Changelog - Patch 46
 
 9/14 4:26 am Program now unlocks images automatically when the domme allows you to stop
