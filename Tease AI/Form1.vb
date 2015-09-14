@@ -10108,6 +10108,7 @@ OrgasmDecided:
                 If GiveUpVal > GiveUpCheck Then
                     ' you can give up
                     ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\GiveUpALLOWED.txt"
+                    LockImage = False
                     SubGaveUp = True
                     FirstRound = False
                 Else

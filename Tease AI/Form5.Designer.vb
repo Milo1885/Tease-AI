@@ -731,9 +731,9 @@ Partial Class frmApps
         Me.PictureBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
         Me.PictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
-        Me.PictureBox3.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox3.Location = New System.Drawing.Point(0, 18)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(250, 65)
+        Me.PictureBox3.Size = New System.Drawing.Size(250, 47)
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox3.TabIndex = 0
         Me.PictureBox3.TabStop = False
@@ -1909,6 +1909,7 @@ Partial Class frmApps
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(246, 530)
         Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.PNLLazySub)
         Me.Controls.Add(Me.PNLWishList)
         Me.Controls.Add(Me.PNLPlaylist)
         Me.Controls.Add(Me.PNLAppRandomizer)
@@ -1916,7 +1917,6 @@ Partial Class frmApps
         Me.Controls.Add(Me.AppPanelVitalSub)
         Me.Controls.Add(Me.AppPanelGlitter)
         Me.Controls.Add(Me.PNLAppHome)
-        Me.Controls.Add(Me.PNLLazySub)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
