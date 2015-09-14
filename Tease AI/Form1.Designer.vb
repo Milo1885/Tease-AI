@@ -491,7 +491,7 @@ Partial Class Form1
         Me.sendButton.BackColor = System.Drawing.Color.SteelBlue
         Me.sendButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.sendButton.ForeColor = System.Drawing.Color.White
-        Me.sendButton.Location = New System.Drawing.Point(83, 309)
+        Me.sendButton.Location = New System.Drawing.Point(-51, 509)
         Me.sendButton.Name = "sendButton"
         Me.sendButton.Size = New System.Drawing.Size(50, 24)
         Me.sendButton.TabIndex = 147

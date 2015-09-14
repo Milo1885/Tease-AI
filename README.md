@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 46
 
+9/14 2:23 am - Fixed bug where the code for Hold The Edge taunts was pointing to the wrong location
+
 09/13 10:39 am - Added 4 buttons on the App window to switch between Blue, Purple, Black and Red color schemes for Tease AI
 
 09/13 8:09 am - Added Date and Time to UI

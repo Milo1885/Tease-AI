@@ -1470,7 +1470,7 @@ Public Class frmApps
         PNLAppRandomizer.BackColor = Color.Black
         PictureBox3.BackColor = Color.Black
 
-        My.Settings.UIColor = "Gray"
+        My.Settings.UIColor = "Black"
         My.Settings.Save()
 
     End Sub

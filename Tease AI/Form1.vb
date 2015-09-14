@@ -16563,9 +16563,9 @@ NoRepeatOFiles:
             Dim EdgeTaunt As StreamReader
 
             If GlitterTease = False Then
-                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Edge\HoldTheEdge.txt")
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\HoldTheEdge\HoldTheEdge.txt")
             Else
-                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Edge\GroupHoldTheEdge.txt")
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\HoldTheEdge\GroupHoldTheEdge.txt")
             End If
 
             Dim ETLines As New List(Of String)
