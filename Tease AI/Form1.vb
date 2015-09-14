@@ -19371,7 +19371,7 @@ TryNext:
         AddContactTick -= 1
 
         If AddContactTick < 1 Then
-            Contact1Timer.Stop()
+            Contact2Timer.Stop()
             If Not Group.Contains("2") Then
                 Group = Group & "2"
                 GlitterTease = True
@@ -19400,7 +19400,7 @@ TryNext:
         AddContactTick -= 1
 
         If AddContactTick < 1 Then
-            Contact1Timer.Stop()
+            Contact3Timer.Stop()
             If Not Group.Contains("3") Then
                 Group = Group & "3"
                 GlitterTease = True
@@ -19429,7 +19429,7 @@ TryNext:
         AddContactTick -= 1
 
         If AddContactTick < 1 Then
-            Contact1Timer.Stop()
+            DommeTimer.Stop()
             If Not Group.Contains("D") Then
                 Group = Group & "D"
                 If Group = "D" Then GlitterTease = False
