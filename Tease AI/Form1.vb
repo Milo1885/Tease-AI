@@ -465,6 +465,11 @@ Public Class Form1
 
     Dim WindowCheck As Boolean
 
+    Dim StrokeFaster As Boolean
+    Dim StrokeFastest As Boolean
+    Dim StrokeSlower As Boolean
+    Dim StrokeSlowest As Boolean
+
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -4940,6 +4945,8 @@ HypNoResponse:
 
 NoResponse:
 
+                StrokeSpeedCheck()
+
                 If SubStroking = False Then
                     If File.Exists(Application.StartupPath & "\System\Metronome") Then
                         File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
@@ -5602,6 +5609,8 @@ EndSysMes:
                 End If
 
 NullResponseLine2:
+
+                StrokeSpeedCheck()
 
                 If SubStroking = False Then
                     If File.Exists(Application.StartupPath & "\System\Metronome") Then
@@ -8953,16 +8962,7 @@ RinseLatherRepeat:
         '  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚  ┴ ┴└─┘ ┴ └─┘┴└─
 
         If StringClean.Contains("@StrokeFaster") Then
-            If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
-                Debug.Print("Stroke Faster")
-                StrokePace = StrokePace - 20
-                If StrokePace < 10 Then StrokePace = 10
-                If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                End If
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
-            End If
+            StrokeFaster = True
             StringClean = StringClean.Replace("@StrokeFaster", "")
         End If
 
@@ -8971,16 +8971,7 @@ RinseLatherRepeat:
         '  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚═╝┴─┘└─┘└┴┘└─┘┴└─
 
         If StringClean.Contains("@StrokeSlower") Then
-            If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
-                Debug.Print("Stroke Slower")
-                StrokePace = StrokePace + 20
-                If StrokePace > 100 Then StrokePace = 100
-                If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                End If
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
-            End If
+            StrokeSlower = True
             StringClean = StringClean.Replace("@StrokeSlower", "")
         End If
 
@@ -8989,15 +8980,7 @@ RinseLatherRepeat:
         '  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚  ┴ ┴└─┘ ┴ └─┘└─┘ ┴ 
 
         If StringClean.Contains("@StrokeFastest") Then
-            If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
-                Debug.Print("Stroke Fastest")
-                StrokePace = 10
-                If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                End If
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
-            End If
+            StrokeFastest = True
             StringClean = StringClean.Replace("@StrokeFastest", "")
         End If
 
@@ -9006,15 +8989,7 @@ RinseLatherRepeat:
         '  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚═╝┴─┘└─┘└┴┘└─┘└─┘ ┴ 
 
         If StringClean.Contains("@StrokeSlowest") Then
-            If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
-                Debug.Print("Stroke Slowest")
-                StrokePace = 100
-                If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                End If
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
-            End If
+            StrokeSlowest = True
             StringClean = StringClean.Replace("@StrokeSlowest", "")
         End If
 
@@ -20670,4 +20645,63 @@ TryNext:
         LBLDate.Text = Format(Now, "Long Date")
 
     End Sub
+
+    Public Sub StrokeSpeedCheck()
+
+        If StrokeFaster = True Then
+            If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
+                Debug.Print("Stroke Faster")
+                StrokePace = StrokePace - 20
+                If StrokePace < 10 Then StrokePace = 10
+                If File.Exists(Application.StartupPath & "\System\Metronome") Then
+                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
+                End If
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+            End If
+            StrokeFaster = False
+        End If
+
+        If StrokeSlower = True Then
+            If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
+                Debug.Print("Stroke Slower")
+                StrokePace = StrokePace + 20
+                If StrokePace > 100 Then StrokePace = 100
+                If File.Exists(Application.StartupPath & "\System\Metronome") Then
+                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
+                End If
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+            End If
+            StrokeSlower = False
+        End If
+
+        If StrokeFastest = True Then
+            If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
+                Debug.Print("Stroke Fastest")
+                StrokePace = 10
+                If File.Exists(Application.StartupPath & "\System\Metronome") Then
+                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
+                End If
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+            End If
+            StrokeFastest = False
+        End If
+
+        If StrokeSlowest = True Then
+            If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
+                Debug.Print("Stroke Slowest")
+                StrokePace = 100
+                If File.Exists(Application.StartupPath & "\System\Metronome") Then
+                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
+                End If
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+            End If
+            StrokeSlowest = False
+        End If
+
+    End Sub
+
 End Class

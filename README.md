@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 46
 
+9/14 4L20 am - Metronome now waits until Domme has told you to speed up or slow down before changing speed
+
 9/14 2:52 am - Fixed bug where the Domme, Contact 2 and Contact 3 caused System Message loop when joining and leaving the chat room
 
 9/14 2:37 am - Fixed bug where wishlist preview image was not being handled correctly, causing a "cannot locate image url provided" error
