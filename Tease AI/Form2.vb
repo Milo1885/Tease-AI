@@ -11443,8 +11443,10 @@ WhyUMakeMeDoDis:
         WishlistPreview.Image = Nothing
         GC.Collect()
 
+
+
         Try
-            WishlistPreview.Image = Image.FromFile(TBWishlistURL.Text)
+            WishlistPreview.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(TBWishlistURL.Text)))
         Catch ex As Exception
             MessageBox.Show(Me, "Tease AI cannot locate the image URL provided! Please make sure it is a valid address and you are connected to the internet!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             Return

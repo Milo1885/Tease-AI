@@ -24,6 +24,10 @@ Partial Class frmApps
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmApps))
         Me.PNLAppHome = New System.Windows.Forms.Panel()
+        Me.Button33 = New System.Windows.Forms.Button()
+        Me.Button34 = New System.Windows.Forms.Button()
+        Me.Button32 = New System.Windows.Forms.Button()
+        Me.Button31 = New System.Windows.Forms.Button()
         Me.BTNResume = New System.Windows.Forms.Button()
         Me.BTNSuspend = New System.Windows.Forms.Button()
         Me.BTNReset = New System.Windows.Forms.Button()
@@ -159,10 +163,6 @@ Partial Class frmApps
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
-        Me.Button31 = New System.Windows.Forms.Button()
-        Me.Button32 = New System.Windows.Forms.Button()
-        Me.Button33 = New System.Windows.Forms.Button()
-        Me.Button34 = New System.Windows.Forms.Button()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -232,6 +232,54 @@ Partial Class frmApps
         Me.PNLAppHome.Name = "PNLAppHome"
         Me.PNLAppHome.Size = New System.Drawing.Size(250, 485)
         Me.PNLAppHome.TabIndex = 160
+        '
+        'Button33
+        '
+        Me.Button33.BackColor = System.Drawing.Color.Firebrick
+        Me.Button33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button33.ForeColor = System.Drawing.Color.White
+        Me.Button33.Location = New System.Drawing.Point(177, 420)
+        Me.Button33.Name = "Button33"
+        Me.Button33.Size = New System.Drawing.Size(57, 24)
+        Me.Button33.TabIndex = 195
+        Me.Button33.TabStop = False
+        Me.Button33.UseVisualStyleBackColor = False
+        '
+        'Button34
+        '
+        Me.Button34.BackColor = System.Drawing.Color.Black
+        Me.Button34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button34.ForeColor = System.Drawing.Color.White
+        Me.Button34.Location = New System.Drawing.Point(121, 420)
+        Me.Button34.Name = "Button34"
+        Me.Button34.Size = New System.Drawing.Size(57, 24)
+        Me.Button34.TabIndex = 194
+        Me.Button34.TabStop = False
+        Me.Button34.UseVisualStyleBackColor = False
+        '
+        'Button32
+        '
+        Me.Button32.BackColor = System.Drawing.Color.DarkMagenta
+        Me.Button32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button32.ForeColor = System.Drawing.Color.White
+        Me.Button32.Location = New System.Drawing.Point(65, 420)
+        Me.Button32.Name = "Button32"
+        Me.Button32.Size = New System.Drawing.Size(57, 24)
+        Me.Button32.TabIndex = 193
+        Me.Button32.TabStop = False
+        Me.Button32.UseVisualStyleBackColor = False
+        '
+        'Button31
+        '
+        Me.Button31.BackColor = System.Drawing.Color.SteelBlue
+        Me.Button31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button31.ForeColor = System.Drawing.Color.White
+        Me.Button31.Location = New System.Drawing.Point(9, 420)
+        Me.Button31.Name = "Button31"
+        Me.Button31.Size = New System.Drawing.Size(57, 24)
+        Me.Button31.TabIndex = 192
+        Me.Button31.TabStop = False
+        Me.Button31.UseVisualStyleBackColor = False
         '
         'BTNResume
         '
@@ -1854,54 +1902,6 @@ Partial Class frmApps
         Me.Label25.Text = "Playlists"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Button31
-        '
-        Me.Button31.BackColor = System.Drawing.Color.SteelBlue
-        Me.Button31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button31.ForeColor = System.Drawing.Color.White
-        Me.Button31.Location = New System.Drawing.Point(9, 420)
-        Me.Button31.Name = "Button31"
-        Me.Button31.Size = New System.Drawing.Size(57, 24)
-        Me.Button31.TabIndex = 192
-        Me.Button31.TabStop = False
-        Me.Button31.UseVisualStyleBackColor = False
-        '
-        'Button32
-        '
-        Me.Button32.BackColor = System.Drawing.Color.DarkMagenta
-        Me.Button32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button32.ForeColor = System.Drawing.Color.White
-        Me.Button32.Location = New System.Drawing.Point(65, 420)
-        Me.Button32.Name = "Button32"
-        Me.Button32.Size = New System.Drawing.Size(57, 24)
-        Me.Button32.TabIndex = 193
-        Me.Button32.TabStop = False
-        Me.Button32.UseVisualStyleBackColor = False
-        '
-        'Button33
-        '
-        Me.Button33.BackColor = System.Drawing.Color.Firebrick
-        Me.Button33.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button33.ForeColor = System.Drawing.Color.White
-        Me.Button33.Location = New System.Drawing.Point(177, 420)
-        Me.Button33.Name = "Button33"
-        Me.Button33.Size = New System.Drawing.Size(57, 24)
-        Me.Button33.TabIndex = 195
-        Me.Button33.TabStop = False
-        Me.Button33.UseVisualStyleBackColor = False
-        '
-        'Button34
-        '
-        Me.Button34.BackColor = System.Drawing.Color.Black
-        Me.Button34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button34.ForeColor = System.Drawing.Color.White
-        Me.Button34.Location = New System.Drawing.Point(121, 420)
-        Me.Button34.Name = "Button34"
-        Me.Button34.Size = New System.Drawing.Size(57, 24)
-        Me.Button34.TabIndex = 194
-        Me.Button34.TabStop = False
-        Me.Button34.UseVisualStyleBackColor = False
-        '
         'frmApps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1909,14 +1909,14 @@ Partial Class frmApps
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(246, 530)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.PNLAppHome)
-        Me.Controls.Add(Me.PNLLazySub)
         Me.Controls.Add(Me.PNLWishList)
         Me.Controls.Add(Me.PNLPlaylist)
         Me.Controls.Add(Me.PNLAppRandomizer)
         Me.Controls.Add(Me.PNLHypnoGen)
         Me.Controls.Add(Me.AppPanelVitalSub)
         Me.Controls.Add(Me.AppPanelGlitter)
+        Me.Controls.Add(Me.PNLAppHome)
+        Me.Controls.Add(Me.PNLLazySub)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
