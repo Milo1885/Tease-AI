@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 47
 
+9/14 4:41 pm - Gave Terms & Conditions its own form to improve the overall presentation of the program
+
 9/14 1:09 pm - Added Command @InputVar[] - When this Command is used in Linear scripts, the domme will wait for a response from the user and save it as the variable listed in brackets. For example:
 
 I was wondering #SubName

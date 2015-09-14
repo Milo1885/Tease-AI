@@ -35,10 +35,8 @@ Partial Class frmApps
         Me.Button17 = New System.Windows.Forms.Button()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Button28 = New System.Windows.Forms.Button()
-        Me.Button18 = New System.Windows.Forms.Button()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Button19 = New System.Windows.Forms.Button()
-        Me.Button35 = New System.Windows.Forms.Button()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -202,10 +200,8 @@ Partial Class frmApps
         Me.PNLAppHome.Controls.Add(Me.Button17)
         Me.PNLAppHome.Controls.Add(Me.Label15)
         Me.PNLAppHome.Controls.Add(Me.Button28)
-        Me.PNLAppHome.Controls.Add(Me.Button18)
         Me.PNLAppHome.Controls.Add(Me.Label22)
         Me.PNLAppHome.Controls.Add(Me.Button19)
-        Me.PNLAppHome.Controls.Add(Me.Button35)
         Me.PNLAppHome.Controls.Add(Me.Label16)
         Me.PNLAppHome.Controls.Add(Me.Button4)
         Me.PNLAppHome.Controls.Add(Me.Label8)
@@ -284,7 +280,6 @@ Partial Class frmApps
         'BTNResume
         '
         Me.BTNResume.BackColor = System.Drawing.Color.SteelBlue
-        Me.BTNResume.Enabled = False
         Me.BTNResume.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNResume.ForeColor = System.Drawing.Color.White
         Me.BTNResume.Location = New System.Drawing.Point(121, 447)
@@ -298,7 +293,6 @@ Partial Class frmApps
         'BTNSuspend
         '
         Me.BTNSuspend.BackColor = System.Drawing.Color.SteelBlue
-        Me.BTNSuspend.Enabled = False
         Me.BTNSuspend.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNSuspend.ForeColor = System.Drawing.Color.White
         Me.BTNSuspend.Location = New System.Drawing.Point(65, 447)
@@ -312,7 +306,6 @@ Partial Class frmApps
         'BTNReset
         '
         Me.BTNReset.BackColor = System.Drawing.Color.SteelBlue
-        Me.BTNReset.Enabled = False
         Me.BTNReset.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNReset.ForeColor = System.Drawing.Color.White
         Me.BTNReset.Location = New System.Drawing.Point(177, 447)
@@ -338,7 +331,6 @@ Partial Class frmApps
         'Button17
         '
         Me.Button17.BackColor = System.Drawing.Color.Transparent
-        Me.Button17.Enabled = False
         Me.Button17.FlatAppearance.BorderSize = 0
         Me.Button17.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button17.Image = CType(resources.GetObject("Button17.Image"), System.Drawing.Image)
@@ -363,7 +355,6 @@ Partial Class frmApps
         'Button28
         '
         Me.Button28.BackColor = System.Drawing.Color.Transparent
-        Me.Button28.Enabled = False
         Me.Button28.FlatAppearance.BorderSize = 0
         Me.Button28.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button28.Image = CType(resources.GetObject("Button28.Image"), System.Drawing.Image)
@@ -372,16 +363,6 @@ Partial Class frmApps
         Me.Button28.Size = New System.Drawing.Size(48, 48)
         Me.Button28.TabIndex = 184
         Me.Button28.UseVisualStyleBackColor = False
-        '
-        'Button18
-        '
-        Me.Button18.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button18.Location = New System.Drawing.Point(47, 305)
-        Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(145, 52)
-        Me.Button18.TabIndex = 179
-        Me.Button18.Text = "I agree"
-        Me.Button18.UseVisualStyleBackColor = True
         '
         'Label22
         '
@@ -398,7 +379,6 @@ Partial Class frmApps
         'Button19
         '
         Me.Button19.BackColor = System.Drawing.Color.Transparent
-        Me.Button19.Enabled = False
         Me.Button19.FlatAppearance.BorderSize = 0
         Me.Button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button19.Image = CType(resources.GetObject("Button19.Image"), System.Drawing.Image)
@@ -407,16 +387,6 @@ Partial Class frmApps
         Me.Button19.Size = New System.Drawing.Size(48, 48)
         Me.Button19.TabIndex = 182
         Me.Button19.UseVisualStyleBackColor = False
-        '
-        'Button35
-        '
-        Me.Button35.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button35.Location = New System.Drawing.Point(47, 375)
-        Me.Button35.Name = "Button35"
-        Me.Button35.Size = New System.Drawing.Size(145, 52)
-        Me.Button35.TabIndex = 180
-        Me.Button35.Text = "Exit"
-        Me.Button35.UseVisualStyleBackColor = True
         '
         'Label16
         '
@@ -433,7 +403,6 @@ Partial Class frmApps
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.Color.Transparent
-        Me.Button4.Enabled = False
         Me.Button4.FlatAppearance.BorderSize = 0
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
@@ -458,7 +427,6 @@ Partial Class frmApps
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.Transparent
-        Me.Button1.Enabled = False
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
@@ -483,7 +451,6 @@ Partial Class frmApps
         'BTNHomeHypnoGen
         '
         Me.BTNHomeHypnoGen.BackColor = System.Drawing.Color.Transparent
-        Me.BTNHomeHypnoGen.Enabled = False
         Me.BTNHomeHypnoGen.FlatAppearance.BorderSize = 0
         Me.BTNHomeHypnoGen.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNHomeHypnoGen.Image = CType(resources.GetObject("BTNHomeHypnoGen.Image"), System.Drawing.Image)
@@ -586,7 +553,6 @@ Partial Class frmApps
         'BTNRun
         '
         Me.BTNRun.BackColor = System.Drawing.Color.SteelBlue
-        Me.BTNRun.Enabled = False
         Me.BTNRun.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNRun.ForeColor = System.Drawing.Color.White
         Me.BTNRun.Location = New System.Drawing.Point(9, 447)
@@ -650,7 +616,6 @@ Partial Class frmApps
         'Button42
         '
         Me.Button42.BackColor = System.Drawing.Color.Transparent
-        Me.Button42.Enabled = False
         Me.Button42.FlatAppearance.BorderSize = 0
         Me.Button42.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button42.Image = CType(resources.GetObject("Button42.Image"), System.Drawing.Image)
@@ -663,7 +628,6 @@ Partial Class frmApps
         'BTNHomeVitalSub
         '
         Me.BTNHomeVitalSub.BackColor = System.Drawing.Color.Transparent
-        Me.BTNHomeVitalSub.Enabled = False
         Me.BTNHomeVitalSub.FlatAppearance.BorderSize = 0
         Me.BTNHomeVitalSub.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNHomeVitalSub.Image = CType(resources.GetObject("BTNHomeVitalSub.Image"), System.Drawing.Image)
@@ -676,7 +640,6 @@ Partial Class frmApps
         'Button23
         '
         Me.Button23.BackColor = System.Drawing.Color.Transparent
-        Me.Button23.Enabled = False
         Me.Button23.FlatAppearance.BorderColor = System.Drawing.Color.White
         Me.Button23.FlatAppearance.BorderSize = 0
         Me.Button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -1909,6 +1872,7 @@ Partial Class frmApps
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(246, 530)
         Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.PNLAppHome)
         Me.Controls.Add(Me.PNLLazySub)
         Me.Controls.Add(Me.PNLWishList)
         Me.Controls.Add(Me.PNLPlaylist)
@@ -1916,7 +1880,6 @@ Partial Class frmApps
         Me.Controls.Add(Me.PNLHypnoGen)
         Me.Controls.Add(Me.AppPanelVitalSub)
         Me.Controls.Add(Me.AppPanelGlitter)
-        Me.Controls.Add(Me.PNLAppHome)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -2046,8 +2009,6 @@ Partial Class frmApps
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents LBLWishlistDom As System.Windows.Forms.Label
     Friend WithEvents WishlistPreview As System.Windows.Forms.PictureBox
-    Friend WithEvents Button35 As System.Windows.Forms.Button
-    Friend WithEvents Button18 As System.Windows.Forms.Button
     Friend WithEvents Label22 As System.Windows.Forms.Label
     Friend WithEvents Button19 As System.Windows.Forms.Button
     Friend WithEvents PNLLazySub As System.Windows.Forms.Panel

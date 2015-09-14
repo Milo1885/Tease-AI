@@ -644,13 +644,20 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSplash.LBLSplash.Text = "Checking terms and conditions..."
         FrmSplash.Refresh()
 
-        frmApps.Show()
-        If My.Settings.TCAgreed = True Then
-            frmApps.ClearAgree()
+
+        ' If My.Settings.TCAgreed = True Then
+        'frmApps.ClearAgree()
+        'End If
+
+
+        If My.Settings.TC2Agreed = False Then
+            Form7.Show()
+            Do
+                Application.DoEvents()
+            Loop Until My.Settings.TC2Agreed = True
         End If
 
-
-       
+        frmApps.Show()
 
 
         FrmSettings.Show()
@@ -691,7 +698,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         CoInternetSetFeatureEnabled(DISABLE_SOUNDS, SET_FEATURE_ON_PROCESS, True)
 
-    
+
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Loading Domme and Sub avatar images..."
         FrmSplash.Refresh()
@@ -854,7 +861,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         If My.Settings.Glitter2Slider <> 0 Then FrmSettings.GlitterSlider2.Value = My.Settings.Glitter2Slider
         If My.Settings.Glitter3Slider <> 0 Then FrmSettings.GlitterSlider3.Value = My.Settings.Glitter3Slider
 
-       
+
 
         FrmSettings.CBGlitterFeed.Checked = My.Settings.CBGlitterFeed
         FrmSettings.CBGlitterFeedScripts.Checked = My.Settings.CBGlitterFeedScripts

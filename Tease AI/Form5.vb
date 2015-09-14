@@ -861,41 +861,7 @@ Public Class frmApps
 
 
 
-    Private Sub Button35_Click_3(sender As System.Object, e As System.EventArgs) Handles Button35.Click
-        Application.Exit()
-    End Sub
-
-    Private Sub Button18_Click_3(sender As System.Object, e As System.EventArgs) Handles Button18.Click
-
-        My.Settings.TCAgreed = True
-        My.Settings.Save()
-
-        ClearAgree()
-
-    End Sub
-
-    Public Sub ClearAgree()
-
-        Form1.PNLTerms.Visible = False
-        Button23.Enabled = True
-        BTNHomeVitalSub.Enabled = True
-        BTNHomeHypnoGen.Enabled = True
-        Button1.Enabled = True
-        Button4.Enabled = True
-        Button42.Enabled = True
-        BTNRun.Enabled = True
-        BTNSuspend.Enabled = True
-        BTNResume.Enabled = True
-        BTNReset.Enabled = True
-        Button19.Enabled = True
-        Button28.Enabled = True
-        Button17.Enabled = True
-
-        Button18.Visible = False
-        Button35.Visible = False
-
-
-    End Sub
+  
 
     Private Sub frmApps_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         Form1.SaveExercise()
@@ -903,9 +869,7 @@ Public Class frmApps
     End Sub
 
     Private Sub frmApps_Load(sender As Object, e As System.EventArgs) Handles Me.Load
-        If My.Settings.TCAgreed = True Then
-            ClearAgree()
-        End If
+      
 
         LBLCalorie.Text = My.Settings.CaloriesConsumed
         Debug.Print("HOW MANY FUCKING CALORIES!!!! " & My.Settings.CaloriesConsumed)

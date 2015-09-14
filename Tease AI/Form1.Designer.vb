@@ -80,9 +80,6 @@ Partial Class Form1
         Me.EdgeCountTimer = New System.Windows.Forms.Timer(Me.components)
         Me.StrokeTimeTotalTimer = New System.Windows.Forms.Timer(Me.components)
         Me.TnASlides = New System.Windows.Forms.Timer(Me.components)
-        Me.PNLTerms = New System.Windows.Forms.Panel()
-        Me.Label86 = New System.Windows.Forms.Label()
-        Me.Label85 = New System.Windows.Forms.Label()
         Me.WaitTimer = New System.Windows.Forms.Timer(Me.components)
         Me.StupidTimer = New System.Windows.Forms.Timer(Me.components)
         Me.VideoTauntTimer = New System.Windows.Forms.Timer(Me.components)
@@ -142,7 +139,6 @@ Partial Class Form1
         Me.PNLMediaBar.SuspendLayout()
         Me.PNLFileTransfer.SuspendLayout()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PNLTerms.SuspendLayout()
         CType(Me.subAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PictureStrip.SuspendLayout()
         Me.PNLGlitter.SuspendLayout()
@@ -605,37 +601,6 @@ Partial Class Form1
         '
         Me.TnASlides.Interval = 334
         '
-        'PNLTerms
-        '
-        Me.PNLTerms.BackColor = System.Drawing.Color.LightGray
-        Me.PNLTerms.Controls.Add(Me.Label86)
-        Me.PNLTerms.Controls.Add(Me.Label85)
-        Me.PNLTerms.Location = New System.Drawing.Point(0, 0)
-        Me.PNLTerms.Name = "PNLTerms"
-        Me.PNLTerms.Size = New System.Drawing.Size(1378, 1044)
-        Me.PNLTerms.TabIndex = 162
-        '
-        'Label86
-        '
-        Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label86.ForeColor = System.Drawing.Color.Black
-        Me.Label86.Location = New System.Drawing.Point(269, 41)
-        Me.Label86.Name = "Label86"
-        Me.Label86.Size = New System.Drawing.Size(545, 527)
-        Me.Label86.TabIndex = 1
-        Me.Label86.Text = resources.GetString("Label86.Text")
-        '
-        'Label85
-        '
-        Me.Label85.AutoSize = True
-        Me.Label85.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label85.ForeColor = System.Drawing.Color.Black
-        Me.Label85.Location = New System.Drawing.Point(269, 4)
-        Me.Label85.Name = "Label85"
-        Me.Label85.Size = New System.Drawing.Size(545, 37)
-        Me.Label85.TabIndex = 0
-        Me.Label85.Text = "Please read the following carefully!"
-        '
         'WaitTimer
         '
         Me.WaitTimer.Interval = 1000
@@ -926,7 +891,6 @@ Partial Class Form1
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1374, 1012)
-        Me.Controls.Add(Me.PNLTerms)
         Me.Controls.Add(Me.LBLAMPM)
         Me.Controls.Add(Me.LBLDate)
         Me.Controls.Add(Me.LBLTime)
@@ -961,8 +925,6 @@ Partial Class Form1
         Me.PNLMediaBar.ResumeLayout(False)
         Me.PNLFileTransfer.ResumeLayout(False)
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PNLTerms.ResumeLayout(False)
-        Me.PNLTerms.PerformLayout()
         CType(Me.subAvatar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PictureStrip.ResumeLayout(False)
         Me.PNLGlitter.ResumeLayout(False)
@@ -1021,9 +983,6 @@ Partial Class Form1
     Friend WithEvents EdgeCountTimer As System.Windows.Forms.Timer
     Friend WithEvents StrokeTimeTotalTimer As System.Windows.Forms.Timer
     Friend WithEvents TnASlides As System.Windows.Forms.Timer
-    Friend WithEvents PNLTerms As System.Windows.Forms.Panel
-    Friend WithEvents Label86 As System.Windows.Forms.Label
-    Friend WithEvents Label85 As System.Windows.Forms.Label
     Friend WithEvents ImageFolderComboBox As System.Windows.Forms.ComboBox
     Friend WithEvents LBLImageInfo As System.Windows.Forms.Label
     Friend WithEvents DomWMP As AxWMPLib.AxWindowsMediaPlayer

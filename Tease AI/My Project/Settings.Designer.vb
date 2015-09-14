@@ -4592,6 +4592,18 @@ Namespace My
                 Me("UIColor") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property TC2Agreed() As Boolean
+            Get
+                Return CType(Me("TC2Agreed"),Boolean)
+            End Get
+            Set
+                Me("TC2Agreed") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
