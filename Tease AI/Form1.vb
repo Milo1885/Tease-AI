@@ -8541,11 +8541,31 @@ DeepClean:
                             FoundTag = TagList(t)
                             Dim FoundTagSplit As String() = Split(FoundTag)
                             For j As Integer = 0 To FoundTagSplit.Length - 1
-                                If FoundTagSplit(j).Contains("TagGarment") Then TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
-                                If FoundTagSplit(j).Contains("TagUnderwear") Then TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
-                                If FoundTagSplit(j).Contains("TagTattoo") Then TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
-                                If FoundTagSplit(j).Contains("TagSexToy") Then TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
-                                If FoundTagSplit(j).Contains("TagFurniture") Then TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
+                                If FoundTagSplit(j).Contains("TagGarment") Then
+                                    TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
+                                    TagGarment = TagGarment.Replace("-", " ")
+                                End If
+
+                                If FoundTagSplit(j).Contains("TagUnderwear") Then
+                                    TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
+                                    TagUnderwear = TagUnderwear.Replace("-", " ")
+                                End If
+
+                                If FoundTagSplit(j).Contains("TagTattoo") Then
+                                    TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
+                                    TagTattoo = TagTattoo.Replace("-", " ")
+                                End If
+
+                                If FoundTagSplit(j).Contains("TagSexToy") Then
+                                    TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
+                                    TagSexToy = TagSexToy.Replace("-", " ")
+                                End If
+
+                                If FoundTagSplit(j).Contains("TagFurniture") Then
+                                    TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
+                                    TagFurniture = TagFurniture.Replace("-", " ")
+                                End If
+
                             Next
                             Exit For
                         End If
@@ -8652,6 +8672,8 @@ DeepClean:
                         StringClean = StringClean.Replace("TagCloseUp", "")
                         StringClean = StringClean.Replace("TagMasturbating", "")
                         StringClean = StringClean.Replace("TagSucking", "")
+                        StringClean = StringClean.Replace("TagSmiling", "")
+                        StringClean = StringClean.Replace("TagGlaring", "")
 
 
                         'If PoundArray(i).Contains("#") Then GoTo DoItHere
@@ -12252,11 +12274,30 @@ VTSkip:
                             FoundTag = TagList(t)
                             Dim FoundTagSplit As String() = Split(FoundTag)
                             For j As Integer = 0 To FoundTagSplit.Length - 1
-                                If FoundTagSplit(j).Contains("TagGarment") Then TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
-                                If FoundTagSplit(j).Contains("TagUnderwear") Then TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
-                                If FoundTagSplit(j).Contains("TagTattoo") Then TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
-                                If FoundTagSplit(j).Contains("TagSexToy") Then TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
-                                If FoundTagSplit(j).Contains("TagFurniture") Then TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
+                                If FoundTagSplit(j).Contains("TagGarment") Then
+                                    TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
+                                    TagGarment = TagGarment.Replace("-", " ")
+                                End If
+
+                                If FoundTagSplit(j).Contains("TagUnderwear") Then
+                                    TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
+                                    TagUnderwear = TagUnderwear.Replace("-", " ")
+                                End If
+
+                                If FoundTagSplit(j).Contains("TagTattoo") Then
+                                    TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
+                                    TagTattoo = TagTattoo.Replace("-", " ")
+                                End If
+
+                                If FoundTagSplit(j).Contains("TagSexToy") Then
+                                    TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
+                                    TagSexToy = TagSexToy.Replace("-", " ")
+                                End If
+
+                                If FoundTagSplit(j).Contains("TagFurniture") Then
+                                    TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
+                                    TagFurniture = TagFurniture.Replace("-", " ")
+                                End If
                             Next
                             Exit For
                         End If
@@ -13139,6 +13180,48 @@ VTSkip:
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagPiercing") Then
                 If Not FoundTag.Contains("TagPiercing") Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                Else
+                    'Debug.Print("FoundTag Contains TagPiercing")
+                End If
+                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPiercing", "")
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@TagSmiling") Then
+                If Not FoundTag.Contains("TagSmiling") Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                Else
+                    'Debug.Print("FoundTag Contains TagPiercing")
+                End If
+                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPiercing", "")
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@TagGlaring") Then
+                If Not FoundTag.Contains("TagGlaring") Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15455,6 +15538,7 @@ VTSkip:
             ListClean(x) = ListClean(x).Replace("#TagTattoo", TagTattoo)
             ListClean(x) = ListClean(x).Replace("#TagSexToy", TagSexToy)
             ListClean(x) = ListClean(x).Replace("#TagFurniture", TagFurniture)
+            ListClean(x) = ListClean(x).Replace("-", " ")
         Next
 
         Return ListClean

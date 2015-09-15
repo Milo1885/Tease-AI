@@ -161,6 +161,7 @@ Partial Class frmApps
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
+        Me.Button18 = New System.Windows.Forms.Button()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -189,6 +190,7 @@ Partial Class frmApps
         '
         Me.PNLAppHome.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(170, Byte), Integer))
         Me.PNLAppHome.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLAppHome.Controls.Add(Me.Button18)
         Me.PNLAppHome.Controls.Add(Me.Button33)
         Me.PNLAppHome.Controls.Add(Me.Button34)
         Me.PNLAppHome.Controls.Add(Me.Button32)
@@ -1865,6 +1867,18 @@ Partial Class frmApps
         Me.Label25.Text = "Playlists"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Button18
+        '
+        Me.Button18.BackColor = System.Drawing.Color.Black
+        Me.Button18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button18.ForeColor = System.Drawing.Color.White
+        Me.Button18.Location = New System.Drawing.Point(176, 376)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(57, 24)
+        Me.Button18.TabIndex = 196
+        Me.Button18.TabStop = False
+        Me.Button18.UseVisualStyleBackColor = False
+        '
         'frmApps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2054,4 +2068,5 @@ Partial Class frmApps
     Friend WithEvents Button34 As System.Windows.Forms.Button
     Friend WithEvents Button32 As System.Windows.Forms.Button
     Friend WithEvents Button31 As System.Windows.Forms.Button
+    Friend WithEvents Button18 As System.Windows.Forms.Button
 End Class
