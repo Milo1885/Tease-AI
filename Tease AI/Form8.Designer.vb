@@ -584,6 +584,7 @@ Partial Class Form8
         Me.Controls.Add(Me.Ass)
         Me.ForeColor = System.Drawing.Color.Black
         Me.Name = "Form8"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Domme Tag Creator"
         Me.ResumeLayout(False)
         Me.PerformLayout()

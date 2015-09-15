@@ -161,7 +161,8 @@ Partial Class frmApps
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
-        Me.Button18 = New System.Windows.Forms.Button()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Button35 = New System.Windows.Forms.Button()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -190,7 +191,8 @@ Partial Class frmApps
         '
         Me.PNLAppHome.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(170, Byte), Integer))
         Me.PNLAppHome.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLAppHome.Controls.Add(Me.Button18)
+        Me.PNLAppHome.Controls.Add(Me.Button35)
+        Me.PNLAppHome.Controls.Add(Me.Label24)
         Me.PNLAppHome.Controls.Add(Me.Button33)
         Me.PNLAppHome.Controls.Add(Me.Button34)
         Me.PNLAppHome.Controls.Add(Me.Button32)
@@ -210,22 +212,16 @@ Partial Class frmApps
         Me.PNLAppHome.Controls.Add(Me.Button1)
         Me.PNLAppHome.Controls.Add(Me.Label1)
         Me.PNLAppHome.Controls.Add(Me.BTNHomeHypnoGen)
-        Me.PNLAppHome.Controls.Add(Me.Button2)
-        Me.PNLAppHome.Controls.Add(Me.CBDebugAwareness)
-        Me.PNLAppHome.Controls.Add(Me.Label7)
-        Me.PNLAppHome.Controls.Add(Me.Button36)
         Me.PNLAppHome.Controls.Add(Me.MouseYLbl)
         Me.PNLAppHome.Controls.Add(Me.Label84)
         Me.PNLAppHome.Controls.Add(Me.Button51)
         Me.PNLAppHome.Controls.Add(Me.BTNRun)
-        Me.PNLAppHome.Controls.Add(Me.Button6)
         Me.PNLAppHome.Controls.Add(Me.Label11)
         Me.PNLAppHome.Controls.Add(Me.Label10)
         Me.PNLAppHome.Controls.Add(Me.LBLGlitter)
         Me.PNLAppHome.Controls.Add(Me.Button42)
         Me.PNLAppHome.Controls.Add(Me.BTNHomeVitalSub)
         Me.PNLAppHome.Controls.Add(Me.Button23)
-        Me.PNLAppHome.Controls.Add(Me.Button29)
         Me.PNLAppHome.Location = New System.Drawing.Point(0, 47)
         Me.PNLAppHome.Name = "PNLAppHome"
         Me.PNLAppHome.Size = New System.Drawing.Size(250, 485)
@@ -467,7 +463,7 @@ Partial Class frmApps
         Me.Button2.BackColor = System.Drawing.Color.SteelBlue
         Me.Button2.Font = New System.Drawing.Font("Wingdings", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
         Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(14, 319)
+        Me.Button2.Location = New System.Drawing.Point(294, 310)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(46, 31)
         Me.Button2.TabIndex = 165
@@ -480,7 +476,7 @@ Partial Class frmApps
         '
         Me.CBDebugAwareness.AutoSize = True
         Me.CBDebugAwareness.ForeColor = System.Drawing.Color.White
-        Me.CBDebugAwareness.Location = New System.Drawing.Point(68, 357)
+        Me.CBDebugAwareness.Location = New System.Drawing.Point(356, 364)
         Me.CBDebugAwareness.Name = "CBDebugAwareness"
         Me.CBDebugAwareness.Size = New System.Drawing.Size(113, 17)
         Me.CBDebugAwareness.TabIndex = 163
@@ -492,7 +488,7 @@ Partial Class frmApps
         '
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(140, 283)
+        Me.Label7.Location = New System.Drawing.Point(420, 274)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(64, 28)
         Me.Label7.TabIndex = 151
@@ -505,7 +501,7 @@ Partial Class frmApps
         Me.Button36.BackColor = System.Drawing.Color.SteelBlue
         Me.Button36.Font = New System.Drawing.Font("Webdings", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
         Me.Button36.ForeColor = System.Drawing.Color.White
-        Me.Button36.Location = New System.Drawing.Point(16, 356)
+        Me.Button36.Location = New System.Drawing.Point(304, 363)
         Me.Button36.Name = "Button36"
         Me.Button36.Size = New System.Drawing.Size(46, 31)
         Me.Button36.TabIndex = 162
@@ -571,7 +567,7 @@ Partial Class frmApps
         Me.Button6.Enabled = False
         Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button6.ForeColor = System.Drawing.Color.White
-        Me.Button6.Location = New System.Drawing.Point(12, 281)
+        Me.Button6.Location = New System.Drawing.Point(292, 272)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(129, 32)
         Me.Button6.TabIndex = 16
@@ -657,7 +653,7 @@ Partial Class frmApps
         Me.Button29.BackColor = System.Drawing.Color.SteelBlue
         Me.Button29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button29.ForeColor = System.Drawing.Color.White
-        Me.Button29.Location = New System.Drawing.Point(176, 271)
+        Me.Button29.Location = New System.Drawing.Point(456, 262)
         Me.Button29.Name = "Button29"
         Me.Button29.Size = New System.Drawing.Size(57, 24)
         Me.Button29.TabIndex = 191
@@ -1867,17 +1863,30 @@ Partial Class frmApps
         Me.Label25.Text = "Playlists"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Button18
+        'Label24
         '
-        Me.Button18.BackColor = System.Drawing.Color.Black
-        Me.Button18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button18.ForeColor = System.Drawing.Color.White
-        Me.Button18.Location = New System.Drawing.Point(176, 376)
-        Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(57, 24)
-        Me.Button18.TabIndex = 196
-        Me.Button18.TabStop = False
-        Me.Button18.UseVisualStyleBackColor = False
+        Me.Label24.BackColor = System.Drawing.Color.Transparent
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.ForeColor = System.Drawing.Color.White
+        Me.Label24.Location = New System.Drawing.Point(12, 338)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(55, 30)
+        Me.Label24.TabIndex = 198
+        Me.Label24.Text = "Domme Tags"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Button35
+        '
+        Me.Button35.BackColor = System.Drawing.Color.Transparent
+        Me.Button35.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.Button35.FlatAppearance.BorderSize = 0
+        Me.Button35.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button35.Image = CType(resources.GetObject("Button35.Image"), System.Drawing.Image)
+        Me.Button35.Location = New System.Drawing.Point(14, 287)
+        Me.Button35.Name = "Button35"
+        Me.Button35.Size = New System.Drawing.Size(48, 48)
+        Me.Button35.TabIndex = 199
+        Me.Button35.UseVisualStyleBackColor = False
         '
         'frmApps
         '
@@ -1894,6 +1903,12 @@ Partial Class frmApps
         Me.Controls.Add(Me.PNLHypnoGen)
         Me.Controls.Add(Me.AppPanelVitalSub)
         Me.Controls.Add(Me.AppPanelGlitter)
+        Me.Controls.Add(Me.Button6)
+        Me.Controls.Add(Me.Button29)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button36)
+        Me.Controls.Add(Me.CBDebugAwareness)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -1901,7 +1916,6 @@ Partial Class frmApps
         Me.Text = "Apps"
         Me.TopMost = True
         Me.PNLAppHome.ResumeLayout(False)
-        Me.PNLAppHome.PerformLayout()
         Me.AppPanelGlitter.ResumeLayout(False)
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.AppPanelVitalSub.ResumeLayout(False)
@@ -1928,6 +1942,7 @@ Partial Class frmApps
         Me.Panel5.ResumeLayout(False)
         Me.PNLPlaylist.ResumeLayout(False)
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents PNLAppHome As System.Windows.Forms.Panel
@@ -2068,5 +2083,6 @@ Partial Class frmApps
     Friend WithEvents Button34 As System.Windows.Forms.Button
     Friend WithEvents Button32 As System.Windows.Forms.Button
     Friend WithEvents Button31 As System.Windows.Forms.Button
-    Friend WithEvents Button18 As System.Windows.Forms.Button
+    Friend WithEvents Label24 As System.Windows.Forms.Label
+    Friend WithEvents Button35 As System.Windows.Forms.Button
 End Class

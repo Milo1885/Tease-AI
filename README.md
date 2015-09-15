@@ -4,6 +4,10 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 47
 
+9/15 1:50 pm - Fixed bug where @ShowButtImage pulled up Boob pictures instead
+
+9/15 1:36 pm - Domme now occasionally makes and corrects typos
+
 9/15 7:56 am - Created new Domme Tag app that's much easier to work with than the original system - Currently this is accessed through a small black button on the Apps window
 
 9/14 4:41 pm - Gave Terms & Conditions its own form to improve the overall presentation of the program

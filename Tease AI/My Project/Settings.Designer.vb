@@ -4616,6 +4616,30 @@ Namespace My
                 Me("LastDomTagURL") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property Sys_SubLeftEarly() As Integer
+            Get
+                Return CType(Me("Sys_SubLeftEarly"),Integer)
+            End Get
+            Set
+                Me("Sys_SubLeftEarly") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property Sys_SubLeftEarlyTotal() As Integer
+            Get
+                Return CType(Me("Sys_SubLeftEarlyTotal"),Integer)
+            End Get
+            Set
+                Me("Sys_SubLeftEarlyTotal") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

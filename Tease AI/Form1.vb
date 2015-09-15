@@ -473,6 +473,11 @@ Public Class Form1
     Dim InputFlag As Boolean
     Dim InputString As String
 
+    Dim RapidCode As Boolean
+
+    Dim CorrectedTypo As Boolean
+    Dim CorrectedWord As String
+
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -513,6 +518,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         Debug.Print("Here?")
 
         
+        If BeforeTease = False And My.Settings.Sys_SubLeftEarly <> 0 Then My.Settings.Sys_SubLeftEarlyTotal += 1
+        My.Settings.Save()
 
 
         'TempGif.Dispose()
@@ -3599,6 +3606,8 @@ AcceptAnswer:
 
     Public Sub GetGotoChat()
 
+
+
         GotoFlag = True
 
         'DomTypeCheck = True
@@ -4383,6 +4392,8 @@ AcceptAnswer:
 
     Public Sub GetGoto()
 
+
+
         GotoFlag = True
         'Debug.Print("DomTask = " & DomTask)
         'DomTypeCheck = True
@@ -4491,7 +4502,7 @@ SkipGotoSearch:
 
         'Debug.Print("Typing Delay Called " & StrokeTauntVal)
         TypeDelay = StringLength
-        If FrmSettings.typeinstantlyCheckBox.Checked = True Then TypeDelay = 0
+        If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True Then TypeDelay = 0
         SendTimer.Start()
 
 
@@ -4500,7 +4511,7 @@ SkipGotoSearch:
     Public Sub TypingDelayGeneric()
         'Debug.Print("Typing Delay Generic Called " & StrokeTauntVal)
         TypeDelay = StringLength
-        If FrmSettings.typeinstantlyCheckBox.Checked = True Then TypeDelay = 0
+        If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True Then TypeDelay = 0
         If HypnoGen = True And frmApps.CBHypnoGenNoText.Checked = True Then TypeDelay = 0
         Timer1.Start()
 
@@ -4520,7 +4531,12 @@ SkipGotoSearch:
         If DomTask.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
 
         'Debug.Print("Nullresponse = " & NullResponse)
-        If DomTask.Contains("@NullResponse") Then NullResponse = True
+        If DomTask.Contains("@NullResponse") Then
+            NullResponse = True
+        Else
+            RapidCode = False
+        End If
+
 
         If Not Group.Contains("D") And Not DomTask.Contains("@Contact1") And Not DomTask.Contains("@Contact2") And Not DomTask.Contains("@Contact3") Then
             Dim GroupList As New List(Of String)
@@ -4582,7 +4598,7 @@ SkipGotoSearch:
                     DivideText = False
                 End If
                 If RLGLGame = True Then StringLength = 0
-                If FrmSettings.typeinstantlyCheckBox.Checked = True Then StringLength = 0
+                If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True Then StringLength = 0
                 If HypnoGen = True And frmApps.CBHypnoGenNoText.Checked = True Then StringLength = 0
                 TypingDelayGeneric()
             End If
@@ -4899,6 +4915,86 @@ NullResponse:
                     DomTask = DomTask.Replace(":d", ":D")
                     DomTask = DomTask.Replace(": d", ": D")
 
+
+                    'Typo Test
+
+
+
+                    If Not DomTask.Substring(0, 1) = FrmSettings.domemoteComboBox.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False Then
+
+                        Dim TypoChance As Integer = randomizer.Next(0, 101)
+
+                        If TypoChance < 6 Then
+
+                            Dim TypoString As String
+
+                            Dim TypoSplit As String() = DomTask.Split(" ")
+
+                            TempVal = randomizer.Next(0, TypoSplit.Count)
+
+                            CorrectedWord = TypoSplit(TempVal)
+
+                            TypoString = "w d s f x"
+
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "a" Then TypoString = "q w s z x"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "b" Then TypoString = "f v g h n"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "c" Then TypoString = "x d f v b"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "d" Then TypoString = "s c f x e"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "e" Then TypoString = "s r w 3 d"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "f" Then TypoString = "d r g v c"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "g" Then TypoString = "f t b h y"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "h" Then TypoString = "g b n u j"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "i" Then TypoString = "o u j k l"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "j" Then TypoString = "k u i n h"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "k" Then TypoString = "j m , l i"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "l" Then TypoString = "; p . , i"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "m" Then TypoString = "n j k , l"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "n" Then TypoString = "b h j k m"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "o" Then TypoString = "p 0 i k ;"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "p" Then TypoString = "[ - o ; l"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "q" Then TypoString = "1 w s a 2"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "r" Then TypoString = "4 5 t f d"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "s" Then TypoString = "w d a z x"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "t" Then TypoString = "5 6 g y r"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "u" Then TypoString = "y 7 j i k"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "v" Then TypoString = "c f g h b"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "w" Then TypoString = "2 a e q s"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "x" Then TypoString = "z s d f c"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "y" Then TypoString = "t 7 h u g"
+                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "z" Then TypoString = "a s x d c"
+
+                            Dim UpperChance As Integer = randomizer.Next(0, 101)
+                            If UpperChance < 26 Then TypoString = UCase(TypoString)
+
+                          
+
+                            Dim GetTypo As String() = TypoString.Split(" ")
+
+                            Dim MadeTypo As String = GetTypo(randomizer.Next(0, GetTypo.Count))
+
+
+                            Dim DoubleChance As Integer = randomizer.Next(0, 101)
+                            If DoubleChance < 6 Then MadeTypo = MadeTypo & MadeTypo
+
+
+                            TypoSplit(TempVal) = TypoSplit(TempVal).Remove(0, 1)
+
+                            Dim SpaceChance As Integer = randomizer.Next(0, 101)
+                            If SpaceChance < 7 Then
+                                TypoSplit(TempVal) = MadeTypo & " " & TypoSplit(TempVal)
+                            Else
+                                TypoSplit(TempVal) = MadeTypo & TypoSplit(TempVal)
+
+                            End If
+
+                            DomTask = Join(TypoSplit)
+
+                            CorrectedTypo = True
+
+                        End If
+
+                    End If
+
                 End If
 
                 If NullResponse = False And DomTask <> "" Then
@@ -5079,6 +5175,13 @@ HypNoResponse:
 
 NoResponse:
 
+                If CorrectedTypo = True Then
+                    CorrectedTypo = False
+                    DomTask = "*" & CorrectedWord
+                    TypingDelayGeneric()
+                    Return
+                End If
+
                 StrokeSpeedCheck()
 
                 If SubStroking = False Then
@@ -5160,6 +5263,7 @@ NoResponse:
                     ScriptTick = randomizer.Next(4, 9)
                     If RapidFire = True Then ScriptTick = 1
                     If RiskyDeal = True Then ScriptTick = 2
+                    If RapidCode = True Then ScriptTick = 0
                     ScriptTimer.Start()
                 End If
 
@@ -5251,7 +5355,12 @@ NoResponse:
     Private Sub SendTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SendTimer.Tick
 
         If DomChat.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
-        If DomChat.Contains("@NullResponse") Then NullResponse = True
+        If DomChat.Contains("@NullResponse") Then
+            NullResponse = True
+        Else
+            RapidCode = False
+        End If
+
 
         If Not Group.Contains("D") And Not DomChat.Contains("@Contact1") And Not DomChat.Contains("@Contact2") And Not DomChat.Contains("@Contact3") Then
             Dim GroupList As New List(Of String)
@@ -5308,7 +5417,7 @@ NoResponse:
                     StringLength /= 3
                     DivideText = False
                 End If
-                If FrmSettings.typeinstantlyCheckBox.Checked = True Then StringLength = 0
+                If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True Then StringLength = 0
                 TypingDelay()
             End If
 
@@ -8494,6 +8603,11 @@ StatusUpdateEnd:
         StringClean = StringClean.Replace("#SessionEdges", SessionEdges)
 
 
+        StringClean = StringClean.Replace("#Sys_SubLeftEarly", My.Settings.Sys_SubLeftEarly)
+        StringClean = StringClean.Replace("#Sys_SubLeftEarlyTotal", My.Settings.Sys_SubLeftEarlyTotal)
+
+       
+
         Return StringClean
 
 
@@ -9200,6 +9314,8 @@ RinseLatherRepeat:
             ShowModule = False
             'StrokeCycle = -1
             If StartStrokingCount = 0 Then FirstRound = True
+            If FirstRound = True Then My.Settings.Sys_SubLeftEarly += 1
+            My.Settings.Save()
             StartStrokingCount += 1
             StopMetronome = False
             StrokePace = randomizer.Next(3, 8) * 10
@@ -10317,6 +10433,8 @@ OrgasmDecided:
 
 
         If StringClean.Contains("@EndTease") Then
+            My.Settings.Sys_SubLeftEarly = 0
+            My.Settings.Save()
             StopEverything()
             ResetButton()
             frmApps.ResetFlag = True
@@ -10333,7 +10451,7 @@ OrgasmDecided:
             JustShowedBlogImage = True
             GetTnAList()
             ClearMainPictureBox()
-            Dim ButtPic As String = BoobList(randomizer.Next(0, BoobList.Count))
+            Dim ButtPic As String = AssList(randomizer.Next(0, AssList.Count))
 
             If ButtPic.Contains("\") Then
                 mainPictureBox.Image = Image.FromFile(ButtPic)
@@ -12184,8 +12302,15 @@ VTSkip:
         End If
 
 
+        If StringClean.Contains("@RapidCodeOn") Then
+            RapidCode = True
+            StringClean = StringClean.Replace("@RapidCodeOn", "")
+        End If
 
-
+        If StringClean.Contains("@RapidCodeOff") Then
+            RapidCode = False
+            StringClean = StringClean.Replace("@RapidCodeOff", "")
+        End If
 
         Return StringClean
 
@@ -16278,6 +16403,9 @@ NoPlaylistLinkFile:
     End Sub
 
     Public Sub RunLastScript()
+
+        My.Settings.Sys_SubLeftEarly = 0
+        My.Settings.Save()
 
         'Debug.Print("RunLastScript() Called")
 

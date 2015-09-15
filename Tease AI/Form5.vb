@@ -1500,7 +1500,12 @@ Public Class frmApps
 
     End Sub
 
-    Private Sub Button18_Click(sender As System.Object, e As System.EventArgs) Handles Button18.Click
+    Private Sub Button18_Click(sender As System.Object, e As System.EventArgs)
         Form8.Show()
+    End Sub
+
+    Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles Button35.Click
+        Form8.Show()
+        LBLGlitter.Text = LBLGlitter.Text
     End Sub
 End Class
