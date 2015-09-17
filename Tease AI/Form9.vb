@@ -87,65 +87,67 @@ Public Class Form9
 
                 If GetaiBoxList(i).Contains("[aiBox File Begin]") Then aiFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & GetaiBoxList(i).Replace("[aiBox File Begin] ", "")
 
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin]")) Then aiFileType = "Linear"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin]")) Then aiScriptType = "Linear"
+                If GetaiBoxList(i).Contains("[aiBox File Begin]") Then aiFileType = "Linear"
+                If GetaiBoxList(i).Contains("[aiBox File Begin]") Then aiScriptType = "Linear"
 
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Vocabulary\#")) Then aiFileType = "Vocabulary"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\Edge\Edge.txt")) Then aiFileType = "Edge Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\Edge\GroupEdge.txt")) Then aiFileType = "Glitter Edge Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\HoldTheEdge\HoldTheEdge.txt")) Then aiFileType = "Hold The Edge Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\HoldTheEdge\GroupHoldTheEdge.txt")) Then aiFileType = "Glitter Hold The Edge Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] CBT\CBTBalls.txt")) Then aiFileType = "CBT Balls"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] CBT\CBTBalls_First.txt")) Then aiFileType = "CBT Balls_First"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] CBT\CBTCock.txt")) Then aiFileType = "CBT Cock"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] CBT\CBTCock_First.txt")) Then aiFileType = "CBT Cock_First"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Custom\Tasks")) Then aiFileType = "Custom Task"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\StrokeTaunts_1.txt")) Then aiFileType = "Stroke Taunts 1"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\StrokeTaunts_2.txt")) Then aiFileType = "Stroke Taunts 2"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\StrokeTaunts_3.txt")) Then aiFileType = "Stroke Taunts 3"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\ChastityTaunts_1.txt")) Then aiFileType = "Chastity Taunts 1"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\ChastityTaunts_2.txt")) Then aiFileType = "Chastity Taunts 2"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\ChastityTaunts_3.txt")) Then aiFileType = "Chastity Taunts 3"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\GlitterTaunts_1.txt")) Then aiFileType = "Glitter Taunts 1"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\GlitterTaunts_2.txt")) Then aiFileType = "Glitter Taunts 2"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\GlitterTaunts_3.txt")) Then aiFileType = "Glitter Taunts 3"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Tasks")) Then aiFileType = "Tasks"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Video\Avoid The Edge\Taunts.txt")) Then aiFileType = "Avoid The Edge Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Video\Censorship Sucks\CensorBarOff.txt")) Then aiFileType = "Censorship Sucks Censor Bar Off Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Video\Censorship Sucks\CensorBarOn.txt")) Then aiFileType = "Censorship Sucks Censor Bar On Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Video\Red Light Green Light\Taunts.txt")) Then aiFileType = "Red Light Green Light Game Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Video\Red Light Green Light\Green Light.txt")) Then aiFileType = "Green Light Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Video\Red Light Green Light\Red Light.txt")) Then aiFileType = "Red Light Taunts"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Vocabulary\Responses\System")) And GetaiBoxList(i).Contains("KEY") Then aiFileType = "System Response Key File"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Apps\Glitter")) Then aiFileType = "Glitter"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Vocabulary\#") Then aiFileType = "Vocabulary"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\Edge\Edge.txt") Then aiFileType = "Edge Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\Edge\GroupEdge.txt") Then aiFileType = "Glitter Edge Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\HoldTheEdge\HoldTheEdge.txt") Then aiFileType = "Hold The Edge Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\HoldTheEdge\GroupHoldTheEdge.txt") Then aiFileType = "Glitter Hold The Edge Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] CBT\CBTBalls.txt") Then aiFileType = "CBT Balls"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] CBT\CBTBalls_First.txt") Then aiFileType = "CBT Balls_First"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] CBT\CBTCock.txt") Then aiFileType = "CBT Cock"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] CBT\CBTCock_First.txt") Then aiFileType = "CBT Cock_First"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Custom\Tasks") Then aiFileType = "Custom Task"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\StrokeTaunts_1.txt") Then aiFileType = "Stroke Taunts 1"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\StrokeTaunts_2.txt") Then aiFileType = "Stroke Taunts 2"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\StrokeTaunts_3.txt") Then aiFileType = "Stroke Taunts 3"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\ChastityTaunts_1.txt") Then aiFileType = "Chastity Taunts 1"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\ChastityTaunts_2.txt") Then aiFileType = "Chastity Taunts 2"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\ChastityTaunts_3.txt") Then aiFileType = "Chastity Taunts 3"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\GlitterTaunts_1.txt") Then aiFileType = "Glitter Taunts 1"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\GlitterTaunts_2.txt") Then aiFileType = "Glitter Taunts 2"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\GlitterTaunts_3.txt") Then aiFileType = "Glitter Taunts 3"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Tasks") Then aiFileType = "Tasks"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Video\Avoid The Edge\Taunts.txt") Then aiFileType = "Avoid The Edge Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Video\Censorship Sucks\CensorBarOff.txt") Then aiFileType = "Censorship Sucks Censor Bar Off Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Video\Censorship Sucks\CensorBarOn.txt") Then aiFileType = "Censorship Sucks Censor Bar On Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Video\Red Light Green Light\Taunts.txt") Then aiFileType = "Red Light Green Light Game Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Video\Red Light Green Light\Green Light.txt") Then aiFileType = "Green Light Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Video\Red Light Green Light\Red Light.txt") Then aiFileType = "Red Light Taunts"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Vocabulary\Responses\System") And GetaiBoxList(i).Contains("KEY") Then aiFileType = "System Response Key File"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Apps\Glitter") Then aiFileType = "Glitter"
 
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin]")) And aiFileType <> "Linear" Then aiScriptType = "List"
+                If GetaiBoxList(i).Contains("[aiBox File Begin]") And aiFileType <> "Linear" Then aiScriptType = "List"
 
-                Debug.Print(UCase(GetaiBoxList(i)))
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Vocabulary\Responses")) And Not UCase(GetaiBoxList(i)).Contains(UCase("Vocabulary\Responses\System\")) Then
+
+
+                Debug.Print(GetaiBoxList(i))
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Vocabulary\Responses") And Not GetaiBoxList(i).Contains("Vocabulary\Responses\System\") Then
                     aiFileType = "Response"
                     aiScriptType = "Response"
                 End If
 
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Vocabulary\Responses\System\")) And Not GetaiBoxList(i).Contains("KEY") Then
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Vocabulary\Responses\System\") And Not GetaiBoxList(i).Contains("KEY") Then
                     aiFileType = "System Response"
                     aiScriptType = "Response"
                 End If
 
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin]")) And aiFileType <> "Linear" And aiFileType <> "List" Then aiScriptType = "Response"
+                If GetaiBoxList(i).Contains("[aiBox File Begin]") And aiScriptType <> "Linear" And aiScriptType <> "List" Then aiScriptType = "Response"
 
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Interrupt\")) Then aiFileType = "Interrupt"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Modules\")) Then aiFileType = "Module"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\End\")) Then aiFileType = "End"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\Link\")) Then aiFileType = "Link"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Stroke\Start\")) Then aiFileType = "Start"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Playlist\")) Then aiFileType = "Playlist File"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Playlist\Modules\")) Then aiFileType = "Playlist Module"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Playlist\End\")) Then aiFileType = "Playlist End"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Playlist\Link\")) Then aiFileType = "Playlist Link"
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Playlist\Start\")) Then aiFileType = "Playlist Start"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Interrupt\") Then aiFileType = "Interrupt"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Modules\") Then aiFileType = "Module"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\End\") Then aiFileType = "End"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\Link\") Then aiFileType = "Link"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Stroke\Start\") Then aiFileType = "Start"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Playlist\") Then aiFileType = "Playlist File"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Playlist\Modules\") Then aiFileType = "Playlist Module"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Playlist\End\") Then aiFileType = "Playlist End"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Playlist\Link\") Then aiFileType = "Playlist Link"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Playlist\Start\") Then aiFileType = "Playlist Start"
 
-                If UCase(GetaiBoxList(i)).Contains(UCase("[aiBox File Begin] Video\Avoid The Edge\Scripts")) Then aiFileType = "Avoid The Edge Script"
+                If GetaiBoxList(i).Contains("[aiBox File Begin] Video\Avoid The Edge\Scripts") Then aiFileType = "Avoid The Edge Script"
 
 
 
@@ -204,7 +206,7 @@ FoundScriptType:
 
                         End If
 
-                     
+
 
                     Else
 
@@ -265,6 +267,8 @@ FoundScriptType:
 
 
         If File.Exists(aiFile) Then
+
+
 
             If aiScriptType = "List" Then
                 For i As Integer = 0 To CLBAIBox.Items.Count - 1
@@ -534,7 +538,7 @@ FoundScriptType:
 
         Try
             If GetaiBoxList(NextCycle) = "[aiBox Empty]" Then
-                MessageBox.Show(Me, "This AI Box is now empty!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(Me, "The domme's consciousness has escaped this AI Box!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 BTNSaveFile.Enabled = False
                 BTNSkipFile.Enabled = False
                 LBLFileName.Text = ""
@@ -545,7 +549,7 @@ FoundScriptType:
                 Return
             End If
         Catch
-            MessageBox.Show(Me, "This AI Box is now empty!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(Me, "The domme's consciousness has escaped this AI Box!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
             BTNSaveFile.Enabled = False
             BTNSkipFile.Enabled = False
             LBLFileName.Text = ""
@@ -577,6 +581,10 @@ FoundScriptType:
 
     Private Sub Form9_Load(sender As Object, e As System.EventArgs) Handles Me.Load
         LBLPersonality.Text = FrmSettings.dompersonalityComboBox.Text
+
+        CBOpenText.Checked = My.Settings.AIBoxOpen
+        CBSubDir.Checked = My.Settings.AIBoxDir
+
     End Sub
 
     Private Sub BTNSkipFile_Click(sender As System.Object, e As System.EventArgs) Handles BTNSkipFile.Click
@@ -586,7 +594,7 @@ FoundScriptType:
 
         Try
             If GetaiBoxList(NextCycle) = "[aiBox Empty]" Then
-                MessageBox.Show(Me, "This AI Box is now empty!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(Me, "The domme's consciousness has escaped this AI Box!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 BTNSaveFile.Enabled = False
                 BTNSkipFile.Enabled = False
                 LBLFileName.Text = ""
@@ -597,7 +605,7 @@ FoundScriptType:
                 Return
             End If
         Catch
-            MessageBox.Show(Me, "This AI Box is now empty!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(Me, "The domme's consciousness has escaped this AI Box!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
             BTNSaveFile.Enabled = False
             BTNSkipFile.Enabled = False
             LBLFileName.Text = ""
@@ -682,7 +690,7 @@ FoundScriptType:
 
 
             If AIBoxList.Count > 0 Then
-               AddFromFolder()
+                AddFromFolder()
             End If
 
         Next
@@ -794,7 +802,7 @@ FoundScriptType:
         SaveFileDialog1.FilterIndex = 1
         SaveFileDialog1.RestoreDirectory = True
 
-      
+
 
         SaveFileDialog1.FileName = "My " & FrmSettings.dompersonalityComboBox.Text & " AI Box.txt"
 
@@ -817,6 +825,7 @@ FoundScriptType:
             RTBAIBox.Text = ""
             CLBAIBox.Items.Clear()
 
+            If CBOpenText.Checked = True Then Form1.ShellExecute(SaveFileDialog1.FileName)
 
         End If
 
@@ -844,7 +853,7 @@ FoundScriptType:
             HopeDir = HopeDir.Remove(0, 1)
             Debug.Print("Hopedir = " & HopeDir)
 
-           
+
 
             AIBoxContents.Add("[aiBox File Begin] " & HopeDir)
             AIBoxList = Form1.Txt2List(OpenFileDialog1.FileName)
@@ -865,13 +874,13 @@ FoundScriptType:
 
         End If
 
-       
+
 
 
     End Sub
 
 
-  
+
     Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
 
         For j As Integer = 0 To aiCheckList.Count - 1
@@ -907,5 +916,20 @@ FoundScriptType:
     End Sub
 
 
+
+
+    Private Sub CBOpenText_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBOpenText.CheckedChanged
+
+    End Sub
+
+    Private Sub CBOpenText_LostFocus(sender As Object, e As System.EventArgs) Handles CBOpenText.LostFocus
+        My.Settings.AIBoxOpen = CBOpenText.Checked
+        My.Settings.Save()
+    End Sub
+
+    Private Sub CBSubDir_LostFocus(sender As Object, e As System.EventArgs) Handles CBSubDir.LostFocus
+        My.Settings.AIBoxDir = CBSubDir.Checked
+        My.Settings.Save()
+    End Sub
 
 End Class

@@ -4640,6 +4640,30 @@ Namespace My
                 Me("Sys_SubLeftEarlyTotal") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property AIBoxDir() As Boolean
+            Get
+                Return CType(Me("AIBoxDir"),Boolean)
+            End Get
+            Set
+                Me("AIBoxDir") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property AIBoxOpen() As Boolean
+            Get
+                Return CType(Me("AIBoxOpen"),Boolean)
+            End Get
+            Set
+                Me("AIBoxOpen") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

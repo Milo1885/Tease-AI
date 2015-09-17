@@ -52,6 +52,7 @@ Partial Class Form9
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.CBOpenText = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -204,6 +205,7 @@ Partial Class Form9
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.CBOpenText)
         Me.GroupBox2.Controls.Add(Me.CBSubDir)
         Me.GroupBox2.Controls.Add(Me.Button1)
         Me.GroupBox2.Controls.Add(Me.Label6)
@@ -212,7 +214,7 @@ Partial Class Form9
         Me.GroupBox2.Controls.Add(Me.BTNAddFromFolder)
         Me.GroupBox2.Location = New System.Drawing.Point(10, 241)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(246, 210)
+        Me.GroupBox2.Size = New System.Drawing.Size(246, 237)
         Me.GroupBox2.TabIndex = 13
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Create AI Box"
@@ -228,7 +230,7 @@ Partial Class Form9
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(21, 148)
+        Me.Button1.Location = New System.Drawing.Point(21, 151)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(205, 38)
         Me.Button1.TabIndex = 16
@@ -255,7 +257,7 @@ Partial Class Form9
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(31, 518)
+        Me.Button2.Location = New System.Drawing.Point(31, 532)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(203, 24)
         Me.Button2.TabIndex = 17
@@ -303,7 +305,7 @@ Partial Class Form9
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(31, 482)
+        Me.Button3.Location = New System.Drawing.Point(31, 496)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 24)
         Me.Button3.TabIndex = 18
@@ -312,12 +314,23 @@ Partial Class Form9
         '
         'Button4
         '
-        Me.Button4.Location = New System.Drawing.Point(159, 482)
+        Me.Button4.Location = New System.Drawing.Point(159, 496)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 24)
         Me.Button4.TabIndex = 19
         Me.Button4.Text = "Select None"
         Me.Button4.UseVisualStyleBackColor = True
+        '
+        'CBOpenText
+        '
+        Me.CBOpenText.Checked = True
+        Me.CBOpenText.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBOpenText.Location = New System.Drawing.Point(24, 202)
+        Me.CBOpenText.Name = "CBOpenText"
+        Me.CBOpenText.Size = New System.Drawing.Size(205, 29)
+        Me.CBOpenText.TabIndex = 19
+        Me.CBOpenText.Text = "Open AI Box as .txt file when finished"
+        Me.CBOpenText.UseVisualStyleBackColor = True
         '
         'Form9
         '
@@ -375,4 +388,5 @@ Partial Class Form9
     Friend WithEvents CBSubDir As System.Windows.Forms.CheckBox
     Friend WithEvents Button3 As System.Windows.Forms.Button
     Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents CBOpenText As System.Windows.Forms.CheckBox
 End Class
