@@ -1508,4 +1508,48 @@ Public Class frmApps
         Form8.Show()
         LBLGlitter.Text = LBLGlitter.Text
     End Sub
+
+    Private Sub Button18_Click_1(sender As System.Object, e As System.EventArgs) Handles Button18.Click
+
+        Dim AIBoxList As New List(Of String)
+        Dim AIBoxCurrent As New List(Of String)
+        Dim AIBoxContents As New List(Of String)
+
+
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\", FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
+            AIBoxList.Add(foundFile)
+        Next
+
+        For i As Integer = 0 To AIBoxList.Count - 1
+            AIBoxContents.Add("[aiBox File Begin] " & AIBoxList(i).Replace(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\", ""))
+            AIBoxCurrent = Form1.Txt2List(AIBoxList(i))
+            For j As Integer = 0 To AIBoxCurrent.Count - 1
+                AIBoxContents.Add(AIBoxCurrent(j))
+            Next
+            AIBoxContents.Add("[aiBox File End] " & AIBoxList(i).Replace(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\", ""))
+        Next
+
+
+        If AIBoxContents.Count > 0 Then
+
+            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox") Then _
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox")
+
+            For i As Integer = 0 To AIBoxContents.Count - 1
+                If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox") Then
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox", AIBoxContents(i), False)
+                Else
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox", Environment.NewLine & AIBoxContents(i), True)
+                End If
+            Next
+        End If
+
+        MsgBox("done")
+
+    End Sub
+
+    Private Sub Button37_Click(sender As System.Object, e As System.EventArgs) Handles Button37.Click
+        Form9.Show()
+    End Sub
+
 End Class

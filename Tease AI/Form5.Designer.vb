@@ -24,6 +24,11 @@ Partial Class frmApps
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmApps))
         Me.PNLAppHome = New System.Windows.Forms.Panel()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Button37 = New System.Windows.Forms.Button()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.Button35 = New System.Windows.Forms.Button()
+        Me.Label24 = New System.Windows.Forms.Label()
         Me.Button33 = New System.Windows.Forms.Button()
         Me.Button34 = New System.Windows.Forms.Button()
         Me.Button32 = New System.Windows.Forms.Button()
@@ -43,21 +48,21 @@ Partial Class frmApps
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.BTNHomeHypnoGen = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.CBDebugAwareness = New System.Windows.Forms.CheckBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Button36 = New System.Windows.Forms.Button()
         Me.MouseYLbl = New System.Windows.Forms.Label()
         Me.Label84 = New System.Windows.Forms.Label()
         Me.Button51 = New System.Windows.Forms.Button()
         Me.BTNRun = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.LBLGlitter = New System.Windows.Forms.Label()
         Me.Button42 = New System.Windows.Forms.Button()
         Me.BTNHomeVitalSub = New System.Windows.Forms.Button()
         Me.Button23 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.CBDebugAwareness = New System.Windows.Forms.CheckBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Button36 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
         Me.Button29 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.AppPanelGlitter = New System.Windows.Forms.Panel()
@@ -161,8 +166,7 @@ Partial Class frmApps
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.Button35 = New System.Windows.Forms.Button()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -191,6 +195,9 @@ Partial Class frmApps
         '
         Me.PNLAppHome.BackColor = System.Drawing.Color.FromArgb(CType(CType(60, Byte), Integer), CType(CType(120, Byte), Integer), CType(CType(170, Byte), Integer))
         Me.PNLAppHome.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLAppHome.Controls.Add(Me.Label23)
+        Me.PNLAppHome.Controls.Add(Me.Button37)
+        Me.PNLAppHome.Controls.Add(Me.Button18)
         Me.PNLAppHome.Controls.Add(Me.Button35)
         Me.PNLAppHome.Controls.Add(Me.Label24)
         Me.PNLAppHome.Controls.Add(Me.Button33)
@@ -226,6 +233,70 @@ Partial Class frmApps
         Me.PNLAppHome.Name = "PNLAppHome"
         Me.PNLAppHome.Size = New System.Drawing.Size(250, 485)
         Me.PNLAppHome.TabIndex = 160
+        '
+        'Label23
+        '
+        Me.Label23.BackColor = System.Drawing.Color.Transparent
+        Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.ForeColor = System.Drawing.Color.White
+        Me.Label23.Location = New System.Drawing.Point(178, 339)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(48, 18)
+        Me.Label23.TabIndex = 202
+        Me.Label23.Text = "AI Box"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Button37
+        '
+        Me.Button37.BackColor = System.Drawing.Color.Transparent
+        Me.Button37.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.Button37.FlatAppearance.BorderSize = 0
+        Me.Button37.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button37.Image = CType(resources.GetObject("Button37.Image"), System.Drawing.Image)
+        Me.Button37.Location = New System.Drawing.Point(177, 288)
+        Me.Button37.Name = "Button37"
+        Me.Button37.Size = New System.Drawing.Size(48, 48)
+        Me.Button37.TabIndex = 201
+        Me.Button37.UseVisualStyleBackColor = False
+        '
+        'Button18
+        '
+        Me.Button18.BackColor = System.Drawing.Color.Transparent
+        Me.Button18.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.Button18.FlatAppearance.BorderSize = 0
+        Me.Button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button18.Image = CType(resources.GetObject("Button18.Image"), System.Drawing.Image)
+        Me.Button18.Location = New System.Drawing.Point(96, 288)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(48, 48)
+        Me.Button18.TabIndex = 200
+        Me.Button18.UseVisualStyleBackColor = False
+        Me.Button18.Visible = False
+        '
+        'Button35
+        '
+        Me.Button35.BackColor = System.Drawing.Color.Transparent
+        Me.Button35.FlatAppearance.BorderColor = System.Drawing.Color.White
+        Me.Button35.FlatAppearance.BorderSize = 0
+        Me.Button35.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button35.Image = CType(resources.GetObject("Button35.Image"), System.Drawing.Image)
+        Me.Button35.Location = New System.Drawing.Point(14, 287)
+        Me.Button35.Name = "Button35"
+        Me.Button35.Size = New System.Drawing.Size(48, 48)
+        Me.Button35.TabIndex = 199
+        Me.Button35.UseVisualStyleBackColor = False
+        '
+        'Label24
+        '
+        Me.Label24.BackColor = System.Drawing.Color.Transparent
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.ForeColor = System.Drawing.Color.White
+        Me.Label24.Location = New System.Drawing.Point(12, 338)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(55, 30)
+        Me.Label24.TabIndex = 198
+        Me.Label24.Text = "Domme Tags"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Button33
         '
@@ -458,58 +529,6 @@ Partial Class frmApps
         Me.BTNHomeHypnoGen.TabIndex = 166
         Me.BTNHomeHypnoGen.UseVisualStyleBackColor = False
         '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.SteelBlue
-        Me.Button2.Font = New System.Drawing.Font("Wingdings", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(294, 310)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(46, 31)
-        Me.Button2.TabIndex = 165
-        Me.Button2.TabStop = False
-        Me.Button2.Text = "o"
-        Me.Button2.UseVisualStyleBackColor = False
-        Me.Button2.Visible = False
-        '
-        'CBDebugAwareness
-        '
-        Me.CBDebugAwareness.AutoSize = True
-        Me.CBDebugAwareness.ForeColor = System.Drawing.Color.White
-        Me.CBDebugAwareness.Location = New System.Drawing.Point(356, 364)
-        Me.CBDebugAwareness.Name = "CBDebugAwareness"
-        Me.CBDebugAwareness.Size = New System.Drawing.Size(113, 17)
-        Me.CBDebugAwareness.TabIndex = 163
-        Me.CBDebugAwareness.Text = "Debug Awareness"
-        Me.CBDebugAwareness.UseVisualStyleBackColor = True
-        Me.CBDebugAwareness.Visible = False
-        '
-        'Label7
-        '
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(420, 274)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(64, 28)
-        Me.Label7.TabIndex = 151
-        Me.Label7.Text = "Slideshow Options"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Label7.Visible = False
-        '
-        'Button36
-        '
-        Me.Button36.BackColor = System.Drawing.Color.SteelBlue
-        Me.Button36.Font = New System.Drawing.Font("Webdings", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-        Me.Button36.ForeColor = System.Drawing.Color.White
-        Me.Button36.Location = New System.Drawing.Point(304, 363)
-        Me.Button36.Name = "Button36"
-        Me.Button36.Size = New System.Drawing.Size(46, 31)
-        Me.Button36.TabIndex = 162
-        Me.Button36.TabStop = False
-        Me.Button36.Text = "q"
-        Me.Button36.UseVisualStyleBackColor = False
-        Me.Button36.Visible = False
-        '
         'MouseYLbl
         '
         Me.MouseYLbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -560,20 +579,6 @@ Partial Class frmApps
         Me.BTNRun.TabStop = False
         Me.BTNRun.Text = "Run"
         Me.BTNRun.UseVisualStyleBackColor = False
-        '
-        'Button6
-        '
-        Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.Button6.Enabled = False
-        Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button6.ForeColor = System.Drawing.Color.White
-        Me.Button6.Location = New System.Drawing.Point(292, 272)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(129, 32)
-        Me.Button6.TabIndex = 16
-        Me.Button6.Text = "Generate Video Tease"
-        Me.Button6.UseVisualStyleBackColor = False
-        Me.Button6.Visible = False
         '
         'Label11
         '
@@ -647,6 +652,72 @@ Partial Class frmApps
         Me.Button23.Size = New System.Drawing.Size(48, 48)
         Me.Button23.TabIndex = 0
         Me.Button23.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.SteelBlue
+        Me.Button2.Font = New System.Drawing.Font("Wingdings", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
+        Me.Button2.ForeColor = System.Drawing.Color.White
+        Me.Button2.Location = New System.Drawing.Point(294, 310)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(46, 31)
+        Me.Button2.TabIndex = 165
+        Me.Button2.TabStop = False
+        Me.Button2.Text = "o"
+        Me.Button2.UseVisualStyleBackColor = False
+        Me.Button2.Visible = False
+        '
+        'CBDebugAwareness
+        '
+        Me.CBDebugAwareness.AutoSize = True
+        Me.CBDebugAwareness.ForeColor = System.Drawing.Color.White
+        Me.CBDebugAwareness.Location = New System.Drawing.Point(356, 364)
+        Me.CBDebugAwareness.Name = "CBDebugAwareness"
+        Me.CBDebugAwareness.Size = New System.Drawing.Size(113, 17)
+        Me.CBDebugAwareness.TabIndex = 163
+        Me.CBDebugAwareness.Text = "Debug Awareness"
+        Me.CBDebugAwareness.UseVisualStyleBackColor = True
+        Me.CBDebugAwareness.Visible = False
+        '
+        'Label7
+        '
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.White
+        Me.Label7.Location = New System.Drawing.Point(420, 274)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(64, 28)
+        Me.Label7.TabIndex = 151
+        Me.Label7.Text = "Slideshow Options"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Label7.Visible = False
+        '
+        'Button36
+        '
+        Me.Button36.BackColor = System.Drawing.Color.SteelBlue
+        Me.Button36.Font = New System.Drawing.Font("Webdings", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
+        Me.Button36.ForeColor = System.Drawing.Color.White
+        Me.Button36.Location = New System.Drawing.Point(304, 363)
+        Me.Button36.Name = "Button36"
+        Me.Button36.Size = New System.Drawing.Size(46, 31)
+        Me.Button36.TabIndex = 162
+        Me.Button36.TabStop = False
+        Me.Button36.Text = "q"
+        Me.Button36.UseVisualStyleBackColor = False
+        Me.Button36.Visible = False
+        '
+        'Button6
+        '
+        Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.Button6.Enabled = False
+        Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button6.ForeColor = System.Drawing.Color.White
+        Me.Button6.Location = New System.Drawing.Point(292, 272)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(129, 32)
+        Me.Button6.TabIndex = 16
+        Me.Button6.Text = "Generate Video Tease"
+        Me.Button6.UseVisualStyleBackColor = False
+        Me.Button6.Visible = False
         '
         'Button29
         '
@@ -1863,30 +1934,9 @@ Partial Class frmApps
         Me.Label25.Text = "Playlists"
         Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Label24
+        'OpenFileDialog1
         '
-        Me.Label24.BackColor = System.Drawing.Color.Transparent
-        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.ForeColor = System.Drawing.Color.White
-        Me.Label24.Location = New System.Drawing.Point(12, 338)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(55, 30)
-        Me.Label24.TabIndex = 198
-        Me.Label24.Text = "Domme Tags"
-        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Button35
-        '
-        Me.Button35.BackColor = System.Drawing.Color.Transparent
-        Me.Button35.FlatAppearance.BorderColor = System.Drawing.Color.White
-        Me.Button35.FlatAppearance.BorderSize = 0
-        Me.Button35.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button35.Image = CType(resources.GetObject("Button35.Image"), System.Drawing.Image)
-        Me.Button35.Location = New System.Drawing.Point(14, 287)
-        Me.Button35.Name = "Button35"
-        Me.Button35.Size = New System.Drawing.Size(48, 48)
-        Me.Button35.TabIndex = 199
-        Me.Button35.UseVisualStyleBackColor = False
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
         'frmApps
         '
@@ -1914,7 +1964,6 @@ Partial Class frmApps
         Me.MaximizeBox = False
         Me.Name = "frmApps"
         Me.Text = "Apps"
-        Me.TopMost = True
         Me.PNLAppHome.ResumeLayout(False)
         Me.AppPanelGlitter.ResumeLayout(False)
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2085,4 +2134,8 @@ Partial Class frmApps
     Friend WithEvents Button31 As System.Windows.Forms.Button
     Friend WithEvents Label24 As System.Windows.Forms.Label
     Friend WithEvents Button35 As System.Windows.Forms.Button
+    Friend WithEvents Button18 As System.Windows.Forms.Button
+    Friend WithEvents Button37 As System.Windows.Forms.Button
+    Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents Label23 As System.Windows.Forms.Label
 End Class

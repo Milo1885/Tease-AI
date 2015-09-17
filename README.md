@@ -4,6 +4,16 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 47
 
+9/16 - 9/17 - Created AI Box app that allows users to create and open files that will allow them to easily share their creations from entire scripts to minor additions
+
+Added Commands @RapidCodeOn and @RapidCodeOff, which allows the program to chew through multiple @NullResponse lines almost immediately
+
+Added Commands @InterruptsOff and @InterruptsOn which can be used to prevent the user from Interrupting a script
+
+Added Command @DeleteVar[] which allows you delete a variable you've created
+
+App Window is no longer always on top. Holy fuck did that get annoying fast
+
 9/15 1:50 pm - Fixed bug where @ShowButtImage pulled up Boob pictures instead
 
 9/15 1:36 pm - Domme now occasionally makes and corrects typos

@@ -1999,7 +1999,7 @@ Public Class FrmSettings
                 GBGlitter3.Text = "Contact 3"
             End If
 
-
+            Form9.LBLPersonality.Text = dompersonalityComboBox.Text
 
         End If
 

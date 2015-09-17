@@ -478,6 +478,11 @@ Public Class Form1
     Dim CorrectedTypo As Boolean
     Dim CorrectedWord As String
 
+    Public DoNotDisturb As Boolean
+
+    Dim TypoSwitch As Integer = 1
+    Dim TyposDisabled As Boolean
+
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -1509,7 +1514,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         FormLoading = False
 
-
+        My.Settings.Sys_SubLeftEarly = 0
 
         FrmSplash.Close()
         FrmSplash.Dispose()
@@ -3034,7 +3039,17 @@ FoundResponse:
             Return
         End If
 
-        
+        Debug.Print("DoNotDisturb = " & DoNotDisturb)
+        Debug.Print("DomChat = " & DomChat)
+
+        If DoNotDisturb = True Then
+            If DomChat.Contains("@Interrupt") Then
+                DomChat = "#Sys_InterruptsOff"
+            End If
+        End If
+
+
+
 
         TypingDelay()
 
@@ -3644,7 +3659,7 @@ AcceptAnswer:
                 End While
 
                 If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
-                'If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
+                If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
                 Debug.Print(FileGoto)
 
                 DomChat = DomChat.Replace("@Goto" & StripGoto, "")
@@ -3997,6 +4012,8 @@ AcceptAnswer:
 
         Debug.Print(FileText)
 
+        Dim InvalidFilter As Boolean = False
+
         'If File.Exists(HandleScriptText) Then
         If File.Exists(FileText) Then
             'Debug.Print(StrokeTauntVal)
@@ -4015,6 +4032,47 @@ AcceptAnswer:
 
 
             Debug.Print("CHeck")
+
+            If lines(line).Contains("@CockSmall") And FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value Then InvalidFilter = True
+            If lines(line).Contains("@CockLarge") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then InvalidFilter = True
+            If lines(line).Contains("@CockAverage") Then
+                If FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value Then InvalidFilter = True
+            End If
+
+            If lines(line).Contains("@Flag(") Then
+                Dim WriteFlag As String = lines(line)
+                Dim WriteStart As Integer
+                WriteStart = WriteFlag.IndexOf("@Flag(") + 6
+                WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
+                WriteFlag = WriteFlag.Split(")")(0)
+                WriteFlag = WriteFlag.Replace("@Flag(", "")
+                If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) And _
+                    Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+                    InvalidFilter = True
+                End If
+            End If
+
+            If lines(line).Contains("@NotFlag(") Then
+                Dim WriteFlag As String = lines(line)
+                Dim WriteStart As Integer
+                WriteStart = WriteFlag.IndexOf("@NotFlag(") + 9
+                WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
+                WriteFlag = WriteFlag.Split(")")(0)
+                WriteFlag = WriteFlag.Replace("@NotFlag(", "")
+                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) Or _
+                    File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+                    InvalidFilter = True
+                End If
+            End If
+
+
+            If InvalidFilter = True Then
+                ioFile.Close()
+                ioFile.Dispose()
+                InvalidFilter = False
+                RunFileText()
+                Return
+            End If
 
             If lines(line) = "@End" Then
                 If RiskyEdges = True Then RiskyEdges = False
@@ -4448,6 +4506,7 @@ SkipGotoSearch:
             End While
 
             If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
+            If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
             Debug.Print(FileGoto)
             Debug.Print(StripGoto)
             DomTask = DomTask.Replace("@Goto" & StripGoto, "")
@@ -4455,7 +4514,9 @@ SkipGotoSearch:
             'If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
 
             'DomTask = DomTask.Replace("@Goto" & StripGoto, "")
-          
+            Debug.Print("StripGoto = " & StripGoto)
+
+            Debug.Print("FileGoto = " & FileGoto)
 
             Dim gotoline As Integer
             Do
@@ -4918,84 +4979,104 @@ NullResponse:
 
                     'Typo Test
 
+                    Dim RestoreDomTask As String = DomTask
 
-
-                    If Not DomTask.Substring(0, 1) = FrmSettings.domemoteComboBox.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False Then
+                    If Not DomTask.Substring(0, 1) = FrmSettings.domemoteComboBox.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False And TypoSwitch <> 0 And TyposDisabled = False Then
 
                         Dim TypoChance As Integer = randomizer.Next(0, 101)
 
-                        If TypoChance < 6 Then
+                        If TypoChance < 6 Or TypoSwitch = 2 Then
 
-                            Dim TypoString As String
+                            Try
 
-                            Dim TypoSplit As String() = DomTask.Split(" ")
+                                Dim TypoString As String
 
-                            TempVal = randomizer.Next(0, TypoSplit.Count)
+                                Dim TypoSplit As String() = DomTask.Split(" ")
 
-                            CorrectedWord = TypoSplit(TempVal)
+                                TempVal = randomizer.Next(0, TypoSplit.Count)
 
-                            TypoString = "w d s f x"
+                                CorrectedWord = TypoSplit(TempVal)
 
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "a" Then TypoString = "q w s z x"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "b" Then TypoString = "f v g h n"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "c" Then TypoString = "x d f v b"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "d" Then TypoString = "s c f x e"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "e" Then TypoString = "s r w 3 d"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "f" Then TypoString = "d r g v c"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "g" Then TypoString = "f t b h y"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "h" Then TypoString = "g b n u j"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "i" Then TypoString = "o u j k l"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "j" Then TypoString = "k u i n h"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "k" Then TypoString = "j m , l i"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "l" Then TypoString = "; p . , i"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "m" Then TypoString = "n j k , l"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "n" Then TypoString = "b h j k m"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "o" Then TypoString = "p 0 i k ;"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "p" Then TypoString = "[ - o ; l"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "q" Then TypoString = "1 w s a 2"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "r" Then TypoString = "4 5 t f d"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "s" Then TypoString = "w d a z x"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "t" Then TypoString = "5 6 g y r"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "u" Then TypoString = "y 7 j i k"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "v" Then TypoString = "c f g h b"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "w" Then TypoString = "2 a e q s"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "x" Then TypoString = "z s d f c"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "y" Then TypoString = "t 7 h u g"
-                            If LCase(TypoSplit(TempVal).Substring(0, 1)) = "z" Then TypoString = "a s x d c"
+                                CorrectedWord = CorrectedWord.Replace(",", "")
+                                CorrectedWord = CorrectedWord.Replace(".", "")
+                                CorrectedWord = CorrectedWord.Replace("!", "")
+                                CorrectedWord = CorrectedWord.Replace("?", "")
 
-                            Dim UpperChance As Integer = randomizer.Next(0, 101)
-                            If UpperChance < 26 Then TypoString = UCase(TypoString)
-
-                          
-
-                            Dim GetTypo As String() = TypoString.Split(" ")
-
-                            Dim MadeTypo As String = GetTypo(randomizer.Next(0, GetTypo.Count))
+                                TypoString = "w d s f x"
 
 
-                            Dim DoubleChance As Integer = randomizer.Next(0, 101)
-                            If DoubleChance < 6 Then MadeTypo = MadeTypo & MadeTypo
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "a" Then TypoString = "q w s z x"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "b" Then TypoString = "f v g h n"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "c" Then TypoString = "x d f v b"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "d" Then TypoString = "s c f x e"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "e" Then TypoString = "s r w 3 d"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "f" Then TypoString = "d r g v c"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "g" Then TypoString = "f t b h y"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "h" Then TypoString = "g b n u j"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "i" Then TypoString = "o u j k l"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "j" Then TypoString = "k u i n h"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "k" Then TypoString = "j m , l i"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "l" Then TypoString = "; p . , i"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "m" Then TypoString = "n j k , l"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "n" Then TypoString = "b h j k m"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "o" Then TypoString = "p 0 i k ;"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "p" Then TypoString = "[ - o ; l"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "q" Then TypoString = "1 w s a 2"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "r" Then TypoString = "4 5 t f d"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "s" Then TypoString = "w d a z x"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "t" Then TypoString = "5 6 g y r"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "u" Then TypoString = "y 7 j i k"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "v" Then TypoString = "c f g h b"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "w" Then TypoString = "2 a e q s"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "x" Then TypoString = "z s d f c"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "y" Then TypoString = "t 7 h u g"
+                                If LCase(TypoSplit(TempVal).Substring(0, 1)) = "z" Then TypoString = "a s x d c"
 
 
-                            TypoSplit(TempVal) = TypoSplit(TempVal).Remove(0, 1)
+                                Dim UpperChance As Integer = randomizer.Next(0, 101)
+                                If UpperChance < 26 Then TypoString = UCase(TypoString)
 
-                            Dim SpaceChance As Integer = randomizer.Next(0, 101)
-                            If SpaceChance < 7 Then
-                                TypoSplit(TempVal) = MadeTypo & " " & TypoSplit(TempVal)
-                            Else
-                                TypoSplit(TempVal) = MadeTypo & TypoSplit(TempVal)
 
-                            End If
 
-                            DomTask = Join(TypoSplit)
+                                Dim GetTypo As String() = TypoString.Split(" ")
 
-                            CorrectedTypo = True
+                                Dim MadeTypo As String = GetTypo(randomizer.Next(0, GetTypo.Count))
+
+
+                                Dim DoubleChance As Integer = randomizer.Next(0, 101)
+                                If DoubleChance < 11 Then MadeTypo = MadeTypo & LCase(GetTypo(randomizer.Next(0, GetTypo.Count)))
+
+
+                                TypoSplit(TempVal) = TypoSplit(TempVal).Remove(0, 1)
+
+                                Dim SpaceChance As Integer = randomizer.Next(0, 101)
+                                If SpaceChance < 7 Then
+                                    TypoSplit(TempVal) = MadeTypo & " " & TypoSplit(TempVal)
+                                Else
+                                    TypoSplit(TempVal) = MadeTypo & TypoSplit(TempVal)
+
+                                End If
+
+                                DomTask = Join(TypoSplit)
+
+                                CorrectedTypo = True
+
+                            Catch
+
+                                DomTask = RestoreDomTask
+                                CorrectedTypo = False
+                            End Try
 
                         End If
 
                     End If
 
+                    TypoSwitch = 1
+
                 End If
+
+                DomTask = DomTask.Replace("ATSYMBOL", "@")
+                DomTask = DomTask.Replace("atsymbol", "@")
 
                 If NullResponse = False And DomTask <> "" Then
 
@@ -5260,11 +5341,14 @@ NoResponse:
                 End If
 
                 If YesOrNo = False Then
-                    ScriptTick = randomizer.Next(4, 9)
-                    If RapidFire = True Then ScriptTick = 1
-                    If RiskyDeal = True Then ScriptTick = 2
-                    If RapidCode = True Then ScriptTick = 0
-                    ScriptTimer.Start()
+                    If RapidCode = True Then
+                        RunFileText()
+                    Else
+                        ScriptTick = randomizer.Next(4, 9)
+                        If RapidFire = True Then ScriptTick = 1
+                        If RiskyDeal = True Then ScriptTick = 2
+                        ScriptTimer.Start()
+                    End If
                 End If
 
                 If YesOrNo = True And RiskyDeal = True Then
@@ -5709,7 +5793,8 @@ TryNextWithTease:
 
                 End If
 
-
+                DomChat = DomChat.Replace("ATSYMBOL", "@")
+                DomChat = DomChat.Replace("atsymbol", "@")
 
                 If NullResponse = True Or DomChat = "" Or DomChat Is Nothing Then GoTo NullResponseLine2
 
@@ -12312,6 +12397,63 @@ VTSkip:
             StringClean = StringClean.Replace("@RapidCodeOff", "")
         End If
 
+        If StringClean.Contains("@InterruptsOff") Then
+            DoNotDisturb = True
+            StringClean = StringClean.Replace("@InterruptsOff", "")
+        End If
+
+        If StringClean.Contains("@InterruptsOn") Then
+            DoNotDisturb = False
+            StringClean = StringClean.Replace("@InterruptsOn", "")
+        End If
+
+        If StringClean.Contains("@DeleteVar[") Then
+
+            Debug.Print("DeleteVar called")
+
+            Dim WriteFlag As String = StringClean
+
+            Dim WriteStart As Integer
+
+            WriteStart = WriteFlag.IndexOf("@DeleteVar[") + 11
+            WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
+            WriteFlag = WriteFlag.Split(")")(0)
+            WriteFlag = WriteFlag.Replace("@DeleteVar[", "")
+            Debug.Print("Delete Flag = " & WriteFlag)
+
+
+            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) Then _
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & WriteFlag)
+
+            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then _
+             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag)
+
+
+            StringClean = StringClean.Replace("@DeleteVar[" & WriteFlag & "]", "")
+
+        End If
+
+
+        If StringClean.Contains("@NoTypo") Then
+            TypoSwitch = 0
+            StringClean = StringClean.Replace("@NoTypo", "")
+        End If
+
+        If StringClean.Contains("@ForceTypo") Then
+            TypoSwitch = 2
+            StringClean = StringClean.Replace("@ForceTypo", "")
+        End If
+
+        If StringClean.Contains("@TyposOff") Then
+            TyposDisabled = True
+            StringClean = StringClean.Replace("@TyposOff", "")
+        End If
+
+        If StringClean.Contains("@TyposOn") Then
+            TyposDisabled = False
+            StringClean = StringClean.Replace("@TyposOn", "")
+        End If
+
         Return StringClean
 
     End Function
@@ -15621,6 +15763,31 @@ VTSkip:
                 WriteFlag = WriteFlag.Replace("@Flag(", "")
                 If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) And _
                     Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@NotFlag(") Then
+                Dim WriteFlag As String = ListClean(PoundCount)
+                Dim WriteStart As Integer
+                WriteStart = WriteFlag.IndexOf("@NotFlag(") + 9
+                WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
+                WriteFlag = WriteFlag.Split(")")(0)
+                WriteFlag = WriteFlag.Replace("@NotFlag(", "")
+                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) Or _
+                    File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
