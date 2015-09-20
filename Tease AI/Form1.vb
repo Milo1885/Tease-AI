@@ -22281,6 +22281,35 @@ TryNext:
         End If
     End Sub
 
+    Private Sub FromBehind_Click(sender As System.Object, e As System.EventArgs) Handles FromBehind.Click
+        Debug.Print(mainPictureBox.ImageLocation)
+        If SlideshowLoaded = False Then Return
+        If FromBehind.BackColor = Color.White Then
+            AddDommeTag("FromBehind", "Nothing")
+            FromBehind.BackColor = Color.Teal
+            FromBehind.ForeColor = Color.White
+        Else
+            RemoveDommeTag("FromBehind", "Nothing")
+            FromBehind.BackColor = Color.White
+            FromBehind.ForeColor = Color.Black
+        End If
+    End Sub
+
+    Private Sub AllFours_Click(sender As System.Object, e As System.EventArgs) Handles AllFours.Click
+        Debug.Print(mainPictureBox.ImageLocation)
+        If SlideshowLoaded = False Then Return
+        If AllFours.BackColor = Color.White Then
+            AddDommeTag("AllFours", "Nothing")
+            AllFours.BackColor = Color.Teal
+            AllFours.ForeColor = Color.White
+        Else
+            RemoveDommeTag("AllFours", "Nothing")
+            AllFours.BackColor = Color.White
+            AllFours.ForeColor = Color.Black
+        End If
+    End Sub
+
+
     Private Sub Piercing_Click(sender As System.Object, e As System.EventArgs) Handles Piercing.Click
         Debug.Print(mainPictureBox.ImageLocation)
         If SlideshowLoaded = False Then Return
@@ -22563,6 +22592,12 @@ TryNext:
         CloseUp.BackColor = Color.White
         CloseUp.ForeColor = Color.Black
 
+        FromBehind.BackColor = Color.White
+        FromBehind.ForeColor = Color.Black
+
+        AllFours.BackColor = Color.White
+        AllFours.ForeColor = Color.Black
+
         Piercing.BackColor = Color.White
         Piercing.ForeColor = Color.Black
 
@@ -22676,6 +22711,16 @@ TryNext:
                     If TagList(i).Contains("TagSideView") Then
                         SideView.BackColor = Color.Teal
                         SideView.ForeColor = Color.White
+                    End If
+
+                    If TagList(i).Contains("TagFromBehind") Then
+                        FromBehind.BackColor = Color.Teal
+                        FromBehind.ForeColor = Color.White
+                    End If
+
+                    If TagList(i).Contains("TagAllFours") Then
+                        AllFours.BackColor = Color.Teal
+                        AllFours.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagCloseUp") Then

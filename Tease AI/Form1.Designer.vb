@@ -59,8 +59,8 @@ Partial Class Form1
         Me.SideView = New System.Windows.Forms.Button()
         Me.CloseUp = New System.Windows.Forms.Button()
         Me.Garment = New System.Windows.Forms.Button()
-        Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button14 = New System.Windows.Forms.Button()
+        Me.FromBehind = New System.Windows.Forms.Button()
+        Me.AllFours = New System.Windows.Forms.Button()
         Me.Piercing = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.CensorshipBar = New System.Windows.Forms.Panel()
@@ -348,8 +348,8 @@ Partial Class Form1
         Me.PNLDomTagBTN.Controls.Add(Me.SideView)
         Me.PNLDomTagBTN.Controls.Add(Me.CloseUp)
         Me.PNLDomTagBTN.Controls.Add(Me.Garment)
-        Me.PNLDomTagBTN.Controls.Add(Me.Button15)
-        Me.PNLDomTagBTN.Controls.Add(Me.Button14)
+        Me.PNLDomTagBTN.Controls.Add(Me.FromBehind)
+        Me.PNLDomTagBTN.Controls.Add(Me.AllFours)
         Me.PNLDomTagBTN.Controls.Add(Me.Piercing)
         Me.PNLDomTagBTN.Location = New System.Drawing.Point(10, 115)
         Me.PNLDomTagBTN.Name = "PNLDomTagBTN"
@@ -769,35 +769,37 @@ Partial Class Form1
         Me.Garment.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.Garment.UseVisualStyleBackColor = False
         '
-        'Button15
+        'FromBehind
         '
-        Me.Button15.AllowDrop = True
-        Me.Button15.BackColor = System.Drawing.Color.White
-        Me.Button15.FlatAppearance.BorderSize = 2
-        Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button15.ForeColor = System.Drawing.Color.Black
-        Me.Button15.Location = New System.Drawing.Point(120, 244)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(104, 24)
-        Me.Button15.TabIndex = 52
-        Me.Button15.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button15.UseVisualStyleBackColor = False
+        Me.FromBehind.AllowDrop = True
+        Me.FromBehind.BackColor = System.Drawing.Color.White
+        Me.FromBehind.FlatAppearance.BorderSize = 2
+        Me.FromBehind.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.FromBehind.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FromBehind.ForeColor = System.Drawing.Color.Black
+        Me.FromBehind.Location = New System.Drawing.Point(120, 244)
+        Me.FromBehind.Name = "FromBehind"
+        Me.FromBehind.Size = New System.Drawing.Size(104, 24)
+        Me.FromBehind.TabIndex = 52
+        Me.FromBehind.Text = "From Behind"
+        Me.FromBehind.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.FromBehind.UseVisualStyleBackColor = False
         '
-        'Button14
+        'AllFours
         '
-        Me.Button14.AllowDrop = True
-        Me.Button14.BackColor = System.Drawing.Color.White
-        Me.Button14.FlatAppearance.BorderSize = 2
-        Me.Button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button14.ForeColor = System.Drawing.Color.Black
-        Me.Button14.Location = New System.Drawing.Point(120, 274)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(104, 24)
-        Me.Button14.TabIndex = 53
-        Me.Button14.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button14.UseVisualStyleBackColor = False
+        Me.AllFours.AllowDrop = True
+        Me.AllFours.BackColor = System.Drawing.Color.White
+        Me.AllFours.FlatAppearance.BorderSize = 2
+        Me.AllFours.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.AllFours.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.AllFours.ForeColor = System.Drawing.Color.Black
+        Me.AllFours.Location = New System.Drawing.Point(120, 274)
+        Me.AllFours.Name = "AllFours"
+        Me.AllFours.Size = New System.Drawing.Size(104, 24)
+        Me.AllFours.TabIndex = 53
+        Me.AllFours.Text = "All Fours"
+        Me.AllFours.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.AllFours.UseVisualStyleBackColor = False
         '
         'Piercing
         '
@@ -1981,8 +1983,8 @@ Partial Class Form1
     Friend WithEvents Underwear As System.Windows.Forms.Button
     Friend WithEvents Garment As System.Windows.Forms.Button
     Friend WithEvents Piercing As System.Windows.Forms.Button
-    Friend WithEvents Button14 As System.Windows.Forms.Button
-    Friend WithEvents Button15 As System.Windows.Forms.Button
+    Friend WithEvents AllFours As System.Windows.Forms.Button
+    Friend WithEvents FromBehind As System.Windows.Forms.Button
     Friend WithEvents CloseUp As System.Windows.Forms.Button
     Friend WithEvents SideView As System.Windows.Forms.Button
     Friend WithEvents Naked As System.Windows.Forms.Button
