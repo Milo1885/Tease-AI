@@ -4,7 +4,7 @@ Imports System.IO
 
 Public Class frmApps
 
-    Public ResetFlag As Boolean
+
 
     Private Sub CLBExercise_DragLeave(sender As Object, e As System.EventArgs) Handles CLBExercise.DoubleClick
         CLBExercise.Items.Remove(CLBExercise.SelectedItem)
@@ -1056,7 +1056,7 @@ Public Class frmApps
         Form1.StopEverything()
         Form1.ResetButton()
 
-        ResetFlag = True
+        'ForesetFlag = True
         Form1.ResumeSession()
 
         If Form1.DomTypeCheck = False Then
@@ -1307,7 +1307,8 @@ Public Class frmApps
         PNLAppRandomizer.BackColor = Color.SteelBlue
         PictureBox3.BackColor = Color.SteelBlue
 
-
+        Form1.PNLDomTags.BackColor = Color.SteelBlue
+        Form1.PNLDomTagBTN.BackColor = Color.SteelBlue
 
 
 
@@ -1374,6 +1375,10 @@ Public Class frmApps
         PNLAppRandomizer.BackColor = Color.DarkMagenta
         PictureBox3.BackColor = Color.DarkMagenta
 
+        Form1.PNLDomTags.BackColor = Color.DarkMagenta
+        Form1.PNLDomTagBTN.BackColor = Color.DarkMagenta
+
+
         My.Settings.UIColor = "Purple"
         My.Settings.Save()
 
@@ -1433,6 +1438,9 @@ Public Class frmApps
         PNLPlaylist.BackColor = Color.Black
         PNLAppRandomizer.BackColor = Color.Black
         PictureBox3.BackColor = Color.Black
+
+        Form1.PNLDomTags.BackColor = Color.Black
+        Form1.PNLDomTagBTN.BackColor = Color.Black
 
         My.Settings.UIColor = "Black"
         My.Settings.Save()
@@ -1494,6 +1502,10 @@ Public Class frmApps
         PNLPlaylist.BackColor = Color.Firebrick
         PNLAppRandomizer.BackColor = Color.Firebrick
         PictureBox3.BackColor = Color.Firebrick
+
+        Form1.PNLDomTags.BackColor = Color.Firebrick
+        Form1.PNLDomTagBTN.BackColor = Color.Firebrick
+
 
         My.Settings.UIColor = "Red"
         My.Settings.Save()

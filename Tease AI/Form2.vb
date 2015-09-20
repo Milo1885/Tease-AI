@@ -13232,4 +13232,15 @@ NextURL:
         End If
 
     End Sub
+
+    Private Sub MetroTest_ValueChanged(sender As System.Object, e As System.EventArgs) Handles MetroTest.ValueChanged
+
+        Dim bpm As Integer
+        bpm = MetroTest.Value
+        Dim MetroVal As Integer = 60 / bpm * 1000
+
+
+
+        Form1.MetroTimer.Interval = MetroVal
+    End Sub
 End Class

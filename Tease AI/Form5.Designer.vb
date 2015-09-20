@@ -66,8 +66,6 @@ Partial Class frmApps
         Me.Button29 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.AppPanelGlitter = New System.Windows.Forms.Panel()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
         Me.AppPanelVitalSub = New System.Windows.Forms.Panel()
         Me.CBVitalSubDomTask = New System.Windows.Forms.CheckBox()
         Me.BTNVitalSub = New System.Windows.Forms.Button()
@@ -167,9 +165,10 @@ Partial Class frmApps
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.AppPanelVitalSub.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -189,6 +188,7 @@ Partial Class frmApps
         Me.PNLLazySub.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.PNLPlaylist.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PNLAppHome
@@ -757,27 +757,6 @@ Partial Class frmApps
         Me.AppPanelGlitter.Size = New System.Drawing.Size(250, 485)
         Me.AppPanelGlitter.TabIndex = 162
         Me.AppPanelGlitter.Visible = False
-        '
-        'PictureBox3
-        '
-        Me.PictureBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.PictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
-        Me.PictureBox3.Location = New System.Drawing.Point(0, 18)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(250, 47)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox3.TabIndex = 0
-        Me.PictureBox3.TabStop = False
-        '
-        'StatusUpdates
-        '
-        Me.StatusUpdates.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
-        Me.StatusUpdates.Location = New System.Drawing.Point(-3, 62)
-        Me.StatusUpdates.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.StatusUpdates.Name = "StatusUpdates"
-        Me.StatusUpdates.Size = New System.Drawing.Size(250, 416)
-        Me.StatusUpdates.TabIndex = 142
         '
         'AppPanelVitalSub
         '
@@ -1938,6 +1917,27 @@ Partial Class frmApps
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'PictureBox3
+        '
+        Me.PictureBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.PictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
+        Me.PictureBox3.Location = New System.Drawing.Point(0, 18)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(250, 47)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox3.TabIndex = 0
+        Me.PictureBox3.TabStop = False
+        '
+        'StatusUpdates
+        '
+        Me.StatusUpdates.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
+        Me.StatusUpdates.Location = New System.Drawing.Point(-3, 62)
+        Me.StatusUpdates.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.StatusUpdates.Name = "StatusUpdates"
+        Me.StatusUpdates.Size = New System.Drawing.Size(250, 416)
+        Me.StatusUpdates.TabIndex = 142
+        '
         'frmApps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1945,13 +1945,6 @@ Partial Class frmApps
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(246, 530)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.PNLAppHome)
-        Me.Controls.Add(Me.PNLLazySub)
-        Me.Controls.Add(Me.PNLWishList)
-        Me.Controls.Add(Me.PNLPlaylist)
-        Me.Controls.Add(Me.PNLAppRandomizer)
-        Me.Controls.Add(Me.PNLHypnoGen)
-        Me.Controls.Add(Me.AppPanelVitalSub)
         Me.Controls.Add(Me.AppPanelGlitter)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button29)
@@ -1959,6 +1952,13 @@ Partial Class frmApps
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button36)
         Me.Controls.Add(Me.CBDebugAwareness)
+        Me.Controls.Add(Me.PNLAppHome)
+        Me.Controls.Add(Me.PNLLazySub)
+        Me.Controls.Add(Me.PNLWishList)
+        Me.Controls.Add(Me.PNLPlaylist)
+        Me.Controls.Add(Me.PNLAppRandomizer)
+        Me.Controls.Add(Me.PNLHypnoGen)
+        Me.Controls.Add(Me.AppPanelVitalSub)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -1966,7 +1966,6 @@ Partial Class frmApps
         Me.Text = "Apps"
         Me.PNLAppHome.ResumeLayout(False)
         Me.AppPanelGlitter.ResumeLayout(False)
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.AppPanelVitalSub.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -1990,6 +1989,7 @@ Partial Class frmApps
         Me.PNLLazySub.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.PNLPlaylist.ResumeLayout(False)
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2018,8 +2018,6 @@ Partial Class frmApps
     Friend WithEvents Button23 As System.Windows.Forms.Button
     Friend WithEvents Button5 As System.Windows.Forms.Button
     Friend WithEvents AppPanelGlitter As System.Windows.Forms.Panel
-    Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
-    Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
     Friend WithEvents AppPanelVitalSub As System.Windows.Forms.Panel
     Friend WithEvents CBVitalSubDomTask As System.Windows.Forms.CheckBox
     Friend WithEvents BTNVitalSub As System.Windows.Forms.Button
@@ -2138,4 +2136,6 @@ Partial Class frmApps
     Friend WithEvents Button37 As System.Windows.Forms.Button
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents PictureBox3 As System.Windows.Forms.PictureBox
+    Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
 End Class

@@ -914,6 +914,7 @@ Partial Class FrmSettings
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
+        Me.MetroTest = New System.Windows.Forms.NumericUpDown()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -1129,6 +1130,7 @@ Partial Class FrmSettings
         Me.TabPage5.SuspendLayout
         Me.Panel5.SuspendLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.MetroTest,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'SettingsPanel
@@ -11305,6 +11307,7 @@ Partial Class FrmSettings
         '
         'GroupBox33
         '
+        Me.GroupBox33.Controls.Add(Me.MetroTest)
         Me.GroupBox33.Controls.Add(Me.Button11)
         Me.GroupBox33.Controls.Add(Me.LBLChastityState)
         Me.GroupBox33.Controls.Add(Me.Label120)
@@ -11762,6 +11765,16 @@ Partial Class FrmSettings
         'BWCreateURLFiles
         '
         '
+        'MetroTest
+        '
+        Me.MetroTest.Location = New System.Drawing.Point(64, 77)
+        Me.MetroTest.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.MetroTest.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.MetroTest.Name = "MetroTest"
+        Me.MetroTest.Size = New System.Drawing.Size(120, 20)
+        Me.MetroTest.TabIndex = 178
+        Me.MetroTest.Value = New Decimal(New Integer() {30, 0, 0, 0})
+        '
         'FrmSettings
         '
         Me.AllowDrop = true
@@ -12054,6 +12067,7 @@ Partial Class FrmSettings
         Me.Panel5.ResumeLayout(false)
         Me.Panel5.PerformLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.MetroTest,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub
@@ -12947,4 +12961,5 @@ End Sub
     Friend WithEvents GroupBox62 As System.Windows.Forms.GroupBox
     Friend WithEvents RBGerman As System.Windows.Forms.RadioButton
     Friend WithEvents RBEnglish As System.Windows.Forms.RadioButton
+    Friend WithEvents MetroTest As System.Windows.Forms.NumericUpDown
 End Class

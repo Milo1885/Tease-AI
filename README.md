@@ -1,6 +1,10 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+# Changelog - Patch 48
+
+I've mainly been ripping out some guts and trynig to tweak or optimize things. Too much and too minor to detail, but I've added a third attempt at creating a domme tags system and I have to say this third one is an effin winner : D
+
 
 # Changelog - Patch 47
 
