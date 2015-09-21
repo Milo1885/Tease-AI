@@ -495,6 +495,10 @@ Public Class Form1
     Dim ResetFlag As Boolean
 
     Dim DommeTags As Boolean
+    Dim ThemeSettings As Boolean
+
+
+
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -672,6 +676,15 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         ' If My.Settings.TCAgreed = True Then
         'frmApps.ClearAgree()
         'End If
+
+        If File.Exists(My.Settings.BackgroundImage) Then
+            Me.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
+        Else
+            Me.BackgroundImage = Nothing
+        End If
+
+
+        ApplyThemeColor()
 
 
         If My.Settings.TC2Agreed = False Then
@@ -1514,14 +1527,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSplash.Refresh()
 
 
-        Try
-            If My.Settings.UIColor = "" Then frmApps.ColorBlue()
-            If My.Settings.UIColor = "Purple" Then frmApps.ColorPurple()
-            If My.Settings.UIColor = "Black" Then frmApps.ColorBlack()
-            If My.Settings.UIColor = "Red" Then frmApps.ColorRed()
-        Catch
-            frmApps.ColorBlue()
-        End Try
+      
 
         MetroTimer.Start()
 
@@ -1702,9 +1708,11 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         If WritingTaskFlag = True Then GoTo WritingTaskLine
 
+        Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
+
         If SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
 
-            Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font></body>"
+            Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ChatString & "<br></font></body>"
             ChatText.DocumentText = Chat
             While ChatText.ReadyState <> WebBrowserReadyState.Complete
                 Application.DoEvents()
@@ -1715,7 +1723,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         Else
 
             Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""Cambria"" size=""3"" font color=""" & _
-                SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font></body>"
+                SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ChatString & "<br></font></body>"
 
             ChatText.DocumentText = Chat
             While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -5132,6 +5140,9 @@ NullResponse:
                 DomTask = DomTask.Replace("ATSYMBOL", "@")
                 DomTask = DomTask.Replace("atsymbol", "@")
 
+
+                Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
+
                 If NullResponse = False And DomTask <> "" Then
 
                     If UCase(DomTask) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomTask = "<b>Tease AI has been reset</b>"
@@ -5169,7 +5180,7 @@ NullResponse:
 
                     If SubWroteLast = False And FrmSettings.shownamesCheckBox.Checked = False Then
 
-                        Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""#000000"">" & Chat & DomTask & "<br></font></body>"
+                        Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" & TextColor & """>" & Chat & DomTask & "<br></font></body>"
                         ChatText.DocumentText = Chat
                         While ChatText.ReadyState <> WebBrowserReadyState.Complete
                             Application.DoEvents()
@@ -5177,7 +5188,7 @@ NullResponse:
                         ScrollChatDown()
 
                         If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
-                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomTask & "<br></font></body>"
+                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
 
 
                     Else
@@ -5188,7 +5199,7 @@ NullResponse:
 
 
                         Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""Cambria"" size=""3"" font color=""" & _
-                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomTask & "<br></font></body>"
+                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
 
                         TypeToggle = 0
                         ChatText.DocumentText = Chat
@@ -5198,7 +5209,7 @@ NullResponse:
                         ScrollChatDown()
 
                         If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
-                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomTask & "<br></font></body>"
+                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
 
                     End If
 
@@ -5863,6 +5874,7 @@ TryNextWithTease:
 
                 If UCase(DomChat) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomChat = "<b>Tease AI has been reset</b>"
 
+                Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
                 If SysMes = True Then
                     Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & DomChat & "</b><br></font></body>"
@@ -5896,7 +5908,7 @@ TryNextWithTease:
 
                 If SubWroteLast = False And FrmSettings.shownamesCheckBox.Checked = False Then
 
-                    Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""#000000"">" & Chat & DomChat & "<br></font></body>"
+                    Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" & TextColor & """>" & Chat & DomChat & "<br></font></body>"
                     ChatText.DocumentText = Chat
                     While ChatText.ReadyState <> WebBrowserReadyState.Complete
                         Application.DoEvents()
@@ -5904,13 +5916,13 @@ TryNextWithTease:
                     ScrollChatDown()
 
                     If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
-              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomChat & "<br></font></body>"
+              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomChat & "<br></font></body>"
 
                 Else
 
 
                     Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""Cambria"" size=""3"" font color=""" & _
-                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomChat & "<br></font></body>"
+                TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomChat & "<br></font></body>"
                     TypeToggle = 0
                     ChatText.DocumentText = Chat
                     While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -5919,7 +5931,7 @@ TryNextWithTease:
                     ScrollChatDown()
 
                     If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" & _
-              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""#000000"">" & DomChat & "<br></font></body>"
+              TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomChat & "<br></font></body>"
 
                 End If
 
@@ -7983,8 +7995,10 @@ CensorConstant:
         Dim StatusName As String
 
 
+        Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
+
         StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNCDomme & """><b>" & domName.Text & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
-        StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""Black"">" & StatusText & "</font><br><br>"
+        StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText & "</font><br><br>"
 
         'Debug.Print(GlitterImageAV)
         Debug.Print("Clear Stage 2")
@@ -8187,7 +8201,7 @@ StatusUpdate1:
 
         If StatusChance1 < FrmSettings.GlitterSlider1.Value * 10 And FrmSettings.CBGlitter1.Checked = True Then
             StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNC1 & """><b>" & FrmSettings.TBGlitter1.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
-            StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""Black"">" & StatusText1 & "</font><br><br>"
+            StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText1 & "</font><br><br>"
 
 
         End If
@@ -8208,7 +8222,7 @@ StatusUpdate2:
 
         If StatusChance2 < FrmSettings.GlitterSlider2.Value * 10 And FrmSettings.CBGlitter2.Checked = True Then
             StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNC2 & """><b>" & FrmSettings.TBGlitter2.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
-            StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""Black"">" & StatusText2 & "</font><br><br>"
+            StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText2 & "</font><br><br>"
 
 
         End If
@@ -8229,7 +8243,7 @@ StatusUpdate3:
 
         If StatusChance3 < FrmSettings.GlitterSlider3.Value * 10 And FrmSettings.CBGlitter3.Checked = True Then
             StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNC3 & """><b>" & FrmSettings.TBGlitter3.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
-            StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""Black"">" & StatusText3 & "</font><br><br>"
+            StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText3 & "</font><br><br>"
 
 
         End If
@@ -21537,19 +21551,36 @@ TryNext:
         mainPictureBox.Height = SplitContainer1.Panel1.Height
         PNLDomTags.Height = SplitContainer1.Panel1.Height
 
+        mainPictureBox.Width = SplitContainer1.Width
+
         If DommeTags = False Then
-
-            mainPictureBox.Width = SplitContainer1.Width
             PNLDomTags.Location = New Point(SplitContainer1.Width + 1, -2)
-
         Else
-
             mainPictureBox.Width = SplitContainer1.Width - 249
             PNLDomTags.Location = New Point(SplitContainer1.Width - 249, -2)
         End If
 
+        If ThemeSettings = False Then
+            PNLTheme.Location = New Point(SplitContainer1.Width + 1, -2)
+        Else
+            mainPictureBox.Width = SplitContainer1.Width - 287
+            PNLTheme.Location = New Point(SplitContainer1.Width - 287, -2)
+        End If
+
+        PNLTheme.HorizontalScroll.Visible = False
+        PNLThemeBTN.HorizontalScroll.Visible = False
+
+
+        PNLTheme.HorizontalScroll.Maximum = 0
+        PNLTheme.AutoScroll = False
+        PNLTheme.VerticalScroll.Visible = False
+        PNLTheme.AutoScroll = True
+
         PNLDomTagBTN.Location = New Point(10, (PNLDomTags.Height - 479) / 2)
         If PNLDomTagBTN.Location.Y < 30 Then PNLDomTagBTN.Location = New Point(10, 30)
+
+        PNLThemeBTN.Location = New Point(0, (PNLTheme.Height - 480) / 2)
+        If PNLThemeBTN.Location.Y < 30 Then PNLThemeBTN.Location = New Point(0, 30)
 
         If PNLMediaBar.Visible = True Then
             ChatText.Location = New Point(0, 30)
@@ -21621,7 +21652,14 @@ TryNext:
         PNLDomTags.Height = SplitContainer1.Panel1.Height
         PNLDomTagBTN.Location = New Point(10, (PNLDomTags.Height - 479) / 2)
 
+        PNLTheme.Height = SplitContainer1.Panel1.Height
+        PNLThemeBTN.Location = New Point(0, (PNLTheme.Height - 480) / 2)
+
+        PNLTheme.HorizontalScroll.Visible = False
+        PNLThemeBTN.HorizontalScroll.Visible = False
+
         If PNLDomTagBTN.Location.Y < 30 Then PNLDomTagBTN.Location = New Point(10, 30)
+        If PNLThemeBTN.Location.Y < 30 Then PNLThemeBTN.Location = New Point(0, 30)
 
     End Sub
 
@@ -22048,7 +22086,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Face.BackColor = Color.White Then
             AddDommeTag("Face", "Nothing")
-            Face.BackColor = Color.Teal
+            Face.BackColor = Color.ForestGreen
             Face.ForeColor = Color.White
         Else
             RemoveDommeTag("Face", "Nothing")
@@ -22062,7 +22100,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Boobs.BackColor = Color.White Then
             AddDommeTag("Boobs", "Nothing")
-            Boobs.BackColor = Color.Teal
+            Boobs.BackColor = Color.ForestGreen
             Boobs.ForeColor = Color.White
         Else
             RemoveDommeTag("Boobs", "Nothing")
@@ -22076,7 +22114,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Pussy.BackColor = Color.White Then
             AddDommeTag("Pussy", "Nothing")
-            Pussy.BackColor = Color.Teal
+            Pussy.BackColor = Color.ForestGreen
             Pussy.ForeColor = Color.White
         Else
             RemoveDommeTag("Pussy", "Nothing")
@@ -22090,7 +22128,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Ass.BackColor = Color.White Then
             AddDommeTag("Ass", "Nothing")
-            Ass.BackColor = Color.Teal
+            Ass.BackColor = Color.ForestGreen
             Ass.ForeColor = Color.White
         Else
             RemoveDommeTag("Ass", "Nothing")
@@ -22104,7 +22142,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Legs.BackColor = Color.White Then
             AddDommeTag("Legs", "Nothing")
-            Legs.BackColor = Color.Teal
+            Legs.BackColor = Color.ForestGreen
             Legs.ForeColor = Color.White
         Else
             RemoveDommeTag("Legs", "Nothing")
@@ -22118,7 +22156,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Feet.BackColor = Color.White Then
             AddDommeTag("Feet", "Nothing")
-            Feet.BackColor = Color.Teal
+            Feet.BackColor = Color.ForestGreen
             Feet.ForeColor = Color.White
         Else
             RemoveDommeTag("Feet", "Nothing")
@@ -22132,7 +22170,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If FullyDressed.BackColor = Color.White Then
             AddDommeTag("FullyDressed", "Nothing")
-            FullyDressed.BackColor = Color.Teal
+            FullyDressed.BackColor = Color.ForestGreen
             FullyDressed.ForeColor = Color.White
         Else
             RemoveDommeTag("FullyDressed", "Nothing")
@@ -22146,7 +22184,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If HalfDressed.BackColor = Color.White Then
             AddDommeTag("HalfDressed", "Nothing")
-            HalfDressed.BackColor = Color.Teal
+            HalfDressed.BackColor = Color.ForestGreen
             HalfDressed.ForeColor = Color.White
         Else
             RemoveDommeTag("HalfDressed", "Nothing")
@@ -22160,7 +22198,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If GarmentCovering.BackColor = Color.White Then
             AddDommeTag("GarmentCovering", "Nothing")
-            GarmentCovering.BackColor = Color.Teal
+            GarmentCovering.BackColor = Color.ForestGreen
             GarmentCovering.ForeColor = Color.White
         Else
             RemoveDommeTag("GarmentCovering", "Nothing")
@@ -22174,7 +22212,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If HandsCovering.BackColor = Color.White Then
             AddDommeTag("HandsCovering", "Nothing")
-            HandsCovering.BackColor = Color.Teal
+            HandsCovering.BackColor = Color.ForestGreen
             HandsCovering.ForeColor = Color.White
         Else
             RemoveDommeTag("HandsCovering", "Nothing")
@@ -22188,7 +22226,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Naked.BackColor = Color.White Then
             AddDommeTag("Naked", "Nothing")
-            Naked.BackColor = Color.Teal
+            Naked.BackColor = Color.ForestGreen
             Naked.ForeColor = Color.White
         Else
             RemoveDommeTag("Naked", "Nothing")
@@ -22202,7 +22240,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Masturbating.BackColor = Color.White Then
             AddDommeTag("Masturbating", "Nothing")
-            Masturbating.BackColor = Color.Teal
+            Masturbating.BackColor = Color.ForestGreen
             Masturbating.ForeColor = Color.White
         Else
             RemoveDommeTag("Masturbating", "Nothing")
@@ -22216,7 +22254,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Sucking.BackColor = Color.White Then
             AddDommeTag("Sucking", "Nothing")
-            Sucking.BackColor = Color.Teal
+            Sucking.BackColor = Color.ForestGreen
             Sucking.ForeColor = Color.White
         Else
             RemoveDommeTag("Sucking", "Nothing")
@@ -22230,7 +22268,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Smiling.BackColor = Color.White Then
             AddDommeTag("Smiling", "Nothing")
-            Smiling.BackColor = Color.Teal
+            Smiling.BackColor = Color.ForestGreen
             Smiling.ForeColor = Color.White
         Else
             RemoveDommeTag("Smiling", "Nothing")
@@ -22244,7 +22282,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Glaring.BackColor = Color.White Then
             AddDommeTag("Glaring", "Nothing")
-            Glaring.BackColor = Color.Teal
+            Glaring.BackColor = Color.ForestGreen
             Glaring.ForeColor = Color.White
         Else
             RemoveDommeTag("Glaring", "Nothing")
@@ -22258,7 +22296,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If SideView.BackColor = Color.White Then
             AddDommeTag("SideView", "Nothing")
-            SideView.BackColor = Color.Teal
+            SideView.BackColor = Color.ForestGreen
             SideView.ForeColor = Color.White
         Else
             RemoveDommeTag("SideView", "Nothing")
@@ -22272,7 +22310,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If CloseUp.BackColor = Color.White Then
             AddDommeTag("CloseUp", "Nothing")
-            CloseUp.BackColor = Color.Teal
+            CloseUp.BackColor = Color.ForestGreen
             CloseUp.ForeColor = Color.White
         Else
             RemoveDommeTag("CloseUp", "Nothing")
@@ -22286,7 +22324,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If FromBehind.BackColor = Color.White Then
             AddDommeTag("FromBehind", "Nothing")
-            FromBehind.BackColor = Color.Teal
+            FromBehind.BackColor = Color.ForestGreen
             FromBehind.ForeColor = Color.White
         Else
             RemoveDommeTag("FromBehind", "Nothing")
@@ -22300,7 +22338,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If AllFours.BackColor = Color.White Then
             AddDommeTag("AllFours", "Nothing")
-            AllFours.BackColor = Color.Teal
+            AllFours.BackColor = Color.ForestGreen
             AllFours.ForeColor = Color.White
         Else
             RemoveDommeTag("AllFours", "Nothing")
@@ -22315,7 +22353,7 @@ TryNext:
         If SlideshowLoaded = False Then Return
         If Piercing.BackColor = Color.White Then
             AddDommeTag("Piercing", "Nothing")
-            Piercing.BackColor = Color.Teal
+            Piercing.BackColor = Color.ForestGreen
             Piercing.ForeColor = Color.White
         Else
             RemoveDommeTag("Piercing", "Nothing")
@@ -22331,7 +22369,7 @@ TryNext:
             Garment.ForeColor = Color.Black
             RemoveDommeTag("Garment", "Nothing")
         Else
-            Garment.BackColor = Color.Teal
+            Garment.BackColor = Color.ForestGreen
             Garment.ForeColor = Color.White
             AddDommeTag("Garment", TBGarment.Text)
         End If
@@ -22344,7 +22382,7 @@ TryNext:
             Underwear.ForeColor = Color.Black
             RemoveDommeTag("Underwear", "Nothing")
         Else
-            Underwear.BackColor = Color.Teal
+            Underwear.BackColor = Color.ForestGreen
             Underwear.ForeColor = Color.White
             AddDommeTag("Underwear", TBUnderwear.Text)
         End If
@@ -22357,7 +22395,7 @@ TryNext:
             Tattoo.ForeColor = Color.Black
             RemoveDommeTag("Tattoo", "Nothing")
         Else
-            Tattoo.BackColor = Color.Teal
+            Tattoo.BackColor = Color.ForestGreen
             Tattoo.ForeColor = Color.White
             AddDommeTag("Tattoo", TBTattoo.Text)
         End If
@@ -22370,7 +22408,7 @@ TryNext:
             SexToy.ForeColor = Color.Black
             RemoveDommeTag("SexToy", "Nothing")
         Else
-            SexToy.BackColor = Color.Teal
+            SexToy.BackColor = Color.ForestGreen
             SexToy.ForeColor = Color.White
             AddDommeTag("SexToy", TBSexToy.Text)
         End If
@@ -22384,7 +22422,7 @@ TryNext:
             Furniture.ForeColor = Color.Black
             RemoveDommeTag("Furniture", "Nothing")
         Else
-            Furniture.BackColor = Color.Teal
+            Furniture.BackColor = Color.ForestGreen
             Furniture.ForeColor = Color.White
             AddDommeTag("Furniture", TBFurniture.Text)
         End If
@@ -22634,102 +22672,102 @@ TryNext:
             For i As Integer = TagList.Count - 1 To 0 Step -1
                 If TagList(i).Contains(Path.GetFileName(_ImageFileNames(FileCount))) Then
                     If TagList(i).Contains("TagFace") Then
-                        Face.BackColor = Color.Teal
+                        Face.BackColor = Color.ForestGreen
                         Face.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagBoobs") Then
-                        Boobs.BackColor = Color.Teal
+                        Boobs.BackColor = Color.ForestGreen
                         Boobs.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagPussy") Then
-                        Pussy.BackColor = Color.Teal
+                        Pussy.BackColor = Color.ForestGreen
                         Pussy.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagAss") Then
-                        Ass.BackColor = Color.Teal
+                        Ass.BackColor = Color.ForestGreen
                         Ass.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagLegs") Then
-                        Legs.BackColor = Color.Teal
+                        Legs.BackColor = Color.ForestGreen
                         Legs.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagFeet") Then
-                        Feet.BackColor = Color.Teal
+                        Feet.BackColor = Color.ForestGreen
                         Feet.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagFullyDressed") Then
-                        FullyDressed.BackColor = Color.Teal
+                        FullyDressed.BackColor = Color.ForestGreen
                         FullyDressed.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagHalfDressed") Then
-                        HalfDressed.BackColor = Color.Teal
+                        HalfDressed.BackColor = Color.ForestGreen
                         HalfDressed.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagGarmentCovering") Then
-                        GarmentCovering.BackColor = Color.Teal
+                        GarmentCovering.BackColor = Color.ForestGreen
                         GarmentCovering.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagHandsCovering") Then
-                        HandsCovering.BackColor = Color.Teal
+                        HandsCovering.BackColor = Color.ForestGreen
                         HandsCovering.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagNaked") Then
-                        Naked.BackColor = Color.Teal
+                        Naked.BackColor = Color.ForestGreen
                         Naked.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagMasturbating") Then
-                        Masturbating.BackColor = Color.Teal
+                        Masturbating.BackColor = Color.ForestGreen
                         Masturbating.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagSucking") Then
-                        Sucking.BackColor = Color.Teal
+                        Sucking.BackColor = Color.ForestGreen
                         Sucking.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagSmiling") Then
-                        Smiling.BackColor = Color.Teal
+                        Smiling.BackColor = Color.ForestGreen
                         Smiling.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagGlaring") Then
-                        Glaring.BackColor = Color.Teal
+                        Glaring.BackColor = Color.ForestGreen
                         Glaring.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagSideView") Then
-                        SideView.BackColor = Color.Teal
+                        SideView.BackColor = Color.ForestGreen
                         SideView.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagFromBehind") Then
-                        FromBehind.BackColor = Color.Teal
+                        FromBehind.BackColor = Color.ForestGreen
                         FromBehind.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagAllFours") Then
-                        AllFours.BackColor = Color.Teal
+                        AllFours.BackColor = Color.ForestGreen
                         AllFours.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagCloseUp") Then
-                        CloseUp.BackColor = Color.Teal
+                        CloseUp.BackColor = Color.ForestGreen
                         CloseUp.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagPiercing") Then
-                        Piercing.BackColor = Color.Teal
+                        Piercing.BackColor = Color.ForestGreen
                         Piercing.ForeColor = Color.White
                     End If
 
@@ -22738,7 +22776,7 @@ TryNext:
                         For x As Integer = 0 To GarmentArray.Count - 1
                             Debug.Print("GarmentArray(x) = " & GarmentArray(x))
                             If GarmentArray(x).Contains("TagGarment") And Not GarmentArray(x).Contains("TagGarmentCovering") Then
-                                Garment.BackColor = Color.Teal
+                                Garment.BackColor = Color.ForestGreen
                                 Garment.ForeColor = Color.White
                                 TBGarment.Text = GarmentArray(x).Replace("TagGarment", "")
                             End If
@@ -22750,7 +22788,7 @@ TryNext:
                         Dim UnderwearArray As String() = TagList(i).Split
                         For x As Integer = 0 To UnderwearArray.Count - 1
                             If UnderwearArray(x).Contains("TagUnderwear") Then
-                                Underwear.BackColor = Color.Teal
+                                Underwear.BackColor = Color.ForestGreen
                                 Underwear.ForeColor = Color.White
                                 TBUnderwear.Text = UnderwearArray(x).Replace("TagUnderwear", "")
                             End If
@@ -22762,7 +22800,7 @@ TryNext:
                         Dim TattooArray As String() = TagList(i).Split
                         For x As Integer = 0 To TattooArray.Count - 1
                             If TattooArray(x).Contains("TagTattoo") Then
-                                Tattoo.BackColor = Color.Teal
+                                Tattoo.BackColor = Color.ForestGreen
                                 Tattoo.ForeColor = Color.White
                                 TBTattoo.Text = TattooArray(x).Replace("TagTattoo", "")
                             End If
@@ -22773,7 +22811,7 @@ TryNext:
                         Dim SexToyArray As String() = TagList(i).Split
                         For x As Integer = 0 To SexToyArray.Count - 1
                             If SexToyArray(x).Contains("TagSexToy") Then
-                                SexToy.BackColor = Color.Teal
+                                SexToy.BackColor = Color.ForestGreen
                                 SexToy.ForeColor = Color.White
                                 TBSexToy.Text = SexToyArray(x).Replace("TagSexToy", "")
                             End If
@@ -22784,7 +22822,7 @@ TryNext:
                         Dim FurnitureArray As String() = TagList(i).Split
                         For x As Integer = 0 To FurnitureArray.Count - 1
                             If FurnitureArray(x).Contains("TagFurniture") Then
-                                Furniture.BackColor = Color.Teal
+                                Furniture.BackColor = Color.ForestGreen
                                 Furniture.ForeColor = Color.White
                                 TBFurniture.Text = FurnitureArray(x).Replace("TagFurniture", "")
                             End If
@@ -22804,4 +22842,320 @@ TryNext:
 
     
    
+    Private Sub BackgroundImageToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
+
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            Try
+                Me.BackgroundImage.Dispose()
+            Catch
+            End Try
+            Me.BackgroundImage = Nothing
+            GC.Collect()
+            Me.BackgroundImage = Image.FromFile(OpenFileDialog1.FileName)
+            My.Settings.BackgroundImage = OpenFileDialog1.FileName
+            My.Settings.Save()
+        End If
+
+    End Sub
+
+    Private Sub ClearBackgroundToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
+        Try
+            Me.BackgroundImage.Dispose()
+        Catch
+        End Try
+        Me.BackgroundImage = Nothing
+        GC.Collect()
+        My.Settings.BackgroundImage = ""
+        My.Settings.Save()
+    End Sub
+
+   
+
+    Public Sub ApplyThemeColor()
+
+        subName.BackColor = My.Settings.ButtonColor
+        subName.ForeColor = My.Settings.TextColor
+        BTNShowHideApps.BackColor = My.Settings.ButtonColor
+        BTNShowHideApps.ForeColor = My.Settings.TextColor
+        domName.BackColor = My.Settings.ButtonColor
+        domName.ForeColor = My.Settings.TextColor
+
+        browsefolderButton.BackColor = My.Settings.ButtonColor
+        PNLMediaBar.BackColor = My.Settings.ButtonColor
+        PNLHope.BackColor = My.Settings.ButtonColor
+        PNLChatBox.BackColor = My.Settings.ButtonColor
+
+        previousButton.BackColor = My.Settings.ButtonColor
+        nextButton.BackColor = My.Settings.ButtonColor
+        BTNLoadVideo.BackColor = My.Settings.ButtonColor
+        BTNVideoControls.BackColor = My.Settings.ButtonColor
+
+        MediaButton.BackColor = My.Settings.ButtonColor
+        SaveBlogImage.BackColor = My.Settings.ButtonColor
+        SettingsButton.BackColor = My.Settings.ButtonColor
+
+        browsefolderButton.ForeColor = My.Settings.TextColor
+        PNLMediaBar.ForeColor = My.Settings.TextColor
+        PNLHope.ForeColor = My.Settings.TextColor
+        PNLChatBox.ForeColor = My.Settings.TextColor
+
+        previousButton.ForeColor = My.Settings.TextColor
+        nextButton.ForeColor = My.Settings.TextColor
+        BTNLoadVideo.ForeColor = My.Settings.TextColor
+        BTNVideoControls.ForeColor = My.Settings.TextColor
+
+        MediaButton.ForeColor = My.Settings.TextColor
+        SaveBlogImage.ForeColor = My.Settings.TextColor
+        SettingsButton.ForeColor = My.Settings.TextColor
+
+
+        Me.BackColor = My.Settings.BackgroundColor
+
+        If File.Exists(My.Settings.BackgroundImage) Then
+            PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
+            Me.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
+        End If
+     
+
+        SplitContainer1.Panel2.BackColor = My.Settings.BackgroundColor
+
+     
+
+        FrmWritingTask.PNLWritingTask.BackColor = My.Settings.BackgroundColor
+
+        'PNLLazySub.BackColor = my.settings.BackgroundColor
+        'Label27.ForeColor = my.settings.BackgroundColor
+        'Panel1.BackColor = my.settings.BackgroundColor
+        'LBLWishListName.ForeColor = my.settings.BackgroundColor
+        'Panel2.BackColor = my.settings.BackgroundColor
+        'PNLPlaylist.BackColor = my.settings.BackgroundColor
+        'PNLAppRandomizer.BackColor = my.settings.BackgroundColor
+        'PictureBox3.BackColor = my.settings.BackgroundColor
+
+        PNLDomTags.BackColor = My.Settings.BackgroundColor
+        PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
+
+        LBLBackColor.BackColor = My.Settings.BackgroundColor
+        LBLButtonColor.BackColor = My.Settings.ButtonColor
+        LBLTextColor.BackColor = My.Settings.TextColor
+        LBLChatWindowColor.BackColor = My.Settings.ChatWindowColor
+        LBLChatTextColor.BackColor = My.Settings.ChatTextColor
+
+
+        StatusUpdates.DocumentText = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & StatusText & "</body>"
+        Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
+        ChatText.DocumentText = Chat
+        While ChatText.ReadyState <> WebBrowserReadyState.Complete
+            Application.DoEvents()
+        End While
+        ScrollChatDown()
+
+        CBStretchBack.Checked = My.Settings.BackgroundStretch
+
+        If CBStretchBack.Checked = True Then
+            Me.BackgroundImageLayout = ImageLayout.Stretch
+        Else
+            Me.BackgroundImageLayout = ImageLayout.None
+        End If
+
+    End Sub
+
+
+    
+
+    Private Sub ButtonColorToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.ButtonColor = GetColor.Color
+            My.Settings.Save()
+            ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub TextColorToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.TextColor = GetColor.Color
+            My.Settings.Save()
+            ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub BackgroundColorToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.BackgroundColor = GetColor.Color
+            My.Settings.Save()
+            ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button3_Click_1(sender As System.Object, e As System.EventArgs) Handles Button3.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.BackgroundColor = GetColor.Color
+            My.Settings.Save()
+            ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.ButtonColor = GetColor.Color
+            My.Settings.Save()
+            ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.TextColor = GetColor.Color
+            My.Settings.Save()
+            ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button2_Click_2(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            Try
+                Me.BackgroundImage.Dispose()
+            Catch
+            End Try
+            Me.BackgroundImage = Nothing
+            GC.Collect()
+            Me.BackgroundImage = Image.FromFile(OpenFileDialog1.FileName)
+            My.Settings.BackgroundImage = OpenFileDialog1.FileName
+            My.Settings.Save()
+            ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
+        Try
+            Me.BackgroundImage.Dispose()
+            PBBackgroundPreview.Image.Dispose()
+        Catch
+        End Try
+        Me.BackgroundImage = Nothing
+        PBBackgroundPreview.Image = Nothing
+        GC.Collect()
+        My.Settings.BackgroundImage = ""
+        My.Settings.Save()
+    End Sub
+
+    Private Sub Save_Click(sender As System.Object, e As System.EventArgs) Handles Save.Click
+
+        SaveFileDialog1.Title = "Select a location to save current Theme"
+        SaveFileDialog1.InitialDirectory = Application.StartupPath & "\System\"
+
+
+        SaveFileDialog1.FileName = "Theme.txt"
+
+        If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
+            Dim SettingsPath As String = SaveFileDialog1.FileName
+            Dim SettingsList As New List(Of String)
+            SettingsList.Clear()
+
+            SettingsList.Add("Background Image: " & My.Settings.BackgroundImage)
+            SettingsList.Add("Stretch Image: " & CBStretchBack.Checked)
+
+            SettingsList.Add("Background Color: " & My.Settings.BackgroundColor.ToArgb.ToString)
+            SettingsList.Add("Button Color: " & My.Settings.ButtonColor.ToArgb.ToString)
+            SettingsList.Add("Text Color: " & My.Settings.TextColor.ToArgb.ToString)
+            SettingsList.Add("Chat Window Color: " & My.Settings.ChatWindowColor.ToArgb.ToString)
+            SettingsList.Add("Chat Text Color: " & My.Settings.ChatTextColor.ToArgb.ToString)
+
+            Dim SettingsString As String = ""
+
+            For i As Integer = 0 To SettingsList.Count - 1
+                SettingsString = SettingsString & SettingsList(i)
+                If i <> SettingsList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+
+            My.Computer.FileSystem.WriteAllText(SettingsPath, SettingsString, False)
+        End If
+
+
+    End Sub
+
+    Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
+
+
+        OpenScriptDialog.Title = "Select a Theme settings file"
+        OpenScriptDialog.InitialDirectory = Application.StartupPath & "\System\"
+
+        If OpenScriptDialog.ShowDialog() = DialogResult.OK Then
+
+            Dim SettingsList As New List(Of String)
+
+            Try
+                Dim SettingsReader As New StreamReader(OpenScriptDialog.FileName)
+                While SettingsReader.Peek <> -1
+                    SettingsList.Add(SettingsReader.ReadLine())
+                End While
+                SettingsReader.Close()
+                SettingsReader.Dispose()
+            Catch ex As Exception
+                MessageBox.Show(Me, "This file could not be opened!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                Return
+            End Try
+
+            Try
+                If File.Exists(SettingsList(0).Replace("Background Image: ", "")) Then
+                    PBBackgroundPreview.Image = Image.FromFile(SettingsList(0).Replace("Background Image: ", ""))
+                    My.Settings.BackgroundImage = SettingsList(0).Replace("Background Image: ", "")
+                End If
+
+                CBStretchBack.Checked = SettingsList(1).Replace("Stretch Image: ", "")
+
+                My.Settings.BackgroundColor = Color.FromArgb(SettingsList(2).Replace("Background Color: ", ""))
+                My.Settings.ButtonColor = Color.FromArgb(SettingsList(3).Replace("Button Color: ", ""))
+                My.Settings.TextColor = Color.FromArgb(SettingsList(4).Replace("Text Color: ", ""))
+                My.Settings.ChatWindowColor = Color.FromArgb(SettingsList(5).Replace("Chat Window Color: ", ""))
+                My.Settings.ChatTextColor = Color.FromArgb(SettingsList(6).Replace("Chat Text Color: ", ""))
+
+                My.Settings.Save()
+
+
+            Catch
+                MessageBox.Show(Me, "This Theme settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            End Try
+
+            ApplyThemeColor()
+
+
+        End If
+
+
+
+    End Sub
+
+    Private Sub ThemeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ThemeToolStripMenuItem.Click
+        ThemeSettings = True
+        AdjustWindow()
+    End Sub
+
+    Private Sub Button10_Click(sender As System.Object, e As System.EventArgs) Handles Button10.Click
+        ThemeSettings = False
+        AdjustWindow()
+    End Sub
+
+    Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.ChatTextColor = GetColor.Color
+            My.Settings.Save()
+            ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button6_Click(sender As System.Object, e As System.EventArgs) Handles Button6.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.ChatWindowColor = GetColor.Color
+            My.Settings.Save()
+            ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub CBStretchBack_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBStretchBack.CheckedChanged
+        If FormLoading = False Then
+            My.Settings.BackgroundStretch = CBStretchBack.Checked
+            ApplyThemeColor()
+        End If
+    End Sub
 End Class

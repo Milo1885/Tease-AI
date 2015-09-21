@@ -4664,6 +4664,90 @@ Namespace My
                 Me("AIBoxOpen") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("SteelBlue")>  _
+        Public Property BackgroundColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("BackgroundColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("BackgroundColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property BackgroundImage() As String
+            Get
+                Return CType(Me("BackgroundImage"),String)
+            End Get
+            Set
+                Me("BackgroundImage") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("SteelBlue")>  _
+        Public Property ButtonColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("ButtonColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("ButtonColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("White")>  _
+        Public Property TextColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("TextColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("TextColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("White")>  _
+        Public Property ChatWindowColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("ChatWindowColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("ChatWindowColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Black")>  _
+        Public Property ChatTextColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("ChatTextColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("ChatTextColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property BackgroundStretch() As Boolean
+            Get
+                Return CType(Me("BackgroundStretch"),Boolean)
+            End Get
+            Set
+                Me("BackgroundStretch") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

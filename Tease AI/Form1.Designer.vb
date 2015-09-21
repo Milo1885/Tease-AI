@@ -196,6 +196,8 @@ Partial Class Form1
         Me.CollectionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ImagesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DommeTagsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ThemeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.MilovanaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenBetaThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.BugReportThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -206,6 +208,32 @@ Partial Class Form1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetroTimer = New System.Windows.Forms.Timer(Me.components)
         Me.BWMetro = New System.ComponentModel.BackgroundWorker()
+        Me.PNLTheme = New System.Windows.Forms.Panel()
+        Me.PNLThemeBTN = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.PBBackgroundPreview = New System.Windows.Forms.PictureBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.CBStretchBack = New System.Windows.Forms.CheckBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.LBLBackColor = New System.Windows.Forms.Label()
+        Me.LBLButtonColor = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.LBLTextColor = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.LBLChatWindowColor = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LBLChatTextColor = New System.Windows.Forms.Label()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Save = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button10 = New System.Windows.Forms.Button()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -225,6 +253,11 @@ Partial Class Form1
         Me.PNLGlitter.SuspendLayout()
         Me.TeaseAIMenu.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
+        Me.PNLTheme.SuspendLayout()
+        Me.PNLThemeBTN.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'domName
@@ -281,6 +314,7 @@ Partial Class Form1
         '
         'SplitContainer1.Panel1
         '
+        Me.SplitContainer1.Panel1.Controls.Add(Me.PNLTheme)
         Me.SplitContainer1.Panel1.Controls.Add(Me.PNLDomTags)
         Me.SplitContainer1.Panel1.Controls.Add(Me.CensorshipBar)
         Me.SplitContainer1.Panel1.Controls.Add(Me.LBLImageInfo)
@@ -358,8 +392,7 @@ Partial Class Form1
         '
         'TBFurniture
         '
-        Me.TBFurniture.BackColor = System.Drawing.Color.Gainsboro
-        Me.TBFurniture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TBFurniture.BackColor = System.Drawing.Color.LightGray
         Me.TBFurniture.ForeColor = System.Drawing.Color.Black
         Me.TBFurniture.Location = New System.Drawing.Point(120, 457)
         Me.TBFurniture.Name = "TBFurniture"
@@ -400,8 +433,7 @@ Partial Class Form1
         '
         'TBSexToy
         '
-        Me.TBSexToy.BackColor = System.Drawing.Color.Gainsboro
-        Me.TBSexToy.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TBSexToy.BackColor = System.Drawing.Color.LightGray
         Me.TBSexToy.ForeColor = System.Drawing.Color.Black
         Me.TBSexToy.Location = New System.Drawing.Point(120, 427)
         Me.TBSexToy.Name = "TBSexToy"
@@ -442,8 +474,7 @@ Partial Class Form1
         '
         'TBTattoo
         '
-        Me.TBTattoo.BackColor = System.Drawing.Color.Gainsboro
-        Me.TBTattoo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TBTattoo.BackColor = System.Drawing.Color.LightGray
         Me.TBTattoo.ForeColor = System.Drawing.Color.Black
         Me.TBTattoo.Location = New System.Drawing.Point(120, 397)
         Me.TBTattoo.Name = "TBTattoo"
@@ -468,8 +499,7 @@ Partial Class Form1
         '
         'TBUnderwear
         '
-        Me.TBUnderwear.BackColor = System.Drawing.Color.Gainsboro
-        Me.TBUnderwear.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TBUnderwear.BackColor = System.Drawing.Color.LightGray
         Me.TBUnderwear.ForeColor = System.Drawing.Color.Black
         Me.TBUnderwear.Location = New System.Drawing.Point(120, 367)
         Me.TBUnderwear.Name = "TBUnderwear"
@@ -526,8 +556,7 @@ Partial Class Form1
         '
         'TBGarment
         '
-        Me.TBGarment.BackColor = System.Drawing.Color.Gainsboro
-        Me.TBGarment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TBGarment.BackColor = System.Drawing.Color.LightGray
         Me.TBGarment.ForeColor = System.Drawing.Color.Black
         Me.TBGarment.Location = New System.Drawing.Point(120, 337)
         Me.TBGarment.Name = "TBGarment"
@@ -632,8 +661,7 @@ Partial Class Form1
         '
         'LBLDomTagImg
         '
-        Me.LBLDomTagImg.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLDomTagImg.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLDomTagImg.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLDomTagImg.ForeColor = System.Drawing.Color.White
         Me.LBLDomTagImg.Location = New System.Drawing.Point(0, 0)
         Me.LBLDomTagImg.Name = "LBLDomTagImg"
@@ -1503,7 +1531,7 @@ Partial Class Form1
         '
         'MenuStrip2
         '
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AppsToolStripMenuItem, Me.GamesToolStripMenuItem1, Me.ImagesToolStripMenuItem1, Me.MilovanaToolStripMenuItem1, Me.DebugToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AppsToolStripMenuItem, Me.GamesToolStripMenuItem1, Me.ImagesToolStripMenuItem1, Me.ThemeToolStripMenuItem, Me.MilovanaToolStripMenuItem1, Me.DebugToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
         Me.MenuStrip2.Size = New System.Drawing.Size(1374, 24)
@@ -1705,8 +1733,20 @@ Partial Class Form1
         'DommeTagsToolStripMenuItem1
         '
         Me.DommeTagsToolStripMenuItem1.Name = "DommeTagsToolStripMenuItem1"
-        Me.DommeTagsToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
+        Me.DommeTagsToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.DommeTagsToolStripMenuItem1.Text = "Domme Tags"
+        '
+        'ThemeToolStripMenuItem
+        '
+        Me.ThemeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator4})
+        Me.ThemeToolStripMenuItem.Name = "ThemeToolStripMenuItem"
+        Me.ThemeToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
+        Me.ThemeToolStripMenuItem.Text = "Theme"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(171, 6)
         '
         'MilovanaToolStripMenuItem1
         '
@@ -1764,6 +1804,292 @@ Partial Class Form1
         'BWMetro
         '
         '
+        'PNLTheme
+        '
+        Me.PNLTheme.BackColor = System.Drawing.Color.LightGray
+        Me.PNLTheme.Controls.Add(Me.Button10)
+        Me.PNLTheme.Controls.Add(Me.PNLThemeBTN)
+        Me.PNLTheme.Location = New System.Drawing.Point(801, 0)
+        Me.PNLTheme.Name = "PNLTheme"
+        Me.PNLTheme.Size = New System.Drawing.Size(287, 741)
+        Me.PNLTheme.TabIndex = 775
+        '
+        'PNLThemeBTN
+        '
+        Me.PNLThemeBTN.BackColor = System.Drawing.Color.LightGray
+        Me.PNLThemeBTN.Controls.Add(Me.Button8)
+        Me.PNLThemeBTN.Controls.Add(Me.Save)
+        Me.PNLThemeBTN.Controls.Add(Me.GroupBox2)
+        Me.PNLThemeBTN.Controls.Add(Me.GroupBox1)
+        Me.PNLThemeBTN.Location = New System.Drawing.Point(0, 28)
+        Me.PNLThemeBTN.Name = "PNLThemeBTN"
+        Me.PNLThemeBTN.Size = New System.Drawing.Size(285, 480)
+        Me.PNLThemeBTN.TabIndex = 0
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Button9)
+        Me.GroupBox1.Controls.Add(Me.CBStretchBack)
+        Me.GroupBox1.Controls.Add(Me.Button2)
+        Me.GroupBox1.Controls.Add(Me.PBBackgroundPreview)
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(284, 191)
+        Me.GroupBox1.TabIndex = 51
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Background Image"
+        '
+        'PBBackgroundPreview
+        '
+        Me.PBBackgroundPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PBBackgroundPreview.Location = New System.Drawing.Point(23, 36)
+        Me.PBBackgroundPreview.Name = "PBBackgroundPreview"
+        Me.PBBackgroundPreview.Size = New System.Drawing.Size(145, 97)
+        Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PBBackgroundPreview.TabIndex = 0
+        Me.PBBackgroundPreview.TabStop = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.Transparent
+        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button2.Location = New System.Drawing.Point(188, 36)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 57)
+        Me.Button2.TabIndex = 1
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'CBStretchBack
+        '
+        Me.CBStretchBack.AutoSize = True
+        Me.CBStretchBack.Checked = True
+        Me.CBStretchBack.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBStretchBack.Location = New System.Drawing.Point(23, 149)
+        Me.CBStretchBack.Name = "CBStretchBack"
+        Me.CBStretchBack.Size = New System.Drawing.Size(146, 17)
+        Me.CBStretchBack.TabIndex = 2
+        Me.CBStretchBack.Text = "Stretch Image to Window"
+        Me.CBStretchBack.UseVisualStyleBackColor = True
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.LBLChatTextColor)
+        Me.GroupBox2.Controls.Add(Me.Button7)
+        Me.GroupBox2.Controls.Add(Me.LBLChatWindowColor)
+        Me.GroupBox2.Controls.Add(Me.Button6)
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.LBLTextColor)
+        Me.GroupBox2.Controls.Add(Me.Button5)
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.LBLButtonColor)
+        Me.GroupBox2.Controls.Add(Me.Button4)
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.LBLBackColor)
+        Me.GroupBox2.Controls.Add(Me.Button3)
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 197)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(284, 199)
+        Me.GroupBox2.TabIndex = 52
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "UI Colors"
+        '
+        'Label1
+        '
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label1.Location = New System.Drawing.Point(20, 24)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(148, 23)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Background Color"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.Transparent
+        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button3.Location = New System.Drawing.Point(231, 19)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(32, 32)
+        Me.Button3.TabIndex = 2
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'LBLBackColor
+        '
+        Me.LBLBackColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLBackColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLBackColor.Location = New System.Drawing.Point(176, 22)
+        Me.LBLBackColor.Name = "LBLBackColor"
+        Me.LBLBackColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLBackColor.TabIndex = 3
+        '
+        'LBLButtonColor
+        '
+        Me.LBLButtonColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLButtonColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLButtonColor.Location = New System.Drawing.Point(176, 56)
+        Me.LBLButtonColor.Name = "LBLButtonColor"
+        Me.LBLButtonColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLButtonColor.TabIndex = 6
+        '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.Transparent
+        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
+        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button4.Location = New System.Drawing.Point(231, 53)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(32, 32)
+        Me.Button4.TabIndex = 5
+        Me.Button4.UseVisualStyleBackColor = False
+        '
+        'Label4
+        '
+        Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label4.Location = New System.Drawing.Point(20, 58)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(148, 23)
+        Me.Label4.TabIndex = 4
+        Me.Label4.Text = "Button Color"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLTextColor
+        '
+        Me.LBLTextColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLTextColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLTextColor.Location = New System.Drawing.Point(176, 90)
+        Me.LBLTextColor.Name = "LBLTextColor"
+        Me.LBLTextColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLTextColor.TabIndex = 9
+        '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.Transparent
+        Me.Button5.BackgroundImage = CType(resources.GetObject("Button5.BackgroundImage"), System.Drawing.Image)
+        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button5.Location = New System.Drawing.Point(231, 87)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(32, 32)
+        Me.Button5.TabIndex = 8
+        Me.Button5.UseVisualStyleBackColor = False
+        '
+        'Label6
+        '
+        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label6.Location = New System.Drawing.Point(20, 92)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(148, 23)
+        Me.Label6.TabIndex = 7
+        Me.Label6.Text = "Text Color"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLChatWindowColor
+        '
+        Me.LBLChatWindowColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLChatWindowColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChatWindowColor.Location = New System.Drawing.Point(176, 124)
+        Me.LBLChatWindowColor.Name = "LBLChatWindowColor"
+        Me.LBLChatWindowColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLChatWindowColor.TabIndex = 12
+        '
+        'Button6
+        '
+        Me.Button6.BackColor = System.Drawing.Color.Transparent
+        Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
+        Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button6.Location = New System.Drawing.Point(231, 121)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(32, 32)
+        Me.Button6.TabIndex = 11
+        Me.Button6.UseVisualStyleBackColor = False
+        '
+        'Label3
+        '
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label3.Location = New System.Drawing.Point(20, 126)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(148, 23)
+        Me.Label3.TabIndex = 10
+        Me.Label3.Text = "Chat Window Color"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLChatTextColor
+        '
+        Me.LBLChatTextColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLChatTextColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChatTextColor.Location = New System.Drawing.Point(176, 158)
+        Me.LBLChatTextColor.Name = "LBLChatTextColor"
+        Me.LBLChatTextColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLChatTextColor.TabIndex = 16
+        '
+        'Button7
+        '
+        Me.Button7.BackColor = System.Drawing.Color.Transparent
+        Me.Button7.BackgroundImage = CType(resources.GetObject("Button7.BackgroundImage"), System.Drawing.Image)
+        Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button7.Location = New System.Drawing.Point(231, 155)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(32, 32)
+        Me.Button7.TabIndex = 15
+        Me.Button7.UseVisualStyleBackColor = False
+        '
+        'Label7
+        '
+        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label7.Location = New System.Drawing.Point(20, 160)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(148, 23)
+        Me.Label7.TabIndex = 14
+        Me.Label7.Text = "Chat Text Color"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Save
+        '
+        Me.Save.BackColor = System.Drawing.Color.Transparent
+        Me.Save.BackgroundImage = CType(resources.GetObject("Save.BackgroundImage"), System.Drawing.Image)
+        Me.Save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Save.Location = New System.Drawing.Point(44, 405)
+        Me.Save.Name = "Save"
+        Me.Save.Size = New System.Drawing.Size(64, 64)
+        Me.Save.TabIndex = 53
+        Me.Save.UseVisualStyleBackColor = False
+        '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.Transparent
+        Me.Button8.BackgroundImage = CType(resources.GetObject("Button8.BackgroundImage"), System.Drawing.Image)
+        Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button8.Location = New System.Drawing.Point(176, 405)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(64, 64)
+        Me.Button8.TabIndex = 54
+        Me.Button8.UseVisualStyleBackColor = False
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(188, 108)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(75, 25)
+        Me.Button9.TabIndex = 3
+        Me.Button9.Text = "Clear"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'Button10
+        '
+        Me.Button10.BackColor = System.Drawing.Color.Transparent
+        Me.Button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button10.FlatAppearance.BorderSize = 0
+        Me.Button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
+        Me.Button10.Location = New System.Drawing.Point(255, 4)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(20, 20)
+        Me.Button10.TabIndex = 1
+        Me.Button10.UseVisualStyleBackColor = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1817,6 +2143,12 @@ Partial Class Form1
         Me.TeaseAIMenu.ResumeLayout(False)
         Me.MenuStrip2.ResumeLayout(False)
         Me.MenuStrip2.PerformLayout()
+        Me.PNLTheme.ResumeLayout(False)
+        Me.PNLThemeBTN.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2003,5 +2335,33 @@ Partial Class Form1
     Friend WithEvents Boobs As System.Windows.Forms.Button
     Friend WithEvents Ass As System.Windows.Forms.Button
     Friend WithEvents PNLDomTagBTN As System.Windows.Forms.Panel
+    Friend WithEvents ThemeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents PNLTheme As System.Windows.Forms.Panel
+    Friend WithEvents PNLThemeBTN As System.Windows.Forms.Panel
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents PBBackgroundPreview As System.Windows.Forms.PictureBox
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents LBLBackColor As System.Windows.Forms.Label
+    Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents CBStretchBack As System.Windows.Forms.CheckBox
+    Friend WithEvents LBLTextColor As System.Windows.Forms.Label
+    Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents LBLButtonColor As System.Windows.Forms.Label
+    Friend WithEvents Button4 As System.Windows.Forms.Button
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents LBLChatTextColor As System.Windows.Forms.Label
+    Friend WithEvents Button7 As System.Windows.Forms.Button
+    Friend WithEvents LBLChatWindowColor As System.Windows.Forms.Label
+    Friend WithEvents Button6 As System.Windows.Forms.Button
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Button8 As System.Windows.Forms.Button
+    Friend WithEvents Save As System.Windows.Forms.Button
+    Friend WithEvents Button9 As System.Windows.Forms.Button
+    Friend WithEvents Button10 As System.Windows.Forms.Button
 
 End Class
