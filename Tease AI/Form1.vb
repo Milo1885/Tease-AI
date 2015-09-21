@@ -497,6 +497,8 @@ Public Class Form1
     Dim DommeTags As Boolean
     Dim ThemeSettings As Boolean
 
+    Dim InputIcon As Boolean
+
 
 
     Private Const DISABLE_SOUNDS As Integer = 21
@@ -1001,13 +1003,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             FrmSettings.typeinstantlyCheckBox.Checked = False
         End If
 
-        If My.Settings.CBLockWindow = True Then
-            FrmSettings.CBLockWindow.Checked = True
-            SplitContainer1.IsSplitterFixed = True
-        Else
-            FrmSettings.CBLockWindow.Checked = False
-            SplitContainer1.IsSplitterFixed = False
-        End If
+        FrmSettings.CBInputIcon.Checked = My.Settings.CBInputIcon
 
         If My.Settings.CBBlogImageMain = True Then
             FrmSettings.CBBlogImageWindow.Checked = True
@@ -1680,7 +1676,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
                 Chat = "<font face=""Cambria"" size=""2"" color=""Green"">" & Chat & ChatString.Replace("@", "") & " :::  <br>::: FileText = " & FileText & " ::: LineVal = " & StrokeTauntVal & "<br>::: TauntText = " & TauntText & " ::: LineVal = " & TauntTextCount & "<br>::: ResponseFile = " & ResponseFile & " ::: LineVal = " & ResponseLine & "<br></font>"
             End If
 
-
+            Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
             ChatText.DocumentText = Chat
             While ChatText.ReadyState <> WebBrowserReadyState.Complete
                 Application.DoEvents()
@@ -1713,6 +1709,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         If SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
 
             Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ChatString & "<br></font></body>"
+            Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
             ChatText.DocumentText = Chat
             While ChatText.ReadyState <> WebBrowserReadyState.Complete
                 Application.DoEvents()
@@ -1724,7 +1721,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
             Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""Cambria"" size=""3"" font color=""" & _
                 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ChatString & "<br></font></body>"
-
+            Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
             ChatText.DocumentText = Chat
             While ChatText.ReadyState <> WebBrowserReadyState.Complete
                 Application.DoEvents()
@@ -2012,7 +2009,7 @@ WritingTaskLine:
                 FrmWritingTask.LBLLinesRemaining.Text = WritingTaskLinesRemaining
 
                 If SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
-
+                    Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
                     Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & ChatString & "<br></font>"
                     ChatText.DocumentText = Chat
                     While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -2021,7 +2018,7 @@ WritingTaskLine:
                     ScrollChatDown()
 
                 Else
-
+                    Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
                     Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" & _
                 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>"
 
@@ -2038,6 +2035,7 @@ WritingTaskLine:
                 If IsTyping = True Then
 
                     ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
+
                     While ChatText.ReadyState <> WebBrowserReadyState.Complete
                         Application.DoEvents()
                     End While
@@ -2063,6 +2061,7 @@ WritingTaskLine:
                 If SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
 
                     Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & "</font><font color=""#FF0000"">" & ChatString & "<br></font>"
+                    Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
                     ChatText.DocumentText = Chat
                     While ChatText.ReadyState <> WebBrowserReadyState.Complete
                         Application.DoEvents()
@@ -2073,6 +2072,7 @@ WritingTaskLine:
 
                     Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" & _
                 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>"
+                    Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
                     ChatText.DocumentText = Chat
                     While ChatText.ReadyState <> WebBrowserReadyState.Complete
                         Application.DoEvents()
@@ -2123,15 +2123,11 @@ WritingTaskLine:
 
 
 
-        Dim EdgeReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt")
-        Dim EdgeList As New List(Of String)
 
-        While EdgeReader.Peek <> -1
-            EdgeList.Add(EdgeReader.ReadLine)
-        End While
+        Dim EdgeList As New List(Of String) 
+        EdgeList = Txt2List(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt")
 
-        EdgeReader.Close()
-        EdgeReader.Dispose()
+       
 
         Dim EdgeCheck As String = ChatString
 
@@ -2823,14 +2819,10 @@ EdgeSkip:
 
         For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt")
             If Not foundFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
-                Dim SysKeyReader As New StreamReader(foundFile)
+
                 Dim SysKeyList As New List(Of String)
-                SysKeyList.Clear()
-                While SysKeyReader.Peek <> -1
-                    SysKeyList.Add(SysKeyReader.ReadLine())
-                End While
-                SysKeyReader.Close()
-                SysKeyReader.Dispose()
+                SysKeyList = Txt2List(foundFile)
+           
 
                 DebugAwarenessLine = "Domme does not recognize this statement"
 
@@ -2900,14 +2892,10 @@ DebugAwarenessStep2:
             If Not foundFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
 
 
-                Dim SysKeyReader As New StreamReader(foundFile)
+
                 Dim SysKeyList As New List(Of String)
-                SysKeyList.Clear()
-                While SysKeyReader.Peek <> -1
-                    SysKeyList.Add(SysKeyReader.ReadLine())
-                End While
-                SysKeyReader.Close()
-                SysKeyReader.Dispose()
+                SysKeyList = Txt2List(foundFile)
+               
 
                 For i As Integer = 0 To SysKeyList.Count - 1
 
@@ -5140,6 +5128,13 @@ NullResponse:
                 DomTask = DomTask.Replace("ATSYMBOL", "@")
                 DomTask = DomTask.Replace("atsymbol", "@")
 
+                If InputIcon = True Then
+                    DomTask = DomTask & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png""/>"
+                    InputIcon = False
+                End If
+
+
+
 
                 Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
@@ -5259,6 +5254,7 @@ EndSysMes:
 
 
                     ClearMainPictureBox()
+                    CheckDommeTags()
 
                     Try
                         'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
@@ -5467,7 +5463,7 @@ NoResponse:
 
 
 
-                End If
+            End If
         End If
 
     End Sub
@@ -5870,6 +5866,11 @@ TryNextWithTease:
                 DomChat = DomChat.Replace("ATSYMBOL", "@")
                 DomChat = DomChat.Replace("atsymbol", "@")
 
+                If InputIcon = True Then
+                    DomChat = DomChat & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png""/>"
+                    InputIcon = False
+                End If
+
                 If NullResponse = True Or DomChat = "" Or DomChat Is Nothing Then GoTo NullResponseLine2
 
                 If UCase(DomChat) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomChat = "<b>Tease AI has been reset</b>"
@@ -5976,7 +5977,7 @@ EndSysMes:
 
                     ClearMainPictureBox()
 
-
+                    CheckDommeTags()
 
 
                     Try
@@ -6251,6 +6252,7 @@ NullResponseLine2:
 
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
+            CheckDommeTags()
             mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
             CheckDommeTags()
             ShowImageInfo()
@@ -6309,6 +6311,8 @@ TryNext:
 
         If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
+        CheckDommeTags()
+
         Try
             mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
             CheckDommeTags()
@@ -6365,6 +6369,8 @@ TryPrevious:
         ClearMainPictureBox()
 
         If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
+
+        CheckDommeTags()
 
         Try
             mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
@@ -6470,6 +6476,8 @@ TryPrevious:
 
 
     Private Sub StrokeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimer.Tick
+
+        If InputFlag = True Then Return
 
         If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -6603,6 +6611,8 @@ NoPlaylistModuleFile:
     End Sub
 
     Private Sub StrokeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTauntTimer.Tick
+
+        If InputFlag = True Then Return
 
         If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -8199,6 +8209,8 @@ StatusUpdate1:
         S1Pic = S1Pic.Replace("\", "/")
         Debug.Print(S1Pic)
 
+        TextColor = Color2Html(My.Settings.ChatTextColor)
+
         If StatusChance1 < FrmSettings.GlitterSlider1.Value * 10 And FrmSettings.CBGlitter1.Checked = True Then
             StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNC1 & """><b>" & FrmSettings.TBGlitter1.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
             StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText1 & "</font><br><br>"
@@ -8220,6 +8232,8 @@ StatusUpdate2:
         S2Pic = S2Pic.Replace("\", "/")
         Debug.Print(S2Pic)
 
+        TextColor = Color2Html(My.Settings.ChatTextColor)
+
         If StatusChance2 < FrmSettings.GlitterSlider2.Value * 10 And FrmSettings.CBGlitter2.Checked = True Then
             StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNC2 & """><b>" & FrmSettings.TBGlitter2.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
             StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText2 & "</font><br><br>"
@@ -8240,6 +8254,8 @@ StatusUpdate3:
         S3Pic = "file://" & S3Pic
         S3Pic = S3Pic.Replace("\", "/")
         Debug.Print(S3Pic)
+
+        TextColor = Color2Html(My.Settings.ChatTextColor)
 
         If StatusChance3 < FrmSettings.GlitterSlider3.Value * 10 And FrmSettings.CBGlitter3.Checked = True Then
             StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNC3 & """><b>" & FrmSettings.TBGlitter3.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
@@ -8977,7 +8993,8 @@ DeepClean:
                         StringClean = StringClean.Replace("TagSucking", "")
                         StringClean = StringClean.Replace("TagSmiling", "")
                         StringClean = StringClean.Replace("TagGlaring", "")
-
+                        StringClean = StringClean.Replace("TagSeeThrough", "")
+                        StringClean = StringClean.Replace("TagAllFours", "")
 
                         'If PoundArray(i).Contains("#") Then GoTo DoItHere
 
@@ -9020,7 +9037,9 @@ BadVocabBreak:
 
 RinseLatherRepeat:
 
-        
+        ' The @LockImages Commnd prevents the Domme Slideshow from moving forward or back when set to "Tease" or "Timed". Manual operation of Domme Slideshow images is still allowed,
+        ' and pictures displayed through other means will still work. Images are automatically unlocked whenever Tease AI moves into a Link script, an End script, any Interrupt occurs
+        ' (including Long Edge and Start Stroking) or when the sub gives up.
 
         If StringClean.Contains("@LockImages") Then
             LockImage = True
@@ -9029,6 +9048,8 @@ RinseLatherRepeat:
             StringClean = StringClean.Replace("@LockImages", "")
         End If
 
+        ' The @UnlockImages Command allows the Domme Slideshow to resume functioning as normal.
+
         If StringClean.Contains("@UnlockImages") Then
             nextButton.Enabled = True
             previousButton.Enabled = True
@@ -9036,11 +9057,8 @@ RinseLatherRepeat:
             StringClean = StringClean.Replace("@UnlockImages", "")
         End If
 
-
-        '  ┌─┐╔═╗┬ ┬┌─┐┌┐┌┌─┐┌─┐
-        '  │└┘║  ├─┤├─┤││││  ├┤ 
-        '  └──╚═╝┴ ┴┴ ┴┘└┘└─┘└─┘
-
+        ' The @Chance Command gives a chance to either jump to the line specified, or move to the next line as normal. The odds of jumping to the specified line are indicated in the Command
+        ' itself. For example, @Chance50(Domme Instructions) would have a 50% chance of jumping to (Domme Instructions).
 
         If StringClean.Contains("@Chance") Then
 
@@ -9067,12 +9085,8 @@ RinseLatherRepeat:
 
             If TempVal <= ChanceVal Then
 
-
-
                 FileGoto = ChanceSplit(0) & ")"
                 SkipGotoLine = True
-
-
 
                 If YesOrNo = True Then
                     GetGotoChat()
@@ -9080,229 +9094,662 @@ RinseLatherRepeat:
                     GetGoto()
                 End If
 
-
             End If
-
-            'StringClean = StringClean.Replace("@Chance" & ChanceTemp, "")
 
         End If
 
-        '  ┌─┐╔═╗┬ ┬┌─┐┌─┐┬┌─╔═╗┬  ┌─┐┌─┐
-        '  │└┘║  ├─┤├┤ │  ├┴┐╠╣ │  ├─┤│ ┬
-        '  └──╚═╝┴ ┴└─┘└─┘┴ ┴╚  ┴─┘┴ ┴└─┘
+        ' The @CheckFlag() Command checks to see if a Flag has previously been created by @SetFlag or @TempFlag, and goes to the appropriate line if it has. If you use @CheckFlag() with just the name of
+        ' the flag itself, such as @CheckFlag(FlagName) , then Tease AI will move to the line (FlagName) if that Flag exists. However, you can also specify a line to go to if that Flag is found by using
+        ' a comma, such as @CheckFlag(FlagName, Domme Instructions) . In this case, Tease AI would move to the line (Domme Instructions) if the Flag "FlagName" exists. You can use as many @CheckFlag()
+        ' Commands per line that you wish. When specifiying a line to go to in a @CheckFlag Command, never put it in its own parentheses (For example, @CheckFlag(FlagName, Domme Instructions) is correct,
+        ' @CheckFlag(FlagName, (Domme Instructions)) is incorrect. 
 
         If StringClean.Contains("@CheckFlag") Then
 
+            Dim CheckArray As String() = StringClean.Split(")")
+
+            For i As Integer = 0 To CheckArray.Count - 1
+
+                If CheckArray(i).Contains("@CheckFlag(") Then
+
+                    CheckArray(i) = CheckArray(i) & ")"
+
+                    Dim CheckFlag As String = GetParentheses(CheckArray(i), "@CheckFlag(")
+                    Dim OriginalCheck As String = CheckFlag
+
+                    If CheckFlag.Contains(",") Then
+
+                        CheckFlag = CheckFlag.Replace(", ", ",")
+                        CheckFlag = CheckFlag.Replace(" ,", ",")
+
+                        Dim FlagArray() As String = CheckFlag.Split(",")
+
+                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagArray(0)) Or _
+                                File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagArray(0)) Then
+                            SkipGotoLine = True
+                            FileGoto = FlagArray(1)
+                            GetGoto()
+                        End If
+
+                    Else
+
+                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & CheckFlag) Or _
+                            File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & CheckFlag) Then
+                            SkipGotoLine = True
+                            FileGoto = CheckFlag
+                            GetGoto()
+                        End If
+
+                    End If
+
+                    CheckArray(i) = CheckArray(i).Replace("@CheckFlag(" & OriginalCheck & ")", "")
+
+                End If
+
+            Next
+
+            StringClean = Join(CheckArray, Nothing)
+
+        End If
+
+        ' The @SetFlag() Command creates a Flag in System\Flags. You can use multiple @SetFlag() Commands in the same line to set multiple flags at once (For example, @SetFlag(Flag1) @SetFlag(Flag2)).
+        ' You can also set multiple flags at once by separating them in single @SetFlag() Commands with a comma (For example, @SetFlag(Flag1, Flag2, Flag3)).
+
+        If StringClean.Contains("@SetFlag(") Then
+
+            Dim SetArray As String() = StringClean.Split(")")
+
+            For i As Integer = 0 To SetArray.Count - 1
+
+                If SetArray(i).Contains("@SetFlag(") Then
+
+                    SetArray(i) = SetArray(i) & ")"
+
+                    Dim SetFlag As String = GetParentheses(SetArray(i), "@SetFlag(")
+                    Dim OriginalSet As String = SetFlag
+
+                    If SetFlag.Contains(",") Then
+
+                        SetFlag = SetFlag.Replace(", ", ",")
+                        SetFlag = SetFlag.Replace(" ,", ",")
+
+                        Dim FlagArray() As String = SetFlag.Split(",")
+
+                        For x As Integer = 0 To FlagArray.Count - 1
+                            Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagArray(x))
+                            FlagCreate.Close()
+                            FlagCreate.Dispose()
+                        Next
+
+                    Else
+
+                         Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & SetFlag)
+                        FlagCreate.Close()
+                        FlagCreate.Dispose()
+
+                    End If
+
+                    SetArray(i) = SetArray(i).Replace("@SetFlag(" & OriginalSet & ")", "")
+
+                End If
+
+            Next
+
+            StringClean = Join(SetArray, Nothing)
+
+        End If
+
+        ' The @TempFlag() Command creates a Flag in System\Flags\Temp. These work like @SetFlag() Commands, the only difference is that Flags set this way are deleted the next time Tease AI is run.
+        ' You can use multiple @TempFlag() Commands in the same line to set multiple flags at once (For example, @TempFlag(Flag1) @TempFlag(Flag2)).
+        ' You can also set multiple flags at once by separating them in single @TempFlag() Commands with a comma (For example, @TempFlag(Flag1, Flag2, Flag3)).
+
+        If StringClean.Contains("@TempFlag(") Then
+
+            Dim TempArray As String() = StringClean.Split(")")
+
+            For i As Integer = 0 To TempArray.Count - 1
+
+                If TempArray(i).Contains("@TempFlag(") Then
+
+                    TempArray(i) = TempArray(i) & ")"
+
+                    Dim TempFlag As String = GetParentheses(TempArray(i), "@TempFlag(")
+                    Dim OriginalTemp As String = TempFlag
+
+                    If TempFlag.Contains(",") Then
+
+                        TempFlag = TempFlag.Replace(", ", ",")
+                        TempFlag = TempFlag.Replace(" ,", ",")
+
+                        Dim FlagArray() As String = TempFlag.Split(",")
+
+                        For x As Integer = 0 To FlagArray.Count - 1
+                            Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagArray(x))
+                            FlagCreate.Close()
+                            FlagCreate.Dispose()
+                        Next
+
+                    Else
+
+                        Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & TempFlag)
+                        FlagCreate.Close()
+                        FlagCreate.Dispose()
+
+                    End If
+
+                    TempArray(i) = TempArray(i).Replace("@TempFlag(" & OriginalTemp & ")", "")
+
+                End If
+
+            Next
+
+            StringClean = Join(TempArray, Nothing)
+
+        End If
+
+        ' The @DeleteFlag() Command deletes specified Flags in System\Flags and System\Flags\Temp.
+        ' You can use multiple @DeleteFlag() Commands in the same line to delete multiple flags at once (For example, @DeleteFlag(Flag1) @DeleteFlag(Flag2)).
+        ' You can also delete multiple flags at once by separating them in single @DeleteFlag() Commands with a comma (For example, @DeleteFlag(Flag1, Flag2, Flag3)).
+
+
+        If StringClean.Contains("@DeleteFlag(") Then
+
+            Dim DeleteArray As String() = StringClean.Split(")")
+
+            For i As Integer = 0 To DeleteArray.Count - 1
+
+                If DeleteArray(i).Contains("@DeleteFlag(") Then
+
+                    DeleteArray(i) = DeleteArray(i) & ")"
+
+                    Dim DeleteFlag As String = GetParentheses(DeleteArray(i), "@DeleteFlag(")
+                    Dim OriginalDelete As String = DeleteFlag
+
+                    If DeleteFlag.Contains(",") Then
+
+                        DeleteFlag = DeleteFlag.Replace(", ", ",")
+                        DeleteFlag = DeleteFlag.Replace(" ,", ",")
+
+                        Dim FlagArray() As String = DeleteFlag.Split(",")
+
+                        For x As Integer = 0 To FlagArray.Count - 1
+                            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagArray(x)) Then _
+                   My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagArray(x))
+
+                            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagArray(x)) Then _
+                             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagArray(x))
+                        Next
+
+                    Else
+
+                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & DeleteFlag) Then _
+                 My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & DeleteFlag)
+
+                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & DeleteFlag) Then _
+                         My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & DeleteFlag)
+
+                    End If
+
+                    DeleteArray(i) = DeleteArray(i).Replace("@DeleteFlag(" & OriginalDelete & ")", "")
+
+                End If
+
+            Next
+
+            StringClean = Join(DeleteArray, Nothing)
+
+        End If
+
+        ' The @SetVar[] Command is used to set a Variable and store it in System\Variables. The syntax for using @SetVar[] is @SetVar[VariableName]=[Value].
+        ' For example, @SetVar[MyNumber]=[12] would save the Variable "MyNumber" as a value of 12. You can also set string Variables this way, such as @SetVar[MyString]=[lasagna]
+        ' Multiple @SetVar[] Commands may be used per line if you wish.
+        ' Variable names CANNOT contain spaces or any character not supported by Windows file naming conventions \ / : * ? " < > |
+
+        If StringClean.Contains("@SetVar[") Then
+
+            Dim VarArray As String() = StringClean.Split
+
+            For i As Integer = 0 To VarArray.Count - 1
+
+                Dim SCGotVar As String = "NULL"
+
+                If VarArray(i).Contains("@SetVar[") Then
+                    SCGotVar = VarArray(i)
+                    VarArray(i) = ""
+
+                    SCGotVar = SCGotVar.Replace("@SetVar[", "")
+
+                    Dim SCGotVarSplit As String() = Split(SCGotVar, "]")
+
+                    Dim VarName As String = SCGotVarSplit(0)
+
+                    SCGotVarSplit(0) = ""
+
+                    SCGotVar = Join(SCGotVarSplit)
+
+                    SCGotVar = SCGotVar.Replace("=[", "")
+                    SCGotVar = SCGotVar.Replace(" ", "")
+
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName, SCGotVar, False)
+
+                End If
+
+            Next
+
+            StringClean = Join(VarArray)
+
+        End If
+
+        ' The @RoundVar Command is used to take an existing Variable and round it by the amount specified. The correct syntax is @Round[VarName]=[RoundAmount]
+        ' For example, @RoundVar[StrokeTotal]=[10] wound round the Variable "StrokeTotal" by 10.
+        ' @Round[] will only round the and save Variable, it will not dispaly it. More than one @Round[] Command can be used per line
+
+
+        If StringClean.Contains("@RoundVar[") Then
+
+            Dim VarArray As String() = StringClean.Split
+
+            For i As Integer = 0 To VarArray.Count - 1
+
+                Dim SCGotVar As String = "NULL"
+
+                If VarArray(i).Contains("@RoundVar[") Then
+                    SCGotVar = VarArray(i)
+                    VarArray(i) = ""
+                End If
+
+                SCGotVar = SCGotVar.Replace("@RoundVar[", "")
+
+                Dim SCGotVarSplit As String() = Split(SCGotVar, "]")
+
+                Dim VarName As String = SCGotVarSplit(0)
+                Dim Val1 As Integer
+
+                Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName
+
+                If File.Exists(VarCheck) Then
+
+                    Dim VarReader As New StreamReader(VarCheck)
+                    Val1 = Val(VarReader.ReadLine())
+                    VarReader.Close()
+                    VarReader.Dispose()
+
+                    SCGotVarSplit(0) = ""
+
+                    SCGotVar = Join(SCGotVarSplit)
+
+                    SCGotVar = SCGotVar.Replace("=[", "")
+                    SCGotVar = SCGotVar.Replace(" ", "")
+
+                    Dim VarValue As Integer = Val(SCGotVar)
+
+                    Val1 = VarValue * Math.Round(Val1 / VarValue)
+
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName, Val1, False)
+
+                End If
+
+            Next
+
+            StringClean = Join(VarArray)
+
+        End If
+
+
+        If StringClean.Contains("@ChangeVar") Then
+
+
+            Debug.Print("CHangeVar Stringclean = " & StringClean)
+
+            Dim ChangeFlag As String = StringClean
+            Dim ChangeStart As Integer = ChangeFlag.IndexOf("@ChangeVar[") + 11
+
+            Dim ChangeVar As String
+            Dim ChangeVal1 As String
+            Dim ChangeVal2 As String
+            Dim ChangeOperator As String
+
+            Dim Val1 As Integer
+            Dim Val2 As Integer
+
+
+            'Dim CFIndex As Integer = VarSplit(i).IndexOf("@ShowVar[") + 9
+            'CheckFlag = VarSplit(i).Substring(CFIndex, VarSplit(i).Length - CFIndex).Replace("@ShowVar[", "")
+
+
+            ChangeFlag = StringClean.Substring(ChangeStart, StringClean.Length - ChangeStart)
+            ChangeVar = ChangeFlag.Split("]")(0)
+            ChangeVal1 = ChangeFlag.Split("]")(1)
+            ChangeVal2 = ChangeFlag.Split("]")(2)
+            ChangeOperator = ChangeFlag.Split("]")(2)
+
+            StringClean = StringClean.Replace("@ChangeVar[" & ChangeVar & "]" & ChangeVal1 & "]" & ChangeVal2 & "]", "")
+
+            ChangeVar = ChangeVar.Replace("@ChangeVar[", "")
+            ChangeVal1 = ChangeVal1.Replace("=[", "")
+            ChangeVal2 = ChangeVal2.Replace("+[", "")
+            ChangeVal2 = ChangeVal2.Replace("-[", "")
+            ChangeVal2 = ChangeVal2.Replace("*[", "")
+            ChangeVal2 = ChangeVal2.Replace("/[", "")
+
+
+            '@ChangeVar[TB_EdgeHoldingOwed   ]    =[TB_EdgeHoldingOwed    ]     -[1       ]
+
+            If IsNumeric(ChangeVal1) = False Then
+                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1) Then
+                    Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1)
+                    Val1 = Val(VarReader.ReadLine())
+                    VarReader.Close()
+                    VarReader.Dispose()
+                Else
+                    Val1 = 0
+                End If
+            Else
+                Val1 = Val(ChangeVal1)
+            End If
+
+            If IsNumeric(ChangeVal2) = False Then
+                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2) Then
+                    Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2)
+                    Val2 = Val(VarReader.ReadLine())
+                    VarReader.Close()
+                    VarReader.Dispose()
+                Else
+                    Val2 = 0
+                End If
+            Else
+                Val2 = Val(ChangeVal2)
+            End If
+
+            ScriptOperator = "Null"
+            If ChangeOperator.Contains("+") Then ScriptOperator = "Add"
+            If ChangeOperator.Contains("-") Then ScriptOperator = "Subtract"
+            If ChangeOperator.Contains("*") Then ScriptOperator = "Multiply"
+            If ChangeOperator.Contains("/") Then ScriptOperator = "Divide"
+
+            Dim ChangeVal As Integer = 0
+
+            If ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
+            If ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
+            If ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
+            If ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
+
+            'Debug.Print("ChangeVal = " & ChangeVal)
+
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
+
+        End If
+
+
+        If StringClean.Contains("@If[") Then
+
+            Do
+
+                Dim SCIfVar As String() = Split(StringClean)
+                Dim SCGotVar As String = "Null"
+
+                For i As Integer = 0 To SCIfVar.Length - 1
+                    If SCIfVar(i).Contains("@If[") Then
+                        'Debug.Print("@SetVar SCSetVar(i) = " & SCIfVar(i))
+                        Dim IFJoin As Integer = 0
+                        If Not SCIfVar(i).Contains(")") Then
+                            Do
+                                IFJoin += 1
+                                SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
+                                SCIfVar(i + IFJoin) = ""
+                            Loop Until SCIfVar(i).Contains(")")
+                        End If
+                        SCGotVar = SCIfVar(i)
+                        SCIfVar(i) = ""
+                        StringClean = Join(SCIfVar)
+                        Do
+                            StringClean = StringClean.Replace("  ", " ")
+                        Loop Until Not StringClean.Contains("  ")
+                        'Debug.Print("@SetVar SCSetVar Joined StringClean = " & StringClean)
+                        Exit For
+                    End If
+                Next
+
+                SCGotVar = SCGotVar.Replace("@If[", "")
+                Dim SCGotVarSplit As String() = Split(SCGotVar, "]", 2)
+
+                Dim Val1 As Integer = -18855881
+                Dim Str1 As String = SCGotVarSplit(0)
+
+                Debug.Print("SCGotVarSplit(0)= " & SCGotVarSplit(0))
+
+                If IsNumeric(Str1) = True Then
+
+                    Debug.Print("InNumeric Called")
+
+                    Val1 = Val(SCGotVarSplit(0))
+
+                Else
+
+                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
+                    'Debug.Print("VarCheck = " & VarCheck)
+                    If File.Exists(VarCheck) Then
+                        'Debug.Print("VarCheck Exists")
+                        Dim VarReader As New StreamReader(VarCheck)
+
+                        Dim StrCheck As String = VarReader.ReadLine()
+
+                        Debug.Print("StrChec = " & StrCheck)
+
+                        If IsNumeric(StrCheck) = True Then
+                            Val1 = Val(StrCheck)
+                        Else
+                            Str1 = StrCheck
+                        End If
+
+                        VarReader.Close()
+                        VarReader.Dispose()
+                    End If
+
+                End If
+
+
+                Debug.Print("Val1 = " & Val1)
+
+
+
+                'Debug.Print("@SetVar VarDifference = " & Val1)
+
+                'Debug.Print("@SetVar Val = " & Val1)
+                SCGotVarSplit(0) = ""
+
+                SCGotVar = Join(SCGotVarSplit)
+                'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
+
+                SCGotVarSplit = Split(SCGotVar, "[", 2)
+                SCGotVarSplit(0) = SCGotVarSplit(0).Replace(" ", "")
+                'Debug.Print("@SetVar SCGotVarSplit = " & SCGotVarSplit(0))
+
+                ScriptCompare = "Null"
+
+                If SCGotVarSplit(0) = "=" Or SCGotVarSplit(0) = "==" Then ScriptCompare = "="
+                If SCGotVarSplit(0) = "<>" Then ScriptCompare = "<>"
+                If SCGotVarSplit(0) = ">" Then ScriptCompare = ">"
+                If SCGotVarSplit(0) = "<" Then ScriptCompare = "<"
+                If SCGotVarSplit(0) = ">=" Then ScriptCompare = ">="
+                If SCGotVarSplit(0) = "<=" Then ScriptCompare = "<="
+
+                'Debug.Print("Script Compare = " & ScriptCompare)
+
+                SCGotVarSplit(0) = ""
+
+                SCGotVar = Join(SCGotVarSplit)
+                'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
+
+                Do Until SCGotVar.Substring(0, 1) <> " "
+                    SCGotVar = SCGotVar.Remove(0, 1)
+                Loop
+
+                'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
+
+                SCGotVarSplit = Split(SCGotVar, "]", 2)
+                SCGotVarSplit(0) = SCGotVarSplit(0).Replace(" ", "")
+                'Debug.Print("@SetVar SCGotVarSplit(0) = " & SCGotVarSplit(0))
+                SCGotVarSplit(1) = SCGotVarSplit(1).Replace("Then", "")
+                'Debug.Print("@SetVar SCGotVarSplit(1) = " & SCGotVarSplit(1))
+
+
+                Dim Val2 As Integer = -18855881
+                Dim Str2 As String = SCGotVarSplit(0)
+
+                Debug.Print("SCGotVarSplit(0)= " & SCGotVarSplit(0))
+
+                If IsNumeric(Str2) = True Then
+
+                    Debug.Print("InNumeric Called")
+
+                    Val2 = Val(SCGotVarSplit(0))
+
+                Else
+
+                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
+                    'Debug.Print("VarCheck = " & VarCheck)
+                    If File.Exists(VarCheck) Then
+                        'Debug.Print("VarCheck Exists")
+                        Dim VarReader As New StreamReader(VarCheck)
+
+                        Dim StrCheck As String = VarReader.ReadLine()
+                        Debug.Print("StrChec = " & StrCheck)
+                        If IsNumeric(StrCheck) = True Then
+                            Val2 = Val(StrCheck)
+                        Else
+                            Str2 = StrCheck
+                        End If
+
+
+                        VarReader.Close()
+                        VarReader.Dispose()
+                    End If
+
+                End If
+
+                Debug.Print("Val2 = " & Val2)
+
+
+                Dim CompareCheck As String = "Null"
+
+                If Val1 = -18855881 Or Val2 = -18855881 Then
+
+                    Debug.Print("Compare strings called")
+
+                    Debug.Print("Str1 = " & Str1)
+                    Debug.Print("Str2 = " & Str2)
+
+
+                    If ScriptCompare = "=" Then
+                        If UCase(Str1) = UCase(Str2) Then CompareCheck = SCGotVarSplit(1)
+                    End If
+
+                    If ScriptCompare = "<>" Then
+                        If UCase(Str1) <> UCase(Str2) Then CompareCheck = SCGotVarSplit(1)
+                    End If
+
+                Else
+
+                    Debug.Print("Compare integers called")
+
+                    If ScriptCompare = "=" Then
+                        If Val1 = Val2 Then CompareCheck = SCGotVarSplit(1)
+                    End If
+
+                    If ScriptCompare = "<>" Then
+                        If Val1 <> Val2 Then CompareCheck = SCGotVarSplit(1)
+                    End If
+
+                    If ScriptCompare = ">" Then
+                        If Val1 > Val2 Then CompareCheck = SCGotVarSplit(1)
+                    End If
+
+                    If ScriptCompare = "<" Then
+                        If Val1 < Val2 Then CompareCheck = SCGotVarSplit(1)
+                    End If
+
+                    If ScriptCompare = ">=" Then
+                        If Val1 >= Val2 Then CompareCheck = SCGotVarSplit(1)
+                    End If
+
+                    If ScriptCompare = "<=" Then
+                        If Val1 <= Val2 Then CompareCheck = SCGotVarSplit(1)
+                    End If
+
+
+                End If
+
+
+                'Debug.Print("CompareCheck = " & CompareCheck)
+
+                If CompareCheck <> "Null" Then
+                    FileGoto = CompareCheck
+                    SkipGotoLine = True
+                    GetGoto()
+                End If
+
+            Loop Until Not StringClean.Contains("@If")
+
+        End If
+
+        If StringClean.Contains("@ShowVar") Then
 
             Dim CheckFlag As String = StringClean & " some test garbage"
 
-            Dim CFIndex As Integer = StringClean.IndexOf("@CheckFlag(") + 11
-    
-            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
+            Dim VarSplit As String() = CheckFlag.Split("]")
 
-            CheckFlag = CheckFlag.Split(")")(0)
-            CheckFlag = CheckFlag.Replace("@CheckFlag(", "")
+            For i As Integer = 0 To VarSplit.Count - 1
 
+                Debug.Print("Varsplit(" & i & ") = " & VarSplit(i))
+                If VarSplit(i).Contains("@ShowVar[") Then
 
+                    Dim CFIndex As Integer = VarSplit(i).IndexOf("@ShowVar[") + 9
+                    CheckFlag = VarSplit(i).Substring(CFIndex, VarSplit(i).Length - CFIndex).Replace("@ShowVar[", "")
 
-            If CheckFlag.Contains(",") Then
-
-                'Debug.Print("CheckFlag Contains Comma ")
-                CheckFlag = CheckFlag.Replace(", ", ",")
-                CheckFlag = CheckFlag.Replace(" ,", ",")
-
-                Dim FlagArray() As String = CheckFlag.Split(",")
-
-                For i As Integer = 0 To FlagArray.Length - 1
-                    'Debug.Print("FlagArray(i) = " & FlagArray(i))
-                    If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagArray(i)) Or _
-                        File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagArray(i)) Then
-                        SkipGotoLine = True
-                        FileGoto = FlagArray(i)
-                        GetGoto()
+                    Dim VarValue As String
+                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & CheckFlag
+                    Debug.Print("VarCheck = " & VarCheck)
+                    If File.Exists(VarCheck) Then
+                        Debug.Print("VarCheck Exists787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878")
+                        Dim VarReader As New StreamReader(VarCheck)
+                        VarValue = VarReader.ReadLine()
+                        VarReader.Close()
+                        VarReader.Dispose()
+                    Else
+                        VarValue = "0"
                     End If
-                Next
-            Else
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & CheckFlag) Or _
-                    File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & CheckFlag) Then
-                    'Debug.Print("CheckFlag = " & CheckFlag)
-                    SkipGotoLine = True
-                    FileGoto = CheckFlag
-                    GetGoto()
+                    Debug.Print("CheckFlag = " & CheckFlag)
+                    VarSplit(i) = VarSplit(i).Replace("@ShowVar[" & CheckFlag, VarValue)
+                    Debug.Print("Final Varsplit(" & i & ") = " & VarSplit(i))
                 End If
-            End If
-            StringClean = StringClean.Replace("@CheckFlag", "")
+
+            Next
+
+            CheckFlag = Join(VarSplit, Nothing)
+
+            CheckFlag = CheckFlag.Replace(" some test garbage", "")
+
+            StringClean = CheckFlag
+
         End If
+
+
+
+        ' The @InputVar[] stops script progression and waits for the user to input his next message. Whatever the user types next will be saved as a Variable named whatever you specify in the brackets.
+        ' For example, if the script's line was "What's your favorite food? @InputVar[FavoriteFood]", and the user typed "lo mein", then "lo mein" would be saved as the Variable "FavoriteFood". If the
+        ' user has checked "Show Icon During Input Questions" in the General Settings tab, then the domme's question will be accompanied by a small question mark icon to let the user know that their next
+        ' response will be saved verbatim. @InputVar[] will pause Linear Scripts, as well as countdowns and taunts for Stroking, Edging and Holding The Edge.
+
 
 
         If StringClean.Contains("@InputVar[") Then
 
-
-            Dim CheckFlag As String = StringClean & " some test garbage"
-
-            Dim CFIndex As Integer = StringClean.IndexOf("@InputVar[") + 10
-
-            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
-
-            CheckFlag = CheckFlag.Split("]")(0)
-            CheckFlag = CheckFlag.Replace("@InputVar[", "")
-
-            InputString = CheckFlag
+            InputString = GetParentheses(StringClean, "@InputVar[").Replace("]", "")
             InputFlag = True
+            If FrmSettings.CBInputIcon.Checked = True Then InputIcon = True
 
-            StringClean = StringClean.Replace("@InputVar[" & CheckFlag & "]", "")
-        End If
-
-
-        If StringClean.Contains("@Glitter(") Then
-
-            Dim WriteFlag As String = StringClean
-            Dim WriteStart As Integer
-            WriteStart = WriteFlag.IndexOf("@Glitter(") + 9
-            WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-            WriteFlag = WriteFlag.Split(")")(0)
-            WriteFlag = WriteFlag.Replace("@Glitter(", "")
-
-            If FrmSettings.CBGlitterFeedOff.Checked = False And UpdatingPost = False Then
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Script\" & WriteFlag & ".txt") And UpdatingPost = False Then
-                    UpdateList.Clear()
-                    UpdateList.Add(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Script\" & WriteFlag & ".txt")
-                    StatusUpdatePost()
-                End If
-            End If
-
-            StringClean = StringClean.Replace("@Glitter(" & WriteFlag & ")", "")
-
-        End If
-
-        If StringClean.Contains("@CustomTask(") Then
-
-            Dim WriteFlag As String = StringClean
-            Dim WriteStart As Integer
-            WriteStart = WriteFlag.IndexOf("@CustomTask(") + 12
-            WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-            WriteFlag = WriteFlag.Split(")")(0)
-            WriteFlag = WriteFlag.Replace("@CustomTask(", "")
-
-
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & WriteFlag & "_First.txt") And _
-                File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & WriteFlag & ".txt") Then
-                CustomTask = True
-                CustomTaskActive = True
-                CustomTaskText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & WriteFlag & ".txt"
-                CustomTaskTextFirst = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & WriteFlag & "_First.txt"
-
-
-
-            End If
-
-
-            StringClean = StringClean.Replace("@CustomTask(" & WriteFlag & ")", "")
-
-        End If
-
-
-
-
-        If StringClean.Contains("@SetFlag") Then
-            Debug.Print("SetFlag called")
-            Dim WriteFlag As String = StringClean
-            Dim WriteStart As Integer
-            WriteStart = WriteFlag.IndexOf("@SetFlag(") + 9
-            WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-            WriteFlag = WriteFlag.Split(")")(0)
-            WriteFlag = WriteFlag.Replace("@SetFlag(", "")
-            Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag)
-            FlagCreate.Close()
-            FlagCreate.Dispose()
-            StringClean = StringClean.Replace("@SetFlag(" & WriteFlag & ")", "")
-        End If
-
-        If StringClean.Contains("@SetGroup(") Then
-            Debug.Print("SetGroup called")
-            Dim WriteFlag As String = StringClean
-            Dim WriteStart As Integer
-            WriteStart = WriteFlag.IndexOf("@SetGroup(") + 10
-            WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-            WriteFlag = WriteFlag.Split(")")(0)
-            WriteFlag = WriteFlag.Replace("@SetGroup(", "")
-
-            Dim WF As String = UCase(WriteFlag)
-
-            If WF.Contains("D") And Not WF.Contains("1") And Not WF.Contains("2") And Not WF.Contains("3") Then Group = "D"
-            If WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And Not WF.Contains("3") Then Group = "D1"
-            If WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then Group = "D12"
-            If WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then Group = "D13"
-            If WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then Group = "D23"
-            If WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then Group = "D123"
-
-            If Not WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And Not WF.Contains("3") Then Group = "1"
-            If Not WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then Group = "12"
-            If Not WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then Group = "123"
-
-            If WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then Group = "D2"
-            If Not WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then Group = "2"
-            If Not WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then Group = "23"
-
-            If WF.Contains("D") And Not WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then Group = "D3"
-            If Not WF.Contains("D") And Not WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then Group = "3"
-            If Not WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then Group = "13"
-
-
-
-            StringClean = StringClean.Replace("@SetGroup(" & WriteFlag & ")", "")
-        End If
-
-        If StringClean.Contains("@TempFlag") Then
-
-            Debug.Print("TempFlag called")
-
-            Dim WriteFlag As String = StringClean
-
-            Dim WriteStart As Integer
-
-            WriteStart = WriteFlag.IndexOf("@TempFlag(") + 10
-            WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-
-            'WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - 1).Trim
-            Debug.Print("WriteFlag = " & WriteFlag)
-            'WriteFlag = DomTask.Split("@SetFlag(")(1)
-            WriteFlag = WriteFlag.Split(")")(0)
-            WriteFlag = WriteFlag.Replace("@TempFlag(", "")
-            Debug.Print("WriteFlag = " & WriteFlag)
-            'If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) Then
-            'Else
-            Debug.Print("WriteFlag.Write Called")
-            Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag)
-            FlagCreate.Close()
-            FlagCreate.Dispose()
-            'End If
-            StringClean = StringClean.Replace("@TempFlag(" & WriteFlag & ")", "")
-        End If
-
-        If StringClean.Contains("@DeleteFlag") Then
-
-            Debug.Print("DeleteFlag called")
-
-            Dim WriteFlag As String = StringClean
-
-            Dim WriteStart As Integer
-
-            WriteStart = WriteFlag.IndexOf("@DeleteFlag(") + 12
-            WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-            WriteFlag = WriteFlag.Split(")")(0)
-            WriteFlag = WriteFlag.Replace("@DeleteFlag(", "")
-            Debug.Print("Delete Flag = " & WriteFlag)
-
-
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) Then _
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag)
-
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then _
-             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag)
-
-
-            StringClean = StringClean.Replace("@DeleteFlag(" & WriteFlag & ")", "")
+            StringClean = StringClean.Replace("@InputVar[" & InputString & "]", "")
 
         End If
 
@@ -9952,6 +10399,27 @@ CBTFinish:
             StringClean = StringClean.Replace("@CBT", "")
         End If
 
+
+        ' The @CustomTask() Command works similarly to @CBTBalls and @CBTCock. It allows the user to have the domme run custom instructions from scripts located in Custom\Tasks. For example,
+        ' @CustomTask(Spanking) would pull its first instruction from Custom\Tasks\Spanking_First.txt, and all subsequent instructions would be pulled from Custom\Tasks\Spanking.txt.
+
+        If StringClean.Contains("@CustomTask(") Then
+
+            Dim CustomFlag As String = GetParentheses(StringClean, "@CustomTask(")
+
+            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & "_First.txt") And _
+                File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & ".txt") Then
+                CustomTask = True
+                CustomTaskActive = True
+                CustomTaskText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & ".txt"
+                CustomTaskTextFirst = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & "_First.txt"
+            End If
+
+            StringClean = StringClean.Replace("@CustomTask(" & CustomFlag & ")", "")
+
+        End If
+
+
         If StringClean.Contains("@DecideOrgasm") Then
 
 
@@ -10021,7 +10489,24 @@ OrgasmDecided:
         End If
 
 
+        ' The @Glitter Command allows to specify a specfic script from the domme's Apps\Glitter\Script directory, which will then immediately play out in the Glitter app. For example, @Glitter(About to Ruin)
+        ' would run the Glitter script in Apps\Glitter\Script\About to Ruin.txt.
 
+        If StringClean.Contains("@Glitter(") Then
+
+            Dim GlitterFlag As Integer = GetParentheses(StringClean, "@Glitter(")
+
+            If FrmSettings.CBGlitterFeedOff.Checked = False And UpdatingPost = False Then
+                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt") And UpdatingPost = False Then
+                    UpdateList.Clear()
+                    UpdateList.Add(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt")
+                    StatusUpdatePost()
+                End If
+            End If
+
+            StringClean = StringClean.Replace("@Glitter(" & GlitterFlag & ")", "")
+
+        End If
 
 
 
@@ -10159,477 +10644,7 @@ OrgasmDecided:
         End If
 
 
-        If StringClean.Contains("@SetVar") Then
-
-            Do
-
-                Dim SCSetVar As String() = Split(StringClean)
-                Dim SCGotVar As String = "Null"
-
-                For i As Integer = 0 To SCSetVar.Length - 1
-                    If SCSetVar(i).Contains("@SetVar") Then
-                        'Debug.Print("@SetVar SCSetVar(i) = " & SCSetVar(i))
-                        SCGotVar = SCSetVar(i)
-                        SCSetVar(i) = ""
-                        StringClean = Join(SCSetVar)
-                        'Debug.Print("@SetVar SCSetVar Joined StringClean = " & StringClean)
-                        Exit For
-                    End If
-                Next
-
-                SCGotVar = SCGotVar.Replace("@SetVar[", "")
-
-                Dim SCGotVarSplit As String() = Split(SCGotVar, "]")
-
-                Dim VarName As String = SCGotVarSplit(0)
-                'Debug.Print("@SetVar VarName = " & VarName)
-
-                SCGotVarSplit(0) = ""
-
-                SCGotVar = Join(SCGotVarSplit)
-                'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
-
-                SCGotVar = SCGotVar.Replace("=[", "")
-                SCGotVar = SCGotVar.Replace(" ", "")
-
-                'Dim VarValue As Integer = Val(SCGotVar)
-
-                'If SCGotVar = "RAND5" Then VarValue = randomizer.Next(1, 6)
-                'If SCGotVar = "RAND10" Then VarValue = randomizer.Next(1, 11)
-                'If SCGotVar = "RAND50" Then VarValue = randomizer.Next(1, 51)
-                'If SCGotVar = "RAND100" Then VarValue = randomizer.Next(1, 101)
-                'If SCGotVar = "RAND1000" Then VarValue = randomizer.Next(1, 1001)
-
-                'If VarValue = 0 And SCGotVar <> "0" Then
-
-                'Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVar
-                'Debug.Print("VarCheck = " & VarCheck)
-
-                'If File.Exists(VarCheck) Then
-
-                'Debug.Print("VarCheck Exists")
-
-                'Dim VarReader As New StreamReader(VarCheck)
-                'VarValue = Val(VarReader.ReadLine())
-
-                'VarReader.Close()
-                'VarReader.Dispose()
-
-                'End If
-
-                'End If
-
-                'Debug.Print("@SetVar VarValue = " & VarValue)
-
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName, SCGotVar, False)
-
-            Loop Until Not StringClean.Contains("@SetVar")
-
-        End If
-
-        If StringClean.Contains("@RoundVar") Then
-
-            Do
-
-                Dim SCSetVar As String() = Split(StringClean)
-                Dim SCGotVar As String = "Null"
-
-                For i As Integer = 0 To SCSetVar.Length - 1
-                    If SCSetVar(i).Contains("@RoundVar") Then
-                        'Debug.Print("@SetVar SCSetVar(i) = " & SCSetVar(i))
-                        SCGotVar = SCSetVar(i)
-                        SCSetVar(i) = ""
-                        StringClean = Join(SCSetVar)
-                        'Debug.Print("@SetVar SCSetVar Joined StringClean = " & StringClean)
-                        Exit For
-                    End If
-                Next
-
-                SCGotVar = SCGotVar.Replace("@RoundVar[", "")
-
-                Dim SCGotVarSplit As String() = Split(SCGotVar, "]")
-
-                Dim VarName As String = SCGotVarSplit(0)
-                'Debug.Print("@SetVar VarName = " & VarName)
-
-
-                Dim Val1 As Integer
-
-
-                Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
-                'Debug.Print("VarCheck = " & VarCheck)
-                If File.Exists(VarCheck) Then
-                    'Debug.Print("VarCheck Exists")
-                    Dim VarReader As New StreamReader(VarCheck)
-                    Val1 = Val(VarReader.ReadLine())
-                    VarReader.Close()
-                    VarReader.Dispose()
-                End If
-
-                ' Stored variable now set as Val1
-
-
-
-                SCGotVarSplit(0) = ""
-
-                SCGotVar = Join(SCGotVarSplit)
-                'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
-
-                SCGotVar = SCGotVar.Replace("=[", "")
-                SCGotVar = SCGotVar.Replace(" ", "")
-
-                Dim VarValue As Integer = Val(SCGotVar)
-
-                Val1 = VarValue * Math.Round(Val1 / VarValue)
-
-
-
-                'Debug.Print("@SetVar VarValue = " & VarValue)
-
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName, Val1, False)
-
-            Loop Until Not StringClean.Contains("@RoundVar")
-
-        End If
-
-
-        If StringClean.Contains("@ChangeVar") Then
-
-
-            Debug.Print("CHangeVar Stringclean = " & StringClean)
-
-            Dim ChangeFlag As String = StringClean
-            Dim ChangeStart As Integer = ChangeFlag.IndexOf("@ChangeVar[") + 11
-
-            Dim ChangeVar As String
-            Dim ChangeVal1 As String
-            Dim ChangeVal2 As String
-            Dim ChangeOperator As String
-
-            Dim Val1 As Integer
-            Dim Val2 As Integer
-
-
-            'Dim CFIndex As Integer = VarSplit(i).IndexOf("@ShowVar[") + 9
-            'CheckFlag = VarSplit(i).Substring(CFIndex, VarSplit(i).Length - CFIndex).Replace("@ShowVar[", "")
-
-
-            ChangeFlag = StringClean.Substring(ChangeStart, StringClean.Length - ChangeStart)
-            ChangeVar = ChangeFlag.Split("]")(0)
-            ChangeVal1 = ChangeFlag.Split("]")(1)
-            ChangeVal2 = ChangeFlag.Split("]")(2)
-            ChangeOperator = ChangeFlag.Split("]")(2)
-
-            StringClean = StringClean.Replace("@ChangeVar[" & ChangeVar & "]" & ChangeVal1 & "]" & ChangeVal2 & "]", "")
-
-            ChangeVar = ChangeVar.Replace("@ChangeVar[", "")
-            ChangeVal1 = ChangeVal1.Replace("=[", "")
-            ChangeVal2 = ChangeVal2.Replace("+[", "")
-            ChangeVal2 = ChangeVal2.Replace("-[", "")
-            ChangeVal2 = ChangeVal2.Replace("*[", "")
-            ChangeVal2 = ChangeVal2.Replace("/[", "")
-
-
-            '@ChangeVar[TB_EdgeHoldingOwed   ]    =[TB_EdgeHoldingOwed    ]     -[1       ]
-
-            If IsNumeric(ChangeVal1) = False Then
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1) Then
-                    Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1)
-                    Val1 = Val(VarReader.ReadLine())
-                    VarReader.Close()
-                    VarReader.Dispose()
-                Else
-                    Val1 = 0
-                End If
-            Else
-                Val1 = Val(ChangeVal1)
-            End If
-
-            If IsNumeric(ChangeVal2) = False Then
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2) Then
-                    Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2)
-                    Val2 = Val(VarReader.ReadLine())
-                    VarReader.Close()
-                    VarReader.Dispose()
-                Else
-                    Val2 = 0
-                End If
-            Else
-                Val2 = Val(ChangeVal2)
-            End If
-
-                ScriptOperator = "Null"
-                If ChangeOperator.Contains("+") Then ScriptOperator = "Add"
-                If ChangeOperator.Contains("-") Then ScriptOperator = "Subtract"
-                If ChangeOperator.Contains("*") Then ScriptOperator = "Multiply"
-                If ChangeOperator.Contains("/") Then ScriptOperator = "Divide"
-
-                Dim ChangeVal As Integer = 0
-
-                If ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
-                If ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
-                If ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
-                If ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
-
-                'Debug.Print("ChangeVal = " & ChangeVal)
-
-            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
-
-        End If
-
-
-        If StringClean.Contains("@If[") Then
-
-            Do
-
-                Dim SCIfVar As String() = Split(StringClean)
-                Dim SCGotVar As String = "Null"
-
-                For i As Integer = 0 To SCIfVar.Length - 1
-                    If SCIfVar(i).Contains("@If[") Then
-                        'Debug.Print("@SetVar SCSetVar(i) = " & SCIfVar(i))
-                        Dim IFJoin As Integer = 0
-                        If Not SCIfVar(i).Contains(")") Then
-                            Do
-                                IFJoin += 1
-                                SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
-                                SCIfVar(i + IFJoin) = ""
-                            Loop Until SCIfVar(i).Contains(")")
-                        End If
-                        SCGotVar = SCIfVar(i)
-                        SCIfVar(i) = ""
-                        StringClean = Join(SCIfVar)
-                        Do
-                            StringClean = StringClean.Replace("  ", " ")
-                        Loop Until Not StringClean.Contains("  ")
-                        'Debug.Print("@SetVar SCSetVar Joined StringClean = " & StringClean)
-                        Exit For
-                    End If
-                Next
-
-                SCGotVar = SCGotVar.Replace("@If[", "")
-                Dim SCGotVarSplit As String() = Split(SCGotVar, "]", 2)
-
-                Dim Val1 As Integer = -18855881
-                Dim Str1 As String = SCGotVarSplit(0)
-
-                Debug.Print("SCGotVarSplit(0)= " & SCGotVarSplit(0))
-
-                If IsNumeric(Str1) = True Then
-
-                    Debug.Print("InNumeric Called")
-
-                    Val1 = Val(SCGotVarSplit(0))
-
-                Else
-
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
-                    'Debug.Print("VarCheck = " & VarCheck)
-                    If File.Exists(VarCheck) Then
-                        'Debug.Print("VarCheck Exists")
-                        Dim VarReader As New StreamReader(VarCheck)
-
-                        Dim StrCheck As String = VarReader.ReadLine()
-
-                        Debug.Print("StrChec = " & StrCheck)
-
-                        If IsNumeric(StrCheck) = True Then
-                            Val1 = Val(StrCheck)
-                        Else
-                            Str1 = StrCheck
-                        End If
-
-                        VarReader.Close()
-                        VarReader.Dispose()
-                    End If
-
-                End If
-
-
-                Debug.Print("Val1 = " & Val1)
-
-
-
-                'Debug.Print("@SetVar VarDifference = " & Val1)
-
-                'Debug.Print("@SetVar Val = " & Val1)
-                SCGotVarSplit(0) = ""
-
-                SCGotVar = Join(SCGotVarSplit)
-                'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
-
-                SCGotVarSplit = Split(SCGotVar, "[", 2)
-                SCGotVarSplit(0) = SCGotVarSplit(0).Replace(" ", "")
-                'Debug.Print("@SetVar SCGotVarSplit = " & SCGotVarSplit(0))
-
-                ScriptCompare = "Null"
-
-                If SCGotVarSplit(0) = "=" Or SCGotVarSplit(0) = "==" Then ScriptCompare = "="
-                If SCGotVarSplit(0) = "<>" Then ScriptCompare = "<>"
-                If SCGotVarSplit(0) = ">" Then ScriptCompare = ">"
-                If SCGotVarSplit(0) = "<" Then ScriptCompare = "<"
-                If SCGotVarSplit(0) = ">=" Then ScriptCompare = ">="
-                If SCGotVarSplit(0) = "<=" Then ScriptCompare = "<="
-
-                'Debug.Print("Script Compare = " & ScriptCompare)
-
-                SCGotVarSplit(0) = ""
-
-                SCGotVar = Join(SCGotVarSplit)
-                'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
-
-                Do Until SCGotVar.Substring(0, 1) <> " "
-                    SCGotVar = SCGotVar.Remove(0, 1)
-                Loop
-
-                'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
-
-                SCGotVarSplit = Split(SCGotVar, "]", 2)
-                SCGotVarSplit(0) = SCGotVarSplit(0).Replace(" ", "")
-                'Debug.Print("@SetVar SCGotVarSplit(0) = " & SCGotVarSplit(0))
-                SCGotVarSplit(1) = SCGotVarSplit(1).Replace("Then", "")
-                'Debug.Print("@SetVar SCGotVarSplit(1) = " & SCGotVarSplit(1))
-
-
-                Dim Val2 As Integer = -18855881
-                Dim Str2 As String = SCGotVarSplit(0)
-
-                Debug.Print("SCGotVarSplit(0)= " & SCGotVarSplit(0))
-
-                If IsNumeric(Str2) = True Then
-
-                    Debug.Print("InNumeric Called")
-
-                    Val2 = Val(SCGotVarSplit(0))
-
-                Else
-
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
-                    'Debug.Print("VarCheck = " & VarCheck)
-                    If File.Exists(VarCheck) Then
-                        'Debug.Print("VarCheck Exists")
-                        Dim VarReader As New StreamReader(VarCheck)
-
-                        Dim StrCheck As String = VarReader.ReadLine()
-                        Debug.Print("StrChec = " & StrCheck)
-                        If IsNumeric(StrCheck) = True Then
-                            Val2 = Val(StrCheck)
-                        Else
-                            Str2 = StrCheck
-                        End If
-
-
-                        VarReader.Close()
-                        VarReader.Dispose()
-                    End If
-
-                End If
-
-                Debug.Print("Val2 = " & Val2)
-
-
-                Dim CompareCheck As String = "Null"
-
-                If Val1 = -18855881 Or Val2 = -18855881 Then
-
-                    Debug.Print("Compare strings called")
-
-                    Debug.Print("Str1 = " & Str1)
-                    Debug.Print("Str2 = " & Str2)
-
-
-                    If ScriptCompare = "=" Then
-                        If Str1 = Str2 Then CompareCheck = SCGotVarSplit(1)
-                    End If
-
-                    If ScriptCompare = "<>" Then
-                        If Str1 <> Str2 Then CompareCheck = SCGotVarSplit(1)
-                    End If
-
-                Else
-
-                    Debug.Print("Compare integers called")
-
-                    If ScriptCompare = "=" Then
-                        If Val1 = Val2 Then CompareCheck = SCGotVarSplit(1)
-                    End If
-
-                    If ScriptCompare = "<>" Then
-                        If Val1 <> Val2 Then CompareCheck = SCGotVarSplit(1)
-                    End If
-
-                    If ScriptCompare = ">" Then
-                        If Val1 > Val2 Then CompareCheck = SCGotVarSplit(1)
-                    End If
-
-                    If ScriptCompare = "<" Then
-                        If Val1 < Val2 Then CompareCheck = SCGotVarSplit(1)
-                    End If
-
-                    If ScriptCompare = ">=" Then
-                        If Val1 >= Val2 Then CompareCheck = SCGotVarSplit(1)
-                    End If
-
-                    If ScriptCompare = "<=" Then
-                        If Val1 <= Val2 Then CompareCheck = SCGotVarSplit(1)
-                    End If
-
-
-                End If
-
-
-                'Debug.Print("CompareCheck = " & CompareCheck)
-
-                If CompareCheck <> "Null" Then
-                    FileGoto = CompareCheck
-                    SkipGotoLine = True
-                    GetGoto()
-                End If
-
-            Loop Until Not StringClean.Contains("@If")
-
-        End If
-
-        If StringClean.Contains("@ShowVar") Then
-
-            Dim CheckFlag As String = StringClean & " some test garbage"
-
-            Dim VarSplit As String() = CheckFlag.Split("]")
-
-            For i As Integer = 0 To VarSplit.Count - 1
-
-                Debug.Print("Varsplit(" & i & ") = " & VarSplit(i))
-                If VarSplit(i).Contains("@ShowVar[") Then
-
-                    Dim CFIndex As Integer = VarSplit(i).IndexOf("@ShowVar[") + 9
-                    CheckFlag = VarSplit(i).Substring(CFIndex, VarSplit(i).Length - CFIndex).Replace("@ShowVar[", "")
-
-                    Dim VarValue As String
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & CheckFlag
-                    Debug.Print("VarCheck = " & VarCheck)
-                    If File.Exists(VarCheck) Then
-                        Debug.Print("VarCheck Exists787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878")
-                        Dim VarReader As New StreamReader(VarCheck)
-                        VarValue = VarReader.ReadLine()
-                        VarReader.Close()
-                        VarReader.Dispose()
-                    Else
-                        VarValue = "0"
-                    End If
-                    Debug.Print("CheckFlag = " & CheckFlag)
-                    VarSplit(i) = VarSplit(i).Replace("@ShowVar[" & CheckFlag, VarValue)
-                    Debug.Print("Final Varsplit(" & i & ") = " & VarSplit(i))
-                End If
-
-            Next
-
-            CheckFlag = Join(VarSplit, Nothing)
-
-            CheckFlag = CheckFlag.Replace(" some test garbage", "")
-
-            StringClean = CheckFlag
-
-        End If
+       
 
 
         If StringClean.Contains("@GotoDommeOrgasm") Then
@@ -12800,7 +12815,34 @@ VTSkip:
         End If
 
 
+        'The @SetGroup Command is a defunct Command that was created when implementing new Glitter features. It has no use in the current build of Tease AI.
 
+        If StringClean.Contains("@SetGroup(") Then
+
+            Dim WF As String = UCase(GetParentheses(StringClean, "@SetGroup("))
+
+            If WF.Contains("D") And Not WF.Contains("1") And Not WF.Contains("2") And Not WF.Contains("3") Then Group = "D"
+            If WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And Not WF.Contains("3") Then Group = "D1"
+            If WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then Group = "D12"
+            If WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then Group = "D13"
+            If WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then Group = "D23"
+            If WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then Group = "D123"
+
+            If Not WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And Not WF.Contains("3") Then Group = "1"
+            If Not WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then Group = "12"
+            If Not WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then Group = "123"
+
+            If WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then Group = "D2"
+            If Not WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then Group = "2"
+            If Not WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then Group = "23"
+
+            If WF.Contains("D") And Not WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then Group = "D3"
+            If Not WF.Contains("D") And Not WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then Group = "3"
+            If Not WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then Group = "13"
+
+            StringClean = StringClean.Replace("@SetGroup(" & WF & ")", "")
+
+        End If
 
         Return StringClean
 
@@ -13867,6 +13909,48 @@ VTSkip:
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagGlaring") Then
                 If Not FoundTag.Contains("TagGlaring") Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                Else
+                    'Debug.Print("FoundTag Contains TagPiercing")
+                End If
+                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPiercing", "")
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@TagSeeThrough") Then
+                If Not FoundTag.Contains("TagSeeThrough") Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                Else
+                    'Debug.Print("FoundTag Contains TagPiercing")
+                End If
+                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPiercing", "")
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@TagAllFours") Then
+                If Not FoundTag.Contains("TagAllFours") Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -17130,6 +17214,8 @@ NoPlaylistEndFile:
 
     Private Sub EdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeTauntTimer.Tick
 
+        If InputFlag = True Then Return
+
         If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
         If DomTyping = True Then Return
@@ -17182,6 +17268,8 @@ NoPlaylistEndFile:
 
     Private Sub HoldEdgeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTimer.Tick
 
+
+
         'Debug.Print("HoldEdgeTick = " & HoldEdgeTick)
 
         HoldEdgeTime += 1
@@ -17189,6 +17277,8 @@ NoPlaylistEndFile:
 
         My.Settings.HoldEdgeTimeTotal = HoldEdgeTimeTotal
         My.Settings.Save()
+
+        If InputFlag = True Then Return
 
         If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -17483,6 +17573,8 @@ NoRepeatOFiles:
     End Sub
 
     Private Sub HoldEdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTauntTimer.Tick
+
+        If InputFlag = True Then Return
 
         If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -18016,6 +18108,8 @@ TryNext:
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
             ClearMainPictureBox()
+
+            CheckDommeTags()
 
             Try
                 mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
@@ -18842,6 +18936,7 @@ TryNext:
 
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
+            CheckDommeTags()
             mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
             CheckDommeTags()
             JustShowedBlogImage = False
@@ -19009,6 +19104,7 @@ TryNext:
 
                 If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
+                CheckDommeTags()
                 mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
                 CheckDommeTags()
                 JustShowedBlogImage = False
@@ -19940,6 +20036,7 @@ TryNext:
 
         If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
+        CheckDommeTags()
         mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
         CheckDommeTags()
         JustShowedBlogImage = False
@@ -21404,7 +21501,9 @@ TryNext:
         If File.Exists(SettingsPath & ResumePrefix & "Contact2Pics.txt") Then Contact2Pics = Txt2List(SettingsPath & ResumePrefix & "Contact2Pics.txt")
         If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then Contact3Pics = Txt2List(SettingsPath & "Contact3Pics.txt")
 
+
         If SlideshowLoaded = True Then
+            CheckDommeTags()
             If File.Exists(_ImageFileNames(FileCount)) Then mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
             CheckDommeTags()
         End If
@@ -22319,17 +22418,17 @@ TryNext:
         End If
     End Sub
 
-    Private Sub FromBehind_Click(sender As System.Object, e As System.EventArgs) Handles FromBehind.Click
+    Private Sub SeeThrough_Click(sender As System.Object, e As System.EventArgs) Handles SeeThrough.Click
         Debug.Print(mainPictureBox.ImageLocation)
         If SlideshowLoaded = False Then Return
-        If FromBehind.BackColor = Color.White Then
-            AddDommeTag("FromBehind", "Nothing")
-            FromBehind.BackColor = Color.ForestGreen
-            FromBehind.ForeColor = Color.White
+        If SeeThrough.BackColor = Color.White Then
+            AddDommeTag("SeeThrough", "Nothing")
+            SeeThrough.BackColor = Color.ForestGreen
+            SeeThrough.ForeColor = Color.White
         Else
-            RemoveDommeTag("FromBehind", "Nothing")
-            FromBehind.BackColor = Color.White
-            FromBehind.ForeColor = Color.Black
+            RemoveDommeTag("SeeThrough", "Nothing")
+            SeeThrough.BackColor = Color.White
+            SeeThrough.ForeColor = Color.Black
         End If
     End Sub
 
@@ -22363,7 +22462,7 @@ TryNext:
     End Sub
 
     Private Sub TBGarment_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGarment.TextChanged
-        If SlideshowLoaded = False Then Return
+        If SlideshowLoaded = False Or TBGarment.Focused = False Then Return
         If TBGarment.Text = "" Then
             Garment.BackColor = Color.White
             Garment.ForeColor = Color.Black
@@ -22376,7 +22475,7 @@ TryNext:
     End Sub
 
     Private Sub TBUnderwear_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBUnderwear.TextChanged
-        If SlideshowLoaded = False Then Return
+        If SlideshowLoaded = False Or TBUnderwear.Focused = False Then Return
         If TBUnderwear.Text = "" Then
             Underwear.BackColor = Color.White
             Underwear.ForeColor = Color.Black
@@ -22389,7 +22488,7 @@ TryNext:
     End Sub
 
     Private Sub TBTattoo_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBTattoo.TextChanged
-        If SlideshowLoaded = False Then Return
+        If SlideshowLoaded = False Or TBTattoo.Focused = False Then Return
         If TBTattoo.Text = "" Then
             Tattoo.BackColor = Color.White
             Tattoo.ForeColor = Color.Black
@@ -22402,7 +22501,7 @@ TryNext:
     End Sub
 
     Private Sub TBSexToy_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBSexToy.TextChanged
-        If SlideshowLoaded = False Then Return
+        If SlideshowLoaded = False Or TBSexToy.Focused = False Then Return
         If TBSexToy.Text = "" Then
             SexToy.BackColor = Color.White
             SexToy.ForeColor = Color.Black
@@ -22416,7 +22515,7 @@ TryNext:
 
 
     Private Sub TBFurniture_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBFurniture.TextChanged
-        If SlideshowLoaded = False Then Return
+        If SlideshowLoaded = False Or TBFurniture.Focused = False Then Return
         If TBFurniture.Text = "" Then
             Furniture.BackColor = Color.White
             Furniture.ForeColor = Color.Black
@@ -22630,8 +22729,8 @@ TryNext:
         CloseUp.BackColor = Color.White
         CloseUp.ForeColor = Color.Black
 
-        FromBehind.BackColor = Color.White
-        FromBehind.ForeColor = Color.Black
+        SeeThrough.BackColor = Color.White
+        SeeThrough.ForeColor = Color.Black
 
         AllFours.BackColor = Color.White
         AllFours.ForeColor = Color.Black
@@ -22659,6 +22758,7 @@ TryNext:
         TBTattoo.Text = ""
         TBSexToy.Text = ""
         TBFurniture.Text = ""
+
 
         LBLDomTagImg.Text = Path.GetFileName(_ImageFileNames(FileCount))
 
@@ -22751,9 +22851,9 @@ TryNext:
                         SideView.ForeColor = Color.White
                     End If
 
-                    If TagList(i).Contains("TagFromBehind") Then
-                        FromBehind.BackColor = Color.ForestGreen
-                        FromBehind.ForeColor = Color.White
+                    If TagList(i).Contains("TagSeeThrough") Then
+                        SeeThrough.BackColor = Color.ForestGreen
+                        SeeThrough.ForeColor = Color.White
                     End If
 
                     If TagList(i).Contains("TagAllFours") Then
@@ -22781,6 +22881,7 @@ TryNext:
                                 TBGarment.Text = GarmentArray(x).Replace("TagGarment", "")
                             End If
                         Next
+              
                     End If
 
                     If TagList(i).Contains("TagUnderwear") Then
@@ -22793,7 +22894,7 @@ TryNext:
                                 TBUnderwear.Text = UnderwearArray(x).Replace("TagUnderwear", "")
                             End If
                         Next
-
+                
                     End If
 
                     If TagList(i).Contains("TagTattoo") Then
@@ -22805,6 +22906,7 @@ TryNext:
                                 TBTattoo.Text = TattooArray(x).Replace("TagTattoo", "")
                             End If
                         Next
+                   
                     End If
 
                     If TagList(i).Contains("TagSexToy") Then
@@ -22816,6 +22918,7 @@ TryNext:
                                 TBSexToy.Text = SexToyArray(x).Replace("TagSexToy", "")
                             End If
                         Next
+                 
                     End If
 
                     If TagList(i).Contains("TagFurniture") Then
@@ -22828,11 +22931,27 @@ TryNext:
                             End If
                         Next
                     End If
+
+
+
+
                 End If
 
             Next
 
         End If
+
+
+    
+        
+
+       
+
+      
+
+        
+
+
 
 
 
@@ -22940,6 +23059,11 @@ TryNext:
         LBLTextColor.BackColor = My.Settings.TextColor
         LBLChatWindowColor.BackColor = My.Settings.ChatWindowColor
         LBLChatTextColor.BackColor = My.Settings.ChatTextColor
+
+        chatBox.BackColor = My.Settings.ChatWindowColor
+        ImageFolderComboBox.BackColor = My.Settings.ChatWindowColor
+        chatBox.ForeColor = My.Settings.ChatTextColor
+        ImageFolderComboBox.ForeColor = My.Settings.ChatTextColor
 
 
         StatusUpdates.DocumentText = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & StatusText & "</body>"

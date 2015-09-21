@@ -70,7 +70,7 @@ Partial Class FrmSettings
         Me.FontComboBoxD = New System.Windows.Forms.ComboBox()
         Me.NBFontSizeD = New System.Windows.Forms.NumericUpDown()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.CBLockWindow = New System.Windows.Forms.CheckBox()
+        Me.CBInputIcon = New System.Windows.Forms.CheckBox()
         Me.typeinstantlyCheckBox = New System.Windows.Forms.CheckBox()
         Me.timestampCheckBox = New System.Windows.Forms.CheckBox()
         Me.shownamesCheckBox = New System.Windows.Forms.CheckBox()
@@ -861,6 +861,7 @@ Partial Class FrmSettings
         Me.RBGerman = New System.Windows.Forms.RadioButton()
         Me.RBEnglish = New System.Windows.Forms.RadioButton()
         Me.GroupBox33 = New System.Windows.Forms.GroupBox()
+        Me.MetroTest = New System.Windows.Forms.NumericUpDown()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.LBLChastityState = New System.Windows.Forms.Label()
         Me.Label120 = New System.Windows.Forms.Label()
@@ -914,7 +915,6 @@ Partial Class FrmSettings
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
-        Me.MetroTest = New System.Windows.Forms.NumericUpDown()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -1123,6 +1123,7 @@ Partial Class FrmSettings
         Me.Panel11.SuspendLayout
         Me.GroupBox62.SuspendLayout
         Me.GroupBox33.SuspendLayout
+        CType(Me.MetroTest,System.ComponentModel.ISupportInitialize).BeginInit
         Me.GroupBox27.SuspendLayout
         Me.GroupBox20.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1130,7 +1131,6 @@ Partial Class FrmSettings
         Me.TabPage5.SuspendLayout
         Me.Panel5.SuspendLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.MetroTest,System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'SettingsPanel
@@ -1564,7 +1564,7 @@ Partial Class FrmSettings
         Me.GBGeneralSettings.BackColor = System.Drawing.Color.LightGray
         Me.GBGeneralSettings.Controls.Add(Me.GBSubFont)
         Me.GBGeneralSettings.Controls.Add(Me.GBDommeFont)
-        Me.GBGeneralSettings.Controls.Add(Me.CBLockWindow)
+        Me.GBGeneralSettings.Controls.Add(Me.CBInputIcon)
         Me.GBGeneralSettings.Controls.Add(Me.typeinstantlyCheckBox)
         Me.GBGeneralSettings.Controls.Add(Me.timestampCheckBox)
         Me.GBGeneralSettings.Controls.Add(Me.shownamesCheckBox)
@@ -1720,17 +1720,19 @@ Partial Class FrmSettings
         Me.Label7.Text = "Size:"
         Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'CBLockWindow
+        'CBInputIcon
         '
-        Me.CBLockWindow.AutoSize = true
-        Me.CBLockWindow.ForeColor = System.Drawing.Color.Black
-        Me.CBLockWindow.Location = New System.Drawing.Point(6, 87)
-        Me.CBLockWindow.Name = "CBLockWindow"
-        Me.CBLockWindow.Size = New System.Drawing.Size(163, 17)
-        Me.CBLockWindow.TabIndex = 4
-        Me.CBLockWindow.TabStop = false
-        Me.CBLockWindow.Text = "Disable Chat Window Resize"
-        Me.CBLockWindow.UseVisualStyleBackColor = true
+        Me.CBInputIcon.AutoSize = true
+        Me.CBInputIcon.Checked = True
+        Me.CBInputIcon.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBInputIcon.ForeColor = System.Drawing.Color.Black
+        Me.CBInputIcon.Location = New System.Drawing.Point(6, 87)
+        Me.CBInputIcon.Name = "CBInputIcon"
+        Me.CBInputIcon.Size = New System.Drawing.Size(188, 17)
+        Me.CBInputIcon.TabIndex = 4
+        Me.CBInputIcon.TabStop = False
+        Me.CBInputIcon.Text = "Show Icon During Input Questions"
+        Me.CBInputIcon.UseVisualStyleBackColor = true
         '
         'typeinstantlyCheckBox
         '
@@ -11318,6 +11320,16 @@ Partial Class FrmSettings
         Me.GroupBox33.TabStop = false
         Me.GroupBox33.Text = "System States"
         '
+        'MetroTest
+        '
+        Me.MetroTest.Location = New System.Drawing.Point(64, 77)
+        Me.MetroTest.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.MetroTest.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.MetroTest.Name = "MetroTest"
+        Me.MetroTest.Size = New System.Drawing.Size(120, 20)
+        Me.MetroTest.TabIndex = 178
+        Me.MetroTest.Value = New Decimal(New Integer() {30, 0, 0, 0})
+        '
         'Button11
         '
         Me.Button11.Location = New System.Drawing.Point(161, 33)
@@ -11765,16 +11777,6 @@ Partial Class FrmSettings
         'BWCreateURLFiles
         '
         '
-        'MetroTest
-        '
-        Me.MetroTest.Location = New System.Drawing.Point(64, 77)
-        Me.MetroTest.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.MetroTest.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.MetroTest.Name = "MetroTest"
-        Me.MetroTest.Size = New System.Drawing.Size(120, 20)
-        Me.MetroTest.TabIndex = 178
-        Me.MetroTest.Value = New Decimal(New Integer() {30, 0, 0, 0})
-        '
         'FrmSettings
         '
         Me.AllowDrop = true
@@ -12056,6 +12058,7 @@ Partial Class FrmSettings
         Me.GroupBox62.ResumeLayout(false)
         Me.GroupBox62.PerformLayout
         Me.GroupBox33.ResumeLayout(false)
+        CType(Me.MetroTest,System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupBox27.ResumeLayout(false)
         Me.GroupBox27.PerformLayout
         Me.GroupBox20.ResumeLayout(false)
@@ -12067,7 +12070,6 @@ Partial Class FrmSettings
         Me.Panel5.ResumeLayout(false)
         Me.Panel5.PerformLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.MetroTest,System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(false)
 
 End Sub
@@ -12096,7 +12098,7 @@ End Sub
     Friend WithEvents TTSCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents TTSComboBox As System.Windows.Forms.ComboBox
     Friend WithEvents GBGeneralSettings As System.Windows.Forms.GroupBox
-    Friend WithEvents CBLockWindow As System.Windows.Forms.CheckBox
+    Friend WithEvents CBInputIcon As System.Windows.Forms.CheckBox
     Friend WithEvents typeinstantlyCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents timestampCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents shownamesCheckBox As System.Windows.Forms.CheckBox

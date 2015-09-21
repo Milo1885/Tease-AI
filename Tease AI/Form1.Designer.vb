@@ -29,6 +29,32 @@ Partial Class Form1
         Me.mainPictureBox = New System.Windows.Forms.PictureBox()
         Me.domAvatar = New System.Windows.Forms.PictureBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.PNLTheme = New System.Windows.Forms.Panel()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.PNLThemeBTN = New System.Windows.Forms.Panel()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Save = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.LBLChatTextColor = New System.Windows.Forms.Label()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.LBLChatWindowColor = New System.Windows.Forms.Label()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LBLTextColor = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.LBLButtonColor = New System.Windows.Forms.Label()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.LBLBackColor = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.CBStretchBack = New System.Windows.Forms.CheckBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.PBBackgroundPreview = New System.Windows.Forms.PictureBox()
         Me.PNLDomTags = New System.Windows.Forms.Panel()
         Me.PNLDomTagBTN = New System.Windows.Forms.Panel()
         Me.TBFurniture = New System.Windows.Forms.TextBox()
@@ -59,7 +85,7 @@ Partial Class Form1
         Me.SideView = New System.Windows.Forms.Button()
         Me.CloseUp = New System.Windows.Forms.Button()
         Me.Garment = New System.Windows.Forms.Button()
-        Me.FromBehind = New System.Windows.Forms.Button()
+        Me.SeeThrough = New System.Windows.Forms.Button()
         Me.AllFours = New System.Windows.Forms.Button()
         Me.Piercing = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -197,7 +223,6 @@ Partial Class Form1
         Me.ImagesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.DommeTagsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ThemeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.MilovanaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenBetaThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.BugReportThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -208,38 +233,17 @@ Partial Class Form1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetroTimer = New System.Windows.Forms.Timer(Me.components)
         Me.BWMetro = New System.ComponentModel.BackgroundWorker()
-        Me.PNLTheme = New System.Windows.Forms.Panel()
-        Me.PNLThemeBTN = New System.Windows.Forms.Panel()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.PBBackgroundPreview = New System.Windows.Forms.PictureBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.CBStretchBack = New System.Windows.Forms.CheckBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.LBLBackColor = New System.Windows.Forms.Label()
-        Me.LBLButtonColor = New System.Windows.Forms.Label()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.LBLTextColor = New System.Windows.Forms.Label()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.LBLChatWindowColor = New System.Windows.Forms.Label()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.LBLChatTextColor = New System.Windows.Forms.Label()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Save = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
+        Me.PNLTheme.SuspendLayout()
+        Me.PNLThemeBTN.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNLDomTags.SuspendLayout()
         Me.PNLDomTagBTN.SuspendLayout()
         CType(Me.DomWMP, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -253,11 +257,6 @@ Partial Class Form1
         Me.PNLGlitter.SuspendLayout()
         Me.TeaseAIMenu.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
-        Me.PNLTheme.SuspendLayout()
-        Me.PNLThemeBTN.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'domName
@@ -339,6 +338,292 @@ Partial Class Form1
         Me.SplitContainer1.SplitterDistance = 734
         Me.SplitContainer1.TabIndex = 136
         '
+        'PNLTheme
+        '
+        Me.PNLTheme.BackColor = System.Drawing.Color.LightGray
+        Me.PNLTheme.Controls.Add(Me.Button10)
+        Me.PNLTheme.Controls.Add(Me.PNLThemeBTN)
+        Me.PNLTheme.Location = New System.Drawing.Point(801, 0)
+        Me.PNLTheme.Name = "PNLTheme"
+        Me.PNLTheme.Size = New System.Drawing.Size(287, 741)
+        Me.PNLTheme.TabIndex = 775
+        '
+        'Button10
+        '
+        Me.Button10.BackColor = System.Drawing.Color.Transparent
+        Me.Button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button10.FlatAppearance.BorderSize = 0
+        Me.Button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
+        Me.Button10.Location = New System.Drawing.Point(255, 4)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(20, 20)
+        Me.Button10.TabIndex = 1
+        Me.Button10.UseVisualStyleBackColor = False
+        '
+        'PNLThemeBTN
+        '
+        Me.PNLThemeBTN.BackColor = System.Drawing.Color.LightGray
+        Me.PNLThemeBTN.Controls.Add(Me.Button8)
+        Me.PNLThemeBTN.Controls.Add(Me.Save)
+        Me.PNLThemeBTN.Controls.Add(Me.GroupBox2)
+        Me.PNLThemeBTN.Controls.Add(Me.GroupBox1)
+        Me.PNLThemeBTN.Location = New System.Drawing.Point(0, 28)
+        Me.PNLThemeBTN.Name = "PNLThemeBTN"
+        Me.PNLThemeBTN.Size = New System.Drawing.Size(285, 480)
+        Me.PNLThemeBTN.TabIndex = 0
+        '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.Transparent
+        Me.Button8.BackgroundImage = CType(resources.GetObject("Button8.BackgroundImage"), System.Drawing.Image)
+        Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button8.Location = New System.Drawing.Point(176, 405)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(64, 64)
+        Me.Button8.TabIndex = 54
+        Me.Button8.UseVisualStyleBackColor = False
+        '
+        'Save
+        '
+        Me.Save.BackColor = System.Drawing.Color.Transparent
+        Me.Save.BackgroundImage = CType(resources.GetObject("Save.BackgroundImage"), System.Drawing.Image)
+        Me.Save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Save.Location = New System.Drawing.Point(44, 405)
+        Me.Save.Name = "Save"
+        Me.Save.Size = New System.Drawing.Size(64, 64)
+        Me.Save.TabIndex = 53
+        Me.Save.UseVisualStyleBackColor = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.LBLChatTextColor)
+        Me.GroupBox2.Controls.Add(Me.Button7)
+        Me.GroupBox2.Controls.Add(Me.LBLChatWindowColor)
+        Me.GroupBox2.Controls.Add(Me.Button6)
+        Me.GroupBox2.Controls.Add(Me.Label7)
+        Me.GroupBox2.Controls.Add(Me.Label3)
+        Me.GroupBox2.Controls.Add(Me.LBLTextColor)
+        Me.GroupBox2.Controls.Add(Me.Button5)
+        Me.GroupBox2.Controls.Add(Me.Label6)
+        Me.GroupBox2.Controls.Add(Me.LBLButtonColor)
+        Me.GroupBox2.Controls.Add(Me.Button4)
+        Me.GroupBox2.Controls.Add(Me.Label4)
+        Me.GroupBox2.Controls.Add(Me.LBLBackColor)
+        Me.GroupBox2.Controls.Add(Me.Button3)
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 197)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(284, 199)
+        Me.GroupBox2.TabIndex = 52
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "UI Colors"
+        '
+        'LBLChatTextColor
+        '
+        Me.LBLChatTextColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLChatTextColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChatTextColor.Location = New System.Drawing.Point(176, 158)
+        Me.LBLChatTextColor.Name = "LBLChatTextColor"
+        Me.LBLChatTextColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLChatTextColor.TabIndex = 16
+        '
+        'Button7
+        '
+        Me.Button7.BackColor = System.Drawing.Color.Transparent
+        Me.Button7.BackgroundImage = CType(resources.GetObject("Button7.BackgroundImage"), System.Drawing.Image)
+        Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button7.Location = New System.Drawing.Point(231, 155)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(32, 32)
+        Me.Button7.TabIndex = 15
+        Me.Button7.UseVisualStyleBackColor = False
+        '
+        'LBLChatWindowColor
+        '
+        Me.LBLChatWindowColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLChatWindowColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChatWindowColor.Location = New System.Drawing.Point(176, 124)
+        Me.LBLChatWindowColor.Name = "LBLChatWindowColor"
+        Me.LBLChatWindowColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLChatWindowColor.TabIndex = 12
+        '
+        'Button6
+        '
+        Me.Button6.BackColor = System.Drawing.Color.Transparent
+        Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
+        Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button6.Location = New System.Drawing.Point(231, 121)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(32, 32)
+        Me.Button6.TabIndex = 11
+        Me.Button6.UseVisualStyleBackColor = False
+        '
+        'Label7
+        '
+        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label7.Location = New System.Drawing.Point(20, 160)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(148, 23)
+        Me.Label7.TabIndex = 14
+        Me.Label7.Text = "Chat Text Color"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label3
+        '
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label3.Location = New System.Drawing.Point(20, 126)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(148, 23)
+        Me.Label3.TabIndex = 10
+        Me.Label3.Text = "Chat Window Color"
+        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLTextColor
+        '
+        Me.LBLTextColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLTextColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLTextColor.Location = New System.Drawing.Point(176, 90)
+        Me.LBLTextColor.Name = "LBLTextColor"
+        Me.LBLTextColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLTextColor.TabIndex = 9
+        '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.Transparent
+        Me.Button5.BackgroundImage = CType(resources.GetObject("Button5.BackgroundImage"), System.Drawing.Image)
+        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button5.Location = New System.Drawing.Point(231, 87)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(32, 32)
+        Me.Button5.TabIndex = 8
+        Me.Button5.UseVisualStyleBackColor = False
+        '
+        'Label6
+        '
+        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label6.Location = New System.Drawing.Point(20, 92)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(148, 23)
+        Me.Label6.TabIndex = 7
+        Me.Label6.Text = "Text Color"
+        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLButtonColor
+        '
+        Me.LBLButtonColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLButtonColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLButtonColor.Location = New System.Drawing.Point(176, 56)
+        Me.LBLButtonColor.Name = "LBLButtonColor"
+        Me.LBLButtonColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLButtonColor.TabIndex = 6
+        '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.Transparent
+        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
+        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button4.Location = New System.Drawing.Point(231, 53)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(32, 32)
+        Me.Button4.TabIndex = 5
+        Me.Button4.UseVisualStyleBackColor = False
+        '
+        'Label4
+        '
+        Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label4.Location = New System.Drawing.Point(20, 58)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(148, 23)
+        Me.Label4.TabIndex = 4
+        Me.Label4.Text = "Button Color"
+        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLBackColor
+        '
+        Me.LBLBackColor.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLBackColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLBackColor.Location = New System.Drawing.Point(176, 22)
+        Me.LBLBackColor.Name = "LBLBackColor"
+        Me.LBLBackColor.Size = New System.Drawing.Size(50, 28)
+        Me.LBLBackColor.TabIndex = 3
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.Transparent
+        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button3.Location = New System.Drawing.Point(231, 19)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(32, 32)
+        Me.Button3.TabIndex = 2
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'Label1
+        '
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label1.Location = New System.Drawing.Point(20, 24)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(148, 23)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Background Color"
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Button9)
+        Me.GroupBox1.Controls.Add(Me.CBStretchBack)
+        Me.GroupBox1.Controls.Add(Me.Button2)
+        Me.GroupBox1.Controls.Add(Me.PBBackgroundPreview)
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(284, 191)
+        Me.GroupBox1.TabIndex = 51
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Background Image"
+        '
+        'Button9
+        '
+        Me.Button9.Location = New System.Drawing.Point(188, 108)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(75, 25)
+        Me.Button9.TabIndex = 3
+        Me.Button9.Text = "Clear"
+        Me.Button9.UseVisualStyleBackColor = True
+        '
+        'CBStretchBack
+        '
+        Me.CBStretchBack.AutoSize = True
+        Me.CBStretchBack.Checked = True
+        Me.CBStretchBack.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBStretchBack.Location = New System.Drawing.Point(23, 149)
+        Me.CBStretchBack.Name = "CBStretchBack"
+        Me.CBStretchBack.Size = New System.Drawing.Size(146, 17)
+        Me.CBStretchBack.TabIndex = 2
+        Me.CBStretchBack.Text = "Stretch Image to Window"
+        Me.CBStretchBack.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.Transparent
+        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button2.Location = New System.Drawing.Point(188, 36)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 57)
+        Me.Button2.TabIndex = 1
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'PBBackgroundPreview
+        '
+        Me.PBBackgroundPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PBBackgroundPreview.Location = New System.Drawing.Point(23, 36)
+        Me.PBBackgroundPreview.Name = "PBBackgroundPreview"
+        Me.PBBackgroundPreview.Size = New System.Drawing.Size(145, 97)
+        Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PBBackgroundPreview.TabIndex = 0
+        Me.PBBackgroundPreview.TabStop = False
+        '
         'PNLDomTags
         '
         Me.PNLDomTags.BackColor = System.Drawing.Color.SteelBlue
@@ -382,7 +667,7 @@ Partial Class Form1
         Me.PNLDomTagBTN.Controls.Add(Me.SideView)
         Me.PNLDomTagBTN.Controls.Add(Me.CloseUp)
         Me.PNLDomTagBTN.Controls.Add(Me.Garment)
-        Me.PNLDomTagBTN.Controls.Add(Me.FromBehind)
+        Me.PNLDomTagBTN.Controls.Add(Me.SeeThrough)
         Me.PNLDomTagBTN.Controls.Add(Me.AllFours)
         Me.PNLDomTagBTN.Controls.Add(Me.Piercing)
         Me.PNLDomTagBTN.Location = New System.Drawing.Point(10, 115)
@@ -725,7 +1010,7 @@ Partial Class Form1
         Me.Naked.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Naked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Naked.ForeColor = System.Drawing.Color.Black
-        Me.Naked.Location = New System.Drawing.Point(120, 154)
+        Me.Naked.Location = New System.Drawing.Point(120, 184)
         Me.Naked.Name = "Naked"
         Me.Naked.Size = New System.Drawing.Size(104, 24)
         Me.Naked.TabIndex = 49
@@ -757,7 +1042,7 @@ Partial Class Form1
         Me.SideView.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SideView.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SideView.ForeColor = System.Drawing.Color.Black
-        Me.SideView.Location = New System.Drawing.Point(120, 184)
+        Me.SideView.Location = New System.Drawing.Point(120, 214)
         Me.SideView.Name = "SideView"
         Me.SideView.Size = New System.Drawing.Size(104, 24)
         Me.SideView.TabIndex = 50
@@ -773,7 +1058,7 @@ Partial Class Form1
         Me.CloseUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CloseUp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CloseUp.ForeColor = System.Drawing.Color.Black
-        Me.CloseUp.Location = New System.Drawing.Point(120, 214)
+        Me.CloseUp.Location = New System.Drawing.Point(120, 244)
         Me.CloseUp.Name = "CloseUp"
         Me.CloseUp.Size = New System.Drawing.Size(104, 24)
         Me.CloseUp.TabIndex = 51
@@ -797,21 +1082,21 @@ Partial Class Form1
         Me.Garment.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.Garment.UseVisualStyleBackColor = False
         '
-        'FromBehind
+        'SeeThrough
         '
-        Me.FromBehind.AllowDrop = True
-        Me.FromBehind.BackColor = System.Drawing.Color.White
-        Me.FromBehind.FlatAppearance.BorderSize = 2
-        Me.FromBehind.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.FromBehind.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FromBehind.ForeColor = System.Drawing.Color.Black
-        Me.FromBehind.Location = New System.Drawing.Point(120, 244)
-        Me.FromBehind.Name = "FromBehind"
-        Me.FromBehind.Size = New System.Drawing.Size(104, 24)
-        Me.FromBehind.TabIndex = 52
-        Me.FromBehind.Text = "From Behind"
-        Me.FromBehind.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.FromBehind.UseVisualStyleBackColor = False
+        Me.SeeThrough.AllowDrop = True
+        Me.SeeThrough.BackColor = System.Drawing.Color.White
+        Me.SeeThrough.FlatAppearance.BorderSize = 2
+        Me.SeeThrough.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.SeeThrough.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SeeThrough.ForeColor = System.Drawing.Color.Black
+        Me.SeeThrough.Location = New System.Drawing.Point(120, 154)
+        Me.SeeThrough.Name = "SeeThrough"
+        Me.SeeThrough.Size = New System.Drawing.Size(104, 24)
+        Me.SeeThrough.TabIndex = 52
+        Me.SeeThrough.Text = "See Through"
+        Me.SeeThrough.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.SeeThrough.UseVisualStyleBackColor = False
         '
         'AllFours
         '
@@ -1015,7 +1300,7 @@ Partial Class Form1
         Me.BTNVideoControls.ForeColor = System.Drawing.Color.White
         Me.BTNVideoControls.Location = New System.Drawing.Point(969, -4)
         Me.BTNVideoControls.Name = "BTNVideoControls"
-        Me.BTNVideoControls.Size = New System.Drawing.Size(119, 35)
+        Me.BTNVideoControls.Size = New System.Drawing.Size(121, 35)
         Me.BTNVideoControls.TabIndex = 15
         Me.BTNVideoControls.Text = "Show Video Controls"
         Me.BTNVideoControls.UseVisualStyleBackColor = False
@@ -1733,20 +2018,14 @@ Partial Class Form1
         'DommeTagsToolStripMenuItem1
         '
         Me.DommeTagsToolStripMenuItem1.Name = "DommeTagsToolStripMenuItem1"
-        Me.DommeTagsToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.DommeTagsToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
         Me.DommeTagsToolStripMenuItem1.Text = "Domme Tags"
         '
         'ThemeToolStripMenuItem
         '
-        Me.ThemeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator4})
         Me.ThemeToolStripMenuItem.Name = "ThemeToolStripMenuItem"
         Me.ThemeToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
         Me.ThemeToolStripMenuItem.Text = "Theme"
-        '
-        'ToolStripSeparator4
-        '
-        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(171, 6)
         '
         'MilovanaToolStripMenuItem1
         '
@@ -1804,292 +2083,6 @@ Partial Class Form1
         'BWMetro
         '
         '
-        'PNLTheme
-        '
-        Me.PNLTheme.BackColor = System.Drawing.Color.LightGray
-        Me.PNLTheme.Controls.Add(Me.Button10)
-        Me.PNLTheme.Controls.Add(Me.PNLThemeBTN)
-        Me.PNLTheme.Location = New System.Drawing.Point(801, 0)
-        Me.PNLTheme.Name = "PNLTheme"
-        Me.PNLTheme.Size = New System.Drawing.Size(287, 741)
-        Me.PNLTheme.TabIndex = 775
-        '
-        'PNLThemeBTN
-        '
-        Me.PNLThemeBTN.BackColor = System.Drawing.Color.LightGray
-        Me.PNLThemeBTN.Controls.Add(Me.Button8)
-        Me.PNLThemeBTN.Controls.Add(Me.Save)
-        Me.PNLThemeBTN.Controls.Add(Me.GroupBox2)
-        Me.PNLThemeBTN.Controls.Add(Me.GroupBox1)
-        Me.PNLThemeBTN.Location = New System.Drawing.Point(0, 28)
-        Me.PNLThemeBTN.Name = "PNLThemeBTN"
-        Me.PNLThemeBTN.Size = New System.Drawing.Size(285, 480)
-        Me.PNLThemeBTN.TabIndex = 0
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.Button9)
-        Me.GroupBox1.Controls.Add(Me.CBStretchBack)
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Controls.Add(Me.PBBackgroundPreview)
-        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(284, 191)
-        Me.GroupBox1.TabIndex = 51
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Background Image"
-        '
-        'PBBackgroundPreview
-        '
-        Me.PBBackgroundPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PBBackgroundPreview.Location = New System.Drawing.Point(23, 36)
-        Me.PBBackgroundPreview.Name = "PBBackgroundPreview"
-        Me.PBBackgroundPreview.Size = New System.Drawing.Size(145, 97)
-        Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PBBackgroundPreview.TabIndex = 0
-        Me.PBBackgroundPreview.TabStop = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.Transparent
-        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button2.Location = New System.Drawing.Point(188, 36)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 57)
-        Me.Button2.TabIndex = 1
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'CBStretchBack
-        '
-        Me.CBStretchBack.AutoSize = True
-        Me.CBStretchBack.Checked = True
-        Me.CBStretchBack.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CBStretchBack.Location = New System.Drawing.Point(23, 149)
-        Me.CBStretchBack.Name = "CBStretchBack"
-        Me.CBStretchBack.Size = New System.Drawing.Size(146, 17)
-        Me.CBStretchBack.TabIndex = 2
-        Me.CBStretchBack.Text = "Stretch Image to Window"
-        Me.CBStretchBack.UseVisualStyleBackColor = True
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.LBLChatTextColor)
-        Me.GroupBox2.Controls.Add(Me.Button7)
-        Me.GroupBox2.Controls.Add(Me.LBLChatWindowColor)
-        Me.GroupBox2.Controls.Add(Me.Button6)
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.LBLTextColor)
-        Me.GroupBox2.Controls.Add(Me.Button5)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.LBLButtonColor)
-        Me.GroupBox2.Controls.Add(Me.Button4)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.LBLBackColor)
-        Me.GroupBox2.Controls.Add(Me.Button3)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Location = New System.Drawing.Point(0, 197)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(284, 199)
-        Me.GroupBox2.TabIndex = 52
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "UI Colors"
-        '
-        'Label1
-        '
-        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label1.Location = New System.Drawing.Point(20, 24)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(148, 23)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Background Color"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.Transparent
-        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button3.Location = New System.Drawing.Point(231, 19)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(32, 32)
-        Me.Button3.TabIndex = 2
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'LBLBackColor
-        '
-        Me.LBLBackColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLBackColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLBackColor.Location = New System.Drawing.Point(176, 22)
-        Me.LBLBackColor.Name = "LBLBackColor"
-        Me.LBLBackColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLBackColor.TabIndex = 3
-        '
-        'LBLButtonColor
-        '
-        Me.LBLButtonColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLButtonColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLButtonColor.Location = New System.Drawing.Point(176, 56)
-        Me.LBLButtonColor.Name = "LBLButtonColor"
-        Me.LBLButtonColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLButtonColor.TabIndex = 6
-        '
-        'Button4
-        '
-        Me.Button4.BackColor = System.Drawing.Color.Transparent
-        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
-        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button4.Location = New System.Drawing.Point(231, 53)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(32, 32)
-        Me.Button4.TabIndex = 5
-        Me.Button4.UseVisualStyleBackColor = False
-        '
-        'Label4
-        '
-        Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label4.Location = New System.Drawing.Point(20, 58)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(148, 23)
-        Me.Label4.TabIndex = 4
-        Me.Label4.Text = "Button Color"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLTextColor
-        '
-        Me.LBLTextColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLTextColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLTextColor.Location = New System.Drawing.Point(176, 90)
-        Me.LBLTextColor.Name = "LBLTextColor"
-        Me.LBLTextColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLTextColor.TabIndex = 9
-        '
-        'Button5
-        '
-        Me.Button5.BackColor = System.Drawing.Color.Transparent
-        Me.Button5.BackgroundImage = CType(resources.GetObject("Button5.BackgroundImage"), System.Drawing.Image)
-        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button5.Location = New System.Drawing.Point(231, 87)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(32, 32)
-        Me.Button5.TabIndex = 8
-        Me.Button5.UseVisualStyleBackColor = False
-        '
-        'Label6
-        '
-        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label6.Location = New System.Drawing.Point(20, 92)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(148, 23)
-        Me.Label6.TabIndex = 7
-        Me.Label6.Text = "Text Color"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLChatWindowColor
-        '
-        Me.LBLChatWindowColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLChatWindowColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLChatWindowColor.Location = New System.Drawing.Point(176, 124)
-        Me.LBLChatWindowColor.Name = "LBLChatWindowColor"
-        Me.LBLChatWindowColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLChatWindowColor.TabIndex = 12
-        '
-        'Button6
-        '
-        Me.Button6.BackColor = System.Drawing.Color.Transparent
-        Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
-        Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button6.Location = New System.Drawing.Point(231, 121)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(32, 32)
-        Me.Button6.TabIndex = 11
-        Me.Button6.UseVisualStyleBackColor = False
-        '
-        'Label3
-        '
-        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label3.Location = New System.Drawing.Point(20, 126)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(148, 23)
-        Me.Label3.TabIndex = 10
-        Me.Label3.Text = "Chat Window Color"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLChatTextColor
-        '
-        Me.LBLChatTextColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLChatTextColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLChatTextColor.Location = New System.Drawing.Point(176, 158)
-        Me.LBLChatTextColor.Name = "LBLChatTextColor"
-        Me.LBLChatTextColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLChatTextColor.TabIndex = 16
-        '
-        'Button7
-        '
-        Me.Button7.BackColor = System.Drawing.Color.Transparent
-        Me.Button7.BackgroundImage = CType(resources.GetObject("Button7.BackgroundImage"), System.Drawing.Image)
-        Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button7.Location = New System.Drawing.Point(231, 155)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(32, 32)
-        Me.Button7.TabIndex = 15
-        Me.Button7.UseVisualStyleBackColor = False
-        '
-        'Label7
-        '
-        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label7.Location = New System.Drawing.Point(20, 160)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(148, 23)
-        Me.Label7.TabIndex = 14
-        Me.Label7.Text = "Chat Text Color"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Save
-        '
-        Me.Save.BackColor = System.Drawing.Color.Transparent
-        Me.Save.BackgroundImage = CType(resources.GetObject("Save.BackgroundImage"), System.Drawing.Image)
-        Me.Save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Save.Location = New System.Drawing.Point(44, 405)
-        Me.Save.Name = "Save"
-        Me.Save.Size = New System.Drawing.Size(64, 64)
-        Me.Save.TabIndex = 53
-        Me.Save.UseVisualStyleBackColor = False
-        '
-        'Button8
-        '
-        Me.Button8.BackColor = System.Drawing.Color.Transparent
-        Me.Button8.BackgroundImage = CType(resources.GetObject("Button8.BackgroundImage"), System.Drawing.Image)
-        Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button8.Location = New System.Drawing.Point(176, 405)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(64, 64)
-        Me.Button8.TabIndex = 54
-        Me.Button8.UseVisualStyleBackColor = False
-        '
-        'Button9
-        '
-        Me.Button9.Location = New System.Drawing.Point(188, 108)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(75, 25)
-        Me.Button9.TabIndex = 3
-        Me.Button9.Text = "Clear"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
-        'Button10
-        '
-        Me.Button10.BackColor = System.Drawing.Color.Transparent
-        Me.Button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button10.FlatAppearance.BorderSize = 0
-        Me.Button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
-        Me.Button10.Location = New System.Drawing.Point(255, 4)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(20, 20)
-        Me.Button10.TabIndex = 1
-        Me.Button10.UseVisualStyleBackColor = False
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2126,6 +2119,12 @@ Partial Class Form1
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
+        Me.PNLTheme.ResumeLayout(False)
+        Me.PNLThemeBTN.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNLDomTags.ResumeLayout(False)
         Me.PNLDomTagBTN.ResumeLayout(False)
         Me.PNLDomTagBTN.PerformLayout()
@@ -2143,12 +2142,6 @@ Partial Class Form1
         Me.TeaseAIMenu.ResumeLayout(False)
         Me.MenuStrip2.ResumeLayout(False)
         Me.MenuStrip2.PerformLayout()
-        Me.PNLTheme.ResumeLayout(False)
-        Me.PNLThemeBTN.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2316,7 +2309,7 @@ Partial Class Form1
     Friend WithEvents Garment As System.Windows.Forms.Button
     Friend WithEvents Piercing As System.Windows.Forms.Button
     Friend WithEvents AllFours As System.Windows.Forms.Button
-    Friend WithEvents FromBehind As System.Windows.Forms.Button
+    Friend WithEvents SeeThrough As System.Windows.Forms.Button
     Friend WithEvents CloseUp As System.Windows.Forms.Button
     Friend WithEvents SideView As System.Windows.Forms.Button
     Friend WithEvents Naked As System.Windows.Forms.Button
@@ -2336,7 +2329,6 @@ Partial Class Form1
     Friend WithEvents Ass As System.Windows.Forms.Button
     Friend WithEvents PNLDomTagBTN As System.Windows.Forms.Panel
     Friend WithEvents ThemeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents PNLTheme As System.Windows.Forms.Panel
     Friend WithEvents PNLThemeBTN As System.Windows.Forms.Panel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox

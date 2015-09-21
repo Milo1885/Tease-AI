@@ -3161,10 +3161,10 @@ NextURL:
 
     End Sub
 
-    Private Sub CBLockWindow_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBLockWindow.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, the splitter between the chat window and image window cannot be adjusted."
+    Private Sub CBLockWindow_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBInputIcon.MouseHover
+        LBLGeneralSettingsDescription.Text = "When this is selected, a small question mark icon will appear next to domme's question when your exact response will be saved to a variable."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, kann der Teilungsbalken zwischen Chat Fenster und Bildfenster nicht verstellt werden."
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, kann der Teilungsbalken zwischen Chat Fenster und Bildfenster nicht verstellt werden."
 
     End Sub
 
@@ -5146,13 +5146,11 @@ NextURL:
 #End Region
 
 
-    Private Sub CBLockWindow_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBLockWindow.LostFocus
-        If CBLockWindow.Checked = True Then
-            My.Settings.CBLockWindow = True
-            Form1.SplitContainer1.IsSplitterFixed = True
+    Private Sub CBLockWindow_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBInputIcon.LostFocus
+        If CBInputIcon.Checked = True Then
+            My.Settings.CBInputIcon = True
         Else
-            My.Settings.CBLockWindow = False
-            Form1.SplitContainer1.IsSplitterFixed = False
+            My.Settings.CBInputIcon = False
         End If
         My.Settings.Save()
     End Sub
@@ -13115,7 +13113,7 @@ NextURL:
         timestampCheckBox.Text = "Show Timestamps"
         shownamesCheckBox.Text = "Always Show Names"
         typeinstantlyCheckBox.Text = "Domme Types Instantly"
-        CBLockWindow.Text = "Disable Chat Window Resize"
+        CBInputIcon.Text = "Show Icon During Input Questions"
 
         GBDommeFont.Text = "Domme Font Settings"
         BTNDomColor.Text = "Domme Name Color"
@@ -13168,7 +13166,7 @@ NextURL:
         timestampCheckBox.Text = "Zeige Zeitstempel"
         shownamesCheckBox.Text = "Zeige immer die Namen"
         typeinstantlyCheckBox.Text = "Domina Schreibt sofort"
-        CBLockWindow.Text = "Deaktiviere Chat Fenster Verstellung"
+        'CBInputIcon.Text = "Deaktiviere Chat Fenster Verstellung"
 
         GBDommeFont.Text = "Domina Schrift Einstellungen"
         BTNDomColor.Text = "Domina Farbe"
@@ -13243,4 +13241,6 @@ NextURL:
 
         Form1.MetroTimer.Interval = MetroVal
     End Sub
+
+
 End Class
