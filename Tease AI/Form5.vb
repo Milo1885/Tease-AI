@@ -413,13 +413,13 @@ Public Class frmApps
 
 
     Private Sub Button23_Click_1(sender As System.Object, e As System.EventArgs) Handles Button23.Click
-        If Form1.PNLGlitter.Visible = True Then
-            Form1.PNLGlitter.Visible = False
-            LBLGlitter.Text = "Show Glitter"
-        Else
-            Form1.PNLGlitter.Visible = True
-            LBLGlitter.Text = "Hide Glitter"
-        End If
+        '  If Form1.PNLGlitter.Visible = True Then
+        'Form1.PNLGlitter.Visible = False
+        ' LBLGlitter.Text = "Show Glitter"
+        ' Else
+        'Form1.PNLGlitter.Visible = True
+        'LBLGlitter.Text = "Hide Glitter"
+        'End If
     End Sub
 
     Private Sub Button5_Click_1(sender As System.Object, e As System.EventArgs) Handles Button5.Click
@@ -865,7 +865,7 @@ Public Class frmApps
 
     Private Sub frmApps_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         Form1.SaveExercise()
-        Form1.BTNShowHideApps.Text = "Show Apps"
+        'Form1.BTNShowHideApps.Text = "Show Apps"
     End Sub
 
     Private Sub frmApps_Load(sender As Object, e As System.EventArgs) Handles Me.Load
@@ -1268,7 +1268,7 @@ Public Class frmApps
         Form1.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\TAIBack.png")
 
         Form1.subName.BackColor = Color.SteelBlue
-        Form1.BTNShowHideApps.BackColor = Color.SteelBlue
+        'Form1.BTNShowHideApps.BackColor = Color.SteelBlue
         Form1.domName.BackColor = Color.SteelBlue
 
         Form1.browsefolderButton.BackColor = Color.SteelBlue
@@ -1335,7 +1335,7 @@ Public Class frmApps
         Form1.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\TAIBackPurple.png")
 
         Form1.subName.BackColor = Color.DarkMagenta
-        Form1.BTNShowHideApps.BackColor = Color.DarkMagenta
+        ' Form1.BTNShowHideApps.BackColor = Color.DarkMagenta
         Form1.domName.BackColor = Color.DarkMagenta
 
         Form1.browsefolderButton.BackColor = Color.DarkMagenta
@@ -1400,7 +1400,7 @@ Public Class frmApps
         Form1.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\TAIBackGray.png")
 
         Form1.subName.BackColor = Color.Black
-        Form1.BTNShowHideApps.BackColor = Color.Black
+        'Form1.BTNShowHideApps.BackColor = Color.Black
         Form1.domName.BackColor = Color.Black
 
         Form1.browsefolderButton.BackColor = Color.Black
@@ -1464,7 +1464,7 @@ Public Class frmApps
         Form1.BackgroundImage = Image.FromFile(Application.StartupPath & "\Images\System\TAIBackRed.png")
 
         Form1.subName.BackColor = Color.Firebrick
-        Form1.BTNShowHideApps.BackColor = Color.Firebrick
+        'Form1.BTNShowHideApps.BackColor = Color.Firebrick
         Form1.domName.BackColor = Color.Firebrick
 
         Form1.browsefolderButton.BackColor = Color.Firebrick

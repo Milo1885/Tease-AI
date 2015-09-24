@@ -915,6 +915,45 @@ Partial Class FrmSettings
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TabPage26 = New System.Windows.Forms.TabPage()
+        Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.PictureBox10 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.Label144 = New System.Windows.Forms.Label()
+        Me.Label164 = New System.Windows.Forms.Label()
+        Me.PBBackgroundPreview = New System.Windows.Forms.PictureBox()
+        Me.Button17 = New System.Windows.Forms.Button()
+        Me.CBStretchBack = New System.Windows.Forms.CheckBox()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LBLTextColor = New System.Windows.Forms.Label()
+        Me.LBLChatWindowColor2 = New System.Windows.Forms.Label()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.LBLTextColor2 = New System.Windows.Forms.Label()
+        Me.LBLChatTextColor = New System.Windows.Forms.Label()
+        Me.LBLBackColor2 = New System.Windows.Forms.Label()
+        Me.LBLButtonColor = New System.Windows.Forms.Label()
+        Me.LBLChatWindowColor = New System.Windows.Forms.Label()
+        Me.LBLBackColor = New System.Windows.Forms.Label()
+        Me.Button21 = New System.Windows.Forms.Button()
+        Me.Button23 = New System.Windows.Forms.Button()
+        Me.LBLChatTextColor2 = New System.Windows.Forms.Label()
+        Me.Button25 = New System.Windows.Forms.Button()
+        Me.Button27 = New System.Windows.Forms.Button()
+        Me.LBLButtonColor2 = New System.Windows.Forms.Label()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.Label136 = New System.Windows.Forms.Label()
+        Me.Label137 = New System.Windows.Forms.Label()
+        Me.Label138 = New System.Windows.Forms.Label()
+        Me.Button28 = New System.Windows.Forms.Button()
+        Me.Button30 = New System.Windows.Forms.Button()
+        Me.Label139 = New System.Windows.Forms.Label()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.Button31 = New System.Windows.Forms.Button()
+        Me.Button32 = New System.Windows.Forms.Button()
+        Me.Label140 = New System.Windows.Forms.Label()
+        Me.Label141 = New System.Windows.Forms.Label()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -1131,6 +1170,14 @@ Partial Class FrmSettings
         Me.TabPage5.SuspendLayout
         Me.Panel5.SuspendLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage26.SuspendLayout
+        Me.Panel12.SuspendLayout
+        CType(Me.PictureBox10,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox11.SuspendLayout
+        CType(Me.PBBackgroundPreview,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox1.SuspendLayout
+        Me.GroupBox5.SuspendLayout
+        Me.GroupBox9.SuspendLayout
         Me.SuspendLayout
         '
         'SettingsPanel
@@ -1155,6 +1202,7 @@ Partial Class FrmSettings
         Me.SettingsTabs.Controls.Add(Me.TabPage11)
         Me.SettingsTabs.Controls.Add(Me.TabPage3)
         Me.SettingsTabs.Controls.Add(Me.TabPage20)
+        Me.SettingsTabs.Controls.Add(Me.TabPage26)
         Me.SettingsTabs.Controls.Add(Me.TabPage4)
         Me.SettingsTabs.Controls.Add(Me.TabPage13)
         Me.SettingsTabs.Controls.Add(Me.TabPage25)
@@ -1723,14 +1771,14 @@ Partial Class FrmSettings
         'CBInputIcon
         '
         Me.CBInputIcon.AutoSize = true
-        Me.CBInputIcon.Checked = True
+        Me.CBInputIcon.Checked = true
         Me.CBInputIcon.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CBInputIcon.ForeColor = System.Drawing.Color.Black
         Me.CBInputIcon.Location = New System.Drawing.Point(6, 87)
         Me.CBInputIcon.Name = "CBInputIcon"
         Me.CBInputIcon.Size = New System.Drawing.Size(188, 17)
         Me.CBInputIcon.TabIndex = 4
-        Me.CBInputIcon.TabStop = False
+        Me.CBInputIcon.TabStop = false
         Me.CBInputIcon.Text = "Show Icon During Input Questions"
         Me.CBInputIcon.UseVisualStyleBackColor = true
         '
@@ -11777,300 +11825,743 @@ Partial Class FrmSettings
         'BWCreateURLFiles
         '
         '
+        'TabPage26
+        '
+        Me.TabPage26.Controls.Add(Me.Panel12)
+        Me.TabPage26.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage26.Name = "TabPage26"
+        Me.TabPage26.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage26.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage26.TabIndex = 19
+        Me.TabPage26.Text = "Themes"
+        Me.TabPage26.UseVisualStyleBackColor = true
+        '
+        'Panel12
+        '
+        Me.Panel12.BackColor = System.Drawing.Color.LightGray
+        Me.Panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel12.Controls.Add(Me.GroupBox9)
+        Me.Panel12.Controls.Add(Me.PictureBox10)
+        Me.Panel12.Controls.Add(Me.GroupBox5)
+        Me.Panel12.Controls.Add(Me.GroupBox11)
+        Me.Panel12.Controls.Add(Me.GroupBox1)
+        Me.Panel12.Controls.Add(Me.Label164)
+        Me.Panel12.Location = New System.Drawing.Point(6, 6)
+        Me.Panel12.Name = "Panel12"
+        Me.Panel12.Size = New System.Drawing.Size(708, 437)
+        Me.Panel12.TabIndex = 93
+        '
+        'PictureBox10
+        '
+        Me.PictureBox10.BackColor = System.Drawing.Color.LightGray
+        Me.PictureBox10.Image = CType(resources.GetObject("PictureBox10.Image"),System.Drawing.Image)
+        Me.PictureBox10.Location = New System.Drawing.Point(9, 6)
+        Me.PictureBox10.Name = "PictureBox10"
+        Me.PictureBox10.Size = New System.Drawing.Size(160, 19)
+        Me.PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox10.TabIndex = 151
+        Me.PictureBox10.TabStop = false
+        '
+        'GroupBox11
+        '
+        Me.GroupBox11.BackColor = System.Drawing.Color.LightGray
+        Me.GroupBox11.Controls.Add(Me.Label144)
+        Me.GroupBox11.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox11.Location = New System.Drawing.Point(7, 331)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(692, 92)
+        Me.GroupBox11.TabIndex = 65
+        Me.GroupBox11.TabStop = false
+        Me.GroupBox11.Text = "Description"
+        '
+        'Label144
+        '
+        Me.Label144.BackColor = System.Drawing.Color.Transparent
+        Me.Label144.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label144.ForeColor = System.Drawing.Color.Black
+        Me.Label144.Location = New System.Drawing.Point(6, 16)
+        Me.Label144.Name = "Label144"
+        Me.Label144.Size = New System.Drawing.Size(680, 73)
+        Me.Label144.TabIndex = 62
+        Me.Label144.Text = "Use this page to select the videos you would like the program to use and set thei"& _ 
+    "r paths."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"The Domme Genre paths are for videos that feature the model you are "& _ 
+    "using as your domme."
+        Me.Label144.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label164
+        '
+        Me.Label164.BackColor = System.Drawing.Color.Transparent
+        Me.Label164.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label164.ForeColor = System.Drawing.Color.Black
+        Me.Label164.Location = New System.Drawing.Point(7, 6)
+        Me.Label164.Name = "Label164"
+        Me.Label164.Size = New System.Drawing.Size(692, 21)
+        Me.Label164.TabIndex = 49
+        Me.Label164.Text = "Theme Settings"
+        Me.Label164.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PBBackgroundPreview
+        '
+        Me.PBBackgroundPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PBBackgroundPreview.Location = New System.Drawing.Point(6, 19)
+        Me.PBBackgroundPreview.Name = "PBBackgroundPreview"
+        Me.PBBackgroundPreview.Size = New System.Drawing.Size(246, 178)
+        Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PBBackgroundPreview.TabIndex = 0
+        Me.PBBackgroundPreview.TabStop = False
+        '
+        'Button17
+        '
+        Me.Button17.BackColor = System.Drawing.Color.Transparent
+        Me.Button17.BackgroundImage = CType(resources.GetObject("Button17.BackgroundImage"), System.Drawing.Image)
+        Me.Button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button17.Location = New System.Drawing.Point(258, 19)
+        Me.Button17.Name = "Button17"
+        Me.Button17.Size = New System.Drawing.Size(84, 67)
+        Me.Button17.TabIndex = 1
+        Me.Button17.UseVisualStyleBackColor = False
+        '
+        'CBStretchBack
+        '
+        Me.CBStretchBack.Checked = True
+        Me.CBStretchBack.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBStretchBack.Location = New System.Drawing.Point(258, 156)
+        Me.CBStretchBack.Name = "CBStretchBack"
+        Me.CBStretchBack.Size = New System.Drawing.Size(86, 41)
+        Me.CBStretchBack.TabIndex = 2
+        Me.CBStretchBack.Text = "Stretch Background"
+        Me.CBStretchBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.CBStretchBack.UseVisualStyleBackColor = True
+        '
+        'Button18
+        '
+        Me.Button18.Location = New System.Drawing.Point(258, 92)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(84, 58)
+        Me.Button18.TabIndex = 3
+        Me.Button18.Text = "Clear"
+        Me.Button18.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.PBBackgroundPreview)
+        Me.GroupBox1.Controls.Add(Me.Button17)
+        Me.GroupBox1.Controls.Add(Me.CBStretchBack)
+        Me.GroupBox1.Controls.Add(Me.Button18)
+        Me.GroupBox1.Location = New System.Drawing.Point(351, 30)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(348, 209)
+        Me.GroupBox1.TabIndex = 57
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Background"
+        '
+        'LBLTextColor
+        '
+        Me.LBLTextColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLTextColor.Location = New System.Drawing.Point(6, 91)
+        Me.LBLTextColor.Name = "LBLTextColor"
+        Me.LBLTextColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLTextColor.TabIndex = 7
+        Me.LBLTextColor.Text = "Text Color"
+        Me.LBLTextColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLChatWindowColor2
+        '
+        Me.LBLChatWindowColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLChatWindowColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChatWindowColor2.Location = New System.Drawing.Point(187, 122)
+        Me.LBLChatWindowColor2.Name = "LBLChatWindowColor2"
+        Me.LBLChatWindowColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLChatWindowColor2.TabIndex = 12
+        '
+        'Button20
+        '
+        Me.Button20.BackColor = System.Drawing.Color.Transparent
+        Me.Button20.BackgroundImage = CType(resources.GetObject("Button20.BackgroundImage"), System.Drawing.Image)
+        Me.Button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button20.Location = New System.Drawing.Point(296, 85)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(32, 32)
+        Me.Button20.TabIndex = 8
+        Me.Button20.UseVisualStyleBackColor = False
+        '
+        'LBLTextColor2
+        '
+        Me.LBLTextColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLTextColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLTextColor2.Location = New System.Drawing.Point(187, 88)
+        Me.LBLTextColor2.Name = "LBLTextColor2"
+        Me.LBLTextColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLTextColor2.TabIndex = 9
+        '
+        'LBLChatTextColor
+        '
+        Me.LBLChatTextColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLChatTextColor.Location = New System.Drawing.Point(6, 159)
+        Me.LBLChatTextColor.Name = "LBLChatTextColor"
+        Me.LBLChatTextColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLChatTextColor.TabIndex = 14
+        Me.LBLChatTextColor.Text = "Chat Text Color"
+        Me.LBLChatTextColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLBackColor2
+        '
+        Me.LBLBackColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLBackColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLBackColor2.Location = New System.Drawing.Point(187, 20)
+        Me.LBLBackColor2.Name = "LBLBackColor2"
+        Me.LBLBackColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLBackColor2.TabIndex = 3
+        '
+        'LBLButtonColor
+        '
+        Me.LBLButtonColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLButtonColor.Location = New System.Drawing.Point(6, 57)
+        Me.LBLButtonColor.Name = "LBLButtonColor"
+        Me.LBLButtonColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLButtonColor.TabIndex = 4
+        Me.LBLButtonColor.Text = "Button Color"
+        Me.LBLButtonColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLChatWindowColor
+        '
+        Me.LBLChatWindowColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLChatWindowColor.Location = New System.Drawing.Point(6, 125)
+        Me.LBLChatWindowColor.Name = "LBLChatWindowColor"
+        Me.LBLChatWindowColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLChatWindowColor.TabIndex = 10
+        Me.LBLChatWindowColor.Text = "Chat Window Color"
+        Me.LBLChatWindowColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLBackColor
+        '
+        Me.LBLBackColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLBackColor.Location = New System.Drawing.Point(6, 23)
+        Me.LBLBackColor.Name = "LBLBackColor"
+        Me.LBLBackColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLBackColor.TabIndex = 0
+        Me.LBLBackColor.Text = "Background Color"
+        Me.LBLBackColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Button21
+        '
+        Me.Button21.BackColor = System.Drawing.Color.Transparent
+        Me.Button21.BackgroundImage = CType(resources.GetObject("Button21.BackgroundImage"), System.Drawing.Image)
+        Me.Button21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button21.Location = New System.Drawing.Point(296, 153)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(32, 32)
+        Me.Button21.TabIndex = 15
+        Me.Button21.UseVisualStyleBackColor = False
+        '
+        'Button23
+        '
+        Me.Button23.BackColor = System.Drawing.Color.Transparent
+        Me.Button23.BackgroundImage = CType(resources.GetObject("Button23.BackgroundImage"), System.Drawing.Image)
+        Me.Button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button23.Location = New System.Drawing.Point(296, 119)
+        Me.Button23.Name = "Button23"
+        Me.Button23.Size = New System.Drawing.Size(32, 32)
+        Me.Button23.TabIndex = 11
+        Me.Button23.UseVisualStyleBackColor = False
+        '
+        'LBLChatTextColor2
+        '
+        Me.LBLChatTextColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLChatTextColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChatTextColor2.Location = New System.Drawing.Point(187, 156)
+        Me.LBLChatTextColor2.Name = "LBLChatTextColor2"
+        Me.LBLChatTextColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLChatTextColor2.TabIndex = 16
+        '
+        'Button25
+        '
+        Me.Button25.BackColor = System.Drawing.Color.Transparent
+        Me.Button25.BackgroundImage = CType(resources.GetObject("Button25.BackgroundImage"), System.Drawing.Image)
+        Me.Button25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button25.Location = New System.Drawing.Point(296, 17)
+        Me.Button25.Name = "Button25"
+        Me.Button25.Size = New System.Drawing.Size(32, 32)
+        Me.Button25.TabIndex = 2
+        Me.Button25.UseVisualStyleBackColor = False
+        '
+        'Button27
+        '
+        Me.Button27.BackColor = System.Drawing.Color.Transparent
+        Me.Button27.BackgroundImage = CType(resources.GetObject("Button27.BackgroundImage"), System.Drawing.Image)
+        Me.Button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button27.Location = New System.Drawing.Point(296, 51)
+        Me.Button27.Name = "Button27"
+        Me.Button27.Size = New System.Drawing.Size(32, 32)
+        Me.Button27.TabIndex = 5
+        Me.Button27.UseVisualStyleBackColor = False
+        '
+        'LBLButtonColor2
+        '
+        Me.LBLButtonColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLButtonColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLButtonColor2.Location = New System.Drawing.Point(187, 54)
+        Me.LBLButtonColor2.Name = "LBLButtonColor2"
+        Me.LBLButtonColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLButtonColor2.TabIndex = 6
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.CheckBox2)
+        Me.GroupBox5.Controls.Add(Me.Label136)
+        Me.GroupBox5.Controls.Add(Me.Label137)
+        Me.GroupBox5.Controls.Add(Me.Label138)
+        Me.GroupBox5.Controls.Add(Me.Button28)
+        Me.GroupBox5.Controls.Add(Me.Button30)
+        Me.GroupBox5.Controls.Add(Me.Label139)
+        Me.GroupBox5.Controls.Add(Me.LBLTextColor)
+        Me.GroupBox5.Controls.Add(Me.LBLChatWindowColor2)
+        Me.GroupBox5.Controls.Add(Me.Button20)
+        Me.GroupBox5.Controls.Add(Me.LBLTextColor2)
+        Me.GroupBox5.Controls.Add(Me.LBLChatTextColor)
+        Me.GroupBox5.Controls.Add(Me.LBLBackColor2)
+        Me.GroupBox5.Controls.Add(Me.LBLButtonColor)
+        Me.GroupBox5.Controls.Add(Me.LBLChatWindowColor)
+        Me.GroupBox5.Controls.Add(Me.LBLBackColor)
+        Me.GroupBox5.Controls.Add(Me.Button21)
+        Me.GroupBox5.Controls.Add(Me.Button23)
+        Me.GroupBox5.Controls.Add(Me.LBLChatTextColor2)
+        Me.GroupBox5.Controls.Add(Me.Button25)
+        Me.GroupBox5.Controls.Add(Me.Button27)
+        Me.GroupBox5.Controls.Add(Me.LBLButtonColor2)
+        Me.GroupBox5.Location = New System.Drawing.Point(9, 31)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(336, 294)
+        Me.GroupBox5.TabIndex = 58
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "UI Colors"
+        '
+        'GroupBox9
+        '
+        Me.GroupBox9.Controls.Add(Me.Label141)
+        Me.GroupBox9.Controls.Add(Me.Button31)
+        Me.GroupBox9.Controls.Add(Me.Label140)
+        Me.GroupBox9.Controls.Add(Me.Button32)
+        Me.GroupBox9.Location = New System.Drawing.Point(351, 245)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(348, 80)
+        Me.GroupBox9.TabIndex = 152
+        Me.GroupBox9.TabStop = False
+        Me.GroupBox9.Text = "System"
+        '
+        'Label136
+        '
+        Me.Label136.BackColor = System.Drawing.Color.SteelBlue
+        Me.Label136.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label136.Location = New System.Drawing.Point(187, 190)
+        Me.Label136.Name = "Label136"
+        Me.Label136.Size = New System.Drawing.Size(103, 28)
+        Me.Label136.TabIndex = 19
+        '
+        'Label137
+        '
+        Me.Label137.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label137.Location = New System.Drawing.Point(6, 227)
+        Me.Label137.Name = "Label137"
+        Me.Label137.Size = New System.Drawing.Size(175, 20)
+        Me.Label137.TabIndex = 20
+        Me.Label137.Text = "Date/Time Window Color"
+        Me.Label137.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label138
+        '
+        Me.Label138.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label138.Location = New System.Drawing.Point(6, 193)
+        Me.Label138.Name = "Label138"
+        Me.Label138.Size = New System.Drawing.Size(175, 20)
+        Me.Label138.TabIndex = 17
+        Me.Label138.Text = "Date/Time Text Color"
+        Me.Label138.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Button28
+        '
+        Me.Button28.BackColor = System.Drawing.Color.Transparent
+        Me.Button28.BackgroundImage = CType(resources.GetObject("Button28.BackgroundImage"), System.Drawing.Image)
+        Me.Button28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button28.Location = New System.Drawing.Point(296, 221)
+        Me.Button28.Name = "Button28"
+        Me.Button28.Size = New System.Drawing.Size(32, 32)
+        Me.Button28.TabIndex = 21
+        Me.Button28.UseVisualStyleBackColor = False
+        '
+        'Button30
+        '
+        Me.Button30.BackColor = System.Drawing.Color.Transparent
+        Me.Button30.BackgroundImage = CType(resources.GetObject("Button30.BackgroundImage"), System.Drawing.Image)
+        Me.Button30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button30.Location = New System.Drawing.Point(296, 187)
+        Me.Button30.Name = "Button30"
+        Me.Button30.Size = New System.Drawing.Size(32, 32)
+        Me.Button30.TabIndex = 18
+        Me.Button30.UseVisualStyleBackColor = False
+        '
+        'Label139
+        '
+        Me.Label139.BackColor = System.Drawing.Color.SteelBlue
+        Me.Label139.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label139.Location = New System.Drawing.Point(187, 224)
+        Me.Label139.Name = "Label139"
+        Me.Label139.Size = New System.Drawing.Size(103, 28)
+        Me.Label139.TabIndex = 22
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = True
+        Me.CheckBox2.Location = New System.Drawing.Point(7, 262)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(179, 17)
+        Me.CheckBox2.TabIndex = 23
+        Me.CheckBox2.Text = "Transparent Date/Time Window"
+        Me.CheckBox2.UseVisualStyleBackColor = True
+        '
+        'Button31
+        '
+        Me.Button31.BackColor = System.Drawing.Color.Transparent
+        Me.Button31.BackgroundImage = CType(resources.GetObject("Button31.BackgroundImage"), System.Drawing.Image)
+        Me.Button31.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button31.Location = New System.Drawing.Point(19, 18)
+        Me.Button31.Name = "Button31"
+        Me.Button31.Size = New System.Drawing.Size(55, 55)
+        Me.Button31.TabIndex = 54
+        Me.Button31.UseVisualStyleBackColor = False
+        '
+        'Button32
+        '
+        Me.Button32.BackColor = System.Drawing.Color.Transparent
+        Me.Button32.BackgroundImage = CType(resources.GetObject("Button32.BackgroundImage"), System.Drawing.Image)
+        Me.Button32.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button32.Location = New System.Drawing.Point(183, 18)
+        Me.Button32.Name = "Button32"
+        Me.Button32.Size = New System.Drawing.Size(55, 55)
+        Me.Button32.TabIndex = 53
+        Me.Button32.UseVisualStyleBackColor = False
+        '
+        'Label140
+        '
+        Me.Label140.Location = New System.Drawing.Point(80, 18)
+        Me.Label140.Name = "Label140"
+        Me.Label140.Size = New System.Drawing.Size(87, 55)
+        Me.Label140.TabIndex = 55
+        Me.Label140.Text = "Open Custom Tease AI Theme"
+        Me.Label140.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label141
+        '
+        Me.Label141.Location = New System.Drawing.Point(244, 18)
+        Me.Label141.Name = "Label141"
+        Me.Label141.Size = New System.Drawing.Size(87, 55)
+        Me.Label141.TabIndex = 56
+        Me.Label141.Text = "Save Custom Tease AI Theme"
+        Me.Label141.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'FrmSettings
         '
-        Me.AllowDrop = true
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+        Me.AllowDrop = True
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(721, 465)
         Me.Controls.Add(Me.SettingsPanel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
-        Me.MaximizeBox = false
-        Me.MinimizeBox = false
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FrmSettings"
-        Me.ShowIcon = false
+        Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Tease AI Settings"
-        Me.SettingsPanel.ResumeLayout(false)
-        Me.SettingsTabs.ResumeLayout(false)
-        Me.TabPage1.ResumeLayout(false)
-        Me.PNLGeneralSettings.ResumeLayout(false)
-        Me.GBDommeImages.ResumeLayout(false)
-        Me.GBGeneralTextToSpeech.ResumeLayout(false)
-        Me.GBGeneralTextToSpeech.PerformLayout
-        Me.GBSlideshowOptions.ResumeLayout(false)
-        Me.GBSlideshowOptions.PerformLayout
-        CType(Me.slideshowNumBox,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBSafeword.ResumeLayout(false)
-        Me.GBSafeword.PerformLayout
-        Me.GBGeneralSystem.ResumeLayout(false)
-        Me.GBGeneralSystem.PerformLayout
-        Me.GBGeneralImages.ResumeLayout(false)
-        Me.GBGeneralImages.PerformLayout
-        CType(Me.PictureBox2,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBGeneralDesc.ResumeLayout(false)
-        Me.GBGeneralSettings.ResumeLayout(false)
-        Me.GBGeneralSettings.PerformLayout
-        Me.GBSubFont.ResumeLayout(false)
-        CType(Me.NBFontSize,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBDommeFont.ResumeLayout(false)
-        CType(Me.NBFontSizeD,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage2.ResumeLayout(false)
-        Me.Panel3.ResumeLayout(false)
-        Me.Panel3.PerformLayout
-        CType(Me.PictureBox4,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBDomTypingStyle.ResumeLayout(false)
-        Me.GBDomTypingStyle.PerformLayout
-        Me.GBDomRanges.ResumeLayout(false)
-        CType(Me.NBDomMoodMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBDomMoodMin,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBSubAgeMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBSubAgeMin,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBSelfAgeMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBSelfAgeMin,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBAvgCockMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBAvgCockMin,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBDomDescription.ResumeLayout(false)
-        Me.GBDomStats.ResumeLayout(false)
-        Me.GBDomStats.PerformLayout
-        CType(Me.NBEmpathy,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBDomBirthdayDay,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.domageNumBox,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBDomBirthdayMonth,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.domlevelNumBox,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBDomPersonality.ResumeLayout(false)
-        Me.GBDomPersonality.PerformLayout
-        Me.GBDomOrgasms.ResumeLayout(false)
-        Me.GBDomOrgasms.PerformLayout
-        CType(Me.orgasmsPerNumBox,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBDomPetNames.ResumeLayout(false)
-        Me.GBDomPetNames.PerformLayout
-        Me.TabPage10.ResumeLayout(false)
-        Me.Panel2.ResumeLayout(false)
-        Me.GroupBox6.ResumeLayout(false)
-        Me.GroupBox6.PerformLayout
-        Me.GroupBox45.ResumeLayout(false)
-        CType(Me.CBTSlider,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox35.ResumeLayout(false)
-        Me.GroupBox39.ResumeLayout(false)
-        Me.GroupBox39.PerformLayout
-        Me.GroupBox38.ResumeLayout(false)
-        Me.GroupBox38.PerformLayout
-        Me.GroupBox37.ResumeLayout(false)
-        Me.GroupBox37.PerformLayout
-        Me.GroupBox36.ResumeLayout(false)
-        Me.GroupBox36.PerformLayout
-        Me.GroupBox7.ResumeLayout(false)
-        Me.GroupBox7.PerformLayout
-        CType(Me.NBWritingTaskMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBWritingTaskMin,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBHoldTheEdgeMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBLongEdge,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox12,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox12.ResumeLayout(false)
-        Me.GroupBox32.ResumeLayout(false)
-        Me.GroupBox32.PerformLayout
-        CType(Me.NBBirthdayDay,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.subAgeNumBox,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBBirthdayMonth,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.CockSizeNumBox,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage16.ResumeLayout(false)
-        Me.Panel9.ResumeLayout(false)
-        Me.GroupBox31.ResumeLayout(false)
-        Me.TCScripts.ResumeLayout(false)
-        Me.TabPage21.ResumeLayout(false)
-        Me.TabPage17.ResumeLayout(false)
-        Me.TabPage18.ResumeLayout(false)
-        Me.TabPage19.ResumeLayout(false)
-        Me.GroupBox42.ResumeLayout(false)
-        CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox43.ResumeLayout(false)
-        Me.TabPage7.ResumeLayout(false)
-        Me.Panel8.ResumeLayout(false)
-        Me.GroupBox16.ResumeLayout(false)
-        Me.GroupBox16.PerformLayout
-        Me.GroupBox14.ResumeLayout(false)
-        CType(Me.PictureBox13,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox44.ResumeLayout(false)
-        Me.GroupBox47.ResumeLayout(false)
-        Me.GroupBox47.PerformLayout
-        Me.GroupBox41.ResumeLayout(false)
-        Me.GroupBox41.PerformLayout
-        Me.GroupBox40.ResumeLayout(false)
-        Me.GroupBox40.PerformLayout
-        Me.TabPage12.ResumeLayout(false)
-        Me.PNLImageTag.ResumeLayout(false)
-        Me.PNLImageTag.PerformLayout
-        CType(Me.ImageTagPictureBox,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox14,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage9.ResumeLayout(false)
-        Me.Panel4.ResumeLayout(false)
-        Me.Panel4.PerformLayout
-        Me.GroupBox55.ResumeLayout(false)
-        Me.GroupBox55.PerformLayout
-        Me.GroupBox53.ResumeLayout(false)
-        Me.GroupBox53.PerformLayout
-        Me.GroupBox49.ResumeLayout(false)
-        Me.GroupBox49.PerformLayout
-        Me.GroupBox46.ResumeLayout(false)
-        Me.GroupBox46.PerformLayout
-        Me.GroupBox54.ResumeLayout(false)
-        Me.GroupBox54.PerformLayout
-        Me.GroupBox51.ResumeLayout(false)
-        Me.GroupBox51.PerformLayout
-        Me.GroupBox50.ResumeLayout(false)
-        Me.GroupBox50.PerformLayout
-        Me.GroupBox48.ResumeLayout(false)
-        Me.GroupBox48.PerformLayout
-        CType(Me.PictureBox7,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage11.ResumeLayout(false)
-        Me.Panel7.ResumeLayout(false)
-        Me.Panel7.PerformLayout
-        CType(Me.PictureBox5,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.WebPictureBox,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage3.ResumeLayout(false)
-        Me.Panel1.ResumeLayout(false)
-        CType(Me.PictureBox6,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox25.ResumeLayout(false)
-        Me.GroupBox25.PerformLayout
-        Me.GroupBox24.ResumeLayout(false)
-        Me.GroupBox24.PerformLayout
-        Me.GroupBox23.ResumeLayout(false)
-        Me.GroupBox23.PerformLayout
-        Me.GroupBox8.ResumeLayout(false)
-        Me.GroupBox4.ResumeLayout(false)
-        Me.GroupBox4.PerformLayout
-        Me.GroupBox3.ResumeLayout(false)
-        Me.GroupBox3.PerformLayout
-        Me.GroupBox2.ResumeLayout(false)
-        Me.GroupBox2.PerformLayout
-        Me.TabPage20.ResumeLayout(false)
-        Me.TabControl1.ResumeLayout(false)
-        Me.TabPage22.ResumeLayout(false)
-        Me.PNLGlitter.ResumeLayout(false)
-        Me.PNLGlitter.PerformLayout
-        Me.GBGlitterD.ResumeLayout(false)
-        Me.GBGlitterD.PerformLayout
-        CType(Me.GlitterSlider,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.GlitterAV,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBGlitter1.ResumeLayout(false)
-        Me.GBGlitter1.PerformLayout
-        CType(Me.GlitterSlider1,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.GlitterAV1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBGlitter3.ResumeLayout(false)
-        Me.GBGlitter3.PerformLayout
-        CType(Me.GlitterSlider3,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.GlitterAV3,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBGlitter2.ResumeLayout(false)
-        Me.GBGlitter2.PerformLayout
-        CType(Me.GlitterSlider2,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.GlitterAV2,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox26.ResumeLayout(false)
-        Me.TabPage23.ResumeLayout(false)
-        Me.TabPage23.PerformLayout
-        Me.GroupBox61.ResumeLayout(false)
-        Me.GroupBox61.PerformLayout
-        CType(Me.GP6,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.GP2,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.GP5,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.GP1,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.GP3,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.GP4,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox60.ResumeLayout(false)
-        CType(Me.CardBack,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox58.ResumeLayout(false)
-        Me.GroupBox58.PerformLayout
-        CType(Me.BP3,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.BP6,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.BP5,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.BP2,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.BP4,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.BP1,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox59.ResumeLayout(false)
-        Me.GroupBox59.PerformLayout
-        CType(Me.SP6,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.SP2,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.SP5,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.SP1,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.SP3,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.SP4,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage6.ResumeLayout(false)
-        Me.Panel10.ResumeLayout(false)
-        Me.Panel10.PerformLayout
-        CType(Me.NBWishlistCost,System.ComponentModel.ISupportInitialize).EndInit
-        Me.PNLWishList.ResumeLayout(false)
-        CType(Me.WishlistCostSilver,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.WishlistCostGold,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.WishlistPreview,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage4.ResumeLayout(false)
-        Me.Panel6.ResumeLayout(false)
-        Me.GroupBox10.ResumeLayout(false)
-        CType(Me.NBNextImageChance,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox57.ResumeLayout(false)
-        Me.GroupBox57.PerformLayout
-        CType(Me.SliderSTF,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.TauntSlider,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBTauntCycleMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBTauntCycleMin,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBTeaseLengthMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBTeaseLengthMin,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox56.ResumeLayout(false)
-        Me.GroupBox56.PerformLayout
-        CType(Me.NBRuinSometimes,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBRuinRarely,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBRuinOften,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox17.ResumeLayout(false)
-        Me.GroupBox19.ResumeLayout(false)
-        CType(Me.NBGreenLightMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBGreenLightMin,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBRedLightMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBRedLightMin,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox18.ResumeLayout(false)
-        Me.GroupBox18.PerformLayout
-        CType(Me.NBCensorShowMin,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBCensorHideMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBCensorHideMin,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBCensorShowMax,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox52.ResumeLayout(false)
-        Me.GroupBox52.PerformLayout
-        CType(Me.NBAllowSometimes,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBAllowRarely,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBAllowOften,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.PictureBox8,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox21.ResumeLayout(false)
-        Me.TabPage13.ResumeLayout(false)
-        Me.TabControl2.ResumeLayout(false)
-        Me.TabPage27.ResumeLayout(false)
-        Me.TabPage27.PerformLayout
-        Me.TabPage14.ResumeLayout(false)
-        Me.TabPage14.PerformLayout
-        Me.TabPage24.ResumeLayout(false)
-        Me.TabPage24.PerformLayout
-        Me.TabPage8.ResumeLayout(false)
-        Me.GroupBox29.ResumeLayout(false)
-        Me.GroupBox28.ResumeLayout(false)
-        Me.GroupBox30.ResumeLayout(false)
-        Me.TabPage15.ResumeLayout(false)
-        Me.TabPage15.PerformLayout
-        Me.GroupBox34.ResumeLayout(false)
-        Me.TabPage25.ResumeLayout(false)
-        Me.Panel11.ResumeLayout(false)
-        Me.GroupBox62.ResumeLayout(false)
-        Me.GroupBox62.PerformLayout
-        Me.GroupBox33.ResumeLayout(false)
-        CType(Me.MetroTest,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox27.ResumeLayout(false)
-        Me.GroupBox27.PerformLayout
-        Me.GroupBox20.ResumeLayout(false)
-        Me.GroupBox20.PerformLayout
-        Me.GroupBox15.ResumeLayout(false)
-        Me.GroupBox15.PerformLayout
-        CType(Me.PictureBox9,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage5.ResumeLayout(false)
-        Me.Panel5.ResumeLayout(false)
-        Me.Panel5.PerformLayout
-        CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
-        Me.ResumeLayout(false)
+        Me.SettingsPanel.ResumeLayout(False)
+        Me.SettingsTabs.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.PNLGeneralSettings.ResumeLayout(False)
+        Me.GBDommeImages.ResumeLayout(False)
+        Me.GBGeneralTextToSpeech.ResumeLayout(False)
+        Me.GBGeneralTextToSpeech.PerformLayout()
+        Me.GBSlideshowOptions.ResumeLayout(False)
+        Me.GBSlideshowOptions.PerformLayout()
+        CType(Me.slideshowNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBSafeword.ResumeLayout(False)
+        Me.GBSafeword.PerformLayout()
+        Me.GBGeneralSystem.ResumeLayout(False)
+        Me.GBGeneralSystem.PerformLayout()
+        Me.GBGeneralImages.ResumeLayout(False)
+        Me.GBGeneralImages.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBGeneralDesc.ResumeLayout(False)
+        Me.GBGeneralSettings.ResumeLayout(False)
+        Me.GBGeneralSettings.PerformLayout()
+        Me.GBSubFont.ResumeLayout(False)
+        CType(Me.NBFontSize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBDommeFont.ResumeLayout(False)
+        CType(Me.NBFontSizeD, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBDomTypingStyle.ResumeLayout(False)
+        Me.GBDomTypingStyle.PerformLayout()
+        Me.GBDomRanges.ResumeLayout(False)
+        CType(Me.NBDomMoodMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBDomMoodMin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBSubAgeMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBSubAgeMin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBSelfAgeMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBSelfAgeMin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBAvgCockMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBAvgCockMin, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBDomDescription.ResumeLayout(False)
+        Me.GBDomStats.ResumeLayout(False)
+        Me.GBDomStats.PerformLayout()
+        CType(Me.NBEmpathy, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBDomBirthdayDay, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.domageNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBDomBirthdayMonth, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.domlevelNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBDomPersonality.ResumeLayout(False)
+        Me.GBDomPersonality.PerformLayout()
+        Me.GBDomOrgasms.ResumeLayout(False)
+        Me.GBDomOrgasms.PerformLayout()
+        CType(Me.orgasmsPerNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBDomPetNames.ResumeLayout(False)
+        Me.GBDomPetNames.PerformLayout()
+        Me.TabPage10.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        Me.GroupBox45.ResumeLayout(False)
+        CType(Me.CBTSlider, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox35.ResumeLayout(False)
+        Me.GroupBox39.ResumeLayout(False)
+        Me.GroupBox39.PerformLayout()
+        Me.GroupBox38.ResumeLayout(False)
+        Me.GroupBox38.PerformLayout()
+        Me.GroupBox37.ResumeLayout(False)
+        Me.GroupBox37.PerformLayout()
+        Me.GroupBox36.ResumeLayout(False)
+        Me.GroupBox36.PerformLayout()
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
+        CType(Me.NBWritingTaskMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBWritingTaskMin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBHoldTheEdgeMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBLongEdge, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox12.ResumeLayout(False)
+        Me.GroupBox32.ResumeLayout(False)
+        Me.GroupBox32.PerformLayout()
+        CType(Me.NBBirthdayDay, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.subAgeNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBBirthdayMonth, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.CockSizeNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage16.ResumeLayout(False)
+        Me.Panel9.ResumeLayout(False)
+        Me.GroupBox31.ResumeLayout(False)
+        Me.TCScripts.ResumeLayout(False)
+        Me.TabPage21.ResumeLayout(False)
+        Me.TabPage17.ResumeLayout(False)
+        Me.TabPage18.ResumeLayout(False)
+        Me.TabPage19.ResumeLayout(False)
+        Me.GroupBox42.ResumeLayout(False)
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox43.ResumeLayout(False)
+        Me.TabPage7.ResumeLayout(False)
+        Me.Panel8.ResumeLayout(False)
+        Me.GroupBox16.ResumeLayout(False)
+        Me.GroupBox16.PerformLayout()
+        Me.GroupBox14.ResumeLayout(False)
+        CType(Me.PictureBox13, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox44.ResumeLayout(False)
+        Me.GroupBox47.ResumeLayout(False)
+        Me.GroupBox47.PerformLayout()
+        Me.GroupBox41.ResumeLayout(False)
+        Me.GroupBox41.PerformLayout()
+        Me.GroupBox40.ResumeLayout(False)
+        Me.GroupBox40.PerformLayout()
+        Me.TabPage12.ResumeLayout(False)
+        Me.PNLImageTag.ResumeLayout(False)
+        Me.PNLImageTag.PerformLayout()
+        CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox14, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage9.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        Me.GroupBox55.ResumeLayout(False)
+        Me.GroupBox55.PerformLayout()
+        Me.GroupBox53.ResumeLayout(False)
+        Me.GroupBox53.PerformLayout()
+        Me.GroupBox49.ResumeLayout(False)
+        Me.GroupBox49.PerformLayout()
+        Me.GroupBox46.ResumeLayout(False)
+        Me.GroupBox46.PerformLayout()
+        Me.GroupBox54.ResumeLayout(False)
+        Me.GroupBox54.PerformLayout()
+        Me.GroupBox51.ResumeLayout(False)
+        Me.GroupBox51.PerformLayout()
+        Me.GroupBox50.ResumeLayout(False)
+        Me.GroupBox50.PerformLayout()
+        Me.GroupBox48.ResumeLayout(False)
+        Me.GroupBox48.PerformLayout()
+        CType(Me.PictureBox7, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage11.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WebPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage3.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox25.ResumeLayout(False)
+        Me.GroupBox25.PerformLayout()
+        Me.GroupBox24.ResumeLayout(False)
+        Me.GroupBox24.PerformLayout()
+        Me.GroupBox23.ResumeLayout(False)
+        Me.GroupBox23.PerformLayout()
+        Me.GroupBox8.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.TabPage20.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage22.ResumeLayout(False)
+        Me.PNLGlitter.ResumeLayout(False)
+        Me.PNLGlitter.PerformLayout()
+        Me.GBGlitterD.ResumeLayout(False)
+        Me.GBGlitterD.PerformLayout()
+        CType(Me.GlitterSlider, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GlitterAV, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBGlitter1.ResumeLayout(False)
+        Me.GBGlitter1.PerformLayout()
+        CType(Me.GlitterSlider1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GlitterAV1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBGlitter3.ResumeLayout(False)
+        Me.GBGlitter3.PerformLayout()
+        CType(Me.GlitterSlider3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GlitterAV3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GBGlitter2.ResumeLayout(False)
+        Me.GBGlitter2.PerformLayout()
+        CType(Me.GlitterSlider2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GlitterAV2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox26.ResumeLayout(False)
+        Me.TabPage23.ResumeLayout(False)
+        Me.TabPage23.PerformLayout()
+        Me.GroupBox61.ResumeLayout(False)
+        Me.GroupBox61.PerformLayout()
+        CType(Me.GP6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GP2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GP5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GP1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GP3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GP4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox60.ResumeLayout(False)
+        CType(Me.CardBack, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox58.ResumeLayout(False)
+        Me.GroupBox58.PerformLayout()
+        CType(Me.BP3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BP6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BP5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BP2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BP4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.BP1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox59.ResumeLayout(False)
+        Me.GroupBox59.PerformLayout()
+        CType(Me.SP6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SP2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SP5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SP1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SP3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.SP4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage6.ResumeLayout(False)
+        Me.Panel10.ResumeLayout(False)
+        Me.Panel10.PerformLayout()
+        CType(Me.NBWishlistCost, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PNLWishList.ResumeLayout(False)
+        CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage4.ResumeLayout(False)
+        Me.Panel6.ResumeLayout(False)
+        Me.GroupBox10.ResumeLayout(False)
+        CType(Me.NBNextImageChance, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox57.ResumeLayout(False)
+        Me.GroupBox57.PerformLayout()
+        CType(Me.SliderSTF, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TauntSlider, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBTauntCycleMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBTauntCycleMin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBTeaseLengthMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBTeaseLengthMin, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox56.ResumeLayout(False)
+        Me.GroupBox56.PerformLayout()
+        CType(Me.NBRuinSometimes, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBRuinRarely, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBRuinOften, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox17.ResumeLayout(False)
+        Me.GroupBox19.ResumeLayout(False)
+        CType(Me.NBGreenLightMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBGreenLightMin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBRedLightMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBRedLightMin, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox18.ResumeLayout(False)
+        Me.GroupBox18.PerformLayout()
+        CType(Me.NBCensorShowMin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBCensorHideMax, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBCensorHideMin, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBCensorShowMax, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox52.ResumeLayout(False)
+        Me.GroupBox52.PerformLayout()
+        CType(Me.NBAllowSometimes, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBAllowRarely, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBAllowOften, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox21.ResumeLayout(False)
+        Me.TabPage13.ResumeLayout(False)
+        Me.TabControl2.ResumeLayout(False)
+        Me.TabPage27.ResumeLayout(False)
+        Me.TabPage27.PerformLayout()
+        Me.TabPage14.ResumeLayout(False)
+        Me.TabPage14.PerformLayout()
+        Me.TabPage24.ResumeLayout(False)
+        Me.TabPage24.PerformLayout()
+        Me.TabPage8.ResumeLayout(False)
+        Me.GroupBox29.ResumeLayout(False)
+        Me.GroupBox28.ResumeLayout(False)
+        Me.GroupBox30.ResumeLayout(False)
+        Me.TabPage15.ResumeLayout(False)
+        Me.TabPage15.PerformLayout()
+        Me.GroupBox34.ResumeLayout(False)
+        Me.TabPage25.ResumeLayout(False)
+        Me.Panel11.ResumeLayout(False)
+        Me.GroupBox62.ResumeLayout(False)
+        Me.GroupBox62.PerformLayout()
+        Me.GroupBox33.ResumeLayout(False)
+        CType(Me.MetroTest, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox27.ResumeLayout(False)
+        Me.GroupBox27.PerformLayout()
+        Me.GroupBox20.ResumeLayout(False)
+        Me.GroupBox20.PerformLayout()
+        Me.GroupBox15.ResumeLayout(False)
+        Me.GroupBox15.PerformLayout()
+        CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage5.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage26.ResumeLayout(False)
+        Me.Panel12.ResumeLayout(False)
+        CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox11.ResumeLayout(False)
+        CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
+        Me.GroupBox9.ResumeLayout(False)
+        Me.ResumeLayout(False)
 
 End Sub
     Friend WithEvents SettingsPanel As System.Windows.Forms.Panel
@@ -12964,4 +13455,43 @@ End Sub
     Friend WithEvents RBGerman As System.Windows.Forms.RadioButton
     Friend WithEvents RBEnglish As System.Windows.Forms.RadioButton
     Friend WithEvents MetroTest As System.Windows.Forms.NumericUpDown
+    Friend WithEvents TabPage26 As System.Windows.Forms.TabPage
+    Friend WithEvents Panel12 As System.Windows.Forms.Panel
+    Friend WithEvents PictureBox10 As System.Windows.Forms.PictureBox
+    Friend WithEvents GroupBox11 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label144 As System.Windows.Forms.Label
+    Friend WithEvents Label164 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents PBBackgroundPreview As System.Windows.Forms.PictureBox
+    Friend WithEvents Button17 As System.Windows.Forms.Button
+    Friend WithEvents CBStretchBack As System.Windows.Forms.CheckBox
+    Friend WithEvents Button18 As System.Windows.Forms.Button
+    Friend WithEvents GroupBox5 As System.Windows.Forms.GroupBox
+    Friend WithEvents LBLTextColor As System.Windows.Forms.Label
+    Friend WithEvents LBLChatWindowColor2 As System.Windows.Forms.Label
+    Friend WithEvents Button20 As System.Windows.Forms.Button
+    Friend WithEvents LBLTextColor2 As System.Windows.Forms.Label
+    Friend WithEvents LBLChatTextColor As System.Windows.Forms.Label
+    Friend WithEvents LBLBackColor2 As System.Windows.Forms.Label
+    Friend WithEvents LBLButtonColor As System.Windows.Forms.Label
+    Friend WithEvents LBLChatWindowColor As System.Windows.Forms.Label
+    Friend WithEvents LBLBackColor As System.Windows.Forms.Label
+    Friend WithEvents Button21 As System.Windows.Forms.Button
+    Friend WithEvents Button23 As System.Windows.Forms.Button
+    Friend WithEvents LBLChatTextColor2 As System.Windows.Forms.Label
+    Friend WithEvents Button25 As System.Windows.Forms.Button
+    Friend WithEvents Button27 As System.Windows.Forms.Button
+    Friend WithEvents LBLButtonColor2 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label136 As System.Windows.Forms.Label
+    Friend WithEvents Label137 As System.Windows.Forms.Label
+    Friend WithEvents Label138 As System.Windows.Forms.Label
+    Friend WithEvents Button28 As System.Windows.Forms.Button
+    Friend WithEvents Button30 As System.Windows.Forms.Button
+    Friend WithEvents Label139 As System.Windows.Forms.Label
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents Button31 As System.Windows.Forms.Button
+    Friend WithEvents Label140 As System.Windows.Forms.Label
+    Friend WithEvents Button32 As System.Windows.Forms.Button
+    Friend WithEvents Label141 As System.Windows.Forms.Label
 End Class

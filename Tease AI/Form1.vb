@@ -499,6 +499,8 @@ Public Class Form1
 
     Dim InputIcon As Boolean
 
+    Dim FilterL As New List(Of String)
+
 
 
     Private Const DISABLE_SOUNDS As Integer = 21
@@ -743,7 +745,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSplash.Refresh()
 
         If File.Exists(My.Settings.DomAvatarSave) Then domAvatar.Image = Image.FromFile(My.Settings.DomAvatarSave)
-        If File.Exists(My.Settings.SubAvatarSave) Then subAvatar.Image = Image.FromFile(My.Settings.SubAvatarSave)
+        'If File.Exists(My.Settings.SubAvatarSave) Then subAvatar.Image = Image.FromFile(My.Settings.SubAvatarSave)
 
 
         FrmSplash.PBSplash.Value += 1
@@ -1296,7 +1298,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         DomWMP.Height = SplitContainer1.Panel1.Height + 60
 
         If My.Settings.DomAVStretch = False Then domAvatar.SizeMode = PictureBoxSizeMode.Zoom
-        If My.Settings.SubAvStretch = False Then subAvatar.SizeMode = PictureBoxSizeMode.Zoom
+        'If My.Settings.SubAvStretch = False Then subAvatar.SizeMode = PictureBoxSizeMode.Zoom
 
         HoldEdgeTimeTotal = My.Settings.HoldEdgeTimeTotal
 
@@ -1514,7 +1516,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             Me.Height = My.Settings.WindowHeight
         End If
 
-        AdjustWindow()
+
 
         TeaseAIClock.Start()
 
@@ -1539,6 +1541,12 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         Me.Left = (Screen.PrimaryScreen.WorkingArea.Width - Me.Width) / 2
 3:
         Me.Top = (Screen.PrimaryScreen.WorkingArea.Height - Me.Height) / 2
+
+        AdjustWindow()
+
+        'TabControl1.ColorScheme.TabBackground = Color.Transparent
+        'TabControl1.ColorScheme.TabBackground2 = Color.Transparent
+        'TabControl1.BackColor = Color.Transparent
 
         Debug.Print("Form1 Loading Finished")
 
@@ -1731,33 +1739,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End If
 
 
-
-        If My.Settings.UI768 = True Then
-            'If PNLMediaBar.Visible = True Then
-            'ChatText.Location = New Point(0, 29)
-            'Else
-            '   ChatText.Location = New Point(0, 0)
-            'End If
-            ChatText.Width = SplitContainer1.Width - 3
-        End If
-
-        If My.Settings.LargeUI = True Then
-            'If PNLMediaBar.Visible = True Then
-            'ChatText.Location = New Point(0, 29)
-            'Else
-            'ChatText.Location = New Point(0, 0)
-            'End If
-            'ChatText.Width = 1089
-        End If
-
-        If My.Settings.SmallUI = True Then
-            If PNLMediaBar.Visible = True Then
-                ChatText.Location = New Point(0, 29)
-            Else
-                ChatText.Location = New Point(0, 0)
-            End If
-            ChatText.Width = SplitContainer1.Width - 3
-        End If
 
         ScrollChatDown()
 
@@ -5210,32 +5191,7 @@ NullResponse:
 
 EndSysMes:
 
-                    If My.Settings.UI768 = True Then
-                        If PNLMediaBar.Visible = True Then
-                            ChatText.Location = New Point(0, 29)
-                        Else
-                            ChatText.Location = New Point(0, 0)
-                        End If
-                        ChatText.Width = SplitContainer1.Width - 3
-                    End If
-
-                    If My.Settings.LargeUI = True Then
-                        If PNLMediaBar.Visible = True Then
-                            ChatText.Location = New Point(0, 29)
-                        Else
-                            ChatText.Location = New Point(0, 0)
-                        End If
-                        ChatText.Width = SplitContainer1.Width - 3
-                    End If
-
-                    If My.Settings.SmallUI = True Then
-                        If PNLMediaBar.Visible = True Then
-                            ChatText.Location = New Point(0, 29)
-                        Else
-                            ChatText.Location = New Point(0, 0)
-                        End If
-                        ChatText.Width = SplitContainer1.Width - 3
-                    End If
+                   
 
                     ScrollChatDown()
 
@@ -5938,32 +5894,7 @@ TryNextWithTease:
 
 EndSysMes:
 
-                If My.Settings.UI768 = True Then
-                    If PNLMediaBar.Visible = True Then
-                        ChatText.Location = New Point(0, 29)
-                    Else
-                        ChatText.Location = New Point(0, 0)
-                    End If
-                    ChatText.Width = SplitContainer1.Width - 3
-                End If
-
-                If My.Settings.LargeUI = True Then
-                    If PNLMediaBar.Visible = True Then
-                        ChatText.Location = New Point(0, 29)
-                    Else
-                        ChatText.Location = New Point(0, 0)
-                    End If
-                    ChatText.Width = SplitContainer1.Width - 3
-                End If
-
-                If My.Settings.SmallUI = True Then
-                    If PNLMediaBar.Visible = True Then
-                        ChatText.Location = New Point(0, 29)
-                    Else
-                        ChatText.Location = New Point(0, 0)
-                    End If
-                    ChatText.Width = SplitContainer1.Width - 3
-                End If
+           
 
                 ScrollChatDown()
 
@@ -8385,15 +8316,15 @@ StatusUpdateEnd:
         End If
     End Sub
 
-    Private Sub subAvatar_Click(sender As System.Object, e As System.EventArgs) Handles subAvatar.Click
+    Private Sub subAvatar_Click(sender As System.Object, e As System.EventArgs)
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Try
-                subAvatar.Image.Dispose()
+                'subAvatar.Image.Dispose()
             Catch
             End Try
-            subAvatar.Image = Nothing
+            'subAvatar.Image = Nothing
             GC.Collect()
-            subAvatar.Image = Image.FromFile(OpenFileDialog1.FileName)
+            'subAvatar.Image = Image.FromFile(OpenFileDialog1.FileName)
             My.Settings.SubAvatarSave = OpenFileDialog1.FileName
             My.Settings.Save()
         End If
@@ -8481,8 +8412,8 @@ StatusUpdateEnd:
         If PNLMediaBar.Visible = True Then
             PNLMediaBar.Visible = False
             MediaButton.Text = "Show Media Panel"
-            ChatText.Location = New Point(0, 0)
-            ChatText.Height = ChatText.Height + 29
+            'ChatText.Location = New Point(0, 0)
+            'ChatText.Height = ChatText.Height + 29
 
             browsefolderButton.Visible = False
             previousButton.Visible = False
@@ -8494,8 +8425,8 @@ StatusUpdateEnd:
 
             PNLMediaBar.Visible = True
             MediaButton.Text = "Hide Media Panel"
-            ChatText.Location = New Point(0, 29)
-            ChatText.Height = ChatText.Height - 29
+            'ChatText.Location = New Point(0, 29)
+            'ChatText.Height = ChatText.Height - 29
 
             browsefolderButton.Visible = True
             previousButton.Visible = True
@@ -8504,6 +8435,8 @@ StatusUpdateEnd:
             BTNVideoControls.Visible = True
 
         End If
+
+        AdjustWindow()
 
        ScrollChatDown()
 
@@ -8802,10 +8735,12 @@ StatusUpdateEnd:
         StringClean = StringClean.Replace("#CurrentDay", Format(Now, "dddd"))
         StringClean = StringClean.Replace("#CurrentMonth", Format(Now, "MMMMM"))
         StringClean = StringClean.Replace("#CurrentYear", Format(Now, "yyyy"))
-        StringClean = StringClean.Replace("#CurrentDate", Format(Now, "MM/dd/yyyy"))
+        StringClean = StringClean.Replace("#CurrentDate", FormatDateTime(Date.Now, DateFormat.ShortDate))
+        ' StringClean = StringClean.Replace("#CurrentDate", Format(Now, "MM/dd/yyyy"))
 
+        ' 
 
-
+        
         
 
 
@@ -9340,7 +9275,122 @@ RinseLatherRepeat:
 
         End If
 
-        ' The @RoundVar Command is used to take an existing Variable and round it by the amount specified. The correct syntax is @Round[VarName]=[RoundAmount]
+        ' The @SetDate() Command allows you to set a time and date that's a specified amount of time in the future from the current time and date. Correct format is @SetDate(VarName, TimeAmount) .
+        ' For example, @SetDate(EdgingStop, 1 Hour) would set a Variable called "EdgingStop" whose value is 1 hour away from the current time and date. As another example, @SetDate(NextOrgasmChance, 2 Weeks)
+        ' would create a Variable called "NextOrgasmChance" whose value is 2 weeks from the current date.
+        ' The available time increments are - Seconds, Minutes, Hours, Days, Weeks, Months and Years. When designating an amount of time, capitalization and pluralization do not matter. If no increment is
+        ' specified, "Days" will be used.
+
+        If StringClean.Contains("@SetDate(") Then
+
+            Dim CheckArray As String() = StringClean.Split(")")
+            Dim OriginalCheck As String
+
+            For i As Integer = 0 To CheckArray.Count - 1
+
+                If CheckArray(i).Contains("@SetDate(") Then
+
+                    'CheckArray(i) = CheckArray(i) & "]"
+
+                    Dim CheckFlag As String = GetParentheses(CheckArray(i), "@SetDate(")
+                    OriginalCheck = CheckFlag
+
+                    Debug.Print("Original Check = " & OriginalCheck)
+
+                    CheckFlag = CheckFlag.Replace(", ", ",")
+                    CheckFlag = CheckFlag.Replace(" ,", ",")
+
+                    Dim FlagArray() As String = CheckFlag.Split(",")
+
+                    Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
+
+                    If UCase(FlagArray(1)).Contains(UCase("SECOND")) Then SetDate = DateAdd(DateInterval.Second, Val(FlagArray(1)), SetDate)
+                    If UCase(FlagArray(1)).Contains(UCase("MINUTE")) Then SetDate = DateAdd(DateInterval.Minute, Val(FlagArray(1)), SetDate)
+                    If UCase(FlagArray(1)).Contains(UCase("HOUR")) Then SetDate = DateAdd(DateInterval.Hour, Val(FlagArray(1)), SetDate)
+                    If UCase(FlagArray(1)).Contains(UCase("DAY")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
+                    If UCase(FlagArray(1)).Contains(UCase("WEEK")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)) * 7, SetDate)
+                    If UCase(FlagArray(1)).Contains(UCase("MONTH")) Then SetDate = DateAdd(DateInterval.Month, Val(FlagArray(1)), SetDate)
+                    If UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Year, Val(FlagArray(1)), SetDate)
+
+                    If Not UCase(FlagArray(1)).Contains(UCase("SECOND")) And Not UCase(FlagArray(1)).Contains(UCase("MINUTE")) And Not UCase(FlagArray(1)).Contains(UCase("HOUR")) _
+                        And Not UCase(FlagArray(1)).Contains(UCase("DAY")) And Not UCase(FlagArray(1)).Contains(UCase("WEEK")) And Not UCase(FlagArray(1)).Contains(UCase("MONTH")) _
+                        And Not UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
+
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0), FormatDateTime(SetDate, DateFormat.GeneralDate), False)
+
+                    Debug.Print("CheckArray(i) = " & CheckArray(i))
+
+                    CheckArray(i) = CheckArray(i).Replace("@SetDate(" & OriginalCheck, "")
+
+                End If
+
+            Next
+
+            StringClean = Join(CheckArray, Nothing)
+
+
+
+        End If
+
+        ' The @CheckDate() Command checks a previously saved Variable created with the @SetDate() Command and goes to the specified line if the current time and date is on or after the date in the Variable.
+        ' Correct format is @CheckDate(VarName, Goto Line) . For example, @CheckDate(NoPorn, Look At Porn Again) will go to the line (Look At Porn Again) if the current time and date has passed the value set
+        ' for the Variable "NoPorn" by @SetDate()
+
+
+        If StringClean.Contains("@CheckDate(") Then
+
+            Dim CheckArray As String() = StringClean.Split(")")
+
+            For i As Integer = 0 To CheckArray.Count - 1
+
+                If CheckArray(i).Contains("@CheckDate(") Then
+
+                    'CheckArray(i) = CheckArray(i) & "]"
+
+                    Dim CheckFlag As String = GetParentheses(CheckArray(i), "@CheckDate(")
+                    Dim OriginalCheck As String = CheckFlag
+
+                    CheckFlag = CheckFlag.Replace(", ", ",")
+                    CheckFlag = CheckFlag.Replace(" ,", ",")
+
+                    Dim FlagArray() As String = CheckFlag.Split(",")
+
+                    If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0)) Then
+
+                        Dim DateReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0))
+                        Dim CheckDate As Date
+
+                        While DateReader.Peek <> -1
+                            CheckDate = DateReader.ReadLine()
+                        End While
+
+                        DateReader.Close()
+                        DateReader.Dispose()
+
+                        Debug.Print("CheckDate " & CheckDate)
+
+                        If CompareDatesWithTime(CheckDate) <> 1 Then
+                            SkipGotoLine = True
+                            FileGoto = FlagArray(1).Replace(")", "")
+                            GetGoto()
+                        End If
+
+
+                    End If
+
+                    CheckArray(i) = CheckArray(i).Replace("@CheckDate(" & OriginalCheck, "")
+
+                End If
+
+            Next
+
+            StringClean = Join(CheckArray, Nothing)
+
+        End If
+
+
+
+        ' The @RoundVar Command is used to take an existing Variable and round it by the amount specified. The correct format is @Round[VarName]=[RoundAmount]
         ' For example, @RoundVar[StrokeTotal]=[10] wound round the Variable "StrokeTotal" by 10.
         ' @Round[] will only round the and save Variable, it will not dispaly it. More than one @Round[] Command can be used per line
 
@@ -9395,91 +9445,100 @@ RinseLatherRepeat:
 
         End If
 
+        ' The @ChangeVar[] Command is used to Value of a new or existing Variable and round it by the amount specified. The correct format is @ChangeVar[VarName]=[Value1]+[Value2]
+        ' For example, @ChangeVar[StrokeTotal]=[StrokeTotal]+[100] would add 100 to the current value of "StrokeTotal" and save it. If "StrokeTotal" did not previously exist, then it would be created
+        ' with a value of 100 in this case, since nothing + 100 equals 100. You can use @ChangeVar[] to add, subtract, multiply or divide with the operators +, -, * and /
+        'More than one @ChangeVar[] Command can be used per line.
 
-        If StringClean.Contains("@ChangeVar") Then
+        If StringClean.Contains("@ChangeVar[") Then
 
+            Dim ChangeArray As String() = StringClean.Split
 
-            Debug.Print("CHangeVar Stringclean = " & StringClean)
+            For i As Integer = 0 To ChangeArray.Count - 1
 
-            Dim ChangeFlag As String = StringClean
-            Dim ChangeStart As Integer = ChangeFlag.IndexOf("@ChangeVar[") + 11
+                Debug.Print("CHangeVar ChangeArray(i) = " & ChangeArray(i))
 
-            Dim ChangeVar As String
-            Dim ChangeVal1 As String
-            Dim ChangeVal2 As String
-            Dim ChangeOperator As String
+                If ChangeArray(i).Contains("@ChangeVar[") Then
 
-            Dim Val1 As Integer
-            Dim Val2 As Integer
+                    Dim ChangeFlag As String = ChangeArray(i)
+                    Dim ChangeStart As Integer = ChangeFlag.IndexOf("@ChangeVar[") + 11
 
+                    Dim ChangeVar As String
+                    Dim ChangeVal1 As String
+                    Dim ChangeVal2 As String
+                    Dim ChangeOperator As String
 
-            'Dim CFIndex As Integer = VarSplit(i).IndexOf("@ShowVar[") + 9
-            'CheckFlag = VarSplit(i).Substring(CFIndex, VarSplit(i).Length - CFIndex).Replace("@ShowVar[", "")
+                    Dim Val1 As Integer
+                    Dim Val2 As Integer
 
+                    ChangeFlag = ChangeArray(i).Substring(ChangeStart, ChangeArray(i).Length - ChangeStart)
+                    ChangeVar = ChangeFlag.Split("]")(0)
+                    ChangeVal1 = ChangeFlag.Split("]")(1)
+                    ChangeVal2 = ChangeFlag.Split("]")(2)
+                    ChangeOperator = ChangeFlag.Split("]")(2)
 
-            ChangeFlag = StringClean.Substring(ChangeStart, StringClean.Length - ChangeStart)
-            ChangeVar = ChangeFlag.Split("]")(0)
-            ChangeVal1 = ChangeFlag.Split("]")(1)
-            ChangeVal2 = ChangeFlag.Split("]")(2)
-            ChangeOperator = ChangeFlag.Split("]")(2)
+                    ChangeArray(i) = ChangeArray(i).Replace("@ChangeVar[" & ChangeVar & "]" & ChangeVal1 & "]" & ChangeVal2 & "]", "")
 
-            StringClean = StringClean.Replace("@ChangeVar[" & ChangeVar & "]" & ChangeVal1 & "]" & ChangeVal2 & "]", "")
+                    ChangeVar = ChangeVar.Replace("@ChangeVar[", "")
+                    ChangeVal1 = ChangeVal1.Replace("=[", "")
+                    ChangeVal2 = ChangeVal2.Replace("+[", "")
+                    ChangeVal2 = ChangeVal2.Replace("-[", "")
+                    ChangeVal2 = ChangeVal2.Replace("*[", "")
+                    ChangeVal2 = ChangeVal2.Replace("/[", "")
 
-            ChangeVar = ChangeVar.Replace("@ChangeVar[", "")
-            ChangeVal1 = ChangeVal1.Replace("=[", "")
-            ChangeVal2 = ChangeVal2.Replace("+[", "")
-            ChangeVal2 = ChangeVal2.Replace("-[", "")
-            ChangeVal2 = ChangeVal2.Replace("*[", "")
-            ChangeVal2 = ChangeVal2.Replace("/[", "")
+                    '@ChangeVar[TB_EdgeHoldingOwed   ]    =[TB_EdgeHoldingOwed    ]     -[1       ]
 
+                    If IsNumeric(ChangeVal1) = False Then
+                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1) Then
+                            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1)
+                            Val1 = Val(VarReader.ReadLine())
+                            VarReader.Close()
+                            VarReader.Dispose()
+                        Else
+                            Val1 = 0
+                        End If
+                    Else
+                        Val1 = Val(ChangeVal1)
+                    End If
 
-            '@ChangeVar[TB_EdgeHoldingOwed   ]    =[TB_EdgeHoldingOwed    ]     -[1       ]
+                    If IsNumeric(ChangeVal2) = False Then
+                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2) Then
+                            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2)
+                            Val2 = Val(VarReader.ReadLine())
+                            VarReader.Close()
+                            VarReader.Dispose()
+                        Else
+                            Val2 = 0
+                        End If
+                    Else
+                        Val2 = Val(ChangeVal2)
+                    End If
 
-            If IsNumeric(ChangeVal1) = False Then
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1) Then
-                    Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1)
-                    Val1 = Val(VarReader.ReadLine())
-                    VarReader.Close()
-                    VarReader.Dispose()
-                Else
-                    Val1 = 0
+                    ScriptOperator = "Null"
+                    If ChangeOperator.Contains("+") Then ScriptOperator = "Add"
+                    If ChangeOperator.Contains("-") Then ScriptOperator = "Subtract"
+                    If ChangeOperator.Contains("*") Then ScriptOperator = "Multiply"
+                    If ChangeOperator.Contains("/") Then ScriptOperator = "Divide"
+
+                    Dim ChangeVal As Integer = 0
+
+                    If ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
+                    If ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
+                    If ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
+                    If ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
+
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
+
                 End If
-            Else
-                Val1 = Val(ChangeVal1)
-            End If
 
-            If IsNumeric(ChangeVal2) = False Then
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2) Then
-                    Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2)
-                    Val2 = Val(VarReader.ReadLine())
-                    VarReader.Close()
-                    VarReader.Dispose()
-                Else
-                    Val2 = 0
-                End If
-            Else
-                Val2 = Val(ChangeVal2)
-            End If
-
-            ScriptOperator = "Null"
-            If ChangeOperator.Contains("+") Then ScriptOperator = "Add"
-            If ChangeOperator.Contains("-") Then ScriptOperator = "Subtract"
-            If ChangeOperator.Contains("*") Then ScriptOperator = "Multiply"
-            If ChangeOperator.Contains("/") Then ScriptOperator = "Divide"
-
-            Dim ChangeVal As Integer = 0
-
-            If ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
-            If ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
-            If ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
-            If ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
-
-            'Debug.Print("ChangeVal = " & ChangeVal)
-
-            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
+            Next
 
         End If
 
+        ' The @If[] Command allows you to compare Variables and go to a specific line if the statement is true. The correct format is @If[VarName]>[varName2]Then(Goto Line)
+        ' For example, If[StrokeTotal]>[1000]Then(Thousand Strokes) would check if the Variable "StrokeTotal" is greater than 1000, and go to (Thousand Strokes) if so. 
+        ' The @If[] Command can compare any combination of Variables and numeric values with = (or ==), <>, >, <, >= and <= . String Variables can be compared with = (or ==) and <> 
+        ' More than one @If[] Command can be used per line. Tease AI will move to the line specified by whichever true statement happened last in the line.
 
         If StringClean.Contains("@If[") Then
 
@@ -9548,10 +9607,7 @@ RinseLatherRepeat:
 
                 End If
 
-
                 Debug.Print("Val1 = " & Val1)
-
-
 
                 'Debug.Print("@SetVar VarDifference = " & Val1)
 
@@ -9677,9 +9733,7 @@ RinseLatherRepeat:
                         If Val1 <= Val2 Then CompareCheck = SCGotVarSplit(1)
                     End If
 
-
                 End If
-
 
                 'Debug.Print("CompareCheck = " & CompareCheck)
 
@@ -9692,6 +9746,10 @@ RinseLatherRepeat:
             Loop Until Not StringClean.Contains("@If")
 
         End If
+
+
+        ' The @ShowVar[] Command is used to show the value of an existing Variable. The correct format is @ShowVar[VarName]
+        ' More than one @ShowVar[] Commands can be used per line
 
         If StringClean.Contains("@ShowVar") Then
 
@@ -9711,7 +9769,6 @@ RinseLatherRepeat:
                     Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & CheckFlag
                     Debug.Print("VarCheck = " & VarCheck)
                     If File.Exists(VarCheck) Then
-                        Debug.Print("VarCheck Exists787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878787878")
                         Dim VarReader As New StreamReader(VarCheck)
                         VarValue = VarReader.ReadLine()
                         VarReader.Close()
@@ -9734,14 +9791,10 @@ RinseLatherRepeat:
 
         End If
 
-
-
         ' The @InputVar[] stops script progression and waits for the user to input his next message. Whatever the user types next will be saved as a Variable named whatever you specify in the brackets.
         ' For example, if the script's line was "What's your favorite food? @InputVar[FavoriteFood]", and the user typed "lo mein", then "lo mein" would be saved as the Variable "FavoriteFood". If the
         ' user has checked "Show Icon During Input Questions" in the General Settings tab, then the domme's question will be accompanied by a small question mark icon to let the user know that their next
         ' response will be saved verbatim. @InputVar[] will pause Linear Scripts, as well as countdowns and taunts for Stroking, Edging and Holding The Edge.
-
-
 
         If StringClean.Contains("@InputVar[") Then
 
@@ -9754,9 +9807,7 @@ RinseLatherRepeat:
         End If
 
 
-        '  ┌─┐╔╦╗┬┌─┐┬  ┬┬┌─┌─┐╔╗ ┬  ┌─┐┌─┐╦┌┬┐┌─┐┌─┐┌─┐
-        '  │└┘ ║║│└─┐│  │├┴┐├┤ ╠╩╗│  │ ││ ┬║│││├─┤│ ┬├┤ 
-        '  └──═╩╝┴└─┘┴─┘┴┴ ┴└─┘╚═╝┴─┘└─┘└─┘╩┴ ┴┴ ┴└─┘└─┘
+        ' The @DislikeBlogImage Command takes the URL of the most recently viewed blog image and adds it to the "Disliked" list located in [Tease AI Root Directory]\Images\System\DislikedImageURLS.txt
 
         If StringClean.Contains("@DislikeBlogImage") Then
 
@@ -9772,9 +9823,7 @@ RinseLatherRepeat:
 
         End If
 
-        '  ┌─┐╦  ┬┬┌─┌─┐╔╗ ┬  ┌─┐┌─┐╦┌┬┐┌─┐┌─┐┌─┐
-        '  │└┘║  │├┴┐├┤ ╠╩╗│  │ ││ ┬║│││├─┤│ ┬├┤ 
-        '  └──╩═╝┴┴ ┴└─┘╚═╝┴─┘└─┘└─┘╩┴ ┴┴ ┴└─┘└─┘
+        ' The @LikeBlogImage Command takes the URL of the most recently viewed blog image and adds it to the "Liked" list located in [Tease AI Root Directory]\Images\System\LikedImageURLS.txt
 
         If StringClean.Contains("@LikeBlogImage") Then
 
@@ -10080,7 +10129,7 @@ RinseLatherRepeat:
         End If
 
 
-       
+
 
 
         If StringClean.Contains("@EdgeToRuinHoldNoSecret(") Then
@@ -10183,7 +10232,7 @@ RinseLatherRepeat:
 
 
 
-        
+
 
         If StringClean.Contains("@EdgeToRuinHold(") Then
 
@@ -10644,7 +10693,7 @@ OrgasmDecided:
         End If
 
 
-       
+
 
 
         If StringClean.Contains("@GotoDommeOrgasm") Then
@@ -13928,48 +13977,6 @@ VTSkip:
         PoundCount = PoundLine
         Do
             PoundCount -= 1
-            If ListClean(PoundCount).Contains("@TagSeeThrough") Then
-                If Not FoundTag.Contains("TagSeeThrough") Then
-                    If StrokeFilter = True Then
-                        For i As Integer = 0 To StrokeTauntCount - 1
-                            ListClean.Remove(ListClean(PoundCount))
-                            PoundLine -= 1
-                        Next
-                    Else
-                        ListClean.Remove(ListClean(PoundCount))
-                        PoundLine -= 1
-                    End If
-                Else
-                    'Debug.Print("FoundTag Contains TagPiercing")
-                End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPiercing", "")
-            End If
-        Loop Until PoundCount = 0
-
-        PoundCount = PoundLine
-        Do
-            PoundCount -= 1
-            If ListClean(PoundCount).Contains("@TagAllFours") Then
-                If Not FoundTag.Contains("TagAllFours") Then
-                    If StrokeFilter = True Then
-                        For i As Integer = 0 To StrokeTauntCount - 1
-                            ListClean.Remove(ListClean(PoundCount))
-                            PoundLine -= 1
-                        Next
-                    Else
-                        ListClean.Remove(ListClean(PoundCount))
-                        PoundLine -= 1
-                    End If
-                Else
-                    'Debug.Print("FoundTag Contains TagPiercing")
-                End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPiercing", "")
-            End If
-        Loop Until PoundCount = 0
-
-        PoundCount = PoundLine
-        Do
-            PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagGarment") Then
                 If Not FoundTag.Contains("TagGarment") Then
                     If StrokeFilter = True Then
@@ -15099,7 +15106,7 @@ VTSkip:
 
             ListCount = LocalTagImageList.Count - 1
 
-           
+
 
             'If Not supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
 
@@ -16211,7 +16218,7 @@ VTSkip:
 
         End If
 
-       
+
 
         PoundCount = PoundLine
         Do
@@ -16328,6 +16335,12 @@ VTSkip:
         
 
     End Sub
+
+
+   
+
+
+
 
     Private Sub chatbox_KeyDown(sender As Object, e As KeyEventArgs) Handles chatBox.KeyDown
 
@@ -19296,23 +19309,23 @@ TryNext:
         My.Settings.Save()
 
     End Sub
-    Private Sub subAvatar_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles subAvatar.MouseEnter
-        If FrmSettings.Visible = False And FrmCardList.Visible = False Then subAvatar.Focus()
+    Private Sub subAvatar_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs)
+        ' If FrmSettings.Visible = False And FrmCardList.Visible = False Then subAvatar.Focus()
     End Sub
 
-    Private Sub subAvatar_MouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles subAvatar.MouseWheel
+    Private Sub subAvatar_MouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs)
 
 
 
-        If subAvatar.SizeMode = PictureBoxSizeMode.StretchImage Then
-            subAvatar.SizeMode = PictureBoxSizeMode.Zoom
-            My.Settings.SubAvStretch = False
-        Else
-            subAvatar.SizeMode = PictureBoxSizeMode.StretchImage
-            My.Settings.SubAvStretch = True
-        End If
+        'If subAvatar.SizeMode = PictureBoxSizeMode.StretchImage Then
+        'subAvatar.SizeMode = PictureBoxSizeMode.Zoom
+        ' My.Settings.SubAvStretch = False
+        'Else
+        ' subAvatar.SizeMode = PictureBoxSizeMode.StretchImage
+        'My.Settings.SubAvStretch = True
+        ' End If
 
-        My.Settings.Save()
+        ' My.Settings.Save()
     End Sub
 
     Private Sub Button2_Click(sender As System.Object, e As System.EventArgs)
@@ -19891,17 +19904,7 @@ TryNext:
 
     
     
-    Private Sub BTNShowHideApps_Click(sender As System.Object, e As System.EventArgs) Handles BTNShowHideApps.Click
-        If frmApps.Visible = True Then
-            frmApps.Visible = False
-            chatBox.Focus()
-            BTNShowHideApps.Text = "Show Apps"
-        Else
-            frmApps.Show()
-            chatBox.Focus()
-            BTNShowHideApps.Text = "Hide Apps"
-        End If
-    End Sub
+   
    
 
    
@@ -20111,6 +20114,14 @@ TryNext:
 
         Dim result As Integer = DateTime.Compare(FormatDateTime(CheckDate, DateFormat.ShortDate), FormatDateTime(Now, DateFormat.ShortDate))
         Debug.Print("Compare dates: " & FormatDateTime(CheckDate, DateFormat.ShortDate) & " <-> " & FormatDateTime(Now, DateFormat.ShortDate) & " = " & result)
+        Return result
+
+    End Function
+
+    Public Function CompareDatesWithTime(ByVal CheckDate As Date) As Integer
+
+        Dim result As Integer = DateTime.Compare(FormatDateTime(CheckDate, DateFormat.GeneralDate), FormatDateTime(Now, DateFormat.GeneralDate))
+        Debug.Print("Compare dates: " & FormatDateTime(CheckDate, DateFormat.GeneralDate) & " <-> " & FormatDateTime(Now, DateFormat.GeneralDate) & " = " & result)
         Return result
 
     End Function
@@ -21514,32 +21525,7 @@ TryNext:
         End While
         ScrollChatDown()
 
-        If My.Settings.UI768 = True Then
-            If PNLMediaBar.Visible = True Then
-                ChatText.Location = New Point(0, 29)
-            Else
-                ChatText.Location = New Point(0, 0)
-            End If
-            ChatText.Width = SplitContainer1.Width - 3
-        End If
-
-        If My.Settings.LargeUI = True Then
-            If PNLMediaBar.Visible = True Then
-                ChatText.Location = New Point(0, 29)
-            Else
-                ChatText.Location = New Point(0, 0)
-            End If
-            ChatText.Width = SplitContainer1.Width - 3
-        End If
-
-        If My.Settings.SmallUI = True Then
-            If PNLMediaBar.Visible = True Then
-                ChatText.Location = New Point(0, 29)
-            Else
-                ChatText.Location = New Point(0, 0)
-            End If
-            ChatText.Width = SplitContainer1.Width - 3
-        End If
+       
 
         ScrollChatDown()
 
@@ -21608,17 +21594,37 @@ TryNext:
 
 
     Private Sub Form1_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
+
+        Debug.Print("Resize Called")
+
+        Return
+        If Not Me.Height < 734 And Not Me.Width < 978 Then AdjustWindow()
+
+        Return
+
+        Debug.Print(Me.WindowState)
+        Debug.Print(Me.WindowCheck)
         If Me.WindowState = FormWindowState.Maximized Then
+            Debug.Print("Maximized")
             WindowCheck = True
             AdjustWindow()
         End If
 
         If Me.WindowState = FormWindowState.Normal And WindowCheck = True Then
+            Debug.Print("Resized From Maximized")
             WindowCheck = False
             AdjustWindow()
         End If
 
-        'AdjustWindow()
+        AdjustWindow()
+
+        PNLTabs.HorizontalScroll.Visible = False
+
+
+        PNLTabs.HorizontalScroll.Maximum = 0
+        PNLTabs.AutoScroll = False
+        PNLTabs.VerticalScroll.Visible = False
+        PNLTabs.AutoScroll = True
 
     End Sub
 
@@ -21630,27 +21636,151 @@ TryNext:
 
 
     Private Sub Form1_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd
+
+        Debug.Print("Resize End Called")
+
         AdjustWindow()
+
+        SplitContainer1.Width = Me.Width - 296
+
+        My.Settings.WindowHeight = Me.Height
+        My.Settings.WindowWidth = Me.Width
+        My.Settings.Save()
+
     End Sub
 
-
+  
 
 
     Public Sub AdjustWindow()
+
+
+        Debug.Print("Adjust Window Called")
+
+
+        If Me.Height < 734 Then Me.Height = 734
+        If Me.Width < 978 Then Me.Width = 978
+
+        ' PNLAV.Location = New Point(10, Me.Height - 294)
+        ' PNLApp.Height = Me.Height - 84
+        'If PNLTabs.Height <> 0 Then PNLTabs.Height = PNLApp.Height - 333
+
+    
+
+        'If PNLTabs.VerticalScroll.Visible = False Then
+        'PNLTabs.Width = 253
+        'Else
+        'PNLTabs.Width = 258
+        'End If
+
+        PNLTabs.Height = Me.Height - 426
+
+        'subName.Location = New Point(3, PNLApp.Height - 31)
+        'domAvatar.Location = New Point(3, PNLApp.Height - 212)
+        'domName.Location = New Point(3, PNLApp.Height - 243)
+
+        StatusUpdates.Height = PNLTabs.Height - 8
+        PNLAvatar.Location = New Point(9, Me.Height - 294)
+
+        SplitContainer1.Height = Me.Height - 83
+        'SplitContainer1.Width = Me.Width - 39
+
+        'SplitContainer1.Height = Me.Height - 58
+        SplitContainer1.Width = Me.Width - 296
+
+        mainPictureBox.Location = New Point(0, 0)
+        mainPictureBox.Width = SplitContainer1.Width
+        mainPictureBox.Height = SplitContainer1.Panel1.Height
+
+        If PNLMediaBar.Visible = True Then
+            ChatText.Location = New Point(2, 33)
+            ChatText.Height = SplitContainer1.Panel2.Height - 67
+        Else
+            ChatText.Location = New Point(2, 0)
+            ChatText.Height = SplitContainer1.Panel2.Height - 34
+        End If
+
+        ChatText.Width = SplitContainer1.Width - 3
+
+        PNLMediaBar.Width = SplitContainer1.Width - 367
+        ImageFolderComboBox.Width = PNLMediaBar.Width - 13
+
+        previousButton.Location = New Point(SplitContainer1.Width - 314, 0)
+        nextButton.Location = New Point(SplitContainer1.Width - 257, 0)
+        BTNLoadVideo.Location = New Point(SplitContainer1.Width - 200, 0)
+        BTNVideoControls.Location = New Point(SplitContainer1.Width - 124, 0)
+
+
+
+        'chatBox.Location = New Point(3, 5)
+
+        'MediaButton.Location = New Point(0, 3)
+        'SaveBlogImage.Location = New Point(114, 3)
+        'SettingsButton.Location = New Point(190, 3)
+
+
+        PNLChatBox.Width = SplitContainer1.Width - 318
+        chatBox.Width = PNLChatBox.Width - 13
+
+        BTNVideoControls.BringToFront()
+
+
+        If PNLMediaBar.Visible = True Then
+            PNLChatBox.Location = New Point(2, SplitContainer1.Panel2.Height - 32)
+            PNLHope.Location = New Point(SplitContainer1.Width - 314, PNLChatBox.Location.Y)
+        Else
+            PNLChatBox.Location = New Point(2, SplitContainer1.Panel2.Height - 32)
+            PNLHope.Location = New Point(SplitContainer1.Width - 314, PNLChatBox.Location.Y)
+        End If
+
+        'PNLHope.Location = New Point(779, 214)
+
+        'BTNShowHideApps.Location = New Point(10, Me.Height - 292)
+
+        'subName.Location = New Point(10, Me.Height - 69)
+        'subAvatar.Location = New Point(10, Me.Height - 258)
+
+        'PNLGlitter.Height = Me.Height - 597
+        'StatusUpdates.Height = Me.Height - 602
+
+        DomWMP.Location = New Point(0, 0)
+        DomWMP.Width = SplitContainer1.Width
+
+
+
+
+
+        SplitContainer1.Height = Me.Height - 83
+
+
+
+        GoTo SkipNew
+
+
+
+
+
+
+
+
+
 
         If Me.Height < 734 Then Me.Height = 734
         If Me.Width < 978 Then Me.Width = 978
 
 
         SplitContainer1.Height = Me.Height - 83
-        SplitContainer1.Width = Me.Width - 296
+        SplitContainer1.Width = Me.Width - 39
 
-        mainPictureBox.Location = New Point(0, 0)
+        'PNLBackDrop.Location = New Point(259, 0)
+        mainPictureBox.Location = New Point(259, 0)
 
+        'PNLBackDrop.Height = SplitContainer1.Panel1.Height
         mainPictureBox.Height = SplitContainer1.Panel1.Height
         PNLDomTags.Height = SplitContainer1.Panel1.Height
 
-        mainPictureBox.Width = SplitContainer1.Width
+        'PNLBackDrop.Width = SplitContainer1.Width - 261
+        mainPictureBox.Width = SplitContainer1.Width - 261
 
         If DommeTags = False Then
             PNLDomTags.Location = New Point(SplitContainer1.Width + 1, -2)
@@ -21659,38 +21789,40 @@ TryNext:
             PNLDomTags.Location = New Point(SplitContainer1.Width - 249, -2)
         End If
 
-        If ThemeSettings = False Then
-            PNLTheme.Location = New Point(SplitContainer1.Width + 1, -2)
-        Else
-            mainPictureBox.Width = SplitContainer1.Width - 287
-            PNLTheme.Location = New Point(SplitContainer1.Width - 287, -2)
-        End If
+        ' If ThemeSettings = False Then
+        'PNLTheme.Location = New Point(SplitContainer1.Width + 1, -2)
+        'Else
+        'mainPictureBox.Width = SplitContainer1.Width - 287
+        'PNLTheme.Location = New Point(SplitContainer1.Width - 287, -2)
+        'End If
 
-        PNLTheme.HorizontalScroll.Visible = False
-        PNLThemeBTN.HorizontalScroll.Visible = False
+        ' PNLTheme.HorizontalScroll.Visible = False
+        PNLTabs.HorizontalScroll.Visible = False
 
 
-        PNLTheme.HorizontalScroll.Maximum = 0
-        PNLTheme.AutoScroll = False
-        PNLTheme.VerticalScroll.Visible = False
-        PNLTheme.AutoScroll = True
+        PNLTabs.HorizontalScroll.Maximum = 0
+        PNLTabs.AutoScroll = False
+        PNLTabs.VerticalScroll.Visible = False
+        PNLTabs.AutoScroll = True
 
         PNLDomTagBTN.Location = New Point(10, (PNLDomTags.Height - 479) / 2)
         If PNLDomTagBTN.Location.Y < 30 Then PNLDomTagBTN.Location = New Point(10, 30)
 
-        PNLThemeBTN.Location = New Point(0, (PNLTheme.Height - 480) / 2)
-        If PNLThemeBTN.Location.Y < 30 Then PNLThemeBTN.Location = New Point(0, 30)
+        'PNLThemeBTN.Location = New Point(0, (PNLTheme.Height - 480) / 2)
+        'If PNLThemeBTN.Location.Y < 30 Then PNLThemeBTN.Location = New Point(0, 30)
+
+        'PNLThemeBTN.Height = PNLTheme.Height
 
         If PNLMediaBar.Visible = True Then
-            ChatText.Location = New Point(0, 30)
+            ChatText.Location = New Point(258, 30)
         Else
-            ChatText.Location = New Point(0, 0)
+            ChatText.Location = New Point(258, 0)
         End If
 
-        ChatText.Width = SplitContainer1.Width - 3
+        ChatText.Width = SplitContainer1.Width - 262
 
-        PNLMediaBar.Width = SplitContainer1.Width - 365
-        ImageFolderComboBox.Width = SplitContainer1.Width - 378
+        PNLMediaBar.Width = SplitContainer1.Width - 629
+        ImageFolderComboBox.Width = PNLMediaBar.Width - 6
 
         previousButton.Location = New Point(SplitContainer1.Width - 314, -4)
         nextButton.Location = New Point(SplitContainer1.Width - 257, -4)
@@ -21706,39 +21838,82 @@ TryNext:
         SettingsButton.Location = New Point(190, 0)
 
 
-        PNLChatBox.Width = SplitContainer1.Width - 318
+        PNLChatBox.Width = SplitContainer1.Width - 576
 
         BTNVideoControls.BringToFront()
 
 
         If PNLMediaBar.Visible = True Then
-            PNLChatBox.Location = New Point(2, ChatText.Height + 31)
+            PNLChatBox.Location = New Point(257, ChatText.Height + 31)
             PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height + 29)
         Else
-            PNLChatBox.Location = New Point(2, ChatText.Height + 4)
+            PNLChatBox.Location = New Point(257, ChatText.Height + 4)
             PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height)
         End If
 
         'PNLHope.Location = New Point(779, 214)
 
-        BTNShowHideApps.Location = New Point(10, Me.Height - 292)
+        'BTNShowHideApps.Location = New Point(10, Me.Height - 292)
 
-        subName.Location = New Point(10, Me.Height - 69)
-        subAvatar.Location = New Point(10, Me.Height - 258)
+        'subName.Location = New Point(10, Me.Height - 69)
+        'subAvatar.Location = New Point(10, Me.Height - 258)
 
-        PNLGlitter.Height = Me.Height - 622
-        StatusUpdates.Height = Me.Height - 627
+        'PNLGlitter.Height = Me.Height - 622
+        ' StatusUpdates.Height = Me.Height - 627
 
         DomWMP.Location = New Point(0, 0)
         DomWMP.Width = SplitContainer1.Width
+
+        'domAvatar.Height = ChatText.Height
+
+        subName.Location = New Point(3, PNLChatBox.Location.Y + 2)
 
         My.Settings.WindowHeight = Me.Height
         My.Settings.WindowWidth = Me.Width
         My.Settings.Save()
 
+SkipNew:
+
+
     End Sub
 
+
+
+
     Private Sub SplitContainer1_SplitterMoved(sender As Object, e As System.Windows.Forms.SplitterEventArgs) Handles SplitContainer1.SplitterMoved
+
+
+
+        If PNLMediaBar.Visible = True Then
+            ChatText.Location = New Point(2, 33)
+            ChatText.Height = SplitContainer1.Panel2.Height - 67
+        Else
+            ChatText.Location = New Point(2, 0)
+            ChatText.Height = SplitContainer1.Panel2.Height - 68
+        End If
+
+        PNLChatBox.Location = New Point(2, SplitContainer1.Panel2.Height - 32)
+        PNLHope.Location = New Point(SplitContainer1.Width - 314, PNLChatBox.Location.Y)
+
+        GoTo SkipNew
+
+
+
+
+
+
+
+        GoTo SkipNew
+
+        If PNLMediaBar.Visible = True Then
+            PNLChatBox.Location = New Point(2, ChatText.Height + 30)
+            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height + 29)
+        Else
+            PNLChatBox.Location = New Point(2, ChatText.Height - 11)
+            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height - 12)
+        End If
+
+
 
         If PNLMediaBar.Visible = True Then
             PNLChatBox.Location = New Point(2, ChatText.Height + 30)
@@ -21751,14 +21926,18 @@ TryNext:
         PNLDomTags.Height = SplitContainer1.Panel1.Height
         PNLDomTagBTN.Location = New Point(10, (PNLDomTags.Height - 479) / 2)
 
-        PNLTheme.Height = SplitContainer1.Panel1.Height
-        PNLThemeBTN.Location = New Point(0, (PNLTheme.Height - 480) / 2)
+        'PNLTheme.Height = SplitContainer1.Panel1.Height - 82
+        'PNLThemeBTN.Location = New Point(0, (PNLTheme.Height - 480) / 2)
 
-        PNLTheme.HorizontalScroll.Visible = False
-        PNLThemeBTN.HorizontalScroll.Visible = False
+        ' PNLTheme.HorizontalScroll.Visible = False
+        ' PNLThemeBTN.HorizontalScroll.Visible = False
 
         If PNLDomTagBTN.Location.Y < 30 Then PNLDomTagBTN.Location = New Point(10, 30)
-        If PNLThemeBTN.Location.Y < 30 Then PNLThemeBTN.Location = New Point(0, 30)
+        'If PNLThemeBTN.Location.Y < 30 Then PNLThemeBTN.Location = New Point(0, 30)
+
+
+
+SkipNew:
 
     End Sub
 
@@ -21908,8 +22087,8 @@ TryNext:
 
 
 
-   
-   
+
+
     Private Sub SlotsToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles SlotsToolStripMenuItem1.Click
 
         FrmCardList.TCGames.SelectTab(0)
@@ -22028,7 +22207,7 @@ TryNext:
 
     End Sub
 
-   
+
     Private Sub OpenBetaThreadToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles OpenBetaThreadToolStripMenuItem1.Click
         Process.Start("https://milovana.com/forum/viewtopic.php?f=2&t=15776")
     End Sub
@@ -22881,7 +23060,7 @@ TryNext:
                                 TBGarment.Text = GarmentArray(x).Replace("TagGarment", "")
                             End If
                         Next
-              
+
                     End If
 
                     If TagList(i).Contains("TagUnderwear") Then
@@ -22894,7 +23073,7 @@ TryNext:
                                 TBUnderwear.Text = UnderwearArray(x).Replace("TagUnderwear", "")
                             End If
                         Next
-                
+
                     End If
 
                     If TagList(i).Contains("TagTattoo") Then
@@ -22906,7 +23085,7 @@ TryNext:
                                 TBTattoo.Text = TattooArray(x).Replace("TagTattoo", "")
                             End If
                         Next
-                   
+
                     End If
 
                     If TagList(i).Contains("TagSexToy") Then
@@ -22918,7 +23097,7 @@ TryNext:
                                 TBSexToy.Text = SexToyArray(x).Replace("TagSexToy", "")
                             End If
                         Next
-                 
+
                     End If
 
                     If TagList(i).Contains("TagFurniture") Then
@@ -22942,14 +23121,14 @@ TryNext:
         End If
 
 
-    
-        
 
-       
 
-      
 
-        
+
+
+
+
+
 
 
 
@@ -22959,8 +23138,8 @@ TryNext:
     End Sub
 
 
-    
-   
+
+
     Private Sub BackgroundImageToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
 
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
@@ -22988,20 +23167,20 @@ TryNext:
         My.Settings.Save()
     End Sub
 
-   
+
 
     Public Sub ApplyThemeColor()
 
         subName.BackColor = My.Settings.ButtonColor
         subName.ForeColor = My.Settings.TextColor
-        BTNShowHideApps.BackColor = My.Settings.ButtonColor
-        BTNShowHideApps.ForeColor = My.Settings.TextColor
+        'BTNShowHideApps.BackColor = My.Settings.ButtonColor
+        'BTNShowHideApps.ForeColor = My.Settings.TextColor
         domName.BackColor = My.Settings.ButtonColor
         domName.ForeColor = My.Settings.TextColor
 
         browsefolderButton.BackColor = My.Settings.ButtonColor
         PNLMediaBar.BackColor = My.Settings.ButtonColor
-        PNLHope.BackColor = My.Settings.ButtonColor
+        'PNLHope.BackColor = My.Settings.ButtonColor
         PNLChatBox.BackColor = My.Settings.ButtonColor
 
         previousButton.BackColor = My.Settings.ButtonColor
@@ -23031,14 +23210,14 @@ TryNext:
         Me.BackColor = My.Settings.BackgroundColor
 
         If File.Exists(My.Settings.BackgroundImage) Then
-            PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
+            FrmSettings.PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
             Me.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
         End If
-     
 
-        SplitContainer1.Panel2.BackColor = My.Settings.BackgroundColor
 
-     
+        'SplitContainer1.Panel2.BackColor = My.Settings.BackgroundColor
+
+
 
         FrmWritingTask.PNLWritingTask.BackColor = My.Settings.BackgroundColor
 
@@ -23054,11 +23233,11 @@ TryNext:
         PNLDomTags.BackColor = My.Settings.BackgroundColor
         PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
 
-        LBLBackColor.BackColor = My.Settings.BackgroundColor
-        LBLButtonColor.BackColor = My.Settings.ButtonColor
-        LBLTextColor.BackColor = My.Settings.TextColor
-        LBLChatWindowColor.BackColor = My.Settings.ChatWindowColor
-        LBLChatTextColor.BackColor = My.Settings.ChatTextColor
+        FrmSettings.LBLBackColor2.BackColor = My.Settings.BackgroundColor
+        FrmSettings.LBLButtonColor2.BackColor = My.Settings.ButtonColor
+        FrmSettings.LBLTextColor2.BackColor = My.Settings.TextColor
+        FrmSettings.LBLChatWindowColor2.BackColor = My.Settings.ChatWindowColor
+        FrmSettings.LBLChatTextColor2.BackColor = My.Settings.ChatTextColor
 
         chatBox.BackColor = My.Settings.ChatWindowColor
         ImageFolderComboBox.BackColor = My.Settings.ChatWindowColor
@@ -23074,18 +23253,23 @@ TryNext:
         End While
         ScrollChatDown()
 
-        CBStretchBack.Checked = My.Settings.BackgroundStretch
+        FrmSettings.CBStretchBack.Checked = My.Settings.BackgroundStretch
 
-        If CBStretchBack.Checked = True Then
+        If FrmSettings.CBStretchBack.Checked = True Then
             Me.BackgroundImageLayout = ImageLayout.Stretch
         Else
             Me.BackgroundImageLayout = ImageLayout.None
         End If
 
+
+        PNLTabs.BackColor = My.Settings.BackgroundColor
+
+        'TabControl1.DefaultBackColor = My.Settings.BackgroundColor
+
     End Sub
 
 
-    
+
 
     Private Sub ButtonColorToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
         If GetColor.ShowDialog() = DialogResult.OK Then
@@ -23111,7 +23295,7 @@ TryNext:
         End If
     End Sub
 
-    Private Sub Button3_Click_1(sender As System.Object, e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click_1(sender As System.Object, e As System.EventArgs)
         If GetColor.ShowDialog() = DialogResult.OK Then
             My.Settings.BackgroundColor = GetColor.Color
             My.Settings.Save()
@@ -23119,7 +23303,7 @@ TryNext:
         End If
     End Sub
 
-    Private Sub Button4_Click(sender As System.Object, e As System.EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As System.Object, e As System.EventArgs)
         If GetColor.ShowDialog() = DialogResult.OK Then
             My.Settings.ButtonColor = GetColor.Color
             My.Settings.Save()
@@ -23127,7 +23311,7 @@ TryNext:
         End If
     End Sub
 
-    Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(sender As System.Object, e As System.EventArgs)
         If GetColor.ShowDialog() = DialogResult.OK Then
             My.Settings.TextColor = GetColor.Color
             My.Settings.Save()
@@ -23135,7 +23319,7 @@ TryNext:
         End If
     End Sub
 
-    Private Sub Button2_Click_2(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+    Private Sub Button2_Click_2(sender As System.Object, e As System.EventArgs)
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Try
                 Me.BackgroundImage.Dispose()
@@ -23150,117 +23334,35 @@ TryNext:
         End If
     End Sub
 
-    Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
-        Try
-            Me.BackgroundImage.Dispose()
-            PBBackgroundPreview.Image.Dispose()
-        Catch
-        End Try
-        Me.BackgroundImage = Nothing
-        PBBackgroundPreview.Image = Nothing
-        GC.Collect()
-        My.Settings.BackgroundImage = ""
-        My.Settings.Save()
-    End Sub
+  
 
-    Private Sub Save_Click(sender As System.Object, e As System.EventArgs) Handles Save.Click
+  
 
-        SaveFileDialog1.Title = "Select a location to save current Theme"
-        SaveFileDialog1.InitialDirectory = Application.StartupPath & "\System\"
-
-
-        SaveFileDialog1.FileName = "Theme.txt"
-
-        If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
-            Dim SettingsPath As String = SaveFileDialog1.FileName
-            Dim SettingsList As New List(Of String)
-            SettingsList.Clear()
-
-            SettingsList.Add("Background Image: " & My.Settings.BackgroundImage)
-            SettingsList.Add("Stretch Image: " & CBStretchBack.Checked)
-
-            SettingsList.Add("Background Color: " & My.Settings.BackgroundColor.ToArgb.ToString)
-            SettingsList.Add("Button Color: " & My.Settings.ButtonColor.ToArgb.ToString)
-            SettingsList.Add("Text Color: " & My.Settings.TextColor.ToArgb.ToString)
-            SettingsList.Add("Chat Window Color: " & My.Settings.ChatWindowColor.ToArgb.ToString)
-            SettingsList.Add("Chat Text Color: " & My.Settings.ChatTextColor.ToArgb.ToString)
-
-            Dim SettingsString As String = ""
-
-            For i As Integer = 0 To SettingsList.Count - 1
-                SettingsString = SettingsString & SettingsList(i)
-                If i <> SettingsList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-            Next
-
-            My.Computer.FileSystem.WriteAllText(SettingsPath, SettingsString, False)
-        End If
-
-
-    End Sub
-
-    Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
-
-
-        OpenScriptDialog.Title = "Select a Theme settings file"
-        OpenScriptDialog.InitialDirectory = Application.StartupPath & "\System\"
-
-        If OpenScriptDialog.ShowDialog() = DialogResult.OK Then
-
-            Dim SettingsList As New List(Of String)
-
-            Try
-                Dim SettingsReader As New StreamReader(OpenScriptDialog.FileName)
-                While SettingsReader.Peek <> -1
-                    SettingsList.Add(SettingsReader.ReadLine())
-                End While
-                SettingsReader.Close()
-                SettingsReader.Dispose()
-            Catch ex As Exception
-                MessageBox.Show(Me, "This file could not be opened!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-                Return
-            End Try
-
-            Try
-                If File.Exists(SettingsList(0).Replace("Background Image: ", "")) Then
-                    PBBackgroundPreview.Image = Image.FromFile(SettingsList(0).Replace("Background Image: ", ""))
-                    My.Settings.BackgroundImage = SettingsList(0).Replace("Background Image: ", "")
-                End If
-
-                CBStretchBack.Checked = SettingsList(1).Replace("Stretch Image: ", "")
-
-                My.Settings.BackgroundColor = Color.FromArgb(SettingsList(2).Replace("Background Color: ", ""))
-                My.Settings.ButtonColor = Color.FromArgb(SettingsList(3).Replace("Button Color: ", ""))
-                My.Settings.TextColor = Color.FromArgb(SettingsList(4).Replace("Text Color: ", ""))
-                My.Settings.ChatWindowColor = Color.FromArgb(SettingsList(5).Replace("Chat Window Color: ", ""))
-                My.Settings.ChatTextColor = Color.FromArgb(SettingsList(6).Replace("Chat Text Color: ", ""))
-
-                My.Settings.Save()
-
-
-            Catch
-                MessageBox.Show(Me, "This Theme settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-            End Try
-
-            ApplyThemeColor()
-
-
-        End If
-
-
-
-    End Sub
+   
 
     Private Sub ThemeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ThemeToolStripMenuItem.Click
-        ThemeSettings = True
-        AdjustWindow()
+
+        OpenApp()
+
     End Sub
 
-    Private Sub Button10_Click(sender As System.Object, e As System.EventArgs) Handles Button10.Click
+    Public Sub OpenApp()
+
+        PNLTabs.Height = Me.Height - 429
+    End Sub
+
+    Public Sub CloseApp()
+
+        StatusUpdates.Visible = False
+        PNLTabs.Height = 0
+    End Sub
+
+    Private Sub Button10_Click(sender As System.Object, e As System.EventArgs)
         ThemeSettings = False
         AdjustWindow()
     End Sub
 
-    Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
+    Private Sub Button7_Click(sender As System.Object, e As System.EventArgs)
         If GetColor.ShowDialog() = DialogResult.OK Then
             My.Settings.ChatTextColor = GetColor.Color
             My.Settings.Save()
@@ -23268,7 +23370,7 @@ TryNext:
         End If
     End Sub
 
-    Private Sub Button6_Click(sender As System.Object, e As System.EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As System.Object, e As System.EventArgs)
         If GetColor.ShowDialog() = DialogResult.OK Then
             My.Settings.ChatWindowColor = GetColor.Color
             My.Settings.Save()
@@ -23276,10 +23378,47 @@ TryNext:
         End If
     End Sub
 
-    Private Sub CBStretchBack_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBStretchBack.CheckedChanged
-        If FormLoading = False Then
-            My.Settings.BackgroundStretch = CBStretchBack.Checked
-            ApplyThemeColor()
+   
+
+   
+
+   
+    Private Sub Button11_Click(sender As System.Object, e As System.EventArgs)
+        ' PNLThemeBTN.Visible = False
+        ' BTNClose.Visible = False
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As System.EventArgs)
+
+
+        'If TabControl1.SelectedIndex = 0 Then
+        'PNLTabs.Height = 19
+        ' PNLTabs.HorizontalScroll.Visible = False
+
+        ' Else
+        ' PNLTabs.Height = PNLAV.Height - 333
+        ' End If
+
+        If PNLTabs.Height = 19 Then
+            PNLTabs.AutoScroll = False
+        Else
+            PNLTabs.AutoScroll = True
+        End If
+
+
+    End Sub
+
+    Private Sub Button10_Click_2(sender As System.Object, e As System.EventArgs)
+        CloseApp()
+    End Sub
+
+    Private Sub GlitterToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GlitterToolStripMenuItem.Click
+        If StatusUpdates.Visible = False Then
+            CloseApp()
+            OpenApp()
+            StatusUpdates.Visible = True
+        Else
+            CloseApp()
         End If
     End Sub
 End Class

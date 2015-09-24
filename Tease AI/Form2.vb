@@ -13243,4 +13243,161 @@ NextURL:
     End Sub
 
 
+    Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles Button25.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.BackgroundColor = GetColor.Color
+            My.Settings.Save()
+            Form1.ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button27_Click_1(sender As System.Object, e As System.EventArgs) Handles Button27.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.ButtonColor = GetColor.Color
+            My.Settings.Save()
+            Form1.ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button20_Click(sender As System.Object, e As System.EventArgs) Handles Button20.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.TextColor = GetColor.Color
+            My.Settings.Save()
+            Form1.ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button23_Click(sender As System.Object, e As System.EventArgs) Handles Button23.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.ChatWindowColor = GetColor.Color
+            My.Settings.Save()
+            Form1.ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button17_Click(sender As System.Object, e As System.EventArgs) Handles Button17.Click
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            Try
+                Form1.BackgroundImage.Dispose()
+            Catch
+            End Try
+            Form1.BackgroundImage = Nothing
+            GC.Collect()
+            Form1.BackgroundImage = Image.FromFile(OpenFileDialog1.FileName)
+            My.Settings.BackgroundImage = OpenFileDialog1.FileName
+            My.Settings.Save()
+            Form1.ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button18_Click(sender As System.Object, e As System.EventArgs) Handles Button18.Click
+        Try
+            Form1.BackgroundImage.Dispose()
+            PBBackgroundPreview.Image.Dispose()
+        Catch
+        End Try
+        Form1.BackgroundImage = Nothing
+        PBBackgroundPreview.Image = Nothing
+        GC.Collect()
+        My.Settings.BackgroundImage = ""
+        My.Settings.Save()
+    End Sub
+
+    Private Sub Button32_Click(sender As System.Object, e As System.EventArgs) Handles Button32.Click
+        SaveFileDialog1.Title = "Select a location to save current Theme"
+        SaveFileDialog1.InitialDirectory = Application.StartupPath & "\System\"
+
+
+        SaveFileDialog1.FileName = "Theme.txt"
+
+        If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
+            Dim SettingsPath As String = SaveFileDialog1.FileName
+            Dim SettingsList As New List(Of String)
+            SettingsList.Clear()
+
+            SettingsList.Add("Background Image: " & My.Settings.BackgroundImage)
+            SettingsList.Add("Stretch Image: " & CBStretchBack.Checked)
+
+            SettingsList.Add("Background Color: " & My.Settings.BackgroundColor.ToArgb.ToString)
+            SettingsList.Add("Button Color: " & My.Settings.ButtonColor.ToArgb.ToString)
+            SettingsList.Add("Text Color: " & My.Settings.TextColor.ToArgb.ToString)
+            SettingsList.Add("Chat Window Color: " & My.Settings.ChatWindowColor.ToArgb.ToString)
+            SettingsList.Add("Chat Text Color: " & My.Settings.ChatTextColor.ToArgb.ToString)
+
+            Dim SettingsString As String = ""
+
+            For i As Integer = 0 To SettingsList.Count - 1
+                SettingsString = SettingsString & SettingsList(i)
+                If i <> SettingsList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+
+            My.Computer.FileSystem.WriteAllText(SettingsPath, SettingsString, False)
+        End If
+
+    End Sub
+
+    Private Sub Button31_Click(sender As System.Object, e As System.EventArgs) Handles Button31.Click
+        OpenScriptDialog.Title = "Select a Theme settings file"
+        OpenScriptDialog.InitialDirectory = Application.StartupPath & "\System\"
+
+        If OpenScriptDialog.ShowDialog() = DialogResult.OK Then
+
+            Dim SettingsList As New List(Of String)
+
+            Try
+                Dim SettingsReader As New StreamReader(OpenScriptDialog.FileName)
+                While SettingsReader.Peek <> -1
+                    SettingsList.Add(SettingsReader.ReadLine())
+                End While
+                SettingsReader.Close()
+                SettingsReader.Dispose()
+            Catch ex As Exception
+                MessageBox.Show(Me, "This file could not be opened!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                Return
+            End Try
+
+            Try
+                If File.Exists(SettingsList(0).Replace("Background Image: ", "")) Then
+                    PBBackgroundPreview.Image = Image.FromFile(SettingsList(0).Replace("Background Image: ", ""))
+                    My.Settings.BackgroundImage = SettingsList(0).Replace("Background Image: ", "")
+                End If
+
+                CBStretchBack.Checked = SettingsList(1).Replace("Stretch Image: ", "")
+
+                My.Settings.BackgroundColor = Color.FromArgb(SettingsList(2).Replace("Background Color: ", ""))
+                My.Settings.ButtonColor = Color.FromArgb(SettingsList(3).Replace("Button Color: ", ""))
+                My.Settings.TextColor = Color.FromArgb(SettingsList(4).Replace("Text Color: ", ""))
+                My.Settings.ChatWindowColor = Color.FromArgb(SettingsList(5).Replace("Chat Window Color: ", ""))
+                My.Settings.ChatTextColor = Color.FromArgb(SettingsList(6).Replace("Chat Text Color: ", ""))
+
+                My.Settings.Save()
+
+
+            Catch
+                MessageBox.Show(Me, "This Theme settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            End Try
+
+            Form1.ApplyThemeColor()
+
+
+        End If
+    End Sub
+
+    Private Sub Button21_Click_1(sender As System.Object, e As System.EventArgs) Handles Button21.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.ChatTextColor = GetColor.Color
+            My.Settings.Save()
+            Form1.ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub CBStretchBack_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBStretchBack.CheckedChanged
+        If Form1.FormLoading = False Then
+            My.Settings.BackgroundStretch = CBStretchBack.Checked
+            Form1.ApplyThemeColor()
+        End If
+    End Sub
+
+
+  
 End Class

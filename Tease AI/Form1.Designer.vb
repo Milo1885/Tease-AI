@@ -29,32 +29,6 @@ Partial Class Form1
         Me.mainPictureBox = New System.Windows.Forms.PictureBox()
         Me.domAvatar = New System.Windows.Forms.PictureBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.PNLTheme = New System.Windows.Forms.Panel()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.PNLThemeBTN = New System.Windows.Forms.Panel()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Save = New System.Windows.Forms.Button()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.LBLChatTextColor = New System.Windows.Forms.Label()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.LBLChatWindowColor = New System.Windows.Forms.Label()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.LBLTextColor = New System.Windows.Forms.Label()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.LBLButtonColor = New System.Windows.Forms.Label()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.LBLBackColor = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.CBStretchBack = New System.Windows.Forms.CheckBox()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.PBBackgroundPreview = New System.Windows.Forms.PictureBox()
         Me.PNLDomTags = New System.Windows.Forms.Panel()
         Me.PNLDomTagBTN = New System.Windows.Forms.Panel()
         Me.TBFurniture = New System.Windows.Forms.TextBox()
@@ -146,7 +120,6 @@ Partial Class Form1
         Me.TeaseTimer = New System.Windows.Forms.Timer(Me.components)
         Me.RLGLTauntTimer = New System.Windows.Forms.Timer(Me.components)
         Me.AvoidTheEdgeTaunts = New System.Windows.Forms.Timer(Me.components)
-        Me.subAvatar = New System.Windows.Forms.PictureBox()
         Me.PictureStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -154,11 +127,8 @@ Partial Class Form1
         Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ContactTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.BTNShowHideApps = New System.Windows.Forms.Button()
         Me.AudibleMetronome = New System.Windows.Forms.Timer(Me.components)
         Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
-        Me.PNLGlitter = New System.Windows.Forms.Panel()
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.BWGlitter = New System.ComponentModel.BackgroundWorker()
         Me.CustomSlideshowTimer = New System.Windows.Forms.Timer(Me.components)
         Me.BWSlideshow = New System.ComponentModel.BackgroundWorker()
@@ -233,17 +203,20 @@ Partial Class Form1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetroTimer = New System.Windows.Forms.Timer(Me.components)
         Me.BWMetro = New System.ComponentModel.BackgroundWorker()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.LBLGeneralSettings = New System.Windows.Forms.Label()
+        Me.PNLTabs = New System.Windows.Forms.Panel()
+        Me.GlitterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PNLAvatar = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        Me.PNLTheme.SuspendLayout()
-        Me.PNLThemeBTN.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNLDomTags.SuspendLayout()
         Me.PNLDomTagBTN.SuspendLayout()
         CType(Me.DomWMP, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -252,40 +225,44 @@ Partial Class Form1
         Me.PNLMediaBar.SuspendLayout()
         Me.PNLFileTransfer.SuspendLayout()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.subAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PictureStrip.SuspendLayout()
-        Me.PNLGlitter.SuspendLayout()
         Me.TeaseAIMenu.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.PNLTabs.SuspendLayout()
+        Me.PNLAvatar.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'domName
         '
         Me.domName.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.domName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.domName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.domName.ForeColor = System.Drawing.Color.White
-        Me.domName.Location = New System.Drawing.Point(10, 223)
+        Me.domName.Location = New System.Drawing.Point(1, 2)
         Me.domName.Name = "domName"
-        Me.domName.Size = New System.Drawing.Size(250, 26)
+        Me.domName.Size = New System.Drawing.Size(238, 23)
         Me.domName.TabIndex = 2
         Me.domName.Text = "Domme Name"
         Me.domName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'chatBox
         '
-        Me.chatBox.Location = New System.Drawing.Point(3, 4)
+        Me.chatBox.Location = New System.Drawing.Point(4, 3)
         Me.chatBox.Name = "chatBox"
-        Me.chatBox.Size = New System.Drawing.Size(768, 20)
+        Me.chatBox.Size = New System.Drawing.Size(765, 20)
         Me.chatBox.TabIndex = 1
         '
         'mainPictureBox
         '
         Me.mainPictureBox.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
         Me.mainPictureBox.BackColor = System.Drawing.Color.Black
+        Me.mainPictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.mainPictureBox.Image = CType(resources.GetObject("mainPictureBox.Image"), System.Drawing.Image)
-        Me.mainPictureBox.Location = New System.Drawing.Point(0, 0)
+        Me.mainPictureBox.Location = New System.Drawing.Point(0, 29)
         Me.mainPictureBox.Name = "mainPictureBox"
-        Me.mainPictureBox.Size = New System.Drawing.Size(839, 741)
+        Me.mainPictureBox.Size = New System.Drawing.Size(1092, 741)
         Me.mainPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.mainPictureBox.TabIndex = 3
         Me.mainPictureBox.TabStop = False
@@ -295,9 +272,9 @@ Partial Class Form1
         Me.domAvatar.BackColor = System.Drawing.Color.Black
         Me.domAvatar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.domAvatar.Image = CType(resources.GetObject("domAvatar.Image"), System.Drawing.Image)
-        Me.domAvatar.Location = New System.Drawing.Point(10, 37)
+        Me.domAvatar.Location = New System.Drawing.Point(2, 33)
         Me.domAvatar.Name = "domAvatar"
-        Me.domAvatar.Size = New System.Drawing.Size(250, 180)
+        Me.domAvatar.Size = New System.Drawing.Size(245, 176)
         Me.domAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.domAvatar.TabIndex = 117
         Me.domAvatar.TabStop = False
@@ -305,15 +282,13 @@ Partial Class Form1
         'SplitContainer1
         '
         Me.SplitContainer1.BackColor = System.Drawing.Color.Black
-        Me.SplitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.SplitContainer1.IsSplitterFixed = True
         Me.SplitContainer1.Location = New System.Drawing.Point(271, 37)
         Me.SplitContainer1.Name = "SplitContainer1"
         Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
         'SplitContainer1.Panel1
         '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.PNLTheme)
+        Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.SplitContainer1.Panel1.Controls.Add(Me.PNLDomTags)
         Me.SplitContainer1.Panel1.Controls.Add(Me.CensorshipBar)
         Me.SplitContainer1.Panel1.Controls.Add(Me.LBLImageInfo)
@@ -323,7 +298,7 @@ Partial Class Form1
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.SplitContainer1.Panel2.BackColor = System.Drawing.Color.Black
         Me.SplitContainer1.Panel2.Controls.Add(Me.PNLHope)
         Me.SplitContainer1.Panel2.Controls.Add(Me.nextButton)
         Me.SplitContainer1.Panel2.Controls.Add(Me.PNLChatBox)
@@ -334,295 +309,9 @@ Partial Class Form1
         Me.SplitContainer1.Panel2.Controls.Add(Me.browsefolderButton)
         Me.SplitContainer1.Panel2.Controls.Add(Me.ChatText)
         Me.SplitContainer1.Panel2MinSize = 208
-        Me.SplitContainer1.Size = New System.Drawing.Size(1092, 988)
+        Me.SplitContainer1.Size = New System.Drawing.Size(1090, 988)
         Me.SplitContainer1.SplitterDistance = 734
         Me.SplitContainer1.TabIndex = 136
-        '
-        'PNLTheme
-        '
-        Me.PNLTheme.BackColor = System.Drawing.Color.LightGray
-        Me.PNLTheme.Controls.Add(Me.Button10)
-        Me.PNLTheme.Controls.Add(Me.PNLThemeBTN)
-        Me.PNLTheme.Location = New System.Drawing.Point(801, 0)
-        Me.PNLTheme.Name = "PNLTheme"
-        Me.PNLTheme.Size = New System.Drawing.Size(287, 741)
-        Me.PNLTheme.TabIndex = 775
-        '
-        'Button10
-        '
-        Me.Button10.BackColor = System.Drawing.Color.Transparent
-        Me.Button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button10.FlatAppearance.BorderSize = 0
-        Me.Button10.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
-        Me.Button10.Location = New System.Drawing.Point(255, 4)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(20, 20)
-        Me.Button10.TabIndex = 1
-        Me.Button10.UseVisualStyleBackColor = False
-        '
-        'PNLThemeBTN
-        '
-        Me.PNLThemeBTN.BackColor = System.Drawing.Color.LightGray
-        Me.PNLThemeBTN.Controls.Add(Me.Button8)
-        Me.PNLThemeBTN.Controls.Add(Me.Save)
-        Me.PNLThemeBTN.Controls.Add(Me.GroupBox2)
-        Me.PNLThemeBTN.Controls.Add(Me.GroupBox1)
-        Me.PNLThemeBTN.Location = New System.Drawing.Point(0, 28)
-        Me.PNLThemeBTN.Name = "PNLThemeBTN"
-        Me.PNLThemeBTN.Size = New System.Drawing.Size(285, 480)
-        Me.PNLThemeBTN.TabIndex = 0
-        '
-        'Button8
-        '
-        Me.Button8.BackColor = System.Drawing.Color.Transparent
-        Me.Button8.BackgroundImage = CType(resources.GetObject("Button8.BackgroundImage"), System.Drawing.Image)
-        Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button8.Location = New System.Drawing.Point(176, 405)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(64, 64)
-        Me.Button8.TabIndex = 54
-        Me.Button8.UseVisualStyleBackColor = False
-        '
-        'Save
-        '
-        Me.Save.BackColor = System.Drawing.Color.Transparent
-        Me.Save.BackgroundImage = CType(resources.GetObject("Save.BackgroundImage"), System.Drawing.Image)
-        Me.Save.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Save.Location = New System.Drawing.Point(44, 405)
-        Me.Save.Name = "Save"
-        Me.Save.Size = New System.Drawing.Size(64, 64)
-        Me.Save.TabIndex = 53
-        Me.Save.UseVisualStyleBackColor = False
-        '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.LBLChatTextColor)
-        Me.GroupBox2.Controls.Add(Me.Button7)
-        Me.GroupBox2.Controls.Add(Me.LBLChatWindowColor)
-        Me.GroupBox2.Controls.Add(Me.Button6)
-        Me.GroupBox2.Controls.Add(Me.Label7)
-        Me.GroupBox2.Controls.Add(Me.Label3)
-        Me.GroupBox2.Controls.Add(Me.LBLTextColor)
-        Me.GroupBox2.Controls.Add(Me.Button5)
-        Me.GroupBox2.Controls.Add(Me.Label6)
-        Me.GroupBox2.Controls.Add(Me.LBLButtonColor)
-        Me.GroupBox2.Controls.Add(Me.Button4)
-        Me.GroupBox2.Controls.Add(Me.Label4)
-        Me.GroupBox2.Controls.Add(Me.LBLBackColor)
-        Me.GroupBox2.Controls.Add(Me.Button3)
-        Me.GroupBox2.Controls.Add(Me.Label1)
-        Me.GroupBox2.Location = New System.Drawing.Point(0, 197)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(284, 199)
-        Me.GroupBox2.TabIndex = 52
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "UI Colors"
-        '
-        'LBLChatTextColor
-        '
-        Me.LBLChatTextColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLChatTextColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLChatTextColor.Location = New System.Drawing.Point(176, 158)
-        Me.LBLChatTextColor.Name = "LBLChatTextColor"
-        Me.LBLChatTextColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLChatTextColor.TabIndex = 16
-        '
-        'Button7
-        '
-        Me.Button7.BackColor = System.Drawing.Color.Transparent
-        Me.Button7.BackgroundImage = CType(resources.GetObject("Button7.BackgroundImage"), System.Drawing.Image)
-        Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button7.Location = New System.Drawing.Point(231, 155)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(32, 32)
-        Me.Button7.TabIndex = 15
-        Me.Button7.UseVisualStyleBackColor = False
-        '
-        'LBLChatWindowColor
-        '
-        Me.LBLChatWindowColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLChatWindowColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLChatWindowColor.Location = New System.Drawing.Point(176, 124)
-        Me.LBLChatWindowColor.Name = "LBLChatWindowColor"
-        Me.LBLChatWindowColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLChatWindowColor.TabIndex = 12
-        '
-        'Button6
-        '
-        Me.Button6.BackColor = System.Drawing.Color.Transparent
-        Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
-        Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button6.Location = New System.Drawing.Point(231, 121)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(32, 32)
-        Me.Button6.TabIndex = 11
-        Me.Button6.UseVisualStyleBackColor = False
-        '
-        'Label7
-        '
-        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label7.Location = New System.Drawing.Point(20, 160)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(148, 23)
-        Me.Label7.TabIndex = 14
-        Me.Label7.Text = "Chat Text Color"
-        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label3
-        '
-        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label3.Location = New System.Drawing.Point(20, 126)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(148, 23)
-        Me.Label3.TabIndex = 10
-        Me.Label3.Text = "Chat Window Color"
-        Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLTextColor
-        '
-        Me.LBLTextColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLTextColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLTextColor.Location = New System.Drawing.Point(176, 90)
-        Me.LBLTextColor.Name = "LBLTextColor"
-        Me.LBLTextColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLTextColor.TabIndex = 9
-        '
-        'Button5
-        '
-        Me.Button5.BackColor = System.Drawing.Color.Transparent
-        Me.Button5.BackgroundImage = CType(resources.GetObject("Button5.BackgroundImage"), System.Drawing.Image)
-        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button5.Location = New System.Drawing.Point(231, 87)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(32, 32)
-        Me.Button5.TabIndex = 8
-        Me.Button5.UseVisualStyleBackColor = False
-        '
-        'Label6
-        '
-        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label6.Location = New System.Drawing.Point(20, 92)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(148, 23)
-        Me.Label6.TabIndex = 7
-        Me.Label6.Text = "Text Color"
-        Me.Label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLButtonColor
-        '
-        Me.LBLButtonColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLButtonColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLButtonColor.Location = New System.Drawing.Point(176, 56)
-        Me.LBLButtonColor.Name = "LBLButtonColor"
-        Me.LBLButtonColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLButtonColor.TabIndex = 6
-        '
-        'Button4
-        '
-        Me.Button4.BackColor = System.Drawing.Color.Transparent
-        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
-        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button4.Location = New System.Drawing.Point(231, 53)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(32, 32)
-        Me.Button4.TabIndex = 5
-        Me.Button4.UseVisualStyleBackColor = False
-        '
-        'Label4
-        '
-        Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label4.Location = New System.Drawing.Point(20, 58)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(148, 23)
-        Me.Label4.TabIndex = 4
-        Me.Label4.Text = "Button Color"
-        Me.Label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLBackColor
-        '
-        Me.LBLBackColor.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLBackColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLBackColor.Location = New System.Drawing.Point(176, 22)
-        Me.LBLBackColor.Name = "LBLBackColor"
-        Me.LBLBackColor.Size = New System.Drawing.Size(50, 28)
-        Me.LBLBackColor.TabIndex = 3
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.Transparent
-        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
-        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button3.Location = New System.Drawing.Point(231, 19)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(32, 32)
-        Me.Button3.TabIndex = 2
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'Label1
-        '
-        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label1.Location = New System.Drawing.Point(20, 24)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(148, 23)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Background Color"
-        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.Button9)
-        Me.GroupBox1.Controls.Add(Me.CBStretchBack)
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Controls.Add(Me.PBBackgroundPreview)
-        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(284, 191)
-        Me.GroupBox1.TabIndex = 51
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "Background Image"
-        '
-        'Button9
-        '
-        Me.Button9.Location = New System.Drawing.Point(188, 108)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(75, 25)
-        Me.Button9.TabIndex = 3
-        Me.Button9.Text = "Clear"
-        Me.Button9.UseVisualStyleBackColor = True
-        '
-        'CBStretchBack
-        '
-        Me.CBStretchBack.AutoSize = True
-        Me.CBStretchBack.Checked = True
-        Me.CBStretchBack.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CBStretchBack.Location = New System.Drawing.Point(23, 149)
-        Me.CBStretchBack.Name = "CBStretchBack"
-        Me.CBStretchBack.Size = New System.Drawing.Size(146, 17)
-        Me.CBStretchBack.TabIndex = 2
-        Me.CBStretchBack.Text = "Stretch Image to Window"
-        Me.CBStretchBack.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.Transparent
-        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
-        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button2.Location = New System.Drawing.Point(188, 36)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 57)
-        Me.Button2.TabIndex = 1
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'PBBackgroundPreview
-        '
-        Me.PBBackgroundPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PBBackgroundPreview.Location = New System.Drawing.Point(23, 36)
-        Me.PBBackgroundPreview.Name = "PBBackgroundPreview"
-        Me.PBBackgroundPreview.Size = New System.Drawing.Size(145, 97)
-        Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PBBackgroundPreview.TabIndex = 0
-        Me.PBBackgroundPreview.TabStop = False
         '
         'PNLDomTags
         '
@@ -634,6 +323,7 @@ Partial Class Form1
         Me.PNLDomTags.Name = "PNLDomTags"
         Me.PNLDomTags.Size = New System.Drawing.Size(249, 731)
         Me.PNLDomTags.TabIndex = 97
+        Me.PNLDomTags.Visible = False
         '
         'PNLDomTagBTN
         '
@@ -1170,10 +860,10 @@ Partial Class Form1
         '
         Me.DomWMP.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
         Me.DomWMP.Enabled = True
-        Me.DomWMP.Location = New System.Drawing.Point(161, 0)
+        Me.DomWMP.Location = New System.Drawing.Point(33, 0)
         Me.DomWMP.Name = "DomWMP"
         Me.DomWMP.OcxState = CType(resources.GetObject("DomWMP.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.DomWMP.Size = New System.Drawing.Size(1089, 788)
+        Me.DomWMP.Size = New System.Drawing.Size(1089, 792)
         Me.DomWMP.TabIndex = 96
         Me.DomWMP.Visible = False
         '
@@ -1182,9 +872,9 @@ Partial Class Form1
         Me.PNLHope.Controls.Add(Me.MediaButton)
         Me.PNLHope.Controls.Add(Me.SettingsButton)
         Me.PNLHope.Controls.Add(Me.SaveBlogImage)
-        Me.PNLHope.Location = New System.Drawing.Point(779, 213)
+        Me.PNLHope.Location = New System.Drawing.Point(779, 216)
         Me.PNLHope.Name = "PNLHope"
-        Me.PNLHope.Size = New System.Drawing.Size(314, 35)
+        Me.PNLHope.Size = New System.Drawing.Size(313, 32)
         Me.PNLHope.TabIndex = 781
         '
         'MediaButton
@@ -1195,7 +885,7 @@ Partial Class Form1
         Me.MediaButton.ForeColor = System.Drawing.Color.White
         Me.MediaButton.Location = New System.Drawing.Point(0, 0)
         Me.MediaButton.Name = "MediaButton"
-        Me.MediaButton.Size = New System.Drawing.Size(112, 35)
+        Me.MediaButton.Size = New System.Drawing.Size(112, 31)
         Me.MediaButton.TabIndex = 147
         Me.MediaButton.Text = "Hide Media Panel"
         Me.MediaButton.UseVisualStyleBackColor = False
@@ -1208,7 +898,7 @@ Partial Class Form1
         Me.SettingsButton.ForeColor = System.Drawing.Color.White
         Me.SettingsButton.Location = New System.Drawing.Point(190, 0)
         Me.SettingsButton.Name = "SettingsButton"
-        Me.SettingsButton.Size = New System.Drawing.Size(123, 35)
+        Me.SettingsButton.Size = New System.Drawing.Size(123, 31)
         Me.SettingsButton.TabIndex = 19
         Me.SettingsButton.Text = "Open Settings Menu"
         Me.SettingsButton.UseVisualStyleBackColor = False
@@ -1221,7 +911,7 @@ Partial Class Form1
         Me.SaveBlogImage.ForeColor = System.Drawing.Color.White
         Me.SaveBlogImage.Location = New System.Drawing.Point(114, 0)
         Me.SaveBlogImage.Name = "SaveBlogImage"
-        Me.SaveBlogImage.Size = New System.Drawing.Size(74, 35)
+        Me.SaveBlogImage.Size = New System.Drawing.Size(74, 31)
         Me.SaveBlogImage.TabIndex = 149
         Me.SaveBlogImage.Text = "Img <-> Vid"
         Me.SaveBlogImage.UseVisualStyleBackColor = False
@@ -1232,25 +922,27 @@ Partial Class Form1
         Me.nextButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.nextButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.nextButton.ForeColor = System.Drawing.Color.White
-        Me.nextButton.Location = New System.Drawing.Point(836, -4)
+        Me.nextButton.Location = New System.Drawing.Point(836, 0)
         Me.nextButton.Name = "nextButton"
-        Me.nextButton.Size = New System.Drawing.Size(55, 35)
+        Me.nextButton.Size = New System.Drawing.Size(55, 31)
         Me.nextButton.TabIndex = 7
         Me.nextButton.Text = ">>"
         Me.nextButton.UseVisualStyleBackColor = False
         '
         'PNLChatBox
         '
+        Me.PNLChatBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PNLChatBox.Controls.Add(Me.chatBox)
-        Me.PNLChatBox.Location = New System.Drawing.Point(-1, 214)
+        Me.PNLChatBox.Location = New System.Drawing.Point(3, 216)
         Me.PNLChatBox.Name = "PNLChatBox"
-        Me.PNLChatBox.Size = New System.Drawing.Size(777, 32)
+        Me.PNLChatBox.Size = New System.Drawing.Size(774, 31)
         Me.PNLChatBox.TabIndex = 150
         '
         'PNLMediaBar
         '
+        Me.PNLMediaBar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PNLMediaBar.Controls.Add(Me.ImageFolderComboBox)
-        Me.PNLMediaBar.Location = New System.Drawing.Point(51, -1)
+        Me.PNLMediaBar.Location = New System.Drawing.Point(51, 0)
         Me.PNLMediaBar.Name = "PNLMediaBar"
         Me.PNLMediaBar.Size = New System.Drawing.Size(726, 31)
         Me.PNLMediaBar.TabIndex = 97
@@ -1260,9 +952,9 @@ Partial Class Form1
         Me.ImageFolderComboBox.BackColor = System.Drawing.Color.White
         Me.ImageFolderComboBox.ForeColor = System.Drawing.Color.Black
         Me.ImageFolderComboBox.FormattingEnabled = True
-        Me.ImageFolderComboBox.Location = New System.Drawing.Point(6, 5)
+        Me.ImageFolderComboBox.Location = New System.Drawing.Point(4, 3)
         Me.ImageFolderComboBox.Name = "ImageFolderComboBox"
-        Me.ImageFolderComboBox.Size = New System.Drawing.Size(716, 21)
+        Me.ImageFolderComboBox.Size = New System.Drawing.Size(713, 21)
         Me.ImageFolderComboBox.TabIndex = 8
         Me.ImageFolderComboBox.Text = "Enter Image Directory"
         '
@@ -1272,9 +964,9 @@ Partial Class Form1
         Me.previousButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.previousButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.previousButton.ForeColor = System.Drawing.Color.White
-        Me.previousButton.Location = New System.Drawing.Point(779, -4)
+        Me.previousButton.Location = New System.Drawing.Point(779, 0)
         Me.previousButton.Name = "previousButton"
-        Me.previousButton.Size = New System.Drawing.Size(55, 35)
+        Me.previousButton.Size = New System.Drawing.Size(55, 31)
         Me.previousButton.TabIndex = 6
         Me.previousButton.Text = "<<"
         Me.previousButton.UseVisualStyleBackColor = False
@@ -1285,9 +977,9 @@ Partial Class Form1
         Me.BTNLoadVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNLoadVideo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNLoadVideo.ForeColor = System.Drawing.Color.White
-        Me.BTNLoadVideo.Location = New System.Drawing.Point(893, -4)
+        Me.BTNLoadVideo.Location = New System.Drawing.Point(893, 0)
         Me.BTNLoadVideo.Name = "BTNLoadVideo"
-        Me.BTNLoadVideo.Size = New System.Drawing.Size(74, 35)
+        Me.BTNLoadVideo.Size = New System.Drawing.Size(74, 31)
         Me.BTNLoadVideo.TabIndex = 11
         Me.BTNLoadVideo.Text = "Load Video"
         Me.BTNLoadVideo.UseVisualStyleBackColor = False
@@ -1298,9 +990,9 @@ Partial Class Form1
         Me.BTNVideoControls.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.BTNVideoControls.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNVideoControls.ForeColor = System.Drawing.Color.White
-        Me.BTNVideoControls.Location = New System.Drawing.Point(969, -4)
+        Me.BTNVideoControls.Location = New System.Drawing.Point(969, 0)
         Me.BTNVideoControls.Name = "BTNVideoControls"
-        Me.BTNVideoControls.Size = New System.Drawing.Size(121, 35)
+        Me.BTNVideoControls.Size = New System.Drawing.Size(123, 31)
         Me.BTNVideoControls.TabIndex = 15
         Me.BTNVideoControls.Text = "Show Video Controls"
         Me.BTNVideoControls.UseVisualStyleBackColor = False
@@ -1311,21 +1003,19 @@ Partial Class Form1
         Me.browsefolderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.browsefolderButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.browsefolderButton.ForeColor = System.Drawing.Color.White
-        Me.browsefolderButton.Location = New System.Drawing.Point(-2, -4)
+        Me.browsefolderButton.Location = New System.Drawing.Point(2, 0)
         Me.browsefolderButton.Name = "browsefolderButton"
-        Me.browsefolderButton.Size = New System.Drawing.Size(53, 35)
+        Me.browsefolderButton.Size = New System.Drawing.Size(47, 31)
         Me.browsefolderButton.TabIndex = 3
-        Me.browsefolderButton.Text = "Browse"
+        Me.browsefolderButton.Text = "Open"
         Me.browsefolderButton.UseVisualStyleBackColor = False
         '
         'ChatText
         '
-        Me.ChatText.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.ChatText.Location = New System.Drawing.Point(0, 29)
+        Me.ChatText.Location = New System.Drawing.Point(2, 34)
         Me.ChatText.MinimumSize = New System.Drawing.Size(2, 20)
         Me.ChatText.Name = "ChatText"
-        Me.ChatText.Size = New System.Drawing.Size(1089, 185)
+        Me.ChatText.Size = New System.Drawing.Size(1085, 179)
         Me.ChatText.TabIndex = 1
         '
         'subName
@@ -1334,10 +1024,10 @@ Partial Class Form1
         Me.subName.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.subName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.subName.ForeColor = System.Drawing.Color.White
-        Me.subName.Location = New System.Drawing.Point(10, 977)
+        Me.subName.Location = New System.Drawing.Point(1, 2)
         Me.subName.Name = "subName"
         Me.subName.ShortcutsEnabled = False
-        Me.subName.Size = New System.Drawing.Size(250, 23)
+        Me.subName.Size = New System.Drawing.Size(238, 23)
         Me.subName.TabIndex = 3
         Me.subName.Text = "Your Name"
         Me.subName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1454,9 +1144,9 @@ Partial Class Form1
         Me.PNLFileTransfer.Controls.Add(Me.BTNFIleTransferDismiss)
         Me.PNLFileTransfer.Controls.Add(Me.LBLFileTransfer)
         Me.PNLFileTransfer.Controls.Add(Me.PBFileTransfer)
-        Me.PNLFileTransfer.Location = New System.Drawing.Point(10, 37)
+        Me.PNLFileTransfer.Location = New System.Drawing.Point(2, 33)
         Me.PNLFileTransfer.Name = "PNLFileTransfer"
-        Me.PNLFileTransfer.Size = New System.Drawing.Size(250, 180)
+        Me.PNLFileTransfer.Size = New System.Drawing.Size(245, 176)
         Me.PNLFileTransfer.TabIndex = 157
         Me.PNLFileTransfer.Visible = False
         '
@@ -1464,16 +1154,16 @@ Partial Class Form1
         '
         Me.PictureBox11.ErrorImage = Nothing
         Me.PictureBox11.Image = CType(resources.GetObject("PictureBox11.Image"), System.Drawing.Image)
-        Me.PictureBox11.Location = New System.Drawing.Point(27, 29)
+        Me.PictureBox11.Location = New System.Drawing.Point(22, 29)
         Me.PictureBox11.Name = "PictureBox11"
-        Me.PictureBox11.Size = New System.Drawing.Size(195, 88)
+        Me.PictureBox11.Size = New System.Drawing.Size(200, 88)
         Me.PictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox11.TabIndex = 128
         Me.PictureBox11.TabStop = False
         '
         'BTNFileTransferOpen
         '
-        Me.BTNFileTransferOpen.Location = New System.Drawing.Point(27, 145)
+        Me.BTNFileTransferOpen.Location = New System.Drawing.Point(22, 145)
         Me.BTNFileTransferOpen.Name = "BTNFileTransferOpen"
         Me.BTNFileTransferOpen.Size = New System.Drawing.Size(95, 23)
         Me.BTNFileTransferOpen.TabIndex = 127
@@ -1482,7 +1172,7 @@ Partial Class Form1
         '
         'BTNFIleTransferDismiss
         '
-        Me.BTNFIleTransferDismiss.Location = New System.Drawing.Point(127, 145)
+        Me.BTNFIleTransferDismiss.Location = New System.Drawing.Point(128, 145)
         Me.BTNFIleTransferDismiss.Name = "BTNFIleTransferDismiss"
         Me.BTNFIleTransferDismiss.Size = New System.Drawing.Size(95, 23)
         Me.BTNFIleTransferDismiss.TabIndex = 126
@@ -1491,19 +1181,19 @@ Partial Class Form1
         '
         'LBLFileTransfer
         '
-        Me.LBLFileTransfer.Location = New System.Drawing.Point(3, 2)
+        Me.LBLFileTransfer.Location = New System.Drawing.Point(9, 2)
         Me.LBLFileTransfer.Name = "LBLFileTransfer"
-        Me.LBLFileTransfer.Size = New System.Drawing.Size(244, 24)
+        Me.LBLFileTransfer.Size = New System.Drawing.Size(227, 24)
         Me.LBLFileTransfer.TabIndex = 125
         Me.LBLFileTransfer.Text = "Mistress Name is sending you a file!"
         Me.LBLFileTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'PBFileTransfer
         '
-        Me.PBFileTransfer.Location = New System.Drawing.Point(27, 123)
+        Me.PBFileTransfer.Location = New System.Drawing.Point(22, 123)
         Me.PBFileTransfer.Maximum = 3
         Me.PBFileTransfer.Name = "PBFileTransfer"
-        Me.PBFileTransfer.Size = New System.Drawing.Size(195, 13)
+        Me.PBFileTransfer.Size = New System.Drawing.Size(200, 13)
         Me.PBFileTransfer.TabIndex = 0
         '
         'SlideshowTimer
@@ -1546,18 +1236,6 @@ Partial Class Form1
         '
         Me.AvoidTheEdgeTaunts.Interval = 1000
         '
-        'subAvatar
-        '
-        Me.subAvatar.BackColor = System.Drawing.Color.Black
-        Me.subAvatar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.subAvatar.Image = CType(resources.GetObject("subAvatar.Image"), System.Drawing.Image)
-        Me.subAvatar.Location = New System.Drawing.Point(17, 698)
-        Me.subAvatar.Name = "subAvatar"
-        Me.subAvatar.Size = New System.Drawing.Size(250, 180)
-        Me.subAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.subAvatar.TabIndex = 118
-        Me.subAvatar.TabStop = False
-        '
         'PictureStrip
         '
         Me.PictureStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem5, Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4})
@@ -1598,54 +1276,17 @@ Partial Class Form1
         '
         Me.ContactTimer.Interval = 1000
         '
-        'BTNShowHideApps
-        '
-        Me.BTNShowHideApps.BackColor = System.Drawing.Color.SteelBlue
-        Me.BTNShowHideApps.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.BTNShowHideApps.FlatAppearance.BorderColor = System.Drawing.Color.SteelBlue
-        Me.BTNShowHideApps.FlatAppearance.BorderSize = 0
-        Me.BTNShowHideApps.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent
-        Me.BTNShowHideApps.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
-        Me.BTNShowHideApps.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNShowHideApps.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNShowHideApps.ForeColor = System.Drawing.Color.White
-        Me.BTNShowHideApps.Location = New System.Drawing.Point(17, 664)
-        Me.BTNShowHideApps.Name = "BTNShowHideApps"
-        Me.BTNShowHideApps.Size = New System.Drawing.Size(250, 24)
-        Me.BTNShowHideApps.TabIndex = 163
-        Me.BTNShowHideApps.Text = "Hide Apps"
-        Me.BTNShowHideApps.UseVisualStyleBackColor = False
-        '
         'AudibleMetronome
         '
         Me.AudibleMetronome.Interval = 30
         '
         'StatusUpdates
         '
-        Me.StatusUpdates.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
-        Me.StatusUpdates.Location = New System.Drawing.Point(0, 0)
+        Me.StatusUpdates.Location = New System.Drawing.Point(2, 2)
         Me.StatusUpdates.MinimumSize = New System.Drawing.Size(20, 20)
         Me.StatusUpdates.Name = "StatusUpdates"
-        Me.StatusUpdates.Size = New System.Drawing.Size(250, 167)
+        Me.StatusUpdates.Size = New System.Drawing.Size(245, 386)
         Me.StatusUpdates.TabIndex = 770
-        '
-        'PNLGlitter
-        '
-        Me.PNLGlitter.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLGlitter.Controls.Add(Me.StatusUpdates)
-        Me.PNLGlitter.Controls.Add(Me.MenuStrip1)
-        Me.PNLGlitter.Location = New System.Drawing.Point(10, 321)
-        Me.PNLGlitter.Name = "PNLGlitter"
-        Me.PNLGlitter.Size = New System.Drawing.Size(250, 172)
-        Me.PNLGlitter.TabIndex = 770
-        '
-        'MenuStrip1
-        '
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(246, 24)
-        Me.MenuStrip1.TabIndex = 771
-        Me.MenuStrip1.Text = "MenuStrip1"
         '
         'CustomSlideshowTimer
         '
@@ -1782,10 +1423,11 @@ Partial Class Form1
         Me.LBLTime.BackColor = System.Drawing.Color.Transparent
         Me.LBLTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLTime.ForeColor = System.Drawing.Color.White
-        Me.LBLTime.Location = New System.Drawing.Point(10, 257)
+        Me.LBLTime.Location = New System.Drawing.Point(0, 5)
         Me.LBLTime.Name = "LBLTime"
-        Me.LBLTime.Size = New System.Drawing.Size(250, 36)
+        Me.LBLTime.Size = New System.Drawing.Size(247, 36)
         Me.LBLTime.TabIndex = 771
+        Me.LBLTime.Text = "--:--"
         Me.LBLTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LBLDate
@@ -1793,10 +1435,11 @@ Partial Class Form1
         Me.LBLDate.BackColor = System.Drawing.Color.Transparent
         Me.LBLDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLDate.ForeColor = System.Drawing.Color.White
-        Me.LBLDate.Location = New System.Drawing.Point(12, 294)
+        Me.LBLDate.Location = New System.Drawing.Point(0, 42)
         Me.LBLDate.Name = "LBLDate"
-        Me.LBLDate.Size = New System.Drawing.Size(248, 21)
+        Me.LBLDate.Size = New System.Drawing.Size(247, 21)
         Me.LBLDate.TabIndex = 772
+        Me.LBLDate.Text = "Initializing Date..."
         Me.LBLDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'LBLAMPM
@@ -1804,10 +1447,11 @@ Partial Class Form1
         Me.LBLAMPM.BackColor = System.Drawing.Color.Transparent
         Me.LBLAMPM.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLAMPM.ForeColor = System.Drawing.Color.White
-        Me.LBLAMPM.Location = New System.Drawing.Point(173, 268)
+        Me.LBLAMPM.Location = New System.Drawing.Point(176, 16)
         Me.LBLAMPM.Name = "LBLAMPM"
         Me.LBLAMPM.Size = New System.Drawing.Size(40, 24)
         Me.LBLAMPM.TabIndex = 773
+        Me.LBLAMPM.Text = "PM"
         Me.LBLAMPM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'tmrResize
@@ -1819,7 +1463,7 @@ Partial Class Form1
         Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AppsToolStripMenuItem, Me.GamesToolStripMenuItem1, Me.ImagesToolStripMenuItem1, Me.ThemeToolStripMenuItem, Me.MilovanaToolStripMenuItem1, Me.DebugToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
-        Me.MenuStrip2.Size = New System.Drawing.Size(1374, 24)
+        Me.MenuStrip2.Size = New System.Drawing.Size(1682, 24)
         Me.MenuStrip2.TabIndex = 774
         Me.MenuStrip2.Text = "MenuStrip2"
         '
@@ -1967,6 +1611,7 @@ Partial Class Form1
         '
         'AppsToolStripMenuItem
         '
+        Me.AppsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GlitterToolStripMenuItem})
         Me.AppsToolStripMenuItem.Name = "AppsToolStripMenuItem"
         Me.AppsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.AppsToolStripMenuItem.Text = "Apps"
@@ -2083,30 +1728,100 @@ Partial Class Form1
         'BWMetro
         '
         '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.Transparent
+        Me.Panel1.Controls.Add(Me.LBLDate)
+        Me.Panel1.Controls.Add(Me.LBLTime)
+        Me.Panel1.Controls.Add(Me.LBLAMPM)
+        Me.Panel1.Location = New System.Drawing.Point(9, 37)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(247, 83)
+        Me.Panel1.TabIndex = 777
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 41)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(260, 155)
+        Me.GroupBox1.TabIndex = 51
+        Me.GroupBox1.TabStop = False
+        '
+        'LBLGeneralSettings
+        '
+        Me.LBLGeneralSettings.BackColor = System.Drawing.Color.Transparent
+        Me.LBLGeneralSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLGeneralSettings.ForeColor = System.Drawing.Color.Black
+        Me.LBLGeneralSettings.Location = New System.Drawing.Point(4, 8)
+        Me.LBLGeneralSettings.Name = "LBLGeneralSettings"
+        Me.LBLGeneralSettings.Size = New System.Drawing.Size(134, 21)
+        Me.LBLGeneralSettings.TabIndex = 53
+        Me.LBLGeneralSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'PNLTabs
+        '
+        Me.PNLTabs.AutoScroll = True
+        Me.PNLTabs.BackColor = System.Drawing.Color.Black
+        Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLTabs.Controls.Add(Me.StatusUpdates)
+        Me.PNLTabs.Location = New System.Drawing.Point(9, 120)
+        Me.PNLTabs.Name = "PNLTabs"
+        Me.PNLTabs.Size = New System.Drawing.Size(253, 646)
+        Me.PNLTabs.TabIndex = 778
+        '
+        'GlitterToolStripMenuItem
+        '
+        Me.GlitterToolStripMenuItem.Name = "GlitterToolStripMenuItem"
+        Me.GlitterToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GlitterToolStripMenuItem.Text = "Glitter"
+        '
+        'PNLAvatar
+        '
+        Me.PNLAvatar.BackColor = System.Drawing.Color.Black
+        Me.PNLAvatar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLAvatar.Controls.Add(Me.PNLFileTransfer)
+        Me.PNLAvatar.Controls.Add(Me.Panel3)
+        Me.PNLAvatar.Controls.Add(Me.Panel4)
+        Me.PNLAvatar.Controls.Add(Me.domAvatar)
+        Me.PNLAvatar.Location = New System.Drawing.Point(9, 777)
+        Me.PNLAvatar.Name = "PNLAvatar"
+        Me.PNLAvatar.Size = New System.Drawing.Size(253, 247)
+        Me.PNLAvatar.TabIndex = 777
+        '
+        'Panel3
+        '
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel3.Controls.Add(Me.subName)
+        Me.Panel3.Location = New System.Drawing.Point(2, 211)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(245, 31)
+        Me.Panel3.TabIndex = 158
+        '
+        'Panel4
+        '
+        Me.Panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel4.Controls.Add(Me.domName)
+        Me.Panel4.Location = New System.Drawing.Point(2, 1)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(245, 31)
+        Me.Panel4.TabIndex = 779
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.ClientSize = New System.Drawing.Size(1374, 1037)
+        Me.ClientSize = New System.Drawing.Size(1682, 1037)
+        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.PNLTabs)
+        Me.Controls.Add(Me.PNLAvatar)
         Me.Controls.Add(Me.MenuStrip2)
-        Me.Controls.Add(Me.LBLAMPM)
-        Me.Controls.Add(Me.LBLDate)
-        Me.Controls.Add(Me.LBLTime)
-        Me.Controls.Add(Me.PNLGlitter)
-        Me.Controls.Add(Me.PNLFileTransfer)
-        Me.Controls.Add(Me.domName)
-        Me.Controls.Add(Me.subAvatar)
-        Me.Controls.Add(Me.domAvatar)
         Me.Controls.Add(Me.SplitContainer1)
-        Me.Controls.Add(Me.subName)
         Me.Controls.Add(Me.sendButton)
-        Me.Controls.Add(Me.BTNShowHideApps)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
-        Me.MainMenuStrip = Me.MenuStrip1
         Me.MinimumSize = New System.Drawing.Size(978, 734)
         Me.Name = "Form1"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
@@ -2119,12 +1834,6 @@ Partial Class Form1
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        Me.PNLTheme.ResumeLayout(False)
-        Me.PNLThemeBTN.ResumeLayout(False)
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
-        CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNLDomTags.ResumeLayout(False)
         Me.PNLDomTagBTN.ResumeLayout(False)
         Me.PNLDomTagBTN.PerformLayout()
@@ -2135,13 +1844,17 @@ Partial Class Form1
         Me.PNLMediaBar.ResumeLayout(False)
         Me.PNLFileTransfer.ResumeLayout(False)
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.subAvatar, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PictureStrip.ResumeLayout(False)
-        Me.PNLGlitter.ResumeLayout(False)
-        Me.PNLGlitter.PerformLayout()
         Me.TeaseAIMenu.ResumeLayout(False)
         Me.MenuStrip2.ResumeLayout(False)
         Me.MenuStrip2.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.PNLTabs.ResumeLayout(False)
+        Me.PNLAvatar.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2205,7 +1918,6 @@ Partial Class Form1
     Friend WithEvents TeaseTimer As System.Windows.Forms.Timer
     Friend WithEvents RLGLTauntTimer As System.Windows.Forms.Timer
     Friend WithEvents AvoidTheEdgeTaunts As System.Windows.Forms.Timer
-    Friend WithEvents subAvatar As System.Windows.Forms.PictureBox
     Friend WithEvents PNLChatBox As System.Windows.Forms.Panel
     Friend WithEvents PictureStrip As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
@@ -2213,10 +1925,8 @@ Partial Class Form1
     Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ContactTimer As System.Windows.Forms.Timer
-    Friend WithEvents BTNShowHideApps As System.Windows.Forms.Button
     Friend WithEvents AudibleMetronome As System.Windows.Forms.Timer
     Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
-    Friend WithEvents PNLGlitter As System.Windows.Forms.Panel
     Friend WithEvents BWGlitter As System.ComponentModel.BackgroundWorker
     Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CustomSlideshowTimer As System.Windows.Forms.Timer
@@ -2249,7 +1959,6 @@ Partial Class Form1
     Friend WithEvents LBLDate As System.Windows.Forms.Label
     Friend WithEvents LBLAMPM As System.Windows.Forms.Label
     Friend WithEvents tmrResize As System.Windows.Forms.Timer
-    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents MenuStrip2 As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AppsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -2329,31 +2038,13 @@ Partial Class Form1
     Friend WithEvents Ass As System.Windows.Forms.Button
     Friend WithEvents PNLDomTagBTN As System.Windows.Forms.Panel
     Friend WithEvents ThemeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PNLTheme As System.Windows.Forms.Panel
-    Friend WithEvents PNLThemeBTN As System.Windows.Forms.Panel
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents PBBackgroundPreview As System.Windows.Forms.PictureBox
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents LBLBackColor As System.Windows.Forms.Label
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents CBStretchBack As System.Windows.Forms.CheckBox
-    Friend WithEvents LBLTextColor As System.Windows.Forms.Label
-    Friend WithEvents Button5 As System.Windows.Forms.Button
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents LBLButtonColor As System.Windows.Forms.Label
-    Friend WithEvents Button4 As System.Windows.Forms.Button
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents LBLChatTextColor As System.Windows.Forms.Label
-    Friend WithEvents Button7 As System.Windows.Forms.Button
-    Friend WithEvents LBLChatWindowColor As System.Windows.Forms.Label
-    Friend WithEvents Button6 As System.Windows.Forms.Button
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents Button8 As System.Windows.Forms.Button
-    Friend WithEvents Save As System.Windows.Forms.Button
-    Friend WithEvents Button9 As System.Windows.Forms.Button
-    Friend WithEvents Button10 As System.Windows.Forms.Button
+    Friend WithEvents LBLGeneralSettings As System.Windows.Forms.Label
+    Friend WithEvents PNLTabs As System.Windows.Forms.Panel
+    Friend WithEvents GlitterToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PNLAvatar As System.Windows.Forms.Panel
+    Friend WithEvents Panel3 As System.Windows.Forms.Panel
+    Friend WithEvents Panel4 As System.Windows.Forms.Panel
 
 End Class
