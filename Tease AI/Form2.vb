@@ -13323,6 +13323,10 @@ NextURL:
             SettingsList.Add("Text Color: " & My.Settings.TextColor.ToArgb.ToString)
             SettingsList.Add("Chat Window Color: " & My.Settings.ChatWindowColor.ToArgb.ToString)
             SettingsList.Add("Chat Text Color: " & My.Settings.ChatTextColor.ToArgb.ToString)
+            SettingsList.Add("Date Text Color: " & My.Settings.DateTextColor.ToArgb.ToString)
+            SettingsList.Add("Date Back Color: " & My.Settings.DateBackColor.ToArgb.ToString)
+            SettingsList.Add("Transparent Date: " & My.Settings.DateTextColor.ToArgb.ToString)
+
 
             Dim SettingsString As String = ""
 
@@ -13370,6 +13374,10 @@ NextURL:
                 My.Settings.ChatWindowColor = Color.FromArgb(SettingsList(5).Replace("Chat Window Color: ", ""))
                 My.Settings.ChatTextColor = Color.FromArgb(SettingsList(6).Replace("Chat Text Color: ", ""))
 
+                My.Settings.DateTextColor = Color.FromArgb(SettingsList(7).Replace("Date Text Color: ", ""))
+                My.Settings.DateBackColor = Color.FromArgb(SettingsList(8).Replace("Date Back Color: ", ""))
+                CBTransparentTime.Checked = SettingsList(9).Replace("Transparent Date: ", "")
+
                 My.Settings.Save()
 
 
@@ -13392,12 +13400,38 @@ NextURL:
     End Sub
 
     Private Sub CBStretchBack_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBStretchBack.CheckedChanged
-        If Form1.FormLoading = False Then
+        If Form1.ApplyingTheme = False Then
             My.Settings.BackgroundStretch = CBStretchBack.Checked
+            My.Settings.Save()
             Form1.ApplyThemeColor()
         End If
+
     End Sub
 
 
   
+    Private Sub Button30_Click(sender As System.Object, e As System.EventArgs) Handles Button30.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.DateTextColor = GetColor.Color
+            My.Settings.Save()
+            Form1.ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub Button28_Click(sender As System.Object, e As System.EventArgs) Handles Button28.Click
+        If GetColor.ShowDialog() = DialogResult.OK Then
+            My.Settings.DateBackColor = GetColor.Color
+            My.Settings.Save()
+            Form1.ApplyThemeColor()
+        End If
+    End Sub
+
+    Private Sub CBTransparentTime_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTransparentTime.CheckedChanged
+        If Form1.ApplyingTheme = False Then
+            My.Settings.CBDateTransparent = CBTransparentTime.Checked
+            My.Settings.Save()
+            Form1.ApplyThemeColor()
+        End If
+
+    End Sub
 End Class

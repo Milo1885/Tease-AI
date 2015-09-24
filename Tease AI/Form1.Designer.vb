@@ -203,7 +203,7 @@ Partial Class Form1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetroTimer = New System.Windows.Forms.Timer(Me.components)
         Me.BWMetro = New System.ComponentModel.BackgroundWorker()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PNLDate = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LBLGeneralSettings = New System.Windows.Forms.Label()
         Me.PNLTabs = New System.Windows.Forms.Panel()
@@ -228,7 +228,7 @@ Partial Class Form1
         Me.PictureStrip.SuspendLayout()
         Me.TeaseAIMenu.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
-        Me.Panel1.SuspendLayout()
+        Me.PNLDate.SuspendLayout()
         Me.PNLTabs.SuspendLayout()
         Me.PNLAvatar.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -1423,7 +1423,7 @@ Partial Class Form1
         Me.LBLTime.BackColor = System.Drawing.Color.Transparent
         Me.LBLTime.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLTime.ForeColor = System.Drawing.Color.White
-        Me.LBLTime.Location = New System.Drawing.Point(0, 5)
+        Me.LBLTime.Location = New System.Drawing.Point(0, 11)
         Me.LBLTime.Name = "LBLTime"
         Me.LBLTime.Size = New System.Drawing.Size(247, 36)
         Me.LBLTime.TabIndex = 771
@@ -1435,7 +1435,7 @@ Partial Class Form1
         Me.LBLDate.BackColor = System.Drawing.Color.Transparent
         Me.LBLDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLDate.ForeColor = System.Drawing.Color.White
-        Me.LBLDate.Location = New System.Drawing.Point(0, 42)
+        Me.LBLDate.Location = New System.Drawing.Point(0, 48)
         Me.LBLDate.Name = "LBLDate"
         Me.LBLDate.Size = New System.Drawing.Size(247, 21)
         Me.LBLDate.TabIndex = 772
@@ -1728,16 +1728,17 @@ Partial Class Form1
         'BWMetro
         '
         '
-        'Panel1
+        'PNLDate
         '
-        Me.Panel1.BackColor = System.Drawing.Color.Transparent
-        Me.Panel1.Controls.Add(Me.LBLDate)
-        Me.Panel1.Controls.Add(Me.LBLTime)
-        Me.Panel1.Controls.Add(Me.LBLAMPM)
-        Me.Panel1.Location = New System.Drawing.Point(9, 37)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(247, 83)
-        Me.Panel1.TabIndex = 777
+        Me.PNLDate.BackColor = System.Drawing.Color.Transparent
+        Me.PNLDate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLDate.Controls.Add(Me.LBLDate)
+        Me.PNLDate.Controls.Add(Me.LBLTime)
+        Me.PNLDate.Controls.Add(Me.LBLAMPM)
+        Me.PNLDate.Location = New System.Drawing.Point(9, 37)
+        Me.PNLDate.Name = "PNLDate"
+        Me.PNLDate.Size = New System.Drawing.Size(253, 89)
+        Me.PNLDate.TabIndex = 777
         '
         'GroupBox1
         '
@@ -1760,7 +1761,6 @@ Partial Class Form1
         '
         'PNLTabs
         '
-        Me.PNLTabs.AutoScroll = True
         Me.PNLTabs.BackColor = System.Drawing.Color.Black
         Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PNLTabs.Controls.Add(Me.StatusUpdates)
@@ -1813,12 +1813,12 @@ Partial Class Form1
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(1682, 1037)
-        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.PNLTabs)
         Me.Controls.Add(Me.PNLAvatar)
         Me.Controls.Add(Me.MenuStrip2)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.sendButton)
+        Me.Controls.Add(Me.PNLDate)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
@@ -1848,7 +1848,7 @@ Partial Class Form1
         Me.TeaseAIMenu.ResumeLayout(False)
         Me.MenuStrip2.ResumeLayout(False)
         Me.MenuStrip2.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
+        Me.PNLDate.ResumeLayout(False)
         Me.PNLTabs.ResumeLayout(False)
         Me.PNLAvatar.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
@@ -2038,7 +2038,7 @@ Partial Class Form1
     Friend WithEvents Ass As System.Windows.Forms.Button
     Friend WithEvents PNLDomTagBTN As System.Windows.Forms.Panel
     Friend WithEvents ThemeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents PNLDate As System.Windows.Forms.Panel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents LBLGeneralSettings As System.Windows.Forms.Label
     Friend WithEvents PNLTabs As System.Windows.Forms.Panel

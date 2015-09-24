@@ -4760,6 +4760,42 @@ Namespace My
                 Me("CBInputIcon") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("White")>  _
+        Public Property DateTextColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("DateTextColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("DateTextColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Transparent")>  _
+        Public Property DateBackColor() As Global.System.Drawing.Color
+            Get
+                Return CType(Me("DateBackColor"),Global.System.Drawing.Color)
+            End Get
+            Set
+                Me("DateBackColor") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBDateTransparent() As Boolean
+            Get
+                Return CType(Me("CBDateTransparent"),Boolean)
+            End Get
+            Set
+                Me("CBDateTransparent") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

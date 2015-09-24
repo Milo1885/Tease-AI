@@ -943,13 +943,13 @@ Partial Class FrmSettings
         Me.LBLButtonColor2 = New System.Windows.Forms.Label()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.Label136 = New System.Windows.Forms.Label()
+        Me.LBLDateTimeColor2 = New System.Windows.Forms.Label()
         Me.Label137 = New System.Windows.Forms.Label()
         Me.Label138 = New System.Windows.Forms.Label()
         Me.Button28 = New System.Windows.Forms.Button()
         Me.Button30 = New System.Windows.Forms.Button()
-        Me.Label139 = New System.Windows.Forms.Label()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.LBLDateBackColor2 = New System.Windows.Forms.Label()
+        Me.CBTransparentTime = New System.Windows.Forms.CheckBox()
         Me.Button31 = New System.Windows.Forms.Button()
         Me.Button32 = New System.Windows.Forms.Button()
         Me.Label140 = New System.Windows.Forms.Label()
@@ -12107,13 +12107,13 @@ Partial Class FrmSettings
         '
         'GroupBox5
         '
-        Me.GroupBox5.Controls.Add(Me.CheckBox2)
-        Me.GroupBox5.Controls.Add(Me.Label136)
+        Me.GroupBox5.Controls.Add(Me.CBTransparentTime)
+        Me.GroupBox5.Controls.Add(Me.LBLDateTimeColor2)
         Me.GroupBox5.Controls.Add(Me.Label137)
         Me.GroupBox5.Controls.Add(Me.Label138)
         Me.GroupBox5.Controls.Add(Me.Button28)
         Me.GroupBox5.Controls.Add(Me.Button30)
-        Me.GroupBox5.Controls.Add(Me.Label139)
+        Me.GroupBox5.Controls.Add(Me.LBLDateBackColor2)
         Me.GroupBox5.Controls.Add(Me.LBLTextColor)
         Me.GroupBox5.Controls.Add(Me.LBLChatWindowColor2)
         Me.GroupBox5.Controls.Add(Me.Button20)
@@ -12149,14 +12149,14 @@ Partial Class FrmSettings
         Me.GroupBox9.TabStop = False
         Me.GroupBox9.Text = "System"
         '
-        'Label136
+        'LBLDateTimeColor2
         '
-        Me.Label136.BackColor = System.Drawing.Color.SteelBlue
-        Me.Label136.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label136.Location = New System.Drawing.Point(187, 190)
-        Me.Label136.Name = "Label136"
-        Me.Label136.Size = New System.Drawing.Size(103, 28)
-        Me.Label136.TabIndex = 19
+        Me.LBLDateTimeColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLDateTimeColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLDateTimeColor2.Location = New System.Drawing.Point(187, 190)
+        Me.LBLDateTimeColor2.Name = "LBLDateTimeColor2"
+        Me.LBLDateTimeColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLDateTimeColor2.TabIndex = 19
         '
         'Label137
         '
@@ -12200,24 +12200,24 @@ Partial Class FrmSettings
         Me.Button30.TabIndex = 18
         Me.Button30.UseVisualStyleBackColor = False
         '
-        'Label139
+        'LBLDateBackColor2
         '
-        Me.Label139.BackColor = System.Drawing.Color.SteelBlue
-        Me.Label139.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label139.Location = New System.Drawing.Point(187, 224)
-        Me.Label139.Name = "Label139"
-        Me.Label139.Size = New System.Drawing.Size(103, 28)
-        Me.Label139.TabIndex = 22
+        Me.LBLDateBackColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLDateBackColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLDateBackColor2.Location = New System.Drawing.Point(187, 224)
+        Me.LBLDateBackColor2.Name = "LBLDateBackColor2"
+        Me.LBLDateBackColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLDateBackColor2.TabIndex = 22
         '
-        'CheckBox2
+        'CBTransparentTime
         '
-        Me.CheckBox2.AutoSize = True
-        Me.CheckBox2.Location = New System.Drawing.Point(7, 262)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(179, 17)
-        Me.CheckBox2.TabIndex = 23
-        Me.CheckBox2.Text = "Transparent Date/Time Window"
-        Me.CheckBox2.UseVisualStyleBackColor = True
+        Me.CBTransparentTime.AutoSize = True
+        Me.CBTransparentTime.Location = New System.Drawing.Point(7, 262)
+        Me.CBTransparentTime.Name = "CBTransparentTime"
+        Me.CBTransparentTime.Size = New System.Drawing.Size(179, 17)
+        Me.CBTransparentTime.TabIndex = 23
+        Me.CBTransparentTime.Text = "Transparent Date/Time Window"
+        Me.CBTransparentTime.UseVisualStyleBackColor = True
         '
         'Button31
         '
@@ -13483,13 +13483,13 @@ End Sub
     Friend WithEvents Button27 As System.Windows.Forms.Button
     Friend WithEvents LBLButtonColor2 As System.Windows.Forms.Label
     Friend WithEvents GroupBox9 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label136 As System.Windows.Forms.Label
+    Friend WithEvents LBLDateTimeColor2 As System.Windows.Forms.Label
     Friend WithEvents Label137 As System.Windows.Forms.Label
     Friend WithEvents Label138 As System.Windows.Forms.Label
     Friend WithEvents Button28 As System.Windows.Forms.Button
     Friend WithEvents Button30 As System.Windows.Forms.Button
-    Friend WithEvents Label139 As System.Windows.Forms.Label
-    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents LBLDateBackColor2 As System.Windows.Forms.Label
+    Friend WithEvents CBTransparentTime As System.Windows.Forms.CheckBox
     Friend WithEvents Button31 As System.Windows.Forms.Button
     Friend WithEvents Label140 As System.Windows.Forms.Label
     Friend WithEvents Button32 As System.Windows.Forms.Button

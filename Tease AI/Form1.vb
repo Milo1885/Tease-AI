@@ -501,6 +501,8 @@ Public Class Form1
 
     Dim FilterL As New List(Of String)
 
+    Public ApplyingTheme As Boolean
+
 
 
     Private Const DISABLE_SOUNDS As Integer = 21
@@ -12908,6 +12910,15 @@ VTSkip:
 
     End Sub
 
+    Public Function CreateFlag(ByVal FlagDir As String)
+
+        Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagDir)
+        FlagCreate.Close()
+        FlagCreate.Dispose()
+
+
+    End Function
+
     Public Function GetParentheses(ByVal ParenCheck As String, ByVal CommandCheck As String) As String
 
 
@@ -23171,6 +23182,8 @@ SkipNew:
 
     Public Sub ApplyThemeColor()
 
+        ApplyingTheme = True
+
         subName.BackColor = My.Settings.ButtonColor
         subName.ForeColor = My.Settings.TextColor
         'BTNShowHideApps.BackColor = My.Settings.ButtonColor
@@ -23238,12 +23251,24 @@ SkipNew:
         FrmSettings.LBLTextColor2.BackColor = My.Settings.TextColor
         FrmSettings.LBLChatWindowColor2.BackColor = My.Settings.ChatWindowColor
         FrmSettings.LBLChatTextColor2.BackColor = My.Settings.ChatTextColor
+        FrmSettings.LBLDateTimeColor2.BackColor = My.Settings.DateTextColor
+        FrmSettings.LBLDateBackColor2.BackColor = My.Settings.DateBackColor
 
         chatBox.BackColor = My.Settings.ChatWindowColor
         ImageFolderComboBox.BackColor = My.Settings.ChatWindowColor
         chatBox.ForeColor = My.Settings.ChatTextColor
         ImageFolderComboBox.ForeColor = My.Settings.ChatTextColor
 
+        LBLDate.ForeColor = My.Settings.DateTextColor
+        LBLTime.ForeColor = My.Settings.DateTextColor
+
+        FrmSettings.CBTransparentTime.Checked = My.Settings.CBDateTransparent
+
+        If FrmSettings.CBTransparentTime.Checked = True Then
+            PNLDate.BackColor = Color.Transparent
+        Else
+            PNLDate.BackColor = My.Settings.DateBackColor
+        End If
 
         StatusUpdates.DocumentText = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & StatusText & "</body>"
         Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
@@ -23263,6 +23288,9 @@ SkipNew:
 
 
         PNLTabs.BackColor = My.Settings.BackgroundColor
+
+        ApplyingTheme = False
+
 
         'TabControl1.DefaultBackColor = My.Settings.BackgroundColor
 
