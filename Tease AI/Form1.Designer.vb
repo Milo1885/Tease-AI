@@ -240,9 +240,9 @@ Partial Class Form1
         Me.domName.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
         Me.domName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.domName.ForeColor = System.Drawing.Color.White
-        Me.domName.Location = New System.Drawing.Point(1, 2)
+        Me.domName.Location = New System.Drawing.Point(-2, 2)
         Me.domName.Name = "domName"
-        Me.domName.Size = New System.Drawing.Size(238, 23)
+        Me.domName.Size = New System.Drawing.Size(245, 23)
         Me.domName.TabIndex = 2
         Me.domName.Text = "Domme Name"
         Me.domName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1024,10 +1024,10 @@ Partial Class Form1
         Me.subName.Cursor = System.Windows.Forms.Cursors.IBeam
         Me.subName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.subName.ForeColor = System.Drawing.Color.White
-        Me.subName.Location = New System.Drawing.Point(1, 2)
+        Me.subName.Location = New System.Drawing.Point(-2, 2)
         Me.subName.Name = "subName"
         Me.subName.ShortcutsEnabled = False
-        Me.subName.Size = New System.Drawing.Size(238, 23)
+        Me.subName.Size = New System.Drawing.Size(245, 23)
         Me.subName.TabIndex = 3
         Me.subName.Text = "Your Name"
         Me.subName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -1779,10 +1779,10 @@ Partial Class Form1
         '
         Me.PNLAvatar.BackColor = System.Drawing.Color.Black
         Me.PNLAvatar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLAvatar.Controls.Add(Me.PNLFileTransfer)
         Me.PNLAvatar.Controls.Add(Me.Panel3)
         Me.PNLAvatar.Controls.Add(Me.Panel4)
         Me.PNLAvatar.Controls.Add(Me.domAvatar)
+        Me.PNLAvatar.Controls.Add(Me.PNLFileTransfer)
         Me.PNLAvatar.Location = New System.Drawing.Point(9, 777)
         Me.PNLAvatar.Name = "PNLAvatar"
         Me.PNLAvatar.Size = New System.Drawing.Size(253, 247)

@@ -47,6 +47,9 @@ Public Class FrmSettings
 
     Dim TagImageFolder As String
 
+    Private pbTop As Integer = 0
+    Private pbRight As Integer = 0
+
     ' Protected Overrides ReadOnly Property CreateParams() As CreateParams
     '    Get
     ' Dim param As CreateParams = MyBase.CreateParams
@@ -13434,4 +13437,51 @@ NextURL:
         End If
 
     End Sub
+
+    Private Sub Button33_Click(sender As System.Object, e As System.EventArgs) Handles Button33.Click
+        pbTop -= 1
+        Dim bmp As New Bitmap(Form1.ClientSize.Width, Form1.ClientSize.Height)
+        Using g As Graphics = Graphics.FromImage(bmp)
+            'g.Clear(PictureBox1.BackColor)
+            ' g.DrawImage(Image.FromFile(My.Settings.BackgroundImage), pbRight, pbTop, bmp.Width, bmp.Height)
+        End Using
+        Form1.BackgroundImage = bmp
+    End Sub
+
+    Private Sub Button34_Click(sender As System.Object, e As System.EventArgs) Handles Button34.Click
+        pbRight -= 1
+        Dim bmp As New Bitmap(Form1.ClientSize.Width, Form1.ClientSize.Height)
+        Using g As Graphics = Graphics.FromImage(bmp)
+            'g.Clear(PictureBox1.BackColor)
+            g.DrawImage(Image.FromFile(My.Settings.BackgroundImage), pbRight, pbTop, bmp.Width, bmp.Height)
+        End Using
+        Form1.BackgroundImage = bmp
+    End Sub
+
+    Private Sub Button35_Click_1(sender As System.Object, e As System.EventArgs) Handles Button35.Click
+        pbRight += 1
+        Dim bmp As New Bitmap(Form1.ClientSize.Width, Form1.ClientSize.Height)
+        Using g As Graphics = Graphics.FromImage(bmp)
+            'g.Clear(PictureBox1.BackColor)
+            g.DrawImage(Image.FromFile(My.Settings.BackgroundImage), pbRight, pbTop, bmp.Width, bmp.Height)
+        End Using
+        Form1.BackgroundImage = bmp
+    End Sub
+
+    Private Sub Button36_Click_1(sender As System.Object, e As System.EventArgs) Handles Button36.Click
+        pbTop += 1
+        Dim bmp As New Bitmap(Form1.ClientSize.Width, Form1.ClientSize.Height)
+        Using g As Graphics = Graphics.FromImage(bmp)
+            'g.Clear(PictureBox1.BackColor)
+            g.DrawImage(Image.FromFile(My.Settings.BackgroundImage), pbRight, pbTop, bmp.Width, bmp.Height)
+        End Using
+        Form1.BackgroundImage = bmp
+    End Sub
+
+  
+
+
+
+    
+
 End Class
