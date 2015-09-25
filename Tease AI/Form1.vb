@@ -22236,13 +22236,7 @@ TryNext:
 
         AdjustWindow()
 
-        PNLTabs.HorizontalScroll.Visible = False
-
-
-        PNLTabs.HorizontalScroll.Maximum = 0
-        PNLTabs.AutoScroll = False
-        PNLTabs.VerticalScroll.Visible = False
-        PNLTabs.AutoScroll = True
+      
 
     End Sub
 
@@ -22378,6 +22372,22 @@ TryNext:
         DomWMP.Location = New Point(0, 0)
         DomWMP.Width = SplitContainer1.Width
 
+
+        If PNLTabs.Height > 476 Then
+            PNLDomTagBTN.Height = PNLTabs.Height - 8
+        Else
+            PNLDomTagBTN.Height = 468
+        End If
+
+
+        PNLTabs.HorizontalScroll.Visible = False
+
+
+        PNLTabs.HorizontalScroll.Maximum = 0
+        PNLTabs.AutoScroll = False
+        PNLTabs.VerticalScroll.Visible = False
+        PNLTabs.AutoScroll = True
+
         AdjustingWindow = False
 
         'If My.Settings.SplitterPosition <> 0 Then SplitContainer1.SplitterDistance = My.Settings.SplitterPosition
@@ -22449,8 +22459,8 @@ TryNext:
             PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height - 12)
         End If
 
-        PNLDomTags.Height = SplitContainer1.Panel1.Height
-        PNLDomTagBTN.Location = New Point(10, (PNLDomTags.Height - 479) / 2)
+        'PNLDomTags.Height = SplitContainer1.Panel1.Height
+        'PNLDomTagBTN.Location = New Point(10, (PNLDomTags.Height - 479) / 2)
 
         'PNLTheme.Height = SplitContainer1.Panel1.Height - 82
         'PNLThemeBTN.Location = New Point(0, (PNLTheme.Height - 480) / 2)
@@ -22458,7 +22468,7 @@ TryNext:
         ' PNLTheme.HorizontalScroll.Visible = False
         ' PNLThemeBTN.HorizontalScroll.Visible = False
 
-        If PNLDomTagBTN.Location.Y < 30 Then PNLDomTagBTN.Location = New Point(10, 30)
+        'If PNLDomTagBTN.Location.Y < 30 Then PNLDomTagBTN.Location = New Point(10, 30)
         'If PNLThemeBTN.Location.Y < 30 Then PNLThemeBTN.Location = New Point(0, 30)
 
 
@@ -22866,11 +22876,19 @@ SkipNew:
     End Sub
 
     Private Sub DommeTagsToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles DommeTagsToolStripMenuItem1.Click
-        DommeTags = True
-        AdjustWindow()
+
+        If PNLDomTagBTN.Visible = False Then
+            CloseApp()
+            OpenApp()
+            PNLDomTagBTN.Visible = True
+        Else
+            CloseApp()
+        End If
+
+
     End Sub
 
-    Private Sub Button1_Click_3(sender As System.Object, e As System.EventArgs) Handles Button1.Click
+    Private Sub Button1_Click_3(sender As System.Object, e As System.EventArgs)
         DommeTags = False
         AdjustWindow()
     End Sub
@@ -23465,7 +23483,7 @@ SkipNew:
         TBFurniture.Text = ""
 
 
-        LBLDomTagImg.Text = Path.GetFileName(_ImageFileNames(FileCount))
+        'LBLDomTagImg.Text = Path.GetFileName(_ImageFileNames(FileCount))
 
         Dim TagFile As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt"
 
@@ -23734,6 +23752,7 @@ SkipNew:
         SaveBlogImage.ForeColor = My.Settings.TextColor
         SettingsButton.ForeColor = My.Settings.TextColor
 
+        PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
 
         Me.BackColor = My.Settings.BackgroundColor
 
@@ -23758,7 +23777,7 @@ SkipNew:
         'PNLAppRandomizer.BackColor = my.settings.BackgroundColor
         'PictureBox3.BackColor = my.settings.BackgroundColor
 
-        PNLDomTags.BackColor = My.Settings.BackgroundColor
+
         PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
 
         FrmSettings.LBLBackColor2.BackColor = My.Settings.BackgroundColor
@@ -23892,12 +23911,18 @@ SkipNew:
     Public Sub OpenApp()
 
         PNLTabs.Height = Me.Height - 429
+
+        AdjustWindow()
+
     End Sub
 
     Public Sub CloseApp()
 
+        PNLDomTagBTN.Visible = False
         StatusUpdates.Visible = False
         PNLTabs.Height = 0
+
+        AdjustWindow()
     End Sub
 
     Private Sub Button10_Click(sender As System.Object, e As System.EventArgs)

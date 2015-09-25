@@ -29,7 +29,6 @@ Partial Class Form1
         Me.mainPictureBox = New System.Windows.Forms.PictureBox()
         Me.domAvatar = New System.Windows.Forms.PictureBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.PNLDomTags = New System.Windows.Forms.Panel()
         Me.PNLDomTagBTN = New System.Windows.Forms.Panel()
         Me.TBFurniture = New System.Windows.Forms.TextBox()
         Me.Masturbating = New System.Windows.Forms.Button()
@@ -50,7 +49,6 @@ Partial Class Form1
         Me.Ass = New System.Windows.Forms.Button()
         Me.HalfDressed = New System.Windows.Forms.Button()
         Me.SexToy = New System.Windows.Forms.Button()
-        Me.LBLDomTagImg = New System.Windows.Forms.Label()
         Me.GarmentCovering = New System.Windows.Forms.Button()
         Me.Tattoo = New System.Windows.Forms.Button()
         Me.HandsCovering = New System.Windows.Forms.Button()
@@ -62,7 +60,6 @@ Partial Class Form1
         Me.SeeThrough = New System.Windows.Forms.Button()
         Me.AllFours = New System.Windows.Forms.Button()
         Me.Piercing = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.CensorshipBar = New System.Windows.Forms.Panel()
         Me.LBLImageInfo = New System.Windows.Forms.Label()
         Me.DomWMP = New AxWMPLib.AxWindowsMediaPlayer()
@@ -217,7 +214,6 @@ Partial Class Form1
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        Me.PNLDomTags.SuspendLayout()
         Me.PNLDomTagBTN.SuspendLayout()
         CType(Me.DomWMP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNLHope.SuspendLayout()
@@ -289,7 +285,6 @@ Partial Class Form1
         'SplitContainer1.Panel1
         '
         Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.Transparent
-        Me.SplitContainer1.Panel1.Controls.Add(Me.PNLDomTags)
         Me.SplitContainer1.Panel1.Controls.Add(Me.CensorshipBar)
         Me.SplitContainer1.Panel1.Controls.Add(Me.LBLImageInfo)
         Me.SplitContainer1.Panel1.Controls.Add(Me.mainPictureBox)
@@ -313,21 +308,8 @@ Partial Class Form1
         Me.SplitContainer1.SplitterDistance = 734
         Me.SplitContainer1.TabIndex = 136
         '
-        'PNLDomTags
-        '
-        Me.PNLDomTags.BackColor = System.Drawing.Color.SteelBlue
-        Me.PNLDomTags.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLDomTags.Controls.Add(Me.PNLDomTagBTN)
-        Me.PNLDomTags.Controls.Add(Me.Button1)
-        Me.PNLDomTags.Location = New System.Drawing.Point(840, -2)
-        Me.PNLDomTags.Name = "PNLDomTags"
-        Me.PNLDomTags.Size = New System.Drawing.Size(249, 731)
-        Me.PNLDomTags.TabIndex = 97
-        Me.PNLDomTags.Visible = False
-        '
         'PNLDomTagBTN
         '
-        Me.PNLDomTagBTN.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.PNLDomTagBTN.BackColor = System.Drawing.Color.SteelBlue
         Me.PNLDomTagBTN.Controls.Add(Me.TBFurniture)
         Me.PNLDomTagBTN.Controls.Add(Me.Masturbating)
@@ -348,7 +330,6 @@ Partial Class Form1
         Me.PNLDomTagBTN.Controls.Add(Me.Ass)
         Me.PNLDomTagBTN.Controls.Add(Me.HalfDressed)
         Me.PNLDomTagBTN.Controls.Add(Me.SexToy)
-        Me.PNLDomTagBTN.Controls.Add(Me.LBLDomTagImg)
         Me.PNLDomTagBTN.Controls.Add(Me.GarmentCovering)
         Me.PNLDomTagBTN.Controls.Add(Me.Tattoo)
         Me.PNLDomTagBTN.Controls.Add(Me.HandsCovering)
@@ -360,16 +341,16 @@ Partial Class Form1
         Me.PNLDomTagBTN.Controls.Add(Me.SeeThrough)
         Me.PNLDomTagBTN.Controls.Add(Me.AllFours)
         Me.PNLDomTagBTN.Controls.Add(Me.Piercing)
-        Me.PNLDomTagBTN.Location = New System.Drawing.Point(10, 115)
+        Me.PNLDomTagBTN.Location = New System.Drawing.Point(2, 2)
         Me.PNLDomTagBTN.Name = "PNLDomTagBTN"
-        Me.PNLDomTagBTN.Size = New System.Drawing.Size(224, 479)
+        Me.PNLDomTagBTN.Size = New System.Drawing.Size(245, 468)
         Me.PNLDomTagBTN.TabIndex = 0
         '
         'TBFurniture
         '
         Me.TBFurniture.BackColor = System.Drawing.Color.LightGray
         Me.TBFurniture.ForeColor = System.Drawing.Color.Black
-        Me.TBFurniture.Location = New System.Drawing.Point(120, 457)
+        Me.TBFurniture.Location = New System.Drawing.Point(130, 434)
         Me.TBFurniture.Name = "TBFurniture"
         Me.TBFurniture.Size = New System.Drawing.Size(104, 20)
         Me.TBFurniture.TabIndex = 64
@@ -382,7 +363,7 @@ Partial Class Form1
         Me.Masturbating.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Masturbating.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Masturbating.ForeColor = System.Drawing.Color.Black
-        Me.Masturbating.Location = New System.Drawing.Point(0, 214)
+        Me.Masturbating.Location = New System.Drawing.Point(11, 191)
         Me.Masturbating.Name = "Masturbating"
         Me.Masturbating.Size = New System.Drawing.Size(104, 24)
         Me.Masturbating.TabIndex = 41
@@ -398,7 +379,7 @@ Partial Class Form1
         Me.Feet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Feet.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Feet.ForeColor = System.Drawing.Color.Black
-        Me.Feet.Location = New System.Drawing.Point(0, 184)
+        Me.Feet.Location = New System.Drawing.Point(11, 161)
         Me.Feet.Name = "Feet"
         Me.Feet.Size = New System.Drawing.Size(104, 24)
         Me.Feet.TabIndex = 40
@@ -410,7 +391,7 @@ Partial Class Form1
         '
         Me.TBSexToy.BackColor = System.Drawing.Color.LightGray
         Me.TBSexToy.ForeColor = System.Drawing.Color.Black
-        Me.TBSexToy.Location = New System.Drawing.Point(120, 427)
+        Me.TBSexToy.Location = New System.Drawing.Point(130, 404)
         Me.TBSexToy.Name = "TBSexToy"
         Me.TBSexToy.Size = New System.Drawing.Size(104, 20)
         Me.TBSexToy.TabIndex = 63
@@ -423,7 +404,7 @@ Partial Class Form1
         Me.Legs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Legs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Legs.ForeColor = System.Drawing.Color.Black
-        Me.Legs.Location = New System.Drawing.Point(0, 154)
+        Me.Legs.Location = New System.Drawing.Point(11, 131)
         Me.Legs.Name = "Legs"
         Me.Legs.Size = New System.Drawing.Size(104, 24)
         Me.Legs.TabIndex = 39
@@ -439,7 +420,7 @@ Partial Class Form1
         Me.Sucking.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Sucking.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Sucking.ForeColor = System.Drawing.Color.Black
-        Me.Sucking.Location = New System.Drawing.Point(0, 244)
+        Me.Sucking.Location = New System.Drawing.Point(11, 221)
         Me.Sucking.Name = "Sucking"
         Me.Sucking.Size = New System.Drawing.Size(104, 24)
         Me.Sucking.TabIndex = 42
@@ -451,7 +432,7 @@ Partial Class Form1
         '
         Me.TBTattoo.BackColor = System.Drawing.Color.LightGray
         Me.TBTattoo.ForeColor = System.Drawing.Color.Black
-        Me.TBTattoo.Location = New System.Drawing.Point(120, 397)
+        Me.TBTattoo.Location = New System.Drawing.Point(130, 374)
         Me.TBTattoo.Name = "TBTattoo"
         Me.TBTattoo.Size = New System.Drawing.Size(104, 20)
         Me.TBTattoo.TabIndex = 62
@@ -464,7 +445,7 @@ Partial Class Form1
         Me.Face.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Face.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Face.ForeColor = System.Drawing.Color.Black
-        Me.Face.Location = New System.Drawing.Point(0, 34)
+        Me.Face.Location = New System.Drawing.Point(11, 11)
         Me.Face.Name = "Face"
         Me.Face.Size = New System.Drawing.Size(104, 24)
         Me.Face.TabIndex = 38
@@ -476,7 +457,7 @@ Partial Class Form1
         '
         Me.TBUnderwear.BackColor = System.Drawing.Color.LightGray
         Me.TBUnderwear.ForeColor = System.Drawing.Color.Black
-        Me.TBUnderwear.Location = New System.Drawing.Point(120, 367)
+        Me.TBUnderwear.Location = New System.Drawing.Point(130, 344)
         Me.TBUnderwear.Name = "TBUnderwear"
         Me.TBUnderwear.Size = New System.Drawing.Size(104, 20)
         Me.TBUnderwear.TabIndex = 61
@@ -489,7 +470,7 @@ Partial Class Form1
         Me.Smiling.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Smiling.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Smiling.ForeColor = System.Drawing.Color.Black
-        Me.Smiling.Location = New System.Drawing.Point(0, 274)
+        Me.Smiling.Location = New System.Drawing.Point(11, 251)
         Me.Smiling.Name = "Smiling"
         Me.Smiling.Size = New System.Drawing.Size(104, 24)
         Me.Smiling.TabIndex = 43
@@ -505,7 +486,7 @@ Partial Class Form1
         Me.Pussy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Pussy.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Pussy.ForeColor = System.Drawing.Color.Black
-        Me.Pussy.Location = New System.Drawing.Point(0, 94)
+        Me.Pussy.Location = New System.Drawing.Point(11, 71)
         Me.Pussy.Name = "Pussy"
         Me.Pussy.Size = New System.Drawing.Size(104, 24)
         Me.Pussy.TabIndex = 37
@@ -521,7 +502,7 @@ Partial Class Form1
         Me.Glaring.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Glaring.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Glaring.ForeColor = System.Drawing.Color.Black
-        Me.Glaring.Location = New System.Drawing.Point(0, 304)
+        Me.Glaring.Location = New System.Drawing.Point(11, 281)
         Me.Glaring.Name = "Glaring"
         Me.Glaring.Size = New System.Drawing.Size(104, 24)
         Me.Glaring.TabIndex = 44
@@ -533,7 +514,7 @@ Partial Class Form1
         '
         Me.TBGarment.BackColor = System.Drawing.Color.LightGray
         Me.TBGarment.ForeColor = System.Drawing.Color.Black
-        Me.TBGarment.Location = New System.Drawing.Point(120, 337)
+        Me.TBGarment.Location = New System.Drawing.Point(130, 314)
         Me.TBGarment.Name = "TBGarment"
         Me.TBGarment.Size = New System.Drawing.Size(104, 20)
         Me.TBGarment.TabIndex = 60
@@ -546,7 +527,7 @@ Partial Class Form1
         Me.Boobs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Boobs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Boobs.ForeColor = System.Drawing.Color.Black
-        Me.Boobs.Location = New System.Drawing.Point(0, 64)
+        Me.Boobs.Location = New System.Drawing.Point(11, 41)
         Me.Boobs.Name = "Boobs"
         Me.Boobs.Size = New System.Drawing.Size(104, 24)
         Me.Boobs.TabIndex = 36
@@ -562,7 +543,7 @@ Partial Class Form1
         Me.FullyDressed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.FullyDressed.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FullyDressed.ForeColor = System.Drawing.Color.Black
-        Me.FullyDressed.Location = New System.Drawing.Point(120, 34)
+        Me.FullyDressed.Location = New System.Drawing.Point(130, 11)
         Me.FullyDressed.Name = "FullyDressed"
         Me.FullyDressed.Size = New System.Drawing.Size(104, 24)
         Me.FullyDressed.TabIndex = 45
@@ -578,7 +559,7 @@ Partial Class Form1
         Me.Furniture.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Furniture.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Furniture.ForeColor = System.Drawing.Color.Black
-        Me.Furniture.Location = New System.Drawing.Point(0, 454)
+        Me.Furniture.Location = New System.Drawing.Point(11, 431)
         Me.Furniture.Name = "Furniture"
         Me.Furniture.Size = New System.Drawing.Size(104, 24)
         Me.Furniture.TabIndex = 59
@@ -594,7 +575,7 @@ Partial Class Form1
         Me.Ass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Ass.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Ass.ForeColor = System.Drawing.Color.Black
-        Me.Ass.Location = New System.Drawing.Point(0, 124)
+        Me.Ass.Location = New System.Drawing.Point(11, 101)
         Me.Ass.Name = "Ass"
         Me.Ass.Size = New System.Drawing.Size(104, 24)
         Me.Ass.TabIndex = 35
@@ -610,7 +591,7 @@ Partial Class Form1
         Me.HalfDressed.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.HalfDressed.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.HalfDressed.ForeColor = System.Drawing.Color.Black
-        Me.HalfDressed.Location = New System.Drawing.Point(120, 64)
+        Me.HalfDressed.Location = New System.Drawing.Point(130, 41)
         Me.HalfDressed.Name = "HalfDressed"
         Me.HalfDressed.Size = New System.Drawing.Size(104, 24)
         Me.HalfDressed.TabIndex = 46
@@ -626,23 +607,13 @@ Partial Class Form1
         Me.SexToy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SexToy.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SexToy.ForeColor = System.Drawing.Color.Black
-        Me.SexToy.Location = New System.Drawing.Point(0, 424)
+        Me.SexToy.Location = New System.Drawing.Point(11, 401)
         Me.SexToy.Name = "SexToy"
         Me.SexToy.Size = New System.Drawing.Size(104, 24)
         Me.SexToy.TabIndex = 58
         Me.SexToy.Text = "Sex Toy"
         Me.SexToy.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.SexToy.UseVisualStyleBackColor = False
-        '
-        'LBLDomTagImg
-        '
-        Me.LBLDomTagImg.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLDomTagImg.ForeColor = System.Drawing.Color.White
-        Me.LBLDomTagImg.Location = New System.Drawing.Point(0, 0)
-        Me.LBLDomTagImg.Name = "LBLDomTagImg"
-        Me.LBLDomTagImg.Size = New System.Drawing.Size(224, 23)
-        Me.LBLDomTagImg.TabIndex = 1
-        Me.LBLDomTagImg.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'GarmentCovering
         '
@@ -652,7 +623,7 @@ Partial Class Form1
         Me.GarmentCovering.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.GarmentCovering.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GarmentCovering.ForeColor = System.Drawing.Color.Black
-        Me.GarmentCovering.Location = New System.Drawing.Point(120, 94)
+        Me.GarmentCovering.Location = New System.Drawing.Point(130, 71)
         Me.GarmentCovering.Name = "GarmentCovering"
         Me.GarmentCovering.Size = New System.Drawing.Size(104, 24)
         Me.GarmentCovering.TabIndex = 47
@@ -668,7 +639,7 @@ Partial Class Form1
         Me.Tattoo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Tattoo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Tattoo.ForeColor = System.Drawing.Color.Black
-        Me.Tattoo.Location = New System.Drawing.Point(0, 394)
+        Me.Tattoo.Location = New System.Drawing.Point(11, 371)
         Me.Tattoo.Name = "Tattoo"
         Me.Tattoo.Size = New System.Drawing.Size(104, 24)
         Me.Tattoo.TabIndex = 57
@@ -684,7 +655,7 @@ Partial Class Form1
         Me.HandsCovering.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.HandsCovering.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.HandsCovering.ForeColor = System.Drawing.Color.Black
-        Me.HandsCovering.Location = New System.Drawing.Point(120, 124)
+        Me.HandsCovering.Location = New System.Drawing.Point(130, 101)
         Me.HandsCovering.Name = "HandsCovering"
         Me.HandsCovering.Size = New System.Drawing.Size(104, 24)
         Me.HandsCovering.TabIndex = 48
@@ -700,7 +671,7 @@ Partial Class Form1
         Me.Naked.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Naked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Naked.ForeColor = System.Drawing.Color.Black
-        Me.Naked.Location = New System.Drawing.Point(120, 184)
+        Me.Naked.Location = New System.Drawing.Point(130, 161)
         Me.Naked.Name = "Naked"
         Me.Naked.Size = New System.Drawing.Size(104, 24)
         Me.Naked.TabIndex = 49
@@ -716,7 +687,7 @@ Partial Class Form1
         Me.Underwear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Underwear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Underwear.ForeColor = System.Drawing.Color.Black
-        Me.Underwear.Location = New System.Drawing.Point(0, 364)
+        Me.Underwear.Location = New System.Drawing.Point(11, 341)
         Me.Underwear.Name = "Underwear"
         Me.Underwear.Size = New System.Drawing.Size(104, 24)
         Me.Underwear.TabIndex = 56
@@ -732,7 +703,7 @@ Partial Class Form1
         Me.SideView.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SideView.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SideView.ForeColor = System.Drawing.Color.Black
-        Me.SideView.Location = New System.Drawing.Point(120, 214)
+        Me.SideView.Location = New System.Drawing.Point(130, 191)
         Me.SideView.Name = "SideView"
         Me.SideView.Size = New System.Drawing.Size(104, 24)
         Me.SideView.TabIndex = 50
@@ -748,7 +719,7 @@ Partial Class Form1
         Me.CloseUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.CloseUp.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CloseUp.ForeColor = System.Drawing.Color.Black
-        Me.CloseUp.Location = New System.Drawing.Point(120, 244)
+        Me.CloseUp.Location = New System.Drawing.Point(130, 221)
         Me.CloseUp.Name = "CloseUp"
         Me.CloseUp.Size = New System.Drawing.Size(104, 24)
         Me.CloseUp.TabIndex = 51
@@ -764,7 +735,7 @@ Partial Class Form1
         Me.Garment.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Garment.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Garment.ForeColor = System.Drawing.Color.Black
-        Me.Garment.Location = New System.Drawing.Point(0, 334)
+        Me.Garment.Location = New System.Drawing.Point(11, 311)
         Me.Garment.Name = "Garment"
         Me.Garment.Size = New System.Drawing.Size(104, 24)
         Me.Garment.TabIndex = 55
@@ -780,7 +751,7 @@ Partial Class Form1
         Me.SeeThrough.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.SeeThrough.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SeeThrough.ForeColor = System.Drawing.Color.Black
-        Me.SeeThrough.Location = New System.Drawing.Point(120, 154)
+        Me.SeeThrough.Location = New System.Drawing.Point(130, 131)
         Me.SeeThrough.Name = "SeeThrough"
         Me.SeeThrough.Size = New System.Drawing.Size(104, 24)
         Me.SeeThrough.TabIndex = 52
@@ -796,7 +767,7 @@ Partial Class Form1
         Me.AllFours.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.AllFours.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.AllFours.ForeColor = System.Drawing.Color.Black
-        Me.AllFours.Location = New System.Drawing.Point(120, 274)
+        Me.AllFours.Location = New System.Drawing.Point(130, 251)
         Me.AllFours.Name = "AllFours"
         Me.AllFours.Size = New System.Drawing.Size(104, 24)
         Me.AllFours.TabIndex = 53
@@ -812,26 +783,13 @@ Partial Class Form1
         Me.Piercing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Piercing.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Piercing.ForeColor = System.Drawing.Color.Black
-        Me.Piercing.Location = New System.Drawing.Point(120, 304)
+        Me.Piercing.Location = New System.Drawing.Point(130, 281)
         Me.Piercing.Name = "Piercing"
         Me.Piercing.Size = New System.Drawing.Size(104, 24)
         Me.Piercing.TabIndex = 54
         Me.Piercing.Text = "Piercing"
         Me.Piercing.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.Piercing.UseVisualStyleBackColor = False
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.Transparent
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(214, 4)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(20, 20)
-        Me.Button1.TabIndex = 0
-        Me.Button1.UseVisualStyleBackColor = False
         '
         'CensorshipBar
         '
@@ -1763,6 +1721,7 @@ Partial Class Form1
         '
         Me.PNLTabs.BackColor = System.Drawing.Color.Black
         Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLTabs.Controls.Add(Me.PNLDomTagBTN)
         Me.PNLTabs.Controls.Add(Me.StatusUpdates)
         Me.PNLTabs.Location = New System.Drawing.Point(9, 120)
         Me.PNLTabs.Name = "PNLTabs"
@@ -1834,7 +1793,6 @@ Partial Class Form1
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        Me.PNLDomTags.ResumeLayout(False)
         Me.PNLDomTagBTN.ResumeLayout(False)
         Me.PNLDomTagBTN.PerformLayout()
         CType(Me.DomWMP, System.ComponentModel.ISupportInitialize).EndInit()
@@ -2001,11 +1959,8 @@ Partial Class Form1
     Friend WithEvents ForumToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MetroTimer As System.Windows.Forms.Timer
     Friend WithEvents BWMetro As System.ComponentModel.BackgroundWorker
-    Friend WithEvents PNLDomTags As System.Windows.Forms.Panel
     Friend WithEvents ImagesToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DommeTagsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Button1 As System.Windows.Forms.Button
-    Friend WithEvents LBLDomTagImg As System.Windows.Forms.Label
     Friend WithEvents TBFurniture As System.Windows.Forms.TextBox
     Friend WithEvents TBSexToy As System.Windows.Forms.TextBox
     Friend WithEvents TBTattoo As System.Windows.Forms.TextBox

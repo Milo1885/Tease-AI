@@ -575,16 +575,6 @@
         AAAL
 </value>
   </data>
-  <data name="Button1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAADaSURBVFhH7dcxCoMwFIDhnKAH6OppcpGC90gukiVubu49iYigg4sOur7iwwciiYrQ5Fn64BtM
-        jPlXRZqmr5mU8h0C3SdoogfQRlmWMKuqCrVti/q+R9M0oXEcnYZhQF3XoaZpUF3XiL5P9y3XMwooigJC
-        4BuQ5zmEwDcgyzIIgW+AtRb2bOdo3YdvgDEG9pwd19k1vgFKKTjDN653Xe4bcHZcZ9d+J+Bo3ee+AT5a
-        a+Tam9E+uV8AHdw+X13nG7B98Vv+AfwCov+aRQ9IkuSxeAaC9y3Xxw4Q4gObVmDsMCdUVgAAAABJRU5E
-        rkJggg==
-</value>
-  </data>
   <metadata name="ScriptTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>184, 17</value>
   </metadata>

@@ -1307,7 +1307,7 @@ Public Class frmApps
         PNLAppRandomizer.BackColor = Color.SteelBlue
         PictureBox3.BackColor = Color.SteelBlue
 
-        Form1.PNLDomTags.BackColor = Color.SteelBlue
+
         Form1.PNLDomTagBTN.BackColor = Color.SteelBlue
 
 
@@ -1375,7 +1375,7 @@ Public Class frmApps
         PNLAppRandomizer.BackColor = Color.DarkMagenta
         PictureBox3.BackColor = Color.DarkMagenta
 
-        Form1.PNLDomTags.BackColor = Color.DarkMagenta
+
         Form1.PNLDomTagBTN.BackColor = Color.DarkMagenta
 
 
@@ -1439,7 +1439,7 @@ Public Class frmApps
         PNLAppRandomizer.BackColor = Color.Black
         PictureBox3.BackColor = Color.Black
 
-        Form1.PNLDomTags.BackColor = Color.Black
+
         Form1.PNLDomTagBTN.BackColor = Color.Black
 
         My.Settings.UIColor = "Black"
@@ -1503,7 +1503,7 @@ Public Class frmApps
         PNLAppRandomizer.BackColor = Color.Firebrick
         PictureBox3.BackColor = Color.Firebrick
 
-        Form1.PNLDomTags.BackColor = Color.Firebrick
+
         Form1.PNLDomTagBTN.BackColor = Color.Firebrick
 
 
