@@ -13308,6 +13308,14 @@ VTSkip:
 
         If DDiff >= Val(DateArray(1)) Then DateCheck = True
 
+        If Not DateArray(2) Is Nothing And DateCheck = True Then
+
+            FileGoto = DateArray(2)
+            SkipGotoLine = True
+            GetGoto()
+
+        End If
+
         Return DateCheck
 
     End Function
@@ -22104,7 +22112,7 @@ TryNext:
 
     Private Sub Form1_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd
 
-        Debug.Print("Resize End Called")
+        Debug.Print(Me.Width & " " & Me.Height)
 
         AdjustWindow()
 
@@ -22140,13 +22148,13 @@ TryNext:
         'PNLTabs.Width = 258
         'End If
 
-        PNLTabs.Height = Me.Height - 426
+        If PNLTabs.Height <> 0 Then PNLTabs.Height = Me.Height - 426
 
         'subName.Location = New Point(3, PNLApp.Height - 31)
         'domAvatar.Location = New Point(3, PNLApp.Height - 212)
         'domName.Location = New Point(3, PNLApp.Height - 243)
 
-        StatusUpdates.Height = PNLTabs.Height - 8
+        If PNLTabs.Height <> 0 Then StatusUpdates.Height = PNLTabs.Height - 8
         PNLAvatar.Location = New Point(9, Me.Height - 294)
 
         SplitContainer1.Height = Me.Height - 83
