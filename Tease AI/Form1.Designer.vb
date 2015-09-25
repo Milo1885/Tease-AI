@@ -29,6 +29,22 @@ Partial Class Form1
         Me.mainPictureBox = New System.Windows.Forms.PictureBox()
         Me.domAvatar = New System.Windows.Forms.PictureBox()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.CensorshipBar = New System.Windows.Forms.Panel()
+        Me.LBLImageInfo = New System.Windows.Forms.Label()
+        Me.DomWMP = New AxWMPLib.AxWindowsMediaPlayer()
+        Me.PNLHope = New System.Windows.Forms.Panel()
+        Me.MediaButton = New System.Windows.Forms.Button()
+        Me.SettingsButton = New System.Windows.Forms.Button()
+        Me.SaveBlogImage = New System.Windows.Forms.Button()
+        Me.nextButton = New System.Windows.Forms.Button()
+        Me.PNLChatBox = New System.Windows.Forms.Panel()
+        Me.PNLMediaBar = New System.Windows.Forms.Panel()
+        Me.ImageFolderComboBox = New System.Windows.Forms.ComboBox()
+        Me.previousButton = New System.Windows.Forms.Button()
+        Me.BTNLoadVideo = New System.Windows.Forms.Button()
+        Me.BTNVideoControls = New System.Windows.Forms.Button()
+        Me.browsefolderButton = New System.Windows.Forms.Button()
+        Me.ChatText = New System.Windows.Forms.WebBrowser()
         Me.PNLDomTagBTN = New System.Windows.Forms.Panel()
         Me.TBFurniture = New System.Windows.Forms.TextBox()
         Me.Masturbating = New System.Windows.Forms.Button()
@@ -60,22 +76,6 @@ Partial Class Form1
         Me.SeeThrough = New System.Windows.Forms.Button()
         Me.AllFours = New System.Windows.Forms.Button()
         Me.Piercing = New System.Windows.Forms.Button()
-        Me.CensorshipBar = New System.Windows.Forms.Panel()
-        Me.LBLImageInfo = New System.Windows.Forms.Label()
-        Me.DomWMP = New AxWMPLib.AxWindowsMediaPlayer()
-        Me.PNLHope = New System.Windows.Forms.Panel()
-        Me.MediaButton = New System.Windows.Forms.Button()
-        Me.SettingsButton = New System.Windows.Forms.Button()
-        Me.SaveBlogImage = New System.Windows.Forms.Button()
-        Me.nextButton = New System.Windows.Forms.Button()
-        Me.PNLChatBox = New System.Windows.Forms.Panel()
-        Me.PNLMediaBar = New System.Windows.Forms.Panel()
-        Me.ImageFolderComboBox = New System.Windows.Forms.ComboBox()
-        Me.previousButton = New System.Windows.Forms.Button()
-        Me.BTNLoadVideo = New System.Windows.Forms.Button()
-        Me.BTNVideoControls = New System.Windows.Forms.Button()
-        Me.browsefolderButton = New System.Windows.Forms.Button()
-        Me.ChatText = New System.Windows.Forms.WebBrowser()
         Me.subName = New System.Windows.Forms.TextBox()
         Me.ScriptTimer = New System.Windows.Forms.Timer(Me.components)
         Me.OpenScriptDialog = New System.Windows.Forms.OpenFileDialog()
@@ -181,6 +181,10 @@ Partial Class Form1
         Me.ModdingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MiscToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AppsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseAppPanelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.GlitterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DommeTagsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.GamesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SlotsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MatchGameToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -204,21 +208,44 @@ Partial Class Form1
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LBLGeneralSettings = New System.Windows.Forms.Label()
         Me.PNLTabs = New System.Windows.Forms.Panel()
-        Me.GlitterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PNLLazySub = New System.Windows.Forms.Panel()
+        Me.CBHideShortcuts = New System.Windows.Forms.CheckBox()
+        Me.CBShortcuts = New System.Windows.Forms.CheckBox()
+        Me.TBShortSafeword = New System.Windows.Forms.TextBox()
+        Me.TBShortGreet = New System.Windows.Forms.TextBox()
+        Me.TBShortCum = New System.Windows.Forms.TextBox()
+        Me.TBShortStroke = New System.Windows.Forms.TextBox()
+        Me.TBShortStop = New System.Windows.Forms.TextBox()
+        Me.TBShortSlowDown = New System.Windows.Forms.TextBox()
+        Me.TBShortSpeedUp = New System.Windows.Forms.TextBox()
+        Me.TBShortEdge = New System.Windows.Forms.TextBox()
+        Me.TBShortNo = New System.Windows.Forms.TextBox()
+        Me.TBShortYes = New System.Windows.Forms.TextBox()
+        Me.BTNAskToCum = New System.Windows.Forms.Button()
+        Me.BTNSlowDown = New System.Windows.Forms.Button()
+        Me.BTNYes = New System.Windows.Forms.Button()
+        Me.BTNStroke = New System.Windows.Forms.Button()
+        Me.BTNNo = New System.Windows.Forms.Button()
+        Me.BTNGreeting = New System.Windows.Forms.Button()
+        Me.BTNStop = New System.Windows.Forms.Button()
+        Me.BTNSafeword = New System.Windows.Forms.Button()
+        Me.BTNEdge = New System.Windows.Forms.Button()
+        Me.BTNSpeedUp = New System.Windows.Forms.Button()
         Me.PNLAvatar = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.LazySubToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
-        Me.PNLDomTagBTN.SuspendLayout()
         CType(Me.DomWMP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNLHope.SuspendLayout()
         Me.PNLChatBox.SuspendLayout()
         Me.PNLMediaBar.SuspendLayout()
+        Me.PNLDomTagBTN.SuspendLayout()
         Me.PNLFileTransfer.SuspendLayout()
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PictureStrip.SuspendLayout()
@@ -226,6 +253,7 @@ Partial Class Form1
         Me.MenuStrip2.SuspendLayout()
         Me.PNLDate.SuspendLayout()
         Me.PNLTabs.SuspendLayout()
+        Me.PNLLazySub.SuspendLayout()
         Me.PNLAvatar.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -307,6 +335,191 @@ Partial Class Form1
         Me.SplitContainer1.Size = New System.Drawing.Size(1090, 988)
         Me.SplitContainer1.SplitterDistance = 734
         Me.SplitContainer1.TabIndex = 136
+        '
+        'CensorshipBar
+        '
+        Me.CensorshipBar.BackColor = System.Drawing.Color.Black
+        Me.CensorshipBar.BackgroundImage = CType(resources.GetObject("CensorshipBar.BackgroundImage"), System.Drawing.Image)
+        Me.CensorshipBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.CensorshipBar.Location = New System.Drawing.Point(32, 405)
+        Me.CensorshipBar.Name = "CensorshipBar"
+        Me.CensorshipBar.Size = New System.Drawing.Size(637, 244)
+        Me.CensorshipBar.TabIndex = 94
+        Me.CensorshipBar.Visible = False
+        '
+        'LBLImageInfo
+        '
+        Me.LBLImageInfo.AutoSize = True
+        Me.LBLImageInfo.BackColor = System.Drawing.Color.Black
+        Me.LBLImageInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLImageInfo.ForeColor = System.Drawing.Color.White
+        Me.LBLImageInfo.Location = New System.Drawing.Point(0, 0)
+        Me.LBLImageInfo.Name = "LBLImageInfo"
+        Me.LBLImageInfo.Size = New System.Drawing.Size(0, 17)
+        Me.LBLImageInfo.TabIndex = 95
+        Me.LBLImageInfo.Visible = False
+        '
+        'DomWMP
+        '
+        Me.DomWMP.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
+        Me.DomWMP.Enabled = True
+        Me.DomWMP.Location = New System.Drawing.Point(33, 0)
+        Me.DomWMP.Name = "DomWMP"
+        Me.DomWMP.OcxState = CType(resources.GetObject("DomWMP.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.DomWMP.Size = New System.Drawing.Size(1089, 792)
+        Me.DomWMP.TabIndex = 96
+        Me.DomWMP.Visible = False
+        '
+        'PNLHope
+        '
+        Me.PNLHope.Controls.Add(Me.MediaButton)
+        Me.PNLHope.Controls.Add(Me.SettingsButton)
+        Me.PNLHope.Controls.Add(Me.SaveBlogImage)
+        Me.PNLHope.Location = New System.Drawing.Point(779, 216)
+        Me.PNLHope.Name = "PNLHope"
+        Me.PNLHope.Size = New System.Drawing.Size(313, 32)
+        Me.PNLHope.TabIndex = 781
+        '
+        'MediaButton
+        '
+        Me.MediaButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.MediaButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.MediaButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MediaButton.ForeColor = System.Drawing.Color.White
+        Me.MediaButton.Location = New System.Drawing.Point(0, 0)
+        Me.MediaButton.Name = "MediaButton"
+        Me.MediaButton.Size = New System.Drawing.Size(112, 31)
+        Me.MediaButton.TabIndex = 147
+        Me.MediaButton.Text = "Hide Media Panel"
+        Me.MediaButton.UseVisualStyleBackColor = False
+        '
+        'SettingsButton
+        '
+        Me.SettingsButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.SettingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.SettingsButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SettingsButton.ForeColor = System.Drawing.Color.White
+        Me.SettingsButton.Location = New System.Drawing.Point(190, 0)
+        Me.SettingsButton.Name = "SettingsButton"
+        Me.SettingsButton.Size = New System.Drawing.Size(123, 31)
+        Me.SettingsButton.TabIndex = 19
+        Me.SettingsButton.Text = "Open Settings Menu"
+        Me.SettingsButton.UseVisualStyleBackColor = False
+        '
+        'SaveBlogImage
+        '
+        Me.SaveBlogImage.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.SaveBlogImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.SaveBlogImage.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SaveBlogImage.ForeColor = System.Drawing.Color.White
+        Me.SaveBlogImage.Location = New System.Drawing.Point(114, 0)
+        Me.SaveBlogImage.Name = "SaveBlogImage"
+        Me.SaveBlogImage.Size = New System.Drawing.Size(74, 31)
+        Me.SaveBlogImage.TabIndex = 149
+        Me.SaveBlogImage.Text = "Img <-> Vid"
+        Me.SaveBlogImage.UseVisualStyleBackColor = False
+        '
+        'nextButton
+        '
+        Me.nextButton.BackColor = System.Drawing.Color.SteelBlue
+        Me.nextButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.nextButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.nextButton.ForeColor = System.Drawing.Color.White
+        Me.nextButton.Location = New System.Drawing.Point(836, 0)
+        Me.nextButton.Name = "nextButton"
+        Me.nextButton.Size = New System.Drawing.Size(55, 31)
+        Me.nextButton.TabIndex = 7
+        Me.nextButton.Text = ">>"
+        Me.nextButton.UseVisualStyleBackColor = False
+        '
+        'PNLChatBox
+        '
+        Me.PNLChatBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLChatBox.Controls.Add(Me.chatBox)
+        Me.PNLChatBox.Location = New System.Drawing.Point(3, 216)
+        Me.PNLChatBox.Name = "PNLChatBox"
+        Me.PNLChatBox.Size = New System.Drawing.Size(774, 31)
+        Me.PNLChatBox.TabIndex = 150
+        '
+        'PNLMediaBar
+        '
+        Me.PNLMediaBar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLMediaBar.Controls.Add(Me.ImageFolderComboBox)
+        Me.PNLMediaBar.Location = New System.Drawing.Point(51, 0)
+        Me.PNLMediaBar.Name = "PNLMediaBar"
+        Me.PNLMediaBar.Size = New System.Drawing.Size(726, 31)
+        Me.PNLMediaBar.TabIndex = 97
+        '
+        'ImageFolderComboBox
+        '
+        Me.ImageFolderComboBox.BackColor = System.Drawing.Color.White
+        Me.ImageFolderComboBox.ForeColor = System.Drawing.Color.Black
+        Me.ImageFolderComboBox.FormattingEnabled = True
+        Me.ImageFolderComboBox.Location = New System.Drawing.Point(4, 3)
+        Me.ImageFolderComboBox.Name = "ImageFolderComboBox"
+        Me.ImageFolderComboBox.Size = New System.Drawing.Size(713, 21)
+        Me.ImageFolderComboBox.TabIndex = 8
+        Me.ImageFolderComboBox.Text = "Enter Image Directory"
+        '
+        'previousButton
+        '
+        Me.previousButton.BackColor = System.Drawing.Color.SteelBlue
+        Me.previousButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.previousButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.previousButton.ForeColor = System.Drawing.Color.White
+        Me.previousButton.Location = New System.Drawing.Point(779, 0)
+        Me.previousButton.Name = "previousButton"
+        Me.previousButton.Size = New System.Drawing.Size(55, 31)
+        Me.previousButton.TabIndex = 6
+        Me.previousButton.Text = "<<"
+        Me.previousButton.UseVisualStyleBackColor = False
+        '
+        'BTNLoadVideo
+        '
+        Me.BTNLoadVideo.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.BTNLoadVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNLoadVideo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNLoadVideo.ForeColor = System.Drawing.Color.White
+        Me.BTNLoadVideo.Location = New System.Drawing.Point(893, 0)
+        Me.BTNLoadVideo.Name = "BTNLoadVideo"
+        Me.BTNLoadVideo.Size = New System.Drawing.Size(74, 31)
+        Me.BTNLoadVideo.TabIndex = 11
+        Me.BTNLoadVideo.Text = "Load Video"
+        Me.BTNLoadVideo.UseVisualStyleBackColor = False
+        '
+        'BTNVideoControls
+        '
+        Me.BTNVideoControls.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.BTNVideoControls.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNVideoControls.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNVideoControls.ForeColor = System.Drawing.Color.White
+        Me.BTNVideoControls.Location = New System.Drawing.Point(969, 0)
+        Me.BTNVideoControls.Name = "BTNVideoControls"
+        Me.BTNVideoControls.Size = New System.Drawing.Size(123, 31)
+        Me.BTNVideoControls.TabIndex = 15
+        Me.BTNVideoControls.Text = "Show Video Controls"
+        Me.BTNVideoControls.UseVisualStyleBackColor = False
+        '
+        'browsefolderButton
+        '
+        Me.browsefolderButton.BackColor = System.Drawing.Color.SteelBlue
+        Me.browsefolderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.browsefolderButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.browsefolderButton.ForeColor = System.Drawing.Color.White
+        Me.browsefolderButton.Location = New System.Drawing.Point(2, 0)
+        Me.browsefolderButton.Name = "browsefolderButton"
+        Me.browsefolderButton.Size = New System.Drawing.Size(47, 31)
+        Me.browsefolderButton.TabIndex = 3
+        Me.browsefolderButton.Text = "Open"
+        Me.browsefolderButton.UseVisualStyleBackColor = False
+        '
+        'ChatText
+        '
+        Me.ChatText.Location = New System.Drawing.Point(2, 34)
+        Me.ChatText.MinimumSize = New System.Drawing.Size(2, 20)
+        Me.ChatText.Name = "ChatText"
+        Me.ChatText.Size = New System.Drawing.Size(1085, 179)
+        Me.ChatText.TabIndex = 1
         '
         'PNLDomTagBTN
         '
@@ -790,191 +1003,6 @@ Partial Class Form1
         Me.Piercing.Text = "Piercing"
         Me.Piercing.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.Piercing.UseVisualStyleBackColor = False
-        '
-        'CensorshipBar
-        '
-        Me.CensorshipBar.BackColor = System.Drawing.Color.Black
-        Me.CensorshipBar.BackgroundImage = CType(resources.GetObject("CensorshipBar.BackgroundImage"), System.Drawing.Image)
-        Me.CensorshipBar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.CensorshipBar.Location = New System.Drawing.Point(32, 405)
-        Me.CensorshipBar.Name = "CensorshipBar"
-        Me.CensorshipBar.Size = New System.Drawing.Size(637, 244)
-        Me.CensorshipBar.TabIndex = 94
-        Me.CensorshipBar.Visible = False
-        '
-        'LBLImageInfo
-        '
-        Me.LBLImageInfo.AutoSize = True
-        Me.LBLImageInfo.BackColor = System.Drawing.Color.Black
-        Me.LBLImageInfo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLImageInfo.ForeColor = System.Drawing.Color.White
-        Me.LBLImageInfo.Location = New System.Drawing.Point(0, 0)
-        Me.LBLImageInfo.Name = "LBLImageInfo"
-        Me.LBLImageInfo.Size = New System.Drawing.Size(0, 17)
-        Me.LBLImageInfo.TabIndex = 95
-        Me.LBLImageInfo.Visible = False
-        '
-        'DomWMP
-        '
-        Me.DomWMP.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
-        Me.DomWMP.Enabled = True
-        Me.DomWMP.Location = New System.Drawing.Point(33, 0)
-        Me.DomWMP.Name = "DomWMP"
-        Me.DomWMP.OcxState = CType(resources.GetObject("DomWMP.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.DomWMP.Size = New System.Drawing.Size(1089, 792)
-        Me.DomWMP.TabIndex = 96
-        Me.DomWMP.Visible = False
-        '
-        'PNLHope
-        '
-        Me.PNLHope.Controls.Add(Me.MediaButton)
-        Me.PNLHope.Controls.Add(Me.SettingsButton)
-        Me.PNLHope.Controls.Add(Me.SaveBlogImage)
-        Me.PNLHope.Location = New System.Drawing.Point(779, 216)
-        Me.PNLHope.Name = "PNLHope"
-        Me.PNLHope.Size = New System.Drawing.Size(313, 32)
-        Me.PNLHope.TabIndex = 781
-        '
-        'MediaButton
-        '
-        Me.MediaButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.MediaButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.MediaButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MediaButton.ForeColor = System.Drawing.Color.White
-        Me.MediaButton.Location = New System.Drawing.Point(0, 0)
-        Me.MediaButton.Name = "MediaButton"
-        Me.MediaButton.Size = New System.Drawing.Size(112, 31)
-        Me.MediaButton.TabIndex = 147
-        Me.MediaButton.Text = "Hide Media Panel"
-        Me.MediaButton.UseVisualStyleBackColor = False
-        '
-        'SettingsButton
-        '
-        Me.SettingsButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.SettingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.SettingsButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SettingsButton.ForeColor = System.Drawing.Color.White
-        Me.SettingsButton.Location = New System.Drawing.Point(190, 0)
-        Me.SettingsButton.Name = "SettingsButton"
-        Me.SettingsButton.Size = New System.Drawing.Size(123, 31)
-        Me.SettingsButton.TabIndex = 19
-        Me.SettingsButton.Text = "Open Settings Menu"
-        Me.SettingsButton.UseVisualStyleBackColor = False
-        '
-        'SaveBlogImage
-        '
-        Me.SaveBlogImage.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.SaveBlogImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.SaveBlogImage.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SaveBlogImage.ForeColor = System.Drawing.Color.White
-        Me.SaveBlogImage.Location = New System.Drawing.Point(114, 0)
-        Me.SaveBlogImage.Name = "SaveBlogImage"
-        Me.SaveBlogImage.Size = New System.Drawing.Size(74, 31)
-        Me.SaveBlogImage.TabIndex = 149
-        Me.SaveBlogImage.Text = "Img <-> Vid"
-        Me.SaveBlogImage.UseVisualStyleBackColor = False
-        '
-        'nextButton
-        '
-        Me.nextButton.BackColor = System.Drawing.Color.SteelBlue
-        Me.nextButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.nextButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.nextButton.ForeColor = System.Drawing.Color.White
-        Me.nextButton.Location = New System.Drawing.Point(836, 0)
-        Me.nextButton.Name = "nextButton"
-        Me.nextButton.Size = New System.Drawing.Size(55, 31)
-        Me.nextButton.TabIndex = 7
-        Me.nextButton.Text = ">>"
-        Me.nextButton.UseVisualStyleBackColor = False
-        '
-        'PNLChatBox
-        '
-        Me.PNLChatBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLChatBox.Controls.Add(Me.chatBox)
-        Me.PNLChatBox.Location = New System.Drawing.Point(3, 216)
-        Me.PNLChatBox.Name = "PNLChatBox"
-        Me.PNLChatBox.Size = New System.Drawing.Size(774, 31)
-        Me.PNLChatBox.TabIndex = 150
-        '
-        'PNLMediaBar
-        '
-        Me.PNLMediaBar.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLMediaBar.Controls.Add(Me.ImageFolderComboBox)
-        Me.PNLMediaBar.Location = New System.Drawing.Point(51, 0)
-        Me.PNLMediaBar.Name = "PNLMediaBar"
-        Me.PNLMediaBar.Size = New System.Drawing.Size(726, 31)
-        Me.PNLMediaBar.TabIndex = 97
-        '
-        'ImageFolderComboBox
-        '
-        Me.ImageFolderComboBox.BackColor = System.Drawing.Color.White
-        Me.ImageFolderComboBox.ForeColor = System.Drawing.Color.Black
-        Me.ImageFolderComboBox.FormattingEnabled = True
-        Me.ImageFolderComboBox.Location = New System.Drawing.Point(4, 3)
-        Me.ImageFolderComboBox.Name = "ImageFolderComboBox"
-        Me.ImageFolderComboBox.Size = New System.Drawing.Size(713, 21)
-        Me.ImageFolderComboBox.TabIndex = 8
-        Me.ImageFolderComboBox.Text = "Enter Image Directory"
-        '
-        'previousButton
-        '
-        Me.previousButton.BackColor = System.Drawing.Color.SteelBlue
-        Me.previousButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.previousButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.previousButton.ForeColor = System.Drawing.Color.White
-        Me.previousButton.Location = New System.Drawing.Point(779, 0)
-        Me.previousButton.Name = "previousButton"
-        Me.previousButton.Size = New System.Drawing.Size(55, 31)
-        Me.previousButton.TabIndex = 6
-        Me.previousButton.Text = "<<"
-        Me.previousButton.UseVisualStyleBackColor = False
-        '
-        'BTNLoadVideo
-        '
-        Me.BTNLoadVideo.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.BTNLoadVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNLoadVideo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNLoadVideo.ForeColor = System.Drawing.Color.White
-        Me.BTNLoadVideo.Location = New System.Drawing.Point(893, 0)
-        Me.BTNLoadVideo.Name = "BTNLoadVideo"
-        Me.BTNLoadVideo.Size = New System.Drawing.Size(74, 31)
-        Me.BTNLoadVideo.TabIndex = 11
-        Me.BTNLoadVideo.Text = "Load Video"
-        Me.BTNLoadVideo.UseVisualStyleBackColor = False
-        '
-        'BTNVideoControls
-        '
-        Me.BTNVideoControls.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.BTNVideoControls.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNVideoControls.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BTNVideoControls.ForeColor = System.Drawing.Color.White
-        Me.BTNVideoControls.Location = New System.Drawing.Point(969, 0)
-        Me.BTNVideoControls.Name = "BTNVideoControls"
-        Me.BTNVideoControls.Size = New System.Drawing.Size(123, 31)
-        Me.BTNVideoControls.TabIndex = 15
-        Me.BTNVideoControls.Text = "Show Video Controls"
-        Me.BTNVideoControls.UseVisualStyleBackColor = False
-        '
-        'browsefolderButton
-        '
-        Me.browsefolderButton.BackColor = System.Drawing.Color.SteelBlue
-        Me.browsefolderButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.browsefolderButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.browsefolderButton.ForeColor = System.Drawing.Color.White
-        Me.browsefolderButton.Location = New System.Drawing.Point(2, 0)
-        Me.browsefolderButton.Name = "browsefolderButton"
-        Me.browsefolderButton.Size = New System.Drawing.Size(47, 31)
-        Me.browsefolderButton.TabIndex = 3
-        Me.browsefolderButton.Text = "Open"
-        Me.browsefolderButton.UseVisualStyleBackColor = False
-        '
-        'ChatText
-        '
-        Me.ChatText.Location = New System.Drawing.Point(2, 34)
-        Me.ChatText.MinimumSize = New System.Drawing.Size(2, 20)
-        Me.ChatText.Name = "ChatText"
-        Me.ChatText.Size = New System.Drawing.Size(1085, 179)
-        Me.ChatText.TabIndex = 1
         '
         'subName
         '
@@ -1569,10 +1597,33 @@ Partial Class Form1
         '
         'AppsToolStripMenuItem
         '
-        Me.AppsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GlitterToolStripMenuItem})
+        Me.AppsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseAppPanelToolStripMenuItem, Me.ToolStripSeparator4, Me.GlitterToolStripMenuItem, Me.DommeTagsToolStripMenuItem2, Me.LazySubToolStripMenuItem})
         Me.AppsToolStripMenuItem.Name = "AppsToolStripMenuItem"
         Me.AppsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.AppsToolStripMenuItem.Text = "Apps"
+        '
+        'CloseAppPanelToolStripMenuItem
+        '
+        Me.CloseAppPanelToolStripMenuItem.Name = "CloseAppPanelToolStripMenuItem"
+        Me.CloseAppPanelToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.CloseAppPanelToolStripMenuItem.Text = "Close Apps"
+        '
+        'ToolStripSeparator4
+        '
+        Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(142, 6)
+        '
+        'GlitterToolStripMenuItem
+        '
+        Me.GlitterToolStripMenuItem.Name = "GlitterToolStripMenuItem"
+        Me.GlitterToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.GlitterToolStripMenuItem.Text = "Glitter"
+        '
+        'DommeTagsToolStripMenuItem2
+        '
+        Me.DommeTagsToolStripMenuItem2.Name = "DommeTagsToolStripMenuItem2"
+        Me.DommeTagsToolStripMenuItem2.Size = New System.Drawing.Size(145, 22)
+        Me.DommeTagsToolStripMenuItem2.Text = "Domme Tags"
         '
         'GamesToolStripMenuItem1
         '
@@ -1721,6 +1772,7 @@ Partial Class Form1
         '
         Me.PNLTabs.BackColor = System.Drawing.Color.Black
         Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLTabs.Controls.Add(Me.PNLLazySub)
         Me.PNLTabs.Controls.Add(Me.PNLDomTagBTN)
         Me.PNLTabs.Controls.Add(Me.StatusUpdates)
         Me.PNLTabs.Location = New System.Drawing.Point(9, 120)
@@ -1728,11 +1780,302 @@ Partial Class Form1
         Me.PNLTabs.Size = New System.Drawing.Size(253, 646)
         Me.PNLTabs.TabIndex = 778
         '
-        'GlitterToolStripMenuItem
+        'PNLLazySub
         '
-        Me.GlitterToolStripMenuItem.Name = "GlitterToolStripMenuItem"
-        Me.GlitterToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.GlitterToolStripMenuItem.Text = "Glitter"
+        Me.PNLLazySub.BackColor = System.Drawing.Color.SteelBlue
+        Me.PNLLazySub.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLLazySub.Controls.Add(Me.CBHideShortcuts)
+        Me.PNLLazySub.Controls.Add(Me.CBShortcuts)
+        Me.PNLLazySub.Controls.Add(Me.TBShortSafeword)
+        Me.PNLLazySub.Controls.Add(Me.TBShortGreet)
+        Me.PNLLazySub.Controls.Add(Me.TBShortCum)
+        Me.PNLLazySub.Controls.Add(Me.TBShortStroke)
+        Me.PNLLazySub.Controls.Add(Me.TBShortStop)
+        Me.PNLLazySub.Controls.Add(Me.TBShortSlowDown)
+        Me.PNLLazySub.Controls.Add(Me.TBShortSpeedUp)
+        Me.PNLLazySub.Controls.Add(Me.TBShortEdge)
+        Me.PNLLazySub.Controls.Add(Me.TBShortNo)
+        Me.PNLLazySub.Controls.Add(Me.TBShortYes)
+        Me.PNLLazySub.Controls.Add(Me.BTNAskToCum)
+        Me.PNLLazySub.Controls.Add(Me.BTNSlowDown)
+        Me.PNLLazySub.Controls.Add(Me.BTNYes)
+        Me.PNLLazySub.Controls.Add(Me.BTNStroke)
+        Me.PNLLazySub.Controls.Add(Me.BTNNo)
+        Me.PNLLazySub.Controls.Add(Me.BTNGreeting)
+        Me.PNLLazySub.Controls.Add(Me.BTNStop)
+        Me.PNLLazySub.Controls.Add(Me.BTNSafeword)
+        Me.PNLLazySub.Controls.Add(Me.BTNEdge)
+        Me.PNLLazySub.Controls.Add(Me.BTNSpeedUp)
+        Me.PNLLazySub.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PNLLazySub.Location = New System.Drawing.Point(2, 2)
+        Me.PNLLazySub.Name = "PNLLazySub"
+        Me.PNLLazySub.Size = New System.Drawing.Size(245, 444)
+        Me.PNLLazySub.TabIndex = 771
+        Me.PNLLazySub.Visible = False
+        '
+        'CBHideShortcuts
+        '
+        Me.CBHideShortcuts.AutoSize = True
+        Me.CBHideShortcuts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CBHideShortcuts.ForeColor = System.Drawing.Color.White
+        Me.CBHideShortcuts.Location = New System.Drawing.Point(129, 415)
+        Me.CBHideShortcuts.Name = "CBHideShortcuts"
+        Me.CBHideShortcuts.Size = New System.Drawing.Size(96, 17)
+        Me.CBHideShortcuts.TabIndex = 171
+        Me.CBHideShortcuts.Text = "Hide Shortcuts"
+        Me.CBHideShortcuts.UseVisualStyleBackColor = True
+        '
+        'CBShortcuts
+        '
+        Me.CBShortcuts.AutoSize = True
+        Me.CBShortcuts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CBShortcuts.ForeColor = System.Drawing.Color.White
+        Me.CBShortcuts.Location = New System.Drawing.Point(14, 415)
+        Me.CBShortcuts.Name = "CBShortcuts"
+        Me.CBShortcuts.Size = New System.Drawing.Size(107, 17)
+        Me.CBShortcuts.TabIndex = 169
+        Me.CBShortcuts.Text = "Enable Shortcuts"
+        Me.CBShortcuts.UseVisualStyleBackColor = True
+        '
+        'TBShortSafeword
+        '
+        Me.TBShortSafeword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortSafeword.Location = New System.Drawing.Point(130, 382)
+        Me.TBShortSafeword.Name = "TBShortSafeword"
+        Me.TBShortSafeword.Size = New System.Drawing.Size(96, 23)
+        Me.TBShortSafeword.TabIndex = 170
+        Me.TBShortSafeword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBShortGreet
+        '
+        Me.TBShortGreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortGreet.Location = New System.Drawing.Point(15, 382)
+        Me.TBShortGreet.Name = "TBShortGreet"
+        Me.TBShortGreet.Size = New System.Drawing.Size(96, 23)
+        Me.TBShortGreet.TabIndex = 169
+        Me.TBShortGreet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBShortCum
+        '
+        Me.TBShortCum.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortCum.Location = New System.Drawing.Point(15, 315)
+        Me.TBShortCum.Name = "TBShortCum"
+        Me.TBShortCum.Size = New System.Drawing.Size(212, 23)
+        Me.TBShortCum.TabIndex = 121
+        Me.TBShortCum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBShortStroke
+        '
+        Me.TBShortStroke.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortStroke.Location = New System.Drawing.Point(130, 248)
+        Me.TBShortStroke.Name = "TBShortStroke"
+        Me.TBShortStroke.Size = New System.Drawing.Size(96, 23)
+        Me.TBShortStroke.TabIndex = 120
+        Me.TBShortStroke.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBShortStop
+        '
+        Me.TBShortStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortStop.Location = New System.Drawing.Point(15, 248)
+        Me.TBShortStop.Name = "TBShortStop"
+        Me.TBShortStop.Size = New System.Drawing.Size(96, 23)
+        Me.TBShortStop.TabIndex = 119
+        Me.TBShortStop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBShortSlowDown
+        '
+        Me.TBShortSlowDown.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortSlowDown.Location = New System.Drawing.Point(130, 181)
+        Me.TBShortSlowDown.Name = "TBShortSlowDown"
+        Me.TBShortSlowDown.Size = New System.Drawing.Size(96, 23)
+        Me.TBShortSlowDown.TabIndex = 118
+        Me.TBShortSlowDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBShortSpeedUp
+        '
+        Me.TBShortSpeedUp.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortSpeedUp.Location = New System.Drawing.Point(15, 181)
+        Me.TBShortSpeedUp.Name = "TBShortSpeedUp"
+        Me.TBShortSpeedUp.Size = New System.Drawing.Size(96, 23)
+        Me.TBShortSpeedUp.TabIndex = 117
+        Me.TBShortSpeedUp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBShortEdge
+        '
+        Me.TBShortEdge.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortEdge.Location = New System.Drawing.Point(15, 114)
+        Me.TBShortEdge.Name = "TBShortEdge"
+        Me.TBShortEdge.Size = New System.Drawing.Size(212, 23)
+        Me.TBShortEdge.TabIndex = 116
+        Me.TBShortEdge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBShortNo
+        '
+        Me.TBShortNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortNo.Location = New System.Drawing.Point(130, 47)
+        Me.TBShortNo.Name = "TBShortNo"
+        Me.TBShortNo.Size = New System.Drawing.Size(96, 23)
+        Me.TBShortNo.TabIndex = 115
+        Me.TBShortNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'TBShortYes
+        '
+        Me.TBShortYes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBShortYes.Location = New System.Drawing.Point(15, 47)
+        Me.TBShortYes.Name = "TBShortYes"
+        Me.TBShortYes.Size = New System.Drawing.Size(96, 23)
+        Me.TBShortYes.TabIndex = 114
+        Me.TBShortYes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'BTNAskToCum
+        '
+        Me.BTNAskToCum.BackColor = System.Drawing.Color.White
+        Me.BTNAskToCum.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNAskToCum.FlatAppearance.BorderSize = 2
+        Me.BTNAskToCum.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNAskToCum.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNAskToCum.ForeColor = System.Drawing.Color.Black
+        Me.BTNAskToCum.Location = New System.Drawing.Point(13, 279)
+        Me.BTNAskToCum.Name = "BTNAskToCum"
+        Me.BTNAskToCum.Size = New System.Drawing.Size(214, 31)
+        Me.BTNAskToCum.TabIndex = 113
+        Me.BTNAskToCum.Text = "Let me cum!"
+        Me.BTNAskToCum.UseVisualStyleBackColor = False
+        '
+        'BTNSlowDown
+        '
+        Me.BTNSlowDown.BackColor = System.Drawing.Color.White
+        Me.BTNSlowDown.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNSlowDown.FlatAppearance.BorderSize = 2
+        Me.BTNSlowDown.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNSlowDown.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSlowDown.ForeColor = System.Drawing.Color.Black
+        Me.BTNSlowDown.Location = New System.Drawing.Point(128, 145)
+        Me.BTNSlowDown.Name = "BTNSlowDown"
+        Me.BTNSlowDown.Size = New System.Drawing.Size(99, 31)
+        Me.BTNSlowDown.TabIndex = 110
+        Me.BTNSlowDown.Text = "Slow down!"
+        Me.BTNSlowDown.UseVisualStyleBackColor = False
+        '
+        'BTNYes
+        '
+        Me.BTNYes.BackColor = System.Drawing.Color.White
+        Me.BTNYes.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNYes.FlatAppearance.BorderSize = 2
+        Me.BTNYes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNYes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNYes.ForeColor = System.Drawing.Color.Black
+        Me.BTNYes.Location = New System.Drawing.Point(13, 11)
+        Me.BTNYes.Name = "BTNYes"
+        Me.BTNYes.Size = New System.Drawing.Size(99, 31)
+        Me.BTNYes.TabIndex = 104
+        Me.BTNYes.Text = "Yes"
+        Me.BTNYes.UseVisualStyleBackColor = False
+        '
+        'BTNStroke
+        '
+        Me.BTNStroke.BackColor = System.Drawing.Color.White
+        Me.BTNStroke.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNStroke.FlatAppearance.BorderSize = 2
+        Me.BTNStroke.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNStroke.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNStroke.ForeColor = System.Drawing.Color.Black
+        Me.BTNStroke.Location = New System.Drawing.Point(128, 212)
+        Me.BTNStroke.Name = "BTNStroke"
+        Me.BTNStroke.Size = New System.Drawing.Size(100, 31)
+        Me.BTNStroke.TabIndex = 112
+        Me.BTNStroke.Text = "Stroke!"
+        Me.BTNStroke.UseVisualStyleBackColor = False
+        '
+        'BTNNo
+        '
+        Me.BTNNo.BackColor = System.Drawing.Color.White
+        Me.BTNNo.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNNo.FlatAppearance.BorderSize = 2
+        Me.BTNNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNNo.ForeColor = System.Drawing.Color.Black
+        Me.BTNNo.Location = New System.Drawing.Point(128, 11)
+        Me.BTNNo.Name = "BTNNo"
+        Me.BTNNo.Size = New System.Drawing.Size(99, 31)
+        Me.BTNNo.TabIndex = 105
+        Me.BTNNo.Text = "No"
+        Me.BTNNo.UseVisualStyleBackColor = False
+        '
+        'BTNGreeting
+        '
+        Me.BTNGreeting.BackColor = System.Drawing.Color.White
+        Me.BTNGreeting.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNGreeting.FlatAppearance.BorderSize = 2
+        Me.BTNGreeting.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNGreeting.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNGreeting.ForeColor = System.Drawing.Color.Black
+        Me.BTNGreeting.Location = New System.Drawing.Point(13, 346)
+        Me.BTNGreeting.Name = "BTNGreeting"
+        Me.BTNGreeting.Size = New System.Drawing.Size(99, 31)
+        Me.BTNGreeting.TabIndex = 106
+        Me.BTNGreeting.Text = "Greeting"
+        Me.BTNGreeting.UseVisualStyleBackColor = False
+        '
+        'BTNStop
+        '
+        Me.BTNStop.BackColor = System.Drawing.Color.White
+        Me.BTNStop.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNStop.FlatAppearance.BorderSize = 2
+        Me.BTNStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNStop.ForeColor = System.Drawing.Color.Black
+        Me.BTNStop.Location = New System.Drawing.Point(13, 212)
+        Me.BTNStop.Name = "BTNStop"
+        Me.BTNStop.Size = New System.Drawing.Size(98, 31)
+        Me.BTNStop.TabIndex = 111
+        Me.BTNStop.Text = "Stop!"
+        Me.BTNStop.UseVisualStyleBackColor = False
+        '
+        'BTNSafeword
+        '
+        Me.BTNSafeword.BackColor = System.Drawing.Color.White
+        Me.BTNSafeword.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNSafeword.FlatAppearance.BorderSize = 2
+        Me.BTNSafeword.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNSafeword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSafeword.ForeColor = System.Drawing.Color.Black
+        Me.BTNSafeword.Location = New System.Drawing.Point(128, 346)
+        Me.BTNSafeword.Name = "BTNSafeword"
+        Me.BTNSafeword.Size = New System.Drawing.Size(99, 31)
+        Me.BTNSafeword.TabIndex = 107
+        Me.BTNSafeword.Text = "Safeword"
+        Me.BTNSafeword.UseVisualStyleBackColor = False
+        '
+        'BTNEdge
+        '
+        Me.BTNEdge.BackColor = System.Drawing.Color.White
+        Me.BTNEdge.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNEdge.FlatAppearance.BorderSize = 2
+        Me.BTNEdge.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNEdge.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNEdge.ForeColor = System.Drawing.Color.Black
+        Me.BTNEdge.Location = New System.Drawing.Point(13, 78)
+        Me.BTNEdge.Name = "BTNEdge"
+        Me.BTNEdge.Size = New System.Drawing.Size(214, 31)
+        Me.BTNEdge.TabIndex = 108
+        Me.BTNEdge.Text = "On the edge!"
+        Me.BTNEdge.UseVisualStyleBackColor = False
+        '
+        'BTNSpeedUp
+        '
+        Me.BTNSpeedUp.BackColor = System.Drawing.Color.White
+        Me.BTNSpeedUp.FlatAppearance.BorderColor = System.Drawing.Color.Black
+        Me.BTNSpeedUp.FlatAppearance.BorderSize = 2
+        Me.BTNSpeedUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNSpeedUp.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNSpeedUp.ForeColor = System.Drawing.Color.Black
+        Me.BTNSpeedUp.Location = New System.Drawing.Point(13, 145)
+        Me.BTNSpeedUp.Name = "BTNSpeedUp"
+        Me.BTNSpeedUp.Size = New System.Drawing.Size(99, 31)
+        Me.BTNSpeedUp.TabIndex = 109
+        Me.BTNSpeedUp.Text = "Speed up!"
+        Me.BTNSpeedUp.UseVisualStyleBackColor = False
         '
         'PNLAvatar
         '
@@ -1765,6 +2108,12 @@ Partial Class Form1
         Me.Panel4.Size = New System.Drawing.Size(245, 31)
         Me.Panel4.TabIndex = 779
         '
+        'LazySubToolStripMenuItem
+        '
+        Me.LazySubToolStripMenuItem.Name = "LazySubToolStripMenuItem"
+        Me.LazySubToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LazySubToolStripMenuItem.Text = "Lazy Sub"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1793,13 +2142,13 @@ Partial Class Form1
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SplitContainer1.ResumeLayout(False)
-        Me.PNLDomTagBTN.ResumeLayout(False)
-        Me.PNLDomTagBTN.PerformLayout()
         CType(Me.DomWMP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNLHope.ResumeLayout(False)
         Me.PNLChatBox.ResumeLayout(False)
         Me.PNLChatBox.PerformLayout()
         Me.PNLMediaBar.ResumeLayout(False)
+        Me.PNLDomTagBTN.ResumeLayout(False)
+        Me.PNLDomTagBTN.PerformLayout()
         Me.PNLFileTransfer.ResumeLayout(False)
         CType(Me.PictureBox11, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PictureStrip.ResumeLayout(False)
@@ -1808,6 +2157,8 @@ Partial Class Form1
         Me.MenuStrip2.PerformLayout()
         Me.PNLDate.ResumeLayout(False)
         Me.PNLTabs.ResumeLayout(False)
+        Me.PNLLazySub.ResumeLayout(False)
+        Me.PNLLazySub.PerformLayout()
         Me.PNLAvatar.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
@@ -2001,5 +2352,32 @@ Partial Class Form1
     Friend WithEvents PNLAvatar As System.Windows.Forms.Panel
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
+    Friend WithEvents DommeTagsToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CloseAppPanelToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents PNLLazySub As System.Windows.Forms.Panel
+    Friend WithEvents CBHideShortcuts As System.Windows.Forms.CheckBox
+    Friend WithEvents CBShortcuts As System.Windows.Forms.CheckBox
+    Friend WithEvents TBShortSafeword As System.Windows.Forms.TextBox
+    Friend WithEvents TBShortGreet As System.Windows.Forms.TextBox
+    Friend WithEvents TBShortCum As System.Windows.Forms.TextBox
+    Friend WithEvents TBShortStroke As System.Windows.Forms.TextBox
+    Friend WithEvents TBShortStop As System.Windows.Forms.TextBox
+    Friend WithEvents TBShortSlowDown As System.Windows.Forms.TextBox
+    Friend WithEvents TBShortSpeedUp As System.Windows.Forms.TextBox
+    Friend WithEvents TBShortEdge As System.Windows.Forms.TextBox
+    Friend WithEvents TBShortNo As System.Windows.Forms.TextBox
+    Friend WithEvents TBShortYes As System.Windows.Forms.TextBox
+    Friend WithEvents BTNAskToCum As System.Windows.Forms.Button
+    Friend WithEvents BTNSlowDown As System.Windows.Forms.Button
+    Friend WithEvents BTNYes As System.Windows.Forms.Button
+    Friend WithEvents BTNStroke As System.Windows.Forms.Button
+    Friend WithEvents BTNNo As System.Windows.Forms.Button
+    Friend WithEvents BTNGreeting As System.Windows.Forms.Button
+    Friend WithEvents BTNStop As System.Windows.Forms.Button
+    Friend WithEvents BTNSafeword As System.Windows.Forms.Button
+    Friend WithEvents BTNEdge As System.Windows.Forms.Button
+    Friend WithEvents BTNSpeedUp As System.Windows.Forms.Button
+    Friend WithEvents LazySubToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

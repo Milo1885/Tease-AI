@@ -430,7 +430,7 @@ Public Class frmApps
         PNLHypnoGen.Visible = False
         PNLWishList.Visible = False
         PNLAppHome.Visible = True
-        PNLLazySub.Visible = False
+        'PNLLazySub.Visible = False
         PNLPlaylist.Visible = False
 
     End Sub
@@ -920,10 +920,10 @@ Public Class frmApps
 
     Private Sub Button28_Click(sender As System.Object, e As System.EventArgs) Handles Button28.Click
         PNLAppHome.Visible = False
-        PNLLazySub.Visible = True
+        'PNLLazySub.Visible = True
     End Sub
 
-    Private Sub Button3_Click_1(sender As System.Object, e As System.EventArgs) Handles Button3.Click
+    Private Sub Button3_Click_1(sender As System.Object, e As System.EventArgs)
         Try
             Form1.chatBox.Text = "Yes " & FrmSettings.TBHonorific.Text
         Catch
@@ -933,7 +933,7 @@ Public Class frmApps
         Form1.sendButton.PerformClick()
     End Sub
 
-    Private Sub Button7_Click(sender As System.Object, e As System.EventArgs) Handles Button7.Click
+    Private Sub Button7_Click(sender As System.Object, e As System.EventArgs)
         Try
             Form1.chatBox.Text = "No " & FrmSettings.TBHonorific.Text
         Catch
@@ -943,15 +943,15 @@ Public Class frmApps
         Form1.sendButton.PerformClick()
     End Sub
 
-    Private Sub Button21_Click(sender As System.Object, e As System.EventArgs) Handles Button21.Click
-      
+    Private Sub Button21_Click(sender As System.Object, e As System.EventArgs)
 
-            Form1.chatBox.Text = "On the edge"
+
+        Form1.chatBox.Text = "On the edge"
         Form1.sendButton.PerformClick()
 
     End Sub
 
-    Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles Button9.Click
+    Private Sub Button9_Click(sender As System.Object, e As System.EventArgs)
         Try
             Form1.chatBox.Text = "Hello " & FrmSettings.TBHonorific.Text
         Catch
@@ -961,27 +961,27 @@ Public Class frmApps
         Form1.sendButton.PerformClick()
     End Sub
 
-    Private Sub Button22_Click(sender As System.Object, e As System.EventArgs) Handles Button22.Click
+    Private Sub Button22_Click(sender As System.Object, e As System.EventArgs)
         Form1.chatBox.Text = "Let me speed up"
         Form1.sendButton.PerformClick()
     End Sub
 
-    Private Sub Button24_Click(sender As System.Object, e As System.EventArgs) Handles Button24.Click
+    Private Sub Button24_Click(sender As System.Object, e As System.EventArgs)
         Form1.chatBox.Text = "Let me slow down"
         Form1.sendButton.PerformClick()
     End Sub
 
-    Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles Button25.Click
+    Private Sub Button25_Click(sender As System.Object, e As System.EventArgs)
         Form1.chatBox.Text = "Let me stop"
         Form1.sendButton.PerformClick()
     End Sub
 
-    Private Sub Button26_Click(sender As System.Object, e As System.EventArgs) Handles Button26.Click
+    Private Sub Button26_Click(sender As System.Object, e As System.EventArgs)
         Form1.chatBox.Text = "May I start stroking?"
         Form1.sendButton.PerformClick()
     End Sub
 
-    Private Sub Button27_Click(sender As System.Object, e As System.EventArgs) Handles Button27.Click
+    Private Sub Button27_Click(sender As System.Object, e As System.EventArgs)
         Form1.chatBox.Text = "Please let me cum!"
         Form1.sendButton.PerformClick()
     End Sub
@@ -1034,7 +1034,7 @@ Public Class frmApps
 
     End Sub
 
-    Private Sub Button20_Click(sender As System.Object, e As System.EventArgs) Handles Button20.Click
+    Private Sub Button20_Click(sender As System.Object, e As System.EventArgs)
 
         Try
             Form1.chatBox.Text = FrmSettings.TBSafeword.Text
@@ -1156,101 +1156,7 @@ Public Class frmApps
 
     End Sub
 
-    Private Sub CBHideShortcuts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBHideShortcuts.CheckedChanged
-        If Form1.FormLoading = False Then
-            GetShortcutChecked()
-            My.Settings.ShowShortcuts = CBHideShortcuts.Checked
-            My.Settings.Save()
-        End If
-    End Sub
-
-    Public Sub GetShortcutChecked()
-
-        If CBHideShortcuts.Checked = True Then
-            TBShortYes.Visible = False
-            TBShortNo.Visible = False
-            TBShortEdge.Visible = False
-            TBShortSpeedUp.Visible = False
-            TBShortSlowDown.Visible = False
-            TBShortStop.Visible = False
-            TBShortStroke.Visible = False
-            TBShortCum.Visible = False
-            TBShortGreet.Visible = False
-            TBShortSafeword.Visible = False
-
-        Else
-
-            TBShortYes.Visible = True
-            TBShortNo.Visible = True
-            TBShortEdge.Visible = True
-            TBShortSpeedUp.Visible = True
-            TBShortSlowDown.Visible = True
-            TBShortStop.Visible = True
-            TBShortStroke.Visible = True
-            TBShortCum.Visible = True
-            TBShortGreet.Visible = True
-            TBShortSafeword.Visible = True
-
-        End If
-
-    End Sub
-
-    Private Sub CBShortcuts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBShortcuts.CheckedChanged
-        If Form1.FormLoading = False Then
-            My.Settings.Shortcuts = CBShortcuts.Checked
-            My.Settings.Save()
-        End If
-    End Sub
-
-    Private Sub TBShortYes_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortYes.LostFocus
-        My.Settings.ShortYes = TBShortYes.Text
-        My.Settings.Save()
-    End Sub
-
-    Private Sub TBShortNo_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortNo.LostFocus
-        My.Settings.ShortNo = TBShortNo.Text
-        My.Settings.Save()
-    End Sub
-
-    Private Sub TBShortEdge_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortEdge.LostFocus
-        My.Settings.ShortEdge = TBShortEdge.Text
-        My.Settings.Save()
-    End Sub
-
-    Private Sub TBShortSpeedUp_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSpeedUp.LostFocus
-        My.Settings.ShortSpeedUp = TBShortSpeedUp.Text
-        My.Settings.Save()
-    End Sub
-
-    Private Sub TBShortSlowDown_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSlowDown.LostFocus
-        My.Settings.ShortSlowDown = TBShortSlowDown.Text
-        My.Settings.Save()
-    End Sub
-
-    Private Sub TBShortStop_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStop.LostFocus
-        My.Settings.ShortStop = TBShortStop.Text
-        My.Settings.Save()
-    End Sub
-
-    Private Sub TBShortStroke_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStroke.LostFocus
-        My.Settings.ShortStroke = TBShortStroke.Text
-        My.Settings.Save()
-    End Sub
-
-    Private Sub TBShortCum_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortCum.LostFocus
-        My.Settings.ShortCum = TBShortCum.Text
-        My.Settings.Save()
-    End Sub
-
-    Private Sub TBShortGreet_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortGreet.LostFocus
-        My.Settings.ShortGreet = TBShortGreet.Text
-        My.Settings.Save()
-    End Sub
-
-    Private Sub TBShortSafeword_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSafeword.LostFocus
-        My.Settings.ShortSafeword = TBShortSafeword.Text
-        My.Settings.Save()
-    End Sub
+  
 
     
     Private Sub Button31_Click_1(sender As System.Object, e As System.EventArgs) Handles Button31.Click
@@ -1298,8 +1204,8 @@ Public Class frmApps
 
         Form1.SplitContainer1.Panel2.BackColor = Color.SteelBlue
 
-        PNLLazySub.BackColor = Color.SteelBlue
-        Label27.ForeColor = Color.SteelBlue
+        'PNLLazySub.BackColor = Color.SteelBlue
+        'Label27.ForeColor = Color.SteelBlue
         Panel1.BackColor = Color.SteelBlue
         LBLWishListName.ForeColor = Color.SteelBlue
         Panel2.BackColor = Color.SteelBlue
@@ -1366,8 +1272,8 @@ Public Class frmApps
         FrmWritingTask.PNLWritingTask.BackColor = Color.DarkMagenta
 
 
-        PNLLazySub.BackColor = Color.DarkMagenta
-        Label27.ForeColor = Color.DarkMagenta
+        'PNLLazySub.BackColor = Color.DarkMagenta
+        'Label27.ForeColor = Color.DarkMagenta
         Panel1.BackColor = Color.DarkMagenta
         LBLWishListName.ForeColor = Color.DarkMagenta
         Panel2.BackColor = Color.DarkMagenta
@@ -1430,8 +1336,8 @@ Public Class frmApps
 
         FrmWritingTask.PNLWritingTask.BackColor = Color.Black
 
-        PNLLazySub.BackColor = Color.Black
-        Label27.ForeColor = Color.Black
+        'PNLLazySub.BackColor = Color.Black
+        'Label27.ForeColor = Color.Black
         Panel1.BackColor = Color.Black
         LBLWishListName.ForeColor = Color.Black
         Panel2.BackColor = Color.Black
@@ -1494,8 +1400,8 @@ Public Class frmApps
 
         FrmWritingTask.PNLWritingTask.BackColor = Color.Firebrick
 
-        PNLLazySub.BackColor = Color.Firebrick
-        Label27.ForeColor = Color.Firebrick
+        'PNLLazySub.BackColor = Color.Firebrick
+        ' Label27.ForeColor = Color.Firebrick
         Panel1.BackColor = Color.Firebrick
         LBLWishListName.ForeColor = Color.Firebrick
         Panel2.BackColor = Color.Firebrick

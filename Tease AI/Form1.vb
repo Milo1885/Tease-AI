@@ -1501,20 +1501,20 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         ResetFlag = True
         SuspendSession()
 
-        frmApps.CBShortcuts.Checked = My.Settings.Shortcuts
-        frmApps.CBHideShortcuts.Checked = My.Settings.ShowShortcuts
-        frmApps.GetShortcutChecked()
+        CBShortcuts.Checked = My.Settings.Shortcuts
+        CBHideShortcuts.Checked = My.Settings.ShowShortcuts
+        GetShortcutChecked()
 
-        frmApps.TBShortYes.Text = My.Settings.ShortYes
-        frmApps.TBShortNo.Text = My.Settings.ShortNo
-        frmApps.TBShortEdge.Text = My.Settings.ShortEdge
-        frmApps.TBShortSpeedUp.Text = My.Settings.ShortSpeedUp
-        frmApps.TBShortSlowDown.Text = My.Settings.ShortSlowDown
-        frmApps.TBShortStop.Text = My.Settings.ShortStop
-        frmApps.TBShortStroke.Text = My.Settings.ShortStroke
-        frmApps.TBShortCum.Text = My.Settings.ShortCum
-        frmApps.TBShortGreet.Text = My.Settings.ShortGreet
-        frmApps.TBShortSafeword.Text = My.Settings.ShortSafeword
+        TBShortYes.Text = My.Settings.ShortYes
+        TBShortNo.Text = My.Settings.ShortNo
+        TBShortEdge.Text = My.Settings.ShortEdge
+        TBShortSpeedUp.Text = My.Settings.ShortSpeedUp
+        TBShortSlowDown.Text = My.Settings.ShortSlowDown
+        TBShortStop.Text = My.Settings.ShortStop
+        TBShortStroke.Text = My.Settings.ShortStroke
+        TBShortCum.Text = My.Settings.ShortCum
+        TBShortGreet.Text = My.Settings.ShortGreet
+        TBShortSafeword.Text = My.Settings.ShortSafeword
 
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Checking saved dimensions..."
@@ -1535,7 +1535,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSplash.LBLSplash.Text = "Loading theme..."
         FrmSplash.Refresh()
 
-
+        CloseApp()
       
 
         MetroTimer.Start()
@@ -1669,18 +1669,18 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         ChatString = chatBox.Text
 
-        If frmApps.CBShortcuts.Checked = True Then
+        If CBShortcuts.Checked = True Then
 
-            If UCase(ChatString) = UCase(frmApps.TBShortYes.Text) Then ChatString = "Yes " & FrmSettings.TBHonorific.Text
-            If UCase(ChatString) = UCase(frmApps.TBShortNo.Text) Then ChatString = "No " & FrmSettings.TBHonorific.Text
-            If UCase(ChatString) = UCase(frmApps.TBShortEdge.Text) Then ChatString = "On the edge"
-            If UCase(ChatString) = UCase(frmApps.TBShortSpeedUp.Text) Then ChatString = "Let me speed up"
-            If UCase(ChatString) = UCase(frmApps.TBShortSlowDown.Text) Then ChatString = "Let me slow down"
-            If UCase(ChatString) = UCase(frmApps.TBShortStop.Text) Then ChatString = "Let me stop"
-            If UCase(ChatString) = UCase(frmApps.TBShortStroke.Text) Then ChatString = "May I start stroking?"
-            If UCase(ChatString) = UCase(frmApps.TBShortCum.Text) Then ChatString = "Please let me cum!"
-            If UCase(ChatString) = UCase(frmApps.TBShortGreet.Text) Then ChatString = "Hello " & FrmSettings.TBHonorific.Text
-            If UCase(ChatString) = UCase(frmApps.TBShortSafeword.Text) Then ChatString = FrmSettings.TBSafeword.Text
+            If UCase(ChatString) = UCase(TBShortYes.Text) Then ChatString = "Yes " & FrmSettings.TBHonorific.Text
+            If UCase(ChatString) = UCase(TBShortNo.Text) Then ChatString = "No " & FrmSettings.TBHonorific.Text
+            If UCase(ChatString) = UCase(TBShortEdge.Text) Then ChatString = "On the edge"
+            If UCase(ChatString) = UCase(TBShortSpeedUp.Text) Then ChatString = "Let me speed up"
+            If UCase(ChatString) = UCase(TBShortSlowDown.Text) Then ChatString = "Let me slow down"
+            If UCase(ChatString) = UCase(TBShortStop.Text) Then ChatString = "Let me stop"
+            If UCase(ChatString) = UCase(TBShortStroke.Text) Then ChatString = "May I start stroking?"
+            If UCase(ChatString) = UCase(TBShortCum.Text) Then ChatString = "Please let me cum!"
+            If UCase(ChatString) = UCase(TBShortGreet.Text) Then ChatString = "Hello " & FrmSettings.TBHonorific.Text
+            If UCase(ChatString) = UCase(TBShortSafeword.Text) Then ChatString = FrmSettings.TBSafeword.Text
 
         End If
 
@@ -13416,6 +13416,9 @@ VTSkip:
 
             For i As Integer = 0 To TagList.Count - 1
 
+                Try
+
+               
                 If TagList(xU).Contains(DomTag1) And TagList(xU).Contains(DomTag2) And TagList(xU).Contains(DomTag3) Then
 
                     Dim PicArray As String() = TagList(xU).Split
@@ -13432,28 +13435,38 @@ VTSkip:
 
                     Exit For
 
-                End If
+                    End If
+
+                Catch 
+                End Try
 
                 xU += 1
                 If xU > _ImageFileNames.Count - 1 Then xU = _ImageFileNames.Count - 1
 
-                If TagList(xD).Contains(DomTag1) And TagList(xD).Contains(DomTag2) And TagList(xD).Contains(DomTag3) Then
+                Try
 
-                    Dim PicArray As String() = TagList(xD).Split
-                    Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
+                    If TagList(xD).Contains(DomTag1) And TagList(xD).Contains(DomTag2) And TagList(xD).Contains(DomTag3) Then
 
-                    For p As Integer = 0 To PicArray.Count - 1
-                        PicDir = PicDir & PicArray(p)
-                        If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
-                    Next
+                        Dim PicArray As String() = TagList(xD).Split
+                        Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
 
-                    If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
+                        For p As Integer = 0 To PicArray.Count - 1
+                            PicDir = PicDir & PicArray(p)
+                            If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
+                        Next
 
-                    DommeImageFound = True
+                        If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
 
-                    Exit For
+                        DommeImageFound = True
 
-                End If
+                        Exit For
+
+                    End If
+
+                Catch
+
+                End Try
+
 
                 xD -= 1
                 If xD < 0 Then xD = 0
@@ -22379,6 +22392,12 @@ TryNext:
             PNLDomTagBTN.Height = 468
         End If
 
+        If PNLTabs.Height > 452 Then
+            PNLLazySub.Height = PNLTabs.Height - 8
+        Else
+            PNLLazySub.Height = 444
+        End If
+
 
         PNLTabs.HorizontalScroll.Visible = False
 
@@ -22875,18 +22894,7 @@ SkipNew:
 
     End Sub
 
-    Private Sub DommeTagsToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles DommeTagsToolStripMenuItem1.Click
-
-        If PNLDomTagBTN.Visible = False Then
-            CloseApp()
-            OpenApp()
-            PNLDomTagBTN.Visible = True
-        Else
-            CloseApp()
-        End If
-
-
-    End Sub
+    
 
     Private Sub Button1_Click_3(sender As System.Object, e As System.EventArgs)
         DommeTags = False
@@ -23778,7 +23786,7 @@ SkipNew:
         'PictureBox3.BackColor = my.settings.BackgroundColor
 
 
-        PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
+
 
         FrmSettings.LBLBackColor2.BackColor = My.Settings.BackgroundColor
         FrmSettings.LBLButtonColor2.BackColor = My.Settings.ButtonColor
@@ -23822,6 +23830,8 @@ SkipNew:
 
 
         PNLTabs.BackColor = My.Settings.BackgroundColor
+        PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
+        PNLLazySub.BackColor = My.Settings.BackgroundColor
 
         ApplyingTheme = False
 
@@ -23920,6 +23930,7 @@ SkipNew:
 
         PNLDomTagBTN.Visible = False
         StatusUpdates.Visible = False
+        PNLLazySub.Visible = False
         PNLTabs.Height = 0
 
         AdjustWindow()
@@ -23983,10 +23994,203 @@ SkipNew:
     Private Sub GlitterToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GlitterToolStripMenuItem.Click
         If StatusUpdates.Visible = False Then
             CloseApp()
-            OpenApp()
             StatusUpdates.Visible = True
-        Else
-            CloseApp()
+            OpenApp()
         End If
+    End Sub
+
+    Private Sub DommeTagsToolStripMenuItem2_Click(sender As System.Object, e As System.EventArgs) Handles DommeTagsToolStripMenuItem2.Click
+
+        If PNLDomTagBTN.Visible = False Then
+            CloseApp()
+            OpenApp()
+            PNLDomTagBTN.Visible = True
+        End If
+
+    End Sub
+
+    Private Sub CloseAppPanelToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CloseAppPanelToolStripMenuItem.Click
+        CloseApp()
+    End Sub
+
+    Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles BTNStop.Click
+        chatBox.Text = "Let me stop"
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub Button9_Click(sender As System.Object, e As System.EventArgs)
+
+    End Sub
+
+    Private Sub BTNYes_Click(sender As System.Object, e As System.EventArgs) Handles BTNYes.Click
+        Try
+            chatBox.Text = "Yes " & FrmSettings.TBHonorific.Text
+        Catch
+            chatBox.Text = "Yes"
+        End Try
+
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub BTNNo_Click(sender As System.Object, e As System.EventArgs) Handles BTNNo.Click
+        Try
+            chatBox.Text = "No " & FrmSettings.TBHonorific.Text
+        Catch
+            chatBox.Text = "No"
+        End Try
+
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub BTNEdge_Click(sender As System.Object, e As System.EventArgs) Handles BTNEdge.Click
+        chatBox.Text = "On the edge"
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub BTNSpeedUp_Click(sender As System.Object, e As System.EventArgs) Handles BTNSpeedUp.Click
+        chatBox.Text = "Let me speed up"
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub BTNSlowDown_Click(sender As System.Object, e As System.EventArgs) Handles BTNSlowDown.Click
+        chatBox.Text = "Let me slow down"
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub BTNStroke_Click(sender As System.Object, e As System.EventArgs) Handles BTNStroke.Click
+        chatBox.Text = "May I start stroking?"
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub BTNAskToCum_Click(sender As System.Object, e As System.EventArgs) Handles BTNAskToCum.Click
+        chatBox.Text = "Please let me cum!"
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub BTNGreeting_Click(sender As System.Object, e As System.EventArgs) Handles BTNGreeting.Click
+        Try
+            chatBox.Text = "Hello " & FrmSettings.TBHonorific.Text
+        Catch
+            chatBox.Text = "Hello"
+        End Try
+
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub BTNSafeword_Click(sender As System.Object, e As System.EventArgs) Handles BTNSafeword.Click
+        Try
+            chatBox.Text = FrmSettings.TBSafeword.Text
+        Catch
+            chatBox.Text = "@Error"
+        End Try
+
+        sendButton.PerformClick()
+    End Sub
+
+    Private Sub CBHideShortcuts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBHideShortcuts.CheckedChanged
+        If FormLoading = False Then
+            GetShortcutChecked()
+            My.Settings.ShowShortcuts = CBHideShortcuts.Checked
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Public Sub GetShortcutChecked()
+
+        If CBHideShortcuts.Checked = True Then
+            TBShortYes.Visible = False
+            TBShortNo.Visible = False
+            TBShortEdge.Visible = False
+            TBShortSpeedUp.Visible = False
+            TBShortSlowDown.Visible = False
+            TBShortStop.Visible = False
+            TBShortStroke.Visible = False
+            TBShortCum.Visible = False
+            TBShortGreet.Visible = False
+            TBShortSafeword.Visible = False
+
+        Else
+
+            TBShortYes.Visible = True
+            TBShortNo.Visible = True
+            TBShortEdge.Visible = True
+            TBShortSpeedUp.Visible = True
+            TBShortSlowDown.Visible = True
+            TBShortStop.Visible = True
+            TBShortStroke.Visible = True
+            TBShortCum.Visible = True
+            TBShortGreet.Visible = True
+            TBShortSafeword.Visible = True
+
+        End If
+
+    End Sub
+
+    Private Sub CBShortcuts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBShortcuts.CheckedChanged
+        If FormLoading = False Then
+            My.Settings.Shortcuts = CBShortcuts.Checked
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Private Sub TBShortYes_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortYes.LostFocus
+        My.Settings.ShortYes = TBShortYes.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortNo_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortNo.LostFocus
+        My.Settings.ShortNo = TBShortNo.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortEdge_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortEdge.LostFocus
+        My.Settings.ShortEdge = TBShortEdge.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortSpeedUp_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSpeedUp.LostFocus
+        My.Settings.ShortSpeedUp = TBShortSpeedUp.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortSlowDown_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSlowDown.LostFocus
+        My.Settings.ShortSlowDown = TBShortSlowDown.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortStop_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStop.LostFocus
+        My.Settings.ShortStop = TBShortStop.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortStroke_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStroke.LostFocus
+        My.Settings.ShortStroke = TBShortStroke.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortCum_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortCum.LostFocus
+        My.Settings.ShortCum = TBShortCum.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortGreet_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortGreet.LostFocus
+        My.Settings.ShortGreet = TBShortGreet.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub TBShortSafeword_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSafeword.LostFocus
+        My.Settings.ShortSafeword = TBShortSafeword.Text
+        My.Settings.Save()
+    End Sub
+
+
+    Private Sub LazySubToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LazySubToolStripMenuItem.Click
+
+        If PNLLazySub.Visible = False Then
+            CloseApp()
+            OpenApp()
+            PNLLazySub.Visible = True
+        End If
+
     End Sub
 End Class

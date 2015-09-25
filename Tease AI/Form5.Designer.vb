@@ -66,6 +66,8 @@ Partial Class frmApps
         Me.Button29 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.AppPanelGlitter = New System.Windows.Forms.Panel()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
         Me.AppPanelVitalSub = New System.Windows.Forms.Panel()
         Me.CBVitalSubDomTask = New System.Windows.Forms.CheckBox()
         Me.BTNVitalSub = New System.Windows.Forms.Button()
@@ -133,42 +135,15 @@ Partial Class frmApps
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.LBLWishlistDom = New System.Windows.Forms.Label()
         Me.WishlistPreview = New System.Windows.Forms.PictureBox()
-        Me.PNLLazySub = New System.Windows.Forms.Panel()
-        Me.CBHideShortcuts = New System.Windows.Forms.CheckBox()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.CBShortcuts = New System.Windows.Forms.CheckBox()
-        Me.TBShortSafeword = New System.Windows.Forms.TextBox()
-        Me.TBShortGreet = New System.Windows.Forms.TextBox()
-        Me.TBShortCum = New System.Windows.Forms.TextBox()
-        Me.TBShortStroke = New System.Windows.Forms.TextBox()
-        Me.TBShortStop = New System.Windows.Forms.TextBox()
-        Me.TBShortSlowDown = New System.Windows.Forms.TextBox()
-        Me.TBShortSpeedUp = New System.Windows.Forms.TextBox()
-        Me.TBShortEdge = New System.Windows.Forms.TextBox()
-        Me.TBShortNo = New System.Windows.Forms.TextBox()
-        Me.TBShortYes = New System.Windows.Forms.TextBox()
-        Me.Button27 = New System.Windows.Forms.Button()
-        Me.Button24 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button26 = New System.Windows.Forms.Button()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button25 = New System.Windows.Forms.Button()
-        Me.Button20 = New System.Windows.Forms.Button()
-        Me.Button21 = New System.Windows.Forms.Button()
-        Me.Button22 = New System.Windows.Forms.Button()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.PNLPlaylist = New System.Windows.Forms.Panel()
         Me.LBPlaylist = New System.Windows.Forms.ListBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Button30 = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.AppPanelVitalSub.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -185,10 +160,7 @@ Partial Class frmApps
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PNLLazySub.SuspendLayout()
-        Me.Panel5.SuspendLayout()
         Me.PNLPlaylist.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PNLAppHome
@@ -757,6 +729,27 @@ Partial Class frmApps
         Me.AppPanelGlitter.Size = New System.Drawing.Size(250, 485)
         Me.AppPanelGlitter.TabIndex = 162
         Me.AppPanelGlitter.Visible = False
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.PictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
+        Me.PictureBox3.Location = New System.Drawing.Point(0, 18)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(250, 47)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox3.TabIndex = 0
+        Me.PictureBox3.TabStop = False
+        '
+        'StatusUpdates
+        '
+        Me.StatusUpdates.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
+        Me.StatusUpdates.Location = New System.Drawing.Point(-3, 62)
+        Me.StatusUpdates.MinimumSize = New System.Drawing.Size(20, 20)
+        Me.StatusUpdates.Name = "StatusUpdates"
+        Me.StatusUpdates.Size = New System.Drawing.Size(250, 416)
+        Me.StatusUpdates.TabIndex = 142
         '
         'AppPanelVitalSub
         '
@@ -1523,338 +1516,6 @@ Partial Class frmApps
         Me.WishlistPreview.TabIndex = 101
         Me.WishlistPreview.TabStop = False
         '
-        'PNLLazySub
-        '
-        Me.PNLLazySub.BackColor = System.Drawing.Color.SteelBlue
-        Me.PNLLazySub.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLLazySub.Controls.Add(Me.CBHideShortcuts)
-        Me.PNLLazySub.Controls.Add(Me.Panel5)
-        Me.PNLLazySub.Controls.Add(Me.CBShortcuts)
-        Me.PNLLazySub.Controls.Add(Me.TBShortSafeword)
-        Me.PNLLazySub.Controls.Add(Me.TBShortGreet)
-        Me.PNLLazySub.Controls.Add(Me.TBShortCum)
-        Me.PNLLazySub.Controls.Add(Me.TBShortStroke)
-        Me.PNLLazySub.Controls.Add(Me.TBShortStop)
-        Me.PNLLazySub.Controls.Add(Me.TBShortSlowDown)
-        Me.PNLLazySub.Controls.Add(Me.TBShortSpeedUp)
-        Me.PNLLazySub.Controls.Add(Me.TBShortEdge)
-        Me.PNLLazySub.Controls.Add(Me.TBShortNo)
-        Me.PNLLazySub.Controls.Add(Me.TBShortYes)
-        Me.PNLLazySub.Controls.Add(Me.Button27)
-        Me.PNLLazySub.Controls.Add(Me.Button24)
-        Me.PNLLazySub.Controls.Add(Me.Button3)
-        Me.PNLLazySub.Controls.Add(Me.Button26)
-        Me.PNLLazySub.Controls.Add(Me.Button7)
-        Me.PNLLazySub.Controls.Add(Me.Button9)
-        Me.PNLLazySub.Controls.Add(Me.Button25)
-        Me.PNLLazySub.Controls.Add(Me.Button20)
-        Me.PNLLazySub.Controls.Add(Me.Button21)
-        Me.PNLLazySub.Controls.Add(Me.Button22)
-        Me.PNLLazySub.Controls.Add(Me.Label9)
-        Me.PNLLazySub.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PNLLazySub.Location = New System.Drawing.Point(0, 47)
-        Me.PNLLazySub.Name = "PNLLazySub"
-        Me.PNLLazySub.Size = New System.Drawing.Size(250, 485)
-        Me.PNLLazySub.TabIndex = 167
-        Me.PNLLazySub.Visible = False
-        '
-        'CBHideShortcuts
-        '
-        Me.CBHideShortcuts.AutoSize = True
-        Me.CBHideShortcuts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CBHideShortcuts.ForeColor = System.Drawing.Color.White
-        Me.CBHideShortcuts.Location = New System.Drawing.Point(132, 457)
-        Me.CBHideShortcuts.Name = "CBHideShortcuts"
-        Me.CBHideShortcuts.Size = New System.Drawing.Size(96, 17)
-        Me.CBHideShortcuts.TabIndex = 171
-        Me.CBHideShortcuts.Text = "Hide Shortcuts"
-        Me.CBHideShortcuts.UseVisualStyleBackColor = True
-        '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.Color.White
-        Me.Panel5.Controls.Add(Me.Label27)
-        Me.Panel5.ForeColor = System.Drawing.Color.Black
-        Me.Panel5.Location = New System.Drawing.Point(0, 18)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(250, 10)
-        Me.Panel5.TabIndex = 103
-        '
-        'Label27
-        '
-        Me.Label27.BackColor = System.Drawing.Color.White
-        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.ForeColor = System.Drawing.Color.SteelBlue
-        Me.Label27.Location = New System.Drawing.Point(14, -16)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(223, 41)
-        Me.Label27.TabIndex = 102
-        Me.Label27.Text = "lazy sub"
-        Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'CBShortcuts
-        '
-        Me.CBShortcuts.AutoSize = True
-        Me.CBShortcuts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CBShortcuts.ForeColor = System.Drawing.Color.White
-        Me.CBShortcuts.Location = New System.Drawing.Point(17, 457)
-        Me.CBShortcuts.Name = "CBShortcuts"
-        Me.CBShortcuts.Size = New System.Drawing.Size(107, 17)
-        Me.CBShortcuts.TabIndex = 169
-        Me.CBShortcuts.Text = "Enable Shortcuts"
-        Me.CBShortcuts.UseVisualStyleBackColor = True
-        '
-        'TBShortSafeword
-        '
-        Me.TBShortSafeword.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortSafeword.Location = New System.Drawing.Point(133, 424)
-        Me.TBShortSafeword.Name = "TBShortSafeword"
-        Me.TBShortSafeword.Size = New System.Drawing.Size(96, 23)
-        Me.TBShortSafeword.TabIndex = 170
-        Me.TBShortSafeword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBShortGreet
-        '
-        Me.TBShortGreet.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortGreet.Location = New System.Drawing.Point(18, 424)
-        Me.TBShortGreet.Name = "TBShortGreet"
-        Me.TBShortGreet.Size = New System.Drawing.Size(96, 23)
-        Me.TBShortGreet.TabIndex = 169
-        Me.TBShortGreet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBShortCum
-        '
-        Me.TBShortCum.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortCum.Location = New System.Drawing.Point(18, 357)
-        Me.TBShortCum.Name = "TBShortCum"
-        Me.TBShortCum.Size = New System.Drawing.Size(212, 23)
-        Me.TBShortCum.TabIndex = 121
-        Me.TBShortCum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBShortStroke
-        '
-        Me.TBShortStroke.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortStroke.Location = New System.Drawing.Point(133, 290)
-        Me.TBShortStroke.Name = "TBShortStroke"
-        Me.TBShortStroke.Size = New System.Drawing.Size(96, 23)
-        Me.TBShortStroke.TabIndex = 120
-        Me.TBShortStroke.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBShortStop
-        '
-        Me.TBShortStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortStop.Location = New System.Drawing.Point(18, 290)
-        Me.TBShortStop.Name = "TBShortStop"
-        Me.TBShortStop.Size = New System.Drawing.Size(96, 23)
-        Me.TBShortStop.TabIndex = 119
-        Me.TBShortStop.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBShortSlowDown
-        '
-        Me.TBShortSlowDown.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortSlowDown.Location = New System.Drawing.Point(133, 223)
-        Me.TBShortSlowDown.Name = "TBShortSlowDown"
-        Me.TBShortSlowDown.Size = New System.Drawing.Size(96, 23)
-        Me.TBShortSlowDown.TabIndex = 118
-        Me.TBShortSlowDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBShortSpeedUp
-        '
-        Me.TBShortSpeedUp.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortSpeedUp.Location = New System.Drawing.Point(18, 223)
-        Me.TBShortSpeedUp.Name = "TBShortSpeedUp"
-        Me.TBShortSpeedUp.Size = New System.Drawing.Size(96, 23)
-        Me.TBShortSpeedUp.TabIndex = 117
-        Me.TBShortSpeedUp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBShortEdge
-        '
-        Me.TBShortEdge.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortEdge.Location = New System.Drawing.Point(18, 156)
-        Me.TBShortEdge.Name = "TBShortEdge"
-        Me.TBShortEdge.Size = New System.Drawing.Size(212, 23)
-        Me.TBShortEdge.TabIndex = 116
-        Me.TBShortEdge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBShortNo
-        '
-        Me.TBShortNo.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortNo.Location = New System.Drawing.Point(133, 89)
-        Me.TBShortNo.Name = "TBShortNo"
-        Me.TBShortNo.Size = New System.Drawing.Size(96, 23)
-        Me.TBShortNo.TabIndex = 115
-        Me.TBShortNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TBShortYes
-        '
-        Me.TBShortYes.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TBShortYes.Location = New System.Drawing.Point(18, 89)
-        Me.TBShortYes.Name = "TBShortYes"
-        Me.TBShortYes.Size = New System.Drawing.Size(96, 23)
-        Me.TBShortYes.TabIndex = 114
-        Me.TBShortYes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Button27
-        '
-        Me.Button27.BackColor = System.Drawing.Color.White
-        Me.Button27.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button27.FlatAppearance.BorderSize = 2
-        Me.Button27.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button27.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button27.ForeColor = System.Drawing.Color.Black
-        Me.Button27.Location = New System.Drawing.Point(16, 321)
-        Me.Button27.Name = "Button27"
-        Me.Button27.Size = New System.Drawing.Size(214, 31)
-        Me.Button27.TabIndex = 113
-        Me.Button27.Text = "Let me cum!"
-        Me.Button27.UseVisualStyleBackColor = False
-        '
-        'Button24
-        '
-        Me.Button24.BackColor = System.Drawing.Color.White
-        Me.Button24.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button24.FlatAppearance.BorderSize = 2
-        Me.Button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button24.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button24.ForeColor = System.Drawing.Color.Black
-        Me.Button24.Location = New System.Drawing.Point(131, 187)
-        Me.Button24.Name = "Button24"
-        Me.Button24.Size = New System.Drawing.Size(99, 31)
-        Me.Button24.TabIndex = 110
-        Me.Button24.Text = "Slow down!"
-        Me.Button24.UseVisualStyleBackColor = False
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.White
-        Me.Button3.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button3.FlatAppearance.BorderSize = 2
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.Color.Black
-        Me.Button3.Location = New System.Drawing.Point(16, 53)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(99, 31)
-        Me.Button3.TabIndex = 104
-        Me.Button3.Text = "Yes"
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'Button26
-        '
-        Me.Button26.BackColor = System.Drawing.Color.White
-        Me.Button26.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button26.FlatAppearance.BorderSize = 2
-        Me.Button26.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button26.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button26.ForeColor = System.Drawing.Color.Black
-        Me.Button26.Location = New System.Drawing.Point(131, 254)
-        Me.Button26.Name = "Button26"
-        Me.Button26.Size = New System.Drawing.Size(100, 31)
-        Me.Button26.TabIndex = 112
-        Me.Button26.Text = "Stroke!"
-        Me.Button26.UseVisualStyleBackColor = False
-        '
-        'Button7
-        '
-        Me.Button7.BackColor = System.Drawing.Color.White
-        Me.Button7.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button7.FlatAppearance.BorderSize = 2
-        Me.Button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button7.ForeColor = System.Drawing.Color.Black
-        Me.Button7.Location = New System.Drawing.Point(131, 53)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(99, 31)
-        Me.Button7.TabIndex = 105
-        Me.Button7.Text = "No"
-        Me.Button7.UseVisualStyleBackColor = False
-        '
-        'Button9
-        '
-        Me.Button9.BackColor = System.Drawing.Color.White
-        Me.Button9.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button9.FlatAppearance.BorderSize = 2
-        Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button9.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button9.ForeColor = System.Drawing.Color.Black
-        Me.Button9.Location = New System.Drawing.Point(16, 388)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(99, 31)
-        Me.Button9.TabIndex = 106
-        Me.Button9.Text = "Greeting"
-        Me.Button9.UseVisualStyleBackColor = False
-        '
-        'Button25
-        '
-        Me.Button25.BackColor = System.Drawing.Color.White
-        Me.Button25.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button25.FlatAppearance.BorderSize = 2
-        Me.Button25.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button25.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button25.ForeColor = System.Drawing.Color.Black
-        Me.Button25.Location = New System.Drawing.Point(16, 254)
-        Me.Button25.Name = "Button25"
-        Me.Button25.Size = New System.Drawing.Size(98, 31)
-        Me.Button25.TabIndex = 111
-        Me.Button25.Text = "Stop!"
-        Me.Button25.UseVisualStyleBackColor = False
-        '
-        'Button20
-        '
-        Me.Button20.BackColor = System.Drawing.Color.White
-        Me.Button20.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button20.FlatAppearance.BorderSize = 2
-        Me.Button20.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button20.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button20.ForeColor = System.Drawing.Color.Black
-        Me.Button20.Location = New System.Drawing.Point(131, 388)
-        Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(99, 31)
-        Me.Button20.TabIndex = 107
-        Me.Button20.Text = "Safeword"
-        Me.Button20.UseVisualStyleBackColor = False
-        '
-        'Button21
-        '
-        Me.Button21.BackColor = System.Drawing.Color.White
-        Me.Button21.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button21.FlatAppearance.BorderSize = 2
-        Me.Button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button21.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button21.ForeColor = System.Drawing.Color.Black
-        Me.Button21.Location = New System.Drawing.Point(16, 120)
-        Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(214, 31)
-        Me.Button21.TabIndex = 108
-        Me.Button21.Text = "On the edge!"
-        Me.Button21.UseVisualStyleBackColor = False
-        '
-        'Button22
-        '
-        Me.Button22.BackColor = System.Drawing.Color.White
-        Me.Button22.FlatAppearance.BorderColor = System.Drawing.Color.Black
-        Me.Button22.FlatAppearance.BorderSize = 2
-        Me.Button22.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button22.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button22.ForeColor = System.Drawing.Color.Black
-        Me.Button22.Location = New System.Drawing.Point(16, 187)
-        Me.Button22.Name = "Button22"
-        Me.Button22.Size = New System.Drawing.Size(99, 31)
-        Me.Button22.TabIndex = 109
-        Me.Button22.Text = "Speed up!"
-        Me.Button22.UseVisualStyleBackColor = False
-        '
-        'Label9
-        '
-        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.ForeColor = System.Drawing.Color.White
-        Me.Label9.Location = New System.Drawing.Point(14, 1)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(223, 41)
-        Me.Label9.TabIndex = 172
-        Me.Label9.Text = "lazy sub"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'PNLPlaylist
         '
         Me.PNLPlaylist.BackColor = System.Drawing.Color.SteelBlue
@@ -1917,27 +1578,6 @@ Partial Class frmApps
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'PictureBox3
-        '
-        Me.PictureBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-        Me.PictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
-        Me.PictureBox3.Location = New System.Drawing.Point(0, 18)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(250, 47)
-        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox3.TabIndex = 0
-        Me.PictureBox3.TabStop = False
-        '
-        'StatusUpdates
-        '
-        Me.StatusUpdates.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
-        Me.StatusUpdates.Location = New System.Drawing.Point(-3, 62)
-        Me.StatusUpdates.MinimumSize = New System.Drawing.Size(20, 20)
-        Me.StatusUpdates.Name = "StatusUpdates"
-        Me.StatusUpdates.Size = New System.Drawing.Size(250, 416)
-        Me.StatusUpdates.TabIndex = 142
-        '
         'frmApps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1945,20 +1585,19 @@ Partial Class frmApps
         Me.BackColor = System.Drawing.Color.SteelBlue
         Me.ClientSize = New System.Drawing.Size(246, 530)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.AppPanelGlitter)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button29)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button36)
         Me.Controls.Add(Me.CBDebugAwareness)
-        Me.Controls.Add(Me.PNLAppHome)
-        Me.Controls.Add(Me.PNLLazySub)
         Me.Controls.Add(Me.PNLWishList)
         Me.Controls.Add(Me.PNLPlaylist)
         Me.Controls.Add(Me.PNLAppRandomizer)
         Me.Controls.Add(Me.PNLHypnoGen)
         Me.Controls.Add(Me.AppPanelVitalSub)
+        Me.Controls.Add(Me.AppPanelGlitter)
+        Me.Controls.Add(Me.PNLAppHome)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -1966,6 +1605,7 @@ Partial Class frmApps
         Me.Text = "Apps"
         Me.PNLAppHome.ResumeLayout(False)
         Me.AppPanelGlitter.ResumeLayout(False)
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.AppPanelVitalSub.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -1985,11 +1625,7 @@ Partial Class frmApps
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PNLLazySub.ResumeLayout(False)
-        Me.PNLLazySub.PerformLayout()
-        Me.Panel5.ResumeLayout(False)
         Me.PNLPlaylist.ResumeLayout(False)
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2087,19 +1723,6 @@ Partial Class frmApps
     Friend WithEvents WishlistPreview As System.Windows.Forms.PictureBox
     Friend WithEvents Label22 As System.Windows.Forms.Label
     Friend WithEvents Button19 As System.Windows.Forms.Button
-    Friend WithEvents PNLLazySub As System.Windows.Forms.Panel
-    Friend WithEvents Panel5 As System.Windows.Forms.Panel
-    Friend WithEvents Label27 As System.Windows.Forms.Label
-    Friend WithEvents Button3 As System.Windows.Forms.Button
-    Friend WithEvents Button20 As System.Windows.Forms.Button
-    Friend WithEvents Button9 As System.Windows.Forms.Button
-    Friend WithEvents Button7 As System.Windows.Forms.Button
-    Friend WithEvents Button21 As System.Windows.Forms.Button
-    Friend WithEvents Button27 As System.Windows.Forms.Button
-    Friend WithEvents Button26 As System.Windows.Forms.Button
-    Friend WithEvents Button25 As System.Windows.Forms.Button
-    Friend WithEvents Button24 As System.Windows.Forms.Button
-    Friend WithEvents Button22 As System.Windows.Forms.Button
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Button28 As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
@@ -2113,19 +1736,6 @@ Partial Class frmApps
     Friend WithEvents BTNResume As System.Windows.Forms.Button
     Friend WithEvents BTNSuspend As System.Windows.Forms.Button
     Friend WithEvents Button29 As System.Windows.Forms.Button
-    Friend WithEvents TBShortEdge As System.Windows.Forms.TextBox
-    Friend WithEvents TBShortNo As System.Windows.Forms.TextBox
-    Friend WithEvents TBShortYes As System.Windows.Forms.TextBox
-    Friend WithEvents TBShortSlowDown As System.Windows.Forms.TextBox
-    Friend WithEvents TBShortSpeedUp As System.Windows.Forms.TextBox
-    Friend WithEvents TBShortStop As System.Windows.Forms.TextBox
-    Friend WithEvents TBShortCum As System.Windows.Forms.TextBox
-    Friend WithEvents TBShortStroke As System.Windows.Forms.TextBox
-    Friend WithEvents TBShortSafeword As System.Windows.Forms.TextBox
-    Friend WithEvents TBShortGreet As System.Windows.Forms.TextBox
-    Friend WithEvents CBHideShortcuts As System.Windows.Forms.CheckBox
-    Friend WithEvents CBShortcuts As System.Windows.Forms.CheckBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
     Friend WithEvents Button33 As System.Windows.Forms.Button
     Friend WithEvents Button34 As System.Windows.Forms.Button
     Friend WithEvents Button32 As System.Windows.Forms.Button
