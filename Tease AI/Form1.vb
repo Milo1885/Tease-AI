@@ -502,6 +502,9 @@ Public Class Form1
     Dim FilterL As New List(Of String)
 
     Public ApplyingTheme As Boolean
+    Public AdjustingWindow As Boolean
+
+    Dim SplitContainerHeight As Integer
 
 
 
@@ -22129,6 +22132,7 @@ TryNext:
 
     Public Sub AdjustWindow()
 
+        AdjustingWindow = True
 
         Debug.Print("Adjust Window Called")
 
@@ -22157,11 +22161,24 @@ TryNext:
         If PNLTabs.Height <> 0 Then StatusUpdates.Height = PNLTabs.Height - 8
         PNLAvatar.Location = New Point(9, Me.Height - 294)
 
+
+
+
         SplitContainer1.Height = Me.Height - 83
         'SplitContainer1.Width = Me.Width - 39
 
         'SplitContainer1.Height = Me.Height - 58
         SplitContainer1.Width = Me.Width - 296
+
+        If SplitContainerHeight <> 0 Then SplitContainer1.SplitterDistance = (SplitContainer1.Height - SplitContainerHeight) - 4
+
+        Debug.Print("SplitContainer1.Height = " & SplitContainer1.Height)
+        Debug.Print("SplitContainer1.Panel1.Height = " & SplitContainer1.Panel1.Height)
+        Debug.Print("SplitContainer1.Panel2.Height = " & SplitContainer1.Panel2.Height)
+        Debug.Print("SplitContainer1.SplitterDistance = " & SplitContainer1.SplitterDistance)
+        Debug.Print("SplitContainerHeight = " & SplitContainerHeight)
+
+        'SplitContainer1.Panel2.Height = My.Settings.SplitterPosition
 
         mainPictureBox.Location = New Point(0, 0)
         mainPictureBox.Width = SplitContainer1.Width
@@ -22221,133 +22238,15 @@ TryNext:
         DomWMP.Location = New Point(0, 0)
         DomWMP.Width = SplitContainer1.Width
 
+        AdjustingWindow = False
+
+        'If My.Settings.SplitterPosition <> 0 Then SplitContainer1.SplitterDistance = My.Settings.SplitterPosition
+
+        ' SplitContainer1.Height = Me.Height - 83
 
 
 
 
-        SplitContainer1.Height = Me.Height - 83
-
-
-
-        GoTo SkipNew
-
-
-
-
-
-
-
-
-
-
-        If Me.Height < 734 Then Me.Height = 734
-        If Me.Width < 978 Then Me.Width = 978
-
-
-        SplitContainer1.Height = Me.Height - 83
-        SplitContainer1.Width = Me.Width - 39
-
-        'PNLBackDrop.Location = New Point(259, 0)
-        mainPictureBox.Location = New Point(259, 0)
-
-        'PNLBackDrop.Height = SplitContainer1.Panel1.Height
-        mainPictureBox.Height = SplitContainer1.Panel1.Height
-        PNLDomTags.Height = SplitContainer1.Panel1.Height
-
-        'PNLBackDrop.Width = SplitContainer1.Width - 261
-        mainPictureBox.Width = SplitContainer1.Width - 261
-
-        If DommeTags = False Then
-            PNLDomTags.Location = New Point(SplitContainer1.Width + 1, -2)
-        Else
-            mainPictureBox.Width = SplitContainer1.Width - 249
-            PNLDomTags.Location = New Point(SplitContainer1.Width - 249, -2)
-        End If
-
-        ' If ThemeSettings = False Then
-        'PNLTheme.Location = New Point(SplitContainer1.Width + 1, -2)
-        'Else
-        'mainPictureBox.Width = SplitContainer1.Width - 287
-        'PNLTheme.Location = New Point(SplitContainer1.Width - 287, -2)
-        'End If
-
-        ' PNLTheme.HorizontalScroll.Visible = False
-        PNLTabs.HorizontalScroll.Visible = False
-
-
-        PNLTabs.HorizontalScroll.Maximum = 0
-        PNLTabs.AutoScroll = False
-        PNLTabs.VerticalScroll.Visible = False
-        PNLTabs.AutoScroll = True
-
-        PNLDomTagBTN.Location = New Point(10, (PNLDomTags.Height - 479) / 2)
-        If PNLDomTagBTN.Location.Y < 30 Then PNLDomTagBTN.Location = New Point(10, 30)
-
-        'PNLThemeBTN.Location = New Point(0, (PNLTheme.Height - 480) / 2)
-        'If PNLThemeBTN.Location.Y < 30 Then PNLThemeBTN.Location = New Point(0, 30)
-
-        'PNLThemeBTN.Height = PNLTheme.Height
-
-        If PNLMediaBar.Visible = True Then
-            ChatText.Location = New Point(258, 30)
-        Else
-            ChatText.Location = New Point(258, 0)
-        End If
-
-        ChatText.Width = SplitContainer1.Width - 262
-
-        PNLMediaBar.Width = SplitContainer1.Width - 629
-        ImageFolderComboBox.Width = PNLMediaBar.Width - 6
-
-        previousButton.Location = New Point(SplitContainer1.Width - 314, -4)
-        nextButton.Location = New Point(SplitContainer1.Width - 257, -4)
-        BTNLoadVideo.Location = New Point(SplitContainer1.Width - 200, -4)
-        BTNVideoControls.Location = New Point(SplitContainer1.Width - 124, -4)
-
-
-        chatBox.Width = SplitContainer1.Width - 324
-        'chatBox.Location = New Point(3, 5)
-
-        MediaButton.Location = New Point(0, 0)
-        SaveBlogImage.Location = New Point(114, 0)
-        SettingsButton.Location = New Point(190, 0)
-
-
-        PNLChatBox.Width = SplitContainer1.Width - 576
-
-        BTNVideoControls.BringToFront()
-
-
-        If PNLMediaBar.Visible = True Then
-            PNLChatBox.Location = New Point(257, ChatText.Height + 31)
-            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height + 29)
-        Else
-            PNLChatBox.Location = New Point(257, ChatText.Height + 4)
-            PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height)
-        End If
-
-        'PNLHope.Location = New Point(779, 214)
-
-        'BTNShowHideApps.Location = New Point(10, Me.Height - 292)
-
-        'subName.Location = New Point(10, Me.Height - 69)
-        'subAvatar.Location = New Point(10, Me.Height - 258)
-
-        'PNLGlitter.Height = Me.Height - 622
-        ' StatusUpdates.Height = Me.Height - 627
-
-        DomWMP.Location = New Point(0, 0)
-        DomWMP.Width = SplitContainer1.Width
-
-        'domAvatar.Height = ChatText.Height
-
-        subName.Location = New Point(3, PNLChatBox.Location.Y + 2)
-
-        My.Settings.WindowHeight = Me.Height
-        My.Settings.WindowWidth = Me.Width
-        My.Settings.Save()
-
-SkipNew:
 
 
     End Sub
@@ -22357,23 +22256,35 @@ SkipNew:
 
     Private Sub SplitContainer1_SplitterMoved(sender As Object, e As System.Windows.Forms.SplitterEventArgs) Handles SplitContainer1.SplitterMoved
 
+        If ApplyingTheme = False And AdjustingWindow = False Then
+
+            If PNLMediaBar.Visible = True Then
+                ChatText.Location = New Point(2, 33)
+                ChatText.Height = SplitContainer1.Panel2.Height - 67
+            Else
+                ChatText.Location = New Point(2, 0)
+                ChatText.Height = SplitContainer1.Panel2.Height - 68
+            End If
+
+            PNLChatBox.Location = New Point(2, SplitContainer1.Panel2.Height - 32)
+            PNLHope.Location = New Point(SplitContainer1.Width - 314, PNLChatBox.Location.Y)
+
+            SplitContainerHeight = SplitContainer1.Panel2.Height
+
+            '.My.Settings.SplitterPosition = SplitContainer1.Height - SplitContainer1.Panel1.Height
+            '.My.Settings.Save()
 
 
-        If PNLMediaBar.Visible = True Then
-            ChatText.Location = New Point(2, 33)
-            ChatText.Height = SplitContainer1.Panel2.Height - 67
-        Else
-            ChatText.Location = New Point(2, 0)
-            ChatText.Height = SplitContainer1.Panel2.Height - 68
+            Debug.Print("SplitContainer1.Height = " & SplitContainer1.Height)
+            Debug.Print("SplitContainer1.Panel1.Height = " & SplitContainer1.Panel1.Height)
+            Debug.Print("SplitContainer1.Panel2.Height = " & SplitContainer1.Panel2.Height)
+            Debug.Print("SplitContainer1.SplitterDistance = " & SplitContainer1.SplitterDistance)
+            Debug.Print("SplitContainerHeight = " & SplitContainerHeight)
+
+            GoTo SkipNew
+
+
         End If
-
-        PNLChatBox.Location = New Point(2, SplitContainer1.Panel2.Height - 32)
-        PNLHope.Location = New Point(SplitContainer1.Width - 314, PNLChatBox.Location.Y)
-
-        GoTo SkipNew
-
-
-
 
 
 
