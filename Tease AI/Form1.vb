@@ -506,6 +506,9 @@ Public Class Form1
 
     Dim SplitContainerHeight As Integer
 
+    Dim DommeImage As Image
+    Dim DommeImageFound As Boolean
+    Dim DommeImageListCheck As Boolean
 
 
     Private Const DISABLE_SOUNDS As Integer = 21
@@ -1633,6 +1636,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         TeaseTimer.Stop()
 
+        DeleteVariable("SYS_StrokeRound")
 
         mainPictureBox.Image = Nothing
         SlideshowLoaded = False
@@ -5229,7 +5233,12 @@ EndSysMes:
                         If RiskyDeal = True Then
                             FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
                         Else
-                            mainPictureBox.Image = Image.FromFile(DomPic)
+                            If DommeImageFound = True Then
+                                mainPictureBox.Image = DommeImage
+                                DommeImageFound = False
+                            Else
+                                mainPictureBox.Image = Image.FromFile(DomPic)
+                            End If
                         End If
                         CheckDommeTags()
                         ShowImageInfo()
@@ -5928,7 +5937,12 @@ EndSysMes:
                         If RiskyDeal = True Then
                             FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
                         Else
-                            mainPictureBox.Image = Image.FromFile(DomPic)
+                            If DommeImageFound = True Then
+                                mainPictureBox.Image = DommeImage
+                                DommeImageFound = False
+                            Else
+                                mainPictureBox.Image = Image.FromFile(DomPic)
+                            End If
                         End If
                         CheckDommeTags()
                         ShowImageInfo()
@@ -9394,18 +9408,27 @@ RinseLatherRepeat:
 
                         Debug.Print("CheckDate " & CheckDate)
 
-                        If CompareDatesWithTime(CheckDate) <> 1 Then
-                            SkipGotoLine = True
-                            FileGoto = FlagArray(1).Replace(")", "")
-                            GetGoto()
+                        If FlagArray.Count = 2 Then
+
+                            If CompareDatesWithTime(CheckDate) <> 1 Then
+                                SkipGotoLine = True
+                                FileGoto = FlagArray(1).Replace(")", "")
+                                GetGoto()
+                            End If
+
+                        Else
+
+                            CheckDateList(StringClean)
+
                         End If
+
 
 
                     End If
 
-                    CheckArray(i) = CheckArray(i).Replace("@CheckDate(" & OriginalCheck, "")
+                        CheckArray(i) = CheckArray(i).Replace("@CheckDate(" & OriginalCheck, "")
 
-                End If
+                    End If
 
             Next
 
@@ -10012,6 +10035,8 @@ RinseLatherRepeat:
                 Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
                 My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\FirstRun", SetDate, False)
             End If
+
+            SetVariable("SYS_StrokeRound", Val(GetVariable("SYS_StrokeRound")) + 1)
 
             If FrmSettings.TBWebStart.Text <> "" Then
                 Try
@@ -12903,6 +12928,12 @@ VTSkip:
         End If
 
 
+        If StringClean.Contains("@DommeTag(") Then
+            Dim TagFlag As String = GetParentheses(StringClean, "@DommeTag(")
+            GetDommeImage(TagFlag)
+            StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
+        End If
+
         If StringClean.Contains("@Debug") Then
 
             'Dim wy As Long = DateDiff(DateInterval.Day, Val(GetVariable("TB_AFKSlideshow")), Date.Now)
@@ -13008,6 +13039,13 @@ VTSkip:
     Public Function SetVariable(ByVal VarName As String, ByVal VarValue As String)
 
         My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName, VarValue, False)
+
+    End Function
+
+    Public Function DeleteVariable(ByVal FlagDir As String)
+
+        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagDir) Then _
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagDir)
 
     End Function
 
@@ -13346,6 +13384,88 @@ VTSkip:
 
     End Function
 
+    Public Function GetDommeImage(ByVal DomTag As String) As Boolean
+
+        Debug.Print("Is this being called?")
+
+        DommeImage = Nothing
+
+        If File.Exists(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt") Then
+
+
+            Dim TagList As New List(Of String)
+            TagList = Txt2List(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt")
+
+            DomTag = DomTag.Replace(" ,", ",")
+            DomTag = DomTag.Replace(", ", ",")
+
+            Dim DomTagArray As String() = DomTag.Split(",")
+
+            Dim DomTag1 As String = " "
+            Dim DomTag2 As String = " "
+            Dim DomTag3 As String = " "
+
+            For i As Integer = 0 To DomTagArray.Count - 1
+                If i = 0 Then DomTag1 = "Tag" & DomTagArray(0)
+                If i = 1 Then DomTag2 = "Tag" & DomTagArray(1)
+                If i = 2 Then DomTag3 = "Tag" & DomTagArray(2)
+            Next
+
+            Dim xU As Integer = FileCount
+            Dim xD As Integer = FileCount
+
+            For i As Integer = 0 To TagList.Count - 1
+
+                If TagList(xU).Contains(DomTag1) And TagList(xU).Contains(DomTag2) And TagList(xU).Contains(DomTag3) Then
+
+                    Dim PicArray As String() = TagList(xU).Split
+                    Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
+
+                    For p As Integer = 0 To PicArray.Count - 1
+                        PicDir = PicDir & PicArray(p)
+                        If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
+                    Next
+
+                    If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
+                    DommeImageFound = True
+
+
+                    Exit For
+
+                End If
+
+                xU += 1
+                If xU > _ImageFileNames.Count - 1 Then xU = _ImageFileNames.Count - 1
+
+                If TagList(xD).Contains(DomTag1) And TagList(xD).Contains(DomTag2) And TagList(xD).Contains(DomTag3) Then
+
+                    Dim PicArray As String() = TagList(xD).Split
+                    Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
+
+                    For p As Integer = 0 To PicArray.Count - 1
+                        PicDir = PicDir & PicArray(p)
+                        If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
+                    Next
+
+                    If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
+
+                    DommeImageFound = True
+
+                    Exit For
+
+                End If
+
+                xD -= 1
+                If xD < 0 Then xD = 0
+
+            Next
+
+        End If
+
+        Return DommeImageFound
+
+    End Function
+
 
     Public Function ContactEdgeCheck(ByVal EdgeCheck As String)
         If EdgeCheck.Contains("@Contact1") Then Contact1Edge = True
@@ -13386,6 +13506,34 @@ VTSkip:
         End If
 
         My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+
+    End Sub
+
+  
+
+
+    Public Sub ShowGotImage()
+
+        'Debug.Print("ShowGotImage Called")
+        'Debug.Print("FoundString = " & FoundString)
+        JustShowedBlogImage = True
+
+
+        ClearMainPictureBox()
+
+        If FoundString.Contains("/") Then
+            Try
+                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
+            Catch
+                MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End Try
+        Else
+            mainPictureBox.Image = Image.FromFile(FoundString)
+            DeleteLocalImageFilePath = FoundString
+        End If
+
+        ShowImageInfo()
+        
 
     End Sub
 
@@ -16746,6 +16894,29 @@ VTSkip:
             End If
         Loop Until PoundCount = 0
 
+        DommeImageListCheck = True
+
+        PoundCount = PoundLine
+        Do
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@DommeTag(") Then
+                If GetDommeImage(ListClean(PoundCount)) = False Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        DommeImageListCheck = False
+        DommeImageFound = False
+
 
 
         'If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
@@ -16785,37 +16956,6 @@ VTSkip:
     Public Sub FilterListBookmark()
 
     End Sub
-
-
-    Public Sub ShowGotImage()
-
-        'Debug.Print("ShowGotImage Called")
-        'Debug.Print("FoundString = " & FoundString)
-        JustShowedBlogImage = True
-
-
-        ClearMainPictureBox()
-
-        If FoundString.Contains("/") Then
-            Try
-                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
-            Catch
-                MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            End Try
-        Else
-            mainPictureBox.Image = Image.FromFile(FoundString)
-            DeleteLocalImageFilePath = FoundString
-        End If
-
-        ShowImageInfo()
-        
-
-    End Sub
-
-
-   
-
-
 
 
     Private Sub chatbox_KeyDown(sender As Object, e As KeyEventArgs) Handles chatBox.KeyDown
@@ -17131,9 +17271,9 @@ VTSkip:
 
 
 
-  
 
-   
+
+
 
     Private Sub SaveBlogImage_Click_2(sender As System.Object, e As System.EventArgs) Handles SaveBlogImage.Click
 
@@ -17222,7 +17362,7 @@ AlreadySeen:
         ClearMainPictureBox()
 
 
-        
+
 
         Try
 
@@ -17432,7 +17572,7 @@ AlreadySeen:
 
     End Sub
 
-   
+
 
     Public Sub RunLinkScript()
 
@@ -17738,7 +17878,7 @@ NoPlaylistEndFile:
             EdgeTaunt.Close()
             EdgeTaunt.Dispose()
 
-           
+
 
             Try
                 ETLines = FilterList(ETLines)
@@ -17872,7 +18012,7 @@ RuinedOrgasm:
                 Dim RepeatChance As Integer = randomizer.Next(0, 101)
 
                 If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Then
-                  
+
                     EdgeTauntTimer.Stop()
                     HoldEdgeTimer.Stop()
                     HoldEdgeTauntTimer.Stop()
@@ -18113,7 +18253,7 @@ NoRepeatOFiles:
 
 
     Private Sub ChatText_DocumentCompleted(sender As Object, e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText.DocumentCompleted
-       ScrollChatDown()
+        ScrollChatDown()
     End Sub
 
     Private Sub WebBrowser1_Navigating(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserNavigatingEventArgs) Handles ChatText.Navigating
@@ -18156,7 +18296,7 @@ NoRepeatOFiles:
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
-        
+
         While TaskRead.Peek <> -1
             TaskLines.Add(TaskRead.ReadLine())
         End While
@@ -18181,7 +18321,7 @@ NoRepeatOFiles:
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
-      
+
         While TaskRead.Peek <> -1
             TaskLines.Add(TaskRead.ReadLine())
         End While
@@ -18206,7 +18346,7 @@ NoRepeatOFiles:
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
-       
+
 
         While TaskRead.Peek <> -1
             TaskLines.Add(TaskRead.ReadLine())
@@ -18232,7 +18372,7 @@ NoRepeatOFiles:
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
-        
+
 
         While TaskRead.Peek <> -1
             TaskLines.Add(TaskRead.ReadLine())
@@ -18258,7 +18398,7 @@ NoRepeatOFiles:
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
-     
+
 
         While TaskRead.Peek <> -1
             TaskLines.Add(TaskRead.ReadLine())
@@ -18284,7 +18424,7 @@ NoRepeatOFiles:
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
-       
+
         While TaskRead.Peek <> -1
             TaskLines.Add(TaskRead.ReadLine())
         End While
@@ -18308,7 +18448,7 @@ NoRepeatOFiles:
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
-      
+
         While TaskRead.Peek <> -1
             TaskLines.Add(TaskRead.ReadLine())
         End While
@@ -18397,7 +18537,7 @@ AtNext:
 
 
 
-        
+
 
 
         Dim TempDate As String
@@ -18594,7 +18734,7 @@ TryNext:
 
             If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNext
 
-          
+
 
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
@@ -18663,7 +18803,7 @@ TryNext:
 
 
 
-       
+
 
 
 
@@ -18770,7 +18910,7 @@ TryNext:
         End If
 
         Dim JOIVideoLine As Integer = randomizer.Next(0, JOIVideos.Count)
-   
+
         DomWMP.Visible = True
         DomWMP.stretchToFit = True
 
@@ -18819,7 +18959,7 @@ TryNext:
     End Sub
 
 
-    
+
 
     Private Sub TnAFastSlides_Tick(sender As System.Object, e As System.EventArgs) Handles TnASlides.Tick
 
@@ -19313,7 +19453,7 @@ TryNext:
 
 
 
-  
+
 
 
     Private Sub Button36_Click_1(sender As System.Object, e As System.EventArgs)
@@ -19423,7 +19563,7 @@ TryNext:
 
             ClearMainPictureBox()
 
-           
+
 
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
@@ -19591,7 +19731,7 @@ TryNext:
 
                 ClearMainPictureBox()
 
-             
+
 
                 If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
@@ -19867,9 +20007,9 @@ TryNext:
 
     End Sub
 
-   
 
-   
+
+
 
     Private Sub AppPanelGlitter_Paint(sender As System.Object, e As System.Windows.Forms.PaintEventArgs)
 
@@ -19883,10 +20023,10 @@ TryNext:
 
 
 
-    
 
 
- 
+
+
 
     Public Sub SaveExercise()
 
@@ -19920,13 +20060,13 @@ TryNext:
 
     End Sub
 
-    
 
 
 
-    
 
-   
+
+
+
 
     Public Sub RefreshCards()
 
@@ -20014,12 +20154,12 @@ TryNext:
 
     End Sub
 
- 
-
-   
 
 
- 
+
+
+
+
 
     Public Sub SaveTokens()
 
@@ -20034,9 +20174,6 @@ TryNext:
 
 
 
-   
-
- 
 
 
 
@@ -20044,7 +20181,10 @@ TryNext:
 
 
 
-    
+
+
+
+
 
     Private Sub VideoTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTauntTimer.Tick
 
@@ -20083,7 +20223,7 @@ TryNext:
             VTReader.Close()
             VTReader.Dispose()
 
-            
+
 
             Try
                 VTList = FilterList(VTList)
@@ -20244,9 +20384,9 @@ TryNext:
 
 
 
-   
 
- 
+
+
 
 
 
@@ -20278,7 +20418,7 @@ TryNext:
 
     Private Sub ToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem1.Click
 
-      
+
 
         SaveFileDialog1.Filter = "jpegs|*.jpg|gifs|*.gif|pngs|*.png|Bitmaps|*.bmp"
         SaveFileDialog1.FilterIndex = 1
@@ -20380,12 +20520,12 @@ TryNext:
 
     End Sub
 
-    
-    
-   
-   
 
-   
+
+
+
+
+
 
 
 
@@ -20511,7 +20651,7 @@ TryNext:
         End If
 
         FileCount = 0
-      
+
 
         ClearMainPictureBox()
 
@@ -20558,7 +20698,7 @@ TryNext:
 
     End Sub
 
-   
+
 
 
     Private Sub StatusUpdates_DocumentCompleted(sender As Object, e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles StatusUpdates.DocumentCompleted
@@ -22003,7 +22143,7 @@ TryNext:
         End While
         ScrollChatDown()
 
-       
+
 
         ScrollChatDown()
 
@@ -22012,7 +22152,7 @@ TryNext:
     End Sub
 
 
-    
+
     Private Sub SlotsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SlotsToolStripMenuItem.Click
         FrmCardList.TCGames.SelectTab(0)
         FrmCardList.Show()
@@ -22127,7 +22267,7 @@ TryNext:
 
     End Sub
 
-  
+
 
 
     Public Sub AdjustWindow()
@@ -22144,7 +22284,7 @@ TryNext:
         ' PNLApp.Height = Me.Height - 84
         'If PNLTabs.Height <> 0 Then PNLTabs.Height = PNLApp.Height - 333
 
-    
+
 
         'If PNLTabs.VerticalScroll.Visible = False Then
         'PNLTabs.Width = 253
@@ -23737,11 +23877,11 @@ SkipNew:
         End If
     End Sub
 
-  
 
-  
 
-   
+
+
+
 
     Private Sub ThemeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ThemeToolStripMenuItem.Click
 
@@ -23781,11 +23921,11 @@ SkipNew:
         End If
     End Sub
 
-   
 
-   
 
-   
+
+
+
     Private Sub Button11_Click(sender As System.Object, e As System.EventArgs)
         ' PNLThemeBTN.Visible = False
         ' BTNClose.Visible = False
