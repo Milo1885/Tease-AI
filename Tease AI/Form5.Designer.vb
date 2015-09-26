@@ -104,19 +104,6 @@ Partial Class frmApps
         Me.CBHypnoGenPhase = New System.Windows.Forms.CheckBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.BTNHypnoGenStart = New System.Windows.Forms.Button()
-        Me.PNLAppRandomizer = New System.Windows.Forms.Panel()
-        Me.Button16 = New System.Windows.Forms.Button()
-        Me.Label20 = New System.Windows.Forms.Label()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.Label18 = New System.Windows.Forms.Label()
-        Me.Button13 = New System.Windows.Forms.Button()
-        Me.Button14 = New System.Windows.Forms.Button()
-        Me.Button15 = New System.Windows.Forms.Button()
-        Me.Button12 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
-        Me.Button10 = New System.Windows.Forms.Button()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Button8 = New System.Windows.Forms.Button()
         Me.PNLWishList = New System.Windows.Forms.Panel()
         Me.WishlistCostSilver = New System.Windows.Forms.PictureBox()
         Me.LBLWishlistDate = New System.Windows.Forms.Label()
@@ -150,7 +137,6 @@ Partial Class frmApps
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNLHypnoGen.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PNLAppRandomizer.SuspendLayout()
         Me.PNLWishList.SuspendLayout()
         CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1133,180 +1119,6 @@ Partial Class frmApps
         Me.BTNHypnoGenStart.Text = "Guide Me!"
         Me.BTNHypnoGenStart.UseVisualStyleBackColor = True
         '
-        'PNLAppRandomizer
-        '
-        Me.PNLAppRandomizer.BackColor = System.Drawing.Color.SteelBlue
-        Me.PNLAppRandomizer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLAppRandomizer.Controls.Add(Me.Button16)
-        Me.PNLAppRandomizer.Controls.Add(Me.Label20)
-        Me.PNLAppRandomizer.Controls.Add(Me.Label19)
-        Me.PNLAppRandomizer.Controls.Add(Me.Label18)
-        Me.PNLAppRandomizer.Controls.Add(Me.Button13)
-        Me.PNLAppRandomizer.Controls.Add(Me.Button14)
-        Me.PNLAppRandomizer.Controls.Add(Me.Button15)
-        Me.PNLAppRandomizer.Controls.Add(Me.Button12)
-        Me.PNLAppRandomizer.Controls.Add(Me.Button11)
-        Me.PNLAppRandomizer.Controls.Add(Me.Button10)
-        Me.PNLAppRandomizer.Controls.Add(Me.Label17)
-        Me.PNLAppRandomizer.Controls.Add(Me.Button8)
-        Me.PNLAppRandomizer.Location = New System.Drawing.Point(0, 47)
-        Me.PNLAppRandomizer.Name = "PNLAppRandomizer"
-        Me.PNLAppRandomizer.Size = New System.Drawing.Size(250, 485)
-        Me.PNLAppRandomizer.TabIndex = 165
-        Me.PNLAppRandomizer.Visible = False
-        '
-        'Button16
-        '
-        Me.Button16.BackColor = System.Drawing.Color.White
-        Me.Button16.FlatAppearance.BorderSize = 2
-        Me.Button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button16.ForeColor = System.Drawing.Color.Black
-        Me.Button16.Location = New System.Drawing.Point(8, 107)
-        Me.Button16.Name = "Button16"
-        Me.Button16.Size = New System.Drawing.Size(228, 28)
-        Me.Button16.TabIndex = 11
-        Me.Button16.Text = "Local Image"
-        Me.Button16.UseVisualStyleBackColor = False
-        '
-        'Label20
-        '
-        Me.Label20.BackColor = System.Drawing.Color.Transparent
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.ForeColor = System.Drawing.Color.White
-        Me.Label20.Location = New System.Drawing.Point(9, 38)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(228, 28)
-        Me.Label20.TabIndex = 10
-        Me.Label20.Text = "Media"
-        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label19
-        '
-        Me.Label19.BackColor = System.Drawing.Color.Transparent
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.ForeColor = System.Drawing.Color.White
-        Me.Label19.Location = New System.Drawing.Point(9, 188)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(228, 28)
-        Me.Label19.TabIndex = 9
-        Me.Label19.Text = "Special Videos"
-        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label18
-        '
-        Me.Label18.BackColor = System.Drawing.Color.Transparent
-        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.ForeColor = System.Drawing.Color.White
-        Me.Label18.Location = New System.Drawing.Point(9, 302)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(228, 28)
-        Me.Label18.TabIndex = 8
-        Me.Label18.Text = "Video Teases"
-        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Button13
-        '
-        Me.Button13.BackColor = System.Drawing.Color.White
-        Me.Button13.FlatAppearance.BorderSize = 2
-        Me.Button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button13.ForeColor = System.Drawing.Color.Black
-        Me.Button13.Location = New System.Drawing.Point(8, 410)
-        Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(228, 28)
-        Me.Button13.TabIndex = 7
-        Me.Button13.Text = "Red Light Green Light"
-        Me.Button13.UseVisualStyleBackColor = False
-        '
-        'Button14
-        '
-        Me.Button14.BackColor = System.Drawing.Color.White
-        Me.Button14.FlatAppearance.BorderSize = 2
-        Me.Button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button14.ForeColor = System.Drawing.Color.Black
-        Me.Button14.Location = New System.Drawing.Point(8, 371)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(228, 28)
-        Me.Button14.TabIndex = 6
-        Me.Button14.Text = "Avoid The Edge"
-        Me.Button14.UseVisualStyleBackColor = False
-        '
-        'Button15
-        '
-        Me.Button15.BackColor = System.Drawing.Color.White
-        Me.Button15.FlatAppearance.BorderSize = 2
-        Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button15.ForeColor = System.Drawing.Color.Black
-        Me.Button15.Location = New System.Drawing.Point(8, 332)
-        Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(228, 28)
-        Me.Button15.TabIndex = 5
-        Me.Button15.Text = "Censorship Sucks"
-        Me.Button15.UseVisualStyleBackColor = False
-        '
-        'Button12
-        '
-        Me.Button12.BackColor = System.Drawing.Color.White
-        Me.Button12.FlatAppearance.BorderSize = 2
-        Me.Button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button12.ForeColor = System.Drawing.Color.Black
-        Me.Button12.Location = New System.Drawing.Point(8, 257)
-        Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(228, 28)
-        Me.Button12.TabIndex = 4
-        Me.Button12.Text = "CH"
-        Me.Button12.UseVisualStyleBackColor = False
-        '
-        'Button11
-        '
-        Me.Button11.BackColor = System.Drawing.Color.White
-        Me.Button11.FlatAppearance.BorderSize = 2
-        Me.Button11.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button11.ForeColor = System.Drawing.Color.Black
-        Me.Button11.Location = New System.Drawing.Point(8, 218)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(228, 28)
-        Me.Button11.TabIndex = 3
-        Me.Button11.Text = "JOI"
-        Me.Button11.UseVisualStyleBackColor = False
-        '
-        'Button10
-        '
-        Me.Button10.BackColor = System.Drawing.Color.White
-        Me.Button10.FlatAppearance.BorderSize = 2
-        Me.Button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button10.ForeColor = System.Drawing.Color.Black
-        Me.Button10.Location = New System.Drawing.Point(8, 146)
-        Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(228, 28)
-        Me.Button10.TabIndex = 2
-        Me.Button10.Text = "Video"
-        Me.Button10.UseVisualStyleBackColor = False
-        '
-        'Label17
-        '
-        Me.Label17.BackColor = System.Drawing.Color.Transparent
-        Me.Label17.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label17.ForeColor = System.Drawing.Color.White
-        Me.Label17.Location = New System.Drawing.Point(8, 10)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(228, 28)
-        Me.Label17.TabIndex = 1
-        Me.Label17.Text = "Randomize!"
-        Me.Label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Button8
-        '
-        Me.Button8.BackColor = System.Drawing.Color.White
-        Me.Button8.FlatAppearance.BorderSize = 2
-        Me.Button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button8.ForeColor = System.Drawing.Color.Black
-        Me.Button8.Location = New System.Drawing.Point(8, 68)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(228, 28)
-        Me.Button8.TabIndex = 0
-        Me.Button8.Text = "Blog Image"
-        Me.Button8.UseVisualStyleBackColor = False
-        '
         'PNLWishList
         '
         Me.PNLWishList.BackColor = System.Drawing.Color.White
@@ -1591,13 +1403,12 @@ Partial Class frmApps
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button36)
         Me.Controls.Add(Me.CBDebugAwareness)
-        Me.Controls.Add(Me.PNLWishList)
-        Me.Controls.Add(Me.PNLPlaylist)
-        Me.Controls.Add(Me.PNLAppRandomizer)
         Me.Controls.Add(Me.PNLHypnoGen)
         Me.Controls.Add(Me.AppPanelVitalSub)
         Me.Controls.Add(Me.AppPanelGlitter)
         Me.Controls.Add(Me.PNLAppHome)
+        Me.Controls.Add(Me.PNLWishList)
+        Me.Controls.Add(Me.PNLPlaylist)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -1615,7 +1426,6 @@ Partial Class frmApps
         Me.PNLHypnoGen.ResumeLayout(False)
         Me.PNLHypnoGen.PerformLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PNLAppRandomizer.ResumeLayout(False)
         Me.PNLWishList.ResumeLayout(False)
         CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1690,19 +1500,6 @@ Partial Class frmApps
     Friend WithEvents CBHypnoGenPhase As System.Windows.Forms.CheckBox
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents BTNHypnoGenStart As System.Windows.Forms.Button
-    Friend WithEvents PNLAppRandomizer As System.Windows.Forms.Panel
-    Friend WithEvents Button16 As System.Windows.Forms.Button
-    Friend WithEvents Label20 As System.Windows.Forms.Label
-    Friend WithEvents Label19 As System.Windows.Forms.Label
-    Friend WithEvents Label18 As System.Windows.Forms.Label
-    Friend WithEvents Button13 As System.Windows.Forms.Button
-    Friend WithEvents Button14 As System.Windows.Forms.Button
-    Friend WithEvents Button15 As System.Windows.Forms.Button
-    Friend WithEvents Button12 As System.Windows.Forms.Button
-    Friend WithEvents Button11 As System.Windows.Forms.Button
-    Friend WithEvents Button10 As System.Windows.Forms.Button
-    Friend WithEvents Label17 As System.Windows.Forms.Label
-    Friend WithEvents Button8 As System.Windows.Forms.Button
     Friend WithEvents PNLWishList As System.Windows.Forms.Panel
     Friend WithEvents WishlistCostSilver As System.Windows.Forms.PictureBox
     Friend WithEvents LBLWishlistDate As System.Windows.Forms.Label

@@ -426,7 +426,7 @@ Public Class frmApps
         'PNLScriptGuide.Visible = False
         AppPanelGlitter.Visible = False
         AppPanelVitalSub.Visible = False
-        PNLAppRandomizer.Visible = False
+        'PNLAppRandomizer.Visible = False
         PNLHypnoGen.Visible = False
         PNLWishList.Visible = False
         PNLAppHome.Visible = True
@@ -459,10 +459,7 @@ Public Class frmApps
 
     End Sub
 
-    Private Sub Button42_Click(sender As System.Object, e As System.EventArgs) Handles Button42.Click
-        PNLAppHome.Visible = False
-        PNLAppRandomizer.Visible = True
-    End Sub
+   
 
 
     Private Sub Button47_Click(sender As System.Object, e As System.EventArgs) Handles BTNRun.Click
@@ -751,37 +748,25 @@ Public Class frmApps
 
 
 
-    Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
-
-
+    Private Sub Button8_Click(sender As System.Object, e As System.EventArgs)
         Form1.GetBlogImage()
-
-
     End Sub
 
-    Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click
-
+    Private Sub Button16_Click(sender As System.Object, e As System.EventArgs)
         Form1.GetLocalImage()
-
     End Sub
 
-    Private Sub Button10_Click(sender As System.Object, e As System.EventArgs) Handles Button10.Click
-
+    Private Sub Button10_Click(sender As System.Object, e As System.EventArgs)
         Form1.RandomizerVideo = True
         Form1.RandomVideo()
         Form1.RandomizerVideo = False
-
-
     End Sub
 
-    Private Sub Button11_Click(sender As System.Object, e As System.EventArgs) Handles Button11.Click
-
+    Private Sub Button11_Click(sender As System.Object, e As System.EventArgs)
         Form1.PlayRandomJOI()
-
     End Sub
 
-    Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
-
+    Private Sub Button15_Click(sender As System.Object, e As System.EventArgs)
         Form1.SaidHello = True
         Form1.RandomizerVideoTease = True
 
@@ -793,12 +778,9 @@ Public Class frmApps
         Form1.VideoTease = True
         Form1.CensorshipTick = Form1.randomizer.Next(FrmSettings.NBCensorHideMin.Value, FrmSettings.NBCensorHideMax.Value + 1)
         Form1.CensorshipTimer.Start()
-
-
-
     End Sub
 
-    Private Sub Button14_Click(sender As System.Object, e As System.EventArgs) Handles Button14.Click
+    Private Sub Button14_Click(sender As System.Object, e As System.EventArgs)
 
         Form1.SaidHello = True
         Form1.RandomizerVideoTease = True
@@ -822,10 +804,9 @@ Public Class frmApps
         Form1.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
         Form1.AvoidTheEdgeTaunts.Start()
 
-
     End Sub
 
-    Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
+    Private Sub Button13_Click(sender As System.Object, e As System.EventArgs)
 
         Form1.SaidHello = True
         Form1.RandomizerVideoTease = True
@@ -851,11 +832,8 @@ Public Class frmApps
 
     End Sub
 
-    Private Sub Button12_Click_1(sender As System.Object, e As System.EventArgs) Handles Button12.Click
-
+    Private Sub Button12_Click_1(sender As System.Object, e As System.EventArgs)
         Form1.PlayRandomCH()
-
-
     End Sub
 
 
@@ -1210,7 +1188,7 @@ Public Class frmApps
         LBLWishListName.ForeColor = Color.SteelBlue
         Panel2.BackColor = Color.SteelBlue
         PNLPlaylist.BackColor = Color.SteelBlue
-        PNLAppRandomizer.BackColor = Color.SteelBlue
+        'PNLAppRandomizer.BackColor = Color.SteelBlue
         PictureBox3.BackColor = Color.SteelBlue
 
 
@@ -1278,7 +1256,7 @@ Public Class frmApps
         LBLWishListName.ForeColor = Color.DarkMagenta
         Panel2.BackColor = Color.DarkMagenta
         PNLPlaylist.BackColor = Color.DarkMagenta
-        PNLAppRandomizer.BackColor = Color.DarkMagenta
+        ' PNLAppRandomizer.BackColor = Color.DarkMagenta
         PictureBox3.BackColor = Color.DarkMagenta
 
 
@@ -1342,7 +1320,7 @@ Public Class frmApps
         LBLWishListName.ForeColor = Color.Black
         Panel2.BackColor = Color.Black
         PNLPlaylist.BackColor = Color.Black
-        PNLAppRandomizer.BackColor = Color.Black
+        'PNLAppRandomizer.BackColor = Color.Black
         PictureBox3.BackColor = Color.Black
 
 
@@ -1406,7 +1384,7 @@ Public Class frmApps
         LBLWishListName.ForeColor = Color.Firebrick
         Panel2.BackColor = Color.Firebrick
         PNLPlaylist.BackColor = Color.Firebrick
-        PNLAppRandomizer.BackColor = Color.Firebrick
+        'PNLAppRandomizer.BackColor = Color.Firebrick
         PictureBox3.BackColor = Color.Firebrick
 
 

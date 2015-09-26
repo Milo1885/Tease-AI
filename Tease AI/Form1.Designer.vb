@@ -185,15 +185,14 @@ Partial Class Form1
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.GlitterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DommeTagsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LazySubToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.RandomizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GamesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SlotsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MatchGameToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.RiskyPickToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExchangeToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CollectionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImagesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.DommeTagsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ThemeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MilovanaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenBetaThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.BugReportThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -208,6 +207,18 @@ Partial Class Form1
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LBLGeneralSettings = New System.Windows.Forms.Label()
         Me.PNLTabs = New System.Windows.Forms.Panel()
+        Me.PNLAppRandomizer = New System.Windows.Forms.Panel()
+        Me.BTNRandomLocal = New System.Windows.Forms.Button()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.BTNRandomRLGL = New System.Windows.Forms.Button()
+        Me.BTNRandomAtE = New System.Windows.Forms.Button()
+        Me.BTNRandomCS = New System.Windows.Forms.Button()
+        Me.BTNRandomCH = New System.Windows.Forms.Button()
+        Me.BTNRandomJOI = New System.Windows.Forms.Button()
+        Me.BTNRandomVideo = New System.Windows.Forms.Button()
+        Me.BTNRandomBlog = New System.Windows.Forms.Button()
         Me.PNLLazySub = New System.Windows.Forms.Panel()
         Me.CBHideShortcuts = New System.Windows.Forms.CheckBox()
         Me.CBShortcuts = New System.Windows.Forms.CheckBox()
@@ -234,7 +245,8 @@ Partial Class Form1
         Me.PNLAvatar = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.LazySubToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AIBoxToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ThemeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -253,6 +265,7 @@ Partial Class Form1
         Me.MenuStrip2.SuspendLayout()
         Me.PNLDate.SuspendLayout()
         Me.PNLTabs.SuspendLayout()
+        Me.PNLAppRandomizer.SuspendLayout()
         Me.PNLLazySub.SuspendLayout()
         Me.PNLAvatar.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -1446,7 +1459,7 @@ Partial Class Form1
         '
         'MenuStrip2
         '
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AppsToolStripMenuItem, Me.GamesToolStripMenuItem1, Me.ImagesToolStripMenuItem1, Me.ThemeToolStripMenuItem, Me.MilovanaToolStripMenuItem1, Me.DebugToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AppsToolStripMenuItem, Me.GamesToolStripMenuItem1, Me.AIBoxToolsToolStripMenuItem, Me.MilovanaToolStripMenuItem1, Me.DebugToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
         Me.MenuStrip2.Size = New System.Drawing.Size(1682, 24)
@@ -1512,7 +1525,7 @@ Partial Class Form1
         '
         'SettingsToolStripMenuItem
         '
-        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.DommeToolStripMenuItem, Me.SubToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ImagesToolStripMenuItem, Me.DommeTagsToolStripMenuItem, Me.LocalTagsToolStripMenuItem, Me.URLFilesToolStripMenuItem, Me.VideoToolStripMenuItem, Me.AppsToolStripMenuItem1, Me.RangesToolStripMenuItem, Me.ModdingToolStripMenuItem, Me.MiscToolStripMenuItem})
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.DommeToolStripMenuItem, Me.SubToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ImagesToolStripMenuItem, Me.DommeTagsToolStripMenuItem, Me.LocalTagsToolStripMenuItem, Me.URLFilesToolStripMenuItem, Me.VideoToolStripMenuItem, Me.AppsToolStripMenuItem1, Me.ThemeToolStripMenuItem, Me.RangesToolStripMenuItem, Me.ModdingToolStripMenuItem, Me.MiscToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
         Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.SettingsToolStripMenuItem.Text = "Settings"
@@ -1597,7 +1610,7 @@ Partial Class Form1
         '
         'AppsToolStripMenuItem
         '
-        Me.AppsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseAppPanelToolStripMenuItem, Me.ToolStripSeparator4, Me.GlitterToolStripMenuItem, Me.DommeTagsToolStripMenuItem2, Me.LazySubToolStripMenuItem})
+        Me.AppsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseAppPanelToolStripMenuItem, Me.ToolStripSeparator4, Me.GlitterToolStripMenuItem, Me.DommeTagsToolStripMenuItem2, Me.LazySubToolStripMenuItem, Me.RandomizerToolStripMenuItem})
         Me.AppsToolStripMenuItem.Name = "AppsToolStripMenuItem"
         Me.AppsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.AppsToolStripMenuItem.Text = "Apps"
@@ -1624,6 +1637,18 @@ Partial Class Form1
         Me.DommeTagsToolStripMenuItem2.Name = "DommeTagsToolStripMenuItem2"
         Me.DommeTagsToolStripMenuItem2.Size = New System.Drawing.Size(145, 22)
         Me.DommeTagsToolStripMenuItem2.Text = "Domme Tags"
+        '
+        'LazySubToolStripMenuItem
+        '
+        Me.LazySubToolStripMenuItem.Name = "LazySubToolStripMenuItem"
+        Me.LazySubToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.LazySubToolStripMenuItem.Text = "Lazy Sub"
+        '
+        'RandomizerToolStripMenuItem
+        '
+        Me.RandomizerToolStripMenuItem.Name = "RandomizerToolStripMenuItem"
+        Me.RandomizerToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.RandomizerToolStripMenuItem.Text = "Randomizer"
         '
         'GamesToolStripMenuItem1
         '
@@ -1661,25 +1686,6 @@ Partial Class Form1
         Me.CollectionToolStripMenuItem1.Name = "CollectionToolStripMenuItem1"
         Me.CollectionToolStripMenuItem1.Size = New System.Drawing.Size(142, 22)
         Me.CollectionToolStripMenuItem1.Text = "Collection"
-        '
-        'ImagesToolStripMenuItem1
-        '
-        Me.ImagesToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DommeTagsToolStripMenuItem1})
-        Me.ImagesToolStripMenuItem1.Name = "ImagesToolStripMenuItem1"
-        Me.ImagesToolStripMenuItem1.Size = New System.Drawing.Size(57, 20)
-        Me.ImagesToolStripMenuItem1.Text = "Images"
-        '
-        'DommeTagsToolStripMenuItem1
-        '
-        Me.DommeTagsToolStripMenuItem1.Name = "DommeTagsToolStripMenuItem1"
-        Me.DommeTagsToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
-        Me.DommeTagsToolStripMenuItem1.Text = "Domme Tags"
-        '
-        'ThemeToolStripMenuItem
-        '
-        Me.ThemeToolStripMenuItem.Name = "ThemeToolStripMenuItem"
-        Me.ThemeToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
-        Me.ThemeToolStripMenuItem.Text = "Theme"
         '
         'MilovanaToolStripMenuItem1
         '
@@ -1772,6 +1778,7 @@ Partial Class Form1
         '
         Me.PNLTabs.BackColor = System.Drawing.Color.Black
         Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLTabs.Controls.Add(Me.PNLAppRandomizer)
         Me.PNLTabs.Controls.Add(Me.PNLLazySub)
         Me.PNLTabs.Controls.Add(Me.PNLDomTagBTN)
         Me.PNLTabs.Controls.Add(Me.StatusUpdates)
@@ -1779,6 +1786,167 @@ Partial Class Form1
         Me.PNLTabs.Name = "PNLTabs"
         Me.PNLTabs.Size = New System.Drawing.Size(253, 646)
         Me.PNLTabs.TabIndex = 778
+        '
+        'PNLAppRandomizer
+        '
+        Me.PNLAppRandomizer.BackColor = System.Drawing.Color.SteelBlue
+        Me.PNLAppRandomizer.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLAppRandomizer.Controls.Add(Me.BTNRandomLocal)
+        Me.PNLAppRandomizer.Controls.Add(Me.Label20)
+        Me.PNLAppRandomizer.Controls.Add(Me.Label19)
+        Me.PNLAppRandomizer.Controls.Add(Me.Label18)
+        Me.PNLAppRandomizer.Controls.Add(Me.BTNRandomRLGL)
+        Me.PNLAppRandomizer.Controls.Add(Me.BTNRandomAtE)
+        Me.PNLAppRandomizer.Controls.Add(Me.BTNRandomCS)
+        Me.PNLAppRandomizer.Controls.Add(Me.BTNRandomCH)
+        Me.PNLAppRandomizer.Controls.Add(Me.BTNRandomJOI)
+        Me.PNLAppRandomizer.Controls.Add(Me.BTNRandomVideo)
+        Me.PNLAppRandomizer.Controls.Add(Me.BTNRandomBlog)
+        Me.PNLAppRandomizer.Location = New System.Drawing.Point(2, 2)
+        Me.PNLAppRandomizer.Name = "PNLAppRandomizer"
+        Me.PNLAppRandomizer.Size = New System.Drawing.Size(245, 379)
+        Me.PNLAppRandomizer.TabIndex = 772
+        Me.PNLAppRandomizer.Visible = False
+        '
+        'BTNRandomLocal
+        '
+        Me.BTNRandomLocal.BackColor = System.Drawing.Color.White
+        Me.BTNRandomLocal.FlatAppearance.BorderSize = 2
+        Me.BTNRandomLocal.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRandomLocal.ForeColor = System.Drawing.Color.Black
+        Me.BTNRandomLocal.Location = New System.Drawing.Point(6, 66)
+        Me.BTNRandomLocal.Name = "BTNRandomLocal"
+        Me.BTNRandomLocal.Size = New System.Drawing.Size(228, 28)
+        Me.BTNRandomLocal.TabIndex = 11
+        Me.BTNRandomLocal.Text = "Local Image"
+        Me.BTNRandomLocal.UseVisualStyleBackColor = False
+        '
+        'Label20
+        '
+        Me.Label20.BackColor = System.Drawing.Color.Transparent
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.ForeColor = System.Drawing.Color.White
+        Me.Label20.Location = New System.Drawing.Point(-2, -3)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(245, 28)
+        Me.Label20.TabIndex = 10
+        Me.Label20.Text = "Media"
+        Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label19
+        '
+        Me.Label19.BackColor = System.Drawing.Color.Transparent
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.White
+        Me.Label19.Location = New System.Drawing.Point(-2, 131)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(245, 28)
+        Me.Label19.TabIndex = 9
+        Me.Label19.Text = "Special Videos"
+        Me.Label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label18
+        '
+        Me.Label18.BackColor = System.Drawing.Color.Transparent
+        Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label18.ForeColor = System.Drawing.Color.White
+        Me.Label18.Location = New System.Drawing.Point(-2, 227)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(245, 28)
+        Me.Label18.TabIndex = 8
+        Me.Label18.Text = "Video Teases"
+        Me.Label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'BTNRandomRLGL
+        '
+        Me.BTNRandomRLGL.BackColor = System.Drawing.Color.White
+        Me.BTNRandomRLGL.FlatAppearance.BorderSize = 2
+        Me.BTNRandomRLGL.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRandomRLGL.ForeColor = System.Drawing.Color.Black
+        Me.BTNRandomRLGL.Location = New System.Drawing.Point(6, 335)
+        Me.BTNRandomRLGL.Name = "BTNRandomRLGL"
+        Me.BTNRandomRLGL.Size = New System.Drawing.Size(228, 28)
+        Me.BTNRandomRLGL.TabIndex = 7
+        Me.BTNRandomRLGL.Text = "Red Light Green Light"
+        Me.BTNRandomRLGL.UseVisualStyleBackColor = False
+        '
+        'BTNRandomAtE
+        '
+        Me.BTNRandomAtE.BackColor = System.Drawing.Color.White
+        Me.BTNRandomAtE.FlatAppearance.BorderSize = 2
+        Me.BTNRandomAtE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRandomAtE.ForeColor = System.Drawing.Color.Black
+        Me.BTNRandomAtE.Location = New System.Drawing.Point(6, 296)
+        Me.BTNRandomAtE.Name = "BTNRandomAtE"
+        Me.BTNRandomAtE.Size = New System.Drawing.Size(228, 28)
+        Me.BTNRandomAtE.TabIndex = 6
+        Me.BTNRandomAtE.Text = "Avoid The Edge"
+        Me.BTNRandomAtE.UseVisualStyleBackColor = False
+        '
+        'BTNRandomCS
+        '
+        Me.BTNRandomCS.BackColor = System.Drawing.Color.White
+        Me.BTNRandomCS.FlatAppearance.BorderSize = 2
+        Me.BTNRandomCS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRandomCS.ForeColor = System.Drawing.Color.Black
+        Me.BTNRandomCS.Location = New System.Drawing.Point(6, 257)
+        Me.BTNRandomCS.Name = "BTNRandomCS"
+        Me.BTNRandomCS.Size = New System.Drawing.Size(228, 28)
+        Me.BTNRandomCS.TabIndex = 5
+        Me.BTNRandomCS.Text = "Censorship Sucks"
+        Me.BTNRandomCS.UseVisualStyleBackColor = False
+        '
+        'BTNRandomCH
+        '
+        Me.BTNRandomCH.BackColor = System.Drawing.Color.White
+        Me.BTNRandomCH.FlatAppearance.BorderSize = 2
+        Me.BTNRandomCH.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRandomCH.ForeColor = System.Drawing.Color.Black
+        Me.BTNRandomCH.Location = New System.Drawing.Point(6, 200)
+        Me.BTNRandomCH.Name = "BTNRandomCH"
+        Me.BTNRandomCH.Size = New System.Drawing.Size(228, 28)
+        Me.BTNRandomCH.TabIndex = 4
+        Me.BTNRandomCH.Text = "CH"
+        Me.BTNRandomCH.UseVisualStyleBackColor = False
+        '
+        'BTNRandomJOI
+        '
+        Me.BTNRandomJOI.BackColor = System.Drawing.Color.White
+        Me.BTNRandomJOI.FlatAppearance.BorderSize = 2
+        Me.BTNRandomJOI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRandomJOI.ForeColor = System.Drawing.Color.Black
+        Me.BTNRandomJOI.Location = New System.Drawing.Point(6, 161)
+        Me.BTNRandomJOI.Name = "BTNRandomJOI"
+        Me.BTNRandomJOI.Size = New System.Drawing.Size(228, 28)
+        Me.BTNRandomJOI.TabIndex = 3
+        Me.BTNRandomJOI.Text = "JOI"
+        Me.BTNRandomJOI.UseVisualStyleBackColor = False
+        '
+        'BTNRandomVideo
+        '
+        Me.BTNRandomVideo.BackColor = System.Drawing.Color.White
+        Me.BTNRandomVideo.FlatAppearance.BorderSize = 2
+        Me.BTNRandomVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRandomVideo.ForeColor = System.Drawing.Color.Black
+        Me.BTNRandomVideo.Location = New System.Drawing.Point(6, 105)
+        Me.BTNRandomVideo.Name = "BTNRandomVideo"
+        Me.BTNRandomVideo.Size = New System.Drawing.Size(228, 28)
+        Me.BTNRandomVideo.TabIndex = 2
+        Me.BTNRandomVideo.Text = "Video"
+        Me.BTNRandomVideo.UseVisualStyleBackColor = False
+        '
+        'BTNRandomBlog
+        '
+        Me.BTNRandomBlog.BackColor = System.Drawing.Color.White
+        Me.BTNRandomBlog.FlatAppearance.BorderSize = 2
+        Me.BTNRandomBlog.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRandomBlog.ForeColor = System.Drawing.Color.Black
+        Me.BTNRandomBlog.Location = New System.Drawing.Point(6, 27)
+        Me.BTNRandomBlog.Name = "BTNRandomBlog"
+        Me.BTNRandomBlog.Size = New System.Drawing.Size(228, 28)
+        Me.BTNRandomBlog.TabIndex = 0
+        Me.BTNRandomBlog.Text = "Blog Image"
+        Me.BTNRandomBlog.UseVisualStyleBackColor = False
         '
         'PNLLazySub
         '
@@ -2108,11 +2276,17 @@ Partial Class Form1
         Me.Panel4.Size = New System.Drawing.Size(245, 31)
         Me.Panel4.TabIndex = 779
         '
-        'LazySubToolStripMenuItem
+        'AIBoxToolsToolStripMenuItem
         '
-        Me.LazySubToolStripMenuItem.Name = "LazySubToolStripMenuItem"
-        Me.LazySubToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.LazySubToolStripMenuItem.Text = "Lazy Sub"
+        Me.AIBoxToolsToolStripMenuItem.Name = "AIBoxToolsToolStripMenuItem"
+        Me.AIBoxToolsToolStripMenuItem.Size = New System.Drawing.Size(84, 20)
+        Me.AIBoxToolsToolStripMenuItem.Text = "AI Box Tools"
+        '
+        'ThemeToolStripMenuItem
+        '
+        Me.ThemeToolStripMenuItem.Name = "ThemeToolStripMenuItem"
+        Me.ThemeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ThemeToolStripMenuItem.Text = "Theme"
         '
         'Form1
         '
@@ -2157,6 +2331,7 @@ Partial Class Form1
         Me.MenuStrip2.PerformLayout()
         Me.PNLDate.ResumeLayout(False)
         Me.PNLTabs.ResumeLayout(False)
+        Me.PNLAppRandomizer.ResumeLayout(False)
         Me.PNLLazySub.ResumeLayout(False)
         Me.PNLLazySub.PerformLayout()
         Me.PNLAvatar.ResumeLayout(False)
@@ -2310,8 +2485,6 @@ Partial Class Form1
     Friend WithEvents ForumToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MetroTimer As System.Windows.Forms.Timer
     Friend WithEvents BWMetro As System.ComponentModel.BackgroundWorker
-    Friend WithEvents ImagesToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents DommeTagsToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TBFurniture As System.Windows.Forms.TextBox
     Friend WithEvents TBSexToy As System.Windows.Forms.TextBox
     Friend WithEvents TBTattoo As System.Windows.Forms.TextBox
@@ -2343,7 +2516,6 @@ Partial Class Form1
     Friend WithEvents Boobs As System.Windows.Forms.Button
     Friend WithEvents Ass As System.Windows.Forms.Button
     Friend WithEvents PNLDomTagBTN As System.Windows.Forms.Panel
-    Friend WithEvents ThemeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PNLDate As System.Windows.Forms.Panel
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents LBLGeneralSettings As System.Windows.Forms.Label
@@ -2379,5 +2551,20 @@ Partial Class Form1
     Friend WithEvents BTNEdge As System.Windows.Forms.Button
     Friend WithEvents BTNSpeedUp As System.Windows.Forms.Button
     Friend WithEvents LazySubToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PNLAppRandomizer As System.Windows.Forms.Panel
+    Friend WithEvents BTNRandomLocal As System.Windows.Forms.Button
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents BTNRandomRLGL As System.Windows.Forms.Button
+    Friend WithEvents BTNRandomAtE As System.Windows.Forms.Button
+    Friend WithEvents BTNRandomCS As System.Windows.Forms.Button
+    Friend WithEvents BTNRandomCH As System.Windows.Forms.Button
+    Friend WithEvents BTNRandomJOI As System.Windows.Forms.Button
+    Friend WithEvents BTNRandomVideo As System.Windows.Forms.Button
+    Friend WithEvents BTNRandomBlog As System.Windows.Forms.Button
+    Friend WithEvents RandomizerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AIBoxToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ThemeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

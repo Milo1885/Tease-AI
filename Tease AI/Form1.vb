@@ -22398,6 +22398,11 @@ TryNext:
             PNLLazySub.Height = 444
         End If
 
+        If PNLTabs.Height > 387 Then
+            PNLAppRandomizer.Height = PNLTabs.Height - 8
+        Else
+            PNLAppRandomizer.Height = 379
+        End If
 
         PNLTabs.HorizontalScroll.Visible = False
 
@@ -22845,20 +22850,26 @@ SkipNew:
         FrmSettings.Focus()
     End Sub
 
-    Private Sub RangesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RangesToolStripMenuItem.Click
+    Private Sub ThemeToolStripMenuItem_Click_1(sender As System.Object, e As System.EventArgs) Handles ThemeToolStripMenuItem.Click
         FrmSettings.SettingsTabs.SelectTab(10)
         FrmSettings.Show()
         FrmSettings.Focus()
     End Sub
 
-    Private Sub ModdingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ModdingToolStripMenuItem.Click
+    Private Sub RangesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RangesToolStripMenuItem.Click
         FrmSettings.SettingsTabs.SelectTab(11)
         FrmSettings.Show()
         FrmSettings.Focus()
     End Sub
 
-    Private Sub MiscToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MiscToolStripMenuItem.Click
+    Private Sub ModdingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ModdingToolStripMenuItem.Click
         FrmSettings.SettingsTabs.SelectTab(12)
+        FrmSettings.Show()
+        FrmSettings.Focus()
+    End Sub
+
+    Private Sub MiscToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MiscToolStripMenuItem.Click
+        FrmSettings.SettingsTabs.SelectTab(13)
         FrmSettings.Show()
         FrmSettings.Focus()
     End Sub
@@ -23832,6 +23843,7 @@ SkipNew:
         PNLTabs.BackColor = My.Settings.BackgroundColor
         PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
         PNLLazySub.BackColor = My.Settings.BackgroundColor
+        PNLAppRandomizer.BackColor = My.Settings.BackgroundColor
 
         ApplyingTheme = False
 
@@ -23912,7 +23924,7 @@ SkipNew:
 
 
 
-    Private Sub ThemeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ThemeToolStripMenuItem.Click
+    Private Sub ThemeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs)
 
         OpenApp()
 
@@ -23931,15 +23943,13 @@ SkipNew:
         PNLDomTagBTN.Visible = False
         StatusUpdates.Visible = False
         PNLLazySub.Visible = False
+        PNLAppRandomizer.Visible = False
+
         PNLTabs.Height = 0
 
         AdjustWindow()
     End Sub
 
-    Private Sub Button10_Click(sender As System.Object, e As System.EventArgs)
-        ThemeSettings = False
-        AdjustWindow()
-    End Sub
 
     Private Sub Button7_Click(sender As System.Object, e As System.EventArgs)
         If GetColor.ShowDialog() = DialogResult.OK Then
@@ -23962,10 +23972,7 @@ SkipNew:
 
 
 
-    Private Sub Button11_Click(sender As System.Object, e As System.EventArgs)
-        ' PNLThemeBTN.Visible = False
-        ' BTNClose.Visible = False
-    End Sub
+   
 
     Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As System.EventArgs)
 
@@ -24193,4 +24200,107 @@ SkipNew:
         End If
 
     End Sub
+
+    Private Sub RandomizerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RandomizerToolStripMenuItem.Click
+        If PNLAppRandomizer.Visible = False Then
+            CloseApp()
+            OpenApp()
+            PNLAppRandomizer.Visible = True
+        End If
+    End Sub
+
+    Private Sub BTNRandomBlog_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomBlog.Click
+        GetBlogImage()
+    End Sub
+
+    Private Sub BTNRandomLocal_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomLocal.Click
+        GetLocalImage()
+    End Sub
+
+    Private Sub BTNRandomVideo_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomVideo.Click
+        RandomizerVideo = True
+        RandomVideo()
+        RandomizerVideo = False
+    End Sub
+
+    Private Sub BTNRandomJOI_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomJOI.Click
+        PlayRandomJOI()
+    End Sub
+
+    Private Sub BTNRandomCS2(sender As System.Object, e As System.EventArgs) Handles BTNRandomCS.Click
+        SaidHello = True
+        RandomizerVideoTease = True
+
+        ScriptVideoTease = "Censorship Sucks"
+        ScriptVideoTeaseFlag = True
+        RandomVideo()
+        ScriptVideoTeaseFlag = False
+        CensorshipGame = True
+        VideoTease = True
+        CensorshipTick = randomizer.Next(FrmSettings.NBCensorHideMin.Value, FrmSettings.NBCensorHideMax.Value + 1)
+        CensorshipTimer.Start()
+    End Sub
+
+    Private Sub BTNRandomAtE_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomAtE.Click
+
+        SaidHello = True
+        RandomizerVideoTease = True
+
+        ScriptTimer.Stop()
+        SubStroking = True
+        TempStrokeTauntVal = StrokeTauntVal
+        TempFileText = FileText
+        ScriptVideoTease = "Avoid The Edge"
+        ScriptVideoTeaseFlag = True
+        AvoidTheEdgeStroking = True
+        AvoidTheEdgeGame = True
+        RandomVideo()
+        ScriptVideoTeaseFlag = False
+        VideoTease = True
+        StartStrokingCount += 1
+        StopMetronome = False
+        StrokePace = randomizer.Next(3, 8) * 10
+        StrokePaceTimer.Interval = StrokePace
+        StrokePaceTimer.Start()
+        AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
+        AvoidTheEdgeTaunts.Start()
+
+    End Sub
+
+    Private Sub BTNRandomRLGL_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomRLGL.Click
+
+        SaidHello = True
+        RandomizerVideoTease = True
+
+        ScriptTimer.Stop()
+        SubStroking = True
+        ScriptVideoTease = "RLGL"
+        ScriptVideoTeaseFlag = True
+        'AvoidTheEdgeStroking = True
+        RLGLGame = True
+        RandomVideo()
+        ScriptVideoTeaseFlag = False
+        VideoTease = True
+        RLGLTick = randomizer.Next(FrmSettings.NBGreenLightMin.Value, FrmSettings.NBGreenLightMax.Value + 1)
+        RLGLTimer.Start()
+        StartStrokingCount += 1
+        StopMetronome = False
+        StrokePace = randomizer.Next(3, 8) * 10
+        StrokePaceTimer.Interval = StrokePace
+        StrokePaceTimer.Start()
+        'VideoTauntTick = randomizer.Next(20, 31)
+        'VideoTauntTimer.Start()
+
+    End Sub
+
+    Private Sub BTNRandomCH_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNRandomCH.Click
+        PlayRandomCH()
+    End Sub
+
+    Private Sub AIBoxToolsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AIBoxToolsToolStripMenuItem.Click
+        If Form9.Visible = False Then Form9.Show()
+        Form9.Focus()
+    End Sub
+
+   
 End Class
