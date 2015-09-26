@@ -122,11 +122,6 @@ Partial Class frmApps
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.LBLWishlistDom = New System.Windows.Forms.Label()
         Me.WishlistPreview = New System.Windows.Forms.PictureBox()
-        Me.PNLPlaylist = New System.Windows.Forms.Panel()
-        Me.LBPlaylist = New System.Windows.Forms.ListBox()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.Button30 = New System.Windows.Forms.Button()
-        Me.Label25 = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
@@ -146,7 +141,6 @@ Partial Class frmApps
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PNLPlaylist.SuspendLayout()
         Me.SuspendLayout()
         '
         'PNLAppHome
@@ -718,7 +712,7 @@ Partial Class frmApps
         '
         'PictureBox3
         '
-        Me.PictureBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+        Me.PictureBox3.BackColor = System.Drawing.Color.DarkGray
         Me.PictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
         Me.PictureBox3.Location = New System.Drawing.Point(0, 18)
@@ -1328,64 +1322,6 @@ Partial Class frmApps
         Me.WishlistPreview.TabIndex = 101
         Me.WishlistPreview.TabStop = False
         '
-        'PNLPlaylist
-        '
-        Me.PNLPlaylist.BackColor = System.Drawing.Color.SteelBlue
-        Me.PNLPlaylist.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLPlaylist.Controls.Add(Me.LBPlaylist)
-        Me.PNLPlaylist.Controls.Add(Me.Label21)
-        Me.PNLPlaylist.Controls.Add(Me.Button30)
-        Me.PNLPlaylist.Controls.Add(Me.Label25)
-        Me.PNLPlaylist.Location = New System.Drawing.Point(0, 47)
-        Me.PNLPlaylist.Name = "PNLPlaylist"
-        Me.PNLPlaylist.Size = New System.Drawing.Size(250, 485)
-        Me.PNLPlaylist.TabIndex = 168
-        Me.PNLPlaylist.Visible = False
-        '
-        'LBPlaylist
-        '
-        Me.LBPlaylist.FormattingEnabled = True
-        Me.LBPlaylist.Location = New System.Drawing.Point(9, 85)
-        Me.LBPlaylist.Name = "LBPlaylist"
-        Me.LBPlaylist.Size = New System.Drawing.Size(225, 329)
-        Me.LBPlaylist.Sorted = True
-        Me.LBPlaylist.TabIndex = 11
-        '
-        'Label21
-        '
-        Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.ForeColor = System.Drawing.Color.White
-        Me.Label21.Location = New System.Drawing.Point(9, 38)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(228, 28)
-        Me.Label21.TabIndex = 10
-        Me.Label21.Text = "Choose A Playlist To Open"
-        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Button30
-        '
-        Me.Button30.BackColor = System.Drawing.Color.White
-        Me.Button30.FlatAppearance.BorderSize = 2
-        Me.Button30.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button30.ForeColor = System.Drawing.Color.Black
-        Me.Button30.Location = New System.Drawing.Point(9, 434)
-        Me.Button30.Name = "Button30"
-        Me.Button30.Size = New System.Drawing.Size(225, 28)
-        Me.Button30.TabIndex = 7
-        Me.Button30.Text = "Begin Selected Playlist"
-        Me.Button30.UseVisualStyleBackColor = False
-        '
-        'Label25
-        '
-        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.ForeColor = System.Drawing.Color.White
-        Me.Label25.Location = New System.Drawing.Point(8, 10)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(228, 28)
-        Me.Label25.TabIndex = 1
-        Me.Label25.Text = "Playlists"
-        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
@@ -1408,7 +1344,6 @@ Partial Class frmApps
         Me.Controls.Add(Me.AppPanelGlitter)
         Me.Controls.Add(Me.PNLAppHome)
         Me.Controls.Add(Me.PNLWishList)
-        Me.Controls.Add(Me.PNLPlaylist)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -1435,7 +1370,6 @@ Partial Class frmApps
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PNLPlaylist.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1524,11 +1458,6 @@ Partial Class frmApps
     Friend WithEvents Button28 As System.Windows.Forms.Button
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Button17 As System.Windows.Forms.Button
-    Friend WithEvents PNLPlaylist As System.Windows.Forms.Panel
-    Friend WithEvents LBPlaylist As System.Windows.Forms.ListBox
-    Friend WithEvents Label21 As System.Windows.Forms.Label
-    Friend WithEvents Button30 As System.Windows.Forms.Button
-    Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents BTNReset As System.Windows.Forms.Button
     Friend WithEvents BTNResume As System.Windows.Forms.Button
     Friend WithEvents BTNSuspend As System.Windows.Forms.Button

@@ -431,7 +431,7 @@ Public Class frmApps
         PNLWishList.Visible = False
         PNLAppHome.Visible = True
         'PNLLazySub.Visible = False
-        PNLPlaylist.Visible = False
+        'PNLPlaylist.Visible = False
 
     End Sub
 
@@ -968,50 +968,6 @@ Public Class frmApps
         Form1.CreateTaskLetter()
     End Sub
 
-   
-    Private Sub Button30_Click(sender As System.Object, e As System.EventArgs) Handles Button30.Click
-
-        If LBPlaylist.SelectedItems.Count = 0 Then
-            MessageBox.Show(Me, "Please select a Playlist first!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Return
-        End If
-
-        If Form1.SaidHello = True Then
-            MessageBox.Show(Me, "Please wait until you are not engaged with the domme to begin a Playlist!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Return
-        End If
-
-        Form1.Playlist = True
-        'Form1.SaidHello = True
-
-        Form1.PlaylistFile = Form1.txt2list(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\" & LBPlaylist.SelectedItem & ".txt")
-        Form1.PlaylistFile = Form1.StripBlankLines(Form1.PlaylistFile)
-        Form1.PlaylistCurrent = 0
-        Try
-            Form1.chatBox.Text = "Hello " & FrmSettings.TBHonorific.Text
-        Catch
-            Form1.chatBox.Text = "Hello"
-        End Try
-
-        Form1.sendButton.PerformClick()
-
-        Button30.Enabled = False
-
-    End Sub
-
-    Private Sub Button17_Click_1(sender As System.Object, e As System.EventArgs) Handles Button17.Click
-
-        LBPlaylist.Items.Clear()
-
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-            LBPlaylist.Items.Add(Path.GetFileName(foundFile).Replace(".txt", ""))
-        Next
-
-        PNLPlaylist.Visible = True
-        PNLAppHome.Visible = False
-
-    End Sub
-
     Private Sub Button20_Click(sender As System.Object, e As System.EventArgs)
 
         Try
@@ -1187,7 +1143,7 @@ Public Class frmApps
         Panel1.BackColor = Color.SteelBlue
         LBLWishListName.ForeColor = Color.SteelBlue
         Panel2.BackColor = Color.SteelBlue
-        PNLPlaylist.BackColor = Color.SteelBlue
+        'PNLPlaylist.BackColor = Color.SteelBlue
         'PNLAppRandomizer.BackColor = Color.SteelBlue
         PictureBox3.BackColor = Color.SteelBlue
 
@@ -1255,7 +1211,7 @@ Public Class frmApps
         Panel1.BackColor = Color.DarkMagenta
         LBLWishListName.ForeColor = Color.DarkMagenta
         Panel2.BackColor = Color.DarkMagenta
-        PNLPlaylist.BackColor = Color.DarkMagenta
+        'PNLPlaylist.BackColor = Color.DarkMagenta
         ' PNLAppRandomizer.BackColor = Color.DarkMagenta
         PictureBox3.BackColor = Color.DarkMagenta
 
@@ -1319,7 +1275,7 @@ Public Class frmApps
         Panel1.BackColor = Color.Black
         LBLWishListName.ForeColor = Color.Black
         Panel2.BackColor = Color.Black
-        PNLPlaylist.BackColor = Color.Black
+        'PNLPlaylist.BackColor = Color.Black
         'PNLAppRandomizer.BackColor = Color.Black
         PictureBox3.BackColor = Color.Black
 
@@ -1383,7 +1339,7 @@ Public Class frmApps
         Panel1.BackColor = Color.Firebrick
         LBLWishListName.ForeColor = Color.Firebrick
         Panel2.BackColor = Color.Firebrick
-        PNLPlaylist.BackColor = Color.Firebrick
+        ' PNLPlaylist.BackColor = Color.Firebrick
         'PNLAppRandomizer.BackColor = Color.Firebrick
         PictureBox3.BackColor = Color.Firebrick
 

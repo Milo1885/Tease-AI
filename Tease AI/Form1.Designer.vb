@@ -177,6 +177,7 @@ Partial Class Form1
         Me.URLFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VideoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AppsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ThemeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModdingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MiscToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -193,6 +194,7 @@ Partial Class Form1
         Me.RiskyPickToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExchangeToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CollectionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AIBoxToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MilovanaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenBetaThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.BugReportThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -245,8 +247,10 @@ Partial Class Form1
         Me.PNLAvatar = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.AIBoxToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ThemeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PNLPlaylist = New System.Windows.Forms.Panel()
+        Me.LBPlaylist = New System.Windows.Forms.ListBox()
+        Me.BTNPlaylist = New System.Windows.Forms.Button()
+        Me.PlaylistToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -270,6 +274,7 @@ Partial Class Form1
         Me.PNLAvatar.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.PNLPlaylist.SuspendLayout()
         Me.SuspendLayout()
         '
         'domName
@@ -1590,6 +1595,12 @@ Partial Class Form1
         Me.AppsToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
         Me.AppsToolStripMenuItem1.Text = "Apps"
         '
+        'ThemeToolStripMenuItem
+        '
+        Me.ThemeToolStripMenuItem.Name = "ThemeToolStripMenuItem"
+        Me.ThemeToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ThemeToolStripMenuItem.Text = "Theme"
+        '
         'RangesToolStripMenuItem
         '
         Me.RangesToolStripMenuItem.Name = "RangesToolStripMenuItem"
@@ -1610,7 +1621,7 @@ Partial Class Form1
         '
         'AppsToolStripMenuItem
         '
-        Me.AppsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseAppPanelToolStripMenuItem, Me.ToolStripSeparator4, Me.GlitterToolStripMenuItem, Me.DommeTagsToolStripMenuItem2, Me.LazySubToolStripMenuItem, Me.RandomizerToolStripMenuItem})
+        Me.AppsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseAppPanelToolStripMenuItem, Me.ToolStripSeparator4, Me.GlitterToolStripMenuItem, Me.DommeTagsToolStripMenuItem2, Me.LazySubToolStripMenuItem, Me.RandomizerToolStripMenuItem, Me.PlaylistToolStripMenuItem})
         Me.AppsToolStripMenuItem.Name = "AppsToolStripMenuItem"
         Me.AppsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.AppsToolStripMenuItem.Text = "Apps"
@@ -1686,6 +1697,12 @@ Partial Class Form1
         Me.CollectionToolStripMenuItem1.Name = "CollectionToolStripMenuItem1"
         Me.CollectionToolStripMenuItem1.Size = New System.Drawing.Size(142, 22)
         Me.CollectionToolStripMenuItem1.Text = "Collection"
+        '
+        'AIBoxToolsToolStripMenuItem
+        '
+        Me.AIBoxToolsToolStripMenuItem.Name = "AIBoxToolsToolStripMenuItem"
+        Me.AIBoxToolsToolStripMenuItem.Size = New System.Drawing.Size(84, 20)
+        Me.AIBoxToolsToolStripMenuItem.Text = "AI Box Tools"
         '
         'MilovanaToolStripMenuItem1
         '
@@ -1778,6 +1795,7 @@ Partial Class Form1
         '
         Me.PNLTabs.BackColor = System.Drawing.Color.Black
         Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLTabs.Controls.Add(Me.PNLPlaylist)
         Me.PNLTabs.Controls.Add(Me.PNLAppRandomizer)
         Me.PNLTabs.Controls.Add(Me.PNLLazySub)
         Me.PNLTabs.Controls.Add(Me.PNLDomTagBTN)
@@ -2276,17 +2294,45 @@ Partial Class Form1
         Me.Panel4.Size = New System.Drawing.Size(245, 31)
         Me.Panel4.TabIndex = 779
         '
-        'AIBoxToolsToolStripMenuItem
+        'PNLPlaylist
         '
-        Me.AIBoxToolsToolStripMenuItem.Name = "AIBoxToolsToolStripMenuItem"
-        Me.AIBoxToolsToolStripMenuItem.Size = New System.Drawing.Size(84, 20)
-        Me.AIBoxToolsToolStripMenuItem.Text = "AI Box Tools"
+        Me.PNLPlaylist.BackColor = System.Drawing.Color.SteelBlue
+        Me.PNLPlaylist.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLPlaylist.Controls.Add(Me.LBPlaylist)
+        Me.PNLPlaylist.Controls.Add(Me.BTNPlaylist)
+        Me.PNLPlaylist.Location = New System.Drawing.Point(2, 2)
+        Me.PNLPlaylist.Name = "PNLPlaylist"
+        Me.PNLPlaylist.Size = New System.Drawing.Size(245, 394)
+        Me.PNLPlaylist.TabIndex = 773
+        Me.PNLPlaylist.Visible = False
         '
-        'ThemeToolStripMenuItem
+        'LBPlaylist
         '
-        Me.ThemeToolStripMenuItem.Name = "ThemeToolStripMenuItem"
-        Me.ThemeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ThemeToolStripMenuItem.Text = "Theme"
+        Me.LBPlaylist.FormattingEnabled = True
+        Me.LBPlaylist.Location = New System.Drawing.Point(8, 9)
+        Me.LBPlaylist.Name = "LBPlaylist"
+        Me.LBPlaylist.Size = New System.Drawing.Size(224, 329)
+        Me.LBPlaylist.Sorted = True
+        Me.LBPlaylist.TabIndex = 11
+        '
+        'BTNPlaylist
+        '
+        Me.BTNPlaylist.BackColor = System.Drawing.Color.White
+        Me.BTNPlaylist.FlatAppearance.BorderSize = 2
+        Me.BTNPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNPlaylist.ForeColor = System.Drawing.Color.Black
+        Me.BTNPlaylist.Location = New System.Drawing.Point(8, 350)
+        Me.BTNPlaylist.Name = "BTNPlaylist"
+        Me.BTNPlaylist.Size = New System.Drawing.Size(224, 28)
+        Me.BTNPlaylist.TabIndex = 7
+        Me.BTNPlaylist.Text = "Begin Selected Playlist"
+        Me.BTNPlaylist.UseVisualStyleBackColor = False
+        '
+        'PlaylistToolStripMenuItem
+        '
+        Me.PlaylistToolStripMenuItem.Name = "PlaylistToolStripMenuItem"
+        Me.PlaylistToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PlaylistToolStripMenuItem.Text = "Playlist"
         '
         'Form1
         '
@@ -2339,6 +2385,7 @@ Partial Class Form1
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.PNLPlaylist.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2566,5 +2613,9 @@ Partial Class Form1
     Friend WithEvents RandomizerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AIBoxToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ThemeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PNLPlaylist As System.Windows.Forms.Panel
+    Friend WithEvents LBPlaylist As System.Windows.Forms.ListBox
+    Friend WithEvents BTNPlaylist As System.Windows.Forms.Button
+    Friend WithEvents PlaylistToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

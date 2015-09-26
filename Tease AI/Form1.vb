@@ -22228,10 +22228,10 @@ TryNext:
 
         Debug.Print("Resize Called")
 
-        Return
-        If Not Me.Height < 734 And Not Me.Width < 978 Then AdjustWindow()
+        'Return
+        'If Not Me.Height < 734 And Not Me.Width < 978 Then AdjustWindow()
 
-        Return
+        ' Return
 
         Debug.Print(Me.WindowState)
         Debug.Print(Me.WindowCheck)
@@ -22247,7 +22247,7 @@ TryNext:
             AdjustWindow()
         End If
 
-        AdjustWindow()
+        'AdjustWindow()
 
       
 
@@ -22402,6 +22402,12 @@ TryNext:
             PNLAppRandomizer.Height = PNLTabs.Height - 8
         Else
             PNLAppRandomizer.Height = 379
+        End If
+
+        If PNLTabs.Height > 402 Then
+            PNLPlaylist.Height = PNLTabs.Height - 8
+        Else
+            PNLPlaylist.Height = 394
         End If
 
         PNLTabs.HorizontalScroll.Visible = False
@@ -23844,6 +23850,7 @@ SkipNew:
         PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
         PNLLazySub.BackColor = My.Settings.BackgroundColor
         PNLAppRandomizer.BackColor = My.Settings.BackgroundColor
+        PNLPlaylist.BackColor = My.Settings.BackgroundColor
 
         ApplyingTheme = False
 
@@ -23944,6 +23951,7 @@ SkipNew:
         StatusUpdates.Visible = False
         PNLLazySub.Visible = False
         PNLAppRandomizer.Visible = False
+        PNLPlaylist.Visible = False
 
         PNLTabs.Height = 0
 
@@ -24303,4 +24311,43 @@ SkipNew:
     End Sub
 
    
+    Private Sub PlaylistToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PlaylistToolStripMenuItem.Click
+        If PNLPlaylist.Visible = False Then
+            CloseApp()
+            OpenApp()
+            PNLPlaylist.Visible = True
+            LBPlaylist.Items.Clear()
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                LBPlaylist.Items.Add(Path.GetFileName(foundFile).Replace(".txt", ""))
+            Next
+        End If
+    End Sub
+
+    Private Sub BTNPlaylist_Click(sender As System.Object, e As System.EventArgs) Handles BTNPlaylist.Click
+        If LBPlaylist.SelectedItems.Count = 0 Then
+            MessageBox.Show(Me, "Please select a Playlist first!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        If SaidHello = True Then
+            MessageBox.Show(Me, "Please wait until you are not engaged with the domme to begin a Playlist!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        Playlist = True
+        'SaidHello = True
+
+        PlaylistFile = Txt2List(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\" & LBPlaylist.SelectedItem & ".txt")
+        PlaylistFile = StripBlankLines(PlaylistFile)
+        PlaylistCurrent = 0
+        Try
+            chatBox.Text = "Hello " & FrmSettings.TBHonorific.Text
+        Catch
+            chatBox.Text = "Hello"
+        End Try
+
+        sendButton.PerformClick()
+
+        BTNPlaylist.Enabled = False
+    End Sub
 End Class
