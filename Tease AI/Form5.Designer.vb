@@ -1339,11 +1339,11 @@ Partial Class frmApps
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button36)
         Me.Controls.Add(Me.CBDebugAwareness)
-        Me.Controls.Add(Me.PNLHypnoGen)
-        Me.Controls.Add(Me.AppPanelVitalSub)
         Me.Controls.Add(Me.AppPanelGlitter)
         Me.Controls.Add(Me.PNLAppHome)
         Me.Controls.Add(Me.PNLWishList)
+        Me.Controls.Add(Me.PNLHypnoGen)
+        Me.Controls.Add(Me.AppPanelVitalSub)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False

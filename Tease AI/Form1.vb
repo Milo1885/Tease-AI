@@ -510,7 +510,6 @@ Public Class Form1
     Dim DommeImageFound As Boolean
     Dim DommeImageListCheck As Boolean
 
-
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -4075,6 +4074,23 @@ AcceptAnswer:
                 If FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value Then InvalidFilter = True
             End If
 
+            If lines(line).Contains("@AlwaysAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Always Allows" Then InvalidFilter = True
+            If lines(line).Contains("@OftenAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Often Allows" Then InvalidFilter = True
+            If lines(line).Contains("@SometimesAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows" Then InvalidFilter = True
+            If lines(line).Contains("@RarelyAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows" Then InvalidFilter = True
+            If lines(line).Contains("@NeverAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Never Allows" Then InvalidFilter = True
+
+            If lines(line).Contains("@AlwaysRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins" Then InvalidFilter = True
+            If lines(line).Contains("@OftenRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins" Then InvalidFilter = True
+            If lines(line).Contains("@SometimesRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins" Then InvalidFilter = True
+            If lines(line).Contains("@RarelyRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins" Then InvalidFilter = True
+            If lines(line).Contains("@NeverRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins" Then InvalidFilter = True
+
+            If lines(line).Contains("@NotAlwaysAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then InvalidFilter = True
+            If lines(line).Contains("@NotNeverAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then InvalidFilter = True
+            If lines(line).Contains("@NotAlwaysRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then InvalidFilter = True
+            If lines(line).Contains("@NotNeverRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then InvalidFilter = True
+
             If lines(line).Contains("@Flag(") Then
                 Dim WriteFlag As String = lines(line)
                 Dim WriteStart As Integer
@@ -4564,7 +4580,7 @@ SkipGotoSearch:
                 'Loop Until gotolines(gotoline) = FileGoto
 
             Loop Until InStr(gotolines(gotoline), FileGoto) <> 0 And InStr(gotolines(gotoline), "@Goto") = 0 And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
-            And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
+             And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
             And InStr(gotolines(gotoline), "Then(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
 
             ioFile2.Close()
@@ -6497,10 +6513,7 @@ NoPlaylistModuleFile:
                     For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & _
                                                                                     "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, ChastityModuleCheck)
                         Dim TempModule As String = foundFile
-                        TempModule = TempModule.Replace(".txt", "")
-                        Do Until Not TempModule.Contains("\")
-                            TempModule = TempModule.Remove(0, 1)
-                        Loop
+                        TempModule = Path.GetFileName(TempModule).Replace(".txt", "")
                         For x As Integer = 0 To FrmSettings.CLBModuleList.Items.Count - 1
                             If My.Settings.Chastity = True Then
                                 If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") Then
@@ -10191,9 +10204,33 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@EdgeToRuinHoldNoSecret(") Then
 
-            EdgeHoldSeconds = Val(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret("))
-            If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("M") Then EdgeHoldSeconds *= 60
-            If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("H") Then EdgeHoldSeconds *= 3600
+            Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeHold(")
+
+            If EdgeHoldFlag.Contains(",") Then
+
+                EdgeHoldFlag = FixCommas(EdgeHoldFlag)
+
+                Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
+
+                Dim Edge1 As Integer = Val(EdgeFlagArray(0))
+                Dim Edge2 As Integer = Val(EdgeFlagArray(1))
+
+                If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
+                If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
+
+                If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
+                If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
+
+                EdgeHoldSeconds = randomizer.Next(Edge1, Edge2 + 1)
+
+            Else
+
+                EdgeHoldSeconds = Val(EdgeHoldFlag)
+                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("M") Then EdgeHoldSeconds *= 60
+                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("H") Then EdgeHoldSeconds *= 3600
+
+            End If
+
             EdgeHoldFlag = True
 
             ContactEdgeCheck(StringClean)
@@ -10293,9 +10330,33 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@EdgeToRuinHold(") Then
 
-            EdgeHoldSeconds = Val(GetParentheses(StringClean, "@EdgeToRuinHold("))
-            If UCase(GetParentheses(StringClean, "@EdgeToRuinHold(")).Contains("M") Then EdgeHoldSeconds *= 60
-            If UCase(GetParentheses(StringClean, "@EdgeToRuinHold(")).Contains("H") Then EdgeHoldSeconds *= 3600
+            Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeHold(")
+
+            If EdgeHoldFlag.Contains(",") Then
+
+                EdgeHoldFlag = FixCommas(EdgeHoldFlag)
+
+                Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
+
+                Dim Edge1 As Integer = Val(EdgeFlagArray(0))
+                Dim Edge2 As Integer = Val(EdgeFlagArray(1))
+
+                If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
+                If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
+
+                If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
+                If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
+
+                EdgeHoldSeconds = randomizer.Next(Edge1, Edge2 + 1)
+
+            Else
+
+                EdgeHoldSeconds = Val(EdgeHoldFlag)
+                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("M") Then EdgeHoldSeconds *= 60
+                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("H") Then EdgeHoldSeconds *= 3600
+
+            End If
+
             EdgeHoldFlag = True
 
             ContactEdgeCheck(StringClean)
@@ -10384,12 +10445,42 @@ RinseLatherRepeat:
         End If
 
 
+        ' The Commands @EdgeHold(), @EdgeToRuinHold() and @EdgeToRuinHoldNoSecret() allow you to specify the amount of time the edge is held. The defualt is in seconds, but you can use Minutes and Hours as well
+        ' For example: @EdgeHold(60) would have the domme make you hold the edge for 60 seconds
+        ' @EdgeHold(3 Minutes) or @EdgeHold(3 M) - Domme will make you hold the edge for three minutes
+        ' @EdgeHold(2 Hours) - Domme will make you hold the edge for 2 hours. Good luck :D
+        '
+        'You can also set a time range using a comma. For example, @EdgeHold(2 Minutes, 5 Minutes) - the domme would make you hold it a random amount of time bwteen 2 and 5 minutes.
+
         If StringClean.Contains("@EdgeHold(") Then
 
+            Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeHold(")
 
-            EdgeHoldSeconds = Val(GetParentheses(StringClean, "@EdgeHold("))
-            If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("M") Then EdgeHoldSeconds *= 60
-            If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("H") Then EdgeHoldSeconds *= 3600
+            If EdgeHoldFlag.Contains(",") Then
+
+                EdgeHoldFlag = FixCommas(EdgeHoldFlag)
+
+                Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
+
+                Dim Edge1 As Integer = Val(EdgeFlagArray(0))
+                Dim Edge2 As Integer = Val(EdgeFlagArray(1))
+
+                If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
+                If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
+
+                If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
+                If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
+
+                EdgeHoldSeconds = randomizer.Next(Edge1, Edge2 + 1)
+
+            Else
+
+                EdgeHoldSeconds = Val(EdgeHoldFlag)
+                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("M") Then EdgeHoldSeconds *= 60
+                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("H") Then EdgeHoldSeconds *= 3600
+
+            End If
+
             EdgeHoldFlag = True
 
 
@@ -13384,6 +13475,15 @@ VTSkip:
 
     End Function
 
+    Public Function FixCommas(ByVal CommaString) As String
+
+        CommaString = CommaString.replace(", ", ",")
+        CommaString = CommaString.replace(" ,", ",")
+
+        Return CommaString
+
+    End Function
+
     Public Function GetDommeImage(ByVal DomTag As String) As Boolean
 
         Debug.Print("Is this being called?")
@@ -13642,6 +13742,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@Crazy") Then
                 If FrmSettings.crazyCheckBox.Checked = False Then
@@ -13661,6 +13762,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@Vulgar") Then
                 If FrmSettings.vulgarCheckBox.Checked = False Then
@@ -13680,6 +13782,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@Supremacist") Then
                 If FrmSettings.supremacistCheckBox.Checked = False Then
@@ -13699,6 +13802,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DommeLevel1") Then
                 If FrmSettings.domlevelNumBox.Value <> 1 Then
@@ -13718,6 +13822,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DommeLevel2") Then
                 If FrmSettings.domlevelNumBox.Value <> 2 Then
@@ -13737,6 +13842,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DommeLevel3") Then
                 If FrmSettings.domlevelNumBox.Value <> 3 Then
@@ -13756,6 +13862,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DommeLevel4") Then
                 If FrmSettings.domlevelNumBox.Value <> 4 Then
@@ -13775,6 +13882,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DommeLevel5") Then
                 If FrmSettings.domlevelNumBox.Value <> 5 Then
@@ -13794,6 +13902,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SelfYoung") Then
                 If FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then 'Or DommeVideo = False Then
@@ -13812,6 +13921,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SelfYoung") Then
                 If VideoTease = True Or TeaseVideo = True Then
@@ -13832,6 +13942,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SelfOld") Then
                 If FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then 'Or DommeVideo = False Then
@@ -13850,6 +13961,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SelfOld") Then
                 If VideoTease = True Or TeaseVideo = True Then
@@ -13870,6 +13982,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ACup") Then
                 If FrmSettings.boobComboBox.Text <> "A" Or JustShowedBlogImage = True Then
@@ -13889,6 +14002,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@BCup") Then
                 If FrmSettings.boobComboBox.Text <> "B" Or JustShowedBlogImage = True Then
@@ -13908,6 +14022,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CCup") Then
                 If FrmSettings.boobComboBox.Text <> "C" Or JustShowedBlogImage = True Then
@@ -13927,6 +14042,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DCup") Then
                 If FrmSettings.boobComboBox.Text <> "D" Or JustShowedBlogImage = True Then
@@ -13946,6 +14062,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DDCup") Then
                 If FrmSettings.boobComboBox.Text <> "DD" Or JustShowedBlogImage = True Then
@@ -13965,6 +14082,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DDD+Cup") Then
                 If FrmSettings.boobComboBox.Text <> "DDD+" Or JustShowedBlogImage = True Then
@@ -13984,6 +14102,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CockSmall") Then
                 If FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value Then
@@ -14003,6 +14122,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CockLarge") Then
                 If FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then
@@ -14022,6 +14142,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SubYoung") Then
                 If FrmSettings.subAgeNumBox.Value >= FrmSettings.NBSubAgeMin.Value Then
@@ -14041,6 +14162,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SubOld") Then
                 If FrmSettings.subAgeNumBox.Value <= FrmSettings.NBSubAgeMax.Value Then
@@ -14060,6 +14182,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SubBirthday") Then
                 If FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then
@@ -14079,6 +14202,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ValentinesDay") Then
                 If Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14 Then
@@ -14098,6 +14222,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ChristmasEve") Then
                 If Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24 Then
@@ -14117,6 +14242,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ChristmasDay") Then
                 If Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25 Then
@@ -14136,6 +14262,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NewYearsEve") Then
                 If Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31 Then
@@ -14155,6 +14282,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NewYearsDay") Then
                 If Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25 Then
@@ -14174,6 +14302,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagFace") Then
                 If Not FoundTag.Contains("TagFace") Then
@@ -14195,6 +14324,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagBoobs") Then
                 If Not FoundTag.Contains("TagBoobs") Then
@@ -14216,6 +14346,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagPussy") Then
                 If Not FoundTag.Contains("TagPussy") Then
@@ -14237,6 +14368,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagAss") Then
                 If Not FoundTag.Contains("TagAss") Then
@@ -14258,6 +14390,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagFeet") Then
                 If Not FoundTag.Contains("TagFeet") Then
@@ -14279,6 +14412,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagLegs") Then
                 If Not FoundTag.Contains("TagLegs") Then
@@ -14300,6 +14434,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagMasturbating") Then
                 If Not FoundTag.Contains("TagMasturbating") Then
@@ -14321,6 +14456,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagSucking") Then
                 If Not FoundTag.Contains("TagSucking") Then
@@ -14342,6 +14478,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagFullyDressed") Then
                 If Not FoundTag.Contains("TagFullyDressed") Then
@@ -14363,6 +14500,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagHalfDressed") Then
                 If Not FoundTag.Contains("TagHalfDressed") Then
@@ -14384,6 +14522,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagGarmentCovering") Then
                 If Not FoundTag.Contains("TagGarmentCovering") Then
@@ -14405,6 +14544,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagHandsCovering") Then
                 If Not FoundTag.Contains("TagHandsCovering") Then
@@ -14426,6 +14566,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagNaked") Then
                 If Not FoundTag.Contains("TagNaked") Then
@@ -14447,6 +14588,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagSideView") Then
                 If Not FoundTag.Contains("TagSideView") Then
@@ -14468,6 +14610,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagCloseUp") Then
                 If Not FoundTag.Contains("TagCloseUp") Then
@@ -14489,6 +14632,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagPiercing") Then
                 If Not FoundTag.Contains("TagPiercing") Then
@@ -14510,6 +14654,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagSmiling") Then
                 If Not FoundTag.Contains("TagSmiling") Then
@@ -14531,6 +14676,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagGlaring") Then
                 If Not FoundTag.Contains("TagGlaring") Then
@@ -14552,6 +14698,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagGarment") Then
                 If Not FoundTag.Contains("TagGarment") Then
@@ -14573,6 +14720,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagUnderwear") Then
                 If Not FoundTag.Contains("TagUnderwear") Then
@@ -14594,6 +14742,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagTattoo") Then
                 If Not FoundTag.Contains("TagTattoo") Then
@@ -14615,6 +14764,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagSexToy") Then
                 If Not FoundTag.Contains("TagSexToy") Then
@@ -14636,6 +14786,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@TagFurniture") Then
                 If Not FoundTag.Contains("TagFurniture") Then
@@ -14657,6 +14808,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@FirstRound") Then
                 If FirstRound = False Then
@@ -14676,6 +14828,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NotFirstRound") Then
                 If FirstRound = True Then
@@ -14695,6 +14848,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@StrokeSpeedMax") Then
                 If StrokePace < 100 Then
@@ -14714,6 +14868,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@StrokeSpeedMin") Then
                 If StrokePace > 10 Then
@@ -14733,6 +14888,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@AlwaysAllowsOrgasm") Then
                 If FrmSettings.alloworgasmComboBox.Text <> "Always Allows" Then
@@ -14752,6 +14908,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@OftenAllowsOrgasm") Then
                 If FrmSettings.alloworgasmComboBox.Text <> "Often Allows" Then
@@ -14771,6 +14928,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SometimesAllowsOrgasm") Then
                 If FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows" Then
@@ -14790,6 +14948,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@RarelyAllowsOrgasm") Then
                 If FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows" Then
@@ -14809,6 +14968,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NeverAllowsOrgasm") Then
                 If FrmSettings.alloworgasmComboBox.Text <> "Never Allows" Then
@@ -14828,6 +14988,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@AlwaysRuinsOrgasm") Then
                 If FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins" Then
@@ -14847,6 +15008,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@OftenRuinsOrgasm") Then
                 If FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins" Then
@@ -14866,6 +15028,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SometimesRuinsOrgasm") Then
                 If FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins" Then
@@ -14885,6 +15048,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@RarelyRuinsOrgasm") Then
                 If FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins" Then
@@ -14904,6 +15068,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NeverRuinsOrgasm") Then
                 If FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins" Then
@@ -14923,6 +15088,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NotAlwaysAllowsOrgasm") Then
                 If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then
@@ -14942,6 +15108,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NotNeverAllowsOrgasm") Then
                 If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then
@@ -14961,6 +15128,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NotAlwaysRuinsOrgasm") Then
                 If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then
@@ -14980,6 +15148,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NotNeverRuinsOrgasm") Then
                 If FrmSettings.ruinorgasmComboBox.Text = "Never Allows" Then
@@ -14999,6 +15168,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@LongEdge") Then
                 If LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False Then
@@ -15018,6 +15188,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@InterruptLongEdge") Then
                 If LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or TeaseTick < 1 Or RiskyEdges = True Then
@@ -15037,9 +15208,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowHardcoreImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15055,9 +15227,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowSoftcoreImage") Then
-                If Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15073,9 +15246,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLesbianImage") Then
-                If Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15091,9 +15265,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowBlowjobImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15109,9 +15284,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowFemdomImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15127,9 +15303,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLezdomImage") Then
-                If Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15145,9 +15322,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowHentaiImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15163,9 +15341,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowGayImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15181,9 +15360,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowMaledomImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15199,9 +15379,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowCaptionsImage") Then
-                If Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15217,9 +15398,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowGeneralImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15235,8 +15417,9 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
-            If ListClean(PoundCount).Contains("@ShowBlogImage") Or ListClean(PoundCount).Contains("@NewBlogImage") Or FlagExists("SYS_PornRestriction") = True Then
+            If ListClean(PoundCount).Contains("@ShowBlogImage") Or ListClean(PoundCount).Contains("@NewBlogImage") Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                 If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
@@ -15253,6 +15436,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLocalImage") Then
                 If FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And FrmSettings.CBIBlowjob.Checked = False And _
@@ -15273,9 +15457,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLocalImage") Then
-                If FlagExists("SYS_PornRestriction") = True Then
+                If FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15292,9 +15477,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowButtImage") Then
-                If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15310,9 +15496,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowBoobsImage") Then
-                If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_PornRestriction") = True Then
+                If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15328,9 +15515,10 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLocalImage") Or ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowBoobsImage") Then
-                If CustomSlideshow = True Then
+                If CustomSlideshow = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15346,6 +15534,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@1MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119 Then
@@ -15364,6 +15553,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@2MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179 Then
@@ -15382,6 +15572,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@3MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239 Then
@@ -15400,6 +15591,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@4MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299 Then
@@ -15418,6 +15610,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@5MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599 Then
@@ -15436,6 +15629,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@10MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899 Then
@@ -15454,6 +15648,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@15MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799 Then
@@ -15472,6 +15667,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@30MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699 Then
@@ -15490,6 +15686,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@45MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599 Then
@@ -15508,6 +15705,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@60MinuteHold") Then
                 If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then
@@ -15526,6 +15724,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CBTLevel1") Then
                 If FrmSettings.CBTSlider.Value <> 1 Then
@@ -15544,6 +15743,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CBTLevel2") Then
                 If FrmSettings.CBTSlider.Value <> 2 Then
@@ -15562,6 +15762,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CBTLevel3") Then
                 If FrmSettings.CBTSlider.Value <> 3 Then
@@ -15580,6 +15781,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CBTLevel4") Then
                 If FrmSettings.CBTSlider.Value <> 4 Then
@@ -15598,6 +15800,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CBTLevel5") Then
                 If FrmSettings.CBTSlider.Value <> 5 Then
@@ -15616,6 +15819,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SubCircumcised") Then
                 If FrmSettings.CBSubCircumcised.Checked = False Then
@@ -15634,6 +15838,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SubNotCircumcised") Then
                 If FrmSettings.CBSubCircumcised.Checked = True Then
@@ -15652,6 +15857,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SubPierced") Then
                 If FrmSettings.CBSubPierced.Checked = False Then
@@ -15670,6 +15876,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SubNotPierced") Then
                 If FrmSettings.CBSubPierced.Checked = True Then
@@ -15770,6 +15977,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowTaggedImage") Then
                 If LocalTagImageList.Count = 0 Then
@@ -15788,6 +15996,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@BeforeTease") Then
                 If BeforeTease = False Then
@@ -15806,6 +16015,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@OrgasmDenied") Then
                 If OrgasmDenied = False Then
@@ -15824,6 +16034,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@OrgasmAllowed") Then
                 If OrgasmAllowed = False Then
@@ -15842,6 +16053,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@OrgasmRuined") Then
                 If OrgasmRuined = False Then
@@ -15860,6 +16072,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ApathyLevel1") Then
                 If FrmSettings.NBEmpathy.Value <> 1 Then
@@ -15878,6 +16091,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ApathyLevel2") Then
                 If FrmSettings.NBEmpathy.Value <> 2 Then
@@ -15896,6 +16110,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ApathyLevel3") Then
                 If FrmSettings.NBEmpathy.Value <> 3 Then
@@ -15914,6 +16129,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ApathyLevel4") Then
                 If FrmSettings.NBEmpathy.Value <> 4 Then
@@ -15932,6 +16148,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ApathyLevel5") Then
                 If FrmSettings.NBEmpathy.Value <> 5 Then
@@ -15951,6 +16168,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@InChastity") Then
                 If My.Settings.Chastity = False Then
@@ -15969,6 +16187,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@HasChastity") Then
                 If FrmSettings.CBOwnChastity.Checked = False Then
@@ -15987,6 +16206,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ChastityPA") Then
                 If FrmSettings.CBChastityPA.Checked = False Then
@@ -16005,6 +16225,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ChastitySpikes") Then
                 If FrmSettings.CBChastitySpikes.Checked = False Then
@@ -16023,6 +16244,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VitalSub") Then
                 If frmApps.CBVitalSub.Checked = False Then
@@ -16041,6 +16263,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VitalSubAssignment") Then
                 If frmApps.CBVitalSub.Checked = False Or frmApps.CBVitalSubDomTask.Checked = False Then
@@ -16059,6 +16282,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@RuinTaunt") Then
                 If EdgeToRuin = False Or EdgeToRuinSecret = True Then
@@ -16077,6 +16301,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLikedImage") Then
                 If Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
@@ -16095,6 +16320,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowDislikedImage") Then
                 If Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
@@ -16113,6 +16339,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoHardcore") Then
                 If VideoTease = False Or VideoType <> "Hardcore" Then
@@ -16131,6 +16358,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoSoftcore") Then
                 If VideoTease = False Or VideoType <> "Softcore" Then
@@ -16149,6 +16377,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoLesbian") Then
                 If VideoTease = False Or VideoType <> "Lesbian" Then
@@ -16167,6 +16396,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoBlowjob") Then
                 If VideoTease = False Or VideoType <> "Blowjob" Then
@@ -16185,6 +16415,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoFemdom") Then
                 If VideoTease = False Or VideoType <> "Femdom" Then
@@ -16203,6 +16434,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoFemsub") Then
                 If VideoTease = False Or VideoType <> "Femsub" Then
@@ -16221,6 +16453,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoGeneral") Then
                 If VideoTease = False Or VideoType <> "General" Then
@@ -16240,6 +16473,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoHardcoreDomme") Then
                 If VideoTease = False Or VideoType <> "HardcoreD" Then
@@ -16258,6 +16492,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoSoftcoreDomme") Then
                 If VideoTease = False Or VideoType <> "SoftcoreD" Then
@@ -16276,6 +16511,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoLesbianDomme") Then
                 If VideoTease = False Or VideoType <> "LesbianD" Then
@@ -16294,6 +16530,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoBlowjobDomme") Then
                 If VideoTease = False Or VideoType <> "BlowjobD" Then
@@ -16312,6 +16549,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoFemdomDomme") Then
                 If VideoTease = False Or VideoType <> "FemdomD" Then
@@ -16330,6 +16568,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoFemsubDomme") Then
                 If VideoTease = False Or VideoType <> "FemsubD" Then
@@ -16348,6 +16587,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VideoGeneralDomme") Then
                 If VideoTease = False Or VideoType <> "GeneralD" Then
@@ -16366,6 +16606,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CockTorture") Then
                 If FrmSettings.CBCBTCock.Checked = False Then
@@ -16384,6 +16625,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@BallTorture") Then
                 If FrmSettings.CBCBTBalls.Checked = False Then
@@ -16402,6 +16644,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@BallTorture0") Then
                 If CBTBallsCount <> 0 Then
@@ -16420,6 +16663,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@BallTorture1") Then
                 If CBTBallsCount <> 1 Then
@@ -16438,6 +16682,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@BallTorture2") Then
                 If CBTBallsCount <> 2 Then
@@ -16456,6 +16701,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@BallTorture3") Then
                 If CBTBallsCount <> 3 Then
@@ -16474,8 +16720,9 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
-            If ListClean(PoundCount).Contains("@BallTorture3+") Then
+            If ListClean(PoundCount).Contains("@BallTorture4+") Then
                 If CBTBallsCount < 4 Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
@@ -16492,6 +16739,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CockTorture0") Then
                 If CBTCockCount <> 0 Then
@@ -16510,6 +16758,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CockTorture1") Then
                 If CBTCockCount <> 1 Then
@@ -16528,6 +16777,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CockTorture2") Then
                 If CBTCockCount <> 2 Then
@@ -16546,6 +16796,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CockTorture3") Then
                 If CBTCockCount <> 3 Then
@@ -16564,8 +16815,9 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
-            If ListClean(PoundCount).Contains("@CockTorture3+") Then
+            If ListClean(PoundCount).Contains("@CockTorture4+") Then
                 If CBTCockCount < 4 Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
@@ -16584,6 +16836,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Contact1") Then
                     If GlitterTease = False Or Not Group.Contains("1") Then
@@ -16602,6 +16855,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Contact2") Then
                     If GlitterTease = False Or Not Group.Contains("2") Then
@@ -16620,6 +16874,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Contact3") Then
                     If GlitterTease = False Or Not Group.Contains("3") Then
@@ -16640,6 +16895,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Group(") Then
                     Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
@@ -16661,6 +16917,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Group(") Then
                     Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
@@ -16682,6 +16939,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Group(") Then
                     Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
@@ -16703,6 +16961,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Group(") Then
                     Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
@@ -16727,6 +16986,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Group(") Then
                     Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
@@ -16748,6 +17008,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Group(") Then
                     Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
@@ -16769,6 +17030,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Group(") Then
                     Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
@@ -16790,6 +17052,7 @@ VTSkip:
 
             PoundCount = PoundLine
             Do
+                Application.DoEvents()
                 PoundCount -= 1
                 If ListClean(PoundCount).Contains("@Group(") Then
                     Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
@@ -16817,6 +17080,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@Flag(") Then
                 Dim WriteFlag As String = ListClean(PoundCount)
@@ -16842,6 +17106,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@NotFlag(") Then
                 Dim WriteFlag As String = ListClean(PoundCount)
@@ -16868,6 +17133,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@Variable[") Then
                 If CheckVariable(ListClean(PoundCount)) = False Then
@@ -16891,6 +17157,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CheckDate(") Then
                 If CheckDateList(ListClean(PoundCount)) = False Then
@@ -16911,6 +17178,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DommeTag(") Then
                 If GetDommeImage(ListClean(PoundCount)) = False Then
@@ -16938,6 +17206,7 @@ VTSkip:
 
         PoundCount = PoundLine
         Do
+            Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@Info") Then
                 ListClean.Remove(ListClean(PoundCount))
@@ -22279,6 +22548,8 @@ TryNext:
 
     Public Sub AdjustWindow()
 
+        SuspendLayout()
+
         AdjustingWindow = True
 
         Debug.Print("Adjust Window Called")
@@ -22424,9 +22695,7 @@ TryNext:
 
         ' SplitContainer1.Height = Me.Height - 83
 
-
-
-
+        ResumeLayout()
 
 
     End Sub
@@ -23781,10 +24050,10 @@ SkipNew:
 
         Me.BackColor = My.Settings.BackgroundColor
 
-        If File.Exists(My.Settings.BackgroundImage) Then
-            FrmSettings.PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
-            Me.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
-        End If
+        ' If File.Exists(My.Settings.BackgroundImage) Then
+        'FrmSettings.PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
+        'Me.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
+        'End If
 
 
         'SplitContainer1.Panel2.BackColor = My.Settings.BackgroundColor
@@ -23851,6 +24120,33 @@ SkipNew:
         PNLLazySub.BackColor = My.Settings.BackgroundColor
         PNLAppRandomizer.BackColor = My.Settings.BackgroundColor
         PNLPlaylist.BackColor = My.Settings.BackgroundColor
+
+
+
+
+        If FrmSettings.CBFlipBack.Checked = True Then
+
+            Try
+                Dim BGIMage As Image = CType(Bitmap.FromFile(My.Settings.BackgroundImage), Bitmap)
+                BGIMage.RotateFlip(RotateFlipType.Rotate180FlipY)
+
+                BackgroundImage = BGIMage
+                FrmSettings.PBBackgroundPreview.Image = BGIMage
+
+            Catch
+            End Try
+
+        Else
+
+            Try
+
+                BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
+                FrmSettings.PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
+
+            Catch
+            End Try
+
+        End If
 
         ApplyingTheme = False
 
@@ -24350,4 +24646,7 @@ SkipNew:
 
         BTNPlaylist.Enabled = False
     End Sub
+
+   
+  
 End Class

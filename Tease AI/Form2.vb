@@ -47,9 +47,6 @@ Public Class FrmSettings
 
     Dim TagImageFolder As String
 
-    Private pbTop As Integer = 0
-    Private pbRight As Integer = 0
-
     ' Protected Overrides ReadOnly Property CreateParams() As CreateParams
     '    Get
     ' Dim param As CreateParams = MyBase.CreateParams
@@ -13306,42 +13303,7 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub Button32_Click(sender As System.Object, e As System.EventArgs) Handles Button32.Click
-        SaveFileDialog1.Title = "Select a location to save current Theme"
-        SaveFileDialog1.InitialDirectory = Application.StartupPath & "\System\"
 
-
-        SaveFileDialog1.FileName = "Theme.txt"
-
-        If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
-            Dim SettingsPath As String = SaveFileDialog1.FileName
-            Dim SettingsList As New List(Of String)
-            SettingsList.Clear()
-
-            SettingsList.Add("Background Image: " & My.Settings.BackgroundImage)
-            SettingsList.Add("Stretch Image: " & CBStretchBack.Checked)
-
-            SettingsList.Add("Background Color: " & My.Settings.BackgroundColor.ToArgb.ToString)
-            SettingsList.Add("Button Color: " & My.Settings.ButtonColor.ToArgb.ToString)
-            SettingsList.Add("Text Color: " & My.Settings.TextColor.ToArgb.ToString)
-            SettingsList.Add("Chat Window Color: " & My.Settings.ChatWindowColor.ToArgb.ToString)
-            SettingsList.Add("Chat Text Color: " & My.Settings.ChatTextColor.ToArgb.ToString)
-            SettingsList.Add("Date Text Color: " & My.Settings.DateTextColor.ToArgb.ToString)
-            SettingsList.Add("Date Back Color: " & My.Settings.DateBackColor.ToArgb.ToString)
-            SettingsList.Add("Transparent Date: " & My.Settings.DateTextColor.ToArgb.ToString)
-
-
-            Dim SettingsString As String = ""
-
-            For i As Integer = 0 To SettingsList.Count - 1
-                SettingsString = SettingsString & SettingsList(i)
-                If i <> SettingsList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-            Next
-
-            My.Computer.FileSystem.WriteAllText(SettingsPath, SettingsString, False)
-        End If
-
-    End Sub
 
     Private Sub Button31_Click(sender As System.Object, e As System.EventArgs) Handles Button31.Click
         OpenScriptDialog.Title = "Select a Theme settings file"
@@ -13380,6 +13342,8 @@ NextURL:
                 My.Settings.DateTextColor = Color.FromArgb(SettingsList(7).Replace("Date Text Color: ", ""))
                 My.Settings.DateBackColor = Color.FromArgb(SettingsList(8).Replace("Date Back Color: ", ""))
                 CBTransparentTime.Checked = SettingsList(9).Replace("Transparent Date: ", "")
+
+                CBFlipBack.Checked = SettingsList(10).Replace("FlipImage: ", "")
 
                 My.Settings.Save()
 
@@ -13438,45 +13402,7 @@ NextURL:
 
     End Sub
 
-    Private Sub Button33_Click(sender As System.Object, e As System.EventArgs) Handles Button33.Click
-        pbTop -= 1
-        Dim bmp As New Bitmap(Form1.ClientSize.Width, Form1.ClientSize.Height)
-        Using g As Graphics = Graphics.FromImage(bmp)
-            'g.Clear(PictureBox1.BackColor)
-            ' g.DrawImage(Image.FromFile(My.Settings.BackgroundImage), pbRight, pbTop, bmp.Width, bmp.Height)
-        End Using
-        Form1.BackgroundImage = bmp
-    End Sub
-
-    Private Sub Button34_Click(sender As System.Object, e As System.EventArgs) Handles Button34.Click
-        pbRight -= 1
-        Dim bmp As New Bitmap(Form1.ClientSize.Width, Form1.ClientSize.Height)
-        Using g As Graphics = Graphics.FromImage(bmp)
-            'g.Clear(PictureBox1.BackColor)
-            g.DrawImage(Image.FromFile(My.Settings.BackgroundImage), pbRight, pbTop, bmp.Width, bmp.Height)
-        End Using
-        Form1.BackgroundImage = bmp
-    End Sub
-
-    Private Sub Button35_Click_1(sender As System.Object, e As System.EventArgs) Handles Button35.Click
-        pbRight += 1
-        Dim bmp As New Bitmap(Form1.ClientSize.Width, Form1.ClientSize.Height)
-        Using g As Graphics = Graphics.FromImage(bmp)
-            'g.Clear(PictureBox1.BackColor)
-            g.DrawImage(Image.FromFile(My.Settings.BackgroundImage), pbRight, pbTop, bmp.Width, bmp.Height)
-        End Using
-        Form1.BackgroundImage = bmp
-    End Sub
-
-    Private Sub Button36_Click_1(sender As System.Object, e As System.EventArgs) Handles Button36.Click
-        pbTop += 1
-        Dim bmp As New Bitmap(Form1.ClientSize.Width, Form1.ClientSize.Height)
-        Using g As Graphics = Graphics.FromImage(bmp)
-            'g.Clear(PictureBox1.BackColor)
-            g.DrawImage(Image.FromFile(My.Settings.BackgroundImage), pbRight, pbTop, bmp.Width, bmp.Height)
-        End Using
-        Form1.BackgroundImage = bmp
-    End Sub
+   
 
   
 
@@ -13484,4 +13410,47 @@ NextURL:
 
     
 
+    Private Sub CheckBox1_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBFlipBack.CheckedChanged
+
+        If Form1.FormLoading = False And Form1.ApplyingTheme = False Then Form1.ApplyThemeColor()
+
+    End Sub
+
+    Private Sub Button32_Click(sender As System.Object, e As System.EventArgs) Handles Button32.Click
+        SaveFileDialog1.Title = "Select a location to save current Theme"
+        SaveFileDialog1.InitialDirectory = Application.StartupPath & "\System\"
+
+
+        SaveFileDialog1.FileName = "Theme.txt"
+
+        If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
+            Dim SettingsPath As String = SaveFileDialog1.FileName
+            Dim SettingsList As New List(Of String)
+            SettingsList.Clear()
+
+            SettingsList.Add("Background Image: " & My.Settings.BackgroundImage)
+            SettingsList.Add("Stretch Image: " & CBStretchBack.Checked)
+
+            SettingsList.Add("Background Color: " & My.Settings.BackgroundColor.ToArgb.ToString)
+            SettingsList.Add("Button Color: " & My.Settings.ButtonColor.ToArgb.ToString)
+            SettingsList.Add("Text Color: " & My.Settings.TextColor.ToArgb.ToString)
+            SettingsList.Add("Chat Window Color: " & My.Settings.ChatWindowColor.ToArgb.ToString)
+            SettingsList.Add("Chat Text Color: " & My.Settings.ChatTextColor.ToArgb.ToString)
+            SettingsList.Add("Date Text Color: " & My.Settings.DateTextColor.ToArgb.ToString)
+            SettingsList.Add("Date Back Color: " & My.Settings.DateBackColor.ToArgb.ToString)
+            SettingsList.Add("Transparent Date: " & My.Settings.DateTextColor.ToArgb.ToString)
+
+            SettingsList.Add("FlipImage: " & CBFlipBack.Checked)
+
+            Dim SettingsString As String = ""
+
+            For i As Integer = 0 To SettingsList.Count - 1
+                SettingsString = SettingsString & SettingsList(i)
+                If i <> SettingsList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+            Next
+
+            My.Computer.FileSystem.WriteAllText(SettingsPath, SettingsString, False)
+        End If
+
+    End Sub
 End Class

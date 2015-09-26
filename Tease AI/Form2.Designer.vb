@@ -718,6 +718,43 @@ Partial Class FrmSettings
         Me.WishlistCostGold = New System.Windows.Forms.PictureBox()
         Me.LBLWishListName = New System.Windows.Forms.Label()
         Me.WishlistPreview = New System.Windows.Forms.PictureBox()
+        Me.TabPage26 = New System.Windows.Forms.TabPage()
+        Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.Button31 = New System.Windows.Forms.Button()
+        Me.PictureBox10 = New System.Windows.Forms.PictureBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.CBTransparentTime = New System.Windows.Forms.CheckBox()
+        Me.LBLDateTimeColor2 = New System.Windows.Forms.Label()
+        Me.Label137 = New System.Windows.Forms.Label()
+        Me.Label138 = New System.Windows.Forms.Label()
+        Me.Button28 = New System.Windows.Forms.Button()
+        Me.Button30 = New System.Windows.Forms.Button()
+        Me.LBLDateBackColor2 = New System.Windows.Forms.Label()
+        Me.LBLTextColor = New System.Windows.Forms.Label()
+        Me.LBLChatWindowColor2 = New System.Windows.Forms.Label()
+        Me.Button20 = New System.Windows.Forms.Button()
+        Me.LBLTextColor2 = New System.Windows.Forms.Label()
+        Me.LBLChatTextColor = New System.Windows.Forms.Label()
+        Me.LBLBackColor2 = New System.Windows.Forms.Label()
+        Me.LBLButtonColor = New System.Windows.Forms.Label()
+        Me.LBLChatWindowColor = New System.Windows.Forms.Label()
+        Me.LBLBackColor = New System.Windows.Forms.Label()
+        Me.Button21 = New System.Windows.Forms.Button()
+        Me.Button23 = New System.Windows.Forms.Button()
+        Me.LBLChatTextColor2 = New System.Windows.Forms.Label()
+        Me.Button25 = New System.Windows.Forms.Button()
+        Me.Button27 = New System.Windows.Forms.Button()
+        Me.LBLButtonColor2 = New System.Windows.Forms.Label()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.Label144 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.CBFlipBack = New System.Windows.Forms.CheckBox()
+        Me.PBBackgroundPreview = New System.Windows.Forms.PictureBox()
+        Me.Button17 = New System.Windows.Forms.Button()
+        Me.CBStretchBack = New System.Windows.Forms.CheckBox()
+        Me.Button18 = New System.Windows.Forms.Button()
+        Me.Label164 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.GroupBox10 = New System.Windows.Forms.GroupBox()
@@ -915,50 +952,7 @@ Partial Class FrmSettings
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
-        Me.TabPage26 = New System.Windows.Forms.TabPage()
-        Me.Panel12 = New System.Windows.Forms.Panel()
-        Me.PictureBox10 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
-        Me.Label144 = New System.Windows.Forms.Label()
-        Me.Label164 = New System.Windows.Forms.Label()
-        Me.PBBackgroundPreview = New System.Windows.Forms.PictureBox()
-        Me.Button17 = New System.Windows.Forms.Button()
-        Me.CBStretchBack = New System.Windows.Forms.CheckBox()
-        Me.Button18 = New System.Windows.Forms.Button()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.LBLTextColor = New System.Windows.Forms.Label()
-        Me.LBLChatWindowColor2 = New System.Windows.Forms.Label()
-        Me.Button20 = New System.Windows.Forms.Button()
-        Me.LBLTextColor2 = New System.Windows.Forms.Label()
-        Me.LBLChatTextColor = New System.Windows.Forms.Label()
-        Me.LBLBackColor2 = New System.Windows.Forms.Label()
-        Me.LBLButtonColor = New System.Windows.Forms.Label()
-        Me.LBLChatWindowColor = New System.Windows.Forms.Label()
-        Me.LBLBackColor = New System.Windows.Forms.Label()
-        Me.Button21 = New System.Windows.Forms.Button()
-        Me.Button23 = New System.Windows.Forms.Button()
-        Me.LBLChatTextColor2 = New System.Windows.Forms.Label()
-        Me.Button25 = New System.Windows.Forms.Button()
-        Me.Button27 = New System.Windows.Forms.Button()
-        Me.LBLButtonColor2 = New System.Windows.Forms.Label()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
-        Me.LBLDateTimeColor2 = New System.Windows.Forms.Label()
-        Me.Label137 = New System.Windows.Forms.Label()
-        Me.Label138 = New System.Windows.Forms.Label()
-        Me.Button28 = New System.Windows.Forms.Button()
-        Me.Button30 = New System.Windows.Forms.Button()
-        Me.LBLDateBackColor2 = New System.Windows.Forms.Label()
-        Me.CBTransparentTime = New System.Windows.Forms.CheckBox()
-        Me.Button31 = New System.Windows.Forms.Button()
         Me.Button32 = New System.Windows.Forms.Button()
-        Me.Label140 = New System.Windows.Forms.Label()
-        Me.Label141 = New System.Windows.Forms.Label()
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.Button33 = New System.Windows.Forms.Button()
-        Me.Button34 = New System.Windows.Forms.Button()
-        Me.Button35 = New System.Windows.Forms.Button()
-        Me.Button36 = New System.Windows.Forms.Button()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -1120,6 +1114,14 @@ Partial Class FrmSettings
         CType(Me.WishlistCostSilver,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.WishlistCostGold,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.WishlistPreview,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage26.SuspendLayout
+        Me.Panel12.SuspendLayout
+        Me.GroupBox9.SuspendLayout
+        CType(Me.PictureBox10,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox5.SuspendLayout
+        Me.GroupBox11.SuspendLayout
+        Me.GroupBox1.SuspendLayout
+        CType(Me.PBBackgroundPreview,System.ComponentModel.ISupportInitialize).BeginInit
         Me.TabPage4.SuspendLayout
         Me.Panel6.SuspendLayout
         Me.GroupBox10.SuspendLayout
@@ -1175,15 +1177,6 @@ Partial Class FrmSettings
         Me.TabPage5.SuspendLayout
         Me.Panel5.SuspendLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TabPage26.SuspendLayout
-        Me.Panel12.SuspendLayout
-        CType(Me.PictureBox10,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox11.SuspendLayout
-        CType(Me.PBBackgroundPreview,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox1.SuspendLayout
-        Me.GroupBox5.SuspendLayout
-        Me.GroupBox9.SuspendLayout
-        Me.GroupBox13.SuspendLayout
         Me.SuspendLayout
         '
         'SettingsPanel
@@ -9761,6 +9754,420 @@ Partial Class FrmSettings
         Me.WishlistPreview.TabIndex = 101
         Me.WishlistPreview.TabStop = false
         '
+        'TabPage26
+        '
+        Me.TabPage26.Controls.Add(Me.Panel12)
+        Me.TabPage26.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage26.Name = "TabPage26"
+        Me.TabPage26.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage26.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage26.TabIndex = 19
+        Me.TabPage26.Text = "Themes"
+        Me.TabPage26.UseVisualStyleBackColor = true
+        '
+        'Panel12
+        '
+        Me.Panel12.BackColor = System.Drawing.Color.LightGray
+        Me.Panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel12.Controls.Add(Me.GroupBox9)
+        Me.Panel12.Controls.Add(Me.PictureBox10)
+        Me.Panel12.Controls.Add(Me.GroupBox5)
+        Me.Panel12.Controls.Add(Me.GroupBox11)
+        Me.Panel12.Controls.Add(Me.GroupBox1)
+        Me.Panel12.Controls.Add(Me.Label164)
+        Me.Panel12.Location = New System.Drawing.Point(6, 6)
+        Me.Panel12.Name = "Panel12"
+        Me.Panel12.Size = New System.Drawing.Size(708, 437)
+        Me.Panel12.TabIndex = 93
+        '
+        'GroupBox9
+        '
+        Me.GroupBox9.Controls.Add(Me.Button32)
+        Me.GroupBox9.Controls.Add(Me.Button31)
+        Me.GroupBox9.Location = New System.Drawing.Point(351, 231)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(348, 94)
+        Me.GroupBox9.TabIndex = 152
+        Me.GroupBox9.TabStop = false
+        Me.GroupBox9.Text = "System"
+        '
+        'Button31
+        '
+        Me.Button31.BackColor = System.Drawing.Color.Transparent
+        Me.Button31.Image = CType(resources.GetObject("Button31.Image"),System.Drawing.Image)
+        Me.Button31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button31.Location = New System.Drawing.Point(17, 24)
+        Me.Button31.Name = "Button31"
+        Me.Button31.Size = New System.Drawing.Size(135, 55)
+        Me.Button31.TabIndex = 54
+        Me.Button31.Text = "  Open Theme"
+        Me.Button31.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Button31.UseVisualStyleBackColor = False
+        '
+        'PictureBox10
+        '
+        Me.PictureBox10.BackColor = System.Drawing.Color.LightGray
+        Me.PictureBox10.Image = CType(resources.GetObject("PictureBox10.Image"), System.Drawing.Image)
+        Me.PictureBox10.Location = New System.Drawing.Point(9, 6)
+        Me.PictureBox10.Name = "PictureBox10"
+        Me.PictureBox10.Size = New System.Drawing.Size(160, 19)
+        Me.PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox10.TabIndex = 151
+        Me.PictureBox10.TabStop = False
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.CBTransparentTime)
+        Me.GroupBox5.Controls.Add(Me.LBLDateTimeColor2)
+        Me.GroupBox5.Controls.Add(Me.Label137)
+        Me.GroupBox5.Controls.Add(Me.Label138)
+        Me.GroupBox5.Controls.Add(Me.Button28)
+        Me.GroupBox5.Controls.Add(Me.Button30)
+        Me.GroupBox5.Controls.Add(Me.LBLDateBackColor2)
+        Me.GroupBox5.Controls.Add(Me.LBLTextColor)
+        Me.GroupBox5.Controls.Add(Me.LBLChatWindowColor2)
+        Me.GroupBox5.Controls.Add(Me.Button20)
+        Me.GroupBox5.Controls.Add(Me.LBLTextColor2)
+        Me.GroupBox5.Controls.Add(Me.LBLChatTextColor)
+        Me.GroupBox5.Controls.Add(Me.LBLBackColor2)
+        Me.GroupBox5.Controls.Add(Me.LBLButtonColor)
+        Me.GroupBox5.Controls.Add(Me.LBLChatWindowColor)
+        Me.GroupBox5.Controls.Add(Me.LBLBackColor)
+        Me.GroupBox5.Controls.Add(Me.Button21)
+        Me.GroupBox5.Controls.Add(Me.Button23)
+        Me.GroupBox5.Controls.Add(Me.LBLChatTextColor2)
+        Me.GroupBox5.Controls.Add(Me.Button25)
+        Me.GroupBox5.Controls.Add(Me.Button27)
+        Me.GroupBox5.Controls.Add(Me.LBLButtonColor2)
+        Me.GroupBox5.Location = New System.Drawing.Point(9, 31)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(336, 294)
+        Me.GroupBox5.TabIndex = 58
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "UI Colors"
+        '
+        'CBTransparentTime
+        '
+        Me.CBTransparentTime.AutoSize = True
+        Me.CBTransparentTime.Location = New System.Drawing.Point(7, 262)
+        Me.CBTransparentTime.Name = "CBTransparentTime"
+        Me.CBTransparentTime.Size = New System.Drawing.Size(179, 17)
+        Me.CBTransparentTime.TabIndex = 23
+        Me.CBTransparentTime.Text = "Transparent Date/Time Window"
+        Me.CBTransparentTime.UseVisualStyleBackColor = True
+        '
+        'LBLDateTimeColor2
+        '
+        Me.LBLDateTimeColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLDateTimeColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLDateTimeColor2.Location = New System.Drawing.Point(187, 190)
+        Me.LBLDateTimeColor2.Name = "LBLDateTimeColor2"
+        Me.LBLDateTimeColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLDateTimeColor2.TabIndex = 19
+        '
+        'Label137
+        '
+        Me.Label137.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label137.Location = New System.Drawing.Point(6, 227)
+        Me.Label137.Name = "Label137"
+        Me.Label137.Size = New System.Drawing.Size(175, 20)
+        Me.Label137.TabIndex = 20
+        Me.Label137.Text = "Date/Time Window Color"
+        Me.Label137.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label138
+        '
+        Me.Label138.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Label138.Location = New System.Drawing.Point(6, 193)
+        Me.Label138.Name = "Label138"
+        Me.Label138.Size = New System.Drawing.Size(175, 20)
+        Me.Label138.TabIndex = 17
+        Me.Label138.Text = "Date/Time Text Color"
+        Me.Label138.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Button28
+        '
+        Me.Button28.BackColor = System.Drawing.Color.Transparent
+        Me.Button28.BackgroundImage = CType(resources.GetObject("Button28.BackgroundImage"), System.Drawing.Image)
+        Me.Button28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button28.Location = New System.Drawing.Point(296, 221)
+        Me.Button28.Name = "Button28"
+        Me.Button28.Size = New System.Drawing.Size(32, 32)
+        Me.Button28.TabIndex = 21
+        Me.Button28.UseVisualStyleBackColor = False
+        '
+        'Button30
+        '
+        Me.Button30.BackColor = System.Drawing.Color.Transparent
+        Me.Button30.BackgroundImage = CType(resources.GetObject("Button30.BackgroundImage"), System.Drawing.Image)
+        Me.Button30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button30.Location = New System.Drawing.Point(296, 187)
+        Me.Button30.Name = "Button30"
+        Me.Button30.Size = New System.Drawing.Size(32, 32)
+        Me.Button30.TabIndex = 18
+        Me.Button30.UseVisualStyleBackColor = False
+        '
+        'LBLDateBackColor2
+        '
+        Me.LBLDateBackColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLDateBackColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLDateBackColor2.Location = New System.Drawing.Point(187, 224)
+        Me.LBLDateBackColor2.Name = "LBLDateBackColor2"
+        Me.LBLDateBackColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLDateBackColor2.TabIndex = 22
+        '
+        'LBLTextColor
+        '
+        Me.LBLTextColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLTextColor.Location = New System.Drawing.Point(6, 91)
+        Me.LBLTextColor.Name = "LBLTextColor"
+        Me.LBLTextColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLTextColor.TabIndex = 7
+        Me.LBLTextColor.Text = "Text Color"
+        Me.LBLTextColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLChatWindowColor2
+        '
+        Me.LBLChatWindowColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLChatWindowColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChatWindowColor2.Location = New System.Drawing.Point(187, 122)
+        Me.LBLChatWindowColor2.Name = "LBLChatWindowColor2"
+        Me.LBLChatWindowColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLChatWindowColor2.TabIndex = 12
+        '
+        'Button20
+        '
+        Me.Button20.BackColor = System.Drawing.Color.Transparent
+        Me.Button20.BackgroundImage = CType(resources.GetObject("Button20.BackgroundImage"), System.Drawing.Image)
+        Me.Button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button20.Location = New System.Drawing.Point(296, 85)
+        Me.Button20.Name = "Button20"
+        Me.Button20.Size = New System.Drawing.Size(32, 32)
+        Me.Button20.TabIndex = 8
+        Me.Button20.UseVisualStyleBackColor = False
+        '
+        'LBLTextColor2
+        '
+        Me.LBLTextColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLTextColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLTextColor2.Location = New System.Drawing.Point(187, 88)
+        Me.LBLTextColor2.Name = "LBLTextColor2"
+        Me.LBLTextColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLTextColor2.TabIndex = 9
+        '
+        'LBLChatTextColor
+        '
+        Me.LBLChatTextColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLChatTextColor.Location = New System.Drawing.Point(6, 159)
+        Me.LBLChatTextColor.Name = "LBLChatTextColor"
+        Me.LBLChatTextColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLChatTextColor.TabIndex = 14
+        Me.LBLChatTextColor.Text = "Chat Text Color"
+        Me.LBLChatTextColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLBackColor2
+        '
+        Me.LBLBackColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLBackColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLBackColor2.Location = New System.Drawing.Point(187, 20)
+        Me.LBLBackColor2.Name = "LBLBackColor2"
+        Me.LBLBackColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLBackColor2.TabIndex = 3
+        '
+        'LBLButtonColor
+        '
+        Me.LBLButtonColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLButtonColor.Location = New System.Drawing.Point(6, 57)
+        Me.LBLButtonColor.Name = "LBLButtonColor"
+        Me.LBLButtonColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLButtonColor.TabIndex = 4
+        Me.LBLButtonColor.Text = "Button Color"
+        Me.LBLButtonColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLChatWindowColor
+        '
+        Me.LBLChatWindowColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLChatWindowColor.Location = New System.Drawing.Point(6, 125)
+        Me.LBLChatWindowColor.Name = "LBLChatWindowColor"
+        Me.LBLChatWindowColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLChatWindowColor.TabIndex = 10
+        Me.LBLChatWindowColor.Text = "Chat Window Color"
+        Me.LBLChatWindowColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'LBLBackColor
+        '
+        Me.LBLBackColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.LBLBackColor.Location = New System.Drawing.Point(6, 23)
+        Me.LBLBackColor.Name = "LBLBackColor"
+        Me.LBLBackColor.Size = New System.Drawing.Size(175, 20)
+        Me.LBLBackColor.TabIndex = 0
+        Me.LBLBackColor.Text = "Background Color"
+        Me.LBLBackColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Button21
+        '
+        Me.Button21.BackColor = System.Drawing.Color.Transparent
+        Me.Button21.BackgroundImage = CType(resources.GetObject("Button21.BackgroundImage"), System.Drawing.Image)
+        Me.Button21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button21.Location = New System.Drawing.Point(296, 153)
+        Me.Button21.Name = "Button21"
+        Me.Button21.Size = New System.Drawing.Size(32, 32)
+        Me.Button21.TabIndex = 15
+        Me.Button21.UseVisualStyleBackColor = False
+        '
+        'Button23
+        '
+        Me.Button23.BackColor = System.Drawing.Color.Transparent
+        Me.Button23.BackgroundImage = CType(resources.GetObject("Button23.BackgroundImage"), System.Drawing.Image)
+        Me.Button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button23.Location = New System.Drawing.Point(296, 119)
+        Me.Button23.Name = "Button23"
+        Me.Button23.Size = New System.Drawing.Size(32, 32)
+        Me.Button23.TabIndex = 11
+        Me.Button23.UseVisualStyleBackColor = False
+        '
+        'LBLChatTextColor2
+        '
+        Me.LBLChatTextColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLChatTextColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLChatTextColor2.Location = New System.Drawing.Point(187, 156)
+        Me.LBLChatTextColor2.Name = "LBLChatTextColor2"
+        Me.LBLChatTextColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLChatTextColor2.TabIndex = 16
+        '
+        'Button25
+        '
+        Me.Button25.BackColor = System.Drawing.Color.Transparent
+        Me.Button25.BackgroundImage = CType(resources.GetObject("Button25.BackgroundImage"), System.Drawing.Image)
+        Me.Button25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button25.Location = New System.Drawing.Point(296, 17)
+        Me.Button25.Name = "Button25"
+        Me.Button25.Size = New System.Drawing.Size(32, 32)
+        Me.Button25.TabIndex = 2
+        Me.Button25.UseVisualStyleBackColor = False
+        '
+        'Button27
+        '
+        Me.Button27.BackColor = System.Drawing.Color.Transparent
+        Me.Button27.BackgroundImage = CType(resources.GetObject("Button27.BackgroundImage"), System.Drawing.Image)
+        Me.Button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button27.Location = New System.Drawing.Point(296, 51)
+        Me.Button27.Name = "Button27"
+        Me.Button27.Size = New System.Drawing.Size(32, 32)
+        Me.Button27.TabIndex = 5
+        Me.Button27.UseVisualStyleBackColor = False
+        '
+        'LBLButtonColor2
+        '
+        Me.LBLButtonColor2.BackColor = System.Drawing.Color.SteelBlue
+        Me.LBLButtonColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLButtonColor2.Location = New System.Drawing.Point(187, 54)
+        Me.LBLButtonColor2.Name = "LBLButtonColor2"
+        Me.LBLButtonColor2.Size = New System.Drawing.Size(103, 28)
+        Me.LBLButtonColor2.TabIndex = 6
+        '
+        'GroupBox11
+        '
+        Me.GroupBox11.BackColor = System.Drawing.Color.LightGray
+        Me.GroupBox11.Controls.Add(Me.Label144)
+        Me.GroupBox11.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox11.Location = New System.Drawing.Point(7, 331)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(692, 92)
+        Me.GroupBox11.TabIndex = 65
+        Me.GroupBox11.TabStop = False
+        Me.GroupBox11.Text = "Description"
+        '
+        'Label144
+        '
+        Me.Label144.BackColor = System.Drawing.Color.Transparent
+        Me.Label144.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label144.ForeColor = System.Drawing.Color.Black
+        Me.Label144.Location = New System.Drawing.Point(6, 16)
+        Me.Label144.Name = "Label144"
+        Me.Label144.Size = New System.Drawing.Size(680, 73)
+        Me.Label144.TabIndex = 62
+        Me.Label144.Text = "Use this page to select the videos you would like the program to use and set thei" & _
+    "r paths." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The Domme Genre paths are for videos that feature the model you are " & _
+    "using as your domme."
+        Me.Label144.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.CBFlipBack)
+        Me.GroupBox1.Controls.Add(Me.PBBackgroundPreview)
+        Me.GroupBox1.Controls.Add(Me.Button17)
+        Me.GroupBox1.Controls.Add(Me.CBStretchBack)
+        Me.GroupBox1.Controls.Add(Me.Button18)
+        Me.GroupBox1.Location = New System.Drawing.Point(351, 30)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(348, 195)
+        Me.GroupBox1.TabIndex = 57
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Background"
+        '
+        'CBFlipBack
+        '
+        Me.CBFlipBack.Location = New System.Drawing.Point(6, 153)
+        Me.CBFlipBack.Name = "CBFlipBack"
+        Me.CBFlipBack.Size = New System.Drawing.Size(86, 41)
+        Me.CBFlipBack.TabIndex = 4
+        Me.CBFlipBack.Text = "Flip Background"
+        Me.CBFlipBack.UseVisualStyleBackColor = True
+        '
+        'PBBackgroundPreview
+        '
+        Me.PBBackgroundPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PBBackgroundPreview.Location = New System.Drawing.Point(6, 19)
+        Me.PBBackgroundPreview.Name = "PBBackgroundPreview"
+        Me.PBBackgroundPreview.Size = New System.Drawing.Size(202, 133)
+        Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PBBackgroundPreview.TabIndex = 0
+        Me.PBBackgroundPreview.TabStop = False
+        '
+        'Button17
+        '
+        Me.Button17.BackColor = System.Drawing.Color.Transparent
+        Me.Button17.BackgroundImage = CType(resources.GetObject("Button17.BackgroundImage"), System.Drawing.Image)
+        Me.Button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button17.Location = New System.Drawing.Point(228, 36)
+        Me.Button17.Name = "Button17"
+        Me.Button17.Size = New System.Drawing.Size(103, 93)
+        Me.Button17.TabIndex = 1
+        Me.Button17.UseVisualStyleBackColor = False
+        '
+        'CBStretchBack
+        '
+        Me.CBStretchBack.Checked = True
+        Me.CBStretchBack.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBStretchBack.Location = New System.Drawing.Point(122, 153)
+        Me.CBStretchBack.Name = "CBStretchBack"
+        Me.CBStretchBack.Size = New System.Drawing.Size(86, 41)
+        Me.CBStretchBack.TabIndex = 2
+        Me.CBStretchBack.Text = "Stretch Background"
+        Me.CBStretchBack.UseVisualStyleBackColor = True
+        '
+        'Button18
+        '
+        Me.Button18.Location = New System.Drawing.Point(228, 155)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(103, 31)
+        Me.Button18.TabIndex = 3
+        Me.Button18.Text = "Clear"
+        Me.Button18.UseVisualStyleBackColor = True
+        '
+        'Label164
+        '
+        Me.Label164.BackColor = System.Drawing.Color.Transparent
+        Me.Label164.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label164.ForeColor = System.Drawing.Color.Black
+        Me.Label164.Location = New System.Drawing.Point(7, 6)
+        Me.Label164.Name = "Label164"
+        Me.Label164.Size = New System.Drawing.Size(692, 21)
+        Me.Label164.TabIndex = 49
+        Me.Label164.Text = "Theme Settings"
+        Me.Label164.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'TabPage4
         '
         Me.TabPage4.BackColor = System.Drawing.Color.Silver
@@ -9798,13 +10205,13 @@ Partial Class FrmSettings
         Me.GroupBox10.Name = "GroupBox10"
         Me.GroupBox10.Size = New System.Drawing.Size(291, 54)
         Me.GroupBox10.TabIndex = 170
-        Me.GroupBox10.TabStop = false
+        Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "Tease Slideshow"
         '
         'Label112
         '
         Me.Label112.BackColor = System.Drawing.Color.Transparent
-        Me.Label112.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label112.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label112.ForeColor = System.Drawing.Color.Black
         Me.Label112.Location = New System.Drawing.Point(233, 21)
         Me.Label112.Name = "Label112"
@@ -9825,7 +10232,7 @@ Partial Class FrmSettings
         'Label6
         '
         Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.Color.Black
         Me.Label6.Location = New System.Drawing.Point(9, 21)
         Me.Label6.Name = "Label6"
@@ -9860,13 +10267,13 @@ Partial Class FrmSettings
         Me.GroupBox57.Name = "GroupBox57"
         Me.GroupBox57.Size = New System.Drawing.Size(223, 250)
         Me.GroupBox57.TabIndex = 169
-        Me.GroupBox57.TabStop = false
+        Me.GroupBox57.TabStop = False
         Me.GroupBox57.Text = "Tease"
         '
         'LBLVtf
         '
         Me.LBLVtf.BackColor = System.Drawing.Color.Transparent
-        Me.LBLVtf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLVtf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLVtf.ForeColor = System.Drawing.Color.Black
         Me.LBLVtf.Location = New System.Drawing.Point(128, 224)
         Me.LBLVtf.Name = "LBLVtf"
@@ -9878,7 +10285,7 @@ Partial Class FrmSettings
         'LBLStf
         '
         Me.LBLStf.BackColor = System.Drawing.Color.Transparent
-        Me.LBLStf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLStf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLStf.ForeColor = System.Drawing.Color.Black
         Me.LBLStf.Location = New System.Drawing.Point(130, 183)
         Me.LBLStf.Name = "LBLStf"
@@ -9889,7 +10296,7 @@ Partial Class FrmSettings
         '
         'SliderSTF
         '
-        Me.SliderSTF.AutoSize = false
+        Me.SliderSTF.AutoSize = False
         Me.SliderSTF.LargeChange = 1
         Me.SliderSTF.Location = New System.Drawing.Point(130, 162)
         Me.SliderSTF.Maximum = 5
@@ -9901,7 +10308,7 @@ Partial Class FrmSettings
         '
         'TauntSlider
         '
-        Me.TauntSlider.AutoSize = false
+        Me.TauntSlider.AutoSize = False
         Me.TauntSlider.LargeChange = 1
         Me.TauntSlider.Location = New System.Drawing.Point(130, 203)
         Me.TauntSlider.Maximum = 9
@@ -9914,7 +10321,7 @@ Partial Class FrmSettings
         'Label106
         '
         Me.Label106.BackColor = System.Drawing.Color.Transparent
-        Me.Label106.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label106.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label106.ForeColor = System.Drawing.Color.Black
         Me.Label106.Location = New System.Drawing.Point(6, 206)
         Me.Label106.Name = "Label106"
@@ -9925,30 +10332,30 @@ Partial Class FrmSettings
         '
         'CBTauntCycleDD
         '
-        Me.CBTauntCycleDD.AutoSize = true
+        Me.CBTauntCycleDD.AutoSize = True
         Me.CBTauntCycleDD.ForeColor = System.Drawing.Color.Black
         Me.CBTauntCycleDD.Location = New System.Drawing.Point(9, 140)
         Me.CBTauntCycleDD.Name = "CBTauntCycleDD"
         Me.CBTauntCycleDD.Size = New System.Drawing.Size(176, 17)
         Me.CBTauntCycleDD.TabIndex = 185
         Me.CBTauntCycleDD.Text = "Domme Decide Based on Level"
-        Me.CBTauntCycleDD.UseVisualStyleBackColor = true
+        Me.CBTauntCycleDD.UseVisualStyleBackColor = True
         '
         'CBTeaseLengthDD
         '
-        Me.CBTeaseLengthDD.AutoSize = true
+        Me.CBTeaseLengthDD.AutoSize = True
         Me.CBTeaseLengthDD.ForeColor = System.Drawing.Color.Black
         Me.CBTeaseLengthDD.Location = New System.Drawing.Point(9, 69)
         Me.CBTeaseLengthDD.Name = "CBTeaseLengthDD"
         Me.CBTeaseLengthDD.Size = New System.Drawing.Size(176, 17)
         Me.CBTeaseLengthDD.TabIndex = 184
         Me.CBTeaseLengthDD.Text = "Domme Decide Based on Level"
-        Me.CBTeaseLengthDD.UseVisualStyleBackColor = true
+        Me.CBTeaseLengthDD.UseVisualStyleBackColor = True
         '
         'Label103
         '
         Me.Label103.BackColor = System.Drawing.Color.Transparent
-        Me.Label103.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label103.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label103.ForeColor = System.Drawing.Color.Black
         Me.Label103.Location = New System.Drawing.Point(175, 117)
         Me.Label103.Name = "Label103"
@@ -9970,7 +10377,7 @@ Partial Class FrmSettings
         'Label105
         '
         Me.Label105.BackColor = System.Drawing.Color.Transparent
-        Me.Label105.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label105.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label105.ForeColor = System.Drawing.Color.Black
         Me.Label105.Location = New System.Drawing.Point(6, 117)
         Me.Label105.Name = "Label105"
@@ -9982,7 +10389,7 @@ Partial Class FrmSettings
         'Label101
         '
         Me.Label101.BackColor = System.Drawing.Color.Transparent
-        Me.Label101.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label101.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label101.ForeColor = System.Drawing.Color.Black
         Me.Label101.Location = New System.Drawing.Point(175, 93)
         Me.Label101.Name = "Label101"
@@ -10004,7 +10411,7 @@ Partial Class FrmSettings
         'Label102
         '
         Me.Label102.BackColor = System.Drawing.Color.Transparent
-        Me.Label102.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label102.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label102.ForeColor = System.Drawing.Color.Black
         Me.Label102.Location = New System.Drawing.Point(6, 93)
         Me.Label102.Name = "Label102"
@@ -10016,7 +10423,7 @@ Partial Class FrmSettings
         'Label97
         '
         Me.Label97.BackColor = System.Drawing.Color.Transparent
-        Me.Label97.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label97.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label97.ForeColor = System.Drawing.Color.Black
         Me.Label97.Location = New System.Drawing.Point(175, 46)
         Me.Label97.Name = "Label97"
@@ -10038,7 +10445,7 @@ Partial Class FrmSettings
         'Label99
         '
         Me.Label99.BackColor = System.Drawing.Color.Transparent
-        Me.Label99.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label99.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label99.ForeColor = System.Drawing.Color.Black
         Me.Label99.Location = New System.Drawing.Point(6, 46)
         Me.Label99.Name = "Label99"
@@ -10050,7 +10457,7 @@ Partial Class FrmSettings
         'Label96
         '
         Me.Label96.BackColor = System.Drawing.Color.Transparent
-        Me.Label96.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label96.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label96.ForeColor = System.Drawing.Color.Black
         Me.Label96.Location = New System.Drawing.Point(175, 20)
         Me.Label96.Name = "Label96"
@@ -10072,7 +10479,7 @@ Partial Class FrmSettings
         'Label95
         '
         Me.Label95.BackColor = System.Drawing.Color.Transparent
-        Me.Label95.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label95.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label95.ForeColor = System.Drawing.Color.Black
         Me.Label95.Location = New System.Drawing.Point(6, 20)
         Me.Label95.Name = "Label95"
@@ -10084,7 +10491,7 @@ Partial Class FrmSettings
         'Label49
         '
         Me.Label49.BackColor = System.Drawing.Color.Transparent
-        Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label49.ForeColor = System.Drawing.Color.Black
         Me.Label49.Location = New System.Drawing.Point(6, 170)
         Me.Label49.Name = "Label49"
@@ -10106,13 +10513,13 @@ Partial Class FrmSettings
         Me.GroupBox56.Name = "GroupBox56"
         Me.GroupBox56.Size = New System.Drawing.Size(166, 122)
         Me.GroupBox56.TabIndex = 168
-        Me.GroupBox56.TabStop = false
+        Me.GroupBox56.TabStop = False
         Me.GroupBox56.Text = "Ruin Chance"
         '
         'Label90
         '
         Me.Label90.BackColor = System.Drawing.Color.Transparent
-        Me.Label90.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label90.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label90.ForeColor = System.Drawing.Color.Black
         Me.Label90.Location = New System.Drawing.Point(6, 94)
         Me.Label90.Name = "Label90"
@@ -10123,7 +10530,7 @@ Partial Class FrmSettings
         '
         'NBRuinSometimes
         '
-        Me.NBRuinSometimes.Enabled = false
+        Me.NBRuinSometimes.Enabled = False
         Me.NBRuinSometimes.Location = New System.Drawing.Point(113, 68)
         Me.NBRuinSometimes.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBRuinSometimes.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10135,7 +10542,7 @@ Partial Class FrmSettings
         'Label91
         '
         Me.Label91.BackColor = System.Drawing.Color.Transparent
-        Me.Label91.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label91.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label91.ForeColor = System.Drawing.Color.Black
         Me.Label91.Location = New System.Drawing.Point(6, 68)
         Me.Label91.Name = "Label91"
@@ -10147,7 +10554,7 @@ Partial Class FrmSettings
         'Label92
         '
         Me.Label92.BackColor = System.Drawing.Color.Transparent
-        Me.Label92.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label92.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label92.ForeColor = System.Drawing.Color.Black
         Me.Label92.Location = New System.Drawing.Point(6, 42)
         Me.Label92.Name = "Label92"
@@ -10158,7 +10565,7 @@ Partial Class FrmSettings
         '
         'NBRuinRarely
         '
-        Me.NBRuinRarely.Enabled = false
+        Me.NBRuinRarely.Enabled = False
         Me.NBRuinRarely.Location = New System.Drawing.Point(113, 94)
         Me.NBRuinRarely.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBRuinRarely.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10169,7 +10576,7 @@ Partial Class FrmSettings
         '
         'NBRuinOften
         '
-        Me.NBRuinOften.Enabled = false
+        Me.NBRuinOften.Enabled = False
         Me.NBRuinOften.Location = New System.Drawing.Point(113, 42)
         Me.NBRuinOften.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBRuinOften.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10180,14 +10587,14 @@ Partial Class FrmSettings
         '
         'CBRangeRuin
         '
-        Me.CBRangeRuin.AutoSize = true
+        Me.CBRangeRuin.AutoSize = True
         Me.CBRangeRuin.ForeColor = System.Drawing.Color.Black
         Me.CBRangeRuin.Location = New System.Drawing.Point(9, 19)
         Me.CBRangeRuin.Name = "CBRangeRuin"
         Me.CBRangeRuin.Size = New System.Drawing.Size(99, 17)
         Me.CBRangeRuin.TabIndex = 159
         Me.CBRangeRuin.Text = "Domme Decide"
-        Me.CBRangeRuin.UseVisualStyleBackColor = true
+        Me.CBRangeRuin.UseVisualStyleBackColor = True
         '
         'GroupBox17
         '
@@ -10197,7 +10604,7 @@ Partial Class FrmSettings
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.Size = New System.Drawing.Size(291, 190)
         Me.GroupBox17.TabIndex = 0
-        Me.GroupBox17.TabStop = false
+        Me.GroupBox17.TabStop = False
         Me.GroupBox17.Text = "Video Teases"
         '
         'GroupBox19
@@ -10216,13 +10623,13 @@ Partial Class FrmSettings
         Me.GroupBox19.Name = "GroupBox19"
         Me.GroupBox19.Size = New System.Drawing.Size(279, 66)
         Me.GroupBox19.TabIndex = 2
-        Me.GroupBox19.TabStop = false
+        Me.GroupBox19.TabStop = False
         Me.GroupBox19.Text = "Red Light, Green Light"
         '
         'Label110
         '
         Me.Label110.BackColor = System.Drawing.Color.Transparent
-        Me.Label110.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label110.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label110.ForeColor = System.Drawing.Color.Black
         Me.Label110.Location = New System.Drawing.Point(227, 39)
         Me.Label110.Name = "Label110"
@@ -10234,7 +10641,7 @@ Partial Class FrmSettings
         'Label111
         '
         Me.Label111.BackColor = System.Drawing.Color.Transparent
-        Me.Label111.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label111.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label111.ForeColor = System.Drawing.Color.Black
         Me.Label111.Location = New System.Drawing.Point(227, 16)
         Me.Label111.Name = "Label111"
@@ -10270,7 +10677,7 @@ Partial Class FrmSettings
         'Label26
         '
         Me.Label26.BackColor = System.Drawing.Color.Transparent
-        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label26.ForeColor = System.Drawing.Color.Black
         Me.Label26.Location = New System.Drawing.Point(161, 38)
         Me.Label26.Name = "Label26"
@@ -10290,7 +10697,7 @@ Partial Class FrmSettings
         'Label28
         '
         Me.Label28.BackColor = System.Drawing.Color.Transparent
-        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label28.ForeColor = System.Drawing.Color.Black
         Me.Label28.Location = New System.Drawing.Point(161, 15)
         Me.Label28.Name = "Label28"
@@ -10302,7 +10709,7 @@ Partial Class FrmSettings
         'Label27
         '
         Me.Label27.BackColor = System.Drawing.Color.Transparent
-        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label27.ForeColor = System.Drawing.Color.Black
         Me.Label27.Location = New System.Drawing.Point(6, 39)
         Me.Label27.Name = "Label27"
@@ -10314,7 +10721,7 @@ Partial Class FrmSettings
         'Label29
         '
         Me.Label29.BackColor = System.Drawing.Color.Transparent
-        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label29.ForeColor = System.Drawing.Color.Black
         Me.Label29.Location = New System.Drawing.Point(6, 16)
         Me.Label29.Name = "Label29"
@@ -10340,13 +10747,13 @@ Partial Class FrmSettings
         Me.GroupBox18.Name = "GroupBox18"
         Me.GroupBox18.Size = New System.Drawing.Size(279, 88)
         Me.GroupBox18.TabIndex = 1
-        Me.GroupBox18.TabStop = false
+        Me.GroupBox18.TabStop = False
         Me.GroupBox18.Text = "Censorship Sucks"
         '
         'Label108
         '
         Me.Label108.BackColor = System.Drawing.Color.Transparent
-        Me.Label108.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label108.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label108.ForeColor = System.Drawing.Color.Black
         Me.Label108.Location = New System.Drawing.Point(227, 39)
         Me.Label108.Name = "Label108"
@@ -10358,7 +10765,7 @@ Partial Class FrmSettings
         'Label109
         '
         Me.Label109.BackColor = System.Drawing.Color.Transparent
-        Me.Label109.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label109.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label109.ForeColor = System.Drawing.Color.Black
         Me.Label109.Location = New System.Drawing.Point(227, 16)
         Me.Label109.Name = "Label109"
@@ -10399,20 +10806,20 @@ Partial Class FrmSettings
         '
         'CBCensorConstant
         '
-        Me.CBCensorConstant.AutoSize = true
-        Me.CBCensorConstant.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.CBCensorConstant.AutoSize = True
+        Me.CBCensorConstant.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.CBCensorConstant.ForeColor = System.Drawing.Color.Black
         Me.CBCensorConstant.Location = New System.Drawing.Point(6, 65)
         Me.CBCensorConstant.Name = "CBCensorConstant"
         Me.CBCensorConstant.Size = New System.Drawing.Size(263, 17)
         Me.CBCensorConstant.TabIndex = 157
         Me.CBCensorConstant.Text = "Censorship Bar Always Visible During Video Tease"
-        Me.CBCensorConstant.UseVisualStyleBackColor = true
+        Me.CBCensorConstant.UseVisualStyleBackColor = True
         '
         'Label25
         '
         Me.Label25.BackColor = System.Drawing.Color.Transparent
-        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label25.ForeColor = System.Drawing.Color.Black
         Me.Label25.Location = New System.Drawing.Point(161, 15)
         Me.Label25.Name = "Label25"
@@ -10424,7 +10831,7 @@ Partial Class FrmSettings
         'Label20
         '
         Me.Label20.BackColor = System.Drawing.Color.Transparent
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label20.ForeColor = System.Drawing.Color.Black
         Me.Label20.Location = New System.Drawing.Point(6, 39)
         Me.Label20.Name = "Label20"
@@ -10436,7 +10843,7 @@ Partial Class FrmSettings
         'Label19
         '
         Me.Label19.BackColor = System.Drawing.Color.Transparent
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.Black
         Me.Label19.Location = New System.Drawing.Point(161, 38)
         Me.Label19.Name = "Label19"
@@ -10448,7 +10855,7 @@ Partial Class FrmSettings
         'Label24
         '
         Me.Label24.BackColor = System.Drawing.Color.Transparent
-        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label24.ForeColor = System.Drawing.Color.Black
         Me.Label24.Location = New System.Drawing.Point(6, 16)
         Me.Label24.Name = "Label24"
@@ -10480,13 +10887,13 @@ Partial Class FrmSettings
         Me.GroupBox52.Name = "GroupBox52"
         Me.GroupBox52.Size = New System.Drawing.Size(166, 122)
         Me.GroupBox52.TabIndex = 167
-        Me.GroupBox52.TabStop = false
+        Me.GroupBox52.TabStop = False
         Me.GroupBox52.Text = "Orgasm Chance"
         '
         'Label89
         '
         Me.Label89.BackColor = System.Drawing.Color.Transparent
-        Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label89.ForeColor = System.Drawing.Color.Black
         Me.Label89.Location = New System.Drawing.Point(6, 94)
         Me.Label89.Name = "Label89"
@@ -10497,7 +10904,7 @@ Partial Class FrmSettings
         '
         'NBAllowSometimes
         '
-        Me.NBAllowSometimes.Enabled = false
+        Me.NBAllowSometimes.Enabled = False
         Me.NBAllowSometimes.Location = New System.Drawing.Point(113, 68)
         Me.NBAllowSometimes.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBAllowSometimes.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10509,7 +10916,7 @@ Partial Class FrmSettings
         'Label86
         '
         Me.Label86.BackColor = System.Drawing.Color.Transparent
-        Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label86.ForeColor = System.Drawing.Color.Black
         Me.Label86.Location = New System.Drawing.Point(6, 68)
         Me.Label86.Name = "Label86"
@@ -10521,7 +10928,7 @@ Partial Class FrmSettings
         'Label82
         '
         Me.Label82.BackColor = System.Drawing.Color.Transparent
-        Me.Label82.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label82.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label82.ForeColor = System.Drawing.Color.Black
         Me.Label82.Location = New System.Drawing.Point(6, 42)
         Me.Label82.Name = "Label82"
@@ -10532,7 +10939,7 @@ Partial Class FrmSettings
         '
         'NBAllowRarely
         '
-        Me.NBAllowRarely.Enabled = false
+        Me.NBAllowRarely.Enabled = False
         Me.NBAllowRarely.Location = New System.Drawing.Point(113, 94)
         Me.NBAllowRarely.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBAllowRarely.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10543,7 +10950,7 @@ Partial Class FrmSettings
         '
         'NBAllowOften
         '
-        Me.NBAllowOften.Enabled = false
+        Me.NBAllowOften.Enabled = False
         Me.NBAllowOften.Location = New System.Drawing.Point(113, 42)
         Me.NBAllowOften.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBAllowOften.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10554,25 +10961,25 @@ Partial Class FrmSettings
         '
         'CBRangeOrgasm
         '
-        Me.CBRangeOrgasm.AutoSize = true
+        Me.CBRangeOrgasm.AutoSize = True
         Me.CBRangeOrgasm.ForeColor = System.Drawing.Color.Black
         Me.CBRangeOrgasm.Location = New System.Drawing.Point(9, 19)
         Me.CBRangeOrgasm.Name = "CBRangeOrgasm"
         Me.CBRangeOrgasm.Size = New System.Drawing.Size(99, 17)
         Me.CBRangeOrgasm.TabIndex = 159
         Me.CBRangeOrgasm.Text = "Domme Decide"
-        Me.CBRangeOrgasm.UseVisualStyleBackColor = true
+        Me.CBRangeOrgasm.UseVisualStyleBackColor = True
         '
         'PictureBox8
         '
         Me.PictureBox8.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox8.Image = CType(resources.GetObject("PictureBox8.Image"),System.Drawing.Image)
+        Me.PictureBox8.Image = CType(resources.GetObject("PictureBox8.Image"), System.Drawing.Image)
         Me.PictureBox8.Location = New System.Drawing.Point(9, 6)
         Me.PictureBox8.Name = "PictureBox8"
         Me.PictureBox8.Size = New System.Drawing.Size(160, 19)
         Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox8.TabIndex = 166
-        Me.PictureBox8.TabStop = false
+        Me.PictureBox8.TabStop = False
         '
         'GroupBox21
         '
@@ -10583,26 +10990,26 @@ Partial Class FrmSettings
         Me.GroupBox21.Name = "GroupBox21"
         Me.GroupBox21.Size = New System.Drawing.Size(692, 136)
         Me.GroupBox21.TabIndex = 66
-        Me.GroupBox21.TabStop = false
+        Me.GroupBox21.TabStop = False
         Me.GroupBox21.Text = "Description"
         '
         'LBLRangeSettingsDescription
         '
         Me.LBLRangeSettingsDescription.BackColor = System.Drawing.Color.Transparent
-        Me.LBLRangeSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLRangeSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLRangeSettingsDescription.ForeColor = System.Drawing.Color.Black
         Me.LBLRangeSettingsDescription.Location = New System.Drawing.Point(6, 16)
         Me.LBLRangeSettingsDescription.Name = "LBLRangeSettingsDescription"
         Me.LBLRangeSettingsDescription.Size = New System.Drawing.Size(680, 117)
         Me.LBLRangeSettingsDescription.TabIndex = 62
-        Me.LBLRangeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
+        Me.LBLRangeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio" & _
     "n."
         Me.LBLRangeSettingsDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label38
         '
         Me.Label38.BackColor = System.Drawing.Color.Transparent
-        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label38.ForeColor = System.Drawing.Color.Black
         Me.Label38.Location = New System.Drawing.Point(7, 6)
         Me.Label38.Name = "Label38"
@@ -10668,68 +11075,68 @@ Partial Class FrmSettings
         '
         'BTNPlaylistCtrlZ
         '
-        Me.BTNPlaylistCtrlZ.Enabled = false
+        Me.BTNPlaylistCtrlZ.Enabled = False
         Me.BTNPlaylistCtrlZ.Location = New System.Drawing.Point(621, 21)
         Me.BTNPlaylistCtrlZ.Name = "BTNPlaylistCtrlZ"
         Me.BTNPlaylistCtrlZ.Size = New System.Drawing.Size(44, 23)
         Me.BTNPlaylistCtrlZ.TabIndex = 202
         Me.BTNPlaylistCtrlZ.Text = "Undo"
-        Me.BTNPlaylistCtrlZ.UseVisualStyleBackColor = true
+        Me.BTNPlaylistCtrlZ.UseVisualStyleBackColor = True
         '
         'RadioPlaylistRegScripts
         '
-        Me.RadioPlaylistRegScripts.AutoSize = true
+        Me.RadioPlaylistRegScripts.AutoSize = True
         Me.RadioPlaylistRegScripts.Location = New System.Drawing.Point(228, 372)
         Me.RadioPlaylistRegScripts.Name = "RadioPlaylistRegScripts"
         Me.RadioPlaylistRegScripts.Size = New System.Drawing.Size(127, 17)
         Me.RadioPlaylistRegScripts.TabIndex = 201
         Me.RadioPlaylistRegScripts.Text = "Show Regular Scripts"
-        Me.RadioPlaylistRegScripts.UseVisualStyleBackColor = true
+        Me.RadioPlaylistRegScripts.UseVisualStyleBackColor = True
         '
         'RadioPlaylistScripts
         '
-        Me.RadioPlaylistScripts.AutoSize = true
-        Me.RadioPlaylistScripts.Checked = true
+        Me.RadioPlaylistScripts.AutoSize = True
+        Me.RadioPlaylistScripts.Checked = True
         Me.RadioPlaylistScripts.Location = New System.Drawing.Point(62, 372)
         Me.RadioPlaylistScripts.Name = "RadioPlaylistScripts"
         Me.RadioPlaylistScripts.Size = New System.Drawing.Size(122, 17)
         Me.RadioPlaylistScripts.TabIndex = 200
-        Me.RadioPlaylistScripts.TabStop = true
+        Me.RadioPlaylistScripts.TabStop = True
         Me.RadioPlaylistScripts.Text = "Show Playlist Scripts"
-        Me.RadioPlaylistScripts.UseVisualStyleBackColor = true
+        Me.RadioPlaylistScripts.UseVisualStyleBackColor = True
         '
         'BTNPlaylistEnd
         '
         Me.BTNPlaylistEnd.BackColor = System.Drawing.Color.LightGray
-        Me.BTNPlaylistEnd.Enabled = false
-        Me.BTNPlaylistEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.BTNPlaylistEnd.Enabled = False
+        Me.BTNPlaylistEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNPlaylistEnd.ForeColor = System.Drawing.Color.Black
         Me.BTNPlaylistEnd.Location = New System.Drawing.Point(165, 21)
         Me.BTNPlaylistEnd.Name = "BTNPlaylistEnd"
         Me.BTNPlaylistEnd.Size = New System.Drawing.Size(44, 23)
         Me.BTNPlaylistEnd.TabIndex = 199
         Me.BTNPlaylistEnd.Text = "End"
-        Me.BTNPlaylistEnd.UseVisualStyleBackColor = false
+        Me.BTNPlaylistEnd.UseVisualStyleBackColor = False
         '
         'BTNPlaylistClearAll
         '
-        Me.BTNPlaylistClearAll.Enabled = false
+        Me.BTNPlaylistClearAll.Enabled = False
         Me.BTNPlaylistClearAll.Location = New System.Drawing.Point(296, 21)
         Me.BTNPlaylistClearAll.Name = "BTNPlaylistClearAll"
         Me.BTNPlaylistClearAll.Size = New System.Drawing.Size(78, 23)
         Me.BTNPlaylistClearAll.TabIndex = 198
         Me.BTNPlaylistClearAll.Text = "Clear All"
-        Me.BTNPlaylistClearAll.UseVisualStyleBackColor = true
+        Me.BTNPlaylistClearAll.UseVisualStyleBackColor = True
         '
         'BTNPlaylistSave
         '
-        Me.BTNPlaylistSave.Enabled = false
+        Me.BTNPlaylistSave.Enabled = False
         Me.BTNPlaylistSave.Location = New System.Drawing.Point(621, 369)
         Me.BTNPlaylistSave.Name = "BTNPlaylistSave"
         Me.BTNPlaylistSave.Size = New System.Drawing.Size(44, 23)
         Me.BTNPlaylistSave.TabIndex = 197
         Me.BTNPlaylistSave.Text = "Save"
-        Me.BTNPlaylistSave.UseVisualStyleBackColor = true
+        Me.BTNPlaylistSave.UseVisualStyleBackColor = True
         '
         'Button7
         '
@@ -10738,7 +11145,7 @@ Partial Class FrmSettings
         Me.Button7.Size = New System.Drawing.Size(78, 23)
         Me.Button7.TabIndex = 196
         Me.Button7.Text = "Add Random"
-        Me.Button7.UseVisualStyleBackColor = true
+        Me.Button7.UseVisualStyleBackColor = True
         '
         'WBPlaylist
         '
@@ -10750,8 +11157,8 @@ Partial Class FrmSettings
         '
         'Label80
         '
-        Me.Label80.AutoSize = true
-        Me.Label80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label80.AutoSize = True
+        Me.Label80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label80.Location = New System.Drawing.Point(410, 27)
         Me.Label80.Name = "Label80"
         Me.Label80.Size = New System.Drawing.Size(47, 13)
@@ -10761,8 +11168,8 @@ Partial Class FrmSettings
         'LBLPlaylIstLink
         '
         Me.LBLPlaylIstLink.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLPlaylIstLink.Enabled = false
-        Me.LBLPlaylIstLink.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLPlaylIstLink.Enabled = False
+        Me.LBLPlaylIstLink.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLPlaylIstLink.Location = New System.Drawing.Point(128, 22)
         Me.LBLPlaylIstLink.Name = "LBLPlaylIstLink"
         Me.LBLPlaylIstLink.Size = New System.Drawing.Size(34, 21)
@@ -10773,8 +11180,8 @@ Partial Class FrmSettings
         'LBLPlaylistModule
         '
         Me.LBLPlaylistModule.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLPlaylistModule.Enabled = false
-        Me.LBLPlaylistModule.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLPlaylistModule.Enabled = False
+        Me.LBLPlaylistModule.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLPlaylistModule.Location = New System.Drawing.Point(76, 22)
         Me.LBLPlaylistModule.Name = "LBLPlaylistModule"
         Me.LBLPlaylistModule.Size = New System.Drawing.Size(50, 21)
@@ -10786,7 +11193,7 @@ Partial Class FrmSettings
         '
         Me.LBLPLaylistStart.BackColor = System.Drawing.Color.Green
         Me.LBLPLaylistStart.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLPLaylistStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLPLaylistStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLPLaylistStart.ForeColor = System.Drawing.Color.White
         Me.LBLPLaylistStart.Location = New System.Drawing.Point(38, 22)
         Me.LBLPLaylistStart.Name = "LBLPLaylistStart"
@@ -10797,8 +11204,8 @@ Partial Class FrmSettings
         '
         'LBPlaylist
         '
-        Me.LBPlaylist.AllowDrop = true
-        Me.LBPlaylist.FormattingEnabled = true
+        Me.LBPlaylist.AllowDrop = True
+        Me.LBPlaylist.FormattingEnabled = True
         Me.LBPlaylist.Location = New System.Drawing.Point(413, 56)
         Me.LBPlaylist.Name = "LBPlaylist"
         Me.LBPlaylist.Size = New System.Drawing.Size(252, 290)
@@ -10840,7 +11247,7 @@ Partial Class FrmSettings
         Me.Label88.Name = "Label88"
         Me.Label88.Size = New System.Drawing.Size(194, 53)
         Me.Label88.TabIndex = 173
-        Me.Label88.Text = "Preview:  Enter any line with a Keyword and press # to generate a random sentence"& _ 
+        Me.Label88.Text = "Preview:  Enter any line with a Keyword and press # to generate a random sentence" & _
     " the domme return."
         Me.Label88.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -10855,13 +11262,13 @@ Partial Class FrmSettings
         '
         'Button37
         '
-        Me.Button37.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Button37.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button37.Location = New System.Drawing.Point(638, 358)
         Me.Button37.Name = "Button37"
         Me.Button37.Size = New System.Drawing.Size(47, 50)
         Me.Button37.TabIndex = 171
         Me.Button37.Text = "#"
-        Me.Button37.UseVisualStyleBackColor = true
+        Me.Button37.UseVisualStyleBackColor = True
         '
         'Button50
         '
@@ -10870,7 +11277,7 @@ Partial Class FrmSettings
         Me.Button50.Size = New System.Drawing.Size(194, 23)
         Me.Button50.TabIndex = 169
         Me.Button50.Text = "Refresh and Clear Keyword List"
-        Me.Button50.UseVisualStyleBackColor = true
+        Me.Button50.UseVisualStyleBackColor = True
         '
         'Button22
         '
@@ -10879,7 +11286,7 @@ Partial Class FrmSettings
         Me.Button22.Size = New System.Drawing.Size(47, 23)
         Me.Button22.TabIndex = 167
         Me.Button22.Text = "Save"
-        Me.Button22.UseVisualStyleBackColor = true
+        Me.Button22.UseVisualStyleBackColor = True
         '
         'TBKeyWords
         '
@@ -10890,11 +11297,11 @@ Partial Class FrmSettings
         '
         'LBKeyWords
         '
-        Me.LBKeyWords.FormattingEnabled = true
+        Me.LBKeyWords.FormattingEnabled = True
         Me.LBKeyWords.Location = New System.Drawing.Point(6, 36)
         Me.LBKeyWords.Name = "LBKeyWords"
         Me.LBKeyWords.Size = New System.Drawing.Size(194, 316)
-        Me.LBKeyWords.Sorted = true
+        Me.LBKeyWords.Sorted = True
         Me.LBKeyWords.TabIndex = 165
         '
         'RTBKeyWords
@@ -10929,11 +11336,11 @@ Partial Class FrmSettings
         Me.Button9.Size = New System.Drawing.Size(215, 23)
         Me.Button9.TabIndex = 176
         Me.Button9.Text = "Response Template"
-        Me.Button9.UseVisualStyleBackColor = true
+        Me.Button9.UseVisualStyleBackColor = True
         '
         'RTBResponsesKEY
         '
-        Me.RTBResponsesKEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.RTBResponsesKEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RTBResponsesKEY.Location = New System.Drawing.Point(217, 36)
         Me.RTBResponsesKEY.Name = "RTBResponsesKEY"
         Me.RTBResponsesKEY.Size = New System.Drawing.Size(468, 40)
@@ -10947,7 +11354,7 @@ Partial Class FrmSettings
         Me.Button4.Size = New System.Drawing.Size(194, 23)
         Me.Button4.TabIndex = 174
         Me.Button4.Text = "Refresh and Clear Response List"
-        Me.Button4.UseVisualStyleBackColor = true
+        Me.Button4.UseVisualStyleBackColor = True
         '
         'Button5
         '
@@ -10956,7 +11363,7 @@ Partial Class FrmSettings
         Me.Button5.Size = New System.Drawing.Size(47, 23)
         Me.Button5.TabIndex = 173
         Me.Button5.Text = "Save"
-        Me.Button5.UseVisualStyleBackColor = true
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'TBResponses
         '
@@ -10967,11 +11374,11 @@ Partial Class FrmSettings
         '
         'LBResponses
         '
-        Me.LBResponses.FormattingEnabled = true
+        Me.LBResponses.FormattingEnabled = True
         Me.LBResponses.Location = New System.Drawing.Point(6, 36)
         Me.LBResponses.Name = "LBResponses"
         Me.LBResponses.Size = New System.Drawing.Size(194, 355)
-        Me.LBResponses.Sorted = true
+        Me.LBResponses.Sorted = True
         Me.LBResponses.TabIndex = 171
         '
         'RTBResponses
@@ -11000,7 +11407,7 @@ Partial Class FrmSettings
         '
         'RTBVideoMod
         '
-        Me.RTBVideoMod.Enabled = false
+        Me.RTBVideoMod.Enabled = False
         Me.RTBVideoMod.Location = New System.Drawing.Point(167, 17)
         Me.RTBVideoMod.Name = "RTBVideoMod"
         Me.RTBVideoMod.Size = New System.Drawing.Size(525, 286)
@@ -11016,13 +11423,13 @@ Partial Class FrmSettings
         Me.GroupBox29.Name = "GroupBox29"
         Me.GroupBox29.Size = New System.Drawing.Size(692, 92)
         Me.GroupBox29.TabIndex = 66
-        Me.GroupBox29.TabStop = false
+        Me.GroupBox29.TabStop = False
         Me.GroupBox29.Text = "Description"
         '
         'Label51
         '
         Me.Label51.BackColor = System.Drawing.Color.Transparent
-        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label51.ForeColor = System.Drawing.Color.Black
         Me.Label51.Location = New System.Drawing.Point(6, 16)
         Me.Label51.Name = "Label51"
@@ -11033,13 +11440,13 @@ Partial Class FrmSettings
         '
         'BTNVideoModClear
         '
-        Me.BTNVideoModClear.Enabled = false
+        Me.BTNVideoModClear.Enabled = False
         Me.BTNVideoModClear.Location = New System.Drawing.Point(6, 227)
         Me.BTNVideoModClear.Name = "BTNVideoModClear"
         Me.BTNVideoModClear.Size = New System.Drawing.Size(155, 35)
         Me.BTNVideoModClear.TabIndex = 153
         Me.BTNVideoModClear.Text = "Clear Text and Select New Video Tease Type/Script"
-        Me.BTNVideoModClear.UseVisualStyleBackColor = true
+        Me.BTNVideoModClear.UseVisualStyleBackColor = True
         '
         'GroupBox28
         '
@@ -11048,13 +11455,13 @@ Partial Class FrmSettings
         Me.GroupBox28.Name = "GroupBox28"
         Me.GroupBox28.Size = New System.Drawing.Size(155, 46)
         Me.GroupBox28.TabIndex = 148
-        Me.GroupBox28.TabStop = false
+        Me.GroupBox28.TabStop = False
         Me.GroupBox28.Text = "Video Tease Type"
         '
         'CBVTType
         '
         Me.CBVTType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CBVTType.FormattingEnabled = true
+        Me.CBVTType.FormattingEnabled = True
         Me.CBVTType.Items.AddRange(New Object() {"Avoid The Edge", "Censorship Sucks", "Red Light Green Light"})
         Me.CBVTType.Location = New System.Drawing.Point(9, 15)
         Me.CBVTType.Name = "CBVTType"
@@ -11068,7 +11475,7 @@ Partial Class FrmSettings
         Me.BTNVideoModLoad.Size = New System.Drawing.Size(155, 35)
         Me.BTNVideoModLoad.TabIndex = 152
         Me.BTNVideoModLoad.Text = "Load Script"
-        Me.BTNVideoModLoad.UseVisualStyleBackColor = true
+        Me.BTNVideoModLoad.UseVisualStyleBackColor = True
         '
         'GroupBox30
         '
@@ -11077,12 +11484,12 @@ Partial Class FrmSettings
         Me.GroupBox30.Name = "GroupBox30"
         Me.GroupBox30.Size = New System.Drawing.Size(155, 100)
         Me.GroupBox30.TabIndex = 149
-        Me.GroupBox30.TabStop = false
+        Me.GroupBox30.TabStop = False
         Me.GroupBox30.Text = "Script"
         '
         'LBVidScript
         '
-        Me.LBVidScript.FormattingEnabled = true
+        Me.LBVidScript.FormattingEnabled = True
         Me.LBVidScript.Location = New System.Drawing.Point(9, 20)
         Me.LBVidScript.Name = "LBVidScript"
         Me.LBVidScript.Size = New System.Drawing.Size(137, 69)
@@ -11090,13 +11497,13 @@ Partial Class FrmSettings
         '
         'BTNVideoModSave
         '
-        Me.BTNVideoModSave.Enabled = false
+        Me.BTNVideoModSave.Enabled = False
         Me.BTNVideoModSave.Location = New System.Drawing.Point(6, 268)
         Me.BTNVideoModSave.Name = "BTNVideoModSave"
         Me.BTNVideoModSave.Size = New System.Drawing.Size(155, 35)
         Me.BTNVideoModSave.TabIndex = 151
         Me.BTNVideoModSave.Text = "Save Changes"
-        Me.BTNVideoModSave.UseVisualStyleBackColor = true
+        Me.BTNVideoModSave.UseVisualStyleBackColor = True
         '
         'TabPage15
         '
@@ -11187,13 +11594,13 @@ Partial Class FrmSettings
         Me.GroupBox34.Name = "GroupBox34"
         Me.GroupBox34.Size = New System.Drawing.Size(683, 107)
         Me.GroupBox34.TabIndex = 66
-        Me.GroupBox34.TabStop = false
+        Me.GroupBox34.TabStop = False
         Me.GroupBox34.Text = "Description"
         '
         'Label52
         '
         Me.Label52.BackColor = System.Drawing.Color.Transparent
-        Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label52.ForeColor = System.Drawing.Color.Black
         Me.Label52.Location = New System.Drawing.Point(6, 16)
         Me.Label52.Name = "Label52"
@@ -11217,7 +11624,7 @@ Partial Class FrmSettings
         Me.Button26.Size = New System.Drawing.Size(120, 23)
         Me.Button26.TabIndex = 174
         Me.Button26.Text = "Clear Fields"
-        Me.Button26.UseVisualStyleBackColor = true
+        Me.Button26.UseVisualStyleBackColor = True
         '
         'Label56
         '
@@ -11238,7 +11645,7 @@ Partial Class FrmSettings
         '
         'LBGlitModScripts
         '
-        Me.LBGlitModScripts.FormattingEnabled = true
+        Me.LBGlitModScripts.FormattingEnabled = True
         Me.LBGlitModScripts.Location = New System.Drawing.Point(27, 106)
         Me.LBGlitModScripts.Name = "LBGlitModScripts"
         Me.LBGlitModScripts.Size = New System.Drawing.Size(136, 186)
@@ -11255,7 +11662,7 @@ Partial Class FrmSettings
         '
         'LBLGlitModDomType
         '
-        Me.LBLGlitModDomType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLGlitModDomType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLGlitModDomType.Location = New System.Drawing.Point(191, 103)
         Me.LBLGlitModDomType.Name = "LBLGlitModDomType"
         Me.LBLGlitModDomType.Size = New System.Drawing.Size(123, 23)
@@ -11270,12 +11677,12 @@ Partial Class FrmSettings
         Me.Button29.Size = New System.Drawing.Size(120, 23)
         Me.Button29.TabIndex = 151
         Me.Button29.Text = "Save Glitter File"
-        Me.Button29.UseVisualStyleBackColor = true
+        Me.Button29.UseVisualStyleBackColor = True
         '
         'CBGlitModType
         '
         Me.CBGlitModType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CBGlitModType.FormattingEnabled = true
+        Me.CBGlitModType.FormattingEnabled = True
         Me.CBGlitModType.Items.AddRange(New Object() {"Tease", "Egotist", "Trivia", "Daily", "Custom 1", "Custom 2"})
         Me.CBGlitModType.Location = New System.Drawing.Point(27, 35)
         Me.CBGlitModType.Name = "CBGlitModType"
@@ -11336,30 +11743,30 @@ Partial Class FrmSettings
         Me.GroupBox62.Name = "GroupBox62"
         Me.GroupBox62.Size = New System.Drawing.Size(277, 159)
         Me.GroupBox62.TabIndex = 178
-        Me.GroupBox62.TabStop = false
+        Me.GroupBox62.TabStop = False
         Me.GroupBox62.Text = "Language"
         '
         'RBGerman
         '
-        Me.RBGerman.AutoSize = true
+        Me.RBGerman.AutoSize = True
         Me.RBGerman.Location = New System.Drawing.Point(161, 36)
         Me.RBGerman.Name = "RBGerman"
         Me.RBGerman.Size = New System.Drawing.Size(65, 17)
         Me.RBGerman.TabIndex = 1
         Me.RBGerman.Text = "Deutsch"
-        Me.RBGerman.UseVisualStyleBackColor = true
+        Me.RBGerman.UseVisualStyleBackColor = True
         '
         'RBEnglish
         '
-        Me.RBEnglish.AutoSize = true
-        Me.RBEnglish.Checked = true
+        Me.RBEnglish.AutoSize = True
+        Me.RBEnglish.Checked = True
         Me.RBEnglish.Location = New System.Drawing.Point(17, 35)
         Me.RBEnglish.Name = "RBEnglish"
         Me.RBEnglish.Size = New System.Drawing.Size(59, 17)
         Me.RBEnglish.TabIndex = 0
-        Me.RBEnglish.TabStop = true
+        Me.RBEnglish.TabStop = True
         Me.RBEnglish.Text = "English"
-        Me.RBEnglish.UseVisualStyleBackColor = true
+        Me.RBEnglish.UseVisualStyleBackColor = True
         '
         'GroupBox33
         '
@@ -11371,7 +11778,7 @@ Partial Class FrmSettings
         Me.GroupBox33.Name = "GroupBox33"
         Me.GroupBox33.Size = New System.Drawing.Size(277, 107)
         Me.GroupBox33.TabIndex = 177
-        Me.GroupBox33.TabStop = false
+        Me.GroupBox33.TabStop = False
         Me.GroupBox33.Text = "System States"
         '
         'MetroTest
@@ -11391,13 +11798,13 @@ Partial Class FrmSettings
         Me.Button11.Size = New System.Drawing.Size(99, 23)
         Me.Button11.TabIndex = 177
         Me.Button11.Text = "Toggle"
-        Me.Button11.UseVisualStyleBackColor = true
+        Me.Button11.UseVisualStyleBackColor = True
         '
         'LBLChastityState
         '
         Me.LBLChastityState.BackColor = System.Drawing.Color.LightGray
         Me.LBLChastityState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLChastityState.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLChastityState.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLChastityState.ForeColor = System.Drawing.Color.Red
         Me.LBLChastityState.Location = New System.Drawing.Point(120, 33)
         Me.LBLChastityState.Name = "LBLChastityState"
@@ -11410,7 +11817,7 @@ Partial Class FrmSettings
         '
         Me.Label120.BackColor = System.Drawing.Color.LightGray
         Me.Label120.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label120.Location = New System.Drawing.Point(17, 33)
         Me.Label120.Name = "Label120"
         Me.Label120.Size = New System.Drawing.Size(98, 23)
@@ -11430,7 +11837,7 @@ Partial Class FrmSettings
         Me.GroupBox27.Name = "GroupBox27"
         Me.GroupBox27.Size = New System.Drawing.Size(279, 117)
         Me.GroupBox27.TabIndex = 176
-        Me.GroupBox27.TabStop = false
+        Me.GroupBox27.TabStop = False
         Me.GroupBox27.Text = "Session Images"
         '
         'Button6
@@ -11440,7 +11847,7 @@ Partial Class FrmSettings
         Me.Button6.Size = New System.Drawing.Size(117, 23)
         Me.Button6.TabIndex = 176
         Me.Button6.Text = "Delete All Files"
-        Me.Button6.UseVisualStyleBackColor = true
+        Me.Button6.UseVisualStyleBackColor = True
         '
         'LBLSesSpace
         '
@@ -11456,7 +11863,7 @@ Partial Class FrmSettings
         Me.Button3.Size = New System.Drawing.Size(117, 23)
         Me.Button3.TabIndex = 175
         Me.Button3.Text = "Open Folder"
-        Me.Button3.UseVisualStyleBackColor = true
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'LBLSesFiles
         '
@@ -11467,7 +11874,7 @@ Partial Class FrmSettings
         '
         'Label125
         '
-        Me.Label125.AutoSize = true
+        Me.Label125.AutoSize = True
         Me.Label125.Location = New System.Drawing.Point(17, 53)
         Me.Label125.Name = "Label125"
         Me.Label125.Size = New System.Drawing.Size(120, 13)
@@ -11476,7 +11883,7 @@ Partial Class FrmSettings
         '
         'Label124
         '
-        Me.Label124.AutoSize = true
+        Me.Label124.AutoSize = True
         Me.Label124.Location = New System.Drawing.Point(17, 24)
         Me.Label124.Name = "Label124"
         Me.Label124.Size = New System.Drawing.Size(126, 13)
@@ -11500,18 +11907,18 @@ Partial Class FrmSettings
         Me.GroupBox20.Name = "GroupBox20"
         Me.GroupBox20.Size = New System.Drawing.Size(408, 230)
         Me.GroupBox20.TabIndex = 174
-        Me.GroupBox20.TabStop = false
+        Me.GroupBox20.TabStop = False
         Me.GroupBox20.Text = "Maintenance"
         '
         'Button1
         '
-        Me.Button1.Enabled = false
+        Me.Button1.Enabled = False
         Me.Button1.Location = New System.Drawing.Point(270, 19)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(121, 23)
         Me.Button1.TabIndex = 176
         Me.Button1.Text = "Reset Settings"
-        Me.Button1.UseVisualStyleBackColor = true
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'BTNMaintenanceScripts
         '
@@ -11520,7 +11927,7 @@ Partial Class FrmSettings
         Me.BTNMaintenanceScripts.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceScripts.TabIndex = 175
         Me.BTNMaintenanceScripts.Text = "Audit Scripts"
-        Me.BTNMaintenanceScripts.UseVisualStyleBackColor = true
+        Me.BTNMaintenanceScripts.UseVisualStyleBackColor = True
         '
         'BTNMaintenanceValidate
         '
@@ -11529,7 +11936,7 @@ Partial Class FrmSettings
         Me.BTNMaintenanceValidate.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceValidate.TabIndex = 8
         Me.BTNMaintenanceValidate.Text = "Validate Local Files"
-        Me.BTNMaintenanceValidate.UseVisualStyleBackColor = true
+        Me.BTNMaintenanceValidate.UseVisualStyleBackColor = True
         '
         'BTNMaintenanceRefresh
         '
@@ -11538,11 +11945,11 @@ Partial Class FrmSettings
         Me.BTNMaintenanceRefresh.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceRefresh.TabIndex = 7
         Me.BTNMaintenanceRefresh.Text = "Refresh URL Files"
-        Me.BTNMaintenanceRefresh.UseVisualStyleBackColor = true
+        Me.BTNMaintenanceRefresh.UseVisualStyleBackColor = True
         '
         'Label117
         '
-        Me.Label117.AutoSize = true
+        Me.Label117.AutoSize = True
         Me.Label117.Location = New System.Drawing.Point(15, 182)
         Me.Label117.Name = "Label117"
         Me.Label117.Size = New System.Drawing.Size(84, 13)
@@ -11551,7 +11958,7 @@ Partial Class FrmSettings
         '
         'Label116
         '
-        Me.Label116.AutoSize = true
+        Me.Label116.AutoSize = True
         Me.Label116.Location = New System.Drawing.Point(15, 140)
         Me.Label116.Name = "Label116"
         Me.Label116.Size = New System.Drawing.Size(85, 13)
@@ -11567,13 +11974,13 @@ Partial Class FrmSettings
         '
         'BTNMaintenanceCancel
         '
-        Me.BTNMaintenanceCancel.Enabled = false
+        Me.BTNMaintenanceCancel.Enabled = False
         Me.BTNMaintenanceCancel.Location = New System.Drawing.Point(270, 48)
         Me.BTNMaintenanceCancel.Name = "BTNMaintenanceCancel"
         Me.BTNMaintenanceCancel.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceCancel.TabIndex = 3
         Me.BTNMaintenanceCancel.Text = "Cancel"
-        Me.BTNMaintenanceCancel.UseVisualStyleBackColor = true
+        Me.BTNMaintenanceCancel.UseVisualStyleBackColor = True
         '
         'PBMaintenance
         '
@@ -11598,7 +12005,7 @@ Partial Class FrmSettings
         Me.BTNMaintenanceRebuild.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceRebuild.TabIndex = 0
         Me.BTNMaintenanceRebuild.Text = "Rebuild URL Files"
-        Me.BTNMaintenanceRebuild.UseVisualStyleBackColor = true
+        Me.BTNMaintenanceRebuild.UseVisualStyleBackColor = True
         '
         'WebToy
         '
@@ -11618,12 +12025,12 @@ Partial Class FrmSettings
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.Size = New System.Drawing.Size(408, 159)
         Me.GroupBox15.TabIndex = 173
-        Me.GroupBox15.TabStop = false
+        Me.GroupBox15.TabStop = False
         Me.GroupBox15.Text = "Web-Controlled Sex Toy"
         '
         'Label115
         '
-        Me.Label115.AutoSize = true
+        Me.Label115.AutoSize = True
         Me.Label115.Location = New System.Drawing.Point(12, 58)
         Me.Label115.Name = "Label115"
         Me.Label115.Size = New System.Drawing.Size(54, 13)
@@ -11646,7 +12053,7 @@ Partial Class FrmSettings
         '
         'Label114
         '
-        Me.Label114.AutoSize = true
+        Me.Label114.AutoSize = True
         Me.Label114.Location = New System.Drawing.Point(12, 17)
         Me.Label114.Name = "Label114"
         Me.Label114.Size = New System.Drawing.Size(54, 13)
@@ -11656,18 +12063,18 @@ Partial Class FrmSettings
         'PictureBox9
         '
         Me.PictureBox9.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox9.Image = CType(resources.GetObject("PictureBox9.Image"),System.Drawing.Image)
+        Me.PictureBox9.Image = CType(resources.GetObject("PictureBox9.Image"), System.Drawing.Image)
         Me.PictureBox9.Location = New System.Drawing.Point(9, 6)
         Me.PictureBox9.Name = "PictureBox9"
         Me.PictureBox9.Size = New System.Drawing.Size(160, 19)
         Me.PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox9.TabIndex = 166
-        Me.PictureBox9.TabStop = false
+        Me.PictureBox9.TabStop = False
         '
         'Label148
         '
         Me.Label148.BackColor = System.Drawing.Color.Transparent
-        Me.Label148.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label148.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label148.ForeColor = System.Drawing.Color.Black
         Me.Label148.Location = New System.Drawing.Point(7, 6)
         Me.Label148.Name = "Label148"
@@ -11705,17 +12112,17 @@ Partial Class FrmSettings
         '
         'Label113
         '
-        Me.Label113.AutoSize = true
+        Me.Label113.AutoSize = True
         Me.Label113.Location = New System.Drawing.Point(4, 417)
         Me.Label113.Name = "Label113"
         Me.Label113.Size = New System.Drawing.Size(452, 13)
         Me.Label113.TabIndex = 173
-        Me.Label113.Text = "All content contained in or viewed through this program are property of their res"& _ 
+        Me.Label113.Text = "All content contained in or viewed through this program are property of their res" & _
     "pective owners."
         '
         'Label40
         '
-        Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label40.Location = New System.Drawing.Point(35, 273)
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(638, 24)
@@ -11725,19 +12132,19 @@ Partial Class FrmSettings
         '
         'Label35
         '
-        Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label35.Location = New System.Drawing.Point(32, 107)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(641, 77)
         Me.Label35.TabIndex = 170
-        Me.Label35.Text = "This program is freeware. It may be freely distributed."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Do not package or dist"& _ 
-    "ribute this program with any scripts or additional content."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Please distribute a"& _ 
+        Me.Label35.Text = "This program is freeware. It may be freely distributed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Do not package or dist" & _
+    "ribute this program with any scripts or additional content." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please distribute a" & _
     "dditional files separately."
         Me.Label35.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label33
         '
-        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label33.Location = New System.Drawing.Point(32, 191)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(641, 77)
@@ -11747,7 +12154,7 @@ Partial Class FrmSettings
         '
         'Label17
         '
-        Me.Label17.AutoSize = true
+        Me.Label17.AutoSize = True
         Me.Label17.Location = New System.Drawing.Point(522, 78)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(93, 13)
@@ -11756,7 +12163,7 @@ Partial Class FrmSettings
         '
         'Label3
         '
-        Me.Label3.AutoSize = true
+        Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(489, 417)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(215, 13)
@@ -11766,17 +12173,17 @@ Partial Class FrmSettings
         'PictureBox3
         '
         Me.PictureBox3.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"),System.Drawing.Image)
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
         Me.PictureBox3.Location = New System.Drawing.Point(84, 17)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(531, 58)
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox3.TabIndex = 166
-        Me.PictureBox3.TabStop = false
+        Me.PictureBox3.TabStop = False
         '
         'Label41
         '
-        Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label41.Location = New System.Drawing.Point(35, 297)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(638, 120)
@@ -11787,7 +12194,7 @@ Partial Class FrmSettings
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file"& _ 
+        Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" & _
     "s (*.*)|*.*"
         Me.OpenFileDialog1.Title = "Select an image file"
         '
@@ -11817,13 +12224,13 @@ Partial Class FrmSettings
         '
         'BWRebuildURLFiles
         '
-        Me.BWRebuildURLFiles.WorkerReportsProgress = true
-        Me.BWRebuildURLFiles.WorkerSupportsCancellation = true
+        Me.BWRebuildURLFiles.WorkerReportsProgress = True
+        Me.BWRebuildURLFiles.WorkerSupportsCancellation = True
         '
         'BWRefreshURLFiles
         '
-        Me.BWRefreshURLFiles.WorkerReportsProgress = true
-        Me.BWRefreshURLFiles.WorkerSupportsCancellation = true
+        Me.BWRefreshURLFiles.WorkerReportsProgress = True
+        Me.BWRefreshURLFiles.WorkerSupportsCancellation = True
         '
         'BWValidateLocalFiles
         '
@@ -11831,489 +12238,18 @@ Partial Class FrmSettings
         'BWCreateURLFiles
         '
         '
-        'TabPage26
-        '
-        Me.TabPage26.Controls.Add(Me.Panel12)
-        Me.TabPage26.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage26.Name = "TabPage26"
-        Me.TabPage26.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage26.Size = New System.Drawing.Size(720, 448)
-        Me.TabPage26.TabIndex = 19
-        Me.TabPage26.Text = "Themes"
-        Me.TabPage26.UseVisualStyleBackColor = true
-        '
-        'Panel12
-        '
-        Me.Panel12.BackColor = System.Drawing.Color.LightGray
-        Me.Panel12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel12.Controls.Add(Me.GroupBox9)
-        Me.Panel12.Controls.Add(Me.PictureBox10)
-        Me.Panel12.Controls.Add(Me.GroupBox5)
-        Me.Panel12.Controls.Add(Me.GroupBox11)
-        Me.Panel12.Controls.Add(Me.GroupBox1)
-        Me.Panel12.Controls.Add(Me.Label164)
-        Me.Panel12.Location = New System.Drawing.Point(6, 6)
-        Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(708, 437)
-        Me.Panel12.TabIndex = 93
-        '
-        'PictureBox10
-        '
-        Me.PictureBox10.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox10.Image = CType(resources.GetObject("PictureBox10.Image"),System.Drawing.Image)
-        Me.PictureBox10.Location = New System.Drawing.Point(9, 6)
-        Me.PictureBox10.Name = "PictureBox10"
-        Me.PictureBox10.Size = New System.Drawing.Size(160, 19)
-        Me.PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox10.TabIndex = 151
-        Me.PictureBox10.TabStop = false
-        '
-        'GroupBox11
-        '
-        Me.GroupBox11.BackColor = System.Drawing.Color.LightGray
-        Me.GroupBox11.Controls.Add(Me.Label144)
-        Me.GroupBox11.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox11.Location = New System.Drawing.Point(7, 331)
-        Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Size = New System.Drawing.Size(692, 92)
-        Me.GroupBox11.TabIndex = 65
-        Me.GroupBox11.TabStop = false
-        Me.GroupBox11.Text = "Description"
-        '
-        'Label144
-        '
-        Me.Label144.BackColor = System.Drawing.Color.Transparent
-        Me.Label144.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label144.ForeColor = System.Drawing.Color.Black
-        Me.Label144.Location = New System.Drawing.Point(6, 16)
-        Me.Label144.Name = "Label144"
-        Me.Label144.Size = New System.Drawing.Size(680, 73)
-        Me.Label144.TabIndex = 62
-        Me.Label144.Text = "Use this page to select the videos you would like the program to use and set thei"& _ 
-    "r paths."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"The Domme Genre paths are for videos that feature the model you are "& _ 
-    "using as your domme."
-        Me.Label144.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label164
-        '
-        Me.Label164.BackColor = System.Drawing.Color.Transparent
-        Me.Label164.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label164.ForeColor = System.Drawing.Color.Black
-        Me.Label164.Location = New System.Drawing.Point(7, 6)
-        Me.Label164.Name = "Label164"
-        Me.Label164.Size = New System.Drawing.Size(692, 21)
-        Me.Label164.TabIndex = 49
-        Me.Label164.Text = "Theme Settings"
-        Me.Label164.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'PBBackgroundPreview
-        '
-        Me.PBBackgroundPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PBBackgroundPreview.Location = New System.Drawing.Point(6, 19)
-        Me.PBBackgroundPreview.Name = "PBBackgroundPreview"
-        Me.PBBackgroundPreview.Size = New System.Drawing.Size(202, 133)
-        Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PBBackgroundPreview.TabIndex = 0
-        Me.PBBackgroundPreview.TabStop = false
-        '
-        'Button17
-        '
-        Me.Button17.BackColor = System.Drawing.Color.Transparent
-        Me.Button17.BackgroundImage = CType(resources.GetObject("Button17.BackgroundImage"),System.Drawing.Image)
-        Me.Button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button17.Location = New System.Drawing.Point(228, 19)
-        Me.Button17.Name = "Button17"
-        Me.Button17.Size = New System.Drawing.Size(103, 83)
-        Me.Button17.TabIndex = 1
-        Me.Button17.UseVisualStyleBackColor = false
-        '
-        'CBStretchBack
-        '
-        Me.CBStretchBack.Checked = true
-        Me.CBStretchBack.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CBStretchBack.Location = New System.Drawing.Point(258, 156)
-        Me.CBStretchBack.Name = "CBStretchBack"
-        Me.CBStretchBack.Size = New System.Drawing.Size(86, 41)
-        Me.CBStretchBack.TabIndex = 2
-        Me.CBStretchBack.Text = "Stretch Background"
-        Me.CBStretchBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.CBStretchBack.UseVisualStyleBackColor = true
-        '
-        'Button18
-        '
-        Me.Button18.Location = New System.Drawing.Point(228, 120)
-        Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(103, 31)
-        Me.Button18.TabIndex = 3
-        Me.Button18.Text = "Clear"
-        Me.Button18.UseVisualStyleBackColor = true
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.GroupBox13)
-        Me.GroupBox1.Controls.Add(Me.PBBackgroundPreview)
-        Me.GroupBox1.Controls.Add(Me.Button17)
-        Me.GroupBox1.Controls.Add(Me.CBStretchBack)
-        Me.GroupBox1.Controls.Add(Me.Button18)
-        Me.GroupBox1.Location = New System.Drawing.Point(351, 30)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(348, 244)
-        Me.GroupBox1.TabIndex = 57
-        Me.GroupBox1.TabStop = false
-        Me.GroupBox1.Text = "Background"
-        '
-        'LBLTextColor
-        '
-        Me.LBLTextColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBLTextColor.Location = New System.Drawing.Point(6, 91)
-        Me.LBLTextColor.Name = "LBLTextColor"
-        Me.LBLTextColor.Size = New System.Drawing.Size(175, 20)
-        Me.LBLTextColor.TabIndex = 7
-        Me.LBLTextColor.Text = "Text Color"
-        Me.LBLTextColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLChatWindowColor2
-        '
-        Me.LBLChatWindowColor2.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLChatWindowColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLChatWindowColor2.Location = New System.Drawing.Point(187, 122)
-        Me.LBLChatWindowColor2.Name = "LBLChatWindowColor2"
-        Me.LBLChatWindowColor2.Size = New System.Drawing.Size(103, 28)
-        Me.LBLChatWindowColor2.TabIndex = 12
-        '
-        'Button20
-        '
-        Me.Button20.BackColor = System.Drawing.Color.Transparent
-        Me.Button20.BackgroundImage = CType(resources.GetObject("Button20.BackgroundImage"),System.Drawing.Image)
-        Me.Button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button20.Location = New System.Drawing.Point(296, 85)
-        Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(32, 32)
-        Me.Button20.TabIndex = 8
-        Me.Button20.UseVisualStyleBackColor = false
-        '
-        'LBLTextColor2
-        '
-        Me.LBLTextColor2.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLTextColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLTextColor2.Location = New System.Drawing.Point(187, 88)
-        Me.LBLTextColor2.Name = "LBLTextColor2"
-        Me.LBLTextColor2.Size = New System.Drawing.Size(103, 28)
-        Me.LBLTextColor2.TabIndex = 9
-        '
-        'LBLChatTextColor
-        '
-        Me.LBLChatTextColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBLChatTextColor.Location = New System.Drawing.Point(6, 159)
-        Me.LBLChatTextColor.Name = "LBLChatTextColor"
-        Me.LBLChatTextColor.Size = New System.Drawing.Size(175, 20)
-        Me.LBLChatTextColor.TabIndex = 14
-        Me.LBLChatTextColor.Text = "Chat Text Color"
-        Me.LBLChatTextColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLBackColor2
-        '
-        Me.LBLBackColor2.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLBackColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLBackColor2.Location = New System.Drawing.Point(187, 20)
-        Me.LBLBackColor2.Name = "LBLBackColor2"
-        Me.LBLBackColor2.Size = New System.Drawing.Size(103, 28)
-        Me.LBLBackColor2.TabIndex = 3
-        '
-        'LBLButtonColor
-        '
-        Me.LBLButtonColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBLButtonColor.Location = New System.Drawing.Point(6, 57)
-        Me.LBLButtonColor.Name = "LBLButtonColor"
-        Me.LBLButtonColor.Size = New System.Drawing.Size(175, 20)
-        Me.LBLButtonColor.TabIndex = 4
-        Me.LBLButtonColor.Text = "Button Color"
-        Me.LBLButtonColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLChatWindowColor
-        '
-        Me.LBLChatWindowColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBLChatWindowColor.Location = New System.Drawing.Point(6, 125)
-        Me.LBLChatWindowColor.Name = "LBLChatWindowColor"
-        Me.LBLChatWindowColor.Size = New System.Drawing.Size(175, 20)
-        Me.LBLChatWindowColor.TabIndex = 10
-        Me.LBLChatWindowColor.Text = "Chat Window Color"
-        Me.LBLChatWindowColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'LBLBackColor
-        '
-        Me.LBLBackColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBLBackColor.Location = New System.Drawing.Point(6, 23)
-        Me.LBLBackColor.Name = "LBLBackColor"
-        Me.LBLBackColor.Size = New System.Drawing.Size(175, 20)
-        Me.LBLBackColor.TabIndex = 0
-        Me.LBLBackColor.Text = "Background Color"
-        Me.LBLBackColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Button21
-        '
-        Me.Button21.BackColor = System.Drawing.Color.Transparent
-        Me.Button21.BackgroundImage = CType(resources.GetObject("Button21.BackgroundImage"),System.Drawing.Image)
-        Me.Button21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button21.Location = New System.Drawing.Point(296, 153)
-        Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(32, 32)
-        Me.Button21.TabIndex = 15
-        Me.Button21.UseVisualStyleBackColor = false
-        '
-        'Button23
-        '
-        Me.Button23.BackColor = System.Drawing.Color.Transparent
-        Me.Button23.BackgroundImage = CType(resources.GetObject("Button23.BackgroundImage"),System.Drawing.Image)
-        Me.Button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button23.Location = New System.Drawing.Point(296, 119)
-        Me.Button23.Name = "Button23"
-        Me.Button23.Size = New System.Drawing.Size(32, 32)
-        Me.Button23.TabIndex = 11
-        Me.Button23.UseVisualStyleBackColor = false
-        '
-        'LBLChatTextColor2
-        '
-        Me.LBLChatTextColor2.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLChatTextColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLChatTextColor2.Location = New System.Drawing.Point(187, 156)
-        Me.LBLChatTextColor2.Name = "LBLChatTextColor2"
-        Me.LBLChatTextColor2.Size = New System.Drawing.Size(103, 28)
-        Me.LBLChatTextColor2.TabIndex = 16
-        '
-        'Button25
-        '
-        Me.Button25.BackColor = System.Drawing.Color.Transparent
-        Me.Button25.BackgroundImage = CType(resources.GetObject("Button25.BackgroundImage"),System.Drawing.Image)
-        Me.Button25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button25.Location = New System.Drawing.Point(296, 17)
-        Me.Button25.Name = "Button25"
-        Me.Button25.Size = New System.Drawing.Size(32, 32)
-        Me.Button25.TabIndex = 2
-        Me.Button25.UseVisualStyleBackColor = false
-        '
-        'Button27
-        '
-        Me.Button27.BackColor = System.Drawing.Color.Transparent
-        Me.Button27.BackgroundImage = CType(resources.GetObject("Button27.BackgroundImage"),System.Drawing.Image)
-        Me.Button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button27.Location = New System.Drawing.Point(296, 51)
-        Me.Button27.Name = "Button27"
-        Me.Button27.Size = New System.Drawing.Size(32, 32)
-        Me.Button27.TabIndex = 5
-        Me.Button27.UseVisualStyleBackColor = false
-        '
-        'LBLButtonColor2
-        '
-        Me.LBLButtonColor2.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLButtonColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLButtonColor2.Location = New System.Drawing.Point(187, 54)
-        Me.LBLButtonColor2.Name = "LBLButtonColor2"
-        Me.LBLButtonColor2.Size = New System.Drawing.Size(103, 28)
-        Me.LBLButtonColor2.TabIndex = 6
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.CBTransparentTime)
-        Me.GroupBox5.Controls.Add(Me.LBLDateTimeColor2)
-        Me.GroupBox5.Controls.Add(Me.Label137)
-        Me.GroupBox5.Controls.Add(Me.Label138)
-        Me.GroupBox5.Controls.Add(Me.Button28)
-        Me.GroupBox5.Controls.Add(Me.Button30)
-        Me.GroupBox5.Controls.Add(Me.LBLDateBackColor2)
-        Me.GroupBox5.Controls.Add(Me.LBLTextColor)
-        Me.GroupBox5.Controls.Add(Me.LBLChatWindowColor2)
-        Me.GroupBox5.Controls.Add(Me.Button20)
-        Me.GroupBox5.Controls.Add(Me.LBLTextColor2)
-        Me.GroupBox5.Controls.Add(Me.LBLChatTextColor)
-        Me.GroupBox5.Controls.Add(Me.LBLBackColor2)
-        Me.GroupBox5.Controls.Add(Me.LBLButtonColor)
-        Me.GroupBox5.Controls.Add(Me.LBLChatWindowColor)
-        Me.GroupBox5.Controls.Add(Me.LBLBackColor)
-        Me.GroupBox5.Controls.Add(Me.Button21)
-        Me.GroupBox5.Controls.Add(Me.Button23)
-        Me.GroupBox5.Controls.Add(Me.LBLChatTextColor2)
-        Me.GroupBox5.Controls.Add(Me.Button25)
-        Me.GroupBox5.Controls.Add(Me.Button27)
-        Me.GroupBox5.Controls.Add(Me.LBLButtonColor2)
-        Me.GroupBox5.Location = New System.Drawing.Point(9, 31)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(336, 294)
-        Me.GroupBox5.TabIndex = 58
-        Me.GroupBox5.TabStop = false
-        Me.GroupBox5.Text = "UI Colors"
-        '
-        'GroupBox9
-        '
-        Me.GroupBox9.Controls.Add(Me.Label141)
-        Me.GroupBox9.Controls.Add(Me.Button31)
-        Me.GroupBox9.Controls.Add(Me.Label140)
-        Me.GroupBox9.Controls.Add(Me.Button32)
-        Me.GroupBox9.Location = New System.Drawing.Point(351, 280)
-        Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Size = New System.Drawing.Size(348, 45)
-        Me.GroupBox9.TabIndex = 152
-        Me.GroupBox9.TabStop = false
-        Me.GroupBox9.Text = "System"
-        '
-        'LBLDateTimeColor2
-        '
-        Me.LBLDateTimeColor2.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLDateTimeColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLDateTimeColor2.Location = New System.Drawing.Point(187, 190)
-        Me.LBLDateTimeColor2.Name = "LBLDateTimeColor2"
-        Me.LBLDateTimeColor2.Size = New System.Drawing.Size(103, 28)
-        Me.LBLDateTimeColor2.TabIndex = 19
-        '
-        'Label137
-        '
-        Me.Label137.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label137.Location = New System.Drawing.Point(6, 227)
-        Me.Label137.Name = "Label137"
-        Me.Label137.Size = New System.Drawing.Size(175, 20)
-        Me.Label137.TabIndex = 20
-        Me.Label137.Text = "Date/Time Window Color"
-        Me.Label137.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label138
-        '
-        Me.Label138.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Label138.Location = New System.Drawing.Point(6, 193)
-        Me.Label138.Name = "Label138"
-        Me.Label138.Size = New System.Drawing.Size(175, 20)
-        Me.Label138.TabIndex = 17
-        Me.Label138.Text = "Date/Time Text Color"
-        Me.Label138.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Button28
-        '
-        Me.Button28.BackColor = System.Drawing.Color.Transparent
-        Me.Button28.BackgroundImage = CType(resources.GetObject("Button28.BackgroundImage"),System.Drawing.Image)
-        Me.Button28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button28.Location = New System.Drawing.Point(296, 221)
-        Me.Button28.Name = "Button28"
-        Me.Button28.Size = New System.Drawing.Size(32, 32)
-        Me.Button28.TabIndex = 21
-        Me.Button28.UseVisualStyleBackColor = false
-        '
-        'Button30
-        '
-        Me.Button30.BackColor = System.Drawing.Color.Transparent
-        Me.Button30.BackgroundImage = CType(resources.GetObject("Button30.BackgroundImage"),System.Drawing.Image)
-        Me.Button30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button30.Location = New System.Drawing.Point(296, 187)
-        Me.Button30.Name = "Button30"
-        Me.Button30.Size = New System.Drawing.Size(32, 32)
-        Me.Button30.TabIndex = 18
-        Me.Button30.UseVisualStyleBackColor = false
-        '
-        'LBLDateBackColor2
-        '
-        Me.LBLDateBackColor2.BackColor = System.Drawing.Color.SteelBlue
-        Me.LBLDateBackColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLDateBackColor2.Location = New System.Drawing.Point(187, 224)
-        Me.LBLDateBackColor2.Name = "LBLDateBackColor2"
-        Me.LBLDateBackColor2.Size = New System.Drawing.Size(103, 28)
-        Me.LBLDateBackColor2.TabIndex = 22
-        '
-        'CBTransparentTime
-        '
-        Me.CBTransparentTime.AutoSize = true
-        Me.CBTransparentTime.Location = New System.Drawing.Point(7, 262)
-        Me.CBTransparentTime.Name = "CBTransparentTime"
-        Me.CBTransparentTime.Size = New System.Drawing.Size(179, 17)
-        Me.CBTransparentTime.TabIndex = 23
-        Me.CBTransparentTime.Text = "Transparent Date/Time Window"
-        Me.CBTransparentTime.UseVisualStyleBackColor = true
-        '
-        'Button31
-        '
-        Me.Button31.BackColor = System.Drawing.Color.Transparent
-        Me.Button31.BackgroundImage = CType(resources.GetObject("Button31.BackgroundImage"),System.Drawing.Image)
-        Me.Button31.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button31.Location = New System.Drawing.Point(35, 12)
-        Me.Button31.Name = "Button31"
-        Me.Button31.Size = New System.Drawing.Size(32, 32)
-        Me.Button31.TabIndex = 54
-        Me.Button31.UseVisualStyleBackColor = false
-        '
         'Button32
         '
         Me.Button32.BackColor = System.Drawing.Color.Transparent
-        Me.Button32.BackgroundImage = CType(resources.GetObject("Button32.BackgroundImage"),System.Drawing.Image)
-        Me.Button32.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button32.Location = New System.Drawing.Point(206, 12)
+        Me.Button32.Image = CType(resources.GetObject("Button32.Image"), System.Drawing.Image)
+        Me.Button32.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button32.Location = New System.Drawing.Point(196, 24)
         Me.Button32.Name = "Button32"
-        Me.Button32.Size = New System.Drawing.Size(32, 32)
-        Me.Button32.TabIndex = 53
+        Me.Button32.Size = New System.Drawing.Size(135, 55)
+        Me.Button32.TabIndex = 55
+        Me.Button32.Text = "  Save Theme"
+        Me.Button32.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button32.UseVisualStyleBackColor = false
-        '
-        'Label140
-        '
-        Me.Label140.Location = New System.Drawing.Point(73, 12)
-        Me.Label140.Name = "Label140"
-        Me.Label140.Size = New System.Drawing.Size(87, 32)
-        Me.Label140.TabIndex = 55
-        Me.Label140.Text = "Open Theme"
-        Me.Label140.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label141
-        '
-        Me.Label141.Location = New System.Drawing.Point(244, 12)
-        Me.Label141.Name = "Label141"
-        Me.Label141.Size = New System.Drawing.Size(87, 32)
-        Me.Label141.TabIndex = 56
-        Me.Label141.Text = "Save Theme"
-        Me.Label141.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'GroupBox13
-        '
-        Me.GroupBox13.Controls.Add(Me.Button36)
-        Me.GroupBox13.Controls.Add(Me.Button35)
-        Me.GroupBox13.Controls.Add(Me.Button34)
-        Me.GroupBox13.Controls.Add(Me.Button33)
-        Me.GroupBox13.Location = New System.Drawing.Point(8, 194)
-        Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(200, 44)
-        Me.GroupBox13.TabIndex = 4
-        Me.GroupBox13.TabStop = false
-        Me.GroupBox13.Text = "Offset"
-        '
-        'Button33
-        '
-        Me.Button33.Location = New System.Drawing.Point(7, 15)
-        Me.Button33.Name = "Button33"
-        Me.Button33.Size = New System.Drawing.Size(43, 23)
-        Me.Button33.TabIndex = 0
-        Me.Button33.Text = "Up"
-        Me.Button33.UseVisualStyleBackColor = true
-        '
-        'Button34
-        '
-        Me.Button34.Location = New System.Drawing.Point(55, 15)
-        Me.Button34.Name = "Button34"
-        Me.Button34.Size = New System.Drawing.Size(43, 23)
-        Me.Button34.TabIndex = 5
-        Me.Button34.Text = "Right"
-        Me.Button34.UseVisualStyleBackColor = true
-        '
-        'Button35
-        '
-        Me.Button35.Location = New System.Drawing.Point(103, 15)
-        Me.Button35.Name = "Button35"
-        Me.Button35.Size = New System.Drawing.Size(43, 23)
-        Me.Button35.TabIndex = 5
-        Me.Button35.Text = "Left"
-        Me.Button35.UseVisualStyleBackColor = true
-        '
-        'Button36
-        '
-        Me.Button36.Location = New System.Drawing.Point(151, 15)
-        Me.Button36.Name = "Button36"
-        Me.Button36.Size = New System.Drawing.Size(43, 23)
-        Me.Button36.TabIndex = 6
-        Me.Button36.Text = "Down"
-        Me.Button36.UseVisualStyleBackColor = true
         '
         'FrmSettings
         '
@@ -12540,6 +12476,15 @@ Partial Class FrmSettings
         CType(Me.WishlistCostSilver,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.WishlistCostGold,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.WishlistPreview,System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage26.ResumeLayout(false)
+        Me.Panel12.ResumeLayout(false)
+        Me.GroupBox9.ResumeLayout(false)
+        CType(Me.PictureBox10,System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox5.ResumeLayout(false)
+        Me.GroupBox5.PerformLayout
+        Me.GroupBox11.ResumeLayout(false)
+        Me.GroupBox1.ResumeLayout(false)
+        CType(Me.PBBackgroundPreview,System.ComponentModel.ISupportInitialize).EndInit
         Me.TabPage4.ResumeLayout(false)
         Me.Panel6.ResumeLayout(false)
         Me.GroupBox10.ResumeLayout(false)
@@ -12608,16 +12553,6 @@ Partial Class FrmSettings
         Me.Panel5.ResumeLayout(false)
         Me.Panel5.PerformLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
-        Me.TabPage26.ResumeLayout(false)
-        Me.Panel12.ResumeLayout(false)
-        CType(Me.PictureBox10,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox11.ResumeLayout(false)
-        CType(Me.PBBackgroundPreview,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox1.ResumeLayout(false)
-        Me.GroupBox5.ResumeLayout(false)
-        Me.GroupBox5.PerformLayout
-        Me.GroupBox9.ResumeLayout(false)
-        Me.GroupBox13.ResumeLayout(false)
         Me.ResumeLayout(false)
 
 End Sub
@@ -13548,12 +13483,6 @@ End Sub
     Friend WithEvents LBLDateBackColor2 As System.Windows.Forms.Label
     Friend WithEvents CBTransparentTime As System.Windows.Forms.CheckBox
     Friend WithEvents Button31 As System.Windows.Forms.Button
-    Friend WithEvents Label140 As System.Windows.Forms.Label
+    Friend WithEvents CBFlipBack As System.Windows.Forms.CheckBox
     Friend WithEvents Button32 As System.Windows.Forms.Button
-    Friend WithEvents Label141 As System.Windows.Forms.Label
-    Friend WithEvents GroupBox13 As System.Windows.Forms.GroupBox
-    Friend WithEvents Button36 As System.Windows.Forms.Button
-    Friend WithEvents Button35 As System.Windows.Forms.Button
-    Friend WithEvents Button34 As System.Windows.Forms.Button
-    Friend WithEvents Button33 As System.Windows.Forms.Button
 End Class

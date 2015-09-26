@@ -188,6 +188,7 @@ Partial Class Form1
         Me.DommeTagsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.LazySubToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RandomizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.PlaylistToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GamesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SlotsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MatchGameToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -209,6 +210,9 @@ Partial Class Form1
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LBLGeneralSettings = New System.Windows.Forms.Label()
         Me.PNLTabs = New System.Windows.Forms.Panel()
+        Me.PNLPlaylist = New System.Windows.Forms.Panel()
+        Me.LBPlaylist = New System.Windows.Forms.ListBox()
+        Me.BTNPlaylist = New System.Windows.Forms.Button()
         Me.PNLAppRandomizer = New System.Windows.Forms.Panel()
         Me.BTNRandomLocal = New System.Windows.Forms.Button()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -247,10 +251,6 @@ Partial Class Form1
         Me.PNLAvatar = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.PNLPlaylist = New System.Windows.Forms.Panel()
-        Me.LBPlaylist = New System.Windows.Forms.ListBox()
-        Me.BTNPlaylist = New System.Windows.Forms.Button()
-        Me.PlaylistToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -269,12 +269,12 @@ Partial Class Form1
         Me.MenuStrip2.SuspendLayout()
         Me.PNLDate.SuspendLayout()
         Me.PNLTabs.SuspendLayout()
+        Me.PNLPlaylist.SuspendLayout()
         Me.PNLAppRandomizer.SuspendLayout()
         Me.PNLLazySub.SuspendLayout()
         Me.PNLAvatar.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.PNLPlaylist.SuspendLayout()
         Me.SuspendLayout()
         '
         'domName
@@ -1661,6 +1661,12 @@ Partial Class Form1
         Me.RandomizerToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
         Me.RandomizerToolStripMenuItem.Text = "Randomizer"
         '
+        'PlaylistToolStripMenuItem
+        '
+        Me.PlaylistToolStripMenuItem.Name = "PlaylistToolStripMenuItem"
+        Me.PlaylistToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.PlaylistToolStripMenuItem.Text = "Playlist"
+        '
         'GamesToolStripMenuItem1
         '
         Me.GamesToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SlotsToolStripMenuItem1, Me.MatchGameToolStripMenuItem1, Me.RiskyPickToolStripMenuItem1, Me.ExchangeToolStripMenuItem1, Me.CollectionToolStripMenuItem1})
@@ -1804,6 +1810,40 @@ Partial Class Form1
         Me.PNLTabs.Name = "PNLTabs"
         Me.PNLTabs.Size = New System.Drawing.Size(253, 646)
         Me.PNLTabs.TabIndex = 778
+        '
+        'PNLPlaylist
+        '
+        Me.PNLPlaylist.BackColor = System.Drawing.Color.SteelBlue
+        Me.PNLPlaylist.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLPlaylist.Controls.Add(Me.LBPlaylist)
+        Me.PNLPlaylist.Controls.Add(Me.BTNPlaylist)
+        Me.PNLPlaylist.Location = New System.Drawing.Point(2, 2)
+        Me.PNLPlaylist.Name = "PNLPlaylist"
+        Me.PNLPlaylist.Size = New System.Drawing.Size(245, 394)
+        Me.PNLPlaylist.TabIndex = 773
+        Me.PNLPlaylist.Visible = False
+        '
+        'LBPlaylist
+        '
+        Me.LBPlaylist.FormattingEnabled = True
+        Me.LBPlaylist.Location = New System.Drawing.Point(8, 9)
+        Me.LBPlaylist.Name = "LBPlaylist"
+        Me.LBPlaylist.Size = New System.Drawing.Size(224, 329)
+        Me.LBPlaylist.Sorted = True
+        Me.LBPlaylist.TabIndex = 11
+        '
+        'BTNPlaylist
+        '
+        Me.BTNPlaylist.BackColor = System.Drawing.Color.White
+        Me.BTNPlaylist.FlatAppearance.BorderSize = 2
+        Me.BTNPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNPlaylist.ForeColor = System.Drawing.Color.Black
+        Me.BTNPlaylist.Location = New System.Drawing.Point(8, 350)
+        Me.BTNPlaylist.Name = "BTNPlaylist"
+        Me.BTNPlaylist.Size = New System.Drawing.Size(224, 28)
+        Me.BTNPlaylist.TabIndex = 7
+        Me.BTNPlaylist.Text = "Begin Selected Playlist"
+        Me.BTNPlaylist.UseVisualStyleBackColor = False
         '
         'PNLAppRandomizer
         '
@@ -2294,46 +2334,6 @@ Partial Class Form1
         Me.Panel4.Size = New System.Drawing.Size(245, 31)
         Me.Panel4.TabIndex = 779
         '
-        'PNLPlaylist
-        '
-        Me.PNLPlaylist.BackColor = System.Drawing.Color.SteelBlue
-        Me.PNLPlaylist.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLPlaylist.Controls.Add(Me.LBPlaylist)
-        Me.PNLPlaylist.Controls.Add(Me.BTNPlaylist)
-        Me.PNLPlaylist.Location = New System.Drawing.Point(2, 2)
-        Me.PNLPlaylist.Name = "PNLPlaylist"
-        Me.PNLPlaylist.Size = New System.Drawing.Size(245, 394)
-        Me.PNLPlaylist.TabIndex = 773
-        Me.PNLPlaylist.Visible = False
-        '
-        'LBPlaylist
-        '
-        Me.LBPlaylist.FormattingEnabled = True
-        Me.LBPlaylist.Location = New System.Drawing.Point(8, 9)
-        Me.LBPlaylist.Name = "LBPlaylist"
-        Me.LBPlaylist.Size = New System.Drawing.Size(224, 329)
-        Me.LBPlaylist.Sorted = True
-        Me.LBPlaylist.TabIndex = 11
-        '
-        'BTNPlaylist
-        '
-        Me.BTNPlaylist.BackColor = System.Drawing.Color.White
-        Me.BTNPlaylist.FlatAppearance.BorderSize = 2
-        Me.BTNPlaylist.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNPlaylist.ForeColor = System.Drawing.Color.Black
-        Me.BTNPlaylist.Location = New System.Drawing.Point(8, 350)
-        Me.BTNPlaylist.Name = "BTNPlaylist"
-        Me.BTNPlaylist.Size = New System.Drawing.Size(224, 28)
-        Me.BTNPlaylist.TabIndex = 7
-        Me.BTNPlaylist.Text = "Begin Selected Playlist"
-        Me.BTNPlaylist.UseVisualStyleBackColor = False
-        '
-        'PlaylistToolStripMenuItem
-        '
-        Me.PlaylistToolStripMenuItem.Name = "PlaylistToolStripMenuItem"
-        Me.PlaylistToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PlaylistToolStripMenuItem.Text = "Playlist"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2377,6 +2377,7 @@ Partial Class Form1
         Me.MenuStrip2.PerformLayout()
         Me.PNLDate.ResumeLayout(False)
         Me.PNLTabs.ResumeLayout(False)
+        Me.PNLPlaylist.ResumeLayout(False)
         Me.PNLAppRandomizer.ResumeLayout(False)
         Me.PNLLazySub.ResumeLayout(False)
         Me.PNLLazySub.PerformLayout()
@@ -2385,7 +2386,6 @@ Partial Class Form1
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        Me.PNLPlaylist.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

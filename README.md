@@ -3,6 +3,12 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+@EdgeToRuinSecret, @EdgeToRuinHoldSecret and @EdgeToRuinNoHoldSecret are no longer valid Commands. The new Commands are @EdgeToRuinNoSecret, @EdgeToRuinHoldNoSecret and @EdgeToRuinNoHoldNoSecret. It didn't make sense to me that the default state would be knowing the ruin was coming in advance, so ruin taunts are only active when a "NoSecret" @EdgeToRuin style Command is used
+
+Tease AI no longer pulls lines that show images from List scripts when @LockImages is active
+
+@DeleteVar[] should now work correctly
+
 I've mainly been ripping out some guts and trynig to tweak or optimize things. Too much and too minor to detail, but I've added a third attempt at creating a domme tags system and I have to say this third one is an effin winner : D
 
 
