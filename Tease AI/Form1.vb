@@ -90,10 +90,13 @@ Public Class Form1
 
     Dim CBTCockActive As Boolean
     Dim CBTBallsActive As Boolean
+
     Dim CBTCockFlag As Boolean
     Dim CBTBallsFlag As Boolean
+
     Dim CBTBallsFirst As Boolean
     Dim CBTCockFirst As Boolean
+
     Dim CBTBallsCount As Integer
     Dim CBTCockCount As Integer
 
@@ -510,6 +513,11 @@ Public Class Form1
     Dim DommeImageFound As Boolean
     Dim DommeImageListCheck As Boolean
 
+    Dim CBTBothActive As Boolean
+    Dim CBTBothFlag As Boolean
+    Dim CBTBothCount As Integer
+    Dim CBTBothFirst As Boolean
+
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -745,6 +753,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         CBTBallsFirst = True
         CBTCockFirst = True
+        CBTBothFirst = True
         CustomTaskFirst = True
 
         CoInternetSetFeatureEnabled(DISABLE_SOUNDS, SET_FEATURE_ON_PROCESS, True)
@@ -1587,6 +1596,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         CBTBallsFirst = True
         CBTCockFirst = True
+        CBTBothFirst = True
         CustomTaskFirst = True
 
         VideoType = "General"
@@ -2997,14 +3007,16 @@ DebugAwarenessStep2:
 
 
 
-        If CBTCockFlag = True Or CBTBallsFlag = True Or CustomTask = True Then
+        If CBTCockFlag = True Or CBTBallsFlag = True Or CBTBothFlag = True Or CustomTask = True Then
             Dim CBTStop As Integer = randomizer.Next(1, 101)
             If CBTStop < 30 Then
                 CBTCockFlag = False
                 CBTBallsFlag = False
+                CBTBothFlag = False
                 CustomTask = False
                 CBTBallsFirst = True
                 CBTCockFirst = True
+                CBTBothFirst = True
                 CustomTaskFirst = True
                 ScriptTick = 3
                 ScriptTimer.Start()
@@ -3017,6 +3029,10 @@ DebugAwarenessStep2:
 
         If CBTBallsFlag = True Then
             CBTBalls()
+        End If
+
+        If CBTBothFlag = True Then
+            CBTBoth()
         End If
 
         If CustomTask = True Then
@@ -3114,7 +3130,7 @@ FoundResponse:
             GoTo FoundState
         End If
 
-        If CBTBallsFlag = True Then
+        If CBTBallsFlag = True Or CBTBothFlag = True Then
             SubState = "CBT Balls"
             GoTo FoundState
         End If
@@ -3783,27 +3799,6 @@ AcceptAnswer:
 
     Public Sub CBTBalls()
 
-
-        'Dim CBTReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBT Balls.txt")
-        'Dim CBTLines As New List(Of String)
-        'Dim CBTLine As Integer
-        'Dim CBTLineTotal As Integer
-
-        'CBTLine = 0
-        'CBTLineTotal = 0
-
-        'While CBTReader.Peek <> -1
-        'CBTLines.Add(CBTReader.ReadLine())
-        'CBTLineTotal += 1
-        'End While
-
-        'CBTReader.Close()
-        'CBTReader.Dispose()
-
-        'CBTLine = randomizer.Next(0, CBTLineTotal)
-
-        'DomTask = CBTLines(CBTLine)
-
         Dim BallReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTBalls_First.txt")
 
         If CBTBallsFirst = False Then
@@ -3813,13 +3808,12 @@ AcceptAnswer:
         End If
 
         Dim BallList As New List(Of String)
+
         While BallReader.Peek <> -1
             BallList.Add(BallReader.ReadLine())
         End While
         BallReader.Close()
         BallReader.Dispose()
-
-        
 
         Try
             BallList = FilterList(BallList)
@@ -3835,26 +3829,6 @@ AcceptAnswer:
     End Sub
 
     Public Sub CBTCock()
-
-        'Dim CBTReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBT Cock.txt")
-        'Dim CBTLines As New List(Of String)
-        'Dim CBTLine As Integer
-        'Dim CBTLineTotal As Integer
-
-        'CBTLine = 0
-        'CBTLineTotal = 0
-
-        'While CBTReader.Peek <> -1
-        'CBTLines.Add(CBTReader.ReadLine())
-        'CBTLineTotal += 1
-        'End While
-
-        'CBTReader.Close()
-        'CBTReader.Dispose()
-
-        'CBTLine = randomizer.Next(0, CBTLineTotal)
-
-        'DomTask = CBTLines(CBTLine)
 
         Dim CockReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTCock_First.txt")
 
@@ -3881,13 +3855,58 @@ AcceptAnswer:
             DomTask = "ERROR: Tease AI did not return a valid @CBTCock line"
         End Try
 
-        CBTBallsFirst = False
+        CBTCockFirst = False
 
         TypingDelayGeneric()
 
     End Sub
 
+    Public Sub CBTBoth()
 
+        Dim BallReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTBalls_First.txt")
+
+        If CBTBothFirst = False Then
+            BallReader = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTBalls.txt")
+        Else
+            CBTBallsCount += 1
+            CBTCockCount += 1
+        End If
+
+        Dim BothList As New List(Of String)
+
+        While BallReader.Peek <> -1
+            BothList.Add(BallReader.ReadLine())
+        End While
+        BallReader.Close()
+        BallReader.Dispose()
+
+        Dim CockReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTCock_First.txt")
+
+        If CBTBothFirst = False Then
+            CockReader = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTCock.txt")
+        Else
+            CBTBallsCount += 1
+            CBTCockCount += 1
+        End If
+
+        While CockReader.Peek <> -1
+            BothList.Add(CockReader.ReadLine())
+        End While
+        CockReader.Close()
+        CockReader.Dispose()
+
+        Try
+            BothList = FilterList(BothList)
+            DomTask = BothList(randomizer.Next(0, BothList.Count))
+        Catch
+            DomTask = "ERROR: Tease AI did not return a valid @CBT line"
+        End Try
+
+        CBTBothFirst = False
+
+        TypingDelayGeneric()
+
+    End Sub
 
     Public Sub RunCustomTask()
 
@@ -3939,7 +3958,7 @@ AcceptAnswer:
 
         'Debug.Print("CBTCockFlag = " & CBTCockFlag)
         'Debug.Print("CBTBallsFlag = " & CBTBallsFlag)
-        If CBTCockFlag = True Or CBTBallsFlag = True Or CustomTask = True Then Return
+        If CBTCockFlag = True Or CBTBallsFlag = True Or CBTBothFlag = True Or CustomTask = True Then Return
 
         'Debug.Print("WritingTaskFlag = " & WritingTaskFlag)
         If WritingTaskFlag = True Then Return
@@ -5393,6 +5412,11 @@ NoResponse:
                     CBTBalls()
                 End If
 
+                If CBTBothActive = True Then
+                    CBTBothActive = False
+                    CBTBoth()
+                End If
+
                 If CustomTaskActive = True Then
                     CustomTaskActive = False
                     RunCustomTask()
@@ -6026,18 +6050,21 @@ NullResponseLine2:
 
                 If CBTCockActive = True Then CBTCockActive = False
                 If CBTBallsActive = True Then CBTBallsActive = False
+                If CBTBothActive = True Then CBTBothActive = False
 
 
 
-                If CBTCockFlag = True Or CBTBallsFlag = True Or CustomTask = True Then
+                If CBTCockFlag = True Or CBTBallsFlag = True Or CBTBothFlag = True Or CustomTask = True Then
                     Dim CBTStop As Integer = randomizer.Next(1, 101)
                     'Debug.Print("CBTSTop = " & CBTStop)
                     If CBTStop < 30 Then
                         CBTCockFlag = False
                         CBTBallsFlag = False
+                        CBTBothFlag = False
                         CustomTask = False
                         CBTBallsFirst = True
                         CBTCockFirst = True
+                        CBTBothFirst = True
                         CustomTaskFirst = True
                     End If
                 End If
@@ -6048,6 +6075,10 @@ NullResponseLine2:
 
                 If CBTBallsFlag = True Then
                     CBTBalls()
+                End If
+
+                If CBTBothFlag = True Then
+                    CBTBoth()
                 End If
 
                 If CustomTask = True Then
@@ -9903,15 +9934,10 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@ShowLikedImage") Then
             If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-                Dim LikeReader As New StreamReader(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
+
                 Dim LikeList As New List(Of String)
 
-                While LikeReader.Peek <> -1
-                    LikeList.Add(LikeReader.ReadLine())
-                End While
-
-                LikeReader.Close()
-                LikeReader.Dispose()
+                LikeList = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
 
                 If LikeList.Count = 0 Then
                     FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
@@ -9925,15 +9951,10 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@ShowDislikedImage") Then
             If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-                Dim DislikeReader As New StreamReader(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
+
                 Dim DislikeList As New List(Of String)
 
-                While DislikeReader.Peek <> -1
-                    DislikeList.Add(DislikeReader.ReadLine())
-                End While
-
-                DislikeReader.Close()
-                DislikeReader.Dispose()
+                DislikeList = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
 
                 If DislikeList.Count = 0 Then
                     FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
@@ -9943,22 +9964,6 @@ RinseLatherRepeat:
                 ShowGotImage()
             End If
             StringClean = StringClean.Replace("@ShowDislikedImage", "")
-        End If
-
-
-        'If StringClean.Contains("@NullResponse") Then
-        'NullResponse = True
-        'StringClean = StringClean.Replace("@NullResponse", "")
-        'End If
-
-        '  ┌─┐╔╗╔┌─┐┬ ┬╔╗ ┬  ┌─┐┌─┐╦┌┬┐┌─┐┌─┐┌─┐
-        '  │└┘║║║├┤ │││╠╩╗│  │ ││ ┬║│││├─┤│ ┬├┤ 
-        '  └──╝╚╝└─┘└┴┘╚═╝┴─┘└─┘└─┘╩┴ ┴┴ ┴└─┘└─┘
-
-        If StringClean.Contains("@NewBlogImage") Then
-            GetBlogImage()
-            StringClean = StringClean.Replace("@NewBlogImage", "")
-            'Debug.Print("Is this being called?")
         End If
 
         If StringClean.Contains("@ShowBlogImage") Then
@@ -10566,32 +10571,10 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@CBT") And Not StringClean.Contains("@CBTLevel") Then
 
-            If FrmSettings.CBCBTBalls.Checked = False And FrmSettings.CBCBTCock.Checked = True Then
-                CBTCockFlag = True
-                CBTCockActive = True
-                GoTo CBTFinish
+            If FrmSettings.CBCBTCock.Checked = True And FrmSettings.CBCBTBalls.Checked = True Then
+                CBTBothActive = True
+                CBTBothFlag = True
             End If
-
-            If FrmSettings.CBCBTBalls.Checked = True And FrmSettings.CBCBTCock.Checked = False Then
-                CBTBallsFlag = True
-                CBTBallsActive = True
-                GoTo CBTFinish
-            End If
-
-            If FrmSettings.CBCBTBalls.Checked = False And FrmSettings.CBCBTCock.Checked = False Then
-                GoTo CBTFinish
-            End If
-
-            TempVal = randomizer.Next(1, 101)
-            If TempVal > 50 Then
-                CBTBallsFlag = True
-                CBTBallsActive = True
-            Else
-                CBTCockFlag = True
-                CBTCockActive = True
-            End If
-
-CBTFinish:
 
             StringClean = StringClean.Replace("@CBT", "")
         End If
@@ -11503,6 +11486,7 @@ OrgasmDecided:
 
                 CBTCockFlag = False
                 CBTBallsFlag = False
+                CBTBothFlag = False
                 CustomTask = False
                 SubEdging = False
                 SubHoldingEdge = False
@@ -11537,6 +11521,7 @@ OrgasmDecided:
 
                 CBTCockFlag = False
                 CBTBallsFlag = False
+                CBTBothFlag = False
                 CustomTask = False
                 SubEdging = False
                 SubHoldingEdge = False
@@ -13037,6 +13022,15 @@ VTSkip:
             StringClean = StringClean.Replace("@Debug", "")
         End If
 
+        ' The @NewBlogImage Command is a defunct Command that has been replaced by @ShowBlogImage
+
+        If StringClean.Contains("@NewBlogImage") Then
+            GetBlogImage()
+            StringClean = StringClean.Replace("@NewBlogImage", "")
+            'Debug.Print("Is this being called?")
+        End If
+
+
 
         'The @SetGroup Command is a defunct Command that was created when implementing new Glitter features. It has no use in the current build of Tease AI.
 
@@ -13598,7 +13592,7 @@ VTSkip:
         If SubStroking = True Then ReturnSubState = "Stroking"
         If SubEdging = True Then ReturnSubState = "Edging"
         If SubHoldingEdge = True Then ReturnSubState = "Holding The Edge"
-        If CBTBallsActive = True Then ReturnSubState = "CBTBalls"
+        If CBTBallsActive = True Or CBTBothActive = True Then ReturnSubState = "CBTBalls"
         If CBTCockActive = True Then ReturnSubState = "CBTCock"
         If CensorshipGame = True Then ReturnSubState = "Censorship Sucks"
         If AvoidTheEdgeGame = True Then ReturnSubState = "Avoid The Edge"
@@ -24601,10 +24595,7 @@ SkipNew:
         PlayRandomCH()
     End Sub
 
-    Private Sub AIBoxToolsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AIBoxToolsToolStripMenuItem.Click
-        If Form9.Visible = False Then Form9.Show()
-        Form9.Focus()
-    End Sub
+   
 
    
     Private Sub PlaylistToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PlaylistToolStripMenuItem.Click
@@ -24649,4 +24640,13 @@ SkipNew:
 
    
   
+    Private Sub CommandGuideToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CommandGuideToolStripMenuItem.Click
+        If Form10.Visible = False Then Form10.Show()
+        Form10.Focus()
+    End Sub
+
+    Private Sub AIBoxesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AIBoxesToolStripMenuItem.Click
+        If Form9.Visible = False Then Form9.Show()
+        Form9.Focus()
+    End Sub
 End Class

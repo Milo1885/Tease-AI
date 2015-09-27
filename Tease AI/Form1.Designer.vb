@@ -195,7 +195,6 @@ Partial Class Form1
         Me.RiskyPickToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExchangeToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.CollectionToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AIBoxToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MilovanaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenBetaThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.BugReportThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -204,6 +203,9 @@ Partial Class Form1
         Me.DebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RunScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CommandGuideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AIBoxesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MetroTimer = New System.Windows.Forms.Timer(Me.components)
         Me.BWMetro = New System.ComponentModel.BackgroundWorker()
         Me.PNLDate = New System.Windows.Forms.Panel()
@@ -1464,7 +1466,7 @@ Partial Class Form1
         '
         'MenuStrip2
         '
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AppsToolStripMenuItem, Me.GamesToolStripMenuItem1, Me.AIBoxToolsToolStripMenuItem, Me.MilovanaToolStripMenuItem1, Me.DebugToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AppsToolStripMenuItem, Me.GamesToolStripMenuItem1, Me.ToolsToolStripMenuItem, Me.MilovanaToolStripMenuItem1, Me.DebugToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
         Me.MenuStrip2.Size = New System.Drawing.Size(1682, 24)
@@ -1704,12 +1706,6 @@ Partial Class Form1
         Me.CollectionToolStripMenuItem1.Size = New System.Drawing.Size(142, 22)
         Me.CollectionToolStripMenuItem1.Text = "Collection"
         '
-        'AIBoxToolsToolStripMenuItem
-        '
-        Me.AIBoxToolsToolStripMenuItem.Name = "AIBoxToolsToolStripMenuItem"
-        Me.AIBoxToolsToolStripMenuItem.Size = New System.Drawing.Size(84, 20)
-        Me.AIBoxToolsToolStripMenuItem.Text = "AI Box Tools"
-        '
         'MilovanaToolStripMenuItem1
         '
         Me.MilovanaToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenBetaThreadToolStripMenuItem1, Me.BugReportThreadToolStripMenuItem1, Me.WebteasesToolStripMenuItem1, Me.ForumToolStripMenuItem})
@@ -1759,6 +1755,25 @@ Partial Class Form1
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'ToolsToolStripMenuItem
+        '
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AIBoxesToolStripMenuItem, Me.CommandGuideToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
+        Me.ToolsToolStripMenuItem.Text = "Tools"
+        '
+        'CommandGuideToolStripMenuItem
+        '
+        Me.CommandGuideToolStripMenuItem.Name = "CommandGuideToolStripMenuItem"
+        Me.CommandGuideToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.CommandGuideToolStripMenuItem.Text = "Command Guide"
+        '
+        'AIBoxesToolStripMenuItem
+        '
+        Me.AIBoxesToolStripMenuItem.Name = "AIBoxesToolStripMenuItem"
+        Me.AIBoxesToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.AIBoxesToolStripMenuItem.Text = "AI Boxes"
         '
         'MetroTimer
         '
@@ -2611,11 +2626,13 @@ Partial Class Form1
     Friend WithEvents BTNRandomVideo As System.Windows.Forms.Button
     Friend WithEvents BTNRandomBlog As System.Windows.Forms.Button
     Friend WithEvents RandomizerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents AIBoxToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ThemeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PNLPlaylist As System.Windows.Forms.Panel
     Friend WithEvents LBPlaylist As System.Windows.Forms.ListBox
     Friend WithEvents BTNPlaylist As System.Windows.Forms.Button
     Friend WithEvents PlaylistToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CommandGuideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AIBoxesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
