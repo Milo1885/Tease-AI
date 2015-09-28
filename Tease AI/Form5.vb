@@ -1134,7 +1134,6 @@ Public Class frmApps
         BTNResume.BackColor = Color.SteelBlue
         BTNReset.BackColor = Color.SteelBlue
 
-        FrmWritingTask.PNLWritingTask.BackColor = Color.SteelBlue
 
         Form1.SplitContainer1.Panel2.BackColor = Color.SteelBlue
 
@@ -1203,7 +1202,7 @@ Public Class frmApps
         BTNResume.BackColor = Color.DarkMagenta
         BTNReset.BackColor = Color.DarkMagenta
 
-        FrmWritingTask.PNLWritingTask.BackColor = Color.DarkMagenta
+
 
 
         'PNLLazySub.BackColor = Color.DarkMagenta
@@ -1268,7 +1267,7 @@ Public Class frmApps
         BTNResume.BackColor = Color.Black
         BTNReset.BackColor = Color.Black
 
-        FrmWritingTask.PNLWritingTask.BackColor = Color.Black
+
 
         'PNLLazySub.BackColor = Color.Black
         'Label27.ForeColor = Color.Black
@@ -1332,7 +1331,7 @@ Public Class frmApps
         BTNResume.BackColor = Color.Firebrick
         BTNReset.BackColor = Color.Firebrick
 
-        FrmWritingTask.PNLWritingTask.BackColor = Color.Firebrick
+
 
         'PNLLazySub.BackColor = Color.Firebrick
         ' Label27.ForeColor = Color.Firebrick

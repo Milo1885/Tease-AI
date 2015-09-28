@@ -625,12 +625,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End Try
 
         Try
-            FrmWritingTask.Close()
-            FrmWritingTask.Dispose()
-        Catch ex As Exception
-        End Try
-
-        Try
             FrmCardList.Close()
             FrmCardList.Dispose()
         Catch ex As Exception
@@ -727,11 +721,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         Do
             Application.DoEvents()
         Loop Until FrmSettings.FrmSettingsLoading = False
-
-        FrmWritingTask.Show()
-        FrmWritingTask.Visible = False
-
-
 
         StopMetronome = True
 
@@ -1589,7 +1578,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\")
 
-        FrmWritingTask.Visible = False
         StopMetronome = True
 
         
@@ -2002,13 +1990,13 @@ WritingTaskLine:
         If WritingTaskFlag = True Then
 
 
-            If ChatString = FrmWritingTask.LBLWritingTaskText.Text Then
+            If ChatString = LBLWritingTaskText.Text Then
 
                 WritingTaskLinesWritten += 1
                 WritingTaskLinesRemaining -= 1
 
-                FrmWritingTask.LBLLinesWritten.Text = WritingTaskLinesWritten
-                FrmWritingTask.LBLLinesRemaining.Text = WritingTaskLinesRemaining
+                LBLLinesWritten.Text = WritingTaskLinesWritten
+                LBLLinesRemaining.Text = WritingTaskLinesRemaining
 
                 If SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
                     Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
@@ -2051,7 +2039,6 @@ WritingTaskLine:
 
                 If WritingTaskLinesRemaining = 0 Then
                     WritingTaskFlag = False
-                    FrmWritingTask.Visible = False
                     chatBox.ShortcutsEnabled = True
                     ScriptTick = 3
                     ScriptTimer.Start()
@@ -2097,11 +2084,11 @@ WritingTaskLine:
                 SubWroteLast = True
 
                 WritingTaskMistakesMade += 1
-                FrmWritingTask.LBLMistakesMade.Text = WritingTaskMistakesMade
+                LBLMistakesMade.Text = WritingTaskMistakesMade
 
                 If WritingTaskMistakesMade = WritingTaskMistakesAllowed Then
                     WritingTaskFlag = False
-                    FrmWritingTask.Visible = False
+                    'FrmWritingTask.Visible = False
                     chatBox.ShortcutsEnabled = True
                     SkipGotoLine = True
                     FileGoto = "Failed Writing Task"
@@ -4929,11 +4916,7 @@ NullResponse:
 
 
                 If DomTask.Contains("@WritingTask(") Then
-                    Dim WriteFlag As String = DomTask
-                    Dim WriteStart As Integer
-                    WriteStart = WriteFlag.IndexOf("@WritingTask(") + 13
-                    WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-                    WriteFlag = WriteFlag.Split(")")(0)
+                    Dim WriteFlag As String = GetParentheses(DomTask, "@WritingTask(")
                     DomTask = DomTask.Replace(WriteFlag, PoundClean(WriteFlag))
                 End If
 
@@ -5760,11 +5743,7 @@ TryNextWithTease:
                 End If
 
                 If DomChat.Contains("@WritingTask(") Then
-                    Dim WriteFlag As String = DomTask
-                    Dim WriteStart As Integer
-                    WriteStart = WriteFlag.IndexOf("@WritingTask(") + 13
-                    WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-                    WriteFlag = WriteFlag.Split(")")(0)
+                    Dim WriteFlag As String = GetParentheses(DomChat, "@WritingTask(")
                     DomChat = DomChat.Replace(WriteFlag, PoundClean(WriteFlag))
                 End If
 
@@ -10696,12 +10675,12 @@ OrgasmDecided:
 
             Dim WTTempString As String() = Split(StringClean, "@WritingTask(", 2)
             Dim WTTemp As String() = Split(WTTempString(1), ")")
-            FrmWritingTask.LBLWritingTaskText.Text = WTTemp(0)
-            FrmWritingTask.LBLWritingTaskText.Text = StripCommands(FrmWritingTask.LBLWritingTaskText.Text)
-            FrmWritingTask.LBLWritingTaskText.Text = StripFormat(FrmWritingTask.LBLWritingTaskText.Text)
+            LBLWritingTaskText.Text = WTTemp(0)
+            LBLWritingTaskText.Text = StripCommands(LBLWritingTaskText.Text)
+            LBLWritingTaskText.Text = StripFormat(LBLWritingTaskText.Text)
+            LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace("  ", " ")
 
-
-            Dim WritingTaskVal As Integer = Val(FrmWritingTask.LBLWritingTaskText.Text)
+            Dim WritingTaskVal As Integer = Val(LBLWritingTaskText.Text)
             'Debug.Print("WritingTaskVal = " & WritingTaskVal)
 
             If WritingTaskVal = 0 Then
@@ -10709,14 +10688,14 @@ OrgasmDecided:
                 WritingTaskLinesAmount = 5 * Math.Round(WritingTaskLinesAmount / 5)
             Else
                 WritingTaskLinesAmount = WritingTaskVal
-                FrmWritingTask.LBLWritingTaskText.Text = FrmWritingTask.LBLWritingTaskText.Text.Replace(WritingTaskVal, "")
+                LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace(WritingTaskVal, "")
             End If
 
 
-            FrmWritingTask.LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times:"
-            FrmWritingTask.LBLWritingTask.Text = FrmWritingTask.LBLWritingTaskText.Text.Replace("line 1 times", "line 1 time")
-            FrmWritingTask.LBLLinesWritten.Text = "0"
-            FrmWritingTask.LBLLinesRemaining.Text = WritingTaskLinesAmount
+            LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times:"
+            LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
+            LBLLinesWritten.Text = "0"
+            LBLLinesRemaining.Text = WritingTaskLinesAmount
 
 
             ' Dim WTTempString As String() = Split(StringClean, "@WritingTask(", 2)
@@ -10724,16 +10703,21 @@ OrgasmDecided:
 
             ' LBLWritingTaskText.Text = WTTemp(0)
 
-            FrmWritingTask.Show()
+            If PNLWritingTask.Visible = False Then
+                CloseApp()
+                OpenApp()
+                PNLWritingTask.Visible = True
+            End If
             WritingTaskMistakesAllowed = randomizer.Next(3, 11)
-            FrmWritingTask.LBLMistakesAllowed.Text = WritingTaskMistakesAllowed
-            FrmWritingTask.LBLMistakesMade.Text = "0"
+            LBLMistakesAllowed.Text = WritingTaskMistakesAllowed
+            LBLMistakesMade.Text = "0"
             StringClean = StringClean.Replace("@WritingTask", "")
-            FrmWritingTask.LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times."
+            LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times."
             WritingTaskLinesRemaining = WritingTaskLinesAmount
             WritingTaskLinesWritten = 0
             WritingTaskMistakesMade = 0
             chatBox.ShortcutsEnabled = False
+
         End If
 
         If StringClean.Contains("@CheckJOIVideo") Then
@@ -22675,6 +22659,12 @@ TryNext:
             PNLPlaylist.Height = 394
         End If
 
+        If PNLTabs.Height > 275 Then
+            PNLWritingTask.Height = PNLTabs.Height - 8
+        Else
+            PNLWritingTask.Height = 267
+        End If
+
         PNLTabs.HorizontalScroll.Visible = False
 
 
@@ -24054,7 +24044,7 @@ SkipNew:
 
 
 
-        FrmWritingTask.PNLWritingTask.BackColor = My.Settings.BackgroundColor
+
 
         'PNLLazySub.BackColor = my.settings.BackgroundColor
         'Label27.ForeColor = my.settings.BackgroundColor
@@ -24114,6 +24104,7 @@ SkipNew:
         PNLLazySub.BackColor = My.Settings.BackgroundColor
         PNLAppRandomizer.BackColor = My.Settings.BackgroundColor
         PNLPlaylist.BackColor = My.Settings.BackgroundColor
+        PNLWritingTask.BackColor = My.Settings.BackgroundColor
 
 
 
@@ -24242,6 +24233,7 @@ SkipNew:
         PNLLazySub.Visible = False
         PNLAppRandomizer.Visible = False
         PNLPlaylist.Visible = False
+        PNLWritingTask.Visible = False
 
         PNLTabs.Height = 0
 
@@ -24648,5 +24640,13 @@ SkipNew:
     Private Sub AIBoxesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AIBoxesToolStripMenuItem.Click
         If Form9.Visible = False Then Form9.Show()
         Form9.Focus()
+    End Sub
+
+    Private Sub WritingTasksToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles WritingTasksToolStripMenuItem.Click
+        If PNLWritingTask.Visible = False Then
+            CloseApp()
+            OpenApp()
+            PNLWritingTask.Visible = True
+        End If
     End Sub
 End Class
