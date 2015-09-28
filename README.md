@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Improved the way Tease AI validated scripts containing @PlayJOIVideo and @PlayCHVideo
+
 Minor WritingTask UI fixes
 
 Fixed bug where Writing Tasks did not launch correctly from Multiple Choice branches and Responses

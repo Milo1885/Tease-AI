@@ -7392,6 +7392,7 @@ WhyUMakeMeDoDis:
             If ScriptList(i).Contains("@PlayJOIVideo") Then
                 If Not RTBScriptReq.Text.Contains("* JOI or JOI Domme Video path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* JOI or JOI Domme Video path selected with a valid directory *" & Environment.NewLine
                 If CBVideoJOI.Checked = False And CBVideoJOID.Checked = False Then ScriptReqFailed = True
+                If LblVideoJOITotal.Text = "0" And LblVideoJOITotalD.Text = "0" Then ScriptReqFailed = True
                 If CBVideoJOI.Checked = True And Not Directory.Exists(LblVideoJOI.Text) Then ScriptReqFailed = True
                 If CBVideoJOID.Checked = True And Not Directory.Exists(LblVideoJOID.Text) Then ScriptReqFailed = True
             End If
@@ -7399,6 +7400,7 @@ WhyUMakeMeDoDis:
             If ScriptList(i).Contains("@PlayCHVideo") Then
                 If Not RTBScriptReq.Text.Contains("* CH or CH Domme Video path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* CH or CH Domme Video path selected with a valid directory *" & Environment.NewLine
                 If CBVideoCH.Checked = False And CBVideoCHD.Checked = False Then ScriptReqFailed = True
+                If LblVideoCHTotal.Text = "0" And LblVideoCHTotalD.Text = "0" Then ScriptReqFailed = True
                 If CBVideoCH.Checked = True And Not Directory.Exists(LblVideoCH.Text) Then ScriptReqFailed = True
                 If CBVideoCHD.Checked = True And Not Directory.Exists(LblVideoCHD.Text) Then ScriptReqFailed = True
             End If
@@ -7944,12 +7946,14 @@ WhyUMakeMeDoDis:
 
             If AvailList(j).Contains("@PlayJOIVideo") Then
                 If CBVideoJOI.Checked = False And CBVideoJOID.Checked = False Then AvailFail = True
+                If LblVideoJOITotal.Text = "0" And LblVideoJOITotalD.Text = "0" Then AvailFail = True
                 If CBVideoJOI.Checked = True And Not Directory.Exists(LblVideoJOI.Text) Then AvailFail = True
                 If CBVideoJOID.Checked = True And Not Directory.Exists(LblVideoJOID.Text) Then AvailFail = True
             End If
 
             If AvailList(j).Contains("@PlayCHVideo") Then
                 If CBVideoCH.Checked = False And CBVideoCHD.Checked = False Then AvailFail = True
+                If LblVideoCHTotal.Text = "0" And LblVideoCHTotalD.Text = "0" Then AvailFail = True
                 If CBVideoCH.Checked = True And Not Directory.Exists(LblVideoCH.Text) Then AvailFail = True
                 If CBVideoCHD.Checked = True And Not Directory.Exists(LblVideoCHD.Text) Then AvailFail = True
             End If

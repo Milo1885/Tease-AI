@@ -19117,7 +19117,7 @@ TryNext:
         Dim JOIVideos As New List(Of String)
         JOIVideos.Clear()
 
-        If FrmSettings.LblVideoJOITotal.Text <> "0" Then
+        If FrmSettings.LblVideoJOITotal.Text <> "0" And FrmSettings.CBVideoJOI.Checked = True Then
 
             For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOI.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.wmv")
                 JOIVideos.Add(foundFile)
@@ -19141,7 +19141,7 @@ TryNext:
 
 
 
-        If FrmSettings.LblVideoJOITotalD.Text <> "0" Then
+        If FrmSettings.LblVideoJOITotalD.Text <> "0" And FrmSettings.CBVideoJOID.Checked = True Then
             For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOID.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.wmv")
                 JOIVideos.Add(foundFile)
             Next
@@ -19187,13 +19187,13 @@ TryNext:
         Dim CHVideos As New List(Of String)
         CHVideos.Clear()
 
-        If FrmSettings.LblVideoCHTotal.Text <> "0" Then
+        If FrmSettings.LblVideoCHTotal.Text <> "0" And FrmSettings.CBVideoCH.Checked = True Then
 
             For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoCH.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.*")
                 If foundFile.Contains(".wmv") Or foundFile.Contains(".avi") Or foundFile.Contains(".mp4") Or foundFile.Contains(".mov") Or foundFile.Contains(".flv") Or foundFile.Contains(".m4v") Or foundFile.Contains(".mpg") Then CHVideos.Add(foundFile)
             Next
         End If
-        If FrmSettings.LblVideoCHTotalD.Text <> "0" Then
+        If FrmSettings.LblVideoCHTotalD.Text <> "0" And FrmSettings.CBVideoCHD.Checked = True Then
             For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoCHD.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.*")
                 If foundFile.Contains(".wmv") Or foundFile.Contains(".avi") Or foundFile.Contains(".mp4") Or foundFile.Contains(".mov") Or foundFile.Contains(".flv") Or foundFile.Contains(".m4v") Or foundFile.Contains(".mpg") Then CHVideos.Add(foundFile)
             Next
