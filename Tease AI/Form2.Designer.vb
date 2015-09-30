@@ -138,7 +138,6 @@ Partial Class FrmSettings
         Me.supremacistCheckBox = New System.Windows.Forms.CheckBox()
         Me.vulgarCheckBox = New System.Windows.Forms.CheckBox()
         Me.crazyCheckBox = New System.Windows.Forms.CheckBox()
-        Me.dompersonalityComboBox = New System.Windows.Forms.ComboBox()
         Me.GBDomOrgasms = New System.Windows.Forms.GroupBox()
         Me.orgasmlockrandombutton = New System.Windows.Forms.Button()
         Me.CBDomOrgasmEnds = New System.Windows.Forms.CheckBox()
@@ -721,6 +720,7 @@ Partial Class FrmSettings
         Me.TabPage26 = New System.Windows.Forms.TabPage()
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.Button32 = New System.Windows.Forms.Button()
         Me.Button31 = New System.Windows.Forms.Button()
         Me.PictureBox10 = New System.Windows.Forms.PictureBox()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -952,7 +952,9 @@ Partial Class FrmSettings
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button32 = New System.Windows.Forms.Button()
+        Me.humiliatingCheckBox = New System.Windows.Forms.CheckBox()
+        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.sadisticCheckBox = New System.Windows.Forms.CheckBox()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -2588,10 +2590,12 @@ Partial Class FrmSettings
         '
         'GBDomPersonality
         '
+        Me.GBDomPersonality.Controls.Add(Me.CheckBox2)
+        Me.GBDomPersonality.Controls.Add(Me.sadisticCheckBox)
         Me.GBDomPersonality.Controls.Add(Me.supremacistCheckBox)
         Me.GBDomPersonality.Controls.Add(Me.vulgarCheckBox)
         Me.GBDomPersonality.Controls.Add(Me.crazyCheckBox)
-        Me.GBDomPersonality.Controls.Add(Me.dompersonalityComboBox)
+        Me.GBDomPersonality.Controls.Add(Me.humiliatingCheckBox)
         Me.GBDomPersonality.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.GBDomPersonality.ForeColor = System.Drawing.Color.Black
         Me.GBDomPersonality.Location = New System.Drawing.Point(184, 30)
@@ -2606,7 +2610,7 @@ Partial Class FrmSettings
         Me.supremacistCheckBox.AutoSize = true
         Me.supremacistCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.supremacistCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.supremacistCheckBox.Location = New System.Drawing.Point(157, 44)
+        Me.supremacistCheckBox.Location = New System.Drawing.Point(157, 20)
         Me.supremacistCheckBox.Name = "supremacistCheckBox"
         Me.supremacistCheckBox.Size = New System.Drawing.Size(84, 17)
         Me.supremacistCheckBox.TabIndex = 38
@@ -2618,7 +2622,7 @@ Partial Class FrmSettings
         Me.vulgarCheckBox.AutoSize = true
         Me.vulgarCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.vulgarCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.vulgarCheckBox.Location = New System.Drawing.Point(84, 44)
+        Me.vulgarCheckBox.Location = New System.Drawing.Point(84, 20)
         Me.vulgarCheckBox.Name = "vulgarCheckBox"
         Me.vulgarCheckBox.Size = New System.Drawing.Size(56, 17)
         Me.vulgarCheckBox.TabIndex = 37
@@ -2630,23 +2634,12 @@ Partial Class FrmSettings
         Me.crazyCheckBox.AutoSize = true
         Me.crazyCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.crazyCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.crazyCheckBox.Location = New System.Drawing.Point(11, 44)
+        Me.crazyCheckBox.Location = New System.Drawing.Point(11, 20)
         Me.crazyCheckBox.Name = "crazyCheckBox"
         Me.crazyCheckBox.Size = New System.Drawing.Size(52, 17)
         Me.crazyCheckBox.TabIndex = 36
         Me.crazyCheckBox.Text = "Crazy"
         Me.crazyCheckBox.UseVisualStyleBackColor = true
-        '
-        'dompersonalityComboBox
-        '
-        Me.dompersonalityComboBox.BackColor = System.Drawing.Color.White
-        Me.dompersonalityComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.dompersonalityComboBox.ForeColor = System.Drawing.Color.Black
-        Me.dompersonalityComboBox.FormattingEnabled = true
-        Me.dompersonalityComboBox.Location = New System.Drawing.Point(11, 17)
-        Me.dompersonalityComboBox.Name = "dompersonalityComboBox"
-        Me.dompersonalityComboBox.Size = New System.Drawing.Size(230, 21)
-        Me.dompersonalityComboBox.TabIndex = 4
         '
         'GBDomOrgasms
         '
@@ -9791,6 +9784,19 @@ Partial Class FrmSettings
         Me.GroupBox9.TabStop = false
         Me.GroupBox9.Text = "System"
         '
+        'Button32
+        '
+        Me.Button32.BackColor = System.Drawing.Color.Transparent
+        Me.Button32.Image = CType(resources.GetObject("Button32.Image"),System.Drawing.Image)
+        Me.Button32.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button32.Location = New System.Drawing.Point(196, 24)
+        Me.Button32.Name = "Button32"
+        Me.Button32.Size = New System.Drawing.Size(135, 55)
+        Me.Button32.TabIndex = 55
+        Me.Button32.Text = "  Save Theme"
+        Me.Button32.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Button32.UseVisualStyleBackColor = false
+        '
         'Button31
         '
         Me.Button31.BackColor = System.Drawing.Color.Transparent
@@ -9802,18 +9808,18 @@ Partial Class FrmSettings
         Me.Button31.TabIndex = 54
         Me.Button31.Text = "  Open Theme"
         Me.Button31.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button31.UseVisualStyleBackColor = False
+        Me.Button31.UseVisualStyleBackColor = false
         '
         'PictureBox10
         '
         Me.PictureBox10.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox10.Image = CType(resources.GetObject("PictureBox10.Image"), System.Drawing.Image)
+        Me.PictureBox10.Image = CType(resources.GetObject("PictureBox10.Image"),System.Drawing.Image)
         Me.PictureBox10.Location = New System.Drawing.Point(9, 6)
         Me.PictureBox10.Name = "PictureBox10"
         Me.PictureBox10.Size = New System.Drawing.Size(160, 19)
         Me.PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox10.TabIndex = 151
-        Me.PictureBox10.TabStop = False
+        Me.PictureBox10.TabStop = false
         '
         'GroupBox5
         '
@@ -9843,18 +9849,18 @@ Partial Class FrmSettings
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(336, 294)
         Me.GroupBox5.TabIndex = 58
-        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.TabStop = false
         Me.GroupBox5.Text = "UI Colors"
         '
         'CBTransparentTime
         '
-        Me.CBTransparentTime.AutoSize = True
+        Me.CBTransparentTime.AutoSize = true
         Me.CBTransparentTime.Location = New System.Drawing.Point(7, 262)
         Me.CBTransparentTime.Name = "CBTransparentTime"
         Me.CBTransparentTime.Size = New System.Drawing.Size(179, 17)
         Me.CBTransparentTime.TabIndex = 23
         Me.CBTransparentTime.Text = "Transparent Date/Time Window"
-        Me.CBTransparentTime.UseVisualStyleBackColor = True
+        Me.CBTransparentTime.UseVisualStyleBackColor = true
         '
         'LBLDateTimeColor2
         '
@@ -9888,24 +9894,24 @@ Partial Class FrmSettings
         'Button28
         '
         Me.Button28.BackColor = System.Drawing.Color.Transparent
-        Me.Button28.BackgroundImage = CType(resources.GetObject("Button28.BackgroundImage"), System.Drawing.Image)
+        Me.Button28.BackgroundImage = CType(resources.GetObject("Button28.BackgroundImage"),System.Drawing.Image)
         Me.Button28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button28.Location = New System.Drawing.Point(296, 221)
         Me.Button28.Name = "Button28"
         Me.Button28.Size = New System.Drawing.Size(32, 32)
         Me.Button28.TabIndex = 21
-        Me.Button28.UseVisualStyleBackColor = False
+        Me.Button28.UseVisualStyleBackColor = false
         '
         'Button30
         '
         Me.Button30.BackColor = System.Drawing.Color.Transparent
-        Me.Button30.BackgroundImage = CType(resources.GetObject("Button30.BackgroundImage"), System.Drawing.Image)
+        Me.Button30.BackgroundImage = CType(resources.GetObject("Button30.BackgroundImage"),System.Drawing.Image)
         Me.Button30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button30.Location = New System.Drawing.Point(296, 187)
         Me.Button30.Name = "Button30"
         Me.Button30.Size = New System.Drawing.Size(32, 32)
         Me.Button30.TabIndex = 18
-        Me.Button30.UseVisualStyleBackColor = False
+        Me.Button30.UseVisualStyleBackColor = false
         '
         'LBLDateBackColor2
         '
@@ -9938,13 +9944,13 @@ Partial Class FrmSettings
         'Button20
         '
         Me.Button20.BackColor = System.Drawing.Color.Transparent
-        Me.Button20.BackgroundImage = CType(resources.GetObject("Button20.BackgroundImage"), System.Drawing.Image)
+        Me.Button20.BackgroundImage = CType(resources.GetObject("Button20.BackgroundImage"),System.Drawing.Image)
         Me.Button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button20.Location = New System.Drawing.Point(296, 85)
         Me.Button20.Name = "Button20"
         Me.Button20.Size = New System.Drawing.Size(32, 32)
         Me.Button20.TabIndex = 8
-        Me.Button20.UseVisualStyleBackColor = False
+        Me.Button20.UseVisualStyleBackColor = false
         '
         'LBLTextColor2
         '
@@ -10007,24 +10013,24 @@ Partial Class FrmSettings
         'Button21
         '
         Me.Button21.BackColor = System.Drawing.Color.Transparent
-        Me.Button21.BackgroundImage = CType(resources.GetObject("Button21.BackgroundImage"), System.Drawing.Image)
+        Me.Button21.BackgroundImage = CType(resources.GetObject("Button21.BackgroundImage"),System.Drawing.Image)
         Me.Button21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button21.Location = New System.Drawing.Point(296, 153)
         Me.Button21.Name = "Button21"
         Me.Button21.Size = New System.Drawing.Size(32, 32)
         Me.Button21.TabIndex = 15
-        Me.Button21.UseVisualStyleBackColor = False
+        Me.Button21.UseVisualStyleBackColor = false
         '
         'Button23
         '
         Me.Button23.BackColor = System.Drawing.Color.Transparent
-        Me.Button23.BackgroundImage = CType(resources.GetObject("Button23.BackgroundImage"), System.Drawing.Image)
+        Me.Button23.BackgroundImage = CType(resources.GetObject("Button23.BackgroundImage"),System.Drawing.Image)
         Me.Button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button23.Location = New System.Drawing.Point(296, 119)
         Me.Button23.Name = "Button23"
         Me.Button23.Size = New System.Drawing.Size(32, 32)
         Me.Button23.TabIndex = 11
-        Me.Button23.UseVisualStyleBackColor = False
+        Me.Button23.UseVisualStyleBackColor = false
         '
         'LBLChatTextColor2
         '
@@ -10038,24 +10044,24 @@ Partial Class FrmSettings
         'Button25
         '
         Me.Button25.BackColor = System.Drawing.Color.Transparent
-        Me.Button25.BackgroundImage = CType(resources.GetObject("Button25.BackgroundImage"), System.Drawing.Image)
+        Me.Button25.BackgroundImage = CType(resources.GetObject("Button25.BackgroundImage"),System.Drawing.Image)
         Me.Button25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button25.Location = New System.Drawing.Point(296, 17)
         Me.Button25.Name = "Button25"
         Me.Button25.Size = New System.Drawing.Size(32, 32)
         Me.Button25.TabIndex = 2
-        Me.Button25.UseVisualStyleBackColor = False
+        Me.Button25.UseVisualStyleBackColor = false
         '
         'Button27
         '
         Me.Button27.BackColor = System.Drawing.Color.Transparent
-        Me.Button27.BackgroundImage = CType(resources.GetObject("Button27.BackgroundImage"), System.Drawing.Image)
+        Me.Button27.BackgroundImage = CType(resources.GetObject("Button27.BackgroundImage"),System.Drawing.Image)
         Me.Button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button27.Location = New System.Drawing.Point(296, 51)
         Me.Button27.Name = "Button27"
         Me.Button27.Size = New System.Drawing.Size(32, 32)
         Me.Button27.TabIndex = 5
-        Me.Button27.UseVisualStyleBackColor = False
+        Me.Button27.UseVisualStyleBackColor = false
         '
         'LBLButtonColor2
         '
@@ -10075,20 +10081,20 @@ Partial Class FrmSettings
         Me.GroupBox11.Name = "GroupBox11"
         Me.GroupBox11.Size = New System.Drawing.Size(692, 92)
         Me.GroupBox11.TabIndex = 65
-        Me.GroupBox11.TabStop = False
+        Me.GroupBox11.TabStop = false
         Me.GroupBox11.Text = "Description"
         '
         'Label144
         '
         Me.Label144.BackColor = System.Drawing.Color.Transparent
-        Me.Label144.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label144.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label144.ForeColor = System.Drawing.Color.Black
         Me.Label144.Location = New System.Drawing.Point(6, 16)
         Me.Label144.Name = "Label144"
         Me.Label144.Size = New System.Drawing.Size(680, 73)
         Me.Label144.TabIndex = 62
-        Me.Label144.Text = "Use this page to select the videos you would like the program to use and set thei" & _
-    "r paths." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The Domme Genre paths are for videos that feature the model you are " & _
+        Me.Label144.Text = "Use this page to select the videos you would like the program to use and set thei"& _ 
+    "r paths."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"The Domme Genre paths are for videos that feature the model you are "& _ 
     "using as your domme."
         Me.Label144.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -10103,7 +10109,7 @@ Partial Class FrmSettings
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(348, 195)
         Me.GroupBox1.TabIndex = 57
-        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.TabStop = false
         Me.GroupBox1.Text = "Background"
         '
         'CBFlipBack
@@ -10113,7 +10119,7 @@ Partial Class FrmSettings
         Me.CBFlipBack.Size = New System.Drawing.Size(86, 41)
         Me.CBFlipBack.TabIndex = 4
         Me.CBFlipBack.Text = "Flip Background"
-        Me.CBFlipBack.UseVisualStyleBackColor = True
+        Me.CBFlipBack.UseVisualStyleBackColor = true
         '
         'PBBackgroundPreview
         '
@@ -10123,29 +10129,29 @@ Partial Class FrmSettings
         Me.PBBackgroundPreview.Size = New System.Drawing.Size(202, 133)
         Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PBBackgroundPreview.TabIndex = 0
-        Me.PBBackgroundPreview.TabStop = False
+        Me.PBBackgroundPreview.TabStop = false
         '
         'Button17
         '
         Me.Button17.BackColor = System.Drawing.Color.Transparent
-        Me.Button17.BackgroundImage = CType(resources.GetObject("Button17.BackgroundImage"), System.Drawing.Image)
+        Me.Button17.BackgroundImage = CType(resources.GetObject("Button17.BackgroundImage"),System.Drawing.Image)
         Me.Button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.Button17.Location = New System.Drawing.Point(228, 36)
         Me.Button17.Name = "Button17"
         Me.Button17.Size = New System.Drawing.Size(103, 93)
         Me.Button17.TabIndex = 1
-        Me.Button17.UseVisualStyleBackColor = False
+        Me.Button17.UseVisualStyleBackColor = false
         '
         'CBStretchBack
         '
-        Me.CBStretchBack.Checked = True
+        Me.CBStretchBack.Checked = true
         Me.CBStretchBack.CheckState = System.Windows.Forms.CheckState.Checked
         Me.CBStretchBack.Location = New System.Drawing.Point(122, 153)
         Me.CBStretchBack.Name = "CBStretchBack"
         Me.CBStretchBack.Size = New System.Drawing.Size(86, 41)
         Me.CBStretchBack.TabIndex = 2
         Me.CBStretchBack.Text = "Stretch Background"
-        Me.CBStretchBack.UseVisualStyleBackColor = True
+        Me.CBStretchBack.UseVisualStyleBackColor = true
         '
         'Button18
         '
@@ -10154,12 +10160,12 @@ Partial Class FrmSettings
         Me.Button18.Size = New System.Drawing.Size(103, 31)
         Me.Button18.TabIndex = 3
         Me.Button18.Text = "Clear"
-        Me.Button18.UseVisualStyleBackColor = True
+        Me.Button18.UseVisualStyleBackColor = true
         '
         'Label164
         '
         Me.Label164.BackColor = System.Drawing.Color.Transparent
-        Me.Label164.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label164.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label164.ForeColor = System.Drawing.Color.Black
         Me.Label164.Location = New System.Drawing.Point(7, 6)
         Me.Label164.Name = "Label164"
@@ -10205,13 +10211,13 @@ Partial Class FrmSettings
         Me.GroupBox10.Name = "GroupBox10"
         Me.GroupBox10.Size = New System.Drawing.Size(291, 54)
         Me.GroupBox10.TabIndex = 170
-        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.TabStop = false
         Me.GroupBox10.Text = "Tease Slideshow"
         '
         'Label112
         '
         Me.Label112.BackColor = System.Drawing.Color.Transparent
-        Me.Label112.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label112.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label112.ForeColor = System.Drawing.Color.Black
         Me.Label112.Location = New System.Drawing.Point(233, 21)
         Me.Label112.Name = "Label112"
@@ -10232,7 +10238,7 @@ Partial Class FrmSettings
         'Label6
         '
         Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label6.ForeColor = System.Drawing.Color.Black
         Me.Label6.Location = New System.Drawing.Point(9, 21)
         Me.Label6.Name = "Label6"
@@ -10267,13 +10273,13 @@ Partial Class FrmSettings
         Me.GroupBox57.Name = "GroupBox57"
         Me.GroupBox57.Size = New System.Drawing.Size(223, 250)
         Me.GroupBox57.TabIndex = 169
-        Me.GroupBox57.TabStop = False
+        Me.GroupBox57.TabStop = false
         Me.GroupBox57.Text = "Tease"
         '
         'LBLVtf
         '
         Me.LBLVtf.BackColor = System.Drawing.Color.Transparent
-        Me.LBLVtf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLVtf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLVtf.ForeColor = System.Drawing.Color.Black
         Me.LBLVtf.Location = New System.Drawing.Point(128, 224)
         Me.LBLVtf.Name = "LBLVtf"
@@ -10285,7 +10291,7 @@ Partial Class FrmSettings
         'LBLStf
         '
         Me.LBLStf.BackColor = System.Drawing.Color.Transparent
-        Me.LBLStf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLStf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLStf.ForeColor = System.Drawing.Color.Black
         Me.LBLStf.Location = New System.Drawing.Point(130, 183)
         Me.LBLStf.Name = "LBLStf"
@@ -10296,7 +10302,7 @@ Partial Class FrmSettings
         '
         'SliderSTF
         '
-        Me.SliderSTF.AutoSize = False
+        Me.SliderSTF.AutoSize = false
         Me.SliderSTF.LargeChange = 1
         Me.SliderSTF.Location = New System.Drawing.Point(130, 162)
         Me.SliderSTF.Maximum = 5
@@ -10308,7 +10314,7 @@ Partial Class FrmSettings
         '
         'TauntSlider
         '
-        Me.TauntSlider.AutoSize = False
+        Me.TauntSlider.AutoSize = false
         Me.TauntSlider.LargeChange = 1
         Me.TauntSlider.Location = New System.Drawing.Point(130, 203)
         Me.TauntSlider.Maximum = 9
@@ -10321,7 +10327,7 @@ Partial Class FrmSettings
         'Label106
         '
         Me.Label106.BackColor = System.Drawing.Color.Transparent
-        Me.Label106.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label106.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label106.ForeColor = System.Drawing.Color.Black
         Me.Label106.Location = New System.Drawing.Point(6, 206)
         Me.Label106.Name = "Label106"
@@ -10332,30 +10338,30 @@ Partial Class FrmSettings
         '
         'CBTauntCycleDD
         '
-        Me.CBTauntCycleDD.AutoSize = True
+        Me.CBTauntCycleDD.AutoSize = true
         Me.CBTauntCycleDD.ForeColor = System.Drawing.Color.Black
         Me.CBTauntCycleDD.Location = New System.Drawing.Point(9, 140)
         Me.CBTauntCycleDD.Name = "CBTauntCycleDD"
         Me.CBTauntCycleDD.Size = New System.Drawing.Size(176, 17)
         Me.CBTauntCycleDD.TabIndex = 185
         Me.CBTauntCycleDD.Text = "Domme Decide Based on Level"
-        Me.CBTauntCycleDD.UseVisualStyleBackColor = True
+        Me.CBTauntCycleDD.UseVisualStyleBackColor = true
         '
         'CBTeaseLengthDD
         '
-        Me.CBTeaseLengthDD.AutoSize = True
+        Me.CBTeaseLengthDD.AutoSize = true
         Me.CBTeaseLengthDD.ForeColor = System.Drawing.Color.Black
         Me.CBTeaseLengthDD.Location = New System.Drawing.Point(9, 69)
         Me.CBTeaseLengthDD.Name = "CBTeaseLengthDD"
         Me.CBTeaseLengthDD.Size = New System.Drawing.Size(176, 17)
         Me.CBTeaseLengthDD.TabIndex = 184
         Me.CBTeaseLengthDD.Text = "Domme Decide Based on Level"
-        Me.CBTeaseLengthDD.UseVisualStyleBackColor = True
+        Me.CBTeaseLengthDD.UseVisualStyleBackColor = true
         '
         'Label103
         '
         Me.Label103.BackColor = System.Drawing.Color.Transparent
-        Me.Label103.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label103.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label103.ForeColor = System.Drawing.Color.Black
         Me.Label103.Location = New System.Drawing.Point(175, 117)
         Me.Label103.Name = "Label103"
@@ -10377,7 +10383,7 @@ Partial Class FrmSettings
         'Label105
         '
         Me.Label105.BackColor = System.Drawing.Color.Transparent
-        Me.Label105.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label105.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label105.ForeColor = System.Drawing.Color.Black
         Me.Label105.Location = New System.Drawing.Point(6, 117)
         Me.Label105.Name = "Label105"
@@ -10389,7 +10395,7 @@ Partial Class FrmSettings
         'Label101
         '
         Me.Label101.BackColor = System.Drawing.Color.Transparent
-        Me.Label101.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label101.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label101.ForeColor = System.Drawing.Color.Black
         Me.Label101.Location = New System.Drawing.Point(175, 93)
         Me.Label101.Name = "Label101"
@@ -10411,7 +10417,7 @@ Partial Class FrmSettings
         'Label102
         '
         Me.Label102.BackColor = System.Drawing.Color.Transparent
-        Me.Label102.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label102.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label102.ForeColor = System.Drawing.Color.Black
         Me.Label102.Location = New System.Drawing.Point(6, 93)
         Me.Label102.Name = "Label102"
@@ -10423,7 +10429,7 @@ Partial Class FrmSettings
         'Label97
         '
         Me.Label97.BackColor = System.Drawing.Color.Transparent
-        Me.Label97.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label97.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label97.ForeColor = System.Drawing.Color.Black
         Me.Label97.Location = New System.Drawing.Point(175, 46)
         Me.Label97.Name = "Label97"
@@ -10445,7 +10451,7 @@ Partial Class FrmSettings
         'Label99
         '
         Me.Label99.BackColor = System.Drawing.Color.Transparent
-        Me.Label99.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label99.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label99.ForeColor = System.Drawing.Color.Black
         Me.Label99.Location = New System.Drawing.Point(6, 46)
         Me.Label99.Name = "Label99"
@@ -10457,7 +10463,7 @@ Partial Class FrmSettings
         'Label96
         '
         Me.Label96.BackColor = System.Drawing.Color.Transparent
-        Me.Label96.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label96.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label96.ForeColor = System.Drawing.Color.Black
         Me.Label96.Location = New System.Drawing.Point(175, 20)
         Me.Label96.Name = "Label96"
@@ -10479,7 +10485,7 @@ Partial Class FrmSettings
         'Label95
         '
         Me.Label95.BackColor = System.Drawing.Color.Transparent
-        Me.Label95.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label95.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label95.ForeColor = System.Drawing.Color.Black
         Me.Label95.Location = New System.Drawing.Point(6, 20)
         Me.Label95.Name = "Label95"
@@ -10491,7 +10497,7 @@ Partial Class FrmSettings
         'Label49
         '
         Me.Label49.BackColor = System.Drawing.Color.Transparent
-        Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label49.ForeColor = System.Drawing.Color.Black
         Me.Label49.Location = New System.Drawing.Point(6, 170)
         Me.Label49.Name = "Label49"
@@ -10513,13 +10519,13 @@ Partial Class FrmSettings
         Me.GroupBox56.Name = "GroupBox56"
         Me.GroupBox56.Size = New System.Drawing.Size(166, 122)
         Me.GroupBox56.TabIndex = 168
-        Me.GroupBox56.TabStop = False
+        Me.GroupBox56.TabStop = false
         Me.GroupBox56.Text = "Ruin Chance"
         '
         'Label90
         '
         Me.Label90.BackColor = System.Drawing.Color.Transparent
-        Me.Label90.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label90.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label90.ForeColor = System.Drawing.Color.Black
         Me.Label90.Location = New System.Drawing.Point(6, 94)
         Me.Label90.Name = "Label90"
@@ -10530,7 +10536,7 @@ Partial Class FrmSettings
         '
         'NBRuinSometimes
         '
-        Me.NBRuinSometimes.Enabled = False
+        Me.NBRuinSometimes.Enabled = false
         Me.NBRuinSometimes.Location = New System.Drawing.Point(113, 68)
         Me.NBRuinSometimes.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBRuinSometimes.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10542,7 +10548,7 @@ Partial Class FrmSettings
         'Label91
         '
         Me.Label91.BackColor = System.Drawing.Color.Transparent
-        Me.Label91.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label91.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label91.ForeColor = System.Drawing.Color.Black
         Me.Label91.Location = New System.Drawing.Point(6, 68)
         Me.Label91.Name = "Label91"
@@ -10554,7 +10560,7 @@ Partial Class FrmSettings
         'Label92
         '
         Me.Label92.BackColor = System.Drawing.Color.Transparent
-        Me.Label92.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label92.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label92.ForeColor = System.Drawing.Color.Black
         Me.Label92.Location = New System.Drawing.Point(6, 42)
         Me.Label92.Name = "Label92"
@@ -10565,7 +10571,7 @@ Partial Class FrmSettings
         '
         'NBRuinRarely
         '
-        Me.NBRuinRarely.Enabled = False
+        Me.NBRuinRarely.Enabled = false
         Me.NBRuinRarely.Location = New System.Drawing.Point(113, 94)
         Me.NBRuinRarely.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBRuinRarely.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10576,7 +10582,7 @@ Partial Class FrmSettings
         '
         'NBRuinOften
         '
-        Me.NBRuinOften.Enabled = False
+        Me.NBRuinOften.Enabled = false
         Me.NBRuinOften.Location = New System.Drawing.Point(113, 42)
         Me.NBRuinOften.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBRuinOften.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10587,14 +10593,14 @@ Partial Class FrmSettings
         '
         'CBRangeRuin
         '
-        Me.CBRangeRuin.AutoSize = True
+        Me.CBRangeRuin.AutoSize = true
         Me.CBRangeRuin.ForeColor = System.Drawing.Color.Black
         Me.CBRangeRuin.Location = New System.Drawing.Point(9, 19)
         Me.CBRangeRuin.Name = "CBRangeRuin"
         Me.CBRangeRuin.Size = New System.Drawing.Size(99, 17)
         Me.CBRangeRuin.TabIndex = 159
         Me.CBRangeRuin.Text = "Domme Decide"
-        Me.CBRangeRuin.UseVisualStyleBackColor = True
+        Me.CBRangeRuin.UseVisualStyleBackColor = true
         '
         'GroupBox17
         '
@@ -10604,7 +10610,7 @@ Partial Class FrmSettings
         Me.GroupBox17.Name = "GroupBox17"
         Me.GroupBox17.Size = New System.Drawing.Size(291, 190)
         Me.GroupBox17.TabIndex = 0
-        Me.GroupBox17.TabStop = False
+        Me.GroupBox17.TabStop = false
         Me.GroupBox17.Text = "Video Teases"
         '
         'GroupBox19
@@ -10623,13 +10629,13 @@ Partial Class FrmSettings
         Me.GroupBox19.Name = "GroupBox19"
         Me.GroupBox19.Size = New System.Drawing.Size(279, 66)
         Me.GroupBox19.TabIndex = 2
-        Me.GroupBox19.TabStop = False
+        Me.GroupBox19.TabStop = false
         Me.GroupBox19.Text = "Red Light, Green Light"
         '
         'Label110
         '
         Me.Label110.BackColor = System.Drawing.Color.Transparent
-        Me.Label110.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label110.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label110.ForeColor = System.Drawing.Color.Black
         Me.Label110.Location = New System.Drawing.Point(227, 39)
         Me.Label110.Name = "Label110"
@@ -10641,7 +10647,7 @@ Partial Class FrmSettings
         'Label111
         '
         Me.Label111.BackColor = System.Drawing.Color.Transparent
-        Me.Label111.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label111.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label111.ForeColor = System.Drawing.Color.Black
         Me.Label111.Location = New System.Drawing.Point(227, 16)
         Me.Label111.Name = "Label111"
@@ -10677,7 +10683,7 @@ Partial Class FrmSettings
         'Label26
         '
         Me.Label26.BackColor = System.Drawing.Color.Transparent
-        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label26.ForeColor = System.Drawing.Color.Black
         Me.Label26.Location = New System.Drawing.Point(161, 38)
         Me.Label26.Name = "Label26"
@@ -10697,7 +10703,7 @@ Partial Class FrmSettings
         'Label28
         '
         Me.Label28.BackColor = System.Drawing.Color.Transparent
-        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label28.ForeColor = System.Drawing.Color.Black
         Me.Label28.Location = New System.Drawing.Point(161, 15)
         Me.Label28.Name = "Label28"
@@ -10709,7 +10715,7 @@ Partial Class FrmSettings
         'Label27
         '
         Me.Label27.BackColor = System.Drawing.Color.Transparent
-        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label27.ForeColor = System.Drawing.Color.Black
         Me.Label27.Location = New System.Drawing.Point(6, 39)
         Me.Label27.Name = "Label27"
@@ -10721,7 +10727,7 @@ Partial Class FrmSettings
         'Label29
         '
         Me.Label29.BackColor = System.Drawing.Color.Transparent
-        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label29.ForeColor = System.Drawing.Color.Black
         Me.Label29.Location = New System.Drawing.Point(6, 16)
         Me.Label29.Name = "Label29"
@@ -10747,13 +10753,13 @@ Partial Class FrmSettings
         Me.GroupBox18.Name = "GroupBox18"
         Me.GroupBox18.Size = New System.Drawing.Size(279, 88)
         Me.GroupBox18.TabIndex = 1
-        Me.GroupBox18.TabStop = False
+        Me.GroupBox18.TabStop = false
         Me.GroupBox18.Text = "Censorship Sucks"
         '
         'Label108
         '
         Me.Label108.BackColor = System.Drawing.Color.Transparent
-        Me.Label108.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label108.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label108.ForeColor = System.Drawing.Color.Black
         Me.Label108.Location = New System.Drawing.Point(227, 39)
         Me.Label108.Name = "Label108"
@@ -10765,7 +10771,7 @@ Partial Class FrmSettings
         'Label109
         '
         Me.Label109.BackColor = System.Drawing.Color.Transparent
-        Me.Label109.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label109.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label109.ForeColor = System.Drawing.Color.Black
         Me.Label109.Location = New System.Drawing.Point(227, 16)
         Me.Label109.Name = "Label109"
@@ -10806,20 +10812,20 @@ Partial Class FrmSettings
         '
         'CBCensorConstant
         '
-        Me.CBCensorConstant.AutoSize = True
-        Me.CBCensorConstant.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CBCensorConstant.AutoSize = true
+        Me.CBCensorConstant.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.CBCensorConstant.ForeColor = System.Drawing.Color.Black
         Me.CBCensorConstant.Location = New System.Drawing.Point(6, 65)
         Me.CBCensorConstant.Name = "CBCensorConstant"
         Me.CBCensorConstant.Size = New System.Drawing.Size(263, 17)
         Me.CBCensorConstant.TabIndex = 157
         Me.CBCensorConstant.Text = "Censorship Bar Always Visible During Video Tease"
-        Me.CBCensorConstant.UseVisualStyleBackColor = True
+        Me.CBCensorConstant.UseVisualStyleBackColor = true
         '
         'Label25
         '
         Me.Label25.BackColor = System.Drawing.Color.Transparent
-        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label25.ForeColor = System.Drawing.Color.Black
         Me.Label25.Location = New System.Drawing.Point(161, 15)
         Me.Label25.Name = "Label25"
@@ -10831,7 +10837,7 @@ Partial Class FrmSettings
         'Label20
         '
         Me.Label20.BackColor = System.Drawing.Color.Transparent
-        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label20.ForeColor = System.Drawing.Color.Black
         Me.Label20.Location = New System.Drawing.Point(6, 39)
         Me.Label20.Name = "Label20"
@@ -10843,7 +10849,7 @@ Partial Class FrmSettings
         'Label19
         '
         Me.Label19.BackColor = System.Drawing.Color.Transparent
-        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label19.ForeColor = System.Drawing.Color.Black
         Me.Label19.Location = New System.Drawing.Point(161, 38)
         Me.Label19.Name = "Label19"
@@ -10855,7 +10861,7 @@ Partial Class FrmSettings
         'Label24
         '
         Me.Label24.BackColor = System.Drawing.Color.Transparent
-        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label24.ForeColor = System.Drawing.Color.Black
         Me.Label24.Location = New System.Drawing.Point(6, 16)
         Me.Label24.Name = "Label24"
@@ -10887,13 +10893,13 @@ Partial Class FrmSettings
         Me.GroupBox52.Name = "GroupBox52"
         Me.GroupBox52.Size = New System.Drawing.Size(166, 122)
         Me.GroupBox52.TabIndex = 167
-        Me.GroupBox52.TabStop = False
+        Me.GroupBox52.TabStop = false
         Me.GroupBox52.Text = "Orgasm Chance"
         '
         'Label89
         '
         Me.Label89.BackColor = System.Drawing.Color.Transparent
-        Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label89.ForeColor = System.Drawing.Color.Black
         Me.Label89.Location = New System.Drawing.Point(6, 94)
         Me.Label89.Name = "Label89"
@@ -10904,7 +10910,7 @@ Partial Class FrmSettings
         '
         'NBAllowSometimes
         '
-        Me.NBAllowSometimes.Enabled = False
+        Me.NBAllowSometimes.Enabled = false
         Me.NBAllowSometimes.Location = New System.Drawing.Point(113, 68)
         Me.NBAllowSometimes.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBAllowSometimes.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10916,7 +10922,7 @@ Partial Class FrmSettings
         'Label86
         '
         Me.Label86.BackColor = System.Drawing.Color.Transparent
-        Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label86.ForeColor = System.Drawing.Color.Black
         Me.Label86.Location = New System.Drawing.Point(6, 68)
         Me.Label86.Name = "Label86"
@@ -10928,7 +10934,7 @@ Partial Class FrmSettings
         'Label82
         '
         Me.Label82.BackColor = System.Drawing.Color.Transparent
-        Me.Label82.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label82.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label82.ForeColor = System.Drawing.Color.Black
         Me.Label82.Location = New System.Drawing.Point(6, 42)
         Me.Label82.Name = "Label82"
@@ -10939,7 +10945,7 @@ Partial Class FrmSettings
         '
         'NBAllowRarely
         '
-        Me.NBAllowRarely.Enabled = False
+        Me.NBAllowRarely.Enabled = false
         Me.NBAllowRarely.Location = New System.Drawing.Point(113, 94)
         Me.NBAllowRarely.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBAllowRarely.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10950,7 +10956,7 @@ Partial Class FrmSettings
         '
         'NBAllowOften
         '
-        Me.NBAllowOften.Enabled = False
+        Me.NBAllowOften.Enabled = false
         Me.NBAllowOften.Location = New System.Drawing.Point(113, 42)
         Me.NBAllowOften.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
         Me.NBAllowOften.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -10961,25 +10967,25 @@ Partial Class FrmSettings
         '
         'CBRangeOrgasm
         '
-        Me.CBRangeOrgasm.AutoSize = True
+        Me.CBRangeOrgasm.AutoSize = true
         Me.CBRangeOrgasm.ForeColor = System.Drawing.Color.Black
         Me.CBRangeOrgasm.Location = New System.Drawing.Point(9, 19)
         Me.CBRangeOrgasm.Name = "CBRangeOrgasm"
         Me.CBRangeOrgasm.Size = New System.Drawing.Size(99, 17)
         Me.CBRangeOrgasm.TabIndex = 159
         Me.CBRangeOrgasm.Text = "Domme Decide"
-        Me.CBRangeOrgasm.UseVisualStyleBackColor = True
+        Me.CBRangeOrgasm.UseVisualStyleBackColor = true
         '
         'PictureBox8
         '
         Me.PictureBox8.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox8.Image = CType(resources.GetObject("PictureBox8.Image"), System.Drawing.Image)
+        Me.PictureBox8.Image = CType(resources.GetObject("PictureBox8.Image"),System.Drawing.Image)
         Me.PictureBox8.Location = New System.Drawing.Point(9, 6)
         Me.PictureBox8.Name = "PictureBox8"
         Me.PictureBox8.Size = New System.Drawing.Size(160, 19)
         Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox8.TabIndex = 166
-        Me.PictureBox8.TabStop = False
+        Me.PictureBox8.TabStop = false
         '
         'GroupBox21
         '
@@ -10990,26 +10996,26 @@ Partial Class FrmSettings
         Me.GroupBox21.Name = "GroupBox21"
         Me.GroupBox21.Size = New System.Drawing.Size(692, 136)
         Me.GroupBox21.TabIndex = 66
-        Me.GroupBox21.TabStop = False
+        Me.GroupBox21.TabStop = false
         Me.GroupBox21.Text = "Description"
         '
         'LBLRangeSettingsDescription
         '
         Me.LBLRangeSettingsDescription.BackColor = System.Drawing.Color.Transparent
-        Me.LBLRangeSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLRangeSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLRangeSettingsDescription.ForeColor = System.Drawing.Color.Black
         Me.LBLRangeSettingsDescription.Location = New System.Drawing.Point(6, 16)
         Me.LBLRangeSettingsDescription.Name = "LBLRangeSettingsDescription"
         Me.LBLRangeSettingsDescription.Size = New System.Drawing.Size(680, 117)
         Me.LBLRangeSettingsDescription.TabIndex = 62
-        Me.LBLRangeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio" & _
+        Me.LBLRangeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
     "n."
         Me.LBLRangeSettingsDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label38
         '
         Me.Label38.BackColor = System.Drawing.Color.Transparent
-        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label38.ForeColor = System.Drawing.Color.Black
         Me.Label38.Location = New System.Drawing.Point(7, 6)
         Me.Label38.Name = "Label38"
@@ -11075,68 +11081,68 @@ Partial Class FrmSettings
         '
         'BTNPlaylistCtrlZ
         '
-        Me.BTNPlaylistCtrlZ.Enabled = False
+        Me.BTNPlaylistCtrlZ.Enabled = false
         Me.BTNPlaylistCtrlZ.Location = New System.Drawing.Point(621, 21)
         Me.BTNPlaylistCtrlZ.Name = "BTNPlaylistCtrlZ"
         Me.BTNPlaylistCtrlZ.Size = New System.Drawing.Size(44, 23)
         Me.BTNPlaylistCtrlZ.TabIndex = 202
         Me.BTNPlaylistCtrlZ.Text = "Undo"
-        Me.BTNPlaylistCtrlZ.UseVisualStyleBackColor = True
+        Me.BTNPlaylistCtrlZ.UseVisualStyleBackColor = true
         '
         'RadioPlaylistRegScripts
         '
-        Me.RadioPlaylistRegScripts.AutoSize = True
+        Me.RadioPlaylistRegScripts.AutoSize = true
         Me.RadioPlaylistRegScripts.Location = New System.Drawing.Point(228, 372)
         Me.RadioPlaylistRegScripts.Name = "RadioPlaylistRegScripts"
         Me.RadioPlaylistRegScripts.Size = New System.Drawing.Size(127, 17)
         Me.RadioPlaylistRegScripts.TabIndex = 201
         Me.RadioPlaylistRegScripts.Text = "Show Regular Scripts"
-        Me.RadioPlaylistRegScripts.UseVisualStyleBackColor = True
+        Me.RadioPlaylistRegScripts.UseVisualStyleBackColor = true
         '
         'RadioPlaylistScripts
         '
-        Me.RadioPlaylistScripts.AutoSize = True
-        Me.RadioPlaylistScripts.Checked = True
+        Me.RadioPlaylistScripts.AutoSize = true
+        Me.RadioPlaylistScripts.Checked = true
         Me.RadioPlaylistScripts.Location = New System.Drawing.Point(62, 372)
         Me.RadioPlaylistScripts.Name = "RadioPlaylistScripts"
         Me.RadioPlaylistScripts.Size = New System.Drawing.Size(122, 17)
         Me.RadioPlaylistScripts.TabIndex = 200
-        Me.RadioPlaylistScripts.TabStop = True
+        Me.RadioPlaylistScripts.TabStop = true
         Me.RadioPlaylistScripts.Text = "Show Playlist Scripts"
-        Me.RadioPlaylistScripts.UseVisualStyleBackColor = True
+        Me.RadioPlaylistScripts.UseVisualStyleBackColor = true
         '
         'BTNPlaylistEnd
         '
         Me.BTNPlaylistEnd.BackColor = System.Drawing.Color.LightGray
-        Me.BTNPlaylistEnd.Enabled = False
-        Me.BTNPlaylistEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNPlaylistEnd.Enabled = false
+        Me.BTNPlaylistEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.BTNPlaylistEnd.ForeColor = System.Drawing.Color.Black
         Me.BTNPlaylistEnd.Location = New System.Drawing.Point(165, 21)
         Me.BTNPlaylistEnd.Name = "BTNPlaylistEnd"
         Me.BTNPlaylistEnd.Size = New System.Drawing.Size(44, 23)
         Me.BTNPlaylistEnd.TabIndex = 199
         Me.BTNPlaylistEnd.Text = "End"
-        Me.BTNPlaylistEnd.UseVisualStyleBackColor = False
+        Me.BTNPlaylistEnd.UseVisualStyleBackColor = false
         '
         'BTNPlaylistClearAll
         '
-        Me.BTNPlaylistClearAll.Enabled = False
+        Me.BTNPlaylistClearAll.Enabled = false
         Me.BTNPlaylistClearAll.Location = New System.Drawing.Point(296, 21)
         Me.BTNPlaylistClearAll.Name = "BTNPlaylistClearAll"
         Me.BTNPlaylistClearAll.Size = New System.Drawing.Size(78, 23)
         Me.BTNPlaylistClearAll.TabIndex = 198
         Me.BTNPlaylistClearAll.Text = "Clear All"
-        Me.BTNPlaylistClearAll.UseVisualStyleBackColor = True
+        Me.BTNPlaylistClearAll.UseVisualStyleBackColor = true
         '
         'BTNPlaylistSave
         '
-        Me.BTNPlaylistSave.Enabled = False
+        Me.BTNPlaylistSave.Enabled = false
         Me.BTNPlaylistSave.Location = New System.Drawing.Point(621, 369)
         Me.BTNPlaylistSave.Name = "BTNPlaylistSave"
         Me.BTNPlaylistSave.Size = New System.Drawing.Size(44, 23)
         Me.BTNPlaylistSave.TabIndex = 197
         Me.BTNPlaylistSave.Text = "Save"
-        Me.BTNPlaylistSave.UseVisualStyleBackColor = True
+        Me.BTNPlaylistSave.UseVisualStyleBackColor = true
         '
         'Button7
         '
@@ -11145,7 +11151,7 @@ Partial Class FrmSettings
         Me.Button7.Size = New System.Drawing.Size(78, 23)
         Me.Button7.TabIndex = 196
         Me.Button7.Text = "Add Random"
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.Button7.UseVisualStyleBackColor = true
         '
         'WBPlaylist
         '
@@ -11157,8 +11163,8 @@ Partial Class FrmSettings
         '
         'Label80
         '
-        Me.Label80.AutoSize = True
-        Me.Label80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label80.AutoSize = true
+        Me.Label80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label80.Location = New System.Drawing.Point(410, 27)
         Me.Label80.Name = "Label80"
         Me.Label80.Size = New System.Drawing.Size(47, 13)
@@ -11168,8 +11174,8 @@ Partial Class FrmSettings
         'LBLPlaylIstLink
         '
         Me.LBLPlaylIstLink.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLPlaylIstLink.Enabled = False
-        Me.LBLPlaylIstLink.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLPlaylIstLink.Enabled = false
+        Me.LBLPlaylIstLink.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLPlaylIstLink.Location = New System.Drawing.Point(128, 22)
         Me.LBLPlaylIstLink.Name = "LBLPlaylIstLink"
         Me.LBLPlaylIstLink.Size = New System.Drawing.Size(34, 21)
@@ -11180,8 +11186,8 @@ Partial Class FrmSettings
         'LBLPlaylistModule
         '
         Me.LBLPlaylistModule.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLPlaylistModule.Enabled = False
-        Me.LBLPlaylistModule.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLPlaylistModule.Enabled = false
+        Me.LBLPlaylistModule.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLPlaylistModule.Location = New System.Drawing.Point(76, 22)
         Me.LBLPlaylistModule.Name = "LBLPlaylistModule"
         Me.LBLPlaylistModule.Size = New System.Drawing.Size(50, 21)
@@ -11193,7 +11199,7 @@ Partial Class FrmSettings
         '
         Me.LBLPLaylistStart.BackColor = System.Drawing.Color.Green
         Me.LBLPLaylistStart.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLPLaylistStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLPLaylistStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLPLaylistStart.ForeColor = System.Drawing.Color.White
         Me.LBLPLaylistStart.Location = New System.Drawing.Point(38, 22)
         Me.LBLPLaylistStart.Name = "LBLPLaylistStart"
@@ -11204,8 +11210,8 @@ Partial Class FrmSettings
         '
         'LBPlaylist
         '
-        Me.LBPlaylist.AllowDrop = True
-        Me.LBPlaylist.FormattingEnabled = True
+        Me.LBPlaylist.AllowDrop = true
+        Me.LBPlaylist.FormattingEnabled = true
         Me.LBPlaylist.Location = New System.Drawing.Point(413, 56)
         Me.LBPlaylist.Name = "LBPlaylist"
         Me.LBPlaylist.Size = New System.Drawing.Size(252, 290)
@@ -11247,7 +11253,7 @@ Partial Class FrmSettings
         Me.Label88.Name = "Label88"
         Me.Label88.Size = New System.Drawing.Size(194, 53)
         Me.Label88.TabIndex = 173
-        Me.Label88.Text = "Preview:  Enter any line with a Keyword and press # to generate a random sentence" & _
+        Me.Label88.Text = "Preview:  Enter any line with a Keyword and press # to generate a random sentence"& _ 
     " the domme return."
         Me.Label88.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -11262,13 +11268,13 @@ Partial Class FrmSettings
         '
         'Button37
         '
-        Me.Button37.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button37.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Button37.Location = New System.Drawing.Point(638, 358)
         Me.Button37.Name = "Button37"
         Me.Button37.Size = New System.Drawing.Size(47, 50)
         Me.Button37.TabIndex = 171
         Me.Button37.Text = "#"
-        Me.Button37.UseVisualStyleBackColor = True
+        Me.Button37.UseVisualStyleBackColor = true
         '
         'Button50
         '
@@ -11277,7 +11283,7 @@ Partial Class FrmSettings
         Me.Button50.Size = New System.Drawing.Size(194, 23)
         Me.Button50.TabIndex = 169
         Me.Button50.Text = "Refresh and Clear Keyword List"
-        Me.Button50.UseVisualStyleBackColor = True
+        Me.Button50.UseVisualStyleBackColor = true
         '
         'Button22
         '
@@ -11286,7 +11292,7 @@ Partial Class FrmSettings
         Me.Button22.Size = New System.Drawing.Size(47, 23)
         Me.Button22.TabIndex = 167
         Me.Button22.Text = "Save"
-        Me.Button22.UseVisualStyleBackColor = True
+        Me.Button22.UseVisualStyleBackColor = true
         '
         'TBKeyWords
         '
@@ -11297,11 +11303,11 @@ Partial Class FrmSettings
         '
         'LBKeyWords
         '
-        Me.LBKeyWords.FormattingEnabled = True
+        Me.LBKeyWords.FormattingEnabled = true
         Me.LBKeyWords.Location = New System.Drawing.Point(6, 36)
         Me.LBKeyWords.Name = "LBKeyWords"
         Me.LBKeyWords.Size = New System.Drawing.Size(194, 316)
-        Me.LBKeyWords.Sorted = True
+        Me.LBKeyWords.Sorted = true
         Me.LBKeyWords.TabIndex = 165
         '
         'RTBKeyWords
@@ -11336,11 +11342,11 @@ Partial Class FrmSettings
         Me.Button9.Size = New System.Drawing.Size(215, 23)
         Me.Button9.TabIndex = 176
         Me.Button9.Text = "Response Template"
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.Button9.UseVisualStyleBackColor = true
         '
         'RTBResponsesKEY
         '
-        Me.RTBResponsesKEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RTBResponsesKEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.RTBResponsesKEY.Location = New System.Drawing.Point(217, 36)
         Me.RTBResponsesKEY.Name = "RTBResponsesKEY"
         Me.RTBResponsesKEY.Size = New System.Drawing.Size(468, 40)
@@ -11354,7 +11360,7 @@ Partial Class FrmSettings
         Me.Button4.Size = New System.Drawing.Size(194, 23)
         Me.Button4.TabIndex = 174
         Me.Button4.Text = "Refresh and Clear Response List"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.UseVisualStyleBackColor = true
         '
         'Button5
         '
@@ -11363,7 +11369,7 @@ Partial Class FrmSettings
         Me.Button5.Size = New System.Drawing.Size(47, 23)
         Me.Button5.TabIndex = 173
         Me.Button5.Text = "Save"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.UseVisualStyleBackColor = true
         '
         'TBResponses
         '
@@ -11374,11 +11380,11 @@ Partial Class FrmSettings
         '
         'LBResponses
         '
-        Me.LBResponses.FormattingEnabled = True
+        Me.LBResponses.FormattingEnabled = true
         Me.LBResponses.Location = New System.Drawing.Point(6, 36)
         Me.LBResponses.Name = "LBResponses"
         Me.LBResponses.Size = New System.Drawing.Size(194, 355)
-        Me.LBResponses.Sorted = True
+        Me.LBResponses.Sorted = true
         Me.LBResponses.TabIndex = 171
         '
         'RTBResponses
@@ -11407,7 +11413,7 @@ Partial Class FrmSettings
         '
         'RTBVideoMod
         '
-        Me.RTBVideoMod.Enabled = False
+        Me.RTBVideoMod.Enabled = false
         Me.RTBVideoMod.Location = New System.Drawing.Point(167, 17)
         Me.RTBVideoMod.Name = "RTBVideoMod"
         Me.RTBVideoMod.Size = New System.Drawing.Size(525, 286)
@@ -11423,13 +11429,13 @@ Partial Class FrmSettings
         Me.GroupBox29.Name = "GroupBox29"
         Me.GroupBox29.Size = New System.Drawing.Size(692, 92)
         Me.GroupBox29.TabIndex = 66
-        Me.GroupBox29.TabStop = False
+        Me.GroupBox29.TabStop = false
         Me.GroupBox29.Text = "Description"
         '
         'Label51
         '
         Me.Label51.BackColor = System.Drawing.Color.Transparent
-        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label51.ForeColor = System.Drawing.Color.Black
         Me.Label51.Location = New System.Drawing.Point(6, 16)
         Me.Label51.Name = "Label51"
@@ -11440,13 +11446,13 @@ Partial Class FrmSettings
         '
         'BTNVideoModClear
         '
-        Me.BTNVideoModClear.Enabled = False
+        Me.BTNVideoModClear.Enabled = false
         Me.BTNVideoModClear.Location = New System.Drawing.Point(6, 227)
         Me.BTNVideoModClear.Name = "BTNVideoModClear"
         Me.BTNVideoModClear.Size = New System.Drawing.Size(155, 35)
         Me.BTNVideoModClear.TabIndex = 153
         Me.BTNVideoModClear.Text = "Clear Text and Select New Video Tease Type/Script"
-        Me.BTNVideoModClear.UseVisualStyleBackColor = True
+        Me.BTNVideoModClear.UseVisualStyleBackColor = true
         '
         'GroupBox28
         '
@@ -11455,13 +11461,13 @@ Partial Class FrmSettings
         Me.GroupBox28.Name = "GroupBox28"
         Me.GroupBox28.Size = New System.Drawing.Size(155, 46)
         Me.GroupBox28.TabIndex = 148
-        Me.GroupBox28.TabStop = False
+        Me.GroupBox28.TabStop = false
         Me.GroupBox28.Text = "Video Tease Type"
         '
         'CBVTType
         '
         Me.CBVTType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CBVTType.FormattingEnabled = True
+        Me.CBVTType.FormattingEnabled = true
         Me.CBVTType.Items.AddRange(New Object() {"Avoid The Edge", "Censorship Sucks", "Red Light Green Light"})
         Me.CBVTType.Location = New System.Drawing.Point(9, 15)
         Me.CBVTType.Name = "CBVTType"
@@ -11475,7 +11481,7 @@ Partial Class FrmSettings
         Me.BTNVideoModLoad.Size = New System.Drawing.Size(155, 35)
         Me.BTNVideoModLoad.TabIndex = 152
         Me.BTNVideoModLoad.Text = "Load Script"
-        Me.BTNVideoModLoad.UseVisualStyleBackColor = True
+        Me.BTNVideoModLoad.UseVisualStyleBackColor = true
         '
         'GroupBox30
         '
@@ -11484,12 +11490,12 @@ Partial Class FrmSettings
         Me.GroupBox30.Name = "GroupBox30"
         Me.GroupBox30.Size = New System.Drawing.Size(155, 100)
         Me.GroupBox30.TabIndex = 149
-        Me.GroupBox30.TabStop = False
+        Me.GroupBox30.TabStop = false
         Me.GroupBox30.Text = "Script"
         '
         'LBVidScript
         '
-        Me.LBVidScript.FormattingEnabled = True
+        Me.LBVidScript.FormattingEnabled = true
         Me.LBVidScript.Location = New System.Drawing.Point(9, 20)
         Me.LBVidScript.Name = "LBVidScript"
         Me.LBVidScript.Size = New System.Drawing.Size(137, 69)
@@ -11497,13 +11503,13 @@ Partial Class FrmSettings
         '
         'BTNVideoModSave
         '
-        Me.BTNVideoModSave.Enabled = False
+        Me.BTNVideoModSave.Enabled = false
         Me.BTNVideoModSave.Location = New System.Drawing.Point(6, 268)
         Me.BTNVideoModSave.Name = "BTNVideoModSave"
         Me.BTNVideoModSave.Size = New System.Drawing.Size(155, 35)
         Me.BTNVideoModSave.TabIndex = 151
         Me.BTNVideoModSave.Text = "Save Changes"
-        Me.BTNVideoModSave.UseVisualStyleBackColor = True
+        Me.BTNVideoModSave.UseVisualStyleBackColor = true
         '
         'TabPage15
         '
@@ -11594,13 +11600,13 @@ Partial Class FrmSettings
         Me.GroupBox34.Name = "GroupBox34"
         Me.GroupBox34.Size = New System.Drawing.Size(683, 107)
         Me.GroupBox34.TabIndex = 66
-        Me.GroupBox34.TabStop = False
+        Me.GroupBox34.TabStop = false
         Me.GroupBox34.Text = "Description"
         '
         'Label52
         '
         Me.Label52.BackColor = System.Drawing.Color.Transparent
-        Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label52.ForeColor = System.Drawing.Color.Black
         Me.Label52.Location = New System.Drawing.Point(6, 16)
         Me.Label52.Name = "Label52"
@@ -11624,7 +11630,7 @@ Partial Class FrmSettings
         Me.Button26.Size = New System.Drawing.Size(120, 23)
         Me.Button26.TabIndex = 174
         Me.Button26.Text = "Clear Fields"
-        Me.Button26.UseVisualStyleBackColor = True
+        Me.Button26.UseVisualStyleBackColor = true
         '
         'Label56
         '
@@ -11645,7 +11651,7 @@ Partial Class FrmSettings
         '
         'LBGlitModScripts
         '
-        Me.LBGlitModScripts.FormattingEnabled = True
+        Me.LBGlitModScripts.FormattingEnabled = true
         Me.LBGlitModScripts.Location = New System.Drawing.Point(27, 106)
         Me.LBGlitModScripts.Name = "LBGlitModScripts"
         Me.LBGlitModScripts.Size = New System.Drawing.Size(136, 186)
@@ -11662,7 +11668,7 @@ Partial Class FrmSettings
         '
         'LBLGlitModDomType
         '
-        Me.LBLGlitModDomType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLGlitModDomType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLGlitModDomType.Location = New System.Drawing.Point(191, 103)
         Me.LBLGlitModDomType.Name = "LBLGlitModDomType"
         Me.LBLGlitModDomType.Size = New System.Drawing.Size(123, 23)
@@ -11677,12 +11683,12 @@ Partial Class FrmSettings
         Me.Button29.Size = New System.Drawing.Size(120, 23)
         Me.Button29.TabIndex = 151
         Me.Button29.Text = "Save Glitter File"
-        Me.Button29.UseVisualStyleBackColor = True
+        Me.Button29.UseVisualStyleBackColor = true
         '
         'CBGlitModType
         '
         Me.CBGlitModType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CBGlitModType.FormattingEnabled = True
+        Me.CBGlitModType.FormattingEnabled = true
         Me.CBGlitModType.Items.AddRange(New Object() {"Tease", "Egotist", "Trivia", "Daily", "Custom 1", "Custom 2"})
         Me.CBGlitModType.Location = New System.Drawing.Point(27, 35)
         Me.CBGlitModType.Name = "CBGlitModType"
@@ -11743,30 +11749,30 @@ Partial Class FrmSettings
         Me.GroupBox62.Name = "GroupBox62"
         Me.GroupBox62.Size = New System.Drawing.Size(277, 159)
         Me.GroupBox62.TabIndex = 178
-        Me.GroupBox62.TabStop = False
+        Me.GroupBox62.TabStop = false
         Me.GroupBox62.Text = "Language"
         '
         'RBGerman
         '
-        Me.RBGerman.AutoSize = True
+        Me.RBGerman.AutoSize = true
         Me.RBGerman.Location = New System.Drawing.Point(161, 36)
         Me.RBGerman.Name = "RBGerman"
         Me.RBGerman.Size = New System.Drawing.Size(65, 17)
         Me.RBGerman.TabIndex = 1
         Me.RBGerman.Text = "Deutsch"
-        Me.RBGerman.UseVisualStyleBackColor = True
+        Me.RBGerman.UseVisualStyleBackColor = true
         '
         'RBEnglish
         '
-        Me.RBEnglish.AutoSize = True
-        Me.RBEnglish.Checked = True
+        Me.RBEnglish.AutoSize = true
+        Me.RBEnglish.Checked = true
         Me.RBEnglish.Location = New System.Drawing.Point(17, 35)
         Me.RBEnglish.Name = "RBEnglish"
         Me.RBEnglish.Size = New System.Drawing.Size(59, 17)
         Me.RBEnglish.TabIndex = 0
-        Me.RBEnglish.TabStop = True
+        Me.RBEnglish.TabStop = true
         Me.RBEnglish.Text = "English"
-        Me.RBEnglish.UseVisualStyleBackColor = True
+        Me.RBEnglish.UseVisualStyleBackColor = true
         '
         'GroupBox33
         '
@@ -11778,7 +11784,7 @@ Partial Class FrmSettings
         Me.GroupBox33.Name = "GroupBox33"
         Me.GroupBox33.Size = New System.Drawing.Size(277, 107)
         Me.GroupBox33.TabIndex = 177
-        Me.GroupBox33.TabStop = False
+        Me.GroupBox33.TabStop = false
         Me.GroupBox33.Text = "System States"
         '
         'MetroTest
@@ -11798,13 +11804,13 @@ Partial Class FrmSettings
         Me.Button11.Size = New System.Drawing.Size(99, 23)
         Me.Button11.TabIndex = 177
         Me.Button11.Text = "Toggle"
-        Me.Button11.UseVisualStyleBackColor = True
+        Me.Button11.UseVisualStyleBackColor = true
         '
         'LBLChastityState
         '
         Me.LBLChastityState.BackColor = System.Drawing.Color.LightGray
         Me.LBLChastityState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.LBLChastityState.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLChastityState.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.LBLChastityState.ForeColor = System.Drawing.Color.Red
         Me.LBLChastityState.Location = New System.Drawing.Point(120, 33)
         Me.LBLChastityState.Name = "LBLChastityState"
@@ -11817,7 +11823,7 @@ Partial Class FrmSettings
         '
         Me.Label120.BackColor = System.Drawing.Color.LightGray
         Me.Label120.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label120.Location = New System.Drawing.Point(17, 33)
         Me.Label120.Name = "Label120"
         Me.Label120.Size = New System.Drawing.Size(98, 23)
@@ -11837,7 +11843,7 @@ Partial Class FrmSettings
         Me.GroupBox27.Name = "GroupBox27"
         Me.GroupBox27.Size = New System.Drawing.Size(279, 117)
         Me.GroupBox27.TabIndex = 176
-        Me.GroupBox27.TabStop = False
+        Me.GroupBox27.TabStop = false
         Me.GroupBox27.Text = "Session Images"
         '
         'Button6
@@ -11847,7 +11853,7 @@ Partial Class FrmSettings
         Me.Button6.Size = New System.Drawing.Size(117, 23)
         Me.Button6.TabIndex = 176
         Me.Button6.Text = "Delete All Files"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.UseVisualStyleBackColor = true
         '
         'LBLSesSpace
         '
@@ -11863,7 +11869,7 @@ Partial Class FrmSettings
         Me.Button3.Size = New System.Drawing.Size(117, 23)
         Me.Button3.TabIndex = 175
         Me.Button3.Text = "Open Folder"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.UseVisualStyleBackColor = true
         '
         'LBLSesFiles
         '
@@ -11874,7 +11880,7 @@ Partial Class FrmSettings
         '
         'Label125
         '
-        Me.Label125.AutoSize = True
+        Me.Label125.AutoSize = true
         Me.Label125.Location = New System.Drawing.Point(17, 53)
         Me.Label125.Name = "Label125"
         Me.Label125.Size = New System.Drawing.Size(120, 13)
@@ -11883,7 +11889,7 @@ Partial Class FrmSettings
         '
         'Label124
         '
-        Me.Label124.AutoSize = True
+        Me.Label124.AutoSize = true
         Me.Label124.Location = New System.Drawing.Point(17, 24)
         Me.Label124.Name = "Label124"
         Me.Label124.Size = New System.Drawing.Size(126, 13)
@@ -11907,18 +11913,18 @@ Partial Class FrmSettings
         Me.GroupBox20.Name = "GroupBox20"
         Me.GroupBox20.Size = New System.Drawing.Size(408, 230)
         Me.GroupBox20.TabIndex = 174
-        Me.GroupBox20.TabStop = False
+        Me.GroupBox20.TabStop = false
         Me.GroupBox20.Text = "Maintenance"
         '
         'Button1
         '
-        Me.Button1.Enabled = False
+        Me.Button1.Enabled = false
         Me.Button1.Location = New System.Drawing.Point(270, 19)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(121, 23)
         Me.Button1.TabIndex = 176
         Me.Button1.Text = "Reset Settings"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = true
         '
         'BTNMaintenanceScripts
         '
@@ -11927,7 +11933,7 @@ Partial Class FrmSettings
         Me.BTNMaintenanceScripts.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceScripts.TabIndex = 175
         Me.BTNMaintenanceScripts.Text = "Audit Scripts"
-        Me.BTNMaintenanceScripts.UseVisualStyleBackColor = True
+        Me.BTNMaintenanceScripts.UseVisualStyleBackColor = true
         '
         'BTNMaintenanceValidate
         '
@@ -11936,7 +11942,7 @@ Partial Class FrmSettings
         Me.BTNMaintenanceValidate.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceValidate.TabIndex = 8
         Me.BTNMaintenanceValidate.Text = "Validate Local Files"
-        Me.BTNMaintenanceValidate.UseVisualStyleBackColor = True
+        Me.BTNMaintenanceValidate.UseVisualStyleBackColor = true
         '
         'BTNMaintenanceRefresh
         '
@@ -11945,11 +11951,11 @@ Partial Class FrmSettings
         Me.BTNMaintenanceRefresh.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceRefresh.TabIndex = 7
         Me.BTNMaintenanceRefresh.Text = "Refresh URL Files"
-        Me.BTNMaintenanceRefresh.UseVisualStyleBackColor = True
+        Me.BTNMaintenanceRefresh.UseVisualStyleBackColor = true
         '
         'Label117
         '
-        Me.Label117.AutoSize = True
+        Me.Label117.AutoSize = true
         Me.Label117.Location = New System.Drawing.Point(15, 182)
         Me.Label117.Name = "Label117"
         Me.Label117.Size = New System.Drawing.Size(84, 13)
@@ -11958,7 +11964,7 @@ Partial Class FrmSettings
         '
         'Label116
         '
-        Me.Label116.AutoSize = True
+        Me.Label116.AutoSize = true
         Me.Label116.Location = New System.Drawing.Point(15, 140)
         Me.Label116.Name = "Label116"
         Me.Label116.Size = New System.Drawing.Size(85, 13)
@@ -11974,13 +11980,13 @@ Partial Class FrmSettings
         '
         'BTNMaintenanceCancel
         '
-        Me.BTNMaintenanceCancel.Enabled = False
+        Me.BTNMaintenanceCancel.Enabled = false
         Me.BTNMaintenanceCancel.Location = New System.Drawing.Point(270, 48)
         Me.BTNMaintenanceCancel.Name = "BTNMaintenanceCancel"
         Me.BTNMaintenanceCancel.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceCancel.TabIndex = 3
         Me.BTNMaintenanceCancel.Text = "Cancel"
-        Me.BTNMaintenanceCancel.UseVisualStyleBackColor = True
+        Me.BTNMaintenanceCancel.UseVisualStyleBackColor = true
         '
         'PBMaintenance
         '
@@ -12005,7 +12011,7 @@ Partial Class FrmSettings
         Me.BTNMaintenanceRebuild.Size = New System.Drawing.Size(121, 23)
         Me.BTNMaintenanceRebuild.TabIndex = 0
         Me.BTNMaintenanceRebuild.Text = "Rebuild URL Files"
-        Me.BTNMaintenanceRebuild.UseVisualStyleBackColor = True
+        Me.BTNMaintenanceRebuild.UseVisualStyleBackColor = true
         '
         'WebToy
         '
@@ -12025,12 +12031,12 @@ Partial Class FrmSettings
         Me.GroupBox15.Name = "GroupBox15"
         Me.GroupBox15.Size = New System.Drawing.Size(408, 159)
         Me.GroupBox15.TabIndex = 173
-        Me.GroupBox15.TabStop = False
+        Me.GroupBox15.TabStop = false
         Me.GroupBox15.Text = "Web-Controlled Sex Toy"
         '
         'Label115
         '
-        Me.Label115.AutoSize = True
+        Me.Label115.AutoSize = true
         Me.Label115.Location = New System.Drawing.Point(12, 58)
         Me.Label115.Name = "Label115"
         Me.Label115.Size = New System.Drawing.Size(54, 13)
@@ -12053,7 +12059,7 @@ Partial Class FrmSettings
         '
         'Label114
         '
-        Me.Label114.AutoSize = True
+        Me.Label114.AutoSize = true
         Me.Label114.Location = New System.Drawing.Point(12, 17)
         Me.Label114.Name = "Label114"
         Me.Label114.Size = New System.Drawing.Size(54, 13)
@@ -12063,18 +12069,18 @@ Partial Class FrmSettings
         'PictureBox9
         '
         Me.PictureBox9.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox9.Image = CType(resources.GetObject("PictureBox9.Image"), System.Drawing.Image)
+        Me.PictureBox9.Image = CType(resources.GetObject("PictureBox9.Image"),System.Drawing.Image)
         Me.PictureBox9.Location = New System.Drawing.Point(9, 6)
         Me.PictureBox9.Name = "PictureBox9"
         Me.PictureBox9.Size = New System.Drawing.Size(160, 19)
         Me.PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox9.TabIndex = 166
-        Me.PictureBox9.TabStop = False
+        Me.PictureBox9.TabStop = false
         '
         'Label148
         '
         Me.Label148.BackColor = System.Drawing.Color.Transparent
-        Me.Label148.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label148.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label148.ForeColor = System.Drawing.Color.Black
         Me.Label148.Location = New System.Drawing.Point(7, 6)
         Me.Label148.Name = "Label148"
@@ -12112,17 +12118,17 @@ Partial Class FrmSettings
         '
         'Label113
         '
-        Me.Label113.AutoSize = True
+        Me.Label113.AutoSize = true
         Me.Label113.Location = New System.Drawing.Point(4, 417)
         Me.Label113.Name = "Label113"
         Me.Label113.Size = New System.Drawing.Size(452, 13)
         Me.Label113.TabIndex = 173
-        Me.Label113.Text = "All content contained in or viewed through this program are property of their res" & _
+        Me.Label113.Text = "All content contained in or viewed through this program are property of their res"& _ 
     "pective owners."
         '
         'Label40
         '
-        Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label40.Location = New System.Drawing.Point(35, 273)
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(638, 24)
@@ -12132,19 +12138,19 @@ Partial Class FrmSettings
         '
         'Label35
         '
-        Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label35.Location = New System.Drawing.Point(32, 107)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(641, 77)
         Me.Label35.TabIndex = 170
-        Me.Label35.Text = "This program is freeware. It may be freely distributed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Do not package or dist" & _
-    "ribute this program with any scripts or additional content." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please distribute a" & _
+        Me.Label35.Text = "This program is freeware. It may be freely distributed."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Do not package or dist"& _ 
+    "ribute this program with any scripts or additional content."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Please distribute a"& _ 
     "dditional files separately."
         Me.Label35.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'Label33
         '
-        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label33.Location = New System.Drawing.Point(32, 191)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(641, 77)
@@ -12154,7 +12160,7 @@ Partial Class FrmSettings
         '
         'Label17
         '
-        Me.Label17.AutoSize = True
+        Me.Label17.AutoSize = true
         Me.Label17.Location = New System.Drawing.Point(522, 78)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(93, 13)
@@ -12163,7 +12169,7 @@ Partial Class FrmSettings
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
+        Me.Label3.AutoSize = true
         Me.Label3.Location = New System.Drawing.Point(489, 417)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(215, 13)
@@ -12173,17 +12179,17 @@ Partial Class FrmSettings
         'PictureBox3
         '
         Me.PictureBox3.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"), System.Drawing.Image)
+        Me.PictureBox3.Image = CType(resources.GetObject("PictureBox3.Image"),System.Drawing.Image)
         Me.PictureBox3.Location = New System.Drawing.Point(84, 17)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(531, 58)
         Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox3.TabIndex = 166
-        Me.PictureBox3.TabStop = False
+        Me.PictureBox3.TabStop = false
         '
         'Label41
         '
-        Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.Label41.Location = New System.Drawing.Point(35, 297)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(638, 120)
@@ -12194,7 +12200,7 @@ Partial Class FrmSettings
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-        Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" & _
+        Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file"& _ 
     "s (*.*)|*.*"
         Me.OpenFileDialog1.Title = "Select an image file"
         '
@@ -12224,13 +12230,13 @@ Partial Class FrmSettings
         '
         'BWRebuildURLFiles
         '
-        Me.BWRebuildURLFiles.WorkerReportsProgress = True
-        Me.BWRebuildURLFiles.WorkerSupportsCancellation = True
+        Me.BWRebuildURLFiles.WorkerReportsProgress = true
+        Me.BWRebuildURLFiles.WorkerSupportsCancellation = true
         '
         'BWRefreshURLFiles
         '
-        Me.BWRefreshURLFiles.WorkerReportsProgress = True
-        Me.BWRefreshURLFiles.WorkerSupportsCancellation = True
+        Me.BWRefreshURLFiles.WorkerReportsProgress = true
+        Me.BWRefreshURLFiles.WorkerSupportsCancellation = true
         '
         'BWValidateLocalFiles
         '
@@ -12238,18 +12244,41 @@ Partial Class FrmSettings
         'BWCreateURLFiles
         '
         '
-        'Button32
+        'humiliatingCheckBox
         '
-        Me.Button32.BackColor = System.Drawing.Color.Transparent
-        Me.Button32.Image = CType(resources.GetObject("Button32.Image"), System.Drawing.Image)
-        Me.Button32.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button32.Location = New System.Drawing.Point(196, 24)
-        Me.Button32.Name = "Button32"
-        Me.Button32.Size = New System.Drawing.Size(135, 55)
-        Me.Button32.TabIndex = 55
-        Me.Button32.Text = "  Save Theme"
-        Me.Button32.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.Button32.UseVisualStyleBackColor = false
+        Me.humiliatingCheckBox.AutoSize = true
+        Me.humiliatingCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.humiliatingCheckBox.ForeColor = System.Drawing.Color.Black
+        Me.humiliatingCheckBox.Location = New System.Drawing.Point(157, 43)
+        Me.humiliatingCheckBox.Name = "humiliatingCheckBox"
+        Me.humiliatingCheckBox.Size = New System.Drawing.Size(77, 17)
+        Me.humiliatingCheckBox.TabIndex = 41
+        Me.humiliatingCheckBox.Text = "Humiliating"
+        Me.humiliatingCheckBox.UseVisualStyleBackColor = true
+        '
+        'CheckBox2
+        '
+        Me.CheckBox2.AutoSize = true
+        Me.CheckBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.CheckBox2.ForeColor = System.Drawing.Color.Black
+        Me.CheckBox2.Location = New System.Drawing.Point(84, 43)
+        Me.CheckBox2.Name = "CheckBox2"
+        Me.CheckBox2.Size = New System.Drawing.Size(56, 17)
+        Me.CheckBox2.TabIndex = 40
+        Me.CheckBox2.Text = "Vulgar"
+        Me.CheckBox2.UseVisualStyleBackColor = true
+        '
+        'sadisticCheckBox
+        '
+        Me.sadisticCheckBox.AutoSize = true
+        Me.sadisticCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.sadisticCheckBox.ForeColor = System.Drawing.Color.Black
+        Me.sadisticCheckBox.Location = New System.Drawing.Point(11, 43)
+        Me.sadisticCheckBox.Name = "sadisticCheckBox"
+        Me.sadisticCheckBox.Size = New System.Drawing.Size(63, 17)
+        Me.sadisticCheckBox.TabIndex = 39
+        Me.sadisticCheckBox.Text = "Sadistic"
+        Me.sadisticCheckBox.UseVisualStyleBackColor = true
         '
         'FrmSettings
         '
@@ -12623,7 +12652,6 @@ End Sub
     Friend WithEvents supremacistCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents vulgarCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents crazyCheckBox As System.Windows.Forms.CheckBox
-    Friend WithEvents dompersonalityComboBox As System.Windows.Forms.ComboBox
     Friend WithEvents GBDomTypingStyle As System.Windows.Forms.GroupBox
     Friend WithEvents CBMeMyMine As System.Windows.Forms.CheckBox
     Friend WithEvents apostropheCheckBox As System.Windows.Forms.CheckBox
@@ -13485,4 +13513,7 @@ End Sub
     Friend WithEvents Button31 As System.Windows.Forms.Button
     Friend WithEvents CBFlipBack As System.Windows.Forms.CheckBox
     Friend WithEvents Button32 As System.Windows.Forms.Button
+    Friend WithEvents humiliatingCheckBox As System.Windows.Forms.CheckBox
+    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents sadisticCheckBox As System.Windows.Forms.CheckBox
 End Class

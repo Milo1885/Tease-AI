@@ -111,44 +111,7 @@ Public Class FrmSettings
         oSpeech.Dispose()
 
 
-        FrmSplash.PBSplash.Value += 1
-        FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
-        FrmSplash.Refresh()
-
-        Dim PersonType As String
-
-        'dompersonalityComboBox.Items.Clear()
-
-        Debug.Print(My.Settings.DomPersonality)
-        'FrmSettings.dompersonalityComboBox.Text = My.Settings.DomPersonality
-
-        'dompersonalityComboBox.Text = My.Settings.DomPersonality
-
-
-        For Each Dir As String In Directory.GetDirectories(Application.StartupPath & "\Scripts\")
-            PersonType = Dir
-
-            Dim DirSplit As String() = PersonType.Split("\")
-            PersonType = DirSplit(DirSplit.Length - 1)
-            Debug.Print("PersonType = " & PersonType)
-            'Do While PersonType.Contains("\")
-            'PersonType = PersonType.Remove(0, 1)
-            'Loop
-            Try
-                dompersonalityComboBox.Items.Add(PersonType)
-            Catch
-            End Try
-        Next
-
-        If dompersonalityComboBox.Items.Count < 1 Then
-            MessageBox.Show(Me, "No domme Personalities were found! Many aspects of this program will not work correctly until at least one Personality is installed.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        Else
-            Try
-                dompersonalityComboBox.Text = My.Settings.DomPersonality
-            Catch ex As Exception
-                dompersonalityComboBox.Text = dompersonalityComboBox.Items(0)
-            End Try
-        End If
+      
 
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Checking URL Files..."
@@ -727,9 +690,9 @@ Public Class FrmSettings
 
 
         'dompersonalityComboBox.Text = PersonType
-        Debug.Print("Dom personality = " & dompersonalityComboBox.Text)
-        Debug.Print("WEB THING HELLO???" & Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Start\")
-        WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Start\")
+        Debug.Print("Dom personality = " & Form1.dompersonalitycombobox.Text)
+        Debug.Print("WEB THING HELLO???" & Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
+        WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
 
 
         LBLContact1ImageDir.Text = My.Settings.Contact1ImageDir
@@ -1858,18 +1821,18 @@ Public Class FrmSettings
         Dim CensorText As String = "NULL"
 
         If CBVTType.Text = "Censorship Sucks" Then
-            If LBVidScript.SelectedItem = "CensorBarOff" Then CensorText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Censorship Sucks\CensorBarOff.txt"
-            If LBVidScript.SelectedItem = "CensorBarOn" Then CensorText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Censorship Sucks\CensorBarOn.txt"
+            If LBVidScript.SelectedItem = "CensorBarOff" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Censorship Sucks\CensorBarOff.txt"
+            If LBVidScript.SelectedItem = "CensorBarOn" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Censorship Sucks\CensorBarOn.txt"
         End If
 
         If CBVTType.Text = "Avoid The Edge" Then
-            If LBVidScript.SelectedItem = "Taunts" Then CensorText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Avoid The Edge\Taunts.txt"
+            If LBVidScript.SelectedItem = "Taunts" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Avoid The Edge\Taunts.txt"
         End If
 
         If CBVTType.Text = "Red Light Green Light" Then
-            If LBVidScript.SelectedItem = "Green Light" Then CensorText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Red Light Green Light\Green Light.txt"
-            If LBVidScript.SelectedItem = "Red Light" Then CensorText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Red Light Green Light\Red Light.txt"
-            If LBVidScript.SelectedItem = "Taunts" Then CensorText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Red Light Green Light\Taunts.txt"
+            If LBVidScript.SelectedItem = "Green Light" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Green Light.txt"
+            If LBVidScript.SelectedItem = "Red Light" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Red Light.txt"
+            If LBVidScript.SelectedItem = "Taunts" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Taunts.txt"
         End If
 
         Form1.VTPath = CensorText
@@ -1966,44 +1929,7 @@ Public Class FrmSettings
 
     End Sub
 
-    Private Sub dompersonalityComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles dompersonalityComboBox.SelectedIndexChanged
-        If FrmSettingsLoading = False Then
-
-            My.Settings.DomPersonality = dompersonalityComboBox.Text
-            My.Settings.Save()
-
-            LBLGlitModDomType.Text = dompersonalityComboBox.Text
-
-            Try
-                InitializeStartScripts()
-                InitializeModuleScripts()
-                InitializeLinkScripts()
-                InitializeEndScripts()
-            Catch
-            End Try
-
-            Me.TCScripts.SelectTab(3)
-            Me.TCScripts.SelectTab(2)
-            Me.TCScripts.SelectTab(1)
-            Me.TCScripts.SelectTab(0)
-
-            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
-                Dim ContactList As New List(Of String)
-                ContactList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Contact_Descriptions.txt")
-                GBGlitter1.Text = Form1.PoundClean(ContactList(0))
-                GBGlitter2.Text = Form1.PoundClean(ContactList(1))
-                GBGlitter3.Text = Form1.PoundClean(ContactList(2))
-            Else
-                GBGlitter1.Text = "Contact 1"
-                GBGlitter2.Text = "Contact 2"
-                GBGlitter3.Text = "Contact 3"
-            End If
-
-            Form9.LBLPersonality.Text = dompersonalityComboBox.Text
-
-        End If
-
-    End Sub
+   
 
     Private Sub Button26_Click_2(sender As System.Object, e As System.EventArgs) Handles Button26.Click
         TBGlitModFileName.Text = ""
@@ -2017,7 +1943,7 @@ Public Class FrmSettings
 
         If Form1.FormLoading = False Then
 
-            Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\")
+            Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\")
             Dim GlitterScriptCount As Integer
 
             LBGlitModScripts.Items.Clear()
@@ -2036,7 +1962,7 @@ Public Class FrmSettings
 
     Private Sub LBGlitModScripts_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles LBGlitModScripts.SelectedIndexChanged
 
-        Dim GlitPath As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\" & LBGlitModScripts.SelectedItem & ".txt"
+        Dim GlitPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\" & LBGlitModScripts.SelectedItem & ".txt"
 
         If Not File.Exists(GlitPath) Then Return
 
@@ -2100,7 +2026,7 @@ Public Class FrmSettings
 
 
 
-        Dim GlitPath As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\" & TBGlitModFileName.Text & ".txt"
+        Dim GlitPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\" & TBGlitModFileName.Text & ".txt"
 
 
         'My.Computer.FileSystem.WriteAllText(GlitPath, RTBGlitModDommePost.Text & Environment.NewLine & RTBGlitModResponses.Text, False)
@@ -4744,14 +4670,7 @@ NextURL:
             "of the slideshow model's pubic hair to enhance immersion."
     End Sub
 
-    Private Sub dompersonalityComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles dompersonalityComboBox.LostFocus
-
-        My.Settings.DomPersonality = dompersonalityComboBox.Text
-        My.Settings.Save()
-
-    End Sub
-
-    Private Sub dompersonalityComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles dompersonalityComboBox.MouseEnter
+    Private Sub dompersonalityComboBox_MouseHover(sender As System.Object, e As System.EventArgs)
         LblDommeSettingsDescription.Text = "Sets the Domme's personality to a type you have created or downloaded." & Environment.NewLine & Environment.NewLine & "Different personalities allow for varied experiences while using " & _
             "this program. For best results, this value should only be changed before greeting the domme."
     End Sub
@@ -5163,7 +5082,7 @@ NextURL:
         TBKeyWords.Text = ""
         RTBKeyWords.Text = ""
 
-        Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\")
+        Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\")
 
         LBKeyWords.Items.Clear()
 
@@ -5175,7 +5094,7 @@ NextURL:
 
     Private Sub LBKeyWords_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles LBKeyWords.SelectedIndexChanged
 
-        Dim KeyWordPath As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\" & LBKeyWords.SelectedItem & ".txt"
+        Dim KeyWordPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & LBKeyWords.SelectedItem & ".txt"
 
         If Not File.Exists(KeyWordPath) Then Return
 
@@ -5244,13 +5163,13 @@ NextURL:
 
         If Not LBKeyWords.Items.Contains(KeyWordSaveDir) Then
             LBKeyWords.Items.Add(KeyWordSaveDir)
-            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", RTBKeyWords.Text, False)
-            File.WriteAllLines(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt").Where(Function(s) s <> String.Empty))
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", RTBKeyWords.Text, False)
+            File.WriteAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt").Where(Function(s) s <> String.Empty))
         Else
             Dim Result As Integer = MessageBox.Show(Me, KeyWordSaveDir & " already exists!" & Environment.NewLine & Environment.NewLine & "Do you wish to overwrite?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             If Result = DialogResult.Yes Then
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", RTBKeyWords.Text, False)
-                File.WriteAllLines(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt").Where(Function(s) s <> String.Empty))
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", RTBKeyWords.Text, False)
+                File.WriteAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt").Where(Function(s) s <> String.Empty))
             Else
                 Debug.Print("Did not work")
                 Return
@@ -6685,7 +6604,7 @@ WhyUMakeMeDoDis:
         Debug.Print(TCScripts.SelectedIndex)
 
         If TCScripts.SelectedIndex = 0 Then
-            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\StartCheckList.cld") Then
+            If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\StartCheckList.cld") Then
                 LoadStartScripts()
                 If CLBStartList.Items.Count > 0 Then
                     CLBStartList.SetSelected(0, True)
@@ -6702,7 +6621,7 @@ WhyUMakeMeDoDis:
                 Next
 
             Else
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                     Dim TempFile As String = foundFile
                     TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
                     CLBStartList.Items.Add(TempFile)
@@ -6717,7 +6636,7 @@ WhyUMakeMeDoDis:
         End If
 
         If TCScripts.SelectedIndex = 1 Then
-            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\ModuleCheckList.cld") Then
+            If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\ModuleCheckList.cld") Then
                 LoadModuleScripts()
 
                 If CLBModuleList.Items.Count > 0 Then
@@ -6739,7 +6658,7 @@ WhyUMakeMeDoDis:
                     Next
                 Next
             Else
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                     Dim TempFile As String = foundFile
                     TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
                     CLBModuleList.Items.Add(TempFile)
@@ -6754,7 +6673,7 @@ WhyUMakeMeDoDis:
         End If
 
         If TCScripts.SelectedIndex = 2 Then
-            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\LinkCheckList.cld") Then
+            If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\LinkCheckList.cld") Then
                 LoadLinkScripts()
                 If CLBLinkList.Items.Count > 0 Then
                     CLBLinkList.SetSelected(0, True)
@@ -6769,7 +6688,7 @@ WhyUMakeMeDoDis:
                     Next
                 Next
             Else
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                     Dim TempFile As String = foundFile
                     TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
                     CLBLinkList.Items.Add(TempFile)
@@ -6784,7 +6703,7 @@ WhyUMakeMeDoDis:
         End If
 
         If TCScripts.SelectedIndex = 3 Then
-            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\EndCheckList.cld") Then
+            If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\EndCheckList.cld") Then
                 LoadEndScripts()
                 If CLBEndList.Items.Count > 0 Then
                     CLBEndList.SetSelected(0, True)
@@ -6801,7 +6720,7 @@ WhyUMakeMeDoDis:
                 Next
 
             Else
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                     Dim TempFile As String = foundFile
                     TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
                     CLBEndList.Items.Add(TempFile)
@@ -6819,7 +6738,7 @@ WhyUMakeMeDoDis:
 
     Public Sub SaveStartScripts()
 
-        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\StartCheckList.cld", IO.FileMode.Create)
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\StartCheckList.cld", IO.FileMode.Create)
         Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
         For i = 0 To CLBStartList.Items.Count - 1
             BinaryWriter.Write(CStr(CLBStartList.Items(i)))
@@ -6832,7 +6751,7 @@ WhyUMakeMeDoDis:
 
     Public Sub SaveModuleScripts()
 
-        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\ModuleCheckList.cld", IO.FileMode.Create)
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\ModuleCheckList.cld", IO.FileMode.Create)
         Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
         For i = 0 To CLBModuleList.Items.Count - 1
             BinaryWriter.Write(CStr(CLBModuleList.Items(i)))
@@ -6845,7 +6764,7 @@ WhyUMakeMeDoDis:
 
     Public Sub SaveLinkScripts()
 
-        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\LinkCheckList.cld", IO.FileMode.Create)
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\LinkCheckList.cld", IO.FileMode.Create)
         Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
         For i = 0 To CLBLinkList.Items.Count - 1
             BinaryWriter.Write(CStr(CLBLinkList.Items(i)))
@@ -6858,7 +6777,7 @@ WhyUMakeMeDoDis:
 
     Public Sub SaveEndScripts()
 
-        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\EndCheckList.cld", IO.FileMode.Create)
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\EndCheckList.cld", IO.FileMode.Create)
         Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
         For i = 0 To CLBEndList.Items.Count - 1
             BinaryWriter.Write(CStr(CLBEndList.Items(i)))
@@ -6872,7 +6791,7 @@ WhyUMakeMeDoDis:
 
     Public Sub InitializeStartScripts()
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\StartCheckList.cld") Then
+        If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\StartCheckList.cld") Then
 
             LoadStartScripts()
 
@@ -6891,7 +6810,7 @@ WhyUMakeMeDoDis:
             Next
 
         Else
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 Dim TempFile As String = foundFile
                 TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
                 CLBStartList.Items.Add(TempFile)
@@ -6911,11 +6830,11 @@ WhyUMakeMeDoDis:
 
     Public Sub InitializeModuleScripts()
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\ModuleCheckList.cld") Then
+        If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\ModuleCheckList.cld") Then
 
             LoadModuleScripts()
 
-       
+
 
             If CLBModuleList.Items.Count > 0 Then
 
@@ -6934,7 +6853,7 @@ WhyUMakeMeDoDis:
 
             End If
         Else
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 Dim TempFile As String = foundFile
                 TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
                 CLBModuleList.Items.Add(TempFile)
@@ -6944,7 +6863,7 @@ WhyUMakeMeDoDis:
                 CLBModuleList.SetItemChecked(i, True)
             Next
 
-       
+
 
             SaveModuleScripts()
             If CLBModuleList.Items.Count > 0 Then
@@ -6958,7 +6877,7 @@ WhyUMakeMeDoDis:
 
     Public Sub InitializeLinkScripts()
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\LinkCheckList.cld") Then
+        If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\LinkCheckList.cld") Then
 
             LoadLinkScripts()
 
@@ -6978,7 +6897,7 @@ WhyUMakeMeDoDis:
             End If
 
         Else
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 Dim TempFile As String = foundFile
                 TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
                 CLBLinkList.Items.Add(TempFile)
@@ -6997,7 +6916,7 @@ WhyUMakeMeDoDis:
 
     Public Sub InitializeEndScripts()
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\EndCheckList.cld") Then
+        If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\EndCheckList.cld") Then
 
             LoadEndScripts()
 
@@ -7016,7 +6935,7 @@ WhyUMakeMeDoDis:
 
             End If
         Else
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 Dim TempFile As String = foundFile
                 TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
                 CLBEndList.Items.Add(TempFile)
@@ -7037,7 +6956,7 @@ WhyUMakeMeDoDis:
     Public Sub LoadStartScripts()
 
         CLBStartList.Items.Clear()
-        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\StartCheckList.cld", IO.FileMode.Open)
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\StartCheckList.cld", IO.FileMode.Open)
         Dim BinaryReader As New System.IO.BinaryReader(FileStream)
         CLBStartList.BeginUpdate()
         Do While FileStream.Position < FileStream.Length
@@ -7047,7 +6966,7 @@ WhyUMakeMeDoDis:
         CLBStartList.EndUpdate()
         BinaryReader.Close()
         FileStream.Dispose()
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
             Dim TempFile As String = foundFile
             TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
             If Not CLBStartList.Items.Contains(TempFile) Then
@@ -7056,7 +6975,7 @@ WhyUMakeMeDoDis:
             End If
         Next
         For i As Integer = 0 To CLBStartList.Items.Count - 1 Step -1
-            If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt") Then CLBStartList.Items.Remove(CLBStartList.Items(i))
+            If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt") Then CLBStartList.Items.Remove(CLBStartList.Items(i))
         Next
 
     End Sub
@@ -7064,7 +6983,7 @@ WhyUMakeMeDoDis:
     Public Sub LoadModuleScripts()
 
         CLBModuleList.Items.Clear()
-        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\ModuleCheckList.cld", IO.FileMode.Open)
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\ModuleCheckList.cld", IO.FileMode.Open)
         Dim BinaryReader As New System.IO.BinaryReader(FileStream)
         CLBModuleList.BeginUpdate()
         Do While FileStream.Position < FileStream.Length
@@ -7074,7 +6993,7 @@ WhyUMakeMeDoDis:
         CLBModuleList.EndUpdate()
         BinaryReader.Close()
         FileStream.Dispose()
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
             Dim TempFile As String = foundFile
             TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
             Debug.Print("Module Tempfile = " & TempFile)
@@ -7084,7 +7003,7 @@ WhyUMakeMeDoDis:
             End If
         Next
         For i As Integer = 0 To CLBModuleList.Items.Count - 1 Step -1
-            If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt") Then CLBModuleList.Items.Remove(CLBModuleList.Items(i))
+            If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt") Then CLBModuleList.Items.Remove(CLBModuleList.Items(i))
         Next
 
         
@@ -7096,7 +7015,7 @@ WhyUMakeMeDoDis:
     Public Sub LoadLinkScripts()
 
         CLBLinkList.Items.Clear()
-        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\LinkCheckList.cld", IO.FileMode.Open)
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\LinkCheckList.cld", IO.FileMode.Open)
         Dim BinaryReader As New System.IO.BinaryReader(FileStream)
         CLBLinkList.BeginUpdate()
         Do While FileStream.Position < FileStream.Length
@@ -7106,7 +7025,7 @@ WhyUMakeMeDoDis:
         CLBLinkList.EndUpdate()
         BinaryReader.Close()
         FileStream.Dispose()
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
             Dim TempFile As String = foundFile
             TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
             If Not CLBLinkList.Items.Contains(TempFile) Then
@@ -7114,7 +7033,7 @@ WhyUMakeMeDoDis:
             End If
         Next
         For i As Integer = 0 To CLBLinkList.Items.Count - 1 Step -1
-            If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt") Then CLBLinkList.Items.Remove(CLBLinkList.Items(i))
+            If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt") Then CLBLinkList.Items.Remove(CLBLinkList.Items(i))
         Next
 
     End Sub
@@ -7122,7 +7041,7 @@ WhyUMakeMeDoDis:
     Public Sub LoadEndScripts()
 
         CLBEndList.Items.Clear()
-        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\EndCheckList.cld", IO.FileMode.Open)
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\EndCheckList.cld", IO.FileMode.Open)
         Dim BinaryReader As New System.IO.BinaryReader(FileStream)
         CLBEndList.BeginUpdate()
         Do While FileStream.Position < FileStream.Length
@@ -7132,7 +7051,7 @@ WhyUMakeMeDoDis:
         CLBEndList.EndUpdate()
         BinaryReader.Close()
         FileStream.Dispose()
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
             Dim TempFile As String = foundFile
             TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
             If Not CLBEndList.Items.Contains(TempFile) Then
@@ -7140,7 +7059,7 @@ WhyUMakeMeDoDis:
             End If
         Next
         For i As Integer = 0 To CLBEndList.Items.Count - 1 Step -1
-            If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt") Then CLBEndList.Items.Remove(CLBEndList.Items(i))
+            If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt") Then CLBEndList.Items.Remove(CLBEndList.Items(i))
         Next
 
     End Sub
@@ -7182,15 +7101,15 @@ WhyUMakeMeDoDis:
 WhyUMakeMeDoDis:
 
         For i As Integer = 0 To CLBStartList.Items.Count - 1
-            'Debug.Print(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt")
-            If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt") Then
+            'Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt")
+            If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt") Then
                 CLBStartList.Items.Remove(CLBStartList.Items(i))
                 GoTo WhyUMakeMeDoDis
                 Exit For
             End If
         Next
 
-        ScriptFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\" & CLBStartList.Items(CLBStartList.SelectedIndex) & ".txt"
+        ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(CLBStartList.SelectedIndex) & ".txt"
         GetScriptStatus()
 
     End Sub
@@ -7203,8 +7122,8 @@ WhyUMakeMeDoDis:
 WhyUMakeMeDoDis:
 
         For i As Integer = 0 To CLBModuleList.Items.Count - 1
-            ' Debug.Print(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt")
-            If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt") Then
+            ' Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt")
+            If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt") Then
                 CLBModuleList.Items.Remove(CLBModuleList.Items(i))
                 GoTo WhyUMakeMeDoDis
                 Exit For
@@ -7213,7 +7132,7 @@ WhyUMakeMeDoDis:
 
 
 
-        ScriptFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\" & CLBModuleList.Items(CLBModuleList.SelectedIndex) & ".txt"
+        ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(CLBModuleList.SelectedIndex) & ".txt"
 
 
 
@@ -7231,15 +7150,15 @@ WhyUMakeMeDoDis:
 WhyUMakeMeDoDis:
 
         For i As Integer = 0 To CLBLinkList.Items.Count - 1
-            ' Debug.Print(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt")
-            If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt") Then
+            ' Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt")
+            If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt") Then
                 CLBLinkList.Items.Remove(CLBLinkList.Items(i))
                 GoTo WhyUMakeMeDoDis
                 Exit For
             End If
         Next
 
-        ScriptFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\" & CLBLinkList.Items(CLBLinkList.SelectedIndex) & ".txt"
+        ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(CLBLinkList.SelectedIndex) & ".txt"
         GetScriptStatus()
 
     End Sub
@@ -7251,15 +7170,15 @@ WhyUMakeMeDoDis:
 WhyUMakeMeDoDis:
 
         For i As Integer = 0 To CLBEndList.Items.Count - 1
-            ' Debug.Print(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt")
-            If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt") Then
+            ' Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt")
+            If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt") Then
                 CLBEndList.Items.Remove(CLBEndList.Items(i))
                 GoTo WhyUMakeMeDoDis
                 Exit For
             End If
         Next
 
-        ScriptFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\" & CLBEndList.Items(CLBEndList.SelectedIndex) & ".txt"
+        ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(CLBEndList.SelectedIndex) & ".txt"
         GetScriptStatus()
 
     End Sub
@@ -7579,19 +7498,19 @@ WhyUMakeMeDoDis:
 
     Private Sub Button4_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNScriptOpen.Click
         If CLBStartList.Visible = True Then
-            Form1.ShellExecute(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\" & CLBStartList.Items(CLBStartList.SelectedIndex) & ".txt")
+            Form1.ShellExecute(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(CLBStartList.SelectedIndex) & ".txt")
         End If
 
         If CLBModuleList.Visible = True Then
-            Form1.ShellExecute(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\" & CLBModuleList.Items(CLBModuleList.SelectedIndex) & ".txt")
+            Form1.ShellExecute(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(CLBModuleList.SelectedIndex) & ".txt")
         End If
 
         If CLBLinkList.Visible = True Then
-            Form1.ShellExecute(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\" & CLBLinkList.Items(CLBLinkList.SelectedIndex) & ".txt")
+            Form1.ShellExecute(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(CLBLinkList.SelectedIndex) & ".txt")
         End If
 
         If CLBEndList.Visible = True Then
-            Form1.ShellExecute(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\" & CLBEndList.Items(CLBEndList.SelectedIndex) & ".txt")
+            Form1.ShellExecute(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(CLBEndList.SelectedIndex) & ".txt")
         End If
     End Sub
 
@@ -7706,7 +7625,7 @@ WhyUMakeMeDoDis:
 
                 AvailFail = False
 
-                Dim AvailPath As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt"
+                Dim AvailPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt"
                 Dim AvailReader As New StreamReader(AvailPath)
                 AvailList.Clear()
 
@@ -7737,7 +7656,7 @@ WhyUMakeMeDoDis:
             For i As Integer = 0 To CLBModuleList.Items.Count - 1
 
                 AvailFail = False
-                Dim AvailPath As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt"
+                Dim AvailPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt"
 
                 Dim AvailReader As New StreamReader(AvailPath)
                 AvailList.Clear()
@@ -7769,7 +7688,7 @@ WhyUMakeMeDoDis:
 
                 AvailFail = False
 
-                Dim AvailPath As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt"
+                Dim AvailPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt"
                 Dim AvailReader As New StreamReader(AvailPath)
                 AvailList.Clear()
 
@@ -7800,7 +7719,7 @@ WhyUMakeMeDoDis:
 
                 AvailFail = False
 
-                Dim AvailPath As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt"
+                Dim AvailPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt"
                 Dim AvailReader As New StreamReader(AvailPath)
                 AvailList.Clear()
 
@@ -8965,7 +8884,7 @@ WhyUMakeMeDoDis:
     End Sub
 
     Private Sub Button11_Click(sender As System.Object, e As System.EventArgs)
-        Dim testreader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\StrokeTaunts_1.txt")
+        Dim testreader As New StreamReader(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\StrokeTaunts_1.txt")
         Dim TestingList As New List(Of String)
         While testreader.Peek <> -1
             TestingList.Add(testreader.ReadLine())
@@ -9053,8 +8972,8 @@ WhyUMakeMeDoDis:
     Private Sub Button14_Click(sender As System.Object, e As System.EventArgs) Handles BTNSaveDomSet.Click
 
         SaveSettingsDialog.Title = "Select a location to save current Domme settings"
-        SaveSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\"
-        SaveSettingsDialog.FileName = dompersonalityComboBox.Text & " Domme Settings"
+        SaveSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
+        SaveSettingsDialog.FileName = Form1.dompersonalitycombobox.Text & " Domme Settings"
 
         If SaveSettingsDialog.ShowDialog() = DialogResult.OK Then
             Dim SettingsPath As String = SaveSettingsDialog.FileName
@@ -9074,7 +8993,7 @@ WhyUMakeMeDoDis:
             SettingsList.Add("Tattoos: " & CBDomTattoos.Checked)
             SettingsList.Add("Freckles: " & CBDomFreckles.Checked)
 
-            SettingsList.Add("Personality: " & dompersonalityComboBox.Text)
+            SettingsList.Add("Personality: " & Form1.dompersonalitycombobox.Text)
             SettingsList.Add("Crazy: " & crazyCheckBox.Checked)
             SettingsList.Add("Vulgar: " & vulgarCheckBox.Checked)
             SettingsList.Add("Supremacist: " & supremacistCheckBox.Checked)
@@ -9125,7 +9044,7 @@ WhyUMakeMeDoDis:
     Private Sub Button12_Click(sender As System.Object, e As System.EventArgs) Handles BTNLoadDomSet.Click
 
         OpenSettingsDialog.Title = "Select a Domme settings file"
-        OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\"
+        OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
 
         If OpenSettingsDialog.ShowDialog() = DialogResult.OK Then
 
@@ -9157,7 +9076,7 @@ WhyUMakeMeDoDis:
                 CBDomTattoos.Checked = SettingsList(10).Replace("Tattoos: ", "")
                 CBDomFreckles.Checked = SettingsList(11).Replace("Freckles: ", "")
 
-                dompersonalityComboBox.Text = SettingsList(12).Replace("Personality: ", "")
+                Form1.dompersonalitycombobox.Text = SettingsList(12).Replace("Personality: ", "")
                 crazyCheckBox.Checked = SettingsList(13).Replace("Crazy: ", "")
                 vulgarCheckBox.Checked = SettingsList(14).Replace("Vulgar: ", "")
                 supremacistCheckBox.Checked = SettingsList(15).Replace("Supremacist: ", "")
@@ -9218,7 +9137,7 @@ WhyUMakeMeDoDis:
         My.Settings.DomTattoos = CBDomTattoos.Checked
         My.Settings.DomFreckles = CBDomFreckles.Checked
 
-        My.Settings.DomPersonality = dompersonalityComboBox.Text
+        My.Settings.DomPersonality = Form1.dompersonalitycombobox.Text
         My.Settings.DomCrazy = crazyCheckBox.Checked
         My.Settings.DomVulgar = vulgarCheckBox.Checked
         My.Settings.DomSupremacist = supremacistCheckBox.Checked
@@ -9272,7 +9191,7 @@ WhyUMakeMeDoDis:
         CBDomTattoos.Checked = My.Settings.DomTattoos
         CBDomFreckles.Checked = My.Settings.DomFreckles
 
-        dompersonalityComboBox.Text = My.Settings.DomPersonality
+        Form1.dompersonalitycombobox.Text = My.Settings.DomPersonality
         crazyCheckBox.Checked = My.Settings.DomCrazy
         vulgarCheckBox.Checked = My.Settings.DomVulgar
         supremacistCheckBox.Checked = My.Settings.DomSupremacist
@@ -10739,7 +10658,7 @@ WhyUMakeMeDoDis:
         RTBResponses.Text = ""
         RTBResponsesKEY.Text = ""
 
-        Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\")
+        Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\")
 
         LBResponses.Items.Clear()
 
@@ -10754,7 +10673,7 @@ WhyUMakeMeDoDis:
 
     Private Sub LBResponses_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles LBResponses.SelectedIndexChanged
 
-        Dim ResponsePath As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\" & LBResponses.SelectedItem & ".txt"
+        Dim ResponsePath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\" & LBResponses.SelectedItem & ".txt"
 
         If Not File.Exists(ResponsePath) Then Return
 
@@ -10848,15 +10767,15 @@ WhyUMakeMeDoDis:
 
         If Not LBResponses.Items.Contains(ResponsesaveDir) Then
             LBResponses.Items.Add(ResponsesaveDir)
-            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", RTBResponsesKEY.Text & Environment.NewLine, False)
-            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", RTBResponses.Text, True)
-            File.WriteAllLines(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt").Where(Function(s) s <> String.Empty))
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", RTBResponsesKEY.Text & Environment.NewLine, False)
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", RTBResponses.Text, True)
+            File.WriteAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt").Where(Function(s) s <> String.Empty))
         Else
             Dim Result As Integer = MessageBox.Show(Me, ResponsesaveDir & " already exists!" & Environment.NewLine & Environment.NewLine & "Do you wish to overwrite?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             If Result = DialogResult.Yes Then
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", RTBResponsesKEY.Text & Environment.NewLine, False)
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", RTBResponses.Text, True)
-                File.WriteAllLines(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt").Where(Function(s) s <> String.Empty))
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", RTBResponsesKEY.Text & Environment.NewLine, False)
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", RTBResponses.Text, True)
+                File.WriteAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponsesaveDir & ".txt").Where(Function(s) s <> String.Empty))
             Else
                 Debug.Print("Did not work")
                 Return
@@ -10879,7 +10798,7 @@ WhyUMakeMeDoDis:
             Return
         End If
 
-        Dim TemplateDir As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\Template\Template.txt"
+        Dim TemplateDir As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\System\Template\Template.txt"
 
         If File.Exists(TemplateDir) Then
 
@@ -11493,7 +11412,7 @@ WhyUMakeMeDoDis:
         End If
 
         Try
-            Dim WishDir As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Wishlist\Items\" & TBWishlistItem.Text & ".txt"
+            Dim WishDir As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Wishlist\Items\" & TBWishlistItem.Text & ".txt"
 
             If File.Exists(WishDir) Then My.Computer.FileSystem.DeleteFile(WishDir)
 
@@ -11967,7 +11886,7 @@ NextURL:
 
     Private Sub Button3_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNMaintenanceScripts.Click
 
-        PBMaintenance.Maximum = My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt").Count + _
+        PBMaintenance.Maximum = My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt").Count + _
              My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\", FileIO.SearchOption.SearchAllSubDirectories, "*.txt").Count
         PBMaintenance.Value = 0
         Dim BlankAudit As Integer = 0
@@ -11977,7 +11896,7 @@ NextURL:
         BTNMaintenanceRefresh.Enabled = False
         BTNMaintenanceValidate.Enabled = False
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
 
             LBLMaintenance.Text = "Checking " & Path.GetFileName(foundFile) & "..."
             PBMaintenance.Value += 1
@@ -12121,7 +12040,7 @@ NextURL:
 
     Public Sub AuditScripts()
 
-        PBMaintenance.Maximum = My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt").Count + _
+        PBMaintenance.Maximum = My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt").Count + _
        My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\", FileIO.SearchOption.SearchAllSubDirectories, "*.txt").Count
         PBMaintenance.Value = 0
         Dim BlankAudit As Integer = 0
@@ -12131,7 +12050,7 @@ NextURL:
         BTNMaintenanceRefresh.Enabled = False
         BTNMaintenanceValidate.Enabled = False
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
 
             LBLMaintenance.Text = "Checking " & Path.GetFileName(foundFile) & "..."
             PBMaintenance.Value += 1
@@ -12430,9 +12349,9 @@ NextURL:
         If FrmSettingsLoading = True Or BTNPlaylistEnd.BackColor = Color.Blue Then Return
 
         If RadioPlaylistRegScripts.Checked = True Then
-            WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End")
+            WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End")
         Else
-            WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\End\")
+            WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\End\")
         End If
         LBLPlaylIstLink.Enabled = False
         LBLPlaylIstLink.ForeColor = Color.Black
@@ -12448,36 +12367,36 @@ NextURL:
         Debug.Print("Radio CHanged accepted??")
         If LBLPLaylistStart.Enabled = True Then
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Start\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
             End If
             Return
         End If
 
         If BTNPlaylistEnd.BackColor = Color.Blue Then
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\End\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\End\")
             End If
             Return
         End If
 
         If LBLPlaylistModule.Enabled = True Then
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Modules\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Modules\")
             End If
             Return
         End If
 
         If LBLPlaylIstLink.Enabled = True Then
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Link\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Link\")
             End If
             Return
         End If
@@ -12491,7 +12410,7 @@ NextURL:
             MessageBox.Show(Me, "Please enter a name for this Playlist!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Return
         End If
-        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\" & TBPlaylistSave.Text & ".txt") Then
+        If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\" & TBPlaylistSave.Text & ".txt") Then
             Dim result As Integer
             result = MessageBox.Show(TBPlaylistSave.Text & ".txt already exists!" & Environment.NewLine & Environment.NewLine & "Do you wish to overwrite this file?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             If result = DialogResult.No Then
@@ -12505,7 +12424,7 @@ NextURL:
         Next
 
         Try
-            System.IO.File.WriteAllLines(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\" & TBPlaylistSave.Text & ".txt", PlaylistList)
+            System.IO.File.WriteAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\" & TBPlaylistSave.Text & ".txt", PlaylistList)
             MessageBox.Show(Me, "Playlist file has been saved successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
             BTNPlaylistSave.Enabled = False
             LBPlaylist.Items.Clear()
@@ -12516,9 +12435,9 @@ NextURL:
             BTNPlaylistClearAll.Enabled = False
             If LBLPLaylistStart.Enabled = True Then
                 If RadioPlaylistRegScripts.Checked = True Then
-                    WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\")
+                    WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\")
                 Else
-                    WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Start\")
+                    WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
                 End If
             End If
         Catch
@@ -12547,9 +12466,9 @@ NextURL:
         BTNPlaylistClearAll.Enabled = False
         If LBLPLaylistStart.Enabled = True Then
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Start\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
             End If
         End If
 
@@ -12599,9 +12518,9 @@ NextURL:
 
         If LBLPLaylistStart.Enabled = True Then
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Modules\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Modules\")
             End If
 
             LBLPLaylistStart.Enabled = False
@@ -12617,9 +12536,9 @@ NextURL:
 
         If LBLPlaylistModule.Enabled = True Then
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Link\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Link\")
             End If
             LBLPlaylistModule.Enabled = False
             LBLPlaylIstLink.Enabled = True
@@ -12635,9 +12554,9 @@ NextURL:
 
         If LBLPlaylIstLink.Enabled = True Then
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Modules\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Modules\")
             End If
             LBLPlaylIstLink.Enabled = False
             LBLPlaylistModule.Enabled = True
@@ -12673,9 +12592,9 @@ NextURL:
             LBLPlaylistModule.ForeColor = Color.Black
             LBLPlaylistModule.BackColor = Color.LightGray
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Link\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Link\")
             End If
             Return
         End If
@@ -12692,9 +12611,9 @@ NextURL:
             BTNPlaylistCtrlZ.Enabled = False
             BTNPlaylistClearAll.Enabled = False
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Start\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
             End If
             Return
         End If
@@ -12710,9 +12629,9 @@ NextURL:
             LBLPlaylistModule.ForeColor = Color.Black
             LBLPlaylistModule.BackColor = Color.LightGray
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Link\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Link\")
             End If
             Return
         End If
@@ -12728,9 +12647,9 @@ NextURL:
             LBLPlaylIstLink.ForeColor = Color.Black
             LBLPlaylIstLink.BackColor = Color.LightGray
             If RadioPlaylistRegScripts.Checked = True Then
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\")
             Else
-                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Modules\")
+                WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Modules\")
             End If
             Return
         End If
@@ -12853,10 +12772,10 @@ NextURL:
     Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click
 
         SaveSettingsDialog.Title = "Select a location to save current Glitter settings"
-        SaveSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\"
+        SaveSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
 
 
-        SaveSettingsDialog.FileName = dompersonalityComboBox.Text & " Glitter Settings"
+        SaveSettingsDialog.FileName = Form1.dompersonalitycombobox.Text & " Glitter Settings"
 
         If SaveSettingsDialog.ShowDialog() = DialogResult.OK Then
             Dim SettingsPath As String = SaveSettingsDialog.FileName
@@ -12919,7 +12838,7 @@ NextURL:
     Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
 
         OpenSettingsDialog.Title = "Select a Glitter settings file"
-        OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\"
+        OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
 
         If OpenSettingsDialog.ShowDialog() = DialogResult.OK Then
 

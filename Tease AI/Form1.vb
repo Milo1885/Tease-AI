@@ -513,6 +513,10 @@ Public Class Form1
     Dim DommeImageFound As Boolean
     Dim DommeImageListCheck As Boolean
 
+    Dim LocalImage As Image
+    Dim LocalImageFound As Boolean
+    Dim LocalImageListCheck As Boolean
+
     Dim CBTBothActive As Boolean
     Dim CBTBothFlag As Boolean
     Dim CBTBothCount As Integer
@@ -581,8 +585,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
         End If
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
         End If
 
 
@@ -711,6 +715,45 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End If
 
         frmApps.Show()
+
+        FrmSplash.PBSplash.Value += 1
+        FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
+        FrmSplash.Refresh()
+
+        Dim PersonType As String
+
+        'dompersonalityComboBox.Items.Clear()
+
+        Debug.Print(My.Settings.DomPersonality)
+        'dompersonalityComboBox.Text = My.Settings.DomPersonality
+
+        'dompersonalityComboBox.Text = My.Settings.DomPersonality
+
+
+        For Each Dir As String In Directory.GetDirectories(Application.StartupPath & "\Scripts\")
+            PersonType = Dir
+
+            Dim DirSplit As String() = PersonType.Split("\")
+            PersonType = DirSplit(DirSplit.Length - 1)
+            Debug.Print("PersonType = " & PersonType)
+            'Do While PersonType.Contains("\")
+            'PersonType = PersonType.Remove(0, 1)
+            'Loop
+            Try
+                dompersonalitycombobox.Items.Add(PersonType)
+            Catch
+            End Try
+        Next
+
+        If dompersonalitycombobox.Items.Count < 1 Then
+            MessageBox.Show(Me, "No domme Personalities were found! Many aspects of this program will not work correctly until at least one Personality is installed.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        Else
+            Try
+                dompersonalitycombobox.Text = My.Settings.DomPersonality
+            Catch ex As Exception
+                dompersonalitycombobox.Text = dompersonalitycombobox.Items(0)
+            End Try
+        End If
 
 
         FrmSettings.Show()
@@ -1206,13 +1249,13 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSettings.LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
 
         Try
-            FrmSettings.LBLGlitModDomType.Text = FrmSettings.dompersonalityComboBox.Text
+            FrmSettings.LBLGlitModDomType.Text = dompersonalityComboBox.Text
         Catch
             FrmSettings.LBLGlitModDomType.Text = "Error!"
         End Try
 
         Try
-            Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\" & FrmSettings.CBGlitModType.Text & "\")
+            Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\" & FrmSettings.CBGlitModType.Text & "\")
             Dim GlitterScriptCount As Integer
             FrmSettings.LBGlitModScripts.Items.Clear()
             For Each file As String In files
@@ -1449,17 +1492,17 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSplash.LBLSplash.Text = "Loading Domme Personality..."
         FrmSplash.Refresh()
 
-        DomPersonality = FrmSettings.dompersonalityComboBox.Text
+        DomPersonality = dompersonalityComboBox.Text
 
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Clearing temporary flags..."
         FrmSplash.Refresh()
 
-        If Directory.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\") Then
-            My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
+        If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\") Then
+            My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
         End If
 
-        System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\")
+        System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\")
 
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
@@ -1469,9 +1512,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         GetContact2Pics()
         GetContact3Pics()
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
             Dim ContactList As New List(Of String)
-            ContactList = Txt2List(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Contact_Descriptions.txt")
+            ContactList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Contact_Descriptions.txt")
             FrmSettings.GBGlitter1.Text = PoundClean(ContactList(0))
             FrmSettings.GBGlitter2.Text = PoundClean(ContactList(1))
             FrmSettings.GBGlitter3.Text = PoundClean(ContactList(2))
@@ -1572,11 +1615,11 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
         End If
 
-        If Directory.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\") Then
-            My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
+        If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\") Then
+            My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
         End If
 
-        System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\")
+        System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\")
 
         StopMetronome = True
 
@@ -1659,7 +1702,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         If CheckSpace = "" Then Return
 
 
-        If FrmSettings.dompersonalityComboBox.Items.Count < 1 Then
+        If dompersonalityComboBox.Items.Count < 1 Then
             MessageBox.Show(Me, "No domme Personalities were found! Please install at least one Personality directory in the Scripts folder before using this part of the program.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             Return
         End If
@@ -1777,7 +1820,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             If UCase(ChatString).Contains("TASK") Then
                 Dim TaskList As New List(Of String)
 
-                For Each TaskFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Start Tasks\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                For Each TaskFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Start Tasks\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                     TaskList.Add(TaskFile)
                 Next
                 If TaskList.Count > 0 Then
@@ -1792,7 +1835,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
                     ScriptTimer.Start()
                     ShowModule = False
                 Else
-                    MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Start Tasks!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                    MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Start Tasks!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
                 End If
                 Return
             End If
@@ -1890,7 +1933,7 @@ NoPlaylistStartFile:
                             ChastityStartCheck = "*.txt"
                         End If
 
-                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, ChastityStartCheck)
+                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, ChastityStartCheck)
                             Dim TempStart As String = foundFile
                             TempStart = TempStart.Replace(".txt", "")
                             Do Until Not TempStart.Contains("\")
@@ -1912,9 +1955,9 @@ NoPlaylistStartFile:
 
                         If StartList.Count < 1 Then
                             If My.Settings.Chastity = True Then
-                                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\Start_CHASTITY.txt"
+                                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\Start_CHASTITY.txt"
                             Else
-                                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\Start.txt"
+                                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\Start.txt"
                             End If
                         Else
                             FileText = StartList(randomizer.Next(0, StartList.Count))
@@ -1923,11 +1966,11 @@ NoPlaylistStartFile:
                     Else
                         Debug.Print("Start situation found")
                         If PlaylistFile(0).Contains("Regular-TeaseAI-Script") Then
-                            FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Start\" & PlaylistFile(0)
+                            FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Start\" & PlaylistFile(0)
                             FileText = FileText.Replace(" Regular-TeaseAI-Script", "")
                             FileText = FileText & ".txt"
                         Else
-                            FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\Start\" & PlaylistFile(0) & ".txt"
+                            FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Start\" & PlaylistFile(0) & ".txt"
                         End If
                     End If
 
@@ -1961,7 +2004,7 @@ NoPlaylistStartFile:
 
             Dim SafeList As New List(Of String)
 
-            For Each SafeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Safeword\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each SafeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Safeword\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 SafeList.Add(SafeFile)
             Next
 
@@ -1973,7 +2016,7 @@ NoPlaylistStartFile:
                 ScriptTick = 2
                 ScriptTimer.Start()
             Else
-                MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Safeword!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Safeword!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             End If
             Return
         End If
@@ -2114,7 +2157,7 @@ WritingTaskLine:
 
 
         Dim EdgeList As New List(Of String) 
-        EdgeList = Txt2List(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt")
+        EdgeList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt")
 
        
 
@@ -2182,7 +2225,7 @@ WritingTaskLine:
 
                 Dim ATEList As New List(Of String)
 
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Avoid The Edge\Scripts\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Avoid The Edge\Scripts\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                     ATEList.Add(foundFile)
                 Next
 
@@ -2349,7 +2392,7 @@ WritingTaskLine:
 
                                 Dim RepeatList As New List(Of String)
 
-                                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Denial Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Denial Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                                     RepeatList.Add(foundFile)
                                 Next
 
@@ -2427,7 +2470,7 @@ RuinedOrgasm:
 
                         Dim RepeatList As New List(Of String)
 
-                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Ruin Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Ruin Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                             RepeatList.Add(foundFile)
                         Next
 
@@ -2493,7 +2536,7 @@ AllowedOrgasm:
 
                         Dim NoCumList As New List(Of String)
 
-                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Out of Orgasms\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Out of Orgasms\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                             NoCumList.Add(foundFile)
                         Next
 
@@ -2537,7 +2580,7 @@ NoNoCumFiles:
 
                         Dim RepeatList As New List(Of String)
 
-                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Orgasm Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Orgasm Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                             RepeatList.Add(foundFile)
                         Next
 
@@ -2655,7 +2698,7 @@ NoPlaylistModuleFile:
                     Dim ModuleList As New List(Of String)
                     ModuleList.Clear()
 
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & _
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & _
                                                                                     "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         Dim TempModule As String = foundFile
                         TempModule = TempModule.Replace(".txt", "")
@@ -2671,18 +2714,18 @@ NoPlaylistModuleFile:
 
 
                     If ModuleList.Count < 1 Then
-                        FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\Module_EDGING.txt"
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\Module_EDGING.txt"
                     Else
                         FileText = ModuleList(randomizer.Next(0, ModuleList.Count))
                     End If
 
                 Else
                     If PlaylistFile(PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
-                        FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Modules\" & PlaylistFile(PlaylistCurrent)
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\" & PlaylistFile(PlaylistCurrent)
                         FileText = FileText.Replace(" Regular-TeaseAI-Script", "")
                         FileText = FileText & ".txt"
                     Else
-                        FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\Modules\" & PlaylistFile(PlaylistCurrent) & ".txt"
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Modules\" & PlaylistFile(PlaylistCurrent) & ".txt"
                     End If
 
                 End If
@@ -2714,7 +2757,7 @@ NoPlaylistModuleFile:
 DebugAwareness:
 
         If InputFlag = True And DomTypeCheck = False Then
-            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & InputString, ChatString, False)
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & InputString, ChatString, False)
             InputFlag = False
         End If
 
@@ -2743,7 +2786,7 @@ EdgeSkip:
    
         If EdgeNOT = True Then
             EdgeNOT = False
-            ResponseFile = (Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeNOT.txt")
+            ResponseFile = (Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeNOT.txt")
             GoTo FoundResponse
         End If
         
@@ -2787,7 +2830,7 @@ EdgeSkip:
         If BeforeTease = False Then
             If UCase(CheckResponse).Contains(UCase("I need to cum")) Or UCase(CheckResponse).Contains(UCase("let me cum")) Or UCase(CheckResponse).Contains(UCase("I want to cum")) Then
                 If TeaseTick > 0 Then
-                    ResponseFile = (Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\BegToCum.txt")
+                    ResponseFile = (Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\BegToCum.txt")
                     If My.Settings.Chastity = False Then TeaseTick = TeaseTick / 2
                     Debug.Print("LastScriptCountdown = " & LastScriptCountdown)
                     If TeaseTick < 1 And Playlist = False Then
@@ -2810,8 +2853,8 @@ EdgeSkip:
         CheckResponse = CheckResponse.Replace("  ", " ")
 
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt")
-            If Not foundFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt")
+            If Not foundFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
 
                 Dim SysKeyList As New List(Of String)
                 SysKeyList = Txt2List(foundFile)
@@ -2847,7 +2890,7 @@ EdgeSkip:
 
         If frmApps.CBDebugAwareness.Checked = True Then GoTo DebugAwarenessStep2
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
 
             Dim SplitReader As New StreamReader(foundFile)
@@ -2881,8 +2924,8 @@ EdgeSkip:
 
 DebugAwarenessStep2:
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt")
-            If Not foundFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\", FileIO.SearchOption.SearchTopLevelOnly, "*KEY.txt")
+            If Not foundFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\EdgeKEY.txt" Then
 
 
 
@@ -2918,7 +2961,7 @@ DebugAwarenessStep2:
 
         If frmApps.CBDebugAwareness.Checked = True Then GoTo FoundResponse
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
 
             Dim SplitReader As New StreamReader(foundFile)
@@ -2952,7 +2995,7 @@ DebugAwarenessStep2:
 
 
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
 
             Dim SplitReader As New StreamReader(foundFile)
@@ -3786,10 +3829,10 @@ AcceptAnswer:
 
     Public Sub CBTBalls()
 
-        Dim BallReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTBalls_First.txt")
+        Dim BallReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBTBalls_First.txt")
 
         If CBTBallsFirst = False Then
-            BallReader = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTBalls.txt")
+            BallReader = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBTBalls.txt")
         Else
             CBTBallsCount += 1
         End If
@@ -3817,10 +3860,10 @@ AcceptAnswer:
 
     Public Sub CBTCock()
 
-        Dim CockReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTCock_First.txt")
+        Dim CockReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBTCock_First.txt")
 
         If CBTCockFirst = False Then
-            CockReader = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTCock.txt")
+            CockReader = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBTCock.txt")
         Else
 
             CBTCockCount += 1
@@ -3850,10 +3893,10 @@ AcceptAnswer:
 
     Public Sub CBTBoth()
 
-        Dim BallReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTBalls_First.txt")
+        Dim BallReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBTBalls_First.txt")
 
         If CBTBothFirst = False Then
-            BallReader = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTBalls.txt")
+            BallReader = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBTBalls.txt")
         Else
             CBTBallsCount += 1
             CBTCockCount += 1
@@ -3867,10 +3910,10 @@ AcceptAnswer:
         BallReader.Close()
         BallReader.Dispose()
 
-        Dim CockReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTCock_First.txt")
+        Dim CockReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBTCock_First.txt")
 
         If CBTBothFirst = False Then
-            CockReader = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBTCock.txt")
+            CockReader = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBTCock.txt")
         Else
             CBTBallsCount += 1
             CBTCockCount += 1
@@ -4080,6 +4123,11 @@ AcceptAnswer:
                 If FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value Then InvalidFilter = True
             End If
 
+            If lines(line).Contains("@Crazy") And FrmSettings.crazyCheckBox.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@Vulgar") And FrmSettings.vulgarCheckBox.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@Supremacist") And FrmSettings.supremacistCheckBox.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@Sadistic") And FrmSettings.sadisticCheckBox.Checked = False Then InvalidFilter = True
+
             If lines(line).Contains("@AlwaysAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Always Allows" Then InvalidFilter = True
             If lines(line).Contains("@OftenAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Often Allows" Then InvalidFilter = True
             If lines(line).Contains("@SometimesAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows" Then InvalidFilter = True
@@ -4097,6 +4145,21 @@ AcceptAnswer:
             If lines(line).Contains("@NotAlwaysRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then InvalidFilter = True
             If lines(line).Contains("@NotNeverRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then InvalidFilter = True
 
+            If lines(line).Contains("@DommeLevel1") And FrmSettings.domlevelNumBox.Value <> 1 Then InvalidFilter = True
+            If lines(line).Contains("@DommeLevel2") And FrmSettings.domlevelNumBox.Value <> 2 Then InvalidFilter = True
+            If lines(line).Contains("@DommeLevel3") And FrmSettings.domlevelNumBox.Value <> 3 Then InvalidFilter = True
+            If lines(line).Contains("@DommeLevel4") And FrmSettings.domlevelNumBox.Value <> 4 Then InvalidFilter = True
+            If lines(line).Contains("@DommeLevel5") And FrmSettings.domlevelNumBox.Value <> 5 Then InvalidFilter = True
+
+            If lines(line).Contains("@ApathyLevel1") And FrmSettings.NBEmpathy.Value <> 1 Then InvalidFilter = True
+            If lines(line).Contains("@ApathyLevel2") And FrmSettings.NBEmpathy.Value <> 2 Then InvalidFilter = True
+            If lines(line).Contains("@ApathyLevel3") And FrmSettings.NBEmpathy.Value <> 3 Then InvalidFilter = True
+            If lines(line).Contains("@ApathyLevel4") And FrmSettings.NBEmpathy.Value <> 4 Then InvalidFilter = True
+            If lines(line).Contains("@ApathyLevel5") And FrmSettings.NBEmpathy.Value <> 5 Then InvalidFilter = True
+
+
+
+
             If lines(line).Contains("@Flag(") Then
                 Dim WriteFlag As String = lines(line)
                 Dim WriteStart As Integer
@@ -4104,8 +4167,8 @@ AcceptAnswer:
                 WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
                 WriteFlag = WriteFlag.Split(")")(0)
                 WriteFlag = WriteFlag.Replace("@Flag(", "")
-                If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) And _
-                    Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+                If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) And _
+                    Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
                     InvalidFilter = True
                 End If
             End If
@@ -4117,8 +4180,8 @@ AcceptAnswer:
                 WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
                 WriteFlag = WriteFlag.Split(")")(0)
                 WriteFlag = WriteFlag.Replace("@NotFlag(", "")
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) Or _
-                    File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+                If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) Or _
+                    File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
                     InvalidFilter = True
                 End If
             End If
@@ -5042,7 +5105,8 @@ NullResponse:
 
                         Dim RestoreDomTask As String = DomTask
 
-                        If Not DomTask.Substring(0, 1) = FrmSettings.domemoteComboBox.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False And TypoSwitch <> 0 And TyposDisabled = False Then
+                        If Not DomTask.Substring(0, 1) = FrmSettings.domemoteComboBox.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False And TypoSwitch <> 0 And TyposDisabled = False _
+                            And FrmSettings.TTSCheckBox.Checked = False Then
 
                             Dim TypoChance As Integer = randomizer.Next(0, 101)
 
@@ -5255,7 +5319,12 @@ EndSysMes:
                                 mainPictureBox.Image = DommeImage
                                 DommeImageFound = False
                             Else
-                                mainPictureBox.Image = Image.FromFile(DomPic)
+                                If LocalImageFound = True Then
+                                    mainPictureBox.Image = LocalImage
+                                    LocalImageFound = False
+                                Else
+                                    mainPictureBox.Image = Image.FromFile(DomPic)
+                                End If
                             End If
                         End If
                         CheckDommeTags()
@@ -5287,7 +5356,7 @@ HypNoResponse:
                     mciSendString("CLOSE Speech1", String.Empty, 0, 0)
                     mciSendString("CLOSE Echo1", String.Empty, 0, 0)
 
-                    Dim SpeechDir As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\TempWav.wav"
+                    Dim SpeechDir As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\TempWav.wav"
                     Dim Speech1 As String = "Speech1"
                     Dim Echo1 As String = "Echo1"
 
@@ -5960,7 +6029,12 @@ EndSysMes:
                                 mainPictureBox.Image = DommeImage
                                 DommeImageFound = False
                             Else
-                                mainPictureBox.Image = Image.FromFile(DomPic)
+                                If LocalImageFound = True Then
+                                    mainPictureBox.Image = LocalImage
+                                    LocalImageFound = False
+                                Else
+                                    mainPictureBox.Image = Image.FromFile(DomPic)
+                                End If
                             End If
                         End If
                         CheckDommeTags()
@@ -6520,7 +6594,7 @@ TryPrevious:
 
 NoPlaylistModuleFile:
 
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & _
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & _
                                                                                     "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, ChastityModuleCheck)
                         Dim TempModule As String = foundFile
                         TempModule = Path.GetFileName(TempModule).Replace(".txt", "")
@@ -6540,9 +6614,9 @@ NoPlaylistModuleFile:
 
                     If ModuleList.Count < 1 Then
                         If My.Settings.Chastity = True Then
-                            FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\Module_CHASTITY.txt"
+                            FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\Module_CHASTITY.txt"
                         Else
-                            FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\Module.txt"
+                            FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\Module.txt"
                         End If
                     Else
                         FileText = ModuleList(randomizer.Next(0, ModuleList.Count))
@@ -6550,11 +6624,11 @@ NoPlaylistModuleFile:
 
                 Else
                     If PlaylistFile(PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
-                        FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Modules\" & PlaylistFile(PlaylistCurrent)
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\" & PlaylistFile(PlaylistCurrent)
                         FileText = FileText.Replace(" Regular-TeaseAI-Script", "")
                         FileText = FileText & ".txt"
                     Else
-                        FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\Modules\" & PlaylistFile(PlaylistCurrent) & ".txt"
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Modules\" & PlaylistFile(PlaylistCurrent) & ".txt"
                     End If
 
                 End If
@@ -6671,7 +6745,7 @@ TryNextWithTease:
 
                 TauntTextCount = 0
                 ScriptCount = 0
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\", FileIO.SearchOption.SearchTopLevelOnly, TauntFile & "_*.txt")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\", FileIO.SearchOption.SearchTopLevelOnly, TauntFile & "_*.txt")
                     ScriptCount += 1
                 Next
 
@@ -6692,7 +6766,7 @@ TryNextWithTease:
 
 
                 ScriptCount = 0
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\", FileIO.SearchOption.SearchTopLevelOnly, TauntFile & "_*.txt")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\", FileIO.SearchOption.SearchTopLevelOnly, TauntFile & "_*.txt")
                     ScriptCount += 1
                     If TauntTempVal = ScriptCount Then TauntText = foundFile
                 Next
@@ -6824,7 +6898,7 @@ TryNextWithTease:
         YesOrNo = True
         Dim CBTCount As Integer
 
-        Dim ioFile3 As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\CBT\CBT.txt")
+        Dim ioFile3 As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\CBT\CBT.txt")
         Dim lines As New List(Of String)
         While ioFile3.Peek <> -1
             lines.Add(ioFile3.ReadLine())
@@ -7756,7 +7830,7 @@ GetAnotherRandomVideo:
                     Return
                 End If
 
-                CensorVideo = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Censorship Sucks\CensorBarOff.txt"
+                CensorVideo = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Censorship Sucks\CensorBarOff.txt"
 
             Else
 
@@ -7790,7 +7864,7 @@ CensorConstant:
                     Return
                 End If
 
-                CensorVideo = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Censorship Sucks\CensorBarOn.txt"
+                CensorVideo = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Censorship Sucks\CensorBarOn.txt"
 
             End If
 
@@ -7843,7 +7917,7 @@ CensorConstant:
 
                 RedLight = True
 
-                Dim RedReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Red Light Green Light\Red Light.txt")
+                Dim RedReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Red Light Green Light\Red Light.txt")
                 Dim RedList As New List(Of String)
 
                 While RedReader.Peek <> -1
@@ -7875,7 +7949,7 @@ CensorConstant:
                 RedLight = False
 
 
-                Dim GreenReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Red Light Green Light\Green Light.txt")
+                Dim GreenReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Red Light Green Light\Green Light.txt")
                 Dim GreenList As New List(Of String)
 
                 While GreenReader.Peek <> -1
@@ -8397,37 +8471,37 @@ StatusUpdateEnd:
                 UpdateList.Clear()
 
                 If FrmSettings.CBTease.Checked = True Then
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Tease\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Tease\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         UpdateList.Add(foundFile)
                     Next
                 End If
 
                 If FrmSettings.CBEgotist.Checked = True Then
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Egotist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Egotist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         UpdateList.Add(foundFile)
                     Next
                 End If
 
                 If FrmSettings.CBTrivia.Checked = True Then
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Trivia\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Trivia\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         UpdateList.Add(foundFile)
                     Next
                 End If
 
                 If FrmSettings.CBDaily.Checked = True Then
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Daily\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Daily\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         UpdateList.Add(foundFile)
                     Next
                 End If
 
                 If FrmSettings.CBCustom1.Checked = True Then
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Custom 1\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Custom 1\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         UpdateList.Add(foundFile)
                     Next
                 End If
 
                 If FrmSettings.CBCustom2.Checked = True Then
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Custom 2\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Custom 2\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         UpdateList.Add(foundFile)
                     Next
                 End If
@@ -8811,7 +8885,15 @@ StatusUpdateEnd:
         ' StringClean = StringClean.Replace("#CurrentDate", Format(Now, "MM/dd/yyyy"))
 
         ' 
+        If StringClean.Contains("#Var(") Then
 
+            Dim VarFlag As String = GetParentheses(StringClean, "#Var(")
+
+            Dim VarFlag2 As String = GetVariable(VarFlag)
+
+            StringClean = StringClean.Replace("#Var(" & VarFlag & ")", VarFlag2)
+
+        End If
 
 
 
@@ -8949,9 +9031,9 @@ DeepClean:
                     PoundArray(i) = PoundArray(i).Replace(";", "")
                     PoundArray(i) = PoundArray(i).Replace("'s", "")
 
-                    If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\" & PoundArray(i) & ".txt") Then
+                    If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\" & PoundArray(i) & ".txt") Then
 
-                        Dim ioFile As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\" & PoundArray(i) & ".txt")
+                        Dim ioFile As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\" & PoundArray(i) & ".txt")
                         Dim lines As New List(Of String)
                         Dim Vocab As New List(Of String)
                         Dim PoundLine As Integer
@@ -9007,7 +9089,7 @@ DeepClean:
 
                     Else
 
-                        MsgBox("""" & PoundArray(i) & ".txt"" was not found in """ & Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\. Please verify the file is in the correct folder and that " _
+                        MsgBox("""" & PoundArray(i) & ".txt"" was not found in """ & Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\. Please verify the file is in the correct folder and that " _
                                & "the Vocabulary word is spelled correctly in the script.", , "Error!")
 
                         StringClean = StringClean.Replace(PoundArray(i), PoundArray(i).Replace("#", ""))
@@ -9131,8 +9213,8 @@ RinseLatherRepeat:
 
                         Dim FlagArray() As String = CheckFlag.Split(",")
 
-                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagArray(0)) Or _
-                                File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagArray(0)) Then
+                        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & FlagArray(0)) Or _
+                                File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagArray(0)) Then
                             SkipGotoLine = True
                             FileGoto = FlagArray(1)
                             GetGoto()
@@ -9140,8 +9222,8 @@ RinseLatherRepeat:
 
                     Else
 
-                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & CheckFlag) Or _
-                            File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & CheckFlag) Then
+                        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & CheckFlag) Or _
+                            File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & CheckFlag) Then
                             SkipGotoLine = True
                             FileGoto = CheckFlag
                             GetGoto()
@@ -9327,7 +9409,7 @@ RinseLatherRepeat:
                     SCGotVar = SCGotVar.Replace("=[", "")
                     SCGotVar = SCGotVar.Replace(" ", "")
 
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName, SCGotVar, False)
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & VarName, SCGotVar, False)
 
                 End If
 
@@ -9378,7 +9460,7 @@ RinseLatherRepeat:
                         And Not UCase(FlagArray(1)).Contains(UCase("DAY")) And Not UCase(FlagArray(1)).Contains(UCase("WEEK")) And Not UCase(FlagArray(1)).Contains(UCase("MONTH")) _
                         And Not UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
 
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0), FormatDateTime(SetDate, DateFormat.GeneralDate), False)
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0), FormatDateTime(SetDate, DateFormat.GeneralDate), False)
 
                     Debug.Print("CheckArray(i) = " & CheckArray(i))
 
@@ -9417,9 +9499,9 @@ RinseLatherRepeat:
 
                     Dim FlagArray() As String = CheckFlag.Split(",")
 
-                    If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0)) Then
+                    If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0)) Then
 
-                        Dim DateReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0))
+                        Dim DateReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0))
                         Dim CheckDate As Date
 
                         While DateReader.Peek <> -1
@@ -9486,7 +9568,7 @@ RinseLatherRepeat:
                 Dim VarName As String = SCGotVarSplit(0)
                 Dim Val1 As Integer
 
-                Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName
+                Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & VarName
 
                 If File.Exists(VarCheck) Then
 
@@ -9506,7 +9588,7 @@ RinseLatherRepeat:
 
                     Val1 = VarValue * Math.Round(Val1 / VarValue)
 
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName, Val1, False)
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & VarName, Val1, False)
 
                 End If
 
@@ -9560,8 +9642,8 @@ RinseLatherRepeat:
                     '@ChangeVar[TB_EdgeHoldingOwed   ]    =[TB_EdgeHoldingOwed    ]     -[1       ]
 
                     If IsNumeric(ChangeVal1) = False Then
-                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1) Then
-                            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1)
+                        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1) Then
+                            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1)
                             Val1 = Val(VarReader.ReadLine())
                             VarReader.Close()
                             VarReader.Dispose()
@@ -9573,8 +9655,8 @@ RinseLatherRepeat:
                     End If
 
                     If IsNumeric(ChangeVal2) = False Then
-                        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2) Then
-                            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2)
+                        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2) Then
+                            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2)
                             Val2 = Val(VarReader.ReadLine())
                             VarReader.Close()
                             VarReader.Dispose()
@@ -9598,7 +9680,7 @@ RinseLatherRepeat:
                     If ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
                     If ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
 
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
 
                 End If
 
@@ -9656,7 +9738,7 @@ RinseLatherRepeat:
 
                 Else
 
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
+                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
                     'Debug.Print("VarCheck = " & VarCheck)
                     If File.Exists(VarCheck) Then
                         'Debug.Print("VarCheck Exists")
@@ -9734,7 +9816,7 @@ RinseLatherRepeat:
 
                 Else
 
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
+                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
                     'Debug.Print("VarCheck = " & VarCheck)
                     If File.Exists(VarCheck) Then
                         'Debug.Print("VarCheck Exists")
@@ -9837,7 +9919,7 @@ RinseLatherRepeat:
                     CheckFlag = VarSplit(i).Substring(CFIndex, VarSplit(i).Length - CFIndex).Replace("@ShowVar[", "")
 
                     Dim VarValue As String
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & CheckFlag
+                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & CheckFlag
                     Debug.Print("VarCheck = " & VarCheck)
                     If File.Exists(VarCheck) Then
                         Dim VarReader As New StreamReader(VarCheck)
@@ -10028,9 +10110,9 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@StartStroking") Then
 
-            If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\SYS_FirstRun") Then
+            If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_FirstRun") Then
                 Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\FirstRun", SetDate, False)
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\FirstRun", SetDate, False)
             End If
 
             SetVariable("SYS_StrokeRound", Val(GetVariable("SYS_StrokeRound")) + 1)
@@ -10566,12 +10648,12 @@ RinseLatherRepeat:
 
             Dim CustomFlag As String = GetParentheses(StringClean, "@CustomTask(")
 
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & "_First.txt") And _
-                File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & ".txt") Then
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & "_First.txt") And _
+                File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & ".txt") Then
                 CustomTask = True
                 CustomTaskActive = True
-                CustomTaskText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & ".txt"
-                CustomTaskTextFirst = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & "_First.txt"
+                CustomTaskText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & ".txt"
+                CustomTaskTextFirst = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Custom\Tasks\" & CustomFlag & "_First.txt"
             End If
 
             StringClean = StringClean.Replace("@CustomTask(" & CustomFlag & ")", "")
@@ -10656,9 +10738,9 @@ OrgasmDecided:
             Dim GlitterFlag As Integer = GetParentheses(StringClean, "@Glitter(")
 
             If FrmSettings.CBGlitterFeedOff.Checked = False And UpdatingPost = False Then
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt") And UpdatingPost = False Then
+                If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt") And UpdatingPost = False Then
                     UpdateList.Clear()
-                    UpdateList.Add(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt")
+                    UpdateList.Add(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt")
                     StatusUpdatePost()
                 End If
             End If
@@ -10764,142 +10846,7 @@ OrgasmDecided:
 
         End If
 
-
-
-
-
-        If StringClean.Contains("@TnAFastSlides") Or StringClean.Contains("@TnASlowSlides") Or StringClean.Contains("@TnASlides") Then
-
-            ' FrmSettings.offRadio.Checked = True
-            TnAList.Clear()
-
-            If StringClean.Contains("@TnAFastSlides") Then TnASlides.Interval = 334
-            If StringClean.Contains("@TnASlides") Then TnASlides.Interval = 1000
-            If StringClean.Contains("@TnASlowSlides") Then TnASlides.Interval = 5000
-
-
-            'Debug.Print("TNAFASTSLIDES CALLED")
-
-            GetTnAList()
-
-            'Debug.Print("TNALIST.COUNT = " & TnAList.Count)
-
-            'Debug.Print("CALLING TNAFASTLIDES.START")
-            TnASlides.Start()
-            StringClean = StringClean.Replace("@TnAFastSlides", "")
-            StringClean = StringClean.Replace("@TnASlowSlides", "")
-            StringClean = StringClean.Replace("@TnASlides", "")
-        End If
-
-        If StringClean.Contains("@CheckTnA") Then
-            TnASlides.Stop()
-
-            'Debug.Print("@CheckTnA called ::: AssImage = " & AssImage & " ::: BoobImage = " & BoobImage)
-            If AssImage = True Then FileGoto = "(Butt)"
-            If BoobImage = True Then FileGoto = "(Boobs)"
-            SkipGotoLine = True
-            GetGoto()
-            StringClean = StringClean.Replace("@CheckTnA", "")
-        End If
-
-        If StringClean.Contains("@StopTnA") Then
-            TnASlides.Stop()
-            StringClean = StringClean.Replace("@StopTnA", "")
-        End If
-
-
-
-
-
-        If StringClean.Contains("@GotoDommeOrgasm") Then
-
-            'Debug.Print("GotoDommeOrgasmCalled")
-
-
-            If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then FileGoto = "(Never Allows)"
-            If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FileGoto = "(Rarely Allows)"
-            If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FileGoto = "(Sometimes Allows)"
-            If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FileGoto = "(Often Allows)"
-            If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then FileGoto = "(Always Allows)"
-
-            'Debug.Print(FileGoto)
-
-            SkipGotoLine = True
-            GetGoto()
-
-            StringClean = StringClean.Replace("@GotoDommeOrgasm", "")
-
-        End If
-
-        If StringClean.Contains("@GotoDommeRuin") Then
-
-            Debug.Print("GotoDommeRuinedCalled")
-
-
-            If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then FileGoto = "(Never Ruins)"
-            If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FileGoto = "(Rarely Ruins)"
-            If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FileGoto = "(Sometimes Ruins)"
-            If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FileGoto = "(Often Ruins)"
-            If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then FileGoto = "(Always Ruins)"
-
-            'Debug.Print(FileGoto)
-
-            SkipGotoLine = True
-            GetGoto()
-
-            StringClean = StringClean.Replace("@GotoDommeRuin", "")
-
-        End If
-
-        If StringClean.Contains("@GotoDommeApathy") Then
-
-            'Debug.Print("GotoDommeApathyCalled")
-
-
-            If FrmSettings.NBEmpathy.Value = 1 Then FileGoto = "(ApathyLevel1)"
-            If FrmSettings.NBEmpathy.Value = 2 Then FileGoto = "(ApathyLevel2)"
-            If FrmSettings.NBEmpathy.Value = 3 Then FileGoto = "(ApathyLevel3)"
-            If FrmSettings.NBEmpathy.Value = 4 Then FileGoto = "(ApathyLevel4)"
-            If FrmSettings.NBEmpathy.Value = 5 Then FileGoto = "(ApathyLevel5)"
-
-            'Debug.Print(FileGoto)
-
-            SkipGotoLine = True
-            GetGoto()
-
-            StringClean = StringClean.Replace("@GotoDommeApathy", "")
-
-        End If
-
-        If StringClean.Contains("@GotoDommeLevel") Then
-
-
-
-
-            If FrmSettings.domlevelNumBox.Value = 1 Then FileGoto = "(DommeLevel1)"
-            If FrmSettings.domlevelNumBox.Value = 2 Then FileGoto = "(DommeLevel2)"
-            If FrmSettings.domlevelNumBox.Value = 3 Then FileGoto = "(DommeLevel3)"
-            If FrmSettings.domlevelNumBox.Value = 4 Then FileGoto = "(DommeLevel4)"
-            If FrmSettings.domlevelNumBox.Value = 5 Then FileGoto = "(DommeLevel5)"
-
-            'Debug.Print(FileGoto)
-
-            SkipGotoLine = True
-            GetGoto()
-
-            StringClean = StringClean.Replace("@GotoDommeLevel", "")
-
-        End If
-
-
-        If StringClean.Contains("@CheckBnB") Then
-            If FrmSettings.CBEnableBnB.Checked = False Then
-                FileGoto = "(No BnB)"
-                SkipGotoLine = True
-                GetGoto()
-            End If
-            StringClean = StringClean.Replace("@CheckBnB", "")
-        End If
+        
 
 
         If StringClean.Contains("@GiveUpCheck") Then
@@ -10908,9 +10855,9 @@ OrgasmDecided:
             If AskedToGiveUpSection = True Then
 
                 If SubGaveUp = True Then
-                    ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\GiveUpREHASH.txt"
+                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\GiveUpREHASH.txt"
                 Else
-                    ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\GiveUpREPEAT.txt"
+                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\GiveUpREPEAT.txt"
                 End If
                 StringClean = ResponseClean(StringClean)
 
@@ -10931,13 +10878,13 @@ OrgasmDecided:
 
                 If GiveUpVal > GiveUpCheck Then
                     ' you can give up
-                    ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\GiveUpALLOWED.txt"
+                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\GiveUpALLOWED.txt"
                     LockImage = False
                     SubGaveUp = True
                     FirstRound = False
                 Else
                     ' you can't give up
-                    ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\GiveUpDENIED.txt"
+                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\GiveUpDENIED.txt"
                 End If
 
                 StringClean = ResponseClean(StringClean)
@@ -10964,7 +10911,7 @@ OrgasmDecided:
             StringClean = StringClean.Replace("@FinishTease", "")
         End If
 
-        If StringClean.Contains("@ShowButtImage") Then
+        If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
             JustShowedBlogImage = True
             GetTnAList()
             ClearMainPictureBox()
@@ -10978,9 +10925,10 @@ OrgasmDecided:
             End If
             ShowImageInfo()
             StringClean = StringClean.Replace("@ShowButtImage", "")
+            StringClean = StringClean.Replace("@ShowButtsImage", "")
         End If
 
-        If StringClean.Contains("@ShowBoobsImage") Then
+        If StringClean.Contains("@ShowBoobsImage") Or StringClean.Contains("@ShowBoobImage") Then
             JustShowedBlogImage = True
             GetTnAList()
             ClearMainPictureBox()
@@ -10995,6 +10943,7 @@ OrgasmDecided:
 
             ShowImageInfo()
             StringClean = StringClean.Replace("@ShowBoobsImage", "")
+            StringClean = StringClean.Replace("@ShowBoobImage", "")
         End If
 
         If StringClean.Contains("@DommeLevelDown") Then
@@ -11402,26 +11351,11 @@ OrgasmDecided:
             StringClean = StringClean.Replace("@ShowGeneralImage", "")
         End If
 
-
-        If StringClean.Contains("@CheckStrokingState") Then
-            If SubStroking = True Then
-                FileGoto = "(Sub Stroking)"
-            Else
-                FileGoto = "(Sub Not Stroking)"
-            End If
-            SkipGotoLine = True
-            GetGoto()
-            StringClean = StringClean.Replace("@CheckStrokingState", "")
-        End If
-
-
-
-
         If StringClean.Contains("@InterruptLongEdge") Then
 
             Dim EdgeList As New List(Of String)
 
-            For Each EdgeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Long Edge\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each EdgeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Long Edge\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 'Debug.Print("EdgeFile = " & EdgeFile)
                 EdgeList.Add(EdgeFile)
             Next
@@ -11443,7 +11377,7 @@ OrgasmDecided:
                 ShowModule = True
 
             Else
-                MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Long Edge!" & Environment.NewLine _
+                MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Long Edge!" & Environment.NewLine _
                                 & Environment.NewLine & "Please make sure at lease one LongEdge_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             End If
             StringClean = StringClean.Replace("@InterruptLongEdge", "")
@@ -11459,7 +11393,7 @@ OrgasmDecided:
 
             Dim StrokeList As New List(Of String)
 
-            For Each StrokeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Start Stroking\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each StrokeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Start Stroking\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 'Debug.Print("EdgeFile = " & EdgeFile)
                 StrokeList.Add(StrokeFile)
             Next
@@ -11485,7 +11419,7 @@ OrgasmDecided:
                 ShowModule = True
 
             Else
-                MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Start Stroking!" & Environment.NewLine _
+                MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Start Stroking!" & Environment.NewLine _
                                 & Environment.NewLine & "Please make sure at lease one StartStroking_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             End If
             StringClean = StringClean.Replace("@InterruptStartStroking", "")
@@ -11499,9 +11433,9 @@ OrgasmDecided:
                 InterruptClean = InterruptClean.Remove(0, 1)
             Next
             Dim InterruptS As String() = InterruptClean.Split(")")
-            InterruptClean = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\" & InterruptS(0) & ".txt"
+            InterruptClean = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\" & InterruptS(0) & ".txt"
 
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\" & InterruptS(0) & ".txt") Then
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\" & InterruptS(0) & ".txt") Then
 
                 CBTCockFlag = False
                 CBTBallsFlag = False
@@ -11532,7 +11466,7 @@ OrgasmDecided:
                 ShowModule = True
 
             Else
-                MessageBox.Show(Me, InterruptS(0) & ".txt was not found in " & Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt!" & Environment.NewLine _
+                MessageBox.Show(Me, InterruptS(0) & ".txt was not found in " & Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt!" & Environment.NewLine _
                                 & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             End If
             StringClean = StringClean.Replace("@Interrupt(" & InterruptS(0) & ")", "")
@@ -11565,18 +11499,18 @@ OrgasmDecided:
         End If
 
         If StringClean.Contains("@Wait(") Then
-            Dim WaitAmount As String() = Split(StringClean)
-            For i As Integer = 0 To WaitAmount.Length - 1
-                If WaitAmount(i).Contains("@Wait(") Then
-                    Dim WaitInt As String = WaitAmount(i)
-                    WaitInt = WaitInt.Replace("@Wait(", "")
-                    WaitInt = WaitInt.Replace(")", "")
-                    WaitTick = Val(WaitInt)
-                    'Debug.Print("WaitTick = " & WaitTick)
-                    WaitTimer.Start()
-                    StringClean = StringClean.Replace(WaitAmount(i), "")
-                End If
-            Next
+
+            Dim WaitFlag As String = GetParentheses(StringClean, "Wait(")
+            Dim WaitSeconds As Integer = Val(WaitFlag)
+
+            If UCase(WaitFlag).Contains("M") Then WaitSeconds *= 60
+            If UCase(WaitFlag).Contains("H") Then WaitSeconds *= 3600
+
+            WaitTick = WaitSeconds
+            WaitTimer.Start()
+
+            StringClean = StringClean.Replace("@Wait(" & WaitFlag & ")", "")
+
         End If
 
 
@@ -11854,7 +11788,7 @@ OrgasmDecided:
         End If
 
         If StringClean.Contains("@VitalSubAssignment") Then
-            Dim AssignReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\VitalSub\Assignments.txt")
+            Dim AssignReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\VitalSub\Assignments.txt")
             Dim AssignList As New List(Of String)
             While AssignReader.Peek <> -1
                 AssignList.Add(AssignReader.ReadLine())
@@ -12576,13 +12510,13 @@ VTSkip:
         If StringClean.Contains("@SpeedUpCheck") Then
 
             If AskedToSpeedUp = True Then
-                ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpREPEAT.txt"
+                ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpREPEAT.txt"
                 StringClean = ResponseClean(StringClean)
 
             Else
 
                 If StrokePace < 11 Then
-                    ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpMAX.txt"
+                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpMAX.txt"
                     StringClean = ResponseClean(StringClean)
 
                 Else
@@ -12600,13 +12534,13 @@ VTSkip:
                     If SpeedUpVal > SpeedUpCheck Then
 
                         ' you can speed up
-                        ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpALLOWED.txt"
+                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpALLOWED.txt"
 
                     Else
 
                         ' you can't speed up
                         AskedToSpeedUp = True
-                        ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpDENIED.txt"
+                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpDENIED.txt"
 
                     End If
 
@@ -12624,13 +12558,13 @@ VTSkip:
         If StringClean.Contains("@SlowDownCheck") Then
 
             If AskedToSpeedUp = True Then
-                ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownREPEAT.txt"
+                ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownREPEAT.txt"
                 StringClean = ResponseClean(StringClean)
 
             Else
 
                 If StrokePace > 99 Then
-                    ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownMIN.txt"
+                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownMIN.txt"
                     StringClean = ResponseClean(StringClean)
 
                 Else
@@ -12648,13 +12582,13 @@ VTSkip:
                     If SpeedUpVal > SpeedUpCheck Then
 
                         ' you can speed up
-                        ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownALLOWED.txt"
+                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownALLOWED.txt"
 
                     Else
 
                         ' you can't speed up
                         AskedToSpeedUp = True
-                        ResponseFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownDENIED.txt"
+                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownDENIED.txt"
 
                     End If
 
@@ -12754,7 +12688,7 @@ VTSkip:
             End If
             BronzeTokens += FrmCardList.TokensPaid
             FrmCardList.LBLRiskTokens.Text = BronzeTokens
-            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\RP_Edges", FrmCardList.EdgesOwed, False)
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\RP_Edges", FrmCardList.EdgesOwed, False)
             StringClean = StringClean.Replace("@RiskyPayout", "")
         End If
 
@@ -12812,14 +12746,14 @@ VTSkip:
                 CheckFlag = CheckFlag.Replace(", ", ",")
                 CheckFlag = CheckFlag.Replace(" ,", ",")
                 Dim CallSplit As String() = CheckFlag.Split(",")
-                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CallSplit(0)
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CallSplit(0)
                 FileGoto = CallSplit(1)
                 SkipGotoLine = True
                 GetGoto()
 
             Else
 
-                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag
                 StrokeTauntVal = -1
 
             End If
@@ -12844,14 +12778,14 @@ VTSkip:
                 CheckFlag = CheckFlag.Replace(", ", ",")
                 CheckFlag = CheckFlag.Replace(" ,", ",")
                 Dim CallSplit As String() = CheckFlag.Split(",")
-                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CallSplit(0)
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CallSplit(0)
                 FileGoto = CallSplit(1)
                 SkipGotoLine = True
                 GetGoto()
 
             Else
 
-                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag
                 StrokeTauntVal = -1
 
             End If
@@ -12870,18 +12804,18 @@ VTSkip:
             CheckFlag = CheckFlag.Replace("@CallRandom(", "")
             Dim CallReplace As String = CheckFlag
 
-            If Not Directory.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag) Then
+            If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag) Then
                 MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not exist!" & Environment.NewLine & Environment.NewLine & _
-                                Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Else
                 Dim RandomFile As New List(Of String)
                 RandomFile.Clear()
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                     RandomFile.Add(foundFile)
                 Next
                 If RandomFile.Count < 1 Then
                     MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine & _
-                               Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                               Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 Else
                     FileText = RandomFile(randomizer.Next(0, RandomFile.Count))
                     StrokeTauntVal = -1
@@ -12926,8 +12860,8 @@ VTSkip:
             Debug.Print("Delete Flag = " & WriteFlag)
 
 
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & WriteFlag) Then _
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & WriteFlag)
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & WriteFlag) Then _
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & WriteFlag)
 
 
 
@@ -12994,6 +12928,12 @@ VTSkip:
             StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
         End If
 
+        If StringClean.Contains("@ImageTag(") Then
+            Dim TagFlag As String = GetParentheses(StringClean, "@ImageTag(")
+            GetLocalImage(TagFlag)
+            StringClean = StringClean.Replace("@ImageTag(" & TagFlag & ")", "")
+        End If
+
         If StringClean.Contains("@Debug") Then
 
             'Dim wy As Long = DateDiff(DateInterval.Day, Val(GetVariable("TB_AFKSlideshow")), Date.Now)
@@ -13006,6 +12946,141 @@ VTSkip:
             StringClean = StringClean.Replace("@Debug", "")
         End If
 
+
+        If StringClean.Contains("@GotoDommeOrgasm") Then
+
+            'Debug.Print("GotoDommeOrgasmCalled")
+
+
+            If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then FileGoto = "(Never Allows)"
+            If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FileGoto = "(Rarely Allows)"
+            If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FileGoto = "(Sometimes Allows)"
+            If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FileGoto = "(Often Allows)"
+            If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then FileGoto = "(Always Allows)"
+
+            'Debug.Print(FileGoto)
+
+            SkipGotoLine = True
+            GetGoto()
+
+            StringClean = StringClean.Replace("@GotoDommeOrgasm", "")
+
+        End If
+
+        If StringClean.Contains("@GotoDommeRuin") Then
+
+            Debug.Print("GotoDommeRuinedCalled")
+
+
+            If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then FileGoto = "(Never Ruins)"
+            If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FileGoto = "(Rarely Ruins)"
+            If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FileGoto = "(Sometimes Ruins)"
+            If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FileGoto = "(Often Ruins)"
+            If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then FileGoto = "(Always Ruins)"
+
+            'Debug.Print(FileGoto)
+
+            SkipGotoLine = True
+            GetGoto()
+
+            StringClean = StringClean.Replace("@GotoDommeRuin", "")
+
+        End If
+
+        If StringClean.Contains("@GotoDommeApathy") Then
+
+            'Debug.Print("GotoDommeApathyCalled")
+
+
+            If FrmSettings.NBEmpathy.Value = 1 Then FileGoto = "(ApathyLevel1)"
+            If FrmSettings.NBEmpathy.Value = 2 Then FileGoto = "(ApathyLevel2)"
+            If FrmSettings.NBEmpathy.Value = 3 Then FileGoto = "(ApathyLevel3)"
+            If FrmSettings.NBEmpathy.Value = 4 Then FileGoto = "(ApathyLevel4)"
+            If FrmSettings.NBEmpathy.Value = 5 Then FileGoto = "(ApathyLevel5)"
+
+            'Debug.Print(FileGoto)
+
+            SkipGotoLine = True
+            GetGoto()
+
+            StringClean = StringClean.Replace("@GotoDommeApathy", "")
+
+        End If
+
+        If StringClean.Contains("@GotoDommeLevel") Then
+
+            If FrmSettings.domlevelNumBox.Value = 1 Then FileGoto = "(DommeLevel1)"
+            If FrmSettings.domlevelNumBox.Value = 2 Then FileGoto = "(DommeLevel2)"
+            If FrmSettings.domlevelNumBox.Value = 3 Then FileGoto = "(DommeLevel3)"
+            If FrmSettings.domlevelNumBox.Value = 4 Then FileGoto = "(DommeLevel4)"
+            If FrmSettings.domlevelNumBox.Value = 5 Then FileGoto = "(DommeLevel5)"
+
+            'Debug.Print(FileGoto)
+
+            SkipGotoLine = True
+            GetGoto()
+
+            StringClean = StringClean.Replace("@GotoDommeLevel", "")
+
+        End If
+
+
+        If StringClean.Contains("@CheckBnB") Then
+            If FrmSettings.CBEnableBnB.Checked = False Then
+                FileGoto = "(No BnB)"
+                SkipGotoLine = True
+                GetGoto()
+            End If
+            StringClean = StringClean.Replace("@CheckBnB", "")
+        End If
+
+
+
+
+
+
+        ' @TnAFastSlides is a defunct Command that has been replaced by the options available with the @Slideshow function
+
+        If StringClean.Contains("@TnAFastSlides") Or StringClean.Contains("@TnASlowSlides") Or StringClean.Contains("@TnASlides") Then
+
+            ' FrmSettings.offRadio.Checked = True
+            TnAList.Clear()
+
+            If StringClean.Contains("@TnAFastSlides") Then TnASlides.Interval = 334
+            If StringClean.Contains("@TnASlides") Then TnASlides.Interval = 1000
+            If StringClean.Contains("@TnASlowSlides") Then TnASlides.Interval = 5000
+
+
+            'Debug.Print("TNAFASTSLIDES CALLED")
+
+            GetTnAList()
+
+            'Debug.Print("TNALIST.COUNT = " & TnAList.Count)
+
+            'Debug.Print("CALLING TNAFASTLIDES.START")
+            TnASlides.Start()
+            StringClean = StringClean.Replace("@TnAFastSlides", "")
+            StringClean = StringClean.Replace("@TnASlowSlides", "")
+            StringClean = StringClean.Replace("@TnASlides", "")
+        End If
+
+        If StringClean.Contains("@CheckTnA") Then
+            TnASlides.Stop()
+
+            'Debug.Print("@CheckTnA called ::: AssImage = " & AssImage & " ::: BoobImage = " & BoobImage)
+            If AssImage = True Then FileGoto = "(Butt)"
+            If BoobImage = True Then FileGoto = "(Boobs)"
+            SkipGotoLine = True
+            GetGoto()
+            StringClean = StringClean.Replace("@CheckTnA", "")
+        End If
+
+        If StringClean.Contains("@StopTnA") Then
+            TnASlides.Stop()
+            StringClean = StringClean.Replace("@StopTnA", "")
+        End If
+
+
         ' The @NewBlogImage Command is a defunct Command that has been replaced by @ShowBlogImage
 
         If StringClean.Contains("@NewBlogImage") Then
@@ -13015,6 +13090,16 @@ VTSkip:
         End If
 
 
+        If StringClean.Contains("@CheckStrokingState") Then
+            If SubStroking = True Then
+                FileGoto = "(Sub Stroking)"
+            Else
+                FileGoto = "(Sub Not Stroking)"
+            End If
+            SkipGotoLine = True
+            GetGoto()
+            StringClean = StringClean.Replace("@CheckStrokingState", "")
+        End If
 
         'The @SetGroup Command is a defunct Command that was created when implementing new Glitter features. It has no use in the current build of Tease AI.
 
@@ -13062,7 +13147,7 @@ VTSkip:
 
     Public Function CreateFlag(ByVal FlagDir As String)
 
-        Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagDir)
+        Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & FlagDir)
         FlagCreate.Close()
         FlagCreate.Dispose()
 
@@ -13071,7 +13156,7 @@ VTSkip:
 
     Public Function CreateTempFlag(ByVal FlagDir As String)
 
-        Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagDir)
+        Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagDir)
         FlagCreate.Close()
         FlagCreate.Dispose()
 
@@ -13081,11 +13166,11 @@ VTSkip:
 
     Public Function DeleteFlag(ByVal FlagDir As String)
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagDir) Then _
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagDir)
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & FlagDir) Then _
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & FlagDir)
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagDir) Then _
-         My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagDir)
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagDir) Then _
+         My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagDir)
 
 
     End Function
@@ -13094,8 +13179,8 @@ VTSkip:
 
         Dim CheckFlag As Boolean
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & FlagDir) Or _
-            File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagDir) Then
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & FlagDir) Or _
+            File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & FlagDir) Then
             CheckFlag = True
         Else
             CheckFlag = False
@@ -13107,14 +13192,14 @@ VTSkip:
 
     Public Function SetVariable(ByVal VarName As String, ByVal VarValue As String)
 
-        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName, VarValue, False)
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & VarName, VarValue, False)
 
     End Function
 
     Public Function DeleteVariable(ByVal FlagDir As String)
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagDir) Then _
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & FlagDir)
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & FlagDir) Then _
+                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & FlagDir)
 
     End Function
 
@@ -13124,8 +13209,8 @@ VTSkip:
         Dim Val2 As Integer
 
         If IsNumeric(ChangeVal1) = False Then
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1) Then
-                Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1)
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1) Then
+                Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal1)
                 Val1 = Val(VarReader.ReadLine())
                 VarReader.Close()
                 VarReader.Dispose()
@@ -13137,8 +13222,8 @@ VTSkip:
         End If
 
         If IsNumeric(ChangeVal2) = False Then
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2) Then
-                Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2)
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2) Then
+                Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVal2)
                 Val2 = Val(VarReader.ReadLine())
                 VarReader.Close()
                 VarReader.Dispose()
@@ -13162,7 +13247,7 @@ VTSkip:
         If ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
         If ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
 
-        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
 
     End Function
 
@@ -13170,8 +13255,8 @@ VTSkip:
 
         Dim VarGet As String
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName) Then
-            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName)
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & VarName) Then
+            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & VarName)
             VarGet = CDate(VarReader.ReadLine())
             VarReader.Close()
             VarReader.Dispose()
@@ -13189,8 +13274,8 @@ VTSkip:
 
         Dim VarGet As String
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName) Then
-            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & VarName)
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & VarName) Then
+            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & VarName)
             VarGet = Val(VarReader.ReadLine())
             VarReader.Close()
             VarReader.Dispose()
@@ -13236,7 +13321,7 @@ VTSkip:
 
                 Else
 
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
+                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
                     'Debug.Print("VarCheck = " & VarCheck)
                     If File.Exists(VarCheck) Then
                         'Debug.Print("VarCheck Exists")
@@ -13312,7 +13397,7 @@ VTSkip:
 
                 Else
 
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
+                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & SCGotVarSplit(0)
 
                     If File.Exists(VarCheck) Then
 
@@ -13464,8 +13549,6 @@ VTSkip:
 
     Public Function GetDommeImage(ByVal DomTag As String) As Boolean
 
-        Debug.Print("Is this being called?")
-
         DommeImage = Nothing
 
         If File.Exists(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt") Then
@@ -13503,7 +13586,7 @@ VTSkip:
                     Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
 
                     For p As Integer = 0 To PicArray.Count - 1
-                        PicDir = PicDir & PicArray(p)
+                            PicDir = PicDir & PicArray(p) & " "
                         If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
                     Next
 
@@ -13529,7 +13612,7 @@ VTSkip:
                         Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
 
                         For p As Integer = 0 To PicArray.Count - 1
-                            PicDir = PicDir & PicArray(p)
+                            PicDir = PicDir & PicArray(p) & " "
                             If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
                         Next
 
@@ -13554,6 +13637,68 @@ VTSkip:
         End If
 
         Return DommeImageFound
+
+    End Function
+
+    Public Function GetLocalImage(ByVal LocTag As String) As Boolean
+
+        LocalImage = Nothing
+
+        If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+
+
+            Dim TagList As New List(Of String)
+            TagList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+
+            LocTag = LocTag.Replace(" ,", ",")
+            LocTag = LocTag.Replace(", ", ",")
+
+            Dim LocTagArray As String() = LocTag.Split(",")
+
+            Dim LocTag1 As String = " "
+            Dim LocTag2 As String = " "
+            Dim LocTag3 As String = " "
+
+            For i As Integer = 0 To LocTagArray.Count - 1
+                If i = 0 Then LocTag1 = "Tag" & LocTagArray(0)
+                If i = 1 Then LocTag2 = "Tag" & LocTagArray(1)
+                If i = 2 Then LocTag3 = "Tag" & LocTagArray(2)
+            Next
+
+
+            Dim TaggedList As New List(Of String)
+
+            For i As Integer = 0 To TagList.Count - 1
+                If TagList(i).Contains(LocTag1) And TagList(i).Contains(LocTag2) And TagList(i).Contains(LocTag3) Then
+                    TaggedList.Add(TagList(i))
+                End If
+            Next
+
+            If TaggedList.Count > 0 Then
+
+                Dim PicArray As String() = TaggedList(randomizer.Next(0, TaggedList.Count)).Split
+                Dim PicDir As String = ""
+
+                For p As Integer = 0 To PicArray.Count - 1
+                    PicDir = PicDir & PicArray(p) & " "
+                    If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
+                Next
+
+                If LocalImageListCheck = False Then LocalImage = Image.FromFile(PicDir)
+                LocalImageFound = True
+
+
+            Else
+
+                LocalImageFound = False
+
+            End If
+
+        End If
+
+
+
+        Return LocalImageFound
 
     End Function
 
@@ -13775,6 +13920,25 @@ VTSkip:
                     End If
                 End If
                 'ListClean(PoundCount) = ListClean(PoundCount).Replace("@Supremacist", "")
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@Sadistic") Then
+                If FrmSettings.sadisticCheckBox.Checked = False Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
             End If
         Loop Until PoundCount = 0
 
@@ -17067,8 +17231,8 @@ VTSkip:
                 WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
                 WriteFlag = WriteFlag.Split(")")(0)
                 WriteFlag = WriteFlag.Replace("@Flag(", "")
-                If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) And _
-                    Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+                If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) And _
+                    Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -17093,8 +17257,8 @@ VTSkip:
                 WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
                 WriteFlag = WriteFlag.Split(")")(0)
                 WriteFlag = WriteFlag.Replace("@NotFlag(", "")
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) Or _
-                    File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+                If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & WriteFlag) Or _
+                    File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\" & WriteFlag) Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -17175,6 +17339,68 @@ VTSkip:
 
         DommeImageListCheck = False
         DommeImageFound = False
+
+        LocalImageListCheck = True
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@ImageTag(") Then
+                If GetLocalImage(ListClean(PoundCount)) = False Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        LocalImageListCheck = False
+        LocalImageFound = False
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@SubStroking") Then
+                If SubStroking = False Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@SubNotStroking") Then
+                If SubStroking = True Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
 
 
 
@@ -17352,8 +17578,8 @@ VTSkip:
 
 
 
-            Dim AvoidTheEdgeVideo As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\AvoidTheEdge.txt"
-            If DommeVideo = True Then AvoidTheEdgeVideo = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\AvoidTheEdgeD.txt"
+            Dim AvoidTheEdgeVideo As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\AvoidTheEdge.txt"
+            If DommeVideo = True Then AvoidTheEdgeVideo = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\AvoidTheEdgeD.txt"
 
             Dim AvoidTheEdgeLineStart As Integer
             Dim AvoidTheEdgeLineEnd As Integer
@@ -17690,16 +17916,16 @@ AlreadySeen:
         ClearMainPictureBox()
 
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
         End If
-        My.Computer.Network.DownloadFile(TempURL, Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-        TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        My.Computer.Network.DownloadFile(TempURL, Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
         mainPictureBox.Image = TempGif
-        'Dim TempGif As New Image.fromfile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-        'Image(TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif"))
+        'Dim TempGif As New Image.fromfile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'Image(TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif"))
 
-        'Dim TempGif As Bitmap = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'Dim TempGif As Bitmap = Image.FromFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
         'mainPictureBox.Image = TempGif
 
     End Sub
@@ -17803,11 +18029,11 @@ AlreadySeen:
         'mainPictureBox.Image.Dispose()
         'mainPictureBox.Image = Nothing
 
-        'If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-        'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+        'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
         'End If
-        'My.Computer.Network.DownloadFile(FoundString, Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-        'TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'My.Computer.Network.DownloadFile(FoundString, Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
         'End If
 
         'mainPictureBox.Image = TempGif
@@ -17815,8 +18041,8 @@ AlreadySeen:
         'Debug.Print("Gif Not found")
         'mainPictureBox.Load(FoundString)
         'TempGif.Dispose()
-        'If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-        'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
+        'If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
+        'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
         'End If
         'End If
 
@@ -17858,7 +18084,7 @@ NoPlaylistLinkFile:
                 ChastityLinkCheck = "*.txt"
             End If
 
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, ChastityLinkCheck)
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, ChastityLinkCheck)
                 Dim TempLink As String = foundFile
                 TempLink = TempLink.Replace(".txt", "")
                 Do Until Not TempLink.Contains("\")
@@ -17881,9 +18107,9 @@ NoPlaylistLinkFile:
 
             If LinkList.Count < 1 Then
                 If My.Settings.Chastity = True Then
-                    FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\Link_CHASTITY.txt"
+                    FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\Link_CHASTITY.txt"
                 Else
-                    FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\Link.txt"
+                    FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\Link.txt"
                 End If
             Else
                 FileText = LinkList(randomizer.Next(0, LinkList.Count))
@@ -17892,11 +18118,11 @@ NoPlaylistLinkFile:
         Else
             Debug.Print("Playlist Link Called")
             If PlaylistFile(PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
-                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Link\" & PlaylistFile(PlaylistCurrent)
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Link\" & PlaylistFile(PlaylistCurrent)
                 FileText = FileText.Replace(" Regular-TeaseAI-Script", "")
                 FileText = FileText & ".txt"
             Else
-                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\Link\" & PlaylistFile(PlaylistCurrent) & ".txt"
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\Link\" & PlaylistFile(PlaylistCurrent) & ".txt"
             End If
 
         End If
@@ -17925,7 +18151,7 @@ NoPlaylistLinkFile:
 
     Public Function GetSysVar(ByVal GetVar As String) As String
 
-        Dim VarCheck As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\" & GetVar
+        Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & GetVar
         Dim VarValue As String
         If File.Exists(VarCheck) Then
             Dim VarReader As New StreamReader(VarCheck)
@@ -17944,14 +18170,14 @@ NoPlaylistLinkFile:
 
         'My.Settings.Sys_SubLeftEarly = 0
 
-        'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\SYS_SubLeftEarly", "0", False)
+        'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_SubLeftEarly", "0", False)
 
         SetVariable("SYS_SubLeftEarly", 0)
 
         SetVariable("SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1)
 
 
-        'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Variables\SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1, False)
+        'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1, False)
 
 
         My.Settings.Save()
@@ -17974,7 +18200,7 @@ NoPlaylistEndFile:
                 ChastityEndCheck = "*.txt"
             End If
 
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, ChastityEndCheck)
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, ChastityEndCheck)
                 Dim TempEnd As String = foundFile
                 TempEnd = TempEnd.Replace(".txt", "")
                 Do Until Not TempEnd.Contains("\")
@@ -17996,9 +18222,9 @@ NoPlaylistEndFile:
 
             If EndList.Count < 1 Then
                 If My.Settings.Chastity = True Then
-                    FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\End_CHASTITY.txt"
+                    FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\End_CHASTITY.txt"
                 Else
-                    FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\End.txt"
+                    FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\End.txt"
                 End If
             Else
                 FileText = EndList(randomizer.Next(0, EndList.Count))
@@ -18006,11 +18232,11 @@ NoPlaylistEndFile:
 
         Else
             If PlaylistFile(PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
-                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\End\" & PlaylistFile(PlaylistCurrent)
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\" & PlaylistFile(PlaylistCurrent)
                 FileText = FileText.Replace(" Regular-TeaseAI-Script", "")
                 FileText = FileText & ".txt"
             Else
-                FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\End\" & PlaylistFile(PlaylistCurrent) & ".txt"
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\End\" & PlaylistFile(PlaylistCurrent) & ".txt"
             End If
         End If
 
@@ -18032,7 +18258,7 @@ NoPlaylistEndFile:
         Dim EndList As New List(Of String)
         EndList.Clear()
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
             Dim TempEnd As String = foundFile
             TempEnd = TempEnd.Replace(".txt", "")
             Do Until Not TempEnd.Contains("\")
@@ -18048,7 +18274,7 @@ NoPlaylistEndFile:
 
 
         If EndList.Count < 1 Then
-            FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\Scripts\End_BEG.txt"
+            FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Scripts\End_BEG.txt"
         Else
             FileText = EndList(randomizer.Next(0, EndList.Count))
         End If
@@ -18123,9 +18349,9 @@ NoPlaylistEndFile:
 
 
             If GlitterTease = False Then
-                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Edge\Edge.txt")
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Edge\Edge.txt")
             Else
-                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\Edge\GroupEdge.txt")
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Edge\GroupEdge.txt")
             End If
 
 
@@ -18205,7 +18431,7 @@ NoPlaylistEndFile:
 
                         Dim RepeatList As New List(Of String)
 
-                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Denial Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Denial Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                             RepeatList.Add(foundFile)
                         Next
 
@@ -18283,7 +18509,7 @@ RuinedOrgasm:
 
                     Dim RepeatList As New List(Of String)
 
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Ruin Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Ruin Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         RepeatList.Add(foundFile)
                     Next
 
@@ -18351,7 +18577,7 @@ AllowedOrgasm:
 
                     Dim NoCumList As New List(Of String)
 
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Out of Orgasms\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Out of Orgasms\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         NoCumList.Add(foundFile)
                     Next
 
@@ -18401,7 +18627,7 @@ NoNoCumFiles:
 
                     Dim RepeatList As New List(Of String)
 
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Interrupt\Orgasm Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Interrupt\Orgasm Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                         RepeatList.Add(foundFile)
                     Next
 
@@ -18480,9 +18706,9 @@ NoRepeatOFiles:
             Dim EdgeTaunt As StreamReader
 
             If GlitterTease = False Then
-                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\HoldTheEdge\HoldTheEdge.txt")
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\HoldTheEdge\HoldTheEdge.txt")
             Else
-                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Stroke\HoldTheEdge\GroupHoldTheEdge.txt")
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\HoldTheEdge\GroupHoldTheEdge.txt")
             End If
 
             Dim ETLines As New List(Of String)
@@ -18525,7 +18751,7 @@ NoRepeatOFiles:
     Public Sub CreateTaskLetter()
 
 
-        TaskFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Tasks\Greeting.txt"
+        TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Greeting.txt"
         TaskText = ""
 
         Dim TaskRead As New StreamReader(TaskFile)
@@ -18552,7 +18778,7 @@ NoRepeatOFiles:
         CleanTaskText()
         TaskLines.Clear()
 
-        TaskFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Tasks\Intro.txt"
+        TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Intro.txt"
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
@@ -18577,7 +18803,7 @@ NoRepeatOFiles:
         TaskLines.Clear()
 
 
-        TaskFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Tasks\Task_1.txt"
+        TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Task_1.txt"
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
@@ -18602,33 +18828,7 @@ NoRepeatOFiles:
         TaskLines.Clear()
 
 
-        TaskFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Tasks\Link_1-2.txt"
-
-        TaskRead = New StreamReader(TaskFile)
-        TaskLines.Clear()
-
-
-        While TaskRead.Peek <> -1
-            TaskLines.Add(TaskRead.ReadLine())
-        End While
-
-        TaskRead.Close()
-        TaskRead.Dispose()
-
-        Try
-            TaskLines = FilterList(TaskLines)
-            TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-        Catch
-            TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-        End Try
-        PoundClean(TaskEntry)
-
-        TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-        CleanTaskText()
-        TaskLines.Clear()
-
-
-        TaskFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Tasks\Task_2.txt"
+        TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Link_1-2.txt"
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
@@ -18654,7 +18854,7 @@ NoRepeatOFiles:
         TaskLines.Clear()
 
 
-        TaskFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Tasks\Link_2-3.txt"
+        TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Task_2.txt"
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
@@ -18680,7 +18880,33 @@ NoRepeatOFiles:
         TaskLines.Clear()
 
 
-        TaskFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Tasks\Task_3.txt"
+        TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Link_2-3.txt"
+
+        TaskRead = New StreamReader(TaskFile)
+        TaskLines.Clear()
+
+
+        While TaskRead.Peek <> -1
+            TaskLines.Add(TaskRead.ReadLine())
+        End While
+
+        TaskRead.Close()
+        TaskRead.Dispose()
+
+        Try
+            TaskLines = FilterList(TaskLines)
+            TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
+        Catch
+            TaskEntry = "ERROR: Tease AI did not return a valid Task line"
+        End Try
+        PoundClean(TaskEntry)
+
+        TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        CleanTaskText()
+        TaskLines.Clear()
+
+
+        TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Task_3.txt"
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
@@ -18704,7 +18930,7 @@ NoRepeatOFiles:
         CleanTaskText()
         TaskLines.Clear()
 
-        TaskFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Tasks\Outro.txt"
+        TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Outro.txt"
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
@@ -18728,7 +18954,7 @@ NoRepeatOFiles:
         CleanTaskText()
         TaskLines.Clear()
 
-        TaskFile = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Tasks\Signature.txt"
+        TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Signature.txt"
 
         TaskRead = New StreamReader(TaskFile)
         TaskLines.Clear()
@@ -18805,7 +19031,7 @@ AtNext:
 
         TempDate = TempDateNow.ToString("M dd")
 
-        TaskTextDir = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Received Files\Tasks for " & TempDate & ".txt"
+        TaskTextDir = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Received Files\Tasks for " & TempDate & ".txt"
         My.Computer.FileSystem.WriteAllText(TaskTextDir, TaskText, False)
 
 
@@ -20330,7 +20556,7 @@ TryNext:
 
     Public Sub RefreshCards()
 
-        'Dim GoldReader As New StreamReader(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Cards\Gold.txt")
+        'Dim GoldReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Cards\Gold.txt")
         'Dim GoldList As New List(Of String)
 
         'While GoldReader.Peek <> -1
@@ -20466,7 +20692,7 @@ TryNext:
 
             Dim VTDir As String
 
-            If RLGLGame = True Then VTDir = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Red Light Green Light\Taunts.txt"
+            If RLGLGame = True Then VTDir = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Red Light Green Light\Taunts.txt"
 
             If Not File.Exists(VTDir) Then Return
 
@@ -20546,7 +20772,7 @@ TryNext:
 
             Dim VTDir As String
 
-            VTDir = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Red Light Green Light\Taunts.txt"
+            VTDir = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Red Light Green Light\Taunts.txt"
 
             If Not File.Exists(VTDir) Then Return
 
@@ -20605,7 +20831,7 @@ TryNext:
 
             Dim VTDir As String
 
-            VTDir = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Avoid The Edge\Taunts.txt"
+            VTDir = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Avoid The Edge\Taunts.txt"
 
             If Not File.Exists(VTDir) Then Return
 
@@ -21409,13 +21635,13 @@ TryNext:
         Next
         'Debug.Print(VidFile)
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Scripts\" & VidFile & ".txt") Then
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Scripts\" & VidFile & ".txt") Then
             Dim SubCheck As String()
             Dim PlayPos As Integer
             Dim WMPPos As Integer = Math.Ceiling(DomWMP.Ctlcontrols.currentPosition)
 
             Dim SubList As New List(Of String)
-            SubList = Txt2List(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Video\Scripts\" & VidFile & ".txt")
+            SubList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Video\Scripts\" & VidFile & ".txt")
 
             If Not SubList Is Nothing Then
                 For i As Integer = 0 To SubList.Count - 1
@@ -21449,7 +21675,7 @@ TryNext:
         SettingsList.Clear()
 
 
-        SettingsList.Add("Personality: " & FrmSettings.dompersonalityComboBox.Text)
+        SettingsList.Add("Personality: " & dompersonalityComboBox.Text)
         SettingsList.Add("ScriptOperator: " & ScriptOperator)
         SettingsList.Add("ScriptCompare: " & ScriptCompare)
         SettingsList.Add("DomTyping: " & DomTyping)
@@ -22025,7 +22251,7 @@ TryNext:
         End Try
 
 
-        FrmSettings.dompersonalityComboBox.Text = SettingsList(0).Replace("Personality: ", "")
+        dompersonalityComboBox.Text = SettingsList(0).Replace("Personality: ", "")
 
         ScriptOperator = SettingsList(1).Replace("ScriptOperator: ", "")
         ScriptCompare = SettingsList(2).Replace("ScriptCompare: ", "")
@@ -23022,6 +23248,9 @@ SkipNew:
             SaidHello = True
             ScriptTick = 1
             ScriptTimer.Start()
+
+            ApplyThemeColor()
+
         End If
 
     End Sub
@@ -24596,7 +24825,7 @@ SkipNew:
             OpenApp()
             PNLPlaylist.Visible = True
             LBPlaylist.Items.Clear()
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 LBPlaylist.Items.Add(Path.GetFileName(foundFile).Replace(".txt", ""))
             Next
         End If
@@ -24616,7 +24845,7 @@ SkipNew:
         Playlist = True
         'SaidHello = True
 
-        PlaylistFile = Txt2List(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Playlist\" & LBPlaylist.SelectedItem & ".txt")
+        PlaylistFile = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Playlist\" & LBPlaylist.SelectedItem & ".txt")
         PlaylistFile = StripBlankLines(PlaylistFile)
         PlaylistCurrent = 0
         Try
@@ -24649,4 +24878,51 @@ SkipNew:
             PNLWritingTask.Visible = True
         End If
     End Sub
+
+    Private Sub dompersonalitycombobox_LostFocus(sender As Object, e As System.EventArgs) Handles dompersonalitycombobox.LostFocus
+        My.Settings.DomPersonality = dompersonalitycombobox.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub dompersonalitycombobox_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles dompersonalitycombobox.SelectedIndexChanged
+        If FormLoading = False Then
+
+            My.Settings.DomPersonality = dompersonalitycombobox.Text
+            My.Settings.Save()
+
+            FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
+
+            Try
+                FrmSettings.InitializeStartScripts()
+                FrmSettings.InitializeModuleScripts()
+                FrmSettings.InitializeLinkScripts()
+                FrmSettings.InitializeEndScripts()
+            Catch
+            End Try
+
+            FrmSettings.TCScripts.SelectTab(3)
+            FrmSettings.TCScripts.SelectTab(2)
+            FrmSettings.TCScripts.SelectTab(1)
+            FrmSettings.TCScripts.SelectTab(0)
+
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
+                Dim ContactList As New List(Of String)
+                ContactList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt")
+                FrmSettings.GBGlitter1.Text = PoundClean(ContactList(0))
+                FrmSettings.GBGlitter2.Text = PoundClean(ContactList(1))
+                FrmSettings.GBGlitter3.Text = PoundClean(ContactList(2))
+            Else
+                FrmSettings.GBGlitter1.Text = "Contact 1"
+                FrmSettings.GBGlitter2.Text = "Contact 2"
+                FrmSettings.GBGlitter3.Text = "Contact 3"
+            End If
+
+            Form9.LBLPersonality.Text = dompersonalitycombobox.Text
+
+            Debug.Print("Personality Changed")
+
+        End If
+    End Sub
+
+   
 End Class

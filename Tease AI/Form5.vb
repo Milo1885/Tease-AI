@@ -52,7 +52,7 @@ Public Class frmApps
 
         Dim VitalList As New List(Of String)
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\VitalSub\" & VitalSubState & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\VitalSub\" & VitalSubState & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
             VitalList.Add(foundFile)
         Next
 
@@ -96,7 +96,7 @@ Public Class frmApps
 
 
         If My.Settings.ClearWishlist = True Then
-          
+
             MessageBox.Show(Me, "You have already purchased " & Form1.domName.Text & "'s Wishlist item for today!" & Environment.NewLine & Environment.NewLine & _
                             "Please check back again tomorrow!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Return
@@ -104,7 +104,7 @@ Public Class frmApps
 
 
 
-     
+
 
 
 
@@ -114,7 +114,7 @@ Public Class frmApps
             Dim WishList As New List(Of String)
             WishList.Clear()
 
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Wishlist\Items\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Wishlist\Items\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 WishList.Add(foundFile)
             Next
 
@@ -327,7 +327,7 @@ Public Class frmApps
 
             Dim SilverList As New List(Of String)
 
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Wishlist\Silver Rewards\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Wishlist\Silver Rewards\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 SilverList.Add(foundFile)
             Next
 
@@ -364,7 +364,7 @@ Public Class frmApps
 
             Dim GoldList As New List(Of String)
 
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Wishlist\Gold Rewards\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Wishlist\Gold Rewards\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                 GoldList.Add(foundFile)
             Next
 
@@ -455,11 +455,11 @@ Public Class frmApps
 
 
 
-       
+
 
     End Sub
 
-   
+
 
 
     Private Sub Button47_Click(sender As System.Object, e As System.EventArgs) Handles BTNRun.Click
@@ -490,9 +490,9 @@ Public Class frmApps
         If Form1.HypnoGen = False Then
 
             If CBHypnoGenInduction.Checked = True Then
-                If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\Inductions\" & LBHypnoGenInduction.SelectedItem & ".txt") Then
+                If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Inductions\" & LBHypnoGenInduction.SelectedItem & ".txt") Then
                     Form1.Induction = True
-                    Form1.FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\Inductions\" & LBHypnoGenInduction.SelectedItem & ".txt"
+                    Form1.FileText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Inductions\" & LBHypnoGenInduction.SelectedItem & ".txt"
                 Else
                     MessageBox.Show(Me, "Please select a valid Hypno Induction File or deselect the Induction option!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
                     Return
@@ -501,11 +501,11 @@ Public Class frmApps
 
 
 
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\Hypno Files\" & LBHypnoGen.SelectedItem & ".txt") Then
+            If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Hypno Files\" & LBHypnoGen.SelectedItem & ".txt") Then
                 If Form1.Induction = False Then
-                    Form1.FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\Hypno Files\" & LBHypnoGen.SelectedItem & ".txt"
+                    Form1.FileText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Hypno Files\" & LBHypnoGen.SelectedItem & ".txt"
                 Else
-                    Form1.TempHypno = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\Hypno Files\" & LBHypnoGen.SelectedItem & ".txt"
+                    Form1.TempHypno = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Hypno Files\" & LBHypnoGen.SelectedItem & ".txt"
                 End If
             Else
                 MessageBox.Show(Me, "Please select a valid Hypno File!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -515,7 +515,7 @@ Public Class frmApps
             Form1.StrokeTauntVal = -1
             Form1.ScriptTick = 1
             Form1.ScriptTimer.Start()
-            Dim HypnoTrack As String = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\" & ComboBoxHypnoGenTrack.SelectedItem
+            Dim HypnoTrack As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\" & ComboBoxHypnoGenTrack.SelectedItem
             If File.Exists(HypnoTrack) Then Form1.DomWMP.URL = HypnoTrack
             Form1.HypnoGen = True
             Form1.AFK = True
@@ -552,7 +552,7 @@ Public Class frmApps
 
         LBHypnoGenInduction.Items.Clear()
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\Inductions\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Inductions\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
             Dim TempUrl As String = foundFile
             TempUrl = TempUrl.Replace(".txt", "")
@@ -563,7 +563,7 @@ Public Class frmApps
 
         Next
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\", FileIO.SearchOption.SearchTopLevelOnly, "*.mp3")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\", FileIO.SearchOption.SearchTopLevelOnly, "*.mp3")
             Dim TempUrl As String = foundFile
             Do Until Not TempUrl.Contains("\")
                 TempUrl = TempUrl.Remove(0, 1)
@@ -575,7 +575,7 @@ Public Class frmApps
 
         LBHypnoGen.Items.Clear()
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Hypnotic Guide\Hypno Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Hypno Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
             Dim TempUrl As String = foundFile
             TempUrl = TempUrl.Replace(".txt", "")
@@ -839,7 +839,7 @@ Public Class frmApps
 
 
 
-  
+
 
     Private Sub frmApps_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
         Form1.SaveExercise()
@@ -847,7 +847,7 @@ Public Class frmApps
     End Sub
 
     Private Sub frmApps_Load(sender As Object, e As System.EventArgs) Handles Me.Load
-      
+
 
         LBLCalorie.Text = My.Settings.CaloriesConsumed
         Debug.Print("HOW MANY FUCKING CALORIES!!!! " & My.Settings.CaloriesConsumed)
@@ -1090,11 +1090,11 @@ Public Class frmApps
 
     End Sub
 
-  
 
-    
+
+
     Private Sub Button31_Click_1(sender As System.Object, e As System.EventArgs) Handles Button31.Click
-        
+
         ColorBlue()
 
     End Sub
@@ -1287,7 +1287,7 @@ Public Class frmApps
     End Sub
 
     Private Sub Button33_Click(sender As System.Object, e As System.EventArgs) Handles Button33.Click
-      
+
         ColorRed()
 
     End Sub
@@ -1367,30 +1367,30 @@ Public Class frmApps
         Dim AIBoxContents As New List(Of String)
 
 
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\", FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\", FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
             AIBoxList.Add(foundFile)
         Next
 
         For i As Integer = 0 To AIBoxList.Count - 1
-            AIBoxContents.Add("[aiBox File Begin] " & AIBoxList(i).Replace(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\", ""))
+            AIBoxContents.Add("[aiBox File Begin] " & AIBoxList(i).Replace(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\", ""))
             AIBoxCurrent = Form1.Txt2List(AIBoxList(i))
             For j As Integer = 0 To AIBoxCurrent.Count - 1
                 AIBoxContents.Add(AIBoxCurrent(j))
             Next
-            AIBoxContents.Add("[aiBox File End] " & AIBoxList(i).Replace(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\", ""))
+            AIBoxContents.Add("[aiBox File End] " & AIBoxList(i).Replace(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\", ""))
         Next
 
 
         If AIBoxContents.Count > 0 Then
 
-            If File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox") Then _
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox")
+            If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\" & Form1.dompersonalitycombobox.Text & ".aiBox") Then _
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\" & Form1.dompersonalitycombobox.Text & ".aiBox")
 
             For i As Integer = 0 To AIBoxContents.Count - 1
-                If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox") Then
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox", AIBoxContents(i), False)
+                If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\" & Form1.dompersonalitycombobox.Text & ".aiBox") Then
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\" & Form1.dompersonalitycombobox.Text & ".aiBox", AIBoxContents(i), False)
                 Else
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\System\" & FrmSettings.dompersonalityComboBox.Text & ".aiBox", Environment.NewLine & AIBoxContents(i), True)
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\" & Form1.dompersonalitycombobox.Text & ".aiBox", Environment.NewLine & AIBoxContents(i), True)
                 End If
             Next
         End If

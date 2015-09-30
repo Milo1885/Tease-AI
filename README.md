@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Decreased the minimum size of the Chat Window panel so that the main picture area can be made larger
+
 Improved the way Tease AI validated scripts containing @PlayJOIVideo and @PlayCHVideo
 
 Minor WritingTask UI fixes

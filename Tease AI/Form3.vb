@@ -161,7 +161,7 @@ Public Class FrmCardList
         If File.Exists(My.Settings.CardBack) Then
             CardBackImage = My.Settings.CardBack
         Else
-            CardBackImage = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\_CardBackPicture.png"
+            CardBackImage = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Games\_CardBackPicture.png"
         End If
 
         ClearMatchCache()
@@ -213,7 +213,7 @@ Public Class FrmCardList
         'M5C.Enabled = True
         'M6C.Enabled = True
 
-      DealMatchCards()
+        DealMatchCards()
 
         MatchList.Clear()
 
@@ -414,7 +414,7 @@ Public Class FrmCardList
         End If
 
 
-     
+
 
 
     End Sub
@@ -442,7 +442,7 @@ Public Class FrmCardList
         'M5C.Enabled = True
         'M6C.Enabled = True
 
-     
+
 
 
         MatchList.Clear()
@@ -2223,7 +2223,7 @@ Card9:
         SlotTick1 -= 1
 
         Slot1Val = randomizer.Next(0, 18)
-         Try
+        Try
             Slot1.Image.Dispose()
         Catch
         End Try
@@ -2252,7 +2252,7 @@ Card9:
         SlotTick2 -= 1
 
         Slot2Val = randomizer.Next(0, 18)
-          Try
+        Try
             Slot2.Image.Dispose()
         Catch
         End Try
@@ -2438,7 +2438,7 @@ Card9:
         If File.Exists(My.Settings.CardBack) Then
             SlotImage = My.Settings.CardBack
         Else
-            SlotImage = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\_CardBackPicture.png"
+            SlotImage = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Games\_CardBackPicture.png"
         End If
 
         SlotLeft2.Image = Image.FromFile(SlotImage)
@@ -2568,7 +2568,7 @@ Card9:
 
     Private Sub BTNMatchNormal_Click(sender As System.Object, e As System.EventArgs) Handles BTNMatchNormal.Click
 
-          If Form1.BronzeTokens < 1 Then Return
+        If Form1.BronzeTokens < 1 Then Return
 
         InitializeCards()
 
@@ -2600,7 +2600,7 @@ Card9:
 
     Private Sub BTNMatchHard_Click(sender As System.Object, e As System.EventArgs) Handles BTNMatchHard.Click
 
-           If Form1.BronzeTokens < 1 Then Return
+        If Form1.BronzeTokens < 1 Then Return
 
         InitializeCards()
 
@@ -2717,7 +2717,7 @@ Card9:
         M4A.Image = Nothing
         M5A.Image = Nothing
         M6A.Image = Nothing
-      
+
 
 
         M1B.Image = Nothing
@@ -2726,7 +2726,7 @@ Card9:
         M4B.Image = Nothing
         M5B.Image = Nothing
         M6B.Image = Nothing
-     
+
 
 
         M1C.Image = Nothing
@@ -2735,9 +2735,9 @@ Card9:
         M4C.Image = Nothing
         M5C.Image = Nothing
         M6C.Image = Nothing
-      
 
-     
+
+
 
         Try
             GC.Collect()
@@ -2824,7 +2824,7 @@ Card9:
 
                 BoosterBack.Image = Image.FromFile(My.Settings.CardBack)
             Else
-                BoosterBack.Image = Image.FromFile(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\_CardBackPicture.png")
+                BoosterBack.Image = Image.FromFile(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Games\_CardBackPicture.png")
             End If
             LBLExchangeBronze.Text = Form1.BronzeTokens
             LBLExchangeSilver.Text = Form1.SilverTokens
@@ -4122,34 +4122,34 @@ Card9:
 
     Private Sub Button1_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNTokenRequest.Click
 
-     
 
-            Dim TokenList As New List(Of String)
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\Token Tasks\", FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
-                TokenList.Add(foundFile)
-            Next
-            If TokenList.Count > 0 Then
 
-                Form1.SaidHello = True
-                Form1.ShowModule = True
-                Form1.FileText = TokenList(randomizer.Next(0, TokenList.Count))
-                Form1.StrokeTauntVal = -1
-                Form1.ScriptTick = 2
-                Form1.ScriptTimer.Start()
+        Dim TokenList As New List(Of String)
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Games\Token Tasks\", FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
+            TokenList.Add(foundFile)
+        Next
+        If TokenList.Count > 0 Then
+
+            Form1.SaidHello = True
+            Form1.ShowModule = True
+            Form1.FileText = TokenList(randomizer.Next(0, TokenList.Count))
+            Form1.StrokeTauntVal = -1
+            Form1.ScriptTick = 2
+            Form1.ScriptTimer.Start()
 
             My.Settings.TokenTasks = FormatDateTime(Now, DateFormat.ShortDate)
             My.Settings.Save()
             BTNTokenRequest.Enabled = False
-            Else
-                MessageBox.Show(Me, "No tasks found in Token Tasks folder!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-                Return
-            End If
+        Else
+            MessageBox.Show(Me, "No tasks found in Token Tasks folder!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            Return
+        End If
 
 
     End Sub
 
 
-   
+
 
     Private Sub Button1_Click_2(sender As System.Object, e As System.EventArgs)
 
@@ -4191,7 +4191,7 @@ Card9:
         Return resized
 
     End Function
-   
+
     Private Sub Button28_Click(sender As System.Object, e As System.EventArgs)
 
         InitializeRiskyDeal()
@@ -5170,7 +5170,7 @@ Card9:
             Return
         End If
 
-        If Not File.Exists(Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\Risky Pick\Risky Pick.txt") Then
+        If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Games\Risky Pick\Risky Pick.txt") Then
             MessageBox.Show(Me, "Risky Pick.txt was not found in \Games\Risky Pick!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             Return
         End If
@@ -5191,7 +5191,7 @@ Card9:
             Form1.LoadDommeImageFolder()
         End If
 
-        Form1.FileText = Application.StartupPath & "\Scripts\" & FrmSettings.dompersonalityComboBox.Text & "\Apps\Games\Risky Pick\Risky Pick.txt"
+        Form1.FileText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Games\Risky Pick\Risky Pick.txt"
         Form1.BeforeTease = False
         Form1.ShowModule = True
         Form1.SaidHello = True
