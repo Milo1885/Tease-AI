@@ -4808,6 +4808,18 @@ Namespace My
                 Me("SplitterPosition") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property MirrorWindows() As Boolean
+            Get
+                Return CType(Me("MirrorWindows"),Boolean)
+            End Get
+            Set
+                Me("MirrorWindows") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

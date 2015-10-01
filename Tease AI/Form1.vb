@@ -522,6 +522,8 @@ Public Class Form1
     Dim CBTBothCount As Integer
     Dim CBTBothFirst As Boolean
 
+
+
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -4221,18 +4223,28 @@ AcceptAnswer:
                     StrokeTauntVal = ReturnStrokeTauntVal
                     If ReturnSubState = "Stroking" Then
                         DomTask = "Get back to stroking @StartStroking"
+                        TypingDelayGeneric()
                     End If
                     If ReturnSubState = "Edging" Or ReturnSubState = "HoldingTheEdge" Then
                         DomTask = "Start getting yourself to the edge again @Edge"
                         SubStroking = True
+                        TypingDelayGeneric()
                     End If
                     If ReturnSubState = "CBTBalls" Then
                         DomTask = "Now let's get back to busting those #Balls @CBTBalls"
+                        CBTBallsFirst = False
+                        TypingDelayGeneric()
                     End If
                     If ReturnSubState = "CBTCock" Then
                         DomTask = "Now let's get back to abusing that #Cock @CBTCock"
+                        CBTCockFirst = False
+                        TypingDelayGeneric()
                     End If
-                    TypingDelayGeneric()
+                    If ReturnSubState = "Rest" Then
+                        ScriptTick = 2
+                        ScriptTimer.Start()
+                        Return
+                    End If
                 End If
                 ScriptTimer.Stop()
                 Return
@@ -12729,9 +12741,11 @@ VTSkip:
 
         If StringClean.Contains("@CallReturn(") Then
 
+
             ReturnFileText = FileText
             ReturnStrokeTauntVal = StrokeTauntVal
             GetSubState()
+            StopEverything()
             ReturnFlag = True
 
             Dim CheckFlag As String = StringClean & " some test garbage"
@@ -15561,8 +15575,8 @@ VTSkip:
         Do
             Application.DoEvents()
             PoundCount -= 1
-            If ListClean(PoundCount).Contains("@ShowBlogImage") Or ListClean(PoundCount).Contains("@NewBlogImage") Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
-                If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Then
+            If ListClean(PoundCount).Contains("@ShowBlogImage") Or ListClean(PoundCount).Contains("@NewBlogImage") Then
+                If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -22781,7 +22795,20 @@ TryNext:
         'domName.Location = New Point(3, PNLApp.Height - 243)
 
         If PNLTabs.Height <> 0 Then StatusUpdates.Height = PNLTabs.Height - 8
-        PNLAvatar.Location = New Point(9, Me.Height - 294)
+
+        If My.Settings.MirrorWindows = False Then
+            PNLAvatar.Location = New Point(9, Me.Height - 294)
+            PNLTabs.Location = New Point(9, 120)
+            PNLDate.Location = New Point(9, 37)
+            SplitContainer1.Location = New Point(271, 37)
+        Else
+            PNLAvatar.Location = New Point(Me.Width - 278, Me.Height - 294)
+            PNLTabs.Location = New Point(Me.Width - 278, 120)
+            PNLDate.Location = New Point(Me.Width - 278, 37)
+            SplitContainer1.Location = New Point(9, 37)
+        End If
+
+      
 
 
 
@@ -22889,6 +22916,12 @@ TryNext:
             PNLWritingTask.Height = PNLTabs.Height - 8
         Else
             PNLWritingTask.Height = 267
+        End If
+
+        If PNLTabs.Height > 492 Then
+            PNLWishList.Height = PNLTabs.Height - 8
+        Else
+            PNLWishList.Height = 485
         End If
 
         PNLTabs.HorizontalScroll.Visible = False
@@ -24334,6 +24367,8 @@ SkipNew:
         PNLAppRandomizer.BackColor = My.Settings.BackgroundColor
         PNLPlaylist.BackColor = My.Settings.BackgroundColor
         PNLWritingTask.BackColor = My.Settings.BackgroundColor
+        PNLWishlistHeader.BackColor = My.Settings.BackgroundColor
+        PNLWishlistTokenBack.BackColor = My.Settings.BackgroundColor
 
 
 
@@ -24463,6 +24498,7 @@ SkipNew:
         PNLAppRandomizer.Visible = False
         PNLPlaylist.Visible = False
         PNLWritingTask.Visible = False
+        PNLWishList.Visible = False
 
         PNLTabs.Height = 0
 
@@ -24925,4 +24961,323 @@ SkipNew:
     End Sub
 
    
+    Private Sub SwitchSidesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SwitchSidesToolStripMenuItem.Click
+        If My.Settings.MirrorWindows = False Then
+            My.Settings.MirrorWindows = True
+        Else
+            My.Settings.MirrorWindows = False
+        End If
+
+        My.Settings.Save()
+        AdjustWindow()
+
+    End Sub
+
+    Private Sub WishlistToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles WishlistToolStripMenuItem.Click
+        If PNLWishList.Visible = False Then
+
+
+
+            If My.Settings.ClearWishlist = True Then
+
+                MessageBox.Show(Me, "You have already purchased " & domName.Text & "'s Wishlist item for today!" & Environment.NewLine & Environment.NewLine & _
+                                "Please check back again tomorrow!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+
+
+
+
+
+
+
+            If CompareDates(My.Settings.WishlistDate) <> 0 Then
+
+
+                Dim WishList As New List(Of String)
+                WishList.Clear()
+
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Wishlist\Items\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                    WishList.Add(foundFile)
+                Next
+
+                If WishList.Count < 1 Then
+                    MessageBox.Show(Me, "No Wishlist items found!" & Environment.NewLine & Environment.NewLine & _
+                                "Please make sure you have item scripts located in Apps\Wishlist\Items.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                    Return
+
+                End If
+
+                LBLWishlistDom.Text = domName.Text & "'s Wishlist"
+                LBLWishlistDate.Text = FormatDateTime(Now, DateFormat.ShortDate).ToString()
+                WishlistCostGold.Visible = False
+                WishlistCostSilver.Visible = False
+                LBLWishlistBronze.Text = BronzeTokens
+                LBLWishlistSilver.Text = SilverTokens
+                LBLWishlistGold.Text = GoldTokens
+                LBLWishListText.Text = ""
+
+
+
+                Dim WishDir As String = WishList(randomizer.Next(0, WishList.Count))
+
+                Dim WishReader As New StreamReader(WishDir)
+
+                WishList.Clear()
+
+                While WishReader.Peek <> -1
+                    WishList.Add(WishReader.ReadLine())
+                End While
+
+                WishReader.Close()
+                WishReader.Dispose()
+
+                LBLWishListName.Text = WishList(0)
+                My.Settings.WishlistName = LBLWishListName.Text
+
+
+                WishlistPreview.Load(WishList(1))
+                WishlistPreview.Visible = True
+                My.Settings.WishlistPreview = WishList(1)
+
+                If WishList(2).Contains("Silver") Then
+                    WishlistCostSilver.Visible = True
+                    LBLWishlistCost.Text = WishList(2)
+                    LBLWishlistCost.Text = LBLWishlistCost.Text.Replace(" Silver", "")
+                    My.Settings.WishlistTokenType = "Silver"
+                End If
+
+                If WishList(2).Contains("Gold") Then
+                    WishlistCostGold.Visible = True
+                    LBLWishlistCost.Text = WishList(2)
+                    LBLWishlistCost.Text = LBLWishlistCost.Text.Replace(" Gold", "")
+                    My.Settings.WishlistTokenType = "Gold"
+                End If
+
+                My.Settings.WishlistCost = Val(LBLWishlistCost.Text)
+
+
+                LBLWishListText.Text = WishList(3)
+                My.Settings.WishlistNote = WishList(3)
+
+
+                If WishlistCostGold.Visible = True Then
+                    If GoldTokens >= Val(LBLWishlistCost.Text) Then
+                        BTNWishlist.Enabled = True
+                        BTNWishlist.Text = "Purchase for " & domName.Text
+                    Else
+                        BTNWishlist.Enabled = False
+                        BTNWishlist.Text = "Not Enough Tokens!"
+                    End If
+                End If
+
+                If WishlistCostSilver.Visible = True Then
+                    If SilverTokens >= Val(LBLWishlistCost.Text) Then
+                        BTNWishlist.Enabled = True
+                        BTNWishlist.Text = "Purchase for " & domName.Text
+                    Else
+                        BTNWishlist.Enabled = False
+                        BTNWishlist.Text = "Not Enough Tokens!"
+                    End If
+                End If
+
+
+
+                My.Settings.WishlistDate = FormatDateTime(Now, DateFormat.ShortDate)
+
+                My.Settings.Save()
+
+
+
+
+
+
+            Else
+
+
+
+                LBLWishlistDom.Text = domName.Text & "'s Wishlist"
+                LBLWishlistDate.Text = FormatDateTime(Now, DateFormat.ShortDate).ToString()
+                LBLWishlistBronze.Text = BronzeTokens
+                LBLWishlistSilver.Text = SilverTokens
+                LBLWishlistGold.Text = GoldTokens
+
+
+                LBLWishListName.Text = My.Settings.WishlistName
+                Try
+                    WishlistPreview.Load(My.Settings.WishlistPreview)
+                Catch
+                    WishlistPreview.Load(Application.StartupPath & "\Images\System\NoPreview.png")
+                End Try
+
+                If My.Settings.WishlistTokenType = "Silver" Then WishlistCostSilver.Visible = True
+                If My.Settings.WishlistTokenType = "Gold" Then WishlistCostGold.Visible = True
+                LBLWishlistCost.Text = My.Settings.WishlistCost
+                LBLWishListText.Text = My.Settings.WishlistNote
+
+                If WishlistCostGold.Visible = True Then
+                    If GoldTokens >= Val(LBLWishlistCost.Text) Then
+                        BTNWishlist.Text = "????? Gold"
+                        BTNWishlist.Enabled = True
+                    Else
+                        BTNWishlist.Text = "Not Enough Tokens!"
+                        BTNWishlist.Enabled = False
+                    End If
+                End If
+
+                If WishlistCostSilver.Visible = True Then
+                    Debug.Print("Silver Caled PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP")
+                    If SilverTokens >= Val(LBLWishlistCost.Text) Then
+                        BTNWishlist.Text = "???? Silver"
+                        BTNWishlist.Enabled = True
+                    Else
+                        BTNWishlist.Text = "Not Enough Tokens!"
+                        BTNWishlist.Enabled = False
+                    End If
+                End If
+
+            End If
+
+
+
+
+
+            
+
+            LBLWishlistBronze.Text = BronzeTokens
+            LBLWishlistSilver.Text = SilverTokens
+            LBLWishlistGold.Text = GoldTokens
+
+            If WishlistCostGold.Visible = True Then
+                If GoldTokens >= Val(LBLWishlistCost.Text) Then
+                    BTNWishlist.Text = "Purchase for " & domName.Text
+                    BTNWishlist.Enabled = True
+                Else
+                    BTNWishlist.Text = "Not Enough Tokens!"
+                    BTNWishlist.Enabled = False
+                End If
+            End If
+
+            If WishlistCostSilver.Visible = True Then
+                Debug.Print("Silver Called")
+                If SilverTokens >= Val(LBLWishlistCost.Text) Then
+                    BTNWishlist.Text = "Purchase for " & domName.Text
+                    BTNWishlist.Enabled = True
+                Else
+                    BTNWishlist.Text = "Not Enough Tokens!"
+                    BTNWishlist.Enabled = False
+                End If
+            End If
+
+
+
+
+
+
+            CloseApp()
+            OpenApp()
+            PNLWishList.Visible = True
+        End If
+    End Sub
+
+    Private Sub BTNWishlist_Click(sender As System.Object, e As System.EventArgs) Handles BTNWishlist.Click
+
+        If SaidHello = True Then
+            MessageBox.Show(Me, "Please wait until you are not engaged with your domme to use this feature!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        Debug.Print(WishlistCostSilver.Visible)
+        Debug.Print(Val(LBLWishlistCost.Text))
+
+        If WishlistCostSilver.Visible = True And SilverTokens >= Val(LBLWishlistCost.Text) Then
+
+            SilverTokens -= Val(LBLWishlistCost.Text)
+            My.Settings.SilverTokens = SilverTokens
+
+            'LBLWishListText.Text = "You purchased this item for " & domName.Text & " on " & CDate(DateString) & "."
+            'My.Settings.WishlistNote = LBLWishListText.Text
+
+            My.Settings.ClearWishlist = True
+
+            My.Settings.Save()
+
+            WishlistCostGold.Visible = False
+            WishlistCostSilver.Visible = False
+            LBLWishlistBronze.Text = BronzeTokens
+            LBLWishlistSilver.Text = SilverTokens
+            LBLWishlistGold.Text = GoldTokens
+            LBLWishListName.Text = ""
+            WishlistPreview.Visible = False
+            LBLWishlistCost.Text = ""
+            LBLWishListText.Text = "Thank you for your purchase! " & domName.Text & " has been notified of your generous gift. Please check back again tomorrow for a new item!"
+            BTNWishlist.Enabled = False
+            BTNWishlist.Text = ""
+
+
+            Dim SilverList As New List(Of String)
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Wishlist\Silver Rewards\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                SilverList.Add(foundFile)
+            Next
+
+            If SilverList.Count < 1 Then
+                MessageBox.Show(Me, "No Silver Reward scripts were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                Return
+            End If
+
+            SaidHello = True
+            ShowModule = True
+
+            FileText = SilverList(randomizer.Next(0, SilverList.Count))
+
+            If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And SlideshowLoaded = False Then
+                LoadDommeImageFolder()
+            End If
+
+            StrokeTauntVal = -1
+            ScriptTick = 2
+            ScriptTimer.Start()
+            Return
+
+        End If
+
+
+        If WishlistCostGold.Visible = True And GoldTokens >= Val(LBLWishlistCost.Text) Then
+
+            GoldTokens -= Val(LBLWishlistCost.Text)
+            My.Settings.GoldTokens = GoldTokens
+
+            My.Settings.ClearWishlist = True
+
+            My.Settings.Save()
+
+            Dim GoldList As New List(Of String)
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Wishlist\Gold Rewards\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                GoldList.Add(foundFile)
+            Next
+
+            If GoldList.Count < 1 Then
+                MessageBox.Show(Me, "No Gold Reward scripts were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                Return
+            End If
+
+            SaidHello = True
+            ShowModule = True
+
+            FileText = GoldList(randomizer.Next(0, GoldList.Count))
+
+            If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And SlideshowLoaded = False Then
+                LoadDommeImageFolder()
+            End If
+
+            StrokeTauntVal = -1
+            ScriptTick = 2
+            ScriptTimer.Start()
+
+        End If
+
+
+    End Sub
 End Class

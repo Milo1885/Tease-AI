@@ -104,24 +104,6 @@ Partial Class frmApps
         Me.CBHypnoGenPhase = New System.Windows.Forms.CheckBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.BTNHypnoGenStart = New System.Windows.Forms.Button()
-        Me.PNLWishList = New System.Windows.Forms.Panel()
-        Me.WishlistCostSilver = New System.Windows.Forms.PictureBox()
-        Me.LBLWishlistDate = New System.Windows.Forms.Label()
-        Me.BTNWishlist = New System.Windows.Forms.Button()
-        Me.LBLWishListText = New System.Windows.Forms.Label()
-        Me.LBLWishlistCost = New System.Windows.Forms.Label()
-        Me.WishlistCostGold = New System.Windows.Forms.PictureBox()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.LBLWishlistSilver = New System.Windows.Forms.Label()
-        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
-        Me.LBLWishlistBronze = New System.Windows.Forms.Label()
-        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
-        Me.LBLWishlistGold = New System.Windows.Forms.Label()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.LBLWishListName = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.LBLWishlistDom = New System.Windows.Forms.Label()
-        Me.WishlistPreview = New System.Windows.Forms.PictureBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.PNLAppHome.SuspendLayout()
         Me.AppPanelGlitter.SuspendLayout()
@@ -132,15 +114,6 @@ Partial Class frmApps
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNLHypnoGen.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.PNLWishList.SuspendLayout()
-        CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel2.SuspendLayout()
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
-        CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PNLAppHome
@@ -1113,215 +1086,6 @@ Partial Class frmApps
         Me.BTNHypnoGenStart.Text = "Guide Me!"
         Me.BTNHypnoGenStart.UseVisualStyleBackColor = True
         '
-        'PNLWishList
-        '
-        Me.PNLWishList.BackColor = System.Drawing.Color.White
-        Me.PNLWishList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLWishList.Controls.Add(Me.WishlistCostSilver)
-        Me.PNLWishList.Controls.Add(Me.LBLWishlistDate)
-        Me.PNLWishList.Controls.Add(Me.BTNWishlist)
-        Me.PNLWishList.Controls.Add(Me.LBLWishListText)
-        Me.PNLWishList.Controls.Add(Me.LBLWishlistCost)
-        Me.PNLWishList.Controls.Add(Me.WishlistCostGold)
-        Me.PNLWishList.Controls.Add(Me.Panel2)
-        Me.PNLWishList.Controls.Add(Me.LBLWishListName)
-        Me.PNLWishList.Controls.Add(Me.Panel1)
-        Me.PNLWishList.Controls.Add(Me.WishlistPreview)
-        Me.PNLWishList.Location = New System.Drawing.Point(0, 47)
-        Me.PNLWishList.Name = "PNLWishList"
-        Me.PNLWishList.Size = New System.Drawing.Size(250, 485)
-        Me.PNLWishList.TabIndex = 166
-        Me.PNLWishList.Visible = False
-        '
-        'WishlistCostSilver
-        '
-        Me.WishlistCostSilver.BackColor = System.Drawing.Color.Transparent
-        Me.WishlistCostSilver.Image = CType(resources.GetObject("WishlistCostSilver.Image"), System.Drawing.Image)
-        Me.WishlistCostSilver.Location = New System.Drawing.Point(107, 251)
-        Me.WishlistCostSilver.Name = "WishlistCostSilver"
-        Me.WishlistCostSilver.Size = New System.Drawing.Size(28, 28)
-        Me.WishlistCostSilver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.WishlistCostSilver.TabIndex = 111
-        Me.WishlistCostSilver.TabStop = False
-        Me.WishlistCostSilver.Visible = False
-        '
-        'LBLWishlistDate
-        '
-        Me.LBLWishlistDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistDate.ForeColor = System.Drawing.Color.Black
-        Me.LBLWishlistDate.Location = New System.Drawing.Point(14, 42)
-        Me.LBLWishlistDate.Name = "LBLWishlistDate"
-        Me.LBLWishlistDate.Size = New System.Drawing.Size(220, 23)
-        Me.LBLWishlistDate.TabIndex = 110
-        Me.LBLWishlistDate.Text = "04/09/2015"
-        Me.LBLWishlistDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'BTNWishlist
-        '
-        Me.BTNWishlist.Location = New System.Drawing.Point(12, 409)
-        Me.BTNWishlist.Name = "BTNWishlist"
-        Me.BTNWishlist.Size = New System.Drawing.Size(221, 23)
-        Me.BTNWishlist.TabIndex = 109
-        Me.BTNWishlist.UseVisualStyleBackColor = True
-        '
-        'LBLWishListText
-        '
-        Me.LBLWishListText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishListText.Location = New System.Drawing.Point(14, 286)
-        Me.LBLWishListText.Name = "LBLWishListText"
-        Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
-        Me.LBLWishListText.TabIndex = 108
-        Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" & _
-    "uld buy it for me because you know you like buying stuff for me. "
-        '
-        'LBLWishlistCost
-        '
-        Me.LBLWishlistCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistCost.ForeColor = System.Drawing.Color.Black
-        Me.LBLWishlistCost.Location = New System.Drawing.Point(139, 251)
-        Me.LBLWishlistCost.Name = "LBLWishlistCost"
-        Me.LBLWishlistCost.Size = New System.Drawing.Size(44, 28)
-        Me.LBLWishlistCost.TabIndex = 107
-        Me.LBLWishlistCost.Text = "3"
-        Me.LBLWishlistCost.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'WishlistCostGold
-        '
-        Me.WishlistCostGold.BackColor = System.Drawing.Color.Transparent
-        Me.WishlistCostGold.Image = CType(resources.GetObject("WishlistCostGold.Image"), System.Drawing.Image)
-        Me.WishlistCostGold.Location = New System.Drawing.Point(107, 251)
-        Me.WishlistCostGold.Name = "WishlistCostGold"
-        Me.WishlistCostGold.Size = New System.Drawing.Size(28, 28)
-        Me.WishlistCostGold.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.WishlistCostGold.TabIndex = 106
-        Me.WishlistCostGold.TabStop = False
-        Me.WishlistCostGold.Visible = False
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.Panel2.Controls.Add(Me.LBLWishlistSilver)
-        Me.Panel2.Controls.Add(Me.PictureBox6)
-        Me.Panel2.Controls.Add(Me.LBLWishlistBronze)
-        Me.Panel2.Controls.Add(Me.PictureBox5)
-        Me.Panel2.Controls.Add(Me.LBLWishlistGold)
-        Me.Panel2.Controls.Add(Me.PictureBox4)
-        Me.Panel2.Location = New System.Drawing.Point(-2, 441)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(250, 44)
-        Me.Panel2.TabIndex = 105
-        '
-        'LBLWishlistSilver
-        '
-        Me.LBLWishlistSilver.BackColor = System.Drawing.Color.Transparent
-        Me.LBLWishlistSilver.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistSilver.ForeColor = System.Drawing.Color.White
-        Me.LBLWishlistSilver.Location = New System.Drawing.Point(121, 5)
-        Me.LBLWishlistSilver.Name = "LBLWishlistSilver"
-        Me.LBLWishlistSilver.Size = New System.Drawing.Size(44, 28)
-        Me.LBLWishlistSilver.TabIndex = 17
-        Me.LBLWishlistSilver.Text = "100"
-        Me.LBLWishlistSilver.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'PictureBox6
-        '
-        Me.PictureBox6.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"), System.Drawing.Image)
-        Me.PictureBox6.Location = New System.Drawing.Point(89, 5)
-        Me.PictureBox6.Name = "PictureBox6"
-        Me.PictureBox6.Size = New System.Drawing.Size(28, 28)
-        Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox6.TabIndex = 16
-        Me.PictureBox6.TabStop = False
-        '
-        'LBLWishlistBronze
-        '
-        Me.LBLWishlistBronze.BackColor = System.Drawing.Color.Transparent
-        Me.LBLWishlistBronze.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistBronze.ForeColor = System.Drawing.Color.White
-        Me.LBLWishlistBronze.Location = New System.Drawing.Point(38, 5)
-        Me.LBLWishlistBronze.Name = "LBLWishlistBronze"
-        Me.LBLWishlistBronze.Size = New System.Drawing.Size(44, 28)
-        Me.LBLWishlistBronze.TabIndex = 15
-        Me.LBLWishlistBronze.Text = "100"
-        Me.LBLWishlistBronze.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'PictureBox5
-        '
-        Me.PictureBox5.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
-        Me.PictureBox5.Location = New System.Drawing.Point(6, 5)
-        Me.PictureBox5.Name = "PictureBox5"
-        Me.PictureBox5.Size = New System.Drawing.Size(28, 28)
-        Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox5.TabIndex = 14
-        Me.PictureBox5.TabStop = False
-        '
-        'LBLWishlistGold
-        '
-        Me.LBLWishlistGold.BackColor = System.Drawing.Color.Transparent
-        Me.LBLWishlistGold.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistGold.ForeColor = System.Drawing.Color.White
-        Me.LBLWishlistGold.Location = New System.Drawing.Point(199, 5)
-        Me.LBLWishlistGold.Name = "LBLWishlistGold"
-        Me.LBLWishlistGold.Size = New System.Drawing.Size(44, 28)
-        Me.LBLWishlistGold.TabIndex = 13
-        Me.LBLWishlistGold.Text = "100"
-        Me.LBLWishlistGold.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
-        Me.PictureBox4.Location = New System.Drawing.Point(167, 5)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(28, 28)
-        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox4.TabIndex = 12
-        Me.PictureBox4.TabStop = False
-        '
-        'LBLWishListName
-        '
-        Me.LBLWishListName.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishListName.ForeColor = System.Drawing.Color.CornflowerBlue
-        Me.LBLWishListName.Location = New System.Drawing.Point(14, 69)
-        Me.LBLWishListName.Name = "LBLWishListName"
-        Me.LBLWishListName.Size = New System.Drawing.Size(220, 23)
-        Me.LBLWishListName.TabIndex = 104
-        Me.LBLWishListName.Text = "Item Name Goes Here"
-        Me.LBLWishListName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Panel1
-        '
-        Me.Panel1.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.Panel1.Controls.Add(Me.LBLWishlistDom)
-        Me.Panel1.Location = New System.Drawing.Point(-4, -4)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(250, 44)
-        Me.Panel1.TabIndex = 103
-        '
-        'LBLWishlistDom
-        '
-        Me.LBLWishlistDom.BackColor = System.Drawing.Color.Transparent
-        Me.LBLWishlistDom.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistDom.ForeColor = System.Drawing.Color.White
-        Me.LBLWishlistDom.Location = New System.Drawing.Point(14, 14)
-        Me.LBLWishlistDom.Name = "LBLWishlistDom"
-        Me.LBLWishlistDom.Size = New System.Drawing.Size(223, 16)
-        Me.LBLWishlistDom.TabIndex = 102
-        Me.LBLWishlistDom.Text = "Domme Name's Wishlist"
-        Me.LBLWishlistDom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'WishlistPreview
-        '
-        Me.WishlistPreview.ImageLocation = ""
-        Me.WishlistPreview.Location = New System.Drawing.Point(49, 101)
-        Me.WishlistPreview.Name = "WishlistPreview"
-        Me.WishlistPreview.Size = New System.Drawing.Size(145, 143)
-        Me.WishlistPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.WishlistPreview.TabIndex = 101
-        Me.WishlistPreview.TabStop = False
-        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
@@ -1339,11 +1103,10 @@ Partial Class frmApps
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button36)
         Me.Controls.Add(Me.CBDebugAwareness)
-        Me.Controls.Add(Me.AppPanelGlitter)
-        Me.Controls.Add(Me.PNLAppHome)
-        Me.Controls.Add(Me.PNLWishList)
         Me.Controls.Add(Me.PNLHypnoGen)
         Me.Controls.Add(Me.AppPanelVitalSub)
+        Me.Controls.Add(Me.AppPanelGlitter)
+        Me.Controls.Add(Me.PNLAppHome)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
@@ -1361,15 +1124,6 @@ Partial Class frmApps
         Me.PNLHypnoGen.ResumeLayout(False)
         Me.PNLHypnoGen.PerformLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PNLWishList.ResumeLayout(False)
-        CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel2.ResumeLayout(False)
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1434,24 +1188,6 @@ Partial Class frmApps
     Friend WithEvents CBHypnoGenPhase As System.Windows.Forms.CheckBox
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
     Friend WithEvents BTNHypnoGenStart As System.Windows.Forms.Button
-    Friend WithEvents PNLWishList As System.Windows.Forms.Panel
-    Friend WithEvents WishlistCostSilver As System.Windows.Forms.PictureBox
-    Friend WithEvents LBLWishlistDate As System.Windows.Forms.Label
-    Friend WithEvents BTNWishlist As System.Windows.Forms.Button
-    Friend WithEvents LBLWishListText As System.Windows.Forms.Label
-    Friend WithEvents LBLWishlistCost As System.Windows.Forms.Label
-    Friend WithEvents WishlistCostGold As System.Windows.Forms.PictureBox
-    Friend WithEvents Panel2 As System.Windows.Forms.Panel
-    Friend WithEvents LBLWishlistSilver As System.Windows.Forms.Label
-    Friend WithEvents PictureBox6 As System.Windows.Forms.PictureBox
-    Friend WithEvents LBLWishlistBronze As System.Windows.Forms.Label
-    Friend WithEvents PictureBox5 As System.Windows.Forms.PictureBox
-    Friend WithEvents LBLWishlistGold As System.Windows.Forms.Label
-    Friend WithEvents PictureBox4 As System.Windows.Forms.PictureBox
-    Friend WithEvents LBLWishListName As System.Windows.Forms.Label
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents LBLWishlistDom As System.Windows.Forms.Label
-    Friend WithEvents WishlistPreview As System.Windows.Forms.PictureBox
     Friend WithEvents Label22 As System.Windows.Forms.Label
     Friend WithEvents Button19 As System.Windows.Forms.Button
     Friend WithEvents Label15 As System.Windows.Forms.Label

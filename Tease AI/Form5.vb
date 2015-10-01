@@ -95,298 +95,12 @@ Public Class frmApps
 
 
 
-        If My.Settings.ClearWishlist = True Then
-
-            MessageBox.Show(Me, "You have already purchased " & Form1.domName.Text & "'s Wishlist item for today!" & Environment.NewLine & Environment.NewLine & _
-                            "Please check back again tomorrow!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Return
-        End If
-
-
-
-
-
-
-
-        If Form1.CompareDates(My.Settings.WishlistDate) <> 0 Then
-
-
-            Dim WishList As New List(Of String)
-            WishList.Clear()
-
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Wishlist\Items\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-                WishList.Add(foundFile)
-            Next
-
-            If WishList.Count < 1 Then
-                MessageBox.Show(Me, "No Wishlist items found!" & Environment.NewLine & Environment.NewLine & _
-                            "Please make sure you have item scripts located in Apps\Wishlist\Items.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-                Return
-
-            End If
-
-            LBLWishlistDom.Text = Form1.domName.Text & "'s Wishlist"
-            LBLWishlistDate.Text = FormatDateTime(Now, DateFormat.ShortDate).ToString()
-            WishlistCostGold.Visible = False
-            WishlistCostSilver.Visible = False
-            LBLWishlistBronze.Text = Form1.BronzeTokens
-            LBLWishlistSilver.Text = Form1.SilverTokens
-            LBLWishlistGold.Text = Form1.GoldTokens
-            LBLWishListText.Text = ""
-
-
-
-            Dim WishDir As String = WishList(Form1.randomizer.Next(0, WishList.Count))
-
-            Dim WishReader As New StreamReader(WishDir)
-
-            WishList.Clear()
-
-            While WishReader.Peek <> -1
-                WishList.Add(WishReader.ReadLine())
-            End While
-
-            WishReader.Close()
-            WishReader.Dispose()
-
-            LBLWishListName.Text = WishList(0)
-            My.Settings.WishlistName = LBLWishListName.Text
-
-
-            WishlistPreview.Load(WishList(1))
-            WishlistPreview.Visible = True
-            My.Settings.WishlistPreview = WishList(1)
-
-            If WishList(2).Contains("Silver") Then
-                WishlistCostSilver.Visible = True
-                LBLWishlistCost.Text = WishList(2)
-                LBLWishlistCost.Text = LBLWishlistCost.Text.Replace(" Silver", "")
-                My.Settings.WishlistTokenType = "Silver"
-            End If
-
-            If WishList(2).Contains("Gold") Then
-                WishlistCostGold.Visible = True
-                LBLWishlistCost.Text = WishList(2)
-                LBLWishlistCost.Text = LBLWishlistCost.Text.Replace(" Gold", "")
-                My.Settings.WishlistTokenType = "Gold"
-            End If
-
-            My.Settings.WishlistCost = Val(LBLWishlistCost.Text)
-
-
-            LBLWishListText.Text = WishList(3)
-            My.Settings.WishlistNote = WishList(3)
-
-
-            If WishlistCostGold.Visible = True Then
-                If Form1.GoldTokens >= Val(LBLWishlistCost.Text) Then
-                    BTNWishlist.Enabled = True
-                    BTNWishlist.Text = "Purchase for " & Form1.domName.Text
-                Else
-                    BTNWishlist.Enabled = False
-                    BTNWishlist.Text = "Not Enough Tokens!"
-                End If
-            End If
-
-            If WishlistCostSilver.Visible = True Then
-                If Form1.SilverTokens >= Val(LBLWishlistCost.Text) Then
-                    BTNWishlist.Enabled = True
-                    BTNWishlist.Text = "Purchase for " & Form1.domName.Text
-                Else
-                    BTNWishlist.Enabled = False
-                    BTNWishlist.Text = "Not Enough Tokens!"
-                End If
-            End If
-
-
-
-            My.Settings.WishlistDate = FormatDateTime(Now, DateFormat.ShortDate)
-
-            My.Settings.Save()
-
-
-
-
-
-
-        Else
-
-
-
-            LBLWishlistDom.Text = Form1.domName.Text & "'s Wishlist"
-            LBLWishlistDate.Text = FormatDateTime(Now, DateFormat.ShortDate).ToString()
-            LBLWishlistBronze.Text = Form1.BronzeTokens
-            LBLWishlistSilver.Text = Form1.SilverTokens
-            LBLWishlistGold.Text = Form1.GoldTokens
-
-
-            LBLWishListName.Text = My.Settings.WishlistName
-            Try
-                WishlistPreview.Load(My.Settings.WishlistPreview)
-            Catch
-                WishlistPreview.Load(Application.StartupPath & "\Images\System\NoPreview.png")
-            End Try
-
-            If My.Settings.WishlistTokenType = "Silver" Then WishlistCostSilver.Visible = True
-            If My.Settings.WishlistTokenType = "Gold" Then WishlistCostGold.Visible = True
-            LBLWishlistCost.Text = My.Settings.WishlistCost
-            LBLWishListText.Text = My.Settings.WishlistNote
-
-            If WishlistCostGold.Visible = True Then
-                If Form1.GoldTokens >= Val(LBLWishlistCost.Text) Then
-                    BTNWishlist.Text = "????? Gold"
-                    BTNWishlist.Enabled = True
-                Else
-                    BTNWishlist.Text = "Not Enough Tokens!"
-                    BTNWishlist.Enabled = False
-                End If
-            End If
-
-            If WishlistCostSilver.Visible = True Then
-                Debug.Print("Silver Caled PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP")
-                If Form1.SilverTokens >= Val(LBLWishlistCost.Text) Then
-                    BTNWishlist.Text = "???? Silver"
-                    BTNWishlist.Enabled = True
-                Else
-                    BTNWishlist.Text = "Not Enough Tokens!"
-                    BTNWishlist.Enabled = False
-                End If
-            End If
-
-        End If
-
-
-
-
-
-        PNLWishList.Visible = True
-        PNLAppHome.Visible = False
-
-        LBLWishlistBronze.Text = Form1.BronzeTokens
-        LBLWishlistSilver.Text = Form1.SilverTokens
-        LBLWishlistGold.Text = Form1.GoldTokens
-
-        If WishlistCostGold.Visible = True Then
-            If Form1.GoldTokens >= Val(LBLWishlistCost.Text) Then
-                BTNWishlist.Text = "Purchase for " & Form1.domName.Text
-                BTNWishlist.Enabled = True
-            Else
-                BTNWishlist.Text = "Not Enough Tokens!"
-                BTNWishlist.Enabled = False
-            End If
-        End If
-
-        If WishlistCostSilver.Visible = True Then
-            Debug.Print("Silver Called")
-            If Form1.SilverTokens >= Val(LBLWishlistCost.Text) Then
-                BTNWishlist.Text = "Purchase for " & Form1.domName.Text
-                BTNWishlist.Enabled = True
-            Else
-                BTNWishlist.Text = "Not Enough Tokens!"
-                BTNWishlist.Enabled = False
-            End If
-        End If
-
 
     End Sub
 
-    Private Sub BTNWishlist_Click(sender As System.Object, e As System.EventArgs) Handles BTNWishlist.Click
+    Private Sub BTNWishlist_Click(sender As System.Object, e As System.EventArgs)
 
-        If Form1.SaidHello = True Then
-            MessageBox.Show(Me, "Please wait until you are not engaged with your domme to use this feature!", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Return
-        End If
-
-        Debug.Print(WishlistCostSilver.Visible)
-        Debug.Print(Val(LBLWishlistCost.Text))
-
-        If WishlistCostSilver.Visible = True And Form1.SilverTokens >= Val(LBLWishlistCost.Text) Then
-
-            Form1.SilverTokens -= Val(LBLWishlistCost.Text)
-            My.Settings.SilverTokens = Form1.SilverTokens
-
-            'LBLWishListText.Text = "You purchased this item for " & domName.Text & " on " & CDate(DateString) & "."
-            'My.Settings.WishlistNote = LBLWishListText.Text
-
-            My.Settings.ClearWishlist = True
-
-            My.Settings.Save()
-
-            WishlistCostGold.Visible = False
-            WishlistCostSilver.Visible = False
-            LBLWishlistBronze.Text = Form1.BronzeTokens
-            LBLWishlistSilver.Text = Form1.SilverTokens
-            LBLWishlistGold.Text = Form1.GoldTokens
-            LBLWishListName.Text = ""
-            WishlistPreview.Visible = False
-            LBLWishlistCost.Text = ""
-            LBLWishListText.Text = "Thank you for your purchase! " & Form1.domName.Text & " has been notified of your generous gift. Please check back again tomorrow for a new item!"
-            BTNWishlist.Enabled = False
-            BTNWishlist.Text = ""
-
-
-            Dim SilverList As New List(Of String)
-
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Wishlist\Silver Rewards\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-                SilverList.Add(foundFile)
-            Next
-
-            If SilverList.Count < 1 Then
-                MessageBox.Show(Me, "No Silver Reward scripts were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-                Return
-            End If
-
-            Form1.SaidHello = True
-            Form1.ShowModule = True
-
-            Form1.FileText = SilverList(Form1.randomizer.Next(0, SilverList.Count))
-
-            If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And Form1.SlideshowLoaded = False Then
-                Form1.LoadDommeImageFolder()
-            End If
-
-            Form1.StrokeTauntVal = -1
-            Form1.ScriptTick = 2
-            Form1.ScriptTimer.Start()
-            Return
-
-        End If
-
-
-        If WishlistCostGold.Visible = True And Form1.GoldTokens >= Val(LBLWishlistCost.Text) Then
-
-            Form1.GoldTokens -= Val(LBLWishlistCost.Text)
-            My.Settings.GoldTokens = Form1.GoldTokens
-
-            My.Settings.ClearWishlist = True
-
-            My.Settings.Save()
-
-            Dim GoldList As New List(Of String)
-
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Wishlist\Gold Rewards\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-                GoldList.Add(foundFile)
-            Next
-
-            If GoldList.Count < 1 Then
-                MessageBox.Show(Me, "No Gold Reward scripts were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-                Return
-            End If
-
-            Form1.SaidHello = True
-            Form1.ShowModule = True
-
-            Form1.FileText = GoldList(Form1.randomizer.Next(0, GoldList.Count))
-
-            If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And Form1.SlideshowLoaded = False Then
-                Form1.LoadDommeImageFolder()
-            End If
-
-            Form1.StrokeTauntVal = -1
-            Form1.ScriptTick = 2
-            Form1.ScriptTimer.Start()
-
-        End If
+       
 
 
     End Sub
@@ -428,7 +142,7 @@ Public Class frmApps
         AppPanelVitalSub.Visible = False
         'PNLAppRandomizer.Visible = False
         PNLHypnoGen.Visible = False
-        PNLWishList.Visible = False
+        'PNLWishList.Visible = False
         PNLAppHome.Visible = True
         'PNLLazySub.Visible = False
         'PNLPlaylist.Visible = False
@@ -1139,9 +853,9 @@ Public Class frmApps
 
         'PNLLazySub.BackColor = Color.SteelBlue
         'Label27.ForeColor = Color.SteelBlue
-        Panel1.BackColor = Color.SteelBlue
-        LBLWishListName.ForeColor = Color.SteelBlue
-        Panel2.BackColor = Color.SteelBlue
+        'Panel1.BackColor = Color.SteelBlue
+        'LBLWishListName.ForeColor = Color.SteelBlue
+        'Panel2.BackColor = Color.SteelBlue
         'PNLPlaylist.BackColor = Color.SteelBlue
         'PNLAppRandomizer.BackColor = Color.SteelBlue
         PictureBox3.BackColor = Color.SteelBlue
@@ -1207,9 +921,9 @@ Public Class frmApps
 
         'PNLLazySub.BackColor = Color.DarkMagenta
         'Label27.ForeColor = Color.DarkMagenta
-        Panel1.BackColor = Color.DarkMagenta
-        LBLWishListName.ForeColor = Color.DarkMagenta
-        Panel2.BackColor = Color.DarkMagenta
+        'Panel1.BackColor = Color.DarkMagenta
+        'LBLWishListName.ForeColor = Color.DarkMagenta
+        'Panel2.BackColor = Color.DarkMagenta
         'PNLPlaylist.BackColor = Color.DarkMagenta
         ' PNLAppRandomizer.BackColor = Color.DarkMagenta
         PictureBox3.BackColor = Color.DarkMagenta
@@ -1271,9 +985,9 @@ Public Class frmApps
 
         'PNLLazySub.BackColor = Color.Black
         'Label27.ForeColor = Color.Black
-        Panel1.BackColor = Color.Black
-        LBLWishListName.ForeColor = Color.Black
-        Panel2.BackColor = Color.Black
+        'Panel1.BackColor = Color.Black
+        'LBLWishListName.ForeColor = Color.Black
+        'Panel2.BackColor = Color.Black
         'PNLPlaylist.BackColor = Color.Black
         'PNLAppRandomizer.BackColor = Color.Black
         PictureBox3.BackColor = Color.Black
@@ -1335,9 +1049,9 @@ Public Class frmApps
 
         'PNLLazySub.BackColor = Color.Firebrick
         ' Label27.ForeColor = Color.Firebrick
-        Panel1.BackColor = Color.Firebrick
-        LBLWishListName.ForeColor = Color.Firebrick
-        Panel2.BackColor = Color.Firebrick
+        'Panel1.BackColor = Color.Firebrick
+        'LBLWishListName.ForeColor = Color.Firebrick
+        'Panel2.BackColor = Color.Firebrick
         ' PNLPlaylist.BackColor = Color.Firebrick
         'PNLAppRandomizer.BackColor = Color.Firebrick
         PictureBox3.BackColor = Color.Firebrick

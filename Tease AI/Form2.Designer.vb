@@ -952,8 +952,8 @@ Partial Class FrmSettings
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
-        Me.humiliatingCheckBox = New System.Windows.Forms.CheckBox()
-        Me.CheckBox2 = New System.Windows.Forms.CheckBox()
+        Me.condescendingCheckBox = New System.Windows.Forms.CheckBox()
+        Me.degradingCheckBox = New System.Windows.Forms.CheckBox()
         Me.sadisticCheckBox = New System.Windows.Forms.CheckBox()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
@@ -2590,12 +2590,12 @@ Partial Class FrmSettings
         '
         'GBDomPersonality
         '
-        Me.GBDomPersonality.Controls.Add(Me.CheckBox2)
+        Me.GBDomPersonality.Controls.Add(Me.degradingCheckBox)
         Me.GBDomPersonality.Controls.Add(Me.sadisticCheckBox)
         Me.GBDomPersonality.Controls.Add(Me.supremacistCheckBox)
         Me.GBDomPersonality.Controls.Add(Me.vulgarCheckBox)
         Me.GBDomPersonality.Controls.Add(Me.crazyCheckBox)
-        Me.GBDomPersonality.Controls.Add(Me.humiliatingCheckBox)
+        Me.GBDomPersonality.Controls.Add(Me.condescendingCheckBox)
         Me.GBDomPersonality.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.GBDomPersonality.ForeColor = System.Drawing.Color.Black
         Me.GBDomPersonality.Location = New System.Drawing.Point(184, 30)
@@ -2610,7 +2610,7 @@ Partial Class FrmSettings
         Me.supremacistCheckBox.AutoSize = true
         Me.supremacistCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.supremacistCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.supremacistCheckBox.Location = New System.Drawing.Point(157, 20)
+        Me.supremacistCheckBox.Location = New System.Drawing.Point(148, 20)
         Me.supremacistCheckBox.Name = "supremacistCheckBox"
         Me.supremacistCheckBox.Size = New System.Drawing.Size(84, 17)
         Me.supremacistCheckBox.TabIndex = 38
@@ -2622,7 +2622,7 @@ Partial Class FrmSettings
         Me.vulgarCheckBox.AutoSize = true
         Me.vulgarCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.vulgarCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.vulgarCheckBox.Location = New System.Drawing.Point(84, 20)
+        Me.vulgarCheckBox.Location = New System.Drawing.Point(73, 20)
         Me.vulgarCheckBox.Name = "vulgarCheckBox"
         Me.vulgarCheckBox.Size = New System.Drawing.Size(56, 17)
         Me.vulgarCheckBox.TabIndex = 37
@@ -12244,29 +12244,29 @@ Partial Class FrmSettings
         'BWCreateURLFiles
         '
         '
-        'humiliatingCheckBox
+        'condescendingCheckBox
         '
-        Me.humiliatingCheckBox.AutoSize = true
-        Me.humiliatingCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.humiliatingCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.humiliatingCheckBox.Location = New System.Drawing.Point(157, 43)
-        Me.humiliatingCheckBox.Name = "humiliatingCheckBox"
-        Me.humiliatingCheckBox.Size = New System.Drawing.Size(77, 17)
-        Me.humiliatingCheckBox.TabIndex = 41
-        Me.humiliatingCheckBox.Text = "Humiliating"
-        Me.humiliatingCheckBox.UseVisualStyleBackColor = true
+        Me.condescendingCheckBox.AutoSize = true
+        Me.condescendingCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.condescendingCheckBox.ForeColor = System.Drawing.Color.Black
+        Me.condescendingCheckBox.Location = New System.Drawing.Point(148, 43)
+        Me.condescendingCheckBox.Name = "condescendingCheckBox"
+        Me.condescendingCheckBox.Size = New System.Drawing.Size(100, 17)
+        Me.condescendingCheckBox.TabIndex = 41
+        Me.condescendingCheckBox.Text = "Condescending"
+        Me.condescendingCheckBox.UseVisualStyleBackColor = true
         '
-        'CheckBox2
+        'degradingCheckBox
         '
-        Me.CheckBox2.AutoSize = true
-        Me.CheckBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CheckBox2.ForeColor = System.Drawing.Color.Black
-        Me.CheckBox2.Location = New System.Drawing.Point(84, 43)
-        Me.CheckBox2.Name = "CheckBox2"
-        Me.CheckBox2.Size = New System.Drawing.Size(56, 17)
-        Me.CheckBox2.TabIndex = 40
-        Me.CheckBox2.Text = "Vulgar"
-        Me.CheckBox2.UseVisualStyleBackColor = true
+        Me.degradingCheckBox.AutoSize = true
+        Me.degradingCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.degradingCheckBox.ForeColor = System.Drawing.Color.Black
+        Me.degradingCheckBox.Location = New System.Drawing.Point(73, 43)
+        Me.degradingCheckBox.Name = "degradingCheckBox"
+        Me.degradingCheckBox.Size = New System.Drawing.Size(75, 17)
+        Me.degradingCheckBox.TabIndex = 40
+        Me.degradingCheckBox.Text = "Degrading"
+        Me.degradingCheckBox.UseVisualStyleBackColor = true
         '
         'sadisticCheckBox
         '
@@ -13513,7 +13513,7 @@ End Sub
     Friend WithEvents Button31 As System.Windows.Forms.Button
     Friend WithEvents CBFlipBack As System.Windows.Forms.CheckBox
     Friend WithEvents Button32 As System.Windows.Forms.Button
-    Friend WithEvents humiliatingCheckBox As System.Windows.Forms.CheckBox
-    Friend WithEvents CheckBox2 As System.Windows.Forms.CheckBox
+    Friend WithEvents condescendingCheckBox As System.Windows.Forms.CheckBox
+    Friend WithEvents degradingCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents sadisticCheckBox As System.Windows.Forms.CheckBox
 End Class
