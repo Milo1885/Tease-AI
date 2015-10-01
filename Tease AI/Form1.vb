@@ -522,6 +522,8 @@ Public Class Form1
     Dim CBTBothCount As Integer
     Dim CBTBothFirst As Boolean
 
+    Public MetroThread As Thread
+    Dim MetroGet As Integer
 
 
     Private Const DISABLE_SOUNDS As Integer = 21
@@ -625,12 +627,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End Try
 
         Try
-            frmApps.Close()
-            frmApps.Dispose()
-        Catch ex As Exception
-        End Try
-
-        Try
             FrmCardList.Close()
             FrmCardList.Dispose()
         Catch ex As Exception
@@ -685,10 +681,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSplash.Refresh()
 
 
-        If File.Exists(Application.StartupPath & "\System\Metronome") Then
-            File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-        End If
+        StrokePace = 0
 
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Checking terms and conditions..."
@@ -716,7 +709,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             Loop Until My.Settings.TC2Agreed = True
         End If
 
-        frmApps.Show()
+
 
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
@@ -1583,8 +1576,51 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         MetroTimer.Start()
 
 
+        LBLCalorie.Text = My.Settings.CaloriesConsumed
+        Debug.Print("HOW MANY FUCKING CALORIES!!!! " & My.Settings.CaloriesConsumed)
+
+        If File.Exists(Application.StartupPath & "\System\VitalSub\ExerciseList.cld") Then
+            LoadExercise()
+        End If
+
+        CaloriesConsumed = My.Settings.CaloriesConsumed
+
+        If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then
+            Dim CalReader As New StreamReader(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
+            While CalReader.Peek <> -1
+                LBCalorie.Items.Add(CalReader.ReadLine())
+            End While
+            CalReader.Close()
+            CalReader.Dispose()
+            LBLCalorie.Text = CaloriesConsumed
+        Else
+            CaloriesConsumed = 0
+            My.Settings.CaloriesConsumed = 0
+            My.Settings.Save()
+            LBLCalorie.Text = CaloriesConsumed
+        End If
+
+
+        CBVitalSub.Checked = My.Settings.VitalSub
+
+        If CBVitalSub.Checked = True Then
+            CBVitalSub.ForeColor = Color.LightGreen
+            CBVitalSub.Text = "VitalSub Active"
+        Else
+            CBVitalSub.ForeColor = Color.Red
+            CBVitalSub.Text = "VitalSub Inactive"
+        End If
+
+        CBVitalSubDomTask.Checked = My.Settings.VitalSubAssignments
+
+
+
         FormLoading = False
 
+
+        MetroThread = New Thread(AddressOf MetronomeTick)
+        MetroThread.IsBackground = True
+        MetroThread.Start()
 
 
         FrmSplash.Close()
@@ -1612,10 +1648,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
         DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
 
-        If File.Exists(Application.StartupPath & "\System\Metronome") Then
-            File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-        End If
+        StrokePace = 0
 
         If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\") Then
             My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
@@ -1814,7 +1847,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 
-        If frmApps.CBDebugAwareness.Checked = True Then GoTo DebugAwareness
+        'If frmApps.CBDebugAwareness.Checked = True Then GoTo DebugAwareness
 
 
 
@@ -2890,7 +2923,7 @@ EdgeSkip:
 
         Next
 
-        If frmApps.CBDebugAwareness.Checked = True Then GoTo DebugAwarenessStep2
+        ' If frmApps.CBDebugAwareness.Checked = True Then GoTo DebugAwarenessStep2
 
         For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
@@ -2961,7 +2994,7 @@ DebugAwarenessStep2:
         Next
 
 
-        If frmApps.CBDebugAwareness.Checked = True Then GoTo FoundResponse
+        'If frmApps.CBDebugAwareness.Checked = True Then GoTo FoundResponse
 
         For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
@@ -3080,15 +3113,15 @@ DebugAwarenessStep2:
 
 FoundResponse:
 
-        If frmApps.CBDebugAwareness.Checked = True Then
-            If DebugAwarenessLine = "Domme does not recognize this statement" Then
-                Chat = Chat & "<font color=""red"">" & DebugAwarenessLine & "<br>"
-            Else
-                Chat = Chat & "<font color=""green"">" & DebugAwarenessLine & "<br>"
-            End If
-            ChatText.DocumentText = Chat
-            Return
-        End If
+        'If frmApps.CBDebugAwareness.Checked = True Then
+        'If DebugAwarenessLine = "Domme does not recognize this statement" Then
+        'Chat = Chat & "<font color=""red"">" & DebugAwarenessLine & "<br>"
+        'Else
+        'Chat = Chat & "<font color=""green"">" & DebugAwarenessLine & "<br>"
+        'End If
+        'ChatText.DocumentText = Chat
+        'Return
+        'End If
 
         If StrokeTauntTimer.Enabled = True Then
             TempScriptCount = 0
@@ -4215,7 +4248,7 @@ AcceptAnswer:
                     HypnoGen = False
                     AFK = False
                     DomWMP.Ctlcontrols.stop()
-                    frmApps.BTNHypnoGenStart.Text = "Guide Me!"
+                    BTNHypnoGenStart.Text = "Guide Me!"
                 End If
                 If ReturnFlag = True Then
                     ReturnFlag = False
@@ -4546,22 +4579,22 @@ AcceptAnswer:
 
             If HypnoGen = True Then
 
-                If frmApps.CBHypnoGenSlideshow.Checked = True Then
+                If CBHypnoGenSlideshow.Checked = True Then
 
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Boobs" Then DomTask = DomTask & " @ShowBoobsImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Butts" Then DomTask = DomTask & " @ShowButtImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Hardcore" Then DomTask = DomTask & " @ShowHardcoreImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Softcore" Then DomTask = DomTask & " @ShowSoftcoreImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Lesbian" Then DomTask = DomTask & " @ShowLesbianImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Blowjob" Then DomTask = DomTask & " @ShowBlowjobImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Femdom" Then DomTask = DomTask & " @ShowFemdomImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Lezdom" Then DomTask = DomTask & " @ShowLezdomImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Hentai" Then DomTask = DomTask & " @ShowHentaiImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Gay" Then DomTask = DomTask & " @ShowGayImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Maledom" Then DomTask = DomTask & " @ShowMaledomImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Captions" Then DomTask = DomTask & " @ShowCaptionsImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "General" Then DomTask = DomTask & " @ShowGeneralImage"
-                    If frmApps.LBHypnoGenSlideshow.SelectedItem = "Tagged" Then DomTask = DomTask & " @ShowTaggedImage @Tag" & frmApps.TBHypnoGenImageTag.Text
+                    If LBHypnoGenSlideshow.SelectedItem = "Boobs" Then DomTask = DomTask & " @ShowBoobsImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Butts" Then DomTask = DomTask & " @ShowButtImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Hardcore" Then DomTask = DomTask & " @ShowHardcoreImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Softcore" Then DomTask = DomTask & " @ShowSoftcoreImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Lesbian" Then DomTask = DomTask & " @ShowLesbianImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Blowjob" Then DomTask = DomTask & " @ShowBlowjobImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Femdom" Then DomTask = DomTask & " @ShowFemdomImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Lezdom" Then DomTask = DomTask & " @ShowLezdomImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Hentai" Then DomTask = DomTask & " @ShowHentaiImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Gay" Then DomTask = DomTask & " @ShowGayImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Maledom" Then DomTask = DomTask & " @ShowMaledomImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Captions" Then DomTask = DomTask & " @ShowCaptionsImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "General" Then DomTask = DomTask & " @ShowGeneralImage"
+                    If LBHypnoGenSlideshow.SelectedItem = "Tagged" Then DomTask = DomTask & " @ShowTaggedImage @Tag" & TBHypnoGenImageTag.Text
 
 
 
@@ -4706,7 +4739,7 @@ SkipGotoSearch:
         'Debug.Print("Typing Delay Generic Called " & StrokeTauntVal)
         TypeDelay = StringLength
         If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True Then TypeDelay = 0
-        If HypnoGen = True And frmApps.CBHypnoGenNoText.Checked = True Then TypeDelay = 0
+        If HypnoGen = True And CBHypnoGenNoText.Checked = True Then TypeDelay = 0
         Timer1.Start()
 
     End Sub
@@ -4721,7 +4754,7 @@ SkipGotoSearch:
         ' Let the program know that the domme is currently typing
         DomTypeCheck = True
 
-        If frmApps.CBHypnoGenNoText.Checked = True And HypnoGen = True Then NullResponse = True
+        If CBHypnoGenNoText.Checked = True And HypnoGen = True Then NullResponse = True
         If DomTask.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
 
         'Debug.Print("Nullresponse = " & NullResponse)
@@ -4793,7 +4826,7 @@ SkipGotoSearch:
                 End If
                 If RLGLGame = True Then StringLength = 0
                 If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True Then StringLength = 0
-                If HypnoGen = True And frmApps.CBHypnoGenNoText.Checked = True Then StringLength = 0
+                If HypnoGen = True And CBHypnoGenNoText.Checked = True Then StringLength = 0
                 TypingDelayGeneric()
             End If
 
@@ -5051,7 +5084,7 @@ NullResponse:
 
 
                 'Debug.Print("NullResponse = " & NullResponse)
-                If frmApps.CBHypnoGenNoText.Checked = True And HypnoGen = True Then GoTo HypNoResponse
+                If CBHypnoGenNoText.Checked = True And HypnoGen = True Then GoTo HypNoResponse
                 If NullResponse = True Then GoTo NoResponse
 
                 ' Dim AtArray() As String = Split(DomTask)
@@ -5383,7 +5416,7 @@ HypNoResponse:
                     mciSendString("PLAY Speech1 FROM 0", String.Empty, 0, 0)
 
 
-                    If frmApps.CBHypnoGenPhase.Checked And HypnoGen = True Then
+                    If CBHypnoGenPhase.Checked And HypnoGen = True Then
                         Delay(0.4)
                         mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Echo1", String.Empty, 0, 0)
                         mciSendString("PLAY Echo1 FROM 0", String.Empty, 0, 0)
@@ -5403,10 +5436,7 @@ NoResponse:
                 StrokeSpeedCheck()
 
                 If SubStroking = False Then
-                    If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                        File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                        My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                    End If
+                    StrokePace = 0
                     If FrmSettings.TBWebStop.Text <> "" Then
                         Try
                             FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
@@ -5426,7 +5456,7 @@ NoResponse:
                         SubEdging = False
                         SubHoldingEdge = False
                         StopMetronome = False
-                        StrokePace = randomizer.Next(3, 8) * 10
+                        StrokePace = randomizer.Next(4, 8) * 10
                         StrokePaceTimer.Interval = StrokePace
                         RLGLTauntTick = randomizer.Next(20, 31)
                         ' VideoTauntTick = randomizer.Next(20, 31)
@@ -5452,10 +5482,7 @@ NoResponse:
 
                 If SubStroking = False Then StopMetronome = True
                 If SubHoldingEdge = True Then
-                    If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                        File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                        My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                    End If
+                    StrokePace = 0
                 End If
                 'Debug.Print("End of DomTask #######################################################################################################################")
                 'JustShowedBlogImage = False
@@ -6080,10 +6107,7 @@ NullResponseLine2:
                 StrokeSpeedCheck()
 
                 If SubStroking = False Then
-                    If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                        File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                        My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                    End If
+                     StrokePace = 0
                     If FrmSettings.TBWebStop.Text <> "" Then
                         Try
                             FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
@@ -6093,10 +6117,7 @@ NullResponseLine2:
                 End If
 
                 If SubHoldingEdge = True Then
-                    If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                        File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                        My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                    End If
+                     StrokePace = 0
                 End If
 
                 'Debug.Print("NullResponse = " & NullResponse)
@@ -10151,13 +10172,7 @@ RinseLatherRepeat:
             My.Settings.Save()
             StartStrokingCount += 1
             StopMetronome = False
-            StrokePace = randomizer.Next(3, 8) * 10
-            If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-            End If
-            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
-
+            StrokePace = randomizer.Next(4, 9) * 100
 
             If FrmSettings.CBTauntCycleDD.Checked = True Then
                 If FrmSettings.domlevelNumBox.Value = 1 Then StrokeTick = randomizer.Next(1, 3) * 60
@@ -10187,7 +10202,7 @@ RinseLatherRepeat:
             'StrokeCycle = -1
             If StartStrokingCount = 0 Then FirstRound = True
             StartStrokingCount += 1
-            StrokePace = randomizer.Next(3, 8) * 10
+            StrokePace = 0
             StrokePaceTimer.Interval = StrokePace
             StopMetronome = False
             If FrmSettings.CBTauntCycleDD.Checked = True Then
@@ -10231,10 +10246,7 @@ RinseLatherRepeat:
             SubHoldingEdge = False
             StrokeTimer.Stop()
             StrokeTauntTimer.Stop()
-            If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-            End If
+            StrokePace = 0
             EdgeTauntTimer.Stop()
             HoldEdgeTauntTimer.Stop()
             StringClean = StringClean.Replace("@StopStroking", "")
@@ -11677,10 +11689,7 @@ OrgasmDecided:
                 SubStroking = False
                 SubHoldingEdge = True
                 EdgeTauntTimer.Stop()
-                If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                End If
+               StrokePace = 0
                 DomChat = "#HoldTheEdge"
                 If Contact1Stroke = True Then
                     DomChat = "@Contact1 #HoldTheEdge"
@@ -11818,9 +11827,9 @@ OrgasmDecided:
                 TempAssign = "ERROR: VitalSub Assign"
             End Try
 
-            frmApps.CLBExercise.Items.Add(TempAssign)
+            CLBExercise.Items.Add(TempAssign)
             SaveExercise()
-            frmApps.CBVitalSubDomTask.Checked = False
+            CBVitalSubDomTask.Checked = False
             My.Settings.VitalSubAssignments = False
             My.Settings.Save()
             StringClean = StringClean.Replace("@VitalSubAssignment", "")
@@ -11940,7 +11949,7 @@ OrgasmDecided:
             VideoTease = True
             StartStrokingCount += 1
             StopMetronome = False
-            StrokePace = randomizer.Next(3, 8) * 10
+            StrokePace = randomizer.Next(4, 9) * 100
             StrokePaceTimer.Interval = StrokePace
             StrokePaceTimer.Start()
             AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
@@ -11956,7 +11965,7 @@ OrgasmDecided:
             StartStrokingCount += 1
             StopMetronome = False
             VideoTease = True
-            StrokePace = randomizer.Next(3, 8) * 10
+            StrokePace = randomizer.Next(4, 9) * 100
             StrokePaceTimer.Interval = StrokePace
             StrokePaceTimer.Start()
             AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
@@ -11981,7 +11990,7 @@ OrgasmDecided:
             RLGLTimer.Start()
             StartStrokingCount += 1
             StopMetronome = False
-            StrokePace = randomizer.Next(3, 8) * 10
+            StrokePace = randomizer.Next(4, 9) * 100
             StrokePaceTimer.Interval = StrokePace
             StrokePaceTimer.Start()
             'VideoTauntTick = randomizer.Next(20, 31)
@@ -12527,8 +12536,8 @@ VTSkip:
 
             Else
 
-                If StrokePace < 11 Then
-                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpMAX.txt"
+                If StrokePace < 201 Then
+                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpMAX.txt"
                     StringClean = ResponseClean(StringClean)
 
                 Else
@@ -12546,13 +12555,13 @@ VTSkip:
                     If SpeedUpVal > SpeedUpCheck Then
 
                         ' you can speed up
-                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpALLOWED.txt"
+                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpALLOWED.txt"
 
                     Else
 
                         ' you can't speed up
                         AskedToSpeedUp = True
-                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpDENIED.txt"
+                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpDENIED.txt"
 
                     End If
 
@@ -12575,8 +12584,8 @@ VTSkip:
 
             Else
 
-                If StrokePace > 99 Then
-                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownMIN.txt"
+                If StrokePace > 999 Then
+                    ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownMIN.txt"
                     StringClean = ResponseClean(StringClean)
 
                 Else
@@ -12594,13 +12603,13 @@ VTSkip:
                     If SpeedUpVal > SpeedUpCheck Then
 
                         ' you can speed up
-                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownALLOWED.txt"
+                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownALLOWED.txt"
 
                     Else
 
                         ' you can't speed up
                         AskedToSpeedUp = True
-                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownDENIED.txt"
+                        ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownDENIED.txt"
 
                     End If
 
@@ -13748,14 +13757,7 @@ VTSkip:
 
     Public Sub EdgePace()
 
-        StrokePace = randomizer.Next(10, 31)
-
-        If File.Exists(Application.StartupPath & "\System\Metronome") Then
-            File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-        End If
-
-        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+        StrokePace = randomizer.Next(2, 5) * 100
 
     End Sub
 
@@ -15007,7 +15009,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@StrokeSpeedMax") Then
-                If StrokePace < 100 Then
+                If StrokePace < 1000 Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15027,7 +15029,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@StrokeSpeedMin") Then
-                If StrokePace > 10 Then
+                If StrokePace > 200 Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -16403,7 +16405,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VitalSub") Then
-                If frmApps.CBVitalSub.Checked = False Then
+                If CBVitalSub.Checked = False Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -16422,7 +16424,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@VitalSubAssignment") Then
-                If frmApps.CBVitalSub.Checked = False Or frmApps.CBVitalSubDomTask.Checked = False Then
+                If CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -18335,10 +18337,7 @@ NoPlaylistEndFile:
             End Try
         End If
 
-        If File.Exists(Application.StartupPath & "\System\Metronome") Then
-            File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-            My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-        End If
+       StrokePace = 0
 
     End Sub
 
@@ -19494,460 +19493,7 @@ TryNext:
 
 
 
-    Private Sub Button51_Click(sender As System.Object, e As System.EventArgs)
-
-        Dim sVar As String
-
-        sVar = "<head>" & vbCrLf & _
-"  <meta content=""text/html; charset=ISO-8859-1""" & vbCrLf & _
-" http-equiv=""content-type"">" & vbCrLf & _
-"  <title>OKay</title>" & vbCrLf & _
-"</head>" & vbCrLf & _
-"<body>" & vbCrLf & _
-"<span style=""font-weight: bold;""><span" & vbCrLf & _
-" style=""color: red;""><big><span" & vbCrLf & _
-" style=""color: rgb(204, 0, 0);"">@Chance</span></big><span" & vbCrLf & _
-" style=""color: rgb(51, 51, 255);""><big>X</big><span" & vbCrLf & _
-" style=""color: rgb(204, 0, 0);""><big><span" & vbCrLf & _
-" style=""color: rgb(51, 51, 255);"">X</span>( )</big><br>" & vbCrLf & _
-"<span style=""font-weight: bold;""></span></span></span></span></span><span" & vbCrLf & _
-" style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-" style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Domme" & vbCrLf & _
-"has <span style=""color: rgb(51, 51, 255);"">XX</span>" & vbCrLf & _
-"percent chance of going to the line in parentheses. Similar to the <span" & vbCrLf & _
-" style=""color: rgb(204, 0, 0);"">@Goto( )</span>" & vbCrLf & _
-"&nbsp;Command. For example, <span style=""color: rgb(204, 0, 0);"">@Chance</span></span></span></span></span><span" & vbCrLf & _
-" style=""color: rgb(204, 0, 0);""></span><span" & vbCrLf & _
-" style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-" style=""color: rgb(204, 0, 0);""><span style=""color: black;""><span" & vbCrLf & _
-" style=""color: rgb(204, 0, 0);"">50(Because I Said So)</span>" & vbCrLf
-        sVar = sVar & "would have a 50% chance of going to the next line in the</span></span></span></span><span" & vbCrLf & _
-        " style=""font-weight: bold;""><span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""> </span></span></span></span><span" & vbCrLf & _
-        " style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span" & vbCrLf & _
-        " style=""color: rgb(51, 0, 0);"">script, and 50% chance of" & vbCrLf & _
-        "going to the line (Because I Said So). <span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);"">XX</span> must be a" & vbCrLf & _
-        "2-digit number between 01 and 99.</span><br>" & vbCrLf & _
-        "</span></span></span><span" & vbCrLf & _
-        " style=""font-weight: bold;""><span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><br>" & vbCrLf & _
-        "</span></span></span></span><span" & vbCrLf & _
-        " style=""font-weight: bold;""><span style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><br>" & vbCrLf & _
-        "@CheckFlag</span></big><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><big><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""></span>( )</big></span></span></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">The" & vbCrLf & _
-        "program checks to see if the Flag named in parentheses has been" & vbCrLf
-        sVar = sVar & "created, and will go to that line in the script if it has. Similar to" & vbCrLf & _
-        "the <span style=""color: rgb(204, 0, 0);"">@Goto( )</span>" & vbCrLf & _
-        "Command. For example, <span style=""color: rgb(204, 0, 0);"">@CheckFlag(MyFlag1)</span>" & vbCrLf & _
-        "goes to the next line of the script if the flag MyFlag1 does not exist." & vbCrLf & _
-        "and goes to the line (MyFlag1) if it does. Flags are created with the <span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@SetFlag( )</span>" & vbCrLf & _
-        "Command.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><br>" & vbCrLf & _
-        "@DislikeBlogImage</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">The" & vbCrLf & _
-        "program adds the URL address of the most recently displayed blog image" & vbCrLf & _
-        "and adds it to the file ""DislikedImageURLs.txt"" located in" & vbCrLf & _
-        """\Images\System\""<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "</span></span></span></span><span" & vbCrLf & _
-        " style=""font-weight: bold;""><span style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@Edge</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf
-        sVar = sVar & " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command let's the program now the sub&nbsp;has been told to get to" & vbCrLf & _
-        "the edge of orgasm and begin displaying Edge Taunts. Once the sub lets" & vbCrLf & _
-        "the domme know he has reached the edge, the domme will then decide to" & vbCrLf & _
-        "let him stop stroking or hold it. Modules must contain <span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@StopStroking</span> or" & vbCrLf & _
-        "one of the <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands. <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands can be used in any Linear script.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@EdgeHold</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command let's the program now the sub&nbsp;has been told to get to" & vbCrLf & _
-        "the edge" & vbCrLf & _
-        "of orgasm and begin displaying Edge Taunts. Once the sub lets the domme" & vbCrLf & _
-        "know he has reached the edge, the domme will make him hold it. Modules" & vbCrLf & _
-        "must contain <span style=""color: rgb(204, 0, 0);"">@StopStroking</span>" & vbCrLf & _
-        "or one of the <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands. <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands can be used in any Linear script.</span></span></span></span><br>" & vbCrLf
-        sVar = sVar & "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@EdgeNoHold</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command let's the program now the sub&nbsp;has been told to get to" & vbCrLf & _
-        "the edge" & vbCrLf & _
-        "of orgasm and begin displaying Edge Taunts. Once the sub lets the domme" & vbCrLf & _
-        "know he has reached the edge, the domme will make him stop stroking." & vbCrLf & _
-        "Modules must contain <span style=""color: rgb(204, 0, 0);"">@StopStroking</span>" & vbCrLf & _
-        "or one of the <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands. <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands can be used in any Linear script.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@EdgeToRuin</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command let's the program now the sub&nbsp;has been told to get to" & vbCrLf
-        sVar = sVar & "the edge" & vbCrLf & _
-        "of orgasm and begin displaying Edge Taunts. Once the sub lets the domme" & vbCrLf & _
-        "know he has reached the edge, the domme will then decide to let him" & vbCrLf & _
-        "stop stroking or hold it. In either case, the sub will be instructed to" & vbCrLf & _
-        "ruin his orgasm. Modules must contain <span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@StopStroking</span> or" & vbCrLf & _
-        "one of the <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands. <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands can be used in any Linear script.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@EdgeToRuinSecret</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command let's the program now the sub&nbsp;has been told to get to" & vbCrLf & _
-        "the edge" & vbCrLf & _
-        "of orgasm and begin displaying Edge Taunts. Once the sub lets the domme" & vbCrLf & _
-        "know he has reached the edge, the domme will then decide to let him" & vbCrLf & _
-        "stop stroking or hold it. In either case, the sub will be instructed to" & vbCrLf & _
-        "ruin his orgasm. This Command will prevent the domme from letting the" & vbCrLf & _
-        "sub know his orgasm will be ruined during Edge and Hold The Edge" & vbCrLf & _
-        "Taunts. Modules must contain <span style=""color: rgb(204, 0, 0);"">@StopStroking</span>" & vbCrLf
-        sVar = sVar & "or one of the <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands. <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands can be used in any Linear script.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@EdgeToRuinHold</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command let's the program now the sub&nbsp;has been told to get to" & vbCrLf & _
-        "the edge" & vbCrLf & _
-        "of orgasm and begin displaying Edge Taunts. Once the sub lets the domme" & vbCrLf & _
-        "know he has reached the edge, the domme will make him hold it. At some" & vbCrLf & _
-        "point during holding the edge, the sub will be instructed to ruin his" & vbCrLf & _
-        "orgasm. Modules must contain <span style=""color: rgb(204, 0, 0);"">@StopStroking</span>" & vbCrLf & _
-        "or one of the <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands. <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands can be used in any Linear script.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@EdgeToRuinHoldSecret</span></big></span></span><br>" & vbCrLf
-        sVar = sVar & "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command let's the program now the sub&nbsp;has been told to get to" & vbCrLf & _
-        "the edge" & vbCrLf & _
-        "of orgasm and begin displaying Edge Taunts. Once the sub lets the domme" & vbCrLf & _
-        "know he has reached the edge, the domme will make him hold it. At some" & vbCrLf & _
-        "point during holding the edge, the sub will be instructed to ruin his" & vbCrLf & _
-        "orgasm. </span></span></span></span><span" & vbCrLf & _
-        " style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command will prevent the domme from letting the sub know his orgasm" & vbCrLf & _
-        "will be ruined during Edge and Hold The Edge Taunts. </span></span></span></span><span" & vbCrLf & _
-        " style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Modules" & vbCrLf & _
-        "must contain <span style=""color: rgb(204, 0, 0);"">@StopStroking</span>" & vbCrLf & _
-        "or one of the <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands. <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands can be used in any Linear script.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@EdgeToRuinNoHold</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf
-        sVar = sVar & " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command let's the program now the sub&nbsp;has been told to get to" & vbCrLf & _
-        "the edge" & vbCrLf & _
-        "of orgasm and begin displaying Edge Taunts. Once the sub lets the domme" & vbCrLf & _
-        "know he has reached the edge, the domme will make him ruin his" & vbCrLf & _
-        "orgasm.&nbsp;Modules must contain <span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@StopStroking</span> or" & vbCrLf & _
-        "one of the <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands. <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands can be used in any Linear script.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@EdgeToRuinNoHoldSecret</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command let's the program now the sub&nbsp;has been told to get to" & vbCrLf & _
-        "the edge" & vbCrLf & _
-        "of orgasm and begin displaying Edge Taunts. Once the sub lets the domme" & vbCrLf & _
-        "know he has reached the edge, the domme will make him ruin his" & vbCrLf & _
-        "orgasm.&nbsp;</span></span></span></span><span" & vbCrLf & _
-        " style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf
-        sVar = sVar & " style=""color: rgb(204, 0, 0);""><span style=""color: black;""></span></span></span></span><span" & vbCrLf & _
-        " style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command will prevent the domme from letting the sub know his orgasm" & vbCrLf & _
-        "will be ruined during Edge&nbsp;Taunts.</span></span></span></span><span" & vbCrLf & _
-        " style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Modules" & vbCrLf & _
-        "must contain <span style=""color: rgb(204, 0, 0);"">@StopStroking</span>" & vbCrLf & _
-        "or one of the <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands. <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Commands can be used in any Linear script.</span></span></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;""><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "</span></span></span></span><span" & vbCrLf & _
-        " style=""font-weight: bold;""><span style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@LikeBlogImage</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">The" & vbCrLf & _
-        "program adds the URL address of the most recently displayed blog image" & vbCrLf & _
-        "and adds it to the file ""LikedImageURLs.txt"" located in" & vbCrLf & _
-        """\Images\System\""</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf
-        sVar = sVar & "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><br>" & vbCrLf & _
-        "@ShowBlogImage</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Displays" & vbCrLf & _
-        "a random online image from one of the user's selected URL Files.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><br>" & vbCrLf & _
-        "@ShowImage</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Has" & vbCrLf & _
-        "a 50% chance of diplaying a random online image from one of the user's" & vbCrLf & _
-        "selected URL Files, or a 50% chance of displaying a </span></span></span></span><span" & vbCrLf & _
-        " style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">random&nbsp;image" & vbCrLf & _
-        "from one of the user's selected Local Image File paths.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><br>" & vbCrLf
-        sVar = sVar & "@Show</span></big></span></span><span" & vbCrLf & _
-        " style=""font-weight: bold;""><span style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">Image[ ]</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Displays" & vbCrLf & _
-        "a specific image noted between the brackets, using ""<span" & vbCrLf & _
-        " style=""font-style: italic;"">Tease AI Root Folder</span>\Images\""" & vbCrLf & _
-        "as the starting path.&nbsp; For example, <span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@ShowImage[1885\secrets05.jpg]</span>" & vbCrLf & _
-        "would display the picture secrets05.jpg located in </span></span></span></span><span" & vbCrLf & _
-        " style=""color: red;""><span style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">""<span" & vbCrLf & _
-        " style=""font-style: italic;"">Tease AI Root Folder</span>\Images\1885\""</span></span></span></span>.<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><br>" & vbCrLf & _
-        "@ShowLocalImage</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Displays" & vbCrLf & _
-        "a random&nbsp;image from one of the user's selected Local Image" & vbCrLf & _
-        "File paths.</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf
-        sVar = sVar & "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@ShowDislikedImage</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Displays" & vbCrLf & _
-        "a random image taken from&nbsp;""DislikedImageURLs.txt"" located in" & vbCrLf & _
-        """\Images\System\""</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@ShowLikedImage</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Displays" & vbCrLf & _
-        "a random image taken from&nbsp;""LikedImageURLs.txt"" located in" & vbCrLf & _
-        """\Images\System\""</span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@StartStroking</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf
-        sVar = sVar & " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Begins" & vbCrLf & _
-        "the Taunt cycle. This lets the program know the sub is stroking and" & vbCrLf & _
-        "allows the domme to start using Stroke Taunts. This command MUST be" & vbCrLf & _
-        "used in the line before every <span style=""color: rgb(204, 0, 0);"">@End</span>" & vbCrLf & _
-        "command in each Start and Link script (unless the tease is being ended" & vbCrLf & _
-        "or an Interrupt is called) <span" & vbCrLf & _
-        " style=""font-weight: bold; color: rgb(204, 0, 0);"">Start and" & vbCrLf & _
-        "Link scripts ONLY.</span></span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@StartTaunts</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Begins" & vbCrLf & _
-        "the Taunt cycle when the sub can't stroke.&nbsp;This lets the" & vbCrLf & _
-        "program know to begin the appropriate Taunt cycle. Currently this is" & vbCrLf & _
-        "only used for for the Chastity state, but may encompass other states in" & vbCrLf & _
-        "the future. This command MUST be" & vbCrLf & _
-        "used in the line before every <span style=""color: rgb(204, 0, 0);"">@End</span>" & vbCrLf & _
-        "command in each Chastity Start and Link script (unless the tease is" & vbCrLf & _
-        "being ended or an Interrupt is called) <span" & vbCrLf & _
-        " style=""font-weight: bold; color: rgb(204, 0, 0);"">Chastity" & vbCrLf
-        sVar = sVar & "Start and Link scripts ONLY.</span></span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@StopStroking</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">This" & vbCrLf & _
-        "Command is used in Modules to let the program know that the sub is no" & vbCrLf & _
-        "longer stroking.&nbsp;<span style=""color: rgb(204, 0, 0);""></span>Each" & vbCrLf & _
-        "Module MUST contain this or an <span style=""color: rgb(204, 0, 0);"">@Edge</span>" & vbCrLf & _
-        "Command. <span style=""font-weight: bold; color: rgb(204, 0, 0);"">Module" & vbCrLf & _
-        "scripts ONLY.</span></span></span></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@StrokeFaster</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Increases" & vbCrLf & _
-        "the speed the user is stroking by one. This lets the domme know the sub" & vbCrLf & _
-        "is stroking faster, and slightly speeds up the silent metronome. <span" & vbCrLf & _
-        " style=""font-weight: bold; color: rgb(204, 0, 0);"">Stroke" & vbCrLf
-        sVar = sVar & "Taunts&nbsp;</span></span></span></span></span><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span" & vbCrLf & _
-        " style=""font-weight: bold;"">ONLY</span><span" & vbCrLf & _
-        " style=""font-weight: bold;"">.</span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@StrokeFastest</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Increases" & vbCrLf & _
-        "the speed the user is stroking by full value. This lets the domme know" & vbCrLf & _
-        "the sub" & vbCrLf & _
-        "is stroking as fast as possible, and speeds up the silent metronome to" & vbCrLf & _
-        "its highest setting. <span" & vbCrLf & _
-        " style=""font-weight: bold; color: rgb(204, 0, 0);"">Stroke" & vbCrLf & _
-        "Taunts&nbsp;</span></span></span></span></span><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span" & vbCrLf & _
-        " style=""font-weight: bold;"">ONLY</span><span" & vbCrLf & _
-        " style=""font-weight: bold;"">.</span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf
-        sVar = sVar & " style=""color: rgb(204, 0, 0);"">@StrokeSlower</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Decreases" & vbCrLf & _
-        "the speed the user is stroking by one. This lets the domme know the sub" & vbCrLf & _
-        "is stroking slower, and slightly slows down the silent metronome. <span" & vbCrLf & _
-        " style=""font-weight: bold; color: rgb(204, 0, 0);"">Stroke" & vbCrLf & _
-        "Taunts&nbsp;</span></span></span></span></span><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span" & vbCrLf & _
-        " style=""font-weight: bold;"">ONLY</span><span" & vbCrLf & _
-        " style=""font-weight: bold;"">.</span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);"">@StrokeSlowest</span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;"">Decreases" & vbCrLf & _
-        "the speed the user is stroking by full value. This lets the domme know" & vbCrLf & _
-        "the sub" & vbCrLf & _
-        "is stroking as slow as possible, and&nbsp; slows down the silent" & vbCrLf & _
-        "metronome to its lowest setting. <span" & vbCrLf & _
-        " style=""font-weight: bold; color: rgb(204, 0, 0);"">Stroke" & vbCrLf & _
-        "Taunts&nbsp;</span></span></span></span></span><span" & vbCrLf
-        sVar = sVar & " style=""color: rgb(204, 0, 0);""><span" & vbCrLf & _
-        " style=""font-weight: bold;"">ONLY</span><span" & vbCrLf & _
-        " style=""font-weight: bold;"">.</span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""></span></big></span></span><br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<br>" & vbCrLf & _
-        "<span style=""font-weight: bold;""><span" & vbCrLf & _
-        " style=""color: red;""><big><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""></span></big></span></span><br>" & vbCrLf & _
-        "<span style=""color: red;""><span" & vbCrLf & _
-        " style=""color: rgb(51, 51, 255);""><span" & vbCrLf & _
-        " style=""color: rgb(204, 0, 0);""><span style=""color: black;""><br>" & vbCrLf & _
-        "</span></span></span></span>" & vbCrLf & _
-        "</body>" & vbCrLf & _
-        "</html>"
-
-
-        'frmApps.WEBScriptGuide.DocumentText = sVar
-
-        'frmApps.PNLScriptGuide.Visible = True
-        frmApps.PNLAppHome.Visible = False
-
-    End Sub
+ 
 
 
 
@@ -20534,9 +20080,9 @@ TryNext:
 
         Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\System\VitalSub\ExerciseList.cld", IO.FileMode.Create)
         Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
-        For i = 0 To frmApps.CLBExercise.Items.Count - 1
-            BinaryWriter.Write(CStr(frmApps.CLBExercise.Items(i)))
-            BinaryWriter.Write(CBool(frmApps.CLBExercise.GetItemChecked(i)))
+        For i = 0 To CLBExercise.Items.Count - 1
+            BinaryWriter.Write(CStr(CLBExercise.Items(i)))
+            BinaryWriter.Write(CBool(CLBExercise.GetItemChecked(i)))
         Next
         BinaryWriter.Close()
         FileStream.Dispose()
@@ -20545,15 +20091,15 @@ TryNext:
 
     Public Sub LoadExercise()
 
-        frmApps.CLBExercise.Items.Clear()
+        CLBExercise.Items.Clear()
         Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\System\VitalSub\ExerciseList.cld", IO.FileMode.Open)
         Dim BinaryReader As New System.IO.BinaryReader(FileStream)
-        frmApps.CLBExercise.BeginUpdate()
+        CLBExercise.BeginUpdate()
         Do While FileStream.Position < FileStream.Length
-            frmApps.CLBExercise.Items.Add(BinaryReader.ReadString)
-            frmApps.CLBExercise.SetItemChecked(frmApps.CLBExercise.Items.Count - 1, BinaryReader.ReadBoolean)
+            CLBExercise.Items.Add(BinaryReader.ReadString)
+            CLBExercise.SetItemChecked(CLBExercise.Items.Count - 1, BinaryReader.ReadBoolean)
         Loop
-        frmApps.CLBExercise.EndUpdate()
+        CLBExercise.EndUpdate()
         BinaryReader.Close()
         FileStream.Dispose()
 
@@ -22924,6 +22470,19 @@ TryNext:
             PNLWishList.Height = 485
         End If
 
+        If PNLTabs.Height > 426 Then
+            PNLHypnoGen.Height = PNLTabs.Height - 8
+        Else
+            PNLHypnoGen.Height = 418
+        End If
+
+        If PNLTabs.Height > 431 Then
+            AppPanelVitalSub.Height = PNLTabs.Height - 8
+        Else
+            AppPanelVitalSub.Height = 422
+        End If
+
+
         PNLTabs.HorizontalScroll.Visible = False
 
 
@@ -23040,13 +22599,9 @@ SkipNew:
         If StrokeFaster = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Faster")
-                StrokePace = StrokePace - 20
-                If StrokePace < 10 Then StrokePace = 10
-                If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                End If
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+                StrokePace = StrokePace - 100
+                If StrokePace < 200 Then StrokePace = 200
+                
             End If
             StrokeFaster = False
         End If
@@ -23054,13 +22609,9 @@ SkipNew:
         If StrokeSlower = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Slower")
-                StrokePace = StrokePace + 20
-                If StrokePace > 100 Then StrokePace = 100
-                If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                End If
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+                StrokePace = StrokePace + 100
+                If StrokePace > 1000 Then StrokePace = 1000
+              
             End If
             StrokeSlower = False
         End If
@@ -23068,12 +22619,8 @@ SkipNew:
         If StrokeFastest = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Fastest")
-                StrokePace = 10
-                If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                End If
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+                StrokePace = 200
+               
             End If
             StrokeFastest = False
         End If
@@ -23081,12 +22628,8 @@ SkipNew:
         If StrokeSlowest = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Slowest")
-                StrokePace = 100
-                If File.Exists(Application.StartupPath & "\System\Metronome") Then
-                    File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-                    My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-                End If
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\Metronome", StrokePace, False)
+                StrokePace = 1000
+               
             End If
             StrokeSlowest = False
         End If
@@ -23305,7 +22848,7 @@ SkipNew:
 
     Private Sub AboutToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutToolStripMenuItem.Click
 
-        FrmSettings.SettingsTabs.SelectTab(13)
+        FrmSettings.SettingsTabs.SelectTab(14)
         FrmSettings.Show()
         FrmSettings.Focus()
 
@@ -23398,6 +22941,7 @@ SkipNew:
 
     Public Sub PlayMetroTick()
 
+        ' My.Computer.Audio.Stop()
         ' My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\metronome.wav")
 
         'Beep()
@@ -24370,7 +23914,34 @@ SkipNew:
         PNLWishlistHeader.BackColor = My.Settings.BackgroundColor
         PNLWishlistTokenBack.BackColor = My.Settings.BackgroundColor
 
+        PNLHypnoGen.BackColor = My.Settings.BackgroundColor
 
+        CBHypnoGenInduction.ForeColor = My.Settings.TextColor
+        LBLHypnoFile.ForeColor = My.Settings.TextColor
+        CBHypnoGenSlideshow.ForeColor = My.Settings.TextColor
+        LBLHypnoImageTag.ForeColor = My.Settings.TextColor
+        LBLBackTrack.ForeColor = My.Settings.TextColor
+        CBHypnoGenNoText.ForeColor = My.Settings.TextColor
+        CBHypnoGenPhase.ForeColor = My.Settings.TextColor
+
+        BTNHypnoGenStart.ForeColor = My.Settings.TextColor
+        BTNHypnoGenStart.BackColor = My.Settings.ButtonColor
+
+        AppPanelVitalSub.BackColor = My.Settings.BackgroundColor
+
+        CBVitalSubDomTask.ForeColor = My.Settings.TextColor
+        GBGoals.ForeColor = My.Settings.TextColor
+        GBCalories.ForeColor = My.Settings.TextColor
+        LBLConsumed.ForeColor = My.Settings.TextColor
+        LBLGoal.ForeColor = My.Settings.TextColor
+        LBLCalorie.ForeColor = My.Settings.TextColor
+        TBCalorie.ForeColor = My.Settings.TextColor
+        TBCalorie.BackColor = My.Settings.BackgroundColor
+
+        BTNExercise.BackColor = My.Settings.ButtonColor
+        BTNCalorie.BackColor = My.Settings.ButtonColor
+        BTNExercise.ForeColor = My.Settings.TextColor
+        BTNCalorie.ForeColor = My.Settings.TextColor
 
 
         If FrmSettings.CBFlipBack.Checked = True Then
@@ -24499,6 +24070,8 @@ SkipNew:
         PNLPlaylist.Visible = False
         PNLWritingTask.Visible = False
         PNLWishList.Visible = False
+        PNLHypnoGen.Visible = False
+        AppPanelVitalSub.Visible = False
 
         PNLTabs.Height = 0
 
@@ -24814,7 +24387,7 @@ SkipNew:
         VideoTease = True
         StartStrokingCount += 1
         StopMetronome = False
-        StrokePace = randomizer.Next(3, 8) * 10
+        StrokePace = randomizer.Next(4, 9) * 100
         StrokePaceTimer.Interval = StrokePace
         StrokePaceTimer.Start()
         AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
@@ -24840,7 +24413,7 @@ SkipNew:
         RLGLTimer.Start()
         StartStrokingCount += 1
         StopMetronome = False
-        StrokePace = randomizer.Next(3, 8) * 10
+        StrokePace = randomizer.Next(4, 9) * 100
         StrokePaceTimer.Interval = StrokePace
         StrokePaceTimer.Start()
         'VideoTauntTick = randomizer.Next(20, 31)
@@ -25280,4 +24853,384 @@ SkipNew:
 
 
     End Sub
+
+    Private Sub BTNHypnoGenStart_Click(sender As System.Object, e As System.EventArgs) Handles BTNHypnoGenStart.Click
+
+
+
+        If HypnoGen = False Then
+
+            If CBHypnoGenInduction.Checked = True Then
+                If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Inductions\" & LBHypnoGenInduction.SelectedItem & ".txt") Then
+                    Induction = True
+                    FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Inductions\" & LBHypnoGenInduction.SelectedItem & ".txt"
+                Else
+                    MessageBox.Show(Me, "Please select a valid Hypno Induction File or deselect the Induction option!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                    Return
+                End If
+            End If
+
+
+
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Hypno Files\" & LBHypnoGen.SelectedItem & ".txt") Then
+                If Induction = False Then
+                    FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Hypno Files\" & LBHypnoGen.SelectedItem & ".txt"
+                Else
+                    TempHypno = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Hypno Files\" & LBHypnoGen.SelectedItem & ".txt"
+                End If
+            Else
+                MessageBox.Show(Me, "Please select a valid Hypno File!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                Return
+            End If
+
+            StrokeTauntVal = -1
+            ScriptTick = 1
+            ScriptTimer.Start()
+            Dim HypnoTrack As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\" & ComboBoxHypnoGenTrack.SelectedItem
+            If File.Exists(HypnoTrack) Then DomWMP.URL = HypnoTrack
+            HypnoGen = True
+            AFK = True
+            SaidHello = True
+
+            BTNHypnoGenStart.Text = "End Session"
+
+        Else
+
+            mciSendString("CLOSE Speech1", String.Empty, 0, 0)
+            mciSendString("CLOSE Echo1", String.Empty, 0, 0)
+            DomWMP.Ctlcontrols.stop()
+
+            ScriptTimer.Stop()
+            StrokeTauntVal = -1
+            HypnoGen = False
+            Induction = False
+            AFK = False
+            SaidHello = False
+
+            BTNHypnoGenStart.Text = "Guide Me!"
+
+        End If
+
+
+
+
+
+    End Sub
+
+    Private Sub HypnoticGuideToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HypnoticGuideToolStripMenuItem.Click
+
+        If PNLHypnoGen.Visible = False Then
+            CloseApp()
+            OpenApp()
+            PNLHypnoGen.Visible = True
+
+
+
+            LBHypnoGenInduction.Items.Clear()
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Inductions\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+
+                Dim TempUrl As String = foundFile
+                TempUrl = TempUrl.Replace(".txt", "")
+                Do Until Not TempUrl.Contains("\")
+                    TempUrl = TempUrl.Remove(0, 1)
+                Loop
+                LBHypnoGenInduction.Items.Add(TempUrl)
+
+            Next
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\", FileIO.SearchOption.SearchTopLevelOnly, "*.mp3")
+                Dim TempUrl As String = foundFile
+                Do Until Not TempUrl.Contains("\")
+                    TempUrl = TempUrl.Remove(0, 1)
+                Loop
+                ComboBoxHypnoGenTrack.Items.Add(TempUrl)
+            Next
+
+
+
+            LBHypnoGen.Items.Clear()
+
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\Hypno Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+
+                Dim TempUrl As String = foundFile
+                TempUrl = TempUrl.Replace(".txt", "")
+                Do Until Not TempUrl.Contains("\")
+                    TempUrl = TempUrl.Remove(0, 1)
+                Loop
+                LBHypnoGen.Items.Add(TempUrl)
+
+            Next
+
+
+
+        End If
+
+
+    End Sub
+
+    Private Sub CBHypnoGenSlideshow_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBHypnoGenSlideshow.CheckedChanged
+        If FormLoading = False Then
+            If CBHypnoGenSlideshow.Checked = True Then
+                LBHypnoGenSlideshow.Enabled = True
+            Else
+                LBHypnoGenSlideshow.Enabled = False
+            End If
+        End If
+    End Sub
+
+    Private Sub CBHypnoGenInduction_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBHypnoGenInduction.CheckedChanged
+        If FormLoading = False Then
+            If CBHypnoGenInduction.Checked = True Then
+                LBHypnoGenInduction.Enabled = True
+            Else
+                LBHypnoGenInduction.Enabled = False
+            End If
+        End If
+    End Sub
+
+    Private Sub CBHypnoGenNoText_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBHypnoGenNoText.CheckedChanged
+
+    End Sub
+
+    Private Sub VitalSubToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles VitalSubToolStripMenuItem.Click
+
+        If AppPanelVitalSub.Visible = False Then
+            CloseApp()
+            OpenApp()
+            AppPanelVitalSub.Visible = True
+
+            If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieList.txt") And ComboBoxCalorie.Items.Count = 0 Then
+                Debug.Print("called itttttttt")
+                Dim CalReader As New StreamReader(Application.StartupPath & "\System\VitalSub\CalorieList.txt")
+                Dim CalList As New List(Of String)
+                While CalReader.Peek <> -1
+                    CalList.Add(CalReader.ReadLine())
+                End While
+                CalReader.Close()
+                CalReader.Dispose()
+                For i As Integer = 0 To CalList.Count - 1
+                    ComboBoxCalorie.Items.Add(CalList(i))
+                Next
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub BTNExercise_Click(sender As System.Object, e As System.EventArgs) Handles BTNExercise.Click
+        If TBExercise.Text <> "" Then
+            CLBExercise.Items.Add(TBExercise.Text)
+            TBExercise.Text = ""
+            SaveExercise()
+        End If
+    End Sub
+
+    Private Sub BTNCalorie_Click(sender As System.Object, e As System.EventArgs) Handles BTNCalorie.Click
+        If TBCalorieItem.Text <> "" And TBCalorieAmount.Text <> "" Then
+            Dim CalorieString As String
+            CalorieString = TBCalorieItem.Text & " " & TBCalorieAmount.Text & " Calories"
+            Dim Dupecheck As Boolean = False
+            For i As Integer = 0 To ComboBoxCalorie.Items.Count - 1
+                If CalorieString = ComboBoxCalorie.Items(i) Then Dupecheck = True
+            Next
+            ComboBoxCalorie.Items.Add(CalorieString)
+            LBCalorie.Items.Add(CalorieString)
+
+            If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
+            For i As Integer = 0 To LBCalorie.Items.Count - 1
+                If Not File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\VitalSub\CalorieItems.txt", LBCalorie.Items(i), False)
+                Else
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\VitalSub\CalorieItems.txt", Environment.NewLine & LBCalorie.Items(i), True)
+                End If
+            Next
+
+            If Dupecheck = False Then
+                If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieList.txt") Then
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\VitalSub\CalorieList.txt", Environment.NewLine & CalorieString, True)
+                Else
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\VitalSub\CalorieList.txt", CalorieString, False)
+                End If
+            End If
+            Dupecheck = False
+            CaloriesConsumed += TBCalorieAmount.Text
+            LBLCalorie.Text = CaloriesConsumed
+            My.Settings.CaloriesConsumed = CaloriesConsumed
+            TBCalorieItem.Text = ""
+            TBCalorieAmount.Text = ""
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Private Sub ComboBoxCalorie_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ComboBoxCalorie.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub ComboBoxCalorie_SelectionChangeCommitted(sender As Object, e As System.EventArgs) Handles ComboBoxCalorie.SelectionChangeCommitted
+        If Not ComboBoxCalorie.SelectedItem Is Nothing Then
+            Dim CalorieString As String = ComboBoxCalorie.SelectedItem
+            LBCalorie.Items.Add(CalorieString)
+            CalorieString = CalorieString.Replace(" Calories", "")
+            Dim CalorieSplit As String() = Split(CalorieString)
+            Dim TempCal As Integer = Val(CalorieSplit(CalorieSplit.Count - 1))
+            CaloriesConsumed += TempCal
+            LBLCalorie.Text = CaloriesConsumed
+            My.Settings.CaloriesConsumed = CaloriesConsumed
+            My.Settings.Save()
+            If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
+            For i As Integer = 0 To LBCalorie.Items.Count - 1
+                If Not File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\VitalSub\CalorieItems.txt", LBCalorie.Items(i), False)
+                Else
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\VitalSub\CalorieItems.txt", Environment.NewLine & LBCalorie.Items(i), True)
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub CLBExercise_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CLBExercise.SelectedIndexChanged, CLBExercise.LostFocus
+        SaveExercise()
+    End Sub
+
+    Private Sub CBVitalSub_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVitalSub.CheckedChanged
+        If CBVitalSub.Checked = True Then
+            CBVitalSub.ForeColor = Color.LightGreen
+            CBVitalSub.Text = "VitalSub Active"
+        Else
+            CBVitalSub.ForeColor = Color.Red
+            CBVitalSub.Text = "VitalSub Inactive"
+        End If
+    End Sub
+
+    Private Sub CBVitalSub_LostFocus(sender As Object, e As System.EventArgs) Handles CBVitalSub.LostFocus
+        If CBVitalSub.Checked = True Then
+            My.Settings.VitalSub = True
+        Else
+            My.Settings.VitalSub = False
+        End If
+        My.Settings.Save()
+    End Sub
+
+    Private Sub LBCalorie_DoubleClick(sender As Object, e As System.EventArgs) Handles LBCalorie.DoubleClick
+
+
+        Dim CalorieString As String = LBCalorie.SelectedItem
+        CalorieString = CalorieString.Replace(" Calories", "")
+        Dim CalorieSplit As String() = Split(CalorieString)
+        Dim TempCal As Integer = Val(CalorieSplit(CalorieSplit.Count - 1))
+        CaloriesConsumed -= TempCal
+        LBLCalorie.Text = CaloriesConsumed
+        My.Settings.CaloriesConsumed = CaloriesConsumed
+        My.Settings.Save()
+        LBCalorie.Items.Remove(LBCalorie.SelectedItem)
+        If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
+        If LBCalorie.Items.Count > 0 Then
+            For i As Integer = 0 To LBCalorie.Items.Count - 1
+                If Not File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\VitalSub\CalorieItems.txt", LBCalorie.Items(i), False)
+                Else
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\System\VitalSub\CalorieItems.txt", Environment.NewLine & LBCalorie.Items(i), True)
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub BTNVitalSub_Click(sender As System.Object, e As System.EventArgs) Handles BTNVitalSub.Click
+        If SaidHello = True Then
+            MessageBox.Show(Me, "Please wait until you are not engaged with the domme to make VitalSub reports!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+
+        SaidHello = True
+        TeaseOver = False
+
+
+        Dim VitalSubFail As Boolean = False
+
+        If CLBExercise.Items.Count > 0 Then
+            For i As Integer = 0 To CLBExercise.Items.Count - 1
+                If CLBExercise.GetItemChecked(i) = False Then VitalSubFail = True
+            Next
+        End If
+
+        If Val(LBLCalorie.Text) > Val(TBCalorie.Text) Then VitalSubFail = True
+
+        Dim VitalSubState As String
+
+        If VitalSubFail = True Then
+            VitalSubState = "Punishments"
+        Else
+            VitalSubState = "Rewards"
+        End If
+        VitalSubFail = False
+
+
+
+
+        Dim VitalList As New List(Of String)
+
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\VitalSub\" & VitalSubState & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            VitalList.Add(foundFile)
+        Next
+
+        If VitalList.Count > 0 Then
+
+            For i As Integer = 0 To CLBExercise.Items.Count - 1
+                CLBExercise.SetItemChecked(i, False)
+            Next
+            SaveExercise()
+
+            LBCalorie.Items.Clear()
+            If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
+            LBLCalorie.Text = 0
+            CaloriesConsumed = 0
+            My.Settings.CaloriesConsumed = 0
+            My.Settings.Save()
+
+            FileText = VitalList(randomizer.Next(0, VitalList.Count))
+
+            If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And SlideshowLoaded = False Then
+                LoadDommeImageFolder()
+            End If
+
+            StrokeTauntVal = -1
+            ScriptTick = 3
+            ScriptTimer.Start()
+
+        Else
+
+            MessageBox.Show(Me, "No " & VitalSubState & " were found! Please make sure you have files in the VitaSub directory for this personality type!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Return
+        End If
+    End Sub
+
+    Private Sub CLBExercise_DragLeave(sender As Object, e As System.EventArgs) Handles CLBExercise.DragLeave
+
+        CLBExercise.Items.Remove(CLBExercise.SelectedItem)
+    End Sub
+
+    Private Sub CBVitalSubDomTask_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVitalSubDomTask.CheckedChanged
+        If FormLoading = False Then
+            My.Settings.VitalSubAssignments = CBVitalSubDomTask.Checked
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Public Sub MetronomeTick()
+
+        Do
+
+            If StrokePace <> 0 Then
+
+                My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\metronome.wav")
+
+                Thread.Sleep(StrokePace)
+
+            End If
+
+        Loop
+
+    End Sub
+
 End Class

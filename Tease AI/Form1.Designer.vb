@@ -191,6 +191,9 @@ Partial Class Form1
         Me.RandomizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PlaylistToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WritingTasksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.WishlistToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HypnoticGuideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.VitalSubToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GamesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SlotsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.MatchGameToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -214,6 +217,58 @@ Partial Class Form1
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LBLGeneralSettings = New System.Windows.Forms.Label()
         Me.PNLTabs = New System.Windows.Forms.Panel()
+        Me.AppPanelVitalSub = New System.Windows.Forms.Panel()
+        Me.GBGoals = New System.Windows.Forms.GroupBox()
+        Me.BTNExercise = New System.Windows.Forms.Button()
+        Me.TBExercise = New System.Windows.Forms.TextBox()
+        Me.CLBExercise = New System.Windows.Forms.CheckedListBox()
+        Me.CBVitalSubDomTask = New System.Windows.Forms.CheckBox()
+        Me.BTNVitalSub = New System.Windows.Forms.Button()
+        Me.GBCalories = New System.Windows.Forms.GroupBox()
+        Me.TBCalorieAmount = New System.Windows.Forms.TextBox()
+        Me.TBCalorieItem = New System.Windows.Forms.TextBox()
+        Me.BTNCalorie = New System.Windows.Forms.Button()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.LBCalorie = New System.Windows.Forms.ListBox()
+        Me.ComboBoxCalorie = New System.Windows.Forms.ComboBox()
+        Me.TBCalorie = New System.Windows.Forms.TextBox()
+        Me.LBLGoal = New System.Windows.Forms.Label()
+        Me.LBLCalorie = New System.Windows.Forms.Label()
+        Me.LBLConsumed = New System.Windows.Forms.Label()
+        Me.CBVitalSub = New System.Windows.Forms.CheckBox()
+        Me.PNLHypnoGen = New System.Windows.Forms.Panel()
+        Me.ComboBoxHypnoGenTrack = New System.Windows.Forms.ComboBox()
+        Me.LBLBackTrack = New System.Windows.Forms.Label()
+        Me.CBHypnoGenNoText = New System.Windows.Forms.CheckBox()
+        Me.TBHypnoGenImageTag = New System.Windows.Forms.TextBox()
+        Me.LBLHypnoImageTag = New System.Windows.Forms.Label()
+        Me.LBHypnoGenSlideshow = New System.Windows.Forms.ListBox()
+        Me.CBHypnoGenSlideshow = New System.Windows.Forms.CheckBox()
+        Me.LBHypnoGen = New System.Windows.Forms.ListBox()
+        Me.LBLHypnoFile = New System.Windows.Forms.Label()
+        Me.LBHypnoGenInduction = New System.Windows.Forms.ListBox()
+        Me.CBHypnoGenInduction = New System.Windows.Forms.CheckBox()
+        Me.CBHypnoGenPhase = New System.Windows.Forms.CheckBox()
+        Me.BTNHypnoGenStart = New System.Windows.Forms.Button()
+        Me.PNLWishList = New System.Windows.Forms.Panel()
+        Me.WishlistCostSilver = New System.Windows.Forms.PictureBox()
+        Me.LBLWishlistDate = New System.Windows.Forms.Label()
+        Me.BTNWishlist = New System.Windows.Forms.Button()
+        Me.LBLWishListText = New System.Windows.Forms.Label()
+        Me.LBLWishlistCost = New System.Windows.Forms.Label()
+        Me.WishlistCostGold = New System.Windows.Forms.PictureBox()
+        Me.PNLWishlistTokenBack = New System.Windows.Forms.Panel()
+        Me.LBLWishlistSilver = New System.Windows.Forms.Label()
+        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
+        Me.LBLWishlistBronze = New System.Windows.Forms.Label()
+        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
+        Me.LBLWishlistGold = New System.Windows.Forms.Label()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.LBLWishListName = New System.Windows.Forms.Label()
+        Me.PNLWishlistHeader = New System.Windows.Forms.Panel()
+        Me.LBLWishlistDom = New System.Windows.Forms.Label()
+        Me.WishlistPreview = New System.Windows.Forms.PictureBox()
         Me.PNLWritingTask = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label76 = New System.Windows.Forms.Label()
@@ -267,25 +322,6 @@ Partial Class Form1
         Me.PNLAvatar = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.PNLWishList = New System.Windows.Forms.Panel()
-        Me.WishlistCostSilver = New System.Windows.Forms.PictureBox()
-        Me.LBLWishlistDate = New System.Windows.Forms.Label()
-        Me.BTNWishlist = New System.Windows.Forms.Button()
-        Me.LBLWishListText = New System.Windows.Forms.Label()
-        Me.LBLWishlistCost = New System.Windows.Forms.Label()
-        Me.WishlistCostGold = New System.Windows.Forms.PictureBox()
-        Me.PNLWishlistTokenBack = New System.Windows.Forms.Panel()
-        Me.LBLWishlistSilver = New System.Windows.Forms.Label()
-        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
-        Me.LBLWishlistBronze = New System.Windows.Forms.Label()
-        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
-        Me.LBLWishlistGold = New System.Windows.Forms.Label()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.LBLWishListName = New System.Windows.Forms.Label()
-        Me.PNLWishlistHeader = New System.Windows.Forms.Panel()
-        Me.LBLWishlistDom = New System.Windows.Forms.Label()
-        Me.WishlistPreview = New System.Windows.Forms.PictureBox()
-        Me.WishlistToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -304,13 +340,10 @@ Partial Class Form1
         Me.MenuStrip2.SuspendLayout()
         Me.PNLDate.SuspendLayout()
         Me.PNLTabs.SuspendLayout()
-        Me.PNLWritingTask.SuspendLayout()
-        Me.PNLPlaylist.SuspendLayout()
-        Me.PNLAppRandomizer.SuspendLayout()
-        Me.PNLLazySub.SuspendLayout()
-        Me.PNLAvatar.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        Me.Panel4.SuspendLayout()
+        Me.AppPanelVitalSub.SuspendLayout()
+        Me.GBGoals.SuspendLayout()
+        Me.GBCalories.SuspendLayout()
+        Me.PNLHypnoGen.SuspendLayout()
         Me.PNLWishList.SuspendLayout()
         CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -320,6 +353,13 @@ Partial Class Form1
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNLWishlistHeader.SuspendLayout()
         CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.PNLWritingTask.SuspendLayout()
+        Me.PNLPlaylist.SuspendLayout()
+        Me.PNLAppRandomizer.SuspendLayout()
+        Me.PNLLazySub.SuspendLayout()
+        Me.PNLAvatar.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'domName
@@ -1583,90 +1623,90 @@ Partial Class Form1
         'GeneralToolStripMenuItem
         '
         Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
-        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GeneralToolStripMenuItem.Text = "General"
         '
         'DommeToolStripMenuItem
         '
         Me.DommeToolStripMenuItem.Name = "DommeToolStripMenuItem"
-        Me.DommeToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.DommeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.DommeToolStripMenuItem.Text = "Domme"
         '
         'SubToolStripMenuItem
         '
         Me.SubToolStripMenuItem.Name = "SubToolStripMenuItem"
-        Me.SubToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.SubToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SubToolStripMenuItem.Text = "Sub"
         '
         'ScriptsToolStripMenuItem
         '
         Me.ScriptsToolStripMenuItem.Name = "ScriptsToolStripMenuItem"
-        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ScriptsToolStripMenuItem.Text = "Scripts"
         '
         'ImagesToolStripMenuItem
         '
         Me.ImagesToolStripMenuItem.Name = "ImagesToolStripMenuItem"
-        Me.ImagesToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ImagesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ImagesToolStripMenuItem.Text = "Images"
         '
         'DommeTagsToolStripMenuItem
         '
         Me.DommeTagsToolStripMenuItem.Name = "DommeTagsToolStripMenuItem"
-        Me.DommeTagsToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.DommeTagsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.DommeTagsToolStripMenuItem.Text = "Domme Tags"
         '
         'LocalTagsToolStripMenuItem
         '
         Me.LocalTagsToolStripMenuItem.Name = "LocalTagsToolStripMenuItem"
-        Me.LocalTagsToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.LocalTagsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.LocalTagsToolStripMenuItem.Text = "Local Tags"
         '
         'URLFilesToolStripMenuItem
         '
         Me.URLFilesToolStripMenuItem.Name = "URLFilesToolStripMenuItem"
-        Me.URLFilesToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.URLFilesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.URLFilesToolStripMenuItem.Text = "URL Files"
         '
         'VideoToolStripMenuItem
         '
         Me.VideoToolStripMenuItem.Name = "VideoToolStripMenuItem"
-        Me.VideoToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.VideoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.VideoToolStripMenuItem.Text = "Video"
         '
         'AppsToolStripMenuItem1
         '
         Me.AppsToolStripMenuItem1.Name = "AppsToolStripMenuItem1"
-        Me.AppsToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
+        Me.AppsToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.AppsToolStripMenuItem1.Text = "Apps"
         '
         'ThemeToolStripMenuItem
         '
         Me.ThemeToolStripMenuItem.Name = "ThemeToolStripMenuItem"
-        Me.ThemeToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ThemeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ThemeToolStripMenuItem.Text = "Theme"
         '
         'RangesToolStripMenuItem
         '
         Me.RangesToolStripMenuItem.Name = "RangesToolStripMenuItem"
-        Me.RangesToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.RangesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.RangesToolStripMenuItem.Text = "Ranges"
         '
         'ModdingToolStripMenuItem
         '
         Me.ModdingToolStripMenuItem.Name = "ModdingToolStripMenuItem"
-        Me.ModdingToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ModdingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ModdingToolStripMenuItem.Text = "Modding"
         '
         'MiscToolStripMenuItem
         '
         Me.MiscToolStripMenuItem.Name = "MiscToolStripMenuItem"
-        Me.MiscToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.MiscToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MiscToolStripMenuItem.Text = "Misc"
         '
         'AppsToolStripMenuItem
         '
-        Me.AppsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseAppPanelToolStripMenuItem, Me.SwitchSidesToolStripMenuItem, Me.ToolStripSeparator4, Me.GlitterToolStripMenuItem, Me.DommeTagsToolStripMenuItem2, Me.LazySubToolStripMenuItem, Me.RandomizerToolStripMenuItem, Me.PlaylistToolStripMenuItem, Me.WritingTasksToolStripMenuItem, Me.WishlistToolStripMenuItem})
+        Me.AppsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseAppPanelToolStripMenuItem, Me.SwitchSidesToolStripMenuItem, Me.ToolStripSeparator4, Me.GlitterToolStripMenuItem, Me.DommeTagsToolStripMenuItem2, Me.LazySubToolStripMenuItem, Me.RandomizerToolStripMenuItem, Me.PlaylistToolStripMenuItem, Me.WritingTasksToolStripMenuItem, Me.WishlistToolStripMenuItem, Me.HypnoticGuideToolStripMenuItem, Me.VitalSubToolStripMenuItem})
         Me.AppsToolStripMenuItem.Name = "AppsToolStripMenuItem"
         Me.AppsToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
         Me.AppsToolStripMenuItem.Text = "Apps"
@@ -1674,55 +1714,73 @@ Partial Class Form1
         'CloseAppPanelToolStripMenuItem
         '
         Me.CloseAppPanelToolStripMenuItem.Name = "CloseAppPanelToolStripMenuItem"
-        Me.CloseAppPanelToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CloseAppPanelToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.CloseAppPanelToolStripMenuItem.Text = "Close Apps"
         '
         'SwitchSidesToolStripMenuItem
         '
         Me.SwitchSidesToolStripMenuItem.Name = "SwitchSidesToolStripMenuItem"
-        Me.SwitchSidesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SwitchSidesToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.SwitchSidesToolStripMenuItem.Text = "Switch Sides"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(154, 6)
         '
         'GlitterToolStripMenuItem
         '
         Me.GlitterToolStripMenuItem.Name = "GlitterToolStripMenuItem"
-        Me.GlitterToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GlitterToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.GlitterToolStripMenuItem.Text = "Glitter"
         '
         'DommeTagsToolStripMenuItem2
         '
         Me.DommeTagsToolStripMenuItem2.Name = "DommeTagsToolStripMenuItem2"
-        Me.DommeTagsToolStripMenuItem2.Size = New System.Drawing.Size(152, 22)
+        Me.DommeTagsToolStripMenuItem2.Size = New System.Drawing.Size(157, 22)
         Me.DommeTagsToolStripMenuItem2.Text = "Domme Tags"
         '
         'LazySubToolStripMenuItem
         '
         Me.LazySubToolStripMenuItem.Name = "LazySubToolStripMenuItem"
-        Me.LazySubToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LazySubToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.LazySubToolStripMenuItem.Text = "Lazy Sub"
         '
         'RandomizerToolStripMenuItem
         '
         Me.RandomizerToolStripMenuItem.Name = "RandomizerToolStripMenuItem"
-        Me.RandomizerToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.RandomizerToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.RandomizerToolStripMenuItem.Text = "Randomizer"
         '
         'PlaylistToolStripMenuItem
         '
         Me.PlaylistToolStripMenuItem.Name = "PlaylistToolStripMenuItem"
-        Me.PlaylistToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PlaylistToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.PlaylistToolStripMenuItem.Text = "Playlist"
         '
         'WritingTasksToolStripMenuItem
         '
         Me.WritingTasksToolStripMenuItem.Name = "WritingTasksToolStripMenuItem"
-        Me.WritingTasksToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.WritingTasksToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
         Me.WritingTasksToolStripMenuItem.Text = "Writing Tasks"
+        '
+        'WishlistToolStripMenuItem
+        '
+        Me.WishlistToolStripMenuItem.Name = "WishlistToolStripMenuItem"
+        Me.WishlistToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.WishlistToolStripMenuItem.Text = "Wishlist"
+        '
+        'HypnoticGuideToolStripMenuItem
+        '
+        Me.HypnoticGuideToolStripMenuItem.Name = "HypnoticGuideToolStripMenuItem"
+        Me.HypnoticGuideToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.HypnoticGuideToolStripMenuItem.Text = "Hypnotic Guide"
+        '
+        'VitalSubToolStripMenuItem
+        '
+        Me.VitalSubToolStripMenuItem.Name = "VitalSubToolStripMenuItem"
+        Me.VitalSubToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.VitalSubToolStripMenuItem.Text = "VitalSub"
         '
         'GamesToolStripMenuItem1
         '
@@ -1871,6 +1929,8 @@ Partial Class Form1
         '
         Me.PNLTabs.BackColor = System.Drawing.Color.Black
         Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLTabs.Controls.Add(Me.AppPanelVitalSub)
+        Me.PNLTabs.Controls.Add(Me.PNLHypnoGen)
         Me.PNLTabs.Controls.Add(Me.PNLWishList)
         Me.PNLTabs.Controls.Add(Me.PNLWritingTask)
         Me.PNLTabs.Controls.Add(Me.PNLPlaylist)
@@ -1882,6 +1942,584 @@ Partial Class Form1
         Me.PNLTabs.Name = "PNLTabs"
         Me.PNLTabs.Size = New System.Drawing.Size(253, 646)
         Me.PNLTabs.TabIndex = 778
+        '
+        'AppPanelVitalSub
+        '
+        Me.AppPanelVitalSub.BackColor = System.Drawing.Color.Black
+        Me.AppPanelVitalSub.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.AppPanelVitalSub.Controls.Add(Me.GBGoals)
+        Me.AppPanelVitalSub.Controls.Add(Me.CBVitalSubDomTask)
+        Me.AppPanelVitalSub.Controls.Add(Me.BTNVitalSub)
+        Me.AppPanelVitalSub.Controls.Add(Me.GBCalories)
+        Me.AppPanelVitalSub.Controls.Add(Me.CBVitalSub)
+        Me.AppPanelVitalSub.Location = New System.Drawing.Point(2, 2)
+        Me.AppPanelVitalSub.Name = "AppPanelVitalSub"
+        Me.AppPanelVitalSub.Size = New System.Drawing.Size(245, 422)
+        Me.AppPanelVitalSub.TabIndex = 777
+        Me.AppPanelVitalSub.Visible = False
+        '
+        'GBGoals
+        '
+        Me.GBGoals.Controls.Add(Me.BTNExercise)
+        Me.GBGoals.Controls.Add(Me.TBExercise)
+        Me.GBGoals.Controls.Add(Me.CLBExercise)
+        Me.GBGoals.ForeColor = System.Drawing.Color.White
+        Me.GBGoals.Location = New System.Drawing.Point(7, 21)
+        Me.GBGoals.Name = "GBGoals"
+        Me.GBGoals.Size = New System.Drawing.Size(227, 146)
+        Me.GBGoals.TabIndex = 3
+        Me.GBGoals.TabStop = False
+        Me.GBGoals.Text = "Exercise && Motivational Goals"
+        '
+        'BTNExercise
+        '
+        Me.BTNExercise.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNExercise.ForeColor = System.Drawing.Color.White
+        Me.BTNExercise.Location = New System.Drawing.Point(174, 17)
+        Me.BTNExercise.Name = "BTNExercise"
+        Me.BTNExercise.Size = New System.Drawing.Size(46, 24)
+        Me.BTNExercise.TabIndex = 2
+        Me.BTNExercise.Text = "Add"
+        Me.BTNExercise.UseVisualStyleBackColor = True
+        '
+        'TBExercise
+        '
+        Me.TBExercise.Location = New System.Drawing.Point(7, 19)
+        Me.TBExercise.Name = "TBExercise"
+        Me.TBExercise.Size = New System.Drawing.Size(162, 20)
+        Me.TBExercise.TabIndex = 1
+        '
+        'CLBExercise
+        '
+        Me.CLBExercise.CheckOnClick = True
+        Me.CLBExercise.FormattingEnabled = True
+        Me.CLBExercise.Location = New System.Drawing.Point(7, 46)
+        Me.CLBExercise.Name = "CLBExercise"
+        Me.CLBExercise.Size = New System.Drawing.Size(213, 94)
+        Me.CLBExercise.TabIndex = 0
+        '
+        'CBVitalSubDomTask
+        '
+        Me.CBVitalSubDomTask.ForeColor = System.Drawing.Color.White
+        Me.CBVitalSubDomTask.Location = New System.Drawing.Point(114, 0)
+        Me.CBVitalSubDomTask.Name = "CBVitalSubDomTask"
+        Me.CBVitalSubDomTask.Size = New System.Drawing.Size(126, 24)
+        Me.CBVitalSubDomTask.TabIndex = 6
+        Me.CBVitalSubDomTask.Text = "Domme Assignments"
+        Me.CBVitalSubDomTask.UseVisualStyleBackColor = True
+        '
+        'BTNVitalSub
+        '
+        Me.BTNVitalSub.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNVitalSub.ForeColor = System.Drawing.Color.White
+        Me.BTNVitalSub.Location = New System.Drawing.Point(7, 383)
+        Me.BTNVitalSub.Name = "BTNVitalSub"
+        Me.BTNVitalSub.Size = New System.Drawing.Size(227, 29)
+        Me.BTNVitalSub.TabIndex = 5
+        Me.BTNVitalSub.Text = "Report End-of-Day Result to Domme"
+        Me.BTNVitalSub.UseVisualStyleBackColor = True
+        '
+        'GBCalories
+        '
+        Me.GBCalories.Controls.Add(Me.TBCalorieAmount)
+        Me.GBCalories.Controls.Add(Me.TBCalorieItem)
+        Me.GBCalories.Controls.Add(Me.BTNCalorie)
+        Me.GBCalories.Controls.Add(Me.Label14)
+        Me.GBCalories.Controls.Add(Me.Label12)
+        Me.GBCalories.Controls.Add(Me.LBCalorie)
+        Me.GBCalories.Controls.Add(Me.ComboBoxCalorie)
+        Me.GBCalories.Controls.Add(Me.TBCalorie)
+        Me.GBCalories.Controls.Add(Me.LBLGoal)
+        Me.GBCalories.Controls.Add(Me.LBLCalorie)
+        Me.GBCalories.Controls.Add(Me.LBLConsumed)
+        Me.GBCalories.ForeColor = System.Drawing.Color.White
+        Me.GBCalories.Location = New System.Drawing.Point(7, 168)
+        Me.GBCalories.Name = "GBCalories"
+        Me.GBCalories.Size = New System.Drawing.Size(227, 210)
+        Me.GBCalories.TabIndex = 4
+        Me.GBCalories.TabStop = False
+        Me.GBCalories.Text = "Calorie Goals"
+        '
+        'TBCalorieAmount
+        '
+        Me.TBCalorieAmount.Location = New System.Drawing.Point(115, 28)
+        Me.TBCalorieAmount.Name = "TBCalorieAmount"
+        Me.TBCalorieAmount.Size = New System.Drawing.Size(54, 20)
+        Me.TBCalorieAmount.TabIndex = 10
+        '
+        'TBCalorieItem
+        '
+        Me.TBCalorieItem.Location = New System.Drawing.Point(8, 28)
+        Me.TBCalorieItem.Name = "TBCalorieItem"
+        Me.TBCalorieItem.Size = New System.Drawing.Size(100, 20)
+        Me.TBCalorieItem.TabIndex = 9
+        '
+        'BTNCalorie
+        '
+        Me.BTNCalorie.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNCalorie.ForeColor = System.Drawing.Color.White
+        Me.BTNCalorie.Location = New System.Drawing.Point(174, 26)
+        Me.BTNCalorie.Name = "BTNCalorie"
+        Me.BTNCalorie.Size = New System.Drawing.Size(46, 24)
+        Me.BTNCalorie.TabIndex = 8
+        Me.BTNCalorie.Text = "Add"
+        Me.BTNCalorie.UseVisualStyleBackColor = True
+        '
+        'Label14
+        '
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.Location = New System.Drawing.Point(111, 11)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(57, 14)
+        Me.Label14.TabIndex = 7
+        Me.Label14.Text = "Calories"
+        Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label12
+        '
+        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label12.Location = New System.Drawing.Point(6, 11)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(34, 14)
+        Me.Label12.TabIndex = 6
+        Me.Label12.Text = "Item"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBCalorie
+        '
+        Me.LBCalorie.FormattingEnabled = True
+        Me.LBCalorie.Location = New System.Drawing.Point(7, 80)
+        Me.LBCalorie.Name = "LBCalorie"
+        Me.LBCalorie.Size = New System.Drawing.Size(213, 82)
+        Me.LBCalorie.TabIndex = 5
+        '
+        'ComboBoxCalorie
+        '
+        Me.ComboBoxCalorie.FormattingEnabled = True
+        Me.ComboBoxCalorie.Location = New System.Drawing.Point(7, 54)
+        Me.ComboBoxCalorie.Name = "ComboBoxCalorie"
+        Me.ComboBoxCalorie.Size = New System.Drawing.Size(213, 21)
+        Me.ComboBoxCalorie.Sorted = True
+        Me.ComboBoxCalorie.TabIndex = 4
+        '
+        'TBCalorie
+        '
+        Me.TBCalorie.BackColor = System.Drawing.Color.Black
+        Me.TBCalorie.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TBCalorie.ForeColor = System.Drawing.Color.White
+        Me.TBCalorie.Location = New System.Drawing.Point(132, 180)
+        Me.TBCalorie.Name = "TBCalorie"
+        Me.TBCalorie.Size = New System.Drawing.Size(74, 23)
+        Me.TBCalorie.TabIndex = 3
+        Me.TBCalorie.Text = "2000"
+        Me.TBCalorie.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'LBLGoal
+        '
+        Me.LBLGoal.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLGoal.Location = New System.Drawing.Point(131, 161)
+        Me.LBLGoal.Name = "LBLGoal"
+        Me.LBLGoal.Size = New System.Drawing.Size(74, 18)
+        Me.LBLGoal.TabIndex = 2
+        Me.LBLGoal.Text = "Goal"
+        Me.LBLGoal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLCalorie
+        '
+        Me.LBLCalorie.BackColor = System.Drawing.Color.Transparent
+        Me.LBLCalorie.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.LBLCalorie.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLCalorie.Location = New System.Drawing.Point(23, 180)
+        Me.LBLCalorie.Name = "LBLCalorie"
+        Me.LBLCalorie.Size = New System.Drawing.Size(74, 23)
+        Me.LBLCalorie.TabIndex = 1
+        Me.LBLCalorie.Text = "0"
+        Me.LBLCalorie.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'LBLConsumed
+        '
+        Me.LBLConsumed.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLConsumed.Location = New System.Drawing.Point(23, 161)
+        Me.LBLConsumed.Name = "LBLConsumed"
+        Me.LBLConsumed.Size = New System.Drawing.Size(74, 18)
+        Me.LBLConsumed.TabIndex = 0
+        Me.LBLConsumed.Text = "Consumed"
+        Me.LBLConsumed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'CBVitalSub
+        '
+        Me.CBVitalSub.ForeColor = System.Drawing.Color.Red
+        Me.CBVitalSub.Location = New System.Drawing.Point(7, 0)
+        Me.CBVitalSub.Name = "CBVitalSub"
+        Me.CBVitalSub.Size = New System.Drawing.Size(107, 24)
+        Me.CBVitalSub.TabIndex = 2
+        Me.CBVitalSub.Text = "VitalSub Inactive"
+        Me.CBVitalSub.UseVisualStyleBackColor = True
+        '
+        'PNLHypnoGen
+        '
+        Me.PNLHypnoGen.BackColor = System.Drawing.Color.White
+        Me.PNLHypnoGen.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLHypnoGen.Controls.Add(Me.ComboBoxHypnoGenTrack)
+        Me.PNLHypnoGen.Controls.Add(Me.LBLBackTrack)
+        Me.PNLHypnoGen.Controls.Add(Me.CBHypnoGenNoText)
+        Me.PNLHypnoGen.Controls.Add(Me.TBHypnoGenImageTag)
+        Me.PNLHypnoGen.Controls.Add(Me.LBLHypnoImageTag)
+        Me.PNLHypnoGen.Controls.Add(Me.LBHypnoGenSlideshow)
+        Me.PNLHypnoGen.Controls.Add(Me.CBHypnoGenSlideshow)
+        Me.PNLHypnoGen.Controls.Add(Me.LBHypnoGen)
+        Me.PNLHypnoGen.Controls.Add(Me.LBLHypnoFile)
+        Me.PNLHypnoGen.Controls.Add(Me.LBHypnoGenInduction)
+        Me.PNLHypnoGen.Controls.Add(Me.CBHypnoGenInduction)
+        Me.PNLHypnoGen.Controls.Add(Me.CBHypnoGenPhase)
+        Me.PNLHypnoGen.Controls.Add(Me.BTNHypnoGenStart)
+        Me.PNLHypnoGen.Location = New System.Drawing.Point(2, 2)
+        Me.PNLHypnoGen.Name = "PNLHypnoGen"
+        Me.PNLHypnoGen.Size = New System.Drawing.Size(245, 418)
+        Me.PNLHypnoGen.TabIndex = 776
+        Me.PNLHypnoGen.Visible = False
+        '
+        'ComboBoxHypnoGenTrack
+        '
+        Me.ComboBoxHypnoGenTrack.FormattingEnabled = True
+        Me.ComboBoxHypnoGenTrack.Items.AddRange(New Object() {"Silence"})
+        Me.ComboBoxHypnoGenTrack.Location = New System.Drawing.Point(16, 311)
+        Me.ComboBoxHypnoGenTrack.Name = "ComboBoxHypnoGenTrack"
+        Me.ComboBoxHypnoGenTrack.Size = New System.Drawing.Size(210, 21)
+        Me.ComboBoxHypnoGenTrack.TabIndex = 111
+        Me.ComboBoxHypnoGenTrack.Text = "Silence"
+        '
+        'LBLBackTrack
+        '
+        Me.LBLBackTrack.AutoSize = True
+        Me.LBLBackTrack.BackColor = System.Drawing.Color.Transparent
+        Me.LBLBackTrack.Location = New System.Drawing.Point(15, 293)
+        Me.LBLBackTrack.Name = "LBLBackTrack"
+        Me.LBLBackTrack.Size = New System.Drawing.Size(129, 13)
+        Me.LBLBackTrack.TabIndex = 110
+        Me.LBLBackTrack.Text = "Select Background Track"
+        '
+        'CBHypnoGenNoText
+        '
+        Me.CBHypnoGenNoText.AutoSize = True
+        Me.CBHypnoGenNoText.BackColor = System.Drawing.Color.Transparent
+        Me.CBHypnoGenNoText.Checked = True
+        Me.CBHypnoGenNoText.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBHypnoGenNoText.Location = New System.Drawing.Point(16, 338)
+        Me.CBHypnoGenNoText.Name = "CBHypnoGenNoText"
+        Me.CBHypnoGenNoText.Size = New System.Drawing.Size(202, 17)
+        Me.CBHypnoGenNoText.TabIndex = 109
+        Me.CBHypnoGenNoText.Text = "Disable Domme Text in Chat Window"
+        Me.CBHypnoGenNoText.UseVisualStyleBackColor = False
+        '
+        'TBHypnoGenImageTag
+        '
+        Me.TBHypnoGenImageTag.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TBHypnoGenImageTag.Location = New System.Drawing.Point(83, 266)
+        Me.TBHypnoGenImageTag.Name = "TBHypnoGenImageTag"
+        Me.TBHypnoGenImageTag.Size = New System.Drawing.Size(143, 20)
+        Me.TBHypnoGenImageTag.TabIndex = 108
+        '
+        'LBLHypnoImageTag
+        '
+        Me.LBLHypnoImageTag.AutoSize = True
+        Me.LBLHypnoImageTag.BackColor = System.Drawing.Color.Transparent
+        Me.LBLHypnoImageTag.Location = New System.Drawing.Point(15, 270)
+        Me.LBLHypnoImageTag.Name = "LBLHypnoImageTag"
+        Me.LBLHypnoImageTag.Size = New System.Drawing.Size(61, 13)
+        Me.LBLHypnoImageTag.TabIndex = 107
+        Me.LBLHypnoImageTag.Text = "Image Tag:"
+        '
+        'LBHypnoGenSlideshow
+        '
+        Me.LBHypnoGenSlideshow.Enabled = False
+        Me.LBHypnoGenSlideshow.FormattingEnabled = True
+        Me.LBHypnoGenSlideshow.Items.AddRange(New Object() {"Boobs", "Butts", "Hardcore", "Softcore", "Lesbian", "Blowjob", "Femdom", "Hentai", "Gay", "Maledom", "Captions", "General", "Tagged"})
+        Me.LBHypnoGenSlideshow.Location = New System.Drawing.Point(16, 206)
+        Me.LBHypnoGenSlideshow.Name = "LBHypnoGenSlideshow"
+        Me.LBHypnoGenSlideshow.Size = New System.Drawing.Size(210, 56)
+        Me.LBHypnoGenSlideshow.TabIndex = 106
+        '
+        'CBHypnoGenSlideshow
+        '
+        Me.CBHypnoGenSlideshow.AutoSize = True
+        Me.CBHypnoGenSlideshow.BackColor = System.Drawing.Color.Transparent
+        Me.CBHypnoGenSlideshow.Location = New System.Drawing.Point(16, 187)
+        Me.CBHypnoGenSlideshow.Name = "CBHypnoGenSlideshow"
+        Me.CBHypnoGenSlideshow.Size = New System.Drawing.Size(97, 17)
+        Me.CBHypnoGenSlideshow.TabIndex = 105
+        Me.CBHypnoGenSlideshow.Text = "Play Slideshow"
+        Me.CBHypnoGenSlideshow.UseVisualStyleBackColor = False
+        '
+        'LBHypnoGen
+        '
+        Me.LBHypnoGen.FormattingEnabled = True
+        Me.LBHypnoGen.Location = New System.Drawing.Point(16, 100)
+        Me.LBHypnoGen.Name = "LBHypnoGen"
+        Me.LBHypnoGen.Size = New System.Drawing.Size(210, 82)
+        Me.LBHypnoGen.TabIndex = 104
+        '
+        'LBLHypnoFile
+        '
+        Me.LBLHypnoFile.AutoSize = True
+        Me.LBLHypnoFile.BackColor = System.Drawing.Color.Transparent
+        Me.LBLHypnoFile.Location = New System.Drawing.Point(13, 83)
+        Me.LBLHypnoFile.Name = "LBLHypnoFile"
+        Me.LBLHypnoFile.Size = New System.Drawing.Size(90, 13)
+        Me.LBLHypnoFile.TabIndex = 103
+        Me.LBLHypnoFile.Text = "Select Hypno File"
+        '
+        'LBHypnoGenInduction
+        '
+        Me.LBHypnoGenInduction.Enabled = False
+        Me.LBHypnoGenInduction.FormattingEnabled = True
+        Me.LBHypnoGenInduction.Location = New System.Drawing.Point(16, 22)
+        Me.LBHypnoGenInduction.Name = "LBHypnoGenInduction"
+        Me.LBHypnoGenInduction.Size = New System.Drawing.Size(210, 56)
+        Me.LBHypnoGenInduction.TabIndex = 102
+        '
+        'CBHypnoGenInduction
+        '
+        Me.CBHypnoGenInduction.AutoSize = True
+        Me.CBHypnoGenInduction.BackColor = System.Drawing.Color.Transparent
+        Me.CBHypnoGenInduction.Location = New System.Drawing.Point(16, 4)
+        Me.CBHypnoGenInduction.Name = "CBHypnoGenInduction"
+        Me.CBHypnoGenInduction.Size = New System.Drawing.Size(92, 17)
+        Me.CBHypnoGenInduction.TabIndex = 101
+        Me.CBHypnoGenInduction.Text = "Use Induction"
+        Me.CBHypnoGenInduction.UseVisualStyleBackColor = False
+        '
+        'CBHypnoGenPhase
+        '
+        Me.CBHypnoGenPhase.AutoSize = True
+        Me.CBHypnoGenPhase.BackColor = System.Drawing.Color.Transparent
+        Me.CBHypnoGenPhase.Checked = True
+        Me.CBHypnoGenPhase.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBHypnoGenPhase.Location = New System.Drawing.Point(16, 360)
+        Me.CBHypnoGenPhase.Name = "CBHypnoGenPhase"
+        Me.CBHypnoGenPhase.Size = New System.Drawing.Size(197, 17)
+        Me.CBHypnoGenPhase.TabIndex = 100
+        Me.CBHypnoGenPhase.Text = "Apply Phase Effect to Domme Voice"
+        Me.CBHypnoGenPhase.UseVisualStyleBackColor = False
+        '
+        'BTNHypnoGenStart
+        '
+        Me.BTNHypnoGenStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNHypnoGenStart.Location = New System.Drawing.Point(16, 383)
+        Me.BTNHypnoGenStart.Name = "BTNHypnoGenStart"
+        Me.BTNHypnoGenStart.Size = New System.Drawing.Size(210, 23)
+        Me.BTNHypnoGenStart.TabIndex = 0
+        Me.BTNHypnoGenStart.Text = "Guide Me!"
+        Me.BTNHypnoGenStart.UseVisualStyleBackColor = True
+        '
+        'PNLWishList
+        '
+        Me.PNLWishList.BackColor = System.Drawing.Color.White
+        Me.PNLWishList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PNLWishList.Controls.Add(Me.WishlistCostSilver)
+        Me.PNLWishList.Controls.Add(Me.LBLWishlistDate)
+        Me.PNLWishList.Controls.Add(Me.BTNWishlist)
+        Me.PNLWishList.Controls.Add(Me.LBLWishListText)
+        Me.PNLWishList.Controls.Add(Me.LBLWishlistCost)
+        Me.PNLWishList.Controls.Add(Me.WishlistCostGold)
+        Me.PNLWishList.Controls.Add(Me.PNLWishlistTokenBack)
+        Me.PNLWishList.Controls.Add(Me.LBLWishListName)
+        Me.PNLWishList.Controls.Add(Me.PNLWishlistHeader)
+        Me.PNLWishList.Controls.Add(Me.WishlistPreview)
+        Me.PNLWishList.Location = New System.Drawing.Point(2, 2)
+        Me.PNLWishList.Name = "PNLWishList"
+        Me.PNLWishList.Size = New System.Drawing.Size(245, 485)
+        Me.PNLWishList.TabIndex = 775
+        Me.PNLWishList.Visible = False
+        '
+        'WishlistCostSilver
+        '
+        Me.WishlistCostSilver.BackColor = System.Drawing.Color.Transparent
+        Me.WishlistCostSilver.Image = CType(resources.GetObject("WishlistCostSilver.Image"), System.Drawing.Image)
+        Me.WishlistCostSilver.Location = New System.Drawing.Point(107, 251)
+        Me.WishlistCostSilver.Name = "WishlistCostSilver"
+        Me.WishlistCostSilver.Size = New System.Drawing.Size(28, 28)
+        Me.WishlistCostSilver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.WishlistCostSilver.TabIndex = 111
+        Me.WishlistCostSilver.TabStop = False
+        Me.WishlistCostSilver.Visible = False
+        '
+        'LBLWishlistDate
+        '
+        Me.LBLWishlistDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLWishlistDate.ForeColor = System.Drawing.Color.Black
+        Me.LBLWishlistDate.Location = New System.Drawing.Point(14, 42)
+        Me.LBLWishlistDate.Name = "LBLWishlistDate"
+        Me.LBLWishlistDate.Size = New System.Drawing.Size(220, 23)
+        Me.LBLWishlistDate.TabIndex = 110
+        Me.LBLWishlistDate.Text = "04/09/2015"
+        Me.LBLWishlistDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'BTNWishlist
+        '
+        Me.BTNWishlist.Location = New System.Drawing.Point(12, 409)
+        Me.BTNWishlist.Name = "BTNWishlist"
+        Me.BTNWishlist.Size = New System.Drawing.Size(221, 23)
+        Me.BTNWishlist.TabIndex = 109
+        Me.BTNWishlist.UseVisualStyleBackColor = True
+        '
+        'LBLWishListText
+        '
+        Me.LBLWishListText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLWishListText.Location = New System.Drawing.Point(14, 286)
+        Me.LBLWishListText.Name = "LBLWishListText"
+        Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
+        Me.LBLWishListText.TabIndex = 108
+        Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" & _
+    "uld buy it for me because you know you like buying stuff for me. "
+        '
+        'LBLWishlistCost
+        '
+        Me.LBLWishlistCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLWishlistCost.ForeColor = System.Drawing.Color.Black
+        Me.LBLWishlistCost.Location = New System.Drawing.Point(139, 251)
+        Me.LBLWishlistCost.Name = "LBLWishlistCost"
+        Me.LBLWishlistCost.Size = New System.Drawing.Size(44, 28)
+        Me.LBLWishlistCost.TabIndex = 107
+        Me.LBLWishlistCost.Text = "3"
+        Me.LBLWishlistCost.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'WishlistCostGold
+        '
+        Me.WishlistCostGold.BackColor = System.Drawing.Color.Transparent
+        Me.WishlistCostGold.Image = CType(resources.GetObject("WishlistCostGold.Image"), System.Drawing.Image)
+        Me.WishlistCostGold.Location = New System.Drawing.Point(107, 251)
+        Me.WishlistCostGold.Name = "WishlistCostGold"
+        Me.WishlistCostGold.Size = New System.Drawing.Size(28, 28)
+        Me.WishlistCostGold.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.WishlistCostGold.TabIndex = 106
+        Me.WishlistCostGold.TabStop = False
+        Me.WishlistCostGold.Visible = False
+        '
+        'PNLWishlistTokenBack
+        '
+        Me.PNLWishlistTokenBack.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.PNLWishlistTokenBack.Controls.Add(Me.LBLWishlistSilver)
+        Me.PNLWishlistTokenBack.Controls.Add(Me.PictureBox6)
+        Me.PNLWishlistTokenBack.Controls.Add(Me.LBLWishlistBronze)
+        Me.PNLWishlistTokenBack.Controls.Add(Me.PictureBox5)
+        Me.PNLWishlistTokenBack.Controls.Add(Me.LBLWishlistGold)
+        Me.PNLWishlistTokenBack.Controls.Add(Me.PictureBox4)
+        Me.PNLWishlistTokenBack.Location = New System.Drawing.Point(-2, 441)
+        Me.PNLWishlistTokenBack.Name = "PNLWishlistTokenBack"
+        Me.PNLWishlistTokenBack.Size = New System.Drawing.Size(250, 44)
+        Me.PNLWishlistTokenBack.TabIndex = 105
+        '
+        'LBLWishlistSilver
+        '
+        Me.LBLWishlistSilver.BackColor = System.Drawing.Color.Transparent
+        Me.LBLWishlistSilver.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLWishlistSilver.ForeColor = System.Drawing.Color.White
+        Me.LBLWishlistSilver.Location = New System.Drawing.Point(121, 5)
+        Me.LBLWishlistSilver.Name = "LBLWishlistSilver"
+        Me.LBLWishlistSilver.Size = New System.Drawing.Size(44, 28)
+        Me.LBLWishlistSilver.TabIndex = 17
+        Me.LBLWishlistSilver.Text = "100"
+        Me.LBLWishlistSilver.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'PictureBox6
+        '
+        Me.PictureBox6.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"), System.Drawing.Image)
+        Me.PictureBox6.Location = New System.Drawing.Point(89, 5)
+        Me.PictureBox6.Name = "PictureBox6"
+        Me.PictureBox6.Size = New System.Drawing.Size(28, 28)
+        Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox6.TabIndex = 16
+        Me.PictureBox6.TabStop = False
+        '
+        'LBLWishlistBronze
+        '
+        Me.LBLWishlistBronze.BackColor = System.Drawing.Color.Transparent
+        Me.LBLWishlistBronze.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLWishlistBronze.ForeColor = System.Drawing.Color.White
+        Me.LBLWishlistBronze.Location = New System.Drawing.Point(38, 5)
+        Me.LBLWishlistBronze.Name = "LBLWishlistBronze"
+        Me.LBLWishlistBronze.Size = New System.Drawing.Size(44, 28)
+        Me.LBLWishlistBronze.TabIndex = 15
+        Me.LBLWishlistBronze.Text = "100"
+        Me.LBLWishlistBronze.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'PictureBox5
+        '
+        Me.PictureBox5.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
+        Me.PictureBox5.Location = New System.Drawing.Point(6, 5)
+        Me.PictureBox5.Name = "PictureBox5"
+        Me.PictureBox5.Size = New System.Drawing.Size(28, 28)
+        Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox5.TabIndex = 14
+        Me.PictureBox5.TabStop = False
+        '
+        'LBLWishlistGold
+        '
+        Me.LBLWishlistGold.BackColor = System.Drawing.Color.Transparent
+        Me.LBLWishlistGold.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLWishlistGold.ForeColor = System.Drawing.Color.White
+        Me.LBLWishlistGold.Location = New System.Drawing.Point(199, 5)
+        Me.LBLWishlistGold.Name = "LBLWishlistGold"
+        Me.LBLWishlistGold.Size = New System.Drawing.Size(44, 28)
+        Me.LBLWishlistGold.TabIndex = 13
+        Me.LBLWishlistGold.Text = "100"
+        Me.LBLWishlistGold.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
+        Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
+        Me.PictureBox4.Location = New System.Drawing.Point(167, 5)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(28, 28)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox4.TabIndex = 12
+        Me.PictureBox4.TabStop = False
+        '
+        'LBLWishListName
+        '
+        Me.LBLWishListName.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLWishListName.ForeColor = System.Drawing.Color.CornflowerBlue
+        Me.LBLWishListName.Location = New System.Drawing.Point(14, 69)
+        Me.LBLWishListName.Name = "LBLWishListName"
+        Me.LBLWishListName.Size = New System.Drawing.Size(220, 23)
+        Me.LBLWishListName.TabIndex = 104
+        Me.LBLWishListName.Text = "Item Name Goes Here"
+        Me.LBLWishListName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'PNLWishlistHeader
+        '
+        Me.PNLWishlistHeader.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.PNLWishlistHeader.Controls.Add(Me.LBLWishlistDom)
+        Me.PNLWishlistHeader.Location = New System.Drawing.Point(-4, -4)
+        Me.PNLWishlistHeader.Name = "PNLWishlistHeader"
+        Me.PNLWishlistHeader.Size = New System.Drawing.Size(250, 44)
+        Me.PNLWishlistHeader.TabIndex = 103
+        '
+        'LBLWishlistDom
+        '
+        Me.LBLWishlistDom.BackColor = System.Drawing.Color.Transparent
+        Me.LBLWishlistDom.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LBLWishlistDom.ForeColor = System.Drawing.Color.White
+        Me.LBLWishlistDom.Location = New System.Drawing.Point(14, 14)
+        Me.LBLWishlistDom.Name = "LBLWishlistDom"
+        Me.LBLWishlistDom.Size = New System.Drawing.Size(223, 16)
+        Me.LBLWishlistDom.TabIndex = 102
+        Me.LBLWishlistDom.Text = "Domme Name's Wishlist"
+        Me.LBLWishlistDom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'WishlistPreview
+        '
+        Me.WishlistPreview.ImageLocation = ""
+        Me.WishlistPreview.Location = New System.Drawing.Point(49, 101)
+        Me.WishlistPreview.Name = "WishlistPreview"
+        Me.WishlistPreview.Size = New System.Drawing.Size(145, 143)
+        Me.WishlistPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.WishlistPreview.TabIndex = 101
+        Me.WishlistPreview.TabStop = False
         '
         'PNLWritingTask
         '
@@ -2557,221 +3195,6 @@ Partial Class Form1
         Me.Panel4.Size = New System.Drawing.Size(245, 31)
         Me.Panel4.TabIndex = 779
         '
-        'PNLWishList
-        '
-        Me.PNLWishList.BackColor = System.Drawing.Color.White
-        Me.PNLWishList.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PNLWishList.Controls.Add(Me.WishlistCostSilver)
-        Me.PNLWishList.Controls.Add(Me.LBLWishlistDate)
-        Me.PNLWishList.Controls.Add(Me.BTNWishlist)
-        Me.PNLWishList.Controls.Add(Me.LBLWishListText)
-        Me.PNLWishList.Controls.Add(Me.LBLWishlistCost)
-        Me.PNLWishList.Controls.Add(Me.WishlistCostGold)
-        Me.PNLWishList.Controls.Add(Me.PNLWishlistTokenBack)
-        Me.PNLWishList.Controls.Add(Me.LBLWishListName)
-        Me.PNLWishList.Controls.Add(Me.PNLWishlistHeader)
-        Me.PNLWishList.Controls.Add(Me.WishlistPreview)
-        Me.PNLWishList.Location = New System.Drawing.Point(2, 2)
-        Me.PNLWishList.Name = "PNLWishList"
-        Me.PNLWishList.Size = New System.Drawing.Size(245, 485)
-        Me.PNLWishList.TabIndex = 775
-        Me.PNLWishList.Visible = False
-        '
-        'WishlistCostSilver
-        '
-        Me.WishlistCostSilver.BackColor = System.Drawing.Color.Transparent
-        Me.WishlistCostSilver.Image = CType(resources.GetObject("WishlistCostSilver.Image"), System.Drawing.Image)
-        Me.WishlistCostSilver.Location = New System.Drawing.Point(107, 251)
-        Me.WishlistCostSilver.Name = "WishlistCostSilver"
-        Me.WishlistCostSilver.Size = New System.Drawing.Size(28, 28)
-        Me.WishlistCostSilver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.WishlistCostSilver.TabIndex = 111
-        Me.WishlistCostSilver.TabStop = False
-        Me.WishlistCostSilver.Visible = False
-        '
-        'LBLWishlistDate
-        '
-        Me.LBLWishlistDate.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistDate.ForeColor = System.Drawing.Color.Black
-        Me.LBLWishlistDate.Location = New System.Drawing.Point(14, 42)
-        Me.LBLWishlistDate.Name = "LBLWishlistDate"
-        Me.LBLWishlistDate.Size = New System.Drawing.Size(220, 23)
-        Me.LBLWishlistDate.TabIndex = 110
-        Me.LBLWishlistDate.Text = "04/09/2015"
-        Me.LBLWishlistDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'BTNWishlist
-        '
-        Me.BTNWishlist.Location = New System.Drawing.Point(12, 409)
-        Me.BTNWishlist.Name = "BTNWishlist"
-        Me.BTNWishlist.Size = New System.Drawing.Size(221, 23)
-        Me.BTNWishlist.TabIndex = 109
-        Me.BTNWishlist.UseVisualStyleBackColor = True
-        '
-        'LBLWishListText
-        '
-        Me.LBLWishListText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishListText.Location = New System.Drawing.Point(14, 286)
-        Me.LBLWishListText.Name = "LBLWishListText"
-        Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
-        Me.LBLWishListText.TabIndex = 108
-        Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" & _
-    "uld buy it for me because you know you like buying stuff for me. "
-        '
-        'LBLWishlistCost
-        '
-        Me.LBLWishlistCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistCost.ForeColor = System.Drawing.Color.Black
-        Me.LBLWishlistCost.Location = New System.Drawing.Point(139, 251)
-        Me.LBLWishlistCost.Name = "LBLWishlistCost"
-        Me.LBLWishlistCost.Size = New System.Drawing.Size(44, 28)
-        Me.LBLWishlistCost.TabIndex = 107
-        Me.LBLWishlistCost.Text = "3"
-        Me.LBLWishlistCost.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'WishlistCostGold
-        '
-        Me.WishlistCostGold.BackColor = System.Drawing.Color.Transparent
-        Me.WishlistCostGold.Image = CType(resources.GetObject("WishlistCostGold.Image"), System.Drawing.Image)
-        Me.WishlistCostGold.Location = New System.Drawing.Point(107, 251)
-        Me.WishlistCostGold.Name = "WishlistCostGold"
-        Me.WishlistCostGold.Size = New System.Drawing.Size(28, 28)
-        Me.WishlistCostGold.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.WishlistCostGold.TabIndex = 106
-        Me.WishlistCostGold.TabStop = False
-        Me.WishlistCostGold.Visible = False
-        '
-        'PNLWishlistTokenBack
-        '
-        Me.PNLWishlistTokenBack.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.PNLWishlistTokenBack.Controls.Add(Me.LBLWishlistSilver)
-        Me.PNLWishlistTokenBack.Controls.Add(Me.PictureBox6)
-        Me.PNLWishlistTokenBack.Controls.Add(Me.LBLWishlistBronze)
-        Me.PNLWishlistTokenBack.Controls.Add(Me.PictureBox5)
-        Me.PNLWishlistTokenBack.Controls.Add(Me.LBLWishlistGold)
-        Me.PNLWishlistTokenBack.Controls.Add(Me.PictureBox4)
-        Me.PNLWishlistTokenBack.Location = New System.Drawing.Point(-2, 441)
-        Me.PNLWishlistTokenBack.Name = "PNLWishlistTokenBack"
-        Me.PNLWishlistTokenBack.Size = New System.Drawing.Size(250, 44)
-        Me.PNLWishlistTokenBack.TabIndex = 105
-        '
-        'LBLWishlistSilver
-        '
-        Me.LBLWishlistSilver.BackColor = System.Drawing.Color.Transparent
-        Me.LBLWishlistSilver.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistSilver.ForeColor = System.Drawing.Color.White
-        Me.LBLWishlistSilver.Location = New System.Drawing.Point(121, 5)
-        Me.LBLWishlistSilver.Name = "LBLWishlistSilver"
-        Me.LBLWishlistSilver.Size = New System.Drawing.Size(44, 28)
-        Me.LBLWishlistSilver.TabIndex = 17
-        Me.LBLWishlistSilver.Text = "100"
-        Me.LBLWishlistSilver.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'PictureBox6
-        '
-        Me.PictureBox6.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"), System.Drawing.Image)
-        Me.PictureBox6.Location = New System.Drawing.Point(89, 5)
-        Me.PictureBox6.Name = "PictureBox6"
-        Me.PictureBox6.Size = New System.Drawing.Size(28, 28)
-        Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox6.TabIndex = 16
-        Me.PictureBox6.TabStop = False
-        '
-        'LBLWishlistBronze
-        '
-        Me.LBLWishlistBronze.BackColor = System.Drawing.Color.Transparent
-        Me.LBLWishlistBronze.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistBronze.ForeColor = System.Drawing.Color.White
-        Me.LBLWishlistBronze.Location = New System.Drawing.Point(38, 5)
-        Me.LBLWishlistBronze.Name = "LBLWishlistBronze"
-        Me.LBLWishlistBronze.Size = New System.Drawing.Size(44, 28)
-        Me.LBLWishlistBronze.TabIndex = 15
-        Me.LBLWishlistBronze.Text = "100"
-        Me.LBLWishlistBronze.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'PictureBox5
-        '
-        Me.PictureBox5.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
-        Me.PictureBox5.Location = New System.Drawing.Point(6, 5)
-        Me.PictureBox5.Name = "PictureBox5"
-        Me.PictureBox5.Size = New System.Drawing.Size(28, 28)
-        Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox5.TabIndex = 14
-        Me.PictureBox5.TabStop = False
-        '
-        'LBLWishlistGold
-        '
-        Me.LBLWishlistGold.BackColor = System.Drawing.Color.Transparent
-        Me.LBLWishlistGold.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistGold.ForeColor = System.Drawing.Color.White
-        Me.LBLWishlistGold.Location = New System.Drawing.Point(199, 5)
-        Me.LBLWishlistGold.Name = "LBLWishlistGold"
-        Me.LBLWishlistGold.Size = New System.Drawing.Size(44, 28)
-        Me.LBLWishlistGold.TabIndex = 13
-        Me.LBLWishlistGold.Text = "100"
-        Me.LBLWishlistGold.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.BackColor = System.Drawing.Color.Transparent
-        Me.PictureBox4.Image = CType(resources.GetObject("PictureBox4.Image"), System.Drawing.Image)
-        Me.PictureBox4.Location = New System.Drawing.Point(167, 5)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(28, 28)
-        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox4.TabIndex = 12
-        Me.PictureBox4.TabStop = False
-        '
-        'LBLWishListName
-        '
-        Me.LBLWishListName.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishListName.ForeColor = System.Drawing.Color.CornflowerBlue
-        Me.LBLWishListName.Location = New System.Drawing.Point(14, 69)
-        Me.LBLWishListName.Name = "LBLWishListName"
-        Me.LBLWishListName.Size = New System.Drawing.Size(220, 23)
-        Me.LBLWishListName.TabIndex = 104
-        Me.LBLWishListName.Text = "Item Name Goes Here"
-        Me.LBLWishListName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'PNLWishlistHeader
-        '
-        Me.PNLWishlistHeader.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.PNLWishlistHeader.Controls.Add(Me.LBLWishlistDom)
-        Me.PNLWishlistHeader.Location = New System.Drawing.Point(-4, -4)
-        Me.PNLWishlistHeader.Name = "PNLWishlistHeader"
-        Me.PNLWishlistHeader.Size = New System.Drawing.Size(250, 44)
-        Me.PNLWishlistHeader.TabIndex = 103
-        '
-        'LBLWishlistDom
-        '
-        Me.LBLWishlistDom.BackColor = System.Drawing.Color.Transparent
-        Me.LBLWishlistDom.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LBLWishlistDom.ForeColor = System.Drawing.Color.White
-        Me.LBLWishlistDom.Location = New System.Drawing.Point(14, 14)
-        Me.LBLWishlistDom.Name = "LBLWishlistDom"
-        Me.LBLWishlistDom.Size = New System.Drawing.Size(223, 16)
-        Me.LBLWishlistDom.TabIndex = 102
-        Me.LBLWishlistDom.Text = "Domme Name's Wishlist"
-        Me.LBLWishlistDom.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'WishlistPreview
-        '
-        Me.WishlistPreview.ImageLocation = ""
-        Me.WishlistPreview.Location = New System.Drawing.Point(49, 101)
-        Me.WishlistPreview.Name = "WishlistPreview"
-        Me.WishlistPreview.Size = New System.Drawing.Size(145, 143)
-        Me.WishlistPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.WishlistPreview.TabIndex = 101
-        Me.WishlistPreview.TabStop = False
-        '
-        'WishlistToolStripMenuItem
-        '
-        Me.WishlistToolStripMenuItem.Name = "WishlistToolStripMenuItem"
-        Me.WishlistToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.WishlistToolStripMenuItem.Text = "Wishlist"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2815,6 +3238,22 @@ Partial Class Form1
         Me.MenuStrip2.PerformLayout()
         Me.PNLDate.ResumeLayout(False)
         Me.PNLTabs.ResumeLayout(False)
+        Me.AppPanelVitalSub.ResumeLayout(False)
+        Me.GBGoals.ResumeLayout(False)
+        Me.GBGoals.PerformLayout()
+        Me.GBCalories.ResumeLayout(False)
+        Me.GBCalories.PerformLayout()
+        Me.PNLHypnoGen.ResumeLayout(False)
+        Me.PNLHypnoGen.PerformLayout()
+        Me.PNLWishList.ResumeLayout(False)
+        CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PNLWishlistTokenBack.ResumeLayout(False)
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.PNLWishlistHeader.ResumeLayout(False)
+        CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNLWritingTask.ResumeLayout(False)
         Me.PNLPlaylist.ResumeLayout(False)
         Me.PNLAppRandomizer.ResumeLayout(False)
@@ -2825,15 +3264,6 @@ Partial Class Form1
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        Me.PNLWishList.ResumeLayout(False)
-        CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PNLWishlistTokenBack.ResumeLayout(False)
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.PNLWishlistHeader.ResumeLayout(False)
-        CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3100,5 +3530,41 @@ Partial Class Form1
     Friend WithEvents LBLWishlistDom As System.Windows.Forms.Label
     Friend WithEvents WishlistPreview As System.Windows.Forms.PictureBox
     Friend WithEvents WishlistToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PNLHypnoGen As System.Windows.Forms.Panel
+    Friend WithEvents ComboBoxHypnoGenTrack As System.Windows.Forms.ComboBox
+    Friend WithEvents LBLBackTrack As System.Windows.Forms.Label
+    Friend WithEvents CBHypnoGenNoText As System.Windows.Forms.CheckBox
+    Friend WithEvents TBHypnoGenImageTag As System.Windows.Forms.TextBox
+    Friend WithEvents LBLHypnoImageTag As System.Windows.Forms.Label
+    Friend WithEvents LBHypnoGenSlideshow As System.Windows.Forms.ListBox
+    Friend WithEvents CBHypnoGenSlideshow As System.Windows.Forms.CheckBox
+    Friend WithEvents LBHypnoGen As System.Windows.Forms.ListBox
+    Friend WithEvents LBLHypnoFile As System.Windows.Forms.Label
+    Friend WithEvents LBHypnoGenInduction As System.Windows.Forms.ListBox
+    Friend WithEvents CBHypnoGenInduction As System.Windows.Forms.CheckBox
+    Friend WithEvents CBHypnoGenPhase As System.Windows.Forms.CheckBox
+    Friend WithEvents BTNHypnoGenStart As System.Windows.Forms.Button
+    Friend WithEvents HypnoticGuideToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AppPanelVitalSub As System.Windows.Forms.Panel
+    Friend WithEvents GBGoals As System.Windows.Forms.GroupBox
+    Friend WithEvents BTNExercise As System.Windows.Forms.Button
+    Friend WithEvents TBExercise As System.Windows.Forms.TextBox
+    Friend WithEvents CLBExercise As System.Windows.Forms.CheckedListBox
+    Friend WithEvents CBVitalSubDomTask As System.Windows.Forms.CheckBox
+    Friend WithEvents BTNVitalSub As System.Windows.Forms.Button
+    Friend WithEvents GBCalories As System.Windows.Forms.GroupBox
+    Friend WithEvents TBCalorieAmount As System.Windows.Forms.TextBox
+    Friend WithEvents TBCalorieItem As System.Windows.Forms.TextBox
+    Friend WithEvents BTNCalorie As System.Windows.Forms.Button
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents Label12 As System.Windows.Forms.Label
+    Friend WithEvents LBCalorie As System.Windows.Forms.ListBox
+    Friend WithEvents ComboBoxCalorie As System.Windows.Forms.ComboBox
+    Friend WithEvents TBCalorie As System.Windows.Forms.TextBox
+    Friend WithEvents LBLGoal As System.Windows.Forms.Label
+    Friend WithEvents LBLCalorie As System.Windows.Forms.Label
+    Friend WithEvents LBLConsumed As System.Windows.Forms.Label
+    Friend WithEvents CBVitalSub As System.Windows.Forms.CheckBox
+    Friend WithEvents VitalSubToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

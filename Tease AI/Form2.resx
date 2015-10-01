@@ -118,6 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="PictureBox9.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
   <data name="PictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAJkAAAAPCAYAAAD3Y23kAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -1359,39 +1392,6 @@ Local Images - Select which genres and paths you would like to use for local ima
 Enter what the domme will say in the "Domme's Post" box, and then at leat 3 responses in the box below. If you are creating a Tease glitter post, you will need to include 3 responses for each of the contact personality types.
 
 Once you are finished with your changes, click "Save Glitter File".</value>
-  </data>
-  <data name="PictureBox9.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
   </data>
   <data name="Label33.Text" xml:space="preserve">
     <value>Open Beta: This version of Tease AI contains all the features of the original vision.

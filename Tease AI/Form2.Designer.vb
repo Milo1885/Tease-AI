@@ -955,6 +955,8 @@ Partial Class FrmSettings
         Me.condescendingCheckBox = New System.Windows.Forms.CheckBox()
         Me.degradingCheckBox = New System.Windows.Forms.CheckBox()
         Me.sadisticCheckBox = New System.Windows.Forms.CheckBox()
+        Me.Button33 = New System.Windows.Forms.Button()
+        Me.Button34 = New System.Windows.Forms.Button()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -11776,6 +11778,8 @@ Partial Class FrmSettings
         '
         'GroupBox33
         '
+        Me.GroupBox33.Controls.Add(Me.Button34)
+        Me.GroupBox33.Controls.Add(Me.Button33)
         Me.GroupBox33.Controls.Add(Me.MetroTest)
         Me.GroupBox33.Controls.Add(Me.Button11)
         Me.GroupBox33.Controls.Add(Me.LBLChastityState)
@@ -11789,13 +11793,14 @@ Partial Class FrmSettings
         '
         'MetroTest
         '
-        Me.MetroTest.Location = New System.Drawing.Point(64, 77)
+        Me.MetroTest.Increment = New Decimal(New Integer() {10, 0, 0, 0})
+        Me.MetroTest.Location = New System.Drawing.Point(17, 74)
         Me.MetroTest.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.MetroTest.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.MetroTest.Name = "MetroTest"
-        Me.MetroTest.Size = New System.Drawing.Size(120, 20)
+        Me.MetroTest.Size = New System.Drawing.Size(98, 20)
         Me.MetroTest.TabIndex = 178
-        Me.MetroTest.Value = New Decimal(New Integer() {30, 0, 0, 0})
+        Me.MetroTest.Value = New Decimal(New Integer() {200, 0, 0, 0})
         '
         'Button11
         '
@@ -12279,6 +12284,24 @@ Partial Class FrmSettings
         Me.sadisticCheckBox.TabIndex = 39
         Me.sadisticCheckBox.Text = "Sadistic"
         Me.sadisticCheckBox.UseVisualStyleBackColor = true
+        '
+        'Button33
+        '
+        Me.Button33.Location = New System.Drawing.Point(161, 74)
+        Me.Button33.Name = "Button33"
+        Me.Button33.Size = New System.Drawing.Size(48, 23)
+        Me.Button33.TabIndex = 179
+        Me.Button33.Text = "Start"
+        Me.Button33.UseVisualStyleBackColor = true
+        '
+        'Button34
+        '
+        Me.Button34.Location = New System.Drawing.Point(212, 74)
+        Me.Button34.Name = "Button34"
+        Me.Button34.Size = New System.Drawing.Size(48, 23)
+        Me.Button34.TabIndex = 180
+        Me.Button34.Text = "Stop"
+        Me.Button34.UseVisualStyleBackColor = true
         '
         'FrmSettings
         '
@@ -13516,4 +13539,6 @@ End Sub
     Friend WithEvents condescendingCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents degradingCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents sadisticCheckBox As System.Windows.Forms.CheckBox
+    Friend WithEvents Button34 As System.Windows.Forms.Button
+    Friend WithEvents Button33 As System.Windows.Forms.Button
 End Class

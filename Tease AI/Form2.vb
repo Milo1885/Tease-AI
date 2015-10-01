@@ -7474,7 +7474,7 @@ WhyUMakeMeDoDis:
             If ScriptList(i).Contains("@VitalSubAssignment") Then
                 If Not RTBScriptReq.Text.Contains("* VitalSub must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* VitalSub must be enabled *" & Environment.NewLine
                 If Not RTBScriptReq.Text.Contains("* ""Domme Assignments"" must be checked in the VitalSub app *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* ""Domme Assignments"" must be checked in the VitalSub app *" & Environment.NewLine
-                If frmApps.CBVitalSub.Checked = False Or frmApps.CBVitalSubDomTask.Checked = False Then ScriptReqFailed = True
+                If Form1.CBVitalSub.Checked = False Or Form1.CBVitalSubDomTask.Checked = False Then ScriptReqFailed = True
             End If
 
         Next
@@ -8004,7 +8004,7 @@ WhyUMakeMeDoDis:
             End If
 
             If AvailList(j).Contains("@VitalSubAssignment") Then
-                If frmApps.CBVitalSub.Checked = False Or frmApps.CBVitalSubDomTask.Checked = False Then AvailFail = True
+                If Form1.CBVitalSub.Checked = False Or Form1.CBVitalSubDomTask.Checked = False Then AvailFail = True
             End If
 
         Next
@@ -13159,7 +13159,7 @@ NextURL:
         Dim bpm As Integer
         bpm = MetroTest.Value
         Dim MetroVal As Integer = 60 / bpm * 1000
-
+        ' Form1.StrokePace = MetroTest.Value
 
 
         Form1.MetroTimer.Interval = MetroVal
@@ -13375,5 +13375,13 @@ NextURL:
             My.Computer.FileSystem.WriteAllText(SettingsPath, SettingsString, False)
         End If
 
+    End Sub
+
+    Private Sub Button33_Click(sender As System.Object, e As System.EventArgs) Handles Button33.Click
+        Form1.MetroThread.Start()
+    End Sub
+
+    Private Sub Button34_Click(sender As System.Object, e As System.EventArgs) Handles Button34.Click
+        Form1.MetroThread.Suspend()
     End Sub
 End Class
