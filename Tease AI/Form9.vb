@@ -44,6 +44,8 @@ Public Class Form9
 
     Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles BTNOpenAIBoxText.Click
 
+        RTBAIBox.Clear()
+        RTBAIBox.Text = My.Computer.Clipboard.GetText()
 
         Try
             If Not RTBAIBox.Lines(0).Contains("[aiBox File Begin]") Then

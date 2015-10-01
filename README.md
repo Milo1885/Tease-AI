@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Open From Text button in AI Box Tools has been changed to Open From Clipboard
+
 Added option to switch right-side panels to left side of the screen
 
 Decreased the minimum size of the Chat Window panel so that the main picture area can be made larger

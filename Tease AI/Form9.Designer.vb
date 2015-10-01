@@ -38,6 +38,7 @@ Partial Class Form9
         Me.BTNOpenAIBoxText = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.CBOpenText = New System.Windows.Forms.CheckBox()
         Me.CBSubDir = New System.Windows.Forms.CheckBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -52,7 +53,6 @@ Partial Class Form9
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.CBOpenText = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
@@ -177,11 +177,11 @@ Partial Class Form9
         '
         'Label8
         '
-        Me.Label8.Location = New System.Drawing.Point(144, 95)
+        Me.Label8.Location = New System.Drawing.Point(130, 95)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(90, 15)
+        Me.Label8.Size = New System.Drawing.Size(111, 15)
         Me.Label8.TabIndex = 15
-        Me.Label8.Text = "Open From Text"
+        Me.Label8.Text = "Open From Clipboard"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'BTNOpenAIBoxText
@@ -218,6 +218,17 @@ Partial Class Form9
         Me.GroupBox2.TabIndex = 13
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Create AI Box"
+        '
+        'CBOpenText
+        '
+        Me.CBOpenText.Checked = True
+        Me.CBOpenText.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBOpenText.Location = New System.Drawing.Point(24, 202)
+        Me.CBOpenText.Name = "CBOpenText"
+        Me.CBOpenText.Size = New System.Drawing.Size(205, 29)
+        Me.CBOpenText.TabIndex = 19
+        Me.CBOpenText.Text = "Open AI Box as .txt file when finished"
+        Me.CBOpenText.UseVisualStyleBackColor = True
         '
         'CBSubDir
         '
@@ -320,17 +331,6 @@ Partial Class Form9
         Me.Button4.TabIndex = 19
         Me.Button4.Text = "Select None"
         Me.Button4.UseVisualStyleBackColor = True
-        '
-        'CBOpenText
-        '
-        Me.CBOpenText.Checked = True
-        Me.CBOpenText.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CBOpenText.Location = New System.Drawing.Point(24, 202)
-        Me.CBOpenText.Name = "CBOpenText"
-        Me.CBOpenText.Size = New System.Drawing.Size(205, 29)
-        Me.CBOpenText.TabIndex = 19
-        Me.CBOpenText.Text = "Open AI Box as .txt file when finished"
-        Me.CBOpenText.UseVisualStyleBackColor = True
         '
         'Form9
         '
