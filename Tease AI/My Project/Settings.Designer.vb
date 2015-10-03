@@ -4820,6 +4820,54 @@ Namespace My
                 Me("MirrorWindows") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property WakeUp() As String
+            Get
+                Return CType(Me("WakeUp"),String)
+            End Get
+            Set
+                Me("WakeUp") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+        Public Property HoldTheEdgeMin() As Integer
+            Get
+                Return CType(Me("HoldTheEdgeMin"),Integer)
+            End Get
+            Set
+                Me("HoldTheEdgeMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("seconds")>  _
+        Public Property HoldTheEdgeMinAmount() As String
+            Get
+                Return CType(Me("HoldTheEdgeMinAmount"),String)
+            End Get
+            Set
+                Me("HoldTheEdgeMinAmount") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("minutes")>  _
+        Public Property HoldTheEdgeMaxAmount() As String
+            Get
+                Return CType(Me("HoldTheEdgeMaxAmount"),String)
+            End Get
+            Set
+                Me("HoldTheEdgeMaxAmount") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

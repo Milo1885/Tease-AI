@@ -1197,5 +1197,17 @@
     <Setting Name="MirrorWindows" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="WakeUp" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="HoldTheEdgeMin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="HoldTheEdgeMinAmount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">seconds</Value>
+    </Setting>
+    <Setting Name="HoldTheEdgeMaxAmount" Type="System.String" Scope="User">
+      <Value Profile="(Default)">minutes</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -401,6 +401,10 @@ Public Class FrmSettings
         End If
 
         NBHoldTheEdgeMax.Value = My.Settings.HoldTheEdgeMax
+        NBHoldTheEdgeMin.Value = My.Settings.HoldTheEdgeMin
+        LBLMinHold.Text = My.Settings.HoldTheEdgeMinAmount
+        LBLMaxHold.Text = My.Settings.HoldTheEdgeMaxAmount
+
 
         CBTSlider.Value = My.Settings.CBTSlider
 
@@ -8871,15 +8875,48 @@ WhyUMakeMeDoDis:
 
 
     Private Sub NBHoldTheEdgeMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBHoldTheEdgeMax.LostFocus
-        'If NBHoldTheEdgeMax.Value > 0 And NBHoldTheEdgeMax.Value < 10 Then NBHoldTheEdgeMax.Value = 10
         My.Settings.HoldTheEdgeMax = NBHoldTheEdgeMax.Value
+        My.Settings.HoldTheEdgeMaxAmount = LBLMaxHold.Text
+        My.Settings.Save()
+    End Sub
+
+    Private Sub NBHoldTheEdgeMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBHoldTheEdgeMin.LostFocus
+        My.Settings.HoldTheEdgeMin = NBHoldTheEdgeMin.Value
+        My.Settings.HoldTheEdgeMinAmount = LBLMinHold.Text
         My.Settings.Save()
     End Sub
 
     Private Sub NBHoldTheEdgeMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBHoldTheEdgeMax.ValueChanged
         If FrmSettingsLoading = False Then
-            If NBHoldTheEdgeMax.Value = 9 Then NBHoldTheEdgeMax.Value = 0
-            If NBHoldTheEdgeMax.Value = 1 Then NBHoldTheEdgeMax.Value = 10
+
+            If NBHoldTheEdgeMax.Value = 0 And LBLMaxHold.Text = "minutes" Then
+                NBHoldTheEdgeMax.Value = 59
+                LBLMaxHold.Text = "seconds"
+                Return
+            End If
+
+            If NBHoldTheEdgeMax.Value = 60 And LBLMaxHold.Text = "seconds" Then
+                NBHoldTheEdgeMax.Value = 1
+                LBLMaxHold.Text = "minutes"
+                Return
+            End If
+        End If
+    End Sub
+
+    Private Sub NBHoldTheEdgeMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBHoldTheEdgeMin.ValueChanged
+        If FrmSettingsLoading = False Then
+
+            If NBHoldTheEdgeMin.Value = 0 And LBLMinHold.Text = "minutes" Then
+                NBHoldTheEdgeMin.Value = 59
+                LBLMinHold.Text = "seconds"
+                Return
+            End If
+
+            If NBHoldTheEdgeMin.Value = 60 And LBLMinHold.Text = "seconds" Then
+                NBHoldTheEdgeMin.Value = 1
+                LBLMinHold.Text = "minutes"
+                Return
+            End If
         End If
     End Sub
 
@@ -10847,88 +10884,147 @@ WhyUMakeMeDoDis:
 
 
     Private Sub subAgeNumBox_MouseHover(sender As Object, e As System.EventArgs) Handles subAgeNumBox.MouseEnter
-        LBLSubSettingsDescription.Text = "Set your age."
+        TTDir.SetToolTip(subAgeNumBox, "Set your age.")
+        'LBLSubSettingsDescription.Text = "Set your age."
     End Sub
 
     Private Sub NBBirthdayMonth_MouseHover(sender As Object, e As System.EventArgs) Handles NBBirthdayMonth.MouseEnter
-        LBLSubSettingsDescription.Text = "Set the month you were born."
+        TTDir.SetToolTip(NBBirthdayMonth, "Set the month you were born.")
+        'LBLSubSettingsDescription.Text = "Set the month you were born."
+    End Sub
+
+    Private Sub Birthday_MouseHover(sender As Object, e As System.EventArgs) Handles LBLSubBirthday.MouseHover
+        TTDir.SetToolTip(LBLSubBirthday, "Set your birthday with the format mm/dd.")
+        'LBLSubSettingsDescription.Text = "Set the day you were born."
     End Sub
 
     Private Sub NBBirthdayDay_MouseHover(sender As Object, e As System.EventArgs) Handles NBBirthdayDay.MouseEnter
-        LBLSubSettingsDescription.Text = "Set the day you were born."
+        TTDir.SetToolTip(NBBirthdayDay, "Set the day you were born.")
+        'LBLSubSettingsDescription.Text = "Set the day you were born."
     End Sub
 
-    Private Sub TBSubHairColor_MouseHover(sender As Object, e As System.EventArgs) Handles TBSubHairColor.MouseEnter
-        LBLSubSettingsDescription.Text = "Enter your hair color using all lower case letters."
+    Private Sub TBSubHairColor_MouseHover(sender As Object, e As System.EventArgs) Handles TBSubHairColor.MouseHover
+        TTDir.SetToolTip(TBSubHairColor, "Enter your hair color using all lower case letters.")
+        'LBLSubSettingsDescription.Text = "Enter your hair color using all lower case letters."
     End Sub
 
-    Private Sub TBSubEyeColor_MouseHover(sender As Object, e As System.EventArgs) Handles TBSubEyeColor.MouseEnter
-        LBLSubSettingsDescription.Text = "Enter your eye color using all lower case letters."
+    Private Sub TBSubEyeColor_MouseHover(sender As Object, e As System.EventArgs) Handles TBSubEyeColor.MouseHover
+        TTDir.SetToolTip(TBSubEyeColor, "Enter your eye color using all lower case letters.")
+        'LBLSubSettingsDescription.Text = "Enter your eye color using all lower case letters."
     End Sub
 
     Private Sub CockSizeNumBox_MouseHover(sender As Object, e As System.EventArgs) Handles CockSizeNumBox.MouseEnter
-        LBLSubSettingsDescription.Text = "Set your cock size in inches."
+        TTDir.SetToolTip(CockSizeNumBox, "Set your cock size in inches.")
+        'LBLSubSettingsDescription.Text = "Set your cock size in inches."
     End Sub
 
-    Private Sub CBSubCircumcised_MouseHover(sender As Object, e As System.EventArgs) Handles CBSubCircumcised.MouseEnter
-        LBLSubSettingsDescription.Text = "Check this box if your cock is circumcised."
+    Private Sub CBSubCircumcised_MouseHover(sender As Object, e As System.EventArgs) Handles CBSubCircumcised.MouseHover
+        TTDir.SetToolTip(CBSubCircumcised, "Check this box if your cock is circumcised.")
+        'LBLSubSettingsDescription.Text = "Check this box if your cock is circumcised."
     End Sub
 
-    Private Sub CBSubPierced_MouseHover(sender As Object, e As System.EventArgs) Handles CBSubPierced.MouseEnter
-        LBLSubSettingsDescription.Text = "Check this box if your cock is pierced."
+    Private Sub CBSubPierced_MouseHover(sender As Object, e As System.EventArgs) Handles CBSubPierced.MouseHover
+        TTDir.SetToolTip(CBSubPierced, "Check this box if your cock is pierced.")
+        'LBLSubSettingsDescription.Text = "Check this box if your cock is pierced."
     End Sub
 
-    Private Sub CBCBTCock_MouseHover(sender As Object, e As System.EventArgs) Handles CBCBTCock.MouseEnter
-        LBLSubSettingsDescription.Text = "Check this box to enabled cock torture." & Environment.NewLine & Environment.NewLine & "If this box is unchecked, the domme may still state that you're about to endure" _
-            & " cock torture, but the program will simply move to the next line instead of making you perform it."
+    Private Sub CBCBTCock_MouseHover(sender As Object, e As System.EventArgs) Handles CBCBTCock.MouseHover
+
+        TTDir.SetToolTip(CBCBTCock, "Check this box to enable cock torture." & Environment.NewLine & Environment.NewLine & _
+                                     "If this box is unchecked, the domme may still state that you're about to endure cock torture," & Environment.NewLine & _
+                                     "but the program will simply move to the next line instead of making you perform it.")
+
+
+
+        'LBLSubSettingsDescription.Text = "Check this box to enabled cock torture." & Environment.NewLine & Environment.NewLine & "If this box is unchecked, the domme may still state that you're about to endure" _
+        ' & " cock torture, but the program will simply move to the next line instead of making you perform it."
     End Sub
 
-    Private Sub CBCBTBall_MouseHover(sender As Object, e As System.EventArgs) Handles CBCBTBalls.MouseEnter
-        LBLSubSettingsDescription.Text = "Check this box to enabled ball torture." & Environment.NewLine & Environment.NewLine & "If this box is unchecked, the domme may still state that you're about to endure" _
-            & " ball torture, but the program will simply move to the next line instead of making you perform it."
+    Private Sub CBCBTBall_MouseHover(sender As Object, e As System.EventArgs) Handles CBCBTBalls.MouseHover
+
+        TTDir.SetToolTip(CBCBTBalls, "Check this box to enable ball torture." & Environment.NewLine & Environment.NewLine & _
+                                  "If this box is unchecked, the domme may still state that you're about to endure ball torture," & Environment.NewLine & _
+                                  "but the program will simply move to the next line instead of making you perform it.")
+
+        'LBLSubSettingsDescription.Text = "Check this box to enabled ball torture." & Environment.NewLine & Environment.NewLine & "If this box is unchecked, the domme may still state that you're about to endure" _
+        '   & " ball torture, but the program will simply move to the next line instead of making you perform it."
     End Sub
 
-    Private Sub CBTSlider_MouseHover(sender As Object, e As System.EventArgs) Handles CBTSlider.MouseEnter, LBLCBTSlider.MouseEnter
-        LBLSubSettingsDescription.Text = "This affects the severity of the CBT tasks you will be asked to perform. The higher this slider, the more severe the tasks will be."
+    Private Sub CBTSlider_MouseHover(sender As Object, e As System.EventArgs) Handles CBTSlider.MouseHover
+
+        TTDir.SetToolTip(CBTSlider, "This affects the severity of the CBT tasks you will be asked to perform." & Environment.NewLine & Environment.NewLine & _
+                                  "The higher this slider, the more severe the tasks will be.")
+
+        'LBLSubSettingsDescription.Text = "This affects the severity of the CBT tasks you will be asked to perform. The higher this slider, the more severe the tasks will be."
     End Sub
 
     Private Sub GBPerformance_MouseHover(sender As Object, e As System.EventArgs)
         LBLSubSettingsDescription.Text = "This area keeps track of several statistics related to your time with the program."
     End Sub
 
-    Private Sub CBOwnChastity_MouseHover(sender As Object, e As System.EventArgs) Handles CBOwnChastity.MouseEnter
-        LBLSubSettingsDescription.Text = "Check this box if you own a chastity device. This allows the program to use that fact in various scripts."
+    Private Sub CBOwnChastity_MouseHover(sender As Object, e As System.EventArgs) Handles CBOwnChastity.MouseHover
+
+        TTDir.SetToolTip(CBOwnChastity, "Check this box if you own a chastity device and wish to run scripts" & Environment.NewLine & _
+                                        "where the domme places you in chastity.")
+        'LBLSubSettingsDescription.Text = "Check this box if you own a chastity device. This allows the program to use that fact in various scripts."
     End Sub
 
-    Private Sub CBChastityPA_MouseHover(sender As Object, e As System.EventArgs) Handles CBChastityPA.MouseEnter
-        LBLSubSettingsDescription.Text = "Check this box if your chastity device requires a piercing."
+    Private Sub CBChastityPA_MouseHover(sender As Object, e As System.EventArgs) Handles CBChastityPA.MouseHover
+        TTDir.SetToolTip(CBChastityPA, "Check this box if your chastity device requires a piercing.")
+        'LBLSubSettingsDescription.Text = "Check this box if your chastity device requires a piercing."
     End Sub
 
-    Private Sub CBChastitySpikes_MouseHover(sender As Object, e As System.EventArgs) Handles CBChastitySpikes.MouseEnter
-        LBLSubSettingsDescription.Text = "Check this box if your chastity device contains spikes."
+    Private Sub CBChastitySpikes_MouseHover(sender As Object, e As System.EventArgs) Handles CBChastitySpikes.MouseHover
+
+        TTDir.SetToolTip(CBChastitySpikes, "Check this box if your chastity device contains spikes.")
+        'LBLSubSettingsDescription.Text = "Check this box if your chastity device contains spikes."
+
     End Sub
 
-    Private Sub TBGreeting_MouseHover(sender As Object, e As System.EventArgs) Handles TBGreeting.MouseEnter
-        LBLSubSettingsDescription.Text = "Enter any number of words or phrases, separated by commas. When you use any of these words/phrases by themselves after starting the program, the domme will recognize it as a greeting and begin the tease."
+    Private Sub TBGreeting_MouseHover(sender As Object, e As System.EventArgs) Handles TBGreeting.MouseHover
+
+        TTDir.SetToolTip(TBGreeting, "Enter any number of words or phrases, separated by commas." & Environment.NewLine & Environment.NewLine & _
+                                  "When you use any of these words/phrases by themselves after starting the" & Environment.NewLine & _
+                                  "program, the domme will recognize it as a greeting and begin the tease.")
+
+        'LBLSubSettingsDescription.Text = "Enter any number of words or phrases, separated by commas. When you use any of these words/phrases by themselves after starting the program, " _
+        '    & "the domme will recognize it as a greeting and begin the tease."
     End Sub
 
-    Private Sub TBYes_MouseHover(sender As Object, e As System.EventArgs) Handles TBYes.MouseEnter
-        LBLSubSettingsDescription.Text = "Enter any number of words or phrases, separated by commas. The domme will recognize these as ""yes"" answers to Multiple Choice sections."
+    Private Sub TBYes_MouseHover(sender As Object, e As System.EventArgs) Handles TBYes.MouseHover
+
+        TTDir.SetToolTip(TBYes, "Enter any number of words or phrases, separated by commas." & Environment.NewLine & Environment.NewLine & _
+                                    "The domme will recognize these as ""yes"" answers to Multiple Choice sections.")
+
+        ' LBLSubSettingsDescription.Text = "Enter any number of words or phrases, separated by commas. The domme will recognize these as ""yes"" answers to Multiple Choice sections."
     End Sub
 
-    Private Sub TBNo_MouseHover(sender As Object, e As System.EventArgs) Handles TBNo.MouseEnter
-        LBLSubSettingsDescription.Text = "Enter any number of words or phrases, separated by commas. The domme will recognize these as ""no"" answers to Multiple Choice sections."
+    Private Sub TBNo_MouseHover(sender As Object, e As System.EventArgs) Handles TBNo.MouseHover
+
+        TTDir.SetToolTip(TBNo, "Enter any number of words or phrases, separated by commas." & Environment.NewLine & Environment.NewLine & _
+                                 "The domme will recognize these as ""no"" answers to Multiple Choice sections.")
+
+        'LBLSubSettingsDescription.Text = "Enter any number of words or phrases, separated by commas. The domme will recognize these as ""no"" answers to Multiple Choice sections."
     End Sub
 
-    Private Sub TBHonorific_MouseHover(sender As Object, e As System.EventArgs) Handles TBHonorific.MouseEnter
-        LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
+    Private Sub TBHonorific_MouseHover(sender As Object, e As System.EventArgs) Handles TBHonorific.MouseHover
+
+        TTDir.SetToolTip(TBHonorific, "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc.")
+
+        'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
     End Sub
 
-    Private Sub CBHonorificInclude_MouseHover(sender As Object, e As System.EventArgs) Handles CBHonorificInclude.MouseEnter
-        LBLSubSettingsDescription.Text = "When this box is checked, the domme's honorific must be included with greetings and yes or no responses used during multiple choice segments."
+    Private Sub CBHonorificInclude_MouseHover(sender As Object, e As System.EventArgs) Handles CBHonorificInclude.MouseHover
+
+        TTDir.SetToolTip(CBHonorificInclude, "When this box is checked, the domme's honorific must be included with" & Environment.NewLine & _
+                                             "greetings and yes or no responses used during multiple choice segments.")
+
+        'LBLSubSettingsDescription.Text = "When this box is checked, the domme's honorific must be included with greetings and yes or no responses used during multiple choice segments."
     End Sub
-    Private Sub CBHonorificCapitalized_MouseHover(sender As Object, e As System.EventArgs) Handles CBHonorificCapitalized.MouseEnter
-        LBLSubSettingsDescription.Text = "When this box is checked, the domme's honorific must be capitalized where it is required."
+    Private Sub CBHonorificCapitalized_MouseHover(sender As Object, e As System.EventArgs) Handles CBHonorificCapitalized.MouseHover
+
+        TTDir.SetToolTip(CBHonorificCapitalized, "When this box is checked, the domme's honorific must be capitalized where it is required.")
+        'LBLSubSettingsDescription.Text = "When this box is checked, the domme's honorific must be capitalized where it is required."
     End Sub
 
     Private Sub NBLongEdge_MouseHover(sender As Object, e As System.EventArgs) Handles NBLongEdge.MouseEnter
@@ -10972,9 +11068,9 @@ WhyUMakeMeDoDis:
     Private Sub NBWritinGTaskMax_MouseHover(sender As Object, e As System.EventArgs) Handles NBWritingTaskMax.MouseEnter
         LBLSubSettingsDescription.Text = "Sets the maximum amount of lines the domme will assign you for writing tasks."
     End Sub
-    Private Sub SubDescText_MouseHover(sender As Object, e As System.EventArgs) Handles Panel2.MouseEnter, GroupBox32.MouseEnter, GroupBox45.MouseEnter, GroupBox35.MouseEnter, GroupBox7.MouseEnter, GroupBox12.MouseEnter
-        LBLSubSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
-    End Sub
+    'Private Sub SubDescText_MouseHover(sender As Object, e As System.EventArgs) Handles Panel2.MouseEnter, GroupBox32.MouseEnter, GroupBox45.MouseEnter, GroupBox35.MouseEnter, GroupBox7.MouseEnter, GroupBox12.MouseEnter
+    '   LBLSubSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
+    'End Sub
     Private Sub CBHimHer_MouseHover(sender As Object, e As System.EventArgs) Handles CBHimHer.MouseEnter
         LBLSubSettingsDescription.Text = "When this is checked, Glitter will automatically replace any instance of He/Him/His with She/Her/Her."
     End Sub
@@ -10984,7 +11080,7 @@ WhyUMakeMeDoDis:
         My.Settings.Save()
     End Sub
 
-  
+
 
     Private Sub orgasmsperlockButton_Click(sender As System.Object, e As System.EventArgs) Handles orgasmsperlockButton.Click
 
@@ -11492,7 +11588,7 @@ WhyUMakeMeDoDis:
     End Sub
 
 
-   
+
 
     Private Sub BTNMaintenance_Click(sender As System.Object, e As System.EventArgs) Handles BTNMaintenanceRebuild.Click
 
@@ -12252,13 +12348,13 @@ NextURL:
             CalculateSessionImages()
         End If
 
-      
+
 
 
     End Sub
 
-   
-   
+
+
 
 
 
@@ -12342,7 +12438,7 @@ NextURL:
     End Function
 
 
- 
+
     Private Sub BTNPlaylistEnd_Click(sender As System.Object, e As System.EventArgs) Handles BTNPlaylistEnd.Click
 
         Debug.Print("BTNPLaylistENd called?")
@@ -12654,7 +12750,7 @@ NextURL:
             Return
         End If
 
-        
+
 
     End Sub
 
@@ -12685,7 +12781,7 @@ NextURL:
         End If
     End Sub
 
-   
+
     Private Sub CBGlitterFeed_LostFocus(sender As Object, e As System.EventArgs) Handles CBGlitterFeed.LostFocus, CBGlitterFeedScripts.LostFocus, CBGlitterFeedOff.LostFocus
         My.Settings.CBGlitterFeed = CBGlitterFeed.Checked
         My.Settings.CBGlitterFeedScripts = CBGlitterFeedScripts.Checked
@@ -12802,7 +12898,7 @@ NextURL:
             SettingsList.Add("Contact 1 Color: " & LBLGlitterNC1.ForeColor.ToArgb.ToString)
             SettingsList.Add("Contact 1 Image Directory: " & LBLContact1ImageDir.Text)
             SettingsList.Add("Contact 1 Post Frequency: " & GlitterSlider1.Value)
-          
+
             SettingsList.Add("Contact 2 Enabled: " & CBGlitter2.Checked)
             SettingsList.Add("Contact 2 Name: " & TBGlitter2.Text)
             SettingsList.Add("Contact 2 Color: " & LBLGlitterNC2.ForeColor.ToArgb.ToString)
@@ -13133,7 +13229,7 @@ NextURL:
     End Sub
 
 
-   
+
     Private Sub RBGerman_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RBGerman.CheckedChanged, RBEnglish.CheckedChanged
 
         If FrmSettingsLoading = False Then
@@ -13299,7 +13395,7 @@ NextURL:
     End Sub
 
 
-  
+
     Private Sub Button30_Click(sender As System.Object, e As System.EventArgs) Handles Button30.Click
         If GetColor.ShowDialog() = DialogResult.OK Then
             My.Settings.DateTextColor = GetColor.Color
@@ -13325,13 +13421,13 @@ NextURL:
 
     End Sub
 
-   
-
-  
 
 
 
-    
+
+
+
+
 
     Private Sub CheckBox1_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBFlipBack.CheckedChanged
 
@@ -13383,5 +13479,30 @@ NextURL:
 
     Private Sub Button34_Click(sender As System.Object, e As System.EventArgs) Handles Button34.Click
         Form1.MetroThread.Suspend()
+    End Sub
+
+    Private Sub TimeBoxWakeUp_ValueChanged(sender As System.Object, e As System.EventArgs) Handles TimeBoxWakeUp.ValueChanged
+        If Form1.FormLoading = False Then
+
+
+            Dim SetDate As Date = FormatDateTime(TimeBoxWakeUp.Value, DateFormat.LongTime)
+
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp", FormatDateTime(SetDate, DateFormat.LongTime), False)
+
+
+
+            'Debug.Print("Dates = " & Dates)
+
+            My.Settings.WakeUp = Form1.GetTime("SYS_WakeUp")
+            My.Settings.Save()
+
+
+
+
+
+
+
+
+        End If
     End Sub
 End Class

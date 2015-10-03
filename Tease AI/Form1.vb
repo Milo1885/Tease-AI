@@ -525,6 +525,8 @@ Public Class Form1
     Public MetroThread As Thread
     Dim MetroGet As Integer
 
+    Dim GeneralTime As String = "Afternoon"
+
 
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -2372,34 +2374,23 @@ WritingTaskLine:
 
                         HoldEdgeTick = HoldEdgeChance
 
-                        If FrmSettings.NBHoldTheEdgeMax.Value = 0 Then
+                        Dim HoldEdgeMin As Integer = FrmSettings.NBHoldTheEdgeMin.Value
+                        If FrmSettings.LBLMinHold.Text = "minutes" Then HoldEdgeMin *= 60
 
-                            If FrmSettings.domlevelNumBox.Value = 1 Then HoldEdgeTick = randomizer.Next(10, 31)
-                            If FrmSettings.domlevelNumBox.Value = 2 Then HoldEdgeTick = randomizer.Next(15, 46)
-                            If FrmSettings.domlevelNumBox.Value = 3 Then HoldEdgeTick = randomizer.Next(20, 61)
-                            If FrmSettings.domlevelNumBox.Value = 4 Then HoldEdgeTick = randomizer.Next(45, 121)
-                            If FrmSettings.domlevelNumBox.Value = 5 Then HoldEdgeTick = randomizer.Next(60, 301)
+                        Dim HoldEdgeMax As Integer = FrmSettings.NBHoldTheEdgeMax.Value
+                        If FrmSettings.LBLMaxHold.Text = "minutes" Then HoldEdgeMax *= 60
 
-                            If FrmSettings.domlevelNumBox.Value >= 3 And FrmSettings.crazyCheckBox.Checked = True Then
-                                TempVal = randomizer.Next(1, 101)
-                                If TempVal < 21 Then HoldEdgeTick *= 2
-                            End If
+                        If HoldEdgeMax < HoldEdgeMin Then HoldEdgeMax = HoldEdgeMin + 1
 
-                        Else
-
-                            Dim HoldEdgeMin As Integer = 30
-                            If FrmSettings.NBHoldTheEdgeMax.Value < 31 Then HoldEdgeMin = FrmSettings.NBHoldTheEdgeMax.Value / 2
-                            HoldEdgeTick = randomizer.Next(HoldEdgeMin, FrmSettings.NBHoldTheEdgeMax.Value + 1)
-                            If HoldEdgeTick < 10 Then HoldEdgeTick = 10
-
-                        End If
+                        HoldEdgeTick = randomizer.Next(HoldEdgeMin, HoldEdgeMax + 1)
+                        If HoldEdgeTick < 10 Then HoldEdgeTick = 10
 
                     Else
 
-                        HoldEdgeTick = EdgeHoldSeconds
-                        EdgeHoldFlag = False
+                            HoldEdgeTick = EdgeHoldSeconds
+                            EdgeHoldFlag = False
 
-                    End If
+                        End If
 
                     HoldEdgeTime = 0
 
@@ -6977,6 +6968,8 @@ TryNextWithTease:
    
 
     Public Sub RandomVideo()
+
+        NoVideo = False
 
         'SlideshowLoaded = False
         DommeVideo = False
@@ -11627,27 +11620,16 @@ OrgasmDecided:
 
             HoldEdgeTick = HoldEdgeChance
 
-            If FrmSettings.NBHoldTheEdgeMax.Value = 0 Then
+            Dim HoldEdgeMin As Integer = FrmSettings.NBHoldTheEdgeMin.Value
+            If FrmSettings.LBLMinHold.Text = "minutes" Then HoldEdgeMin *= 60
 
-                If FrmSettings.domlevelNumBox.Value = 1 Then HoldEdgeTick = randomizer.Next(10, 31)
-                If FrmSettings.domlevelNumBox.Value = 2 Then HoldEdgeTick = randomizer.Next(15, 46)
-                If FrmSettings.domlevelNumBox.Value = 3 Then HoldEdgeTick = randomizer.Next(20, 61)
-                If FrmSettings.domlevelNumBox.Value = 4 Then HoldEdgeTick = randomizer.Next(45, 121)
-                If FrmSettings.domlevelNumBox.Value = 5 Then HoldEdgeTick = randomizer.Next(60, 301)
+            Dim HoldEdgeMax As Integer = FrmSettings.NBHoldTheEdgeMax.Value
+            If FrmSettings.LBLMaxHold.Text = "minutes" Then HoldEdgeMax *= 60
 
-                If FrmSettings.domlevelNumBox.Value >= 3 And FrmSettings.crazyCheckBox.Checked = True Then
-                    TempVal = randomizer.Next(1, 101)
-                    If TempVal < 21 Then HoldEdgeTick *= 2
-                End If
+            If HoldEdgeMax < HoldEdgeMin Then HoldEdgeMax = HoldEdgeMin + 1
 
-            Else
-
-                Dim HoldEdgeMin As Integer = 30
-                If FrmSettings.NBHoldTheEdgeMax.Value < 31 Then HoldEdgeMin = FrmSettings.NBHoldTheEdgeMax.Value / 2
-                HoldEdgeTick = randomizer.Next(HoldEdgeMin, FrmSettings.NBHoldTheEdgeMax.Value + 1)
-                If HoldEdgeTick < 10 Then HoldEdgeTick = 10
-
-            End If
+            HoldEdgeTick = randomizer.Next(HoldEdgeMin, HoldEdgeMax + 1)
+            If HoldEdgeTick < 10 Then HoldEdgeTick = 10
 
             HoldEdgeTime = 0
 
@@ -11707,27 +11689,16 @@ OrgasmDecided:
 
                 HoldEdgeTick = HoldEdgeChance
 
-                If FrmSettings.NBHoldTheEdgeMax.Value = 0 Then
+                Dim HoldEdgeMin As Integer = FrmSettings.NBHoldTheEdgeMin.Value
+                If FrmSettings.LBLMinHold.Text = "minutes" Then HoldEdgeMin *= 60
 
-                    If FrmSettings.domlevelNumBox.Value = 1 Then HoldEdgeTick = randomizer.Next(10, 31)
-                    If FrmSettings.domlevelNumBox.Value = 2 Then HoldEdgeTick = randomizer.Next(15, 46)
-                    If FrmSettings.domlevelNumBox.Value = 3 Then HoldEdgeTick = randomizer.Next(20, 61)
-                    If FrmSettings.domlevelNumBox.Value = 4 Then HoldEdgeTick = randomizer.Next(45, 121)
-                    If FrmSettings.domlevelNumBox.Value = 5 Then HoldEdgeTick = randomizer.Next(60, 301)
+                Dim HoldEdgeMax As Integer = FrmSettings.NBHoldTheEdgeMax.Value
+                If FrmSettings.LBLMaxHold.Text = "minutes" Then HoldEdgeMax *= 60
 
-                    If FrmSettings.domlevelNumBox.Value >= 3 And FrmSettings.crazyCheckBox.Checked = True Then
-                        TempVal = randomizer.Next(1, 101)
-                        If TempVal < 21 Then HoldEdgeTick *= 2
-                    End If
+                If HoldEdgeMax < HoldEdgeMin Then HoldEdgeMax = HoldEdgeMin + 1
 
-                Else
-
-                    Dim HoldEdgeMin As Integer = 30
-                    If FrmSettings.NBHoldTheEdgeMax.Value < 31 Then HoldEdgeMin = FrmSettings.NBHoldTheEdgeMax.Value / 2
-                    HoldEdgeTick = randomizer.Next(HoldEdgeMin, FrmSettings.NBHoldTheEdgeMax.Value + 1)
-                    If HoldEdgeTick < 10 Then HoldEdgeTick = 10
-
-                End If
+                HoldEdgeTick = randomizer.Next(HoldEdgeMin, HoldEdgeMax + 1)
+                If HoldEdgeTick < 10 Then HoldEdgeTick = 10
 
                 HoldEdgeTime = 0
 
@@ -11781,14 +11752,19 @@ OrgasmDecided:
         End If
 
         If StringClean.Contains("@PlayCensorshipSucks") Then
-            ScriptVideoTease = "Censorship Sucks"
-            ScriptVideoTeaseFlag = True
+
             RandomVideo()
-            ScriptVideoTeaseFlag = False
-            CensorshipGame = True
-            VideoTease = True
-            CensorshipTick = randomizer.Next(FrmSettings.NBCensorHideMin.Value, FrmSettings.NBCensorHideMax.Value + 1)
-            CensorshipTimer.Start()
+
+            If NoVideo = False Then
+                ScriptVideoTease = "Censorship Sucks"
+                ScriptVideoTeaseFlag = True
+                ScriptVideoTeaseFlag = False
+                CensorshipGame = True
+                VideoTease = True
+                CensorshipTick = randomizer.Next(FrmSettings.NBCensorHideMin.Value, FrmSettings.NBCensorHideMax.Value + 1)
+                CensorshipTimer.Start()
+            End If
+
             StringClean = StringClean.Replace("@PlayCensorshipSucks", "")
         End If
 
@@ -11809,7 +11785,7 @@ OrgasmDecided:
         End If
 
         If StringClean.Contains("@VitalSubAssignment") Then
-            Dim AssignReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\VitalSub\Assignments.txt")
+            Dim AssignReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\VitalSub\Assignments.txt")
             Dim AssignList As New List(Of String)
             While AssignReader.Peek <> -1
                 AssignList.Add(AssignReader.ReadLine())
@@ -11826,6 +11802,13 @@ OrgasmDecided:
             Catch
                 TempAssign = "ERROR: VitalSub Assign"
             End Try
+
+            Dim TempArray As String() = Split(TempAssign)
+
+            For i As Integer = TempArray.Count - 1 To 0 Step -1
+                If TempArray(i).Contains("@") Then TempArray(i) = ""
+            Next
+
 
             CLBExercise.Items.Add(TempAssign)
             SaveExercise()
@@ -11859,6 +11842,73 @@ OrgasmDecided:
 
 
             StringClean = StringClean.Replace("@DeleteLocalImage", "")
+        End If
+
+        If StringClean.Contains("@AddTokens(") Then
+
+            Dim TokenFlag As String = GetParentheses(StringClean, "@AddTokens(")
+            TokenFlag = FixCommas(TokenFlag)
+            Dim TokenAdd As Integer
+
+            If TokenFlag.Contains(",") Then
+                Dim TokenArray As String() = TokenFlag.Split(",")
+                For i As Integer = 0 To TokenArray.Count - 1
+                    TokenAdd = Val(TokenArray(i))
+                    If UCase(TokenArray(i)).Contains("B") Then BronzeTokens += TokenAdd
+                    If UCase(TokenArray(i)).Contains("S") Then SilverTokens += TokenAdd
+                    If UCase(TokenArray(i)).Contains("G") Then GoldTokens += TokenAdd
+                Next
+            Else
+                TokenAdd = Val(TokenFlag)
+                If UCase(TokenFlag).Contains("B") Then BronzeTokens += TokenAdd
+                If UCase(TokenFlag).Contains("S") Then SilverTokens += TokenAdd
+                If UCase(TokenFlag).Contains("G") Then GoldTokens += TokenAdd
+            End If
+
+            My.Settings.BronzeTokens = BronzeTokens
+            My.Settings.SilverTokens = SilverTokens
+            My.Settings.GoldTokens = GoldTokens
+
+            My.Settings.Save()
+
+            StringClean = StringClean.Replace("@AddTokens(" & TokenFlag & ")", "")
+
+        End If
+
+
+        If StringClean.Contains("@RemoveTokens(") Then
+
+            Dim TokenFlag As String = GetParentheses(StringClean, "@RemoveTokens(")
+            TokenFlag = FixCommas(TokenFlag)
+            Dim TokenRemove As Integer
+
+            If TokenFlag.Contains(",") Then
+                Dim TokenArray As String() = TokenFlag.Split(",")
+                For i As Integer = 0 To TokenArray.Count - 1
+                    TokenRemove = Val(TokenArray(i))
+                    If UCase(TokenArray(i)).Contains("B") Then BronzeTokens -= TokenRemove
+                    If UCase(TokenArray(i)).Contains("S") Then SilverTokens -= TokenRemove
+                    If UCase(TokenArray(i)).Contains("G") Then GoldTokens -= TokenRemove
+                Next
+            Else
+                TokenRemove = Val(TokenFlag)
+                If UCase(TokenFlag).Contains("B") Then BronzeTokens -= TokenRemove
+                If UCase(TokenFlag).Contains("S") Then SilverTokens -= TokenRemove
+                If UCase(TokenFlag).Contains("G") Then GoldTokens -= TokenRemove
+            End If
+
+            If BronzeTokens < 0 Then BronzeTokens = 0
+            If SilverTokens < 0 Then SilverTokens = 0
+            If GoldTokens < 0 Then GoldTokens = 0
+
+            My.Settings.BronzeTokens = BronzeTokens
+            My.Settings.SilverTokens = SilverTokens
+            My.Settings.GoldTokens = GoldTokens
+
+            My.Settings.Save()
+
+            StringClean = StringClean.Replace("@RemoveTokens(" & TokenFlag & ")", "")
+
         End If
 
         If StringClean.Contains("@Add1Token") Then
@@ -11936,24 +11986,31 @@ OrgasmDecided:
 
         If StringClean.Contains("@PlayAvoidTheEdge") Then
             ' #### Reboot
-            ScriptTimer.Stop()
-            SubStroking = True
-            TempStrokeTauntVal = StrokeTauntVal
-            TempFileText = FileText
-            ScriptVideoTease = "Avoid The Edge"
-            ScriptVideoTeaseFlag = True
-            AvoidTheEdgeStroking = True
-            AvoidTheEdgeGame = True
+
             RandomVideo()
-            ScriptVideoTeaseFlag = False
-            VideoTease = True
-            StartStrokingCount += 1
-            StopMetronome = False
-            StrokePace = randomizer.Next(4, 9) * 100
-            StrokePaceTimer.Interval = StrokePace
-            StrokePaceTimer.Start()
-            AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
-            AvoidTheEdgeTaunts.Start()
+
+            If NoVideo = False Then
+
+                ScriptTimer.Stop()
+                SubStroking = True
+                TempStrokeTauntVal = StrokeTauntVal
+                TempFileText = FileText
+                ScriptVideoTease = "Avoid The Edge"
+                ScriptVideoTeaseFlag = True
+                AvoidTheEdgeStroking = True
+                AvoidTheEdgeGame = True
+                ScriptVideoTeaseFlag = False
+                VideoTease = True
+                StartStrokingCount += 1
+                StopMetronome = False
+                StrokePace = randomizer.Next(4, 9) * 100
+                StrokePaceTimer.Interval = StrokePace
+                StrokePaceTimer.Start()
+                AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
+                AvoidTheEdgeTaunts.Start()
+
+            End If
+
             StringClean = StringClean.Replace("@PlayAvoidTheEdge", "")
         End If
 
@@ -11975,73 +12032,121 @@ OrgasmDecided:
 
         If StringClean.Contains("@PlayRedLightGreenLight") Then
             ' #### Reboot
-            ScriptTimer.Stop()
-            SubStroking = True
-            TempStrokeTauntVal = StrokeTauntVal
-            TempFileText = FileText
-            ScriptVideoTease = "RLGL"
-            ScriptVideoTeaseFlag = True
-            'AvoidTheEdgeStroking = True
-            RLGLGame = True
+
             RandomVideo()
-            ScriptVideoTeaseFlag = False
-            VideoTease = True
-            RLGLTick = randomizer.Next(FrmSettings.NBGreenLightMin.Value, FrmSettings.NBGreenLightMax.Value + 1)
-            RLGLTimer.Start()
-            StartStrokingCount += 1
-            StopMetronome = False
-            StrokePace = randomizer.Next(4, 9) * 100
-            StrokePaceTimer.Interval = StrokePace
-            StrokePaceTimer.Start()
-            'VideoTauntTick = randomizer.Next(20, 31)
-            'VideoTauntTimer.Start()
+
+            If NoVideo = False Then
+
+                ScriptTimer.Stop()
+                SubStroking = True
+                TempStrokeTauntVal = StrokeTauntVal
+                TempFileText = FileText
+                ScriptVideoTease = "RLGL"
+                ScriptVideoTeaseFlag = True
+                'AvoidTheEdgeStroking = True
+                RLGLGame = True
+
+                ScriptVideoTeaseFlag = False
+                VideoTease = True
+                RLGLTick = randomizer.Next(FrmSettings.NBGreenLightMin.Value, FrmSettings.NBGreenLightMax.Value + 1)
+                RLGLTimer.Start()
+                StartStrokingCount += 1
+                StopMetronome = False
+                StrokePace = randomizer.Next(4, 9) * 100
+                StrokePaceTimer.Interval = StrokePace
+                StrokePaceTimer.Start()
+                'VideoTauntTick = randomizer.Next(20, 31)
+                'VideoTauntTimer.Start()
+
+            End If
             StringClean = StringClean.Replace("@PlayRedLightGreenLight", "")
         End If
 
         If StringClean.Contains("@PlayVideo[") Then
-            Dim VideoClean As String = StringClean
-            Dim StartIndex As Integer = VideoClean.IndexOf("@PlayVideo[") + 11
-            For i As Integer = 1 To StartIndex
-                VideoClean = VideoClean.Remove(0, 1)
-            Next
-            Dim VideoS As String() = VideoClean.Split("]")
-            VideoClean = Application.StartupPath & "\Video\" & VideoS(0)
+
+            Dim VideoFlag As String = GetParentheses(StringClean, "@PlayVideo[")
+            Dim VideoClean As String = Application.StartupPath & "\Video\" & VideoFlag
             VideoClean = VideoClean.Replace("\\", "\")
-            Try
+
+            Debug.Print("VideoFlag = " & VideoFlag)
+
+            If File.Exists(VideoClean) Then
+                DomWMP.URL = VideoClean
                 DomWMP.Visible = True
                 mainPictureBox.Visible = False
-                DomWMP.URL = VideoClean
                 TeaseVideo = True
-            Catch
-                MessageBox.Show(Me, "\" & VideoS(0) & " was not found in " & Application.StartupPath & "\Video!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-            End Try
-            StringClean = StringClean.Replace("@PlayVideo[" & VideoS(0) & "]", "")
+            Else
+                MessageBox.Show(Me, Path.GetFileName(VideoClean) & " was not found in " & Application.StartupPath & "\Video!" & Environment.NewLine & Environment.NewLine & _
+                                "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            End If
+
+            StringClean = StringClean.Replace("@PlayVideo[" & VideoFlag & "]", "")
         End If
 
         If StringClean.Contains("@PlayAudio[") Then
-            Dim AudioClean As String = StringClean
-            Dim StartIndex As Integer = AudioClean.IndexOf("@PlayAudio[") + 11
-            For i As Integer = 1 To StartIndex
-                AudioClean = AudioClean.Remove(0, 1)
-            Next
-            Dim AudioS As String() = AudioClean.Split("]")
-            AudioClean = Application.StartupPath & "\Audio\" & AudioS(0)
+
+            Dim AudioFlag As String = GetParentheses(StringClean, "@PlayAudio[")
+            Dim AudioClean As String = Application.StartupPath & "\Video\" & AudioFlag
             AudioClean = AudioClean.Replace("\\", "\")
-            Try
+
+            If File.Exists(AudioClean) Then
                 DomWMP.URL = AudioClean
-            Catch
-                MessageBox.Show(Me, "\" & AudioS(0) & " was not found in " & Application.StartupPath & "\Audio!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-            End Try
-            StringClean = StringClean.Replace("@PlayAudio[" & AudioS(0) & "]", "")
+            Else
+                MessageBox.Show(Me, Path.GetFileName(AudioClean) & " was not found in " & Application.StartupPath & "\Audio!" & Environment.NewLine & Environment.NewLine & _
+                                "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            End If
+
+            StringClean = StringClean.Replace("@PlayAudio[" & AudioFlag & "]", "")
+
         End If
 
         If StringClean.Contains("@PlayVideo") Then
-            TeaseVideo = True
+
             RandomizerVideo = True
             RandomVideo()
+
+            If NoVideo = False Then
+                TeaseVideo = True
+            Else
+                MessageBox.Show(Me, "No videos were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+            End If
+
             RandomizerVideo = False
             StringClean = StringClean.Replace("@PlayVideo", "")
         End If
+
+
+        If StringClean.Contains("@AddStrokeTime(") Then
+
+            Dim OriginalFlag As String = ""
+
+            If StrokeTimer.Enabled = True Then
+
+                Dim StrokeFlag As String = GetParentheses(StringClean, "@AddStrokeTime(")
+                OriginalFlag = StrokeFlag
+                Dim StrokeSeconds As Integer
+
+                If StrokeFlag.Contains(",") Then
+                    StrokeFlag = FixCommas(StrokeFlag)
+                    Dim StrokeFlagArray As String() = StrokeFlag.Split(",")
+                    Dim Stroke1 As Integer = Val(StrokeFlagArray(0))
+                    Dim Stroke2 As Integer = Val(StrokeFlagArray(1))
+                    If UCase(StrokeFlagArray(0)).Contains("M") Then Stroke1 *= 60
+                    If UCase(StrokeFlagArray(1)).Contains("M") Then Stroke2 *= 60
+                    If UCase(StrokeFlagArray(0)).Contains("H") Then Stroke1 *= 3600
+                    If UCase(StrokeFlagArray(1)).Contains("H") Then Stroke2 *= 3600
+                    StrokeSeconds = randomizer.Next(Stroke1, Stroke2 + 1)
+                Else
+                    StrokeSeconds = Val(StrokeFlag)
+                    If UCase(GetParentheses(StringClean, "@AddStrokeTime(")).Contains("M") Then StrokeSeconds *= 60
+                    If UCase(GetParentheses(StringClean, "@AddStrokeTime(")).Contains("H") Then StrokeSeconds *= 3600
+                End If
+                StrokeTick += StrokeSeconds
+            End If
+            StringClean = StringClean.Replace("@AddStrokeTime(" & OriginalFlag & ")", "")
+        End If
+
+
 
         If StringClean.Contains("@AddStrokeTime") Then
             If StrokeTimer.Enabled = True Then
@@ -12059,25 +12164,50 @@ OrgasmDecided:
         End If
 
 
+        If StringClean.Contains("@AddEdgeHoldTime(") Then
+
+            Dim OriginalFlag As String = ""
+
+            If HoldEdgeTimer.Enabled = True Then
+
+                Dim HoldEdgeFlag As String = GetParentheses(StringClean, "@AddEdgeHoldTime(")
+                OriginalFlag = HoldEdgeFlag
+                Dim HoldEdgeSeconds As Integer
+
+                If HoldEdgeFlag.Contains(",") Then
+                    HoldEdgeFlag = FixCommas(HoldEdgeFlag)
+                    Dim HoldEdgeFlagArray As String() = HoldEdgeFlag.Split(",")
+                    Dim HoldEdge1 As Integer = Val(HoldEdgeFlagArray(0))
+                    Dim HoldEdge2 As Integer = Val(HoldEdgeFlagArray(1))
+                    If UCase(HoldEdgeFlagArray(0)).Contains("M") Then HoldEdge1 *= 60
+                    If UCase(HoldEdgeFlagArray(1)).Contains("M") Then HoldEdge2 *= 60
+                    If UCase(HoldEdgeFlagArray(0)).Contains("H") Then HoldEdge1 *= 3600
+                    If UCase(HoldEdgeFlagArray(1)).Contains("H") Then HoldEdge2 *= 3600
+                    HoldEdgeSeconds = randomizer.Next(HoldEdge1, HoldEdge2 + 1)
+                Else
+                    HoldEdgeSeconds = Val(HoldEdgeFlag)
+                    If UCase(GetParentheses(StringClean, "@AddEdgeHoldTime(")).Contains("M") Then HoldEdgeSeconds *= 60
+                    If UCase(GetParentheses(StringClean, "@AddEdgeHoldTime(")).Contains("H") Then HoldEdgeSeconds *= 3600
+                End If
+                HoldEdgeTick += HoldEdgeSeconds
+            End If
+            StringClean = StringClean.Replace("@AddEdgeHoldTime(" & OriginalFlag & ")", "")
+        End If
+
+
         If StringClean.Contains("@AddEdgeHoldTime") Then
 
             If HoldEdgeTimer.Enabled = True Then
-                If FrmSettings.NBHoldTheEdgeMax.Value = 0 Then
-                    If FrmSettings.domlevelNumBox.Value = 1 Then HoldEdgeTick += randomizer.Next(10, 31)
-                    If FrmSettings.domlevelNumBox.Value = 2 Then HoldEdgeTick += randomizer.Next(15, 46)
-                    If FrmSettings.domlevelNumBox.Value = 3 Then HoldEdgeTick += randomizer.Next(20, 61)
-                    If FrmSettings.domlevelNumBox.Value = 4 Then HoldEdgeTick += randomizer.Next(45, 121)
-                    If FrmSettings.domlevelNumBox.Value = 5 Then HoldEdgeTick += randomizer.Next(60, 301)
-                    If FrmSettings.domlevelNumBox.Value >= 3 And FrmSettings.crazyCheckBox.Checked = True Then
-                        TempVal = randomizer.Next(1, 101)
-                        If TempVal < 21 Then HoldEdgeTick *= 2
-                    End If
-                Else
-                    Dim HoldEdgeMin As Integer = 30
-                    If FrmSettings.NBHoldTheEdgeMax.Value < 31 Then HoldEdgeMin = FrmSettings.NBHoldTheEdgeMax.Value / 2
-                    HoldEdgeTick += randomizer.Next(HoldEdgeMin, FrmSettings.NBHoldTheEdgeMax.Value + 1)
-                    If HoldEdgeTick < 10 Then HoldEdgeTick = 30
-                End If
+                Dim HoldEdgeMin As Integer = FrmSettings.NBHoldTheEdgeMin.Value
+                If FrmSettings.LBLMinHold.Text = "minutes" Then HoldEdgeMin *= 60
+
+                Dim HoldEdgeMax As Integer = FrmSettings.NBHoldTheEdgeMax.Value
+                If FrmSettings.LBLMaxHold.Text = "minutes" Then HoldEdgeMax *= 60
+
+                If HoldEdgeMax < HoldEdgeMin Then HoldEdgeMax = HoldEdgeMin + 1
+
+                HoldEdgeTick += randomizer.Next(HoldEdgeMin, HoldEdgeMax + 1)
+                If HoldEdgeTick < 10 Then HoldEdgeTick = 10
             End If
             StringClean = StringClean.Replace("@AddEdgeHoldTime", "")
         End If
@@ -12531,7 +12661,7 @@ VTSkip:
         If StringClean.Contains("@SpeedUpCheck") Then
 
             If AskedToSpeedUp = True Then
-                ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SpeedUpREPEAT.txt"
+                ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpREPEAT.txt"
                 StringClean = ResponseClean(StringClean)
 
             Else
@@ -12579,7 +12709,7 @@ VTSkip:
         If StringClean.Contains("@SlowDownCheck") Then
 
             If AskedToSpeedUp = True Then
-                ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Vocabulary\Responses\System\SlowDownREPEAT.txt"
+                ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownREPEAT.txt"
                 StringClean = ResponseClean(StringClean)
 
             Else
@@ -12709,7 +12839,7 @@ VTSkip:
             End If
             BronzeTokens += FrmCardList.TokensPaid
             FrmCardList.LBLRiskTokens.Text = BronzeTokens
-            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\RP_Edges", FrmCardList.EdgesOwed, False)
+            My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\RP_Edges", FrmCardList.EdgesOwed, False)
             StringClean = StringClean.Replace("@RiskyPayout", "")
         End If
 
@@ -12769,14 +12899,14 @@ VTSkip:
                 CheckFlag = CheckFlag.Replace(", ", ",")
                 CheckFlag = CheckFlag.Replace(" ,", ",")
                 Dim CallSplit As String() = CheckFlag.Split(",")
-                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CallSplit(0)
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
                 FileGoto = CallSplit(1)
                 SkipGotoLine = True
                 GetGoto()
 
             Else
 
-                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
                 StrokeTauntVal = -1
 
             End If
@@ -12801,14 +12931,14 @@ VTSkip:
                 CheckFlag = CheckFlag.Replace(", ", ",")
                 CheckFlag = CheckFlag.Replace(" ,", ",")
                 Dim CallSplit As String() = CheckFlag.Split(",")
-                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CallSplit(0)
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
                 FileGoto = CallSplit(1)
                 SkipGotoLine = True
                 GetGoto()
 
             Else
 
-                FileText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag
+                FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
                 StrokeTauntVal = -1
 
             End If
@@ -12827,18 +12957,18 @@ VTSkip:
             CheckFlag = CheckFlag.Replace("@CallRandom(", "")
             Dim CallReplace As String = CheckFlag
 
-            If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag) Then
+            If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag) Then
                 MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not exist!" & Environment.NewLine & Environment.NewLine & _
-                                Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                                Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Else
                 Dim RandomFile As New List(Of String)
                 RandomFile.Clear()
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
                     RandomFile.Add(foundFile)
                 Next
                 If RandomFile.Count < 1 Then
                     MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine & _
-                               Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                               Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 Else
                     FileText = RandomFile(randomizer.Next(0, RandomFile.Count))
                     StrokeTauntVal = -1
@@ -12883,8 +13013,8 @@ VTSkip:
             Debug.Print("Delete Flag = " & WriteFlag)
 
 
-            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & WriteFlag) Then _
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & WriteFlag)
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & WriteFlag) Then _
+                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & WriteFlag)
 
 
 
@@ -12934,14 +13064,14 @@ VTSkip:
         End If
 
 
-        If StringClean.Contains("@PornRestrictionOn") Then
-            CreateFlag("SYS_PornRestriction")
-            StringClean = StringClean.Replace("@PornRestrictionOn", "")
+        If StringClean.Contains("@NoPornAllowed") Then
+            CreateFlag("SYS_NoPornAllowed")
+            StringClean = StringClean.Replace("@NoPornAllowed", "")
         End If
 
-        If StringClean.Contains("@PornRestrictionOff") Then
-            DeleteFlag("SYS_PornRestriction")
-            StringClean = StringClean.Replace("@PornRestrictionOff", "")
+        If StringClean.Contains("@PornAllowed") Then
+            DeleteFlag("SYS_NoPornAllowed")
+            StringClean = StringClean.Replace("@PornAllowed", "")
         End If
 
 
@@ -13292,6 +13422,24 @@ VTSkip:
 
     End Function
 
+    Public Function GetTime(ByVal VarName As String) As Date
+
+        Dim VarGet As String
+
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
+            Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName)
+            VarGet = CDate(VarReader.ReadLine())
+            VarReader.Close()
+            VarReader.Dispose()
+        Else
+            VarGet = FormatDateTime(Now, DateFormat.LongTime)
+        End If
+
+        Return VarGet
+
+
+    End Function
+
 
     Public Function GetVariable(ByVal VarName As String) As String
 
@@ -13546,14 +13694,13 @@ VTSkip:
         Dim ParenStart As Integer = ParenFlag.IndexOf(CommandCheck) + CommandCheck.Length
         Dim ParenType As String
 
-
-        If CommandCheck.Substring(0, CommandCheck.Length - 1) = "(" Then ParenType = ")"
-        If CommandCheck.Substring(0, CommandCheck.Length - 1) = "[" Then ParenType = "]"
-        Debug.Print("ParenType = " & ParenType)
+        ' #### CHECK ALL GETPAREN!
+        If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "(" Then ParenType = ")"
+        If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "[" Then ParenType = "]"
 
         ParenFlag = ParenFlag.Substring(ParenStart, ParenFlag.Length - ParenStart)
         ParenFlag = ParenFlag.Split(")")(0)
-        ParenFlag = ParenFlag.Replace(CommandCheck, "")
+        ParenFlag = ParenFlag.Replace(ParenType, "")
         Debug.Print("ParenFlag = " & ParenFlag)
 
         Return ParenFlag
@@ -13707,7 +13854,11 @@ VTSkip:
                     If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
                 Next
 
-                If LocalImageListCheck = False Then LocalImage = Image.FromFile(PicDir)
+                If LocalImageListCheck = False Then
+                    LocalImage = Image.FromFile(PicDir)
+                    DeleteLocalImageFilePath = PicDir
+                End If
+
                 LocalImageFound = True
 
 
@@ -17418,7 +17569,62 @@ VTSkip:
             End If
         Loop Until PoundCount = 0
 
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@Morning") Then
+                If GeneralTime <> "Morning" Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
 
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@Afternoon") Then
+                If GeneralTime <> "Afternoon" Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@Night") Then
+                If GeneralTime <> "Night" Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
 
         'If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
 
@@ -18815,6 +19021,8 @@ NoRepeatOFiles:
         CleanTaskText()
         TaskLines.Clear()
 
+        If GeneralTime = "Afternoon" Then GoTo Afternoon
+        If GeneralTime = "Night" Then GoTo Night
 
         TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Task_1.txt"
 
@@ -18865,6 +19073,8 @@ NoRepeatOFiles:
         TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
         CleanTaskText()
         TaskLines.Clear()
+
+Afternoon:
 
 
         TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Task_2.txt"
@@ -18918,6 +19128,7 @@ NoRepeatOFiles:
         CleanTaskText()
         TaskLines.Clear()
 
+Night:
 
         TaskFile = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Tasks\Task_3.txt"
 
@@ -19309,7 +19520,7 @@ TryNext:
         If FrmSettings.CBEdgeUseAvg.Checked = True Then
             If EdgeCountTick > EdgeTickCheck Then LongEdge = True
         Else
-            If EdgeCountTick > FrmSettings.NBLongEdge.Value Then LongEdge = True
+            If EdgeCountTick > FrmSettings.NBLongEdge.Value * 60 Then LongEdge = True
         End If
 
 
@@ -20889,14 +21100,14 @@ TryNext:
         ClearMainPictureBox()
 
         ImageString = CustomSlideshowList(randomizer.Next(0, CustomSlideshowList.Count))
-
+        DeleteLocalImageFilePath = ImageString
 
         original = Image.FromFile(ImageString)
         resized = ResizeImage(original, New Size(mainPictureBox.Width, mainPictureBox.Height))
 
         mainPictureBox.Image = resized
 
-        LBLImageInfo.Text = "lol"
+        LBLImageInfo.Text = ImageString
 
     End Sub
 
@@ -22589,7 +22800,26 @@ SkipNew:
         LBLAMPM.Text = Format(Now, "tt")
         LBLDate.Text = Format(Now, "Long Date")
 
-        Debug.Print(Format(Now, "MM/dd/yyyy"))
+        ' Debug.Print(Format(Now, "MM/dd/yyyy"))
+
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp") Then
+
+            Dim Dates As String
+            Dates = FormatDateTime(Now, DateFormat.ShortDate) & " " & GetTime("SYS_WakeUp")
+
+            Dim DDiff As Integer
+            DDiff = DateDiff(DateInterval.Hour, CDate(Dates), Now)
+
+            Debug.Print(DDiff)
+            Debug.Print(GetTime("SYS_WakeUp"))
+
+            GeneralTime = "Night"
+            If DDiff > -1 And DDiff < 5 Then GeneralTime = "Morning"
+            If DDiff > 4 And DDiff < 12 Then GeneralTime = "Afternoon"
+            If DDiff < -13 Then GeneralTime = "Afternoon"
+
+            Debug.Print(GeneralTime)
+        End If
 
 
     End Sub
