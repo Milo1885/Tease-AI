@@ -185,6 +185,7 @@ Partial Class Form1
         Me.CloseAppPanelToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SwitchSidesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.MetronomeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GlitterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DommeTagsToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
         Me.LazySubToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -211,12 +212,22 @@ Partial Class Form1
         Me.DebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RunScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.MetroTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.BWMetro = New System.ComponentModel.BackgroundWorker()
         Me.PNLDate = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LBLGeneralSettings = New System.Windows.Forms.Label()
         Me.PNLTabs = New System.Windows.Forms.Panel()
+        Me.PNLMetronome = New System.Windows.Forms.Panel()
+        Me.BTNMetroStop2 = New System.Windows.Forms.Button()
+        Me.BTNMetroStop1 = New System.Windows.Forms.Button()
+        Me.BTNMetroPreview2 = New System.Windows.Forms.Button()
+        Me.BTNMetroPreview1 = New System.Windows.Forms.Button()
+        Me.LBLHigh = New System.Windows.Forms.Label()
+        Me.NBMinPace = New System.Windows.Forms.NumericUpDown()
+        Me.LBLMinSpeed = New System.Windows.Forms.Label()
+        Me.LBLLow = New System.Windows.Forms.Label()
+        Me.NBMaxPace = New System.Windows.Forms.NumericUpDown()
+        Me.LBLMaxSpeed = New System.Windows.Forms.Label()
+        Me.CBMetronome = New System.Windows.Forms.CheckBox()
         Me.AppPanelVitalSub = New System.Windows.Forms.Panel()
         Me.GBGoals = New System.Windows.Forms.GroupBox()
         Me.BTNExercise = New System.Windows.Forms.Button()
@@ -322,19 +333,6 @@ Partial Class Form1
         Me.PNLAvatar = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.PNLMetronome = New System.Windows.Forms.Panel()
-        Me.CBMetronome = New System.Windows.Forms.CheckBox()
-        Me.LBLMaxSpeed = New System.Windows.Forms.Label()
-        Me.NBMaxPace = New System.Windows.Forms.NumericUpDown()
-        Me.LBLLow = New System.Windows.Forms.Label()
-        Me.LBLHigh = New System.Windows.Forms.Label()
-        Me.NBMinPace = New System.Windows.Forms.NumericUpDown()
-        Me.LBLMinSpeed = New System.Windows.Forms.Label()
-        Me.BTNMetroPreview1 = New System.Windows.Forms.Button()
-        Me.BTNMetroPreview2 = New System.Windows.Forms.Button()
-        Me.BTNMetroStop1 = New System.Windows.Forms.Button()
-        Me.BTNMetroStop2 = New System.Windows.Forms.Button()
-        Me.MetronomeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -353,6 +351,9 @@ Partial Class Form1
         Me.MenuStrip2.SuspendLayout()
         Me.PNLDate.SuspendLayout()
         Me.PNLTabs.SuspendLayout()
+        Me.PNLMetronome.SuspendLayout()
+        CType(Me.NBMinPace, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NBMaxPace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.AppPanelVitalSub.SuspendLayout()
         Me.GBGoals.SuspendLayout()
         Me.GBCalories.SuspendLayout()
@@ -373,9 +374,6 @@ Partial Class Form1
         Me.PNLAvatar.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.PNLMetronome.SuspendLayout()
-        CType(Me.NBMaxPace, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NBMinPace, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'domName
@@ -1744,6 +1742,12 @@ Partial Class Form1
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
         Me.ToolStripSeparator4.Size = New System.Drawing.Size(154, 6)
         '
+        'MetronomeToolStripMenuItem
+        '
+        Me.MetronomeToolStripMenuItem.Name = "MetronomeToolStripMenuItem"
+        Me.MetronomeToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.MetronomeToolStripMenuItem.Text = "Metronome"
+        '
         'GlitterToolStripMenuItem
         '
         Me.GlitterToolStripMenuItem.Name = "GlitterToolStripMenuItem"
@@ -1904,12 +1908,6 @@ Partial Class Form1
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.AboutToolStripMenuItem.Text = "About"
         '
-        'MetroTimer
-        '
-        '
-        'BWMetro
-        '
-        '
         'PNLDate
         '
         Me.PNLDate.BackColor = System.Drawing.Color.Transparent
@@ -1959,6 +1957,149 @@ Partial Class Form1
         Me.PNLTabs.Name = "PNLTabs"
         Me.PNLTabs.Size = New System.Drawing.Size(253, 646)
         Me.PNLTabs.TabIndex = 778
+        '
+        'PNLMetronome
+        '
+        Me.PNLMetronome.BackColor = System.Drawing.Color.SteelBlue
+        Me.PNLMetronome.Controls.Add(Me.BTNMetroStop2)
+        Me.PNLMetronome.Controls.Add(Me.BTNMetroStop1)
+        Me.PNLMetronome.Controls.Add(Me.BTNMetroPreview2)
+        Me.PNLMetronome.Controls.Add(Me.BTNMetroPreview1)
+        Me.PNLMetronome.Controls.Add(Me.LBLHigh)
+        Me.PNLMetronome.Controls.Add(Me.NBMinPace)
+        Me.PNLMetronome.Controls.Add(Me.LBLMinSpeed)
+        Me.PNLMetronome.Controls.Add(Me.LBLLow)
+        Me.PNLMetronome.Controls.Add(Me.NBMaxPace)
+        Me.PNLMetronome.Controls.Add(Me.LBLMaxSpeed)
+        Me.PNLMetronome.Controls.Add(Me.CBMetronome)
+        Me.PNLMetronome.Location = New System.Drawing.Point(2, 2)
+        Me.PNLMetronome.Name = "PNLMetronome"
+        Me.PNLMetronome.Size = New System.Drawing.Size(245, 167)
+        Me.PNLMetronome.TabIndex = 779
+        '
+        'BTNMetroStop2
+        '
+        Me.BTNMetroStop2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMetroStop2.ForeColor = System.Drawing.Color.White
+        Me.BTNMetroStop2.Location = New System.Drawing.Point(85, 119)
+        Me.BTNMetroStop2.Name = "BTNMetroStop2"
+        Me.BTNMetroStop2.Size = New System.Drawing.Size(41, 23)
+        Me.BTNMetroStop2.TabIndex = 10
+        Me.BTNMetroStop2.Text = "Stop"
+        Me.BTNMetroStop2.UseVisualStyleBackColor = True
+        '
+        'BTNMetroStop1
+        '
+        Me.BTNMetroStop1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMetroStop1.ForeColor = System.Drawing.Color.White
+        Me.BTNMetroStop1.Location = New System.Drawing.Point(85, 64)
+        Me.BTNMetroStop1.Name = "BTNMetroStop1"
+        Me.BTNMetroStop1.Size = New System.Drawing.Size(41, 23)
+        Me.BTNMetroStop1.TabIndex = 9
+        Me.BTNMetroStop1.Text = "Stop"
+        Me.BTNMetroStop1.UseVisualStyleBackColor = True
+        '
+        'BTNMetroPreview2
+        '
+        Me.BTNMetroPreview2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMetroPreview2.ForeColor = System.Drawing.Color.White
+        Me.BTNMetroPreview2.Location = New System.Drawing.Point(8, 119)
+        Me.BTNMetroPreview2.Name = "BTNMetroPreview2"
+        Me.BTNMetroPreview2.Size = New System.Drawing.Size(70, 23)
+        Me.BTNMetroPreview2.TabIndex = 8
+        Me.BTNMetroPreview2.Text = "Preview"
+        Me.BTNMetroPreview2.UseVisualStyleBackColor = True
+        '
+        'BTNMetroPreview1
+        '
+        Me.BTNMetroPreview1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNMetroPreview1.ForeColor = System.Drawing.Color.White
+        Me.BTNMetroPreview1.Location = New System.Drawing.Point(8, 64)
+        Me.BTNMetroPreview1.Name = "BTNMetroPreview1"
+        Me.BTNMetroPreview1.Size = New System.Drawing.Size(70, 23)
+        Me.BTNMetroPreview1.TabIndex = 7
+        Me.BTNMetroPreview1.Text = "Preview"
+        Me.BTNMetroPreview1.UseVisualStyleBackColor = True
+        '
+        'LBLHigh
+        '
+        Me.LBLHigh.BackColor = System.Drawing.Color.Transparent
+        Me.LBLHigh.ForeColor = System.Drawing.Color.White
+        Me.LBLHigh.Location = New System.Drawing.Point(144, 119)
+        Me.LBLHigh.Name = "LBLHigh"
+        Me.LBLHigh.Size = New System.Drawing.Size(92, 18)
+        Me.LBLHigh.TabIndex = 6
+        Me.LBLHigh.Text = "Higher is Slower"
+        Me.LBLHigh.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'NBMinPace
+        '
+        Me.NBMinPace.Increment = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.NBMinPace.Location = New System.Drawing.Point(144, 97)
+        Me.NBMinPace.Maximum = New Decimal(New Integer() {3000, 0, 0, 0})
+        Me.NBMinPace.Minimum = New Decimal(New Integer() {200, 0, 0, 0})
+        Me.NBMinPace.Name = "NBMinPace"
+        Me.NBMinPace.Size = New System.Drawing.Size(92, 20)
+        Me.NBMinPace.TabIndex = 5
+        Me.NBMinPace.Value = New Decimal(New Integer() {1000, 0, 0, 0})
+        '
+        'LBLMinSpeed
+        '
+        Me.LBLMinSpeed.AutoSize = True
+        Me.LBLMinSpeed.BackColor = System.Drawing.Color.Transparent
+        Me.LBLMinSpeed.ForeColor = System.Drawing.Color.White
+        Me.LBLMinSpeed.Location = New System.Drawing.Point(8, 99)
+        Me.LBLMinSpeed.Name = "LBLMinSpeed"
+        Me.LBLMinSpeed.Size = New System.Drawing.Size(118, 13)
+        Me.LBLMinSpeed.TabIndex = 4
+        Me.LBLMinSpeed.Text = "Minimum Stroking Pace"
+        '
+        'LBLLow
+        '
+        Me.LBLLow.BackColor = System.Drawing.Color.Transparent
+        Me.LBLLow.ForeColor = System.Drawing.Color.White
+        Me.LBLLow.Location = New System.Drawing.Point(144, 64)
+        Me.LBLLow.Name = "LBLLow"
+        Me.LBLLow.Size = New System.Drawing.Size(92, 16)
+        Me.LBLLow.TabIndex = 3
+        Me.LBLLow.Text = "Lower is Faster"
+        Me.LBLLow.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'NBMaxPace
+        '
+        Me.NBMaxPace.Increment = New Decimal(New Integer() {50, 0, 0, 0})
+        Me.NBMaxPace.Location = New System.Drawing.Point(144, 43)
+        Me.NBMaxPace.Maximum = New Decimal(New Integer() {900, 0, 0, 0})
+        Me.NBMaxPace.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.NBMaxPace.Name = "NBMaxPace"
+        Me.NBMaxPace.Size = New System.Drawing.Size(92, 20)
+        Me.NBMaxPace.TabIndex = 2
+        Me.NBMaxPace.Value = New Decimal(New Integer() {200, 0, 0, 0})
+        '
+        'LBLMaxSpeed
+        '
+        Me.LBLMaxSpeed.AutoSize = True
+        Me.LBLMaxSpeed.BackColor = System.Drawing.Color.Transparent
+        Me.LBLMaxSpeed.ForeColor = System.Drawing.Color.White
+        Me.LBLMaxSpeed.Location = New System.Drawing.Point(8, 45)
+        Me.LBLMaxSpeed.Name = "LBLMaxSpeed"
+        Me.LBLMaxSpeed.Size = New System.Drawing.Size(121, 13)
+        Me.LBLMaxSpeed.TabIndex = 1
+        Me.LBLMaxSpeed.Text = "Maximum Stroking Pace"
+        '
+        'CBMetronome
+        '
+        Me.CBMetronome.AutoSize = True
+        Me.CBMetronome.BackColor = System.Drawing.Color.Transparent
+        Me.CBMetronome.Checked = True
+        Me.CBMetronome.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBMetronome.ForeColor = System.Drawing.Color.White
+        Me.CBMetronome.Location = New System.Drawing.Point(10, 16)
+        Me.CBMetronome.Name = "CBMetronome"
+        Me.CBMetronome.Size = New System.Drawing.Size(115, 17)
+        Me.CBMetronome.TabIndex = 0
+        Me.CBMetronome.Text = "Enable Metronome"
+        Me.CBMetronome.UseVisualStyleBackColor = False
         '
         'AppPanelVitalSub
         '
@@ -3212,155 +3353,6 @@ Partial Class Form1
         Me.Panel4.Size = New System.Drawing.Size(245, 31)
         Me.Panel4.TabIndex = 779
         '
-        'PNLMetronome
-        '
-        Me.PNLMetronome.BackColor = System.Drawing.Color.SteelBlue
-        Me.PNLMetronome.Controls.Add(Me.BTNMetroStop2)
-        Me.PNLMetronome.Controls.Add(Me.BTNMetroStop1)
-        Me.PNLMetronome.Controls.Add(Me.BTNMetroPreview2)
-        Me.PNLMetronome.Controls.Add(Me.BTNMetroPreview1)
-        Me.PNLMetronome.Controls.Add(Me.LBLHigh)
-        Me.PNLMetronome.Controls.Add(Me.NBMinPace)
-        Me.PNLMetronome.Controls.Add(Me.LBLMinSpeed)
-        Me.PNLMetronome.Controls.Add(Me.LBLLow)
-        Me.PNLMetronome.Controls.Add(Me.NBMaxPace)
-        Me.PNLMetronome.Controls.Add(Me.LBLMaxSpeed)
-        Me.PNLMetronome.Controls.Add(Me.CBMetronome)
-        Me.PNLMetronome.Location = New System.Drawing.Point(2, 2)
-        Me.PNLMetronome.Name = "PNLMetronome"
-        Me.PNLMetronome.Size = New System.Drawing.Size(245, 167)
-        Me.PNLMetronome.TabIndex = 779
-        '
-        'CBMetronome
-        '
-        Me.CBMetronome.AutoSize = True
-        Me.CBMetronome.BackColor = System.Drawing.Color.Transparent
-        Me.CBMetronome.Checked = True
-        Me.CBMetronome.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CBMetronome.ForeColor = System.Drawing.Color.White
-        Me.CBMetronome.Location = New System.Drawing.Point(10, 16)
-        Me.CBMetronome.Name = "CBMetronome"
-        Me.CBMetronome.Size = New System.Drawing.Size(115, 17)
-        Me.CBMetronome.TabIndex = 0
-        Me.CBMetronome.Text = "Enable Metronome"
-        Me.CBMetronome.UseVisualStyleBackColor = False
-        '
-        'LBLMaxSpeed
-        '
-        Me.LBLMaxSpeed.AutoSize = True
-        Me.LBLMaxSpeed.BackColor = System.Drawing.Color.Transparent
-        Me.LBLMaxSpeed.ForeColor = System.Drawing.Color.White
-        Me.LBLMaxSpeed.Location = New System.Drawing.Point(8, 45)
-        Me.LBLMaxSpeed.Name = "LBLMaxSpeed"
-        Me.LBLMaxSpeed.Size = New System.Drawing.Size(121, 13)
-        Me.LBLMaxSpeed.TabIndex = 1
-        Me.LBLMaxSpeed.Text = "Maximum Stroking Pace"
-        '
-        'NBMaxPace
-        '
-        Me.NBMaxPace.Increment = New Decimal(New Integer() {50, 0, 0, 0})
-        Me.NBMaxPace.Location = New System.Drawing.Point(144, 43)
-        Me.NBMaxPace.Maximum = New Decimal(New Integer() {900, 0, 0, 0})
-        Me.NBMaxPace.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.NBMaxPace.Name = "NBMaxPace"
-        Me.NBMaxPace.Size = New System.Drawing.Size(92, 20)
-        Me.NBMaxPace.TabIndex = 2
-        Me.NBMaxPace.Value = New Decimal(New Integer() {200, 0, 0, 0})
-        '
-        'LBLLow
-        '
-        Me.LBLLow.BackColor = System.Drawing.Color.Transparent
-        Me.LBLLow.ForeColor = System.Drawing.Color.White
-        Me.LBLLow.Location = New System.Drawing.Point(144, 64)
-        Me.LBLLow.Name = "LBLLow"
-        Me.LBLLow.Size = New System.Drawing.Size(92, 16)
-        Me.LBLLow.TabIndex = 3
-        Me.LBLLow.Text = "Lower is Faster"
-        Me.LBLLow.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'LBLHigh
-        '
-        Me.LBLHigh.BackColor = System.Drawing.Color.Transparent
-        Me.LBLHigh.ForeColor = System.Drawing.Color.White
-        Me.LBLHigh.Location = New System.Drawing.Point(144, 119)
-        Me.LBLHigh.Name = "LBLHigh"
-        Me.LBLHigh.Size = New System.Drawing.Size(92, 18)
-        Me.LBLHigh.TabIndex = 6
-        Me.LBLHigh.Text = "Higher is Slower"
-        Me.LBLHigh.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'NBMinPace
-        '
-        Me.NBMinPace.Increment = New Decimal(New Integer() {50, 0, 0, 0})
-        Me.NBMinPace.Location = New System.Drawing.Point(144, 97)
-        Me.NBMinPace.Maximum = New Decimal(New Integer() {3000, 0, 0, 0})
-        Me.NBMinPace.Minimum = New Decimal(New Integer() {200, 0, 0, 0})
-        Me.NBMinPace.Name = "NBMinPace"
-        Me.NBMinPace.Size = New System.Drawing.Size(92, 20)
-        Me.NBMinPace.TabIndex = 5
-        Me.NBMinPace.Value = New Decimal(New Integer() {1000, 0, 0, 0})
-        '
-        'LBLMinSpeed
-        '
-        Me.LBLMinSpeed.AutoSize = True
-        Me.LBLMinSpeed.BackColor = System.Drawing.Color.Transparent
-        Me.LBLMinSpeed.ForeColor = System.Drawing.Color.White
-        Me.LBLMinSpeed.Location = New System.Drawing.Point(8, 99)
-        Me.LBLMinSpeed.Name = "LBLMinSpeed"
-        Me.LBLMinSpeed.Size = New System.Drawing.Size(118, 13)
-        Me.LBLMinSpeed.TabIndex = 4
-        Me.LBLMinSpeed.Text = "Minimum Stroking Pace"
-        '
-        'BTNMetroPreview1
-        '
-        Me.BTNMetroPreview1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNMetroPreview1.ForeColor = System.Drawing.Color.White
-        Me.BTNMetroPreview1.Location = New System.Drawing.Point(8, 64)
-        Me.BTNMetroPreview1.Name = "BTNMetroPreview1"
-        Me.BTNMetroPreview1.Size = New System.Drawing.Size(70, 23)
-        Me.BTNMetroPreview1.TabIndex = 7
-        Me.BTNMetroPreview1.Text = "Preview"
-        Me.BTNMetroPreview1.UseVisualStyleBackColor = True
-        '
-        'BTNMetroPreview2
-        '
-        Me.BTNMetroPreview2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNMetroPreview2.ForeColor = System.Drawing.Color.White
-        Me.BTNMetroPreview2.Location = New System.Drawing.Point(8, 119)
-        Me.BTNMetroPreview2.Name = "BTNMetroPreview2"
-        Me.BTNMetroPreview2.Size = New System.Drawing.Size(70, 23)
-        Me.BTNMetroPreview2.TabIndex = 8
-        Me.BTNMetroPreview2.Text = "Preview"
-        Me.BTNMetroPreview2.UseVisualStyleBackColor = True
-        '
-        'BTNMetroStop1
-        '
-        Me.BTNMetroStop1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNMetroStop1.ForeColor = System.Drawing.Color.White
-        Me.BTNMetroStop1.Location = New System.Drawing.Point(85, 64)
-        Me.BTNMetroStop1.Name = "BTNMetroStop1"
-        Me.BTNMetroStop1.Size = New System.Drawing.Size(41, 23)
-        Me.BTNMetroStop1.TabIndex = 9
-        Me.BTNMetroStop1.Text = "Stop"
-        Me.BTNMetroStop1.UseVisualStyleBackColor = True
-        '
-        'BTNMetroStop2
-        '
-        Me.BTNMetroStop2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BTNMetroStop2.ForeColor = System.Drawing.Color.White
-        Me.BTNMetroStop2.Location = New System.Drawing.Point(85, 119)
-        Me.BTNMetroStop2.Name = "BTNMetroStop2"
-        Me.BTNMetroStop2.Size = New System.Drawing.Size(41, 23)
-        Me.BTNMetroStop2.TabIndex = 10
-        Me.BTNMetroStop2.Text = "Stop"
-        Me.BTNMetroStop2.UseVisualStyleBackColor = True
-        '
-        'MetronomeToolStripMenuItem
-        '
-        Me.MetronomeToolStripMenuItem.Name = "MetronomeToolStripMenuItem"
-        Me.MetronomeToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.MetronomeToolStripMenuItem.Text = "Metronome"
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3404,6 +3396,10 @@ Partial Class Form1
         Me.MenuStrip2.PerformLayout()
         Me.PNLDate.ResumeLayout(False)
         Me.PNLTabs.ResumeLayout(False)
+        Me.PNLMetronome.ResumeLayout(False)
+        Me.PNLMetronome.PerformLayout()
+        CType(Me.NBMinPace, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NBMaxPace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.AppPanelVitalSub.ResumeLayout(False)
         Me.GBGoals.ResumeLayout(False)
         Me.GBGoals.PerformLayout()
@@ -3430,10 +3426,6 @@ Partial Class Form1
         Me.Panel3.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        Me.PNLMetronome.ResumeLayout(False)
-        Me.PNLMetronome.PerformLayout()
-        CType(Me.NBMaxPace, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NBMinPace, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -3578,8 +3570,6 @@ Partial Class Form1
     Friend WithEvents BugReportThreadToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents WebteasesToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ForumToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MetroTimer As System.Windows.Forms.Timer
-    Friend WithEvents BWMetro As System.ComponentModel.BackgroundWorker
     Friend WithEvents TBFurniture As System.Windows.Forms.TextBox
     Friend WithEvents TBSexToy As System.Windows.Forms.TextBox
     Friend WithEvents TBTattoo As System.Windows.Forms.TextBox

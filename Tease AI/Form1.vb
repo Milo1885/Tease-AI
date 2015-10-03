@@ -1573,10 +1573,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSplash.Refresh()
 
         CloseApp()
-      
-
-        MetroTimer.Start()
-
 
         LBLCalorie.Text = My.Settings.CaloriesConsumed
         Debug.Print("HOW MANY FUCKING CALORIES!!!! " & My.Settings.CaloriesConsumed)
@@ -3779,7 +3775,7 @@ AcceptAnswer:
 
                 Loop Until InStr(gotolines(gotoline), FileGoto) <> 0 And InStr(gotolines(gotoline), "@Goto") = 0 And InStr(gotolines(gotoline), "@CheckFlag") = 0 _
            And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
-           And InStr(gotolines(gotoline), "Then(") = 0
+           And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0
 
                 'Debug.Print("GetGotoChat() Final gotolines(gotoline) = " & (gotolines(gotoline)))
 
@@ -4003,9 +3999,9 @@ AcceptAnswer:
     Public Sub RunFileText()
 
 
+        Debug.Print("ReturnFlag = " & ReturnFlag)
 
-
-       
+        If ReturnFlag = True Then GoTo ReturnCalled
 
         Debug.Print("SaidHello = " & SaidHello)
         If SaidHello = False Then Return
@@ -4031,6 +4027,8 @@ AcceptAnswer:
         If InputFlag = True Then Return
 
         'Debug.Print("RunFileText " & StrokeTauntVal)
+
+ReturnCalled:
 
         StrokeTauntVal += 1
 
@@ -4184,6 +4182,13 @@ AcceptAnswer:
             If lines(line).Contains("@ApathyLevel4") And FrmSettings.NBEmpathy.Value <> 4 Then InvalidFilter = True
             If lines(line).Contains("@ApathyLevel5") And FrmSettings.NBEmpathy.Value <> 5 Then InvalidFilter = True
 
+            If lines(line).Contains("@Stroking") And SubStroking = False Then InvalidFilter = True
+            If lines(line).Contains("@Edging") And SubEdging = False Then InvalidFilter = True
+            If lines(line).Contains("@HoldingTheEdge") And SubHoldingEdge = False Then InvalidFilter = True
+
+            If lines(line).Contains("@NotStroking") And SubStroking = True Then InvalidFilter = True
+            If lines(line).Contains("@NotEdging") And SubEdging = True Then InvalidFilter = True
+            If lines(line).Contains("@NotHoldingTheEdge") And SubHoldingEdge = True Then InvalidFilter = True
 
 
 
@@ -4247,13 +4252,32 @@ AcceptAnswer:
                     FileText = ReturnFileText
                     StrokeTauntVal = ReturnStrokeTauntVal
                     If ReturnSubState = "Stroking" Then
-                        DomTask = "Get back to stroking @StartStroking"
-                        TypingDelayGeneric()
+                        If SubStroking = False Then
+                            DomTask = "Get back to stroking @StartStroking"
+                            TypingDelayGeneric()
+                        Else
+                            StrokeTimer.Start()
+                            StrokeTauntTimer.Start()
+                        End If
                     End If
-                    If ReturnSubState = "Edging" Or ReturnSubState = "HoldingTheEdge" Then
-                        DomTask = "Start getting yourself to the edge again @Edge"
-                        SubStroking = True
-                        TypingDelayGeneric()
+                    If ReturnSubState = "Edging" Then
+                        If SubEdging = False Then
+                            DomTask = "Start getting yourself to the edge again @Edge"
+                            SubStroking = True
+                            TypingDelayGeneric()
+                        Else
+                            EdgeTauntTimer.Start()
+                        End If
+                    End If
+                    If ReturnSubState = "HoldingTheEdge" Then
+                        If SubEdging = False Then
+                            DomTask = "Start getting yourself to the edge again @EdgeHold"
+                            SubStroking = True
+                            TypingDelayGeneric()
+                        Else
+                            HoldEdgeTimer.Start()
+                            HoldEdgeTauntTimer.Start()
+                        End If
                     End If
                     If ReturnSubState = "CBTBalls" Then
                         DomTask = "Now let's get back to busting those #Balls @CBTBalls"
@@ -4266,8 +4290,11 @@ AcceptAnswer:
                         TypingDelayGeneric()
                     End If
                     If ReturnSubState = "Rest" Then
-                        ScriptTick = 2
+                        DomTypeCheck = True
+                        ScriptTick = 7
                         ScriptTimer.Start()
+                        DomTask = "Now as I was saying"
+                        TypingDelayGeneric()
                         Return
                     End If
                 End If
@@ -4687,7 +4714,7 @@ SkipGotoSearch:
 
             Loop Until InStr(gotolines(gotoline), FileGoto) <> 0 And InStr(gotolines(gotoline), "@Goto") = 0 And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
              And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
-            And InStr(gotolines(gotoline), "Then(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
+            And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
 
             ioFile2.Close()
             ioFile2.Dispose()
@@ -10140,7 +10167,7 @@ RinseLatherRepeat:
 
             If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_FirstRun") Then
                 Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
-                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\FirstRun", SetDate, False)
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_FirstRun", SetDate, False)
             End If
 
             SetVariable("SYS_StrokeRound", Val(GetVariable("SYS_StrokeRound")) + 1)
@@ -12934,7 +12961,31 @@ VTSkip:
             ReturnFileText = FileText
             ReturnStrokeTauntVal = StrokeTauntVal
             GetSubState()
-            StopEverything()
+
+            StrokeTimer.Stop()
+            StrokeTauntTimer.Stop()
+            CensorshipTimer.Stop()
+            RLGLTimer.Stop()
+            TnASlides.Stop()
+            AvoidTheEdge.Stop()
+            EdgeTauntTimer.Stop()
+            HoldEdgeTimer.Stop()
+            HoldEdgeTauntTimer.Stop()
+            StrokePaceTimer.Stop()
+            AvoidTheEdgeTaunts.Stop()
+            RLGLTauntTimer.Stop()
+            VideoTauntTimer.Stop()
+            EdgeCountTimer.Stop()
+
+            CBTBallsActive = False
+            CBTBallsFlag = False
+            CBTCockActive = False
+            CBTCockFlag = False
+            CBTBothActive = False
+            CBTBothFlag = False
+            CustomTaskActive = False
+
+            'StopEverything()
             ReturnFlag = True
 
             Dim CheckFlag As String = StringClean & " some test garbage"
@@ -13135,6 +13186,57 @@ VTSkip:
             Dim TagFlag As String = GetParentheses(StringClean, "@ImageTag(")
             GetLocalImage(TagFlag)
             StringClean = StringClean.Replace("@ImageTag(" & TagFlag & ")", "")
+        End If
+
+        If StringClean.Contains("@GoodMood(") Then
+
+            Dim MoodFlag As String = GetParentheses(StringClean, "@GoodMood(")
+
+            If DommeMood > FrmSettings.NBDomMoodMax.Value Then
+                FileGoto = MoodFlag
+                SkipGotoLine = True
+                GetGoto()
+            End If
+
+            StringClean = StringClean.Replace("@GoodMood(" & MoodFlag & ")", "")
+        End If
+
+        If StringClean.Contains("@BadMood(") Then
+
+            Dim MoodFlag As String = GetParentheses(StringClean, "@BadMood(")
+
+            If DommeMood < FrmSettings.NBDomMoodMin.Value Then
+                FileGoto = MoodFlag
+                SkipGotoLine = True
+                GetGoto()
+            End If
+
+            StringClean = StringClean.Replace("@BadMood(" & MoodFlag & ")", "")
+        End If
+
+        If StringClean.Contains("@NeutralMood(") Then
+
+            Dim MoodFlag As String = GetParentheses(StringClean, "@NeutralMood(")
+
+            If DommeMood >= FrmSettings.NBDomMoodMin.Value And DommeMood <= FrmSettings.NBDomMoodMax.Value Then
+                FileGoto = MoodFlag
+                SkipGotoLine = True
+                GetGoto()
+            End If
+
+            StringClean = StringClean.Replace("@NeutralMood(" & MoodFlag & ")", "")
+        End If
+
+        If StringClean.Contains("@MoodUp") Then
+            DommeMood += 1
+            If DommeMood > 10 Then DommeMood = 10
+            StringClean = StringClean.Replace("@MoodUp", "")
+        End If
+
+        If StringClean.Contains("@MoodDown") Then
+            DommeMood -= 1
+            If DommeMood < 1 Then DommeMood = 1
+            StringClean = StringClean.Replace("@MoodDown", "")
         End If
 
         If StringClean.Contains("@Debug") Then
@@ -13945,8 +14047,8 @@ VTSkip:
         If SubStroking = True Then ReturnSubState = "Stroking"
         If SubEdging = True Then ReturnSubState = "Edging"
         If SubHoldingEdge = True Then ReturnSubState = "Holding The Edge"
-        If CBTBallsActive = True Or CBTBothActive = True Then ReturnSubState = "CBTBalls"
-        If CBTCockActive = True Then ReturnSubState = "CBTCock"
+        If CBTBallsFlag = True Or CBTBothFlag = True Then ReturnSubState = "CBTBalls"
+        If CBTCockFlag = True Then ReturnSubState = "CBTCock"
         If CensorshipGame = True Then ReturnSubState = "Censorship Sucks"
         If AvoidTheEdgeGame = True Then ReturnSubState = "Avoid The Edge"
         If RLGLGame = True Then ReturnSubState = "RLGL"
@@ -17587,7 +17689,7 @@ VTSkip:
         Do
             Application.DoEvents()
             PoundCount -= 1
-            If ListClean(PoundCount).Contains("@SubStroking") Then
+            If ListClean(PoundCount).Contains("@Stroking") Or ListClean(PoundCount).Contains("@SubStroking") Then
                 If SubStroking = False Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
@@ -17606,8 +17708,84 @@ VTSkip:
         Do
             Application.DoEvents()
             PoundCount -= 1
-            If ListClean(PoundCount).Contains("@SubNotStroking") Then
+            If ListClean(PoundCount).Contains("@NotStroking") Or ListClean(PoundCount).Contains("@SubNotStroking") Then
                 If SubStroking = True Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@Edging") Or ListClean(PoundCount).Contains("@SubEdging") Then
+                If SubEdging = False Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@NotEdging") Or ListClean(PoundCount).Contains("@SubNotEdging") Then
+                If SubEdging = True Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@HoldingTheEdge") Or ListClean(PoundCount).Contains("@SubHoldingTheEdge") Then
+                If SubHoldingEdge = False Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@NotHoldingTheEdge") Or ListClean(PoundCount).Contains("@SubNotHoldingTheEdge") Then
+                If SubHoldingEdge = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -17665,6 +17843,63 @@ VTSkip:
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@Night") Then
                 If GeneralTime <> "Night" Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@GoodMood") Then
+                If DommeMood <= FrmSettings.NBDomMoodMax.Value Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@BadMood") Then
+                If DommeMood >= FrmSettings.NBDomMoodMin.Value Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@NeutralMood") Then
+                If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -23231,36 +23466,12 @@ SkipNew:
     End Sub
 
 
-    Public Sub PlayMetroTick()
-
-        ' My.Computer.Audio.Stop()
-        ' My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\metronome.wav")
-
-        'Beep()
-
-    End Sub
 
 
 
 
 
-    Private Sub MetroTimer_Tick(sender As System.Object, e As System.EventArgs) Handles MetroTimer.Tick
-
-        BWMetro.RunWorkerAsync()
-
-        ' 
-    End Sub
-
-    Private Sub BWMetro_DoWork(sender As System.Object, e As System.ComponentModel.DoWorkEventArgs) Handles BWMetro.DoWork
-
-
-        Control.CheckForIllegalCrossThreadCalls = False
-
-        Thr = New Threading.Thread(New Threading.ThreadStart(AddressOf PlayMetroTick))
-        Thr.SetApartmentState(ApartmentState.STA)
-        Thr.Start()
-
-    End Sub
+  
 
     
 
@@ -25535,6 +25746,7 @@ SkipNew:
 
             If StrokePace <> 0 And CBMetronome.Checked = True Then
 
+                My.Computer.Audio.Stop()
                 My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\metronome.wav")
 
                 Thread.Sleep(StrokePace)
@@ -25587,4 +25799,5 @@ SkipNew:
         End If
     End Sub
 
+    
 End Class

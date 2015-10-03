@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+@CallReturn() Command, Domme Mood Commands
+
 Long Edge amount is now measured in minutes instead of seconds
 
 Open From Text button in AI Box Tools has been changed to Open From Clipboard
