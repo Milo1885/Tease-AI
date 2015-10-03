@@ -13255,10 +13255,10 @@ NextURL:
         Dim bpm As Integer
         bpm = MetroTest.Value
         Dim MetroVal As Integer = 60 / bpm * 1000
-        ' Form1.StrokePace = MetroTest.Value
+        'Form1.StrokePace = MetroTest.Value
 
 
-        Form1.MetroTimer.Interval = MetroVal
+        ' Form1.MetroTimer.Interval = MetroVal
     End Sub
 
 

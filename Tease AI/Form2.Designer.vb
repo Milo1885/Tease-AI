@@ -169,8 +169,6 @@ Partial Class FrmSettings
         Me.Label54 = New System.Windows.Forms.Label()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
-        Me.TimeBoxWakeUp = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.LBLAvgEdgeStroking = New System.Windows.Forms.Label()
@@ -183,11 +181,16 @@ Partial Class FrmSettings
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.GroupBox22 = New System.Windows.Forms.GroupBox()
+        Me.NBWritingTaskMax = New System.Windows.Forms.NumericUpDown()
+        Me.NBWritingTaskMin = New System.Windows.Forms.NumericUpDown()
+        Me.Label75 = New System.Windows.Forms.Label()
+        Me.Label77 = New System.Windows.Forms.Label()
         Me.GroupBox45 = New System.Windows.Forms.GroupBox()
+        Me.CBTSlider = New System.Windows.Forms.TrackBar()
         Me.LBLCBTSlider = New System.Windows.Forms.Label()
         Me.CBCBTBalls = New System.Windows.Forms.CheckBox()
         Me.CBCBTCock = New System.Windows.Forms.CheckBox()
-        Me.CBTSlider = New System.Windows.Forms.TrackBar()
         Me.GroupBox35 = New System.Windows.Forms.GroupBox()
         Me.GroupBox39 = New System.Windows.Forms.GroupBox()
         Me.CBHonorificInclude = New System.Windows.Forms.CheckBox()
@@ -199,21 +202,23 @@ Partial Class FrmSettings
         Me.TBYes = New System.Windows.Forms.TextBox()
         Me.GroupBox36 = New System.Windows.Forms.GroupBox()
         Me.TBGreeting = New System.Windows.Forms.TextBox()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.TimeBoxWakeUp = New System.Windows.Forms.DateTimePicker()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
-        Me.CBEdgeUseAvg = New System.Windows.Forms.CheckBox()
-        Me.CBLongEdgeTaunts = New System.Windows.Forms.CheckBox()
-        Me.Label55 = New System.Windows.Forms.Label()
-        Me.CBLongEdgeInterrupts = New System.Windows.Forms.CheckBox()
-        Me.NBWritingTaskMax = New System.Windows.Forms.NumericUpDown()
-        Me.NBWritingTaskMin = New System.Windows.Forms.NumericUpDown()
-        Me.NBHoldTheEdgeMax = New System.Windows.Forms.NumericUpDown()
-        Me.Label77 = New System.Windows.Forms.Label()
-        Me.Label75 = New System.Windows.Forms.Label()
-        Me.Label81 = New System.Windows.Forms.Label()
+        Me.LBLMaxHold = New System.Windows.Forms.Label()
+        Me.Label79 = New System.Windows.Forms.Label()
         Me.NBLongEdge = New System.Windows.Forms.NumericUpDown()
+        Me.LBLMinHold = New System.Windows.Forms.Label()
+        Me.CBEdgeUseAvg = New System.Windows.Forms.CheckBox()
+        Me.CBLongEdgeInterrupts = New System.Windows.Forms.CheckBox()
+        Me.NBHoldTheEdgeMin = New System.Windows.Forms.NumericUpDown()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.Label81 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.NBHoldTheEdgeMax = New System.Windows.Forms.NumericUpDown()
+        Me.CBLongEdgeTaunts = New System.Windows.Forms.CheckBox()
         Me.PictureBox12 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
-        Me.LBLSubSettingsDescription = New System.Windows.Forms.Label()
         Me.GroupBox32 = New System.Windows.Forms.GroupBox()
         Me.LBLSubBdayFormat = New System.Windows.Forms.Label()
         Me.CBChastitySpikes = New System.Windows.Forms.CheckBox()
@@ -945,6 +950,8 @@ Partial Class FrmSettings
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Label41 = New System.Windows.Forms.Label()
+        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.LBLSubSettingsDescription = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.GetColor = New System.Windows.Forms.ColorDialog()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
@@ -958,13 +965,6 @@ Partial Class FrmSettings
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.NBHoldTheEdgeMin = New System.Windows.Forms.NumericUpDown()
-        Me.LBLMinHold = New System.Windows.Forms.Label()
-        Me.LBLMaxHold = New System.Windows.Forms.Label()
-        Me.Label79 = New System.Windows.Forms.Label()
-        Me.Label34 = New System.Windows.Forms.Label()
-        Me.GroupBox22 = New System.Windows.Forms.GroupBox()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -1009,8 +1009,10 @@ Partial Class FrmSettings
         Me.GBDomPetNames.SuspendLayout
         Me.TabPage10.SuspendLayout
         Me.Panel2.SuspendLayout
-        Me.GroupBox13.SuspendLayout
         Me.GroupBox6.SuspendLayout
+        Me.GroupBox22.SuspendLayout
+        CType(Me.NBWritingTaskMax,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.NBWritingTaskMin,System.ComponentModel.ISupportInitialize).BeginInit
         Me.GroupBox45.SuspendLayout
         CType(Me.CBTSlider,System.ComponentModel.ISupportInitialize).BeginInit
         Me.GroupBox35.SuspendLayout
@@ -1018,13 +1020,12 @@ Partial Class FrmSettings
         Me.GroupBox38.SuspendLayout
         Me.GroupBox37.SuspendLayout
         Me.GroupBox36.SuspendLayout
+        Me.GroupBox13.SuspendLayout
         Me.GroupBox7.SuspendLayout
-        CType(Me.NBWritingTaskMax,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.NBWritingTaskMin,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.NBHoldTheEdgeMax,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NBLongEdge,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.NBHoldTheEdgeMin,System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.NBHoldTheEdgeMax,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox12,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox12.SuspendLayout
         Me.GroupBox32.SuspendLayout
         CType(Me.NBBirthdayDay,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.subAgeNumBox,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1190,8 +1191,7 @@ Partial Class FrmSettings
         Me.TabPage5.SuspendLayout
         Me.Panel5.SuspendLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.NBHoldTheEdgeMin,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox22.SuspendLayout
+        Me.GroupBox12.SuspendLayout
         Me.SuspendLayout
         '
         'SettingsPanel
@@ -3033,7 +3033,7 @@ Partial Class FrmSettings
         Me.TabPage10.Location = New System.Drawing.Point(4, 22)
         Me.TabPage10.Name = "TabPage10"
         Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage10.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage10.Size = New System.Drawing.Size(930, 448)
         Me.TabPage10.TabIndex = 9
         Me.TabPage10.Text = "Sub"
         '
@@ -3054,28 +3054,6 @@ Partial Class FrmSettings
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(708, 437)
         Me.Panel2.TabIndex = 94
-        '
-        'GroupBox13
-        '
-        Me.GroupBox13.BackColor = System.Drawing.Color.LightGray
-        Me.GroupBox13.Controls.Add(Me.Label34)
-        Me.GroupBox13.Controls.Add(Me.TimeBoxWakeUp)
-        Me.GroupBox13.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox13.Location = New System.Drawing.Point(440, 299)
-        Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(259, 49)
-        Me.GroupBox13.TabIndex = 157
-        Me.GroupBox13.TabStop = false
-        Me.GroupBox13.Text = "Routine"
-        '
-        'TimeBoxWakeUp
-        '
-        Me.TimeBoxWakeUp.Format = System.Windows.Forms.DateTimePickerFormat.Time
-        Me.TimeBoxWakeUp.Location = New System.Drawing.Point(134, 18)
-        Me.TimeBoxWakeUp.Name = "TimeBoxWakeUp"
-        Me.TimeBoxWakeUp.ShowUpDown = true
-        Me.TimeBoxWakeUp.Size = New System.Drawing.Size(110, 20)
-        Me.TimeBoxWakeUp.TabIndex = 0
         '
         'GroupBox6
         '
@@ -3212,6 +3190,68 @@ Partial Class FrmSettings
         Me.Label1.Text = "While Stroking:"
         Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'GroupBox22
+        '
+        Me.GroupBox22.BackColor = System.Drawing.Color.LightGray
+        Me.GroupBox22.Controls.Add(Me.NBWritingTaskMax)
+        Me.GroupBox22.Controls.Add(Me.NBWritingTaskMin)
+        Me.GroupBox22.Controls.Add(Me.Label75)
+        Me.GroupBox22.Controls.Add(Me.Label77)
+        Me.GroupBox22.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox22.Location = New System.Drawing.Point(440, 354)
+        Me.GroupBox22.Name = "GroupBox22"
+        Me.GroupBox22.Size = New System.Drawing.Size(259, 49)
+        Me.GroupBox22.TabIndex = 158
+        Me.GroupBox22.TabStop = false
+        Me.GroupBox22.Text = "Writing Tasks"
+        '
+        'NBWritingTaskMax
+        '
+        Me.NBWritingTaskMax.Increment = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.NBWritingTaskMax.Location = New System.Drawing.Point(200, 19)
+        Me.NBWritingTaskMax.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.NBWritingTaskMax.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.NBWritingTaskMax.Name = "NBWritingTaskMax"
+        Me.NBWritingTaskMax.Size = New System.Drawing.Size(44, 20)
+        Me.NBWritingTaskMax.TabIndex = 168
+        Me.NBWritingTaskMax.Value = New Decimal(New Integer() {20, 0, 0, 0})
+        '
+        'NBWritingTaskMin
+        '
+        Me.NBWritingTaskMin.Increment = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.NBWritingTaskMin.Location = New System.Drawing.Point(134, 19)
+        Me.NBWritingTaskMin.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        Me.NBWritingTaskMin.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.NBWritingTaskMin.Name = "NBWritingTaskMin"
+        Me.NBWritingTaskMin.Size = New System.Drawing.Size(44, 20)
+        Me.NBWritingTaskMin.TabIndex = 167
+        Me.NBWritingTaskMin.Value = New Decimal(New Integer() {10, 0, 0, 0})
+        '
+        'Label75
+        '
+        Me.Label75.BackColor = System.Drawing.Color.Transparent
+        Me.Label75.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label75.ForeColor = System.Drawing.Color.Black
+        Me.Label75.Location = New System.Drawing.Point(184, 19)
+        Me.Label75.Name = "Label75"
+        Me.Label75.Size = New System.Drawing.Size(10, 17)
+        Me.Label75.TabIndex = 166
+        Me.Label75.Text = "-"
+        Me.Label75.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'Label77
+        '
+        Me.Label77.BackColor = System.Drawing.Color.Transparent
+        Me.Label77.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label77.ForeColor = System.Drawing.Color.Black
+        Me.Label77.Location = New System.Drawing.Point(12, 19)
+        Me.Label77.Name = "Label77"
+        Me.Label77.Size = New System.Drawing.Size(126, 17)
+        Me.Label77.TabIndex = 165
+        Me.Label77.Tag = ""
+        Me.Label77.Text = "Line Amount Range:"
+        Me.Label77.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'GroupBox45
         '
         Me.GroupBox45.BackColor = System.Drawing.Color.LightGray
@@ -3226,6 +3266,18 @@ Partial Class FrmSettings
         Me.GroupBox45.TabIndex = 155
         Me.GroupBox45.TabStop = false
         Me.GroupBox45.Text = "CBT"
+        '
+        'CBTSlider
+        '
+        Me.CBTSlider.AutoSize = false
+        Me.CBTSlider.LargeChange = 1
+        Me.CBTSlider.Location = New System.Drawing.Point(14, 45)
+        Me.CBTSlider.Maximum = 5
+        Me.CBTSlider.Minimum = 1
+        Me.CBTSlider.Name = "CBTSlider"
+        Me.CBTSlider.Size = New System.Drawing.Size(111, 25)
+        Me.CBTSlider.TabIndex = 166
+        Me.CBTSlider.Value = 3
         '
         'LBLCBTSlider
         '
@@ -3256,18 +3308,6 @@ Partial Class FrmSettings
         Me.CBCBTCock.TabIndex = 0
         Me.CBCBTCock.Text = "Cock Torture"
         Me.CBCBTCock.UseVisualStyleBackColor = true
-        '
-        'CBTSlider
-        '
-        Me.CBTSlider.AutoSize = false
-        Me.CBTSlider.LargeChange = 1
-        Me.CBTSlider.Location = New System.Drawing.Point(14, 45)
-        Me.CBTSlider.Maximum = 5
-        Me.CBTSlider.Minimum = 1
-        Me.CBTSlider.Name = "CBTSlider"
-        Me.CBTSlider.Size = New System.Drawing.Size(111, 25)
-        Me.CBTSlider.TabIndex = 166
-        Me.CBTSlider.Value = 3
         '
         'GroupBox35
         '
@@ -3384,6 +3424,40 @@ Partial Class FrmSettings
         Me.TBGreeting.TabIndex = 0
         Me.TBGreeting.Text = "hello, hi, hey, heya, good morning, good afternoon, good evening"
         '
+        'GroupBox13
+        '
+        Me.GroupBox13.BackColor = System.Drawing.Color.LightGray
+        Me.GroupBox13.Controls.Add(Me.Label34)
+        Me.GroupBox13.Controls.Add(Me.TimeBoxWakeUp)
+        Me.GroupBox13.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox13.Location = New System.Drawing.Point(440, 299)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.Size = New System.Drawing.Size(259, 49)
+        Me.GroupBox13.TabIndex = 157
+        Me.GroupBox13.TabStop = false
+        Me.GroupBox13.Text = "Routine"
+        '
+        'Label34
+        '
+        Me.Label34.BackColor = System.Drawing.Color.Transparent
+        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label34.ForeColor = System.Drawing.Color.Black
+        Me.Label34.Location = New System.Drawing.Point(12, 21)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(116, 17)
+        Me.Label34.TabIndex = 140
+        Me.Label34.Text = "Daily Wake Up Time:"
+        Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'TimeBoxWakeUp
+        '
+        Me.TimeBoxWakeUp.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.TimeBoxWakeUp.Location = New System.Drawing.Point(134, 18)
+        Me.TimeBoxWakeUp.Name = "TimeBoxWakeUp"
+        Me.TimeBoxWakeUp.ShowUpDown = true
+        Me.TimeBoxWakeUp.Size = New System.Drawing.Size(110, 20)
+        Me.TimeBoxWakeUp.TabIndex = 0
+        '
         'GroupBox7
         '
         Me.GroupBox7.Controls.Add(Me.LBLMaxHold)
@@ -3405,6 +3479,48 @@ Partial Class FrmSettings
         Me.GroupBox7.TabStop = false
         Me.GroupBox7.Text = "Edging"
         '
+        'LBLMaxHold
+        '
+        Me.LBLMaxHold.AutoSize = true
+        Me.LBLMaxHold.Location = New System.Drawing.Point(379, 18)
+        Me.LBLMaxHold.Name = "LBLMaxHold"
+        Me.LBLMaxHold.Size = New System.Drawing.Size(43, 13)
+        Me.LBLMaxHold.TabIndex = 180
+        Me.LBLMaxHold.Text = "minutes"
+        Me.LBLMaxHold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label79
+        '
+        Me.Label79.BackColor = System.Drawing.Color.Transparent
+        Me.Label79.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label79.ForeColor = System.Drawing.Color.Black
+        Me.Label79.Location = New System.Drawing.Point(221, 17)
+        Me.Label79.Name = "Label79"
+        Me.Label79.Size = New System.Drawing.Size(113, 17)
+        Me.Label79.TabIndex = 178
+        Me.Label79.Text = "Max Hold Edge Time:"
+        Me.Label79.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'NBLongEdge
+        '
+        Me.NBLongEdge.Location = New System.Drawing.Point(119, 40)
+        Me.NBLongEdge.Maximum = New Decimal(New Integer() {300, 0, 0, 0})
+        Me.NBLongEdge.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.NBLongEdge.Name = "NBLongEdge"
+        Me.NBLongEdge.Size = New System.Drawing.Size(44, 20)
+        Me.NBLongEdge.TabIndex = 152
+        Me.NBLongEdge.Value = New Decimal(New Integer() {120, 0, 0, 0})
+        '
+        'LBLMinHold
+        '
+        Me.LBLMinHold.AutoSize = true
+        Me.LBLMinHold.Location = New System.Drawing.Point(164, 18)
+        Me.LBLMinHold.Name = "LBLMinHold"
+        Me.LBLMinHold.Size = New System.Drawing.Size(47, 13)
+        Me.LBLMinHold.TabIndex = 177
+        Me.LBLMinHold.Text = "seconds"
+        Me.LBLMinHold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'CBEdgeUseAvg
         '
         Me.CBEdgeUseAvg.AutoSize = true
@@ -3414,31 +3530,6 @@ Partial Class FrmSettings
         Me.CBEdgeUseAvg.TabIndex = 174
         Me.CBEdgeUseAvg.Text = "Use Avg Edge Time as Threshold"
         Me.CBEdgeUseAvg.UseVisualStyleBackColor = true
-        '
-        'CBLongEdgeTaunts
-        '
-        Me.CBLongEdgeTaunts.Checked = true
-        Me.CBLongEdgeTaunts.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CBLongEdgeTaunts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.CBLongEdgeTaunts.ForeColor = System.Drawing.Color.Black
-        Me.CBLongEdgeTaunts.Location = New System.Drawing.Point(10, 65)
-        Me.CBLongEdgeTaunts.Name = "CBLongEdgeTaunts"
-        Me.CBLongEdgeTaunts.Size = New System.Drawing.Size(163, 21)
-        Me.CBLongEdgeTaunts.TabIndex = 172
-        Me.CBLongEdgeTaunts.Text = "Allow Long Edge Taunts"
-        Me.CBLongEdgeTaunts.UseVisualStyleBackColor = true
-        '
-        'Label55
-        '
-        Me.Label55.BackColor = System.Drawing.Color.Transparent
-        Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label55.ForeColor = System.Drawing.Color.Black
-        Me.Label55.Location = New System.Drawing.Point(7, 41)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(116, 17)
-        Me.Label55.TabIndex = 170
-        Me.Label55.Text = "Long Edge Threshold:"
-        Me.Label55.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'CBLongEdgeInterrupts
         '
@@ -3453,61 +3544,26 @@ Partial Class FrmSettings
         Me.CBLongEdgeInterrupts.Text = "Allow Long Edge Interrupts"
         Me.CBLongEdgeInterrupts.UseVisualStyleBackColor = true
         '
-        'NBWritingTaskMax
+        'NBHoldTheEdgeMin
         '
-        Me.NBWritingTaskMax.Increment = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.NBWritingTaskMax.Location = New System.Drawing.Point(200, 19)
-        Me.NBWritingTaskMax.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.NBWritingTaskMax.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.NBWritingTaskMax.Name = "NBWritingTaskMax"
-        Me.NBWritingTaskMax.Size = New System.Drawing.Size(44, 20)
-        Me.NBWritingTaskMax.TabIndex = 168
-        Me.NBWritingTaskMax.Value = New Decimal(New Integer() {20, 0, 0, 0})
+        Me.NBHoldTheEdgeMin.Location = New System.Drawing.Point(119, 16)
+        Me.NBHoldTheEdgeMin.Maximum = New Decimal(New Integer() {3600, 0, 0, 0})
+        Me.NBHoldTheEdgeMin.Name = "NBHoldTheEdgeMin"
+        Me.NBHoldTheEdgeMin.Size = New System.Drawing.Size(44, 20)
+        Me.NBHoldTheEdgeMin.TabIndex = 176
+        Me.NBHoldTheEdgeMin.Value = New Decimal(New Integer() {60, 0, 0, 0})
         '
-        'NBWritingTaskMin
+        'Label55
         '
-        Me.NBWritingTaskMin.Increment = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.NBWritingTaskMin.Location = New System.Drawing.Point(134, 19)
-        Me.NBWritingTaskMin.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.NBWritingTaskMin.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.NBWritingTaskMin.Name = "NBWritingTaskMin"
-        Me.NBWritingTaskMin.Size = New System.Drawing.Size(44, 20)
-        Me.NBWritingTaskMin.TabIndex = 167
-        Me.NBWritingTaskMin.Value = New Decimal(New Integer() {10, 0, 0, 0})
-        '
-        'NBHoldTheEdgeMax
-        '
-        Me.NBHoldTheEdgeMax.Location = New System.Drawing.Point(334, 16)
-        Me.NBHoldTheEdgeMax.Maximum = New Decimal(New Integer() {3600, 0, 0, 0})
-        Me.NBHoldTheEdgeMax.Name = "NBHoldTheEdgeMax"
-        Me.NBHoldTheEdgeMax.Size = New System.Drawing.Size(44, 20)
-        Me.NBHoldTheEdgeMax.TabIndex = 155
-        Me.NBHoldTheEdgeMax.Value = New Decimal(New Integer() {60, 0, 0, 0})
-        '
-        'Label77
-        '
-        Me.Label77.BackColor = System.Drawing.Color.Transparent
-        Me.Label77.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label77.ForeColor = System.Drawing.Color.Black
-        Me.Label77.Location = New System.Drawing.Point(12, 19)
-        Me.Label77.Name = "Label77"
-        Me.Label77.Size = New System.Drawing.Size(126, 17)
-        Me.Label77.TabIndex = 165
-        Me.Label77.Tag = ""
-        Me.Label77.Text = "Line Amount Range:"
-        Me.Label77.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label75
-        '
-        Me.Label75.BackColor = System.Drawing.Color.Transparent
-        Me.Label75.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label75.ForeColor = System.Drawing.Color.Black
-        Me.Label75.Location = New System.Drawing.Point(184, 19)
-        Me.Label75.Name = "Label75"
-        Me.Label75.Size = New System.Drawing.Size(10, 17)
-        Me.Label75.TabIndex = 166
-        Me.Label75.Text = "-"
-        Me.Label75.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Label55.BackColor = System.Drawing.Color.Transparent
+        Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label55.ForeColor = System.Drawing.Color.Black
+        Me.Label55.Location = New System.Drawing.Point(7, 41)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(116, 17)
+        Me.Label55.TabIndex = 170
+        Me.Label55.Text = "Long Edge Threshold:"
+        Me.Label55.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label81
         '
@@ -3521,15 +3577,37 @@ Partial Class FrmSettings
         Me.Label81.Text = "Min Hold Edge Time:"
         Me.Label81.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'NBLongEdge
+        'Label5
         '
-        Me.NBLongEdge.Location = New System.Drawing.Point(119, 40)
-        Me.NBLongEdge.Maximum = New Decimal(New Integer() {300, 0, 0, 0})
-        Me.NBLongEdge.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.NBLongEdge.Name = "NBLongEdge"
-        Me.NBLongEdge.Size = New System.Drawing.Size(44, 20)
-        Me.NBLongEdge.TabIndex = 152
-        Me.NBLongEdge.Value = New Decimal(New Integer() {120, 0, 0, 0})
+        Me.Label5.AutoSize = true
+        Me.Label5.Location = New System.Drawing.Point(165, 43)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(43, 13)
+        Me.Label5.TabIndex = 175
+        Me.Label5.Text = "minutes"
+        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'NBHoldTheEdgeMax
+        '
+        Me.NBHoldTheEdgeMax.Location = New System.Drawing.Point(334, 16)
+        Me.NBHoldTheEdgeMax.Maximum = New Decimal(New Integer() {3600, 0, 0, 0})
+        Me.NBHoldTheEdgeMax.Name = "NBHoldTheEdgeMax"
+        Me.NBHoldTheEdgeMax.Size = New System.Drawing.Size(44, 20)
+        Me.NBHoldTheEdgeMax.TabIndex = 155
+        Me.NBHoldTheEdgeMax.Value = New Decimal(New Integer() {60, 0, 0, 0})
+        '
+        'CBLongEdgeTaunts
+        '
+        Me.CBLongEdgeTaunts.Checked = true
+        Me.CBLongEdgeTaunts.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.CBLongEdgeTaunts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.CBLongEdgeTaunts.ForeColor = System.Drawing.Color.Black
+        Me.CBLongEdgeTaunts.Location = New System.Drawing.Point(10, 65)
+        Me.CBLongEdgeTaunts.Name = "CBLongEdgeTaunts"
+        Me.CBLongEdgeTaunts.Size = New System.Drawing.Size(163, 21)
+        Me.CBLongEdgeTaunts.TabIndex = 172
+        Me.CBLongEdgeTaunts.Text = "Allow Long Edge Taunts"
+        Me.CBLongEdgeTaunts.UseVisualStyleBackColor = true
         '
         'PictureBox12
         '
@@ -3541,30 +3619,6 @@ Partial Class FrmSettings
         Me.PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox12.TabIndex = 149
         Me.PictureBox12.TabStop = false
-        '
-        'GroupBox12
-        '
-        Me.GroupBox12.BackColor = System.Drawing.Color.LightGray
-        Me.GroupBox12.Controls.Add(Me.LBLSubSettingsDescription)
-        Me.GroupBox12.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox12.Location = New System.Drawing.Point(960, 308)
-        Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Size = New System.Drawing.Size(171, 124)
-        Me.GroupBox12.TabIndex = 65
-        Me.GroupBox12.TabStop = false
-        Me.GroupBox12.Text = "Description"
-        '
-        'LBLSubSettingsDescription
-        '
-        Me.LBLSubSettingsDescription.BackColor = System.Drawing.Color.Transparent
-        Me.LBLSubSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LBLSubSettingsDescription.ForeColor = System.Drawing.Color.Black
-        Me.LBLSubSettingsDescription.Location = New System.Drawing.Point(10, 19)
-        Me.LBLSubSettingsDescription.Name = "LBLSubSettingsDescription"
-        Me.LBLSubSettingsDescription.Size = New System.Drawing.Size(150, 89)
-        Me.LBLSubSettingsDescription.TabIndex = 62
-        Me.LBLSubSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
-    "n."
         '
         'GroupBox32
         '
@@ -3872,7 +3926,7 @@ Partial Class FrmSettings
         Me.TabPage16.Location = New System.Drawing.Point(4, 22)
         Me.TabPage16.Name = "TabPage16"
         Me.TabPage16.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage16.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage16.Size = New System.Drawing.Size(930, 448)
         Me.TabPage16.TabIndex = 14
         Me.TabPage16.Text = "Scripts"
         '
@@ -4128,7 +4182,7 @@ Partial Class FrmSettings
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage7.Size = New System.Drawing.Size(930, 448)
         Me.TabPage7.TabIndex = 11
         Me.TabPage7.Text = "Images"
         '
@@ -5001,7 +5055,7 @@ Partial Class FrmSettings
         Me.TabPage12.Location = New System.Drawing.Point(4, 22)
         Me.TabPage12.Name = "TabPage12"
         Me.TabPage12.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage12.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage12.Size = New System.Drawing.Size(930, 448)
         Me.TabPage12.TabIndex = 12
         Me.TabPage12.Text = "Domme Tags"
         '
@@ -5458,7 +5512,7 @@ Partial Class FrmSettings
         Me.TabPage9.Controls.Add(Me.Panel4)
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
-        Me.TabPage9.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage9.Size = New System.Drawing.Size(930, 448)
         Me.TabPage9.TabIndex = 15
         Me.TabPage9.Text = "Local Tags"
         '
@@ -6944,7 +6998,7 @@ Partial Class FrmSettings
         Me.TabPage11.Location = New System.Drawing.Point(4, 22)
         Me.TabPage11.Name = "TabPage11"
         Me.TabPage11.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage11.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage11.Size = New System.Drawing.Size(930, 448)
         Me.TabPage11.TabIndex = 10
         Me.TabPage11.Text = "URL Files"
         '
@@ -7220,7 +7274,7 @@ Partial Class FrmSettings
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage3.Size = New System.Drawing.Size(930, 448)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Video"
         '
@@ -8318,7 +8372,7 @@ Partial Class FrmSettings
         Me.TabPage20.Location = New System.Drawing.Point(4, 22)
         Me.TabPage20.Name = "TabPage20"
         Me.TabPage20.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage20.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage20.Size = New System.Drawing.Size(930, 448)
         Me.TabPage20.TabIndex = 16
         Me.TabPage20.Text = "Apps"
         '
@@ -9815,7 +9869,7 @@ Partial Class FrmSettings
         Me.TabPage26.Location = New System.Drawing.Point(4, 22)
         Me.TabPage26.Name = "TabPage26"
         Me.TabPage26.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage26.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage26.Size = New System.Drawing.Size(930, 448)
         Me.TabPage26.TabIndex = 19
         Me.TabPage26.Text = "Themes"
         Me.TabPage26.UseVisualStyleBackColor = true
@@ -10257,7 +10311,6 @@ Partial Class FrmSettings
         Me.Panel6.Controls.Add(Me.GroupBox17)
         Me.Panel6.Controls.Add(Me.GroupBox52)
         Me.Panel6.Controls.Add(Me.PictureBox8)
-        Me.Panel6.Controls.Add(Me.GroupBox21)
         Me.Panel6.Controls.Add(Me.Label38)
         Me.Panel6.Location = New System.Drawing.Point(6, 6)
         Me.Panel6.Name = "Panel6"
@@ -11054,9 +11107,9 @@ Partial Class FrmSettings
         Me.GroupBox21.BackColor = System.Drawing.Color.LightGray
         Me.GroupBox21.Controls.Add(Me.LBLRangeSettingsDescription)
         Me.GroupBox21.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox21.Location = New System.Drawing.Point(7, 287)
+        Me.GroupBox21.Location = New System.Drawing.Point(790, 9)
         Me.GroupBox21.Name = "GroupBox21"
-        Me.GroupBox21.Size = New System.Drawing.Size(692, 136)
+        Me.GroupBox21.Size = New System.Drawing.Size(316, 136)
         Me.GroupBox21.TabIndex = 66
         Me.GroupBox21.TabStop = false
         Me.GroupBox21.Text = "Description"
@@ -11093,7 +11146,7 @@ Partial Class FrmSettings
         Me.TabPage13.Location = New System.Drawing.Point(4, 22)
         Me.TabPage13.Name = "TabPage13"
         Me.TabPage13.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage13.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage13.Size = New System.Drawing.Size(930, 448)
         Me.TabPage13.TabIndex = 13
         Me.TabPage13.Text = "Modding"
         '
@@ -11817,7 +11870,7 @@ Partial Class FrmSettings
         'RBGerman
         '
         Me.RBGerman.AutoSize = true
-        Me.RBGerman.Location = New System.Drawing.Point(161, 36)
+        Me.RBGerman.Location = New System.Drawing.Point(180, 20)
         Me.RBGerman.Name = "RBGerman"
         Me.RBGerman.Size = New System.Drawing.Size(65, 17)
         Me.RBGerman.TabIndex = 1
@@ -11828,7 +11881,7 @@ Partial Class FrmSettings
         '
         Me.RBEnglish.AutoSize = true
         Me.RBEnglish.Checked = true
-        Me.RBEnglish.Location = New System.Drawing.Point(17, 35)
+        Me.RBEnglish.Location = New System.Drawing.Point(36, 19)
         Me.RBEnglish.Name = "RBEnglish"
         Me.RBEnglish.Size = New System.Drawing.Size(59, 17)
         Me.RBEnglish.TabIndex = 0
@@ -12178,7 +12231,7 @@ Partial Class FrmSettings
         Me.TabPage5.Controls.Add(Me.Panel5)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(720, 448)
+        Me.TabPage5.Size = New System.Drawing.Size(930, 448)
         Me.TabPage5.TabIndex = 17
         Me.TabPage5.Text = "About"
         '
@@ -12280,6 +12333,30 @@ Partial Class FrmSettings
         Me.Label41.Text = resources.GetString("Label41.Text")
         Me.Label41.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
+        'GroupBox12
+        '
+        Me.GroupBox12.BackColor = System.Drawing.Color.LightGray
+        Me.GroupBox12.Controls.Add(Me.LBLSubSettingsDescription)
+        Me.GroupBox12.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox12.Location = New System.Drawing.Point(960, 308)
+        Me.GroupBox12.Name = "GroupBox12"
+        Me.GroupBox12.Size = New System.Drawing.Size(171, 124)
+        Me.GroupBox12.TabIndex = 65
+        Me.GroupBox12.TabStop = false
+        Me.GroupBox12.Text = "Description"
+        '
+        'LBLSubSettingsDescription
+        '
+        Me.LBLSubSettingsDescription.BackColor = System.Drawing.Color.Transparent
+        Me.LBLSubSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLSubSettingsDescription.ForeColor = System.Drawing.Color.Black
+        Me.LBLSubSettingsDescription.Location = New System.Drawing.Point(10, 19)
+        Me.LBLSubSettingsDescription.Name = "LBLSubSettingsDescription"
+        Me.LBLSubSettingsDescription.Size = New System.Drawing.Size(150, 89)
+        Me.LBLSubSettingsDescription.TabIndex = 62
+        Me.LBLSubSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
+    "n."
+        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
@@ -12327,84 +12404,6 @@ Partial Class FrmSettings
         'BWCreateURLFiles
         '
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = true
-        Me.Label5.Location = New System.Drawing.Point(165, 43)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(43, 13)
-        Me.Label5.TabIndex = 175
-        Me.Label5.Text = "minutes"
-        Me.Label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'NBHoldTheEdgeMin
-        '
-        Me.NBHoldTheEdgeMin.Location = New System.Drawing.Point(119, 16)
-        Me.NBHoldTheEdgeMin.Maximum = New Decimal(New Integer() {3600, 0, 0, 0})
-        Me.NBHoldTheEdgeMin.Name = "NBHoldTheEdgeMin"
-        Me.NBHoldTheEdgeMin.Size = New System.Drawing.Size(44, 20)
-        Me.NBHoldTheEdgeMin.TabIndex = 176
-        Me.NBHoldTheEdgeMin.Value = New Decimal(New Integer() {60, 0, 0, 0})
-        '
-        'LBLMinHold
-        '
-        Me.LBLMinHold.AutoSize = true
-        Me.LBLMinHold.Location = New System.Drawing.Point(164, 18)
-        Me.LBLMinHold.Name = "LBLMinHold"
-        Me.LBLMinHold.Size = New System.Drawing.Size(47, 13)
-        Me.LBLMinHold.TabIndex = 177
-        Me.LBLMinHold.Text = "seconds"
-        Me.LBLMinHold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'LBLMaxHold
-        '
-        Me.LBLMaxHold.AutoSize = true
-        Me.LBLMaxHold.Location = New System.Drawing.Point(379, 18)
-        Me.LBLMaxHold.Name = "LBLMaxHold"
-        Me.LBLMaxHold.Size = New System.Drawing.Size(43, 13)
-        Me.LBLMaxHold.TabIndex = 180
-        Me.LBLMaxHold.Text = "minutes"
-        Me.LBLMaxHold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'Label79
-        '
-        Me.Label79.BackColor = System.Drawing.Color.Transparent
-        Me.Label79.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label79.ForeColor = System.Drawing.Color.Black
-        Me.Label79.Location = New System.Drawing.Point(221, 17)
-        Me.Label79.Name = "Label79"
-        Me.Label79.Size = New System.Drawing.Size(113, 17)
-        Me.Label79.TabIndex = 178
-        Me.Label79.Text = "Max Hold Edge Time:"
-        Me.Label79.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'Label34
-        '
-        Me.Label34.BackColor = System.Drawing.Color.Transparent
-        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Label34.ForeColor = System.Drawing.Color.Black
-        Me.Label34.Location = New System.Drawing.Point(12, 21)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(116, 17)
-        Me.Label34.TabIndex = 140
-        Me.Label34.Text = "Daily Wake Up Time:"
-        Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'GroupBox22
-        '
-        Me.GroupBox22.BackColor = System.Drawing.Color.LightGray
-        Me.GroupBox22.Controls.Add(Me.NBWritingTaskMax)
-        Me.GroupBox22.Controls.Add(Me.NBWritingTaskMin)
-        Me.GroupBox22.Controls.Add(Me.Label75)
-        Me.GroupBox22.Controls.Add(Me.Label77)
-        Me.GroupBox22.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox22.Location = New System.Drawing.Point(440, 354)
-        Me.GroupBox22.Name = "GroupBox22"
-        Me.GroupBox22.Size = New System.Drawing.Size(259, 49)
-        Me.GroupBox22.TabIndex = 158
-        Me.GroupBox22.TabStop = false
-        Me.GroupBox22.Text = "Writing Tasks"
-        '
         'FrmSettings
         '
         Me.AllowDrop = true
@@ -12413,6 +12412,7 @@ Partial Class FrmSettings
         Me.ClientSize = New System.Drawing.Size(721, 465)
         Me.Controls.Add(Me.SettingsPanel)
         Me.Controls.Add(Me.GroupBox12)
+        Me.Controls.Add(Me.GroupBox21)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
         Me.MaximizeBox = false
         Me.MinimizeBox = false
@@ -12476,9 +12476,11 @@ Partial Class FrmSettings
         Me.GBDomPetNames.PerformLayout
         Me.TabPage10.ResumeLayout(false)
         Me.Panel2.ResumeLayout(false)
-        Me.GroupBox13.ResumeLayout(false)
         Me.GroupBox6.ResumeLayout(false)
         Me.GroupBox6.PerformLayout
+        Me.GroupBox22.ResumeLayout(false)
+        CType(Me.NBWritingTaskMax,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.NBWritingTaskMin,System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupBox45.ResumeLayout(false)
         CType(Me.CBTSlider,System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupBox35.ResumeLayout(false)
@@ -12490,14 +12492,13 @@ Partial Class FrmSettings
         Me.GroupBox37.PerformLayout
         Me.GroupBox36.ResumeLayout(false)
         Me.GroupBox36.PerformLayout
+        Me.GroupBox13.ResumeLayout(false)
         Me.GroupBox7.ResumeLayout(false)
         Me.GroupBox7.PerformLayout
-        CType(Me.NBWritingTaskMax,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBWritingTaskMin,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBHoldTheEdgeMax,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.NBLongEdge,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.NBHoldTheEdgeMin,System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.NBHoldTheEdgeMax,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.PictureBox12,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox12.ResumeLayout(false)
         Me.GroupBox32.ResumeLayout(false)
         Me.GroupBox32.PerformLayout
         CType(Me.NBBirthdayDay,System.ComponentModel.ISupportInitialize).EndInit
@@ -12709,8 +12710,7 @@ Partial Class FrmSettings
         Me.Panel5.ResumeLayout(false)
         Me.Panel5.PerformLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.NBHoldTheEdgeMin,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox22.ResumeLayout(false)
+        Me.GroupBox12.ResumeLayout(false)
         Me.ResumeLayout(false)
 
 End Sub

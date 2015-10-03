@@ -4868,6 +4868,30 @@ Namespace My
                 Me("HoldTheEdgeMaxAmount") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("200")>  _
+        Public Property MaxPace() As Integer
+            Get
+                Return CType(Me("MaxPace"),Integer)
+            End Get
+            Set
+                Me("MaxPace") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1000")>  _
+        Public Property MinPace() As Integer
+            Get
+                Return CType(Me("MinPace"),Integer)
+            End Get
+            Set
+                Me("MinPace") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

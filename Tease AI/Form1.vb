@@ -1615,7 +1615,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         CBVitalSubDomTask.Checked = My.Settings.VitalSubAssignments
 
-
+        NBMinPace.Value = My.Settings.MinPace
+        NBMaxPace.Value = My.Settings.MaxPace
 
         FormLoading = False
 
@@ -5447,7 +5448,8 @@ NoResponse:
                         SubEdging = False
                         SubHoldingEdge = False
                         StopMetronome = False
-                        StrokePace = randomizer.Next(4, 8) * 10
+                        StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+                        StrokePace = 50 * Math.Round(StrokePace / 50)
                         StrokePaceTimer.Interval = StrokePace
                         RLGLTauntTick = randomizer.Next(20, 31)
                         ' VideoTauntTick = randomizer.Next(20, 31)
@@ -10165,7 +10167,8 @@ RinseLatherRepeat:
             My.Settings.Save()
             StartStrokingCount += 1
             StopMetronome = False
-            StrokePace = randomizer.Next(4, 9) * 100
+            StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+            StrokePace = 50 * Math.Round(StrokePace / 50)
 
             If FrmSettings.CBTauntCycleDD.Checked = True Then
                 If FrmSettings.domlevelNumBox.Value = 1 Then StrokeTick = randomizer.Next(1, 3) * 60
@@ -12003,7 +12006,8 @@ OrgasmDecided:
                 VideoTease = True
                 StartStrokingCount += 1
                 StopMetronome = False
-                StrokePace = randomizer.Next(4, 9) * 100
+                StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+                StrokePace = 50 * Math.Round(StrokePace / 50)
                 StrokePaceTimer.Interval = StrokePace
                 StrokePaceTimer.Start()
                 AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
@@ -12022,7 +12026,8 @@ OrgasmDecided:
             StartStrokingCount += 1
             StopMetronome = False
             VideoTease = True
-            StrokePace = randomizer.Next(4, 9) * 100
+            StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+            StrokePace = 50 * Math.Round(StrokePace / 50)
             StrokePaceTimer.Interval = StrokePace
             StrokePaceTimer.Start()
             AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
@@ -12052,7 +12057,8 @@ OrgasmDecided:
                 RLGLTimer.Start()
                 StartStrokingCount += 1
                 StopMetronome = False
-                StrokePace = randomizer.Next(4, 9) * 100
+                StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+                StrokePace = 50 * Math.Round(StrokePace / 50)
                 StrokePaceTimer.Interval = StrokePace
                 StrokePaceTimer.Start()
                 'VideoTauntTick = randomizer.Next(20, 31)
@@ -12212,6 +12218,50 @@ OrgasmDecided:
             StringClean = StringClean.Replace("@AddEdgeHoldTime", "")
         End If
 
+        If StringClean.Contains("@AddTeaseTime(") Then
+
+            Dim OriginalFlag As String = ""
+
+            If TeaseTimer.Enabled = True Then
+
+                Dim TeaseFlag As String = GetParentheses(StringClean, "@AddTeaseTime(")
+                OriginalFlag = TeaseFlag
+                Dim TeaseSeconds As Integer
+
+                If TeaseFlag.Contains(",") Then
+                    TeaseFlag = FixCommas(TeaseFlag)
+                    Dim TeaseFlagArray As String() = TeaseFlag.Split(",")
+                    Dim Tease1 As Integer = Val(TeaseFlagArray(0))
+                    Dim Tease2 As Integer = Val(TeaseFlagArray(1))
+                    If UCase(TeaseFlagArray(0)).Contains("M") Then Tease1 *= 60
+                    If UCase(TeaseFlagArray(1)).Contains("M") Then Tease2 *= 60
+                    If UCase(TeaseFlagArray(0)).Contains("H") Then Tease1 *= 3600
+                    If UCase(TeaseFlagArray(1)).Contains("H") Then Tease2 *= 3600
+                    TeaseSeconds = randomizer.Next(Tease1, Tease2 + 1)
+                Else
+                    TeaseSeconds = Val(TeaseFlag)
+                    If UCase(GetParentheses(StringClean, "@AddTeaseTime(")).Contains("M") Then TeaseSeconds *= 60
+                    If UCase(GetParentheses(StringClean, "@AddTeaseTime(")).Contains("H") Then TeaseSeconds *= 3600
+                End If
+                TeaseTick += TeaseSeconds
+            End If
+            StringClean = StringClean.Replace("@AddTeaseTime(" & OriginalFlag & ")", "")
+        End If
+
+        If StringClean.Contains("@AddTeaseTime") Then
+            If TeaseTimer.Enabled = True Then
+                If FrmSettings.CBTeaseLengthDD.Checked = True Then
+                    If FrmSettings.domlevelNumBox.Value = 1 Then TeaseTick += randomizer.Next(10, 16) * 60
+                    If FrmSettings.domlevelNumBox.Value = 2 Then TeaseTick += randomizer.Next(15, 21) * 60
+                    If FrmSettings.domlevelNumBox.Value = 3 Then TeaseTick += randomizer.Next(20, 31) * 60
+                    If FrmSettings.domlevelNumBox.Value = 4 Then TeaseTick += randomizer.Next(30, 46) * 60
+                    If FrmSettings.domlevelNumBox.Value = 5 Then TeaseTick += randomizer.Next(45, 61) * 60
+                Else
+                    TeaseTick += randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+                End If
+            End If
+            StringClean = StringClean.Replace("@AddTeaseTime", "")
+        End If
 
         If StringClean.Contains("@PlaylistOff") Then
             Playlist = False
@@ -13908,7 +13958,9 @@ VTSkip:
 
     Public Sub EdgePace()
 
-        StrokePace = randomizer.Next(2, 5) * 100
+        StrokePace = randomizer.Next(NBMaxPace.Value, NBMaxPace.Value + 151)
+        If StrokePace > NBMinPace.Value Then StrokePace = NBMinPace.Value
+        StrokePace = 50 * Math.Round(StrokePace / 50)
 
     End Sub
 
@@ -22693,6 +22745,12 @@ TryNext:
             AppPanelVitalSub.Height = 422
         End If
 
+        If PNLTabs.Height > 175 Then
+            PNLMetronome.Height = PNLTabs.Height - 8
+        Else
+            PNLMetronome.Height = 167
+        End If
+
 
         PNLTabs.HorizontalScroll.Visible = False
 
@@ -22829,8 +22887,10 @@ SkipNew:
         If StrokeFaster = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Faster")
-                StrokePace = StrokePace - 100
-                If StrokePace < 200 Then StrokePace = 200
+                Dim Stroke123 As Integer = randomizer.Next(1, 4)
+                Stroke123 = Stroke123 * 50
+                StrokePace = StrokePace - Stroke123
+                If StrokePace < NBMinPace.Value Then StrokePace = NBMinPace.Value
                 
             End If
             StrokeFaster = False
@@ -22839,8 +22899,10 @@ SkipNew:
         If StrokeSlower = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Slower")
-                StrokePace = StrokePace + 100
-                If StrokePace > 1000 Then StrokePace = 1000
+                Dim Stroke123 As Integer = randomizer.Next(1, 4)
+                Stroke123 = Stroke123 * 50
+                StrokePace = StrokePace + Stroke123
+                If StrokePace > NBMaxPace.Value Then StrokePace = NBMaxPace.Value
               
             End If
             StrokeSlower = False
@@ -22849,7 +22911,7 @@ SkipNew:
         If StrokeFastest = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Fastest")
-                StrokePace = 200
+                StrokePace = NBMinPace.Value
                
             End If
             StrokeFastest = False
@@ -22858,7 +22920,7 @@ SkipNew:
         If StrokeSlowest = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Slowest")
-                StrokePace = 1000
+                StrokePace = NBMaxPace.Value
                
             End If
             StrokeSlowest = False
@@ -24143,6 +24205,7 @@ SkipNew:
         PNLWritingTask.BackColor = My.Settings.BackgroundColor
         PNLWishlistHeader.BackColor = My.Settings.BackgroundColor
         PNLWishlistTokenBack.BackColor = My.Settings.BackgroundColor
+        PNLMetronome.BackColor = My.Settings.BackgroundColor
 
         PNLHypnoGen.BackColor = My.Settings.BackgroundColor
 
@@ -24172,6 +24235,22 @@ SkipNew:
         BTNCalorie.BackColor = My.Settings.ButtonColor
         BTNExercise.ForeColor = My.Settings.TextColor
         BTNCalorie.ForeColor = My.Settings.TextColor
+
+        BTNMetroPreview1.BackColor = My.Settings.ButtonColor
+        BTNMetroPreview2.BackColor = My.Settings.ButtonColor
+        BTNMetroStop1.BackColor = My.Settings.ButtonColor
+        BTNMetroStop2.BackColor = My.Settings.ButtonColor
+
+        BTNMetroPreview1.ForeColor = My.Settings.TextColor
+        BTNMetroPreview2.ForeColor = My.Settings.TextColor
+        BTNMetroStop1.ForeColor = My.Settings.TextColor
+        BTNMetroStop2.ForeColor = My.Settings.TextColor
+
+        CBMetronome.ForeColor = My.Settings.TextColor
+        LBLMaxSpeed.ForeColor = My.Settings.TextColor
+        LBLMinSpeed.ForeColor = My.Settings.TextColor
+        LBLLow.ForeColor = My.Settings.TextColor
+        LBLHigh.ForeColor = My.Settings.TextColor
 
 
         If FrmSettings.CBFlipBack.Checked = True Then
@@ -24302,6 +24381,7 @@ SkipNew:
         PNLWishList.Visible = False
         PNLHypnoGen.Visible = False
         AppPanelVitalSub.Visible = False
+        PNLMetronome.Visible = False
 
         PNLTabs.Height = 0
 
@@ -24617,7 +24697,8 @@ SkipNew:
         VideoTease = True
         StartStrokingCount += 1
         StopMetronome = False
-        StrokePace = randomizer.Next(4, 9) * 100
+        StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+        StrokePace = 50 * Math.Round(StrokePace / 50)
         StrokePaceTimer.Interval = StrokePace
         StrokePaceTimer.Start()
         AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
@@ -24643,7 +24724,8 @@ SkipNew:
         RLGLTimer.Start()
         StartStrokingCount += 1
         StopMetronome = False
-        StrokePace = randomizer.Next(4, 9) * 100
+        StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+        StrokePace = 50 * Math.Round(StrokePace / 50)
         StrokePaceTimer.Interval = StrokePace
         StrokePaceTimer.Start()
         'VideoTauntTick = randomizer.Next(20, 31)
@@ -25451,7 +25533,7 @@ SkipNew:
 
         Do
 
-            If StrokePace <> 0 Then
+            If StrokePace <> 0 And CBMetronome.Checked = True Then
 
                 My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\metronome.wav")
 
@@ -25461,6 +25543,48 @@ SkipNew:
 
         Loop
 
+    End Sub
+
+    Private Sub MetronomeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MetronomeToolStripMenuItem.Click
+        If PNLMetronome.Visible = False Then
+            CloseApp()
+            OpenApp()
+            PNLMetronome.Visible = True
+        End If
+    End Sub
+
+    Private Sub BTNMetroPreview1_Click(sender As System.Object, e As System.EventArgs) Handles BTNMetroPreview1.Click
+        If SubStroking = False Then StrokePace = NBMaxPace.Value
+    End Sub
+
+    Private Sub BTNMetroPreview2_Click(sender As System.Object, e As System.EventArgs) Handles BTNMetroPreview2.Click
+        If SubStroking = False Then StrokePace = NBMinPace.Value
+    End Sub
+
+    Private Sub BTNMetroStop1_Click(sender As System.Object, e As System.EventArgs) Handles BTNMetroStop1.Click
+        If SubStroking = False Then StrokePace = 0
+    End Sub
+
+    Private Sub BTNMetroStop2_Click(sender As System.Object, e As System.EventArgs) Handles BTNMetroStop2.Click
+        If SubStroking = False Then StrokePace = 0
+    End Sub
+
+    Private Sub NBMaxPace_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBMaxPace.ValueChanged
+        If FormLoading = False Then
+            If NBMaxPace.Value > NBMinPace.Value - 50 Then NBMaxPace.Value = NBMinPace.Value - 50
+            If SubStroking = False Then StrokePace = NBMaxPace.Value
+            My.Settings.MaxPace = NBMaxPace.Value
+            My.Settings.Save()
+        End If
+    End Sub
+
+    Private Sub NBMinPace_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBMinPace.ValueChanged
+        If FormLoading = False Then
+            If NBMinPace.Value < NBMaxPace.Value + 50 Then NBMinPace.Value = NBMaxPace.Value + 50
+            If SubStroking = False Then StrokePace = NBMinPace.Value
+            My.Settings.MinPace = NBMinPace.Value
+            My.Settings.Save()
+        End If
     End Sub
 
 End Class

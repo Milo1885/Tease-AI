@@ -1209,5 +1209,11 @@
     <Setting Name="HoldTheEdgeMaxAmount" Type="System.String" Scope="User">
       <Value Profile="(Default)">minutes</Value>
     </Setting>
+    <Setting Name="MaxPace" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="MinPace" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
