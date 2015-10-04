@@ -706,6 +706,12 @@ Public Class FrmSettings
         If My.Settings.TeaseAILanguage = "English" Then EnglishMenu()
         If My.Settings.TeaseAILanguage = "German" Then GermanMenu()
 
+        Try
+            TimeBoxWakeUp.Value = My.Settings.WakeUp
+        Catch
+        End Try
+
+
         FrmSettingsLoading = False
 
         Me.Visible = False

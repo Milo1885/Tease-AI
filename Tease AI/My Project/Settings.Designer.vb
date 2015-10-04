@@ -4822,11 +4822,10 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property WakeUp() As String
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property WakeUp() As Date
             Get
-                Return CType(Me("WakeUp"),String)
+                Return CType(Me("WakeUp"),Date)
             End Get
             Set
                 Me("WakeUp") = value

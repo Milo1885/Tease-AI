@@ -3131,8 +3131,8 @@ FoundResponse:
         Debug.Print("DomChat = " & DomChat)
 
         If DoNotDisturb = True Then
-            If DomChat.Contains("@Interrupt") Then
-                DomChat = "#Sys_InterruptsOff"
+            If DomChat.Contains("@Interrupt") Or DomChat.Contains("@Call(") Or DomChat.Contains("@CallRandom(") Then
+                DomChat = "#SYS_InterruptsOff"
             End If
         End If
 
@@ -4267,6 +4267,7 @@ ReturnCalled:
                             TypingDelayGeneric()
                         Else
                             EdgeTauntTimer.Start()
+                            EdgeCountTimer.Start()
                         End If
                     End If
                     If ReturnSubState = "HoldingTheEdge" Then
@@ -9407,8 +9408,7 @@ RinseLatherRepeat:
 
                     If DFlag.Contains(",") Then
 
-                        DFlag = DFlag.Replace(", ", ",")
-                        DFlag = DFlag.Replace(" ,", ",")
+                      DFlag = FixCommas(DFlag)
 
                         Dim FlagArray() As String = DFlag.Split(",")
 
@@ -12988,17 +12988,14 @@ VTSkip:
             'StopEverything()
             ReturnFlag = True
 
-            Dim CheckFlag As String = StringClean & " some test garbage"
-            Dim CFIndex As Integer = StringClean.IndexOf("@CallReturn(") + 12
-            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
-            CheckFlag = CheckFlag.Split(")")(0)
-            CheckFlag = CheckFlag.Replace("@CallReturn(", "")
+
+            Dim CheckFlag As String = GetParentheses(StringClean, "@CallReturn(")
             Dim CallReplace As String = CheckFlag
 
             If CheckFlag.Contains(",") Then
 
-                CheckFlag = CheckFlag.Replace(", ", ",")
-                CheckFlag = CheckFlag.Replace(" ,", ",")
+                CheckFlag = FixCommas(CheckFlag)
+
                 Dim CallSplit As String() = CheckFlag.Split(",")
                 FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
                 FileGoto = CallSplit(1)
@@ -13020,17 +13017,13 @@ VTSkip:
 
         If StringClean.Contains("@Call(") Then
 
-            Dim CheckFlag As String = StringClean & " some test garbage"
-            Dim CFIndex As Integer = StringClean.IndexOf("@Call(") + 6
-            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
-            CheckFlag = CheckFlag.Split(")")(0)
-            CheckFlag = CheckFlag.Replace("@Call(", "")
+            Dim CheckFlag As String = GetParentheses(StringClean, "@Call(")
             Dim CallReplace As String = CheckFlag
 
             If CheckFlag.Contains(",") Then
 
-                CheckFlag = CheckFlag.Replace(", ", ",")
-                CheckFlag = CheckFlag.Replace(" ,", ",")
+                CheckFlag = FixCommas(CheckFlag)
+
                 Dim CallSplit As String() = CheckFlag.Split(",")
                 FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
                 FileGoto = CallSplit(1)
@@ -13051,11 +13044,7 @@ VTSkip:
 
         If StringClean.Contains("@CallRandom(") Then
 
-            Dim CheckFlag As String = StringClean & " some test garbage"
-            Dim CFIndex As Integer = StringClean.IndexOf("@CallRandom(") + 12
-            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
-            CheckFlag = CheckFlag.Split(")")(0)
-            CheckFlag = CheckFlag.Replace("@CallRandom(", "")
+            Dim CheckFlag As String = GetParentheses(StringClean, "@CallRandom(")
             Dim CallReplace As String = CheckFlag
 
             If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag) Then
@@ -13099,30 +13088,56 @@ VTSkip:
             StringClean = StringClean.Replace("@InterruptsOn", "")
         End If
 
+
+
         If StringClean.Contains("@DeleteVar[") Then
 
-            Debug.Print("DeleteVar called")
+            Dim DeleteArray As String() = StringClean.Split("]")
 
-            Dim WriteFlag As String = StringClean
+            For i As Integer = 0 To DeleteArray.Count - 1
 
-            Dim WriteStart As Integer
+                If DeleteArray(i).Contains("@DeleteVar[") Then
 
-            WriteStart = WriteFlag.IndexOf("@DeleteVar[") + 11
-            WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-            WriteFlag = WriteFlag.Split(")")(0)
-            WriteFlag = WriteFlag.Replace("@DeleteVar[", "")
-            Debug.Print("Delete Flag = " & WriteFlag)
+                    DeleteArray(i) = DeleteArray(i) & "]"
 
+                    Dim DFlag As String = GetParentheses(DeleteArray(i), "@DeleteVar[")
+                    Dim OriginalDelete As String = DFlag
 
-            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & WriteFlag) Then _
-                My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & WriteFlag)
+                    If DFlag.Contains(",") Then
 
+                        DFlag = FixCommas(DFlag)
 
+                        Dim FlagArray() As String = DFlag.Split(",")
 
-            StringClean = StringClean.Replace("@DeleteVar[" & WriteFlag & "]", "")
+                        For x As Integer = 0 To FlagArray.Count - 1
+
+                            DeleteVariable(FlagArray(x))
+
+                        Next
+
+                    Else
+
+                        DeleteVariable(DFlag)
+
+                    End If
+
+                    DeleteArray(i) = DeleteArray(i).Replace("@DeleteVar[" & OriginalDelete & "]", "")
+
+                End If
+
+            Next
+
+            StringClean = Join(DeleteArray, Nothing)
 
         End If
 
+        'If StringClean.Contains("@DeleteVar[") Then
+        'Debug.Print("DeleteVar called")
+        'Dim WriteFlag As String = GetParentheses(StringClean, "@DeleteVar[")
+        'If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & WriteFlag) Then _
+        'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & WriteFlag)
+        'StringClean = StringClean.Replace("@DeleteVar[" & WriteFlag & "]", "")
+        'End If
 
         If StringClean.Contains("@NoTypo") Then
             TypoSwitch = 0
@@ -13144,33 +13159,12 @@ VTSkip:
             StringClean = StringClean.Replace("@TyposOn", "")
         End If
 
-
-        If StringClean.Contains("@GetRandomSlideshowCategory") Then
-            Dim SlideshowList As New List(Of String)
-            If FrmSettings.CBIHardcore.Checked = True Then SlideshowList.Add("Hardcore")
-            If FrmSettings.CBISoftcore.Checked = True Then SlideshowList.Add("Softcore")
-            If FrmSettings.CBILesbian.Checked = True Then SlideshowList.Add("Lesbian")
-            If FrmSettings.CBIBlowjob.Checked = True Then SlideshowList.Add("Blowjob")
-            If FrmSettings.CBIFemdom.Checked = True Then SlideshowList.Add("Femdom")
-            If FrmSettings.CBILezdom.Checked = True Then SlideshowList.Add("Lezdom")
-            If FrmSettings.CBIHentai.Checked = True Then SlideshowList.Add("Hentai")
-            If FrmSettings.CBIGay.Checked = True Then SlideshowList.Add("Gay")
-            If FrmSettings.CBIMaledom.Checked = True Then SlideshowList.Add("Maledom")
-            If FrmSettings.CBICaptions.Checked = True Then SlideshowList.Add("Captions")
-            If FrmSettings.CBIGeneral.Checked = True Then SlideshowList.Add("General")
-            'If FrmSettings.CBBoobSubDir.Checked = True And FrmSettings.LBLBoobPath.Text <> "No path selected" Then SlideshowList.Add("Boobs")
-            'If FrmSettings.CBButtSubDir.Checked = True And FrmSettings.LBLBoobPath.Text <> "No path selected" Then SlideshowList.Add("Butts")
-            RandomSlideshowCategory = SlideshowList(randomizer.Next(0, SlideshowList.Count))
-            StringClean = StringClean.Replace("@GetRandomSlideshowCategory", "")
-        End If
-
-
-        If StringClean.Contains("@NoPornAllowed") Then
+        If StringClean.Contains("@PornAllowedOff") Then
             CreateFlag("SYS_NoPornAllowed")
             StringClean = StringClean.Replace("@NoPornAllowed", "")
         End If
 
-        If StringClean.Contains("@PornAllowed") Then
+        If StringClean.Contains("@PornAllowedOn") Then
             DeleteFlag("SYS_NoPornAllowed")
             StringClean = StringClean.Replace("@PornAllowed", "")
         End If
@@ -15674,7 +15668,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowHardcoreImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15693,7 +15687,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowSoftcoreImage") Then
-                If Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15712,7 +15706,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLesbianImage") Then
-                If Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15731,7 +15725,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowBlowjobImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15750,7 +15744,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowFemdomImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15769,7 +15763,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLezdomImage") Then
-                If Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15788,7 +15782,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowHentaiImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15807,7 +15801,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowGayImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15826,7 +15820,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowMaledomImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15845,7 +15839,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowCaptionsImage") Then
-                If Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15864,7 +15858,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowGeneralImage") Then
-                If Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15883,7 +15877,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowBlogImage") Or ListClean(PoundCount).Contains("@NewBlogImage") Then
-                If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15923,7 +15917,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLocalImage") Then
-                If FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15943,7 +15937,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowButtImage") Then
-                If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15962,7 +15956,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowBoobsImage") Then
-                If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_PornRestriction") = True Or LockImage = True Then
+                If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -20927,7 +20921,52 @@ TryNext:
 
 
 
+    Public Function SaveImage(ByVal BlogPath As String)
 
+        If BlogPath = "Hardcore" Then BlogPath = FrmSettings.LBLIHardcore.Text
+        If BlogPath = "Softcore" Then BlogPath = FrmSettings.LBLISoftcore.Text
+        If BlogPath = "Lesbian" Then BlogPath = FrmSettings.LBLILesbian.Text
+        If BlogPath = "Blowjob" Then BlogPath = FrmSettings.LBLIBlowjob.Text
+        If BlogPath = "Femdom" Then BlogPath = FrmSettings.LBLIFemdom.Text
+        If BlogPath = "Lezdom" Then BlogPath = FrmSettings.LBLILezdom.Text
+        If BlogPath = "Hentai" Then BlogPath = FrmSettings.LBLIHentai.Text
+        If BlogPath = "Gay" Then BlogPath = FrmSettings.LBLIGay.Text
+        If BlogPath = "Maledom" Then BlogPath = FrmSettings.LBLIMaledom.Text
+        If BlogPath = "Captions" Then BlogPath = FrmSettings.LBLICaptions.Text
+        If BlogPath = "General" Then BlogPath = FrmSettings.LBLIGeneral.Text
+        If BlogPath = "Boobs" Then BlogPath = FrmSettings.LBLBoobPath.Text
+        If BlogPath = "Butt" Then BlogPath = FrmSettings.LBLButtPath.Text
+
+
+        If Directory.Exists(BlogPath) Then
+
+            WebImage = FoundString
+
+            Do Until Not WebImage.Contains("/")
+                WebImage = WebImage.Remove(0, 1)
+            Loop
+
+            Debug.Print(BlogPath & "\" & WebImage)
+
+            If File.Exists(BlogPath & "\" & WebImage) Then
+
+                Dim Result As Integer = MessageBox.Show(Me, WebImage & " already exists in this directory!" & Environment.NewLine & Environment.NewLine & _
+                                                     "Do you wish to overwrite?", "Caution!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+                If Result = DialogResult.Yes Then
+                    My.Computer.FileSystem.DeleteFile(BlogPath & "\" & WebImage)
+                    My.Computer.Network.DownloadFile(FoundString, BlogPath & "\" & WebImage)
+                End If
+
+            Else
+
+                My.Computer.Network.DownloadFile(FoundString, BlogPath & "\" & WebImage)
+
+            End If
+
+        End If
+
+
+    End Function
 
 
 
@@ -25800,4 +25839,43 @@ SkipNew:
     End Sub
 
     
+    Private Sub HardcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HardcoreToolStripMenuItem.Click
+        SaveImage("Hardcore")
+    End Sub
+    Private Sub SoftcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SoftcoreToolStripMenuItem.Click
+        SaveImage("Softcore")
+    End Sub
+    Private Sub LesbianToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LesbianToolStripMenuItem.Click
+        SaveImage("Lesbian")
+    End Sub
+    Private Sub BlowjobToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BlowjobToolStripMenuItem.Click
+        SaveImage("Blowjob")
+    End Sub
+    Private Sub FemdomToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles FemdomToolStripMenuItem.Click
+        SaveImage("Femdom")
+    End Sub
+    Private Sub LezdomToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LezdomToolStripMenuItem.Click
+        SaveImage("Lezdom")
+    End Sub
+    Private Sub HentaiToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HentaiToolStripMenuItem.Click
+        SaveImage("Hentai")
+    End Sub
+    Private Sub GayToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GayToolStripMenuItem.Click
+        SaveImage("Gay")
+    End Sub
+    Private Sub MaledomToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MaledomToolStripMenuItem.Click
+        SaveImage("Maledom")
+    End Sub
+    Private Sub CaptionsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CaptionsToolStripMenuItem.Click
+        SaveImage("Captions")
+    End Sub
+    Private Sub GeneralToolStripMenuItem2_Click(sender As System.Object, e As System.EventArgs) Handles GeneralToolStripMenuItem.Click
+        SaveImage("General")
+    End Sub
+    Private Sub BoobsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BoobsToolStripMenuItem.Click
+        SaveImage("Boobs")
+    End Sub
+    Private Sub ButtsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ButtsToolStripMenuItem.Click
+        SaveImage("Butt")
+    End Sub
 End Class

@@ -333,6 +333,20 @@ Partial Class Form1
         Me.PNLAvatar = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.SaveImageToToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HardcoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SoftcoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LesbianToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BlowjobToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FemdomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LezdomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HentaiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MaledomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CaptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.GeneralToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.BoobsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ButtsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1341,9 +1355,9 @@ Partial Class Form1
         '
         'PictureStrip
         '
-        Me.PictureStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem5, Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4})
+        Me.PictureStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem5, Me.ToolStripMenuItem1, Me.SaveImageToToolStripMenuItem, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4})
         Me.PictureStrip.Name = "PictureStrip"
-        Me.PictureStrip.Size = New System.Drawing.Size(194, 114)
+        Me.PictureStrip.Size = New System.Drawing.Size(194, 158)
         '
         'ToolStripMenuItem5
         '
@@ -2025,7 +2039,7 @@ Partial Class Form1
         '
         Me.LBLHigh.BackColor = System.Drawing.Color.Transparent
         Me.LBLHigh.ForeColor = System.Drawing.Color.White
-        Me.LBLHigh.Location = New System.Drawing.Point(144, 119)
+        Me.LBLHigh.Location = New System.Drawing.Point(144, 131)
         Me.LBLHigh.Name = "LBLHigh"
         Me.LBLHigh.Size = New System.Drawing.Size(92, 18)
         Me.LBLHigh.TabIndex = 6
@@ -2035,7 +2049,7 @@ Partial Class Form1
         'NBMinPace
         '
         Me.NBMinPace.Increment = New Decimal(New Integer() {50, 0, 0, 0})
-        Me.NBMinPace.Location = New System.Drawing.Point(144, 97)
+        Me.NBMinPace.Location = New System.Drawing.Point(144, 109)
         Me.NBMinPace.Maximum = New Decimal(New Integer() {3000, 0, 0, 0})
         Me.NBMinPace.Minimum = New Decimal(New Integer() {200, 0, 0, 0})
         Me.NBMinPace.Name = "NBMinPace"
@@ -2058,7 +2072,7 @@ Partial Class Form1
         '
         Me.LBLLow.BackColor = System.Drawing.Color.Transparent
         Me.LBLLow.ForeColor = System.Drawing.Color.White
-        Me.LBLLow.Location = New System.Drawing.Point(144, 64)
+        Me.LBLLow.Location = New System.Drawing.Point(144, 76)
         Me.LBLLow.Name = "LBLLow"
         Me.LBLLow.Size = New System.Drawing.Size(92, 16)
         Me.LBLLow.TabIndex = 3
@@ -2068,7 +2082,7 @@ Partial Class Form1
         'NBMaxPace
         '
         Me.NBMaxPace.Increment = New Decimal(New Integer() {50, 0, 0, 0})
-        Me.NBMaxPace.Location = New System.Drawing.Point(144, 43)
+        Me.NBMaxPace.Location = New System.Drawing.Point(144, 54)
         Me.NBMaxPace.Maximum = New Decimal(New Integer() {900, 0, 0, 0})
         Me.NBMaxPace.Minimum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.NBMaxPace.Name = "NBMaxPace"
@@ -3353,6 +3367,91 @@ Partial Class Form1
         Me.Panel4.Size = New System.Drawing.Size(245, 31)
         Me.Panel4.TabIndex = 779
         '
+        'SaveImageToToolStripMenuItem
+        '
+        Me.SaveImageToToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HardcoreToolStripMenuItem, Me.SoftcoreToolStripMenuItem, Me.LesbianToolStripMenuItem, Me.BlowjobToolStripMenuItem, Me.FemdomToolStripMenuItem, Me.LezdomToolStripMenuItem, Me.HentaiToolStripMenuItem, Me.GayToolStripMenuItem, Me.MaledomToolStripMenuItem, Me.CaptionsToolStripMenuItem, Me.GeneralToolStripMenuItem1, Me.BoobsToolStripMenuItem, Me.ButtsToolStripMenuItem})
+        Me.SaveImageToToolStripMenuItem.Name = "SaveImageToToolStripMenuItem"
+        Me.SaveImageToToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.SaveImageToToolStripMenuItem.Text = "Save Image To"
+        '
+        'HardcoreToolStripMenuItem
+        '
+        Me.HardcoreToolStripMenuItem.Name = "HardcoreToolStripMenuItem"
+        Me.HardcoreToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HardcoreToolStripMenuItem.Text = "Hardcore"
+        '
+        'SoftcoreToolStripMenuItem
+        '
+        Me.SoftcoreToolStripMenuItem.Name = "SoftcoreToolStripMenuItem"
+        Me.SoftcoreToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SoftcoreToolStripMenuItem.Text = "Softcore"
+        '
+        'LesbianToolStripMenuItem
+        '
+        Me.LesbianToolStripMenuItem.Name = "LesbianToolStripMenuItem"
+        Me.LesbianToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LesbianToolStripMenuItem.Text = "Lesbian"
+        '
+        'BlowjobToolStripMenuItem
+        '
+        Me.BlowjobToolStripMenuItem.Name = "BlowjobToolStripMenuItem"
+        Me.BlowjobToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BlowjobToolStripMenuItem.Text = "Blowjob"
+        '
+        'FemdomToolStripMenuItem
+        '
+        Me.FemdomToolStripMenuItem.Name = "FemdomToolStripMenuItem"
+        Me.FemdomToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FemdomToolStripMenuItem.Text = "Femdom"
+        '
+        'LezdomToolStripMenuItem
+        '
+        Me.LezdomToolStripMenuItem.Name = "LezdomToolStripMenuItem"
+        Me.LezdomToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LezdomToolStripMenuItem.Text = "Lezdom"
+        '
+        'HentaiToolStripMenuItem
+        '
+        Me.HentaiToolStripMenuItem.Name = "HentaiToolStripMenuItem"
+        Me.HentaiToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HentaiToolStripMenuItem.Text = "Hentai"
+        '
+        'GayToolStripMenuItem
+        '
+        Me.GayToolStripMenuItem.Name = "GayToolStripMenuItem"
+        Me.GayToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GayToolStripMenuItem.Text = "Gay"
+        '
+        'MaledomToolStripMenuItem
+        '
+        Me.MaledomToolStripMenuItem.Name = "MaledomToolStripMenuItem"
+        Me.MaledomToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MaledomToolStripMenuItem.Text = "Maledom"
+        '
+        'CaptionsToolStripMenuItem
+        '
+        Me.CaptionsToolStripMenuItem.Name = "CaptionsToolStripMenuItem"
+        Me.CaptionsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CaptionsToolStripMenuItem.Text = "Captions"
+        '
+        'GeneralToolStripMenuItem1
+        '
+        Me.GeneralToolStripMenuItem1.Name = "GeneralToolStripMenuItem1"
+        Me.GeneralToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.GeneralToolStripMenuItem1.Text = "General"
+        '
+        'BoobsToolStripMenuItem
+        '
+        Me.BoobsToolStripMenuItem.Name = "BoobsToolStripMenuItem"
+        Me.BoobsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BoobsToolStripMenuItem.Text = "Boobs"
+        '
+        'ButtsToolStripMenuItem
+        '
+        Me.ButtsToolStripMenuItem.Name = "ButtsToolStripMenuItem"
+        Me.ButtsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ButtsToolStripMenuItem.Text = "Butts"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -3739,5 +3838,19 @@ Partial Class Form1
     Friend WithEvents BTNMetroStop2 As System.Windows.Forms.Button
     Friend WithEvents BTNMetroStop1 As System.Windows.Forms.Button
     Friend WithEvents MetronomeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveImageToToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HardcoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SoftcoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LesbianToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BlowjobToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FemdomToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LezdomToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HentaiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GayToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MaledomToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CaptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents GeneralToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents BoobsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ButtsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
