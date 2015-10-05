@@ -527,6 +527,11 @@ Public Class Form1
 
     Dim GeneralTime As String = "Afternoon"
 
+    Dim NewDommeSlideshow As Boolean
+    Dim OriginalDommeSlideshow As String
+
+    Dim TimeoutTick As Integer
+
 
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -1735,6 +1740,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         If CheckSpace = "" Then Return
 
+
+        If TimeoutTimer.Enabled = True Then TimeoutTimer.Stop()
 
         If dompersonalityComboBox.Items.Count < 1 Then
             MessageBox.Show(Me, "No domme Personalities were found! Please install at least one Personality directory in the Scripts folder before using this part of the program.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -4152,6 +4159,7 @@ ReturnCalled:
             If lines(line).Contains("@Vulgar") And FrmSettings.vulgarCheckBox.Checked = False Then InvalidFilter = True
             If lines(line).Contains("@Supremacist") And FrmSettings.supremacistCheckBox.Checked = False Then InvalidFilter = True
             If lines(line).Contains("@Sadistic") And FrmSettings.sadisticCheckBox.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@Degrading") And FrmSettings.degradingCheckBox.Checked = False Then InvalidFilter = True
 
             If lines(line).Contains("@AlwaysAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Always Allows" Then InvalidFilter = True
             If lines(line).Contains("@OftenAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Often Allows" Then InvalidFilter = True
@@ -4190,6 +4198,103 @@ ReturnCalled:
             If lines(line).Contains("@NotEdging") And SubEdging = True Then InvalidFilter = True
             If lines(line).Contains("@NotHoldingTheEdge") And SubHoldingEdge = True Then InvalidFilter = True
 
+            If lines(line).Contains("@SelfYoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then InvalidFilter = True
+            If lines(line).Contains("@SelfOld") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then InvalidFilter = True
+            If lines(line).Contains("@SubYoung") And FrmSettings.subAgeNumBox.Value > FrmSettings.NBSubAgeMin.Value - 1 Then InvalidFilter = True
+            If lines(line).Contains("@SubOld") And FrmSettings.subAgeNumBox.Value < FrmSettings.NBSubAgeMax.Value + 1 Then InvalidFilter = True
+
+            If lines(line).Contains("@ACup") And FrmSettings.boobComboBox.Text <> "A" Then InvalidFilter = True
+            If lines(line).Contains("@BCup") And FrmSettings.boobComboBox.Text <> "B" Then InvalidFilter = True
+            If lines(line).Contains("@CCup") And FrmSettings.boobComboBox.Text <> "C" Then InvalidFilter = True
+            If lines(line).Contains("@DCup") And FrmSettings.boobComboBox.Text <> "D" Then InvalidFilter = True
+            If lines(line).Contains("@DDCup") And FrmSettings.boobComboBox.Text <> "DD" Then InvalidFilter = True
+            If lines(line).Contains("@DDD+Cup") And FrmSettings.boobComboBox.Text <> "DDD+" Then InvalidFilter = True
+
+            If lines(line).Contains("@DomBirthday") And FrmSettings.NBDomBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBDomBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then InvalidFilter = True
+            If lines(line).Contains("@SubBirthday") And FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then InvalidFilter = True
+            If lines(line).Contains("@ValentinesDay") And Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14 Then InvalidFilter = True
+            If lines(line).Contains("@ChristmasEve") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24 Then InvalidFilter = True
+            If lines(line).Contains("@ChristmasDay") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25 Then InvalidFilter = True
+            If lines(line).Contains("@NewYearsEve") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31 Then InvalidFilter = True
+            If lines(line).Contains("@NewYearsDay") And Month(Date.Now) <> 1 And DateAndTime.Day(Date.Now) <> 1 Then InvalidFilter = True
+
+            If lines(line).Contains("@FirstRound") And FirstRound = False Then InvalidFilter = True
+            If lines(line).Contains("@NotFirstRound") And FirstRound = True Then InvalidFilter = True
+            If lines(line).Contains("@StrokeSpeedMax") And StrokePace < NBMaxPace.Value Then InvalidFilter = True
+            If lines(line).Contains("@StrokeSpeedMin") And StrokePace < NBMinPace.Value Then InvalidFilter = True
+
+            If lines(line).Contains("@LongEdge") And LongEdge = False Then InvalidFilter = True
+            If lines(line).Contains("@InterruptLongEdge") And LongEdge = False And FrmSettings.CBLongEdgeInterrupts.Checked = False Then InvalidFilter = True
+
+            If lines(line).Contains("@1MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119 Then InvalidFilter = True
+            End If
+            If lines(line).Contains("@2MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179 Then InvalidFilter = True
+            End If
+            If lines(line).Contains("@3MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239 Then InvalidFilter = True
+            End If
+            If lines(line).Contains("@4MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299 Then InvalidFilter = True
+            End If
+            If lines(line).Contains("@5MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599 Then InvalidFilter = True
+            End If
+            If lines(line).Contains("@10MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899 Then InvalidFilter = True
+            End If
+            If lines(line).Contains("@15MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799 Then InvalidFilter = True
+            End If
+            If lines(line).Contains("@30MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699 Then InvalidFilter = True
+            End If
+            If lines(line).Contains("@45MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599 Then InvalidFilter = True
+            End If
+            If lines(line).Contains("@60MinuteHold") Then
+                If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then InvalidFilter = True
+            End If
+
+            If lines(line).Contains("@CBTLevel1") And FrmSettings.CBTSlider.Value <> 1 Then InvalidFilter = True
+            If lines(line).Contains("@CBTLevel2") And FrmSettings.CBTSlider.Value <> 2 Then InvalidFilter = True
+            If lines(line).Contains("@CBTLevel3") And FrmSettings.CBTSlider.Value <> 3 Then InvalidFilter = True
+            If lines(line).Contains("@CBTLevel4") And FrmSettings.CBTSlider.Value <> 4 Then InvalidFilter = True
+            If lines(line).Contains("@CBTLevel5") And FrmSettings.CBTSlider.Value <> 5 Then InvalidFilter = True
+
+            If lines(line).Contains("@SubCircumcised") And FrmSettings.CBSubCircumcised.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@SubNotCircumcised") And FrmSettings.CBSubCircumcised.Checked = True Then InvalidFilter = True
+            If lines(line).Contains("@SubPierced") And FrmSettings.CBSubPierced.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@SubNotPierced") And FrmSettings.CBSubPierced.Checked = True Then InvalidFilter = True
+
+            If lines(line).Contains("@BeforeTease") And BeforeTease = False Then InvalidFilter = True
+            If lines(line).Contains("@OrgasmDenied") And OrgasmDenied = False Then InvalidFilter = True
+            If lines(line).Contains("@OrgasmAllowed") And OrgasmAllowed = False Then InvalidFilter = True
+            If lines(line).Contains("@OrgasmRuined") And OrgasmRuined = False Then InvalidFilter = True
+
+            If lines(line).Contains("@InChastity") And My.Settings.Chastity = False Then InvalidFilter = True
+            If lines(line).Contains("@HasChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@ChastityPA") And FrmSettings.CBChastityPA.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@ChastitySpikes") And FrmSettings.CBChastitySpikes.Checked = False Then InvalidFilter = True
+
+            'If lines(line).Contains("@VitalSub") And CBVitalSub.Checked = False Then InvalidFilter = True
+            'If lines(line).Contains("@VitalSubAssignment") And CBVitalSubDomTask.Checked = False Then InvalidFilter = True
+
+            If lines(line).Contains("@RuinTaunt") And EdgeToRuinSecret = True Then InvalidFilter = True
+
+            If lines(line).Contains("@CockTorture") And FrmSettings.CBCBTCock.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@BallTorture") And FrmSettings.CBCBTBalls.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@BallTorture0") And CBTBallsCount <> 0 Then InvalidFilter = True
+            If lines(line).Contains("@BallTorture1") And CBTBallsCount <> 1 Then InvalidFilter = True
+            If lines(line).Contains("@BallTorture2") And CBTBallsCount <> 2 Then InvalidFilter = True
+            If lines(line).Contains("@BallTorture3") And CBTBallsCount <> 3 Then InvalidFilter = True
+            If lines(line).Contains("@BallTorture4+") And CBTBallsCount < 4 Then InvalidFilter = True
+            If lines(line).Contains("@CockTorture0") And CBTCockCount <> 0 Then InvalidFilter = True
+            If lines(line).Contains("@CockTorture1") And CBTCockCount <> 1 Then InvalidFilter = True
+            If lines(line).Contains("@CockTorture2") And CBTCockCount <> 2 Then InvalidFilter = True
+            If lines(line).Contains("@CockTorture3") And CBTCockCount <> 3 Then InvalidFilter = True
+            If lines(line).Contains("@CockTorture4+") And CBTCockCount < 4 Then InvalidFilter = True
 
 
             If lines(line).Contains("@Flag(") Then
@@ -4218,6 +4323,25 @@ ReturnCalled:
                 End If
             End If
 
+            If lines(line).Contains("@Variable[") Then
+                If CheckVariable(lines(line)) = False Then InvalidFilter = True
+            End If
+
+            'If lines(line).Contains("@CheckDate(") Then
+            'If CheckDateList(lines(line)) = False Then InvalidFilter = True
+            'End If
+
+            If lines(line).Contains("@Morning") And GeneralTime <> "Morning" Then InvalidFilter = True
+            If lines(line).Contains("@Afternoon") And GeneralTime <> "Afternoon" Then InvalidFilter = True
+            If lines(line).Contains("@Night") And GeneralTime <> "Night" Then InvalidFilter = True
+
+            If lines(line).Contains("@GoodMood") And DommeMood <= FrmSettings.NBDomMoodMax.Value Then InvalidFilter = True
+            If lines(line).Contains("@BadMood") And DommeMood >= FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
+            If lines(line).Contains("@NeutralMood") Then
+                If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
+            End If
+
+            If lines(line).Contains("@Info") Then InvalidFilter = True
 
             If InvalidFilter = True Then
                 ioFile.Close()
@@ -5091,11 +5215,17 @@ NullResponse:
 
                 'If RiskyDeal = True Then Me.Focus()
 
+                Dim LoopBuffer As Integer = 0
+
                 Do
+                    LoopBuffer += 1
+
                     DomTask = PoundClean(DomTask)
                     DomTask = CommandClean(DomTask)
                     DomTask = StripCommands(DomTask)
                     DomTask = PoundClean(DomTask)
+
+                    If LoopBuffer > 4 Then Exit Do
 
                 Loop Until Not DomTask.Contains("#") And Not DomTask.Contains("@")
 
@@ -5916,11 +6046,19 @@ TryNextWithTease:
                 End If
 
 
+                Dim LoopBuffer As Integer = 0
+
                 Do
+
+                    LoopBuffer += 1
+
                     DomChat = PoundClean(DomChat)
                     DomChat = CommandClean(DomChat)
                     DomChat = StripCommands(DomChat)
                     DomChat = PoundClean(DomChat)
+
+                    If LoopBuffer > 4 Then Exit Do
+
                 Loop Until Not DomChat.Contains("#") And Not DomChat.Contains("@")
 
 
@@ -13233,6 +13371,32 @@ VTSkip:
             StringClean = StringClean.Replace("@MoodDown", "")
         End If
 
+        If StringClean.Contains("@NewDommeSlideshow") Then
+            NewDommeSlideshow = True
+            OriginalDommeSlideshow = _ImageFileNames(0)
+            LoadDommeImageFolder()
+            NewDommeSlideshow = False
+            DomPic = _ImageFileNames(FileCount)
+            StringClean = StringClean.Replace("@NewDommeSlideshow", "")
+        End If
+
+        If StringClean.Contains("@Timeout(") Then
+
+            Dim TimeFlag As String = GetParentheses(StringClean, "@Timeout(")
+            Dim OriginalFlag As String = TimeFlag
+
+            TimeFlag = FixCommas(TimeFlag)
+
+            Dim TimeArray As String() = TimeFlag.Split(",")
+
+            FileGoto = TimeArray(1)
+            TimeoutTick = Val(TimeArray(0))
+            TimeoutTimer.Start()
+
+            StringClean = StringClean.Replace("@Timeout(" & OriginalFlag & ")", "")
+        End If
+
+
         If StringClean.Contains("@Debug") Then
 
             'Dim wy As Long = DateDiff(DateInterval.Day, Val(GetVariable("TB_AFKSlideshow")), Date.Now)
@@ -14261,6 +14425,25 @@ VTSkip:
         Do
             Application.DoEvents()
             PoundCount -= 1
+            If ListClean(PoundCount).Contains("@Degrading") Then
+                If FrmSettings.degradingCheckBox.Checked = False Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
             If ListClean(PoundCount).Contains("@DommeLevel1") Then
                 If FrmSettings.domlevelNumBox.Value <> 1 Then
                     If StrokeFilter = True Then
@@ -14583,6 +14766,26 @@ VTSkip:
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@CockLarge") Then
                 If FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@CockLarge", "")
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@CockAverage") Then
+                If FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15308,7 +15511,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@StrokeSpeedMax") Then
-                If StrokePace < 1000 Then
+                If StrokePace < NBMaxPace.Value Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -15328,7 +15531,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@StrokeSpeedMin") Then
-                If StrokePace > 200 Then
+                If StrokePace > NBMinPace.Value Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -21165,6 +21368,11 @@ TryNext:
 
     Public Sub LoadDommeImageFolder()
 
+
+        Dim NewSlideshowAttempts As Integer = 0
+
+GetDommeSlideshow:
+
         Dim GreetFolder As New List(Of String)
         GreetFolder.Clear()
 
@@ -21234,6 +21442,12 @@ TryNext:
         End If
 
         FileCount = 0
+
+
+        If NewDommeSlideshow = True Then
+            NewSlideshowAttempts += 1
+            If _ImageFileNames(0) = OriginalDommeSlideshow And NewSlideshowAttempts < 6 Then GoTo GetDommeSlideshow
+        End If
 
 
         ClearMainPictureBox()
@@ -23164,7 +23378,7 @@ SkipNew:
                 Dim Stroke123 As Integer = randomizer.Next(1, 4)
                 Stroke123 = Stroke123 * 50
                 StrokePace = StrokePace - Stroke123
-                If StrokePace < NBMinPace.Value Then StrokePace = NBMinPace.Value
+                If StrokePace < NBMaxPace.Value Then StrokePace = NBMaxPace.Value
                 
             End If
             StrokeFaster = False
@@ -23176,7 +23390,7 @@ SkipNew:
                 Dim Stroke123 As Integer = randomizer.Next(1, 4)
                 Stroke123 = Stroke123 * 50
                 StrokePace = StrokePace + Stroke123
-                If StrokePace > NBMaxPace.Value Then StrokePace = NBMaxPace.Value
+                If StrokePace > NBMinPace.Value Then StrokePace = NBMinPace.Value
               
             End If
             StrokeSlower = False
@@ -23185,7 +23399,7 @@ SkipNew:
         If StrokeFastest = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Fastest")
-                StrokePace = NBMinPace.Value
+                StrokePace = NBMaxPace.Value
                
             End If
             StrokeFastest = False
@@ -23194,7 +23408,7 @@ SkipNew:
         If StrokeSlowest = True Then
             If SubStroking = True And SubEdging = False And SubHoldingEdge = False Then
                 Debug.Print("Stroke Slowest")
-                StrokePace = NBMaxPace.Value
+                StrokePace = NBMinPace.Value
                
             End If
             StrokeSlowest = False
@@ -25877,5 +26091,28 @@ SkipNew:
     End Sub
     Private Sub ButtsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ButtsToolStripMenuItem.Click
         SaveImage("Butt")
+    End Sub
+
+    Private Sub TimeoutTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TimeoutTimer.Tick
+
+        Debug.Print("TimeoutTick = " & TimeoutTick)
+
+        If chatBox.Text <> "" And TimeoutTick < 3 Then Return
+
+        TimeoutTick -= 1
+
+        If TimeoutTick < 1 Then
+
+            TimeoutTimer.Stop()
+            YesOrNo = False
+            InputFlag = False
+
+            SkipGotoLine = True
+            GetGoto()
+
+            RunFileText()
+
+        End If
+
     End Sub
 End Class
