@@ -14027,6 +14027,17 @@ VTSkip:
 
     End Function
 
+    Public Function GetEdgeHoldMinutes(ByVal HoldTime As Integer) As Boolean
+
+        Dim HoldEdgeCheck As Boolean = False
+
+        If HoldEdgeTime >= HoldTime * 60 Then HoldEdgeCheck = True
+
+        Return HoldEdgeCheck
+
+
+    End Function
+
     Public Function GetDommeImage(ByVal DomTag As String) As Boolean
 
         DommeImage = Nothing
@@ -16139,7 +16150,7 @@ VTSkip:
         Do
             Application.DoEvents()
             PoundCount -= 1
-            If ListClean(PoundCount).Contains("@ShowButtImage") Then
+            If ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowButtsImage") Then
                 If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
@@ -16158,7 +16169,7 @@ VTSkip:
         Do
             Application.DoEvents()
             PoundCount -= 1
-            If ListClean(PoundCount).Contains("@ShowBoobsImage") Then
+            If ListClean(PoundCount).Contains("@ShowBoobsImage") Or ListClean(PoundCount).Contains("@ShowBoobImage") Then
                 If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
@@ -16179,6 +16190,35 @@ VTSkip:
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ShowLocalImage") Or ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowBoobsImage") Then
                 If CustomSlideshow = True Or LockImage = True Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@EdgeHeld(") Then
+                Dim EdgeFail As Boolean = False
+                Dim EdgeFlag As String = GetParentheses(ListClean(PoundCount), "@EdgeHeld(")
+                If EdgeFlag.Contains(",") Then
+                    EdgeFlag = FixCommas(EdgeFlag)
+                    Dim EdgeArray As String() = EdgeFlag.Split(",")
+                    If HoldEdgeTime < Val(EdgeArray(0)) * 60 Or HoldEdgeTime > Val(EdgeArray(1)) * 60 Then EdgeFail = True
+                Else
+                    If Val(EdgeFlag) * 60 > HoldEdgeTime Then EdgeFail = True
+                End If
+                If EdgeFail = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))

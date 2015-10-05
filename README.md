@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Added @EdgeHeld() Command Filter
+
 Added Timeout() Command
 
 Added "Save Image To" option to main picture window right-click menu that let's you quickly save a blog image to one of your local image directories
