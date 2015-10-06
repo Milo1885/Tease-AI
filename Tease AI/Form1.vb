@@ -4257,6 +4257,18 @@ ReturnCalled:
                 If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then InvalidFilter = True
             End If
 
+            If lines(line).Contains("@EdgeHeld(") Then
+                Dim EdgeFail As Boolean = False
+                Dim EdgeFlag As String = GetParentheses(lines(line), "@EdgeHeld(")
+                If EdgeFlag.Contains(",") Then
+                    EdgeFlag = FixCommas(EdgeFlag)
+                    Dim EdgeArray As String() = EdgeFlag.Split(",")
+                    If HoldEdgeTime < Val(EdgeArray(0)) * 60 Or HoldEdgeTime > Val(EdgeArray(1)) * 60 Then InvalidFilter = True
+                Else
+                    If Val(EdgeFlag) * 60 > HoldEdgeTime Then InvalidFilter = True
+                End If
+            End If
+
             If lines(line).Contains("@CBTLevel1") And FrmSettings.CBTSlider.Value <> 1 Then InvalidFilter = True
             If lines(line).Contains("@CBTLevel2") And FrmSettings.CBTSlider.Value <> 2 Then InvalidFilter = True
             If lines(line).Contains("@CBTLevel3") And FrmSettings.CBTSlider.Value <> 3 Then InvalidFilter = True
@@ -4275,6 +4287,8 @@ ReturnCalled:
 
             If lines(line).Contains("@InChastity") And My.Settings.Chastity = False Then InvalidFilter = True
             If lines(line).Contains("@HasChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
+            If lines(line).Contains("@NotInChastity") And My.Settings.Chastity = True Then InvalidFilter = True
+            If lines(line).Contains("@DoesNotHaveChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
             If lines(line).Contains("@ChastityPA") And FrmSettings.CBChastityPA.Checked = False Then InvalidFilter = True
             If lines(line).Contains("@ChastitySpikes") And FrmSettings.CBChastitySpikes.Checked = False Then InvalidFilter = True
 
@@ -9687,46 +9701,82 @@ RinseLatherRepeat:
                     Dim CheckFlag As String = GetParentheses(CheckArray(i), "@CheckDate(")
                     Dim OriginalCheck As String = CheckFlag
 
-                    CheckFlag = CheckFlag.Replace(", ", ",")
-                    CheckFlag = CheckFlag.Replace(" ,", ",")
+                    CheckFlag = FixCommas(CheckFlag)
 
-                    Dim FlagArray() As String = CheckFlag.Split(",")
+                    Dim DateArray() As String = CheckFlag.Split(",")
 
-                    If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0)) Then
+                    If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & DateArray(0)) Then
 
-                        Dim DateReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\" & FlagArray(0))
-                        Dim CheckDate As Date
+                        Debug.Print(GetDate(DateArray(0)))
 
-                        While DateReader.Peek <> -1
-                            CheckDate = DateReader.ReadLine()
-                        End While
-
-                        DateReader.Close()
-                        DateReader.Dispose()
-
-                        Debug.Print("CheckDate " & CheckDate)
-
-                        If FlagArray.Count = 2 Then
-
-                            If CompareDatesWithTime(CheckDate) <> 1 Then
+                        If DateArray.Count = 2 Then
+                            If CompareDatesWithTime(GetDate(DateArray(0))) <> 1 Then
                                 SkipGotoLine = True
-                                FileGoto = FlagArray(1).Replace(")", "")
+                                FileGoto = DateArray(1).Replace(")", "")
                                 GetGoto()
                             End If
+                        End If
 
-                        Else
+                        If DateArray.Count = 3 Then
 
-                            CheckDateList(StringClean)
+                            Dim DDiff As Integer
+
+                            Debug.Print("GetDate(DateArray(0) = " & GetDate(DateArray(0)))
+
+                            If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
+                            If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+
+                            Debug.Print("DDiff = " & DDiff)
+                            Debug.Print("Val(DateArray(1)) = " & Val(DateArray(1)))
+
+                            If DDiff >= Val(DateArray(1)) Then
+                                SkipGotoLine = True
+                                FileGoto = DateArray(2).Replace(")", "")
+                                GetGoto()
+                            End If
 
                         End If
 
 
+                        If DateArray.Count = 4 Then
+
+                            Dim DDiff As Integer
+                            Dim DDiff2 As Integer
+
+                            If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
+                            If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+
+                            If UCase(DateArray(2)).Contains("SECOND") Then DDiff2 = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(2)).Contains("MINUTE") Then DDiff2 = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(2)).Contains("HOUR") Then DDiff2 = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(2)).Contains("DAY") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(2)).Contains("WEEK") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
+                            If UCase(DateArray(2)).Contains("MONTH") Then DDiff2 = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
+                            If UCase(DateArray(2)).Contains("YEAR") Then DDiff2 = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+
+                            If DDiff >= Val(DateArray(1)) And DDiff2 <= Val(DateArray(2)) Then
+                                SkipGotoLine = True
+                                FileGoto = DateArray(3).Replace(")", "")
+                                GetGoto()
+                            End If
+
+                        End If
 
                     End If
 
-                        CheckArray(i) = CheckArray(i).Replace("@CheckDate(" & OriginalCheck, "")
+                    CheckArray(i) = CheckArray(i).Replace("@CheckDate(" & OriginalCheck, "")
 
-                    End If
+                End If
 
             Next
 
@@ -9738,7 +9788,7 @@ RinseLatherRepeat:
 
         ' The @RoundVar Command is used to take an existing Variable and round it by the amount specified. The correct format is @Round[VarName]=[RoundAmount]
         ' For example, @RoundVar[StrokeTotal]=[10] wound round the Variable "StrokeTotal" by 10.
-        ' @Round[] will only round the and save Variable, it will not dispaly it. More than one @Round[] Command can be used per line
+        ' @Round[] will only round the and save Variable, it will not display it. More than one @Round[] Command can be used per line
 
 
         If StringClean.Contains("@RoundVar[") Then
@@ -11770,6 +11820,8 @@ OrgasmDecided:
             StringClean = StringClean.Replace("@ShowTaggedImage", "")
 
         End If
+
+
 
         If StringClean.Contains("@SendDailyTasks") Then
             CreateTaskLetter()
@@ -13969,28 +14021,67 @@ VTSkip:
 
         Dim DateFlag As String = GetParentheses(DateString, "@CheckDate(")
 
-        DateFlag = DateFlag.Replace(", ", ",")
-        DateFlag = DateFlag.Replace(" ,", ",")
-        Dim DateArray() As String = DateFlag.Split(",")
-        Dim DDiff As Integer
 
-        If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-        If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-        If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-        If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-        If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) * 7
-        If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-        If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+        If DateFlag.Contains(",") Then
 
-        If DDiff >= Val(DateArray(1)) Then DateCheck = True
+            DateFlag = FixCommas(DateFlag)
 
-        If Not DateArray(2) Is Nothing And DateCheck = True Then
+            Dim DateArray() As String = DateFlag.Split(",")
+            Dim DDiff As Integer = 18855881
+            Dim DDiff2 As Integer = 18855881
 
-            FileGoto = DateArray(2)
-            SkipGotoLine = True
-            GetGoto()
+            If DateArray.Count = 2 Then
+
+                If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
+                If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+
+                If DDiff >= Val(DateArray(1)) Then DateCheck = True
+
+            End If
+
+            If DateArray.Count = 3 Then
+
+                If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
+                If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+
+                If UCase(DateArray(2)).Contains("SECOND") Then DDiff2 = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(2)).Contains("MINUTE") Then DDiff2 = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(2)).Contains("HOUR") Then DDiff2 = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(2)).Contains("DAY") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(2)).Contains("WEEK") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
+                If UCase(DateArray(2)).Contains("MONTH") Then DDiff2 = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
+                If UCase(DateArray(2)).Contains("YEAR") Then DDiff2 = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+
+                If DDiff >= Val(DateArray(1)) And DDiff2 <= Val(DateArray(2)) Then DateCheck = True
+
+            End If
+
+        Else
+
+            If CompareDatesWithTime(GetDate(DateFlag)) <> 1 Then DateCheck = True
 
         End If
+
+
+        'If DDiff >= Val(DateArray(1)) Then DateCheck = True
+
+        'If Not DateArray(2) Is Nothing And DateCheck = True Then
+
+        'FileGoto = DateArray(2)
+        'SkipGotoLine = True
+        'GetGoto()
+
+        'End If
 
         Return DateCheck
 
@@ -14351,6 +14442,14 @@ VTSkip:
 
         Dim PoundCount As Integer = ListClean.Count
         Dim PoundLine As Integer = PoundCount
+
+        Debug.Print("Begin FilterTest")
+
+        GoTo TagTest
+
+TagTest:
+
+        Debug.Print("Test?")
 
 
         PoundCount = PoundLine
@@ -14851,6 +14950,8 @@ VTSkip:
             End If
         Loop Until PoundCount = 0
 
+
+
         PoundCount = PoundLine
         Do
             Application.DoEvents()
@@ -14970,6 +15071,10 @@ VTSkip:
                 'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NewYearsDay", "")
             End If
         Loop Until PoundCount = 0
+
+
+
+
 
         PoundCount = PoundLine
         Do
@@ -15476,6 +15581,7 @@ VTSkip:
                 'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagFurniture", TagFurniture)
             End If
         Loop Until PoundCount = 0
+
 
         PoundCount = PoundLine
         Do
@@ -16889,8 +16995,46 @@ VTSkip:
         Do
             Application.DoEvents()
             PoundCount -= 1
+            If ListClean(PoundCount).Contains("@NotInChastity") Then
+                If My.Settings.Chastity = True Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
             If ListClean(PoundCount).Contains("@HasChastity") Then
                 If FrmSettings.CBOwnChastity.Checked = False Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@DoesNotHaveChastity") Then
+                If FrmSettings.CBOwnChastity.Checked = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -18165,6 +18309,10 @@ VTSkip:
         Loop Until PoundCount = 0
 
         ListClean.Remove(ListClean(ListClean.Count - 1))
+
+        For i As Integer = 0 To ListClean.Count - 1
+            Debug.Print(ListClean(i))
+        Next
 
         'For i As Integer = 0 To ListClean.Count - 1
         'Debug.Print("AFTER " & i & ". " & ListClean(i))
@@ -23734,12 +23882,6 @@ SkipNew:
         FrmSettings.Focus()
     End Sub
 
-    Private Sub ThemeToolStripMenuItem_Click_1(sender As System.Object, e As System.EventArgs) Handles ThemeToolStripMenuItem.Click
-        FrmSettings.SettingsTabs.SelectTab(10)
-        FrmSettings.Show()
-        FrmSettings.Focus()
-    End Sub
-
     Private Sub RangesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RangesToolStripMenuItem.Click
         FrmSettings.SettingsTabs.SelectTab(11)
         FrmSettings.Show()
@@ -26154,5 +26296,11 @@ SkipNew:
 
         End If
 
+    End Sub
+
+    Private Sub ThemesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ThemesToolStripMenuItem.Click
+        FrmSettings.SettingsTabs.SelectTab(10)
+        FrmSettings.Show()
+        FrmSettings.Focus()
     End Sub
 End Class

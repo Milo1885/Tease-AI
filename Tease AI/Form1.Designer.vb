@@ -191,7 +191,6 @@ Partial Class Form1
         Me.URLFilesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.VideoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AppsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ThemeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RangesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ModdingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MiscToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -226,6 +225,7 @@ Partial Class Form1
         Me.DebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.RunScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ThemesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PNLDate = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.LBLGeneralSettings = New System.Windows.Forms.Label()
@@ -1382,79 +1382,79 @@ Partial Class Form1
         'HardcoreToolStripMenuItem
         '
         Me.HardcoreToolStripMenuItem.Name = "HardcoreToolStripMenuItem"
-        Me.HardcoreToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HardcoreToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.HardcoreToolStripMenuItem.Text = "Hardcore"
         '
         'SoftcoreToolStripMenuItem
         '
         Me.SoftcoreToolStripMenuItem.Name = "SoftcoreToolStripMenuItem"
-        Me.SoftcoreToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SoftcoreToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.SoftcoreToolStripMenuItem.Text = "Softcore"
         '
         'LesbianToolStripMenuItem
         '
         Me.LesbianToolStripMenuItem.Name = "LesbianToolStripMenuItem"
-        Me.LesbianToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LesbianToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.LesbianToolStripMenuItem.Text = "Lesbian"
         '
         'BlowjobToolStripMenuItem
         '
         Me.BlowjobToolStripMenuItem.Name = "BlowjobToolStripMenuItem"
-        Me.BlowjobToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BlowjobToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.BlowjobToolStripMenuItem.Text = "Blowjob"
         '
         'FemdomToolStripMenuItem
         '
         Me.FemdomToolStripMenuItem.Name = "FemdomToolStripMenuItem"
-        Me.FemdomToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.FemdomToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.FemdomToolStripMenuItem.Text = "Femdom"
         '
         'LezdomToolStripMenuItem
         '
         Me.LezdomToolStripMenuItem.Name = "LezdomToolStripMenuItem"
-        Me.LezdomToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.LezdomToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.LezdomToolStripMenuItem.Text = "Lezdom"
         '
         'HentaiToolStripMenuItem
         '
         Me.HentaiToolStripMenuItem.Name = "HentaiToolStripMenuItem"
-        Me.HentaiToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.HentaiToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.HentaiToolStripMenuItem.Text = "Hentai"
         '
         'GayToolStripMenuItem
         '
         Me.GayToolStripMenuItem.Name = "GayToolStripMenuItem"
-        Me.GayToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GayToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.GayToolStripMenuItem.Text = "Gay"
         '
         'MaledomToolStripMenuItem
         '
         Me.MaledomToolStripMenuItem.Name = "MaledomToolStripMenuItem"
-        Me.MaledomToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.MaledomToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.MaledomToolStripMenuItem.Text = "Maledom"
         '
         'CaptionsToolStripMenuItem
         '
         Me.CaptionsToolStripMenuItem.Name = "CaptionsToolStripMenuItem"
-        Me.CaptionsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.CaptionsToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.CaptionsToolStripMenuItem.Text = "Captions"
         '
         'GeneralToolStripMenuItem1
         '
         Me.GeneralToolStripMenuItem1.Name = "GeneralToolStripMenuItem1"
-        Me.GeneralToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.GeneralToolStripMenuItem1.Size = New System.Drawing.Size(125, 22)
         Me.GeneralToolStripMenuItem1.Text = "General"
         '
         'BoobsToolStripMenuItem
         '
         Me.BoobsToolStripMenuItem.Name = "BoobsToolStripMenuItem"
-        Me.BoobsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.BoobsToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.BoobsToolStripMenuItem.Text = "Boobs"
         '
         'ButtsToolStripMenuItem
         '
         Me.ButtsToolStripMenuItem.Name = "ButtsToolStripMenuItem"
-        Me.ButtsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ButtsToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
         Me.ButtsToolStripMenuItem.Text = "Butts"
         '
         'ToolStripMenuItem2
@@ -1663,7 +1663,7 @@ Partial Class Form1
         '
         'MenuStrip2
         '
-        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AppsToolStripMenuItem, Me.GamesToolStripMenuItem1, Me.ToolsToolStripMenuItem, Me.MilovanaToolStripMenuItem1, Me.DebugToolStripMenuItem, Me.AboutToolStripMenuItem})
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.SettingsToolStripMenuItem, Me.AppsToolStripMenuItem, Me.GamesToolStripMenuItem1, Me.ThemesToolStripMenuItem, Me.ToolsToolStripMenuItem, Me.MilovanaToolStripMenuItem1, Me.DebugToolStripMenuItem, Me.AboutToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
         Me.MenuStrip2.Size = New System.Drawing.Size(1682, 24)
@@ -1729,7 +1729,7 @@ Partial Class Form1
         '
         'SettingsToolStripMenuItem
         '
-        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.DommeToolStripMenuItem, Me.SubToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ImagesToolStripMenuItem, Me.DommeTagsToolStripMenuItem, Me.LocalTagsToolStripMenuItem, Me.URLFilesToolStripMenuItem, Me.VideoToolStripMenuItem, Me.AppsToolStripMenuItem1, Me.ThemeToolStripMenuItem, Me.RangesToolStripMenuItem, Me.ModdingToolStripMenuItem, Me.MiscToolStripMenuItem})
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GeneralToolStripMenuItem, Me.DommeToolStripMenuItem, Me.SubToolStripMenuItem, Me.ScriptsToolStripMenuItem, Me.ImagesToolStripMenuItem, Me.DommeTagsToolStripMenuItem, Me.LocalTagsToolStripMenuItem, Me.URLFilesToolStripMenuItem, Me.VideoToolStripMenuItem, Me.AppsToolStripMenuItem1, Me.RangesToolStripMenuItem, Me.ModdingToolStripMenuItem, Me.MiscToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
         Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.SettingsToolStripMenuItem.Text = "Settings"
@@ -1737,85 +1737,79 @@ Partial Class Form1
         'GeneralToolStripMenuItem
         '
         Me.GeneralToolStripMenuItem.Name = "GeneralToolStripMenuItem"
-        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.GeneralToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GeneralToolStripMenuItem.Text = "General"
         '
         'DommeToolStripMenuItem
         '
         Me.DommeToolStripMenuItem.Name = "DommeToolStripMenuItem"
-        Me.DommeToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.DommeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.DommeToolStripMenuItem.Text = "Domme"
         '
         'SubToolStripMenuItem
         '
         Me.SubToolStripMenuItem.Name = "SubToolStripMenuItem"
-        Me.SubToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.SubToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SubToolStripMenuItem.Text = "Sub"
         '
         'ScriptsToolStripMenuItem
         '
         Me.ScriptsToolStripMenuItem.Name = "ScriptsToolStripMenuItem"
-        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ScriptsToolStripMenuItem.Text = "Scripts"
         '
         'ImagesToolStripMenuItem
         '
         Me.ImagesToolStripMenuItem.Name = "ImagesToolStripMenuItem"
-        Me.ImagesToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ImagesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ImagesToolStripMenuItem.Text = "Images"
         '
         'DommeTagsToolStripMenuItem
         '
         Me.DommeTagsToolStripMenuItem.Name = "DommeTagsToolStripMenuItem"
-        Me.DommeTagsToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.DommeTagsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.DommeTagsToolStripMenuItem.Text = "Domme Tags"
         '
         'LocalTagsToolStripMenuItem
         '
         Me.LocalTagsToolStripMenuItem.Name = "LocalTagsToolStripMenuItem"
-        Me.LocalTagsToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.LocalTagsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.LocalTagsToolStripMenuItem.Text = "Local Tags"
         '
         'URLFilesToolStripMenuItem
         '
         Me.URLFilesToolStripMenuItem.Name = "URLFilesToolStripMenuItem"
-        Me.URLFilesToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.URLFilesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.URLFilesToolStripMenuItem.Text = "URL Files"
         '
         'VideoToolStripMenuItem
         '
         Me.VideoToolStripMenuItem.Name = "VideoToolStripMenuItem"
-        Me.VideoToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.VideoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.VideoToolStripMenuItem.Text = "Video"
         '
         'AppsToolStripMenuItem1
         '
         Me.AppsToolStripMenuItem1.Name = "AppsToolStripMenuItem1"
-        Me.AppsToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
+        Me.AppsToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
         Me.AppsToolStripMenuItem1.Text = "Apps"
-        '
-        'ThemeToolStripMenuItem
-        '
-        Me.ThemeToolStripMenuItem.Name = "ThemeToolStripMenuItem"
-        Me.ThemeToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
-        Me.ThemeToolStripMenuItem.Text = "Theme"
         '
         'RangesToolStripMenuItem
         '
         Me.RangesToolStripMenuItem.Name = "RangesToolStripMenuItem"
-        Me.RangesToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.RangesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.RangesToolStripMenuItem.Text = "Ranges"
         '
         'ModdingToolStripMenuItem
         '
         Me.ModdingToolStripMenuItem.Name = "ModdingToolStripMenuItem"
-        Me.ModdingToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.ModdingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ModdingToolStripMenuItem.Text = "Modding"
         '
         'MiscToolStripMenuItem
         '
         Me.MiscToolStripMenuItem.Name = "MiscToolStripMenuItem"
-        Me.MiscToolStripMenuItem.Size = New System.Drawing.Size(145, 22)
+        Me.MiscToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.MiscToolStripMenuItem.Text = "Misc"
         '
         'AppsToolStripMenuItem
@@ -2007,6 +2001,12 @@ Partial Class Form1
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
         Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
         Me.AboutToolStripMenuItem.Text = "About"
+        '
+        'ThemesToolStripMenuItem
+        '
+        Me.ThemesToolStripMenuItem.Name = "ThemesToolStripMenuItem"
+        Me.ThemesToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.ThemesToolStripMenuItem.Text = "Themes"
         '
         'PNLDate
         '
@@ -3753,7 +3753,6 @@ Partial Class Form1
     Friend WithEvents BTNRandomVideo As System.Windows.Forms.Button
     Friend WithEvents BTNRandomBlog As System.Windows.Forms.Button
     Friend WithEvents RandomizerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ThemeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents PNLPlaylist As System.Windows.Forms.Panel
     Friend WithEvents LBPlaylist As System.Windows.Forms.ListBox
     Friend WithEvents BTNPlaylist As System.Windows.Forms.Button
@@ -3858,5 +3857,6 @@ Partial Class Form1
     Friend WithEvents BoobsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ButtsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TimeoutTimer As System.Windows.Forms.Timer
+    Friend WithEvents ThemesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class
