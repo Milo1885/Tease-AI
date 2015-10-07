@@ -13645,6 +13645,8 @@ VTSkip:
 
         End If
 
+        Debug.Print("Command Clean Complete")
+
         Return StringClean
 
     End Function
@@ -14133,6 +14135,8 @@ VTSkip:
 
         DommeImage = Nothing
 
+        DommeImageFound = False
+
         If File.Exists(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt") Then
 
 
@@ -14159,34 +14163,46 @@ VTSkip:
 
             For i As Integer = 0 To TagList.Count - 1
 
+                'Debug.Print("Taglist(i) = " & TagList(i))
+
                 Try
 
-               
-                If TagList(xU).Contains(DomTag1) And TagList(xU).Contains(DomTag2) And TagList(xU).Contains(DomTag3) Then
+                    ' Debug.Print("Taglist(xU) = " & TagList(xU))
+                    ' Debug.Print("DomTag1 = " & DomTag1)
+                    'Debug.Print("DomTag2 = " & DomTag2)
+                    'Debug.Print("DomTag3 = " & DomTag3)
 
-                    Dim PicArray As String() = TagList(xU).Split
-                    Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
+                    If TagList(xU).Contains(DomTag1) And TagList(xU).Contains(DomTag2) And TagList(xU).Contains(DomTag3) Then
 
-                    For p As Integer = 0 To PicArray.Count - 1
+                        Dim PicArray As String() = TagList(xU).Split
+                        Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
+
+                        For p As Integer = 0 To PicArray.Count - 1
                             PicDir = PicDir & PicArray(p) & " "
-                        If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
-                    Next
+                            If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
+                        Next
 
-                    If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
-                    DommeImageFound = True
+                        If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
+                        DommeImageFound = True
+
+                        'Debug.Print("DommeImageFound = " & DommeImageFound)
 
 
-                    Exit For
+                        Exit For
 
                     End If
 
-                Catch 
+                    xU += 1
+                    If xU > TagList.Count - 1 Then xU = TagList.Count - 1
+
+                Catch
                 End Try
 
-                xU += 1
-                If xU > _ImageFileNames.Count - 1 Then xU = _ImageFileNames.Count - 1
+
 
                 Try
+
+                    'Debug.Print("Taglist(xD) = " & TagList(xD))
 
                     If TagList(xD).Contains(DomTag1) And TagList(xD).Contains(DomTag2) And TagList(xD).Contains(DomTag3) Then
 
@@ -14202,21 +14218,29 @@ VTSkip:
 
                         DommeImageFound = True
 
+                        ' Debug.Print("DommeImageFound = " & DommeImageFound)
+
                         Exit For
 
                     End If
+
+
+                    xD -= 1
+                    If xD < 0 Then xD = 0
 
                 Catch
 
                 End Try
 
 
-                xD -= 1
-                If xD < 0 Then xD = 0
+
+                ' Debug.Print(i & " of " & TagList.Count - 1 & " complete")
 
             Next
 
         End If
+
+        ' Debug.Print("Final DommeImageFound = " & DommeImageFound)
 
         Return DommeImageFound
 
@@ -14445,11 +14469,9 @@ VTSkip:
 
         Debug.Print("Begin FilterTest")
 
-        GoTo TagTest
 
-TagTest:
 
-        Debug.Print("Test?")
+
 
 
         PoundCount = PoundLine
@@ -15660,6 +15682,46 @@ TagTest:
                     End If
                 End If
                 'ListClean(PoundCount) = ListClean(PoundCount).Replace("@StrokeSpeedMin", "")
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@StrokeFaster") Or ListClean(PoundCount).Contains("@StrokeFastest") Then
+                If StrokePace = NBMaxPace.Value Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@StrokeSpeedMax", "")
+            End If
+        Loop Until PoundCount = 0
+
+        PoundCount = PoundLine
+        Do
+            Application.DoEvents()
+            PoundCount -= 1
+            If ListClean(PoundCount).Contains("@StrokeSlower") Or ListClean(PoundCount).Contains("@StrokeSlowest") Then
+                If StrokePace = NBMinPace.Value Then
+                    If StrokeFilter = True Then
+                        For i As Integer = 0 To StrokeTauntCount - 1
+                            ListClean.Remove(ListClean(PoundCount))
+                            PoundLine -= 1
+                        Next
+                    Else
+                        ListClean.Remove(ListClean(PoundCount))
+                        PoundLine -= 1
+                    End If
+                End If
+                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@StrokeSpeedMax", "")
             End If
         Loop Until PoundCount = 0
 
@@ -18015,32 +18077,47 @@ TagTest:
                         PoundLine -= 1
                     End If
                 End If
+                ListClean(PoundCount) = ListClean(PoundCount).Replace("@CheckDate(" & GetParentheses(ListClean(PoundCount), "@CheckDate(") & ")", "")
             End If
         Loop Until PoundCount = 0
+
+
+
+
 
         DommeImageListCheck = True
 
         PoundCount = PoundLine
         Do
-            Application.DoEvents()
+            ' Application.DoEvents()
             PoundCount -= 1
+            'Debug.Print("Check ListClean(PoundCount) = " & ListClean(PoundCount))
             If ListClean(PoundCount).Contains("@DommeTag(") Then
-                If GetDommeImage(ListClean(PoundCount)) = False Then
+                If GetDommeImage(GetParentheses(ListClean(PoundCount), "@DommeTag(")) = False Then
+                    'Debug.Print("DommImageFalse")
+                    'Debug.Print("StrokeFilter = " & StrokeFilter)
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
+                            'Debug.Print("StrokeTauntCount - 1 = " & StrokeTauntCount - 1)
+                            'Debug.Print("ListClean(PoundCount) = " & ListClean(PoundCount))
                             ListClean.Remove(ListClean(PoundCount))
                             PoundLine -= 1
                         Next
                     Else
+                        'Debug.Print("DommImageTrue")
                         ListClean.Remove(ListClean(PoundCount))
                         PoundLine -= 1
                     End If
+                    'Debug.Print("DommImageFalseFinished")
                 End If
             End If
         Loop Until PoundCount = 0
 
         DommeImageListCheck = False
         DommeImageFound = False
+
+        Debug.Print("Filter Test Bookmark Reached")
+
 
         LocalImageListCheck = True
 
@@ -18328,6 +18405,8 @@ TagTest:
             ListClean(x) = ListClean(x).Replace("#TagFurniture", TagFurniture)
             ListClean(x) = ListClean(x).Replace("-", " ")
         Next
+
+        Debug.Print("Filter List Complete")
 
         Return ListClean
 
