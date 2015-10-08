@@ -532,6 +532,13 @@ Public Class Form1
 
     Dim TimeoutTick As Integer
 
+    Public ImageThread As Thread
+    Dim PBImage As String
+    Dim DommeImageSTR As String
+    Dim LocalImageSTR As String
+
+    Dim ImageLocation As String
+
 
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -1201,8 +1208,11 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End If
 
 
-
-        FrmSettings.domemoteComboBox.Text = My.Settings.DomEmotes
+        Try
+            FrmSettings.domemoteComboBox.Text = My.Settings.DomEmotes
+        Catch
+            FrmSettings.domemoteComboBox.Text = "*emote*"
+        End Try
 
         FrmSettings.alloworgasmComboBox.Text = My.Settings.OrgasmAllow
         FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
@@ -1251,13 +1261,13 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSettings.LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
 
         Try
-            FrmSettings.LBLGlitModDomType.Text = dompersonalityComboBox.Text
+            FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
         Catch
             FrmSettings.LBLGlitModDomType.Text = "Error!"
         End Try
 
         Try
-            Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\" & FrmSettings.CBGlitModType.Text & "\")
+            Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\" & FrmSettings.CBGlitModType.Text & "\")
             Dim GlitterScriptCount As Integer
             FrmSettings.LBGlitModScripts.Items.Clear()
             For Each file As String In files
@@ -1489,22 +1499,23 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         PictureStrip.Items(2).Enabled = False
         PictureStrip.Items(3).Enabled = False
         PictureStrip.Items(4).Enabled = False
+        PictureStrip.Items(5).Enabled = False
 
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Loading Domme Personality..."
         FrmSplash.Refresh()
 
-        DomPersonality = dompersonalityComboBox.Text
+        DomPersonality = dompersonalitycombobox.Text
 
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Clearing temporary flags..."
         FrmSplash.Refresh()
 
-        If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\") Then
-            My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
+        If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\") Then
+            My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
         End If
 
-        System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\Temp\")
+        System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\")
 
         FrmSplash.PBSplash.Value += 1
         FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
@@ -1514,9 +1525,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         GetContact2Pics()
         GetContact3Pics()
 
-        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
             Dim ContactList As New List(Of String)
-            ContactList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Glitter\Contact_Descriptions.txt")
+            ContactList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt")
             FrmSettings.GBGlitter1.Text = PoundClean(ContactList(0))
             FrmSettings.GBGlitter2.Text = PoundClean(ContactList(1))
             FrmSettings.GBGlitter3.Text = PoundClean(ContactList(2))
@@ -1621,11 +1632,14 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         FormLoading = False
 
+        Control.CheckForIllegalCrossThreadCalls = False
 
         MetroThread = New Thread(AddressOf MetronomeTick)
         MetroThread.IsBackground = True
         MetroThread.Start()
 
+       
+        'ImageThread.Start()
 
         FrmSplash.Close()
         FrmSplash.Dispose()
@@ -1691,6 +1705,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         PictureStrip.Items(2).Enabled = False
         PictureStrip.Items(3).Enabled = False
         PictureStrip.Items(4).Enabled = False
+        PictureStrip.Items(5).Enabled = False
 
         JustShowedBlogImage = False
 
@@ -5005,6 +5020,7 @@ SkipGotoSearch:
                 PictureStrip.Items(2).Enabled = False
                 PictureStrip.Items(3).Enabled = False
                 PictureStrip.Items(4).Enabled = False
+                PictureStrip.Items(5).Enabled = False
 
                 ' If PreCleanString.Contains("#") Then GoTo PoundLoop
 
@@ -5319,7 +5335,7 @@ NullResponse:
 
                             Dim TypoChance As Integer = randomizer.Next(0, 101)
 
-                            If TypoChance < 6 Or TypoSwitch = 2 Then
+                            If TypoChance < FrmSettings.NBTypoChance.Value Or TypoSwitch = 2 Then
 
                                 Try
 
@@ -5525,19 +5541,34 @@ EndSysMes:
                             FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
                         Else
                             If DommeImageFound = True Then
-                                mainPictureBox.Image = DommeImage
+                                ShowImage(DommeImageSTR)
+                                'ImageLocation = DommeImageSTR
+                                'DisplayImage(DommeImage)
+                                'PBImage = DommeImageSTR
+                                'ImageThread.Start()
+                                'mainPictureBox.Image = DommeImage
                                 DommeImageFound = False
                             Else
                                 If LocalImageFound = True Then
-                                    mainPictureBox.Image = LocalImage
+                                    'DisplayImage(LocalImage)
+                                    ShowImage(LocalImageSTR)
+                                    'ImageLocation = LocalImageSTR
+                                    'PBImage = LocalImageSTR
+                                    'ImageThread.Start()
+                                    'mainPictureBox.Image = LocalImage
                                     LocalImageFound = False
                                 Else
-                                    mainPictureBox.Image = Image.FromFile(DomPic)
+                                    ShowImage(DomPic)
+                                    'ImageLocation = DomPic
+                                    'PBImage = DomPic
+                                    'ImageThread.Start()
+                                    'DisplayImage()
+                                    'mainPictureBox.Image = Image.FromFile(DomPic)
                                 End If
                             End If
                         End If
                         CheckDommeTags()
-                        ShowImageInfo()
+
                     Catch
                         ' GoTo TryNextWithTease
                     End Try
@@ -5863,6 +5894,7 @@ NullResponseLine:
                 PictureStrip.Items(2).Enabled = False
                 PictureStrip.Items(3).Enabled = False
                 PictureStrip.Items(4).Enabled = False
+                PictureStrip.Items(5).Enabled = False
 
                 If GlitterTease = True And JustShowedBlogImage = False Then GoTo TryNextWithTease
 
@@ -6238,19 +6270,32 @@ EndSysMes:
                             FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
                         Else
                             If DommeImageFound = True Then
-                                mainPictureBox.Image = DommeImage
+                                ShowImage(DommeImageSTR)
+                                'ImageLocation = DommeImageSTR
+                                'PBImage = DommeImageSTR
+                                'ImageThread.Start()
+                                'mainPictureBox.Image = DommeImage
                                 DommeImageFound = False
                             Else
                                 If LocalImageFound = True Then
-                                    mainPictureBox.Image = LocalImage
+                                    ShowImage(LocalImageSTR)
+                                    'ImageLocation = LocalImageSTR
+                                    'PBImage = LocalImageSTR
+                                    'ImageThread.Start()
+                                    'mainPictureBox.Image = LocalImage
                                     LocalImageFound = False
                                 Else
-                                    mainPictureBox.Image = Image.FromFile(DomPic)
+                                    ShowImage(DomPic)
+                                    'ImageLocation = DomPic
+                                    'PBImage = DomPic
+                                    'ImageThread.Start()
+                                    'DisplayImage(Image.FromFile(DomPic))
+                                    'mainPictureBox.Image = Image.FromFile(DomPic)
                                 End If
                             End If
                         End If
                         CheckDommeTags()
-                        ShowImageInfo()
+
                     Catch
                         ' GoTo TryNextWithTease
                     End Try
@@ -6516,9 +6561,14 @@ NullResponseLine2:
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
             CheckDommeTags()
-            mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+            ShowImage(_ImageFileNames(FileCount))
+            'ImageLocation = _ImageFileNames(FileCount)
+            'PBImage = _ImageFileNames(FileCount)
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
+            'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
             CheckDommeTags()
-            ShowImageInfo()
+
 
             If FrmSettings.landscapeCheckBox.Checked = True Then
                 If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
@@ -6576,11 +6626,18 @@ TryNext:
 
         CheckDommeTags()
 
+        'ImageThread.Abort()
+
         Try
-            mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+            ShowImage(_ImageFileNames(FileCount))
+            'ImageLocation = _ImageFileNames(FileCount)
+            'PBImage = _ImageFileNames(FileCount)
+            'ImageThread.Start()
+            'DisplayImage(_ImageFileNames(FileCount))
+            ' mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
             CheckDommeTags()
             JustShowedBlogImage = False
-            ShowImageInfo()
+
         Catch
             GoTo TryNext
         End Try
@@ -6636,9 +6693,14 @@ TryPrevious:
         CheckDommeTags()
 
         Try
-            mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+            ShowImage(_ImageFileNames(FileCount))
+            'ImageLocation = _ImageFileNames(FileCount)
+            'PBImage = _ImageFileNames(FileCount)
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
+            ' mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
             CheckDommeTags()
-            ShowImageInfo()
+
             JustShowedBlogImage = False
         Catch
             GoTo TryPrevious
@@ -8803,6 +8865,8 @@ StatusUpdateEnd:
 
         StringClean = StringClean.Replace("#DomHair", FrmSettings.TBDomHairColor.Text)
 
+        StringClean = StringClean.Replace("#DomHairLength", FrmSettings.domhairlengthComboBox.Text)
+
         StringClean = StringClean.Replace("#DomEyes", FrmSettings.TBDomEyeColor.Text)
 
         StringClean = StringClean.Replace("#DomCup", FrmSettings.boobComboBox.Text)
@@ -8831,13 +8895,17 @@ StatusUpdateEnd:
 
         StringClean = StringClean.Replace("#DomOrgasmRate", LCase(FrmSettings.alloworgasmComboBox.Text).Replace("allows", "allow"))
 
-        StringClean = StringClean.Replace("#DomRuinRate", LCase(FrmSettings.ruinorgasmComboBox.Text).Replace("allows", "allow"))
+        StringClean = StringClean.Replace("#DomRuinRate", LCase(FrmSettings.ruinorgasmComboBox.Text).Replace("ruins", "ruin"))
 
         StringClean = StringClean.Replace("#SubAge", FrmSettings.subAgeNumBox.Value)
 
         StringClean = StringClean.Replace("#SubBirthdayMonth", FrmSettings.NBBirthdayMonth.Value)
 
         StringClean = StringClean.Replace("#SubBirthdayDay", FrmSettings.NBBirthdayDay.Value)
+
+        StringClean = StringClean.Replace("#DomBirthdayMonth", FrmSettings.NBDomBirthdayMonth.Value)
+
+        StringClean = StringClean.Replace("#DomBirthdayDay", FrmSettings.NBDomBirthdayDay.Value)
 
         StringClean = StringClean.Replace("#SubHair", FrmSettings.TBSubHairColor.Text)
 
@@ -9120,7 +9188,7 @@ StatusUpdateEnd:
 
         'Debug.Print("StringClean = " & StringClean)
 
-DeepClean:
+        'DeepClean:
 
 
         StringClean = SysKeywordClean(StringClean)
@@ -9321,7 +9389,7 @@ PoundBreak:
 
         'Debug.Print("StringClean = " & StringClean)
 
-        If StringClean.Contains("#") Then GoTo DeepClean
+        'If StringClean.Contains("#") Then GoTo DeepClean
 
 BadVocabBreak:
 
@@ -10291,7 +10359,12 @@ RinseLatherRepeat:
             ImageClean = ImageClean.Replace("\\", "\")
             ClearMainPictureBox()
             Try
-                mainPictureBox.Image = Image.FromFile(ImageClean)
+                ShowImage(ImageClean)
+                'ImageLocation = ImageClean
+                'PBImage = ImageClean
+                'ImageThread.Start()
+                'DisplayImage(Image.FromFile(ImageClean))
+                ' mainPictureBox.Image = Image.FromFile(ImageClean)
             Catch
                 MessageBox.Show(Me, "\" & ImageS(0) & " was not found in " & Application.StartupPath & "\Images!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
             End Try
@@ -11153,12 +11226,21 @@ OrgasmDecided:
             Dim ButtPic As String = AssList(randomizer.Next(0, AssList.Count))
 
             If ButtPic.Contains("\") Then
-                mainPictureBox.Image = Image.FromFile(ButtPic)
+                ShowImage(ButtPic)
+                'ImageLocation = ButtPic
+                'PBImage = ButtPic
+                'ImageThread.Start()
+                'DisplayImage(Image.FromFile(ButtPic))
+                'mainPictureBox.Image = Image.FromFile(ButtPic)
                 DeleteLocalImageFilePath = ButtPic
             Else
-                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(ButtPic)))
+                ShowImage(ButtPic)
+                ' ImageLocation = ButtPic
+                'PBImage = ButtPic
+                'ImageThread.Start()
+                'mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(ButtPic)))
             End If
-            ShowImageInfo()
+
             StringClean = StringClean.Replace("@ShowButtImage", "")
             StringClean = StringClean.Replace("@ShowButtsImage", "")
         End If
@@ -11170,13 +11252,23 @@ OrgasmDecided:
             Dim BoobPic As String = BoobList(randomizer.Next(0, BoobList.Count))
 
             If BoobPic.Contains("\") Then
-                mainPictureBox.Image = Image.FromFile(BoobPic)
+                ShowImage(BoobPic)
+                'ImageLocation = BoobPic
+                'PBImage = _ImageFileNames(BoobPic)
+                'ImageThread.Start()
+                'DisplayImage(Image.FromFile(BoobPic))
+                'mainPictureBox.Image = Image.FromFile(BoobPic)
                 DeleteLocalImageFilePath = BoobPic
             Else
-                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(BoobPic)))
+                ShowImage(BoobPic)
+                'ImageLocation = BoobPic
+                'PBImage = _ImageFileNames(BoobPic)
+                'ImageThread.Start()
+                'DisplayImage(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(BoobPic))))
+                'mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(BoobPic)))
             End If
 
-            ShowImageInfo()
+
             StringClean = StringClean.Replace("@ShowBoobsImage", "")
             StringClean = StringClean.Replace("@ShowBoobImage", "")
         End If
@@ -11811,12 +11903,18 @@ OrgasmDecided:
             JustShowedBlogImage = True
 
             ClearMainPictureBox()
-            mainPictureBox.Image = Image.FromFile(FoundString)
+
+            ShowImage(FoundString)
+            'ImageLocation = FoundString
+            'PBImage = FoundString
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile(FoundString))
+            'mainPictureBox.Image = Image.FromFile(FoundString)
             DeleteLocalImageFilePath = FoundString
-            ShowImageInfo()
 
 
-            ShowImageInfo()
+
+
             StringClean = StringClean.Replace("@ShowTaggedImage", "")
 
         End If
@@ -12051,7 +12149,12 @@ OrgasmDecided:
 
             mainPictureBox.BackgroundImage = Nothing
             mainPictureBox.Refresh()
-            mainPictureBox.Image = Image.FromFile(Application.StartupPath & "\Images\System\Black.jpg")
+            ShowImage(Application.StartupPath & "\Images\System\Black.jpg")
+            'ImageLocation = Application.StartupPath & "\Images\System\Black.jpg"
+            'PBImage =
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile())
+            'mainPictureBox.Image = Image.FromFile(Application.StartupPath & "\Images\System\Black.jpg")
 
             If FrmSettings.CBDomDel.Checked = True Then
                 Try
@@ -12798,7 +12901,12 @@ OrgasmDecided:
             End If
             mainPictureBox.BackgroundImage = Nothing
             mainPictureBox.Refresh()
-            mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
+            ShowImage(CustomSlideshowList(SlideshowInt))
+            'ImageLocation = CustomSlideshowList(SlideshowInt)
+            'PBImage =
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile())
+            'mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
             DeleteLocalImageFilePath = CustomSlideshowList(SlideshowInt)
             StringClean = StringClean.Replace("@SlideshowFirst", "")
         End If
@@ -12814,7 +12922,12 @@ OrgasmDecided:
             End If
             mainPictureBox.BackgroundImage = Nothing
             mainPictureBox.Refresh()
-            mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
+            ShowImage(CustomSlideshowList(SlideshowInt))
+            'ImageLocation = CustomSlideshowList(SlideshowInt)
+            'PBImage = CustomSlideshowList(SlideshowInt)
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile())
+            'mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
             DeleteLocalImageFilePath = CustomSlideshowList(SlideshowInt)
             StringClean = StringClean.Replace("@SlideshowLast", "")
         End If
@@ -12831,7 +12944,12 @@ OrgasmDecided:
             End If
             mainPictureBox.BackgroundImage = Nothing
             mainPictureBox.Refresh()
-            mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
+            ShowImage(CustomSlideshowList(SlideshowInt))
+            'ImageLocation = CustomSlideshowList(SlideshowInt)
+            'PBImage = CustomSlideshowList(SlideshowInt)
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile())
+            'mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
             DeleteLocalImageFilePath = CustomSlideshowList(SlideshowInt)
             StringClean = StringClean.Replace("@SlideshowNext", "")
         End If
@@ -12848,7 +12966,12 @@ OrgasmDecided:
             End If
             mainPictureBox.BackgroundImage = Nothing
             mainPictureBox.Refresh()
-            mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
+            ShowImage(CustomSlideshowList(SlideshowInt))
+            'ImageLocation = CustomSlideshowList(SlideshowInt)
+            'PBImage = CustomSlideshowList(SlideshowInt)
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile())
+            'mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
             DeleteLocalImageFilePath = CustomSlideshowList(SlideshowInt)
             StringClean = StringClean.Replace("@SlideshowPrevious", "")
         End If
@@ -13448,6 +13571,15 @@ VTSkip:
             StringClean = StringClean.Replace("@Timeout(" & OriginalFlag & ")", "")
         End If
 
+        If StringClean.Contains("@BallTorture+1") Then
+            CBTBallsCount += 1
+            StringClean = StringClean.Replace("@BallTorture+1", "")
+        End If
+
+        If StringClean.Contains("@CockTorture+1") Then
+            CBTCockCount += 1
+            StringClean = StringClean.Replace("@CockTorture+1", "")
+        End If
 
         If StringClean.Contains("@Debug") Then
 
@@ -14182,7 +14314,8 @@ VTSkip:
                             If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
                         Next
 
-                        If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
+                        'If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
+                        If DommeImageListCheck = False Then DommeImageSTR = PicDir
                         DommeImageFound = True
 
                         'Debug.Print("DommeImageFound = " & DommeImageFound)
@@ -14214,7 +14347,8 @@ VTSkip:
                             If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
                         Next
 
-                        If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
+                        'If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
+                        If DommeImageListCheck = False Then DommeImageSTR = PicDir
 
                         DommeImageFound = True
 
@@ -14291,7 +14425,8 @@ VTSkip:
                 Next
 
                 If LocalImageListCheck = False Then
-                    LocalImage = Image.FromFile(PicDir)
+                    'LocalImage = Image.FromFile(PicDir)
+                    LocalImageSTR = PicDir
                     DeleteLocalImageFilePath = PicDir
                 End If
 
@@ -14364,16 +14499,26 @@ VTSkip:
 
         If FoundString.Contains("/") Then
             Try
-                mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
+                ShowImage(FoundString)
+                'ImageLocation = FoundString
+                'PBImage = FoundString
+                'ImageThread.Start()
+                'DisplayImage(Image.FromFile())
+                'DisplayImage(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString))))
+                'mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
             Catch
                 MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             End Try
         Else
-            mainPictureBox.Image = Image.FromFile(FoundString)
+            ShowImage(FoundString)
+            'ImageLocation = FoundString
+            'PBImage = FoundString
+            'ImageThread.Start()
+            'mainPictureBox.Image = Image.FromFile(FoundString)
             DeleteLocalImageFilePath = FoundString
         End If
 
-        ShowImageInfo()
+
         
 
     End Sub
@@ -18820,7 +18965,7 @@ AlreadySeen:
 
         ClearMainPictureBox()
 
-
+        
 
 
         Try
@@ -18830,19 +18975,27 @@ AlreadySeen:
 
             If FoundString.Contains("/") Then
                 Try
-                    mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
+                    ShowImage(FoundString)
+                    'ImageLocation = FoundString
+                    'DisplayImage(FoundString)
+                    'ImageThread.Start()
+                    'mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
                 Catch
                     MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 End Try
             Else
-                mainPictureBox.Image = Image.FromFile(FoundString)
+                ShowImage(FoundString)
+                'ImageLocation = FoundString
+                'PBImage = FoundString
+                'ImageThread.Start()
+                'mainPictureBox.Image = Image.FromFile(FoundString)
                 DeleteLocalImageFilePath = FoundString
             End If
 
 
 
             mainPictureBox.Refresh()
-            ShowImageInfo()
+
 
             If FrmSettings.CBBlogImageWindow.Checked = True Then
                 WebImage = FoundString
@@ -18867,11 +19020,14 @@ AlreadySeen:
 
             End Try
 
+
+
             PictureStrip.Items(0).Enabled = True
             PictureStrip.Items(1).Enabled = True
             PictureStrip.Items(2).Enabled = True
             PictureStrip.Items(3).Enabled = True
             PictureStrip.Items(4).Enabled = True
+            PictureStrip.Items(5).Enabled = True
 
         Catch
             GetLocalImage()
@@ -18893,8 +19049,13 @@ AlreadySeen:
             My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
         End If
         My.Computer.Network.DownloadFile(TempURL, Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-        TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-        mainPictureBox.Image = TempGif
+        TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif")
+        ShowImage(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif")
+        'ImageLocation = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif"
+        'PBImage = 
+        'ImageThread.Start()
+        'DisplayImage(TempGif)
+        'mainPictureBox.Image = TempGif
         'Dim TempGif As New Image.fromfile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
         'Image(TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif"))
 
@@ -18976,9 +19137,10 @@ AlreadySeen:
 
         PictureStrip.Items(0).Enabled = True
         PictureStrip.Items(1).Enabled = False
-        PictureStrip.Items(2).Enabled = True
+        PictureStrip.Items(2).Enabled = False
         PictureStrip.Items(3).Enabled = True
-        PictureStrip.Items(4).Enabled = False
+        PictureStrip.Items(4).Enabled = True
+        PictureStrip.Items(5).Enabled = False
 
 
 
@@ -18986,7 +19148,12 @@ AlreadySeen:
 
         ' ### 0000000000000000000
 
-        mainPictureBox.Image = Image.FromFile(FoundString)
+        ShowImage(FoundString)
+        'ImageLocation = FoundString
+        'PBImage = FoundString
+        'ImageThread.Start()
+        'DisplayImage(Image.FromFile(FoundString))
+        'mainPictureBox.Image = Image.FromFile(FoundString)
         DeleteLocalImageFilePath = FoundString
 
 
@@ -19025,7 +19192,7 @@ AlreadySeen:
         Catch
         End Try
         'mainPictureBox.Load(FoundString)
-        ShowImageInfo()
+
 
 
 
@@ -20204,11 +20371,16 @@ TryNext:
             CheckDommeTags()
 
             Try
-                mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+                ShowImage(_ImageFileNames(FileCount))
+                'ImageLocation = _ImageFileNames(FileCount)
+                'PBImage = 
+                'ImageThread.Start()
+                'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
+                'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
                 CheckDommeTags()
                 JustShowedBlogImage = False
                 JustShowedSlideshowImage = True
-                ShowImageInfo()
+
             Catch
                 GoTo TryNext
             End Try
@@ -20429,18 +20601,28 @@ TryNext:
         ClearMainPictureBox()
 
         If TnARandom < 51 Then
-
-            mainPictureBox.Image = Image.FromFile(BoobList(randomizer.Next(0, BoobList.Count)))
+            Dim BoobString As String = BoobList(randomizer.Next(0, BoobList.Count))
+            ShowImage(BoobString)
+            'ImageLocation = BoobString
+            'PBImage = 
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile(BoobList(randomizer.Next(0, BoobList.Count))))
+            'mainPictureBox.Image = Image.FromFile(BoobList(randomizer.Next(0, BoobList.Count)))
             DeleteLocalImageFilePath = FoundString
-            ShowImageInfo()
+
             BoobImage = True
             AssImage = False
 
         Else
-
-            mainPictureBox.Image = Image.FromFile(AssList(randomizer.Next(0, AssList.Count)))
+            Dim ButtString As String = AssList(randomizer.Next(0, AssList.Count))
+            ShowImage(ButtString)
+            'ImageLocation = ButtString
+            'PBImage =
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile())
+            'mainPictureBox.Image = Image.FromFile(AssList(randomizer.Next(0, AssList.Count)))
             DeleteLocalImageFilePath = FoundString
-            ShowImageInfo()
+
             BoobImage = False
             AssImage = True
 
@@ -20576,10 +20758,14 @@ TryNext:
             If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
             CheckDommeTags()
-            mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+            ShowImage(_ImageFileNames(FileCount))
+            'ImageLocation = _ImageFileNames(FileCount)
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
+            'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
             CheckDommeTags()
             JustShowedBlogImage = False
-            ShowImageInfo()
+
 
             If FrmSettings.landscapeCheckBox.Checked = True Then
                 If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
@@ -20744,10 +20930,13 @@ TryNext:
                 If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
                 CheckDommeTags()
-                mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+                ShowImage(_ImageFileNames(FileCount))
+                'ImageLocation = _ImageFileNames(FileCount)
+                'ImageThread.Start()
+                'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
                 CheckDommeTags()
                 JustShowedBlogImage = False
-                ShowImageInfo()
+
 
                 If FrmSettings.landscapeCheckBox.Checked = True Then
                     If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
@@ -20779,26 +20968,6 @@ TryNext:
 
 
     End Sub
-
-
-    Public Sub ShowImageInfo()
-        'Debug.Print("ShowImageCalled")
-        'Debug.Print(mainPictureBox.ImageLocation)
-        If FrmSettings.CBImageInfo.Checked = True Then
-            Try
-                If JustShowedBlogImage = True Then
-                    LBLImageInfo.Text = FoundString
-                Else
-                    LBLImageInfo.Text = _ImageFileNames(FileCount)
-                End If
-
-                'LBLImageInfo.Text = "Test"
-            Catch ex As Exception
-                LBLImageInfo.Text = "Error!"
-            End Try
-        End If
-    End Sub
-
 
     Private Sub DomWMP_PlayStateChange(sender As Object, e As AxWMPLib._WMPOCXEvents_PlayStateChangeEvent) Handles DomWMP.PlayStateChange
 
@@ -20975,7 +21144,11 @@ TryNext:
         ImageClean = ImageClean.Replace("\\", "\")
         ClearMainPictureBox()
         Try
-            mainPictureBox.Image = Image.FromFile(ImageClean)
+            ShowImage(ImageClean)
+            'ImageLocation = ImageClean
+            'ImageThread.Start()
+            'DisplayImage(Image.FromFile(ImageClean))
+            'mainPictureBox.Image = Image.FromFile(ImageClean)
         Catch
             MessageBox.Show(Me, "\" & ImageS(0) & " was not found in " & Application.StartupPath & "\Images!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
         End Try
@@ -21438,6 +21611,11 @@ TryNext:
 
     End Function
 
+    Private Sub mainPictureBox_LoadCompleted(sender As Object, e As System.ComponentModel.AsyncCompletedEventArgs) Handles mainPictureBox.LoadCompleted
+        ImageThread.Abort()
+        Debug.Print("ImageLoadCOmpleted")
+    End Sub
+
 
 
 
@@ -21458,13 +21636,7 @@ TryNext:
 
     Private Sub ToolStripMenuItem5_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem5.Click
 
-
-        If JustShowedBlogImage = True Then
-            My.Computer.Clipboard.SetText(FoundString)
-        Else
-            My.Computer.Clipboard.SetText(_ImageFileNames(FileCount))
-        End If
-
+        My.Computer.Clipboard.SetText(ImageLocation)
 
     End Sub
 
@@ -21501,7 +21673,7 @@ TryNext:
             Else
                 My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FoundString, True)
             End If
-            PictureStrip.Items(2).Enabled = False
+            PictureStrip.Items(3).Enabled = False
         End If
 
 
@@ -21516,7 +21688,7 @@ TryNext:
             Else
                 My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FoundString, True)
             End If
-            PictureStrip.Items(3).Enabled = False
+            PictureStrip.Items(4).Enabled = False
         End If
 
     End Sub
@@ -21556,7 +21728,7 @@ TryNext:
         Next
         'Next
 
-        PictureStrip.Items(4).Enabled = False
+        PictureStrip.Items(5).Enabled = False
 
     End Sub
 
@@ -21722,11 +21894,15 @@ GetDommeSlideshow:
         If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
         CheckDommeTags()
-        mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+        ShowImage(_ImageFileNames(FileCount))
+        'ImageLocation = _ImageFileNames(FileCount)
+        'ImageThread.Start()
+        'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
+        'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
         CheckDommeTags()
         JustShowedBlogImage = False
         If RiskyDeal = True Then FrmCardList.PBRiskyPic.Image = Image.FromFile(_ImageFileNames(FileCount))
-        ShowImageInfo()
+
 
         If FrmSettings.landscapeCheckBox.Checked = True Then
             If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
@@ -21810,14 +21986,9 @@ GetDommeSlideshow:
 
     Public Sub ClearMainPictureBox()
 
+     
 
-        Try
-            mainPictureBox.Image.Dispose()
-        Catch
-        End Try
-
-        mainPictureBox.Image = Nothing
-        GC.Collect()
+     
 
 
 
@@ -21912,6 +22083,7 @@ GetDommeSlideshow:
         original = Image.FromFile(ImageString)
         resized = ResizeImage(original, New Size(mainPictureBox.Width, mainPictureBox.Height))
 
+        'DisplayImage(resized)
         mainPictureBox.Image = resized
 
         LBLImageInfo.Text = ImageString
@@ -23197,7 +23369,11 @@ GetDommeSlideshow:
 
         If SlideshowLoaded = True Then
             CheckDommeTags()
-            If File.Exists(_ImageFileNames(FileCount)) Then mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
+            If File.Exists(_ImageFileNames(FileCount)) Then
+                PBImage = _ImageFileNames(FileCount)
+                ImageThread.Start()
+            End If
+            'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
             CheckDommeTags()
         End If
 
@@ -26382,4 +26558,43 @@ SkipNew:
         FrmSettings.Show()
         FrmSettings.Focus()
     End Sub
+
+    Public Sub ShowImage(ByVal ImageToShow As String)
+
+        PBImage = ImageToShow
+        ImageLocation = ImageToShow
+        ImageThread = New Thread(AddressOf DisplayImage)
+        ImageThread.IsBackground = True
+        ImageThread.Start()
+
+    End Sub
+
+    Public Sub DisplayImage()
+
+        If FormLoading = True Or PBImage = "" Then Return
+
+        Control.CheckForIllegalCrossThreadCalls = False
+
+        'Try
+        'mainPictureBox.Image.Dispose()
+        'Catch
+        'End Try
+
+        'mainPictureBox.Image = Nothing
+        GC.Collect()
+
+        If PBImage.Contains("/") Then
+            mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PBImage)))
+        Else
+            mainPictureBox.Image = Image.FromFile(PBImage)
+        End If
+
+        LBLImageInfo.Text = ImageLocation
+
+        Debug.Print("PBImageThread")
+
+
+    End Sub
+
+  
 End Class

@@ -83,12 +83,17 @@ Partial Class FrmSettings
         Me.Label126 = New System.Windows.Forms.Label()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.GBDomTypingStyle = New System.Windows.Forms.GroupBox()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.NBTypoChance = New System.Windows.Forms.NumericUpDown()
+        Me.Label66 = New System.Windows.Forms.Label()
         Me.CBMeMyMine = New System.Windows.Forms.CheckBox()
-        Me.apostropheCheckBox = New System.Windows.Forms.CheckBox()
-        Me.LCaseCheckBox = New System.Windows.Forms.CheckBox()
-        Me.periodCheckBox = New System.Windows.Forms.CheckBox()
         Me.domemoteComboBox = New System.Windows.Forms.ComboBox()
+        Me.GroupBox63 = New System.Windows.Forms.GroupBox()
+        Me.LCaseCheckBox = New System.Windows.Forms.CheckBox()
+        Me.apostropheCheckBox = New System.Windows.Forms.CheckBox()
+        Me.periodCheckBox = New System.Windows.Forms.CheckBox()
         Me.commaCheckBox = New System.Windows.Forms.CheckBox()
+        Me.Label64 = New System.Windows.Forms.Label()
         Me.GBDomRanges = New System.Windows.Forms.GroupBox()
         Me.NBDomMoodMax = New System.Windows.Forms.NumericUpDown()
         Me.NBDomMoodMin = New System.Windows.Forms.NumericUpDown()
@@ -832,8 +837,6 @@ Partial Class FrmSettings
         Me.NBAllowOften = New System.Windows.Forms.NumericUpDown()
         Me.CBRangeOrgasm = New System.Windows.Forms.CheckBox()
         Me.PictureBox8 = New System.Windows.Forms.PictureBox()
-        Me.GroupBox21 = New System.Windows.Forms.GroupBox()
-        Me.LBLRangeSettingsDescription = New System.Windows.Forms.Label()
         Me.Label38 = New System.Windows.Forms.Label()
         Me.TabPage13 = New System.Windows.Forms.TabPage()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
@@ -950,6 +953,8 @@ Partial Class FrmSettings
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Label41 = New System.Windows.Forms.Label()
+        Me.GroupBox21 = New System.Windows.Forms.GroupBox()
+        Me.LBLRangeSettingsDescription = New System.Windows.Forms.Label()
         Me.GroupBox12 = New System.Windows.Forms.GroupBox()
         Me.LBLSubSettingsDescription = New System.Windows.Forms.Label()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
@@ -987,6 +992,8 @@ Partial Class FrmSettings
         Me.Panel3.SuspendLayout
         CType(Me.PictureBox4,System.ComponentModel.ISupportInitialize).BeginInit
         Me.GBDomTypingStyle.SuspendLayout
+        CType(Me.NBTypoChance,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox63.SuspendLayout
         Me.GBDomRanges.SuspendLayout
         CType(Me.NBDomMoodMax,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NBDomMoodMin,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1167,7 +1174,6 @@ Partial Class FrmSettings
         CType(Me.NBAllowRarely,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NBAllowOften,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.PictureBox8,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox21.SuspendLayout
         Me.TabPage13.SuspendLayout
         Me.TabControl2.SuspendLayout
         Me.TabPage27.SuspendLayout
@@ -1191,6 +1197,7 @@ Partial Class FrmSettings
         Me.TabPage5.SuspendLayout
         Me.Panel5.SuspendLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox21.SuspendLayout
         Me.GroupBox12.SuspendLayout
         Me.SuspendLayout
         '
@@ -1952,12 +1959,13 @@ Partial Class FrmSettings
         '
         'GBDomTypingStyle
         '
+        Me.GBDomTypingStyle.Controls.Add(Me.Label67)
+        Me.GBDomTypingStyle.Controls.Add(Me.NBTypoChance)
+        Me.GBDomTypingStyle.Controls.Add(Me.Label66)
         Me.GBDomTypingStyle.Controls.Add(Me.CBMeMyMine)
-        Me.GBDomTypingStyle.Controls.Add(Me.apostropheCheckBox)
-        Me.GBDomTypingStyle.Controls.Add(Me.LCaseCheckBox)
-        Me.GBDomTypingStyle.Controls.Add(Me.periodCheckBox)
         Me.GBDomTypingStyle.Controls.Add(Me.domemoteComboBox)
-        Me.GBDomTypingStyle.Controls.Add(Me.commaCheckBox)
+        Me.GBDomTypingStyle.Controls.Add(Me.GroupBox63)
+        Me.GBDomTypingStyle.Controls.Add(Me.Label64)
         Me.GBDomTypingStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.GBDomTypingStyle.ForeColor = System.Drawing.Color.Black
         Me.GBDomTypingStyle.Location = New System.Drawing.Point(440, 201)
@@ -1967,53 +1975,49 @@ Partial Class FrmSettings
         Me.GBDomTypingStyle.TabStop = false
         Me.GBDomTypingStyle.Text = "Typing Style"
         '
+        'Label67
+        '
+        Me.Label67.AutoSize = true
+        Me.Label67.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label67.ForeColor = System.Drawing.Color.Black
+        Me.Label67.Location = New System.Drawing.Point(92, 49)
+        Me.Label67.Name = "Label67"
+        Me.Label67.Size = New System.Drawing.Size(42, 13)
+        Me.Label67.TabIndex = 169
+        Me.Label67.Text = "Typo %"
+        Me.Label67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'NBTypoChance
+        '
+        Me.NBTypoChance.Location = New System.Drawing.Point(93, 64)
+        Me.NBTypoChance.Name = "NBTypoChance"
+        Me.NBTypoChance.Size = New System.Drawing.Size(44, 20)
+        Me.NBTypoChance.TabIndex = 168
+        Me.NBTypoChance.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'Label66
+        '
+        Me.Label66.AutoSize = true
+        Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label66.ForeColor = System.Drawing.Color.Black
+        Me.Label66.Location = New System.Drawing.Point(147, 49)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(52, 13)
+        Me.Label66.TabIndex = 44
+        Me.Label66.Text = "Pronouns"
+        Me.Label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'CBMeMyMine
         '
         Me.CBMeMyMine.AutoSize = true
         Me.CBMeMyMine.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.CBMeMyMine.ForeColor = System.Drawing.Color.Black
-        Me.CBMeMyMine.Location = New System.Drawing.Point(145, 63)
+        Me.CBMeMyMine.Location = New System.Drawing.Point(150, 67)
         Me.CBMeMyMine.Name = "CBMeMyMine"
         Me.CBMeMyMine.Size = New System.Drawing.Size(88, 17)
         Me.CBMeMyMine.TabIndex = 40
         Me.CBMeMyMine.Text = "Me/My/Mine"
         Me.CBMeMyMine.UseVisualStyleBackColor = true
-        '
-        'apostropheCheckBox
-        '
-        Me.apostropheCheckBox.AutoSize = true
-        Me.apostropheCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.apostropheCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.apostropheCheckBox.Location = New System.Drawing.Point(24, 42)
-        Me.apostropheCheckBox.Name = "apostropheCheckBox"
-        Me.apostropheCheckBox.Size = New System.Drawing.Size(102, 17)
-        Me.apostropheCheckBox.TabIndex = 39
-        Me.apostropheCheckBox.Text = "No Apostrophes"
-        Me.apostropheCheckBox.UseVisualStyleBackColor = true
-        '
-        'LCaseCheckBox
-        '
-        Me.LCaseCheckBox.AutoSize = true
-        Me.LCaseCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LCaseCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.LCaseCheckBox.Location = New System.Drawing.Point(24, 19)
-        Me.LCaseCheckBox.Name = "LCaseCheckBox"
-        Me.LCaseCheckBox.Size = New System.Drawing.Size(92, 17)
-        Me.LCaseCheckBox.TabIndex = 38
-        Me.LCaseCheckBox.Text = "All Lowercase"
-        Me.LCaseCheckBox.UseVisualStyleBackColor = true
-        '
-        'periodCheckBox
-        '
-        Me.periodCheckBox.AutoSize = true
-        Me.periodCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.periodCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.periodCheckBox.Location = New System.Drawing.Point(145, 40)
-        Me.periodCheckBox.Name = "periodCheckBox"
-        Me.periodCheckBox.Size = New System.Drawing.Size(78, 17)
-        Me.periodCheckBox.TabIndex = 37
-        Me.periodCheckBox.Text = "No Periods"
-        Me.periodCheckBox.UseVisualStyleBackColor = true
         '
         'domemoteComboBox
         '
@@ -2022,23 +2026,84 @@ Partial Class FrmSettings
         Me.domemoteComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.domemoteComboBox.ForeColor = System.Drawing.Color.Black
         Me.domemoteComboBox.FormattingEnabled = true
-        Me.domemoteComboBox.Items.AddRange(New Object() {"*emote like this*", "-emote like this-", "~emote like this~", "+emote like this+", "`emote like this`", "=emote like this="})
-        Me.domemoteComboBox.Location = New System.Drawing.Point(24, 62)
+        Me.domemoteComboBox.Items.AddRange(New Object() {"*emote*", "-emote-", "~emote~", "+emote+", "`emote`", "=emote="})
+        Me.domemoteComboBox.Location = New System.Drawing.Point(15, 64)
         Me.domemoteComboBox.Name = "domemoteComboBox"
-        Me.domemoteComboBox.Size = New System.Drawing.Size(102, 21)
+        Me.domemoteComboBox.Size = New System.Drawing.Size(61, 21)
         Me.domemoteComboBox.TabIndex = 3
+        '
+        'GroupBox63
+        '
+        Me.GroupBox63.Controls.Add(Me.LCaseCheckBox)
+        Me.GroupBox63.Controls.Add(Me.apostropheCheckBox)
+        Me.GroupBox63.Controls.Add(Me.periodCheckBox)
+        Me.GroupBox63.Controls.Add(Me.commaCheckBox)
+        Me.GroupBox63.Location = New System.Drawing.Point(6, 12)
+        Me.GroupBox63.Name = "GroupBox63"
+        Me.GroupBox63.Size = New System.Drawing.Size(247, 32)
+        Me.GroupBox63.TabIndex = 41
+        Me.GroupBox63.TabStop = false
+        Me.GroupBox63.Text = "Remove"
+        '
+        'LCaseCheckBox
+        '
+        Me.LCaseCheckBox.AutoSize = true
+        Me.LCaseCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LCaseCheckBox.ForeColor = System.Drawing.Color.Black
+        Me.LCaseCheckBox.Location = New System.Drawing.Point(9, 13)
+        Me.LCaseCheckBox.Name = "LCaseCheckBox"
+        Me.LCaseCheckBox.Size = New System.Drawing.Size(50, 17)
+        Me.LCaseCheckBox.TabIndex = 38
+        Me.LCaseCheckBox.Text = "Caps"
+        Me.LCaseCheckBox.UseVisualStyleBackColor = true
+        '
+        'apostropheCheckBox
+        '
+        Me.apostropheCheckBox.AutoSize = true
+        Me.apostropheCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.apostropheCheckBox.ForeColor = System.Drawing.Color.Black
+        Me.apostropheCheckBox.Location = New System.Drawing.Point(74, 13)
+        Me.apostropheCheckBox.Name = "apostropheCheckBox"
+        Me.apostropheCheckBox.Size = New System.Drawing.Size(28, 17)
+        Me.apostropheCheckBox.TabIndex = 39
+        Me.apostropheCheckBox.Text = "'"
+        Me.apostropheCheckBox.UseVisualStyleBackColor = true
+        '
+        'periodCheckBox
+        '
+        Me.periodCheckBox.AutoSize = true
+        Me.periodCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.periodCheckBox.ForeColor = System.Drawing.Color.Black
+        Me.periodCheckBox.Location = New System.Drawing.Point(214, 13)
+        Me.periodCheckBox.Name = "periodCheckBox"
+        Me.periodCheckBox.Size = New System.Drawing.Size(29, 17)
+        Me.periodCheckBox.TabIndex = 37
+        Me.periodCheckBox.Text = "."
+        Me.periodCheckBox.UseVisualStyleBackColor = true
         '
         'commaCheckBox
         '
         Me.commaCheckBox.AutoSize = true
         Me.commaCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.commaCheckBox.ForeColor = System.Drawing.Color.Black
-        Me.commaCheckBox.Location = New System.Drawing.Point(145, 17)
+        Me.commaCheckBox.Location = New System.Drawing.Point(144, 13)
         Me.commaCheckBox.Name = "commaCheckBox"
-        Me.commaCheckBox.Size = New System.Drawing.Size(83, 17)
+        Me.commaCheckBox.Size = New System.Drawing.Size(29, 17)
         Me.commaCheckBox.TabIndex = 36
-        Me.commaCheckBox.Text = "No Commas"
+        Me.commaCheckBox.Text = ","
         Me.commaCheckBox.UseVisualStyleBackColor = true
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = true
+        Me.Label64.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label64.ForeColor = System.Drawing.Color.Black
+        Me.Label64.Location = New System.Drawing.Point(13, 49)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(63, 13)
+        Me.Label64.TabIndex = 43
+        Me.Label64.Text = "Emote Style"
+        Me.Label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'GBDomRanges
         '
@@ -3033,7 +3098,7 @@ Partial Class FrmSettings
         Me.TabPage10.Location = New System.Drawing.Point(4, 22)
         Me.TabPage10.Name = "TabPage10"
         Me.TabPage10.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage10.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage10.Size = New System.Drawing.Size(720, 448)
         Me.TabPage10.TabIndex = 9
         Me.TabPage10.Text = "Sub"
         '
@@ -3926,7 +3991,7 @@ Partial Class FrmSettings
         Me.TabPage16.Location = New System.Drawing.Point(4, 22)
         Me.TabPage16.Name = "TabPage16"
         Me.TabPage16.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage16.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage16.Size = New System.Drawing.Size(720, 448)
         Me.TabPage16.TabIndex = 14
         Me.TabPage16.Text = "Scripts"
         '
@@ -4182,7 +4247,7 @@ Partial Class FrmSettings
         Me.TabPage7.Location = New System.Drawing.Point(4, 22)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage7.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage7.Size = New System.Drawing.Size(720, 448)
         Me.TabPage7.TabIndex = 11
         Me.TabPage7.Text = "Images"
         '
@@ -5055,7 +5120,7 @@ Partial Class FrmSettings
         Me.TabPage12.Location = New System.Drawing.Point(4, 22)
         Me.TabPage12.Name = "TabPage12"
         Me.TabPage12.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage12.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage12.Size = New System.Drawing.Size(720, 448)
         Me.TabPage12.TabIndex = 12
         Me.TabPage12.Text = "Domme Tags"
         '
@@ -5512,7 +5577,7 @@ Partial Class FrmSettings
         Me.TabPage9.Controls.Add(Me.Panel4)
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
-        Me.TabPage9.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage9.Size = New System.Drawing.Size(720, 448)
         Me.TabPage9.TabIndex = 15
         Me.TabPage9.Text = "Local Tags"
         '
@@ -6998,7 +7063,7 @@ Partial Class FrmSettings
         Me.TabPage11.Location = New System.Drawing.Point(4, 22)
         Me.TabPage11.Name = "TabPage11"
         Me.TabPage11.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage11.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage11.Size = New System.Drawing.Size(720, 448)
         Me.TabPage11.TabIndex = 10
         Me.TabPage11.Text = "URL Files"
         '
@@ -7274,7 +7339,7 @@ Partial Class FrmSettings
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage3.Size = New System.Drawing.Size(720, 448)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Video"
         '
@@ -8372,7 +8437,7 @@ Partial Class FrmSettings
         Me.TabPage20.Location = New System.Drawing.Point(4, 22)
         Me.TabPage20.Name = "TabPage20"
         Me.TabPage20.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage20.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage20.Size = New System.Drawing.Size(720, 448)
         Me.TabPage20.TabIndex = 16
         Me.TabPage20.Text = "Apps"
         '
@@ -9869,7 +9934,7 @@ Partial Class FrmSettings
         Me.TabPage26.Location = New System.Drawing.Point(4, 22)
         Me.TabPage26.Name = "TabPage26"
         Me.TabPage26.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage26.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage26.Size = New System.Drawing.Size(720, 448)
         Me.TabPage26.TabIndex = 19
         Me.TabPage26.Text = "Themes"
         Me.TabPage26.UseVisualStyleBackColor = true
@@ -11102,31 +11167,6 @@ Partial Class FrmSettings
         Me.PictureBox8.TabIndex = 166
         Me.PictureBox8.TabStop = false
         '
-        'GroupBox21
-        '
-        Me.GroupBox21.BackColor = System.Drawing.Color.LightGray
-        Me.GroupBox21.Controls.Add(Me.LBLRangeSettingsDescription)
-        Me.GroupBox21.ForeColor = System.Drawing.Color.Black
-        Me.GroupBox21.Location = New System.Drawing.Point(790, 9)
-        Me.GroupBox21.Name = "GroupBox21"
-        Me.GroupBox21.Size = New System.Drawing.Size(316, 136)
-        Me.GroupBox21.TabIndex = 66
-        Me.GroupBox21.TabStop = false
-        Me.GroupBox21.Text = "Description"
-        '
-        'LBLRangeSettingsDescription
-        '
-        Me.LBLRangeSettingsDescription.BackColor = System.Drawing.Color.Transparent
-        Me.LBLRangeSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LBLRangeSettingsDescription.ForeColor = System.Drawing.Color.Black
-        Me.LBLRangeSettingsDescription.Location = New System.Drawing.Point(6, 16)
-        Me.LBLRangeSettingsDescription.Name = "LBLRangeSettingsDescription"
-        Me.LBLRangeSettingsDescription.Size = New System.Drawing.Size(680, 117)
-        Me.LBLRangeSettingsDescription.TabIndex = 62
-        Me.LBLRangeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
-    "n."
-        Me.LBLRangeSettingsDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'Label38
         '
         Me.Label38.BackColor = System.Drawing.Color.Transparent
@@ -11146,7 +11186,7 @@ Partial Class FrmSettings
         Me.TabPage13.Location = New System.Drawing.Point(4, 22)
         Me.TabPage13.Name = "TabPage13"
         Me.TabPage13.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage13.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage13.Size = New System.Drawing.Size(720, 448)
         Me.TabPage13.TabIndex = 13
         Me.TabPage13.Text = "Modding"
         '
@@ -12231,7 +12271,7 @@ Partial Class FrmSettings
         Me.TabPage5.Controls.Add(Me.Panel5)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(930, 448)
+        Me.TabPage5.Size = New System.Drawing.Size(720, 448)
         Me.TabPage5.TabIndex = 17
         Me.TabPage5.Text = "About"
         '
@@ -12333,6 +12373,31 @@ Partial Class FrmSettings
         Me.Label41.Text = resources.GetString("Label41.Text")
         Me.Label41.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
+        'GroupBox21
+        '
+        Me.GroupBox21.BackColor = System.Drawing.Color.LightGray
+        Me.GroupBox21.Controls.Add(Me.LBLRangeSettingsDescription)
+        Me.GroupBox21.ForeColor = System.Drawing.Color.Black
+        Me.GroupBox21.Location = New System.Drawing.Point(790, 9)
+        Me.GroupBox21.Name = "GroupBox21"
+        Me.GroupBox21.Size = New System.Drawing.Size(316, 136)
+        Me.GroupBox21.TabIndex = 66
+        Me.GroupBox21.TabStop = false
+        Me.GroupBox21.Text = "Description"
+        '
+        'LBLRangeSettingsDescription
+        '
+        Me.LBLRangeSettingsDescription.BackColor = System.Drawing.Color.Transparent
+        Me.LBLRangeSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLRangeSettingsDescription.ForeColor = System.Drawing.Color.Black
+        Me.LBLRangeSettingsDescription.Location = New System.Drawing.Point(6, 16)
+        Me.LBLRangeSettingsDescription.Name = "LBLRangeSettingsDescription"
+        Me.LBLRangeSettingsDescription.Size = New System.Drawing.Size(680, 117)
+        Me.LBLRangeSettingsDescription.TabIndex = 62
+        Me.LBLRangeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
+    "n."
+        Me.LBLRangeSettingsDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'GroupBox12
         '
         Me.GroupBox12.BackColor = System.Drawing.Color.LightGray
@@ -12409,7 +12474,7 @@ Partial Class FrmSettings
         Me.AllowDrop = true
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(721, 465)
+        Me.ClientSize = New System.Drawing.Size(727, 465)
         Me.Controls.Add(Me.SettingsPanel)
         Me.Controls.Add(Me.GroupBox12)
         Me.Controls.Add(Me.GroupBox21)
@@ -12450,6 +12515,9 @@ Partial Class FrmSettings
         CType(Me.PictureBox4,System.ComponentModel.ISupportInitialize).EndInit
         Me.GBDomTypingStyle.ResumeLayout(false)
         Me.GBDomTypingStyle.PerformLayout
+        CType(Me.NBTypoChance,System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox63.ResumeLayout(false)
+        Me.GroupBox63.PerformLayout
         Me.GBDomRanges.ResumeLayout(false)
         CType(Me.NBDomMoodMax,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.NBDomMoodMin,System.ComponentModel.ISupportInitialize).EndInit
@@ -12677,7 +12745,6 @@ Partial Class FrmSettings
         CType(Me.NBAllowRarely,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.NBAllowOften,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.PictureBox8,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GroupBox21.ResumeLayout(false)
         Me.TabPage13.ResumeLayout(false)
         Me.TabControl2.ResumeLayout(false)
         Me.TabPage27.ResumeLayout(false)
@@ -12710,6 +12777,7 @@ Partial Class FrmSettings
         Me.Panel5.ResumeLayout(false)
         Me.Panel5.PerformLayout
         CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox21.ResumeLayout(false)
         Me.GroupBox12.ResumeLayout(false)
         Me.ResumeLayout(false)
 
@@ -13655,4 +13723,9 @@ End Sub
     Friend WithEvents Label79 As System.Windows.Forms.Label
     Friend WithEvents GroupBox22 As System.Windows.Forms.GroupBox
     Friend WithEvents Label34 As System.Windows.Forms.Label
+    Friend WithEvents Label66 As System.Windows.Forms.Label
+    Friend WithEvents GroupBox63 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label64 As System.Windows.Forms.Label
+    Friend WithEvents Label67 As System.Windows.Forms.Label
+    Friend WithEvents NBTypoChance As System.Windows.Forms.NumericUpDown
 End Class

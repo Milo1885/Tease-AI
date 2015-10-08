@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Multithreading overhaul - Displaying images to main window
+
 Added @EdgeHeld() Command Filter
 
 Added Timeout() Command

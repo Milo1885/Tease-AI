@@ -4891,6 +4891,18 @@ Namespace My
                 Me("MinPace") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1")>  _
+        Public Property TypoChance() As Integer
+            Get
+                Return CType(Me("TypoChance"),Integer)
+            End Get
+            Set
+                Me("TypoChance") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

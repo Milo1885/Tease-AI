@@ -711,6 +711,8 @@ Public Class FrmSettings
         Catch
         End Try
 
+        NBTypoChance.Value = My.Settings.TypoChance
+
 
         FrmSettingsLoading = False
 
@@ -5502,11 +5504,11 @@ NextURL:
     Private Sub CBImageInfo_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBImageInfo.CheckedChanged
         If CBImageInfo.Checked = True Then
             Form1.LBLImageInfo.Visible = True
-            Form1.ShowImageInfo()
+            'Form1.ShowImageInfo()
             My.Settings.CBImageInfo = True
         Else
             Form1.LBLImageInfo.Visible = False
-            Form1.LBLImageInfo.Text = ""
+            'Form1.LBLImageInfo.Text = ""
             My.Settings.CBImageInfo = False
         End If
         My.Settings.Save()
@@ -13511,4 +13513,11 @@ NextURL:
 
         End If
     End Sub
+
+    Private Sub NBTypoChance_LostFocus(sender As Object, e As System.EventArgs) Handles NBTypoChance.LostFocus
+        My.Settings.TypoChance = NBTypoChance.Value
+        My.Settings.Save()
+    End Sub
+
+  
 End Class
