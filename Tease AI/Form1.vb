@@ -1494,6 +1494,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             FrmSettings.LBLAvgEdgeNoTouch.Text = "WAIT"
         End If
 
+        Debug.Print("Form Load PictureStrip")
         PictureStrip.Items(0).Enabled = False
         PictureStrip.Items(1).Enabled = False
         PictureStrip.Items(2).Enabled = False
@@ -1700,6 +1701,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
         DommeMood = randomizer.Next(5, 8)
 
+        Debug.Print("Reset PictureStrip")
         PictureStrip.Items(0).Enabled = False
         PictureStrip.Items(1).Enabled = False
         PictureStrip.Items(2).Enabled = False
@@ -4054,6 +4056,19 @@ ReturnCalled:
 
         StrokeTauntVal += 1
 
+        Dim lines As New List(Of String)
+        lines = Txt2List(FileText)
+
+        Try
+            If RunningScript = False And AvoidTheEdgeGame = False And ReturnFlag = False Then
+                Debug.Print("End Check StrokeTauntVal = " & StrokeTauntVal)
+                If lines(StrokeTauntVal) = "@End" Then
+                    If ShowModule = True Then ModuleEnd = True
+                End If
+            End If
+        Catch
+        End Try
+
 
         'If ShowThought = True Or ShowEdgeThought = True Then
         'ThoughtTauntVal += 1
@@ -4468,14 +4483,7 @@ ReturnCalled:
                 ScriptTimer.Stop()
             End If
 
-            If RunningScript = False And AvoidTheEdgeGame = False And ReturnFlag = False Then
-                Debug.Print("End Check StrokeTauntVal = " & StrokeTauntVal)
-                If lines(line + 1) = "@End" Then 'Or lines(line + 1) = "@Thought" Then
-                    ' If ShowThought = True Or ShowEdgeThought = True Then ThoughtEnd = True
-                    Debug.Print("And this??")
-                    If ShowModule = True Then ModuleEnd = True
-                End If
-            End If
+          
 
             Debug.Print("CHeck")
 
@@ -5015,12 +5023,7 @@ SkipGotoSearch:
                 IsTyping = False
                 If RiskyDeal = True Then FrmCardList.LblRiskType.Visible = False
 
-                PictureStrip.Items(0).Enabled = False
-                PictureStrip.Items(1).Enabled = False
-                PictureStrip.Items(2).Enabled = False
-                PictureStrip.Items(3).Enabled = False
-                PictureStrip.Items(4).Enabled = False
-                PictureStrip.Items(5).Enabled = False
+              
 
                 ' If PreCleanString.Contains("#") Then GoTo PoundLoop
 
@@ -5587,6 +5590,8 @@ EndSysMes:
                     ShowPicture = False
                 End If
 
+            
+
 HypNoResponse:
 
                 If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
@@ -5620,6 +5625,24 @@ HypNoResponse:
                 End If
 
 NoResponse:
+
+                If ImageLocation.Contains("/") Then
+                    Debug.Print("Timer1 PictureStrip")
+                    PictureStrip.Items(0).Enabled = True
+                    PictureStrip.Items(1).Enabled = True
+                    PictureStrip.Items(2).Enabled = True
+                    PictureStrip.Items(3).Enabled = True
+                    PictureStrip.Items(4).Enabled = True
+                    PictureStrip.Items(5).Enabled = True
+                Else
+                    Debug.Print("Timer1 PictureStrip")
+                    PictureStrip.Items(0).Enabled = True
+                    PictureStrip.Items(1).Enabled = False
+                    PictureStrip.Items(2).Enabled = False
+                    PictureStrip.Items(3).Enabled = False
+                    PictureStrip.Items(4).Enabled = False
+                    PictureStrip.Items(5).Enabled = False
+                End If
 
                 If CorrectedTypo = True Then
                     CorrectedTypo = False
@@ -5888,13 +5911,7 @@ NoResponse:
 
 NullResponseLine:
 
-
-                PictureStrip.Items(0).Enabled = False
-                PictureStrip.Items(1).Enabled = False
-                PictureStrip.Items(2).Enabled = False
-                PictureStrip.Items(3).Enabled = False
-                PictureStrip.Items(4).Enabled = False
-                PictureStrip.Items(5).Enabled = False
+         
 
                 If GlitterTease = True And JustShowedBlogImage = False Then GoTo TryNextWithTease
 
@@ -6321,6 +6338,24 @@ EndSysMes:
                 End If
 
 NullResponseLine2:
+
+                If ImageLocation.Contains("/") Then
+                    Debug.Print("SendTimer PictureStrip")
+                    PictureStrip.Items(0).Enabled = True
+                    PictureStrip.Items(1).Enabled = True
+                    PictureStrip.Items(2).Enabled = True
+                    PictureStrip.Items(3).Enabled = True
+                    PictureStrip.Items(4).Enabled = True
+                    PictureStrip.Items(5).Enabled = True
+                Else
+                    Debug.Print("SendTimer PictureStrip")
+                    PictureStrip.Items(0).Enabled = True
+                    PictureStrip.Items(1).Enabled = False
+                    PictureStrip.Items(2).Enabled = False
+                    PictureStrip.Items(3).Enabled = False
+                    PictureStrip.Items(4).Enabled = False
+                    PictureStrip.Items(5).Enabled = False
+                End If
 
                 StrokeSpeedCheck()
 
@@ -10275,12 +10310,12 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@DislikeBlogImage") Then
 
-            If FoundString <> "" Then
+            If ImageLocation <> "" Then
 
                 If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & FoundString, True)
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & ImageLocation, True)
                 Else
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FoundString, True)
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", ImageLocation, True)
                 End If
                 StringClean = StringClean.Replace("@DislikeBlogImage", "")
             End If
@@ -10291,12 +10326,12 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@LikeBlogImage") Then
 
-            If FoundString <> "" Then
+            If ImageLocation <> "" Then
 
                 If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & FoundString, True)
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & ImageLocation, True)
                 Else
-                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FoundString, True)
+                    My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", ImageLocation, True)
                 End If
                 StringClean = StringClean.Replace("@LikeBlogImage", "")
             End If
@@ -19020,8 +19055,7 @@ AlreadySeen:
 
             End Try
 
-
-
+            Debug.Print("Blog Image PictureStrip")
             PictureStrip.Items(0).Enabled = True
             PictureStrip.Items(1).Enabled = True
             PictureStrip.Items(2).Enabled = True
@@ -19135,6 +19169,7 @@ AlreadySeen:
 
         JustShowedBlogImage = True
 
+        Debug.Print("Local Image PictureStrip")
         PictureStrip.Items(0).Enabled = True
         PictureStrip.Items(1).Enabled = False
         PictureStrip.Items(2).Enabled = False
@@ -21583,7 +21618,7 @@ TryNext:
 
         If Directory.Exists(BlogPath) Then
 
-            WebImage = FoundString
+            WebImage = ImageLocation
 
             Do Until Not WebImage.Contains("/")
                 WebImage = WebImage.Remove(0, 1)
