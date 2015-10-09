@@ -8975,84 +8975,69 @@ StatusUpdateEnd:
         End If
 
         If StringClean.Contains("#RandomRound100(") Then
-            Debug.Print("Random Stringlean called - " & StringClean)
+
+            Dim RandomFlag As String = GetParentheses(StringClean, "#RandomRound100(")
+            Dim OriginalFlag As String = RandomFlag
+            RandomFlag = FixCommas(RandomFlag)
             Dim RandInt As Integer
-            Dim CheckFlag As String = StringClean & " some test garbage"
-            Dim CFIndex As Integer = StringClean.IndexOf("#RandomRound100(") + 16
-            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
-            CheckFlag = CheckFlag.Split(")")(0)
-            CheckFlag = CheckFlag.Replace("#RandomRound100(", "")
-            CheckFlag = CheckFlag.Replace(", ", ",")
-            CheckFlag = CheckFlag.Replace(" ,", ",")
-            Dim FlagArray() As String = CheckFlag.Split(",")
+            Dim FlagArray() As String = RandomFlag.Split(",")
+
             RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
             RandInt = 100 * Math.Round(RandInt / 100)
-            StringClean = StringClean.Replace("#RandomRound100(" & FlagArray(0) & "," & FlagArray(1) & ")", RandInt)
-            StringClean = StringClean.Replace("#RandomRound100(" & FlagArray(0) & " ," & FlagArray(1) & ")", RandInt)
-            StringClean = StringClean.Replace("#RandomRound100(" & FlagArray(0) & ", " & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#RandomRound100(" & OriginalFlag & ")", RandInt)
+
         End If
 
         If StringClean.Contains("#RandomRound10(") Then
-            Debug.Print("Random Stringlean called - " & StringClean)
+          
+
+            Dim RandomFlag As String = GetParentheses(StringClean, "#RandomRound10(")
+            Dim OriginalFlag As String = RandomFlag
+            RandomFlag = FixCommas(RandomFlag)
             Dim RandInt As Integer
-            Dim CheckFlag As String = StringClean & " some test garbage"
-            Dim CFIndex As Integer = StringClean.IndexOf("#RandomRound10(") + 15
-            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
-            CheckFlag = CheckFlag.Split(")")(0)
-            CheckFlag = CheckFlag.Replace("#RandomRound10(", "")
-            CheckFlag = CheckFlag.Replace(", ", ",")
-            CheckFlag = CheckFlag.Replace(" ,", ",")
-            Dim FlagArray() As String = CheckFlag.Split(",")
+            Dim FlagArray() As String = RandomFlag.Split(",")
+
             RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
             RandInt = 10 * Math.Round(RandInt / 10)
-            StringClean = StringClean.Replace("#RandomRound10(" & FlagArray(0) & "," & FlagArray(1) & ")", RandInt)
-            StringClean = StringClean.Replace("#RandomRound10(" & FlagArray(0) & " ," & FlagArray(1) & ")", RandInt)
-            StringClean = StringClean.Replace("#RandomRound10(" & FlagArray(0) & ", " & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#RandomRound10(" & OriginalFlag & ")", RandInt)
+
         End If
 
 
         If StringClean.Contains("#RandomRound5(") Then
-            Debug.Print("Random Stringlean called - " & StringClean)
+           
+
+            Dim RandomFlag As String = GetParentheses(StringClean, "#RandomRound5(")
+            Dim OriginalFlag As String = RandomFlag
+            RandomFlag = FixCommas(RandomFlag)
             Dim RandInt As Integer
-            Dim CheckFlag As String = StringClean & " some test garbage"
-            Dim CFIndex As Integer = StringClean.IndexOf("#RandomRound5(") + 14
-            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
-            CheckFlag = CheckFlag.Split(")")(0)
-            CheckFlag = CheckFlag.Replace("#RandomRound5(", "")
-            CheckFlag = CheckFlag.Replace(", ", ",")
-            CheckFlag = CheckFlag.Replace(" ,", ",")
-            Dim FlagArray() As String = CheckFlag.Split(",")
+            Dim FlagArray() As String = RandomFlag.Split(",")
+
             RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
             RandInt = 5 * Math.Round(RandInt / 5)
-            StringClean = StringClean.Replace("#RandomRound5(" & FlagArray(0) & "," & FlagArray(1) & ")", RandInt)
-            StringClean = StringClean.Replace("#RandomRound5(" & FlagArray(0) & " ," & FlagArray(1) & ")", RandInt)
-            StringClean = StringClean.Replace("#RandomRound5(" & FlagArray(0) & ", " & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#RandomRound5(" & OriginalFlag & ")", RandInt)
+
         End If
 
 
         If StringClean.Contains("#Random(") Then
-            Debug.Print("Random Stringlean called - " & StringClean)
+
+            Dim RandomFlag As String = GetParentheses(StringClean, "#Random(")
+            Dim OriginalFlag As String = RandomFlag
+            RandomFlag = FixCommas(RandomFlag)
             Dim RandInt As Integer
-            Dim CheckFlag As String = StringClean & " some test garbage"
-            Dim CFIndex As Integer = StringClean.IndexOf("#Random(") + 8
-            CheckFlag = CheckFlag.Substring(CFIndex, StringClean.Length - CFIndex)
-            CheckFlag = CheckFlag.Split(")")(0)
-            CheckFlag = CheckFlag.Replace("#Random(", "")
-            CheckFlag = CheckFlag.Replace(", ", ",")
-            CheckFlag = CheckFlag.Replace(" ,", ",")
-            Dim FlagArray() As String = CheckFlag.Split(",")
+            Dim FlagArray() As String = RandomFlag.Split(",")
+
             RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
-            StringClean = StringClean.Replace("#Random(" & FlagArray(0) & "," & FlagArray(1) & ")", RandInt)
-            StringClean = StringClean.Replace("#Random(" & FlagArray(0) & " ," & FlagArray(1) & ")", RandInt)
-            StringClean = StringClean.Replace("#Random(" & FlagArray(0) & ", " & FlagArray(1) & ")", RandInt)
+            StringClean = StringClean.Replace("#Random(" & OriginalFlag & ")", RandInt)
+
         End If
 
         If StringClean.Contains("#DateDifference(") Then
 
             Dim DateFlag As String = GetParentheses(StringClean, "#DateDifference(")
             Dim OriginalFlag As String = DateFlag
-            DateFlag = DateFlag.Replace(", ", ",")
-            DateFlag = DateFlag.Replace(" ,", ",")
+            DateFlag = FixCommas(DateFlag)
             Dim DateArray() As String = DateFlag.Split(",")
 
             Dim dATEsTRING As String = DateArray(0)
@@ -9179,7 +9164,8 @@ StatusUpdateEnd:
         StringClean = StringClean.Replace("#GoldTokens", GoldTokens)
 
         StringClean = StringClean.Replace("#SessionEdges", SessionEdges)
-
+        StringClean = StringClean.Replace("#SessionCBTCock", CBTCockCount)
+        StringClean = StringClean.Replace("#SessionCBTBalls", CBTBallsCount)
 
         'StringClean = StringClean.Replace("#Sys_SubLeftEarly", My.Settings.Sys_SubLeftEarly)
         'StringClean = StringClean.Replace("#Sys_SubLeftEarlyTotal", My.Settings.Sys_SubLeftEarlyTotal)
@@ -9196,13 +9182,13 @@ StatusUpdateEnd:
         ' StringClean = StringClean.Replace("#CurrentDate", Format(Now, "MM/dd/yyyy"))
 
         ' 
-        If StringClean.Contains("#Var(") Then
+        If StringClean.Contains("#Var[") Then
 
-            Dim VarFlag As String = GetParentheses(StringClean, "#Var(")
+            Dim VarFlag As String = GetParentheses(StringClean, "#Var[")
 
             Dim VarFlag2 As String = GetVariable(VarFlag)
 
-            StringClean = StringClean.Replace("#Var(" & VarFlag & ")", VarFlag2)
+            StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
 
         End If
 
