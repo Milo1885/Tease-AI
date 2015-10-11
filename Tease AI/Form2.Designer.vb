@@ -55,8 +55,6 @@ Partial Class FrmSettings
         Me.CBBlogImageWindow = New System.Windows.Forms.CheckBox()
         Me.CBSlideshowSubDir = New System.Windows.Forms.CheckBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.GBGeneralDesc = New System.Windows.Forms.GroupBox()
-        Me.LBLGeneralSettingsDescription = New System.Windows.Forms.Label()
         Me.GBGeneralSettings = New System.Windows.Forms.GroupBox()
         Me.GBSubFont = New System.Windows.Forms.GroupBox()
         Me.BTNSubColor = New System.Windows.Forms.Button()
@@ -111,8 +109,6 @@ Partial Class FrmSettings
         Me.NBAvgCockMin = New System.Windows.Forms.NumericUpDown()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label30 = New System.Windows.Forms.Label()
-        Me.GBDomDescription = New System.Windows.Forms.GroupBox()
-        Me.LblDommeSettingsDescription = New System.Windows.Forms.Label()
         Me.GBDomStats = New System.Windows.Forms.GroupBox()
         Me.Label128 = New System.Windows.Forms.Label()
         Me.LBLEmpathy = New System.Windows.Forms.Label()
@@ -910,9 +906,6 @@ Partial Class FrmSettings
         Me.RBGerman = New System.Windows.Forms.RadioButton()
         Me.RBEnglish = New System.Windows.Forms.RadioButton()
         Me.GroupBox33 = New System.Windows.Forms.GroupBox()
-        Me.Button34 = New System.Windows.Forms.Button()
-        Me.Button33 = New System.Windows.Forms.Button()
-        Me.MetroTest = New System.Windows.Forms.NumericUpDown()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.LBLChastityState = New System.Windows.Forms.Label()
         Me.Label120 = New System.Windows.Forms.Label()
@@ -982,7 +975,6 @@ Partial Class FrmSettings
         Me.GBGeneralSystem.SuspendLayout
         Me.GBGeneralImages.SuspendLayout
         CType(Me.PictureBox2,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GBGeneralDesc.SuspendLayout
         Me.GBGeneralSettings.SuspendLayout
         Me.GBSubFont.SuspendLayout
         CType(Me.NBFontSize,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1003,7 +995,6 @@ Partial Class FrmSettings
         CType(Me.NBSelfAgeMin,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NBAvgCockMax,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NBAvgCockMin,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GBDomDescription.SuspendLayout
         Me.GBDomStats.SuspendLayout
         CType(Me.NBEmpathy,System.ComponentModel.ISupportInitialize).BeginInit
         CType(Me.NBDomBirthdayDay,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1189,7 +1180,6 @@ Partial Class FrmSettings
         Me.Panel11.SuspendLayout
         Me.GroupBox62.SuspendLayout
         Me.GroupBox33.SuspendLayout
-        CType(Me.MetroTest,System.ComponentModel.ISupportInitialize).BeginInit
         Me.GroupBox27.SuspendLayout
         Me.GroupBox20.SuspendLayout
         Me.GroupBox15.SuspendLayout
@@ -1256,7 +1246,6 @@ Partial Class FrmSettings
         Me.PNLGeneralSettings.Controls.Add(Me.GBGeneralSystem)
         Me.PNLGeneralSettings.Controls.Add(Me.GBGeneralImages)
         Me.PNLGeneralSettings.Controls.Add(Me.PictureBox2)
-        Me.PNLGeneralSettings.Controls.Add(Me.GBGeneralDesc)
         Me.PNLGeneralSettings.Controls.Add(Me.GBGeneralSettings)
         Me.PNLGeneralSettings.Controls.Add(Me.LBLGeneralSettings)
         Me.PNLGeneralSettings.Location = New System.Drawing.Point(6, 6)
@@ -1603,31 +1592,6 @@ Partial Class FrmSettings
         Me.PictureBox2.TabIndex = 148
         Me.PictureBox2.TabStop = false
         '
-        'GBGeneralDesc
-        '
-        Me.GBGeneralDesc.BackColor = System.Drawing.Color.LightGray
-        Me.GBGeneralDesc.Controls.Add(Me.LBLGeneralSettingsDescription)
-        Me.GBGeneralDesc.ForeColor = System.Drawing.Color.Black
-        Me.GBGeneralDesc.Location = New System.Drawing.Point(7, 309)
-        Me.GBGeneralDesc.Name = "GBGeneralDesc"
-        Me.GBGeneralDesc.Size = New System.Drawing.Size(692, 114)
-        Me.GBGeneralDesc.TabIndex = 0
-        Me.GBGeneralDesc.TabStop = false
-        Me.GBGeneralDesc.Text = "Description"
-        '
-        'LBLGeneralSettingsDescription
-        '
-        Me.LBLGeneralSettingsDescription.BackColor = System.Drawing.Color.Transparent
-        Me.LBLGeneralSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LBLGeneralSettingsDescription.ForeColor = System.Drawing.Color.Black
-        Me.LBLGeneralSettingsDescription.Location = New System.Drawing.Point(6, 16)
-        Me.LBLGeneralSettingsDescription.Name = "LBLGeneralSettingsDescription"
-        Me.LBLGeneralSettingsDescription.Size = New System.Drawing.Size(680, 73)
-        Me.LBLGeneralSettingsDescription.TabIndex = 0
-        Me.LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
-    "n."
-        Me.LBLGeneralSettingsDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'GBGeneralSettings
         '
         Me.GBGeneralSettings.BackColor = System.Drawing.Color.LightGray
@@ -1877,7 +1841,6 @@ Partial Class FrmSettings
         Me.Panel3.Controls.Add(Me.PictureBox4)
         Me.Panel3.Controls.Add(Me.GBDomTypingStyle)
         Me.Panel3.Controls.Add(Me.GBDomRanges)
-        Me.Panel3.Controls.Add(Me.GBDomDescription)
         Me.Panel3.Controls.Add(Me.GBDomStats)
         Me.Panel3.Controls.Add(Me.GBDomPersonality)
         Me.Panel3.Controls.Add(Me.GBDomOrgasms)
@@ -2305,30 +2268,6 @@ Partial Class FrmSettings
         Me.Label30.TabIndex = 149
         Me.Label30.Text = "Average Dick Size:"
         Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        '
-        'GBDomDescription
-        '
-        Me.GBDomDescription.BackColor = System.Drawing.Color.LightGray
-        Me.GBDomDescription.Controls.Add(Me.LblDommeSettingsDescription)
-        Me.GBDomDescription.ForeColor = System.Drawing.Color.Black
-        Me.GBDomDescription.Location = New System.Drawing.Point(7, 299)
-        Me.GBDomDescription.Name = "GBDomDescription"
-        Me.GBDomDescription.Size = New System.Drawing.Size(427, 124)
-        Me.GBDomDescription.TabIndex = 65
-        Me.GBDomDescription.TabStop = false
-        Me.GBDomDescription.Text = "Description"
-        '
-        'LblDommeSettingsDescription
-        '
-        Me.LblDommeSettingsDescription.BackColor = System.Drawing.Color.Transparent
-        Me.LblDommeSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.LblDommeSettingsDescription.ForeColor = System.Drawing.Color.Black
-        Me.LblDommeSettingsDescription.Location = New System.Drawing.Point(10, 19)
-        Me.LblDommeSettingsDescription.Name = "LblDommeSettingsDescription"
-        Me.LblDommeSettingsDescription.Size = New System.Drawing.Size(408, 102)
-        Me.LblDommeSettingsDescription.TabIndex = 62
-        Me.LblDommeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
-    "n."
         '
         'GBDomStats
         '
@@ -11931,9 +11870,6 @@ Partial Class FrmSettings
         '
         'GroupBox33
         '
-        Me.GroupBox33.Controls.Add(Me.Button34)
-        Me.GroupBox33.Controls.Add(Me.Button33)
-        Me.GroupBox33.Controls.Add(Me.MetroTest)
         Me.GroupBox33.Controls.Add(Me.Button11)
         Me.GroupBox33.Controls.Add(Me.LBLChastityState)
         Me.GroupBox33.Controls.Add(Me.Label120)
@@ -11943,35 +11879,6 @@ Partial Class FrmSettings
         Me.GroupBox33.TabIndex = 177
         Me.GroupBox33.TabStop = false
         Me.GroupBox33.Text = "System States"
-        '
-        'Button34
-        '
-        Me.Button34.Location = New System.Drawing.Point(212, 74)
-        Me.Button34.Name = "Button34"
-        Me.Button34.Size = New System.Drawing.Size(48, 23)
-        Me.Button34.TabIndex = 180
-        Me.Button34.Text = "Stop"
-        Me.Button34.UseVisualStyleBackColor = true
-        '
-        'Button33
-        '
-        Me.Button33.Location = New System.Drawing.Point(161, 74)
-        Me.Button33.Name = "Button33"
-        Me.Button33.Size = New System.Drawing.Size(48, 23)
-        Me.Button33.TabIndex = 179
-        Me.Button33.Text = "Start"
-        Me.Button33.UseVisualStyleBackColor = true
-        '
-        'MetroTest
-        '
-        Me.MetroTest.Increment = New Decimal(New Integer() {10, 0, 0, 0})
-        Me.MetroTest.Location = New System.Drawing.Point(17, 74)
-        Me.MetroTest.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
-        Me.MetroTest.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.MetroTest.Name = "MetroTest"
-        Me.MetroTest.Size = New System.Drawing.Size(98, 20)
-        Me.MetroTest.TabIndex = 178
-        Me.MetroTest.Value = New Decimal(New Integer() {200, 0, 0, 0})
         '
         'Button11
         '
@@ -12502,7 +12409,6 @@ Partial Class FrmSettings
         Me.GBGeneralImages.ResumeLayout(false)
         Me.GBGeneralImages.PerformLayout
         CType(Me.PictureBox2,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBGeneralDesc.ResumeLayout(false)
         Me.GBGeneralSettings.ResumeLayout(false)
         Me.GBGeneralSettings.PerformLayout
         Me.GBSubFont.ResumeLayout(false)
@@ -12527,7 +12433,6 @@ Partial Class FrmSettings
         CType(Me.NBSelfAgeMin,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.NBAvgCockMax,System.ComponentModel.ISupportInitialize).EndInit
         CType(Me.NBAvgCockMin,System.ComponentModel.ISupportInitialize).EndInit
-        Me.GBDomDescription.ResumeLayout(false)
         Me.GBDomStats.ResumeLayout(false)
         Me.GBDomStats.PerformLayout
         CType(Me.NBEmpathy,System.ComponentModel.ISupportInitialize).EndInit
@@ -12765,7 +12670,6 @@ Partial Class FrmSettings
         Me.GroupBox62.ResumeLayout(false)
         Me.GroupBox62.PerformLayout
         Me.GroupBox33.ResumeLayout(false)
-        CType(Me.MetroTest,System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupBox27.ResumeLayout(false)
         Me.GroupBox27.PerformLayout
         Me.GroupBox20.ResumeLayout(false)
@@ -12801,8 +12705,6 @@ End Sub
     Friend WithEvents CBBlogImageWindow As System.Windows.Forms.CheckBox
     Friend WithEvents CBSlideshowSubDir As System.Windows.Forms.CheckBox
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
-    Friend WithEvents GBGeneralDesc As System.Windows.Forms.GroupBox
-    Friend WithEvents LBLGeneralSettingsDescription As System.Windows.Forms.Label
     Friend WithEvents GBGeneralTextToSpeech As System.Windows.Forms.GroupBox
     Friend WithEvents TTSCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents TTSComboBox As System.Windows.Forms.ComboBox
@@ -12832,8 +12734,6 @@ End Sub
     Friend WithEvents NBAvgCockMin As System.Windows.Forms.NumericUpDown
     Friend WithEvents Label23 As System.Windows.Forms.Label
     Friend WithEvents Label30 As System.Windows.Forms.Label
-    Friend WithEvents GBDomDescription As System.Windows.Forms.GroupBox
-    Friend WithEvents LblDommeSettingsDescription As System.Windows.Forms.Label
     Friend WithEvents GBDomStats As System.Windows.Forms.GroupBox
     Friend WithEvents boobComboBox As System.Windows.Forms.ComboBox
     Friend WithEvents DomLevelDescLabel As System.Windows.Forms.Label
@@ -13670,7 +13570,6 @@ End Sub
     Friend WithEvents GroupBox62 As System.Windows.Forms.GroupBox
     Friend WithEvents RBGerman As System.Windows.Forms.RadioButton
     Friend WithEvents RBEnglish As System.Windows.Forms.RadioButton
-    Friend WithEvents MetroTest As System.Windows.Forms.NumericUpDown
     Friend WithEvents TabPage26 As System.Windows.Forms.TabPage
     Friend WithEvents Panel12 As System.Windows.Forms.Panel
     Friend WithEvents PictureBox10 As System.Windows.Forms.PictureBox
@@ -13712,8 +13611,6 @@ End Sub
     Friend WithEvents condescendingCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents degradingCheckBox As System.Windows.Forms.CheckBox
     Friend WithEvents sadisticCheckBox As System.Windows.Forms.CheckBox
-    Friend WithEvents Button34 As System.Windows.Forms.Button
-    Friend WithEvents Button33 As System.Windows.Forms.Button
     Friend WithEvents GroupBox13 As System.Windows.Forms.GroupBox
     Friend WithEvents TimeBoxWakeUp As System.Windows.Forms.DateTimePicker
     Friend WithEvents Label5 As System.Windows.Forms.Label

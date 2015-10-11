@@ -37,7 +37,7 @@ Public Class FrmSettings
 
     Dim CheckImgDir As New List(Of String)
 
-    Dim Fringe As New SpeechSynthesizer
+    'Dim Fringe As New SpeechSynthesizer
 
     Private Thr As Threading.Thread
 
@@ -344,8 +344,8 @@ Public Class FrmSettings
         FrmSplash.Refresh()
 
         Dim voicecheck As Integer
-        Dim voices = Fringe.GetInstalledVoices()
-        For Each v As InstalledVoice In voices
+        'Dim voices = Fringe.GetInstalledVoices()
+        For Each v As InstalledVoice In installedVoices
             Debug.Print("Voice " & v.ToString())
             voicecheck += 1
             TTSComboBox.Items.Add(v.VoiceInfo.Name)
@@ -3077,75 +3077,159 @@ NextURL:
     End Sub
 
     Private Sub timestampCheckBox_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles timestampCheckBox.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, a timestamp will appear with each message you and the domme send."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird mit jeder Nachricht die du oder die Domina sendet ein Zeitstempel angezeigt"
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(timestampCheckBox, "When this is selected, a timestamp will appear" & Environment.NewLine & _
+                                                                             "with each message you and the domme send.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(timestampCheckBox, "Wenn dies aktiviert ist, wird mit jeder Nachricht die" & Environment.NewLine & _
+                                                                            "du oder die Domina sendet ein Zeitstempel angezeigt")
+
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, a timestamp will appear with each message you and the domme send."
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird mit jeder Nachricht die du oder die Domina sendet ein Zeitstempel angezeigt"
+
     End Sub
 
     Private Sub shownamesCheckBox_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles shownamesCheckBox.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, the names of you and the domme will appear with every message you send. If it is unselected, names will only appear when you were not the last one to type."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird mit jeder Nachricht die du oder die  Domina sendet der Name angezeigt. Wenn dies deaktiviert ist," _
-            & " Namen werden nur erscheinen wenn du nicht der letzte warst, der geschrieben hat."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(shownamesCheckBox, "When this is selected, the names of you and the" & Environment.NewLine & _
+                                                                              "domme will appear with every message you send." & Environment.NewLine & Environment.NewLine & _
+                                                                              "If it is unselected, names will only appear" & Environment.NewLine & _
+                                                                              "when you were not the last one to type.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(shownamesCheckBox, "Wenn dies aktiviert ist, wird mit jeder Nachricht" & Environment.NewLine & _
+                                                                            "die du oder die Domina sendet der Name angezeigt." & Environment.NewLine & Environment.NewLine & _
+                                                                            "Wenn dies deaktiviert ist, Namen werden nur erscheinen" & Environment.NewLine & _
+                                                                            "wenn du nicht der letzte warst, der geschrieben hat.")
+
+
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, the names of you and the domme will appear with every message you send. If it is unselected, names will only appear when you were not the last one to type."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird mit jeder Nachricht die du oder die Domina sendet der Name angezeigt. Wenn dies deaktiviert ist," _
+        '   & " Namen werden nur erscheinen wenn du nicht der letzte warst, der geschrieben hat."
 
     End Sub
 
 
     Private Sub typeinstantlyCheckBox_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles typeinstantlyCheckBox.MouseHover
-        LBLGeneralSettingsDescription.Text = "This program simulates a chat environment, so a brief delay appears before each post the domme makes. This delay is determined by the length of what she is saying and will " _
-            & "be accompanied by the text ""[Dom Name] is typing..."" for added effect. When this is unselected, the typing delay is removed and the domme's messages become instantaneous."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Dieses Programm simuliert eine Chat Umgebung, daher erscheint eine kurze Verzögerung vor jedem Beitrag den die Domina macht. Diese Verzögerung hängt von der Länge ab, was sie schreibt und wird begleitet mit dem text „[Dom Name] is typing…"" für einen besseren Effekt. Wenn dies deaktiviert ist, ist die „Tippen"" Verzögerung entfernt und die Domina Beiträge erschein sofort"
+
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(typeinstantlyCheckBox, "This program simulates a chat environment, so a brief delay appears before each post the domme makes." & Environment.NewLine & _
+                                                                                 "This delay is determined by the length of what she is saying and will be accompanied by the text ""[Dom Name] is typing...""" & Environment.NewLine & Environment.NewLine & _
+                                                                                 "When this is selected, the typing delay is removed and the domme's messages become instantaneous.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(typeinstantlyCheckBox, "Dieses Programm simuliert eine Chat Umgebung, daher erscheint eine kurze Verzögerung vor jedem Beitrag den die Domina macht." & Environment.NewLine & _
+                                                                                "Diese Verzögerung hängt von der Länge ab, was sie schreibt und wird begleitet mit dem text „[Dom Name] is typing…"" für einen besseren Effekt." & Environment.NewLine & Environment.NewLine & _
+                                                                                "Wenn dies deaktiviert ist, ist die „Tippen"" Verzögerung entfernt und die Domina Beiträge erschein sofort")
+
+
+
+        ' LBLGeneralSettingsDescription.Text = "This program simulates a chat environment, so a brief delay appears before each post the domme makes. This delay is determined by the length of what she is saying and will " _
+        '  & "be accompanied by the text ""[Dom Name] is typing..."" for added effect. When this is unselected, the typing delay is removed and the domme's messages become instantaneous."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Dieses Programm simuliert eine Chat Umgebung, daher erscheint eine kurze Verzögerung vor jedem Beitrag den die Domina macht. Diese Verzögerung hängt von der Länge ab, was sie schreibt und wird begleitet mit dem text „[Dom Name] is typing…"" für einen besseren Effekt."
+        ' Wenn dies deaktiviert ist, ist die „Tippen"" Verzögerung entfernt und die Domina Beiträge erschein sofort"
 
     End Sub
 
     Private Sub CBLockWindow_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBInputIcon.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, a small question mark icon will appear next to domme's question when your exact response will be saved to a variable."
+
+        TTDir.SetToolTip(CBInputIcon, "When this is selected, a small question mark icon will appear next to the" & Environment.NewLine & _
+                                      "domme's question when your exact response will be saved to a variable.")
+        'If RBGerman.Checked = True Then TTDir.SetToolTip(CBInputIcon, "Wenn dies aktiviert ist, wird mit jeder Nachricht die" & Environment.NewLine & _
+        ' "du oder die Domina sendet ein Zeitstempel angezeigt")
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, a small question mark icon will appear next to domme's question when your exact response will be saved to a variable."
 
         'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, kann der Teilungsbalken zwischen Chat Fenster und Bildfenster nicht verstellt werden."
 
     End Sub
 
     Private Sub CBBlogImageWindow_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBBlogImageWindow.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, any blog images the domme shows you will automatically be saved to ""[root folder]\Images\Session Images\""."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird jedes Blog Bild, welches die Domina dir zeigt automatisch gespeichert in „…\Tease AI Open Beta\Images\Session Images\"""
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(CBBlogImageWindow, "When this is selected, any blog images the domme shows you will" & Environment.NewLine & _
+                                                                             "automatically be saved to ""[root folder]\Images\Session Images\"".")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(CBBlogImageWindow, "Wenn dies aktiviert ist, wird jedes Blog Bild, welches die Domina dir zeigt" & Environment.NewLine & _
+                                                                            "automatisch gespeichert in „…\Tease AI Open Beta\Images\Session Images\""")
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, any blog images the domme shows you will automatically be saved to ""[root folder]\Images\Session Images\""."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird jedes Blog Bild, welches die Domina dir zeigt automatisch gespeichert in „…\Tease AI Open Beta\Images\Session Images\"""
     End Sub
 
     Private Sub landscapeCheckBox_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles landscapeCheckBox.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, images that appear in the main window will be stretched to fit the screen if their width is greater than their height."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, werden die Bilder(welche Angezeigt werden) gestreckt, wenn ihre Breite größer als ihre Höhe ist"
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(landscapeCheckBox, "When this is selected, images that appear in the main window will be" & Environment.NewLine & _
+                                                                             "stretched to fit the screen if their width is greater than their height.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(landscapeCheckBox, "Wenn dies aktiviert ist, werden die Bilder(welche Angezeigt" & Environment.NewLine & _
+                                                                            "werden) gestreckt, wenn ihre Breite größer als ihre Höhe ist.")
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, images that appear in the main window will be stretched to fit the screen if their width is greater than their height."
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, werden die Bilder(welche Angezeigt werden) gestreckt, wenn ihre Breite größer als ihre Höhe ist"
     End Sub
     Private Sub CBImageInfo_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBImageInfo.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, the local filepath or URL address of each image displayed in the main window will appear in the upper left hand corner of the screen."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird der Lokale Dateipfad oder die URL-Adresse von jedem Bild in der oberen linken Ecke des Bildschirms angezeigt."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(CBImageInfo, "When this is selected, the local filepath or URL address of each image displayed" & Environment.NewLine & _
+                                                                       "in the main window will appear in the upper left hand corner of the screen.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(CBImageInfo, "Wenn dies aktiviert ist, wird der Lokale Dateipfad oder die URL-Adresse" & Environment.NewLine & _
+                                                                      "von jedem Bild in der oberen linken Ecke des Bildschirms angezeigt.")
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, the local filepath or URL address of each image displayed in the main window will appear in the upper left hand corner of the screen."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird der Lokale Dateipfad oder die URL-Adresse von jedem Bild in der oberen linken Ecke des Bildschirms angezeigt."
     End Sub
 
     Private Sub BTNDomImageDir_MouseHover(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.MouseHover
-        LBLGeneralSettingsDescription.Text = "Use this button to select a directory containing several image set folders of the same model you're using as your domme. Once a valid directory has been set, any time" _
-            & " you say hello to the domme, one of those folders will automatically be selected at random and used for the slideshow."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre Bildersets von dem selben Model enthält, die du als Domina benutzt. Nachdem einmal ein gültiges Verzeichnis gesetzt wurde, wird nachdem du Hello zu der Domina gesagt hast, automatisch zufällig eine Diashow ausgewählt."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(BTNDomImageDir, "Use this button to select a directory containing several image" & Environment.NewLine & _
+                                                                             "set folders of the same model you're using as your domme." & Environment.NewLine & Environment.NewLine & _
+                                                                             "Once a valid directory has been set, any time you say hello to the domme, one of" & Environment.NewLine & _
+                                                                             "those folders will automatically be selected at random and used for the slideshow.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(BTNDomImageDir, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine & _
+                                                                            "Bildersets von dem selben Model enthält, die du als Domina benutzt." & Environment.NewLine & Environment.NewLine & _
+                                                                            "Nachdem einmal ein gültiges Verzeichnis gesetzt wurde, wird nachdem du Hello" & Environment.NewLine & _
+                                                                            "zu der Domina gesagt hast, automatisch zufällig eine Diashow ausgewählt.")
+
+
+        'LBLGeneralSettingsDescription.Text = "Use this button to select a directory containing several image set folders of the same model you're using as your domme. Once a valid directory has been set, any time" _
+        '& " you say hello to the domme, one of those folders will automatically be selected at random and used for the slideshow."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre Bildersets von dem selben Model enthält,"
+        ' die du als Domina benutzt. Nachdem einmal ein gültiges Verzeichnis gesetzt wurde, wird nachdem du Hello zu der Domina gesagt hast, automatisch zufällig eine Diashow ausgewählt."
     End Sub
 
     Private Sub offRadio_MouseHover(sender As System.Object, e As System.EventArgs) Handles offRadio.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is set, any slideshow you have selected will not advance during the tease. Use the Previous and Next buttons on the Media Bar to change the images."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird jede Diashow nicht automatisch die Bilder wechseln. Nutze die Vor- und Zurückschaltflächen in der media bar um die Bilder zu wechseln"
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(offRadio, "When this is set, any domme slideshow you have selected will not advance during the" & Environment.NewLine & _
+                                                                    "tease. Use the Previous and Next buttons on the Media Bar to change the images.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(offRadio, "Wenn dies aktiviert ist, wird jede Diashow nicht automatisch die Bilder wechseln." & Environment.NewLine & _
+                                                                   "Nutze die Vor- und Zurückschaltflächen in der media bar um die Bilder zu wechseln.")
+
+        'LBLGeneralSettingsDescription.Text = "When this is set, any slideshow you have selected will not advance during the tease. Use the Previous and Next buttons on the Media Bar to change the images."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird jede Diashow nicht automatisch die Bilder wechseln. Nutze die Vor- und Zurückschaltflächen in der media bar um die Bilder zu wechseln"
     End Sub
 
     Private Sub timedRadio_MouseHover(sender As System.Object, e As System.EventArgs) Handles timedRadio.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is set, any slideshow you have selected will advance the image every number of seconds displayed in the box to the right of this option."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
+        TTDir.SetToolTip(timedRadio, "When this is set, any slideshow you have selected will advance the image" & Environment.NewLine & _
+                                     "every number of seconds displayed in the box to the right of this option.")
+
+        'LBLGeneralSettingsDescription.Text = "When this is set, any slideshow you have selected will advance the image every number of seconds displayed in the box to the right of this option."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
     End Sub
 
     Private Sub SlideshowNumBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles slideshowNumBox.MouseHover
-        LBLGeneralSettingsDescription.Text = "The number of seconds between image changes when the ""Timed"" slideshow option is checked."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
+        TTDir.SetToolTip(slideshowNumBox, "The number of seconds between image changes" & Environment.NewLine & _
+                                          "when the ""Timed"" slideshow option is checked.")
+
+        'LBLGeneralSettingsDescription.Text = "The number of seconds between image changes when the ""Timed"" slideshow option is checked."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
     End Sub
 
     Private Sub Radio_LostFocus(sender As Object, e As System.EventArgs) Handles teaseRadio.LostFocus, offRadio.LostFocus, timedRadio.LostFocus
@@ -3156,61 +3240,127 @@ NextURL:
     End Sub
 
     Private Sub teaseRadio_MouseHover(sender As System.Object, e As System.EventArgs) Handles teaseRadio.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is set, any slideshow you have selected will advance automatically when the domme types. The slideshow may move forward or backward, but will not loop either" _
-            & " direction. You can change the odds of which way the slideshow will move in the Ranges tab. This is the default slideshow mode for Tease AI."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird die Diashow automatisch die Bilder wechseln wenn die Domina schreibt. Die Diashow kann vorwärts oder rückwärts laufen, aber wird keine Richtung wiederholen. Du kannst die Wahrscheinlichkeit in welche Richtung die Diashow läuft im Wertebereichs „Reiter"" ändern. Dies ist der Standart Diashow modus in Tease AI "
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(teaseRadio, "When this is set, any slideshow you have selected will advance automatically when the domme " & Environment.NewLine & _
+                                                                      "types. The slideshow may move forward or backward, but will not loop either direction." & Environment.NewLine & Environment.NewLine & _
+                                                                      "You can change the odds of which way the slideshow will move in" & Environment.NewLine & _
+                                                                      "the Ranges tab. This is the default slideshow mode for Tease AI.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(teaseRadio, "Wenn dies aktiviert ist, wird die Diashow automatisch die Bilder wechseln wenn die Domina schreibt." & Environment.NewLine & _
+                                                                     "Die Diashow kann vorwärts oder rückwärts laufen, aber wird keine Richtung wiederholen." & Environment.NewLine & Environment.NewLine & _
+                                                                     "Du kannst die Wahrscheinlichkeit in welche Richtung die Diashow läuft im Wertebereichs" & Environment.NewLine & _
+                                                                     "„Reiter"" ändern. Dies ist der Standart Diashow modus in Tease AI.")
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is set, any slideshow you have selected will advance automatically when the domme types. The slideshow may move forward or backward, but will not loop either" _
+        '   & " direction. You can change the odds of which way the slideshow will move in the Ranges tab. This is the default slideshow mode for Tease AI."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird die Diashow automatisch die Bilder wechseln wenn die Domina schreibt. 
+        'Die Diashow kann vorwärts oder rückwärts laufen, aber wird keine Richtung wiederholen. Du kannst die Wahrscheinlichkeit in welche Richtung die 
+        'Diashow läuft im Wertebereichs „Reiter"" ändern. Dies ist der Standart Diashow modus in Tease AI "
     End Sub
 
 
-    Private Sub CBMetronome_CheckedChanged_1(sender As System.Object, e As System.EventArgs)
-        LBLGeneralSettingsDescription.Text = "When this is selected, the silent metronome located above the sub avatar will activate any time you are instructed to stroke."
+    ' Private Sub CBMetronome_CheckedChanged_1(sender As System.Object, e As System.EventArgs)
+    ' LBLGeneralSettingsDescription.Text = "When this is selected, the silent metronome located above the sub avatar will activate any time you are instructed to stroke."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
-    End Sub
+    ' If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
+    ' End Sub
 
     Private Sub CBSettingsPause_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBSettingsPause.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, the program will pause any time the settings menu is open and resume once it is closed."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird das Programm immer in Pause springen solange das Einstellungsmenü geöffnet ist."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(CBSettingsPause, "When this is selected, the program will pause any time" & Environment.NewLine & _
+                                                                           "the settings menu is open and resume once it is closed.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(CBSettingsPause, "Wenn dies aktiviert ist, wird das Programm immer in Pause" & Environment.NewLine & _
+                                                                          "springen solange das Einstellungsmenü geöffnet ist.")
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, the program will pause any time the settings menu is open and resume once it is closed."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird das Programm immer in Pause springen solange das Einstellungsmenü geöffnet ist."
     End Sub
 
     Private Sub BTNDomColor_MouseHover(sender As Object, e As System.EventArgs) Handles BTNDomColor.MouseHover
-        LBLGeneralSettingsDescription.Text = "This button allows you to change the color of the domme's name as it appears in the chat window. A preview will appear in the text box next to this button once a color has been selected."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Diese Schaltfläche erlaubt dir die Farbe  des Domina Namens zu ändern in der er im Chat Fenster angezeigt wird. Eine Vorschau wird in der Textbox neben dieser Schaltfläche angezeigt, nachdem eine Farbe ausgewählt wurde."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(BTNDomColor, "This button allows you to change the color of the" & Environment.NewLine & _
+                                                                       "domme's name as it appears in the chat window." & Environment.NewLine & Environment.NewLine & _
+                                                                       "A preview will appear in the text box next to this" & Environment.NewLine & _
+                                                                       "button once a color has been selected.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(BTNDomColor, "Diese Schaltfläche erlaubt dir die Farbe des Domina Namens" & Environment.NewLine & _
+                                                                      "zu ändern in der er im Chat Fenster angezeigt wird." & Environment.NewLine & Environment.NewLine & _
+                                                                      "Eine Vorschau wird in der Textbox neben dieser Schaltfläche" & Environment.NewLine & _
+                                                                      "angezeigt, nachdem eine Farbe ausgewählt wurde.")
+
+
+        'LBLGeneralSettingsDescription.Text = "This button allows you to change the color of the domme's name as it appears in the chat window. A preview will appear in the text box next to this button once a color has been selected."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Diese Schaltfläche erlaubt dir die Farbe des Domina Namens zu ändern in der er im Chat Fenster angezeigt wird. Eine Vorschau wird in der Textbox neben dieser Schaltfläche angezeigt, nachdem eine Farbe ausgewählt wurde."
     End Sub
 
     Private Sub BTNSubColor_MouseHover(sender As Object, e As System.EventArgs) Handles BTNSubColor.MouseHover
-        LBLGeneralSettingsDescription.Text = "This button allows you to change the color of your name as it appears in the chat window. A preview will appear in the text box next to this button once a color has been selected."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Diese Schaltfläche erlaubt dir die Farbe  des Sklaven Namens zu ändern in der er im Chat Fenster angezeigt wird. Eine Vorschau wird in der Textbox neben dieser Schaltfläche angezeigt, nachdem eine Farbe ausgewählt wurde."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(BTNSubColor, "This button allows you to change the color of" & Environment.NewLine & _
+                                                                       "your name as it appears in the chat window." & Environment.NewLine & Environment.NewLine & _
+                                                                       "A preview will appear in the text box next to this" & Environment.NewLine & _
+                                                                       "button once a color has been selected.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(BTNSubColor, "Diese Schaltfläche erlaubt dir die Farbe des Sklaven Namens" & Environment.NewLine & _
+                                                                      "zu ändern in der er im Chat Fenster angezeigt wird." & Environment.NewLine & Environment.NewLine & _
+                                                                      "Eine Vorschau wird in der Textbox neben dieser Schaltfläche" & Environment.NewLine & _
+                                                                      "angezeigt, nachdem eine Farbe ausgewählt wurde.")
+
+        'LBLGeneralSettingsDescription.Text = "This button allows you to change the color of your name as it appears in the chat window. A preview will appear in the text box next to this button once a color has been selected."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Diese Schaltfläche erlaubt dir die Farbe  des Sklaven Namens zu ändern in der er im Chat Fenster angezeigt wird. Eine Vorschau wird in der Textbox neben dieser Schaltfläche angezeigt, nachdem eine Farbe ausgewählt wurde."
     End Sub
 
     Private Sub LBLDomColor_Click(sender As System.Object, e As System.EventArgs) Handles LBLDomColor.MouseHover
-        LBLGeneralSettingsDescription.Text = "After clicking the ""Domme Name Color"" button to the left, a preview of the selected color will appear here."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Nachdem Klicken der Schaltfläche ""Domina Farbe für Namen"" zur linken, eine Vorschau der ausgewählten Farbe erscheint hier"
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(LBLDomColor, "After clicking the ""Domme Name Color"" button to the" & Environment.NewLine & _
+                                                                       "left, a preview of the selected color will appear here.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(LBLDomColor, "Nachdem Klicken der Schaltfläche ""Domina Farbe für Namen"" zur" & Environment.NewLine & _
+                                                                      "linken, eine Vorschau der ausgewählten Farbe erscheint hier.")
+
+        'LBLGeneralSettingsDescription.Text = "After clicking the ""Domme Name Color"" button to the left, a preview of the selected color will appear here."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Nachdem Klicken der Schaltfläche ""Domina Farbe für Namen"" zur linken, eine Vorschau der ausgewählten Farbe erscheint hier"
     End Sub
 
     Private Sub LBLSubColor_Click(sender As System.Object, e As System.EventArgs) Handles LBLSubColor.MouseHover
-        LBLGeneralSettingsDescription.Text = "After clicking the ""Sub Name Color"" button to the left, a preview of the selected color will appear here."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Nachdem Klicken der Schaltfläche ""Sklaven Farbe für Namen"" zur linken, eine Vorschau der ausgewählten Farbe erscheint hier"
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(LBLSubColor, "After clicking the ""Sub Name Color"" button to the" & Environment.NewLine & _
+                                                                      "left, a preview of the selected color will appear here.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(LBLSubColor, "Nachdem Klicken der Schaltfläche ""Sklaven Farbe für Namen"" zur" & Environment.NewLine & _
+                                                                      "linken, eine Vorschau der ausgewählten Farbe erscheint hier.")
+
+
+        'LBLGeneralSettingsDescription.Text = "After clicking the ""Sub Name Color"" button to the left, a preview of the selected color will appear here."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Nachdem Klicken der Schaltfläche ""Sklaven Farbe für Namen"" zur linken, eine Vorschau der ausgewählten Farbe erscheint hier"
     End Sub
 
     Private Sub CBDomDel_Click(sender As System.Object, e As System.EventArgs) Handles CBDomDel.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this box is checked, the domme will be able to permanently delete media from your hard drive when such Commands are used in scripts." & Environment.NewLine & _
-            Environment.NewLine & "When this box is NOT checked, media will not actually be deleted. Images will still disappear from the window, but they will not be deleted from the hard drive."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, ist die Domina dazu in der Lage Medien permanent von deiner Festplatte zu löschen, wenn solche Kommandos in dem Script genutzt werden. Wenn dies deaktiviert ist, werden Bilder vom Bildschirm verschwinden, aber nicht von der Festplatte gelöscht."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(CBDomDel, "When this box is checked, the domme will be able to permanently delete" & Environment.NewLine & _
+                                                                    "media from your hard drive when such Commands are used in scripts." & Environment.NewLine & Environment.NewLine & _
+                                                                    "When this box is NOT checked, media will not actually be deleted. Images will still" & Environment.NewLine & _
+                                                                    "disappear from the window, but they will not be deleted from the hard drive.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(CBDomDel, "Wenn dies aktiviert ist, ist die Domina dazu in der Lage Medien permanent von" & Environment.NewLine & _
+                                                                   "deiner Festplatte zu löschen, wenn solche Kommandos in dem Script genutzt werden." & Environment.NewLine & Environment.NewLine & _
+                                                                   "Wenn dies deaktiviert ist, werden Bilder vom Bildschirm" & Environment.NewLine & _
+                                                                   "verschwinden, aber nicht von der Festplatte gelöscht.")
+
+
+
+        'LBLGeneralSettingsDescription.Text = "When this box is checked, the domme will be able to permanently delete media from your hard drive when such Commands are used in scripts." & Environment.NewLine & _
+        '   Environment.NewLine & "When this box is NOT checked, media will not actually be deleted. Images will still disappear from the window, but they will not be deleted from the hard drive."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, ist die Domina dazu in der Lage Medien permanent von deiner Festplatte zu löschen, wenn solche "
+        'Kommandos in dem Script genutzt werden. Wenn dies deaktiviert ist, werden Bilder vom Bildschirm verschwinden, aber nicht von der Festplatte gelöscht."
     End Sub
 
-    Private Sub GBGeneralSettings_MouseHover(sender As Object, e As System.EventArgs) Handles GBGeneralSettings.MouseEnter, PNLGeneralSettings.MouseEnter
-        LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
+    ' Private Sub GBGeneralSettings_MouseHover(sender As Object, e As System.EventArgs) Handles GBGeneralSettings.MouseEnter, PNLGeneralSettings.MouseEnter
+    '    LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
-    End Sub
+    '   If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
+    'End Sub
 
     Private Sub domlevelNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.LostFocus
         My.Settings.DomLevel = domlevelNumBox.Value
@@ -4531,10 +4681,23 @@ NextURL:
     End Sub
 
     Private Sub CBSlideshowSubDir_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBSlideshowSubDir.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, the program will include all subdirectories when you select a folder for slideshow images. When it is unselected, only the images in the top " & _
-            "level of the folder will be used."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird das Programm alle Unterordner mit einbeziehn wenn du ein Ordner für Diashow bilder gewählt hast. Wenn dies deaktiviert ist. Werden nur Bilder des ausgewählten Ordners benutzt"
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(CBSlideshowSubDir, "When this is selected, the program will include all subdirectories" & Environment.NewLine & _
+                                                                             "when you select a folder for domme slideshow images" & Environment.NewLine & Environment.NewLine & _
+                                                                             "When it is unselected, only the images in the top" & Environment.NewLine & _
+                                                                             "level of the folder will be used.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(CBSlideshowSubDir, "Wenn dies aktiviert ist, wird das Programm alle Unterordner mit" & Environment.NewLine & _
+                                                                            "einbeziehn wenn du ein Ordner für Diashow bilder gewählt hast." & Environment.NewLine & Environment.NewLine & _
+                                                                            "Wenn dies deaktiviert ist. Werden nur Bilder" & Environment.NewLine & _
+                                                                            "des ausgewählten Ordners benutzt.")
+
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, the program will include all subdirectories when you select a folder for slideshow images. When it is unselected, only the images in the top " & _
+        '   "level of the folder will be used."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird das Programm alle Unterordner mit einbeziehn wenn du ein Ordner für Diashow bilder gewählt hast. "
+        'Wenn dies deaktiviert ist. Werden nur Bilder des ausgewählten Ordners benutzt"
     End Sub
 
     Private Sub CBSlideshowRandom_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBSlideshowRandom.LostFocus
@@ -4547,57 +4710,117 @@ NextURL:
     End Sub
 
     Private Sub CBSlideshowRandom_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBSlideshowRandom.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, the slideshow will display images randomly. When it is unselected, it will display images in order of their filename."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, werden Diashow Bilder zufällig angezeigt. Wenn dies deaktiviert ist, werden die Bilder in Reihenfolge ihrer Dateinamen gezeigt."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(CBSlideshowRandom, "When this is selected, the slideshow will display images randomly." & Environment.NewLine & _
+                                                                             "When it is unselected, it will display images in order of their filename.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(CBSlideshowRandom, "Wenn dies aktiviert ist, werden Diashow Bilder zufällig angezeigt." & Environment.NewLine & _
+                                                                            " Wenn dies deaktiviert ist, werden die Bilder in Reihenfolge ihrer Dateinamen gezeigt.")
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, the slideshow will display images randomly. When it is unselected, it will display images in order of their filename."
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, werden Diashow Bilder zufällig angezeigt. Wenn dies deaktiviert ist, werden die Bilder in Reihenfolge ihrer Dateinamen gezeigt."
+
     End Sub
 
     Private Sub CBAutosaveChatlog_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBAutosaveChatlog.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, the program will save a chatlog called ""Autosave.html"" any time you or the domme post a message. This log is overwritten each time, so it will only display " & _
-            "a record of the current session. This log can be found in the ""Chatlogs"" directory in the root folder of the program."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, speichert das Programm einen Chatlog („Autosave.html"") immer wenn du oder die Domina eine Nachricht senden. Dieses Log wird jedes Mal überschrieben, so das es nur die Aktuelle Session aufnimmt/anzeigt. Dieses Log befindet sich im Ordner „Chatlogs"" in dem Tease AI Ordner."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(CBAutosaveChatlog, "When this is selected, the program will save a chatlog called" & Environment.NewLine & _
+                                                                             """Autosave.html"" any time you or the domme post a message." & Environment.NewLine & Environment.NewLine & _
+                                                                             "This log is overwritten each time, so it will only display a record of the current session." & Environment.NewLine & _
+                                                                             "This log can be found in the ""Chatlogs"" directory in the root folder of the program.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(CBAutosaveChatlog, "Wenn dies aktiviert ist, speichert das Programm einen Chatlog" & Environment.NewLine & _
+                                                                            "(„Autosave.html"") immer wenn du oder die Domina eine Nachricht senden." & Environment.NewLine & Environment.NewLine & _
+                                                                            "Dieses Log wird jedes Mal überschrieben, so das es nur die Aktuelle Session aufnimmt/anzeigt." & Environment.NewLine & _
+                                                                            "Dieses Log befindet sich im Ordner „Chatlogs"" in dem Tease AI Ordner.")
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, the program will save a chatlog called ""Autosave.html"" any time you or the domme post a message. This log is overwritten each time, so it will only display " & _
+        ' "a record of the current session. This log can be found in the ""Chatlogs"" directory in the root folder of the program."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, speichert das Programm einen Chatlog („Autosave.html"") immer wenn du oder die Domina eine Nachricht senden."
+        ' Dieses Log wird jedes Mal überschrieben, so das es nur die Aktuelle Session aufnimmt/anzeigt. Dieses Log befindet sich im Ordner „Chatlogs"" in dem Tease AI Ordner."
 
     End Sub
 
     Private Sub CBSaveChatlogExit_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBSaveChatlogExit.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, a unique chatlog that includes the date and time will be created whenever you exit the program. This log can be found in the ""Chatlogs"" directory in " & _
-            "the root folder of the program."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, speichert das Programm einen einzigartigen Chatlog, der Datum und Zeit beinhaltet, immer dann wenn du das Programm beendest. Dieses Log befindet sich im Ordner „Chatlogs"" in dem Tease AI Ordner."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(CBSaveChatlogExit, "When this is selected, a unique chatlog that includes the" & Environment.NewLine & _
+                                                                             "date and time will be created whenever you exit the program." & Environment.NewLine & Environment.NewLine & _
+                                                                             "This log can be found in the ""Chatlogs"" directory in the root folder of the program.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(CBSaveChatlogExit, "Wenn dies aktiviert ist, speichert das Programm einen einzigartigen Chatlog," & Environment.NewLine & _
+                                                                            "der Datum und Zeit beinhaltet, immer dann wenn du das Programm beendest." & Environment.NewLine & Environment.NewLine & _
+                                                                            "Dieses Log befindet sich im Ordner „Chatlogs"" in dem Tease AI Ordner.")
+
+
+        ' LBLGeneralSettingsDescription.Text = "When this is selected, a unique chatlog that includes the date and time will be created whenever you exit the program. This log can be found in the ""Chatlogs"" directory in " & _
+        '    "the root folder of the program."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, speichert das Programm einen einzigartigen Chatlog, der Datum und Zeit beinhaltet, immer dann wenn du das "
+        'Programm beendest. Dieses Log befindet sich im Ordner „Chatlogs"" in dem Tease AI Ordner."
     End Sub
 
     Private Sub CBJackInTheBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBAuditStartup.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is checked, the program will automatically audit all scripts in the current domme's directory and fix common errors."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird das Programm automatisch alle Scripts im domina Ordner prüfen und häufige Fehler beheben"
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(CBAuditStartup, "When this is checked, the program will automatically audit all" & Environment.NewLine & _
+                                                                          "scripts in the current domme's directory and fix common errors.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(CBAuditStartup, "Wenn dies aktiviert ist, wird das Programm automatisch alle" & Environment.NewLine & _
+                                                                         "Scripts im domina Ordner prüfen und häufige Fehler beheben.")
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is checked, the program will automatically audit all scripts in the current domme's directory and fix common errors."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird das Programm automatisch alle Scripts im domina Ordner prüfen und häufige Fehler beheben"
     End Sub
 
     Private Sub TBSafeword_MouseHover(sender As System.Object, e As System.EventArgs) Handles TBSafeword.MouseHover
-        LBLGeneralSettingsDescription.Text = "Use this to set the word you would like to use as your safeword. When used by itself during interaction with the domme, it will stop all activity and begin an Interrupt" _
-            & " script where the domme makes sure you're okay to continue."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Gebe hier dein Safeword ein, welches alle Aktivitäten der Domina stopt, bis sie sicher ist, das du weiter machen kannst."
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(TBSafeword, "Use this to set the word you would like to use as your safeword." & Environment.NewLine & Environment.NewLine & _
+                                                                      "When used by itself during interaction with the domme, it will stop all activity" & Environment.NewLine & _
+                                                                      "and begin an Interrupt script where the domme makes sure you're okay to continue.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(TBSafeword, "Gebe hier dein Safeword ein, welches alle Aktivitäten der Domina stopt," & Environment.NewLine & _
+                                                                     "bis sie sicher ist, das du weiter machen kannst.")
+
+        'LBLGeneralSettingsDescription.Text = "Use this to set the word you would like to use as your safeword. When used by itself during interaction with the domme, it will stop all activity and begin an Interrupt" _
+        '   & " script where the domme makes sure you're okay to continue."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Gebe hier dein Safeword ein, welches alle Aktivitäten der Domina stopt, bis sie sicher ist, das du weiter machen kannst."
     End Sub
 
     Private Sub TTSCheckbox_MouseHover(sender As System.Object, e As System.EventArgs) Handles TTSCheckBox.MouseHover
-        LBLGeneralSettingsDescription.Text = "When this is selected, the domme will ""speak"" her lines using whichever TTS voice you have selected. This setting must be manually checked to make the most out of the" _
-            & " Hypnotic Guide app. For privacy reasons, this setting will not be saved through multiple uses of the program. It must be selected each time you start Tease AI and wish to use it."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies Aktiviert ist, wird die Domina ihre Zeilen ""sprechen"" mit welcher TTS stimme du gewählt hast. Diese Einstellung muss Manuel gewählt werden um das meiste aus der Hypnotic Guide app zu machen. Wegen der  Privatsphäre wird diese Einstellung nicht gespeichert, sondern muss bei jedem Start von Tease AI gesondert gewählt werden."
+
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(TTSCheckBox, "When this is selected, the domme will ""speak"" her lines using whichever TTS voice you have selected." & Environment.NewLine & _
+                                                                       "This setting must be manually checked to make the most out of the Hypnotic Guide app." & Environment.NewLine & Environment.NewLine & _
+                                                                       "For privacy reasons, this setting will not be saved through multiple uses of the program." & Environment.NewLine & _
+                                                                       "It must be selected each time you start Tease AI and wish to use it.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(TTSCheckBox, "Wenn dies Aktiviert ist, wird die Domina ihre Zeilen ""sprechen"" mit welcher TTS stimme du gewählt hast." & Environment.NewLine & _
+                                                                      "Diese Einstellung muss Manuel gewählt werden um das meiste aus der Hypnotic Guide app zu machen." & Environment.NewLine & Environment.NewLine & _
+                                                                      "Wegen der Privatsphäre wird diese Einstellung nicht gespeichert," & Environment.NewLine & _
+                                                                      "sondern muss bei jedem Start von Tease AI gesondert gewählt werden.")
+
+
+        'LBLGeneralSettingsDescription.Text = "When this is selected, the domme will ""speak"" her lines using whichever TTS voice you have selected. This setting must be manually checked to make the most out of the" _
+        '   & " Hypnotic Guide app. For privacy reasons, this setting will not be saved through multiple uses of the program. It must be selected each time you start Tease AI and wish to use it."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies Aktiviert ist, wird die Domina ihre Zeilen ""sprechen"" mit welcher TTS stimme du gewählt hast."
+        'Diese Einstellung muss Manuel gewählt werden um das meiste aus der Hypnotic Guide app zu machen. Wegen der Privatsphäre wird diese Einstellung nicht gespeichert,
+        '   sondern muss bei jedem Start von Tease AI gesondert gewählt werden."
     End Sub
 
     Private Sub TTSComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles TTSComboBox.MouseHover
-        LBLGeneralSettingsDescription.Text = "Make a selection from the Text-to-Speech voices installed on your computer."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
+        TTDir.SetToolTip(TTSComboBox, "Make a selection from the Text-to-Speech voices installed on your computer.")
+
+        ' LBLGeneralSettingsDescription.Text = "Make a selection from the Text-to-Speech voices installed on your computer."
+
+        'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
     End Sub
 
-    Private Sub GBGeneralSystem_MouseEnter(sender As System.Object, e As System.EventArgs) Handles GBGeneralSystem.MouseEnter
-        LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
+    'Private Sub GBGeneralSystem_MouseEnter(sender As System.Object, e As System.EventArgs) Handles GBGeneralSystem.MouseEnter
+    '   LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
 
-        If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
-    End Sub
+    '    If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
+    'End Sub
 
 
 #Region " Domme Settings "
@@ -4607,29 +4830,46 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub domageNumBox_MouseHover(sender As Object, e As System.EventArgs) Handles domageNumBox.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets the Domme's age (18-99 years old)." & Environment.NewLine & Environment.NewLine & "This setting mainly affects how the domme describes herself in random conversation. For example, a younger domme might refer to her skin " _
-            & "as tight or smooth, while an older domme might choose words like sensuous. Scripts may also contain keywords and variables that will limit certain paths to certain age groups."
+    Private Sub domageNumBox_MouseHover(sender As Object, e As System.EventArgs) Handles domageNumBox.MouseHover
+
+        TTDir.SetToolTip(domageNumBox, "Sets the Domme's age (18-99 years old).")
+
+        'LblDommeSettingsDescription.Text = "Sets the Domme's age (18-99 years old)." & Environment.NewLine & Environment.NewLine & "This setting mainly affects how the domme describes herself in random conversation. For example, a younger domme might refer to her skin " _
+        ' & "as tight or smooth, while an older domme might choose words like sensuous. Scripts may also contain keywords and variables that will limit certain paths to certain age groups."
     End Sub
 
 
-    Private Sub domlevelNumBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets the Domme's level (1-5)." & Environment.NewLine & Environment.NewLine & "This setting affects the difficulty of the tasks the domme will subject you to. For example, a domme with a higher level may make you hold edges for " _
-            & "longer periods of time, while a domme with a lower level may not make you edge that often. The domme's level is a general guideline of how easy-going or sadistic she can be, not necessarily what she will " _
-            & "choose for you every time."
+    Private Sub domlevelNumBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.MouseHover
+
+        TTDir.SetToolTip(domlevelNumBox, "Sets the Domme's level (1-5)." & Environment.NewLine & Environment.NewLine & _
+                         "This setting affects the difficulty of the tasks the domme will subject you to.")
+
+        'LblDommeSettingsDescription.Text = "Sets the Domme's level (1-5)." & Environment.NewLine & Environment.NewLine & "This setting affects the difficulty of the tasks the domme will subject you to. For example, a domme with a higher level may make you hold edges for " _
+        '   & "longer periods of time, while a domme with a lower level may not make you edge that often. The domme's level is a general guideline of how easy-going or sadistic she can be, not necessarily what she will " _
+        '  & "choose for you every time."
     End Sub
 
-    Private Sub NBEmpathy_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBEmpathy.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets the Domme's Apathy level (1-5)." & Environment.NewLine & Environment.NewLine & "This setting affects how lenient the domme is likely to be with you. For example, a domme with a higher level may rarely take mercy on you or let " _
-            & "you stop a task, while a domme with a lower level may never attempt to push your limits."
+    Private Sub NBEmpathy_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBEmpathy.MouseHover
+
+        TTDir.SetToolTip(NBEmpathy, "Sets the Domme's Apathy level (1-5)." & Environment.NewLine & Environment.NewLine & _
+                       "This setting affects how merciless the domme is likely to be with you")
+
+        'LblDommeSettingsDescription.Text = "Sets the Domme's Apathy level (1-5)." & Environment.NewLine & Environment.NewLine & "This setting affects how lenient the domme is likely to be with you. For example, a domme with a higher level may rarely take mercy on you or let " _
+        '   & "you stop a task, while a domme with a lower level may never attempt to push your limits."
     End Sub
 
-    Private Sub NBDomBirthdayMonth_MouseHover(sender As Object, e As System.EventArgs) Handles NBDomBirthdayMonth.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets the month the domme was born."
+    Private Sub NBDomBirthdayMonth_MouseHover(sender As Object, e As System.EventArgs) Handles NBDomBirthdayMonth.MouseHover
+
+        TTDir.SetToolTip(NBDomBirthdayMonth, "Sets the month the domme was born.")
+
+        'LblDommeSettingsDescription.Text = "Sets the month the domme was born."
     End Sub
 
-    Private Sub NBDomBirthdayDay_MouseHover(sender As Object, e As System.EventArgs) Handles NBDomBirthdayDay.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets the day the domme was born."
+    Private Sub NBDomBirthdayDay_MouseHover(sender As Object, e As System.EventArgs) Handles NBDomBirthdayDay.MouseHover
+
+        TTDir.SetToolTip(NBDomBirthdayDay, "Sets the day the domme was born.")
+
+        'LblDommeSettingsDescription.Text = "Sets the day the domme was born."
     End Sub
 
     Private Sub TBDomHairColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBDomHairColor.LostFocus
@@ -4638,8 +4878,11 @@ NextURL:
     End Sub
 
     Private Sub domhairComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles TBDomHairColor.MouseHover
-        LblDommeSettingsDescription.Text = "Sets the Domme's hair color." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to her hair color over the course of the tease. Set this value to the color " & _
-            "of the slideshow model's hair to enhance immersion."
+
+        TTDir.SetToolTip(TBDomHairColor, "Sets the domme's hair color.")
+
+        'LblDommeSettingsDescription.Text = "Sets the Domme's hair color." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to her hair color over the course of the tease. Set this value to the color " & _
+        ' "of the slideshow model's hair to enhance immersion."
     End Sub
 
     Private Sub domhairlengthComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domhairlengthComboBox.LostFocus
@@ -4647,9 +4890,12 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub domhairlengthComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles domhairlengthComboBox.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets the Domme's hair length." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to her hair length over the course of the tease. Set this value to the length " & _
-            "of the slideshow model's hair to enhance immersion."
+    Private Sub domhairlengthComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles domhairlengthComboBox.MouseHover
+
+        TTDir.SetToolTip(domhairlengthComboBox, "Sets the domme's hair length.")
+
+        'LblDommeSettingsDescription.Text = "Sets the Domme's hair length." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to her hair length over the course of the tease. Set this value to the length " & _
+        '   "of the slideshow model's hair to enhance immersion."
     End Sub
 
     Private Sub TBDomEyeColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBDomEyeColor.LostFocus
@@ -4658,8 +4904,11 @@ NextURL:
     End Sub
 
     Private Sub domeyesComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles TBDomEyeColor.MouseHover
-        LblDommeSettingsDescription.Text = "Sets the Domme's eye color." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to her eye color over the course of the tease. Set this value to the color " & _
-            "of the slideshow model's eyes to enhance immersion."
+
+        TTDir.SetToolTip(TBDomEyeColor, "Sets the domme's eye color.")
+
+        'LblDommeSettingsDescription.Text = "Sets the Domme's eye color." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to her eye color over the course of the tease. Set this value to the color " & _
+        '   "of the slideshow model's eyes to enhance immersion."
     End Sub
 
     Private Sub boobComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles boobComboBox.LostFocus
@@ -4667,9 +4916,12 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub boobComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles boobComboBox.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets the Domme's cup size." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to the size of her breasts over the course of the tease. Set this value to the " & _
-            "slideshow model's cup size to enhance immersion."
+    Private Sub boobComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles boobComboBox.MouseHover
+
+        TTDir.SetToolTip(boobComboBox, "Sets the Domme's cup size.")
+
+        'LblDommeSettingsDescription.Text = "Sets the Domme's cup size." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to the size of her breasts over the course of the tease. Set this value to the " & _
+        '   "slideshow model's cup size to enhance immersion."
     End Sub
 
     Private Sub dompubichairComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles dompubichairComboBox.LostFocus
@@ -4677,15 +4929,18 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub dompubichairComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles dompubichairComboBox.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets description of the Domme's pubic hair." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to her pubic hair over the course of the tease. Set this value to a description " & _
-            "of the slideshow model's pubic hair to enhance immersion."
+    Private Sub dompubichairComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles dompubichairComboBox.MouseHover
+
+        TTDir.SetToolTip(dompubichairComboBox, "Sets description of the Domme's pubic hair.")
+
+        'LblDommeSettingsDescription.Text = "Sets description of the Domme's pubic hair." & Environment.NewLine & Environment.NewLine & "The domme may sometimes refer to her pubic hair over the course of the tease. Set this value to a description " & _
+        '  "of the slideshow model's pubic hair to enhance immersion."
     End Sub
 
-    Private Sub dompersonalityComboBox_MouseHover(sender As System.Object, e As System.EventArgs)
-        LblDommeSettingsDescription.Text = "Sets the Domme's personality to a type you have created or downloaded." & Environment.NewLine & Environment.NewLine & "Different personalities allow for varied experiences while using " & _
-            "this program. For best results, this value should only be changed before greeting the domme."
-    End Sub
+    ' Private Sub dompersonalityComboBox_MouseHover(sender As System.Object, e As System.EventArgs)
+    ' LblDommeSettingsDescription.Text = "Sets the Domme's personality to a type you have created or downloaded." & Environment.NewLine & Environment.NewLine & "Different personalities allow for varied experiences while using " & _
+    '     "this program. For best results, this value should only be changed before greeting the domme."
+    ' End Sub
 
     Private Sub crazyCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles crazyCheckBox.LostFocus
         If crazyCheckBox.Checked = True Then
@@ -4696,9 +4951,13 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub crazyCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles crazyCheckBox.MouseEnter
-        LblDommeSettingsDescription.Text = "Gives the Domme the Crazy trait." & Environment.NewLine & Environment.NewLine & "This will open up dialogue options that suggest the domme is a little unhinged. " & _
-            "Scripts may also contain keywords and variables that will limit certain paths to this trait."
+    Private Sub crazyCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles crazyCheckBox.MouseHover
+
+        TTDir.SetToolTip(crazyCheckBox, "Gives the Domme the Crazy trait." & Environment.NewLine & Environment.NewLine & _
+                     "This will open up dialogue options that suggest the domme is a little unhinged.")
+
+        'LblDommeSettingsDescription.Text = "Gives the Domme the Crazy trait." & Environment.NewLine & Environment.NewLine & "This will open up dialogue options that suggest the domme is a little unhinged. " & _
+        '   "Scripts may also contain keywords and variables that will limit certain paths to this trait."
     End Sub
 
     Private Sub CBDomTattoos_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBDomTattoos.LostFocus
@@ -4710,9 +4969,12 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub CBDomTattoos_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomTattoos.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets whether the domme has tattoos." & Environment.NewLine & Environment.NewLine & "This will open up dialogue options that involve the domme being tattooed. " & _
-            "Scripts may also contain keywords and variables that will limit certain paths to this trait."
+    Private Sub CBDomTattoos_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomTattoos.MouseHover
+
+        TTDir.SetToolTip(CBDomTattoos, "Sets whether the domme has tattoos.")
+
+        'LblDommeSettingsDescription.Text = "Sets whether the domme has tattoos." & Environment.NewLine & Environment.NewLine & "This will open up dialogue options that involve the domme being tattooed. " & _
+        ' "Scripts may also contain keywords and variables that will limit certain paths to this trait."
     End Sub
 
 
@@ -4725,9 +4987,12 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub CBDomFreckles_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomFreckles.MouseEnter
-        LblDommeSettingsDescription.Text = "Sets whether the domme has freckles." & Environment.NewLine & Environment.NewLine & "This will open up dialogue options that involve the domme having freckles. " & _
-            "Scripts may also contain keywords and variables that will limit certain paths to this trait."
+    Private Sub CBDomFreckles_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomFreckles.MouseHover
+
+        TTDir.SetToolTip(CBDomTattoos, "Sets whether the domme has freckles.")
+
+        'LblDommeSettingsDescription.Text = "Sets whether the domme has freckles." & Environment.NewLine & Environment.NewLine & "This will open up dialogue options that involve the domme having freckles. " & _
+        '   "Scripts may also contain keywords and variables that will limit certain paths to this trait."
     End Sub
 
     Private Sub vulgarCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles vulgarCheckBox.LostFocus
@@ -4739,9 +5004,13 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub vulgarCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles vulgarCheckBox.MouseEnter
-        LblDommeSettingsDescription.Text = "Gives the Domme the Vulgar trait." & Environment.NewLine & Environment.NewLine & "This will open up vulgar dialogue options for the domme. She will include words like ""titties"" and " & _
-            """gonads"" while a more reserved domme may limit herself to ""tits"" and ""balls"". Scripts may also contain keywords and variables that will limit certain paths to this trait."
+    Private Sub vulgarCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles vulgarCheckBox.MouseHover
+
+        TTDir.SetToolTip(vulgarCheckBox, "Gives the Domme the Vulgar trait." & Environment.NewLine & Environment.NewLine & _
+                  "This will open up vulgar dialogue options for the domme.")
+
+        'LblDommeSettingsDescription.Text = "Gives the Domme the Vulgar trait." & Environment.NewLine & Environment.NewLine & "This will open up vulgar dialogue options for the domme. She will include words like ""titties"" and " & _
+        ' """gonads"" while a more reserved domme may limit herself to ""tits"" and ""balls"". Scripts may also contain keywords and variables that will limit certain paths to this trait."
     End Sub
 
     Private Sub supremacistCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles supremacistCheckBox.LostFocus
@@ -4753,9 +5022,14 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub supremacistCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles supremacistCheckBox.MouseEnter
-        LblDommeSettingsDescription.Text = "Gives the Domme the Supremacist trait." & Environment.NewLine & Environment.NewLine & "This will open up dialogue options that suggest the domme considers herself inherently superior " & _
-            "to you. Scripts may also contain keywords and variables that will limit certain paths to this trait."
+    Private Sub supremacistCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles supremacistCheckBox.MouseHover
+
+        TTDir.SetToolTip(supremacistCheckBox, "Gives the Domme the Supremacist trait." & Environment.NewLine & Environment.NewLine & _
+                                         "This will open up dialogue options that suggest the" & Environment.NewLine & _
+                                         "domme considers herself inherently superior to you.")
+
+        ' LblDommeSettingsDescription.Text = "Gives the Domme the Supremacist trait." & Environment.NewLine & Environment.NewLine & "This will open up dialogue options that suggest the domme considers herself inherently superior " & _
+        '    "to you. Scripts may also contain keywords and variables that will limit certain paths to this trait."
     End Sub
 
     Private Sub LCaseCheckBoxCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles LCaseCheckBox.LostFocus
@@ -4768,15 +5042,29 @@ NextURL:
     End Sub
 
     Private Sub alloworgasmComboBox_MouseHover(sender As Object, e As System.EventArgs) Handles alloworgasmComboBox.MouseHover
-        LblDommeSettingsDescription.Text = "Sets how often the domme allows the user to have an orgasm during End scripts." & Environment.NewLine & Environment.NewLine & "To further define these parameters, use the options in the Ranges tab."
+
+        TTDir.SetToolTip(alloworgasmComboBox, "Sets how often the domme allows the user to have an orgasm during End scripts." & Environment.NewLine & Environment.NewLine & _
+                                              "To further define these parameters, use the options in the Ranges tab.")
+
+
+        'LblDommeSettingsDescription.Text = "Sets how often the domme allows the user to have an orgasm during End scripts." & Environment.NewLine & Environment.NewLine & "To further define these parameters, use the options in the Ranges tab."
     End Sub
 
     Private Sub ruinorgasmComboBox_MouseHover(sender As Object, e As System.EventArgs) Handles ruinorgasmComboBox.MouseHover
-        LblDommeSettingsDescription.Text = "Sets how often the domme will ruin the user's orgasm during End scripts." & Environment.NewLine & Environment.NewLine & "To further define these parameters, use the options in the Ranges tab."
+
+        TTDir.SetToolTip(ruinorgasmComboBox, "Sets how often the domme will ruin the user's orgasm during End scripts." & Environment.NewLine & Environment.NewLine & _
+                                              "To further define these parameters, use the options in the Ranges tab.")
+
+        'LblDommeSettingsDescription.Text = "Sets how often the domme will ruin the user's orgasm during End scripts." & Environment.NewLine & Environment.NewLine & "To further define these parameters, use the options in the Ranges tab."
     End Sub
 
-    Private Sub LCaseCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles LCaseCheckBox.MouseEnter
-        LblDommeSettingsDescription.Text = "When this is checked, the domme won't use capital letters when she types." & Environment.NewLine & Environment.NewLine & "She will still capitalize Me/My/Mine if that box is checked."
+    Private Sub LCaseCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles LCaseCheckBox.MouseHover
+
+        TTDir.SetToolTip(LCaseCheckBox, "When this is checked, the domme won't use capital letters when she types." & Environment.NewLine & Environment.NewLine & _
+                                         "She will still capitalize Me/My/Mine if that box is checked.")
+
+
+        'LblDommeSettingsDescription.Text = "When this is checked, the domme won't use capital letters when she types." & Environment.NewLine & Environment.NewLine & "She will still capitalize Me/My/Mine if that box is checked."
     End Sub
 
     Private Sub apostropheCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles apostropheCheckBox.LostFocus
@@ -4788,8 +5076,11 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub apostropheCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles apostropheCheckBox.MouseEnter
-        LblDommeSettingsDescription.Text = "When this is checked, the domme won't use apostrophes when she types."
+    Private Sub apostropheCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles apostropheCheckBox.MouseHover
+
+        TTDir.SetToolTip(apostropheCheckBox, "When this is checked, the domme won't use apostrophes when she types.")
+
+        'LblDommeSettingsDescription.Text = "When this is checked, the domme won't use apostrophes when she types."
     End Sub
 
     Private Sub commaCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles commaCheckBox.LostFocus
@@ -4801,8 +5092,11 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub commaCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles commaCheckBox.MouseEnter
-        LblDommeSettingsDescription.Text = "When this is checked, the domme won't use commas when she types."
+    Private Sub commaCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles commaCheckBox.MouseHover
+
+        TTDir.SetToolTip(commaCheckBox, "When this is checked, the domme won't use commas when she types.")
+
+        'LblDommeSettingsDescription.Text = "When this is checked, the domme won't use commas when she types."
     End Sub
 
     Private Sub periodCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles periodCheckBox.LostFocus
@@ -4814,8 +5108,11 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub periodCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles periodCheckBox.MouseEnter
-        LblDommeSettingsDescription.Text = "When this is checked, the domme won't use periods when she types."
+    Private Sub periodCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles periodCheckBox.MouseHover
+
+        TTDir.SetToolTip(periodCheckBox, "When this is checked, the domme won't use periods when she types.")
+
+        'LblDommeSettingsDescription.Text = "When this is checked, the domme won't use periods when she types."
     End Sub
 
     Private Sub CBMeMyMine_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBMeMyMine.LostFocus
@@ -4827,9 +5124,9 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub CBMeMyMine_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBMeMyMine.MouseEnter
-        LblDommeSettingsDescription.Text = "When this is checked, the domme will always capitalize ""Me, My and Mine""." & Environment.NewLine & Environment.NewLine & _
-            "If the lowercase typing option is checked, she will also capitalize ""I, I'm, I'd and I'll""."
+    Private Sub CBMeMyMine_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBMeMyMine.MouseHover
+        TTDir.SetToolTip(CBMeMyMine, "When this is checked, the domme will always capitalize ""Me, My and Mine""." & Environment.NewLine & Environment.NewLine & _
+           "If the lowercase typing option is checked, she will also capitalize ""I, I'm, I'd and I'll"".")
     End Sub
 
     Private Sub domemoteComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domemoteComboBox.LostFocus
@@ -4837,8 +5134,8 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub domemoteComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles domemoteComboBox.MouseEnter
-        LblDommeSettingsDescription.Text = "This determines what symbols the domme uses to emote."
+    Private Sub domemoteComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles domemoteComboBox.MouseHover
+        TTDir.SetToolTip(domemoteComboBox, "This determines what symbols the domme uses to emote.")
     End Sub
 
     Private Sub CBDomDenialEnds_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBDomDenialEnds.LostFocus
@@ -4850,9 +5147,10 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub CBDomDenialEnds_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomDenialEnds.MouseEnter
-        LblDommeSettingsDescription.Text = "Determines whether the domme will keep teasing you after you have been denied." & Environment.NewLine & Environment.NewLine & _
-            "If this box is checked, she will end the tease after she decides to deny your orgasm. If it is unchecked, she may choose to start teasing you all over again."
+    Private Sub CBDomDenialEnds_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomDenialEnds.MouseHover
+        TTDir.SetToolTip(CBDomDenialEnds, "Determines whether the domme will keep teasing you after you have been denied." & Environment.NewLine & Environment.NewLine & _
+            "If this box is checked, she will end the tease after she decides to deny your orgasm." & Environment.NewLine & _
+            "If it is unchecked, she may choose to start teasing you all over again.")
     End Sub
 
     Private Sub CBDomOrgasmEnds_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBDomOrgasmEnds.LostFocus
@@ -4864,20 +5162,50 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub CBDomOrgasmEnds_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomOrgasmEnds.MouseEnter
-        LblDommeSettingsDescription.Text = "Determines whether the domme will keep teasing you after you have an orgasm." & Environment.NewLine & Environment.NewLine & _
-            "If this box is checked, she will end the tease after she allows you to cum. If it is unchecked, she may choose to start teasing you all over again."
+    Private Sub CBDomOrgasmEnds_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomOrgasmEnds.MouseHover
+        TTDir.SetToolTip(CBDomOrgasmEnds, "Determines whether the domme will keep teasing you after you have an orgasm." & Environment.NewLine & Environment.NewLine & _
+             "If this box is checked, she will end the tease after she allows you to cum." & Environment.NewLine & _
+             "If it is unchecked, she may choose to start teasing you all over again.")
+    End Sub
+
+    Private Sub LockOrgasm_MouseHover(sender As System.Object, e As System.EventArgs) Handles orgasmsperlockButton.MouseHover
+        TTDir.SetToolTip(orgasmsperlockButton, "When this arrangement is selected, the domme will limit the number of" & Environment.NewLine & _
+                                                "orgasms she allows you to have according to the parameters you set." & Environment.NewLine & Environment.NewLine & _
+                                                "This will not be finalized until the Limit box is checked and you click ""Lock Selected""." & Environment.NewLine & _
+                                                "Once an orgasm limit has been finalized, it cannot be undone until the period of time is up!")
+    End Sub
+
+    Private Sub limitcheckbox_MouseHover(sender As System.Object, e As System.EventArgs) Handles limitcheckbox.MouseHover
+        TTDir.SetToolTip(limitcheckbox, "When this arrangement is selected, the domme will limit the number of" & Environment.NewLine & _
+                                                "orgasms she allows you to have according to the parameters you set." & Environment.NewLine & Environment.NewLine & _
+                                                "This will not be finalized until the Limit box is checked and you click ""Lock Selected""." & Environment.NewLine & _
+                                                "Once an orgasm limit has been finalized, it cannot be undone until the period of time is up!")
+    End Sub
+
+    Private Sub orgasmsPerNumBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles orgasmsPerNumBox.MouseHover
+        TTDir.SetToolTip(orgasmsPerNumBox, "When this arrangement is selected, the domme will limit the number of" & Environment.NewLine & _
+                                                "orgasms she allows you to have according to the parameters you set." & Environment.NewLine & Environment.NewLine & _
+                                                "This will not be finalized until the Limit box is checked and you click ""Lock Selected""." & Environment.NewLine & _
+                                                "Once an orgasm limit has been finalized, it cannot be undone until the period of time is up!")
+    End Sub
+
+    Private Sub orgasmsperComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles orgasmsperComboBox.MouseHover
+        TTDir.SetToolTip(orgasmsperComboBox, "When this arrangement is selected, the domme will limit the number of" & Environment.NewLine & _
+                                                "orgasms she allows you to have according to the parameters you set." & Environment.NewLine & Environment.NewLine & _
+                                                "This will not be finalized until the Limit box is checked and you click ""Lock Selected""." & Environment.NewLine & _
+                                                "Once an orgasm limit has been finalized, it cannot be undone until the period of time is up!")
     End Sub
 
 
-    Private Sub LockOrgasm_MouseHover(sender As System.Object, e As System.EventArgs) Handles limitcheckbox.MouseEnter, orgasmsPerNumBox.MouseEnter, orgasmsperComboBox.MouseEnter, orgasmsperlockButton.MouseEnter
-        LblDommeSettingsDescription.Text = "When this arrangement is selected, the domme will limit the number of orgasms she allows you to have according to the parameters you set." & Environment.NewLine & Environment.NewLine & _
-            "This will not be finalized until the Limit box is checked and you click ""Lock Selected"". Once an orgasm limit has been finalized, it cannot be undone until the period of time is up!"
-    End Sub
 
-    Private Sub LockRandomOrgasm_MouseHover(sender As System.Object, e As System.EventArgs) Handles orgasmlockrandombutton.MouseEnter
-        LblDommeSettingsDescription.Text = "When this button is clicked, the domme will randomly limit the number of orgasms she allows you to have for a random period of time." & Environment.NewLine & Environment.NewLine & _
-            "Her choice will be based on her level, so be careful. A higher level domme could limit the amount of orgasms you have for up to a year! Once you confirm this choice, it cannot be undone until the period of time is up!"
+    Private Sub LockRandomOrgasm_MouseHover(sender As System.Object, e As System.EventArgs) Handles orgasmlockrandombutton.MouseHover
+
+        TTDir.SetToolTip(orgasmsperComboBox, "When this arrangement is selected, the domme will randomly limit the" & Environment.NewLine & _
+                                              "number of orgasms she allows you to have for a random period of time." & Environment.NewLine & Environment.NewLine & _
+                                              "Once you confirm this choice, it cannot be undone until the period of time is up!")
+
+        'LblDommeSettingsDescription.Text = "When this button is clicked, the domme will randomly limit the number of orgasms she allows you to have for a random period of time." & Environment.NewLine & Environment.NewLine & _
+        '   "Her choice will be based on her level, so be careful. A higher level domme could limit the amount of orgasms you have for up to a year! Once you confirm this choice, it cannot be undone until the period of time is up!"
     End Sub
 
     Private Sub NBDomMoodMin_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMin.LostFocus
@@ -4885,9 +5213,17 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub NBDomMoodMin_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMin.MouseEnter
-        LblDommeSettingsDescription.Text = "Determines the low range of the domme's mood index. The domme's mood may affect certain dialogue choices or outcomes." & Environment.NewLine & Environment.NewLine & _
-            "The higher this number is, the easier it is to put her in a bad mood. Setting this value to ""1"" will prevent the domme from ever being in a bad mood."
+    Private Sub NBDomMoodMin_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMin.MouseHover
+
+        TTDir.SetToolTip(NBDomMoodMin, "Determines the low range of the domme's mood index." & Environment.NewLine & _
+                                       "The domme's mood may affect certain dialogue choices or outcomes." & Environment.NewLine & Environment.NewLine & _
+                                       "The higher this number is, the easier it is to put her in a bad mood." & Environment.NewLine & _
+                                       "Setting this value to ""1"" will prevent the domme from ever being in a bad mood.")
+
+
+
+        'LblDommeSettingsDescription.Text = "Determines the low range of the domme's mood index. The domme's mood may affect certain dialogue choices or outcomes." & Environment.NewLine & Environment.NewLine & _
+        '   "The higher this number is, the easier it is to put her in a bad mood. Setting this value to ""1"" will prevent the domme from ever being in a bad mood."
     End Sub
 
     Private Sub NBDomMoodMax_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMax.LostFocus
@@ -4895,9 +5231,17 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub NBDomMoodMax_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMax.MouseEnter
-        LblDommeSettingsDescription.Text = "Determines the high range of the domme's mood index. The domme's mood may affect certain dialogue choices or outcomes." & Environment.NewLine & Environment.NewLine & _
-            "The lower this number is, the easier it is to put her in an especially great mood. Setting this value to ""10"" will prevent the domme from ever being in an especially great mood."
+    Private Sub NBDomMoodMax_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMax.MouseHover
+
+        TTDir.SetToolTip(NBDomMoodMax, "Determines the high range of the domme's mood index." & Environment.NewLine & _
+                                    "The domme's mood may affect certain dialogue choices or outcomes." & Environment.NewLine & Environment.NewLine & _
+                                    "The lower this number is, the easier it is to put her in a good mood." & Environment.NewLine & _
+                                    "Setting this value to ""10"" will prevent the domme from ever being in an especially great mood.")
+
+
+
+        'LblDommeSettingsDescription.Text = "Determines the high range of the domme's mood index. The domme's mood may affect certain dialogue choices or outcomes." & Environment.NewLine & Environment.NewLine & _
+        '   "The lower this number is, the easier it is to put her in an especially great mood. Setting this value to ""10"" will prevent the domme from ever being in an especially great mood."
     End Sub
 
     Private Sub NBDomMoodMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMin.ValueChanged
@@ -4913,9 +5257,9 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub NBAvgCockMin_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMin.MouseEnter
-        LblDommeSettingsDescription.Text = "Determines the lowest range of what the domme considers an average cock size." & Environment.NewLine & Environment.NewLine & _
-            "If your cock size has been set to a value lower than this number, the domme will consider your cock small. Having a small cock will open up certain dialogue options and outcomes that are likely to include elements of small penis humiliation, depending on the selected personality type."
+    Private Sub NBAvgCockMin_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMin.MouseHover
+        TTDir.SetToolTip(NBAvgCockMin, "Determines the lowest range of what the domme considers an average cock size." & Environment.NewLine & Environment.NewLine & _
+                                       "If your cock size is lower then this, the domme will consider it small.")
     End Sub
 
     Private Sub NBAvgCockMax_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMax.LostFocus
@@ -4923,9 +5267,9 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub NBAvgCockMax_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMax.MouseEnter
-        LblDommeSettingsDescription.Text = "Determines the highest range of what the domme considers an average cock size." & Environment.NewLine & Environment.NewLine & _
-            "If your cock size has been set to a value higher than this number, the domme will consider your cock big. Having a big cock will open up certain dialogue options and outcomes, depending on the selected personality type."
+    Private Sub NBAvgCockMax_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMax.MouseHover
+        TTDir.SetToolTip(NBAvgCockMin, "Determines the highest range of what the domme considers an average cock size." & Environment.NewLine & Environment.NewLine & _
+           "If your cock size is higher than this, the domme will consider it big.")
     End Sub
 
     Private Sub NBAvgCockMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMin.ValueChanged
@@ -4941,9 +5285,11 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub NBSelfAgeMin_Enter(sender As Object, e As System.EventArgs) Handles NBSelfAgeMin.MouseEnter
-        LblDommeSettingsDescription.Text = "This is the age range that the domme considers ""not that young, but not that old""." & Environment.NewLine & Environment.NewLine & _
-            "If the domme's age is below this number, she will use dialogue options that suggest having the maturity and body of a girl in her early twenties. Scripts may also contain keywords and variables that will limit certain paths to this trait."
+    Private Sub NBSelfAgeMin_Enter(sender As Object, e As System.EventArgs) Handles NBSelfAgeMin.MouseHover
+
+        TTDir.SetToolTip(NBSelfAgeMin, "This is the age range that the domme considers ""not that young, but not that old""." & Environment.NewLine & Environment.NewLine & _
+                                       "If the domme's age is below this number, she will use dialogue options that suggest" & Environment.NewLine & _
+                                       "having the maturity and body of a girl in her early twenties.")
     End Sub
 
     Private Sub NBSelfAgeMax_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBSelfAgeMax.LostFocus
@@ -4951,9 +5297,11 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub NBSelfAgeMax_Enter(sender As Object, e As System.EventArgs) Handles NBSelfAgeMax.MouseEnter
-        LblDommeSettingsDescription.Text = "This is the age range that the domme considers ""not that young, but not that old""." & Environment.NewLine & Environment.NewLine & _
-                "If the domme's age is above this number, she will use dialogue options that suggest an exceptional amount of maturity, or having an aging body. Scripts may also contain keywords and variables that will limit certain paths to this trait."
+    Private Sub NBSelfAgeMax_Enter(sender As Object, e As System.EventArgs) Handles NBSelfAgeMax.MouseHover
+
+        TTDir.SetToolTip(NBSelfAgeMax, "This is the age range that the domme considers ""not that young, but not that old""." & Environment.NewLine & Environment.NewLine & _
+               "If the domme's age is above this number, she will use dialogue options that suggest" & Environment.NewLine & _
+               "an exceptional amount of maturity, or having an aging body.")
     End Sub
 
     Private Sub NBSelfAgeMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBSelfAgeMin.ValueChanged
@@ -4969,9 +5317,10 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub NBSubAgeMin_Enter(sender As Object, e As System.EventArgs) Handles NBSubAgeMin.MouseEnter
-        LblDommeSettingsDescription.Text = "This is the age range that the domme considers ""not that young, but not that old""." & Environment.NewLine & Environment.NewLine & _
-            "If your age is below this number, the domme will use dialogue options that suggest you have the virility and body of a male in his early twenties. Scripts may also contain keywords and variables that will limit certain paths to this trait."
+    Private Sub NBSubAgeMin_Enter(sender As Object, e As System.EventArgs) Handles NBSubAgeMin.MouseHover
+        TTDir.SetToolTip(NBSubAgeMin, "This is the age range that the domme considers ""not that young, but not that old""." & Environment.NewLine & Environment.NewLine & _
+            "If your age is below this number, the domme will use dialogue options that suggest" & Environment.NewLine & _
+            "you have the virility and body of a male in his early twenties.")
     End Sub
 
     Private Sub NBSubAgeMax_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBSubAgeMax.LostFocus
@@ -4979,9 +5328,10 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-    Private Sub NBSubAgeMax_Enter(sender As Object, e As System.EventArgs) Handles NBSubAgeMax.MouseEnter
-        LblDommeSettingsDescription.Text = "This is the age range that the domme considers ""not that young, but not that old""." & Environment.NewLine & Environment.NewLine & _
-                "If your age is above this number, the domme will use dialogue options that suggest you're over the hill. Scripts may also contain keywords and variables that will limit certain paths to this trait."
+    Private Sub NBSubAgeMax_Enter(sender As Object, e As System.EventArgs) Handles NBSubAgeMax.MouseHover
+        TTDir.SetToolTip(NBSubAgeMax, "This is the age range that the domme considers ""not that young, but not that old""." & Environment.NewLine & Environment.NewLine & _
+                                      "If your age is above this number, the domme will use dialogue options that suggest" & Environment.NewLine & _
+                                      "you're over the hill.")
     End Sub
 
     Private Sub NBSubAgeMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBSubAgeMin.ValueChanged
@@ -4992,87 +5342,56 @@ NextURL:
         If NBSubAgeMax.Value < NBSubAgeMin.Value Then NBSubAgeMax.Value = NBSubAgeMin.Value
     End Sub
 
-    Private Sub PetNameBox1_Enter(sender As Object, e As System.EventArgs) Handles petnameBox1.MouseEnter
-        LblDommeSettingsDescription.Text = "Enter a pet name that the domme will call you when she's in a great mood." & Environment.NewLine & Environment.NewLine & _
-                "For a fun-loving domme, you could use names like ""darling"" or ""pet"", while a crueller domme might use names such as ""loser"" or ""bitch boy"". The same pet name can be used multiple times to increase " & _
-                "the chance of being used. All pet name boxes must be filled in."
+    Private Sub PetNameBox1_Enter(sender As Object, e As System.EventArgs) Handles petnameBox1.MouseHover
+        TTDir.SetToolTip(petnameBox1, "Enter a pet name that the domme will call you when she's in a great mood." & Environment.NewLine & Environment.NewLine & _
+                                      "All pet name boxes must be filled in.")
     End Sub
 
-    Private Sub PetNameBox2_Enter(sender As Object, e As System.EventArgs) Handles petnameBox2.MouseEnter
-        LblDommeSettingsDescription.Text = "Enter a pet name that the domme will call you when she's in a great mood." & Environment.NewLine & Environment.NewLine & _
-                "For a fun-loving domme, you could use names like ""darling"" or ""pet"", while a crueller domme might use names such as ""loser"" or ""bitch boy"". The same pet name can be used multiple times to increase " & _
-                "the chance of being used. All pet name boxes must be filled in."
+    Private Sub PetNameBox2_Enter(sender As Object, e As System.EventArgs) Handles petnameBox2.MouseHover
+        TTDir.SetToolTip(petnameBox2, "Enter a pet name that the domme will call you when she's in a great mood." & Environment.NewLine & Environment.NewLine & _
+                                        "All pet name boxes must be filled in.")
     End Sub
 
-    Private Sub PetNameBox3_Enter(sender As Object, e As System.EventArgs) Handles petnameBox3.MouseEnter
-        LblDommeSettingsDescription.Text = "Enter a pet name that the domme will call you when she's in a neutral mood." & Environment.NewLine & Environment.NewLine & _
-                "For a fun-loving domme, you could use names like ""darling"" or ""pet"", while a crueller domme might use names such as ""loser"" or ""bitch boy"". The same pet name can be used multiple times to increase " & _
-                "the chance of being used. All pet name boxes must be filled in."
+    Private Sub PetNameBox3_Enter(sender As Object, e As System.EventArgs) Handles petnameBox3.MouseHover
+        TTDir.SetToolTip(petnameBox3, "Enter a pet name that the domme will call you when she's in a neutral mood." & Environment.NewLine & Environment.NewLine & _
+                                       "All pet name boxes must be filled in.")
     End Sub
 
-    Private Sub PetNameBox4_Enter(sender As Object, e As System.EventArgs) Handles petnameBox4.MouseEnter
-        LblDommeSettingsDescription.Text = "Enter a pet name that the domme will call you when she's in a neutral mood." & Environment.NewLine & Environment.NewLine & _
-                "For a fun-loving domme, you could use names like ""darling"" or ""pet"", while a crueller domme might use names such as ""loser"" or ""bitch boy"". The same pet name can be used multiple times to increase " & _
-                "the chance of being used. All pet name boxes must be filled in."
+    Private Sub PetNameBox4_Enter(sender As Object, e As System.EventArgs) Handles petnameBox4.MouseHover
+        TTDir.SetToolTip(petnameBox4, "Enter a pet name that the domme will call you when she's in a neutral mood." & Environment.NewLine & Environment.NewLine & _
+                                      "All pet name boxes must be filled in.")
     End Sub
 
-    Private Sub PetNameBox5_Enter(sender As Object, e As System.EventArgs) Handles petnameBox5.MouseEnter
-        LblDommeSettingsDescription.Text = "Enter a pet name that the domme will call you when she's in a neutral mood." & Environment.NewLine & Environment.NewLine & _
-                "For a fun-loving domme, you could use names like ""darling"" or ""pet"", while a crueller domme might use names such as ""loser"" or ""bitch boy"". The same pet name can be used multiple times to increase " & _
-                "the chance of being used. All pet name boxes must be filled in."
+    Private Sub PetNameBox5_Enter(sender As Object, e As System.EventArgs) Handles petnameBox5.MouseHover
+        TTDir.SetToolTip(petnameBox5, "Enter a pet name that the domme will call you when she's in a neutral mood." & Environment.NewLine & Environment.NewLine & _
+                                             "All pet name boxes must be filled in.")
     End Sub
 
-    Private Sub PetNameBox6_Enter(sender As Object, e As System.EventArgs) Handles petnameBox6.MouseEnter
-        LblDommeSettingsDescription.Text = "Enter a pet name that the domme will call you when she's in a neutral mood." & Environment.NewLine & Environment.NewLine & _
-                "For a fun-loving domme, you could use names like ""darling"" or ""pet"", while a crueller domme might use names such as ""loser"" or ""bitch boy"". The same pet name can be used multiple times to increase " & _
-                "the chance of being used. All pet name boxes must be filled in."
+    Private Sub PetNameBox6_Enter(sender As Object, e As System.EventArgs) Handles petnameBox6.MouseHover
+        TTDir.SetToolTip(petnameBox6, "Enter a pet name that the domme will call you when she's in a neutral mood." & Environment.NewLine & Environment.NewLine & _
+                                     "All pet name boxes must be filled in.")
     End Sub
 
 
-    Private Sub PetNameBox7_Enter(sender As Object, e As System.EventArgs) Handles petnameBox7.MouseEnter
-        LblDommeSettingsDescription.Text = "Enter a pet name that the domme will call you when she's in a bad mood." & Environment.NewLine & Environment.NewLine & _
-                "For a fun-loving domme, you could use names like ""darling"" or ""pet"", while a crueller domme might use names such as ""loser"" or ""bitch boy"". The same pet name can be used multiple times to increase " & _
-                "the chance of being used. All pet name boxes must be filled in."
+    Private Sub PetNameBox7_Enter(sender As Object, e As System.EventArgs) Handles petnameBox7.MouseHover
+        TTDir.SetToolTip(petnameBox7, "Enter a pet name that the domme will call you when she's in a bad mood." & Environment.NewLine & Environment.NewLine & _
+                                     "All pet name boxes must be filled in.")
     End Sub
 
 
-    Private Sub PetNameBox8_Enter(sender As Object, e As System.EventArgs) Handles petnameBox8.MouseEnter
-        LblDommeSettingsDescription.Text = "Enter a pet name that the domme will call you when she's in a bad mood." & Environment.NewLine & Environment.NewLine & _
-                "For a fun-loving domme, you could use names like ""darling"" or ""pet"", while a crueller domme might use names such as ""loser"" or ""bitch boy"". The same pet name can be used multiple times to increase " & _
-                "the chance of being used. All pet name boxes must be filled in."
+    Private Sub PetNameBox8_Enter(sender As Object, e As System.EventArgs) Handles petnameBox8.MouseHover
+        TTDir.SetToolTip(petnameBox8, "Enter a pet name that the domme will call you when she's in a bad mood." & Environment.NewLine & Environment.NewLine & _
+                                     "All pet name boxes must be filled in.")
     End Sub
 
     Private Sub BTNSaveDomSet_MouseHover(sender As Object, e As System.EventArgs) Handles BTNSaveDomSet.MouseHover
-        LblDommeSettingsDescription.Text = "Click to save this configuration of Domme Settings to a file that you can load at any time."
+        TTDir.SetToolTip(BTNSaveDomSet, "Click to save this configuration of Domme Settings to a file that you can load at any time.")
     End Sub
 
     Private Sub BTNLoadDomSet_MouseHover(sender As Object, e As System.EventArgs) Handles BTNLoadDomSet.MouseHover
-        LblDommeSettingsDescription.Text = "Click to load a custom Domme Settings file you have previously created."
+        TTDir.SetToolTip(BTNLoadDomSet, "Click to load a custom Domme Settings file you have previously created.")
     End Sub
 
-    Private Sub GBDomRanges_Enter(sender As System.Object, e As System.EventArgs) Handles GBDomRanges.MouseEnter
-        LblDommeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
-    End Sub
-
-    Private Sub GBDomStats_Enter(sender As System.Object, e As System.EventArgs) Handles GBDomStats.MouseEnter
-        LblDommeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
-    End Sub
-
-    Private Sub GBDomPersonality_Enter(sender As System.Object, e As System.EventArgs) Handles GBDomPersonality.MouseEnter
-        LblDommeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
-    End Sub
-
-    Private Sub GBDomTypingStyle_Enter(sender As System.Object, e As System.EventArgs) Handles GBDomTypingStyle.MouseEnter
-        LblDommeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
-    End Sub
-
-    Private Sub GBDomOrgasms_Enter(sender As System.Object, e As System.EventArgs) Handles GBDomOrgasms.MouseEnter
-        LblDommeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
-    End Sub
-
-    Private Sub GBDomDescription_Enter(sender As System.Object, e As System.EventArgs) Handles GBDomDescription.MouseEnter
-        LblDommeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
-    End Sub
 
 #End Region
 
@@ -13178,8 +13497,8 @@ NextURL:
         GBGeneralTextToSpeech.Text = "Text to Speech"
         TTSCheckBox.Text = "Enable"
 
-        GBGeneralDesc.Text = "Description"
-        LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
+        ' GBGeneralDesc.Text = "Description"
+        'LBLGeneralSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
 
     End Sub
 
@@ -13231,8 +13550,8 @@ NextURL:
         GBGeneralTextToSpeech.Text = "Text zu Sprache"
         TTSCheckBox.Text = "Aktiv"
 
-        GBGeneralDesc.Text = "Beschreibung"
-        LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
+        'GBGeneralDesc.Text = "Beschreibung"
+        'LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
 
     End Sub
 
@@ -13258,16 +13577,16 @@ NextURL:
 
     End Sub
 
-    Private Sub MetroTest_ValueChanged(sender As System.Object, e As System.EventArgs) Handles MetroTest.ValueChanged
+    'Private Sub MetroTest_ValueChanged(sender As System.Object, e As System.EventArgs)
 
-        Dim bpm As Integer
-        bpm = MetroTest.Value
-        Dim MetroVal As Integer = 60 / bpm * 1000
-        'Form1.StrokePace = MetroTest.Value
+    'Dim bpm As Integer
+    '   bpm = MetroTest.Value
+    'Dim MetroVal As Integer = 60 / bpm * 1000
+    'Form1.StrokePace = MetroTest.Value
 
 
-        ' Form1.MetroTimer.Interval = MetroVal
-    End Sub
+    ' Form1.MetroTimer.Interval = MetroVal
+    'End Sub
 
 
     Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles Button25.Click
@@ -13481,11 +13800,11 @@ NextURL:
 
     End Sub
 
-    Private Sub Button33_Click(sender As System.Object, e As System.EventArgs) Handles Button33.Click
+    Private Sub Button33_Click(sender As System.Object, e As System.EventArgs)
         Form1.MetroThread.Start()
     End Sub
 
-    Private Sub Button34_Click(sender As System.Object, e As System.EventArgs) Handles Button34.Click
+    Private Sub Button34_Click(sender As System.Object, e As System.EventArgs)
         Form1.MetroThread.Suspend()
     End Sub
 
@@ -13519,5 +13838,19 @@ NextURL:
         My.Settings.Save()
     End Sub
 
-  
+
+    Private Sub LBLBoobPath_MouseHover(sender As Object, e As System.EventArgs) Handles LBLBoobPath.MouseHover
+        TTDir.SetToolTip(LBLBoobPath, LBLBoobPath.Text)
+    End Sub
+    Private Sub LBLBoobURL_MouseHover(sender As Object, e As System.EventArgs) Handles LBLBoobURL.MouseHover
+        TTDir.SetToolTip(LBLBoobURL, LBLBoobURL.Text)
+    End Sub
+
+    Private Sub LBLButtPath_MouseHover(sender As Object, e As System.EventArgs) Handles LBLButtPath.MouseHover
+        TTDir.SetToolTip(LBLButtPath, LBLButtPath.Text)
+    End Sub
+    Private Sub LBLButtURL_MouseHover(sender As Object, e As System.EventArgs) Handles LBLButtURL.MouseHover
+        TTDir.SetToolTip(LBLButtURL, LBLButtURL.Text)
+    End Sub
+
 End Class

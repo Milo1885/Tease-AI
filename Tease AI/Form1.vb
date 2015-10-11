@@ -539,6 +539,8 @@ Public Class Form1
 
     Dim ImageLocation As String
 
+    Public StrokeThread As Thread
+
 
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -4043,7 +4045,7 @@ AcceptAnswer:
         'Debug.Print("TeaseVideo = " & TeaseVideo)
         If TeaseVideo = True Then Return
 
-        If CensorshipGame = True Or RLGLGame = True Or AvoidTheEdgeStroking = True Or SubEdging = True Or SubHoldingEdge = True Then Return
+        If CensorshipGame = True Or RLGLGame = True Or AvoidTheEdgeStroking = True Or SubEdging = True Or SubHoldingEdge = True Or SubStroking = True Then Return
         'If SearchImageBlog = True Then Return
 
         If RiskyDelay = True Then Return
@@ -6837,33 +6839,22 @@ TryPrevious:
 
     Private Sub StrokeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimer.Tick
 
-        If InputFlag = True Then Return
-
+        If InputFlag = True Or DomTyping = True Then Return
         If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-
-
-        If DomTyping = True Then Return
         If DomTypeCheck = True And StrokeTick < 5 Then Return
         If chatBox.Text <> "" And StrokeTick < 5 Then Return
 
-
         StrokeTick -= 1
-        Debug.Print("StrokeTick = " & StrokeTick)
+        'Debug.Print("StrokeTick = " & StrokeTick)
 
         If StrokeTick < 4 And TempScriptCount > 0 Then StrokeTick += 1
 
         If StrokeTick = 0 Then
 
-           
-                'SubStroking = False
-
                 FirstRound = False
 
                 StrokeTimer.Stop()
             StrokeTauntTimer.Stop()
-
-            'DomTask = "@NullResponse"
-            'TypingDelayGeneric()
 
                 If RunningScript = True Then
                 ScriptTick = 3
@@ -6966,6 +6957,130 @@ NoPlaylistModuleFile:
 
 
     End Sub
+
+
+    Public Sub StrokeLoop()
+
+
+        Do
+
+            'If InputFlag = True Or DomTyping = True Then GoTo SkipTick
+            'If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then GoTo SkipTick
+            'If DomTypeCheck = True And StrokeTick < 5 Then GoTo SkipTick
+            'If chatBox.Text <> "" And StrokeTick < 5 Then GoTo SkipTick
+            'If StrokeTick < 4 And TempScriptCount > 0 Then GoTo SkipTick
+
+            StrokeTick -= 1
+            Debug.Print("Threaded StrokeTick = " & StrokeTick)
+SkipTick:
+
+            Thread.Sleep(1000)
+
+        Loop Until StrokeTick = 0
+
+        If StrokeTick = 0 Then
+
+            FirstRound = False
+
+            StrokeTimer.Stop()
+            StrokeTauntTimer.Stop()
+
+            If RunningScript = True Then
+                ScriptTick = 3
+                ScriptTimer.Start()
+            Else
+
+                ShowModule = True
+
+                Dim ModuleList As New List(Of String)
+                ModuleList.Clear()
+
+                Dim ChastityModuleCheck As String
+                If My.Settings.Chastity = True Then
+                    AskedToSpeedUp = False
+                    AskedToSlowDown = False
+                    SubStroking = False
+                    SubEdging = False
+                    SubHoldingEdge = False
+                    StrokeTimer.Stop()
+                    StrokeTauntTimer.Stop()
+                    EdgeTauntTimer.Stop()
+                    HoldEdgeTauntTimer.Stop()
+                    ChastityModuleCheck = "*_CHASTITY.txt"
+                Else
+                    ChastityModuleCheck = "*.txt"
+                End If
+
+                If PlaylistFile.Count = 0 Then GoTo NoPlaylistModuleFile
+
+                If Playlist = False Or PlaylistFile(PlaylistCurrent).Contains("Random Module") Then
+
+NoPlaylistModuleFile:
+
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & _
+                                                                                    "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, ChastityModuleCheck)
+                        Dim TempModule As String = foundFile
+                        TempModule = Path.GetFileName(TempModule).Replace(".txt", "")
+                        For x As Integer = 0 To FrmSettings.CLBModuleList.Items.Count - 1
+                            If My.Settings.Chastity = True Then
+                                If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") Then
+                                    ModuleList.Add(foundFile)
+                                End If
+                            Else
+                                If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") And Not foundFile.Contains("_CHASTITY") Then
+                                    ModuleList.Add(foundFile)
+                                End If
+                            End If
+
+                        Next
+                    Next
+
+                    If ModuleList.Count < 1 Then
+                        If My.Settings.Chastity = True Then
+                            FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module_CHASTITY.txt"
+                        Else
+                            FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module.txt"
+                        End If
+                    Else
+                        FileText = ModuleList(randomizer.Next(0, ModuleList.Count))
+                    End If
+
+                Else
+                    If PlaylistFile(PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\" & PlaylistFile(PlaylistCurrent)
+                        FileText = FileText.Replace(" Regular-TeaseAI-Script", "")
+                        FileText = FileText & ".txt"
+                    Else
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\Modules\" & PlaylistFile(PlaylistCurrent) & ".txt"
+                    End If
+
+                End If
+
+                DomTask = DomTask.Replace("@Module", "")
+                StrokeTauntVal = -1
+
+                If Playlist = True Then PlaylistCurrent += 1
+                If Playlist = True Then BookmarkModule = False
+
+                If BookmarkModule = True Then
+                    BookmarkModule = False
+                    FileText = BookmarkModuleFile
+                    StrokeTauntVal = BookmarkModuleLine
+                End If
+
+
+                ScriptTick = 3
+                ScriptTimer.Start()
+
+            End If
+
+
+        End If
+
+
+
+    End Sub
+
 
     Private Sub StrokeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTauntTimer.Tick
 
@@ -10492,6 +10607,10 @@ RinseLatherRepeat:
 
 
             StrokeTauntTick = randomizer.Next(11, 21)
+            'StrokeThread = New Thread(AddressOf StrokeLoop)
+            'StrokeThread.IsBackground = True
+            'StrokeThread.SetApartmentState(ApartmentState.STA)
+            'StrokeThread.Start()
             StrokeTimer.Start()
             StrokeTauntTimer.Start()
             StringClean = StringClean.Replace("@StartStroking", "")
@@ -24098,7 +24217,7 @@ SkipNew:
 
     End Sub
 
-    Private Sub GeneralToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GeneralToolStripMenuItem.Click
+    Private Sub GeneralSettingsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GeneralSettingsToolStripMenuItem.Click
         FrmSettings.SettingsTabs.SelectTab(0)
         FrmSettings.Show()
         FrmSettings.Focus()
@@ -24182,9 +24301,9 @@ SkipNew:
 
 
 
-  
 
-    
+
+
 
     Private Sub Button1_Click_3(sender As System.Object, e As System.EventArgs)
         DommeTags = False
@@ -25332,7 +25451,7 @@ SkipNew:
 
 
 
-   
+
 
     Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As System.EventArgs)
 
@@ -25659,9 +25778,9 @@ SkipNew:
         PlayRandomCH()
     End Sub
 
-   
 
-   
+
+
     Private Sub PlaylistToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PlaylistToolStripMenuItem.Click
         If PNLPlaylist.Visible = False Then
             CloseApp()
@@ -25702,8 +25821,8 @@ SkipNew:
         BTNPlaylist.Enabled = False
     End Sub
 
-   
-  
+
+
     Private Sub CommandGuideToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CommandGuideToolStripMenuItem.Click
         If Form10.Visible = False Then Form10.Show()
         Form10.Focus()
@@ -25767,7 +25886,7 @@ SkipNew:
         End If
     End Sub
 
-   
+
     Private Sub SwitchSidesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SwitchSidesToolStripMenuItem.Click
         If My.Settings.MirrorWindows = False Then
             My.Settings.MirrorWindows = True
@@ -25949,7 +26068,7 @@ SkipNew:
 
 
 
-            
+
 
             LBLWishlistBronze.Text = BronzeTokens
             LBLWishlistSilver.Text = SilverTokens
@@ -26510,7 +26629,7 @@ SkipNew:
         End If
     End Sub
 
-    
+
     Private Sub HardcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HardcoreToolStripMenuItem.Click
         SaveImage("Hardcore")
     End Sub
@@ -26541,7 +26660,7 @@ SkipNew:
     Private Sub CaptionsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CaptionsToolStripMenuItem.Click
         SaveImage("Captions")
     End Sub
-    Private Sub GeneralToolStripMenuItem2_Click(sender As System.Object, e As System.EventArgs) Handles GeneralToolStripMenuItem.Click
+    Private Sub GeneralToolStripMenuItem2_Click(sender As System.Object, e As System.EventArgs) Handles GeneralToolStripMenuItem1.Click
         SaveImage("General")
     End Sub
     Private Sub BoobsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BoobsToolStripMenuItem.Click
