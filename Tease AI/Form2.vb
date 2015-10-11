@@ -5511,7 +5511,7 @@ NextURL:
 
     End Sub
 
-    Private Sub Button57_Click(sender As System.Object, e As System.EventArgs) Handles Button57.Click
+    Private Sub Button57_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIBrowse.Click
         If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
             TBWIDirectory.Text = FolderBrowserDialog1.SelectedPath
         End If
@@ -13852,5 +13852,110 @@ NextURL:
     Private Sub LBLButtURL_MouseHover(sender As Object, e As System.EventArgs) Handles LBLButtURL.MouseHover
         TTDir.SetToolTip(LBLButtURL, LBLButtURL.Text)
     End Sub
+
+    Private Sub LBLIHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIHardcore.MouseHover
+        TTDir.SetToolTip(LBLIHardcore, LBLIHardcore.Text)
+    End Sub
+    Private Sub LBLISoftcore_MouseHover(sender As Object, e As System.EventArgs) Handles LBLISoftcore.MouseHover
+        TTDir.SetToolTip(LBLISoftcore, LBLISoftcore.Text)
+    End Sub
+    Private Sub LBLILesbian_MouseHover(sender As Object, e As System.EventArgs) Handles LBLILesbian.MouseHover
+        TTDir.SetToolTip(LBLILesbian, LBLILesbian.Text)
+    End Sub
+    Private Sub LBLIBlowjob_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIBlowjob.MouseHover
+        TTDir.SetToolTip(LBLIBlowjob, LBLIBlowjob.Text)
+    End Sub
+    Private Sub LBLIFemdom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIFemdom.MouseHover
+        TTDir.SetToolTip(LBLIFemdom, LBLIFemdom.Text)
+    End Sub
+    Private Sub LBLILezdom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLILezdom.MouseHover
+        TTDir.SetToolTip(LBLILezdom, LBLILezdom.Text)
+    End Sub
+    Private Sub LBLIHentai_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIHentai.MouseHover
+        TTDir.SetToolTip(LBLIHentai, LBLIHentai.Text)
+    End Sub
+    Private Sub LBLIGay_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIGay.MouseHover
+        TTDir.SetToolTip(LBLIGay, LBLIGay.Text)
+    End Sub
+    Private Sub LBLIMaledom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIMaledom.MouseHover
+        TTDir.SetToolTip(LBLIMaledom, LBLIMaledom.Text)
+    End Sub
+    Private Sub LBLICaptions_MouseHover(sender As Object, e As System.EventArgs) Handles LBLICaptions.MouseHover
+        TTDir.SetToolTip(LBLICaptions, LBLICaptions.Text)
+    End Sub
+    Private Sub LBLIGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIGeneral.MouseHover
+        TTDir.SetToolTip(LBLIGeneral, LBLIGeneral.Text)
+    End Sub
+
+
+
+
+    Private Sub BTNWICreateURL_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWICreateURL.MouseHover
+        TTDir.SetToolTip(BTNWICreateURL, "Click here to create a new URL File." & Environment.NewLine & Environment.NewLine & _
+                                         "URL Files create a txt file containing the URL address" & Environment.NewLine & _
+                                         "of every image posted at the image blog you specify.")
+    End Sub
+
+    Private Sub CBWIreview_MouseHover(sender As Object, e As System.EventArgs) Handles CBWIReview.MouseHover
+        TTDir.SetToolTip(CBWIReview, "When this is checked, you'll need to review" & Environment.NewLine & _
+                                     "each image before it's added to the URL File." )
+    End Sub
+
+    Private Sub CBWISavetoDisk_MouseHover(sender As Object, e As System.EventArgs) Handles CBWISaveToDisk.MouseHover
+        TTDir.SetToolTip(CBWISaveToDisk, "When this is checked, images will also be saved" & Environment.NewLine & _
+                                         "to the specified HDD directory as they are added.")
+    End Sub
+
+    Private Sub BTNWIAddandContinue_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWIAddandContinue.MouseHover
+        TTDir.SetToolTip(BTNWIAddandContinue, "When reviewing images, click this button to add the" & Environment.NewLine & _
+                                              "current image to the URL File and continue to the next.")
+    End Sub
+
+    Private Sub BTNWIContinue_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWIContinue.MouseHover
+        TTDir.SetToolTip(BTNWIContinue, "When reviewing images, click this button to skip the" & Environment.NewLine & _
+                                        "current image without adding it to the URL File.")
+    End Sub
+
+    Private Sub BTNWICancel_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWICancel.MouseHover
+        TTDir.SetToolTip(BTNWICancel, "Use this button to cancel URL File creation.")
+    End Sub
+
+    Private Sub BTNWIOpenURL_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWIOpenURL.MouseHover
+        TTDir.SetToolTip(BTNWIOpenURL, "Use this button to view a URL File you have previously created.")
+    End Sub
+
+    Private Sub BTNWIPrevious_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWIPrevious.MouseHover
+        TTDir.SetToolTip(BTNWIPrevious, "Use this button to view the previous image of a URL File.")
+    End Sub
+
+    Private Sub BTNWINext_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWINext.MouseHover
+        TTDir.SetToolTip(BTNWINext, "Use this button to view the next image of a URL File.")
+    End Sub
+
+    Private Sub BTNWIRemove_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWIRemove.MouseHover
+        TTDir.SetToolTip(BTNWIRemove, "Use this button to remove an image from a URL File.")
+    End Sub
+
+    Private Sub BTNWILiked_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWILiked.MouseHover
+        TTDir.SetToolTip(BTNWILiked, "Use this button to add the current image to your Liked URL Files list.")
+    End Sub
+
+    Private Sub BTNWIDisliked_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWIDisliked.MouseHover
+        TTDir.SetToolTip(BTNWIDisliked, "Use this button to add the current image to your Disliked URL Files list.")
+    End Sub
+
+    Private Sub BTNWISave_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWISave.MouseHover
+        TTDir.SetToolTip(BTNWISave, "Use this button to save the current image to your hard drive.")
+    End Sub
+
+    Private Sub TBWIDirectory_MouseHover(sender As Object, e As System.EventArgs) Handles TBWIDirectory.MouseHover
+        TTDir.SetToolTip(TBWIDirectory, "This is where images will be saved if ""Save Images to Disk"" is checked.")
+    End Sub
+
+    Private Sub BTNWIBrowse_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWIBrowse.MouseHover
+        TTDir.SetToolTip(BTNWIBrowse, "Select the directory where images will be saved to disk.")
+    End Sub
+
+
 
 End Class

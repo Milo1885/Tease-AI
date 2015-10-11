@@ -3,6 +3,10 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Tooltip Descriptions added to URL Files tab
+
+Tooltips added to Image path labels to show full paths
+
 General, Domme and Sub settings now use ToolTips for descriptions.
 
 Fixed bug that caused errors when using Goto-related Commands on the line just before an End Command

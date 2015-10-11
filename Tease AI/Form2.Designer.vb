@@ -498,7 +498,7 @@ Partial Class FrmSettings
         Me.BTNWIAddandContinue = New System.Windows.Forms.Button()
         Me.BTNWICancel = New System.Windows.Forms.Button()
         Me.CBWIReview = New System.Windows.Forms.CheckBox()
-        Me.Button57 = New System.Windows.Forms.Button()
+        Me.BTNWIBrowse = New System.Windows.Forms.Button()
         Me.TBWIDirectory = New System.Windows.Forms.TextBox()
         Me.BTNWIDisliked = New System.Windows.Forms.Button()
         Me.BTNWILiked = New System.Windows.Forms.Button()
@@ -7014,7 +7014,7 @@ Partial Class FrmSettings
         Me.Panel7.Controls.Add(Me.BTNWIAddandContinue)
         Me.Panel7.Controls.Add(Me.BTNWICancel)
         Me.Panel7.Controls.Add(Me.CBWIReview)
-        Me.Panel7.Controls.Add(Me.Button57)
+        Me.Panel7.Controls.Add(Me.BTNWIBrowse)
         Me.Panel7.Controls.Add(Me.TBWIDirectory)
         Me.Panel7.Controls.Add(Me.BTNWIDisliked)
         Me.Panel7.Controls.Add(Me.BTNWILiked)
@@ -7083,17 +7083,17 @@ Partial Class FrmSettings
         Me.CBWIReview.Text = "Review Each Image"
         Me.CBWIReview.UseVisualStyleBackColor = true
         '
-        'Button57
+        'BTNWIBrowse
         '
-        Me.Button57.BackColor = System.Drawing.Color.LightGray
-        Me.Button57.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Button57.ForeColor = System.Drawing.Color.Black
-        Me.Button57.Location = New System.Drawing.Point(105, 402)
-        Me.Button57.Name = "Button57"
-        Me.Button57.Size = New System.Drawing.Size(50, 24)
-        Me.Button57.TabIndex = 163
-        Me.Button57.Text = "Browse"
-        Me.Button57.UseVisualStyleBackColor = false
+        Me.BTNWIBrowse.BackColor = System.Drawing.Color.LightGray
+        Me.BTNWIBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNWIBrowse.ForeColor = System.Drawing.Color.Black
+        Me.BTNWIBrowse.Location = New System.Drawing.Point(105, 402)
+        Me.BTNWIBrowse.Name = "BTNWIBrowse"
+        Me.BTNWIBrowse.Size = New System.Drawing.Size(50, 24)
+        Me.BTNWIBrowse.TabIndex = 163
+        Me.BTNWIBrowse.Text = "Browse"
+        Me.BTNWIBrowse.UseVisualStyleBackColor = false
         '
         'TBWIDirectory
         '
@@ -12868,7 +12868,7 @@ End Sub
     Friend WithEvents BTNWIAddandContinue As System.Windows.Forms.Button
     Friend WithEvents BTNWICancel As System.Windows.Forms.Button
     Friend WithEvents CBWIReview As System.Windows.Forms.CheckBox
-    Friend WithEvents Button57 As System.Windows.Forms.Button
+    Friend WithEvents BTNWIBrowse As System.Windows.Forms.Button
     Friend WithEvents TBWIDirectory As System.Windows.Forms.TextBox
     Friend WithEvents BTNWIDisliked As System.Windows.Forms.Button
     Friend WithEvents BTNWILiked As System.Windows.Forms.Button
