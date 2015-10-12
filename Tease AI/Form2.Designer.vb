@@ -517,7 +517,7 @@ Partial Class FrmSettings
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox6 = New System.Windows.Forms.PictureBox()
-        Me.Button24 = New System.Windows.Forms.Button()
+        Me.BTNRefreshVideos = New System.Windows.Forms.Button()
         Me.GroupBox25 = New System.Windows.Forms.GroupBox()
         Me.LblVideoGeneralTotalD = New System.Windows.Forms.Label()
         Me.LblVideoGeneralD = New System.Windows.Forms.Label()
@@ -7093,12 +7093,12 @@ Partial Class FrmSettings
         Me.BTNWIBrowse.Size = New System.Drawing.Size(50, 24)
         Me.BTNWIBrowse.TabIndex = 163
         Me.BTNWIBrowse.Text = "Browse"
-        Me.BTNWIBrowse.UseVisualStyleBackColor = false
+        Me.BTNWIBrowse.UseVisualStyleBackColor = False
         '
         'TBWIDirectory
         '
         Me.TBWIDirectory.BackColor = System.Drawing.Color.White
-        Me.TBWIDirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.TBWIDirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TBWIDirectory.ForeColor = System.Drawing.Color.Black
         Me.TBWIDirectory.Location = New System.Drawing.Point(161, 404)
         Me.TBWIDirectory.Name = "TBWIDirectory"
@@ -7109,41 +7109,41 @@ Partial Class FrmSettings
         'BTNWIDisliked
         '
         Me.BTNWIDisliked.BackColor = System.Drawing.Color.LightGray
-        Me.BTNWIDisliked.Enabled = false
-        Me.BTNWIDisliked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.BTNWIDisliked.Enabled = False
+        Me.BTNWIDisliked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNWIDisliked.ForeColor = System.Drawing.Color.Black
         Me.BTNWIDisliked.Location = New System.Drawing.Point(567, 372)
         Me.BTNWIDisliked.Name = "BTNWIDisliked"
         Me.BTNWIDisliked.Size = New System.Drawing.Size(131, 24)
         Me.BTNWIDisliked.TabIndex = 162
         Me.BTNWIDisliked.Text = "Add to Disliked Images"
-        Me.BTNWIDisliked.UseVisualStyleBackColor = false
+        Me.BTNWIDisliked.UseVisualStyleBackColor = False
         '
         'BTNWILiked
         '
         Me.BTNWILiked.BackColor = System.Drawing.Color.LightGray
-        Me.BTNWILiked.Enabled = false
-        Me.BTNWILiked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.BTNWILiked.Enabled = False
+        Me.BTNWILiked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNWILiked.ForeColor = System.Drawing.Color.Black
         Me.BTNWILiked.Location = New System.Drawing.Point(567, 342)
         Me.BTNWILiked.Name = "BTNWILiked"
         Me.BTNWILiked.Size = New System.Drawing.Size(131, 24)
         Me.BTNWILiked.TabIndex = 161
         Me.BTNWILiked.Text = "Add to Liked Images"
-        Me.BTNWILiked.UseVisualStyleBackColor = false
+        Me.BTNWILiked.UseVisualStyleBackColor = False
         '
         'BTNWIRemove
         '
         Me.BTNWIRemove.BackColor = System.Drawing.Color.LightGray
-        Me.BTNWIRemove.Enabled = false
-        Me.BTNWIRemove.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.BTNWIRemove.Enabled = False
+        Me.BTNWIRemove.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNWIRemove.ForeColor = System.Drawing.Color.Black
         Me.BTNWIRemove.Location = New System.Drawing.Point(567, 312)
         Me.BTNWIRemove.Name = "BTNWIRemove"
         Me.BTNWIRemove.Size = New System.Drawing.Size(131, 24)
         Me.BTNWIRemove.TabIndex = 160
         Me.BTNWIRemove.Text = "Remove From URL File"
-        Me.BTNWIRemove.UseVisualStyleBackColor = false
+        Me.BTNWIRemove.UseVisualStyleBackColor = False
         '
         'CBWISaveToDisk
         '
@@ -7152,18 +7152,18 @@ Partial Class FrmSettings
         Me.CBWISaveToDisk.Size = New System.Drawing.Size(124, 30)
         Me.CBWISaveToDisk.TabIndex = 157
         Me.CBWISaveToDisk.Text = "Save Images to Disk"
-        Me.CBWISaveToDisk.UseVisualStyleBackColor = true
+        Me.CBWISaveToDisk.UseVisualStyleBackColor = True
         '
         'PictureBox5
         '
         Me.PictureBox5.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"),System.Drawing.Image)
+        Me.PictureBox5.Image = CType(resources.GetObject("PictureBox5.Image"), System.Drawing.Image)
         Me.PictureBox5.Location = New System.Drawing.Point(9, 6)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(160, 19)
         Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox5.TabIndex = 156
-        Me.PictureBox5.TabStop = false
+        Me.PictureBox5.TabStop = False
         '
         'WebImageProgressBar
         '
@@ -7176,20 +7176,20 @@ Partial Class FrmSettings
         'BTNWICreateURL
         '
         Me.BTNWICreateURL.BackColor = System.Drawing.Color.LightGray
-        Me.BTNWICreateURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.BTNWICreateURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNWICreateURL.ForeColor = System.Drawing.Color.Black
         Me.BTNWICreateURL.Location = New System.Drawing.Point(567, 39)
         Me.BTNWICreateURL.Name = "BTNWICreateURL"
         Me.BTNWICreateURL.Size = New System.Drawing.Size(132, 24)
         Me.BTNWICreateURL.TabIndex = 154
         Me.BTNWICreateURL.Text = "Create URL File"
-        Me.BTNWICreateURL.UseVisualStyleBackColor = false
+        Me.BTNWICreateURL.UseVisualStyleBackColor = False
         '
         'LBLWebImageCount
         '
         Me.LBLWebImageCount.BackColor = System.Drawing.Color.Transparent
         Me.LBLWebImageCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.LBLWebImageCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.LBLWebImageCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LBLWebImageCount.ForeColor = System.Drawing.Color.Black
         Me.LBLWebImageCount.Location = New System.Drawing.Point(6, 404)
         Me.LBLWebImageCount.Name = "LBLWebImageCount"
@@ -7201,53 +7201,53 @@ Partial Class FrmSettings
         'BTNWISave
         '
         Me.BTNWISave.BackColor = System.Drawing.Color.LightGray
-        Me.BTNWISave.Enabled = false
-        Me.BTNWISave.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.BTNWISave.Enabled = False
+        Me.BTNWISave.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNWISave.ForeColor = System.Drawing.Color.Black
         Me.BTNWISave.Location = New System.Drawing.Point(567, 401)
         Me.BTNWISave.Name = "BTNWISave"
         Me.BTNWISave.Size = New System.Drawing.Size(131, 24)
         Me.BTNWISave.TabIndex = 152
         Me.BTNWISave.Text = "Save Image to Disk"
-        Me.BTNWISave.UseVisualStyleBackColor = false
+        Me.BTNWISave.UseVisualStyleBackColor = False
         '
         'BTNWIOpenURL
         '
         Me.BTNWIOpenURL.BackColor = System.Drawing.Color.LightGray
-        Me.BTNWIOpenURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.BTNWIOpenURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNWIOpenURL.ForeColor = System.Drawing.Color.Black
         Me.BTNWIOpenURL.Location = New System.Drawing.Point(566, 252)
         Me.BTNWIOpenURL.Name = "BTNWIOpenURL"
         Me.BTNWIOpenURL.Size = New System.Drawing.Size(132, 24)
         Me.BTNWIOpenURL.TabIndex = 151
         Me.BTNWIOpenURL.Text = "Open URL File"
-        Me.BTNWIOpenURL.UseVisualStyleBackColor = false
+        Me.BTNWIOpenURL.UseVisualStyleBackColor = False
         '
         'BTNWIPrevious
         '
         Me.BTNWIPrevious.BackColor = System.Drawing.Color.LightGray
-        Me.BTNWIPrevious.Enabled = false
-        Me.BTNWIPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.BTNWIPrevious.Enabled = False
+        Me.BTNWIPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNWIPrevious.ForeColor = System.Drawing.Color.Black
         Me.BTNWIPrevious.Location = New System.Drawing.Point(567, 282)
         Me.BTNWIPrevious.Name = "BTNWIPrevious"
         Me.BTNWIPrevious.Size = New System.Drawing.Size(47, 24)
         Me.BTNWIPrevious.TabIndex = 149
         Me.BTNWIPrevious.Text = "<<"
-        Me.BTNWIPrevious.UseVisualStyleBackColor = false
+        Me.BTNWIPrevious.UseVisualStyleBackColor = False
         '
         'BTNWINext
         '
         Me.BTNWINext.BackColor = System.Drawing.Color.LightGray
-        Me.BTNWINext.Enabled = false
-        Me.BTNWINext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.BTNWINext.Enabled = False
+        Me.BTNWINext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BTNWINext.ForeColor = System.Drawing.Color.Black
         Me.BTNWINext.Location = New System.Drawing.Point(651, 282)
         Me.BTNWINext.Name = "BTNWINext"
         Me.BTNWINext.Size = New System.Drawing.Size(47, 24)
         Me.BTNWINext.TabIndex = 150
         Me.BTNWINext.Text = ">>"
-        Me.BTNWINext.UseVisualStyleBackColor = false
+        Me.BTNWINext.UseVisualStyleBackColor = False
         '
         'WebPictureBox
         '
@@ -7257,12 +7257,12 @@ Partial Class FrmSettings
         Me.WebPictureBox.Size = New System.Drawing.Size(555, 358)
         Me.WebPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.WebPictureBox.TabIndex = 148
-        Me.WebPictureBox.TabStop = false
+        Me.WebPictureBox.TabStop = False
         '
         'Label71
         '
         Me.Label71.BackColor = System.Drawing.Color.Transparent
-        Me.Label71.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Label71.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label71.ForeColor = System.Drawing.Color.Black
         Me.Label71.Location = New System.Drawing.Point(7, 6)
         Me.Label71.Name = "Label71"
@@ -7287,7 +7287,7 @@ Partial Class FrmSettings
         Me.Panel1.BackColor = System.Drawing.Color.LightGray
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.PictureBox6)
-        Me.Panel1.Controls.Add(Me.Button24)
+        Me.Panel1.Controls.Add(Me.BTNRefreshVideos)
         Me.Panel1.Controls.Add(Me.GroupBox25)
         Me.Panel1.Controls.Add(Me.GroupBox24)
         Me.Panel1.Controls.Add(Me.GroupBox23)
@@ -7304,30 +7304,30 @@ Partial Class FrmSettings
         'PictureBox6
         '
         Me.PictureBox6.BackColor = System.Drawing.Color.LightGray
-        Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"),System.Drawing.Image)
+        Me.PictureBox6.Image = CType(resources.GetObject("PictureBox6.Image"), System.Drawing.Image)
         Me.PictureBox6.Location = New System.Drawing.Point(9, 6)
         Me.PictureBox6.Name = "PictureBox6"
         Me.PictureBox6.Size = New System.Drawing.Size(160, 19)
         Me.PictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
         Me.PictureBox6.TabIndex = 151
-        Me.PictureBox6.TabStop = false
+        Me.PictureBox6.TabStop = False
         '
-        'Button24
+        'BTNRefreshVideos
         '
-        Me.Button24.BackColor = System.Drawing.Color.LightGray
-        Me.Button24.BackgroundImage = CType(resources.GetObject("Button24.BackgroundImage"),System.Drawing.Image)
-        Me.Button24.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button24.FlatAppearance.BorderSize = 0
-        Me.Button24.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-        Me.Button24.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-        Me.Button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button24.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-        Me.Button24.ForeColor = System.Drawing.Color.Black
-        Me.Button24.Location = New System.Drawing.Point(671, 6)
-        Me.Button24.Name = "Button24"
-        Me.Button24.Size = New System.Drawing.Size(30, 26)
-        Me.Button24.TabIndex = 149
-        Me.Button24.UseVisualStyleBackColor = false
+        Me.BTNRefreshVideos.BackColor = System.Drawing.Color.LightGray
+        Me.BTNRefreshVideos.BackgroundImage = CType(resources.GetObject("BTNRefreshVideos.BackgroundImage"), System.Drawing.Image)
+        Me.BTNRefreshVideos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.BTNRefreshVideos.FlatAppearance.BorderSize = 0
+        Me.BTNRefreshVideos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+        Me.BTNRefreshVideos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.BTNRefreshVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BTNRefreshVideos.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BTNRefreshVideos.ForeColor = System.Drawing.Color.Black
+        Me.BTNRefreshVideos.Location = New System.Drawing.Point(671, 6)
+        Me.BTNRefreshVideos.Name = "BTNRefreshVideos"
+        Me.BTNRefreshVideos.Size = New System.Drawing.Size(30, 26)
+        Me.BTNRefreshVideos.TabIndex = 149
+        Me.BTNRefreshVideos.UseVisualStyleBackColor = false
         '
         'GroupBox25
         '
@@ -12887,7 +12887,7 @@ End Sub
     Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents PictureBox6 As System.Windows.Forms.PictureBox
-    Friend WithEvents Button24 As System.Windows.Forms.Button
+    Friend WithEvents BTNRefreshVideos As System.Windows.Forms.Button
     Friend WithEvents GroupBox25 As System.Windows.Forms.GroupBox
     Friend WithEvents LblVideoGeneralTotalD As System.Windows.Forms.Label
     Friend WithEvents LblVideoGeneralD As System.Windows.Forms.Label

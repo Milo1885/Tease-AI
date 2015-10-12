@@ -1621,7 +1621,7 @@ Public Class FrmSettings
         If NBCensorHideMax.Value < NBCensorHideMin.Value Then NBCensorHideMax.Value = NBCensorHideMin.Value
     End Sub
 
-    Private Sub Button24_Click(sender As System.Object, e As System.EventArgs) Handles Button24.Click
+    Private Sub Button24_Click(sender As System.Object, e As System.EventArgs) Handles BTNRefreshVideos.Click
         Form1.RefreshVideoTotal = 0
 
         Form1.HardCoreVideoTotal()
@@ -13956,6 +13956,80 @@ NextURL:
         TTDir.SetToolTip(BTNWIBrowse, "Select the directory where images will be saved to disk.")
     End Sub
 
+    Private Sub LBLVideoHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoHardCore.MouseHover
+        TTDir.SetToolTip(LblVideoHardCore, LblVideoHardCore.Text)
+    End Sub
 
+    Private Sub LBLVideoHardcoreD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoHardCoreD.MouseHover
+        TTDir.SetToolTip(LblVideoHardCoreD, LblVideoHardCoreD.Text)
+    End Sub
+
+    Private Sub LBLVideoSoftcore_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoSoftCore.MouseHover
+        TTDir.SetToolTip(LblVideoSoftCore, LblVideoSoftCore.Text)
+    End Sub
+
+    Private Sub LBLVideoSoftcoreD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoSoftCoreD.MouseHover
+        TTDir.SetToolTip(LblVideoSoftCoreD, LblVideoSoftCoreD.Text)
+    End Sub
+
+    Private Sub LBLVideoLesbian_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoLesbian.MouseHover
+        TTDir.SetToolTip(LblVideoLesbian, LblVideoLesbian.Text)
+    End Sub
+
+    Private Sub LBLVideoLesbianD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoLesbianD.MouseHover
+        TTDir.SetToolTip(LblVideoLesbianD, LblVideoLesbianD.Text)
+    End Sub
+
+    Private Sub LBLVideoBlowjob_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoBlowjob.MouseHover
+        TTDir.SetToolTip(LblVideoBlowjob, LblVideoBlowjob.Text)
+    End Sub
+
+    Private Sub LBLVideoBlowjobD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoBlowjobD.MouseHover
+        TTDir.SetToolTip(LblVideoBlowjobD, LblVideoBlowjobD.Text)
+    End Sub
+
+    Private Sub LBLVideoFemdom_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoFemdom.MouseHover
+        TTDir.SetToolTip(LblVideoFemdom, LblVideoFemdom.Text)
+    End Sub
+
+    Private Sub LBLVideoFemdomD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoFemdomD.MouseHover
+        TTDir.SetToolTip(LblVideoFemdomD, LblVideoFemdomD.Text)
+    End Sub
+
+    Private Sub LBLVideoFemsub_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoFemsub.MouseHover
+        TTDir.SetToolTip(LblVideoFemsub, LblVideoFemsub.Text)
+    End Sub
+
+    Private Sub LBLVideoFemsubD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoFemsubD.MouseHover
+        TTDir.SetToolTip(LblVideoFemsubD, LblVideoFemsubD.Text)
+    End Sub
+
+    Private Sub LBLVideoJOI_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoJOI.MouseHover
+        TTDir.SetToolTip(LblVideoJOI, LblVideoJOI.Text)
+    End Sub
+
+    Private Sub LBLVideoJOID_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoJOID.MouseHover
+        TTDir.SetToolTip(LblVideoJOID, LblVideoJOID.Text)
+    End Sub
+
+    Private Sub LBLVideoCH_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoCH.MouseHover
+        TTDir.SetToolTip(LblVideoCH, LblVideoCH.Text)
+    End Sub
+
+    Private Sub LBLVideoCHD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoCHD.MouseHover
+        TTDir.SetToolTip(LblVideoCHD, LblVideoCHD.Text)
+    End Sub
+
+    Private Sub LBLVideoGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoGeneral.MouseHover
+        TTDir.SetToolTip(LblVideoGeneral, LblVideoGeneral.Text)
+    End Sub
+
+    Private Sub LBLVideoGeneralD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoGeneralD.MouseHover
+        TTDir.SetToolTip(LblVideoGeneralD, LblVideoGeneralD.Text)
+    End Sub
+
+    Private Sub BTNRefreshVideos_MouseHover(sender As Object, e As System.EventArgs) Handles BTNRefreshVideos.MouseHover
+        TTDir.SetToolTip(BTNRefreshVideos, "Use this button to refresh video paths.")
+    End Sub
 
 End Class
