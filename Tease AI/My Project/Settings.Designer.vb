@@ -4903,6 +4903,54 @@ Namespace My
                 Me("TypoChance") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("*")>  _
+        Public Property TBEmote() As String
+            Get
+                Return CType(Me("TBEmote"),String)
+            End Get
+            Set
+                Me("TBEmote") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("*")>  _
+        Public Property TBEmoteEnd() As String
+            Get
+                Return CType(Me("TBEmoteEnd"),String)
+            End Get
+            Set
+                Me("TBEmoteEnd") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("50")>  _
+        Public Property VVolume() As Integer
+            Get
+                Return CType(Me("VVolume"),Integer)
+            End Get
+            Set
+                Me("VVolume") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property VRate() As Integer
+            Get
+                Return CType(Me("VRate"),Integer)
+            End Get
+            Set
+                Me("VRate") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

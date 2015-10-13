@@ -3,6 +3,10 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Added Volume and Rate Sliders for Text to Speech options
+
+Replaced "Emotes Like This" with custom beginning/ending emote textboxes
+
 Tooltip Descriptions added to URL Files tab
 
 Tooltips added to Image path labels to show full paths

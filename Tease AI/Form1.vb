@@ -1210,11 +1210,12 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         End If
 
 
-        Try
-            FrmSettings.domemoteComboBox.Text = My.Settings.DomEmotes
-        Catch
-            FrmSettings.domemoteComboBox.Text = "*emote*"
-        End Try
+
+        FrmSettings.TBEmote.Text = My.Settings.TBEmote
+        FrmSettings.TBEmoteEnd.Text = My.Settings.TBEmoteEnd
+
+        If FrmSettings.TBEmote.Text = "" Then FrmSettings.TBEmote.Text = "*"
+        If FrmSettings.TBEmoteEnd.Text = "" Then FrmSettings.TBEmoteEnd.Text = "*"
 
         FrmSettings.alloworgasmComboBox.Text = My.Settings.OrgasmAllow
         FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
@@ -1260,7 +1261,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         FrmSplash.LBLSplash.Text = "Checking Glitter scripts..."
         FrmSplash.Refresh()
 
-        FrmSettings.LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
+        'FrmSettings.LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
 
         Try
             FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
@@ -1641,7 +1642,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
         MetroThread.IsBackground = True
         MetroThread.Start()
 
-       
+
         'ImageThread.Start()
 
         FrmSplash.Close()
@@ -5320,10 +5321,23 @@ NullResponse:
                     If FrmSettings.commaCheckBox.Checked = True Then DomTask = DomTask.Replace(",", "")
                     If FrmSettings.periodCheckBox.Checked = True Then DomTask = DomTask.Replace(".", "")
 
-                    Try
-                        DomTask = DomTask.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
-                    Catch
-                    End Try
+                    ' Try
+                    'DomTask = DomTask.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
+                    'Catch
+                    'End Try
+
+                    Dim EmoToggle As Boolean = True
+                    For i As Integer = DomTask.Length - 1 To 0 Step -1
+                        If DomTask.Substring(i, 1) = "*" Then
+                            If EmoToggle = False Then
+                                EmoToggle = True
+                                DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
+                            Else
+                                EmoToggle = False
+                                DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
+                            End If
+                        End If
+                    Next
 
                     DomTask = DomTask.Replace(":d", ":D")
                     DomTask = DomTask.Replace(": d", ": D")
@@ -5335,7 +5349,7 @@ NullResponse:
 
                         Dim RestoreDomTask As String = DomTask
 
-                        If Not DomTask.Substring(0, 1) = FrmSettings.domemoteComboBox.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False And TypoSwitch <> 0 And TyposDisabled = False _
+                        If Not DomTask.Substring(0, 1) = FrmSettings.TBEmote.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False And TypoSwitch <> 0 And TyposDisabled = False _
                             And FrmSettings.TTSCheckBox.Checked = False Then
 
                             Dim TypoChance As Integer = randomizer.Next(0, 101)
@@ -6181,10 +6195,18 @@ TryNextWithTease:
                     If FrmSettings.commaCheckBox.Checked = True Then DomChat = DomChat.Replace(",", "")
                     If FrmSettings.periodCheckBox.Checked = True Then DomChat = DomChat.Replace(".", "")
 
-                    Try
-                        DomChat = DomChat.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
-                    Catch
-                    End Try
+                    Dim EmoToggle As Boolean = True
+                    For i As Integer = DomChat.Length - 1 To 0 Step -1
+                        If DomChat.Substring(i, 1) = "*" Then
+                            If EmoToggle = False Then
+                                EmoToggle = True
+                                DomChat = DomChat.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
+                            Else
+                                EmoToggle = False
+                                DomChat = DomChat.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
+                            End If
+                        End If
+                    Next
 
                     DomChat = DomChat.Replace(":d", ":D")
                     DomChat = DomChat.Replace(": d", ": D")
@@ -22191,16 +22213,9 @@ GetDommeSlideshow:
         FormatClean = FormatClean.Replace("</b>", "")
         FormatClean = FormatClean.Replace("<u>", "")
         FormatClean = FormatClean.Replace("</u>", "")
-        Try
-            If FormatClean.Contains(FrmSettings.domemoteComboBox.Text.Substring(0, 1)) Then
-                Dim FormatReg As RegularExpressions.Regex
-                Debug.Print(FrmSettings.domemoteComboBox.Text.Substring(0, 1))
-                Debug.Print("\" & FrmSettings.domemoteComboBox.Text.Substring(0, 1) & "([^\)]*)\" & FrmSettings.domemoteComboBox.Text.Substring(0, 1))
-                FormatReg = New RegularExpressions.Regex("\" & FrmSettings.domemoteComboBox.Text.Substring(0, 1) & "([^\)]*)\" & FrmSettings.domemoteComboBox.Text.Substring(0, 1))
-                FormatClean = FormatClean.Replace(FormatReg.Match(FormatClean).Value(), "")
-            End If
-        Catch
-        End Try
+        FormatClean = FormatClean.Replace(FrmSettings.TBEmote.Text, "")
+        FormatClean = FormatClean.Replace(FrmSettings.TBEmoteEnd.Text, "")
+       
         Return FormatClean
     End Function
 

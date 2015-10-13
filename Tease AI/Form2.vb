@@ -713,6 +713,11 @@ Public Class FrmSettings
 
         NBTypoChance.Value = My.Settings.TypoChance
 
+        SliderVVolume.Value = My.Settings.VVolume
+        SliderVRate.Value = My.Settings.VRate
+
+        LBLVVolume.Text = SliderVVolume.Value
+        LBLVRate.Text = SliderVRate.Value
 
         FrmSettingsLoading = False
 
@@ -1436,93 +1441,123 @@ Public Class FrmSettings
     End Sub
   
  
-    Private Sub CBGlitterFeed_MouseHover(sender As Object, e As System.EventArgs)
-        LblGlitterSettingsDescription.Text = "This check box turns Glitter functionality on and off. Glitter is a fictional app located in the sidebar on the left side of the window. It is meant to emulate a social media feed " _
-            & "where the domme posts various thoughts that her contacts might then comment on. When this box is checked, the domme's posts and responses will appear in the Glitter app according to the settings above. " _
-            & "If this box is unchecked, no new posts or responses will appear in the feed."
-    End Sub
-    Private Sub Button35_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitterD.MouseHover
-        LblGlitterSettingsDescription.Text = "This button allows you to change the color of the domme's name as it appears in the Glitter app. A preview will appear in the text box below this button once a color has been selected."
+    ' Private Sub CBGlitterFeed_MouseHover(sender As Object, e As System.EventArgs)
+    '    LblGlitterSettingsDescription.Text = "This check box turns Glitter functionality on and off. Glitter is a fictional app located in the sidebar on the left side of the window. It is meant to emulate a social media feed " _
+    '       & "where the domme posts various thoughts that her contacts might then comment on. When this box is checked, the domme's posts and responses will appear in the Glitter app according to the settings above. " _
+    '      & "If this box is unchecked, no new posts or responses will appear in the feed."
+    'End Sub
+    Private Sub BTNGlitterD_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitterD.MouseHover
+
+        TTDir.SetToolTip(BTNGlitterD, "This button allows you to change the color of the domme's name as it appears in the Glitter app." & Environment.NewLine & _
+                                      "A preview will appear in the text box below this button once a color has been selected.")
+
     End Sub
     Private Sub GlitterAV_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV.MouseHover
-        LblGlitterSettingsDescription.Text = "Click here to set the image the domme will use as her Glitter avatar."
+        TTDir.SetToolTip(GlitterAV, "Click here to set the image the domme will use as her Glitter avatar.")
     End Sub
-    Private Sub LBLGlitterNCDomme_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNCDomme.MouseHover, LBLGlitterNC1.MouseHover, LBLGlitterNC2.MouseHover, LBLGlitterNC3.MouseHover
-        LblGlitterSettingsDescription.Text = "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here."
+    Private Sub LBLGlitterNCDomme_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNCDomme.MouseHover
+        TTDir.SetToolTip(LBLGlitterNCDomme, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
+    End Sub
+    Private Sub LBLGlitterNC1_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC1.MouseHover
+        TTDir.SetToolTip(LBLGlitterNC1, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
+    End Sub
+    Private Sub LBLGlitterNC2_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC2.MouseHover
+        TTDir.SetToolTip(LBLGlitterNC2, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
+    End Sub
+    Private Sub LBLGlitterNC3_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC3.MouseHover
+        TTDir.SetToolTip(LBLGlitterNC3, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
     End Sub
     Private Sub TBGlitterShortName_TextChanged_1(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.MouseHover
-        LblGlitterSettingsDescription.Text = "This is the name that the domme's contacts will refer to her as in the Glitter feed. While it can be the same name you've set in the main window, this setting can help avoid " _
-            & "some potential thematic conflicts. For example, if you've named your domme ""Mistress Ashley"", it wouldn't make sense for her contacts to refer to her in such a way. You could enter ""Ashley"" or ""Ash"" " _
-            & "in this space to better represent their relationship."
-    End Sub
-    Private Sub PNLGlitter_MouseEnter(sender As Object, e As System.EventArgs) Handles PNLGlitter.MouseEnter, GBGlitterD.MouseEnter, GBGlitter1.MouseEnter, GBGlitter2.MouseEnter, GBGlitter3.MouseEnter
-        LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
+        TTDir.SetToolTip(TBGlitterShortName, "This is the name that the domme's contacts will refer to her as in the Glitter feed.")
     End Sub
     Private Sub CBTease_MouseHover(sender As Object, e As System.EventArgs) Handles CBTease.MouseHover
-        LblGlitterSettingsDescription.Text = "When this box is checked, the domme will make posts referencing your ongoing teasing and denial. Her contacts may then respond based on what personality settings have been selected."
+        TTDir.SetToolTip(CBTease, "When this box is checked, the domme will make posts referencing your ongoing teasing and denial.")
     End Sub
     Private Sub CBEgotist_MouseHover(sender As Object, e As System.EventArgs) Handles CBEgotist.MouseHover
-        LblGlitterSettingsDescription.Text = "When this box is checked, the domme will make self-centered posts stating how amazing she is. Her contacts may then respond if they have been enabled."
+        TTDir.SetToolTip(CBEgotist, "When this box is checked, the domme will make self-centered posts stating how amazing she is.")
     End Sub
     Private Sub CBTrivia_MouseHover(sender As Object, e As System.EventArgs) Handles CBTrivia.MouseHover
-        LblGlitterSettingsDescription.Text = "When this box is checked, the domme will make posts containing quotes or general trivia. Her contacts may then respond if they have been enabled."
+        TTDir.SetToolTip(CBTrivia, "When this box is checked, the domme will make posts containing quotes or general trivia.")
     End Sub
     Private Sub CBDaily_MouseHover(sender As Object, e As System.EventArgs) Handles CBDaily.MouseHover
-        LblGlitterSettingsDescription.Text = "When this box is checked, the domme will make posts referencing mundane and generally unimportant events about her day. Her contacts may then respond if they have been enabled."
+        TTDir.SetToolTip(CBDaily, "When this box is checked, the domme will make mundane posts about her day.")
     End Sub
     Private Sub CBCustom1_MouseHover(sender As Object, e As System.EventArgs) Handles CBCustom1.MouseHover
-        LblGlitterSettingsDescription.Text = "When this box is checked, the domme will make posts taken from Custom 1 folder in the Glitter scripts directory for her personality style. Her contacts may then respond if they have been enabled."
+        TTDir.SetToolTip(CBCustom1, "When this box is checked, the domme will make posts taken from Custom 1" & Environment.NewLine & _
+                                  "folder in the Glitter scripts directory for her personality style.")
     End Sub
     Private Sub CBCustom2_MouseHover(sender As Object, e As System.EventArgs) Handles CBCustom2.MouseHover
-        LblGlitterSettingsDescription.Text = "When this box is checked, the domme will make posts taken from Custom 2 folder in the Glitter scripts directory for her personality style. Her contacts may then respond if they have been enabled."
+        TTDir.SetToolTip(CBCustom2, "When this box is checked, the domme will make posts taken from Custom 2" & Environment.NewLine & _
+                                  "folder in the Glitter scripts directory for her personality style.")
     End Sub
-    Private Sub GlitterSlider_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider.MouseHover, LBLGlitterSlider.MouseHover
-        LblGlitterSettingsDescription.Text = "This slider determines how often the domme makes Glitter posts on her own. The further to the right the slider is, the more often she posts. Having the slider all the way to the left will " _
-           & "make her posts very rare. Uncheck the ""Enable Glitter Feed"" box to disable them completely."
+    Private Sub GlitterSlider_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider.MouseHover
+        TTDir.SetToolTip(GlitterSlider, "This slider determines how often the domme makes Glitter posts on her own." & Environment.NewLine & _
+                                             "The further to the right the slider is, the more often she posts.")
     End Sub
-    Private Sub CB1Bratty_MouseHover(sender As Object, e As System.EventArgs)
-        LblGlitterSettingsDescription.Text = "When this box is checked, this contact will respond to the domme's Tease updates by saying bratty things to or about you. She might express amusement at the situation you're in, " _
-            & "or make a joke at the expense of your suffering. Bratty remarks can be considered the chants of a cheerleader who's excited by the action on the field, but doesn't wish to participate herself. NOTE: This check " _
-            & "box only affects responses to Tease posts the domme makes. Any other category will be responded to without taking this setting into account. More than one box may be checked at the same time."
+    Private Sub LBLGlitterSlider_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider.MouseHover
+        TTDir.SetToolTip(LBLGlitterSlider, "This slider determines how often the domme makes Glitter posts on her own." & Environment.NewLine & _
+                                             "The further to the right the slider is, the more often she posts.")
     End Sub
-    Private Sub CB1Cruel_MouseHover(sender As Object, e As System.EventArgs)
-        LblGlitterSettingsDescription.Text = "When this box is checked, this contact will respond to the domme's Tease updates by antagonizing you or your domme, encouraging her to make you suffer even more. She might insist " _
-            & "you can take more than what you let on, or tell you how much worse you'd have it if you were under her control. Cruel remarks try to cut you to the bone and keep your ache going strong. NOTE: This check " _
-            & "box only affects responses to Tease posts the domme makes. Any other category will be responded to without taking this setting into account. More than one box may be checked at the same time."
+  
+    Private Sub TBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter1.MouseHover
+        TTDir.SetToolTip(TBGlitter1, "This will be the name of this contact as it appears in the Glitter feed.")
     End Sub
-    Private Sub CB1Caring_MouseHover(sender As Object, e As System.EventArgs)
-        LblGlitterSettingsDescription.Text = "When this box is checked, this contact will respond to the domme's Tease updates with sympathy and compassion for you. She might inspire you to keep up the struggle by telling " _
-            & "you that you're doing really well, or express concern for your overall well-being. Caring remarks never try to undermine your domme, but they do seek to give you strength and encouragement. NOTE: This check " _
-            & "box only affects responses to Tease posts the domme makes. Any other category will be responded to without taking this setting into account. More than one box may be checked at the same time."
+    Private Sub TBGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter2.MouseHover
+        TTDir.SetToolTip(TBGlitter2, "This will be the name of this contact as it appears in the Glitter feed.")
     End Sub
-    Private Sub CB1Angry_MouseHover(sender As Object, e As System.EventArgs)
-        LblGlitterSettingsDescription.Text = "When this box is checked, this contact will respond to the domme's Tease updates with fiery indignation. She will be shocked and appalled by what you're being put through, " _
-            & "or that your domme could make light of your ordeal by posting about it for everyone to see. Angry remarks won't dissuade your domme from doing what she wants, leaving the contact to seethe in vocal disbelief. NOTE: This check " _
-            & "box only affects responses to Tease posts the domme makes. Any other category will be responded to without taking this setting into account. More than one box may be checked at the same time."
+    Private Sub TBGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter3.MouseHover
+        TTDir.SetToolTip(TBGlitter3, "This will be the name of this contact as it appears in the Glitter feed.")
     End Sub
-    Private Sub CB1Custom1_MouseHover(sender As Object, e As System.EventArgs)
-        LblGlitterSettingsDescription.Text = "When this box is checked, this contact will respond to the domme's Tease updates with comments that contain the ""@Custom1"" keyword. NOTE: This check " _
-            & "box only affects responses to Tease posts the domme makes. Any other category will be responded to without taking this setting into account. More than one box may be checked at the same time."
+    Private Sub GlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider1.MouseHover
+        TTDir.SetToolTip(GlitterSlider1, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine & _
+                                         "The further to the right the slider is, the more often she responds.")
     End Sub
-    Private Sub CB1Custom2_MouseHover(sender As Object, e As System.EventArgs)
-        LblGlitterSettingsDescription.Text = "When this box is checked, this contact will respond to the domme's Tease updates with comments that contain the ""@Custom2"" keyword. NOTE: This check " _
-            & "box only affects responses to Tease posts the domme makes. Any other category will be responded to without taking this setting into account. More than one box may be checked at the same time."
+    Private Sub GlitterSlider2_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider2.MouseHover
+        TTDir.SetToolTip(GlitterSlider2, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine & _
+                                         "The further to the right the slider is, the more often she responds.")
     End Sub
-    Private Sub TBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter1.MouseHover, TBGlitter2.MouseHover, TBGlitter3.MouseHover
-        LblGlitterSettingsDescription.Text = "This will be the name of this contact as it appears in the Glitter feed."
+    Private Sub GlitterSlider3_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider3.MouseHover
+        TTDir.SetToolTip(GlitterSlider3, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine & _
+                                         "The further to the right the slider is, the more often she responds.")
     End Sub
-    Private Sub GlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider1.MouseHover, LBLGlitterSlider1.MouseHover, GlitterSlider2.MouseHover, LBLGlitterSlider2.MouseHover, GlitterSlider3.MouseHover, LBLGlitterSlider3.MouseHover
-        LblGlitterSettingsDescription.Text = "This slider determines how often this contact responds to the domme's Glitter posts. The further to the right the slider is, the more often she responds. Having the slider all the way to the left will " _
-           & "make her responses very rare."
+    Private Sub LBLGlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider1.MouseHover
+        TTDir.SetToolTip(LBLGlitterSlider1, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine & _
+                                         "The further to the right the slider is, the more often she responds.")
     End Sub
-    Private Sub GlitterAV1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV1.MouseHover, GlitterAV2.MouseHover, GlitterAV3.MouseHover
-        LblGlitterSettingsDescription.Text = "Click here to set the image that this contact will use as her Glitter avatar."
+    Private Sub LBLGlitterSlider2_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider2.MouseHover
+        TTDir.SetToolTip(LBLGlitterSlider2, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine & _
+                                         "The further to the right the slider is, the more often she responds.")
     End Sub
-    Private Sub CBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter1.MouseHover, CBGlitter2.MouseHover, CBGlitter3.MouseHover
-        LblGlitterSettingsDescription.Text = "This check box enables this contact's participation in the Glitter feed."
+    Private Sub LBLGlitterSlider3_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider3.MouseHover
+        TTDir.SetToolTip(LBLGlitterSlider3, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine & _
+                                         "The further to the right the slider is, the more often she responds.")
     End Sub
-    Private Sub BTNGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter1.MouseHover, BTNGlitter2.MouseHover, BTNGlitter3.MouseHover
-        LblGlitterSettingsDescription.Text = "This button allows you to change the color of this contact's name as it appears in the Glitter app. A preview will appear in the text box below this button once a color has been selected."
+    Private Sub GlitterAV1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV1.MouseHover
+        TTDir.SetToolTip(GlitterAV1, "Click here to set the image that this contact will use as her Glitter avatar.")
+    End Sub
+    Private Sub GlitterAV2_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV2.MouseHover
+        TTDir.SetToolTip(GlitterAV2, "Click here to set the image that this contact will use as her Glitter avatar.")
+    End Sub
+    Private Sub GlitterAV3_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV3.MouseHover
+        TTDir.SetToolTip(GlitterAV3, "Click here to set the image that this contact will use as her Glitter avatar.")
+    End Sub
+    Private Sub CBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter1.MouseHover
+        TTDir.SetToolTip(CBGlitter1, "This check box enables this contact's participation in the Glitter feed.")
+    End Sub
+    Private Sub CBGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter2.MouseHover
+        TTDir.SetToolTip(CBGlitter2, "This check box enables this contact's participation in the Glitter feed.")
+    End Sub
+    Private Sub CBGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter3.MouseHover
+        TTDir.SetToolTip(CBGlitter3, "This check box enables this contact's participation in the Glitter feed.")
+    End Sub
+    Private Sub BTNGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter1.MouseHover
+        TTDir.SetToolTip(BTNGlitter1, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
+    End Sub
+    Private Sub BTNGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter2.MouseHover
+        TTDir.SetToolTip(BTNGlitter2, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
+    End Sub
+    Private Sub BTNGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter3.MouseHover
+        TTDir.SetToolTip(BTNGlitter3, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
     End Sub
 #End Region
 
@@ -5129,13 +5164,24 @@ NextURL:
            "If the lowercase typing option is checked, she will also capitalize ""I, I'm, I'd and I'll"".")
     End Sub
 
-    Private Sub domemoteComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domemoteComboBox.LostFocus
-        My.Settings.DomEmotes = domemoteComboBox.Text
+    Private Sub TBEmote_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBEmote.LostFocus
+        My.Settings.TBEmote = TBEmote.Text
         My.Settings.Save()
     End Sub
 
-    Private Sub domemoteComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles domemoteComboBox.MouseHover
-        TTDir.SetToolTip(domemoteComboBox, "This determines what symbols the domme uses to emote.")
+    Private Sub TBEmoteEnd_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBEmoteEnd.LostFocus
+        My.Settings.TBEmoteEnd = TBEmoteEnd.Text
+        My.Settings.Save()
+    End Sub
+
+
+
+    Private Sub TBEmote_MouseHover(sender As System.Object, e As System.EventArgs) Handles TBEmote.MouseHover
+        TTDir.SetToolTip(TBEmote, "This determines what symbol(s) the domme uses to begin an emote.")
+    End Sub
+
+    Private Sub TBEmoteEnd_MouseHover(sender As System.Object, e As System.EventArgs) Handles TBEmoteEnd.MouseHover
+        TTDir.SetToolTip(TBEmoteEnd, "This determines what symbol(s) the domme uses to end an emote.")
     End Sub
 
     Private Sub CBDomDenialEnds_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBDomDenialEnds.LostFocus
@@ -9380,7 +9426,7 @@ WhyUMakeMeDoDis:
             SettingsList.Add("No Commas: " & commaCheckBox.Checked)
             SettingsList.Add("No Periods: " & periodCheckBox.Checked)
             SettingsList.Add("Me/My/Mine: " & CBMeMyMine.Checked)
-            SettingsList.Add("Emotes: " & domemoteComboBox.Text)
+            SettingsList.Add("Emotes: " & "NULL")
 
             SettingsList.Add("DommeMoodMin: " & NBDomMoodMin.Value)
             SettingsList.Add("DommeMoodMax: " & NBDomMoodMax.Value)
@@ -9463,7 +9509,7 @@ WhyUMakeMeDoDis:
                 commaCheckBox.Checked = SettingsList(31).Replace("No Commas: ", "")
                 periodCheckBox.Checked = SettingsList(32).Replace("No Periods: ", "")
                 CBMeMyMine.Checked = SettingsList(33).Replace("Me/My/Mine: ", "")
-                domemoteComboBox.Text = SettingsList(34).Replace("Emotes: ", "")
+                'domemoteComboBox.Text = SettingsList(34).Replace("Emotes: ", "")
 
                 NBDomMoodMin.Value = SettingsList(35).Replace("DommeMoodMin: ", "")
                 NBDomMoodMax.Value = SettingsList(36).Replace("DommeMoodMax: ", "")
@@ -9524,7 +9570,7 @@ WhyUMakeMeDoDis:
         My.Settings.DomNoCommas = commaCheckBox.Checked
         My.Settings.DomNoPeriods = periodCheckBox.Checked
         My.Settings.DomMeMyMine = CBMeMyMine.Checked
-        My.Settings.DomEmotes = domemoteComboBox.Text
+        My.Settings.DomEmotes = "NULL"
 
         My.Settings.DomMoodMin = NBDomMoodMin.Value
         My.Settings.DomMoodMax = NBDomMoodMax.Value
@@ -9578,7 +9624,7 @@ WhyUMakeMeDoDis:
         commaCheckBox.Checked = My.Settings.DomNoCommas
         periodCheckBox.Checked = My.Settings.DomNoPeriods
         CBMeMyMine.Checked = My.Settings.DomMeMyMine
-        domemoteComboBox.Text = My.Settings.DomEmotes
+        'domemoteComboBox.Text = My.Settings.DomEmotes
 
         NBDomMoodMin.Value = My.Settings.DomMoodMin
         NBDomMoodMax.Value = My.Settings.DomMoodMax
@@ -14032,4 +14078,29 @@ NextURL:
         TTDir.SetToolTip(BTNRefreshVideos, "Use this button to refresh video paths.")
     End Sub
 
+    Private Sub SliderVVolume_LostFocus(sender As Object, e As System.EventArgs) Handles SliderVVolume.LostFocus
+        My.Settings.VVolume = SliderVVolume.Value
+        My.Settings.Save()
+    End Sub
+    Private Sub SliderVRate_LostFocus(sender As Object, e As System.EventArgs) Handles SliderVRate.LostFocus
+        My.Settings.VRate = SliderVRate.Value
+        My.Settings.Save()
+    End Sub
+
+    Private Sub SliderVVolume_MouseHover(sender As Object, e As System.EventArgs) Handles SliderVVolume.MouseHover
+        TTDir.SetToolTip(SliderVVolume, "Adusts the volume of the domme's TTS voice.")
+    End Sub
+
+    Private Sub SliderVRate_MouseHover(sender As Object, e As System.EventArgs) Handles SliderVRate.MouseHover
+        TTDir.SetToolTip(SliderVRate, "Adusts the speed of the domme's TTS voice.")
+    End Sub
+
+    Private Sub SliderVVolume_Scroll(sender As System.Object, e As System.EventArgs) Handles SliderVVolume.Scroll
+        Form1.synth2.Volume = SliderVVolume.Value
+        LBLVVolume.Text = SliderVVolume.Value
+    End Sub
+    Private Sub SliderVRate_Scroll(sender As System.Object, e As System.EventArgs) Handles SliderVRate.Scroll
+        Form1.synth2.Rate = SliderVRate.Value
+        LBLVRate.Text = SliderVRate.Value
+    End Sub
 End Class
