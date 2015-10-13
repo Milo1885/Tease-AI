@@ -5297,6 +5297,9 @@ NullResponse:
 
                 If SysMes = False And EmoMes = False Then
 
+                    Dim UCASELine As String = UCase(DomTask.Substring(0, 1))
+                    DomTask = DomTask.Remove(0, 1).Insert(0, UCASELine)
+
                     If FrmSettings.LCaseCheckBox.Checked = True Then DomTask = LCase(DomTask)
                     If FrmSettings.CBMeMyMine.Checked = True Then
                         Dim MeArray() As String = Split(DomTask)
@@ -6170,6 +6173,9 @@ TryNextWithTease:
                 ' #######################
 
                 If SysMes = False And EmoMes = False Then
+
+                    Dim UCASELine As String = UCase(DomChat.Substring(0, 1))
+                    DomChat = DomChat.Remove(0, 1).Insert(0, UCASELine)
 
                     If FrmSettings.LCaseCheckBox.Checked = True Then DomChat = LCase(DomChat)
                     If FrmSettings.CBMeMyMine.Checked = True Then

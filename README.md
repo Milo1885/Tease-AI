@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Tease AI now automatically capitalizes the first character of each line (will still be overridden by Remove Capitalization option in Domme's Typing Style)
+
 Wildcard ability added to @PlayVideo[] @PlayAudio[] and @ShowImage[] Commands
 
 Web Sex Toy start instructions added to @Edge-related Commands
