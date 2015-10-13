@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Wildcard ability added to @PlayVideo[] @PlayAudio[] and @ShowImage[] Commands
+
 Web Sex Toy start instructions added to @Edge-related Commands
 
 Added Volume and Rate Sliders for Text to Speech options
