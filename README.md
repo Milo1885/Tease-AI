@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 48
 
+Web Sex Toy start instructions added to @Edge-related Commands
+
 Added Volume and Rate Sliders for Text to Speech options
 
 Replaced "Emotes Like This" with custom beginning/ending emote textboxes
@@ -29,7 +31,7 @@ Long Edge amount is now measured in minutes instead of seconds
 
 Open From Text button in AI Box Tools has been changed to Open From Clipboard
 
-Added option to switch right-side panels to left side of the screen
+Added option to switch left-side panels to right side of the screen
 
 Decreased the minimum size of the Chat Window panel so that the main picture area can be made larger
 

@@ -10729,6 +10729,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinNoHoldNoSecret", "")
@@ -10740,7 +10741,7 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@EdgeToRuinHoldNoSecret(") Then
 
-            Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeHold(")
+            Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")
 
             If EdgeHoldFlag.Contains(",") Then
 
@@ -10762,8 +10763,8 @@ RinseLatherRepeat:
             Else
 
                 EdgeHoldSeconds = Val(EdgeHoldFlag)
-                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("M") Then EdgeHoldSeconds *= 60
-                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("H") Then EdgeHoldSeconds *= 3600
+                If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("M") Then EdgeHoldSeconds *= 60
+                If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("H") Then EdgeHoldSeconds *= 3600
 
             End If
 
@@ -10786,6 +10787,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret(" & GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(") & ")", "")
@@ -10811,6 +10813,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret", "")
@@ -10833,6 +10836,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinNoSecret", "")
@@ -10855,6 +10859,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinNoHold", "")
@@ -10866,7 +10871,7 @@ RinseLatherRepeat:
 
         If StringClean.Contains("@EdgeToRuinHold(") Then
 
-            Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeHold(")
+            Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeToRuinHold(")
 
             If EdgeHoldFlag.Contains(",") Then
 
@@ -10888,8 +10893,8 @@ RinseLatherRepeat:
             Else
 
                 EdgeHoldSeconds = Val(EdgeHoldFlag)
-                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("M") Then EdgeHoldSeconds *= 60
-                If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("H") Then EdgeHoldSeconds *= 3600
+                If UCase(GetParentheses(StringClean, "@EdgeToRuinHold(")).Contains("M") Then EdgeHoldSeconds *= 60
+                If UCase(GetParentheses(StringClean, "@EdgeToRuinHold(")).Contains("H") Then EdgeHoldSeconds *= 3600
 
             End If
 
@@ -10911,6 +10916,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinHold(" & GetParentheses(StringClean, "@EdgeToRuinHold(") & ")", "")
@@ -10933,6 +10939,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuinHold", "")
@@ -10954,6 +10961,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeToRuin", "")
@@ -10975,6 +10983,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeNoHold", "")
@@ -11035,9 +11044,11 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeHold(" & GetParentheses(StringClean, "@EdgeHold(") & ")", "")
+
         End If
 
 
@@ -11059,6 +11070,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@EdgeHold", "")
@@ -11079,6 +11091,7 @@ RinseLatherRepeat:
             EdgeTauntTimer.Start()
             If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
             EdgePace()
+            ActivateWebToy()
             DisableContactStroke()
             SessionEdges += 1
             StringClean = StringClean.Replace("@Edge", "")
@@ -13953,6 +13966,28 @@ VTSkip:
         'MsgBox(Test)
         'StringClean = StringClean.Replace("@ParenTest(" & Test & ")", "")
         'End If
+
+    End Sub
+
+    Public Sub ActivateWebToy()
+
+        If FrmSettings.TBWebStart.Text <> "" Then
+            Try
+                FrmSettings.WebToy.Navigate(FrmSettings.TBWebStart.Text)
+            Catch
+            End Try
+        End If
+
+    End Sub
+
+    Public Sub DeactivateWebToy()
+
+        If FrmSettings.TBWebStart.Text <> "" Then
+            Try
+                FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
+            Catch
+            End Try
+        End If
 
     End Sub
 
