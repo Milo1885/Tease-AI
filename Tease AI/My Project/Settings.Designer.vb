@@ -4951,6 +4951,30 @@ Namespace My
                 Me("VRate") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomSadistic() As Boolean
+            Get
+                Return CType(Me("DomSadistic"),Boolean)
+            End Get
+            Set
+                Me("DomSadistic") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property DomDegrading() As Boolean
+            Get
+                Return CType(Me("DomDegrading"),Boolean)
+            End Get
+            Set
+                Me("DomDegrading") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

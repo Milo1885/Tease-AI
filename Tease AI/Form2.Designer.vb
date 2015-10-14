@@ -32,6 +32,10 @@ Partial Class FrmSettings
         Me.BTNDomImageDir = New System.Windows.Forms.Button()
         Me.LBLDomImageDir = New System.Windows.Forms.Label()
         Me.GBGeneralTextToSpeech = New System.Windows.Forms.GroupBox()
+        Me.LBLVRate = New System.Windows.Forms.Label()
+        Me.Label93 = New System.Windows.Forms.Label()
+        Me.LBLVVolume = New System.Windows.Forms.Label()
+        Me.Label68 = New System.Windows.Forms.Label()
         Me.SliderVRate = New System.Windows.Forms.TrackBar()
         Me.SliderVVolume = New System.Windows.Forms.TrackBar()
         Me.TTSCheckBox = New System.Windows.Forms.CheckBox()
@@ -963,10 +967,6 @@ Partial Class FrmSettings
         Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
         Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
         Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Label68 = New System.Windows.Forms.Label()
-        Me.LBLVVolume = New System.Windows.Forms.Label()
-        Me.LBLVRate = New System.Windows.Forms.Label()
-        Me.Label93 = New System.Windows.Forms.Label()
         Me.SettingsPanel.SuspendLayout
         Me.SettingsTabs.SuspendLayout
         Me.TabPage1.SuspendLayout
@@ -1314,6 +1314,42 @@ Partial Class FrmSettings
         Me.GBGeneralTextToSpeech.TabIndex = 0
         Me.GBGeneralTextToSpeech.TabStop = false
         Me.GBGeneralTextToSpeech.Text = "Text to Speech"
+        '
+        'LBLVRate
+        '
+        Me.LBLVRate.Location = New System.Drawing.Point(197, 108)
+        Me.LBLVRate.Name = "LBLVRate"
+        Me.LBLVRate.Size = New System.Drawing.Size(45, 13)
+        Me.LBLVRate.TabIndex = 158
+        Me.LBLVRate.Text = "100"
+        Me.LBLVRate.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'Label93
+        '
+        Me.Label93.AutoSize = true
+        Me.Label93.Location = New System.Drawing.Point(20, 108)
+        Me.Label93.Name = "Label93"
+        Me.Label93.Size = New System.Drawing.Size(33, 13)
+        Me.Label93.TabIndex = 157
+        Me.Label93.Text = "Rate:"
+        '
+        'LBLVVolume
+        '
+        Me.LBLVVolume.Location = New System.Drawing.Point(197, 49)
+        Me.LBLVVolume.Name = "LBLVVolume"
+        Me.LBLVVolume.Size = New System.Drawing.Size(45, 13)
+        Me.LBLVVolume.TabIndex = 33
+        Me.LBLVVolume.Text = "100"
+        Me.LBLVVolume.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'Label68
+        '
+        Me.Label68.AutoSize = true
+        Me.Label68.Location = New System.Drawing.Point(20, 49)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(45, 13)
+        Me.Label68.TabIndex = 32
+        Me.Label68.Text = "Volume:"
         '
         'SliderVRate
         '
@@ -2729,9 +2765,8 @@ Partial Class FrmSettings
         Me.condescendingCheckBox.ForeColor = System.Drawing.Color.Black
         Me.condescendingCheckBox.Location = New System.Drawing.Point(148, 43)
         Me.condescendingCheckBox.Name = "condescendingCheckBox"
-        Me.condescendingCheckBox.Size = New System.Drawing.Size(100, 17)
+        Me.condescendingCheckBox.Size = New System.Drawing.Size(15, 14)
         Me.condescendingCheckBox.TabIndex = 41
-        Me.condescendingCheckBox.Text = "Condescending"
         Me.condescendingCheckBox.UseVisualStyleBackColor = true
         '
         'GBDomOrgasms
@@ -12376,42 +12411,6 @@ Partial Class FrmSettings
         '
         'BWCreateURLFiles
         '
-        '
-        'Label68
-        '
-        Me.Label68.AutoSize = true
-        Me.Label68.Location = New System.Drawing.Point(20, 49)
-        Me.Label68.Name = "Label68"
-        Me.Label68.Size = New System.Drawing.Size(45, 13)
-        Me.Label68.TabIndex = 32
-        Me.Label68.Text = "Volume:"
-        '
-        'LBLVVolume
-        '
-        Me.LBLVVolume.Location = New System.Drawing.Point(197, 49)
-        Me.LBLVVolume.Name = "LBLVVolume"
-        Me.LBLVVolume.Size = New System.Drawing.Size(45, 13)
-        Me.LBLVVolume.TabIndex = 33
-        Me.LBLVVolume.Text = "100"
-        Me.LBLVVolume.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'LBLVRate
-        '
-        Me.LBLVRate.Location = New System.Drawing.Point(197, 108)
-        Me.LBLVRate.Name = "LBLVRate"
-        Me.LBLVRate.Size = New System.Drawing.Size(45, 13)
-        Me.LBLVRate.TabIndex = 158
-        Me.LBLVRate.Text = "100"
-        Me.LBLVRate.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'Label93
-        '
-        Me.Label93.AutoSize = true
-        Me.Label93.Location = New System.Drawing.Point(20, 108)
-        Me.Label93.Name = "Label93"
-        Me.Label93.Size = New System.Drawing.Size(33, 13)
-        Me.Label93.TabIndex = 157
-        Me.Label93.Text = "Rate:"
         '
         'FrmSettings
         '

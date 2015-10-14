@@ -9437,7 +9437,13 @@ WhyUMakeMeDoDis:
             SettingsList.Add("SubAgeMin: " & NBSubAgeMin.Value)
             SettingsList.Add("SubAgeMax: " & NBSubAgeMax.Value)
 
+            SettingsList.Add("Emote Start: " & TBEmote.Text)
+            SettingsList.Add("Emote End: " & TBEmoteEnd.Text)
 
+            SettingsList.Add("Sadistic: " & sadisticCheckBox.Checked)
+            SettingsList.Add("Degrading: " & degradingCheckBox.Checked)
+
+            SettingsList.Add("Typo Chance: " & NBTypoChance.Value)
 
             Dim SettingsString As String = ""
 
@@ -9520,6 +9526,16 @@ WhyUMakeMeDoDis:
                 NBSubAgeMin.Value = SettingsList(41).Replace("SubAgeMin: ", "")
                 NBSubAgeMax.Value = SettingsList(42).Replace("SubAgeMax: ", "")
 
+
+                TBEmote.Text = SettingsList(43).Replace("Emote Start: ", "")
+                TBEmoteEnd.Text = SettingsList(44).Replace("Emote End: ", "")
+
+                sadisticCheckBox.Checked = SettingsList(45).Replace("Sadistic: ", "")
+                degradingCheckBox.Checked = SettingsList(46).Replace("Degrading: ", "")
+
+                NBTypoChance.Value = SettingsList(47).Replace("Typo Chance: ", "")
+
+
                 SaveDommeSettings()
             Catch
                 MessageBox.Show(Me, "This settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -9551,6 +9567,8 @@ WhyUMakeMeDoDis:
         My.Settings.DomCrazy = crazyCheckBox.Checked
         My.Settings.DomVulgar = vulgarCheckBox.Checked
         My.Settings.DomSupremacist = supremacistCheckBox.Checked
+        My.Settings.DomSadistic = sadisticCheckBox.Checked
+        My.Settings.DomDegrading = degradingCheckBox.Checked
         My.Settings.pnSetting1 = petnameBox1.Text
         My.Settings.pnSetting2 = petnameBox2.Text
         My.Settings.pnSetting3 = petnameBox3.Text
@@ -9605,6 +9623,8 @@ WhyUMakeMeDoDis:
         crazyCheckBox.Checked = My.Settings.DomCrazy
         vulgarCheckBox.Checked = My.Settings.DomVulgar
         supremacistCheckBox.Checked = My.Settings.DomSupremacist
+        sadisticCheckBox.Checked = My.Settings.DomSadistic
+        degradingCheckBox.Checked = My.Settings.DomDegrading
         petnameBox1.Text = My.Settings.pnSetting1
         petnameBox2.Text = My.Settings.pnSetting2
         petnameBox3.Text = My.Settings.pnSetting3
@@ -14103,4 +14123,15 @@ NextURL:
         Form1.synth2.Rate = SliderVRate.Value
         LBLVRate.Text = SliderVRate.Value
     End Sub
+
+    Private Sub sadisticCheckBox_LostFocus(sender As Object, e As System.EventArgs) Handles sadisticCheckBox.LostFocus
+        My.Settings.DomSadistic = sadisticCheckBox.Checked
+        My.Settings.Save()
+    End Sub
+
+    Private Sub degradingCheckBox_LostFocus(sender As Object, e As System.EventArgs) Handles degradingCheckBox.LostFocus
+        My.Settings.DomDegrading = degradingCheckBox.Checked
+        My.Settings.Save()
+    End Sub
+
 End Class
