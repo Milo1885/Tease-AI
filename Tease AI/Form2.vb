@@ -404,6 +404,10 @@ Public Class FrmSettings
         NBHoldTheEdgeMin.Value = My.Settings.HoldTheEdgeMin
         LBLMinHold.Text = My.Settings.HoldTheEdgeMinAmount
         LBLMaxHold.Text = My.Settings.HoldTheEdgeMaxAmount
+        NBLongHoldMax.Value = My.Settings.LongHoldMax
+        NBLongHoldMin.Value = My.Settings.LongHoldMin
+        NBExtremeHoldMax.Value = My.Settings.ExtremeHoldMax
+        NBExtremeHoldMin.Value = My.Settings.ExtremeHoldMin
 
 
         CBTSlider.Value = My.Settings.CBTSlider
@@ -3084,6 +3088,18 @@ NextURL:
 
     End Sub
 
+    Private Sub CBWebtease_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBWebtease.MouseClick
+
+        If CBWebtease.Checked = True Then
+            My.Settings.CBWebtease = True
+        Else
+            My.Settings.CBWebtease = False
+        End If
+        My.Settings.Save()
+
+
+    End Sub
+
     Private Sub CBBlogImageWindow_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBBlogImageWindow.MouseClick
         If CBBlogImageWindow.Checked = True Then
             My.Settings.CBBlogImageMain = True
@@ -3215,6 +3231,31 @@ NextURL:
 
         'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird der Lokale Dateipfad oder die URL-Adresse von jedem Bild in der oberen linken Ecke des Bildschirms angezeigt."
     End Sub
+
+
+    Private Sub Button2_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button2.MouseHover
+
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(Button2, "Use this button to select a directory containing several image" & Environment.NewLine &
+"set folders of the same model you're using as your contact.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(Button2, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+    End Sub
+    Private Sub Button8_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button8.MouseHover
+
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(Button8, "Use this button to select a directory containing several image" & Environment.NewLine &
+"set folders of the same model you're using as your contact.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(Button8, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+    End Sub
+    Private Sub Button10_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button10.MouseHover
+
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(Button10, "Use this button to select a directory containing several image" & Environment.NewLine &
+"set folders of the same model you're using as your contact.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(Button10, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+    End Sub
+
+
 
     Private Sub BTNDomImageDir_MouseHover(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.MouseHover
 
@@ -9293,6 +9334,67 @@ WhyUMakeMeDoDis:
         End If
     End Sub
 
+    Private Sub NBLongHoldMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBLongHoldMax.LostFocus
+        My.Settings.LongHoldMax = NBLongHoldMax.Value
+        My.Settings.Save()
+    End Sub
+
+    Private Sub NBLongHoldMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBLongHoldMin.LostFocus
+        My.Settings.LongHoldMin = NBLongHoldMin.Value
+        My.Settings.Save()
+    End Sub
+
+    Private Sub NBLongHoldMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBLongHoldMax.ValueChanged
+        If FrmSettingsLoading = False Then
+            If NBLongHoldMax.Value = 1 Then
+                LBLMaxLongHold.Text = "minute"
+            Else
+                LBLMaxLongHold.Text = "minutes"
+            End If
+        End If
+    End Sub
+
+    Private Sub NBLongHoldMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBLongHoldMin.ValueChanged
+        If FrmSettingsLoading = False Then
+            If NBLongHoldMin.Value = 1 Then
+                LBLMinLongHold.Text = "minute"
+            Else
+                LBLMinLongHold.Text = "minutes"
+            End If
+        End If
+    End Sub
+
+
+    Private Sub NBExtremeHoldMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBExtremeHoldMax.LostFocus
+        My.Settings.ExtremeHoldMax = NBExtremeHoldMax.Value
+        My.Settings.Save()
+    End Sub
+
+    Private Sub NBExtremeHoldMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBExtremeHoldMin.LostFocus
+        My.Settings.ExtremeHoldMin = NBExtremeHoldMin.Value
+        My.Settings.Save()
+    End Sub
+
+    Private Sub NBExtremeHoldMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBExtremeHoldMax.ValueChanged
+        If FrmSettingsLoading = False Then
+            If NBExtremeHoldMax.Value = 1 Then
+                LBLMaxExtremeHold.Text = "minute"
+            Else
+                LBLMaxExtremeHold.Text = "minutes"
+            End If
+        End If
+    End Sub
+
+    Private Sub NBExtremeHoldMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBExtremeHoldMin.ValueChanged
+        If FrmSettingsLoading = False Then
+            If NBExtremeHoldMin.Value = 1 Then
+                LBLMinExtremeHold.Text = "minute"
+            Else
+                LBLMinExtremeHold.Text = "minutes"
+            End If
+        End If
+    End Sub
+
     Private Sub Button11_Click(sender As System.Object, e As System.EventArgs)
         Dim testreader As New StreamReader(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\StrokeTaunts_1.txt")
         Dim TestingList As New List(Of String)
@@ -12512,7 +12614,8 @@ NextURL:
 
         Debug.Print("done")
 
-        MessageBox.Show(Me, PBMaintenance.Maximum & " scripts have been audited." & Environment.NewLine & Environment.NewLine & _
+        ' Github Patch
+        MessageBox.Show(If(Me.Visible, Me, FrmSplash), PBMaintenance.Maximum & " scripts have been audited." & Environment.NewLine & Environment.NewLine & _
                         "Blank lines cleared: " & BlankAudit & Environment.NewLine & Environment.NewLine & _
                         "Script errors corrected: " & ErrorAudit, "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
@@ -13850,7 +13953,7 @@ NextURL:
             SettingsList.Add("Chat Text Color: " & My.Settings.ChatTextColor.ToArgb.ToString)
             SettingsList.Add("Date Text Color: " & My.Settings.DateTextColor.ToArgb.ToString)
             SettingsList.Add("Date Back Color: " & My.Settings.DateBackColor.ToArgb.ToString)
-            SettingsList.Add("Transparent Date: " & My.Settings.DateTextColor.ToArgb.ToString)
+            SettingsList.Add("Transparent Date: " & CBTransparentTime.Checked)
 
             SettingsList.Add("FlipImage: " & CBFlipBack.Checked)
 
@@ -13886,7 +13989,8 @@ NextURL:
 
             'Debug.Print("Dates = " & Dates)
 
-            My.Settings.WakeUp = Form1.GetTime("SYS_WakeUp")
+            ' Github Patch My.Settings.WakeUp = Form1.GetTime("SYS_WakeUp")
+            My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & Form1.GetTime("SYS_WakeUp")
             My.Settings.Save()
 
 
@@ -14116,10 +14220,12 @@ NextURL:
     End Sub
 
     Private Sub SliderVVolume_Scroll(sender As System.Object, e As System.EventArgs) Handles SliderVVolume.Scroll
+        Form1.synth.Volume = SliderVVolume.Value
         Form1.synth2.Volume = SliderVVolume.Value
         LBLVVolume.Text = SliderVVolume.Value
     End Sub
     Private Sub SliderVRate_Scroll(sender As System.Object, e As System.EventArgs) Handles SliderVRate.Scroll
+        Form1.synth.Rate = SliderVRate.Value
         Form1.synth2.Rate = SliderVRate.Value
         LBLVRate.Text = SliderVRate.Value
     End Sub
@@ -14134,4 +14240,93 @@ NextURL:
         My.Settings.Save()
     End Sub
 
+  
+    Private Sub CBWebtease_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBWebtease.CheckedChanged
+        If CBWebtease.Checked = True Then
+            Form1.WebteaseModeToolStripMenuItem.Checked = True
+            Form1.ChatText.ScrollBarsEnabled = False
+            Form1.ChatText2.ScrollBarsEnabled = False
+        Else
+            Form1.WebteaseModeToolStripMenuItem.Checked = False
+            Form1.ChatText.ScrollBarsEnabled = True
+            Form1.ChatText2.ScrollBarsEnabled = True
+
+        End If
+    End Sub
+
+    Private Sub CBDebugTaunts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBDebugTaunts.CheckedChanged
+        If CBDebugTaunts.Checked = True Then
+            RBDebugTaunts1.Enabled = True
+            RBDebugTaunts2.Enabled = True
+            RBDebugTaunts3.Enabled = True
+            CBDebugTauntsEndless.Enabled = True
+            BTNDebugTauntsClear.Enabled = True
+
+            If RBDebugTaunts1.Checked = True Then
+                TBDebugTaunts1.Enabled = True
+                TBDebugTaunts2.Enabled = False
+                TBDebugTaunts3.Enabled = False
+            End If
+            If RBDebugTaunts2.Checked = True Then
+                TBDebugTaunts1.Enabled = True
+                TBDebugTaunts2.Enabled = True
+                TBDebugTaunts3.Enabled = False
+            End If
+            If RBDebugTaunts3.Checked = True Then
+                TBDebugTaunts1.Enabled = True
+                TBDebugTaunts2.Enabled = True
+                TBDebugTaunts3.Enabled = True
+            End If
+        Else
+            RBDebugTaunts1.Enabled = False
+            RBDebugTaunts2.Enabled = False
+            RBDebugTaunts3.Enabled = False
+            CBDebugTauntsEndless.Enabled = False
+            BTNDebugTauntsClear.Enabled = False
+            TBDebugTaunts1.Enabled = False
+            TBDebugTaunts2.Enabled = False
+            TBDebugTaunts3.Enabled = False
+        End If
+    End Sub
+
+    Private Sub RBDebugTaunts1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RBDebugTaunts1.CheckedChanged, RBDebugTaunts2.CheckedChanged, RBDebugTaunts3.CheckedChanged
+        If RBDebugTaunts1.Checked = True Then
+            TBDebugTaunts1.Enabled = True
+            TBDebugTaunts2.Enabled = False
+            TBDebugTaunts3.Enabled = False
+        End If
+        If RBDebugTaunts2.Checked = True Then
+            TBDebugTaunts1.Enabled = True
+            TBDebugTaunts2.Enabled = True
+            TBDebugTaunts3.Enabled = False
+        End If
+        If RBDebugTaunts3.Checked = True Then
+            TBDebugTaunts1.Enabled = True
+            TBDebugTaunts2.Enabled = True
+            TBDebugTaunts3.Enabled = True
+        End If
+    End Sub
+
+    Private Sub BTNDebugTauntsClear_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugTauntsClear.Click
+        TBDebugTaunts1.Text = ""
+        TBDebugTaunts2.Text = ""
+        TBDebugTaunts3.Text = ""
+    End Sub
+
+    Private Sub Button19_Click(sender As System.Object, e As System.EventArgs) Handles Button19.Click
+        Form1.StrokeTick = 5
+    End Sub
+
+    Private Sub CBWebtease_CheckedChanged(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles CBWebtease.MouseClick
+
+    End Sub
+
+    Private Sub CBMuteMedia_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBMuteMedia.CheckedChanged
+        If Form1.FormLoading = False Then
+            My.Settings.MuteMedia = CBMuteMedia.Checked
+            My.Settings.Save()
+        End If
+    End Sub
+
+    
 End Class

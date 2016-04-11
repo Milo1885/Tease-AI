@@ -1,7 +1,215 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
-# Changelog - Patch 48
+
+# Changelog - Patch 50
+
+Tease AI no longer allows script-switching countdowns to end while the domme is in the middle of a @FollowUp. This fixes a bug where the domme's response ability would be frozen and the main picture wouldn't change. 
+
+@PlayVideo[], @PlayAudio[] and @ShowImage[] will now check full file paths as well as their respective media folders in the Tease AI root directory. This is especially useful for showing media stored in variables based on user's prior input. (For example, "Give me the location of your favorite porn video @InputVar[FavoritePornVideo]", and then calling it later with @PlayVideo[#Var[FavoritePornVideo]])
+
+Added @CheckFile() Command - @CheckFile() allows you to check whether a file exists on a user's computer, then go to the appropriate line in the script if it does, @CheckFile() Can be used in two ways:
+
+@CheckFile(FileName, GotoLineIfFileExists)
+@CheckFile(FileName, GotoLineIfFileExists, GotoLineIfFileDoesNotExist)
+
+For example, @CheckFile(#Var[FavoritePornVideo], Porn File Exists) would jump to the line (Porn File Exists) if the information stored in the Variable FavoritePornVideo is a vaild file location. If it is not a valid file location, then the script would just continue to the next line as normal
+
+You can also use this example: @CheckFile(#Var[FavoritePornVideo], Porn File Exists, Porn File Does Not Exist) - The script will still jump to the line (Porn File Exists) FavoritePornVideo is a valid location, but in this case it will jump to the line (Porn File Does Not Exist) if it is not
+
+Individual files from your computer can now be dragged and dropped onto the text entry field in the main chat window or the side chat. This will enter the file's full path and send it as a message. This is useful for when the domme asks you to input variables such as a favorite picture
+
+Added setting "Mute Video and Audio Played in Media Player" to General Settings tab. When this is checked, the media player will automatically mute any media file that is started or has it's state changed to playing (For example, pressing play while it's paused). The volume can still be manually adjusted during media playback if you wish. This is very useful if you want to be able to run more scripts with Videos but have privacy concerns due to noise. 
+
+Fixed bug where TTS did not recognize user's volume settings during domme responses
+
+Added Command @PlayVideo() - @PlayVideo() allows you to play a video for the amount of time specified in parentheses. For example, @PlayVideo(15) will play a random video for 15 seconds. When the 15 seconds are up, the video will stop and the tease will continue as normal. This is especially good to combine with @JumpVideo to create shorter, randomized clips in your tease session
+
+Added Command @JumpVideo - If there is a video currently playing, @JumpVideo will jump to a new point in the video somewhere between 10% and 60% of its run time. If @JumpVideo is used in the same line as @PlayVideo, @PlayVideo() or @PlayVideo[], then the video will start at a random position between 10 and 60% instead of the beginning
+
+Added Command @EdgeMode() - @EdgeMode(Goto, GotoLine) @EdgeMode(Video, GotoLine) @EdgeMode(Message, MessageText) @EdgeMode(Normal)
+
+# Changelog - Patch 48/49
+
+
+Remind about HoldEdgeMaxAmount settings when using older settings
+
+
+Image Pre-Loading
+
+
+Fixes added From the Unofficial Patch:
+
+	Fixed Issue #6: Non-working @Glitter commands 
+ 
+	Modified MetronomeTick() function decrease cpu usage to pepsifreak's code	
+	
+	Implemented pepsifreak's fix for broken images on reset 
+	
+	Implemented pepsifreak's fix for crash on session resume 
+	
+	Implememted pepsifreak's fix for @EdgingDecide command by changing it to @DecideEdge
+	
+	Half of Issue #9 fixed: @PlayAudio works again 
+	
+	Fixed second half of Issue #9 so that @ShowImage[] now works 
+	
+	Pepsifreaks's fix for error when toy suspend a session, resume it, and then suspend it again
+	
+	pepsifreak's tweak to chatlog saving to save during @EndTease, and a minimum size to prevent saving empty logs
+	
+	Pepsifreak's fix for WakeUp time saving 
+	
+	Pepsifreak's fix for metronome settings not saving 
+	
+	Pepsifreak's fix for a suspend/resume bug that would sometimes happen
+	
+	Pepsifreak's fix so that the Glitter contacts that make you hold an edge will be the ones to make you stop
+	
+	Pepsifreak's fix for not being able to start a new playlist if you started one and then reset
+	
+	Pepsifreak's fix for @UpdateRuined and @UpdateOrgasm don't update the counter for how many orgasms you've had - includes Locked setting checked
+	
+	pepsifreak's fix for needing comands like @PlayAudio, @PlayVideo, and others needing to be in a specific part of the line.
+	
+	pepsifreak's fix for crashing if you don't have images of a specific tag, now shows error image
+	
+	pepsifreak's change to allow "nested" vocabulary phrases to work with glitter text (seen in #EmoteRandom)
+	
+	Pepsifreak's fix for @StartTaunts problem
+	
+	Tasks startup fix and prevention 
+	
+	@CallReturn fix 
+	
+	Add tooltip to variable save icon
+	
+	Fix black box when resizing chat window when the media panel is hidden
+	
+	prevent edging while in chastity 
+	
+	CallReturn now works correctly from taunts 
+	
+	Fix bug with @Goto
+	
+	Fixed glitter text breaking when changing themes 
+	
+	VitalSub exercises now clear when you report them
+	
+	Fix ShowBoob/Butts commands 
+	
+	Fixed ShowImage bug where it runs twice 
+	
+	Fixed ShowVar breaking ShowImage
+	
+	Fix contact image randomizing 
+	
+	Added something to ClearMainPictureBox 
+	
+    Move module code to its own function - Also make "giving up" while stroking give you a module instead of a link
+	
+	Fix styling on Theme settings tab 
+	
+	Stop crash when contact images weren't loaded yet 
+	
+	GiveUp response now supports callreturn 
+	
+	Image code cleanup - removes blinking between images besides certain cases
+	
+	UI tweaks - buttons cut off on randomizer app
+	 
+	Prevent an error if a line ended up empty 
+	
+	More UI fixes - adds tooltip for contact images
+	
+	Add startup warning if contact image directories are incorrect 
+	
+	Speed up scripts slightly
+	
+	Move callreturn responses to vocabulary files 
+	
+	Randomize the type delay a little 
+	
+	Prevent error with the end of certain modules
+	
+	Daragorn's forced ending commands - Adds the following Commands: @OrgasmDeny, @OrgasmAllow, @OrgasmRuin
+	
+	Adds debug menu option to "refresh" the randomizer 
+	
+	simplified the senddailytasks progressbar - no longer eats cpu
+	
+	Fix the previous end fix when suspending state 
+	
+	Replace hardcoded honorific responses with #DomHonorific
+	
+	include edges with checkstrokingstate 
+	
+	Contacts now correct their own typos 
+
+	Fixed issue when displaying large gifs 
+	
+Added @MiniScript() Command
+
+Tease AI now keeps track of where the user left the splitter between sessions
+
+Added Interface to main menu strip. Added or relocated the following functions to "Interface": Switch Sides, Side Chat, Lazy Sub AV, Themes, Maximize Image and Webtease Mode
+
+Added Commands @MoodBest and @MoodWorst
+
+Added Commands @DecreaseOrgasmChance, @IncreaseOrgasmChance, @DecreaseRuinChance and @IncreaseRuinChance
+
+Added options to the main picture right-click menu to go to the first image of the current domme slideshow, go to the last image of the current domme slideshow, and load a new random domme slideshow from the directory set in the General Settings tab
+
+Fixed bug where #Keywords would return a "not found" error if adjacent to a ")"
+
+Fixed bug where Next Image and Previous Image buttons were not always unlocked when @LockImages was disabled by system events rather than the @UnlockImages Command 
+
+Fixed major bug where the @ChanceXX Command was not processed correctly, resulting in chunks of the domme's dialogue and Commands being deleted before they could be parsed
+
+Fixed bug where certain @Command() functions would break other @Command() functions in the same line. This includes @CheckFlag(), @SetFlag(), @TempFlag, @DeleteFlag(), @SetDate(), @CheckDate() and @DeleteVar[]
+
+Added Command Filters @AssWorship, @BoobWorship and @PussyWorship
+
+Added Commands @Worship() and @ClearWorship
+
+Added Command Filters @LongHold and @ExtremeHold
+
+Added Commands @LongHold, @LongHold(), @ExtremeHold and @ExtremeHold()
+
+Added Sub Settings for Long Hold Min/Max and Extreme Hold Min/Max
+
+Added Command Filters @SubWorshipping and @SubNotWorshipping
+
+Added Commands @WorshipOn and @WorshipOff
+
+Added Commands @FollowUp() and @FollowUpXX
+
+Response Files will no longer include lines in the [All] category if the session has yet to enter the first Taunt Cycle, or the session has passed the orgasm decision.
+
+Domme recognizes requests to have an orgasm through new keyphrases: "I cum", "me cum", "I have an orgasm", "me have an orgasm"
+
+Added System Keywords #LocalImageCount, #HardcoreImageCount, #SoftcoreImageCount, #LesbianImageCount, #BlowjobImageCount, #FemdomImageCount, #LezdomImageCount, #HentaiImageCount, #GayImageCount, #MaledomImageCount, #CaptionsImageCount and #GeneralImageCount
+
+Fixed bug with @DeleteLocalImage Command that caused the program to stop responding
+
+Added @RestrictOrgasm() and @RestrictOrgasm Commands
+
+"Domme is typing..." timer length is now capped at 6 seconds. This is to ensure that lines get delivered in a timely manner, even if they contain lengthy sets of Commands in the script.
+
+Added @RandomText() Command
+
+Added @SetModule() and @SetLink() Commands
+
+Added @ResponseYes() and @ResponseNo() Commands
+
+Added custom button options to Lazy Sub
+
+Fixed bug that caused Tease AI to crash during videos when domme typed a new message
+
+Improved Tease AI's parsing ability when matching Response Files
+
+
+_______________________________________ 
 
 Tease AI now automatically capitalizes the first character of each line (will still be overridden by Remove Capitalization option in Domme's Typing Style)
 

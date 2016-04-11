@@ -1236,5 +1236,65 @@
     <Setting Name="DomDegrading" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="MetroOn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LS1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 1</Value>
+    </Setting>
+    <Setting Name="LS2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 2</Value>
+    </Setting>
+    <Setting Name="LS3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 3</Value>
+    </Setting>
+    <Setting Name="LS4" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 4</Value>
+    </Setting>
+    <Setting Name="LS5" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 5</Value>
+    </Setting>
+    <Setting Name="LS6" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 6</Value>
+    </Setting>
+    <Setting Name="LS7" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 7</Value>
+    </Setting>
+    <Setting Name="LS8" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 8</Value>
+    </Setting>
+    <Setting Name="LS9" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 9</Value>
+    </Setting>
+    <Setting Name="LS10" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Custom 10</Value>
+    </Setting>
+    <Setting Name="LongHoldMin" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="LongHoldMax" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="ExtremeHoldMin" Type="System.String" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="ExtremeHoldMax" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="CBWebtease" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SplitterDistance" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="SideChat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LazySubAV" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MuteMedia" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
