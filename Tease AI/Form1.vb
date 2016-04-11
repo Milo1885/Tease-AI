@@ -2570,6 +2570,7 @@ WritingTaskLine:
             EdgeFound = False
 
             If EdgeVideo = True Then
+                SessionEdges += 1
                 EdgeVideo = False
                 TeaseVideo = False
                 VideoTimer.Stop()
@@ -2583,6 +2584,7 @@ WritingTaskLine:
             End If
 
             If EdgeGoto = True Then
+                SessionEdges += 1
                 EdgeGoto = False
                 FileGoto = EdgeGotoLine
                 SkipGotoLine = True
@@ -2591,6 +2593,7 @@ WritingTaskLine:
             End If
 
             If EdgeMessage = True Then
+                SessionEdges += 1
                 EdgeMessage = False
                 ChatString = EdgeMessageText
                 GoTo DebugAwareness
