@@ -555,6 +555,9 @@ Public Class Form1
 
     Dim SetModule As String = ""
     Dim SetLink As String = ""
+    Dim SetModuleGoto As String = ""
+    Dim SetLinkGoto As String = ""
+
 
     Public OrgasmRestricted As Boolean
     Dim OrgasmRestrictionLifted As Boolean
@@ -15691,12 +15694,25 @@ VTSkip:
 
         If StringClean.Contains("@SetModule(") Then
             Dim TempMod As String = GetParentheses(StringClean, "@SetModule(")
+
+            If TempMod.Contains(",") Then
+                TempMod = FixCommas(TempMod)
+                Dim TempArray As String() = TempMod.Split(",")
+                TempMod = TempArray(0)
+                SetModuleGoto = TempArray(1)
+
+            End If
+
+
             If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Modules\" & TempMod & ".txt") Then
                 SetModule = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Modules\" & TempMod & ".txt"
             End If
             If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\" & TempMod & ".txt") Then
                 SetModule = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\" & TempMod & ".txt"
             End If
+
+            If SetModule = "" Then SetModuleGoto = ""
+
             StringClean = StringClean.Replace("@SetModule(" & GetParentheses(StringClean, "@SetModule(") & ")", "")
         End If
 
@@ -20944,7 +20960,7 @@ VTSkip:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@SetModule(") Then
-                If SetModule <> "" Then
+                If SetModule <> "" Or BookmarkModule = True Then
                     If StrokeFilter = True Then
                         For i As Integer = 0 To StrokeTauntCount - 1
                             ListClean.Remove(ListClean(PoundCount))
@@ -21891,46 +21907,53 @@ AlreadySeen:
 
         If Playlist = False Or PlaylistFile(PlaylistCurrent).Contains("Random Module") Then
 
+
 NoPlaylistModuleFile:
 
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, ChastityModuleCheck)
-                Dim TempModule As String = foundFile
-                TempModule = Path.GetFileName(TempModule).Replace(".txt", "")
+            If SetModule <> "" Then
 
-                If IsEdging Then
-
-                    Do Until Not TempModule.Contains("\")
-                        TempModule = TempModule.Remove(0, 1)
-                    Loop
-                End If
-
-                For x As Integer = 0 To FrmSettings.CLBModuleList.Items.Count - 1
-                    If My.Settings.Chastity = True Then
-                        If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") Then
-                            ModuleList.Add(foundFile)
-                        End If
-                    ElseIf IsEdging Then
-                        If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And foundFile.Contains("_EDGING") Then
-                            ModuleList.Add(foundFile)
-                        End If
-                    Else
-                        If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") And Not foundFile.Contains("_CHASTITY") Then
-                            ModuleList.Add(foundFile)
-                        End If
-                    End If
-                Next
-            Next
-
-            If ModuleList.Count < 1 Then
-                If My.Settings.Chastity = True Then
-                    FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module_CHASTITY.txt"
-                ElseIf IsEdging Then
-                    FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module_EDGING.txt"
-                Else
-                    FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module.txt"
-                End If
+                FileText = SetModule
             Else
-                FileText = ModuleList(randomizer.Next(0, ModuleList.Count))
+
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, ChastityModuleCheck)
+                    Dim TempModule As String = foundFile
+                    TempModule = Path.GetFileName(TempModule).Replace(".txt", "")
+
+                    If IsEdging Then
+
+                        Do Until Not TempModule.Contains("\")
+                            TempModule = TempModule.Remove(0, 1)
+                        Loop
+                    End If
+
+                    For x As Integer = 0 To FrmSettings.CLBModuleList.Items.Count - 1
+                        If My.Settings.Chastity = True Then
+                            If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") Then
+                                ModuleList.Add(foundFile)
+                            End If
+                        ElseIf IsEdging Then
+                            If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And foundFile.Contains("_EDGING") Then
+                                ModuleList.Add(foundFile)
+                            End If
+                        Else
+                            If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") And Not foundFile.Contains("_CHASTITY") Then
+                                ModuleList.Add(foundFile)
+                            End If
+                        End If
+                    Next
+                Next
+
+                If ModuleList.Count < 1 Then
+                    If My.Settings.Chastity = True Then
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module_CHASTITY.txt"
+                    ElseIf IsEdging Then
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module_EDGING.txt"
+                    Else
+                        FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module.txt"
+                    End If
+                Else
+                    FileText = ModuleList(randomizer.Next(0, ModuleList.Count))
+                End If
             End If
 
         Else
@@ -21944,8 +21967,19 @@ NoPlaylistModuleFile:
 
         End If
 
+        SetModule = ""
+
         DomTask = DomTask.Replace("@Module", "")
-        StrokeTauntVal = -1
+
+
+        If SetModuleGoto <> "" Then
+            FileGoto = SetModuleGoto
+            SkipGotoLine = True
+            GetGoto()
+            SetModuleGoto = ""
+        Else
+            StrokeTauntVal = -1
+        End If
 
         If Playlist = True Then PlaylistCurrent = 1
 
@@ -22062,7 +22096,15 @@ NoPlaylistLinkFile:
         End If
 
 
-        StrokeTauntVal = -1
+        If SetLinkGoto <> "" Then
+            FileGoto = SetLinkGoto
+            SkipGotoLine = True
+            GetGoto()
+            SetLinkGoto = ""
+        Else
+            StrokeTauntVal = -1
+        End If
+
 
         If Playlist = True Then PlaylistCurrent += 1
         If Playlist = True Then BookmarkLink = False

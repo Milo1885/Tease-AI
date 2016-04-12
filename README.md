@@ -9,6 +9,11 @@ System Files added in Patch 50
 	 \Vocabulary\#SYS_MultipleEdgesStop
 
 
+
+@SetModule() functionality restored. When I copied the RunModuleLink Sub, I forgot to add the SetModul code back in. 
+
+@SetModule() and @SetLink() can now jump to a specifiec line in the script when it is called by using a comma. For example, @SetModule(Ballbusting Tasks, Task 2) would start after the line (Tasks 2) in Ballbusting Tasks.txt when the Module begins.
+	 
 @ShowVar[] and #Var[] should now work correctly and can be used multiple times per line
 
 DommeMoodMin and DommeMoodMax should now output correctly	 
