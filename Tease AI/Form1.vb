@@ -9955,11 +9955,11 @@ StatusUpdateEnd:
 
         StringClean = StringClean.Replace("#DomCup", FrmSettings.boobComboBox.Text)
 
-        StringClean = StringClean.Replace("#DomMood", DommeMood)
-
         StringClean = StringClean.Replace("#DomMoodMin", FrmSettings.NBDomMoodMin.Value)
 
-        StringClean = StringClean.Replace("#DomMoodMax", FrmSettings.NBDomMoodMin.Value)
+        StringClean = StringClean.Replace("#DomMoodMax", FrmSettings.NBDomMoodMax.Value)
+
+        StringClean = StringClean.Replace("#DomMood", DommeMood)
 
         StringClean = StringClean.Replace("#DomAvgCockMin", FrmSettings.NBAvgCockMin.Value)
 

@@ -8,6 +8,7 @@ System Files added in Patch 50
      \Vocabulary\#SYS_MultipleEdgesStart
 	 \Vocabulary\#SYS_MultipleEdgesStop
 
+#DommeMoodMin and #DommeMoodMax should now output correctly	 
 
 @RandomText() should now work correctly	 
 	 
