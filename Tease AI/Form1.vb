@@ -450,6 +450,7 @@ Public Class Form1
     Public TempGif As Image
     Dim original As Image
     Dim resized As Image
+    Dim resized2 As Image
 
     Dim SysMes As Boolean
     Dim EmoMes As Boolean
@@ -14968,7 +14969,7 @@ ExternalAudio:
 
             CustomSlideshowTimer.Interval = 1000
             If LCase(SlideFlag).Contains("slow") Then CustomSlideshowTimer.Interval = 5000
-            If LCase(SlideFlag).Contains("fast") Then CustomSlideshowTimer.Interval = 334
+            If LCase(SlideFlag).Contains("fast") Then CustomSlideshowTimer.Interval = 500
 
 
             StringClean = StringClean.Replace("@Slideshow(" & SlideFlag & ")", "")
@@ -24950,20 +24951,45 @@ GetDommeSlideshow:
 
     Public Sub LoadSlideshowImage()
 
-        ClearMainPictureBox()
+        'ClearMainPictureBox()
+
 
         ImageString = CustomSlideshowList(randomizer.Next(0, CustomSlideshowList.Count))
+
+
         DeleteLocalImageFilePath = ImageString
 
-        original = Image.FromFile(ImageString)
-        resized = ResizeImage(original, New Size(mainPictureBox.Width, mainPictureBox.Height))
+        Try
+            original = Image.FromFile(ImageString)
+            LBLImageInfo.Text = ImageString
+            CurrentImage = ImageString
+        Catch
+            original = Image.FromFile(Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg")
+            DeleteLocalImageFilePath = ""
+            LBLImageInfo.Text = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+            CurrentImage = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+        End Try
+
+        Debug.Print("CurrentImage = " & CurrentImage)
+
+        Try
+            resized = ResizeImage(original, New Size(mainPictureBox.Width, mainPictureBox.Height))
+        Catch
+            resized = Image.FromFile(Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg")
+        End Try
 
 
-        'DisplayImage(resized)
         mainPictureBox.Image = resized
 
-        LBLImageInfo.Text = ImageString
-        CurrentImage = ImageString
+
+        'GC.Collect
+
+        Try
+            original.Dispose()
+        Catch
+        End Try
+
+
 
     End Sub
 
