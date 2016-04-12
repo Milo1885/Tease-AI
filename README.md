@@ -4,6 +4,13 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 50
 
+System Files added in Patch 50
+     \Vocabulary\#SYS_MultipleEdgesStart
+	 \Vocabulary\#SYS_MultipleEdgesStop
+
+
+@RandomText() should now work correctly	 
+	 
 Fixed bug that would cause OutOfMemory exceptions during Slideshows
 
 Added @MultipleEdges() Command

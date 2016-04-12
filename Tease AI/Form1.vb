@@ -9915,6 +9915,16 @@ StatusUpdateEnd:
 
     Public Function SysKeywordClean(ByVal StringClean As String) As String
 
+        If StringClean.Contains("@RandomText(") Then
+            Dim TempText As String = GetParentheses(StringClean, "@RandomText(")
+            TempText = FixCommas(TempText)
+            Dim TextArray As String() = TempText.Split(",")
+            TempText = TextArray(randomizer.Next(0, TextArray.Count))
+            StringClean = StringClean.Replace("@RandomText(" & GetParentheses(StringClean, "@RandomText(") & ")", TempText)
+        End If
+
+
+
         If FrmSettings.CBCockToClit.Checked = True Then
             StringClean = StringClean.Replace("#Cock", "#CockToClit")
             StringClean = StringClean.Replace("stroking", "#StrokingToRubbing")
@@ -15736,13 +15746,13 @@ VTSkip:
         End If
 
 
-        If StringClean.Contains("@RandomText(") Then
-            Dim TempText As String = GetParentheses(StringClean, "@RandomText(")
-            TempText = FixCommas(TempText)
-            Dim TextArray As String() = TempText.Split(",")
-            TempText = TextArray(randomizer.Next(0, TextArray.Count))
-            StringClean = StringClean.Replace("@RandomText(" & GetParentheses(StringClean, "@RandomText(") & ")", TempText)
-        End If
+        'If StringClean.Contains("@RandomText(") Then
+        'Dim TempText As String = GetParentheses(StringClean, "@RandomText(")
+        'TempText = FixCommas(TempText)
+        'Dim TextArray As String() = TempText.Split(",")
+        'TempText = TextArray(randomizer.Next(0, TextArray.Count))
+        'StringClean = StringClean.Replace("@RandomText(" & GetParentheses(StringClean, "@RandomText(") & ")", TempText)
+        'End If
 
 
 
