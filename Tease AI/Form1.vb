@@ -18,8 +18,8 @@ Imports System.Text.RegularExpressions
 
 
 Public Class Form1
-
-    Public Chat As String
+	'blah
+	Public Chat As String
     Public Chat2 As String
     Public randomizer As New Random
     Public ScriptOperator As String
