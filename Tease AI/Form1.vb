@@ -597,6 +597,11 @@ Public Class Form1
     Dim EdgeMessageText As String
     Dim EdgeGotoLine As String
 
+    Dim MultipleEdges As Boolean
+    Dim MultipleEdgesAmount As Integer
+    Dim MultipleEdgesInterval As Integer
+    Dim MultipleEdgesTick As Integer
+
 
     Private Const DISABLE_SOUNDS As Integer = 21
     Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -840,8 +845,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
             End Try
         End If
 
-        ' Github Patch
-        'FrmSettings.Show()
+
+        FrmSettings.Show()
+        FrmSettings.Hide()
         FrmSettings.FrmSettingsLoading = True
 
         FrmSettings.FrmSettingStartUp()
@@ -2654,6 +2660,28 @@ WritingTaskLine:
                 Debug.Print("EdgeFOund = SubEdging")
 
                 EdgeCountTimer.Stop()
+
+                If MultipleEdges = True Then
+                    MultipleEdgesAmount -= 1
+                    SessionEdges += 1
+
+                    If MultipleEdgesAmount < 1 Then
+
+                        MultipleEdges = False
+
+                    Else
+
+                        EdgeCountTimer.Stop()
+                        DomChat = "#SYS_MultipleEdgesStop"
+                        TypingDelay()
+                        MultipleEdgesTick = MultipleEdgesInterval
+                        MultipleEdgesTimer.Start()
+                        Return
+
+                    End If
+
+
+                End If
 
                 If SubStroking = True Then
                     AvgEdgeCount += 1
@@ -12119,6 +12147,36 @@ ShowedBlogImage:
         If StringClean.Contains("@ExtremeHold") Then
             ExtremeHold = True
             StringClean = StringClean.Replace("@ExtremeHold", "")
+        End If
+
+        If StringClean.Contains("@MultipleEdges(") Then
+
+            If StringClean.Contains("@Edg") Then
+
+                Dim EdgeFlag As String = GetParentheses(StringClean, "@MultipleEdges(")
+                EdgeFlag = FixCommas(EdgeFlag)
+                Dim EdgeArray As String() = EdgeFlag.Split(",")
+
+                If EdgeFlag.Count = 3 Then
+
+                    If randomizer.Next(1, 101) < Val(EdgeFlag(2)) Then
+                        MultipleEdges = True
+                        MultipleEdgesAmount = Val(EdgeArray(0))
+                        MultipleEdgesInterval = Val(EdgeArray(1))
+                    End If
+
+                Else
+
+                    MultipleEdges = True
+                    MultipleEdgesAmount = Val(EdgeArray(0))
+                    MultipleEdgesInterval = Val(EdgeArray(1))
+
+                End If
+
+            End If
+
+            StringClean = StringClean.Replace("@MultipleEdges(" & GetParentheses(StringClean, "@MultipleEdges(") & ")", "")
+
         End If
 
         If StringClean.Contains("@EdgeMode(") Then
@@ -22272,6 +22330,7 @@ NoPlaylistEndFile:
 
     Private Sub EdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeTauntTimer.Tick
 
+        If MultipleEdgesTimer.Enabled = True Then Return
         If MiniScript = True Then Return
         If InputFlag = True Then Return
 
@@ -22292,9 +22351,9 @@ NoPlaylistEndFile:
 
 
             If GlitterTease = False Then
-                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Edge\Edge.txt")
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\Edge.txt")
             Else
-                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Stroke\Edge\GroupEdge.txt")
+                EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\GroupEdge.txt")
             End If
 
 
@@ -24898,6 +24957,7 @@ GetDommeSlideshow:
 
         original = Image.FromFile(ImageString)
         resized = ResizeImage(original, New Size(mainPictureBox.Width, mainPictureBox.Height))
+
 
         'DisplayImage(resized)
         mainPictureBox.Image = resized
@@ -30408,6 +30468,29 @@ SkipNew:
             VideoTimer.Stop()
             DomWMP.Ctlcontrols.stop()
         End If
+
+
+    End Sub
+
+    Private Sub MultipleEdgesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles MultipleEdgesTimer.Tick
+
+        If DomTypeCheck = True Then Return
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
+        MultipleEdgesTick -= 1
+
+        If MultipleEdgesTick < 1 Then
+
+            MultipleEdgesTimer.Stop()
+
+            DomChat = "#SYS_MultipleEdgesStart"
+            TypingDelay()
+
+            EdgeCountTick = 0
+            EdgeCountTimer.Start()
+
+        End If
+
 
 
     End Sub

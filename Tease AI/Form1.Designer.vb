@@ -396,6 +396,7 @@ Partial Class Form1
         Me.TimeoutTimer = New System.Windows.Forms.Timer(Me.components)
         Me.Button12 = New System.Windows.Forms.Button()
         Me.VideoTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.MultipleEdgesTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -4014,6 +4015,10 @@ Partial Class Form1
         '
         Me.VideoTimer.Interval = 1000
         '
+        'MultipleEdgesTimer
+        '
+        Me.MultipleEdgesTimer.Interval = 1000
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4466,5 +4471,6 @@ Partial Class Form1
     Friend WithEvents RefreshRandomizerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Button12 As System.Windows.Forms.Button
     Friend WithEvents VideoTimer As System.Windows.Forms.Timer
+    Friend WithEvents MultipleEdgesTimer As System.Windows.Forms.Timer
 
 End Class

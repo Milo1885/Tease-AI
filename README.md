@@ -4,6 +4,24 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 50
 
+Added @MultipleEdges() Command
+   
+     Syntax: @MultipleEdges(Amount, Interval) or @MultipleEdges(Amount, Interval, Chance)
+     Special Instructions: Must be used in a line with any @Edge-related Command
+	 
+	 The @MultipleEdges Command lets you mark any @Edge Command as one that will require multiple edges before the tease will progress as usual. The interval dictates how much rest the user will have between stopping one edge and beginning the next. Think of it like a webtease instruction to edge 10 times with a 5 second break in between, for example. But when using @MultipleEdges in Tease AI, the domme instructs you through each one without having to keep track of the amount of edges or the time between each one.
+	 
+	 You can also specify what percentage chance the edge will turn into multiple edges. For example:
+	 
+	 Get to the edge @Edge @MultipleEdges(10, 5, 25)
+	 
+	 In this case, there would be a 25 percent chance that the user would have to edge ten times with a 5 second break in between. 
+	 
+	 When a user finishes the edges, the final edge will resolve according to the @Edge Command in the line. So for example, if the @Edge Command was @EdgeHold, then the user would be instructed to hold the final edge.
+		
+
+Fixed bug that prevented SessionEdges from updating when @EdgeMode edges resolved
+
 Tease AI no longer allows script-switching countdowns to end while the domme is in the middle of a @FollowUp. This fixes a bug where the domme's response ability would be frozen and the main picture wouldn't change. 
 
 @PlayVideo[], @PlayAudio[] and @ShowImage[] will now check full file paths as well as their respective media folders in the Tease AI root directory. This is especially useful for showing media stored in variables based on user's prior input. (For example, "Give me the location of your favorite porn video @InputVar[FavoritePornVideo]", and then calling it later with @PlayVideo[#Var[FavoritePornVideo]])
