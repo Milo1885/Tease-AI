@@ -10233,21 +10233,23 @@ StatusUpdateEnd:
         ' 
         If StringClean.Contains("#Var[") Then
 
-            Dim VarFlag As String = GetParentheses(StringClean, "#Var[")
-            Debug.Print("VarFlag = " & VarFlag)
-            Dim VarFlag2 As String = GetVariable(VarFlag)
-            Debug.Print("VarFlag2 = " & VarFlag2)
+            'Dim VarSplit As String() = StringClean.Split("]")
+            'For i As Integer = 0 To VarSplit.Count - 1
+            'If VarSplit(i).Contains("#Var[") Then
+            'Dim VarString As String = VarSplit(i) & "]"
+            'Dim VarFlag As String = GetParentheses(VarString, "#Var[")
+            'Debug.Print("VarFlag = " & VarFlag)
+            'Dim VarFlag2 As String = GetVariable(VarFlag)
+            'Debug.Print("VarFlag2 = " & VarFlag2)
             ' StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
+            'Debug.Print("Try this shit       #Var[" & VarFlag & "]")
+            'StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
+            'End If
+            '    Next
 
-            Debug.Print("Try this shit       #Var[" & VarFlag & "]")
-
-            StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
-
-            Debug.Print("StringClean = " & StringClean)
+            StringClean = StringClean.Replace("#Var[", "@ShowVar[")
 
         End If
-
-
 
 
         If StringClean.Contains("#RandomSlideshowCategory") Then StringClean = StringClean.Replace("#RandomSlideshowCategory", RandomSlideshowCategory)
@@ -11696,65 +11698,29 @@ RinseLatherRepeat:
         ' The @ShowVar[] Command is used to show the value of an existing Variable. The correct format is @ShowVar[VarName]
         ' More than one @ShowVar[] Commands can be used per line
 
-        If StringClean.Contains("@ShowVar") Then
+        If StringClean.Contains("@ShowVar[") Then
 
-            Dim CheckFlag As String = StringClean & " some test garbage"
-
-            Dim VarSplit As String() = CheckFlag.Split("]")
+            Dim VarSplit As String() = StringClean.Split("]")
 
             For i As Integer = 0 To VarSplit.Count - 1
 
-                Debug.Print("Varsplit(" & i & ") = " & VarSplit(i))
                 If VarSplit(i).Contains("@ShowVar[") Then
 
-                    Dim CFIndex As Integer = VarSplit(i).IndexOf("@ShowVar[") + 9
-                    CheckFlag = VarSplit(i).Substring(CFIndex, VarSplit(i).Length - CFIndex).Replace("@ShowVar[", "")
+                    Dim VarString As String = VarSplit(i) & "]"
 
-                    Dim VarValue As String
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & CheckFlag
-                    Debug.Print("VarCheck = " & VarCheck)
-                    If File.Exists(VarCheck) Then
-                        Dim VarReader As New StreamReader(VarCheck)
-                        VarValue = VarReader.ReadLine()
-                        VarReader.Close()
-                        VarReader.Dispose()
-                    Else
-                        VarValue = "0"
-                    End If
-                    Debug.Print("CheckFlag = " & CheckFlag)
-                    VarSplit(i) = VarSplit(i).Replace("@ShowVar[" & CheckFlag, VarValue)
-                    Debug.Print("Final Varsplit(" & i & ") = " & VarSplit(i))
-                End If
-                If VarSplit(i).Contains("@ShowVar[") Then
+                    Dim VarFlag As String = GetParentheses(VarString, "@ShowVar[")
+                    Debug.Print("VarFlag = " & VarFlag)
+                    Dim VarFlag2 As String = GetVariable(VarFlag)
+                    Debug.Print("VarFlag2 = " & VarFlag2)
+                    ' StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
 
-                    Dim CFIndex As Integer = VarSplit(i).IndexOf("@ShowVar[") + 9
-                    CheckFlag = VarSplit(i).Substring(CFIndex, VarSplit(i).Length - CFIndex).Replace("@ShowVar[", "")
+                    Debug.Print("Try this shit       @ShowVar[" & VarFlag & "]")
 
-                    Dim VarValue As String
-                    Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & CheckFlag
-                    Debug.Print("VarCheck = " & VarCheck)
-                    If File.Exists(VarCheck) Then
-                        Dim VarReader As New StreamReader(VarCheck)
-                        VarValue = VarReader.ReadLine()
-                        VarReader.Close()
-                        VarReader.Dispose()
-                    Else
-                        VarValue = "0"
-                    End If
-                    Debug.Print("CheckFlag = " & CheckFlag)
-                    VarSplit(i) = VarSplit(i).Replace("@ShowVar[" & CheckFlag, VarValue)
-                    Debug.Print("Final Varsplit(" & i & ") = " & VarSplit(i))
-                Else
-                    If Not i = VarSplit.Count - 1 Then VarSplit(i) += "]"
+                    StringClean = StringClean.Replace("@ShowVar[" & VarFlag & "]", VarFlag2)
+
                 End If
 
             Next
-
-            CheckFlag = Join(VarSplit, Nothing)
-
-            CheckFlag = CheckFlag.Replace(" some test garbage", "")
-
-            StringClean = CheckFlag
 
         End If
 
