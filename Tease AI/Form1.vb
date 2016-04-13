@@ -8244,168 +8244,57 @@ TryNextWithTease:
 
 	End Sub
 
+	''' =========================================================================================================
+	''' <summary>
+	''' Returns a List of all available videofiles in the given directory.
+	''' </summary>
+	''' <param name="DirectoryPath"></param>
+	''' <returns>A generic list containing all video-files in the directory.</returns>
+	''' <exception cref="Exception">Rethrows all exceptions.</exception>
+	Function GetVideosInDirectory(ByVal DirectoryPath As String) As List(Of String)
+		Try
+			If Directory.Exists(DirectoryPath) Then
+				Dim ___Sup_Ext As New List(Of String) From {".wmv", ".avi", ".mp4", ".m4v", ".mpg", ".mov"}
+				Return Directory.GetFiles(DirectoryPath, "*", SearchOption.AllDirectories) _
+					.Where(Function(f) ___Sup_Ext.Contains(Path.GetExtension(f).ToLower())).ToList
+			Else
+				Return New List(Of String)
+			End If
+		Catch ex As Exception
+			Throw
+		End Try
+	End Function
 
 
 	Public Sub RandomVideo()
-
+		' Reset retentive global variables
 		NoVideo = False
-
-		'SlideshowLoaded = False
 		DommeVideo = False
 
-		Dim random As Random = New Random()
-		Dim RandomVideo As String
-		Dim TotalFiles(0 To 0) As String
-		Dim ArrayCycle As New Integer
+		Dim __dom As Random = New Random()
+		Dim __domVideo As String
+		Dim __TotalFiles As New List(Of String)
 
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoHardCore.Text) And FrmSettings.CBVideoHardcore.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.mov", SearchOption.AllDirectories)
+		'======================================================================================
+		'									Genre Videos
+		'======================================================================================
+		If FrmSettings.CBVideoHardcore.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoHardCore.Text))
 
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
+		If FrmSettings.CBVideoSoftCore.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoSoftCore.Text))
 
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
+		If FrmSettings.CBVideoLesbian.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoLesbian.Text))
 
+		If FrmSettings.CBVideoBlowjob.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoBlowjob.Text))
 
+		If FrmSettings.CBVideoFemdom.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoFemdom.Text))
 
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoSoftCore.Text) And FrmSettings.CBVideoSoftCore.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoLesbian.Text) And FrmSettings.CBVideoLesbian.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoBlowjob.Text) And FrmSettings.CBVideoBlowjob.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoFemdom.Text) And FrmSettings.CBVideoFemdom.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoFemsub.Text) And FrmSettings.CBVideoFemsub.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
+		If FrmSettings.CBVideoFemsub.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoFemsub.Text))
 
 		If NoSpecialVideo = True Then GoTo SkipSpecial
 
@@ -8415,232 +8304,42 @@ TryNextWithTease:
 
 		If RandomizerVideo = True Then GoTo SkipSpecial
 
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoJOI.Text) And FrmSettings.CBVideoJOI.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.mov", SearchOption.AllDirectories)
+		'======================================================================================
+		'								Special - Videos
+		'======================================================================================
+		If FrmSettings.CBVideoJOI.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoJOI.Text))
 
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoCH.Text) And FrmSettings.CBVideoCH.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
+		If FrmSettings.CBVideoCH.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoCH.Text))
 
 SkipSpecial:
+		'======================================================================================
+		'									General Videos
+		'======================================================================================
+		If FrmSettings.CBVideoGeneral.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoGeneral.Text))
 
+		'======================================================================================
+		'									Domme - Videos
+		'======================================================================================
+		If FrmSettings.CBVideoHardcoreD.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoHardCoreD.Text))
 
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoGeneral.Text) And FrmSettings.CBVideoGeneral.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.mov", SearchOption.AllDirectories)
+		If FrmSettings.CBVideoSoftCoreD.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoSoftCoreD.Text))
 
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
+		If FrmSettings.CBVideoLesbianD.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoLesbianD.Text))
 
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
+		If FrmSettings.CBVideoBlowjobD.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoBlowjobD.Text))
 
+		If FrmSettings.CBVideoFemdomD.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoFemdomD.Text))
 
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoHardCoreD.Text) And FrmSettings.CBVideoHardcoreD.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoSoftCoreD.Text) And FrmSettings.CBVideoSoftCoreD.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoLesbianD.Text) And FrmSettings.CBVideoLesbianD.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoBlowjobD.Text) And FrmSettings.CBVideoBlowjobD.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoFemdomD.Text) And FrmSettings.CBVideoFemdomD.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoFemsubD.Text) And FrmSettings.CBVideoFemsubD.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
+		If FrmSettings.CBVideoFemsubD.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoFemsubD.Text))
 
 		If NoSpecialVideo = True Then GoTo SkipSpecialD
 		If ScriptVideoTeaseFlag = True Then
@@ -8649,153 +8348,87 @@ SkipSpecial:
 
 		If RandomizerVideo = True Then GoTo SkipSpecialD
 
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoJOID.Text) And FrmSettings.CBVideoJOID.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.mov", SearchOption.AllDirectories)
+		'======================================================================================
+		'								Domme - Special - Videos
+		'======================================================================================
+		If FrmSettings.CBVideoJOID.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoJOID.Text))
 
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoCHD.Text) And FrmSettings.CBVideoCHD.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
-
-
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
-
-		End If
+		If FrmSettings.CBVideoCHD.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoCHD.Text))
 
 SkipSpecialD:
-
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoGeneralD.Text) And FrmSettings.CBVideoGeneralD.Checked = True Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.mov", SearchOption.AllDirectories)
-
-			ReDim Preserve TotalFiles(TotalFiles.Length + files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-
-			ArrayCycle = -1
-			Do
-				ArrayCycle += 1
-			Loop Until TotalFiles(ArrayCycle) = ""
+		'======================================================================================
+		'								Domme - General Videos
+		'======================================================================================
+		If FrmSettings.CBVideoGeneralD.Checked = True Then _
+			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoGeneralD.Text))
 
 
-			files.CopyTo(TotalFiles, ArrayCycle)
-			files2.CopyTo(TotalFiles, ArrayCycle + files.Length)
-			files3.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length)
-			files4.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length)
-			files5.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length)
-			files6.CopyTo(TotalFiles, ArrayCycle + files.Length + files2.Length + files3.Length + files4.Length + files5.Length)
 
-		End If
+		If __TotalFiles.Count = 0 Then Exit Sub
 
-
-		If TotalFiles(0) = "" Then
-			NoVideo = True
-			Return
-		End If
-
-		If VideoCheck = True Then Return
+		If VideoCheck = True Then Exit Sub
 
 GetAnotherRandomVideo:
 
-		RandomVideo = TotalFiles(random.Next(0, TotalFiles.Length - 1))
+		__domVideo = __TotalFiles(__dom.Next(0, __TotalFiles.Count - 1))
 
-		If RandomVideo = "" Then GoTo GetAnotherRandomVideo
+		If __domVideo = "" Then GoTo GetAnotherRandomVideo
 
-		Dim ArrayCheck As Integer
-
-		ArrayCheck = 1
-		Do
-			'Debug.Print(TotalFiles(ArrayCheck) & " " & ArrayCheck)
-			ArrayCheck += 1
-		Loop Until ArrayCheck = TotalFiles.Length
-
-		If FrmSettings.CBVideoHardcore.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoHardCore.Text) <> 0 Then VideoType = "Hardcore"
-		If FrmSettings.CBVideoSoftCore.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoSoftCore.Text) <> 0 Then VideoType = "Softcore"
-		If FrmSettings.CBVideoLesbian.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoLesbian.Text) <> 0 Then VideoType = "Lesbian"
-		If FrmSettings.CBVideoBlowjob.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoBlowjob.Text) <> 0 Then VideoType = "Blowjob"
-		If FrmSettings.CBVideoFemdom.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoFemdom.Text) <> 0 Then VideoType = "Femdom"
-		If FrmSettings.CBVideoFemsub.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoFemsub.Text) <> 0 Then VideoType = "Femsub"
-		If FrmSettings.CBVideoJOI.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoJOI.Text) <> 0 Then VideoType = "JOI"
-		If FrmSettings.CBVideoCH.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoCH.Text) <> 0 Then VideoType = "CH"
-		If FrmSettings.CBVideoGeneral.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoGeneral.Text) <> 0 Then VideoType = "General"
+		'@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ Debug Line @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		If Debugger.IsAttached AndAlso 1 = 2 Then _
+			__TotalFiles.ForEach(Sub(x) Debug.Print("RndVideoCheck: " & x))
 
 
-		If FrmSettings.CBVideoHardcoreD.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoHardCoreD.Text) <> 0 Then
+		If FrmSettings.CBVideoHardcore.Checked = True And InStr(__domVideo, FrmSettings.LblVideoHardCore.Text) <> 0 Then VideoType = "Hardcore"
+		If FrmSettings.CBVideoSoftCore.Checked = True And InStr(__domVideo, FrmSettings.LblVideoSoftCore.Text) <> 0 Then VideoType = "Softcore"
+		If FrmSettings.CBVideoLesbian.Checked = True And InStr(__domVideo, FrmSettings.LblVideoLesbian.Text) <> 0 Then VideoType = "Lesbian"
+		If FrmSettings.CBVideoBlowjob.Checked = True And InStr(__domVideo, FrmSettings.LblVideoBlowjob.Text) <> 0 Then VideoType = "Blowjob"
+		If FrmSettings.CBVideoFemdom.Checked = True And InStr(__domVideo, FrmSettings.LblVideoFemdom.Text) <> 0 Then VideoType = "Femdom"
+		If FrmSettings.CBVideoFemsub.Checked = True And InStr(__domVideo, FrmSettings.LblVideoFemsub.Text) <> 0 Then VideoType = "Femsub"
+		If FrmSettings.CBVideoJOI.Checked = True And InStr(__domVideo, FrmSettings.LblVideoJOI.Text) <> 0 Then VideoType = "JOI"
+		If FrmSettings.CBVideoCH.Checked = True And InStr(__domVideo, FrmSettings.LblVideoCH.Text) <> 0 Then VideoType = "CH"
+		If FrmSettings.CBVideoGeneral.Checked = True And InStr(__domVideo, FrmSettings.LblVideoGeneral.Text) <> 0 Then VideoType = "General"
+
+
+		If FrmSettings.CBVideoHardcoreD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoHardCoreD.Text) <> 0 Then
 			VideoType = "HardcoreD"
 			DommeVideo = True
 		End If
-		If FrmSettings.CBVideoSoftCoreD.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoSoftCoreD.Text) <> 0 Then
+		If FrmSettings.CBVideoSoftCoreD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoSoftCoreD.Text) <> 0 Then
 			VideoType = "SoftcoreD"
 			DommeVideo = True
 		End If
-		If FrmSettings.CBVideoLesbianD.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoLesbianD.Text) <> 0 Then
+		If FrmSettings.CBVideoLesbianD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoLesbianD.Text) <> 0 Then
 			VideoType = "LesbianD"
 			DommeVideo = True
 		End If
 
-		If FrmSettings.CBVideoBlowjobD.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoBlowjobD.Text) <> 0 Then
+		If FrmSettings.CBVideoBlowjobD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoBlowjobD.Text) <> 0 Then
 			VideoType = "BlowjobD"
 			DommeVideo = True
 		End If
-		If FrmSettings.CBVideoFemdomD.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoFemdomD.Text) <> 0 Then
+		If FrmSettings.CBVideoFemdomD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoFemdomD.Text) <> 0 Then
 			VideoType = "FemdomD"
 			DommeVideo = True
 		End If
-		If FrmSettings.CBVideoFemsubD.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoFemsubD.Text) <> 0 Then
+		If FrmSettings.CBVideoFemsubD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoFemsubD.Text) <> 0 Then
 			VideoType = "FemsubD"
 			DommeVideo = True
 		End If
 
-		If FrmSettings.CBVideoJOID.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoJOID.Text) <> 0 Then
+		If FrmSettings.CBVideoJOID.Checked = True And InStr(__domVideo, FrmSettings.LblVideoJOID.Text) <> 0 Then
 			VideoType = "JOID"
 			DommeVideo = True
 		End If
 
-		If FrmSettings.CBVideoCHD.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoCHD.Text) <> 0 Then
+		If FrmSettings.CBVideoCHD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoCHD.Text) <> 0 Then
 			VideoType = "CHD"
 			DommeVideo = True
 		End If
 
-		If FrmSettings.CBVideoGeneralD.Checked = True And InStr(RandomVideo, FrmSettings.LblVideoGeneralD.Text) <> 0 Then
+		If FrmSettings.CBVideoGeneralD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoGeneralD.Text) <> 0 Then
 			VideoType = "GeneralD"
 			DommeVideo = True
 		End If
@@ -8821,298 +8454,117 @@ GetAnotherRandomVideo:
 		'If FrmSettings.VLC1610Radio.Checked = True Then domVLC.video.crop = "16:10"
 		'If FrmSettings.VLC169Radio.Checked = True Then domVLC.video.crop = "16:9"
 
-		DomWMP.URL = RandomVideo
+		DomWMP.URL = __domVideo
 
 
 
 		If JumpVideo = True Then
-
 			Do
 				Application.DoEvents()
 			Loop Until (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying)
 
-			Dim VideoLength As Integer = DomWMP.currentMedia.duration
-			Dim VidLow As Integer = VideoLength * 0.4
-			Dim VidHigh As Integer = VideoLength * 0.9
-			Dim VidPoint As Integer = randomizer.Next(VidLow, VidHigh)
-
-			Debug.Print("VidLow = " & VidLow)
-			Debug.Print("VidHigh = " & VidHigh)
-			Debug.Print("VidPoint = " & VidPoint)
-
-			DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
+			VideoJump2Random(Nothing, Nothing)
 
 		End If
 
 		JumpVideo = False
-
-
 	End Sub
 
-
-
 	Public Sub HardCoreVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoHardCore.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoHardCore.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoHardCoreTotal.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoHardCoreTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoHardCore.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoHardCoreTotal.Text)
 	End Sub
 
 	Public Sub SoftcoreVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoSoftCore.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCore.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoSoftCoreTotal.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoSoftCoreTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoSoftCore.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoSoftCoreTotal.Text)
 	End Sub
 
 	Public Sub LesbianVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoLesbian.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoLesbian.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoLesbianTotal.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoLesbianTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoLesbian.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoLesbianTotal.Text)
 	End Sub
 
 	Public Sub BlowjobVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoBlowjob.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjob.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoBlowjobTotal.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoBlowjobTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoBlowjob.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoBlowjobTotal.Text)
 	End Sub
 
 	Public Sub FemdomVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoFemdom.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoFemdom.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoFemdomTotal.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoFemdomTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoFemdom.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemdomTotal.Text)
 	End Sub
 
 	Public Sub FemsubVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoFemsub.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoFemsub.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoFemsubTotal.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoFemsubTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoFemsub.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemsubTotal.Text)
 	End Sub
 
 	Public Sub JOIVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoJOI.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoJOI.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoJOITotal.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
-
+		FrmSettings.LblVideoJOITotal.Text = GetVideosInDirectory(FrmSettings.LblVideoJOI.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoJOITotal.Text)
 	End Sub
 
 	Public Sub CHVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoCH.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoCH.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoCHTotal.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoCHTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoCH.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoCHTotal.Text)
 	End Sub
 
 	Public Sub GeneralVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoGeneral.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoGeneral.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoGeneralTotal.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
-
+		FrmSettings.LblVideoGeneralTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoGeneral.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoGeneralTotal.Text)
 	End Sub
 
-
 	Public Sub HardcoreDVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoHardCoreD.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoHardCoreD.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoHardCoreTotalD.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoHardCoreTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoHardCoreD.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoHardCoreTotalD.Text)
 	End Sub
 
 
 	Public Sub SoftcoreDVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoSoftCoreD.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoSoftCoreD.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoSoftCoreTotalD.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoSoftCoreTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoSoftCoreD.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoSoftCoreTotalD.Text)
 	End Sub
 
 
 	Public Sub LesbianDVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoLesbianD.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoLesbianD.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoLesbianTotalD.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoLesbianTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoLesbianD.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoLesbianTotalD.Text)
 	End Sub
 
 
 	Public Sub BlowjobDVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoBlowjobD.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoBlowjobD.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoBlowjobTotalD.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoBlowjobTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoBlowjobD.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoBlowjobTotalD.Text)
 	End Sub
 
 	Public Sub FemdomDVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoFemdomD.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoFemdomD.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoFemdomTotalD.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoFemdomTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoFemdomD.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemdomTotalD.Text)
 	End Sub
 
 
 	Public Sub FemsubDVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoFemsubD.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoFemsubD.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoFemsubTotalD.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoFemsubTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoFemsubD.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemsubTotalD.Text)
 	End Sub
 
 
 	Public Sub JOIDVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoJOID.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoJOID.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoJOITotalD.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
-
+		FrmSettings.LblVideoJOITotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoJOID.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoJOITotalD.Text)
 	End Sub
 
 
 	Public Sub CHDVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoCHD.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoCHD.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoCHTotalD.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
+		FrmSettings.LblVideoCHTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoCHD.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoCHTotalD.Text)
 	End Sub
 
 
 	Public Sub GeneralDVideoTotal()
-		If My.Computer.FileSystem.DirectoryExists(FrmSettings.LblVideoGeneralD.Text) Then
-			Dim files() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.wmv", SearchOption.AllDirectories)
-			Dim files2() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.avi", SearchOption.AllDirectories)
-			Dim files3() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.mp4", SearchOption.AllDirectories)
-			Dim files4() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.m4v", SearchOption.AllDirectories)
-			Dim files5() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.mpg", SearchOption.AllDirectories)
-			Dim files6() As String = Directory.GetFiles(FrmSettings.LblVideoGeneralD.Text, "*.mov", SearchOption.AllDirectories)
-			Dim TotalFiles As Integer = (files.Length + files2.Length + files3.Length + files4.Length + files5.Length + files6.Length)
-			FrmSettings.LblVideoGeneralTotalD.Text = TotalFiles
-			RefreshVideoTotal += TotalFiles
-		End If
-
+		FrmSettings.LblVideoGeneralTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoGeneralD.Text).Count
+		RefreshVideoTotal += CInt(FrmSettings.LblVideoGeneralTotalD.Text)
 	End Sub
 
 
@@ -26520,19 +25972,23 @@ GetDommeSlideshow:
 
 	End Sub
 
-	Private Sub OpenBetaThreadToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OpenBetaThreadToolStripMenuItem.Click
+	Private Sub OpenBetaThreadToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OpenBetaThreadToolStripMenuItem.Click,
+																											OpenBetaThreadToolStripMenuItem1.Click
 		Process.Start("https://milovana.com/forum/viewtopic.php?f=2&t=15776")
 	End Sub
 
-	Private Sub BugReportThreadToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BugReportThreadToolStripMenuItem.Click
+	Private Sub BugReportThreadToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BugReportThreadToolStripMenuItem.Click,
+																											BugReportThreadToolStripMenuItem1.Click
 		Process.Start("https://milovana.com/forum/viewtopic.php?f=2&t=16203")
 	End Sub
 
-	Private Sub WebteasesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles WebteasesToolStripMenuItem.Click
+	Private Sub WebteasesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles WebteasesToolStripMenuItem.Click,
+																										WebteasesToolStripMenuItem1.Click
 		Process.Start("https://milovana.com/webteases/")
 	End Sub
 
-	Private Sub AllAndEverythingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AllAndEverythingToolStripMenuItem.Click
+	Private Sub AllAndEverythingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AllAndEverythingToolStripMenuItem.Click,
+																												ForumToolStripMenuItem.Click
 		Process.Start("https://milovana.com/forum/")
 	End Sub
 
@@ -27221,21 +26677,6 @@ SkipNew:
 
 		End If
 
-	End Sub
-
-
-	Private Sub OpenBetaThreadToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles OpenBetaThreadToolStripMenuItem1.Click
-		Process.Start("https://milovana.com/forum/viewtopic.php?f=2&t=15776")
-	End Sub
-
-	Private Sub BugReportThreadToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles BugReportThreadToolStripMenuItem1.Click
-		Process.Start("https://milovana.com/forum/viewtopic.php?f=2&t=16203")
-	End Sub
-	Private Sub WebteasesToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles WebteasesToolStripMenuItem1.Click
-		Process.Start("https://milovana.com/webteases/")
-	End Sub
-	Private Sub ForumToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ForumToolStripMenuItem.Click
-		Process.Start("https://milovana.com/forum/")
 	End Sub
 
 	Private Sub AboutToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutToolStripMenuItem.Click
@@ -30483,25 +29924,40 @@ SkipNew:
 	End Function
 
 
+	''' =========================================================================================================
+	''' <summary>
+	''' Jumps to random videoposition in current video.
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
+	''' <ramarks>There is no need for parameter Sender and e. 
+	''' Only for Designer Compatiblity with Butten Clicks.</ramarks>
+	''' <exception cref="exception">Rethrows all exceptions to catcher, as long sender is nothing.</exception>
+	Private Sub VideoJump2Random(sender As System.Object, e As System.EventArgs) Handles Button12.Click
+		Try
+			If DomWMP.currentPlaylist.count = 0 Then Throw New Exception("No Video playing - can't jump.")
 
+			Dim VideoLength As Integer = DomWMP.currentMedia.duration
+			Dim VidLow As Integer = VideoLength * 0.4
+			Dim VidHigh As Integer = VideoLength * 0.9
+			Dim VidPoint As Integer = randomizer.Next(VidLow, VidHigh)
 
+			Debug.Print("VidLow = " & VidLow)
+			Debug.Print("VidHigh = " & VidHigh)
+			Debug.Print("VidPoint = " & VidPoint)
 
-
-
-
-	Private Sub Button12_Click_1(sender As System.Object, e As System.EventArgs) Handles Button12.Click
-		Dim VideoLength As Integer = DomWMP.currentMedia.duration
-		Dim VidLow As Integer = VideoLength * 0.4
-		Dim VidHigh As Integer = VideoLength * 0.9
-		Dim VidPoint As Integer = randomizer.Next(VidLow, VidHigh)
-
-		Debug.Print("VidLow = " & VidLow)
-		Debug.Print("VidHigh = " & VidHigh)
-		Debug.Print("VidPoint = " & VidPoint)
-
-
-
-		DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
+			DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			If sender IsNot Nothing Then
+				MsgBox("Error on jumping to Random Position in Video!" & vbCrLf & ex.Message,
+						vbExclamation, "Jump to random Position")
+			Else
+				Throw
+			End If
+		End Try
 	End Sub
 
 	Private Sub VideoTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTimer.Tick
