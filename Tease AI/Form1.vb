@@ -513,7 +513,6 @@ Public Class Form1
 
 	Dim SplitContainerHeight As Integer
 
-	Dim DommeImage As Image
 	Dim DommeImageFound As Boolean
 	Dim DommeImageListCheck As Boolean
 
@@ -850,8 +849,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		End If
 
 
-		FrmSettings.Show()
-		FrmSettings.Hide()
 		FrmSettings.FrmSettingsLoading = True
 
 		FrmSettings.FrmSettingStartUp()
@@ -16701,121 +16698,205 @@ VTSkip:
 
 	End Function
 
+	''' ========================================================================================================= 
+	''' <summary>
+	''' Searches for a DommeImage, that is tagged with the given Domme Tags.
+	''' This Function is running timeconsuming Regex and IO Operations in a differnt Task.
+	''' </summary>
+	''' <param name="DomTag">The DommeTags, to Search for.</param>
+	''' <returns>Returns remanent true, if there is a DommeImage, with the specified Tags.</returns>
+	''' <remarks>
+	''' It is possible to Exclude Tags from Search <br></br>
+	''' Examples: <br></br>
+	''' You want to show a butt without feet, you can enter "Ass, NotFeet".<br></br>
+	''' You want to show a closeup face without boobs: "Face, NotBoobs, Closeup"<br></br>
+	''' If there is no image found for the specified Tags, the Tags will be altered and searched again:<br></br>
+	''' The order of alternation is: <br></br>
+	''' 1. Remove: Furniture, SexToy, Tattoo
+	''' 2. Remove: Closeup, Sideview<br></br>
+	''' 3. Change: Naked -> GarmentCovering <br></br>
+	''' 4. Change: GarmentCovering -> HalfDressed <br></br>
+	''' 5. Change: HalfDressed -> FullDressed <br></br>
+	''' 6. Change: HandsCovering -> GarmentCovering <br></br>
+	''' 7. Remove: Excluded Tags from the BaseTags <br></br>
+	''' 8-12: Same as 1-6 without Excluded tags. If there are no excluded tags this will be skipped.<br></br>
+	''' 13. Change: FullDressed -> HalfDressed <br></br>
+	''' 14. Change: HalfDressed -> GarmentCovering <br></br>
+	''' Before each step there is a check, if it could alter the result. If it won't the Step is skipped.<br></br> 
+	''' The Tag-Order, case and count doesn't matter. 
+	''' This Function should be ThreadSafe (Microsoft would propably disagree, but who really understands Threadsafty... ;-) )
+	'''   </remarks>
 	Public Function GetDommeImage(ByVal DomTag As String) As Boolean
-
-		DommeImage = Nothing
-
+		DommeImageSTR = Nothing
 		DommeImageFound = False
+		Try
+			Dim __targetFolder As String = Path.GetDirectoryName(_ImageFileNames(FileCount))
 
-		If File.Exists(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt") Then
+			If File.Exists(__targetFolder & "\ImageTags.txt") Then
+				Dim task1 As Tasks.Task(Of String) = Tasks.Task.Factory.StartNew(
+					Function() As String
+                        '×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+                        '                           Parallel Task - Beyond this Line: INVOKE IS REQUIRED...
+                        CheckForIllegalCrossThreadCalls = True  ' Plz Leave it True, and inform me, if there is an error
+                        Dim ___retryStage As Integer = 0
+						Dim ___DomTag_Base As String = DomTag
+						Dim ___DomTag_Work As String = ___DomTag_Base
 
+                        ' Load Taglist for current Slideshow
+                        Dim ___TagList As New List(Of String)
+						___TagList = Txt2List(__targetFolder & "\ImageTags.txt")
+retry_WithExclusion:
+                        ' Convert all overgiven DommeTags to Regex with positive Lookahead
+                        Dim ___matchpattern As String = "(?<TAG>[\w]+)[,\s]*"    ' MatchPattern to get all overgiven DommeTags 
+                        Dim ___replacementstring As String = "(?=.*Tag${TAG})"   ' ReplatePattern, Replace every Tag, with positve LookAhead
+                        ' Execute: Search Words in Overgiven Tags and warp them in the ReplacePattern.
+                        Dim ___TagPattern As String = RegularExpressions.Regex.Replace(___DomTag_Work, ___matchpattern, ___replacementstring,
+																						RegularExpressions.RegexOptions.IgnoreCase)
 
-			Dim TagList As New List(Of String)
-			TagList = Txt2List(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt")
+                        ' Convert every DommeTag starting with "Not" to negativ Lookahead
+                        ___matchpattern = "(\?=\.\*\bTagNot)"         ' MatchPattern FindAllTag start with "Not" 
+                        ___replacementstring = "?!.*"              ' ReplatePattern, Replace those Tags, with Negative LookAhead
+                        ' Execute: Search Words in Overgiven Tags and warp them in the ReplacePattern.
+                        ___TagPattern = RegularExpressions.Regex.Replace(___TagPattern, ___matchpattern, ___replacementstring,
+																	  RegularExpressions.RegexOptions.IgnoreCase)
 
-			DomTag = DomTag.Replace(" ,", ",")
-			DomTag = DomTag.Replace(", ", ",")
+                        ' Define the Regex to search for the desired Dommetags, return only Filenames.
+                        Dim ___re As New RegularExpressions.Regex("(?:^.*(?:\.jpg|jpeg|png|bmp|gif)){1}" & ___TagPattern,
+																	RegularExpressions.RegexOptions.IgnoreCase _
+																	Or RegularExpressions.RegexOptions.Multiline)
+                        ' Get the Matches.
+                        Dim ___mc As RegularExpressions.MatchCollection = ___re.Matches(String.Join(vbCrLf, ___TagList))
 
-			Dim DomTagArray As String() = DomTag.Split(",")
+                        ' Check if Matches found.
+retry_NextStage:
+						If ___mc.Count <= 0 AndAlso ___retryStage <= 14 Then
+                            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+                            '                             TAG-Alternation-Start
+                            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+                            ' No Match for Current TagSet found => try differnt variations
+                            Select Case ___retryStage
+								Case 0, 7
+                                    ' Remove View-Tag
+                                    ___matchpattern = "(?:\bFurniture\b)|(?:\bSexToy\b)|(?:\bTattoo\b)"
+									___replacementstring = ""
+								Case 1, 8
+                                    ' Remove View-Tag
+                                    ___matchpattern = "(?:\bCloseUP\b)|(?:\bSideview\b)"
+									___replacementstring = ""
+								Case 2, 9
+                                    ' Increase Clothing
+                                    ___matchpattern = "\bNaked\b"
+									___replacementstring = "GarmentCovering"
+								Case 3, 10
+                                    ' Increase Clothing
+                                    ___matchpattern = "\bGarmentCovering\b"
+									___replacementstring = "HalfDressed"
+								Case 4, 11
+                                    ' Increase Clothing
+                                    ___matchpattern = "\bHalfDressed\b"
+									___replacementstring = "FullyDressed"
+								Case 5, 12
+                                    ' Increase Clothing
+                                    ___matchpattern = "\bHandsCovering\b"
+									___replacementstring = "GarmentCovering"
+								Case 6
+                                    ' Use BaseTags, remove Exclusions and Start again
+                                    ___DomTag_Work = ___DomTag_Base
+									___matchpattern = "\bNot[\w]*\b"
+									___replacementstring = ""
+								Case 13
+                                    ' Decrease Clothing
+                                    ___matchpattern = "\bFullyDressed\b"
+									___replacementstring = "HalfDressed"
+								Case 14
+                                    ' Decrease Clothing
+                                    ___matchpattern = "\bHalfDressed\b"
+									___replacementstring = "GarmentCovering"
+							End Select
+							___retryStage += 1
+                            ' Save the actual TagList for comparison. We want to know if this Tag-Replacemtent will give another result.
+                            Dim ___DomTag_Temp As String = ___DomTag_Work
+							___DomTag_Work = RegularExpressions.Regex.Replace(___DomTag_Work, ___matchpattern, ___replacementstring,
+																			 RegularExpressions.RegexOptions.IgnoreCase)
 
-			Dim DomTag1 As String = " "
-			Dim DomTag2 As String = " "
-			Dim DomTag3 As String = " "
+                            ' IF:    actual Stage is remove excluded Tags
+                            ' And:   there are none
+                            ' Then:  Set Stage to 11 to skip unnecessary searches
+                            If ___retryStage = 6 _
+							AndAlso ___DomTag_Work = ___DomTag_Temp _
+							Then ___retryStage = 11
 
-			For i As Integer = 0 To DomTagArray.Count - 1
-				If i = 0 Then DomTag1 = "Tag" & DomTagArray(0)
-				If i = 1 Then DomTag2 = "Tag" & DomTagArray(1)
-				If i = 2 Then DomTag3 = "Tag" & DomTagArray(2)
-			Next
-
-			Dim xU As Integer = FileCount
-			Dim xD As Integer = FileCount
-
-			For i As Integer = 0 To TagList.Count - 1
-
-				'Debug.Print("Taglist(i) = " & TagList(i))
-
-				Try
-
-					' Debug.Print("Taglist(xU) = " & TagList(xU))
-					' Debug.Print("DomTag1 = " & DomTag1)
-					'Debug.Print("DomTag2 = " & DomTag2)
-					'Debug.Print("DomTag3 = " & DomTag3)
-
-					If TagList(xU).Contains(DomTag1) And TagList(xU).Contains(DomTag2) And TagList(xU).Contains(DomTag3) Then
-
-						Dim PicArray As String() = TagList(xU).Split
-						Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
-
-						For p As Integer = 0 To PicArray.Count - 1
-							PicDir = PicDir & PicArray(p) & " "
-							If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
+                            ' IF:   Check if the Expression changed the TagList
+                            ' Then: Start Search with new Tags.
+                            ' Else: Skip Search and jump to next Stage.
+                            If ___DomTag_Work <> ___DomTag_Temp _
+							Then GoTo retry_WithExclusion _
+							Else GoTo retry_NextStage
+                            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+                            '             TAG-Alternation-END 
+                            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+                        ElseIf ___mc.Count <= 0
+                            ' No Images Found => interrupt task
+                            Throw New Exception("No DommeImage found for Tags: '" & ___DomTag_Base & "' in directory: '" & __targetFolder & "'")
+						End If
+                        ' Copy Matches to editable Container
+                        Dim ___FoundFiles As New List(Of String)
+						For Each File As RegularExpressions.Capture In ___mc
+							___FoundFiles.Add(File.Value)
 						Next
+FileNotFound_GetNext:
+                        ' Get random File from ___FoundFiles
+                        Dim ___rndFileName As String = ___FoundFiles.Item(randomizer.Next(0, ___FoundFiles.Count - 1))
 
-						'If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
-						If DommeImageListCheck = False Then DommeImageSTR = PicDir
-						DommeImageFound = True
+						If File.Exists(__targetFolder & "\" & ___rndFileName) Then
+                            ' File Found: Return absolute path
+                            Return DirectCast(__targetFolder & "\" & ___rndFileName, String)
+						Else
+                            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+                            '                           Try-Finding-Another File
+                            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+                            ' File not Found: Get next in List
+                            'SUGGESTION: Build in a Debug-Window, so the User can review such "Erros", without beeing interrupted (ôÔ).
+                            Debug.Print(String.Format(
+										"DommeImage '{0}' not found, please check your DommeTags for directory '{1}'.",
+										 ___rndFileName, __targetFolder))
+                            ' Loop through ___FoundFiles until it's empty. Then interrupt Task
+                            If ___FoundFiles.Count > 0 Then
+                                ' Remove not found File from Container and try another File.
+                                ___FoundFiles.Remove(___rndFileName)
+								GoTo FileNotFound_GetNext
+							Else
+								Throw New Exception("No available DommeImage found. Tags were found, but none of the " &
+													"files could be localized. Please Check your TagFile for Directory: " & __targetFolder)
+							End If
+                            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+                            '             Try-Finding-Another File
+                            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+                        End If
+						'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Task °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+				End Function)
 
-						'Debug.Print("DommeImageFound = " & DommeImageFound)
+                ' Wait for Task to end, Withour freezing UI
+                Do Until task1.IsCompleted Or task1.IsFaulted
+					Application.DoEvents()
+				Loop
+                ' Check if there was an exception, if yes rethrow it.
+                If task1.IsFaulted Then Throw task1.Exception.InnerException
 
-
-						Exit For
-
-					End If
-
-					xU += 1
-					If xU > TagList.Count - 1 Then xU = TagList.Count - 1
-
-				Catch
-				End Try
-
-
-
-				Try
-
-					'Debug.Print("Taglist(xD) = " & TagList(xD))
-
-					If TagList(xD).Contains(DomTag1) And TagList(xD).Contains(DomTag2) And TagList(xD).Contains(DomTag3) Then
-
-						Dim PicArray As String() = TagList(xD).Split
-						Dim PicDir As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\"
-
-						For p As Integer = 0 To PicArray.Count - 1
-							PicDir = PicDir & PicArray(p) & " "
-							If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
-						Next
-
-						'If DommeImageListCheck = False Then DommeImage = Image.FromFile(PicDir)
-						If DommeImageListCheck = False Then DommeImageSTR = PicDir
-
-						DommeImageFound = True
-
-						' Debug.Print("DommeImageFound = " & DommeImageFound)
-
-						Exit For
-
-					End If
-
-
-					xD -= 1
-					If xD < 0 Then xD = 0
-
-				Catch
-
-				End Try
-
-
-
-				' Debug.Print(i & " of " & TagList.Count - 1 & " complete")
-
-			Next
-
-		End If
-
-		' Debug.Print("Final DommeImageFound = " & DommeImageFound)
-
+                ' Set the stuff and return it.
+                DommeImageSTR = task1.Result
+				DommeImageFound = True
+			End If
+		Catch ex As Exception
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            '                                            All Errors
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            'SUGGESTION: Build in a Debug-Window, so the User can review such "Erros", without beeing interrupted (ôÔ).
+            Debug.Print(ex.Message)
+			DommeImageSTR = Nothing
+			DommeImageFound = False
+		End Try
 		Return DommeImageFound
-
 	End Function
 
 	Public Function GetLocalImage(ByVal LocTag As String) As Boolean

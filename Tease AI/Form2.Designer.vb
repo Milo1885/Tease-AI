@@ -996,10 +996,8 @@ Partial Class FrmSettings
 		Me.OpenScriptDialog = New System.Windows.Forms.OpenFileDialog()
 		Me.OpenSettingsDialog = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveSettingsDialog = New System.Windows.Forms.SaveFileDialog()
-		Me.BWRebuildURLFiles = New System.ComponentModel.BackgroundWorker()
-		Me.BWRefreshURLFiles = New System.ComponentModel.BackgroundWorker()
+		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW
 		Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
-		Me.BWCreateURLFiles = New System.ComponentModel.BackgroundWorker()
 		Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
 		Me.GroupBox65 = New System.Windows.Forms.GroupBox()
 		Me.Label136 = New System.Windows.Forms.Label()
@@ -12837,21 +12835,13 @@ Partial Class FrmSettings
 		Me.SaveSettingsDialog.Filter = "TXT Files (*.txt)|*.txt"
 		Me.SaveSettingsDialog.Title = "Select a location to save current Domme settings"
 		'
-		'BWRebuildURLFiles
-		'
-		Me.BWRebuildURLFiles.WorkerReportsProgress = True
-		Me.BWRebuildURLFiles.WorkerSupportsCancellation = True
-		'
-		'BWRefreshURLFiles
-		'
-		Me.BWRefreshURLFiles.WorkerReportsProgress = True
-		Me.BWRefreshURLFiles.WorkerSupportsCancellation = True
-		'
 		'BWValidateLocalFiles
 		'
 		'
-		'BWCreateURLFiles
+		'BWRefreshURLFiles
 		'
+		Me.BWURLFiles.WorkerReportsProgress = True
+		Me.BWURLFiles.WorkerSupportsCancellation = True
 		'
 		'GroupBox65
 		'
@@ -14079,16 +14069,13 @@ Partial Class FrmSettings
 	Friend WithEvents PBMaintenance As System.Windows.Forms.ProgressBar
 	Friend WithEvents LBLMaintenance As System.Windows.Forms.Label
 	Friend WithEvents BTNMaintenanceRebuild As System.Windows.Forms.Button
-	Friend WithEvents BWRebuildURLFiles As System.ComponentModel.BackgroundWorker
 	Friend WithEvents BTNMaintenanceCancel As System.Windows.Forms.Button
 	Friend WithEvents Label116 As System.Windows.Forms.Label
 	Friend WithEvents PBCurrent As System.Windows.Forms.ProgressBar
 	Friend WithEvents Label117 As System.Windows.Forms.Label
-	Friend WithEvents BWRefreshURLFiles As System.ComponentModel.BackgroundWorker
 	Friend WithEvents BTNMaintenanceRefresh As System.Windows.Forms.Button
 	Friend WithEvents BTNMaintenanceValidate As System.Windows.Forms.Button
 	Friend WithEvents BWValidateLocalFiles As System.ComponentModel.BackgroundWorker
-	Friend WithEvents BWCreateURLFiles As System.ComponentModel.BackgroundWorker
 	Friend WithEvents TabPage27 As System.Windows.Forms.TabPage
 	Friend WithEvents BTNMaintenanceScripts As System.Windows.Forms.Button
 	Friend WithEvents Button3 As System.Windows.Forms.Button
@@ -14263,4 +14250,5 @@ Partial Class FrmSettings
 	Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
 	Friend WithEvents Label135 As System.Windows.Forms.Label
 	Friend WithEvents TrackBar2 As System.Windows.Forms.TrackBar
+	Friend WithEvents BWURLFiles As Tease_AI.URL_Files.URL_File_BGW
 End Class
