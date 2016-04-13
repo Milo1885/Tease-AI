@@ -12765,7 +12765,7 @@ NextURL:
 
 		Debug.Print("done")
 
-		MessageBox.Show(Me, PBMaintenance.Maximum & " scripts have been audited." & Environment.NewLine & Environment.NewLine &
+		MessageBox.Show(If(Me.Visible, Me, FrmSplash), PBMaintenance.Maximum & " scripts have been audited." & Environment.NewLine & Environment.NewLine &
 						"Blank lines cleared: " & BlankAudit & Environment.NewLine & Environment.NewLine &
 						"Script errors corrected: " & ErrorAudit, "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
