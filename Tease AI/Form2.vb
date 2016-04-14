@@ -13144,8 +13144,11 @@ WhyUMakeMeDoDis:
 	Private Sub CBTransparentTime_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTransparentTime.CheckedChanged
 		If Form1.ApplyingTheme = False Then
 			My.Settings.CBDateTransparent = CBTransparentTime.Checked
-			My.Settings.Save()
-			Form1.ApplyThemeColor()
+            My.Settings.Save()
+            Try
+                Form1.ApplyThemeColor()
+            Catch
+            End Try
 		End If
 
 	End Sub
@@ -13160,9 +13163,12 @@ WhyUMakeMeDoDis:
 
 	Private Sub CheckBox1_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBFlipBack.CheckedChanged
 
-		If Form1.FormLoading = False And Form1.ApplyingTheme = False Then Form1.ApplyThemeColor()
+        Try
+            If Form1.FormLoading = False And Form1.ApplyingTheme = False Then Form1.ApplyThemeColor()
+        Catch
+        End Try
 
-	End Sub
+    End Sub
 
 	Private Sub Button32_Click(sender As System.Object, e As System.EventArgs) Handles Button32.Click
 		SaveFileDialog1.Title = "Select a location to save current Theme"

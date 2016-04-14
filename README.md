@@ -2,6 +2,48 @@
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
 
+# Changelog - Patch 51
+
+Fixes added from Community Members:
+
+	Stefaf: Settings window no longer appears on startup
+	
+	Stefaf: URL-File-Review-Fix 
+	     
+		 Improvements :
+         - Fixed all CrossthreadCalls, wich caused the System to malfunction, with UserInteraction.
+         - Removed all hard-coded Folder and File Strings.
+         - Removed redundant Code.
+         - If you review and download images, the image was downloaded twice.
+         - The Blog-XML was downloaded with XML-Doc. After you scraped an URL, you sometimes couldn't scrape it again.
+         - Deadlinks were imported again.
+         - Adding an URL to DislikeList was only writing to file, so a disliked URL could get into File, if a blog contains it twice.
+
+     Stefaf: @DommeTag() Overhaul 
+	     
+		 Reworked the Function to search a DommeImage, that is tagged with the given Domme Tags.Now it is possible to Exclude Tags from Search. The Tag-Order, case and count doesn't matter.
+
+         You want to show a butt without feet, you can enter "Ass, NotFeet".
+         You want to show a closeup face without boobs: "Face, NotBoobs, Closeup"
+
+         If there is no image found for the specified Tags, the Tags will be altered and searched again:
+
+         The order of alternation is:
+         1. Remove: Furniture, SexToy, Tattoo
+         2. Remove: Closeup, Sideview
+         3. Change: Naked -> GarmentCovering
+         4. Change: GarmentCovering -> HalfDressed
+         5. Change: HalfDressed -> FullDressed
+         6. Change: HandsCovering -> GarmentCovering
+         7. Remove: Excluded Tags from the BaseTags
+         8-12: Same as 1-6 without Excluded tags. If there are no excluded tags this will be skipped.
+         13. Change: FullDressed -> HalfDressed 
+         14. Change: HalfDressed -> GarmentCovering 
+
+         Before each step there is a check, if it could alter the result. If it won't the Step is skipped.
+
+		 
+		 
 # Changelog - Patch 50
 
 System Files added in Patch 50
@@ -10,9 +52,9 @@ System Files added in Patch 50
 
 
 
-@SetModule() functionality restored. When I copied the RunModuleLink Sub, I forgot to add the SetModul code back in. 
+@SetModule() functionality restored. When I copied the RunModuleLink Sub, I forgot to add the SetModule code back in. 
 
-@SetModule() and @SetLink() can now jump to a specifiec line in the script when it is called by using a comma. For example, @SetModule(Ballbusting Tasks, Task 2) would start after the line (Tasks 2) in Ballbusting Tasks.txt when the Module begins.
+@SetModule() and @SetLink() can now jump to a specific line in the script when it is called by using a comma. For example, @SetModule(Ballbusting Tasks, Task 2) would start after the line (Tasks 2) in Ballbusting Tasks.txt when the Module begins.
 	 
 @ShowVar[] and #Var[] should now work correctly and can be used multiple times per line
 
@@ -40,7 +82,7 @@ Added @MultipleEdges() Command
 
 Fixed bug that prevented SessionEdges from updating when @EdgeMode edges resolved
 
-Tease AI no longer allows script-switching countdowns to end while the domme is in the middle of a @FollowUp. This fixes a bug where the domme's response ability would be frozen and the main picture wouldn't change. 
+Tease AI no longer allows script-switching countdowns to end while the domme is in the middle of a @FollowUp(). This fixes a bug where the domme's response ability would be frozen and the main picture wouldn't change. 
 
 @PlayVideo[], @PlayAudio[] and @ShowImage[] will now check full file paths as well as their respective media folders in the Tease AI root directory. This is especially useful for showing media stored in variables based on user's prior input. (For example, "Give me the location of your favorite porn video @InputVar[FavoritePornVideo]", and then calling it later with @PlayVideo[#Var[FavoritePornVideo]])
 

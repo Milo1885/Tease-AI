@@ -645,6 +645,14 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		mainPictureBox.Image = Nothing
 		Debug.Print("Here?")
 
+        UpdatesTimer.Stop()
+        StrokeTimeTotalTimer.Stop()
+        StopEverything()
+
+        'ScriptTimer.Stop()
+        'StrokeTimer.Stop()
+
+
 
 		'If BeforeTease = False And My.Settings.Sys_SubLeftEarly <> 0 Then My.Settings.Sys_SubLeftEarlyTotal += 1
 
@@ -28353,115 +28361,115 @@ SkipNew:
 		End While
 		ScrollChatDown()
 
-		FrmSettings.CBStretchBack.Checked = My.Settings.BackgroundStretch
+        Try
+            FrmSettings.CBStretchBack.Checked = My.Settings.BackgroundStretch
 
-		If FrmSettings.CBStretchBack.Checked = True Then
-			Me.BackgroundImageLayout = ImageLayout.Stretch
-		Else
-			Me.BackgroundImageLayout = ImageLayout.None
-		End If
+            If FrmSettings.CBStretchBack.Checked = True Then
+                Me.BackgroundImageLayout = ImageLayout.Stretch
+            Else
+                Me.BackgroundImageLayout = ImageLayout.None
+            End If
+        Catch
+        End Try
 
+        PNLTabs.BackColor = My.Settings.BackgroundColor
+        PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
+        PNLLazySub.BackColor = My.Settings.BackgroundColor
+        PNLLazySub2.BackColor = My.Settings.BackgroundColor
+        PNLAppRandomizer.BackColor = My.Settings.BackgroundColor
+        PNLPlaylist.BackColor = My.Settings.BackgroundColor
+        PNLWritingTask.BackColor = My.Settings.BackgroundColor
+        PNLWishlistHeader.BackColor = My.Settings.BackgroundColor
+        PNLWishlistTokenBack.BackColor = My.Settings.BackgroundColor
+        PNLMetronome.BackColor = My.Settings.BackgroundColor
 
-		PNLTabs.BackColor = My.Settings.BackgroundColor
-		PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
-		PNLLazySub.BackColor = My.Settings.BackgroundColor
-		PNLLazySub2.BackColor = My.Settings.BackgroundColor
-		PNLAppRandomizer.BackColor = My.Settings.BackgroundColor
-		PNLPlaylist.BackColor = My.Settings.BackgroundColor
-		PNLWritingTask.BackColor = My.Settings.BackgroundColor
-		PNLWishlistHeader.BackColor = My.Settings.BackgroundColor
-		PNLWishlistTokenBack.BackColor = My.Settings.BackgroundColor
-		PNLMetronome.BackColor = My.Settings.BackgroundColor
+        PNLHypnoGen.BackColor = My.Settings.BackgroundColor
 
-		PNLHypnoGen.BackColor = My.Settings.BackgroundColor
+        CBHypnoGenInduction.ForeColor = My.Settings.TextColor
+        LBLHypnoFile.ForeColor = My.Settings.TextColor
+        CBHypnoGenSlideshow.ForeColor = My.Settings.TextColor
+        LBLHypnoImageTag.ForeColor = My.Settings.TextColor
+        LBLBackTrack.ForeColor = My.Settings.TextColor
+        CBHypnoGenNoText.ForeColor = My.Settings.TextColor
+        CBHypnoGenPhase.ForeColor = My.Settings.TextColor
 
-		CBHypnoGenInduction.ForeColor = My.Settings.TextColor
-		LBLHypnoFile.ForeColor = My.Settings.TextColor
-		CBHypnoGenSlideshow.ForeColor = My.Settings.TextColor
-		LBLHypnoImageTag.ForeColor = My.Settings.TextColor
-		LBLBackTrack.ForeColor = My.Settings.TextColor
-		CBHypnoGenNoText.ForeColor = My.Settings.TextColor
-		CBHypnoGenPhase.ForeColor = My.Settings.TextColor
+        BTNHypnoGenStart.ForeColor = My.Settings.TextColor
+        BTNHypnoGenStart.BackColor = My.Settings.ButtonColor
 
-		BTNHypnoGenStart.ForeColor = My.Settings.TextColor
-		BTNHypnoGenStart.BackColor = My.Settings.ButtonColor
+        AppPanelVitalSub.BackColor = My.Settings.BackgroundColor
 
-		AppPanelVitalSub.BackColor = My.Settings.BackgroundColor
+        CBVitalSubDomTask.ForeColor = My.Settings.TextColor
+        GBGoals.ForeColor = My.Settings.TextColor
+        GBCalories.ForeColor = My.Settings.TextColor
+        LBLConsumed.ForeColor = My.Settings.TextColor
+        LBLGoal.ForeColor = My.Settings.TextColor
+        LBLCalorie.ForeColor = My.Settings.TextColor
+        TBCalorie.ForeColor = My.Settings.TextColor
+        TBCalorie.BackColor = My.Settings.BackgroundColor
 
-		CBVitalSubDomTask.ForeColor = My.Settings.TextColor
-		GBGoals.ForeColor = My.Settings.TextColor
-		GBCalories.ForeColor = My.Settings.TextColor
-		LBLConsumed.ForeColor = My.Settings.TextColor
-		LBLGoal.ForeColor = My.Settings.TextColor
-		LBLCalorie.ForeColor = My.Settings.TextColor
-		TBCalorie.ForeColor = My.Settings.TextColor
-		TBCalorie.BackColor = My.Settings.BackgroundColor
+        BTNExercise.BackColor = My.Settings.ButtonColor
+        BTNCalorie.BackColor = My.Settings.ButtonColor
+        BTNExercise.ForeColor = My.Settings.TextColor
+        BTNCalorie.ForeColor = My.Settings.TextColor
 
-		BTNExercise.BackColor = My.Settings.ButtonColor
-		BTNCalorie.BackColor = My.Settings.ButtonColor
-		BTNExercise.ForeColor = My.Settings.TextColor
-		BTNCalorie.ForeColor = My.Settings.TextColor
+        BTNMetroPreview1.BackColor = My.Settings.ButtonColor
+        BTNMetroPreview2.BackColor = My.Settings.ButtonColor
+        BTNMetroStop1.BackColor = My.Settings.ButtonColor
+        BTNMetroStop2.BackColor = My.Settings.ButtonColor
 
-		BTNMetroPreview1.BackColor = My.Settings.ButtonColor
-		BTNMetroPreview2.BackColor = My.Settings.ButtonColor
-		BTNMetroStop1.BackColor = My.Settings.ButtonColor
-		BTNMetroStop2.BackColor = My.Settings.ButtonColor
+        BTNMetroPreview1.ForeColor = My.Settings.TextColor
+        BTNMetroPreview2.ForeColor = My.Settings.TextColor
+        BTNMetroStop1.ForeColor = My.Settings.TextColor
+        BTNMetroStop2.ForeColor = My.Settings.TextColor
 
-		BTNMetroPreview1.ForeColor = My.Settings.TextColor
-		BTNMetroPreview2.ForeColor = My.Settings.TextColor
-		BTNMetroStop1.ForeColor = My.Settings.TextColor
-		BTNMetroStop2.ForeColor = My.Settings.TextColor
-
-		CBMetronome.ForeColor = My.Settings.TextColor
-		LBLMaxSpeed.ForeColor = My.Settings.TextColor
-		LBLMinSpeed.ForeColor = My.Settings.TextColor
-		LBLLow.ForeColor = My.Settings.TextColor
-		LBLHigh.ForeColor = My.Settings.TextColor
-
-
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
+        CBMetronome.ForeColor = My.Settings.TextColor
+        LBLMaxSpeed.ForeColor = My.Settings.TextColor
+        LBLMinSpeed.ForeColor = My.Settings.TextColor
+        LBLLow.ForeColor = My.Settings.TextColor
+        LBLHigh.ForeColor = My.Settings.TextColor
 
 
-
-		If FrmSettings.CBFlipBack.Checked = True Then
-
-			Try
-				Dim BGIMage As Image = CType(Bitmap.FromFile(My.Settings.BackgroundImage), Bitmap)
-				BGIMage.RotateFlip(RotateFlipType.Rotate180FlipY)
-
-				BackgroundImage = BGIMage
-				FrmSettings.PBBackgroundPreview.Image = BGIMage
-
-			Catch
-			End Try
-
-		Else
-
-			Try
-
-				BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
-				FrmSettings.PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
-
-			Catch
-			End Try
-
-		End If
-
-		ApplyingTheme = False
+        BTNLS1Edit.BackColor = My.Settings.ButtonColor
+        BTNLS1Edit.ForeColor = My.Settings.TextColor
+        BTNLS2Edit.BackColor = My.Settings.ButtonColor
+        BTNLS2Edit.ForeColor = My.Settings.TextColor
+        BTNLS3Edit.BackColor = My.Settings.ButtonColor
+        BTNLS3Edit.ForeColor = My.Settings.TextColor
+        BTNLS4Edit.BackColor = My.Settings.ButtonColor
+        BTNLS4Edit.ForeColor = My.Settings.TextColor
+        BTNLS5Edit.BackColor = My.Settings.ButtonColor
+        BTNLS5Edit.ForeColor = My.Settings.TextColor
 
 
-		'TabControl1.DefaultBackColor = My.Settings.BackgroundColor
+        Try
+            If FrmSettings.CBFlipBack.Checked = True Then
 
-	End Sub
+
+                Dim BGIMage As Image = CType(Bitmap.FromFile(My.Settings.BackgroundImage), Bitmap)
+                BGIMage.RotateFlip(RotateFlipType.Rotate180FlipY)
+
+                BackgroundImage = BGIMage
+                FrmSettings.PBBackgroundPreview.Image = BGIMage
+
+           
+
+        Else
+
+
+                BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
+                FrmSettings.PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
+
+            End If
+
+        Catch
+        End Try
+
+        ApplyingTheme = False
+
+
+        'TabControl1.DefaultBackColor = My.Settings.BackgroundColor
+
+    End Sub
 
 
 
