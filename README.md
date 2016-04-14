@@ -16,7 +16,8 @@ Fixes added from Community Members:
          - Removed redundant Code.
          - If you review and download images, the image was downloaded twice.
          - The Blog-XML was downloaded with XML-Doc. After you scraped an URL, you sometimes couldn't scrape it again.
-         - Deadlinks were imported again.
+         - Deadlinks were imported again. Now Deadlinks will be removed if you open a blog with Review and on rebuilding, 
+        	as long you don't cancel it. Refresh URL-File imports only new Images.
          - Adding an URL to DislikeList was only writing to file, so a disliked URL could get into File, if a blog contains it twice.
 
      Stefaf: @DommeTag() Overhaul 
@@ -25,6 +26,8 @@ Fixes added from Community Members:
 
          You want to show a butt without feet, you can enter "Ass, NotFeet".
          You want to show a closeup face without boobs: "Face, NotBoobs, Closeup"
+         This Function will return in 99% of all cases the nearest result for the given Tags. :D
+         Of course you must set up your DommeTags properly.
 
          If there is no image found for the specified Tags, the Tags will be altered and searched again:
 
