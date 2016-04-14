@@ -4,7 +4,60 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 51
 
+Fixed bug where wildcards were not returning correct file counts when using @PlayAudio[] or @PlayVideo[]
+
+@ShowImage[] should now work with "\" or "/"
+
+Added @Cup() Command Filter - will only display a line if the domme's cup size matches what's in parentheses. You may enter as many cup options as you want. You may also use "Not" as a modifier. For example:
+
+	@Cup(C) - Will only display if the domme is a C cup
+	@Cup(A, B) - Will only display if the domme is an A or B cup
+	@Cup(Not, A) - Will only display if the domme is not an A Cup
+	@Cup(DD, DDD+, Not) - Will only display if the domme is not a DD or DDD+ cup
+	
+	@Cup() replaces the Command Filters @ACup, @BCup, @CCup, @DCup, @DDCup and @DDD+Cup. These are now legacy commands which will continue to function. 
+
+	
+Added @AllowsOrgasm() Command Filter - will only display a line if the domme's "Allows Orgasms" settings matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@AllowsOrgasm(Never) - Will only display if the domme never allows orgasm
+	@AllowsOrgasm(Often, Sometimes) - Will only display if the domme often or sometimes allows orgasm
+	@AllowsOrgasm(Not, Always) - Will only display if the domme does not always allow orgasm
+	@AllowsOrgasm(Always, Never, Not) - Will only display if the domme does not always allow orgasm and does not never allow orgasm
+	
+	@AllowsOrgasm() replaces the Command Filters @AlwaysAllowsOrgasm, @OftenAllowsOrgasm, @SometimesAllowsOrgasm, @RarelyAllowsOrgasm, @NeverAllowsOrgasm, @NotAlwaysAllowsOrgasm and @NotNeverAllowsOrgasm. These are now legacy commands which will continue to function.	
+	
+	
+Added @RuinsOrgasm() Command Filter - will only display a line if the domme's "Ruins Orgasms" settings matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@RuinsOrgasm(Never) - Will only display if the domme never ruins orgasm
+	@RuinsOrgasm(Often, Sometimes) - Will only display if the domme often or sometimes ruins orgasm
+	@RuinsOrgasm(Not, Always) - Will only display if the domme does not always ruin orgasms
+	@RuinsOrgasm(Always, Never, Not) - Will only display if the domme does not always ruin orgasms and does not never ruin orgasms
+	
+	@RuinsOrgasm() replaces the Command Filters @AlwaysRuinsOrgasm, @OftenRuinsOrgasm, @SometimesRuinsOrgasm, @RarelyRuinsOrgasm, @NeverRuinsOrgasm, @NotAlwaysRuinsOrgasm and @NotNeverRuinsOrgasm. These are now legacy commands which will continue to function.		
+	
+Added @DommeLevel() Command Filter - will only display a line if the domme's Level matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@DommeLevel(5) - Will only display if the domme's Level is 5
+	@DommeLevel(4, 5) - Will only display if the domme's Level is 4 or 5
+	@DommeLevel(Not, 1) - Will only display if the domme's Level is not 1
+	@DommeLevel(1, 2, Not) - Will only display if the domme's Level is not 1 or 2
+	
+	@DommeLevel() replaces the Command Filters @DommeLevel1, @DommeLevel2, @DommeLevel3, @DommeLevel4 and @DommeLevel5. These are now legacy commands which will continue to function.	
+
+Added @ApathyLevel() Command Filter - will only display a line if the domme's Level matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@ApathyLevel(5) - Will only display if the domme's Apathy is 5
+	@ApathyLevel(4, 5) - Will only display if the domme's Apathy is 4 or 5
+	@ApathyLevel(Not, 1) - Will only display if the domme's Apathy is not 1
+	@ApathyLevel(1, 2, Not) - Will only display if the domme's Apathy is not 1 or 2
+	
+	@ApathyLevel() replaces the Command Filters @ApathyLevel1, @ApathyLevel2, @ApathyLevel3, @ApathyLevel4 and @ApathyLevel5. These are now legacy commands which will continue to function.	
+	
 Fixes added from Community Members:
+
+
 
 	Stefaf: Settings window no longer appears on startup
 	
