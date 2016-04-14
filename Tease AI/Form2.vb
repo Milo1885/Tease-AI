@@ -2331,13 +2331,11 @@ trypreviousimage:
 						ElseIf __tmpResult.ErrorText.Capacity > 0
 							MessageBox.Show(Me, "URL Files have been refreshed with errors!" &
 											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added." &
-											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total." &
 											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 						Else
 							MessageBox.Show(Me, "All URL Files have been refreshed!" &
-											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added." &
-											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total.",
+											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added.",
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 						End If
 					Catch
