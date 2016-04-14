@@ -13562,6 +13562,12 @@ WhyUMakeMeDoDis:
 		If Form1.FormLoading = False Then
 			My.Settings.MuteMedia = CBMuteMedia.Checked
 			My.Settings.Save()
+
+			If CBMuteMedia.Checked Then
+				Form1.DomWMP.settings.mute = True
+			Else
+				Form1.DomWMP.settings.mute = False
+			End If
 		End If
 	End Sub
 
