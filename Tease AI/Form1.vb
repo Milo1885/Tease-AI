@@ -16227,8 +16227,9 @@ retry_WithExclusion:
                         ' Get the Matches.
                         Dim ___mc As RegularExpressions.MatchCollection = ___re.Matches(String.Join(vbCrLf, ___TagList))
 
-                        ' Check if Matches found.
 retry_NextStage:
+						' If there are no images for the given Tags and we didn't try to alternate the Tags
+						' Then alternate the Tags.
 						If ___mc.Count <= 0 AndAlso ___retryStage <= 14 Then
                             '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
                             '                             TAG-Alternation-Start
@@ -16236,7 +16237,7 @@ retry_NextStage:
                             ' No Match for Current TagSet found => try differnt variations
                             Select Case ___retryStage
 								Case 0, 7
-                                    ' Remove View-Tag
+                                    ' Remove Accessories
                                     ___matchpattern = "(?:\bFurniture\b)|(?:\bSexToy\b)|(?:\bTattoo\b)"
 									___replacementstring = ""
 								Case 1, 8
@@ -16284,7 +16285,7 @@ retry_NextStage:
                             ' Then:  Set Stage to 11 to skip unnecessary searches
                             If ___retryStage = 6 _
 							AndAlso ___DomTag_Work = ___DomTag_Temp _
-							Then ___retryStage = 11
+							Then ___retryStage = 13
 
                             ' IF:   Check if the Expression changed the TagList
                             ' Then: Start Search with new Tags.
@@ -16296,8 +16297,14 @@ retry_NextStage:
                             '             TAG-Alternation-END 
                             '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
                         ElseIf ___mc.Count <= 0
-                            ' No Images Found => interrupt task
-                            Throw New Exception("No DommeImage found for Tags: '" & ___DomTag_Base & "' in directory: '" & __targetFolder & "'")
+							' No Images Found and Tag-alternation didn't get any results => interrupt task
+							' Beware: If the debugger is attached VS will beef about an "Unhandled Exception".
+							'			Stupid Programm... This exacly what we want. We want to crash the thread,
+							'			otherwise we can't evaluate task1.IsFaulted to rethrow the Exception...
+							' So, here is a simple workaround to override this, while debugging. Only change the 
+							' statement after AndAlso, otherwise it will behave wrong in the final programm.
+							If Debugger.IsAttached AndAlso 1 = 2 Then Return Nothing
+							Throw New Exception("No DommeImage found for Tags: '" & ___DomTag_Base & "' in directory: '" & __targetFolder & "'")
 						End If
                         ' Copy Matches to editable Container
                         Dim ___FoundFiles As New List(Of String)
@@ -16305,12 +16312,32 @@ retry_NextStage:
 							___FoundFiles.Add(File.Value)
 						Next
 FileNotFound_GetNext:
-                        ' Get random File from ___FoundFiles
-                        Dim ___rndFileName As String = ___FoundFiles.Item(randomizer.Next(0, ___FoundFiles.Count - 1))
-
-						If File.Exists(__targetFolder & "\" & ___rndFileName) Then
+						Dim ___FileName As String = ""
+						Dim ___CurrDist As Integer = 999999
+						'############################### Get nearest Image ###############################
+						For Each ___ForFile As String In ___FoundFiles
+							' Calculate the distance of ListIndex from the FoundFile to CurrentImage
+							Dim ___FileDist As Integer = _ImageFileNames.IndexOf(__targetFolder & "\" & ___ForFile) - FileCount
+							' Convert negative values to positive by multipling (-) x (-) = (+) 
+							If ___FileDist < 0 Then ___FileDist *= -1
+							' Check if the distance is bigger than the previous one
+							If ___FileDist < ___CurrDist Then
+								' Yes: We will set this file and save its distance
+								___FileName = ___ForFile
+								___CurrDist = ___FileDist
+							Else
+								' As for the ___FoundFiles-List is in the Same order as ImageFileNames-List
+								' We can stop searching, when the value is getting bigger.
+								Exit For
+							End If
+						Next
+						If randomizer.Next(0, 100) <= 99 Then GoTo Skip_RandomFile ' 1% can be a nice surprise
+						'########################+####### Get random Image ###############################
+						___FileName = ___FoundFiles.Item(randomizer.Next(0, ___FoundFiles.Count - 1))
+Skip_RandomFile:
+						If File.Exists(__targetFolder & "\" & ___FileName) Then
                             ' File Found: Return absolute path
-                            Return DirectCast(__targetFolder & "\" & ___rndFileName, String)
+                            Return DirectCast(__targetFolder & "\" & ___FileName, String)
 						Else
                             '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
                             '                           Try-Finding-Another File
@@ -16319,11 +16346,11 @@ FileNotFound_GetNext:
                             'SUGGESTION: Build in a Debug-Window, so the User can review such "Erros", without beeing interrupted (ôÔ).
                             Debug.Print(String.Format(
 										"DommeImage '{0}' not found, please check your DommeTags for directory '{1}'.",
-										 ___rndFileName, __targetFolder))
+										 ___FileName, __targetFolder))
                             ' Loop through ___FoundFiles until it's empty. Then interrupt Task
                             If ___FoundFiles.Count > 0 Then
                                 ' Remove not found File from Container and try another File.
-                                ___FoundFiles.Remove(___rndFileName)
+                                ___FoundFiles.Remove(___FileName)
 								GoTo FileNotFound_GetNext
 							Else
 								Throw New Exception("No available DommeImage found. Tags were found, but none of the " &

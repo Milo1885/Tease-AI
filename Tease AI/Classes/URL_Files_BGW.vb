@@ -42,12 +42,12 @@ Namespace URL_Files
 		Idle
 		''' <summary>
 		''' Creates a new URL-File, with UserInteractions.
-		''' If it runs not the first time and is not cancelled Dead-URLs will be removed
+		''' If it runs <b>not</b> the first time and is not cancelled Dead-URLs will be removed.
 		''' </summary>
 		CreateURLFile
 		''' <summary>
-		''' Refreshes all URL-Files and automatically adds new URLs.
-		''' If not Cancelled, it will remove Dead-URLs.
+		''' Refreshes all URL-Files and automatically adds new URLs. It will scrape the blog
+		''' until a known Url is found. 
 		''' </summary>
 		RefreshURLFiles
 		''' <summary>
@@ -561,8 +561,12 @@ Scrape:
 							'########################## URL-Rebuild - Unknown URL ############################
 							' If Rebuilding URL-File skip Urls not previous known.
 							GoTo NextImage
+						ElseIf Me._Work = URL_File_Tasks.RefreshURLFiles AndAlso ___BlogListOld.Contains(___PhotoNode.InnerXml)
+							'############################# Refresh - Known URL ###############################
+							' If refreshing a URL-File and there is a known URL then stop scraping.
+							GoTo ExitScrape
 						ElseIf ___BlogListOld.Contains(___PhotoNode.InnerXml)
-							'########################## Create/Refresh - Known URL ###########################
+							'############################## Create - Known URL ###############################
 							___BlogListNew.Add(___PhotoNode.InnerXml)           ' Add to new list
 							___ImageCountTotal += 1                             ' Increment Image Counter.
 							GoTo NextImage                                      ' No Saving or Reviewing    
@@ -647,13 +651,13 @@ NextImage:
 ExitScrape:
 				Me.URL_FileCreate_OnProgressChanged(___ImageCountTotal, ___BlogCycle / ___BlogCycleSize, ___RoundPostsCount / ___BlogCycleSize, WorkingStages.Writing_File, Nothing)
 
-				' IF:   Work is Cancelled?
-				' Then: Write Combined New and Old List
+				' IF:   Work is Cancelled? Or do we refresh the file?
+				' Then: Write a combined copy of  new and old List
 				' Else: Write only New List. This removes Dead links.
 				Dim ___BlogListCombine As New List(Of String)
-				If Me.CancellationPending = True _
-		Then ___BlogListCombine = ___BlogListOld.Union(___BlogListNew).ToList _
-		Else ___BlogListCombine = ___BlogListNew
+				If Me.CancellationPending = True Or Me._Work = URL_File_Tasks.RefreshURLFiles _
+				Then ___BlogListCombine = ___BlogListOld.Union(___BlogListNew).ToList _
+				Else ___BlogListCombine = ___BlogListNew
 				'===============================================================================
 				' Delete old URL-File: Retry delayed 10 times if the File is blocked by use.
 				'===============================================================================
