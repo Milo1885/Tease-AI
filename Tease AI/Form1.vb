@@ -604,6 +604,7 @@ Public Class Form1
 	Dim MultipleEdgesAmount As Integer
 	Dim MultipleEdgesInterval As Integer
 	Dim MultipleEdgesTick As Integer
+	Dim MultipleEdgesMetronome As String = ""
 
 
 	Private Const DISABLE_SOUNDS As Integer = 21
@@ -2685,6 +2686,7 @@ WritingTaskLine:
 						TypingDelay()
 						MultipleEdgesTick = MultipleEdgesInterval
 						MultipleEdgesTimer.Start()
+						MultipleEdgesMetronome = "STOP"
 						Return
 
 					End If
@@ -4539,6 +4541,8 @@ AcceptAnswer:
 		If MiniScript = True Then GoTo ReturnCalled
 
 		If CensorshipGame = True Or RLGLGame = True Or AvoidTheEdgeStroking = True Or SubEdging = True Or SubHoldingEdge = True Then Return
+
+		If MultipleEdges = True Then Return
 
 		'Debug.Print("RunFileText " & StrokeTauntVal)
 
@@ -7297,6 +7301,23 @@ EndSysMes:
 				End If
 
 NullResponseLine2:
+
+				If MultipleEdgesMetronome = "STOP" Then
+					MultipleEdgesMetronome = ""
+					StrokePace = 0
+					SubStroking = False
+					SubEdging = False
+					DeactivateWebToy()
+				End If
+
+				If MultipleEdgesMetronome = "START" Then
+					MultipleEdgesMetronome = ""
+					EdgePace()
+					SubStroking = True
+					SubEdging = True
+					ActivateWebToy()
+					DisableContactStroke()
+				End If
 
 				Try
 					If mainPictureBox.Visible = True Then
@@ -11617,9 +11638,9 @@ ShowedBlogImage:
 				EdgeFlag = FixCommas(EdgeFlag)
 				Dim EdgeArray As String() = EdgeFlag.Split(",")
 
-				If EdgeFlag.Count = 3 Then
+				If EdgeArray.Count = 3 Then
 
-					If randomizer.Next(1, 101) < Val(EdgeFlag(2)) Then
+					If randomizer.Next(1, 101) < Val(EdgeArray(2)) Then
 						MultipleEdges = True
 						MultipleEdgesAmount = Val(EdgeArray(0))
 						MultipleEdgesInterval = Val(EdgeArray(1))
@@ -30230,6 +30251,8 @@ SkipNew:
 
 			DomChat = "#SYS_MultipleEdgesStart"
 			TypingDelay()
+
+			MultipleEdgesMetronome = "START"
 
 			EdgeCountTick = 0
 			EdgeCountTimer.Start()

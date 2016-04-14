@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 51
 
+Fixed problems with @MultipleEdges() Command. I had  a couple of typos in the @MultipleEdges() Command Clean that was screwing up the whole thing. The scripts were also still progressing after each edge when they should not have been. Should be fixed now. Metronome should now react correctly to each edge as well
+
 Fixed bug where wildcards were not returning correct file counts when using @PlayAudio[] or @PlayVideo[]
 
 @ShowImage[] should now work with "\" or "/"
