@@ -719,6 +719,15 @@ Public Class FrmSettings
 		LBLVVolume.Text = SliderVVolume.Value
 		LBLVRate.Text = SliderVRate.Value
 
+		If My.Settings.OfflineMode = False Then
+			LBLOfflineMode.Text = "OFF"
+			LBLOfflineMode.ForeColor = Color.Red
+		Else
+			LBLOfflineMode.Text = "ON"
+			LBLOfflineMode.ForeColor = Color.Green
+		End If
+
+
 		FrmSettingsLoading = False
 
 		Me.Visible = False
@@ -13572,4 +13581,16 @@ WhyUMakeMeDoDis:
 	End Sub
 
 
+	Private Sub BTNOfflineMode_Click(sender As System.Object, e As System.EventArgs) Handles BTNOfflineMode.Click
+		If My.Settings.OfflineMode = True Then
+			My.Settings.OfflineMode = False
+			LBLOfflineMode.Text = "OFF"
+			LBLOfflineMode.ForeColor = Color.Red
+		Else
+			My.Settings.OfflineMode = True
+			LBLOfflineMode.Text = "ON"
+			LBLOfflineMode.ForeColor = Color.Green
+		End If
+		My.Settings.Save()
+	End Sub
 End Class

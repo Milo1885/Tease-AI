@@ -5544,6 +5544,9 @@ SkipGotoSearch:
 	Public Sub TypingDelay()
 
 		'Debug.Print("Typing Delay Called " & StrokeTauntVal)
+		If My.Settings.OfflineMode = True Then
+			DomChat = OfflineConversion(DomChat)
+		End If
 		TypeDelay = StringLength
 		If TypeDelay > 60 Then TypeDelay = 60
 		If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True = True Then TypeDelay = 0
@@ -5554,6 +5557,9 @@ SkipGotoSearch:
 
 	Public Sub TypingDelayGeneric()
 		'Debug.Print("Typing Delay Generic Called " & StrokeTauntVal)
+		If My.Settings.OfflineMode = True Then
+			DomTask = OfflineConversion(DomTask)
+		End If
 		TypeDelay = StringLength
 		If TypeDelay > 60 Then TypeDelay = 60
 		If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True = True Then TypeDelay = 0
@@ -24647,7 +24653,9 @@ GetDommeSlideshow:
         Debug.Print("CFClean = " & CFClean)
         If CFClean.Contains("@Cup(") Then CFClean = CFClean.Replace("@Cup(" & GetParentheses(CFClean, "@Cup(") & ")", "")
         If CFClean.Contains("@AllowsOrgasm(") Then CFClean = CFClean.Replace("@AllowsOrgasm(" & GetParentheses(CFClean, "@AllowsOrgasm(") & ")", "")
-        If CFClean.Contains("@RuinsOrgasm(") Then CFClean = CFClean.Replace("@RuinsOrgasm(" & GetParentheses(CFClean, "@RuinsOrgasm(") & ")", "")
+		If CFClean.Contains("@RuinsOrgasm(") Then CFClean = CFClean.Replace("@RuinsOrgasm(" & GetParentheses(CFClean, "@RuinsOrgasm(") & ")", "")
+		If CFClean.Contains("@DommeLevel(") Then CFClean = CFClean.Replace("@DommeLevel(" & GetParentheses(CFClean, "@DommeLevel(") & ")", "")
+		If CFClean.Contains("@ApathyLevel(") Then CFClean = CFClean.Replace("@ApathyLevel(" & GetParentheses(CFClean, "@ApathyLevel(") & ")", "")
 
         Dim AtArray() As String = Split(CFClean)
         For i As Integer = 0 To AtArray.Length - 1
@@ -30430,6 +30438,30 @@ SkipNew:
 
     End Function
 
+	Public Function OfflineConversion(ByVal OffString As String) As String
 
+		' Ixnay on the Wordplay
+
+		OffString = OffString.Replace("@ShowBlogImage", "@ShowLocalImage")
+
+		If FrmSettings.CBBnBLocal.Checked = False Then
+			OffString = OffString.Replace("@ShowButtImage", "")
+			OffString = OffString.Replace("@ShowButtsImage", "")
+			OffString = OffString.Replace("@ShowBoobImage", "")
+			OffString = OffString.Replace("@ShowBoobsImage", "")
+		End If
+
+		If OffString.Contains("@ShowImage[") Then
+			Dim CheckImage As String = GetParentheses(OffString, "@ShowImage[")
+			If CheckImage.Contains("://") Then
+				OffString = OffString.Replace("@ShowImage[" & CheckImage & "]", "")
+			End If
+		End If
+
+		Return OffString
+
+		' You gotta keep 'em numerated
+
+	End Function
 
 End Class

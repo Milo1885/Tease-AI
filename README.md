@@ -4,6 +4,9 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 51
 
+Added Offline Mode to System States settings in the Misc tab. If you're using Tease AI without an internet connection, Offline Mode will automatically convert @ShowBlogImage Commands to @ShowLocalImage, as well as removing @ShowButtImage and @ShowBoobsImage Commands if they are set to URL Files. Toggling Tease AI to Offline Mode when you have no connectivity will help mitigate delays and crashes.
+	
+
 Fixed problems with @MultipleEdges() Command. I had  a couple of typos in the @MultipleEdges() Command Clean that was screwing up the whole thing. The scripts were also still progressing after each edge when they should not have been. Should be fixed now. Metronome should now react correctly to each edge as well
 
 Fixed bug where wildcards were not returning correct file counts when using @PlayAudio[] or @PlayVideo[]
@@ -100,7 +103,10 @@ Fixes added from Community Members:
 
          Before each step there is a check, if it could alter the result. If it won't the Step is skipped.
 
-		 
+	pepsifreak: Default mute setting to false, player now updates with the setting  
+	     
+		I feel it should be off by default, and since audio doesn't display the
+        player, there needed to be an easy way to unmute
 		 
 # Changelog - Patch 50
 
