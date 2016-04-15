@@ -4758,648 +4758,653 @@ ReturnCalled:
 			If lines(line).Contains("@NotAlwaysRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then InvalidFilter = True
             If lines(line).Contains("@NotNeverRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then InvalidFilter = True
 
-            If lines(line).Contains("@AllowsOrgasm(") Then
-                If GetOrgasmChance(GetParentheses(lines(line), "@AllowsOrgasm(")) = False Then InvalidFilter = True
-            End If
-
-            If lines(line).Contains("@RuinsOrgasm(") Then
-                If GetRuinChance(GetParentheses(lines(line), "@RuinsOrgasm(")) = False Then InvalidFilter = True
-            End If
-
-
-            If lines(line).Contains("@DommeLevel1") And FrmSettings.domlevelNumBox.Value <> 1 Then InvalidFilter = True
-            If lines(line).Contains("@DommeLevel2") And FrmSettings.domlevelNumBox.Value <> 2 Then InvalidFilter = True
-            If lines(line).Contains("@DommeLevel3") And FrmSettings.domlevelNumBox.Value <> 3 Then InvalidFilter = True
-            If lines(line).Contains("@DommeLevel4") And FrmSettings.domlevelNumBox.Value <> 4 Then InvalidFilter = True
-            If lines(line).Contains("@DommeLevel5") And FrmSettings.domlevelNumBox.Value <> 5 Then InvalidFilter = True
-
-            If lines(line).Contains("@DommeLevel(") Then
-                If GetDommeLevel(GetParentheses(lines(line), "@DommeLevel(")) = False Then InvalidFilter = True
-            End If
-
-            If lines(line).Contains("@ApathyLevel1") And FrmSettings.NBEmpathy.Value <> 1 Then InvalidFilter = True
-            If lines(line).Contains("@ApathyLevel2") And FrmSettings.NBEmpathy.Value <> 2 Then InvalidFilter = True
-            If lines(line).Contains("@ApathyLevel3") And FrmSettings.NBEmpathy.Value <> 3 Then InvalidFilter = True
-            If lines(line).Contains("@ApathyLevel4") And FrmSettings.NBEmpathy.Value <> 4 Then InvalidFilter = True
-            If lines(line).Contains("@ApathyLevel5") And FrmSettings.NBEmpathy.Value <> 5 Then InvalidFilter = True
-
-            If lines(line).Contains("@ApathyLevel(") Then
-                If GetDommeApathy(GetParentheses(lines(line), "@ApathyLevel(")) = False Then InvalidFilter = True
-            End If
-
-            If lines(line).Contains("@Stroking") And SubStroking = False Then InvalidFilter = True
-            If lines(line).Contains("@Edging") And SubEdging = False Then InvalidFilter = True
-            If lines(line).Contains("@HoldingTheEdge") And SubHoldingEdge = False Then InvalidFilter = True
-
-            If lines(line).Contains("@NotStroking") And SubStroking = True Then InvalidFilter = True
-            If lines(line).Contains("@NotEdging") And SubEdging = True Then InvalidFilter = True
-            If lines(line).Contains("@NotHoldingTheEdge") And SubHoldingEdge = True Then InvalidFilter = True
-
-            If lines(line).Contains("@SelfYoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then InvalidFilter = True
-            If lines(line).Contains("@SelfOld") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then InvalidFilter = True
-            If lines(line).Contains("@SubYoung") And FrmSettings.subAgeNumBox.Value > FrmSettings.NBSubAgeMin.Value - 1 Then InvalidFilter = True
-            If lines(line).Contains("@SubOld") And FrmSettings.subAgeNumBox.Value < FrmSettings.NBSubAgeMax.Value + 1 Then InvalidFilter = True
-
-            If lines(line).Contains("@ACup") And FrmSettings.boobComboBox.Text <> "A" Then InvalidFilter = True
-            If lines(line).Contains("@BCup") And FrmSettings.boobComboBox.Text <> "B" Then InvalidFilter = True
-            If lines(line).Contains("@CCup") And FrmSettings.boobComboBox.Text <> "C" Then InvalidFilter = True
-            If lines(line).Contains("@DCup") And FrmSettings.boobComboBox.Text <> "D" Then InvalidFilter = True
-            If lines(line).Contains("@DDCup") And FrmSettings.boobComboBox.Text <> "DD" Then InvalidFilter = True
-            If lines(line).Contains("@DDD+Cup") And FrmSettings.boobComboBox.Text <> "DDD+" Then InvalidFilter = True
-
-            If lines(line).Contains("@Cup(") Then
-                If GetCup(GetParentheses(lines(line), "@Cup(")) = False Then InvalidFilter = True
-            End If
-
-            If lines(line).Contains("@DomBirthday") And FrmSettings.NBDomBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBDomBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then InvalidFilter = True
-            If lines(line).Contains("@SubBirthday") And FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then InvalidFilter = True
-            If lines(line).Contains("@ValentinesDay") And Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14 Then InvalidFilter = True
-            If lines(line).Contains("@ChristmasEve") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24 Then InvalidFilter = True
-            If lines(line).Contains("@ChristmasDay") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25 Then InvalidFilter = True
-            If lines(line).Contains("@NewYearsEve") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31 Then InvalidFilter = True
-            If lines(line).Contains("@NewYearsDay") And Month(Date.Now) <> 1 And DateAndTime.Day(Date.Now) <> 1 Then InvalidFilter = True
-
-            If lines(line).Contains("@FirstRound") And FirstRound = False Then InvalidFilter = True
-            If lines(line).Contains("@NotFirstRound") And FirstRound = True Then InvalidFilter = True
-            If lines(line).Contains("@StrokeSpeedMax") And StrokePace < NBMaxPace.Value Then InvalidFilter = True
-            If lines(line).Contains("@StrokeSpeedMin") And StrokePace < NBMinPace.Value Then InvalidFilter = True
-
-            If lines(line).Contains("@LongEdge") And LongEdge = False Then InvalidFilter = True
-            If lines(line).Contains("@InterruptLongEdge") And LongEdge = False And FrmSettings.CBLongEdgeInterrupts.Checked = False Then InvalidFilter = True
-
-            If lines(line).Contains("@1MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119 Then InvalidFilter = True
-            End If
-            If lines(line).Contains("@2MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179 Then InvalidFilter = True
-            End If
-            If lines(line).Contains("@3MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239 Then InvalidFilter = True
-            End If
-            If lines(line).Contains("@4MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299 Then InvalidFilter = True
-            End If
-            If lines(line).Contains("@5MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599 Then InvalidFilter = True
-            End If
-            If lines(line).Contains("@10MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899 Then InvalidFilter = True
-            End If
-            If lines(line).Contains("@15MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799 Then InvalidFilter = True
-            End If
-            If lines(line).Contains("@30MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699 Then InvalidFilter = True
-            End If
-            If lines(line).Contains("@45MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599 Then InvalidFilter = True
-            End If
-            If lines(line).Contains("@60MinuteHold") Then
-                If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then InvalidFilter = True
-            End If
-
-            If lines(line).Contains("@EdgeHeld(") Then
-                Dim EdgeFail As Boolean = False
-                Dim EdgeFlag As String = GetParentheses(lines(line), "@EdgeHeld(")
-                If EdgeFlag.Contains(",") Then
-                    EdgeFlag = FixCommas(EdgeFlag)
-                    Dim EdgeArray As String() = EdgeFlag.Split(",")
-                    If HoldEdgeTime < Val(EdgeArray(0)) * 60 Or HoldEdgeTime > Val(EdgeArray(1)) * 60 Then InvalidFilter = True
-                Else
-                    If Val(EdgeFlag) * 60 > HoldEdgeTime Then InvalidFilter = True
-                End If
-            End If
-
-            If lines(line).Contains("@CBTLevel1") And FrmSettings.CBTSlider.Value <> 1 Then InvalidFilter = True
-            If lines(line).Contains("@CBTLevel2") And FrmSettings.CBTSlider.Value <> 2 Then InvalidFilter = True
-            If lines(line).Contains("@CBTLevel3") And FrmSettings.CBTSlider.Value <> 3 Then InvalidFilter = True
-            If lines(line).Contains("@CBTLevel4") And FrmSettings.CBTSlider.Value <> 4 Then InvalidFilter = True
-            If lines(line).Contains("@CBTLevel5") And FrmSettings.CBTSlider.Value <> 5 Then InvalidFilter = True
-
-            If lines(line).Contains("@SubCircumcised") And FrmSettings.CBSubCircumcised.Checked = False Then InvalidFilter = True
-            If lines(line).Contains("@SubNotCircumcised") And FrmSettings.CBSubCircumcised.Checked = True Then InvalidFilter = True
-            If lines(line).Contains("@SubPierced") And FrmSettings.CBSubPierced.Checked = False Then InvalidFilter = True
-            If lines(line).Contains("@SubNotPierced") And FrmSettings.CBSubPierced.Checked = True Then InvalidFilter = True
-
-            If lines(line).Contains("@BeforeTease") And BeforeTease = False Then InvalidFilter = True
-            If lines(line).Contains("@OrgasmDenied") And OrgasmDenied = False Then InvalidFilter = True
-            If lines(line).Contains("@OrgasmAllowed") And OrgasmAllowed = False Then InvalidFilter = True
-            If lines(line).Contains("@OrgasmRuined") And OrgasmRuined = False Then InvalidFilter = True
-
-            If lines(line).Contains("@InChastity") And My.Settings.Chastity = False Then InvalidFilter = True
-            If lines(line).Contains("@HasChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
-            If lines(line).Contains("@NotInChastity") And My.Settings.Chastity = True Then InvalidFilter = True
-            If lines(line).Contains("@DoesNotHaveChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
-            If lines(line).Contains("@ChastityPA") And FrmSettings.CBChastityPA.Checked = False Then InvalidFilter = True
-            If lines(line).Contains("@ChastitySpikes") And FrmSettings.CBChastitySpikes.Checked = False Then InvalidFilter = True
-
-            'If lines(line).Contains("@VitalSub") And CBVitalSub.Checked = False Then InvalidFilter = True
-            'If lines(line).Contains("@VitalSubAssignment") And CBVitalSubDomTask.Checked = False Then InvalidFilter = True
-
-            If lines(line).Contains("@RuinTaunt") And EdgeToRuinSecret = True Then InvalidFilter = True
-
-            If lines(line).Contains("@CockTorture") And FrmSettings.CBCBTCock.Checked = False Then InvalidFilter = True
-            If lines(line).Contains("@BallTorture") And FrmSettings.CBCBTBalls.Checked = False Then InvalidFilter = True
-            If lines(line).Contains("@BallTorture0") And CBTBallsCount <> 0 Then InvalidFilter = True
-            If lines(line).Contains("@BallTorture1") And CBTBallsCount <> 1 Then InvalidFilter = True
-            If lines(line).Contains("@BallTorture2") And CBTBallsCount <> 2 Then InvalidFilter = True
-            If lines(line).Contains("@BallTorture3") And CBTBallsCount <> 3 Then InvalidFilter = True
-            If lines(line).Contains("@BallTorture4+") And CBTBallsCount < 4 Then InvalidFilter = True
-            If lines(line).Contains("@CockTorture0") And CBTCockCount <> 0 Then InvalidFilter = True
-            If lines(line).Contains("@CockTorture1") And CBTCockCount <> 1 Then InvalidFilter = True
-            If lines(line).Contains("@CockTorture2") And CBTCockCount <> 2 Then InvalidFilter = True
-            If lines(line).Contains("@CockTorture3") And CBTCockCount <> 3 Then InvalidFilter = True
-            If lines(line).Contains("@CockTorture4+") And CBTCockCount < 4 Then InvalidFilter = True
-
-
-            If lines(line).Contains("@Flag(") Then
-                Dim WriteFlag As String = lines(line)
-                Dim WriteStart As Integer
-                WriteStart = WriteFlag.IndexOf("@Flag(") + 6
-                WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-                WriteFlag = WriteFlag.Split(")")(0)
-                WriteFlag = WriteFlag.Replace("@Flag(", "")
-                If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And
-                 Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
-                    InvalidFilter = True
-                End If
-            End If
-
-            If lines(line).Contains("@NotFlag(") Then
-                Dim WriteFlag As String = lines(line)
-                Dim WriteStart As Integer
-                WriteStart = WriteFlag.IndexOf("@NotFlag(") + 9
-                WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-                WriteFlag = WriteFlag.Split(")")(0)
-                WriteFlag = WriteFlag.Replace("@NotFlag(", "")
-                If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or
-                 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
-                    InvalidFilter = True
-                End If
-            End If
-
-            If lines(line).Contains("@Variable[") Then
-                If CheckVariable(lines(line)) = False Then InvalidFilter = True
-            End If
-
-            'If lines(line).Contains("@CheckDate(") Then
-            'If CheckDateList(lines(line)) = False Then InvalidFilter = True
-            'End If
-
-            If lines(line).Contains("@Morning") And GeneralTime <> "Morning" Then InvalidFilter = True
-            If lines(line).Contains("@Afternoon") And GeneralTime <> "Afternoon" Then InvalidFilter = True
-            If lines(line).Contains("@Night") And GeneralTime <> "Night" Then InvalidFilter = True
-
-            If lines(line).Contains("@GoodMood") And DommeMood <= FrmSettings.NBDomMoodMax.Value Then InvalidFilter = True
-            If lines(line).Contains("@BadMood") And DommeMood >= FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
-            If lines(line).Contains("@NeutralMood") Then
-                If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
-            End If
-
-            If lines(line).Contains("@OrgasmRestricted") And OrgasmRestricted = False Then InvalidFilter = True
-            If lines(line).Contains("@OrgasmNotRestricted") And OrgasmRestricted = True Then InvalidFilter = True
-
-            If lines(line).Contains("@Info") Then InvalidFilter = True
-
-            If InvalidFilter = True Then
-                ioFile.Close()
-                ioFile.Dispose()
-                InvalidFilter = False
-                RunFileText()
-                Return
-            End If
-
-            If lines(line) = "@End" Then
-                If RiskyEdges = True Then RiskyEdges = False
-                If LastScript = True Then
-                    LastScript = False
-                    EndTease = True
-                End If
-                If HypnoGen = True Then
-                    If Induction = True Then
-                        Induction = False
-                        StrokeTauntVal = -1
-                        FileText = TempHypno
-                        ScriptTick = 1
-                        ScriptTimer.Start()
-                        Return
-                    End If
-                    HypnoGen = False
-                    AFK = False
-                    DomWMP.Ctlcontrols.stop()
-                    BTNHypnoGenStart.Text = "Guide Me!"
-                End If
-                If ReturnFlag = True Then
-                    ReturnFlag = False
-                    FileText = ReturnFileText
-                    StrokeTauntVal = ReturnStrokeTauntVal
-
-
-                    'github patch begin
-                    'If ReturnSubState = "Stroking" Then
-                    'If SubStroking = False Then
-                    'DomTask = "Get back to stroking @StartStroking"
-                    'TypingDelayGeneric()
-                    'Else
-                    ' StrokeTimer.Start()
-                    ' StrokeTauntTimer.Start()
-                    'End If
-                    'End If
-                    'If ReturnSubState = "Edging" Then
-
-                    'github patch end
-
-                    If ReturnSubState = "Stroking" Then
-                        If My.Settings.Chastity = True Then
-                            'DomTask = "Now as I was saying @StartTaunts"
-                            DomTask = "#Return_Chastity"
-                            TypingDelayGeneric()
-                        Else
-                            If SubStroking = False Then
-                                'DomTask = "Get back to stroking @StartStroking"
-                                DomTask = "#Return_Stroking"
-                                TypingDelayGeneric()
-                            Else
-                                StrokeTimer.Start()
-                                StrokeTauntTimer.Start()
-                            End If
-                        End If
-                    End If
-                    If ReturnSubState = "Edging" Then
-
-                        If SubEdging = False Then
-                            'DomTask = "Start getting yourself to the edge again @Edge"
-                            DomTask = "#Return_Edging"
-                            'SubStroking = True
-                            TypingDelayGeneric()
-                        Else
-                            EdgeTauntTimer.Start()
-                            EdgeCountTimer.Start()
-                        End If
-                    End If
-                    If ReturnSubState = "Holding The Edge" Then
-                        If SubEdging = False Then
-                            'DomTask = "Start getting yourself to the edge again @EdgeHold"
-                            DomTask = "#Return_Holding"
-                            'SubStroking = True
-                            TypingDelayGeneric()
-                        Else
-                            HoldEdgeTimer.Start()
-                            HoldEdgeTauntTimer.Start()
-                        End If
-                    End If
-                    If ReturnSubState = "CBTBalls" Then
-                        'DomTask = "Now let's get back to busting those #Balls @CBTBalls"
-                        DomTask = "#Return_CBTBalls"
-                        CBTBallsFirst = False
-                        TypingDelayGeneric()
-                    End If
-                    If ReturnSubState = "CBTCock" Then
-                        'DomTask = "Now let's get back to abusing that #Cock @CBTCock"
-                        DomTask = "#Return_CBTCock"
-                        CBTCockFirst = False
-                        TypingDelayGeneric()
-                    End If
-                    If ReturnSubState = "Rest" Then
-                        DomTypeCheck = True
-                        ScriptTick = 5
-                        ScriptTimer.Start()
-                        'DomTask = "Now as I was saying"
-                        DomTask = "#Return_Rest"
-                        TypingDelayGeneric()
-                        Return
-                    End If
-                End If
-                ScriptTimer.Stop()
-                Return
-            End If
-
-            'If lines(line).Substring(0, 1) = "(" Then
-            'Do
-            'line += 1
-            'If MiniScript = True Then
-            'MiniTauntVal += 1
-            'Else
-            '   StrokeTauntVal += 1
-            'End If
-
-            'Loop Until lines(line).Substring(0, 1) <> "("
-            'End If
-
-            If lines(line + 1).Substring(0, 1) = "[" Then
-                YesOrNo = True
-                ScriptTimer.Stop()
-            End If
-
-
-
-            Debug.Print("CHeck")
-
-
-
-
-
-            DomTask = (lines(line).Trim)
-
-
-
-
-
-            StringLength = 1
+			If lines(line).Contains("@AllowsOrgasm(") Then
+				If FilterCheck(GetParentheses(lines(line), "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox) = False Then InvalidFilter = True
+				'If GetOrgasmChance(GetParentheses(lines(line), "@AllowsOrgasm(")) = False Then InvalidFilter = True
+			End If
+
+			If lines(line).Contains("@RuinsOrgasm(") Then
+				If FilterCheck(GetParentheses(lines(line), "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox) = False Then InvalidFilter = True
+				'If GetRuinChance(GetParentheses(lines(line), "@RuinsOrgasm(")) = False Then InvalidFilter = True
+			End If
+
+
+			If lines(line).Contains("@DommeLevel1") And FrmSettings.domlevelNumBox.Value <> 1 Then InvalidFilter = True
+			If lines(line).Contains("@DommeLevel2") And FrmSettings.domlevelNumBox.Value <> 2 Then InvalidFilter = True
+			If lines(line).Contains("@DommeLevel3") And FrmSettings.domlevelNumBox.Value <> 3 Then InvalidFilter = True
+			If lines(line).Contains("@DommeLevel4") And FrmSettings.domlevelNumBox.Value <> 4 Then InvalidFilter = True
+			If lines(line).Contains("@DommeLevel5") And FrmSettings.domlevelNumBox.Value <> 5 Then InvalidFilter = True
+
+			If lines(line).Contains("@DommeLevel(") Then
+				If FilterCheck(GetParentheses(lines(line), "@DommeLevel("), FrmSettings.domlevelNumBox) = False Then InvalidFilter = True
+				'If GetDommeLevel(GetParentheses(lines(line), "@DommeLevel(")) = False Then InvalidFilter = True
+			End If
+
+			If lines(line).Contains("@ApathyLevel1") And FrmSettings.NBEmpathy.Value <> 1 Then InvalidFilter = True
+			If lines(line).Contains("@ApathyLevel2") And FrmSettings.NBEmpathy.Value <> 2 Then InvalidFilter = True
+			If lines(line).Contains("@ApathyLevel3") And FrmSettings.NBEmpathy.Value <> 3 Then InvalidFilter = True
+			If lines(line).Contains("@ApathyLevel4") And FrmSettings.NBEmpathy.Value <> 4 Then InvalidFilter = True
+			If lines(line).Contains("@ApathyLevel5") And FrmSettings.NBEmpathy.Value <> 5 Then InvalidFilter = True
+
+			If lines(line).Contains("@ApathyLevel(") Then
+				If FilterCheck(GetParentheses(lines(line), "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then InvalidFilter = True
+				'If GetDommeApathy(GetParentheses(lines(line), "@ApathyLevel(")) = False Then InvalidFilter = True
+			End If
+
+			If lines(line).Contains("@Stroking") And SubStroking = False Then InvalidFilter = True
+			If lines(line).Contains("@Edging") And SubEdging = False Then InvalidFilter = True
+			If lines(line).Contains("@HoldingTheEdge") And SubHoldingEdge = False Then InvalidFilter = True
+
+			If lines(line).Contains("@NotStroking") And SubStroking = True Then InvalidFilter = True
+			If lines(line).Contains("@NotEdging") And SubEdging = True Then InvalidFilter = True
+			If lines(line).Contains("@NotHoldingTheEdge") And SubHoldingEdge = True Then InvalidFilter = True
+
+			If lines(line).Contains("@SelfYoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then InvalidFilter = True
+			If lines(line).Contains("@SelfOld") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then InvalidFilter = True
+			If lines(line).Contains("@SubYoung") And FrmSettings.subAgeNumBox.Value > FrmSettings.NBSubAgeMin.Value - 1 Then InvalidFilter = True
+			If lines(line).Contains("@SubOld") And FrmSettings.subAgeNumBox.Value < FrmSettings.NBSubAgeMax.Value + 1 Then InvalidFilter = True
+
+			If lines(line).Contains("@ACup") And FrmSettings.boobComboBox.Text <> "A" Then InvalidFilter = True
+			If lines(line).Contains("@BCup") And FrmSettings.boobComboBox.Text <> "B" Then InvalidFilter = True
+			If lines(line).Contains("@CCup") And FrmSettings.boobComboBox.Text <> "C" Then InvalidFilter = True
+			If lines(line).Contains("@DCup") And FrmSettings.boobComboBox.Text <> "D" Then InvalidFilter = True
+			If lines(line).Contains("@DDCup") And FrmSettings.boobComboBox.Text <> "DD" Then InvalidFilter = True
+			If lines(line).Contains("@DDD+Cup") And FrmSettings.boobComboBox.Text <> "DDD+" Then InvalidFilter = True
+
+			If lines(line).Contains("@Cup(") Then
+				If FilterCheck(GetParentheses(lines(line), "@Cup("), FrmSettings.boobComboBox) = False Then InvalidFilter = True
+				'If GetCup(GetParentheses(lines(line), "@Cup(")) = False Then InvalidFilter = True
+			End If
+
+			If lines(line).Contains("@DomBirthday") And FrmSettings.NBDomBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBDomBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then InvalidFilter = True
+			If lines(line).Contains("@SubBirthday") And FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then InvalidFilter = True
+			If lines(line).Contains("@ValentinesDay") And Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14 Then InvalidFilter = True
+			If lines(line).Contains("@ChristmasEve") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24 Then InvalidFilter = True
+			If lines(line).Contains("@ChristmasDay") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25 Then InvalidFilter = True
+			If lines(line).Contains("@NewYearsEve") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31 Then InvalidFilter = True
+			If lines(line).Contains("@NewYearsDay") And Month(Date.Now) <> 1 And DateAndTime.Day(Date.Now) <> 1 Then InvalidFilter = True
+
+			If lines(line).Contains("@FirstRound") And FirstRound = False Then InvalidFilter = True
+			If lines(line).Contains("@NotFirstRound") And FirstRound = True Then InvalidFilter = True
+			If lines(line).Contains("@StrokeSpeedMax") And StrokePace < NBMaxPace.Value Then InvalidFilter = True
+			If lines(line).Contains("@StrokeSpeedMin") And StrokePace < NBMinPace.Value Then InvalidFilter = True
+
+			If lines(line).Contains("@LongEdge") And LongEdge = False Then InvalidFilter = True
+			If lines(line).Contains("@InterruptLongEdge") And LongEdge = False And FrmSettings.CBLongEdgeInterrupts.Checked = False Then InvalidFilter = True
+
+			If lines(line).Contains("@1MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119 Then InvalidFilter = True
+			End If
+			If lines(line).Contains("@2MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179 Then InvalidFilter = True
+			End If
+			If lines(line).Contains("@3MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239 Then InvalidFilter = True
+			End If
+			If lines(line).Contains("@4MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299 Then InvalidFilter = True
+			End If
+			If lines(line).Contains("@5MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599 Then InvalidFilter = True
+			End If
+			If lines(line).Contains("@10MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899 Then InvalidFilter = True
+			End If
+			If lines(line).Contains("@15MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799 Then InvalidFilter = True
+			End If
+			If lines(line).Contains("@30MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699 Then InvalidFilter = True
+			End If
+			If lines(line).Contains("@45MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599 Then InvalidFilter = True
+			End If
+			If lines(line).Contains("@60MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then InvalidFilter = True
+			End If
+
+			If lines(line).Contains("@EdgeHeld(") Then
+				Dim EdgeFail As Boolean = False
+				Dim EdgeFlag As String = GetParentheses(lines(line), "@EdgeHeld(")
+				If EdgeFlag.Contains(",") Then
+					EdgeFlag = FixCommas(EdgeFlag)
+					Dim EdgeArray As String() = EdgeFlag.Split(",")
+					If HoldEdgeTime < Val(EdgeArray(0)) * 60 Or HoldEdgeTime > Val(EdgeArray(1)) * 60 Then InvalidFilter = True
+				Else
+					If Val(EdgeFlag) * 60 > HoldEdgeTime Then InvalidFilter = True
+				End If
+			End If
+
+			If lines(line).Contains("@CBTLevel1") And FrmSettings.CBTSlider.Value <> 1 Then InvalidFilter = True
+			If lines(line).Contains("@CBTLevel2") And FrmSettings.CBTSlider.Value <> 2 Then InvalidFilter = True
+			If lines(line).Contains("@CBTLevel3") And FrmSettings.CBTSlider.Value <> 3 Then InvalidFilter = True
+			If lines(line).Contains("@CBTLevel4") And FrmSettings.CBTSlider.Value <> 4 Then InvalidFilter = True
+			If lines(line).Contains("@CBTLevel5") And FrmSettings.CBTSlider.Value <> 5 Then InvalidFilter = True
+
+			If lines(line).Contains("@SubCircumcised") And FrmSettings.CBSubCircumcised.Checked = False Then InvalidFilter = True
+			If lines(line).Contains("@SubNotCircumcised") And FrmSettings.CBSubCircumcised.Checked = True Then InvalidFilter = True
+			If lines(line).Contains("@SubPierced") And FrmSettings.CBSubPierced.Checked = False Then InvalidFilter = True
+			If lines(line).Contains("@SubNotPierced") And FrmSettings.CBSubPierced.Checked = True Then InvalidFilter = True
+
+			If lines(line).Contains("@BeforeTease") And BeforeTease = False Then InvalidFilter = True
+			If lines(line).Contains("@OrgasmDenied") And OrgasmDenied = False Then InvalidFilter = True
+			If lines(line).Contains("@OrgasmAllowed") And OrgasmAllowed = False Then InvalidFilter = True
+			If lines(line).Contains("@OrgasmRuined") And OrgasmRuined = False Then InvalidFilter = True
+
+			If lines(line).Contains("@InChastity") And My.Settings.Chastity = False Then InvalidFilter = True
+			If lines(line).Contains("@HasChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
+			If lines(line).Contains("@NotInChastity") And My.Settings.Chastity = True Then InvalidFilter = True
+			If lines(line).Contains("@DoesNotHaveChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
+			If lines(line).Contains("@ChastityPA") And FrmSettings.CBChastityPA.Checked = False Then InvalidFilter = True
+			If lines(line).Contains("@ChastitySpikes") And FrmSettings.CBChastitySpikes.Checked = False Then InvalidFilter = True
+
+			'If lines(line).Contains("@VitalSub") And CBVitalSub.Checked = False Then InvalidFilter = True
+			'If lines(line).Contains("@VitalSubAssignment") And CBVitalSubDomTask.Checked = False Then InvalidFilter = True
+
+			If lines(line).Contains("@RuinTaunt") And EdgeToRuinSecret = True Then InvalidFilter = True
+
+			If lines(line).Contains("@CockTorture") And FrmSettings.CBCBTCock.Checked = False Then InvalidFilter = True
+			If lines(line).Contains("@BallTorture") And FrmSettings.CBCBTBalls.Checked = False Then InvalidFilter = True
+			If lines(line).Contains("@BallTorture0") And CBTBallsCount <> 0 Then InvalidFilter = True
+			If lines(line).Contains("@BallTorture1") And CBTBallsCount <> 1 Then InvalidFilter = True
+			If lines(line).Contains("@BallTorture2") And CBTBallsCount <> 2 Then InvalidFilter = True
+			If lines(line).Contains("@BallTorture3") And CBTBallsCount <> 3 Then InvalidFilter = True
+			If lines(line).Contains("@BallTorture4+") And CBTBallsCount < 4 Then InvalidFilter = True
+			If lines(line).Contains("@CockTorture0") And CBTCockCount <> 0 Then InvalidFilter = True
+			If lines(line).Contains("@CockTorture1") And CBTCockCount <> 1 Then InvalidFilter = True
+			If lines(line).Contains("@CockTorture2") And CBTCockCount <> 2 Then InvalidFilter = True
+			If lines(line).Contains("@CockTorture3") And CBTCockCount <> 3 Then InvalidFilter = True
+			If lines(line).Contains("@CockTorture4+") And CBTCockCount < 4 Then InvalidFilter = True
+
+
+			If lines(line).Contains("@Flag(") Then
+				Dim WriteFlag As String = lines(line)
+				Dim WriteStart As Integer
+				WriteStart = WriteFlag.IndexOf("@Flag(") + 6
+				WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
+				WriteFlag = WriteFlag.Split(")")(0)
+				WriteFlag = WriteFlag.Replace("@Flag(", "")
+				If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And
+				 Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+					InvalidFilter = True
+				End If
+			End If
+
+			If lines(line).Contains("@NotFlag(") Then
+				Dim WriteFlag As String = lines(line)
+				Dim WriteStart As Integer
+				WriteStart = WriteFlag.IndexOf("@NotFlag(") + 9
+				WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
+				WriteFlag = WriteFlag.Split(")")(0)
+				WriteFlag = WriteFlag.Replace("@NotFlag(", "")
+				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or
+				 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+					InvalidFilter = True
+				End If
+			End If
+
+			If lines(line).Contains("@Variable[") Then
+				If CheckVariable(lines(line)) = False Then InvalidFilter = True
+			End If
+
+			'If lines(line).Contains("@CheckDate(") Then
+			'If CheckDateList(lines(line)) = False Then InvalidFilter = True
+			'End If
+
+			If lines(line).Contains("@Morning") And GeneralTime <> "Morning" Then InvalidFilter = True
+			If lines(line).Contains("@Afternoon") And GeneralTime <> "Afternoon" Then InvalidFilter = True
+			If lines(line).Contains("@Night") And GeneralTime <> "Night" Then InvalidFilter = True
+
+			If lines(line).Contains("@GoodMood") And DommeMood <= FrmSettings.NBDomMoodMax.Value Then InvalidFilter = True
+			If lines(line).Contains("@BadMood") And DommeMood >= FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
+			If lines(line).Contains("@NeutralMood") Then
+				If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
+			End If
+
+			If lines(line).Contains("@OrgasmRestricted") And OrgasmRestricted = False Then InvalidFilter = True
+			If lines(line).Contains("@OrgasmNotRestricted") And OrgasmRestricted = True Then InvalidFilter = True
+
+			If lines(line).Contains("@Info") Then InvalidFilter = True
+
+			If InvalidFilter = True Then
+				ioFile.Close()
+				ioFile.Dispose()
+				InvalidFilter = False
+				RunFileText()
+				Return
+			End If
+
+			If lines(line) = "@End" Then
+				If RiskyEdges = True Then RiskyEdges = False
+				If LastScript = True Then
+					LastScript = False
+					EndTease = True
+				End If
+				If HypnoGen = True Then
+					If Induction = True Then
+						Induction = False
+						StrokeTauntVal = -1
+						FileText = TempHypno
+						ScriptTick = 1
+						ScriptTimer.Start()
+						Return
+					End If
+					HypnoGen = False
+					AFK = False
+					DomWMP.Ctlcontrols.stop()
+					BTNHypnoGenStart.Text = "Guide Me!"
+				End If
+				If ReturnFlag = True Then
+					ReturnFlag = False
+					FileText = ReturnFileText
+					StrokeTauntVal = ReturnStrokeTauntVal
+
+
+					'github patch begin
+					'If ReturnSubState = "Stroking" Then
+					'If SubStroking = False Then
+					'DomTask = "Get back to stroking @StartStroking"
+					'TypingDelayGeneric()
+					'Else
+					' StrokeTimer.Start()
+					' StrokeTauntTimer.Start()
+					'End If
+					'End If
+					'If ReturnSubState = "Edging" Then
+
+					'github patch end
+
+					If ReturnSubState = "Stroking" Then
+						If My.Settings.Chastity = True Then
+							'DomTask = "Now as I was saying @StartTaunts"
+							DomTask = "#Return_Chastity"
+							TypingDelayGeneric()
+						Else
+							If SubStroking = False Then
+								'DomTask = "Get back to stroking @StartStroking"
+								DomTask = "#Return_Stroking"
+								TypingDelayGeneric()
+							Else
+								StrokeTimer.Start()
+								StrokeTauntTimer.Start()
+							End If
+						End If
+					End If
+					If ReturnSubState = "Edging" Then
+
+						If SubEdging = False Then
+							'DomTask = "Start getting yourself to the edge again @Edge"
+							DomTask = "#Return_Edging"
+							'SubStroking = True
+							TypingDelayGeneric()
+						Else
+							EdgeTauntTimer.Start()
+							EdgeCountTimer.Start()
+						End If
+					End If
+					If ReturnSubState = "Holding The Edge" Then
+						If SubEdging = False Then
+							'DomTask = "Start getting yourself to the edge again @EdgeHold"
+							DomTask = "#Return_Holding"
+							'SubStroking = True
+							TypingDelayGeneric()
+						Else
+							HoldEdgeTimer.Start()
+							HoldEdgeTauntTimer.Start()
+						End If
+					End If
+					If ReturnSubState = "CBTBalls" Then
+						'DomTask = "Now let's get back to busting those #Balls @CBTBalls"
+						DomTask = "#Return_CBTBalls"
+						CBTBallsFirst = False
+						TypingDelayGeneric()
+					End If
+					If ReturnSubState = "CBTCock" Then
+						'DomTask = "Now let's get back to abusing that #Cock @CBTCock"
+						DomTask = "#Return_CBTCock"
+						CBTCockFirst = False
+						TypingDelayGeneric()
+					End If
+					If ReturnSubState = "Rest" Then
+						DomTypeCheck = True
+						ScriptTick = 5
+						ScriptTimer.Start()
+						'DomTask = "Now as I was saying"
+						DomTask = "#Return_Rest"
+						TypingDelayGeneric()
+						Return
+					End If
+				End If
+				ScriptTimer.Stop()
+				Return
+			End If
+
+			'If lines(line).Substring(0, 1) = "(" Then
+			'Do
+			'line += 1
+			'If MiniScript = True Then
+			'MiniTauntVal += 1
+			'Else
+			'   StrokeTauntVal += 1
+			'End If
+
+			'Loop Until lines(line).Substring(0, 1) <> "("
+			'End If
+
+			If lines(line + 1).Substring(0, 1) = "[" Then
+				YesOrNo = True
+				ScriptTimer.Stop()
+			End If
+
+
+
+			Debug.Print("CHeck")
+
+
+
+
+
+			DomTask = (lines(line).Trim)
+
+
+
+
+
+			StringLength = 1
+
+
 
-
+			DomTask = DomTask.Replace("#SubName", subName.Text)
+
+			DomTask = DomTask.Replace("#VTLength", VTLength / 60)
 
-            DomTask = DomTask.Replace("#SubName", subName.Text)
 
-            DomTask = DomTask.Replace("#VTLength", VTLength / 60)
+			If InStr(DomTask, "@CockSizeSmall") <> 0 Then DivideText = True
 
 
-            If InStr(DomTask, "@CockSizeSmall") <> 0 Then DivideText = True
+			If DomTask.Contains("@SearchImageBlogAgain") Then
 
+				SearchImageBlog = True
+				GetBlogImage()
 
-            If DomTask.Contains("@SearchImageBlogAgain") Then
+			End If
 
-                SearchImageBlog = True
-                GetBlogImage()
 
-            End If
+			If DomTask.Contains("@SearchImageBlog") And Not DomTask.Contains("@SearchImageBlogAgain") Then
 
+				SearchImageBlog = True
+				GetBlogImage()
 
-            If DomTask.Contains("@SearchImageBlog") And Not DomTask.Contains("@SearchImageBlogAgain") Then
+			End If
 
-                SearchImageBlog = True
-                GetBlogImage()
 
-            End If
+			'If InStr(UCase(DomTask), UCase("@Goto")) <> 0 And InStr(UCase(DomTask), UCase("@GotoDommeLevel")) = 0 And InStr(UCase(DomTask), UCase("@GotoDommeOrgasm")) = 0 And InStr(UCase(DomTask), UCase("@GotoDommeRuin")) = 0 And InStr(UCase(DomTask), UCase("@GotoDommeApathy")) = 0 And InStr(UCase(DomTask), UCase("@GotoSlideshow")) = 0 Then
+			If DomTask.Contains("@Goto(") Then
+				GetGoto()
+			End If
 
+			'If DomTask.Contains("@Chance") Then
 
-            'If InStr(UCase(DomTask), UCase("@Goto")) <> 0 And InStr(UCase(DomTask), UCase("@GotoDommeLevel")) = 0 And InStr(UCase(DomTask), UCase("@GotoDommeOrgasm")) = 0 And InStr(UCase(DomTask), UCase("@GotoDommeRuin")) = 0 And InStr(UCase(DomTask), UCase("@GotoDommeApathy")) = 0 And InStr(UCase(DomTask), UCase("@GotoSlideshow")) = 0 Then
-            If DomTask.Contains("@Goto(") Then
-                GetGoto()
-            End If
+			'Dim ChanceTemp As String
+			'Dim TSStartIndex As Integer
+			'Dim TSEndIndex As Integer
 
-            'If DomTask.Contains("@Chance") Then
+			'TSStartIndex = DomTask.IndexOf("@Chance") + 7
+			'TSEndIndex = DomTask.IndexOf("@Chance") + 9
 
-            'Dim ChanceTemp As String
-            'Dim TSStartIndex As Integer
-            'Dim TSEndIndex As Integer
+			'ChanceTemp = DomTask.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim
 
-            'TSStartIndex = DomTask.IndexOf("@Chance") + 7
-            'TSEndIndex = DomTask.IndexOf("@Chance") + 9
+			'            Dim ChanceVal As Integer
 
-            'ChanceTemp = DomTask.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim
+			' ChanceVal = Val(ChanceTemp)
 
-            '            Dim ChanceVal As Integer
+			' 'Debug.Print("Check Substring " & ChanceTemp & " , " & ChanceVal)
+			' 'Debug.Print("Check Substring " & DomTask.Substring("@Chance", 2))
 
-            ' ChanceVal = Val(ChanceTemp)
+			' TempVal = randomizer.Next(1, 101)
 
-            ' 'Debug.Print("Check Substring " & ChanceTemp & " , " & ChanceVal)
-            ' 'Debug.Print("Check Substring " & DomTask.Substring("@Chance", 2))
+			Debug.Print("TempVal = " & TempVal)
+			'Debug.Print("ChanceVal = " & ChanceVal)
 
-            ' TempVal = randomizer.Next(1, 101)
+			'If TempVal <= ChanceVal Then
 
-            Debug.Print("TempVal = " & TempVal)
-            'Debug.Print("ChanceVal = " & ChanceVal)
+			''Debug.Print("Goto should be called")
 
-            'If TempVal <= ChanceVal Then
+			'GetGoto()
 
-            ''Debug.Print("Goto should be called")
+			'End If
 
-            'GetGoto()
+			' 'Debug.Print("ChanceTemp DomTask = " & DomTask)
 
-            'End If
+			'DomTask = DomTask.Replace("@Chance" & ChanceTemp, "")
 
-            ' 'Debug.Print("ChanceTemp DomTask = " & DomTask)
+			'End If
 
-            'DomTask = DomTask.Replace("@Chance" & ChanceTemp, "")
 
-            'End If
 
 
+			'  If DomTask.Contains("@CheckFlag") Then
 
+			''Debug.Print("CheckFlagcalled")
 
-            '  If DomTask.Contains("@CheckFlag") Then
+			'Dim CheckFlag As String = DomTask
 
-            ''Debug.Print("CheckFlagcalled")
+			'CheckFlag = DomTask.Split("@CheckFlag(")(1)
+			'CheckFlag = CheckFlag.Split(")")(0)
+			'CheckFlag = CheckFlag.Replace("CheckFlag(", "")
 
-            'Dim CheckFlag As String = DomTask
+			'If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & CheckFlag & ".txt") Then
+			''Debug.Print("CheckFlag = " & CheckFlag)
+			'SkipGotoLine = True
+			'FileGoto = CheckFlag
+			'GetGoto()
+			'End If
 
-            'CheckFlag = DomTask.Split("@CheckFlag(")(1)
-            'CheckFlag = CheckFlag.Split(")")(0)
-            'CheckFlag = CheckFlag.Replace("CheckFlag(", "")
+			'    DomTask = DomTask.Replace("@CheckFlag", "")
 
-            'If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Flags\" & CheckFlag & ".txt") Then
-            ''Debug.Print("CheckFlag = " & CheckFlag)
-            'SkipGotoLine = True
-            'FileGoto = CheckFlag
-            'GetGoto()
-            'End If
+			'End If
 
-            '    DomTask = DomTask.Replace("@CheckFlag", "")
 
-            'End If
 
 
+			'If DomTask.Contains("@GotoDommeLevel") Then
 
+			'GotoDommeLevel = True
 
-            'If DomTask.Contains("@GotoDommeLevel") Then
+			'Dim GotoDommeLevelString As String
 
-            'GotoDommeLevel = True
+			'GotoDommeLevelString = DomTask.Split("@GotoDommeLevel(")(1)
+			'GotoDommeLevelString = GotoDommeLevelString.Split(")")(0)
+			'GotoDommeLevelString = GotoDommeLevelString.Replace("GotoDommeLevel(", "")
 
-            'Dim GotoDommeLevelString As String
+			'FileGoto = "DommeLevel" & GotoDommeLevelString & FrmSettings.domlevelNumBox.Value
 
-            'GotoDommeLevelString = DomTask.Split("@GotoDommeLevel(")(1)
-            'GotoDommeLevelString = GotoDommeLevelString.Split(")")(0)
-            'GotoDommeLevelString = GotoDommeLevelString.Replace("GotoDommeLevel(", "")
+			'Debug.Print("GotoDommeLebel FileGoto = " & FileGoto)
 
-            'FileGoto = "DommeLevel" & GotoDommeLevelString & FrmSettings.domlevelNumBox.Value
+			'DomTask = DomTask.Replace("GotoDommeLevel(" & GotoDommeLevelString & ")", "")
 
-            'Debug.Print("GotoDommeLebel FileGoto = " & FileGoto)
+			'GetGoto()
 
-            'DomTask = DomTask.Replace("GotoDommeLevel(" & GotoDommeLevelString & ")", "")
+			'End If
 
-            'GetGoto()
+			' If DomTask.Contains("@VTLength") Then
 
-            'End If
+			'SkipGotoLine = True
 
-            ' If DomTask.Contains("@VTLength") Then
+			'If FrmSettings.ComboBoxVTLength.Text = "Never" Then FileGoto = "VTLengthNo"
 
-            'SkipGotoLine = True
+			'If FrmSettings.ComboBoxVTLength.Text = "Always" Then FileGoto = "VTLengthYes"
 
-            'If FrmSettings.ComboBoxVTLength.Text = "Never" Then FileGoto = "VTLengthNo"
+			'If FrmSettings.ComboBoxVTLength.Text = "Sometimes" Then
 
-            'If FrmSettings.ComboBoxVTLength.Text = "Always" Then FileGoto = "VTLengthYes"
+			'TempVal = randomizer.Next(5, 21) * FrmSettings.domlevelNumBox.Value
 
-            'If FrmSettings.ComboBoxVTLength.Text = "Sometimes" Then
+			' 5, 20   10, 40   15, 60   20, 80   25, 100
+			'If TempVal < 10 * FrmSettings.domlevelNumBox.Value Then
+			'FileGoto = "VTLengthYes"
+			'Else
+			'   FileGoto = "VTLengthNo"
+			' End If
 
-            'TempVal = randomizer.Next(5, 21) * FrmSettings.domlevelNumBox.Value
+			'End If
 
-            ' 5, 20   10, 40   15, 60   20, 80   25, 100
-            'If TempVal < 10 * FrmSettings.domlevelNumBox.Value Then
-            'FileGoto = "VTLengthYes"
-            'Else
-            '   FileGoto = "VTLengthNo"
-            ' End If
 
-            'End If
 
+			'Debug.Print("VTLength = " & FileGoto)
 
+			'DomTask = DomTask.Replace("@VTLength", "")
 
-            'Debug.Print("VTLength = " & FileGoto)
+			'GetGoto()
 
-            'DomTask = DomTask.Replace("@VTLength", "")
+			'End If
 
-            'GetGoto()
 
-            'End If
 
 
 
 
+			ioFile.Close()
+			ioFile.Dispose()
 
 
-            ioFile.Close()
-            ioFile.Dispose()
+			' If DomTask.Contains("@Module") Then
+			'ShowModule = True
+			'ScriptCount = 0
+			'For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+			' ScriptCount += 1
+			'Next
+			'TempVal = randomizer.Next(1, ScriptCount + 1)
+			'ScriptCount = 0
+			'For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+			'ScriptCount += 1
+			'If TempVal = ScriptCount Then ModText = foundFile
+			'Next
+			'DomTask = DomTask.Replace("@Module", "")
+			'ModuleTauntVal = -1
+			'End If
 
+			'Debug.Print("GotoFLag = " & GotoFlag)
 
-            ' If DomTask.Contains("@Module") Then
-            'ShowModule = True
-            'ScriptCount = 0
-            'For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-            ' ScriptCount += 1
-            'Next
-            'TempVal = randomizer.Next(1, ScriptCount + 1)
-            'ScriptCount = 0
-            'For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-            'ScriptCount += 1
-            'If TempVal = ScriptCount Then ModText = foundFile
-            'Next
-            'DomTask = DomTask.Replace("@Module", "")
-            'ModuleTauntVal = -1
-            'End If
+			'If DomTask.Contains("@PlayVideoTeaseCensorshipSucks") Then
+			'ScriptVideoTease = "Censorship Sucks"
+			'ScriptVideoTeaseFlag = True
+			' RandomVideo()
+			'DomTask = DomTask.Replace("@PlayVideoTeaseCensorshipSucks", "")
+			' End If
 
-            'Debug.Print("GotoFLag = " & GotoFlag)
 
-            'If DomTask.Contains("@PlayVideoTeaseCensorshipSucks") Then
-            'ScriptVideoTease = "Censorship Sucks"
-            'ScriptVideoTeaseFlag = True
-            ' RandomVideo()
-            'DomTask = DomTask.Replace("@PlayVideoTeaseCensorshipSucks", "")
-            ' End If
 
+			'If DomTask.Contains("@PauseAvoidTheEdge") Then
+			'domVLC.playlist.pause()
+			'AvoidTheEdgeTick = 120 / TauntSlider.Value
+			'AvoidTheEdgeStroking = False
+			'DomTask = DomTask.Replace("@PauseAvoidTheEdge", "")
+			'End If
 
+			'    If DomChat.Contains("@PauseAvoidTheEdge") Then
+			'domVLC.playlist.pause()
+			'AvoidTheEdgeTick = 120 / TauntSlider.Value
+			'AvoidTheEdgeStroking = False
+			'DomChat = DomChat.Replace("@PauseAvoidTheEdge", "")
+			'End If
 
-            'If DomTask.Contains("@PauseAvoidTheEdge") Then
-            'domVLC.playlist.pause()
-            'AvoidTheEdgeTick = 120 / TauntSlider.Value
-            'AvoidTheEdgeStroking = False
-            'DomTask = DomTask.Replace("@PauseAvoidTheEdge", "")
-            'End If
+			'    If DomTask.Contains("@PauseAvoidTheEdgeNoTaunts") Then
+			'AvoidTheEdge.Stop()
+			'DomTask = DomTask.Replace("@PauseAvoidTheEdgeNoTaunts", "")
+			'End If
 
-            '    If DomChat.Contains("@PauseAvoidTheEdge") Then
-            'domVLC.playlist.pause()
-            'AvoidTheEdgeTick = 120 / TauntSlider.Value
-            'AvoidTheEdgeStroking = False
-            'DomChat = DomChat.Replace("@PauseAvoidTheEdge", "")
-            'End If
+			'If DomTask.Contains("@CountdownAvoidTheEdge") Then
+			'ScriptTimer.Stop()
+			'AtECountdown = randomizer.Next(FrmSettings.NBAvoidTheEdgeMin.Value, FrmSettings.NBAvoidTheEdgeMax.Value + 1)
+			'DomTask = DomTask.Replace("@CountdownAvoidTheEdge", "")
+			'AvoidTheEdgeResume.Start()
+			'End If
 
-            '    If DomTask.Contains("@PauseAvoidTheEdgeNoTaunts") Then
-            'AvoidTheEdge.Stop()
-            'DomTask = DomTask.Replace("@PauseAvoidTheEdgeNoTaunts", "")
-            'End If
+			'    If DomTask.Contains("@ResumeAvoidTheEdge") Then
+			'DomTask = DomTask.Replace("@ResumeAvoidTheEdge", "")
+			'FileGoto = "AvoidTheEdgeBegin"
+			'SkipGotoLine = True
+			'GetGoto()
+			'domVLC.playlist.play()
+			'End If
 
-            'If DomTask.Contains("@CountdownAvoidTheEdge") Then
-            'ScriptTimer.Stop()
-            'AtECountdown = randomizer.Next(FrmSettings.NBAvoidTheEdgeMin.Value, FrmSettings.NBAvoidTheEdgeMax.Value + 1)
-            'DomTask = DomTask.Replace("@CountdownAvoidTheEdge", "")
-            'AvoidTheEdgeResume.Start()
-            'End If
+			'If DomTask.Contains("@EmbedImage") Then
 
-            '    If DomTask.Contains("@ResumeAvoidTheEdge") Then
-            'DomTask = DomTask.Replace("@ResumeAvoidTheEdge", "")
-            'FileGoto = "AvoidTheEdgeBegin"
-            'SkipGotoLine = True
-            'GetGoto()
-            'domVLC.playlist.play()
-            'End If
+			'Dim EmbedImageFile As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\ImageURLs.txt")
+			'Dim ImageLines As New List(Of String)
+			'Dim ImageLine As Integer
 
-            'If DomTask.Contains("@EmbedImage") Then
+			'ImageLine = -1
 
-            'Dim EmbedImageFile As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\ImageURLs.txt")
-            'Dim ImageLines As New List(Of String)
-            'Dim ImageLine As Integer
+			'While EmbedImageFile.Peek <> -1
+			'  ImageLine += 1
+			'   ImageLines.Add(EmbedImageFile.ReadLine())
+			'End While
+			''Debug.Print("ImageLine = " & ImageLine)
+			'TempVal = randomizer.Next(0, ImageLine + 1)
+			''Debug.Print("TempVal = " & TempVal)
 
-            'ImageLine = -1
+			'subAvatar.Load(ImageLines(TempVal))
 
-            'While EmbedImageFile.Peek <> -1
-            '  ImageLine += 1
-            '   ImageLines.Add(EmbedImageFile.ReadLine())
-            'End While
-            ''Debug.Print("ImageLine = " & ImageLine)
-            'TempVal = randomizer.Next(0, ImageLine + 1)
-            ''Debug.Print("TempVal = " & TempVal)
 
-            'subAvatar.Load(ImageLines(TempVal))
+			'Dim EmbedImageDoc As New XmlDocument()
 
+			'EmbedImageDoc.Load("http://justblowjobgifs.tumblr.com/api/read")
 
-            'Dim EmbedImageDoc As New XmlDocument()
+			'EmbedImageDoc.Save("G:\Temp\EmbedImage.xml")
 
-            'EmbedImageDoc.Load("http://justblowjobgifs.tumblr.com/api/read")
+			'   For Each XmlAttribute As XElement In EmbedImageDoc
 
-            'EmbedImageDoc.Save("G:\Temp\EmbedImage.xml")
+			'If XmlAttribute.Attribute("type") = "photo" Then
+			'MsgBox(XmlAttribute.Elements("photo-url").Value)
+			'End If
 
-            '   For Each XmlAttribute As XElement In EmbedImageDoc
+			'    Next
 
-            'If XmlAttribute.Attribute("type") = "photo" Then
-            'MsgBox(XmlAttribute.Elements("photo-url").Value)
-            'End If
 
-            '    Next
 
+			'RunFileText()
+			'Return
+			'End If
 
+			If DomTask.Contains("@ShowTaggedImage") Then JustShowedBlogImage = True
 
-            'RunFileText()
-            'Return
-            'End If
+			If DomTask.Contains("@NullResponse") Then NullResponse = True
 
-            If DomTask.Contains("@ShowTaggedImage") Then JustShowedBlogImage = True
+			If HypnoGen = True Then
 
-            If DomTask.Contains("@NullResponse") Then NullResponse = True
+				If CBHypnoGenSlideshow.Checked = True Then
 
-            If HypnoGen = True Then
+					If LBHypnoGenSlideshow.SelectedItem = "Boobs" Then DomTask = DomTask & " @ShowBoobsImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Butts" Then DomTask = DomTask & " @ShowButtImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Hardcore" Then DomTask = DomTask & " @ShowHardcoreImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Softcore" Then DomTask = DomTask & " @ShowSoftcoreImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Lesbian" Then DomTask = DomTask & " @ShowLesbianImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Blowjob" Then DomTask = DomTask & " @ShowBlowjobImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Femdom" Then DomTask = DomTask & " @ShowFemdomImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Lezdom" Then DomTask = DomTask & " @ShowLezdomImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Hentai" Then DomTask = DomTask & " @ShowHentaiImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Gay" Then DomTask = DomTask & " @ShowGayImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Maledom" Then DomTask = DomTask & " @ShowMaledomImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Captions" Then DomTask = DomTask & " @ShowCaptionsImage"
+					If LBHypnoGenSlideshow.SelectedItem = "General" Then DomTask = DomTask & " @ShowGeneralImage"
+					If LBHypnoGenSlideshow.SelectedItem = "Tagged" Then DomTask = DomTask & " @ShowTaggedImage @Tag" & TBHypnoGenImageTag.Text
 
-                If CBHypnoGenSlideshow.Checked = True Then
 
-                    If LBHypnoGenSlideshow.SelectedItem = "Boobs" Then DomTask = DomTask & " @ShowBoobsImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Butts" Then DomTask = DomTask & " @ShowButtImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Hardcore" Then DomTask = DomTask & " @ShowHardcoreImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Softcore" Then DomTask = DomTask & " @ShowSoftcoreImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Lesbian" Then DomTask = DomTask & " @ShowLesbianImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Blowjob" Then DomTask = DomTask & " @ShowBlowjobImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Femdom" Then DomTask = DomTask & " @ShowFemdomImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Lezdom" Then DomTask = DomTask & " @ShowLezdomImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Hentai" Then DomTask = DomTask & " @ShowHentaiImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Gay" Then DomTask = DomTask & " @ShowGayImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Maledom" Then DomTask = DomTask & " @ShowMaledomImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Captions" Then DomTask = DomTask & " @ShowCaptionsImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "General" Then DomTask = DomTask & " @ShowGeneralImage"
-                    If LBHypnoGenSlideshow.SelectedItem = "Tagged" Then DomTask = DomTask & " @ShowTaggedImage @Tag" & TBHypnoGenImageTag.Text
 
+				End If
 
+			End If
 
-                End If
 
-            End If
+			If DomTask <> "" Then
+				TypingDelayGeneric()
+			Else
+				RunFileText()
+			End If
 
 
-            If DomTask <> "" Then
-                TypingDelayGeneric()
-            Else
-                RunFileText()
-            End If
-
-
-        End If
+		End If
 
 	End Sub
 
@@ -16779,17 +16784,17 @@ Skip_RandomFile:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@DommeLevel(") Then
-                If GetDommeLevel(GetParentheses(ListClean(PoundCount), "@DommeLevel(")) = False Then
-                    If StrokeFilter = True Then
-                        For i As Integer = 0 To StrokeTauntCount - 1
-                            ListClean.Remove(ListClean(PoundCount))
-                            PoundLine -= 1
-                        Next
-                    Else
-                        ListClean.Remove(ListClean(PoundCount))
-                        PoundLine -= 1
-                    End If
-                End If
+				If FilterCheck(GetParentheses(ListClean(PoundCount), "@DommeLevel("), FrmSettings.domlevelNumBox) = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
             End If
         Loop Until PoundCount = 0
 
@@ -16978,17 +16983,17 @@ Skip_RandomFile:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@Cup(") Then
-                If GetCup(GetParentheses(ListClean(PoundCount), "@Cup(")) = False Then
-                    If StrokeFilter = True Then
-                        For i As Integer = 0 To StrokeTauntCount - 1
-                            ListClean.Remove(ListClean(PoundCount))
-                            PoundLine -= 1
-                        Next
-                    Else
-                        ListClean.Remove(ListClean(PoundCount))
-                        PoundLine -= 1
-                    End If
-                End If
+				If FilterCheck(GetParentheses(ListClean(PoundCount), "@Cup("), FrmSettings.boobComboBox) = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
             End If
         Loop Until PoundCount = 0
 
@@ -17970,17 +17975,17 @@ Skip_RandomFile:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@AllowsOrgasm(") Then
-                If GetOrgasmChance(GetParentheses(ListClean(PoundCount), "@AllowsOrgasm(")) = False Then
-                    If StrokeFilter = True Then
-                        For i As Integer = 0 To StrokeTauntCount - 1
-                            ListClean.Remove(ListClean(PoundCount))
-                            PoundLine -= 1
-                        Next
-                    Else
-                        ListClean.Remove(ListClean(PoundCount))
-                        PoundLine -= 1
-                    End If
-                End If
+				If FilterCheck(GetParentheses(ListClean(PoundCount), "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox) = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
                 'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
             End If
         Loop Until PoundCount = 0
@@ -18092,17 +18097,17 @@ Skip_RandomFile:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@RuinsOrgasm(") Then
-                If GetRuinChance(GetParentheses(ListClean(PoundCount), "@RuinsOrgasm(")) = False Then
-                    If StrokeFilter = True Then
-                        For i As Integer = 0 To StrokeTauntCount - 1
-                            ListClean.Remove(ListClean(PoundCount))
-                            PoundLine -= 1
-                        Next
-                    Else
-                        ListClean.Remove(ListClean(PoundCount))
-                        PoundLine -= 1
-                    End If
-                End If
+				If FilterCheck(GetParentheses(ListClean(PoundCount), "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox) = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
                 'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
             End If
         Loop Until PoundCount = 0
@@ -19226,17 +19231,17 @@ Skip_RandomFile:
             Application.DoEvents()
             PoundCount -= 1
             If ListClean(PoundCount).Contains("@ApathyLevel(") Then
-                If GetDommeApathy(GetParentheses(ListClean(PoundCount), "@ApathyLevel(")) = False Then
-                    If StrokeFilter = True Then
-                        For i As Integer = 0 To StrokeTauntCount - 1
-                            ListClean.Remove(ListClean(PoundCount))
-                            PoundLine -= 1
-                        Next
-                    Else
-                        ListClean.Remove(ListClean(PoundCount))
-                        PoundLine -= 1
-                    End If
-                End If
+				If FilterCheck(GetParentheses(ListClean(PoundCount), "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
             End If
         Loop Until PoundCount = 0
 
@@ -30463,5 +30468,67 @@ SkipNew:
 		' You gotta keep 'em numerated
 
 	End Function
+
+
+	Private Function FilterCheck(ByRef Input As String, ByVal ConditionControl As Control) As Boolean
+
+
+		Debug.Print("Input = " & Input)
+		Debug.Print("ConditionControl = " & ConditionControl.ToString)
+
+		If TypeOf ConditionControl Is NumericUpDown Then
+			Debug.Print("It's a combo box" & Input)
+		End If
+
+		Dim TextCondition As String
+		' Cast the Type of the Control to access it's visible TextValue
+		If TypeOf ConditionControl Is NumericUpDown Then
+			TextCondition = DirectCast(ConditionControl, NumericUpDown).Value
+		ElseIf TypeOf ConditionControl Is ComboBox Then
+			TextCondition = DirectCast(ConditionControl, ComboBox).Text
+		Else
+			Throw New Exception("Type of control not implemented in Function.")
+		End If
+
+		TextCondition = UCase(TextCondition)
+		Debug.Print("TextCondition = " & TextCondition)
+
+
+		' Cast the Type of the Control to access it's visible TextValue
+		'If ConditionControl Is GetType(NumericUpDown) Then
+		'TextCondition = DirectCast(ConditionControl, NumericUpDown).Value
+		'ElseIf ConditionControl Is GetType(ComboBox) Then
+		'TextCondition = DirectCast(ConditionControl, ComboBox).Text
+		'Else
+		'Throw New Exception("Type of control not implemented in Function.")
+		'End If
+
+
+		Input = UCase(Input)
+		'Input = Input.Replace(" ", "")
+
+		If Input.Contains(",") Then
+			Input = FixCommas(Input)
+			Dim SplitArray() As String = Input.Split(",")
+
+			If Input.Contains("NOT") Then
+				For i As Integer = 0 To SplitArray.Count - 1
+					If SplitArray(i) = TextCondition Then Return False
+				Next
+				Return True
+			Else
+				For i As Integer = 0 To SplitArray.Count - 1
+					If SplitArray(i) = TextCondition Then Return True
+				Next
+			End If
+		Else
+			If Input = TextCondition Then Return True
+		End If
+
+		Return False
+
+	End Function
+
+
 
 End Class

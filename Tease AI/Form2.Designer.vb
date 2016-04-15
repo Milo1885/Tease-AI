@@ -913,6 +913,9 @@ Partial Class FrmSettings
 		Me.RBGerman = New System.Windows.Forms.RadioButton()
 		Me.RBEnglish = New System.Windows.Forms.RadioButton()
 		Me.GroupBox33 = New System.Windows.Forms.GroupBox()
+		Me.BTNOfflineMode = New System.Windows.Forms.Button()
+		Me.LBLOfflineMode = New System.Windows.Forms.Label()
+		Me.Label140 = New System.Windows.Forms.Label()
 		Me.Button11 = New System.Windows.Forms.Button()
 		Me.LBLChastityState = New System.Windows.Forms.Label()
 		Me.Label120 = New System.Windows.Forms.Label()
@@ -996,7 +999,6 @@ Partial Class FrmSettings
 		Me.OpenScriptDialog = New System.Windows.Forms.OpenFileDialog()
 		Me.OpenSettingsDialog = New System.Windows.Forms.OpenFileDialog()
 		Me.SaveSettingsDialog = New System.Windows.Forms.SaveFileDialog()
-		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
 		Me.BWValidateLocalFiles = New System.ComponentModel.BackgroundWorker()
 		Me.TTDir = New System.Windows.Forms.ToolTip(Me.components)
 		Me.GroupBox65 = New System.Windows.Forms.GroupBox()
@@ -1008,9 +1010,7 @@ Partial Class FrmSettings
 		Me.CheckBox1 = New System.Windows.Forms.CheckBox()
 		Me.Label135 = New System.Windows.Forms.Label()
 		Me.TrackBar2 = New System.Windows.Forms.TrackBar()
-		Me.BTNOfflineMode = New System.Windows.Forms.Button()
-		Me.LBLOfflineMode = New System.Windows.Forms.Label()
-		Me.Label140 = New System.Windows.Forms.Label()
+		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
 		Me.SettingsPanel.SuspendLayout
 		Me.SettingsTabs.SuspendLayout
 		Me.TabPage1.SuspendLayout
@@ -12020,6 +12020,40 @@ Partial Class FrmSettings
 		Me.GroupBox33.TabStop = false
 		Me.GroupBox33.Text = "System States"
 		'
+		'BTNOfflineMode
+		'
+		Me.BTNOfflineMode.Location = New System.Drawing.Point(161, 70)
+		Me.BTNOfflineMode.Name = "BTNOfflineMode"
+		Me.BTNOfflineMode.Size = New System.Drawing.Size(99, 23)
+		Me.BTNOfflineMode.TabIndex = 180
+		Me.BTNOfflineMode.Text = "Toggle"
+		Me.BTNOfflineMode.UseVisualStyleBackColor = true
+		'
+		'LBLOfflineMode
+		'
+		Me.LBLOfflineMode.BackColor = System.Drawing.Color.LightGray
+		Me.LBLOfflineMode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLOfflineMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLOfflineMode.ForeColor = System.Drawing.Color.Red
+		Me.LBLOfflineMode.Location = New System.Drawing.Point(120, 70)
+		Me.LBLOfflineMode.Name = "LBLOfflineMode"
+		Me.LBLOfflineMode.Size = New System.Drawing.Size(37, 23)
+		Me.LBLOfflineMode.TabIndex = 179
+		Me.LBLOfflineMode.Text = "OFF"
+		Me.LBLOfflineMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'Label140
+		'
+		Me.Label140.BackColor = System.Drawing.Color.LightGray
+		Me.Label140.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.Label140.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label140.Location = New System.Drawing.Point(17, 70)
+		Me.Label140.Name = "Label140"
+		Me.Label140.Size = New System.Drawing.Size(98, 23)
+		Me.Label140.TabIndex = 178
+		Me.Label140.Text = "OFFLINE MODE"
+		Me.Label140.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
 		'Button11
 		'
 		Me.Button11.Location = New System.Drawing.Point(161, 33)
@@ -12520,17 +12554,17 @@ Partial Class FrmSettings
 		Me.Label130.Name = "Label130"
 		Me.Label130.Size = New System.Drawing.Size(254, 54)
 		Me.Label130.TabIndex = 176
-		Me.Label130.Text = "OxiKlein"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Ambossli"
+		Me.Label130.Text = "q55x8x"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"OxiKlein"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
 		Me.Label130.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
 		'Label123
 		'
 		Me.Label123.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.Label123.Location = New System.Drawing.Point(81, 318)
+		Me.Label123.Location = New System.Drawing.Point(81, 314)
 		Me.Label123.Name = "Label123"
 		Me.Label123.Size = New System.Drawing.Size(254, 54)
 		Me.Label123.TabIndex = 175
-		Me.Label123.Text = "pepsifreak"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Daragorn"
+		Me.Label123.Text = "pepsifreak"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Daragorn"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Ambossli"
 		Me.Label123.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
 		'Label69
@@ -12841,14 +12875,6 @@ Partial Class FrmSettings
 		Me.SaveSettingsDialog.Filter = "TXT Files (*.txt)|*.txt"
 		Me.SaveSettingsDialog.Title = "Select a location to save current Domme settings"
 		'
-		'BWURLFiles
-		'
-		Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
-		Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
-		Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
-		Me.BWURLFiles.WorkerReportsProgress = true
-		Me.BWURLFiles.WorkerSupportsCancellation = true
-		'
 		'BWValidateLocalFiles
 		'
 		'
@@ -12948,39 +12974,13 @@ Partial Class FrmSettings
 		Me.TrackBar2.TabIndex = 30
 		Me.TrackBar2.Value = 50
 		'
-		'BTNOfflineMode
+		'BWURLFiles
 		'
-		Me.BTNOfflineMode.Location = New System.Drawing.Point(161, 70)
-		Me.BTNOfflineMode.Name = "BTNOfflineMode"
-		Me.BTNOfflineMode.Size = New System.Drawing.Size(99, 23)
-		Me.BTNOfflineMode.TabIndex = 180
-		Me.BTNOfflineMode.Text = "Toggle"
-		Me.BTNOfflineMode.UseVisualStyleBackColor = true
-		'
-		'LBLOfflineMode
-		'
-		Me.LBLOfflineMode.BackColor = System.Drawing.Color.LightGray
-		Me.LBLOfflineMode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLOfflineMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLOfflineMode.ForeColor = System.Drawing.Color.Red
-		Me.LBLOfflineMode.Location = New System.Drawing.Point(120, 70)
-		Me.LBLOfflineMode.Name = "LBLOfflineMode"
-		Me.LBLOfflineMode.Size = New System.Drawing.Size(37, 23)
-		Me.LBLOfflineMode.TabIndex = 179
-		Me.LBLOfflineMode.Text = "OFF"
-		Me.LBLOfflineMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'Label140
-		'
-		Me.Label140.BackColor = System.Drawing.Color.LightGray
-		Me.Label140.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.Label140.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.Label140.Location = New System.Drawing.Point(17, 70)
-		Me.Label140.Name = "Label140"
-		Me.Label140.Size = New System.Drawing.Size(98, 23)
-		Me.Label140.TabIndex = 178
-		Me.Label140.Text = "OFFLINE MODE"
-		Me.Label140.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
+		Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
+		Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
+		Me.BWURLFiles.WorkerReportsProgress = true
+		Me.BWURLFiles.WorkerSupportsCancellation = true
 		'
 		'FrmSettings
 		'
