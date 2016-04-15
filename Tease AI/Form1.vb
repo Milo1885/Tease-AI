@@ -30470,7 +30470,7 @@ SkipNew:
 	End Function
 
 
-	Private Function FilterCheck(ByRef Input As String, ByVal ConditionControl As Control) As Boolean
+	Private Function FilterCheck(ByVal Input As String, ByVal ConditionControl As Control) As Boolean
 
 
 		Debug.Print("Input = " & Input)
