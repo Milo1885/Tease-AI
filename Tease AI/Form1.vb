@@ -4498,7 +4498,7 @@ AcceptAnswer:
 	End Sub
 
 
-	Public Sub ScriptTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ScriptTimer.Tick
+	Public Sub ScriptTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles ScriptTimer.Tick
 
 		Debug.Print("ScriptTick = " & ScriptTick)
 
@@ -5753,7 +5753,7 @@ SkipGotoSearch:
 
 	End Sub
 
-	Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles Timer1.Tick
+	Private Sub Timer1_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles Timer1.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -6856,7 +6856,7 @@ NoResponse:
 										ByVal cchBuffer As Int32) As Int32
 	End Function
 
-	Private Sub SendTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SendTimer.Tick
+	Private Sub SendTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles SendTimer.Tick
 
 		If DomChat.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
 		If DomChat.Contains("@NullResponse") Then
@@ -8045,7 +8045,7 @@ TryPrevious:
 #End Region
 
 
-	Private Sub StrokeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimer.Tick
+	Private Sub StrokeTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles StrokeTimer.Tick
 
 
 		If InputFlag = True Or DomTyping = True Then Return
@@ -8137,7 +8137,7 @@ SkipTick:
 	End Sub
 
 
-	Private Sub StrokeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTauntTimer.Tick
+	Private Sub StrokeTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles StrokeTauntTimer.Tick
 
 		If MiniScript = True Then Return
 		If InputFlag = True Then Return
@@ -8465,7 +8465,7 @@ TryNextWithTease:
 
 
 
-	Private Sub DelayTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DelayTimer.Tick
+	Private Sub DelayTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles DelayTimer.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -8819,7 +8819,7 @@ GetAnotherRandomVideo:
 
 
 
-	Public Sub CensorshipTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CensorshipTimer.Tick
+	Public Sub CensorshipTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles CensorshipTimer.Tick
 
 
 		If MiniScript = True Then Return
@@ -8871,6 +8871,7 @@ CensorConstant:
 				CensorshipBar.Height = CensorshipBarY2
 				CensorshipBar.Width = CensorshipBarY2 * 2.6
 
+				'BUG: if CensorshipBar.Width > DomWMP.Width then ArgumentOutOfRangeException
 				CensorshipBarX = randomizer.Next(5, DomWMP.Width - CensorshipBar.Width + 1)
 				CensorshipBarY = randomizer.Next(5, ((DomWMP.Height - 39) - CensorshipBar.Height) + 1)
 				CensorshipBar.Location = New Point(CensorshipBarX, CensorshipBarY)
@@ -8918,7 +8919,7 @@ CensorConstant:
 	End Sub
 
 
-	Public Sub RLGLTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTimer.Tick
+	Public Sub RLGLTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles RLGLTimer.Tick
 
 		' DEBUG CHANGE THIS ONCE WMP IS IMPLEMENTED
 
@@ -9491,7 +9492,7 @@ StatusUpdateEnd:
 	End Sub
 
 
-	Private Sub UpdatesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdatesTimer.Tick
+	Private Sub UpdatesTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles UpdatesTimer.Tick
 
 		'Debug.Print("updates tick = " & UpdatesTick)
 
@@ -21398,7 +21399,7 @@ Skip_RandomFile:
 	End Sub
 
 
-	Private Sub AvoidTheEdge_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdge.Tick
+	Private Sub AvoidTheEdge_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles AvoidTheEdge.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -21546,7 +21547,7 @@ Skip_RandomFile:
 
 	End Sub
 
-	Private Sub AvoidTheEdgeResume_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeResume.Tick
+	Private Sub AvoidTheEdgeResume_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles AvoidTheEdgeResume.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -22398,7 +22399,7 @@ NoPlaylistEndFile:
 	End Sub
 
 
-	Private Sub EdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeTauntTimer.Tick
+	Private Sub EdgeTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles EdgeTauntTimer.Tick
 
 		If MultipleEdgesTimer.Enabled = True Then Return
 		If MiniScript = True Then Return
@@ -22455,7 +22456,7 @@ NoPlaylistEndFile:
 
 
 
-	Private Sub HoldEdgeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTimer.Tick
+	Private Sub HoldEdgeTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles HoldEdgeTimer.Tick
 
 		If MiniScript = True Then Return
 
@@ -22766,7 +22767,7 @@ NoRepeatOFiles:
 
 	End Sub
 
-	Private Sub HoldEdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTauntTimer.Tick
+	Private Sub HoldEdgeTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles HoldEdgeTauntTimer.Tick
 
 		If MiniScript = True Then Return
 		If InputFlag = True Then Return
@@ -23238,7 +23239,7 @@ AtNext:
 
 
 
-	Private Sub SlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SlideshowTimer.Tick
+	Private Sub SlideshowTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles SlideshowTimer.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -23331,7 +23332,7 @@ TryNext:
 
 
 
-	Private Sub EdgeCountTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeCountTimer.Tick
+	Private Sub EdgeCountTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles EdgeCountTimer.Tick
 		EdgeCountTick += 1
 
 
@@ -23364,7 +23365,7 @@ TryNext:
 		'Debug.Print("EdgeCountTick = " & String.Format("{0:00}:{1:00}", TST.Minutes, TST.Seconds))
 	End Sub
 
-	Private Sub StrokeTimeTotalTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
+	Private Sub StrokeTimeTotalTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -23496,7 +23497,7 @@ TryNext:
 
 
 
-	Private Sub TnAFastSlides_Tick(sender As System.Object, e As System.EventArgs) Handles TnASlides.Tick
+	Private Sub TnAFastSlides_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TnASlides.Tick
 
 		Dim TnARandom As Integer = randomizer.Next(1, 101)
 
@@ -24083,7 +24084,7 @@ TryNext:
 	End Sub
 
 
-	Private Sub WaitTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WaitTimer.Tick
+	Private Sub WaitTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles WaitTimer.Tick
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
 		If DomTypeCheck = True Or YesOrNo = True Then Return
@@ -24100,7 +24101,7 @@ TryNext:
 
 	End Sub
 
-	Private Sub StupidTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StupidTimer.Tick
+	Private Sub StupidTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles StupidTimer.Tick
 
 		If PBFileTransfer.Value = PBFileTransfer.Maximum Then
 			StupidTimer.Enabled = False
@@ -24298,7 +24299,7 @@ TryNext:
 
 
 
-	Private Sub VideoTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTauntTimer.Tick
+	Private Sub VideoTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles VideoTauntTimer.Tick
 
 		If MiniScript = True Then Return
 
@@ -24366,7 +24367,7 @@ TryNext:
 
 	End Sub
 
-	Private Sub TeaseTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseTimer.Tick
+	Private Sub TeaseTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TeaseTimer.Tick
 
 
 
@@ -24380,7 +24381,7 @@ TryNext:
 
 	End Sub
 
-	Public Sub RLGLTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTauntTimer.Tick
+	Public Sub RLGLTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles RLGLTauntTimer.Tick
 
 		If MiniScript = True Then Return
 
@@ -24439,7 +24440,7 @@ TryNext:
 
 	End Sub
 
-	Private Sub AvoidTheEdgeTaunts_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeTaunts.Tick
+	Private Sub AvoidTheEdgeTaunts_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles AvoidTheEdgeTaunts.Tick
 
 
 		If DomTyping = True Then Return
@@ -24670,7 +24671,7 @@ TryNext:
 
 
 
-	Private Sub ContactTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ContactTimer.Tick
+	Private Sub ContactTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles ContactTimer.Tick
 		ContactTick -= 1
 
 
@@ -25025,7 +25026,7 @@ GetDommeSlideshow:
 	End Function
 
 
-	Private Sub CustomSlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
+	Private Sub CustomSlideshowTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
 
 
 		BWSlideshow.RunWorkerAsync()
@@ -25118,7 +25119,7 @@ GetDommeSlideshow:
 	End Sub
 
 
-	Private Sub Contact1Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact1Timer.Tick
+	Private Sub Contact1Timer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles Contact1Timer.Tick
 
 		AddContactTick -= 1
 
@@ -25306,7 +25307,7 @@ GetDommeSlideshow:
 	End Sub
 
 
-	Private Sub Contact2Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact2Timer.Tick
+	Private Sub Contact2Timer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles Contact2Timer.Tick
 
 		AddContactTick -= 1
 
@@ -25343,7 +25344,7 @@ GetDommeSlideshow:
 
 	End Sub
 
-	Private Sub Contact3Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact3Timer.Tick
+	Private Sub Contact3Timer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles Contact3Timer.Tick
 
 		AddContactTick -= 1
 
@@ -25380,7 +25381,7 @@ GetDommeSlideshow:
 
 	End Sub
 
-	Private Sub DommeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DommeTimer.Tick
+	Private Sub DommeTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles DommeTimer.Tick
 
 		AddContactTick -= 1
 
@@ -25417,7 +25418,7 @@ GetDommeSlideshow:
 
 	End Sub
 
-	Private Sub UpdateStageTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateStageTimer.Tick
+	Private Sub UpdateStageTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles UpdateStageTimer.Tick
 		UpdateStageTick -= 1
 		If UpdateStageTick < 1 Then
 			UpdateStageTimer.Stop()
@@ -25427,7 +25428,7 @@ GetDommeSlideshow:
 
 
 
-	Private Sub WMPTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WMPTimer.Tick
+	Private Sub WMPTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles WMPTimer.Tick
 
 		Try
 			Dim VideoLength As Integer = DomWMP.currentMedia.duration
@@ -27013,7 +27014,7 @@ SkipNew:
 
 
 
-	Private Sub TeaseAIClock_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseAIClock.Tick
+	Private Sub TeaseAIClock_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TeaseAIClock.Tick
 
 		LBLTime.Text = Format(Now, "h:mm")
 		LBLAMPM.Text = Format(Now, "tt")
@@ -29850,7 +29851,7 @@ SkipNew:
 		SaveImage("Butt")
 	End Sub
 
-	Private Sub TimeoutTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TimeoutTimer.Tick
+	Private Sub TimeoutTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TimeoutTimer.Tick
 
 		Debug.Print("TimeoutTick = " & TimeoutTick)
 
@@ -30574,7 +30575,7 @@ SkipNew:
 		End Try
 	End Sub
 
-	Private Sub VideoTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTimer.Tick
+	Private Sub VideoTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles VideoTimer.Tick
 
 		VideoTick -= 1
 
@@ -30586,7 +30587,7 @@ SkipNew:
 
 	End Sub
 
-	Private Sub MultipleEdgesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles MultipleEdgesTimer.Tick
+	Private Sub MultipleEdgesTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles MultipleEdgesTimer.Tick
 
 		If DomTypeCheck = True Then Return
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
