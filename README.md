@@ -4,6 +4,58 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 51
 
+Added @YesMode() Command - 
+
+     @YesMode() allows you perform a specific action if the user enters one of their "Yes" words while YesMode is active. There are two ways to use @YesMode()
+	 
+	 @YesMode(Goto, GotoLine)
+	 @YesMode(Video, GotoLine)
+	 
+	 Goto mode will go to the specified GotoLine if the user enters a Yes phrase
+	 Video mode will stop a currently playing video if the user enters a Yes phrase and go to the specified GotoLine. If the video ends or is stopped first, the Video mode will be cleared and the script will move to the next line as usual
+
+	 You can clear YesMode with @YesMode(Normal)  
+
+Added @NoMode() Command - 
+
+     @YesMode() allows you perform a specific action if the user enters one of their "No" words while YesMode is active. There are two ways to use @NoMode()
+	 
+	 @NoMode(Goto, GotoLine)
+	 @NoMode(Video, GotoLine)
+	 
+	 Goto mode will go to the specified GotoLine if the user enters a No phrase
+	 Video mode will stop a currently playing video if the user enters a No phrase and go to the specified GotoLine. If the video ends or is stopped first, the Video mode will be cleared and the script will move to the next line as usual
+
+	 You can clear NoMode with @NoMode(Normal)  
+	 
+Added @CameMode() Command - 
+
+     @CameMode() allows you perform a specific action if the user says one of the exact following expressions while CameMode is active: "Came", "I Came", "Just Came" or "I just came". Case doesn't matter, but Came mode will only pick up those four exact phrases. So "I just came" would activate it, "But I just came yesterday" would not. There are three ways to use @CameMode()
+	 
+	 @CameMode(Goto, GotoLine)
+	 @CameMode(Video, GotoLine)
+	 @CameMode(Message, MessageText)
+	 
+	 Goto mode will go to the specified GotoLine if the user enters one of the above phrases
+	 Video mode will stop a currently playing video if the user enters one of the above phrases and go to the specified GotoLine. If the video ends or is stopped first, the Video mode will be cleared and the script will move to the next line as usual
+	 Message mode will have the program process one of the above "I came" phrases as whatever text is specified as MessageText
+
+	 You can clear CameMode with @CameMode(Normal)  	
+
+Added @RuinedMode() Command - 
+
+     @RuinedMode() allows you perform a specific action if the user says one of the exact following expressions while RuinedMode is active: "Ruined", "I Ruined", "Ruined it" or "I ruined it". Case doesn't matter, but Ruined mode will only pick up those four exact phrases. So "I ruined" would activate it, "I think I ruined my carpet" would not. There are three ways to use @RuinedMode()
+	 
+	 @RuinedMode(Goto, GotoLine)
+	 @RuinedMode(Video, GotoLine)
+	 @RuinedMode(Message, MessageText)
+	 
+	 Goto mode will go to the specified GotoLine if the user enters one of the above phrases
+	 Video mode will stop a currently playing video if the user enters one of the above phrases and go to the specified GotoLine. If the video ends or is stopped first, the Video mode will be cleared and the script will move to the next line as usual
+	 Message mode will have the program process one of the above "Ruined" phrases as whatever text is specified as MessageText
+
+	 You can clear RuinedMode with @RuinedMode(Normal)  	 
+
 Added Offline Mode to System States settings in the Misc tab. If you're using Tease AI without an internet connection, Offline Mode will automatically convert @ShowBlogImage Commands to @ShowLocalImage, as well as removing @ShowButtImage and @ShowBoobsImage Commands if they are set to URL Files. Toggling Tease AI to Offline Mode when you have no connectivity will help mitigate delays and crashes.
 	
 

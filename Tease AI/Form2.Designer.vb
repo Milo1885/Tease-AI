@@ -12550,11 +12550,11 @@ Partial Class FrmSettings
 		'Label130
 		'
 		Me.Label130.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.Label130.Location = New System.Drawing.Point(361, 318)
+		Me.Label130.Location = New System.Drawing.Point(361, 314)
 		Me.Label130.Name = "Label130"
 		Me.Label130.Size = New System.Drawing.Size(254, 54)
 		Me.Label130.TabIndex = 176
-		Me.Label130.Text = "q55x8x"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"OxiKlein"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
+		Me.Label130.Text = "q55x8x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Stefaf" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OxiKlein" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
 		Me.Label130.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
 		'Label123

@@ -606,6 +606,23 @@ Public Class Form1
 	Dim MultipleEdgesTick As Integer
 	Dim MultipleEdgesMetronome As String = ""
 
+	Dim YesGoto As Boolean
+	Dim YesVideo As Boolean
+	Dim NoGoto As Boolean
+	Dim NoVideo_Mode As Boolean
+	Dim CameGoto As Boolean
+	Dim CameVideo As Boolean
+	Dim CameMessage As Boolean
+	Dim CameMessageText As String
+	Dim RuinedGoto As Boolean
+	Dim RuinedVideo As Boolean
+	Dim RuinedMessage As Boolean
+	Dim RuinedMessageText As String
+	Dim YesGotoLine As String
+	Dim NoGotoLine As String
+	Dim CameGotoLine As String
+	Dim RuinedGotoLine As String
+
 
 	Private Const DISABLE_SOUNDS As Integer = 21
 	Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -3159,6 +3176,8 @@ NoRepeatOFiles:
 
 DebugAwareness:
 
+
+
 		If InputFlag = True And DomTypeCheck = False Then
 			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & InputString, ChatString, False)
 			InputFlag = False
@@ -3169,6 +3188,22 @@ DebugAwareness:
 		ChatString = ChatString.Replace("'", "")
 		ChatString = ChatString.Replace(".", "")
 
+
+		If UCase(ChatString) = UCase("CAME") Or UCase(ChatString) = UCase("I CAME") Or UCase(ChatString) = UCase("JUST CAME") Or UCase(ChatString) = UCase("I JUST CAME") Then
+			If CameMessage = True Then
+				CameMessage = False
+				ChatString = CameMessageText
+			End If
+		End If
+
+		If UCase(ChatString) = UCase("RUINED") Or UCase(ChatString) = UCase("I RUINED") Or UCase(ChatString) = UCase("RUINED IT") Or UCase(ChatString) = UCase("I RUINED IT") Then
+			If RuinedMessage = True Then
+				RuinedMessage = False
+				ChatString = RuinedMessageText
+			End If
+		End If
+
+
 		' If the domme is waiting for a response, go straight to this sub-routine instead
 		If YesOrNo = True And SubEdging = True Then GoTo EdgeSkip
 		If YesOrNo = True And SubHoldingEdge = True Then GoTo EdgeSkip
@@ -3177,6 +3212,8 @@ DebugAwareness:
 			YesOrNoQuestions()
 			Return
 		End If
+
+
 
 EdgeSkip:
 
@@ -3236,18 +3273,124 @@ EdgeSkip:
 		Catch
 		End Try
 
+		If UCase(CheckResponse) = UCase("CAME") Or UCase(CheckResponse) = UCase("I CAME") Then
+			If CameGoto = True Then
+				CameGoto = False
+				WaitTimer.Stop()
+				If TimeoutTimer.Enabled = True Then
+					TimeoutTimer.Stop()
+					YesOrNo = False
+					InputFlag = False
+				End If
+				FileGoto = CameGotoLine
+				SkipGotoLine = True
+				GetGoto()
+				Return
+			End If
+			If CameVideo = True Then
+				CameVideo = False
+				TeaseVideo = False
+				VideoTimer.Stop()
+				DomWMP.Visible = False
+				DomWMP.Ctlcontrols.stop()
+				mainPictureBox.Visible = True
+				FileGoto = CameGotoLine
+				SkipGotoLine = True
+				GetGoto()
+				Return
+			End If
+		End If
+
+
+		If UCase(CheckResponse) = UCase("RUINED") Or UCase(CheckResponse) = UCase("I RUINED") Or UCase(CheckResponse) = UCase("RUINED IT") Or UCase(CheckResponse) = UCase("I RUINED IT") Then
+			If RuinedGoto = True Then
+				RuinedGoto = False
+				WaitTimer.Stop()
+				If TimeoutTimer.Enabled = True Then
+					TimeoutTimer.Stop()
+					YesOrNo = False
+					InputFlag = False
+				End If
+				FileGoto = RuinedGotoLine
+				SkipGotoLine = True
+				GetGoto()
+				Return
+			End If
+			If RuinedVideo = True Then
+				RuinedVideo = False
+				TeaseVideo = False
+				VideoTimer.Stop()
+				DomWMP.Visible = False
+				DomWMP.Ctlcontrols.stop()
+				mainPictureBox.Visible = True
+				FileGoto = RuinedGotoLine
+				SkipGotoLine = True
+				GetGoto()
+				Return
+			End If
+		End If
+
+		
+
+
 		ResponseFile = ""
+
+		Dim YesSplit As String = FrmSettings.TBYes.Text
+
+		Do
+			YesSplit = YesSplit.Replace("  ", " ")
+			YesSplit = YesSplit.Replace(" ,", ",")
+			YesSplit = YesSplit.Replace(", ", ",")
+			YesSplit = YesSplit.Replace("'", "")
+		Loop Until Not YesSplit.Contains("  ") And Not YesSplit.Contains(", ") And Not YesSplit.Contains(" ,") And Not YesSplit.Contains("'")
+
+		If YesGoto = True Then
+			Dim SplitParts As String() = YesSplit.Split(New Char() {","c})
+			For i As Integer = 0 To SplitParts.Count - 1
+				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
+					YesGoto = False
+					WaitTimer.Stop()
+					If TimeoutTimer.Enabled = True Then
+						TimeoutTimer.Stop()
+						YesOrNo = False
+						InputFlag = False
+					End If
+					FileGoto = YesGotoLine
+					SkipGotoLine = True
+					GetGoto()
+				End If
+			Next
+			If YesGoto = False Then Return
+		End If
+
+		If YesVideo = True Then
+			Dim SplitParts As String() = YesSplit.Split(New Char() {","c})
+			For i As Integer = 0 To SplitParts.Count - 1
+				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
+					YesVideo = False
+					TeaseVideo = False
+					VideoTimer.Stop()
+					DomWMP.Visible = False
+					DomWMP.Ctlcontrols.stop()
+					mainPictureBox.Visible = True
+					FileGoto = YesGotoLine
+					SkipGotoLine = True
+					GetGoto()
+				End If
+			Next
+			If YesVideo = False Then Return
+		End If
 
 		If ResponseYes <> "" And File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponseYes & ".txt") Then
 
-			Dim YesSplit As String = FrmSettings.TBYes.Text
+			'Dim YesSplit As String = FrmSettings.TBYes.Text
 
-			Do
-				YesSplit = YesSplit.Replace("  ", " ")
-				YesSplit = YesSplit.Replace(" ,", ",")
-				YesSplit = YesSplit.Replace(", ", ",")
-				YesSplit = YesSplit.Replace("'", "")
-			Loop Until Not YesSplit.Contains("  ") And Not YesSplit.Contains(", ") And Not YesSplit.Contains(" ,") And Not YesSplit.Contains("'")
+			'Do
+			'YesSplit = YesSplit.Replace("  ", " ")
+			'YesSplit = YesSplit.Replace(" ,", ",")
+			'YesSplit = YesSplit.Replace(", ", ",")
+			'YesSplit = YesSplit.Replace("'", "")
+			'Loop Until Not YesSplit.Contains("  ") And Not YesSplit.Contains(", ") And Not YesSplit.Contains(" ,") And Not YesSplit.Contains("'")
 
 			Dim SplitParts As String() = YesSplit.Split(New Char() {","c})
 
@@ -3260,16 +3403,53 @@ EdgeSkip:
 			Next
 		End If
 
+		Dim NoSplit As String = FrmSettings.TBNo.Text
+
+		Do
+			NoSplit = NoSplit.Replace("  ", " ")
+			NoSplit = NoSplit.Replace(" ,", ",")
+			NoSplit = NoSplit.Replace(", ", ",")
+			NoSplit = NoSplit.Replace("'", "")
+		Loop Until Not NoSplit.Contains("  ") And Not NoSplit.Contains(", ") And Not NoSplit.Contains(" ,") And Not NoSplit.Contains("'")
+
+		If NoGoto = True Then
+			Dim SplitParts As String() = NoSplit.Split(New Char() {","c})
+			For i As Integer = 0 To SplitParts.Count - 1
+				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
+					NoGoto = False
+					WaitTimer.Stop()
+					If TimeoutTimer.Enabled = True Then
+						TimeoutTimer.Stop()
+						YesOrNo = False
+						InputFlag = False
+					End If
+					FileGoto = NoGotoLine
+					SkipGotoLine = True
+					GetGoto()
+				End If
+			Next
+			If NoGoto = False Then Return
+		End If
+
+		If NoVideo_Mode = True Then
+			Dim SplitParts As String() = NoSplit.Split(New Char() {","c})
+			For i As Integer = 0 To SplitParts.Count - 1
+				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
+					NoVideo_Mode = False
+					TeaseVideo = False
+					VideoTimer.Stop()
+					DomWMP.Visible = False
+					DomWMP.Ctlcontrols.stop()
+					mainPictureBox.Visible = True
+					FileGoto = NoGotoLine
+					SkipGotoLine = True
+					GetGoto()
+				End If
+			Next
+			If NoVideo_Mode = False Then Return
+		End If
+
 		If ResponseNo <> "" And File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ResponseNo & ".txt") Then
-
-			Dim NoSplit As String = FrmSettings.TBNo.Text
-
-			Do
-				NoSplit = NoSplit.Replace("  ", " ")
-				NoSplit = NoSplit.Replace(" ,", ",")
-				NoSplit = NoSplit.Replace(", ", ",")
-				NoSplit = NoSplit.Replace("'", "")
-			Loop Until Not NoSplit.Contains("  ") And Not NoSplit.Contains(", ") And Not NoSplit.Contains(" ,") And Not NoSplit.Contains("'")
 
 			Dim SplitParts As String() = NoSplit.Split(New Char() {","c})
 
@@ -3284,7 +3464,7 @@ EdgeSkip:
 
 		If BeforeTease = False Then
 			If UCase(CheckResponse).Contains(UCase("I cum")) Or UCase(CheckResponse).Contains(UCase("me cum")) Or UCase(CheckResponse).Contains(UCase("I have an orgasm")) _
-				Or UCase(CheckResponse).Contains(UCase("me have an orgasm")) Then
+			 Or UCase(CheckResponse).Contains(UCase("me have an orgasm")) Then
 				If TeaseTick > 0 Then
 					ResponseFile = (Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\BegToCum.txt")
 					If My.Settings.Chastity = False And OrgasmRestricted = False Then TeaseTick = TeaseTick / 2
@@ -11505,6 +11685,8 @@ ShowedBlogImage:
 				StrokeSlowest = True
 			End If
 
+			ClearModes()
+
 			If FrmSettings.CBTauntCycleDD.Checked = True Then
 				If FrmSettings.domlevelNumBox.Value = 1 Then StrokeTick = randomizer.Next(1, 3) * 60
 				If FrmSettings.domlevelNumBox.Value = 2 Then StrokeTick = randomizer.Next(1, 4) * 60
@@ -11550,6 +11732,9 @@ ShowedBlogImage:
 			' github patch StrokePace = 0
 			' github patch StrokePaceTimer.Interval = StrokePace
 			StopMetronome = False
+
+			ClearModes()
+
 			If FrmSettings.CBTauntCycleDD.Checked = True Then
 				If FrmSettings.domlevelNumBox.Value = 1 Then StrokeTick = randomizer.Next(1, 3) * 60
 				If FrmSettings.domlevelNumBox.Value = 2 Then StrokeTick = randomizer.Next(1, 4) * 60
@@ -15482,6 +15667,119 @@ VTSkip:
 		End If
 
 
+		If StringClean.Contains("@YesMode(") Then
+
+			Dim YesFlag As String = GetParentheses(StringClean, "@YesMode(")
+			YesFlag = FixCommas(YesFlag)
+			Dim YesArray As String() = YesFlag.Split(",")
+
+			If UCase(YesArray(0)).Contains("GOTO") Then
+				YesGoto = True
+				YesGotoLine = YesArray(1)
+			End If
+
+			If UCase(YesArray(0)).Contains("VIDEO") Then
+				YesVideo = True
+				YesGotoLine = YesArray(1)
+			End If
+
+			If UCase(YesArray(0)).Contains("NORMAL") Then
+				YesGoto = False
+				YesVideo = False
+			End If
+
+			StringClean = StringClean.Replace("@YesMode(" & GetParentheses(StringClean, "@YesMode(") & ")", "")
+		End If
+
+		If StringClean.Contains("@NoMode(") Then
+
+			Dim NoFlag As String = GetParentheses(StringClean, "@NoMode(")
+			NoFlag = FixCommas(NoFlag)
+			Dim NoArray As String() = NoFlag.Split(",")
+
+			If UCase(NoArray(0)).Contains("GOTO") Then
+				NoGoto = True
+				NoGotoLine = NoArray(1)
+			End If
+
+			If UCase(NoArray(0)).Contains("VIDEO") Then
+				NoVideo_Mode = True
+				NoGotoLine = NoArray(1)
+			End If
+
+			If UCase(NoArray(0)).Contains("NORMAL") Then
+				NoGoto = False
+				NoVideo_Mode = False
+			End If
+
+			StringClean = StringClean.Replace("@NoMode(" & GetParentheses(StringClean, "@NoMode(") & ")", "")
+		End If
+
+		If StringClean.Contains("@CameMode(") Then
+
+			Dim CameFlag As String = GetParentheses(StringClean, "@CameMode(")
+			CameFlag = FixCommas(CameFlag)
+			Dim CameArray As String() = CameFlag.Split(",")
+
+			If UCase(CameArray(0)).Contains("GOTO") Then
+				CameGoto = True
+				CameGotoLine = CameArray(1)
+			End If
+
+			If UCase(CameArray(0)).Contains("MESSAGE") Then
+				CameMessage = True
+				CameMessageText = CameArray(1)
+			End If
+
+			If UCase(CameArray(0)).Contains("VIDEO") Then
+				CameVideo = True
+				CameGotoLine = CameArray(1)
+			End If
+
+			If UCase(CameArray(0)).Contains("NORMAL") Then
+				CameGoto = False
+				CameMessage = False
+				CameVideo = False
+			End If
+
+			StringClean = StringClean.Replace("@CameMode(" & GetParentheses(StringClean, "@CameMode(") & ")", "")
+		End If
+
+		If StringClean.Contains("@RuinedMode(") Then
+
+			Dim RuinedFlag As String = GetParentheses(StringClean, "@RuinedMode(")
+			RuinedFlag = FixCommas(RuinedFlag)
+			Dim RuinedArray As String() = RuinedFlag.Split(",")
+
+			If UCase(RuinedArray(0)).Contains("GOTO") Then
+				RuinedGoto = True
+				RuinedGotoLine = RuinedArray(1)
+			End If
+
+			If UCase(RuinedArray(0)).Contains("MESSAGE") Then
+				RuinedMessage = True
+				RuinedMessageText = RuinedArray(1)
+			End If
+
+			If UCase(RuinedArray(0)).Contains("VIDEO") Then
+				RuinedVideo = True
+				RuinedGotoLine = RuinedArray(1)
+			End If
+
+			If UCase(RuinedArray(0)).Contains("NORMAL") Then
+				RuinedGoto = False
+				RuinedMessage = False
+				RuinedVideo = False
+			End If
+
+			StringClean = StringClean.Replace("@RuinedMode(" & GetParentheses(StringClean, "@RuinedMode(") & ")", "")
+		End If
+
+		If StringClean.Contains("@ClearModes") Then
+			ClearModes()
+			StringClean = StringClean.Replace("@ClearModes", "")
+		End If
+		
 
 		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", CurrentImage)
 
@@ -21732,6 +22030,7 @@ NoPlaylistModuleFile:
 
 		Debug.Print("RunLinkScript() Called")
 
+		ClearModes()
 
 		If PlaylistFile.Count = 0 Then GoTo NoPlaylistLinkFile
 
@@ -21867,6 +22166,8 @@ NoPlaylistLinkFile:
 
 	Public Sub RunLastScript()
 
+		ClearModes()
+
 		'My.Settings.Sys_SubLeftEarly = 0
 
 		'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_SubLeftEarly", "0", False)
@@ -21973,6 +22274,8 @@ NoPlaylistEndFile:
 
 	Public Sub RunLastBegScript()
 
+		ClearModes()
+
 		'Debug.Print("RunLastBegScript() Called")
 		Dim EndList As New List(Of String)
 		EndList.Clear()
@@ -22058,6 +22361,9 @@ NoPlaylistEndFile:
 		ExtremeHold = False
 
 		MiniScript = False
+
+		ClearModes()
+
 
 		If FrmSettings.TBWebStop.Text <> "" Then
 			Try
@@ -23565,6 +23871,14 @@ TryNext:
 			'Debug.Print("WMP Stopped Called")
 
 			VideoTimer.Stop()
+
+			EdgeVideo = False
+			YesVideo = False
+			NoVideo_Mode = False
+			CameVideo = False
+			RuinedVideo = False
+
+
 
 			DomWMP.currentPlaylist.clear()
 
@@ -30493,15 +30807,11 @@ SkipNew:
 		TextCondition = UCase(TextCondition)
 		Debug.Print("TextCondition = " & TextCondition)
 
-
-		' Cast the Type of the Control to access it's visible TextValue
-		'If ConditionControl Is GetType(NumericUpDown) Then
-		'TextCondition = DirectCast(ConditionControl, NumericUpDown).Value
-		'ElseIf ConditionControl Is GetType(ComboBox) Then
-		'TextCondition = DirectCast(ConditionControl, ComboBox).Text
-		'Else
-		'Throw New Exception("Type of control not implemented in Function.")
-		'End If
+		If TextCondition = "ALWAYS ALLOWS" Or TextCondition = "ALWAYS RUINS" Then TextCondition = "ALWAYS"
+		If TextCondition = "OFTEN ALLOWS" Or TextCondition = "OFTEN RUINS" Then TextCondition = "OFTEN"
+		If TextCondition = "SOMETIMES ALLOWS" Or TextCondition = "SOMETIMES RUINS" Then TextCondition = "SOMETIMES"
+		If TextCondition = "RARELY ALLOWS" Or TextCondition = "RARELY RUINS" Then TextCondition = "RARELY"
+		If TextCondition = "NEVER ALLOWS" Or TextCondition = "NEVER RUINS" Then TextCondition = "NEVER"
 
 
 		Input = UCase(Input)
@@ -30529,6 +30839,22 @@ SkipNew:
 
 	End Function
 
+	Public Sub ClearModes()
 
+		EdgeGoto = False
+		YesGoto = False
+		NoGoto = False
+		CameGoto = False
+		RuinedGoto = False
+		EdgeVideo = False
+		YesVideo = False
+		NoVideo_Mode = False
+		CameVideo = False
+		RuinedVideo = False
+		EdgeMessage = False
+		CameMessage = False
+		RuinedMessage = False
+
+	End Sub
 
 End Class
