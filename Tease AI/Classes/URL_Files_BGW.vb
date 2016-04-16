@@ -147,10 +147,9 @@ System.ComponentModel.Description("Determines the Target Directory of the URL-Fi
 					_ImageURLFileDir = value
 				Else
 					Try
+						' check if Folder Exists, if Not Create it
 						If Not Directory.Exists(Path.GetDirectoryName(value)) Then _
 							Directory.CreateDirectory(Path.GetDirectoryName(value))
-
-						If Not File.Exists(value) Then File.CreateText(value)
 
 						_ImageURLFileDir = value
 					Catch ex As Exception
