@@ -4,7 +4,119 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 51
 
+@RandomText() Can now be used multiple times per line
+
+Added @YesMode() Command - 
+
+     @YesMode() allows you perform a specific action if the user enters one of their "Yes" words while YesMode is active. There are two ways to use @YesMode()
+	 
+	 @YesMode(Goto, GotoLine)
+	 @YesMode(Video, GotoLine)
+	 
+	 Goto mode will go to the specified GotoLine if the user enters a Yes phrase
+	 Video mode will stop a currently playing video if the user enters a Yes phrase and go to the specified GotoLine. If the video ends or is stopped first, the Video mode will be cleared and the script will move to the next line as usual
+
+	 You can clear YesMode with @YesMode(Normal)  
+
+Added @NoMode() Command - 
+
+     @YesMode() allows you perform a specific action if the user enters one of their "No" words while YesMode is active. There are two ways to use @NoMode()
+	 
+	 @NoMode(Goto, GotoLine)
+	 @NoMode(Video, GotoLine)
+	 
+	 Goto mode will go to the specified GotoLine if the user enters a No phrase
+	 Video mode will stop a currently playing video if the user enters a No phrase and go to the specified GotoLine. If the video ends or is stopped first, the Video mode will be cleared and the script will move to the next line as usual
+
+	 You can clear NoMode with @NoMode(Normal)  
+	 
+Added @CameMode() Command - 
+
+     @CameMode() allows you perform a specific action if the user says one of the exact following expressions while CameMode is active: "Came", "I Came", "Just Came" or "I just came". Case doesn't matter, but Came mode will only pick up those four exact phrases. So "I just came" would activate it, "But I just came yesterday" would not. There are three ways to use @CameMode()
+	 
+	 @CameMode(Goto, GotoLine)
+	 @CameMode(Video, GotoLine)
+	 @CameMode(Message, MessageText)
+	 
+	 Goto mode will go to the specified GotoLine if the user enters one of the above phrases
+	 Video mode will stop a currently playing video if the user enters one of the above phrases and go to the specified GotoLine. If the video ends or is stopped first, the Video mode will be cleared and the script will move to the next line as usual
+	 Message mode will have the program process one of the above "I came" phrases as whatever text is specified as MessageText
+
+	 You can clear CameMode with @CameMode(Normal)  	
+
+Added @RuinedMode() Command - 
+
+     @RuinedMode() allows you perform a specific action if the user says one of the exact following expressions while RuinedMode is active: "Ruined", "I Ruined", "Ruined it" or "I ruined it". Case doesn't matter, but Ruined mode will only pick up those four exact phrases. So "I ruined" would activate it, "I think I ruined my carpet" would not. There are three ways to use @RuinedMode()
+	 
+	 @RuinedMode(Goto, GotoLine)
+	 @RuinedMode(Video, GotoLine)
+	 @RuinedMode(Message, MessageText)
+	 
+	 Goto mode will go to the specified GotoLine if the user enters one of the above phrases
+	 Video mode will stop a currently playing video if the user enters one of the above phrases and go to the specified GotoLine. If the video ends or is stopped first, the Video mode will be cleared and the script will move to the next line as usual
+	 Message mode will have the program process one of the above "Ruined" phrases as whatever text is specified as MessageText
+
+	 You can clear RuinedMode with @RuinedMode(Normal)  	 
+
+Added Offline Mode to System States settings in the Misc tab. If you're using Tease AI without an internet connection, Offline Mode will automatically convert @ShowBlogImage Commands to @ShowLocalImage, as well as removing @ShowButtImage and @ShowBoobsImage Commands if they are set to URL Files. Toggling Tease AI to Offline Mode when you have no connectivity will help mitigate delays and crashes.
+	
+
+Fixed problems with @MultipleEdges() Command. I had  a couple of typos in the @MultipleEdges() Command Clean that was screwing up the whole thing. The scripts were also still progressing after each edge when they should not have been. Should be fixed now. Metronome should now react correctly to each edge as well
+
+Fixed bug where wildcards were not returning correct file counts when using @PlayAudio[] or @PlayVideo[]
+
+@ShowImage[] should now work with "\" or "/"
+
+Added @Cup() Command Filter - will only display a line if the domme's cup size matches what's in parentheses. You may enter as many cup options as you want. You may also use "Not" as a modifier. For example:
+
+	@Cup(C) - Will only display if the domme is a C cup
+	@Cup(A, B) - Will only display if the domme is an A or B cup
+	@Cup(Not, A) - Will only display if the domme is not an A Cup
+	@Cup(DD, DDD+, Not) - Will only display if the domme is not a DD or DDD+ cup
+	
+	@Cup() replaces the Command Filters @ACup, @BCup, @CCup, @DCup, @DDCup and @DDD+Cup. These are now legacy commands which will continue to function. 
+
+	
+Added @AllowsOrgasm() Command Filter - will only display a line if the domme's "Allows Orgasms" settings matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@AllowsOrgasm(Never) - Will only display if the domme never allows orgasm
+	@AllowsOrgasm(Often, Sometimes) - Will only display if the domme often or sometimes allows orgasm
+	@AllowsOrgasm(Not, Always) - Will only display if the domme does not always allow orgasm
+	@AllowsOrgasm(Always, Never, Not) - Will only display if the domme does not always allow orgasm and does not never allow orgasm
+	
+	@AllowsOrgasm() replaces the Command Filters @AlwaysAllowsOrgasm, @OftenAllowsOrgasm, @SometimesAllowsOrgasm, @RarelyAllowsOrgasm, @NeverAllowsOrgasm, @NotAlwaysAllowsOrgasm and @NotNeverAllowsOrgasm. These are now legacy commands which will continue to function.	
+	
+	
+Added @RuinsOrgasm() Command Filter - will only display a line if the domme's "Ruins Orgasms" settings matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@RuinsOrgasm(Never) - Will only display if the domme never ruins orgasm
+	@RuinsOrgasm(Often, Sometimes) - Will only display if the domme often or sometimes ruins orgasm
+	@RuinsOrgasm(Not, Always) - Will only display if the domme does not always ruin orgasms
+	@RuinsOrgasm(Always, Never, Not) - Will only display if the domme does not always ruin orgasms and does not never ruin orgasms
+	
+	@RuinsOrgasm() replaces the Command Filters @AlwaysRuinsOrgasm, @OftenRuinsOrgasm, @SometimesRuinsOrgasm, @RarelyRuinsOrgasm, @NeverRuinsOrgasm, @NotAlwaysRuinsOrgasm and @NotNeverRuinsOrgasm. These are now legacy commands which will continue to function.		
+	
+Added @DommeLevel() Command Filter - will only display a line if the domme's Level matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@DommeLevel(5) - Will only display if the domme's Level is 5
+	@DommeLevel(4, 5) - Will only display if the domme's Level is 4 or 5
+	@DommeLevel(Not, 1) - Will only display if the domme's Level is not 1
+	@DommeLevel(1, 2, Not) - Will only display if the domme's Level is not 1 or 2
+	
+	@DommeLevel() replaces the Command Filters @DommeLevel1, @DommeLevel2, @DommeLevel3, @DommeLevel4 and @DommeLevel5. These are now legacy commands which will continue to function.	
+
+Added @ApathyLevel() Command Filter - will only display a line if the domme's Level matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@ApathyLevel(5) - Will only display if the domme's Apathy is 5
+	@ApathyLevel(4, 5) - Will only display if the domme's Apathy is 4 or 5
+	@ApathyLevel(Not, 1) - Will only display if the domme's Apathy is not 1
+	@ApathyLevel(1, 2, Not) - Will only display if the domme's Apathy is not 1 or 2
+	
+	@ApathyLevel() replaces the Command Filters @ApathyLevel1, @ApathyLevel2, @ApathyLevel3, @ApathyLevel4 and @ApathyLevel5. These are now legacy commands which will continue to function.	
+	
 Fixes added from Community Members:
+
+
 
 	Stefaf: Settings window no longer appears on startup
 	
@@ -16,7 +128,8 @@ Fixes added from Community Members:
          - Removed redundant Code.
          - If you review and download images, the image was downloaded twice.
          - The Blog-XML was downloaded with XML-Doc. After you scraped an URL, you sometimes couldn't scrape it again.
-         - Deadlinks were imported again.
+         - Deadlinks were imported again. Now Deadlinks will be removed if you open a blog with Review and on rebuilding, 
+        	as long you don't cancel it. Refresh URL-File imports only new Images.
          - Adding an URL to DislikeList was only writing to file, so a disliked URL could get into File, if a blog contains it twice.
 
      Stefaf: @DommeTag() Overhaul 
@@ -25,6 +138,8 @@ Fixes added from Community Members:
 
          You want to show a butt without feet, you can enter "Ass, NotFeet".
          You want to show a closeup face without boobs: "Face, NotBoobs, Closeup"
+         This Function will return in 99% of all cases the nearest result for the given Tags. :D
+         Of course you must set up your DommeTags properly.
 
          If there is no image found for the specified Tags, the Tags will be altered and searched again:
 
@@ -45,6 +160,10 @@ Fixes added from Community Members:
 	Stefaf: Bugfix StackOverflowException
 		Added functionallity to prevent Timers from triggering oneself over and over again, while the TickEventHandler is running long procedures. 
 		 
+	pepsifreak: Default mute setting to false, player now updates with the setting  
+	     
+		I feel it should be off by default, and since audio doesn't display the
+        player, there needed to be an easy way to unmute
 		 
 # Changelog - Patch 50
 

@@ -719,6 +719,15 @@ Public Class FrmSettings
 		LBLVVolume.Text = SliderVVolume.Value
 		LBLVRate.Text = SliderVRate.Value
 
+		If My.Settings.OfflineMode = False Then
+			LBLOfflineMode.Text = "OFF"
+			LBLOfflineMode.ForeColor = Color.Red
+		Else
+			LBLOfflineMode.Text = "ON"
+			LBLOfflineMode.ForeColor = Color.Green
+		End If
+
+
 		FrmSettingsLoading = False
 
 		Me.Visible = False
@@ -2331,13 +2340,11 @@ trypreviousimage:
 						ElseIf __tmpResult.ErrorText.Capacity > 0
 							MessageBox.Show(Me, "URL Files have been refreshed with errors!" &
 											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added." &
-											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total." &
 											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 						Else
 							MessageBox.Show(Me, "All URL Files have been refreshed!" &
-											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added." &
-											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total.",
+											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added.",
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 						End If
 					Catch
@@ -13564,8 +13571,26 @@ WhyUMakeMeDoDis:
 		If Form1.FormLoading = False Then
 			My.Settings.MuteMedia = CBMuteMedia.Checked
 			My.Settings.Save()
+
+			If CBMuteMedia.Checked Then
+				Form1.DomWMP.settings.mute = True
+			Else
+				Form1.DomWMP.settings.mute = False
+			End If
 		End If
 	End Sub
 
 
+	Private Sub BTNOfflineMode_Click(sender As System.Object, e As System.EventArgs) Handles BTNOfflineMode.Click
+		If My.Settings.OfflineMode = True Then
+			My.Settings.OfflineMode = False
+			LBLOfflineMode.Text = "OFF"
+			LBLOfflineMode.ForeColor = Color.Red
+		Else
+			My.Settings.OfflineMode = True
+			LBLOfflineMode.Text = "ON"
+			LBLOfflineMode.ForeColor = Color.Green
+		End If
+		My.Settings.Save()
+	End Sub
 End Class
