@@ -77,46 +77,46 @@ Partial Class Form1
 		Me.AllFours = New System.Windows.Forms.Button()
 		Me.Piercing = New System.Windows.Forms.Button()
 		Me.subName = New System.Windows.Forms.TextBox()
-		Me.ScriptTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.ScriptTimer = New Tease_AI.teaseAI_Timer()
 		Me.OpenScriptDialog = New System.Windows.Forms.OpenFileDialog()
-		Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-		Me.IsTypingTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.SendTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.Timer1 = New Tease_AI.teaseAI_Timer()
+		Me.IsTypingTimer = New Tease_AI.teaseAI_Timer()
+		Me.SendTimer = New Tease_AI.teaseAI_Timer()
 		Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
 		Me.OpenFileDialog2 = New System.Windows.Forms.OpenFileDialog()
-		Me.StrokeTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.StrokeTauntTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.DelayTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.CensorshipTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.RLGLTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.StrokeTimer = New Tease_AI.teaseAI_Timer()
+		Me.StrokeTauntTimer = New Tease_AI.teaseAI_Timer()
+		Me.DelayTimer = New Tease_AI.teaseAI_Timer()
+		Me.CensorshipTimer = New Tease_AI.teaseAI_Timer()
+		Me.RLGLTimer = New Tease_AI.teaseAI_Timer()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
-		Me.UpdatesTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.UpdatesTimer = New Tease_AI.teaseAI_Timer()
 		Me.GetColor = New System.Windows.Forms.ColorDialog()
 		Me.sendButton = New System.Windows.Forms.Button()
-		Me.AvoidTheEdge = New System.Windows.Forms.Timer(Me.components)
-		Me.AvoidTheEdgeResume = New System.Windows.Forms.Timer(Me.components)
+		Me.AvoidTheEdge = New Tease_AI.teaseAI_Timer()
+		Me.AvoidTheEdgeResume = New Tease_AI.teaseAI_Timer()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
 		Me.WebImageFileDialog = New System.Windows.Forms.OpenFileDialog()
-		Me.StrokePaceTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.EdgeTauntTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.HoldEdgeTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.HoldEdgeTauntTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.StrokePaceTimer = New Tease_AI.teaseAI_Timer()
+		Me.EdgeTauntTimer = New Tease_AI.teaseAI_Timer()
+		Me.HoldEdgeTimer = New Tease_AI.teaseAI_Timer()
+		Me.HoldEdgeTauntTimer = New Tease_AI.teaseAI_Timer()
 		Me.PNLFileTransfer = New System.Windows.Forms.Panel()
 		Me.PictureBox11 = New System.Windows.Forms.PictureBox()
 		Me.BTNFileTransferOpen = New System.Windows.Forms.Button()
 		Me.BTNFIleTransferDismiss = New System.Windows.Forms.Button()
 		Me.LBLFileTransfer = New System.Windows.Forms.Label()
 		Me.PBFileTransfer = New System.Windows.Forms.ProgressBar()
-		Me.SlideshowTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.EdgeCountTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.StrokeTimeTotalTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.TnASlides = New System.Windows.Forms.Timer(Me.components)
-		Me.WaitTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.StupidTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.VideoTauntTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.TeaseTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.RLGLTauntTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.AvoidTheEdgeTaunts = New System.Windows.Forms.Timer(Me.components)
+		Me.SlideshowTimer = New Tease_AI.teaseAI_Timer()
+		Me.EdgeCountTimer = New Tease_AI.teaseAI_Timer()
+		Me.StrokeTimeTotalTimer = New Tease_AI.teaseAI_Timer()
+		Me.TnASlides = New Tease_AI.teaseAI_Timer()
+		Me.WaitTimer = New Tease_AI.teaseAI_Timer()
+		Me.StupidTimer = New Tease_AI.teaseAI_Timer()
+		Me.VideoTauntTimer = New Tease_AI.teaseAI_Timer()
+		Me.TeaseTimer = New Tease_AI.teaseAI_Timer()
+		Me.RLGLTauntTimer = New Tease_AI.teaseAI_Timer()
+		Me.AvoidTheEdgeTaunts = New Tease_AI.teaseAI_Timer()
 		Me.PictureStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
@@ -145,17 +145,17 @@ Partial Class Form1
 		Me.GoToLastImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
 		Me.LoadNewSlideshowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ContactTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.AudibleMetronome = New System.Windows.Forms.Timer(Me.components)
+		Me.ContactTimer = New Tease_AI.teaseAI_Timer()
+		Me.AudibleMetronome = New Tease_AI.teaseAI_Timer()
 		Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
 		Me.BWGlitter = New System.ComponentModel.BackgroundWorker()
-		Me.CustomSlideshowTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.CustomSlideshowTimer = New Tease_AI.teaseAI_Timer()
 		Me.BWSlideshow = New System.ComponentModel.BackgroundWorker()
-		Me.Contact1Timer = New System.Windows.Forms.Timer(Me.components)
-		Me.Contact2Timer = New System.Windows.Forms.Timer(Me.components)
-		Me.Contact3Timer = New System.Windows.Forms.Timer(Me.components)
-		Me.UpdateStageTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.WMPTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.Contact1Timer = New Tease_AI.teaseAI_Timer()
+		Me.Contact2Timer = New Tease_AI.teaseAI_Timer()
+		Me.Contact3Timer = New Tease_AI.teaseAI_Timer()
+		Me.UpdateStageTimer = New Tease_AI.teaseAI_Timer()
+		Me.WMPTimer = New Tease_AI.teaseAI_Timer()
 		Me.TeaseAINotify = New System.Windows.Forms.NotifyIcon(Me.components)
 		Me.TeaseAIMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.GamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -171,12 +171,12 @@ Partial Class Form1
 		Me.AllAndEverythingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripMenuItem7 = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.DommeTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.TeaseAIClock = New System.Windows.Forms.Timer(Me.components)
+		Me.DommeTimer = New Tease_AI.teaseAI_Timer()
+		Me.TeaseAIClock = New Tease_AI.teaseAI_Timer()
 		Me.LBLTime = New System.Windows.Forms.Label()
 		Me.LBLDate = New System.Windows.Forms.Label()
 		Me.LBLAMPM = New System.Windows.Forms.Label()
-		Me.tmrResize = New System.Windows.Forms.Timer(Me.components)
+		Me.tmrResize = New Tease_AI.teaseAI_Timer()
 		Me.MenuStrip2 = New System.Windows.Forms.MenuStrip()
 		Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.PersonalityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -393,10 +393,10 @@ Partial Class Form1
 		Me.Button4 = New System.Windows.Forms.Button()
 		Me.Panel3 = New System.Windows.Forms.Panel()
 		Me.Panel4 = New System.Windows.Forms.Panel()
-		Me.TimeoutTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.TimeoutTimer = New Tease_AI.teaseAI_Timer()
 		Me.Button12 = New System.Windows.Forms.Button()
-		Me.VideoTimer = New System.Windows.Forms.Timer(Me.components)
-		Me.MultipleEdgesTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.VideoTimer = New Tease_AI.teaseAI_Timer()
+		Me.MultipleEdgesTimer = New Tease_AI.teaseAI_Timer()
 		CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -4109,73 +4109,73 @@ Partial Class Form1
 	Friend WithEvents previousButton As System.Windows.Forms.Button
 	Friend WithEvents subName As System.Windows.Forms.TextBox
 	Friend WithEvents ChatText As System.Windows.Forms.WebBrowser
-	Friend WithEvents ScriptTimer As System.Windows.Forms.Timer
+	Friend WithEvents ScriptTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents OpenScriptDialog As System.Windows.Forms.OpenFileDialog
-	Friend WithEvents Timer1 As System.Windows.Forms.Timer
-	Friend WithEvents IsTypingTimer As System.Windows.Forms.Timer
-	Friend WithEvents SendTimer As System.Windows.Forms.Timer
+	Friend WithEvents Timer1 As Tease_AI.teaseAI_Timer
+	Friend WithEvents IsTypingTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents SendTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents FolderBrowserDialog1 As System.Windows.Forms.FolderBrowserDialog
 	Friend WithEvents OpenFileDialog2 As System.Windows.Forms.OpenFileDialog
-	Friend WithEvents StrokeTimer As System.Windows.Forms.Timer
-	Friend WithEvents StrokeTauntTimer As System.Windows.Forms.Timer
-	Friend WithEvents DelayTimer As System.Windows.Forms.Timer
+	Friend WithEvents StrokeTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents StrokeTauntTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents DelayTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents SettingsButton As System.Windows.Forms.Button
 	Friend WithEvents CensorshipBar As System.Windows.Forms.Panel
-	Friend WithEvents CensorshipTimer As System.Windows.Forms.Timer
-	Friend WithEvents RLGLTimer As System.Windows.Forms.Timer
+	Friend WithEvents CensorshipTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents RLGLTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
 	Friend WithEvents BTNLoadVideo As System.Windows.Forms.Button
 	Friend WithEvents BTNVideoControls As System.Windows.Forms.Button
-	Friend WithEvents UpdatesTimer As System.Windows.Forms.Timer
+	Friend WithEvents UpdatesTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents GetColor As System.Windows.Forms.ColorDialog
 	Friend WithEvents MediaButton As System.Windows.Forms.Button
 	Friend WithEvents sendButton As System.Windows.Forms.Button
-	Friend WithEvents AvoidTheEdge As System.Windows.Forms.Timer
-	Friend WithEvents AvoidTheEdgeResume As System.Windows.Forms.Timer
+	Friend WithEvents AvoidTheEdge As Tease_AI.teaseAI_Timer
+	Friend WithEvents AvoidTheEdgeResume As Tease_AI.teaseAI_Timer
 	Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
 	Friend WithEvents SaveBlogImage As System.Windows.Forms.Button
 	Friend WithEvents WebImageFileDialog As System.Windows.Forms.OpenFileDialog
-	Friend WithEvents StrokePaceTimer As System.Windows.Forms.Timer
-	Friend WithEvents EdgeTauntTimer As System.Windows.Forms.Timer
-	Friend WithEvents HoldEdgeTimer As System.Windows.Forms.Timer
-	Friend WithEvents HoldEdgeTauntTimer As System.Windows.Forms.Timer
+	Friend WithEvents StrokePaceTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents EdgeTauntTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents HoldEdgeTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents HoldEdgeTauntTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents PNLFileTransfer As System.Windows.Forms.Panel
 	Friend WithEvents LBLFileTransfer As System.Windows.Forms.Label
 	Friend WithEvents PBFileTransfer As System.Windows.Forms.ProgressBar
 	Friend WithEvents PictureBox11 As System.Windows.Forms.PictureBox
 	Friend WithEvents BTNFileTransferOpen As System.Windows.Forms.Button
 	Friend WithEvents BTNFIleTransferDismiss As System.Windows.Forms.Button
-	Friend WithEvents SlideshowTimer As System.Windows.Forms.Timer
-	Friend WithEvents EdgeCountTimer As System.Windows.Forms.Timer
-	Friend WithEvents StrokeTimeTotalTimer As System.Windows.Forms.Timer
-	Friend WithEvents TnASlides As System.Windows.Forms.Timer
+	Friend WithEvents SlideshowTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents EdgeCountTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents StrokeTimeTotalTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents TnASlides As Tease_AI.teaseAI_Timer
 	Friend WithEvents ImageFolderComboBox As System.Windows.Forms.ComboBox
 	Friend WithEvents LBLImageInfo As System.Windows.Forms.Label
 	Friend WithEvents DomWMP As AxWMPLib.AxWindowsMediaPlayer
-	Friend WithEvents WaitTimer As System.Windows.Forms.Timer
-	Friend WithEvents StupidTimer As System.Windows.Forms.Timer
-	Friend WithEvents VideoTauntTimer As System.Windows.Forms.Timer
-	Friend WithEvents TeaseTimer As System.Windows.Forms.Timer
-	Friend WithEvents RLGLTauntTimer As System.Windows.Forms.Timer
-	Friend WithEvents AvoidTheEdgeTaunts As System.Windows.Forms.Timer
+	Friend WithEvents WaitTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents StupidTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents VideoTauntTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents TeaseTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents RLGLTauntTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents AvoidTheEdgeTaunts As Tease_AI.teaseAI_Timer
 	Friend WithEvents PNLChatBox As System.Windows.Forms.Panel
 	Friend WithEvents PictureStrip As System.Windows.Forms.ContextMenuStrip
 	Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents ContactTimer As System.Windows.Forms.Timer
-	Friend WithEvents AudibleMetronome As System.Windows.Forms.Timer
+	Friend WithEvents ContactTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents AudibleMetronome As Tease_AI.teaseAI_Timer
 	Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
 	Friend WithEvents BWGlitter As System.ComponentModel.BackgroundWorker
 	Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents CustomSlideshowTimer As System.Windows.Forms.Timer
+	Friend WithEvents CustomSlideshowTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents BWSlideshow As System.ComponentModel.BackgroundWorker
-	Friend WithEvents Contact1Timer As System.Windows.Forms.Timer
-	Friend WithEvents Contact2Timer As System.Windows.Forms.Timer
-	Friend WithEvents Contact3Timer As System.Windows.Forms.Timer
-	Friend WithEvents UpdateStageTimer As System.Windows.Forms.Timer
-	Friend WithEvents WMPTimer As System.Windows.Forms.Timer
+	Friend WithEvents Contact1Timer As Tease_AI.teaseAI_Timer
+	Friend WithEvents Contact2Timer As Tease_AI.teaseAI_Timer
+	Friend WithEvents Contact3Timer As Tease_AI.teaseAI_Timer
+	Friend WithEvents UpdateStageTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents WMPTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents TeaseAINotify As System.Windows.Forms.NotifyIcon
 	Friend WithEvents TeaseAIMenu As System.Windows.Forms.ContextMenuStrip
 	Friend WithEvents GamesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -4191,14 +4191,14 @@ Partial Class Form1
 	Friend WithEvents BugReportThreadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents WebteasesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents AllAndEverythingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents DommeTimer As System.Windows.Forms.Timer
+	Friend WithEvents DommeTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents PNLMediaBar As System.Windows.Forms.Panel
 	Friend WithEvents PNLHope As System.Windows.Forms.Panel
-	Friend WithEvents TeaseAIClock As System.Windows.Forms.Timer
+	Friend WithEvents TeaseAIClock As Tease_AI.teaseAI_Timer
 	Friend WithEvents LBLTime As System.Windows.Forms.Label
 	Friend WithEvents LBLDate As System.Windows.Forms.Label
 	Friend WithEvents LBLAMPM As System.Windows.Forms.Label
-	Friend WithEvents tmrResize As System.Windows.Forms.Timer
+	Friend WithEvents tmrResize As Tease_AI.teaseAI_Timer
 	Friend WithEvents MenuStrip2 As System.Windows.Forms.MenuStrip
 	Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents AppsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
@@ -4420,7 +4420,7 @@ Partial Class Form1
 	Friend WithEvents GeneralToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents BoobsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ButtsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents TimeoutTimer As System.Windows.Forms.Timer
+	Friend WithEvents TimeoutTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents PNLLazySub2 As System.Windows.Forms.Panel
 	Friend WithEvents BTNLS1 As System.Windows.Forms.Button
 	Friend WithEvents BTNLS1Edit As System.Windows.Forms.Button
@@ -4470,7 +4470,7 @@ Partial Class Form1
 	Friend WithEvents ToolStripSeparator13 As System.Windows.Forms.ToolStripSeparator
 	Friend WithEvents RefreshRandomizerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents Button12 As System.Windows.Forms.Button
-	Friend WithEvents VideoTimer As System.Windows.Forms.Timer
-	Friend WithEvents MultipleEdgesTimer As System.Windows.Forms.Timer
+	Friend WithEvents VideoTimer As Tease_AI.teaseAI_Timer
+	Friend WithEvents MultipleEdgesTimer As Tease_AI.teaseAI_Timer
 
 End Class
