@@ -183,9 +183,6 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Dislikelist.
 						If Not Directory.Exists(Path.GetDirectoryName(value)) Then _
 							Directory.CreateDirectory(Path.GetDirectoryName(value))
 
-						' Check if File exits, otherweise Create it.
-						If Not File.Exists(value) Then File.Create(value).Dispose()
-
 						_DislikeListPath = value
 					Catch ex As Exception
 						Throw
@@ -216,9 +213,6 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 						' check if Folder Exists, if Not Create it
 						If Not Directory.Exists(Path.GetDirectoryName(value)) Then _
 							Directory.CreateDirectory(Path.GetDirectoryName(value))
-
-						' Check if File exits, otherweise Create it.
-						If Not File.Exists(value) Then File.Create(value).Dispose()
 
 						_LikeListPath = value
 					Catch ex As Exception
