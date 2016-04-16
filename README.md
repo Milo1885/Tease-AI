@@ -42,6 +42,8 @@ Fixes added from Community Members:
 
          Before each step there is a check, if it could alter the result. If it won't the Step is skipped.
 
+	Stefaf: Bugfix StackOverflowException
+		Added functionallity to prevent Timers from triggering oneself over and over again, while the TickEventHandler is running long procedures. 
 		 
 		 
 # Changelog - Patch 50
