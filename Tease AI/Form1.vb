@@ -9610,11 +9610,32 @@ StatusUpdateEnd:
 	Public Function SysKeywordClean(ByVal StringClean As String) As String
 
 		If StringClean.Contains("@RandomText(") Then
-			Dim TempText As String = GetParentheses(StringClean, "@RandomText(")
-			TempText = FixCommas(TempText)
-			Dim TextArray As String() = TempText.Split(",")
-			TempText = TextArray(randomizer.Next(0, TextArray.Count))
-			StringClean = StringClean.Replace("@RandomText(" & GetParentheses(StringClean, "@RandomText(") & ")", TempText)
+
+
+
+			Dim RandArray As String() = StringClean.Split(")")
+
+			For i As Integer = 0 To RandArray.Count - 1
+
+				If RandArray(i).Contains("@RandomText(") Then
+
+					RandArray(i) = RandArray(i) & ")"
+
+					Dim TempText As String = GetParentheses(RandArray(i), "@RandomText(")
+					Dim OriginalRand As String = TempText
+
+					If TempText.Contains(",") Then
+						TempText = FixCommas(TempText)
+						Dim TextArray As String() = TempText.Split(",")
+						TempText = TextArray(randomizer.Next(0, TextArray.Count))
+					End If
+
+					StringClean = StringClean.Replace("@RandomText(" & OriginalRand & ")", TempText)
+
+				End If
+
+			Next
+
 		End If
 
 

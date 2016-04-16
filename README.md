@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 51
 
+@RandomText() Can now be used multiple times per line
+
 Added @YesMode() Command - 
 
      @YesMode() allows you perform a specific action if the user enters one of their "Yes" words while YesMode is active. There are two ways to use @YesMode()
