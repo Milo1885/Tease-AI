@@ -4,6 +4,29 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Added @Month() Command Filter - will only display a line if the current month (represented by a number) matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@Month(11) - Will only display if the current month is November
+	@Month(6, 7, 8) - Will only display if the current month is June, July or August
+	@Month(Not, 4) - Will only display if the current month is not April
+	@Month(4, 5, Not) - Will only display if the current month is not April or May
+	
+Added @Day() Command Filter - will only display a line if the current day of the month(1-31) matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
+
+	@Day(15) - Will only display if it is he 15th
+	@Day(1, 2, 3) - Will only display if it is the 1st, 2nd, or 3rd
+	@Day(Not, 31) - Will only display if it is not the 31st
+	@Day(1, 2, Not) - Will only display if it is not the 1st or 2nd
+	
+	
+Together, @Month() and @Day() replace the Command Filters for @ValentinesDay, @ChristmasEve, @ChristmasDay, @NewYearsEve and @NewYearsDay (THese are now legacy Commands and will continue to function). Combining @MOnth() and @Day() allows you to accommodate any event without the need for a specific Command Filter for each one. For example
+
+     @Month(12) @Day(25) Merry Christmas!
+     @Month(10) @Day(31) Happy Halloween!
+     @Month(5) @Day(4) May the Fourth be with you!
+     @Crazy @Month(7) @Day(20) Did you know this is the anniversary of when they faked the moon landing? O.o @PlayAudio[X-Files_Theme.mp3]
+
+
 Fixed bug that was making Taunt Cycles last slightly longer than they should have
 
 Note - Here's the AI Box to go with the Edging Ends Taunts feature I just added:

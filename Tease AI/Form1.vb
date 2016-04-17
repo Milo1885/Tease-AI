@@ -30991,9 +30991,27 @@ SkipNew:
 
 			Dim CommandArray As String() = CommandFlag.Split(",")
 
+			Dim NotFlag As Boolean = False
+
 			For i As Integer = 0 To CommandArray.Count - 1
-				If CommandArray(i) = Match Then Return True
+				If CommandArray(i).ToUpper = "NOT" Then NotFlag = True
 			Next
+
+			If NotFlag = True Then
+
+				For i As Integer = 0 To CommandArray.Count - 1
+					If CommandArray(i) = Match Then Return False
+				Next
+
+				Return True
+
+			Else
+
+				For i As Integer = 0 To CommandArray.Count - 1
+					If CommandArray(i) = Match Then Return True
+				Next
+
+			End If
 
 		Else
 
