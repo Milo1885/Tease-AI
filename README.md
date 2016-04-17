@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Lines with @FollowUpXX() should now display correctly
+
 Fixed bug where @ShowBoobsImage would return a butt image
 
 The program no longer displays a messagebox when a #Keyword cannot be located. Now the #Keyword is highlighted in red in the chat window without any interruptions

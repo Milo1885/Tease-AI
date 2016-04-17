@@ -15555,7 +15555,7 @@ VTSkip:
 
 			If TempVal <= FollowVal Then FollowUp = GetParentheses(StringClean, "@FollowUp" & FollowVal & "(")
 
-			StringClean = StringClean.Replace("@FollowUp" & FollowVal & "(" & GetParentheses(StringClean, "@FollowUp(" & FollowVal & "(") & ")", "")
+			StringClean = StringClean.Replace("@FollowUp" & FollowVal & "(" & FollowUp & ")", "")
 
 		End If
 
