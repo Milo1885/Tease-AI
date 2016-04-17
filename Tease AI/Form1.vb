@@ -6006,7 +6006,15 @@ TryNextWithTease:
 
 							FileCount += 1
 							If FileCount > FileCountMax Then
-								FileCount = FileCountMax
+								If FrmSettings.CBNewSlideshow.Checked = True Then
+									NewDommeSlideshow = True
+									OriginalDommeSlideshow = _ImageFileNames(0)
+									LoadDommeImageFolder()
+									NewDommeSlideshow = False
+									DomPic = _ImageFileNames(FileCount)
+								Else
+									FileCount = FileCountMax
+								End If
 							End If
 
 							If DomTask.Contains("@Contact1") Then
@@ -7070,7 +7078,15 @@ TryNextWithTease:
 
 							FileCount += 1
 							If FileCount > FileCountMax Then
-								FileCount = FileCountMax
+								If FrmSettings.CBNewSlideshow.Checked = True Then
+									NewDommeSlideshow = True
+									OriginalDommeSlideshow = _ImageFileNames(0)
+									LoadDommeImageFolder()
+									NewDommeSlideshow = False
+									DomPic = _ImageFileNames(FileCount)
+								Else
+									FileCount = FileCountMax
+								End If
 							End If
 
 							If DomTask.Contains("@Contact1") Then
@@ -8192,7 +8208,15 @@ TryNextWithTease:
 
 						FileCount += 1
 						If FileCount > FileCountMax Then
-							FileCount = FileCountMax
+							If FrmSettings.CBNewSlideshow.Checked = True Then
+								NewDommeSlideshow = True
+								OriginalDommeSlideshow = _ImageFileNames(0)
+								LoadDommeImageFolder()
+								NewDommeSlideshow = False
+								DomPic = _ImageFileNames(FileCount)
+							Else
+								FileCount = FileCountMax
+							End If
 						End If
 
 					End If
@@ -23266,8 +23290,17 @@ TryNext:
 			FileCount += 1
 			'Debug.Print("Filecount = " & FileCount)
 			'Debug.Print("FileCOuntMax = " & FileCountMax)
+			FileCount += 1
 			If FileCount > FileCountMax Then
-				FileCount = 0
+				If FrmSettings.CBNewSlideshow.Checked = True Then
+					NewDommeSlideshow = True
+					OriginalDommeSlideshow = _ImageFileNames(0)
+					LoadDommeImageFolder()
+					NewDommeSlideshow = False
+					DomPic = _ImageFileNames(FileCount)
+				Else
+					FileCount = 0
+				End If
 			End If
 
 			If File.Exists(_ImageFileNames(FileCount)) Then

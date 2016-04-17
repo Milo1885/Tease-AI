@@ -31,7 +31,12 @@ Partial Class FrmSettings
 		Me.GroupBox64 = New System.Windows.Forms.GroupBox()
 		Me.CBMuteMedia = New System.Windows.Forms.CheckBox()
 		Me.GBDommeImages = New System.Windows.Forms.GroupBox()
+		Me.slideshowNumBox = New System.Windows.Forms.NumericUpDown()
+		Me.teaseRadio = New System.Windows.Forms.RadioButton()
+		Me.CBNewSlideshow = New System.Windows.Forms.CheckBox()
+		Me.offRadio = New System.Windows.Forms.RadioButton()
 		Me.BTNDomImageDir = New System.Windows.Forms.Button()
+		Me.timedRadio = New System.Windows.Forms.RadioButton()
 		Me.LBLDomImageDir = New System.Windows.Forms.Label()
 		Me.GBGeneralTextToSpeech = New System.Windows.Forms.GroupBox()
 		Me.LBLVRate = New System.Windows.Forms.Label()
@@ -42,11 +47,6 @@ Partial Class FrmSettings
 		Me.SliderVVolume = New System.Windows.Forms.TrackBar()
 		Me.TTSCheckBox = New System.Windows.Forms.CheckBox()
 		Me.TTSComboBox = New System.Windows.Forms.ComboBox()
-		Me.GBSlideshowOptions = New System.Windows.Forms.GroupBox()
-		Me.slideshowNumBox = New System.Windows.Forms.NumericUpDown()
-		Me.teaseRadio = New System.Windows.Forms.RadioButton()
-		Me.offRadio = New System.Windows.Forms.RadioButton()
-		Me.timedRadio = New System.Windows.Forms.RadioButton()
 		Me.GBSafeword = New System.Windows.Forms.GroupBox()
 		Me.LBLSafeword = New System.Windows.Forms.Label()
 		Me.TBSafeword = New System.Windows.Forms.TextBox()
@@ -1017,11 +1017,10 @@ Partial Class FrmSettings
 		Me.PNLGeneralSettings.SuspendLayout
 		Me.GroupBox64.SuspendLayout
 		Me.GBDommeImages.SuspendLayout
+		CType(Me.slideshowNumBox,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.GBGeneralTextToSpeech.SuspendLayout
 		CType(Me.SliderVRate,System.ComponentModel.ISupportInitialize).BeginInit
 		CType(Me.SliderVVolume,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBSlideshowOptions.SuspendLayout
-		CType(Me.slideshowNumBox,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.GBSafeword.SuspendLayout
 		Me.GBGeneralSystem.SuspendLayout
 		Me.GBGeneralImages.SuspendLayout
@@ -1304,7 +1303,6 @@ Partial Class FrmSettings
 		Me.PNLGeneralSettings.Controls.Add(Me.GroupBox64)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBDommeImages)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBGeneralTextToSpeech)
-		Me.PNLGeneralSettings.Controls.Add(Me.GBSlideshowOptions)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBSafeword)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBGeneralSystem)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBGeneralImages)
@@ -1345,27 +1343,96 @@ Partial Class FrmSettings
 		'GBDommeImages
 		'
 		Me.GBDommeImages.BackColor = System.Drawing.Color.LightGray
+		Me.GBDommeImages.Controls.Add(Me.slideshowNumBox)
+		Me.GBDommeImages.Controls.Add(Me.teaseRadio)
+		Me.GBDommeImages.Controls.Add(Me.CBNewSlideshow)
+		Me.GBDommeImages.Controls.Add(Me.offRadio)
 		Me.GBDommeImages.Controls.Add(Me.BTNDomImageDir)
+		Me.GBDommeImages.Controls.Add(Me.timedRadio)
 		Me.GBDommeImages.Controls.Add(Me.LBLDomImageDir)
 		Me.GBDommeImages.ForeColor = System.Drawing.Color.Black
 		Me.GBDommeImages.Location = New System.Drawing.Point(224, 176)
 		Me.GBDommeImages.Name = "GBDommeImages"
-		Me.GBDommeImages.Size = New System.Drawing.Size(210, 74)
+		Me.GBDommeImages.Size = New System.Drawing.Size(210, 128)
 		Me.GBDommeImages.TabIndex = 156
 		Me.GBDommeImages.TabStop = false
-		Me.GBDommeImages.Text = "Domme Images Directory"
+		Me.GBDommeImages.Text = "Slideshow Options"
+		'
+		'slideshowNumBox
+		'
+		Me.slideshowNumBox.BackColor = System.Drawing.Color.White
+		Me.slideshowNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.slideshowNumBox.ForeColor = System.Drawing.Color.Black
+		Me.slideshowNumBox.Location = New System.Drawing.Point(93, 20)
+		Me.slideshowNumBox.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
+		Me.slideshowNumBox.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.slideshowNumBox.Name = "slideshowNumBox"
+		Me.slideshowNumBox.Size = New System.Drawing.Size(47, 20)
+		Me.slideshowNumBox.TabIndex = 20
+		Me.slideshowNumBox.Value = New Decimal(New Integer() {30, 0, 0, 0})
+		'
+		'teaseRadio
+		'
+		Me.teaseRadio.AutoSize = true
+		Me.teaseRadio.Checked = true
+		Me.teaseRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.teaseRadio.ForeColor = System.Drawing.Color.Black
+		Me.teaseRadio.Location = New System.Drawing.Point(149, 21)
+		Me.teaseRadio.Name = "teaseRadio"
+		Me.teaseRadio.Size = New System.Drawing.Size(55, 17)
+		Me.teaseRadio.TabIndex = 21
+		Me.teaseRadio.TabStop = true
+		Me.teaseRadio.Text = "Tease"
+		Me.teaseRadio.UseVisualStyleBackColor = true
+		'
+		'CBNewSlideshow
+		'
+		Me.CBNewSlideshow.AutoSize = true
+		Me.CBNewSlideshow.Checked = true
+		Me.CBNewSlideshow.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBNewSlideshow.ForeColor = System.Drawing.Color.Black
+		Me.CBNewSlideshow.Location = New System.Drawing.Point(6, 100)
+		Me.CBNewSlideshow.Name = "CBNewSlideshow"
+		Me.CBNewSlideshow.Size = New System.Drawing.Size(200, 17)
+		Me.CBNewSlideshow.TabIndex = 18
+		Me.CBNewSlideshow.TabStop = false
+		Me.CBNewSlideshow.Text = "Load New Slideshow When Finished"
+		Me.CBNewSlideshow.UseVisualStyleBackColor = true
+		'
+		'offRadio
+		'
+		Me.offRadio.AutoSize = true
+		Me.offRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.offRadio.ForeColor = System.Drawing.Color.Black
+		Me.offRadio.Location = New System.Drawing.Point(6, 21)
+		Me.offRadio.Name = "offRadio"
+		Me.offRadio.Size = New System.Drawing.Size(60, 17)
+		Me.offRadio.TabIndex = 18
+		Me.offRadio.Text = "Manual"
+		Me.offRadio.UseVisualStyleBackColor = true
 		'
 		'BTNDomImageDir
 		'
 		Me.BTNDomImageDir.BackColor = System.Drawing.Color.LightGray
 		Me.BTNDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.BTNDomImageDir.ForeColor = System.Drawing.Color.Black
-		Me.BTNDomImageDir.Location = New System.Drawing.Point(6, 17)
+		Me.BTNDomImageDir.Location = New System.Drawing.Point(6, 45)
 		Me.BTNDomImageDir.Name = "BTNDomImageDir"
 		Me.BTNDomImageDir.Size = New System.Drawing.Size(198, 22)
 		Me.BTNDomImageDir.TabIndex = 17
 		Me.BTNDomImageDir.Text = "Set Domme Images Directory"
 		Me.BTNDomImageDir.UseVisualStyleBackColor = false
+		'
+		'timedRadio
+		'
+		Me.timedRadio.AutoSize = true
+		Me.timedRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.timedRadio.ForeColor = System.Drawing.Color.Black
+		Me.timedRadio.Location = New System.Drawing.Point(72, 23)
+		Me.timedRadio.Name = "timedRadio"
+		Me.timedRadio.Size = New System.Drawing.Size(14, 13)
+		Me.timedRadio.TabIndex = 19
+		Me.timedRadio.UseVisualStyleBackColor = true
 		'
 		'LBLDomImageDir
 		'
@@ -1373,7 +1440,7 @@ Partial Class FrmSettings
 		Me.LBLDomImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
 		Me.LBLDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.LBLDomImageDir.ForeColor = System.Drawing.Color.Black
-		Me.LBLDomImageDir.Location = New System.Drawing.Point(6, 45)
+		Me.LBLDomImageDir.Location = New System.Drawing.Point(6, 73)
 		Me.LBLDomImageDir.Name = "LBLDomImageDir"
 		Me.LBLDomImageDir.Size = New System.Drawing.Size(198, 17)
 		Me.LBLDomImageDir.TabIndex = 0
@@ -1475,71 +1542,6 @@ Partial Class FrmSettings
 		Me.TTSComboBox.Size = New System.Drawing.Size(178, 21)
 		Me.TTSComboBox.TabIndex = 29
 		Me.TTSComboBox.TabStop = false
-		'
-		'GBSlideshowOptions
-		'
-		Me.GBSlideshowOptions.BackColor = System.Drawing.Color.LightGray
-		Me.GBSlideshowOptions.Controls.Add(Me.slideshowNumBox)
-		Me.GBSlideshowOptions.Controls.Add(Me.teaseRadio)
-		Me.GBSlideshowOptions.Controls.Add(Me.offRadio)
-		Me.GBSlideshowOptions.Controls.Add(Me.timedRadio)
-		Me.GBSlideshowOptions.ForeColor = System.Drawing.Color.Black
-		Me.GBSlideshowOptions.Location = New System.Drawing.Point(224, 255)
-		Me.GBSlideshowOptions.Name = "GBSlideshowOptions"
-		Me.GBSlideshowOptions.Size = New System.Drawing.Size(210, 49)
-		Me.GBSlideshowOptions.TabIndex = 155
-		Me.GBSlideshowOptions.TabStop = false
-		Me.GBSlideshowOptions.Text = "Slideshow Options"
-		'
-		'slideshowNumBox
-		'
-		Me.slideshowNumBox.BackColor = System.Drawing.Color.White
-		Me.slideshowNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.slideshowNumBox.ForeColor = System.Drawing.Color.Black
-		Me.slideshowNumBox.Location = New System.Drawing.Point(93, 18)
-		Me.slideshowNumBox.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
-		Me.slideshowNumBox.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-		Me.slideshowNumBox.Name = "slideshowNumBox"
-		Me.slideshowNumBox.Size = New System.Drawing.Size(47, 20)
-		Me.slideshowNumBox.TabIndex = 20
-		Me.slideshowNumBox.Value = New Decimal(New Integer() {30, 0, 0, 0})
-		'
-		'teaseRadio
-		'
-		Me.teaseRadio.AutoSize = true
-		Me.teaseRadio.Checked = true
-		Me.teaseRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.teaseRadio.ForeColor = System.Drawing.Color.Black
-		Me.teaseRadio.Location = New System.Drawing.Point(149, 19)
-		Me.teaseRadio.Name = "teaseRadio"
-		Me.teaseRadio.Size = New System.Drawing.Size(55, 17)
-		Me.teaseRadio.TabIndex = 21
-		Me.teaseRadio.TabStop = true
-		Me.teaseRadio.Text = "Tease"
-		Me.teaseRadio.UseVisualStyleBackColor = true
-		'
-		'offRadio
-		'
-		Me.offRadio.AutoSize = true
-		Me.offRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.offRadio.ForeColor = System.Drawing.Color.Black
-		Me.offRadio.Location = New System.Drawing.Point(6, 19)
-		Me.offRadio.Name = "offRadio"
-		Me.offRadio.Size = New System.Drawing.Size(60, 17)
-		Me.offRadio.TabIndex = 18
-		Me.offRadio.Text = "Manual"
-		Me.offRadio.UseVisualStyleBackColor = true
-		'
-		'timedRadio
-		'
-		Me.timedRadio.AutoSize = true
-		Me.timedRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.timedRadio.ForeColor = System.Drawing.Color.Black
-		Me.timedRadio.Location = New System.Drawing.Point(72, 21)
-		Me.timedRadio.Name = "timedRadio"
-		Me.timedRadio.Size = New System.Drawing.Size(14, 13)
-		Me.timedRadio.TabIndex = 19
-		Me.timedRadio.UseVisualStyleBackColor = true
 		'
 		'GBSafeword
 		'
@@ -12554,7 +12556,7 @@ Partial Class FrmSettings
 		Me.Label130.Name = "Label130"
 		Me.Label130.Size = New System.Drawing.Size(254, 54)
 		Me.Label130.TabIndex = 176
-		Me.Label130.Text = "q55x8x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Stefaf" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OxiKlein" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
+		Me.Label130.Text = "q55x8x"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Stefaf"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"OxiKlein"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
 		Me.Label130.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
 		'Label123
@@ -13007,13 +13009,12 @@ Partial Class FrmSettings
 		Me.GroupBox64.ResumeLayout(false)
 		Me.GroupBox64.PerformLayout
 		Me.GBDommeImages.ResumeLayout(false)
+		Me.GBDommeImages.PerformLayout
+		CType(Me.slideshowNumBox,System.ComponentModel.ISupportInitialize).EndInit
 		Me.GBGeneralTextToSpeech.ResumeLayout(false)
 		Me.GBGeneralTextToSpeech.PerformLayout
 		CType(Me.SliderVRate,System.ComponentModel.ISupportInitialize).EndInit
 		CType(Me.SliderVVolume,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBSlideshowOptions.ResumeLayout(false)
-		Me.GBSlideshowOptions.PerformLayout
-		CType(Me.slideshowNumBox,System.ComponentModel.ISupportInitialize).EndInit
 		Me.GBSafeword.ResumeLayout(false)
 		Me.GBSafeword.PerformLayout
 		Me.GBGeneralSystem.ResumeLayout(false)
@@ -13705,7 +13706,6 @@ End Sub
 	Friend WithEvents WebImageFileDialog As System.Windows.Forms.OpenFileDialog
 	Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
 	Friend WithEvents OpenScriptDialog As System.Windows.Forms.OpenFileDialog
-	Friend WithEvents GBSlideshowOptions As System.Windows.Forms.GroupBox
 	Friend WithEvents teaseRadio As System.Windows.Forms.RadioButton
 	Friend WithEvents offRadio As System.Windows.Forms.RadioButton
 	Friend WithEvents slideshowNumBox As System.Windows.Forms.NumericUpDown
@@ -14297,4 +14297,5 @@ End Sub
 	Friend WithEvents BTNOfflineMode As System.Windows.Forms.Button
 	Friend WithEvents LBLOfflineMode As System.Windows.Forms.Label
 	Friend WithEvents Label140 As System.Windows.Forms.Label
+	Friend WithEvents CBNewSlideshow As System.Windows.Forms.CheckBox
 End Class

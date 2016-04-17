@@ -727,6 +727,8 @@ Public Class FrmSettings
 			LBLOfflineMode.ForeColor = Color.Green
 		End If
 
+		CBNewSlideshow.Checked = My.Settings.CBNewSlideshow
+
 
 		FrmSettingsLoading = False
 
@@ -12886,10 +12888,10 @@ WhyUMakeMeDoDis:
 		landscapeCheckBox.Text = "Stretch Landscape Images"
 		CBImageInfo.Text = "Display Image Information"
 
-		GBDommeImages.Text = "Domme Images Directory"
+		GBDommeImages.Text = "Slideshow Options"
 		BTNDomImageDir.Text = "Set Domme Images Directory"
 
-		GBSlideshowOptions.Text = "Slideshow Options"
+		'GBSlideshowOptions.Text = "Slideshow Options"
 		offRadio.Text = "Manual"
 		teaseRadio.Text = "Tease"
 
@@ -12939,10 +12941,10 @@ WhyUMakeMeDoDis:
 		landscapeCheckBox.Text = "Strecke „Landschaftsbilder"""
 		CBImageInfo.Text = "Zeige Bild Informationen"
 
-		GBDommeImages.Text = "Domina Bilder Ordner"
+		GBDommeImages.Text = "Diashow Einstellungen"
 		BTNDomImageDir.Text = "Wähle Domina Bilder Speicherpfad"
 
-		GBSlideshowOptions.Text = "Diashow Einstellungen"
+		'GBSlideshowOptions.Text = "Diashow Einstellungen"
 		offRadio.Text = "Manual"
 		teaseRadio.Text = "Tease"
 
@@ -13590,6 +13592,15 @@ WhyUMakeMeDoDis:
 			My.Settings.OfflineMode = True
 			LBLOfflineMode.Text = "ON"
 			LBLOfflineMode.ForeColor = Color.Green
+		End If
+		My.Settings.Save()
+	End Sub
+
+	Private Sub CBNewSlideshow_LostFocus(sender As Object, e As System.EventArgs) Handles CBNewSlideshow.LostFocus
+		If CBNewSlideshow.Checked = True Then
+			My.Settings.CBNewSlideshow = True
+		Else
+			My.Settings.CBNewSlideshow = False
 		End If
 		My.Settings.Save()
 	End Sub

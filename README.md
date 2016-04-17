@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Added "Load New Slideshow When Finished" option to Slideshow Settings in General Settings tab. If this box is checked, Tease AI will load a new domme slideshow once it reaches the end of the current one through Tease or Timed progression.
+
 Lines with @FollowUpXX() should now display correctly
 
 Fixed bug where @ShowBoobsImage would return a butt image

@@ -5227,6 +5227,18 @@ Namespace My
                 Me("OfflineMode") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBNewSlideshow() As Boolean
+            Get
+                Return CType(Me("CBNewSlideshow"),Boolean)
+            End Get
+            Set
+                Me("CBNewSlideshow") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
