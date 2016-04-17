@@ -729,6 +729,7 @@ Public Class FrmSettings
 
 		CBNewSlideshow.Checked = My.Settings.CBNewSlideshow
 
+		NBTauntEdging.Value = My.Settings.TauntEdging
 
 		FrmSettingsLoading = False
 
@@ -13602,6 +13603,11 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.CBNewSlideshow = False
 		End If
+		My.Settings.Save()
+	End Sub
+
+	Private Sub NBTauntEdging_LostFocus(sender As Object, e As System.EventArgs) Handles NBTauntEdging.LostFocus
+		My.Settings.TauntEdging = NBTauntEdging.Value
 		My.Settings.Save()
 	End Sub
 End Class

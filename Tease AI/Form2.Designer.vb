@@ -1011,6 +1011,9 @@ Partial Class FrmSettings
 		Me.Label135 = New System.Windows.Forms.Label()
 		Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
+		Me.NBTauntEdging = New System.Windows.Forms.NumericUpDown()
+		Me.Label139 = New System.Windows.Forms.Label()
+		Me.Label141 = New System.Windows.Forms.Label()
 		Me.SettingsPanel.SuspendLayout
 		Me.SettingsTabs.SuspendLayout
 		Me.TabPage1.SuspendLayout
@@ -1249,6 +1252,7 @@ Partial Class FrmSettings
 		Me.GroupBox65.SuspendLayout
 		CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).BeginInit
 		CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTauntEdging,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.SuspendLayout
 		'
 		'SettingsPanel
@@ -10507,6 +10511,8 @@ Partial Class FrmSettings
 		'
 		'GroupBox57
 		'
+		Me.GroupBox57.Controls.Add(Me.Label139)
+		Me.GroupBox57.Controls.Add(Me.NBTauntEdging)
 		Me.GroupBox57.Controls.Add(Me.LBLVtf)
 		Me.GroupBox57.Controls.Add(Me.LBLStf)
 		Me.GroupBox57.Controls.Add(Me.SliderSTF)
@@ -10527,9 +10533,10 @@ Partial Class FrmSettings
 		Me.GroupBox57.Controls.Add(Me.NBTeaseLengthMin)
 		Me.GroupBox57.Controls.Add(Me.Label95)
 		Me.GroupBox57.Controls.Add(Me.Label49)
+		Me.GroupBox57.Controls.Add(Me.Label141)
 		Me.GroupBox57.Location = New System.Drawing.Point(7, 30)
 		Me.GroupBox57.Name = "GroupBox57"
-		Me.GroupBox57.Size = New System.Drawing.Size(223, 250)
+		Me.GroupBox57.Size = New System.Drawing.Size(223, 397)
 		Me.GroupBox57.TabIndex = 169
 		Me.GroupBox57.TabStop = false
 		Me.GroupBox57.Text = "Tease"
@@ -10539,7 +10546,7 @@ Partial Class FrmSettings
 		Me.LBLVtf.BackColor = System.Drawing.Color.Transparent
 		Me.LBLVtf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.LBLVtf.ForeColor = System.Drawing.Color.Black
-		Me.LBLVtf.Location = New System.Drawing.Point(128, 224)
+		Me.LBLVtf.Location = New System.Drawing.Point(128, 261)
 		Me.LBLVtf.Name = "LBLVtf"
 		Me.LBLVtf.Size = New System.Drawing.Size(87, 17)
 		Me.LBLVtf.TabIndex = 187
@@ -10551,7 +10558,7 @@ Partial Class FrmSettings
 		Me.LBLStf.BackColor = System.Drawing.Color.Transparent
 		Me.LBLStf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.LBLStf.ForeColor = System.Drawing.Color.Black
-		Me.LBLStf.Location = New System.Drawing.Point(130, 183)
+		Me.LBLStf.Location = New System.Drawing.Point(130, 220)
 		Me.LBLStf.Name = "LBLStf"
 		Me.LBLStf.Size = New System.Drawing.Size(87, 17)
 		Me.LBLStf.TabIndex = 165
@@ -10562,7 +10569,7 @@ Partial Class FrmSettings
 		'
 		Me.SliderSTF.AutoSize = false
 		Me.SliderSTF.LargeChange = 1
-		Me.SliderSTF.Location = New System.Drawing.Point(130, 162)
+		Me.SliderSTF.Location = New System.Drawing.Point(130, 199)
 		Me.SliderSTF.Maximum = 5
 		Me.SliderSTF.Minimum = 1
 		Me.SliderSTF.Name = "SliderSTF"
@@ -10574,7 +10581,7 @@ Partial Class FrmSettings
 		'
 		Me.TauntSlider.AutoSize = false
 		Me.TauntSlider.LargeChange = 1
-		Me.TauntSlider.Location = New System.Drawing.Point(130, 203)
+		Me.TauntSlider.Location = New System.Drawing.Point(130, 240)
 		Me.TauntSlider.Maximum = 9
 		Me.TauntSlider.Minimum = 1
 		Me.TauntSlider.Name = "TauntSlider"
@@ -10587,7 +10594,7 @@ Partial Class FrmSettings
 		Me.Label106.BackColor = System.Drawing.Color.Transparent
 		Me.Label106.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.Label106.ForeColor = System.Drawing.Color.Black
-		Me.Label106.Location = New System.Drawing.Point(6, 206)
+		Me.Label106.Location = New System.Drawing.Point(6, 243)
 		Me.Label106.Name = "Label106"
 		Me.Label106.Size = New System.Drawing.Size(123, 17)
 		Me.Label106.TabIndex = 186
@@ -10757,7 +10764,7 @@ Partial Class FrmSettings
 		Me.Label49.BackColor = System.Drawing.Color.Transparent
 		Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.Label49.ForeColor = System.Drawing.Color.Black
-		Me.Label49.Location = New System.Drawing.Point(6, 170)
+		Me.Label49.Location = New System.Drawing.Point(6, 207)
 		Me.Label49.Name = "Label49"
 		Me.Label49.Size = New System.Drawing.Size(132, 17)
 		Me.Label49.TabIndex = 164
@@ -12984,6 +12991,38 @@ Partial Class FrmSettings
 		Me.BWURLFiles.WorkerReportsProgress = true
 		Me.BWURLFiles.WorkerSupportsCancellation = true
 		'
+		'NBTauntEdging
+		'
+		Me.NBTauntEdging.Location = New System.Drawing.Point(130, 171)
+		Me.NBTauntEdging.Name = "NBTauntEdging"
+		Me.NBTauntEdging.Size = New System.Drawing.Size(44, 20)
+		Me.NBTauntEdging.TabIndex = 188
+		Me.NBTauntEdging.Value = New Decimal(New Integer() {70, 0, 0, 0})
+		'
+		'Label139
+		'
+		Me.Label139.BackColor = System.Drawing.Color.Transparent
+		Me.Label139.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Label139.ForeColor = System.Drawing.Color.Black
+		Me.Label139.Location = New System.Drawing.Point(175, 171)
+		Me.Label139.Name = "Label139"
+		Me.Label139.Size = New System.Drawing.Size(50, 17)
+		Me.Label139.TabIndex = 184
+		Me.Label139.Text = "percent"
+		Me.Label139.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label141
+		'
+		Me.Label141.BackColor = System.Drawing.Color.Transparent
+		Me.Label141.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Label141.ForeColor = System.Drawing.Color.Black
+		Me.Label141.Location = New System.Drawing.Point(6, 163)
+		Me.Label141.Name = "Label141"
+		Me.Label141.Size = New System.Drawing.Size(141, 32)
+		Me.Label141.TabIndex = 189
+		Me.Label141.Text = "Edging Ends Taunts:"
+		Me.Label141.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
 		'FrmSettings
 		'
 		Me.AllowDrop = true
@@ -13308,6 +13347,7 @@ Partial Class FrmSettings
 		Me.GroupBox65.PerformLayout
 		CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).EndInit
 		CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTauntEdging,System.ComponentModel.ISupportInitialize).EndInit
 		Me.ResumeLayout(false)
 
 End Sub
@@ -14298,4 +14338,7 @@ End Sub
 	Friend WithEvents LBLOfflineMode As System.Windows.Forms.Label
 	Friend WithEvents Label140 As System.Windows.Forms.Label
 	Friend WithEvents CBNewSlideshow As System.Windows.Forms.CheckBox
+	Friend WithEvents Label139 As System.Windows.Forms.Label
+	Friend WithEvents NBTauntEdging As System.Windows.Forms.NumericUpDown
+	Friend WithEvents Label141 As System.Windows.Forms.Label
 End Class

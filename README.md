@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Added "Edging Ends Taunts" setting to Ranges tab. This allows you to set the percentage chance that the domme will move to a module if you say you are on the edge. If you edge and the check fails, the domme will not let you stop or move into the next module until the set Stroke Time runs out - Requires 2 new vocabulary files - #SYS_TauntEdging.txt (Domme tells you that you can't stop yet) and #SYS_TauntEdgingAsked (Domme says she already told you what she wants for this Taunt cycle)
+
 Added "Load New Slideshow When Finished" option to Slideshow Settings in General Settings tab. If this box is checked, Tease AI will load a new domme slideshow once it reaches the end of the current one through Tease or Timed progression.
 
 Lines with @FollowUpXX() should now display correctly

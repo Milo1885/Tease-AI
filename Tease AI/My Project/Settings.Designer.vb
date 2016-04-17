@@ -5239,6 +5239,18 @@ Namespace My
                 Me("CBNewSlideshow") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("70")>  _
+        Public Property TauntEdging() As Integer
+            Get
+                Return CType(Me("TauntEdging"),Integer)
+            End Get
+            Set
+                Me("TauntEdging") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

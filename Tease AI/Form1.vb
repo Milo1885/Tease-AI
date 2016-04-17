@@ -623,6 +623,10 @@ Public Class Form1
 	Dim CameGotoLine As String
 	Dim RuinedGotoLine As String
 
+	Dim TauntEdging As Boolean
+	Dim TauntEdgingSession As Boolean
+	Dim TauntEdgingAsked As Boolean
+
 
 	Private Const DISABLE_SOUNDS As Integer = 21
 	Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -2602,6 +2606,21 @@ WritingTaskLine:
 
 			EdgeFound = False
 
+
+
+			If TauntEdging = True Or TauntEdgingSession = True Then
+				If TauntEdgingAsked = True Then
+					DomChat = "#SYS_TauntEdgingAsked"
+					TypingDelay()
+				Else
+					TauntEdgingAsked = True
+					DomChat = "#SYS_TauntEdging"
+					TypingDelay()
+				End If
+				Return
+			End If
+
+
 			If EdgeVideo = True Then
 				SessionEdges += 1
 				EdgeVideo = False
@@ -3135,57 +3154,73 @@ NoRepeatOFiles:
 
 			If SubStroking = True Then
 
-				FirstRound = False
-				'ShowModule = True
-				StrokeTauntTimer.Stop()
-				StrokeTimer.Stop()
+				Dim TauntStop As Integer = randomizer.Next(1, 101)
+
+				If TauntStop <= FrmSettings.NBTauntEdging.Value Then
+
+					FirstRound = False
+					'ShowModule = True
+					StrokeTauntTimer.Stop()
+					StrokeTimer.Stop()
 
 
-				If BookmarkModule = True Then
-					DomTypeCheck = True
-					SubEdging = False
-					SubStroking = False
-					DomChat = "#StopStrokingEdge"
-					If Contact1Edge = True Then
-						DomChat = "@Contact1 #StopStrokingEdge"
-						Contact1Edge = False
+					If BookmarkModule = True Then
+						DomTypeCheck = True
+						SubEdging = False
+						SubStroking = False
+						DomChat = "#StopStrokingEdge"
+						If Contact1Edge = True Then
+							DomChat = "@Contact1 #StopStrokingEdge"
+							Contact1Edge = False
+						End If
+						If Contact2Edge = True Then
+							DomChat = "@Contact2 #StopStrokingEdge"
+							Contact2Edge = False
+						End If
+						If Contact3Edge = True Then
+							DomChat = "@Contact3 #StopStrokingEdge"
+							Contact3Edge = False
+						End If
+						TypingDelay()
+
+						Do
+							Application.DoEvents()
+						Loop Until DomTypeCheck = False
+
+						BookmarkModule = False
+						FileText = BookmarkModuleFile
+						StrokeTauntVal = BookmarkModuleLine
+						RunFileText()
+						Return
 					End If
-					If Contact2Edge = True Then
-						DomChat = "@Contact2 #StopStrokingEdge"
-						Contact2Edge = False
-					End If
-					If Contact3Edge = True Then
-						DomChat = "@Contact3 #StopStrokingEdge"
-						Contact3Edge = False
-					End If
+
+					RunModuleScript(True)
+
+				Else
+
+					TauntEdging = True
+					TauntEdgingAsked = True
+
+					DomChat = "#SYS_TauntEdging"
 					TypingDelay()
 
-					Do
-						Application.DoEvents()
-					Loop Until DomTypeCheck = False
 
-					BookmarkModule = False
-					FileText = BookmarkModuleFile
-					StrokeTauntVal = BookmarkModuleLine
-					RunFileText()
-					Return
 				End If
 
-				RunModuleScript(True)
 
 
 			End If
 
 
-			Return
+				Return
 
-		End If
+			End If
 
 
-		If EdgeFound = True And My.Settings.Chastity = True Then
-			EdgeFound = False
-			EdgeNOT = True
-		End If
+			If EdgeFound = True And My.Settings.Chastity = True Then
+				EdgeFound = False
+				EdgeNOT = True
+			End If
 
 
 
@@ -3196,50 +3231,50 @@ DebugAwareness:
 
 
 
-		If InputFlag = True And DomTypeCheck = False Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & InputString, ChatString, False)
-			InputFlag = False
-		End If
-
-		' Remove commas and apostrophes from user's entered text
-		ChatString = ChatString.Replace(",", "")
-		ChatString = ChatString.Replace("'", "")
-		ChatString = ChatString.Replace(".", "")
-
-
-		If UCase(ChatString) = UCase("CAME") Or UCase(ChatString) = UCase("I CAME") Or UCase(ChatString) = UCase("JUST CAME") Or UCase(ChatString) = UCase("I JUST CAME") Then
-			If CameMessage = True Then
-				CameMessage = False
-				ChatString = CameMessageText
+			If InputFlag = True And DomTypeCheck = False Then
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & InputString, ChatString, False)
+				InputFlag = False
 			End If
-		End If
 
-		If UCase(ChatString) = UCase("RUINED") Or UCase(ChatString) = UCase("I RUINED") Or UCase(ChatString) = UCase("RUINED IT") Or UCase(ChatString) = UCase("I RUINED IT") Then
-			If RuinedMessage = True Then
-				RuinedMessage = False
-				ChatString = RuinedMessageText
+			' Remove commas and apostrophes from user's entered text
+			ChatString = ChatString.Replace(",", "")
+			ChatString = ChatString.Replace("'", "")
+			ChatString = ChatString.Replace(".", "")
+
+
+			If UCase(ChatString) = UCase("CAME") Or UCase(ChatString) = UCase("I CAME") Or UCase(ChatString) = UCase("JUST CAME") Or UCase(ChatString) = UCase("I JUST CAME") Then
+				If CameMessage = True Then
+					CameMessage = False
+					ChatString = CameMessageText
+				End If
 			End If
-		End If
+
+			If UCase(ChatString) = UCase("RUINED") Or UCase(ChatString) = UCase("I RUINED") Or UCase(ChatString) = UCase("RUINED IT") Or UCase(ChatString) = UCase("I RUINED IT") Then
+				If RuinedMessage = True Then
+					RuinedMessage = False
+					ChatString = RuinedMessageText
+				End If
+			End If
 
 
-		' If the domme is waiting for a response, go straight to this sub-routine instead
-		If YesOrNo = True And SubEdging = True Then GoTo EdgeSkip
-		If YesOrNo = True And SubHoldingEdge = True Then GoTo EdgeSkip
+			' If the domme is waiting for a response, go straight to this sub-routine instead
+			If YesOrNo = True And SubEdging = True Then GoTo EdgeSkip
+			If YesOrNo = True And SubHoldingEdge = True Then GoTo EdgeSkip
 
-		If YesOrNo = True And OrgasmYesNo = False And DomTypeCheck = False Then
-			YesOrNoQuestions()
-			Return
-		End If
+			If YesOrNo = True And OrgasmYesNo = False And DomTypeCheck = False Then
+				YesOrNoQuestions()
+				Return
+			End If
 
 
 
 EdgeSkip:
 
-		Debug.Print("Before Dom Response, YesOrNo = " & YesOrNo)
+			Debug.Print("Before Dom Response, YesOrNo = " & YesOrNo)
 
-		DomResponse()
+			DomResponse()
 
-		'CalculateResponse()
+			'CalculateResponse()
 
 	End Sub
 
@@ -5162,6 +5197,14 @@ ReturnCalled:
 			If lines(line).Contains("@OrgasmRestricted") And OrgasmRestricted = False Then InvalidFilter = True
 			If lines(line).Contains("@OrgasmNotRestricted") And OrgasmRestricted = True Then InvalidFilter = True
 
+			If lines(line).Contains("@Month(") Then
+				If GetMatch(lines(line), "@Month(", DateAndTime.Now.Month) = False Then InvalidFilter = True
+			End If
+
+			If lines(line).Contains("@Day(") Then
+				If GetMatch(lines(line), "@Day(", DateAndTime.Now.Day) = False Then InvalidFilter = True
+			End If
+
 			If lines(line).Contains("@Info") Then InvalidFilter = True
 
 			If InvalidFilter = True Then
@@ -5794,8 +5837,8 @@ SkipGotoSearch:
 			If FrmSettings.CBBnBLocal.Checked = False Then
 				JustShowedBlogImage = True
 				CacheImage("Butt")
-				DomTask = DomTask.Replace("ShowButtImage", "")
-				DomTask = DomTask.Replace("ShowButtsImage", "")
+				DomTask = DomTask.Replace("@ShowButtImage", "")
+				DomTask = DomTask.Replace("@ShowButtsImage", "")
 			End If
 		End If
 
@@ -5803,8 +5846,8 @@ SkipGotoSearch:
 			If FrmSettings.CBBnBLocal.Checked = False Then
 				JustShowedBlogImage = True
 				CacheImage("Boobs")
-				DomTask = DomTask.Replace("ShowBoobImage", "")
-				DomTask = DomTask.Replace("ShowBoobsImage", "")
+				DomTask = DomTask.Replace("@ShowBoobImage", "")
+				DomTask = DomTask.Replace("@ShowBoobsImage", "")
 			End If
 		End If
 
@@ -6194,7 +6237,6 @@ NullResponse:
 					If LoopBuffer > 4 Then Exit Do
 
 				Loop Until Not DomTask.Contains("#") And Not DomTask.Contains("@")
-
 
 
 
@@ -6894,15 +6936,15 @@ NoResponse:
 		If DomChat.Contains("@ShowBlogImage") Then
 			JustShowedBlogImage = True
 			CacheImage("Blog")
-			DomChat = DomChat.Replace("ShowBlogImage", "")
+			DomChat = DomChat.Replace("@ShowBlogImage", "")
 		End If
 
 		If DomChat.Contains("@ShowButtImage") Or DomChat.Contains("@ShowButtsImage") Then
 			If FrmSettings.CBBnBLocal.Checked = False Then
 				JustShowedBlogImage = True
 				CacheImage("Butt")
-				DomChat = DomChat.Replace("ShowButtImage", "")
-				DomChat = DomChat.Replace("ShowButtsImage", "")
+				DomChat = DomChat.Replace("@ShowButtImage", "")
+				DomChat = DomChat.Replace("@ShowButtsImage", "")
 			End If
 		End If
 
@@ -6910,8 +6952,8 @@ NoResponse:
 			If FrmSettings.CBBnBLocal.Checked = False Then
 				JustShowedBlogImage = True
 				CacheImage("Boobs")
-				DomChat = DomChat.Replace("ShowBoobImage", "")
-				DomChat = DomChat.Replace("ShowBoobsImage", "")
+				DomChat = DomChat.Replace("@ShowBoobImage", "")
+				DomChat = DomChat.Replace("@ShowBoobsImage", "")
 			End If
 		End If
 
@@ -21981,6 +22023,9 @@ AlreadySeen:
 
 		ShowModule = True
 
+		TauntEdging = False
+		TauntEdgingAsked = False
+
 		AskedToGiveUpSection = False
 		Dim ModuleList As New List(Of String)
 		ModuleList.Clear()
@@ -25052,24 +25097,50 @@ GetDommeSlideshow:
 
     Public Function StripCommands(ByVal CFClean As String) As String
 
-        Debug.Print("CFClean = " & CFClean)
-        If CFClean.Contains("@Cup(") Then CFClean = CFClean.Replace("@Cup(" & GetParentheses(CFClean, "@Cup(") & ")", "")
-        If CFClean.Contains("@AllowsOrgasm(") Then CFClean = CFClean.Replace("@AllowsOrgasm(" & GetParentheses(CFClean, "@AllowsOrgasm(") & ")", "")
+		Debug.Print("CFClean = " & CFClean)
+
+		' This works as a solution to avoid all the crap I'm having to do underneath it, but I couldn't figuure out how to keep it from eating
+		' words after @CommandFilters in #Keywords
+
+		'Dim CleanReg As RegularExpressions.Regex
+		'CleanReg = New RegularExpressions.Regex("(@[^)]+)\)")
+
+		'Dim StripArray As String() = CFClean.Split(")")
+
+		'For i As Integer = 0 To StripArray.Count - 1
+		'If StripArray(i).Contains("@") Then
+		'StripArray(i) = StripArray(i) & ")"
+		'StripArray(i) = StripArray(i).Replace(CleanReg.Match(StripArray(i)).Value(), "")
+		'End If
+		'Next
+
+		'CFClean = Join(StripArray)
+
+		'Debug.Print("CFClean Joined = " & CFClean)
+
+
+
+
+
+		If CFClean.Contains("@Cup(") Then CFClean = CFClean.Replace("@Cup(" & GetParentheses(CFClean, "@Cup(") & ")", "")
+		If CFClean.Contains("@AllowsOrgasm(") Then CFClean = CFClean.Replace("@AllowsOrgasm(" & GetParentheses(CFClean, "@AllowsOrgasm(") & ")", "")
 		If CFClean.Contains("@RuinsOrgasm(") Then CFClean = CFClean.Replace("@RuinsOrgasm(" & GetParentheses(CFClean, "@RuinsOrgasm(") & ")", "")
 		If CFClean.Contains("@DommeLevel(") Then CFClean = CFClean.Replace("@DommeLevel(" & GetParentheses(CFClean, "@DommeLevel(") & ")", "")
 		If CFClean.Contains("@ApathyLevel(") Then CFClean = CFClean.Replace("@ApathyLevel(" & GetParentheses(CFClean, "@ApathyLevel(") & ")", "")
+		If CFClean.Contains("@Month(") Then CFClean = CFClean.Replace("@Month(" & GetParentheses(CFClean, "@Month(") & ")", "")
+		If CFClean.Contains("@Day(") Then CFClean = CFClean.Replace("@Day(" & GetParentheses(CFClean, "@Day(") & ")", "")
 
-        Dim AtArray() As String = Split(CFClean)
-        For i As Integer = 0 To AtArray.Length - 1
-            Try
-                If AtArray(i).Contains("@") Then
-                    AtArray(i) = AtArray(i).Replace(AtArray(i), "")
-                End If
-            Catch
-            End Try
-        Next
-        CFClean = Join(AtArray)
-        Return CFClean
+		Dim AtArray() As String = Split(CFClean)
+		For i As Integer = 0 To AtArray.Length - 1
+			Try
+				If AtArray(i).Contains("@") Then
+					AtArray(i) = AtArray(i).Replace(AtArray(i), "")
+				End If
+			Catch
+			End Try
+		Next
+		CFClean = Join(AtArray)
+		Return CFClean
 
     End Function
 
@@ -27080,6 +27151,8 @@ SkipNew:
 		LBLTime.Text = Format(Now, "h:mm")
 		LBLAMPM.Text = Format(Now, "tt")
 		LBLDate.Text = Format(Now, "Long Date")
+
+		Debug.Print("Current day = " & Format(Now, "dd"))
 
 		' Debug.Print(Format(Now, "MM/dd/yyyy"))
 
@@ -30942,5 +31015,34 @@ SkipNew:
 		RuinedMessage = False
 
 	End Sub
+
+
+	Public Function GetMatch(ByVal Line As String, ByVal Command As String, Match As String) As Boolean
+
+		Debug.Print("Line = " & Line)
+		Debug.Print("Command = " & Command)
+		Debug.Print("Match = " & Match)
+
+		Dim CommandFlag As String = GetParentheses(Line, Command)
+
+		If CommandFlag.Contains(",") Then
+
+			CommandFlag = FixCommas(CommandFlag)
+
+			Dim CommandArray As String() = CommandFlag.Split(",")
+
+			For i As Integer = 0 To CommandArray.Count - 1
+				If CommandArray(i) = Match Then Return True
+			Next
+
+		Else
+
+			If CommandFlag = Match Then Return True
+
+		End If
+
+		Return False
+
+	End Function
 
 End Class
