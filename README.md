@@ -4,6 +4,40 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Note - Here's the AI Box to go with the Edging Ends Taunts feature I just added:
+
+[aiBox File Begin] Vocabulary\#SYS_TauntEdging.txt
+Don't stop #RandomName, but don't you dare fucking cum
+Back off a little, but don't stop stroking @StrokeSlower
+Too bad, I'm not ready for you to stop stroking yet #RandomName
+Do what what you have to not to cum, but keep stroking
+I don't care, don't stop stroking #RandomName
+Too bad I'm not ready for you to stop stroking yet #Grin 
+Slow <i>way</i> down then cause I'm not done with you yet @StrokeSlowest
+Maybe you should slow down a little then @StrokeSlower
+@Sadistic Yeah? Stroke even faster then and don't you dare fucking cum @StrokeFaster
+@Sadistic Start stroking as fast as you can @FollowUp(And you <i>better</i> hold that fucking cum back) @StrokeFastest
+[aiBox File End] Vocabulary\#SYS_TauntEdging.txt
+[aiBox File Begin] Vocabulary\#SYS_TauntEdgingAsked.txt
+I know #RandomName, what's your point #Lol
+I already said I don't want you to stop stroking
+Keep telling me so I can keep laughing at you #Lol
+Telling me again isn't going to make me let you stop
+Too bad, don't stop stroking
+You better hold it back #RandomName
+You better not fucking cum #RandomName
+I don't care, all I care about is that you don't cum
+I'm still not letting you stop
+You better not have an accident #RandomName 
+[aiBox File End] Vocabulary\#SYS_TauntEdgingAsked.txt
+[aiBox File Begin] Vocabulary\#RandomName.txt
+#SubName
+#PetName
+#Null
+#Null
+[aiBox File End] Vocabulary\#RandomName.txt
+[aiBox Empty]
+
 Added "Edging Ends Taunts" setting to Ranges tab. This allows you to set the percentage chance that the domme will move to a module if you say you are on the edge. If you edge and the check fails, the domme will not let you stop or move into the next module until the set Stroke Time runs out - Requires 2 new vocabulary files - #SYS_TauntEdging.txt (Domme tells you that you can't stop yet) and #SYS_TauntEdgingAsked (Domme says she already told you what she wants for this Taunt cycle)
 
 Added "Load New Slideshow When Finished" option to Slideshow Settings in General Settings tab. If this box is checked, Tease AI will load a new domme slideshow once it reaches the end of the current one through Tease or Timed progression.
