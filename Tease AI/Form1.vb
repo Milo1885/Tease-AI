@@ -6750,7 +6750,7 @@ NoResponse:
 					If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
 						DomWMP.Ctlcontrols.pause()
 						SubStroking = False
-						StopMetronome = False
+						StopMetronome = True
 						StrokePace = 0
 						'VideoTauntTimer.Stop()
 					End If
