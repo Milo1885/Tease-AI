@@ -57,7 +57,7 @@ Partial Class Form8
 		Me.TBFurniture = New System.Windows.Forms.TextBox()
 		Me.TBSexToy = New System.Windows.Forms.TextBox()
 		Me.LblInfo = New System.Windows.Forms.Label()
-		Me.InfoTimer = New System.Windows.Forms.Timer(Me.components)
+		Me.InfoTimer = New Tease_AI.teaseAI_Timer()
 		Me.comboDrive = New System.Windows.Forms.ComboBox()
 		Me.BTNBack = New System.Windows.Forms.Button()
 		Me.TBURL = New System.Windows.Forms.TextBox()
