@@ -6750,6 +6750,8 @@ NoResponse:
 					If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
 						DomWMP.Ctlcontrols.pause()
 						SubStroking = False
+						StopMetronome = True
+						StrokePace = 0
 						'VideoTauntTimer.Stop()
 					End If
 				End If
@@ -9004,13 +9006,9 @@ CensorConstant:
 
 
 	Public Sub RLGLTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles RLGLTimer.Tick
-
-		' DEBUG CHANGE THIS ONCE WMP IS IMPLEMENTED
-
-
+		' Check all Conditions before starting scripts.
 		If MiniScript = True Then Return
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-
 
 		If DomTyping = True Then Return
 		If DomTypeCheck = True And RLGLTick < 6 Then Return
@@ -9018,78 +9016,39 @@ CensorConstant:
 		If ChatBox2.Text <> "" And RLGLTick < 6 Then Return
 		If FollowUp <> "" And RLGLTick < 6 Then Return
 
+		' Decrement TickCounter if Game is running.
 		If RLGLGame = True Then RLGLTick -= 1
 
+		' Run scripts only if time is over.
 		If RLGLTick < 1 Then
+			' Swap the BooleanValue
+			RedLight = Not RedLight
+			' Turn off TauntTimer when State is red.
+			If RedLight Then RLGLTauntTimer.Stop()
 
-			If RedLight = False Then
+			' Declare list to read
+			Dim tempList As List(Of String)
 
-				RLGLTauntTimer.Stop()
-
-				RedLight = True
-
-				Dim RedReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Red Light.txt")
-				Dim RedList As New List(Of String)
-
-				While RedReader.Peek <> -1
-					RedList.Add(RedReader.ReadLine())
-				End While
-
-				RedReader.Close()
-				RedReader.Dispose()
-
-				Try
-					RedList = FilterList(RedList)
-					DomTask = RedList(randomizer.Next(0, RedList.Count))
-				Catch
-					DomTask = "ERROR: Tease AI did not return a valid RLGL line"
-				End Try
-
-				TypingDelayGeneric()
-
-				'DomWMP.Ctlcontrols.pause()
-
-
-
+			' Read File according to state and set the next timer-tick-duration.
+			If RedLight Then
+				'################################## RED - Light ##################################
+				tempList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Red Light.txt")
 				RLGLTick = randomizer.Next(FrmSettings.NBRedLightMin.Value, FrmSettings.NBRedLightMax.Value + 1)
-
 			Else
-
-
-
-				RedLight = False
-
-
-				Dim GreenReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Green Light.txt")
-				Dim GreenList As New List(Of String)
-
-				While GreenReader.Peek <> -1
-					GreenList.Add(GreenReader.ReadLine())
-				End While
-
-				GreenReader.Close()
-				GreenReader.Dispose()
-
-
-				Try
-					GreenList = FilterList(GreenList)
-					DomTask = GreenList(randomizer.Next(0, GreenList.Count))
-				Catch
-					DomTask = "ERROR: Tease AI did not return a valid RLGL line"
-				End Try
-
-				TypingDelayGeneric()
-
-				'DomWMP.Ctlcontrols.play()
-
-
-
+				'################################## Green - Light ################################
+				tempList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Green Light.txt")
 				RLGLTick = randomizer.Next(FrmSettings.NBGreenLightMin.Value, FrmSettings.NBGreenLightMax.Value + 1)
-
 			End If
 
-		End If
+			Try
+				tempList = FilterList(tempList)
+				DomTask = tempList(randomizer.Next(0, tempList.Count))
+			Catch
+				DomTask = "ERROR: Tease AI did not return a valid RLGL line"
+			End Try
 
+			TypingDelayGeneric()
+		End If
 	End Sub
 
 
