@@ -2700,6 +2700,9 @@ WritingTaskLine:
 
 						EdgeCountTimer.Stop()
 						DomChat = "#SYS_MultipleEdgesStop"
+						If Contact1Edge = True Then DomChat = "@Contact1 #SYS_MultipleEdgesStop"
+						If Contact2Edge = True Then DomChat = "@Contact2 #SYS_MultipleEdgesStop"
+						If Contact3Edge = True Then DomChat = "@Contact3 #SYS_MultipleEdgesStop"
 						TypingDelay()
 						MultipleEdgesTick = MultipleEdgesInterval
 						MultipleEdgesTimer.Start()
@@ -10329,13 +10332,23 @@ StatusUpdateEnd:
 
 
 		If StringClean.Contains("#LikedImageCount") Then
-			Dim LikeList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
-			StringClean = StringClean.Replace("#LikedImageCount", LikeList.Count)
+			Try
+				Dim LikeList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
+				StringClean = StringClean.Replace("#LikedImageCount", LikeList.Count)
+			Catch
+				StringClean = StringClean.Replace("#LikedImageCount", "0")
+			End Try
+
 		End If
 
 		If StringClean.Contains("#DislikedImageCount") Then
-			Dim DislikeList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
-			StringClean = StringClean.Replace("#DislikedImageCount", DislikeList.Count)
+			Try
+				Dim DislikeList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
+				StringClean = StringClean.Replace("#DislikedImageCount", DislikeList.Count)
+			Catch
+				StringClean = StringClean.Replace("#DislikedImageCount", "0")
+			End Try
+
 		End If
 
 
@@ -30599,6 +30612,9 @@ SkipNew:
 			MultipleEdgesTimer.Stop()
 
 			DomChat = "#SYS_MultipleEdgesStart"
+			If Contact1Edge = True Then DomChat = "@Contact1 #SYS_MultipleEdgesStart"
+			If Contact2Edge = True Then DomChat = "@Contact2 #SYS_MultipleEdgesStart"
+			If Contact3Edge = True Then DomChat = "@Contact3 #SYS_MultipleEdgesStart"
 			TypingDelay()
 
 			MultipleEdgesMetronome = "START"

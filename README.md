@@ -2,7 +2,24 @@
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
 
+# Changelog - Patch 52
+
+
+Fixed bug where Glitter Contacts did not appear correctly during Multiple Edges they initiated
+
+
+Fixes added from Community Members:
+
+	Stefaf: Bugfix StackOverflowException
+		Added functionallity to prevent Timers from triggering oneself over and over again, while the TickEventHandler is running long procedures. 
+
+    Stefaf: Bugfix image list not found (1885 Note: The code here is above my expertise, but it appears to fix crashes that would occur when Tease AI cannot locate Url Files, DislikedImageURLS or LikedImageURLS) 
+
+
+
+
 # Changelog - Patch 51
+
 
 @RandomText() Can now be used multiple times per line
 
@@ -157,9 +174,7 @@ Fixes added from Community Members:
 
          Before each step there is a check, if it could alter the result. If it won't the Step is skipped.
 
-	Stefaf: Bugfix StackOverflowException
-		Added functionallity to prevent Timers from triggering oneself over and over again, while the TickEventHandler is running long procedures. 
-		 
+			 
 	pepsifreak: Default mute setting to false, player now updates with the setting  
 	     
 		I feel it should be off by default, and since audio doesn't display the
