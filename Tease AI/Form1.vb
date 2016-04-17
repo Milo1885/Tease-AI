@@ -10543,12 +10543,12 @@ StatusUpdateEnd:
 
 					Else
 
-						MsgBox("""" & PoundArray(i) & ".txt"" was not found in """ & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\. Please verify the file is in the correct folder and that " _
-							   & "the Vocabulary word is spelled correctly in the script.", , "Error!")
+						'MsgBox("""" & PoundArray(i) & ".txt"" was not found in """ & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\. Please verify the file is in the correct folder and that " _
+						'& "the Vocabulary word is spelled correctly in the script.", , "Error!")
 
-						StringClean = StringClean.Replace(PoundArray(i), PoundArray(i).Replace("#", ""))
+						StringClean = StringClean.Replace(PoundArray(i), "<font color=""red"">" & PoundArray(i) & "</font>")
+						'StringClean = StringClean.Replace(PoundArray(i), PoundArray(i).Replace("#", ""))
 
-						'PoundArray(i) = PoundArray(i).Replace("#", "")
 						Debug.Print("dafuq?")
 						Debug.Print(StringClean)
 						'GoTo BadVocabBreak
