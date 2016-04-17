@@ -2877,6 +2877,11 @@ WritingTaskLine:
 								End If
 								TeaseTimer.Start()
 
+								OrgasmYesNo = False
+
+								'Github Patch
+								YesOrNo = False
+
 								'ShowModule = True
 								StrokeTauntVal = -1
 								FileText = RepeatList(randomizer.Next(0, RepeatList.Count))
@@ -2954,6 +2959,11 @@ RuinedOrgasm:
 							TeaseTick = randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
 						End If
 						TeaseTimer.Start()
+
+						OrgasmYesNo = False
+
+						'Github Patch
+						YesOrNo = False
 
 						'ShowModule = True
 						StrokeTauntVal = -1
@@ -3067,6 +3077,11 @@ NoNoCumFiles:
 							TeaseTick = randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
 						End If
 						TeaseTimer.Start()
+
+						OrgasmYesNo = False
+
+						'Github Patch
+						YesOrNo = False
 
 						'ShowModule = True
 						StrokeTauntVal = -1
