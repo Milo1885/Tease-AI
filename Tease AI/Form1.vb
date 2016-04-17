@@ -6508,7 +6508,7 @@ EndSysMes:
 
 				End If
 
-				If PreLoadImage = True Then GoTo HypNoResponse
+				If PreLoadImage = True Or JustShowedBlogImage = True Then GoTo HypNoResponse
 
 
 				If ShowPicture = True Or DommeImageFound = True Then
@@ -12683,7 +12683,7 @@ OrgasmDecided:
 			Dim BoobPic As String
 
 			Try
-				BoobPic = AssList(randomizer.Next(0, BoobList.Count))
+				BoobPic = BoobList(randomizer.Next(0, BoobList.Count))
 			Catch
 				BoobPic = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
 			End Try
