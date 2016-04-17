@@ -146,7 +146,15 @@ System.ComponentModel.Description("Determines the Target Directory of the URL-Fi
 				If System.IO.Directory.Exists(value) Or Me.DesignMode = True Then
 					_ImageURLFileDir = value
 				Else
-					Throw New DirectoryNotFoundException(String.Format("Can't find the given directory: '{0}'", value))
+					Try
+						' check if Folder Exists, if Not Create it
+						If Not Directory.Exists(Path.GetDirectoryName(value)) Then _
+							Directory.CreateDirectory(Path.GetDirectoryName(value))
+
+						_ImageURLFileDir = value
+					Catch ex As Exception
+						Throw
+					End Try
 				End If
 			End Set
 		End Property
@@ -170,7 +178,15 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Dislikelist.
 				If System.IO.File.Exists(value) Or Me.DesignMode = True Then
 					_DislikeListPath = value
 				Else
-					Throw New DirectoryNotFoundException(String.Format("Can't find the given directory: '{0}'", value))
+					Try
+						' check if Folder Exists, if Not Create it
+						If Not Directory.Exists(Path.GetDirectoryName(value)) Then _
+							Directory.CreateDirectory(Path.GetDirectoryName(value))
+
+						_DislikeListPath = value
+					Catch ex As Exception
+						Throw
+					End Try
 				End If
 			End Set
 		End Property
@@ -193,7 +209,15 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 				If System.IO.File.Exists(value) Or Me.DesignMode = True Then
 					_LikeListPath = value
 				Else
-					Throw New DirectoryNotFoundException(String.Format("Can't find the given directory: '{0}'", value))
+					Try
+						' check if Folder Exists, if Not Create it
+						If Not Directory.Exists(Path.GetDirectoryName(value)) Then _
+							Directory.CreateDirectory(Path.GetDirectoryName(value))
+
+						_LikeListPath = value
+					Catch ex As Exception
+						Throw
+					End Try
 				End If
 			End Set
 		End Property
