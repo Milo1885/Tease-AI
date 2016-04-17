@@ -8126,13 +8126,14 @@ TryPrevious:
 	Private Sub StrokeTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles StrokeTimer.Tick
 
 
-		If InputFlag = True Or DomTyping = True Then Return
+		If InputFlag = True Then Return
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		If DomTypeCheck = True And StrokeTick < 5 Then Return
 		If chatBox.Text <> "" And StrokeTick < 5 Then Return
 		If ChatBox2.Text <> "" And StrokeTick < 5 Then Return
 		If MiniScript = True And StrokeTick < 5 Then Return
 		If FollowUp <> "" And StrokeTick < 5 Then Return
+
 
 		If FrmSettings.CBDebugTauntsEndless.Checked = True And StrokeTick < 5 Then Return
 

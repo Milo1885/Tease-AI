@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Fixed bug that was making Taunt Cycles last slightly longer than they should have
+
 Note - Here's the AI Box to go with the Edging Ends Taunts feature I just added:
 
 Edit: That didn't work :(
@@ -27,6 +29,12 @@ Fixes added from Community Members:
 		Added functionallity to prevent Timers from triggering oneself over and over again, while the TickEventHandler is running long procedures. 
 
     Stefaf: Bugfix image list not found (1885 Note: The code here is above my expertise, but it appears to fix crashes that would occur when Tease AI cannot locate Url Files, DislikedImageURLS or LikedImageURLS) 
+	
+	pepsifreak: Fixed end continue scripts
+	     The first line would get cut off so you wouldn't actually know what to do
+		 
+	Stefaf: Stops Metronome during RLGL
+         Now the Metronome will be stopped during Red light. Simplified Eventhandler RLGLTimer_Tick, for better maintainability	
 
 
 
