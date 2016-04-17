@@ -78,7 +78,6 @@ Partial Class Form1
         Me.Piercing = New System.Windows.Forms.Button()
         Me.subName = New System.Windows.Forms.TextBox()
 		Me.ScriptTimer = New Tease_AI.teaseAI_Timer()
-		Me.ScriptTimer = New Tease_AI.teaseAI_Timer()
         Me.OpenScriptDialog = New System.Windows.Forms.OpenFileDialog()
 		Me.Timer1 = New Tease_AI.teaseAI_Timer()
 		Me.IsTypingTimer = New Tease_AI.teaseAI_Timer()
