@@ -51,7 +51,7 @@ Public Class Form1
 	Public TempFileText As String
 	Dim ModText As String
 
-	Dim TeaseTick As Integer
+	Public TeaseTick As Integer
 
 	Dim StrokeTauntCount As Integer
 	Dim TauntTextTotal As Integer
@@ -131,7 +131,7 @@ Public Class Form1
 	Dim HoldEdgeTime As Integer
 	Dim HoldEdgeTimeTotal As Integer
 
-	Dim EdgeTauntInt As Integer
+	Public EdgeTauntInt As Integer
 
 	Dim DelayTick As Integer
 	Dim DelayFlag As Boolean
@@ -166,7 +166,7 @@ Public Class Form1
 
 	Dim DivideText As Boolean
 
-	Dim HoldEdgeTick As Integer
+	Public HoldEdgeTick As Integer
 	Dim HoldEdgeChance As Integer
 
 	Dim EdgeHold As Boolean
@@ -4553,7 +4553,8 @@ AcceptAnswer:
 
 	Public Sub ScriptTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles ScriptTimer.Tick
 
-		Debug.Print("ScriptTick = " & ScriptTick)
+		FrmSettings.LBLDebugScriptTime.Text = ScriptTick
+		'Debug.Print("ScriptTick = " & ScriptTick)
 
 		If DomTyping = True Then Return
 		If YesOrNo = True Then Return
@@ -5188,9 +5189,9 @@ ReturnCalled:
 			If lines(line).Contains("@Afternoon") And GeneralTime <> "Afternoon" Then InvalidFilter = True
 			If lines(line).Contains("@Night") And GeneralTime <> "Night" Then InvalidFilter = True
 
-			If lines(line).Contains("@GoodMood") And DommeMood <= FrmSettings.NBDomMoodMax.Value Then InvalidFilter = True
-			If lines(line).Contains("@BadMood") And DommeMood >= FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
-			If lines(line).Contains("@NeutralMood") Then
+			If lines(line).Contains("@GoodMood") And Not lines(line).Contains("@GoodMood(") And DommeMood <= FrmSettings.NBDomMoodMax.Value Then InvalidFilter = True
+			If lines(line).Contains("@BadMood") And Not lines(line).Contains("@BadMood(") And DommeMood >= FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
+			If lines(line).Contains("@NeutralMood") And Not lines(line).Contains("@NeutralMood(") Then
 				If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
 			End If
 
@@ -5887,7 +5888,7 @@ SkipGotoSearch:
 
 		' Toggle switch to let the program know when to display "Domme is typing..." and when to remove it and display what she wrote
 		If TypeToggle = 0 Then
-			Debug.Print("TypeDelay = " & TypeDelay)
+			'Debug.Print("TypeDelay = " & TypeDelay)
 			If TypeDelay > 0 Then
 				TypeDelay -= 1
 			Else
@@ -8139,7 +8140,9 @@ TryPrevious:
 
 		StrokeTick -= 1
 		FrmSettings.LBLCycleDebugCountdown.Text = StrokeTick
-		Debug.Print("StrokeTick = " & StrokeTick)
+
+		FrmSettings.LBLDebugStrokeTime.Text = StrokeTick
+		'Debug.Print("StrokeTick = " & StrokeTick)
 
 		If StrokeTick < 4 And TempScriptCount > 0 Then StrokeTick += 1
 
@@ -8237,7 +8240,8 @@ SkipTick:
 
 		StrokeTauntTick -= 1
 
-		Debug.Print("StrokeTauntTick = " & StrokeTauntTick)
+		FrmSettings.LBLDebugStrokeTauntTime.Text = StrokeTauntTick
+		'Debug.Print("StrokeTauntTick = " & StrokeTauntTick)
 
 		If StrokeTauntTick = 0 Then
 
@@ -15703,7 +15707,7 @@ VTSkip:
 			Dim MiniTemp As String = GetParentheses(StringClean, "@MiniScript(")
 
 
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\MiniScripts\" & MiniTemp & ".txt") And MiniScript = False Then
+			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\MiniScripts\" & MiniTemp & ".txt") Then ' And MiniScript = False Then
 				MiniScript = True
 				MiniScriptText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\MiniScripts\" & MiniTemp & ".txt"
 				MiniTauntVal = -1
@@ -22469,7 +22473,9 @@ NoPlaylistEndFile:
 		If chatBox.Text <> "" And EdgeTauntInt < 6 Then Return
 		If ChatBox2.Text <> "" And EdgeTauntInt < 6 Then Return
 
-		Debug.Print("EdgeTauntIn = " & EdgeTauntInt)
+		FrmSettings.LBLDebugEdgeTauntTime.Text = EdgeTauntInt
+
+		'Debug.Print("EdgeTauntIn = " & EdgeTauntInt)
 
 		EdgeTauntInt -= 1
 
@@ -22538,7 +22544,8 @@ NoPlaylistEndFile:
 
 		HoldEdgeTick -= 1
 
-		Debug.Print("HoldEdgeTick = " & HoldEdgeTick)
+		FrmSettings.LBLDebugHoldEdgeTime.Text = HoldEdgeTick
+		'Debug.Print("HoldEdgeTick = " & HoldEdgeTick)
 
 		If HoldEdgeTick < 1 Then
 
@@ -24436,8 +24443,8 @@ TryNext:
 	Private Sub TeaseTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TeaseTimer.Tick
 
 
-
-		Debug.Print("TeaseTick = " & TeaseTick)
+		FrmSettings.LBLDebugTeaseTime.Text = TeaseTick
+		'Debug.Print("TeaseTick = " & TeaseTick)
 
 		TeaseTick -= 1
 
@@ -25522,14 +25529,18 @@ GetDommeSlideshow:
 
 	Private Sub WMPTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles WMPTimer.Tick
 
-		Try
-			Dim VideoLength As Integer = DomWMP.currentMedia.duration
-			Dim VideoRemaining As Integer = Math.Floor(DomWMP.currentMedia.duration - DomWMP.Ctlcontrols.currentPosition)
 
-			Debug.Print("Video Length = " & VideoLength)
-			Debug.Print("Video Remaining = " & VideoRemaining)
-		Catch
-		End Try
+		If DomWMP.currentPlaylist.count <> 0 Then
+			Try
+				Dim VideoLength As Integer = DomWMP.currentMedia.duration
+				Dim VideoRemaining As Integer = Math.Floor(DomWMP.currentMedia.duration - DomWMP.Ctlcontrols.currentPosition)
+
+				Debug.Print("Video Length = " & VideoLength)
+				Debug.Print("Video Remaining = " & VideoRemaining)
+			Catch
+			End Try
+		End If
+
 
 
 
@@ -27112,7 +27123,7 @@ SkipNew:
 		LBLAMPM.Text = Format(Now, "tt")
 		LBLDate.Text = Format(Now, "Long Date")
 
-		Debug.Print("Current day = " & Format(Now, "dd"))
+		'Debug.Print("Current day = " & Format(Now, "dd"))
 
 		' Debug.Print(Format(Now, "MM/dd/yyyy"))
 
@@ -27124,24 +27135,24 @@ SkipNew:
 			Dim DDiff As Integer
 			DDiff = DateDiff(DateInterval.Hour, CDate(Dates), Now)
 
-			Debug.Print(DDiff)
-			Debug.Print(GetTime("SYS_WakeUp"))
+			'Debug.Print(DDiff)
+			'Debug.Print(GetTime("SYS_WakeUp"))
 
 			GeneralTime = "Night"
 			If DDiff > -1 And DDiff < 5 Then GeneralTime = "Morning"
 			If DDiff > 4 And DDiff < 12 Then GeneralTime = "Afternoon"
 			If DDiff < -13 Then GeneralTime = "Afternoon"
 
-			Debug.Print(GeneralTime)
+			'Debug.Print(GeneralTime)
 		End If
 
 
 		' #DEBUG
 
-		Debug.Print("LockImage = " & LockImage)
-		Debug.Print("WorshipMode = " & WorshipMode)
-		Debug.Print("WorshipTarget = " & WorshipTarget)
-		Debug.Print("My.Settings.SplitterDistance = " & My.Settings.SplitterDistance)
+		'Debug.Print("LockImage = " & LockImage)
+		'Debug.Print("WorshipMode = " & WorshipMode)
+		'Debug.Print("WorshipTarget = " & WorshipTarget)
+		'Debug.Print("My.Settings.SplitterDistance = " & My.Settings.SplitterDistance)
 
 
 

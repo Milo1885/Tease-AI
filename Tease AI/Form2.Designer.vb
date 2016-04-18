@@ -779,6 +779,8 @@ Partial Class FrmSettings
 		Me.NBNextImageChance = New System.Windows.Forms.NumericUpDown()
 		Me.Label6 = New System.Windows.Forms.Label()
 		Me.GroupBox57 = New System.Windows.Forms.GroupBox()
+		Me.Label139 = New System.Windows.Forms.Label()
+		Me.NBTauntEdging = New System.Windows.Forms.NumericUpDown()
 		Me.LBLVtf = New System.Windows.Forms.Label()
 		Me.LBLStf = New System.Windows.Forms.Label()
 		Me.SliderSTF = New System.Windows.Forms.TrackBar()
@@ -799,6 +801,7 @@ Partial Class FrmSettings
 		Me.NBTeaseLengthMin = New System.Windows.Forms.NumericUpDown()
 		Me.Label95 = New System.Windows.Forms.Label()
 		Me.Label49 = New System.Windows.Forms.Label()
+		Me.Label141 = New System.Windows.Forms.Label()
 		Me.GroupBox56 = New System.Windows.Forms.GroupBox()
 		Me.Label90 = New System.Windows.Forms.Label()
 		Me.NBRuinSometimes = New System.Windows.Forms.NumericUpDown()
@@ -949,6 +952,9 @@ Partial Class FrmSettings
 		Me.TabPage28 = New System.Windows.Forms.TabPage()
 		Me.TabControl3 = New System.Windows.Forms.TabControl()
 		Me.TabPage29 = New System.Windows.Forms.TabPage()
+		Me.Label143 = New System.Windows.Forms.Label()
+		Me.LBLDebugScriptTime = New System.Windows.Forms.Label()
+		Me.BTNDebugHoldEdgeTimer = New System.Windows.Forms.Button()
 		Me.GroupBox26 = New System.Windows.Forms.GroupBox()
 		Me.LBLCycleDebugCountdown = New System.Windows.Forms.Label()
 		Me.Button19 = New System.Windows.Forms.Button()
@@ -961,6 +967,20 @@ Partial Class FrmSettings
 		Me.RBDebugTaunts1 = New System.Windows.Forms.RadioButton()
 		Me.CBDebugTauntsEndless = New System.Windows.Forms.CheckBox()
 		Me.CBDebugTaunts = New System.Windows.Forms.CheckBox()
+		Me.BTNDebugStrokeTauntTimer = New System.Windows.Forms.Button()
+		Me.LBLDebugHoldEdgeTime = New System.Windows.Forms.Label()
+		Me.Label145 = New System.Windows.Forms.Label()
+		Me.BTNDebugStrokeTime = New System.Windows.Forms.Button()
+		Me.BTNDebugEdgeTauntTimer = New System.Windows.Forms.Button()
+		Me.LBLDebugTeaseTime = New System.Windows.Forms.Label()
+		Me.LBLDebugStrokeTime = New System.Windows.Forms.Label()
+		Me.LBLDebugEdgeTauntTime = New System.Windows.Forms.Label()
+		Me.BTNDebugTeaseTimer = New System.Windows.Forms.Button()
+		Me.Label142 = New System.Windows.Forms.Label()
+		Me.Label150 = New System.Windows.Forms.Label()
+		Me.Label152 = New System.Windows.Forms.Label()
+		Me.LBLDebugStrokeTauntTime = New System.Windows.Forms.Label()
+		Me.Label147 = New System.Windows.Forms.Label()
 		Me.TabPage30 = New System.Windows.Forms.TabPage()
 		Me.TabPage5 = New System.Windows.Forms.TabPage()
 		Me.Panel5 = New System.Windows.Forms.Panel()
@@ -1011,9 +1031,6 @@ Partial Class FrmSettings
 		Me.Label135 = New System.Windows.Forms.Label()
 		Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
-		Me.NBTauntEdging = New System.Windows.Forms.NumericUpDown()
-		Me.Label139 = New System.Windows.Forms.Label()
-		Me.Label141 = New System.Windows.Forms.Label()
 		Me.SettingsPanel.SuspendLayout
 		Me.SettingsTabs.SuspendLayout
 		Me.TabPage1.SuspendLayout
@@ -1194,6 +1211,7 @@ Partial Class FrmSettings
 		Me.GroupBox10.SuspendLayout
 		CType(Me.NBNextImageChance,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.GroupBox57.SuspendLayout
+		CType(Me.NBTauntEdging,System.ComponentModel.ISupportInitialize).BeginInit
 		CType(Me.SliderSTF,System.ComponentModel.ISupportInitialize).BeginInit
 		CType(Me.TauntSlider,System.ComponentModel.ISupportInitialize).BeginInit
 		CType(Me.NBTauntCycleMax,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1252,7 +1270,6 @@ Partial Class FrmSettings
 		Me.GroupBox65.SuspendLayout
 		CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).BeginInit
 		CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTauntEdging,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.SuspendLayout
 		'
 		'SettingsPanel
@@ -10541,6 +10558,26 @@ Partial Class FrmSettings
 		Me.GroupBox57.TabStop = false
 		Me.GroupBox57.Text = "Tease"
 		'
+		'Label139
+		'
+		Me.Label139.BackColor = System.Drawing.Color.Transparent
+		Me.Label139.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label139.ForeColor = System.Drawing.Color.Black
+		Me.Label139.Location = New System.Drawing.Point(175, 171)
+		Me.Label139.Name = "Label139"
+		Me.Label139.Size = New System.Drawing.Size(50, 17)
+		Me.Label139.TabIndex = 184
+		Me.Label139.Text = "percent"
+		Me.Label139.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'NBTauntEdging
+		'
+		Me.NBTauntEdging.Location = New System.Drawing.Point(130, 171)
+		Me.NBTauntEdging.Name = "NBTauntEdging"
+		Me.NBTauntEdging.Size = New System.Drawing.Size(44, 20)
+		Me.NBTauntEdging.TabIndex = 188
+		Me.NBTauntEdging.Value = New Decimal(New Integer() {70, 0, 0, 0})
+		'
 		'LBLVtf
 		'
 		Me.LBLVtf.BackColor = System.Drawing.Color.Transparent
@@ -10770,6 +10807,18 @@ Partial Class FrmSettings
 		Me.Label49.TabIndex = 164
 		Me.Label49.Text = "Stroke Taunt Frequency:"
 		Me.Label49.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label141
+		'
+		Me.Label141.BackColor = System.Drawing.Color.Transparent
+		Me.Label141.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label141.ForeColor = System.Drawing.Color.Black
+		Me.Label141.Location = New System.Drawing.Point(6, 163)
+		Me.Label141.Name = "Label141"
+		Me.Label141.Size = New System.Drawing.Size(141, 32)
+		Me.Label141.TabIndex = 189
+		Me.Label141.Text = "Edging Ends Taunts:"
+		Me.Label141.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'GroupBox56
 		'
@@ -12379,13 +12428,59 @@ Partial Class FrmSettings
 		'TabPage29
 		'
 		Me.TabPage29.BackColor = System.Drawing.Color.LightGray
+		Me.TabPage29.Controls.Add(Me.Label143)
+		Me.TabPage29.Controls.Add(Me.LBLDebugScriptTime)
+		Me.TabPage29.Controls.Add(Me.BTNDebugHoldEdgeTimer)
 		Me.TabPage29.Controls.Add(Me.GroupBox26)
+		Me.TabPage29.Controls.Add(Me.BTNDebugStrokeTauntTimer)
+		Me.TabPage29.Controls.Add(Me.LBLDebugHoldEdgeTime)
+		Me.TabPage29.Controls.Add(Me.Label145)
+		Me.TabPage29.Controls.Add(Me.BTNDebugStrokeTime)
+		Me.TabPage29.Controls.Add(Me.BTNDebugEdgeTauntTimer)
+		Me.TabPage29.Controls.Add(Me.LBLDebugTeaseTime)
+		Me.TabPage29.Controls.Add(Me.LBLDebugStrokeTime)
+		Me.TabPage29.Controls.Add(Me.LBLDebugEdgeTauntTime)
+		Me.TabPage29.Controls.Add(Me.BTNDebugTeaseTimer)
+		Me.TabPage29.Controls.Add(Me.Label142)
+		Me.TabPage29.Controls.Add(Me.Label150)
+		Me.TabPage29.Controls.Add(Me.Label152)
+		Me.TabPage29.Controls.Add(Me.LBLDebugStrokeTauntTime)
+		Me.TabPage29.Controls.Add(Me.Label147)
 		Me.TabPage29.Location = New System.Drawing.Point(4, 22)
 		Me.TabPage29.Name = "TabPage29"
 		Me.TabPage29.Padding = New System.Windows.Forms.Padding(3)
 		Me.TabPage29.Size = New System.Drawing.Size(700, 411)
 		Me.TabPage29.TabIndex = 0
 		Me.TabPage29.Text = "TabPage29"
+		'
+		'Label143
+		'
+		Me.Label143.Location = New System.Drawing.Point(402, 46)
+		Me.Label143.Name = "Label143"
+		Me.Label143.Size = New System.Drawing.Size(67, 23)
+		Me.Label143.TabIndex = 15
+		Me.Label143.Text = "Script Timer"
+		Me.Label143.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLDebugScriptTime
+		'
+		Me.LBLDebugScriptTime.BackColor = System.Drawing.Color.Gainsboro
+		Me.LBLDebugScriptTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLDebugScriptTime.Location = New System.Drawing.Point(475, 46)
+		Me.LBLDebugScriptTime.Name = "LBLDebugScriptTime"
+		Me.LBLDebugScriptTime.Size = New System.Drawing.Size(100, 23)
+		Me.LBLDebugScriptTime.TabIndex = 16
+		Me.LBLDebugScriptTime.Text = "0"
+		Me.LBLDebugScriptTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'BTNDebugHoldEdgeTimer
+		'
+		Me.BTNDebugHoldEdgeTimer.Location = New System.Drawing.Point(581, 248)
+		Me.BTNDebugHoldEdgeTimer.Name = "BTNDebugHoldEdgeTimer"
+		Me.BTNDebugHoldEdgeTimer.Size = New System.Drawing.Size(75, 23)
+		Me.BTNDebugHoldEdgeTimer.TabIndex = 14
+		Me.BTNDebugHoldEdgeTimer.Text = "Set to 5"
+		Me.BTNDebugHoldEdgeTimer.UseVisualStyleBackColor = true
 		'
 		'GroupBox26
 		'
@@ -12428,7 +12523,6 @@ Partial Class FrmSettings
 		'
 		'BTNDebugTauntsClear
 		'
-		Me.BTNDebugTauntsClear.Enabled = false
 		Me.BTNDebugTauntsClear.Location = New System.Drawing.Point(194, 28)
 		Me.BTNDebugTauntsClear.Name = "BTNDebugTauntsClear"
 		Me.BTNDebugTauntsClear.Size = New System.Drawing.Size(146, 30)
@@ -12438,7 +12532,6 @@ Partial Class FrmSettings
 		'
 		'TBDebugTaunts3
 		'
-		Me.TBDebugTaunts3.Enabled = false
 		Me.TBDebugTaunts3.Location = New System.Drawing.Point(6, 116)
 		Me.TBDebugTaunts3.Name = "TBDebugTaunts3"
 		Me.TBDebugTaunts3.Size = New System.Drawing.Size(331, 20)
@@ -12446,7 +12539,6 @@ Partial Class FrmSettings
 		'
 		'TBDebugTaunts2
 		'
-		Me.TBDebugTaunts2.Enabled = false
 		Me.TBDebugTaunts2.Location = New System.Drawing.Point(6, 90)
 		Me.TBDebugTaunts2.Name = "TBDebugTaunts2"
 		Me.TBDebugTaunts2.Size = New System.Drawing.Size(331, 20)
@@ -12454,7 +12546,6 @@ Partial Class FrmSettings
 		'
 		'TBDebugTaunts1
 		'
-		Me.TBDebugTaunts1.Enabled = false
 		Me.TBDebugTaunts1.Location = New System.Drawing.Point(6, 64)
 		Me.TBDebugTaunts1.Name = "TBDebugTaunts1"
 		Me.TBDebugTaunts1.Size = New System.Drawing.Size(331, 20)
@@ -12463,7 +12554,6 @@ Partial Class FrmSettings
 		'RBDebugTaunts3
 		'
 		Me.RBDebugTaunts3.AutoSize = true
-		Me.RBDebugTaunts3.Enabled = false
 		Me.RBDebugTaunts3.Location = New System.Drawing.Point(127, 41)
 		Me.RBDebugTaunts3.Name = "RBDebugTaunts3"
 		Me.RBDebugTaunts3.Size = New System.Drawing.Size(59, 17)
@@ -12474,7 +12564,6 @@ Partial Class FrmSettings
 		'RBDebugTaunts2
 		'
 		Me.RBDebugTaunts2.AutoSize = true
-		Me.RBDebugTaunts2.Enabled = false
 		Me.RBDebugTaunts2.Location = New System.Drawing.Point(66, 41)
 		Me.RBDebugTaunts2.Name = "RBDebugTaunts2"
 		Me.RBDebugTaunts2.Size = New System.Drawing.Size(59, 17)
@@ -12486,7 +12575,6 @@ Partial Class FrmSettings
 		'
 		Me.RBDebugTaunts1.AutoSize = true
 		Me.RBDebugTaunts1.Checked = true
-		Me.RBDebugTaunts1.Enabled = false
 		Me.RBDebugTaunts1.Location = New System.Drawing.Point(7, 41)
 		Me.RBDebugTaunts1.Name = "RBDebugTaunts1"
 		Me.RBDebugTaunts1.Size = New System.Drawing.Size(54, 17)
@@ -12498,7 +12586,6 @@ Partial Class FrmSettings
 		'CBDebugTauntsEndless
 		'
 		Me.CBDebugTauntsEndless.AutoSize = true
-		Me.CBDebugTauntsEndless.Enabled = false
 		Me.CBDebugTauntsEndless.Location = New System.Drawing.Point(7, 150)
 		Me.CBDebugTauntsEndless.Name = "CBDebugTauntsEndless"
 		Me.CBDebugTauntsEndless.Size = New System.Drawing.Size(92, 17)
@@ -12516,15 +12603,151 @@ Partial Class FrmSettings
 		Me.CBDebugTaunts.Text = "Enable Taunt Cycle Debugging"
 		Me.CBDebugTaunts.UseVisualStyleBackColor = true
 		'
+		'BTNDebugStrokeTauntTimer
+		'
+		Me.BTNDebugStrokeTauntTimer.Location = New System.Drawing.Point(581, 150)
+		Me.BTNDebugStrokeTauntTimer.Name = "BTNDebugStrokeTauntTimer"
+		Me.BTNDebugStrokeTauntTimer.Size = New System.Drawing.Size(75, 23)
+		Me.BTNDebugStrokeTauntTimer.TabIndex = 8
+		Me.BTNDebugStrokeTauntTimer.Text = "Set to 5"
+		Me.BTNDebugStrokeTauntTimer.UseVisualStyleBackColor = true
+		'
+		'LBLDebugHoldEdgeTime
+		'
+		Me.LBLDebugHoldEdgeTime.BackColor = System.Drawing.Color.Gainsboro
+		Me.LBLDebugHoldEdgeTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLDebugHoldEdgeTime.Location = New System.Drawing.Point(475, 248)
+		Me.LBLDebugHoldEdgeTime.Name = "LBLDebugHoldEdgeTime"
+		Me.LBLDebugHoldEdgeTime.Size = New System.Drawing.Size(100, 23)
+		Me.LBLDebugHoldEdgeTime.TabIndex = 13
+		Me.LBLDebugHoldEdgeTime.Text = "0"
+		Me.LBLDebugHoldEdgeTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'Label145
+		'
+		Me.Label145.Location = New System.Drawing.Point(402, 11)
+		Me.Label145.Name = "Label145"
+		Me.Label145.Size = New System.Drawing.Size(67, 23)
+		Me.Label145.TabIndex = 3
+		Me.Label145.Text = "Tease Timer"
+		Me.Label145.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'BTNDebugStrokeTime
+		'
+		Me.BTNDebugStrokeTime.Location = New System.Drawing.Point(581, 121)
+		Me.BTNDebugStrokeTime.Name = "BTNDebugStrokeTime"
+		Me.BTNDebugStrokeTime.Size = New System.Drawing.Size(75, 23)
+		Me.BTNDebugStrokeTime.TabIndex = 2
+		Me.BTNDebugStrokeTime.Text = "Set to 5"
+		Me.BTNDebugStrokeTime.UseVisualStyleBackColor = true
+		'
+		'BTNDebugEdgeTauntTimer
+		'
+		Me.BTNDebugEdgeTauntTimer.Location = New System.Drawing.Point(581, 209)
+		Me.BTNDebugEdgeTauntTimer.Name = "BTNDebugEdgeTauntTimer"
+		Me.BTNDebugEdgeTauntTimer.Size = New System.Drawing.Size(75, 23)
+		Me.BTNDebugEdgeTauntTimer.TabIndex = 11
+		Me.BTNDebugEdgeTauntTimer.Text = "Set to 5"
+		Me.BTNDebugEdgeTauntTimer.UseVisualStyleBackColor = true
+		'
+		'LBLDebugTeaseTime
+		'
+		Me.LBLDebugTeaseTime.BackColor = System.Drawing.Color.Gainsboro
+		Me.LBLDebugTeaseTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLDebugTeaseTime.Location = New System.Drawing.Point(475, 11)
+		Me.LBLDebugTeaseTime.Name = "LBLDebugTeaseTime"
+		Me.LBLDebugTeaseTime.Size = New System.Drawing.Size(100, 23)
+		Me.LBLDebugTeaseTime.TabIndex = 4
+		Me.LBLDebugTeaseTime.Text = "0"
+		Me.LBLDebugTeaseTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLDebugStrokeTime
+		'
+		Me.LBLDebugStrokeTime.BackColor = System.Drawing.Color.Gainsboro
+		Me.LBLDebugStrokeTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLDebugStrokeTime.Location = New System.Drawing.Point(475, 121)
+		Me.LBLDebugStrokeTime.Name = "LBLDebugStrokeTime"
+		Me.LBLDebugStrokeTime.Size = New System.Drawing.Size(100, 23)
+		Me.LBLDebugStrokeTime.TabIndex = 1
+		Me.LBLDebugStrokeTime.Text = "0"
+		Me.LBLDebugStrokeTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLDebugEdgeTauntTime
+		'
+		Me.LBLDebugEdgeTauntTime.BackColor = System.Drawing.Color.Gainsboro
+		Me.LBLDebugEdgeTauntTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLDebugEdgeTauntTime.Location = New System.Drawing.Point(475, 209)
+		Me.LBLDebugEdgeTauntTime.Name = "LBLDebugEdgeTauntTime"
+		Me.LBLDebugEdgeTauntTime.Size = New System.Drawing.Size(100, 23)
+		Me.LBLDebugEdgeTauntTime.TabIndex = 10
+		Me.LBLDebugEdgeTauntTime.Text = "0"
+		Me.LBLDebugEdgeTauntTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'BTNDebugTeaseTimer
+		'
+		Me.BTNDebugTeaseTimer.Location = New System.Drawing.Point(581, 11)
+		Me.BTNDebugTeaseTimer.Name = "BTNDebugTeaseTimer"
+		Me.BTNDebugTeaseTimer.Size = New System.Drawing.Size(75, 23)
+		Me.BTNDebugTeaseTimer.TabIndex = 5
+		Me.BTNDebugTeaseTimer.Text = "Set to 5"
+		Me.BTNDebugTeaseTimer.UseVisualStyleBackColor = true
+		'
+		'Label142
+		'
+		Me.Label142.Location = New System.Drawing.Point(402, 121)
+		Me.Label142.Name = "Label142"
+		Me.Label142.Size = New System.Drawing.Size(67, 23)
+		Me.Label142.TabIndex = 0
+		Me.Label142.Text = "Stroke Timer"
+		Me.Label142.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'Label150
+		'
+		Me.Label150.Location = New System.Drawing.Point(402, 206)
+		Me.Label150.Name = "Label150"
+		Me.Label150.Size = New System.Drawing.Size(67, 27)
+		Me.Label150.TabIndex = 9
+		Me.Label150.Text = "Edge Taunt Timer"
+		Me.Label150.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'Label152
+		'
+		Me.Label152.Location = New System.Drawing.Point(402, 238)
+		Me.Label152.Name = "Label152"
+		Me.Label152.Size = New System.Drawing.Size(67, 40)
+		Me.Label152.TabIndex = 12
+		Me.Label152.Text = "Hold Edge Timer"
+		Me.Label152.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLDebugStrokeTauntTime
+		'
+		Me.LBLDebugStrokeTauntTime.BackColor = System.Drawing.Color.Gainsboro
+		Me.LBLDebugStrokeTauntTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLDebugStrokeTauntTime.Location = New System.Drawing.Point(475, 150)
+		Me.LBLDebugStrokeTauntTime.Name = "LBLDebugStrokeTauntTime"
+		Me.LBLDebugStrokeTauntTime.Size = New System.Drawing.Size(100, 23)
+		Me.LBLDebugStrokeTauntTime.TabIndex = 7
+		Me.LBLDebugStrokeTauntTime.Text = "0"
+		Me.LBLDebugStrokeTauntTime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'Label147
+		'
+		Me.Label147.Location = New System.Drawing.Point(402, 143)
+		Me.Label147.Name = "Label147"
+		Me.Label147.Size = New System.Drawing.Size(67, 29)
+		Me.Label147.TabIndex = 6
+		Me.Label147.Text = "Stroke Taunt Timer"
+		Me.Label147.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
 		'TabPage30
 		'
+		Me.TabPage30.BackColor = System.Drawing.Color.LightGray
 		Me.TabPage30.Location = New System.Drawing.Point(4, 22)
 		Me.TabPage30.Name = "TabPage30"
 		Me.TabPage30.Padding = New System.Windows.Forms.Padding(3)
 		Me.TabPage30.Size = New System.Drawing.Size(700, 411)
 		Me.TabPage30.TabIndex = 1
 		Me.TabPage30.Text = "TabPage30"
-		Me.TabPage30.UseVisualStyleBackColor = true
 		'
 		'TabPage5
 		'
@@ -12991,38 +13214,6 @@ Partial Class FrmSettings
 		Me.BWURLFiles.WorkerReportsProgress = true
 		Me.BWURLFiles.WorkerSupportsCancellation = true
 		'
-		'NBTauntEdging
-		'
-		Me.NBTauntEdging.Location = New System.Drawing.Point(130, 171)
-		Me.NBTauntEdging.Name = "NBTauntEdging"
-		Me.NBTauntEdging.Size = New System.Drawing.Size(44, 20)
-		Me.NBTauntEdging.TabIndex = 188
-		Me.NBTauntEdging.Value = New Decimal(New Integer() {70, 0, 0, 0})
-		'
-		'Label139
-		'
-		Me.Label139.BackColor = System.Drawing.Color.Transparent
-		Me.Label139.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Label139.ForeColor = System.Drawing.Color.Black
-		Me.Label139.Location = New System.Drawing.Point(175, 171)
-		Me.Label139.Name = "Label139"
-		Me.Label139.Size = New System.Drawing.Size(50, 17)
-		Me.Label139.TabIndex = 184
-		Me.Label139.Text = "percent"
-		Me.Label139.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'Label141
-		'
-		Me.Label141.BackColor = System.Drawing.Color.Transparent
-		Me.Label141.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Label141.ForeColor = System.Drawing.Color.Black
-		Me.Label141.Location = New System.Drawing.Point(6, 163)
-		Me.Label141.Name = "Label141"
-		Me.Label141.Size = New System.Drawing.Size(141, 32)
-		Me.Label141.TabIndex = 189
-		Me.Label141.Text = "Edging Ends Taunts:"
-		Me.Label141.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
 		'FrmSettings
 		'
 		Me.AllowDrop = true
@@ -13274,6 +13465,7 @@ Partial Class FrmSettings
 		CType(Me.NBNextImageChance,System.ComponentModel.ISupportInitialize).EndInit
 		Me.GroupBox57.ResumeLayout(false)
 		Me.GroupBox57.PerformLayout
+		CType(Me.NBTauntEdging,System.ComponentModel.ISupportInitialize).EndInit
 		CType(Me.SliderSTF,System.ComponentModel.ISupportInitialize).EndInit
 		CType(Me.TauntSlider,System.ComponentModel.ISupportInitialize).EndInit
 		CType(Me.NBTauntCycleMax,System.ComponentModel.ISupportInitialize).EndInit
@@ -13347,7 +13539,6 @@ Partial Class FrmSettings
 		Me.GroupBox65.PerformLayout
 		CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).EndInit
 		CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTauntEdging,System.ComponentModel.ISupportInitialize).EndInit
 		Me.ResumeLayout(false)
 
 End Sub
@@ -14341,4 +14532,21 @@ End Sub
 	Friend WithEvents Label139 As System.Windows.Forms.Label
 	Friend WithEvents NBTauntEdging As System.Windows.Forms.NumericUpDown
 	Friend WithEvents Label141 As System.Windows.Forms.Label
+	Friend WithEvents BTNDebugHoldEdgeTimer As System.Windows.Forms.Button
+	Friend WithEvents BTNDebugStrokeTauntTimer As System.Windows.Forms.Button
+	Friend WithEvents LBLDebugHoldEdgeTime As System.Windows.Forms.Label
+	Friend WithEvents Label145 As System.Windows.Forms.Label
+	Friend WithEvents BTNDebugStrokeTime As System.Windows.Forms.Button
+	Friend WithEvents BTNDebugEdgeTauntTimer As System.Windows.Forms.Button
+	Friend WithEvents LBLDebugTeaseTime As System.Windows.Forms.Label
+	Friend WithEvents LBLDebugStrokeTime As System.Windows.Forms.Label
+	Friend WithEvents LBLDebugEdgeTauntTime As System.Windows.Forms.Label
+	Friend WithEvents BTNDebugTeaseTimer As System.Windows.Forms.Button
+	Friend WithEvents Label142 As System.Windows.Forms.Label
+	Friend WithEvents Label150 As System.Windows.Forms.Label
+	Friend WithEvents Label152 As System.Windows.Forms.Label
+	Friend WithEvents LBLDebugStrokeTauntTime As System.Windows.Forms.Label
+	Friend WithEvents Label147 As System.Windows.Forms.Label
+	Friend WithEvents Label143 As System.Windows.Forms.Label
+	Friend WithEvents LBLDebugScriptTime As System.Windows.Forms.Label
 End Class

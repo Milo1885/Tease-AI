@@ -4,6 +4,10 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Fixed bug where @GoodMood(), @BadMood() and @NeutralMood() were being treated like Command Filters
+
+Miniscripts can now be called from within Miniscripts. Should be able to stack these indefinitely Inception style. When any Miniscript ends, it will return to the point where the first MiniScript was called. 
+
 Added @Month() Command Filter - will only display a line if the current month (represented by a number) matches what's in parentheses. You may enter as many options as you want. You may also use "Not" as a modifier. For example:
 
 	@Month(11) - Will only display if the current month is November

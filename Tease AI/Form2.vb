@@ -13503,58 +13503,7 @@ WhyUMakeMeDoDis:
 		End If
 	End Sub
 
-	Private Sub CBDebugTaunts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBDebugTaunts.CheckedChanged
-		If CBDebugTaunts.Checked = True Then
-			RBDebugTaunts1.Enabled = True
-			RBDebugTaunts2.Enabled = True
-			RBDebugTaunts3.Enabled = True
-			CBDebugTauntsEndless.Enabled = True
-			BTNDebugTauntsClear.Enabled = True
-
-			If RBDebugTaunts1.Checked = True Then
-				TBDebugTaunts1.Enabled = True
-				TBDebugTaunts2.Enabled = False
-				TBDebugTaunts3.Enabled = False
-			End If
-			If RBDebugTaunts2.Checked = True Then
-				TBDebugTaunts1.Enabled = True
-				TBDebugTaunts2.Enabled = True
-				TBDebugTaunts3.Enabled = False
-			End If
-			If RBDebugTaunts3.Checked = True Then
-				TBDebugTaunts1.Enabled = True
-				TBDebugTaunts2.Enabled = True
-				TBDebugTaunts3.Enabled = True
-			End If
-		Else
-			RBDebugTaunts1.Enabled = False
-			RBDebugTaunts2.Enabled = False
-			RBDebugTaunts3.Enabled = False
-			CBDebugTauntsEndless.Enabled = False
-			BTNDebugTauntsClear.Enabled = False
-			TBDebugTaunts1.Enabled = False
-			TBDebugTaunts2.Enabled = False
-			TBDebugTaunts3.Enabled = False
-		End If
-	End Sub
-
-	Private Sub RBDebugTaunts1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RBDebugTaunts1.CheckedChanged, RBDebugTaunts2.CheckedChanged, RBDebugTaunts3.CheckedChanged
-		If RBDebugTaunts1.Checked = True Then
-			TBDebugTaunts1.Enabled = True
-			TBDebugTaunts2.Enabled = False
-			TBDebugTaunts3.Enabled = False
-		End If
-		If RBDebugTaunts2.Checked = True Then
-			TBDebugTaunts1.Enabled = True
-			TBDebugTaunts2.Enabled = True
-			TBDebugTaunts3.Enabled = False
-		End If
-		If RBDebugTaunts3.Checked = True Then
-			TBDebugTaunts1.Enabled = True
-			TBDebugTaunts2.Enabled = True
-			TBDebugTaunts3.Enabled = True
-		End If
-	End Sub
+	
 
 	Private Sub BTNDebugTauntsClear_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugTauntsClear.Click
 		TBDebugTaunts1.Text = ""
@@ -13609,5 +13558,25 @@ WhyUMakeMeDoDis:
 	Private Sub NBTauntEdging_LostFocus(sender As Object, e As System.EventArgs) Handles NBTauntEdging.LostFocus
 		My.Settings.TauntEdging = NBTauntEdging.Value
 		My.Settings.Save()
+	End Sub
+
+	Private Sub BTNDebugTeaseTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugTeaseTimer.Click
+		Form1.TeaseTick = 5
+	End Sub
+
+	Private Sub BTNDebugStrokeTime_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugStrokeTime.Click
+		Form1.StrokeTick = 5
+	End Sub
+
+	Private Sub BTNDebugStrokeTauntTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugStrokeTauntTimer.Click
+		Form1.StrokeTauntTick = 5
+	End Sub
+
+	Private Sub BTNDebugEdgeTauntTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugEdgeTauntTimer.Click
+		Form1.EdgeTauntInt = 5
+	End Sub
+
+	Private Sub BTNDebugHoldEdgeTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugHoldEdgeTimer.Click
+		Form1.HoldEdgeTick = 5
 	End Sub
 End Class
