@@ -46,6 +46,8 @@ Partial Class Form1
 		Me.ChatText = New System.Windows.Forms.WebBrowser()
 		Me.BTNVideoControls = New System.Windows.Forms.Button()
 		Me.PNLDomTagBTN = New System.Windows.Forms.Panel()
+		Me.Button13 = New System.Windows.Forms.Button()
+		Me.Button14 = New System.Windows.Forms.Button()
 		Me.TBFurniture = New System.Windows.Forms.TextBox()
 		Me.Masturbating = New System.Windows.Forms.Button()
 		Me.Feet = New System.Windows.Forms.Button()
@@ -199,6 +201,8 @@ Partial Class Form1
 		Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.AIBoxesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.CommandGuideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
+		Me.OldDommeTagsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.MilovanaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
 		Me.OpenBetaThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
 		Me.BugReportThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -357,10 +361,6 @@ Partial Class Form1
 		Me.Button4 = New System.Windows.Forms.Button()
 		Me.Panel3 = New System.Windows.Forms.Panel()
 		Me.Panel4 = New System.Windows.Forms.Panel()
-		Me.OldDommeTagsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
-		Me.Button13 = New System.Windows.Forms.Button()
-		Me.Button14 = New System.Windows.Forms.Button()
 		Me.ScriptTimer = New Tease_AI.teaseAI_Timer()
 		Me.Timer1 = New Tease_AI.teaseAI_Timer()
 		Me.IsTypingTimer = New Tease_AI.teaseAI_Timer()
@@ -750,6 +750,34 @@ Partial Class Form1
 		Me.PNLDomTagBTN.Name = "PNLDomTagBTN"
 		Me.PNLDomTagBTN.Size = New System.Drawing.Size(245, 541)
 		Me.PNLDomTagBTN.TabIndex = 0
+		'
+		'Button13
+		'
+		Me.Button13.BackColor = System.Drawing.Color.White
+		Me.Button13.FlatAppearance.BorderSize = 2
+		Me.Button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.Button13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Button13.ForeColor = System.Drawing.Color.Black
+		Me.Button13.Location = New System.Drawing.Point(123, 465)
+		Me.Button13.Name = "Button13"
+		Me.Button13.Size = New System.Drawing.Size(55, 31)
+		Me.Button13.TabIndex = 66
+		Me.Button13.Text = ">>"
+		Me.Button13.UseVisualStyleBackColor = False
+		'
+		'Button14
+		'
+		Me.Button14.BackColor = System.Drawing.Color.White
+		Me.Button14.FlatAppearance.BorderSize = 2
+		Me.Button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.Button14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Button14.ForeColor = System.Drawing.Color.Black
+		Me.Button14.Location = New System.Drawing.Point(66, 465)
+		Me.Button14.Name = "Button14"
+		Me.Button14.Size = New System.Drawing.Size(55, 31)
+		Me.Button14.TabIndex = 65
+		Me.Button14.Text = "<<"
+		Me.Button14.UseVisualStyleBackColor = False
 		'
 		'TBFurniture
 		'
@@ -1973,6 +2001,17 @@ Partial Class Form1
 		Me.CommandGuideToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
 		Me.CommandGuideToolStripMenuItem.Text = "Command Guide"
 		'
+		'ToolStripSeparator14
+		'
+		Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
+		Me.ToolStripSeparator14.Size = New System.Drawing.Size(164, 6)
+		'
+		'OldDommeTagsToolStripMenuItem
+		'
+		Me.OldDommeTagsToolStripMenuItem.Name = "OldDommeTagsToolStripMenuItem"
+		Me.OldDommeTagsToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+		Me.OldDommeTagsToolStripMenuItem.Text = "Old Domme Tags"
+		'
 		'MilovanaToolStripMenuItem1
 		'
 		Me.MilovanaToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenBetaThreadToolStripMenuItem1, Me.BugReportThreadToolStripMenuItem1, Me.WebteasesToolStripMenuItem1, Me.ForumToolStripMenuItem})
@@ -2075,8 +2114,8 @@ Partial Class Form1
 		'
 		Me.PNLTabs.BackColor = System.Drawing.Color.Black
 		Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.PNLTabs.Controls.Add(Me.PNLDomTagBTN)
 		Me.PNLTabs.Controls.Add(Me.PNLAppRandomizer)
+		Me.PNLTabs.Controls.Add(Me.PNLDomTagBTN)
 		Me.PNLTabs.Controls.Add(Me.PNLChatBox2)
 		Me.PNLTabs.Controls.Add(Me.PNLLazySub2)
 		Me.PNLTabs.Controls.Add(Me.ChatText2)
@@ -2123,6 +2162,7 @@ Partial Class Form1
 		Me.Button12.TabIndex = 12
 		Me.Button12.Text = "Button12"
 		Me.Button12.UseVisualStyleBackColor = True
+		Me.Button12.Visible = False
 		'
 		'BTNRandomLocal
 		'
@@ -3864,45 +3904,6 @@ Partial Class Form1
 		Me.Panel4.Name = "Panel4"
 		Me.Panel4.Size = New System.Drawing.Size(245, 31)
 		Me.Panel4.TabIndex = 779
-		'
-		'OldDommeTagsToolStripMenuItem
-		'
-		Me.OldDommeTagsToolStripMenuItem.Name = "OldDommeTagsToolStripMenuItem"
-		Me.OldDommeTagsToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-		Me.OldDommeTagsToolStripMenuItem.Text = "Old Domme Tags"
-		'
-		'ToolStripSeparator14
-		'
-		Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-		Me.ToolStripSeparator14.Size = New System.Drawing.Size(164, 6)
-		'
-		'Button13
-		'
-		Me.Button13.BackColor = System.Drawing.Color.White
-		Me.Button13.FlatAppearance.BorderSize = 2
-		Me.Button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Button13.ForeColor = System.Drawing.Color.Black
-		Me.Button13.Location = New System.Drawing.Point(123, 465)
-		Me.Button13.Name = "Button13"
-		Me.Button13.Size = New System.Drawing.Size(55, 31)
-		Me.Button13.TabIndex = 66
-		Me.Button13.Text = ">>"
-		Me.Button13.UseVisualStyleBackColor = False
-		'
-		'Button14
-		'
-		Me.Button14.BackColor = System.Drawing.Color.White
-		Me.Button14.FlatAppearance.BorderSize = 2
-		Me.Button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Button14.ForeColor = System.Drawing.Color.Black
-		Me.Button14.Location = New System.Drawing.Point(66, 465)
-		Me.Button14.Name = "Button14"
-		Me.Button14.Size = New System.Drawing.Size(55, 31)
-		Me.Button14.TabIndex = 65
-		Me.Button14.Text = "<<"
-		Me.Button14.UseVisualStyleBackColor = False
 		'
 		'ScriptTimer
 		'

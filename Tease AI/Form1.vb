@@ -559,6 +559,8 @@ Public Class Form1
 
 	Dim LongHold As Boolean
 	Dim ExtremeHold As Boolean
+	Dim LongTaunts As Boolean
+	Dim ExtremeTaunts As Boolean
 
 	Dim LazyEdit1 As Boolean
 	Dim LazyEdit2 As Boolean
@@ -11916,6 +11918,34 @@ ShowedBlogImage:
 
 		End If
 
+
+		If StringClean.Contains("@Edge(") Then
+
+			ContactEdgeCheck(StringClean)
+
+			Edge()
+
+			If GetMatch(StringClean, "@Edge(", "Hold") = True Then EdgeHold = True
+			If GetMatch(StringClean, "@Edge(", "NoHold") = True Then EdgeNoHold = True
+			If GetMatch(StringClean, "@Edge(", "Ruin") = True Then EdgeToRuin = True
+			If GetMatch(StringClean, "@Edge(", "RuinTaunts") = True Then EdgeToRuinSecret = False
+			If GetMatch(StringClean, "@Edge(", "LongHold") = True Then
+				EdgeHold = True
+				LongHold = True
+			End If
+			If GetMatch(StringClean, "@Edge(", "ExtremeHold") = True Then
+				EdgeHold = True
+				ExtremeHold = True
+			End If
+			If GetMatch(StringClean, "@Edge(", "HoldTaunts") = True Then
+				If LongHold = True Then LongTaunts = True
+				If ExtremeHold = True Then ExtremeTaunts = True
+			End If
+
+		End If
+
+
+
 		If StringClean.Contains("@EdgeMode(") Then
 
 			Dim EdgeFlag As String = GetParentheses(StringClean, "@EdgeMode(")
@@ -11948,31 +11978,11 @@ ShowedBlogImage:
 
 		If StringClean.Contains("@EdgeToRuinNoHoldNoSecret") Then
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
-			EdgeNoHold = True
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
+			Edge()
 			EdgeToRuin = True
 			EdgeToRuinSecret = False
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeToRuinNoHoldNoSecret", "")
 		End If
-
-
-
-
 
 		If StringClean.Contains("@EdgeToRuinHoldNoSecret(") Then
 
@@ -12006,25 +12016,10 @@ ShowedBlogImage:
 			EdgeHoldFlag = True
 
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
+			Edge()
 			EdgeHold = True
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
 			EdgeToRuin = True
 			EdgeToRuinSecret = False
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret(" & GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(") & ")", "")
 		End If
 
@@ -12032,77 +12027,28 @@ ShowedBlogImage:
 
 		If StringClean.Contains("@EdgeToRuinHoldNoSecret") Then
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
+			Edge()
 			EdgeHold = True
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
 			EdgeToRuin = True
 			EdgeToRuinSecret = False
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret", "")
 		End If
 
 		If StringClean.Contains("@EdgeToRuinNoSecret") Then
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
+			Edge()
 			EdgeToRuinSecret = False
 			EdgeToRuin = True
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeToRuinNoSecret", "")
 		End If
 
 		If StringClean.Contains("@EdgeToRuinNoHold") Then
-			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
+		ContactEdgeCheck(StringClean)
+			Edge()
 			EdgeNoHold = True
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
 			EdgeToRuin = True
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeToRuinNoHold", "")
 		End If
-
-
-
-
 
 		If StringClean.Contains("@EdgeToRuinHold(") Then
 
@@ -12136,91 +12082,32 @@ ShowedBlogImage:
 			EdgeHoldFlag = True
 
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
+			Edge()
 			EdgeHold = True
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
 			EdgeToRuin = True
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
+
 			StringClean = StringClean.Replace("@EdgeToRuinHold(" & GetParentheses(StringClean, "@EdgeToRuinHold(") & ")", "")
 		End If
 
 		If StringClean.Contains("@EdgeToRuinHold") Then
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
+			Edge()
 			EdgeHold = True
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
 			EdgeToRuin = True
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeToRuinHold", "")
 		End If
 
 		If StringClean.Contains("@EdgeToRuin") Then
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
+			Edge()
 			EdgeToRuin = True
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeToRuin", "")
 		End If
 
 		If StringClean.Contains("@EdgeNoHold") Then
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
+			Edge()
 			EdgeNoHold = True
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeNoHold", "")
 		End If
 
@@ -12265,70 +12152,23 @@ ShowedBlogImage:
 
 
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
+			Edge()
 			EdgeHold = True
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeHold(" & GetParentheses(StringClean, "@EdgeHold(") & ")", "")
 
 		End If
 
 
-
-
 		If StringClean.Contains("@EdgeHold") Then
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
+			Edge()
 			EdgeHold = True
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
 			StringClean = StringClean.Replace("@EdgeHold", "")
 		End If
 
 		If StringClean.Contains("@Edge") Then
 			ContactEdgeCheck(StringClean)
-			If SubStroking = True Then AlreadyStrokingEdge = True
-			GetEdgeTickCheck()
-			SubStroking = True
-			LongEdge = False
-			AskedToSpeedUp = False
-			AskedToSlowDown = False
-			EdgeCountTick = 0
-			EdgeCountTimer.Start()
-			SubEdging = True
-			EdgeTauntInt = randomizer.Next(30, 46)
-			EdgeTauntTimer.Start()
-			If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
-			EdgePace()
-			ActivateWebToy()
-			DisableContactStroke()
-			SessionEdges += 1
+			Edge()
 			StringClean = StringClean.Replace("@Edge", "")
 		End If
 
@@ -30520,4 +30360,26 @@ SkipNew:
 	Private Sub Button14_Click(sender As System.Object, e As System.EventArgs) Handles Button14.Click
 		previousButton.PerformClick()
 	End Sub
+
+	Public Sub Edge()
+
+		If SubStroking = True Then AlreadyStrokingEdge = True
+		GetEdgeTickCheck()
+		SubStroking = True
+		LongEdge = False
+		AskedToSpeedUp = False
+		AskedToSlowDown = False
+		EdgeCountTick = 0
+		EdgeCountTimer.Start()
+		SubEdging = True
+		EdgeTauntInt = randomizer.Next(30, 46)
+		EdgeTauntTimer.Start()
+		If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
+		EdgePace()
+		ActivateWebToy()
+		DisableContactStroke()
+		SessionEdges += 1
+
+	End Sub
+
 End Class
