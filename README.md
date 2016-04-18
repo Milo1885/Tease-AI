@@ -4,6 +4,16 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Domme Tag methods reimplemented or enhanced in the following ways:
+
+     "Fancy" domme tag creator brought back, under Tools on the main menu strip
+	 
+	 Main picture box now changes with the original domme tag creator
+	 
+	 Next and previous buttons added to Domme Tags App
+	 
+None of these are perfect solutions, but hopefully they'll mitigate the aggravation some until a better system can be developed
+
 Fixed bug where @GoodMood(), @BadMood() and @NeutralMood() were being treated like Command Filters
 
 Miniscripts can now be called from within Miniscripts. Should be able to stack these indefinitely Inception style. When any Miniscript ends, it will return to the point where the first MiniScript was called. 

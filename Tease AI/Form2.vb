@@ -3346,6 +3346,7 @@ trypreviousimage:
 			GC.Collect()
 
 			ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
+			Form1.mainPictureBox.Image = Image.FromFile(ImageTagDir(0))
 			CurrentImageTagImage = ImageTagDir(0)
 
 			If File.Exists(TagImageFolder & "\ImageTags.txt") Then
@@ -3549,6 +3550,7 @@ trypreviousimage:
 
 				Debug.Print("find")
 				ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
+				Form1.mainPictureBox.Image = Image.FromFile(ImageTagDir(0))
 
 
 				CurrentImageTagImage = ImageTagDir(0)
@@ -4018,7 +4020,7 @@ trypreviousimage:
 		GC.Collect()
 
 		ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
-
+		Form1.mainPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
 
 
 		CurrentImageTagImage = ImageTagDir(ImageTagCount)
@@ -4242,6 +4244,7 @@ trypreviousimage:
 		GC.Collect()
 
 		ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
+		Form1.mainPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
 		CurrentImageTagImage = ImageTagDir(ImageTagCount)
 
 		If ImageTagCount = 0 Then BTNTagPrevious.Enabled = False
