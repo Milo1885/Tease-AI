@@ -2856,11 +2856,13 @@ WritingTaskLine:
 
 					If EdgeToRuin = True Or OrgasmRuined = True Then
 						LastOrgasmType = "RUINED"
+						OrgasmRuined = False
 						GoTo RuinedOrgasm
 					End If
 
 					If OrgasmAllowed = True Then
 						LastOrgasmType = "ALLOWED"
+						OrgasmAllowed = False
 						GoTo AllowedOrgasm
 					End If
 
@@ -11940,9 +11942,6 @@ ShowedBlogImage:
 
 			Edge()
 
-			OrgasmAllowed = False
-			OrgasmRuined = False
-
 			If GetMatch(StringClean, "@Edge(", "Hold") = True Then EdgeHold = True
 			If GetMatch(StringClean, "@Edge(", "NoHold") = True Then EdgeNoHold = True
 			If EdgeHold = True And EdgeNoHold = True Then EdgeHold = False
@@ -12249,9 +12248,31 @@ ShowedBlogImage:
 
 		If StringClean.Contains("@DecideOrgasm") Then
 
+			OrgasmDenied = False
+			OrgasmAllowed = False
+			OrgasmRuined = False
+
+			Dim AllowGoto As String = "Orgasm Allow"
+			Dim RuinGoto As String = "Orgasm Ruin"
+			Dim DenyGoto As String = "Orgasm Deny"
+
+			If StringClean.Contains("@DecideOrgasm(") Then
+
+				Dim OrgasmFlag As String = GetParentheses(StringClean, "@DecideOrgasm(")
+				OrgasmFlag = FixCommas(OrgasmFlag)
+				Dim OrgasmArray As String() = OrgasmFlag.Split(",")
+
+				If OrgasmArray.Count = 3 Then
+					AllowGoto = OrgasmArray(0)
+					RuinGoto = OrgasmArray(1)
+					DenyGoto = OrgasmArray(2)
+				End If
+
+			End If
+
 
 			If FrmSettings.alloworgasmComboBox.Text = "Always Allows" And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then
-				FileGoto = "Orgasm Ruin"
+				FileGoto = RuinGoto
 				OrgasmRuined = True
 				GoTo OrgasmDecided
 			End If
@@ -12275,7 +12296,7 @@ ShowedBlogImage:
 
 
 			If OrgasmInt > OrgasmThreshold Then
-				FileGoto = "Orgasm Deny"
+				FileGoto = DenyGoto
 				OrgasmDenied = True
 				GoTo OrgasmDecided
 			End If
@@ -12300,10 +12321,10 @@ ShowedBlogImage:
 
 
 			If RuinInt > RuinThreshold Then
-				FileGoto = "Orgasm Allow"
+				FileGoto = AllowGoto
 				OrgasmAllowed = True
 			Else
-				FileGoto = "Orgasm Ruin"
+				FileGoto = RuinGoto
 				OrgasmRuined = True
 			End If
 
@@ -22338,11 +22359,13 @@ NoPlaylistEndFile:
 
 			If EdgeToRuin = True Or OrgasmRuined = True Then
 				LastOrgasmType = "RUINED"
+				OrgasmRuined = False
 				GoTo RuinedOrgasm
 			End If
 
 			If OrgasmAllowed = True Then
 				LastOrgasmType = "ALLOWED"
+				OrgasmAllowed = False
 				GoTo AllowedOrgasm
 			End If
 

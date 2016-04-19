@@ -4,6 +4,14 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Added @DecideOrgasm() Command - This Command will make the domme decide if and how the user can have an orgasm based on their domme settings. This works the same way as @DecideOrgasm. When @DecideOrgasm is used, the domme decides if the user will cum, ruin or be denied based on her domme settings. Depending on what she decides, @DecideOrgasm will either go to (Orgasm Allow), (Orgasm Ruin) or (Orgasm Deny). 
+
+@DecideOrgasm() allows you to set the GotoLines for allowed, ruined and denied orgasms (specified in that order - Allowed GotoLine first, Ruined GotoLine second and Denied GotoLine third). For example:
+
+     @DecideOrgasm(Allowed to Cum, Made to Ruin, Denied Orgasm) - In this case, if the domme has decided the user can cum, the script will move to (Allowed to Cum). If she decides to ruin, it will move to (Made to Ruin). And it will move to (Denied Orgasm) is she decides to deny. From there the next @Edge-related Command will end with an orgasm, ruined or denial depending on the domme's decision. 
+	 
+@DecideOrgasm() is extremely useful if you want to have more than one orgasm decision per script. This lets you set orgasm decision paths with different tones, such as having different reactions to the orgasm result based on the domme's mood
+
 Added @Edge() Command - The @Edge() Command is used to indicate the user has been told by the domme to edge, just like @Edge currently does. However, @Edge() allows you to put any combination of the following modifiers in parentheses for different results when the user indicates they are on the edge:
 
      Hold - User will be told to hold it
