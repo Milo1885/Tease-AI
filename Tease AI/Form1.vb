@@ -8962,9 +8962,9 @@ CensorConstant:
 				CensorshipBar.Height = CensorshipBarY2
 				CensorshipBar.Width = CensorshipBarY2 * 2.6
 
-				'BUG: if CensorshipBar.Width > DomWMP.Width then ArgumentOutOfRangeException
-				CensorshipBarX = randomizer.Next(5, DomWMP.Width - CensorshipBar.Width + 1)
-				CensorshipBarY = randomizer.Next(5, ((DomWMP.Height - 39) - CensorshipBar.Height) + 1)
+				'QnD-BUGFIX: if CensorshipBar.Width > DomWMP.Width then ArgumentOutOfRangeException 
+				CensorshipBarX = randomizer.Next(5, If(CensorshipBar.Width > DomWMP.Width, DomWMP.Width, DomWMP.Width - CensorshipBar.Width + 1))
+				CensorshipBarY = randomizer.Next(5, If(CensorshipBar.Height > DomWMP.Height, DomWMP.Height, DomWMP.Height - CensorshipBar.Height + 1))
 				CensorshipBar.Location = New Point(CensorshipBarX, CensorshipBarY)
 
 
