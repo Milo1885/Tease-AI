@@ -2305,16 +2305,23 @@ trypreviousimage:
                         __BtnLocalURL.ForEach(Sub(x) x.Enabled = False)
 
                         ' Run Backgroundworker
-                        Dim __tmpResult As String = DirectCast(BWURLFiles.CreateURLFileAsync(),
-															   URL_File_BGW.CreateUrlFileResult).Filename
+                        Dim __tmpResult As URL_File_BGW.CreateUrlFileResult = BWURLFiles.CreateURLFileAsync()
 
                         ' Activate the created URL-File
-                        URL_File_Set(__tmpResult)
+                        URL_File_Set(__tmpResult.Filename)
 
-                        ' UserInfo
-                        MsgBox("URL File has been saved to:" &
-							   vbCrLf & vbCrLf & Application.StartupPath & "\Images\System\URL Files\" & __tmpResult & ".txt" &
+						' UserInfo
+						If __tmpResult._Error Is Nothing Then
+							MsgBox("URL File has been saved to:" &
+							   vbCrLf & vbCrLf & Application.StartupPath & "\Images\System\URL Files\" & __tmpResult.Filename & ".txt" &
 							   vbCrLf & vbCrLf & "Use the ""Open URL File"" button to load and view your collections.",  , "Success!")
+						Else
+							MsgBox("It is encountered an error during URL-File-Creation." & vbCrLf &
+								   __tmpResult._Error.Message & vbCrLf &
+									   "URL File has been saved to:" &
+									vbCrLf & vbCrLf & Application.StartupPath & "\Images\System\URL Files\" & __tmpResult.Filename & ".txt" &
+									vbCrLf & vbCrLf & "Use the ""Open URL File"" button to load and view your collections.",  , "Successful despite errors!")
+						End If
 					Catch
                         '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                         '                                            All Errors

@@ -414,6 +414,7 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 			Public ImagesAdded As Integer = 0
 			Public ImagesTotal As Integer = 0
 			Public Filename As String
+			Public _Error As Exception
 
 			Sub New()
 			End Sub
@@ -449,80 +450,82 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 		'''   if a Blog Contains it twice.
 		''' </remarks>
 		Private Function BlogToUrlFile(ByVal Optional ___ImageBlogUrl As String = "") As CreateUrlFileResult
+			'===============================================================================
+			' Declaration of Variables
+			'===============================================================================
+			Me.URL_FileCreate_OnProgressChanged(0, 0, 0, WorkingStages.Started, Nothing)
+			If Me.CancellationPending = True Then Return Nothing
+			Dim ___ExactPostsCount As Integer = -1 ' If its -1, then the First Pass has not been done
+			Dim ___RoundPostsCount As Integer = -1
+			Dim ___ImageCountAdded As Integer = 0
+			Dim ___ImageCountTotal As Integer = 0
+			Dim ___BlogCycle As Integer = 0
+			Dim ___BlogCycleSize As Integer = 50
+
+			Dim ___BlogListOld, ___BlogListNew, ___DislikeList As New List(Of String)
+
+			If ___ImageBlogUrl = "" Then ___ImageBlogUrl = InputBox("Enter an image blog", "URL File Generator", "http://(Blog Name).tumblr.com/")
+			If ___ImageBlogUrl = "" Then Me.CancelAsync() : Return New CreateUrlFileResult With {.Cancelled = True}
+
+			Dim ___req As HttpWebRequest
+			Dim ___res As HttpWebResponse
+
+			Dim ___TempImg As Bitmap = Nothing
+			' This Var is to Save any occuring Error, to return it to caller.
+			Dim ___ExCache As Exception = Nothing
+			'===============================================================================
+			' Connection Try
+			'===============================================================================
+			___req = WebRequest.Create(___ImageBlogUrl)
+			___req.ReadWriteTimeout = 60000
+			___res = ___req.GetResponse()
+			___req.Abort()
+			'===============================================================================
+			' Convert URL For Local Filesystem
+			'===============================================================================
+			Dim ___ModifiedUrl As String
+			___ModifiedUrl = ___ImageBlogUrl
+			___ModifiedUrl = ___ModifiedUrl.Replace("http://", "")
+			___ModifiedUrl = ___ModifiedUrl.Replace("/", "")
+
+			Dim ___ImageURLPath As String = _ImageURLFileDir & ___ModifiedUrl & ".txt"
+			'===============================================================================
+			' Load the old File if possible, to avoid Duplicate Files
+			'===============================================================================
+			If File.Exists(___ImageURLPath) Then
+				' ReadFile
+				Using __UrlFileReader As New StreamReader(___ImageURLPath)
+					Try
+						While __UrlFileReader.Peek <> -1
+							___BlogListOld.Add(__UrlFileReader.ReadLine)
+						End While
+					Catch
+						Throw
+					Finally
+						__UrlFileReader.Close()
+					End Try
+				End Using
+			End If
+			'===============================================================================
+			'                           Load Dislike List. 
+			'===============================================================================
+			If File.Exists(_DislikeListPath) Then
+				Using __DislikeFileReader As New StreamReader(_DislikeListPath)
+					Try
+						While __DislikeFileReader.Peek <> -1
+							___DislikeList.Add(__DislikeFileReader.ReadLine())
+						End While
+					Catch
+						Throw
+					Finally
+						__DislikeFileReader.Close()
+					End Try
+				End Using
+			End If
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+			'                         Start Page-Scraping
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			Try
-				'===============================================================================
-				' Declaration of Variables
-				'===============================================================================
-				Me.URL_FileCreate_OnProgressChanged(0, 0, 0, WorkingStages.Started, Nothing)
-				If Me.CancellationPending = True Then Return Nothing
-				Dim ___ExactPostsCount As Integer = -1 ' If its -1, then the First Pass has not been done
-				Dim ___RoundPostsCount As Integer = -1
-				Dim ___ImageCountAdded As Integer = 0
-				Dim ___ImageCountTotal As Integer = 0
-				Dim ___BlogCycle As Integer = 0
-				Dim ___BlogCycleSize As Integer = 50
-
-				Dim ___BlogListOld, ___BlogListNew, ___DislikeList As New List(Of String)
-
-				If ___ImageBlogUrl = "" Then ___ImageBlogUrl = InputBox("Enter an image blog", "URL File Generator", "http://(Blog Name).tumblr.com/")
-				If ___ImageBlogUrl = "" Then Me.CancelAsync() : Return New CreateUrlFileResult With {.Cancelled = True}
-
-				Dim ___req As HttpWebRequest
-				Dim ___res As HttpWebResponse
-
-				Dim ___TempImg As Bitmap = Nothing
-				'===============================================================================
-				' Connection Try
-				'===============================================================================
-				___req = WebRequest.Create(___ImageBlogUrl)
-				___req.ReadWriteTimeout = 60000
-				___res = ___req.GetResponse()
-				___req.Abort()
-				'===============================================================================
-				' Convert URL For Local Filesystem
-				'===============================================================================
-				Dim ___ModifiedUrl As String
-				___ModifiedUrl = ___ImageBlogUrl
-				___ModifiedUrl = ___ModifiedUrl.Replace("http://", "")
-				___ModifiedUrl = ___ModifiedUrl.Replace("/", "")
-
-				Dim ___ImageURLPath As String = _ImageURLFileDir & ___ModifiedUrl & ".txt"
-				'===============================================================================
-				' Load the old File if possible, to avoid Duplicate Files
-				'===============================================================================
-				If File.Exists(___ImageURLPath) Then
-					' ReadFile
-					Using __UrlFileReader As New StreamReader(___ImageURLPath)
-						Try
-							While __UrlFileReader.Peek <> -1
-								___BlogListOld.Add(__UrlFileReader.ReadLine)
-							End While
-						Catch
-							Throw
-						Finally
-							__UrlFileReader.Close()
-						End Try
-					End Using
-				End If
-				'===============================================================================
-				'                           Load Dislike List. 
-				'===============================================================================
-				If File.Exists(_DislikeListPath) Then
-					Using __DislikeFileReader As New StreamReader(_DislikeListPath)
-						Try
-							While __DislikeFileReader.Peek <> -1
-								___DislikeList.Add(__DislikeFileReader.ReadLine())
-							End While
-						Catch
-							Throw
-						Finally
-							__DislikeFileReader.Close()
-						End Try
-					End Using
-				End If
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				'                         Start Page-Scraping
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 Scrape:
 				' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 				If Me.CancellationPending AndAlso ___ExactPostsCount = -1 Then Return New CreateUrlFileResult With {.Cancelled = True}
@@ -562,74 +565,77 @@ Scrape:
 				'                             Blog-Loop-Start 
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 				For Each ___PhotoNode As XmlNode In ___doc.DocumentElement.SelectNodes("//photo-url")
-					Application.DoEvents()
-					' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-					If Me.CancellationPending Then GoTo ExitScrape
-					If CInt(___PhotoNode.Attributes.ItemOf("max-width").InnerText) = 1280 Then
+					Try
+						Application.DoEvents()
+						' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+						If Me.CancellationPending Then GoTo ExitScrape
+						If CInt(___PhotoNode.Attributes.ItemOf("max-width").InnerText) = 1280 Then
 
-						Me.URL_FileCreate_OnProgressChanged(___ImageCountTotal, ___BlogCycle / ___BlogCycleSize, ___RoundPostsCount / ___BlogCycleSize, WorkingStages.Blog_Scraping, Nothing)
-						'===============================================================================
-						'                         Check what to do with URL
-						'===============================================================================
-						If ___DislikeList.Contains(___PhotoNode.InnerXml) Or ___BlogListNew.Contains(___PhotoNode.InnerXml) Then
-							'############################ ALL - Disliked & Added #############################
-							' Always Skip Disliked Urls and already added URLs.
-							GoTo NextImage
-						ElseIf Me._Work = URL_File_Tasks.RebuildURLFiles AndAlso ___BlogListOld.Contains(___PhotoNode.InnerXml) Then
-							'########################### URL-Rebuild - Known URL #############################
-							' If rebuilding URL-File, only add files which were known before.
-							___BlogListNew.Add(___PhotoNode.InnerXml)           ' Add to new list
-							___ImageCountTotal += 1                             ' Increment Image Counter.
-							GoTo NextImage                                      ' No Saving or Reviewing    
-						ElseIf Me._Work = URL_File_Tasks.RebuildURLFiles
-							'########################## URL-Rebuild - Unknown URL ############################
-							' If Rebuilding URL-File skip Urls not previous known.
-							GoTo NextImage
-						ElseIf Me._Work = URL_File_Tasks.RefreshURLFiles AndAlso ___BlogListOld.Contains(___PhotoNode.InnerXml)
-							'############################# Refresh - Known URL ###############################
-							' If refreshing a URL-File and there is a known URL then stop scraping.
-							GoTo ExitScrape
-						ElseIf ___BlogListOld.Contains(___PhotoNode.InnerXml)
-							'############################## Create - Known URL ###############################
-							___BlogListNew.Add(___PhotoNode.InnerXml)           ' Add to new list
-							___ImageCountTotal += 1                             ' Increment Image Counter.
-							GoTo NextImage                                      ' No Saving or Reviewing    
-						End If
-						'===============================================================================
-						'                                 Review Image
-						'===============================================================================
-						If ReviewImages = True Then
-							' Downlaod Image
-							___TempImg = New Bitmap(New IO.MemoryStream(New WebClient().DownloadData(___PhotoNode.InnerXml)))
+							Me.URL_FileCreate_OnProgressChanged(___ImageCountTotal, ___BlogCycle / ___BlogCycleSize, ___RoundPostsCount / ___BlogCycleSize, WorkingStages.Blog_Scraping, Nothing)
+							'===============================================================================
+							'                         Check what to do with URL
+							'===============================================================================
+							If ___DislikeList.Contains(___PhotoNode.InnerXml) Or ___BlogListNew.Contains(___PhotoNode.InnerXml) Then
+								'############################ ALL - Disliked & Added #############################
+								' Always Skip Disliked Urls and already added URLs.
+								GoTo NextImage
+							ElseIf Me._Work = URL_File_Tasks.RebuildURLFiles AndAlso ___BlogListOld.Contains(___PhotoNode.InnerXml) Then
+								'########################### URL-Rebuild - Known URL #############################
+								' If rebuilding URL-File, only add files which were known before.
+								___BlogListNew.Add(___PhotoNode.InnerXml)           ' Add to new list
+								___ImageCountTotal += 1                             ' Increment Image Counter.
+								GoTo NextImage                                      ' No Saving or Reviewing    
+							ElseIf Me._Work = URL_File_Tasks.RebuildURLFiles
+								'########################## URL-Rebuild - Unknown URL ############################
+								' If Rebuilding URL-File skip Urls not previous known.
+								GoTo NextImage
+							ElseIf Me._Work = URL_File_Tasks.RefreshURLFiles AndAlso ___BlogListOld.Contains(___PhotoNode.InnerXml)
+								'############################# Refresh - Known URL ###############################
+								' If refreshing a URL-File and there is a known URL then stop scraping.
+								GoTo ExitScrape
+							ElseIf ___BlogListOld.Contains(___PhotoNode.InnerXml)
+								'############################## Create - Known URL ###############################
+								___BlogListNew.Add(___PhotoNode.InnerXml)           ' Add to new list
+								___ImageCountTotal += 1                             ' Increment Image Counter.
+								GoTo NextImage                                      ' No Saving or Reviewing    
+							End If
+							'===============================================================================
+							'                                 Review Image
+							'===============================================================================
+							If ReviewImages = True Then
+								' Downlaod Image
 
-							Me.URL_FileCreate_OnProgressChanged(___ImageCountTotal, ___BlogCycle, ___RoundPostsCount, WorkingStages.ImageApproval, ___TempImg)
+								' download the image
+								___TempImg = New Bitmap(New IO.MemoryStream(New WebClient().DownloadData(___PhotoNode.InnerXml)))
 
-							' Wait For User Approval
-							Do
-								Application.DoEvents()
-								' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-								If Me.CancellationPending Then GoTo ExitScrape
-							Loop Until ApproveImage <> ImageApprovalStatus.Pending
+								' Report to MainApplication, the BGW is waiting for the Image Approval.
+								Me.URL_FileCreate_OnProgressChanged(___ImageCountTotal, ___BlogCycle, ___RoundPostsCount, WorkingStages.ImageApproval, ___TempImg)
 
-							' If Img declined and DislikeFile is set, write URL to DislikeFile
-							If ApproveImage = ImageApprovalStatus.Declined _
-					And _DislikeListPath <> String.Empty Then
-								' Add the URL to DislikeList
-								___DislikeList.Add(___PhotoNode.InnerXml)
-								' If DislikeFile exists: Append URL Else create new File
-								If File.Exists(_DislikeListPath) Then
-									My.Computer.FileSystem.WriteAllText(_DislikeListPath, Environment.NewLine & ___PhotoNode.InnerXml, True)
-								Else
-									My.Computer.FileSystem.WriteAllText(_DislikeListPath, ___PhotoNode.InnerXml, True)
+								' Wait For User Approval
+								Do
+									Application.DoEvents()
+									' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+									If Me.CancellationPending Then GoTo ExitScrape
+								Loop Until ApproveImage <> ImageApprovalStatus.Pending
+
+								' If Img declined and DislikeFile is set, write URL to DislikeFile
+								If ApproveImage = ImageApprovalStatus.Declined _
+								And _DislikeListPath <> String.Empty Then
+									' Add the URL to DislikeList
+									___DislikeList.Add(___PhotoNode.InnerXml)
+									' If DislikeFile exists: Append URL Else create new File
+									If File.Exists(_DislikeListPath) Then
+										My.Computer.FileSystem.WriteAllText(_DislikeListPath, Environment.NewLine & ___PhotoNode.InnerXml, True)
+									Else
+										My.Computer.FileSystem.WriteAllText(_DislikeListPath, ___PhotoNode.InnerXml, True)
+									End If
 								End If
 							End If
-						End If
 
-						'===============================================================================
-						'                                 Image Approved
-						'===============================================================================
-						If ApproveImage = ImageApprovalStatus.Approved Or ReviewImages = False Then
-							Try
+							'===============================================================================
+							'                                 Image Approved
+							'===============================================================================
+							If ApproveImage = ImageApprovalStatus.Approved Or ReviewImages = False Then
 								' --------------------------SAVE IMAGE TO DISK --------------------------
 								If SaveImages = True Then
 									Dim ___XMLImagePath As String = ___PhotoNode.InnerXml
@@ -653,13 +659,21 @@ Scrape:
 								___BlogListNew.Add(___PhotoNode.InnerXml)
 								___ImageCountTotal += 1
 								___ImageCountAdded += 1
-							Catch ex As Exception
-								GoTo ExitScrape
-							End Try
-
+							End If
 						End If
+					Catch ex As WebException
+						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨ WebException ▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+						' On a Webexception like a 404,410 and stuff like that, goto next image.
+						GoTo NextImage
+					Catch ex As Exception
+						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+						'						       All Errors
+						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+						' On any other Error, we want to write the data and Exit.
+						___ExCache = ex
+						GoTo ExitScrape
+					End Try
 NextImage:
-					End If
 					___TempImg = Nothing ' Reset Image
 				Next
 				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -675,11 +689,13 @@ NextImage:
 ExitScrape:
 				Me.URL_FileCreate_OnProgressChanged(___ImageCountTotal, ___BlogCycle / ___BlogCycleSize, ___RoundPostsCount / ___BlogCycleSize, WorkingStages.Writing_File, Nothing)
 
-				' IF:   Work is Cancelled? Or do we refresh the file?
+				' IF:   Work is Cancelled? Or do we refresh the file? Or did an Error occur?
 				' Then: Write a combined copy of  new and old List
 				' Else: Write only New List. This removes Dead links.
 				Dim ___BlogListCombine As New List(Of String)
-				If Me.CancellationPending = True Or Me._Work = URL_File_Tasks.RefreshURLFiles _
+				If Me.CancellationPending = True _
+				Or Me._Work = URL_File_Tasks.RefreshURLFiles _
+				Or ___ExCache IsNot Nothing _
 				Then ___BlogListCombine = ___BlogListOld.Union(___BlogListNew).ToList _
 				Else ___BlogListCombine = ___BlogListNew
 				'===============================================================================
@@ -706,7 +722,6 @@ RetryDeleteFile:
 				'===============================================================================
 				File.WriteAllText(___ImageURLPath, String.Join(vbCrLf, ___BlogListCombine))
 
-
 				___doc = Nothing
 				___req = Nothing
 				___res = Nothing
@@ -714,10 +729,22 @@ RetryDeleteFile:
 				Me.URL_FileCreate_OnProgressChanged(0, 0, 0, WorkingStages.Completed, Nothing)
 
 				Return New CreateUrlFileResult With {.Cancelled = Me.CancellationPending,
-												.Filename = ___ModifiedUrl,
-												.ImagesAdded = ___ImageCountAdded,
-												.ImagesTotal = ___ImageCountTotal
-											}
+					.Filename = ___ModifiedUrl,
+					.ImagesAdded = ___ImageCountAdded,
+					.ImagesTotal = ___ImageCountTotal,
+					._Error = ___ExCache
+				}
+			Catch ex As WebException
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'                                           Webexception
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				' This branch is only reachable, if there is an Error during loading the XML-Sitemap.
+				' If this is happening on the First pass, rethrow the Exception, Otherwise Write data to disk and Exit.
+				If ___ExactPostsCount = -1 Then Throw
+				' Set Error, to inform user about it.
+				___ExCache = ex
+				' Write data to Disk and Exit.
+				GoTo ExitScrape
 			Catch ex As Exception
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				'                                            All Errors
