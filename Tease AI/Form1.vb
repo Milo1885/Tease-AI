@@ -380,6 +380,7 @@ Public Class Form1
 	Dim OrgasmDenied As Boolean
 	Dim OrgasmAllowed As Boolean
 	Dim OrgasmRuined As Boolean
+	Dim LastOrgasmType As String = ""
 
 	Dim StupidTick As Integer
 	Dim StupidFlag As Boolean
@@ -2853,12 +2854,22 @@ WritingTaskLine:
 
 				Else
 
-					If EdgeToRuin = True Or OrgasmRuined = True Then GoTo RuinedOrgasm
-					If OrgasmAllowed = True Then GoTo AllowedOrgasm
+					If EdgeToRuin = True Or OrgasmRuined = True Then
+						LastOrgasmType = "RUINED"
+						GoTo RuinedOrgasm
+					End If
+
+					If OrgasmAllowed = True Then
+						LastOrgasmType = "ALLOWED"
+						GoTo AllowedOrgasm
+					End If
+
 
 					Debug.Print("Ruined Orgasm skipped")
 
 					If OrgasmDenied = True Then
+
+						LastOrgasmType = "DENIED"
 
 						If FrmSettings.CBDomDenialEnds.Checked = False Then
 
@@ -5114,9 +5125,13 @@ ReturnCalled:
 			If lines(line).Contains("@SubNotPierced") And FrmSettings.CBSubPierced.Checked = True Then InvalidFilter = True
 
 			If lines(line).Contains("@BeforeTease") And BeforeTease = False Then InvalidFilter = True
-			If lines(line).Contains("@OrgasmDenied") And OrgasmDenied = False Then InvalidFilter = True
-			If lines(line).Contains("@OrgasmAllowed") And OrgasmAllowed = False Then InvalidFilter = True
-			If lines(line).Contains("@OrgasmRuined") And OrgasmRuined = False Then InvalidFilter = True
+			'If lines(line).Contains("@OrgasmDenied") And OrgasmDenied = False Then InvalidFilter = True
+			'If lines(line).Contains("@OrgasmAllowed") And OrgasmAllowed = False Then InvalidFilter = True
+			'If lines(line).Contains("@OrgasmRuined") And OrgasmRuined = False Then InvalidFilter = True
+
+			If lines(line).Contains("@OrgasmDenied") And LastOrgasmType <> "DENIED" Then InvalidFilter = True
+			If lines(line).Contains("@OrgasmAllowed") And LastOrgasmType <> "ALLOWED" Then InvalidFilter = True
+			If lines(line).Contains("@OrgasmRuined") And LastOrgasmType <> "RUINED" Then InvalidFilter = True
 
 			If lines(line).Contains("@InChastity") And My.Settings.Chastity = False Then InvalidFilter = True
 			If lines(line).Contains("@HasChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
@@ -11925,10 +11940,23 @@ ShowedBlogImage:
 
 			Edge()
 
+			OrgasmAllowed = False
+			OrgasmRuined = False
+
 			If GetMatch(StringClean, "@Edge(", "Hold") = True Then EdgeHold = True
 			If GetMatch(StringClean, "@Edge(", "NoHold") = True Then EdgeNoHold = True
-			If GetMatch(StringClean, "@Edge(", "Ruin") = True Then EdgeToRuin = True
-			If GetMatch(StringClean, "@Edge(", "RuinTaunts") = True Then EdgeToRuinSecret = False
+			If EdgeHold = True And EdgeNoHold = True Then EdgeHold = False
+
+			If GetMatch(StringClean, "@Edge(", "Orgasm") = True Then OrgasmAllowed = True
+
+			If GetMatch(StringClean, "@Edge(", "Ruin") = True Then OrgasmRuined = True
+
+			If OrgasmAllowed = True And OrgasmRuined = True Then OrgasmRuined = False
+
+			If GetMatch(StringClean, "@Edge(", "RuinTaunts") = True Then
+				If EdgeToRuin = True Then EdgeToRuinSecret = False
+			End If
+
 			If GetMatch(StringClean, "@Edge(", "LongHold") = True Then
 				EdgeHold = True
 				LongHold = True
@@ -12043,7 +12071,7 @@ ShowedBlogImage:
 		End If
 
 		If StringClean.Contains("@EdgeToRuinNoHold") Then
-		ContactEdgeCheck(StringClean)
+			ContactEdgeCheck(StringClean)
 			Edge()
 			EdgeNoHold = True
 			EdgeToRuin = True
@@ -12207,7 +12235,7 @@ ShowedBlogImage:
 			Dim CustomFlag As String = GetParentheses(StringClean, "@CustomTask(")
 
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomFlag & "_First.txt") And
-				File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomFlag & ".txt") Then
+			 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomFlag & ".txt") Then
 				CustomTask = True
 				CustomTaskActive = True
 				CustomTaskText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomFlag & ".txt"
@@ -13016,7 +13044,7 @@ OrgasmDecided:
 
 			Else
 				MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Long Edge!" & Environment.NewLine _
-								& Environment.NewLine & "Please make sure at lease one LongEdge_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				 & Environment.NewLine & "Please make sure at lease one LongEdge_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			End If
 			StringClean = StringClean.Replace("@InterruptLongEdge", "")
 			JustShowedBlogImage = True
@@ -13064,7 +13092,7 @@ OrgasmDecided:
 
 			Else
 				MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Start Stroking!" & Environment.NewLine _
-								& Environment.NewLine & "Please make sure at lease one StartStroking_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				 & Environment.NewLine & "Please make sure at lease one StartStroking_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			End If
 			StringClean = StringClean.Replace("@InterruptStartStroking", "")
 			JustShowedBlogImage = True
@@ -13119,7 +13147,7 @@ OrgasmDecided:
 
 			Else
 				MessageBox.Show(Me, InterruptS(0) & ".txt was not found in " & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt!" & Environment.NewLine _
-								& Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				 & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			End If
 			StringClean = StringClean.Replace("@Interrupt(" & InterruptS(0) & ")", "")
 			'Debug.Print("StringClean INterrupt Remove = " & "@Interrupt(" & InterruptS(0) & ")")
@@ -13184,12 +13212,12 @@ OrgasmDecided:
 					Dim LocalString As String = LocalCheck(0)
 					Debug.Print("LocalString = " & LocalString)
 					If Not LCase(LocalString).Contains(".jpg") And Not LCase(LocalString).Contains(".jpeg") And Not LCase(LocalString).Contains(".bmp") And
-						Not LCase(LocalString).Contains(".png") And Not LCase(LocalString).Contains(".gif") Then
+					 Not LCase(LocalString).Contains(".png") And Not LCase(LocalString).Contains(".gif") Then
 						Debug.Print("LocalTag Check Doesn't contain extension")
 						For x As Integer = 1 To LocalCheck.Count - 1
 							LocalString = LocalString & " " & LocalCheck(x)
 							If LCase(LocalString).Contains(".jpg") Or LCase(LocalString).Contains(".jpeg") Or LCase(LocalString).Contains(".bmp") Or
-				   LCase(LocalString).Contains(".png") Or LCase(LocalString).Contains(".gif") Then Exit For
+							LCase(LocalString).Contains(".png") Or LCase(LocalString).Contains(".gif") Then Exit For
 						Next
 					End If
 					Debug.Print("Local Tag check - " & LocalString)
@@ -13780,7 +13808,7 @@ OrgasmDecided:
 
 				Else
 					MessageBox.Show(Me, Path.GetFileName(VideoClean) & " was not found in " & Path.GetDirectoryName(VideoClean) & "!" & Environment.NewLine & Environment.NewLine &
-									"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
 
 				GoTo ExternalVideo
@@ -13826,7 +13854,7 @@ OrgasmDecided:
 					JumpVideo = False
 				Else
 					MessageBox.Show(Me, "No videos matching " & Path.GetFileName(VideoClean) & " were found in " & Path.GetDirectoryName(VideoClean) & "!" & Environment.NewLine & Environment.NewLine &
-							   "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					  "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
 
 			Else
@@ -13856,7 +13884,7 @@ OrgasmDecided:
 
 				Else
 					MessageBox.Show(Me, Path.GetFileName(VideoClean) & " was not found in " & Application.StartupPath & "\Video!" & Environment.NewLine & Environment.NewLine &
-									"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
 
 			End If
@@ -13879,7 +13907,7 @@ ExternalVideo:
 					DomWMP.URL = AudioClean
 				Else
 					MessageBox.Show(Me, Path.GetFileName(AudioClean) & " was not found in " & Path.GetDirectoryName(AudioClean) & "!" & Environment.NewLine & Environment.NewLine &
-						"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
 
 				GoTo ExternalAudio
@@ -13904,7 +13932,7 @@ ExternalVideo:
 					DomWMP.URL = AudioList(randomizer.Next(0, AudioList.Count))
 				Else
 					MessageBox.Show(Me, "No audio files matching " & Path.GetFileName(AudioClean) & " were found in " & Path.GetDirectoryName(AudioClean) & "!" & Environment.NewLine & Environment.NewLine &
-							   "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					  "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
 
 			Else
@@ -13914,7 +13942,7 @@ ExternalVideo:
 					DomWMP.URL = AudioClean
 				Else
 					MessageBox.Show(Me, Path.GetFileName(AudioClean) & " was not found in " & Application.StartupPath & "\Audio!" & Environment.NewLine & Environment.NewLine &
-									"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
 
 			End If
@@ -15044,7 +15072,7 @@ VTSkip:
 
 			If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag) Then
 				MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not exist!" & Environment.NewLine & Environment.NewLine &
-								Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+				 Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			Else
 				Dim RandomFile As New List(Of String)
 				RandomFile.Clear()
@@ -15053,7 +15081,7 @@ VTSkip:
 				Next
 				If RandomFile.Count < 1 Then
 					MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine &
-							   Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+					  Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				Else
 					FileText = RandomFile(randomizer.Next(0, RandomFile.Count))
 					StrokeTauntVal = -1
@@ -15383,8 +15411,8 @@ VTSkip:
 				If UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Year, Val(CheckFlag), SetDate)
 
 				If Not UCase(CheckFlag).Contains(UCase("SECOND")) And Not UCase(CheckFlag).Contains(UCase("MINUTE")) And Not UCase(CheckFlag).Contains(UCase("HOUR")) _
-					And Not UCase(CheckFlag).Contains(UCase("DAY")) And Not UCase(CheckFlag).Contains(UCase("WEEK")) And Not UCase(CheckFlag).Contains(UCase("MONTH")) _
-					And Not UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
+				 And Not UCase(CheckFlag).Contains(UCase("DAY")) And Not UCase(CheckFlag).Contains(UCase("WEEK")) And Not UCase(CheckFlag).Contains(UCase("MONTH")) _
+				 And Not UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
 
 				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
 
@@ -19361,7 +19389,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@OrgasmDenied") Then
-				If OrgasmDenied = False Then
+				If LastOrgasmType <> "DENIED" Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -19380,7 +19408,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@OrgasmAllowed") Then
-				If OrgasmAllowed = False Then
+				If LastOrgasmType <> "ALLOWED" Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -19399,7 +19427,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@OrgasmRuined") Then
-				If OrgasmRuined = False Then
+				If LastOrgasmType <> "RUINED" Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -22305,12 +22333,22 @@ NoPlaylistEndFile:
 			WorshipMode = False
 			WorshipTarget = ""
 
-			If OrgasmAllowed = True Then GoTo AllowedOrgasm
-			If EdgeToRuin = True Or OrgasmRuined = True Then GoTo RuinedOrgasm
+			'If OrgasmAllowed = True Then GoTo AllowedOrgasm
+			'If EdgeToRuin = True Or OrgasmRuined = True Then GoTo RuinedOrgasm
 
+			If EdgeToRuin = True Or OrgasmRuined = True Then
+				LastOrgasmType = "RUINED"
+				GoTo RuinedOrgasm
+			End If
 
+			If OrgasmAllowed = True Then
+				LastOrgasmType = "ALLOWED"
+				GoTo AllowedOrgasm
+			End If
 
 			If OrgasmDenied = True Then
+
+				LastOrgasmType = "DENIED"
 
 				If FrmSettings.CBDomDenialEnds.Checked = False Then
 

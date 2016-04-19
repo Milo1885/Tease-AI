@@ -201,7 +201,6 @@ Partial Class Form1
 		Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.AIBoxesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.CommandGuideToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator()
 		Me.OldDommeTagsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.MilovanaToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
 		Me.OpenBetaThreadToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
@@ -1984,7 +1983,7 @@ Partial Class Form1
 		'
 		'ToolsToolStripMenuItem
 		'
-		Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AIBoxesToolStripMenuItem, Me.CommandGuideToolStripMenuItem, Me.ToolStripSeparator14, Me.OldDommeTagsToolStripMenuItem})
+		Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AIBoxesToolStripMenuItem, Me.CommandGuideToolStripMenuItem, Me.OldDommeTagsToolStripMenuItem})
 		Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
 		Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
 		Me.ToolsToolStripMenuItem.Text = "Tools"
@@ -1992,25 +1991,20 @@ Partial Class Form1
 		'AIBoxesToolStripMenuItem
 		'
 		Me.AIBoxesToolStripMenuItem.Name = "AIBoxesToolStripMenuItem"
-		Me.AIBoxesToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+		Me.AIBoxesToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
 		Me.AIBoxesToolStripMenuItem.Text = "AI Boxes"
 		'
 		'CommandGuideToolStripMenuItem
 		'
 		Me.CommandGuideToolStripMenuItem.Name = "CommandGuideToolStripMenuItem"
-		Me.CommandGuideToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
+		Me.CommandGuideToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
 		Me.CommandGuideToolStripMenuItem.Text = "Command Guide"
-		'
-		'ToolStripSeparator14
-		'
-		Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-		Me.ToolStripSeparator14.Size = New System.Drawing.Size(164, 6)
 		'
 		'OldDommeTagsToolStripMenuItem
 		'
 		Me.OldDommeTagsToolStripMenuItem.Name = "OldDommeTagsToolStripMenuItem"
-		Me.OldDommeTagsToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-		Me.OldDommeTagsToolStripMenuItem.Text = "Old Domme Tags"
+		Me.OldDommeTagsToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+		Me.OldDommeTagsToolStripMenuItem.Text = "Domme Tag Creator"
 		'
 		'MilovanaToolStripMenuItem1
 		'
@@ -4518,7 +4512,6 @@ Partial Class Form1
 	Friend WithEvents Button12 As System.Windows.Forms.Button
 	Friend WithEvents VideoTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents MultipleEdgesTimer As Tease_AI.teaseAI_Timer
-	Friend WithEvents ToolStripSeparator14 As System.Windows.Forms.ToolStripSeparator
 	Friend WithEvents OldDommeTagsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents Button13 As System.Windows.Forms.Button
 	Friend WithEvents Button14 As System.Windows.Forms.Button

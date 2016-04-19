@@ -4,6 +4,29 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Added @Edge() Command - The @Edge() Command is used to indicate the user has been told by the domme to edge, just like @Edge currently does. However, @Edge() allows you to put any combination of the following modifiers in parentheses for different results when the user indicates they are on the edge:
+
+     Hold - User will be told to hold it
+	 NoHold - User will be told to stop stroking
+	 Orgasm - User will be told to cum
+	 Ruin - User will be told to ruin
+	 RuinTaunts - Enables @RuinTaunt Command Filter (used in Edge.txt and HoldTheEdge.txt) for lines that taunt the user about the orgasm they're about to ruin
+	 LongHold - User will be made to hold a long edge
+	 ExtremeHold - User will be made to hold an extreme edge
+	 HoldTaunts - Enables @LongHold or @ExtremeHold Taunts (used in Edge.txt and HoldTheEdge.txt) for lines that taunt the user about how long the edge they're about to hold/holding is going to be
+	 
+	 These Modifiers may be used in any combination:
+	 
+	 @Edge(Orgasm, NoHold) - User will be told to cum when they reach the edge
+	 @Edge(Ruin, Hold) - User will be told to hold an edge, and afterwards told to ruin their orgasms
+	 @Edge(Orgasm, LongHold, HoldTaunts) - User will be told to hold a long edge then allowed to cum; @LongHold Taunts will be active
+	 
+	 The program will disregard any combinations that don't make sense, such as:
+	 
+	 @Edge(Orgasm, Ruin) - The program disregards "Ruin" regardless of order
+	 @Edge(Hold, NoHold) - The program disregards "Hold" regardless of order
+	 @Edge(Hold, RuinTaunts) User will be told to hold the edge, @RuinTaunt Command Filters will not be activated as no Ruin modifier was included
+	
 Domme Tag methods reimplemented or enhanced in the following ways:
 
      "Fancy" domme tag creator brought back, under Tools on the main menu strip
