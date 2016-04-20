@@ -11,7 +11,6 @@ Imports System.Text.RegularExpressions
 Public Class Form1
 	'blah
 	Public Chat As String
-	Public Chat2 As String
 	Public randomizer As New Random
 	Public ScriptOperator As String
 	Public ScriptCompare As String
@@ -264,18 +263,6 @@ Public Class Form1
 	Dim TempDick As String
 	Dim PetName As String
 	Dim PetName2 As String
-	Dim DescribeCock As String
-	Dim Small As String
-	Dim Worthless As String
-	Dim TempSmallWords As Integer
-	Dim TempBigWords As Integer
-	Dim TempDickWords As Integer
-
-	Dim SmallWords(0 To 18) As String
-	Dim BigWords(0 To 18) As String
-	Dim DickWords(0 To 9) As String
-	Dim DescribeCockWords(0 To 20) As String
-	Dim WorthlessWords(0 To 9) As String
 
 	Dim TauntText As String
 	Dim ScriptCount As Integer
@@ -284,8 +271,6 @@ Public Class Form1
 
 	Dim StartIndex As Integer
 	Dim EndIndex As Integer
-
-	Dim Posts As XElement
 
 	Public SlideshowTimerTick As Integer
 
@@ -398,8 +383,6 @@ Public Class Form1
 
 	Public VTFlag As Boolean
 
-	Private GlitterThr As Threading.Thread
-
 	Public Shared DomPersonality As String
 	Public UpdateList As New List(Of String)
 
@@ -442,7 +425,6 @@ Public Class Form1
 	Public TempGif As Image
 	Dim original As Image
 	Dim resized As Image
-	Dim resized2 As Image
 
 	Dim SysMes As Boolean
 	Dim EmoMes As Boolean
@@ -498,8 +480,6 @@ Public Class Form1
 
 	Dim InputIcon As Boolean
 
-	Dim FilterL As New List(Of String)
-
 	Public ApplyingTheme As Boolean
 	Public AdjustingWindow As Boolean
 
@@ -508,7 +488,6 @@ Public Class Form1
 	Dim DommeImageFound As Boolean
 	Dim DommeImageListCheck As Boolean
 
-	Dim LocalImage As Image
 	Dim LocalImageFound As Boolean
 	Dim LocalImageListCheck As Boolean
 
@@ -536,11 +515,6 @@ Public Class Form1
 
 	Public ResponseThread As Thread
 
-	Public StrokeThread As Thread
-
-	Dim LinSelected As Boolean
-	Dim LinLine As Integer
-
 	Dim ResponseYes As String
 	Dim ResponseNo As String
 
@@ -551,7 +525,6 @@ Public Class Form1
 
 
 	Public OrgasmRestricted As Boolean
-	Dim OrgasmRestrictionLifted As Boolean
 
 	Dim FollowUp As String = ""
 
@@ -570,14 +543,12 @@ Public Class Form1
 	Dim LazyEdit5 As Boolean
 
 	Dim CurrentImage As String
-	Dim CurrentImageFlag As Boolean
 
 	Dim FormFinishedLoading As Boolean = False
 
 	Dim MiniScript As Boolean
 	Dim MiniScriptText As String
 	Dim MiniTauntVal As Integer
-	Dim MiniEnd As Boolean
 	Dim MiniTimerCheck As Boolean
 
 	Dim PreLoadImage As Boolean
@@ -4823,7 +4794,6 @@ ReturnCalled:
 				If MiniScript = True Then
 					If lines(MiniTauntVal) = "@End" Then
 						MiniScript = False
-						MiniEnd = False
 						If MiniTimerCheck = True Then
 							ScriptTick = 3
 							ScriptTimer.Start()
@@ -4947,7 +4917,6 @@ ReturnCalled:
 			'Dim ioFile As New StreamReader(HandleScriptText)
 			Dim ioFile As New StreamReader(CheckText)
 			Dim lines As New List(Of String)
-			Dim rnd As New Random()
 			Dim line As Integer
 
 			While ioFile.Peek <> -1
@@ -5101,7 +5070,6 @@ ReturnCalled:
 			End If
 
 			If lines(line).Contains("@EdgeHeld(") Then
-				Dim EdgeFail As Boolean = False
 				Dim EdgeFlag As String = GetParentheses(lines(line), "@EdgeHeld(")
 				If EdgeFlag.Contains(",") Then
 					EdgeFlag = FixCommas(EdgeFlag)
@@ -6635,8 +6603,6 @@ HypNoResponse:
 					mciSendString("CLOSE Echo1", String.Empty, 0, 0)
 
 					Dim SpeechDir As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\TempWav.wav"
-					Dim Speech1 As String = "Speech1"
-					Dim Echo1 As String = "Echo1"
 
 					synth2.SelectVoice(FrmSettings.TTSComboBox.Text)
 					synth2.SetOutputToWaveFile(SpeechDir, New SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono))
@@ -6886,7 +6852,7 @@ NoResponse:
 		Dim retval As Integer
 		Dim returnData As String = Space(128)
 
-		retval = mciSendString("status Speech1 mode", returnData, 128, 0)
+		'retval = mciSendString("status Speech1 mode", returnData, 128, 0)
 
 		If returnData.Substring(0, 7) = "playing" Then
 
@@ -8309,7 +8275,7 @@ TryNextWithTease:
 				'Else
 
 				'If TauntTempVal < 11 Then
-				LinSelected = True
+				'LinSelected = True
 				'End If
 
 				'If TauntTempVal > 10 And TauntTempVal < 51 Then
@@ -9826,7 +9792,6 @@ StatusUpdateEnd:
 			DateFlag = FixCommas(DateFlag)
 			Dim DateArray() As String = DateFlag.Split(",")
 
-			Dim dATEsTRING As String = DateArray(0)
 			Dim DDiff As Integer
 
 			If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
@@ -10477,8 +10442,6 @@ StatusUpdateEnd:
 			Dim PoundArray() As String = Split(StringClean)
 
 
-			Dim LastNonEmpty As Integer = -1
-
 			For i As Integer = 0 To PoundArray.Length - 1
 				Debug.Print("PoundArray(i) = " & PoundArray(i))
 				'Debug.Print("PoundArray.Length = " & PoundArray.Length)
@@ -10507,7 +10470,6 @@ StatusUpdateEnd:
 
 						Dim ioFile As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & PoundArray(i) & ".txt")
 						Dim lines As New List(Of String)
-						Dim Vocab As New List(Of String)
 						Dim PoundLine As Integer
 						PoundLine = -1
 
@@ -16334,8 +16296,6 @@ Skip_RandomFile:
 
 	Public Function GetLocalImage(ByVal LocTag As String) As Boolean
 
-		LocalImage = Nothing
-
 		If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
 
 
@@ -18946,12 +18906,12 @@ Skip_RandomFile:
 				End If
 			Loop Until PoundCount = 0
 
-			Dim ListCount As Integer
-			LocalTagImageList.Clear()
-			Dim ListCountTotal As Integer = -1
+
+		LocalTagImageList.Clear()
 
 
-			If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+
+		If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
 				Dim LocalReader As New StreamReader(Application.StartupPath & "\Images\System\LocalImageTags.txt")
 				While LocalReader.Peek <> -1
 					LocalTagImageList.Add(LocalReader.ReadLine())
@@ -18959,14 +18919,13 @@ Skip_RandomFile:
 				LocalReader.Close()
 				LocalReader.Dispose()
 
-				ListCount = LocalTagImageList.Count - 1
 
 
 
-				'If Not supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
+			'If Not supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
 
 
-				For i As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+			For i As Integer = LocalTagImageList.Count - 1 To 0 Step -1
 					Dim LocalCheck As String() = Split(LocalTagImageList(i))
 					Dim LocalString As String = LocalCheck(0)
 					Debug.Print("LocalString = " & LocalString)
@@ -20996,11 +20955,6 @@ FinishTNA:
 
 
 
-			Dim AvoidTheEdgeLineTemp As Integer = randomizer.Next(1, 101)
-			'Debug.Print("AtELT = " & AvoidTheEdgeLineTemp)
-
-
-
 			Dim AvoidTheEdgeVideo As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\AvoidTheEdge.txt"
 			If DommeVideo = True Then AvoidTheEdgeVideo = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\AvoidTheEdgeD.txt"
 
@@ -21328,7 +21282,6 @@ AlreadySeen:
 	Public Sub GetLocalImage()
 
 
-		Dim LocalFileCheck As Integer = 0
 		Dim CheckString As String
 		Dim CheckBoolean As Boolean
 		Dim LocalList As New List(Of String)
@@ -30099,114 +30052,6 @@ SkipNew:
 
 	Private Sub OldDommeTagsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OldDommeTagsToolStripMenuItem.Click
 		Form8.Show()
-	End Sub
-	Private Sub MultipleEdgesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles MultipleEdgesTimer.Tick
-
-	End Sub
-	Private Sub VideoTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTimer.Tick
-
-	End Sub
-	Private Sub TimeoutTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TimeoutTimer.Tick
-
-	End Sub
-	Private Sub TeaseAIClock_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseAIClock.Tick
-
-	End Sub
-	Private Sub DommeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DommeTimer.Tick
-
-	End Sub
-	Private Sub WMPTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WMPTimer.Tick
-
-	End Sub
-	Private Sub UpdateStageTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateStageTimer.Tick
-
-	End Sub
-	Private Sub Contact3Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact3Timer.Tick
-
-	End Sub
-	Private Sub Contact2Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact2Timer.Tick
-
-	End Sub
-	Private Sub Contact1Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact1Timer.Tick
-
-	End Sub
-	Private Sub CustomSlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
-
-	End Sub
-	Private Sub ContactTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ContactTimer.Tick
-
-	End Sub
-	Private Sub AvoidTheEdgeTaunts_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeTaunts.Tick
-
-	End Sub
-	Private Sub RLGLTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTauntTimer.Tick
-
-	End Sub
-	Private Sub TeaseTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseTimer.Tick
-
-	End Sub
-	Private Sub VideoTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTauntTimer.Tick
-
-	End Sub
-	Private Sub StupidTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StupidTimer.Tick
-
-	End Sub
-	Private Sub WaitTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WaitTimer.Tick
-
-	End Sub
-	Private Sub TnAFastSlides_Tick(sender As System.Object, e As System.EventArgs) Handles TnASlides.Tick
-
-	End Sub
-	Private Sub StrokeTimeTotalTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
-
-	End Sub
-	Private Sub EdgeCountTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeCountTimer.Tick
-
-	End Sub
-	Private Sub SlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SlideshowTimer.Tick
-
-	End Sub
-	Private Sub HoldEdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTauntTimer.Tick
-
-	End Sub
-	Private Sub HoldEdgeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTimer.Tick
-
-	End Sub
-	Private Sub EdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeTauntTimer.Tick
-
-	End Sub
-	Private Sub AvoidTheEdgeResume_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeResume.Tick
-
-	End Sub
-	Private Sub AvoidTheEdge_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdge.Tick
-
-	End Sub
-	Private Sub UpdatesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdatesTimer.Tick
-
-	End Sub
-	Private Sub RLGLTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTimer.Tick
-
-	End Sub
-	Private Sub CensorshipTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CensorshipTimer.Tick
-
-	End Sub
-	Private Sub DelayTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DelayTimer.Tick
-
-	End Sub
-	Private Sub StrokeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTauntTimer.Tick
-
-	End Sub
-	Private Sub StrokeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimer.Tick
-
-	End Sub
-	Private Sub SendTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SendTimer.Tick
-
-	End Sub
-	Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles Timer1.Tick
-
-	End Sub
-	Private Sub ScriptTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ScriptTimer.Tick
-
 	End Sub
 
 	Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
