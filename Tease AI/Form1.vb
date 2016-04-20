@@ -30453,67 +30453,67 @@ SkipNew:
 		If Genre = "Hardcore" Then
 			If FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBURLHardcore.Checked = False Then Return False
 			If FrmSettings.CBIHardcore.Checked And Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Then Return False
-			If FrmSettings.CBURLHardcore.Checked And Not Directory.Exists(FrmSettings.LBLURLHardcore.Text) Then Return False
+			If FrmSettings.CBURLHardcore.Checked And Not File.Exists(FrmSettings.LBLURLHardcore.Text) Then Return False
 		End If
 
 		If Genre = "Softcore" Then
 			If FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBURLSoftcore.Checked = False Then Return False
 			If FrmSettings.CBISoftcore.Checked And Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Then Return False
-			If FrmSettings.CBURLSoftcore.Checked And Not Directory.Exists(FrmSettings.LBLURLSoftcore.Text) Then Return False
+			If FrmSettings.CBURLSoftcore.Checked And Not File.Exists(FrmSettings.LBLURLSoftcore.Text) Then Return False
 		End If
 
 		If Genre = "Lesbian" Then
 			If FrmSettings.CBILesbian.Checked = False And FrmSettings.CBURLLesbian.Checked = False Then Return False
 			If FrmSettings.CBILesbian.Checked And Not Directory.Exists(FrmSettings.LBLILesbian.Text) Then Return False
-			If FrmSettings.CBURLLesbian.Checked And Not Directory.Exists(FrmSettings.LBLURLLesbian.Text) Then Return False
+			If FrmSettings.CBURLLesbian.Checked And Not File.Exists(FrmSettings.LBLURLLesbian.Text) Then Return False
 		End If
 
 		If Genre = "Blowjob" Then
 			If FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBURLBlowjob.Checked = False Then Return False
 			If FrmSettings.CBIBlowjob.Checked And Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then Return False
-			If FrmSettings.CBURLBlowjob.Checked And Not Directory.Exists(FrmSettings.LBLURLBlowjob.Text) Then Return False
+			If FrmSettings.CBURLBlowjob.Checked And Not File.Exists(FrmSettings.LBLURLBlowjob.Text) Then Return False
 		End If
 
 		If Genre = "Femdom" Then
 			If FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBURLFemdom.Checked = False Then Return False
 			If FrmSettings.CBIFemdom.Checked And Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Then Return False
-			If FrmSettings.CBURLFemdom.Checked And Not Directory.Exists(FrmSettings.LBLURLFemdom.Text) Then Return False
+			If FrmSettings.CBURLFemdom.Checked And Not File.Exists(FrmSettings.LBLURLFemdom.Text) Then Return False
 		End If
 
 		If Genre = "Lezdom" Then
 			If FrmSettings.CBILezdom.Checked = False And FrmSettings.CBURLLezdom.Checked = False Then Return False
 			If FrmSettings.CBILezdom.Checked And Not Directory.Exists(FrmSettings.LBLILezdom.Text) Then Return False
-			If FrmSettings.CBURLLezdom.Checked And Not Directory.Exists(FrmSettings.LBLURLLezdom.Text) Then Return False
+			If FrmSettings.CBURLLezdom.Checked And Not File.Exists(FrmSettings.LBLURLLezdom.Text) Then Return False
 		End If
 
 		If Genre = "Hentai" Then
 			If FrmSettings.CBIHentai.Checked = False And FrmSettings.CBURLHentai.Checked = False Then Return False
 			If FrmSettings.CBIHentai.Checked And Not Directory.Exists(FrmSettings.LBLIHentai.Text) Then Return False
-			If FrmSettings.CBURLHentai.Checked And Not Directory.Exists(FrmSettings.LBLURLHentai.Text) Then Return False
+			If FrmSettings.CBURLHentai.Checked And Not File.Exists(FrmSettings.LBLURLHentai.Text) Then Return False
 		End If
 
 		If Genre = "Gay" Then
 			If FrmSettings.CBIGay.Checked = False And FrmSettings.CBURLGay.Checked = False Then Return False
 			If FrmSettings.CBIGay.Checked And Not Directory.Exists(FrmSettings.LBLIGay.Text) Then Return False
-			If FrmSettings.CBURLGay.Checked And Not Directory.Exists(FrmSettings.LBLURLGay.Text) Then Return False
+			If FrmSettings.CBURLGay.Checked And Not File.Exists(FrmSettings.LBLURLGay.Text) Then Return False
 		End If
 
 		If Genre = "Maledom" Then
 			If FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBURLMaledom.Checked = False Then Return False
 			If FrmSettings.CBIMaledom.Checked And Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Then Return False
-			If FrmSettings.CBURLMaledom.Checked And Not Directory.Exists(FrmSettings.LBLURLMaledom.Text) Then Return False
+			If FrmSettings.CBURLMaledom.Checked And Not File.Exists(FrmSettings.LBLURLMaledom.Text) Then Return False
 		End If
 
 		If Genre = "Captions" Then
 			If FrmSettings.CBICaptions.Checked = False And FrmSettings.CBURLCaptions.Checked = False Then Return False
 			If FrmSettings.CBICaptions.Checked And Not Directory.Exists(FrmSettings.LBLICaptions.Text) Then Return False
-			If FrmSettings.CBURLCaptions.Checked And Not Directory.Exists(FrmSettings.LBLURLCaptions.Text) Then Return False
+			If FrmSettings.CBURLCaptions.Checked And Not File.Exists(FrmSettings.LBLURLCaptions.Text) Then Return False
 		End If
 
 		If Genre = "General" Then
 			If FrmSettings.CBIGeneral.Checked = False And FrmSettings.CBURLGeneral.Checked = False Then Return False
 			If FrmSettings.CBIGeneral.Checked And Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Then Return False
-			If FrmSettings.CBURLGeneral.Checked And Not Directory.Exists(FrmSettings.LBLURLGeneral.Text) Then Return False
+			If FrmSettings.CBURLGeneral.Checked And Not File.Exists(FrmSettings.LBLURLGeneral.Text) Then Return False
 		End If
 
 
