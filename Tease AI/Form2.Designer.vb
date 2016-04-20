@@ -279,74 +279,107 @@ Partial Class FrmSettings
 		Me.Label98 = New System.Windows.Forms.Label()
 		Me.Label104 = New System.Windows.Forms.Label()
 		Me.TabPage7 = New System.Windows.Forms.TabPage()
-		Me.Panel8 = New System.Windows.Forms.Panel()
-		Me.GroupBox16 = New System.Windows.Forms.GroupBox()
-		Me.BTNIGeneral = New System.Windows.Forms.Button()
-		Me.BTNICaptions = New System.Windows.Forms.Button()
-		Me.BTNIMaledom = New System.Windows.Forms.Button()
-		Me.BTNIGay = New System.Windows.Forms.Button()
-		Me.BTNIHentai = New System.Windows.Forms.Button()
-		Me.BTNILezdom = New System.Windows.Forms.Button()
-		Me.BTNIFemdom = New System.Windows.Forms.Button()
-		Me.BTNIBlowjob = New System.Windows.Forms.Button()
-		Me.BTNILesbian = New System.Windows.Forms.Button()
-		Me.BTNISoftcore = New System.Windows.Forms.Button()
-		Me.BTNIHardcore = New System.Windows.Forms.Button()
-		Me.CBICaptionsSD = New System.Windows.Forms.CheckBox()
-		Me.CBIGeneralSD = New System.Windows.Forms.CheckBox()
-		Me.LBLICaptions = New System.Windows.Forms.Label()
-		Me.LBLIHentai = New System.Windows.Forms.Label()
-		Me.CBICaptions = New System.Windows.Forms.CheckBox()
-		Me.CBIMaledomSD = New System.Windows.Forms.CheckBox()
-		Me.CBIFemdom = New System.Windows.Forms.CheckBox()
-		Me.CBIGaySD = New System.Windows.Forms.CheckBox()
-		Me.CBILezdom = New System.Windows.Forms.CheckBox()
-		Me.CBIHentaiSD = New System.Windows.Forms.CheckBox()
-		Me.CBIBlowjob = New System.Windows.Forms.CheckBox()
-		Me.CBILezdomSD = New System.Windows.Forms.CheckBox()
-		Me.CBILesbian = New System.Windows.Forms.CheckBox()
-		Me.CBIFemdomSD = New System.Windows.Forms.CheckBox()
-		Me.CBISoftcore = New System.Windows.Forms.CheckBox()
-		Me.CBIBlowjobSD = New System.Windows.Forms.CheckBox()
-		Me.CBIHardcore = New System.Windows.Forms.CheckBox()
-		Me.CBILesbianSD = New System.Windows.Forms.CheckBox()
-		Me.CBISoftcoreSD = New System.Windows.Forms.CheckBox()
-		Me.CBIHardcoreSD = New System.Windows.Forms.CheckBox()
-		Me.LBLIGeneral = New System.Windows.Forms.Label()
-		Me.CBIGeneral = New System.Windows.Forms.CheckBox()
-		Me.LBLIMaledom = New System.Windows.Forms.Label()
-		Me.LBLIHardcore = New System.Windows.Forms.Label()
-		Me.LBLIGay = New System.Windows.Forms.Label()
-		Me.LBLISoftcore = New System.Windows.Forms.Label()
-		Me.LBLILesbian = New System.Windows.Forms.Label()
-		Me.LBLIBlowjob = New System.Windows.Forms.Label()
-		Me.LBLIFemdom = New System.Windows.Forms.Label()
-		Me.LBLILezdom = New System.Windows.Forms.Label()
-		Me.CBIHentai = New System.Windows.Forms.CheckBox()
-		Me.CBIGay = New System.Windows.Forms.CheckBox()
-		Me.CBIMaledom = New System.Windows.Forms.CheckBox()
-		Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+		Me.TabControl4 = New System.Windows.Forms.TabControl()
+		Me.TabPage31 = New System.Windows.Forms.TabPage()
+		Me.GroupBox66 = New System.Windows.Forms.GroupBox()
+		Me.PBURLPreview = New System.Windows.Forms.PictureBox()
+		Me.BTNURLFilesAll = New System.Windows.Forms.Button()
+		Me.BTNURLFilesNone = New System.Windows.Forms.Button()
 		Me.URLFileList = New System.Windows.Forms.CheckedListBox()
-		Me.PictureBox13 = New System.Windows.Forms.PictureBox()
-		Me.GroupBox44 = New System.Windows.Forms.GroupBox()
-		Me.Label100 = New System.Windows.Forms.Label()
-		Me.GroupBox47 = New System.Windows.Forms.GroupBox()
-		Me.CBBnBURL = New System.Windows.Forms.RadioButton()
-		Me.CBBnBLocal = New System.Windows.Forms.RadioButton()
-		Me.CBEnableBnB = New System.Windows.Forms.CheckBox()
-		Me.GroupBox41 = New System.Windows.Forms.GroupBox()
+		Me.TabPage32 = New System.Windows.Forms.TabPage()
+		Me.GroupBox16 = New System.Windows.Forms.GroupBox()
+		Me.LBLBoobURL = New System.Windows.Forms.Label()
+		Me.BTNButtURL = New System.Windows.Forms.Button()
+		Me.BTNBoobURL = New System.Windows.Forms.Button()
+		Me.LBLButtURL = New System.Windows.Forms.Label()
+		Me.CBURLButts = New System.Windows.Forms.CheckBox()
+		Me.CBURLBoobs = New System.Windows.Forms.CheckBox()
+		Me.LBLURLFemdom = New System.Windows.Forms.Label()
+		Me.BTNURLGeneral = New System.Windows.Forms.Button()
+		Me.LBLURLHentai = New System.Windows.Forms.Label()
+		Me.CBURLLesbian = New System.Windows.Forms.CheckBox()
+		Me.BTNURLCaptions = New System.Windows.Forms.Button()
+		Me.CBURLBlowjob = New System.Windows.Forms.CheckBox()
+		Me.BTNURLMaledom = New System.Windows.Forms.Button()
+		Me.CBURLGay = New System.Windows.Forms.CheckBox()
+		Me.BTNURLGay = New System.Windows.Forms.Button()
+		Me.CBURLSoftcore = New System.Windows.Forms.CheckBox()
+		Me.CBURLHentai = New System.Windows.Forms.CheckBox()
+		Me.CBURLLezdom = New System.Windows.Forms.CheckBox()
+		Me.BTNURLHentai = New System.Windows.Forms.Button()
+		Me.LBLURLLezdom = New System.Windows.Forms.Label()
+		Me.BTNURLLezdom = New System.Windows.Forms.Button()
+		Me.CBURLFemdom = New System.Windows.Forms.CheckBox()
+		Me.BTNURLFemdom = New System.Windows.Forms.Button()
+		Me.LBLURLBlowjob = New System.Windows.Forms.Label()
+		Me.BTNURLBlowjob = New System.Windows.Forms.Button()
+		Me.LBLURLLesbian = New System.Windows.Forms.Label()
+		Me.CBURLCaptions = New System.Windows.Forms.CheckBox()
+		Me.BTNURLLesbian = New System.Windows.Forms.Button()
+		Me.LBLURLSoftcore = New System.Windows.Forms.Label()
+		Me.LBLURLGeneral = New System.Windows.Forms.Label()
+		Me.BTNURLSoftcore = New System.Windows.Forms.Button()
+		Me.LBLURLCaptions = New System.Windows.Forms.Label()
+		Me.LBLURLGay = New System.Windows.Forms.Label()
+		Me.CBURLGeneral = New System.Windows.Forms.CheckBox()
+		Me.BTNURLHardcore = New System.Windows.Forms.Button()
+		Me.LBLURLHardcore = New System.Windows.Forms.Label()
+		Me.LBLURLMaledom = New System.Windows.Forms.Label()
+		Me.CBURLHardcore = New System.Windows.Forms.CheckBox()
+		Me.CBURLMaledom = New System.Windows.Forms.CheckBox()
+		Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+		Me.CBIButts = New System.Windows.Forms.CheckBox()
+		Me.CBIBoobs = New System.Windows.Forms.CheckBox()
 		Me.CBButtSubDir = New System.Windows.Forms.CheckBox()
 		Me.LBLButtPath = New System.Windows.Forms.Label()
-		Me.LBLButtURL = New System.Windows.Forms.Label()
-		Me.BTNButtPath = New System.Windows.Forms.Button()
-		Me.BTNButtURL = New System.Windows.Forms.Button()
-		Me.GroupBox40 = New System.Windows.Forms.GroupBox()
 		Me.CBBoobSubDir = New System.Windows.Forms.CheckBox()
+		Me.LBLIFemdom = New System.Windows.Forms.Label()
+		Me.BTNButtPath = New System.Windows.Forms.Button()
 		Me.LBLBoobPath = New System.Windows.Forms.Label()
-		Me.LBLBoobURL = New System.Windows.Forms.Label()
+		Me.BTNIGeneral = New System.Windows.Forms.Button()
+		Me.CBILezdomSD = New System.Windows.Forms.CheckBox()
 		Me.BTNBoobPath = New System.Windows.Forms.Button()
-		Me.BTNBoobURL = New System.Windows.Forms.Button()
-		Me.Label119 = New System.Windows.Forms.Label()
+		Me.LBLIHentai = New System.Windows.Forms.Label()
+		Me.CBILesbian = New System.Windows.Forms.CheckBox()
+		Me.BTNICaptions = New System.Windows.Forms.Button()
+		Me.CBIBlowjob = New System.Windows.Forms.CheckBox()
+		Me.BTNIMaledom = New System.Windows.Forms.Button()
+		Me.CBIFemdomSD = New System.Windows.Forms.CheckBox()
+		Me.CBIGay = New System.Windows.Forms.CheckBox()
+		Me.CBIHentaiSD = New System.Windows.Forms.CheckBox()
+		Me.BTNIGay = New System.Windows.Forms.Button()
+		Me.CBISoftcore = New System.Windows.Forms.CheckBox()
+		Me.CBIHentai = New System.Windows.Forms.CheckBox()
+		Me.CBILezdom = New System.Windows.Forms.CheckBox()
+		Me.BTNIHentai = New System.Windows.Forms.Button()
+		Me.CBIBlowjobSD = New System.Windows.Forms.CheckBox()
+		Me.LBLILezdom = New System.Windows.Forms.Label()
+		Me.CBIGaySD = New System.Windows.Forms.CheckBox()
+		Me.BTNILezdom = New System.Windows.Forms.Button()
+		Me.CBIFemdom = New System.Windows.Forms.CheckBox()
+		Me.BTNIFemdom = New System.Windows.Forms.Button()
+		Me.CBILesbianSD = New System.Windows.Forms.CheckBox()
+		Me.LBLIBlowjob = New System.Windows.Forms.Label()
+		Me.CBIMaledomSD = New System.Windows.Forms.CheckBox()
+		Me.BTNIBlowjob = New System.Windows.Forms.Button()
+		Me.CBISoftcoreSD = New System.Windows.Forms.CheckBox()
+		Me.LBLILesbian = New System.Windows.Forms.Label()
+		Me.CBICaptions = New System.Windows.Forms.CheckBox()
+		Me.BTNILesbian = New System.Windows.Forms.Button()
+		Me.CBIHardcoreSD = New System.Windows.Forms.CheckBox()
+		Me.LBLISoftcore = New System.Windows.Forms.Label()
+		Me.LBLIGeneral = New System.Windows.Forms.Label()
+		Me.BTNISoftcore = New System.Windows.Forms.Button()
+		Me.LBLICaptions = New System.Windows.Forms.Label()
+		Me.LBLIGay = New System.Windows.Forms.Label()
+		Me.CBIGeneral = New System.Windows.Forms.CheckBox()
+		Me.BTNIHardcore = New System.Windows.Forms.Button()
+		Me.CBIGeneralSD = New System.Windows.Forms.CheckBox()
+		Me.LBLIHardcore = New System.Windows.Forms.Label()
+		Me.LBLIMaledom = New System.Windows.Forms.Label()
+		Me.CBICaptionsSD = New System.Windows.Forms.CheckBox()
+		Me.CBIHardcore = New System.Windows.Forms.CheckBox()
+		Me.CBIMaledom = New System.Windows.Forms.CheckBox()
 		Me.TabPage12 = New System.Windows.Forms.TabPage()
 		Me.PNLImageTag = New System.Windows.Forms.Panel()
 		Me.TBTagDir = New System.Windows.Forms.TextBox()
@@ -995,6 +1028,12 @@ Partial Class FrmSettings
 		Me.Label3 = New System.Windows.Forms.Label()
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.Label41 = New System.Windows.Forms.Label()
+		Me.GroupBox47 = New System.Windows.Forms.GroupBox()
+		Me.GroupBox41 = New System.Windows.Forms.GroupBox()
+		Me.Button34 = New System.Windows.Forms.Button()
+		Me.GroupBox40 = New System.Windows.Forms.GroupBox()
+		Me.GroupBox44 = New System.Windows.Forms.GroupBox()
+		Me.Label100 = New System.Windows.Forms.Label()
 		Me.GroupBox6 = New System.Windows.Forms.GroupBox()
 		Me.Label4 = New System.Windows.Forms.Label()
 		Me.LBLAvgEdgeStroking = New System.Windows.Forms.Label()
@@ -1008,7 +1047,9 @@ Partial Class FrmSettings
 		Me.Label13 = New System.Windows.Forms.Label()
 		Me.Label1 = New System.Windows.Forms.Label()
 		Me.GroupBox21 = New System.Windows.Forms.GroupBox()
+		Me.Label153 = New System.Windows.Forms.Label()
 		Me.LBLRangeSettingsDescription = New System.Windows.Forms.Label()
+		Me.Label156 = New System.Windows.Forms.Label()
 		Me.GroupBox12 = New System.Windows.Forms.GroupBox()
 		Me.LBLSubSettingsDescription = New System.Windows.Forms.Label()
 		Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
@@ -1031,6 +1072,7 @@ Partial Class FrmSettings
 		Me.Label135 = New System.Windows.Forms.Label()
 		Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
+		Me.CBURLPreview = New System.Windows.Forms.CheckBox()
 		Me.SettingsPanel.SuspendLayout
 		Me.SettingsTabs.SuspendLayout
 		Me.TabPage1.SuspendLayout
@@ -1114,14 +1156,13 @@ Partial Class FrmSettings
 		CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.GroupBox43.SuspendLayout
 		Me.TabPage7.SuspendLayout
-		Me.Panel8.SuspendLayout
+		Me.TabControl4.SuspendLayout
+		Me.TabPage31.SuspendLayout
+		Me.GroupBox66.SuspendLayout
+		CType(Me.PBURLPreview,System.ComponentModel.ISupportInitialize).BeginInit
+		Me.TabPage32.SuspendLayout
 		Me.GroupBox16.SuspendLayout
 		Me.GroupBox14.SuspendLayout
-		CType(Me.PictureBox13,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox44.SuspendLayout
-		Me.GroupBox47.SuspendLayout
-		Me.GroupBox41.SuspendLayout
-		Me.GroupBox40.SuspendLayout
 		Me.TabPage12.SuspendLayout
 		Me.PNLImageTag.SuspendLayout
 		CType(Me.ImageTagPictureBox,System.ComponentModel.ISupportInitialize).BeginInit
@@ -1264,6 +1305,9 @@ Partial Class FrmSettings
 		Me.TabPage5.SuspendLayout
 		Me.Panel5.SuspendLayout
 		CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
+		Me.GroupBox47.SuspendLayout
+		Me.GroupBox41.SuspendLayout
+		Me.GroupBox44.SuspendLayout
 		Me.GroupBox6.SuspendLayout
 		Me.GroupBox21.SuspendLayout
 		Me.GroupBox12.SuspendLayout
@@ -4382,7 +4426,7 @@ Partial Class FrmSettings
 		'TabPage7
 		'
 		Me.TabPage7.BackColor = System.Drawing.Color.Silver
-		Me.TabPage7.Controls.Add(Me.Panel8)
+		Me.TabPage7.Controls.Add(Me.TabControl4)
 		Me.TabPage7.Location = New System.Drawing.Point(4, 22)
 		Me.TabPage7.Name = "TabPage7"
 		Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
@@ -4390,729 +4434,698 @@ Partial Class FrmSettings
 		Me.TabPage7.TabIndex = 11
 		Me.TabPage7.Text = "Images"
 		'
-		'Panel8
-		'
-		Me.Panel8.BackColor = System.Drawing.Color.LightGray
-		Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.Panel8.Controls.Add(Me.GroupBox16)
-		Me.Panel8.Controls.Add(Me.GroupBox14)
-		Me.Panel8.Controls.Add(Me.PictureBox13)
-		Me.Panel8.Controls.Add(Me.GroupBox44)
-		Me.Panel8.Controls.Add(Me.GroupBox47)
-		Me.Panel8.Controls.Add(Me.Label119)
-		Me.Panel8.Location = New System.Drawing.Point(6, 6)
-		Me.Panel8.Name = "Panel8"
-		Me.Panel8.Size = New System.Drawing.Size(708, 437)
-		Me.Panel8.TabIndex = 93
-		'
-		'GroupBox16
-		'
-		Me.GroupBox16.Controls.Add(Me.BTNIGeneral)
-		Me.GroupBox16.Controls.Add(Me.BTNICaptions)
-		Me.GroupBox16.Controls.Add(Me.BTNIMaledom)
-		Me.GroupBox16.Controls.Add(Me.BTNIGay)
-		Me.GroupBox16.Controls.Add(Me.BTNIHentai)
-		Me.GroupBox16.Controls.Add(Me.BTNILezdom)
-		Me.GroupBox16.Controls.Add(Me.BTNIFemdom)
-		Me.GroupBox16.Controls.Add(Me.BTNIBlowjob)
-		Me.GroupBox16.Controls.Add(Me.BTNILesbian)
-		Me.GroupBox16.Controls.Add(Me.BTNISoftcore)
-		Me.GroupBox16.Controls.Add(Me.BTNIHardcore)
-		Me.GroupBox16.Controls.Add(Me.CBICaptionsSD)
-		Me.GroupBox16.Controls.Add(Me.CBIGeneralSD)
-		Me.GroupBox16.Controls.Add(Me.LBLICaptions)
-		Me.GroupBox16.Controls.Add(Me.LBLIHentai)
-		Me.GroupBox16.Controls.Add(Me.CBICaptions)
-		Me.GroupBox16.Controls.Add(Me.CBIMaledomSD)
-		Me.GroupBox16.Controls.Add(Me.CBIFemdom)
-		Me.GroupBox16.Controls.Add(Me.CBIGaySD)
-		Me.GroupBox16.Controls.Add(Me.CBILezdom)
-		Me.GroupBox16.Controls.Add(Me.CBIHentaiSD)
-		Me.GroupBox16.Controls.Add(Me.CBIBlowjob)
-		Me.GroupBox16.Controls.Add(Me.CBILezdomSD)
-		Me.GroupBox16.Controls.Add(Me.CBILesbian)
-		Me.GroupBox16.Controls.Add(Me.CBIFemdomSD)
-		Me.GroupBox16.Controls.Add(Me.CBISoftcore)
-		Me.GroupBox16.Controls.Add(Me.CBIBlowjobSD)
-		Me.GroupBox16.Controls.Add(Me.CBIHardcore)
-		Me.GroupBox16.Controls.Add(Me.CBILesbianSD)
-		Me.GroupBox16.Controls.Add(Me.CBISoftcoreSD)
-		Me.GroupBox16.Controls.Add(Me.CBIHardcoreSD)
-		Me.GroupBox16.Controls.Add(Me.LBLIGeneral)
-		Me.GroupBox16.Controls.Add(Me.CBIGeneral)
-		Me.GroupBox16.Controls.Add(Me.LBLIMaledom)
-		Me.GroupBox16.Controls.Add(Me.LBLIHardcore)
-		Me.GroupBox16.Controls.Add(Me.LBLIGay)
-		Me.GroupBox16.Controls.Add(Me.LBLISoftcore)
-		Me.GroupBox16.Controls.Add(Me.LBLILesbian)
-		Me.GroupBox16.Controls.Add(Me.LBLIBlowjob)
-		Me.GroupBox16.Controls.Add(Me.LBLIFemdom)
-		Me.GroupBox16.Controls.Add(Me.LBLILezdom)
-		Me.GroupBox16.Controls.Add(Me.CBIHentai)
-		Me.GroupBox16.Controls.Add(Me.CBIGay)
-		Me.GroupBox16.Controls.Add(Me.CBIMaledom)
-		Me.GroupBox16.Location = New System.Drawing.Point(327, 30)
-		Me.GroupBox16.Name = "GroupBox16"
-		Me.GroupBox16.Size = New System.Drawing.Size(372, 298)
-		Me.GroupBox16.TabIndex = 154
-		Me.GroupBox16.TabStop = false
-		Me.GroupBox16.Text = "Local Images"
-		'
-		'BTNIGeneral
-		'
-		Me.BTNIGeneral.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIGeneral.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNIGeneral.ForeColor = System.Drawing.Color.Black
-		Me.BTNIGeneral.Location = New System.Drawing.Point(86, 257)
-		Me.BTNIGeneral.Name = "BTNIGeneral"
-		Me.BTNIGeneral.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIGeneral.TabIndex = 166
-		Me.BTNIGeneral.Text = "1"
-		Me.BTNIGeneral.UseVisualStyleBackColor = false
-		'
-		'BTNICaptions
-		'
-		Me.BTNICaptions.BackColor = System.Drawing.Color.LightGray
-		Me.BTNICaptions.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNICaptions.ForeColor = System.Drawing.Color.Black
-		Me.BTNICaptions.Location = New System.Drawing.Point(86, 233)
-		Me.BTNICaptions.Name = "BTNICaptions"
-		Me.BTNICaptions.Size = New System.Drawing.Size(34, 28)
-		Me.BTNICaptions.TabIndex = 178
-		Me.BTNICaptions.Text = "1"
-		Me.BTNICaptions.UseVisualStyleBackColor = false
-		'
-		'BTNIMaledom
-		'
-		Me.BTNIMaledom.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIMaledom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNIMaledom.ForeColor = System.Drawing.Color.Black
-		Me.BTNIMaledom.Location = New System.Drawing.Point(86, 209)
-		Me.BTNIMaledom.Name = "BTNIMaledom"
-		Me.BTNIMaledom.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIMaledom.TabIndex = 161
-		Me.BTNIMaledom.Text = "1"
-		Me.BTNIMaledom.UseVisualStyleBackColor = false
-		'
-		'BTNIGay
-		'
-		Me.BTNIGay.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIGay.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNIGay.ForeColor = System.Drawing.Color.Black
-		Me.BTNIGay.Location = New System.Drawing.Point(86, 185)
-		Me.BTNIGay.Name = "BTNIGay"
-		Me.BTNIGay.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIGay.TabIndex = 160
-		Me.BTNIGay.Text = "1"
-		Me.BTNIGay.UseVisualStyleBackColor = false
-		'
-		'BTNIHentai
-		'
-		Me.BTNIHentai.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIHentai.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNIHentai.ForeColor = System.Drawing.Color.Black
-		Me.BTNIHentai.Location = New System.Drawing.Point(86, 161)
-		Me.BTNIHentai.Name = "BTNIHentai"
-		Me.BTNIHentai.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIHentai.TabIndex = 159
-		Me.BTNIHentai.Text = "1"
-		Me.BTNIHentai.UseVisualStyleBackColor = false
-		'
-		'BTNILezdom
-		'
-		Me.BTNILezdom.BackColor = System.Drawing.Color.LightGray
-		Me.BTNILezdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNILezdom.ForeColor = System.Drawing.Color.Black
-		Me.BTNILezdom.Location = New System.Drawing.Point(86, 137)
-		Me.BTNILezdom.Name = "BTNILezdom"
-		Me.BTNILezdom.Size = New System.Drawing.Size(34, 28)
-		Me.BTNILezdom.TabIndex = 149
-		Me.BTNILezdom.Text = "1"
-		Me.BTNILezdom.UseVisualStyleBackColor = false
-		'
-		'BTNIFemdom
-		'
-		Me.BTNIFemdom.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIFemdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNIFemdom.ForeColor = System.Drawing.Color.Black
-		Me.BTNIFemdom.Location = New System.Drawing.Point(86, 113)
-		Me.BTNIFemdom.Name = "BTNIFemdom"
-		Me.BTNIFemdom.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIFemdom.TabIndex = 148
-		Me.BTNIFemdom.Text = "1"
-		Me.BTNIFemdom.UseVisualStyleBackColor = false
-		'
-		'BTNIBlowjob
-		'
-		Me.BTNIBlowjob.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIBlowjob.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNIBlowjob.ForeColor = System.Drawing.Color.Black
-		Me.BTNIBlowjob.Location = New System.Drawing.Point(86, 89)
-		Me.BTNIBlowjob.Name = "BTNIBlowjob"
-		Me.BTNIBlowjob.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIBlowjob.TabIndex = 147
-		Me.BTNIBlowjob.Text = "1"
-		Me.BTNIBlowjob.UseVisualStyleBackColor = false
-		'
-		'BTNILesbian
-		'
-		Me.BTNILesbian.BackColor = System.Drawing.Color.LightGray
-		Me.BTNILesbian.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNILesbian.ForeColor = System.Drawing.Color.Black
-		Me.BTNILesbian.Location = New System.Drawing.Point(86, 66)
-		Me.BTNILesbian.Name = "BTNILesbian"
-		Me.BTNILesbian.Size = New System.Drawing.Size(34, 28)
-		Me.BTNILesbian.TabIndex = 146
-		Me.BTNILesbian.Text = "1"
-		Me.BTNILesbian.UseVisualStyleBackColor = false
-		'
-		'BTNISoftcore
-		'
-		Me.BTNISoftcore.BackColor = System.Drawing.Color.LightGray
-		Me.BTNISoftcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNISoftcore.ForeColor = System.Drawing.Color.Black
-		Me.BTNISoftcore.Location = New System.Drawing.Point(86, 43)
-		Me.BTNISoftcore.Name = "BTNISoftcore"
-		Me.BTNISoftcore.Size = New System.Drawing.Size(34, 28)
-		Me.BTNISoftcore.TabIndex = 145
-		Me.BTNISoftcore.Text = "1"
-		Me.BTNISoftcore.UseVisualStyleBackColor = false
-		'
-		'BTNIHardcore
-		'
-		Me.BTNIHardcore.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIHardcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNIHardcore.ForeColor = System.Drawing.Color.Black
-		Me.BTNIHardcore.Location = New System.Drawing.Point(86, 19)
-		Me.BTNIHardcore.Name = "BTNIHardcore"
-		Me.BTNIHardcore.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIHardcore.TabIndex = 144
-		Me.BTNIHardcore.Text = "1"
-		Me.BTNIHardcore.UseVisualStyleBackColor = false
-		'
-		'CBICaptionsSD
-		'
-		Me.CBICaptionsSD.AutoSize = true
-		Me.CBICaptionsSD.Checked = true
-		Me.CBICaptionsSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBICaptionsSD.ForeColor = System.Drawing.Color.Black
-		Me.CBICaptionsSD.Location = New System.Drawing.Point(339, 241)
-		Me.CBICaptionsSD.Name = "CBICaptionsSD"
-		Me.CBICaptionsSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBICaptionsSD.TabIndex = 180
-		Me.CBICaptionsSD.UseVisualStyleBackColor = true
-		'
-		'CBIGeneralSD
-		'
-		Me.CBIGeneralSD.AutoSize = true
-		Me.CBIGeneralSD.Checked = true
-		Me.CBIGeneralSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIGeneralSD.ForeColor = System.Drawing.Color.Black
-		Me.CBIGeneralSD.Location = New System.Drawing.Point(339, 265)
-		Me.CBIGeneralSD.Name = "CBIGeneralSD"
-		Me.CBIGeneralSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIGeneralSD.TabIndex = 176
-		Me.CBIGeneralSD.UseVisualStyleBackColor = true
-		'
-		'LBLICaptions
-		'
-		Me.LBLICaptions.BackColor = System.Drawing.Color.Transparent
-		Me.LBLICaptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLICaptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLICaptions.ForeColor = System.Drawing.Color.Black
-		Me.LBLICaptions.Location = New System.Drawing.Point(126, 239)
-		Me.LBLICaptions.Name = "LBLICaptions"
-		Me.LBLICaptions.Size = New System.Drawing.Size(206, 17)
-		Me.LBLICaptions.TabIndex = 179
-		Me.LBLICaptions.Text = "No path selected"
-		Me.LBLICaptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'LBLIHentai
-		'
-		Me.LBLIHentai.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIHentai.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIHentai.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLIHentai.ForeColor = System.Drawing.Color.Black
-		Me.LBLIHentai.Location = New System.Drawing.Point(126, 167)
-		Me.LBLIHentai.Name = "LBLIHentai"
-		Me.LBLIHentai.Size = New System.Drawing.Size(206, 17)
-		Me.LBLIHentai.TabIndex = 162
-		Me.LBLIHentai.Text = "No path selected"
-		Me.LBLIHentai.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'CBICaptions
-		'
-		Me.CBICaptions.AutoSize = true
-		Me.CBICaptions.ForeColor = System.Drawing.Color.Black
-		Me.CBICaptions.Location = New System.Drawing.Point(19, 240)
-		Me.CBICaptions.Name = "CBICaptions"
-		Me.CBICaptions.Size = New System.Drawing.Size(67, 17)
-		Me.CBICaptions.TabIndex = 177
-		Me.CBICaptions.Text = "Captions"
-		Me.CBICaptions.UseVisualStyleBackColor = true
-		'
-		'CBIMaledomSD
-		'
-		Me.CBIMaledomSD.AutoSize = true
-		Me.CBIMaledomSD.Checked = true
-		Me.CBIMaledomSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIMaledomSD.ForeColor = System.Drawing.Color.Black
-		Me.CBIMaledomSD.Location = New System.Drawing.Point(339, 217)
-		Me.CBIMaledomSD.Name = "CBIMaledomSD"
-		Me.CBIMaledomSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIMaledomSD.TabIndex = 175
-		Me.CBIMaledomSD.UseVisualStyleBackColor = true
-		'
-		'CBIFemdom
-		'
-		Me.CBIFemdom.AutoSize = true
-		Me.CBIFemdom.ForeColor = System.Drawing.Color.Black
-		Me.CBIFemdom.Location = New System.Drawing.Point(19, 120)
-		Me.CBIFemdom.Name = "CBIFemdom"
-		Me.CBIFemdom.Size = New System.Drawing.Size(66, 17)
-		Me.CBIFemdom.TabIndex = 142
-		Me.CBIFemdom.Text = "Femdom"
-		Me.CBIFemdom.UseVisualStyleBackColor = true
-		'
-		'CBIGaySD
-		'
-		Me.CBIGaySD.AutoSize = true
-		Me.CBIGaySD.Checked = true
-		Me.CBIGaySD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIGaySD.ForeColor = System.Drawing.Color.Black
-		Me.CBIGaySD.Location = New System.Drawing.Point(339, 193)
-		Me.CBIGaySD.Name = "CBIGaySD"
-		Me.CBIGaySD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIGaySD.TabIndex = 174
-		Me.CBIGaySD.UseVisualStyleBackColor = true
-		'
-		'CBILezdom
-		'
-		Me.CBILezdom.AutoSize = true
-		Me.CBILezdom.ForeColor = System.Drawing.Color.Black
-		Me.CBILezdom.Location = New System.Drawing.Point(19, 144)
-		Me.CBILezdom.Name = "CBILezdom"
-		Me.CBILezdom.Size = New System.Drawing.Size(63, 17)
-		Me.CBILezdom.TabIndex = 143
-		Me.CBILezdom.Text = "Lezdom"
-		Me.CBILezdom.UseVisualStyleBackColor = true
-		'
-		'CBIHentaiSD
-		'
-		Me.CBIHentaiSD.AutoSize = true
-		Me.CBIHentaiSD.Checked = true
-		Me.CBIHentaiSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIHentaiSD.ForeColor = System.Drawing.Color.Black
-		Me.CBIHentaiSD.Location = New System.Drawing.Point(339, 170)
-		Me.CBIHentaiSD.Name = "CBIHentaiSD"
-		Me.CBIHentaiSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIHentaiSD.TabIndex = 173
-		Me.CBIHentaiSD.UseVisualStyleBackColor = true
-		'
-		'CBIBlowjob
-		'
-		Me.CBIBlowjob.AutoSize = true
-		Me.CBIBlowjob.ForeColor = System.Drawing.Color.Black
-		Me.CBIBlowjob.Location = New System.Drawing.Point(19, 96)
-		Me.CBIBlowjob.Name = "CBIBlowjob"
-		Me.CBIBlowjob.Size = New System.Drawing.Size(63, 17)
-		Me.CBIBlowjob.TabIndex = 141
-		Me.CBIBlowjob.Text = "Blowjob"
-		Me.CBIBlowjob.UseVisualStyleBackColor = true
-		'
-		'CBILezdomSD
-		'
-		Me.CBILezdomSD.AutoSize = true
-		Me.CBILezdomSD.Checked = true
-		Me.CBILezdomSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBILezdomSD.ForeColor = System.Drawing.Color.Black
-		Me.CBILezdomSD.Location = New System.Drawing.Point(339, 145)
-		Me.CBILezdomSD.Name = "CBILezdomSD"
-		Me.CBILezdomSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBILezdomSD.TabIndex = 172
-		Me.CBILezdomSD.UseVisualStyleBackColor = true
-		'
-		'CBILesbian
-		'
-		Me.CBILesbian.AutoSize = true
-		Me.CBILesbian.ForeColor = System.Drawing.Color.Black
-		Me.CBILesbian.Location = New System.Drawing.Point(19, 73)
-		Me.CBILesbian.Name = "CBILesbian"
-		Me.CBILesbian.Size = New System.Drawing.Size(63, 17)
-		Me.CBILesbian.TabIndex = 140
-		Me.CBILesbian.Text = "Lesbian"
-		Me.CBILesbian.UseVisualStyleBackColor = true
-		'
-		'CBIFemdomSD
-		'
-		Me.CBIFemdomSD.AutoSize = true
-		Me.CBIFemdomSD.Checked = true
-		Me.CBIFemdomSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIFemdomSD.ForeColor = System.Drawing.Color.Black
-		Me.CBIFemdomSD.Location = New System.Drawing.Point(339, 121)
-		Me.CBIFemdomSD.Name = "CBIFemdomSD"
-		Me.CBIFemdomSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIFemdomSD.TabIndex = 171
-		Me.CBIFemdomSD.UseVisualStyleBackColor = true
-		'
-		'CBISoftcore
-		'
-		Me.CBISoftcore.AutoSize = true
-		Me.CBISoftcore.ForeColor = System.Drawing.Color.Black
-		Me.CBISoftcore.Location = New System.Drawing.Point(19, 50)
-		Me.CBISoftcore.Name = "CBISoftcore"
-		Me.CBISoftcore.Size = New System.Drawing.Size(66, 17)
-		Me.CBISoftcore.TabIndex = 139
-		Me.CBISoftcore.Text = "Softcore"
-		Me.CBISoftcore.UseVisualStyleBackColor = true
-		'
-		'CBIBlowjobSD
-		'
-		Me.CBIBlowjobSD.AutoSize = true
-		Me.CBIBlowjobSD.Checked = true
-		Me.CBIBlowjobSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIBlowjobSD.ForeColor = System.Drawing.Color.Black
-		Me.CBIBlowjobSD.Location = New System.Drawing.Point(339, 97)
-		Me.CBIBlowjobSD.Name = "CBIBlowjobSD"
-		Me.CBIBlowjobSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIBlowjobSD.TabIndex = 170
-		Me.CBIBlowjobSD.UseVisualStyleBackColor = true
-		'
-		'CBIHardcore
-		'
-		Me.CBIHardcore.AutoSize = true
-		Me.CBIHardcore.ForeColor = System.Drawing.Color.Black
-		Me.CBIHardcore.Location = New System.Drawing.Point(19, 26)
-		Me.CBIHardcore.Name = "CBIHardcore"
-		Me.CBIHardcore.Size = New System.Drawing.Size(70, 17)
-		Me.CBIHardcore.TabIndex = 138
-		Me.CBIHardcore.Text = "Hardcore"
-		Me.CBIHardcore.UseVisualStyleBackColor = true
-		'
-		'CBILesbianSD
-		'
-		Me.CBILesbianSD.AutoSize = true
-		Me.CBILesbianSD.Checked = true
-		Me.CBILesbianSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBILesbianSD.ForeColor = System.Drawing.Color.Black
-		Me.CBILesbianSD.Location = New System.Drawing.Point(339, 74)
-		Me.CBILesbianSD.Name = "CBILesbianSD"
-		Me.CBILesbianSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBILesbianSD.TabIndex = 169
-		Me.CBILesbianSD.UseVisualStyleBackColor = true
-		'
-		'CBISoftcoreSD
-		'
-		Me.CBISoftcoreSD.AutoSize = true
-		Me.CBISoftcoreSD.Checked = true
-		Me.CBISoftcoreSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBISoftcoreSD.ForeColor = System.Drawing.Color.Black
-		Me.CBISoftcoreSD.Location = New System.Drawing.Point(339, 51)
-		Me.CBISoftcoreSD.Name = "CBISoftcoreSD"
-		Me.CBISoftcoreSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBISoftcoreSD.TabIndex = 168
-		Me.CBISoftcoreSD.UseVisualStyleBackColor = true
-		'
-		'CBIHardcoreSD
-		'
-		Me.CBIHardcoreSD.AutoSize = true
-		Me.CBIHardcoreSD.Checked = true
-		Me.CBIHardcoreSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIHardcoreSD.ForeColor = System.Drawing.Color.Black
-		Me.CBIHardcoreSD.Location = New System.Drawing.Point(339, 28)
-		Me.CBIHardcoreSD.Name = "CBIHardcoreSD"
-		Me.CBIHardcoreSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIHardcoreSD.TabIndex = 141
-		Me.CBIHardcoreSD.UseVisualStyleBackColor = true
-		'
-		'LBLIGeneral
-		'
-		Me.LBLIGeneral.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIGeneral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLIGeneral.ForeColor = System.Drawing.Color.Black
-		Me.LBLIGeneral.Location = New System.Drawing.Point(126, 263)
-		Me.LBLIGeneral.Name = "LBLIGeneral"
-		Me.LBLIGeneral.Size = New System.Drawing.Size(206, 17)
-		Me.LBLIGeneral.TabIndex = 167
-		Me.LBLIGeneral.Text = "No path selected"
-		Me.LBLIGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'CBIGeneral
-		'
-		Me.CBIGeneral.AutoSize = true
-		Me.CBIGeneral.ForeColor = System.Drawing.Color.Black
-		Me.CBIGeneral.Location = New System.Drawing.Point(19, 264)
-		Me.CBIGeneral.Name = "CBIGeneral"
-		Me.CBIGeneral.Size = New System.Drawing.Size(63, 17)
-		Me.CBIGeneral.TabIndex = 165
-		Me.CBIGeneral.Text = "General"
-		Me.CBIGeneral.UseVisualStyleBackColor = true
-		'
-		'LBLIMaledom
-		'
-		Me.LBLIMaledom.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIMaledom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIMaledom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLIMaledom.ForeColor = System.Drawing.Color.Black
-		Me.LBLIMaledom.Location = New System.Drawing.Point(126, 215)
-		Me.LBLIMaledom.Name = "LBLIMaledom"
-		Me.LBLIMaledom.Size = New System.Drawing.Size(206, 17)
-		Me.LBLIMaledom.TabIndex = 164
-		Me.LBLIMaledom.Text = "No path selected"
-		Me.LBLIMaledom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'LBLIHardcore
-		'
-		Me.LBLIHardcore.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIHardcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIHardcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLIHardcore.ForeColor = System.Drawing.Color.Black
-		Me.LBLIHardcore.Location = New System.Drawing.Point(126, 26)
-		Me.LBLIHardcore.Name = "LBLIHardcore"
-		Me.LBLIHardcore.Size = New System.Drawing.Size(206, 17)
-		Me.LBLIHardcore.TabIndex = 150
-		Me.LBLIHardcore.Text = "No path selected"
-		Me.LBLIHardcore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'LBLIGay
-		'
-		Me.LBLIGay.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIGay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIGay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLIGay.ForeColor = System.Drawing.Color.Black
-		Me.LBLIGay.Location = New System.Drawing.Point(126, 191)
-		Me.LBLIGay.Name = "LBLIGay"
-		Me.LBLIGay.Size = New System.Drawing.Size(206, 17)
-		Me.LBLIGay.TabIndex = 163
-		Me.LBLIGay.Text = "No path selected"
-		Me.LBLIGay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'LBLISoftcore
-		'
-		Me.LBLISoftcore.BackColor = System.Drawing.Color.Transparent
-		Me.LBLISoftcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLISoftcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLISoftcore.ForeColor = System.Drawing.Color.Black
-		Me.LBLISoftcore.Location = New System.Drawing.Point(126, 49)
-		Me.LBLISoftcore.Name = "LBLISoftcore"
-		Me.LBLISoftcore.Size = New System.Drawing.Size(206, 17)
-		Me.LBLISoftcore.TabIndex = 151
-		Me.LBLISoftcore.Text = "No path selected"
-		Me.LBLISoftcore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'LBLILesbian
-		'
-		Me.LBLILesbian.BackColor = System.Drawing.Color.Transparent
-		Me.LBLILesbian.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLILesbian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLILesbian.ForeColor = System.Drawing.Color.Black
-		Me.LBLILesbian.Location = New System.Drawing.Point(126, 72)
-		Me.LBLILesbian.Name = "LBLILesbian"
-		Me.LBLILesbian.Size = New System.Drawing.Size(206, 17)
-		Me.LBLILesbian.TabIndex = 152
-		Me.LBLILesbian.Text = "No path selected"
-		Me.LBLILesbian.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'LBLIBlowjob
-		'
-		Me.LBLIBlowjob.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIBlowjob.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIBlowjob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLIBlowjob.ForeColor = System.Drawing.Color.Black
-		Me.LBLIBlowjob.Location = New System.Drawing.Point(126, 95)
-		Me.LBLIBlowjob.Name = "LBLIBlowjob"
-		Me.LBLIBlowjob.Size = New System.Drawing.Size(206, 17)
-		Me.LBLIBlowjob.TabIndex = 153
-		Me.LBLIBlowjob.Text = "No path selected"
-		Me.LBLIBlowjob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'LBLIFemdom
-		'
-		Me.LBLIFemdom.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIFemdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIFemdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLIFemdom.ForeColor = System.Drawing.Color.Black
-		Me.LBLIFemdom.Location = New System.Drawing.Point(126, 119)
-		Me.LBLIFemdom.Name = "LBLIFemdom"
-		Me.LBLIFemdom.Size = New System.Drawing.Size(206, 17)
-		Me.LBLIFemdom.TabIndex = 154
-		Me.LBLIFemdom.Text = "No path selected"
-		Me.LBLIFemdom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'LBLILezdom
-		'
-		Me.LBLILezdom.BackColor = System.Drawing.Color.Transparent
-		Me.LBLILezdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLILezdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLILezdom.ForeColor = System.Drawing.Color.Black
-		Me.LBLILezdom.Location = New System.Drawing.Point(126, 143)
-		Me.LBLILezdom.Name = "LBLILezdom"
-		Me.LBLILezdom.Size = New System.Drawing.Size(206, 17)
-		Me.LBLILezdom.TabIndex = 155
-		Me.LBLILezdom.Text = "No path selected"
-		Me.LBLILezdom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'CBIHentai
-		'
-		Me.CBIHentai.AutoSize = true
-		Me.CBIHentai.ForeColor = System.Drawing.Color.Black
-		Me.CBIHentai.Location = New System.Drawing.Point(19, 168)
-		Me.CBIHentai.Name = "CBIHentai"
-		Me.CBIHentai.Size = New System.Drawing.Size(57, 17)
-		Me.CBIHentai.TabIndex = 156
-		Me.CBIHentai.Text = "Hentai"
-		Me.CBIHentai.UseVisualStyleBackColor = true
-		'
-		'CBIGay
-		'
-		Me.CBIGay.AutoSize = true
-		Me.CBIGay.ForeColor = System.Drawing.Color.Black
-		Me.CBIGay.Location = New System.Drawing.Point(19, 192)
-		Me.CBIGay.Name = "CBIGay"
-		Me.CBIGay.Size = New System.Drawing.Size(45, 17)
-		Me.CBIGay.TabIndex = 157
-		Me.CBIGay.Text = "Gay"
-		Me.CBIGay.UseVisualStyleBackColor = true
-		'
-		'CBIMaledom
-		'
-		Me.CBIMaledom.AutoSize = true
-		Me.CBIMaledom.ForeColor = System.Drawing.Color.Black
-		Me.CBIMaledom.Location = New System.Drawing.Point(19, 216)
-		Me.CBIMaledom.Name = "CBIMaledom"
-		Me.CBIMaledom.Size = New System.Drawing.Size(69, 17)
-		Me.CBIMaledom.TabIndex = 158
-		Me.CBIMaledom.Text = "Maledom"
-		Me.CBIMaledom.UseVisualStyleBackColor = true
-		'
-		'GroupBox14
-		'
-		Me.GroupBox14.Controls.Add(Me.URLFileList)
-		Me.GroupBox14.Location = New System.Drawing.Point(11, 222)
-		Me.GroupBox14.Name = "GroupBox14"
-		Me.GroupBox14.Size = New System.Drawing.Size(310, 106)
-		Me.GroupBox14.TabIndex = 153
-		Me.GroupBox14.TabStop = false
-		Me.GroupBox14.Text = "URL Files"
+		'TabControl4
+		'
+		Me.TabControl4.Controls.Add(Me.TabPage31)
+		Me.TabControl4.Controls.Add(Me.TabPage32)
+		Me.TabControl4.Location = New System.Drawing.Point(6, 6)
+		Me.TabControl4.Name = "TabControl4"
+		Me.TabControl4.SelectedIndex = 0
+		Me.TabControl4.Size = New System.Drawing.Size(708, 437)
+		Me.TabControl4.TabIndex = 154
+		'
+		'TabPage31
+		'
+		Me.TabPage31.BackColor = System.Drawing.Color.LightGray
+		Me.TabPage31.Controls.Add(Me.CBURLPreview)
+		Me.TabPage31.Controls.Add(Me.GroupBox66)
+		Me.TabPage31.Controls.Add(Me.BTNURLFilesAll)
+		Me.TabPage31.Controls.Add(Me.BTNURLFilesNone)
+		Me.TabPage31.Controls.Add(Me.URLFileList)
+		Me.TabPage31.Location = New System.Drawing.Point(4, 22)
+		Me.TabPage31.Name = "TabPage31"
+		Me.TabPage31.Padding = New System.Windows.Forms.Padding(3)
+		Me.TabPage31.Size = New System.Drawing.Size(700, 411)
+		Me.TabPage31.TabIndex = 0
+		Me.TabPage31.Text = "URL Files"
+		'
+		'GroupBox66
+		'
+		Me.GroupBox66.Controls.Add(Me.PBURLPreview)
+		Me.GroupBox66.Location = New System.Drawing.Point(344, 3)
+		Me.GroupBox66.Name = "GroupBox66"
+		Me.GroupBox66.Size = New System.Drawing.Size(350, 309)
+		Me.GroupBox66.TabIndex = 162
+		Me.GroupBox66.TabStop = false
+		Me.GroupBox66.Text = "Example Preview"
+		'
+		'PBURLPreview
+		'
+		Me.PBURLPreview.BackColor = System.Drawing.Color.Black
+		Me.PBURLPreview.Location = New System.Drawing.Point(6, 19)
+		Me.PBURLPreview.Name = "PBURLPreview"
+		Me.PBURLPreview.Size = New System.Drawing.Size(338, 284)
+		Me.PBURLPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+		Me.PBURLPreview.TabIndex = 0
+		Me.PBURLPreview.TabStop = false
+		'
+		'BTNURLFilesAll
+		'
+		Me.BTNURLFilesAll.Location = New System.Drawing.Point(344, 348)
+		Me.BTNURLFilesAll.Name = "BTNURLFilesAll"
+		Me.BTNURLFilesAll.Size = New System.Drawing.Size(75, 23)
+		Me.BTNURLFilesAll.TabIndex = 160
+		Me.BTNURLFilesAll.Text = "Select All"
+		Me.BTNURLFilesAll.UseVisualStyleBackColor = true
+		'
+		'BTNURLFilesNone
+		'
+		Me.BTNURLFilesNone.Location = New System.Drawing.Point(344, 380)
+		Me.BTNURLFilesNone.Name = "BTNURLFilesNone"
+		Me.BTNURLFilesNone.Size = New System.Drawing.Size(75, 23)
+		Me.BTNURLFilesNone.TabIndex = 161
+		Me.BTNURLFilesNone.Text = "Select None"
+		Me.BTNURLFilesNone.UseVisualStyleBackColor = true
 		'
 		'URLFileList
 		'
 		Me.URLFileList.CheckOnClick = true
 		Me.URLFileList.FormattingEnabled = true
-		Me.URLFileList.Location = New System.Drawing.Point(11, 23)
+		Me.URLFileList.Location = New System.Drawing.Point(6, 9)
 		Me.URLFileList.Name = "URLFileList"
-		Me.URLFileList.Size = New System.Drawing.Size(286, 64)
+		Me.URLFileList.Size = New System.Drawing.Size(332, 394)
 		Me.URLFileList.Sorted = true
 		Me.URLFileList.TabIndex = 154
 		'
-		'PictureBox13
+		'TabPage32
 		'
-		Me.PictureBox13.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox13.Image = CType(resources.GetObject("PictureBox13.Image"),System.Drawing.Image)
-		Me.PictureBox13.Location = New System.Drawing.Point(9, 6)
-		Me.PictureBox13.Name = "PictureBox13"
-		Me.PictureBox13.Size = New System.Drawing.Size(160, 19)
-		Me.PictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PictureBox13.TabIndex = 151
-		Me.PictureBox13.TabStop = false
+		Me.TabPage32.BackColor = System.Drawing.Color.LightGray
+		Me.TabPage32.Controls.Add(Me.GroupBox16)
+		Me.TabPage32.Controls.Add(Me.GroupBox14)
+		Me.TabPage32.Location = New System.Drawing.Point(4, 22)
+		Me.TabPage32.Name = "TabPage32"
+		Me.TabPage32.Padding = New System.Windows.Forms.Padding(3)
+		Me.TabPage32.Size = New System.Drawing.Size(700, 411)
+		Me.TabPage32.TabIndex = 1
+		Me.TabPage32.Text = "Genre Images"
 		'
-		'GroupBox44
+		'GroupBox16
 		'
-		Me.GroupBox44.BackColor = System.Drawing.Color.LightGray
-		Me.GroupBox44.Controls.Add(Me.Label100)
-		Me.GroupBox44.ForeColor = System.Drawing.Color.Black
-		Me.GroupBox44.Location = New System.Drawing.Point(7, 331)
-		Me.GroupBox44.Name = "GroupBox44"
-		Me.GroupBox44.Size = New System.Drawing.Size(692, 92)
-		Me.GroupBox44.TabIndex = 65
-		Me.GroupBox44.TabStop = false
-		Me.GroupBox44.Text = "Description"
+		Me.GroupBox16.Controls.Add(Me.LBLBoobURL)
+		Me.GroupBox16.Controls.Add(Me.BTNButtURL)
+		Me.GroupBox16.Controls.Add(Me.BTNBoobURL)
+		Me.GroupBox16.Controls.Add(Me.LBLButtURL)
+		Me.GroupBox16.Controls.Add(Me.CBURLButts)
+		Me.GroupBox16.Controls.Add(Me.CBURLBoobs)
+		Me.GroupBox16.Controls.Add(Me.LBLURLFemdom)
+		Me.GroupBox16.Controls.Add(Me.BTNURLGeneral)
+		Me.GroupBox16.Controls.Add(Me.LBLURLHentai)
+		Me.GroupBox16.Controls.Add(Me.CBURLLesbian)
+		Me.GroupBox16.Controls.Add(Me.BTNURLCaptions)
+		Me.GroupBox16.Controls.Add(Me.CBURLBlowjob)
+		Me.GroupBox16.Controls.Add(Me.BTNURLMaledom)
+		Me.GroupBox16.Controls.Add(Me.CBURLGay)
+		Me.GroupBox16.Controls.Add(Me.BTNURLGay)
+		Me.GroupBox16.Controls.Add(Me.CBURLSoftcore)
+		Me.GroupBox16.Controls.Add(Me.CBURLHentai)
+		Me.GroupBox16.Controls.Add(Me.CBURLLezdom)
+		Me.GroupBox16.Controls.Add(Me.BTNURLHentai)
+		Me.GroupBox16.Controls.Add(Me.LBLURLLezdom)
+		Me.GroupBox16.Controls.Add(Me.BTNURLLezdom)
+		Me.GroupBox16.Controls.Add(Me.CBURLFemdom)
+		Me.GroupBox16.Controls.Add(Me.BTNURLFemdom)
+		Me.GroupBox16.Controls.Add(Me.LBLURLBlowjob)
+		Me.GroupBox16.Controls.Add(Me.BTNURLBlowjob)
+		Me.GroupBox16.Controls.Add(Me.LBLURLLesbian)
+		Me.GroupBox16.Controls.Add(Me.CBURLCaptions)
+		Me.GroupBox16.Controls.Add(Me.BTNURLLesbian)
+		Me.GroupBox16.Controls.Add(Me.LBLURLSoftcore)
+		Me.GroupBox16.Controls.Add(Me.LBLURLGeneral)
+		Me.GroupBox16.Controls.Add(Me.BTNURLSoftcore)
+		Me.GroupBox16.Controls.Add(Me.LBLURLCaptions)
+		Me.GroupBox16.Controls.Add(Me.LBLURLGay)
+		Me.GroupBox16.Controls.Add(Me.CBURLGeneral)
+		Me.GroupBox16.Controls.Add(Me.BTNURLHardcore)
+		Me.GroupBox16.Controls.Add(Me.LBLURLHardcore)
+		Me.GroupBox16.Controls.Add(Me.LBLURLMaledom)
+		Me.GroupBox16.Controls.Add(Me.CBURLHardcore)
+		Me.GroupBox16.Controls.Add(Me.CBURLMaledom)
+		Me.GroupBox16.Location = New System.Drawing.Point(383, 8)
+		Me.GroupBox16.Name = "GroupBox16"
+		Me.GroupBox16.Size = New System.Drawing.Size(311, 400)
+		Me.GroupBox16.TabIndex = 156
+		Me.GroupBox16.TabStop = false
+		Me.GroupBox16.Text = "URL Files"
 		'
-		'Label100
+		'LBLBoobURL
 		'
-		Me.Label100.BackColor = System.Drawing.Color.Transparent
-		Me.Label100.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.Label100.ForeColor = System.Drawing.Color.Black
-		Me.Label100.Location = New System.Drawing.Point(6, 16)
-		Me.Label100.Name = "Label100"
-		Me.Label100.Size = New System.Drawing.Size(680, 73)
-		Me.Label100.TabIndex = 62
-		Me.Label100.Text = resources.GetString("Label100.Text")
-		Me.Label100.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		Me.LBLBoobURL.BackColor = System.Drawing.Color.Transparent
+		Me.LBLBoobURL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLBoobURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLBoobURL.ForeColor = System.Drawing.Color.Black
+		Me.LBLBoobURL.Location = New System.Drawing.Point(122, 341)
+		Me.LBLBoobURL.Name = "LBLBoobURL"
+		Me.LBLBoobURL.Size = New System.Drawing.Size(173, 17)
+		Me.LBLBoobURL.TabIndex = 139
+		Me.LBLBoobURL.Text = "No path selected"
+		Me.LBLBoobURL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
-		'GroupBox47
+		'BTNButtURL
 		'
-		Me.GroupBox47.BackColor = System.Drawing.Color.LightGray
-		Me.GroupBox47.Controls.Add(Me.CBBnBURL)
-		Me.GroupBox47.Controls.Add(Me.CBBnBLocal)
-		Me.GroupBox47.Controls.Add(Me.CBEnableBnB)
-		Me.GroupBox47.Controls.Add(Me.GroupBox41)
-		Me.GroupBox47.Controls.Add(Me.GroupBox40)
-		Me.GroupBox47.ForeColor = System.Drawing.Color.Black
-		Me.GroupBox47.Location = New System.Drawing.Point(11, 30)
-		Me.GroupBox47.Name = "GroupBox47"
-		Me.GroupBox47.Size = New System.Drawing.Size(310, 190)
-		Me.GroupBox47.TabIndex = 63
-		Me.GroupBox47.TabStop = false
-		Me.GroupBox47.Text = "Boobs and Butts Paths"
+		Me.BTNButtURL.BackColor = System.Drawing.Color.LightGray
+		Me.BTNButtURL.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold)
+		Me.BTNButtURL.ForeColor = System.Drawing.Color.Black
+		Me.BTNButtURL.Location = New System.Drawing.Point(82, 364)
+		Me.BTNButtURL.Name = "BTNButtURL"
+		Me.BTNButtURL.Size = New System.Drawing.Size(34, 28)
+		Me.BTNButtURL.TabIndex = 137
+		Me.BTNButtURL.Text = "1"
+		Me.BTNButtURL.UseVisualStyleBackColor = false
 		'
-		'CBBnBURL
+		'BTNBoobURL
 		'
-		Me.CBBnBURL.AutoSize = true
-		Me.CBBnBURL.Location = New System.Drawing.Point(227, 15)
-		Me.CBBnBURL.Name = "CBBnBURL"
-		Me.CBBnBURL.Size = New System.Drawing.Size(71, 17)
-		Me.CBBnBURL.TabIndex = 153
-		Me.CBBnBURL.Text = "URL Files"
-		Me.CBBnBURL.UseVisualStyleBackColor = true
+		Me.BTNBoobURL.BackColor = System.Drawing.Color.LightGray
+		Me.BTNBoobURL.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold)
+		Me.BTNBoobURL.ForeColor = System.Drawing.Color.Black
+		Me.BTNBoobURL.Location = New System.Drawing.Point(82, 335)
+		Me.BTNBoobURL.Name = "BTNBoobURL"
+		Me.BTNBoobURL.Size = New System.Drawing.Size(34, 28)
+		Me.BTNBoobURL.TabIndex = 137
+		Me.BTNBoobURL.Text = "1"
+		Me.BTNBoobURL.UseVisualStyleBackColor = false
 		'
-		'CBBnBLocal
+		'LBLButtURL
 		'
-		Me.CBBnBLocal.AutoSize = true
-		Me.CBBnBLocal.Checked = true
-		Me.CBBnBLocal.Location = New System.Drawing.Point(130, 15)
-		Me.CBBnBLocal.Name = "CBBnBLocal"
-		Me.CBBnBLocal.Size = New System.Drawing.Size(88, 17)
-		Me.CBBnBLocal.TabIndex = 152
-		Me.CBBnBLocal.TabStop = true
-		Me.CBBnBLocal.Text = "Local Images"
-		Me.CBBnBLocal.UseVisualStyleBackColor = true
+		Me.LBLButtURL.BackColor = System.Drawing.Color.Transparent
+		Me.LBLButtURL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLButtURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLButtURL.ForeColor = System.Drawing.Color.Black
+		Me.LBLButtURL.Location = New System.Drawing.Point(122, 370)
+		Me.LBLButtURL.Name = "LBLButtURL"
+		Me.LBLButtURL.Size = New System.Drawing.Size(173, 17)
+		Me.LBLButtURL.TabIndex = 139
+		Me.LBLButtURL.Text = "No path selected"
+		Me.LBLButtURL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
-		'CBEnableBnB
+		'CBURLButts
 		'
-		Me.CBEnableBnB.AutoSize = true
-		Me.CBEnableBnB.ForeColor = System.Drawing.Color.Black
-		Me.CBEnableBnB.Location = New System.Drawing.Point(6, 15)
-		Me.CBEnableBnB.Name = "CBEnableBnB"
-		Me.CBEnableBnB.Size = New System.Drawing.Size(118, 17)
-		Me.CBEnableBnB.TabIndex = 152
-		Me.CBEnableBnB.Text = "Enable BnB Games"
-		Me.CBEnableBnB.UseVisualStyleBackColor = true
+		Me.CBURLButts.AutoSize = true
+		Me.CBURLButts.ForeColor = System.Drawing.Color.Black
+		Me.CBURLButts.Location = New System.Drawing.Point(15, 371)
+		Me.CBURLButts.Name = "CBURLButts"
+		Me.CBURLButts.Size = New System.Drawing.Size(50, 17)
+		Me.CBURLButts.TabIndex = 184
+		Me.CBURLButts.Text = "Butts"
+		Me.CBURLButts.UseVisualStyleBackColor = true
 		'
-		'GroupBox41
+		'CBURLBoobs
 		'
-		Me.GroupBox41.Controls.Add(Me.CBButtSubDir)
-		Me.GroupBox41.Controls.Add(Me.LBLButtPath)
-		Me.GroupBox41.Controls.Add(Me.LBLButtURL)
-		Me.GroupBox41.Controls.Add(Me.BTNButtPath)
-		Me.GroupBox41.Controls.Add(Me.BTNButtURL)
-		Me.GroupBox41.Location = New System.Drawing.Point(6, 110)
-		Me.GroupBox41.Name = "GroupBox41"
-		Me.GroupBox41.Size = New System.Drawing.Size(298, 74)
-		Me.GroupBox41.TabIndex = 153
-		Me.GroupBox41.TabStop = false
-		Me.GroupBox41.Text = "Butts"
+		Me.CBURLBoobs.AutoSize = true
+		Me.CBURLBoobs.ForeColor = System.Drawing.Color.Black
+		Me.CBURLBoobs.Location = New System.Drawing.Point(15, 342)
+		Me.CBURLBoobs.Name = "CBURLBoobs"
+		Me.CBURLBoobs.Size = New System.Drawing.Size(56, 17)
+		Me.CBURLBoobs.TabIndex = 183
+		Me.CBURLBoobs.Text = "Boobs"
+		Me.CBURLBoobs.UseVisualStyleBackColor = true
+		'
+		'LBLURLFemdom
+		'
+		Me.LBLURLFemdom.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLFemdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLFemdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLFemdom.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLFemdom.Location = New System.Drawing.Point(122, 138)
+		Me.LBLURLFemdom.Name = "LBLURLFemdom"
+		Me.LBLURLFemdom.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLFemdom.TabIndex = 154
+		Me.LBLURLFemdom.Text = "No path selected"
+		Me.LBLURLFemdom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'BTNURLGeneral
+		'
+		Me.BTNURLGeneral.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLGeneral.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLGeneral.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLGeneral.Location = New System.Drawing.Point(82, 306)
+		Me.BTNURLGeneral.Name = "BTNURLGeneral"
+		Me.BTNURLGeneral.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLGeneral.TabIndex = 166
+		Me.BTNURLGeneral.Text = "1"
+		Me.BTNURLGeneral.UseVisualStyleBackColor = false
+		'
+		'LBLURLHentai
+		'
+		Me.LBLURLHentai.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLHentai.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLHentai.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLHentai.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLHentai.Location = New System.Drawing.Point(122, 196)
+		Me.LBLURLHentai.Name = "LBLURLHentai"
+		Me.LBLURLHentai.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLHentai.TabIndex = 162
+		Me.LBLURLHentai.Text = "No path selected"
+		Me.LBLURLHentai.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBURLLesbian
+		'
+		Me.CBURLLesbian.AutoSize = true
+		Me.CBURLLesbian.ForeColor = System.Drawing.Color.Black
+		Me.CBURLLesbian.Location = New System.Drawing.Point(15, 81)
+		Me.CBURLLesbian.Name = "CBURLLesbian"
+		Me.CBURLLesbian.Size = New System.Drawing.Size(63, 17)
+		Me.CBURLLesbian.TabIndex = 140
+		Me.CBURLLesbian.Text = "Lesbian"
+		Me.CBURLLesbian.UseVisualStyleBackColor = true
+		'
+		'BTNURLCaptions
+		'
+		Me.BTNURLCaptions.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLCaptions.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLCaptions.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLCaptions.Location = New System.Drawing.Point(82, 277)
+		Me.BTNURLCaptions.Name = "BTNURLCaptions"
+		Me.BTNURLCaptions.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLCaptions.TabIndex = 178
+		Me.BTNURLCaptions.Text = "1"
+		Me.BTNURLCaptions.UseVisualStyleBackColor = false
+		'
+		'CBURLBlowjob
+		'
+		Me.CBURLBlowjob.AutoSize = true
+		Me.CBURLBlowjob.ForeColor = System.Drawing.Color.Black
+		Me.CBURLBlowjob.Location = New System.Drawing.Point(15, 110)
+		Me.CBURLBlowjob.Name = "CBURLBlowjob"
+		Me.CBURLBlowjob.Size = New System.Drawing.Size(63, 17)
+		Me.CBURLBlowjob.TabIndex = 141
+		Me.CBURLBlowjob.Text = "Blowjob"
+		Me.CBURLBlowjob.UseVisualStyleBackColor = true
+		'
+		'BTNURLMaledom
+		'
+		Me.BTNURLMaledom.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLMaledom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLMaledom.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLMaledom.Location = New System.Drawing.Point(82, 248)
+		Me.BTNURLMaledom.Name = "BTNURLMaledom"
+		Me.BTNURLMaledom.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLMaledom.TabIndex = 161
+		Me.BTNURLMaledom.Text = "1"
+		Me.BTNURLMaledom.UseVisualStyleBackColor = false
+		'
+		'CBURLGay
+		'
+		Me.CBURLGay.AutoSize = true
+		Me.CBURLGay.ForeColor = System.Drawing.Color.Black
+		Me.CBURLGay.Location = New System.Drawing.Point(15, 226)
+		Me.CBURLGay.Name = "CBURLGay"
+		Me.CBURLGay.Size = New System.Drawing.Size(45, 17)
+		Me.CBURLGay.TabIndex = 157
+		Me.CBURLGay.Text = "Gay"
+		Me.CBURLGay.UseVisualStyleBackColor = true
+		'
+		'BTNURLGay
+		'
+		Me.BTNURLGay.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLGay.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLGay.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLGay.Location = New System.Drawing.Point(82, 219)
+		Me.BTNURLGay.Name = "BTNURLGay"
+		Me.BTNURLGay.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLGay.TabIndex = 160
+		Me.BTNURLGay.Text = "1"
+		Me.BTNURLGay.UseVisualStyleBackColor = false
+		'
+		'CBURLSoftcore
+		'
+		Me.CBURLSoftcore.AutoSize = true
+		Me.CBURLSoftcore.ForeColor = System.Drawing.Color.Black
+		Me.CBURLSoftcore.Location = New System.Drawing.Point(15, 52)
+		Me.CBURLSoftcore.Name = "CBURLSoftcore"
+		Me.CBURLSoftcore.Size = New System.Drawing.Size(66, 17)
+		Me.CBURLSoftcore.TabIndex = 139
+		Me.CBURLSoftcore.Text = "Softcore"
+		Me.CBURLSoftcore.UseVisualStyleBackColor = true
+		'
+		'CBURLHentai
+		'
+		Me.CBURLHentai.AutoSize = true
+		Me.CBURLHentai.ForeColor = System.Drawing.Color.Black
+		Me.CBURLHentai.Location = New System.Drawing.Point(15, 197)
+		Me.CBURLHentai.Name = "CBURLHentai"
+		Me.CBURLHentai.Size = New System.Drawing.Size(57, 17)
+		Me.CBURLHentai.TabIndex = 156
+		Me.CBURLHentai.Text = "Hentai"
+		Me.CBURLHentai.UseVisualStyleBackColor = true
+		'
+		'CBURLLezdom
+		'
+		Me.CBURLLezdom.AutoSize = true
+		Me.CBURLLezdom.ForeColor = System.Drawing.Color.Black
+		Me.CBURLLezdom.Location = New System.Drawing.Point(15, 168)
+		Me.CBURLLezdom.Name = "CBURLLezdom"
+		Me.CBURLLezdom.Size = New System.Drawing.Size(63, 17)
+		Me.CBURLLezdom.TabIndex = 143
+		Me.CBURLLezdom.Text = "Lezdom"
+		Me.CBURLLezdom.UseVisualStyleBackColor = true
+		'
+		'BTNURLHentai
+		'
+		Me.BTNURLHentai.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLHentai.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLHentai.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLHentai.Location = New System.Drawing.Point(82, 190)
+		Me.BTNURLHentai.Name = "BTNURLHentai"
+		Me.BTNURLHentai.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLHentai.TabIndex = 159
+		Me.BTNURLHentai.Text = "1"
+		Me.BTNURLHentai.UseVisualStyleBackColor = false
+		'
+		'LBLURLLezdom
+		'
+		Me.LBLURLLezdom.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLLezdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLLezdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLLezdom.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLLezdom.Location = New System.Drawing.Point(122, 167)
+		Me.LBLURLLezdom.Name = "LBLURLLezdom"
+		Me.LBLURLLezdom.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLLezdom.TabIndex = 155
+		Me.LBLURLLezdom.Text = "No path selected"
+		Me.LBLURLLezdom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'BTNURLLezdom
+		'
+		Me.BTNURLLezdom.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLLezdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLLezdom.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLLezdom.Location = New System.Drawing.Point(82, 161)
+		Me.BTNURLLezdom.Name = "BTNURLLezdom"
+		Me.BTNURLLezdom.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLLezdom.TabIndex = 149
+		Me.BTNURLLezdom.Text = "1"
+		Me.BTNURLLezdom.UseVisualStyleBackColor = false
+		'
+		'CBURLFemdom
+		'
+		Me.CBURLFemdom.AutoSize = true
+		Me.CBURLFemdom.ForeColor = System.Drawing.Color.Black
+		Me.CBURLFemdom.Location = New System.Drawing.Point(15, 139)
+		Me.CBURLFemdom.Name = "CBURLFemdom"
+		Me.CBURLFemdom.Size = New System.Drawing.Size(66, 17)
+		Me.CBURLFemdom.TabIndex = 142
+		Me.CBURLFemdom.Text = "Femdom"
+		Me.CBURLFemdom.UseVisualStyleBackColor = true
+		'
+		'BTNURLFemdom
+		'
+		Me.BTNURLFemdom.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLFemdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLFemdom.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLFemdom.Location = New System.Drawing.Point(82, 132)
+		Me.BTNURLFemdom.Name = "BTNURLFemdom"
+		Me.BTNURLFemdom.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLFemdom.TabIndex = 148
+		Me.BTNURLFemdom.Text = "1"
+		Me.BTNURLFemdom.UseVisualStyleBackColor = false
+		'
+		'LBLURLBlowjob
+		'
+		Me.LBLURLBlowjob.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLBlowjob.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLBlowjob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLBlowjob.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLBlowjob.Location = New System.Drawing.Point(122, 109)
+		Me.LBLURLBlowjob.Name = "LBLURLBlowjob"
+		Me.LBLURLBlowjob.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLBlowjob.TabIndex = 153
+		Me.LBLURLBlowjob.Text = "No URL File selected"
+		Me.LBLURLBlowjob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'BTNURLBlowjob
+		'
+		Me.BTNURLBlowjob.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLBlowjob.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLBlowjob.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLBlowjob.Location = New System.Drawing.Point(82, 103)
+		Me.BTNURLBlowjob.Name = "BTNURLBlowjob"
+		Me.BTNURLBlowjob.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLBlowjob.TabIndex = 147
+		Me.BTNURLBlowjob.Text = "1"
+		Me.BTNURLBlowjob.UseVisualStyleBackColor = false
+		'
+		'LBLURLLesbian
+		'
+		Me.LBLURLLesbian.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLLesbian.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLLesbian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLLesbian.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLLesbian.Location = New System.Drawing.Point(122, 80)
+		Me.LBLURLLesbian.Name = "LBLURLLesbian"
+		Me.LBLURLLesbian.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLLesbian.TabIndex = 152
+		Me.LBLURLLesbian.Text = "No path selected"
+		Me.LBLURLLesbian.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBURLCaptions
+		'
+		Me.CBURLCaptions.AutoSize = true
+		Me.CBURLCaptions.ForeColor = System.Drawing.Color.Black
+		Me.CBURLCaptions.Location = New System.Drawing.Point(15, 284)
+		Me.CBURLCaptions.Name = "CBURLCaptions"
+		Me.CBURLCaptions.Size = New System.Drawing.Size(67, 17)
+		Me.CBURLCaptions.TabIndex = 177
+		Me.CBURLCaptions.Text = "Captions"
+		Me.CBURLCaptions.UseVisualStyleBackColor = true
+		'
+		'BTNURLLesbian
+		'
+		Me.BTNURLLesbian.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLLesbian.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLLesbian.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLLesbian.Location = New System.Drawing.Point(82, 74)
+		Me.BTNURLLesbian.Name = "BTNURLLesbian"
+		Me.BTNURLLesbian.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLLesbian.TabIndex = 146
+		Me.BTNURLLesbian.Text = "1"
+		Me.BTNURLLesbian.UseVisualStyleBackColor = false
+		'
+		'LBLURLSoftcore
+		'
+		Me.LBLURLSoftcore.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLSoftcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLSoftcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLSoftcore.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLSoftcore.Location = New System.Drawing.Point(122, 51)
+		Me.LBLURLSoftcore.Name = "LBLURLSoftcore"
+		Me.LBLURLSoftcore.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLSoftcore.TabIndex = 151
+		Me.LBLURLSoftcore.Text = "No path selected"
+		Me.LBLURLSoftcore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'LBLURLGeneral
+		'
+		Me.LBLURLGeneral.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLGeneral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLGeneral.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLGeneral.Location = New System.Drawing.Point(122, 312)
+		Me.LBLURLGeneral.Name = "LBLURLGeneral"
+		Me.LBLURLGeneral.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLGeneral.TabIndex = 167
+		Me.LBLURLGeneral.Text = "No path selected"
+		Me.LBLURLGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'BTNURLSoftcore
+		'
+		Me.BTNURLSoftcore.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLSoftcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLSoftcore.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLSoftcore.Location = New System.Drawing.Point(82, 45)
+		Me.BTNURLSoftcore.Name = "BTNURLSoftcore"
+		Me.BTNURLSoftcore.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLSoftcore.TabIndex = 145
+		Me.BTNURLSoftcore.Text = "1"
+		Me.BTNURLSoftcore.UseVisualStyleBackColor = false
+		'
+		'LBLURLCaptions
+		'
+		Me.LBLURLCaptions.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLCaptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLCaptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLCaptions.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLCaptions.Location = New System.Drawing.Point(122, 283)
+		Me.LBLURLCaptions.Name = "LBLURLCaptions"
+		Me.LBLURLCaptions.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLCaptions.TabIndex = 179
+		Me.LBLURLCaptions.Text = "No path selected"
+		Me.LBLURLCaptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'LBLURLGay
+		'
+		Me.LBLURLGay.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLGay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLGay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLGay.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLGay.Location = New System.Drawing.Point(122, 225)
+		Me.LBLURLGay.Name = "LBLURLGay"
+		Me.LBLURLGay.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLGay.TabIndex = 163
+		Me.LBLURLGay.Text = "No path selected"
+		Me.LBLURLGay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBURLGeneral
+		'
+		Me.CBURLGeneral.AutoSize = true
+		Me.CBURLGeneral.ForeColor = System.Drawing.Color.Black
+		Me.CBURLGeneral.Location = New System.Drawing.Point(15, 313)
+		Me.CBURLGeneral.Name = "CBURLGeneral"
+		Me.CBURLGeneral.Size = New System.Drawing.Size(63, 17)
+		Me.CBURLGeneral.TabIndex = 165
+		Me.CBURLGeneral.Text = "General"
+		Me.CBURLGeneral.UseVisualStyleBackColor = true
+		'
+		'BTNURLHardcore
+		'
+		Me.BTNURLHardcore.BackColor = System.Drawing.Color.LightGray
+		Me.BTNURLHardcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNURLHardcore.ForeColor = System.Drawing.Color.Black
+		Me.BTNURLHardcore.Location = New System.Drawing.Point(82, 16)
+		Me.BTNURLHardcore.Name = "BTNURLHardcore"
+		Me.BTNURLHardcore.Size = New System.Drawing.Size(34, 28)
+		Me.BTNURLHardcore.TabIndex = 144
+		Me.BTNURLHardcore.Text = "1"
+		Me.BTNURLHardcore.UseVisualStyleBackColor = false
+		'
+		'LBLURLHardcore
+		'
+		Me.LBLURLHardcore.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLHardcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLHardcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLHardcore.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLHardcore.Location = New System.Drawing.Point(122, 23)
+		Me.LBLURLHardcore.Name = "LBLURLHardcore"
+		Me.LBLURLHardcore.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLHardcore.TabIndex = 150
+		Me.LBLURLHardcore.Text = "No path selected"
+		Me.LBLURLHardcore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'LBLURLMaledom
+		'
+		Me.LBLURLMaledom.BackColor = System.Drawing.Color.Transparent
+		Me.LBLURLMaledom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLURLMaledom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLURLMaledom.ForeColor = System.Drawing.Color.Black
+		Me.LBLURLMaledom.Location = New System.Drawing.Point(122, 254)
+		Me.LBLURLMaledom.Name = "LBLURLMaledom"
+		Me.LBLURLMaledom.Size = New System.Drawing.Size(173, 17)
+		Me.LBLURLMaledom.TabIndex = 164
+		Me.LBLURLMaledom.Text = "No path selected"
+		Me.LBLURLMaledom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBURLHardcore
+		'
+		Me.CBURLHardcore.AutoSize = true
+		Me.CBURLHardcore.ForeColor = System.Drawing.Color.Black
+		Me.CBURLHardcore.Location = New System.Drawing.Point(15, 23)
+		Me.CBURLHardcore.Name = "CBURLHardcore"
+		Me.CBURLHardcore.Size = New System.Drawing.Size(70, 17)
+		Me.CBURLHardcore.TabIndex = 138
+		Me.CBURLHardcore.Text = "Hardcore"
+		Me.CBURLHardcore.UseVisualStyleBackColor = true
+		'
+		'CBURLMaledom
+		'
+		Me.CBURLMaledom.AutoSize = true
+		Me.CBURLMaledom.ForeColor = System.Drawing.Color.Black
+		Me.CBURLMaledom.Location = New System.Drawing.Point(15, 255)
+		Me.CBURLMaledom.Name = "CBURLMaledom"
+		Me.CBURLMaledom.Size = New System.Drawing.Size(69, 17)
+		Me.CBURLMaledom.TabIndex = 158
+		Me.CBURLMaledom.Text = "Maledom"
+		Me.CBURLMaledom.UseVisualStyleBackColor = true
+		'
+		'GroupBox14
+		'
+		Me.GroupBox14.Controls.Add(Me.CBIButts)
+		Me.GroupBox14.Controls.Add(Me.CBIBoobs)
+		Me.GroupBox14.Controls.Add(Me.CBButtSubDir)
+		Me.GroupBox14.Controls.Add(Me.LBLButtPath)
+		Me.GroupBox14.Controls.Add(Me.CBBoobSubDir)
+		Me.GroupBox14.Controls.Add(Me.LBLIFemdom)
+		Me.GroupBox14.Controls.Add(Me.BTNButtPath)
+		Me.GroupBox14.Controls.Add(Me.LBLBoobPath)
+		Me.GroupBox14.Controls.Add(Me.BTNIGeneral)
+		Me.GroupBox14.Controls.Add(Me.CBILezdomSD)
+		Me.GroupBox14.Controls.Add(Me.BTNBoobPath)
+		Me.GroupBox14.Controls.Add(Me.LBLIHentai)
+		Me.GroupBox14.Controls.Add(Me.CBILesbian)
+		Me.GroupBox14.Controls.Add(Me.BTNICaptions)
+		Me.GroupBox14.Controls.Add(Me.CBIBlowjob)
+		Me.GroupBox14.Controls.Add(Me.BTNIMaledom)
+		Me.GroupBox14.Controls.Add(Me.CBIFemdomSD)
+		Me.GroupBox14.Controls.Add(Me.CBIGay)
+		Me.GroupBox14.Controls.Add(Me.CBIHentaiSD)
+		Me.GroupBox14.Controls.Add(Me.BTNIGay)
+		Me.GroupBox14.Controls.Add(Me.CBISoftcore)
+		Me.GroupBox14.Controls.Add(Me.CBIHentai)
+		Me.GroupBox14.Controls.Add(Me.CBILezdom)
+		Me.GroupBox14.Controls.Add(Me.BTNIHentai)
+		Me.GroupBox14.Controls.Add(Me.CBIBlowjobSD)
+		Me.GroupBox14.Controls.Add(Me.LBLILezdom)
+		Me.GroupBox14.Controls.Add(Me.CBIGaySD)
+		Me.GroupBox14.Controls.Add(Me.BTNILezdom)
+		Me.GroupBox14.Controls.Add(Me.CBIFemdom)
+		Me.GroupBox14.Controls.Add(Me.BTNIFemdom)
+		Me.GroupBox14.Controls.Add(Me.CBILesbianSD)
+		Me.GroupBox14.Controls.Add(Me.LBLIBlowjob)
+		Me.GroupBox14.Controls.Add(Me.CBIMaledomSD)
+		Me.GroupBox14.Controls.Add(Me.BTNIBlowjob)
+		Me.GroupBox14.Controls.Add(Me.CBISoftcoreSD)
+		Me.GroupBox14.Controls.Add(Me.LBLILesbian)
+		Me.GroupBox14.Controls.Add(Me.CBICaptions)
+		Me.GroupBox14.Controls.Add(Me.BTNILesbian)
+		Me.GroupBox14.Controls.Add(Me.CBIHardcoreSD)
+		Me.GroupBox14.Controls.Add(Me.LBLISoftcore)
+		Me.GroupBox14.Controls.Add(Me.LBLIGeneral)
+		Me.GroupBox14.Controls.Add(Me.BTNISoftcore)
+		Me.GroupBox14.Controls.Add(Me.LBLICaptions)
+		Me.GroupBox14.Controls.Add(Me.LBLIGay)
+		Me.GroupBox14.Controls.Add(Me.CBIGeneral)
+		Me.GroupBox14.Controls.Add(Me.BTNIHardcore)
+		Me.GroupBox14.Controls.Add(Me.CBIGeneralSD)
+		Me.GroupBox14.Controls.Add(Me.LBLIHardcore)
+		Me.GroupBox14.Controls.Add(Me.LBLIMaledom)
+		Me.GroupBox14.Controls.Add(Me.CBICaptionsSD)
+		Me.GroupBox14.Controls.Add(Me.CBIHardcore)
+		Me.GroupBox14.Controls.Add(Me.CBIMaledom)
+		Me.GroupBox14.Location = New System.Drawing.Point(6, 8)
+		Me.GroupBox14.Name = "GroupBox14"
+		Me.GroupBox14.Size = New System.Drawing.Size(371, 400)
+		Me.GroupBox14.TabIndex = 155
+		Me.GroupBox14.TabStop = false
+		Me.GroupBox14.Text = "Local Images"
+		'
+		'CBIButts
+		'
+		Me.CBIButts.AutoSize = true
+		Me.CBIButts.ForeColor = System.Drawing.Color.Black
+		Me.CBIButts.Location = New System.Drawing.Point(15, 371)
+		Me.CBIButts.Name = "CBIButts"
+		Me.CBIButts.Size = New System.Drawing.Size(50, 17)
+		Me.CBIButts.TabIndex = 182
+		Me.CBIButts.Text = "Butts"
+		Me.CBIButts.UseVisualStyleBackColor = true
+		'
+		'CBIBoobs
+		'
+		Me.CBIBoobs.AutoSize = true
+		Me.CBIBoobs.ForeColor = System.Drawing.Color.Black
+		Me.CBIBoobs.Location = New System.Drawing.Point(15, 342)
+		Me.CBIBoobs.Name = "CBIBoobs"
+		Me.CBIBoobs.Size = New System.Drawing.Size(56, 17)
+		Me.CBIBoobs.TabIndex = 181
+		Me.CBIBoobs.Text = "Boobs"
+		Me.CBIBoobs.UseVisualStyleBackColor = true
 		'
 		'CBButtSubDir
 		'
 		Me.CBButtSubDir.AutoSize = true
 		Me.CBButtSubDir.ForeColor = System.Drawing.Color.Black
-		Me.CBButtSubDir.Location = New System.Drawing.Point(7, 53)
+		Me.CBButtSubDir.Location = New System.Drawing.Point(347, 372)
 		Me.CBButtSubDir.Name = "CBButtSubDir"
-		Me.CBButtSubDir.Size = New System.Drawing.Size(134, 17)
+		Me.CBButtSubDir.Size = New System.Drawing.Size(15, 14)
 		Me.CBButtSubDir.TabIndex = 140
-		Me.CBButtSubDir.Text = "Include Subdirectories "
 		Me.CBButtSubDir.UseVisualStyleBackColor = true
 		'
 		'LBLButtPath
@@ -5121,74 +5134,47 @@ Partial Class FrmSettings
 		Me.LBLButtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
 		Me.LBLButtPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.LBLButtPath.ForeColor = System.Drawing.Color.Black
-		Me.LBLButtPath.Location = New System.Drawing.Point(46, 25)
+		Me.LBLButtPath.Location = New System.Drawing.Point(122, 370)
 		Me.LBLButtPath.Name = "LBLButtPath"
-		Me.LBLButtPath.Size = New System.Drawing.Size(95, 17)
+		Me.LBLButtPath.Size = New System.Drawing.Size(217, 17)
 		Me.LBLButtPath.TabIndex = 135
 		Me.LBLButtPath.Text = "No path selected"
 		Me.LBLButtPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
-		'LBLButtURL
+		'CBBoobSubDir
 		'
-		Me.LBLButtURL.BackColor = System.Drawing.Color.Transparent
-		Me.LBLButtURL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLButtURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLButtURL.ForeColor = System.Drawing.Color.Black
-		Me.LBLButtURL.Location = New System.Drawing.Point(197, 25)
-		Me.LBLButtURL.Name = "LBLButtURL"
-		Me.LBLButtURL.Size = New System.Drawing.Size(95, 17)
-		Me.LBLButtURL.TabIndex = 139
-		Me.LBLButtURL.Text = "No path selected"
-		Me.LBLButtURL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.CBBoobSubDir.AutoSize = true
+		Me.CBBoobSubDir.ForeColor = System.Drawing.Color.Black
+		Me.CBBoobSubDir.Location = New System.Drawing.Point(347, 343)
+		Me.CBBoobSubDir.Name = "CBBoobSubDir"
+		Me.CBBoobSubDir.Size = New System.Drawing.Size(15, 14)
+		Me.CBBoobSubDir.TabIndex = 140
+		Me.CBBoobSubDir.UseVisualStyleBackColor = true
+		'
+		'LBLIFemdom
+		'
+		Me.LBLIFemdom.BackColor = System.Drawing.Color.Transparent
+		Me.LBLIFemdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLIFemdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLIFemdom.ForeColor = System.Drawing.Color.Black
+		Me.LBLIFemdom.Location = New System.Drawing.Point(122, 138)
+		Me.LBLIFemdom.Name = "LBLIFemdom"
+		Me.LBLIFemdom.Size = New System.Drawing.Size(217, 17)
+		Me.LBLIFemdom.TabIndex = 154
+		Me.LBLIFemdom.Text = "No path selected"
+		Me.LBLIFemdom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'BTNButtPath
 		'
 		Me.BTNButtPath.BackColor = System.Drawing.Color.LightGray
 		Me.BTNButtPath.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
 		Me.BTNButtPath.ForeColor = System.Drawing.Color.Black
-		Me.BTNButtPath.Location = New System.Drawing.Point(6, 19)
+		Me.BTNButtPath.Location = New System.Drawing.Point(82, 364)
 		Me.BTNButtPath.Name = "BTNButtPath"
 		Me.BTNButtPath.Size = New System.Drawing.Size(34, 28)
 		Me.BTNButtPath.TabIndex = 131
 		Me.BTNButtPath.Text = "1"
 		Me.BTNButtPath.UseVisualStyleBackColor = false
-		'
-		'BTNButtURL
-		'
-		Me.BTNButtURL.BackColor = System.Drawing.Color.LightGray
-		Me.BTNButtURL.Font = New System.Drawing.Font("Wingdings", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNButtURL.ForeColor = System.Drawing.Color.Black
-		Me.BTNButtURL.Location = New System.Drawing.Point(157, 18)
-		Me.BTNButtURL.Name = "BTNButtURL"
-		Me.BTNButtURL.Size = New System.Drawing.Size(34, 28)
-		Me.BTNButtURL.TabIndex = 137
-		Me.BTNButtURL.Text = "2"
-		Me.BTNButtURL.UseVisualStyleBackColor = false
-		'
-		'GroupBox40
-		'
-		Me.GroupBox40.Controls.Add(Me.CBBoobSubDir)
-		Me.GroupBox40.Controls.Add(Me.LBLBoobPath)
-		Me.GroupBox40.Controls.Add(Me.LBLBoobURL)
-		Me.GroupBox40.Controls.Add(Me.BTNBoobPath)
-		Me.GroupBox40.Controls.Add(Me.BTNBoobURL)
-		Me.GroupBox40.Location = New System.Drawing.Point(5, 35)
-		Me.GroupBox40.Name = "GroupBox40"
-		Me.GroupBox40.Size = New System.Drawing.Size(298, 74)
-		Me.GroupBox40.TabIndex = 152
-		Me.GroupBox40.TabStop = false
-		Me.GroupBox40.Text = "Boobs"
-		'
-		'CBBoobSubDir
-		'
-		Me.CBBoobSubDir.AutoSize = true
-		Me.CBBoobSubDir.ForeColor = System.Drawing.Color.Black
-		Me.CBBoobSubDir.Location = New System.Drawing.Point(7, 53)
-		Me.CBBoobSubDir.Name = "CBBoobSubDir"
-		Me.CBBoobSubDir.Size = New System.Drawing.Size(134, 17)
-		Me.CBBoobSubDir.TabIndex = 140
-		Me.CBBoobSubDir.Text = "Include Subdirectories "
-		Me.CBBoobSubDir.UseVisualStyleBackColor = true
 		'
 		'LBLBoobPath
 		'
@@ -5196,61 +5182,539 @@ Partial Class FrmSettings
 		Me.LBLBoobPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
 		Me.LBLBoobPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 		Me.LBLBoobPath.ForeColor = System.Drawing.Color.Black
-		Me.LBLBoobPath.Location = New System.Drawing.Point(46, 25)
+		Me.LBLBoobPath.Location = New System.Drawing.Point(122, 341)
 		Me.LBLBoobPath.Name = "LBLBoobPath"
-		Me.LBLBoobPath.Size = New System.Drawing.Size(95, 17)
+		Me.LBLBoobPath.Size = New System.Drawing.Size(217, 17)
 		Me.LBLBoobPath.TabIndex = 135
 		Me.LBLBoobPath.Text = "No path selected"
 		Me.LBLBoobPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
-		'LBLBoobURL
+		'BTNIGeneral
 		'
-		Me.LBLBoobURL.BackColor = System.Drawing.Color.Transparent
-		Me.LBLBoobURL.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLBoobURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.LBLBoobURL.ForeColor = System.Drawing.Color.Black
-		Me.LBLBoobURL.Location = New System.Drawing.Point(197, 25)
-		Me.LBLBoobURL.Name = "LBLBoobURL"
-		Me.LBLBoobURL.Size = New System.Drawing.Size(95, 17)
-		Me.LBLBoobURL.TabIndex = 139
-		Me.LBLBoobURL.Text = "No path selected"
-		Me.LBLBoobURL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.BTNIGeneral.BackColor = System.Drawing.Color.LightGray
+		Me.BTNIGeneral.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIGeneral.ForeColor = System.Drawing.Color.Black
+		Me.BTNIGeneral.Location = New System.Drawing.Point(82, 306)
+		Me.BTNIGeneral.Name = "BTNIGeneral"
+		Me.BTNIGeneral.Size = New System.Drawing.Size(34, 28)
+		Me.BTNIGeneral.TabIndex = 166
+		Me.BTNIGeneral.Text = "1"
+		Me.BTNIGeneral.UseVisualStyleBackColor = false
+		'
+		'CBILezdomSD
+		'
+		Me.CBILezdomSD.AutoSize = true
+		Me.CBILezdomSD.Checked = true
+		Me.CBILezdomSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBILezdomSD.ForeColor = System.Drawing.Color.Black
+		Me.CBILezdomSD.Location = New System.Drawing.Point(347, 169)
+		Me.CBILezdomSD.Name = "CBILezdomSD"
+		Me.CBILezdomSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBILezdomSD.TabIndex = 172
+		Me.CBILezdomSD.UseVisualStyleBackColor = true
 		'
 		'BTNBoobPath
 		'
 		Me.BTNBoobPath.BackColor = System.Drawing.Color.LightGray
 		Me.BTNBoobPath.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
 		Me.BTNBoobPath.ForeColor = System.Drawing.Color.Black
-		Me.BTNBoobPath.Location = New System.Drawing.Point(6, 19)
+		Me.BTNBoobPath.Location = New System.Drawing.Point(82, 335)
 		Me.BTNBoobPath.Name = "BTNBoobPath"
 		Me.BTNBoobPath.Size = New System.Drawing.Size(34, 28)
 		Me.BTNBoobPath.TabIndex = 131
 		Me.BTNBoobPath.Text = "1"
 		Me.BTNBoobPath.UseVisualStyleBackColor = false
 		'
-		'BTNBoobURL
+		'LBLIHentai
 		'
-		Me.BTNBoobURL.BackColor = System.Drawing.Color.LightGray
-		Me.BTNBoobURL.Font = New System.Drawing.Font("Wingdings", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
-		Me.BTNBoobURL.ForeColor = System.Drawing.Color.Black
-		Me.BTNBoobURL.Location = New System.Drawing.Point(157, 18)
-		Me.BTNBoobURL.Name = "BTNBoobURL"
-		Me.BTNBoobURL.Size = New System.Drawing.Size(34, 28)
-		Me.BTNBoobURL.TabIndex = 137
-		Me.BTNBoobURL.Text = "2"
-		Me.BTNBoobURL.UseVisualStyleBackColor = false
+		Me.LBLIHentai.BackColor = System.Drawing.Color.Transparent
+		Me.LBLIHentai.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLIHentai.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLIHentai.ForeColor = System.Drawing.Color.Black
+		Me.LBLIHentai.Location = New System.Drawing.Point(122, 196)
+		Me.LBLIHentai.Name = "LBLIHentai"
+		Me.LBLIHentai.Size = New System.Drawing.Size(217, 17)
+		Me.LBLIHentai.TabIndex = 162
+		Me.LBLIHentai.Text = "No path selected"
+		Me.LBLIHentai.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
-		'Label119
+		'CBILesbian
 		'
-		Me.Label119.BackColor = System.Drawing.Color.Transparent
-		Me.Label119.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.Label119.ForeColor = System.Drawing.Color.Black
-		Me.Label119.Location = New System.Drawing.Point(7, 6)
-		Me.Label119.Name = "Label119"
-		Me.Label119.Size = New System.Drawing.Size(692, 21)
-		Me.Label119.TabIndex = 49
-		Me.Label119.Text = "Image Settings"
-		Me.Label119.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		Me.CBILesbian.AutoSize = true
+		Me.CBILesbian.ForeColor = System.Drawing.Color.Black
+		Me.CBILesbian.Location = New System.Drawing.Point(15, 81)
+		Me.CBILesbian.Name = "CBILesbian"
+		Me.CBILesbian.Size = New System.Drawing.Size(63, 17)
+		Me.CBILesbian.TabIndex = 140
+		Me.CBILesbian.Text = "Lesbian"
+		Me.CBILesbian.UseVisualStyleBackColor = true
+		'
+		'BTNICaptions
+		'
+		Me.BTNICaptions.BackColor = System.Drawing.Color.LightGray
+		Me.BTNICaptions.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNICaptions.ForeColor = System.Drawing.Color.Black
+		Me.BTNICaptions.Location = New System.Drawing.Point(82, 277)
+		Me.BTNICaptions.Name = "BTNICaptions"
+		Me.BTNICaptions.Size = New System.Drawing.Size(34, 28)
+		Me.BTNICaptions.TabIndex = 178
+		Me.BTNICaptions.Text = "1"
+		Me.BTNICaptions.UseVisualStyleBackColor = false
+		'
+		'CBIBlowjob
+		'
+		Me.CBIBlowjob.AutoSize = true
+		Me.CBIBlowjob.ForeColor = System.Drawing.Color.Black
+		Me.CBIBlowjob.Location = New System.Drawing.Point(15, 110)
+		Me.CBIBlowjob.Name = "CBIBlowjob"
+		Me.CBIBlowjob.Size = New System.Drawing.Size(63, 17)
+		Me.CBIBlowjob.TabIndex = 141
+		Me.CBIBlowjob.Text = "Blowjob"
+		Me.CBIBlowjob.UseVisualStyleBackColor = true
+		'
+		'BTNIMaledom
+		'
+		Me.BTNIMaledom.BackColor = System.Drawing.Color.LightGray
+		Me.BTNIMaledom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIMaledom.ForeColor = System.Drawing.Color.Black
+		Me.BTNIMaledom.Location = New System.Drawing.Point(82, 248)
+		Me.BTNIMaledom.Name = "BTNIMaledom"
+		Me.BTNIMaledom.Size = New System.Drawing.Size(34, 28)
+		Me.BTNIMaledom.TabIndex = 161
+		Me.BTNIMaledom.Text = "1"
+		Me.BTNIMaledom.UseVisualStyleBackColor = false
+		'
+		'CBIFemdomSD
+		'
+		Me.CBIFemdomSD.AutoSize = true
+		Me.CBIFemdomSD.Checked = true
+		Me.CBIFemdomSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIFemdomSD.ForeColor = System.Drawing.Color.Black
+		Me.CBIFemdomSD.Location = New System.Drawing.Point(347, 140)
+		Me.CBIFemdomSD.Name = "CBIFemdomSD"
+		Me.CBIFemdomSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBIFemdomSD.TabIndex = 171
+		Me.CBIFemdomSD.UseVisualStyleBackColor = true
+		'
+		'CBIGay
+		'
+		Me.CBIGay.AutoSize = true
+		Me.CBIGay.ForeColor = System.Drawing.Color.Black
+		Me.CBIGay.Location = New System.Drawing.Point(15, 226)
+		Me.CBIGay.Name = "CBIGay"
+		Me.CBIGay.Size = New System.Drawing.Size(45, 17)
+		Me.CBIGay.TabIndex = 157
+		Me.CBIGay.Text = "Gay"
+		Me.CBIGay.UseVisualStyleBackColor = true
+		'
+		'CBIHentaiSD
+		'
+		Me.CBIHentaiSD.AutoSize = true
+		Me.CBIHentaiSD.Checked = true
+		Me.CBIHentaiSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIHentaiSD.ForeColor = System.Drawing.Color.Black
+		Me.CBIHentaiSD.Location = New System.Drawing.Point(347, 199)
+		Me.CBIHentaiSD.Name = "CBIHentaiSD"
+		Me.CBIHentaiSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBIHentaiSD.TabIndex = 173
+		Me.CBIHentaiSD.UseVisualStyleBackColor = true
+		'
+		'BTNIGay
+		'
+		Me.BTNIGay.BackColor = System.Drawing.Color.LightGray
+		Me.BTNIGay.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIGay.ForeColor = System.Drawing.Color.Black
+		Me.BTNIGay.Location = New System.Drawing.Point(82, 219)
+		Me.BTNIGay.Name = "BTNIGay"
+		Me.BTNIGay.Size = New System.Drawing.Size(34, 28)
+		Me.BTNIGay.TabIndex = 160
+		Me.BTNIGay.Text = "1"
+		Me.BTNIGay.UseVisualStyleBackColor = false
+		'
+		'CBISoftcore
+		'
+		Me.CBISoftcore.AutoSize = true
+		Me.CBISoftcore.ForeColor = System.Drawing.Color.Black
+		Me.CBISoftcore.Location = New System.Drawing.Point(15, 52)
+		Me.CBISoftcore.Name = "CBISoftcore"
+		Me.CBISoftcore.Size = New System.Drawing.Size(66, 17)
+		Me.CBISoftcore.TabIndex = 139
+		Me.CBISoftcore.Text = "Softcore"
+		Me.CBISoftcore.UseVisualStyleBackColor = true
+		'
+		'CBIHentai
+		'
+		Me.CBIHentai.AutoSize = true
+		Me.CBIHentai.ForeColor = System.Drawing.Color.Black
+		Me.CBIHentai.Location = New System.Drawing.Point(15, 197)
+		Me.CBIHentai.Name = "CBIHentai"
+		Me.CBIHentai.Size = New System.Drawing.Size(57, 17)
+		Me.CBIHentai.TabIndex = 156
+		Me.CBIHentai.Text = "Hentai"
+		Me.CBIHentai.UseVisualStyleBackColor = true
+		'
+		'CBILezdom
+		'
+		Me.CBILezdom.AutoSize = true
+		Me.CBILezdom.ForeColor = System.Drawing.Color.Black
+		Me.CBILezdom.Location = New System.Drawing.Point(15, 168)
+		Me.CBILezdom.Name = "CBILezdom"
+		Me.CBILezdom.Size = New System.Drawing.Size(63, 17)
+		Me.CBILezdom.TabIndex = 143
+		Me.CBILezdom.Text = "Lezdom"
+		Me.CBILezdom.UseVisualStyleBackColor = true
+		'
+		'BTNIHentai
+		'
+		Me.BTNIHentai.BackColor = System.Drawing.Color.LightGray
+		Me.BTNIHentai.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIHentai.ForeColor = System.Drawing.Color.Black
+		Me.BTNIHentai.Location = New System.Drawing.Point(82, 190)
+		Me.BTNIHentai.Name = "BTNIHentai"
+		Me.BTNIHentai.Size = New System.Drawing.Size(34, 28)
+		Me.BTNIHentai.TabIndex = 159
+		Me.BTNIHentai.Text = "1"
+		Me.BTNIHentai.UseVisualStyleBackColor = false
+		'
+		'CBIBlowjobSD
+		'
+		Me.CBIBlowjobSD.AutoSize = true
+		Me.CBIBlowjobSD.Checked = true
+		Me.CBIBlowjobSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIBlowjobSD.ForeColor = System.Drawing.Color.Black
+		Me.CBIBlowjobSD.Location = New System.Drawing.Point(347, 111)
+		Me.CBIBlowjobSD.Name = "CBIBlowjobSD"
+		Me.CBIBlowjobSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBIBlowjobSD.TabIndex = 170
+		Me.CBIBlowjobSD.UseVisualStyleBackColor = true
+		'
+		'LBLILezdom
+		'
+		Me.LBLILezdom.BackColor = System.Drawing.Color.Transparent
+		Me.LBLILezdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLILezdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLILezdom.ForeColor = System.Drawing.Color.Black
+		Me.LBLILezdom.Location = New System.Drawing.Point(122, 167)
+		Me.LBLILezdom.Name = "LBLILezdom"
+		Me.LBLILezdom.Size = New System.Drawing.Size(217, 17)
+		Me.LBLILezdom.TabIndex = 155
+		Me.LBLILezdom.Text = "No path selected"
+		Me.LBLILezdom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBIGaySD
+		'
+		Me.CBIGaySD.AutoSize = true
+		Me.CBIGaySD.Checked = true
+		Me.CBIGaySD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIGaySD.ForeColor = System.Drawing.Color.Black
+		Me.CBIGaySD.Location = New System.Drawing.Point(347, 227)
+		Me.CBIGaySD.Name = "CBIGaySD"
+		Me.CBIGaySD.Size = New System.Drawing.Size(15, 14)
+		Me.CBIGaySD.TabIndex = 174
+		Me.CBIGaySD.UseVisualStyleBackColor = true
+		'
+		'BTNILezdom
+		'
+		Me.BTNILezdom.BackColor = System.Drawing.Color.LightGray
+		Me.BTNILezdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNILezdom.ForeColor = System.Drawing.Color.Black
+		Me.BTNILezdom.Location = New System.Drawing.Point(82, 161)
+		Me.BTNILezdom.Name = "BTNILezdom"
+		Me.BTNILezdom.Size = New System.Drawing.Size(34, 28)
+		Me.BTNILezdom.TabIndex = 149
+		Me.BTNILezdom.Text = "1"
+		Me.BTNILezdom.UseVisualStyleBackColor = false
+		'
+		'CBIFemdom
+		'
+		Me.CBIFemdom.AutoSize = true
+		Me.CBIFemdom.ForeColor = System.Drawing.Color.Black
+		Me.CBIFemdom.Location = New System.Drawing.Point(15, 139)
+		Me.CBIFemdom.Name = "CBIFemdom"
+		Me.CBIFemdom.Size = New System.Drawing.Size(66, 17)
+		Me.CBIFemdom.TabIndex = 142
+		Me.CBIFemdom.Text = "Femdom"
+		Me.CBIFemdom.UseVisualStyleBackColor = true
+		'
+		'BTNIFemdom
+		'
+		Me.BTNIFemdom.BackColor = System.Drawing.Color.LightGray
+		Me.BTNIFemdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIFemdom.ForeColor = System.Drawing.Color.Black
+		Me.BTNIFemdom.Location = New System.Drawing.Point(82, 132)
+		Me.BTNIFemdom.Name = "BTNIFemdom"
+		Me.BTNIFemdom.Size = New System.Drawing.Size(34, 28)
+		Me.BTNIFemdom.TabIndex = 148
+		Me.BTNIFemdom.Text = "1"
+		Me.BTNIFemdom.UseVisualStyleBackColor = false
+		'
+		'CBILesbianSD
+		'
+		Me.CBILesbianSD.AutoSize = true
+		Me.CBILesbianSD.Checked = true
+		Me.CBILesbianSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBILesbianSD.ForeColor = System.Drawing.Color.Black
+		Me.CBILesbianSD.Location = New System.Drawing.Point(347, 82)
+		Me.CBILesbianSD.Name = "CBILesbianSD"
+		Me.CBILesbianSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBILesbianSD.TabIndex = 169
+		Me.CBILesbianSD.UseVisualStyleBackColor = true
+		'
+		'LBLIBlowjob
+		'
+		Me.LBLIBlowjob.BackColor = System.Drawing.Color.Transparent
+		Me.LBLIBlowjob.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLIBlowjob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLIBlowjob.ForeColor = System.Drawing.Color.Black
+		Me.LBLIBlowjob.Location = New System.Drawing.Point(122, 109)
+		Me.LBLIBlowjob.Name = "LBLIBlowjob"
+		Me.LBLIBlowjob.Size = New System.Drawing.Size(217, 17)
+		Me.LBLIBlowjob.TabIndex = 153
+		Me.LBLIBlowjob.Text = "No path selected"
+		Me.LBLIBlowjob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBIMaledomSD
+		'
+		Me.CBIMaledomSD.AutoSize = true
+		Me.CBIMaledomSD.Checked = true
+		Me.CBIMaledomSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIMaledomSD.ForeColor = System.Drawing.Color.Black
+		Me.CBIMaledomSD.Location = New System.Drawing.Point(347, 256)
+		Me.CBIMaledomSD.Name = "CBIMaledomSD"
+		Me.CBIMaledomSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBIMaledomSD.TabIndex = 175
+		Me.CBIMaledomSD.UseVisualStyleBackColor = true
+		'
+		'BTNIBlowjob
+		'
+		Me.BTNIBlowjob.BackColor = System.Drawing.Color.LightGray
+		Me.BTNIBlowjob.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIBlowjob.ForeColor = System.Drawing.Color.Black
+		Me.BTNIBlowjob.Location = New System.Drawing.Point(82, 103)
+		Me.BTNIBlowjob.Name = "BTNIBlowjob"
+		Me.BTNIBlowjob.Size = New System.Drawing.Size(34, 28)
+		Me.BTNIBlowjob.TabIndex = 147
+		Me.BTNIBlowjob.Text = "1"
+		Me.BTNIBlowjob.UseVisualStyleBackColor = false
+		'
+		'CBISoftcoreSD
+		'
+		Me.CBISoftcoreSD.AutoSize = true
+		Me.CBISoftcoreSD.Checked = true
+		Me.CBISoftcoreSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBISoftcoreSD.ForeColor = System.Drawing.Color.Black
+		Me.CBISoftcoreSD.Location = New System.Drawing.Point(347, 53)
+		Me.CBISoftcoreSD.Name = "CBISoftcoreSD"
+		Me.CBISoftcoreSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBISoftcoreSD.TabIndex = 168
+		Me.CBISoftcoreSD.UseVisualStyleBackColor = true
+		'
+		'LBLILesbian
+		'
+		Me.LBLILesbian.BackColor = System.Drawing.Color.Transparent
+		Me.LBLILesbian.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLILesbian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLILesbian.ForeColor = System.Drawing.Color.Black
+		Me.LBLILesbian.Location = New System.Drawing.Point(122, 80)
+		Me.LBLILesbian.Name = "LBLILesbian"
+		Me.LBLILesbian.Size = New System.Drawing.Size(217, 17)
+		Me.LBLILesbian.TabIndex = 152
+		Me.LBLILesbian.Text = "No path selected"
+		Me.LBLILesbian.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBICaptions
+		'
+		Me.CBICaptions.AutoSize = true
+		Me.CBICaptions.ForeColor = System.Drawing.Color.Black
+		Me.CBICaptions.Location = New System.Drawing.Point(15, 284)
+		Me.CBICaptions.Name = "CBICaptions"
+		Me.CBICaptions.Size = New System.Drawing.Size(67, 17)
+		Me.CBICaptions.TabIndex = 177
+		Me.CBICaptions.Text = "Captions"
+		Me.CBICaptions.UseVisualStyleBackColor = true
+		'
+		'BTNILesbian
+		'
+		Me.BTNILesbian.BackColor = System.Drawing.Color.LightGray
+		Me.BTNILesbian.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNILesbian.ForeColor = System.Drawing.Color.Black
+		Me.BTNILesbian.Location = New System.Drawing.Point(82, 74)
+		Me.BTNILesbian.Name = "BTNILesbian"
+		Me.BTNILesbian.Size = New System.Drawing.Size(34, 28)
+		Me.BTNILesbian.TabIndex = 146
+		Me.BTNILesbian.Text = "1"
+		Me.BTNILesbian.UseVisualStyleBackColor = false
+		'
+		'CBIHardcoreSD
+		'
+		Me.CBIHardcoreSD.AutoSize = true
+		Me.CBIHardcoreSD.Checked = true
+		Me.CBIHardcoreSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIHardcoreSD.ForeColor = System.Drawing.Color.Black
+		Me.CBIHardcoreSD.Location = New System.Drawing.Point(347, 25)
+		Me.CBIHardcoreSD.Name = "CBIHardcoreSD"
+		Me.CBIHardcoreSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBIHardcoreSD.TabIndex = 141
+		Me.CBIHardcoreSD.UseVisualStyleBackColor = true
+		'
+		'LBLISoftcore
+		'
+		Me.LBLISoftcore.BackColor = System.Drawing.Color.Transparent
+		Me.LBLISoftcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLISoftcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLISoftcore.ForeColor = System.Drawing.Color.Black
+		Me.LBLISoftcore.Location = New System.Drawing.Point(122, 51)
+		Me.LBLISoftcore.Name = "LBLISoftcore"
+		Me.LBLISoftcore.Size = New System.Drawing.Size(217, 17)
+		Me.LBLISoftcore.TabIndex = 151
+		Me.LBLISoftcore.Text = "No path selected"
+		Me.LBLISoftcore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'LBLIGeneral
+		'
+		Me.LBLIGeneral.BackColor = System.Drawing.Color.Transparent
+		Me.LBLIGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLIGeneral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLIGeneral.ForeColor = System.Drawing.Color.Black
+		Me.LBLIGeneral.Location = New System.Drawing.Point(122, 312)
+		Me.LBLIGeneral.Name = "LBLIGeneral"
+		Me.LBLIGeneral.Size = New System.Drawing.Size(217, 17)
+		Me.LBLIGeneral.TabIndex = 167
+		Me.LBLIGeneral.Text = "No path selected"
+		Me.LBLIGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'BTNISoftcore
+		'
+		Me.BTNISoftcore.BackColor = System.Drawing.Color.LightGray
+		Me.BTNISoftcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNISoftcore.ForeColor = System.Drawing.Color.Black
+		Me.BTNISoftcore.Location = New System.Drawing.Point(82, 45)
+		Me.BTNISoftcore.Name = "BTNISoftcore"
+		Me.BTNISoftcore.Size = New System.Drawing.Size(34, 28)
+		Me.BTNISoftcore.TabIndex = 145
+		Me.BTNISoftcore.Text = "1"
+		Me.BTNISoftcore.UseVisualStyleBackColor = false
+		'
+		'LBLICaptions
+		'
+		Me.LBLICaptions.BackColor = System.Drawing.Color.Transparent
+		Me.LBLICaptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLICaptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLICaptions.ForeColor = System.Drawing.Color.Black
+		Me.LBLICaptions.Location = New System.Drawing.Point(122, 283)
+		Me.LBLICaptions.Name = "LBLICaptions"
+		Me.LBLICaptions.Size = New System.Drawing.Size(217, 17)
+		Me.LBLICaptions.TabIndex = 179
+		Me.LBLICaptions.Text = "No path selected"
+		Me.LBLICaptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'LBLIGay
+		'
+		Me.LBLIGay.BackColor = System.Drawing.Color.Transparent
+		Me.LBLIGay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLIGay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLIGay.ForeColor = System.Drawing.Color.Black
+		Me.LBLIGay.Location = New System.Drawing.Point(122, 225)
+		Me.LBLIGay.Name = "LBLIGay"
+		Me.LBLIGay.Size = New System.Drawing.Size(217, 17)
+		Me.LBLIGay.TabIndex = 163
+		Me.LBLIGay.Text = "No path selected"
+		Me.LBLIGay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBIGeneral
+		'
+		Me.CBIGeneral.AutoSize = true
+		Me.CBIGeneral.ForeColor = System.Drawing.Color.Black
+		Me.CBIGeneral.Location = New System.Drawing.Point(15, 313)
+		Me.CBIGeneral.Name = "CBIGeneral"
+		Me.CBIGeneral.Size = New System.Drawing.Size(63, 17)
+		Me.CBIGeneral.TabIndex = 165
+		Me.CBIGeneral.Text = "General"
+		Me.CBIGeneral.UseVisualStyleBackColor = true
+		'
+		'BTNIHardcore
+		'
+		Me.BTNIHardcore.BackColor = System.Drawing.Color.LightGray
+		Me.BTNIHardcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIHardcore.ForeColor = System.Drawing.Color.Black
+		Me.BTNIHardcore.Location = New System.Drawing.Point(82, 16)
+		Me.BTNIHardcore.Name = "BTNIHardcore"
+		Me.BTNIHardcore.Size = New System.Drawing.Size(34, 28)
+		Me.BTNIHardcore.TabIndex = 144
+		Me.BTNIHardcore.Text = "1"
+		Me.BTNIHardcore.UseVisualStyleBackColor = false
+		'
+		'CBIGeneralSD
+		'
+		Me.CBIGeneralSD.AutoSize = true
+		Me.CBIGeneralSD.Checked = true
+		Me.CBIGeneralSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIGeneralSD.ForeColor = System.Drawing.Color.Black
+		Me.CBIGeneralSD.Location = New System.Drawing.Point(347, 314)
+		Me.CBIGeneralSD.Name = "CBIGeneralSD"
+		Me.CBIGeneralSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBIGeneralSD.TabIndex = 176
+		Me.CBIGeneralSD.UseVisualStyleBackColor = true
+		'
+		'LBLIHardcore
+		'
+		Me.LBLIHardcore.BackColor = System.Drawing.Color.Transparent
+		Me.LBLIHardcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLIHardcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLIHardcore.ForeColor = System.Drawing.Color.Black
+		Me.LBLIHardcore.Location = New System.Drawing.Point(122, 23)
+		Me.LBLIHardcore.Name = "LBLIHardcore"
+		Me.LBLIHardcore.Size = New System.Drawing.Size(217, 17)
+		Me.LBLIHardcore.TabIndex = 150
+		Me.LBLIHardcore.Text = "No path selected"
+		Me.LBLIHardcore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'LBLIMaledom
+		'
+		Me.LBLIMaledom.BackColor = System.Drawing.Color.Transparent
+		Me.LBLIMaledom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLIMaledom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLIMaledom.ForeColor = System.Drawing.Color.Black
+		Me.LBLIMaledom.Location = New System.Drawing.Point(122, 254)
+		Me.LBLIMaledom.Name = "LBLIMaledom"
+		Me.LBLIMaledom.Size = New System.Drawing.Size(217, 17)
+		Me.LBLIMaledom.TabIndex = 164
+		Me.LBLIMaledom.Text = "No path selected"
+		Me.LBLIMaledom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBICaptionsSD
+		'
+		Me.CBICaptionsSD.AutoSize = true
+		Me.CBICaptionsSD.Checked = true
+		Me.CBICaptionsSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBICaptionsSD.ForeColor = System.Drawing.Color.Black
+		Me.CBICaptionsSD.Location = New System.Drawing.Point(347, 285)
+		Me.CBICaptionsSD.Name = "CBICaptionsSD"
+		Me.CBICaptionsSD.Size = New System.Drawing.Size(15, 14)
+		Me.CBICaptionsSD.TabIndex = 180
+		Me.CBICaptionsSD.UseVisualStyleBackColor = true
+		'
+		'CBIHardcore
+		'
+		Me.CBIHardcore.AutoSize = true
+		Me.CBIHardcore.ForeColor = System.Drawing.Color.Black
+		Me.CBIHardcore.Location = New System.Drawing.Point(15, 23)
+		Me.CBIHardcore.Name = "CBIHardcore"
+		Me.CBIHardcore.Size = New System.Drawing.Size(70, 17)
+		Me.CBIHardcore.TabIndex = 138
+		Me.CBIHardcore.Text = "Hardcore"
+		Me.CBIHardcore.UseVisualStyleBackColor = true
+		'
+		'CBIMaledom
+		'
+		Me.CBIMaledom.AutoSize = true
+		Me.CBIMaledom.ForeColor = System.Drawing.Color.Black
+		Me.CBIMaledom.Location = New System.Drawing.Point(15, 255)
+		Me.CBIMaledom.Name = "CBIMaledom"
+		Me.CBIMaledom.Size = New System.Drawing.Size(69, 17)
+		Me.CBIMaledom.TabIndex = 158
+		Me.CBIMaledom.Text = "Maledom"
+		Me.CBIMaledom.UseVisualStyleBackColor = true
 		'
 		'TabPage12
 		'
@@ -12892,6 +13356,74 @@ Partial Class FrmSettings
     " you."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
 		Me.Label41.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
+		'GroupBox47
+		'
+		Me.GroupBox47.BackColor = System.Drawing.Color.LightGray
+		Me.GroupBox47.Controls.Add(Me.GroupBox41)
+		Me.GroupBox47.Controls.Add(Me.GroupBox40)
+		Me.GroupBox47.ForeColor = System.Drawing.Color.Black
+		Me.GroupBox47.Location = New System.Drawing.Point(806, 255)
+		Me.GroupBox47.Name = "GroupBox47"
+		Me.GroupBox47.Size = New System.Drawing.Size(310, 190)
+		Me.GroupBox47.TabIndex = 63
+		Me.GroupBox47.TabStop = false
+		Me.GroupBox47.Text = "Boobs and Butts Paths"
+		'
+		'GroupBox41
+		'
+		Me.GroupBox41.Controls.Add(Me.Button34)
+		Me.GroupBox41.Location = New System.Drawing.Point(6, 110)
+		Me.GroupBox41.Name = "GroupBox41"
+		Me.GroupBox41.Size = New System.Drawing.Size(298, 74)
+		Me.GroupBox41.TabIndex = 153
+		Me.GroupBox41.TabStop = false
+		Me.GroupBox41.Text = "Butts"
+		'
+		'Button34
+		'
+		Me.Button34.BackColor = System.Drawing.Color.LightGray
+		Me.Button34.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.Button34.ForeColor = System.Drawing.Color.Black
+		Me.Button34.Location = New System.Drawing.Point(85, 25)
+		Me.Button34.Name = "Button34"
+		Me.Button34.Size = New System.Drawing.Size(34, 28)
+		Me.Button34.TabIndex = 131
+		Me.Button34.Text = "1"
+		Me.Button34.UseVisualStyleBackColor = false
+		'
+		'GroupBox40
+		'
+		Me.GroupBox40.Location = New System.Drawing.Point(5, 35)
+		Me.GroupBox40.Name = "GroupBox40"
+		Me.GroupBox40.Size = New System.Drawing.Size(298, 74)
+		Me.GroupBox40.TabIndex = 152
+		Me.GroupBox40.TabStop = false
+		Me.GroupBox40.Text = "Boobs"
+		'
+		'GroupBox44
+		'
+		Me.GroupBox44.BackColor = System.Drawing.Color.LightGray
+		Me.GroupBox44.Controls.Add(Me.Label100)
+		Me.GroupBox44.ForeColor = System.Drawing.Color.Black
+		Me.GroupBox44.Location = New System.Drawing.Point(1160, 181)
+		Me.GroupBox44.Name = "GroupBox44"
+		Me.GroupBox44.Size = New System.Drawing.Size(310, 92)
+		Me.GroupBox44.TabIndex = 65
+		Me.GroupBox44.TabStop = false
+		Me.GroupBox44.Text = "Description"
+		'
+		'Label100
+		'
+		Me.Label100.BackColor = System.Drawing.Color.Transparent
+		Me.Label100.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label100.ForeColor = System.Drawing.Color.Black
+		Me.Label100.Location = New System.Drawing.Point(11, 16)
+		Me.Label100.Name = "Label100"
+		Me.Label100.Size = New System.Drawing.Size(286, 73)
+		Me.Label100.TabIndex = 62
+		Me.Label100.Text = resources.GetString("Label100.Text")
+		Me.Label100.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
 		'GroupBox6
 		'
 		Me.GroupBox6.Controls.Add(Me.Label4)
@@ -12905,7 +13437,7 @@ Partial Class FrmSettings
 		Me.GroupBox6.Controls.Add(Me.Label14)
 		Me.GroupBox6.Controls.Add(Me.Label13)
 		Me.GroupBox6.Controls.Add(Me.Label1)
-		Me.GroupBox6.Location = New System.Drawing.Point(869, 161)
+		Me.GroupBox6.Location = New System.Drawing.Point(27, 114)
 		Me.GroupBox6.Name = "GroupBox6"
 		Me.GroupBox6.Size = New System.Drawing.Size(283, 102)
 		Me.GroupBox6.TabIndex = 156
@@ -13030,14 +13562,30 @@ Partial Class FrmSettings
 		'GroupBox21
 		'
 		Me.GroupBox21.BackColor = System.Drawing.Color.LightGray
+		Me.GroupBox21.Controls.Add(Me.Label153)
 		Me.GroupBox21.Controls.Add(Me.LBLRangeSettingsDescription)
+		Me.GroupBox21.Controls.Add(Me.GroupBox6)
+		Me.GroupBox21.Controls.Add(Me.Label156)
 		Me.GroupBox21.ForeColor = System.Drawing.Color.Black
-		Me.GroupBox21.Location = New System.Drawing.Point(790, 9)
+		Me.GroupBox21.Location = New System.Drawing.Point(797, 55)
 		Me.GroupBox21.Name = "GroupBox21"
 		Me.GroupBox21.Size = New System.Drawing.Size(316, 136)
 		Me.GroupBox21.TabIndex = 66
 		Me.GroupBox21.TabStop = false
 		Me.GroupBox21.Text = "Description"
+		'
+		'Label153
+		'
+		Me.Label153.BackColor = System.Drawing.Color.Transparent
+		Me.Label153.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.Label153.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label153.ForeColor = System.Drawing.Color.Black
+		Me.Label153.Location = New System.Drawing.Point(78, 94)
+		Me.Label153.Name = "Label153"
+		Me.Label153.Size = New System.Drawing.Size(158, 17)
+		Me.Label153.TabIndex = 135
+		Me.Label153.Text = "No path selected"
+		Me.Label153.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'LBLRangeSettingsDescription
 		'
@@ -13052,12 +13600,25 @@ Partial Class FrmSettings
     "n."
 		Me.LBLRangeSettingsDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
+		'Label156
+		'
+		Me.Label156.BackColor = System.Drawing.Color.Transparent
+		Me.Label156.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.Label156.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label156.ForeColor = System.Drawing.Color.Black
+		Me.Label156.Location = New System.Drawing.Point(133, 23)
+		Me.Label156.Name = "Label156"
+		Me.Label156.Size = New System.Drawing.Size(158, 17)
+		Me.Label156.TabIndex = 135
+		Me.Label156.Text = "No path selected"
+		Me.Label156.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
 		'GroupBox12
 		'
 		Me.GroupBox12.BackColor = System.Drawing.Color.LightGray
 		Me.GroupBox12.Controls.Add(Me.LBLSubSettingsDescription)
 		Me.GroupBox12.ForeColor = System.Drawing.Color.Black
-		Me.GroupBox12.Location = New System.Drawing.Point(960, 308)
+		Me.GroupBox12.Location = New System.Drawing.Point(1299, 163)
 		Me.GroupBox12.Name = "GroupBox12"
 		Me.GroupBox12.Size = New System.Drawing.Size(171, 124)
 		Me.GroupBox12.TabIndex = 65
@@ -13090,7 +13651,7 @@ Partial Class FrmSettings
 		'WebImageFileDialog
 		'
 		Me.WebImageFileDialog.Filter = "TXT Files (*.txt)|*.txt"
-		Me.WebImageFileDialog.Title = "Please select an Image Blog URL File"
+		Me.WebImageFileDialog.Title = "Please select a URL File"
 		'
 		'OpenScriptDialog
 		'
@@ -13214,6 +13775,18 @@ Partial Class FrmSettings
 		Me.BWURLFiles.WorkerReportsProgress = true
 		Me.BWURLFiles.WorkerSupportsCancellation = true
 		'
+		'CBURLPreview
+		'
+		Me.CBURLPreview.AutoSize = true
+		Me.CBURLPreview.Checked = true
+		Me.CBURLPreview.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBURLPreview.Location = New System.Drawing.Point(344, 323)
+		Me.CBURLPreview.Name = "CBURLPreview"
+		Me.CBURLPreview.Size = New System.Drawing.Size(240, 17)
+		Me.CBURLPreview.TabIndex = 163
+		Me.CBURLPreview.Text = "Show Previews When A URL File is Selected"
+		Me.CBURLPreview.UseVisualStyleBackColor = true
+		'
 		'FrmSettings
 		'
 		Me.AllowDrop = true
@@ -13221,7 +13794,8 @@ Partial Class FrmSettings
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.ClientSize = New System.Drawing.Size(727, 465)
 		Me.Controls.Add(Me.GroupBox65)
-		Me.Controls.Add(Me.GroupBox6)
+		Me.Controls.Add(Me.GroupBox44)
+		Me.Controls.Add(Me.GroupBox47)
 		Me.Controls.Add(Me.SettingsPanel)
 		Me.Controls.Add(Me.GroupBox12)
 		Me.Controls.Add(Me.GroupBox21)
@@ -13335,18 +13909,16 @@ Partial Class FrmSettings
 		CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
 		Me.GroupBox43.ResumeLayout(false)
 		Me.TabPage7.ResumeLayout(false)
-		Me.Panel8.ResumeLayout(false)
+		Me.TabControl4.ResumeLayout(false)
+		Me.TabPage31.ResumeLayout(false)
+		Me.TabPage31.PerformLayout
+		Me.GroupBox66.ResumeLayout(false)
+		CType(Me.PBURLPreview,System.ComponentModel.ISupportInitialize).EndInit
+		Me.TabPage32.ResumeLayout(false)
 		Me.GroupBox16.ResumeLayout(false)
 		Me.GroupBox16.PerformLayout
 		Me.GroupBox14.ResumeLayout(false)
-		CType(Me.PictureBox13,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox44.ResumeLayout(false)
-		Me.GroupBox47.ResumeLayout(false)
-		Me.GroupBox47.PerformLayout
-		Me.GroupBox41.ResumeLayout(false)
-		Me.GroupBox41.PerformLayout
-		Me.GroupBox40.ResumeLayout(false)
-		Me.GroupBox40.PerformLayout
+		Me.GroupBox14.PerformLayout
 		Me.TabPage12.ResumeLayout(false)
 		Me.PNLImageTag.ResumeLayout(false)
 		Me.PNLImageTag.PerformLayout
@@ -13531,6 +14103,9 @@ Partial Class FrmSettings
 		Me.Panel5.ResumeLayout(false)
 		Me.Panel5.PerformLayout
 		CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
+		Me.GroupBox47.ResumeLayout(false)
+		Me.GroupBox41.ResumeLayout(false)
+		Me.GroupBox44.ResumeLayout(false)
 		Me.GroupBox6.ResumeLayout(false)
 		Me.GroupBox6.PerformLayout
 		Me.GroupBox21.ResumeLayout(false)
@@ -13678,14 +14253,9 @@ End Sub
 	Friend WithEvents LBLSubAge As System.Windows.Forms.Label
 	Friend WithEvents Label70 As System.Windows.Forms.Label
 	Friend WithEvents TabPage7 As System.Windows.Forms.TabPage
-	Friend WithEvents Panel8 As System.Windows.Forms.Panel
-	Friend WithEvents PictureBox13 As System.Windows.Forms.PictureBox
 	Friend WithEvents GroupBox44 As System.Windows.Forms.GroupBox
 	Friend WithEvents Label100 As System.Windows.Forms.Label
 	Friend WithEvents GroupBox47 As System.Windows.Forms.GroupBox
-	Friend WithEvents CBBnBURL As System.Windows.Forms.RadioButton
-	Friend WithEvents CBBnBLocal As System.Windows.Forms.RadioButton
-	Friend WithEvents CBEnableBnB As System.Windows.Forms.CheckBox
 	Friend WithEvents GroupBox41 As System.Windows.Forms.GroupBox
 	Friend WithEvents CBButtSubDir As System.Windows.Forms.CheckBox
 	Friend WithEvents LBLButtPath As System.Windows.Forms.Label
@@ -13698,7 +14268,6 @@ End Sub
 	Friend WithEvents LBLBoobURL As System.Windows.Forms.Label
 	Friend WithEvents BTNBoobPath As System.Windows.Forms.Button
 	Friend WithEvents BTNBoobURL As System.Windows.Forms.Button
-	Friend WithEvents Label119 As System.Windows.Forms.Label
 	Friend WithEvents TabPage12 As System.Windows.Forms.TabPage
 	Friend WithEvents PNLImageTag As System.Windows.Forms.Panel
 	Friend WithEvents CBTagSucking As System.Windows.Forms.CheckBox
@@ -13984,9 +14553,7 @@ End Sub
 	Friend WithEvents CBImageInfo As System.Windows.Forms.CheckBox
 	Friend WithEvents Label88 As System.Windows.Forms.Label
 	Friend WithEvents TBTagDir As System.Windows.Forms.TextBox
-	Friend WithEvents GroupBox14 As System.Windows.Forms.GroupBox
 	Friend WithEvents URLFileList As System.Windows.Forms.CheckedListBox
-	Friend WithEvents GroupBox16 As System.Windows.Forms.GroupBox
 	Friend WithEvents LBLIMaledom As System.Windows.Forms.Label
 	Friend WithEvents LBLIGay As System.Windows.Forms.Label
 	Friend WithEvents LBLIHentai As System.Windows.Forms.Label
@@ -14549,4 +15116,54 @@ End Sub
 	Friend WithEvents Label147 As System.Windows.Forms.Label
 	Friend WithEvents Label143 As System.Windows.Forms.Label
 	Friend WithEvents LBLDebugScriptTime As System.Windows.Forms.Label
+	Friend WithEvents TabControl4 As System.Windows.Forms.TabControl
+	Friend WithEvents TabPage31 As System.Windows.Forms.TabPage
+	Friend WithEvents TabPage32 As System.Windows.Forms.TabPage
+	Friend WithEvents BTNURLFilesNone As System.Windows.Forms.Button
+	Friend WithEvents BTNURLFilesAll As System.Windows.Forms.Button
+	Friend WithEvents GroupBox14 As System.Windows.Forms.GroupBox
+	Friend WithEvents GroupBox16 As System.Windows.Forms.GroupBox
+	Friend WithEvents CBURLButts As System.Windows.Forms.CheckBox
+	Friend WithEvents CBURLBoobs As System.Windows.Forms.CheckBox
+	Friend WithEvents Label153 As System.Windows.Forms.Label
+	Friend WithEvents LBLURLFemdom As System.Windows.Forms.Label
+	Friend WithEvents Label156 As System.Windows.Forms.Label
+	Friend WithEvents BTNURLGeneral As System.Windows.Forms.Button
+	Friend WithEvents Button34 As System.Windows.Forms.Button
+	Friend WithEvents LBLURLHentai As System.Windows.Forms.Label
+	Friend WithEvents CBURLLesbian As System.Windows.Forms.CheckBox
+	Friend WithEvents BTNURLCaptions As System.Windows.Forms.Button
+	Friend WithEvents CBURLBlowjob As System.Windows.Forms.CheckBox
+	Friend WithEvents BTNURLMaledom As System.Windows.Forms.Button
+	Friend WithEvents CBURLGay As System.Windows.Forms.CheckBox
+	Friend WithEvents BTNURLGay As System.Windows.Forms.Button
+	Friend WithEvents CBURLSoftcore As System.Windows.Forms.CheckBox
+	Friend WithEvents CBURLHentai As System.Windows.Forms.CheckBox
+	Friend WithEvents CBURLLezdom As System.Windows.Forms.CheckBox
+	Friend WithEvents BTNURLHentai As System.Windows.Forms.Button
+	Friend WithEvents LBLURLLezdom As System.Windows.Forms.Label
+	Friend WithEvents BTNURLLezdom As System.Windows.Forms.Button
+	Friend WithEvents CBURLFemdom As System.Windows.Forms.CheckBox
+	Friend WithEvents BTNURLFemdom As System.Windows.Forms.Button
+	Friend WithEvents LBLURLBlowjob As System.Windows.Forms.Label
+	Friend WithEvents BTNURLBlowjob As System.Windows.Forms.Button
+	Friend WithEvents LBLURLLesbian As System.Windows.Forms.Label
+	Friend WithEvents CBURLCaptions As System.Windows.Forms.CheckBox
+	Friend WithEvents BTNURLLesbian As System.Windows.Forms.Button
+	Friend WithEvents LBLURLSoftcore As System.Windows.Forms.Label
+	Friend WithEvents LBLURLGeneral As System.Windows.Forms.Label
+	Friend WithEvents BTNURLSoftcore As System.Windows.Forms.Button
+	Friend WithEvents LBLURLCaptions As System.Windows.Forms.Label
+	Friend WithEvents LBLURLGay As System.Windows.Forms.Label
+	Friend WithEvents CBURLGeneral As System.Windows.Forms.CheckBox
+	Friend WithEvents BTNURLHardcore As System.Windows.Forms.Button
+	Friend WithEvents LBLURLHardcore As System.Windows.Forms.Label
+	Friend WithEvents LBLURLMaledom As System.Windows.Forms.Label
+	Friend WithEvents CBURLHardcore As System.Windows.Forms.CheckBox
+	Friend WithEvents CBURLMaledom As System.Windows.Forms.CheckBox
+	Friend WithEvents CBIButts As System.Windows.Forms.CheckBox
+	Friend WithEvents CBIBoobs As System.Windows.Forms.CheckBox
+	Friend WithEvents GroupBox66 As System.Windows.Forms.GroupBox
+	Friend WithEvents PBURLPreview As System.Windows.Forms.PictureBox
+	Friend WithEvents CBURLPreview As System.Windows.Forms.CheckBox
 End Class

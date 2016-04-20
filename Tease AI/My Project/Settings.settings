@@ -1305,5 +1305,86 @@
     <Setting Name="TauntEdging" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">70</Value>
     </Setting>
+    <Setting Name="HardcoreURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="SoftcoreURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="LesbianURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="BlowjobURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="FemdomURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="LezdomURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="HentaiURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="GayURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="MaledomURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="CaptionsURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="GeneralURLFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">No URL File selected</Value>
+    </Setting>
+    <Setting Name="CBURLHardcore" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLSoftcore" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLLesbian" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLBlowjob" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLFemdom" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLLezdom" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLHentai" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLGay" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLMaledom" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLCaptions" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLGeneral" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBIBoobs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBIButts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLBoobs" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLButts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CBURLPreview" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

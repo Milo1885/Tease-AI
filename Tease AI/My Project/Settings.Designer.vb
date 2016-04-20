@@ -5251,6 +5251,330 @@ Namespace My
                 Me("TauntEdging") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property HardcoreURLFile() As String
+            Get
+                Return CType(Me("HardcoreURLFile"),String)
+            End Get
+            Set
+                Me("HardcoreURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property SoftcoreURLFile() As String
+            Get
+                Return CType(Me("SoftcoreURLFile"),String)
+            End Get
+            Set
+                Me("SoftcoreURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property LesbianURLFile() As String
+            Get
+                Return CType(Me("LesbianURLFile"),String)
+            End Get
+            Set
+                Me("LesbianURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property BlowjobURLFile() As String
+            Get
+                Return CType(Me("BlowjobURLFile"),String)
+            End Get
+            Set
+                Me("BlowjobURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property FemdomURLFile() As String
+            Get
+                Return CType(Me("FemdomURLFile"),String)
+            End Get
+            Set
+                Me("FemdomURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property LezdomURLFile() As String
+            Get
+                Return CType(Me("LezdomURLFile"),String)
+            End Get
+            Set
+                Me("LezdomURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property HentaiURLFile() As String
+            Get
+                Return CType(Me("HentaiURLFile"),String)
+            End Get
+            Set
+                Me("HentaiURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property GayURLFile() As String
+            Get
+                Return CType(Me("GayURLFile"),String)
+            End Get
+            Set
+                Me("GayURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property MaledomURLFile() As String
+            Get
+                Return CType(Me("MaledomURLFile"),String)
+            End Get
+            Set
+                Me("MaledomURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property CaptionsURLFile() As String
+            Get
+                Return CType(Me("CaptionsURLFile"),String)
+            End Get
+            Set
+                Me("CaptionsURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property GeneralURLFile() As String
+            Get
+                Return CType(Me("GeneralURLFile"),String)
+            End Get
+            Set
+                Me("GeneralURLFile") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLHardcore() As Boolean
+            Get
+                Return CType(Me("CBURLHardcore"),Boolean)
+            End Get
+            Set
+                Me("CBURLHardcore") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLSoftcore() As Boolean
+            Get
+                Return CType(Me("CBURLSoftcore"),Boolean)
+            End Get
+            Set
+                Me("CBURLSoftcore") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLLesbian() As Boolean
+            Get
+                Return CType(Me("CBURLLesbian"),Boolean)
+            End Get
+            Set
+                Me("CBURLLesbian") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLBlowjob() As Boolean
+            Get
+                Return CType(Me("CBURLBlowjob"),Boolean)
+            End Get
+            Set
+                Me("CBURLBlowjob") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLFemdom() As Boolean
+            Get
+                Return CType(Me("CBURLFemdom"),Boolean)
+            End Get
+            Set
+                Me("CBURLFemdom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLLezdom() As Boolean
+            Get
+                Return CType(Me("CBURLLezdom"),Boolean)
+            End Get
+            Set
+                Me("CBURLLezdom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLHentai() As Boolean
+            Get
+                Return CType(Me("CBURLHentai"),Boolean)
+            End Get
+            Set
+                Me("CBURLHentai") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLGay() As Boolean
+            Get
+                Return CType(Me("CBURLGay"),Boolean)
+            End Get
+            Set
+                Me("CBURLGay") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLMaledom() As Boolean
+            Get
+                Return CType(Me("CBURLMaledom"),Boolean)
+            End Get
+            Set
+                Me("CBURLMaledom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLCaptions() As Boolean
+            Get
+                Return CType(Me("CBURLCaptions"),Boolean)
+            End Get
+            Set
+                Me("CBURLCaptions") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLGeneral() As Boolean
+            Get
+                Return CType(Me("CBURLGeneral"),Boolean)
+            End Get
+            Set
+                Me("CBURLGeneral") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBIBoobs() As Boolean
+            Get
+                Return CType(Me("CBIBoobs"),Boolean)
+            End Get
+            Set
+                Me("CBIBoobs") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBIButts() As Boolean
+            Get
+                Return CType(Me("CBIButts"),Boolean)
+            End Get
+            Set
+                Me("CBIButts") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLBoobs() As Boolean
+            Get
+                Return CType(Me("CBURLBoobs"),Boolean)
+            End Get
+            Set
+                Me("CBURLBoobs") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CBURLButts() As Boolean
+            Get
+                Return CType(Me("CBURLButts"),Boolean)
+            End Get
+            Set
+                Me("CBURLButts") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBURLPreview() As Boolean
+            Get
+                Return CType(Me("CBURLPreview"),Boolean)
+            End Get
+            Set
+                Me("CBURLPreview") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

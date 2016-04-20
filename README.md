@@ -4,6 +4,24 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Major Image Settings overhaul
+
+     URL Files and Genre Images are now on two separate tabs
+	 
+	 Genre Images can now be set to URL Files as well as Local Directories for use with Commands like @ShowHardcoreImage, @ShowLesbianImage, etc
+	 
+	 URL List size greatly expanded
+	 
+	 Added preview window that shows a random image from a URL File whenever it is selected in the URL File List
+	 
+	 Added buttons to select all or none of the URL Files in the list
+	 
+	 
+Session Images now save correctly when images have been pre-loaded
+
+	 
+	 
+	 
 Added @DecideOrgasm() Command - This Command will make the domme decide if and how the user can have an orgasm based on their domme settings. This works the same way as @DecideOrgasm. When @DecideOrgasm is used, the domme decides if the user will cum, ruin or be denied based on her domme settings. Depending on what she decides, @DecideOrgasm will either go to (Orgasm Allow), (Orgasm Ruin) or (Orgasm Deny). 
 
 @DecideOrgasm() allows you to set the GotoLines for allowed, ruined and denied orgasms (specified in that order - Allowed GotoLine first, Ruined GotoLine second and Denied GotoLine third). For example:

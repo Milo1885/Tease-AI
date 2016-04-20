@@ -231,6 +231,9 @@ Public Class FrmSettings
 			CBIGeneral.Checked = False
 		End If
 
+		CBIButts.Checked = My.Settings.CBIButts
+		CBIBoobs.Checked = My.Settings.CBIBoobs
+
 		Debug.Print(My.Settings.IHardcoreSD & "????????")
 
 
@@ -730,6 +733,36 @@ Public Class FrmSettings
 		CBNewSlideshow.Checked = My.Settings.CBNewSlideshow
 
 		NBTauntEdging.Value = My.Settings.TauntEdging
+
+		LBLURLHardcore.Text = My.Settings.HardcoreURLFile
+		LBLURLSoftcore.Text = My.Settings.SoftcoreURLFile
+		LBLURLLesbian.Text = My.Settings.LesbianURLFile
+		LBLURLBlowjob.Text = My.Settings.BlowjobURLFile
+		LBLURLFemdom.Text = My.Settings.FemdomURLFile
+		LBLURLLezdom.Text = My.Settings.LezdomURLFile
+		LBLURLHentai.Text = My.Settings.HentaiURLFile
+		LBLURLGay.Text = My.Settings.GayURLFile
+		LBLURLMaledom.Text = My.Settings.MaledomURLFile
+		LBLURLCaptions.Text = My.Settings.CaptionsURLFile
+		LBLURLGeneral.Text = My.Settings.GeneralURLFile
+
+		CBURLHardcore.Checked = My.Settings.CBURLHardcore
+		CBURLSoftcore.Checked = My.Settings.CBURLSoftcore
+		CBURLLesbian.Checked = My.Settings.CBURLLesbian
+		CBURLBlowjob.Checked = My.Settings.CBURLBlowjob
+		CBURLFemdom.Checked = My.Settings.CBURLFemdom
+		CBURLLezdom.Checked = My.Settings.CBURLLezdom
+		CBURLHentai.Checked = My.Settings.CBURLHentai
+		CBURLGay.Checked = My.Settings.CBURLGay
+		CBURLMaledom.Checked = My.Settings.CBURLMaledom
+		CBURLCaptions.Checked = My.Settings.CBURLCaptions
+		CBURLGeneral.Checked = My.Settings.CBURLGeneral
+
+		CBURLButts.Checked = My.Settings.CBURLButts
+		CBURLBoobs.Checked = My.Settings.CBURLBoobs
+
+		CBURLPreview.Checked = My.Settings.CBURLPreview
+
 
 		FrmSettingsLoading = False
 
@@ -3172,22 +3205,6 @@ trypreviousimage:
 		End If
 	End Sub
 
-	Private Sub CBBnBLocal_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBBnBLocal.LostFocus
-		If CBBnBLocal.Checked = True Then
-			My.Settings.CBBnBLocal = True
-			My.Settings.CBBnBURL = False
-			My.Settings.Save()
-		End If
-	End Sub
-
-	Private Sub CBBnBURL_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBBnBURL.LostFocus
-		If CBBnBURL.Checked = True Then
-			My.Settings.CBBnBLocal = False
-			My.Settings.CBBnBURL = True
-			My.Settings.Save()
-		End If
-	End Sub
-
 	Private Sub CBBoobSubDir_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBBoobSubDir.CheckedChanged
 		If CBBoobSubDir.Checked = True Then
 			My.Settings.CBBoobSubDir = True
@@ -3202,109 +3219,7 @@ trypreviousimage:
 		End If
 	End Sub
 
-	Private Sub CBEnableBnB_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBEnableBnB.CheckedChanged
-		If CBEnableBnB.Checked = True Then
-
-			If CBBnBLocal.Checked = True Then
-
-				If Not Directory.Exists(LBLBoobPath.Text) Then
-					MessageBox.Show(Me, "The current Boob path directory does not exist!" & Environment.NewLine & "Please set a directory using the button with the folder icon.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBEnableBnB.Checked = False
-					Return
-				End If
-
-				If Not Directory.Exists(LBLButtPath.Text) Then
-					MessageBox.Show(Me, "The current Butt path directory does not exist!" & Environment.NewLine & "Please set a directory using the button with the folder icon.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBEnableBnB.Checked = False
-					Return
-				End If
-
-				If LBLBoobPath.Text = LBLButtPath.Text Then
-					MessageBox.Show(Me, "The Boob and Butt paths must not be the same!" & Environment.NewLine & "Please select a different directory for at least one of them.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBEnableBnB.Checked = False
-					Return
-				End If
-
-				Dim BnBFileCheck As New List(Of String)
-				BnBFileCheck.Clear()
-
-				Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-				'Dim files As String() = Directory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
-
-				Dim files As String()
-
-				If CBBoobSubDir.Checked = True Then
-					files = Directory.GetFiles(LBLBoobPath.Text, "*.*", SearchOption.AllDirectories)
-				Else
-					files = Directory.GetFiles(LBLBoobPath.Text, "*.*")
-				End If
-
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						BnBFileCheck.Add(fi)
-					End If
-				Next
-
-
-				If BnBFileCheck.Count < 1 Then
-					MessageBox.Show(Me, "No images found in " & LBLBoobPath.Text & "!" & Environment.NewLine & "Please double check your selected folder and subdirectory setting.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBEnableBnB.Checked = False
-					Return
-				End If
-
-				BnBFileCheck.Clear()
-
-				If CBButtSubDir.Checked = True Then
-					files = Directory.GetFiles(LBLButtPath.Text, "*.*", SearchOption.AllDirectories)
-				Else
-					files = Directory.GetFiles(LBLButtPath.Text, "*.*")
-				End If
-
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						BnBFileCheck.Add(fi)
-					End If
-				Next
-
-				If BnBFileCheck.Count < 1 Then
-					MessageBox.Show(Me, "No images found in " & LBLButtPath.Text & "!" & Environment.NewLine & "Please double check your selected folder and subdirectory setting.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBEnableBnB.Checked = False
-					Return
-				End If
-
-
-				My.Settings.CBEnableBnB = True
-				My.Settings.Save()
-				Return
-
-			End If
-
-			If CBBnBURL.Checked = True Then
-
-				If Not File.Exists(LBLBoobURL.Text) Then
-					MessageBox.Show(Me, "The Boob URL File was not found!" & Environment.NewLine & "Please set a file using the button with the list icon", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBEnableBnB.Checked = False
-					Return
-				End If
-
-				If Not File.Exists(LBLButtURL.Text) Then
-					MessageBox.Show(Me, "The Butt URL File was not found!" & Environment.NewLine & "Please set a file using the button with the list icon", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBEnableBnB.Checked = False
-					Return
-				End If
-
-				My.Settings.CBEnableBnB = True
-				My.Settings.Save()
-				Return
-
-			End If
-
-		End If
-	End Sub
+	
 
 	Private Sub Button45_Click(sender As System.Object, e As System.EventArgs)
 		Form1.GetBlogImage()
@@ -6190,7 +6105,8 @@ WhyUMakeMeDoDis:
 
 	End Sub
 
-	Private Sub URLFileList_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles URLFileList.SelectedIndexChanged, URLFileList.LostFocus
+	Private Sub SaveURLFileSelection()
+
 		If FrmSettingsLoading = True Then Return
 
 		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Create)
@@ -6202,7 +6118,37 @@ WhyUMakeMeDoDis:
 		BinaryWriter.Close()
 		FileStream.Dispose()
 
+	End Sub
 
+	Private Sub URLFileList_LostFocus(sender As Object, e As System.EventArgs) Handles URLFileList.LostFocus
+		SaveURLFileSelection()
+	End Sub
+
+
+	Private Sub URLFileList_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles URLFileList.SelectedIndexChanged
+
+		If CBURLPreview.Checked = True Then
+			Dim PreviewList As New List(Of String)
+			PreviewList = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.SelectedItem & ".txt")
+			PBURLPreview.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PreviewList(Form1.randomizer.Next(0, PreviewList.Count)))))
+		End If
+
+		SaveURLFileSelection()
+
+	End Sub
+
+	Private Sub BTNURLFilesAll_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLFilesAll.Click
+		For i As Integer = 0 To URLFileList.Items.Count - 1
+			URLFileList.SetItemChecked(i, True)
+		Next
+		SaveURLFileSelection()
+	End Sub
+
+	Private Sub BTNURLFilesNone_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLFilesNone.Click
+		For i As Integer = 0 To URLFileList.Items.Count - 1
+			URLFileList.SetItemChecked(i, False)
+		Next
+		SaveURLFileSelection()
 	End Sub
 
 	Private Sub BTNIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNIHardcore.Click
@@ -6408,6 +6354,8 @@ WhyUMakeMeDoDis:
 		My.Settings.Save()
 
 	End Sub
+
+	
 
 
 	Private Sub CBIHardcore_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIHardcore.CheckedChanged
@@ -7362,21 +7310,21 @@ WhyUMakeMeDoDis:
 				If CBVideoCHD.Checked = True And Not Directory.Exists(LblVideoCHD.Text) Then ScriptReqFailed = True
 			End If
 
-			If ScriptList(i).Contains("@TnAFastSlides") Or ScriptList(i).Contains("@TnASlowSlides") Or ScriptList(i).Contains("@TnASlides") Or ScriptList(i).Contains("@CheckTnA") Then
-				If Not RTBScriptReq.Text.Contains("* BnB Games must be enabled in Image Settings *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Games must be enabled in Image Settings *" & Environment.NewLine
-				If CBEnableBnB.Checked = False Then ScriptReqFailed = True
-			End If
+			'If ScriptList(i).Contains("@TnAFastSlides") Or ScriptList(i).Contains("@TnASlowSlides") Or ScriptList(i).Contains("@TnASlides") Or ScriptList(i).Contains("@CheckTnA") Then
+			'If Not RTBScriptReq.Text.Contains("* BnB Games must be enabled in Image Settings *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Games must be enabled in Image Settings *" & Environment.NewLine
+			'If CBEnableBnB.Checked = False Then ScriptReqFailed = True
+			'End If
 
 			If ScriptList(i).Contains("@ShowButtImage") Then
 				If Not RTBScriptReq.Text.Contains("* BnB Butt path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Butt path must be set to a valid directory or URL File *" & Environment.NewLine
-				If CBBnBLocal.Checked = True And Not Directory.Exists(LBLButtPath.Text) Then ScriptReqFailed = True
-				If CBBnBURL.Checked = True And Not File.Exists(LBLButtURL.Text) Then ScriptReqFailed = True
+				If CBIButts.Checked = True And Not Directory.Exists(LBLButtPath.Text) Then ScriptReqFailed = True
+				If CBURLButts.Checked = True And Not File.Exists(LBLButtURL.Text) Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowBoobsImage") Then
 				If Not RTBScriptReq.Text.Contains("* BnB Boobs path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Boobs path must be set to a valid directory or URL File *" & Environment.NewLine
-				If CBBnBLocal.Checked = True And Not Directory.Exists(LBLBoobPath.Text) Then ScriptReqFailed = True
-				If CBBnBURL.Checked = True And Not File.Exists(LBLBoobURL.Text) Then ScriptReqFailed = True
+				If CBIBoobs.Checked = True And Not Directory.Exists(LBLBoobPath.Text) Then ScriptReqFailed = True
+				If CBURLBoobs.Checked = True And Not File.Exists(LBLBoobURL.Text) Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowHardcoreImage") Then
@@ -7915,18 +7863,18 @@ WhyUMakeMeDoDis:
 				If CBVideoCHD.Checked = True And Not Directory.Exists(LblVideoCHD.Text) Then AvailFail = True
 			End If
 
-			If AvailList(j).Contains("@TnAFastSlides") Or AvailList(j).Contains("@TnASlowSlides") Or AvailList(j).Contains("@TnASlides") Or AvailList(j).Contains("@CheckTnA") Then
-				If CBEnableBnB.Checked = False Then AvailFail = True
-			End If
+			'If AvailList(j).Contains("@TnAFastSlides") Or AvailList(j).Contains("@TnASlowSlides") Or AvailList(j).Contains("@TnASlides") Or AvailList(j).Contains("@CheckTnA") Then
+			'If CBEnableBnB.Checked = False Then AvailFail = True
+			'End If
 
 			If AvailList(j).Contains("@ShowButtImage") Then
-				If CBBnBLocal.Checked = True And Not Directory.Exists(LBLButtPath.Text) Then AvailFail = True
-				If CBBnBURL.Checked = True And Not File.Exists(LBLButtURL.Text) Then AvailFail = True
+				If CBIButts.Checked = True And Not Directory.Exists(LBLButtPath.Text) Then AvailFail = True
+				If CBURLButts.Checked = True And Not File.Exists(LBLButtURL.Text) Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowBoobsImage") Then
-				If CBBnBLocal.Checked = True And Not Directory.Exists(LBLBoobPath.Text) Then AvailFail = True
-				If CBBnBURL.Checked = True And Not File.Exists(LBLBoobURL.Text) Then AvailFail = True
+				If CBIBoobs.Checked = True And Not Directory.Exists(LBLBoobPath.Text) Then AvailFail = True
+				If CBURLBoobs.Checked = True And Not File.Exists(LBLBoobURL.Text) Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowHardcoreImage") Then
@@ -13316,7 +13264,39 @@ WhyUMakeMeDoDis:
 		TTDir.SetToolTip(LBLIGeneral, LBLIGeneral.Text)
 	End Sub
 
-
+	Private Sub LBLURLHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLHardcore.MouseHover
+		TTDir.SetToolTip(LBLURLHardcore, LBLURLHardcore.Text)
+	End Sub
+	Private Sub LBLURLSoftcore_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLSoftcore.MouseHover
+		TTDir.SetToolTip(LBLURLSoftcore, LBLURLSoftcore.Text)
+	End Sub
+	Private Sub LBLURLLesbian_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLLesbian.MouseHover
+		TTDir.SetToolTip(LBLURLLesbian, LBLURLLesbian.Text)
+	End Sub
+	Private Sub LBLURLBlowjob_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLBlowjob.MouseHover
+		TTDir.SetToolTip(LBLURLBlowjob, LBLURLBlowjob.Text)
+	End Sub
+	Private Sub LBLURLFemdom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLFemdom.MouseHover
+		TTDir.SetToolTip(LBLURLFemdom, LBLURLFemdom.Text)
+	End Sub
+	Private Sub LBLURLLezdom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLLezdom.MouseHover
+		TTDir.SetToolTip(LBLURLLezdom, LBLURLLezdom.Text)
+	End Sub
+	Private Sub LBLURLHentai_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLHentai.MouseHover
+		TTDir.SetToolTip(LBLURLHentai, LBLURLHentai.Text)
+	End Sub
+	Private Sub LBLURLGay_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLGay.MouseHover
+		TTDir.SetToolTip(LBLURLGay, LBLURLGay.Text)
+	End Sub
+	Private Sub LBLURLMaledom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLMaledom.MouseHover
+		TTDir.SetToolTip(LBLURLMaledom, LBLURLMaledom.Text)
+	End Sub
+	Private Sub LBLURLCaptions_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLCaptions.MouseHover
+		TTDir.SetToolTip(LBLURLCaptions, LBLURLCaptions.Text)
+	End Sub
+	Private Sub LBLURLGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLGeneral.MouseHover
+		TTDir.SetToolTip(LBLURLGeneral, LBLURLGeneral.Text)
+	End Sub
 
 
 	Private Sub BTNWICreateURL_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWICreateURL.MouseHover
@@ -13588,5 +13568,174 @@ WhyUMakeMeDoDis:
 
 	Private Sub BTNDebugHoldEdgeTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugHoldEdgeTimer.Click
 		Form1.HoldEdgeTick = 5
+	End Sub
+
+
+	
+	Private Sub BTNURLHardcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLHardcore.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLHardcore.Text = WebImageFileDialog.FileName
+			My.Settings.HardcoreURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLSoftcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLSoftcore.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLSoftcore.Text = WebImageFileDialog.FileName
+			My.Settings.SoftcoreURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLLesbian_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLLesbian.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLLesbian.Text = WebImageFileDialog.FileName
+			My.Settings.LesbianURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLBlowjob.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLBlowjob.Text = WebImageFileDialog.FileName
+			My.Settings.BlowjobURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLFemdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLFemdom.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLFemdom.Text = WebImageFileDialog.FileName
+			My.Settings.FemdomURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLLezdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLLezdom.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLLezdom.Text = WebImageFileDialog.FileName
+			My.Settings.LezdomURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLHentai_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLHentai.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLHentai.Text = WebImageFileDialog.FileName
+			My.Settings.HentaiURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLGay_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLGay.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLGay.Text = WebImageFileDialog.FileName
+			My.Settings.GayURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLMaledom_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLMaledom.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLMaledom.Text = WebImageFileDialog.FileName
+			My.Settings.MaledomURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLCaptions_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLCaptions.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLCaptions.Text = WebImageFileDialog.FileName
+			My.Settings.CaptionsURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+
+	Private Sub BTNURLGeneral_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLGeneral.Click
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+			LBLURLGeneral.Text = WebImageFileDialog.FileName
+			My.Settings.GeneralURLFile = WebImageFileDialog.FileName
+			My.Settings.Save()
+		End If
+	End Sub
+	
+	Private Sub CBURLHardcore_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLHardcore.LostFocus
+		My.Settings.CBURLHardcore = CBURLHardcore.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLSoftcore_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLSoftcore.LostFocus
+		My.Settings.CBURLSoftcore = CBURLSoftcore.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLLesbian_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLLesbian.LostFocus
+		My.Settings.CBURLLesbian = CBURLLesbian.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLBlowjob_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLBlowjob.LostFocus
+		My.Settings.CBURLBlowjob = CBURLBlowjob.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLFemdom_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLFemdom.LostFocus
+		My.Settings.CBURLFemdom = CBURLFemdom.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLLezdom_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLLezdom.LostFocus
+		My.Settings.CBURLLezdom = CBURLLezdom.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLHentai_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLHentai.LostFocus
+		My.Settings.CBURLHentai = CBURLHentai.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLGay_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLGay.LostFocus
+		My.Settings.CBURLGay = CBURLGay.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLMaledom_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLMaledom.LostFocus
+		My.Settings.CBURLMaledom = CBURLMaledom.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLCaptions_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLCaptions.LostFocus
+		My.Settings.CBURLCaptions = CBURLCaptions.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLGeneral_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLGeneral.LostFocus
+		My.Settings.CBURLGeneral = CBURLGeneral.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLBoobs_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLBoobs.LostFocus
+		My.Settings.CBURLBoobs = CBURLBoobs.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBURLButts_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLButts.LostFocus
+		My.Settings.CBURLButts = CBURLButts.Checked
+		My.Settings.Save()
+	End Sub
+
+	Private Sub CBIButts_LostFocus(sender As Object, e As System.EventArgs) Handles CBIButts.LostFocus
+		My.Settings.CBIButts = CBIButts.Checked
+		My.Settings.Save()
+	End Sub
+	Private Sub CBIBoobs_LostFocus(sender As Object, e As System.EventArgs) Handles CBIBoobs.LostFocus
+		My.Settings.CBIBoobs = CBIBoobs.Checked
+		My.Settings.Save()
+	End Sub
+
+
+	
+	Private Sub CBURLPreview_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLPreview.LostFocus
+		My.Settings.CBURLPreview = CBURLPreview.Checked
 	End Sub
 End Class
