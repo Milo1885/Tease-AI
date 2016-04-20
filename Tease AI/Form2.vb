@@ -7094,7 +7094,8 @@ WhyUMakeMeDoDis:
 				Exit For
 			End If
 		Next
-
+		'QnD-Bugfix: Prevent GetScriptStatus when no index is selected
+		If CLBStartList.SelectedIndex = -1 Then ScriptStatusUnlock(False) : Exit Sub
 		ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(CLBStartList.SelectedIndex) & ".txt"
 		GetScriptStatus()
 
@@ -7115,17 +7116,10 @@ WhyUMakeMeDoDis:
 				Exit For
 			End If
 		Next
-
-
-
+		'QnD-Bugfix: Prevent GetScriptStatus when no index is selected
+		If CLBModuleList.SelectedIndex = -1 Then ScriptStatusUnlock(False) : Exit Sub
 		ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(CLBModuleList.SelectedIndex) & ".txt"
-
-
-
 		GetScriptStatus()
-
-
-
 
 	End Sub
 
@@ -7143,7 +7137,8 @@ WhyUMakeMeDoDis:
 				Exit For
 			End If
 		Next
-
+		'QnD-Bugfix: Prevent GetScriptStatus when no index is selected
+		If CLBLinkList.SelectedIndex = -1 Then ScriptStatusUnlock(False) : Exit Sub
 		ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(CLBLinkList.SelectedIndex) & ".txt"
 		GetScriptStatus()
 
@@ -7163,14 +7158,33 @@ WhyUMakeMeDoDis:
 				Exit For
 			End If
 		Next
-
+		'QnD-Bugfix: Prevent GetScriptStatus when no index is selected
+		If CLBEndList.SelectedIndex = -1 Then ScriptStatusUnlock(False) : Exit Sub
 		ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(CLBEndList.SelectedIndex) & ".txt"
 		GetScriptStatus()
 
 	End Sub
 
-	Public Sub GetScriptStatus()
 
+	''' <summary>
+	''' This Procedure enables or disables the Controls to view a script status.
+	''' On disabling it will clear the textbox.text as well.
+	''' </summary>
+	''' <param name="state">False disables the Controls. True enables them.</param>
+	Private Sub ScriptStatusUnlock(ByVal state As Boolean)
+		BTNScriptOpen.Enabled = state
+		RTBScriptDesc.Enabled = state
+		RTBScriptReq.Enabled = state
+		LBLScriptReq.Enabled = state
+		If state = False Then
+			RTBScriptDesc.Text = ""
+			RTBScriptReq.Text = ""
+			LBLScriptReq.Text = ""
+		End If
+	End Sub
+
+	Public Sub GetScriptStatus()
+		ScriptStatusUnlock(True)
 		Dim ScriptReader As New StreamReader(ScriptFile)
 		ScriptList.Clear()
 		While ScriptReader.Peek <> -1
