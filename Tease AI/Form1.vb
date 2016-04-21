@@ -20754,12 +20754,12 @@ Skip_RandomFile:
 			'Dim ListReturn As String = ListClean(randomizer.Next(0, ListClean.Count - 1))
 
 			For x As Integer = 0 To ListClean.Count - 1
-				ListClean(x) = ListClean(x).Replace("#TagGarment", TagGarment)
-				ListClean(x) = ListClean(x).Replace("#TagUnderwear", TagUnderwear)
-				ListClean(x) = ListClean(x).Replace("#TagTattoo", TagTattoo)
-				ListClean(x) = ListClean(x).Replace("#TagSexToy", TagSexToy)
-				ListClean(x) = ListClean(x).Replace("#TagFurniture", TagFurniture)
-				ListClean(x) = ListClean(x).Replace("-", " ")
+			ListClean(x) = ListClean(x).Replace("#TagGarment", TagGarment.Replace("-", " "))
+			ListClean(x) = ListClean(x).Replace("#TagUnderwear", TagUnderwear.Replace("-", " "))
+			ListClean(x) = ListClean(x).Replace("#TagTattoo", TagTattoo.Replace("-", " "))
+			ListClean(x) = ListClean(x).Replace("#TagSexToy", TagSexToy.Replace("-", " "))
+			ListClean(x) = ListClean(x).Replace("#TagFurniture", TagFurniture.Replace("-", " "))
+			'ListClean(x) = ListClean(x).Replace("-", " ")
 			Next
 
 			Debug.Print("Filter List Complete")

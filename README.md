@@ -4,6 +4,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 52
 
+Fixed bug that caused Tease AI to delete "-" when it parsed lines, potentially messing up scripts
+
 CheckGenreImage() bugfix - URL File checks were checking to see if Directory.Exists instead of File.Exists
 
 Major Image Settings overhaul
