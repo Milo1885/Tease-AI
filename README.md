@@ -115,6 +115,14 @@ Fixed bug where Glitter Contacts did not appear correctly during Multiple Edges 
 
 Fixes added from Community Members:
 
+    Stefaf: Bugfix: Error during CensorshipsSucks, if the window is not maximized
+
+    Stefaf: BugFix: URL-File Exiting on 404 without writing the gathered data
+
+    Stefaf: BugFix: Exception on selecting ScriptTabs
+	
+	Stefaf: Various Code Cleanup
+
 	Stefaf: Bugfix StackOverflowException
 		Added functionallity to prevent Timers from triggering oneself over and over again, while the TickEventHandler is running long procedures. 
 

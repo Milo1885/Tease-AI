@@ -4697,24 +4697,30 @@ ReturnCalled:
 			MiniTauntVal += 1
 			lines = Txt2List(MiniScriptText)
 			Try
-				If lines(MiniTauntVal).Substring(0, 1) = "(" Then
-					Do
-						MiniTauntVal += 1
-					Loop Until lines(MiniTauntVal).Substring(0, 1) <> "("
+				If MiniTauntVal < lines.Count Then
+					If lines(MiniTauntVal).Substring(0, 1) = "(" Then
+						Do
+							MiniTauntVal += 1
+						Loop Until lines(MiniTauntVal).Substring(0, 1) <> "("
+					End If
 				End If
 			Catch
 			End Try
+
 		Else
 			StrokeTauntVal += 1
 			lines = Txt2List(FileText)
 			Try
-				If lines(StrokeTauntVal).Substring(0, 1) = "(" Then
-					Do
-						StrokeTauntVal += 1
-					Loop Until lines(StrokeTauntVal).Substring(0, 1) <> "("
+				If StrokeTauntVal < lines.Count - 1 Then
+					If lines(StrokeTauntVal).Substring(0, 1) = "(" Then
+						Do
+							StrokeTauntVal += 1
+						Loop Until lines(StrokeTauntVal).Substring(0, 1) <> "("
+					End If
 				End If
 			Catch
 			End Try
+
 		End If
 
 
@@ -4738,11 +4744,12 @@ ReturnCalled:
 						Return
 					End If
 				Else
-					If lines(StrokeTauntVal) = "@End" Then
-						If ShowModule = True Then ModuleEnd = True
+					If Not StrokeTauntVal > lines.Count - 1 Then
+						If lines(StrokeTauntVal) = "@End" Then
+							If ShowModule = True Then ModuleEnd = True
+						End If
 					End If
 				End If
-
 			End If
 		Catch
 		End Try
@@ -23533,6 +23540,10 @@ TryNext:
 
 
 
+
+	End Sub
+
+	Private Sub TeaseTimer_Disposed(sender As Object, e As System.EventArgs) Handles TeaseTimer.Disposed
 
 	End Sub
 
