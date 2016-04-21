@@ -1682,12 +1682,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		CaloriesConsumed = My.Settings.CaloriesConsumed
 
 		If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then
-			Dim CalReader As New StreamReader(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
-			While CalReader.Peek <> -1
-				LBCalorie.Items.Add(CalReader.ReadLine())
-			End While
-			CalReader.Close()
-			CalReader.Dispose()
+			' Read the given File, convert List(of String) to Array and add it to ListboxItems.
+			LBCalorie.Items.AddRange(Txt2List(Application.StartupPath & "\System\VitalSub\CalorieItems.txt").ToArray)
 			LBLCalorie.Text = CaloriesConsumed
 		Else
 			CaloriesConsumed = 0
@@ -3539,10 +3535,8 @@ EdgeSkip:
 						ResponseFile = foundFile
 						ResponseFile = ResponseFile.Replace("KEY", "")
 						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ResponseFile = ResponseFile.Replace(".txt", "NOT.txt")
-						Dim AwarenessReader As New StreamReader(ResponseFile)
-						DebugAwarenessLine = AwarenessReader.ReadLine()
-						AwarenessReader.Close()
-						AwarenessReader.Dispose()
+						' Read the first line of the given file.
+						DebugAwarenessLine = TxtReadLine(ResponseFile)
 						GoTo FoundResponse
 						Exit For
 					End If
@@ -3555,13 +3549,8 @@ EdgeSkip:
 
 		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
-
-			Dim SplitReader As New StreamReader(foundFile)
-			Dim SplitText As String = SplitReader.ReadLine()
-
-			SplitReader.Close()
-			SplitReader.Dispose()
-
+			' Read the first line of the given file.
+			Dim SplitText As String = TxtReadLine(foundFile)
 
 			Dim SplitResponse As String() = SplitText.Split(New Char() {"]"c})
 			SplitResponse(0) = SplitResponse(0).Replace("[", "")
@@ -3610,10 +3599,8 @@ DebugAwarenessStep2:
 						ResponseFile = foundFile
 						ResponseFile = ResponseFile.Replace("KEY", "")
 						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ResponseFile = ResponseFile.Replace(".txt", "NOT.txt")
-						Dim AwarenessReader As New StreamReader(ResponseFile)
-						DebugAwarenessLine = AwarenessReader.ReadLine()
-						AwarenessReader.Close()
-						AwarenessReader.Dispose()
+						' Read the first line of the given file.
+						DebugAwarenessLine = TxtReadLine(ResponseFile)
 						GoTo FoundResponse
 						Exit For
 					End If
@@ -3637,12 +3624,8 @@ DebugAwarenessStep2:
 
 				Application.DoEvents()
 
-				Dim SplitReader As New StreamReader(foundFile)
-				Dim SplitText As String = SplitReader.ReadLine()
-
-				SplitReader.Close()
-				SplitReader.Dispose()
-
+				' Read the first line of the given file.
+				Dim SplitText As String = TxtReadLine(foundFile)
 
 				Dim SplitResponse As String() = SplitText.Split(New Char() {"]"c})
 				SplitResponse(0) = SplitResponse(0).Replace("[", "")
@@ -3674,13 +3657,8 @@ DebugAwarenessStep2:
 
 		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
-
-			Dim SplitReader As New StreamReader(foundFile)
-			Dim SplitText As String = SplitReader.ReadLine()
-
-			SplitReader.Close()
-			SplitReader.Dispose()
-
+			' Read the first line of the given file.
+			Dim SplitText As String = TxtReadLine(foundFile)
 
 			Dim SplitResponse As String() = SplitText.Split(New Char() {"]"c})
 			SplitResponse(0) = SplitResponse(0).Replace("[", "")
@@ -3803,7 +3781,7 @@ FoundResponse:
 
 	Public Function ResponseClean(ByVal CleanResponse As String) As String
 
-
+		'TODO: Add Errorhandling.
 		Dim DomResponse As New StreamReader(ResponseFile)
 		Dim DRLines As New List(Of String)
 		Dim DRLineTotal As Integer
@@ -4162,15 +4140,9 @@ NullSkip:
 
 		Dim AcceptLine As Integer
 
-		Dim ioFile As New StreamReader(dir)
-		Dim lines As New List(Of String)
+		' Read all lines of File
+		Dim lines As List(Of String) = Txt2List(dir)
 		Dim line As Integer
-		While ioFile.Peek <> -1
-			lines.Add(ioFile.ReadLine())
-		End While
-
-		ioFile.Close()
-		ioFile.Dispose()
 
 		If MiniScript = True Then
 			line = MiniTauntVal
@@ -4461,12 +4433,9 @@ AcceptAnswer:
 			End If
 
 			If File.Exists(GotoText) Then
-				Dim ioFile2 As New StreamReader(GotoText)
-				Dim gotolines As New List(Of String)
+				' Read all lines of File
+				Dim gotolines As List(Of String) = Txt2List(GotoText)
 				Dim gotoline As Integer
-				While ioFile2.Peek <> -1
-					gotolines.Add(ioFile2.ReadLine())
-				End While
 
 				If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
 				If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
@@ -4491,9 +4460,6 @@ AcceptAnswer:
 
 
 				'Debug.Print("GetGotoChat() Final gotolines(gotoline) = " & (gotolines(gotoline)))
-
-				ioFile2.Close()
-				ioFile2.Dispose()
 
 				'If ShowThought = True Or ShowEdgeThought = True Then
 				StrokeTauntVal = gotoline
@@ -4571,22 +4537,16 @@ AcceptAnswer:
 	End Sub
 
 	Public Sub CBTBalls()
-
-		Dim BallReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTBalls_First.txt")
+		Dim File2Read As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTBalls_First.txt"
 
 		If CBTBallsFirst = False Then
-			BallReader = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTBalls.txt")
+			File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTBalls.txt"
 		Else
 			CBTBallsCount += 1
 		End If
 
-		Dim BallList As New List(Of String)
-
-		While BallReader.Peek <> -1
-			BallList.Add(BallReader.ReadLine())
-		End While
-		BallReader.Close()
-		BallReader.Dispose()
+		' Read all Lines of the given File.
+		Dim BallList As List(Of String) = Txt2List(File2Read)
 
 		Try
 			BallList = FilterList(BallList)
@@ -4603,23 +4563,16 @@ AcceptAnswer:
 
 	Public Sub CBTCock()
 
-		Dim CockReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTCock_First.txt")
+		Dim File2Read As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTCock_First.txt"
 
 		If CBTCockFirst = False Then
-			CockReader = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTCock.txt")
+			File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTCock.txt"
 		Else
-
 			CBTCockCount += 1
 		End If
 
-		Dim CockList As New List(Of String)
-		While CockReader.Peek <> -1
-			CockList.Add(CockReader.ReadLine())
-		End While
-		CockReader.Close()
-		CockReader.Dispose()
-
-
+		' Read all Lines of the given File.
+		Dim CockList As List(Of String) = Txt2List(File2Read)
 
 		Try
 			CockList = FilterList(CockList)
@@ -4636,37 +4589,29 @@ AcceptAnswer:
 
 	Public Sub CBTBoth()
 
-		Dim BallReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTBalls_First.txt")
+		Dim File2Read As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTBalls_First.txt"
 
 		If CBTBothFirst = False Then
-			BallReader = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTBalls.txt")
+			File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTBalls.txt"
 		Else
 			CBTBallsCount += 1
 			CBTCockCount += 1
 		End If
 
-		Dim BothList As New List(Of String)
+		' Read all Lines of the given File.
+		Dim BothList As List(Of String) = Txt2List(File2Read)
 
-		While BallReader.Peek <> -1
-			BothList.Add(BallReader.ReadLine())
-		End While
-		BallReader.Close()
-		BallReader.Dispose()
-
-		Dim CockReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTCock_First.txt")
+		File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTCock_First.txt"
 
 		If CBTBothFirst = False Then
-			CockReader = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTCock.txt")
+			File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBTCock.txt"
 		Else
 			CBTBallsCount += 1
 			CBTCockCount += 1
 		End If
 
-		While CockReader.Peek <> -1
-			BothList.Add(CockReader.ReadLine())
-		End While
-		CockReader.Close()
-		CockReader.Dispose()
+		' Read all Lines of the given file and append to List.
+		BothList.AddRange(Txt2List(File2Read))
 
 		Try
 			BothList = FilterList(BothList)
@@ -4683,22 +4628,14 @@ AcceptAnswer:
 
 	Public Sub RunCustomTask()
 
-
-
-		Dim CustomReader As New StreamReader(CustomTaskTextFirst)
+		Dim File2Read As String = CustomTaskTextFirst
 
 		If CustomTaskFirst = False Then
-			CustomReader = New StreamReader(CustomTaskText)
+			File2Read = CustomTaskText
 		End If
 
-		Dim CustomList As New List(Of String)
-		While CustomReader.Peek <> -1
-			CustomList.Add(CustomReader.ReadLine())
-		End While
-		CustomReader.Close()
-		CustomReader.Dispose()
-
-
+		' Read all Lines of the given File.
+		Dim CustomList As List(Of String) = Txt2List(File2Read)
 
 		Try
 			CustomList = FilterList(CustomList)
@@ -4708,8 +4645,6 @@ AcceptAnswer:
 		End Try
 
 		CustomTaskFirst = False
-
-
 
 		TypingDelayGeneric()
 
@@ -4915,13 +4850,8 @@ ReturnCalled:
 		If File.Exists(CheckText) Then
 			'Debug.Print(StrokeTauntVal)
 			'Dim ioFile As New StreamReader(HandleScriptText)
-			Dim ioFile As New StreamReader(CheckText)
-			Dim lines As New List(Of String)
+			Dim lines As List(Of String) = Txt2List(CheckText)
 			Dim line As Integer
-
-			While ioFile.Peek <> -1
-				lines.Add(ioFile.ReadLine())
-			End While
 
 			'line = ScriptLineVal
 
@@ -5184,8 +5114,6 @@ ReturnCalled:
 			If lines(line).Contains("@Info") Then InvalidFilter = True
 
 			If InvalidFilter = True Then
-				ioFile.Close()
-				ioFile.Dispose()
 				InvalidFilter = False
 				RunFileText()
 				Return
@@ -5480,10 +5408,6 @@ ReturnCalled:
 
 
 
-			ioFile.Close()
-			ioFile.Dispose()
-
-
 			' If DomTask.Contains("@Module") Then
 			'ShowModule = True
 			'ScriptCount = 0
@@ -5680,18 +5604,11 @@ SkipGotoSearch:
 		End If
 
 
-
+		'TODO: Add Errorhandling.
 		If File.Exists(GotoText) Then
-			Dim ioFile2 As New StreamReader(GotoText)
-			Dim gotolines As New List(Of String)
-			Dim CountGotoLines As Integer
-
-			CountGotoLines = 0
-
-			While ioFile2.Peek <> -1
-				gotolines.Add(ioFile2.ReadLine())
-				CountGotoLines += 1
-			End While
+			' Read all lines of the given file.
+			Dim gotolines As List(Of String) = Txt2List(GotoText)
+			Dim CountGotoLines As Integer = gotolines.Count
 
 			If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
 			If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
@@ -5726,9 +5643,6 @@ SkipGotoSearch:
 			And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
 
 
-
-			ioFile2.Close()
-			ioFile2.Dispose()
 
 
 			' If ShowThought = True Or ShowEdgeThought = True Then
@@ -8326,16 +8240,12 @@ TryNextWithTease:
 
 			If TempScriptCount = 0 Then 'And LinSelected = False Then
 
-				TauntTextTotal = 0
-
-				Dim ioFile2 As New StreamReader(TauntText)
+				' Uneseccary for txt2List creates a new List(of ) instance.
 				TauntLines.Clear()
-				While ioFile2.Peek <> -1
-					TauntLines.Add(ioFile2.ReadLine())
-					TauntTextTotal += 1
-				End While
-				ioFile2.Close()
-				ioFile2.Dispose()
+				' Read all lines of given File.
+				TauntLines = Txt2List(TauntText)
+				TauntTextTotal = TauntLines.Count
+
 				TauntTextTotal -= 1
 
 				StrokeFilter = True
@@ -8463,12 +8373,8 @@ TryNextWithTease:
 		YesOrNo = True
 		Dim CBTCount As Integer
 
-		Dim ioFile3 As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBT.txt")
-		Dim lines As New List(Of String)
-		While ioFile3.Peek <> -1
-			lines.Add(ioFile3.ReadLine())
-			CBTCount += 1
-		End While
+		Dim lines As List(Of String) = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBT.txt")
+		CBTCount += lines.Count
 
 		CBTCount = randomizer.Next(0, CBTCount)
 
@@ -8478,11 +8384,6 @@ TryNextWithTease:
 		DomTask = DomTask.Replace("#CBTAmount", CBTAmount)
 
 		TypingDelayGeneric()
-
-
-		ioFile3.Close()
-		ioFile3.Dispose()
-
 
 
 	End Sub
@@ -8919,11 +8820,8 @@ CensorConstant:
 
 			End If
 
-			Dim ioFile As New StreamReader(CensorVideo)
-			Dim lines As New List(Of String)
-			While ioFile.Peek <> -1
-				lines.Add(ioFile.ReadLine())
-			End While
+			' Read all lines of the given file.
+			Dim lines As List(Of String) = Txt2List(CensorVideo)
 
 			Dim CensorLine As Integer
 
@@ -9023,18 +8921,8 @@ CensorConstant:
 		Debug.Print("STatusText = " & StatusText)
 		Debug.Print("Clear stage 1")
 
-		Dim ioFile As New StreamReader(StatusText)
-
-		Dim lines As New List(Of String)
-		Dim TempUpdates As Integer
-
-		While ioFile.Peek <> -1
-			TempUpdates += 1
-			lines.Add(ioFile.ReadLine())
-		End While
-
-		ioFile.Close()
-		ioFile.Dispose()
+		' Read all lines of the given File.
+		Dim lines As List(Of String) = Txt2List(StatusText)
 
 
 		For i As Integer = lines.Count - 1 To 0 Step -1
@@ -10363,17 +10251,10 @@ StatusUpdateEnd:
 		Catch
 		End Try
 
+		'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
 		If File.Exists(MainPictureImage & "\ImageTags.txt") Then
-			Dim TagReader As New StreamReader(MainPictureImage & "\ImageTags.txt")
-			Dim TagList As New List(Of String)
-			While TagReader.Peek <> -1
-				TagList.Add(TagReader.ReadLine())
-			End While
-
-			TagReader.Close()
-			TagReader.Dispose()
-
-
+			' Read all lines of the given file.
+			Dim TagList As List(Of String) = Txt2List(MainPictureImage & "\ImageTags.txt")
 
 			'If SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And domVLC.Visible = False Then
 			If SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And DomWMP.Visible = False Then
@@ -11071,12 +10952,11 @@ RinseLatherRepeat:
 
 				Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName
 
-				If File.Exists(VarCheck) Then
 
-					Dim VarReader As New StreamReader(VarCheck)
-					Val1 = Val(VarReader.ReadLine())
-					VarReader.Close()
-					VarReader.Dispose()
+				'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
+				If File.Exists(VarCheck) Then
+					' Read first line of the given file.
+					Val1 = CInt(TxtReadLine(VarCheck))
 
 					SCGotVarSplit(0) = ""
 
@@ -11145,11 +11025,9 @@ RinseLatherRepeat:
 					'@ChangeVar[TB_EdgeHoldingOwed   ]    =[TB_EdgeHoldingOwed    ]     -[1       ]
 
 					If IsNumeric(ChangeVal1) = False Then
+						'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
 						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1) Then
-							Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1)
-							Val1 = Val(VarReader.ReadLine())
-							VarReader.Close()
-							VarReader.Dispose()
+							Val1 = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1)
 						Else
 							Val1 = 0
 						End If
@@ -11158,11 +11036,9 @@ RinseLatherRepeat:
 					End If
 
 					If IsNumeric(ChangeVal2) = False Then
+						'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
 						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2) Then
-							Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2)
-							Val2 = Val(VarReader.ReadLine())
-							VarReader.Close()
-							VarReader.Dispose()
+							Val2 = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2)
 						Else
 							Val2 = 0
 						End If
@@ -11243,11 +11119,10 @@ RinseLatherRepeat:
 
 					Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVarSplit(0)
 					'Debug.Print("VarCheck = " & VarCheck)
+					'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
 					If File.Exists(VarCheck) Then
 						'Debug.Print("VarCheck Exists")
-						Dim VarReader As New StreamReader(VarCheck)
-
-						Dim StrCheck As String = VarReader.ReadLine()
+						Dim StrCheck As String = TxtReadLine(VarCheck)
 
 						Debug.Print("StrChec = " & StrCheck)
 
@@ -11256,9 +11131,6 @@ RinseLatherRepeat:
 						Else
 							Str1 = StrCheck
 						End If
-
-						VarReader.Close()
-						VarReader.Dispose()
 					End If
 
 				End If
@@ -11321,21 +11193,17 @@ RinseLatherRepeat:
 
 					Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVarSplit(0)
 					'Debug.Print("VarCheck = " & VarCheck)
+					'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
 					If File.Exists(VarCheck) Then
 						'Debug.Print("VarCheck Exists")
-						Dim VarReader As New StreamReader(VarCheck)
-
-						Dim StrCheck As String = VarReader.ReadLine()
+						' Read the first line of the given file.
+						Dim StrCheck As String = TxtReadLine(VarCheck)
 						Debug.Print("StrChec = " & StrCheck)
 						If IsNumeric(StrCheck) = True Then
 							Val2 = Val(StrCheck)
 						Else
 							Str2 = StrCheck
 						End If
-
-
-						VarReader.Close()
-						VarReader.Dispose()
 					End If
 
 				End If
@@ -12834,13 +12702,10 @@ OrgasmDecided:
 
 			'Debug.Print("ShowTaggedImage StringClean ^^^^^^^^^^^^^^^^^^^^^^ = " & StringClean)
 
+			'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
 			If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
-				Dim LocalReader As New StreamReader(Application.StartupPath & "\Images\System\LocalImageTags.txt")
-				While LocalReader.Peek <> -1
-					LocalTagImageList.Add(LocalReader.ReadLine())
-				End While
-				LocalReader.Close()
-				LocalReader.Dispose()
+				' Read all lines of the given file.
+				LocalTagImageList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
 
 				For i As Integer = LocalTagImageList.Count - 1 To 0 Step -1
 					Dim LocalCheck As String() = Split(LocalTagImageList(i))
@@ -13121,14 +12986,8 @@ OrgasmDecided:
 		End If
 
 		If StringClean.Contains("@VitalSubAssignment") Then
-			Dim AssignReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\VitalSub\Assignments.txt")
-			Dim AssignList As New List(Of String)
-			While AssignReader.Peek <> -1
-				AssignList.Add(AssignReader.ReadLine())
-			End While
-			AssignReader.Close()
-			AssignReader.Dispose()
-
+			' Read all lines of the given file.
+			Dim AssignList As List(Of String) = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\VitalSub\Assignments.txt")
 
 			Dim TempAssign As String
 
@@ -15638,11 +15497,9 @@ VTSkip:
 		Dim Val2 As Integer
 
 		If IsNumeric(ChangeVal1) = False Then
+			'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1) Then
-				Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1)
-				Val1 = Val(VarReader.ReadLine())
-				VarReader.Close()
-				VarReader.Dispose()
+				Val1 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1))
 			Else
 				Val1 = 0
 			End If
@@ -15651,11 +15508,9 @@ VTSkip:
 		End If
 
 		If IsNumeric(ChangeVal2) = False Then
+			'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2) Then
-				Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2)
-				Val2 = Val(VarReader.ReadLine())
-				VarReader.Close()
-				VarReader.Dispose()
+				Val2 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2))
 			Else
 				Val2 = 0
 			End If
@@ -15683,12 +15538,9 @@ VTSkip:
 	Public Function GetDate(ByVal VarName As String) As Date
 
 		Dim VarGet As String
-
+		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName)
-			VarGet = CDate(VarReader.ReadLine())
-			VarReader.Close()
-			VarReader.Dispose()
+			VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
 		Else
 			VarGet = FormatDateTime(Now, DateFormat.GeneralDate)
 		End If
@@ -15701,12 +15553,9 @@ VTSkip:
 	Public Function GetTime(ByVal VarName As String) As Date
 
 		Dim VarGet As String
-
+		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName)
-			VarGet = CDate(VarReader.ReadLine())
-			VarReader.Close()
-			VarReader.Dispose()
+			VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
 		Else
 			VarGet = FormatDateTime(Now, DateFormat.LongTime)
 		End If
@@ -15720,18 +15569,13 @@ VTSkip:
 	Public Function GetVariable(ByVal VarName As String) As String
 
 		Dim VarGet As String
-
+		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			Dim VarReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName)
-
 			'### DEBUG
 
 			' VarGet = Val(VarReader.ReadLine())
 
-			VarGet = VarReader.ReadLine()
-
-			VarReader.Close()
-			VarReader.Dispose()
+			VarGet = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName)
 		Else
 			VarGet = 0
 		End If
@@ -15776,11 +15620,10 @@ VTSkip:
 
 					Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVarSplit(0)
 					'Debug.Print("VarCheck = " & VarCheck)
+					'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
 					If File.Exists(VarCheck) Then
 						'Debug.Print("VarCheck Exists")
-						Dim VarReader As New StreamReader(VarCheck)
-
-						Dim StrCheck As String = VarReader.ReadLine()
+						Dim StrCheck As String = TxtReadLine(VarCheck)
 
 						Debug.Print("StrChec = " & StrCheck)
 
@@ -15790,8 +15633,7 @@ VTSkip:
 							Str1 = StrCheck
 						End If
 
-						VarReader.Close()
-						VarReader.Dispose()
+
 					End If
 
 				End If
@@ -15851,22 +15693,15 @@ VTSkip:
 				Else
 
 					Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVarSplit(0)
-
+					'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
 					If File.Exists(VarCheck) Then
-
-						Dim VarReader As New StreamReader(VarCheck)
-
-						Dim StrCheck As String = VarReader.ReadLine()
+						Dim StrCheck As String = TxtReadLine(VarCheck)
 						Debug.Print("StrChec = " & StrCheck)
 						If IsNumeric(StrCheck) = True Then
 							Val2 = Val(StrCheck)
 						Else
 							Str2 = StrCheck
 						End If
-
-
-						VarReader.Close()
-						VarReader.Dispose()
 					End If
 
 				End If
@@ -16451,16 +16286,10 @@ Skip_RandomFile:
 		Catch
 		End Try
 
+		'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
 		If File.Exists(MainPictureImage & "\ImageTags.txt") Then
-			Dim TagReader As New StreamReader(MainPictureImage & "\ImageTags.txt")
-			Dim TagList As New List(Of String)
-			While TagReader.Peek <> -1
-				TagList.Add(TagReader.ReadLine())
-			End While
-
-			TagReader.Close()
-			TagReader.Dispose()
-
+			' Read all lines of the given file.
+			Dim TagList As List(Of String) = Txt2List(MainPictureImage & "\ImageTags.txt")
 
 
 			'If SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And domVLC.Visible = False Then
@@ -18910,49 +18739,42 @@ Skip_RandomFile:
 		LocalTagImageList.Clear()
 
 
-
+		'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
 		If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
-				Dim LocalReader As New StreamReader(Application.StartupPath & "\Images\System\LocalImageTags.txt")
-				While LocalReader.Peek <> -1
-					LocalTagImageList.Add(LocalReader.ReadLine())
-				End While
-				LocalReader.Close()
-				LocalReader.Dispose()
-
-
-
+			' Read all lines of given file.
+			LocalTagImageList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
 
 			'If Not supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
 
 
 			For i As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-					Dim LocalCheck As String() = Split(LocalTagImageList(i))
-					Dim LocalString As String = LocalCheck(0)
-					Debug.Print("LocalString = " & LocalString)
-					If Not LCase(LocalString).Contains(".jpg") And Not LCase(LocalString).Contains(".jpeg") And Not LCase(LocalString).Contains(".bmp") And
-					 Not LCase(LocalString).Contains(".png") And Not LCase(LocalString).Contains(".gif") Then
-						Debug.Print("LocalTag Check Doesn't contain extension")
-						For x As Integer = 1 To LocalCheck.Count - 1
-							LocalString = LocalString & " " & LocalCheck(x)
-							If LCase(LocalString).Contains(".jpg") Or LCase(LocalString).Contains(".jpeg") Or LCase(LocalString).Contains(".bmp") Or
-							LCase(LocalString).Contains(".png") Or LCase(LocalString).Contains(".gif") Then Exit For
-						Next
-					End If
-					Debug.Print("Local Tag check - " & LocalString)
-					If Not File.Exists(LocalString) Then LocalTagImageList.Remove(LocalTagImageList(i))
-				Next
+				Dim LocalCheck As String() = Split(LocalTagImageList(i))
+				Dim LocalString As String = LocalCheck(0)
+				Debug.Print("LocalString = " & LocalString)
+				If Not LCase(LocalString).Contains(".jpg") And Not LCase(LocalString).Contains(".jpeg") And Not LCase(LocalString).Contains(".bmp") And
+				 Not LCase(LocalString).Contains(".png") And Not LCase(LocalString).Contains(".gif") Then
+					Debug.Print("LocalTag Check Doesn't contain extension")
+					For x As Integer = 1 To LocalCheck.Count - 1
+						LocalString = LocalString & " " & LocalCheck(x)
+						If LCase(LocalString).Contains(".jpg") Or LCase(LocalString).Contains(".jpeg") Or LCase(LocalString).Contains(".bmp") Or
+						LCase(LocalString).Contains(".png") Or LCase(LocalString).Contains(".gif") Then Exit For
+					Next
+				End If
+				Debug.Print("Local Tag check - " & LocalString)
+				If Not File.Exists(LocalString) Then LocalTagImageList.Remove(LocalTagImageList(i))
+			Next
 
-				'Do
-				'ListCountTotal += 1
-				'Debug.Print("LocalTagImageList(i) = &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" & LocalTagImageList(ListCountTotal))
-				'If LocalTagImageList(ListCountTotal) = "" Or LocalTagImageList(ListCountTotal) Is Nothing Then
-				'LocalTagImageList.Remove(LocalTagImageList(ListCountTotal))
-				'ListCount -= 1
-				'End If
-				'Loop Until ListCountTotal = ListCount
-			End If
+			'Do
+			'ListCountTotal += 1
+			'Debug.Print("LocalTagImageList(i) = &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" & LocalTagImageList(ListCountTotal))
+			'If LocalTagImageList(ListCountTotal) = "" Or LocalTagImageList(ListCountTotal) Is Nothing Then
+			'LocalTagImageList.Remove(LocalTagImageList(ListCountTotal))
+			'ListCount -= 1
+			'End If
+			'Loop Until ListCountTotal = ListCount
+		End If
 
-			For i As Integer = 0 To LocalTagImageList.Count - 1
+		For i As Integer = 0 To LocalTagImageList.Count - 1
 				'Debug.Print(i & ": LocalTagImageList(i) = " & LocalTagImageList(i))
 			Next
 
@@ -20985,36 +20807,35 @@ FinishTNA:
 				'Return
 				'End If
 
-				Dim ioFileA As New StreamReader(AvoidTheEdgeVideo)
-				Dim linesA As New List(Of String)
-				Dim TempAvoidTheEdgeLine As Integer
+				Using ioFileA As New StreamReader(AvoidTheEdgeVideo)
+					Dim linesA As New List(Of String)
+					Dim TempAvoidTheEdgeLine As Integer
 
-				TempAvoidTheEdgeLine = -1
-				While ioFileA.Peek <> -1
-					TempAvoidTheEdgeLine += 1
-					linesA.Add(ioFileA.ReadLine())
-					If VideoType = "Hardcore" And linesA(TempAvoidTheEdgeLine) = "[HardcoreStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Hardcore" And linesA(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Softcore" And linesA(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Softcore" And linesA(TempAvoidTheEdgeLine) = "[LesbianStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Lesbian" And linesA(TempAvoidTheEdgeLine) = "[LesbianStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Lesbian" And linesA(TempAvoidTheEdgeLine) = "[BlowjobStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Blowjob" And linesA(TempAvoidTheEdgeLine) = "[BlowjobStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Blowjob" And linesA(TempAvoidTheEdgeLine) = "[FemdomStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Femdom" And linesA(TempAvoidTheEdgeLine) = "[FemdomStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Femdom" And linesA(TempAvoidTheEdgeLine) = "[FemsubStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Femsub" And linesA(TempAvoidTheEdgeLine) = "[FemsubStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Femsub" And linesA(TempAvoidTheEdgeLine) = "[JOIStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "JOI" And linesA(TempAvoidTheEdgeLine) = "[JOIStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "JOI" And linesA(TempAvoidTheEdgeLine) = "[CHStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "CH" And linesA(TempAvoidTheEdgeLine) = "[CHStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "CH" And linesA(TempAvoidTheEdgeLine) = "[GeneralStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "General" And linesA(TempAvoidTheEdgeLine) = "[GeneralStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "General" And linesA(TempAvoidTheEdgeLine) = "[StrokingEnd]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-				End While
+					TempAvoidTheEdgeLine = -1
+					While ioFileA.Peek <> -1
+						TempAvoidTheEdgeLine += 1
+						linesA.Add(ioFileA.ReadLine())
+						If VideoType = "Hardcore" And linesA(TempAvoidTheEdgeLine) = "[HardcoreStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Hardcore" And linesA(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Softcore" And linesA(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Softcore" And linesA(TempAvoidTheEdgeLine) = "[LesbianStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Lesbian" And linesA(TempAvoidTheEdgeLine) = "[LesbianStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Lesbian" And linesA(TempAvoidTheEdgeLine) = "[BlowjobStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Blowjob" And linesA(TempAvoidTheEdgeLine) = "[BlowjobStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Blowjob" And linesA(TempAvoidTheEdgeLine) = "[FemdomStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Femdom" And linesA(TempAvoidTheEdgeLine) = "[FemdomStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Femdom" And linesA(TempAvoidTheEdgeLine) = "[FemsubStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Femsub" And linesA(TempAvoidTheEdgeLine) = "[FemsubStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Femsub" And linesA(TempAvoidTheEdgeLine) = "[JOIStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "JOI" And linesA(TempAvoidTheEdgeLine) = "[JOIStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "JOI" And linesA(TempAvoidTheEdgeLine) = "[CHStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "CH" And linesA(TempAvoidTheEdgeLine) = "[CHStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "CH" And linesA(TempAvoidTheEdgeLine) = "[GeneralStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "General" And linesA(TempAvoidTheEdgeLine) = "[GeneralStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "General" And linesA(TempAvoidTheEdgeLine) = "[StrokingEnd]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+					End While
 
-				ioFileA.Close()
-				ioFileA.Dispose()
+				End Using
 
 			Else
 
@@ -21025,36 +20846,35 @@ FinishTNA:
 
 				AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
 
-				Dim ioFileB As New StreamReader(AvoidTheEdgeVideo)
-				Dim linesB As New List(Of String)
-				Dim TempAvoidTheEdgeLine As Integer
+				Using ioFileB As New StreamReader(AvoidTheEdgeVideo)
+					Dim linesB As New List(Of String)
+					Dim TempAvoidTheEdgeLine As Integer
 
-				TempAvoidTheEdgeLine = -1
-				While ioFileB.Peek <> -1
-					TempAvoidTheEdgeLine += 1
-					linesB.Add(ioFileB.ReadLine())
-					If VideoType = "Hardcore" And linesB(TempAvoidTheEdgeLine) = "[HardcoreStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Hardcore" And linesB(TempAvoidTheEdgeLine) = "[HardcoreStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Softcore" And linesB(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Softcore" And linesB(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Lesbian" And linesB(TempAvoidTheEdgeLine) = "[LesbianStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Lesbian" And linesB(TempAvoidTheEdgeLine) = "[LesbianStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Blowjob" And linesB(TempAvoidTheEdgeLine) = "[BlowjobStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Blowjob" And linesB(TempAvoidTheEdgeLine) = "[BlowjobStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Femdom" And linesB(TempAvoidTheEdgeLine) = "[FemdomStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Femdom" And linesB(TempAvoidTheEdgeLine) = "[FemdomStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "Femsub" And linesB(TempAvoidTheEdgeLine) = "[FemsubStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "Femsub" And linesB(TempAvoidTheEdgeLine) = "[FemsubStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "JOI" And linesB(TempAvoidTheEdgeLine) = "[JOIStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "JOI" And linesB(TempAvoidTheEdgeLine) = "[JOIStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "CH" And linesB(TempAvoidTheEdgeLine) = "[CHStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "CH" And linesB(TempAvoidTheEdgeLine) = "[CHStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					If VideoType = "General" And linesB(TempAvoidTheEdgeLine) = "[GeneralStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-					If VideoType = "General" And linesB(TempAvoidTheEdgeLine) = "[GeneralStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-				End While
+					TempAvoidTheEdgeLine = -1
+					While ioFileB.Peek <> -1
+						TempAvoidTheEdgeLine += 1
+						linesB.Add(ioFileB.ReadLine())
+						If VideoType = "Hardcore" And linesB(TempAvoidTheEdgeLine) = "[HardcoreStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Hardcore" And linesB(TempAvoidTheEdgeLine) = "[HardcoreStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Softcore" And linesB(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Softcore" And linesB(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Lesbian" And linesB(TempAvoidTheEdgeLine) = "[LesbianStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Lesbian" And linesB(TempAvoidTheEdgeLine) = "[LesbianStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Blowjob" And linesB(TempAvoidTheEdgeLine) = "[BlowjobStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Blowjob" And linesB(TempAvoidTheEdgeLine) = "[BlowjobStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Femdom" And linesB(TempAvoidTheEdgeLine) = "[FemdomStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Femdom" And linesB(TempAvoidTheEdgeLine) = "[FemdomStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "Femsub" And linesB(TempAvoidTheEdgeLine) = "[FemsubStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "Femsub" And linesB(TempAvoidTheEdgeLine) = "[FemsubStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "JOI" And linesB(TempAvoidTheEdgeLine) = "[JOIStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "JOI" And linesB(TempAvoidTheEdgeLine) = "[JOIStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "CH" And linesB(TempAvoidTheEdgeLine) = "[CHStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "CH" And linesB(TempAvoidTheEdgeLine) = "[CHStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+						If VideoType = "General" And linesB(TempAvoidTheEdgeLine) = "[GeneralStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+						If VideoType = "General" And linesB(TempAvoidTheEdgeLine) = "[GeneralStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+					End While
 
-				ioFileB.Close()
-				ioFileB.Dispose()
+				End Using
 
 			End If
 
@@ -21176,12 +20996,8 @@ AlreadySeen:
 
 		Debug.Print(ImageUrlFilePath)
 
-		Dim GetBlogImage As New StreamReader(ImageUrlFilePath)
-		Dim linesGB As New List(Of String)
-
-		While GetBlogImage.Peek <> -1
-			linesGB.Add(GetBlogImage.ReadLine())
-		End While
+		' Read all lines of given file.
+		Dim linesGB As List(Of String) = Txt2List(ImageUrlFilePath)
 
 		Do
 			ImageUrlFileIndex = randomizer.Next(0, linesGB.Count)
@@ -21189,8 +21005,6 @@ AlreadySeen:
 		Loop Until FoundString <> ""
 
 		Debug.Print("FoundString = " & FoundString)
-		GetBlogImage.Close()
-		GetBlogImage.Dispose()
 
 		'  If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
 		'Dim ImageRepeat() As String = Filter(System.IO.File.ReadAllLines(Application.StartupPath & "\Images\System\DislikedImageURLs.txt"), FoundString)
@@ -21664,11 +21478,9 @@ NoPlaylistLinkFile:
 
 		Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & GetVar
 		Dim VarValue As String
+		'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
 		If File.Exists(VarCheck) Then
-			Dim VarReader As New StreamReader(VarCheck)
-			VarValue = VarReader.ReadLine()
-			VarReader.Close()
-			VarReader.Dispose()
+			VarValue = TxtReadLine(VarCheck)
 		Else
 			VarValue = "0"
 		End If
@@ -21911,26 +21723,16 @@ NoPlaylistEndFile:
 
 		If EdgeTauntInt < 1 Then
 
-			Dim EdgeTaunt As StreamReader
-
+			Dim File2Read As String = ""
 
 			If GlitterTease = False Then
-				EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\Edge.txt")
+				File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\Edge.txt"
 			Else
-				EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\GroupEdge.txt")
+				File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\GroupEdge.txt"
 			End If
 
-
-			Dim ETLines As New List(Of String)
-
-			While EdgeTaunt.Peek <> -1
-				ETLines.Add(EdgeTaunt.ReadLine())
-			End While
-
-			EdgeTaunt.Close()
-			EdgeTaunt.Dispose()
-
-
+			'Read all lines of the given file.
+			Dim ETLines As List(Of String) = Txt2List(File2Read)
 
 			Try
 				ETLines = FilterList(ETLines)
@@ -22289,22 +22091,16 @@ NoRepeatOFiles:
 
 		If EdgeTauntInt < 1 Then
 
-			Dim EdgeTaunt As StreamReader
+			Dim File2Read As String = ""
 
 			If GlitterTease = False Then
-				EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\HoldTheEdge\HoldTheEdge.txt")
+				File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\HoldTheEdge\HoldTheEdge.txt"
 			Else
-				EdgeTaunt = New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\HoldTheEdge\GroupHoldTheEdge.txt")
+				File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\HoldTheEdge\GroupHoldTheEdge.txt"
 			End If
 
+			' Read all lines of given file.
 			Dim ETLines As New List(Of String)
-
-			While EdgeTaunt.Peek <> -1
-				ETLines.Add(EdgeTaunt.ReadLine())
-			End While
-
-			EdgeTaunt.Close()
-			EdgeTaunt.Dispose()
 
 			Try
 				ETLines = FilterList(ETLines)
@@ -22336,16 +22132,9 @@ NoRepeatOFiles:
 		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Greeting.txt"
 		TaskText = ""
 
-		Dim TaskRead As New StreamReader(TaskFile)
-		Dim TaskLines As New List(Of String)
+		'Read all lines of the given file.
+		Dim TaskLines As List(Of String) = Txt2List(TaskFile)
 		Dim TaskEntry As String
-
-		While TaskRead.Peek <> -1
-			TaskLines.Add(TaskRead.ReadLine())
-		End While
-
-		TaskRead.Close()
-		TaskRead.Dispose()
 
 		Try
 			TaskLines = FilterList(TaskLines)
@@ -22362,15 +22151,8 @@ NoRepeatOFiles:
 
 		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Intro.txt"
 
-		TaskRead = New StreamReader(TaskFile)
-		TaskLines.Clear()
-
-		While TaskRead.Peek <> -1
-			TaskLines.Add(TaskRead.ReadLine())
-		End While
-
-		TaskRead.Close()
-		TaskRead.Dispose()
+		'Read all lines of the given file.
+		TaskLines = Txt2List(TaskFile)
 
 		Try
 			TaskLines = FilterList(TaskLines)
@@ -22389,15 +22171,10 @@ NoRepeatOFiles:
 
 		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_1.txt"
 
-		TaskRead = New StreamReader(TaskFile)
 		TaskLines.Clear()
 
-		While TaskRead.Peek <> -1
-			TaskLines.Add(TaskRead.ReadLine())
-		End While
-
-		TaskRead.Close()
-		TaskRead.Dispose()
+		'Read all lines of the given file.
+		TaskLines = Txt2List(TaskFile)
 
 		Try
 			TaskLines = FilterList(TaskLines)
@@ -22414,16 +22191,10 @@ NoRepeatOFiles:
 
 		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_1-2.txt"
 
-		TaskRead = New StreamReader(TaskFile)
 		TaskLines.Clear()
 
-
-		While TaskRead.Peek <> -1
-			TaskLines.Add(TaskRead.ReadLine())
-		End While
-
-		TaskRead.Close()
-		TaskRead.Dispose()
+		'Read all lines of the given file.
+		TaskLines = Txt2List(TaskFile)
 
 		Try
 			TaskLines = FilterList(TaskLines)
@@ -22442,16 +22213,10 @@ Afternoon:
 
 		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_2.txt"
 
-		TaskRead = New StreamReader(TaskFile)
 		TaskLines.Clear()
 
-
-		While TaskRead.Peek <> -1
-			TaskLines.Add(TaskRead.ReadLine())
-		End While
-
-		TaskRead.Close()
-		TaskRead.Dispose()
+		'Read all lines of the given file.
+		TaskLines = Txt2List(TaskFile)
 
 		Try
 			TaskLines = FilterList(TaskLines)
@@ -22468,16 +22233,10 @@ Afternoon:
 
 		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_2-3.txt"
 
-		TaskRead = New StreamReader(TaskFile)
 		TaskLines.Clear()
 
-
-		While TaskRead.Peek <> -1
-			TaskLines.Add(TaskRead.ReadLine())
-		End While
-
-		TaskRead.Close()
-		TaskRead.Dispose()
+		'Read all lines of the given file.
+		TaskLines = Txt2List(TaskFile)
 
 		Try
 			TaskLines = FilterList(TaskLines)
@@ -22495,15 +22254,10 @@ Night:
 
 		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_3.txt"
 
-		TaskRead = New StreamReader(TaskFile)
 		TaskLines.Clear()
 
-		While TaskRead.Peek <> -1
-			TaskLines.Add(TaskRead.ReadLine())
-		End While
-
-		TaskRead.Close()
-		TaskRead.Dispose()
+		'Read all lines of the given file.
+		TaskLines = Txt2List(TaskFile)
 
 		Try
 			TaskLines = FilterList(TaskLines)
@@ -22519,15 +22273,10 @@ Night:
 
 		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Outro.txt"
 
-		TaskRead = New StreamReader(TaskFile)
 		TaskLines.Clear()
 
-		While TaskRead.Peek <> -1
-			TaskLines.Add(TaskRead.ReadLine())
-		End While
-
-		TaskRead.Close()
-		TaskRead.Dispose()
+		'Read all lines of the given file.
+		TaskLines = Txt2List(TaskFile)
 
 		Try
 			TaskLines = FilterList(TaskLines)
@@ -22543,15 +22292,10 @@ Night:
 
 		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Signature.txt"
 
-		TaskRead = New StreamReader(TaskFile)
 		TaskLines.Clear()
 
-		While TaskRead.Peek <> -1
-			TaskLines.Add(TaskRead.ReadLine())
-		End While
-
-		TaskRead.Close()
-		TaskRead.Dispose()
+		'Read all lines of the given file.
+		TaskLines = Txt2List(TaskFile)
 
 		Try
 			TaskLines = FilterList(TaskLines)
@@ -23759,23 +23503,11 @@ TryNext:
 			Dim VTDir As String
 
 			If RLGLGame = True Then VTDir = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Taunts.txt"
-
+			'TODO: Prevent File.Exits() with String.Empty
 			If Not File.Exists(VTDir) Then Return
 
-
-			Dim VTList As New List(Of String)
-
-			Dim VTReader As New StreamReader(VTDir)
-
-			While VTReader.Peek <> -1
-				VTList.Add(VTReader.ReadLine())
-			End While
-
-
-			VTReader.Close()
-			VTReader.Dispose()
-
-
+			' Read all lines of the given file.
+			Dim VTList As List(Of String) = Txt2List(VTDir)
 
 			Try
 				VTList = FilterList(VTList)
@@ -23844,18 +23576,8 @@ TryNext:
 
 			If Not File.Exists(VTDir) Then Return
 
-
-			Dim VTList As New List(Of String)
-
-			Dim VTReader As New StreamReader(VTDir)
-
-			While VTReader.Peek <> -1
-				VTList.Add(VTReader.ReadLine())
-			End While
-
-
-			VTReader.Close()
-			VTReader.Dispose()
+			' Read all lines of the given file.
+			Dim VTList As List(Of String) = Txt2List(VTDir)
 
 			Try
 				VTList = FilterList(VTList)
@@ -23904,18 +23626,8 @@ TryNext:
 
 			If Not File.Exists(VTDir) Then Return
 
-
-			Dim VTList As New List(Of String)
-
-			Dim VTReader As New StreamReader(VTDir)
-
-			While VTReader.Peek <> -1
-				VTList.Add(VTReader.ReadLine())
-			End While
-
-
-			VTReader.Close()
-			VTReader.Dispose()
+			' Read all lines of the given file.
+			Dim VTList As List(Of String) = Txt2List(VTDir)
 
 			Try
 				VTList = FilterList(VTList)
@@ -24059,19 +23771,13 @@ TryNext:
 
 	End Sub
 
-	Private Sub ToolStripMenuItem4_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem4.Click
+	Private Sub RemoveFromUrlFile_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem4.Click
 
-
-		Dim RemoveList As New List(Of String)
 		'For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\URL Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 		Debug.Print(ImageUrlFilePath)
-		Dim filereader As New StreamReader(ImageUrlFilePath)
-		RemoveList.Clear()
-		While filereader.Peek <> -1
-			RemoveList.Add(filereader.ReadLine())
-		End While
-		filereader.Close()
-		filereader.Dispose()
+		' Read all lines of the given file.
+		Dim RemoveList As List(Of String) = Txt2List(ImageUrlFilePath)
+
 		'For i As Integer = RemoveList.Count - 1 To 0 Step -1
 		Debug.Print(RemoveList(ImageUrlFileIndex))
 		Debug.Print("foundstring = " & FoundString)
@@ -24481,21 +24187,50 @@ GetDommeSlideshow:
 
 	End Sub
 
-	Public Function Txt2List(ByVal GetText As String) As List(Of String)
-		If File.Exists(GetText) Then
-			Dim TextReader As New StreamReader(GetText)
-			Dim TextList As New List(Of String)
-			TextList.Clear()
-			While TextReader.Peek <> -1
-				TextList.Add(TextReader.ReadLine())
-			End While
-			TextReader.Close()
-			TextReader.Dispose()
-			Return TextList
+	''' =========================================================================================================
+	''' <summary>
+	''' Reads a TextFile to a generic List(of String).
+	''' </summary>
+	''' <param name="GetText">The Filepath to read.</param>
+	''' <returns>A List(of String) containing all Lines of the given File. Returns 
+	''' "Nothing" if the specified file doesn't exists.</returns>
+	''' <remarks>This Method will create the given DirectoryStructure for the given
+	''' Filepath if it doesn't exists.</remarks>
+	Public Shared Function Txt2List(ByVal GetText As String) As List(Of String)
+
+		' check if the given Directory Exits, otherwise a IO.DirectoryNotFound Exception occurs.
+		If Directory.Exists(Path.GetDirectoryName(GetText)) = False Then
+			Directory.CreateDirectory(Path.GetDirectoryName(GetText))
 		End If
+
+		If File.Exists(GetText) Then
+			Using TextReader As New StreamReader(GetText)
+				Dim TextList As New List(Of String)
+				TextList.Clear()
+				While TextReader.Peek <> -1
+					TextList.Add(TextReader.ReadLine())
+				End While
+				Return TextList
+			End Using
+		End If
+		Return Nothing
 	End Function
 
 
+	Public Shared Function TxtReadLine(ByVal GetText As String) As String
+
+		' check if the given Directory Exits, otherwise a IO.DirectoryNotFound Exception occurs.
+		If Directory.Exists(Path.GetDirectoryName(GetText)) = False Then
+			Directory.CreateDirectory(Path.GetDirectoryName(GetText))
+		End If
+
+		If File.Exists(GetText) Then
+			Using TextReader As New StreamReader(GetText)
+				Return TextReader.ReadLine
+			End Using
+		End If
+		Return Nothing
+	End Function
 
 
 	Public Function StripBlankLines(ByVal SpaceClean As List(Of String)) As List(Of String)
@@ -25579,12 +25314,10 @@ GetDommeSlideshow:
 		End If
 
 		Try
-			Dim SettingsReader As New StreamReader(Application.StartupPath & "\System\" & ResumeState)
-			While SettingsReader.Peek <> -1
-				SettingsList.Add(SettingsReader.ReadLine())
-			End While
-			SettingsReader.Close()
-			SettingsReader.Dispose()
+			'Read all lines of the given file. 
+			SettingsList = Txt2List(Application.StartupPath & "\System\" & ResumeState)
+			'check if file was successful read.
+			If SettingsList Is Nothing Then Throw New FileLoadException()
 		Catch ex As Exception
 			MessageBox.Show(Me, ResumeState & " could not be read!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
@@ -26411,16 +26144,9 @@ GetDommeSlideshow:
 
 				Dim WishDir As String = WishList(randomizer.Next(0, WishList.Count))
 
-				Dim WishReader As New StreamReader(WishDir)
-
 				WishList.Clear()
-
-				While WishReader.Peek <> -1
-					WishList.Add(WishReader.ReadLine())
-				End While
-
-				WishReader.Close()
-				WishReader.Dispose()
+				'Read all lines of the given file.
+				WishList = Txt2List(WishDir)
 
 				LBLWishListName.Text = WishList(0)
 				My.Settings.WishlistName = LBLWishListName.Text
@@ -26631,13 +26357,9 @@ GetDommeSlideshow:
 
 			If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieList.txt") And ComboBoxCalorie.Items.Count = 0 Then
 				Debug.Print("called itttttttt")
-				Dim CalReader As New StreamReader(Application.StartupPath & "\System\VitalSub\CalorieList.txt")
-				Dim CalList As New List(Of String)
-				While CalReader.Peek <> -1
-					CalList.Add(CalReader.ReadLine())
-				End While
-				CalReader.Close()
-				CalReader.Dispose()
+				'Read all lines of the given file.
+				Dim CalList As List(Of String) = Txt2List(Application.StartupPath & "\System\VitalSub\CalorieList.txt")
+
 				For i As Integer = 0 To CalList.Count - 1
 					ComboBoxCalorie.Items.Add(CalList(i))
 				Next

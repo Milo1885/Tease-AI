@@ -495,15 +495,9 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 			If File.Exists(___ImageURLPath) Then
 				' ReadFile
 				Using __UrlFileReader As New StreamReader(___ImageURLPath)
-					Try
-						While __UrlFileReader.Peek <> -1
-							___BlogListOld.Add(__UrlFileReader.ReadLine)
-						End While
-					Catch
-						Throw
-					Finally
-						__UrlFileReader.Close()
-					End Try
+					While __UrlFileReader.Peek <> -1
+						___BlogListOld.Add(__UrlFileReader.ReadLine)
+					End While
 				End Using
 			End If
 			'===============================================================================
@@ -511,15 +505,9 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 			'===============================================================================
 			If File.Exists(_DislikeListPath) Then
 				Using __DislikeFileReader As New StreamReader(_DislikeListPath)
-					Try
-						While __DislikeFileReader.Peek <> -1
-							___DislikeList.Add(__DislikeFileReader.ReadLine())
-						End While
-					Catch
-						Throw
-					Finally
-						__DislikeFileReader.Close()
-					End Try
+					While __DislikeFileReader.Peek <> -1
+						___DislikeList.Add(__DislikeFileReader.ReadLine())
+					End While
 				End Using
 			End If
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
