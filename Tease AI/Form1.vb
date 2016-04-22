@@ -20749,7 +20749,7 @@ LocalBoobs:
 
 			For Each fi As String In files
 				If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-					AssList.Add(fi)
+					BoobList.Add(fi)
 				End If
 			Next
 
