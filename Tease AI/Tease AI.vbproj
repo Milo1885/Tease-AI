@@ -97,6 +97,7 @@
     <Import Include="WMPLib" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DirectoryExt.vb" />
     <Compile Include="Classes\teaseAI_Timer.vb">
       <SubType>Component</SubType>
     </Compile>

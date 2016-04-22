@@ -2035,7 +2035,7 @@ Public Class FrmSettings
 
 		If Form1.FormLoading = False Then
 
-			Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\")
+			Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\")
 			Dim GlitterScriptCount As Integer
 
 			LBGlitModScripts.Items.Clear()
@@ -3219,7 +3219,7 @@ trypreviousimage:
 		End If
 	End Sub
 
-	
+
 
 	Private Sub Button45_Click(sender As System.Object, e As System.EventArgs)
 		Form1.GetBlogImage()
@@ -3244,7 +3244,7 @@ trypreviousimage:
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 			Dim files As String()
 
-			files = Directory.GetFiles(TagImageFolder, "*.*")
+			files = myDirectory.GetFiles(TagImageFolder, "*.*")
 
 			Array.Sort(files)
 
@@ -3447,7 +3447,7 @@ trypreviousimage:
 				Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 				Dim files As String()
 
-				files = Directory.GetFiles(TagImageFolder, "*.*")
+				files = myDirectory.GetFiles(TagImageFolder, "*.*")
 
 				Array.Sort(files)
 
@@ -5035,7 +5035,7 @@ trypreviousimage:
 		TBKeyWords.Text = ""
 		RTBKeyWords.Text = ""
 
-		Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\")
+		Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\")
 
 		LBKeyWords.Items.Clear()
 
@@ -5574,7 +5574,7 @@ trypreviousimage:
 
 				Dim ImageFolder As String = LBLIHardcore.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5615,7 +5615,7 @@ HardcoreGood:
 
 				Dim ImageFolder As String = LBLISoftcore.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5657,7 +5657,7 @@ SoftcoreGood:
 
 				Dim ImageFolder As String = LBLILesbian.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5699,7 +5699,7 @@ LesbianGood:
 
 				Dim ImageFolder As String = LBLIBlowjob.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5741,7 +5741,7 @@ BlowjobGood:
 
 				Dim ImageFolder As String = LBLIFemdom.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5784,7 +5784,7 @@ FemdomGood:
 
 				Dim ImageFolder As String = LBLILezdom.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5826,7 +5826,7 @@ LezdomGood:
 
 				Dim ImageFolder As String = LBLIHentai.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5868,7 +5868,7 @@ HentaiGood:
 
 				Dim ImageFolder As String = LBLIGay.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5910,7 +5910,7 @@ GayGood:
 
 				Dim ImageFolder As String = LBLIMaledom.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5953,7 +5953,7 @@ MaledomGood:
 
 				Dim ImageFolder As String = LBLICaptions.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -5995,7 +5995,7 @@ CaptionsGood:
 
 				Dim ImageFolder As String = LBLIGeneral.Text
 
-				files = Directory.GetFiles(ImageFolder, "*.*")
+				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
 
 				For Each fi As String In files
@@ -6355,7 +6355,7 @@ WhyUMakeMeDoDis:
 
 	End Sub
 
-	
+
 
 
 	Private Sub CBIHardcore_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIHardcore.CheckedChanged
@@ -8053,7 +8053,7 @@ WhyUMakeMeDoDis:
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 			Dim files As String()
 
-			files = Directory.GetFiles(TagLocalImageFolder, "*.*")
+			files = myDirectory.GetFiles(TagLocalImageFolder, "*.*")
 
 			Array.Sort(files)
 
@@ -9396,7 +9396,7 @@ WhyUMakeMeDoDis:
 				Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 				Dim files As String()
 
-				files = Directory.GetFiles(TagLocalImageFolder, "*.*")
+				files = myDirectory.GetFiles(TagLocalImageFolder, "*.*")
 
 				Array.Sort(files)
 
@@ -10772,7 +10772,7 @@ WhyUMakeMeDoDis:
 		RTBResponses.Text = ""
 		RTBResponsesKEY.Text = ""
 
-		Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\")
+		Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\Responses\")
 
 		LBResponses.Items.Clear()
 

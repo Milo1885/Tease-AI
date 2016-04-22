@@ -817,7 +817,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		'dompersonalityComboBox.Text = My.Settings.DomPersonality
 
 
-		For Each Dir As String In Directory.GetDirectories(Application.StartupPath & "\Scripts\")
+		For Each Dir As String In myDirectory.GetDirectories(Application.StartupPath & "\Scripts\")
 			PersonType = Dir
 
 			Dim DirSplit As String() = PersonType.Split("\")
@@ -1350,7 +1350,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		End Try
 
 		Try
-			Dim files() As String = Directory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\" & FrmSettings.CBGlitModType.Text & "\")
+			Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\" & FrmSettings.CBGlitModType.Text & "\")
 			Dim GlitterScriptCount As Integer
 			FrmSettings.LBGlitModScripts.Items.Clear()
 			For Each file As String In files
@@ -1370,7 +1370,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.LBLSplash.Text = "Loading Image settings..."
 		FrmSplash.Refresh()
 
-		
+
 		If My.Settings.CBBoobSubDir = True Then FrmSettings.CBBoobSubDir.Checked = True
 		If My.Settings.CBButtSubDir = True Then FrmSettings.CBButtSubDir.Checked = True
 
@@ -5630,7 +5630,7 @@ SkipGotoSearch:
 
 			Debug.Print("FileGoto = " & FileGoto)
 
-			Dim gotoline As Integer
+			Dim gotoline As Integer = 0
 			Do
 				gotoline += 1
 				If GotoDommeLevel = True And gotoline = CountGotoLines Then
@@ -5645,7 +5645,7 @@ SkipGotoSearch:
 				'And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
 				'github patch end
 
-			Loop Until gotolines(gotoline).StartsWith(FileGoto) And InStr(gotolines(gotoline), "@Goto") = 0 And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
+			Loop Until gotolines(gotoline).StartsWith(FileGoto) And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
 			And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
 			And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
 
@@ -5726,7 +5726,7 @@ SkipGotoSearch:
 		' Let the program know that the domme is currently typing
 		DomTypeCheck = True
 
-	
+
 
 
 		If CBHypnoGenNoText.Checked = True And HypnoGen = True Then NullResponse = True
@@ -7670,17 +7670,17 @@ NullResponseLine2:
 
 
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			'Dim files As String() = Directory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+			'Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
 
 			Dim files As String()
 
 			If FrmSettings.CBSlideshowSubDir.Checked = True Then
-				files = Directory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(GetFolder, "*.*")
+				files = myDirectory.GetFiles(GetFolder, "*.*")
 			End If
 
-			' Dim files As String() = Directory.GetFiles(GetFolder, "*.*")
+			' Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*")
 			Array.Sort(files)
 
 			' For Each fi As String In files
@@ -7699,17 +7699,17 @@ NullResponseLine2:
 			Next
 
 			' If FrmSettings.CBSlideshowSubDir.Checked = True Then
-			'FileCountMax = Directory.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
+			'FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
 			'Else
-			'   FileCountMax = Directory.GetFiles(GetFolder, "*.jpg").Count
-			'  FileCountMax += Directory.GetFiles(GetFolder, "*.png").Count
-			' FileCountMax += Directory.GetFiles(GetFolder, "*.gif").Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.bmp").Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.jpeg").Count
+			'   FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg").Count
+			'  FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png").Count
+			' FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif").Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp").Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg").Count
 			'End If
 
 			FileCountMax = _ImageFileNames.Count - 1
@@ -8428,7 +8428,7 @@ TryNextWithTease:
 		Try
 			If Directory.Exists(DirectoryPath) Then
 				Dim ___Sup_Ext As New List(Of String) From {".wmv", ".avi", ".mp4", ".m4v", ".mpg", ".mov"}
-				Return Directory.GetFiles(DirectoryPath, "*", SearchOption.AllDirectories) _
+				Return myDirectory.GetFiles(DirectoryPath, "*", SearchOption.AllDirectories) _
 					.Where(Function(f) ___Sup_Ext.Contains(Path.GetExtension(f).ToLower())).ToList
 			Else
 				Return New List(Of String)
@@ -9892,9 +9892,9 @@ StatusUpdateEnd:
 
 				If Not CheckString = "NULL" Then
 					If CheckBoolean = True Then
-						files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(CheckString, "*.*")
+						files = myDirectory.GetFiles(CheckString, "*.*")
 					End If
 					Array.Sort(files)
 					For Each fi As String In files
@@ -9924,9 +9924,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBIHardcoreSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -9951,9 +9951,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBISoftcoreSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -9978,9 +9978,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBILesbianSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -10005,9 +10005,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBIBlowjobSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -10032,9 +10032,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBIFemdomSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -10059,9 +10059,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBILezdomSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -10086,9 +10086,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBIHentaiSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -10113,9 +10113,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBIGaySD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -10140,9 +10140,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBIMaledomSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -10167,9 +10167,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBICaptionsSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -10194,9 +10194,9 @@ StatusUpdateEnd:
 			If FrmSettings.CBIGeneralSD.Checked = True Then CheckBoolean = True
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 				Array.Sort(files)
 				For Each fi As String In files
@@ -13827,9 +13827,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("hardcore") Then
 				Try
 					If FrmSettings.CBIHardcoreSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -13846,9 +13846,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("softcore") Then
 				Try
 					If FrmSettings.CBISoftcoreSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -13865,9 +13865,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("lesbian") Then
 				Try
 					If FrmSettings.CBILesbianSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -13884,9 +13884,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("blowjob") Then
 				Try
 					If FrmSettings.CBIBlowjobSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -13903,9 +13903,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("femdom") Then
 				Try
 					If FrmSettings.CBIFemdomSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -13922,9 +13922,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("lezdom") Then
 				Try
 					If FrmSettings.CBILezdomSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -13941,9 +13941,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("hentai") Then
 				Try
 					If FrmSettings.CBIHentaiSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -13960,9 +13960,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("gay") Then
 				Try
 					If FrmSettings.CBIGaySD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLIGay.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLIGay.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLIGay.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLIGay.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -13979,9 +13979,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("maledom") Then
 				Try
 					If FrmSettings.CBIMaledomSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -13998,9 +13998,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("captions") Then
 				Try
 					If FrmSettings.CBICaptionsSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -14017,9 +14017,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("general") Then
 				Try
 					If FrmSettings.CBIGeneralSD.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -14036,9 +14036,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("boob") Then
 				Try
 					If FrmSettings.CBBoobSubDir.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -14055,9 +14055,9 @@ ExternalAudio:
 			If LCase(SlideFlag).Contains("butt") Then
 				Try
 					If FrmSettings.CBButtSubDir.Checked = True Then
-						files = Directory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*", SearchOption.AllDirectories)
+						files = myDirectory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*", SearchOption.AllDirectories)
 					Else
-						files = Directory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*")
+						files = myDirectory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*")
 					End If
 
 					Array.Sort(files)
@@ -18021,11 +18021,11 @@ Skip_RandomFile:
 
 
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowHardcoreImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowHardcoreImage") Then
 				If CheckGenreImage("Hardcore") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18037,14 +18037,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowSoftcoreImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowSoftcoreImage") Then
 				If CheckGenreImage("Softcore") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18056,14 +18056,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowLesbianImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowLesbianImage") Then
 				If CheckGenreImage("Lesbian") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18075,14 +18075,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowBlowjobImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowBlowjobImage") Then
 				If CheckGenreImage("Blowjob") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18094,14 +18094,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowFemdomImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowFemdomImage") Then
 				If CheckGenreImage("Femdom") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18113,14 +18113,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowLezdomImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowLezdomImage") Then
 				If CheckGenreImage("Lezdom") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18132,14 +18132,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowHentaiImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowHentaiImage") Then
 				If CheckGenreImage("Hentai") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18151,14 +18151,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowGayImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowGayImage") Then
 				If CheckGenreImage("Gay") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18170,14 +18170,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowMaledomImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowMaledomImage") Then
 				If CheckGenreImage("Maledom") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18189,14 +18189,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowCaptionsImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowCaptionsImage") Then
 				If CheckGenreImage("Captions") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18208,14 +18208,14 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowGeneralImage") Then
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowGeneralImage") Then
 				If CheckGenreImage("General") = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
@@ -18227,520 +18227,520 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
 
 
 
 
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowBlogImage") Or ListClean(PoundCount).Contains("@NewBlogImage") Then
-					If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowBlogImage") Or ListClean(PoundCount).Contains("@NewBlogImage") Then
+				If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowLocalImage") Then
-					If FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And FrmSettings.CBIBlowjob.Checked = False And
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowLocalImage") Then
+				If FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And FrmSettings.CBIBlowjob.Checked = False And
 					 FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And FrmSettings.CBIGay.Checked = False And
 					 FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowLocalImage") Then
-					If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowButtsImage") Then
-					If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowBoobsImage") Or ListClean(PoundCount).Contains("@ShowBoobImage") Then
-					If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowLocalImage") Or ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowBoobsImage") Or ListClean(PoundCount).Contains("@ShowButtsImage") Or ListClean(PoundCount).Contains("@ShowBoobsImage") Then
-					If CustomSlideshow = True Or LockImage = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@EdgeHeld(") Then
-					Dim EdgeFail As Boolean = False
-					Dim EdgeFlag As String = GetParentheses(ListClean(PoundCount), "@EdgeHeld(")
-					If EdgeFlag.Contains(",") Then
-						EdgeFlag = FixCommas(EdgeFlag)
-						Dim EdgeArray As String() = EdgeFlag.Split(",")
-						If HoldEdgeTime < Val(EdgeArray(0)) * 60 Or HoldEdgeTime > Val(EdgeArray(1)) * 60 Then EdgeFail = True
+						Next
 					Else
-						If Val(EdgeFlag) * 60 > HoldEdgeTime Then EdgeFail = True
-					End If
-					If EdgeFail = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@1MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowLocalImage") Then
+				If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@2MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@3MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowButtsImage") Then
+				If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@4MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowBoobsImage") Or ListClean(PoundCount).Contains("@ShowBoobImage") Then
+				If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@5MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowLocalImage") Or ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowBoobsImage") Or ListClean(PoundCount).Contains("@ShowButtsImage") Or ListClean(PoundCount).Contains("@ShowBoobsImage") Then
+				If CustomSlideshow = True Or LockImage = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@10MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@15MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@EdgeHeld(") Then
+				Dim EdgeFail As Boolean = False
+				Dim EdgeFlag As String = GetParentheses(ListClean(PoundCount), "@EdgeHeld(")
+				If EdgeFlag.Contains(",") Then
+					EdgeFlag = FixCommas(EdgeFlag)
+					Dim EdgeArray As String() = EdgeFlag.Split(",")
+					If HoldEdgeTime < Val(EdgeArray(0)) * 60 Or HoldEdgeTime > Val(EdgeArray(1)) * 60 Then EdgeFail = True
+				Else
+					If Val(EdgeFlag) * 60 > HoldEdgeTime Then EdgeFail = True
+				End If
+				If EdgeFail = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@30MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@1MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@45MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@2MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@60MinuteHold") Then
-					If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@3MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CBTLevel1") Then
-					If FrmSettings.CBTSlider.Value <> 1 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@4MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CBTLevel2") Then
-					If FrmSettings.CBTSlider.Value <> 2 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@5MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CBTLevel3") Then
-					If FrmSettings.CBTSlider.Value <> 3 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@10MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CBTLevel4") Then
-					If FrmSettings.CBTSlider.Value <> 4 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@15MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CBTLevel5") Then
-					If FrmSettings.CBTSlider.Value <> 5 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@30MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@SubCircumcised") Then
-					If FrmSettings.CBSubCircumcised.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@45MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@SubNotCircumcised") Then
-					If FrmSettings.CBSubCircumcised.Checked = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@60MinuteHold") Then
+				If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@SubPierced") Then
-					If FrmSettings.CBSubPierced.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CBTLevel1") Then
+				If FrmSettings.CBTSlider.Value <> 1 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@SubNotPierced") Then
-					If FrmSettings.CBSubPierced.Checked = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CBTLevel2") Then
+				If FrmSettings.CBTSlider.Value <> 2 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CBTLevel3") Then
+				If FrmSettings.CBTSlider.Value <> 3 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CBTLevel4") Then
+				If FrmSettings.CBTSlider.Value <> 4 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CBTLevel5") Then
+				If FrmSettings.CBTSlider.Value <> 5 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@SubCircumcised") Then
+				If FrmSettings.CBSubCircumcised.Checked = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@SubNotCircumcised") Then
+				If FrmSettings.CBSubCircumcised.Checked = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@SubPierced") Then
+				If FrmSettings.CBSubPierced.Checked = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@SubNotPierced") Then
+				If FrmSettings.CBSubPierced.Checked = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
 
 
 		LocalTagImageList.Clear()
@@ -18782,46 +18782,964 @@ Skip_RandomFile:
 		End If
 
 		For i As Integer = 0 To LocalTagImageList.Count - 1
-				'Debug.Print(i & ": LocalTagImageList(i) = " & LocalTagImageList(i))
-			Next
+			'Debug.Print(i & ": LocalTagImageList(i) = " & LocalTagImageList(i))
+		Next
 
-			'ListCountTotal = -1
-			Dim TagCount As Integer = 0
+		'ListCountTotal = -1
+		Dim TagCount As Integer = 0
 
-			For i As Integer = ListClean.Count - 1 To 0 Step -1
-				TagCount = 0
-				If ListClean(i).Contains("@ShowTaggedImage") And ListClean(i).Contains("@Tag") Then
-					Dim TSplit As String() = Split(ListClean(i))
-					For j As Integer = 0 To TSplit.Length - 1
-						If TSplit(j).Contains("@Tag") Then
-							Dim TString As String = TSplit(j).Replace("@Tag", "")
-							For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-								If LocalTagImageList(k).Contains(TString) Then TagCount += 1
-							Next
-							If TagCount = 0 Then
-								If StrokeFilter = True Then
-									For l As Integer = 0 To StrokeTauntCount - 1
-										ListClean.RemoveAt(i)
-										PoundLine -= 1
-									Next
-								Else
+		For i As Integer = ListClean.Count - 1 To 0 Step -1
+			TagCount = 0
+			If ListClean(i).Contains("@ShowTaggedImage") And ListClean(i).Contains("@Tag") Then
+				Dim TSplit As String() = Split(ListClean(i))
+				For j As Integer = 0 To TSplit.Length - 1
+					If TSplit(j).Contains("@Tag") Then
+						Dim TString As String = TSplit(j).Replace("@Tag", "")
+						For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+							If LocalTagImageList(k).Contains(TString) Then TagCount += 1
+						Next
+						If TagCount = 0 Then
+							If StrokeFilter = True Then
+								For l As Integer = 0 To StrokeTauntCount - 1
 									ListClean.RemoveAt(i)
 									PoundLine -= 1
-								End If
-								Exit For
+								Next
+							Else
+								ListClean.RemoveAt(i)
+								PoundLine -= 1
 							End If
-							TagCount = 0
+							Exit For
 						End If
-					Next
+						TagCount = 0
+					End If
+				Next
+			End If
+		Next
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowTaggedImage") Then
+				If LocalTagImageList.Count = 0 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
 				End If
-			Next
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@BeforeTease") Then
+				If BeforeTease = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@OrgasmDenied") Then
+				If LastOrgasmType <> "DENIED" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@OrgasmAllowed") Then
+				If LastOrgasmType <> "ALLOWED" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@OrgasmRuined") Then
+				If LastOrgasmType <> "RUINED" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ApathyLevel(") Then
+				If FilterCheck(GetParentheses(ListClean(PoundCount), "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ApathyLevel1") Then
+				If FrmSettings.NBEmpathy.Value <> 1 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ApathyLevel2") Then
+				If FrmSettings.NBEmpathy.Value <> 2 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ApathyLevel3") Then
+				If FrmSettings.NBEmpathy.Value <> 3 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ApathyLevel4") Then
+				If FrmSettings.NBEmpathy.Value <> 4 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ApathyLevel5") Then
+				If FrmSettings.NBEmpathy.Value <> 5 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@InChastity") Then
+				If My.Settings.Chastity = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@NotInChastity") Then
+				If My.Settings.Chastity = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@HasChastity") Then
+				If FrmSettings.CBOwnChastity.Checked = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@DoesNotHaveChastity") Then
+				If FrmSettings.CBOwnChastity.Checked = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ChastityPA") Then
+				If FrmSettings.CBChastityPA.Checked = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ChastitySpikes") Then
+				If FrmSettings.CBChastitySpikes.Checked = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VitalSub") Then
+				If CBVitalSub.Checked = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VitalSubAssignment") Then
+				If CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@RuinTaunt") Then
+				If EdgeToRuin = False Or EdgeToRuinSecret = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowLikedImage") Then
+				If Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ShowDislikedImage") Then
+				If Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoHardcore") Then
+				If VideoTease = False Or VideoType <> "Hardcore" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoSoftcore") Then
+				If VideoTease = False Or VideoType <> "Softcore" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoLesbian") Then
+				If VideoTease = False Or VideoType <> "Lesbian" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoBlowjob") Then
+				If VideoTease = False Or VideoType <> "Blowjob" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoFemdom") Then
+				If VideoTease = False Or VideoType <> "Femdom" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoFemsub") Then
+				If VideoTease = False Or VideoType <> "Femsub" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoGeneral") Then
+				If VideoTease = False Or VideoType <> "General" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoHardcoreDomme") Then
+				If VideoTease = False Or VideoType <> "HardcoreD" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoSoftcoreDomme") Then
+				If VideoTease = False Or VideoType <> "SoftcoreD" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoLesbianDomme") Then
+				If VideoTease = False Or VideoType <> "LesbianD" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoBlowjobDomme") Then
+				If VideoTease = False Or VideoType <> "BlowjobD" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoFemdomDomme") Then
+				If VideoTease = False Or VideoType <> "FemdomD" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoFemsubDomme") Then
+				If VideoTease = False Or VideoType <> "FemsubD" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@VideoGeneralDomme") Then
+				If VideoTease = False Or VideoType <> "GeneralD" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CockTorture") Then
+				If FrmSettings.CBCBTCock.Checked = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@BallTorture") Then
+				If FrmSettings.CBCBTBalls.Checked = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@BallTorture0") Then
+				If CBTBallsCount <> 0 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@BallTorture1") Then
+				If CBTBallsCount <> 1 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@BallTorture2") Then
+				If CBTBallsCount <> 2 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@BallTorture3") Then
+				If CBTBallsCount <> 3 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@BallTorture4+") Then
+				If CBTBallsCount < 4 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CockTorture0") Then
+				If CBTCockCount <> 0 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CockTorture1") Then
+				If CBTCockCount <> 1 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CockTorture2") Then
+				If CBTCockCount <> 2 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CockTorture3") Then
+				If CBTCockCount <> 3 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CockTorture4+") Then
+				If CBTCockCount < 4 Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							ListClean.Remove(ListClean(PoundCount))
+							PoundLine -= 1
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
+					End If
+				End If
+			End If
+		Loop Until PoundCount = 0
+
+		If SubStroking = False Or StrokeTauntCount = 1 Then
 
 			PoundCount = PoundLine
 			Do
 				Application.DoEvents()
 				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowTaggedImage") Then
-					If LocalTagImageList.Count = 0 Then
+				If ListClean(PoundCount).Contains("@Contact1") Then
+					If GlitterTease = False Or Not Group.Contains("1") Then
 						If StrokeFilter = True Then
 							For i As Integer = 0 To StrokeTauntCount - 1
 								ListClean.Remove(ListClean(PoundCount))
@@ -18839,8 +19757,8 @@ Skip_RandomFile:
 			Do
 				Application.DoEvents()
 				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@BeforeTease") Then
-					If BeforeTease = False Then
+				If ListClean(PoundCount).Contains("@Contact2") Then
+					If GlitterTease = False Or Not Group.Contains("2") Then
 						If StrokeFilter = True Then
 							For i As Integer = 0 To StrokeTauntCount - 1
 								ListClean.Remove(ListClean(PoundCount))
@@ -18858,8 +19776,8 @@ Skip_RandomFile:
 			Do
 				Application.DoEvents()
 				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@OrgasmDenied") Then
-					If LastOrgasmType <> "DENIED" Then
+				If ListClean(PoundCount).Contains("@Contact3") Then
+					If GlitterTease = False Or Not Group.Contains("3") Then
 						If StrokeFilter = True Then
 							For i As Integer = 0 To StrokeTauntCount - 1
 								ListClean.Remove(ListClean(PoundCount))
@@ -18868,6 +19786,30 @@ Skip_RandomFile:
 						Else
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
+						End If
+					End If
+				End If
+			Loop Until PoundCount = 0
+
+		Else
+
+			PoundCount = PoundLine
+			Do
+				Application.DoEvents()
+				PoundCount -= 1
+				If ListClean(PoundCount).Contains("@Group(") Then
+					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
+					If GroupCheck(0).Contains("D") Then
+						If GlitterTease = False Or Not Group.Contains("D") Then
+							If StrokeFilter = True Then
+								For i As Integer = 0 To StrokeTauntCount - 1
+									ListClean.Remove(ListClean(PoundCount))
+									PoundLine -= 1
+								Next
+							Else
+								ListClean.Remove(ListClean(PoundCount))
+								PoundLine -= 1
+							End If
 						End If
 					End If
 				End If
@@ -18877,868 +19819,9 @@ Skip_RandomFile:
 			Do
 				Application.DoEvents()
 				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@OrgasmAllowed") Then
-					If LastOrgasmType <> "ALLOWED" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@OrgasmRuined") Then
-					If LastOrgasmType <> "RUINED" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ApathyLevel(") Then
-					If FilterCheck(GetParentheses(ListClean(PoundCount), "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ApathyLevel1") Then
-					If FrmSettings.NBEmpathy.Value <> 1 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ApathyLevel2") Then
-					If FrmSettings.NBEmpathy.Value <> 2 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ApathyLevel3") Then
-					If FrmSettings.NBEmpathy.Value <> 3 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ApathyLevel4") Then
-					If FrmSettings.NBEmpathy.Value <> 4 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ApathyLevel5") Then
-					If FrmSettings.NBEmpathy.Value <> 5 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@InChastity") Then
-					If My.Settings.Chastity = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@NotInChastity") Then
-					If My.Settings.Chastity = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@HasChastity") Then
-					If FrmSettings.CBOwnChastity.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@DoesNotHaveChastity") Then
-					If FrmSettings.CBOwnChastity.Checked = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ChastityPA") Then
-					If FrmSettings.CBChastityPA.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ChastitySpikes") Then
-					If FrmSettings.CBChastitySpikes.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VitalSub") Then
-					If CBVitalSub.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VitalSubAssignment") Then
-					If CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@RuinTaunt") Then
-					If EdgeToRuin = False Or EdgeToRuinSecret = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowLikedImage") Then
-					If Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ShowDislikedImage") Then
-					If Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoHardcore") Then
-					If VideoTease = False Or VideoType <> "Hardcore" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoSoftcore") Then
-					If VideoTease = False Or VideoType <> "Softcore" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoLesbian") Then
-					If VideoTease = False Or VideoType <> "Lesbian" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoBlowjob") Then
-					If VideoTease = False Or VideoType <> "Blowjob" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoFemdom") Then
-					If VideoTease = False Or VideoType <> "Femdom" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoFemsub") Then
-					If VideoTease = False Or VideoType <> "Femsub" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoGeneral") Then
-					If VideoTease = False Or VideoType <> "General" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoHardcoreDomme") Then
-					If VideoTease = False Or VideoType <> "HardcoreD" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoSoftcoreDomme") Then
-					If VideoTease = False Or VideoType <> "SoftcoreD" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoLesbianDomme") Then
-					If VideoTease = False Or VideoType <> "LesbianD" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoBlowjobDomme") Then
-					If VideoTease = False Or VideoType <> "BlowjobD" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoFemdomDomme") Then
-					If VideoTease = False Or VideoType <> "FemdomD" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoFemsubDomme") Then
-					If VideoTease = False Or VideoType <> "FemsubD" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@VideoGeneralDomme") Then
-					If VideoTease = False Or VideoType <> "GeneralD" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CockTorture") Then
-					If FrmSettings.CBCBTCock.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@BallTorture") Then
-					If FrmSettings.CBCBTBalls.Checked = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@BallTorture0") Then
-					If CBTBallsCount <> 0 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@BallTorture1") Then
-					If CBTBallsCount <> 1 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@BallTorture2") Then
-					If CBTBallsCount <> 2 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@BallTorture3") Then
-					If CBTBallsCount <> 3 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@BallTorture4+") Then
-					If CBTBallsCount < 4 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CockTorture0") Then
-					If CBTCockCount <> 0 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CockTorture1") Then
-					If CBTCockCount <> 1 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CockTorture2") Then
-					If CBTCockCount <> 2 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CockTorture3") Then
-					If CBTCockCount <> 3 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CockTorture4+") Then
-					If CBTCockCount < 4 Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			If SubStroking = False Or StrokeTauntCount = 1 Then
-
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Contact1") Then
+				If ListClean(PoundCount).Contains("@Group(") Then
+					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
+					If GroupCheck(0).Contains("1") Then
 						If GlitterTease = False Or Not Group.Contains("1") Then
 							If StrokeFilter = True Then
 								For i As Integer = 0 To StrokeTauntCount - 1
@@ -19751,13 +19834,16 @@ Skip_RandomFile:
 							End If
 						End If
 					End If
-				Loop Until PoundCount = 0
+				End If
+			Loop Until PoundCount = 0
 
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Contact2") Then
+			PoundCount = PoundLine
+			Do
+				Application.DoEvents()
+				PoundCount -= 1
+				If ListClean(PoundCount).Contains("@Group(") Then
+					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
+					If GroupCheck(0).Contains("2") Then
 						If GlitterTease = False Or Not Group.Contains("2") Then
 							If StrokeFilter = True Then
 								For i As Integer = 0 To StrokeTauntCount - 1
@@ -19770,13 +19856,16 @@ Skip_RandomFile:
 							End If
 						End If
 					End If
-				Loop Until PoundCount = 0
+				End If
+			Loop Until PoundCount = 0
 
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Contact3") Then
+			PoundCount = PoundLine
+			Do
+				Application.DoEvents()
+				PoundCount -= 1
+				If ListClean(PoundCount).Contains("@Group(") Then
+					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
+					If GroupCheck(0).Contains("3") Then
 						If GlitterTease = False Or Not Group.Contains("3") Then
 							If StrokeFilter = True Then
 								For i As Integer = 0 To StrokeTauntCount - 1
@@ -19789,192 +19878,9 @@ Skip_RandomFile:
 							End If
 						End If
 					End If
-				Loop Until PoundCount = 0
+				End If
+			Loop Until PoundCount = 0
 
-			Else
-
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Group(") Then
-						Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-						If GroupCheck(0).Contains("D") Then
-							If GlitterTease = False Or Not Group.Contains("D") Then
-								If StrokeFilter = True Then
-									For i As Integer = 0 To StrokeTauntCount - 1
-										ListClean.Remove(ListClean(PoundCount))
-										PoundLine -= 1
-									Next
-								Else
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								End If
-							End If
-						End If
-					End If
-				Loop Until PoundCount = 0
-
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Group(") Then
-						Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-						If GroupCheck(0).Contains("1") Then
-							If GlitterTease = False Or Not Group.Contains("1") Then
-								If StrokeFilter = True Then
-									For i As Integer = 0 To StrokeTauntCount - 1
-										ListClean.Remove(ListClean(PoundCount))
-										PoundLine -= 1
-									Next
-								Else
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								End If
-							End If
-						End If
-					End If
-				Loop Until PoundCount = 0
-
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Group(") Then
-						Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-						If GroupCheck(0).Contains("2") Then
-							If GlitterTease = False Or Not Group.Contains("2") Then
-								If StrokeFilter = True Then
-									For i As Integer = 0 To StrokeTauntCount - 1
-										ListClean.Remove(ListClean(PoundCount))
-										PoundLine -= 1
-									Next
-								Else
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								End If
-							End If
-						End If
-					End If
-				Loop Until PoundCount = 0
-
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Group(") Then
-						Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-						If GroupCheck(0).Contains("3") Then
-							If GlitterTease = False Or Not Group.Contains("3") Then
-								If StrokeFilter = True Then
-									For i As Integer = 0 To StrokeTauntCount - 1
-										ListClean.Remove(ListClean(PoundCount))
-										PoundLine -= 1
-									Next
-								Else
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								End If
-							End If
-						End If
-					End If
-				Loop Until PoundCount = 0
-
-
-
-
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Group(") Then
-						Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-						If Group.Contains("D") Then
-							If GlitterTease = False Or Not GroupCheck(0).Contains("D") Then
-								If StrokeFilter = True Then
-									For i As Integer = 0 To StrokeTauntCount - 1
-										ListClean.Remove(ListClean(PoundCount))
-										PoundLine -= 1
-									Next
-								Else
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								End If
-							End If
-						End If
-					End If
-				Loop Until PoundCount = 0
-
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Group(") Then
-						Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-						If Group.Contains("1") Then
-							If GlitterTease = False Or Not GroupCheck(0).Contains("1") Then
-								If StrokeFilter = True Then
-									For i As Integer = 0 To StrokeTauntCount - 1
-										ListClean.Remove(ListClean(PoundCount))
-										PoundLine -= 1
-									Next
-								Else
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								End If
-							End If
-						End If
-					End If
-				Loop Until PoundCount = 0
-
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Group(") Then
-						Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-						If Group.Contains("2") Then
-							If GlitterTease = False Or Not GroupCheck(0).Contains("2") Then
-								If StrokeFilter = True Then
-									For i As Integer = 0 To StrokeTauntCount - 1
-										ListClean.Remove(ListClean(PoundCount))
-										PoundLine -= 1
-									Next
-								Else
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								End If
-							End If
-						End If
-					End If
-				Loop Until PoundCount = 0
-
-				PoundCount = PoundLine
-				Do
-					Application.DoEvents()
-					PoundCount -= 1
-					If ListClean(PoundCount).Contains("@Group(") Then
-						Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-						If Group.Contains("3") Then
-							If GlitterTease = False Or Not GroupCheck(0).Contains("3") Then
-								If StrokeFilter = True Then
-									For i As Integer = 0 To StrokeTauntCount - 1
-										ListClean.Remove(ListClean(PoundCount))
-										PoundLine -= 1
-									Next
-								Else
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								End If
-							End If
-						End If
-					End If
-				Loop Until PoundCount = 0
-
-
-
-			End If
 
 
 
@@ -19982,618 +19888,712 @@ Skip_RandomFile:
 			Do
 				Application.DoEvents()
 				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Flag(") Then
-					Dim WriteFlag As String = ListClean(PoundCount)
-					Dim WriteStart As Integer
-					WriteStart = WriteFlag.IndexOf("@Flag(") + 6
-					WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-					WriteFlag = WriteFlag.Split(")")(0)
-					WriteFlag = WriteFlag.Replace("@Flag(", "")
-					If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And
+				If ListClean(PoundCount).Contains("@Group(") Then
+					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
+					If Group.Contains("D") Then
+						If GlitterTease = False Or Not GroupCheck(0).Contains("D") Then
+							If StrokeFilter = True Then
+								For i As Integer = 0 To StrokeTauntCount - 1
+									ListClean.Remove(ListClean(PoundCount))
+									PoundLine -= 1
+								Next
+							Else
+								ListClean.Remove(ListClean(PoundCount))
+								PoundLine -= 1
+							End If
+						End If
+					End If
+				End If
+			Loop Until PoundCount = 0
+
+			PoundCount = PoundLine
+			Do
+				Application.DoEvents()
+				PoundCount -= 1
+				If ListClean(PoundCount).Contains("@Group(") Then
+					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
+					If Group.Contains("1") Then
+						If GlitterTease = False Or Not GroupCheck(0).Contains("1") Then
+							If StrokeFilter = True Then
+								For i As Integer = 0 To StrokeTauntCount - 1
+									ListClean.Remove(ListClean(PoundCount))
+									PoundLine -= 1
+								Next
+							Else
+								ListClean.Remove(ListClean(PoundCount))
+								PoundLine -= 1
+							End If
+						End If
+					End If
+				End If
+			Loop Until PoundCount = 0
+
+			PoundCount = PoundLine
+			Do
+				Application.DoEvents()
+				PoundCount -= 1
+				If ListClean(PoundCount).Contains("@Group(") Then
+					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
+					If Group.Contains("2") Then
+						If GlitterTease = False Or Not GroupCheck(0).Contains("2") Then
+							If StrokeFilter = True Then
+								For i As Integer = 0 To StrokeTauntCount - 1
+									ListClean.Remove(ListClean(PoundCount))
+									PoundLine -= 1
+								Next
+							Else
+								ListClean.Remove(ListClean(PoundCount))
+								PoundLine -= 1
+							End If
+						End If
+					End If
+				End If
+			Loop Until PoundCount = 0
+
+			PoundCount = PoundLine
+			Do
+				Application.DoEvents()
+				PoundCount -= 1
+				If ListClean(PoundCount).Contains("@Group(") Then
+					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
+					If Group.Contains("3") Then
+						If GlitterTease = False Or Not GroupCheck(0).Contains("3") Then
+							If StrokeFilter = True Then
+								For i As Integer = 0 To StrokeTauntCount - 1
+									ListClean.Remove(ListClean(PoundCount))
+									PoundLine -= 1
+								Next
+							Else
+								ListClean.Remove(ListClean(PoundCount))
+								PoundLine -= 1
+							End If
+						End If
+					End If
+				End If
+			Loop Until PoundCount = 0
+
+
+
+		End If
+
+
+
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@Flag(") Then
+				Dim WriteFlag As String = ListClean(PoundCount)
+				Dim WriteStart As Integer
+				WriteStart = WriteFlag.IndexOf("@Flag(") + 6
+				WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
+				WriteFlag = WriteFlag.Split(")")(0)
+				WriteFlag = WriteFlag.Replace("@Flag(", "")
+				If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And
 					 Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@NotFlag(") Then
-					Dim WriteFlag As String = ListClean(PoundCount)
-					Dim WriteStart As Integer
-					WriteStart = WriteFlag.IndexOf("@NotFlag(") + 9
-					WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-					WriteFlag = WriteFlag.Split(")")(0)
-					WriteFlag = WriteFlag.Replace("@NotFlag(", "")
-					If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@NotFlag(") Then
+				Dim WriteFlag As String = ListClean(PoundCount)
+				Dim WriteStart As Integer
+				WriteStart = WriteFlag.IndexOf("@NotFlag(") + 9
+				WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
+				WriteFlag = WriteFlag.Split(")")(0)
+				WriteFlag = WriteFlag.Replace("@NotFlag(", "")
+				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or
 					 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Variable[") Then
-					If CheckVariable(ListClean(PoundCount)) = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@Variable[") Then
+				If CheckVariable(ListClean(PoundCount)) = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			' The @CheckDate() Command Filter allows you to remove lines if the current date doesn't fall within a specified amount of time of a previously set date. 
-			'The correct format is @CheckDate(DateVariableName, Amount of Time)
-			' For example, @CheckDate(SYS_FirstRun, 2 Weeks) would only be added to the pool of possible lines if the current date is two weeks or more away from the date saved in SYS_FirstRun.
-			' To specify time interval, you can use Seconds, Minutes, Hours, Days, Weeks, Months or Years. Capitalization and pluralization do not matter.
+		' The @CheckDate() Command Filter allows you to remove lines if the current date doesn't fall within a specified amount of time of a previously set date. 
+		'The correct format is @CheckDate(DateVariableName, Amount of Time)
+		' For example, @CheckDate(SYS_FirstRun, 2 Weeks) would only be added to the pool of possible lines if the current date is two weeks or more away from the date saved in SYS_FirstRun.
+		' To specify time interval, you can use Seconds, Minutes, Hours, Days, Weeks, Months or Years. Capitalization and pluralization do not matter.
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@CheckDate(") Then
-					If CheckDateList(ListClean(PoundCount)) = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@CheckDate(") Then
+				If CheckDateList(ListClean(PoundCount)) = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
-					ListClean(PoundCount) = ListClean(PoundCount).Replace("@CheckDate(" & GetParentheses(ListClean(PoundCount), "@CheckDate(") & ")", "")
 				End If
-			Loop Until PoundCount = 0
+				ListClean(PoundCount) = ListClean(PoundCount).Replace("@CheckDate(" & GetParentheses(ListClean(PoundCount), "@CheckDate(") & ")", "")
+			End If
+		Loop Until PoundCount = 0
 
 
 
 
 
-			DommeImageListCheck = True
+		DommeImageListCheck = True
 
-			PoundCount = PoundLine
-			Do
-				' Application.DoEvents()
-				PoundCount -= 1
-				'Debug.Print("Check ListClean(PoundCount) = " & ListClean(PoundCount))
-				If ListClean(PoundCount).Contains("@DommeTag(") Then
-					If GetDommeImage(GetParentheses(ListClean(PoundCount), "@DommeTag(")) = False Or LockImage = True Then
-						'Debug.Print("DommImageFalse")
-						'Debug.Print("StrokeFilter = " & StrokeFilter)
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								'Debug.Print("StrokeTauntCount - 1 = " & StrokeTauntCount - 1)
-								'Debug.Print("ListClean(PoundCount) = " & ListClean(PoundCount))
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							'Debug.Print("DommImageTrue")
+		PoundCount = PoundLine
+		Do
+			' Application.DoEvents()
+			PoundCount -= 1
+			'Debug.Print("Check ListClean(PoundCount) = " & ListClean(PoundCount))
+			If ListClean(PoundCount).Contains("@DommeTag(") Then
+				If GetDommeImage(GetParentheses(ListClean(PoundCount), "@DommeTag(")) = False Or LockImage = True Then
+					'Debug.Print("DommImageFalse")
+					'Debug.Print("StrokeFilter = " & StrokeFilter)
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
+							'Debug.Print("StrokeTauntCount - 1 = " & StrokeTauntCount - 1)
+							'Debug.Print("ListClean(PoundCount) = " & ListClean(PoundCount))
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
-						'Debug.Print("DommImageFalseFinished")
+						Next
+					Else
+						'Debug.Print("DommImageTrue")
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
+					'Debug.Print("DommImageFalseFinished")
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			DommeImageListCheck = False
-			DommeImageFound = False
+		DommeImageListCheck = False
+		DommeImageFound = False
 
-			Debug.Print("Filter Test Bookmark Reached")
+		Debug.Print("Filter Test Bookmark Reached")
 
 
-			LocalImageListCheck = True
+		LocalImageListCheck = True
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ImageTag(") Then
-					If GetLocalImage(ListClean(PoundCount)) = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ImageTag(") Then
+				If GetLocalImage(ListClean(PoundCount)) = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			LocalImageListCheck = False
-			LocalImageFound = False
+		LocalImageListCheck = False
+		LocalImageFound = False
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Stroking") Or ListClean(PoundCount).Contains("@SubStroking") Then
-					If SubStroking = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@Stroking") Or ListClean(PoundCount).Contains("@SubStroking") Then
+				If SubStroking = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@NotStroking") Or ListClean(PoundCount).Contains("@SubNotStroking") Then
-					If SubStroking = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@NotStroking") Or ListClean(PoundCount).Contains("@SubNotStroking") Then
+				If SubStroking = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Edging") Or ListClean(PoundCount).Contains("@SubEdging") Then
-					If SubEdging = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@Edging") Or ListClean(PoundCount).Contains("@SubEdging") Then
+				If SubEdging = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@NotEdging") Or ListClean(PoundCount).Contains("@SubNotEdging") Then
-					If SubEdging = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@NotEdging") Or ListClean(PoundCount).Contains("@SubNotEdging") Then
+				If SubEdging = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@HoldingTheEdge") Or ListClean(PoundCount).Contains("@SubHoldingTheEdge") Then
-					If SubHoldingEdge = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@HoldingTheEdge") Or ListClean(PoundCount).Contains("@SubHoldingTheEdge") Then
+				If SubHoldingEdge = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@NotHoldingTheEdge") Or ListClean(PoundCount).Contains("@SubNotHoldingTheEdge") Then
-					If SubHoldingEdge = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@NotHoldingTheEdge") Or ListClean(PoundCount).Contains("@SubNotHoldingTheEdge") Then
+				If SubHoldingEdge = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Morning") Then
-					If GeneralTime <> "Morning" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@Morning") Then
+				If GeneralTime <> "Morning" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Afternoon") Then
-					If GeneralTime <> "Afternoon" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@Afternoon") Then
+				If GeneralTime <> "Afternoon" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Night") Then
-					If GeneralTime <> "Night" Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@Night") Then
+				If GeneralTime <> "Night" Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@GoodMood") Then
-					If DommeMood <= FrmSettings.NBDomMoodMax.Value Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@GoodMood") Then
+				If DommeMood <= FrmSettings.NBDomMoodMax.Value Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@BadMood") Then
-					If DommeMood >= FrmSettings.NBDomMoodMin.Value Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@BadMood") Then
+				If DommeMood >= FrmSettings.NBDomMoodMin.Value Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@NeutralMood") Then
-					If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@NeutralMood") Then
+				If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@SetModule(") Then
-					If SetModule <> "" Or BookmarkModule = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@SetModule(") Then
+				If SetModule <> "" Or BookmarkModule = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@OrgasmRestricted") Then
-					If OrgasmRestricted = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@OrgasmRestricted") Then
+				If OrgasmRestricted = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@OrgasmNotRestricted") Then
-					If OrgasmRestricted = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@OrgasmNotRestricted") Then
+				If OrgasmRestricted = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@SubWorshipping") Then
-					If WorshipMode = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@SubWorshipping") Then
+				If WorshipMode = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@SubNotWorshipping") Then
-					If WorshipMode = True Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@SubNotWorshipping") Then
+				If WorshipMode = True Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@LongHold") Then
-					If LongHold = False Or SubHoldingEdge = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@LongHold") Then
+				If LongHold = False Or SubHoldingEdge = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@ExtremeHold") Then
-					If ExtremeHold = False Or SubHoldingEdge = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@ExtremeHold") Then
+				If ExtremeHold = False Or SubHoldingEdge = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@AssWorship") Then
-					If WorshipTarget <> "Ass" Or WorshipMode = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@AssWorship") Then
+				If WorshipTarget <> "Ass" Or WorshipMode = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@BoobWorship") Then
-					If WorshipTarget <> "Boobs" Or WorshipMode = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@BoobWorship") Then
+				If WorshipTarget <> "Boobs" Or WorshipMode = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@PussyWorship") Then
-					If WorshipTarget <> "Pussy" Or WorshipMode = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@PussyWorship") Then
+				If WorshipTarget <> "Pussy" Or WorshipMode = False Then
+					If StrokeFilter = True Then
+						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
 							PoundLine -= 1
-						End If
+						Next
+					Else
+						ListClean.Remove(ListClean(PoundCount))
+						PoundLine -= 1
 					End If
 				End If
-			Loop Until PoundCount = 0
+			End If
+		Loop Until PoundCount = 0
 
-			'If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
+		'If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
 
-			'Debug.Print("LocalTagImageList.Count = " & LocalTagImageList.Count)
+		'Debug.Print("LocalTagImageList.Count = " & LocalTagImageList.Count)
 
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Info") Then
-					ListClean.Remove(ListClean(PoundCount))
-					PoundLine -= 1
-				End If
-			Loop Until PoundCount = 0
+		PoundCount = PoundLine
+		Do
+			Application.DoEvents()
+			PoundCount -= 1
+			If ListClean(PoundCount).Contains("@Info") Then
+				ListClean.Remove(ListClean(PoundCount))
+				PoundLine -= 1
+			End If
+		Loop Until PoundCount = 0
 
-			ListClean.Remove(ListClean(ListClean.Count - 1))
+		ListClean.Remove(ListClean(ListClean.Count - 1))
 
-			For i As Integer = 0 To ListClean.Count - 1
-				Debug.Print(ListClean(i))
-			Next
+		For i As Integer = 0 To ListClean.Count - 1
+			Debug.Print(ListClean(i))
+		Next
 
-			'For i As Integer = 0 To ListClean.Count - 1
-			'Debug.Print("AFTER " & i & ". " & ListClean(i))
-			'Next
+		'For i As Integer = 0 To ListClean.Count - 1
+		'Debug.Print("AFTER " & i & ". " & ListClean(i))
+		'Next
 
-			'Dim ListReturn As String = ListClean(randomizer.Next(0, ListClean.Count - 1))
+		'Dim ListReturn As String = ListClean(randomizer.Next(0, ListClean.Count - 1))
 
-			For x As Integer = 0 To ListClean.Count - 1
+		For x As Integer = 0 To ListClean.Count - 1
 			ListClean(x) = ListClean(x).Replace("#TagGarment", TagGarment.Replace("-", " "))
 			ListClean(x) = ListClean(x).Replace("#TagUnderwear", TagUnderwear.Replace("-", " "))
 			ListClean(x) = ListClean(x).Replace("#TagTattoo", TagTattoo.Replace("-", " "))
 			ListClean(x) = ListClean(x).Replace("#TagSexToy", TagSexToy.Replace("-", " "))
 			ListClean(x) = ListClean(x).Replace("#TagFurniture", TagFurniture.Replace("-", " "))
 			'ListClean(x) = ListClean(x).Replace("-", " ")
-			Next
+		Next
 
-			Debug.Print("Filter List Complete")
+		Debug.Print("Filter List Complete")
 
-			Return ListClean
+		Return ListClean
 
 	End Function
 
@@ -20682,7 +20682,7 @@ Skip_RandomFile:
 			If randomizer.Next(1, 101) < 51 Then
 				GoTo LocalButt
 			Else
-				GoTo Onlinebutt
+				GoTo OnlineButt
 			End If
 		End If
 
@@ -20697,9 +20697,9 @@ LocalButt:
 		If Directory.Exists(FrmSettings.LBLButtPath.Text) Then
 
 			If FrmSettings.CBButtSubDir.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*")
 			End If
 
 			Array.Sort(files)
@@ -20740,9 +20740,9 @@ LocalBoobs:
 		If Directory.Exists(FrmSettings.LBLBoobPath.Text) Then
 
 			If FrmSettings.CBBoobSubDir.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*")
 			End If
 
 			Array.Sort(files)
@@ -20763,7 +20763,7 @@ OnlineBoobs:
 
 FinishTNA:
 
-		
+
 
 
 	End Sub
@@ -21141,9 +21141,9 @@ AlreadySeen:
 
 			If Not CheckString = "NULL" Then
 				If CheckBoolean = True Then
-					files = Directory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(CheckString, "*.*")
+					files = myDirectory.GetFiles(CheckString, "*.*")
 				End If
 
 				Array.Sort(files)
@@ -22848,18 +22848,18 @@ TryNext:
 			GetFolder = ImageFolderComboBox.Text
 
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			'Dim files As String() = Directory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+			'Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
 
 			Dim files As String()
 
 			If FrmSettings.CBSlideshowSubDir.Checked = True Then
-				files = Directory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(GetFolder, "*.*")
+				files = myDirectory.GetFiles(GetFolder, "*.*")
 			End If
 
 
-			' Dim files As String() = Directory.GetFiles(GetFolder, "*.*")
+			' Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*")
 			Array.Sort(files)
 			' For Each fi As String In files
 			'If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
@@ -22877,17 +22877,17 @@ TryNext:
 			Next
 
 			' If FrmSettings.CBSlideshowSubDir.Checked = True Then
-			'FileCountMax = Directory.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
+			'FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
 			'Else
-			'   FileCountMax = Directory.GetFiles(GetFolder, "*.jpg").Count
-			'  FileCountMax += Directory.GetFiles(GetFolder, "*.png").Count
-			' FileCountMax += Directory.GetFiles(GetFolder, "*.gif").Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.bmp").Count
-			'FileCountMax += Directory.GetFiles(GetFolder, "*.jpeg").Count
+			'   FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg").Count
+			'  FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png").Count
+			' FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif").Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp").Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg").Count
 			'End If
 
 			FileCountMax = _ImageFileNames.Count - 1
@@ -23022,18 +23022,18 @@ TryNext:
 
 
 				Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-				'Dim files As String() = Directory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+				'Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
 
 				Dim files As String()
 
 				If FrmSettings.CBSlideshowSubDir.Checked = True Then
-					files = Directory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+					files = myDirectory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
 				Else
-					files = Directory.GetFiles(GetFolder, "*.*")
+					files = myDirectory.GetFiles(GetFolder, "*.*")
 				End If
 
 
-				' Dim files As String() = Directory.GetFiles(GetFolder, "*.*")
+				' Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*")
 				Array.Sort(files)
 
 				' For Each fi As String In files
@@ -23052,17 +23052,17 @@ TryNext:
 				Next
 
 				' If FrmSettings.CBSlideshowSubDir.Checked = True Then
-				'FileCountMax = Directory.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
-				'FileCountMax += Directory.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
-				'FileCountMax += Directory.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
-				'FileCountMax += Directory.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
-				'FileCountMax += Directory.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
+				'FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
 				'Else
-				'   FileCountMax = Directory.GetFiles(GetFolder, "*.jpg").Count
-				'  FileCountMax += Directory.GetFiles(GetFolder, "*.png").Count
-				' FileCountMax += Directory.GetFiles(GetFolder, "*.gif").Count
-				'FileCountMax += Directory.GetFiles(GetFolder, "*.bmp").Count
-				'FileCountMax += Directory.GetFiles(GetFolder, "*.jpeg").Count
+				'   FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg").Count
+				'  FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png").Count
+				' FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif").Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp").Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg").Count
 				'End If
 
 				FileCountMax = _ImageFileNames.Count - 1
@@ -24002,7 +24002,7 @@ GetDommeSlideshow:
 
 
 
-		For Each Dir As String In Directory.GetDirectories(FrmSettings.LBLDomImageDir.Text)
+		For Each Dir As String In myDirectory.GetDirectories(FrmSettings.LBLDomImageDir.Text)
 			Try
 				GreetFolder.Add(Dir)
 			Catch
@@ -24038,9 +24038,9 @@ GetDommeSlideshow:
 		Dim files As String()
 
 		If FrmSettings.CBSlideshowSubDir.Checked = True Then
-			files = Directory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+			files = myDirectory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
 		Else
-			files = Directory.GetFiles(GetFolder, "*.*")
+			files = myDirectory.GetFiles(GetFolder, "*.*")
 		End If
 
 
@@ -24414,7 +24414,7 @@ GetDommeSlideshow:
 		Contact1Folder.Clear()
 		Contact1Pics.Clear()
 		If Directory.Exists(FrmSettings.LBLContact1ImageDir.Text) Then
-			For Each Dir As String In Directory.GetDirectories(FrmSettings.LBLContact1ImageDir.Text)
+			For Each Dir As String In myDirectory.GetDirectories(FrmSettings.LBLContact1ImageDir.Text)
 				Try
 					Contact1Folder.Add(Dir)
 				Catch
@@ -24431,7 +24431,7 @@ GetDommeSlideshow:
 
 				ContactFolder = Contact1Folder(randomizer.Next(0, Contact1Folder.Count))
 
-				ContactPics = Directory.GetFiles(ContactFolder, "*.*")
+				ContactPics = myDirectory.GetFiles(ContactFolder, "*.*")
 				Array.Sort(ContactPics)
 
 
@@ -24464,7 +24464,7 @@ GetDommeSlideshow:
 		Contact2Folder.Clear()
 		Contact2Pics.Clear()
 		If Directory.Exists(FrmSettings.LBLContact2ImageDir.Text) Then
-			For Each Dir As String In Directory.GetDirectories(FrmSettings.LBLContact2ImageDir.Text)
+			For Each Dir As String In myDirectory.GetDirectories(FrmSettings.LBLContact2ImageDir.Text)
 				Try
 					Contact2Folder.Add(Dir)
 				Catch
@@ -24481,7 +24481,7 @@ GetDommeSlideshow:
 
 				ContactFolder = Contact2Folder(randomizer.Next(0, Contact2Folder.Count))
 
-				ContactPics = Directory.GetFiles(ContactFolder, "*.*")
+				ContactPics = myDirectory.GetFiles(ContactFolder, "*.*")
 				Array.Sort(ContactPics)
 
 
@@ -24513,7 +24513,7 @@ GetDommeSlideshow:
 		Contact3Folder.Clear()
 		Contact3Pics.Clear()
 		If Directory.Exists(FrmSettings.LBLContact3ImageDir.Text) Then
-			For Each Dir As String In Directory.GetDirectories(FrmSettings.LBLContact3ImageDir.Text)
+			For Each Dir As String In myDirectory.GetDirectories(FrmSettings.LBLContact3ImageDir.Text)
 				Try
 					Contact3Folder.Add(Dir)
 				Catch
@@ -24531,7 +24531,7 @@ GetDommeSlideshow:
 
 				ContactFolder = Contact3Folder(randomizer.Next(0, Contact3Folder.Count))
 
-				ContactPics = Directory.GetFiles(ContactFolder, "*.*")
+				ContactPics = myDirectory.GetFiles(ContactFolder, "*.*")
 				Array.Sort(ContactPics)
 
 
@@ -29995,9 +29995,9 @@ SkipNew:
 		Dim files As String()
 		Try
 			If subdir = True Then
-				files = Directory.GetFiles(dir, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(dir, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(dir, "*.*")
+				files = myDirectory.GetFiles(dir, "*.*")
 			End If
 
 			Array.Sort(files)

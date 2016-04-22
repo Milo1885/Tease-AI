@@ -261,9 +261,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIHardcore.Checked = True And Directory.Exists(FrmSettings.LBLIHardcore.Text) Then
 			If FrmSettings.CBIHardcoreSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -275,9 +275,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBISoftcore.Checked = True And Directory.Exists(FrmSettings.LBLISoftcore.Text) Then
 			If FrmSettings.CBISoftcoreSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -289,9 +289,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBILesbian.Checked = True And Directory.Exists(FrmSettings.LBLILesbian.Text) Then
 			If FrmSettings.CBILesbianSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -303,9 +303,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIBlowjob.Checked = True And Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then
 			If FrmSettings.CBIBlowjobSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -317,9 +317,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIFemdom.Checked = True And Directory.Exists(FrmSettings.LBLIFemdom.Text) Then
 			If FrmSettings.CBIFemdomSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -331,9 +331,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBILezdom.Checked = True And Directory.Exists(FrmSettings.LBLILezdom.Text) Then
 			If FrmSettings.CBILezdomSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -345,9 +345,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIHentai.Checked = True And Directory.Exists(FrmSettings.LBLIHentai.Text) Then
 			If FrmSettings.CBIHentaiSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -359,9 +359,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIGay.Checked = True And Directory.Exists(FrmSettings.LBLIGay.Text) Then
 			If FrmSettings.CBIGaySD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIGay.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIGay.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIGay.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIGay.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -373,9 +373,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIMaledom.Checked = True And Directory.Exists(FrmSettings.LBLIMaledom.Text) Then
 			If FrmSettings.CBIMaledomSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -387,9 +387,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBICaptions.Checked = True And Directory.Exists(FrmSettings.LBLICaptions.Text) Then
 			If FrmSettings.CBICaptionsSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -401,9 +401,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIGeneral.Checked = True And Directory.Exists(FrmSettings.LBLIGeneral.Text) Then
 			If FrmSettings.CBIGeneralSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -491,9 +491,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIHardcore.Checked = True And Directory.Exists(FrmSettings.LBLIHardcore.Text) Then
 			If FrmSettings.CBIHardcoreSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -505,9 +505,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBISoftcore.Checked = True And Directory.Exists(FrmSettings.LBLISoftcore.Text) Then
 			If FrmSettings.CBISoftcoreSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -519,9 +519,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBILesbian.Checked = True And Directory.Exists(FrmSettings.LBLILesbian.Text) Then
 			If FrmSettings.CBILesbianSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -533,9 +533,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIBlowjob.Checked = True And Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then
 			If FrmSettings.CBIBlowjobSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -547,9 +547,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIFemdom.Checked = True And Directory.Exists(FrmSettings.LBLIFemdom.Text) Then
 			If FrmSettings.CBIFemdomSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -561,9 +561,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBILezdom.Checked = True And Directory.Exists(FrmSettings.LBLILezdom.Text) Then
 			If FrmSettings.CBILezdomSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -575,9 +575,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIHentai.Checked = True And Directory.Exists(FrmSettings.LBLIHentai.Text) Then
 			If FrmSettings.CBIHentaiSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -589,9 +589,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIGay.Checked = True And Directory.Exists(FrmSettings.LBLIGay.Text) Then
 			If FrmSettings.CBIGaySD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIGay.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIGay.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIGay.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIGay.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -603,9 +603,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIMaledom.Checked = True And Directory.Exists(FrmSettings.LBLIMaledom.Text) Then
 			If FrmSettings.CBIMaledomSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -617,9 +617,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBICaptions.Checked = True And Directory.Exists(FrmSettings.LBLICaptions.Text) Then
 			If FrmSettings.CBICaptionsSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
@@ -631,9 +631,9 @@ Public Class FrmCardList
 
 		If FrmSettings.CBIGeneral.Checked = True And Directory.Exists(FrmSettings.LBLIGeneral.Text) Then
 			If FrmSettings.CBIGeneralSD.Checked = True Then
-				files = Directory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*", SearchOption.AllDirectories)
+				files = myDirectory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*", SearchOption.AllDirectories)
 			Else
-				files = Directory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*")
+				files = myDirectory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*")
 			End If
 			Array.Sort(files)
 			For Each fi As String In files
