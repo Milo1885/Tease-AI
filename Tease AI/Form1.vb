@@ -486,6 +486,10 @@ Public Class Form1
 	Dim SplitContainerHeight As Integer
 
 	Dim DommeImageFound As Boolean
+	''' <summary>
+	''' Variable Deprected. Remove from Suspend and Resume Session needed. 
+	''' But check for Incompatibilty first.
+	''' </summary>
 	Dim DommeImageListCheck As Boolean
 
 	Dim LocalImageFound As Boolean
@@ -6456,44 +6460,26 @@ EndSysMes:
 				If ShowPicture = True Or DommeImageFound = True Then
 
 
-					'ClearMainPictureBox()
-					CheckDommeTags()
 
 					Try
-						'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
 						If RiskyDeal = True Then
+							' ######################## Risky Pick #########################
 							FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
+						ElseIf DommeImageFound = True Then
+							' ######################## Domme Tags #########################
+							ShowImage(DommeImageSTR)
+							DommeImageFound = False
+						ElseIf LocalImageFound = True Then
+							' ######################## Local Img. #########################
+							ShowImage(LocalImageSTR)
+							LocalImageFound = False
 						Else
-							If DommeImageFound = True Then
-								ShowImage(DommeImageSTR)
-								'ImageLocation = DommeImageSTR
-								'DisplayImage(DommeImage)
-								'PBImage = DommeImageSTR
-								'ImageThread.Start()
-								'mainPictureBox.Image = DommeImage
-								DommeImageFound = False
-							Else
-								If LocalImageFound = True Then
-									'DisplayImage(LocalImage)
-									ShowImage(LocalImageSTR)
-									'ImageLocation = LocalImageSTR
-									'PBImage = LocalImageSTR
-									'ImageThread.Start()
-									'mainPictureBox.Image = LocalImage
-									LocalImageFound = False
-								Else
-									ShowImage(DomPic)
-									'ImageLocation = DomPic
-									'PBImage = DomPic
-									'ImageThread.Start()
-									'DisplayImage()
-									'mainPictureBox.Image = Image.FromFile(DomPic)
-								End If
-							End If
+							' ######################## Slideshow ##########################
+							ShowImage(DomPic)
 						End If
-						CheckDommeTags()
-
-					Catch
+					Catch ex As Exception
+						'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
+						Debug.Print(ex.Message & vbCrLf & ex.StackTrace)
 						ClearMainPictureBox()
 						' GoTo TryNextWithTease
 					End Try
@@ -7362,47 +7348,29 @@ EndSysMes:
 				If ShowPicture = True Or DommeImageFound = True Then
 
 
-					'ClearMainPictureBox()
-
-					CheckDommeTags()
-
-
 					Try
-						'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
 						If RiskyDeal = True Then
+							' ######################## Risky Pick #########################
 							FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
+						ElseIf DommeImageFound = True Then
+							' ######################## Domme Tags #########################
+							ShowImage(DommeImageSTR)
+							DommeImageFound = False
+						ElseIf LocalImageFound = True Then
+							' ######################## Local Img. #########################
+							ShowImage(LocalImageSTR)
+							LocalImageFound = False
 						Else
-							If DommeImageFound = True Then
-								ShowImage(DommeImageSTR)
-								'ImageLocation = DommeImageSTR
-								'PBImage = DommeImageSTR
-								'ImageThread.Start()
-								'mainPictureBox.Image = DommeImage
-								DommeImageFound = False
-							Else
-								If LocalImageFound = True Then
-									ShowImage(LocalImageSTR)
-									'ImageLocation = LocalImageSTR
-									'PBImage = LocalImageSTR
-									'ImageThread.Start()
-									'mainPictureBox.Image = LocalImage
-									LocalImageFound = False
-								Else
-									ShowImage(DomPic)
-									'ImageLocation = DomPic
-									'PBImage = DomPic
-									'ImageThread.Start()
-									'DisplayImage(Image.FromFile(DomPic))
-									'mainPictureBox.Image = Image.FromFile(DomPic)
-								End If
-							End If
+							' ######################## Slideshow ##########################
+							ShowImage(DomPic)
 						End If
-						CheckDommeTags()
-
-					Catch
+					Catch ex As Exception
+						'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
+						Debug.Print(ex.Message & vbCrLf & ex.StackTrace)
 						ClearMainPictureBox()
 						' GoTo TryNextWithTease
 					End Try
+
 					If FrmSettings.landscapeCheckBox.Checked = True Then
 						If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
 							mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
@@ -7730,14 +7698,8 @@ NullResponseLine2:
 
 			If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-			CheckDommeTags()
 			ShowImage(_ImageFileNames(FileCount))
-			'ImageLocation = _ImageFileNames(FileCount)
-			'PBImage = _ImageFileNames(FileCount)
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
-			'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
-			CheckDommeTags()
+
 
 
 			nextButton.Enabled = True
@@ -7799,18 +7761,11 @@ TryNext:
 
 		If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-		CheckDommeTags()
 
-		'ImageThread.Abort()
 
 		Try
 			ShowImage(_ImageFileNames(FileCount))
-			'ImageLocation = _ImageFileNames(FileCount)
-			'PBImage = _ImageFileNames(FileCount)
-			'ImageThread.Start()
-			'DisplayImage(_ImageFileNames(FileCount))
-			' mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
-			CheckDommeTags()
+
 			JustShowedBlogImage = False
 
 		Catch
@@ -7868,16 +7823,10 @@ TryPrevious:
 
 		If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-		CheckDommeTags()
 
 		Try
 			ShowImage(_ImageFileNames(FileCount))
-			'ImageLocation = _ImageFileNames(FileCount)
-			'PBImage = _ImageFileNames(FileCount)
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
-			' mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
-			CheckDommeTags()
+
 
 			JustShowedBlogImage = False
 		Catch
@@ -10507,13 +10456,20 @@ RinseLatherRepeat:
 
 		If StringClean.Contains("@DommeTag(") Then
 			Dim TagFlag As String = GetParentheses(StringClean, "@DommeTag(")
-			GetDommeImage(TagFlag)
+			' Try to get a Domme Image for the given Tags.
+			DommeImageSTR = GetDommeImage(TagFlag)
+			' Check the Result 
+			If DommeImageSTR <> "" Then DommeImageFound = True
+			' Clean the Text.
 			StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
 		End If
 
 		If StringClean.Contains("@DomTag(") Then
 			Dim TagFlag As String = GetParentheses(StringClean, "@DomTag(")
-			GetDommeImage(TagFlag)
+			' Try to get a Domme Image for the given Tags.
+			DommeImageSTR = GetDommeImage(TagFlag)
+			' Check the Result 
+			If DommeImageSTR <> "" Then DommeImageFound = True Else DommeImageFound = False
 			StringClean = StringClean.Replace("@DomTag(" & TagFlag & ")", "")
 		End If
 
@@ -15970,7 +15926,8 @@ VTSkip:
 	''' This Function is running timeconsuming Regex and IO Operations in a differnt Task.
 	''' </summary>
 	''' <param name="DomTag">The DommeTags, to Search for.</param>
-	''' <returns>Returns remanent true, if there is a DommeImage, with the specified Tags.</returns>
+	''' <returns>Returns a String representing the ImageLocation for the found image. If none was found it will 
+	''' return an empty string.</returns>
 	''' <remarks>
 	''' It is possible to Exclude Tags from Search <br></br>
 	''' Examples: <br></br>
@@ -15992,9 +15949,7 @@ VTSkip:
 	''' The Tag-Order, case and count doesn't matter. 
 	''' This Function should be ThreadSafe (Microsoft would propably disagree, but who really understands Threadsafty... ;-) )
 	'''   </remarks>
-	Public Function GetDommeImage(ByVal DomTag As String) As Boolean
-		DommeImageSTR = Nothing
-		DommeImageFound = False
+	Public Function GetDommeImage(ByVal DomTag As String) As String
 		Try
 			Dim __targetFolder As String = Path.GetDirectoryName(_ImageFileNames(FileCount))
 
@@ -16176,9 +16131,8 @@ Skip_RandomFile:
                 ' Check if there was an exception, if yes rethrow it.
                 If task1.IsFaulted Then Throw task1.Exception.InnerException
 
-                ' Set the stuff and return it.
-                DommeImageSTR = task1.Result
-				DommeImageFound = True
+				Return task1.Result
+
 			End If
 		Catch ex As Exception
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
@@ -16186,10 +16140,8 @@ Skip_RandomFile:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             'SUGGESTION: Build in a Debug-Window, so the User can review such "Erros", without beeing interrupted (ôÔ).
             Debug.Print(ex.Message)
-			DommeImageSTR = Nothing
-			DommeImageFound = False
+			Return ""
 		End Try
-		Return DommeImageFound
 	End Function
 
 	Public Function GetLocalImage(ByVal LocTag As String) As Boolean
@@ -20135,15 +20087,13 @@ Skip_RandomFile:
 
 
 
-		DommeImageListCheck = True
-
 		PoundCount = PoundLine
 		Do
 			' Application.DoEvents()
 			PoundCount -= 1
 			'Debug.Print("Check ListClean(PoundCount) = " & ListClean(PoundCount))
 			If ListClean(PoundCount).Contains("@DommeTag(") Then
-				If GetDommeImage(GetParentheses(ListClean(PoundCount), "@DommeTag(")) = False Or LockImage = True Then
+				If GetDommeImage(GetParentheses(ListClean(PoundCount), "@DommeTag(")) <> "" Or LockImage = True Then
 					'Debug.Print("DommImageFalse")
 					'Debug.Print("StrokeFilter = " & StrokeFilter)
 					If StrokeFilter = True Then
@@ -20163,8 +20113,6 @@ Skip_RandomFile:
 			End If
 		Loop Until PoundCount = 0
 
-		DommeImageListCheck = False
-		DommeImageFound = False
 
 		Debug.Print("Filter Test Bookmark Reached")
 
@@ -22163,7 +22111,7 @@ NoRepeatOFiles:
 			End If
 
 			' Read all lines of given file.
-			Dim ETLines As New List(Of String)
+			Dim ETLines As List(Of String) = Txt2List(File2Read)
 
 			Try
 				ETLines = FilterList(ETLines)
@@ -22586,18 +22534,9 @@ TryNext:
 
 			If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-			'ClearMainPictureBox()
-
-			CheckDommeTags()
 
 			Try
 				ShowImage(_ImageFileNames(FileCount))
-				'ImageLocation = _ImageFileNames(FileCount)
-				'PBImage = 
-				'ImageThread.Start()
-				'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
-				'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
-				CheckDommeTags()
 				JustShowedBlogImage = False
 				JustShowedSlideshowImage = True
 
@@ -22712,15 +22651,12 @@ TryNext:
 		Dim TnARandom As Integer = randomizer.Next(1, 101)
 
 		'ClearMainPictureBox()
+		'QnD-BUGFIX: Booblist was empty at this point. 
+		If BoobList.Count = 0 Or AssList.Count = 0 Then GetTnAList()
 
 		If TnARandom < 51 Then
 			Dim BoobString As String = BoobList(randomizer.Next(0, BoobList.Count))
 			ShowImage(BoobString)
-			'ImageLocation = BoobString
-			'PBImage = 
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile(BoobList(randomizer.Next(0, BoobList.Count))))
-			'mainPictureBox.Image = Image.FromFile(BoobList(randomizer.Next(0, BoobList.Count)))
 			DeleteLocalImageFilePath = FoundString
 
 			BoobImage = True
@@ -22729,11 +22665,6 @@ TryNext:
 		Else
 			Dim ButtString As String = AssList(randomizer.Next(0, AssList.Count))
 			ShowImage(ButtString)
-			'ImageLocation = ButtString
-			'PBImage =
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile())
-			'mainPictureBox.Image = Image.FromFile(AssList(randomizer.Next(0, AssList.Count)))
 			DeleteLocalImageFilePath = FoundString
 
 			BoobImage = False
@@ -22859,13 +22790,7 @@ TryNext:
 
 			If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-			CheckDommeTags()
 			ShowImage(_ImageFileNames(FileCount))
-			'ImageLocation = _ImageFileNames(FileCount)
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
-			'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
-			CheckDommeTags()
 			JustShowedBlogImage = False
 
 			nextButton.Enabled = True
@@ -23034,12 +22959,7 @@ TryNext:
 
 				If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-				CheckDommeTags()
 				ShowImage(_ImageFileNames(FileCount))
-				'ImageLocation = _ImageFileNames(FileCount)
-				'ImageThread.Start()
-				'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
-				CheckDommeTags()
 				JustShowedBlogImage = False
 
 
@@ -23659,7 +23579,8 @@ TryNext:
 #Region "-------------------------------------------------- MainPictureBox ----------------------------------------------------"
 
 	Private Sub mainPictureBox_LoadCompleted(sender As Object, e As System.ComponentModel.AsyncCompletedEventArgs) Handles mainPictureBox.LoadCompleted
-		ImageThread.Abort()
+
+		CheckDommeTags()
 		Debug.Print("ImageLoadCOmpleted")
 	End Sub
 
@@ -23825,13 +23746,8 @@ TryNext:
 
 		ClearMainPictureBox()
 
-		CheckDommeTags()
-
 		Try
 			ShowImage(_ImageFileNames(FileCount))
-
-			CheckDommeTags()
-
 			JustShowedBlogImage = False
 		Catch
 
@@ -23867,12 +23783,9 @@ TryNext:
 
 		ClearMainPictureBox()
 
-		CheckDommeTags()
 
 		Try
 			ShowImage(_ImageFileNames(FileCount))
-
-			CheckDommeTags()
 
 			JustShowedBlogImage = False
 		Catch
@@ -24023,17 +23936,10 @@ GetDommeSlideshow:
 		End If
 
 
-		'ClearMainPictureBox()
 
 		If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-		CheckDommeTags()
 		ShowImage(_ImageFileNames(FileCount))
-		'ImageLocation = _ImageFileNames(FileCount)
-		'ImageThread.Start()
-		'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
-		'mainPictureBox.Image = Image.FromFile(_ImageFileNames(FileCount))
-		CheckDommeTags()
 		JustShowedBlogImage = False
 
 		nextButton.Enabled = True
@@ -25692,14 +25598,11 @@ GetDommeSlideshow:
 		If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then Contact3Pics = Txt2List(SettingsPath & ResumePrefix & "Contact3Pics.txt")
 
 		If SlideshowLoaded = True Then
-			CheckDommeTags()
 			If File.Exists(_ImageFileNames(FileCount)) Then
 				PBImage = _ImageFileNames(FileCount)
 				' Github Patch ImageThread.Start()
 				DisplayImage()
 			End If
-			'DisplayImage(Image.FromFile(_ImageFileNames(FileCount)))
-			CheckDommeTags()
 		End If
 
 		ChatText.DocumentText = Chat
@@ -27681,7 +27584,8 @@ SkipNew:
 
 
 	Public Function AddDommeTag(ByVal AddDomTag As String, ByVal AddCustomDomTag As String)
-
+		MsgBox("This function is deactivated for maintenance", MsgBoxStyle.Information, "Not Available yet")
+		Exit Function
 		Dim DomTag As String = "Tag" & AddDomTag
 		Dim Custom As String
 		If AddCustomDomTag = "Nothing" Then
@@ -27760,7 +27664,8 @@ SkipNew:
 
 
 	Public Function RemoveDommeTag(ByVal RemoveDomTag As String, ByVal RemoveCustomDomTag As String)
-
+		MsgBox("This function is deactivated for maintenance", MsgBoxStyle.Information, "Not Available yet")
+		Exit Function
 		Dim DomTag As String = "Tag" & RemoveDomTag
 		Dim Custom As String
 		If RemoveCustomDomTag = "Nothing" Then
@@ -27826,6 +27731,16 @@ SkipNew:
 
 	End Function
 
+
+	''' <summary>
+	''' <para>In Order to Work, this function has to be called AFTER an Image has been loaded into the 
+	''' <see cref="Form1.mainPictureBox">PictureBox</see>. Everthing else doesn't work properly.</para>
+	''' <para>Right now there are only two working non-UI-Freezing posibilities: The Imagebox 
+	''' LoadCompleted-Event and PBImageThread. In PBImageThread an Invoke is required!</para>
+	''' </summary>
+	''' <remarks>
+	''' To Raise the PictureBoxCompleted-Event, you have to load an Image via LoadAsync(URL).
+	''' </remarks>
 	Public Sub CheckDommeTags()
 
 		Face.BackColor = Color.White
@@ -27912,7 +27827,17 @@ SkipNew:
 
 		'LBLDomTagImg.Text = Path.GetFileName(_ImageFileNames(FileCount))
 
-		Dim TagFile As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt"
+		Dim tmpFilePath As String
+
+		If mainPictureBox.ImageLocation <> "" Then
+			tmpFilePath = mainPictureBox.ImageLocation
+		Else
+			tmpFilePath = _ImageFileNames(FileCount)
+		End If
+
+		Dim tmpFileName As String = Path.GetFileName(tmpFilePath)
+
+		Dim TagFile As String = Path.GetDirectoryName(tmpFilePath) & "\ImageTags.txt"
 
 		If File.Exists(TagFile) Then
 
@@ -27920,7 +27845,8 @@ SkipNew:
 			TagList = Txt2List(TagFile)
 
 			For i As Integer = TagList.Count - 1 To 0 Step -1
-				If TagList(i).Contains(Path.GetFileName(_ImageFileNames(FileCount))) Then
+
+				If TagList(i).Contains(tmpFileName) Then
 					If TagList(i).Contains("TagFace") Then
 						Face.BackColor = Color.ForestGreen
 						Face.ForeColor = Color.White
@@ -29259,7 +29185,7 @@ SkipNew:
 
 		PBImage = ImageToShow
 		ImageLocation = ImageToShow
-		ImageThread = New Thread(AddressOf DisplayImage)
+		ImageThread = New Thread(AddressOf DisplayImage) With {.Name = "ImageThread"}
 		ImageThread.IsBackground = True
 		ImageThread.Start()
 
@@ -29268,13 +29194,16 @@ SkipNew:
 	Public Sub CalculateResponse()
 
 
-		ResponseThread = New Thread(AddressOf DomResponse)
+		ResponseThread = New Thread(AddressOf DomResponse) With {.Name = "ResponseThread"}
 		ResponseThread.IsBackground = True
 		ResponseThread.Start()
 
 	End Sub
 
-	Public Sub DisplayImage()
+	''' <summary>
+	''' Invokes included! This function should be used in a thread.
+	''' </summary>
+	Private Sub DisplayImage()
 
 		If FormLoading = True Then Return
 		If PBImage = "" And PreLoadImage = False Then Return
@@ -29284,38 +29213,37 @@ SkipNew:
 
 		Dim OldImage As Image = mainPictureBox.Image
 
-		'Try
-		'mainPictureBox.Image.Dispose()
-		'Catch
-		'End Try
-
-		'mainPictureBox.Image = Nothing
-
-		'mainPictureBox.Load(PBImage)
-
-		'If PBImage.Contains("/") And PBImage.Contains("://") Then
-		'	mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PBImage)))
-		'Else
-		'	mainPictureBox.Image = Image.FromFile(PBImage)
-		'End If
-
 		If PreLoadImage = True Then
 
 			If Not CachedImage2 Is Nothing Then
 				mainPictureBox.Image = CachedImage2
+				' Reset to Tell CheckDommeTag() this is definitely no DommeImage
+				mainPictureBox.ImageLocation = ""
 				SaveSessionImage(CachedImage2)
 				If Not CachedImage Is Nothing Then CachedImage.Dispose()
 			Else
 				mainPictureBox.Image = CachedImage
+				' Reset to Tell CheckDommeTag() this is definitely no DommeImage
+				mainPictureBox.ImageLocation = ""
 				SaveSessionImage(CachedImage)
 			End If
 			PreLoadImage = False
 
 		Else
 			If PBImage.Contains("/") And PBImage.Contains("://") Then
-				mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PBImage)))
+				Try
+					' Load the Image.
+					mainPictureBox.Image = New Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PBImage)))
+				Catch ex As Net.WebException
+					Exit Sub
+				End Try
+				' We have to set this Property manually, otherwise CheckDommeTag will give a wrong result.
+				mainPictureBox.ImageLocation = PBImage
+
 			Else
-				mainPictureBox.Image = Image.FromFile(PBImage)
+				' This will set the ImageLocation of the PictureBox too
+				mainPictureBox.Load(PBImage)
+
 			End If
 
 			If Not CachedImage Is Nothing Then CachedImage.Dispose()
@@ -29335,6 +29263,8 @@ SkipNew:
 			OldImage.Dispose()
 		End If
 		GC.Collect()
+
+		Me.Invoke(New Action(AddressOf CheckDommeTags))
 
 		Debug.Print("PBImageThread")
 
@@ -30068,5 +29998,5 @@ SkipNew:
 
 	End Sub
 
-	
+
 End Class

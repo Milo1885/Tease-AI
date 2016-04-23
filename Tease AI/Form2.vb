@@ -3268,7 +3268,7 @@ trypreviousimage:
 			GC.Collect()
 
 			ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
-			Form1.mainPictureBox.Image = Image.FromFile(ImageTagDir(0))
+			Form1.mainPictureBox.LoadAsync(ImageTagDir(0))
 			CurrentImageTagImage = ImageTagDir(0)
 
 			If File.Exists(TagImageFolder & "\ImageTags.txt") Then
@@ -3472,7 +3472,7 @@ trypreviousimage:
 
 				Debug.Print("find")
 				ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
-				Form1.mainPictureBox.Image = Image.FromFile(ImageTagDir(0))
+				Form1.mainPictureBox.LoadAsync(ImageTagDir(0))
 
 
 				CurrentImageTagImage = ImageTagDir(0)
@@ -3942,7 +3942,7 @@ trypreviousimage:
 		GC.Collect()
 
 		ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
-		Form1.mainPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
+		Form1.mainPictureBox.LoadAsync(ImageTagDir(ImageTagCount))
 
 
 		CurrentImageTagImage = ImageTagDir(ImageTagCount)
@@ -4166,7 +4166,7 @@ trypreviousimage:
 		GC.Collect()
 
 		ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
-		Form1.mainPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
+		Form1.mainPictureBox.LoadAsync(ImageTagDir(ImageTagCount))
 		CurrentImageTagImage = ImageTagDir(ImageTagCount)
 
 		If ImageTagCount = 0 Then BTNTagPrevious.Enabled = False
@@ -8068,7 +8068,7 @@ WhyUMakeMeDoDis:
 				Return
 			End If
 
-			Form1.mainPictureBox.Image = Image.FromFile(LocalImageTagDir(0))
+			Form1.mainPictureBox.LoadAsync(LocalImageTagDir(0))
 
 
 			CurrentLocalImageTagImage = LocalImageTagDir(0)
@@ -8109,7 +8109,7 @@ WhyUMakeMeDoDis:
 		SetLocalImageTags()
 
 		LocalImageTagCount += 1
-		Form1.mainPictureBox.Image = Image.FromFile(LocalImageTagDir(LocalImageTagCount))
+		Form1.mainPictureBox.LoadAsync(LocalImageTagDir(LocalImageTagCount))
 		CurrentLocalImageTagImage = LocalImageTagDir(LocalImageTagCount)
 
 		If LocalImageTagCount = LocalImageTagDir.Count - 1 Then BTNLocalTagNext.Enabled = False
@@ -9350,7 +9350,7 @@ WhyUMakeMeDoDis:
 		SetLocalImageTags()
 
 		LocalImageTagCount -= 1
-		Form1.mainPictureBox.Image = Image.FromFile(LocalImageTagDir(LocalImageTagCount))
+		Form1.mainPictureBox.LoadAsync(LocalImageTagDir(LocalImageTagCount))
 		CurrentLocalImageTagImage = LocalImageTagDir(LocalImageTagCount)
 
 		If LocalImageTagCount = 0 Then BTNLocalTagPrevious.Enabled = False
@@ -9411,7 +9411,7 @@ WhyUMakeMeDoDis:
 					Return
 				End If
 
-				Form1.mainPictureBox.Image = Image.FromFile(LocalImageTagDir(0))
+				Form1.mainPictureBox.LoadAsync(LocalImageTagDir(0))
 
 
 				CurrentLocalImageTagImage = LocalImageTagDir(0)
