@@ -8417,28 +8417,6 @@ TryNextWithTease:
 
 #Region "----------------------------------------------------- Video-Files ----------------------------------------------------"
 
-	''' =========================================================================================================
-	''' <summary>
-	''' Returns a List of all available videofiles in the given directory.
-	''' </summary>
-	''' <param name="DirectoryPath"></param>
-	''' <returns>A generic list containing all video-files in the directory.</returns>
-	''' <exception cref="Exception">Rethrows all exceptions.</exception>
-	Function GetVideosInDirectory(ByVal DirectoryPath As String) As List(Of String)
-		Try
-			If Directory.Exists(DirectoryPath) Then
-				Dim ___Sup_Ext As New List(Of String) From {".wmv", ".avi", ".mp4", ".m4v", ".mpg", ".mov"}
-				Return myDirectory.GetFiles(DirectoryPath, "*", SearchOption.AllDirectories) _
-					.Where(Function(f) ___Sup_Ext.Contains(Path.GetExtension(f).ToLower())).ToList
-			Else
-				Return New List(Of String)
-			End If
-		Catch ex As Exception
-			Throw
-		End Try
-	End Function
-
-
 	Public Sub RandomVideo()
 		' Reset retentive global variables
 		NoVideo = False
@@ -8452,22 +8430,22 @@ TryNextWithTease:
 		'									Genre Videos
 		'======================================================================================
 		If FrmSettings.CBVideoHardcore.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoHardCore.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoHardCore.Text))
 
 		If FrmSettings.CBVideoSoftCore.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoSoftCore.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoSoftCore.Text))
 
 		If FrmSettings.CBVideoLesbian.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoLesbian.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoLesbian.Text))
 
 		If FrmSettings.CBVideoBlowjob.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoBlowjob.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoBlowjob.Text))
 
 		If FrmSettings.CBVideoFemdom.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoFemdom.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoFemdom.Text))
 
 		If FrmSettings.CBVideoFemsub.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoFemsub.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoFemsub.Text))
 
 		If NoSpecialVideo = True Then GoTo SkipSpecial
 
@@ -8481,38 +8459,38 @@ TryNextWithTease:
 		'								Special - Videos
 		'======================================================================================
 		If FrmSettings.CBVideoJOI.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoJOI.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text))
 
 		If FrmSettings.CBVideoCH.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoCH.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCH.Text))
 
 SkipSpecial:
 		'======================================================================================
 		'									General Videos
 		'======================================================================================
 		If FrmSettings.CBVideoGeneral.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoGeneral.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoGeneral.Text))
 
 		'======================================================================================
 		'									Domme - Videos
 		'======================================================================================
 		If FrmSettings.CBVideoHardcoreD.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoHardCoreD.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoHardCoreD.Text))
 
 		If FrmSettings.CBVideoSoftCoreD.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoSoftCoreD.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoSoftCoreD.Text))
 
 		If FrmSettings.CBVideoLesbianD.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoLesbianD.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoLesbianD.Text))
 
 		If FrmSettings.CBVideoBlowjobD.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoBlowjobD.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoBlowjobD.Text))
 
 		If FrmSettings.CBVideoFemdomD.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoFemdomD.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoFemdomD.Text))
 
 		If FrmSettings.CBVideoFemsubD.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoFemsubD.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoFemsubD.Text))
 
 		If NoSpecialVideo = True Then GoTo SkipSpecialD
 		If ScriptVideoTeaseFlag = True Then
@@ -8525,17 +8503,17 @@ SkipSpecial:
 		'								Domme - Special - Videos
 		'======================================================================================
 		If FrmSettings.CBVideoJOID.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoJOID.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOID.Text))
 
 		If FrmSettings.CBVideoCHD.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoCHD.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCHD.Text))
 
 SkipSpecialD:
 		'======================================================================================
 		'								Domme - General Videos
 		'======================================================================================
 		If FrmSettings.CBVideoGeneralD.Checked = True Then _
-			__TotalFiles.AddRange(GetVideosInDirectory(FrmSettings.LblVideoGeneralD.Text))
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoGeneralD.Text))
 
 
 
@@ -8643,102 +8621,180 @@ GetAnotherRandomVideo:
 		JumpVideo = False
 	End Sub
 
+
+
+	Friend Sub PlayRandomJOI()
+		'ISSUE: there is no control, if a Domme-Video or a Regular JOI is played.
+		'ISSUE: Redundant Code
+		Dim JOIVideos As New List(Of String)
+		JOIVideos.Clear()
+
+		If FrmSettings.LblVideoJOITotal.Text <> "0" And FrmSettings.CBVideoJOI.Checked = True Then
+
+			JOIVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text,
+														 System.IO.SearchOption.AllDirectories))
+		End If
+
+		If FrmSettings.LblVideoJOITotalD.Text <> "0" And FrmSettings.CBVideoJOID.Checked = True Then
+			JOIVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text,
+														 System.IO.SearchOption.AllDirectories))
+		End If
+
+		If JOIVideos.Count < 1 Then
+			'ISSUE: This Message will occur during running Scripts!
+			MessageBox.Show(Me, "No JOI Videos found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+			If TeaseVideo = True Then RunFileText()
+			TeaseVideo = False
+			Return
+		End If
+
+		Dim JOIVideoLine As Integer = randomizer.Next(0, JOIVideos.Count)
+
+		DomWMP.Visible = True
+		DomWMP.stretchToFit = True
+
+		mainPictureBox.Visible = False
+
+		DomWMP.URL = JOIVideos(JOIVideoLine)
+
+
+	End Sub
+
+
+	Friend Sub PlayRandomCH()
+		'ISSUE: there is no control, if a Domme-Video or a Regular JOI is played.
+		'ISSUE: Redundant Code
+		Dim CHVideos As New List(Of String)
+		CHVideos.Clear()
+
+		If FrmSettings.LblVideoCHTotal.Text <> "0" And FrmSettings.CBVideoCH.Checked = True Then
+			CHVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCH.Text))
+		End If
+		If FrmSettings.LblVideoCHTotalD.Text <> "0" And FrmSettings.CBVideoCHD.Checked = True Then
+			CHVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCHD.Text))
+		End If
+
+		If CHVideos.Count < 1 Then
+			'ISSUE: This Message will occur during running Scripts!
+			MessageBox.Show(Me, "No CH Videos found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+			If TeaseVideo = True Then RunFileText()
+			TeaseVideo = False
+			Return
+		End If
+
+		Dim CHVideoLine As Integer = randomizer.Next(0, CHVideos.Count)
+
+		DomWMP.Visible = True
+		DomWMP.stretchToFit = True
+
+		mainPictureBox.Visible = False
+
+		DomWMP.URL = CHVideos(CHVideoLine)
+
+
+	End Sub
+
+
+#Region "----------------------------------------------------- Video-Totals ---------------------------------------------------"
+
 	Public Sub HardCoreVideoTotal()
-		FrmSettings.LblVideoHardCoreTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoHardCore.Text).Count
+		FrmSettings.LblVideoHardCoreTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoHardCore.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoHardCoreTotal.Text)
 	End Sub
 
 	Public Sub SoftcoreVideoTotal()
-		FrmSettings.LblVideoSoftCoreTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoSoftCore.Text).Count
+		FrmSettings.LblVideoSoftCoreTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoSoftCore.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoSoftCoreTotal.Text)
 	End Sub
 
 	Public Sub LesbianVideoTotal()
-		FrmSettings.LblVideoLesbianTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoLesbian.Text).Count
+		FrmSettings.LblVideoLesbianTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoLesbian.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoLesbianTotal.Text)
 	End Sub
 
 	Public Sub BlowjobVideoTotal()
-		FrmSettings.LblVideoBlowjobTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoBlowjob.Text).Count
+		FrmSettings.LblVideoBlowjobTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoBlowjob.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoBlowjobTotal.Text)
 	End Sub
 
 	Public Sub FemdomVideoTotal()
-		FrmSettings.LblVideoFemdomTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoFemdom.Text).Count
+		FrmSettings.LblVideoFemdomTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoFemdom.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemdomTotal.Text)
 	End Sub
 
 	Public Sub FemsubVideoTotal()
-		FrmSettings.LblVideoFemsubTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoFemsub.Text).Count
+		FrmSettings.LblVideoFemsubTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoFemsub.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemsubTotal.Text)
 	End Sub
 
 	Public Sub JOIVideoTotal()
-		FrmSettings.LblVideoJOITotal.Text = GetVideosInDirectory(FrmSettings.LblVideoJOI.Text).Count
+		FrmSettings.LblVideoJOITotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoJOITotal.Text)
 	End Sub
 
 	Public Sub CHVideoTotal()
-		FrmSettings.LblVideoCHTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoCH.Text).Count
+		FrmSettings.LblVideoCHTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoCH.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoCHTotal.Text)
 	End Sub
 
 	Public Sub GeneralVideoTotal()
-		FrmSettings.LblVideoGeneralTotal.Text = GetVideosInDirectory(FrmSettings.LblVideoGeneral.Text).Count
+		FrmSettings.LblVideoGeneralTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoGeneral.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoGeneralTotal.Text)
 	End Sub
 
 	Public Sub HardcoreDVideoTotal()
-		FrmSettings.LblVideoHardCoreTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoHardCoreD.Text).Count
+		FrmSettings.LblVideoHardCoreTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoHardCoreD.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoHardCoreTotalD.Text)
 	End Sub
 
 
 	Public Sub SoftcoreDVideoTotal()
-		FrmSettings.LblVideoSoftCoreTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoSoftCoreD.Text).Count
+		FrmSettings.LblVideoSoftCoreTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoSoftCoreD.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoSoftCoreTotalD.Text)
 	End Sub
 
 
 	Public Sub LesbianDVideoTotal()
-		FrmSettings.LblVideoLesbianTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoLesbianD.Text).Count
+		FrmSettings.LblVideoLesbianTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoLesbianD.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoLesbianTotalD.Text)
 	End Sub
 
 
 	Public Sub BlowjobDVideoTotal()
-		FrmSettings.LblVideoBlowjobTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoBlowjobD.Text).Count
+		FrmSettings.LblVideoBlowjobTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoBlowjobD.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoBlowjobTotalD.Text)
 	End Sub
 
 	Public Sub FemdomDVideoTotal()
-		FrmSettings.LblVideoFemdomTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoFemdomD.Text).Count
+		FrmSettings.LblVideoFemdomTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoFemdomD.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemdomTotalD.Text)
 	End Sub
 
 
 	Public Sub FemsubDVideoTotal()
-		FrmSettings.LblVideoFemsubTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoFemsubD.Text).Count
+		FrmSettings.LblVideoFemsubTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoFemsubD.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemsubTotalD.Text)
 	End Sub
 
 
 	Public Sub JOIDVideoTotal()
-		FrmSettings.LblVideoJOITotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoJOID.Text).Count
+		FrmSettings.LblVideoJOITotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoJOID.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoJOITotalD.Text)
 	End Sub
 
 
 	Public Sub CHDVideoTotal()
-		FrmSettings.LblVideoCHTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoCHD.Text).Count
+		FrmSettings.LblVideoCHTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoCHD.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoCHTotalD.Text)
 	End Sub
 
 
 	Public Sub GeneralDVideoTotal()
-		FrmSettings.LblVideoGeneralTotalD.Text = GetVideosInDirectory(FrmSettings.LblVideoGeneralD.Text).Count
+		FrmSettings.LblVideoGeneralTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoGeneralD.Text).Count
 		RefreshVideoTotal += CInt(FrmSettings.LblVideoGeneralTotalD.Text)
 	End Sub
+
+#End Region
 
 #End Region
 
@@ -22647,113 +22703,6 @@ TryNext:
 	End Sub
 
 
-
-
-	Public Sub PlayRandomJOI()
-
-		Dim JOIVideos As New List(Of String)
-		JOIVideos.Clear()
-
-		If FrmSettings.LblVideoJOITotal.Text <> "0" And FrmSettings.CBVideoJOI.Checked = True Then
-
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOI.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.wmv")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOI.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.avi")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOI.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.mp4")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOI.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.mov")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOI.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.m4v")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOI.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.mpg")
-				JOIVideos.Add(foundFile)
-			Next
-		End If
-
-
-
-		If FrmSettings.LblVideoJOITotalD.Text <> "0" And FrmSettings.CBVideoJOID.Checked = True Then
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOID.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.wmv")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOID.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.avi")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOID.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.mp4")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOID.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.mov")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOID.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.m4v")
-				JOIVideos.Add(foundFile)
-			Next
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoJOID.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.mpg")
-				JOIVideos.Add(foundFile)
-			Next
-		End If
-
-		If JOIVideos.Count < 1 Then
-			MessageBox.Show(Me, "No JOI Videos found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-			If TeaseVideo = True Then RunFileText()
-			TeaseVideo = False
-			Return
-		End If
-
-		Dim JOIVideoLine As Integer = randomizer.Next(0, JOIVideos.Count)
-
-		DomWMP.Visible = True
-		DomWMP.stretchToFit = True
-
-		mainPictureBox.Visible = False
-
-		DomWMP.URL = JOIVideos(JOIVideoLine)
-
-
-	End Sub
-
-
-	Public Sub PlayRandomCH()
-
-		Dim CHVideos As New List(Of String)
-		CHVideos.Clear()
-
-		If FrmSettings.LblVideoCHTotal.Text <> "0" And FrmSettings.CBVideoCH.Checked = True Then
-
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoCH.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.*")
-				If foundFile.Contains(".wmv") Or foundFile.Contains(".avi") Or foundFile.Contains(".mp4") Or foundFile.Contains(".mov") Or foundFile.Contains(".flv") Or foundFile.Contains(".m4v") Or foundFile.Contains(".mpg") Then CHVideos.Add(foundFile)
-			Next
-		End If
-		If FrmSettings.LblVideoCHTotalD.Text <> "0" And FrmSettings.CBVideoCHD.Checked = True Then
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(FrmSettings.LblVideoCHD.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.*")
-				If foundFile.Contains(".wmv") Or foundFile.Contains(".avi") Or foundFile.Contains(".mp4") Or foundFile.Contains(".mov") Or foundFile.Contains(".flv") Or foundFile.Contains(".m4v") Or foundFile.Contains(".mpg") Then CHVideos.Add(foundFile)
-			Next
-		End If
-
-		If CHVideos.Count < 1 Then
-			MessageBox.Show(Me, "No CH Videos found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-			If TeaseVideo = True Then RunFileText()
-			TeaseVideo = False
-			Return
-		End If
-
-		Dim CHVideoLine As Integer = randomizer.Next(0, CHVideos.Count)
-
-		DomWMP.Visible = True
-		DomWMP.stretchToFit = True
-
-		mainPictureBox.Visible = False
-
-		DomWMP.URL = CHVideos(CHVideoLine)
-
-
-	End Sub
 
 
 

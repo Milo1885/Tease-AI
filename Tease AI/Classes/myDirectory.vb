@@ -84,6 +84,80 @@ Public NotInheritable Class myDirectory
 
 #End Region
 
+#Region "---------------------------------------------- GetFiles Media --------------------------------------------------------"
+
+	Public Shared Function GetFilesExtension(ByVal path As String,
+										ByVal filter As List(Of String),
+										ByVal Optional searchOption As System.IO.SearchOption = System.IO.SearchOption.AllDirectories) As List(Of String)
+		Try
+			If System.IO.Directory.Exists(path) Then
+
+				' Convert all Extensions to LowerCase
+				For i = 0 To filter.Count - 1
+					filter(i) = filter(i).ToLower
+				Next
+
+				Return myDirectory.GetFiles(path, "*", searchOption) _
+					.Where(Function(f) filter.Contains(System.IO.Path.GetExtension(f).ToLower())).ToList
+			Else
+				Return New List(Of String)
+			End If
+		Catch ex As Exception
+			Throw
+		End Try
+	End Function
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Returns the names of videofiles (including their paths) in the specified directory, using a value 
+	''' to determine whether to search subdirectories. This Function creates the Root-directory it doeesn't 
+	''' extist and it is a subdirectory of the Applications StartupPath. 
+	''' </summary>
+	''' 
+	''' <param name="path">The relative or absolute path to the directory to search. This string is not 
+	''' case-sensitive.</param>
+	''' 
+	''' <param name="searchOption">One of the enumeration values that specifies whether the search operation 
+	''' should include all subdirectories or only the current directory. This parameter is optional and 
+	''' standard is to search all directories.</param>
+	''' 
+	''' <returns>A generic list containing all video-files in the directory.</returns>
+	''' <exception cref="Exception">Rethrows all exceptions.</exception>
+	Public Shared Function GetFilesVideo(ByVal path As String,
+										 ByVal Optional searchOption As System.IO.SearchOption = System.IO.SearchOption.AllDirectories) As List(Of String)
+
+		Dim supportedExtension As New List(Of String) From {".wmv", ".avi", ".mp4", ".m4v", ".mpg", ".mov", ".flv"}
+
+		Return GetFilesExtension(path, supportedExtension, searchOption)
+
+	End Function
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Returns the names of videofiles (including their paths) in the specified directory, using a value 
+	''' to determine whether to search subdirectories. This Function creates the Root-directory it doeesn't 
+	''' extist and it is a subdirectory of the Applications StartupPath. 
+	''' </summary>
+	''' 
+	''' <param name="path">The relative or absolute path to the directory to search. This string is not 
+	''' case-sensitive.</param>
+	''' 
+	''' <param name="searchOption">One of the enumeration values that specifies whether the search operation 
+	''' should include all subdirectories or only the current directory. This parameter is optional and 
+	''' standard is to search all directories.</param>
+	''' 
+	''' <returns>A generic list containing all video-files in the directory.</returns>
+	''' <exception cref="Exception">Rethrows all exceptions.</exception>
+	Public Shared Function GetFilesImages(ByVal path As String,
+										 ByVal Optional searchOption As System.IO.SearchOption = System.IO.SearchOption.AllDirectories) As List(Of String)
+		Dim supportedExtension As New List(Of String) From {".png", ".jpg", ".gif", ".bmp", ".jpeg"}
+
+		Return GetFilesExtension(path, supportedExtension, searchOption)
+
+	End Function
+
+#End Region
+
 #Region "----------------------------------------- GetDirectories Standard ----------------------------------------------------"
 
 	''' <summary>
