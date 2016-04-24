@@ -27522,8 +27522,6 @@ SkipNew:
 
 
 	Public Function AddDommeTag(ByVal AddDomTag As String, ByVal AddCustomDomTag As String)
-		'MsgBox("This function is deactivated for maintenance", MsgBoxStyle.Information, "Not Available yet")
-		'Exit Function
 		Dim DomTag As String = "Tag" & AddDomTag
 		Dim Custom As String
 		If AddCustomDomTag = "Nothing" Then
@@ -27592,8 +27590,8 @@ SkipNew:
 				My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt", SettingsString, False)
 			End If
 
-		Else
-
+		ElseIf Path.GetDirectoryName(_ImageFileNames(FileCount)) = Path.GetDirectoryName(ImageLocation)
+			' Only Create new file for the loaded Slidshow. This Prevents URL-Image-Tagging.
 			My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt", Path.GetFileName(ImageLocation) & " " & DomTag & Custom, True)
 
 		End If
@@ -27603,8 +27601,6 @@ SkipNew:
 
 
 	Public Function RemoveDommeTag(ByVal RemoveDomTag As String, ByVal RemoveCustomDomTag As String)
-		'MsgBox("This function is deactivated for maintenance", MsgBoxStyle.Information, "Not Available yet")
-		'Exit Function
 		Dim DomTag As String = "Tag" & RemoveDomTag
 		Dim Custom As String
 		If RemoveCustomDomTag = "Nothing" Then
@@ -29165,13 +29161,8 @@ SkipNew:
 				Catch ex As Net.WebException
 					Exit Sub
 				End Try
-				' We have to set this Property manually, otherwise CheckDommeTag will give a wrong result.
-				mainPictureBox.ImageLocation = PBImage
-
 			Else
-				' This will set the ImageLocation of the PictureBox too
-				mainPictureBox.Load(PBImage)
-
+				mainPictureBox.Image = Image.FromFile(PBImage)
 			End If
 
 			If Not CachedImage Is Nothing Then CachedImage.Dispose()
