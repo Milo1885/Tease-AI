@@ -26430,31 +26430,22 @@ GetDommeSlideshow:
 	Private Sub Form1_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
 
 		Debug.Print("Resize Called")
-
-		'Return
-		'If Not Me.Height < 734 And Not Me.Width < 978 Then AdjustWindow()
-
-		' Return
-
 		Debug.Print(Me.WindowState)
 		Debug.Print(Me.WindowCheck)
-		'If Me.WindowState = FormWindowState.Maximized Then
-		If Me.WindowState = 0 Then
-			Debug.Print("Maximized")
-			WindowCheck = True
-			AdjustWindow()
-		End If
 
-		If Me.WindowState = FormWindowState.Normal And WindowCheck = True Then
-			Debug.Print("Resized From Maximized")
-			WindowCheck = False
-			AdjustWindow()
-		End If
+		Select Case Me.WindowState
 
-		'AdjustWindow()
+			Case FormWindowState.Maximized
+				Debug.Print("Maximized")
+				WindowCheck = True
+				AdjustWindow()
 
+			Case FormWindowState.Normal And WindowCheck = True
+				Debug.Print("Resized From Maximized")
+				WindowCheck = False
+				AdjustWindow()
 
-
+		End Select
 	End Sub
 
 	Private Sub Form1_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd
@@ -26900,70 +26891,6 @@ SkipNew:
 			StrokeSlowest = False
 		End If
 
-	End Sub
-
-	Private Sub Form_Resize()
-		'if handling resizing...
-		If bResize Then Exit Sub
-		Select Case Me.WindowState
-			Case vbMinimizedNoFocus
-				Exit Sub
-			Case vbMinimizedFocus
-				Exit Sub
-			Case vbNormal
-				'if left mouse button down...
-				If GetKeyState(VK_LBUTTON) < 0 Then
-					'let timer handle fix
-					With Me.tmrResize
-						.Enabled = False 'disable timer
-						Application.DoEvents() 'let screen catch up
-						.Enabled = True 're-enable timer
-					End With
-					Exit Sub
-				End If
-				'if too small...
-				If Me.Width < MyFormWd _
-				   Or Me.Height < MyFormHt Then
-					With Me.tmrResize 'smooth w/timer
-						.Enabled = False 'turn timer off
-						Application.DoEvents() 'screen catch up
-						.Enabled = True 'restart timer
-					End With
-					Exit Sub 'let timer do work
-				End If
-		End Select
-		'
-		'other control arrangement code goes here.
-		'
-	End Sub
-
-	Private Sub tmrResize_Timer()
-		'
-		' Exit if Mouse pick button still down 
-		'
-		If GetKeyState(VK_LBUTTON) < 0 Then Exit Sub
-		'
-		'turn off timer
-		'
-		Me.tmrResize.Enabled = False
-		'
-		'do nothing if minimized
-		'
-		If Me.WindowState = vbMinimizedFocus Or Me.WindowState = vbMinimizedNoFocus Then
-			Exit Sub
-		End If
-		'
-		'resize to minimum dims
-		'
-		bResize = True 'block resize envent
-		If Me.Width < MyFormWd Then
-			Me.Width = MyFormWd
-		End If
-		If Me.Height < MyFormHt Then
-			Me.Height = MyFormHt
-		End If
-		bResize = False 'unblock resize event
-		Call Form_Resize() 'now process all resizing
 	End Sub
 
 	Public Sub ApplyThemeColor()
