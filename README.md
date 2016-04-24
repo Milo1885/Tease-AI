@@ -115,6 +115,18 @@ Fixed bug where Glitter Contacts did not appear correctly during Multiple Edges 
 
 Fixes added from Community Members:
 
+	Stefaf: Bugfix: UI-didn't resize on maximizing the window.
+	
+	Stefaf: Bugfix: DommeTagApp wasn't working properly. It was randomly showing and setting the wrong Tags for the wrong image.
+	
+	Stefaf: Bugfix/Addon: Only CH-Videos did load .flv Files. Now all Video-genres can load .flv-Files.
+	
+	Stefaf: Bugfix: Hold the Edge Taunts returned "TeaseAI did not return a Hold the Edge Taunt" <--- Sorry guys and gals, that was my fault. (stefaf) 
+
+	Stefaf: BugFix: @DommeTag() Didn't return the right picture, if the Task-Line contained a Keyword.
+	
+	Stefaf: Bugfix: @ShowBoobsImage() didn't work with local files.
+	
     Stefaf: Bugfix: Error during CensorshipsSucks, if the window is not maximized
 
     Stefaf: BugFix: URL-File Exiting on 404 without writing the gathered data
