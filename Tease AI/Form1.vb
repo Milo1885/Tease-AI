@@ -514,7 +514,10 @@ Public Class Form1
 	Dim PBImage As String
 	Dim DommeImageSTR As String
 	Dim LocalImageSTR As String
-
+	''' <summary>
+	''' This Variable contains the Path of origin of the displayed Image. CheckDommeTag() uses 
+	''' this string to get the curremt ImageData for the DommeTagApp.
+	''' </summary>
 	Dim ImageLocation As String
 
 	Public ResponseThread As Thread
@@ -16064,7 +16067,7 @@ retry_NextStage:
 							'			otherwise we can't evaluate task1.IsFaulted to rethrow the Exception...
 							' So, here is a simple workaround to override this, while debugging. Only change the 
 							' statement after AndAlso, otherwise it will behave wrong in the final programm.
-							If Debugger.IsAttached AndAlso 1 = 2 Then Return Nothing
+							If Debugger.IsAttached AndAlso 1 = 1 Then Return ""
 							Throw New Exception("No DommeImage found for Tags: '" & ___DomTag_Base & "' in directory: '" & __targetFolder & "'")
 						End If
                         ' Copy Matches to editable Container
@@ -23134,8 +23137,68 @@ TryNext:
 
 	End Sub
 
+	Private Sub WMPTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles WMPTimer.Tick
 
-#End Region
+
+		If DomWMP.currentPlaylist.count <> 0 Then
+			Try
+				Dim VideoLength As Integer = DomWMP.currentMedia.duration
+				Dim VideoRemaining As Integer = Math.Floor(DomWMP.currentMedia.duration - DomWMP.Ctlcontrols.currentPosition)
+
+				Debug.Print("Video Length = " & VideoLength)
+				Debug.Print("Video Remaining = " & VideoRemaining)
+			Catch
+			End Try
+		End If
+
+
+
+
+
+		If DomTypeCheck = True Or DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped Or DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused Then Return
+
+		'Debug.Print("New movie loaded: " & DomWMP.URL.ToString)
+
+		VidFile = Path.GetFileName(DomWMP.URL.ToString)
+
+		Dim VidSplit As String() = VidFile.Split(".")
+		VidFile = ""
+		For i As Integer = 0 To VidSplit.Count - 2
+			VidFile = VidFile + VidSplit(i)
+		Next
+		'Debug.Print(VidFile)
+
+		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & VidFile & ".txt") Then
+			Dim SubCheck As String()
+			Dim PlayPos As Integer
+			Dim WMPPos As Integer = Math.Ceiling(DomWMP.Ctlcontrols.currentPosition)
+
+			Dim SubList As New List(Of String)
+			SubList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & VidFile & ".txt")
+
+			If Not SubList Is Nothing Then
+				For i As Integer = 0 To SubList.Count - 1
+					SubCheck = SubList(i).Split("]")
+					SubCheck(0) = SubCheck(0).Replace("[", "")
+					Dim SubCheck2 As String() = SubCheck(0).Split(":")
+
+					PlayPos = SubCheck2(0) * 3600
+					PlayPos += SubCheck2(1) * 60
+					PlayPos += SubCheck2(2)
+
+					If WMPPos = PlayPos Then
+						DomTask = SubCheck(1)
+						TypingDelayGeneric()
+						Debug.Print(SubList(i))
+					End If
+				Next
+			End If
+		End If
+
+
+	End Sub
+
+#End Region 'Domme-WMP
 
 	Private Sub domAvatar_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles domAvatar.MouseEnter
 		If FrmSettings.Visible = False And FrmCardList.Visible = False Then domAvatar.Focus()
@@ -23579,7 +23642,7 @@ TryNext:
 #Region "-------------------------------------------------- MainPictureBox ----------------------------------------------------"
 
 	Private Sub mainPictureBox_LoadCompleted(sender As Object, e As System.ComponentModel.AsyncCompletedEventArgs) Handles mainPictureBox.LoadCompleted
-
+		ImageLocation = mainPictureBox.ImageLocation
 		CheckDommeTags()
 		Debug.Print("ImageLoadCOmpleted")
 	End Sub
@@ -24258,6 +24321,7 @@ GetDommeSlideshow:
 
 	End Sub
 
+#Region "-------------------------------------------------- Contact 1-3 -------------------------------------------------------"
 
 	Public Sub GetContact1Pics()
 
@@ -24520,6 +24584,8 @@ GetDommeSlideshow:
 
 	End Sub
 
+#End Region
+
 	Private Sub DommeTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles DommeTimer.Tick
 
 		AddContactTick -= 1
@@ -24565,6 +24631,7 @@ GetDommeSlideshow:
 		End If
 	End Sub
 
+#Region "-------------------------------------------- Session Supend/Reset ----------------------------------------------------"
 
 	Public Sub SuspendSession()
 
@@ -25623,67 +25690,7 @@ GetDommeSlideshow:
 
 	End Sub
 
-
-	Private Sub WMPTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles WMPTimer.Tick
-
-
-		If DomWMP.currentPlaylist.count <> 0 Then
-			Try
-				Dim VideoLength As Integer = DomWMP.currentMedia.duration
-				Dim VideoRemaining As Integer = Math.Floor(DomWMP.currentMedia.duration - DomWMP.Ctlcontrols.currentPosition)
-
-				Debug.Print("Video Length = " & VideoLength)
-				Debug.Print("Video Remaining = " & VideoRemaining)
-			Catch
-			End Try
-		End If
-
-
-
-
-
-		If DomTypeCheck = True Or DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped Or DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused Then Return
-
-		'Debug.Print("New movie loaded: " & DomWMP.URL.ToString)
-
-		VidFile = Path.GetFileName(DomWMP.URL.ToString)
-
-		Dim VidSplit As String() = VidFile.Split(".")
-		VidFile = ""
-		For i As Integer = 0 To VidSplit.Count - 2
-			VidFile = VidFile + VidSplit(i)
-		Next
-		'Debug.Print(VidFile)
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & VidFile & ".txt") Then
-			Dim SubCheck As String()
-			Dim PlayPos As Integer
-			Dim WMPPos As Integer = Math.Ceiling(DomWMP.Ctlcontrols.currentPosition)
-
-			Dim SubList As New List(Of String)
-			SubList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & VidFile & ".txt")
-
-			If Not SubList Is Nothing Then
-				For i As Integer = 0 To SubList.Count - 1
-					SubCheck = SubList(i).Split("]")
-					SubCheck(0) = SubCheck(0).Replace("[", "")
-					Dim SubCheck2 As String() = SubCheck(0).Split(":")
-
-					PlayPos = SubCheck2(0) * 3600
-					PlayPos += SubCheck2(1) * 60
-					PlayPos += SubCheck2(2)
-
-					If WMPPos = PlayPos Then
-						DomTask = SubCheck(1)
-						TypingDelayGeneric()
-						Debug.Print(SubList(i))
-					End If
-				Next
-			End If
-		End If
-
-
-	End Sub
+#End Region 'Session Supend/Reset
 
 #Region "------------------------------------------------------ MenuStuff -----------------------------------------------------"
 
@@ -27162,6 +27169,8 @@ SkipNew:
 
 #Region "--------------------------------------------------- DommeTag APP -----------------------------------------------------"
 
+#Region "------------------------------------------------- Regular Buttons-----------------------------------------------------"
+
 	Private Sub Face_Click(sender As System.Object, e As System.EventArgs) Handles Face.Click
 		Debug.Print(mainPictureBox.ImageLocation)
 		If SlideshowLoaded = False Then Return
@@ -27509,10 +27518,12 @@ SkipNew:
 		End If
 	End Sub
 
+#End Region ' Regular Buttons
+
 
 	Public Function AddDommeTag(ByVal AddDomTag As String, ByVal AddCustomDomTag As String)
-		MsgBox("This function is deactivated for maintenance", MsgBoxStyle.Information, "Not Available yet")
-		Exit Function
+		'MsgBox("This function is deactivated for maintenance", MsgBoxStyle.Information, "Not Available yet")
+		'Exit Function
 		Dim DomTag As String = "Tag" & AddDomTag
 		Dim Custom As String
 		If AddCustomDomTag = "Nothing" Then
@@ -27525,7 +27536,8 @@ SkipNew:
 		Debug.Print("Custom = " & Custom)
 
 
-		Dim TagFile As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt"
+		'Dim TagFile As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt"
+		Dim TagFile As String = Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt"
 
 		If File.Exists(TagFile) Then
 
@@ -27535,7 +27547,7 @@ SkipNew:
 			Dim FoundFile As Boolean = False
 
 			For i As Integer = 0 To TagList.Count - 1
-				If TagList(i).Contains(Path.GetFileName(_ImageFileNames(FileCount))) Then
+				If TagList(i).Contains(Path.GetFileName(ImageLocation)) Then
 					FoundFile = True
 					If Not TagList(i).Contains(DomTag) Then
 						TagList(i) = TagList(i) & " " & DomTag & Custom
@@ -27569,7 +27581,7 @@ SkipNew:
 				End If
 			Next
 
-			If FoundFile = False Then TagList.Add(Path.GetFileName(_ImageFileNames(FileCount)) & " " & DomTag & Custom)
+			If FoundFile = False Then TagList.Add(Path.GetFileName(ImageLocation) & " " & DomTag & Custom)
 
 			If TagList.Count > 0 Then
 				Dim SettingsString As String = ""
@@ -27577,12 +27589,12 @@ SkipNew:
 					SettingsString = SettingsString & TagList(i)
 					If i <> TagList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
 				Next
-				My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt", SettingsString, False)
+				My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt", SettingsString, False)
 			End If
 
 		Else
 
-			My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt", Path.GetFileName(_ImageFileNames(FileCount)) & " " & DomTag & Custom, True)
+			My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt", Path.GetFileName(ImageLocation) & " " & DomTag & Custom, True)
 
 		End If
 
@@ -27591,8 +27603,8 @@ SkipNew:
 
 
 	Public Function RemoveDommeTag(ByVal RemoveDomTag As String, ByVal RemoveCustomDomTag As String)
-		MsgBox("This function is deactivated for maintenance", MsgBoxStyle.Information, "Not Available yet")
-		Exit Function
+		'MsgBox("This function is deactivated for maintenance", MsgBoxStyle.Information, "Not Available yet")
+		'Exit Function
 		Dim DomTag As String = "Tag" & RemoveDomTag
 		Dim Custom As String
 		If RemoveCustomDomTag = "Nothing" Then
@@ -27602,7 +27614,8 @@ SkipNew:
 		End If
 
 		Dim SettingsString As String
-		Dim TagFile As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt"
+		'Dim TagFile As String = Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt"
+		Dim TagFile As String = Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt"
 		Debug.Print("TagFile = " & TagFile)
 
 		Debug.Print("DomTag & Custom = " & DomTag & Custom)
@@ -27613,7 +27626,7 @@ SkipNew:
 			TagList = Txt2List(TagFile)
 
 			For i As Integer = TagList.Count - 1 To 0 Step -1
-				If TagList(i).Contains(Path.GetFileName(_ImageFileNames(FileCount))) Then
+				If TagList(i).Contains(Path.GetFileName(ImageLocation)) Then
 					If TagList(i).Contains(DomTag & Custom) Then
 
 						If DomTag = "TagGarment" Or DomTag = "TagUnderwear" Or DomTag = "TagTattoo" Or DomTag = "TagSexToy" Or DomTag = "TagFurniture" Then
@@ -27646,9 +27659,9 @@ SkipNew:
 					SettingsString = SettingsString & TagList(i)
 					If i <> TagList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
 				Next
-				My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt", SettingsString, False)
+				My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt", SettingsString, False)
 			Else
-				If File.Exists(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt") Then My.Computer.FileSystem.DeleteFile(Path.GetDirectoryName(_ImageFileNames(FileCount)) & "\ImageTags.txt")
+				If File.Exists(Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt") Then My.Computer.FileSystem.DeleteFile(Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt")
 			End If
 
 		End If
@@ -27664,6 +27677,8 @@ SkipNew:
 	''' <see cref="Form1.mainPictureBox">PictureBox</see>. Everthing else doesn't work properly.</para>
 	''' <para>Right now there are only two working non-UI-Freezing posibilities: The Imagebox 
 	''' LoadCompleted-Event and PBImageThread. In PBImageThread an Invoke is required!</para>
+	''' This Function uses the <see cref="form1.ImageLocation">ImageLocation</see> Variable to get the
+	''' current ImageFilePath. 
 	''' </summary>
 	''' <remarks>
 	''' To Raise the PictureBoxCompleted-Event, you have to load an Image via LoadAsync(URL).
@@ -27752,19 +27767,9 @@ SkipNew:
 		TBFurniture.Text = ""
 
 
-		'LBLDomTagImg.Text = Path.GetFileName(_ImageFileNames(FileCount))
+		Dim tmpFileName As String = Path.GetFileName(ImageLocation)
 
-		Dim tmpFilePath As String
-
-		If mainPictureBox.ImageLocation <> "" Then
-			tmpFilePath = mainPictureBox.ImageLocation
-		Else
-			tmpFilePath = _ImageFileNames(FileCount)
-		End If
-
-		Dim tmpFileName As String = Path.GetFileName(tmpFilePath)
-
-		Dim TagFile As String = Path.GetDirectoryName(tmpFilePath) & "\ImageTags.txt"
+		Dim TagFile As String = Path.GetDirectoryName(ImageLocation) & "\ImageTags.txt"
 
 		If File.Exists(TagFile) Then
 
@@ -29144,14 +29149,10 @@ SkipNew:
 
 			If Not CachedImage2 Is Nothing Then
 				mainPictureBox.Image = CachedImage2
-				' Reset to Tell CheckDommeTag() this is definitely no DommeImage
-				mainPictureBox.ImageLocation = ""
 				SaveSessionImage(CachedImage2)
 				If Not CachedImage Is Nothing Then CachedImage.Dispose()
 			Else
 				mainPictureBox.Image = CachedImage
-				' Reset to Tell CheckDommeTag() this is definitely no DommeImage
-				mainPictureBox.ImageLocation = ""
 				SaveSessionImage(CachedImage)
 			End If
 			PreLoadImage = False
