@@ -10569,12 +10569,15 @@ RinseLatherRepeat:
 
 						Dim FlagArray() As String = CheckFlag.Split(",")
 
-						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & FlagArray(0)) Or
-								File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagArray(0)) Then
-							SkipGotoLine = True
-							FileGoto = FlagArray(1)
-							GetGoto()
-						End If
+						For z As Integer = 0 To FlagArray.Length - 1
+							'Debug.Print("FlagArray(i) = " & FlagArray(i))
+							If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & FlagArray(z)) Or
+								File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagArray(z)) Then
+								SkipGotoLine = True
+								FileGoto = FlagArray(z)
+								GetGoto()
+							End If
+						Next
 
 					Else
 
