@@ -114,6 +114,7 @@ Fixed bug where Glitter Contacts did not appear correctly during Multiple Edges 
 
 
 Fixes added from Community Members:
+	Stefaf: Bugfix: The Custom Slideshow randomly caused an IllegalCrossThreadCall, when the Slideshow was still running while the Domme is writing a Response.
 
 	Stefaf: Bugfix: UI-didn't resize on maximizing the window.
 	

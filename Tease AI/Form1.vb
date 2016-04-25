@@ -393,8 +393,6 @@ Public Class Form1
 	Dim CustomSlideshowList As New List(Of String)
 	Dim ImageString As String
 
-	Private Thr As Threading.Thread
-
 	Dim RapidFire As Boolean
 
 	Public GlitterTease As Boolean
@@ -423,7 +421,6 @@ Public Class Form1
 	Public FinalRiskyPick As Boolean
 
 	Public TempGif As Image
-	Dim original As Image
 	Dim resized As Image
 
 	Dim SysMes As Boolean
@@ -20673,7 +20670,7 @@ Skip_RandomFile:
 		End If
 	End Sub
 
-#End Region
+#End Region ' Chatbox
 
 	Public Sub GetTnAList()
 
@@ -24234,54 +24231,15 @@ GetDommeSlideshow:
 
 	Private Sub CustomSlideshowTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
 
-
-		BWSlideshow.RunWorkerAsync()
-
-
-	End Sub
-
-	Public Sub LoadSlideshowImage()
-
-		'ClearMainPictureBox()
-
-
 		ImageString = CustomSlideshowList(randomizer.Next(0, CustomSlideshowList.Count))
-
-
 		DeleteLocalImageFilePath = ImageString
 
 		Try
-			original = Image.FromFile(ImageString)
-			LBLImageInfo.Text = ImageString
-			CurrentImage = ImageString
-		Catch
-			original = Image.FromFile(Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg")
-			DeleteLocalImageFilePath = ""
-			LBLImageInfo.Text = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-			CurrentImage = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+			ShowImage(ImageString)
+		Catch ex As Exception
+			Exit Sub
+
 		End Try
-
-		Debug.Print("CurrentImage = " & CurrentImage)
-
-		Try
-			resized = ResizeImage(original, New Size(mainPictureBox.Width, mainPictureBox.Height))
-		Catch
-			resized = Image.FromFile(Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg")
-		End Try
-
-
-		mainPictureBox.Image = resized
-
-
-		'GC.Collect
-
-		Try
-			original.Dispose()
-		Catch
-		End Try
-
-
-
 	End Sub
 
 	Public Shared Function ResizeImage(ByVal image As Image, ByVal size As Size, Optional ByVal preserveAspectRatio As Boolean = True) As Image
@@ -24310,16 +24268,6 @@ GetDommeSlideshow:
 		Return newImage
 
 	End Function
-
-	Private Sub BWSlideshow_DoWork(sender As System.Object, e As System.ComponentModel.DoWorkEventArgs) Handles BWSlideshow.DoWork
-		'TODO: Integrate proper GBW-Usage
-		Control.CheckForIllegalCrossThreadCalls = False
-
-		Thr = New Threading.Thread(New Threading.ThreadStart(AddressOf LoadSlideshowImage))
-		Thr.SetApartmentState(ApartmentState.STA)
-		Thr.Start()
-
-	End Sub
 
 #Region "-------------------------------------------------- Contact 1-3 -------------------------------------------------------"
 
@@ -29173,7 +29121,7 @@ SkipNew:
 
 
 		Try
-			LBLImageInfo.Text = ImageLocation
+			Me.UIThread(Sub() LBLImageInfo.Text = ImageLocation)
 		Catch
 			LBLImageInfo.Text = "Error!"
 		End Try

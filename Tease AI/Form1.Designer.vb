@@ -123,7 +123,6 @@ Partial Class Form1
 		Me.LoadNewSlideshowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
 		Me.BWGlitter = New System.ComponentModel.BackgroundWorker()
-		Me.BWSlideshow = New System.ComponentModel.BackgroundWorker()
 		Me.TeaseAINotify = New System.Windows.Forms.NotifyIcon(Me.components)
 		Me.TeaseAIMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.GamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -1251,8 +1250,8 @@ Partial Class Form1
 		'OpenFileDialog1
 		'
 		Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" & _
-		  "s (*.*)|*.*"
+		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" &
+	"s (*.*)|*.*"
 		Me.OpenFileDialog1.Title = "Select an image file"
 		'
 		'GetColor
@@ -1511,9 +1510,6 @@ Partial Class Form1
 		Me.StatusUpdates.Name = "StatusUpdates"
 		Me.StatusUpdates.Size = New System.Drawing.Size(245, 386)
 		Me.StatusUpdates.TabIndex = 770
-		'
-		'BWSlideshow
-		'
 		'
 		'TeaseAINotify
 		'
@@ -2763,8 +2759,8 @@ Partial Class Form1
 		Me.LBLWishListText.Name = "LBLWishListText"
 		Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
 		Me.LBLWishListText.TabIndex = 108
-		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" & _
-		  "uld buy it for me because you know you like buying stuff for me. "
+		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" &
+	"uld buy it for me because you know you like buying stuff for me. "
 		'
 		'LBLWishlistCost
 		'
@@ -4210,7 +4206,6 @@ Partial Class Form1
 	Friend WithEvents BWGlitter As System.ComponentModel.BackgroundWorker
 	Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents CustomSlideshowTimer As Tease_AI.teaseAI_Timer
-	Friend WithEvents BWSlideshow As System.ComponentModel.BackgroundWorker
 	Friend WithEvents Contact1Timer As Tease_AI.teaseAI_Timer
 	Friend WithEvents Contact2Timer As Tease_AI.teaseAI_Timer
 	Friend WithEvents Contact3Timer As Tease_AI.teaseAI_Timer
