@@ -114,6 +114,7 @@ Fixed bug where Glitter Contacts did not appear correctly during Multiple Edges 
 
 
 Fixes added from Community Members:
+	Stefaf: Bugfix: @CheckFlag(abc, def) Multiple Flags in Parentheses didn't work.
 
 	Stefaf: Bugfix: UI-didn't resize on maximizing the window.
 	
