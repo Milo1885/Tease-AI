@@ -1394,6 +1394,8 @@ Partial Class FrmSettings
 		'CBMuteMedia
 		'
 		Me.CBMuteMedia.AutoSize = true
+		Me.CBMuteMedia.Checked = Global.Tease_AI.My.MySettings.Default.MuteMedia
+		Me.CBMuteMedia.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "MuteMedia", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBMuteMedia.ForeColor = System.Drawing.Color.Black
 		Me.CBMuteMedia.Location = New System.Drawing.Point(7, 21)
 		Me.CBMuteMedia.Name = "CBMuteMedia"
