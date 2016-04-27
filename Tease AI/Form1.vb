@@ -1778,8 +1778,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 		If My.Settings.SplitterDistance <> -1 Then
-			'SplitContainer1.SplitterDistance = SplitContainer1.Height / 0.75
-			'Else
+			If My.Settings.SplitterDistance > SplitContainer1.Height Then My.Settings.SplitterDistance = SplitContainer1.Height * 0.75
 			SplitContainer1.SplitterDistance = My.Settings.SplitterDistance
 		End If
 
