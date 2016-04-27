@@ -6466,15 +6466,15 @@ EndSysMes:
 							FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
 						ElseIf DommeImageFound = True Then
 							' ######################## Domme Tags #########################
-							ShowImage(DommeImageSTR)
+							ShowImage(DommeImageSTR, True)
 							DommeImageFound = False
 						ElseIf LocalImageFound = True Then
 							' ######################## Local Img. #########################
-							ShowImage(LocalImageSTR)
+							ShowImage(LocalImageSTR, True)
 							LocalImageFound = False
 						Else
 							' ######################## Slideshow ##########################
-							ShowImage(DomPic)
+							ShowImage(DomPic, True)
 						End If
 					Catch ex As Exception
 						'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
@@ -7353,15 +7353,15 @@ EndSysMes:
 							FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
 						ElseIf DommeImageFound = True Then
 							' ######################## Domme Tags #########################
-							ShowImage(DommeImageSTR)
+							ShowImage(DommeImageSTR, True)
 							DommeImageFound = False
 						ElseIf LocalImageFound = True Then
 							' ######################## Local Img. #########################
-							ShowImage(LocalImageSTR)
+							ShowImage(LocalImageSTR, True)
 							LocalImageFound = False
 						Else
 							' ######################## Slideshow ##########################
-							ShowImage(DomPic)
+							ShowImage(DomPic, True)
 						End If
 					Catch ex As Exception
 						'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
@@ -7568,7 +7568,6 @@ NullResponseLine2:
 					End If
 
 				End If
-
 			End If
 		End If
 
@@ -16260,7 +16259,7 @@ Skip_RandomFile:
 
 		If FoundString.Contains("/") Then
 			Try
-				ShowImage(FoundString)
+				ShowImage(FoundString, True)
 				'ImageLocation = FoundString
 				'PBImage = FoundString
 				'ImageThread.Start()
@@ -16272,7 +16271,7 @@ Skip_RandomFile:
 				MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			End Try
 		Else
-			ShowImage(FoundString)
+			ShowImage(FoundString, True)
 			'ImageLocation = FoundString
 			'PBImage = FoundString
 			'ImageThread.Start()
@@ -21038,7 +21037,7 @@ AlreadySeen:
 
 			If FoundString.Contains("/") Then
 				Try
-					ShowImage(FoundString)
+					ShowImage(FoundString, True)
 					'ImageLocation = FoundString
 					'DisplayImage(FoundString)
 					'ImageThread.Start()
@@ -21048,7 +21047,7 @@ AlreadySeen:
 					MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End Try
 			Else
-				ShowImage(FoundString)
+				ShowImage(FoundString, True)
 				'ImageLocation = FoundString
 				'PBImage = FoundString
 				'ImageThread.Start()
@@ -23637,6 +23636,35 @@ TryNext:
 
 #Region "-------------------------------------------------- MainPictureBox ----------------------------------------------------"
 
+	Public Sub ShowImage(ByVal ImageToShow As String, ByVal WaitToFinish As Boolean)
+		If FormLoading = True Then Return
+
+		Debug.Print(
+				"    _____                                  ______     _         _      " & vbCrLf &
+				"   |_   _|                                |  ____|   | |       | |     " & vbCrLf &
+				"     | |   _ __ ___    __ _   __ _   ___  | |__  ___ | |_  ___ | |__   " & vbCrLf &
+				"     | |  | '_ ` _ \  / _` | / _` | / _ \ |  __|/ _ \| __|/ __|| '_ \  " & vbCrLf &
+				"    _| |_ | | | | | || (_| || (_| ||  __/ | |  |  __/| |_| (__ | | | | " & vbCrLf &
+				"   |_____||_| |_| |_| \__,_| \__, | \___| |_|   \___| \__|\___||_| |_| " & vbCrLf &
+				"                              __/ |                                    " & vbCrLf &
+				"                             |___/                                     " & vbCrLf &
+				" ImageLocation: " & ImageToShow & vbCrLf &
+				" WaitToFinish:  " & WaitToFinish)
+
+		Dim FetchContainer As New ImageFetchObject
+		FetchContainer.ImageLocation = ImageToShow
+
+		If FrmSettings.CBBlogImageWindow.Checked = True _
+		Then FetchContainer.SaveImageDirectory = Application.StartupPath & " \ Images \ Session Images\" _
+		Else FetchContainer.SaveImageDirectory = ""
+
+		BWimageFetcher.RunWorkerAsync(FetchContainer, True)
+
+
+		If WaitToFinish Then BWimageFetcher.WaitToFinish()
+
+	End Sub
+
 	Private Sub mainPictureBox_LoadCompleted(sender As Object, e As System.ComponentModel.AsyncCompletedEventArgs) Handles mainPictureBox.LoadCompleted
 		ImageLocation = mainPictureBox.ImageLocation
 		CheckDommeTags()
@@ -23649,7 +23677,111 @@ TryNext:
 		End If
 	End Sub
 
-#End Region
+#Region "---------------------------------------------------- BWimageSync -----------------------------------------------------"
+
+#Region "---------------------------------------------------- Declarations ----------------------------------------------------"
+
+	''' <summary>
+	''' Modified Backgroundworker to load and save images on a different thread, with tth possibility to trigger 
+	''' the RunWorkerCompleted-Event manually
+	''' </summary>
+	Private WithEvents BWimageFetcher As New Tease_AI.BackgroundWorkerSyncable
+
+	''' <summary>
+	''' Object to pass data to a differnt thread.
+	''' </summary>
+	Private Class ImageFetchObject
+		Public ImageLocation As String = ""
+
+		Private _SaveImageDirectory As String = ""
+
+		Public Property SaveImageDirectory As String
+			Get
+				Return _SaveImageDirectory
+			End Get
+			Set(value As String)
+				If Not value.EndsWith("\") Then
+					_SaveImageDirectory = value & "\"
+				Else
+					_SaveImageDirectory = value
+
+				End If
+			End Set
+		End Property
+
+		Public FetchedImage As Image = Nothing
+	End Class
+
+#End Region ' Declarations
+
+
+	''' <summary>
+	''' Invokes included! This function should be used in a thread.
+	''' </summary>
+	Private Sub BWimageFetcher_DoWork(ByVal sender As Object,
+							 ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BWimageFetcher.DoWork
+
+		If TypeOf e.Argument Is ImageFetchObject Then
+			Dim FetchContainer As ImageFetchObject = e.Argument
+			Try
+				With FetchContainer
+					If .ImageLocation.Contains("/") And .ImageLocation.Contains("://") Then
+						' ###################### Online Image #########################
+						' Download the image
+						.FetchedImage = New Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(.ImageLocation)))
+						'check if Folder is set and exists.
+						If .SaveImageDirectory <> "" _
+					AndAlso Directory.Exists(.SaveImageDirectory) Then
+							'Check if the destination Filename exists.
+							If Not File.Exists(.SaveImageDirectory & Path.GetFileName(.ImageLocation)) Then
+								.FetchedImage.Save(.SaveImageDirectory & Path.GetFileName(.ImageLocation))
+							End If
+						End If
+					Else
+						' ####################### Local Image #########################
+						.FetchedImage = Image.FromFile(.ImageLocation)
+					End If
+				End With
+			Catch ex As Exception
+				' Do nothing, Just for Debug.
+				Throw
+			End Try
+			' Return the fetched data to the UI-Thread
+			e.Result = FetchContainer
+		End If
+		Debug.Print("ImageFetch - DoWork - Done")
+	End Sub
+
+	Private Sub BWimageFetcher_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BWimageFetcher.RunWorkerCompleted
+		If e.Cancelled Then Exit Sub
+		If e.Error IsNot Nothing Then Exit Sub
+
+		If TypeOf e.Result Is ImageFetchObject Then
+			Dim FetchResult As ImageFetchObject = e.Result
+			Dim OldImage As Image = mainPictureBox.Image
+			Dim NewImage As Bitmap = FetchResult.FetchedImage.Clone
+
+			mainPictureBox.Image = NewImage
+			mainPictureBox.Refresh()
+			mainPictureBox.Invalidate()
+
+			PBImage = FetchResult.ImageLocation
+			ImageLocation = FetchResult.ImageLocation
+			LBLImageInfo.Text = FetchResult.ImageLocation
+
+			If OldImage IsNot Nothing Then
+				OldImage.Dispose()
+			End If
+			GC.Collect()
+			CheckDommeTags()
+			Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
+						"	ImageLocation: " & FetchResult.ImageLocation)
+		End If
+	End Sub
+
+#End Region ' BWimageSync
+
+#End Region ' MainPictureBox
 
 #Region "-------------------------------------------------- PictureStrip ------------------------------------------------------"
 
@@ -24234,7 +24366,7 @@ GetDommeSlideshow:
 		DeleteLocalImageFilePath = ImageString
 
 		Try
-			ShowImage(ImageString)
+			ShowImage(ImageString, True)
 		Catch ex As Exception
 			Exit Sub
 
@@ -29132,7 +29264,11 @@ SkipNew:
 
 		Me.Invoke(New Action(AddressOf CheckDommeTags))
 
-		Debug.Print("PBImageThread")
+		If Me.InvokeRequired Then
+			Debug.Print("PBImageThread --- On different Thread")
+		Else
+			Debug.Print("PBImageThread --- On UI-Thread")
+		End If
 
 
 	End Sub
@@ -29765,7 +29901,7 @@ SkipNew:
 		End Try
 
 
-		ShowGotImage()
+		 ShowGotImage()
 
 	End Sub
 
