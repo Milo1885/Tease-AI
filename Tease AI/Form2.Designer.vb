@@ -1394,8 +1394,6 @@ Partial Class FrmSettings
 		'CBMuteMedia
 		'
 		Me.CBMuteMedia.AutoSize = true
-		Me.CBMuteMedia.Checked = true
-		Me.CBMuteMedia.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBMuteMedia.ForeColor = System.Drawing.Color.Black
 		Me.CBMuteMedia.Location = New System.Drawing.Point(7, 21)
 		Me.CBMuteMedia.Name = "CBMuteMedia"
