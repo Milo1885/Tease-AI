@@ -1,7 +1,36 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+# Changelog - Patch 53
 
+Added Command @ShowLocalImage() - Since genre image Commands such as @ShowLesbianImage, @ShowFemdomImage etc can now reference Local or URL Files, @ShowLocalImage() has been created to allow you to specify genre images in Local files only. You can use a comma to create a list to randomly choose from, or use not to show any Local image but the genres specified. For example:
+
+     @ShowLocalImage(lesbian) - Show a local lesbian image
+	 @ShowLocalImage(hentai, captions) - Show either a local hentai or captions image
+	 @ShowLocalImage(not, captions) - Show any local image that is not a captions image
+	 @ShowLocalImage(gay, maledom, not) - Show any local image that is not a gay or maledom image
+	 
+
+
+Fixes added from Community Members:
+
+    Stefaf: Improvement ImageLoading 
+
+    pepsifreak: SplitterDistance setting now resets if too big
+
+	Stefaf: Bugfix: The Custom Slideshow randomly caused an IllegalCrossThreadCall, when the Slideshow was still running while the Domme is writing a Response.
+
+	Stefaf: Bugfix: UI-didn't resize on maximizing the window.
+	
+	Stefaf: Bugfix: DommeTagApp wasn't working properly. It was randomly showing and setting the wrong Tags for the wrong image.
+	
+	Stefaf: Bugfix/Addon: Only CH-Videos did load .flv Files. Now all Video-genres can load .flv-Files.
+	
+	Stefaf: Bugfix: Hold the Edge Taunts returned "TeaseAI did not return a Hold the Edge Taunt" <--- Sorry guys and gals, that was my fault. (stefaf) 
+
+	Stefaf: BugFix: @DommeTag() Didn't return the right picture, if the Task-Line contained a Keyword.
+	 
+	 
 # Changelog - Patch 52
 
 Fixed bug that caused Tease AI to delete "-" when it parsed lines, potentially messing up scripts
@@ -114,18 +143,7 @@ Fixed bug where Glitter Contacts did not appear correctly during Multiple Edges 
 
 
 Fixes added from Community Members:
-	Stefaf: Bugfix: The Custom Slideshow randomly caused an IllegalCrossThreadCall, when the Slideshow was still running while the Domme is writing a Response.
-
-	Stefaf: Bugfix: UI-didn't resize on maximizing the window.
-	
-	Stefaf: Bugfix: DommeTagApp wasn't working properly. It was randomly showing and setting the wrong Tags for the wrong image.
-	
-	Stefaf: Bugfix/Addon: Only CH-Videos did load .flv Files. Now all Video-genres can load .flv-Files.
-	
-	Stefaf: Bugfix: Hold the Edge Taunts returned "TeaseAI did not return a Hold the Edge Taunt" <--- Sorry guys and gals, that was my fault. (stefaf) 
-
-	Stefaf: BugFix: @DommeTag() Didn't return the right picture, if the Task-Line contained a Keyword.
-	
+		
 	Stefaf: Bugfix: @ShowBoobsImage() didn't work with local files.
 	
     Stefaf: Bugfix: Error during CensorshipsSucks, if the window is not maximized

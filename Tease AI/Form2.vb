@@ -13524,16 +13524,14 @@ WhyUMakeMeDoDis:
 	End Sub
 
 	Private Sub CBMuteMedia_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBMuteMedia.CheckedChanged
-		If Form1.FormLoading = False Then
-			My.Settings.MuteMedia = CBMuteMedia.Checked
-			My.Settings.Save()
+		
+				Form1.DomWMP.settings.mute = CBMuteMedia.Checked
+			
+	End Sub
 
-			If CBMuteMedia.Checked Then
-				Form1.DomWMP.settings.mute = True
-			Else
-				Form1.DomWMP.settings.mute = False
-			End If
-		End If
+	Private Sub CBMuteMedia_LostFocus(sender As Object, e As System.EventArgs) Handles CBMuteMedia.LostFocus
+		My.Settings.MuteMedia = CBMuteMedia.Checked
+		My.Settings.Save()
 	End Sub
 
 
@@ -13752,4 +13750,6 @@ WhyUMakeMeDoDis:
 	Private Sub CBURLPreview_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLPreview.LostFocus
 		My.Settings.CBURLPreview = CBURLPreview.Checked
 	End Sub
+
+
 End Class

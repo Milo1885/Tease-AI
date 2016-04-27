@@ -11406,6 +11406,69 @@ RinseLatherRepeat:
 			StringClean = StringClean.Replace("@ShowBlogImage", "")
 		End If
 
+		If StringClean.Contains("@ShowLocalImage(") Then
+
+			Dim LocalFlag As String = GetParentheses(StringClean, "@ShowLocalImage(")
+			LocalFlag = FixCommas(LocalFlag)
+
+			Dim LocalArray As New List(Of String)
+
+			LocalArray = LocalFlag.Split(",").ToList
+
+			If Not LocalFlag.ToUpper.Contains("NOT") Then
+
+				LocalFlag = LocalArray(randomizer.Next(0, LocalArray.Count))
+
+			Else
+
+				Dim CompareFlag As String = "Hardcore, Softcore, Lesbian, Blowjob, Femdom, Lezdom, Hentai, Gay, Maledom, Captions, General, Butts, Boobs"
+
+				For i As Integer = LocalArray.Count - 1 To 0 Step -1
+					'If LocalArray(i).ToUpper.Contains("NOT") Then
+					'LocalArray.RemoveAt(i)
+					'End If
+					If LocalArray(i).ToUpper.Contains("HARDCORE") Or Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Then CompareFlag = CompareFlag.Replace("Hardcore, ", "")
+					If LocalArray(i).ToUpper.Contains("SOFTCORE") Or Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Then CompareFlag = CompareFlag.Replace("Softcore, ", "")
+					If LocalArray(i).ToUpper.Contains("LESBIAN") Or Not Directory.Exists(FrmSettings.LBLILesbian.Text) Then CompareFlag = CompareFlag.Replace("Lesbian, ", "")
+					If LocalArray(i).ToUpper.Contains("BLOWJOB") Or Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then CompareFlag = CompareFlag.Replace("Blowjob, ", "")
+					If LocalArray(i).ToUpper.Contains("FEMDOM") Or Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Then CompareFlag = CompareFlag.Replace("Femdom, ", "")
+					If LocalArray(i).ToUpper.Contains("LEZDOM") Or Not Directory.Exists(FrmSettings.LBLILezdom.Text) Then CompareFlag = CompareFlag.Replace("Lezdom, ", "")
+					If LocalArray(i).ToUpper.Contains("HENTAI") Or Not Directory.Exists(FrmSettings.LBLIHentai.Text) Then CompareFlag = CompareFlag.Replace("Hentai, ", "")
+					If LocalArray(i).ToUpper.Contains("GAY") Or Not Directory.Exists(FrmSettings.LBLIGay.Text) Then CompareFlag = CompareFlag.Replace("Gay, ", "")
+					If LocalArray(i).ToUpper.Contains("MALEDOM") Or Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Then CompareFlag = CompareFlag.Replace("Maledom, ", "")
+					If LocalArray(i).ToUpper.Contains("CAPTIONS") Or Not Directory.Exists(FrmSettings.LBLICaptions.Text) Then CompareFlag = CompareFlag.Replace("Captions, ", "")
+					If LocalArray(i).ToUpper.Contains("GENERAL") Or Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Then CompareFlag = CompareFlag.Replace("General", "")
+					If LocalArray(i).ToUpper.Contains("BUTT") Or Not Directory.Exists(FrmSettings.LBLButtPath.Text) Then CompareFlag = CompareFlag.Replace("Butts", "")
+					If LocalArray(i).ToUpper.Contains("BOOB") Or Not Directory.Exists(FrmSettings.LBLBoobPath.Text) Then CompareFlag = CompareFlag.Replace("Boobs", "")
+
+				Next
+
+
+				Dim CompareArray As String() = CompareFlag.Split(",")
+				LocalFlag = CompareArray(randomizer.Next(0, CompareArray.Count))
+
+			End If
+
+			Debug.Print("LocalFLag = " & LocalFlag.ToUpper)
+
+			If LocalFlag.ToUpper.Contains("HARDCORE") Then CheckLocalImage(FrmSettings.LBLIHardcore.Text, FrmSettings.CBIHardcoreSD.Checked)
+			If LocalFlag.ToUpper.Contains("SOFTCORE") Then CheckLocalImage(FrmSettings.LBLISoftcore.Text, FrmSettings.CBISoftcoreSD.Checked)
+			If LocalFlag.ToUpper.Contains("LESBIAN") Then CheckLocalImage(FrmSettings.LBLILesbian.Text, FrmSettings.CBILesbianSD.Checked)
+			If LocalFlag.ToUpper.Contains("BLOWJOB") Then CheckLocalImage(FrmSettings.LBLIBlowjob.Text, FrmSettings.CBIBlowjobSD.Checked)
+			If LocalFlag.ToUpper.Contains("FEMDOM") Then CheckLocalImage(FrmSettings.LBLIFemdom.Text, FrmSettings.CBIFemdomSD.Checked)
+			If LocalFlag.ToUpper.Contains("LEZDOM") Then CheckLocalImage(FrmSettings.LBLILezdom.Text, FrmSettings.CBILezdomSD.Checked)
+			If LocalFlag.ToUpper.Contains("HENTAI") Then CheckLocalImage(FrmSettings.LBLIHentai.Text, FrmSettings.CBIHentaiSD.Checked)
+			If LocalFlag.ToUpper.Contains("GAY") Then CheckLocalImage(FrmSettings.LBLIGay.Text, FrmSettings.CBIGaySD.Checked)
+			If LocalFlag.ToUpper.Contains("MALEDOM") Then CheckLocalImage(FrmSettings.LBLIMaledom.Text, FrmSettings.CBIMaledomSD.Checked)
+			If LocalFlag.ToUpper.Contains("CAPTION") Then CheckLocalImage(FrmSettings.LBLICaptions.Text, FrmSettings.CBICaptionsSD.Checked)
+			If LocalFlag.ToUpper.Contains("GENERAL") Then CheckLocalImage(FrmSettings.LBLIGeneral.Text, FrmSettings.CBIGeneralSD.Checked)
+			If LocalFlag.ToUpper.Contains("BUTT") Then CheckLocalImage(FrmSettings.LBLButtPath.Text, FrmSettings.CBButtSubDir.Checked)
+			If LocalFlag.ToUpper.Contains("BOOB") Then CheckLocalImage(FrmSettings.LBLBoobPath.Text, FrmSettings.CBBoobSubDir.Checked)
+
+			StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
+		End If
+
+
 		If StringClean.Contains("@ShowLocalImage") Then
 			GetLocalImage()
 			StringClean = StringClean.Replace("@ShowLocalImage", "")
@@ -13056,6 +13119,7 @@ OrgasmDecided:
 				End Try
 			End If
 
+			DeleteLocalImageFilePath = ""
 
 			StringClean = StringClean.Replace("@DeleteLocalImage", "")
 		End If
