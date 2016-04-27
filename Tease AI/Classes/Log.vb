@@ -14,7 +14,7 @@ Public Class Log
 		Try
 			Dim Logfile As String = Application.StartupPath & "\log.txt"
 			Dim DateString As String = Now.ToUniversalTime.ToString("yyyy-MM-dd HH:mm:ss")
-			Dim StList As List(Of String) = Environment.StackTrace.Split(vbCrLf).ToList
+			Dim StList As List(Of String) = Environment.StackTrace.Replace(vbLf, "").Split(vbCrLf).ToList
 			StList.RemoveRange(0, 3)
 			Dim StString As String = String.Join(vbCrLf, StList)
 Restart:
@@ -69,7 +69,7 @@ Restart:
 			Dim TargetFilePath As String = Application.StartupPath &
 			"\ErrorLogs\" & Today.ToUniversalTime.ToString("yyyy-MM-dd") & "_errorlog.txt"
 
-			Dim StList As List(Of String) = Environment.StackTrace.Split(vbCrLf).ToList
+			Dim StList As List(Of String) = Environment.StackTrace.Replace(vbLf, "").Split(vbCrLf).ToList
 			StList.RemoveRange(0, 3)
 			Dim StString As String = String.Join(vbCrLf, StList)
 
