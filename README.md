@@ -114,6 +114,9 @@ Fixed bug where Glitter Contacts did not appear correctly during Multiple Edges 
 
 
 Fixes added from Community Members:
+
+	Stefaf: Added Logging. Now most of the script loading will log it's IO-Access with StackTrace. This file is located in Tease-AI-Folder and has a maximum Size of 2MB. If it gets bigger, the file will be flushed. To easily remove the Stacktrace on top of the file a Regex Matchpattern is included. Added Error-Loggging to all Catch Blocks containing : "Tease-AI did....". These logs will be saved in Application StartupPath & /ErrorLogs/. Each day a new file will be created. All Times are converted to UniversalTime and Printed in Format "yyyy-MM-dd HH:mm:ss"
+	
 	Stefaf: Bugfix: The Custom Slideshow randomly caused an IllegalCrossThreadCall, when the Slideshow was still running while the Domme is writing a Response.
 
 	Stefaf: Bugfix: UI-didn't resize on maximizing the window.
