@@ -3,6 +3,8 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 # Changelog - Patch 53
 
+New Temporary FilterList Sub - The old one has been renamed to FilterListBak. I did as much work as I could ()before passing out for the night) to get this back on par with the original FilterList while actually working like it's supposed to on multi-line taunts. This is a WIP of a temporary solution, but it should be no worse than the original FilterList. It should be better 
+
 Added Command @ShowLocalImage() - Since genre image Commands such as @ShowLesbianImage, @ShowFemdomImage etc can now reference Local or URL Files, @ShowLocalImage() has been created to allow you to specify genre images in Local files only. You can use a comma to create a list to randomly choose from, or use not to show any Local image but the genres specified. For example:
 
      @ShowLocalImage(lesbian) - Show a local lesbian image

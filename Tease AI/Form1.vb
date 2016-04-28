@@ -8223,6 +8223,7 @@ TryNextWithTease:
 
 				Try
 					TauntLines = FilterList(TauntLines)
+					Dim g As String = "BreakPoint"
 				Catch ex As Exception
 					Log.WriteError("Tease AI did not return a valid Taunt", ex, "StrokeTauntTimer.Tick")
 					DomTask = "ERROR: Tease AI did not return a valid Taunt"
@@ -16214,7 +16215,7 @@ Skip_RandomFile:
 
 	End Sub
 
-	Public Function FilterList(ByVal ListClean As List(Of String)) As List(Of String)
+	Public Function FilterListBak(ByVal ListClean As List(Of String)) As List(Of String)
 
 		ListClean.Add("### BUFFER LINE ###")
 
@@ -16526,7 +16527,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@SelfYoung") Then
-				If FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then 'Or DommeVideo = False Then
+				If FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then	'Or DommeVideo = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -16566,7 +16567,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@SelfOld") Then
-				If FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then 'Or DommeVideo = False Then
+				If FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then	'Or DommeVideo = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17609,8 +17610,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 
@@ -17630,8 +17631,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17650,8 +17651,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@OftenAllowsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@OftenAllowsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17670,8 +17671,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@SometimesAllowsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@SometimesAllowsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17690,8 +17691,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@RarelyAllowsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@RarelyAllowsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17710,8 +17711,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NeverAllowsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NeverAllowsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 
@@ -17731,8 +17732,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17751,8 +17752,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysRuinsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysRuinsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17771,8 +17772,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@OftenRuinsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@OftenRuinsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17791,8 +17792,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@SometimesRuinsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@SometimesRuinsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17811,8 +17812,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@RarelyRuinsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@RarelyRuinsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17831,8 +17832,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NeverRuinsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NeverRuinsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17851,8 +17852,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotAlwaysAllowsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotAlwaysAllowsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17871,8 +17872,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotNeverAllowsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotNeverAllowsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17891,8 +17892,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotAlwaysRuinsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotAlwaysRuinsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17911,8 +17912,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotNeverRuinsOrgasm", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotNeverRuinsOrgasm", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17931,8 +17932,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@LongEdge", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@LongEdge", "")
+			End If
 		Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
@@ -17951,8 +17952,8 @@ Skip_RandomFile:
 						PoundLine -= 1
 					End If
 				End If
-                'ListClean(PoundCount) = ListClean(PoundCount).Replace("@InterruptLongEdge", "")
-            End If
+				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@InterruptLongEdge", "")
+			End If
 		Loop Until PoundCount = 0
 
 
@@ -18196,8 +18197,8 @@ Skip_RandomFile:
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowLocalImage") Then
 				If FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And FrmSettings.CBIBlowjob.Checked = False And
-					 FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And FrmSettings.CBIGay.Checked = False And
-					 FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then
+				  FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And FrmSettings.CBIGay.Checked = False And
+				  FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -19926,7 +19927,7 @@ Skip_RandomFile:
 				WriteFlag = WriteFlag.Split(")")(0)
 				WriteFlag = WriteFlag.Replace("@Flag(", "")
 				If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And
-					 Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+				  Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -19952,7 +19953,7 @@ Skip_RandomFile:
 				WriteFlag = WriteFlag.Split(")")(0)
 				WriteFlag = WriteFlag.Replace("@NotFlag(", "")
 				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or
-					 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
+				  File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -20529,6 +20530,914 @@ Skip_RandomFile:
 
 	End Function
 
+
+	Public Function FilterList(ByVal ListClean As List(Of String)) As List(Of String)
+
+
+		FoundTag = "NULL"
+
+		Try
+			If File.Exists(_ImageFileNames(FileCount)) Then MainPictureImage = Path.GetDirectoryName(_ImageFileNames(FileCount))
+		Catch
+		End Try
+
+		If File.Exists(MainPictureImage & "\ImageTags.txt") Then
+			Dim TagReader As New StreamReader(MainPictureImage & "\ImageTags.txt")
+			Dim TagList As New List(Of String)
+			While TagReader.Peek <> -1
+				TagList.Add(TagReader.ReadLine())
+			End While
+
+			TagReader.Close()
+			TagReader.Dispose()
+
+			If SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And DomWMP.Visible = False Then
+				Try
+					For t As Integer = 0 To TagList.Count - 1
+						'Debug.Print("TagList(t) = " & TagList(t))
+						If TagList(t).Contains(Path.GetFileName(_ImageFileNames(FileCount))) Then
+							FoundTag = TagList(t)
+							Dim FoundTagSplit As String() = Split(FoundTag)
+							For j As Integer = 0 To FoundTagSplit.Length - 1
+								If FoundTagSplit(j).Contains("TagGarment") Then
+									TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
+									TagGarment = TagGarment.Replace("-", " ")
+								End If
+
+								If FoundTagSplit(j).Contains("TagUnderwear") Then
+									TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
+									TagUnderwear = TagUnderwear.Replace("-", " ")
+								End If
+
+								If FoundTagSplit(j).Contains("TagTattoo") Then
+									TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
+									TagTattoo = TagTattoo.Replace("-", " ")
+								End If
+
+								If FoundTagSplit(j).Contains("TagSexToy") Then
+									TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
+									TagSexToy = TagSexToy.Replace("-", " ")
+								End If
+
+								If FoundTagSplit(j).Contains("TagFurniture") Then
+									TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
+									TagFurniture = TagFurniture.Replace("-", " ")
+								End If
+							Next
+							Exit For
+						End If
+					Next
+				Catch
+				End Try
+			End If
+
+		End If
+
+		Dim FilterPass As Boolean
+		Dim ListIncrement As Integer = 1
+		If StrokeFilter = True Then ListIncrement = StrokeTauntCount
+
+		For i As Integer = 0 To ListClean.Count - 1 Step ListIncrement
+
+			FilterPass = True
+
+			For x As Integer = 0 To ListIncrement - 1
+				If GetFilter(ListClean(i + x)) = False Then
+					FilterPass = False
+					Exit For
+				End If
+			Next
+
+			If FilterPass = False Then
+				For x As Integer = 0 To ListIncrement - 1
+					ListClean(i + x) = ListClean(i + x) & "###-INVALID-###"
+				Next
+			End If
+
+		Next
+
+		For i As Integer = ListClean.Count - 1 To 0 Step -1
+			If ListClean(i).Contains("###-INVALID-###") Then ListClean.RemoveAt(i)
+		Next
+
+
+		For x As Integer = 0 To ListClean.Count - 1
+			ListClean(x) = ListClean(x).Replace("#TagGarment", TagGarment.Replace("-", " "))
+			ListClean(x) = ListClean(x).Replace("#TagUnderwear", TagUnderwear.Replace("-", " "))
+			ListClean(x) = ListClean(x).Replace("#TagTattoo", TagTattoo.Replace("-", " "))
+			ListClean(x) = ListClean(x).Replace("#TagSexToy", TagSexToy.Replace("-", " "))
+			ListClean(x) = ListClean(x).Replace("#TagFurniture", TagFurniture.Replace("-", " "))
+		Next
+
+		Dim FilteredList As New List(Of String)
+
+		'For i As Integer = 0 To ListClean.Count - 1
+		'If Not ListClean(i).Contains("###-INVALID-###") Then FilteredList.Add(ListClean(i))
+		'Next
+
+		Return ListClean
+
+	End Function
+
+
+	Public Function GetFilter(ByVal FilterString As String) As Boolean
+
+
+		If FilterString.ToLower.Contains("@crazy") And FrmSettings.crazyCheckBox.Checked = False Then Return False
+		If FilterString.ToLower.Contains("@vulgar") And FrmSettings.vulgarCheckBox.Checked = False Then Return False
+		If FilterString.ToLower.Contains("@supremacist") And FrmSettings.supremacistCheckBox.Checked = False Then Return False
+		If FilterString.ToLower.Contains("@sadistic") And FrmSettings.sadisticCheckBox.Checked = False Then Return False
+		If FilterString.ToLower.Contains("@degrading") And FrmSettings.degradingCheckBox.Checked = False Then Return False
+
+		If FilterString.ToLower.Contains("@dommeLevel1") And FrmSettings.domlevelNumBox.Value <> 1 Then Return False
+		If FilterString.ToLower.Contains("@dommeLevel2") And FrmSettings.domlevelNumBox.Value <> 2 Then Return False
+		If FilterString.ToLower.Contains("@dommeLevel3") And FrmSettings.domlevelNumBox.Value <> 3 Then Return False
+		If FilterString.ToLower.Contains("@dommeLevel4") And FrmSettings.domlevelNumBox.Value <> 4 Then Return False
+		If FilterString.ToLower.Contains("@dommeLevel5") And FrmSettings.domlevelNumBox.Value <> 5 Then Return False
+
+		If FilterString.ToLower.Contains("@selfyoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then Return False
+		If FilterString.ToLower.Contains("@selfold") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then Return False
+		If FilterString.ToLower.Contains("@selfyoung") Or FilterString.ToLower.Contains("@selfold") Then
+			If VideoTease = True Or TeaseVideo = True Then Return False
+		End If
+		If FilterString.ToLower.Contains("@subyoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then Return False
+		If FilterString.ToLower.Contains("@selfold") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then Return False
+
+		If FilterString.ToLower.Contains("@acup") Then
+			If FrmSettings.boobComboBox.Text <> "A" Or JustShowedBlogImage = True Then Return False
+		End If
+		If FilterString.ToLower.Contains("@bcup") Then
+			If FrmSettings.boobComboBox.Text <> "B" Or JustShowedBlogImage = True Then Return False
+		End If
+		If FilterString.ToLower.Contains("@ccup") Then
+			If FrmSettings.boobComboBox.Text <> "C" Or JustShowedBlogImage = True Then Return False
+		End If
+		If FilterString.ToLower.Contains("@dcup") Then
+			If FrmSettings.boobComboBox.Text <> "D" Or JustShowedBlogImage = True Then Return False
+		End If
+		If FilterString.ToLower.Contains("@ddcup") Then
+			If FrmSettings.boobComboBox.Text <> "DD" Or JustShowedBlogImage = True Then Return False
+		End If
+		If FilterString.ToLower.Contains("@ddd+cup") Then
+			If FrmSettings.boobComboBox.Text <> "DDD+" Or JustShowedBlogImage = True Then Return False
+		End If
+
+		If FilterString.Contains("@Cup(") Then
+			If FilterCheck(GetParentheses(FilterString, "@Cup("), FrmSettings.boobComboBox) = False Then Return False
+		End If
+
+		If FilterString.ToLower.Contains("@tagface") And Not FoundTag.ToLower.Contains("tagface") Then Return False
+		If FilterString.ToLower.Contains("@tagboobs") And Not FoundTag.ToLower.Contains("tagboobs") Then Return False
+		If FilterString.ToLower.Contains("@tagpussy") And Not FoundTag.ToLower.Contains("tagpussy") Then Return False
+		If FilterString.ToLower.Contains("@tagass") And Not FoundTag.ToLower.Contains("tagass") Then Return False
+		If FilterString.ToLower.Contains("@tagfeet") And Not FoundTag.ToLower.Contains("tagfeet") Then Return False
+		If FilterString.ToLower.Contains("@taglegs") And Not FoundTag.ToLower.Contains("taglegs") Then Return False
+		If FilterString.ToLower.Contains("@tagmasturbating") And Not FoundTag.ToLower.Contains("tagmasturbating") Then Return False
+		If FilterString.ToLower.Contains("@tagsucking") And Not FoundTag.ToLower.Contains("tagsucking") Then Return False
+		If FilterString.ToLower.Contains("@tagfullydressed") And Not FoundTag.ToLower.Contains("tagfullydressed") Then Return False
+		If FilterString.ToLower.Contains("@taghalfdressed") And Not FoundTag.ToLower.Contains("taghalfdressed") Then Return False
+		If FilterString.ToLower.Contains("@taggarmentcovering") And Not FoundTag.ToLower.Contains("taggarmentcovering") Then Return False
+		If FilterString.ToLower.Contains("@taghandscovering") And Not FoundTag.ToLower.Contains("taghandscovering") Then Return False
+		If FilterString.ToLower.Contains("@tagnaked") And Not FoundTag.ToLower.Contains("tagnaked") Then Return False
+		If FilterString.ToLower.Contains("@tagsideview") And Not FoundTag.ToLower.Contains("tagsideview") Then Return False
+		If FilterString.ToLower.Contains("@tagcloseup") And Not FoundTag.ToLower.Contains("tagcloseup") Then Return False
+		If FilterString.ToLower.Contains("@tagpiercing") And Not FoundTag.ToLower.Contains("tagpiercing") Then Return False
+		If FilterString.ToLower.Contains("@tagsmiling") And Not FoundTag.ToLower.Contains("tagsmiling") Then Return False
+		If FilterString.ToLower.Contains("@tagglaring") And Not FoundTag.ToLower.Contains("tagglaring") Then Return False
+		If FilterString.ToLower.Contains("@taggarment") And Not FoundTag.ToLower.Contains("taggarment") Then Return False
+		If FilterString.ToLower.Contains("@tagunderwear") And Not FoundTag.ToLower.Contains("tagunderwear") Then Return False
+		If FilterString.ToLower.Contains("@tagtattoo") And Not FoundTag.ToLower.Contains("tagtattoo") Then Return False
+		If FilterString.ToLower.Contains("@tagsextoy") And Not FoundTag.ToLower.Contains("tagsextoy") Then Return False
+		If FilterString.ToLower.Contains("@tagfurniture") And Not FoundTag.ToLower.Contains("tagfurniture") Then Return False
+
+		If FilterString.ToLower.Contains("@cocksmall") And FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value Then Return False
+		If FilterString.ToLower.Contains("@cockaverage") Then
+			If FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value Then Return False
+		End If
+
+		If FilterString.ToLower.Contains("@cocklarge") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+
+		If FilterString.ToLower.Contains("@dombirthday") Then
+			If FrmSettings.NBDomBirthdayMonth.Value <> Month(Date.Now) Or FrmSettings.NBDomBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then Return False
+		End If
+
+		If FilterString.ToLower.Contains("@subbirthday") Then
+			If FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) Or FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then Return False
+		End If
+
+		If FilterString.ToLower.Contains("@valentinesday") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+		If FilterString.ToLower.Contains("@christmaseve") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+		If FilterString.ToLower.Contains("@christmasday") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+		If FilterString.ToLower.Contains("@newyearseve") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+		If FilterString.ToLower.Contains("@newyearsday") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+
+		If FilterString.ToLower.Contains("@firstround") And FirstRound = False Then Return False
+		If FilterString.ToLower.Contains("@notfirstround") And FirstRound = True Then Return False
+
+		If FilterString.ToLower.Contains("@strokespeedmax") And StrokePace < NBMaxPace.Value Then Return False
+		If FilterString.ToLower.Contains("@strokespeedmin") And StrokePace < NBMinPace.Value Then Return False
+		If FilterString.ToLower.Contains("@strokefaster") Or FilterString.ToLower.Contains("@strokefastest") Then
+			If StrokePace = NBMaxPace.Value Or WorshipMode = True Then Return False
+		End If
+		If FilterString.ToLower.Contains("@strokeslower") Or FilterString.ToLower.Contains("@strokeslowest") Then
+			If StrokePace = NBMinPace.Value Or WorshipMode = True Then Return False
+		End If
+
+		If FilterString.Contains("@AllowsOrgasm(") Then
+			If FilterCheck(GetParentheses(FilterString, "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox) = False Then Return False
+		End If
+
+		If FilterString.ToLower.Contains("@alwaysallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Always Allows" Then Return False
+		If FilterString.ToLower.Contains("@oftenallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Often Allows" Then Return False
+		If FilterString.ToLower.Contains("@sometimesallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows" Then Return False
+		If FilterString.ToLower.Contains("@rarelyallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows" Then Return False
+		If FilterString.ToLower.Contains("@neverallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Never Allows" Then Return False
+
+		If FilterString.Contains("@RuinsOrgasm(") Then
+			If FilterCheck(GetParentheses(FilterString, "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox) = False Then Return False
+		End If
+
+		If FilterString.ToLower.Contains("@alwaysruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins" Then Return False
+		If FilterString.ToLower.Contains("@oftenruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins" Then Return False
+		If FilterString.ToLower.Contains("@sometimesruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins" Then Return False
+		If FilterString.ToLower.Contains("@rarelyruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins" Then Return False
+		If FilterString.ToLower.Contains("@neverruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins" Then Return False
+
+		If FilterString.ToLower.Contains("@notalwaysallowsorgasm") And FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then Return False
+		If FilterString.ToLower.Contains("@notneverallowsorgasm") And FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then Return False
+		If FilterString.ToLower.Contains("@notalwaysruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then Return False
+		If FilterString.ToLower.Contains("@notneverruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then Return False
+
+
+		If FilterString.Contains("@LongEdge") Then
+			If LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False Then Return False
+		End If
+		If FilterString.Contains("@InterruptLongEdge") Then
+			If LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or TeaseTick < 1 Or RiskyEdges = True Then Return False
+		End If
+
+		If FilterString.Contains("@ShowHardcoreImage") Then
+			If Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowSoftcoreImage") Then
+			If Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowLesbianImage") Then
+			If Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowBlowjobImage") Then
+			If Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowFemdomImage") Then
+			If Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowLezdomImage") Then
+			If Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowHentaiImage") Then
+			If Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowGayImage") Then
+			If Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowMaledomImage") Then
+			If Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowCaptionsImage") Then
+			If Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowGeneralImage") Then
+			If Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+
+	
+		If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
+			If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowLocalImage") And FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And _
+		   FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And _
+			  FrmSettings.CBIGay.Checked = False And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then Return False
+		If FilterString.Contains("@ShowLocalImage") Then
+			If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
+			If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
+			If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+		End If
+		If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
+			If CustomSlideshow = True Or LockImage = True Then Return False
+		End If
+
+		If FilterString.Contains("@1MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119 Then Return False
+		End If
+		If FilterString.Contains("@2MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179 Then Return False
+		End If
+		If FilterString.Contains("@3MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239 Then Return False
+		End If
+		If FilterString.Contains("@4MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299 Then Return False
+		End If
+		If FilterString.Contains("@5MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599 Then Return False
+		End If
+		If FilterString.Contains("@10MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899 Then Return False
+		End If
+		If FilterString.Contains("@15MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799 Then Return False
+		End If
+		If FilterString.Contains("@30MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699 Then Return False
+		End If
+		If FilterString.Contains("@45MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599 Then Return False
+		End If
+		If FilterString.Contains("@60MinuteHold") Then
+			If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then Return False
+		End If
+
+		If FilterString.Contains("@CBTLevel1") And FrmSettings.CBTSlider.Value <> 1 Then Return False
+		If FilterString.Contains("@CBTLevel2") And FrmSettings.CBTSlider.Value <> 2 Then Return False
+		If FilterString.Contains("@CBTLevel3") And FrmSettings.CBTSlider.Value <> 3 Then Return False
+		If FilterString.Contains("@CBTLevel4") And FrmSettings.CBTSlider.Value <> 4 Then Return False
+		If FilterString.Contains("@CBTLevel5") And FrmSettings.CBTSlider.Value <> 5 Then Return False
+		If FilterString.Contains("@SubCircumcised") And FrmSettings.CBSubCircumcised.Checked = False Then Return False
+		If FilterString.Contains("@SubNotCircumcised") And FrmSettings.CBSubCircumcised.Checked = True Then Return False
+		If FilterString.Contains("@SubPierced") And FrmSettings.CBSubPierced.Checked = False Then Return False
+		If FilterString.Contains("@SubNotPierced") And FrmSettings.CBSubPierced.Checked = True Then Return False
+		If FilterString.Contains("@ShowTaggedImage") And LocalTagImageList.Count = 0 Then Return False
+		If FilterString.Contains("@BeforeTease") And BeforeTease = False Then Return False
+		If FilterString.Contains("@OrgasmDenied") And OrgasmDenied = False Then Return False
+		If FilterString.Contains("@OrgasmAllowed") And OrgasmAllowed = False Then Return False
+		If FilterString.Contains("@OrgasmRuined") And OrgasmRuined = False Then Return False
+		If FilterString.Contains("@ApathyLevel(") Then
+			If FilterCheck(GetParentheses(FilterString, "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then Return False
+		End If
+
+		If FilterString.Contains("@ApathyLevel1") And FrmSettings.NBEmpathy.Value <> 1 Then Return False
+		If FilterString.Contains("@ApathyLevel2") And FrmSettings.NBEmpathy.Value <> 2 Then Return False
+		If FilterString.Contains("@ApathyLevel3") And FrmSettings.NBEmpathy.Value <> 3 Then Return False
+		If FilterString.Contains("@ApathyLevel4") And FrmSettings.NBEmpathy.Value <> 4 Then Return False
+		If FilterString.Contains("@ApathyLevel5") And FrmSettings.NBEmpathy.Value <> 5 Then Return False
+		If FilterString.Contains("@InChastity") And My.Settings.Chastity = False Then Return False
+		If FilterString.Contains("@NotInChastity") And My.Settings.Chastity = True Then Return False
+		If FilterString.Contains("@HasChastity") And FrmSettings.CBOwnChastity.Checked = False Then Return False
+		If FilterString.Contains("@DoesNotHaveChastity") And FrmSettings.CBOwnChastity.Checked = True Then Return False
+		If FilterString.Contains("@ChastityPA") And FrmSettings.CBChastityPA.Checked = False Then Return False
+		If FilterString.Contains("@ChastitySpikes") And FrmSettings.CBChastitySpikes.Checked = False Then Return False
+		If FilterString.Contains("@VitalSub") And CBVitalSub.Checked = False Then Return False
+		If FilterString.Contains("@VitalSubAssignment") Then
+			If CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False Then Return False
+		End If
+
+		If FilterString.Contains("@RuinTaunt") Then
+			If EdgeToRuin = False Or EdgeToRuinSecret = True Then Return False
+		End If
+
+		If FilterString.Contains("@ShowLikedImage") And Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then Return False
+		If FilterString.Contains("@ShowDislikedImage") And Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then Return False
+
+		If FilterString.Contains("@VideoHardcore") Then
+			If VideoTease = False Or VideoType <> "Hardcore" Then Return False
+		End If
+		If FilterString.Contains("@VideoSoftcore") Then
+			If VideoTease = False Or VideoType <> "Softcore" Then Return False
+		End If
+		If FilterString.Contains("@VideoLesbian") Then
+			If VideoTease = False Or VideoType <> "Lesbian" Then Return False
+		End If
+		If FilterString.Contains("@VideoBlowjob") Then
+			If VideoTease = False Or VideoType <> "Blowjob" Then Return False
+		End If
+		If FilterString.Contains("@VideoFemdom") Then
+			If VideoTease = False Or VideoType <> "Femdom" Then Return False
+		End If
+		If FilterString.Contains("@VideoFemsub") Then
+			If VideoTease = False Or VideoType <> "Femsub" Then Return False
+		End If
+		If FilterString.Contains("@VideoGeneral") Then
+			If VideoTease = False Or VideoType <> "General" Then Return False
+		End If
+
+		If FilterString.Contains("@VideoHardcoreDomme") Then
+			If VideoTease = False Or VideoType <> "HardcoreD" Then Return False
+		End If
+		If FilterString.Contains("@VideoSoftcoreDomme") Then
+			If VideoTease = False Or VideoType <> "SoftcoreD" Then Return False
+		End If
+		If FilterString.Contains("@VideoLesbianDomme") Then
+			If VideoTease = False Or VideoType <> "LesbianD" Then Return False
+		End If
+		If FilterString.Contains("@VideoBlowjobDomme") Then
+			If VideoTease = False Or VideoType <> "BlowjobD" Then Return False
+		End If
+		If FilterString.Contains("@VideoFemdomDomme") Then
+			If VideoTease = False Or VideoType <> "FemdomD" Then Return False
+		End If
+		If FilterString.Contains("@VideoFemsubDomme") Then
+			If VideoTease = False Or VideoType <> "FemsubD" Then Return False
+		End If
+		If FilterString.Contains("@VideoGeneralDomme") Then
+			If VideoTease = False Or VideoType <> "GeneralD" Then Return False
+		End If
+
+
+		If FilterString.Contains("@CockTorture") And FrmSettings.CBCBTCock.Checked = False Then Return False
+		If FilterString.Contains("@BallTorture") And FrmSettings.CBCBTBalls.Checked = False Then Return False
+		If FilterString.Contains("@BallTorture0") And CBTBallsCount <> 0 Then Return False
+		If FilterString.Contains("@BallTorture1") And CBTBallsCount <> 1 Then Return False
+		If FilterString.Contains("@BallTorture2") And CBTBallsCount <> 2 Then Return False
+		If FilterString.Contains("@BallTorture3") And CBTBallsCount <> 3 Then Return False
+		If FilterString.Contains("@BallTorture4+") And CBTBallsCount < 4 Then Return False
+		If FilterString.Contains("@CockTorture0") And CBTCockCount <> 0 Then Return False
+		If FilterString.Contains("@CockTorture1") And CBTCockCount <> 1 Then Return False
+		If FilterString.Contains("@CockTorture2") And CBTCockCount <> 2 Then Return False
+		If FilterString.Contains("@CockTorture3") And CBTCockCount <> 3 Then Return False
+		If FilterString.Contains("@CockTorture4+") And CBTCockCount < 4 Then Return False
+		If FilterString.Contains("@Variable[") Then
+			If CheckVariable(FilterString) = False Then Return False
+		End If
+
+		If FilterString.Contains("@CheckDate(") Then
+			If CheckDateList(FilterString) = False Then Return False
+		End If
+
+		If FilterString.Contains("@DommeTag(") Then
+			Dim g As String = "breakpoint"
+			Debug.Print("Domme return -= " & GetDommeImage(GetParentheses(FilterString, "@DommeTag(")))
+			If GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = "" Or LockImage = True Then Return False
+		End If
+
+		If FilterString.Contains("@ImageTag(") Then
+			If GetLocalImage(FilterString) = False Then Return False
+		End If
+
+		If FilterString.Contains("@Stroking") Or FilterString.Contains("@SubStroking") Then
+			If SubStroking = False Then Return False
+		End If
+
+		If FilterString.Contains("@NotStroking") Or FilterString.Contains("@SubNotStroking") Then
+			If SubStroking = True Then Return False
+		End If
+
+		If FilterString.Contains("@Edging") Or FilterString.Contains("@SubEdging") Then
+			If SubEdging = False Then Return False
+		End If
+
+		If FilterString.Contains("@NotEdging") Or FilterString.Contains("@SubNotEdging") Then
+			If SubEdging = True Then Return False
+		End If
+
+		If FilterString.Contains("@HoldingTheEdge") Or FilterString.Contains("@SubHoldingTheEdge") Then
+			If SubHoldingEdge = False Then Return False
+		End If
+
+		If FilterString.Contains("@NotHoldingTheEdge") Or FilterString.Contains("@SubNotHoldingTheEdge") Then
+			If SubHoldingEdge = True Then Return False
+		End If
+
+		If FilterString.Contains("@Morning") And GeneralTime <> "Morning" Then Return False
+		If FilterString.Contains("@Afternoon") And GeneralTime <> "Afternoon" Then Return False
+		If FilterString.Contains("@Night") And GeneralTime <> "Night" Then Return False
+		If FilterString.Contains("@GoodMood") And DommeMood <= FrmSettings.NBDomMoodMax.Value Then Return False
+		If FilterString.Contains("@BadMood") And DommeMood >= FrmSettings.NBDomMoodMin.Value Then Return False
+		If FilterString.Contains("@NeutralMood") Then
+			If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then Return False
+		End If
+
+		If FilterString.Contains("@SetModule(") Then
+			If SetModule <> "" Or BookmarkModule = True Then Return False
+		End If
+
+		If FilterString.Contains("@OrgasmRestricted") And OrgasmRestricted = False Then Return False
+		If FilterString.Contains("@OrgasmNotRestricted") And OrgasmRestricted = True Then Return False
+		If FilterString.Contains("@SubWorshipping") And WorshipMode = False Then Return False
+		If FilterString.Contains("@SubNotWorshipping") And WorshipMode = True Then Return False
+		If FilterString.Contains("@LongHold") Then
+			If LongHold = False Or SubHoldingEdge = False Then Return False
+		End If
+
+		If FilterString.Contains("@ExtremeHold") Then
+			If ExtremeHold = False Or SubHoldingEdge = False Then Return False
+		End If
+
+		If FilterString.Contains("@AssWorship") Then
+			If WorshipTarget <> "Ass" Or WorshipMode = False Then Return False
+		End If
+
+		If FilterString.Contains("@BoobWorship") Then
+			If WorshipTarget <> "Boobs" Or WorshipMode = False Then Return False
+		End If
+
+		If FilterString.Contains("@PussyWorship") Then
+			If WorshipTarget <> "Pussy" Or WorshipMode = False Then Return False
+		End If
+
+		If FilterString.Contains("@Contact1") Then
+			If GlitterTease = False Or Not Group.Contains("1") Then Return False
+		End If
+
+		If FilterString.Contains("@Contact2") Then
+			If GlitterTease = False Or Not Group.Contains("2") Then Return False
+		End If
+
+		If FilterString.Contains("@Contact3") Then
+			If GlitterTease = False Or Not Group.Contains("3") Then Return False
+		End If
+
+		If FilterString.Contains("@Group(") Then
+			Dim GroupCheck As String = GetParentheses(FilterString, "@Group(")
+			If GroupCheck.Contains("D") Then
+				If GlitterTease = False Or Not Group.Contains("D") Then Return False
+			End If
+			If GroupCheck.Contains("1") Then
+				If GlitterTease = False Or Not Group.Contains("1") Then Return False
+			End If
+			If GroupCheck.Contains("2") Then
+				If GlitterTease = False Or Not Group.Contains("2") Then Return False
+			End If
+			If GroupCheck.Contains("3") Then
+				If GlitterTease = False Or Not Group.Contains("3") Then Return False
+			End If
+		End If
+
+		If FilterString.Contains("@Flag(") Then
+			Dim WriteFlag As String = GetParentheses(FilterString, "@Flag(")
+
+			If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And _
+			Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then Return False
+
+		End If
+
+		If FilterString.Contains("@NotFlag(") Then
+			Dim WriteFlag As String = GetParentheses(FilterString, "@NotFlag(")
+
+			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or _
+			File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then Return False
+
+		End If
+
+		If FilterString.Contains("@ImageTag(") Then
+			If GetLocalImage(FilterString) = False Then Return False
+		End If
+
+
+		If FilterString.Contains("@Info") Then Return False
+
+
+		If FilterString.Contains("@ShowTaggedImage") Then
+
+			LocalTagImageList.Clear()
+
+
+			'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
+			If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+				' Read all lines of given file.
+				LocalTagImageList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+
+				'If Not supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
+
+
+				For i As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+					Dim LocalCheck As String() = Split(LocalTagImageList(i))
+					Dim LocalString As String = LocalCheck(0)
+					Debug.Print("LocalString = " & LocalString)
+					If Not LCase(LocalString).Contains(".jpg") And Not LCase(LocalString).Contains(".jpeg") And Not LCase(LocalString).Contains(".bmp") And
+					 Not LCase(LocalString).Contains(".png") And Not LCase(LocalString).Contains(".gif") Then
+						Debug.Print("LocalTag Check Doesn't contain extension")
+						For x As Integer = 1 To LocalCheck.Count - 1
+							LocalString = LocalString & " " & LocalCheck(x)
+							If LCase(LocalString).Contains(".jpg") Or LCase(LocalString).Contains(".jpeg") Or LCase(LocalString).Contains(".bmp") Or
+							LCase(LocalString).Contains(".png") Or LCase(LocalString).Contains(".gif") Then Exit For
+						Next
+					End If
+					Debug.Print("Local Tag check - " & LocalString)
+					If Not File.Exists(LocalString) Then LocalTagImageList.Remove(LocalTagImageList(i))
+				Next
+
+			End If
+
+			'ListCountTotal = -1
+			Dim TagCount As Integer = 0
+
+
+			If FilterString.Contains("@ShowTaggedImage") And FilterString.Contains("@Tag") Then
+				Dim TSplit As String() = Split(FilterString)
+				For j As Integer = 0 To TSplit.Length - 1
+					If TSplit(j).Contains("@Tag") Then
+						Dim TString As String = TSplit(j).Replace("@Tag", "")
+						For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+							If LocalTagImageList(k).Contains(TString) Then TagCount += 1
+						Next
+						If TagCount = 0 Then Return False
+						TagCount = 0
+					End If
+				Next
+			End If
+
+
+
+			If FilterString.Contains("@ShowTaggedImage") And LocalTagImageList.Count = 0 Then Return False
+
+
+		End If
+
+
+
+		Return True
+
+	End Function
+
+
+	Public Function GetFilter2(ByVal FilterString As String) As Boolean
+
+
+		Dim __ConditionDic As New Dictionary(Of String, Boolean)(System.StringComparer.OrdinalIgnoreCase)
+		Try
+			'===============================================================================
+			'							Dictionary Setup Description
+			' 1st Parameter: "Key" this is the Command as String preceded with @
+			' 2nd Parameter: "Value" These are the conditions that must be met to EXCLUDE a line.
+			'
+			'		 If "Value" is "True", all lines containing "Key" will be excuded.
+			'
+			'===============================================================================
+			With __ConditionDic
+				.Add("@Crazy", FrmSettings.crazyCheckBox.Checked = False)
+				.Add("@Vulgar", FrmSettings.vulgarCheckBox.Checked = False)
+				.Add("@Supremacist", FrmSettings.supremacistCheckBox.Checked = False)
+				.Add("@Sadistic", FrmSettings.sadisticCheckBox.Checked = False)
+				.Add("@Degrading", FrmSettings.degradingCheckBox.Checked = False)
+				.Add("@DommeLevel1", FrmSettings.domlevelNumBox.Value <> 1)
+				.Add("@DommeLevel2", FrmSettings.domlevelNumBox.Value <> 2)
+				.Add("@DommeLevel3", FrmSettings.domlevelNumBox.Value <> 3)
+				.Add("@DommeLevel4", FrmSettings.domlevelNumBox.Value <> 4)
+				.Add("@DommeLevel5", FrmSettings.domlevelNumBox.Value <> 5)
+				.Add("@SelfYoung", FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1)
+				.Add("@SelfOld", FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1)
+				.Add("@ACup", FrmSettings.boobComboBox.Text <> "A" Or JustShowedBlogImage = True)
+				.Add("@BCup", FrmSettings.boobComboBox.Text <> "B" Or JustShowedBlogImage = True)
+				.Add("@CCup", FrmSettings.boobComboBox.Text <> "C" Or JustShowedBlogImage = True)
+				.Add("@DCup", FrmSettings.boobComboBox.Text <> "D" Or JustShowedBlogImage = True)
+				.Add("@DDCup", FrmSettings.boobComboBox.Text <> "DD" Or JustShowedBlogImage = True)
+				.Add("@DDD+Cup", FrmSettings.boobComboBox.Text <> "DDD+" Or JustShowedBlogImage = True)
+				.Add("@CockSmall", FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value)
+				.Add("@CockLarge", FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value)
+				.Add("@CockAverage", FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value)
+				.Add("@SubYoung", FrmSettings.subAgeNumBox.Value >= FrmSettings.NBSubAgeMin.Value)
+				.Add("@SubOld", FrmSettings.subAgeNumBox.Value <= FrmSettings.NBSubAgeMax.Value)
+				.Add("@SubBirthday", FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now))
+				.Add("@ValentinesDay", Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14)
+				.Add("@ChristmasEve", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24)
+				.Add("@ChristmasDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
+				.Add("@NewYearsEve", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31)
+				.Add("@NewYearsDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
+				.Add("@TagFace", Not FoundTag.Contains("TagFace"))
+				.Add("@TagBoobs", Not FoundTag.Contains("TagBoobs"))
+				.Add("@TagPussy", Not FoundTag.Contains("TagPussy"))
+				.Add("@TagAss", Not FoundTag.Contains("TagAss"))
+				.Add("@TagFeet", Not FoundTag.Contains("TagFeet"))
+				.Add("@TagLegs", Not FoundTag.Contains("TagLegs"))
+				.Add("@TagMasturbating", Not FoundTag.Contains("TagMasturbating"))
+				.Add("@TagSucking", Not FoundTag.Contains("TagSucking"))
+				.Add("@TagFullyDressed", Not FoundTag.Contains("TagFullyDressed"))
+				.Add("@TagHalfDressed", Not FoundTag.Contains("TagHalfDressed"))
+				.Add("@TagGarmentCovering", Not FoundTag.Contains("TagGarmentCovering"))
+				.Add("@TagHandsCovering", Not FoundTag.Contains("TagHandsCovering"))
+				.Add("@TagNaked", Not FoundTag.Contains("TagNaked"))
+				.Add("@TagSideView", Not FoundTag.Contains("TagSideView"))
+				.Add("@TagCloseUp", Not FoundTag.Contains("TagCloseUp"))
+				.Add("@TagPiercing", Not FoundTag.Contains("TagPiercing"))
+				.Add("@TagSmiling", Not FoundTag.Contains("TagSmiling"))
+				.Add("@TagGlaring", Not FoundTag.Contains("TagGlaring"))
+				.Add("@TagGarment", Not FoundTag.Contains("TagGarment"))
+				.Add("@TagUnderwear", Not FoundTag.Contains("TagUnderwear"))
+				.Add("@TagTattoo", Not FoundTag.Contains("TagTattoo"))
+				.Add("@TagSexToy", Not FoundTag.Contains("TagSexToy"))
+				.Add("@TagFurniture", Not FoundTag.Contains("TagFurniture"))
+				.Add("@FirstRound", FirstRound = False)
+				.Add("@NotFirstRound", FirstRound = True)
+				.Add("@StrokeSpeedMax", StrokePace < NBMaxPace.Value)
+				.Add("@StrokeSpeedMin", StrokePace > NBMinPace.Value)
+				.Add("@StrokeFaster", StrokePace = NBMaxPace.Value Or WorshipMode = True)
+				.Add("@StrokeFastest", StrokePace = NBMaxPace.Value Or WorshipMode = True)
+				.Add("@StrokeSlower", StrokePace = NBMinPace.Value Or WorshipMode = True)
+				.Add("@StrokeSlowest", StrokePace = NBMinPace.Value Or WorshipMode = True)
+				.Add("@AlwaysAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Always Allows")
+				.Add("@OftenAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Often Allows")
+				.Add("@SometimesAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows")
+				.Add("@RarelyAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows")
+				.Add("@NeverAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Never Allows")
+				.Add("@AlwaysRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins")
+				.Add("@OftenRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins")
+				.Add("@SometimesRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins")
+				.Add("@RarelyRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins")
+				.Add("@NeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins")
+				.Add("@NotAlwaysAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text = "Always Allows")
+				.Add("@NotNeverAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text = "Never Allows")
+				.Add("@NotAlwaysRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Always Ruins")
+				.Add("@NotNeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Never Allows")
+				.Add("@LongEdge", LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False)
+				.Add("@InterruptLongEdge", LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or TeaseTick < 1 Or RiskyEdges = True)
+				.Add("@ShowHardcoreImage", Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowSoftcoreImage", Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowLesbianImage", Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowBlowjobImage", Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowFemdomImage", Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowLezdomImage", Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowHentaiImage", Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowGayImage", Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowMaledomImage", Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowCaptionsImage", Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowGeneralImage", Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowBlogImage", FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@NewBlogImage", __ConditionDic("@ShowBlogImage"))	' duplicate Command, lets get the Value af the other one.
+				.Add("@ShowLocalImage", FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True _
+					  Or (FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And FrmSettings.CBIBlowjob.Checked = False _
+					   And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And FrmSettings.CBIGay.Checked = False _
+					   And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False))
+				.Add("@ShowButtImage", Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
+				.Add("@ShowButtsImage", __ConditionDic("@ShowButtImage")) ' duplicate Command, lets get the Value af the other one.
+				.Add("@ShowBoobImage", Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
+				.Add("@ShowBoobsImage", __ConditionDic("@ShowBoobImage")) ' duplicate Command, lets get the Value af the other one.
+				.Add("@1MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119)
+				.Add("@2MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179)
+				.Add("@3MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239)
+				.Add("@4MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299)
+				.Add("@5MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599)
+				.Add("@10MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899)
+				.Add("@15MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799)
+				.Add("@30MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699)
+				.Add("@45MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599)
+				.Add("@60MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 3600)
+				.Add("@CBTLevel1", FrmSettings.CBTSlider.Value <> 1)
+				.Add("@CBTLevel2", FrmSettings.CBTSlider.Value <> 2)
+				.Add("@CBTLevel3", FrmSettings.CBTSlider.Value <> 3)
+				.Add("@CBTLevel4", FrmSettings.CBTSlider.Value <> 4)
+				.Add("@CBTLevel5", FrmSettings.CBTSlider.Value <> 5)
+				.Add("@SubCircumcised", FrmSettings.CBSubCircumcised.Checked = False)
+				.Add("@SubNotCircumcised", FrmSettings.CBSubCircumcised.Checked = True)
+				.Add("@SubPierced", FrmSettings.CBSubPierced.Checked = False)
+				.Add("@SubNotPierced", FrmSettings.CBSubPierced.Checked = True)
+				.Add("@ShowTaggedImage", LocalTagImageList.Count = 0) '=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> For this Condition the tags have be loaded before.
+				.Add("@BeforeTease", BeforeTease = False)
+				.Add("@OrgasmDenied", OrgasmDenied = False)
+				.Add("@OrgasmAllowed", OrgasmAllowed = False)
+				.Add("@OrgasmRuined", OrgasmRuined = False)
+				.Add("@ApathyLevel1", FrmSettings.NBEmpathy.Value <> 1)
+				.Add("@ApathyLevel2", FrmSettings.NBEmpathy.Value <> 2)
+				.Add("@ApathyLevel3", FrmSettings.NBEmpathy.Value <> 3)
+				.Add("@ApathyLevel4", FrmSettings.NBEmpathy.Value <> 4)
+				.Add("@ApathyLevel5", FrmSettings.NBEmpathy.Value <> 5)
+				.Add("@InChastity", My.Settings.Chastity = False)
+				.Add("@NotInChastity", My.Settings.Chastity = True)
+				.Add("@HasChastity", FrmSettings.CBOwnChastity.Checked = False)
+				.Add("@DoesNotHaveChastity", FrmSettings.CBOwnChastity.Checked = True)
+				.Add("@ChastityPA", FrmSettings.CBChastityPA.Checked = False)
+				.Add("@ChastitySpikes", FrmSettings.CBChastitySpikes.Checked = False)
+				.Add("@VitalSub", CBVitalSub.Checked = False)
+				.Add("@VitalSubAssignment", CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False)
+				.Add("@RuinTaunt", EdgeToRuin = False Or EdgeToRuinSecret = True)
+				.Add("@ShowLikedImage", Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt"))
+				.Add("@ShowDislikedImage", Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt"))
+				.Add("@VideoHardcore", VideoTease = False Or VideoType <> "Hardcore")
+				.Add("@VideoSoftcore", VideoTease = False Or VideoType <> "Softcore")
+				.Add("@VideoLesbian", VideoTease = False Or VideoType <> "Lesbian")
+				.Add("@VideoBlowjob", VideoTease = False Or VideoType <> "Blowjob")
+				.Add("@VideoFemdom", VideoTease = False Or VideoType <> "Femdom")
+				.Add("@VideoFemsub", VideoTease = False Or VideoType <> "Femsub")
+				.Add("@VideoGeneral", VideoTease = False Or VideoType <> "General")
+				.Add("@VideoHardcoreDomme", VideoTease = False Or VideoType <> "HardcoreD")
+				.Add("@VideoSoftcoreDomme", VideoTease = False Or VideoType <> "SoftcoreD")
+				.Add("@VideoLesbianDomme", VideoTease = False Or VideoType <> "LesbianD")
+				.Add("@VideoBlowjobDomme", VideoTease = False Or VideoType <> "BlowjobD")
+				.Add("@VideoFemdomDomme", VideoTease = False Or VideoType <> "FemdomD")
+				.Add("@VideoFemsubDomme", VideoTease = False Or VideoType <> "FemsubD")
+				.Add("@VideoGeneralDomme", VideoTease = False Or VideoType <> "GeneralD")
+				.Add("@CockTorture", FrmSettings.CBCBTCock.Checked = False)
+				.Add("@BallTorture", FrmSettings.CBCBTBalls.Checked = False)
+				.Add("@BallTorture0", CBTBallsCount <> 0)
+				.Add("@BallTorture1", CBTBallsCount <> 1)
+				.Add("@BallTorture2", CBTBallsCount <> 2)
+				.Add("@BallTorture3", CBTBallsCount <> 3)
+				.Add("@BallTorture4+", CBTBallsCount < 4)
+				.Add("@CockTorture0", CBTCockCount <> 0)
+				.Add("@CockTorture1", CBTCockCount <> 1)
+				.Add("@CockTorture2", CBTCockCount <> 2)
+				.Add("@CockTorture3", CBTCockCount <> 3)
+				.Add("@CockTorture4+", CBTCockCount < 4)
+				.Add("@Contact1", GlitterTease = False Or Not Group.Contains("1"))
+				.Add("@Contact2", GlitterTease = False Or Not Group.Contains("2"))
+				.Add("@Contact3", GlitterTease = False Or Not Group.Contains("3"))
+				.Add("@Stroking", SubStroking = False)
+				.Add("@SubStroking", SubStroking = False)
+				.Add("@NotStroking", SubStroking = True)
+				.Add("@SubNotStroking", SubStroking = True)
+				.Add("@Edging", SubEdging = False)
+				.Add("@SubEdging", SubEdging = False)
+				.Add("@NotEdging", SubEdging = True)
+				.Add("@SubNotEdging", SubEdging = True)
+				.Add("@HoldingTheEdge", SubHoldingEdge = False)
+				.Add("@SubHoldingTheEdge", SubHoldingEdge = False)
+				.Add("@NotHoldingTheEdge", SubHoldingEdge = True)
+				.Add("@SubNotHoldingTheEdge", SubHoldingEdge = True)
+				.Add("@Morning", GeneralTime <> "Morning")
+				.Add("@Afternoon", GeneralTime <> "Afternoon")
+				.Add("@Night", GeneralTime <> "Night")
+				.Add("@GoodMood", DommeMood <= FrmSettings.NBDomMoodMax.Value)
+				.Add("@BadMood", DommeMood >= FrmSettings.NBDomMoodMin.Value)
+				.Add("@NeutralMood", DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value)
+				.Add("@SetModule(", SetModule <> "" Or BookmarkModule = True) ' I wonder if this will work.
+				.Add("@OrgasmRestricted", OrgasmRestricted = False)
+				.Add("@OrgasmNotRestricted", OrgasmRestricted = True)
+				.Add("@SubWorshipping", WorshipMode = False)
+				.Add("@SubNotWorshipping", WorshipMode = True)
+				.Add("@LongHold", LongHold = False Or SubHoldingEdge = False)
+				.Add("@ExtremeHold", ExtremeHold = False Or SubHoldingEdge = False)
+				.Add("@AssWorship", WorshipTarget <> "Ass" Or WorshipMode = False)
+				.Add("@BoobWorship", WorshipTarget <> "Boobs" Or WorshipMode = False)
+				.Add("@PussyWorship", WorshipTarget <> "Pussy" Or WorshipMode = False)
+			End With
+		Catch ex As ArgumentException
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'	                ArgumentException => Will occur everytime until you fix Source Code!
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Debug.Print("Error on initializing FilterList." & vbCrLf & ex.Message & vbCrLf & ex.StackTrace)
+			MsgBox("Error on initializing FilterList. This Error occurs, If you try to add a duplikace Key to the dictionary." &
+				"This error is major issue in Code and will occur everytime until you fix this Error. For there is no point in " &
+				"further executing the Code, the application will exit after closing this Message." & vbCrLf &
+				ex.Message & vbCrLf & ex.StackTrace, MsgBoxStyle.Critical, "Source Code Error")
+			Application.Exit()
+		End Try
+
+
+		Try
+			' Declare a new regex Instance, for detecting the parameters in a line.
+			' Allowed chars for Commands are:		 A-Z a-z 0-9 @ 
+			' Allowed Brackets are :				( [
+			' Minimum length is 3 Chars, maximum Command length has no restriction.
+			Dim __re As Regex = New Regex("@[@\w\d+]{3,}[\(\[]*", RegexOptions.IgnoreCase)
+
+			
+				' Execute regex on current line, to find all containing Commands
+				Dim mc As MatchCollection = __re.Matches(FilterString)
+
+				For Each m As Match In mc
+					If __ConditionDic.Keys.Contains(m.Value) AndAlso __ConditionDic(m.Value) Then
+						'===============================================================================
+						'					Known Command - DELETE Condition = TRUE
+						'===============================================================================
+						' The Command is known and his delete condition is True -> delete line
+					Return False
+						
+					ElseIf __ConditionDic.Keys.Contains(m.Value) = False Then
+						'===============================================================================
+						'						Unknown Command / BracketCommand
+						'===============================================================================
+						Dim Condition As Boolean = False
+
+						Select Case m.Value.ToUpper
+						Case "@DommeLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@DommeLevel("), FrmSettings.domlevelNumBox)
+						Case "@Cup(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@Cup("), FrmSettings.boobComboBox)
+						Case "@AllowsOrgasm(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox)
+						Case "@RuinsOrgasm(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox)
+						Case "@ApathyLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@ApathyLevel("), FrmSettings.NBEmpathy)
+						Case "@Variable[".ToUpper : Condition = CheckVariable(FilterString)
+						Case "@CheckDate(".ToUpper : Condition = CheckDateList(FilterString)
+						Case "@DommeTag(".ToUpper : Condition = GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = False Or LockImage = True
+						Case "@ImageTag(".ToUpper : Condition = GetLocalImage(FilterString)
+							Case Else
+								'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
+								'					Unknown Command => goto next Match
+								'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
+								Dim f As String = "" ' Debug line to add the ability to set a breakpoint.
+								Exit For
+						End Select
+						' The Command is known and his delete condition is True -> delete line
+					If Condition Then Return False
+					End If
+				Next ' of Regex matches (Commands)
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'TODO: Once implemented rethrow all exceptions.
+			'Throw
+		End Try
+
+		Return True
+
+
+
+
+	End Function
+
+
 #Region "---------------------------------------------------- Chatbox ---------------------------------------------------------"
 
 	Private Sub ChatText_DocumentCompleted(sender As Object, e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText.DocumentCompleted
@@ -20699,6 +21608,11 @@ FinishTNA:
 
 
 	End Sub
+
+
+
+
+
 
 	Private Sub AvoidTheEdge_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles AvoidTheEdge.Tick
 
