@@ -517,8 +517,6 @@ Public Class Form1
 	''' </summary>
 	Dim ImageLocation As String
 
-	Public ResponseThread As Thread
-
 	Dim ResponseYes As String
 	Dim ResponseNo As String
 
@@ -555,9 +553,6 @@ Public Class Form1
 	Dim MiniTauntVal As Integer
 	Dim MiniTimerCheck As Boolean
 
-	Dim PreLoadImage As Boolean
-	Dim CachedImage As Image
-	Dim CachedImage2 As Image
 
 	Dim JumpVideo As Boolean
 	Dim VideoTick As Integer
@@ -6453,7 +6448,12 @@ EndSysMes:
 
 				End If
 
-				If PreLoadImage = True Or JustShowedBlogImage = True Then GoTo HypNoResponse
+				' If Sync of Reseults is activated
+				' Wait for the ImageFetcher to Finish 
+				If BWimageFetcher.TriggerRequired _
+				Then BWimageFetcher.WaitToFinish()
+
+				If JustShowedBlogImage = True Then GoTo HypNoResponse
 
 
 				If ShowPicture = True Or DommeImageFound = True Then
@@ -6530,10 +6530,10 @@ HypNoResponse:
 				End If
 
 NoResponse:
-
-				If PreLoadImage = True Then
-					DisplayImage()
-				End If
+				' If Sync of Reseults is activated
+				' Wait for the ImageFetcher to Finish 
+				If BWimageFetcher.TriggerRequired _
+				Then BWimageFetcher.WaitToFinish()
 
 				Try
 					If mainPictureBox.Visible = True Then
@@ -7344,6 +7344,11 @@ EndSysMes:
 
 				SubWroteLast = False
 
+				' If Sync of Reseults is activated
+				' Wait for the ImageFetcher to Finish 
+				If BWimageFetcher.TriggerRequired _
+				Then BWimageFetcher.WaitToFinish()
+
 				If ShowPicture = True Or DommeImageFound = True Then
 
 
@@ -7392,6 +7397,11 @@ EndSysMes:
 				End If
 
 NullResponseLine2:
+
+				' If Sync of Reseults is activated
+				' Wait for the ImageFetcher to Finish 
+				If BWimageFetcher.TriggerRequired _
+				Then BWimageFetcher.WaitToFinish()
 
 				If MultipleEdgesMetronome = "STOP" Then
 					MultipleEdgesMetronome = ""
@@ -13834,249 +13844,95 @@ ExternalAudio:
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 			Dim files As String()
 
+			Dim dicImageData As Dictionary(Of String, ImageDataContainer) = GetImageData()
+
 			If LCase(SlideFlag).Contains("hardcore") Then
 				Try
-					If FrmSettings.CBIHardcoreSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLIHardcore.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("hardcore").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("softcore") Then
 				Try
-					If FrmSettings.CBISoftcoreSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLISoftcore.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("softcore").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("lesbian") Then
 				Try
-					If FrmSettings.CBILesbianSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLILesbian.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("lesbian").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("blowjob") Then
 				Try
-					If FrmSettings.CBIBlowjobSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLIBlowjob.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("blowjob").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("femdom") Then
 				Try
-					If FrmSettings.CBIFemdomSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLIFemdom.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("femdom").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("lezdom") Then
 				Try
-					If FrmSettings.CBILezdomSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLILezdom.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("lezdom").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("hentai") Then
 				Try
-					If FrmSettings.CBIHentaiSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLIHentai.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("hentai").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("gay") Then
 				Try
-					If FrmSettings.CBIGaySD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLIGay.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLIGay.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("gay").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("maledom") Then
 				Try
-					If FrmSettings.CBIMaledomSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLIMaledom.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("maledom").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("captions") Then
 				Try
-					If FrmSettings.CBICaptionsSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLICaptions.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("captions").ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("general") Then
 				Try
-					If FrmSettings.CBIGeneralSD.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLIGeneral.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("general").ToList())
 				Catch
 				End Try
 			End If
 
-			If LCase(SlideFlag).Contains("boob") Then
+			If LCase(SlideFlag).Contains("boob") Or LCase(SlideFlag).Contains("boobs") Then
 				Try
-					If FrmSettings.CBBoobSubDir.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("boobs").ToList())
 				Catch
 				End Try
 			End If
 
-			If LCase(SlideFlag).Contains("butt") Then
+			If LCase(SlideFlag).Contains("butt") Or LCase(SlideFlag).Contains("butts") Then
 				Try
-					If FrmSettings.CBButtSubDir.Checked = True Then
-						files = myDirectory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*")
-					End If
-
-					Array.Sort(files)
-
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							CustomSlideshowList.Add(fi)
-						End If
-					Next
+					CustomSlideshowList.AddRange(dicImageData("butt").ToList())
 				Catch
 				End Try
 			End If
@@ -23636,35 +23492,6 @@ TryNext:
 
 #Region "-------------------------------------------------- MainPictureBox ----------------------------------------------------"
 
-	Public Sub ShowImage(ByVal ImageToShow As String, ByVal WaitToFinish As Boolean)
-		If FormLoading = True Then Return
-
-		Debug.Print(
-				"    _____                                  ______     _         _      " & vbCrLf &
-				"   |_   _|                                |  ____|   | |       | |     " & vbCrLf &
-				"     | |   _ __ ___    __ _   __ _   ___  | |__  ___ | |_  ___ | |__   " & vbCrLf &
-				"     | |  | '_ ` _ \  / _` | / _` | / _ \ |  __|/ _ \| __|/ __|| '_ \  " & vbCrLf &
-				"    _| |_ | | | | | || (_| || (_| ||  __/ | |  |  __/| |_| (__ | | | | " & vbCrLf &
-				"   |_____||_| |_| |_| \__,_| \__, | \___| |_|   \___| \__|\___||_| |_| " & vbCrLf &
-				"                              __/ |                                    " & vbCrLf &
-				"                             |___/                                     " & vbCrLf &
-				" ImageLocation: " & ImageToShow & vbCrLf &
-				" WaitToFinish:  " & WaitToFinish)
-
-		Dim FetchContainer As New ImageFetchObject
-		FetchContainer.ImageLocation = ImageToShow
-
-		If FrmSettings.CBBlogImageWindow.Checked = True _
-		Then FetchContainer.SaveImageDirectory = Application.StartupPath & " \ Images \ Session Images\" _
-		Else FetchContainer.SaveImageDirectory = ""
-
-		BWimageFetcher.RunWorkerAsync(FetchContainer, True)
-
-
-		If WaitToFinish Then BWimageFetcher.WaitToFinish()
-
-	End Sub
-
 	Private Sub mainPictureBox_LoadCompleted(sender As Object, e As System.ComponentModel.AsyncCompletedEventArgs) Handles mainPictureBox.LoadCompleted
 		ImageLocation = mainPictureBox.ImageLocation
 		CheckDommeTags()
@@ -23677,109 +23504,7 @@ TryNext:
 		End If
 	End Sub
 
-#Region "---------------------------------------------------- BWimageSync -----------------------------------------------------"
 
-#Region "---------------------------------------------------- Declarations ----------------------------------------------------"
-
-	''' <summary>
-	''' Modified Backgroundworker to load and save images on a different thread, with tth possibility to trigger 
-	''' the RunWorkerCompleted-Event manually
-	''' </summary>
-	Private WithEvents BWimageFetcher As New Tease_AI.BackgroundWorkerSyncable
-
-	''' <summary>
-	''' Object to pass data to a differnt thread.
-	''' </summary>
-	Private Class ImageFetchObject
-		Public ImageLocation As String = ""
-
-		Private _SaveImageDirectory As String = ""
-
-		Public Property SaveImageDirectory As String
-			Get
-				Return _SaveImageDirectory
-			End Get
-			Set(value As String)
-				If Not value.EndsWith("\") Then
-					_SaveImageDirectory = value & "\"
-				Else
-					_SaveImageDirectory = value
-
-				End If
-			End Set
-		End Property
-
-		Public FetchedImage As Image = Nothing
-	End Class
-
-#End Region ' Declarations
-
-
-	''' <summary>
-	''' Invokes included! This function should be used in a thread.
-	''' </summary>
-	Private Sub BWimageFetcher_DoWork(ByVal sender As Object,
-							 ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BWimageFetcher.DoWork
-
-		If TypeOf e.Argument Is ImageFetchObject Then
-			Dim FetchContainer As ImageFetchObject = e.Argument
-			Try
-				With FetchContainer
-					If .ImageLocation.Contains("/") And .ImageLocation.Contains("://") Then
-						' ###################### Online Image #########################
-						' Download the image
-						.FetchedImage = New Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(.ImageLocation)))
-						'check if Folder is set and exists.
-						If .SaveImageDirectory <> "" _
-					AndAlso Directory.Exists(.SaveImageDirectory) Then
-							'Check if the destination Filename exists.
-							If Not File.Exists(.SaveImageDirectory & Path.GetFileName(.ImageLocation)) Then
-								.FetchedImage.Save(.SaveImageDirectory & Path.GetFileName(.ImageLocation))
-							End If
-						End If
-					Else
-						' ####################### Local Image #########################
-						.FetchedImage = Image.FromFile(.ImageLocation)
-					End If
-				End With
-			Catch ex As Exception
-				' Do nothing, Just for Debug.
-				Throw
-			End Try
-			' Return the fetched data to the UI-Thread
-			e.Result = FetchContainer
-		End If
-		Debug.Print("ImageFetch - DoWork - Done")
-	End Sub
-
-	Private Sub BWimageFetcher_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BWimageFetcher.RunWorkerCompleted
-		If e.Cancelled Then Exit Sub
-		If e.Error IsNot Nothing Then Exit Sub
-
-		If TypeOf e.Result Is ImageFetchObject Then
-			Dim FetchResult As ImageFetchObject = e.Result
-			Dim OldImage As Image = mainPictureBox.Image
-			Dim NewImage As Bitmap = FetchResult.FetchedImage.Clone
-
-			mainPictureBox.Image = NewImage
-			mainPictureBox.Refresh()
-			mainPictureBox.Invalidate()
-
-			PBImage = FetchResult.ImageLocation
-			ImageLocation = FetchResult.ImageLocation
-			LBLImageInfo.Text = FetchResult.ImageLocation
-
-			If OldImage IsNot Nothing Then
-				OldImage.Dispose()
-			End If
-			GC.Collect()
-			CheckDommeTags()
-			Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
-						"	ImageLocation: " & FetchResult.ImageLocation)
-		End If
-	End Sub
-
-#End Region ' BWimageSync
 
 #End Region ' MainPictureBox
 
@@ -29198,57 +28923,30 @@ SkipNew:
 
 	End Sub
 
-	Public Sub CalculateResponse()
-
-
-		ResponseThread = New Thread(AddressOf DomResponse) With {.Name = "ResponseThread"}
-		ResponseThread.IsBackground = True
-		ResponseThread.Start()
-
-	End Sub
-
 	''' <summary>
 	''' Invokes included! This function should be used in a thread.
 	''' </summary>
 	Private Sub DisplayImage()
 
 		If FormLoading = True Then Return
-		If PBImage = "" And PreLoadImage = False Then Return
+		If PBImage = "" Then Return
 
 		Control.CheckForIllegalCrossThreadCalls = False
 
 
 		Dim OldImage As Image = mainPictureBox.Image
 
-		If PreLoadImage = True Then
 
-			If Not CachedImage2 Is Nothing Then
-				mainPictureBox.Image = CachedImage2
-				SaveSessionImage(CachedImage2)
-				If Not CachedImage Is Nothing Then CachedImage.Dispose()
-			Else
-				mainPictureBox.Image = CachedImage
-				SaveSessionImage(CachedImage)
-			End If
-			PreLoadImage = False
-
+		If PBImage.Contains("/") And PBImage.Contains("://") Then
+			Try
+				' Load the Image.
+				mainPictureBox.Image = New Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PBImage)))
+			Catch ex As Net.WebException
+				Exit Sub
+			End Try
 		Else
-			If PBImage.Contains("/") And PBImage.Contains("://") Then
-				Try
-					' Load the Image.
-					mainPictureBox.Image = New Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PBImage)))
-				Catch ex As Net.WebException
-					Exit Sub
-				End Try
-			Else
-				mainPictureBox.Image = Image.FromFile(PBImage)
-			End If
-
-			If Not CachedImage Is Nothing Then CachedImage.Dispose()
-			If Not CachedImage2 Is Nothing Then CachedImage2.Dispose()
-
+			mainPictureBox.Image = Image.FromFile(PBImage)
 		End If
-
 
 
 		Try
@@ -29273,206 +28971,6 @@ SkipNew:
 
 	End Sub
 
-	Public Function CacheImage(ByVal OnlineImage As String) As String
-
-		Dim ImageToCache As String = ""
-
-		If OnlineImage = "Blog" Then
-
-			Dim URLList As New List(Of String)
-			URLList.Clear()
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\URL Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-				URLList.Add(foundFile.Replace(".txt", ""))
-			Next
-
-			If URLList.Count < 1 Then
-				Return ImageToCache
-				Exit Function
-			End If
-
-			For i As Integer = FrmSettings.URLFileList.Items.Count - 1 To 0 Step -1
-				For j As Integer = URLList.Count - 1 To 0 Step -1
-					If FrmSettings.URLFileList.GetItemChecked(i) = False And FrmSettings.URLFileList.Items(i) = URLList(j).Replace(Application.StartupPath & "\Images\System\URL Files\", "") Then
-						URLList.Remove(URLList(j))
-						Exit For
-					End If
-				Next
-			Next
-
-			If URLList.Count < 1 Then
-				Return ImageToCache
-				Exit Function
-			End If
-
-			ImageUrlFilePath = URLList(randomizer.Next(0, URLList.Count)) & ".txt"
-
-			Dim linesGB As New List(Of String)
-			linesGB = Txt2List(ImageUrlFilePath)
-
-			Do
-				ImageUrlFileIndex = randomizer.Next(0, linesGB.Count)
-				FoundString = linesGB(ImageUrlFileIndex)
-			Loop Until FoundString <> ""
-
-			ImageToCache = FoundString
-
-		End If
-
-		If OnlineImage = "Butt" Then
-			GetTnAList()
-			Try
-				ImageToCache = AssList(randomizer.Next(0, AssList.Count))
-			Catch
-				If FrmSettings.CBIButts.Checked = True Then
-					ImageToCache = (Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg")
-				Else
-					ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-				End If
-			End Try
-		End If
-
-		If OnlineImage = "Boobs" Then
-			GetTnAList()
-			Try
-				ImageToCache = BoobList(randomizer.Next(0, BoobList.Count))
-			Catch
-				If FrmSettings.CBIBoobs.Checked = True Then
-					ImageToCache = (Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg")
-				Else
-					ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-				End If
-			End Try
-		End If
-
-		If OnlineImage = "Hardcore" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.HardcoreURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "Softcore" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.SoftcoreURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "Lesbian" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.LesbianURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "Blowjob" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.BlowjobURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "Femdom" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.FemdomURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "Lezdom" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.LezdomURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "Hentai" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.HentaiURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "Gay" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.GayURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "Maledom" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.MaledomURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "Captions" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.CaptionsURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If OnlineImage = "General" Then
-			Try
-				Dim PicList As New List(Of String)
-				PicList = Txt2List(My.Settings.GeneralURLFile)
-				ImageToCache = PicList(randomizer.Next(0, PicList.Count))
-			Catch
-				ImageToCache = (Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg")
-			End Try
-		End If
-
-		If ImageToCache = "" Then
-			Return ImageToCache
-			Exit Function
-		End If
-
-
-		PreLoadImage = True
-
-		If CachedImage Is Nothing Then
-			CachedImage = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(ImageToCache)))
-		Else
-			CachedImage2 = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(ImageToCache)))
-		End If
-
-		ImageLocation = ImageToCache
-		Return ImageToCache
-
-
-	End Function
 
 	Private Sub VideoTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles VideoTimer.Tick
 
@@ -29697,11 +29195,19 @@ SkipNew:
 
 	End Sub
 
+
+	''' <summary>
+	''' Checks if there are any ImageCommands in StringClean, which need an early loading of Images. 
+	''' If there are Images to load, BWImageFetcher is started, with manual triggering of the 
+	''' RunWorkerCompled-Event. 
+	''' <para>Make sure to call BWImageFetcher.WaitToFinish() when all other Work is done!</para> 
+	''' </summary>
+	''' <returns></returns>
 	Public Function CheckPreLoad(ByVal StringClean As String) As String
 
 
 		If StringClean.Contains("@ShowBlogImage") Then
-			If CacheImage("Blog") <> "" Then
+			If BeginImageFetch("Blog") <> "" Then
 				JustShowedBlogImage = True
 				StringClean = StringClean.Replace("@ShowBlogImage", "")
 			Else
@@ -29720,7 +29226,7 @@ SkipNew:
 			End If
 
 			JustShowedBlogImage = True
-			CacheImage("Butt")
+			BeginImageFetch("Butt")
 			StringClean = StringClean.Replace("@ShowButtImage", "")
 			StringClean = StringClean.Replace("@ShowButtsImage", "")
 
@@ -29735,7 +29241,7 @@ SkipNew:
 			End If
 
 			JustShowedBlogImage = True
-			CacheImage("Boobs")
+			BeginImageFetch("Boobs")
 			StringClean = StringClean.Replace("@ShowBoobImage", "")
 			StringClean = StringClean.Replace("@ShowBoobsImage", "")
 
@@ -29748,7 +29254,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Hardcore")
+			BeginImageFetch("Hardcore")
 			StringClean = StringClean.Replace("@ShowHardcoreImage", "")
 		End If
 
@@ -29759,7 +29265,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Softcore")
+			BeginImageFetch("Softcore")
 			StringClean = StringClean.Replace("@ShowSoftcoreImage", "")
 		End If
 
@@ -29770,7 +29276,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Lesbian")
+			BeginImageFetch("Lesbian")
 			StringClean = StringClean.Replace("@ShowLesbianImage", "")
 		End If
 
@@ -29781,7 +29287,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Blowjob")
+			BeginImageFetch("Blowjob")
 			StringClean = StringClean.Replace("@ShowBlowjobImage", "")
 		End If
 
@@ -29792,7 +29298,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Femdom")
+			BeginImageFetch("Femdom")
 			StringClean = StringClean.Replace("@ShowFemdomImage", "")
 		End If
 
@@ -29803,7 +29309,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Lezdom")
+			BeginImageFetch("Lezdom")
 			StringClean = StringClean.Replace("@ShowLezdomImage", "")
 		End If
 
@@ -29814,7 +29320,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Hentai")
+			BeginImageFetch("Hentai")
 			StringClean = StringClean.Replace("@ShowHentaiImage", "")
 		End If
 
@@ -29825,7 +29331,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Gay")
+			BeginImageFetch("Gay")
 			StringClean = StringClean.Replace("@ShowGayImage", "")
 		End If
 
@@ -29836,7 +29342,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Maledom")
+			BeginImageFetch("Maledom")
 			StringClean = StringClean.Replace("@ShowMaledomImage", "")
 		End If
 
@@ -29847,7 +29353,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("Captions")
+			BeginImageFetch("Captions")
 			StringClean = StringClean.Replace("@ShowCaptionsImage", "")
 		End If
 
@@ -29858,7 +29364,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			CacheImage("General")
+			BeginImageFetch("General")
 			StringClean = StringClean.Replace("@ShowGeneralImage", "")
 		End If
 
@@ -29979,26 +29485,5 @@ SkipNew:
 		Return True
 
 	End Function
-
-	Public Sub SaveSessionImage(ByVal SessionImage As Image)
-
-		If FrmSettings.CBBlogImageWindow.Checked = True Then
-
-			Dim ImageFlag As String = ImageLocation
-			Do Until Not ImageFlag.Contains("/")
-				ImageFlag = ImageFlag.Remove(0, 1)
-			Loop
-
-			If Not File.Exists(Application.StartupPath & "\Images\Session Images\" & ImageFlag) Then
-				SessionImage.Save(Application.StartupPath & "\Images\Session Images\" & ImageFlag)
-				FrmSettings.CalculateSessionImages()
-			Else
-				Debug.Print("Session Image already exists")
-			End If
-
-		End If
-
-	End Sub
-
 
 End Class

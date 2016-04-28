@@ -1,23 +1,46 @@
-﻿''' <summary>
+﻿Imports System.ComponentModel
+''' <summary>
 ''' BackgroundWorker-Class to raise the RunWorkerCompleted-Event manually.
 ''' </summary>
 Public Class BackgroundWorkerSyncable
 	Inherits System.ComponentModel.BackgroundWorker
 
 
-#Region "------------------------------------------------- Sync Required -------------------------------------------------------"
+#Region "-----------------------------------------------  Trigger Required -----------------------------------------------------"
 
-	Private _SyncRequired As Boolean = True
+	Private _TriggerRequired As Boolean = True
 
-	Public ReadOnly Property SyncRequired As Boolean
+	Public ReadOnly Property TriggerRequired As Boolean
 		Get
-			Return _SyncRequired
+			Return _TriggerRequired
 		End Get
 	End Property
 
 #End Region ' Sync Required
 
-#Region "------------------------------------------------- MyBaseRelated -------------------------------------------------------"
+#Region "-------------------------------------------------- Trigger Timer ------------------------------------------------------"
+
+	Private WithEvents TriggerTimer As New Timer With {.Interval = 10000}
+
+
+	Private Sub TriggerTimer_Tick(sender As Object, e As EventArgs) Handles TriggerTimer.Tick
+		TriggerTimer.Stop()
+		Debug.Print("@ @ @ @ @ @ @ @ @ @ @ @ @ @ Forced BW Event-Trigger @ @ @ @ @ @ @ @ @ @ @ @ @ @")
+		Debug.Print("Make sure to trigger the RunWorkerCompleted-Event when activating manual Trigger!")
+
+		'TODO: Add a LogWrite
+
+		MyBase.OnRunWorkerCompleted(New RunWorkerCompletedEventArgs(
+									Nothing,
+									New TimeoutException("This Event has been forced Triggered. Make sure " &
+									"to trigger the RunWorkerCompleted-Event when activating manual Trigger!"),
+									True))
+		Reset()
+	End Sub
+
+#End Region
+
+#Region " - ------------------------------------------------MyBaseRelated - ------------------------------------------------------"
 
 	''' =========================================================================================================
 	''' <summary>
@@ -44,15 +67,22 @@ Public Class BackgroundWorkerSyncable
 	''' <exception cref="InvalidOperationException">Occurs if you try to start a new thread, without syncing the 
 	''' previous results.</exception>
 	Public Shadows Sub RunWorkerAsync(Obj As Object, Optional ByVal SyncRequired As Boolean = True)
-		If _ResultCache IsNot Nothing Then Throw New InvalidOperationException("Starting is not allowed while a previous result is cached.")
-		_SyncRequired = SyncRequired
+		If _ResultCache IsNot Nothing Then Throw New InvalidOperationException("Starting Is Not allowed while a previous result Is cached.")
+		_TriggerRequired = SyncRequired
 		_SyncTimeOut = False
 		MyBase.RunWorkerAsync(Obj)
 	End Sub
 
 	Protected Overrides Sub OnRunWorkerCompleted(e As System.ComponentModel.RunWorkerCompletedEventArgs)
-		If _SyncTimeOut Then Exit Sub
-		If SyncRequired Then
+		If _SyncTimeOut Then
+			' The BackgroundThread has taken too long. The waiting Thread has aborted.
+			' ReWrtite the Result Argument and trigger the Event.
+			_ResultCache = New RunWorkerCompletedEventArgs(_ResultCache.Result, _ResultCache.Error, True)
+			MyBase.OnRunWorkerCompleted(_ResultCache)
+		End If
+
+		If TriggerRequired Then
+			TriggerTimer.Start()
 			_ResultCache = e
 		Else
 			MyBase.OnRunWorkerCompleted(e)
@@ -111,16 +141,27 @@ Public Class BackgroundWorkerSyncable
 		If Me._ResultCache.Error IsNot Nothing Then Throw Me._ResultCache.Error
 
 		MyBase.OnRunWorkerCompleted(_ResultCache)
-		CancelSync()
+		Reset()
 	End Sub
 
 	''' <summary>
-	''' Cancels the current Syncing and deletes all fetched data.
+	''' Cancels the current Thread, manual Triggering and deletes all fetched data.
 	''' </summary>
 	''' <remarks></remarks>
-	Public Sub CancelSync()
+	Public Sub CancelTrigger()
+		Me.CancelAsync()
+
+		Do Until MyBase.IsBusy = False
+			Application.DoEvents()
+		Loop
+		Reset()
+		If MyBase.IsBusy = False Then MyBase.OnRunWorkerCompleted(New RunWorkerCompletedEventArgs(Nothing, Nothing, True))
+	End Sub
+
+	Private Sub Reset()
+		If TriggerTimer.Enabled Then TriggerTimer.Stop()
 		_ResultCache = Nothing
-		_SyncRequired = False
+		_TriggerRequired = False
 	End Sub
 
 #End Region  ' Sync-Members
