@@ -4085,7 +4085,8 @@ FoundState:
 			DRLines = FilterList(DRLines)
 			ResponseLine = randomizer.Next(0, DRLines.Count)
 			CleanResponse = DRLines(ResponseLine)
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Response line", ex, "ReponseClean()")
 			CleanResponse = "ERROR: Tease AI did not return a valid Response line"
 		End Try
 
@@ -4554,7 +4555,8 @@ AcceptAnswer:
 		Try
 			BallList = FilterList(BallList)
 			DomTask = BallList(randomizer.Next(0, BallList.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid @CBTBalls line", ex, "CBTBalls()")
 			DomTask = "ERROR: Tease AI did not return a valid @CBTBalls line"
 		End Try
 
@@ -4580,7 +4582,8 @@ AcceptAnswer:
 		Try
 			CockList = FilterList(CockList)
 			DomTask = CockList(randomizer.Next(0, CockList.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid @CBTCock line", ex, "CBTCock()")
 			DomTask = "ERROR: Tease AI did not return a valid @CBTCock line"
 		End Try
 
@@ -4619,7 +4622,8 @@ AcceptAnswer:
 		Try
 			BothList = FilterList(BothList)
 			DomTask = BothList(randomizer.Next(0, BothList.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid @CBT line", ex, "CBTBoth()")
 			DomTask = "ERROR: Tease AI did not return a valid @CBT line"
 		End Try
 
@@ -4643,7 +4647,8 @@ AcceptAnswer:
 		Try
 			CustomList = FilterList(CustomList)
 			DomTask = CustomList(randomizer.Next(0, CustomList.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Custom Taks line", ex, "RunCustomTask()")
 			DomTask = "ERROR: Tease AI did not return a valid Custom Task line"
 		End Try
 
@@ -8208,7 +8213,8 @@ TryNextWithTease:
 
 				Try
 					TauntLines = FilterList(TauntLines)
-				Catch
+				Catch ex As Exception
+					Log.WriteError("Tease AI did not return a valid Taunt", ex, "StrokeTauntTimer.Tick")
 					DomTask = "ERROR: Tease AI did not return a valid Taunt"
 				End Try
 
@@ -8270,7 +8276,8 @@ TryNextWithTease:
 
 			Try
 				DomTask = TauntLines(TauntTextCount)
-			Catch
+			Catch ex As Exception
+				Log.WriteError("Tease AI did not return a valid Taunt", ex, "StrokeTauntTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Taunt"
 			End Try
 
@@ -8844,7 +8851,8 @@ CensorConstant:
 				If lines.Count < 1 Then Return
 				CensorLine = randomizer.Next(0, lines.Count)
 				DomTask = lines(CensorLine)
-			Catch
+			Catch ex As Exception
+				Log.WriteError("Tease AI did not return a valid Censorship Sucks line", ex, "CensorshipTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Censorship Sucks line"
 			End Try
 
@@ -8893,7 +8901,8 @@ CensorConstant:
 			Try
 				tempList = FilterList(tempList)
 				DomTask = tempList(randomizer.Next(0, tempList.Count))
-			Catch
+			Catch ex As Exception
+				Log.WriteError("Tease AI did not return a valid RLGL line", ex, "RLGLTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid RLGL line"
 			End Try
 
@@ -10389,7 +10398,8 @@ StatusUpdateEnd:
 							'Debug.Print("PoundLine = " & PoundLine)
 							'Debug.Print("PoundVal = " & PoundVal)
 							StringClean = StringClean.Replace(PoundArray(i), lines(PoundVal))
-						Catch
+						Catch ex As Exception
+							Log.WriteError("Tease AI did not return a valid line while parsing Command Filters", ex, "PoundClean()")
 							StringClean = "ERROR: Tease AI did not return a valid line while parsing Command Filters"
 						End Try
 
@@ -21810,7 +21820,8 @@ NoPlaylistEndFile:
 			Try
 				ETLines = FilterList(ETLines)
 				DomTask = ETLines(randomizer.Next(0, ETLines.Count))
-			Catch
+			Catch ex As Exception
+				Log.WriteError("Tease AI did not return a valid Edge Taunt", ex, "EdgeTauntTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Edge Taunt"
 			End Try
 
@@ -22178,7 +22189,8 @@ NoRepeatOFiles:
 			Try
 				ETLines = FilterList(ETLines)
 				DomTask = ETLines(randomizer.Next(0, ETLines.Count))
-			Catch
+			Catch ex As Exception
+				Log.WriteError("Tease AI did not return a valid Hold the Edge Taunt", ex, "HoldEdgeTauntTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Hold the Edge Taunt"
 			End Try
 
@@ -22212,7 +22224,8 @@ NoRepeatOFiles:
 		Try
 			TaskLines = FilterList(TaskLines)
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
 			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
 		End Try
 
@@ -22230,7 +22243,8 @@ NoRepeatOFiles:
 		Try
 			TaskLines = FilterList(TaskLines)
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
 			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
 		End Try
 		PoundClean(TaskEntry)
@@ -22252,7 +22266,8 @@ NoRepeatOFiles:
 		Try
 			TaskLines = FilterList(TaskLines)
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
 			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
 		End Try
 		PoundClean(TaskEntry)
@@ -22272,7 +22287,8 @@ NoRepeatOFiles:
 		Try
 			TaskLines = FilterList(TaskLines)
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
 			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
 		End Try
 		PoundClean(TaskEntry)
@@ -22294,7 +22310,8 @@ Afternoon:
 		Try
 			TaskLines = FilterList(TaskLines)
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
 			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
 		End Try
 		PoundClean(TaskEntry)
@@ -22314,7 +22331,8 @@ Afternoon:
 		Try
 			TaskLines = FilterList(TaskLines)
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
 			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
 		End Try
 		PoundClean(TaskEntry)
@@ -22335,7 +22353,8 @@ Night:
 		Try
 			TaskLines = FilterList(TaskLines)
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
 			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
 		End Try
 		PoundClean(TaskEntry)
@@ -22354,7 +22373,8 @@ Night:
 		Try
 			TaskLines = FilterList(TaskLines)
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
 			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
 		End Try
 		PoundClean(TaskEntry)
@@ -22373,7 +22393,8 @@ Night:
 		Try
 			TaskLines = FilterList(TaskLines)
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
 			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
 		End Try
 		PoundClean(TaskEntry)
@@ -23511,7 +23532,8 @@ TryNext:
 				VTList = FilterList(VTList)
 				If VTList.Count < 1 Then Return
 				DomTask = VTList(randomizer.Next(0, VTList.Count))
-			Catch
+			Catch ex As Exception
+				Log.WriteError("Tease AI did not return a valid Video Taunt", ex, "VideoTaunTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
 			End Try
 
@@ -23531,10 +23553,6 @@ TryNext:
 
 
 
-
-	End Sub
-
-	Private Sub TeaseTimer_Disposed(sender As Object, e As System.EventArgs) Handles TeaseTimer.Disposed
 
 	End Sub
 
@@ -23585,7 +23603,8 @@ TryNext:
 				VTList = FilterList(VTList)
 				If VTList.Count < 1 Then Return
 				DomTask = VTList(randomizer.Next(0, VTList.Count))
-			Catch
+			Catch ex As Exception
+				Log.WriteError("Tease AI did not return a valid Video Taunt", ex, "RLGLTauntTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
 			End Try
 			TypingDelayGeneric()
@@ -23635,7 +23654,8 @@ TryNext:
 				VTList = FilterList(VTList)
 				If VTList.Count < 1 Then Return
 				DomTask = VTList(randomizer.Next(0, VTList.Count))
-			Catch
+			Catch ex As Exception
+				Log.WriteError("Tease AI did not return a valid Video Taunt", ex, "AvoidTheEdgeTaunts.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
 			End Try
 			TypingDelayGeneric()
@@ -24323,7 +24343,7 @@ GetDommeSlideshow:
 		If Directory.Exists(Path.GetDirectoryName(GetText)) = False Then
 			Directory.CreateDirectory(Path.GetDirectoryName(GetText))
 		End If
-
+		Log.Write("Load File: " & GetText)
 		If File.Exists(GetText) Then
 			Using TextReader As New StreamReader(GetText)
 				Dim TextList As New List(Of String)
