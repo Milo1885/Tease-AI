@@ -29407,7 +29407,7 @@ SkipNew:
 		End Try
 
 
-		ShowGotImage()
+		 ShowGotImage()
 
 	End Sub
 
@@ -29485,5 +29485,26 @@ SkipNew:
 		Return True
 
 	End Function
+
+	Public Sub SaveSessionImage(ByVal SessionImage As Image)
+
+		If FrmSettings.CBBlogImageWindow.Checked = True Then
+
+			Dim ImageFlag As String = ImageLocation
+			Do Until Not ImageFlag.Contains("/")
+				ImageFlag = ImageFlag.Remove(0, 1)
+			Loop
+
+			If Not File.Exists(Application.StartupPath & "\Images\Session Images\" & ImageFlag) Then
+				SessionImage.Save(Application.StartupPath & "\Images\Session Images\" & ImageFlag)
+				FrmSettings.CalculateSessionImages()
+			Else
+				Debug.Print("Session Image already exists")
+			End If
+
+		End If
+
+	End Sub
+
 
 End Class
