@@ -72,7 +72,7 @@ Partial Class Form1
 			' Check if Links/Paths are present.
 			If tmpList.Count > 0 Then
 				' Pick a Random Image-Path
-				Return tmpList(New Random().Next(0, tmpList.Count - 1))
+				Return tmpList(New Random().Next(0, tmpList.Count))
 			Else
 				' Return the Error-Image FilePath
 				Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
@@ -91,7 +91,7 @@ Partial Class Form1
 			' Check if Links/Paths are present.
 			If tmpList.Count > 0 Then
 				' Pick a Random Image-Path
-				Return tmpList(New Random().Next(0, tmpList.Count - 1))
+				Return tmpList(New Random().Next(0, tmpList.Count))
 			Else
 				' Return an Error-Image FilePath
 				If Type = ImageSourceType.Local _
@@ -236,7 +236,7 @@ Partial Class Form1
 		If GenreCount = 0 Then Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
 
 		' Dertmine a Random ImageGenre.
-		Dim RandomGenre As String = dicFilePaths.Keys(New Random().Next(0, GenreCount - 1)).ToString
+		Dim RandomGenre As String = dicFilePaths.Keys(New Random().Next(0, GenreCount)).ToString
 
 		' get an Random Image from the Random Genre.
 		Return dicFilePaths(RandomGenre).Random()
@@ -271,7 +271,7 @@ Partial Class Form1
 		If GenreCount = 0 Then GoTo NoNeFound
 
 		' Dertmine a Random ImageGenre.
-		Dim RandomGenre As String = dicFilePaths.Keys(New Random().Next(0, GenreCount - 1)).ToString
+		Dim RandomGenre As String = dicFilePaths.Keys(New Random().Next(0, GenreCount)).ToString
 
 		' get an Random Image from the Random Genre.
 		Return dicFilePaths(RandomGenre).Random(source)
@@ -443,11 +443,20 @@ NoNeFound:
 	End Sub
 
 
+	''' <summary>
+	''' Starts to Download an Image on Background. Make sure, to tell the Backgroundworker, 
+	''' when you finished your work and waiting for him to complete.
+	''' </summary>
+	''' <param name="OnlineImage"></param>
+	''' <returns></returns>
 	Public Function BeginImageFetch(ByVal OnlineImage As String) As String
-		' 
+
 		Dim ImageToCache As String = ""
 
 		If OnlineImage = "Blog" Then
+			'===============================================================================
+			'	                        Pick from available Blog
+			'===============================================================================
 			Dim tmpList As New List(Of String)
 
 			' Load all checked Items into List.
@@ -460,7 +469,7 @@ NextUrlFile:
 			If tmpList.Count < 1 Then Return ImageToCache
 
 			' Get a random URL-File 
-			ImageUrlFilePath = tmpList(randomizer.Next(0, tmpList.Count - 1)) & ".txt"
+			ImageUrlFilePath = tmpList(randomizer.Next(0, tmpList.Count)) & ".txt"
 
 			' Read the URL-File
 			Dim linesGB As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & ImageUrlFilePath)
@@ -474,14 +483,16 @@ NextUrlFile:
 
 			' Get a random Entry 
 			Do
-				ImageUrlFileIndex = randomizer.Next(0, linesGB.Count - 1)
+				ImageUrlFileIndex = randomizer.Next(0, linesGB.Count)
 				FoundString = linesGB(ImageUrlFileIndex)
 			Loop Until FoundString <> ""
 
 			' Set image to load
 			ImageToCache = FoundString
 		Else
-
+			'===============================================================================
+			'                            Pick by genre.
+			'===============================================================================
 			ImageToCache = GetRandomImage(OnlineImage)
 		End If
 
