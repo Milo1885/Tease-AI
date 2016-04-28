@@ -6024,9 +6024,9 @@ TryNextWithTease:
 
 					If FrmSettings.CBSlideshowRandom.Checked = True Then
 						FileCount = randomizer.Next(0, FileCountMax + 1)
-						If Contact1Pics.Count > 0 Then Contact1PicsCount = randomizer.Next(0, Contact1Pics.Count - 1)
-						If Contact2Pics.Count > 0 Then Contact2PicsCount = randomizer.Next(0, Contact2Pics.Count - 1)
-						If Contact3Pics.Count > 0 Then Contact3PicsCount = randomizer.Next(0, Contact3Pics.Count - 1)
+						If Contact1Pics.Count > 0 Then Contact1PicsCount = randomizer.Next(0, Contact1Pics.Count)
+						If Contact2Pics.Count > 0 Then Contact2PicsCount = randomizer.Next(0, Contact2Pics.Count)
+						If Contact3Pics.Count > 0 Then Contact3PicsCount = randomizer.Next(0, Contact3Pics.Count)
 					End If
 
 
@@ -7061,9 +7061,9 @@ TryNextWithTease:
 					' github patch If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
 					If FrmSettings.CBSlideshowRandom.Checked = True Then
-						If Contact1Pics.Count > 0 Then Contact1PicsCount = randomizer.Next(0, Contact1Pics.Count - 1)
-						If Contact2Pics.Count > 0 Then Contact2PicsCount = randomizer.Next(0, Contact2Pics.Count - 1)
-						If Contact3Pics.Count > 0 Then Contact3PicsCount = randomizer.Next(0, Contact3Pics.Count - 1)
+						If Contact1Pics.Count > 0 Then Contact1PicsCount = randomizer.Next(0, Contact1Pics.Count)
+						If Contact2Pics.Count > 0 Then Contact2PicsCount = randomizer.Next(0, Contact2Pics.Count)
+						If Contact3Pics.Count > 0 Then Contact3PicsCount = randomizer.Next(0, Contact3Pics.Count)
 					End If
 
 
@@ -8487,7 +8487,7 @@ SkipSpecialD:
 
 GetAnotherRandomVideo:
 
-		__domVideo = __TotalFiles(__dom.Next(0, __TotalFiles.Count - 1))
+		__domVideo = __TotalFiles(__dom.Next(0, __TotalFiles.Count))
 
 		If __domVideo = "" Then GoTo GetAnotherRandomVideo
 
@@ -16022,7 +16022,7 @@ FileNotFound_GetNext:
 						Next
 						If randomizer.Next(0, 100) <= 99 Then GoTo Skip_RandomFile ' 1% can be a nice surprise
 						'########################+####### Get random Image ###############################
-						___FileName = ___FoundFiles.Item(randomizer.Next(0, ___FoundFiles.Count - 1))
+						___FileName = ___FoundFiles.Item(randomizer.Next(0, ___FoundFiles.Count))
 Skip_RandomFile:
 						If File.Exists(__targetFolder & "\" & ___FileName) Then
                             ' File Found: Return absolute path
@@ -25556,7 +25556,7 @@ GetDommeSlideshow:
 			If File.Exists(_ImageFileNames(FileCount)) Then
 				PBImage = _ImageFileNames(FileCount)
 				' Github Patch ImageThread.Start()
-				DisplayImage()
+				ShowImage(PBImage, True)
 			End If
 		End If
 
