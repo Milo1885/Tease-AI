@@ -740,6 +740,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		TeaseAINotify.Dispose()
 
+		MyBase.OnClosing(e)
 	End Sub
 
 
