@@ -6335,6 +6335,12 @@ NullResponse:
 				DomTask = DomTask.Replace(" an utopia", " a utopia")
 
 
+				'SUGGESTION: All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
+				' If Sync of Reseults is activated
+				' Wait for the ImageFetcher to Finish 
+				If BWimageFetcher.TriggerRequired _
+				Then BWimageFetcher.WaitToFinish()
+
 				Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
 				If NullResponse = False And DomTask <> "" Then
@@ -7242,6 +7248,12 @@ TryNextWithTease:
 				DomChat = DomChat.Replace(" an utility", " a utility")
 				DomChat = DomChat.Replace(" an uterus", " a uterus")
 				DomChat = DomChat.Replace(" an utopia", " a utopia")
+
+				'SUGGESTION: All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
+				' If Sync of Reseults is activated
+				' Wait for the ImageFetcher to Finish 
+				If BWimageFetcher.TriggerRequired _
+				Then BWimageFetcher.WaitToFinish()
 
 				If NullResponse = True Or DomChat = "" Or DomChat Is Nothing Then GoTo NullResponseLine2
 
@@ -10378,25 +10390,8 @@ StatusUpdateEnd:
 					PoundArray(i) = PoundArray(i).Replace("'s", "")
 
 					If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & PoundArray(i) & ".txt") Then
-
-						Dim ioFile As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & PoundArray(i) & ".txt")
-						Dim lines As New List(Of String)
-						Dim PoundLine As Integer
-						PoundLine = -1
-
-						While ioFile.Peek <> -1
-							PoundLine += 1
-							lines.Add(ioFile.ReadLine())
-							'Debug.Print("iofile.readline = " & lines(PoundLine))
-							If lines(PoundLine) = "" Then
-								lines.Remove(PoundLine)
-								PoundLine -= 1
-							End If
-						End While
-
-						ioFile.Close()
-						ioFile.Dispose()
-
+						Dim filePath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & PoundArray(i) & ".txt"
+						Dim lines As List(Of String) = Txt2List(filePath)
 
 
 
@@ -10410,7 +10405,8 @@ StatusUpdateEnd:
 							'Debug.Print("PoundVal = " & PoundVal)
 							StringClean = StringClean.Replace(PoundArray(i), lines(PoundVal))
 						Catch ex As Exception
-							Log.WriteError("Tease AI did not return a valid line while parsing Command Filters", ex, "PoundClean()")
+							Log.WriteError("Error Processing file: " & filePath, ex,
+										   "Tease AI did not return a valid line while parsing Command Filters")
 							StringClean = "ERROR: Tease AI did not return a valid line while parsing Command Filters"
 						End Try
 
@@ -16026,17 +16022,20 @@ FileNotFound_GetNext:
 						___FileName = ___FoundFiles.Item(randomizer.Next(0, ___FoundFiles.Count))
 Skip_RandomFile:
 						If File.Exists(__targetFolder & "\" & ___FileName) Then
-                            ' File Found: Return absolute path
-                            Return DirectCast(__targetFolder & "\" & ___FileName, String)
+							' File Found: Return absolute path
+							If ___DomTag_Base <> ___DomTag_Work Then _
+									Log.Write("DommeTags have been altered in order to retrieve results: " &
+									___DomTag_Base & " => " & ___DomTag_Work & " in Directory: " & __targetFolder)
+							Return DirectCast(__targetFolder & "\" & ___FileName, String)
 						Else
-                            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-                            '                           Try-Finding-Another File
-                            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-                            ' File not Found: Get next in List
-                            'SUGGESTION: Build in a Debug-Window, so the User can review such "Erros", without beeing interrupted (ôÔ).
-                            Debug.Print(String.Format(
+							'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+							'                           Try-Finding-Another File
+							'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+							' File not Found: Get next in List
+							Log.Write(String.Format(
 										"DommeImage '{0}' not found, please check your DommeTags for directory '{1}'.",
 										 ___FileName, __targetFolder))
+
                             ' Loop through ___FoundFiles until it's empty. Then interrupt Task
                             If ___FoundFiles.Count > 0 Then
                                 ' Remove not found File from Container and try another File.
@@ -16067,8 +16066,8 @@ Skip_RandomFile:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             '                                            All Errors
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            'SUGGESTION: Build in a Debug-Window, so the User can review such "Erros", without beeing interrupted (ôÔ).
-            Debug.Print(ex.Message)
+            Log.WriteError("Exception in GetDommeImage()", ex, "")
+			Debug.Print(ex.Message)
 			Return ""
 		End Try
 	End Function
@@ -20542,14 +20541,7 @@ Skip_RandomFile:
 		End Try
 
 		If File.Exists(MainPictureImage & "\ImageTags.txt") Then
-			Dim TagReader As New StreamReader(MainPictureImage & "\ImageTags.txt")
-			Dim TagList As New List(Of String)
-			While TagReader.Peek <> -1
-				TagList.Add(TagReader.ReadLine())
-			End While
-
-			TagReader.Close()
-			TagReader.Dispose()
+			Dim TagList As List(Of String) = Txt2List(MainPictureImage & "\ImageTags.txt")
 
 			If SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And DomWMP.Visible = False Then
 				Try
@@ -20596,6 +20588,34 @@ Skip_RandomFile:
 		Dim FilterPass As Boolean
 		Dim ListIncrement As Integer = 1
 		If StrokeFilter = True Then ListIncrement = StrokeTauntCount
+
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		'		Check if Grouped-Lines-Files have the right amount of Lines
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		' No need to go further on an empty file.
+		If ListClean.Count <= 0 Then
+			Log.Write("FilterList started with empty List. Skipping filter.")
+			Return ListClean
+		End If
+
+		' To Avoid DivideByZeroException 
+		If ListIncrement <= 0 Then
+			Dim lazyText As String = "FilterList Started With LineGroupingValue """ & ListIncrement & """. "
+			Log.WriteError(lazyText, New ArgumentOutOfRangeException(lazyText), "FilterList Cancelled")
+			Return ListClean
+		End If
+
+		' Divide List.Count by StrokeTauntSize and get the Remainder.
+		Dim InvalidLineCount As Integer = ListClean.Count Mod ListIncrement
+
+		' If there is a Remainder, the file has not the desired Line.Count.
+		If InvalidLineCount > 0 Then
+			' So delete the Lines of the last and hopefully uncomplete Group. 
+			ListClean.RemoveRange(ListClean.Count - InvalidLineCount, InvalidLineCount)
+		End If
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		'		Grouped-Lines-Check-END 
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 		For i As Integer = 0 To ListClean.Count - 1 Step ListIncrement
 
@@ -20969,7 +20989,7 @@ Skip_RandomFile:
 
 		If FilterString.Contains("@DommeTag(") Then
 			Dim g As String = "breakpoint"
-			Debug.Print("Domme return -= " & GetDommeImage(GetParentheses(FilterString, "@DommeTag(")))
+			Debug.Print("Domme Return -= " & GetDommeImage(GetParentheses(FilterString, "@DommeTag(")))
 			If GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = "" Or LockImage = True Then Return False
 		End If
 
@@ -24982,7 +25002,7 @@ GetDommeSlideshow:
 		If Directory.Exists(Path.GetDirectoryName(GetText)) = False Then
 			Directory.CreateDirectory(Path.GetDirectoryName(GetText))
 		End If
-		Log.Write("Load File: " & GetText)
+		Log.Write("Load File: " & GetText, 5)
 		If File.Exists(GetText) Then
 			Using TextReader As New StreamReader(GetText)
 				Dim TextList As New List(Of String)
@@ -24990,6 +25010,10 @@ GetDommeSlideshow:
 				While TextReader.Peek <> -1
 					TextList.Add(TextReader.ReadLine())
 				End While
+
+				' Remove all empty Lines from list.
+				TextList.RemoveAll(Function(x) x = "")
+
 				Return TextList
 			End Using
 		End If
@@ -25084,15 +25108,18 @@ GetDommeSlideshow:
 
 
 	Private Sub CustomSlideshowTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
-
-		ImageString = CustomSlideshowList(randomizer.Next(0, CustomSlideshowList.Count))
-		DeleteLocalImageFilePath = ImageString
-
 		Try
+			CustomSlideshowTimer.Stop()
+
+			ImageString = CustomSlideshowList(randomizer.Next(0, CustomSlideshowList.Count))
+			DeleteLocalImageFilePath = ImageString
+
+
 			ShowImage(ImageString, True)
 		Catch ex As Exception
 			Exit Sub
-
+		Finally
+			CustomSlideshowTimer.Start()
 		End Try
 	End Sub
 

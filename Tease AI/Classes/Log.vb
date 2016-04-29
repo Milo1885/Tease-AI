@@ -5,7 +5,15 @@ Imports System.Reflection
 ''' Provides Static procedures to write Messages to predefined TextFiles.
 ''' </summary>
 Public Class Log
-	Public Shared Sub Write(ByVal text As String)
+
+	''' <summary>
+	''' Writes Data to a Logfifile
+	''' </summary>
+	''' <param name="text">The Text to append to file.</param>
+	''' 
+	''' <param name="stackDepth">Determines the maximum depth of Stacktrace 
+	''' written with the Message.</param>
+	Public Shared Sub Write(ByVal text As String, Optional ByVal stackDepth As Integer = 0)
 		'╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩
 		'
 		'	                       Write Data to Logfile
@@ -13,10 +21,20 @@ Public Class Log
 		'╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦
 		Try
 			Dim Logfile As String = Application.StartupPath & "\log.txt"
-			Dim DateString As String = Now.ToUniversalTime.ToString("yyyy-MM-dd HH:mm:ss")
 			Dim StList As List(Of String) = Environment.StackTrace.Replace(vbLf, "").Split(vbCrLf).ToList
+
+			' Remove fist 3 Items, Because its the Call-Depth of Environment.StackTrace() and Write(String)
 			StList.RemoveRange(0, 3)
-			Dim StString As String = String.Join(vbCrLf, StList)
+
+			' Save the StackTraceCount for printing
+			Dim StackCountOrg As Integer = StList.Count
+
+			' Trim Stacktrace
+			If stackDepth > 0 AndAlso StList.Count > stackDepth Then
+				StList.RemoveRange(stackDepth - 1, StList.Count - stackDepth)
+			End If
+
+			Dim StString As String = String.Join(vbCrLf & vbTab, StList)
 Restart:
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'                               Check File
@@ -27,11 +45,13 @@ Restart:
 				'===============================================================================
 				Using sw As New StreamWriter(Logfile)
 					Dim fecha As Date = IO.File.GetCreationTime(Assembly.GetExecutingAssembly().Location)
-					sw.Write("======================= LogFile Created ==========================" & vbCrLf &
-							 "FileDate: " & DateString & vbCrLf &
-							 "Build Date: " & fecha.ToUniversalTime.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
-							 "If you want to remove the Stacktrace use NotePad++. Search Regex with" & vbCrLf &
-							 "MatchPattern: @>~@>~[^\a]*?~<@~<@+?" & vbCrLf & vbCrLf)
+					sw.Write("=========================== LogFile Created =============================" & vbCrLf &
+							 "Build Date (UTC): " & fecha.ToUniversalTime.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
+							 "File Date (UTC): " & Now.ToUniversalTime.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
+							 "If you want to remove the Stacktrace: Use NotePad++ and search Regex with" & vbCrLf &
+							 "MatchPattern: \t@>~@>~[^\a]*?~<@~<@+?\r\n" & vbCrLf &
+							 "ReplacePatten: Leave it Empty" & vbCrLf &
+							 "=========================== LogFile Created =============================" & vbCrLf & vbCrLf)
 				End Using
 			Else
 				'===============================================================================
@@ -52,10 +72,12 @@ Restart:
 			'===============================================================================
 			Using fs1 As New FileStream(Logfile, FileMode.Append, FileAccess.Write)
 				Using s1 As New StreamWriter(fs1)
-					s1.Write(DateString & " " & text & vbCrLf)
-					s1.Write("@>~@>~~~~~~~~~~~~~~~Application.StackTrace~~~~~~~~~~~~~~~~~~~~~~~~~" & vbCrLf)
-					s1.Write(StString & vbCrLf)
-					s1.Write("~~~~~~~~~~~~~~~~~~~~Application.StackTrace~~~~~~~~~~~~~~~~~~~~<@~<@" & vbCrLf)
+					s1.Write(Now.ToString("yyyy-MM-dd HH:mm:ss") & " " & text & vbCrLf)
+					If stackDepth > 0 Then
+						s1.Write(vbTab & "@>~@>~~~~~~~~~~~~Application.StackTrace (" & stackDepth & "/" & StackCountOrg & ")~~~~~~~~~~~~~~~~~~" & vbCrLf)
+						s1.Write(vbTab & StString & vbCrLf)
+						s1.Write(vbTab & "~~~~~~~~~~~~~~~~~Application.StackTrace (" & stackDepth & "/" & StackCountOrg & ")~~~~~~~~~~~~~<@~<@" & vbCrLf)
+					End If
 				End Using
 			End Using
 		Catch ex As Exception
@@ -87,9 +109,9 @@ Restart:
 			Using fs1 As New FileStream(TargetFilePath, FileMode.Append, FileAccess.Write)
 				Using s1 As New StreamWriter(fs1)
 					s1.Write("###################################################################" & vbCrLf)
-					s1.Write("Date/Time: " & DateTime.Now.ToString() & vbCrLf)
+					s1.Write("Date/Time: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf)
 					s1.Write("Version: " & My.Application.Info.Version.ToString & vbCrLf)
-					s1.Write("BuildDate: " & File.GetCreationTimeUtc(Assembly.GetExecutingAssembly().Location) & vbCrLf)
+					s1.Write("BuildDate (UTC): " & File.GetCreationTimeUtc(Assembly.GetExecutingAssembly().Location).ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf)
 					s1.Write("Title: " & title & vbCrLf)
 					s1.Write("Message: " & msg & vbCrLf)
 					s1.Write("Exceptions: " & Replace(ExceptonToString(Exception), vbCrLf, vbCrLf & vbTab) & vbCrLf)
