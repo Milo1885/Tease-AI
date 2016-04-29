@@ -5,13 +5,54 @@
 ''' </summary>
 Public NotInheritable Class myDirectory
 
-#Region "-------------------------------------------- GetFiles Standard -------------------------------------------------------"
+	''' <summary>
+	''' Determines whether the given path refers to an existing directory on disk.
+	''' This Function creates the Root-directory if it doesn't extists and is a subdirectory of the 
+	''' Applications StartupPath. 
+	''' </summary>
+	''' <param name="path">The path to test. </param>
+	''' <returns>true if path refers to an existing directory; false if the directory does not exist or 
+	''' an error occurs when trying to determine if the specified file exists.</returns>
+	''' <remarks>BaseFunction to wrap around.</remarks>
+	Private Shared Function DirectoryCheck(path As String) As Boolean
+		If path.ToUpper = "No path selected".ToUpper Then Return False
 
-	Private Shared Function DirectoryCheck(path As String)
-		If System.IO.Directory.Exists(path) = False _
-		And System.IO.Directory.GetParent(path).FullName.StartsWith(Application.StartupPath) _
-		Then Return System.IO.Directory.CreateDirectory(path)
+		If System.IO.Directory.Exists(path) Then
+			' The Directory exists => Nothing to do.
+			Return True
+		Else
+			' The Directory does not exist...
+			If System.IO.Directory.GetParent(path).FullName.StartsWith(Application.StartupPath) Then
+				' ... Is it a SubDirectory of application, create it
+				Try
+					System.IO.Directory.CreateDirectory(path)
+					' everthing fine, Directory has been created.
+					Return True
+				Catch EX As Exception
+					' Error on creation => ReThrow Exception
+					Throw
+				End Try
+			Else
+				' ... The Directory does not exist and is no application Subdirectory
+				Return False
+			End If
+		End If
 	End Function
+
+	''' <summary>
+	''' Determines whether the given path refers to an existing directory on disk.
+	''' This Function creates the Root-directory if it doesn't extists and is a subdirectory of the 
+	''' Applications StartupPath. 
+	''' </summary>
+	''' <param name="path">The path to test. </param>
+	''' <returns>true if path refers to an existing directory; false if the directory does not exist or 
+	''' an error occurs when trying to determine if the specified file exists.</returns>
+	Public Shared Function Exists(path As String) As Boolean
+		' IF directory-check has failed return an empty String.Array
+		Return DirectoryCheck(path)
+	End Function
+
+#Region "-------------------------------------------- GetFiles Standard -------------------------------------------------------"
 
 	''' <summary>
 	''' Returns the names of files (including their paths) in the specified directory.
@@ -26,8 +67,8 @@ Public NotInheritable Class myDirectory
 	''' match the specified search pattern and option, or an empty array if no files are found.</returns>
 	''' <seealso cref="System.IO.Directory.GetFiles(String)"/>
 	Public Shared Function GetFiles(path) As String()
-
-		DirectoryCheck(path)
+		' IF directory-check has failed return an empty String.Array
+		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
 		Return System.IO.Directory.GetFiles(path)
 	End Function
@@ -49,8 +90,8 @@ Public NotInheritable Class myDirectory
 	''' match the specified search pattern and option, or an empty array if no files are found.</returns>
 	''' <seealso cref="System.IO.Directory.GetFiles(String, String) "/>
 	Public Shared Function GetFiles(path As String, searchPattern As String) As String()
-
-		DirectoryCheck(path)
+		' IF directory-check has failed return an empty String.Array
+		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
 		Return System.IO.Directory.GetFiles(path, searchPattern)
 	End Function
@@ -76,8 +117,8 @@ Public NotInheritable Class myDirectory
 	''' match the specified search pattern and option, or an empty array if no files are found.</returns>
 	''' <seealso cref="System.IO.Directory.GetFiles(String, String, IO.SearchOption) "/>
 	Public Shared Function GetFiles(path As String, searchPattern As String, searchOption As System.IO.SearchOption) As String()
-
-		DirectoryCheck(path)
+		' IF directory-check has failed return an empty String.Array
+		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
 		Return System.IO.Directory.GetFiles(path, searchPattern, searchOption)
 	End Function
@@ -90,18 +131,13 @@ Public NotInheritable Class myDirectory
 										ByVal filter As List(Of String),
 										ByVal Optional searchOption As System.IO.SearchOption = System.IO.SearchOption.AllDirectories) As List(Of String)
 		Try
-			If System.IO.Directory.Exists(path) Then
+			' Convert all Extensions to LowerCase
+			For i = 0 To filter.Count - 1
+				filter(i) = filter(i).ToLower
+			Next
 
-				' Convert all Extensions to LowerCase
-				For i = 0 To filter.Count - 1
-					filter(i) = filter(i).ToLower
-				Next
-
-				Return myDirectory.GetFiles(path, "*", searchOption) _
+			Return myDirectory.GetFiles(path, "*", searchOption) _
 					.Where(Function(f) filter.Contains(System.IO.Path.GetExtension(f).ToLower())).ToList
-			Else
-				Return New List(Of String)
-			End If
 		Catch ex As Exception
 			Throw
 		End Try
@@ -174,8 +210,8 @@ Public NotInheritable Class myDirectory
 	''' </remarks>
 	''' <seealso cref="System.IO.Directory.GetDirectories(String) "/>
 	Public Shared Function GetDirectories(path As String) As String()
-
-		DirectoryCheck(path)
+		' IF directory-check has failed return an empty String.Array
+		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
 		Return System.IO.Directory.GetDirectories(path)
 	End Function
@@ -197,8 +233,8 @@ Public NotInheritable Class myDirectory
 	''' criteria, or an empty array if no directories are found.</returns>
 	''' <seealso cref="System.IO.Directory.GetDirectories(String, String, IO.SearchOption)"/>
 	Public Shared Function GetDirectories(path As String, searchPattern As String) As String()
-
-		DirectoryCheck(path)
+		' IF directory-check has failed return an empty String.Array
+		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
 		Return System.IO.Directory.GetDirectories(path, searchPattern)
 	End Function
@@ -225,8 +261,8 @@ Public NotInheritable Class myDirectory
 	''' criteria, or an empty array if no directories are found.</returns>
 	''' <seealso cref="System.IO.Directory.GetDirectories(String, String, IO.SearchOption)"/>
 	Public Shared Function GetDirectories(path As String, searchPattern As String, searchOption As System.IO.SearchOption) As String()
-
-		DirectoryCheck(path)
+		' IF directory-check has failed return an empty String.Array
+		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
 		Return System.IO.Directory.GetDirectories(path, searchPattern, searchOption)
 	End Function
