@@ -28,7 +28,10 @@ Public Class BackgroundWorkerSyncable
 		Debug.Print("@ @ @ @ @ @ @ @ @ @ @ @ @ @ Forced BW Event-Trigger @ @ @ @ @ @ @ @ @ @ @ @ @ @")
 		Debug.Print("Make sure to trigger the RunWorkerCompleted-Event when activating manual Trigger!")
 
-		'TODO: Add a LogWrite
+		Dim lazytext As String = "A forced Event-Triggering in the BackGroundWorker was accomplished. " &
+								"Make sure to trigger the event, when you start the BackgroundWorker, " &
+								"with option manual Event-Triggering."
+		Log.WriteError(lazytext, New TimeoutException(lazytext), "Forced-RunWorkerCompleted Trigger")
 
 		MyBase.OnRunWorkerCompleted(New RunWorkerCompletedEventArgs(
 									Nothing,
@@ -149,6 +152,7 @@ Public Class BackgroundWorkerSyncable
 	''' </summary>
 	''' <remarks></remarks>
 	Public Sub CancelTrigger()
+		If Me.WorkerSupportsCancellation = False Then Me.WorkerSupportsCancellation = True
 		Me.CancelAsync()
 
 		Do Until MyBase.IsBusy = False
