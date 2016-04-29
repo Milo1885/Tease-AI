@@ -17,6 +17,8 @@ Public NotInheritable Class myDirectory
 	Private Shared Function DirectoryCheck(path As String) As Boolean
 		If path.ToUpper = "No path selected".ToUpper Then Return False
 
+		If path = "" Then Return False
+
 		If System.IO.Directory.Exists(path) Then
 			' The Directory exists => Nothing to do.
 			Return True
