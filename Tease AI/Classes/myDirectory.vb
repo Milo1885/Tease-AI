@@ -12,11 +12,11 @@ Public NotInheritable Class myDirectory
 	''' </summary>
 	''' <param name="path">The path to test. </param>
 	''' <returns>true if path refers to an existing directory; false if the directory does not exist or 
-	''' an error occurs when trying to determine if the specified file exists.</returns>
+	''' an error occurs when trying to determine if the specified directory exists.</returns>
 	''' <remarks>BaseFunction to wrap around.</remarks>
 	Private Shared Function DirectoryCheck(path As String) As Boolean
 		If path.ToUpper = "No path selected".ToUpper Then Return False
-
+		If path = Nothing Then Return False
 		If path = "" Then Return False
 
 		If System.IO.Directory.Exists(path) Then
