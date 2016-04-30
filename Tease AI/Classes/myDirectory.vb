@@ -41,6 +41,22 @@ Public NotInheritable Class myDirectory
 		End If
 	End Function
 
+	Private Shared Function Sort(SortObject As Object)
+		If TypeOf SortObject Is Array Then
+			'################## Arrays ###################
+			Array.Sort(DirectCast(SortObject, Array))
+			Return SortObject
+
+		ElseIf TypeOf SortObject Is List(Of String)
+			'############## List(of String) ##############
+			DirectCast(SortObject, List(Of String)).Sort()
+			Return SortObject
+
+		Else
+			Throw New InvalidCastException("Object Type unknown.")
+		End If
+	End Function
+
 	''' <summary>
 	''' Determines whether the given path refers to an existing directory on disk.
 	''' This Function creates the Root-directory if it doesn't extists and is a subdirectory of the 
@@ -72,7 +88,12 @@ Public NotInheritable Class myDirectory
 		' IF directory-check has failed return an empty String.Array
 		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
-		Return System.IO.Directory.GetFiles(path)
+		' Read all Files 
+		Dim temp() As String = System.IO.Directory.GetFiles(path)
+
+		' Sort the result and return it
+		Return Sort(temp)
+
 	End Function
 
 	''' <summary>
@@ -95,7 +116,12 @@ Public NotInheritable Class myDirectory
 		' IF directory-check has failed return an empty String.Array
 		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
-		Return System.IO.Directory.GetFiles(path, searchPattern)
+		' Read all Files with the given pattern
+		Dim temp() As String = System.IO.Directory.GetFiles(path, searchPattern)
+
+		' Sort the result and return it
+		Return Sort(temp)
+
 	End Function
 
 	''' <summary>
@@ -122,7 +148,12 @@ Public NotInheritable Class myDirectory
 		' IF directory-check has failed return an empty String.Array
 		If DirectoryCheck(path) = False Then Return New List(Of String)().ToArray
 
-		Return System.IO.Directory.GetFiles(path, searchPattern, searchOption)
+		' Read all Files with the given pattern and Searchoption
+		Dim temp() As String = System.IO.Directory.GetFiles(path, searchPattern, searchOption)
+
+		' Sort the result and return it
+		Return Sort(temp)
+
 	End Function
 
 #End Region
@@ -138,8 +169,13 @@ Public NotInheritable Class myDirectory
 				filter(i) = filter(i).ToLower
 			Next
 
-			Return myDirectory.GetFiles(path, "*", searchOption) _
+			' Read get all Files with the given pattern
+			Dim temp As List(Of String) = myDirectory.GetFiles(path, "*", searchOption) _
 					.Where(Function(f) filter.Contains(System.IO.Path.GetExtension(f).ToLower())).ToList
+
+			' Sort the result and return it
+			Return Sort(temp)
+
 		Catch ex As Exception
 			Throw
 		End Try

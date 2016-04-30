@@ -24833,29 +24833,11 @@ GetDommeSlideshow:
 		_ImageFileNames.Clear()
 
 
-		Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-
-
-		Dim files As String()
-
 		If FrmSettings.CBSlideshowSubDir.Checked = True Then
-			files = myDirectory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+			_ImageFileNames = myDirectory.GetFilesImages(GetFolder, SearchOption.AllDirectories)
 		Else
-			files = myDirectory.GetFiles(GetFolder, "*.*")
+			_ImageFileNames = myDirectory.GetFilesImages(GetFolder, SearchOption.TopDirectoryOnly)
 		End If
-
-
-		Array.Sort(files)
-
-
-
-		Dim TestCOUnt As Integer = 0
-		For Each fi As String In files
-			If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-				TestCOUnt += 1
-				_ImageFileNames.Add(fi)
-			End If
-		Next
 
 		FileCountMax = _ImageFileNames.Count - 1
 
