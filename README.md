@@ -5,8 +5,19 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 
 Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: Status Initial
+	
 
 # Changelog - Patch 54
+
+Tease AI will now move to the next script type in the cycle if the current script has run out of lines
+
+Added @Month() and @Day() to GetFilter(), I left them out by accident
+
+HandleScripts now uses GetFilter() the same way FilterList() does, code is much cleaner now
+
+Added @LockVideo and @UnlockVideo Commands - @LockVideo will prevent Tease AI from switching back to the image window when a video ends. This is useful for times when you want to play multiple videos in a row for whatever reason without the domme slideshow popping up in between. @UnlockVideo will deactivate this mode and switch back to the image window when used.
+
+Fixed bug where @SubOld and @SubYoung were not getting filtered correctly
 
 Fixes added from Community Members:
 
@@ -15,7 +26,7 @@ Fixes added from Community Members:
 	Stefaf: Added Offline-Mode-Support to the ImageDataContainer-Class and fixed some minor bugs in it.
 	
 	Stefaf: All lists retrieved with functions in Class myDirectory are now sorted alphabetically.
-	
+
 # Changelog - Patch 53
 
 Added check for empty string in MyDirectory Class
