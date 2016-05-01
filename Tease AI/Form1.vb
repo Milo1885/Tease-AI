@@ -251,6 +251,7 @@ Public Class Form1
 	Public DomPic As String
 
 	Dim LockImage As Boolean
+	Dim LockVideo As Boolean
 
 	Dim LocalTagImageList As New List(Of String)
 
@@ -4802,6 +4803,7 @@ ReturnCalled:
 
 		' ### Debug
 
+ModuleEnd:
 
 		If ModuleEnd = True And AvoidTheEdgeGame = False Then
 			Debug.Print("Module End Called?")
@@ -4849,8 +4851,6 @@ ReturnCalled:
 
 		Debug.Print(FileText)
 
-		Dim InvalidFilter As Boolean = False
-
 		Dim CheckText As String
 
 		If MiniScript = True Then
@@ -4874,265 +4874,26 @@ ReturnCalled:
 				line = StrokeTauntVal
 			End If
 
-
+			If line = lines.Count Then
+				If ShowModule = True Then
+					ModuleEnd = True
+					GoTo ModuleEnd
+				Else
+					GoTo NonModuleEnd
+				End If
+			End If
 
 			Debug.Print("CHeck")
 
-			If lines(line).Contains("@CockSmall") And FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value Then InvalidFilter = True
-			If lines(line).Contains("@CockLarge") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then InvalidFilter = True
-			If lines(line).Contains("@CockAverage") Then
-				If FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value Then InvalidFilter = True
-			End If
-
-			If lines(line).Contains("@Crazy") And FrmSettings.crazyCheckBox.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@Vulgar") And FrmSettings.vulgarCheckBox.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@Supremacist") And FrmSettings.supremacistCheckBox.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@Sadistic") And FrmSettings.sadisticCheckBox.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@Degrading") And FrmSettings.degradingCheckBox.Checked = False Then InvalidFilter = True
-
-			If lines(line).Contains("@AlwaysAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Always Allows" Then InvalidFilter = True
-			If lines(line).Contains("@OftenAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Often Allows" Then InvalidFilter = True
-			If lines(line).Contains("@SometimesAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows" Then InvalidFilter = True
-			If lines(line).Contains("@RarelyAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows" Then InvalidFilter = True
-			If lines(line).Contains("@NeverAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text <> "Never Allows" Then InvalidFilter = True
-
-			If lines(line).Contains("@AlwaysRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins" Then InvalidFilter = True
-			If lines(line).Contains("@OftenRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins" Then InvalidFilter = True
-			If lines(line).Contains("@SometimesRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins" Then InvalidFilter = True
-			If lines(line).Contains("@RarelyRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins" Then InvalidFilter = True
-			If lines(line).Contains("@NeverRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins" Then InvalidFilter = True
-
-			If lines(line).Contains("@NotAlwaysAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then InvalidFilter = True
-			If lines(line).Contains("@NotNeverAllowsOrgasm") And FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then InvalidFilter = True
-			If lines(line).Contains("@NotAlwaysRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then InvalidFilter = True
-			If lines(line).Contains("@NotNeverRuinsOrgasm") And FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then InvalidFilter = True
-
-			If lines(line).Contains("@AllowsOrgasm(") Then
-				If FilterCheck(GetParentheses(lines(line), "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox) = False Then InvalidFilter = True
-				'If GetOrgasmChance(GetParentheses(lines(line), "@AllowsOrgasm(")) = False Then InvalidFilter = True
-			End If
-
-			If lines(line).Contains("@RuinsOrgasm(") Then
-				If FilterCheck(GetParentheses(lines(line), "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox) = False Then InvalidFilter = True
-				'If GetRuinChance(GetParentheses(lines(line), "@RuinsOrgasm(")) = False Then InvalidFilter = True
-			End If
-
-
-			If lines(line).Contains("@DommeLevel1") And FrmSettings.domlevelNumBox.Value <> 1 Then InvalidFilter = True
-			If lines(line).Contains("@DommeLevel2") And FrmSettings.domlevelNumBox.Value <> 2 Then InvalidFilter = True
-			If lines(line).Contains("@DommeLevel3") And FrmSettings.domlevelNumBox.Value <> 3 Then InvalidFilter = True
-			If lines(line).Contains("@DommeLevel4") And FrmSettings.domlevelNumBox.Value <> 4 Then InvalidFilter = True
-			If lines(line).Contains("@DommeLevel5") And FrmSettings.domlevelNumBox.Value <> 5 Then InvalidFilter = True
-
-			If lines(line).Contains("@DommeLevel(") Then
-				If FilterCheck(GetParentheses(lines(line), "@DommeLevel("), FrmSettings.domlevelNumBox) = False Then InvalidFilter = True
-				'If GetDommeLevel(GetParentheses(lines(line), "@DommeLevel(")) = False Then InvalidFilter = True
-			End If
-
-			If lines(line).Contains("@ApathyLevel1") And FrmSettings.NBEmpathy.Value <> 1 Then InvalidFilter = True
-			If lines(line).Contains("@ApathyLevel2") And FrmSettings.NBEmpathy.Value <> 2 Then InvalidFilter = True
-			If lines(line).Contains("@ApathyLevel3") And FrmSettings.NBEmpathy.Value <> 3 Then InvalidFilter = True
-			If lines(line).Contains("@ApathyLevel4") And FrmSettings.NBEmpathy.Value <> 4 Then InvalidFilter = True
-			If lines(line).Contains("@ApathyLevel5") And FrmSettings.NBEmpathy.Value <> 5 Then InvalidFilter = True
-
-			If lines(line).Contains("@ApathyLevel(") Then
-				If FilterCheck(GetParentheses(lines(line), "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then InvalidFilter = True
-				'If GetDommeApathy(GetParentheses(lines(line), "@ApathyLevel(")) = False Then InvalidFilter = True
-			End If
-
-			If lines(line).Contains("@Stroking") And SubStroking = False Then InvalidFilter = True
-			If lines(line).Contains("@Edging") And SubEdging = False Then InvalidFilter = True
-			If lines(line).Contains("@HoldingTheEdge") And SubHoldingEdge = False Then InvalidFilter = True
-
-			If lines(line).Contains("@NotStroking") And SubStroking = True Then InvalidFilter = True
-			If lines(line).Contains("@NotEdging") And SubEdging = True Then InvalidFilter = True
-			If lines(line).Contains("@NotHoldingTheEdge") And SubHoldingEdge = True Then InvalidFilter = True
-
-			If lines(line).Contains("@SelfYoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then InvalidFilter = True
-			If lines(line).Contains("@SelfOld") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then InvalidFilter = True
-			If lines(line).Contains("@SubYoung") And FrmSettings.subAgeNumBox.Value > FrmSettings.NBSubAgeMin.Value - 1 Then InvalidFilter = True
-			If lines(line).Contains("@SubOld") And FrmSettings.subAgeNumBox.Value < FrmSettings.NBSubAgeMax.Value + 1 Then InvalidFilter = True
-
-			If lines(line).Contains("@ACup") And FrmSettings.boobComboBox.Text <> "A" Then InvalidFilter = True
-			If lines(line).Contains("@BCup") And FrmSettings.boobComboBox.Text <> "B" Then InvalidFilter = True
-			If lines(line).Contains("@CCup") And FrmSettings.boobComboBox.Text <> "C" Then InvalidFilter = True
-			If lines(line).Contains("@DCup") And FrmSettings.boobComboBox.Text <> "D" Then InvalidFilter = True
-			If lines(line).Contains("@DDCup") And FrmSettings.boobComboBox.Text <> "DD" Then InvalidFilter = True
-			If lines(line).Contains("@DDD+Cup") And FrmSettings.boobComboBox.Text <> "DDD+" Then InvalidFilter = True
-
-			If lines(line).Contains("@Cup(") Then
-				If FilterCheck(GetParentheses(lines(line), "@Cup("), FrmSettings.boobComboBox) = False Then InvalidFilter = True
-				'If GetCup(GetParentheses(lines(line), "@Cup(")) = False Then InvalidFilter = True
-			End If
-
-			If lines(line).Contains("@DomBirthday") And FrmSettings.NBDomBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBDomBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then InvalidFilter = True
-			If lines(line).Contains("@SubBirthday") And FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then InvalidFilter = True
-			If lines(line).Contains("@ValentinesDay") And Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14 Then InvalidFilter = True
-			If lines(line).Contains("@ChristmasEve") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24 Then InvalidFilter = True
-			If lines(line).Contains("@ChristmasDay") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25 Then InvalidFilter = True
-			If lines(line).Contains("@NewYearsEve") And Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31 Then InvalidFilter = True
-			If lines(line).Contains("@NewYearsDay") And Month(Date.Now) <> 1 And DateAndTime.Day(Date.Now) <> 1 Then InvalidFilter = True
-
-			If lines(line).Contains("@FirstRound") And FirstRound = False Then InvalidFilter = True
-			If lines(line).Contains("@NotFirstRound") And FirstRound = True Then InvalidFilter = True
-			If lines(line).Contains("@StrokeSpeedMax") And StrokePace < NBMaxPace.Value Then InvalidFilter = True
-			If lines(line).Contains("@StrokeSpeedMin") And StrokePace < NBMinPace.Value Then InvalidFilter = True
-
-			If lines(line).Contains("@LongEdge") And LongEdge = False Then InvalidFilter = True
-			If lines(line).Contains("@InterruptLongEdge") And LongEdge = False And FrmSettings.CBLongEdgeInterrupts.Checked = False Then InvalidFilter = True
-
-			If lines(line).Contains("@1MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119 Then InvalidFilter = True
-			End If
-			If lines(line).Contains("@2MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179 Then InvalidFilter = True
-			End If
-			If lines(line).Contains("@3MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239 Then InvalidFilter = True
-			End If
-			If lines(line).Contains("@4MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299 Then InvalidFilter = True
-			End If
-			If lines(line).Contains("@5MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599 Then InvalidFilter = True
-			End If
-			If lines(line).Contains("@10MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899 Then InvalidFilter = True
-			End If
-			If lines(line).Contains("@15MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799 Then InvalidFilter = True
-			End If
-			If lines(line).Contains("@30MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699 Then InvalidFilter = True
-			End If
-			If lines(line).Contains("@45MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599 Then InvalidFilter = True
-			End If
-			If lines(line).Contains("@60MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then InvalidFilter = True
-			End If
-
-			If lines(line).Contains("@EdgeHeld(") Then
-				Dim EdgeFlag As String = GetParentheses(lines(line), "@EdgeHeld(")
-				If EdgeFlag.Contains(",") Then
-					EdgeFlag = FixCommas(EdgeFlag)
-					Dim EdgeArray As String() = EdgeFlag.Split(",")
-					If HoldEdgeTime < Val(EdgeArray(0)) * 60 Or HoldEdgeTime > Val(EdgeArray(1)) * 60 Then InvalidFilter = True
-				Else
-					If Val(EdgeFlag) * 60 > HoldEdgeTime Then InvalidFilter = True
-				End If
-			End If
-
-			If lines(line).Contains("@CBTLevel1") And FrmSettings.CBTSlider.Value <> 1 Then InvalidFilter = True
-			If lines(line).Contains("@CBTLevel2") And FrmSettings.CBTSlider.Value <> 2 Then InvalidFilter = True
-			If lines(line).Contains("@CBTLevel3") And FrmSettings.CBTSlider.Value <> 3 Then InvalidFilter = True
-			If lines(line).Contains("@CBTLevel4") And FrmSettings.CBTSlider.Value <> 4 Then InvalidFilter = True
-			If lines(line).Contains("@CBTLevel5") And FrmSettings.CBTSlider.Value <> 5 Then InvalidFilter = True
-
-			If lines(line).Contains("@SubCircumcised") And FrmSettings.CBSubCircumcised.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@SubNotCircumcised") And FrmSettings.CBSubCircumcised.Checked = True Then InvalidFilter = True
-			If lines(line).Contains("@SubPierced") And FrmSettings.CBSubPierced.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@SubNotPierced") And FrmSettings.CBSubPierced.Checked = True Then InvalidFilter = True
-
-			If lines(line).Contains("@BeforeTease") And BeforeTease = False Then InvalidFilter = True
-			'If lines(line).Contains("@OrgasmDenied") And OrgasmDenied = False Then InvalidFilter = True
-			'If lines(line).Contains("@OrgasmAllowed") And OrgasmAllowed = False Then InvalidFilter = True
-			'If lines(line).Contains("@OrgasmRuined") And OrgasmRuined = False Then InvalidFilter = True
-
-			If lines(line).Contains("@OrgasmDenied") And LastOrgasmType <> "DENIED" Then InvalidFilter = True
-			If lines(line).Contains("@OrgasmAllowed") And LastOrgasmType <> "ALLOWED" Then InvalidFilter = True
-			If lines(line).Contains("@OrgasmRuined") And LastOrgasmType <> "RUINED" Then InvalidFilter = True
-
-			If lines(line).Contains("@InChastity") And My.Settings.Chastity = False Then InvalidFilter = True
-			If lines(line).Contains("@HasChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@NotInChastity") And My.Settings.Chastity = True Then InvalidFilter = True
-			If lines(line).Contains("@DoesNotHaveChastity") And FrmSettings.CBOwnChastity.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@ChastityPA") And FrmSettings.CBChastityPA.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@ChastitySpikes") And FrmSettings.CBChastitySpikes.Checked = False Then InvalidFilter = True
-
-			'If lines(line).Contains("@VitalSub") And CBVitalSub.Checked = False Then InvalidFilter = True
-			'If lines(line).Contains("@VitalSubAssignment") And CBVitalSubDomTask.Checked = False Then InvalidFilter = True
-
-			If lines(line).Contains("@RuinTaunt") And EdgeToRuinSecret = True Then InvalidFilter = True
-
-			If lines(line).Contains("@CockTorture") And FrmSettings.CBCBTCock.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@BallTorture") And FrmSettings.CBCBTBalls.Checked = False Then InvalidFilter = True
-			If lines(line).Contains("@BallTorture0") And CBTBallsCount <> 0 Then InvalidFilter = True
-			If lines(line).Contains("@BallTorture1") And CBTBallsCount <> 1 Then InvalidFilter = True
-			If lines(line).Contains("@BallTorture2") And CBTBallsCount <> 2 Then InvalidFilter = True
-			If lines(line).Contains("@BallTorture3") And CBTBallsCount <> 3 Then InvalidFilter = True
-			If lines(line).Contains("@BallTorture4+") And CBTBallsCount < 4 Then InvalidFilter = True
-			If lines(line).Contains("@CockTorture0") And CBTCockCount <> 0 Then InvalidFilter = True
-			If lines(line).Contains("@CockTorture1") And CBTCockCount <> 1 Then InvalidFilter = True
-			If lines(line).Contains("@CockTorture2") And CBTCockCount <> 2 Then InvalidFilter = True
-			If lines(line).Contains("@CockTorture3") And CBTCockCount <> 3 Then InvalidFilter = True
-			If lines(line).Contains("@CockTorture4+") And CBTCockCount < 4 Then InvalidFilter = True
-
-
-			If lines(line).Contains("@Flag(") Then
-				Dim WriteFlag As String = lines(line)
-				Dim WriteStart As Integer
-				WriteStart = WriteFlag.IndexOf("@Flag(") + 6
-				WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-				WriteFlag = WriteFlag.Split(")")(0)
-				WriteFlag = WriteFlag.Replace("@Flag(", "")
-				If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And
-				 Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
-					InvalidFilter = True
-				End If
-			End If
-
-			If lines(line).Contains("@NotFlag(") Then
-				Dim WriteFlag As String = lines(line)
-				Dim WriteStart As Integer
-				WriteStart = WriteFlag.IndexOf("@NotFlag(") + 9
-				WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-				WriteFlag = WriteFlag.Split(")")(0)
-				WriteFlag = WriteFlag.Replace("@NotFlag(", "")
-				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or
-				 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
-					InvalidFilter = True
-				End If
-			End If
-
-			If lines(line).Contains("@Variable[") Then
-				If CheckVariable(lines(line)) = False Then InvalidFilter = True
-			End If
-
-			'If lines(line).Contains("@CheckDate(") Then
-			'If CheckDateList(lines(line)) = False Then InvalidFilter = True
-			'End If
-
-			If lines(line).Contains("@Morning") And GeneralTime <> "Morning" Then InvalidFilter = True
-			If lines(line).Contains("@Afternoon") And GeneralTime <> "Afternoon" Then InvalidFilter = True
-			If lines(line).Contains("@Night") And GeneralTime <> "Night" Then InvalidFilter = True
-
-			If lines(line).Contains("@GoodMood") And Not lines(line).Contains("@GoodMood(") And DommeMood <= FrmSettings.NBDomMoodMax.Value Then InvalidFilter = True
-			If lines(line).Contains("@BadMood") And Not lines(line).Contains("@BadMood(") And DommeMood >= FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
-			If lines(line).Contains("@NeutralMood") And Not lines(line).Contains("@NeutralMood(") Then
-				If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then InvalidFilter = True
-			End If
-
-			If lines(line).Contains("@OrgasmRestricted") And OrgasmRestricted = False Then InvalidFilter = True
-			If lines(line).Contains("@OrgasmNotRestricted") And OrgasmRestricted = True Then InvalidFilter = True
-
-			If lines(line).Contains("@Month(") Then
-				If GetMatch(lines(line), "@Month(", DateAndTime.Now.Month) = False Then InvalidFilter = True
-			End If
-
-			If lines(line).Contains("@Day(") Then
-				If GetMatch(lines(line), "@Day(", DateAndTime.Now.Day) = False Then InvalidFilter = True
-			End If
-
-			If lines(line).Contains("@Info") Then InvalidFilter = True
-
-			If InvalidFilter = True Then
-				InvalidFilter = False
+			If GetFilter(lines(line)) = False Then
 				RunFileText()
 				Return
 			End If
 
 			If lines(line) = "@End" Then
+
+NonModuleEnd:
+
 				If RiskyEdges = True Then RiskyEdges = False
 				If LastScript = True Then
 					LastScript = False
@@ -5249,12 +5010,13 @@ ReturnCalled:
 			'Loop Until lines(line).Substring(0, 1) <> "("
 			'End If
 
-			If lines(line + 1).Substring(0, 1) = "[" Then
-				YesOrNo = True
-				ScriptTimer.Stop()
+
+			If line < lines.Count - 1 Then
+				If lines(line + 1).Substring(0, 1) = "[" Then
+					YesOrNo = True
+					ScriptTimer.Stop()
+				End If
 			End If
-
-
 
 			Debug.Print("CHeck")
 
@@ -15154,6 +14916,19 @@ VTSkip:
 		End If
 
 
+		If StringClean.Contains("@LockVideo") Then
+			LockVideo = True
+			StringClean = StringClean.Replace("@LockVideo", "")
+		End If
+
+		If StringClean.Contains("@UnlockVideo") Then
+			LockVideo = False
+			mainPictureBox.Visible = True
+			DomWMP.Visible = False
+			StringClean = StringClean.Replace("@UnlockVideo", "")
+		End If
+
+
 		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", CurrentImage)
 
 		If StringClean.Contains("@Debug") Then
@@ -20685,8 +20460,8 @@ Skip_RandomFile:
 		If FilterString.ToLower.Contains("@selfyoung") Or FilterString.ToLower.Contains("@selfold") Then
 			If VideoTease = True Or TeaseVideo = True Then Return False
 		End If
-		If FilterString.ToLower.Contains("@subyoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then Return False
-		If FilterString.ToLower.Contains("@selfold") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then Return False
+		If FilterString.ToLower.Contains("@subyoung") And FrmSettings.subAgeNumBox.Value > FrmSettings.NBSubAgeMin.Value - 1 Then Return False
+		If FilterString.ToLower.Contains("@subold") And FrmSettings.subAgeNumBox.Value < FrmSettings.NBSubAgeMax.Value + 1 Then Return False
 
 		If FilterString.ToLower.Contains("@acup") Then
 			If FrmSettings.boobComboBox.Text <> "A" Or JustShowedBlogImage = True Then Return False
@@ -21105,6 +20880,14 @@ Skip_RandomFile:
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or _
 			File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then Return False
 
+		End If
+
+		If FilterString.Contains("@Month(") Then
+			If GetMatch(FilterString, "@Month(", DateAndTime.Now.Month) = False Then Return False
+		End If
+
+		If FilterString.Contains("@Day(") Then
+			If GetMatch(FilterString, "@Day(", DateAndTime.Now.Day) = False Then Return False
 		End If
 
 		If FilterString.Contains("@ImageTag(") Then
@@ -23899,8 +23682,6 @@ TryNext:
 			CameVideo = False
 			RuinedVideo = False
 
-
-
 			DomWMP.currentPlaylist.clear()
 
 
@@ -23909,10 +23690,6 @@ TryNext:
 				CensorshipBar.Visible = False
 				CensorshipGame = False
 				VideoTease = False
-				mainPictureBox.Visible = True
-				DomWMP.Visible = False
-
-
 
 				If RandomizerVideoTease = True Then
 					ScriptTimer.Stop()
@@ -23956,10 +23733,7 @@ TryNext:
 				'RunFileText()
 
 
-
-				mainPictureBox.Visible = True
-				DomWMP.Visible = False
-
+				
 
 				'AvoidTheEdge.Stop()
 				'AvoidTheEdgeGame = False
@@ -23991,8 +23765,6 @@ TryNext:
 
 				ScriptTick = 1
 				ScriptTimer.Start()
-				mainPictureBox.Visible = True
-				DomWMP.Visible = False
 
 				Return
 			End If
@@ -24000,12 +23772,15 @@ TryNext:
 
 			If TeaseVideo = True Then
 				TeaseVideo = False
-				DomWMP.Visible = False
 				DomWMP.Ctlcontrols.pause()
-				mainPictureBox.Visible = True
 				RunFileText()
 			End If
 
+
+			If LockVideo = False Then
+				mainPictureBox.Visible = True
+				DomWMP.Visible = False
+			End If
 
 
 		End If

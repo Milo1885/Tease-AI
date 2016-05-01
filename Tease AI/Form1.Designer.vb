@@ -1250,8 +1250,8 @@ Partial Class Form1
 		'OpenFileDialog1
 		'
 		Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" &
-	"s (*.*)|*.*"
+		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" & _
+		  "s (*.*)|*.*"
 		Me.OpenFileDialog1.Title = "Select an image file"
 		'
 		'GetColor
@@ -2759,8 +2759,8 @@ Partial Class Form1
 		Me.LBLWishListText.Name = "LBLWishListText"
 		Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
 		Me.LBLWishListText.TabIndex = 108
-		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" &
-	"uld buy it for me because you know you like buying stuff for me. "
+		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" & _
+		  "uld buy it for me because you know you like buying stuff for me. "
 		'
 		'LBLWishlistCost
 		'
@@ -4075,7 +4075,7 @@ Partial Class Form1
 		Me.Name = "Form1"
 		Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-		Me.Text = "Tease A.I. - PATCH 52"
+		Me.Text = "Tease A.I. - PATCH 54"
 		CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.SplitContainer1.Panel1.ResumeLayout(False)
