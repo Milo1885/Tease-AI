@@ -10,14 +10,18 @@ Partial Class Form1
 	End Enum
 
 	''' <summary>
-	''' Represents a Object which can store all necessary Data related to genere-Images
+	''' Represents a Object which can store all necessary Data related to genere-Images. 
+	''' This obejct is intended for managing Images. All Data and conditions can be stored in here
+	''' and retrieved from it.
 	''' </summary>
 	Friend Class ImageDataContainer
 		Public Name As String = ""
 		Public URLFile As String = ""
 		Public LocalDirectory As String = ""
 		Public LocalSubDirectories As Boolean = False
+		Public OfflineMode As Boolean = My.Settings.OfflineMode
 
+		''' =========================================================================================================
 		''' <summary>
 		''' Returns a List of FilePaths or URLs.
 		''' </summary>
@@ -28,23 +32,28 @@ Partial Class Form1
 
 			rtnList.AddRange(ToList(ImageSourceType.Local))
 
-			rtnList.AddRange(ToList(ImageSourceType.Remote))
+			' Load only LocalFiles if Oflline-Mode is acivated.
+			If OfflineMode = False Then _
+				rtnList.AddRange(ToList(ImageSourceType.Remote))
 
 			Return rtnList
 		End Function
 
-
+		''' =========================================================================================================
 		''' <summary>
-		''' Returns a List of FilePaths or URL for the given Type.
+		''' Returns a List of FilePaths or URLs for the given Type.
 		''' </summary>
 		''' <param name="Type">The LoationType to Search for.</param>
 		''' <returns>Returns a List Containing all Found Links. If none are 
 		''' Found an empty List is returned</returns>
-		Public Function ToList(ByVal Type As ImageSourceType) As List(Of String)
+		Public Function ToList(ByRef Type As ImageSourceType) As List(Of String)
 			Dim rtnList As New List(Of String)
 
+			' If offline mode is activated then search only for local files.
+			If OfflineMode Then Type = ImageSourceType.Local
+
 			' Load Local ImageList
-			If Type = ImageSourceType.Local AndAlso LocalDirectory <> "" Then
+			If Type = ImageSourceType.Local AndAlso LocalDirectory <> "" AndAlso LocalDirectory IsNot Nothing Then
 				If LocalSubDirectories = True Then
 					rtnList.AddRange(myDirectory.GetFilesImages(LocalDirectory, SearchOption.TopDirectoryOnly))
 				Else
@@ -53,57 +62,89 @@ Partial Class Form1
 			End If
 
 			' Load an URL-File
-			If Type = ImageSourceType.Remote AndAlso URLFile <> "" Then
+			If Type = ImageSourceType.Remote And URLFile <> "" And URLFile IsNot Nothing Then
 				rtnList.AddRange(Txt2List(URLFile))
 			End If
 
 			Return rtnList
 		End Function
 
+		''' =========================================================================================================
 		''' <summary>
-		''' Returns a random Image from all Lists.
+		''' Returns a random Image URL or Path from all Lists and directories.
 		''' </summary>
 		''' <returns>Returns a FilePath or URL. If there are no Images found the 
 		''' "NoLocalImagesFound-Image-Filepath is returned.</returns>
 		Public Function Random() As String
-			' Get List of Files
-			Dim tmpList As List(Of String) = ToList()
+			Try
+				' Get List of Files
+				Dim tmpList As List(Of String) = ToList()
 
-			' Check if Links/Paths are present.
-			If tmpList.Count > 0 Then
+				' Check if Links/Paths are present.
+				If tmpList.Count <= 0 Then GoTo NoneFound
+
 				' Pick a Random Image-Path
 				Return tmpList(New Random().Next(0, tmpList.Count))
-			Else
-				' Return the Error-Image FilePath
-				Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-			End If
+			Catch ex As Exception
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'						       All Errors
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while choosing a random Image.")
+			End Try
+NoneFound:
+			' Return the Error-Image FilePath
+			Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
 		End Function
 
+		''' =========================================================================================================
 		''' <summary>
 		''' Returns a random Image for the given ImageGenre.
 		''' </summary>
 		''' <returns>Returns a FilePath or URL. If there are no Images found the 
 		''' "NoLocalImagesFound-Image-Filepath is returned.</returns>
-		Public Function Random(ByVal Type As ImageSourceType) As String
-			' Get List of Files for Current Type
-			Dim tmpList As List(Of String) = ToList(Type)
+		Public Function Random(ByRef Type As ImageSourceType) As String
+			Try
+				' If offline mode is activated then search only for local files.
+				If OfflineMode Then Type = ImageSourceType.Local
 
-			' Check if Links/Paths are present.
-			If tmpList.Count > 0 Then
+				' Get List of Files for Current Type
+				Dim tmpList As List(Of String) = ToList(Type)
+
+				' Check if Links/Paths are present.
+				If tmpList.Count <= 0 Then GoTo NoneFound
+
 				' Pick a Random Image-Path
 				Return tmpList(New Random().Next(0, tmpList.Count))
-			Else
-				' Return an Error-Image FilePath
-				If Type = ImageSourceType.Local _
-				Then Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg" _
-				Else Return Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg"
-			End If
+			Catch ex As Exception
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'						       All Errors
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while choosing a random Image.")
+				'SUGGESTION: 
+			End Try
+NoneFound:
+			' Return an Error-Image FilePath
+			If Type = ImageSourceType.Local _
+			Then Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg" _
+			Else Return Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg"
 		End Function
+
+		Public Overrides Function ToString() As String
+			Return "ImageDataContainer containing:" & vbCrLf &
+					"	GenreName: " & Name.ToString & vbCrLf &
+					"	URLFile: " & URLFile.ToString & vbCrLf &
+					"	LocalDirectory: " & LocalDirectory.ToString & vbCrLf &
+					"	LocalSubDirectories: " & LocalSubDirectories.ToString & vbCrLf &
+					"	OfflineMode: " & OfflineMode.ToString
+			'Return MyBase.ToString()
+		End Function
+
 	End Class
 
 #End Region ' ImageDataContainer
 
 
+	''' =========================================================================================================
 	''' <summary>
 	''' Gets a dictionary which contains all nessecary data of genere-images.
 	''' </summary>
@@ -497,7 +538,8 @@ NextUrlFile:
 		End If
 
 		' Start the Image-Download, with manual Event-triggering.
-		If ImageToCache <> "" Then ShowImage(ImageToCache, False)
+		If ImageToCache <> "" And ImageToCache IsNot Nothing _
+		Then ShowImage(ImageToCache, False)
 
 		Return ImageToCache
 	End Function

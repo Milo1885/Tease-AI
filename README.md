@@ -1,6 +1,21 @@
 # Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
+# Todo:
+
+Stefaf: Integration of Class myDirectory: Status ongoing.
+	Testrun to sort Lists like Win-Explorer: Status Initial
+
+# Changelog - Patch 54
+
+Fixes added from Community Members:
+
+	Stefaf: Function txt2List(String) was not able to deal path = "" or path = nothing. Improved Error handling and logging.
+	
+	Stefaf: Added Offline-Mode-Support to the ImageDataContainer-Class and fixed some minor bugs in it.
+	
+	Stefaf: All lists retrieved with functions in Class myDirectory are now sorted alphabetically.
+	
 # Changelog - Patch 53
 
 Added check for empty string in MyDirectory Class
