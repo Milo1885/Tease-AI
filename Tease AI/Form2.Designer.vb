@@ -1072,8 +1072,10 @@ Partial Class FrmSettings
 		Me.Label135 = New System.Windows.Forms.Label()
 		Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
-		Me.CBURLPreview = New System.Windows.Forms.CheckBox()
-		Me.SettingsPanel.SuspendLayout
+        Me.CBURLPreview = New System.Windows.Forms.CheckBox()
+        Me.BtnImportSettings = New System.Windows.Forms.Button()
+        Me.LblImportSettings = New System.Windows.Forms.Label()
+        Me.SettingsPanel.SuspendLayout
 		Me.SettingsTabs.SuspendLayout
 		Me.TabPage1.SuspendLayout
 		Me.PNLGeneralSettings.SuspendLayout
@@ -1364,8 +1366,10 @@ Partial Class FrmSettings
 		'PNLGeneralSettings
 		'
 		Me.PNLGeneralSettings.BackColor = System.Drawing.Color.LightGray
-		Me.PNLGeneralSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.PNLGeneralSettings.Controls.Add(Me.GroupBox64)
+        Me.PNLGeneralSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PNLGeneralSettings.Controls.Add(Me.BtnImportSettings)
+        Me.PNLGeneralSettings.Controls.Add(Me.LblImportSettings)
+        Me.PNLGeneralSettings.Controls.Add(Me.GroupBox64)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBDommeImages)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBGeneralTextToSpeech)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBSafeword)
@@ -13772,12 +13776,41 @@ Partial Class FrmSettings
 		Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
 		Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
 		Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
-		Me.BWURLFiles.WorkerReportsProgress = true
-		Me.BWURLFiles.WorkerSupportsCancellation = true
-		'
-		'CBURLPreview
-		'
-		Me.CBURLPreview.AutoSize = true
+		Me.BWURLFiles.WorkerReportsProgress = True
+        Me.BWURLFiles.WorkerSupportsCancellation = True
+        '
+        'BtnImportSettings
+        '
+        Me.BtnImportSettings.BackColor = System.Drawing.Color.LightGray
+        Me.BtnImportSettings.BackgroundImage = CType(resources.GetObject("BtnImportSettings.BackgroundImage"), System.Drawing.Image)
+        Me.BtnImportSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.BtnImportSettings.FlatAppearance.BorderSize = 0
+        Me.BtnImportSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+        Me.BtnImportSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+        Me.BtnImportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.BtnImportSettings.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnImportSettings.ForeColor = System.Drawing.Color.Black
+        Me.BtnImportSettings.Location = New System.Drawing.Point(669, 11)
+        Me.BtnImportSettings.Name = "BtnImportSettings"
+        Me.BtnImportSettings.Size = New System.Drawing.Size(30, 26)
+        Me.BtnImportSettings.TabIndex = 158
+        Me.BtnImportSettings.UseVisualStyleBackColor = False
+        '
+        'LblImportSettings
+        '
+        Me.LblImportSettings.AutoSize = True
+        Me.LblImportSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LblImportSettings.ForeColor = System.Drawing.Color.Black
+        Me.LblImportSettings.Location = New System.Drawing.Point(663, -4)
+        Me.LblImportSettings.Name = "LblImportSettings"
+        Me.LblImportSettings.Size = New System.Drawing.Size(36, 13)
+        Me.LblImportSettings.TabIndex = 159
+        Me.LblImportSettings.Text = "Import"
+        Me.LblImportSettings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'CBURLPreview
+        '
+        Me.CBURLPreview.AutoSize = true
 		Me.CBURLPreview.Checked = true
 		Me.CBURLPreview.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBURLPreview.Location = New System.Drawing.Point(344, 323)
@@ -15165,5 +15198,7 @@ End Sub
 	Friend WithEvents CBIBoobs As System.Windows.Forms.CheckBox
 	Friend WithEvents GroupBox66 As System.Windows.Forms.GroupBox
 	Friend WithEvents PBURLPreview As System.Windows.Forms.PictureBox
-	Friend WithEvents CBURLPreview As System.Windows.Forms.CheckBox
+    Friend WithEvents CBURLPreview As System.Windows.Forms.CheckBox
+    Friend WithEvents BtnImportSettings As Button
+    Friend WithEvents LblImportSettings As Label
 End Class

@@ -13751,5 +13751,7 @@ WhyUMakeMeDoDis:
 		My.Settings.CBURLPreview = CBURLPreview.Checked
 	End Sub
 
-
+    Private Sub BtnImportSettings_Click(sender As Object, e As EventArgs) Handles BtnImportSettings.Click
+        My.MySettings.importOnRestart()
+    End Sub
 End Class
