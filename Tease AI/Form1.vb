@@ -287,9 +287,17 @@ Public Class Form1
 	Public WebImageLineTotal As Integer
 	Public WebImagePath As String
 
+    ''' <summary>
+    ''' Variable Deprected. Remove from Suspend and Resume Session needed. 
+    ''' </summary>
+    '''TODO: Remove ImageUrlFilePath
+    Dim ImageUrlFilePath As String
 
-	Dim ImageUrlFilePath As String
-	Dim ImageUrlFileIndex As Integer
+    ''' <summary>
+    ''' Variable Deprected. Remove from Suspend and Resume Session needed. 
+    ''' </summary>
+    '''TODO: Remove ImageUrlFileIndex
+    Dim ImageUrlFileIndex As Integer
 
 
 	Dim ReaderString As String
@@ -9655,8 +9663,9 @@ StatusUpdateEnd:
 
 
 		If StringClean.Contains("#LocalImageCount") Then
+            'TODO: Implement ImageDataobject
 
-			Dim CheckString As String
+            Dim CheckString As String
 			Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
@@ -9714,8 +9723,9 @@ StatusUpdateEnd:
 
 
 		If StringClean.Contains("#HardcoreImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9741,8 +9751,9 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("#SoftcoreImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9768,8 +9779,9 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("#LesbianImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9795,8 +9807,9 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("#BlowjobImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9822,8 +9835,9 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("#FemdomImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9849,8 +9863,9 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("#LezdomImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9876,8 +9891,9 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("#HentaiImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9903,8 +9919,9 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("#GayImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9930,8 +9947,9 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("#MaledomImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9957,8 +9975,9 @@ StatusUpdateEnd:
 		End If
 
 		If StringClean.Contains("#CaptionsImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
 			Dim LocalList As New List(Of String)
 			LocalList.Clear()
 			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
@@ -9983,35 +10002,36 @@ StatusUpdateEnd:
 			StringClean = StringClean.Replace("#CaptionsImageCount", LocalList.Count)
 		End If
 
-		If StringClean.Contains("#GeneralImageCount") Then
-			Dim CheckString As String
-			Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBIGeneral.Checked = True And Directory.Exists(FrmSettings.LBLIGeneral.Text) Then CheckString = FrmSettings.LBLIGeneral.Text
-			If FrmSettings.CBIGeneralSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#GeneralImageCount", LocalList.Count)
-		End If
+        If StringClean.Contains("#GeneralImageCount") Then
+            'TODO: Implement ImageDataobject
+            Dim CheckString As String
+            Dim CheckBoolean As Boolean
+            Dim LocalList As New List(Of String)
+            LocalList.Clear()
+            Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
+            Dim files As String()
+            CheckString = "NULL"
+            CheckBoolean = False
+            If FrmSettings.CBIGeneral.Checked = True And Directory.Exists(FrmSettings.LBLIGeneral.Text) Then CheckString = FrmSettings.LBLIGeneral.Text
+            If FrmSettings.CBIGeneralSD.Checked = True Then CheckBoolean = True
+            If Not CheckString = "NULL" Then
+                If CheckBoolean = True Then
+                    files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
+                Else
+                    files = myDirectory.GetFiles(CheckString, "*.*")
+                End If
+                Array.Sort(files)
+                For Each fi As String In files
+                    If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
+                        LocalList.Add(fi)
+                    End If
+                Next
+            End If
+            StringClean = StringClean.Replace("#GeneralImageCount", LocalList.Count)
+        End If
 
 
-		If StringClean.Contains("#LikedImageCount") Then
+        If StringClean.Contains("#LikedImageCount") Then
 			Try
 				Dim LikeList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
 				StringClean = StringClean.Replace("#LikedImageCount", LikeList.Count)
@@ -21617,278 +21637,41 @@ FinishTNA:
 
 		If FrmSettings.URLFileList.CheckedItems.Count = 0 Then
 			GetLocalImage()
-			Return
-		End If
+            Exit Sub
+        End If
 
-AlreadySeen:
+        Try
+            FoundString = GetRandomImage(ImageSourceType.Blog)
 
+            ClearMainPictureBox()
 
+            ShowImage(FoundString, True)
+            JustShowedBlogImage = True
 
-		Dim URLList As New List(Of String)
-		URLList.Clear()
+        Catch ex As Exception
+            GetLocalImage()
+            Exit Sub
+        End Try
 
+    End Sub
 
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\URL Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-			URLList.Add(foundFile.Replace(".txt", ""))
-		Next
 
+    Public Sub GetLocalImage()
 
-		For i As Integer = FrmSettings.URLFileList.Items.Count - 1 To 0 Step -1
-			For j As Integer = URLList.Count - 1 To 0 Step -1
-				If FrmSettings.URLFileList.GetItemChecked(i) = False And FrmSettings.URLFileList.Items(i) = URLList(j).Replace(Application.StartupPath & "\Images\System\URL Files\", "") Then
-					URLList.Remove(URLList(j))
-					Exit For
-				End If
-			Next
-		Next
+        FoundString = GetRandomImage(ImageSourceType.Local)
 
+        ClearMainPictureBox()
 
+        ShowImage(FoundString, True)
+        JustShowedBlogImage = True
 
+        DeleteLocalImageFilePath = FoundString
+        CurrentImage = FoundString
 
+    End Sub
 
-		Debug.Print("URLList.COunt = " & URLList.Count)
-		For i As Integer = 0 To URLList.Count - 1
-			Debug.Print(i & " " & URLList(i))
-		Next
 
-		'Debug.Print("URLList Count = " & URLList.Count)
-
-		ImageUrlFilePath = URLList(randomizer.Next(0, URLList.Count)) & ".txt"
-
-		Debug.Print(ImageUrlFilePath)
-
-		' Read all lines of given file.
-		Dim linesGB As List(Of String) = Txt2List(ImageUrlFilePath)
-
-		Do
-			ImageUrlFileIndex = randomizer.Next(0, linesGB.Count)
-			FoundString = linesGB(ImageUrlFileIndex)
-		Loop Until FoundString <> ""
-
-		Debug.Print("FoundString = " & FoundString)
-
-		'  If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-		'Dim ImageRepeat() As String = Filter(System.IO.File.ReadAllLines(Application.StartupPath & "\Images\System\DislikedImageURLs.txt"), FoundString)
-		'If Not UBound(ImageRepeat) = -1 Then GoTo AlreadySeen
-		'End If
-		'If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-		'Dim ImageRepeat2() As String = Filter(System.IO.File.ReadAllLines(Application.StartupPath & "\Images\System\LikedImageURLs.txt"), FoundString)
-		'If Not UBound(ImageRepeat2) = -1 Then GoTo AlreadySeen
-		'End If
-
-
-		ClearMainPictureBox()
-
-
-
-
-		Try
-
-			JustShowedBlogImage = True
-
-
-			If FoundString.Contains("/") Then
-				Try
-					ShowImage(FoundString, True)
-					'ImageLocation = FoundString
-					'DisplayImage(FoundString)
-					'ImageThread.Start()
-					'mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
-				Catch
-					ClearMainPictureBox()
-					MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End Try
-			Else
-				ShowImage(FoundString, True)
-				'ImageLocation = FoundString
-				'PBImage = FoundString
-				'ImageThread.Start()
-				'mainPictureBox.Image = Image.FromFile(FoundString)
-				DeleteLocalImageFilePath = FoundString
-			End If
-
-			CurrentImage = FoundString
-
-			mainPictureBox.Refresh()
-
-
-			If FrmSettings.CBBlogImageWindow.Checked = True Then
-				WebImage = FoundString
-				Do Until Not WebImage.Contains("/")
-					WebImage = WebImage.Remove(0, 1)
-				Loop
-				If Not File.Exists(Application.StartupPath & "\Images\Session Images\" & WebImage) Then
-					Try
-						My.Computer.Network.DownloadFile(FoundString, Application.StartupPath & "\Images\Session Images\" & WebImage)
-						FrmSettings.CalculateSessionImages()
-					Catch
-					End Try
-				Else
-					Debug.Print("Session Image already exists")
-				End If
-
-			End If
-
-			Try
-				GC.Collect()
-			Catch ex As Exception
-
-			End Try
-
-			Debug.Print("Blog Image PictureStrip")
-			PictureStrip.Items(0).Enabled = True
-			PictureStrip.Items(1).Enabled = True
-			PictureStrip.Items(2).Enabled = True
-			PictureStrip.Items(3).Enabled = True
-			PictureStrip.Items(4).Enabled = True
-			PictureStrip.Items(5).Enabled = True
-
-		Catch
-			GetLocalImage()
-			Return
-		End Try
-
-
-
-
-	End Sub
-
-
-	Public Sub GetLocalImage()
-
-
-		Dim CheckString As String
-		Dim CheckBoolean As Boolean
-		Dim LocalList As New List(Of String)
-		LocalList.Clear()
-
-		Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-		Dim files As String()
-
-		For i As Integer = 1 To 11
-			CheckString = "NULL"
-			CheckBoolean = False
-			If i = 1 And FrmSettings.CBIHardcore.Checked = True And Directory.Exists(FrmSettings.LBLIHardcore.Text) Then CheckString = FrmSettings.LBLIHardcore.Text
-			If i = 2 And FrmSettings.CBISoftcore.Checked = True And Directory.Exists(FrmSettings.LBLISoftcore.Text) Then CheckString = FrmSettings.LBLISoftcore.Text
-			If i = 3 And FrmSettings.CBILesbian.Checked = True And Directory.Exists(FrmSettings.LBLILesbian.Text) Then CheckString = FrmSettings.LBLILesbian.Text
-			If i = 4 And FrmSettings.CBIBlowjob.Checked = True And Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then CheckString = FrmSettings.LBLIBlowjob.Text
-			If i = 5 And FrmSettings.CBIFemdom.Checked = True And Directory.Exists(FrmSettings.LBLIFemdom.Text) Then CheckString = FrmSettings.LBLIFemdom.Text
-			If i = 6 And FrmSettings.CBILezdom.Checked = True And Directory.Exists(FrmSettings.LBLILezdom.Text) Then CheckString = FrmSettings.LBLILezdom.Text
-			If i = 7 And FrmSettings.CBIHentai.Checked = True And Directory.Exists(FrmSettings.LBLIHentai.Text) Then CheckString = FrmSettings.LBLIHentai.Text
-			If i = 8 And FrmSettings.CBIGay.Checked = True And Directory.Exists(FrmSettings.LBLIGay.Text) Then CheckString = FrmSettings.LBLIGay.Text
-			If i = 9 And FrmSettings.CBIMaledom.Checked = True And Directory.Exists(FrmSettings.LBLIMaledom.Text) Then CheckString = FrmSettings.LBLIMaledom.Text
-			If i = 10 And FrmSettings.CBICaptions.Checked = True And Directory.Exists(FrmSettings.LBLICaptions.Text) Then CheckString = FrmSettings.LBLICaptions.Text
-			If i = 11 And FrmSettings.CBIGeneral.Checked = True And Directory.Exists(FrmSettings.LBLIGeneral.Text) Then CheckString = FrmSettings.LBLIGeneral.Text
-
-			If i = 1 And FrmSettings.CBIHardcoreSD.Checked = True Then CheckBoolean = True
-			If i = 2 And FrmSettings.CBISoftcoreSD.Checked = True Then CheckBoolean = True
-			If i = 3 And FrmSettings.CBILesbianSD.Checked = True Then CheckBoolean = True
-			If i = 4 And FrmSettings.CBIBlowjobSD.Checked = True Then CheckBoolean = True
-			If i = 5 And FrmSettings.CBIFemdomSD.Checked = True Then CheckBoolean = True
-			If i = 6 And FrmSettings.CBILezdomSD.Checked = True Then CheckBoolean = True
-			If i = 7 And FrmSettings.CBIHentaiSD.Checked = True Then CheckBoolean = True
-			If i = 8 And FrmSettings.CBIGaySD.Checked = True Then CheckBoolean = True
-			If i = 9 And FrmSettings.CBIMaledomSD.Checked = True Then CheckBoolean = True
-			If i = 10 And FrmSettings.CBICaptionsSD.Checked = True Then CheckBoolean = True
-			If i = 11 And FrmSettings.CBIGeneralSD.Checked = True Then CheckBoolean = True
-
-
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-
-			End If
-
-		Next
-
-		If LocalList.Count = 0 Then
-			FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-		Else
-			Do
-				FoundString = LocalList(randomizer.Next(0, LocalList.Count))
-			Loop Until FoundString <> ""
-		End If
-
-
-		JustShowedBlogImage = True
-
-		Debug.Print("Local Image PictureStrip")
-		PictureStrip.Items(0).Enabled = True
-		PictureStrip.Items(1).Enabled = False
-		PictureStrip.Items(2).Enabled = False
-		PictureStrip.Items(3).Enabled = True
-		PictureStrip.Items(4).Enabled = True
-		PictureStrip.Items(5).Enabled = False
-
-
-
-		ClearMainPictureBox()
-
-		' ### 0000000000000000000
-
-		ShowImage(FoundString)
-		'ImageLocation = FoundString
-		'PBImage = FoundString
-		'ImageThread.Start()
-		'DisplayImage(Image.FromFile(FoundString))
-		'mainPictureBox.Image = Image.FromFile(FoundString)
-		DeleteLocalImageFilePath = FoundString
-		CurrentImage = FoundString
-
-		'If UCase(FoundString).Contains(".GIF") Then
-
-		'Debug.Print("GIF Found")
-
-		'If FoundString.Contains("\") Then
-		'TempGif = Image.FromFile(FoundString)
-		'End If
-
-		'If FoundString.Contains("/") Then
-		'mainPictureBox.Image.Dispose()
-		'mainPictureBox.Image = Nothing
-
-		'If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-		'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-		'End If
-		'My.Computer.Network.DownloadFile(FoundString, Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-		'TempGif = Image.FromFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-		'End If
-
-		'mainPictureBox.Image = TempGif
-		'Else
-		'Debug.Print("Gif Not found")
-		'mainPictureBox.Load(FoundString)
-		'TempGif.Dispose()
-		'If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif") Then
-		'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Temp\Temp.gif")
-		'End If
-		'End If
-
-
-		Try
-			GC.Collect()
-		Catch
-		End Try
-		'mainPictureBox.Load(FoundString)
-
-
-
-
-	End Sub
-
-
-	Public Sub RunModuleScript(IsEdging As Boolean)
+    Public Sub RunModuleScript(IsEdging As Boolean)
 
 		ShowModule = True
 
@@ -24366,42 +24149,44 @@ TryNext:
 
 	End Sub
 
-	Private Sub RemoveFromUrlFile_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem4.Click
+    Private Sub RemoveFromUrlFile_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem4.Click
+        Try
+            ' Lock Control
+            ToolStripMenuItem4.Enabled = False
 
-		'For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\URL Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-		Debug.Print(ImageUrlFilePath)
-		' Read all lines of the given file.
-		Dim RemoveList As List(Of String) = Txt2List(ImageUrlFilePath)
+            ' Chekc if directory exits,
+            If myDirectory.Exists(Application.StartupPath & "\Images\System\URL Files\") Then
 
-		'For i As Integer = RemoveList.Count - 1 To 0 Step -1
-		Debug.Print(RemoveList(ImageUrlFileIndex))
-		Debug.Print("foundstring = " & FoundString)
-		'If RemoveList(i) = FoundString Then
-		'Debug.Print("MMMMMMMMMMMMMMMMMMMMMMMAAAAAAAAAAAAAAAAATTTTTTTTTTTTTTTTCCCCCCCCCCCCCCHHHHHHHHHHHHHHHHH")
-		RemoveList.Remove(RemoveList(ImageUrlFileIndex))
-		'End If
-		'Next
+                ' Fine the URL in all URLFiles
+                Dim foundFiles As ObjectModel.ReadOnlyCollection(Of String) =
+                    FileIO.FileSystem.FindInFiles(Application.StartupPath & "\Images\System\URL Files\",
+                                                  CurrentImage, True, FileIO.SearchOption.SearchTopLevelOnly)
 
-		If File.Exists(ImageUrlFilePath) Then My.Computer.FileSystem.DeleteFile(ImageUrlFilePath)
+                ' Delete the URL from all Files 
+                For Each filePath As String In foundFiles
+                    ' read all lines from file
+                    Dim deleteFile As List(Of String) = Txt2List(filePath)
 
-		Debug.Print(RemoveList.Count)
+                    ' Delete all Lines containing the URL
+                    deleteFile.RemoveAll(Function(x) x.Contains(CurrentImage))
 
-		For i As Integer = 0 To RemoveList.Count - 1
-			If File.Exists(ImageUrlFilePath) Then
-				My.Computer.FileSystem.WriteAllText(ImageUrlFilePath, Environment.NewLine & RemoveList(i), True)
-			Else
-				My.Computer.FileSystem.WriteAllText(ImageUrlFilePath, RemoveList(i), True)
-			End If
-		Next
-		'Next
-
-		PictureStrip.Items(5).Enabled = False
-
-	End Sub
+                    'Write modified List to disk.
+                    File.WriteAllLines(filePath, deleteFile)
+                Next
+            End If
+        Catch ex As Exception
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            '						       All Errors
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while deleting URL-From files.")
+            MsgBox("An Exception Occured while deleting the URL from Files." & vbCrLf _
+                   & ex.Message, MsgBoxStyle.Exclamation, "Delete URL from Files")
+        End Try
+    End Sub
 
 #Region "-------------------------------------------------- Save Blog Image ---------------------------------------------------"
 
-	Private Sub HardcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HardcoreToolStripMenuItem.Click
+    Private Sub HardcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HardcoreToolStripMenuItem.Click
 		SaveImage("Hardcore")
 	End Sub
 	Private Sub SoftcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SoftcoreToolStripMenuItem.Click

@@ -4,17 +4,18 @@ Partial Class Form1
 
 #Region "-------------------------------------------------- ImageDataContainer ------------------------------------------------"
 
-	Friend Enum ImageSourceType
-		Local
-		Remote
-	End Enum
+    Friend Enum ImageSourceType
+        Blog
+        Local
+        Remote
+    End Enum
 
-	''' <summary>
-	''' Represents a Object which can store all necessary Data related to genere-Images. 
-	''' This obejct is intended for managing Images. All Data and conditions can be stored in here
-	''' and retrieved from it.
-	''' </summary>
-	Friend Class ImageDataContainer
+    ''' <summary>
+    ''' Represents a Object which can store all necessary Data related to genere-Images. 
+    ''' This obejct is intended for managing Images. All Data and conditions can be stored in here
+    ''' and retrieved from it.
+    ''' </summary>
+    Friend Class ImageDataContainer
 		Public Name As String = ""
 		Public URLFile As String = ""
 		Public LocalDirectory As String = ""
@@ -262,33 +263,33 @@ NoneFound:
 
 #Region "------------------------------------------------- GetRandom Image ----------------------------------------------------"
 
-	''' <summary>
-	''' Gets a random image URI from all available Sources
-	''' </summary>
-	''' <returns>The URI of a random Image.</returns>
-	Friend Function GetRandomImage() As String
-		' Get all definitions for Images.
-		Dim dicFilePaths As Dictionary(Of String, ImageDataContainer) = GetImageData()
+    ''' <summary>
+    ''' Gets a random image URI from all available Sources
+    ''' </summary>
+    ''' <returns>The URI of a random Image.</returns>
+    Friend Function GetRandomImage() As String
+        ' Get all definitions for Images.
+        Dim dicFilePaths As Dictionary(Of String, ImageDataContainer) = GetImageData()
+        Dim AllImages As New List(Of String)
 
-		'Count the Genres.
-		Dim GenreCount As Integer = dicFilePaths.Keys.Count
+        ' Fetch all available ImageLocations
+        For Each genre As String In dicFilePaths.Keys
+            AllImages.AddRange(dicFilePaths(genre).ToList())
+        Next
 
-		' Check if Genres are present.
-		If GenreCount = 0 Then Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+        ' Check if there are images
+        If AllImages.Count = 0 Then Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
 
-		' Dertmine a Random ImageGenre.
-		Dim RandomGenre As String = dicFilePaths.Keys(New Random().Next(0, GenreCount)).ToString
+        ' get an Random Image from the all available Locations
+        Return AllImages(New Random().Next(0, AllImages.Count)).ToString
+    End Function
 
-		' get an Random Image from the Random Genre.
-		Return dicFilePaths(RandomGenre).Random()
-	End Function
-
-	''' <summary>
-	''' Gets a random image URI for given Genre from Local and URL-Files.
-	''' </summary>
-	''' <param name="genre">Determines the Genre to get a random image for.</param>
-	''' <returns>The URI of a random Image.</returns>
-	Friend Function GetRandomImage(ByVal genre As String) As String
+    ''' <summary>
+    ''' Gets a random image URI for given Genre from Local and URL-Files.
+    ''' </summary>
+    ''' <param name="genre">Determines the Genre to get a random image for.</param>
+    ''' <returns>The URI of a random Image.</returns>
+    Friend Function GetRandomImage(ByVal genre As String) As String
 		' Get all definitions for Images.
 		Dim dicFilePaths As Dictionary(Of String, ImageDataContainer) = GetImageData()
 
@@ -305,17 +306,59 @@ NoneFound:
 		' Get all definitions for Images.
 		Dim dicFilePaths As Dictionary(Of String, ImageDataContainer) = GetImageData()
 
-		'Count the Genres.
-		Dim GenreCount As Integer = dicFilePaths.Keys.Count
+        Dim allImages As New List(Of String)
 
-		' Check if Genres are present.
-		If GenreCount = 0 Then GoTo NoNeFound
+        If source = ImageSourceType.Blog And My.Settings.OfflineMode = False Then
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '                Get imagelocation from URL-Files not genrerelated.
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            Dim tmpList As New List(Of String)
 
-		' Dertmine a Random ImageGenre.
-		Dim RandomGenre As String = dicFilePaths.Keys(New Random().Next(0, GenreCount)).ToString
+            ' Load all checked Items into List.
+            tmpList.AddRange(FrmSettings.URLFileList.CheckedItems.Cast(Of String))
 
-		' get an Random Image from the Random Genre.
-		Return dicFilePaths(RandomGenre).Random(source)
+            ' Remove Items where File does not exist.
+            tmpList.RemoveAll(Function(x) Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & x & ".txt"))
+NextUrlFile:
+            ' Check Result if Files in List
+            If tmpList.Count < 1 Then GoTo NoNeFound
+
+            ' Get a random URL-File 
+            Dim fileName As String = tmpList(randomizer.Next(0, tmpList.Count))
+
+            ' Read the URL-File
+            Dim linesGB As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & fileName & ".txt")
+
+            ' Check if File is empty... 
+            If linesGB.Count = 0 Then
+                '... If yes then remove file From List and try again.
+                tmpList.Remove(fileName)
+                GoTo NextUrlFile
+            End If
+
+            ' Get a random Entry 
+            Do
+                FoundString = linesGB(randomizer.Next(0, linesGB.Count))
+            Loop Until FoundString <> ""
+
+            ' Return the image URL
+            Return FoundString
+            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+            ' GetBlogimage - End
+            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+        Else
+            ' Fetch all available ImageLocations for sourceType
+            For Each genre As String In dicFilePaths.Keys
+                allImages.AddRange(dicFilePaths(genre).ToList(source))
+            Next
+        End If
+
+
+        ' Check if Genres are present.
+        If allImages.Count = 0 Then GoTo NoNeFound
+
+        ' get an Random Image for the given SourceType
+        Return allImages(New Random().Next(0, allImages.Count)).ToString
 NoNeFound:
 		' Return an Error-Image FilePath
 		If source = ImageSourceType.Local _
@@ -363,7 +406,9 @@ NoNeFound:
 	Private Class ImageFetchObject
 		Public ImageLocation As String = ""
 
-		Private _SaveImageDirectory As String = ""
+        Public Source As ImageSourceType
+
+        Private _SaveImageDirectory As String = ""
 
 		Public Property SaveImageDirectory As String
 			Get
@@ -396,9 +441,10 @@ NoNeFound:
 			Try
 				With FetchContainer
 					If .ImageLocation.Contains("/") And .ImageLocation.Contains("://") Then
-						' ###################### Online Image #########################
-						' Download the image
-						.FetchedImage = New Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(.ImageLocation)))
+                        ' ###################### Online Image #########################
+                        .Source = ImageSourceType.Remote
+                        ' Download the image
+                        .FetchedImage = New Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(.ImageLocation)))
 						'check if Folder is set and exists.
 						If .SaveImageDirectory <> "" _
 					AndAlso Directory.Exists(.SaveImageDirectory) Then
@@ -408,8 +454,9 @@ NoNeFound:
 							End If
 						End If
 					Else
-						' ####################### Local Image #########################
-						.FetchedImage = Image.FromFile(.ImageLocation)
+                        ' ####################### Local Image #########################
+                        .Source = ImageSourceType.Local
+                        .FetchedImage = Image.FromFile(.ImageLocation)
 					End If
 				End With
 			Catch ex As Exception
@@ -445,8 +492,53 @@ NoNeFound:
 				OldImage.Dispose()
 			End If
 			GC.Collect()
-			CheckDommeTags()
-			Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
+            CheckDommeTags()
+
+            If FetchResult.Source = ImageSourceType.Local Then
+                Debug.Print("Local Image PictureStrip")
+
+                If _ImageFileNames.Contains(FetchResult.ImageLocation) Then _
+                    DeleteLocalImageFilePath = FetchResult.ImageLocation
+
+                CurrentImage = FetchResult.ImageLocation
+
+                'CopyImageLocation
+                ToolStripMenuItem5.Enabled = True
+
+                'Save Image
+                ToolStripMenuItem1.Enabled = False
+
+                SaveImageToToolStripMenuItem.Enabled = False
+
+                'Like Image
+                ToolStripMenuItem2.Enabled = False
+                'DislikeImage
+                ToolStripMenuItem3.Enabled = False
+                'Remove from URLFile
+                ToolStripMenuItem4.Enabled = False
+
+            Else
+                Debug.Print("Blog Image PictureStrip")
+                CurrentImage = FoundString
+
+                'CopyImageLocation
+                ToolStripMenuItem5.Enabled = True
+
+                'Save Image
+                ToolStripMenuItem1.Enabled = True
+
+                SaveImageToToolStripMenuItem.Enabled = True
+
+                'Like Image
+                ToolStripMenuItem2.Enabled = True
+                'DislikeImage
+                ToolStripMenuItem3.Enabled = True
+                'Remove from URLFile
+                ToolStripMenuItem4.Enabled = True
+
+            End If
+
+            Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
 						"	ImageLocation: " & FetchResult.ImageLocation)
 		End If
 	End Sub
@@ -495,42 +587,12 @@ NoNeFound:
 		Dim ImageToCache As String = ""
 
 		If OnlineImage = "Blog" Then
-			'===============================================================================
-			'	                        Pick from available Blog
-			'===============================================================================
-			Dim tmpList As New List(Of String)
-
-			' Load all checked Items into List.
-			tmpList.AddRange(FrmSettings.URLFileList.CheckedItems.Cast(Of String))
-
-			' Remove Items where File does not exist.
-			tmpList.RemoveAll(Function(x) Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & x & ".txt"))
-NextUrlFile:
-			' Check Result if Files in List
-			If tmpList.Count < 1 Then Return ImageToCache
-
-			' Get a random URL-File 
-			ImageUrlFilePath = tmpList(randomizer.Next(0, tmpList.Count)) & ".txt"
-
-			' Read the URL-File
-			Dim linesGB As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & ImageUrlFilePath)
-
-			' Check if File is empty... 
-			If linesGB.Count = 0 Then
-				'... If yes then remove file From List and try again.
-				tmpList.Remove(ImageUrlFilePath)
-				GoTo NextUrlFile
-			End If
-
-			' Get a random Entry 
-			Do
-				ImageUrlFileIndex = randomizer.Next(0, linesGB.Count)
-				FoundString = linesGB(ImageUrlFileIndex)
-			Loop Until FoundString <> ""
-
-			' Set image to load
-			ImageToCache = FoundString
-		Else
+            '===============================================================================
+            '	                        Pick from available Blog
+            '===============================================================================
+            ' Set image to load
+            ImageToCache = GetRandomImage(ImageSourceType.Blog)
+        Else
 			'===============================================================================
 			'                            Pick by genre.
 			'===============================================================================
