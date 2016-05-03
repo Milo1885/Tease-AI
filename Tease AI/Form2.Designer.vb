@@ -29,7 +29,6 @@ Partial Class FrmSettings
 		Me.TabPage1 = New System.Windows.Forms.TabPage()
 		Me.PNLGeneralSettings = New System.Windows.Forms.Panel()
 		Me.GroupBox64 = New System.Windows.Forms.GroupBox()
-		Me.CBMuteMedia = New System.Windows.Forms.CheckBox()
 		Me.GBDommeImages = New System.Windows.Forms.GroupBox()
 		Me.slideshowNumBox = New System.Windows.Forms.NumericUpDown()
 		Me.teaseRadio = New System.Windows.Forms.RadioButton()
@@ -281,6 +280,7 @@ Partial Class FrmSettings
 		Me.TabPage7 = New System.Windows.Forms.TabPage()
 		Me.TabControl4 = New System.Windows.Forms.TabControl()
 		Me.TabPage31 = New System.Windows.Forms.TabPage()
+		Me.CBURLPreview = New System.Windows.Forms.CheckBox()
 		Me.GroupBox66 = New System.Windows.Forms.GroupBox()
 		Me.PBURLPreview = New System.Windows.Forms.PictureBox()
 		Me.BTNURLFilesAll = New System.Windows.Forms.Button()
@@ -807,6 +807,28 @@ Partial Class FrmSettings
 		Me.Label164 = New System.Windows.Forms.Label()
 		Me.TabPage4 = New System.Windows.Forms.TabPage()
 		Me.Panel6 = New System.Windows.Forms.Panel()
+		Me.GroupBox67 = New System.Windows.Forms.GroupBox()
+		Me.Label161 = New System.Windows.Forms.Label()
+		Me.Label162 = New System.Windows.Forms.Label()
+		Me.Label163 = New System.Windows.Forms.Label()
+		Me.Label158 = New System.Windows.Forms.Label()
+		Me.NBTaskEdgeHoldTimeMax = New System.Windows.Forms.NumericUpDown()
+		Me.NBTaskEdgeHoldTimeMin = New System.Windows.Forms.NumericUpDown()
+		Me.Label159 = New System.Windows.Forms.Label()
+		Me.Label160 = New System.Windows.Forms.Label()
+		Me.NBTaskEdgesMax = New System.Windows.Forms.NumericUpDown()
+		Me.NBTaskEdgesMin = New System.Windows.Forms.NumericUpDown()
+		Me.Label119 = New System.Windows.Forms.Label()
+		Me.Label157 = New System.Windows.Forms.Label()
+		Me.Label151 = New System.Windows.Forms.Label()
+		Me.NBTaskStrokingTimeMax = New System.Windows.Forms.NumericUpDown()
+		Me.NBTaskStrokingTimeMin = New System.Windows.Forms.NumericUpDown()
+		Me.Label154 = New System.Windows.Forms.Label()
+		Me.Label155 = New System.Windows.Forms.Label()
+		Me.NBTaskStrokesMax = New System.Windows.Forms.NumericUpDown()
+		Me.NBTaskStrokesMin = New System.Windows.Forms.NumericUpDown()
+		Me.Label146 = New System.Windows.Forms.Label()
+		Me.Label149 = New System.Windows.Forms.Label()
 		Me.GroupBox10 = New System.Windows.Forms.GroupBox()
 		Me.Label112 = New System.Windows.Forms.Label()
 		Me.NBNextImageChance = New System.Windows.Forms.NumericUpDown()
@@ -1071,11 +1093,11 @@ Partial Class FrmSettings
 		Me.CheckBox1 = New System.Windows.Forms.CheckBox()
 		Me.Label135 = New System.Windows.Forms.Label()
 		Me.TrackBar2 = New System.Windows.Forms.TrackBar()
+		Me.CBMuteMedia = New System.Windows.Forms.CheckBox()
+		Me.NBTaskCBTTimeMax = New System.Windows.Forms.NumericUpDown()
+		Me.NBTaskCBTTimeMin = New System.Windows.Forms.NumericUpDown()
 		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
-        Me.CBURLPreview = New System.Windows.Forms.CheckBox()
-        Me.BtnImportSettings = New System.Windows.Forms.Button()
-        Me.LblImportSettings = New System.Windows.Forms.Label()
-        Me.SettingsPanel.SuspendLayout
+		Me.SettingsPanel.SuspendLayout
 		Me.SettingsTabs.SuspendLayout
 		Me.TabPage1.SuspendLayout
 		Me.PNLGeneralSettings.SuspendLayout
@@ -1251,6 +1273,15 @@ Partial Class FrmSettings
 		CType(Me.PBBackgroundPreview,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.TabPage4.SuspendLayout
 		Me.Panel6.SuspendLayout
+		Me.GroupBox67.SuspendLayout
+		CType(Me.NBTaskEdgeHoldTimeMax,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTaskEdgeHoldTimeMin,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTaskEdgesMax,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTaskEdgesMin,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTaskStrokingTimeMax,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTaskStrokingTimeMin,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTaskStrokesMax,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTaskStrokesMin,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.GroupBox10.SuspendLayout
 		CType(Me.NBNextImageChance,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.GroupBox57.SuspendLayout
@@ -1316,6 +1347,8 @@ Partial Class FrmSettings
 		Me.GroupBox65.SuspendLayout
 		CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).BeginInit
 		CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTaskCBTTimeMax,System.ComponentModel.ISupportInitialize).BeginInit
+		CType(Me.NBTaskCBTTimeMin,System.ComponentModel.ISupportInitialize).BeginInit
 		Me.SuspendLayout
 		'
 		'SettingsPanel
@@ -1366,10 +1399,8 @@ Partial Class FrmSettings
 		'PNLGeneralSettings
 		'
 		Me.PNLGeneralSettings.BackColor = System.Drawing.Color.LightGray
-        Me.PNLGeneralSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PNLGeneralSettings.Controls.Add(Me.BtnImportSettings)
-        Me.PNLGeneralSettings.Controls.Add(Me.LblImportSettings)
-        Me.PNLGeneralSettings.Controls.Add(Me.GroupBox64)
+		Me.PNLGeneralSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.PNLGeneralSettings.Controls.Add(Me.GroupBox64)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBDommeImages)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBGeneralTextToSpeech)
 		Me.PNLGeneralSettings.Controls.Add(Me.GBSafeword)
@@ -1394,20 +1425,6 @@ Partial Class FrmSettings
 		Me.GroupBox64.TabIndex = 157
 		Me.GroupBox64.TabStop = false
 		Me.GroupBox64.Text = "Media Options"
-		'
-		'CBMuteMedia
-		'
-		Me.CBMuteMedia.AutoSize = true
-		Me.CBMuteMedia.Checked = Global.Tease_AI.My.MySettings.Default.MuteMedia
-		Me.CBMuteMedia.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "MuteMedia", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.CBMuteMedia.ForeColor = System.Drawing.Color.Black
-		Me.CBMuteMedia.Location = New System.Drawing.Point(7, 21)
-		Me.CBMuteMedia.Name = "CBMuteMedia"
-		Me.CBMuteMedia.Size = New System.Drawing.Size(241, 17)
-		Me.CBMuteMedia.TabIndex = 6
-		Me.CBMuteMedia.TabStop = false
-		Me.CBMuteMedia.Text = "Mute Video and Audio Played in Media Player"
-		Me.CBMuteMedia.UseVisualStyleBackColor = true
 		'
 		'GBDommeImages
 		'
@@ -4462,6 +4479,18 @@ Partial Class FrmSettings
 		Me.TabPage31.Size = New System.Drawing.Size(700, 411)
 		Me.TabPage31.TabIndex = 0
 		Me.TabPage31.Text = "URL Files"
+		'
+		'CBURLPreview
+		'
+		Me.CBURLPreview.AutoSize = true
+		Me.CBURLPreview.Checked = true
+		Me.CBURLPreview.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBURLPreview.Location = New System.Drawing.Point(344, 323)
+		Me.CBURLPreview.Name = "CBURLPreview"
+		Me.CBURLPreview.Size = New System.Drawing.Size(240, 17)
+		Me.CBURLPreview.TabIndex = 163
+		Me.CBURLPreview.Text = "Show Previews When A URL File is Selected"
+		Me.CBURLPreview.UseVisualStyleBackColor = true
 		'
 		'GroupBox66
 		'
@@ -10937,6 +10966,7 @@ Partial Class FrmSettings
 		'
 		Me.Panel6.BackColor = System.Drawing.Color.LightGray
 		Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.Panel6.Controls.Add(Me.GroupBox67)
 		Me.Panel6.Controls.Add(Me.GroupBox10)
 		Me.Panel6.Controls.Add(Me.GroupBox57)
 		Me.Panel6.Controls.Add(Me.GroupBox56)
@@ -10948,6 +10978,282 @@ Partial Class FrmSettings
 		Me.Panel6.Name = "Panel6"
 		Me.Panel6.Size = New System.Drawing.Size(708, 437)
 		Me.Panel6.TabIndex = 91
+		'
+		'GroupBox67
+		'
+		Me.GroupBox67.Controls.Add(Me.Label161)
+		Me.GroupBox67.Controls.Add(Me.NBTaskCBTTimeMax)
+		Me.GroupBox67.Controls.Add(Me.NBTaskCBTTimeMin)
+		Me.GroupBox67.Controls.Add(Me.Label162)
+		Me.GroupBox67.Controls.Add(Me.Label163)
+		Me.GroupBox67.Controls.Add(Me.Label158)
+		Me.GroupBox67.Controls.Add(Me.NBTaskEdgeHoldTimeMax)
+		Me.GroupBox67.Controls.Add(Me.NBTaskEdgeHoldTimeMin)
+		Me.GroupBox67.Controls.Add(Me.Label159)
+		Me.GroupBox67.Controls.Add(Me.Label160)
+		Me.GroupBox67.Controls.Add(Me.NBTaskEdgesMax)
+		Me.GroupBox67.Controls.Add(Me.NBTaskEdgesMin)
+		Me.GroupBox67.Controls.Add(Me.Label119)
+		Me.GroupBox67.Controls.Add(Me.Label157)
+		Me.GroupBox67.Controls.Add(Me.Label151)
+		Me.GroupBox67.Controls.Add(Me.NBTaskStrokingTimeMax)
+		Me.GroupBox67.Controls.Add(Me.NBTaskStrokingTimeMin)
+		Me.GroupBox67.Controls.Add(Me.Label154)
+		Me.GroupBox67.Controls.Add(Me.Label155)
+		Me.GroupBox67.Controls.Add(Me.NBTaskStrokesMax)
+		Me.GroupBox67.Controls.Add(Me.NBTaskStrokesMin)
+		Me.GroupBox67.Controls.Add(Me.Label146)
+		Me.GroupBox67.Controls.Add(Me.Label149)
+		Me.GroupBox67.Location = New System.Drawing.Point(408, 288)
+		Me.GroupBox67.Name = "GroupBox67"
+		Me.GroupBox67.Size = New System.Drawing.Size(291, 139)
+		Me.GroupBox67.TabIndex = 171
+		Me.GroupBox67.TabStop = false
+		Me.GroupBox67.Text = "Tasks"
+		'
+		'Label161
+		'
+		Me.Label161.BackColor = System.Drawing.Color.Transparent
+		Me.Label161.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label161.ForeColor = System.Drawing.Color.Black
+		Me.Label161.Location = New System.Drawing.Point(233, 110)
+		Me.Label161.Name = "Label161"
+		Me.Label161.Size = New System.Drawing.Size(50, 17)
+		Me.Label161.TabIndex = 204
+		Me.Label161.Text = "minutes"
+		Me.Label161.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label162
+		'
+		Me.Label162.BackColor = System.Drawing.Color.Transparent
+		Me.Label162.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label162.ForeColor = System.Drawing.Color.Black
+		Me.Label162.Location = New System.Drawing.Point(167, 110)
+		Me.Label162.Name = "Label162"
+		Me.Label162.Size = New System.Drawing.Size(10, 17)
+		Me.Label162.TabIndex = 201
+		Me.Label162.Text = "-"
+		Me.Label162.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label163
+		'
+		Me.Label163.BackColor = System.Drawing.Color.Transparent
+		Me.Label163.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label163.ForeColor = System.Drawing.Color.Black
+		Me.Label163.Location = New System.Drawing.Point(12, 111)
+		Me.Label163.Name = "Label163"
+		Me.Label163.Size = New System.Drawing.Size(151, 17)
+		Me.Label163.TabIndex = 200
+		Me.Label163.Text = "CBT Time:"
+		Me.Label163.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label158
+		'
+		Me.Label158.BackColor = System.Drawing.Color.Transparent
+		Me.Label158.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label158.ForeColor = System.Drawing.Color.Black
+		Me.Label158.Location = New System.Drawing.Point(233, 87)
+		Me.Label158.Name = "Label158"
+		Me.Label158.Size = New System.Drawing.Size(50, 17)
+		Me.Label158.TabIndex = 199
+		Me.Label158.Text = "minutes"
+		Me.Label158.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'NBTaskEdgeHoldTimeMax
+		'
+		Me.NBTaskEdgeHoldTimeMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgeHoldTimeMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskEdgeHoldTimeMax.Location = New System.Drawing.Point(183, 87)
+		Me.NBTaskEdgeHoldTimeMax.Maximum = New Decimal(New Integer() {600, 0, 0, 0})
+		Me.NBTaskEdgeHoldTimeMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskEdgeHoldTimeMax.Name = "NBTaskEdgeHoldTimeMax"
+		Me.NBTaskEdgeHoldTimeMax.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskEdgeHoldTimeMax.TabIndex = 198
+		Me.NBTaskEdgeHoldTimeMax.Value = Global.Tease_AI.My.MySettings.Default.TaskEdgeHoldTimeMax
+		'
+		'NBTaskEdgeHoldTimeMin
+		'
+		Me.NBTaskEdgeHoldTimeMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgeHoldTimeMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskEdgeHoldTimeMin.Location = New System.Drawing.Point(117, 88)
+		Me.NBTaskEdgeHoldTimeMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+		Me.NBTaskEdgeHoldTimeMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskEdgeHoldTimeMin.Name = "NBTaskEdgeHoldTimeMin"
+		Me.NBTaskEdgeHoldTimeMin.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskEdgeHoldTimeMin.TabIndex = 197
+		Me.NBTaskEdgeHoldTimeMin.Value = Global.Tease_AI.My.MySettings.Default.TaskEdgeHoldTimeMin
+		'
+		'Label159
+		'
+		Me.Label159.BackColor = System.Drawing.Color.Transparent
+		Me.Label159.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label159.ForeColor = System.Drawing.Color.Black
+		Me.Label159.Location = New System.Drawing.Point(167, 87)
+		Me.Label159.Name = "Label159"
+		Me.Label159.Size = New System.Drawing.Size(10, 17)
+		Me.Label159.TabIndex = 196
+		Me.Label159.Text = "-"
+		Me.Label159.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label160
+		'
+		Me.Label160.BackColor = System.Drawing.Color.Transparent
+		Me.Label160.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label160.ForeColor = System.Drawing.Color.Black
+		Me.Label160.Location = New System.Drawing.Point(12, 88)
+		Me.Label160.Name = "Label160"
+		Me.Label160.Size = New System.Drawing.Size(151, 17)
+		Me.Label160.TabIndex = 195
+		Me.Label160.Text = "Edge Hold Time:"
+		Me.Label160.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'NBTaskEdgesMax
+		'
+		Me.NBTaskEdgesMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgesMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskEdgesMax.Location = New System.Drawing.Point(183, 64)
+		Me.NBTaskEdgesMax.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+		Me.NBTaskEdgesMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskEdgesMax.Name = "NBTaskEdgesMax"
+		Me.NBTaskEdgesMax.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskEdgesMax.TabIndex = 194
+		Me.NBTaskEdgesMax.Value = Global.Tease_AI.My.MySettings.Default.TaskEdgesMax
+		'
+		'NBTaskEdgesMin
+		'
+		Me.NBTaskEdgesMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgesMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskEdgesMin.Location = New System.Drawing.Point(117, 65)
+		Me.NBTaskEdgesMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+		Me.NBTaskEdgesMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskEdgesMin.Name = "NBTaskEdgesMin"
+		Me.NBTaskEdgesMin.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskEdgesMin.TabIndex = 193
+		Me.NBTaskEdgesMin.Value = Global.Tease_AI.My.MySettings.Default.TaskEdgesMin
+		'
+		'Label119
+		'
+		Me.Label119.BackColor = System.Drawing.Color.Transparent
+		Me.Label119.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label119.ForeColor = System.Drawing.Color.Black
+		Me.Label119.Location = New System.Drawing.Point(167, 64)
+		Me.Label119.Name = "Label119"
+		Me.Label119.Size = New System.Drawing.Size(10, 17)
+		Me.Label119.TabIndex = 192
+		Me.Label119.Text = "-"
+		Me.Label119.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label157
+		'
+		Me.Label157.BackColor = System.Drawing.Color.Transparent
+		Me.Label157.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label157.ForeColor = System.Drawing.Color.Black
+		Me.Label157.Location = New System.Drawing.Point(12, 65)
+		Me.Label157.Name = "Label157"
+		Me.Label157.Size = New System.Drawing.Size(151, 17)
+		Me.Label157.TabIndex = 191
+		Me.Label157.Text = "Edges:"
+		Me.Label157.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label151
+		'
+		Me.Label151.BackColor = System.Drawing.Color.Transparent
+		Me.Label151.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label151.ForeColor = System.Drawing.Color.Black
+		Me.Label151.Location = New System.Drawing.Point(233, 41)
+		Me.Label151.Name = "Label151"
+		Me.Label151.Size = New System.Drawing.Size(50, 17)
+		Me.Label151.TabIndex = 190
+		Me.Label151.Text = "minutes"
+		Me.Label151.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'NBTaskStrokingTimeMax
+		'
+		Me.NBTaskStrokingTimeMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokingTimeMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskStrokingTimeMax.Location = New System.Drawing.Point(183, 41)
+		Me.NBTaskStrokingTimeMax.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+		Me.NBTaskStrokingTimeMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskStrokingTimeMax.Name = "NBTaskStrokingTimeMax"
+		Me.NBTaskStrokingTimeMax.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskStrokingTimeMax.TabIndex = 189
+		Me.NBTaskStrokingTimeMax.Value = Global.Tease_AI.My.MySettings.Default.TaskStrokingTimeMax
+		'
+		'NBTaskStrokingTimeMin
+		'
+		Me.NBTaskStrokingTimeMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokingTimeMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskStrokingTimeMin.Location = New System.Drawing.Point(117, 42)
+		Me.NBTaskStrokingTimeMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+		Me.NBTaskStrokingTimeMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskStrokingTimeMin.Name = "NBTaskStrokingTimeMin"
+		Me.NBTaskStrokingTimeMin.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskStrokingTimeMin.TabIndex = 188
+		Me.NBTaskStrokingTimeMin.Value = Global.Tease_AI.My.MySettings.Default.TaskStrokingTimeMin
+		'
+		'Label154
+		'
+		Me.Label154.BackColor = System.Drawing.Color.Transparent
+		Me.Label154.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label154.ForeColor = System.Drawing.Color.Black
+		Me.Label154.Location = New System.Drawing.Point(167, 41)
+		Me.Label154.Name = "Label154"
+		Me.Label154.Size = New System.Drawing.Size(10, 17)
+		Me.Label154.TabIndex = 187
+		Me.Label154.Text = "-"
+		Me.Label154.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label155
+		'
+		Me.Label155.BackColor = System.Drawing.Color.Transparent
+		Me.Label155.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label155.ForeColor = System.Drawing.Color.Black
+		Me.Label155.Location = New System.Drawing.Point(12, 42)
+		Me.Label155.Name = "Label155"
+		Me.Label155.Size = New System.Drawing.Size(151, 17)
+		Me.Label155.TabIndex = 186
+		Me.Label155.Text = "Stroking Time:"
+		Me.Label155.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'NBTaskStrokesMax
+		'
+		Me.NBTaskStrokesMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokesMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskStrokesMax.Location = New System.Drawing.Point(183, 18)
+		Me.NBTaskStrokesMax.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+		Me.NBTaskStrokesMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskStrokesMax.Name = "NBTaskStrokesMax"
+		Me.NBTaskStrokesMax.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskStrokesMax.TabIndex = 184
+		Me.NBTaskStrokesMax.Value = Global.Tease_AI.My.MySettings.Default.TaskStrokesMax
+		'
+		'NBTaskStrokesMin
+		'
+		Me.NBTaskStrokesMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokesMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskStrokesMin.Location = New System.Drawing.Point(117, 19)
+		Me.NBTaskStrokesMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+		Me.NBTaskStrokesMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskStrokesMin.Name = "NBTaskStrokesMin"
+		Me.NBTaskStrokesMin.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskStrokesMin.TabIndex = 183
+		Me.NBTaskStrokesMin.Value = Global.Tease_AI.My.MySettings.Default.TaskStrokesMin
+		'
+		'Label146
+		'
+		Me.Label146.BackColor = System.Drawing.Color.Transparent
+		Me.Label146.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label146.ForeColor = System.Drawing.Color.Black
+		Me.Label146.Location = New System.Drawing.Point(167, 18)
+		Me.Label146.Name = "Label146"
+		Me.Label146.Size = New System.Drawing.Size(10, 17)
+		Me.Label146.TabIndex = 182
+		Me.Label146.Text = "-"
+		Me.Label146.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'Label149
+		'
+		Me.Label149.BackColor = System.Drawing.Color.Transparent
+		Me.Label149.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label149.ForeColor = System.Drawing.Color.Black
+		Me.Label149.Location = New System.Drawing.Point(12, 19)
+		Me.Label149.Name = "Label149"
+		Me.Label149.Size = New System.Drawing.Size(151, 17)
+		Me.Label149.TabIndex = 181
+		Me.Label149.Text = "Strokes:"
+		Me.Label149.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'GroupBox10
 		'
@@ -13771,54 +14077,49 @@ Partial Class FrmSettings
 		Me.TrackBar2.TabIndex = 30
 		Me.TrackBar2.Value = 50
 		'
+		'CBMuteMedia
+		'
+		Me.CBMuteMedia.AutoSize = true
+		Me.CBMuteMedia.Checked = Global.Tease_AI.My.MySettings.Default.MuteMedia
+		Me.CBMuteMedia.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "MuteMedia", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBMuteMedia.ForeColor = System.Drawing.Color.Black
+		Me.CBMuteMedia.Location = New System.Drawing.Point(7, 21)
+		Me.CBMuteMedia.Name = "CBMuteMedia"
+		Me.CBMuteMedia.Size = New System.Drawing.Size(241, 17)
+		Me.CBMuteMedia.TabIndex = 6
+		Me.CBMuteMedia.TabStop = false
+		Me.CBMuteMedia.Text = "Mute Video and Audio Played in Media Player"
+		Me.CBMuteMedia.UseVisualStyleBackColor = true
+		'
+		'NBTaskCBTTimeMax
+		'
+		Me.NBTaskCBTTimeMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskCBTTimeMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskCBTTimeMax.Location = New System.Drawing.Point(183, 110)
+		Me.NBTaskCBTTimeMax.Maximum = New Decimal(New Integer() {600, 0, 0, 0})
+		Me.NBTaskCBTTimeMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskCBTTimeMax.Name = "NBTaskCBTTimeMax"
+		Me.NBTaskCBTTimeMax.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskCBTTimeMax.TabIndex = 203
+		Me.NBTaskCBTTimeMax.Value = Global.Tease_AI.My.MySettings.Default.TaskCBTTimeMax
+		'
+		'NBTaskCBTTimeMin
+		'
+		Me.NBTaskCBTTimeMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskCBTTimeMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskCBTTimeMin.Location = New System.Drawing.Point(117, 111)
+		Me.NBTaskCBTTimeMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+		Me.NBTaskCBTTimeMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+		Me.NBTaskCBTTimeMin.Name = "NBTaskCBTTimeMin"
+		Me.NBTaskCBTTimeMin.Size = New System.Drawing.Size(44, 20)
+		Me.NBTaskCBTTimeMin.TabIndex = 202
+		Me.NBTaskCBTTimeMin.Value = Global.Tease_AI.My.MySettings.Default.TaskCBTTimeMin
+		'
 		'BWURLFiles
 		'
 		Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
 		Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
 		Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
-		Me.BWURLFiles.WorkerReportsProgress = True
-        Me.BWURLFiles.WorkerSupportsCancellation = True
-        '
-        'BtnImportSettings
-        '
-        Me.BtnImportSettings.BackColor = System.Drawing.Color.LightGray
-        Me.BtnImportSettings.BackgroundImage = CType(resources.GetObject("BtnImportSettings.BackgroundImage"), System.Drawing.Image)
-        Me.BtnImportSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.BtnImportSettings.FlatAppearance.BorderSize = 0
-        Me.BtnImportSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-        Me.BtnImportSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-        Me.BtnImportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.BtnImportSettings.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnImportSettings.ForeColor = System.Drawing.Color.Black
-        Me.BtnImportSettings.Location = New System.Drawing.Point(669, 11)
-        Me.BtnImportSettings.Name = "BtnImportSettings"
-        Me.BtnImportSettings.Size = New System.Drawing.Size(30, 26)
-        Me.BtnImportSettings.TabIndex = 158
-        Me.BtnImportSettings.UseVisualStyleBackColor = False
-        '
-        'LblImportSettings
-        '
-        Me.LblImportSettings.AutoSize = True
-        Me.LblImportSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LblImportSettings.ForeColor = System.Drawing.Color.Black
-        Me.LblImportSettings.Location = New System.Drawing.Point(663, -4)
-        Me.LblImportSettings.Name = "LblImportSettings"
-        Me.LblImportSettings.Size = New System.Drawing.Size(36, 13)
-        Me.LblImportSettings.TabIndex = 159
-        Me.LblImportSettings.Text = "Import"
-        Me.LblImportSettings.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'CBURLPreview
-        '
-        Me.CBURLPreview.AutoSize = true
-		Me.CBURLPreview.Checked = true
-		Me.CBURLPreview.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBURLPreview.Location = New System.Drawing.Point(344, 323)
-		Me.CBURLPreview.Name = "CBURLPreview"
-		Me.CBURLPreview.Size = New System.Drawing.Size(240, 17)
-		Me.CBURLPreview.TabIndex = 163
-		Me.CBURLPreview.Text = "Show Previews When A URL File is Selected"
-		Me.CBURLPreview.UseVisualStyleBackColor = true
+		Me.BWURLFiles.WorkerReportsProgress = true
+		Me.BWURLFiles.WorkerSupportsCancellation = true
 		'
 		'FrmSettings
 		'
@@ -14066,6 +14367,15 @@ Partial Class FrmSettings
 		CType(Me.PBBackgroundPreview,System.ComponentModel.ISupportInitialize).EndInit
 		Me.TabPage4.ResumeLayout(false)
 		Me.Panel6.ResumeLayout(false)
+		Me.GroupBox67.ResumeLayout(false)
+		CType(Me.NBTaskEdgeHoldTimeMax,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTaskEdgeHoldTimeMin,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTaskEdgesMax,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTaskEdgesMin,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTaskStrokingTimeMax,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTaskStrokingTimeMin,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTaskStrokesMax,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTaskStrokesMin,System.ComponentModel.ISupportInitialize).EndInit
 		Me.GroupBox10.ResumeLayout(false)
 		CType(Me.NBNextImageChance,System.ComponentModel.ISupportInitialize).EndInit
 		Me.GroupBox57.ResumeLayout(false)
@@ -14147,6 +14457,8 @@ Partial Class FrmSettings
 		Me.GroupBox65.PerformLayout
 		CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).EndInit
 		CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTaskCBTTimeMax,System.ComponentModel.ISupportInitialize).EndInit
+		CType(Me.NBTaskCBTTimeMin,System.ComponentModel.ISupportInitialize).EndInit
 		Me.ResumeLayout(false)
 
 End Sub
@@ -15198,7 +15510,29 @@ End Sub
 	Friend WithEvents CBIBoobs As System.Windows.Forms.CheckBox
 	Friend WithEvents GroupBox66 As System.Windows.Forms.GroupBox
 	Friend WithEvents PBURLPreview As System.Windows.Forms.PictureBox
-    Friend WithEvents CBURLPreview As System.Windows.Forms.CheckBox
-    Friend WithEvents BtnImportSettings As Button
-    Friend WithEvents LblImportSettings As Label
+	Friend WithEvents CBURLPreview As System.Windows.Forms.CheckBox
+	Friend WithEvents GroupBox67 As System.Windows.Forms.GroupBox
+	Friend WithEvents Label151 As System.Windows.Forms.Label
+	Friend WithEvents NBTaskStrokingTimeMax As System.Windows.Forms.NumericUpDown
+	Friend WithEvents NBTaskStrokingTimeMin As System.Windows.Forms.NumericUpDown
+	Friend WithEvents Label154 As System.Windows.Forms.Label
+	Friend WithEvents Label155 As System.Windows.Forms.Label
+	Friend WithEvents NBTaskStrokesMax As System.Windows.Forms.NumericUpDown
+	Friend WithEvents NBTaskStrokesMin As System.Windows.Forms.NumericUpDown
+	Friend WithEvents Label146 As System.Windows.Forms.Label
+	Friend WithEvents Label149 As System.Windows.Forms.Label
+	Friend WithEvents NBTaskEdgesMax As System.Windows.Forms.NumericUpDown
+	Friend WithEvents NBTaskEdgesMin As System.Windows.Forms.NumericUpDown
+	Friend WithEvents Label119 As System.Windows.Forms.Label
+	Friend WithEvents Label157 As System.Windows.Forms.Label
+	Friend WithEvents Label161 As System.Windows.Forms.Label
+	Friend WithEvents NBTaskCBTTimeMax As System.Windows.Forms.NumericUpDown
+	Friend WithEvents NBTaskCBTTimeMin As System.Windows.Forms.NumericUpDown
+	Friend WithEvents Label162 As System.Windows.Forms.Label
+	Friend WithEvents Label163 As System.Windows.Forms.Label
+	Friend WithEvents Label158 As System.Windows.Forms.Label
+	Friend WithEvents NBTaskEdgeHoldTimeMax As System.Windows.Forms.NumericUpDown
+	Friend WithEvents NBTaskEdgeHoldTimeMin As System.Windows.Forms.NumericUpDown
+	Friend WithEvents Label159 As System.Windows.Forms.Label
+	Friend WithEvents Label160 As System.Windows.Forms.Label
 End Class
