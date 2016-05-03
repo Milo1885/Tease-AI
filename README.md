@@ -9,6 +9,26 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 # Changelog - Patch 54
 
+Major Tasks overhaul:
+
+     Tasks should now function as originally intended
+	 
+	 Multiple uses of the same #Keyword will now produce different results
+	 
+	 Tasks are now filtered through the new routine which should greatly improve stability
+	 
+	 Task-related #Keywords should no longer return 0 as a value
+
+     "Domme is sending you a file" window now displays correctly when Lazy Sub AV is active
+  
+     Task-related Ranges added to Ranges tab, corresponding to the following #KeyWords: #TaskStrokes, #TaskStrokingTime, #TaskEdges, #TaskHoldTheEdgeTime, #TaskCBTTime
+	 
+	 
+New #Keywords added: #EdgeHold, #LongHold, #ExtremeHold
+
+     Returns a random value based on the user's Sub settings, and automatically displays it as an amount of time in seconds, minutes and/or hours. 
+	 
+
 Tease AI will now move to the next script type in the cycle if the current script has run out of lines
 
 Added @Month() and @Day() to GetFilter(), I left them out by accident

@@ -13752,4 +13752,38 @@ WhyUMakeMeDoDis:
 	End Sub
 
 
+	Private Sub NBTaskStrokesMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskStrokesMin.ValueChanged
+		If NBTaskStrokesMin.Value > NBTaskStrokesMax.Value Then NBTaskStrokesMin.Value = NBTaskStrokesMax.Value
+	End Sub
+	Private Sub NBTaskStrokesMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskStrokesMax.ValueChanged
+		If NBTaskStrokesMax.Value < NBTaskStrokesMin.Value Then NBTaskStrokesMax.Value = NBTaskStrokesMin.Value
+	End Sub
+
+	Private Sub NBTaskStrokingTimeMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskStrokingTimeMin.ValueChanged
+		If NBTaskStrokingTimeMin.Value > NBTaskStrokingTimeMax.Value Then NBTaskStrokingTimeMin.Value = NBTaskStrokingTimeMax.Value
+	End Sub
+	Private Sub NBTaskStrokingTimeMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskStrokingTimeMax.ValueChanged
+		If NBTaskStrokingTimeMax.Value < NBTaskStrokingTimeMin.Value Then NBTaskStrokingTimeMax.Value = NBTaskStrokingTimeMin.Value
+	End Sub
+
+	Private Sub NBTaskEdgesMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskEdgesMin.ValueChanged
+		If NBTaskEdgesMin.Value > NBTaskEdgesMax.Value Then NBTaskEdgesMin.Value = NBTaskEdgesMax.Value
+	End Sub
+	Private Sub NBTaskEdgesMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskEdgesMax.ValueChanged
+		If NBTaskEdgesMax.Value < NBTaskEdgesMin.Value Then NBTaskEdgesMax.Value = NBTaskEdgesMin.Value
+	End Sub
+
+	Private Sub NBTaskEdgeHoldTimeMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskEdgeHoldTimeMin.ValueChanged
+		If NBTaskEdgeHoldTimeMin.Value > NBTaskEdgeHoldTimeMax.Value Then NBTaskEdgeHoldTimeMin.Value = NBTaskEdgeHoldTimeMax.Value
+	End Sub
+	Private Sub NBTaskEdgeHoldTimeMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskEdgeHoldTimeMax.ValueChanged
+		If NBTaskEdgeHoldTimeMax.Value < NBTaskEdgeHoldTimeMin.Value Then NBTaskEdgeHoldTimeMax.Value = NBTaskEdgeHoldTimeMin.Value
+	End Sub
+
+	Private Sub NBTaskCBTTimeMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskCBTTimeMin.ValueChanged
+		If NBTaskCBTTimeMin.Value > NBTaskCBTTimeMax.Value Then NBTaskCBTTimeMin.Value = NBTaskCBTTimeMax.Value
+	End Sub
+	Private Sub NBTaskCBTTimeMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskCBTTimeMax.ValueChanged
+		If NBTaskCBTTimeMax.Value < NBTaskCBTTimeMin.Value Then NBTaskCBTTimeMax.Value = NBTaskCBTTimeMin.Value
+	End Sub
 End Class
