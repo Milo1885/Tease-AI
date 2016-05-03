@@ -29,7 +29,7 @@
 			LBCommands.Items.Clear()
 
 			Dim CommandList As New List(Of String)
-			CommandList = Form1.Txt2List(Application.StartupPath & "\System\Commands.txt")
+			CommandList = Txt2List(Application.StartupPath & "\System\Commands.txt")
 
 			For i As Integer = 0 To CommandList.Count - 3 Step 4
 				LBCommands.Items.Add(CommandList(i))
@@ -43,7 +43,7 @@
 			LBCommands.Items.Clear()
 
 			Dim CommandList As New List(Of String)
-			CommandList = Form1.Txt2List(Application.StartupPath & "\System\Command Filters.txt")
+			CommandList = Txt2List(Application.StartupPath & "\System\Command Filters.txt")
 
 			For i As Integer = 0 To CommandList.Count - 3 Step 4
 				LBCommands.Items.Add(CommandList(i))
@@ -57,7 +57,7 @@
 			LBCommands.Items.Clear()
 
 			Dim CommandList As New List(Of String)
-			CommandList = Form1.Txt2List(Application.StartupPath & "\System\System Keywords.txt")
+			CommandList = Txt2List(Application.StartupPath & "\System\System Keywords.txt")
 
 			For i As Integer = 0 To CommandList.Count - 3 Step 4
 				LBCommands.Items.Add(CommandList(i))
@@ -73,7 +73,7 @@
 		If comboCommandType.Text = "Commands" Then
 
 			Dim CommandList As New List(Of String)
-			CommandList = Form1.Txt2List(Application.StartupPath & "\System\Commands.txt")
+			CommandList = Txt2List(Application.StartupPath & "\System\Commands.txt")
 
 			For i As Integer = 0 To CommandList.Count - 1
 				If LBCommands.SelectedItem = CommandList(i) Then
@@ -89,7 +89,7 @@
 		If comboCommandType.Text = "Command Filters" Then
 
 			Dim CommandList As New List(Of String)
-			CommandList = Form1.Txt2List(Application.StartupPath & "\System\Command Filters.txt")
+			CommandList = Txt2List(Application.StartupPath & "\System\Command Filters.txt")
 
 			For i As Integer = 0 To CommandList.Count - 1
 				If LBCommands.SelectedItem = CommandList(i) Then
@@ -105,7 +105,7 @@
 		If comboCommandType.Text = "System Keywords" Then
 
 			Dim CommandList As New List(Of String)
-			CommandList = Form1.Txt2List(Application.StartupPath & "\System\System Keywords.txt")
+			CommandList = Txt2List(Application.StartupPath & "\System\System Keywords.txt")
 
 			For i As Integer = 0 To CommandList.Count - 1
 				If LBCommands.SelectedItem = CommandList(i) Then

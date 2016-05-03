@@ -1,14 +1,33 @@
 ﻿Imports System.IO
+Imports Tease_AI.Common
 
 Partial Class Form1
 
 #Region "-------------------------------------------------- ImageDataContainer ------------------------------------------------"
 
     Friend Enum ImageSourceType
-        Blog
-        Local
-        Remote
-    End Enum
+		Local
+		Remote
+	End Enum
+
+	Enum ImageGenre
+		Blog
+		Butt
+		Boobs
+		Hardcore
+		Softcore
+		Lesbian
+		Blowjob
+		Femdom
+		Lezdom
+		Hentai
+		Gay
+		Maledom
+		Captions
+		General
+		Liked
+		Disliked
+	End Enum
 
     ''' <summary>
     ''' Represents a Object which can store all necessary Data related to genere-Images. 
@@ -16,25 +35,33 @@ Partial Class Form1
     ''' and retrieved from it.
     ''' </summary>
     Friend Class ImageDataContainer
-		Public Name As String = ""
+		Public Name As ImageGenre
 		Public URLFile As String = ""
 		Public LocalDirectory As String = ""
 		Public LocalSubDirectories As Boolean = False
 		Public OfflineMode As Boolean = My.Settings.OfflineMode
 
-		''' =========================================================================================================
-		''' <summary>
-		''' Returns a List of FilePaths or URLs.
-		''' </summary>
-		''' <returns>Returns a List Containing all Found Links. If none are 
-		''' Found an empty List is returned</returns>
-		Public Function ToList() As List(Of String)
+		Public Function CountImages() As Integer
+			Return ToList().Count
+		End Function
+
+		Public Function CountImages(ByRef Type As ImageSourceType) As Integer
+			Return ToList(Type).Count
+		End Function
+
+        ''' =========================================================================================================
+        ''' <summary>
+        ''' Returns a List of FilePaths or URLs.
+        ''' </summary>
+        ''' <returns>Returns a List Containing all Found Links. If none are 
+        ''' Found an empty List is returned</returns>
+        Public Function ToList() As List(Of String)
 			Dim rtnList As New List(Of String)
 
 			rtnList.AddRange(ToList(ImageSourceType.Local))
 
-			' Load only LocalFiles if Oflline-Mode is acivated.
-			If OfflineMode = False Then _
+            ' Load only LocalFiles if Oflline-Mode is acivated.
+            If OfflineMode = False Then _
 				rtnList.AddRange(ToList(ImageSourceType.Remote))
 
 			Return rtnList
@@ -53,20 +80,99 @@ Partial Class Form1
 			' If offline mode is activated then search only for local files.
 			If OfflineMode Then Type = ImageSourceType.Local
 
-			' Load Local ImageList
-			If Type = ImageSourceType.Local AndAlso LocalDirectory <> "" AndAlso LocalDirectory IsNot Nothing Then
-				If LocalSubDirectories = True Then
-					rtnList.AddRange(myDirectory.GetFilesImages(LocalDirectory, SearchOption.TopDirectoryOnly))
-				Else
-					rtnList.AddRange(myDirectory.GetFilesImages(LocalDirectory, SearchOption.AllDirectories))
+			If Name = ImageGenre.Blog Then
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'                                   Blog Images
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				If OfflineMode Or Type = ImageSourceType.Local Then GoTo exitEmpty
+				Dim tmpList As New List(Of String)
+
+				' Load threadsafe all checked Items into List.
+				Dim temp As Object = FrmSettings.UIThread(Function()
+															  Return FrmSettings.URLFileList.CheckedItems.Cast(Of String).ToList
+														  End Function)
+
+				tmpList.AddRange(DirectCast(temp, List(Of String)))
+
+				' Remove Items where File does not exist.
+				tmpList.RemoveAll(Function(x) Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & x & ".txt"))
+
+				' Check Result if Files in List
+				If tmpList.Count < 1 Then GoTo exitEmpty
+
+				For Each fileName As String In tmpList
+					' Read the URL-File
+					Dim addList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & fileName & ".txt")
+
+					' add lines from file
+					rtnList.AddRange(addList)
+				Next
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				' Blog Images - End
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			ElseIf Name = ImageGenre.Liked
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'                                  Liked Images
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				Try
+					Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
+
+					' Remove all URLs if Offline-Mode is activated
+					If OfflineMode Or Type = ImageSourceType.Local Then
+						addlist.RemoveAll(Function(x) isURL(x))
+					End If
+
+					rtnList.AddRange(addlist)
+				Catch ex As Exception
+					Log.WriteError(ex.Message, ex, "Error occured while loading Likelist")
+					GoTo exitEmpty
+				End Try
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				' Liked Images - End
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			ElseIf Name = ImageGenre.Disliked
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'                                Disliked Images
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				Try
+					Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
+
+					' Remove all URLs if Offline-Mode is activated
+					If OfflineMode Or Type = ImageSourceType.Local Then
+						addlist.RemoveAll(Function(x) isURL(x))
+					End If
+
+					rtnList.AddRange(addlist)
+				Catch ex As Exception
+					Log.WriteError(ex.Message, ex, "Error occured while loading Dislikelist")
+					GoTo exitEmpty
+				End Try
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				' Disliked Images - End
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			Else
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'                                 Regular Genres
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+				' Load Local ImageList
+				If Type = ImageSourceType.Local AndAlso LocalDirectory <> "" AndAlso LocalDirectory IsNot Nothing Then
+					If LocalSubDirectories = False Then
+						rtnList.AddRange(myDirectory.GetFilesImages(LocalDirectory, SearchOption.TopDirectoryOnly))
+					Else
+						rtnList.AddRange(myDirectory.GetFilesImages(LocalDirectory, SearchOption.AllDirectories))
+					End If
 				End If
-			End If
 
-			' Load an URL-File
-			If Type = ImageSourceType.Remote And URLFile <> "" And URLFile IsNot Nothing Then
-				rtnList.AddRange(Txt2List(URLFile))
+				' Load an URL-File
+				If Type = ImageSourceType.Remote And URLFile <> "" And URLFile IsNot Nothing Then
+					rtnList.AddRange(Txt2List(URLFile))
+				End If
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				' Regular Genres - End
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 			End If
-
+exitEmpty:
 			Return rtnList
 		End Function
 
@@ -144,114 +250,123 @@ NoneFound:
 
 #End Region ' ImageDataContainer
 
+	Friend Function GetImageData(genre As ImageGenre) As ImageDataContainer
+		Dim tmpObj As Dictionary(Of ImageGenre, ImageDataContainer) = GetImageData()
 
-	''' =========================================================================================================
-	''' <summary>
-	''' Gets a dictionary which contains all nessecary data of genere-images.
-	''' </summary>
-	''' <returns>Returns a dictionary which contains all nessecary data of genere-images.</returns>
-	Friend Function GetImageData() As Dictionary(Of String, ImageDataContainer)
-		Dim rtnDic As New Dictionary(Of String, ImageDataContainer)(StringComparer.OrdinalIgnoreCase)
-		With rtnDic
-			.Add("Butt", New ImageDataContainer With
+		Return tmpObj(genre)
+	End Function
+
+    ''' =========================================================================================================
+    ''' <summary>
+    ''' Gets a dictionary which contains all nessecary data of genere-images.
+    ''' </summary>
+    ''' <returns>Returns a dictionary which contains all nessecary data of genere-images.</returns>
+    Friend Function GetImageData() As Dictionary(Of ImageGenre, ImageDataContainer)
+		Dim rtnDic As New Dictionary(Of ImageGenre, ImageDataContainer) '(StringComparer.OrdinalIgnoreCase)
+        With rtnDic
+			.Add(ImageGenre.Blog, New ImageDataContainer With {.Name = ImageGenre.Blog})
+			.Add(ImageGenre.Liked, New ImageDataContainer With {.Name = ImageGenre.Liked})
+			.Add(ImageGenre.Disliked, New ImageDataContainer With {.Name = ImageGenre.Disliked})
+
+			.Add(ImageGenre.Butt, New ImageDataContainer With
 				 {
-					.Name = "Butt",
+					.Name = ImageGenre.Butt,
 					.LocalDirectory = If(My.Settings.CBIButts, My.Settings.LBLButtPath, ""),
 					.LocalSubDirectories = My.Settings.CBButtSubDir,
 					.URLFile = If(My.Settings.CBURLButts, My.Settings.LBLButtURL, "")
 				})
 
-			.Add("Boobs", New ImageDataContainer With
+			.Add(ImageGenre.Boobs, New ImageDataContainer With
 				 {
-					.Name = "Butt",
+					.Name = ImageGenre.Boobs,
 					.LocalDirectory = If(My.Settings.CBIBoobs, My.Settings.LBLBoobPath, ""),
 					.LocalSubDirectories = My.Settings.CBButtSubDir,
 					.URLFile = If(My.Settings.CBURLBoobs, My.Settings.LBLBoobURL, "")
 				})
 
-			.Add("Hardcore", New ImageDataContainer With
+			.Add(ImageGenre.Hardcore, New ImageDataContainer With
 				 {
-					.Name = "Hardcore",
+					.Name = ImageGenre.Hardcore,
 					.LocalDirectory = If(My.Settings.CBIHardcore, My.Settings.IHardcore, ""),
 					.LocalSubDirectories = My.Settings.CBHardcore,
 					.URLFile = If(My.Settings.CBURLHardcore, My.Settings.HardcoreURLFile, "")
 				})
 
-			.Add("Softcore", New ImageDataContainer With
+			.Add(ImageGenre.Softcore, New ImageDataContainer With
 				 {
-					.Name = "Softcore",
+					.Name = ImageGenre.Softcore,
 					.LocalDirectory = If(My.Settings.CBISoftcore, My.Settings.ISoftcore, ""),
 					.LocalSubDirectories = My.Settings.CBSoftcore,
 					.URLFile = If(My.Settings.CBURLSoftcore, My.Settings.SoftcoreURLFile, "")
 				})
 
-			.Add("Lesbian", New ImageDataContainer With
+			.Add(ImageGenre.Lesbian, New ImageDataContainer With
 				 {
-					.Name = "Lesbian",
+					.Name = ImageGenre.Lesbian,
 					.LocalDirectory = If(My.Settings.CBILesbian, My.Settings.ILesbian, ""),
 					.LocalSubDirectories = My.Settings.CBLesbian,
 					.URLFile = If(My.Settings.CBURLLesbian, My.Settings.LesbianURLFile, "")
 				})
 
-			.Add("Blowjob", New ImageDataContainer With
+			.Add(ImageGenre.Blowjob, New ImageDataContainer With
 				 {
-					.Name = "Blowjob",
+					.Name = ImageGenre.Blowjob,
 					.LocalDirectory = If(My.Settings.CBIBlowjob, My.Settings.IBlowjob, ""),
 					.LocalSubDirectories = My.Settings.CBBlowjob,
 					.URLFile = If(My.Settings.CBURLBlowjob, My.Settings.BlowjobURLFile, "")
 				})
 
-			.Add("Femdom", New ImageDataContainer With
+			.Add(ImageGenre.Femdom, New ImageDataContainer With
 				 {
-					.Name = "Femdom",
+					.Name = ImageGenre.Femdom,
 					.LocalDirectory = If(My.Settings.CBIFemdom, My.Settings.IFemdom, ""),
 					.LocalSubDirectories = My.Settings.CBFemdom,
 					.URLFile = If(My.Settings.CBURLFemdom, My.Settings.FemdomURLFile, "")
 				})
 
-			.Add("Lezdom", New ImageDataContainer With
+			.Add(ImageGenre.Lezdom, New ImageDataContainer With
 				 {
-					.Name = "Lezdom",
+					.Name = ImageGenre.Lezdom,
 					.LocalDirectory = If(My.Settings.CBILezdom, My.Settings.ILezdom, ""),
 					.LocalSubDirectories = My.Settings.ILezdomSD,
 					.URLFile = If(My.Settings.CBURLLezdom, My.Settings.LezdomURLFile, "")
 				})
 
-			.Add("Hentai", New ImageDataContainer With
+			.Add(ImageGenre.Hentai, New ImageDataContainer With
 				 {
-					.Name = "Hentai",
+					.Name = ImageGenre.Hentai,
 					.LocalDirectory = If(My.Settings.CBIHentai, My.Settings.IHentai, ""),
 					.LocalSubDirectories = My.Settings.IHentaiSD,
 					.URLFile = If(My.Settings.CBURLHentai, My.Settings.HentaiURLFile, "")
 				})
 
-			.Add("Gay", New ImageDataContainer With
+			.Add(ImageGenre.Gay, New ImageDataContainer With
 				 {
-					.Name = "Gay",
+					.Name = ImageGenre.Gay,
 					.LocalDirectory = If(My.Settings.CBIGay, My.Settings.IGay, ""),
 					.LocalSubDirectories = My.Settings.IGaySD,
 					.URLFile = If(My.Settings.CBURLGay, My.Settings.GayURLFile, "")
 				})
 
-			.Add("Maledom", New ImageDataContainer With
+			.Add(ImageGenre.Maledom, New ImageDataContainer With
 				 {
-					.Name = "Maledom",
+					.Name = ImageGenre.Maledom,
 					.LocalDirectory = If(My.Settings.CBIMaledom, My.Settings.IMaledom, ""),
 					.LocalSubDirectories = My.Settings.IMaledomSD,
 					.URLFile = If(My.Settings.CBURLMaledom, My.Settings.MaledomURLFile, "")
 				})
 
-			.Add("Captions", New ImageDataContainer With
+			.Add(ImageGenre.Captions, New ImageDataContainer With
 				 {
-					.Name = "Captions",
+					.Name = ImageGenre.Captions,
 					.LocalDirectory = If(My.Settings.CBICaptions, My.Settings.ICaptions, ""),
 					.LocalSubDirectories = My.Settings.ICaptionsSD,
 					.URLFile = If(My.Settings.CBURLCaptions, My.Settings.CaptionsURLFile, "")
 				})
 
-			.Add("General", New ImageDataContainer With
+			.Add(ImageGenre.General, New ImageDataContainer With
 				 {
-					.Name = "General",
+					.Name = ImageGenre.General,
 					.LocalDirectory = If(My.Settings.CBIGeneral, My.Settings.IGeneral, ""),
 					.LocalSubDirectories = My.Settings.IGeneralSD,
 					.URLFile = If(My.Settings.CBURLGeneral, My.Settings.GeneralURLFile, "")
@@ -263,96 +378,55 @@ NoneFound:
 
 #Region "------------------------------------------------- GetRandom Image ----------------------------------------------------"
 
-    ''' <summary>
-    ''' Gets a random image URI from all available Sources
-    ''' </summary>
-    ''' <returns>The URI of a random Image.</returns>
-    Friend Function GetRandomImage() As String
+	''' <summary>
+	''' Gets a random image URI from all available Sources
+	''' </summary>
+	''' <returns>The URI of a random Image.</returns>
+	Friend Function GetRandomImage() As String
         ' Get all definitions for Images.
-        Dim dicFilePaths As Dictionary(Of String, ImageDataContainer) = GetImageData()
-        Dim AllImages As New List(Of String)
+        Dim dicFilePaths As Dictionary(Of ImageGenre, ImageDataContainer) = GetImageData()
+		Dim AllImages As New List(Of String)
 
         ' Fetch all available ImageLocations
-        For Each genre As String In dicFilePaths.Keys
-            AllImages.AddRange(dicFilePaths(genre).ToList())
-        Next
+        For Each genre As ImageGenre In dicFilePaths.Keys
+			AllImages.AddRange(dicFilePaths(genre).ToList())
+		Next
 
         ' Check if there are images
         If AllImages.Count = 0 Then Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
 
         ' get an Random Image from the all available Locations
         Return AllImages(New Random().Next(0, AllImages.Count)).ToString
-    End Function
+	End Function
 
     ''' <summary>
     ''' Gets a random image URI for given Genre from Local and URL-Files.
     ''' </summary>
     ''' <param name="genre">Determines the Genre to get a random image for.</param>
     ''' <returns>The URI of a random Image.</returns>
-    Friend Function GetRandomImage(ByVal genre As String) As String
-		' Get all definitions for Images.
-		Dim dicFilePaths As Dictionary(Of String, ImageDataContainer) = GetImageData()
+    Friend Function GetRandomImage(ByVal genre As ImageGenre) As String
+        ' Get all definitions for Images.
+        Dim dicFilePaths As Dictionary(Of ImageGenre, ImageDataContainer) = GetImageData()
 
-		' get an Random Image from the Random Genre.
-		Return dicFilePaths(genre).Random()
+        ' get an Random Image from the Random Genre.
+        Return dicFilePaths(genre).Random()
 	End Function
 
-	''' <summary>
-	''' Gets a random image URI for the given sourcetype (URL or Local).
-	''' </summary>
-	''' <param name="source">Determines the source to get a random image for.</param>
-	''' <returns>The URI of a random Image.</returns>
-	Friend Function GetRandomImage(ByVal source As ImageSourceType) As String
-		' Get all definitions for Images.
-		Dim dicFilePaths As Dictionary(Of String, ImageDataContainer) = GetImageData()
+    ''' <summary>
+    ''' Gets a random image URI for the given sourcetype (URL or Local).
+    ''' </summary>
+    ''' <param name="source">Determines the source to get a random image for.</param>
+    ''' <returns>The URI of a random Image.</returns>
+    Friend Function GetRandomImage(ByVal source As ImageSourceType) As String
+        ' Get all definitions for Images.
+        Dim dicFilePaths As Dictionary(Of ImageGenre, ImageDataContainer) = GetImageData()
 
-        Dim allImages As New List(Of String)
+		Dim allImages As New List(Of String)
 
-        If source = ImageSourceType.Blog And My.Settings.OfflineMode = False Then
-            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-            '                Get imagelocation from URL-Files not genrerelated.
-            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-            Dim tmpList As New List(Of String)
-
-            ' Load all checked Items into List.
-            tmpList.AddRange(FrmSettings.URLFileList.CheckedItems.Cast(Of String))
-
-            ' Remove Items where File does not exist.
-            tmpList.RemoveAll(Function(x) Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & x & ".txt"))
-NextUrlFile:
-            ' Check Result if Files in List
-            If tmpList.Count < 1 Then GoTo NoNeFound
-
-            ' Get a random URL-File 
-            Dim fileName As String = tmpList(randomizer.Next(0, tmpList.Count))
-
-            ' Read the URL-File
-            Dim linesGB As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & fileName & ".txt")
-
-            ' Check if File is empty... 
-            If linesGB.Count = 0 Then
-                '... If yes then remove file From List and try again.
-                tmpList.Remove(fileName)
-                GoTo NextUrlFile
-            End If
-
-            ' Get a random Entry 
-            Do
-                FoundString = linesGB(randomizer.Next(0, linesGB.Count))
-            Loop Until FoundString <> ""
-
-            ' Return the image URL
-            Return FoundString
-            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-            ' GetBlogimage - End
-            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-        Else
-            ' Fetch all available ImageLocations for sourceType
-            For Each genre As String In dicFilePaths.Keys
-                allImages.AddRange(dicFilePaths(genre).ToList(source))
-            Next
-        End If
-
+        ' Fetch all available ImageLocations for sourceType
+        For Each genre As String In dicFilePaths.Keys
+			allImages.AddRange(dicFilePaths(genre).ToList(source))
+		Next
 
         ' Check if Genres are present.
         If allImages.Count = 0 Then GoTo NoNeFound
@@ -366,23 +440,23 @@ NoNeFound:
 		Else Return Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg"
 	End Function
 
-	''' <summary>
-	''' Gets a random image URI for the given genre and sourcetype (URL or Local)..
-	''' </summary>
-	''' <param name="genre">Determines the genre to get a random image for.</param>
-	''' <param name="source">Determines the source to get a random image for.</param>
-	''' <returns>The URI of a random Image.</returns>
-	Friend Function GetRandomImage(ByVal genre As String, ByVal source As ImageSourceType) As String
-		' Get all definitions for Images.
-		Dim dicFilePaths As Dictionary(Of String, ImageDataContainer) = GetImageData()
+    ''' <summary>
+    ''' Gets a random image URI for the given genre and sourcetype (URL or Local)..
+    ''' </summary>
+    ''' <param name="genre">Determines the genre to get a random image for.</param>
+    ''' <param name="source">Determines the source to get a random image for.</param>
+    ''' <returns>The URI of a random Image.</returns>
+    Friend Function GetRandomImage(ByVal genre As ImageGenre, ByVal source As ImageSourceType) As String
+        ' Get all definitions for Images.
+        Dim dicFilePaths As Dictionary(Of ImageGenre, ImageDataContainer) = GetImageData()
 
-		' Check if the given Genre is found.
-		If dicFilePaths.Keys.Contains(genre) Then
-			' get an Random Image
-			Return dicFilePaths(genre).Random(source)
+        ' Check if the given Genre is found.
+        If dicFilePaths.Keys.Contains(genre) Then
+            ' get an Random Image
+            Return dicFilePaths(genre).Random(source)
 		Else
-			' Return the Error-Image FilePath
-			If source = ImageSourceType.Local _
+            ' Return the Error-Image FilePath
+            If source = ImageSourceType.Local _
 			Then Return Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg" _
 			Else Return Application.StartupPath & "\Images\System\NoURLFilesSelected.jpg"
 		End If
@@ -406,9 +480,9 @@ NoNeFound:
 	Private Class ImageFetchObject
 		Public ImageLocation As String = ""
 
-        Public Source As ImageSourceType
+		Public Source As ImageSourceType
 
-        Private _SaveImageDirectory As String = ""
+		Private _SaveImageDirectory As String = ""
 
 		Public Property SaveImageDirectory As String
 			Get
@@ -456,7 +530,7 @@ NoNeFound:
 					Else
                         ' ####################### Local Image #########################
                         .Source = ImageSourceType.Local
-                        .FetchedImage = Image.FromFile(.ImageLocation)
+						.FetchedImage = Image.FromFile(.ImageLocation)
 					End If
 				End With
 			Catch ex As Exception
@@ -492,15 +566,15 @@ NoNeFound:
 				OldImage.Dispose()
 			End If
 			GC.Collect()
-            CheckDommeTags()
+			CheckDommeTags()
 
-            If FetchResult.Source = ImageSourceType.Local Then
-                Debug.Print("Local Image PictureStrip")
+			If FetchResult.Source = ImageSourceType.Local Then
+				Debug.Print("Local Image PictureStrip")
 
-                If _ImageFileNames.Contains(FetchResult.ImageLocation) Then _
-                    DeleteLocalImageFilePath = FetchResult.ImageLocation
+				If _ImageFileNames.Contains(FetchResult.ImageLocation) Then _
+					DeleteLocalImageFilePath = FetchResult.ImageLocation
 
-                CurrentImage = FetchResult.ImageLocation
+				CurrentImage = FetchResult.ImageLocation
 
                 'CopyImageLocation
                 ToolStripMenuItem5.Enabled = True
@@ -508,7 +582,7 @@ NoNeFound:
                 'Save Image
                 ToolStripMenuItem1.Enabled = False
 
-                SaveImageToToolStripMenuItem.Enabled = False
+				SaveImageToToolStripMenuItem.Enabled = False
 
                 'Like Image
                 ToolStripMenuItem2.Enabled = False
@@ -517,9 +591,9 @@ NoNeFound:
                 'Remove from URLFile
                 ToolStripMenuItem4.Enabled = False
 
-            Else
-                Debug.Print("Blog Image PictureStrip")
-                CurrentImage = FoundString
+			Else
+				Debug.Print("Blog Image PictureStrip")
+				CurrentImage = FoundString
 
                 'CopyImageLocation
                 ToolStripMenuItem5.Enabled = True
@@ -527,7 +601,7 @@ NoNeFound:
                 'Save Image
                 ToolStripMenuItem1.Enabled = True
 
-                SaveImageToToolStripMenuItem.Enabled = True
+				SaveImageToToolStripMenuItem.Enabled = True
 
                 'Like Image
                 ToolStripMenuItem2.Enabled = True
@@ -536,9 +610,9 @@ NoNeFound:
                 'Remove from URLFile
                 ToolStripMenuItem4.Enabled = True
 
-            End If
+			End If
 
-            Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
+			Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
 						"	ImageLocation: " & FetchResult.ImageLocation)
 		End If
 	End Sub
@@ -576,31 +650,19 @@ NoNeFound:
 	End Sub
 
 
-	''' <summary>
-	''' Starts to Download an Image on Background. Make sure, to tell the Backgroundworker, 
-	''' when you finished your work and waiting for him to complete.
-	''' </summary>
-	''' <param name="OnlineImage"></param>
-	''' <returns></returns>
-	Public Function BeginImageFetch(ByVal OnlineImage As String) As String
+    ''' <summary>
+    ''' Starts to Download an Image on Background. Make sure, to tell the Backgroundworker, 
+    ''' when you finished your work and waiting for him to complete.
+    ''' </summary>
+    ''' <param name="genre"></param>
+    ''' <returns></returns>
+    Public Function BeginImageFetch(ByVal genre As ImageGenre) As String
 
-		Dim ImageToCache As String = ""
 
-		If OnlineImage = "Blog" Then
-            '===============================================================================
-            '	                        Pick from available Blog
-            '===============================================================================
-            ' Set image to load
-            ImageToCache = GetRandomImage(ImageSourceType.Blog)
-        Else
-			'===============================================================================
-			'                            Pick by genre.
-			'===============================================================================
-			ImageToCache = GetRandomImage(OnlineImage)
-		End If
+		Dim ImageToCache As String = GetRandomImage(genre)
 
-		' Start the Image-Download, with manual Event-triggering.
-		If ImageToCache <> "" And ImageToCache IsNot Nothing _
+        ' Start the Image-Download, with manual Event-triggering.
+        If ImageToCache <> "" And ImageToCache IsNot Nothing _
 		Then ShowImage(ImageToCache, False)
 
 		Return ImageToCache

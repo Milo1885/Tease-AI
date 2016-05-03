@@ -30,7 +30,7 @@ Public Class Form9
 			GetaiBoxList.Clear()
 
 
-			GetaiBoxList = Form1.Txt2List(OpenFileDialog1.FileName)
+			GetaiBoxList = Txt2List(OpenFileDialog1.FileName)
 
 			NextCycle = 0
 
@@ -195,7 +195,7 @@ FoundScriptType:
 							Next
 
 							Dim CompareList As New List(Of String)
-							CompareList = Form1.Txt2List(aiFile)
+							CompareList = Txt2List(aiFile)
 
 							For x As Integer = 0 To CLBAIBox.Items.Count - 1
 								If CompareList.Contains(CLBAIBox.Items(x)) Then
@@ -283,7 +283,7 @@ FoundScriptType:
 				Dim Cycle As String = "All"
 
 				Dim GetResponse As New List(Of String)
-				GetResponse = Form1.Txt2List(aiFile)
+				GetResponse = Txt2List(aiFile)
 
 				Dim ResponseKeywords As String = GetResponse(0)
 
@@ -707,7 +707,7 @@ FoundScriptType:
 
 		For i As Integer = 0 To AIBoxList.Count - 1
 			AIBoxContents.Add("[aiBox File Begin] " & AIBoxList(i).Replace(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\", ""))
-			AIBoxCurrent = Form1.Txt2List(AIBoxList(i))
+			AIBoxCurrent = Txt2List(AIBoxList(i))
 			For j As Integer = 0 To AIBoxCurrent.Count - 1
 				AIBoxContents.Add(AIBoxCurrent(j))
 			Next
@@ -749,7 +749,7 @@ FoundScriptType:
 		Debug.Print("Hopedir = " & HopeDir)
 
 		AIBoxContents.Add("[aiBox File Begin] " & HopeDir)
-		AIBoxList = Form1.Txt2List(DropPath)
+		AIBoxList = Txt2List(DropPath)
 
 		For i As Integer = 0 To AIBoxList.Count - 1
 			AIBoxContents.Add(AIBoxList(i))
@@ -775,7 +775,7 @@ FoundScriptType:
 		GetaiBoxList.Clear()
 
 
-		GetaiBoxList = Form1.Txt2List(DropPath)
+		GetaiBoxList = Txt2List(DropPath)
 
 		NextCycle = 0
 
@@ -858,7 +858,7 @@ FoundScriptType:
 
 
 			AIBoxContents.Add("[aiBox File Begin] " & HopeDir)
-			AIBoxList = Form1.Txt2List(OpenFileDialog1.FileName)
+			AIBoxList = Txt2List(OpenFileDialog1.FileName)
 
 			For i As Integer = 0 To AIBoxList.Count - 1
 				AIBoxContents.Add(AIBoxList(i))

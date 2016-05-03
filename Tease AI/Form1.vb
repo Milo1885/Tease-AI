@@ -5406,7 +5406,7 @@ SkipGotoSearch:
 
 			Debug.Print("FileGoto = " & FileGoto)
 
-			Dim gotoline As Integer = 0
+			Dim gotoline As Integer = -1
 			Do
 				gotoline += 1
 				If GotoDommeLevel = True And gotoline = CountGotoLines Then
@@ -9661,398 +9661,100 @@ StatusUpdateEnd:
 
 		If StringClean.Contains("#RandomSlideshowCategory") Then StringClean = StringClean.Replace("#RandomSlideshowCategory", RandomSlideshowCategory)
 
+        '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        '                                   ImageCount
+        '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        If StringClean.Contains("#LocalImageCount") Then
+			Dim temp As Dictionary(Of ImageGenre, ImageDataContainer) = GetImageData()
+			Dim counter As Integer = 0
 
-		If StringClean.Contains("#LocalImageCount") Then
-            'TODO: Implement ImageDataobject
-
-            Dim CheckString As String
-			Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-
-			For i As Integer = 1 To 11
-				CheckString = "NULL"
-				CheckBoolean = False
-				If i = 1 And FrmSettings.CBIHardcore.Checked = True And Directory.Exists(FrmSettings.LBLIHardcore.Text) Then CheckString = FrmSettings.LBLIHardcore.Text
-				If i = 2 And FrmSettings.CBISoftcore.Checked = True And Directory.Exists(FrmSettings.LBLISoftcore.Text) Then CheckString = FrmSettings.LBLISoftcore.Text
-				If i = 3 And FrmSettings.CBILesbian.Checked = True And Directory.Exists(FrmSettings.LBLILesbian.Text) Then CheckString = FrmSettings.LBLILesbian.Text
-				If i = 4 And FrmSettings.CBIBlowjob.Checked = True And Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then CheckString = FrmSettings.LBLIBlowjob.Text
-				If i = 5 And FrmSettings.CBIFemdom.Checked = True And Directory.Exists(FrmSettings.LBLIFemdom.Text) Then CheckString = FrmSettings.LBLIFemdom.Text
-				If i = 6 And FrmSettings.CBILezdom.Checked = True And Directory.Exists(FrmSettings.LBLILezdom.Text) Then CheckString = FrmSettings.LBLILezdom.Text
-				If i = 7 And FrmSettings.CBIHentai.Checked = True And Directory.Exists(FrmSettings.LBLIHentai.Text) Then CheckString = FrmSettings.LBLIHentai.Text
-				If i = 8 And FrmSettings.CBIGay.Checked = True And Directory.Exists(FrmSettings.LBLIGay.Text) Then CheckString = FrmSettings.LBLIGay.Text
-				If i = 9 And FrmSettings.CBIMaledom.Checked = True And Directory.Exists(FrmSettings.LBLIMaledom.Text) Then CheckString = FrmSettings.LBLIMaledom.Text
-				If i = 10 And FrmSettings.CBICaptions.Checked = True And Directory.Exists(FrmSettings.LBLICaptions.Text) Then CheckString = FrmSettings.LBLICaptions.Text
-				If i = 11 And FrmSettings.CBIGeneral.Checked = True And Directory.Exists(FrmSettings.LBLIGeneral.Text) Then CheckString = FrmSettings.LBLIGeneral.Text
-
-				If i = 1 And FrmSettings.CBIHardcoreSD.Checked = True Then CheckBoolean = True
-				If i = 2 And FrmSettings.CBISoftcoreSD.Checked = True Then CheckBoolean = True
-				If i = 3 And FrmSettings.CBILesbianSD.Checked = True Then CheckBoolean = True
-				If i = 4 And FrmSettings.CBIBlowjobSD.Checked = True Then CheckBoolean = True
-				If i = 5 And FrmSettings.CBIFemdomSD.Checked = True Then CheckBoolean = True
-				If i = 6 And FrmSettings.CBILezdomSD.Checked = True Then CheckBoolean = True
-				If i = 7 And FrmSettings.CBIHentaiSD.Checked = True Then CheckBoolean = True
-				If i = 8 And FrmSettings.CBIGaySD.Checked = True Then CheckBoolean = True
-				If i = 9 And FrmSettings.CBIMaledomSD.Checked = True Then CheckBoolean = True
-				If i = 10 And FrmSettings.CBICaptionsSD.Checked = True Then CheckBoolean = True
-				If i = 11 And FrmSettings.CBIGeneralSD.Checked = True Then CheckBoolean = True
-
-
-				If Not CheckString = "NULL" Then
-					If CheckBoolean = True Then
-						files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-					Else
-						files = myDirectory.GetFiles(CheckString, "*.*")
-					End If
-					Array.Sort(files)
-					For Each fi As String In files
-						If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-							LocalList.Add(fi)
-						End If
-					Next
-				End If
+			For Each genre As ImageGenre In temp.Keys
+				counter += temp(genre).CountImages(ImageSourceType.Local)
 			Next
 
-			StringClean = StringClean.Replace("#LocalImageCount", LocalList.Count)
-
+			StringClean = StringClean.Replace("#LocalImageCount", counter)
 		End If
 
+		If StringClean.Contains("#BlogImageCount") Then
+			StringClean = StringClean.Replace("#BlogImageCount", GetImageData(ImageGenre.Blog).CountImages())
+		End If
 
+		If StringClean.Contains("#ButtImageCount") Then
+			StringClean = StringClean.Replace("#ButtImageCount", GetImageData(ImageGenre.Butt).CountImages())
+		End If
+
+		If StringClean.Contains("#ButtsImageCount") Then
+			StringClean = StringClean.Replace("#ButtsImageCount", GetImageData(ImageGenre.Butt).CountImages())
+		End If
+
+		If StringClean.Contains("#BoobImageCount") Then
+			StringClean = StringClean.Replace("#BoobImageCount", GetImageData(ImageGenre.Boobs).CountImages())
+		End If
+
+		If StringClean.Contains("#BoobsImageCount") Then
+			StringClean = StringClean.Replace("#BoobsImageCount", GetImageData(ImageGenre.Boobs).CountImages())
+		End If
 
 		If StringClean.Contains("#HardcoreImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBIHardcore.Checked = True And Directory.Exists(FrmSettings.LBLIHardcore.Text) Then CheckString = FrmSettings.LBLIHardcore.Text
-			If FrmSettings.CBIHardcoreSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#HardcoreImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#HardcoreImageCount", GetImageData(ImageGenre.Hardcore).CountImages())
+		End If
+
+		If StringClean.Contains("#HardcoreImageCount") Then
+			StringClean = StringClean.Replace("#HardcoreImageCount", GetImageData(ImageGenre.Hardcore).CountImages())
 		End If
 
 		If StringClean.Contains("#SoftcoreImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBISoftcore.Checked = True And Directory.Exists(FrmSettings.LBLISoftcore.Text) Then CheckString = FrmSettings.LBLISoftcore.Text
-			If FrmSettings.CBISoftcoreSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#SoftcoreImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#SoftcoreImageCount", GetImageData(ImageGenre.Softcore).CountImages())
 		End If
 
 		If StringClean.Contains("#LesbianImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBILesbian.Checked = True And Directory.Exists(FrmSettings.LBLILesbian.Text) Then CheckString = FrmSettings.LBLILesbian.Text
-			If FrmSettings.CBILesbianSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#LesbianImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#LesbianImageCount", GetImageData(ImageGenre.Lesbian).CountImages())
 		End If
 
 		If StringClean.Contains("#BlowjobImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBIBlowjob.Checked = True And Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then CheckString = FrmSettings.LBLIBlowjob.Text
-			If FrmSettings.CBIBlowjobSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#BlowjobImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#BlowjobImageCount", GetImageData(ImageGenre.Blowjob).CountImages())
 		End If
 
 		If StringClean.Contains("#FemdomImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBIFemdom.Checked = True And Directory.Exists(FrmSettings.LBLIFemdom.Text) Then CheckString = FrmSettings.LBLIFemdom.Text
-			If FrmSettings.CBIFemdomSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#FemdomImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#FemdomImageCount", GetImageData(ImageGenre.Femdom).CountImages())
 		End If
 
 		If StringClean.Contains("#LezdomImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBILezdom.Checked = True And Directory.Exists(FrmSettings.LBLILezdom.Text) Then CheckString = FrmSettings.LBLILezdom.Text
-			If FrmSettings.CBILezdomSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#LezdomImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#LezdomImageCount", GetImageData(ImageGenre.Lezdom).CountImages())
 		End If
 
 		If StringClean.Contains("#HentaiImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBIHentai.Checked = True And Directory.Exists(FrmSettings.LBLIHentai.Text) Then CheckString = FrmSettings.LBLIHentai.Text
-			If FrmSettings.CBIHentaiSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#HentaiImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#HentaiImageCount", GetImageData(ImageGenre.Hentai).CountImages())
 		End If
 
 		If StringClean.Contains("#GayImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBIGay.Checked = True And Directory.Exists(FrmSettings.LBLIGay.Text) Then CheckString = FrmSettings.LBLIGay.Text
-			If FrmSettings.CBIGaySD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#GayImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#GayImageCount", GetImageData(ImageGenre.Gay).CountImages())
 		End If
 
 		If StringClean.Contains("#MaledomImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBIMaledom.Checked = True And Directory.Exists(FrmSettings.LBLIMaledom.Text) Then CheckString = FrmSettings.LBLIMaledom.Text
-			If FrmSettings.CBIMaledomSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#MaledomImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#MaledomImageCount", GetImageData(ImageGenre.Maledom).CountImages())
 		End If
 
 		If StringClean.Contains("#CaptionsImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-			Dim LocalList As New List(Of String)
-			LocalList.Clear()
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-			CheckString = "NULL"
-			CheckBoolean = False
-			If FrmSettings.CBICaptions.Checked = True And Directory.Exists(FrmSettings.LBLICaptions.Text) Then CheckString = FrmSettings.LBLICaptions.Text
-			If FrmSettings.CBICaptionsSD.Checked = True Then CheckBoolean = True
-			If Not CheckString = "NULL" Then
-				If CheckBoolean = True Then
-					files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(CheckString, "*.*")
-				End If
-				Array.Sort(files)
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						LocalList.Add(fi)
-					End If
-				Next
-			End If
-			StringClean = StringClean.Replace("#CaptionsImageCount", LocalList.Count)
+			StringClean = StringClean.Replace("#CaptionsImageCount", GetImageData(ImageGenre.Captions).CountImages())
 		End If
 
-        If StringClean.Contains("#GeneralImageCount") Then
-            'TODO: Implement ImageDataobject
-            Dim CheckString As String
-            Dim CheckBoolean As Boolean
-            Dim LocalList As New List(Of String)
-            LocalList.Clear()
-            Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-            Dim files As String()
-            CheckString = "NULL"
-            CheckBoolean = False
-            If FrmSettings.CBIGeneral.Checked = True And Directory.Exists(FrmSettings.LBLIGeneral.Text) Then CheckString = FrmSettings.LBLIGeneral.Text
-            If FrmSettings.CBIGeneralSD.Checked = True Then CheckBoolean = True
-            If Not CheckString = "NULL" Then
-                If CheckBoolean = True Then
-                    files = myDirectory.GetFiles(CheckString, "*.*", SearchOption.AllDirectories)
-                Else
-                    files = myDirectory.GetFiles(CheckString, "*.*")
-                End If
-                Array.Sort(files)
-                For Each fi As String In files
-                    If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-                        LocalList.Add(fi)
-                    End If
-                Next
-            End If
-            StringClean = StringClean.Replace("#GeneralImageCount", LocalList.Count)
-        End If
+		If StringClean.Contains("#GeneralImageCount") Then
+			StringClean = StringClean.Replace("#GeneralImageCount", GetImageData(ImageGenre.General).CountImages())
+		End If
 
-
-        If StringClean.Contains("#LikedImageCount") Then
-			Try
-				Dim LikeList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
-				StringClean = StringClean.Replace("#LikedImageCount", LikeList.Count)
-			Catch
-				StringClean = StringClean.Replace("#LikedImageCount", "0")
-			End Try
-
+		If StringClean.Contains("#LikedImageCount") Then
+			StringClean = StringClean.Replace("#LikedImageCount", GetImageData(ImageGenre.Liked).CountImages())
 		End If
 
 		If StringClean.Contains("#DislikedImageCount") Then
-			Try
-				Dim DislikeList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
-				StringClean = StringClean.Replace("#DislikedImageCount", DislikeList.Count)
-			Catch
-				StringClean = StringClean.Replace("#DislikedImageCount", "0")
-			End Try
-
+			StringClean = StringClean.Replace("#DislikedImageCount", GetImageData(ImageGenre.Disliked).CountImages())
 		End If
+        '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+        ' ImageCount - End
+        '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
-
-		StringClean = StringClean.Replace("#CurrentImage", CurrentImage)
+        StringClean = StringClean.Replace("#CurrentImage", CurrentImage)
 
 		Return StringClean
 
@@ -13699,98 +13401,94 @@ ExternalAudio:
 
 			CustomSlideshowList.Clear()
 
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-
-			Dim dicImageData As Dictionary(Of String, ImageDataContainer) = GetImageData()
 
 			If LCase(SlideFlag).Contains("hardcore") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("hardcore").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Hardcore).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("softcore") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("softcore").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Softcore).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("lesbian") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("lesbian").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Lesbian).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("blowjob") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("blowjob").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Blowjob).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("femdom") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("femdom").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Femdom).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("lezdom") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("lezdom").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Lezdom).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("hentai") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("hentai").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Hentai).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("gay") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("gay").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Gay).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("maledom") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("maledom").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Maledom).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("captions") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("captions").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Captions).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("general") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("general").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.General).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("boob") Or LCase(SlideFlag).Contains("boobs") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("boobs").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Boobs).ToList())
 				Catch
 				End Try
 			End If
 
 			If LCase(SlideFlag).Contains("butt") Or LCase(SlideFlag).Contains("butts") Then
 				Try
-					CustomSlideshowList.AddRange(dicImageData("butt").ToList())
+					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Butt).ToList())
 				Catch
 				End Try
 			End If
@@ -16326,7 +16024,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@SelfYoung") Then
-				If FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then	'Or DommeVideo = False Then
+				If FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then 'Or DommeVideo = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -16366,7 +16064,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@SelfOld") Then
-				If FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then	'Or DommeVideo = False Then
+				If FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then 'Or DommeVideo = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -20630,12 +20328,12 @@ Skip_RandomFile:
 			If Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
 		End If
 
-	
+
 		If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
 			If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
 		End If
-		If FilterString.Contains("@ShowLocalImage") And FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And _
-		   FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And _
+		If FilterString.Contains("@ShowLocalImage") And FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And
+		   FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And
 			  FrmSettings.CBIGay.Checked = False And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then Return False
 		If FilterString.Contains("@ShowLocalImage") Then
 			If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
@@ -20889,7 +20587,7 @@ Skip_RandomFile:
 		If FilterString.Contains("@Flag(") Then
 			Dim WriteFlag As String = GetParentheses(FilterString, "@Flag(")
 
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And _
+			If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And
 			Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then Return False
 
 		End If
@@ -20897,7 +20595,7 @@ Skip_RandomFile:
 		If FilterString.Contains("@NotFlag(") Then
 			Dim WriteFlag As String = GetParentheses(FilterString, "@NotFlag(")
 
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or _
+			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or
 			File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then Return False
 
 		End If
@@ -21084,7 +20782,7 @@ Skip_RandomFile:
 				.Add("@ShowCaptionsImage", Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
 				.Add("@ShowGeneralImage", Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
 				.Add("@ShowBlogImage", FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@NewBlogImage", __ConditionDic("@ShowBlogImage"))	' duplicate Command, lets get the Value af the other one.
+				.Add("@NewBlogImage", __ConditionDic("@ShowBlogImage")) ' duplicate Command, lets get the Value af the other one.
 				.Add("@ShowLocalImage", FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True _
 					  Or (FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And FrmSettings.CBIBlowjob.Checked = False _
 					   And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And FrmSettings.CBIGay.Checked = False _
@@ -21211,25 +20909,25 @@ Skip_RandomFile:
 			' Minimum length is 3 Chars, maximum Command length has no restriction.
 			Dim __re As Regex = New Regex("@[@\w\d+]{3,}[\(\[]*", RegexOptions.IgnoreCase)
 
-			
-				' Execute regex on current line, to find all containing Commands
-				Dim mc As MatchCollection = __re.Matches(FilterString)
 
-				For Each m As Match In mc
-					If __ConditionDic.Keys.Contains(m.Value) AndAlso __ConditionDic(m.Value) Then
-						'===============================================================================
-						'					Known Command - DELETE Condition = TRUE
-						'===============================================================================
-						' The Command is known and his delete condition is True -> delete line
+			' Execute regex on current line, to find all containing Commands
+			Dim mc As MatchCollection = __re.Matches(FilterString)
+
+			For Each m As Match In mc
+				If __ConditionDic.Keys.Contains(m.Value) AndAlso __ConditionDic(m.Value) Then
+					'===============================================================================
+					'					Known Command - DELETE Condition = TRUE
+					'===============================================================================
+					' The Command is known and his delete condition is True -> delete line
 					Return False
-						
-					ElseIf __ConditionDic.Keys.Contains(m.Value) = False Then
-						'===============================================================================
-						'						Unknown Command / BracketCommand
-						'===============================================================================
-						Dim Condition As Boolean = False
 
-						Select Case m.Value.ToUpper
+				ElseIf __ConditionDic.Keys.Contains(m.Value) = False Then
+					'===============================================================================
+					'						Unknown Command / BracketCommand
+					'===============================================================================
+					Dim Condition As Boolean = False
+
+					Select Case m.Value.ToUpper
 						Case "@DommeLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@DommeLevel("), FrmSettings.domlevelNumBox)
 						Case "@Cup(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@Cup("), FrmSettings.boobComboBox)
 						Case "@AllowsOrgasm(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox)
@@ -21239,17 +20937,17 @@ Skip_RandomFile:
 						Case "@CheckDate(".ToUpper : Condition = CheckDateList(FilterString)
 						Case "@DommeTag(".ToUpper : Condition = GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = False Or LockImage = True
 						Case "@ImageTag(".ToUpper : Condition = GetLocalImage(FilterString)
-							Case Else
-								'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
-								'					Unknown Command => goto next Match
-								'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
-								Dim f As String = "" ' Debug line to add the ability to set a breakpoint.
-								Exit For
-						End Select
-						' The Command is known and his delete condition is True -> delete line
+						Case Else
+							'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
+							'					Unknown Command => goto next Match
+							'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
+							Dim f As String = "" ' Debug line to add the ability to set a breakpoint.
+							Exit For
+					End Select
+					' The Command is known and his delete condition is True -> delete line
 					If Condition Then Return False
-					End If
-				Next ' of Regex matches (Commands)
+				End If
+			Next ' of Regex matches (Commands)
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
@@ -21637,41 +21335,41 @@ FinishTNA:
 
 		If FrmSettings.URLFileList.CheckedItems.Count = 0 Then
 			GetLocalImage()
-            Exit Sub
-        End If
+			Exit Sub
+		End If
 
-        Try
-            FoundString = GetRandomImage(ImageSourceType.Blog)
+		Try
+			FoundString = GetRandomImage(ImageGenre.Blog)
 
-            ClearMainPictureBox()
+			ClearMainPictureBox()
 
-            ShowImage(FoundString, True)
-            JustShowedBlogImage = True
+			ShowImage(FoundString, True)
+			JustShowedBlogImage = True
 
-        Catch ex As Exception
-            GetLocalImage()
-            Exit Sub
-        End Try
+		Catch ex As Exception
+			GetLocalImage()
+			Exit Sub
+		End Try
 
-    End Sub
-
-
-    Public Sub GetLocalImage()
-
-        FoundString = GetRandomImage(ImageSourceType.Local)
-
-        ClearMainPictureBox()
-
-        ShowImage(FoundString, True)
-        JustShowedBlogImage = True
-
-        DeleteLocalImageFilePath = FoundString
-        CurrentImage = FoundString
-
-    End Sub
+	End Sub
 
 
-    Public Sub RunModuleScript(IsEdging As Boolean)
+	Public Sub GetLocalImage()
+
+		FoundString = GetRandomImage(ImageSourceType.Local)
+
+		ClearMainPictureBox()
+
+		ShowImage(FoundString, True)
+		JustShowedBlogImage = True
+
+		DeleteLocalImageFilePath = FoundString
+		CurrentImage = FoundString
+
+	End Sub
+
+
+	Public Sub RunModuleScript(IsEdging As Boolean)
 
 		ShowModule = True
 
@@ -23516,7 +23214,7 @@ TryNext:
 				'RunFileText()
 
 
-				
+
 
 				'AvoidTheEdge.Stop()
 				'AvoidTheEdgeGame = False
@@ -24149,8 +23847,8 @@ TryNext:
 
 	End Sub
 
-    Private Sub RemoveFromUrlFile_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem4.Click
-        Try
+	Private Sub RemoveFromUrlFile_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem4.Click
+		Try
             ' Lock Control
             ToolStripMenuItem4.Enabled = False
 
@@ -24159,8 +23857,8 @@ TryNext:
 
                 ' Fine the URL in all URLFiles
                 Dim foundFiles As ObjectModel.ReadOnlyCollection(Of String) =
-                    FileIO.FileSystem.FindInFiles(Application.StartupPath & "\Images\System\URL Files\",
-                                                  CurrentImage, True, FileIO.SearchOption.SearchTopLevelOnly)
+					FileIO.FileSystem.FindInFiles(Application.StartupPath & "\Images\System\URL Files\",
+												  CurrentImage, True, FileIO.SearchOption.SearchTopLevelOnly)
 
                 ' Delete the URL from all Files 
                 For Each filePath As String In foundFiles
@@ -24172,21 +23870,21 @@ TryNext:
 
                     'Write modified List to disk.
                     File.WriteAllLines(filePath, deleteFile)
-                Next
-            End If
-        Catch ex As Exception
+				Next
+			End If
+		Catch ex As Exception
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             '						       All Errors
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while deleting URL-From files.")
-            MsgBox("An Exception Occured while deleting the URL from Files." & vbCrLf _
-                   & ex.Message, MsgBoxStyle.Exclamation, "Delete URL from Files")
-        End Try
-    End Sub
+			MsgBox("An Exception Occured while deleting the URL from Files." & vbCrLf _
+				   & ex.Message, MsgBoxStyle.Exclamation, "Delete URL from Files")
+		End Try
+	End Sub
 
 #Region "-------------------------------------------------- Save Blog Image ---------------------------------------------------"
 
-    Private Sub HardcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HardcoreToolStripMenuItem.Click
+	Private Sub HardcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HardcoreToolStripMenuItem.Click
 		SaveImage("Hardcore")
 	End Sub
 	Private Sub SoftcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SoftcoreToolStripMenuItem.Click
@@ -24533,75 +24231,6 @@ GetDommeSlideshow:
 
 
 	End Sub
-
-	''' =========================================================================================================
-	''' <summary>
-	''' Reads a TextFile into a generic List(of String). EmptyLines are removed from the list.
-	''' </summary>
-	''' <param name="GetText">The Filepath to read.</param>
-	''' <returns>A List(of String) containing all Lines of the given File. Returns 
-	''' an empty List if the specified file doesn't exists, or an exception occurs.</returns>
-	''' <remarks>This Method will create the given DirectoryStructure for the given
-	''' Filepath if it doesn't exist.</remarks>
-	Public Shared Function Txt2List(ByVal GetText As String) As List(Of String)
-		Try
-			If GetText = Nothing Then Return New List(Of String)
-			' Check if the given Directory exists. MyDirectory.Exists will 
-			' try to create the directory, if it's an App-sub-dir.
-			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(GetText))) Then
-				Log.Write("Loading Text-File: " & GetText, 5)
-				If File.Exists(GetText) Then
-					Using TextReader As New StreamReader(GetText)
-						Dim TextList As New List(Of String)
-
-						While TextReader.Peek <> -1
-							TextList.Add(TextReader.ReadLine())
-						End While
-
-						' Remove all empty Lines from list.
-						TextList.RemoveAll(Function(x) x = "")
-
-						Return TextList
-					End Using
-				End If
-			End If
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'						       All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Error loading TextFile: " & GetText)
-		End Try
-		Return New List(Of String)
-	End Function
-
-	''' =========================================================================================================
-	''' <summary>
-	''' Reads the First line of the given textfile.
-	''' </summary>
-	''' <param name="GetText">On success the first line as string. Otherwise an
-	''' empty String.</param>
-	''' <returns></returns>
-	Public Shared Function TxtReadLine(ByVal GetText As String) As String
-		Try
-			If GetText = Nothing Then Return Nothing
-			' Check if the given Directory exists. MyDirectory.Exists will 
-			' try to create the directory, if it's an App-sub-dir.
-			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(GetText))) Then
-				If File.Exists(GetText) Then
-					Using TextReader As New StreamReader(GetText)
-						Return TextReader.ReadLine
-					End Using
-				End If
-			End If
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'						       All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Error loading TextFile: " & GetText)
-		End Try
-		Return ""
-	End Function
-
 
 	Public Function StripBlankLines(ByVal SpaceClean As List(Of String)) As List(Of String)
 		For i As Integer = SpaceClean.Count - 1 To 0 Step -1
@@ -26207,7 +25836,7 @@ GetDommeSlideshow:
 		Me.Dispose()
 	End Sub
 
-#End Region
+#End Region ' File
 
 #Region "------------------------------------------------------ Settings ------------------------------------------------------"
 
@@ -26289,7 +25918,7 @@ GetDommeSlideshow:
 		FrmSettings.Focus()
 	End Sub
 
-#End Region
+#End Region ' Settings
 
 #Region "-------------------------------------------------------- APPs --------------------------------------------------------"
 
@@ -26634,7 +26263,7 @@ GetDommeSlideshow:
 
 	End Sub
 
-#End Region
+#End Region ' APPs
 
 #Region "-------------------------------------------------------- Games -------------------------------------------------------"
 
@@ -26673,7 +26302,7 @@ GetDommeSlideshow:
 		FrmCardList.Focus()
 	End Sub
 
-#End Region
+#End Region ' Games
 
 #Region "----------------------------------------------------- Interface ------------------------------------------------------"
 
@@ -26744,7 +26373,7 @@ GetDommeSlideshow:
 		If SplitContainer1.Height > 430 Then SplitContainer1.SplitterDistance = SplitContainer1.Height - 252
 	End Sub
 
-#End Region
+#End Region ' Interface
 
 #Region "------------------------------------------------------- Tools --------------------------------------------------------"
 
@@ -26758,7 +26387,7 @@ GetDommeSlideshow:
 		Form9.Focus()
 	End Sub
 
-#End Region
+#End Region ' Tools
 
 #Region "------------------------------------------------------ Milovana ------------------------------------------------------"
 
@@ -26782,7 +26411,7 @@ GetDommeSlideshow:
 		Process.Start("https://milovana.com/forum/")
 	End Sub
 
-#End Region
+#End Region ' Milovana
 
 	Private Sub RunScriptToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RunScriptToolStripMenuItem.Click
 
@@ -26823,7 +26452,7 @@ GetDommeSlideshow:
 		FrmSettings.Focus()
 	End Sub
 
-#End Region
+#End Region ' Menu
 
 	Private Sub Form1_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseClick
 		If SplitContainer1.Width + 270 > Me.Width Then AdjustWindow()
@@ -28342,16 +27971,16 @@ SkipNew:
 	End Sub
 
 
-#End Region
+#End Region ' DommeTag APP
 
-#Region "------------------------------------------------------ Lazy-Sub-------------------------------------------------------"
+#Region "------------------------------------------------------ Lazy-Sub ------------------------------------------------------"
 
-	Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles BTNStop.Click
+	Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles BTNStop.Click, Button7.Click
 		chatBox.Text = "Let me stop"
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub BTNYes_Click(sender As System.Object, e As System.EventArgs) Handles BTNYes.Click
+	Private Sub BTNYes_Click(sender As System.Object, e As System.EventArgs) Handles BTNYes.Click, Button2.Click
 		Try
 			chatBox.Text = "Yes " & FrmSettings.TBHonorific.Text
 		Catch
@@ -28361,7 +27990,7 @@ SkipNew:
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub BTNNo_Click(sender As System.Object, e As System.EventArgs) Handles BTNNo.Click
+	Private Sub BTNNo_Click(sender As System.Object, e As System.EventArgs) Handles BTNNo.Click, Button3.Click
 		Try
 			chatBox.Text = "No " & FrmSettings.TBHonorific.Text
 		Catch
@@ -28371,32 +28000,32 @@ SkipNew:
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub BTNEdge_Click(sender As System.Object, e As System.EventArgs) Handles BTNEdge.Click
+	Private Sub BTNEdge_Click(sender As System.Object, e As System.EventArgs) Handles BTNEdge.Click, Button4.Click
 		chatBox.Text = "On the edge"
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub BTNSpeedUp_Click(sender As System.Object, e As System.EventArgs) Handles BTNSpeedUp.Click
+	Private Sub BTNSpeedUp_Click(sender As System.Object, e As System.EventArgs) Handles BTNSpeedUp.Click, Button8.Click
 		chatBox.Text = "Let me speed up"
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub BTNSlowDown_Click(sender As System.Object, e As System.EventArgs) Handles BTNSlowDown.Click
+	Private Sub BTNSlowDown_Click(sender As System.Object, e As System.EventArgs) Handles BTNSlowDown.Click, Button5.Click
 		chatBox.Text = "Let me slow down"
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub BTNStroke_Click(sender As System.Object, e As System.EventArgs) Handles BTNStroke.Click
+	Private Sub BTNStroke_Click(sender As System.Object, e As System.EventArgs) Handles BTNStroke.Click, Button6.Click
 		chatBox.Text = "May I start stroking?"
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub BTNAskToCum_Click(sender As System.Object, e As System.EventArgs) Handles BTNAskToCum.Click
+	Private Sub BTNAskToCum_Click(sender As System.Object, e As System.EventArgs) Handles BTNAskToCum.Click, Button9.Click
 		chatBox.Text = "Please let me cum!"
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub BTNGreeting_Click(sender As System.Object, e As System.EventArgs) Handles BTNGreeting.Click
+	Private Sub BTNGreeting_Click(sender As System.Object, e As System.EventArgs) Handles BTNGreeting.Click, Button10.Click
 
 		If SaidHello = True Then
 			LockImage = False
@@ -28418,7 +28047,7 @@ SkipNew:
 		sendButton.PerformClick()
 	End Sub
 
-	Private Sub BTNSafeword_Click(sender As System.Object, e As System.EventArgs) Handles BTNSafeword.Click
+	Private Sub BTNSafeword_Click(sender As System.Object, e As System.EventArgs) Handles BTNSafeword.Click, Button11.Click
 		Try
 			chatBox.Text = FrmSettings.TBSafeword.Text
 		Catch
@@ -28747,7 +28376,7 @@ SkipNew:
 
 	End Sub
 
-#End Region
+#End Region ' Lazy-Sub
 
 #Region "-------------------------------------------------- Randomizer-App ----------------------------------------------------"
 
@@ -29406,91 +29035,6 @@ SkipNew:
 
 #End Region
 
-#Region "---------------------------------------------------- LazySub-AV ------------------------------------------------------"
-
-	Private Sub Button7_Click_1(sender As System.Object, e As System.EventArgs) Handles Button7.Click
-		chatBox.Text = "Let me stop"
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub Button2_Click_3(sender As System.Object, e As System.EventArgs) Handles Button2.Click
-		Try
-			chatBox.Text = "Yes " & FrmSettings.TBHonorific.Text
-		Catch
-			chatBox.Text = "Yes"
-		End Try
-
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub Button3_Click_2(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-		Try
-			chatBox.Text = "No " & FrmSettings.TBHonorific.Text
-		Catch
-			chatBox.Text = "No"
-		End Try
-
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub Button4_Click_1(sender As System.Object, e As System.EventArgs) Handles Button4.Click
-		chatBox.Text = "On the edge"
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
-		chatBox.Text = "Let me speed up"
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub Button5_Click_1(sender As System.Object, e As System.EventArgs) Handles Button5.Click
-		chatBox.Text = "Let me slow down"
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub Button6_Click_1(sender As System.Object, e As System.EventArgs) Handles Button6.Click
-		chatBox.Text = "May I start stroking?"
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub Button9_Click_2(sender As System.Object, e As System.EventArgs) Handles Button9.Click
-		chatBox.Text = "Please let me cum!"
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub Button10_Click(sender As System.Object, e As System.EventArgs) Handles Button10.Click
-		If SaidHello = True Then
-			LockImage = False
-			RapidFire = False
-			If SlideshowLoaded = True Then
-				nextButton.Enabled = True
-				previousButton.Enabled = True
-				DommeSlideshowToolStripMenuItem.Enabled = True
-			End If
-			Return
-		End If
-
-		Try
-			chatBox.Text = "Hello " & FrmSettings.TBHonorific.Text
-		Catch
-			chatBox.Text = "Hello"
-		End Try
-
-		sendButton.PerformClick()
-	End Sub
-
-	Private Sub Button11_Click(sender As System.Object, e As System.EventArgs) Handles Button11.Click
-		Try
-			chatBox.Text = FrmSettings.TBSafeword.Text
-		Catch
-			chatBox.Text = "@Error"
-		End Try
-
-		sendButton.PerformClick()
-	End Sub
-
-#End Region
-
 #End Region ' Apps
 
 	Private Sub ChatText_Resize(sender As Object, e As EventArgs) Handles ChatText.Resize
@@ -29798,7 +29342,7 @@ SkipNew:
 
 
 		If StringClean.Contains("@ShowBlogImage") Then
-			If BeginImageFetch("Blog") <> "" Then
+			If BeginImageFetch(ImageGenre.Blog) <> "" Then
 				JustShowedBlogImage = True
 				StringClean = StringClean.Replace("@ShowBlogImage", "")
 			Else
@@ -29817,7 +29361,7 @@ SkipNew:
 			End If
 
 			JustShowedBlogImage = True
-			BeginImageFetch("Butt")
+			BeginImageFetch(ImageGenre.Butt)
 			StringClean = StringClean.Replace("@ShowButtImage", "")
 			StringClean = StringClean.Replace("@ShowButtsImage", "")
 
@@ -29832,7 +29376,7 @@ SkipNew:
 			End If
 
 			JustShowedBlogImage = True
-			BeginImageFetch("Boobs")
+			BeginImageFetch(ImageGenre.Boobs)
 			StringClean = StringClean.Replace("@ShowBoobImage", "")
 			StringClean = StringClean.Replace("@ShowBoobsImage", "")
 
@@ -29845,7 +29389,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Hardcore")
+			BeginImageFetch(ImageGenre.Hardcore)
 			StringClean = StringClean.Replace("@ShowHardcoreImage", "")
 		End If
 
@@ -29856,7 +29400,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Softcore")
+			BeginImageFetch(ImageGenre.Softcore)
 			StringClean = StringClean.Replace("@ShowSoftcoreImage", "")
 		End If
 
@@ -29867,7 +29411,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Lesbian")
+			BeginImageFetch(ImageGenre.Lesbian)
 			StringClean = StringClean.Replace("@ShowLesbianImage", "")
 		End If
 
@@ -29878,7 +29422,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Blowjob")
+			BeginImageFetch(ImageGenre.Blowjob)
 			StringClean = StringClean.Replace("@ShowBlowjobImage", "")
 		End If
 
@@ -29889,7 +29433,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Femdom")
+			BeginImageFetch(ImageGenre.Femdom)
 			StringClean = StringClean.Replace("@ShowFemdomImage", "")
 		End If
 
@@ -29900,7 +29444,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Lezdom")
+			BeginImageFetch(ImageGenre.Lezdom)
 			StringClean = StringClean.Replace("@ShowLezdomImage", "")
 		End If
 
@@ -29911,7 +29455,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Hentai")
+			BeginImageFetch(ImageGenre.Hentai)
 			StringClean = StringClean.Replace("@ShowHentaiImage", "")
 		End If
 
@@ -29922,7 +29466,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Gay")
+			BeginImageFetch(ImageGenre.Gay)
 			StringClean = StringClean.Replace("@ShowGayImage", "")
 		End If
 
@@ -29933,7 +29477,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Maledom")
+			BeginImageFetch(ImageGenre.Maledom)
 			StringClean = StringClean.Replace("@ShowMaledomImage", "")
 		End If
 
@@ -29944,7 +29488,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("Captions")
+			BeginImageFetch(ImageGenre.Captions)
 			StringClean = StringClean.Replace("@ShowCaptionsImage", "")
 		End If
 
@@ -29955,7 +29499,7 @@ SkipNew:
 				If randomizer.Next(1, 101) < 51 Then Return StringClean
 			End If
 			JustShowedBlogImage = True
-			BeginImageFetch("General")
+			BeginImageFetch(ImageGenre.General)
 			StringClean = StringClean.Replace("@ShowGeneralImage", "")
 		End If
 
@@ -30003,7 +29547,7 @@ SkipNew:
 	End Sub
 
 	Public Function CheckGenreImage(ByVal Genre As String) As Boolean
-
+		'TODO: Next Step ImageDataContainer-Integration. Replace this function with ImageDataContainer member.
 		If CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
 
 		If Genre = "Hardcore" Then
@@ -30076,27 +29620,6 @@ SkipNew:
 		Return True
 
 	End Function
-
-	Public Sub SaveSessionImage(ByVal SessionImage As Image)
-
-		If FrmSettings.CBBlogImageWindow.Checked = True Then
-			Dim ImageFlag As String = ImageLocation
-
-			'Skip all local Files.
-			If ImageFlag.Contains("/") And ImageFlag.Contains("://") Then
-				Do Until Not ImageFlag.Contains("/")
-					ImageFlag = ImageFlag.Remove(0, 1)
-				Loop
-
-				If Not File.Exists(Application.StartupPath & "\Images\Session Images\" & ImageFlag) Then
-					SessionImage.Save(Application.StartupPath & "\Images\Session Images\" & ImageFlag)
-					FrmSettings.CalculateSessionImages()
-				Else
-					Debug.Print("Session Image already exists")
-				End If
-			End If
-		End If
-	End Sub
 
 
 End Class
