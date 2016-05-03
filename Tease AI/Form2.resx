@@ -118,6 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="BtnImportSettings.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAJVSURBVFhH7ZU/aFpRFMYjFgy1loK1OGVwEQKKCEqHgFsnwUWKODhLB8Hi4NBJcOjiIOjm4qBI
+        BwOdajZBimRQh1oUIdSKguLiH1Ainn7nodKXqDH+SRY/+A3n3HPP+Xzed98J9B3cMIlE4oaIdsbn8wn9
+        ZgTBWnERMTCA/bsLBoR+M9JgrQ5iIJlMUiQSeT4DDoeDbDbb8xmY9wRHA0cDRwObG3C73dTpdKjb7W5N
+        s9mki4uL7QwwEonk0QSDQSqVSgLFYpEKhcKCWq3WxUM55UGrJDKwDfF4nPx+P+l0OhEGg4GGw+EtDLxE
+        3UrtxYDT6byXl0ql1Ov1Hm+AH2s4HKZcLrcR7XZ7vwbkcjlNp1PhUFkslgWXl5fotVx7N8BqtVqifDQa
+        FfLLdDRwcANarZbq9bqQX6ZVBvr9Pi9f40z9vAvyn1G3+ROIxWL8XpPdbieTySRCqVSKaucYjUZRndls
+        pmw2y+1/wIRwQV39v4F56C8ol8ukUqlEa5vCtyYG59HmFWJBb0AOLIrmBgaDAYVCoQV8zc6Vz+dJoVCI
+        mj+E1+vl4b+w/S1ikdhNDPCHIw0DaRStBY1ymUyGZDLZ0mF3cblcNJlM/mDfGeLdBRMvwLdUKiUcNk6t
+        wmq10ng87qD+HPH+hIan+EVXfDY4XAZ/mvEm8KtgRrx/ofFrmLgOBAL3huv1er7Ox6j5gPhwwoB3MPHb
+        4/Eshms0Gmo0GrfIfxSKDi2YOMMh+8sXklqtpmq1ihR9mi0/jTDwfDQadSqVCg//AmYrTygMfQ++bjb8
+        5OQfKVj7IKmQlxgAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="PictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAJkAAAAPCAYAAAD3Y23kAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -1556,22 +1572,6 @@ to give people a chance to try it out and suggest new features before finalizing
         I1YvJ+Mxkeg6Vt8nwxgDVt7JeIwNq4amFawLyWomEjFj9XSy/SYS0wWr/5PVjAkr/2T7jRWrlobs9f4f
         t+JLDAVPXPAAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="BtnImportSettings.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-      iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-      YQUAAAJVSURBVFhH7ZU/aFpRFMYjFgy1loK1OGVwEQKKCEqHgFsnwUWKODhLB8Hi4NBJcOjiIOjm4qBI
-      BwOdajZBimRQh1oUIdSKguLiH1Ainn7nodKXqDH+SRY/+A3n3HPP+Xzed98J9B3cMIlE4oaIdsbn8wn9
-      ZgTBWnERMTCA/bsLBoR+M9JgrQ5iIJlMUiQSeT4DDoeDbDbb8xmY9wRHA0cDRwObG3C73dTpdKjb7W5N
-      s9mki4uL7QwwEonk0QSDQSqVSgLFYpEKhcKCWq3WxUM55UGrJDKwDfF4nPx+P+l0OhEGg4GGw+EtDLxE
-      3UrtxYDT6byXl0ql1Ov1Hm+AH2s4HKZcLrcR7XZ7vwbkcjlNp1PhUFkslgWXl5fotVx7N8BqtVqifDQa
-      FfLLdDRwcANarZbq9bqQX6ZVBvr9Pi9f40z9vAvyn1G3+ROIxWL8XpPdbieTySRCqVSKaucYjUZRndls
-      pmw2y+1/wIRwQV39v4F56C8ol8ukUqlEa5vCtyYG59HmFWJBb0AOLIrmBgaDAYVCoQV8zc6Vz+dJoVCI
-      mj+E1+vl4b+w/S1ikdhNDPCHIw0DaRStBY1ymUyGZDLZ0mF3cblcNJlM/mDfGeLdBRMvwLdUKiUcNk6t
-      wmq10ng87qD+HPH+hIan+EVXfDY4XAZ/mvEm8KtgRrx/ofFrmLgOBAL3huv1er7Ox6j5gPhwwoB3MPHb
-      4/Eshms0Gmo0GrfIfxSKDi2YOMMh+8sXklqtpmq1ihR9mi0/jTDwfDQadSqVCg//AmYrTygMfQ++bjb8
-      5OQfKVj7IKmQlxgAAAAASUVORK5CYII=
-    </value>
   </data>
   <data name="Label100.Text" xml:space="preserve">
     <value>Boobs and Butts - Set Local and/or URL file locations for pictures of boobs and butts.
