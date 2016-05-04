@@ -775,6 +775,14 @@ Public Class FrmSettings
 
 	End Sub
 
+#Region "-------------------------------------- GeneralTab ----------------------------------------------"
+
+	Private Sub BtnImportSettings_Click(sender As Object, e As EventArgs) Handles BtnImportSettings.Click
+		My.MySettings.importOnRestart()
+	End Sub
+
+#End Region ' GeneralTab
+
 	Private Sub BindCombo()
 		FontComboBox.DrawMode = DrawMode.OwnerDrawFixed
 		FontComboBox.Font = New Font("Microsoft Sans Serif, 11.25pt", 11.25)

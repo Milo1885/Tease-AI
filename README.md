@@ -46,6 +46,15 @@ Fixes added from Community Members:
 	Stefaf: Added Offline-Mode-Support to the ImageDataContainer-Class and fixed some minor bugs in it.
 	
 	Stefaf: All lists retrieved with functions in Class myDirectory are now sorted alphabetically.
+	
+	Stefaf: Added Feature: User-Settings are now saved in: "App-Directory\System\Settings\"
+		[spoiler]The Local user.setting-file is duplicated on saving into the application-subdirectory.
+		 On start-up this duplicated file is used to replace the user.config file in the 
+		 %localAppData%-directory. For safely importing Setting-files from other versions 
+		 there is also an import-function included. This function will ask you to select a file to 
+		 import and restarts the application to process the import and data-upgrade.
+		 To start the import go to Settings->General tab.
+		[/spoiler]
 
 # Changelog - Patch 53
 
