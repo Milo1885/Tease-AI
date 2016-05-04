@@ -9440,7 +9440,7 @@ StatusUpdateEnd:
 			Dim FlagArray() As String = RandomFlag.Split(",")
 
 			RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
-			RandInt = 100 * Math.Round(RandInt / 100)
+			If RandInt >= 100 Then RandInt = 100 * Math.Round(RandInt / 100)
 			StringClean = StringClean.Replace("#RandomRound100(" & OriginalFlag & ")", RandInt)
 
 		End If
@@ -9455,7 +9455,7 @@ StatusUpdateEnd:
 			Dim FlagArray() As String = RandomFlag.Split(",")
 
 			RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
-			RandInt = 10 * Math.Round(RandInt / 10)
+			If RandInt >= 10 Then RandInt = 10 * Math.Round(RandInt / 10)
 			StringClean = StringClean.Replace("#RandomRound10(" & OriginalFlag & ")", RandInt)
 
 		End If
@@ -9471,7 +9471,7 @@ StatusUpdateEnd:
 			Dim FlagArray() As String = RandomFlag.Split(",")
 
 			RandInt = randomizer.Next(Val(FlagArray(0)), Val(FlagArray(1)) + 1)
-			RandInt = 5 * Math.Round(RandInt / 5)
+			If RandInt >= 5 Then RandInt = 5 * Math.Round(RandInt / 5)
 			StringClean = StringClean.Replace("#RandomRound5(" & OriginalFlag & ")", RandInt)
 
 		End If
@@ -9750,16 +9750,103 @@ StatusUpdateEnd:
 		If StringClean.Contains("#DislikedImageCount") Then
 			StringClean = StringClean.Replace("#DislikedImageCount", GetImageData(ImageGenre.Disliked).CountImages())
 		End If
-        '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-        ' ImageCount - End
-        '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		' ImageCount - End
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		If StringClean.Contains("#EdgeHold") Then
+			Dim i As Integer = FrmSettings.NBHoldTheEdgeMin.Value
+			If FrmSettings.LBLMinHold.Text = "minutes" Then i *= 60
 
-        StringClean = StringClean.Replace("#CurrentImage", CurrentImage)
+			Dim x As Integer = FrmSettings.NBHoldTheEdgeMax.Value
+			If FrmSettings.LBLMaxHold.Text = "minutes" Then x *= 60
+
+			Dim t As Integer = randomizer.Next(i, x + 1)
+			If t >= 5 Then t = 5 * Math.Round(t / 5)
+			Dim TConvert As String = ConvertSeconds(t)
+			StringClean = StringClean.Replace("#EdgeHold", TConvert)
+		End If
+
+		If StringClean.Contains("#LongHold") Then
+			Dim i As Integer = FrmSettings.NBLongHoldMin.Value
+			Dim x As Integer = FrmSettings.NBLongHoldMax.Value
+			Dim t As Integer = randomizer.Next(i, x + 1)
+			t *= 60
+			If t >= 5 Then t = 5 * Math.Round(t / 5)
+			Dim TConvert As String = ConvertSeconds(t)
+			StringClean = StringClean.Replace("#LongHold", TConvert)
+		End If
+
+		If StringClean.Contains("#ExtremeHold") Then
+			Dim i As Integer = FrmSettings.NBExtremeHoldMin.Value
+			Dim x As Integer = FrmSettings.NBExtremeHoldMax.Value
+			Dim t As Integer = randomizer.Next(i, x + 1)
+			t *= 60
+			If t >= 5 Then t = 5 * Math.Round(t / 5)
+			Dim TConvert As String = ConvertSeconds(t)
+			StringClean = StringClean.Replace("#ExtremeHold", TConvert)
+		End If
+
+		StringClean = StringClean.Replace("#CurrentImage", CurrentImage)
 
 		Return StringClean
 
 
 	End Function
+
+	Public Function ConvertSeconds(ByVal Seconds As Integer) As String
+
+		Dim RetVal As String
+
+		Dim SecondsDifference As Integer = Seconds
+		Dim HMS = TimeSpan.FromSeconds(SecondsDifference)
+		Dim H = HMS.Hours.ToString
+		Dim M = HMS.Minutes.ToString
+		Dim S = HMS.Seconds.ToString
+
+		If HMS.Hours = 1 Then
+			H = "1 hour"
+		Else
+			H = H & " hours"
+		End If
+
+		If HMS.Minutes = 1 Then
+			M = "1 minute"
+		Else
+			Dim t As Integer = HMS.Minutes
+			If t >= 5 Then t = 5 * Math.Round(t / 5)
+			M = t & " minutes"
+		End If
+
+		If HMS.Minutes > 4 Or HMS.Hours > 0 Or HMS.Seconds = 0 Then
+			S = ""
+		Else
+			If HMS.Seconds = 1 Then
+				S = "1 second"
+			Else
+				S = S & " seconds"
+			End If
+		End If
+
+		RetVal = ""
+
+		If HMS.Hours > 0 Then
+			RetVal = RetVal & H
+			If HMS.Minutes > 0 Then RetVal = RetVal & " and "
+		End If
+
+		If HMS.Minutes > 0 Then
+			RetVal = RetVal & M
+			If HMS.Seconds > 0 And HMS.Hours < 1 And HMS.Minutes < 4 Then RetVal = RetVal & " and "
+		End If
+
+		RetVal = RetVal & S
+
+		Return RetVal
+
+
+	End Function
+
+
 
 
 	Public Function PoundClean(ByVal StringClean As String) As String
@@ -22263,204 +22350,97 @@ NoRepeatOFiles:
 	End Sub
 
 
+	Public Function CleanTaskLines(ByVal dir As String) As String
 
+		Dim TaskLines As List(Of String) = Txt2List(dir)
+		Dim TaskEntry As String
+		Dim TaskArray As String()
+		Dim TaskList As New List(Of String)
 
+		Try
+			TaskLines = FilterList(TaskLines)
+			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
+		Catch ex As Exception
+			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
+			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
+			Return TaskEntry
+		End Try
 
+		Dim LoopBuffer As Integer
 
+		TaskArray = TaskEntry.Split(" ")
+		For i As Integer = 0 To TaskArray.Count - 1
+			TaskList.Add(TaskArray(i))
+		Next
+		TaskEntry = ""
+		For i As Integer = 0 To TaskList.Count - 1
+			Try
+				LoopBuffer = 0
 
+PoundLoop:
+				LoopBuffer += 1
+
+				TaskList(i) = PoundClean(TaskList(i))
+				If TaskEntry.Contains("#") And LoopBuffer < 6 Then GoTo PoundLoop
+
+				TaskEntry = TaskEntry & TaskList(i) & " "
+			Catch
+			End Try
+		Next
+
+		TaskEntry = TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+		Return TaskEntry
+
+	End Function
 
 
 	Public Sub CreateTaskLetter()
 
-
-		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Greeting.txt"
-		TaskText = ""
-
-		'Read all lines of the given file.
-		Dim TaskLines As List(Of String) = Txt2List(TaskFile)
 		Dim TaskEntry As String
 
-		Try
-			TaskLines = FilterList(TaskLines)
-			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-		End Try
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Greeting.txt")
+		TaskText = TaskText & TaskEntry
+		TaskText = CleanTaskText(TaskText)
 
-		PoundClean(TaskEntry)
-
-		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-		CleanTaskText()
-		TaskLines.Clear()
-
-		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Intro.txt"
-
-		'Read all lines of the given file.
-		TaskLines = Txt2List(TaskFile)
-
-		Try
-			TaskLines = FilterList(TaskLines)
-			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-		End Try
-		PoundClean(TaskEntry)
-
-		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-		CleanTaskText()
-		TaskLines.Clear()
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Intro.txt")
+		TaskText = TaskText & TaskEntry
+		TaskText = CleanTaskText(TaskText)
 
 		If GeneralTime = "Afternoon" Then GoTo Afternoon
 		If GeneralTime = "Night" Then GoTo Night
 
-		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_1.txt"
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_1.txt")
+		TaskText = TaskText & TaskEntry
+		TaskText = CleanTaskText(TaskText)
 
-		TaskLines.Clear()
-
-		'Read all lines of the given file.
-		TaskLines = Txt2List(TaskFile)
-
-		Try
-			TaskLines = FilterList(TaskLines)
-			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-		End Try
-		PoundClean(TaskEntry)
-
-		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-		CleanTaskText()
-		TaskLines.Clear()
-
-
-		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_1-2.txt"
-
-		TaskLines.Clear()
-
-		'Read all lines of the given file.
-		TaskLines = Txt2List(TaskFile)
-
-		Try
-			TaskLines = FilterList(TaskLines)
-			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-		End Try
-		PoundClean(TaskEntry)
-
-		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-		CleanTaskText()
-		TaskLines.Clear()
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_1-2.txt")
+		TaskText = TaskText & TaskEntry
+		TaskText = CleanTaskText(TaskText)
 
 Afternoon:
 
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_2.txt")
+		TaskText = TaskText & TaskEntry
+		TaskText = CleanTaskText(TaskText)
 
-		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_2.txt"
-
-		TaskLines.Clear()
-
-		'Read all lines of the given file.
-		TaskLines = Txt2List(TaskFile)
-
-		Try
-			TaskLines = FilterList(TaskLines)
-			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-		End Try
-		PoundClean(TaskEntry)
-
-		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-		CleanTaskText()
-		TaskLines.Clear()
-
-
-		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_2-3.txt"
-
-		TaskLines.Clear()
-
-		'Read all lines of the given file.
-		TaskLines = Txt2List(TaskFile)
-
-		Try
-			TaskLines = FilterList(TaskLines)
-			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-		End Try
-		PoundClean(TaskEntry)
-
-		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-		CleanTaskText()
-		TaskLines.Clear()
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_2-3.txt")
+		TaskText = TaskText & TaskEntry
+		TaskText = CleanTaskText(TaskText)
 
 Night:
 
-		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_3.txt"
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_3.txt")
+		TaskText = TaskText & TaskEntry
+		TaskText = CleanTaskText(TaskText)
 
-		TaskLines.Clear()
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Outro.txt")
+		TaskText = TaskText & TaskEntry
+		TaskText = CleanTaskText(TaskText)
 
-		'Read all lines of the given file.
-		TaskLines = Txt2List(TaskFile)
-
-		Try
-			TaskLines = FilterList(TaskLines)
-			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-		End Try
-		PoundClean(TaskEntry)
-
-		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-		CleanTaskText()
-		TaskLines.Clear()
-
-		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Outro.txt"
-
-		TaskLines.Clear()
-
-		'Read all lines of the given file.
-		TaskLines = Txt2List(TaskFile)
-
-		Try
-			TaskLines = FilterList(TaskLines)
-			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-		End Try
-		PoundClean(TaskEntry)
-
-		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-		CleanTaskText()
-		TaskLines.Clear()
-
-		TaskFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Signature.txt"
-
-		TaskLines.Clear()
-
-		'Read all lines of the given file.
-		TaskLines = Txt2List(TaskFile)
-
-		Try
-			TaskLines = FilterList(TaskLines)
-			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-		End Try
-		PoundClean(TaskEntry)
-
-		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
-		CleanTaskText()
-		TaskLines.Clear()
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Signature.txt")
+		TaskText = TaskText & TaskEntry
+		TaskText = CleanTaskText(TaskText)
 
 		If FrmSettings.CBHonorificInclude.Checked = True Then
 			TaskText = TaskText & FrmSettings.TBHonorific.Text & " " & domName.Text
@@ -22468,47 +22448,7 @@ Night:
 			TaskText = TaskText & domName.Text
 		End If
 
-
-		'TaskText = PoundClean(TaskText)
-
-		Dim AtArray2() As String = Split(TaskText)
-		For i As Integer = 0 To AtArray2.Length - 1
-			'If AtArray(i) = "" Then GoTo AtBreak
-			If AtArray2(i) = "" Then GoTo AtNext
-			If AtArray2(i).Contains("#") Then
-				AtArray2(i) = PoundClean(AtArray2(i))
-			End If
-AtNext:
-
-		Next
-
-		TaskText = Join(AtArray2)
-
-
-		Dim TextLines() As String = TaskText.Split(Environment.NewLine)
-		Dim TextTemp As String
-		For x As Integer = 0 To TextLines.Count - 1
-			Dim AtArray() As String = Split(TextLines(x))
-			For i As Integer = 0 To AtArray.Length - 1
-				If AtArray(i).Contains("@") Then AtArray(i) = ""
-			Next
-			TextLines(x) = Join(AtArray)
-			If TextLines(x).Substring(0, 1) = " " Then
-				Do
-					TextLines(x) = TextLines(x).Remove(0, 1)
-				Loop Until Not TextLines(x).Substring(0, 1) = " "
-
-			End If
-			TextTemp = TextTemp & TextLines(x) & Environment.NewLine
-			'TextLines(x) = Join(AtArray)
-		Next
-
-		TaskText = TextTemp
-
-
-
-
-
+		TaskText = System.Text.RegularExpressions.Regex.Replace(TaskText, "[ ]{2,}", " ")
 
 		Dim TempDate As String
 		Dim TempDateNow As DateTime = DateTime.Now
@@ -22518,89 +22458,129 @@ AtNext:
 		TaskTextDir = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Received Files\Tasks for " & TempDate & ".txt"
 		My.Computer.FileSystem.WriteAllText(TaskTextDir, TaskText, False)
 
+		TaskText = ""
 
 		LBLFileTransfer.Text = domName.Text & " is sending you a file!"
 		PNLFileTransfer.Visible = True
+		PNLFileTransfer.BringToFront()
 
 		StupidTimer.Start()
 
-
-
-
 	End Sub
 
 
-	Public Sub CleanTaskText()
+	Public Function CleanTaskText(ByVal TaskString As String) As String
 
 		Dim i As Integer
 
-		If TaskText.Contains("#TaskEdges") Then
+		If TaskString.Contains("#TaskEdges") Then
 			Do
-				i = randomizer.Next(5, 21) * FrmSettings.domlevelNumBox.Value
-				i = 5 * Math.Round(i / 5)
-				TaskText = TaskText.Replace("#TaskEdges", i)
-			Loop Until Not TaskText.Contains("#TaskEdges")
+				'i = randomizer.Next(5, 21) * FrmSettings.domlevelNumBox.Value
+				i = randomizer.Next(FrmSettings.NBTaskEdgesMin.Value, FrmSettings.NBTaskEdgesMax.Value + 1)
+				If i > 5 Then i = 5 * Math.Round(i / 5)
+				TaskString = TaskString.Replace("#TaskEdges", i)
+			Loop Until Not TaskString.Contains("#TaskEdges")
 		End If
 
-		If TaskText.Contains("#TaskStrokes") Then
+		If TaskString.Contains("#TaskStrokes") Then
 			Do
-				i = randomizer.Next(50, 201) * FrmSettings.domlevelNumBox.Value
-				i = 10 * Math.Round(i / 10)
-				TaskText = TaskText.Replace("#TaskStrokes", i)
-			Loop Until Not TaskText.Contains("#TaskStrokes")
+				'i = randomizer.Next(50, 201) * FrmSettings.domlevelNumBox.Value
+				i = randomizer.Next(FrmSettings.NBTaskStrokesMin.Value, FrmSettings.NBTaskStrokesMax.Value + 1)
+				If i > 10 Then i = 10 * Math.Round(i / 10)
+				TaskString = TaskString.Replace("#TaskStrokes", i)
+			Loop Until Not TaskString.Contains("#TaskStrokes")
 		End If
 
-		If TaskText.Contains("#TaskHours") Then
+		If TaskString.Contains("#TaskHours") Then
 			Do
 				i = randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1) + FrmSettings.domlevelNumBox.Value
-				TaskText = TaskText.Replace("#TaskHours", i)
-			Loop Until Not TaskText.Contains("#TaskHours")
+				TaskString = TaskString.Replace("#TaskHours", i)
+			Loop Until Not TaskString.Contains("#TaskHours")
 		End If
 
-		If TaskText.Contains("#TaskMinutes") Then
+		If TaskString.Contains("#TaskMinutes") Then
 			Do
 				i = randomizer.Next(5, 13) * FrmSettings.domlevelNumBox.Value
-				TaskText = TaskText.Replace("#TaskMinutes", i)
-			Loop Until Not TaskText.Contains("#TaskMinutes")
+				TaskString = TaskString.Replace("#TaskMinutes", i)
+			Loop Until Not TaskString.Contains("#TaskMinutes")
 		End If
 
-		If TaskText.Contains("#TaskSeconds") Then
+		If TaskString.Contains("#TaskSeconds") Then
 			Do
 				i = randomizer.Next(10, 30) * FrmSettings.domlevelNumBox.Value * randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1)
-				TaskText = TaskText.Replace("#TaskSeconds", i)
-			Loop Until Not TaskText.Contains("#TaskSeconds")
+				TaskString = TaskString.Replace("#TaskSeconds", i)
+			Loop Until Not TaskString.Contains("#TaskSeconds")
 		End If
 
-		If TaskText.Contains("#TaskAmountLarge") Then
+		If TaskString.Contains("#TaskAmountLarge") Then
 			Do
 				i = (randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) * 2
-				i = 5 * Math.Round(i / 5)
-				TaskText = TaskText.Replace("#TaskAmountLarge", i)
-			Loop Until Not TaskText.Contains("#TaskAmountLarge")
+				If i > 5 Then i = 5 * Math.Round(i / 5)
+				TaskString = TaskString.Replace("#TaskAmountLarge", i)
+			Loop Until Not TaskString.Contains("#TaskAmountLarge")
 		End If
 
-		If TaskText.Contains("#TaskAmountSmall") Then
+		If TaskString.Contains("#TaskAmountSmall") Then
 			Do
-				i = (randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) / 2
-				i = 5 * Math.Round(i / 5)
-				TaskText = TaskText.Replace("#TaskAmountSmall", i)
-			Loop Until Not TaskText.Contains("#TaskAmountSmall")
+				'i = (randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) / 2
+				i = (randomizer.Next(5, 11) * FrmSettings.domlevelNumBox.Value) / 2
+				If i > 5 Then i = 5 * Math.Round(i / 5)
+				TaskString = TaskString.Replace("#TaskAmountSmall", i)
+			Loop Until Not TaskString.Contains("#TaskAmountSmall")
 		End If
 
-		If TaskText.Contains("#TaskAmount") Then
+		If TaskString.Contains("#TaskAmount") Then
 			Do
 				i = randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value
-				i = 5 * Math.Round(i / 5)
-				TaskText = TaskText.Replace("#TaskAmount", i)
-			Loop Until Not TaskText.Contains("#TaskAmount")
+				If i > 5 Then i = 5 * Math.Round(i / 5)
+				TaskString = TaskString.Replace("#TaskAmount", i)
+			Loop Until Not TaskString.Contains("#TaskAmount")
 		End If
 
+		If TaskString.Contains("#TaskStrokingTime") Then
+			Do
+				i = randomizer.Next(FrmSettings.NBTaskStrokingTimeMin.Value, FrmSettings.NBTaskStrokingTimeMax.Value + 1)
+				i *= 60
+				Dim TConvert As String = ConvertSeconds(i)
+				TaskString = TaskString.Replace("#TaskStrokingTime", TConvert)
+			Loop Until Not TaskString.Contains("#TaskStrokingTime")
+		End If
 
+		If TaskString.Contains("#TaskHoldTheEdgeTime") Then
+			Do
+				i = randomizer.Next(FrmSettings.NBTaskEdgeHoldTimeMin.Value, FrmSettings.NBTaskEdgeHoldTimeMax.Value + 1)
+				i *= 60
+				Dim TConvert As String = ConvertSeconds(i)
+				TaskString = TaskString.Replace("#TaskHoldTheEdgeTime", TConvert)
+			Loop Until Not TaskString.Contains("#TaskHoldTheEdgeTime")
+		End If
 
+		If TaskString.Contains("#TaskCBTTime") Then
+			Do
+				i = randomizer.Next(FrmSettings.NBTaskCBTTimeMin.Value, FrmSettings.NBTaskCBTTimeMax.Value + 1)
+				i *= 60
+				Dim TConvert As String = ConvertSeconds(i)
+				TaskString = TaskString.Replace("#TaskCBTTime", TConvert)
+			Loop Until Not TaskString.Contains("#TaskCBTTime")
+		End If
 
+		TaskString = TaskString.Replace("<font color=""red"">", "")
+		TaskString = TaskString.Replace("</font>", "")
+		TaskString = TaskString.Replace("#Null", "")
 
+		Dim LoopBuffer As Integer
 
-	End Sub
+		Do
+			LoopBuffer += 1
+			If LoopBuffer > 4 Then Exit Do
+			TaskString = PoundClean(TaskString)
+		Loop Until Not TaskString.Contains("#") And Not TaskString.Contains("@RT(") And Not TaskString.Contains("@RandomText(")
+
+		TaskString = StripCommands(TaskString)
+
+		Return TaskString
+
+	End Function
 
 
 	Private Sub BTNFIleTransferDismiss_Click(sender As System.Object, e As System.EventArgs) Handles BTNFIleTransferDismiss.Click

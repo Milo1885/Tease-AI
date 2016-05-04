@@ -5575,6 +5575,126 @@ Namespace My
                 Me("CBURLPreview") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("100")>  _
+        Public Property TaskStrokesMin() As Decimal
+            Get
+                Return CType(Me("TaskStrokesMin"),Decimal)
+            End Get
+            Set
+                Me("TaskStrokesMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1000")>  _
+        Public Property TaskStrokesMax() As Decimal
+            Get
+                Return CType(Me("TaskStrokesMax"),Decimal)
+            End Get
+            Set
+                Me("TaskStrokesMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+        Public Property TaskStrokingTimeMin() As Decimal
+            Get
+                Return CType(Me("TaskStrokingTimeMin"),Decimal)
+            End Get
+            Set
+                Me("TaskStrokingTimeMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("30")>  _
+        Public Property TaskStrokingTimeMax() As Decimal
+            Get
+                Return CType(Me("TaskStrokingTimeMax"),Decimal)
+            End Get
+            Set
+                Me("TaskStrokingTimeMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+        Public Property TaskEdgesMin() As Decimal
+            Get
+                Return CType(Me("TaskEdgesMin"),Decimal)
+            End Get
+            Set
+                Me("TaskEdgesMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("25")>  _
+        Public Property TaskEdgesMax() As Decimal
+            Get
+                Return CType(Me("TaskEdgesMax"),Decimal)
+            End Get
+            Set
+                Me("TaskEdgesMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
+        Public Property TaskEdgeHoldTimeMin() As Decimal
+            Get
+                Return CType(Me("TaskEdgeHoldTimeMin"),Decimal)
+            End Get
+            Set
+                Me("TaskEdgeHoldTimeMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property TaskEdgeHoldTimeMax() As Decimal
+            Get
+                Return CType(Me("TaskEdgeHoldTimeMax"),Decimal)
+            End Get
+            Set
+                Me("TaskEdgeHoldTimeMax") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
+        Public Property TaskCBTTimeMin() As Decimal
+            Get
+                Return CType(Me("TaskCBTTimeMin"),Decimal)
+            End Get
+            Set
+                Me("TaskCBTTimeMin") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
+        Public Property TaskCBTTimeMax() As Decimal
+            Get
+                Return CType(Me("TaskCBTTimeMax"),Decimal)
+            End Get
+            Set
+                Me("TaskCBTTimeMax") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
