@@ -391,7 +391,7 @@ Public Class Form8
 		If File.Exists(TagFile) Then
 
 			Dim TagList As New List(Of String)
-			TagList = Form1.Txt2List(TagFile)
+			TagList = Txt2List(TagFile)
 
 			Dim FoundFile As Boolean = False
 
@@ -437,7 +437,7 @@ Public Class Form8
 		If File.Exists(TagFile) Then
 
 			Dim TagList As New List(Of String)
-			TagList = Form1.Txt2List(TagFile)
+			TagList = Txt2List(TagFile)
 
 			Dim FoundFile As Boolean = False
 
@@ -483,7 +483,7 @@ Public Class Form8
 		If File.Exists(TagFile) Then
 
 			Dim TagList As New List(Of String)
-			TagList = Form1.Txt2List(TagFile)
+			TagList = Txt2List(TagFile)
 
 			For i As Integer = TagList.Count - 1 To 0 Step -1
 				If TagList(i).Contains(Path.GetFileName(TagPath)) Then
@@ -526,7 +526,7 @@ Public Class Form8
 		If File.Exists(TagFile) Then
 
 			Dim TagList As New List(Of String)
-			TagList = Form1.Txt2List(TagFile)
+			TagList = Txt2List(TagFile)
 
 			For i As Integer = TagList.Count - 1 To 0 Step -1
 				If TagList(i).Contains(Path.GetFileName(TagPath)) Then
