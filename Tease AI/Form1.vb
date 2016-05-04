@@ -22349,6 +22349,69 @@ NoRepeatOFiles:
 
 	End Sub
 
+	Public Sub CreateTaskLetter()
+
+		Dim TaskEntry As String
+
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Greeting.txt")
+		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Intro.txt")
+		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+		If GeneralTime = "Afternoon" Then GoTo Afternoon
+		If GeneralTime = "Night" Then GoTo Night
+
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_1.txt")
+		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_1-2.txt")
+		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+Afternoon:
+
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_2.txt")
+		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_2-3.txt")
+		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+Night:
+
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_3.txt")
+		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Outro.txt")
+		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Signature.txt")
+		TaskText = TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+
+		If FrmSettings.CBHonorificInclude.Checked = True Then
+			TaskText = TaskText & FrmSettings.TBHonorific.Text & " " & domName.Text
+		Else
+			TaskText = TaskText & domName.Text
+		End If
+
+		TaskText = System.Text.RegularExpressions.Regex.Replace(TaskText, "[ ]{2,}", " ")
+
+		Dim TempDate As String
+		Dim TempDateNow As DateTime = DateTime.Now
+
+		TempDate = TempDateNow.ToString("M dd")
+
+		TaskTextDir = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Received Files\Tasks for " & TempDate & ".txt"
+		My.Computer.FileSystem.WriteAllText(TaskTextDir, TaskText, False)
+
+		TaskText = ""
+
+		LBLFileTransfer.Text = domName.Text & " is sending you a file!"
+		PNLFileTransfer.Visible = True
+		PNLFileTransfer.BringToFront()
+
+		StupidTimer.Start()
+
+	End Sub
 
 	Public Function CleanTaskLines(ByVal dir As String) As String
 
@@ -22388,200 +22451,115 @@ PoundLoop:
 			End Try
 		Next
 
-		TaskEntry = TaskEntry & " " & Environment.NewLine & Environment.NewLine
+		Dim int As Integer
 
-		Return TaskEntry
-
-	End Function
-
-
-	Public Sub CreateTaskLetter()
-
-		Dim TaskEntry As String
-
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Greeting.txt")
-		TaskText = TaskText & TaskEntry
-		TaskText = CleanTaskText(TaskText)
-
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Intro.txt")
-		TaskText = TaskText & TaskEntry
-		TaskText = CleanTaskText(TaskText)
-
-		If GeneralTime = "Afternoon" Then GoTo Afternoon
-		If GeneralTime = "Night" Then GoTo Night
-
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_1.txt")
-		TaskText = TaskText & TaskEntry
-		TaskText = CleanTaskText(TaskText)
-
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_1-2.txt")
-		TaskText = TaskText & TaskEntry
-		TaskText = CleanTaskText(TaskText)
-
-Afternoon:
-
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_2.txt")
-		TaskText = TaskText & TaskEntry
-		TaskText = CleanTaskText(TaskText)
-
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_2-3.txt")
-		TaskText = TaskText & TaskEntry
-		TaskText = CleanTaskText(TaskText)
-
-Night:
-
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_3.txt")
-		TaskText = TaskText & TaskEntry
-		TaskText = CleanTaskText(TaskText)
-
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Outro.txt")
-		TaskText = TaskText & TaskEntry
-		TaskText = CleanTaskText(TaskText)
-
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Signature.txt")
-		TaskText = TaskText & TaskEntry
-		TaskText = CleanTaskText(TaskText)
-
-		If FrmSettings.CBHonorificInclude.Checked = True Then
-			TaskText = TaskText & FrmSettings.TBHonorific.Text & " " & domName.Text
-		Else
-			TaskText = TaskText & domName.Text
-		End If
-
-		TaskText = System.Text.RegularExpressions.Regex.Replace(TaskText, "[ ]{2,}", " ")
-
-		Dim TempDate As String
-		Dim TempDateNow As DateTime = DateTime.Now
-
-		TempDate = TempDateNow.ToString("M dd")
-
-		TaskTextDir = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Received Files\Tasks for " & TempDate & ".txt"
-		My.Computer.FileSystem.WriteAllText(TaskTextDir, TaskText, False)
-
-		TaskText = ""
-
-		LBLFileTransfer.Text = domName.Text & " is sending you a file!"
-		PNLFileTransfer.Visible = True
-		PNLFileTransfer.BringToFront()
-
-		StupidTimer.Start()
-
-	End Sub
-
-
-	Public Function CleanTaskText(ByVal TaskString As String) As String
-
-		Dim i As Integer
-
-		If TaskString.Contains("#TaskEdges") Then
+		If TaskEntry.Contains("#TaskEdges") Then
 			Do
-				'i = randomizer.Next(5, 21) * FrmSettings.domlevelNumBox.Value
-				i = randomizer.Next(FrmSettings.NBTaskEdgesMin.Value, FrmSettings.NBTaskEdgesMax.Value + 1)
-				If i > 5 Then i = 5 * Math.Round(i / 5)
-				TaskString = TaskString.Replace("#TaskEdges", i)
-			Loop Until Not TaskString.Contains("#TaskEdges")
+				int = randomizer.Next(FrmSettings.NBTaskEdgesMin.Value, FrmSettings.NBTaskEdgesMax.Value + 1)
+				If int > 5 Then int = 5 * Math.Round(int / 5)
+				TaskEntry = TaskEntry.Replace("#TaskEdges", int)
+			Loop Until Not TaskEntry.Contains("#TaskEdges")
 		End If
 
-		If TaskString.Contains("#TaskStrokes") Then
+		If TaskEntry.Contains("#TaskStrokes") Then
 			Do
-				'i = randomizer.Next(50, 201) * FrmSettings.domlevelNumBox.Value
-				i = randomizer.Next(FrmSettings.NBTaskStrokesMin.Value, FrmSettings.NBTaskStrokesMax.Value + 1)
-				If i > 10 Then i = 10 * Math.Round(i / 10)
-				TaskString = TaskString.Replace("#TaskStrokes", i)
-			Loop Until Not TaskString.Contains("#TaskStrokes")
+				int = randomizer.Next(FrmSettings.NBTaskStrokesMin.Value, FrmSettings.NBTaskStrokesMax.Value + 1)
+				If int > 10 Then int = 10 * Math.Round(int / 10)
+				TaskEntry = TaskEntry.Replace("#TaskStrokes", int)
+			Loop Until Not TaskEntry.Contains("#TaskStrokes")
 		End If
 
-		If TaskString.Contains("#TaskHours") Then
+		If TaskEntry.Contains("#TaskHours") Then
 			Do
-				i = randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1) + FrmSettings.domlevelNumBox.Value
-				TaskString = TaskString.Replace("#TaskHours", i)
-			Loop Until Not TaskString.Contains("#TaskHours")
+				int = randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1) + FrmSettings.domlevelNumBox.Value
+				TaskEntry = TaskEntry.Replace("#TaskHours", int)
+			Loop Until Not TaskEntry.Contains("#TaskHours")
 		End If
 
-		If TaskString.Contains("#TaskMinutes") Then
+		If TaskEntry.Contains("#TaskMinutes") Then
 			Do
-				i = randomizer.Next(5, 13) * FrmSettings.domlevelNumBox.Value
-				TaskString = TaskString.Replace("#TaskMinutes", i)
-			Loop Until Not TaskString.Contains("#TaskMinutes")
+				int = randomizer.Next(5, 13) * FrmSettings.domlevelNumBox.Value
+				TaskEntry = TaskEntry.Replace("#TaskMinutes", int)
+			Loop Until Not TaskEntry.Contains("#TaskMinutes")
 		End If
 
-		If TaskString.Contains("#TaskSeconds") Then
+		If TaskEntry.Contains("#TaskSeconds") Then
 			Do
-				i = randomizer.Next(10, 30) * FrmSettings.domlevelNumBox.Value * randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1)
-				TaskString = TaskString.Replace("#TaskSeconds", i)
-			Loop Until Not TaskString.Contains("#TaskSeconds")
+				int = randomizer.Next(10, 30) * FrmSettings.domlevelNumBox.Value * randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1)
+				TaskEntry = TaskEntry.Replace("#TaskSeconds", int)
+			Loop Until Not TaskEntry.Contains("#TaskSeconds")
 		End If
 
-		If TaskString.Contains("#TaskAmountLarge") Then
+		If TaskEntry.Contains("#TaskAmountLarge") Then
 			Do
-				i = (randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) * 2
-				If i > 5 Then i = 5 * Math.Round(i / 5)
-				TaskString = TaskString.Replace("#TaskAmountLarge", i)
-			Loop Until Not TaskString.Contains("#TaskAmountLarge")
+				int = (randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) * 2
+				If int > 5 Then int = 5 * Math.Round(int / 5)
+				TaskEntry = TaskEntry.Replace("#TaskAmountLarge", int)
+			Loop Until Not TaskEntry.Contains("#TaskAmountLarge")
 		End If
 
-		If TaskString.Contains("#TaskAmountSmall") Then
+		If TaskEntry.Contains("#TaskAmountSmall") Then
 			Do
-				'i = (randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) / 2
-				i = (randomizer.Next(5, 11) * FrmSettings.domlevelNumBox.Value) / 2
-				If i > 5 Then i = 5 * Math.Round(i / 5)
-				TaskString = TaskString.Replace("#TaskAmountSmall", i)
-			Loop Until Not TaskString.Contains("#TaskAmountSmall")
+				int = (randomizer.Next(5, 11) * FrmSettings.domlevelNumBox.Value) / 2
+				If int > 5 Then int = 5 * Math.Round(int / 5)
+				TaskEntry = TaskEntry.Replace("#TaskAmountSmall", int)
+			Loop Until Not TaskEntry.Contains("#TaskAmountSmall")
 		End If
 
-		If TaskString.Contains("#TaskAmount") Then
+		If TaskEntry.Contains("#TaskAmount") Then
 			Do
-				i = randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value
-				If i > 5 Then i = 5 * Math.Round(i / 5)
-				TaskString = TaskString.Replace("#TaskAmount", i)
-			Loop Until Not TaskString.Contains("#TaskAmount")
+				int = randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value
+				If int > 5 Then int = 5 * Math.Round(int / 5)
+				TaskEntry = TaskEntry.Replace("#TaskAmount", int)
+			Loop Until Not TaskEntry.Contains("#TaskAmount")
 		End If
 
-		If TaskString.Contains("#TaskStrokingTime") Then
+		If TaskEntry.Contains("#TaskStrokingTime") Then
 			Do
-				i = randomizer.Next(FrmSettings.NBTaskStrokingTimeMin.Value, FrmSettings.NBTaskStrokingTimeMax.Value + 1)
-				i *= 60
-				Dim TConvert As String = ConvertSeconds(i)
-				TaskString = TaskString.Replace("#TaskStrokingTime", TConvert)
-			Loop Until Not TaskString.Contains("#TaskStrokingTime")
+				int = randomizer.Next(FrmSettings.NBTaskStrokingTimeMin.Value, FrmSettings.NBTaskStrokingTimeMax.Value + 1)
+				int *= 60
+				Dim TConvert As String = ConvertSeconds(int)
+				TaskEntry = TaskEntry.Replace("#TaskStrokingTime", TConvert)
+			Loop Until Not TaskEntry.Contains("#TaskStrokingTime")
 		End If
 
-		If TaskString.Contains("#TaskHoldTheEdgeTime") Then
+		If TaskEntry.Contains("#TaskHoldTheEdgeTime") Then
 			Do
-				i = randomizer.Next(FrmSettings.NBTaskEdgeHoldTimeMin.Value, FrmSettings.NBTaskEdgeHoldTimeMax.Value + 1)
-				i *= 60
-				Dim TConvert As String = ConvertSeconds(i)
-				TaskString = TaskString.Replace("#TaskHoldTheEdgeTime", TConvert)
-			Loop Until Not TaskString.Contains("#TaskHoldTheEdgeTime")
+				int = randomizer.Next(FrmSettings.NBTaskEdgeHoldTimeMin.Value, FrmSettings.NBTaskEdgeHoldTimeMax.Value + 1)
+				int *= 60
+				Dim TConvert As String = ConvertSeconds(int)
+				TaskEntry = TaskEntry.Replace("#TaskHoldTheEdgeTime", TConvert)
+			Loop Until Not TaskEntry.Contains("#TaskHoldTheEdgeTime")
 		End If
 
-		If TaskString.Contains("#TaskCBTTime") Then
+		If TaskEntry.Contains("#TaskCBTTime") Then
 			Do
-				i = randomizer.Next(FrmSettings.NBTaskCBTTimeMin.Value, FrmSettings.NBTaskCBTTimeMax.Value + 1)
-				i *= 60
-				Dim TConvert As String = ConvertSeconds(i)
-				TaskString = TaskString.Replace("#TaskCBTTime", TConvert)
-			Loop Until Not TaskString.Contains("#TaskCBTTime")
+				int = randomizer.Next(FrmSettings.NBTaskCBTTimeMin.Value, FrmSettings.NBTaskCBTTimeMax.Value + 1)
+				int *= 60
+				Dim TConvert As String = ConvertSeconds(int)
+				TaskEntry = TaskEntry.Replace("#TaskCBTTime", TConvert)
+			Loop Until Not TaskEntry.Contains("#TaskCBTTime")
 		End If
 
-		TaskString = TaskString.Replace("<font color=""red"">", "")
-		TaskString = TaskString.Replace("</font>", "")
-		TaskString = TaskString.Replace("#Null", "")
+		TaskEntry = TaskEntry.Replace("<font color=""red"">", "")
+		TaskEntry = TaskEntry.Replace("</font>", "")
+		TaskEntry = TaskEntry.Replace("#Null", "")
 
-		Dim LoopBuffer As Integer
+		LoopBuffer = 0
 
 		Do
 			LoopBuffer += 1
 			If LoopBuffer > 4 Then Exit Do
-			TaskString = PoundClean(TaskString)
-		Loop Until Not TaskString.Contains("#") And Not TaskString.Contains("@RT(") And Not TaskString.Contains("@RandomText(")
+			TaskEntry = PoundClean(TaskEntry)
+		Loop Until Not TaskEntry.Contains("#") And Not TaskEntry.Contains("@RT(") And Not TaskEntry.Contains("@RandomText(")
 
-		TaskString = StripCommands(TaskString)
+		TaskEntry = StripCommands(TaskEntry)
 
-		Return TaskString
+		TaskEntry = Trim(TaskEntry)
+
+		Return TaskEntry
 
 	End Function
-
 
 	Private Sub BTNFIleTransferDismiss_Click(sender As System.Object, e As System.EventArgs) Handles BTNFIleTransferDismiss.Click
 

@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 # Changelog - Patch 54
 
+Task overhaul tweaks
+
 Major Tasks overhaul:
 
      Tasks should now function as originally intended
@@ -40,6 +42,12 @@ Added @LockVideo and @UnlockVideo Commands - @LockVideo will prevent Tease AI fr
 Fixed bug where @SubOld and @SubYoung were not getting filtered correctly
 
 Fixes added from Community Members:
+
+    Stefaf: Bugfix ErrorImage was shown randomly if one of all imagegenres had no images.
+	 
+    Stefaf: Bugfix ContectMenu MainImageBox did not activate or deactivate the MenuItems correct.
+	 
+    Stefaf: Improvement: Remove from URL-File option in ContextMenu MainPicturebox removes a ImageUrl from all URL-Files.
 
 	Stefaf: Function txt2List(String) was not able to deal path = "" or path = nothing. Improved Error handling and logging.
 	
