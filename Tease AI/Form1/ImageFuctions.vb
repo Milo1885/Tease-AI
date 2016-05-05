@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-Imports Tease_AI.Common
+
 
 Partial Class Form1
 
@@ -35,11 +35,13 @@ Partial Class Form1
     ''' and retrieved from it.
     ''' </summary>
     Friend Class ImageDataContainer
+		'TODO: ImageDataContainer Improve the usage of System Ressources.
 		Public Name As ImageGenre
 		Public URLFile As String = ""
 		Public LocalDirectory As String = ""
 		Public LocalSubDirectories As Boolean = False
 		Public OfflineMode As Boolean = My.Settings.OfflineMode
+		Public SYS_NoPornAllowed As Boolean = False
 
 		Public Function CountImages() As Integer
 			Return ToList().Count
@@ -47,6 +49,19 @@ Partial Class Form1
 
 		Public Function CountImages(ByRef Type As ImageSourceType) As Integer
 			Return ToList(Type).Count
+		End Function
+
+		''' =========================================================================================================
+		''' <summary>
+		''' Checks if there are images available for the current Genre.
+		''' </summary>
+		''' <returns></returns>
+		Public Function IsAvailable() As Boolean
+			If CountImages() > 0 Then
+				Return True
+			Else
+				Return False
+			End If
 		End Function
 
         ''' =========================================================================================================
@@ -57,6 +72,9 @@ Partial Class Form1
         ''' Found an empty List is returned</returns>
         Public Function ToList() As List(Of String)
 			Dim rtnList As New List(Of String)
+
+			' If no Porn is allowed, then return Empty
+			If SYS_NoPornAllowed Then Return rtnList
 
 			rtnList.AddRange(ToList(ImageSourceType.Local))
 
@@ -76,6 +94,9 @@ Partial Class Form1
 		''' Found an empty List is returned</returns>
 		Public Function ToList(ByRef Type As ImageSourceType) As List(Of String)
 			Dim rtnList As New List(Of String)
+
+			' If no Porn is allowed, then return Empty
+			If SYS_NoPornAllowed Then Return rtnList
 
 			' If offline mode is activated then search only for local files.
 			If OfflineMode Then Type = ImageSourceType.Local
@@ -263,17 +284,31 @@ NoneFound:
     ''' <returns>Returns a dictionary which contains all nessecary data of genere-images.</returns>
     Friend Function GetImageData() As Dictionary(Of ImageGenre, ImageDataContainer)
 		Dim rtnDic As New Dictionary(Of ImageGenre, ImageDataContainer) '(StringComparer.OrdinalIgnoreCase)
-        With rtnDic
-			.Add(ImageGenre.Blog, New ImageDataContainer With {.Name = ImageGenre.Blog})
-			.Add(ImageGenre.Liked, New ImageDataContainer With {.Name = ImageGenre.Liked})
-			.Add(ImageGenre.Disliked, New ImageDataContainer With {.Name = ImageGenre.Disliked})
+		Dim SysNoPornAllowed As Boolean = FlagExists("SYS_NoPornAllowed")
+		With rtnDic
+			.Add(ImageGenre.Blog, New ImageDataContainer With
+				 {
+					.Name = ImageGenre.Blog,
+					.SYS_NoPornAllowed = SysNoPornAllowed
+				 })
+			.Add(ImageGenre.Liked, New ImageDataContainer With
+				 {
+					.Name = ImageGenre.Liked,
+					.SYS_NoPornAllowed = SysNoPornAllowed
+				 })
+			.Add(ImageGenre.Disliked, New ImageDataContainer With
+				 {
+					.Name = ImageGenre.Disliked,
+					.SYS_NoPornAllowed = SysNoPornAllowed
+				 })
 
 			.Add(ImageGenre.Butt, New ImageDataContainer With
 				 {
 					.Name = ImageGenre.Butt,
 					.LocalDirectory = If(My.Settings.CBIButts, My.Settings.LBLButtPath, ""),
 					.LocalSubDirectories = My.Settings.CBButtSubDir,
-					.URLFile = If(My.Settings.CBURLButts, My.Settings.LBLButtURL, "")
+					.URLFile = If(My.Settings.CBURLButts, My.Settings.LBLButtURL, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Boobs, New ImageDataContainer With
@@ -281,7 +316,8 @@ NoneFound:
 					.Name = ImageGenre.Boobs,
 					.LocalDirectory = If(My.Settings.CBIBoobs, My.Settings.LBLBoobPath, ""),
 					.LocalSubDirectories = My.Settings.CBButtSubDir,
-					.URLFile = If(My.Settings.CBURLBoobs, My.Settings.LBLBoobURL, "")
+					.URLFile = If(My.Settings.CBURLBoobs, My.Settings.LBLBoobURL, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Hardcore, New ImageDataContainer With
@@ -289,7 +325,8 @@ NoneFound:
 					.Name = ImageGenre.Hardcore,
 					.LocalDirectory = If(My.Settings.CBIHardcore, My.Settings.IHardcore, ""),
 					.LocalSubDirectories = My.Settings.CBHardcore,
-					.URLFile = If(My.Settings.CBURLHardcore, My.Settings.HardcoreURLFile, "")
+					.URLFile = If(My.Settings.CBURLHardcore, My.Settings.HardcoreURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Softcore, New ImageDataContainer With
@@ -297,7 +334,8 @@ NoneFound:
 					.Name = ImageGenre.Softcore,
 					.LocalDirectory = If(My.Settings.CBISoftcore, My.Settings.ISoftcore, ""),
 					.LocalSubDirectories = My.Settings.CBSoftcore,
-					.URLFile = If(My.Settings.CBURLSoftcore, My.Settings.SoftcoreURLFile, "")
+					.URLFile = If(My.Settings.CBURLSoftcore, My.Settings.SoftcoreURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Lesbian, New ImageDataContainer With
@@ -305,7 +343,8 @@ NoneFound:
 					.Name = ImageGenre.Lesbian,
 					.LocalDirectory = If(My.Settings.CBILesbian, My.Settings.ILesbian, ""),
 					.LocalSubDirectories = My.Settings.CBLesbian,
-					.URLFile = If(My.Settings.CBURLLesbian, My.Settings.LesbianURLFile, "")
+					.URLFile = If(My.Settings.CBURLLesbian, My.Settings.LesbianURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Blowjob, New ImageDataContainer With
@@ -313,7 +352,8 @@ NoneFound:
 					.Name = ImageGenre.Blowjob,
 					.LocalDirectory = If(My.Settings.CBIBlowjob, My.Settings.IBlowjob, ""),
 					.LocalSubDirectories = My.Settings.CBBlowjob,
-					.URLFile = If(My.Settings.CBURLBlowjob, My.Settings.BlowjobURLFile, "")
+					.URLFile = If(My.Settings.CBURLBlowjob, My.Settings.BlowjobURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Femdom, New ImageDataContainer With
@@ -321,7 +361,8 @@ NoneFound:
 					.Name = ImageGenre.Femdom,
 					.LocalDirectory = If(My.Settings.CBIFemdom, My.Settings.IFemdom, ""),
 					.LocalSubDirectories = My.Settings.CBFemdom,
-					.URLFile = If(My.Settings.CBURLFemdom, My.Settings.FemdomURLFile, "")
+					.URLFile = If(My.Settings.CBURLFemdom, My.Settings.FemdomURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Lezdom, New ImageDataContainer With
@@ -329,7 +370,8 @@ NoneFound:
 					.Name = ImageGenre.Lezdom,
 					.LocalDirectory = If(My.Settings.CBILezdom, My.Settings.ILezdom, ""),
 					.LocalSubDirectories = My.Settings.ILezdomSD,
-					.URLFile = If(My.Settings.CBURLLezdom, My.Settings.LezdomURLFile, "")
+					.URLFile = If(My.Settings.CBURLLezdom, My.Settings.LezdomURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Hentai, New ImageDataContainer With
@@ -337,7 +379,8 @@ NoneFound:
 					.Name = ImageGenre.Hentai,
 					.LocalDirectory = If(My.Settings.CBIHentai, My.Settings.IHentai, ""),
 					.LocalSubDirectories = My.Settings.IHentaiSD,
-					.URLFile = If(My.Settings.CBURLHentai, My.Settings.HentaiURLFile, "")
+					.URLFile = If(My.Settings.CBURLHentai, My.Settings.HentaiURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Gay, New ImageDataContainer With
@@ -345,7 +388,8 @@ NoneFound:
 					.Name = ImageGenre.Gay,
 					.LocalDirectory = If(My.Settings.CBIGay, My.Settings.IGay, ""),
 					.LocalSubDirectories = My.Settings.IGaySD,
-					.URLFile = If(My.Settings.CBURLGay, My.Settings.GayURLFile, "")
+					.URLFile = If(My.Settings.CBURLGay, My.Settings.GayURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Maledom, New ImageDataContainer With
@@ -353,7 +397,8 @@ NoneFound:
 					.Name = ImageGenre.Maledom,
 					.LocalDirectory = If(My.Settings.CBIMaledom, My.Settings.IMaledom, ""),
 					.LocalSubDirectories = My.Settings.IMaledomSD,
-					.URLFile = If(My.Settings.CBURLMaledom, My.Settings.MaledomURLFile, "")
+					.URLFile = If(My.Settings.CBURLMaledom, My.Settings.MaledomURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.Captions, New ImageDataContainer With
@@ -361,7 +406,8 @@ NoneFound:
 					.Name = ImageGenre.Captions,
 					.LocalDirectory = If(My.Settings.CBICaptions, My.Settings.ICaptions, ""),
 					.LocalSubDirectories = My.Settings.ICaptionsSD,
-					.URLFile = If(My.Settings.CBURLCaptions, My.Settings.CaptionsURLFile, "")
+					.URLFile = If(My.Settings.CBURLCaptions, My.Settings.CaptionsURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
 			.Add(ImageGenre.General, New ImageDataContainer With
@@ -369,7 +415,8 @@ NoneFound:
 					.Name = ImageGenre.General,
 					.LocalDirectory = If(My.Settings.CBIGeneral, My.Settings.IGeneral, ""),
 					.LocalSubDirectories = My.Settings.IGeneralSD,
-					.URLFile = If(My.Settings.CBURLGeneral, My.Settings.GeneralURLFile, "")
+					.URLFile = If(My.Settings.CBURLGeneral, My.Settings.GeneralURLFile, ""),
+					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 		End With
 

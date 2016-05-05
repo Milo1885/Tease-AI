@@ -24,22 +24,15 @@ Public Class Form1
 	Public PlaylistFile As New List(Of String)
 	Public PlaylistCurrent As Integer
 
-	Public SubInChastity As Boolean
-
 	' Github Patch  Public FormLoading As Boolean
 	Public FormLoading As Boolean = True
 
-	Dim RandomDelay As Integer
 	Dim Responding As Boolean
 
-	Dim ScriptLineVal As Integer
 	Public StrokeTauntVal As Integer
-	Dim ThoughtTauntVal As Integer
-	Dim ModuleTauntVal As Integer
 	Public FileText As String
 	Public TempStrokeTauntVal As Integer
 	Public TempFileText As String
-	Dim ModText As String
 
 	Public TeaseTick As Integer
 
@@ -53,7 +46,6 @@ Public Class Form1
 	Public FileGoto As String
 	Public SkipGotoLine As Boolean
 
-	Dim HandleScriptText As String
 	Dim ChatString As String
 	Public DomTask As String
 	Public DomChat As String
@@ -61,17 +53,8 @@ Public Class Form1
 	Dim TempVal As Integer
 	Dim NullResponse As Boolean
 
-	Dim CleanFlag As Boolean
-
-	Dim DebugAwarenessLine As String
-
 	Public TagCount As Integer
 	Public LocalTagCount As Integer
-
-	Dim OrgasmResult As String
-	Dim BeggedOrgasmDecision As Boolean
-	Public TeaseOver As Boolean
-
 
 	Dim TaskFile As String
 	Dim TaskText As String
@@ -93,8 +76,6 @@ Public Class Form1
 	Dim CBTBallsCount As Integer
 	Dim CBTCockCount As Integer
 
-	Dim ThoughtCount As Integer
-
 	Dim GotoDommeLevel As Boolean
 
 	Dim DommeMood As Integer
@@ -109,13 +90,10 @@ Public Class Form1
 	Public DomColor As String
 	Public SubColor As String
 
-	Dim StrokeCycle As Integer
-
 	Public StrokeTick As Integer
 	Public StrokeTauntTick As Integer
 	Public StrokePaceRight As Boolean
 	Public StrokePace As Integer
-	Public AudibleTick As Integer
 
 	Dim StrokeTimeTotal As Integer
 	Dim HoldEdgeTime As Integer
@@ -124,9 +102,6 @@ Public Class Form1
 	Public EdgeTauntInt As Integer
 
 	Dim DelayTick As Integer
-	Dim DelayFlag As Boolean
-
-	Dim PreCleanString As String
 
 	Public DomTypeCheck As Boolean
 	Dim TypeToggle As Boolean
@@ -134,23 +109,17 @@ Public Class Form1
 	Dim SubWroteLast As Boolean
 	Dim YesOrNo As Boolean
 	Dim GotoFlag As Boolean
-	Dim LoopAnswer As Boolean
 
 	Dim CBT As Boolean
-	Dim NoEdge As Boolean
 
 	Dim RunningScript As Boolean
-	Dim RePound As Boolean
 
 	Public BeforeTease As Boolean
 	Public SubStroking As Boolean
 	Dim SubEdging As Boolean
 	Dim SubHoldingEdge As Boolean
-	Dim SubCBT As Boolean
-	Dim EndTease As Boolean
+	Dim EndTease As Boolean 'QUESTION: Is Set to true and never to False.
 
-	Dim ShowThought As Boolean
-	Dim ShowEdgeThought As Boolean
 	Public ShowModule As Boolean
 	Dim ModuleEnd As Boolean
 
@@ -287,19 +256,6 @@ Public Class Form1
 	Public WebImageLineTotal As Integer
 	Public WebImagePath As String
 
-    ''' <summary>
-    ''' Variable Deprected. Remove from Suspend and Resume Session needed. 
-    ''' </summary>
-    '''TODO: Remove ImageUrlFilePath
-    Dim ImageUrlFilePath As String
-
-    ''' <summary>
-    ''' Variable Deprected. Remove from Suspend and Resume Session needed. 
-    ''' </summary>
-    '''TODO: Remove ImageUrlFileIndex
-    Dim ImageUrlFileIndex As Integer
-
-
 	Dim ReaderString As String
 	Dim ReaderStringTotal As Integer
 
@@ -429,9 +385,6 @@ Public Class Form1
 	Public RiskyDelay As Boolean
 	Public FinalRiskyPick As Boolean
 
-	Public TempGif As Image
-	Dim resized As Image
-
 	Dim SysMes As Boolean
 	Dim EmoMes As Boolean
 
@@ -507,7 +460,6 @@ Public Class Form1
 	Dim CBTBothFirst As Boolean
 
 	Public MetroThread As Thread
-	Dim MetroGet As Integer
 
 	Dim GeneralTime As String = "Afternoon"
 
@@ -545,7 +497,6 @@ Public Class Form1
 	Dim LongHold As Boolean
 	Dim ExtremeHold As Boolean
 	Dim LongTaunts As Boolean
-	Dim ExtremeTaunts As Boolean
 
 	Dim LazyEdit1 As Boolean
 	Dim LazyEdit2 As Boolean
@@ -597,14 +548,10 @@ Public Class Form1
 	Dim RuinedGotoLine As String
 
 	Dim TauntEdging As Boolean
-	Dim TauntEdgingSession As Boolean
 	Dim TauntEdgingAsked As Boolean
 
 	Private Const DISABLE_SOUNDS As Integer = 21
 	Private Const SET_FEATURE_ON_PROCESS As Integer = 2
-
-	Private Const MyFormWd As Long = 5000
-	Private Const MyFormHt As Long = 6000
 
 	Private Declare Function GetKeyState _
 		 Lib "user32" _
@@ -2574,7 +2521,7 @@ WritingTaskLine:
 
 
 
-			If TauntEdging = True Or TauntEdgingSession = True Then
+			If TauntEdging = True Then
 				If TauntEdgingAsked = True Then
 					DomChat = "#SYS_TauntEdgingAsked"
 					TypingDelay()
@@ -3527,8 +3474,6 @@ EdgeSkip:
 				SysKeyList = Txt2List(foundFile)
 
 
-				DebugAwarenessLine = "Domme does not recognize this statement"
-
 				For i As Integer = 0 To SysKeyList.Count - 1
 
 					SysKeyList(i) = SysKeyList(i).Replace(",", "")
@@ -3542,9 +3487,8 @@ EdgeSkip:
 					If UCase(CheckResponse) = UCase(SysKeyList(i)) Then
 						ResponseFile = foundFile
 						ResponseFile = ResponseFile.Replace("KEY", "")
+						'QUESTION: What does the following line?
 						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ResponseFile = ResponseFile.Replace(".txt", "NOT.txt")
-						' Read the first line of the given file.
-						DebugAwarenessLine = TxtReadLine(ResponseFile)
 						GoTo FoundResponse
 						Exit For
 					End If
@@ -3606,9 +3550,8 @@ DebugAwarenessStep2:
 					If UCase(CheckResponse).Contains(UCase(SysKeyList(i))) Then
 						ResponseFile = foundFile
 						ResponseFile = ResponseFile.Replace("KEY", "")
+						'QUESTION: What does the following line?
 						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ResponseFile = ResponseFile.Replace(".txt", "NOT.txt")
-						' Read the first line of the given file.
-						DebugAwarenessLine = TxtReadLine(ResponseFile)
 						GoTo FoundResponse
 						Exit For
 					End If
@@ -4675,9 +4618,6 @@ AcceptAnswer:
 
 		Debug.Print("SaidHello = " & SaidHello)
 		If SaidHello = False Then Return
-
-		'Debug.Print("TeaseOver = " & TeaseOver)
-		If TeaseOver = True Then Return
 
 		'Debug.Print("CBTCockFlag = " & CBTCockFlag)
 		'Debug.Print("CBTBallsFlag = " & CBTBallsFlag)
@@ -8161,7 +8101,6 @@ TryNextWithTease:
 
 		If DelayTick < 1 Then
 			DelayTimer.Stop()
-			DelayFlag = False
 		End If
 
 
@@ -11443,7 +11382,6 @@ ShowedBlogImage:
 			End If
 			If GetMatch(StringClean, "@Edge(", "HoldTaunts") = True Then
 				If LongHold = True Then LongTaunts = True
-				If ExtremeHold = True Then ExtremeTaunts = True
 			End If
 
 		End If
@@ -14198,12 +14136,12 @@ VTSkip:
 
 		If StringClean.Contains("@PornAllowedOff") Then
 			CreateFlag("SYS_NoPornAllowed")
-			StringClean = StringClean.Replace("@NoPornAllowed", "")
+			StringClean = StringClean.Replace("@PornAllowedOff", "")
 		End If
 
 		If StringClean.Contains("@PornAllowedOn") Then
 			DeleteFlag("SYS_NoPornAllowed")
-			StringClean = StringClean.Replace("@PornAllowed", "")
+			StringClean = StringClean.Replace("@PornAllowedOn", "")
 		End If
 
 
@@ -14992,7 +14930,7 @@ VTSkip:
 
 	End Function
 
-	Public Function FlagExists(ByVal FlagDir As String) As Boolean
+	Friend Function FlagExists(ByVal FlagDir As String) As Boolean
 
 		Dim CheckFlag As Boolean
 
@@ -17547,7 +17485,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowHardcoreImage") Then
-				If CheckGenreImage("Hardcore") = False Then
+				If GetImageData(ImageGenre.Hardcore).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17566,7 +17504,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowSoftcoreImage") Then
-				If CheckGenreImage("Softcore") = False Then
+				If GetImageData(ImageGenre.Softcore).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17585,7 +17523,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowLesbianImage") Then
-				If CheckGenreImage("Lesbian") = False Then
+				If GetImageData(ImageGenre.Lesbian).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17604,7 +17542,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowBlowjobImage") Then
-				If CheckGenreImage("Blowjob") = False Then
+				If GetImageData(ImageGenre.Blowjob).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17623,7 +17561,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowFemdomImage") Then
-				If CheckGenreImage("Femdom") = False Then
+				If GetImageData(ImageGenre.Femdom).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17642,7 +17580,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowLezdomImage") Then
-				If CheckGenreImage("Lezdom") = False Then
+				If GetImageData(ImageGenre.Lezdom).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17661,7 +17599,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowHentaiImage") Then
-				If CheckGenreImage("Hentai") = False Then
+				If GetImageData(ImageGenre.Hentai).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17680,7 +17618,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowGayImage") Then
-				If CheckGenreImage("Gay") = False Then
+				If GetImageData(ImageGenre.Gay).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17699,7 +17637,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowMaledomImage") Then
-				If CheckGenreImage("Maledom") = False Then
+				If GetImageData(ImageGenre.Maledom).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17718,7 +17656,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowCaptionsImage") Then
-				If CheckGenreImage("Captions") = False Then
+				If GetImageData(ImageGenre.Captions).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -17737,7 +17675,7 @@ Skip_RandomFile:
 			Application.DoEvents()
 			PoundCount -= 1
 			If ListClean(PoundCount).Contains("@ShowGeneralImage") Then
-				If CheckGenreImage("General") = False Then
+				If GetImageData(ImageGenre.General).IsAvailable = False Then
 					If StrokeFilter = True Then
 						For i As Integer = 0 To StrokeTauntCount - 1
 							ListClean.Remove(ListClean(PoundCount))
@@ -24648,19 +24586,19 @@ GetDommeSlideshow:
 		SettingsList.Add("Playlist: " & Playlist)
 
 		SettingsList.Add("PlaylistCurrent: " & PlaylistCurrent)
-		SettingsList.Add("SubInChastity: " & SubInChastity)
-		' Github Patch SettingsList.Add("FormLoading: " & FormLoading)
+		SettingsList.Add("SubInChastity: --obsolete--") ' for compatibility
+		' Github Patch SettingsList.Add("FormLoading:  " & FormLoading)
 		SettingsList.Add("FormLoading: " & False)
-		SettingsList.Add("RandomDelay: " & RandomDelay)
+		SettingsList.Add("RandomDelay: --obsolete--") ' for compatibility
 		SettingsList.Add("Responding: " & Responding)
-		SettingsList.Add("ScriptLineVal: " & ScriptLineVal)
+		SettingsList.Add("ScriptLineVal: --obsolete--") ' for compatibility
 		SettingsList.Add("StrokeTauntVal: " & StrokeTauntVal)
-		SettingsList.Add("ThoughtTauntVal: " & ThoughtTauntVal)
-		SettingsList.Add("ModuleTauntVal: " & ModuleTauntVal)
+		SettingsList.Add("ThoughtTauntVal: --obsolete--") ' for compatibility
+		SettingsList.Add("ModuleTauntVal: --obsolete--") ' for compatibility
 		SettingsList.Add("FileText: " & FileText)
 		SettingsList.Add("TempStrokeTauntVal: " & TempStrokeTauntVal)
 		SettingsList.Add("TempFileText: " & TempFileText)
-		SettingsList.Add("ModText: " & ModText)
+		SettingsList.Add("ModText: --obsolete--") ' for compatibility
 		SettingsList.Add("TeaseTick: " & TeaseTick)
 		SettingsList.Add("StrokeTauntCount: " & StrokeTauntCount)
 		SettingsList.Add("TauntTextTotal: " & TauntTextTotal)
@@ -24670,20 +24608,20 @@ GetDommeSlideshow:
 		SettingsList.Add("StringLength: " & StringLength)
 		SettingsList.Add("FileGoto: " & FileGoto)
 		SettingsList.Add("SkipGotoLine: " & SkipGotoLine)
-		SettingsList.Add("HandleScriptText: " & HandleScriptText)
+		SettingsList.Add("HandleScriptText: --obsolete--") ' for compatibility
 		SettingsList.Add("ChatString: " & ChatString)
 		SettingsList.Add("DomTask: " & DomTask)
 		SettingsList.Add("DomChat: " & DomChat)
 		SettingsList.Add("TypeDelay: " & TypeDelay)
 		SettingsList.Add("TempVal: " & TempVal)
 		SettingsList.Add("NullResponse: " & NullResponse)
-		SettingsList.Add("CleanFlag: " & CleanFlag)
-		SettingsList.Add("DebugAwarenessLine: " & DebugAwarenessLine)
+		SettingsList.Add("CleanFlag: --obsolete--") ' for compatibility
+		SettingsList.Add("DebugAwarenessLine: --obsolete--") ' for compatibility
 		SettingsList.Add("TagCount: " & TagCount)
 		SettingsList.Add("LocalTagCount: " & LocalTagCount)
-		SettingsList.Add("OrgasmResult: " & OrgasmResult)
-		SettingsList.Add("BeggedOrgasmDecision: " & BeggedOrgasmDecision)
-		SettingsList.Add("TeaseOver: " & TeaseOver)
+		SettingsList.Add("OrgasmResult: --obsolete--") ' for compatibility
+		SettingsList.Add("BeggedOrgasmDecision: --obsolete--") ' for compatibility
+		SettingsList.Add("TeaseOver: --obsolete--") ' for compatibility
 		SettingsList.Add("TaskFile: " & TaskFile)
 		SettingsList.Add("TaskText: " & TaskText)
 		SettingsList.Add("TaskTextDir: " & TaskTextDir)
@@ -24697,7 +24635,7 @@ GetDommeSlideshow:
 		SettingsList.Add("CBTCockFirst: " & CBTCockFirst)
 		SettingsList.Add("CBTBallsCount: " & CBTBallsCount)
 		SettingsList.Add("CBTCockCount: " & CBTCockCount)
-		SettingsList.Add("ThoughtCount: " & ThoughtCount)
+		SettingsList.Add("ThoughtCount: --obsolete--") ' for compatibility
 		SettingsList.Add("GotoDommeLevel: " & GotoDommeLevel)
 		SettingsList.Add("DommeMood: " & DommeMood)
 		SettingsList.Add("AFK: " & AFK)
@@ -24706,38 +24644,38 @@ GetDommeSlideshow:
 		SettingsList.Add("TempHypno: " & TempHypno)
 		SettingsList.Add("DomColor: " & DomColor)
 		SettingsList.Add("SubColor: " & SubColor)
-		SettingsList.Add("StrokeCycle: " & StrokeCycle)
+		SettingsList.Add("StrokeCycle: --obsolete--") ' for compatibility
 		SettingsList.Add("StrokeTick: " & StrokeTick)
 		SettingsList.Add("StrokeTauntTick: " & StrokeTauntTick)
 		SettingsList.Add("StrokePaceRight: " & StrokePaceRight)
 		SettingsList.Add("StrokePace: " & StrokePace)
-		SettingsList.Add("AudibleTick: " & AudibleTick)
+		SettingsList.Add("AudibleTick: --obsolete--") ' for compatibility
 		SettingsList.Add("StrokeTimeTotal: " & StrokeTimeTotal)
 		SettingsList.Add("HoldEdgeTime: " & HoldEdgeTime)
 		SettingsList.Add("HoldEdgeTimeTotal: " & HoldEdgeTimeTotal)
 		SettingsList.Add("EdgeTauntInt: " & EdgeTauntInt)
 		SettingsList.Add("DelayTick: " & DelayTick)
-		SettingsList.Add("DelayFlag: " & DelayFlag)
-		SettingsList.Add("PreCleanString: " & PreCleanString)
+		SettingsList.Add("DelayFlag: --obsolete--") ' for compatibility
+		SettingsList.Add("PreCleanString: --obsolete--") ' for compatibility
 		SettingsList.Add("DomTypeCheck: " & DomTypeCheck)
 		SettingsList.Add("TypeToggle: " & TypeToggle)
 		SettingsList.Add("IsTyping: " & IsTyping)
 		SettingsList.Add("SubWroteLast: " & SubWroteLast)
 		SettingsList.Add("YesOrNo: " & YesOrNo)
 		SettingsList.Add("GotoFlag: " & GotoFlag)
-		SettingsList.Add("LoopAnswer: " & LoopAnswer)
+		SettingsList.Add("LoopAnswer: --obsolete--") ' for compatibility
 		SettingsList.Add("CBT: " & CBT)
-		SettingsList.Add("NoEdge: " & NoEdge)
+		SettingsList.Add("NoEdge: --obsolete--") ' for compatibility
 		SettingsList.Add("RunningScript: " & RunningScript)
-		SettingsList.Add("RePound: " & RePound)
+		SettingsList.Add("RePound: --obsolete--") ' for compatibility
 		SettingsList.Add("BeforeTease: " & BeforeTease)
 		SettingsList.Add("SubStroking: " & SubStroking)
 		SettingsList.Add("SubEdging: " & SubEdging)
 		SettingsList.Add("SubHoldingEdge: " & SubHoldingEdge)
-		SettingsList.Add("SubCBT: " & SubCBT)
+		SettingsList.Add("SubCBT: --obsolete--") ' for compatibility
 		SettingsList.Add("EndTease: " & EndTease)
-		SettingsList.Add("ShowThought: " & ShowThought)
-		SettingsList.Add("ShowEdgeThought: " & ShowEdgeThought)
+		SettingsList.Add("ShowThought: --obsolete--") ' for compatibility
+		SettingsList.Add("ShowEdgeThought: --obsolete--") ' for compatibility
 		SettingsList.Add("ShowModule: " & ShowModule)
 		SettingsList.Add("ModuleEnd: " & ModuleEnd)
 		SettingsList.Add("DivideText: " & DivideText)
@@ -24843,8 +24781,8 @@ GetDommeSlideshow:
 		SettingsList.Add("WebImageLine: " & WebImageLine)
 		SettingsList.Add("WebImageLineTotal: " & WebImageLineTotal)
 		SettingsList.Add("WebImagePath: " & WebImagePath)
-		SettingsList.Add("ImageUrlFilePath: " & ImageUrlFilePath)
-		SettingsList.Add("ImageUrlFileIndex: " & ImageUrlFileIndex)
+		SettingsList.Add("ImageUrlFilePath: --obsolete--") ' for compatibility
+		SettingsList.Add("ImageUrlFileIndex: --obsolete--") ' for compatibility
 		SettingsList.Add("ReaderString: " & ReaderString)
 		SettingsList.Add("ReaderStringTotal: " & ReaderStringTotal)
 		SettingsList.Add("StrokePaceInt: " & StrokePaceInt)
@@ -25035,7 +24973,7 @@ GetDommeSlideshow:
 		SettingsList.Add("CBTBothFlag: " & CBTBothFlag)
 		SettingsList.Add("CBTBothCount: " & CBTBothCount)
 		SettingsList.Add("CBTBothFirst: " & CBTBothFirst)
-		SettingsList.Add("MetroGet: " & MetroGet)
+		SettingsList.Add("MetroGet: --obsolete--") ' for compatibility
 		SettingsList.Add("GeneralTime: " & GeneralTime)
 		SettingsList.Add("NewDommeSlideshow: " & NewDommeSlideshow)
 		SettingsList.Add("OriginalDommeSlideshow: " & OriginalDommeSlideshow)
@@ -25264,18 +25202,18 @@ GetDommeSlideshow:
 		CheckNo = SettingsList(5).Replace("CheckNo: ", "")
 		Playlist = SettingsList(6).Replace("Playlist: ", "")
 		PlaylistCurrent = SettingsList(7).Replace("PlaylistCurrent: ", "")
-		SubInChastity = SettingsList(8).Replace("SubInChastity: ", "")
+		'SubInChastity = SettingsList(8).Replace("SubInChastity: ", "")
 		FormLoading = SettingsList(9).Replace("FormLoading: ", "")
-		RandomDelay = SettingsList(10).Replace("RandomDelay: ", "")
+		'RandomDelay = SettingsList(10).Replace("RandomDelay: ", "")
 		Responding = SettingsList(11).Replace("Responding: ", "")
-		ScriptLineVal = SettingsList(12).Replace("ScriptLineVal: ", "")
+		'ScriptLineVal = SettingsList(12).Replace("ScriptLineVal: ", "")
 		StrokeTauntVal = SettingsList(13).Replace("StrokeTauntVal: ", "")
-		ThoughtTauntVal = SettingsList(14).Replace("ThoughtTauntVal: ", "")
-		ModuleTauntVal = SettingsList(15).Replace("ModuleTauntVal: ", "")
+		'ThoughtTauntVal = SettingsList(14).Replace("ThoughtTauntVal: ", "")
+		'ModuleTauntVal = SettingsList(15).Replace("ModuleTauntVal: ", "")
 		FileText = SettingsList(16).Replace("FileText: ", "")
 		TempStrokeTauntVal = SettingsList(17).Replace("TempStrokeTauntVal: ", "")
 		TempFileText = SettingsList(18).Replace("TempFileText: ", "")
-		ModText = SettingsList(19).Replace("ModText: ", "")
+		'ModText = SettingsList(19).Replace("ModText: ", "")
 		TeaseTick = SettingsList(20).Replace("TeaseTick: ", "")
 		StrokeTauntCount = SettingsList(21).Replace("StrokeTauntCount: ", "")
 		TauntTextTotal = SettingsList(22).Replace("TauntTextTotal: ", "")
@@ -25284,20 +25222,20 @@ GetDommeSlideshow:
 		StringLength = SettingsList(25).Replace("StringLength: ", "")
 		FileGoto = SettingsList(26).Replace("FileGoto: ", "")
 		SkipGotoLine = SettingsList(27).Replace("SkipGotoLine: ", "")
-		HandleScriptText = SettingsList(28).Replace("HandleScriptText: ", "")
+		'HandleScriptText = SettingsList(28).Replace("HandleScriptText: ", "")
 		ChatString = SettingsList(29).Replace("ChatString: ", "")
 		DomTask = SettingsList(30).Replace("DomTask: ", "")
 		DomChat = SettingsList(31).Replace("DomChat: ", "")
 		TypeDelay = SettingsList(32).Replace("TypeDelay: ", "")
 		TempVal = SettingsList(33).Replace("TempVal: ", "")
 		NullResponse = SettingsList(34).Replace("NullResponse: ", "")
-		CleanFlag = SettingsList(35).Replace("CleanFlag: ", "")
-		DebugAwarenessLine = SettingsList(36).Replace("DebugAwarenessLine: ", "")
+		'CleanFlag = SettingsList(35).Replace("CleanFlag: ", "")
+		'DebugAwarenessLine = SettingsList(36).Replace("DebugAwarenessLine: ", "")
 		TagCount = SettingsList(37).Replace("TagCount: ", "")
 		LocalTagCount = SettingsList(38).Replace("LocalTagCount: ", "")
-		OrgasmResult = SettingsList(39).Replace("OrgasmResult: ", "")
-		BeggedOrgasmDecision = SettingsList(40).Replace("BeggedOrgasmDecision: ", "")
-		TeaseOver = SettingsList(41).Replace("TeaseOver: ", "")
+		'OrgasmResult = SettingsList(39).Replace("OrgasmResult: ", "")
+		'BeggedOrgasmDecision = SettingsList(40).Replace("BeggedOrgasmDecision: ", "")
+		'TeaseOver = SettingsList(41).Replace("TeaseOver: ", "")
 		TaskFile = SettingsList(42).Replace("TaskFile: ", "")
 		TaskText = SettingsList(43).Replace("TaskText: ", "")
 		TaskTextDir = SettingsList(44).Replace("TaskTextDir: ", "")
@@ -25311,7 +25249,7 @@ GetDommeSlideshow:
 		CBTCockFirst = SettingsList(52).Replace("CBTCockFirst: ", "")
 		CBTBallsCount = SettingsList(53).Replace("CBTBallsCount: ", "")
 		CBTCockCount = SettingsList(54).Replace("CBTCockCount: ", "")
-		ThoughtCount = SettingsList(55).Replace("ThoughtCount: ", "")
+		'ThoughtCount = SettingsList(55).Replace("ThoughtCount: ", "")
 		GotoDommeLevel = SettingsList(56).Replace("GotoDommeLevel: ", "")
 		DommeMood = SettingsList(57).Replace("DommeMood: ", "")
 		AFK = SettingsList(58).Replace("AFK: ", "")
@@ -25320,38 +25258,38 @@ GetDommeSlideshow:
 		TempHypno = SettingsList(61).Replace("TempHypno: ", "")
 		DomColor = SettingsList(62).Replace("DomColor: ", "")
 		SubColor = SettingsList(63).Replace("SubColor: ", "")
-		StrokeCycle = SettingsList(64).Replace("StrokeCycle: ", "")
+		'StrokeCycle = SettingsList(64).Replace("StrokeCycle: ", "")
 		StrokeTick = SettingsList(65).Replace("StrokeTick: ", "")
 		StrokeTauntTick = SettingsList(66).Replace("StrokeTauntTick: ", "")
 		StrokePaceRight = SettingsList(67).Replace("StrokePaceRight: ", "")
 		StrokePace = SettingsList(68).Replace("StrokePace: ", "")
-		AudibleTick = SettingsList(69).Replace("AudibleTick: ", "")
+		'AudibleTick = SettingsList(69).Replace("AudibleTick: ", "")
 		StrokeTimeTotal = SettingsList(70).Replace("StrokeTimeTotal: ", "")
 		HoldEdgeTime = SettingsList(71).Replace("HoldEdgeTime: ", "")
 		HoldEdgeTimeTotal = SettingsList(72).Replace("HoldEdgeTimeTotal: ", "")
 		EdgeTauntInt = SettingsList(73).Replace("EdgeTauntInt: ", "")
 		DelayTick = SettingsList(74).Replace("DelayTick: ", "")
-		DelayFlag = SettingsList(75).Replace("DelayFlag: ", "")
-		PreCleanString = SettingsList(76).Replace("PreCleanString: ", "")
+		'DelayFlag = SettingsList(75).Replace("DelayFlag: ", "")
+		'PreCleanString = SettingsList(76).Replace("PreCleanString: ", "")
 		DomTypeCheck = SettingsList(77).Replace("DomTypeCheck: ", "")
 		TypeToggle = SettingsList(78).Replace("TypeToggle: ", "")
 		IsTyping = SettingsList(79).Replace("IsTyping: ", "")
 		SubWroteLast = SettingsList(80).Replace("SubWroteLast: ", "")
 		YesOrNo = SettingsList(81).Replace("YesOrNo: ", "")
 		GotoFlag = SettingsList(82).Replace("GotoFlag: ", "")
-		LoopAnswer = SettingsList(83).Replace("LoopAnswer: ", "")
+		'LoopAnswer = SettingsList(83).Replace("LoopAnswer: ", "")
 		CBT = SettingsList(84).Replace("CBT: ", "")
-		NoEdge = SettingsList(85).Replace("NoEdge: ", "")
+		'NoEdge = SettingsList(85).Replace("NoEdge: ", "")
 		RunningScript = SettingsList(86).Replace("RunningScript: ", "")
-		RePound = SettingsList(87).Replace("RePound: ", "")
+		'RePound = SettingsList(87).Replace("RePound: ", "")
 		BeforeTease = SettingsList(88).Replace("BeforeTease: ", "")
 		SubStroking = SettingsList(89).Replace("SubStroking: ", "")
 		SubEdging = SettingsList(90).Replace("SubEdging: ", "")
 		SubHoldingEdge = SettingsList(91).Replace("SubHoldingEdge: ", "")
-		SubCBT = SettingsList(92).Replace("SubCBT: ", "")
+		'SubCBT = SettingsList(92).Replace("SubCBT: ", "")
 		EndTease = SettingsList(93).Replace("EndTease: ", "")
-		ShowThought = SettingsList(94).Replace("ShowThought: ", "")
-		ShowEdgeThought = SettingsList(95).Replace("ShowEdgeThought: ", "")
+		'ShowThought = SettingsList(94).Replace("ShowThought: ", "")
+		'ShowEdgeThought = SettingsList(95).Replace("ShowEdgeThought: ", "")
 		ShowModule = SettingsList(96).Replace("ShowModule: ", "")
 		ModuleEnd = SettingsList(97).Replace("ModuleEnd: ", "")
 		DivideText = SettingsList(98).Replace("DivideText: ", "")
@@ -25453,8 +25391,8 @@ GetDommeSlideshow:
 		WebImageLine = SettingsList(194).Replace("WebImageLine: ", "")
 		WebImageLineTotal = SettingsList(195).Replace("WebImageLineTotal: ", "")
 		WebImagePath = SettingsList(196).Replace("WebImagePath: ", "")
-		ImageUrlFilePath = SettingsList(197).Replace("ImageUrlFilePath: ", "")
-		ImageUrlFileIndex = SettingsList(198).Replace("ImageUrlFileIndex: ", "")
+		'ImageUrlFilePath = SettingsList(197).Replace("ImageUrlFilePath: ", "")
+		'ImageUrlFileIndex = SettingsList(198).Replace("ImageUrlFileIndex: ", "")
 		ReaderString = SettingsList(199).Replace("ReaderString: ", "")
 		ReaderStringTotal = SettingsList(200).Replace("ReaderStringTotal: ", "")
 		StrokePaceInt = SettingsList(201).Replace("StrokePaceInt: ", "")
@@ -25635,7 +25573,7 @@ GetDommeSlideshow:
 		CBTBothFlag = SettingsList(361).Replace("CBTBothFlag: ", "")
 		CBTBothCount = SettingsList(362).Replace("CBTBothCount: ", "")
 		CBTBothFirst = SettingsList(363).Replace("CBTBothFirst: ", "")
-		MetroGet = SettingsList(364).Replace("MetroGet: ", "")
+		'MetroGet = SettingsList(364).Replace("MetroGet: ", "")
 		GeneralTime = SettingsList(365).Replace("GeneralTime: ", "")
 		NewDommeSlideshow = SettingsList(366).Replace("NewDommeSlideshow: ", "")
 		OriginalDommeSlideshow = SettingsList(367).Replace("OriginalDommeSlideshow: ", "")
@@ -28833,7 +28771,6 @@ SkipNew:
 		End If
 
 		SaidHello = True
-		TeaseOver = False
 
 
 		Dim VitalSubFail As Boolean = False
@@ -29519,81 +29456,6 @@ SkipNew:
 		 ShowGotImage()
 
 	End Sub
-
-	Public Function CheckGenreImage(ByVal Genre As String) As Boolean
-		'TODO: Next Step ImageDataContainer-Integration. Replace this function with ImageDataContainer member.
-		If CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-
-		If Genre = "Hardcore" Then
-			If FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBURLHardcore.Checked = False Then Return False
-			If FrmSettings.CBIHardcore.Checked And Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Then Return False
-			If FrmSettings.CBURLHardcore.Checked And Not File.Exists(FrmSettings.LBLURLHardcore.Text) Then Return False
-		End If
-
-		If Genre = "Softcore" Then
-			If FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBURLSoftcore.Checked = False Then Return False
-			If FrmSettings.CBISoftcore.Checked And Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Then Return False
-			If FrmSettings.CBURLSoftcore.Checked And Not File.Exists(FrmSettings.LBLURLSoftcore.Text) Then Return False
-		End If
-
-		If Genre = "Lesbian" Then
-			If FrmSettings.CBILesbian.Checked = False And FrmSettings.CBURLLesbian.Checked = False Then Return False
-			If FrmSettings.CBILesbian.Checked And Not Directory.Exists(FrmSettings.LBLILesbian.Text) Then Return False
-			If FrmSettings.CBURLLesbian.Checked And Not File.Exists(FrmSettings.LBLURLLesbian.Text) Then Return False
-		End If
-
-		If Genre = "Blowjob" Then
-			If FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBURLBlowjob.Checked = False Then Return False
-			If FrmSettings.CBIBlowjob.Checked And Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then Return False
-			If FrmSettings.CBURLBlowjob.Checked And Not File.Exists(FrmSettings.LBLURLBlowjob.Text) Then Return False
-		End If
-
-		If Genre = "Femdom" Then
-			If FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBURLFemdom.Checked = False Then Return False
-			If FrmSettings.CBIFemdom.Checked And Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Then Return False
-			If FrmSettings.CBURLFemdom.Checked And Not File.Exists(FrmSettings.LBLURLFemdom.Text) Then Return False
-		End If
-
-		If Genre = "Lezdom" Then
-			If FrmSettings.CBILezdom.Checked = False And FrmSettings.CBURLLezdom.Checked = False Then Return False
-			If FrmSettings.CBILezdom.Checked And Not Directory.Exists(FrmSettings.LBLILezdom.Text) Then Return False
-			If FrmSettings.CBURLLezdom.Checked And Not File.Exists(FrmSettings.LBLURLLezdom.Text) Then Return False
-		End If
-
-		If Genre = "Hentai" Then
-			If FrmSettings.CBIHentai.Checked = False And FrmSettings.CBURLHentai.Checked = False Then Return False
-			If FrmSettings.CBIHentai.Checked And Not Directory.Exists(FrmSettings.LBLIHentai.Text) Then Return False
-			If FrmSettings.CBURLHentai.Checked And Not File.Exists(FrmSettings.LBLURLHentai.Text) Then Return False
-		End If
-
-		If Genre = "Gay" Then
-			If FrmSettings.CBIGay.Checked = False And FrmSettings.CBURLGay.Checked = False Then Return False
-			If FrmSettings.CBIGay.Checked And Not Directory.Exists(FrmSettings.LBLIGay.Text) Then Return False
-			If FrmSettings.CBURLGay.Checked And Not File.Exists(FrmSettings.LBLURLGay.Text) Then Return False
-		End If
-
-		If Genre = "Maledom" Then
-			If FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBURLMaledom.Checked = False Then Return False
-			If FrmSettings.CBIMaledom.Checked And Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Then Return False
-			If FrmSettings.CBURLMaledom.Checked And Not File.Exists(FrmSettings.LBLURLMaledom.Text) Then Return False
-		End If
-
-		If Genre = "Captions" Then
-			If FrmSettings.CBICaptions.Checked = False And FrmSettings.CBURLCaptions.Checked = False Then Return False
-			If FrmSettings.CBICaptions.Checked And Not Directory.Exists(FrmSettings.LBLICaptions.Text) Then Return False
-			If FrmSettings.CBURLCaptions.Checked And Not File.Exists(FrmSettings.LBLURLCaptions.Text) Then Return False
-		End If
-
-		If Genre = "General" Then
-			If FrmSettings.CBIGeneral.Checked = False And FrmSettings.CBURLGeneral.Checked = False Then Return False
-			If FrmSettings.CBIGeneral.Checked And Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Then Return False
-			If FrmSettings.CBURLGeneral.Checked And Not File.Exists(FrmSettings.LBLURLGeneral.Text) Then Return False
-		End If
-
-
-		Return True
-
-	End Function
 
 
 End Class

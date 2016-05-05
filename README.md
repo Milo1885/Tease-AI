@@ -30,6 +30,13 @@ New #Keywords added: #EdgeHold, #LongHold, #ExtremeHold
 
      Returns a random value based on the user's Sub settings, and automatically displays it as an amount of time in seconds, minutes and/or hours. 
 	 
+New #Keywords added: 
+	#BlogImageCount
+	#ButtImageCount
+	#ButtsImageCount
+	#BoobImageCount
+	#BoobsImageCount
+	 
 
 Tease AI will now move to the next script type in the cycle if the current script has run out of lines
 
@@ -63,6 +70,22 @@ Fixes added from Community Members:
 		 import and restarts the application to process the import and data-upgrade.
 		 To start the import go to Settings->General tab.
 		[/spoiler]
+	
+	Stefaf: Commands @PornAllowedOff and @PornAllowedOn where not replaced correct in Domme Output.
+	
+	Stefaf: ImageCount-Keywords didn't count Images in URL-Files and none did neither react to OfflineMode nor @PornAllowedOff.
+	
+	Stefaf: #LocalImageCount didn't count local Butt and Boob Images.
+	
+	Stefaf: ImageDataContainer was searching Sub-folders instead of top level only and vice versa.
+	
+	Stefaf: GetGoto() was not able to jump to the first line of a script.
+	
+	Stefaf: ErrorImage has been shown randomly if one of all image-genres had no images.
+	
+	Stefaf: ContextMenu of MainImageBox did not activate or deactivate the MenuItems correct.
+	
+	Stefaf: Improvement: Remove from URL-File option in ContextMenu MainPicturebox now removes a ImageUrl from all URL-Files.
 
 # Changelog - Patch 53
 
