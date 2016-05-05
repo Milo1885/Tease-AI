@@ -2833,6 +2833,7 @@ WritingTaskLine:
 								ScriptTimer.Start()
 								OrgasmDenied = False
 								OrgasmYesNo = False
+								EndTease = False
 								Return
 							End If
 
@@ -2916,6 +2917,7 @@ RuinedOrgasm:
 						ScriptTimer.Start()
 						OrgasmRuined = False
 						OrgasmYesNo = False
+						EndTease = False
 						Return
 					End If
 
@@ -3034,6 +3036,7 @@ NoNoCumFiles:
 						ScriptTimer.Start()
 						OrgasmAllowed = False
 						OrgasmYesNo = False
+						EndTease = False
 						Return
 					End If
 
@@ -22009,6 +22012,7 @@ NoPlaylistEndFile:
 						ScriptTimer.Start()
 						OrgasmDenied = False
 						OrgasmYesNo = False
+						EndTease = False
 						Return
 					End If
 
@@ -22087,6 +22091,7 @@ RuinedOrgasm:
 					ScriptTimer.Start()
 					OrgasmRuined = False
 					OrgasmYesNo = False
+					EndTease = False
 					Return
 				End If
 
@@ -22205,6 +22210,7 @@ NoNoCumFiles:
 					ScriptTimer.Start()
 					OrgasmAllowed = False
 					OrgasmYesNo = False
+					EndTease = False
 					Return
 				End If
 
