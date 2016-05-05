@@ -22557,6 +22557,22 @@ PoundLoop:
 
 		TaskEntry = Trim(TaskEntry)
 
+		If TaskEntry.Contains("*") Then
+			TaskEntry = TaskEntry.Replace(". *", " *")
+			Dim EmoToggle As Boolean = True
+			For i As Integer = TaskEntry.Length - 1 To 0 Step -1
+				If TaskEntry.Substring(i, 1) = "*" Then
+					If EmoToggle = False Then
+						EmoToggle = True
+						TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
+					Else
+						EmoToggle = False
+						TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
+					End If
+				End If
+			Next
+		End If
+
 		Return TaskEntry
 
 	End Function
