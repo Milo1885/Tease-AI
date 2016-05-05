@@ -13794,4 +13794,11 @@ WhyUMakeMeDoDis:
 	Private Sub NBTaskCBTTimeMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTaskCBTTimeMax.ValueChanged
 		If NBTaskCBTTimeMax.Value < NBTaskCBTTimeMin.Value Then NBTaskCBTTimeMax.Value = NBTaskCBTTimeMin.Value
 	End Sub
+
+	Private Sub NBTasksMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTasksMin.ValueChanged
+		If NBTasksMin.Value > NBTasksMax.Value Then NBTasksMin.Value = NBTasksMax.Value
+	End Sub
+	Private Sub NBTasksMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTasksMax.ValueChanged
+		If NBTasksMax.Value < NBTasksMin.Value Then NBTasksMax.Value = NBTasksMin.Value
+	End Sub
 End Class
