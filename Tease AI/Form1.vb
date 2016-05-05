@@ -21497,7 +21497,7 @@ NoPlaylistModuleFile:
 			StrokeTauntVal = -1
 		End If
 
-		If Playlist = True Then PlaylistCurrent = 1
+		If Playlist = True Then PlaylistCurrent += 1
 
 		If Not IsEdging Then
 
@@ -21529,7 +21529,6 @@ NoPlaylistModuleFile:
 		If PlaylistFile.Count = 0 Then GoTo NoPlaylistLinkFile
 
 		If Playlist = False Or PlaylistFile(PlaylistCurrent).Contains("Random Link") Then
-
 
 
 NoPlaylistLinkFile:

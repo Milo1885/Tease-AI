@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 # Changelog - Patch 54
 
+Fixed bug where Playlists did not move on to Link scripts after running Modules
+
 Task overhaul tweaks
 
 Major Tasks overhaul:
