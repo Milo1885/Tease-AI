@@ -463,7 +463,7 @@ Public Class Form1
 
 	Public MetroThread As Thread
 
-	Dim GeneralTime As String = "Afternoon"
+	Public GeneralTime As String = "Afternoon"
 
 	Dim NewDommeSlideshow As Boolean
 	Dim OriginalDommeSlideshow As String
@@ -551,6 +551,8 @@ Public Class Form1
 
 	Dim TauntEdging As Boolean
 	Dim TauntEdgingAsked As Boolean
+
+	Dim Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
 
 	Private Const DISABLE_SOUNDS As Integer = 21
 	Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -3313,7 +3315,35 @@ EdgeSkip:
 			End If
 		End If
 
-
+		If Modes.Count > 0 Then
+			If Modes.Keys.Contains(CheckResponse) Then
+				If Modes(CheckResponse).Type.ToUpper.Contains("GOTO") Then
+					WaitTimer.Stop()
+					If TimeoutTimer.Enabled = True Then
+						TimeoutTimer.Stop()
+						YesOrNo = False
+						InputFlag = False
+					End If
+					FileGoto = Modes(CheckResponse).GotoLine
+					SkipGotoLine = True
+					GetGoto()
+					Modes.Remove(CheckResponse)
+					Return
+				End If
+				If Modes(CheckResponse).Type.ToUpper.Contains("VIDEO") Then
+					TeaseVideo = False
+					VideoTimer.Stop()
+					DomWMP.Visible = False
+					DomWMP.Ctlcontrols.stop()
+					mainPictureBox.Visible = True
+					FileGoto = Modes(CheckResponse).GotoLine
+					SkipGotoLine = True
+					GetGoto()
+					Modes.Remove(CheckResponse)
+					Return
+				End If
+			End If
+		End If
 
 
 		ResponseFile = ""
@@ -14671,6 +14701,33 @@ VTSkip:
 			StringClean = StringClean.Replace("@RuinedMode(" & GetParentheses(StringClean, "@RuinedMode(") & ")", "")
 		End If
 
+		If StringClean.Contains("@CustomMode(") Then
+
+			Dim CustomFlag As String = GetParentheses(StringClean, "@CustomMode(")
+			CustomFlag = FixCommas(CustomFlag)
+			Dim CustomArray As String() = CustomFlag.Split(",")
+
+			If CustomArray.Count = 3 Then
+				Dim NewMode As New Mode
+				NewMode.Keyword = CustomArray(0)
+				NewMode.Type = CustomArray(1)
+				NewMode.GotoLine = CustomArray(2)
+				Modes.Add(CustomArray(0), NewMode)
+			End If
+
+			If CustomArray.Count = 2 Then
+				If CustomArray(1).ToUpper.Contains("NORMAL") Then
+					If Modes.Keys.Contains(CustomArray(0)) Then
+						Modes.Remove(CustomArray(0))
+					End If
+				End If
+			End If
+
+			StringClean = StringClean.Replace("@CustomMode(" & GetParentheses(StringClean, "@CustomMode(") & ")", "")
+
+		End If
+
+
 		If StringClean.Contains("@ClearModes") Then
 			ClearModes()
 			StringClean = StringClean.Replace("@ClearModes", "")
@@ -22364,6 +22421,10 @@ Night:
 
 		StupidTimer.Start()
 
+		Debug.Print("<><><><><><><><><><><><><><><><><><><><><>")
+		Debug.Print("Created " & GeneralTime & " Task Letter")
+		Debug.Print("<><><><><><><><><><><><><><><><><><><><><>")
+
 	End Sub
 
 	Public Function CleanTaskLines(ByVal dir As String) As String
@@ -22395,6 +22456,10 @@ Night:
 
 PoundLoop:
 				LoopBuffer += 1
+
+				TaskList(i) = TaskList(i).Replace(". #Emote", " #Emote")
+				TaskList(i) = TaskList(i).Replace(". #Grin", " #Grin")
+				TaskList(i) = TaskList(i).Replace(". #Lol", " #Lol.")
 
 				TaskList(i) = PoundClean(TaskList(i))
 				If TaskEntry.Contains("#") And LoopBuffer < 6 Then GoTo PoundLoop
@@ -26822,18 +26887,26 @@ SkipNew:
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp") Then
 
 			Dim Dates As String
-			Dates = FormatDateTime(Now, DateFormat.ShortDate) & " " & GetTime("SYS_WakeUp")
+			'Dates = FormatDateTime(Now, DateFormat.ShortDate) & " " & GetTime("SYS_WakeUp")
+			Dates = FormatDateTime(Now, DateFormat.ShortDate) & " " & FormatDateTime(FrmSettings.TimeBoxWakeUp.Value, DateFormat.LongTime)
 
 			Dim DDiff As Integer
 			DDiff = DateDiff(DateInterval.Hour, CDate(Dates), Now)
 
-			'Debug.Print(DDiff)
+			Dim TimeCounter As Integer = -3
+
+
+
+			'Debug.Print("DDiff = " & DDiff)
 			'Debug.Print(GetTime("SYS_WakeUp"))
 
 			GeneralTime = "Night"
-			If DDiff > -1 And DDiff < 5 Then GeneralTime = "Morning"
+			'If DDiff < -13 Then GeneralTime = "Afternoon"
+			If DDiff < -20 Then GeneralTime = "Morning"
+			If DDiff > -2 And DDiff < 5 Then GeneralTime = "Morning"
 			If DDiff > 4 And DDiff < 12 Then GeneralTime = "Afternoon"
-			If DDiff < -13 Then GeneralTime = "Afternoon"
+			If DDiff > -21 And DDiff < -11 Then GeneralTime = "Afternoon"
+
 
 			'Debug.Print(GeneralTime)
 		End If
@@ -29218,6 +29291,8 @@ SkipNew:
 		EdgeMessage = False
 		CameMessage = False
 		RuinedMessage = False
+		Modes.Clear()
+
 
 	End Sub
 

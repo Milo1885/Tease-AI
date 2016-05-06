@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Classes\Common.vb" />
     <Compile Include="Classes\Log.vb" />
+    <Compile Include="Classes\Mode.vb" />
     <Compile Include="Classes\myDirectory.vb" />
     <Compile Include="Classes\mySettings_Partial.vb" />
     <Compile Include="Classes\teaseAI_Timer.vb">
