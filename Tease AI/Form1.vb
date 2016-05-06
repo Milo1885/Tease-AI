@@ -76,6 +76,8 @@ Public Class Form1
 	Dim CBTBallsCount As Integer
 	Dim CBTCockCount As Integer
 
+	Dim TasksCount As Integer = "0"
+
 	Dim GotoDommeLevel As Boolean
 
 	Dim DommeMood As Integer
@@ -3647,8 +3649,8 @@ DebugAwarenessStep2:
 
 
 		If CBTCockFlag = True Or CBTBallsFlag = True Or CBTBothFlag = True Or CustomTask = True Then
-			Dim CBTStop As Integer = randomizer.Next(1, 101)
-			If CBTStop < 30 Then
+			TasksCount -= 1
+			If TasksCount < 1 Then
 				CBTCockFlag = False
 				CBTBallsFlag = False
 				CBTBothFlag = False
@@ -7234,9 +7236,8 @@ NullResponseLine2:
 
 
 				If CBTCockFlag = True Or CBTBallsFlag = True Or CBTBothFlag = True Or CustomTask = True Then
-					Dim CBTStop As Integer = randomizer.Next(1, 101)
-					'Debug.Print("CBTSTop = " & CBTStop)
-					If CBTStop < 30 Then
+					TasksCount -= 1
+					If TasksCount < 1 Then
 						CBTCockFlag = False
 						CBTBallsFlag = False
 						CBTBothFlag = False
@@ -10213,13 +10214,13 @@ RinseLatherRepeat:
 
 						For x As Integer = 0 To FlagArray.Count - 1
 
-							CreateTempFlag(FlagArray(x))
+							CreateFlag(FlagArray(x), True)
 
 						Next
 
 					Else
 
-						CreateTempFlag(TempFlag)
+						CreateFlag(TempFlag, True)
 
 					End If
 
@@ -11631,6 +11632,7 @@ ShowedBlogImage:
 			If FrmSettings.CBCBTBalls.Checked = True Then
 				CBTBallsActive = True
 				CBTBallsFlag = True
+				TasksCount = randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
 			End If
 			StringClean = StringClean.Replace("@CBTBalls", "")
 		End If
@@ -11639,6 +11641,7 @@ ShowedBlogImage:
 			If FrmSettings.CBCBTCock.Checked = True Then
 				CBTCockActive = True
 				CBTCockFlag = True
+				TasksCount = randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
 			End If
 			StringClean = StringClean.Replace("@CBTCock", "")
 		End If
@@ -11648,6 +11651,7 @@ ShowedBlogImage:
 			If FrmSettings.CBCBTCock.Checked = True And FrmSettings.CBCBTBalls.Checked = True Then
 				CBTBothActive = True
 				CBTBothFlag = True
+				TasksCount = randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
 			End If
 
 			StringClean = StringClean.Replace("@CBT", "")
@@ -11661,15 +11665,26 @@ ShowedBlogImage:
 
 			Dim CustomFlag As String = GetParentheses(StringClean, "@CustomTask(")
 
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomFlag & "_First.txt") And
-			 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomFlag & ".txt") Then
+			CustomFlag = FixCommas(CustomFlag)
+
+			Dim CustomArray As String() = CustomFlag.Split(",")
+
+			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & "_First.txt") And
+		  File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & ".txt") Then
 				CustomTask = True
 				CustomTaskActive = True
-				CustomTaskText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomFlag & ".txt"
-				CustomTaskTextFirst = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomFlag & "_First.txt"
+				CustomTaskText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & ".txt"
+				CustomTaskTextFirst = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & "_First.txt"
 			End If
 
-			StringClean = StringClean.Replace("@CustomTask(" & CustomFlag & ")", "")
+			If CustomArray.Count > 1 Then
+				TasksCount = Val(CustomArray(1))
+			Else
+				TasksCount = randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
+			End If
+
+
+			StringClean = StringClean.Replace("@CustomTask(" & GetParentheses(StringClean, "@CustomTask(") & ")", "")
 
 		End If
 
@@ -14913,24 +14928,19 @@ VTSkip:
 
 	End Sub
 
-	Public Function CreateFlag(ByVal FlagDir As String)
+	Public Function CreateFlag(ByVal FlagDir As String, Optional ByVal Temp As Boolean = False)
 
-		Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & FlagDir)
+		If Temp = False Then
+			FlagDir = "Flags\" & FlagDir
+		Else
+			FlagDir = "Flags\Temp\" & FlagDir
+		End If
+
+		Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\" & FlagDir)
 		FlagCreate.Close()
 		FlagCreate.Dispose()
 
-
 	End Function
-
-	Public Function CreateTempFlag(ByVal FlagDir As String)
-
-		Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagDir)
-		FlagCreate.Close()
-		FlagCreate.Dispose()
-
-
-	End Function
-
 
 	Public Function DeleteFlag(ByVal FlagDir As String)
 
@@ -22504,6 +22514,51 @@ PoundLoop:
 				If LoopBuffer > 4 Then Exit Do
 				TaskEntry = PoundClean(TaskEntry)
 			Loop Until Not TaskEntry.Contains("#") And Not TaskEntry.Contains("@RT(") And Not TaskEntry.Contains("@RandomText(")
+
+			If TaskEntry.Contains("@SetFlag(") Then
+				Dim SetFlag As String = GetParentheses(TaskEntry, "@SetFlag(")
+				Dim OriginalSet As String = SetFlag
+				If SetFlag.Contains(",") Then
+					SetFlag = FixCommas(SetFlag)
+					Dim FlagArray() As String = SetFlag.Split(",")
+					For x As Integer = 0 To FlagArray.Count - 1
+						CreateFlag(FlagArray(x))
+					Next
+				Else
+					CreateFlag(SetFlag)
+				End If
+				TaskEntry = TaskEntry.Replace("@SetFlag(" & OriginalSet & ")", "")
+			End If
+
+			If TaskEntry.Contains("@TempFlag(") Then
+				Dim SetFlag As String = GetParentheses(TaskEntry, "@TempFlag(")
+				Dim OriginalSet As String = SetFlag
+				If SetFlag.Contains(",") Then
+					SetFlag = FixCommas(SetFlag)
+					Dim FlagArray() As String = SetFlag.Split(",")
+					For x As Integer = 0 To FlagArray.Count - 1
+						CreateFlag(FlagArray(x), True)
+					Next
+				Else
+					CreateFlag(SetFlag, True)
+				End If
+				TaskEntry = TaskEntry.Replace("@TempFlag(" & OriginalSet & ")", "")
+			End If
+
+			If TaskEntry.Contains("@DeleteFlag(") Then
+				Dim SetFlag As String = GetParentheses(TaskEntry, "@DeleteFlag(")
+				Dim OriginalSet As String = SetFlag
+				If SetFlag.Contains(",") Then
+					SetFlag = FixCommas(SetFlag)
+					Dim FlagArray() As String = SetFlag.Split(",")
+					For x As Integer = 0 To FlagArray.Count - 1
+						DeleteFlag(FlagArray(x))
+					Next
+				Else
+					DeleteFlag(SetFlag)
+				End If
+				TaskEntry = TaskEntry.Replace("@DeleteFlag(" & OriginalSet & ")", "")
+			End If
 
 			TaskEntry = StripCommands(TaskEntry)
 

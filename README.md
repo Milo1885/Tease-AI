@@ -9,6 +9,10 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 # Changelog - Patch 54
 
+Enhanced @CustomTask() Command and added Session Tasks settings in Ranges setings tab - Session tasks (@CBT, @CBTBalls, @CBTCock and @CustomTask()) no longer run for a random number of times. The number of times tasks run is now determined by the new settings in the Ranges settings tab for Session Tasks. For Custom Tasks, you may specify a specific amount of times to run the task using a comma. For example:
+
+     @CustomTask(Spanking, 5) - This would run the Custom Task "Spanking" 5 times. This number includes the first instruction taken from "_First.txt
+ 
 Fixed bug where Responses would get locked to [After Tease] lines if the domme continued a session after the orgasm decision
 
 Fixed bug where Playlists did not move on to Link scripts after running Modules
@@ -24,6 +28,10 @@ Major Tasks overhaul:
 	 Tasks are now filtered through the new routine which should greatly improve stability
 	 
 	 Task-related #Keywords should no longer return 0 as a value
+	 
+	 @RandomText() and @RT() can now be used in Task lines
+	 
+	 @SetFlag(), @TempFlag() and @DeleteFlag() can now be used in Task lines
 
      "Domme is sending you a file" window now displays correctly when Lazy Sub AV is active
   
