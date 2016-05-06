@@ -9,7 +9,15 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 # Changelog - Patch 54
 
-Enhanced @CustomTask() Command and added Session Tasks settings in Ranges setings tab - Session tasks (@CBT, @CBTBalls, @CBTCock and @CustomTask()) no longer run for a random number of times. The number of times tasks run is now determined by the new settings in the Ranges settings tab for Session Tasks. For Custom Tasks, you may specify a specific amount of times to run the task using a comma. For example:
+Added @CustomMode() Command and Mode Class - You can use @CustomMode to set any keyword or phrase to a mode that will move to a GotoLine in the script when used. The current types that @CustomMode can use are Goto and Video. For example:
+
+     @CustomMode(I'm done, Goto, Finished Task) - This would move the script to the line (Finished Task) if the user types "I'm done" (not case sensitive)
+	 @CustomMode(I saw boobs, Video, Video Closed) - This would stop a video and move to the line (Video Closed) if the user types "I saw boobs" (not case sensitive)
+
+     Only one @CustomMode() Command should be used per line, but you may have as many custom modes activated at a time that you wish. Remember that individual Modes are cleared when they resolve, and all modes are cleared when transitioning between script types. To manually clear a mode, use @CustomMode(ModeText, Normal)	 
+	 
+
+Enhanced @CustomTask() Command and added Session Tasks settings in Ranges settings tab - Session tasks (@CBT, @CBTBalls, @CBTCock and @CustomTask()) no longer run for a random number of times. The number of times tasks run is now determined by the new settings in the Ranges settings tab for Session Tasks. For Custom Tasks, you may specify a specific amount of times to run the task using a comma. For example:
 
      @CustomTask(Spanking, 5) - This would run the Custom Task "Spanking" 5 times. This number includes the first instruction taken from "_First.txt
  
@@ -34,6 +42,8 @@ Major Tasks overhaul:
 	 @SetFlag(), @TempFlag() and @DeleteFlag() can now be used in Task lines
 
      "Domme is sending you a file" window now displays correctly when Lazy Sub AV is active
+	 
+	 @Morning, @Afternoon and @Night Command Filters now filter more accurately relative to user's Daily Wake Up Time
   
      Task-related Ranges added to Ranges tab, corresponding to the following #KeyWords: #TaskStrokes, #TaskStrokingTime, #TaskEdges, #TaskHoldTheEdgeTime, #TaskCBTTime
 	 
