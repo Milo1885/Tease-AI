@@ -44,7 +44,7 @@ Restart:
 				' Create new file
 				'===============================================================================
 				Using sw As New StreamWriter(Logfile)
-					Dim fecha As Date = IO.File.GetCreationTime(Assembly.GetExecutingAssembly().Location)
+					Dim fecha As Date = IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location)
 					sw.Write("=========================== LogFile Created =============================" & vbCrLf &
 							 "Build Date (UTC): " & fecha.ToUniversalTime.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
 							 "File Date (UTC): " & Now.ToUniversalTime.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
@@ -88,6 +88,7 @@ Restart:
 	Friend Shared Sub WriteError(ByVal msg As String,
    ByVal Exception As Exception, ByVal title As String)
 		Try
+			Write("Exception occured: " & msg)
 			Dim TargetFilePath As String = Application.StartupPath &
 			"\ErrorLogs\" & Today.ToUniversalTime.ToString("yyyy-MM-dd") & "_errorlog.txt"
 
@@ -111,7 +112,7 @@ Restart:
 					s1.Write("###################################################################" & vbCrLf)
 					s1.Write("Date/Time: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf)
 					s1.Write("Version: " & My.Application.Info.Version.ToString & vbCrLf)
-					s1.Write("BuildDate (UTC): " & File.GetCreationTimeUtc(Assembly.GetExecutingAssembly().Location).ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf)
+					s1.Write("BuildDate (UTC): " & File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf)
 					s1.Write("Title: " & title & vbCrLf)
 					s1.Write("Message: " & msg & vbCrLf)
 					s1.Write("Exceptions: " & Replace(ExceptonToString(Exception), vbCrLf, vbCrLf & vbTab) & vbCrLf)

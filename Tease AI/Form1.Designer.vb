@@ -94,33 +94,33 @@ Partial Class Form1
 		Me.LBLFileTransfer = New System.Windows.Forms.Label()
 		Me.PBFileTransfer = New System.Windows.Forms.ProgressBar()
 		Me.PictureStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-		Me.ToolStripMenuItem5 = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-		Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-		Me.SaveImageToToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.HardcoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.SoftcoreToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.LesbianToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.BlowjobToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.FemdomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.LezdomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.HentaiToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.GayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.MaledomToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.CaptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.GeneralToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-		Me.BoobsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ButtsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
-		Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator()
-		Me.DommeSlideshowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.GoToFirstImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.GoToLastImageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
-		Me.LoadNewSlideshowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIcopyImageLocation = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSS1 = New System.Windows.Forms.ToolStripSeparator()
+		Me.PicStripTSMIsaveImage = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMISaveImageTo = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveHardcore = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveSoftcore = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveLesbian = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveBlowjob = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveFemdom = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveLezdom = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveHentai = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveGay = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveMaledom = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveCaptions = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveGeneral = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveBoobs = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIsaveButts = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSS2 = New System.Windows.Forms.ToolStripSeparator()
+		Me.PicStripTSMIlikeImage = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIdislikeImage = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIremoveFromURL = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSS3 = New System.Windows.Forms.ToolStripSeparator()
+		Me.PicStripTSMIdommeSlideshow = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIdommeSlideshow_GoToFirst = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIdommeSlideshowGoToLast = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTSMIdommeSlideshowTSS1 = New System.Windows.Forms.ToolStripSeparator()
+		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow = New System.Windows.Forms.ToolStripMenuItem()
 		Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
 		Me.BWGlitter = New System.ComponentModel.BackgroundWorker()
 		Me.TeaseAINotify = New System.Windows.Forms.NotifyIcon(Me.components)
@@ -1250,7 +1250,7 @@ Partial Class Form1
 		'OpenFileDialog1
 		'
 		Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" & _
+		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" &
 		  "s (*.*)|*.*"
 		Me.OpenFileDialog1.Title = "Select an image file"
 		'
@@ -1338,170 +1338,170 @@ Partial Class Form1
 		'
 		'PictureStrip
 		'
-		Me.PictureStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem5, Me.ToolStripSeparator6, Me.ToolStripMenuItem1, Me.SaveImageToToolStripMenuItem, Me.ToolStripSeparator7, Me.ToolStripMenuItem2, Me.ToolStripMenuItem3, Me.ToolStripMenuItem4, Me.ToolStripSeparator8, Me.DommeSlideshowToolStripMenuItem})
+		Me.PictureStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIcopyImageLocation, Me.PicStripTSS1, Me.PicStripTSMIsaveImage, Me.PicStripTSMISaveImageTo, Me.PicStripTSS2, Me.PicStripTSMIlikeImage, Me.PicStripTSMIdislikeImage, Me.PicStripTSMIremoveFromURL, Me.PicStripTSS3, Me.PicStripTSMIdommeSlideshow})
 		Me.PictureStrip.Name = "PictureStrip"
 		Me.PictureStrip.Size = New System.Drawing.Size(194, 176)
 		'
 		'ToolStripMenuItem5
 		'
-		Me.ToolStripMenuItem5.Name = "ToolStripMenuItem5"
-		Me.ToolStripMenuItem5.Size = New System.Drawing.Size(193, 22)
-		Me.ToolStripMenuItem5.Text = "Copy Image Location"
+		Me.PicStripTSMIcopyImageLocation.Name = "ToolStripMenuItem5"
+		Me.PicStripTSMIcopyImageLocation.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIcopyImageLocation.Text = "Copy Image Location"
 		'
 		'ToolStripSeparator6
 		'
-		Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-		Me.ToolStripSeparator6.Size = New System.Drawing.Size(190, 6)
+		Me.PicStripTSS1.Name = "ToolStripSeparator6"
+		Me.PicStripTSS1.Size = New System.Drawing.Size(190, 6)
 		'
 		'ToolStripMenuItem1
 		'
-		Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-		Me.ToolStripMenuItem1.Size = New System.Drawing.Size(193, 22)
-		Me.ToolStripMenuItem1.Text = "Save Image"
+		Me.PicStripTSMIsaveImage.Name = "ToolStripMenuItem1"
+		Me.PicStripTSMIsaveImage.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIsaveImage.Text = "Save Image"
 		'
 		'SaveImageToToolStripMenuItem
 		'
-		Me.SaveImageToToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.HardcoreToolStripMenuItem, Me.SoftcoreToolStripMenuItem, Me.LesbianToolStripMenuItem, Me.BlowjobToolStripMenuItem, Me.FemdomToolStripMenuItem, Me.LezdomToolStripMenuItem, Me.HentaiToolStripMenuItem, Me.GayToolStripMenuItem, Me.MaledomToolStripMenuItem, Me.CaptionsToolStripMenuItem, Me.GeneralToolStripMenuItem1, Me.BoobsToolStripMenuItem, Me.ButtsToolStripMenuItem})
-		Me.SaveImageToToolStripMenuItem.Name = "SaveImageToToolStripMenuItem"
-		Me.SaveImageToToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-		Me.SaveImageToToolStripMenuItem.Text = "Save Image To"
+		Me.PicStripTSMISaveImageTo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIsaveHardcore, Me.PicStripTSMIsaveSoftcore, Me.PicStripTSMIsaveLesbian, Me.PicStripTSMIsaveBlowjob, Me.PicStripTSMIsaveFemdom, Me.PicStripTSMIsaveLezdom, Me.PicStripTSMIsaveHentai, Me.PicStripTSMIsaveGay, Me.PicStripTSMIsaveMaledom, Me.PicStripTSMIsaveCaptions, Me.PicStripTSMIsaveGeneral, Me.PicStripTSMIsaveBoobs, Me.PicStripTSMIsaveButts})
+		Me.PicStripTSMISaveImageTo.Name = "SaveImageToToolStripMenuItem"
+		Me.PicStripTSMISaveImageTo.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMISaveImageTo.Text = "Save Image To"
 		'
 		'HardcoreToolStripMenuItem
 		'
-		Me.HardcoreToolStripMenuItem.Name = "HardcoreToolStripMenuItem"
-		Me.HardcoreToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.HardcoreToolStripMenuItem.Text = "Hardcore"
+		Me.PicStripTSMIsaveHardcore.Name = "HardcoreToolStripMenuItem"
+		Me.PicStripTSMIsaveHardcore.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveHardcore.Text = "Hardcore"
 		'
 		'SoftcoreToolStripMenuItem
 		'
-		Me.SoftcoreToolStripMenuItem.Name = "SoftcoreToolStripMenuItem"
-		Me.SoftcoreToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.SoftcoreToolStripMenuItem.Text = "Softcore"
+		Me.PicStripTSMIsaveSoftcore.Name = "SoftcoreToolStripMenuItem"
+		Me.PicStripTSMIsaveSoftcore.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveSoftcore.Text = "Softcore"
 		'
 		'LesbianToolStripMenuItem
 		'
-		Me.LesbianToolStripMenuItem.Name = "LesbianToolStripMenuItem"
-		Me.LesbianToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.LesbianToolStripMenuItem.Text = "Lesbian"
+		Me.PicStripTSMIsaveLesbian.Name = "LesbianToolStripMenuItem"
+		Me.PicStripTSMIsaveLesbian.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveLesbian.Text = "Lesbian"
 		'
 		'BlowjobToolStripMenuItem
 		'
-		Me.BlowjobToolStripMenuItem.Name = "BlowjobToolStripMenuItem"
-		Me.BlowjobToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.BlowjobToolStripMenuItem.Text = "Blowjob"
+		Me.PicStripTSMIsaveBlowjob.Name = "BlowjobToolStripMenuItem"
+		Me.PicStripTSMIsaveBlowjob.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveBlowjob.Text = "Blowjob"
 		'
 		'FemdomToolStripMenuItem
 		'
-		Me.FemdomToolStripMenuItem.Name = "FemdomToolStripMenuItem"
-		Me.FemdomToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.FemdomToolStripMenuItem.Text = "Femdom"
+		Me.PicStripTSMIsaveFemdom.Name = "FemdomToolStripMenuItem"
+		Me.PicStripTSMIsaveFemdom.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveFemdom.Text = "Femdom"
 		'
 		'LezdomToolStripMenuItem
 		'
-		Me.LezdomToolStripMenuItem.Name = "LezdomToolStripMenuItem"
-		Me.LezdomToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.LezdomToolStripMenuItem.Text = "Lezdom"
+		Me.PicStripTSMIsaveLezdom.Name = "LezdomToolStripMenuItem"
+		Me.PicStripTSMIsaveLezdom.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveLezdom.Text = "Lezdom"
 		'
 		'HentaiToolStripMenuItem
 		'
-		Me.HentaiToolStripMenuItem.Name = "HentaiToolStripMenuItem"
-		Me.HentaiToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.HentaiToolStripMenuItem.Text = "Hentai"
+		Me.PicStripTSMIsaveHentai.Name = "HentaiToolStripMenuItem"
+		Me.PicStripTSMIsaveHentai.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveHentai.Text = "Hentai"
 		'
 		'GayToolStripMenuItem
 		'
-		Me.GayToolStripMenuItem.Name = "GayToolStripMenuItem"
-		Me.GayToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.GayToolStripMenuItem.Text = "Gay"
+		Me.PicStripTSMIsaveGay.Name = "GayToolStripMenuItem"
+		Me.PicStripTSMIsaveGay.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveGay.Text = "Gay"
 		'
 		'MaledomToolStripMenuItem
 		'
-		Me.MaledomToolStripMenuItem.Name = "MaledomToolStripMenuItem"
-		Me.MaledomToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.MaledomToolStripMenuItem.Text = "Maledom"
+		Me.PicStripTSMIsaveMaledom.Name = "MaledomToolStripMenuItem"
+		Me.PicStripTSMIsaveMaledom.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveMaledom.Text = "Maledom"
 		'
 		'CaptionsToolStripMenuItem
 		'
-		Me.CaptionsToolStripMenuItem.Name = "CaptionsToolStripMenuItem"
-		Me.CaptionsToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.CaptionsToolStripMenuItem.Text = "Captions"
+		Me.PicStripTSMIsaveCaptions.Name = "CaptionsToolStripMenuItem"
+		Me.PicStripTSMIsaveCaptions.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveCaptions.Text = "Captions"
 		'
 		'GeneralToolStripMenuItem1
 		'
-		Me.GeneralToolStripMenuItem1.Name = "GeneralToolStripMenuItem1"
-		Me.GeneralToolStripMenuItem1.Size = New System.Drawing.Size(125, 22)
-		Me.GeneralToolStripMenuItem1.Text = "General"
+		Me.PicStripTSMIsaveGeneral.Name = "GeneralToolStripMenuItem1"
+		Me.PicStripTSMIsaveGeneral.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveGeneral.Text = "General"
 		'
 		'BoobsToolStripMenuItem
 		'
-		Me.BoobsToolStripMenuItem.Name = "BoobsToolStripMenuItem"
-		Me.BoobsToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.BoobsToolStripMenuItem.Text = "Boobs"
+		Me.PicStripTSMIsaveBoobs.Name = "BoobsToolStripMenuItem"
+		Me.PicStripTSMIsaveBoobs.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveBoobs.Text = "Boobs"
 		'
 		'ButtsToolStripMenuItem
 		'
-		Me.ButtsToolStripMenuItem.Name = "ButtsToolStripMenuItem"
-		Me.ButtsToolStripMenuItem.Size = New System.Drawing.Size(125, 22)
-		Me.ButtsToolStripMenuItem.Text = "Butts"
+		Me.PicStripTSMIsaveButts.Name = "ButtsToolStripMenuItem"
+		Me.PicStripTSMIsaveButts.Size = New System.Drawing.Size(125, 22)
+		Me.PicStripTSMIsaveButts.Text = "Butts"
 		'
 		'ToolStripSeparator7
 		'
-		Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-		Me.ToolStripSeparator7.Size = New System.Drawing.Size(190, 6)
+		Me.PicStripTSS2.Name = "ToolStripSeparator7"
+		Me.PicStripTSS2.Size = New System.Drawing.Size(190, 6)
 		'
 		'ToolStripMenuItem2
 		'
-		Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-		Me.ToolStripMenuItem2.Size = New System.Drawing.Size(193, 22)
-		Me.ToolStripMenuItem2.Text = "Like This Image"
+		Me.PicStripTSMIlikeImage.Name = "ToolStripMenuItem2"
+		Me.PicStripTSMIlikeImage.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIlikeImage.Text = "Like This Image"
 		'
 		'ToolStripMenuItem3
 		'
-		Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
-		Me.ToolStripMenuItem3.Size = New System.Drawing.Size(193, 22)
-		Me.ToolStripMenuItem3.Text = "Dislike This Image"
+		Me.PicStripTSMIdislikeImage.Name = "ToolStripMenuItem3"
+		Me.PicStripTSMIdislikeImage.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIdislikeImage.Text = "Dislike This Image"
 		'
 		'ToolStripMenuItem4
 		'
-		Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
-		Me.ToolStripMenuItem4.Size = New System.Drawing.Size(193, 22)
-		Me.ToolStripMenuItem4.Text = "Remove From URL File"
+		Me.PicStripTSMIremoveFromURL.Name = "ToolStripMenuItem4"
+		Me.PicStripTSMIremoveFromURL.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIremoveFromURL.Text = "Remove From URL File"
 		'
 		'ToolStripSeparator8
 		'
-		Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-		Me.ToolStripSeparator8.Size = New System.Drawing.Size(190, 6)
+		Me.PicStripTSS3.Name = "ToolStripSeparator8"
+		Me.PicStripTSS3.Size = New System.Drawing.Size(190, 6)
 		'
 		'DommeSlideshowToolStripMenuItem
 		'
-		Me.DommeSlideshowToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GoToFirstImageToolStripMenuItem, Me.GoToLastImageToolStripMenuItem, Me.ToolStripSeparator9, Me.LoadNewSlideshowToolStripMenuItem})
-		Me.DommeSlideshowToolStripMenuItem.Enabled = False
-		Me.DommeSlideshowToolStripMenuItem.Name = "DommeSlideshowToolStripMenuItem"
-		Me.DommeSlideshowToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-		Me.DommeSlideshowToolStripMenuItem.Text = "Domme Slideshow"
+		Me.PicStripTSMIdommeSlideshow.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIdommeSlideshow_GoToFirst, Me.PicStripTSMIdommeSlideshowGoToLast, Me.PicStripTSMIdommeSlideshowTSS1, Me.PicStripTSMIdommeSlideshowLoadNewSlideshow})
+		Me.PicStripTSMIdommeSlideshow.Enabled = False
+		Me.PicStripTSMIdommeSlideshow.Name = "DommeSlideshowToolStripMenuItem"
+		Me.PicStripTSMIdommeSlideshow.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIdommeSlideshow.Text = "Domme Slideshow"
 		'
 		'GoToFirstImageToolStripMenuItem
 		'
-		Me.GoToFirstImageToolStripMenuItem.Name = "GoToFirstImageToolStripMenuItem"
-		Me.GoToFirstImageToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-		Me.GoToFirstImageToolStripMenuItem.Text = "Go To First Image"
+		Me.PicStripTSMIdommeSlideshow_GoToFirst.Name = "GoToFirstImageToolStripMenuItem"
+		Me.PicStripTSMIdommeSlideshow_GoToFirst.Size = New System.Drawing.Size(167, 22)
+		Me.PicStripTSMIdommeSlideshow_GoToFirst.Text = "Go To First Image"
 		'
 		'GoToLastImageToolStripMenuItem
 		'
-		Me.GoToLastImageToolStripMenuItem.Name = "GoToLastImageToolStripMenuItem"
-		Me.GoToLastImageToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-		Me.GoToLastImageToolStripMenuItem.Text = "Go To Last Image"
+		Me.PicStripTSMIdommeSlideshowGoToLast.Name = "GoToLastImageToolStripMenuItem"
+		Me.PicStripTSMIdommeSlideshowGoToLast.Size = New System.Drawing.Size(167, 22)
+		Me.PicStripTSMIdommeSlideshowGoToLast.Text = "Go To Last Image"
 		'
 		'ToolStripSeparator9
 		'
-		Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-		Me.ToolStripSeparator9.Size = New System.Drawing.Size(164, 6)
+		Me.PicStripTSMIdommeSlideshowTSS1.Name = "ToolStripSeparator9"
+		Me.PicStripTSMIdommeSlideshowTSS1.Size = New System.Drawing.Size(164, 6)
 		'
 		'LoadNewSlideshowToolStripMenuItem
 		'
-		Me.LoadNewSlideshowToolStripMenuItem.Name = "LoadNewSlideshowToolStripMenuItem"
-		Me.LoadNewSlideshowToolStripMenuItem.Size = New System.Drawing.Size(167, 22)
-		Me.LoadNewSlideshowToolStripMenuItem.Text = "New Slideshow"
+		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Name = "LoadNewSlideshowToolStripMenuItem"
+		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Size = New System.Drawing.Size(167, 22)
+		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Text = "New Slideshow"
 		'
 		'StatusUpdates
 		'
@@ -2759,7 +2759,7 @@ Partial Class Form1
 		Me.LBLWishListText.Name = "LBLWishListText"
 		Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
 		Me.LBLWishListText.TabIndex = 108
-		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" & _
+		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" &
 		  "uld buy it for me because you know you like buying stuff for me. "
 		'
 		'LBLWishlistCost
@@ -4196,15 +4196,15 @@ Partial Class Form1
 	Friend WithEvents AvoidTheEdgeTaunts As Tease_AI.teaseAI_Timer
 	Friend WithEvents PNLChatBox As System.Windows.Forms.Panel
 	Friend WithEvents PictureStrip As System.Windows.Forms.ContextMenuStrip
-	Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveImage As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIlikeImage As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIdislikeImage As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIremoveFromURL As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents ContactTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents AudibleMetronome As Tease_AI.teaseAI_Timer
 	Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
 	Friend WithEvents BWGlitter As System.ComponentModel.BackgroundWorker
-	Friend WithEvents ToolStripMenuItem5 As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIcopyImageLocation As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents CustomSlideshowTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents Contact1Timer As Tease_AI.teaseAI_Timer
 	Friend WithEvents Contact2Timer As Tease_AI.teaseAI_Timer
@@ -4441,20 +4441,20 @@ Partial Class Form1
 	Friend WithEvents BTNMetroStop2 As System.Windows.Forms.Button
 	Friend WithEvents BTNMetroStop1 As System.Windows.Forms.Button
 	Friend WithEvents MetronomeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents SaveImageToToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents HardcoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents SoftcoreToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents LesbianToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents BlowjobToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents FemdomToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents LezdomToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents HentaiToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents GayToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents MaledomToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents CaptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents GeneralToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents BoobsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents ButtsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMISaveImageTo As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveHardcore As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveSoftcore As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveLesbian As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveBlowjob As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveFemdom As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveLezdom As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveHentai As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveGay As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveMaledom As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveCaptions As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveGeneral As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveBoobs As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIsaveButts As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents TimeoutTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents PNLLazySub2 As System.Windows.Forms.Panel
 	Friend WithEvents BTNLS1 As System.Windows.Forms.Button
@@ -4481,14 +4481,14 @@ Partial Class Form1
 	Friend WithEvents Button4 As System.Windows.Forms.Button
 	Friend WithEvents PNLChatBox2 As System.Windows.Forms.Panel
 	Friend WithEvents ChatBox2 As System.Windows.Forms.TextBox
-	Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents ToolStripSeparator7 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents ToolStripSeparator8 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents DommeSlideshowToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents GoToFirstImageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents GoToLastImageToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents ToolStripSeparator9 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents LoadNewSlideshowToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSS1 As System.Windows.Forms.ToolStripSeparator
+	Friend WithEvents PicStripTSS2 As System.Windows.Forms.ToolStripSeparator
+	Friend WithEvents PicStripTSS3 As System.Windows.Forms.ToolStripSeparator
+	Friend WithEvents PicStripTSMIdommeSlideshow As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIdommeSlideshow_GoToFirst As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIdommeSlideshowGoToLast As System.Windows.Forms.ToolStripMenuItem
+	Friend WithEvents PicStripTSMIdommeSlideshowTSS1 As System.Windows.Forms.ToolStripSeparator
+	Friend WithEvents PicStripTSMIdommeSlideshowLoadNewSlideshow As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents InterfaceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents SideChatToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents SwitchSidesToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
