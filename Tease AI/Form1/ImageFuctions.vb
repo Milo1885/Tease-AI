@@ -5,7 +5,7 @@ Partial Class Form1
 
 #Region "-------------------------------------------------- ImageDataContainer ------------------------------------------------"
 
-    Friend Enum ImageSourceType
+	Friend Enum ImageSourceType
 		Local
 		Remote
 	End Enum
@@ -594,6 +594,8 @@ NoNeFound:
 		If TypeOf e.Error Is TimeoutException Then Debug.Print(e.Error.Message)
 		If e.Error IsNot Nothing Then Exit Sub
 
+		JustShowedBlogImage = True
+
 		If e.Cancelled Then Exit Sub
 
 		If TypeOf e.Result Is ImageFetchObject Then
@@ -681,23 +683,5 @@ NoNeFound:
 
 	End Sub
 
-
-    ''' <summary>
-    ''' Starts to Download an Image on Background. Make sure, to tell the Backgroundworker, 
-    ''' when you finished your work and waiting for him to complete.
-    ''' </summary>
-    ''' <param name="genre"></param>
-    ''' <returns></returns>
-    Public Function BeginImageFetch(ByVal genre As ImageGenre) As String
-
-
-		Dim ImageToCache As String = GetRandomImage(genre)
-
-        ' Start the Image-Download, with manual Event-triggering.
-        If ImageToCache <> "" And ImageToCache IsNot Nothing _
-		Then ShowImage(ImageToCache, False)
-
-		Return ImageToCache
-	End Function
 
 End Class

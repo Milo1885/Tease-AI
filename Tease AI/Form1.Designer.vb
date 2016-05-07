@@ -46,8 +46,8 @@ Partial Class Form1
 		Me.ChatText = New System.Windows.Forms.WebBrowser()
 		Me.BTNVideoControls = New System.Windows.Forms.Button()
 		Me.PNLDomTagBTN = New System.Windows.Forms.Panel()
-		Me.Button13 = New System.Windows.Forms.Button()
-		Me.Button14 = New System.Windows.Forms.Button()
+		Me.DommeTagBtnNextImage = New System.Windows.Forms.Button()
+		Me.DommeTagBtnLastImage = New System.Windows.Forms.Button()
 		Me.TBFurniture = New System.Windows.Forms.TextBox()
 		Me.Masturbating = New System.Windows.Forms.Button()
 		Me.Feet = New System.Windows.Forms.Button()
@@ -712,8 +712,8 @@ Partial Class Form1
 		'PNLDomTagBTN
 		'
 		Me.PNLDomTagBTN.BackColor = System.Drawing.Color.SteelBlue
-		Me.PNLDomTagBTN.Controls.Add(Me.Button13)
-		Me.PNLDomTagBTN.Controls.Add(Me.Button14)
+		Me.PNLDomTagBTN.Controls.Add(Me.DommeTagBtnNextImage)
+		Me.PNLDomTagBTN.Controls.Add(Me.DommeTagBtnLastImage)
 		Me.PNLDomTagBTN.Controls.Add(Me.TBFurniture)
 		Me.PNLDomTagBTN.Controls.Add(Me.Masturbating)
 		Me.PNLDomTagBTN.Controls.Add(Me.Feet)
@@ -749,33 +749,33 @@ Partial Class Form1
 		Me.PNLDomTagBTN.Size = New System.Drawing.Size(245, 541)
 		Me.PNLDomTagBTN.TabIndex = 0
 		'
-		'Button13
+		'DommeTagBtnNextImage
 		'
-		Me.Button13.BackColor = System.Drawing.Color.White
-		Me.Button13.FlatAppearance.BorderSize = 2
-		Me.Button13.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Button13.ForeColor = System.Drawing.Color.Black
-		Me.Button13.Location = New System.Drawing.Point(123, 465)
-		Me.Button13.Name = "Button13"
-		Me.Button13.Size = New System.Drawing.Size(55, 31)
-		Me.Button13.TabIndex = 66
-		Me.Button13.Text = ">>"
-		Me.Button13.UseVisualStyleBackColor = False
+		Me.DommeTagBtnNextImage.BackColor = System.Drawing.Color.White
+		Me.DommeTagBtnNextImage.FlatAppearance.BorderSize = 2
+		Me.DommeTagBtnNextImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.DommeTagBtnNextImage.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.DommeTagBtnNextImage.ForeColor = System.Drawing.Color.Black
+		Me.DommeTagBtnNextImage.Location = New System.Drawing.Point(123, 465)
+		Me.DommeTagBtnNextImage.Name = "DommeTagBtnNextImage"
+		Me.DommeTagBtnNextImage.Size = New System.Drawing.Size(55, 31)
+		Me.DommeTagBtnNextImage.TabIndex = 66
+		Me.DommeTagBtnNextImage.Text = ">>"
+		Me.DommeTagBtnNextImage.UseVisualStyleBackColor = False
 		'
-		'Button14
+		'DommeTagBtnLastImage
 		'
-		Me.Button14.BackColor = System.Drawing.Color.White
-		Me.Button14.FlatAppearance.BorderSize = 2
-		Me.Button14.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Button14.ForeColor = System.Drawing.Color.Black
-		Me.Button14.Location = New System.Drawing.Point(66, 465)
-		Me.Button14.Name = "Button14"
-		Me.Button14.Size = New System.Drawing.Size(55, 31)
-		Me.Button14.TabIndex = 65
-		Me.Button14.Text = "<<"
-		Me.Button14.UseVisualStyleBackColor = False
+		Me.DommeTagBtnLastImage.BackColor = System.Drawing.Color.White
+		Me.DommeTagBtnLastImage.FlatAppearance.BorderSize = 2
+		Me.DommeTagBtnLastImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.DommeTagBtnLastImage.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.DommeTagBtnLastImage.ForeColor = System.Drawing.Color.Black
+		Me.DommeTagBtnLastImage.Location = New System.Drawing.Point(66, 465)
+		Me.DommeTagBtnLastImage.Name = "DommeTagBtnLastImage"
+		Me.DommeTagBtnLastImage.Size = New System.Drawing.Size(55, 31)
+		Me.DommeTagBtnLastImage.TabIndex = 65
+		Me.DommeTagBtnLastImage.Text = "<<"
+		Me.DommeTagBtnLastImage.UseVisualStyleBackColor = False
 		'
 		'TBFurniture
 		'
@@ -4508,7 +4508,7 @@ Partial Class Form1
 	Friend WithEvents VideoTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents MultipleEdgesTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents OldDommeTagsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents Button13 As System.Windows.Forms.Button
-	Friend WithEvents Button14 As System.Windows.Forms.Button
+	Friend WithEvents DommeTagBtnNextImage As System.Windows.Forms.Button
+	Friend WithEvents DommeTagBtnLastImage As System.Windows.Forms.Button
 
 End Class

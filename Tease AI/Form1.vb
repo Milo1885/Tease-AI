@@ -5474,10 +5474,6 @@ SkipGotoSearch:
 		DomTyping = True
 		Dim ShowPicture As Boolean = False
 
-		If DomTypeCheck = False Then
-			DomTask = CheckPreLoad(DomTask)
-		End If
-
 
 		' Let the program know that the domme is currently typing
 		DomTypeCheck = True
@@ -6558,11 +6554,6 @@ NoResponse:
 		Else
 			RapidCode = False
 		End If
-
-		If DomTypeCheck = False Then
-			DomTask = CheckPreLoad(DomTask)
-		End If
-
 
 		If Not Group.Contains("D") And Not DomChat.Contains("@Contact1") And Not DomChat.Contains("@Contact2") And Not DomChat.Contains("@Contact3") Then
 			Dim GroupList As New List(Of String)
@@ -10032,6 +10023,20 @@ BadVocabBreak:
 
 RinseLatherRepeat:
 
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		'									ImageCommands
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+		' The @UnlockImages Command allows the Domme Slideshow to resume functioning as normal.
+		If StringClean.Contains("@UnlockImages") Then
+			If SlideshowLoaded = True Then
+				nextButton.Enabled = True
+				previousButton.Enabled = True
+				PicStripTSMIdommeSlideshow.Enabled = True
+			End If
+			LockImage = False
+			StringClean = StringClean.Replace("@UnlockImages", "")
+		End If
 
 		If StringClean.Contains("@DommeTag(") Then
 			Dim TagFlag As String = GetParentheses(StringClean, "@DommeTag(")
@@ -10052,6 +10057,361 @@ RinseLatherRepeat:
 			StringClean = StringClean.Replace("@DomTag(" & TagFlag & ")", "")
 		End If
 
+		If StringClean.Contains("@ShowImage") And Not StringClean.Contains("@ShowImage[") Then
+			FoundString = GetRandomImage()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowImage", "")
+		End If
+
+		If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
+			GetTnAList()
+			FoundString = GetImageData(ImageGenre.Butt).Random()
+			ShowImage(FoundString, True)
+
+			StringClean = StringClean.Replace("@ShowButtImage", "")
+			StringClean = StringClean.Replace("@ShowButtsImage", "")
+		End If
+
+		If StringClean.Contains("@ShowBoobsImage") Or StringClean.Contains("@ShowBoobImage") Then
+			GetTnAList()
+			FoundString = GetImageData(ImageGenre.Boobs).Random()
+			ShowImage(FoundString, True)
+
+			StringClean = StringClean.Replace("@ShowBoobsImage", "")
+			StringClean = StringClean.Replace("@ShowBoobImage", "")
+		End If
+
+		If StringClean.Contains("@ShowHardcoreImage") Then
+			FoundString = GetImageData(ImageGenre.Hardcore).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowHardcoreImage", "")
+		End If
+
+		If StringClean.Contains("@ShowSoftcoreImage") Then
+			FoundString = GetImageData(ImageGenre.Softcore).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowSoftcoreImage", "")
+		End If
+
+		If StringClean.Contains("@ShowLesbianImage") Then
+			FoundString = GetImageData(ImageGenre.Lesbian).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowLesbianImage", "")
+		End If
+
+		If StringClean.Contains("@ShowBlowjobImage") Then
+			FoundString = GetImageData(ImageGenre.Blowjob).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowBlowjobImage", "")
+		End If
+
+		If StringClean.Contains("@ShowFemdomImage") Then
+			FoundString = GetImageData(ImageGenre.Femdom).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowFemdomImage", "")
+		End If
+
+		If StringClean.Contains("@ShowLezdomImage") Then
+			FoundString = GetImageData(ImageGenre.Lezdom).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowLezdomImage", "")
+		End If
+
+		If StringClean.Contains("@ShowHentaiImage") Then
+			FoundString = GetImageData(ImageGenre.Hentai).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowHentaiImage", "")
+		End If
+
+		If StringClean.Contains("@ShowGayImage") Then
+			FoundString = GetImageData(ImageGenre.Gay).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowGayImage", "")
+		End If
+
+		If StringClean.Contains("@ShowMaledomImage") Then
+			FoundString = GetImageData(ImageGenre.Maledom).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowMaledomImage", "")
+		End If
+
+		If StringClean.Contains("@ShowCaptionsImage") Then
+			FoundString = GetImageData(ImageGenre.Captions).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowCaptionsImage", "")
+		End If
+
+		If StringClean.Contains("@ShowGeneralImage") Then
+			FoundString = GetImageData(ImageGenre.General).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowGeneralImage", "")
+		End If
+
+		If StringClean.Contains("@ShowLikedImage") Then
+			FoundString = GetImageData(ImageGenre.Liked).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowLikedImage", "")
+		End If
+
+		If StringClean.Contains("@ShowDislikedImage") Then
+			FoundString = GetImageData(ImageGenre.Disliked).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowDislikedImage", "")
+		End If
+
+		If StringClean.Contains("@ShowBlogImage") Then
+			FoundString = GetImageData(ImageGenre.Blog).Random()
+			ShowImage(FoundString, True)
+			StringClean = StringClean.Replace("@ShowBlogImage", "")
+		End If
+
+		' The @NewBlogImage Command is a defunct Command that has been replaced by @ShowBlogImage
+
+		If StringClean.Contains("@NewBlogImage") Then
+			FoundString = GetImageData(ImageGenre.Liked).Random()
+			ShowImage(FoundString, Not TaskClean)
+			StringClean = StringClean.Replace("@NewBlogImage", "")
+		End If
+
+		If StringClean.Contains("@ShowLocalImage(") Then
+
+			Dim LocalFlag As String = GetParentheses(StringClean, "@ShowLocalImage(")
+			LocalFlag = FixCommas(LocalFlag)
+
+			Dim LocalArray As New List(Of String)
+
+			LocalArray = LocalFlag.Split(",").ToList
+
+			If Not LocalFlag.ToUpper.Contains("NOT") Then
+
+				LocalFlag = LocalArray(randomizer.Next(0, LocalArray.Count))
+
+			Else
+
+				Dim CompareFlag As String = "Hardcore, Softcore, Lesbian, Blowjob, Femdom, Lezdom, Hentai, Gay, Maledom, Captions, General, Butts, Boobs"
+
+				For i As Integer = LocalArray.Count - 1 To 0 Step -1
+					'If LocalArray(i).ToUpper.Contains("NOT") Then
+					'LocalArray.RemoveAt(i)
+					'End If
+					If LocalArray(i).ToUpper.Contains("HARDCORE") Or Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Then CompareFlag = CompareFlag.Replace("Hardcore, ", "")
+					If LocalArray(i).ToUpper.Contains("SOFTCORE") Or Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Then CompareFlag = CompareFlag.Replace("Softcore, ", "")
+					If LocalArray(i).ToUpper.Contains("LESBIAN") Or Not Directory.Exists(FrmSettings.LBLILesbian.Text) Then CompareFlag = CompareFlag.Replace("Lesbian, ", "")
+					If LocalArray(i).ToUpper.Contains("BLOWJOB") Or Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then CompareFlag = CompareFlag.Replace("Blowjob, ", "")
+					If LocalArray(i).ToUpper.Contains("FEMDOM") Or Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Then CompareFlag = CompareFlag.Replace("Femdom, ", "")
+					If LocalArray(i).ToUpper.Contains("LEZDOM") Or Not Directory.Exists(FrmSettings.LBLILezdom.Text) Then CompareFlag = CompareFlag.Replace("Lezdom, ", "")
+					If LocalArray(i).ToUpper.Contains("HENTAI") Or Not Directory.Exists(FrmSettings.LBLIHentai.Text) Then CompareFlag = CompareFlag.Replace("Hentai, ", "")
+					If LocalArray(i).ToUpper.Contains("GAY") Or Not Directory.Exists(FrmSettings.LBLIGay.Text) Then CompareFlag = CompareFlag.Replace("Gay, ", "")
+					If LocalArray(i).ToUpper.Contains("MALEDOM") Or Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Then CompareFlag = CompareFlag.Replace("Maledom, ", "")
+					If LocalArray(i).ToUpper.Contains("CAPTIONS") Or Not Directory.Exists(FrmSettings.LBLICaptions.Text) Then CompareFlag = CompareFlag.Replace("Captions, ", "")
+					If LocalArray(i).ToUpper.Contains("GENERAL") Or Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Then CompareFlag = CompareFlag.Replace("General", "")
+					If LocalArray(i).ToUpper.Contains("BUTT") Or Not Directory.Exists(FrmSettings.LBLButtPath.Text) Then CompareFlag = CompareFlag.Replace("Butts", "")
+					If LocalArray(i).ToUpper.Contains("BOOB") Or Not Directory.Exists(FrmSettings.LBLBoobPath.Text) Then CompareFlag = CompareFlag.Replace("Boobs", "")
+
+				Next
+
+
+				Dim CompareArray As String() = CompareFlag.Split(",")
+				LocalFlag = CompareArray(randomizer.Next(0, CompareArray.Count))
+
+			End If
+
+			Debug.Print("LocalFLag = " & LocalFlag.ToUpper)
+
+			If LocalFlag.ToUpper.Contains("HARDCORE") Then CheckLocalImage(FrmSettings.LBLIHardcore.Text, FrmSettings.CBIHardcoreSD.Checked)
+			If LocalFlag.ToUpper.Contains("SOFTCORE") Then CheckLocalImage(FrmSettings.LBLISoftcore.Text, FrmSettings.CBISoftcoreSD.Checked)
+			If LocalFlag.ToUpper.Contains("LESBIAN") Then CheckLocalImage(FrmSettings.LBLILesbian.Text, FrmSettings.CBILesbianSD.Checked)
+			If LocalFlag.ToUpper.Contains("BLOWJOB") Then CheckLocalImage(FrmSettings.LBLIBlowjob.Text, FrmSettings.CBIBlowjobSD.Checked)
+			If LocalFlag.ToUpper.Contains("FEMDOM") Then CheckLocalImage(FrmSettings.LBLIFemdom.Text, FrmSettings.CBIFemdomSD.Checked)
+			If LocalFlag.ToUpper.Contains("LEZDOM") Then CheckLocalImage(FrmSettings.LBLILezdom.Text, FrmSettings.CBILezdomSD.Checked)
+			If LocalFlag.ToUpper.Contains("HENTAI") Then CheckLocalImage(FrmSettings.LBLIHentai.Text, FrmSettings.CBIHentaiSD.Checked)
+			If LocalFlag.ToUpper.Contains("GAY") Then CheckLocalImage(FrmSettings.LBLIGay.Text, FrmSettings.CBIGaySD.Checked)
+			If LocalFlag.ToUpper.Contains("MALEDOM") Then CheckLocalImage(FrmSettings.LBLIMaledom.Text, FrmSettings.CBIMaledomSD.Checked)
+			If LocalFlag.ToUpper.Contains("CAPTION") Then CheckLocalImage(FrmSettings.LBLICaptions.Text, FrmSettings.CBICaptionsSD.Checked)
+			If LocalFlag.ToUpper.Contains("GENERAL") Then CheckLocalImage(FrmSettings.LBLIGeneral.Text, FrmSettings.CBIGeneralSD.Checked)
+			If LocalFlag.ToUpper.Contains("BUTT") Then CheckLocalImage(FrmSettings.LBLButtPath.Text, FrmSettings.CBButtSubDir.Checked)
+			If LocalFlag.ToUpper.Contains("BOOB") Then CheckLocalImage(FrmSettings.LBLBoobPath.Text, FrmSettings.CBBoobSubDir.Checked)
+
+			StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
+		End If
+
+
+		If StringClean.Contains("@ShowLocalImage") Then
+			GetLocalImage()
+			StringClean = StringClean.Replace("@ShowLocalImage", "")
+		End If
+
+		If StringClean.Contains("@ShowTaggedImage") Then
+
+			'Debug.Print("ShowTaggedImage StringClean ^^^^^^^^^^^^^^^^^^^^^^ = " & StringClean)
+
+			'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
+			If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+				' Read all lines of the given file.
+				LocalTagImageList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+
+				For i As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+					Dim LocalCheck As String() = Split(LocalTagImageList(i))
+					Dim LocalString As String = LocalCheck(0)
+					Debug.Print("LocalString = " & LocalString)
+					If Not LCase(LocalString).Contains(".jpg") And Not LCase(LocalString).Contains(".jpeg") And Not LCase(LocalString).Contains(".bmp") And
+					 Not LCase(LocalString).Contains(".png") And Not LCase(LocalString).Contains(".gif") Then
+						Debug.Print("LocalTag Check Doesn't contain extension")
+						For x As Integer = 1 To LocalCheck.Count - 1
+							LocalString = LocalString & " " & LocalCheck(x)
+							If LCase(LocalString).Contains(".jpg") Or LCase(LocalString).Contains(".jpeg") Or LCase(LocalString).Contains(".bmp") Or
+							LCase(LocalString).Contains(".png") Or LCase(LocalString).Contains(".gif") Then Exit For
+						Next
+					End If
+					Debug.Print("Local Tag check - " & LocalString)
+					If Not File.Exists(LocalString) Then LocalTagImageList.Remove(LocalTagImageList(i))
+				Next
+			End If
+
+
+			If StringClean.Contains("@Tag") Then
+				Dim TSplit As String() = Split(StringClean)
+				For i As Integer = 0 To TSplit.Length - 1
+					If TSplit(i).Contains("@Tag") Then
+						Dim TString As String = TSplit(i).Replace("@Tag", "")
+						For j As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+							If Not LocalTagImageList(j).Contains(TString) Then LocalTagImageList.RemoveAt(j)
+						Next
+					End If
+				Next
+			End If
+
+			For i As Integer = 0 To LocalTagImageList.Count - 1
+				'Debug.Print(i & ". " & LocalTagImageList(i))
+			Next
+
+			' github patch begin
+
+			'Dim TagSplit As String() = Split(LocalTagImageList(randomizer.Next(0, LocalTagImageList.Count)))
+			'FoundString = TagSplit(0) & " "
+
+			'If Not LCase(FoundString).Contains(".jpg ") Or Not LCase(FoundString).Contains(".jpeg ") Or Not LCase(FoundString).Contains(".png ") Or Not LCase(FoundString).Contains(".bmp ") Or Not LCase(FoundString).Contains(".gif ") Then
+			'Dim FSLoop As Integer = 1
+			'Do Until LCase(FoundString).Contains(".jpg ") Or LCase(FoundString).Contains(".jpeg ") Or LCase(FoundString).Contains(".png ") Or LCase(FoundString).Contains(".bmp ") Or LCase(FoundString).Contains(".gif ")
+			'FoundString = FoundString & TagSplit(FSLoop) & " "
+			'FSLoop += 1
+			'Loop
+			'githib patch end
+
+
+			If LocalTagImageList.Count = 0 Then
+				FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+			Else
+				Dim TagSplit As String() = Split(LocalTagImageList(randomizer.Next(0, LocalTagImageList.Count)))
+				FoundString = TagSplit(0) & " "
+
+				If Not LCase(FoundString).Contains(".jpg ") Or Not LCase(FoundString).Contains(".jpeg ") Or Not LCase(FoundString).Contains(".png ") Or Not LCase(FoundString).Contains(".bmp ") Or Not LCase(FoundString).Contains(".gif ") Then
+					Dim FSLoop As Integer = 1
+					Do Until LCase(FoundString).Contains(".jpg ") Or LCase(FoundString).Contains(".jpeg ") Or LCase(FoundString).Contains(".png ") Or LCase(FoundString).Contains(".bmp ") Or LCase(FoundString).Contains(".gif ")
+						FoundString = FoundString & TagSplit(FSLoop) & " "
+						FSLoop += 1
+					Loop
+				End If
+			End If
+
+			JustShowedBlogImage = True
+
+			'ClearMainPictureBox()
+
+			ShowImage(FoundString)
+
+			DeleteLocalImageFilePath = FoundString
+
+
+
+
+			StringClean = StringClean.Replace("@ShowTaggedImage", "")
+
+		End If
+
+		If StringClean.Contains("@ShowImage[") Then
+
+
+			Dim ImageToShow As String = GetParentheses(StringClean, "@ShowImage[")
+
+			If ImageToShow.Contains("://") Then
+
+				Try
+					ShowImage(ImageToShow)
+					JustShowedBlogImage = True
+				Catch
+				End Try
+
+				GoTo ShowedBlogImage
+
+			End If
+
+			ImageToShow = ImageToShow.Replace("/", "\")
+
+			If ImageToShow.Contains(":\") Then
+
+				If File.Exists(ImageToShow) Then
+					Try
+						ShowImage(ImageToShow)
+						JustShowedBlogImage = True
+					Catch
+						ClearMainPictureBox()
+						MessageBox.Show(Me, ImageToShow & " could not be accessed!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					End Try
+				Else
+					MessageBox.Show(Me, Path.GetFileName(ImageToShow) & " was not found in " & Path.GetDirectoryName(ImageToShow) & "!" & Environment.NewLine & Environment.NewLine &
+						"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				End If
+
+
+				GoTo ShowedBlogImage
+
+			Else
+
+				ImageToShow = Application.StartupPath & "\Images\" & ImageToShow
+				ImageToShow = ImageToShow.Replace("\\", "\")
+
+			End If
+
+
+
+			'ClearMainPictureBox()
+
+			If ImageToShow.Contains("*") Then
+
+				Dim ImageList As New List(Of String)
+
+				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Path.GetDirectoryName(ImageToShow), FileIO.SearchOption.SearchTopLevelOnly, Path.GetFileName(ImageToShow))
+					ImageList.Add(foundFile)
+				Next
+
+				If ImageList.Count > 0 Then
+					ShowImage(ImageList(randomizer.Next(0, ImageList.Count)))
+					JustShowedBlogImage = True
+				Else
+					ClearMainPictureBox()
+					MessageBox.Show(Me, "No images matching " & Path.GetFileName(ImageToShow) & " were found in " & Path.GetDirectoryName(ImageToShow) & "!" & Environment.NewLine & Environment.NewLine &
+						 "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				End If
+
+			Else
+
+				Try
+					ShowImage(ImageToShow)
+					JustShowedBlogImage = True
+				Catch
+					ClearMainPictureBox()
+					MessageBox.Show(Me, ImageToShow & " could not be accessed!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				End Try
+
+			End If
+
+ShowedBlogImage:
+
+			StringClean = StringClean.Replace("@ShowImage[" & ImageToShow & "]", "")
+
+		End If
+
 		' The @LockImages Commnd prevents the Domme Slideshow from moving forward or back when set to "Tease" or "Timed". Manual operation of Domme Slideshow images is still allowed,
 		' and pictures displayed through other means will still work. Images are automatically unlocked whenever Tease AI moves into a Link script, an End script, any Interrupt occurs
 		' (including Long Edge and Start Stroking) or when the sub gives up.
@@ -10063,18 +10423,9 @@ RinseLatherRepeat:
 			PicStripTSMIdommeSlideshow.Enabled = False
 			StringClean = StringClean.Replace("@LockImages", "")
 		End If
-
-		' The @UnlockImages Command allows the Domme Slideshow to resume functioning as normal.
-
-		If StringClean.Contains("@UnlockImages") Then
-			If SlideshowLoaded = True Then
-				nextButton.Enabled = True
-				previousButton.Enabled = True
-				PicStripTSMIdommeSlideshow.Enabled = True
-			End If
-			LockImage = False
-			StringClean = StringClean.Replace("@UnlockImages", "")
-		End If
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		'			ImageCommands - End
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 		' The @Chance Command gives a chance to either jump to the line specified, or move to the next line as normal. The odds of jumping to the specified line are indicated in the Command
 		' itself. For example, @Chance50(Domme Instructions) would have a 50% chance of jumping to (Domme Instructions).
@@ -11303,208 +11654,6 @@ TaskCleanSet:
 
 		End If
 
-
-		If StringClean.Contains("@ShowLikedImage") Then
-			If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-
-				Dim LikeList As New List(Of String)
-
-				LikeList = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
-
-				If LikeList.Count = 0 Then
-					FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-				Else
-					FoundString = LikeList(randomizer.Next(0, LikeList.Count))
-				End If
-				ShowGotImage()
-			End If
-			StringClean = StringClean.Replace("@ShowLikedImage", "")
-		End If
-
-		If StringClean.Contains("@ShowDislikedImage") Then
-			If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-
-				Dim DislikeList As New List(Of String)
-
-				DislikeList = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
-
-				If DislikeList.Count = 0 Then
-					FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-				Else
-					FoundString = DislikeList(randomizer.Next(0, DislikeList.Count))
-				End If
-				ShowGotImage()
-			End If
-			StringClean = StringClean.Replace("@ShowDislikedImage", "")
-		End If
-
-		If StringClean.Contains("@ShowBlogImage") Then
-			GetBlogImage()
-			StringClean = StringClean.Replace("@ShowBlogImage", "")
-		End If
-
-		If StringClean.Contains("@ShowLocalImage(") Then
-
-			Dim LocalFlag As String = GetParentheses(StringClean, "@ShowLocalImage(")
-			LocalFlag = FixCommas(LocalFlag)
-
-			Dim LocalArray As New List(Of String)
-
-			LocalArray = LocalFlag.Split(",").ToList
-
-			If Not LocalFlag.ToUpper.Contains("NOT") Then
-
-				LocalFlag = LocalArray(randomizer.Next(0, LocalArray.Count))
-
-			Else
-
-				Dim CompareFlag As String = "Hardcore, Softcore, Lesbian, Blowjob, Femdom, Lezdom, Hentai, Gay, Maledom, Captions, General, Butts, Boobs"
-
-				For i As Integer = LocalArray.Count - 1 To 0 Step -1
-					'If LocalArray(i).ToUpper.Contains("NOT") Then
-					'LocalArray.RemoveAt(i)
-					'End If
-					If LocalArray(i).ToUpper.Contains("HARDCORE") Or Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Then CompareFlag = CompareFlag.Replace("Hardcore, ", "")
-					If LocalArray(i).ToUpper.Contains("SOFTCORE") Or Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Then CompareFlag = CompareFlag.Replace("Softcore, ", "")
-					If LocalArray(i).ToUpper.Contains("LESBIAN") Or Not Directory.Exists(FrmSettings.LBLILesbian.Text) Then CompareFlag = CompareFlag.Replace("Lesbian, ", "")
-					If LocalArray(i).ToUpper.Contains("BLOWJOB") Or Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then CompareFlag = CompareFlag.Replace("Blowjob, ", "")
-					If LocalArray(i).ToUpper.Contains("FEMDOM") Or Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Then CompareFlag = CompareFlag.Replace("Femdom, ", "")
-					If LocalArray(i).ToUpper.Contains("LEZDOM") Or Not Directory.Exists(FrmSettings.LBLILezdom.Text) Then CompareFlag = CompareFlag.Replace("Lezdom, ", "")
-					If LocalArray(i).ToUpper.Contains("HENTAI") Or Not Directory.Exists(FrmSettings.LBLIHentai.Text) Then CompareFlag = CompareFlag.Replace("Hentai, ", "")
-					If LocalArray(i).ToUpper.Contains("GAY") Or Not Directory.Exists(FrmSettings.LBLIGay.Text) Then CompareFlag = CompareFlag.Replace("Gay, ", "")
-					If LocalArray(i).ToUpper.Contains("MALEDOM") Or Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Then CompareFlag = CompareFlag.Replace("Maledom, ", "")
-					If LocalArray(i).ToUpper.Contains("CAPTIONS") Or Not Directory.Exists(FrmSettings.LBLICaptions.Text) Then CompareFlag = CompareFlag.Replace("Captions, ", "")
-					If LocalArray(i).ToUpper.Contains("GENERAL") Or Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Then CompareFlag = CompareFlag.Replace("General", "")
-					If LocalArray(i).ToUpper.Contains("BUTT") Or Not Directory.Exists(FrmSettings.LBLButtPath.Text) Then CompareFlag = CompareFlag.Replace("Butts", "")
-					If LocalArray(i).ToUpper.Contains("BOOB") Or Not Directory.Exists(FrmSettings.LBLBoobPath.Text) Then CompareFlag = CompareFlag.Replace("Boobs", "")
-
-				Next
-
-
-				Dim CompareArray As String() = CompareFlag.Split(",")
-				LocalFlag = CompareArray(randomizer.Next(0, CompareArray.Count))
-
-			End If
-
-			Debug.Print("LocalFLag = " & LocalFlag.ToUpper)
-
-			If LocalFlag.ToUpper.Contains("HARDCORE") Then CheckLocalImage(FrmSettings.LBLIHardcore.Text, FrmSettings.CBIHardcoreSD.Checked)
-			If LocalFlag.ToUpper.Contains("SOFTCORE") Then CheckLocalImage(FrmSettings.LBLISoftcore.Text, FrmSettings.CBISoftcoreSD.Checked)
-			If LocalFlag.ToUpper.Contains("LESBIAN") Then CheckLocalImage(FrmSettings.LBLILesbian.Text, FrmSettings.CBILesbianSD.Checked)
-			If LocalFlag.ToUpper.Contains("BLOWJOB") Then CheckLocalImage(FrmSettings.LBLIBlowjob.Text, FrmSettings.CBIBlowjobSD.Checked)
-			If LocalFlag.ToUpper.Contains("FEMDOM") Then CheckLocalImage(FrmSettings.LBLIFemdom.Text, FrmSettings.CBIFemdomSD.Checked)
-			If LocalFlag.ToUpper.Contains("LEZDOM") Then CheckLocalImage(FrmSettings.LBLILezdom.Text, FrmSettings.CBILezdomSD.Checked)
-			If LocalFlag.ToUpper.Contains("HENTAI") Then CheckLocalImage(FrmSettings.LBLIHentai.Text, FrmSettings.CBIHentaiSD.Checked)
-			If LocalFlag.ToUpper.Contains("GAY") Then CheckLocalImage(FrmSettings.LBLIGay.Text, FrmSettings.CBIGaySD.Checked)
-			If LocalFlag.ToUpper.Contains("MALEDOM") Then CheckLocalImage(FrmSettings.LBLIMaledom.Text, FrmSettings.CBIMaledomSD.Checked)
-			If LocalFlag.ToUpper.Contains("CAPTION") Then CheckLocalImage(FrmSettings.LBLICaptions.Text, FrmSettings.CBICaptionsSD.Checked)
-			If LocalFlag.ToUpper.Contains("GENERAL") Then CheckLocalImage(FrmSettings.LBLIGeneral.Text, FrmSettings.CBIGeneralSD.Checked)
-			If LocalFlag.ToUpper.Contains("BUTT") Then CheckLocalImage(FrmSettings.LBLButtPath.Text, FrmSettings.CBButtSubDir.Checked)
-			If LocalFlag.ToUpper.Contains("BOOB") Then CheckLocalImage(FrmSettings.LBLBoobPath.Text, FrmSettings.CBBoobSubDir.Checked)
-
-			StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
-		End If
-
-
-		If StringClean.Contains("@ShowLocalImage") Then
-			GetLocalImage()
-			StringClean = StringClean.Replace("@ShowLocalImage", "")
-		End If
-
-		If StringClean.Contains("@ShowImage[") Then
-
-
-			Dim ImageToShow As String = GetParentheses(StringClean, "@ShowImage[")
-
-			If ImageToShow.Contains("://") Then
-
-				Try
-					ShowImage(ImageToShow)
-					JustShowedBlogImage = True
-				Catch
-				End Try
-
-				GoTo ShowedBlogImage
-
-			End If
-
-			ImageToShow = ImageToShow.Replace("/", "\")
-
-			If ImageToShow.Contains(":\") Then
-
-				If File.Exists(ImageToShow) Then
-					Try
-						ShowImage(ImageToShow)
-						JustShowedBlogImage = True
-					Catch
-						ClearMainPictureBox()
-						MessageBox.Show(Me, ImageToShow & " could not be accessed!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-					End Try
-				Else
-					MessageBox.Show(Me, Path.GetFileName(ImageToShow) & " was not found in " & Path.GetDirectoryName(ImageToShow) & "!" & Environment.NewLine & Environment.NewLine &
-						"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				End If
-
-
-				GoTo ShowedBlogImage
-
-			Else
-
-				ImageToShow = Application.StartupPath & "\Images\" & ImageToShow
-				ImageToShow = ImageToShow.Replace("\\", "\")
-
-			End If
-
-
-
-			'ClearMainPictureBox()
-
-			If ImageToShow.Contains("*") Then
-
-				Dim ImageList As New List(Of String)
-
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Path.GetDirectoryName(ImageToShow), FileIO.SearchOption.SearchTopLevelOnly, Path.GetFileName(ImageToShow))
-					ImageList.Add(foundFile)
-				Next
-
-				If ImageList.Count > 0 Then
-					ShowImage(ImageList(randomizer.Next(0, ImageList.Count)))
-					JustShowedBlogImage = True
-				Else
-					ClearMainPictureBox()
-					MessageBox.Show(Me, "No images matching " & Path.GetFileName(ImageToShow) & " were found in " & Path.GetDirectoryName(ImageToShow) & "!" & Environment.NewLine & Environment.NewLine &
-						 "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				End If
-
-			Else
-
-				Try
-					ShowImage(ImageToShow)
-					JustShowedBlogImage = True
-				Catch
-					ClearMainPictureBox()
-					MessageBox.Show(Me, ImageToShow & " could not be accessed!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				End Try
-
-			End If
-
-ShowedBlogImage:
-
-			StringClean = StringClean.Replace("@ShowImage[" & ImageToShow & "]", "")
-
-		End If
-
-
-		If StringClean.Contains("@ShowImage") And Not StringClean.Contains("@ShowImage[") Then
-			TempVal = randomizer.Next(1, 101)
-			If TempVal < 51 Then
-				GetBlogImage()
-			Else
-				GetLocalImage()
-			End If
-			StringClean = StringClean.Replace("@ShowImage", "")
-		End If
-
 		Debug.Print("SubStroking = " & SubStroking)
 		Debug.Print("SubEdging = " & SubEdging)
 		Debug.Print("SubHoldingEdge = " & SubHoldingEdge)
@@ -12389,80 +12538,6 @@ OrgasmDecided:
 			StringClean = StringClean.Replace("@FinishTease", "")
 		End If
 
-		If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
-			JustShowedBlogImage = True
-			GetTnAList()
-			'ClearMainPictureBox()
-
-			Dim ButtPic As String
-
-			Try
-				ButtPic = AssList(randomizer.Next(0, AssList.Count))
-			Catch
-				ButtPic = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-			End Try
-
-
-			If ButtPic.Contains("\") Then
-				ShowImage(ButtPic)
-				'ImageLocation = ButtPic
-				'PBImage = ButtPic
-				'ImageThread.Start()
-				'DisplayImage(Image.FromFile(ButtPic))
-				'mainPictureBox.Image = Image.FromFile(ButtPic)
-				DeleteLocalImageFilePath = ButtPic
-			Else
-				ShowImage(ButtPic)
-				' ImageLocation = ButtPic
-				'PBImage = ButtPic
-				'ImageThread.Start()
-				'mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(ButtPic)))
-			End If
-
-			CurrentImage = ButtPic
-
-			StringClean = StringClean.Replace("@ShowButtImage", "")
-			StringClean = StringClean.Replace("@ShowButtsImage", "")
-		End If
-
-		If StringClean.Contains("@ShowBoobsImage") Or StringClean.Contains("@ShowBoobImage") Then
-			JustShowedBlogImage = True
-			GetTnAList()
-			'ClearMainPictureBox()
-
-			Dim BoobPic As String
-
-			Try
-				BoobPic = BoobList(randomizer.Next(0, BoobList.Count))
-			Catch
-				BoobPic = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-			End Try
-
-			'Dim BoobPic As String = BoobList(randomizer.Next(0, BoobList.Count))
-
-			If BoobPic.Contains("\") Then
-				ShowImage(BoobPic)
-				'ImageLocation = BoobPic
-				'PBImage = _ImageFileNames(BoobPic)
-				'ImageThread.Start()
-				'DisplayImage(Image.FromFile(BoobPic))
-				'mainPictureBox.Image = Image.FromFile(BoobPic)
-				DeleteLocalImageFilePath = BoobPic
-			Else
-				ShowImage(BoobPic)
-				'ImageLocation = BoobPic
-				'PBImage = _ImageFileNames(BoobPic)
-				'ImageThread.Start()
-				'DisplayImage(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(BoobPic))))
-				'mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(BoobPic)))
-			End If
-
-			CurrentImage = BoobPic
-
-			StringClean = StringClean.Replace("@ShowBoobsImage", "")
-			StringClean = StringClean.Replace("@ShowBoobImage", "")
-		End If
-
 		If StringClean.Contains("@DommeLevelDown") Then
 			If FrmSettings.domlevelNumBox.Value > 1 Then
 				FrmSettings.domlevelNumBox.Value -= 1
@@ -12489,61 +12564,6 @@ OrgasmDecided:
 				FrmSettings.NBEmpathy.Value += 1
 			End If
 			StringClean = StringClean.Replace("@ApathyLevelUp", "")
-		End If
-
-		If StringClean.Contains("@ShowHardcoreImage") Then
-			CheckLocalImage(FrmSettings.LBLIHardcore.Text, FrmSettings.CBIHardcoreSD.Checked)
-			StringClean = StringClean.Replace("@ShowHardcoreImage", "")
-		End If
-
-		If StringClean.Contains("@ShowSoftcoreImage") Then
-			CheckLocalImage(FrmSettings.LBLISoftcore.Text, FrmSettings.CBISoftcoreSD.Checked)
-			StringClean = StringClean.Replace("@ShowSoftcoreImage", "")
-		End If
-
-		If StringClean.Contains("@ShowLesbianImage") Then
-			CheckLocalImage(FrmSettings.LBLILesbian.Text, FrmSettings.CBILesbianSD.Checked)
-			StringClean = StringClean.Replace("@ShowLesbianImage", "")
-		End If
-
-		If StringClean.Contains("@ShowBlowjobImage") Then
-			CheckLocalImage(FrmSettings.LBLIBlowjob.Text, FrmSettings.CBIBlowjobSD.Checked)
-			StringClean = StringClean.Replace("@ShowBlowjobImage", "")
-		End If
-
-		If StringClean.Contains("@ShowFemdomImage") Then
-			CheckLocalImage(FrmSettings.LBLIFemdom.Text, FrmSettings.CBIFemdomSD.Checked)
-			StringClean = StringClean.Replace("@ShowFemdomImage", "")
-		End If
-
-		If StringClean.Contains("@ShowLezdomImage") Then
-			CheckLocalImage(FrmSettings.LBLILezdom.Text, FrmSettings.CBILezdomSD.Checked)
-			StringClean = StringClean.Replace("@ShowLezdomImage", "")
-		End If
-
-		If StringClean.Contains("@ShowHentaiImage") Then
-			CheckLocalImage(FrmSettings.LBLIHentai.Text, FrmSettings.CBIHentaiSD.Checked)
-			StringClean = StringClean.Replace("@ShowHentaiImage", "")
-		End If
-
-		If StringClean.Contains("@ShowGayImage") Then
-			CheckLocalImage(FrmSettings.LBLIGay.Text, FrmSettings.CBIGaySD.Checked)
-			StringClean = StringClean.Replace("@ShowGayImage", "")
-		End If
-
-		If StringClean.Contains("@ShowMaledomImage") Then
-			CheckLocalImage(FrmSettings.LBLIMaledom.Text, FrmSettings.CBIMaledomSD.Checked)
-			StringClean = StringClean.Replace("@ShowMaledomImage", "")
-		End If
-
-		If StringClean.Contains("@ShowCaptionsImage") Then
-			CheckLocalImage(FrmSettings.LBLICaptions.Text, FrmSettings.CBICaptionsSD.Checked)
-			StringClean = StringClean.Replace("@ShowCaptionsImage", "")
-		End If
-
-		If StringClean.Contains("@ShowGeneralImage") Then
-			CheckLocalImage(FrmSettings.LBLIGeneral.Text, FrmSettings.CBIGeneralSD.Checked)
-			StringClean = StringClean.Replace("@ShowGeneralImage", "")
 		End If
 
 		If StringClean.Contains("@InterruptLongEdge") Then
@@ -12725,100 +12745,6 @@ OrgasmDecided:
 			WaitTimer.Start()
 
 			StringClean = StringClean.Replace("@Wait(" & WaitFlag & ")", "")
-
-		End If
-
-
-
-		If StringClean.Contains("@ShowTaggedImage") Then
-
-			'Debug.Print("ShowTaggedImage StringClean ^^^^^^^^^^^^^^^^^^^^^^ = " & StringClean)
-
-			'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
-			If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
-				' Read all lines of the given file.
-				LocalTagImageList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
-
-				For i As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-					Dim LocalCheck As String() = Split(LocalTagImageList(i))
-					Dim LocalString As String = LocalCheck(0)
-					Debug.Print("LocalString = " & LocalString)
-					If Not LCase(LocalString).Contains(".jpg") And Not LCase(LocalString).Contains(".jpeg") And Not LCase(LocalString).Contains(".bmp") And
-					 Not LCase(LocalString).Contains(".png") And Not LCase(LocalString).Contains(".gif") Then
-						Debug.Print("LocalTag Check Doesn't contain extension")
-						For x As Integer = 1 To LocalCheck.Count - 1
-							LocalString = LocalString & " " & LocalCheck(x)
-							If LCase(LocalString).Contains(".jpg") Or LCase(LocalString).Contains(".jpeg") Or LCase(LocalString).Contains(".bmp") Or
-							LCase(LocalString).Contains(".png") Or LCase(LocalString).Contains(".gif") Then Exit For
-						Next
-					End If
-					Debug.Print("Local Tag check - " & LocalString)
-					If Not File.Exists(LocalString) Then LocalTagImageList.Remove(LocalTagImageList(i))
-				Next
-			End If
-
-
-			If StringClean.Contains("@Tag") Then
-				Dim TSplit As String() = Split(StringClean)
-				For i As Integer = 0 To TSplit.Length - 1
-					If TSplit(i).Contains("@Tag") Then
-						Dim TString As String = TSplit(i).Replace("@Tag", "")
-						For j As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-							If Not LocalTagImageList(j).Contains(TString) Then LocalTagImageList.RemoveAt(j)
-						Next
-					End If
-				Next
-			End If
-
-			For i As Integer = 0 To LocalTagImageList.Count - 1
-				'Debug.Print(i & ". " & LocalTagImageList(i))
-			Next
-
-			' github patch begin
-
-			'Dim TagSplit As String() = Split(LocalTagImageList(randomizer.Next(0, LocalTagImageList.Count)))
-			'FoundString = TagSplit(0) & " "
-
-			'If Not LCase(FoundString).Contains(".jpg ") Or Not LCase(FoundString).Contains(".jpeg ") Or Not LCase(FoundString).Contains(".png ") Or Not LCase(FoundString).Contains(".bmp ") Or Not LCase(FoundString).Contains(".gif ") Then
-			'Dim FSLoop As Integer = 1
-			'Do Until LCase(FoundString).Contains(".jpg ") Or LCase(FoundString).Contains(".jpeg ") Or LCase(FoundString).Contains(".png ") Or LCase(FoundString).Contains(".bmp ") Or LCase(FoundString).Contains(".gif ")
-			'FoundString = FoundString & TagSplit(FSLoop) & " "
-			'FSLoop += 1
-			'Loop
-			'githib patch end
-
-
-			If LocalTagImageList.Count = 0 Then
-				FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-			Else
-				Dim TagSplit As String() = Split(LocalTagImageList(randomizer.Next(0, LocalTagImageList.Count)))
-				FoundString = TagSplit(0) & " "
-
-				If Not LCase(FoundString).Contains(".jpg ") Or Not LCase(FoundString).Contains(".jpeg ") Or Not LCase(FoundString).Contains(".png ") Or Not LCase(FoundString).Contains(".bmp ") Or Not LCase(FoundString).Contains(".gif ") Then
-					Dim FSLoop As Integer = 1
-					Do Until LCase(FoundString).Contains(".jpg ") Or LCase(FoundString).Contains(".jpeg ") Or LCase(FoundString).Contains(".png ") Or LCase(FoundString).Contains(".bmp ") Or LCase(FoundString).Contains(".gif ")
-						FoundString = FoundString & TagSplit(FSLoop) & " "
-						FSLoop += 1
-					Loop
-				End If
-			End If
-
-			JustShowedBlogImage = True
-
-			'ClearMainPictureBox()
-
-			ShowImage(FoundString)
-			'ImageLocation = FoundString
-			'PBImage = FoundString
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile(FoundString))
-			'mainPictureBox.Image = Image.FromFile(FoundString)
-			DeleteLocalImageFilePath = FoundString
-
-
-
-
-			StringClean = StringClean.Replace("@ShowTaggedImage", "")
 
 		End If
 
@@ -14911,15 +14837,6 @@ VTSkip:
 		If StringClean.Contains("@StopTnA") Then
 			TnASlides.Stop()
 			StringClean = StringClean.Replace("@StopTnA", "")
-		End If
-
-
-		' The @NewBlogImage Command is a defunct Command that has been replaced by @ShowBlogImage
-
-		If StringClean.Contains("@NewBlogImage") Then
-			GetBlogImage()
-			StringClean = StringClean.Replace("@NewBlogImage", "")
-			'Debug.Print("Is this being called?")
 		End If
 
 
@@ -26408,6 +26325,10 @@ GetDommeSlideshow:
 		Form9.Focus()
 	End Sub
 
+	Private Sub OldDommeTagsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OldDommeTagsToolStripMenuItem.Click
+		Form8.Show()
+	End Sub
+
 #End Region ' Tools
 
 #Region "------------------------------------------------------ Milovana ------------------------------------------------------"
@@ -27651,8 +27572,6 @@ SkipNew:
 
 	End Function
 
-
-
 	Public Function RemoveDommeTag(ByVal RemoveDomTag As String, ByVal RemoveCustomDomTag As String)
 		Dim DomTag As String = "Tag" & RemoveDomTag
 		Dim Custom As String
@@ -27720,6 +27639,13 @@ SkipNew:
 
 	End Function
 
+	Private Sub BtnDommeTagNextImage_Click(sender As System.Object, e As System.EventArgs) Handles DommeTagBtnNextImage.Click
+		nextButton.PerformClick()
+	End Sub
+
+	Private Sub BtnDommeTagLastImage_Click(sender As System.Object, e As System.EventArgs) Handles DommeTagBtnLastImage.Click
+		previousButton.PerformClick()
+	End Sub
 
 	''' <summary>
 	''' <para>In Order to Work, this function has to be called AFTER an Image has been loaded into the 
@@ -29327,17 +29253,7 @@ SkipNew:
 
 	End Function
 
-	Private Sub OldDommeTagsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles OldDommeTagsToolStripMenuItem.Click
-		Form8.Show()
-	End Sub
 
-	Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
-		nextButton.PerformClick()
-	End Sub
-
-	Private Sub Button14_Click(sender As System.Object, e As System.EventArgs) Handles Button14.Click
-		previousButton.PerformClick()
-	End Sub
 
 	Public Sub Edge()
 
@@ -29359,183 +29275,6 @@ SkipNew:
 		SessionEdges += 1
 
 	End Sub
-
-
-	''' <summary>
-	''' Checks if there are any ImageCommands in StringClean, which need an early loading of Images. 
-	''' If there are Images to load, BWImageFetcher is started, with manual triggering of the 
-	''' RunWorkerCompled-Event. 
-	''' <para>Make sure to call BWImageFetcher.WaitToFinish() when all other Work is done!</para> 
-	''' </summary>
-	''' <returns></returns>
-	Public Function CheckPreLoad(ByVal StringClean As String) As String
-
-
-		If StringClean.Contains("@ShowBlogImage") Then
-			If BeginImageFetch(ImageGenre.Blog) <> "" Then
-				JustShowedBlogImage = True
-				StringClean = StringClean.Replace("@ShowBlogImage", "")
-			Else
-				StringClean = StringClean.Replace("@ShowBlogImage", "@ShowLocalImage")
-			End If
-
-			Return StringClean
-		End If
-
-		If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
-
-			If FrmSettings.CBURLButts.Checked = False Then Return StringClean
-			If FrmSettings.CBIButts.Checked = True And FrmSettings.CBURLButts.Checked = False Then Return StringClean
-			If FrmSettings.CBIButts.Checked = True And FrmSettings.CBURLButts.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Butt)
-			StringClean = StringClean.Replace("@ShowButtImage", "")
-			StringClean = StringClean.Replace("@ShowButtsImage", "")
-
-		End If
-
-		If StringClean.Contains("@ShowBoobImage") Or StringClean.Contains("@ShowBoobsImage") Then
-
-			If FrmSettings.CBURLBoobs.Checked = False Then Return StringClean
-			If FrmSettings.CBIBoobs.Checked = True And FrmSettings.CBURLBoobs.Checked = False Then Return StringClean
-			If FrmSettings.CBIBoobs.Checked = True And FrmSettings.CBURLBoobs.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Boobs)
-			StringClean = StringClean.Replace("@ShowBoobImage", "")
-			StringClean = StringClean.Replace("@ShowBoobsImage", "")
-
-		End If
-
-		If StringClean.Contains("@ShowHardcoreImage") Then
-			If FrmSettings.CBURLHardcore.Checked = False Then Return StringClean
-			If FrmSettings.CBIHardcore.Checked = True And FrmSettings.CBURLHardcore.Checked = False Then Return StringClean
-			If FrmSettings.CBIHardcore.Checked = True And FrmSettings.CBURLHardcore.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Hardcore)
-			StringClean = StringClean.Replace("@ShowHardcoreImage", "")
-		End If
-
-		If StringClean.Contains("@ShowSoftcoreImage") Then
-			If FrmSettings.CBURLSoftcore.Checked = False Then Return StringClean
-			If FrmSettings.CBISoftcore.Checked = True And FrmSettings.CBURLSoftcore.Checked = False Then Return StringClean
-			If FrmSettings.CBISoftcore.Checked = True And FrmSettings.CBURLSoftcore.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Softcore)
-			StringClean = StringClean.Replace("@ShowSoftcoreImage", "")
-		End If
-
-		If StringClean.Contains("@ShowLesbianImage") Then
-			If FrmSettings.CBURLLesbian.Checked = False Then Return StringClean
-			If FrmSettings.CBILesbian.Checked = True And FrmSettings.CBURLLesbian.Checked = False Then Return StringClean
-			If FrmSettings.CBILesbian.Checked = True And FrmSettings.CBURLLesbian.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Lesbian)
-			StringClean = StringClean.Replace("@ShowLesbianImage", "")
-		End If
-
-		If StringClean.Contains("@ShowBlowjobImage") Then
-			If FrmSettings.CBURLBlowjob.Checked = False Then Return StringClean
-			If FrmSettings.CBIBlowjob.Checked = True And FrmSettings.CBURLBlowjob.Checked = False Then Return StringClean
-			If FrmSettings.CBIBlowjob.Checked = True And FrmSettings.CBURLBlowjob.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Blowjob)
-			StringClean = StringClean.Replace("@ShowBlowjobImage", "")
-		End If
-
-		If StringClean.Contains("@ShowFemdomImage") Then
-			If FrmSettings.CBURLFemdom.Checked = False Then Return StringClean
-			If FrmSettings.CBIFemdom.Checked = True And FrmSettings.CBURLFemdom.Checked = False Then Return StringClean
-			If FrmSettings.CBIFemdom.Checked = True And FrmSettings.CBURLFemdom.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Femdom)
-			StringClean = StringClean.Replace("@ShowFemdomImage", "")
-		End If
-
-		If StringClean.Contains("@ShowLezdomImage") Then
-			If FrmSettings.CBURLLezdom.Checked = False Then Return StringClean
-			If FrmSettings.CBILezdom.Checked = True And FrmSettings.CBURLLezdom.Checked = False Then Return StringClean
-			If FrmSettings.CBILezdom.Checked = True And FrmSettings.CBURLLezdom.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Lezdom)
-			StringClean = StringClean.Replace("@ShowLezdomImage", "")
-		End If
-
-		If StringClean.Contains("@ShowHentaiImage") Then
-			If FrmSettings.CBURLHentai.Checked = False Then Return StringClean
-			If FrmSettings.CBIHentai.Checked = True And FrmSettings.CBURLHentai.Checked = False Then Return StringClean
-			If FrmSettings.CBIHentai.Checked = True And FrmSettings.CBURLHentai.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Hentai)
-			StringClean = StringClean.Replace("@ShowHentaiImage", "")
-		End If
-
-		If StringClean.Contains("@ShowGayImage") Then
-			If FrmSettings.CBURLGay.Checked = False Then Return StringClean
-			If FrmSettings.CBIGay.Checked = True And FrmSettings.CBURLGay.Checked = False Then Return StringClean
-			If FrmSettings.CBIGay.Checked = True And FrmSettings.CBURLGay.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Gay)
-			StringClean = StringClean.Replace("@ShowGayImage", "")
-		End If
-
-		If StringClean.Contains("@ShowMaledomImage") Then
-			If FrmSettings.CBURLMaledom.Checked = False Then Return StringClean
-			If FrmSettings.CBIMaledom.Checked = True And FrmSettings.CBURLMaledom.Checked = False Then Return StringClean
-			If FrmSettings.CBIMaledom.Checked = True And FrmSettings.CBURLMaledom.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Maledom)
-			StringClean = StringClean.Replace("@ShowMaledomImage", "")
-		End If
-
-		If StringClean.Contains("@ShowCaptionsImage") Then
-			If FrmSettings.CBURLCaptions.Checked = False Then Return StringClean
-			If FrmSettings.CBICaptions.Checked = True And FrmSettings.CBURLCaptions.Checked = False Then Return StringClean
-			If FrmSettings.CBICaptions.Checked = True And FrmSettings.CBURLCaptions.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.Captions)
-			StringClean = StringClean.Replace("@ShowCaptionsImage", "")
-		End If
-
-		If StringClean.Contains("@ShowGeneralImage") Then
-			If FrmSettings.CBURLGeneral.Checked = False Then Return StringClean
-			If FrmSettings.CBIGeneral.Checked = True And FrmSettings.CBURLGeneral.Checked = False Then Return StringClean
-			If FrmSettings.CBIGeneral.Checked = True And FrmSettings.CBURLGeneral.Checked = True Then
-				If randomizer.Next(1, 101) < 51 Then Return StringClean
-			End If
-			JustShowedBlogImage = True
-			BeginImageFetch(ImageGenre.General)
-			StringClean = StringClean.Replace("@ShowGeneralImage", "")
-		End If
-
-		Return StringClean
-
-	End Function
 
 
 	Public Sub CheckLocalImage(ByVal dir As String, ByVal subdir As Boolean)
