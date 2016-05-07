@@ -763,6 +763,8 @@ Public Class FrmSettings
 
 		CBURLPreview.Checked = My.Settings.CBURLPreview
 
+		TypesSpeedVal.Text = TypeSpeedSlider.Value
+
 
 		FrmSettingsLoading = False
 
@@ -13134,11 +13136,11 @@ WhyUMakeMeDoDis:
 	Private Sub CBTransparentTime_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTransparentTime.CheckedChanged
 		If Form1.ApplyingTheme = False Then
 			My.Settings.CBDateTransparent = CBTransparentTime.Checked
-            My.Settings.Save()
-            Try
-                Form1.ApplyThemeColor()
-            Catch
-            End Try
+			My.Settings.Save()
+			Try
+				Form1.ApplyThemeColor()
+			Catch
+			End Try
 		End If
 
 	End Sub
@@ -13153,12 +13155,12 @@ WhyUMakeMeDoDis:
 
 	Private Sub CheckBox1_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBFlipBack.CheckedChanged
 
-        Try
-            If Form1.FormLoading = False And Form1.ApplyingTheme = False Then Form1.ApplyThemeColor()
-        Catch
-        End Try
+		Try
+			If Form1.FormLoading = False And Form1.ApplyingTheme = False Then Form1.ApplyThemeColor()
+		Catch
+		End Try
 
-    End Sub
+	End Sub
 
 	Private Sub Button32_Click(sender As System.Object, e As System.EventArgs) Handles Button32.Click
 		SaveFileDialog1.Title = "Select a location to save current Theme"
@@ -13515,7 +13517,7 @@ WhyUMakeMeDoDis:
 		End If
 	End Sub
 
-	
+
 
 	Private Sub BTNDebugTauntsClear_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugTauntsClear.Click
 		TBDebugTaunts1.Text = ""
@@ -13532,9 +13534,9 @@ WhyUMakeMeDoDis:
 	End Sub
 
 	Private Sub CBMuteMedia_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBMuteMedia.CheckedChanged
-		
-				Form1.DomWMP.settings.mute = CBMuteMedia.Checked
-			
+
+		Form1.DomWMP.settings.mute = CBMuteMedia.Checked
+
 	End Sub
 
 	Private Sub CBMuteMedia_LostFocus(sender As Object, e As System.EventArgs) Handles CBMuteMedia.LostFocus
@@ -13591,7 +13593,7 @@ WhyUMakeMeDoDis:
 	End Sub
 
 
-	
+
 	Private Sub BTNURLHardcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLHardcore.Click
 		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
 		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
@@ -13690,7 +13692,7 @@ WhyUMakeMeDoDis:
 			My.Settings.Save()
 		End If
 	End Sub
-	
+
 	Private Sub CBURLHardcore_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLHardcore.LostFocus
 		My.Settings.CBURLHardcore = CBURLHardcore.Checked
 		My.Settings.Save()
@@ -13754,7 +13756,7 @@ WhyUMakeMeDoDis:
 	End Sub
 
 
-	
+
 	Private Sub CBURLPreview_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLPreview.LostFocus
 		My.Settings.CBURLPreview = CBURLPreview.Checked
 	End Sub
@@ -13801,4 +13803,22 @@ WhyUMakeMeDoDis:
 	Private Sub NBTasksMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTasksMax.ValueChanged
 		If NBTasksMax.Value < NBTasksMin.Value Then NBTasksMax.Value = NBTasksMin.Value
 	End Sub
+
+	Private Sub TypeSpeedSlider_MouseHover(sender As Object, e As System.EventArgs) Handles TypeSpeedSlider.MouseHover
+		TTDir.SetToolTip(TypeSpeedSlider, "Adjust your typing speed. It determines how much time you will have during Writing Tasks to accomplish them." & vbCrLf & "(There is a 3-fold difference in time granted between slowest and fastest typing speed")
+	End Sub
+
+	Private Sub TypeSpeedSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles TypeSpeedSlider.Scroll
+		TypesSpeedVal.Text = TypeSpeedSlider.Value
+	End Sub
+
+	Private Sub TimedWriting_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles TimedWriting.MouseHover
+
+		If RBEnglish.Checked = True Then TTDir.SetToolTip(TimedWriting, "When selected, you will need to complete Writing Tasks in a certain amount of time, based on sentence length and Typing Speed value" & Environment.NewLine &
+	  "When unselected, Writing Tasks failure will only be based on errors made")
+		If RBGerman.Checked = True Then TTDir.SetToolTip(TimedWriting, "Wenn diese Option aktiviert , müssen Sie Schreibaufgaben in einer bestimmten Zeit zu vervollständigen, basierend auf Satzlängeund Typing Speed ​​Wert" & Environment.NewLine &
+		 "Wenn diese Option deaktiviert, Schreibaufgaben Fehler wird nur auf Fehler beruhen gemacht")
+
+	End Sub
+
 End Class

@@ -554,6 +554,8 @@ Public Class Form1
 
 	Dim Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
 
+	Dim WritingTaskCurrentTime As Single
+
 	Private Const DISABLE_SOUNDS As Integer = 21
 	Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -1857,6 +1859,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		' Github Patch
 		BTNPlaylist.Enabled = True
 
+		If PNLWritingTask.Visible Then CloseApp()
+
 	End Sub
 
 
@@ -2343,7 +2347,16 @@ WritingTaskLine:
 
 				If SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
-					Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & ChatString & "<br></font>"
+					If CBWritingProgress.Checked = True Then
+						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & ChatString & "<br></font> " _
+										& "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#006400"">" & "Correct: " & WritingTaskLinesRemaining & " lines remaining<br></font>"
+						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Correct: " & WritingTaskLinesRemaining & " lines remaining", "Time Expired")
+						Chat = Chat.Replace(" 1 lines", " 1 line")
+						Chat = Chat.Replace(" 0 lines remaining", " Task Completed")
+					Else
+						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & ChatString & "<br></font>"
+					End If
+
 					ChatText.DocumentText = Chat
 					While ChatText.ReadyState <> WebBrowserReadyState.Complete
 						Application.DoEvents()
@@ -2356,8 +2369,18 @@ WritingTaskLine:
 
 				Else
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
-					Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-				SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>"
+
+					If CBWritingProgress.Checked = True Then
+						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
+						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>" _
+						 & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#006400"">" & "Correct: " & WritingTaskLinesRemaining & " lines remaining<br></font>"
+						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Correct: " & WritingTaskLinesRemaining & " lines remaining", "Time Expired")
+						Chat = Chat.Replace(" 1 lines", " 1 line")
+						Chat = Chat.Replace(" 0 lines remaining", " Task Completed")
+					Else
+						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
+						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>"
+					End If
 
 					ChatText.DocumentText = Chat
 					While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -2396,10 +2419,17 @@ WritingTaskLine:
 
 
 				If WritingTaskLinesRemaining = 0 Then
-					WritingTaskFlag = False
-					chatBox.ShortcutsEnabled = True
-					ChatBox2.ShortcutsEnabled = True
+					ClearWriteTask()
 					ScriptTick = 3
+					ScriptTimer.Start()
+				End If
+
+				If WritingTaskCurrentTime < 1 And My.Settings.TimedWriting = True And WritingTaskFlag = True Then
+					ClearWriteTask()
+					SkipGotoLine = True
+					FileGoto = "Failed Writing Task"
+					GetGoto()
+					ScriptTick = 4
 					ScriptTimer.Start()
 				End If
 
@@ -2408,7 +2438,17 @@ WritingTaskLine:
 
 				If SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
 
-					Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & "</font><font color=""#FF0000"">" & ChatString & "<br></font>"
+					If CBWritingProgress.Checked = True Then
+						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & "</font><font color=""#FF0000"">" & ChatString & "<br></font>" &
+						"<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#CD0000"">" & "Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 &
+						" mistakes remaining<br></font>"
+						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 & " mistakes remaining", "Time Expired")
+						Chat = Chat.Replace(" 1 mistakes", " 1 mistake")
+						Chat = Chat.Replace(" 0 mistakes remaining", " Task Failed")
+					Else
+						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & "</font><font color=""#FF0000"">" & ChatString & "<br></font>"
+					End If
+
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 					ChatText.DocumentText = Chat
 					While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -2422,8 +2462,19 @@ WritingTaskLine:
 
 				Else
 
-					Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-				SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>"
+					If CBWritingProgress.Checked = True Then
+						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
+						   SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>" &
+						  "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#CD0000"">" & "Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 &
+						  " mistakes remaining<br></font>"
+						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 & " mistakes remaining", "Time Expired")
+						Chat = Chat.Replace(" 1 mistakes", " 1 mistake")
+						Chat = Chat.Replace(" 0 mistakes remaining", " Task Failed")
+					Else
+						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
+						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>"
+					End If
+
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 					ChatText.DocumentText = Chat
 					While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -2458,10 +2509,7 @@ WritingTaskLine:
 				LBLMistakesMade.Text = WritingTaskMistakesMade
 
 				If WritingTaskMistakesMade = WritingTaskMistakesAllowed Then
-					WritingTaskFlag = False
-					'FrmWritingTask.Visible = False
-					chatBox.ShortcutsEnabled = True
-					ChatBox2.ShortcutsEnabled = True
+					ClearWriteTask()
 					SkipGotoLine = True
 					FileGoto = "Failed Writing Task"
 					GetGoto()
@@ -2469,6 +2517,14 @@ WritingTaskLine:
 					ScriptTimer.Start()
 				End If
 
+				If WritingTaskCurrentTime < 1 And My.Settings.TimedWriting = True And WritingTaskFlag = True Then
+					ClearWriteTask()
+					SkipGotoLine = True
+					FileGoto = "Failed Writing Task"
+					GetGoto()
+					ScriptTick = 4
+					ScriptTimer.Start()
+				End If
 
 			End If
 
@@ -4480,7 +4536,7 @@ AcceptAnswer:
 	End Sub
 
 
-	Public Sub ScriptTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles ScriptTimer.Tick
+	Public Sub ScriptTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ScriptTimer.Tick
 
 		FrmSettings.LBLDebugScriptTime.Text = ScriptTick
 		'Debug.Print("ScriptTick = " & ScriptTick)
@@ -5467,7 +5523,7 @@ SkipGotoSearch:
 
 	End Sub
 
-	Private Sub Timer1_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles Timer1.Tick
+	Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles Timer1.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -6546,7 +6602,7 @@ NoResponse:
 										ByVal cchBuffer As Int32) As Int32
 	End Function
 
-	Private Sub SendTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles SendTimer.Tick
+	Private Sub SendTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SendTimer.Tick
 
 		If DomChat.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
 		If DomChat.Contains("@NullResponse") Then
@@ -7695,7 +7751,7 @@ TryPrevious:
 #End Region
 
 
-	Private Sub StrokeTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles StrokeTimer.Tick
+	Private Sub StrokeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimer.Tick
 
 
 		If InputFlag = True Then Return
@@ -7790,7 +7846,7 @@ SkipTick:
 	End Sub
 
 
-	Private Sub StrokeTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles StrokeTauntTimer.Tick
+	Private Sub StrokeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTauntTimer.Tick
 
 		If MiniScript = True Then Return
 		If InputFlag = True Then Return
@@ -8119,7 +8175,7 @@ TryNextWithTease:
 
 
 
-	Private Sub DelayTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles DelayTimer.Tick
+	Private Sub DelayTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DelayTimer.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -8532,7 +8588,7 @@ GetAnotherRandomVideo:
 
 
 
-	Public Sub CensorshipTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles CensorshipTimer.Tick
+	Public Sub CensorshipTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CensorshipTimer.Tick
 
 
 		If MiniScript = True Then Return
@@ -8631,7 +8687,7 @@ CensorConstant:
 	End Sub
 
 
-	Public Sub RLGLTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles RLGLTimer.Tick
+	Public Sub RLGLTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTimer.Tick
 		' Check all Conditions before starting scripts.
 		If MiniScript = True Then Return
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
@@ -9141,7 +9197,7 @@ StatusUpdateEnd:
 		End If
 	End Sub
 
-	Private Sub UpdatesTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles UpdatesTimer.Tick
+	Private Sub UpdatesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdatesTimer.Tick
 
 		'Debug.Print("updates tick = " & UpdatesTick)
 
@@ -12392,33 +12448,42 @@ OrgasmDecided:
 				LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace(WritingTaskVal, "")
 			End If
 
-
-			LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times:"
-			LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
 			LBLLinesWritten.Text = "0"
 			LBLLinesRemaining.Text = WritingTaskLinesAmount
-
-
-			' Dim WTTempString As String() = Split(StringClean, "@WritingTask(", 2)
-			' Dim WTTemp As String() = Split(WTTempString(1), ")" 1)
-
-			' LBLWritingTaskText.Text = WTTemp(0)
 
 			If PNLWritingTask.Visible = False Then
 				CloseApp()
 				OpenApp()
 				PNLWritingTask.Visible = True
 			End If
-			WritingTaskMistakesAllowed = randomizer.Next(3, 11)
+			WritingTaskMistakesAllowed = randomizer.Next(3, 9)
 			LBLMistakesAllowed.Text = WritingTaskMistakesAllowed
 			LBLMistakesMade.Text = "0"
 			StringClean = StringClean.Replace("@WritingTask", "")
-			LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times."
+			'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times."
 			WritingTaskLinesRemaining = WritingTaskLinesAmount
 			WritingTaskLinesWritten = 0
 			WritingTaskMistakesMade = 0
 			chatBox.ShortcutsEnabled = False
 			ChatBox2.ShortcutsEnabled = False
+
+			If My.Settings.TimedWriting = True Then
+
+				Dim secs As Single
+
+				'determines how many secs are given for writing each line, depending on line length and typespeed value selected by the user in the settings
+				'(between 0,54 and 0,75 secs per character in the sentence at slowest typingspeed and between 0.18 and 0.25 at fastest typing speed)
+				secs = (randomizer.Next(18, 25) / My.Settings.TypeSpeed) * LBLWritingTaskText.Text.Length
+				'determines how much time is given (in seconds) to complete the @WritingTask() depending on how many lines you have to write and a small bonus to give some
+				'more time for very short lines
+				WritingTaskCurrentTime = 5 + secs * WritingTaskLinesAmount
+
+				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "In " & ConvertSeconds(WritingTaskCurrentTime)
+				LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
+			Else
+				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times"
+				LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
+			End If
 
 		End If
 
@@ -21170,7 +21235,7 @@ FinishTNA:
 
 
 
-	Private Sub AvoidTheEdge_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles AvoidTheEdge.Tick
+	Private Sub AvoidTheEdge_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdge.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -21311,7 +21376,7 @@ FinishTNA:
 
 	End Sub
 
-	Private Sub AvoidTheEdgeResume_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles AvoidTheEdgeResume.Tick
+	Private Sub AvoidTheEdgeResume_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeResume.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -21873,7 +21938,7 @@ NoPlaylistEndFile:
 	End Sub
 
 
-	Private Sub EdgeTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles EdgeTauntTimer.Tick
+	Private Sub EdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeTauntTimer.Tick
 
 		If MultipleEdgesTimer.Enabled = True Then Return
 		If MiniScript = True Then Return
@@ -21924,7 +21989,7 @@ NoPlaylistEndFile:
 
 
 
-	Private Sub HoldEdgeTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles HoldEdgeTimer.Tick
+	Private Sub HoldEdgeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTimer.Tick
 
 		If MiniScript = True Then Return
 
@@ -22251,7 +22316,7 @@ NoRepeatOFiles:
 
 	End Sub
 
-	Private Sub HoldEdgeTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles HoldEdgeTauntTimer.Tick
+	Private Sub HoldEdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTauntTimer.Tick
 
 		If MiniScript = True Then Return
 		If InputFlag = True Then Return
@@ -22572,7 +22637,7 @@ PoundLoop:
 
 
 
-	Private Sub SlideshowTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles SlideshowTimer.Tick
+	Private Sub SlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SlideshowTimer.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -22665,7 +22730,7 @@ TryNext:
 
 
 
-	Private Sub EdgeCountTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles EdgeCountTimer.Tick
+	Private Sub EdgeCountTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeCountTimer.Tick
 		EdgeCountTick += 1
 
 
@@ -22698,7 +22763,7 @@ TryNext:
 		'Debug.Print("EdgeCountTick = " & String.Format("{0:00}:{1:00}", TST.Minutes, TST.Seconds))
 	End Sub
 
-	Private Sub StrokeTimeTotalTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
+	Private Sub StrokeTimeTotalTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
@@ -22723,7 +22788,7 @@ TryNext:
 
 
 
-	Private Sub TnAFastSlides_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TnASlides.Tick
+	Private Sub TnAFastSlides_Tick(sender As System.Object, e As System.EventArgs) Handles TnASlides.Tick
 
 		Dim TnARandom As Integer = randomizer.Next(1, 101)
 
@@ -23203,7 +23268,7 @@ TryNext:
 
 	End Sub
 
-	Private Sub WMPTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles WMPTimer.Tick
+	Private Sub WMPTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WMPTimer.Tick
 
 
 		If DomWMP.currentPlaylist.count <> 0 Then
@@ -23286,7 +23351,7 @@ TryNext:
 	End Sub
 
 
-	Private Sub WaitTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles WaitTimer.Tick
+	Private Sub WaitTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WaitTimer.Tick
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
 		If DomTypeCheck = True Or YesOrNo = True Then Return
@@ -23303,7 +23368,7 @@ TryNext:
 
 	End Sub
 
-	Private Sub StupidTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles StupidTimer.Tick
+	Private Sub StupidTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StupidTimer.Tick
 
 		If PBFileTransfer.Value = PBFileTransfer.Maximum Then
 			StupidTimer.Enabled = False
@@ -23485,7 +23550,7 @@ TryNext:
 
 
 
-	Private Sub VideoTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles VideoTauntTimer.Tick
+	Private Sub VideoTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTauntTimer.Tick
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
 		If MiniScript = True Then Return
 
@@ -23543,7 +23608,7 @@ TryNext:
 
 	End Sub
 
-	Private Sub TeaseTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TeaseTimer.Tick
+	Private Sub TeaseTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseTimer.Tick
 
 
 		FrmSettings.LBLDebugTeaseTime.Text = TeaseTick
@@ -23557,7 +23622,7 @@ TryNext:
 
 	End Sub
 
-	Public Sub RLGLTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles RLGLTauntTimer.Tick
+	Public Sub RLGLTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTauntTimer.Tick
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
 		If MiniScript = True Then Return
 
@@ -23608,7 +23673,7 @@ TryNext:
 
 	End Sub
 
-	Private Sub AvoidTheEdgeTaunts_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles AvoidTheEdgeTaunts.Tick
+	Private Sub AvoidTheEdgeTaunts_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeTaunts.Tick
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
 
 		If DomTyping = True Then Return
@@ -23958,7 +24023,7 @@ TryNext:
 #End Region ' PictureStrip
 
 
-	Private Sub ContactTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles ContactTimer.Tick
+	Private Sub ContactTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ContactTimer.Tick
 		'QUESTION: (stefaF) This Timer seems to be useless. Is this correct?
 		ContactTick -= 1
 
@@ -24240,7 +24305,7 @@ GetDommeSlideshow:
 	End Function
 
 
-	Private Sub CustomSlideshowTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
+	Private Sub CustomSlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
 		Try
 			CustomSlideshowTimer.Stop()
 
@@ -24435,7 +24500,7 @@ GetDommeSlideshow:
 	End Sub
 
 
-	Private Sub Contact1Timer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles Contact1Timer.Tick
+	Private Sub Contact1Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact1Timer.Tick
 
 		AddContactTick -= 1
 
@@ -24472,7 +24537,7 @@ GetDommeSlideshow:
 
 	End Sub
 
-	Private Sub Contact2Timer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles Contact2Timer.Tick
+	Private Sub Contact2Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact2Timer.Tick
 
 		AddContactTick -= 1
 
@@ -24509,7 +24574,7 @@ GetDommeSlideshow:
 
 	End Sub
 
-	Private Sub Contact3Timer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles Contact3Timer.Tick
+	Private Sub Contact3Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact3Timer.Tick
 
 		AddContactTick -= 1
 
@@ -24548,7 +24613,7 @@ GetDommeSlideshow:
 
 #End Region
 
-	Private Sub DommeTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles DommeTimer.Tick
+	Private Sub DommeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DommeTimer.Tick
 
 		AddContactTick -= 1
 
@@ -24585,7 +24650,7 @@ GetDommeSlideshow:
 
 	End Sub
 
-	Private Sub UpdateStageTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles UpdateStageTimer.Tick
+	Private Sub UpdateStageTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateStageTimer.Tick
 		UpdateStageTick -= 1
 		If UpdateStageTick < 1 Then
 			UpdateStageTimer.Stop()
@@ -26256,6 +26321,7 @@ GetDommeSlideshow:
 	End Sub
 
 	Private Sub SideChatToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles SideChatToolStripMenuItem1.Click
+		If SideChatToolStripMenuItem1.Checked = True Then SideChatToolStripMenuItem1.Checked = False
 		If ChatText2.Visible = False Then
 			CloseApp()
 			ChatText2.Visible = True
@@ -26779,15 +26845,29 @@ SkipNew:
 
 
 
-	Private Sub TeaseAIClock_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TeaseAIClock.Tick
+	Private Sub TeaseAIClock_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseAIClock.Tick
 
-		LBLTime.Text = Format(Now, "h:mm")
-		LBLAMPM.Text = Format(Now, "tt")
-		LBLDate.Text = Format(Now, "Long Date")
+		If WritingTaskFlag = False Then
+			LBLTime.Text = Format(Now, "h:mm")
+			LBLAMPM.Text = Format(Now, "tt")
+			LBLDate.Text = Format(Now, "Long Date")
 
-		'Debug.Print("Current day = " & Format(Now, "dd"))
+		Else
 
-		' Debug.Print(Format(Now, "MM/dd/yyyy"))
+			If WritingTaskCurrentTime > 0 Then
+				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "You have " & ConvertSeconds(WritingTaskCurrentTime)
+				LBLTime.Text = Convert.ToInt16(WritingTaskCurrentTime)
+			Else
+				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
+				LBLTime.Text = "Time's Up"
+			End If
+			WritingTaskCurrentTime -= 1
+
+
+			LBLAMPM.Text = ""
+
+		End If
+
 
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp") Then
 
@@ -26800,31 +26880,15 @@ SkipNew:
 
 			Dim TimeCounter As Integer = -3
 
-
-
-			'Debug.Print("DDiff = " & DDiff)
-			'Debug.Print(GetTime("SYS_WakeUp"))
-
 			GeneralTime = "Night"
-			'If DDiff < -13 Then GeneralTime = "Afternoon"
 			If DDiff < -20 Then GeneralTime = "Morning"
 			If DDiff > -2 And DDiff < 5 Then GeneralTime = "Morning"
 			If DDiff > 4 And DDiff < 12 Then GeneralTime = "Afternoon"
 			If DDiff > -21 And DDiff < -11 Then GeneralTime = "Afternoon"
 
-
-			'Debug.Print(GeneralTime)
 		End If
 
-
 		' #DEBUG
-
-		'Debug.Print("LockImage = " & LockImage)
-		'Debug.Print("WorshipMode = " & WorshipMode)
-		'Debug.Print("WorshipTarget = " & WorshipTarget)
-		'Debug.Print("My.Settings.SplitterDistance = " & My.Settings.SplitterDistance)
-
-
 
 	End Sub
 
@@ -27120,8 +27184,13 @@ SkipNew:
 
 		PNLDomTagBTN.Visible = False
 		StatusUpdates.Visible = False
-		ChatText2.Visible = False
-		PNLChatBox2.Visible = False
+		If SideChatToolStripMenuItem1.Checked = False Then
+			ChatText2.Visible = False
+			PNLChatBox2.Visible = False
+		Else
+			ChatText2.SendToBack()
+			PNLChatBox2.SendToBack()
+		End If
 		PNLLazySub.Visible = False
 		PNLLazySub2.Visible = False
 		PNLAppRandomizer.Visible = False
@@ -27132,9 +27201,12 @@ SkipNew:
 		AppPanelVitalSub.Visible = False
 		PNLMetronome.Visible = False
 
-		SideChatToolStripMenuItem1.Checked = False
+		If ChatText2.Visible = False Then
+			PNLTabs.Height = 0
+		Else
+			OpenApp()
+		End If
 
-		PNLTabs.Height = 0
 
 		AdjustWindow()
 	End Sub
@@ -28133,11 +28205,20 @@ SkipNew:
 		My.Settings.Save()
 	End Sub
 
+	Public Sub CheatCheck()
+
+		If chatBox.Text = LBLWritingTaskText.Text Then
+			chatBox.Text = "I'm a dirty cheater"
+		End If
+
+	End Sub
+
 	Private Sub BTNLS1_Click(sender As System.Object, e As System.EventArgs) Handles BTNLS1.Click
 
 
 		If BTNLS1.Text <> "" Then
 			chatBox.Text = BTNLS1.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -28178,6 +28259,7 @@ SkipNew:
 
 		If BTNLS2.Text <> "" Then
 			chatBox.Text = BTNLS2.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -28217,6 +28299,7 @@ SkipNew:
 
 		If BTNLS3.Text <> "" Then
 			chatBox.Text = BTNLS3.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -28257,6 +28340,7 @@ SkipNew:
 
 		If BTNLS4.Text <> "" Then
 			chatBox.Text = BTNLS4.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -28297,6 +28381,7 @@ SkipNew:
 
 		If BTNLS5.Text <> "" Then
 			chatBox.Text = BTNLS5.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -28958,7 +29043,7 @@ SkipNew:
 		End If
 	End Sub
 
-	Private Sub TimeoutTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TimeoutTimer.Tick
+	Private Sub TimeoutTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TimeoutTimer.Tick
 
 		Debug.Print("TimeoutTick = " & TimeoutTick)
 
@@ -29061,7 +29146,7 @@ SkipNew:
 	End Sub
 
 
-	Private Sub VideoTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles VideoTimer.Tick
+	Private Sub VideoTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTimer.Tick
 
 		VideoTick -= 1
 
@@ -29073,7 +29158,7 @@ SkipNew:
 
 	End Sub
 
-	Private Sub MultipleEdgesTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles MultipleEdgesTimer.Tick
+	Private Sub MultipleEdgesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles MultipleEdgesTimer.Tick
 
 		If DomTypeCheck = True Then Return
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
@@ -29315,5 +29400,31 @@ SkipNew:
 
 	End Sub
 
+	Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
+		CloseApp()
+		ChatText2.Visible = True
+		PNLChatBox2.Visible = True
+		OpenApp()
+		SideChatToolStripMenuItem1.Checked = True
+		My.Settings.SideChat = True
+		My.Settings.Save()
+	End Sub
+
+	Public Sub ClearWriteTask()
+		'WritingTaskTimer.Stop()
+		WritingTaskCurrentTime = 0
+		WritingTaskFlag = False
+		chatBox.ShortcutsEnabled = True
+		ChatBox2.ShortcutsEnabled = True
+		CloseApp()
+		If ChatText.Height < 31 Then
+			ChatText2.Visible = True
+			PNLChatBox2.Visible = True
+			OpenApp()
+			SideChatToolStripMenuItem1.Checked = True
+			My.Settings.SideChat = True
+			My.Settings.Save()
+		End If
+	End Sub
 
 End Class
