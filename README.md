@@ -9,6 +9,10 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
+Side Chat now functions independently of other Apps. If Side Chat was active when another app was opened, then Side Chat will return on its own once that app is closed. 
+
+Implemented Daragorn's Timed Writing Tasks feature. Timed Writing Tasks can be activated/deactivated in the Ranges settings tab. 
+
 Added Button to WritingTasks panel that allows the user to open Side Chat directly from that panel. Also added checkbox to display how many lines/mistakes are remaining in chat during the writing task
 
 Added optional Boolean overload to CommandClean() that CleanTaskLines uses to process Commands that would only be useful in lines for Task letters. This allows Task letters to now process the following Commands:

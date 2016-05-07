@@ -2106,7 +2106,6 @@ Partial Class Form1
 		'
 		Me.PNLTabs.BackColor = System.Drawing.Color.Black
 		Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.PNLTabs.Controls.Add(Me.PNLLazySub)
 		Me.PNLTabs.Controls.Add(Me.PNLWritingTask)
 		Me.PNLTabs.Controls.Add(Me.PNLAppRandomizer)
 		Me.PNLTabs.Controls.Add(Me.PNLDomTagBTN)
@@ -2119,6 +2118,7 @@ Partial Class Form1
 		Me.PNLTabs.Controls.Add(Me.PNLWishList)
 		Me.PNLTabs.Controls.Add(Me.PNLMetronome)
 		Me.PNLTabs.Controls.Add(Me.PNLPlaylist)
+		Me.PNLTabs.Controls.Add(Me.PNLLazySub)
 		Me.PNLTabs.Location = New System.Drawing.Point(9, 120)
 		Me.PNLTabs.Name = "PNLTabs"
 		Me.PNLTabs.Size = New System.Drawing.Size(253, 646)
@@ -3081,7 +3081,7 @@ Partial Class Form1
 		'
 		Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
 		Me.Button1.ForeColor = System.Drawing.Color.White
-		Me.Button1.Location = New System.Drawing.Point(8, 247)
+		Me.Button1.Location = New System.Drawing.Point(8, 300)
 		Me.Button1.Name = "Button1"
 		Me.Button1.Size = New System.Drawing.Size(228, 28)
 		Me.Button1.TabIndex = 137
@@ -3092,7 +3092,7 @@ Partial Class Form1
 		'
 		Me.Label76.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label76.ForeColor = System.Drawing.Color.White
-		Me.Label76.Location = New System.Drawing.Point(8, 134)
+		Me.Label76.Location = New System.Drawing.Point(8, 187)
 		Me.Label76.Name = "Label76"
 		Me.Label76.Size = New System.Drawing.Size(108, 17)
 		Me.Label76.TabIndex = 136
@@ -3105,7 +3105,7 @@ Partial Class Form1
 		Me.LBLMistakesMade.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
 		Me.LBLMistakesMade.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLMistakesMade.ForeColor = System.Drawing.Color.Black
-		Me.LBLMistakesMade.Location = New System.Drawing.Point(126, 153)
+		Me.LBLMistakesMade.Location = New System.Drawing.Point(126, 206)
 		Me.LBLMistakesMade.Name = "LBLMistakesMade"
 		Me.LBLMistakesMade.Size = New System.Drawing.Size(108, 24)
 		Me.LBLMistakesMade.TabIndex = 135
@@ -3116,7 +3116,7 @@ Partial Class Form1
 		'
 		Me.LNLMistakesMade.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LNLMistakesMade.ForeColor = System.Drawing.Color.White
-		Me.LNLMistakesMade.Location = New System.Drawing.Point(126, 134)
+		Me.LNLMistakesMade.Location = New System.Drawing.Point(126, 187)
 		Me.LNLMistakesMade.Name = "LNLMistakesMade"
 		Me.LNLMistakesMade.Size = New System.Drawing.Size(108, 17)
 		Me.LNLMistakesMade.TabIndex = 134
@@ -3129,7 +3129,7 @@ Partial Class Form1
 		Me.LBLMistakesAllowed.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
 		Me.LBLMistakesAllowed.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLMistakesAllowed.ForeColor = System.Drawing.Color.Black
-		Me.LBLMistakesAllowed.Location = New System.Drawing.Point(8, 153)
+		Me.LBLMistakesAllowed.Location = New System.Drawing.Point(8, 206)
 		Me.LBLMistakesAllowed.Name = "LBLMistakesAllowed"
 		Me.LBLMistakesAllowed.Size = New System.Drawing.Size(108, 24)
 		Me.LBLMistakesAllowed.TabIndex = 133
@@ -3140,7 +3140,7 @@ Partial Class Form1
 		'
 		Me.Label74.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label74.ForeColor = System.Drawing.Color.White
-		Me.Label74.Location = New System.Drawing.Point(126, 86)
+		Me.Label74.Location = New System.Drawing.Point(126, 139)
 		Me.Label74.Name = "Label74"
 		Me.Label74.Size = New System.Drawing.Size(108, 17)
 		Me.Label74.TabIndex = 132
@@ -3153,7 +3153,7 @@ Partial Class Form1
 		Me.LBLLinesRemaining.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
 		Me.LBLLinesRemaining.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLLinesRemaining.ForeColor = System.Drawing.Color.Black
-		Me.LBLLinesRemaining.Location = New System.Drawing.Point(126, 105)
+		Me.LBLLinesRemaining.Location = New System.Drawing.Point(126, 158)
 		Me.LBLLinesRemaining.Name = "LBLLinesRemaining"
 		Me.LBLLinesRemaining.Size = New System.Drawing.Size(108, 24)
 		Me.LBLLinesRemaining.TabIndex = 131
@@ -3164,7 +3164,7 @@ Partial Class Form1
 		'
 		Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label15.ForeColor = System.Drawing.Color.White
-		Me.Label15.Location = New System.Drawing.Point(8, 86)
+		Me.Label15.Location = New System.Drawing.Point(8, 139)
 		Me.Label15.Name = "Label15"
 		Me.Label15.Size = New System.Drawing.Size(108, 17)
 		Me.Label15.TabIndex = 130
@@ -3177,9 +3177,9 @@ Partial Class Form1
 		Me.LBLWritingTaskText.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
 		Me.LBLWritingTaskText.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLWritingTaskText.ForeColor = System.Drawing.Color.Black
-		Me.LBLWritingTaskText.Location = New System.Drawing.Point(8, 30)
+		Me.LBLWritingTaskText.Location = New System.Drawing.Point(8, 64)
 		Me.LBLWritingTaskText.Name = "LBLWritingTaskText"
-		Me.LBLWritingTaskText.Size = New System.Drawing.Size(226, 52)
+		Me.LBLWritingTaskText.Size = New System.Drawing.Size(226, 61)
 		Me.LBLWritingTaskText.TabIndex = 128
 		Me.LBLWritingTaskText.Text = "WritingTask"
 		Me.LBLWritingTaskText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3190,7 +3190,7 @@ Partial Class Form1
 		Me.LBLWritingTask.ForeColor = System.Drawing.Color.White
 		Me.LBLWritingTask.Location = New System.Drawing.Point(0, 3)
 		Me.LBLWritingTask.Name = "LBLWritingTask"
-		Me.LBLWritingTask.Size = New System.Drawing.Size(245, 24)
+		Me.LBLWritingTask.Size = New System.Drawing.Size(245, 54)
 		Me.LBLWritingTask.TabIndex = 125
 		Me.LBLWritingTask.Text = "Write the following line 100 times:"
 		Me.LBLWritingTask.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3201,7 +3201,7 @@ Partial Class Form1
 		Me.LBLLinesWritten.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
 		Me.LBLLinesWritten.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLLinesWritten.ForeColor = System.Drawing.Color.Black
-		Me.LBLLinesWritten.Location = New System.Drawing.Point(8, 105)
+		Me.LBLLinesWritten.Location = New System.Drawing.Point(8, 158)
 		Me.LBLLinesWritten.Name = "LBLLinesWritten"
 		Me.LBLLinesWritten.Size = New System.Drawing.Size(108, 24)
 		Me.LBLLinesWritten.TabIndex = 129
@@ -3903,7 +3903,7 @@ Partial Class Form1
 		'
 		Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
 		Me.Button15.ForeColor = System.Drawing.Color.White
-		Me.Button15.Location = New System.Drawing.Point(8, 213)
+		Me.Button15.Location = New System.Drawing.Point(8, 266)
 		Me.Button15.Name = "Button15"
 		Me.Button15.Size = New System.Drawing.Size(228, 28)
 		Me.Button15.TabIndex = 138
@@ -3917,7 +3917,7 @@ Partial Class Form1
 		Me.CBWritingProgress.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBWritingProgress.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "WritingProgress", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBWritingProgress.ForeColor = System.Drawing.Color.White
-		Me.CBWritingProgress.Location = New System.Drawing.Point(9, 188)
+		Me.CBWritingProgress.Location = New System.Drawing.Point(9, 241)
 		Me.CBWritingProgress.Name = "CBWritingProgress"
 		Me.CBWritingProgress.Size = New System.Drawing.Size(182, 17)
 		Me.CBWritingProgress.TabIndex = 139

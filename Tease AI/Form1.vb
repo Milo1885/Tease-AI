@@ -554,6 +554,8 @@ Public Class Form1
 
 	Dim Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
 
+	Dim WritingTaskCurrentTime As Single
+
 	Private Const DISABLE_SOUNDS As Integer = 21
 	Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -1857,6 +1859,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		' Github Patch
 		BTNPlaylist.Enabled = True
 
+		If PNLWritingTask.Visible Then CloseApp()
+
 	End Sub
 
 
@@ -2346,6 +2350,7 @@ WritingTaskLine:
 					If CBWritingProgress.Checked = True Then
 						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & ChatString & "<br></font> " _
 										& "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#006400"">" & "Correct: " & WritingTaskLinesRemaining & " lines remaining<br></font>"
+						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Correct: " & WritingTaskLinesRemaining & " lines remaining", "Time Expired")
 						Chat = Chat.Replace(" 1 lines", " 1 line")
 						Chat = Chat.Replace(" 0 lines remaining", " Task Completed")
 					Else
@@ -2369,11 +2374,12 @@ WritingTaskLine:
 						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
 						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>" _
 						 & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#006400"">" & "Correct: " & WritingTaskLinesRemaining & " lines remaining<br></font>"
+						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Correct: " & WritingTaskLinesRemaining & " lines remaining", "Time Expired")
 						Chat = Chat.Replace(" 1 lines", " 1 line")
 						Chat = Chat.Replace(" 0 lines remaining", " Task Completed")
 					Else
 						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-					  SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>"
+						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>"
 					End If
 
 					ChatText.DocumentText = Chat
@@ -2413,10 +2419,17 @@ WritingTaskLine:
 
 
 				If WritingTaskLinesRemaining = 0 Then
-					WritingTaskFlag = False
-					chatBox.ShortcutsEnabled = True
-					ChatBox2.ShortcutsEnabled = True
+					ClearWriteTask()
 					ScriptTick = 3
+					ScriptTimer.Start()
+				End If
+
+				If WritingTaskCurrentTime < 1 And My.Settings.TimedWriting = True And WritingTaskFlag = True Then
+					ClearWriteTask()
+					SkipGotoLine = True
+					FileGoto = "Failed Writing Task"
+					GetGoto()
+					ScriptTick = 4
 					ScriptTimer.Start()
 				End If
 
@@ -2429,6 +2442,7 @@ WritingTaskLine:
 						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & "</font><font color=""#FF0000"">" & ChatString & "<br></font>" & _
 						"<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#CD0000"">" & "Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 & _
 						" mistakes remaining<br></font>"
+						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 & " mistakes remaining", "Time Expired")
 						Chat = Chat.Replace(" 1 mistakes", " 1 mistake")
 						Chat = Chat.Replace(" 0 mistakes remaining", " Task Failed")
 					Else
@@ -2453,13 +2467,14 @@ WritingTaskLine:
 						   SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>" & _
 						  "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#CD0000"">" & "Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 & _
 						  " mistakes remaining<br></font>"
+						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 & " mistakes remaining", "Time Expired")
 						Chat = Chat.Replace(" 1 mistakes", " 1 mistake")
 						Chat = Chat.Replace(" 0 mistakes remaining", " Task Failed")
 					Else
 						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-					  SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>"
+						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>"
 					End If
-					
+
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 					ChatText.DocumentText = Chat
 					While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -2494,10 +2509,7 @@ WritingTaskLine:
 				LBLMistakesMade.Text = WritingTaskMistakesMade
 
 				If WritingTaskMistakesMade = WritingTaskMistakesAllowed Then
-					WritingTaskFlag = False
-					'FrmWritingTask.Visible = False
-					chatBox.ShortcutsEnabled = True
-					ChatBox2.ShortcutsEnabled = True
+					ClearWriteTask()
 					SkipGotoLine = True
 					FileGoto = "Failed Writing Task"
 					GetGoto()
@@ -2505,8 +2517,16 @@ WritingTaskLine:
 					ScriptTimer.Start()
 				End If
 
+				If WritingTaskCurrentTime < 1 And My.Settings.TimedWriting = True And WritingTaskFlag = True Then
+					ClearWriteTask()
+					SkipGotoLine = True
+					FileGoto = "Failed Writing Task"
+					GetGoto()
+					ScriptTick = 4
+					ScriptTimer.Start()
+				End If
 
-			End If
+				End If
 
 		End If
 
@@ -12279,33 +12299,42 @@ OrgasmDecided:
 				LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace(WritingTaskVal, "")
 			End If
 
-
-			LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times:"
-			LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
 			LBLLinesWritten.Text = "0"
 			LBLLinesRemaining.Text = WritingTaskLinesAmount
-
-
-			' Dim WTTempString As String() = Split(StringClean, "@WritingTask(", 2)
-			' Dim WTTemp As String() = Split(WTTempString(1), ")" 1)
-
-			' LBLWritingTaskText.Text = WTTemp(0)
 
 			If PNLWritingTask.Visible = False Then
 				CloseApp()
 				OpenApp()
 				PNLWritingTask.Visible = True
 			End If
-			WritingTaskMistakesAllowed = randomizer.Next(3, 11)
+			WritingTaskMistakesAllowed = randomizer.Next(3, 9)
 			LBLMistakesAllowed.Text = WritingTaskMistakesAllowed
 			LBLMistakesMade.Text = "0"
 			StringClean = StringClean.Replace("@WritingTask", "")
-			LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times."
+			'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times."
 			WritingTaskLinesRemaining = WritingTaskLinesAmount
 			WritingTaskLinesWritten = 0
 			WritingTaskMistakesMade = 0
 			chatBox.ShortcutsEnabled = False
 			ChatBox2.ShortcutsEnabled = False
+
+			If My.Settings.TimedWriting = True Then
+
+				Dim secs As Single
+
+				'determines how many secs are given for writing each line, depending on line length and typespeed value selected by the user in the settings
+				'(between 0,54 and 0,75 secs per character in the sentence at slowest typingspeed and between 0.18 and 0.25 at fastest typing speed)
+				secs = (randomizer.Next(18, 25) / My.Settings.TypeSpeed) * LBLWritingTaskText.Text.Length
+				'determines how much time is given (in seconds) to complete the @WritingTask() depending on how many lines you have to write and a small bonus to give some
+				'more time for very short lines
+				WritingTaskCurrentTime = 5 + secs * WritingTaskLinesAmount
+
+				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "In " & ConvertSeconds(WritingTaskCurrentTime)
+				LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
+			Else
+				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times"
+				LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
+			End If
 
 		End If
 
@@ -26375,6 +26404,7 @@ GetDommeSlideshow:
 	End Sub
 
 	Private Sub SideChatToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles SideChatToolStripMenuItem1.Click
+		If SideChatToolStripMenuItem1.Checked = True Then SideChatToolStripMenuItem1.Checked = False
 		If ChatText2.Visible = False Then
 			CloseApp()
 			ChatText2.Visible = True
@@ -26896,13 +26926,27 @@ SkipNew:
 
 	Private Sub TeaseAIClock_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles TeaseAIClock.Tick
 
-		LBLTime.Text = Format(Now, "h:mm")
-		LBLAMPM.Text = Format(Now, "tt")
-		LBLDate.Text = Format(Now, "Long Date")
+		If WritingTaskFlag = False Then
+			LBLTime.Text = Format(Now, "h:mm")
+			LBLAMPM.Text = Format(Now, "tt")
+			LBLDate.Text = Format(Now, "Long Date")
 
-		'Debug.Print("Current day = " & Format(Now, "dd"))
+		Else
 
-		' Debug.Print(Format(Now, "MM/dd/yyyy"))
+			If WritingTaskCurrentTime > 0 Then
+				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "You have " & ConvertSeconds(WritingTaskCurrentTime)
+				LBLTime.Text = Convert.ToInt16(WritingTaskCurrentTime)
+			Else
+				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
+				LBLTime.Text = "Time's Up"
+			End If
+			WritingTaskCurrentTime -= 1
+
+
+			LBLAMPM.Text = ""
+
+		End If
+
 
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp") Then
 
@@ -26915,31 +26959,15 @@ SkipNew:
 
 			Dim TimeCounter As Integer = -3
 
-
-
-			'Debug.Print("DDiff = " & DDiff)
-			'Debug.Print(GetTime("SYS_WakeUp"))
-
 			GeneralTime = "Night"
-			'If DDiff < -13 Then GeneralTime = "Afternoon"
 			If DDiff < -20 Then GeneralTime = "Morning"
 			If DDiff > -2 And DDiff < 5 Then GeneralTime = "Morning"
 			If DDiff > 4 And DDiff < 12 Then GeneralTime = "Afternoon"
 			If DDiff > -21 And DDiff < -11 Then GeneralTime = "Afternoon"
 
-
-			'Debug.Print(GeneralTime)
 		End If
 
-
 		' #DEBUG
-
-		'Debug.Print("LockImage = " & LockImage)
-		'Debug.Print("WorshipMode = " & WorshipMode)
-		'Debug.Print("WorshipTarget = " & WorshipTarget)
-		'Debug.Print("My.Settings.SplitterDistance = " & My.Settings.SplitterDistance)
-
-
 
 	End Sub
 
@@ -27235,8 +27263,13 @@ SkipNew:
 
 		PNLDomTagBTN.Visible = False
 		StatusUpdates.Visible = False
-		ChatText2.Visible = False
-		PNLChatBox2.Visible = False
+		If SideChatToolStripMenuItem1.Checked = False Then
+			ChatText2.Visible = False
+			PNLChatBox2.Visible = False
+		Else
+			ChatText2.SendToBack()
+			PNLChatBox2.SendToBack()
+		End If
 		PNLLazySub.Visible = False
 		PNLLazySub2.Visible = False
 		PNLAppRandomizer.Visible = False
@@ -27247,9 +27280,12 @@ SkipNew:
 		AppPanelVitalSub.Visible = False
 		PNLMetronome.Visible = False
 
-		SideChatToolStripMenuItem1.Checked = False
+		If ChatText2.Visible = False Then
+			PNLTabs.Height = 0
+		Else
+			OpenApp()
+		End If
 
-		PNLTabs.Height = 0
 
 		AdjustWindow()
 	End Sub
@@ -29744,4 +29780,22 @@ SkipNew:
 		My.Settings.SideChat = True
 		My.Settings.Save()
 	End Sub
+
+	Public Sub ClearWriteTask()
+		'WritingTaskTimer.Stop()
+		WritingTaskCurrentTime = 0
+		WritingTaskFlag = False
+		chatBox.ShortcutsEnabled = True
+		ChatBox2.ShortcutsEnabled = True
+		CloseApp()
+		If ChatText.Height < 31 Then
+			ChatText2.Visible = True
+			PNLChatBox2.Visible = True
+			OpenApp()
+			SideChatToolStripMenuItem1.Checked = True
+			My.Settings.SideChat = True
+			My.Settings.Save()
+		End If
+	End Sub
+
 End Class
