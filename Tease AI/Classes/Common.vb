@@ -25,7 +25,14 @@ Public Class Common
 	''' Filepath if it doesn't exist.</remarks>
 	Friend Shared Function Txt2List(ByVal GetText As String) As List(Of String)
 		Try
-			If GetText = Nothing Then Return New List(Of String)
+			If GetText Is Nothing Then
+				Throw New ArgumentNullException("The given filepath was NULL.")
+			End If
+
+			If GetText Is Nothing Or GetText = "" Then
+				Throw New ArgumentException("The given filepath was empty """ & GetText & """")
+			End If
+
 			' Check if the given Directory exists. MyDirectory.Exists will 
 			' try to create the directory, if it's an App-sub-dir.
 			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(GetText))) Then
@@ -43,13 +50,17 @@ Public Class Common
 
 						Return TextList
 					End Using
+				Else
+					Throw New FileNotFoundException("Can't locate the file: """ & GetText & """")
 				End If
+			Else
+				Throw New DirectoryNotFoundException("Can't locate the directory """ & Path.GetDirectoryName(GetText) & """")
 			End If
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'						       All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Error loading TextFile: " & GetText)
+			Log.WriteError(ex.Message, ex, "Error loading TextFile: """ & GetText & """")
 		End Try
 		Return New List(Of String)
 	End Function
@@ -63,7 +74,14 @@ Public Class Common
 	''' <returns></returns>
 	Friend Shared Function TxtReadLine(ByVal GetText As String) As String
 		Try
-			If GetText = Nothing Then Return Nothing
+			If GetText Is Nothing Then
+				Throw New ArgumentNullException("The given filepath was NULL.")
+			End If
+
+			If GetText Is Nothing Or GetText = "" Then
+				Throw New ArgumentException("The given filepath was empty """ & GetText & """")
+			End If
+
 			' Check if the given Directory exists. MyDirectory.Exists will 
 			' try to create the directory, if it's an App-sub-dir.
 			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(GetText))) Then
@@ -71,13 +89,17 @@ Public Class Common
 					Using TextReader As New StreamReader(GetText)
 						Return TextReader.ReadLine
 					End Using
+				Else
+					Throw New FileNotFoundException("Can't locate the file: """ & GetText & """")
 				End If
+			Else
+				Throw New DirectoryNotFoundException("Can't locate the directory """ & Path.GetDirectoryName(GetText) & """")
 			End If
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'						       All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Error loading TextFile: " & GetText)
+			Log.WriteError(ex.Message, ex, "Error loading TextLine:  " & GetText)
 		End Try
 		Return ""
 	End Function

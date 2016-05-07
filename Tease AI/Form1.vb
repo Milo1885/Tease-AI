@@ -2128,7 +2128,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 					If SlideshowLoaded = True Then
 						nextButton.Enabled = True
 						previousButton.Enabled = True
-						DommeSlideshowToolStripMenuItem.Enabled = True
+						PicStripTSMIdommeSlideshow.Enabled = True
 					End If
 					StrokeTauntVal = -1
 					ScriptTick = 3
@@ -4035,25 +4035,24 @@ FoundState:
 		DomResponse.Dispose()
 
 
-		Dim DomResponseAll As New StreamReader(ResponseFile)
+		Using DomResponseAll As New StreamReader(ResponseFile)
 
-		While DomResponseAll.Peek <> -1
-			DRLineTotal += 1
-			DRLines.Add(DomResponseAll.ReadLine())
-			If DRLines(DRLineTotal) = "[All]" Then
-				AddResponse = True
-			End If
-			If DRLines(DRLineTotal) = "[All End]" Then
-				AddResponse = False
-			End If
-			If AddResponse = False Or DRLines(DRLineTotal) = "[All]" Then
-				DRLines.Remove(DRLines(DRLineTotal))
-				DRLineTotal -= 1
-			End If
-		End While
+			While DomResponseAll.Peek <> -1
+				DRLineTotal += 1
+				DRLines.Add(DomResponseAll.ReadLine())
+				If DRLines(DRLineTotal) = "[All]" Then
+					AddResponse = True
+				End If
+				If DRLines(DRLineTotal) = "[All End]" Then
+					AddResponse = False
+				End If
+				If AddResponse = False Or DRLines(DRLineTotal) = "[All]" Then
+					DRLines.Remove(DRLines(DRLineTotal))
+					DRLineTotal -= 1
+				End If
+			End While
 
-		DomResponseAll.Close()
-		DomResponseAll.Dispose()
+		End Using
 
 		' ###########
 
@@ -4069,7 +4068,8 @@ FoundState:
 			ResponseLine = randomizer.Next(0, DRLines.Count)
 			CleanResponse = DRLines(ResponseLine)
 		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Response line", ex, "ReponseClean()")
+			Log.WriteError("Tease AI did not return a valid Response line from file: " &
+						   ResponseFile, ex, "ReponseClean(String)")
 			CleanResponse = "ERROR: Tease AI did not return a valid Response line"
 		End Try
 
@@ -4541,7 +4541,8 @@ AcceptAnswer:
 			BallList = FilterList(BallList)
 			DomTask = BallList(randomizer.Next(0, BallList.Count))
 		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid @CBTBalls line", ex, "CBTBalls()")
+			Log.WriteError("Tease AI did not return a valid @CBTBalls line from file: " &
+						   File2Read, ex, "CBTBalls()")
 			DomTask = "ERROR: Tease AI did not return a valid @CBTBalls line"
 		End Try
 
@@ -4568,7 +4569,8 @@ AcceptAnswer:
 			CockList = FilterList(CockList)
 			DomTask = CockList(randomizer.Next(0, CockList.Count))
 		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid @CBTCock line", ex, "CBTCock()")
+			Log.WriteError("Tease AI did not return a valid @CBTCock line from file: " &
+						   File2Read, ex, "CBTCock()")
 			DomTask = "ERROR: Tease AI did not return a valid @CBTCock line"
 		End Try
 
@@ -4608,7 +4610,8 @@ AcceptAnswer:
 			BothList = FilterList(BothList)
 			DomTask = BothList(randomizer.Next(0, BothList.Count))
 		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid @CBT line", ex, "CBTBoth()")
+			Log.WriteError("Tease AI did not return a valid @CBT line from file: " &
+						   File2Read, ex, "CBTBoth()")
 			DomTask = "ERROR: Tease AI did not return a valid @CBT line"
 		End Try
 
@@ -4633,7 +4636,7 @@ AcceptAnswer:
 			CustomList = FilterList(CustomList)
 			DomTask = CustomList(randomizer.Next(0, CustomList.Count))
 		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Custom Taks line", ex, "RunCustomTask()")
+			Log.WriteError("Tease AI did not return a valid Custom Taks line from file: " & File2Read, ex, "RunCustomTask()")
 			DomTask = "ERROR: Tease AI did not return a valid Custom Task line"
 		End Try
 
@@ -7276,75 +7279,75 @@ NullResponseLine2:
 					End If
 				End If
 
-					If CBTCockFlag = True Then
-						CBTCock()
-					End If
-
-					If CBTBallsFlag = True Then
-						CBTBalls()
-					End If
-
-					If CBTBothFlag = True Then
-						CBTBoth()
-					End If
-
-					If CustomTask = True Then
-						RunCustomTask()
-					End If
-
-					If YesOrNo = False And Responding = False Then
-						ScriptTick = randomizer.Next(4, 7)
-						If RiskyDeal = True Then ScriptTick = 2
-						ScriptTimer.Start()
-					End If
-
-					Responding = False
-
-					If SubGaveUp = True Then
-
-						SubGaveUp = False
-
-						AskedToGiveUpSection = False
-						If TnASlides.Enabled = True Then TnASlides.Stop()
-
-						Dim WasStroking As Boolean = SubStroking
-						Dim WasEdging As Boolean = SubEdging
-						Dim WasHolding As Boolean = SubHoldingEdge
-
-						StopEverything()
-						ModuleEnd = False
-						ShowModule = False
-
-						'DelayFlag = True
-						'DelayTick = randomizer.Next(3, 6)
-
-						'DelayTimer.Start()
-
-						'Do
-						'Application.DoEvents()
-						'Loop Until DelayFlag = False
-
-						LastScriptCountdown -= 1
-						'Debug.Print("LastScriptCountdown = " & LastScriptCountdown)
-
-						'FrmSettings.LBLOrgasmCountdown.Text = LastScriptCountdown
-
-						If ReturnFlag Then
-							ShowModule = True
-							ScriptTimer.Start()
-						ElseIf TeaseTick < 1 And Playlist = False Then
-							StrokeTauntVal = -1
-							RunLastScript()
-						ElseIf WasStroking And Not WasEdging And Not WasHolding Then
-							StrokeTauntVal = -1
-							RunModuleScript(False)
-						Else
-							StrokeTauntVal = -1
-							RunLinkScript()
-						End If
-
-					End If
+				If CBTCockFlag = True Then
+					CBTCock()
 				End If
+
+				If CBTBallsFlag = True Then
+					CBTBalls()
+				End If
+
+				If CBTBothFlag = True Then
+					CBTBoth()
+				End If
+
+				If CustomTask = True Then
+					RunCustomTask()
+				End If
+
+				If YesOrNo = False And Responding = False Then
+					ScriptTick = randomizer.Next(4, 7)
+					If RiskyDeal = True Then ScriptTick = 2
+					ScriptTimer.Start()
+				End If
+
+				Responding = False
+
+				If SubGaveUp = True Then
+
+					SubGaveUp = False
+
+					AskedToGiveUpSection = False
+					If TnASlides.Enabled = True Then TnASlides.Stop()
+
+					Dim WasStroking As Boolean = SubStroking
+					Dim WasEdging As Boolean = SubEdging
+					Dim WasHolding As Boolean = SubHoldingEdge
+
+					StopEverything()
+					ModuleEnd = False
+					ShowModule = False
+
+					'DelayFlag = True
+					'DelayTick = randomizer.Next(3, 6)
+
+					'DelayTimer.Start()
+
+					'Do
+					'Application.DoEvents()
+					'Loop Until DelayFlag = False
+
+					LastScriptCountdown -= 1
+					'Debug.Print("LastScriptCountdown = " & LastScriptCountdown)
+
+					'FrmSettings.LBLOrgasmCountdown.Text = LastScriptCountdown
+
+					If ReturnFlag Then
+						ShowModule = True
+						ScriptTimer.Start()
+					ElseIf TeaseTick < 1 And Playlist = False Then
+						StrokeTauntVal = -1
+						RunLastScript()
+					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
+						StrokeTauntVal = -1
+						RunModuleScript(False)
+					Else
+						StrokeTauntVal = -1
+						RunLinkScript()
+					End If
+
+				End If
+			End If
 		End If
 
 	End Sub
@@ -7478,7 +7481,7 @@ NullResponseLine2:
 
 			nextButton.Enabled = True
 			previousButton.Enabled = True
-			DommeSlideshowToolStripMenuItem.Enabled = True
+			PicStripTSMIdommeSlideshow.Enabled = True
 
 			If FrmSettings.landscapeCheckBox.Checked = True Then
 				If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
@@ -7986,7 +7989,8 @@ TryNextWithTease:
 					TauntLines = FilterList(TauntLines)
 					Dim g As String = "BreakPoint"
 				Catch ex As Exception
-					Log.WriteError("Tease AI did not return a valid Taunt", ex, "StrokeTauntTimer.Tick")
+					Log.WriteError("Tease AI did not return a valid Taunt from file: " &
+								   TauntText, ex, "StrokeTauntTimer.Tick")
 					DomTask = "ERROR: Tease AI did not return a valid Taunt"
 				End Try
 
@@ -8049,7 +8053,8 @@ TryNextWithTease:
 			Try
 				DomTask = TauntLines(TauntTextCount)
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Taunt", ex, "StrokeTauntTimer.Tick")
+				Log.WriteError("Tease AI did not return a valid Taunt from file: " &
+								   TauntText, ex, "StrokeTauntTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Taunt"
 			End Try
 
@@ -8623,7 +8628,8 @@ CensorConstant:
 				CensorLine = randomizer.Next(0, lines.Count)
 				DomTask = lines(CensorLine)
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Censorship Sucks line", ex, "CensorshipTimer.Tick")
+				Log.WriteError("Tease AI did not return a valid Censorship Sucks line from file: " &
+							   CensorVideo, ex, "CensorshipTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Censorship Sucks line"
 			End Try
 
@@ -8657,15 +8663,18 @@ CensorConstant:
 
 			' Declare list to read
 			Dim tempList As List(Of String)
+			Dim file2read As String
 
 			' Read File according to state and set the next timer-tick-duration.
 			If RedLight Then
 				'################################## RED - Light ##################################
-				tempList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Red Light.txt")
+				file2read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Red Light.txt"
+				tempList = Txt2List(file2read)
 				RLGLTick = randomizer.Next(FrmSettings.NBRedLightMin.Value, FrmSettings.NBRedLightMax.Value + 1)
 			Else
 				'################################## Green - Light ################################
-				tempList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Green Light.txt")
+				file2read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Green Light.txt"
+				tempList = Txt2List(file2read)
 				RLGLTick = randomizer.Next(FrmSettings.NBGreenLightMin.Value, FrmSettings.NBGreenLightMax.Value + 1)
 			End If
 
@@ -8673,7 +8682,8 @@ CensorConstant:
 				tempList = FilterList(tempList)
 				DomTask = tempList(randomizer.Next(0, tempList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid RLGL line", ex, "RLGLTimer.Tick")
+				Log.WriteError("Tease AI did not return a valid RLGL line from file: " &
+							   file2read, ex, "RLGLTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid RLGL line"
 			End Try
 
@@ -10045,7 +10055,7 @@ RinseLatherRepeat:
 			LockImage = True
 			nextButton.Enabled = False
 			previousButton.Enabled = False
-			DommeSlideshowToolStripMenuItem.Enabled = False
+			PicStripTSMIdommeSlideshow.Enabled = False
 			StringClean = StringClean.Replace("@LockImages", "")
 		End If
 
@@ -10055,7 +10065,7 @@ RinseLatherRepeat:
 			If SlideshowLoaded = True Then
 				nextButton.Enabled = True
 				previousButton.Enabled = True
-				DommeSlideshowToolStripMenuItem.Enabled = True
+				PicStripTSMIdommeSlideshow.Enabled = True
 			End If
 			LockImage = False
 			StringClean = StringClean.Replace("@UnlockImages", "")
@@ -11984,7 +11994,7 @@ OrgasmDecided:
 					If SlideshowLoaded = True Then
 						nextButton.Enabled = True
 						previousButton.Enabled = True
-						DommeSlideshowToolStripMenuItem.Enabled = True
+						PicStripTSMIdommeSlideshow.Enabled = True
 					End If
 					SubGaveUp = True
 					FirstRound = False
@@ -12199,7 +12209,7 @@ OrgasmDecided:
 				If SlideshowLoaded = True Then
 					nextButton.Enabled = True
 					previousButton.Enabled = True
-					DommeSlideshowToolStripMenuItem.Enabled = True
+					PicStripTSMIdommeSlideshow.Enabled = True
 				End If
 				StrokeTauntVal = -1
 				ScriptTick = 3
@@ -12246,7 +12256,7 @@ OrgasmDecided:
 				If SlideshowLoaded = True Then
 					nextButton.Enabled = True
 					previousButton.Enabled = True
-					DommeSlideshowToolStripMenuItem.Enabled = True
+					PicStripTSMIdommeSlideshow.Enabled = True
 				End If
 				StrokeTauntVal = -1
 				ScriptTick = 3
@@ -12300,7 +12310,7 @@ OrgasmDecided:
 				If SlideshowLoaded = True Then
 					nextButton.Enabled = True
 					previousButton.Enabled = True
-					DommeSlideshowToolStripMenuItem.Enabled = True
+					PicStripTSMIdommeSlideshow.Enabled = True
 				End If
 				StrokeTauntVal = -1
 				ScriptTick = 3
@@ -21682,7 +21692,7 @@ NoPlaylistLinkFile:
 			If SlideshowLoaded = True Then
 				nextButton.Enabled = True
 				previousButton.Enabled = True
-				DommeSlideshowToolStripMenuItem.Enabled = True
+				PicStripTSMIdommeSlideshow.Enabled = True
 			End If
 		End If
 
@@ -21822,7 +21832,7 @@ NoPlaylistEndFile:
 			If SlideshowLoaded = True Then
 				nextButton.Enabled = True
 				previousButton.Enabled = True
-				DommeSlideshowToolStripMenuItem.Enabled = True
+				PicStripTSMIdommeSlideshow.Enabled = True
 			End If
 			LockImage = False
 		End If
@@ -21885,7 +21895,7 @@ NoPlaylistEndFile:
 		If SlideshowLoaded = True Then
 			nextButton.Enabled = True
 			previousButton.Enabled = True
-			DommeSlideshowToolStripMenuItem.Enabled = True
+			PicStripTSMIdommeSlideshow.Enabled = True
 		End If
 
 		StrokeTauntVal = -1
@@ -21979,7 +21989,8 @@ NoPlaylistEndFile:
 				ETLines = FilterList(ETLines)
 				DomTask = ETLines(randomizer.Next(0, ETLines.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Edge Taunt", ex, "EdgeTauntTimer.Tick")
+				Log.WriteError("Tease AI did not return a valid Edge Taunt from file: " &
+							   File2Read, ex, "EdgeTauntTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Edge Taunt"
 			End Try
 
@@ -22351,7 +22362,8 @@ NoRepeatOFiles:
 				ETLines = FilterList(ETLines)
 				DomTask = ETLines(randomizer.Next(0, ETLines.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Hold the Edge Taunt", ex, "HoldEdgeTauntTimer.Tick")
+				Log.WriteError("Tease AI did not return a valid Hold the Edge Taunt from file: " &
+							   File2Read, ex, "HoldEdgeTauntTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Hold the Edge Taunt"
 			End Try
 
@@ -22433,216 +22445,219 @@ Night:
 	End Sub
 
 	Public Function CleanTaskLines(ByVal dir As String) As String
-
-		Dim TaskLines As List(Of String) = Txt2List(dir)
-		Dim TaskEntry As String
-		Dim TaskArray As String()
-		Dim TaskList As New List(Of String)
-
 		Try
+			Dim TaskLines As List(Of String) = Txt2List(dir)
+			Dim TaskEntry As String
+			Dim TaskArray As String()
+			Dim TaskList As New List(Of String)
+
 			TaskLines = FilterList(TaskLines)
+			If TaskLines.Count = 0 Then Throw New ArgumentException("The given file: """ & dir & """ was returned empty.")
+
 			TaskEntry = TaskLines(randomizer.Next(0, TaskLines.Count))
-		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Task Line", ex, "CreateTaskLetter()")
-			TaskEntry = "ERROR: Tease AI did not return a valid Task line"
-			Return TaskEntry
-		End Try
 
-		Dim LoopBuffer As Integer
 
-		TaskArray = TaskEntry.Split(" ")
-		For i As Integer = 0 To TaskArray.Count - 1
-			TaskList.Add(TaskArray(i))
-		Next
-		TaskEntry = ""
-		For i As Integer = 0 To TaskList.Count - 1
-			Try
-				LoopBuffer = 0
+			Dim LoopBuffer As Integer
+
+			TaskArray = TaskEntry.Split(" ")
+			For i As Integer = 0 To TaskArray.Count - 1
+				TaskList.Add(TaskArray(i))
+			Next
+			TaskEntry = ""
+			For i As Integer = 0 To TaskList.Count - 1
+				Try
+					LoopBuffer = 0
 
 PoundLoop:
-				LoopBuffer += 1
+					LoopBuffer += 1
 
-				TaskList(i) = TaskList(i).Replace(". #Emote", " #Emote")
-				TaskList(i) = TaskList(i).Replace(". #Grin", " #Grin")
-				TaskList(i) = TaskList(i).Replace(". #Lol", " #Lol.")
+					TaskList(i) = TaskList(i).Replace(". #Emote", " #Emote")
+					TaskList(i) = TaskList(i).Replace(". #Grin", " #Grin")
+					TaskList(i) = TaskList(i).Replace(". #Lol", " #Lol.")
 
-				TaskList(i) = PoundClean(TaskList(i))
-				If TaskEntry.Contains("#") And LoopBuffer < 6 Then GoTo PoundLoop
+					TaskList(i) = PoundClean(TaskList(i))
+					If TaskEntry.Contains("#") And LoopBuffer < 6 Then GoTo PoundLoop
 
-				TaskEntry = TaskEntry & TaskList(i) & " "
-			Catch
-			End Try
-		Next
-
-		Dim int As Integer
-
-		If TaskEntry.Contains("#TaskEdges") Then
-			Do
-				int = randomizer.Next(FrmSettings.NBTaskEdgesMin.Value, FrmSettings.NBTaskEdgesMax.Value + 1)
-				If int > 5 Then int = 5 * Math.Round(int / 5)
-				TaskEntry = TaskEntry.Replace("#TaskEdges", int)
-			Loop Until Not TaskEntry.Contains("#TaskEdges")
-		End If
-
-		If TaskEntry.Contains("#TaskStrokes") Then
-			Do
-				int = randomizer.Next(FrmSettings.NBTaskStrokesMin.Value, FrmSettings.NBTaskStrokesMax.Value + 1)
-				If int > 10 Then int = 10 * Math.Round(int / 10)
-				TaskEntry = TaskEntry.Replace("#TaskStrokes", int)
-			Loop Until Not TaskEntry.Contains("#TaskStrokes")
-		End If
-
-		If TaskEntry.Contains("#TaskHours") Then
-			Do
-				int = randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1) + FrmSettings.domlevelNumBox.Value
-				TaskEntry = TaskEntry.Replace("#TaskHours", int)
-			Loop Until Not TaskEntry.Contains("#TaskHours")
-		End If
-
-		If TaskEntry.Contains("#TaskMinutes") Then
-			Do
-				int = randomizer.Next(5, 13) * FrmSettings.domlevelNumBox.Value
-				TaskEntry = TaskEntry.Replace("#TaskMinutes", int)
-			Loop Until Not TaskEntry.Contains("#TaskMinutes")
-		End If
-
-		If TaskEntry.Contains("#TaskSeconds") Then
-			Do
-				int = randomizer.Next(10, 30) * FrmSettings.domlevelNumBox.Value * randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1)
-				TaskEntry = TaskEntry.Replace("#TaskSeconds", int)
-			Loop Until Not TaskEntry.Contains("#TaskSeconds")
-		End If
-
-		If TaskEntry.Contains("#TaskAmountLarge") Then
-			Do
-				int = (randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) * 2
-				If int > 5 Then int = 5 * Math.Round(int / 5)
-				TaskEntry = TaskEntry.Replace("#TaskAmountLarge", int)
-			Loop Until Not TaskEntry.Contains("#TaskAmountLarge")
-		End If
-
-		If TaskEntry.Contains("#TaskAmountSmall") Then
-			Do
-				int = (randomizer.Next(5, 11) * FrmSettings.domlevelNumBox.Value) / 2
-				If int > 5 Then int = 5 * Math.Round(int / 5)
-				TaskEntry = TaskEntry.Replace("#TaskAmountSmall", int)
-			Loop Until Not TaskEntry.Contains("#TaskAmountSmall")
-		End If
-
-		If TaskEntry.Contains("#TaskAmount") Then
-			Do
-				int = randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value
-				If int > 5 Then int = 5 * Math.Round(int / 5)
-				TaskEntry = TaskEntry.Replace("#TaskAmount", int)
-			Loop Until Not TaskEntry.Contains("#TaskAmount")
-		End If
-
-		If TaskEntry.Contains("#TaskStrokingTime") Then
-			Do
-				int = randomizer.Next(FrmSettings.NBTaskStrokingTimeMin.Value, FrmSettings.NBTaskStrokingTimeMax.Value + 1)
-				int *= 60
-				Dim TConvert As String = ConvertSeconds(int)
-				TaskEntry = TaskEntry.Replace("#TaskStrokingTime", TConvert)
-			Loop Until Not TaskEntry.Contains("#TaskStrokingTime")
-		End If
-
-		If TaskEntry.Contains("#TaskHoldTheEdgeTime") Then
-			Do
-				int = randomizer.Next(FrmSettings.NBTaskEdgeHoldTimeMin.Value, FrmSettings.NBTaskEdgeHoldTimeMax.Value + 1)
-				int *= 60
-				Dim TConvert As String = ConvertSeconds(int)
-				TaskEntry = TaskEntry.Replace("#TaskHoldTheEdgeTime", TConvert)
-			Loop Until Not TaskEntry.Contains("#TaskHoldTheEdgeTime")
-		End If
-
-		If TaskEntry.Contains("#TaskCBTTime") Then
-			Do
-				int = randomizer.Next(FrmSettings.NBTaskCBTTimeMin.Value, FrmSettings.NBTaskCBTTimeMax.Value + 1)
-				int *= 60
-				Dim TConvert As String = ConvertSeconds(int)
-				TaskEntry = TaskEntry.Replace("#TaskCBTTime", TConvert)
-			Loop Until Not TaskEntry.Contains("#TaskCBTTime")
-		End If
-
-		TaskEntry = TaskEntry.Replace("<font color=""red"">", "")
-		TaskEntry = TaskEntry.Replace("</font>", "")
-		TaskEntry = TaskEntry.Replace("#Null", "")
-
-		LoopBuffer = 0
-
-		Do
-			LoopBuffer += 1
-			If LoopBuffer > 4 Then Exit Do
-			TaskEntry = PoundClean(TaskEntry)
-		Loop Until Not TaskEntry.Contains("#") And Not TaskEntry.Contains("@RT(") And Not TaskEntry.Contains("@RandomText(")
-
-		If TaskEntry.Contains("@SetFlag(") Then
-			Dim SetFlag As String = GetParentheses(TaskEntry, "@SetFlag(")
-			Dim OriginalSet As String = SetFlag
-			If SetFlag.Contains(",") Then
-				SetFlag = FixCommas(SetFlag)
-				Dim FlagArray() As String = SetFlag.Split(",")
-				For x As Integer = 0 To FlagArray.Count - 1
-					CreateFlag(FlagArray(x))
-				Next
-			Else
-				CreateFlag(SetFlag)
-			End If
-			TaskEntry = TaskEntry.Replace("@SetFlag(" & OriginalSet & ")", "")
-		End If
-
-		If TaskEntry.Contains("@TempFlag(") Then
-			Dim SetFlag As String = GetParentheses(TaskEntry, "@TempFlag(")
-			Dim OriginalSet As String = SetFlag
-			If SetFlag.Contains(",") Then
-				SetFlag = FixCommas(SetFlag)
-				Dim FlagArray() As String = SetFlag.Split(",")
-				For x As Integer = 0 To FlagArray.Count - 1
-					CreateFlag(FlagArray(x), True)
-				Next
-			Else
-				CreateFlag(SetFlag, True)
-			End If
-			TaskEntry = TaskEntry.Replace("@TempFlag(" & OriginalSet & ")", "")
-		End If
-
-		If TaskEntry.Contains("@DeleteFlag(") Then
-			Dim SetFlag As String = GetParentheses(TaskEntry, "@DeleteFlag(")
-			Dim OriginalSet As String = SetFlag
-			If SetFlag.Contains(",") Then
-				SetFlag = FixCommas(SetFlag)
-				Dim FlagArray() As String = SetFlag.Split(",")
-				For x As Integer = 0 To FlagArray.Count - 1
-					DeleteFlag(FlagArray(x))
-				Next
-			Else
-				DeleteFlag(SetFlag)
-			End If
-			TaskEntry = TaskEntry.Replace("@DeleteFlag(" & OriginalSet & ")", "")
-		End If
-
-		TaskEntry = StripCommands(TaskEntry)
-
-		TaskEntry = Trim(TaskEntry)
-
-		If TaskEntry.Contains("*") Then
-			TaskEntry = TaskEntry.Replace(". *", " *")
-			Dim EmoToggle As Boolean = True
-			For i As Integer = TaskEntry.Length - 1 To 0 Step -1
-				If TaskEntry.Substring(i, 1) = "*" Then
-					If EmoToggle = False Then
-						EmoToggle = True
-						TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
-					Else
-						EmoToggle = False
-						TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
-					End If
-				End If
+					TaskEntry = TaskEntry & TaskList(i) & " "
+				Catch
+				End Try
 			Next
-		End If
 
-		Return TaskEntry
+			Dim int As Integer
 
+			If TaskEntry.Contains("#TaskEdges") Then
+				Do
+					int = randomizer.Next(FrmSettings.NBTaskEdgesMin.Value, FrmSettings.NBTaskEdgesMax.Value + 1)
+					If int > 5 Then int = 5 * Math.Round(int / 5)
+					TaskEntry = TaskEntry.Replace("#TaskEdges", int)
+				Loop Until Not TaskEntry.Contains("#TaskEdges")
+			End If
+
+			If TaskEntry.Contains("#TaskStrokes") Then
+				Do
+					int = randomizer.Next(FrmSettings.NBTaskStrokesMin.Value, FrmSettings.NBTaskStrokesMax.Value + 1)
+					If int > 10 Then int = 10 * Math.Round(int / 10)
+					TaskEntry = TaskEntry.Replace("#TaskStrokes", int)
+				Loop Until Not TaskEntry.Contains("#TaskStrokes")
+			End If
+
+			If TaskEntry.Contains("#TaskHours") Then
+				Do
+					int = randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1) + FrmSettings.domlevelNumBox.Value
+					TaskEntry = TaskEntry.Replace("#TaskHours", int)
+				Loop Until Not TaskEntry.Contains("#TaskHours")
+			End If
+
+			If TaskEntry.Contains("#TaskMinutes") Then
+				Do
+					int = randomizer.Next(5, 13) * FrmSettings.domlevelNumBox.Value
+					TaskEntry = TaskEntry.Replace("#TaskMinutes", int)
+				Loop Until Not TaskEntry.Contains("#TaskMinutes")
+			End If
+
+			If TaskEntry.Contains("#TaskSeconds") Then
+				Do
+					int = randomizer.Next(10, 30) * FrmSettings.domlevelNumBox.Value * randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1)
+					TaskEntry = TaskEntry.Replace("#TaskSeconds", int)
+				Loop Until Not TaskEntry.Contains("#TaskSeconds")
+			End If
+
+			If TaskEntry.Contains("#TaskAmountLarge") Then
+				Do
+					int = (randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) * 2
+					If int > 5 Then int = 5 * Math.Round(int / 5)
+					TaskEntry = TaskEntry.Replace("#TaskAmountLarge", int)
+				Loop Until Not TaskEntry.Contains("#TaskAmountLarge")
+			End If
+
+			If TaskEntry.Contains("#TaskAmountSmall") Then
+				Do
+					int = (randomizer.Next(5, 11) * FrmSettings.domlevelNumBox.Value) / 2
+					If int > 5 Then int = 5 * Math.Round(int / 5)
+					TaskEntry = TaskEntry.Replace("#TaskAmountSmall", int)
+				Loop Until Not TaskEntry.Contains("#TaskAmountSmall")
+			End If
+
+			If TaskEntry.Contains("#TaskAmount") Then
+				Do
+					int = randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value
+					If int > 5 Then int = 5 * Math.Round(int / 5)
+					TaskEntry = TaskEntry.Replace("#TaskAmount", int)
+				Loop Until Not TaskEntry.Contains("#TaskAmount")
+			End If
+
+			If TaskEntry.Contains("#TaskStrokingTime") Then
+				Do
+					int = randomizer.Next(FrmSettings.NBTaskStrokingTimeMin.Value, FrmSettings.NBTaskStrokingTimeMax.Value + 1)
+					int *= 60
+					Dim TConvert As String = ConvertSeconds(int)
+					TaskEntry = TaskEntry.Replace("#TaskStrokingTime", TConvert)
+				Loop Until Not TaskEntry.Contains("#TaskStrokingTime")
+			End If
+
+			If TaskEntry.Contains("#TaskHoldTheEdgeTime") Then
+				Do
+					int = randomizer.Next(FrmSettings.NBTaskEdgeHoldTimeMin.Value, FrmSettings.NBTaskEdgeHoldTimeMax.Value + 1)
+					int *= 60
+					Dim TConvert As String = ConvertSeconds(int)
+					TaskEntry = TaskEntry.Replace("#TaskHoldTheEdgeTime", TConvert)
+				Loop Until Not TaskEntry.Contains("#TaskHoldTheEdgeTime")
+			End If
+
+			If TaskEntry.Contains("#TaskCBTTime") Then
+				Do
+					int = randomizer.Next(FrmSettings.NBTaskCBTTimeMin.Value, FrmSettings.NBTaskCBTTimeMax.Value + 1)
+					int *= 60
+					Dim TConvert As String = ConvertSeconds(int)
+					TaskEntry = TaskEntry.Replace("#TaskCBTTime", TConvert)
+				Loop Until Not TaskEntry.Contains("#TaskCBTTime")
+			End If
+
+			TaskEntry = TaskEntry.Replace("<font color=""red"">", "")
+			TaskEntry = TaskEntry.Replace("</font>", "")
+			TaskEntry = TaskEntry.Replace("#Null", "")
+
+			LoopBuffer = 0
+
+			Do
+				LoopBuffer += 1
+				If LoopBuffer > 4 Then Exit Do
+				TaskEntry = PoundClean(TaskEntry)
+			Loop Until Not TaskEntry.Contains("#") And Not TaskEntry.Contains("@RT(") And Not TaskEntry.Contains("@RandomText(")
+
+			If TaskEntry.Contains("@SetFlag(") Then
+				Dim SetFlag As String = GetParentheses(TaskEntry, "@SetFlag(")
+				Dim OriginalSet As String = SetFlag
+				If SetFlag.Contains(",") Then
+					SetFlag = FixCommas(SetFlag)
+					Dim FlagArray() As String = SetFlag.Split(",")
+					For x As Integer = 0 To FlagArray.Count - 1
+						CreateFlag(FlagArray(x))
+					Next
+				Else
+					CreateFlag(SetFlag)
+				End If
+				TaskEntry = TaskEntry.Replace("@SetFlag(" & OriginalSet & ")", "")
+			End If
+
+			If TaskEntry.Contains("@TempFlag(") Then
+				Dim SetFlag As String = GetParentheses(TaskEntry, "@TempFlag(")
+				Dim OriginalSet As String = SetFlag
+				If SetFlag.Contains(",") Then
+					SetFlag = FixCommas(SetFlag)
+					Dim FlagArray() As String = SetFlag.Split(",")
+					For x As Integer = 0 To FlagArray.Count - 1
+						CreateFlag(FlagArray(x), True)
+					Next
+				Else
+					CreateFlag(SetFlag, True)
+				End If
+				TaskEntry = TaskEntry.Replace("@TempFlag(" & OriginalSet & ")", "")
+			End If
+
+			If TaskEntry.Contains("@DeleteFlag(") Then
+				Dim SetFlag As String = GetParentheses(TaskEntry, "@DeleteFlag(")
+				Dim OriginalSet As String = SetFlag
+				If SetFlag.Contains(",") Then
+					SetFlag = FixCommas(SetFlag)
+					Dim FlagArray() As String = SetFlag.Split(",")
+					For x As Integer = 0 To FlagArray.Count - 1
+						DeleteFlag(FlagArray(x))
+					Next
+				Else
+					DeleteFlag(SetFlag)
+				End If
+				TaskEntry = TaskEntry.Replace("@DeleteFlag(" & OriginalSet & ")", "")
+			End If
+
+			TaskEntry = StripCommands(TaskEntry)
+
+			TaskEntry = Trim(TaskEntry)
+
+			If TaskEntry.Contains("*") Then
+				TaskEntry = TaskEntry.Replace(". *", " *")
+				Dim EmoToggle As Boolean = True
+				For i As Integer = TaskEntry.Length - 1 To 0 Step -1
+					If TaskEntry.Substring(i, 1) = "*" Then
+						If EmoToggle = False Then
+							EmoToggle = True
+							TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
+						Else
+							EmoToggle = False
+							TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
+						End If
+					End If
+				Next
+			End If
+
+			Return TaskEntry
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError("Error occurred during file processing:  """ & dir & """", ex, "CleanTaskLines(String)")
+			Return "ERROR: Tease AI did not return a valid Task line"
+		End Try
 	End Function
 
 	Private Sub BTNFIleTransferDismiss_Click(sender As System.Object, e As System.EventArgs) Handles BTNFIleTransferDismiss.Click
@@ -22979,7 +22994,7 @@ TryNext:
 
 			nextButton.Enabled = True
 			previousButton.Enabled = True
-			DommeSlideshowToolStripMenuItem.Enabled = True
+			PicStripTSMIdommeSlideshow.Enabled = True
 
 			If FrmSettings.landscapeCheckBox.Checked = True Then
 				If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
@@ -23149,7 +23164,7 @@ TryNext:
 
 				nextButton.Enabled = True
 				previousButton.Enabled = True
-				DommeSlideshowToolStripMenuItem.Enabled = True
+				PicStripTSMIdommeSlideshow.Enabled = True
 
 				If FrmSettings.landscapeCheckBox.Checked = True Then
 					If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
@@ -23593,7 +23608,7 @@ TryNext:
 
 
 	Private Sub VideoTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles VideoTauntTimer.Tick
-
+		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
 		If MiniScript = True Then Return
 
 		If DomTyping = True Then Return
@@ -23626,7 +23641,8 @@ TryNext:
 				If VTList.Count < 1 Then Return
 				DomTask = VTList(randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Video Taunt", ex, "VideoTaunTimer.Tick")
+				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+							   VTDir, ex, "VideoTaunTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
 			End Try
 
@@ -23664,7 +23680,7 @@ TryNext:
 	End Sub
 
 	Public Sub RLGLTauntTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles RLGLTauntTimer.Tick
-
+		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
 		If MiniScript = True Then Return
 
 		If DomTyping = True Then Return
@@ -23697,7 +23713,8 @@ TryNext:
 				If VTList.Count < 1 Then Return
 				DomTask = VTList(randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Video Taunt", ex, "RLGLTauntTimer.Tick")
+				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+							   VTDir, ex, "RLGLTauntTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
 			End Try
 			TypingDelayGeneric()
@@ -23714,7 +23731,7 @@ TryNext:
 	End Sub
 
 	Private Sub AvoidTheEdgeTaunts_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles AvoidTheEdgeTaunts.Tick
-
+		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
 
 		If DomTyping = True Then Return
 		If DomTypeCheck = True And AvoidTheEdgeTick < 6 Then Return
@@ -23748,7 +23765,8 @@ TryNext:
 				If VTList.Count < 1 Then Return
 				DomTask = VTList(randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Video Taunt", ex, "AvoidTheEdgeTaunts.Tick")
+				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+							   VTDir, ex, "AvoidTheEdgeTaunts.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
 			End Try
 			TypingDelayGeneric()
@@ -23763,7 +23781,122 @@ TryNext:
 
 	End Sub
 
-	Public Function SaveImage(ByVal BlogPath As String)
+#Region "-------------------------------------------------- MainPictureBox ----------------------------------------------------"
+
+	Private Sub mainPictureBox_LoadCompleted(sender As Object, e As System.ComponentModel.AsyncCompletedEventArgs) Handles mainPictureBox.LoadCompleted
+		ImageLocation = mainPictureBox.ImageLocation
+		CheckDommeTags()
+		Debug.Print("ImageLoadCOmpleted")
+	End Sub
+
+	Private Sub mainPictureBox_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles mainPictureBox.MouseDown
+		If e.Button = MouseButtons.Right Then
+			PictureStrip.Show(CType(sender, Control), e.Location)
+		End If
+	End Sub
+
+
+
+#End Region ' MainPictureBox
+
+#Region "-------------------------------------------------- PictureStrip ------------------------------------------------------"
+
+	Private Sub PicStripTSMIcopyImageLocation_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIcopyImageLocation.Click
+
+		My.Computer.Clipboard.SetText(ImageLocation)
+
+	End Sub
+
+	Private Sub PicStripTSMIsaveImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveImage.Click
+
+
+
+		SaveFileDialog1.Filter = "jpegs|*.jpg|gifs|*.gif|pngs|*.png|Bitmaps|*.bmp"
+		SaveFileDialog1.FilterIndex = 1
+		SaveFileDialog1.RestoreDirectory = True
+
+		WebImage = FoundString
+		Do Until Not WebImage.Contains("/")
+			WebImage = WebImage.Remove(0, 1)
+		Loop
+
+		SaveFileDialog1.FileName = WebImage
+
+		If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
+
+			My.Computer.Network.DownloadFile(FoundString, SaveFileDialog1.FileName)
+
+		End If
+
+
+	End Sub
+
+	Private Sub PicStripTSMIlikeImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIlikeImage.Click
+
+		If FoundString <> "" Then
+			If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & FoundString, True)
+			Else
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FoundString, True)
+			End If
+			PictureStrip.Items(3).Enabled = False
+		End If
+
+
+	End Sub
+
+	Private Sub PicStripTSMIdislikeImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdislikeImage.Click
+
+		If FoundString <> "" Then
+
+			If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & FoundString, True)
+			Else
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FoundString, True)
+			End If
+			PictureStrip.Items(4).Enabled = False
+		End If
+
+	End Sub
+
+	Private Sub PicStripTSMIremoveFromURL_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIremoveFromURL.Click
+		Try
+            ' Lock Control
+            PicStripTSMIremoveFromURL.Enabled = False
+
+            ' Chekc if directory exits,
+            If myDirectory.Exists(Application.StartupPath & "\Images\System\URL Files\") Then
+
+                ' Fine the URL in all URLFiles
+                Dim foundFiles As ObjectModel.ReadOnlyCollection(Of String) =
+					FileIO.FileSystem.FindInFiles(Application.StartupPath & "\Images\System\URL Files\",
+												  CurrentImage, True, FileIO.SearchOption.SearchTopLevelOnly)
+
+                ' Delete the URL from all Files 
+                For Each filePath As String In foundFiles
+                    ' read all lines from file
+                    Dim deleteFile As List(Of String) = Txt2List(filePath)
+
+                    ' Delete all Lines containing the URL
+                    deleteFile.RemoveAll(Function(x) x.Contains(CurrentImage))
+
+                    'Write modified List to disk.
+                    File.WriteAllLines(filePath, deleteFile)
+				Next
+			End If
+		Catch ex As Exception
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            '						       All Errors
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while deleting URL-From files.")
+			MsgBox("An Exception Occured while deleting the URL from Files." & vbCrLf _
+				   & ex.Message, MsgBoxStyle.Exclamation, "Delete URL from Files")
+		End Try
+	End Sub
+
+#Region "-------------------------------------------------- Save Blog Image ---------------------------------------------------"
+
+	Public Sub PicStripTSMI_SaveImage(ByVal BlogPath As String)
 
 		If BlogPath = "Hardcore" Then BlogPath = FrmSettings.LBLIHardcore.Text
 		If BlogPath = "Softcore" Then BlogPath = FrmSettings.LBLISoftcore.Text
@@ -23808,169 +23941,53 @@ TryNext:
 		End If
 
 
-	End Function
-
-
-#Region "-------------------------------------------------- MainPictureBox ----------------------------------------------------"
-
-	Private Sub mainPictureBox_LoadCompleted(sender As Object, e As System.ComponentModel.AsyncCompletedEventArgs) Handles mainPictureBox.LoadCompleted
-		ImageLocation = mainPictureBox.ImageLocation
-		CheckDommeTags()
-		Debug.Print("ImageLoadCOmpleted")
 	End Sub
 
-	Private Sub mainPictureBox_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles mainPictureBox.MouseDown
-		If e.Button = MouseButtons.Right Then
-			PictureStrip.Show(CType(sender, Control), e.Location)
-		End If
+	Private Sub PicStripTSMIsaveHardcore_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveHardcore.Click
+		PicStripTSMI_SaveImage("Hardcore")
+	End Sub
+	Private Sub PicStripTSMIsaveSoftcore_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveSoftcore.Click
+		PicStripTSMI_SaveImage("Softcore")
+	End Sub
+	Private Sub PicStripTSMIsaveLesbian_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveLesbian.Click
+		PicStripTSMI_SaveImage("Lesbian")
+	End Sub
+	Private Sub PicStripTSMIsaveBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveBlowjob.Click
+		PicStripTSMI_SaveImage("Blowjob")
+	End Sub
+	Private Sub PicStripTSMIsaveFemdom_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveFemdom.Click
+		PicStripTSMI_SaveImage("Femdom")
+	End Sub
+	Private Sub PicStripTSMIsaveLezdom_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveLezdom.Click
+		PicStripTSMI_SaveImage("Lezdom")
+	End Sub
+	Private Sub PicStripTSMIsaveHentai_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveHentai.Click
+		PicStripTSMI_SaveImage("Hentai")
+	End Sub
+	Private Sub PicStripTSMIsaveGay_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveGay.Click
+		PicStripTSMI_SaveImage("Gay")
+	End Sub
+	Private Sub PicStripTSMIsaveMaledom_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveMaledom.Click
+		PicStripTSMI_SaveImage("Maledom")
+	End Sub
+	Private Sub PicStripTSMIsaveCaptions_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveCaptions.Click
+		PicStripTSMI_SaveImage("Captions")
+	End Sub
+	Private Sub PicStripTSMIsaveGeneral_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveGeneral.Click
+		PicStripTSMI_SaveImage("General")
+	End Sub
+	Private Sub PicStripTSMIsaveBoobs_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveBoobs.Click
+		PicStripTSMI_SaveImage("Boobs")
+	End Sub
+	Private Sub PicStripTSMIsaveButts_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveButts.Click
+		PicStripTSMI_SaveImage("Butt")
 	End Sub
 
-
-
-#End Region ' MainPictureBox
-
-#Region "-------------------------------------------------- PictureStrip ------------------------------------------------------"
-
-	Private Sub ToolStripMenuItem5_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem5.Click
-
-		My.Computer.Clipboard.SetText(ImageLocation)
-
-	End Sub
-
-	Private Sub ToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem1.Click
-
-
-
-		SaveFileDialog1.Filter = "jpegs|*.jpg|gifs|*.gif|pngs|*.png|Bitmaps|*.bmp"
-		SaveFileDialog1.FilterIndex = 1
-		SaveFileDialog1.RestoreDirectory = True
-
-		WebImage = FoundString
-		Do Until Not WebImage.Contains("/")
-			WebImage = WebImage.Remove(0, 1)
-		Loop
-
-		SaveFileDialog1.FileName = WebImage
-
-		If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
-
-			My.Computer.Network.DownloadFile(FoundString, SaveFileDialog1.FileName)
-
-		End If
-
-
-	End Sub
-
-	Private Sub ToolStripMenuItem2_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem2.Click
-
-		If FoundString <> "" Then
-			If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & FoundString, True)
-			Else
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FoundString, True)
-			End If
-			PictureStrip.Items(3).Enabled = False
-		End If
-
-
-	End Sub
-
-	Private Sub ToolStripMenuItem3_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem3.Click
-
-		If FoundString <> "" Then
-
-			If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & FoundString, True)
-			Else
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FoundString, True)
-			End If
-			PictureStrip.Items(4).Enabled = False
-		End If
-
-	End Sub
-
-	Private Sub RemoveFromUrlFile_Click(sender As System.Object, e As System.EventArgs) Handles ToolStripMenuItem4.Click
-		Try
-            ' Lock Control
-            ToolStripMenuItem4.Enabled = False
-
-            ' Chekc if directory exits,
-            If myDirectory.Exists(Application.StartupPath & "\Images\System\URL Files\") Then
-
-                ' Fine the URL in all URLFiles
-                Dim foundFiles As ObjectModel.ReadOnlyCollection(Of String) =
-					FileIO.FileSystem.FindInFiles(Application.StartupPath & "\Images\System\URL Files\",
-												  CurrentImage, True, FileIO.SearchOption.SearchTopLevelOnly)
-
-                ' Delete the URL from all Files 
-                For Each filePath As String In foundFiles
-                    ' read all lines from file
-                    Dim deleteFile As List(Of String) = Txt2List(filePath)
-
-                    ' Delete all Lines containing the URL
-                    deleteFile.RemoveAll(Function(x) x.Contains(CurrentImage))
-
-                    'Write modified List to disk.
-                    File.WriteAllLines(filePath, deleteFile)
-				Next
-			End If
-		Catch ex As Exception
-            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            '						       All Errors
-            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while deleting URL-From files.")
-			MsgBox("An Exception Occured while deleting the URL from Files." & vbCrLf _
-				   & ex.Message, MsgBoxStyle.Exclamation, "Delete URL from Files")
-		End Try
-	End Sub
-
-#Region "-------------------------------------------------- Save Blog Image ---------------------------------------------------"
-
-	Private Sub HardcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HardcoreToolStripMenuItem.Click
-		SaveImage("Hardcore")
-	End Sub
-	Private Sub SoftcoreToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SoftcoreToolStripMenuItem.Click
-		SaveImage("Softcore")
-	End Sub
-	Private Sub LesbianToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LesbianToolStripMenuItem.Click
-		SaveImage("Lesbian")
-	End Sub
-	Private Sub BlowjobToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BlowjobToolStripMenuItem.Click
-		SaveImage("Blowjob")
-	End Sub
-	Private Sub FemdomToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles FemdomToolStripMenuItem.Click
-		SaveImage("Femdom")
-	End Sub
-	Private Sub LezdomToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LezdomToolStripMenuItem.Click
-		SaveImage("Lezdom")
-	End Sub
-	Private Sub HentaiToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HentaiToolStripMenuItem.Click
-		SaveImage("Hentai")
-	End Sub
-	Private Sub GayToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GayToolStripMenuItem.Click
-		SaveImage("Gay")
-	End Sub
-	Private Sub MaledomToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MaledomToolStripMenuItem.Click
-		SaveImage("Maledom")
-	End Sub
-	Private Sub CaptionsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CaptionsToolStripMenuItem.Click
-		SaveImage("Captions")
-	End Sub
-	Private Sub GeneralToolStripMenuItem2_Click(sender As System.Object, e As System.EventArgs) Handles GeneralToolStripMenuItem1.Click
-		SaveImage("General")
-	End Sub
-	Private Sub BoobsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles BoobsToolStripMenuItem.Click
-		SaveImage("Boobs")
-	End Sub
-	Private Sub ButtsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ButtsToolStripMenuItem.Click
-		SaveImage("Butt")
-	End Sub
-
-#End Region
+#End Region ' Save Blog Image
 
 #Region "-------------------------------------------------- DommeSlideshow ----------------------------------------------------"
 
-	Private Sub GoToLastImageToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GoToLastImageToolStripMenuItem.Click
+	Private Sub PicStripTSMIdommeSlideshowGoToLast_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshowGoToLast.Click
 
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
@@ -24007,7 +24024,7 @@ TryNext:
 
 	End Sub
 
-	Private Sub GoToFirstImageToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GoToFirstImageToolStripMenuItem.Click
+	Private Sub PicStripTSMIdommeSlideshow_GoToFirst_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshow_GoToFirst.Click
 
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
@@ -24048,7 +24065,7 @@ TryNext:
 
 	End Sub
 
-	Private Sub LoadNewSlideshowToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LoadNewSlideshowToolStripMenuItem.Click
+	Private Sub PicStripTSMIdommeSlideshowLoadNewSlideshow_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshowLoadNewSlideshow.Click
 
 		NewDommeSlideshow = True
 		OriginalDommeSlideshow = _ImageFileNames(0)
@@ -24058,12 +24075,13 @@ TryNext:
 
 	End Sub
 
-#End Region
+#End Region ' DommeSlideshow
 
-#End Region
+#End Region ' PictureStrip
 
 
 	Private Sub ContactTimer_Tick(sender As teaseAI_Timer, e As System.EventArgs) Handles ContactTimer.Tick
+		'QUESTION: (stefaF) This Timer seems to be useless. Is this correct?
 		ContactTick -= 1
 
 
@@ -24165,7 +24183,7 @@ GetDommeSlideshow:
 
 		nextButton.Enabled = True
 		previousButton.Enabled = True
-		DommeSlideshowToolStripMenuItem.Enabled = True
+		PicStripTSMIdommeSlideshow.Enabled = True
 
 		If RiskyDeal = True Then FrmCardList.PBRiskyPic.Image = Image.FromFile(_ImageFileNames(FileCount))
 
@@ -28082,7 +28100,7 @@ SkipNew:
 			If SlideshowLoaded = True Then
 				nextButton.Enabled = True
 				previousButton.Enabled = True
-				DommeSlideshowToolStripMenuItem.Enabled = True
+				PicStripTSMIdommeSlideshow.Enabled = True
 			End If
 			RapidFire = False
 			Return
@@ -29593,7 +29611,7 @@ SkipNew:
 		End Try
 
 
-		 ShowGotImage()
+		ShowGotImage()
 
 	End Sub
 

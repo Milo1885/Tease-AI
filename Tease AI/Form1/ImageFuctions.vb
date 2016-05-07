@@ -623,39 +623,24 @@ NoNeFound:
 
 				CurrentImage = FetchResult.ImageLocation
 
-                'CopyImageLocation
-                ToolStripMenuItem5.Enabled = True
+				PicStripTSMIcopyImageLocation.Enabled = True
+				PicStripTSMIsaveImage.Enabled = False
+				PicStripTSMISaveImageTo.Enabled = False
 
-                'Save Image
-                ToolStripMenuItem1.Enabled = False
-
-				SaveImageToToolStripMenuItem.Enabled = False
-
-                'Like Image
-                ToolStripMenuItem2.Enabled = False
-                'DislikeImage
-                ToolStripMenuItem3.Enabled = False
-                'Remove from URLFile
-                ToolStripMenuItem4.Enabled = False
+				PicStripTSMIlikeImage.Enabled = False
+				PicStripTSMIdislikeImage.Enabled = False
+				PicStripTSMIremoveFromURL.Enabled = False
 
 			Else
 				Debug.Print("Blog Image PictureStrip")
 				CurrentImage = FoundString
 
-                'CopyImageLocation
-                ToolStripMenuItem5.Enabled = True
-
-                'Save Image
-                ToolStripMenuItem1.Enabled = True
-
-				SaveImageToToolStripMenuItem.Enabled = True
-
-                'Like Image
-                ToolStripMenuItem2.Enabled = True
-                'DislikeImage
-                ToolStripMenuItem3.Enabled = True
-                'Remove from URLFile
-                ToolStripMenuItem4.Enabled = True
+				PicStripTSMIcopyImageLocation.Enabled = True
+				PicStripTSMIsaveImage.Enabled = True
+				PicStripTSMISaveImageTo.Enabled = True
+				PicStripTSMIlikeImage.Enabled = True
+				PicStripTSMIdislikeImage.Enabled = True
+				PicStripTSMIremoveFromURL.Enabled = True
 
 			End If
 
