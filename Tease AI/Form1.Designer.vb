@@ -359,6 +359,8 @@ Partial Class Form1
 		Me.Button4 = New System.Windows.Forms.Button()
 		Me.Panel3 = New System.Windows.Forms.Panel()
 		Me.Panel4 = New System.Windows.Forms.Panel()
+		Me.Button15 = New System.Windows.Forms.Button()
+		Me.CBWritingProgress = New System.Windows.Forms.CheckBox()
 		Me.ScriptTimer = New Tease_AI.teaseAI_Timer()
 		Me.Timer1 = New Tease_AI.teaseAI_Timer()
 		Me.IsTypingTimer = New Tease_AI.teaseAI_Timer()
@@ -1250,7 +1252,7 @@ Partial Class Form1
 		'OpenFileDialog1
 		'
 		Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" &
+		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" & _
 		  "s (*.*)|*.*"
 		Me.OpenFileDialog1.Title = "Select an image file"
 		'
@@ -1342,164 +1344,164 @@ Partial Class Form1
 		Me.PictureStrip.Name = "PictureStrip"
 		Me.PictureStrip.Size = New System.Drawing.Size(194, 176)
 		'
-		'ToolStripMenuItem5
+		'PicStripTSMIcopyImageLocation
 		'
-		Me.PicStripTSMIcopyImageLocation.Name = "ToolStripMenuItem5"
+		Me.PicStripTSMIcopyImageLocation.Name = "PicStripTSMIcopyImageLocation"
 		Me.PicStripTSMIcopyImageLocation.Size = New System.Drawing.Size(193, 22)
 		Me.PicStripTSMIcopyImageLocation.Text = "Copy Image Location"
 		'
-		'ToolStripSeparator6
+		'PicStripTSS1
 		'
-		Me.PicStripTSS1.Name = "ToolStripSeparator6"
+		Me.PicStripTSS1.Name = "PicStripTSS1"
 		Me.PicStripTSS1.Size = New System.Drawing.Size(190, 6)
 		'
-		'ToolStripMenuItem1
+		'PicStripTSMIsaveImage
 		'
-		Me.PicStripTSMIsaveImage.Name = "ToolStripMenuItem1"
+		Me.PicStripTSMIsaveImage.Name = "PicStripTSMIsaveImage"
 		Me.PicStripTSMIsaveImage.Size = New System.Drawing.Size(193, 22)
 		Me.PicStripTSMIsaveImage.Text = "Save Image"
 		'
-		'SaveImageToToolStripMenuItem
+		'PicStripTSMISaveImageTo
 		'
 		Me.PicStripTSMISaveImageTo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIsaveHardcore, Me.PicStripTSMIsaveSoftcore, Me.PicStripTSMIsaveLesbian, Me.PicStripTSMIsaveBlowjob, Me.PicStripTSMIsaveFemdom, Me.PicStripTSMIsaveLezdom, Me.PicStripTSMIsaveHentai, Me.PicStripTSMIsaveGay, Me.PicStripTSMIsaveMaledom, Me.PicStripTSMIsaveCaptions, Me.PicStripTSMIsaveGeneral, Me.PicStripTSMIsaveBoobs, Me.PicStripTSMIsaveButts})
-		Me.PicStripTSMISaveImageTo.Name = "SaveImageToToolStripMenuItem"
+		Me.PicStripTSMISaveImageTo.Name = "PicStripTSMISaveImageTo"
 		Me.PicStripTSMISaveImageTo.Size = New System.Drawing.Size(193, 22)
 		Me.PicStripTSMISaveImageTo.Text = "Save Image To"
 		'
-		'HardcoreToolStripMenuItem
+		'PicStripTSMIsaveHardcore
 		'
-		Me.PicStripTSMIsaveHardcore.Name = "HardcoreToolStripMenuItem"
+		Me.PicStripTSMIsaveHardcore.Name = "PicStripTSMIsaveHardcore"
 		Me.PicStripTSMIsaveHardcore.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveHardcore.Text = "Hardcore"
 		'
-		'SoftcoreToolStripMenuItem
+		'PicStripTSMIsaveSoftcore
 		'
-		Me.PicStripTSMIsaveSoftcore.Name = "SoftcoreToolStripMenuItem"
+		Me.PicStripTSMIsaveSoftcore.Name = "PicStripTSMIsaveSoftcore"
 		Me.PicStripTSMIsaveSoftcore.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveSoftcore.Text = "Softcore"
 		'
-		'LesbianToolStripMenuItem
+		'PicStripTSMIsaveLesbian
 		'
-		Me.PicStripTSMIsaveLesbian.Name = "LesbianToolStripMenuItem"
+		Me.PicStripTSMIsaveLesbian.Name = "PicStripTSMIsaveLesbian"
 		Me.PicStripTSMIsaveLesbian.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveLesbian.Text = "Lesbian"
 		'
-		'BlowjobToolStripMenuItem
+		'PicStripTSMIsaveBlowjob
 		'
-		Me.PicStripTSMIsaveBlowjob.Name = "BlowjobToolStripMenuItem"
+		Me.PicStripTSMIsaveBlowjob.Name = "PicStripTSMIsaveBlowjob"
 		Me.PicStripTSMIsaveBlowjob.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveBlowjob.Text = "Blowjob"
 		'
-		'FemdomToolStripMenuItem
+		'PicStripTSMIsaveFemdom
 		'
-		Me.PicStripTSMIsaveFemdom.Name = "FemdomToolStripMenuItem"
+		Me.PicStripTSMIsaveFemdom.Name = "PicStripTSMIsaveFemdom"
 		Me.PicStripTSMIsaveFemdom.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveFemdom.Text = "Femdom"
 		'
-		'LezdomToolStripMenuItem
+		'PicStripTSMIsaveLezdom
 		'
-		Me.PicStripTSMIsaveLezdom.Name = "LezdomToolStripMenuItem"
+		Me.PicStripTSMIsaveLezdom.Name = "PicStripTSMIsaveLezdom"
 		Me.PicStripTSMIsaveLezdom.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveLezdom.Text = "Lezdom"
 		'
-		'HentaiToolStripMenuItem
+		'PicStripTSMIsaveHentai
 		'
-		Me.PicStripTSMIsaveHentai.Name = "HentaiToolStripMenuItem"
+		Me.PicStripTSMIsaveHentai.Name = "PicStripTSMIsaveHentai"
 		Me.PicStripTSMIsaveHentai.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveHentai.Text = "Hentai"
 		'
-		'GayToolStripMenuItem
+		'PicStripTSMIsaveGay
 		'
-		Me.PicStripTSMIsaveGay.Name = "GayToolStripMenuItem"
+		Me.PicStripTSMIsaveGay.Name = "PicStripTSMIsaveGay"
 		Me.PicStripTSMIsaveGay.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveGay.Text = "Gay"
 		'
-		'MaledomToolStripMenuItem
+		'PicStripTSMIsaveMaledom
 		'
-		Me.PicStripTSMIsaveMaledom.Name = "MaledomToolStripMenuItem"
+		Me.PicStripTSMIsaveMaledom.Name = "PicStripTSMIsaveMaledom"
 		Me.PicStripTSMIsaveMaledom.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveMaledom.Text = "Maledom"
 		'
-		'CaptionsToolStripMenuItem
+		'PicStripTSMIsaveCaptions
 		'
-		Me.PicStripTSMIsaveCaptions.Name = "CaptionsToolStripMenuItem"
+		Me.PicStripTSMIsaveCaptions.Name = "PicStripTSMIsaveCaptions"
 		Me.PicStripTSMIsaveCaptions.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveCaptions.Text = "Captions"
 		'
-		'GeneralToolStripMenuItem1
+		'PicStripTSMIsaveGeneral
 		'
-		Me.PicStripTSMIsaveGeneral.Name = "GeneralToolStripMenuItem1"
+		Me.PicStripTSMIsaveGeneral.Name = "PicStripTSMIsaveGeneral"
 		Me.PicStripTSMIsaveGeneral.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveGeneral.Text = "General"
 		'
-		'BoobsToolStripMenuItem
+		'PicStripTSMIsaveBoobs
 		'
-		Me.PicStripTSMIsaveBoobs.Name = "BoobsToolStripMenuItem"
+		Me.PicStripTSMIsaveBoobs.Name = "PicStripTSMIsaveBoobs"
 		Me.PicStripTSMIsaveBoobs.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveBoobs.Text = "Boobs"
 		'
-		'ButtsToolStripMenuItem
+		'PicStripTSMIsaveButts
 		'
-		Me.PicStripTSMIsaveButts.Name = "ButtsToolStripMenuItem"
+		Me.PicStripTSMIsaveButts.Name = "PicStripTSMIsaveButts"
 		Me.PicStripTSMIsaveButts.Size = New System.Drawing.Size(125, 22)
 		Me.PicStripTSMIsaveButts.Text = "Butts"
 		'
-		'ToolStripSeparator7
+		'PicStripTSS2
 		'
-		Me.PicStripTSS2.Name = "ToolStripSeparator7"
+		Me.PicStripTSS2.Name = "PicStripTSS2"
 		Me.PicStripTSS2.Size = New System.Drawing.Size(190, 6)
 		'
-		'ToolStripMenuItem2
+		'PicStripTSMIlikeImage
 		'
-		Me.PicStripTSMIlikeImage.Name = "ToolStripMenuItem2"
+		Me.PicStripTSMIlikeImage.Name = "PicStripTSMIlikeImage"
 		Me.PicStripTSMIlikeImage.Size = New System.Drawing.Size(193, 22)
 		Me.PicStripTSMIlikeImage.Text = "Like This Image"
 		'
-		'ToolStripMenuItem3
+		'PicStripTSMIdislikeImage
 		'
-		Me.PicStripTSMIdislikeImage.Name = "ToolStripMenuItem3"
+		Me.PicStripTSMIdislikeImage.Name = "PicStripTSMIdislikeImage"
 		Me.PicStripTSMIdislikeImage.Size = New System.Drawing.Size(193, 22)
 		Me.PicStripTSMIdislikeImage.Text = "Dislike This Image"
 		'
-		'ToolStripMenuItem4
+		'PicStripTSMIremoveFromURL
 		'
-		Me.PicStripTSMIremoveFromURL.Name = "ToolStripMenuItem4"
+		Me.PicStripTSMIremoveFromURL.Name = "PicStripTSMIremoveFromURL"
 		Me.PicStripTSMIremoveFromURL.Size = New System.Drawing.Size(193, 22)
 		Me.PicStripTSMIremoveFromURL.Text = "Remove From URL File"
 		'
-		'ToolStripSeparator8
+		'PicStripTSS3
 		'
-		Me.PicStripTSS3.Name = "ToolStripSeparator8"
+		Me.PicStripTSS3.Name = "PicStripTSS3"
 		Me.PicStripTSS3.Size = New System.Drawing.Size(190, 6)
 		'
-		'DommeSlideshowToolStripMenuItem
+		'PicStripTSMIdommeSlideshow
 		'
 		Me.PicStripTSMIdommeSlideshow.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIdommeSlideshow_GoToFirst, Me.PicStripTSMIdommeSlideshowGoToLast, Me.PicStripTSMIdommeSlideshowTSS1, Me.PicStripTSMIdommeSlideshowLoadNewSlideshow})
 		Me.PicStripTSMIdommeSlideshow.Enabled = False
-		Me.PicStripTSMIdommeSlideshow.Name = "DommeSlideshowToolStripMenuItem"
+		Me.PicStripTSMIdommeSlideshow.Name = "PicStripTSMIdommeSlideshow"
 		Me.PicStripTSMIdommeSlideshow.Size = New System.Drawing.Size(193, 22)
 		Me.PicStripTSMIdommeSlideshow.Text = "Domme Slideshow"
 		'
-		'GoToFirstImageToolStripMenuItem
+		'PicStripTSMIdommeSlideshow_GoToFirst
 		'
-		Me.PicStripTSMIdommeSlideshow_GoToFirst.Name = "GoToFirstImageToolStripMenuItem"
+		Me.PicStripTSMIdommeSlideshow_GoToFirst.Name = "PicStripTSMIdommeSlideshow_GoToFirst"
 		Me.PicStripTSMIdommeSlideshow_GoToFirst.Size = New System.Drawing.Size(167, 22)
 		Me.PicStripTSMIdommeSlideshow_GoToFirst.Text = "Go To First Image"
 		'
-		'GoToLastImageToolStripMenuItem
+		'PicStripTSMIdommeSlideshowGoToLast
 		'
-		Me.PicStripTSMIdommeSlideshowGoToLast.Name = "GoToLastImageToolStripMenuItem"
+		Me.PicStripTSMIdommeSlideshowGoToLast.Name = "PicStripTSMIdommeSlideshowGoToLast"
 		Me.PicStripTSMIdommeSlideshowGoToLast.Size = New System.Drawing.Size(167, 22)
 		Me.PicStripTSMIdommeSlideshowGoToLast.Text = "Go To Last Image"
 		'
-		'ToolStripSeparator9
+		'PicStripTSMIdommeSlideshowTSS1
 		'
-		Me.PicStripTSMIdommeSlideshowTSS1.Name = "ToolStripSeparator9"
+		Me.PicStripTSMIdommeSlideshowTSS1.Name = "PicStripTSMIdommeSlideshowTSS1"
 		Me.PicStripTSMIdommeSlideshowTSS1.Size = New System.Drawing.Size(164, 6)
 		'
-		'LoadNewSlideshowToolStripMenuItem
+		'PicStripTSMIdommeSlideshowLoadNewSlideshow
 		'
-		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Name = "LoadNewSlideshowToolStripMenuItem"
+		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Name = "PicStripTSMIdommeSlideshowLoadNewSlideshow"
 		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Size = New System.Drawing.Size(167, 22)
 		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow.Text = "New Slideshow"
 		'
@@ -2104,6 +2106,8 @@ Partial Class Form1
 		'
 		Me.PNLTabs.BackColor = System.Drawing.Color.Black
 		Me.PNLTabs.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.PNLTabs.Controls.Add(Me.PNLLazySub)
+		Me.PNLTabs.Controls.Add(Me.PNLWritingTask)
 		Me.PNLTabs.Controls.Add(Me.PNLAppRandomizer)
 		Me.PNLTabs.Controls.Add(Me.PNLDomTagBTN)
 		Me.PNLTabs.Controls.Add(Me.PNLChatBox2)
@@ -2114,9 +2118,7 @@ Partial Class Form1
 		Me.PNLTabs.Controls.Add(Me.PNLHypnoGen)
 		Me.PNLTabs.Controls.Add(Me.PNLWishList)
 		Me.PNLTabs.Controls.Add(Me.PNLMetronome)
-		Me.PNLTabs.Controls.Add(Me.PNLWritingTask)
 		Me.PNLTabs.Controls.Add(Me.PNLPlaylist)
-		Me.PNLTabs.Controls.Add(Me.PNLLazySub)
 		Me.PNLTabs.Location = New System.Drawing.Point(9, 120)
 		Me.PNLTabs.Name = "PNLTabs"
 		Me.PNLTabs.Size = New System.Drawing.Size(253, 646)
@@ -2759,7 +2761,7 @@ Partial Class Form1
 		Me.LBLWishListText.Name = "LBLWishListText"
 		Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
 		Me.LBLWishListText.TabIndex = 108
-		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" &
+		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" & _
 		  "uld buy it for me because you know you like buying stuff for me. "
 		'
 		'LBLWishlistCost
@@ -3057,6 +3059,8 @@ Partial Class Form1
 		'
 		Me.PNLWritingTask.BackColor = System.Drawing.Color.SteelBlue
 		Me.PNLWritingTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+		Me.PNLWritingTask.Controls.Add(Me.CBWritingProgress)
+		Me.PNLWritingTask.Controls.Add(Me.Button15)
 		Me.PNLWritingTask.Controls.Add(Me.Button1)
 		Me.PNLWritingTask.Controls.Add(Me.Label76)
 		Me.PNLWritingTask.Controls.Add(Me.LBLMistakesMade)
@@ -3070,16 +3074,16 @@ Partial Class Form1
 		Me.PNLWritingTask.Controls.Add(Me.LBLLinesWritten)
 		Me.PNLWritingTask.Location = New System.Drawing.Point(2, 2)
 		Me.PNLWritingTask.Name = "PNLWritingTask"
-		Me.PNLWritingTask.Size = New System.Drawing.Size(245, 267)
+		Me.PNLWritingTask.Size = New System.Drawing.Size(245, 346)
 		Me.PNLWritingTask.TabIndex = 774
 		'
 		'Button1
 		'
 		Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
 		Me.Button1.ForeColor = System.Drawing.Color.White
-		Me.Button1.Location = New System.Drawing.Point(8, 197)
+		Me.Button1.Location = New System.Drawing.Point(8, 247)
 		Me.Button1.Name = "Button1"
-		Me.Button1.Size = New System.Drawing.Size(228, 52)
+		Me.Button1.Size = New System.Drawing.Size(228, 28)
 		Me.Button1.TabIndex = 137
 		Me.Button1.Text = "Perform Random Writing Task"
 		Me.Button1.UseVisualStyleBackColor = True
@@ -3895,6 +3899,31 @@ Partial Class Form1
 		Me.Panel4.Size = New System.Drawing.Size(245, 31)
 		Me.Panel4.TabIndex = 779
 		'
+		'Button15
+		'
+		Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.Button15.ForeColor = System.Drawing.Color.White
+		Me.Button15.Location = New System.Drawing.Point(8, 213)
+		Me.Button15.Name = "Button15"
+		Me.Button15.Size = New System.Drawing.Size(228, 28)
+		Me.Button15.TabIndex = 138
+		Me.Button15.Text = "Close This Window and Open Side Chat"
+		Me.Button15.UseVisualStyleBackColor = True
+		'
+		'CBWritingProgress
+		'
+		Me.CBWritingProgress.AutoSize = True
+		Me.CBWritingProgress.Checked = Global.Tease_AI.My.MySettings.Default.WritingProgress
+		Me.CBWritingProgress.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBWritingProgress.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "WritingProgress", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBWritingProgress.ForeColor = System.Drawing.Color.White
+		Me.CBWritingProgress.Location = New System.Drawing.Point(9, 188)
+		Me.CBWritingProgress.Name = "CBWritingProgress"
+		Me.CBWritingProgress.Size = New System.Drawing.Size(182, 17)
+		Me.CBWritingProgress.TabIndex = 139
+		Me.CBWritingProgress.Text = "Display Progress in Chat Window"
+		Me.CBWritingProgress.UseVisualStyleBackColor = True
+		'
 		'ScriptTimer
 		'
 		Me.ScriptTimer.Interval = 1000
@@ -4122,6 +4151,7 @@ Partial Class Form1
 		CType(Me.NBMinPace, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.NBMaxPace, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.PNLWritingTask.ResumeLayout(False)
+		Me.PNLWritingTask.PerformLayout()
 		Me.PNLPlaylist.ResumeLayout(False)
 		Me.PNLLazySub.ResumeLayout(False)
 		Me.PNLLazySub.PerformLayout()
@@ -4510,5 +4540,7 @@ Partial Class Form1
 	Friend WithEvents OldDommeTagsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents Button13 As System.Windows.Forms.Button
 	Friend WithEvents Button14 As System.Windows.Forms.Button
+	Friend WithEvents Button15 As System.Windows.Forms.Button
+	Friend WithEvents CBWritingProgress As System.Windows.Forms.CheckBox
 
 End Class

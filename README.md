@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
+Added Button to WritingTasks panel that allows the user to open Side Chat directly from that panel. Also added checkbox to display how many lines/mistakes are remaining in chat during the writing task
+
 Added optional Boolean overload to CommandClean() that CleanTaskLines uses to process Commands that would only be useful in lines for Task letters. This allows Task letters to now process the following Commands:
 
      @SetFlag(), @TempFlag(), @DeleteFlag(), @SetVar[], @ShowVar[], @ChangeVar[], @RoundVar[], @DeleteVar[], @SetDate()

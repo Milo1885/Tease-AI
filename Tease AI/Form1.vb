@@ -2343,7 +2343,15 @@ WritingTaskLine:
 
 				If SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
-					Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & ChatString & "<br></font>"
+					If CBWritingProgress.Checked = True Then
+						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & ChatString & "<br></font> " _
+										& "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#006400"">" & "Correct: " & WritingTaskLinesRemaining & " lines remaining<br></font>"
+						Chat = Chat.Replace(" 1 lines", " 1 line")
+						Chat = Chat.Replace(" 0 lines remaining", " Task Completed")
+					Else
+						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & ChatString & "<br></font>"
+					End If
+
 					ChatText.DocumentText = Chat
 					While ChatText.ReadyState <> WebBrowserReadyState.Complete
 						Application.DoEvents()
@@ -2356,8 +2364,17 @@ WritingTaskLine:
 
 				Else
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
-					Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-				SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>"
+
+					If CBWritingProgress.Checked = True Then
+						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
+						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>" _
+						 & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#006400"">" & "Correct: " & WritingTaskLinesRemaining & " lines remaining<br></font>"
+						Chat = Chat.Replace(" 1 lines", " 1 line")
+						Chat = Chat.Replace(" 0 lines remaining", " Task Completed")
+					Else
+						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
+					  SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>"
+					End If
 
 					ChatText.DocumentText = Chat
 					While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -2408,7 +2425,16 @@ WritingTaskLine:
 
 				If SubWroteLast = True And FrmSettings.shownamesCheckBox.Checked = False Then
 
-					Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & "</font><font color=""#FF0000"">" & ChatString & "<br></font>"
+					If CBWritingProgress.Checked = True Then
+						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & "</font><font color=""#FF0000"">" & ChatString & "<br></font>" & _
+						"<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#CD0000"">" & "Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 & _
+						" mistakes remaining<br></font>"
+						Chat = Chat.Replace(" 1 mistakes", " 1 mistake")
+						Chat = Chat.Replace(" 0 mistakes remaining", " Task Failed")
+					Else
+						Chat = "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & Chat & "</font><font color=""#FF0000"">" & ChatString & "<br></font>"
+					End If
+
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 					ChatText.DocumentText = Chat
 					While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -2422,8 +2448,18 @@ WritingTaskLine:
 
 				Else
 
-					Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-				SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>"
+					If CBWritingProgress.Checked = True Then
+						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" & _
+						   SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>" & _
+						  "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#CD0000"">" & "Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 & _
+						  " mistakes remaining<br></font>"
+						Chat = Chat.Replace(" 1 mistakes", " 1 mistake")
+						Chat = Chat.Replace(" 0 mistakes remaining", " Task Failed")
+					Else
+						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
+					  SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>"
+					End If
+					
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 					ChatText.DocumentText = Chat
 					While ChatText.ReadyState <> WebBrowserReadyState.Complete
@@ -28207,11 +28243,20 @@ SkipNew:
 		My.Settings.Save()
 	End Sub
 
+	Public Sub CheatCheck()
+
+		If chatBox.Text = LBLWritingTaskText.Text Then
+			chatBox.Text = "I'm a dirty cheater"
+		End If
+
+	End Sub
+
 	Private Sub BTNLS1_Click(sender As System.Object, e As System.EventArgs) Handles BTNLS1.Click
 
 
 		If BTNLS1.Text <> "" Then
 			chatBox.Text = BTNLS1.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -28252,6 +28297,7 @@ SkipNew:
 
 		If BTNLS2.Text <> "" Then
 			chatBox.Text = BTNLS2.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -28291,6 +28337,7 @@ SkipNew:
 
 		If BTNLS3.Text <> "" Then
 			chatBox.Text = BTNLS3.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -28331,6 +28378,7 @@ SkipNew:
 
 		If BTNLS4.Text <> "" Then
 			chatBox.Text = BTNLS4.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -28371,6 +28419,7 @@ SkipNew:
 
 		If BTNLS5.Text <> "" Then
 			chatBox.Text = BTNLS5.Text
+			If WritingTaskFlag = True Then CheatCheck()
 			sendButton.PerformClick()
 		End If
 
@@ -29577,4 +29626,122 @@ SkipNew:
 	End Sub
 
 
+	Private Sub MultipleEdgesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles MultipleEdgesTimer.Tick
+
+	End Sub
+	Private Sub VideoTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTimer.Tick
+
+	End Sub
+	Private Sub TimeoutTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TimeoutTimer.Tick
+
+	End Sub
+	Private Sub TeaseAIClock_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseAIClock.Tick
+
+	End Sub
+	Private Sub DommeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DommeTimer.Tick
+
+	End Sub
+	Private Sub WMPTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WMPTimer.Tick
+
+	End Sub
+	Private Sub UpdateStageTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateStageTimer.Tick
+
+	End Sub
+	Private Sub Contact3Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact3Timer.Tick
+
+	End Sub
+	Private Sub Contact2Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact2Timer.Tick
+
+	End Sub
+	Private Sub Contact1Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact1Timer.Tick
+
+	End Sub
+	Private Sub CustomSlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
+
+	End Sub
+	Private Sub ContactTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ContactTimer.Tick
+
+	End Sub
+	Private Sub AvoidTheEdgeTaunts_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeTaunts.Tick
+
+	End Sub
+	Private Sub RLGLTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTauntTimer.Tick
+
+	End Sub
+	Private Sub TeaseTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseTimer.Tick
+
+	End Sub
+	Private Sub VideoTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTauntTimer.Tick
+
+	End Sub
+	Private Sub StupidTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StupidTimer.Tick
+
+	End Sub
+	Private Sub WaitTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WaitTimer.Tick
+
+	End Sub
+	Private Sub TnAFastSlides_Tick(sender As System.Object, e As System.EventArgs) Handles TnASlides.Tick
+
+	End Sub
+	Private Sub StrokeTimeTotalTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
+
+	End Sub
+	Private Sub EdgeCountTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeCountTimer.Tick
+
+	End Sub
+	Private Sub SlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SlideshowTimer.Tick
+
+	End Sub
+	Private Sub HoldEdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTauntTimer.Tick
+
+	End Sub
+	Private Sub HoldEdgeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTimer.Tick
+
+	End Sub
+	Private Sub EdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeTauntTimer.Tick
+
+	End Sub
+	Private Sub AvoidTheEdgeResume_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeResume.Tick
+
+	End Sub
+	Private Sub AvoidTheEdge_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdge.Tick
+
+	End Sub
+	Private Sub UpdatesTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdatesTimer.Tick
+
+	End Sub
+	Private Sub RLGLTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTimer.Tick
+
+	End Sub
+	Private Sub CensorshipTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CensorshipTimer.Tick
+
+	End Sub
+	Private Sub DelayTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DelayTimer.Tick
+
+	End Sub
+	Private Sub StrokeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTauntTimer.Tick
+
+	End Sub
+	Private Sub StrokeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimer.Tick
+
+	End Sub
+	Private Sub SendTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SendTimer.Tick
+
+	End Sub
+	Private Sub Timer1_Tick(sender As System.Object, e As System.EventArgs) Handles Timer1.Tick
+
+	End Sub
+	Private Sub ScriptTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ScriptTimer.Tick
+
+	End Sub
+
+	Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
+		CloseApp()
+		ChatText2.Visible = True
+		PNLChatBox2.Visible = True
+		OpenApp()
+		SideChatToolStripMenuItem1.Checked = True
+		My.Settings.SideChat = True
+		My.Settings.Save()
+	End Sub
 End Class
