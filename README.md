@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 # Changelog - Patch 54
 
+Added "Deny" overload to @Edge() Command. This simply lets the program know that the user was just denied an orgasm. Mostly useful for coordinating with end of tease Task letters
+
 Added @CustomMode() Command and Mode Class - You can use @CustomMode to set any keyword or phrase to a mode that will move to a GotoLine in the script when used. The current types that @CustomMode can use are Goto and Video. For example:
 
      @CustomMode(I'm done, Goto, Finished Task) - This would move the script to the line (Finished Task) if the user types "I'm done" (not case sensitive)

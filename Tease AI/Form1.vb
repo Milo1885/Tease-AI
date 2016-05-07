@@ -2796,7 +2796,7 @@ WritingTaskLine:
 
 						LastOrgasmType = "DENIED"
 
-						If FrmSettings.CBDomDenialEnds.Checked = False Then
+						If FrmSettings.CBDomDenialEnds.Checked = False And TeaseTick < 1 Then
 
 							Dim RepeatChance As Integer = randomizer.Next(0, 101)
 
@@ -2877,7 +2877,7 @@ RuinedOrgasm:
 				My.Settings.Save()
 				FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
 
-				If FrmSettings.CBDomOrgasmEnds.Checked = False And OrgasmRuined = True Then
+				If FrmSettings.CBDomOrgasmEnds.Checked = False And OrgasmRuined = True And TeaseTick < 1 Then
 
 					Dim RepeatChance As Integer = randomizer.Next(0, 101)
 
@@ -2999,7 +2999,7 @@ NoNoCumFiles:
 				My.Settings.Save()
 				FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
 
-				If FrmSettings.CBDomOrgasmEnds.Checked = False Then
+				If FrmSettings.CBDomOrgasmEnds.Checked = False And TeaseTick < 1 Then
 
 					Dim RepeatChance As Integer = randomizer.Next(0, 101)
 
@@ -11396,6 +11396,8 @@ ShowedBlogImage:
 			If GetMatch(StringClean, "@Edge(", "NoHold") = True Then EdgeNoHold = True
 			If EdgeHold = True And EdgeNoHold = True Then EdgeHold = False
 
+			If GetMatch(StringClean, "@Edge(", "Deny") = True Then OrgasmDenied = True
+
 			If GetMatch(StringClean, "@Edge(", "Orgasm") = True Then OrgasmAllowed = True
 
 			If GetMatch(StringClean, "@Edge(", "Ruin") = True Then OrgasmRuined = True
@@ -14708,6 +14710,9 @@ VTSkip:
 			Dim CustomArray As String() = CustomFlag.Split(",")
 
 			If CustomArray.Count = 3 Then
+
+				If Modes.Keys.Contains(CustomArray(0)) Then Modes.Remove(CustomArray(0))
+
 				Dim NewMode As New Mode
 				NewMode.Keyword = CustomArray(0)
 				NewMode.Type = CustomArray(1)
@@ -22043,7 +22048,7 @@ NoPlaylistEndFile:
 
 				LastOrgasmType = "DENIED"
 
-				If FrmSettings.CBDomDenialEnds.Checked = False Then
+				If FrmSettings.CBDomDenialEnds.Checked = False And TeaseTick < 1 Then
 
 					Dim RepeatChance As Integer = randomizer.Next(0, 101)
 
@@ -22117,7 +22122,7 @@ RuinedOrgasm:
 			My.Settings.Save()
 			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
 
-			If FrmSettings.CBDomOrgasmEnds.Checked = False And OrgasmRuined = True Then
+			If FrmSettings.CBDomOrgasmEnds.Checked = False And OrgasmRuined = True And TeaseTick < 1 Then
 
 				Dim RepeatChance As Integer = randomizer.Next(0, 101)
 
@@ -22236,7 +22241,7 @@ NoNoCumFiles:
 			My.Settings.Save()
 			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
 
-			If FrmSettings.CBDomOrgasmEnds.Checked = False Then
+			If FrmSettings.CBDomOrgasmEnds.Checked = False And TeaseTick < 1 Then
 
 				Dim RepeatChance As Integer = randomizer.Next(0, 101)
 
