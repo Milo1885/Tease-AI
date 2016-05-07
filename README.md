@@ -6,8 +6,15 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: Status Initial
 	
-
+ 
 # Changelog - Patch 54
+
+Added optional Boolean overload to CommandClean() that CleanTaskLines uses to process Commands that would only be useful in lines for Task letters. This allows Task letters to now process the following Commands:
+
+     @SetFlag(), @TempFlag(), @DeleteFlag(), @SetVar[], @ShowVar[], @ChangeVar[], @RoundVar[], @DeleteVar[], @SetDate()
+	 @UpdateOrgasm, @UpdateRuined, @ChastityOn, @ChastityOff, @RestrictOrgasm(), @RestrictOrgasm, @PornAllowedOff, @PornAllowedOn 
+	 @DecreaseOrgasmChance, @IncreaseOrgasmChance, @DecreaseRuinChance, @IncreaseRuinChance, 
+	 @AddTokens(), @RemoveTokens(), all other Token related Commands
 
 Added "Deny" overload to @Edge() Command. This simply lets the program know that the user was just denied an orgasm. Mostly useful for coordinating with end of tease Task letters
 

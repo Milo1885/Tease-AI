@@ -10021,9 +10021,14 @@ BadVocabBreak:
 		Return StringClean
 	End Function
 
-	Public Function CommandClean(ByVal StringClean As String) As String
+	Public Function CommandClean(ByVal StringClean As String, Optional ByVal TaskClean As Boolean = False) As String
 
 		Debug.Print("Stringclean Intro = " & StringClean)
+
+		If TaskClean = True Then
+			Debug.Print("Tasks CommandClean")
+			GoTo TaskCleanSet
+		End If
 
 RinseLatherRepeat:
 
@@ -10141,7 +10146,7 @@ RinseLatherRepeat:
 						Dim FlagArray() As String = CheckFlag.Split(",")
 
 						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & FlagArray(0)) Or
-								File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagArray(0)) Then
+						  File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagArray(0)) Then
 							SkipGotoLine = True
 							FileGoto = FlagArray(1)
 							GetGoto()
@@ -10150,7 +10155,7 @@ RinseLatherRepeat:
 					Else
 
 						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & CheckFlag) Or
-							File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & CheckFlag) Then
+						 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & CheckFlag) Then
 							SkipGotoLine = True
 							FileGoto = CheckFlag
 							GetGoto()
@@ -10170,6 +10175,10 @@ RinseLatherRepeat:
 			' StringClean = Join(CheckArray, Nothing)
 
 		End If
+
+
+TaskCleanSet:
+
 
 		' The @SetFlag() Command creates a Flag in System\Flags. You can use multiple @SetFlag() Commands in the same line to set multiple flags at once (For example, @SetFlag(Flag1) @SetFlag(Flag2)).
 		' You can also set multiple flags at once by separating them in single @SetFlag() Commands with a comma (For example, @SetFlag(Flag1, Flag2, Flag3)).
@@ -10392,8 +10401,8 @@ RinseLatherRepeat:
 					If UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Year, Val(FlagArray(1)), SetDate)
 
 					If Not UCase(FlagArray(1)).Contains(UCase("SECOND")) And Not UCase(FlagArray(1)).Contains(UCase("MINUTE")) And Not UCase(FlagArray(1)).Contains(UCase("HOUR")) _
-						And Not UCase(FlagArray(1)).Contains(UCase("DAY")) And Not UCase(FlagArray(1)).Contains(UCase("WEEK")) And Not UCase(FlagArray(1)).Contains(UCase("MONTH")) _
-						And Not UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
+					 And Not UCase(FlagArray(1)).Contains(UCase("DAY")) And Not UCase(FlagArray(1)).Contains(UCase("WEEK")) And Not UCase(FlagArray(1)).Contains(UCase("MONTH")) _
+					 And Not UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
 
 					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagArray(0), FormatDateTime(SetDate, DateFormat.GeneralDate), False)
 
@@ -10409,113 +10418,7 @@ RinseLatherRepeat:
 
 			'StringClean = Join(CheckArray, Nothing)
 
-
-
 		End If
-
-		' The @CheckDate() Command checks a previously saved Variable created with the @SetDate() Command and goes to the specified line if the current time and date is on or after the date in the Variable.
-		' Correct format is @CheckDate(VarName, Goto Line) . For example, @CheckDate(NoPorn, Look At Porn Again) will go to the line (Look At Porn Again) if the current time and date has passed the value set
-		' for the Variable "NoPorn" by @SetDate()
-
-
-		If StringClean.Contains("@CheckDate(") Then
-
-			Dim CheckArray As String() = StringClean.Split(")")
-
-			For i As Integer = 0 To CheckArray.Count - 1
-
-				If CheckArray(i).Contains("@CheckDate(") Then
-
-					'CheckArray(i) = CheckArray(i) & "]"
-
-					Dim CheckFlag As String = GetParentheses(CheckArray(i), "@CheckDate(")
-					Dim OriginalCheck As String = CheckFlag
-
-					CheckFlag = FixCommas(CheckFlag)
-
-					Dim DateArray() As String = CheckFlag.Split(",")
-
-					If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & DateArray(0)) Then
-
-						Debug.Print(GetDate(DateArray(0)))
-
-						If DateArray.Count = 2 Then
-							If CompareDatesWithTime(GetDate(DateArray(0))) <> 1 Then
-								SkipGotoLine = True
-								FileGoto = DateArray(1).Replace(")", "")
-								GetGoto()
-							End If
-						End If
-
-						If DateArray.Count = 3 Then
-
-							Dim DDiff As Integer
-
-							Debug.Print("GetDate(DateArray(0) = " & GetDate(DateArray(0)))
-
-							If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
-							If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
-
-							Debug.Print("DDiff = " & DDiff)
-							Debug.Print("Val(DateArray(1)) = " & Val(DateArray(1)))
-
-							If DDiff >= Val(DateArray(1)) Then
-								SkipGotoLine = True
-								FileGoto = DateArray(2).Replace(")", "")
-								GetGoto()
-							End If
-
-						End If
-
-
-						If DateArray.Count = 4 Then
-
-							Dim DDiff As Integer
-							Dim DDiff2 As Integer
-
-							If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
-							If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
-
-							If UCase(DateArray(2)).Contains("SECOND") Then DDiff2 = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("MINUTE") Then DDiff2 = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("HOUR") Then DDiff2 = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("DAY") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("WEEK") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
-							If UCase(DateArray(2)).Contains("MONTH") Then DDiff2 = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("YEAR") Then DDiff2 = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
-
-							If DDiff >= Val(DateArray(1)) And DDiff2 <= Val(DateArray(2)) Then
-								SkipGotoLine = True
-								FileGoto = DateArray(3).Replace(")", "")
-								GetGoto()
-							End If
-
-						End If
-
-					End If
-
-					' CheckArray(i) = CheckArray(i).Replace("@CheckDate(" & OriginalCheck, "")
-
-					StringClean = StringClean.Replace("@CheckDate(" & OriginalCheck & ")", "")
-
-				End If
-
-			Next
-
-			'  StringClean = Join(CheckArray, Nothing)
-
-		End If
-
 
 
 		' The @RoundVar Command is used to take an existing Variable and round it by the amount specified. The correct format is @Round[VarName]=[RoundAmount]
@@ -10659,6 +10562,494 @@ RinseLatherRepeat:
 			Next
 
 		End If
+
+		' The @ShowVar[] Command is used to show the value of an existing Variable. The correct format is @ShowVar[VarName]
+		' More than one @ShowVar[] Commands can be used per line
+
+		If StringClean.Contains("@ShowVar[") Then
+
+			Dim VarSplit As String() = StringClean.Split("]")
+
+			For i As Integer = 0 To VarSplit.Count - 1
+
+				If VarSplit(i).Contains("@ShowVar[") Then
+
+					Dim VarString As String = VarSplit(i) & "]"
+
+					Dim VarFlag As String = GetParentheses(VarString, "@ShowVar[")
+					Debug.Print("VarFlag = " & VarFlag)
+					Dim VarFlag2 As String = GetVariable(VarFlag)
+					Debug.Print("VarFlag2 = " & VarFlag2)
+					' StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
+
+					Debug.Print("Try this shit       @ShowVar[" & VarFlag & "]")
+
+					StringClean = StringClean.Replace("@ShowVar[" & VarFlag & "]", VarFlag2)
+
+				End If
+
+			Next
+
+		End If
+
+
+		If StringClean.Contains("@ChastityOn") Then
+			My.Settings.Chastity = True
+			My.Settings.Save()
+			FrmSettings.LBLChastityState.Text = "ON"
+			FrmSettings.LBLChastityState.ForeColor = Color.Green
+			StringClean = StringClean.Replace("@ChastityOn", "")
+		End If
+
+		If StringClean.Contains("@ChastityOff") Then
+			My.Settings.Chastity = False
+			My.Settings.Save()
+			FrmSettings.LBLChastityState.Text = "OFF"
+			FrmSettings.LBLChastityState.ForeColor = Color.Red
+			StringClean = StringClean.Replace("@ChastityOff", "")
+		End If
+
+		If StringClean.Contains("@AddTokens(") Then
+
+			Dim TokenFlag As String = GetParentheses(StringClean, "@AddTokens(")
+			TokenFlag = FixCommas(TokenFlag)
+			Dim TokenAdd As Integer
+
+			If TokenFlag.Contains(",") Then
+				Dim TokenArray As String() = TokenFlag.Split(",")
+				For i As Integer = 0 To TokenArray.Count - 1
+					TokenAdd = Val(TokenArray(i))
+					If UCase(TokenArray(i)).Contains("B") Then BronzeTokens += TokenAdd
+					If UCase(TokenArray(i)).Contains("S") Then SilverTokens += TokenAdd
+					If UCase(TokenArray(i)).Contains("G") Then GoldTokens += TokenAdd
+				Next
+			Else
+				TokenAdd = Val(TokenFlag)
+				If UCase(TokenFlag).Contains("B") Then BronzeTokens += TokenAdd
+				If UCase(TokenFlag).Contains("S") Then SilverTokens += TokenAdd
+				If UCase(TokenFlag).Contains("G") Then GoldTokens += TokenAdd
+			End If
+
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.SilverTokens = SilverTokens
+			My.Settings.GoldTokens = GoldTokens
+
+			My.Settings.Save()
+
+			StringClean = StringClean.Replace("@AddTokens(" & TokenFlag & ")", "")
+
+		End If
+
+
+		If StringClean.Contains("@RemoveTokens(") Then
+
+			Dim TokenFlag As String = GetParentheses(StringClean, "@RemoveTokens(")
+			TokenFlag = FixCommas(TokenFlag)
+			Dim TokenRemove As Integer
+
+			If TokenFlag.Contains(",") Then
+				Dim TokenArray As String() = TokenFlag.Split(",")
+				For i As Integer = 0 To TokenArray.Count - 1
+					TokenRemove = Val(TokenArray(i))
+					If UCase(TokenArray(i)).Contains("B") Then BronzeTokens -= TokenRemove
+					If UCase(TokenArray(i)).Contains("S") Then SilverTokens -= TokenRemove
+					If UCase(TokenArray(i)).Contains("G") Then GoldTokens -= TokenRemove
+				Next
+			Else
+				TokenRemove = Val(TokenFlag)
+				If UCase(TokenFlag).Contains("B") Then BronzeTokens -= TokenRemove
+				If UCase(TokenFlag).Contains("S") Then SilverTokens -= TokenRemove
+				If UCase(TokenFlag).Contains("G") Then GoldTokens -= TokenRemove
+			End If
+
+			If BronzeTokens < 0 Then BronzeTokens = 0
+			If SilverTokens < 0 Then SilverTokens = 0
+			If GoldTokens < 0 Then GoldTokens = 0
+
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.SilverTokens = SilverTokens
+			My.Settings.GoldTokens = GoldTokens
+
+			My.Settings.Save()
+
+			StringClean = StringClean.Replace("@RemoveTokens(" & TokenFlag & ")", "")
+
+		End If
+
+		If StringClean.Contains("@Add1Token") Then
+			BronzeTokens += 1
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.Save()
+			FrmCardList.UpdateBronzeTokens()
+			MessageBox.Show(Me, domName.Text & " has given you 1 Bronze token!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			StringClean = StringClean.Replace("@Add1Token", "")
+		End If
+
+		If StringClean.Contains("@Add3Tokens") Then
+			BronzeTokens += 3
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.Save()
+			FrmCardList.UpdateBronzeTokens()
+			MessageBox.Show(Me, domName.Text & " has given you 3 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			StringClean = StringClean.Replace("@Add3Tokens", "")
+		End If
+
+		If StringClean.Contains("@Add5Tokens") Then
+			BronzeTokens += 5
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.Save()
+			FrmCardList.UpdateBronzeTokens()
+			StringClean = StringClean.Replace("@Add5Tokens", "")
+			MessageBox.Show(Me, domName.Text & " has given you 5 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+		End If
+
+		If StringClean.Contains("@Add10Tokens") Then
+			BronzeTokens += 10
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.Save()
+			FrmCardList.UpdateBronzeTokens()
+			MessageBox.Show(Me, domName.Text & " has given you 10 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			StringClean = StringClean.Replace("@Add10Tokens", "")
+		End If
+
+		If StringClean.Contains("@Add25Tokens") Then
+			BronzeTokens += 25
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.Save()
+			FrmCardList.UpdateBronzeTokens()
+			MessageBox.Show(Me, domName.Text & " has given you 25 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			StringClean = StringClean.Replace("@Add25Tokens", "")
+		End If
+
+		If StringClean.Contains("@Add50Tokens") Then
+			BronzeTokens += 50
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.Save()
+			FrmCardList.UpdateBronzeTokens()
+			MessageBox.Show(Me, domName.Text & " has given you 50 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			StringClean = StringClean.Replace("@Add50Tokens", "")
+		End If
+
+		If StringClean.Contains("@Add100Tokens") Then
+			BronzeTokens += 100
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.Save()
+			FrmCardList.UpdateBronzeTokens()
+			MessageBox.Show(Me, domName.Text & " has given you 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			StringClean = StringClean.Replace("@Add50Tokens", "")
+		End If
+
+		If StringClean.Contains("@Remove100Tokens") Then
+			BronzeTokens -= 100
+			My.Settings.BronzeTokens = BronzeTokens
+			My.Settings.Save()
+			FrmCardList.UpdateBronzeTokens()
+			MessageBox.Show(Me, domName.Text & " has taken 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			StringClean = StringClean.Replace("@@Remove100Tokens", "")
+		End If
+
+
+		If StringClean.Contains("@UpdateOrgasm") Then
+			My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
+
+			'Github Patch
+			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
+
+			My.Settings.Save()
+			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
+			StringClean = StringClean.Replace("@UpdateOrgasm", "")
+		End If
+
+		If StringClean.Contains("@UpdateRuined") Then
+			My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
+
+			' GithubPatch
+			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
+
+			My.Settings.Save()
+			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
+			StringClean = StringClean.Replace("@UpdateRuined", "")
+		End If
+
+		If StringClean.Contains("@DeleteVar[") Then
+
+			Dim DeleteArray As String() = StringClean.Split("]")
+
+			For i As Integer = 0 To DeleteArray.Count - 1
+
+				If DeleteArray(i).Contains("@DeleteVar[") Then
+
+					DeleteArray(i) = DeleteArray(i) & "]"
+
+					Dim DFlag As String = GetParentheses(DeleteArray(i), "@DeleteVar[")
+					Dim OriginalDelete As String = DFlag
+
+					If DFlag.Contains(",") Then
+
+						DFlag = FixCommas(DFlag)
+
+						Dim FlagArray() As String = DFlag.Split(",")
+
+						For x As Integer = 0 To FlagArray.Count - 1
+
+							DeleteVariable(FlagArray(x))
+
+						Next
+
+					Else
+
+						DeleteVariable(DFlag)
+
+					End If
+
+					'DeleteArray(i) = DeleteArray(i).Replace("@DeleteVar[" & OriginalDelete & "]", "")
+
+					StringClean = StringClean.Replace("@DeleteVar[" & OriginalDelete & "]", "")
+
+				End If
+
+			Next
+
+			'StringClean = Join(DeleteArray, Nothing)
+
+		End If
+
+		If StringClean.Contains("@PornAllowedOff") Then
+			CreateFlag("SYS_NoPornAllowed")
+			StringClean = StringClean.Replace("@PornAllowedOff", "")
+		End If
+
+		If StringClean.Contains("@PornAllowedOn") Then
+			DeleteFlag("SYS_NoPornAllowed")
+			StringClean = StringClean.Replace("@PornAllowedOn", "")
+		End If
+
+		If StringClean.Contains("@RestrictOrgasm(") Then
+
+			Dim CheckFlag As String = GetParentheses(StringClean, "@RestrictOrgasm(")
+
+			If CheckFlag.Contains(",") Then
+
+				CheckFlag = CheckFlag.Replace(", ", ",")
+				CheckFlag = CheckFlag.Replace(" ,", ",")
+
+				Dim FlagArray() As String = CheckFlag.Split(",")
+
+				Dim Seconds1 As Integer = Val(FlagArray(0))
+				Dim Seconds2 As Integer = Val(FlagArray(1))
+
+				If UCase(FlagArray(0)).Contains(UCase("MINUTE")) Then Seconds1 *= 60
+				If UCase(FlagArray(0)).Contains(UCase("HOUR")) Then Seconds1 *= 3600
+				If UCase(FlagArray(0)).Contains(UCase("DAY")) Then Seconds1 *= 86400
+				If UCase(FlagArray(0)).Contains(UCase("WEEK")) Then Seconds1 *= 604800
+				If UCase(FlagArray(0)).Contains(UCase("MONTH")) Then Seconds1 *= 2419200
+				If UCase(FlagArray(0)).Contains(UCase("YEAR")) Then Seconds1 *= 29030400
+
+				If UCase(FlagArray(1)).Contains(UCase("MINUTE")) Then Seconds2 *= 60
+				If UCase(FlagArray(1)).Contains(UCase("HOUR")) Then Seconds2 *= 3600
+				If UCase(FlagArray(1)).Contains(UCase("DAY")) Then Seconds2 *= 86400
+				If UCase(FlagArray(1)).Contains(UCase("WEEK")) Then Seconds2 *= 604800
+				If UCase(FlagArray(1)).Contains(UCase("MONTH")) Then Seconds2 *= 2419200
+				If UCase(FlagArray(1)).Contains(UCase("YEAR")) Then Seconds2 *= 29030400
+
+				Dim TotalSeconds As Integer = randomizer.Next(Seconds1, Seconds2 + 1)
+
+				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
+
+				SetDate = DateAdd(DateInterval.Second, TotalSeconds, SetDate)
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
+
+			Else
+
+				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
+
+				If UCase(CheckFlag).Contains(UCase("SECOND")) Then SetDate = DateAdd(DateInterval.Second, Val(CheckFlag), SetDate)
+				If UCase(CheckFlag).Contains(UCase("MINUTE")) Then SetDate = DateAdd(DateInterval.Minute, Val(CheckFlag), SetDate)
+				If UCase(CheckFlag).Contains(UCase("HOUR")) Then SetDate = DateAdd(DateInterval.Hour, Val(CheckFlag), SetDate)
+				If UCase(CheckFlag).Contains(UCase("DAY")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
+				If UCase(CheckFlag).Contains(UCase("WEEK")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag) * 7, SetDate)
+				If UCase(CheckFlag).Contains(UCase("MONTH")) Then SetDate = DateAdd(DateInterval.Month, Val(CheckFlag), SetDate)
+				If UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Year, Val(CheckFlag), SetDate)
+
+				If Not UCase(CheckFlag).Contains(UCase("SECOND")) And Not UCase(CheckFlag).Contains(UCase("MINUTE")) And Not UCase(CheckFlag).Contains(UCase("HOUR")) _
+				 And Not UCase(CheckFlag).Contains(UCase("DAY")) And Not UCase(CheckFlag).Contains(UCase("WEEK")) And Not UCase(CheckFlag).Contains(UCase("MONTH")) _
+				 And Not UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
+
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
+
+			End If
+			OrgasmRestricted = True
+			StringClean = StringClean.Replace("@RestrictOrgasm(" & GetParentheses(StringClean, "@RestrictOrgasm(") & ")", "")
+		End If
+
+		If StringClean.Contains("@RestrictOrgasm") Then
+			OrgasmRestricted = True
+			StringClean = StringClean.Replace("@RestrictOrgasm", "")
+		End If
+
+		If StringClean.Contains("@DecreaseOrgasmChance") Then
+
+			If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FrmSettings.alloworgasmComboBox.Text = "Never Allows"
+			If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
+			If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows"
+			If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
+
+			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
+			My.Settings.Save()
+
+			StringClean = StringClean.Replace("@DecreaseOrgasmChance", "")
+		End If
+
+		If StringClean.Contains("@IncreaseOrgasmChance") Then
+
+			If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FrmSettings.alloworgasmComboBox.Text = "Always Allows"
+			If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
+			If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows"
+			If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
+
+			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
+			My.Settings.Save()
+
+			StringClean = StringClean.Replace("@IncreaseOrgasmChance", "")
+		End If
+
+		If StringClean.Contains("@DecreaseRuinChance") Then
+
+			If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Never Ruins"
+			If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
+			If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins"
+			If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
+
+			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
+			My.Settings.Save()
+
+			StringClean = StringClean.Replace("@DecreaseRuinChance", "")
+		End If
+
+		If StringClean.Contains("@IncreaseRuinChance") Then
+
+			If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Always Ruins"
+			If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
+			If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins"
+			If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
+
+			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
+			My.Settings.Save()
+
+			StringClean = StringClean.Replace("@IncreaseRuinChance", "")
+		End If
+
+		'@@@@@@@@@@@@@@@@@@@@@@ TASKCLEAN END
+
+		If TaskClean = True Then Return StringClean
+
+
+
+
+
+		' The @CheckDate() Command checks a previously saved Variable created with the @SetDate() Command and goes to the specified line if the current time and date is on or after the date in the Variable.
+		' Correct format is @CheckDate(VarName, Goto Line) . For example, @CheckDate(NoPorn, Look At Porn Again) will go to the line (Look At Porn Again) if the current time and date has passed the value set
+		' for the Variable "NoPorn" by @SetDate()
+
+
+		If StringClean.Contains("@CheckDate(") Then
+
+			Dim CheckArray As String() = StringClean.Split(")")
+
+			For i As Integer = 0 To CheckArray.Count - 1
+
+				If CheckArray(i).Contains("@CheckDate(") Then
+
+					'CheckArray(i) = CheckArray(i) & "]"
+
+					Dim CheckFlag As String = GetParentheses(CheckArray(i), "@CheckDate(")
+					Dim OriginalCheck As String = CheckFlag
+
+					CheckFlag = FixCommas(CheckFlag)
+
+					Dim DateArray() As String = CheckFlag.Split(",")
+
+					If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & DateArray(0)) Then
+
+						Debug.Print(GetDate(DateArray(0)))
+
+						If DateArray.Count = 2 Then
+							If CompareDatesWithTime(GetDate(DateArray(0))) <> 1 Then
+								SkipGotoLine = True
+								FileGoto = DateArray(1).Replace(")", "")
+								GetGoto()
+							End If
+						End If
+
+						If DateArray.Count = 3 Then
+
+							Dim DDiff As Integer
+
+							Debug.Print("GetDate(DateArray(0) = " & GetDate(DateArray(0)))
+
+							If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
+							If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+
+							Debug.Print("DDiff = " & DDiff)
+							Debug.Print("Val(DateArray(1)) = " & Val(DateArray(1)))
+
+							If DDiff >= Val(DateArray(1)) Then
+								SkipGotoLine = True
+								FileGoto = DateArray(2).Replace(")", "")
+								GetGoto()
+							End If
+
+						End If
+
+
+						If DateArray.Count = 4 Then
+
+							Dim DDiff As Integer
+							Dim DDiff2 As Integer
+
+							If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
+							If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+
+							If UCase(DateArray(2)).Contains("SECOND") Then DDiff2 = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(2)).Contains("MINUTE") Then DDiff2 = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(2)).Contains("HOUR") Then DDiff2 = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(2)).Contains("DAY") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(2)).Contains("WEEK") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
+							If UCase(DateArray(2)).Contains("MONTH") Then DDiff2 = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
+							If UCase(DateArray(2)).Contains("YEAR") Then DDiff2 = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+
+							If DDiff >= Val(DateArray(1)) And DDiff2 <= Val(DateArray(2)) Then
+								SkipGotoLine = True
+								FileGoto = DateArray(3).Replace(")", "")
+								GetGoto()
+							End If
+
+						End If
+
+					End If
+
+					' CheckArray(i) = CheckArray(i).Replace("@CheckDate(" & OriginalCheck, "")
+
+					StringClean = StringClean.Replace("@CheckDate(" & OriginalCheck & ")", "")
+
+				End If
+
+			Next
+
+			'  StringClean = Join(CheckArray, Nothing)
+
+		End If
+
 
 		' The @If[] Command allows you to compare Variables and go to a specific line if the statement is true. The correct format is @If[VarName]>[varName2]Then(Goto Line)
 		' For example, If[StrokeTotal]>[1000]Then(Thousand Strokes) would check if the Variable "StrokeTotal" is greater than 1000, and go to (Thousand Strokes) if so. 
@@ -10864,36 +11255,6 @@ RinseLatherRepeat:
 
 		End If
 
-
-		' The @ShowVar[] Command is used to show the value of an existing Variable. The correct format is @ShowVar[VarName]
-		' More than one @ShowVar[] Commands can be used per line
-
-		If StringClean.Contains("@ShowVar[") Then
-
-			Dim VarSplit As String() = StringClean.Split("]")
-
-			For i As Integer = 0 To VarSplit.Count - 1
-
-				If VarSplit(i).Contains("@ShowVar[") Then
-
-					Dim VarString As String = VarSplit(i) & "]"
-
-					Dim VarFlag As String = GetParentheses(VarString, "@ShowVar[")
-					Debug.Print("VarFlag = " & VarFlag)
-					Dim VarFlag2 As String = GetVariable(VarFlag)
-					Debug.Print("VarFlag2 = " & VarFlag2)
-					' StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
-
-					Debug.Print("Try this shit       @ShowVar[" & VarFlag & "]")
-
-					StringClean = StringClean.Replace("@ShowVar[" & VarFlag & "]", VarFlag2)
-
-				End If
-
-			Next
-
-		End If
-
 		' The @InputVar[] stops script progression and waits for the user to input his next message. Whatever the user types next will be saved as a Variable named whatever you specify in the brackets.
 		' For example, if the script's line was "What's your favorite food? @InputVar[FavoriteFood]", and the user typed "lo mein", then "lo mein" would be saved as the Variable "FavoriteFood". If the
 		' user has checked "Show Icon During Input Questions" in the General Settings tab, then the domme's question will be accompanied by a small question mark icon to let the user know that their next
@@ -11081,7 +11442,7 @@ RinseLatherRepeat:
 					End Try
 				Else
 					MessageBox.Show(Me, Path.GetFileName(ImageToShow) & " was not found in " & Path.GetDirectoryName(ImageToShow) & "!" & Environment.NewLine & Environment.NewLine &
-									"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+						"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
 
 
@@ -11112,7 +11473,7 @@ RinseLatherRepeat:
 				Else
 					ClearMainPictureBox()
 					MessageBox.Show(Me, "No images matching " & Path.GetFileName(ImageToShow) & " were found in " & Path.GetDirectoryName(ImageToShow) & "!" & Environment.NewLine & Environment.NewLine &
-							   "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+						 "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
 
 			Else
@@ -11702,7 +12063,7 @@ ShowedBlogImage:
 			Dim CustomArray As String() = CustomFlag.Split(",")
 
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & "_First.txt") And
-		  File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & ".txt") Then
+			 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & ".txt") Then
 				CustomTask = True
 				CustomTaskActive = True
 				CustomTaskText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & ".txt"
@@ -12640,22 +13001,6 @@ OrgasmDecided:
 			StringClean = StringClean.Replace("@PlayCensorshipSucks", "")
 		End If
 
-		If StringClean.Contains("@ChastityOn") Then
-			My.Settings.Chastity = True
-			My.Settings.Save()
-			FrmSettings.LBLChastityState.Text = "ON"
-			FrmSettings.LBLChastityState.ForeColor = Color.Green
-			StringClean = StringClean.Replace("@ChastityOn", "")
-		End If
-
-		If StringClean.Contains("@ChastityOff") Then
-			My.Settings.Chastity = False
-			My.Settings.Save()
-			FrmSettings.LBLChastityState.Text = "OFF"
-			FrmSettings.LBLChastityState.ForeColor = Color.Red
-			StringClean = StringClean.Replace("@ChastityOff", "")
-		End If
-
 		If StringClean.Contains("@VitalSubAssignment") Then
 			' Read all lines of the given file.
 			Dim AssignList As List(Of String) = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\VitalSub\Assignments.txt")
@@ -12714,146 +13059,6 @@ OrgasmDecided:
 
 			StringClean = StringClean.Replace("@DeleteLocalImage", "")
 		End If
-
-		If StringClean.Contains("@AddTokens(") Then
-
-			Dim TokenFlag As String = GetParentheses(StringClean, "@AddTokens(")
-			TokenFlag = FixCommas(TokenFlag)
-			Dim TokenAdd As Integer
-
-			If TokenFlag.Contains(",") Then
-				Dim TokenArray As String() = TokenFlag.Split(",")
-				For i As Integer = 0 To TokenArray.Count - 1
-					TokenAdd = Val(TokenArray(i))
-					If UCase(TokenArray(i)).Contains("B") Then BronzeTokens += TokenAdd
-					If UCase(TokenArray(i)).Contains("S") Then SilverTokens += TokenAdd
-					If UCase(TokenArray(i)).Contains("G") Then GoldTokens += TokenAdd
-				Next
-			Else
-				TokenAdd = Val(TokenFlag)
-				If UCase(TokenFlag).Contains("B") Then BronzeTokens += TokenAdd
-				If UCase(TokenFlag).Contains("S") Then SilverTokens += TokenAdd
-				If UCase(TokenFlag).Contains("G") Then GoldTokens += TokenAdd
-			End If
-
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.SilverTokens = SilverTokens
-			My.Settings.GoldTokens = GoldTokens
-
-			My.Settings.Save()
-
-			StringClean = StringClean.Replace("@AddTokens(" & TokenFlag & ")", "")
-
-		End If
-
-
-		If StringClean.Contains("@RemoveTokens(") Then
-
-			Dim TokenFlag As String = GetParentheses(StringClean, "@RemoveTokens(")
-			TokenFlag = FixCommas(TokenFlag)
-			Dim TokenRemove As Integer
-
-			If TokenFlag.Contains(",") Then
-				Dim TokenArray As String() = TokenFlag.Split(",")
-				For i As Integer = 0 To TokenArray.Count - 1
-					TokenRemove = Val(TokenArray(i))
-					If UCase(TokenArray(i)).Contains("B") Then BronzeTokens -= TokenRemove
-					If UCase(TokenArray(i)).Contains("S") Then SilverTokens -= TokenRemove
-					If UCase(TokenArray(i)).Contains("G") Then GoldTokens -= TokenRemove
-				Next
-			Else
-				TokenRemove = Val(TokenFlag)
-				If UCase(TokenFlag).Contains("B") Then BronzeTokens -= TokenRemove
-				If UCase(TokenFlag).Contains("S") Then SilverTokens -= TokenRemove
-				If UCase(TokenFlag).Contains("G") Then GoldTokens -= TokenRemove
-			End If
-
-			If BronzeTokens < 0 Then BronzeTokens = 0
-			If SilverTokens < 0 Then SilverTokens = 0
-			If GoldTokens < 0 Then GoldTokens = 0
-
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.SilverTokens = SilverTokens
-			My.Settings.GoldTokens = GoldTokens
-
-			My.Settings.Save()
-
-			StringClean = StringClean.Replace("@RemoveTokens(" & TokenFlag & ")", "")
-
-		End If
-
-		If StringClean.Contains("@Add1Token") Then
-			BronzeTokens += 1
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 1 Bronze token!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add1Token", "")
-		End If
-
-		If StringClean.Contains("@Add3Tokens") Then
-			BronzeTokens += 3
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 3 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add3Tokens", "")
-		End If
-
-		If StringClean.Contains("@Add5Tokens") Then
-			BronzeTokens += 5
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
-			FrmCardList.UpdateBronzeTokens()
-			StringClean = StringClean.Replace("@Add5Tokens", "")
-			MessageBox.Show(Me, domName.Text & " has given you 5 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-		End If
-
-		If StringClean.Contains("@Add10Tokens") Then
-			BronzeTokens += 10
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 10 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add10Tokens", "")
-		End If
-
-		If StringClean.Contains("@Add25Tokens") Then
-			BronzeTokens += 25
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 25 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add25Tokens", "")
-		End If
-
-		If StringClean.Contains("@Add50Tokens") Then
-			BronzeTokens += 50
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 50 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add50Tokens", "")
-		End If
-
-		If StringClean.Contains("@Add100Tokens") Then
-			BronzeTokens += 100
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add50Tokens", "")
-		End If
-
-		If StringClean.Contains("@Remove100Tokens") Then
-			BronzeTokens -= 100
-			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has taken 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@@Remove100Tokens", "")
-		End If
-
 
 		If StringClean.Contains("@PlayAvoidTheEdge") Then
 			' #### Reboot
@@ -13449,28 +13654,6 @@ ExternalAudio:
 		If StringClean.Contains("@PlaylistOff") Then
 			Playlist = False
 			StringClean = StringClean.Replace("@PlaylistOff", "")
-		End If
-
-		If StringClean.Contains("@UpdateOrgasm") Then
-			My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-
-			'Github Patch
-			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
-
-			My.Settings.Save()
-			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
-			StringClean = StringClean.Replace("@UpdateOrgasm", "")
-		End If
-
-		If StringClean.Contains("@UpdateRuined") Then
-			My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-
-			' GithubPatch
-			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
-
-			My.Settings.Save()
-			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
-			StringClean = StringClean.Replace("@UpdateRuined", "")
 		End If
 
 		If StringClean.Contains("@Slideshow(") Then
@@ -14122,58 +14305,6 @@ VTSkip:
 		End If
 
 
-
-		If StringClean.Contains("@DeleteVar[") Then
-
-			Dim DeleteArray As String() = StringClean.Split("]")
-
-			For i As Integer = 0 To DeleteArray.Count - 1
-
-				If DeleteArray(i).Contains("@DeleteVar[") Then
-
-					DeleteArray(i) = DeleteArray(i) & "]"
-
-					Dim DFlag As String = GetParentheses(DeleteArray(i), "@DeleteVar[")
-					Dim OriginalDelete As String = DFlag
-
-					If DFlag.Contains(",") Then
-
-						DFlag = FixCommas(DFlag)
-
-						Dim FlagArray() As String = DFlag.Split(",")
-
-						For x As Integer = 0 To FlagArray.Count - 1
-
-							DeleteVariable(FlagArray(x))
-
-						Next
-
-					Else
-
-						DeleteVariable(DFlag)
-
-					End If
-
-					'DeleteArray(i) = DeleteArray(i).Replace("@DeleteVar[" & OriginalDelete & "]", "")
-
-					StringClean = StringClean.Replace("@DeleteVar[" & OriginalDelete & "]", "")
-
-				End If
-
-			Next
-
-			'StringClean = Join(DeleteArray, Nothing)
-
-		End If
-
-		'If StringClean.Contains("@DeleteVar[") Then
-		'Debug.Print("DeleteVar called")
-		'Dim WriteFlag As String = GetParentheses(StringClean, "@DeleteVar[")
-		'If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & WriteFlag) Then _
-		'My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & WriteFlag)
-		'StringClean = StringClean.Replace("@DeleteVar[" & WriteFlag & "]", "")
-		'End If
-
 		If StringClean.Contains("@NoTypo") Then
 			TypoSwitch = 0
 			StringClean = StringClean.Replace("@NoTypo", "")
@@ -14193,18 +14324,6 @@ VTSkip:
 			TyposDisabled = False
 			StringClean = StringClean.Replace("@TyposOn", "")
 		End If
-
-		If StringClean.Contains("@PornAllowedOff") Then
-			CreateFlag("SYS_NoPornAllowed")
-			StringClean = StringClean.Replace("@PornAllowedOff", "")
-		End If
-
-		If StringClean.Contains("@PornAllowedOn") Then
-			DeleteFlag("SYS_NoPornAllowed")
-			StringClean = StringClean.Replace("@PornAllowedOn", "")
-		End If
-
-
 
 
 		If StringClean.Contains("@ImageTag(") Then
@@ -14372,72 +14491,6 @@ VTSkip:
 		'End If
 
 
-
-		If StringClean.Contains("@RestrictOrgasm(") Then
-
-			Dim CheckFlag As String = GetParentheses(StringClean, "@RestrictOrgasm(")
-
-			If CheckFlag.Contains(",") Then
-
-				CheckFlag = CheckFlag.Replace(", ", ",")
-				CheckFlag = CheckFlag.Replace(" ,", ",")
-
-				Dim FlagArray() As String = CheckFlag.Split(",")
-
-				Dim Seconds1 As Integer = Val(FlagArray(0))
-				Dim Seconds2 As Integer = Val(FlagArray(1))
-
-				If UCase(FlagArray(0)).Contains(UCase("MINUTE")) Then Seconds1 *= 60
-				If UCase(FlagArray(0)).Contains(UCase("HOUR")) Then Seconds1 *= 3600
-				If UCase(FlagArray(0)).Contains(UCase("DAY")) Then Seconds1 *= 86400
-				If UCase(FlagArray(0)).Contains(UCase("WEEK")) Then Seconds1 *= 604800
-				If UCase(FlagArray(0)).Contains(UCase("MONTH")) Then Seconds1 *= 2419200
-				If UCase(FlagArray(0)).Contains(UCase("YEAR")) Then Seconds1 *= 29030400
-
-				If UCase(FlagArray(1)).Contains(UCase("MINUTE")) Then Seconds2 *= 60
-				If UCase(FlagArray(1)).Contains(UCase("HOUR")) Then Seconds2 *= 3600
-				If UCase(FlagArray(1)).Contains(UCase("DAY")) Then Seconds2 *= 86400
-				If UCase(FlagArray(1)).Contains(UCase("WEEK")) Then Seconds2 *= 604800
-				If UCase(FlagArray(1)).Contains(UCase("MONTH")) Then Seconds2 *= 2419200
-				If UCase(FlagArray(1)).Contains(UCase("YEAR")) Then Seconds2 *= 29030400
-
-				Dim TotalSeconds As Integer = randomizer.Next(Seconds1, Seconds2 + 1)
-
-				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
-
-				SetDate = DateAdd(DateInterval.Second, TotalSeconds, SetDate)
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
-
-			Else
-
-				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
-
-				If UCase(CheckFlag).Contains(UCase("SECOND")) Then SetDate = DateAdd(DateInterval.Second, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("MINUTE")) Then SetDate = DateAdd(DateInterval.Minute, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("HOUR")) Then SetDate = DateAdd(DateInterval.Hour, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("DAY")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("WEEK")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag) * 7, SetDate)
-				If UCase(CheckFlag).Contains(UCase("MONTH")) Then SetDate = DateAdd(DateInterval.Month, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Year, Val(CheckFlag), SetDate)
-
-				If Not UCase(CheckFlag).Contains(UCase("SECOND")) And Not UCase(CheckFlag).Contains(UCase("MINUTE")) And Not UCase(CheckFlag).Contains(UCase("HOUR")) _
-				 And Not UCase(CheckFlag).Contains(UCase("DAY")) And Not UCase(CheckFlag).Contains(UCase("WEEK")) And Not UCase(CheckFlag).Contains(UCase("MONTH")) _
-				 And Not UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
-
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
-
-			End If
-			OrgasmRestricted = True
-			StringClean = StringClean.Replace("@RestrictOrgasm(" & GetParentheses(StringClean, "@RestrictOrgasm(") & ")", "")
-		End If
-
-		If StringClean.Contains("@RestrictOrgasm") Then
-			OrgasmRestricted = True
-			StringClean = StringClean.Replace("@RestrictOrgasm", "")
-		End If
-
-
-
 		If StringClean.Contains("@FollowUp(") And FollowUp = "" Then
 			FollowUp = GetParentheses(StringClean, "@FollowUp(")
 			StringClean = StringClean.Replace("@FollowUp(" & FollowUp & ")", "")
@@ -14506,57 +14559,7 @@ VTSkip:
 
 
 
-		If StringClean.Contains("@DecreaseOrgasmChance") Then
 
-			If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FrmSettings.alloworgasmComboBox.Text = "Never Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
-
-			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
-			My.Settings.Save()
-
-			StringClean = StringClean.Replace("@DecreaseOrgasmChance", "")
-		End If
-
-		If StringClean.Contains("@IncreaseOrgasmChance") Then
-
-			If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FrmSettings.alloworgasmComboBox.Text = "Always Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
-
-			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
-			My.Settings.Save()
-
-			StringClean = StringClean.Replace("@IncreaseOrgasmChance", "")
-		End If
-
-		If StringClean.Contains("@DecreaseRuinChance") Then
-
-			If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Never Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
-
-			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
-			My.Settings.Save()
-
-			StringClean = StringClean.Replace("@DecreaseRuinChance", "")
-		End If
-
-		If StringClean.Contains("@IncreaseRuinChance") Then
-
-			If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Always Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
-
-			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
-			My.Settings.Save()
-
-			StringClean = StringClean.Replace("@IncreaseRuinChance", "")
-		End If
 
 
 
@@ -22585,50 +22588,8 @@ PoundLoop:
 				TaskEntry = PoundClean(TaskEntry)
 			Loop Until Not TaskEntry.Contains("#") And Not TaskEntry.Contains("@RT(") And Not TaskEntry.Contains("@RandomText(")
 
-			If TaskEntry.Contains("@SetFlag(") Then
-				Dim SetFlag As String = GetParentheses(TaskEntry, "@SetFlag(")
-				Dim OriginalSet As String = SetFlag
-				If SetFlag.Contains(",") Then
-					SetFlag = FixCommas(SetFlag)
-					Dim FlagArray() As String = SetFlag.Split(",")
-					For x As Integer = 0 To FlagArray.Count - 1
-						CreateFlag(FlagArray(x))
-					Next
-				Else
-					CreateFlag(SetFlag)
-				End If
-				TaskEntry = TaskEntry.Replace("@SetFlag(" & OriginalSet & ")", "")
-			End If
 
-			If TaskEntry.Contains("@TempFlag(") Then
-				Dim SetFlag As String = GetParentheses(TaskEntry, "@TempFlag(")
-				Dim OriginalSet As String = SetFlag
-				If SetFlag.Contains(",") Then
-					SetFlag = FixCommas(SetFlag)
-					Dim FlagArray() As String = SetFlag.Split(",")
-					For x As Integer = 0 To FlagArray.Count - 1
-						CreateFlag(FlagArray(x), True)
-					Next
-				Else
-					CreateFlag(SetFlag, True)
-				End If
-				TaskEntry = TaskEntry.Replace("@TempFlag(" & OriginalSet & ")", "")
-			End If
-
-			If TaskEntry.Contains("@DeleteFlag(") Then
-				Dim SetFlag As String = GetParentheses(TaskEntry, "@DeleteFlag(")
-				Dim OriginalSet As String = SetFlag
-				If SetFlag.Contains(",") Then
-					SetFlag = FixCommas(SetFlag)
-					Dim FlagArray() As String = SetFlag.Split(",")
-					For x As Integer = 0 To FlagArray.Count - 1
-						DeleteFlag(FlagArray(x))
-					Next
-				Else
-					DeleteFlag(SetFlag)
-				End If
-				TaskEntry = TaskEntry.Replace("@DeleteFlag(" & OriginalSet & ")", "")
-			End If
+			TaskEntry = CommandClean(TaskEntry, True)
 
 			TaskEntry = StripCommands(TaskEntry)
 
