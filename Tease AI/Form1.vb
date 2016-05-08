@@ -14755,6 +14755,11 @@ VTSkip:
 			StringClean = StringClean.Replace("@UnlockVideo", "")
 		End If
 
+		If StringClean.Contains("@ClearChat") Then
+			ClearChat()
+			StringClean = StringClean.Replace("@ClearChat", "")
+		End If
+
 
 		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", CurrentImage)
 
@@ -29425,6 +29430,21 @@ SkipNew:
 			My.Settings.SideChat = True
 			My.Settings.Save()
 		End If
+	End Sub
+
+	Public Sub ClearChat()
+
+		Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """></body>"
+		ChatText.DocumentText = Chat
+		While ChatText.ReadyState <> WebBrowserReadyState.Complete
+			Application.DoEvents()
+		End While
+		ChatText2.DocumentText = Chat
+		While ChatText2.ReadyState <> WebBrowserReadyState.Complete
+			Application.DoEvents()
+		End While
+		ScrollChatDown()
+
 	End Sub
 
 End Class
