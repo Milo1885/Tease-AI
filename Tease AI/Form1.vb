@@ -5555,9 +5555,9 @@ SkipGotoSearch:
 		If Not Group.Contains("D") And Not DomTask.Contains("@Contact1") And Not DomTask.Contains("@Contact2") And Not DomTask.Contains("@Contact3") Then
 			Dim GroupList As New List(Of String)
 			GroupList.Clear()
-			If Group.Contains("1") Then GroupList.Add("@Contact1 ")
-			If Group.Contains("2") Then GroupList.Add("@Contact2 ")
-			If Group.Contains("3") Then GroupList.Add("@Contact3 ")
+			If Group.Contains("1") Then GroupList.Add(" @Contact1 ")
+			If Group.Contains("2") Then GroupList.Add(" @Contact2 ")
+			If Group.Contains("3") Then GroupList.Add(" @Contact3 ")
 			DomTask = DomTask & GroupList(randomizer.Next(0, GroupList.Count))
 		End If
 
@@ -6623,9 +6623,9 @@ NoResponse:
 		If Not Group.Contains("D") And Not DomChat.Contains("@Contact1") And Not DomChat.Contains("@Contact2") And Not DomChat.Contains("@Contact3") Then
 			Dim GroupList As New List(Of String)
 			GroupList.Clear()
-			If Group.Contains("1") Then GroupList.Add("@Contact1 ")
-			If Group.Contains("2") Then GroupList.Add("@Contact2 ")
-			If Group.Contains("3") Then GroupList.Add("@Contact3 ")
+			If Group.Contains("1") Then GroupList.Add(" @Contact1 ")
+			If Group.Contains("2") Then GroupList.Add(" @Contact2 ")
+			If Group.Contains("3") Then GroupList.Add(" @Contact3 ")
 			DomChat = DomChat & GroupList(randomizer.Next(0, GroupList.Count))
 		End If
 

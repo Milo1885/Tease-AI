@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
+Fixed bug where Glitter Contacts would drop the last word of their sentences when the domme was out of the room
+
 Side Chat now functions independently of other Apps. If Side Chat was active when another app was opened, then Side Chat will return on its own once that app is closed. 
 
 Implemented Daragorn's Timed Writing Tasks feature. Timed Writing Tasks can be activated/deactivated in the Ranges settings tab. 
