@@ -1422,5 +1422,14 @@
     <Setting Name="TasksMax" Type="System.String" Scope="User">
       <Value Profile="(Default)">6</Value>
     </Setting>
+    <Setting Name="WritingProgress" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TimedWriting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="TypeSpeed" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
