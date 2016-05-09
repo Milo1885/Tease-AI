@@ -120,7 +120,7 @@ Public Class Form1
 	Public SubStroking As Boolean
 	Dim SubEdging As Boolean
 	Dim SubHoldingEdge As Boolean
-	Dim EndTease As Boolean 'QUESTION: Is Set to true and never to False.
+	Dim EndTease As Boolean
 
 	Public ShowModule As Boolean
 	Dim ModuleEnd As Boolean
@@ -299,7 +299,7 @@ Public Class Form1
 	Dim TeaseJOI As Boolean
 	Dim TeaseVideo As Boolean
 
-	'TODO: Variable obsolete
+	'TODO: Variable TnAList is obsolete
 	Dim TnAList As New List(Of String)
 	Dim BoobList As New List(Of String)
 	Dim AssList As New List(Of String)
@@ -3576,7 +3576,7 @@ EdgeSkip:
 					If UCase(CheckResponse) = UCase(SysKeyList(i)) Then
 						ResponseFile = foundFile
 						ResponseFile = ResponseFile.Replace("KEY", "")
-						'QUESTION: What does the following line?
+						'QUESTION: (Stefaf) What does the following line?
 						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ResponseFile = ResponseFile.Replace(".txt", "NOT.txt")
 						GoTo FoundResponse
 						Exit For
@@ -3639,7 +3639,7 @@ DebugAwarenessStep2:
 					If UCase(CheckResponse).Contains(UCase(SysKeyList(i))) Then
 						ResponseFile = foundFile
 						ResponseFile = ResponseFile.Replace("KEY", "")
-						'QUESTION: What does the following line?
+						'QUESTION: (Stefaf) What does the following line?
 						If UCase(CheckResponse).Contains("DONT") Or UCase(CheckResponse).Contains("NEVER") Or UCase(CheckResponse).Contains("NOT") Then ResponseFile = ResponseFile.Replace(".txt", "NOT.txt")
 						GoTo FoundResponse
 						Exit For
@@ -6138,7 +6138,7 @@ NullResponse:
 				DomTask = DomTask.Replace(" an utopia", " a utopia")
 
 
-				'SUGGESTION: All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
+				'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
 				' If Sync of Reseults is activated
 				' Wait for the ImageFetcher to Finish 
 				If BWimageFetcher.TriggerRequired _
@@ -7047,7 +7047,7 @@ TryNextWithTease:
 				DomChat = DomChat.Replace(" an uterus", " a uterus")
 				DomChat = DomChat.Replace(" an utopia", " a utopia")
 
-				'SUGGESTION: All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
+				'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
 				' If Sync of Reseults is activated
 				' Wait for the ImageFetcher to Finish 
 				If BWimageFetcher.TriggerRequired _
@@ -7403,7 +7403,7 @@ NullResponseLine2:
 #Region " Images "
 
 	Private Sub browsefolderButton_Click(sender As System.Object, e As System.EventArgs) Handles browsefolderButton.Click
-
+		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
 			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
 			Return
@@ -7552,6 +7552,7 @@ NullResponseLine2:
 	End Sub
 
 	Private Sub imagesNextButton_Click(sender As System.Object, e As System.EventArgs) Handles nextButton.Click
+		'TODO-Next: Implement ShowImage(String, Boolean) + Rework
 		' Begin Next Button
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
@@ -7615,7 +7616,7 @@ TryNext:
 	End Sub
 
 	Private Sub imagesPreviousButton_Click(sender As System.Object, e As System.EventArgs) Handles previousButton.Click
-
+		'TODO-Next: Implement ShowImage(String, Boolean) + Rework
 		' Begin Previous Button
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
@@ -10331,7 +10332,7 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@ShowTaggedImage") Then
-
+			'TODO-Next: @ShowTaggedImage: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
 			'Debug.Print("ShowTaggedImage StringClean ^^^^^^^^^^^^^^^^^^^^^^ = " & StringClean)
 
 			'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
@@ -13235,7 +13236,7 @@ OrgasmDecided:
 		End If
 
 		If StringClean.Contains("@DeleteLocalImage") Then
-
+			'TODO-Next: @DeleteLocalImage Rework and Check if the Command is working after all that changes in imagestuff.
 			Debug.Print("FoundString = " & FoundString)
 
 			Try
@@ -20289,43 +20290,50 @@ Skip_RandomFile:
 		End If
 
 		If FilterString.Contains("@ShowHardcoreImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Hardcore).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowSoftcoreImage") Then
-			If Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Softcore).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowLesbianImage") Then
-			If Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Lesbian).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowBlowjobImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Blowjob).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowFemdomImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Femdom).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowLezdomImage") Then
-			If Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Lezdom).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowHentaiImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Hentai).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowGayImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Gay).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowMaledomImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Maledom).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowCaptionsImage") Then
-			If Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Captions).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowGeneralImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.General).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
-
 
 		If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
-			If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Blog).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
+		If FilterString.Contains("@ShowLikedImage") Then
+			If Not GetImageData(ImageGenre.Liked).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+		End If
+		If FilterString.Contains("@ShowDislikedImage") Then
+			If Not GetImageData(ImageGenre.Disliked).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+		End If
+
+		'TODO: Add ImageDataContainerUsage to filter @ShowLocalImage correct.
 		If FilterString.Contains("@ShowLocalImage") And FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And
 		   FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And
 			  FrmSettings.CBIGay.Checked = False And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then Return False
@@ -20333,10 +20341,10 @@ Skip_RandomFile:
 			If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
 		End If
 		If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
-			If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Butt).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
-			If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			If Not GetImageData(ImageGenre.Boobs).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
 		End If
 		If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
 			If CustomSlideshow = True Or LockImage = True Then Return False
@@ -20410,9 +20418,6 @@ Skip_RandomFile:
 		If FilterString.Contains("@RuinTaunt") Then
 			If EdgeToRuin = False Or EdgeToRuinSecret = True Then Return False
 		End If
-
-		If FilterString.Contains("@ShowLikedImage") And Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then Return False
-		If FilterString.Contains("@ShowDislikedImage") And Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then Return False
 
 		If FilterString.Contains("@VideoHardcore") Then
 			If VideoTease = False Or VideoType <> "Hardcore" Then Return False
@@ -22423,7 +22428,7 @@ PoundLoop:
 
 
 	Private Sub SlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SlideshowTimer.Tick
-
+		'TODO-Next: Implement ShowImage(String, Boolean) + Rework
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
 		If SlideshowLoaded = False Or FrmSettings.timedRadio.Checked = False Or TeaseVideo = True Or LockImage = True Or JustShowedBlogImage = True Or CustomSlideshow = True Then Return
@@ -22644,8 +22649,7 @@ RestartFunction:
 	End Sub
 
 	Private Sub ImageFolderComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ImageFolderComboBox.SelectedIndexChanged
-
-
+		'TODO-Next: Implement ShowImage(Of String, Boolean)() And myDirectory.GetFilesImages(Of String)
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
 			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
@@ -22779,7 +22783,7 @@ RestartFunction:
 
 
 	Private Sub ImageFolderComboBox_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles ImageFolderComboBox.KeyPress
-
+		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
 
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
@@ -23737,7 +23741,7 @@ RestartFunction:
 #Region "-------------------------------------------------- DommeSlideshow ----------------------------------------------------"
 
 	Private Sub PicStripTSMIdommeSlideshowGoToLast_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshowGoToLast.Click
-
+		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
 			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
@@ -23774,7 +23778,7 @@ RestartFunction:
 	End Sub
 
 	Private Sub PicStripTSMIdommeSlideshow_GoToFirst_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshow_GoToFirst.Click
-
+		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
 			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
@@ -23859,7 +23863,7 @@ RestartFunction:
 
 
 	Public Sub LoadDommeImageFolder()
-
+		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String) + Rework
 
 		Dim NewSlideshowAttempts As Integer = 0
 
@@ -28892,7 +28896,7 @@ SkipNew:
 
 
 	Public Sub ShowImage(ByVal ImageToShow As String)
-
+		'TODO-Next: Function ShowImage is decpreciated. Remove all references
 		PBImage = ImageToShow
 		ImageLocation = ImageToShow
 		ImageThread = New Thread(AddressOf DisplayImage) With {.Name = "ImageThread"}
@@ -28905,7 +28909,7 @@ SkipNew:
 	''' Invokes included! This function should be used in a thread.
 	''' </summary>
 	Private Sub DisplayImage()
-
+		'TODO-Next: Function DisplayImage is decpreciated. Remove all references
 		If FormLoading = True Then Return
 		If PBImage = "" Then Return
 
