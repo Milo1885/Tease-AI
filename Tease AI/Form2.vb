@@ -5205,14 +5205,7 @@ trypreviousimage:
 			Debug.Print("Nope")
 		End If
 
-		For i As Integer = 0 To Form1.WebImageLines.Count - 1
-			If i = 0 Then
-				My.Computer.FileSystem.WriteAllText(Form1.WebImagePath, Form1.WebImageLines(i), True)
-			Else
-				My.Computer.FileSystem.WriteAllText(Form1.WebImagePath, Environment.NewLine & Form1.WebImageLines(i), True)
-			End If
-		Next
-
+		My.Computer.FileSystem.WriteAllText(Form1.WebImagePath, String.Join(Environment.NewLine, Form1.WebImageLines), False)
 
 	End Sub
 
@@ -5506,7 +5499,7 @@ trypreviousimage:
 			Next
 
 			If KeywordCount > 0 Then
-				Form1.ImportKeyword = True
+				'Form1.ImportKeyword = True
 				If KeywordCount > 1 Then
 					'  Button3.Text = "Next"
 				Else
