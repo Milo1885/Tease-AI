@@ -1787,7 +1787,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		StopMetronome = True
 
-
+		TauntEdgingAsked = False
+		TauntEdging = False
 
 		CBTBallsFirst = True
 		CBTCockFirst = True
@@ -12456,7 +12457,15 @@ OrgasmDecided:
 				OpenApp()
 				PNLWritingTask.Visible = True
 			End If
-			WritingTaskMistakesAllowed = randomizer.Next(3, 9)
+
+			'WritingTaskMistakesAllowed = randomizer.Next(3, 9)
+
+			'determine error numbers based on numbers of lines to write
+			WritingTaskMistakesAllowed = randomizer.Next(WritingTaskLinesAmount / 10, WritingTaskLinesAmount / 3)
+			'clamps the value between 2 and 10 errors
+			WritingTaskMistakesAllowed = Math.Max(2, WritingTaskMistakesAllowed)
+			WritingTaskMistakesAllowed = Math.Min(WritingTaskMistakesAllowed, 10)
+
 			LBLMistakesAllowed.Text = WritingTaskMistakesAllowed
 			LBLMistakesMade.Text = "0"
 			StringClean = StringClean.Replace("@WritingTask", "")
@@ -12473,7 +12482,7 @@ OrgasmDecided:
 
 				'determines how many secs are given for writing each line, depending on line length and typespeed value selected by the user in the settings
 				'(between 0,54 and 0,75 secs per character in the sentence at slowest typingspeed and between 0.18 and 0.25 at fastest typing speed)
-				secs = (randomizer.Next(18, 25) / My.Settings.TypeSpeed) * LBLWritingTaskText.Text.Length
+				secs = (randomizer.Next(15, 25) / My.Settings.TypeSpeed) * LBLWritingTaskText.Text.Length
 				'determines how much time is given (in seconds) to complete the @WritingTask() depending on how many lines you have to write and a small bonus to give some
 				'more time for very short lines
 				WritingTaskCurrentTime = 5 + secs * WritingTaskLinesAmount
@@ -22736,23 +22745,16 @@ TryNext:
 
 
 	Private Sub EdgeCountTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeCountTimer.Tick
+
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
 		EdgeCountTick += 1
-
-
-
-
-
-
-
-
 
 		If FrmSettings.CBEdgeUseAvg.Checked = True Then
 			If EdgeCountTick > EdgeTickCheck Then LongEdge = True
 		Else
 			If EdgeCountTick > FrmSettings.NBLongEdge.Value * 60 Then LongEdge = True
 		End If
-
-
 
 
 		Dim m As Integer = TimeSpan.FromSeconds(EdgeCountTick).Minutes
@@ -23556,7 +23558,9 @@ TryNext:
 
 
 	Private Sub VideoTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTauntTimer.Tick
+
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		If MiniScript = True Then Return
 
 		If DomTyping = True Then Return
@@ -23590,7 +23594,7 @@ TryNext:
 				DomTask = VTList(randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
-							   VTDir, ex, "VideoTaunTimer.Tick")
+					  VTDir, ex, "VideoTaunTimer.Tick")
 				DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
 			End Try
 
@@ -23629,6 +23633,7 @@ TryNext:
 
 	Public Sub RLGLTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTauntTimer.Tick
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		If MiniScript = True Then Return
 
 		If DomTyping = True Then Return
@@ -23680,6 +23685,7 @@ TryNext:
 
 	Private Sub AvoidTheEdgeTaunts_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeTaunts.Tick
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
 		If DomTyping = True Then Return
 		If DomTypeCheck = True And AvoidTheEdgeTick < 6 Then Return
@@ -24311,6 +24317,7 @@ GetDommeSlideshow:
 
 
 	Private Sub CustomSlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		Try
 			CustomSlideshowTimer.Stop()
 
@@ -24656,6 +24663,7 @@ GetDommeSlideshow:
 	End Sub
 
 	Private Sub UpdateStageTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateStageTimer.Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		UpdateStageTick -= 1
 		If UpdateStageTick < 1 Then
 			UpdateStageTimer.Stop()
@@ -26852,26 +26860,66 @@ SkipNew:
 
 	Private Sub TeaseAIClock_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseAIClock.Tick
 
-		If WritingTaskFlag = False Then
+
+
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
 			LBLTime.Text = Format(Now, "h:mm")
 			LBLAMPM.Text = Format(Now, "tt")
 			LBLDate.Text = Format(Now, "Long Date")
+			Return
+		End If
 
+		If WritingTaskFlag = False Or (WritingTaskFlag = True And My.Settings.TimedWriting = False) Then
+			LBLTime.Text = Format(Now, "h:mm")
+			LBLAMPM.Text = Format(Now, "tt")
+			LBLDate.Text = Format(Now, "Long Date")
 		Else
-
 			If WritingTaskCurrentTime > 0 Then
-				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "You have " & ConvertSeconds(WritingTaskCurrentTime)
-				LBLTime.Text = Convert.ToInt16(WritingTaskCurrentTime)
+				If My.Settings.TimedWriting = True Then
+					LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "You have " & ConvertSeconds(WritingTaskCurrentTime)
+					LBLTime.Text = Convert.ToInt16(WritingTaskCurrentTime)
+				Else
+					LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times"
+				End If
 			Else
-				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
-				LBLTime.Text = "Time's Up"
+				If My.Settings.TimedWriting = True Then
+					LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
+					LBLTime.Text = "Time's Up"
+					'immediately ends the writing task if time is up without waiting for next user input
+					ClearWriteTask()
+					SkipGotoLine = True
+					FileGoto = "Failed Writing Task"
+					GetGoto()
+					ScriptTick = 4
+					ScriptTimer.Start()
+				Else
+					LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times"
+				End If
+
 			End If
 			WritingTaskCurrentTime -= 1
 
-
 			LBLAMPM.Text = ""
-
 		End If
+
+
+
+
+		'If WritingTaskFlag = False Then
+		'LBLTime.Text = Format(Now, "h:mm")
+		'LBLAMPM.Text = Format(Now, "tt")
+		'LBLDate.Text = Format(Now, "Long Date")
+		'Else
+		'If WritingTaskCurrentTime > 0 Then
+		'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "You have " & ConvertSeconds(WritingTaskCurrentTime)
+		'LBLTime.Text = Convert.ToInt16(WritingTaskCurrentTime)
+		'Else
+		'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
+		'LBLTime.Text = "Time's Up"
+		'End If
+		'WritingTaskCurrentTime -= 1
+		'LBLAMPM.Text = ""
+		'End If
 
 
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp") Then
@@ -29050,6 +29098,8 @@ SkipNew:
 
 	Private Sub TimeoutTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TimeoutTimer.Tick
 
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
 		Debug.Print("TimeoutTick = " & TimeoutTick)
 
 		If chatBox.Text <> "" And TimeoutTick < 3 Then Return
@@ -29152,6 +29202,8 @@ SkipNew:
 
 
 	Private Sub VideoTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTimer.Tick
+
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
 		VideoTick -= 1
 

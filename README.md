@@ -127,6 +127,12 @@ Fixes added from Community Members:
 	Stefaf: ContextMenu of MainImageBox did not activate or deactivate the MenuItems correct.
 	
 	Stefaf: Improvement: Remove from URL-File option in ContextMenu MainPicturebox now removes a ImageUrl from all URL-Files.
+	
+	Daragorn: BugFix: "Edging Ends Taunts" state wasn't reinitialized when Tease AI was reset
+	
+	Daragorn: Clean-up of 1885's implementation of Daragorn's original Timed Writing code
+	
+	Daragorn: BugFix: Some aspects of the program didn't pause when Settings Menu was open and "Pause Program When Settings Menu is Visible" wasn't checked
 
 # Changelog - Patch 53
 
