@@ -249,6 +249,8 @@ Public Class Form1
 	Dim ReadBlog As String
 	Dim ReadBlogRate As String
 	Dim SearchImageBlog As Boolean
+
+	'TODO: Check if Variable can be removed.
 	Dim FoundString As String
 	Public WebImage As String
 
@@ -297,14 +299,12 @@ Public Class Form1
 	Dim TeaseJOI As Boolean
 	Dim TeaseVideo As Boolean
 
-	Dim TnAPath As String
+	'TODO: Variable obsolete
 	Dim TnAList As New List(Of String)
 	Dim BoobList As New List(Of String)
 	Dim AssList As New List(Of String)
-	Dim AssImage As Boolean
-	Dim BoobImage As Boolean
-
-
+	Dim AssImage As Boolean = False
+	Dim BoobImage As Boolean = False
 
 	Dim FoundTag As String = "Null"
 	Dim TagGarment As String = "NULL"
@@ -312,8 +312,6 @@ Public Class Form1
 	Dim TagTattoo As String = "NULL"
 	Dim TagSexToy As String = "NULL"
 	Dim TagFurniture As String = "NULL"
-
-	Public ImportKeyword As Boolean
 
 	Dim BookmarkModule As Boolean
 	Dim BookmarkModuleFile As String
@@ -10037,15 +10035,10 @@ StatusUpdateEnd:
 
 					Else
 
-						'MsgBox("""" & PoundArray(i) & ".txt"" was not found in """ & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\. Please verify the file is in the correct folder and that " _
-						'& "the Vocabulary word is spelled correctly in the script.", , "Error!")
-
 						StringClean = StringClean.Replace(PoundArray(i), "<font color=""red"">" & PoundArray(i) & "</font>")
-						'StringClean = StringClean.Replace(PoundArray(i), PoundArray(i).Replace("#", ""))
 
-						Debug.Print("dafuq?")
-						Debug.Print(StringClean)
-						'GoTo BadVocabBreak
+						Dim lazytext As String = "Unable to find the vocabulary file: """ & PoundArray(i) & """"
+						Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
 
 					End If
 
@@ -10081,6 +10074,10 @@ RinseLatherRepeat:
 
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 		'									ImageCommands
+		' Make sure you call all Display ImageFunctions before executing @LockImages.
+		' If you don't, FilterList() will return a wrong list of lines =>
+		' => The Domme is talking about an image, but she never showed one.
+		' => She is talking about an new image, but never showed one.
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
 		' The @UnlockImages Command allows the Domme Slideshow to resume functioning as normal.
@@ -10104,6 +10101,15 @@ RinseLatherRepeat:
 			StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
 		End If
 
+		If StringClean.Contains("@NewDommeSlideshow") Then
+			NewDommeSlideshow = True
+			OriginalDommeSlideshow = _ImageFileNames(0)
+			LoadDommeImageFolder()
+			NewDommeSlideshow = False
+			DomPic = _ImageFileNames(FileCount)
+			StringClean = StringClean.Replace("@NewDommeSlideshow", "")
+		End If
+
 		If StringClean.Contains("@DomTag(") Then
 			Dim TagFlag As String = GetParentheses(StringClean, "@DomTag(")
 			' Try to get a Domme Image for the given Tags.
@@ -10113,6 +10119,12 @@ RinseLatherRepeat:
 			StringClean = StringClean.Replace("@DomTag(" & TagFlag & ")", "")
 		End If
 
+		If StringClean.Contains("@ImageTag(") Then
+			Dim TagFlag As String = GetParentheses(StringClean, "@ImageTag(")
+			GetLocalImage(TagFlag)
+			StringClean = StringClean.Replace("@ImageTag(" & TagFlag & ")", "")
+		End If
+
 		If StringClean.Contains("@ShowImage") And Not StringClean.Contains("@ShowImage[") Then
 			FoundString = GetRandomImage()
 			ShowImage(FoundString, True)
@@ -10120,7 +10132,6 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
-			GetTnAList()
 			FoundString = GetImageData(ImageGenre.Butt).Random()
 			ShowImage(FoundString, True)
 
@@ -10129,7 +10140,6 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@ShowBoobsImage") Or StringClean.Contains("@ShowBoobImage") Then
-			GetTnAList()
 			FoundString = GetImageData(ImageGenre.Boobs).Random()
 			ShowImage(FoundString, True)
 
@@ -10224,69 +10234,92 @@ RinseLatherRepeat:
 		' The @NewBlogImage Command is a defunct Command that has been replaced by @ShowBlogImage
 
 		If StringClean.Contains("@NewBlogImage") Then
-			FoundString = GetImageData(ImageGenre.Liked).Random()
-			ShowImage(FoundString, Not TaskClean)
+			FoundString = GetImageData(ImageGenre.Blog).Random()
+			ShowImage(FoundString, True)
 			StringClean = StringClean.Replace("@NewBlogImage", "")
 		End If
 
 		If StringClean.Contains("@ShowLocalImage(") Then
-
 			Dim LocalFlag As String = GetParentheses(StringClean, "@ShowLocalImage(")
 			LocalFlag = FixCommas(LocalFlag)
 
-			Dim LocalArray As New List(Of String)
+			Dim tmpListGenre As List(Of String) = LocalFlag.Split(",").ToList
 
-			LocalArray = LocalFlag.Split(",").ToList
-
-			If Not LocalFlag.ToUpper.Contains("NOT") Then
-
-				LocalFlag = LocalArray(randomizer.Next(0, LocalArray.Count))
-
-			Else
-
+			If LocalFlag.ToUpper.Contains("NOT") Then
+				' =============== Invert the Content in Brackets ===============
+				' Declare a String containing all available ImageGenres
 				Dim CompareFlag As String = "Hardcore, Softcore, Lesbian, Blowjob, Femdom, Lezdom, Hentai, Gay, Maledom, Captions, General, Butts, Boobs"
 
-				For i As Integer = LocalArray.Count - 1 To 0 Step -1
-					'If LocalArray(i).ToUpper.Contains("NOT") Then
-					'LocalArray.RemoveAt(i)
-					'End If
-					If LocalArray(i).ToUpper.Contains("HARDCORE") Or Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Then CompareFlag = CompareFlag.Replace("Hardcore, ", "")
-					If LocalArray(i).ToUpper.Contains("SOFTCORE") Or Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Then CompareFlag = CompareFlag.Replace("Softcore, ", "")
-					If LocalArray(i).ToUpper.Contains("LESBIAN") Or Not Directory.Exists(FrmSettings.LBLILesbian.Text) Then CompareFlag = CompareFlag.Replace("Lesbian, ", "")
-					If LocalArray(i).ToUpper.Contains("BLOWJOB") Or Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Then CompareFlag = CompareFlag.Replace("Blowjob, ", "")
-					If LocalArray(i).ToUpper.Contains("FEMDOM") Or Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Then CompareFlag = CompareFlag.Replace("Femdom, ", "")
-					If LocalArray(i).ToUpper.Contains("LEZDOM") Or Not Directory.Exists(FrmSettings.LBLILezdom.Text) Then CompareFlag = CompareFlag.Replace("Lezdom, ", "")
-					If LocalArray(i).ToUpper.Contains("HENTAI") Or Not Directory.Exists(FrmSettings.LBLIHentai.Text) Then CompareFlag = CompareFlag.Replace("Hentai, ", "")
-					If LocalArray(i).ToUpper.Contains("GAY") Or Not Directory.Exists(FrmSettings.LBLIGay.Text) Then CompareFlag = CompareFlag.Replace("Gay, ", "")
-					If LocalArray(i).ToUpper.Contains("MALEDOM") Or Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Then CompareFlag = CompareFlag.Replace("Maledom, ", "")
-					If LocalArray(i).ToUpper.Contains("CAPTIONS") Or Not Directory.Exists(FrmSettings.LBLICaptions.Text) Then CompareFlag = CompareFlag.Replace("Captions, ", "")
-					If LocalArray(i).ToUpper.Contains("GENERAL") Or Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Then CompareFlag = CompareFlag.Replace("General", "")
-					If LocalArray(i).ToUpper.Contains("BUTT") Or Not Directory.Exists(FrmSettings.LBLButtPath.Text) Then CompareFlag = CompareFlag.Replace("Butts", "")
-					If LocalArray(i).ToUpper.Contains("BOOB") Or Not Directory.Exists(FrmSettings.LBLBoobPath.Text) Then CompareFlag = CompareFlag.Replace("Boobs", "")
-
+				' Remove Imagegenre, when there are no local Images available or it is in the inverting bracket
+				For i As Integer = tmpListGenre.Count - 1 To 0 Step -1
+					If tmpListGenre(i).ToUpper.Contains("HARDCORE") Or Not GetImageData(ImageGenre.Hardcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hardcore, ", "")
+					If tmpListGenre(i).ToUpper.Contains("SOFTCORE") Or Not GetImageData(ImageGenre.Softcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Softcore, ", "")
+					If tmpListGenre(i).ToUpper.Contains("LESBIAN") Or Not GetImageData(ImageGenre.Lesbian).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lesbian, ", "")
+					If tmpListGenre(i).ToUpper.Contains("BLOWJOB") Or Not GetImageData(ImageGenre.Blowjob).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Blowjob, ", "")
+					If tmpListGenre(i).ToUpper.Contains("FEMDOM") Or Not GetImageData(ImageGenre.Femdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Femdom, ", "")
+					If tmpListGenre(i).ToUpper.Contains("LEZDOM") Or Not GetImageData(ImageGenre.Lezdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lezdom, ", "")
+					If tmpListGenre(i).ToUpper.Contains("HENTAI") Or Not GetImageData(ImageGenre.Hentai).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hentai, ", "")
+					If tmpListGenre(i).ToUpper.Contains("GAY") Or Not GetImageData(ImageGenre.Gay).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Gay, ", "")
+					If tmpListGenre(i).ToUpper.Contains("MALEDOM") Or Not GetImageData(ImageGenre.Maledom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Maledom, ", "")
+					If tmpListGenre(i).ToUpper.Contains("CAPTIONS") Or Not GetImageData(ImageGenre.Captions).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Captions, ", "")
+					If tmpListGenre(i).ToUpper.Contains("GENERAL") Or Not GetImageData(ImageGenre.General).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("General, ", "")
+					If tmpListGenre(i).ToUpper.Contains("BUTT") Or Not GetImageData(ImageGenre.Butt).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Butts, ", "")
+					If tmpListGenre(i).ToUpper.Contains("BUTTS") Then CompareFlag = CompareFlag.Replace("Butts, ", "")
+					If tmpListGenre(i).ToUpper.Contains("BOOB") Or Not GetImageData(ImageGenre.Boobs).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Boobs", "")
+					If tmpListGenre(i).ToUpper.Contains("BOOBS") Then CompareFlag = CompareFlag.Replace("Boobs", "")
 				Next
 
-
-				Dim CompareArray As String() = CompareFlag.Split(",")
-				LocalFlag = CompareArray(randomizer.Next(0, CompareArray.Count))
-
+				' Set the inverted Array.
+				tmpListGenre = CompareFlag.Split(", ").ToList
 			End If
 
-			Debug.Print("LocalFLag = " & LocalFlag.ToUpper)
+			' Pick a random entry from list
+			Debug.Print("@ShowLocalImage() LocalFLag original = " & LocalFlag)
+			Debug.Print("@ShowLocalImage() LocalFLag modified = " & String.Join(", ", tmpListGenre))
 
-			If LocalFlag.ToUpper.Contains("HARDCORE") Then CheckLocalImage(FrmSettings.LBLIHardcore.Text, FrmSettings.CBIHardcoreSD.Checked)
-			If LocalFlag.ToUpper.Contains("SOFTCORE") Then CheckLocalImage(FrmSettings.LBLISoftcore.Text, FrmSettings.CBISoftcoreSD.Checked)
-			If LocalFlag.ToUpper.Contains("LESBIAN") Then CheckLocalImage(FrmSettings.LBLILesbian.Text, FrmSettings.CBILesbianSD.Checked)
-			If LocalFlag.ToUpper.Contains("BLOWJOB") Then CheckLocalImage(FrmSettings.LBLIBlowjob.Text, FrmSettings.CBIBlowjobSD.Checked)
-			If LocalFlag.ToUpper.Contains("FEMDOM") Then CheckLocalImage(FrmSettings.LBLIFemdom.Text, FrmSettings.CBIFemdomSD.Checked)
-			If LocalFlag.ToUpper.Contains("LEZDOM") Then CheckLocalImage(FrmSettings.LBLILezdom.Text, FrmSettings.CBILezdomSD.Checked)
-			If LocalFlag.ToUpper.Contains("HENTAI") Then CheckLocalImage(FrmSettings.LBLIHentai.Text, FrmSettings.CBIHentaiSD.Checked)
-			If LocalFlag.ToUpper.Contains("GAY") Then CheckLocalImage(FrmSettings.LBLIGay.Text, FrmSettings.CBIGaySD.Checked)
-			If LocalFlag.ToUpper.Contains("MALEDOM") Then CheckLocalImage(FrmSettings.LBLIMaledom.Text, FrmSettings.CBIMaledomSD.Checked)
-			If LocalFlag.ToUpper.Contains("CAPTION") Then CheckLocalImage(FrmSettings.LBLICaptions.Text, FrmSettings.CBICaptionsSD.Checked)
-			If LocalFlag.ToUpper.Contains("GENERAL") Then CheckLocalImage(FrmSettings.LBLIGeneral.Text, FrmSettings.CBIGeneralSD.Checked)
-			If LocalFlag.ToUpper.Contains("BUTT") Then CheckLocalImage(FrmSettings.LBLButtPath.Text, FrmSettings.CBButtSubDir.Checked)
-			If LocalFlag.ToUpper.Contains("BOOB") Then CheckLocalImage(FrmSettings.LBLBoobPath.Text, FrmSettings.CBBoobSubDir.Checked)
+			' generate a list of all available Local Images. This way it is most 
+			' likely, to get an image.
+			Dim tmpImageLocationList As New List(Of String)
+
+			For Each tmpStr As String In tmpListGenre
+				If tmpStr.ToUpper.Contains("HARDCORE") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hardcore).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("SOFTCORE") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Softcore).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("LESBIAN") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lesbian).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("BLOWJOB") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Blowjob).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("FEMDOM") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Femdom).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("LEZDOM") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lezdom).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("HENTAI") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hentai).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("GAY") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Gay).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("MALEDOM") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Maledom).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("CAPTION") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Captions).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("GENERAL") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.General).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("BUTT") Or tmpStr.ToUpper.Contains("BUTTS") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Butt).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("BOOB") Or tmpStr.ToUpper.Contains("BOOBS") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Boobs).ToList(ImageSourceType.Local))
+				End If
+			Next
+			' Declare a string for the Image to show - initialize with error Image
+			Dim tmpImgToShow As String = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+			' If there are images, overwrite the error image.
+			If tmpImageLocationList.Count > 0 Then
+				tmpImgToShow = tmpImageLocationList(New Random().Next(0, tmpImageLocationList.Count))
+			Else
+				Log.Write("No images found For Command: @ShowLocalImage(" & LocalFlag & ")")
+			End If
+
+			ShowImage(tmpImgToShow, False)
 
 			StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
 		End If
@@ -10341,19 +10374,6 @@ RinseLatherRepeat:
 				'Debug.Print(i & ". " & LocalTagImageList(i))
 			Next
 
-			' github patch begin
-
-			'Dim TagSplit As String() = Split(LocalTagImageList(randomizer.Next(0, LocalTagImageList.Count)))
-			'FoundString = TagSplit(0) & " "
-
-			'If Not LCase(FoundString).Contains(".jpg ") Or Not LCase(FoundString).Contains(".jpeg ") Or Not LCase(FoundString).Contains(".png ") Or Not LCase(FoundString).Contains(".bmp ") Or Not LCase(FoundString).Contains(".gif ") Then
-			'Dim FSLoop As Integer = 1
-			'Do Until LCase(FoundString).Contains(".jpg ") Or LCase(FoundString).Contains(".jpeg ") Or LCase(FoundString).Contains(".png ") Or LCase(FoundString).Contains(".bmp ") Or LCase(FoundString).Contains(".gif ")
-			'FoundString = FoundString & TagSplit(FSLoop) & " "
-			'FSLoop += 1
-			'Loop
-			'githib patch end
-
 
 			If LocalTagImageList.Count = 0 Then
 				FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
@@ -10372,17 +10392,11 @@ RinseLatherRepeat:
 
 			JustShowedBlogImage = True
 
-			'ClearMainPictureBox()
-
 			ShowImage(FoundString)
 
 			DeleteLocalImageFilePath = FoundString
 
-
-
-
 			StringClean = StringClean.Replace("@ShowTaggedImage", "")
-
 		End If
 
 		If StringClean.Contains("@ShowImage[") Then
@@ -10430,9 +10444,6 @@ RinseLatherRepeat:
 			End If
 
 
-
-			'ClearMainPictureBox()
-
 			If ImageToShow.Contains("*") Then
 
 				Dim ImageList As New List(Of String)
@@ -10467,6 +10478,209 @@ ShowedBlogImage:
 			StringClean = StringClean.Replace("@ShowImage[" & ImageToShow & "]", "")
 
 		End If
+		'===============================================================================
+		'								Legacy TnA-Slideshow
+		'===============================================================================
+		' @TnAFastSlides starts a fast slideshow with Boobs and Butts. Use with local images, to avoid the download delay. otherwise the images will stutter.
+		' @TnASlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per second.
+		' @TnASlowSlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per 5 seconds.
+
+		If StringClean.Contains("@TnAFastSlides") Or StringClean.Contains("@TnASlowSlides") Or StringClean.Contains("@TnASlides") Then
+			If StringClean.Contains("@TnAFastSlides") Then TnASlides.Interval = 334
+			If StringClean.Contains("@TnASlides") Then TnASlides.Interval = 1000
+			If StringClean.Contains("@TnASlowSlides") Then TnASlides.Interval = 5000
+
+			Try
+				BoobList.Clear()
+				AssList.Clear()
+
+				If BoobList.Count < 1 Then BoobList = GetImageData(ImageGenre.Boobs).ToList
+				If AssList.Count < 1 Then AssList = GetImageData(ImageGenre.Butt).ToList
+
+				If BoobList.Count < 1 Then Throw New Exception("No Boobs-images found.")
+				If AssList.Count < 1 Then Throw New Exception("No Butt-images found.")
+
+				TnASlides.Start()
+			Catch ex As Exception
+				Log.WriteError("Unable to start TnA Slideshow: " & vbCrLf &
+							   ex.Message, ex, "CommandClean()")
+			End Try
+
+			StringClean = StringClean.Replace("@TnAFastSlides", "")
+			StringClean = StringClean.Replace("@TnASlowSlides", "")
+			StringClean = StringClean.Replace("@TnASlides", "")
+		End If
+
+		If StringClean.Contains("@CheckTnA") Then
+			TnASlides.Stop()
+
+			'Debug.Print("@CheckTnA called ::: AssImage = " & AssImage & " ::: BoobImage = " & BoobImage)
+			If AssImage = True Then FileGoto = "(Butt)"
+			If BoobImage = True Then FileGoto = "(Boobs)"
+			SkipGotoLine = True
+			GetGoto()
+			StringClean = StringClean.Replace("@CheckTnA", "")
+		End If
+
+		If StringClean.Contains("@StopTnA") Then
+			TnASlides.Stop()
+			BoobList.Clear()
+			BoobImage = False
+			AssList.Clear()
+			AssImage = False
+			StringClean = StringClean.Replace("@StopTnA", "")
+		End If
+		'----------------------------------------
+		' TnA-Slideshow - End
+		'----------------------------------------
+		'===============================================================================
+		'								Slideshow
+		'===============================================================================
+		If StringClean.Contains("@Slideshow(") Then
+
+			Dim SlideFlag As String = StringClean
+
+			Dim SlideStart As Integer
+
+			SlideStart = SlideFlag.IndexOf("@Slideshow(") + 11
+			SlideFlag = SlideFlag.Substring(SlideStart, SlideFlag.Length - SlideStart)
+			SlideFlag = SlideFlag.Split(")")(0)
+			SlideFlag = SlideFlag.Replace("@Slideshow(", "")
+
+			CustomSlideshowList.Clear()
+
+			If SlideFlag.ToLower.Contains("hardcore") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Hardcore).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("softcore") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Softcore).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("lesbian") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Lesbian).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("blowjob") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Blowjob).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("femdom") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Femdom).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("lezdom") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Lezdom).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("hentai") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Hentai).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("gay") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Gay).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("maledom") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Maledom).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("captions") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Captions).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("general") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.General).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("boob") Or LCase(SlideFlag).Contains("boobs") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Boobs).ToList())
+			End If
+
+			If SlideFlag.ToLower.Contains("butt") Or LCase(SlideFlag).Contains("butts") Then
+				CustomSlideshowList.AddRange(GetImageData(ImageGenre.Butt).ToList())
+			End If
+
+
+			CustomSlideshowTimer.Interval = 1000
+			If LCase(SlideFlag).Contains("slow") Then CustomSlideshowTimer.Interval = 5000
+			If LCase(SlideFlag).Contains("fast") Then CustomSlideshowTimer.Interval = 500
+
+
+			StringClean = StringClean.Replace("@Slideshow(" & SlideFlag & ")", "")
+		End If
+
+		If StringClean.Contains("@SlideshowOn") Then
+			If CustomSlideshowList.Count > 0 Then
+				CustomSlideshow = True
+				CustomSlideshowTimer.Start()
+			End If
+			StringClean = StringClean.Replace("@SlideshowOn", "")
+		End If
+
+		If StringClean.Contains("@SlideshowOff") Then
+			CustomSlideshow = False
+			CustomSlideshowTimer.Stop()
+			StringClean = StringClean.Replace("@SlideshowOff", "")
+		End If
+
+		If StringClean.Contains("@SlideshowFirst") Then
+			SlideshowInt = 0
+			CustomSlideshow = True
+			ShowImage(CustomSlideshowList(SlideshowInt), False)
+			StringClean = StringClean.Replace("@SlideshowFirst", "")
+		End If
+
+		If StringClean.Contains("@SlideshowLast") Then
+			SlideshowInt = CustomSlideshowList.Count - 1
+			CustomSlideshow = True
+			ShowImage(CustomSlideshowList(SlideshowInt), False)
+			StringClean = StringClean.Replace("@SlideshowLast", "")
+		End If
+
+		If StringClean.Contains("@SlideshowNext") Then
+			SlideshowInt += 1
+			If SlideshowInt > CustomSlideshowList.Count - 1 Then SlideshowInt = CustomSlideshowList.Count - 1
+			CustomSlideshow = True
+			ShowImage(CustomSlideshowList(SlideshowInt), False)
+			StringClean = StringClean.Replace("@SlideshowNext", "")
+		End If
+
+		If StringClean.Contains("@SlideshowPrevious") Then
+			SlideshowInt -= 1
+			If SlideshowInt < 0 Then SlideshowInt = 0
+			CustomSlideshow = True
+			ShowImage(CustomSlideshowList(SlideshowInt), False)
+			StringClean = StringClean.Replace("@SlideshowPrevious", "")
+		End If
+
+		If StringClean.Contains("@GotoSlideshow") Then
+			If ImageString.Contains(FrmSettings.LBLIHardcore.Text) Then FileGoto = "Hardcore"
+			If ImageString.Contains(FrmSettings.LBLISoftcore.Text) Then FileGoto = "Softcore"
+			If ImageString.Contains(FrmSettings.LBLILesbian.Text) Then FileGoto = "Lesbian"
+			If ImageString.Contains(FrmSettings.LBLIBlowjob.Text) Then FileGoto = "Blowjob"
+			If ImageString.Contains(FrmSettings.LBLIFemdom.Text) Then FileGoto = "Femdom"
+			If ImageString.Contains(FrmSettings.LBLILezdom.Text) Then FileGoto = "Lezdom"
+			If ImageString.Contains(FrmSettings.LBLIHentai.Text) Then FileGoto = "Hentai"
+			If ImageString.Contains(FrmSettings.LBLIGay.Text) Then FileGoto = "Gay"
+			If ImageString.Contains(FrmSettings.LBLIMaledom.Text) Then FileGoto = "Maledom"
+			If ImageString.Contains(FrmSettings.LBLICaptions.Text) Then FileGoto = "Captions"
+			If ImageString.Contains(FrmSettings.LBLIGeneral.Text) Then FileGoto = "General"
+			If ImageString.Contains(FrmSettings.LBLBoobPath.Text) Then FileGoto = "Boobs"
+			If ImageString.Contains(FrmSettings.LBLButtPath.Text) Then FileGoto = "Butts"
+
+			Debug.Print("GotoSlideshow called, FileGoto = " & FileGoto)
+
+			SkipGotoLine = True
+			GetGoto()
+
+			StringClean = StringClean.Replace("@GotoSlideshow", "")
+		End If
+		'----------------------------------------
+		' Slideshow - End
+		'----------------------------------------
+		' This Command will not work in the same line, because the Images are loaded async and not available yet.
+		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", CurrentImage)
 
 		' The @LockImages Commnd prevents the Domme Slideshow from moving forward or back when set to "Tease" or "Timed". Manual operation of Domme Slideshow images is still allowed,
 		' and pictures displayed through other means will still work. Images are automatically unlocked whenever Tease AI moves into a Link script, an End script, any Interrupt occurs
@@ -13655,247 +13869,6 @@ ExternalAudio:
 			StringClean = StringClean.Replace("@PlaylistOff", "")
 		End If
 
-		If StringClean.Contains("@Slideshow(") Then
-
-			Dim SlideFlag As String = StringClean
-
-			Dim SlideStart As Integer
-
-			SlideStart = SlideFlag.IndexOf("@Slideshow(") + 11
-			SlideFlag = SlideFlag.Substring(SlideStart, SlideFlag.Length - SlideStart)
-			SlideFlag = SlideFlag.Split(")")(0)
-			SlideFlag = SlideFlag.Replace("@Slideshow(", "")
-
-			CustomSlideshowList.Clear()
-
-
-			If LCase(SlideFlag).Contains("hardcore") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Hardcore).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("softcore") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Softcore).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("lesbian") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Lesbian).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("blowjob") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Blowjob).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("femdom") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Femdom).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("lezdom") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Lezdom).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("hentai") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Hentai).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("gay") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Gay).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("maledom") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Maledom).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("captions") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Captions).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("general") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.General).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("boob") Or LCase(SlideFlag).Contains("boobs") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Boobs).ToList())
-				Catch
-				End Try
-			End If
-
-			If LCase(SlideFlag).Contains("butt") Or LCase(SlideFlag).Contains("butts") Then
-				Try
-					CustomSlideshowList.AddRange(GetImageData(ImageGenre.Butt).ToList())
-				Catch
-				End Try
-			End If
-
-
-			CustomSlideshowTimer.Interval = 1000
-			If LCase(SlideFlag).Contains("slow") Then CustomSlideshowTimer.Interval = 5000
-			If LCase(SlideFlag).Contains("fast") Then CustomSlideshowTimer.Interval = 500
-
-
-			StringClean = StringClean.Replace("@Slideshow(" & SlideFlag & ")", "")
-
-
-		End If
-
-		If StringClean.Contains("@SlideshowOn") Then
-			If CustomSlideshowList.Count > 0 Then
-				CustomSlideshow = True
-				CustomSlideshowTimer.Start()
-			End If
-			StringClean = StringClean.Replace("@SlideshowOn", "")
-		End If
-
-		If StringClean.Contains("@SlideshowOff") Then
-			CustomSlideshow = False
-			CustomSlideshowTimer.Stop()
-			StringClean = StringClean.Replace("@SlideshowOff", "")
-		End If
-
-		If StringClean.Contains("@SlideshowFirst") Then
-			SlideshowInt = 0
-			CustomSlideshow = True
-			If Not mainPictureBox Is Nothing Then
-				ClearMainPictureBox()
-				Do
-					Application.DoEvents()
-				Loop Until mainPictureBox.Image Is Nothing
-			End If
-			mainPictureBox.BackgroundImage = Nothing
-			mainPictureBox.Refresh()
-			ShowImage(CustomSlideshowList(SlideshowInt))
-			'ImageLocation = CustomSlideshowList(SlideshowInt)
-			'PBImage =
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile())
-			'mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
-			DeleteLocalImageFilePath = CustomSlideshowList(SlideshowInt)
-			StringClean = StringClean.Replace("@SlideshowFirst", "")
-		End If
-
-		If StringClean.Contains("@SlideshowLast") Then
-			SlideshowInt = CustomSlideshowList.Count - 1
-			CustomSlideshow = True
-			If Not mainPictureBox Is Nothing Then
-				ClearMainPictureBox()
-				Do
-					Application.DoEvents()
-				Loop Until mainPictureBox.Image Is Nothing
-			End If
-			mainPictureBox.BackgroundImage = Nothing
-			mainPictureBox.Refresh()
-			ShowImage(CustomSlideshowList(SlideshowInt))
-			'ImageLocation = CustomSlideshowList(SlideshowInt)
-			'PBImage = CustomSlideshowList(SlideshowInt)
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile())
-			'mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
-			DeleteLocalImageFilePath = CustomSlideshowList(SlideshowInt)
-			StringClean = StringClean.Replace("@SlideshowLast", "")
-		End If
-
-		If StringClean.Contains("@SlideshowNext") Then
-			SlideshowInt += 1
-			If SlideshowInt > CustomSlideshowList.Count - 1 Then SlideshowInt = CustomSlideshowList.Count - 1
-			CustomSlideshow = True
-			If Not mainPictureBox Is Nothing Then
-				ClearMainPictureBox()
-				Do
-					Application.DoEvents()
-				Loop Until mainPictureBox.Image Is Nothing
-			End If
-			mainPictureBox.BackgroundImage = Nothing
-			mainPictureBox.Refresh()
-			ShowImage(CustomSlideshowList(SlideshowInt))
-			'ImageLocation = CustomSlideshowList(SlideshowInt)
-			'PBImage = CustomSlideshowList(SlideshowInt)
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile())
-			'mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
-			DeleteLocalImageFilePath = CustomSlideshowList(SlideshowInt)
-			StringClean = StringClean.Replace("@SlideshowNext", "")
-		End If
-
-		If StringClean.Contains("@SlideshowPrevious") Then
-			SlideshowInt -= 1
-			If SlideshowInt < 0 Then SlideshowInt = 0
-			CustomSlideshow = True
-			If Not mainPictureBox Is Nothing Then
-				ClearMainPictureBox()
-				Do
-					Application.DoEvents()
-				Loop Until mainPictureBox.Image Is Nothing
-			End If
-			mainPictureBox.BackgroundImage = Nothing
-			mainPictureBox.Refresh()
-			ShowImage(CustomSlideshowList(SlideshowInt))
-			'ImageLocation = CustomSlideshowList(SlideshowInt)
-			'PBImage = CustomSlideshowList(SlideshowInt)
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile())
-			'mainPictureBox.Image = Image.FromFile(CustomSlideshowList(SlideshowInt))
-			DeleteLocalImageFilePath = CustomSlideshowList(SlideshowInt)
-			StringClean = StringClean.Replace("@SlideshowPrevious", "")
-		End If
-
-
-		If StringClean.Contains("@GotoSlideshow") Then
-			If ImageString.Contains(FrmSettings.LBLIHardcore.Text) Then FileGoto = "Hardcore"
-			If ImageString.Contains(FrmSettings.LBLISoftcore.Text) Then FileGoto = "Softcore"
-			If ImageString.Contains(FrmSettings.LBLILesbian.Text) Then FileGoto = "Lesbian"
-			If ImageString.Contains(FrmSettings.LBLIBlowjob.Text) Then FileGoto = "Blowjob"
-			If ImageString.Contains(FrmSettings.LBLIFemdom.Text) Then FileGoto = "Femdom"
-			If ImageString.Contains(FrmSettings.LBLILezdom.Text) Then FileGoto = "Lezdom"
-			If ImageString.Contains(FrmSettings.LBLIHentai.Text) Then FileGoto = "Hentai"
-			If ImageString.Contains(FrmSettings.LBLIGay.Text) Then FileGoto = "Gay"
-			If ImageString.Contains(FrmSettings.LBLIMaledom.Text) Then FileGoto = "Maledom"
-			If ImageString.Contains(FrmSettings.LBLICaptions.Text) Then FileGoto = "Captions"
-			If ImageString.Contains(FrmSettings.LBLIGeneral.Text) Then FileGoto = "General"
-			If ImageString.Contains(FrmSettings.LBLBoobPath.Text) Then FileGoto = "Boobs"
-			If ImageString.Contains(FrmSettings.LBLButtPath.Text) Then FileGoto = "Butts"
-
-			Debug.Print("GotoSlideshow called, FileGoto = " & FileGoto)
-
-			SkipGotoLine = True
-			GetGoto()
-
-
-			StringClean = StringClean.Replace("@GotoSlideshow", "")
-		End If
-
 		If StringClean.Contains("@RapidTextOn") Or StringClean.Contains("@RTOn") Then
 			RapidFire = True
 			StringClean = StringClean.Replace("@RapidTextOn", "")
@@ -14324,13 +14297,6 @@ VTSkip:
 			StringClean = StringClean.Replace("@TyposOn", "")
 		End If
 
-
-		If StringClean.Contains("@ImageTag(") Then
-			Dim TagFlag As String = GetParentheses(StringClean, "@ImageTag(")
-			GetLocalImage(TagFlag)
-			StringClean = StringClean.Replace("@ImageTag(" & TagFlag & ")", "")
-		End If
-
 		If StringClean.Contains("@GoodMood(") Then
 
 			Dim MoodFlag As String = GetParentheses(StringClean, "@GoodMood(")
@@ -14390,15 +14356,6 @@ VTSkip:
 		If StringClean.Contains("@MoodWorst") Then
 			DommeMood = 1
 			StringClean = StringClean.Replace("@MoodWorst", "")
-		End If
-
-		If StringClean.Contains("@NewDommeSlideshow") Then
-			NewDommeSlideshow = True
-			OriginalDommeSlideshow = _ImageFileNames(0)
-			LoadDommeImageFolder()
-			NewDommeSlideshow = False
-			DomPic = _ImageFileNames(FileCount)
-			StringClean = StringClean.Replace("@NewDommeSlideshow", "")
 		End If
 
 		If StringClean.Contains("@Timeout(") Then
@@ -14768,9 +14725,6 @@ VTSkip:
 			StringClean = StringClean.Replace("@ClearChat", "")
 		End If
 
-
-		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", CurrentImage)
-
 		If StringClean.Contains("@Debug") Then
 
 			'Dim wy As Long = DateDiff(DateInterval.Day, Val(GetVariable("TB_AFKSlideshow")), Date.Now)
@@ -14876,47 +14830,6 @@ VTSkip:
 
 
 
-		' @TnAFastSlides is a defunct Command that has been replaced by the options available with the @Slideshow function
-
-		If StringClean.Contains("@TnAFastSlides") Or StringClean.Contains("@TnASlowSlides") Or StringClean.Contains("@TnASlides") Then
-
-			' FrmSettings.offRadio.Checked = True
-			TnAList.Clear()
-
-			If StringClean.Contains("@TnAFastSlides") Then TnASlides.Interval = 334
-			If StringClean.Contains("@TnASlides") Then TnASlides.Interval = 1000
-			If StringClean.Contains("@TnASlowSlides") Then TnASlides.Interval = 5000
-
-
-			'Debug.Print("TNAFASTSLIDES CALLED")
-
-			GetTnAList()
-
-			'Debug.Print("TNALIST.COUNT = " & TnAList.Count)
-
-			'Debug.Print("CALLING TNAFASTLIDES.START")
-			TnASlides.Start()
-			StringClean = StringClean.Replace("@TnAFastSlides", "")
-			StringClean = StringClean.Replace("@TnASlowSlides", "")
-			StringClean = StringClean.Replace("@TnASlides", "")
-		End If
-
-		If StringClean.Contains("@CheckTnA") Then
-			TnASlides.Stop()
-
-			'Debug.Print("@CheckTnA called ::: AssImage = " & AssImage & " ::: BoobImage = " & BoobImage)
-			If AssImage = True Then FileGoto = "(Butt)"
-			If BoobImage = True Then FileGoto = "(Boobs)"
-			SkipGotoLine = True
-			GetGoto()
-			StringClean = StringClean.Replace("@CheckTnA", "")
-		End If
-
-		If StringClean.Contains("@StopTnA") Then
-			TnASlides.Stop()
-			StringClean = StringClean.Replace("@StopTnA", "")
-		End If
-
 
 		If StringClean.Contains("@CheckStrokingState") Then
 			'If SubStroking = True Then
@@ -14965,6 +14878,7 @@ VTSkip:
 
 	End Function
 
+#Region "-------------------------------------------- Webtoy --------------------------------------------"
 
 	Public Sub ActivateWebToy()
 
@@ -14987,6 +14901,12 @@ VTSkip:
 		End If
 
 	End Sub
+
+#End Region ' WebToy
+
+#Region "-------------------------------- Script: Flags/Dates/Variables ---------------------------------"
+
+#Region "---------------------------------------- Script-Flags ------------------------------------------"
 
 	Public Function CreateFlag(ByVal FlagDir As String, Optional ByVal Temp As Boolean = False)
 
@@ -15027,6 +14947,10 @@ VTSkip:
 		Return CheckFlag
 
 	End Function
+
+#End Region ' Script-Flags
+
+#Region "------------------------------------- Script-Variables -----------------------------------------"
 
 	Public Function SetVariable(ByVal VarName As String, ByVal VarValue As String)
 
@@ -15084,37 +15008,6 @@ VTSkip:
 		My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
 
 	End Function
-
-	Public Function GetDate(ByVal VarName As String) As Date
-
-		Dim VarGet As String
-		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
-		Else
-			VarGet = FormatDateTime(Now, DateFormat.GeneralDate)
-		End If
-
-		Return VarGet
-
-
-	End Function
-
-	Public Function GetTime(ByVal VarName As String) As Date
-
-		Dim VarGet As String
-		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
-		Else
-			VarGet = FormatDateTime(Now, DateFormat.LongTime)
-		End If
-
-		Return VarGet
-
-
-	End Function
-
 
 	Public Function GetVariable(ByVal VarName As String) As String
 
@@ -15320,6 +15213,40 @@ VTSkip:
 
 	End Function
 
+#End Region ' Script-Variables
+
+#Region "---------------------------------------- Script-Dates ------------------------------------------"
+
+	Public Function GetDate(ByVal VarName As String) As Date
+
+		Dim VarGet As String
+		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
+		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
+			VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
+		Else
+			VarGet = FormatDateTime(Now, DateFormat.GeneralDate)
+		End If
+
+		Return VarGet
+
+
+	End Function
+
+	Public Function GetTime(ByVal VarName As String) As Date
+
+		Dim VarGet As String
+		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
+		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
+			VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
+		Else
+			VarGet = FormatDateTime(Now, DateFormat.LongTime)
+		End If
+
+		Return VarGet
+
+
+	End Function
+
 	Public Function CheckDateList(ByVal DateString As String) As Boolean
 
 		Dim DateCheck As Boolean = False
@@ -15391,6 +15318,12 @@ VTSkip:
 		Return DateCheck
 
 	End Function
+
+#End Region ' Script-Dates
+
+#End Region ' Flags/Dates/Variables
+
+
 
 	Public Function GetParentheses(ByVal ParenCheck As String, ByVal CommandCheck As String) As String
 
@@ -15744,11 +15677,11 @@ Skip_RandomFile:
 	End Function
 
 
-	Public Function ContactEdgeCheck(ByVal EdgeCheck As String)
+	Friend Sub ContactEdgeCheck(ByVal EdgeCheck As String)
 		If EdgeCheck.Contains("@Contact1") Then Contact1Edge = True
 		If EdgeCheck.Contains("@Contact2") Then Contact2Edge = True
 		If EdgeCheck.Contains("@Contact3") Then Contact3Edge = True
-	End Function
+	End Sub
 
 	Public Sub DisableContactStroke()
 		Contact1Stroke = False
@@ -15772,7 +15705,6 @@ Skip_RandomFile:
 
 	End Sub
 
-
 	Public Sub EdgePace()
 
 		StrokePace = randomizer.Next(NBMaxPace.Value, NBMaxPace.Value + 151)
@@ -15781,44 +15713,6 @@ Skip_RandomFile:
 
 	End Sub
 
-
-
-
-	Public Sub ShowGotImage()
-
-		'Debug.Print("ShowGotImage Called")
-		'Debug.Print("FoundString = " & FoundString)
-		JustShowedBlogImage = True
-
-
-		' ClearMainPictureBox()
-
-		If FoundString.Contains("/") Then
-			Try
-				ShowImage(FoundString, True)
-				'ImageLocation = FoundString
-				'PBImage = FoundString
-				'ImageThread.Start()
-				'DisplayImage(Image.FromFile())
-				'DisplayImage(New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString))))
-				'mainPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(FoundString)))
-			Catch
-				ClearMainPictureBox()
-				MessageBox.Show(Me, "Failed to load image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-			End Try
-		Else
-			ShowImage(FoundString, True)
-			'ImageLocation = FoundString
-			'PBImage = FoundString
-			'ImageThread.Start()
-			'mainPictureBox.Image = Image.FromFile(FoundString)
-			DeleteLocalImageFilePath = FoundString
-		End If
-
-
-
-
-	End Sub
 
 	Public Function FilterListBak(ByVal ListClean As List(Of String)) As List(Of String)
 
@@ -21150,110 +21044,7 @@ Skip_RandomFile:
 
 #End Region ' Chatbox
 
-	Public Sub GetTnAList()
-
-		BoobList.Clear()
-		AssList.Clear()
-
-
-		Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-		Dim files As String()
-
-
-		If FrmSettings.CBIButts.Checked = True And FrmSettings.CBURLButts.Checked = True Then
-			If randomizer.Next(1, 101) < 51 Then
-				GoTo LocalButt
-			Else
-				GoTo OnlineButt
-			End If
-		End If
-
-		If FrmSettings.CBIButts.Checked = True Then GoTo LocalButt
-		If FrmSettings.CBURLButts.Checked = True Then GoTo OnlineButt
-
-		GoTo GetBoobs
-
-LocalButt:
-
-
-		If Directory.Exists(FrmSettings.LBLButtPath.Text) Then
-
-			If FrmSettings.CBButtSubDir.Checked = True Then
-				files = myDirectory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*", SearchOption.AllDirectories)
-			Else
-				files = myDirectory.GetFiles(FrmSettings.LBLButtPath.Text, "*.*")
-			End If
-
-			Array.Sort(files)
-
-			For Each fi As String In files
-				If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-					AssList.Add(fi)
-				End If
-			Next
-
-		End If
-
-		GoTo GetBoobs
-
-OnlineButt:
-
-		AssList = Txt2List(FrmSettings.LBLButtURL.Text)
-
-
-GetBoobs:
-
-		If FrmSettings.CBIBoobs.Checked = True And FrmSettings.CBURLBoobs.Checked = True Then
-			If randomizer.Next(1, 101) < 51 Then
-				GoTo LocalBoobs
-			Else
-				GoTo OnlineBoobs
-			End If
-		End If
-
-		If FrmSettings.CBIBoobs.Checked = True Then GoTo LocalBoobs
-		If FrmSettings.CBURLBoobs.Checked = True Then GoTo OnlineBoobs
-
-		GoTo FinishTNA
-
-LocalBoobs:
-
-
-		If Directory.Exists(FrmSettings.LBLBoobPath.Text) Then
-
-			If FrmSettings.CBBoobSubDir.Checked = True Then
-				files = myDirectory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*", SearchOption.AllDirectories)
-			Else
-				files = myDirectory.GetFiles(FrmSettings.LBLBoobPath.Text, "*.*")
-			End If
-
-			Array.Sort(files)
-
-			For Each fi As String In files
-				If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-					BoobList.Add(fi)
-				End If
-			Next
-
-		End If
-
-		GoTo FinishTNA
-
-OnlineBoobs:
-
-		BoobList = Txt2List(FrmSettings.LBLBoobURL.Text)
-
-FinishTNA:
-
-
-
-
-	End Sub
-
-
-
-
-
+#Region "------------------------------------ Avoid the Edge --------------------------------------------"
 
 	Private Sub AvoidTheEdge_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdge.Tick
 
@@ -21425,7 +21216,7 @@ FinishTNA:
 
 	End Sub
 
-
+#End Region ' Avoid the Edge
 
 
 
@@ -21730,20 +21521,7 @@ NoPlaylistLinkFile:
 
 	End Sub
 
-	Public Function GetSysVar(ByVal GetVar As String) As String
 
-		Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & GetVar
-		Dim VarValue As String
-		'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
-		If File.Exists(VarCheck) Then
-			VarValue = TxtReadLine(VarCheck)
-		Else
-			VarValue = "0"
-		End If
-
-		Return VarValue
-
-	End Function
 
 	Public Sub RunLastScript()
 
@@ -22007,7 +21785,7 @@ NoPlaylistEndFile:
 
 	End Sub
 
-
+#Region "--------------------------------------- Hold the Edge ------------------------------------------"
 
 	Private Sub HoldEdgeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTimer.Tick
 
@@ -22380,6 +22158,8 @@ NoRepeatOFiles:
 		End If
 
 	End Sub
+
+#End Region ' Hold the Edge
 
 	Public Sub CreateTaskLetter()
 
@@ -22802,36 +22582,57 @@ TryNext:
 
 
 	Private Sub TnAFastSlides_Tick(sender As System.Object, e As System.EventArgs) Handles TnASlides.Tick
+		Dim tmpSw As New Stopwatch
 
-		Dim TnARandom As Integer = randomizer.Next(1, 101)
+RestartFunction:
+		tmpSw.Restart()
+		Try
+			If BoobList.Count < 1 Then Throw New Exception("No Boobs-images loaded.")
+			If AssList.Count < 1 Then Throw New Exception("No Butt-images loaded.")
 
-		'ClearMainPictureBox()
-		'QnD-BUGFIX: Booblist was empty at this point. 
-		If BoobList.Count = 0 Or AssList.Count = 0 Then GetTnAList()
+			Dim tmpImageToShow As String = ""
+			Dim tmpLateSet As Boolean
 
-		If TnARandom < 51 Then
-			Dim BoobString As String = BoobList(randomizer.Next(0, BoobList.Count))
-			ShowImage(BoobString)
-			DeleteLocalImageFilePath = FoundString
+			If New Random().Next(0, 101) < 51 Then
+				tmpImageToShow = BoobList(randomizer.Next(0, BoobList.Count))
+				tmpLateSet = True
+			Else
+				tmpImageToShow = AssList(randomizer.Next(0, AssList.Count))
+				tmpLateSet = False
+			End If
 
-			BoobImage = True
-			AssImage = False
+			Try
+				ShowImage(tmpImageToShow, True)
 
-		Else
-			Dim ButtString As String = AssList(randomizer.Next(0, AssList.Count))
-			ShowImage(ButtString)
-			DeleteLocalImageFilePath = FoundString
+				If tmpLateSet Then
+					BoobImage = True
+					AssImage = False
+				Else
+					BoobImage = False
+					AssImage = True
+				End If
 
-			BoobImage = False
-			AssImage = True
-
-		End If
-
-
-
-		''Debug.Print("TNAFASTSLIDES CALLED")
-
-
+				' If the elapsed time to load an image was longer as the Timer.Interval
+				' we restart the function instantly, to avoid an unnecessary delay.
+				' If it took way too long and the Timer was stopped during imagedownload, 
+				' we dont want the timer to restart.
+				If tmpSw.ElapsedMilliseconds > TnASlides.Interval And TnASlides.Enabled Then
+					GoTo RestartFunction
+				End If
+			Catch ex As Exception
+				' @@@@@@@@@@@@@@@@ Exception while loading image @@@@@@@@@@@@@@@@@
+				' Remove the ImagePath and retry.
+				BoobList.RemoveAll(Function(x) x.Contains(tmpImageToShow))
+				AssList.RemoveAll(Function(x) x.Contains(tmpImageToShow))
+				GoTo RestartFunction
+			End Try
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			TnASlides.Stop()
+			Log.WriteError(ex.Message & vbCrLf & "TnA Slideshow will stop.", ex, "Exception in TnASlieds.Tick occured")
+		End Try
 	End Sub
 
 
@@ -24328,8 +24129,6 @@ GetDommeSlideshow:
 			CustomSlideshowTimer.Stop()
 
 			ImageString = CustomSlideshowList(randomizer.Next(0, CustomSlideshowList.Count))
-			DeleteLocalImageFilePath = ImageString
-
 
 			ShowImage(ImageString, True)
 		Catch ex As Exception
@@ -24920,7 +24719,7 @@ GetDommeSlideshow:
 		SettingsList.Add("StartStrokingCount: " & StartStrokingCount)
 		SettingsList.Add("TeaseJOI: " & TeaseJOI)
 		SettingsList.Add("TeaseVideo: " & TeaseVideo)
-		SettingsList.Add("TnAPath: " & TnAPath)
+		SettingsList.Add("TnAPath: --obsolete--") ' for compatibility
 		'SettingsList.Add("TnAList: " & TnAList)
 		'SettingsList.Add("BoobList: " & BoobList)
 		'SettingsList.Add("AssList: " & AssList)
@@ -24932,7 +24731,7 @@ GetDommeSlideshow:
 		SettingsList.Add("TagTattoo: " & TagTattoo)
 		SettingsList.Add("TagSexToy: " & TagSexToy)
 		SettingsList.Add("TagFurniture: " & TagFurniture)
-		SettingsList.Add("ImportKeyword: " & ImportKeyword)
+		SettingsList.Add("ImportKeyword: --obsolete--") ' for compatibility
 		SettingsList.Add("BookmarkModule: " & BookmarkModule)
 		SettingsList.Add("BookmarkModuleFile: " & BookmarkModuleFile)
 		SettingsList.Add("BookmarkModuleLine: " & BookmarkModuleLine)
@@ -25530,7 +25329,7 @@ GetDommeSlideshow:
 		StartStrokingCount = SettingsList(223).Replace("StartStrokingCount: ", "")
 		TeaseJOI = SettingsList(224).Replace("TeaseJOI: ", "")
 		TeaseVideo = SettingsList(225).Replace("TeaseVideo: ", "")
-		TnAPath = SettingsList(226).Replace("TnAPath: ", "")
+		'TnAPath = SettingsList(226).Replace("TnAPath: ", "") 
 		AssImage = SettingsList(227).Replace("AssImage: ", "")
 		BoobImage = SettingsList(228).Replace("BoobImage: ", "")
 		FoundTag = SettingsList(229).Replace("FoundTag: ", "")
@@ -25539,7 +25338,7 @@ GetDommeSlideshow:
 		TagTattoo = SettingsList(232).Replace("TagTattoo: ", "")
 		TagSexToy = SettingsList(233).Replace("TagSexToy: ", "")
 		TagFurniture = SettingsList(234).Replace("TagFurniture: ", "")
-		ImportKeyword = SettingsList(235).Replace("ImportKeyword: ", "")
+		'ImportKeyword = SettingsList(235).Replace("ImportKeyword: ", "")
 		BookmarkModule = SettingsList(236).Replace("BookmarkModule: ", "")
 		BookmarkModuleFile = SettingsList(237).Replace("BookmarkModuleFile: ", "")
 		BookmarkModuleLine = SettingsList(238).Replace("BookmarkModuleLine: ", "")
@@ -29424,44 +29223,6 @@ SkipNew:
 
 	End Sub
 
-
-	Public Sub CheckLocalImage(ByVal dir As String, ByVal subdir As Boolean)
-
-
-		Dim PornList As New List(Of String)
-		PornList.Clear()
-		Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-		Dim files As String()
-		Try
-			If subdir = True Then
-				files = myDirectory.GetFiles(dir, "*.*", SearchOption.AllDirectories)
-			Else
-				files = myDirectory.GetFiles(dir, "*.*")
-			End If
-
-			Array.Sort(files)
-
-			For Each fi As String In files
-				If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-					PornList.Add(fi)
-				End If
-			Next
-
-			If PornList.Count = 0 Then
-				FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-			Else
-				Do
-					FoundString = PornList(randomizer.Next(0, PornList.Count))
-				Loop Until FoundString <> ""
-			End If
-		Catch
-			FoundString = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-		End Try
-
-
-		ShowGotImage()
-
-	End Sub
 
 	Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
 		CloseApp()

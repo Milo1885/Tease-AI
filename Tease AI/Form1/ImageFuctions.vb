@@ -64,6 +64,14 @@ Partial Class Form1
 			End If
 		End Function
 
+		Public Function IsAvailable(ByRef Type As ImageSourceType) As Boolean
+			If CountImages(Type) > 0 Then
+				Return True
+			Else
+				Return False
+			End If
+		End Function
+
         ''' =========================================================================================================
         ''' <summary>
         ''' Returns a List of FilePaths or URLs.
@@ -71,6 +79,7 @@ Partial Class Form1
         ''' <returns>Returns a List Containing all Found Links. If none are 
         ''' Found an empty List is returned</returns>
         Public Function ToList() As List(Of String)
+			'TODO: Next Add Errorhandling
 			Dim rtnList As New List(Of String)
 
 			' If no Porn is allowed, then return Empty
@@ -93,6 +102,7 @@ Partial Class Form1
 		''' <returns>Returns a List Containing all Found Links. If none are 
 		''' Found an empty List is returned</returns>
 		Public Function ToList(ByRef Type As ImageSourceType) As List(Of String)
+			'TODO: Next Add Errorhandling
 			Dim rtnList As New List(Of String)
 
 			' If no Porn is allowed, then return Empty
@@ -580,6 +590,7 @@ NoNeFound:
 						.FetchedImage = Image.FromFile(.ImageLocation)
 					End If
 				End With
+
 			Catch ex As Exception
 				' Do nothing, Just for Debug.
 				Throw
