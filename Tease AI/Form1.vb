@@ -10245,7 +10245,7 @@ RinseLatherRepeat:
 
 			Dim tmpListGenre As List(Of String) = LocalFlag.Split(",").ToList
 
-			If LocalFlag.ToUpper.Contains("Not") Then
+			If LocalFlag.ToUpper.Contains("NOT") Then
 				' =============== Invert the Content in Brackets ===============
 				' Declare a String containing all available ImageGenres
 				Dim CompareFlag As String = "Hardcore, Softcore, Lesbian, Blowjob, Femdom, Lezdom, Hentai, Gay, Maledom, Captions, General, Butts, Boobs"
