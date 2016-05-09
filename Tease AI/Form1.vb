@@ -4927,7 +4927,7 @@ ModuleEnd:
 
 			Debug.Print("CHeck")
 
-			If GetFilter(lines(line)) = False Then
+			If GetFilter(lines(line), True) = False Then
 				RunFileText()
 				Return
 			End If
@@ -5699,7 +5699,7 @@ SkipIsTyping:
 
 
 
-				If GlitterTease = True And JustShowedBlogImage = False Then GoTo TryNextWithTease
+				If GlitterTease = True And JustShowedBlogImage = False And LockImage = False Then GoTo TryNextWithTease
 
 
 				If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
@@ -20266,7 +20266,7 @@ Skip_RandomFile:
 	End Function
 
 
-	Public Function GetFilter(ByVal FilterString As String) As Boolean
+	Public Function GetFilter(ByVal FilterString As String, Optional ByVal Linear As Boolean = False) As Boolean
 
 
 		If FilterString.ToLower.Contains("@crazy") And FrmSettings.crazyCheckBox.Checked = False Then Return False
@@ -20402,58 +20402,65 @@ Skip_RandomFile:
 			If LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or TeaseTick < 1 Or RiskyEdges = True Then Return False
 		End If
 
-		If FilterString.Contains("@ShowHardcoreImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowSoftcoreImage") Then
-			If Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowLesbianImage") Then
-			If Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowBlowjobImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowFemdomImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowLezdomImage") Then
-			If Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowHentaiImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowGayImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowMaledomImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowCaptionsImage") Then
-			If Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowGeneralImage") Then
-			If Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
+		If Linear = False Then
+
+			If FilterString.Contains("@ShowHardcoreImage") Then
+				If Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowSoftcoreImage") Then
+				If Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowLesbianImage") Then
+				If Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowBlowjobImage") Then
+				If Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowFemdomImage") Then
+				If Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowLezdomImage") Then
+				If Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowHentaiImage") Then
+				If Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowGayImage") Then
+				If Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowMaledomImage") Then
+				If Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowCaptionsImage") Then
+				If Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowGeneralImage") Then
+				If Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
 
 
-		If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
-			If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowLocalImage") And FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And
-		   FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And
-			  FrmSettings.CBIGay.Checked = False And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then Return False
-		If FilterString.Contains("@ShowLocalImage") Then
-			If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
-			If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
-			If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
-			If CustomSlideshow = True Or LockImage = True Then Return False
+			If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
+				If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowLocalImage") And FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And
+			   FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And
+			   FrmSettings.CBIGay.Checked = False And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then Return False
+			If FilterString.Contains("@ShowLocalImage") Then
+				If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
+				If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
+				If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
+				If CustomSlideshow = True Or LockImage = True Then Return False
+			End If
+
+			If FilterString.Contains("@ShowLikedImage") And LockImage = True Then Return False
+			If FilterString.Contains("@ShowDislikedImage") And LockImage = True Then Return False
+
 		End If
 
 		If FilterString.Contains("@1MinuteHold") Then

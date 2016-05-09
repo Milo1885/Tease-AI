@@ -9,7 +9,13 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
+BugFix: @LockImages didn't function when Glitter Contacts were in the room
+
+BugFix: The program was filtering out @ShowImage type Commands in Linear acripts when @LockImages was activated, which goes against its function. It even prevented the lines from getting displayed in the first place. Added a Boolean to GetFilter to discern between filtering List or Linear type scripts
+
 BugFix: "Edging Ends Taunts" was still being checked after the Taunt Cycle ended if the Module didn't call @StopStroking or @Edge  
+
+BugFix: SYS_EdgeTotal wasn't being updated when EdgeMode edges were used
 
 Added Command @ClearChat - Clears the main chat window and Side Chat
 
