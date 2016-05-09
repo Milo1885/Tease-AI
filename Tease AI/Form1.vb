@@ -2581,8 +2581,16 @@ WritingTaskLine:
 			EdgeFound = False
 
 
+			If SubHoldingEdge = True Then
+				Debug.Print("EdgeFOund = SubHoldingedge")
+				DomChat = " #YoureAlreadySupposedToBeClose"
+				TypingDelay()
+				Return
+			End If
 
-			If TauntEdging = True Then
+			SetVariable("SYS_EdgeTotal", Val(GetVariable("SYS_EdgeTotal") + 1))
+
+			If TauntEdging = True And ShowModule = False Then
 				If TauntEdgingAsked = True Then
 					DomChat = "#SYS_TauntEdgingAsked"
 					TypingDelay()
@@ -2626,15 +2634,6 @@ WritingTaskLine:
 			End If
 
 			'EdgeMessageYesNo = EdgeArray(1)
-
-			If SubHoldingEdge = True Then
-				Debug.Print("EdgeFOund = SubHoldingedge")
-				DomChat = " #YoureAlreadySupposedToBeClose"
-				TypingDelay()
-				Return
-			End If
-
-			SetVariable("SYS_EdgeTotal", Val(GetVariable("SYS_EdgeTotal") + 1))
 
 			If RLGLGame = True Then
 				Debug.Print("EdgeFOund = RLGL")

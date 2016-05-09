@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
+BugFix: "Edging Ends Taunts" was still being checked after the Taunt Cycle ended if the Module didn't call @StopStroking or @Edge  
+
 Added Command @ClearChat - Clears the main chat window and Side Chat
 
 Fixed bug where Glitter Contacts would drop the last word of their sentences when the domme was out of the room
