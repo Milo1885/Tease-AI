@@ -1785,7 +1785,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		StopMetronome = True
 
-
+		TauntEdgingAsked = False
+		TauntEdging = False
 
 		CBTBallsFirst = True
 		CBTCockFirst = True
@@ -2578,8 +2579,16 @@ WritingTaskLine:
 			EdgeFound = False
 
 
+			If SubHoldingEdge = True Then
+				Debug.Print("EdgeFOund = SubHoldingedge")
+				DomChat = " #YoureAlreadySupposedToBeClose"
+				TypingDelay()
+				Return
+			End If
 
-			If TauntEdging = True Then
+			SetVariable("SYS_EdgeTotal", Val(GetVariable("SYS_EdgeTotal") + 1))
+
+			If TauntEdging = True And ShowModule = False Then
 				If TauntEdgingAsked = True Then
 					DomChat = "#SYS_TauntEdgingAsked"
 					TypingDelay()
@@ -2623,15 +2632,6 @@ WritingTaskLine:
 			End If
 
 			'EdgeMessageYesNo = EdgeArray(1)
-
-			If SubHoldingEdge = True Then
-				Debug.Print("EdgeFOund = SubHoldingedge")
-				DomChat = " #YoureAlreadySupposedToBeClose"
-				TypingDelay()
-				Return
-			End If
-
-			SetVariable("SYS_EdgeTotal", Val(GetVariable("SYS_EdgeTotal") + 1))
 
 			If RLGLGame = True Then
 				Debug.Print("EdgeFOund = RLGL")
@@ -4925,7 +4925,7 @@ ModuleEnd:
 
 			Debug.Print("CHeck")
 
-			If GetFilter(lines(line)) = False Then
+			If GetFilter(lines(line), True) = False Then
 				RunFileText()
 				Return
 			End If
@@ -5697,7 +5697,7 @@ SkipIsTyping:
 
 
 
-				If GlitterTease = True And JustShowedBlogImage = False Then GoTo TryNextWithTease
+				If GlitterTease = True And JustShowedBlogImage = False And LockImage = False Then GoTo TryNextWithTease
 
 
 				If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
@@ -12671,7 +12671,15 @@ OrgasmDecided:
 				OpenApp()
 				PNLWritingTask.Visible = True
 			End If
-			WritingTaskMistakesAllowed = randomizer.Next(3, 9)
+
+			'WritingTaskMistakesAllowed = randomizer.Next(3, 9)
+
+			'determine error numbers based on numbers of lines to write
+			WritingTaskMistakesAllowed = randomizer.Next(WritingTaskLinesAmount / 10, WritingTaskLinesAmount / 3)
+			'clamps the value between 2 and 10 errors
+			WritingTaskMistakesAllowed = Math.Max(2, WritingTaskMistakesAllowed)
+			WritingTaskMistakesAllowed = Math.Min(WritingTaskMistakesAllowed, 10)
+
 			LBLMistakesAllowed.Text = WritingTaskMistakesAllowed
 			LBLMistakesMade.Text = "0"
 			StringClean = StringClean.Replace("@WritingTask", "")
@@ -12688,7 +12696,7 @@ OrgasmDecided:
 
 				'determines how many secs are given for writing each line, depending on line length and typespeed value selected by the user in the settings
 				'(between 0,54 and 0,75 secs per character in the sentence at slowest typingspeed and between 0.18 and 0.25 at fastest typing speed)
-				secs = (randomizer.Next(18, 25) / My.Settings.TypeSpeed) * LBLWritingTaskText.Text.Length
+				secs = (randomizer.Next(15, 25) / My.Settings.TypeSpeed) * LBLWritingTaskText.Text.Length
 				'determines how much time is given (in seconds) to complete the @WritingTask() depending on how many lines you have to write and a small bonus to give some
 				'more time for very short lines
 				WritingTaskCurrentTime = 5 + secs * WritingTaskLinesAmount
@@ -15522,7 +15530,7 @@ retry_NextStage:
 							' So, here is a simple workaround to override this, while debugging. Only change the 
 							' statement after AndAlso, otherwise it will behave wrong in the final programm.
 							If Debugger.IsAttached AndAlso 1 = 1 Then Return ""
-							Throw New Exception("No DommeImage found for Tags: '" & ___DomTag_Base & "' in directory: '" & __targetFolder & "'")
+							Log.Write("No DommeImage found for Tags: '" & ___DomTag_Base & "' in directory: '" & __targetFolder & "'")
 						End If
                         ' Copy Matches to editable Container
                         Dim ___FoundFiles As New List(Of String)
@@ -20153,7 +20161,7 @@ Skip_RandomFile:
 	End Function
 
 
-	Public Function GetFilter(ByVal FilterString As String) As Boolean
+	Public Function GetFilter(ByVal FilterString As String, Optional ByVal Linear As Boolean = False) As Boolean
 
 
 		If FilterString.ToLower.Contains("@crazy") And FrmSettings.crazyCheckBox.Checked = False Then Return False
@@ -20289,65 +20297,68 @@ Skip_RandomFile:
 			If LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or TeaseTick < 1 Or RiskyEdges = True Then Return False
 		End If
 
-		If FilterString.Contains("@ShowHardcoreImage") Then
-			If Not GetImageData(ImageGenre.Hardcore).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowSoftcoreImage") Then
-			If Not GetImageData(ImageGenre.Softcore).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowLesbianImage") Then
-			If Not GetImageData(ImageGenre.Lesbian).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowBlowjobImage") Then
-			If Not GetImageData(ImageGenre.Blowjob).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowFemdomImage") Then
-			If Not GetImageData(ImageGenre.Femdom).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowLezdomImage") Then
-			If Not GetImageData(ImageGenre.Lezdom).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowHentaiImage") Then
-			If Not GetImageData(ImageGenre.Hentai).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowGayImage") Then
-			If Not GetImageData(ImageGenre.Gay).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowMaledomImage") Then
-			If Not GetImageData(ImageGenre.Maledom).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowCaptionsImage") Then
-			If Not GetImageData(ImageGenre.Captions).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowGeneralImage") Then
-			If Not GetImageData(ImageGenre.General).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
+		If Linear = False Then
 
-		If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
-			If Not GetImageData(ImageGenre.Blog).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowLikedImage") Then
-			If Not GetImageData(ImageGenre.Liked).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowDislikedImage") Then
-			If Not GetImageData(ImageGenre.Disliked).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
+			If FilterString.Contains("@ShowHardcoreImage") Then
+				If Not GetImageData(ImageGenre.Hardcore).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowSoftcoreImage") Then
+				If Not GetImageData(ImageGenre.Softcore).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowLesbianImage") Then
+				If Not GetImageData(ImageGenre.Lesbian).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowBlowjobImage") Then
+				If Not GetImageData(ImageGenre.Blowjob).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowFemdomImage") Then
+				If Not GetImageData(ImageGenre.Femdom).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowLezdomImage") Then
+				If Not GetImageData(ImageGenre.Lezdom).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowHentaiImage") Then
+				If Not GetImageData(ImageGenre.Hentai).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowGayImage") Then
+				If Not GetImageData(ImageGenre.Gay).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowMaledomImage") Then
+				If Not GetImageData(ImageGenre.Maledom).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowCaptionsImage") Then
+				If Not GetImageData(ImageGenre.Captions).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowGeneralImage") Then
+				If Not GetImageData(ImageGenre.General).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
 
-		'TODO: Add ImageDataContainerUsage to filter @ShowLocalImage correct.
-		If FilterString.Contains("@ShowLocalImage") And FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And
-		   FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And
-			  FrmSettings.CBIGay.Checked = False And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then Return False
-		If FilterString.Contains("@ShowLocalImage") Then
-			If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
-		End If
-		If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
-			If Not GetImageData(ImageGenre.Butt).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
-			If Not GetImageData(ImageGenre.Boobs).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
-		End If
-		If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
-			If CustomSlideshow = True Or LockImage = True Then Return False
+			If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
+				If Not GetImageData(ImageGenre.Blog).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowLikedImage") Then
+				If Not GetImageData(ImageGenre.Liked).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowDislikedImage") Then
+				If Not GetImageData(ImageGenre.Disliked).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+
+			'TODO: Add ImageDataContainerUsage to filter @ShowLocalImage correct.
+			If FilterString.Contains("@ShowLocalImage") And FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And
+			   FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And
+				  FrmSettings.CBIGay.Checked = False And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then Return False
+			If FilterString.Contains("@ShowLocalImage") Then
+				If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
+			End If
+			If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
+				If Not GetImageData(ImageGenre.Butt).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
+				If Not GetImageData(ImageGenre.Boobs).IsAvailable Or LockImage = True Or CustomSlideshow = True Then Return False
+			End If
+			If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
+				If CustomSlideshow = True Or LockImage = True Then Return False
+			End If
 		End If
 
 		If FilterString.Contains("@1MinuteHold") Then
@@ -22521,23 +22532,16 @@ TryNext:
 
 
 	Private Sub EdgeCountTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeCountTimer.Tick
+
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
 		EdgeCountTick += 1
-
-
-
-
-
-
-
-
 
 		If FrmSettings.CBEdgeUseAvg.Checked = True Then
 			If EdgeCountTick > EdgeTickCheck Then LongEdge = True
 		Else
 			If EdgeCountTick > FrmSettings.NBLongEdge.Value * 60 Then LongEdge = True
 		End If
-
-
 
 
 		Dim m As Integer = TimeSpan.FromSeconds(EdgeCountTick).Minutes
@@ -23361,7 +23365,9 @@ RestartFunction:
 
 
 	Private Sub VideoTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTauntTimer.Tick
+
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		If MiniScript = True Then Return
 
 		If DomTyping = True Then Return
@@ -23434,6 +23440,7 @@ RestartFunction:
 
 	Public Sub RLGLTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTauntTimer.Tick
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		If MiniScript = True Then Return
 
 		If DomTyping = True Then Return
@@ -23485,6 +23492,7 @@ RestartFunction:
 
 	Private Sub AvoidTheEdgeTaunts_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeTaunts.Tick
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
 		If DomTyping = True Then Return
 		If DomTypeCheck = True And AvoidTheEdgeTick < 6 Then Return
@@ -24116,6 +24124,7 @@ GetDommeSlideshow:
 
 
 	Private Sub CustomSlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		Try
 			CustomSlideshowTimer.Stop()
 
@@ -24459,6 +24468,7 @@ GetDommeSlideshow:
 	End Sub
 
 	Private Sub UpdateStageTimer_Tick(sender As System.Object, e As System.EventArgs) Handles UpdateStageTimer.Tick
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		UpdateStageTick -= 1
 		If UpdateStageTick < 1 Then
 			UpdateStageTimer.Stop()
@@ -26655,26 +26665,66 @@ SkipNew:
 
 	Private Sub TeaseAIClock_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseAIClock.Tick
 
-		If WritingTaskFlag = False Then
+
+
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
 			LBLTime.Text = Format(Now, "h:mm")
 			LBLAMPM.Text = Format(Now, "tt")
 			LBLDate.Text = Format(Now, "Long Date")
+			Return
+		End If
 
+		If WritingTaskFlag = False Or (WritingTaskFlag = True And My.Settings.TimedWriting = False) Then
+			LBLTime.Text = Format(Now, "h:mm")
+			LBLAMPM.Text = Format(Now, "tt")
+			LBLDate.Text = Format(Now, "Long Date")
 		Else
-
 			If WritingTaskCurrentTime > 0 Then
-				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "You have " & ConvertSeconds(WritingTaskCurrentTime)
-				LBLTime.Text = Convert.ToInt16(WritingTaskCurrentTime)
+				If My.Settings.TimedWriting = True Then
+					LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "You have " & ConvertSeconds(WritingTaskCurrentTime)
+					LBLTime.Text = Convert.ToInt16(WritingTaskCurrentTime)
+				Else
+					LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times"
+				End If
 			Else
-				LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
-				LBLTime.Text = "Time's Up"
+				If My.Settings.TimedWriting = True Then
+					LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
+					LBLTime.Text = "Time's Up"
+					'immediately ends the writing task if time is up without waiting for next user input
+					ClearWriteTask()
+					SkipGotoLine = True
+					FileGoto = "Failed Writing Task"
+					GetGoto()
+					ScriptTick = 4
+					ScriptTimer.Start()
+				Else
+					LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times"
+				End If
+
 			End If
 			WritingTaskCurrentTime -= 1
 
-
 			LBLAMPM.Text = ""
-
 		End If
+
+
+
+
+		'If WritingTaskFlag = False Then
+		'LBLTime.Text = Format(Now, "h:mm")
+		'LBLAMPM.Text = Format(Now, "tt")
+		'LBLDate.Text = Format(Now, "Long Date")
+		'Else
+		'If WritingTaskCurrentTime > 0 Then
+		'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "You have " & ConvertSeconds(WritingTaskCurrentTime)
+		'LBLTime.Text = Convert.ToInt16(WritingTaskCurrentTime)
+		'Else
+		'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times" & vbCrLf & "YOUR TIME IS UP"
+		'LBLTime.Text = "Time's Up"
+		'End If
+		'WritingTaskCurrentTime -= 1
+		'LBLAMPM.Text = ""
+		'End If
 
 
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_WakeUp") Then
@@ -28853,6 +28903,8 @@ SkipNew:
 
 	Private Sub TimeoutTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TimeoutTimer.Tick
 
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
 		Debug.Print("TimeoutTick = " & TimeoutTick)
 
 		If chatBox.Text <> "" And TimeoutTick < 3 Then Return
@@ -28955,6 +29007,8 @@ SkipNew:
 
 
 	Private Sub VideoTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTimer.Tick
+
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
 		VideoTick -= 1
 

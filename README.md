@@ -9,6 +9,14 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
+BugFix: @LockImages didn't function when Glitter Contacts were in the room
+
+BugFix: The program was filtering out @ShowImage type Commands in Linear acripts when @LockImages was activated, which goes against its function. It even prevented the lines from getting displayed in the first place. Added a Boolean to GetFilter to discern between filtering List or Linear type scripts
+
+BugFix: "Edging Ends Taunts" was still being checked after the Taunt Cycle ended if the Module didn't call @StopStroking or @Edge  
+
+BugFix: SYS_EdgeTotal wasn't being updated when EdgeMode edges were used
+
 Added Command @ClearChat - Clears the main chat window and Side Chat
 
 Fixed bug where Glitter Contacts would drop the last word of their sentences when the domme was out of the room
@@ -127,6 +135,12 @@ Fixes added from Community Members:
 	Stefaf: ContextMenu of MainImageBox did not activate or deactivate the MenuItems correct.
 	
 	Stefaf: Improvement: Remove from URL-File option in ContextMenu MainPicturebox now removes a ImageUrl from all URL-Files.
+	
+	Daragorn: BugFix: "Edging Ends Taunts" state wasn't reinitialized when Tease AI was reset
+	
+	Daragorn: Clean-up of 1885's implementation of Daragorn's original Timed Writing code
+	
+	Daragorn: BugFix: Some aspects of the program didn't pause when Settings Menu was open and "Pause Program When Settings Menu is Visible" wasn't checked
 
 # Changelog - Patch 53
 
