@@ -738,6 +738,8 @@ NoNeFound:
 				' Dispose the Image from RAM
 				ClearMainPictureBox()
 				If rtnInt < 1 Then Throw New Exception("The URL was not successfully deleted.")
+
+				Log.Write("Deleted image-link: " & tmpPath)
 				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 				' Online Images - End
 				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -794,6 +796,8 @@ NoNeFound:
 				' Delete the File from disk
 				My.Computer.FileSystem.DeleteFile(tmpPath)
 
+				Log.Write("Deleted local File: " & tmpPath)
+
 				If File.Exists(tmpPath) Then Throw New Exception("The image was not successfully deleted.")
 				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 				' Local Images - End
@@ -845,19 +849,35 @@ NoNeFound:
 	Friend Function RemoveFromUrlFiles(ByVal path As String)
 		Dim rtnInt As Integer = 0
 
-		' Check if directory exits,
-		If myDirectory.Exists(Application.StartupPath & "\Images\System\URL Files\") Then
+		Dim CustomURLFileList As New List(Of String)
 
-			' Find the URL in all URLFiles
+		' Get all URL-Files associated with image-Genres 
+		' Their location can be outside of \Images\System\URL Files\
+		For Each imgDC As ImageDataContainer In GetImageData.Values
+			If imgDC.URLFile IsNot Nothing AndAlso imgDC.URLFile <> "" Then
+				CustomURLFileList.Add(imgDC.URLFile)
+			End If
+		Next
+
+		' Remove all, where the directory does not exists.
+		CustomURLFileList.RemoveAll(Function(x) Not Directory.Exists(IO.Path.GetDirectoryName(x)))
+		' Remove all, where the file itself does not exists.
+		CustomURLFileList.RemoveAll(Function(x) Not File.Exists(x))
+
+		' Find the URL in all URLFiles located in Standard Directory
+		If Directory.Exists(Application.StartupPath & "\Images\System\URL Files\") Then
 			Dim foundFiles As ObjectModel.ReadOnlyCollection(Of String) =
-				FileIO.FileSystem.FindInFiles(Application.StartupPath & "\Images\System\URL Files\",
-											  path, True, FileIO.SearchOption.SearchTopLevelOnly)
+			FileIO.FileSystem.FindInFiles(Application.StartupPath & "\Images\System\URL Files\",
+										  path, True, FileIO.SearchOption.SearchTopLevelOnly)
 
-			' Delete the URL from all Files 
-			For Each filePath As String In foundFiles
-				rtnInt += TxtRemoveLine(filePath, path)
-			Next
+			' Distinct join the 2 Lists 
+			CustomURLFileList = CustomURLFileList.Union(foundFiles).ToList
 		End If
+
+		' Delete the URL from all Files 
+		For Each filePath As String In CustomURLFileList
+			rtnInt += TxtRemoveLine(filePath, path)
+		Next
 
 		Return rtnInt
 	End Function
