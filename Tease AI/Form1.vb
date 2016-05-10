@@ -429,6 +429,7 @@ Public Class Form1
 	Public SlideshowInt As Integer
 	Dim JustShowedSlideshowImage As Boolean
 
+	'TODO: Change to Property after Implementing ImageDataContainer
 	Public DeleteLocalImageFilePath As String
 	Dim RandomSlideshowCategory As String
 
@@ -13245,31 +13246,19 @@ OrgasmDecided:
 
 		If StringClean.Contains("@DeleteLocalImage") Then
 			'TODO-Next: @DeleteLocalImage Rework and Check if the Command is working after all that changes in imagestuff.
-			Debug.Print("FoundString = " & FoundString)
+			'ShowImage(Application.StartupPath & "\Images\System\Black.jpg")
 
-			Try
-				mainPictureBox.Image.Dispose()
-			Catch
-			End Try
-			mainPictureBox.Image = Nothing
-			mainPictureBox.Refresh()
-			ShowImage(Application.StartupPath & "\Images\System\Black.jpg")
-			'ImageLocation = Application.StartupPath & "\Images\System\Black.jpg"
-			'PBImage =
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile())
-			'mainPictureBox.Image = Image.FromFile(Application.StartupPath & "\Images\System\Black.jpg")
-
-			Debug.Print("DeleteLocalImageFilePath = " & DeleteLocalImageFilePath)
-
-			If FrmSettings.CBDomDel.Checked = True Then
+			If My.Settings.DomDeleteMedia = True Then
 				Try
-					My.Computer.FileSystem.DeleteFile(DeleteLocalImageFilePath)
-				Catch
+					DeleteCurrentImage()
+				Catch ex As Exception
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					'                   All Errors
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					Log.WriteError("Command @DeleteLocalImage was unable to delete the image.",
+								   ex, "@DeleteLocalImage failed")
 				End Try
 			End If
-
-			DeleteLocalImageFilePath = ""
 
 			StringClean = StringClean.Replace("@DeleteLocalImage", "")
 		End If
@@ -24038,18 +24027,24 @@ GetDommeSlideshow:
 
 	Public Sub ClearMainPictureBox()
 
-
-
 		If Not mainPictureBox Is Nothing Then
 			Try
 				mainPictureBox.Image.Dispose()
 				mainPictureBox.Image = Nothing
+
+				DeleteLocalImageFilePath = ""
+				PBImage = ""
+				ImageLocation = ""
+
 				GC.Collect()
-			Catch
+			Catch ex As Exception
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'                                            All Errors
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Log.WriteError("Unable to dispose the current image From PictureBox: " & ex.Message,
+								ex, "ClearMainPictureBox")
 			End Try
 		End If
-
-
 
 	End Sub
 
