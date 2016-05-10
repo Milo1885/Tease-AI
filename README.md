@@ -166,86 +166,221 @@ Fixes added from Community Members:
 
 	
 Conclusion List:
-	#BlogImageCount	 -> 	Added: returns amount of Images
-	#BlowjobImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#BlowjobImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#BoobImageCount	 -> 	Added: returns amount of Images
-	#BoobsImageCount	 -> 	Added: returns amount of Images
-	#ButtImageCount	 -> 	Added: returns amount of Images
-	#ButtsImageCount	 -> 	Added: returns amount of Images
-	#CaptionsImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#DislikedImageCount	 -> 	Reworked: Reacts now to OfflineMode
-	#EdgeHold	 -> 	Added: Returns a random value based on the user's Sub settings
-	#ExtremeHold	 -> 	Added: Returns a random value based on the user's Sub settings
-	#FemdomImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#GayImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#GeneralImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#HardcoreImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#HentaiImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#LesbianImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#LezdomImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#LikedImageCount	 -> 	Reworked: Reacts now to OfflineMode
-	#LocalImageCount	 -> 	Added: returns amount of Images
-	#LongHold	 -> 	Added: Returns a random value based on the user's Sub settings
-	#MaledomImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#SoftcoreImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
-	#TaskCBTTime	 -> 	Ranges added to Ranges tab
-	#TaskEdges	 -> 	Ranges added to Ranges tab
-	#TaskHoldTheEdgeTime	 -> 	Ranges added to Ranges tab
-	#TaskStrokes	 -> 	Ranges added to Ranges tab
-	#TaskStrokingTime	 -> 	Ranges added to Ranges tab
-	@AddTokens()	 -> 	usable in Tasks now
-	@Afternoon	 -> 	 better filtered to user's daily WakupTime
-	@CBT	 -> 	 no longer run for a random number of times in Tasks
-	@CBTBalls	 -> 	 no longer run for a random number of times in Tasks
-	@CBTCock	 -> 	 no longer run for a random number of times in Tasks
-	@ChangeVar[]	 -> 	usable in Tasks now
-	@ChastityOff	 -> 	usable in Tasks now
-	@ChastityOn	 -> 	usable in Tasks now
-	@CheckTnA	 -> 	Reworked and fixed.
-	@ClearChat	 -> 	New: Clears the main chat window and Side Chat
-	@CustomMode()	 -> 	New with  Available modes: Goto, Video
-	@CustomTask()	 -> 	Enhanced, added settings in Ranges-Tab
-	@Day()	 -> 	Filters now correct
-	@DecreaseOrgasmChance	 -> 	usable in Tasks now
-	@DecreaseRuinChance	 -> 	usable in Tasks now
-	@DeleteFlag()	 -> 	usable in Tasks now
-	@DeleteImage	 -> 	New: to remove URL-Links and Local Files from all Local Sources. Deletes no Domme or Contact files
-	@DeleteLocalImage	 -> 	Reworked. Removes now Links in LoacalImageTags.txt, LikedImage.txt, DislikedImages.txt. Deletes no Domme or Contact files
-	@DeleteVar[]	 -> 	usable in Tasks now
-	@Edge	 -> 	
-	@Edge()	 -> 	
-	@IncreaseOrgasmChance	 -> 	usable in Tasks now
-	@IncreaseRuinChance	 -> 	usable in Tasks now
-	@LockImages	 -> 	Fixed with Contacts, is performed after showing an image.
-	@LockVideo	 -> 	Added: will prevent Tease AI from switching back to the image window
-	@Month()	 -> 	Filters now correct
-	@Morning	 -> 	is better filtered to user's daily WakupTime
-	@Night	 -> 	is better filtered to user's daily WakupTime
-	@PornAllowedOff	 -> 	Fixed: was not replaced correct in output.
-	@PornAllowedOn	 -> 	Fixed: was not replaced correct in output.
-	@RandomText()	 -> 	usable in Tasks now
-	@RemoveTokens()	 -> 	usable in Tasks now
-	@RestrictOrgasm	 -> 	usable in Tasks now
-	@RestrictOrgasm()	 -> 	usable in Tasks now
-	@RoundVar[]	 -> 	usable in Tasks now
-	@RT()	 -> 	usable in Tasks now
-	@SetDate()	 -> 	usable in Tasks now
-	@SetFlag()	 -> 	usable in Tasks now
-	@SetVar[]	 -> 	usable in Tasks now
-	@ShowImage[]	 -> 	Reworked: New Filter * for all available imagefiles, added logging
-	@ShowLocalImage()	 -> 	Reworked: Won't show up an Errorimage anymore
-	@ShowVar[]	 -> 	usable in Tasks now
-	@StopStroking	 -> 	
-	@SubOld	 -> 	Filters now correct
-	@SubYoung	 -> 	Filters now correct
-	@TempFlag()	 -> 	usable in Tasks now
-	@TnAFastSlides	 -> 	Reworked and fixed.
-	@TnASlides	 -> 	Reworked and fixed.
-	@TnASlowSlides	 -> 	Reworked and fixed.
-	@UnlockVideo	 -> 	deactivates @LockVideo and shows the image window
-	@UpdateOrgasm	 -> 	usable in Tasks now
-	@UpdateRuined	 -> 	usable in Tasks now
+	
+	[list]
+	
+	[*]#BlogImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#BlowjobImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#BoobImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#BoobsImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#ButtImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#ButtsImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#CaptionsImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#DislikedImageCount	 -> 	Reworked: Reacts now to OfflineMode
+	
+	[*]#EdgeHold	 -> 	Added: Returns a random value based on the user's Sub settings
+	
+	[*]#ExtremeHold	 -> 	Added: Returns a random value based on the user's Sub settings
+	
+	[*]#FemdomImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#GayImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#GeneralImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#HardcoreImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#HentaiImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#LesbianImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#LezdomImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#LikedImageCount	 -> 	Reworked: Reacts now to OfflineMode
+	
+	[*]#LocalImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#LongHold	 -> 	Added: Returns a random value based on the user's Sub settings
+	
+	[*]#MaledomImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#SoftcoreImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#TaskCBTTime	 -> 	Ranges added to Ranges tab
+	
+	[*]#TaskEdges	 -> 	Ranges added to Ranges tab
+	
+	[*]#TaskHoldTheEdgeTime	 -> 	Ranges added to Ranges tab
+	
+	[*]#TaskStrokes	 -> 	Ranges added to Ranges tab
+	
+	[*]#TaskStrokingTime	 -> 	Ranges added to Ranges tab
+	
+	[*]@AddTokens()	 -> 	usable in Tasks now
+	
+	[*]@Afternoon	 -> 	 better filtered to user's daily WakupTime
+	
+	[*]@CBT	 -> 	 no longer run for a random number of times in Tasks
+	
+	[*]@CBTBalls	 -> 	 no longer run for a random number of times in Tasks
+	
+	[*]@CBTCock	 -> 	 no longer run for a random number of times in Tasks
+	
+	[*]@ChangeVar[]	 -> 	usable in Tasks now
+	
+	[*]@ChastityOff	 -> 	usable in Tasks now
+	
+	[*]@ChastityOn	 -> 	usable in Tasks now
+	
+	[*]@CheckTnA	 -> 	Reworked and fixed.
+	
+	[*]@ClearChat	 -> 	New: Clears the main chat window and Side Chat
+	
+	[*]@CurrentImage	 -> 	Reworked
+	
+	[*]@CustomMode()	 -> 	New with  Available modes: Goto, Video
+	
+	[*]@CustomTask()	 -> 	Enhanced, added settings in Ranges-Tab
+	
+	[*]@Day()	 -> 	Filters now correct
+	
+	[*]@DecreaseOrgasmChance	 -> 	usable in Tasks now
+	
+	[*]@DecreaseRuinChance	 -> 	usable in Tasks now
+	
+	[*]@DeleteFlag()	 -> 	usable in Tasks now
+	
+	[*]@DeleteImage	 -> 	New: to remove URL-Links and Local Files from all Local Sources. Deletes no Domme or Contact files
+	
+	[*]@DeleteLocalImage	 -> 	Reworked. Removes now Links in LoacalImageTags.txt, LikedImage.txt, DislikedImages.txt. Deletes no Domme or Contact files
+	
+	[*]@DeleteVar[]	 -> 	usable in Tasks now
+	
+	[*]@Edge	 -> 	
+	
+	[*]@Edge()	 -> 	
+	
+	[*]@IncreaseOrgasmChance	 -> 	usable in Tasks now
+	
+	[*]@IncreaseRuinChance	 -> 	usable in Tasks now
+	
+	[*]@LockImages	 -> 	Fixed with Contacts, is performed after showing an image.
+	
+	[*]@LockVideo	 -> 	Added: will prevent Tease AI from switching back to the image window
+	
+	[*]@Month()	 -> 	Filters now correct
+	
+	[*]@Morning	 -> 	is better filtered to user's daily WakupTime
+	
+	[*]@NewBlogImage	 -> 	Reworked: does the same as @ShowBlogImage
+	
+	[*]@Night	 -> 	is better filtered to user's daily WakupTime
+	
+	[*]@PornAllowedOff	 -> 	Fixed: was not replaced correct in output.
+	
+	[*]@PornAllowedOn	 -> 	Fixed: was not replaced correct in output.
+	
+	[*]@RandomText()	 -> 	usable in Tasks now
+	
+	[*]@RemoveTokens()	 -> 	usable in Tasks now
+	
+	[*]@RestrictOrgasm	 -> 	usable in Tasks now
+	
+	[*]@RestrictOrgasm()	 -> 	usable in Tasks now
+	
+	[*]@RoundVar[]	 -> 	usable in Tasks now
+	
+	[*]@RT()	 -> 	usable in Tasks now
+	
+	[*]@SetDate()	 -> 	usable in Tasks now
+	
+	[*]@SetFlag()	 -> 	usable in Tasks now
+	
+	[*]@SetVar[]	 -> 	usable in Tasks now
+	
+	[*]@ShowBlogImage	 -> 	Reworked: Reacts now to OfflineMode
+	
+	[*]@ShowBlowjobImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowBoobImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowBoobsImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowButtImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowButtsImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowCaptionsImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowDislikedImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowFemdomImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowGayImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowGeneralImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowHardcoreImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowHentaiImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowImage[	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowImage[]	 -> 	Reworked: New Filter * for all available imagefiles, added logging
+	
+	[*]@ShowLesbianImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLezdomImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLikedImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLocalImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLocalImage(	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLocalImage()	 -> 	Reworked: Won't show up an Errorimage anymore
+	
+	[*]@ShowMaledomImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowSoftcoreImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowVar[]	 -> 	usable in Tasks now
+	
+	[*]@Slideshow()	 -> 	Reworked: uses OfflineMode, URL-Files, Displays Local and Remote Images syncronized with text
+	
+	[*]@StopStroking	 -> 	
+	
+	[*]@StopTnA	 -> 	Reworked and fixed.
+	
+	[*]@SubOld	 -> 	Filters now correct
+	
+	[*]@SubYoung	 -> 	Filters now correct
+	
+	[*]@TempFlag()	 -> 	usable in Tasks now
+	
+	[*]@TnAFastSlides	 -> 	Reworked and fixed.
+	
+	[*]@TnASlides	 -> 	Reworked and fixed.
+	
+	[*]@TnASlowSlides	 -> 	Reworked and fixed.
+	
+	[*]@UnlockVideo	 -> 	deactivates @LockVideo and shows the image window
+	
+	[*]@UpdateOrgasm	 -> 	usable in Tasks now
+	
+	[*]@UpdateRuined	 -> 	usable in Tasks now
+	
+	[/list]
+
 
 	
 # Changelog - Patch 53
