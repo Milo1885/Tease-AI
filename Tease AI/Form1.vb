@@ -9,7 +9,10 @@ Imports System.Text.RegularExpressions
 
 
 Public Class Form1
-	'blah
+	Shared ReadOnly pathLikeList As String = Application.StartupPath & "\Images\System\LikedImageURLs.txt"
+	Shared ReadOnly pathDislikeList As String = Application.StartupPath & "\Images\System\DislikedImageURLs.txt"
+	Shared ReadOnly pathImageTagList As String = Application.StartupPath & "\Images\System\LocalImageTags.txt"
+
 	Public Chat As String
 	Public randomizer As New Random
 	Public ScriptOperator As String
@@ -208,7 +211,6 @@ Public Class Form1
 	Dim Update2 As Boolean
 	Dim Update3 As Boolean
 
-	Dim LastSuccessfulImage As Integer
 	Dim GetFolder As String
 	Dim FileCount As Integer
 	Dim FileCountMax As Integer
@@ -429,8 +431,6 @@ Public Class Form1
 	Public SlideshowInt As Integer
 	Dim JustShowedSlideshowImage As Boolean
 
-	'TODO: Change to Property after Implementing ImageDataContainer
-	Public DeleteLocalImageFilePath As String
 	Dim RandomSlideshowCategory As String
 
 	Dim ResetFlag As Boolean
@@ -446,11 +446,6 @@ Public Class Form1
 	Dim SplitContainerHeight As Integer
 
 	Dim DommeImageFound As Boolean
-	''' <summary>
-	''' Variable Deprected. Remove from Suspend and Resume Session needed. 
-	''' But check for Incompatibilty first.
-	''' </summary>
-	Dim DommeImageListCheck As Boolean
 
 	Dim LocalImageFound As Boolean
 	Dim LocalImageListCheck As Boolean
@@ -504,8 +499,6 @@ Public Class Form1
 	Dim LazyEdit3 As Boolean
 	Dim LazyEdit4 As Boolean
 	Dim LazyEdit5 As Boolean
-
-	Dim CurrentImage As String
 
 	Dim FormFinishedLoading As Boolean = False
 
@@ -9688,7 +9681,7 @@ StatusUpdateEnd:
 
 		End If
 
-
+		'BUG: #RandomSlideshowCategory does not work! The Variable RandomSlideshowCategory is never set.
 		If StringClean.Contains("#RandomSlideshowCategory") Then StringClean = StringClean.Replace("#RandomSlideshowCategory", RandomSlideshowCategory)
 
         '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -9816,7 +9809,7 @@ StatusUpdateEnd:
 			StringClean = StringClean.Replace("#ExtremeHold", TConvert)
 		End If
 
-		StringClean = StringClean.Replace("#CurrentImage", CurrentImage)
+		StringClean = StringClean.Replace("#CurrentImage", ImageLocation)
 
 		Return StringClean
 
@@ -10084,16 +10077,13 @@ RinseLatherRepeat:
 		'	are loaded and displayed async. Otherwise it will delete the wrong image!
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
-		' @DeleteLocalImage deletes the current displayed image from filesystem, if the 
-		' current Image is not an DommeImage.
+		' @DeleteLocalImage: Deletes the current displayed local image from filesystem, 
+		' LiskedList, DislikedList and LocalImageTagList,  if the  current Image is 
+		' not an image in the Domme- or Contacts-Image directory or their subdirectories.
 		If StringClean.Contains("@DeleteLocalImage") Then
-			'TODO-Next: @DeleteLocalImage Rework and Check if the Command is working after all that changes in imagestuff.
-			'BUG: @DeleteLocalImage will corrupt Liked, Disliked and LocalImageTags.Txt
-			'ShowImage(Application.StartupPath & "\Images\System\Black.jpg")
-
 			If My.Settings.DomDeleteMedia = True Then
 				Try
-					DeleteCurrentImage()
+					DeleteCurrentImage(True)
 				Catch ex As Exception
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 					'                   All Errors
@@ -10103,6 +10093,24 @@ RinseLatherRepeat:
 				End Try
 			End If
 			StringClean = StringClean.Replace("@DeleteLocalImage", "")
+		End If
+
+		' @DeleteImage: Deletes the current displayed image from filesystem, LiskedList, 
+		' DislikedList, LocalImageTagList and URL-Files, if the  current Image is 
+		' not an image in the Domme- or Contacts-Image directory or their subdirectories.
+		If StringClean.Contains("@DeleteImage") Then
+			If My.Settings.DomDeleteMedia = True Then
+				Try
+					DeleteCurrentImage(False)
+				Catch ex As Exception
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					'                   All Errors
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					Log.WriteError("Command @DeleteImage was unable to delete the image.",
+								   ex, "@DeleteImage failed")
+				End Try
+			End If
+			StringClean = StringClean.Replace("@DeleteImage", "")
 		End If
 
 		' The @UnlockImages Command allows the Domme Slideshow to resume functioning as normal.
@@ -10152,13 +10160,13 @@ RinseLatherRepeat:
 
 		If StringClean.Contains("@ShowImage") And Not StringClean.Contains("@ShowImage[") Then
 			FoundString = GetRandomImage()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowImage", "")
 		End If
 
 		If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
 			FoundString = GetImageData(ImageGenre.Butt).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 
 			StringClean = StringClean.Replace("@ShowButtImage", "")
 			StringClean = StringClean.Replace("@ShowButtsImage", "")
@@ -10166,7 +10174,7 @@ RinseLatherRepeat:
 
 		If StringClean.Contains("@ShowBoobsImage") Or StringClean.Contains("@ShowBoobImage") Then
 			FoundString = GetImageData(ImageGenre.Boobs).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 
 			StringClean = StringClean.Replace("@ShowBoobsImage", "")
 			StringClean = StringClean.Replace("@ShowBoobImage", "")
@@ -10174,96 +10182,103 @@ RinseLatherRepeat:
 
 		If StringClean.Contains("@ShowHardcoreImage") Then
 			FoundString = GetImageData(ImageGenre.Hardcore).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowHardcoreImage", "")
 		End If
 
 		If StringClean.Contains("@ShowSoftcoreImage") Then
 			FoundString = GetImageData(ImageGenre.Softcore).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowSoftcoreImage", "")
 		End If
 
 		If StringClean.Contains("@ShowLesbianImage") Then
 			FoundString = GetImageData(ImageGenre.Lesbian).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowLesbianImage", "")
 		End If
 
 		If StringClean.Contains("@ShowBlowjobImage") Then
 			FoundString = GetImageData(ImageGenre.Blowjob).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowBlowjobImage", "")
 		End If
 
 		If StringClean.Contains("@ShowFemdomImage") Then
 			FoundString = GetImageData(ImageGenre.Femdom).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowFemdomImage", "")
 		End If
 
 		If StringClean.Contains("@ShowLezdomImage") Then
 			FoundString = GetImageData(ImageGenre.Lezdom).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowLezdomImage", "")
 		End If
 
 		If StringClean.Contains("@ShowHentaiImage") Then
 			FoundString = GetImageData(ImageGenre.Hentai).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowHentaiImage", "")
 		End If
 
 		If StringClean.Contains("@ShowGayImage") Then
 			FoundString = GetImageData(ImageGenre.Gay).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowGayImage", "")
 		End If
 
 		If StringClean.Contains("@ShowMaledomImage") Then
 			FoundString = GetImageData(ImageGenre.Maledom).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowMaledomImage", "")
 		End If
 
 		If StringClean.Contains("@ShowCaptionsImage") Then
 			FoundString = GetImageData(ImageGenre.Captions).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowCaptionsImage", "")
 		End If
 
 		If StringClean.Contains("@ShowGeneralImage") Then
 			FoundString = GetImageData(ImageGenre.General).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowGeneralImage", "")
 		End If
 
 		If StringClean.Contains("@ShowLikedImage") Then
 			FoundString = GetImageData(ImageGenre.Liked).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowLikedImage", "")
 		End If
 
 		If StringClean.Contains("@ShowDislikedImage") Then
 			FoundString = GetImageData(ImageGenre.Disliked).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowDislikedImage", "")
 		End If
 
 		If StringClean.Contains("@ShowBlogImage") Then
 			FoundString = GetImageData(ImageGenre.Blog).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@ShowBlogImage", "")
 		End If
 
 		' The @NewBlogImage Command is a defunct Command that has been replaced by @ShowBlogImage
-
 		If StringClean.Contains("@NewBlogImage") Then
 			FoundString = GetImageData(ImageGenre.Blog).Random()
-			ShowImage(FoundString, True)
+			ShowImage(FoundString, False)
 			StringClean = StringClean.Replace("@NewBlogImage", "")
 		End If
 
+		If StringClean.Contains("@ShowLocalImage") Then
+			GetLocalImage()
+			StringClean = StringClean.Replace("@ShowLocalImage", "")
+		End If
+
+		'===============================================================================
+		'								@ShowLocalImage()
+		'===============================================================================
 		If StringClean.Contains("@ShowLocalImage(") Then
 			Dim LocalFlag As String = GetParentheses(StringClean, "@ShowLocalImage(")
 			LocalFlag = FixCommas(LocalFlag)
@@ -10348,15 +10363,14 @@ RinseLatherRepeat:
 
 			StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
 		End If
-
-		If StringClean.Contains("@ShowLocalImage") Then
-			GetLocalImage()
-			StringClean = StringClean.Replace("@ShowLocalImage", "")
-		End If
-
+		'----------------------------------------
+		' @ShowLocalImage()- End
+		'----------------------------------------
+		'===============================================================================
+		'								@ShowTaggedImage
+		'===============================================================================
 		If StringClean.Contains("@ShowTaggedImage") Then
 			'TODO-Next: @ShowTaggedImage: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
-			'BUG: @DeleteLocalImage is not working with @ShowTaggedImage
 			'Debug.Print("ShowTaggedImage StringClean ^^^^^^^^^^^^^^^^^^^^^^ = " & StringClean)
 
 			'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
@@ -10417,93 +10431,90 @@ RinseLatherRepeat:
 
 			JustShowedBlogImage = True
 
-			ShowImage(FoundString)
-
-			DeleteLocalImageFilePath = FoundString
+			ShowImage(FoundString, False)
 
 			StringClean = StringClean.Replace("@ShowTaggedImage", "")
 		End If
-
+		'----------------------------------------
+		' @ShowTaggedImage - End
+		'----------------------------------------
+		'===============================================================================
+		'									@ShowImage[]
+		'===============================================================================
 		If StringClean.Contains("@ShowImage[") Then
-			'TODO-Next: @ShowImage: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
-			'BUG: @DeleteLocalImage is not working with @ShowImage[] 
-
 			Dim ImageToShow As String = GetParentheses(StringClean, "@ShowImage[")
+			Try
+				Dim tmpImgLoc As String = ""
 
-			If ImageToShow.Contains("://") Then
-
-				Try
-					ShowImage(ImageToShow)
-					JustShowedBlogImage = True
-				Catch
-				End Try
-
-				GoTo ShowedBlogImage
-
-			End If
-
-			ImageToShow = ImageToShow.Replace("/", "\")
-
-			If ImageToShow.Contains(":\") Then
-
-				If File.Exists(ImageToShow) Then
-					Try
-						ShowImage(ImageToShow)
-						JustShowedBlogImage = True
-					Catch
-						ClearMainPictureBox()
-						MessageBox.Show(Me, ImageToShow & " could not be accessed!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-					End Try
-				Else
-					MessageBox.Show(Me, Path.GetFileName(ImageToShow) & " was not found in " & Path.GetDirectoryName(ImageToShow) & "!" & Environment.NewLine & Environment.NewLine &
-						"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				If isURL(ImageToShow) Then
+					'########################## ImageURL was given #########################
+					tmpImgLoc = ImageToShow
+					GoTo ShowedBlogImage
 				End If
 
-
-				GoTo ShowedBlogImage
-
-			Else
-
-				ImageToShow = Application.StartupPath & "\Images\" & ImageToShow
-				ImageToShow = ImageToShow.Replace("\\", "\")
-
-			End If
-
-
-			If ImageToShow.Contains("*") Then
-
-				Dim ImageList As New List(Of String)
-
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Path.GetDirectoryName(ImageToShow), FileIO.SearchOption.SearchTopLevelOnly, Path.GetFileName(ImageToShow))
-					ImageList.Add(foundFile)
-				Next
-
-				If ImageList.Count > 0 Then
-					ShowImage(ImageList(randomizer.Next(0, ImageList.Count)))
-					JustShowedBlogImage = True
-				Else
-					ClearMainPictureBox()
-					MessageBox.Show(Me, "No images matching " & Path.GetFileName(ImageToShow) & " were found in " & Path.GetDirectoryName(ImageToShow) & "!" & Environment.NewLine & Environment.NewLine &
-						 "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				' Change evtl. wrong given Slashes
+				ImageToShow = ImageToShow.Replace("/", "\")
+				' Transform relative to absolute path
+				If Path.IsPathRooted(ImageToShow) = False Then
+					ImageToShow = Application.StartupPath & "\Images\" & ImageToShow
+					ImageToShow = ImageToShow.Replace("\\", "\")
 				End If
 
-			Else
+				If ImageToShow.Contains("*") Then
+					'######################### Directory was given #########################
+					Dim tmpFilter As String = Path.GetFileName(ImageToShow)
+					Dim tmpDir As String = Path.GetDirectoryName(ImageToShow)
+					Dim ImageList As List(Of String)
 
-				Try
-					ShowImage(ImageToShow)
-					JustShowedBlogImage = True
-				Catch
-					ClearMainPictureBox()
-					MessageBox.Show(Me, ImageToShow & " could not be accessed!" & Environment.NewLine & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				End Try
+					If Directory.Exists(tmpDir) = False Then
+						Throw New Exception(
+							"The given directory """ & tmpDir & """ does not exist." &
+							vbCrLf & vbCrLf &
+							"Please make sure the directory exists and it is spelled correctly in the script.")
+					End If
 
-			End If
+					If tmpFilter = "*" Then
+						ImageList = myDirectory.GetFilesImages(tmpDir)
+					Else
+						ImageList = Directory.GetFiles(tmpDir, tmpFilter, SearchOption.TopDirectoryOnly).ToList
+					End If
 
+					If ImageList.Count = 0 Then
+						Throw New FileNotFoundException(
+							"No images matching the filter """ & tmpFilter &
+							""" were found in """ & tmpDir & """!" &
+							vbCrLf & vbCrLf &
+							"Please make sure that valid files exist and the wildcards are applied correctly in the script.")
+					End If
+
+					tmpImgLoc = ImageList(New Random().Next(0, ImageList.Count))
+				Else
+					'############################# Single Image ############################
+					If File.Exists(ImageToShow) Then
+						tmpImgLoc = ImageToShow
+					Else
+						Throw New Exception(
+							"""" & Path.GetFileName(ImageToShow) & """ was not found in """ & Path.GetDirectoryName(ImageToShow) & """!" &
+							vbCrLf & vbCrLf &
+							"Please make sure the file exists and it is spelled correctly in the script.")
+					End If
+				End If
+				'############### Display the Image ##################
 ShowedBlogImage:
-
+				ShowImage(tmpImgLoc, False)
+			Catch ex As Exception
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'                   All Errors
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Log.WriteError("Command @ShowImage[] was unable to display the image.",
+							   ex, "Error at @ShowImage[]")
+				MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error at @ShowImage[]")
+			End Try
 			StringClean = StringClean.Replace("@ShowImage[" & ImageToShow & "]", "")
-
 		End If
+		'----------------------------------------
+		' @ShowImage[]- End
+		'----------------------------------------
 		'===============================================================================
 		'								Legacy TnA-Slideshow
 		'===============================================================================
@@ -10706,7 +10717,7 @@ ShowedBlogImage:
 		' Slideshow - End
 		'----------------------------------------
 		' This Command will not work in the same line, because the Images are loaded async and not available yet.
-		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", CurrentImage)
+		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", ImageLocation)
 
 		' The @LockImages Commnd prevents the Domme Slideshow from moving forward or back when set to "Tease" or "Timed". Manual operation of Domme Slideshow images is still allowed,
 		' and pictures displayed through other means will still work. Images are automatically unlocked whenever Tease AI moves into a Link script, an End script, any Interrupt occurs
@@ -15651,7 +15662,6 @@ Skip_RandomFile:
 				If LocalImageListCheck = False Then
 					'LocalImage = Image.FromFile(PicDir)
 					LocalImageSTR = PicDir
-					DeleteLocalImageFilePath = PicDir
 				End If
 
 				LocalImageFound = True
@@ -21264,9 +21274,6 @@ Skip_RandomFile:
 		ShowImage(FoundString, True)
 		JustShowedBlogImage = True
 
-		DeleteLocalImageFilePath = FoundString
-		CurrentImage = FoundString
-
 	End Sub
 
 
@@ -23619,26 +23626,8 @@ RestartFunction:
             ' Lock Control
             PicStripTSMIremoveFromURL.Enabled = False
 
-            ' Chekc if directory exits,
-            If myDirectory.Exists(Application.StartupPath & "\Images\System\URL Files\") Then
-
-                ' Fine the URL in all URLFiles
-                Dim foundFiles As ObjectModel.ReadOnlyCollection(Of String) =
-					FileIO.FileSystem.FindInFiles(Application.StartupPath & "\Images\System\URL Files\",
-												  CurrentImage, True, FileIO.SearchOption.SearchTopLevelOnly)
-
-                ' Delete the URL from all Files 
-                For Each filePath As String In foundFiles
-                    ' read all lines from file
-                    Dim deleteFile As List(Of String) = Txt2List(filePath)
-
-                    ' Delete all Lines containing the URL
-                    deleteFile.RemoveAll(Function(x) x.Contains(CurrentImage))
-
-                    'Write modified List to disk.
-                    File.WriteAllLines(filePath, deleteFile)
-				Next
-			End If
+			' Remove from URL-Files.
+			RemoveFromUrlFiles(ImageLocation)
 		Catch ex As Exception
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             '						       All Errors
@@ -24037,11 +24026,11 @@ GetDommeSlideshow:
 				mainPictureBox.Image.Dispose()
 				mainPictureBox.Image = Nothing
 
-				DeleteLocalImageFilePath = ""
+				GC.Collect()
+				Application.DoEvents()
+
 				PBImage = ""
 				ImageLocation = ""
-
-				GC.Collect()
 			Catch ex As Exception
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				'                                            All Errors
@@ -24653,7 +24642,7 @@ GetDommeSlideshow:
 		SettingsList.Add("Update1: " & Update1)
 		SettingsList.Add("Update2: " & Update2)
 		SettingsList.Add("Update3: " & Update3)
-		SettingsList.Add("LastSuccessfulImage: " & LastSuccessfulImage)
+		SettingsList.Add("LastSuccessfulImage: --obsolete--") ' for compatibility
 		SettingsList.Add("GetFolder: " & GetFolder)
 		SettingsList.Add("FileCount: " & FileCount)
 		SettingsList.Add("FileCountMax: " & FileCountMax)
@@ -24865,7 +24854,7 @@ GetDommeSlideshow:
 		SettingsList.Add("EdgeHoldFlag: " & EdgeHoldFlag)
 		SettingsList.Add("SlideshowInt: " & SlideshowInt)
 		SettingsList.Add("JustShowedSlideshowImage: " & JustShowedSlideshowImage)
-		SettingsList.Add("DeleteLocalImageFilePath: " & DeleteLocalImageFilePath)
+		SettingsList.Add("DeleteLocalImageFilePath: --obsolete--") ' for compatibility
 		SettingsList.Add("RandomSlideshowCategory: " & RandomSlideshowCategory)
 		SettingsList.Add("ResetFlag: " & ResetFlag)
 		SettingsList.Add("DommeTags: " & DommeTags)
@@ -24875,7 +24864,7 @@ GetDommeSlideshow:
 		SettingsList.Add("AdjustingWindow: " & AdjustingWindow)
 		SettingsList.Add("SplitContainerHeight: " & SplitContainerHeight)
 		SettingsList.Add("DommeImageFound: " & DommeImageFound)
-		SettingsList.Add("DommeImageListCheck: " & DommeImageListCheck)
+		SettingsList.Add("DommeImageListCheck: --obsolete--") ' for compatibility
 		SettingsList.Add("LocalImageFound: " & LocalImageFound)
 		SettingsList.Add("LocalImageListCheck: " & LocalImageListCheck)
 		SettingsList.Add("CBTBothActive: " & CBTBothActive)
@@ -25267,7 +25256,7 @@ GetDommeSlideshow:
 		Update1 = SettingsList(161).Replace("Update1: ", "")
 		Update2 = SettingsList(162).Replace("Update2: ", "")
 		Update3 = SettingsList(163).Replace("Update3: ", "")
-		LastSuccessfulImage = SettingsList(164).Replace("LastSuccessfulImage: ", "")
+		'LastSuccessfulImage = SettingsList(164).Replace("LastSuccessfulImage: ", "")
 		GetFolder = SettingsList(165).Replace("GetFolder: ", "")
 		FileCount = SettingsList(166).Replace("FileCount: ", "")
 		FileCountMax = SettingsList(167).Replace("FileCountMax: ", "")
@@ -25465,7 +25454,7 @@ GetDommeSlideshow:
 		EdgeHoldFlag = SettingsList(344).Replace("EdgeHoldFlag: ", "")
 		SlideshowInt = SettingsList(345).Replace("SlideshowInt: ", "")
 		JustShowedSlideshowImage = SettingsList(346).Replace("JustShowedSlideshowImage: ", "")
-		DeleteLocalImageFilePath = SettingsList(347).Replace("DeleteLocalImageFilePath: ", "")
+		'DeleteLocalImageFilePath = SettingsList(347).Replace("DeleteLocalImageFilePath: ", "")
 		RandomSlideshowCategory = SettingsList(348).Replace("RandomSlideshowCategory: ", "")
 		ResetFlag = SettingsList(349).Replace("ResetFlag: ", "")
 		DommeTags = SettingsList(350).Replace("DommeTags: ", "")
@@ -25475,7 +25464,7 @@ GetDommeSlideshow:
 		AdjustingWindow = SettingsList(354).Replace("AdjustingWindow: ", "")
 		SplitContainerHeight = SettingsList(355).Replace("SplitContainerHeight: ", "")
 		DommeImageFound = SettingsList(356).Replace("DommeImageFound: ", "")
-		DommeImageListCheck = SettingsList(357).Replace("DommeImageListCheck: ", "")
+		'DommeImageListCheck = SettingsList(357).Replace("DommeImageListCheck: ", "")
 		LocalImageFound = SettingsList(358).Replace("LocalImageFound: ", "")
 		LocalImageListCheck = SettingsList(359).Replace("LocalImageListCheck: ", "")
 		CBTBothActive = SettingsList(360).Replace("CBTBothActive: ", "")
