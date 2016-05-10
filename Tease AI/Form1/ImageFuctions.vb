@@ -79,18 +79,24 @@ Partial Class Form1
         ''' <returns>Returns a List Containing all Found Links. If none are 
         ''' Found an empty List is returned</returns>
         Public Function ToList() As List(Of String)
-			'TODO: Next Add Errorhandling
 			Dim rtnList As New List(Of String)
+			Try
+				' If no Porn is allowed, then return Empty
+				If SYS_NoPornAllowed Then Return rtnList
 
-			' If no Porn is allowed, then return Empty
-			If SYS_NoPornAllowed Then Return rtnList
+				rtnList.AddRange(ToList(ImageSourceType.Local))
 
-			rtnList.AddRange(ToList(ImageSourceType.Local))
-
-            ' Load only LocalFiles if Oflline-Mode is acivated.
-            If OfflineMode = False Then _
-				rtnList.AddRange(ToList(ImageSourceType.Remote))
-
+				' Load only LocalFiles if Oflline-Mode is acivated.
+				If OfflineMode = False Then _
+					rtnList.AddRange(ToList(ImageSourceType.Remote))
+			Catch ex As Exception
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'                                            All Errors
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Log.WriteError("Failed to fetch ImageList for genre." & Name.ToString & " : " & ex.Message, ex,
+							   "Excetion at: " & Name.ToString & ".ToList()")
+				Return New List(Of String)
+			End Try
 			Return rtnList
 		End Function
 
@@ -102,107 +108,115 @@ Partial Class Form1
 		''' <returns>Returns a List Containing all Found Links. If none are 
 		''' Found an empty List is returned</returns>
 		Public Function ToList(ByRef Type As ImageSourceType) As List(Of String)
-			'TODO: Next Add Errorhandling
 			Dim rtnList As New List(Of String)
 
-			' If no Porn is allowed, then return Empty
-			If SYS_NoPornAllowed Then Return rtnList
+			Try
+				' If no Porn is allowed, then return Empty
+				If SYS_NoPornAllowed Then Return rtnList
 
-			' If offline mode is activated then search only for local files.
-			If OfflineMode Then Type = ImageSourceType.Local
+				' If offline mode is activated then search only for local files.
+				If OfflineMode Then Type = ImageSourceType.Local
 
-			If Name = ImageGenre.Blog Then
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				'                                   Blog Images
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				If OfflineMode Or Type = ImageSourceType.Local Then GoTo exitEmpty
-				Dim tmpList As New List(Of String)
+				If Name = ImageGenre.Blog Then
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'                                   Blog Images
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					If OfflineMode Or Type = ImageSourceType.Local Then GoTo exitEmpty
+					Dim tmpList As New List(Of String)
 
-				' Load threadsafe all checked Items into List.
-				Dim temp As Object = FrmSettings.UIThread(Function()
-															  Return FrmSettings.URLFileList.CheckedItems.Cast(Of String).ToList
-														  End Function)
+					' Load threadsafe all checked Items into List.
+					Dim temp As Object = FrmSettings.UIThread(Function()
+																  Return FrmSettings.URLFileList.CheckedItems.Cast(Of String).ToList
+															  End Function)
 
-				tmpList.AddRange(DirectCast(temp, List(Of String)))
+					tmpList.AddRange(DirectCast(temp, List(Of String)))
 
-				' Remove Items where File does not exist.
-				tmpList.RemoveAll(Function(x) Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & x & ".txt"))
+					' Remove Items where File does not exist.
+					tmpList.RemoveAll(Function(x) Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & x & ".txt"))
 
-				' Check Result if Files in List
-				If tmpList.Count < 1 Then GoTo exitEmpty
+					' Check Result if Files in List
+					If tmpList.Count < 1 Then GoTo exitEmpty
 
-				For Each fileName As String In tmpList
-					' Read the URL-File
-					Dim addList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & fileName & ".txt")
+					For Each fileName As String In tmpList
+						' Read the URL-File
+						Dim addList As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & fileName & ".txt")
 
-					' add lines from file
-					rtnList.AddRange(addList)
-				Next
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-				' Blog Images - End
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			ElseIf Name = ImageGenre.Liked
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				'                                  Liked Images
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				Try
-					Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
+						' add lines from file
+						rtnList.AddRange(addList)
+					Next
+					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+					' Blog Images - End
+					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				ElseIf Name = ImageGenre.Liked
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'                                  Liked Images
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					Try
+						Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
 
-					' Remove all URLs if Offline-Mode is activated
-					If OfflineMode Or Type = ImageSourceType.Local Then
-						addlist.RemoveAll(Function(x) isURL(x))
+						' Remove all URLs if Offline-Mode is activated
+						If OfflineMode Or Type = ImageSourceType.Local Then
+							addlist.RemoveAll(Function(x) isURL(x))
+						End If
+
+						rtnList.AddRange(addlist)
+					Catch ex As Exception
+						Log.WriteError(ex.Message, ex, "Error occured while loading Likelist")
+						GoTo exitEmpty
+					End Try
+					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+					' Liked Images - End
+					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				ElseIf Name = ImageGenre.Disliked
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'                                Disliked Images
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					Try
+						Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
+
+						' Remove all URLs if Offline-Mode is activated
+						If OfflineMode Or Type = ImageSourceType.Local Then
+							addlist.RemoveAll(Function(x) isURL(x))
+						End If
+
+						rtnList.AddRange(addlist)
+					Catch ex As Exception
+						Log.WriteError(ex.Message, ex, "Error occured while loading Dislikelist")
+						GoTo exitEmpty
+					End Try
+					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+					' Disliked Images - End
+					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				Else
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'                                 Regular Genres
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+					' Load Local ImageList
+					If Type = ImageSourceType.Local AndAlso LocalDirectory <> "" AndAlso LocalDirectory IsNot Nothing Then
+						If LocalSubDirectories = False Then
+							rtnList.AddRange(myDirectory.GetFilesImages(LocalDirectory, SearchOption.TopDirectoryOnly))
+						Else
+							rtnList.AddRange(myDirectory.GetFilesImages(LocalDirectory, SearchOption.AllDirectories))
+						End If
 					End If
 
-					rtnList.AddRange(addlist)
-				Catch ex As Exception
-					Log.WriteError(ex.Message, ex, "Error occured while loading Likelist")
-					GoTo exitEmpty
-				End Try
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-				' Liked Images - End
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			ElseIf Name = ImageGenre.Disliked
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				'                                Disliked Images
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				Try
-					Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
-
-					' Remove all URLs if Offline-Mode is activated
-					If OfflineMode Or Type = ImageSourceType.Local Then
-						addlist.RemoveAll(Function(x) isURL(x))
+					' Load an URL-File
+					If Type = ImageSourceType.Remote And URLFile <> "" And URLFile IsNot Nothing Then
+						rtnList.AddRange(Txt2List(URLFile))
 					End If
-
-					rtnList.AddRange(addlist)
-				Catch ex As Exception
-					Log.WriteError(ex.Message, ex, "Error occured while loading Dislikelist")
-					GoTo exitEmpty
-				End Try
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-				' Disliked Images - End
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			Else
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				'                                 Regular Genres
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-
-				' Load Local ImageList
-				If Type = ImageSourceType.Local AndAlso LocalDirectory <> "" AndAlso LocalDirectory IsNot Nothing Then
-					If LocalSubDirectories = False Then
-						rtnList.AddRange(myDirectory.GetFilesImages(LocalDirectory, SearchOption.TopDirectoryOnly))
-					Else
-						rtnList.AddRange(myDirectory.GetFilesImages(LocalDirectory, SearchOption.AllDirectories))
-					End If
+					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+					' Regular Genres - End
+					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 				End If
-
-				' Load an URL-File
-				If Type = ImageSourceType.Remote And URLFile <> "" And URLFile IsNot Nothing Then
-					rtnList.AddRange(Txt2List(URLFile))
-				End If
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-				' Regular Genres - End
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			End If
+			Catch ex As Exception
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'                                            All Errors
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Log.WriteError("Failed to fetch ImageList for genre." & Name.ToString & " and Source." & Type.ToString & " : " & ex.Message, ex,
+							   "Excetion at: " & Name.ToString & ".ToList(" & Type.ToString & ")")
+				Return New List(Of String)
+			End Try
 exitEmpty:
 			Return rtnList
 		End Function
@@ -258,7 +272,6 @@ NoneFound:
 				'						       All Errors
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while choosing a random Image.")
-				'SUGGESTION: 
 			End Try
 NoneFound:
 			' Return an Error-Image FilePath
@@ -610,6 +623,7 @@ NoNeFound:
 		If e.Cancelled Then Exit Sub
 
 		If TypeOf e.Result Is ImageFetchObject Then
+			'TODO-Next: Add the picturebox-Streching Stuff.?.
 			Dim FetchResult As ImageFetchObject = e.Result
 			Dim OldImage As Image = mainPictureBox.Image
 			Dim NewImage As Bitmap = FetchResult.FetchedImage.Clone

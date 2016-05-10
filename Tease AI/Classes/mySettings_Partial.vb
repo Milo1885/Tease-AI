@@ -166,13 +166,13 @@ Namespace My
         ''' </summary>
         Friend Shared Sub importOnRestart()
             Try
-                Dim fs As New OpenFileDialog With
-                {.Filter = "config|*.config",
-                .Multiselect = False,
-                .Title = "Select config file to import.",
-                .InitialDirectory = Reflection.Assembly.GetExecutingAssembly().CodeBase}
+				Dim fs As New OpenFileDialog With
+				{.Filter = "config|*.config",
+				.Multiselect = False,
+				.Title = "Select config file to import.",
+				.InitialDirectory = BackupDir}
 
-                If fs.ShowDialog = DialogResult.OK And fs.FileName <> "" And File.Exists(fs.FileName) Then
+				If fs.ShowDialog = DialogResult.OK And fs.FileName <> "" And File.Exists(fs.FileName) Then
                     ' Restart the application with new Start-parameters
                     Dim startInfo As New ProcessStartInfo()
                     startInfo.FileName = Reflection.Assembly.GetExecutingAssembly().CodeBase
@@ -228,21 +228,24 @@ Namespace My
                     '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
                     Dim splitVersion() As String = Application.Info.Version.ToString.Split(".")
                     Dim calcVersion As New List(Of Integer)
-                    Dim copyRest As Boolean = True
+					Dim copyRest As Boolean = False
 
-                    For i = splitVersion.Count - 1 To 0 Step -1
+					For i = splitVersion.Count - 1 To 0 Step -1
                         Dim currNumber As Integer = Integer.Parse(splitVersion(i))
                         Dim prevNumber As Integer = currNumber - 1
 
-                        If prevNumber = -1 And i <> 0 Then
-                            ' Number was 0 => convert to 9999 if not Major Number
-                            calcVersion.Insert(0, 9999)
-                        ElseIf prevNumber < currNumber
+						If copyRest Then
+							' Calculated a non-negative number before Copy rest
+							calcVersion.Insert(0, currNumber)
+						ElseIf prevNumber = -1 And i <> 0 Then
+							' Number was 0 => convert to 9999 if not Major Number
+							calcVersion.Insert(0, 9999)
+						ElseIf prevNumber < currNumber
                             ' Number is smaller than the current Number => Copy rest of Numbers
                             copyRest = True
-                            calcVersion.Insert(0, prevNumber)
-                        Else
-                            Throw New ArgumentException("Unknown case while calculation previous Version.")
+							calcVersion.Insert(0, prevNumber)
+						Else
+							Throw New ArgumentException("Unknown case while calculation previous Version.")
                         End If
                     Next
 
