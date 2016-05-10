@@ -559,7 +559,7 @@ NoNeFound:
 				Return _SaveImageDirectory
 			End Get
 			Set(value As String)
-				If Not value.EndsWith("\") Then
+				If Not value.EndsWith("\") And value <> "" Then
 					_SaveImageDirectory = value & "\"
 				Else
 					_SaveImageDirectory = value
@@ -706,6 +706,45 @@ NoNeFound:
 
 		If WaitToFinish Then BWimageFetcher.WaitToFinish()
 
+	End Sub
+
+	''' <summary>
+	''' Deletes the current image from Filesystem, and disposes the resources from the Main Picturebox. Applies 
+	''' only to Images not in the current DommeSlideshow.
+	''' <para>Rethrows all Exceptions!</para>
+	''' </summary>
+	Private Sub DeleteCurrentImage()
+		'TODO-Next: (!) Remove Images from Liked, Disliked and LocalImageTaggs.Txt too. Otherwise Files are corrupted!
+		If DeleteLocalImageFilePath Is Nothing Then Throw New ArgumentException("The given path was empty.")
+		If DeleteLocalImageFilePath = "" Then Throw New ArgumentException("The given path was empty.")
+
+		If isURL(DeleteLocalImageFilePath) Then
+			Throw New ArgumentException("Can't delete remote files!")
+		Else
+			Try
+				' Check if all requirements are met.
+				Dim tmpstring As String = Path.GetDirectoryName(DeleteLocalImageFilePath)
+				If myDirectory.Exists(tmpstring) = False Then
+					Throw New DirectoryNotFoundException("The given directory was not found: """ &
+														 Path.GetDirectoryName(tmpstring) & """")
+				End If
+
+				If File.Exists(DeleteLocalImageFilePath) = False Then
+					Throw New FileNotFoundException("The given File was not found: """ &
+													DeleteLocalImageFilePath & """")
+				End If
+
+				' Delete the File from disk
+				My.Computer.FileSystem.DeleteFile(DeleteLocalImageFilePath)
+				' Dispose the Image from RAM
+				ClearMainPictureBox()
+			Catch ex As Exception
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'                                         All Errors
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Throw
+			End Try
+		End If
 	End Sub
 
 

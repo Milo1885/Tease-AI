@@ -429,6 +429,7 @@ Public Class Form1
 	Public SlideshowInt As Integer
 	Dim JustShowedSlideshowImage As Boolean
 
+	'TODO: Change to Property after Implementing ImageDataContainer
 	Public DeleteLocalImageFilePath As String
 	Dim RandomSlideshowCategory As String
 
@@ -10075,11 +10076,34 @@ RinseLatherRepeat:
 
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 		'									ImageCommands
-		' Make sure you call all Display ImageFunctions before executing @LockImages.
-		' If you don't, FilterList() will return a wrong list of lines =>
-		' => The Domme is talking about an image, but she never showed one.
-		' => She is talking about an new image, but never showed one.
+		' - Make sure you call all Display ImageFunctions before executing @LockImages.
+		'	If you don't, FilterList() will return a wrong list of lines =>
+		'		=> The Domme is talking about an image, but she never showed one.
+		'		=> She is talking about an new image, but never showed one.
+		' - Call @DeleteLocalImage before you start to display a new Image, because they 
+		'	are loaded and displayed async. Otherwise it will delete the wrong image!
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+		' @DeleteLocalImage deletes the current displayed image from filesystem, if the 
+		' current Image is not an DommeImage.
+		If StringClean.Contains("@DeleteLocalImage") Then
+			'TODO-Next: @DeleteLocalImage Rework and Check if the Command is working after all that changes in imagestuff.
+			'BUG: @DeleteLocalImage will corrupt Liked, Disliked and LocalImageTags.Txt
+			'ShowImage(Application.StartupPath & "\Images\System\Black.jpg")
+
+			If My.Settings.DomDeleteMedia = True Then
+				Try
+					DeleteCurrentImage()
+				Catch ex As Exception
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					'                   All Errors
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					Log.WriteError("Command @DeleteLocalImage was unable to delete the image.",
+								   ex, "@DeleteLocalImage failed")
+				End Try
+			End If
+			StringClean = StringClean.Replace("@DeleteLocalImage", "")
+		End If
 
 		' The @UnlockImages Command allows the Domme Slideshow to resume functioning as normal.
 		If StringClean.Contains("@UnlockImages") Then
@@ -10325,7 +10349,6 @@ RinseLatherRepeat:
 			StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
 		End If
 
-
 		If StringClean.Contains("@ShowLocalImage") Then
 			GetLocalImage()
 			StringClean = StringClean.Replace("@ShowLocalImage", "")
@@ -10333,6 +10356,7 @@ RinseLatherRepeat:
 
 		If StringClean.Contains("@ShowTaggedImage") Then
 			'TODO-Next: @ShowTaggedImage: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
+			'BUG: @DeleteLocalImage is not working with @ShowTaggedImage
 			'Debug.Print("ShowTaggedImage StringClean ^^^^^^^^^^^^^^^^^^^^^^ = " & StringClean)
 
 			'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
@@ -10401,7 +10425,8 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@ShowImage[") Then
-
+			'TODO-Next: @ShowImage: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
+			'BUG: @DeleteLocalImage is not working with @ShowImage[] 
 
 			Dim ImageToShow As String = GetParentheses(StringClean, "@ShowImage[")
 
@@ -13241,37 +13266,6 @@ OrgasmDecided:
 			My.Settings.VitalSubAssignments = False
 			My.Settings.Save()
 			StringClean = StringClean.Replace("@VitalSubAssignment", "")
-		End If
-
-		If StringClean.Contains("@DeleteLocalImage") Then
-			'TODO-Next: @DeleteLocalImage Rework and Check if the Command is working after all that changes in imagestuff.
-			Debug.Print("FoundString = " & FoundString)
-
-			Try
-				mainPictureBox.Image.Dispose()
-			Catch
-			End Try
-			mainPictureBox.Image = Nothing
-			mainPictureBox.Refresh()
-			ShowImage(Application.StartupPath & "\Images\System\Black.jpg")
-			'ImageLocation = Application.StartupPath & "\Images\System\Black.jpg"
-			'PBImage =
-			'ImageThread.Start()
-			'DisplayImage(Image.FromFile())
-			'mainPictureBox.Image = Image.FromFile(Application.StartupPath & "\Images\System\Black.jpg")
-
-			Debug.Print("DeleteLocalImageFilePath = " & DeleteLocalImageFilePath)
-
-			If FrmSettings.CBDomDel.Checked = True Then
-				Try
-					My.Computer.FileSystem.DeleteFile(DeleteLocalImageFilePath)
-				Catch
-				End Try
-			End If
-
-			DeleteLocalImageFilePath = ""
-
-			StringClean = StringClean.Replace("@DeleteLocalImage", "")
 		End If
 
 		If StringClean.Contains("@PlayAvoidTheEdge") Then
@@ -24038,18 +24032,24 @@ GetDommeSlideshow:
 
 	Public Sub ClearMainPictureBox()
 
-
-
 		If Not mainPictureBox Is Nothing Then
 			Try
 				mainPictureBox.Image.Dispose()
 				mainPictureBox.Image = Nothing
+
+				DeleteLocalImageFilePath = ""
+				PBImage = ""
+				ImageLocation = ""
+
 				GC.Collect()
-			Catch
+			Catch ex As Exception
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'                                            All Errors
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Log.WriteError("Unable to dispose the current image From PictureBox: " & ex.Message,
+								ex, "ClearMainPictureBox")
 			End Try
 		End If
-
-
 
 	End Sub
 
