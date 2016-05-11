@@ -9,7 +9,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
-BugFix: @LockImages didn't function when Glitter Contacts were in the room
+BugFix: @LockImages didn't function when Glitter Contacts were in the room. It's now also performed after all @Show... Commands. 
 
 BugFix: The program was filtering out @ShowImage type Commands in Linear acripts when @LockImages was activated, which goes against its function. It even prevented the lines from getting displayed in the first place. Added a Boolean to GetFilter to discern between filtering List or Linear type scripts
 
@@ -91,6 +91,8 @@ Tease AI will now move to the next script type in the cycle if the current scrip
 
 Added @Month() and @Day() to GetFilter(), I left them out by accident
 
+Added Command @DeleteImage: This will remove the current image from all local Sources. (File system, URL-Files, LikedList, DislikedList, LocalImageTagList). But it won't delete an image located in the Domme- or Contacts-Image directory or one of it's subdirectories.
+
 HandleScripts now uses GetFilter() the same way FilterList() does, code is much cleaner now
 
 Added @LockVideo and @UnlockVideo Commands - @LockVideo will prevent Tease AI from switching back to the image window when a video ends. This is useful for times when you want to play multiple videos in a row for whatever reason without the domme slideshow popping up in between. @UnlockVideo will deactivate this mode and switch back to the image window when used.
@@ -141,7 +143,246 @@ Fixes added from Community Members:
 	Daragorn: Clean-up of 1885's implementation of Daragorn's original Timed Writing code
 	
 	Daragorn: BugFix: Some aspects of the program didn't pause when Settings Menu was open and "Pause Program When Settings Menu is Visible" wasn't checked
+	
+	Stefaf: BugFix and Cause... Remote Images where stored to the RootDirectory, if Save Blog Images From Session was deactivated. 
+	
+	Stefaf: Bugfix: @DeleteLocalImage was sometimes deleting the wrong image. It also removes the file from LikedList, DislikedList and  LocalImageTagList now.  But it won't delete an image located in the Domme- or Contacts-Image directory or one of it's subdirectories.
+	
+	Stefaf: Bugfix & Rework : @ShowImage[]
+		[spoiler]- Added Logging. If an Error Occurs it is written to the logs. 
+		- Fixed GetFile in Directory with filter.
+		- Added new filter * -> This will give a result, from all available Image-Extensions.
+		[/spoiler]
+		
+	Stefaf - Bugfix: BBnB is working now. (@TnAFastSlides, @TnASlowSlides, @TnASlides, @CheckTnA)
+	
+	Stefaf - Improvement: Added Logging if a custom vocabularyFile is missing. Now this will create a new Error-Log-Entry.
+	
+	Stefaf - Improvement: Removing an URL from an URL-File in SettingsWindow took way too long. Now it's faster.
+	
+	Stefaf - Imporvement: @ShowLocalImage() Now the ImageDataContainer-Class is used. It doesn't try to get an single image from a single random genre any more. Instead it tries to get a single image from all given genres.
 
+	Stefaf - Improvement: Added logging at several points.
+
+	
+Conclusion List:
+	
+	[list]
+	
+	[*]#BlogImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#BlowjobImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#BoobImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#BoobsImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#ButtImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#ButtsImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#CaptionsImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#DislikedImageCount	 -> 	Reworked: Reacts now to OfflineMode
+	
+	[*]#EdgeHold	 -> 	Added: Returns a random value based on the user's Sub settings
+	
+	[*]#ExtremeHold	 -> 	Added: Returns a random value based on the user's Sub settings
+	
+	[*]#FemdomImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#GayImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#GeneralImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#HardcoreImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#HentaiImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#LesbianImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#LezdomImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#LikedImageCount	 -> 	Reworked: Reacts now to OfflineMode
+	
+	[*]#LocalImageCount	 -> 	Added: returns amount of Images
+	
+	[*]#LongHold	 -> 	Added: Returns a random value based on the user's Sub settings
+	
+	[*]#MaledomImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#SoftcoreImageCount	 -> 	Reworked: Reacts now to URL-Files and OfflineMode
+	
+	[*]#TaskCBTTime	 -> 	Ranges added to Ranges tab
+	
+	[*]#TaskEdges	 -> 	Ranges added to Ranges tab
+	
+	[*]#TaskHoldTheEdgeTime	 -> 	Ranges added to Ranges tab
+	
+	[*]#TaskStrokes	 -> 	Ranges added to Ranges tab
+	
+	[*]#TaskStrokingTime	 -> 	Ranges added to Ranges tab
+	
+	[*]@AddTokens()	 -> 	usable in Tasks now
+	
+	[*]@Afternoon	 -> 	 better filtered to user's daily WakupTime
+	
+	[*]@CBT	 -> 	 no longer run for a random number of times in Tasks
+	
+	[*]@CBTBalls	 -> 	 no longer run for a random number of times in Tasks
+	
+	[*]@CBTCock	 -> 	 no longer run for a random number of times in Tasks
+	
+	[*]@ChangeVar[]	 -> 	usable in Tasks now
+	
+	[*]@ChastityOff	 -> 	usable in Tasks now
+	
+	[*]@ChastityOn	 -> 	usable in Tasks now
+	
+	[*]@CheckTnA	 -> 	Reworked and fixed.
+	
+	[*]@ClearChat	 -> 	New: Clears the main chat window and Side Chat
+	
+	[*]@CurrentImage	 -> 	Reworked
+	
+	[*]@CustomMode()	 -> 	New with  Available modes: Goto, Video
+	
+	[*]@CustomTask()	 -> 	Enhanced, added settings in Ranges-Tab
+	
+	[*]@Day()	 -> 	Filters now correct
+	
+	[*]@DecreaseOrgasmChance	 -> 	usable in Tasks now
+	
+	[*]@DecreaseRuinChance	 -> 	usable in Tasks now
+	
+	[*]@DeleteFlag()	 -> 	usable in Tasks now
+	
+	[*]@DeleteImage	 -> 	New: to remove URL-Links and Local Files from all Local Sources. Deletes no Domme or Contact files
+	
+	[*]@DeleteLocalImage	 -> 	Reworked. Removes now Links in LoacalImageTags.txt, LikedImage.txt, DislikedImages.txt. Deletes no Domme or Contact files
+	
+	[*]@DeleteVar[]	 -> 	usable in Tasks now
+	
+	[*]@Edge	 -> 	
+	
+	[*]@Edge()	 -> 	
+	
+	[*]@IncreaseOrgasmChance	 -> 	usable in Tasks now
+	
+	[*]@IncreaseRuinChance	 -> 	usable in Tasks now
+	
+	[*]@LockImages	 -> 	Fixed with Contacts, is performed after showing an image.
+	
+	[*]@LockVideo	 -> 	Added: will prevent Tease AI from switching back to the image window
+	
+	[*]@Month()	 -> 	Filters now correct
+	
+	[*]@Morning	 -> 	is better filtered to user's daily WakupTime
+	
+	[*]@NewBlogImage	 -> 	Reworked: does the same as @ShowBlogImage
+	
+	[*]@Night	 -> 	is better filtered to user's daily WakupTime
+	
+	[*]@PornAllowedOff	 -> 	Fixed: was not replaced correct in output.
+	
+	[*]@PornAllowedOn	 -> 	Fixed: was not replaced correct in output.
+	
+	[*]@RandomText()	 -> 	usable in Tasks now
+	
+	[*]@RemoveTokens()	 -> 	usable in Tasks now
+	
+	[*]@RestrictOrgasm	 -> 	usable in Tasks now
+	
+	[*]@RestrictOrgasm()	 -> 	usable in Tasks now
+	
+	[*]@RoundVar[]	 -> 	usable in Tasks now
+	
+	[*]@RT()	 -> 	usable in Tasks now
+	
+	[*]@SetDate()	 -> 	usable in Tasks now
+	
+	[*]@SetFlag()	 -> 	usable in Tasks now
+	
+	[*]@SetVar[]	 -> 	usable in Tasks now
+	
+	[*]@ShowBlogImage	 -> 	Reworked: Reacts now to OfflineMode
+	
+	[*]@ShowBlowjobImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowBoobImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowBoobsImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowButtImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowButtsImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowCaptionsImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowDislikedImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowFemdomImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowGayImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowGeneralImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowHardcoreImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowHentaiImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowImage[	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowImage[]	 -> 	Reworked: New Filter * for all available imagefiles, added logging
+	
+	[*]@ShowLesbianImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLezdomImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLikedImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLocalImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLocalImage(	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowLocalImage()	 -> 	Reworked: Won't show up an Errorimage anymore
+	
+	[*]@ShowMaledomImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowSoftcoreImage	 -> 	Reworked: uses OfflineMode, Displays Local and Remote Images syncronized with text
+	
+	[*]@ShowVar[]	 -> 	usable in Tasks now
+	
+	[*]@Slideshow()	 -> 	Reworked: uses OfflineMode, URL-Files, Displays Local and Remote Images syncronized with text
+	
+	[*]@StopStroking	 -> 	
+	
+	[*]@StopTnA	 -> 	Reworked and fixed.
+	
+	[*]@SubOld	 -> 	Filters now correct
+	
+	[*]@SubYoung	 -> 	Filters now correct
+	
+	[*]@TempFlag()	 -> 	usable in Tasks now
+	
+	[*]@TnAFastSlides	 -> 	Reworked and fixed.
+	
+	[*]@TnASlides	 -> 	Reworked and fixed.
+	
+	[*]@TnASlowSlides	 -> 	Reworked and fixed.
+	
+	[*]@UnlockVideo	 -> 	deactivates @LockVideo and shows the image window
+	
+	[*]@UpdateOrgasm	 -> 	usable in Tasks now
+	
+	[*]@UpdateRuined	 -> 	usable in Tasks now
+	
+	[/list]
+
+
+	
 # Changelog - Patch 53
 
 Added check for empty string in MyDirectory Class

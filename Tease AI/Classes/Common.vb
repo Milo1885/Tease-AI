@@ -104,6 +104,45 @@ Public Class Common
 		Return ""
 	End Function
 
+	''' =========================================================================================================
+	''' <summary>
+	''' Removes all lines containing the given string from a file.
+	''' </summary>
+	''' <param name="Filepath">The File to delete from</param>
+	''' <param name="Searchpattern">The Filter what the line has to contain to delet it. (Case Insensitive)
+	''' Has to be at least 6 chars long.
+	''' </param>
+	''' <returns>The count of removed lines .</returns>
+	Friend Shared Function TxtRemoveLine(ByVal Filepath As String,
+										 ByVal Searchpattern As String) As Integer
+		Dim rtnInt As Integer = 0
+		Try
+			If Searchpattern = Nothing Then Throw New ArgumentException("Searchpattern was empty.")
+			If Searchpattern.Count < 5 Then Throw New ArgumentException("Searchpattern has to be longer than 5 Chars.")
+			' Read the TextFile
+			Dim tmplist As List(Of String) = Txt2List(Filepath)
+
+			' Check if File has lines.
+			If tmplist.Count > 0 Then
+				' Remove all lines containing the searchpattern
+				rtnInt = tmplist.RemoveAll(Function(x) x.ToLower.Contains(Searchpattern.ToLower))
+
+				' If there were Lines deleted, 
+				If rtnInt > 0 Then File.WriteAllLines(Filepath, tmplist)
+			End If
+
+			'Return the Deleted line count 
+			Return rtnInt
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'						       All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Error removing TextLine: """ & Searchpattern &
+						   """ from file """ & Filepath & """")
+			Return 0
+		End Try
+	End Function
+
 #End Region ' TextFiles
 
 	''' =========================================================================================================

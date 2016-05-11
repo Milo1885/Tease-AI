@@ -152,7 +152,7 @@ Partial Class Form1
 					'                                  Liked Images
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					Try
-						Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
+						Dim addlist As List(Of String) = Txt2List(PathLikeList)
 
 						' Remove all URLs if Offline-Mode is activated
 						If OfflineMode Or Type = ImageSourceType.Local Then
@@ -559,6 +559,7 @@ NoNeFound:
 				Return _SaveImageDirectory
 			End Get
 			Set(value As String)
+				If value Is Nothing Then _SaveImageDirectory = ""
 				If Not value.EndsWith("\") And value <> "" Then
 					_SaveImageDirectory = value & "\"
 				Else
@@ -628,6 +629,8 @@ NoNeFound:
 			Dim OldImage As Image = mainPictureBox.Image
 			Dim NewImage As Bitmap = FetchResult.FetchedImage.Clone
 
+			FetchResult.FetchedImage.Dispose()
+
 			mainPictureBox.Image = NewImage
 			mainPictureBox.Invalidate()
 			mainPictureBox.Refresh()
@@ -645,22 +648,15 @@ NoNeFound:
 			If FetchResult.Source = ImageSourceType.Local Then
 				Debug.Print("Local Image PictureStrip")
 
-				If _ImageFileNames.Contains(FetchResult.ImageLocation) Then _
-					DeleteLocalImageFilePath = FetchResult.ImageLocation
-
-				CurrentImage = FetchResult.ImageLocation
-
 				PicStripTSMIcopyImageLocation.Enabled = True
 				PicStripTSMIsaveImage.Enabled = False
 				PicStripTSMISaveImageTo.Enabled = False
-
 				PicStripTSMIlikeImage.Enabled = False
 				PicStripTSMIdislikeImage.Enabled = False
 				PicStripTSMIremoveFromURL.Enabled = False
 
 			Else
 				Debug.Print("Blog Image PictureStrip")
-				CurrentImage = FoundString
 
 				PicStripTSMIcopyImageLocation.Enabled = True
 				PicStripTSMIsaveImage.Enabled = True
@@ -708,44 +704,182 @@ NoNeFound:
 
 	End Sub
 
+	''' =========================================================================================================
 	''' <summary>
-	''' Deletes the current image from Filesystem, and disposes the resources from the Main Picturebox. Applies 
-	''' only to Images not in the current DommeSlideshow.
+	''' disposes the resources from the Main Picturebox and deletes the current image from Filesystem including 
+	''' TagList, LikedList and DislikedList.Applies only to Images not loacted in DommeImageDir or ContactImageDirs.
 	''' <para>Rethrows all Exceptions!</para>
+	''' <param name="restrictToLocal">Set TRUE to delete only LocalImages. Set to False to delete local 
+	''' images as well as remote image links</param>
 	''' </summary>
-	Private Sub DeleteCurrentImage()
-		'TODO-Next: (!) Remove Images from Liked, Disliked and LocalImageTaggs.Txt too. Otherwise Files are corrupted!
-		If DeleteLocalImageFilePath Is Nothing Then Throw New ArgumentException("The given path was empty.")
-		If DeleteLocalImageFilePath = "" Then Throw New ArgumentException("The given path was empty.")
+	Private Sub DeleteCurrentImage(ByVal restrictToLocal As Boolean)
+		If ImageLocation Is Nothing Then Throw New ArgumentException("The given path was empty.")
+		If ImageLocation = "" Then Throw New ArgumentException("The given path was empty.")
+		Try
+			If isURL(ImageLocation) Then
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'									Online Images
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				Debug.Print("××××××××××××××××××××××× Deleting remote Image: " & ImageLocation & "×××××××××××××××××××××××")
 
-		If isURL(DeleteLocalImageFilePath) Then
-			Throw New ArgumentException("Can't delete remote files!")
-		Else
-			Try
+				If restrictToLocal Then Throw New ArgumentException("Can't delete remote files!")
+				Dim rtnInt As Integer = 0
+				' #################### Remove from LikeList ####################
+				rtnInt += RemoveFromLikeList(ImageLocation)
+				' ################## Remove from DislikeList ###################
+				rtnInt += RemoveFromDislikeList(ImageLocation)
+				' ################## Remove from LocalTagList ##################
+				rtnInt += RemoveFromLocalTagList(ImageLocation)
+				' #################### Remove from URL-Lists ###################
+				rtnInt += RemoveFromUrlFiles(ImageLocation)
+
+				' Save the Path temporary -> CLearMainPictureBox will flush ImageLocation
+				Dim tmpPath As String = ImageLocation
+				' Dispose the Image from RAM
+				ClearMainPictureBox()
+				If rtnInt < 1 Then Throw New Exception("The URL was not successfully deleted.")
+
+				Log.Write("Deleted image-link: " & tmpPath)
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				' Online Images - End
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			Else
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'									Local Images
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				Debug.Print("××××××××××××××××××××××× Deleting local Image: " & ImageLocation & "×××××××××××××××××××××××")
+
 				' Check if all requirements are met.
-				Dim tmpstring As String = Path.GetDirectoryName(DeleteLocalImageFilePath)
+				Dim tmpstring As String = Path.GetDirectoryName(ImageLocation)
 				If myDirectory.Exists(tmpstring) = False Then
 					Throw New DirectoryNotFoundException("The given directory was not found: """ &
 														 Path.GetDirectoryName(tmpstring) & """")
 				End If
 
-				If File.Exists(DeleteLocalImageFilePath) = False Then
+				If File.Exists(ImageLocation) = False Then
 					Throw New FileNotFoundException("The given File was not found: """ &
-													DeleteLocalImageFilePath & """")
+													ImageLocation & """")
 				End If
 
-				' Delete the File from disk
-				My.Computer.FileSystem.DeleteFile(DeleteLocalImageFilePath)
+				If ImageLocation.ToLower.StartsWith(Application.StartupPath.ToLower & "\Images\System\".ToLower) Then _
+					Throw New ArgumentException("System iamges are not allowed to delete.")
+				If _ImageFileNames.Contains(ImageLocation) Then _
+					Throw New ArgumentException("Domme-Slideshow images are not allowed to delete!")
+				If Contact1Pics.Contains(ImageLocation) Then _
+					Throw New ArgumentException("Contact1-Slideshow images are not allowed to delete!")
+				If Contact2Pics.Contains(ImageLocation) Then _
+					Throw New ArgumentException("Contact2-Slideshow images are not allowed to delete!")
+				If Contact3Pics.Contains(ImageLocation) Then _
+					Throw New ArgumentException("Contact3-Slideshow images are not allowed to delete!")
+
+				If ImageLocation.ToLower.StartsWith(My.Settings.DomImageDir.ToLower) Then _
+					Throw New Exception("Images in Domme-Image-Dir are not allowed to delete!")
+				If ImageLocation.ToLower.StartsWith(My.Settings.Contact1ImageDir.ToLower) Then _
+					Throw New Exception("Images in Contact1-Image-Dir are not allowed to delete!")
+				If ImageLocation.ToLower.StartsWith(My.Settings.Contact1ImageDir.ToLower) Then _
+					Throw New Exception("Images in Contact2-Image-Dir are not allowed to delete!")
+				If ImageLocation.ToLower.StartsWith(My.Settings.Contact1ImageDir.ToLower) Then _
+					Throw New Exception("Images in contact3-Image-Dir are not allowed to delete!")
+
+
+				' #################### Remove from ####################
+				RemoveFromLikeList(ImageLocation)
+				' ################## Remove from DislikeList ###################
+				RemoveFromDislikeList(ImageLocation)
+				' ################## Remove from LocalTagList ##################
+				RemoveFromLocalTagList(ImageLocation)
+
+				' Save the Path temporary -> CLearMainPictureBox will flush ImageLocation
+				Dim tmpPath As String = ImageLocation
 				' Dispose the Image from RAM
 				ClearMainPictureBox()
-			Catch ex As Exception
-				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-				'                                         All Errors
-				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-				Throw
-			End Try
-		End If
+				' Delete the File from disk
+				My.Computer.FileSystem.DeleteFile(tmpPath)
+
+				Log.Write("Deleted local File: " & tmpPath)
+
+				If File.Exists(tmpPath) Then Throw New Exception("The image was not successfully deleted.")
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				' Local Images - End
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			End If
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                         All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Throw
+		End Try
 	End Sub
 
+	''' =========================================================================================================
+	''' <summary>
+	''' Removes the given path from the likedImage file.
+	''' </summary>
+	''' <param name="path">The Path/Url to remove from the file.</param>
+	''' <return>The number of lines deleted.</return>
+	Friend Function RemoveFromLikeList(ByVal path As String) As Integer
+		Return TxtRemoveLine(pathLikeList, path)
+	End Function
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Removes the given path from the DislikedImage file.
+	''' </summary>
+	''' <param name="path">The Path/Url to remove from the file.</param>
+	''' <return>The number of lines deleted.</return>
+	Friend Function RemoveFromDislikeList(ByVal path As String) As Integer
+		Return TxtRemoveLine(pathDislikeList, path)
+	End Function
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Removes the given path from the LocalImageTag file.
+	''' </summary>
+	''' <param name="path">The Path/Url to remove from the file.</param>
+	''' <return>The number of lines deleted.</return>
+	Friend Function RemoveFromLocalTagList(ByVal path As String) As Integer
+		Return TxtRemoveLine(pathImageTagList, path)
+	End Function
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Removes the given path from the LocalImageTag file.
+	''' </summary>
+	''' <param name="path">The Path/Url to remove from the file.</param>
+	Friend Function RemoveFromUrlFiles(ByVal path As String)
+		Dim rtnInt As Integer = 0
+
+		Dim CustomURLFileList As New List(Of String)
+
+		' Get all URL-Files associated with image-Genres 
+		' Their location can be outside of \Images\System\URL Files\
+		For Each imgDC As ImageDataContainer In GetImageData.Values
+			If imgDC.URLFile IsNot Nothing AndAlso imgDC.URLFile <> "" Then
+				CustomURLFileList.Add(imgDC.URLFile)
+			End If
+		Next
+
+		' Remove all, where the directory does not exists.
+		CustomURLFileList.RemoveAll(Function(x) Not Directory.Exists(IO.Path.GetDirectoryName(x)))
+		' Remove all, where the file itself does not exists.
+		CustomURLFileList.RemoveAll(Function(x) Not File.Exists(x))
+
+		' Find the URL in all URLFiles located in Standard Directory
+		If Directory.Exists(Application.StartupPath & "\Images\System\URL Files\") Then
+			Dim foundFiles As ObjectModel.ReadOnlyCollection(Of String) =
+			FileIO.FileSystem.FindInFiles(Application.StartupPath & "\Images\System\URL Files\",
+										  path, True, FileIO.SearchOption.SearchTopLevelOnly)
+
+			' Distinct join the 2 Lists 
+			CustomURLFileList = CustomURLFileList.Union(foundFiles).ToList
+		End If
+
+		' Delete the URL from all Files 
+		For Each filePath As String In CustomURLFileList
+			rtnInt += TxtRemoveLine(filePath, path)
+		Next
+
+		Return rtnInt
+	End Function
 
 End Class
