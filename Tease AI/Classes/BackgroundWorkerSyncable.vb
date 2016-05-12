@@ -141,8 +141,8 @@ Public Class BackgroundWorkerSyncable
 		Loop
 		If _ResultCache Is Nothing Then Exit Sub
 		' if an Error occured in BGW.DoWork the Error is "rethrown" here.
-		If Me._ResultCache.Error IsNot Nothing Then Throw Me._ResultCache.Error
-
+		'QnD-Bugfix: 404 caused scripts to stop
+		'If Me._ResultCache.Error IsNot Nothing Then Throw Me._ResultCache.Error
 		MyBase.OnRunWorkerCompleted(_ResultCache)
 		Reset()
 	End Sub

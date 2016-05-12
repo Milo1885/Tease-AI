@@ -1,12 +1,5 @@
 ﻿Imports System.IO
-Imports System.Xml
-
-Imports System.Drawing.Font
-Imports System.Drawing.FontFamily
-Imports System.Drawing.FontConverter
 Imports System.Speech.Synthesis
-Imports System.Net
-Imports System.Text
 Imports System.Threading
 Imports Tease_AI.URL_Files
 
@@ -610,7 +603,6 @@ Public Class FrmSettings
 			Debug.Print("Form2 Orgasm Lock Date = " & My.Settings.OrgasmLockDate)
 			If Form1.CompareDates(My.Settings.OrgasmLockDate) <= 0 Then
 				My.Settings.OrgasmsLocked = False
-				My.Settings.Save()
 			Else
 				limitcheckbox.Checked = True
 				limitcheckbox.Enabled = False
@@ -734,33 +726,6 @@ Public Class FrmSettings
 
 		NBTauntEdging.Value = My.Settings.TauntEdging
 
-		LBLURLHardcore.Text = My.Settings.HardcoreURLFile
-		LBLURLSoftcore.Text = My.Settings.SoftcoreURLFile
-		LBLURLLesbian.Text = My.Settings.LesbianURLFile
-		LBLURLBlowjob.Text = My.Settings.BlowjobURLFile
-		LBLURLFemdom.Text = My.Settings.FemdomURLFile
-		LBLURLLezdom.Text = My.Settings.LezdomURLFile
-		LBLURLHentai.Text = My.Settings.HentaiURLFile
-		LBLURLGay.Text = My.Settings.GayURLFile
-		LBLURLMaledom.Text = My.Settings.MaledomURLFile
-		LBLURLCaptions.Text = My.Settings.CaptionsURLFile
-		LBLURLGeneral.Text = My.Settings.GeneralURLFile
-
-		CBURLHardcore.Checked = My.Settings.CBURLHardcore
-		CBURLSoftcore.Checked = My.Settings.CBURLSoftcore
-		CBURLLesbian.Checked = My.Settings.CBURLLesbian
-		CBURLBlowjob.Checked = My.Settings.CBURLBlowjob
-		CBURLFemdom.Checked = My.Settings.CBURLFemdom
-		CBURLLezdom.Checked = My.Settings.CBURLLezdom
-		CBURLHentai.Checked = My.Settings.CBURLHentai
-		CBURLGay.Checked = My.Settings.CBURLGay
-		CBURLMaledom.Checked = My.Settings.CBURLMaledom
-		CBURLCaptions.Checked = My.Settings.CBURLCaptions
-		CBURLGeneral.Checked = My.Settings.CBURLGeneral
-
-		CBURLButts.Checked = My.Settings.CBURLButts
-		CBURLBoobs.Checked = My.Settings.CBURLBoobs
-
 		CBURLPreview.Checked = My.Settings.CBURLPreview
 
 		TypesSpeedVal.Text = TypeSpeedSlider.Value
@@ -882,7 +847,6 @@ Public Class FrmSettings
 
 	Private Sub CockSizeNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles CockSizeNumBox.LostFocus
 		My.Settings.SubCockSize = CockSizeNumBox.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub BTNVideoHardCore_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoHardCore.Click
@@ -891,7 +855,6 @@ Public Class FrmSettings
 			LblVideoHardCore.Text = FolderBrowserDialog1.SelectedPath
 			Form1.HardCoreVideoTotal()
 			My.Settings.VideoHardcore = LblVideoHardCore.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -902,7 +865,6 @@ Public Class FrmSettings
 			LblVideoSoftCore.Text = FolderBrowserDialog1.SelectedPath
 			Form1.SoftcoreVideoTotal()
 			My.Settings.VideoSoftcore = LblVideoSoftCore.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -913,7 +875,6 @@ Public Class FrmSettings
 			LblVideoLesbian.Text = FolderBrowserDialog1.SelectedPath
 			Form1.LesbianVideoTotal()
 			My.Settings.VideoLesbian = LblVideoLesbian.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -924,7 +885,6 @@ Public Class FrmSettings
 			LblVideoBlowjob.Text = FolderBrowserDialog1.SelectedPath
 			Form1.BlowjobVideoTotal()
 			My.Settings.VideoBlowjob = LblVideoBlowjob.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -935,7 +895,6 @@ Public Class FrmSettings
 			LblVideoFemdom.Text = FolderBrowserDialog1.SelectedPath
 			Form1.FemdomVideoTotal()
 			My.Settings.VideoFemdom = LblVideoFemdom.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -946,7 +905,6 @@ Public Class FrmSettings
 			LblVideoFemsub.Text = FolderBrowserDialog1.SelectedPath
 			Form1.FemsubVideoTotal()
 			My.Settings.VideoFemsub = LblVideoFemsub.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -957,7 +915,6 @@ Public Class FrmSettings
 			LblVideoJOI.Text = FolderBrowserDialog1.SelectedPath
 			Form1.JOIVideoTotal()
 			My.Settings.VideoJOI = LblVideoJOI.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -968,7 +925,6 @@ Public Class FrmSettings
 			LblVideoCH.Text = FolderBrowserDialog1.SelectedPath
 			Form1.CHVideoTotal()
 			My.Settings.VideoCH = LblVideoCH.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -979,7 +935,6 @@ Public Class FrmSettings
 			LblVideoGeneral.Text = FolderBrowserDialog1.SelectedPath
 			Form1.GeneralVideoTotal()
 			My.Settings.VideoGeneral = LblVideoGeneral.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -990,7 +945,6 @@ Public Class FrmSettings
 			LblVideoHardCoreD.Text = FolderBrowserDialog1.SelectedPath
 			Form1.HardcoreDVideoTotal()
 			My.Settings.VideoHardcoreD = LblVideoHardCoreD.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -1001,7 +955,6 @@ Public Class FrmSettings
 			LblVideoSoftCoreD.Text = FolderBrowserDialog1.SelectedPath
 			Form1.SoftcoreDVideoTotal()
 			My.Settings.VideoSoftcoreD = LblVideoSoftCoreD.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -1012,7 +965,6 @@ Public Class FrmSettings
 			LblVideoLesbianD.Text = FolderBrowserDialog1.SelectedPath
 			Form1.LesbianDVideoTotal()
 			My.Settings.VideoLesbianD = LblVideoLesbianD.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -1023,7 +975,6 @@ Public Class FrmSettings
 			LblVideoBlowjobD.Text = FolderBrowserDialog1.SelectedPath
 			Form1.BlowjobDVideoTotal()
 			My.Settings.VideoBlowjobD = LblVideoBlowjobD.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -1034,7 +985,6 @@ Public Class FrmSettings
 			LblVideoFemdomD.Text = FolderBrowserDialog1.SelectedPath
 			Form1.FemdomDVideoTotal()
 			My.Settings.VideoFemdomD = LblVideoFemdomD.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -1045,7 +995,6 @@ Public Class FrmSettings
 			LblVideoFemsubD.Text = FolderBrowserDialog1.SelectedPath
 			Form1.FemsubDVideoTotal()
 			My.Settings.VideoFemsubD = LblVideoFemsubD.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -1056,7 +1005,6 @@ Public Class FrmSettings
 			LblVideoJOID.Text = FolderBrowserDialog1.SelectedPath
 			Form1.JOIDVideoTotal()
 			My.Settings.VideoJOID = LblVideoJOID.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -1067,7 +1015,6 @@ Public Class FrmSettings
 			LblVideoCHD.Text = FolderBrowserDialog1.SelectedPath
 			Form1.CHDVideoTotal()
 			My.Settings.VideoCHD = LblVideoCHD.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -1078,7 +1025,6 @@ Public Class FrmSettings
 			LblVideoGeneralD.Text = FolderBrowserDialog1.SelectedPath
 			Form1.GeneralDVideoTotal()
 			My.Settings.VideoGeneralD = LblVideoGeneralD.Text
-			My.Settings.Save()
 		End If
 
 	End Sub
@@ -1090,7 +1036,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBHardcore = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoSoftCore_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoSoftCore.CheckedChanged
@@ -1099,7 +1044,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBSoftcore = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoLesbian_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoLesbian.CheckedChanged
@@ -1108,7 +1052,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBLesbian = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoBlowjob_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoBlowjob.CheckedChanged
@@ -1117,7 +1060,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBBlowjob = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoFemdom_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoFemdom.CheckedChanged
@@ -1126,7 +1068,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBFemdom = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoFemSub_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoFemsub.CheckedChanged
@@ -1135,7 +1076,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBFemsub = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoJOI_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoJOI.CheckedChanged
@@ -1144,7 +1084,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBJOI = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoCH_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoCH.CheckedChanged
@@ -1153,7 +1092,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBCH = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoGeneral_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoGeneral.CheckedChanged
@@ -1162,7 +1100,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBGeneral = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 
@@ -1172,7 +1109,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBHardcoreD = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoSoftcoreD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoSoftCoreD.CheckedChanged
@@ -1181,7 +1117,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBSoftcoreD = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoLesbianD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoLesbianD.CheckedChanged
@@ -1190,7 +1125,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBLesbianD = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoBlowjobD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoBlowjobD.CheckedChanged
@@ -1199,7 +1133,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBBlowjobD = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoFemdomD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoFemdomD.CheckedChanged
@@ -1208,7 +1141,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBFemdomD = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoFemsubD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoFemsubD.CheckedChanged
@@ -1217,7 +1149,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBFemsubD = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoJOID_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoJOID.CheckedChanged
@@ -1226,7 +1157,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBJOID = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoCHD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoCHD.CheckedChanged
@@ -1235,7 +1165,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBCHD = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBVideoGeneralD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoGeneralD.CheckedChanged
@@ -1244,29 +1173,24 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBGeneralD = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 
 	Private Sub NBCensorShowMin_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMin.Leave
 		My.Settings.NBCensorShowMin = NBCensorShowMin.Value
-		My.Settings.Save()
 		Debug.Print(My.Settings.NBCensorShowMin & " " & NBCensorShowMin.Value)
 	End Sub
 
 	Private Sub NBCensorShowMax_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMax.Leave
 		My.Settings.NBCensorShowMax = NBCensorShowMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBCensorHideMin_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMin.Leave
 		My.Settings.NBCensorHideMin = NBCensorHideMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBCensorHideMax_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMax.Leave
 		My.Settings.NBCensorHideMax = NBCensorHideMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBCensorConstant_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCensorConstant.CheckedChanged
@@ -1275,7 +1199,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBCensorConstant = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Public Function Color2Html(ByVal MyColor As Color) As String
@@ -1283,13 +1206,6 @@ Public Class FrmSettings
 	End Function
 
 #Region "Glitter"
-	Private Sub GlitterAV_Click(sender As System.Object, e As System.EventArgs)
-		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-			GlitterAV.Image = Image.FromFile(OpenFileDialog1.FileName)
-			My.Settings.GlitterAV = OpenFileDialog1.FileName
-			My.Settings.Save()
-		End If
-	End Sub
 	Private Sub GlitterAV_Click_1(sender As System.Object, e As System.EventArgs) Handles GlitterAV.Click
 		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
 			Try
@@ -1300,7 +1216,6 @@ Public Class FrmSettings
 			GC.Collect()
 			GlitterAV.Image = Image.FromFile(OpenFileDialog1.FileName)
 			My.Settings.GlitterAV = OpenFileDialog1.FileName
-			My.Settings.Save()
 		End If
 	End Sub
 	Private Sub GlitterAV1_Click(sender As System.Object, e As System.EventArgs) Handles GlitterAV1.Click
@@ -1313,7 +1228,6 @@ Public Class FrmSettings
 			GC.Collect()
 			GlitterAV1.Image = Image.FromFile(OpenFileDialog1.FileName)
 			My.Settings.GlitterAV1 = OpenFileDialog1.FileName
-			My.Settings.Save()
 		End If
 	End Sub
 	Private Sub GlitterAV2_Click(sender As System.Object, e As System.EventArgs) Handles GlitterAV2.Click
@@ -1326,7 +1240,6 @@ Public Class FrmSettings
 			GC.Collect()
 			GlitterAV2.Image = Image.FromFile(OpenFileDialog1.FileName)
 			My.Settings.GlitterAV2 = OpenFileDialog1.FileName
-			My.Settings.Save()
 		End If
 	End Sub
 	Private Sub GlitterAV3_Click(sender As System.Object, e As System.EventArgs) Handles GlitterAV3.Click
@@ -1339,7 +1252,6 @@ Public Class FrmSettings
 			GC.Collect()
 			GlitterAV3.Image = Image.FromFile(OpenFileDialog1.FileName)
 			My.Settings.GlitterAV3 = OpenFileDialog1.FileName
-			My.Settings.Save()
 		End If
 	End Sub
 	Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitterD.Click
@@ -1348,7 +1260,6 @@ Public Class FrmSettings
 			LBLGlitterNCDomme.ForeColor = GetColor.Color
 			Form1.GlitterNCDomme = Color2Html(GetColor.Color)
 			My.Settings.GlitterNCDomme = Form1.GlitterNCDomme
-			My.Settings.Save()
 			Debug.Print("GlitterNCDomme = " & Form1.GlitterNCDomme)
 		End If
 	End Sub
@@ -1358,7 +1269,6 @@ Public Class FrmSettings
 			LBLGlitterNC1.ForeColor = GetColor.Color
 			Form1.GlitterNC1 = Color2Html(GetColor.Color)
 			My.Settings.GlitterNC1 = Form1.GlitterNC1
-			My.Settings.Save()
 			Debug.Print("GlitterNC1 = " & Form1.GlitterNC1)
 		End If
 	End Sub
@@ -1368,7 +1278,6 @@ Public Class FrmSettings
 			LBLGlitterNC2.ForeColor = GetColor.Color
 			Form1.GlitterNC2 = Color2Html(GetColor.Color)
 			My.Settings.GlitterNC2 = Form1.GlitterNC2
-			My.Settings.Save()
 			Debug.Print("GlitterNC2 = " & Form1.GlitterNC2)
 		End If
 	End Sub
@@ -1378,49 +1287,32 @@ Public Class FrmSettings
 			LBLGlitterNC3.ForeColor = GetColor.Color
 			Form1.GlitterNC3 = Color2Html(GetColor.Color)
 			My.Settings.GlitterNC3 = Form1.GlitterNC3
-			My.Settings.Save()
 			Debug.Print("GlitterNC3 = " & Form1.GlitterNC3)
 		End If
 	End Sub
 	Private Sub TBGlitterShortName_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.Leave
 		My.Settings.GlitterSN = TBGlitterShortName.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub TBGlitter1_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter1.Leave
 		My.Settings.Glitter1 = TBGlitter1.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub TBGlitter2_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter2.Leave
 		My.Settings.Glitter2 = TBGlitter2.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub TBGlitter3_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter3.Leave
 		My.Settings.Glitter3 = TBGlitter3.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub GlitterSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider.Scroll
 		My.Settings.GlitterDSlider = GlitterSlider.Value
-		My.Settings.Save()
 	End Sub
 	Private Sub GlitterSlider1_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider1.Scroll
 		My.Settings.Glitter1Slider = GlitterSlider1.Value
-		My.Settings.Save()
 	End Sub
 	Private Sub GlitterSlider2_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider2.Scroll
 		My.Settings.Glitter2Slider = GlitterSlider2.Value
-		My.Settings.Save()
 	End Sub
 	Private Sub GlitterSlider3_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider3.Scroll
 		My.Settings.Glitter3Slider = GlitterSlider3.Value
-		My.Settings.Save()
-	End Sub
-	Private Sub CBGlitterFeed_CheckedChanged(sender As System.Object, e As System.EventArgs)
-		If CBGlitterFeed.Checked = True Then
-			My.Settings.CBGlitterFeed = True
-		Else
-			My.Settings.CBGlitterFeed = False
-		End If
-		My.Settings.Save()
 	End Sub
 	Private Sub CBGlitter1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter1.CheckedChanged
 		If CBGlitter1.Checked = True Then
@@ -1428,7 +1320,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBGlitter1 = False
 		End If
-		My.Settings.Save()
 	End Sub
 	Private Sub CBGlitter2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter2.CheckedChanged
 		If CBGlitter2.Checked = True Then
@@ -1436,7 +1327,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBGlitter2 = False
 		End If
-		My.Settings.Save()
 	End Sub
 	Private Sub CBGlitter3_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter3.CheckedChanged
 		If CBGlitter3.Checked = True Then
@@ -1444,7 +1334,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBGlitter3 = False
 		End If
-		My.Settings.Save()
 	End Sub
 	Private Sub CBTease_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTease.CheckedChanged
 		If CBTease.Checked = True Then
@@ -1452,7 +1341,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBTease = False
 		End If
-		My.Settings.Save()
 	End Sub
 	Private Sub CBEgotist_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBEgotist.CheckedChanged
 		If CBEgotist.Checked = True Then
@@ -1460,7 +1348,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBEgotist = False
 		End If
-		My.Settings.Save()
 	End Sub
 	Private Sub CBTrivia_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTrivia.CheckedChanged
 		If CBTrivia.Checked = True Then
@@ -1468,7 +1355,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBTrivia = False
 		End If
-		My.Settings.Save()
 	End Sub
 	Private Sub CBDaily_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBDaily.CheckedChanged
 		If CBDaily.Checked = True Then
@@ -1476,7 +1362,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBDaily = False
 		End If
-		My.Settings.Save()
 	End Sub
 	Private Sub CBCustom1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCustom1.CheckedChanged
 		If CBCustom1.Checked = True Then
@@ -1484,7 +1369,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBCustom1 = False
 		End If
-		My.Settings.Save()
 	End Sub
 	Private Sub CBCustom2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCustom2.CheckedChanged
 		If CBCustom2.Checked = True Then
@@ -1492,7 +1376,6 @@ Public Class FrmSettings
 		Else
 			My.Settings.CBCustom2 = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 
@@ -1616,26 +1499,6 @@ Public Class FrmSettings
 	End Sub
 #End Region
 
-	Private Sub Button21_Click(sender As System.Object, e As System.EventArgs)
-
-		Form1.ScriptTimer.Start()
-
-		' Dim TestString As String
-		'Dim TSStartIndex As Integer
-		'Dim TSEndIndex As Integer
-
-		'TSStartIndex = TextBox3.Text.IndexOf("@Chance") + 7
-		'TSEndIndex = TextBox3.Text.IndexOf("@Chance") + 9
-
-		'TestString = TextBox3.Text
-		'TestString = TestString.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim
-
-		'        Dim TestVal As Integer
-
-		' TestVal = Val(TestString)
-
-		'Debug.Print("Check Substring " & TestString & " , " & TestVal)
-	End Sub
 
 
 
@@ -1649,40 +1512,32 @@ Public Class FrmSettings
 
 	Private Sub NBTeaseLengthMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBTeaseLengthMin.LostFocus
 		My.Settings.TeaseLengthMin = NBTeaseLengthMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBTeaseLengthMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBTeaseLengthMax.LostFocus
 		My.Settings.TeaseLengthMax = NBTeaseLengthMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBTauntCycleMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBTauntCycleMin.LostFocus
 		My.Settings.TauntCycleMin = NBTauntCycleMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBTauntCycleMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBTauntCycleMax.LostFocus
 		My.Settings.TauntCycleMax = NBTauntCycleMax.Value
-		My.Settings.Save()
 	End Sub
 	Private Sub NBRedLightMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBRedLightMin.LostFocus
 		My.Settings.RedLightMin = NBRedLightMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBRedLightMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBRedLightMax.LostFocus
 		My.Settings.RedLightMax = NBRedLightMax.Value
-		My.Settings.Save()
 	End Sub
 	Private Sub NBGreenLightMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBGreenLightMin.LostFocus
 		My.Settings.GreenLightMin = NBGreenLightMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBGreenLightMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBGreenLightMax.LostFocus
 		My.Settings.GreenLightMax = NBGreenLightMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBTeaseLengthMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTeaseLengthMin.ValueChanged
@@ -1911,7 +1766,6 @@ Public Class FrmSettings
 		My.Settings.pnSetting7 = petnameBox7.Text
 		My.Settings.pnSetting8 = petnameBox8.Text
 
-		My.Settings.Save()
 
 	End Sub
 
@@ -2632,11 +2486,6 @@ trypreviousimage:
 		WebPictureBox.Focus()
 	End Sub
 
-	Private Sub Button32_Click_1(sender As System.Object, e As System.EventArgs)
-		Form1.GetBlogImage()
-
-	End Sub
-
 	Private Sub SliderSTF_Scroll(sender As System.Object, e As System.EventArgs) Handles SliderSTF.Scroll
 		If SliderSTF.Value = 1 Then LBLStf.Text = "Preoccupied"
 		If SliderSTF.Value = 2 Then LBLStf.Text = "Distracted"
@@ -2659,13 +2508,11 @@ trypreviousimage:
 
 	Private Sub TauntSlider_LostFocus(sender As System.Object, e As System.EventArgs) Handles TauntSlider.LostFocus
 		My.Settings.TimerVTF = TauntSlider.Value
-		My.Settings.Save()
 
 	End Sub
 
 	Private Sub SliderSTF_LostFocus(sender As System.Object, e As System.EventArgs) Handles SliderSTF.LostFocus
 		My.Settings.TimerSTF = SliderSTF.Value
-		My.Settings.Save()
 
 	End Sub
 
@@ -2676,7 +2523,6 @@ trypreviousimage:
 			LBLDomColor.ForeColor = GetColor.Color
 			Form1.DomColor = Color2Html(GetColor.Color)
 			My.Settings.DomColor = Form1.DomColor
-			My.Settings.Save()
 		End If
 
 
@@ -2689,23 +2535,10 @@ trypreviousimage:
 			LBLSubColor.ForeColor = GetColor.Color
 			Form1.SubColor = Color2Html(GetColor.Color)
 			My.Settings.SubColor = Form1.SubColor
-			My.Settings.Save()
 		End If
 
 	End Sub
 
-	Private Sub Button39_Click(sender As System.Object, e As System.EventArgs)
-		Form1.StrokePaceInt = 1
-		Form1.StrokePaceRight = True
-
-		If Form1.StrokePaceTimer.Enabled = True Then
-			Form1.StopMetronome = True
-			Form1.StrokePaceTimer.Stop()
-		Else
-			Form1.StopMetronome = False
-			Form1.StrokePaceTimer.Start()
-		End If
-	End Sub
 
 
 
@@ -2718,7 +2551,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBTimeStamps = False
 		End If
-		My.Settings.Save()
 
 
 
@@ -2732,7 +2564,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBShowNames = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -2743,7 +2574,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBInstantType = False
 		End If
-		My.Settings.Save()
 
 
 	End Sub
@@ -2755,7 +2585,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBWebtease = False
 		End If
-		My.Settings.Save()
 
 
 	End Sub
@@ -2766,7 +2595,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBBlogImageMain = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub landscapeCheckBox_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles landscapeCheckBox.MouseClick
@@ -2775,7 +2603,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBStretchLandscape = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBSettingsPause_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBSettingsPause.MouseClick
@@ -2784,7 +2611,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBSettingsPause = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub timestampCheckBox_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles timestampCheckBox.MouseHover
@@ -2972,7 +2798,6 @@ trypreviousimage:
 		If teaseRadio.Checked = True Then My.Settings.SlideshowMode = "Tease"
 		If timedRadio.Checked = True Then My.Settings.SlideshowMode = "Timed"
 		If offRadio.Checked = True Then My.Settings.SlideshowMode = "Manual"
-		My.Settings.Save()
 	End Sub
 
 	Private Sub teaseRadio_MouseHover(sender As System.Object, e As System.EventArgs) Handles teaseRadio.MouseHover
@@ -2996,11 +2821,6 @@ trypreviousimage:
 	End Sub
 
 
-	' Private Sub CBMetronome_CheckedChanged_1(sender As System.Object, e As System.EventArgs)
-	' LBLGeneralSettingsDescription.Text = "When this is selected, the silent metronome located above the sub avatar will activate any time you are instructed to stroke."
-
-	' If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = ""
-	' End Sub
 
 	Private Sub CBSettingsPause_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBSettingsPause.MouseHover
 
@@ -3100,7 +2920,6 @@ trypreviousimage:
 
 	Private Sub domlevelNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.LostFocus
 		My.Settings.DomLevel = domlevelNumBox.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub alloworgasmComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles alloworgasmComboBox.LostFocus
@@ -3108,7 +2927,6 @@ trypreviousimage:
 
 
 		My.Settings.OrgasmAllow = alloworgasmComboBox.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub ruinorgasmComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ruinorgasmComboBox.LostFocus
@@ -3116,7 +2934,6 @@ trypreviousimage:
 
 
 		My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
-		My.Settings.Save()
 
 
 
@@ -3129,7 +2946,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBAutosaveChatlog = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBSaveChatlogExit_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBSaveChatlogExit.MouseClick
@@ -3138,7 +2954,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBExitSaveChatlog = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBJackInTheBox_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBAuditStartup.MouseClick
@@ -3147,12 +2962,10 @@ trypreviousimage:
 		Else
 			My.Settings.AuditStartup = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBWritingTaskMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBWritingTaskMin.LostFocus
 		My.Settings.NBWritingTaskMin = NBWritingTaskMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBWritingTaskMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBWritingTaskMin.ValueChanged
@@ -3161,22 +2974,10 @@ trypreviousimage:
 
 	Private Sub NBWritingTaskMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBWritingTaskMax.LostFocus
 		My.Settings.NBWritingTaskMax = NBWritingTaskMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBWritingTaskMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBWritingTaskMax.ValueChanged
 		If NBWritingTaskMax.Value < NBWritingTaskMin.Value Then NBWritingTaskMax.Value = NBWritingTaskMin.Value
-	End Sub
-
-	Private Sub Button43_Click(sender As System.Object, e As System.EventArgs)
-		'My.Computer.Network.DownloadFile("http://41.media.tumblr.com/71a41fe5e4b0fee012b516e2666465dd/tumblr_njunkf9uGX1rsx7u3o1_1280.jpg", "G:\Anime\Images\Tumblr\Tease AI\Scrape\file.jpg")
-
-		If Form1.TnASlides.Enabled = True Then
-			Form1.TnASlides.Stop()
-			Return
-		End If
-		Form1.TnASlides.Start()
-
 	End Sub
 
 
@@ -3187,15 +2988,6 @@ trypreviousimage:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLBoobPath.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.LBLBoobPath = LBLBoobPath.Text
-			My.Settings.Save()
-		End If
-	End Sub
-
-	Private Sub BTNBoobURL_Click(sender As System.Object, e As System.EventArgs) Handles BTNBoobURL.Click
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLBoobURL.Text = WebImageFileDialog.FileName
-			My.Settings.LBLBoobURL = LBLBoobURL.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -3203,38 +2995,22 @@ trypreviousimage:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLButtPath.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.LBLButtPath = LBLButtPath.Text
-			My.Settings.Save()
-		End If
-	End Sub
-
-	Private Sub BTNButtURL_Click(sender As System.Object, e As System.EventArgs) Handles BTNButtURL.Click
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLButtURL.Text = WebImageFileDialog.FileName
-			My.Settings.LBLButtURL = LBLButtURL.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
 	Private Sub CBBoobSubDir_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBBoobSubDir.CheckedChanged
 		If CBBoobSubDir.Checked = True Then
 			My.Settings.CBBoobSubDir = True
-			My.Settings.Save()
 		End If
 	End Sub
 
 	Private Sub CBButtSubDir_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBButtSubDir.CheckedChanged
 		If CBButtSubDir.Checked = True Then
 			My.Settings.CBButtSubDir = True
-			My.Settings.Save()
 		End If
 	End Sub
 
 
-
-	Private Sub Button45_Click(sender As System.Object, e As System.EventArgs)
-		Form1.GetBlogImage()
-
-	End Sub
 
 	Private Sub CheckBox6_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTagBoobs.CheckedChanged
 
@@ -4298,7 +4074,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBSlideshowSubDir = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBSlideshowSubDir_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBSlideshowSubDir.MouseHover
@@ -4327,7 +4102,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBSlideshowRandom = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBSlideshowRandom_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBSlideshowRandom.MouseHover
@@ -4448,7 +4222,6 @@ trypreviousimage:
 
 	Private Sub domageNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domageNumBox.LostFocus
 		My.Settings.DomAge = domageNumBox.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub domageNumBox_MouseHover(sender As Object, e As System.EventArgs) Handles domageNumBox.MouseHover
@@ -4495,7 +4268,6 @@ trypreviousimage:
 
 	Private Sub TBDomHairColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBDomHairColor.LostFocus
 		My.Settings.DomHair = TBDomHairColor.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub domhairComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles TBDomHairColor.MouseHover
@@ -4508,7 +4280,6 @@ trypreviousimage:
 
 	Private Sub domhairlengthComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domhairlengthComboBox.LostFocus
 		My.Settings.DomHairLength = domhairlengthComboBox.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub domhairlengthComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles domhairlengthComboBox.MouseHover
@@ -4521,7 +4292,6 @@ trypreviousimage:
 
 	Private Sub TBDomEyeColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBDomEyeColor.LostFocus
 		My.Settings.DomEyes = TBDomEyeColor.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub domeyesComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles TBDomEyeColor.MouseHover
@@ -4534,7 +4304,6 @@ trypreviousimage:
 
 	Private Sub boobComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles boobComboBox.LostFocus
 		My.Settings.DomCup = boobComboBox.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub boobComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles boobComboBox.MouseHover
@@ -4547,7 +4316,6 @@ trypreviousimage:
 
 	Private Sub dompubichairComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles dompubichairComboBox.LostFocus
 		My.Settings.DomPubicHair = dompubichairComboBox.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub dompubichairComboBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles dompubichairComboBox.MouseHover
@@ -4558,10 +4326,6 @@ trypreviousimage:
 		'  "of the slideshow model's pubic hair to enhance immersion."
 	End Sub
 
-	' Private Sub dompersonalityComboBox_MouseHover(sender As System.Object, e As System.EventArgs)
-	' LblDommeSettingsDescription.Text = "Sets the Domme's personality to a type you have created or downloaded." & Environment.NewLine & Environment.NewLine & "Different personalities allow for varied experiences while using " & _
-	'     "this program. For best results, this value should only be changed before greeting the domme."
-	' End Sub
 
 	Private Sub crazyCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles crazyCheckBox.LostFocus
 		If crazyCheckBox.Checked = True Then
@@ -4569,7 +4333,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomCrazy = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub crazyCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles crazyCheckBox.MouseHover
@@ -4587,7 +4350,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomTattoos = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBDomTattoos_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomTattoos.MouseHover
@@ -4605,7 +4367,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomFreckles = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBDomFreckles_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomFreckles.MouseHover
@@ -4622,7 +4383,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomVulgar = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub vulgarCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles vulgarCheckBox.MouseHover
@@ -4640,7 +4400,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomSupremacist = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub supremacistCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles supremacistCheckBox.MouseHover
@@ -4659,7 +4418,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomLowercase = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub alloworgasmComboBox_MouseHover(sender As Object, e As System.EventArgs) Handles alloworgasmComboBox.MouseHover
@@ -4694,7 +4452,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomNoApostrophes = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub apostropheCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles apostropheCheckBox.MouseHover
@@ -4710,7 +4467,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomNoCommas = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub commaCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles commaCheckBox.MouseHover
@@ -4726,7 +4482,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomNoPeriods = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub periodCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles periodCheckBox.MouseHover
@@ -4742,7 +4497,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomMeMyMine = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBMeMyMine_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBMeMyMine.MouseHover
@@ -4752,12 +4506,10 @@ trypreviousimage:
 
 	Private Sub TBEmote_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBEmote.LostFocus
 		My.Settings.TBEmote = TBEmote.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBEmoteEnd_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBEmoteEnd.LostFocus
 		My.Settings.TBEmoteEnd = TBEmoteEnd.Text
-		My.Settings.Save()
 	End Sub
 
 
@@ -4776,7 +4528,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomDenialEnd = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBDomDenialEnds_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomDenialEnds.MouseHover
@@ -4791,7 +4542,6 @@ trypreviousimage:
 		Else
 			My.Settings.DomOrgasmEnd = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBDomOrgasmEnds_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBDomOrgasmEnds.MouseHover
@@ -4842,7 +4592,6 @@ trypreviousimage:
 
 	Private Sub NBDomMoodMin_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMin.LostFocus
 		My.Settings.DomMoodMin = NBDomMoodMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBDomMoodMin_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMin.MouseHover
@@ -4860,7 +4609,6 @@ trypreviousimage:
 
 	Private Sub NBDomMoodMax_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMax.LostFocus
 		My.Settings.DomMoodMax = NBDomMoodMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBDomMoodMax_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBDomMoodMax.MouseHover
@@ -4886,7 +4634,6 @@ trypreviousimage:
 
 	Private Sub NBAvgCockMin_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMin.LostFocus
 		My.Settings.AvgCockMin = NBAvgCockMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBAvgCockMin_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMin.MouseHover
@@ -4896,7 +4643,6 @@ trypreviousimage:
 
 	Private Sub NBAvgCockMax_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMax.LostFocus
 		My.Settings.AvgCockMax = NBAvgCockMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBAvgCockMax_MouseHover(sender As System.Object, e As System.EventArgs) Handles NBAvgCockMax.MouseHover
@@ -4914,7 +4660,6 @@ trypreviousimage:
 
 	Private Sub NBSelfAgeMin_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBSelfAgeMin.LostFocus
 		My.Settings.SelfAgeMin = NBSelfAgeMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBSelfAgeMin_Enter(sender As Object, e As System.EventArgs) Handles NBSelfAgeMin.MouseHover
@@ -4926,7 +4671,6 @@ trypreviousimage:
 
 	Private Sub NBSelfAgeMax_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBSelfAgeMax.LostFocus
 		My.Settings.SelfAgeMax = NBSelfAgeMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBSelfAgeMax_Enter(sender As Object, e As System.EventArgs) Handles NBSelfAgeMax.MouseHover
@@ -4946,7 +4690,6 @@ trypreviousimage:
 
 	Private Sub NBSubAgeMin_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBSubAgeMin.LostFocus
 		My.Settings.SubAgeMin = NBSubAgeMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBSubAgeMin_Enter(sender As Object, e As System.EventArgs) Handles NBSubAgeMin.MouseHover
@@ -4957,7 +4700,6 @@ trypreviousimage:
 
 	Private Sub NBSubAgeMax_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBSubAgeMax.LostFocus
 		My.Settings.SubAgeMax = NBSubAgeMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBSubAgeMax_Enter(sender As Object, e As System.EventArgs) Handles NBSubAgeMax.MouseHover
@@ -5034,7 +4776,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBInputIcon = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 
@@ -5233,23 +4974,19 @@ trypreviousimage:
 
 	Private Sub TBGreeting_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBGreeting.LostFocus
 		My.Settings.SubGreeting = TBGreeting.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBYes_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBYes.LostFocus
 		My.Settings.SubYes = TBYes.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBNo_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBNo.LostFocus
 		My.Settings.SubNo = TBNo.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBHonorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBHonorific.LostFocus
 		If TBHonorific.Text = "" Or TBHonorific.Text Is Nothing Then TBHonorific.Text = "Mistress"
 		My.Settings.SubHonorific = TBHonorific.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBHonorificInclude_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBHonorificInclude.LostFocus
@@ -5258,7 +4995,6 @@ trypreviousimage:
 		Else
 			My.Settings.CBUseHonor = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBHonorificCapitalized_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBHonorificCapitalized.LostFocus
@@ -5267,43 +5003,35 @@ trypreviousimage:
 		Else
 			My.Settings.CBCapHonor = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub subAgeNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles subAgeNumBox.LostFocus
 		My.Settings.SubAge = subAgeNumBox.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBDomBirthdayMonth_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomBirthdayMonth.LostFocus
 		My.Settings.DomBirthMonth = NBDomBirthdayMonth.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBDomBirthdayDay_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomBirthdayDay.LostFocus
 		My.Settings.DomBirthDay = NBDomBirthdayDay.Value
-		My.Settings.Save()
 	End Sub
 
 
 	Private Sub NBBirthdayMonth_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBBirthdayMonth.LostFocus
 		My.Settings.SubBirthMonth = NBBirthdayMonth.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBBirthdayDay_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBBirthdayDay.LostFocus
 		My.Settings.SubBirthDay = NBBirthdayDay.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBSubHairColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBSubHairColor.LostFocus
 		My.Settings.SubHair = TBSubHairColor.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBSubEyeColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBSubEyeColor.LostFocus
 		My.Settings.SubEyes = TBSubEyeColor.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub Button37_Click_1(sender As System.Object, e As System.EventArgs) Handles Button37.Click
@@ -5354,22 +5082,6 @@ trypreviousimage:
 
 	End Sub
 
-	Private Sub ButtonOpenScript_Click(sender As System.Object, e As System.EventArgs)
-
-		If OpenScriptDialog.ShowDialog() = DialogResult.OK Then
-
-			Form1.StrokeTauntVal = -1
-
-			Form1.FileText = OpenScriptDialog.FileName
-			Form1.ScriptTick = 1
-			Form1.ScriptTimer.Start()
-
-
-		End If
-
-
-	End Sub
-
 
 
 	Private Sub timedRadio_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles timedRadio.CheckedChanged
@@ -5393,55 +5105,20 @@ trypreviousimage:
 
 	Private Sub FontComboBoxD_LostFocus(sender As System.Object, e As System.EventArgs) Handles FontComboBoxD.LostFocus
 		My.Settings.DomFont = FontComboBoxD.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub FontComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles FontComboBox.LostFocus
 		My.Settings.SubFont = FontComboBox.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBFontSizeD_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBFontSizeD.LostFocus
 		My.Settings.DomFontSize = NBFontSizeD.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBFontSize_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBFontSize.LostFocus
 		My.Settings.SubFontSize = NBFontSize.Value
-		My.Settings.Save()
 	End Sub
 
-
-	' Private Sub Button2_Click(sender As System.Object, e As System.EventArgs)
-	'Dim Str As System.IO.Stream
-	'Dim srRead As System.IO.StreamReader
-	'   Try
-	' make a Web request
-	'Dim req As System.Net.WebRequest = System.Net.WebRequest.Create(TextBox3.Text)
-	'Dim resp As System.Net.WebResponse = req.GetResponse
-	'       Str = resp.GetResponseStream
-	'      srRead = New System.IO.StreamReader(Str)
-	' read all the text
-	'Dim strlist As New List(Of String)
-	'       While srRead.Peek <> -1
-	'          strlist.Add(srRead.ReadLine())
-	'     End While
-
-	'        For i As Integer = 0 To strlist.Count - 1
-	'           If strlist(i).Contains(TextBox4.Text) Then
-	'              MsgBox(TextBox4.Text & " found at line " & i + 1 & Environment.NewLine & Environment.NewLine & strlist(i))
-	'         End If
-	'    Next
-
-	'        TextBox4.Text = "Finished"
-	'   Catch ex As Exception
-	'      TextBox4.Text = "Unable to download content"
-	' Finally
-	' Close Stream and StreamReader when done
-	'    srRead.Close()
-	'   Str.Close()
-	'End Try
-	'End Sub
 
 
 
@@ -5455,73 +5132,8 @@ trypreviousimage:
 			'Form1.LBLImageInfo.Text = ""
 			My.Settings.CBImageInfo = False
 		End If
-		My.Settings.Save()
 	End Sub
 
-	Private Sub Button3_Click(sender As System.Object, e As System.EventArgs)
-
-		Dim KeywordCount As Integer = 0
-
-		Dim Str As System.IO.Stream
-		Dim srRead As System.IO.StreamReader
-		Try
-			' make a Web request
-			Dim req As System.Net.WebRequest = System.Net.WebRequest.Create(TBKeywordPreview.Text)
-			Dim resp As System.Net.WebResponse = req.GetResponse
-			Str = resp.GetResponseStream
-			srRead = New System.IO.StreamReader(Str)
-			' read all the text
-			Dim strlist As New List(Of String)
-			While srRead.Peek <> -1
-				strlist.Add(srRead.ReadLine())
-			End While
-
-			For i As Integer = 0 To strlist.Count - 1
-				If strlist(i).Contains("Keyword]") Then
-					KeywordCount = InstrCount(strlist(i), "[Keyword]")
-					strlist(i) = strlist(i).Replace("<br />", ",")
-					strlist(i) = strlist(i).Replace("<br/>", ",")
-					strlist(i) = strlist(i).Replace("</br>", ",")
-					strlist(i) = strlist(i).Replace("</ br>", ",")
-
-
-					For j As Integer = 1 To KeywordCount
-
-
-
-
-
-
-
-
-					Next
-				End If
-			Next
-
-			If KeywordCount > 0 Then
-				'Form1.ImportKeyword = True
-				If KeywordCount > 1 Then
-					'  Button3.Text = "Next"
-				Else
-					'  Button3.Enabled = False
-				End If
-			End If
-
-			MsgBox("[Keyword] was found " & KeywordCount & " times!")
-
-		Catch ex As Exception
-			' TextBox4.Text = "Unable to download content"
-		Finally
-
-
-
-			' Close Stream and StreamReader when done
-			srRead.Close()
-			Str.Close()
-		End Try
-
-
-	End Sub
 
 	Function InstrCount(StringToSearch As String,
 		   StringToFind As String) As Long
@@ -6026,7 +5638,6 @@ GeneralGood:
 		PBMaintenance.Value = PBMaintenance.Maximum
 
 
-		My.Settings.Save()
 
 
 		MessageBox.Show(Me, "All Local Image paths have been validated.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -6159,7 +5770,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLIHardcore.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.IHardcore = LBLIHardcore.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6168,7 +5778,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLISoftcore.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.ISoftcore = LBLISoftcore.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6176,7 +5785,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLILesbian.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.ILesbian = LBLILesbian.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6184,7 +5792,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLIBlowjob.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.IBlowjob = LBLIBlowjob.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6192,7 +5799,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLIFemdom.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.IFemdom = LBLIFemdom.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6200,7 +5806,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLILezdom.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.ILezdom = LBLILezdom.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6208,7 +5813,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLIHentai.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.IHentai = LBLIHentai.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6216,7 +5820,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLIGay.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.IGay = LBLIGay.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6224,7 +5827,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLIMaledom.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.IMaledom = LBLIMaledom.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6232,7 +5834,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLIGeneral.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.IGeneral = LBLIGeneral.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6244,7 +5845,6 @@ WhyUMakeMeDoDis:
 			My.Settings.IHardcoreSD = False
 		End If
 		Debug.Print("My.Settings.IHardcoreSD = " & My.Settings.IHardcoreSD)
-		My.Settings.Save()
 
 	End Sub
 
@@ -6255,7 +5855,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.ISoftcoreSD = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -6266,7 +5865,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.ILesbianSD = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -6277,7 +5875,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.IBlowjobSD = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -6288,7 +5885,7 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.IFemdomSD = False
 		End If
-		My.Settings.Save()
+
 
 	End Sub
 
@@ -6299,7 +5896,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.ILezdomSD = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -6310,7 +5906,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.IHentaiSD = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -6321,7 +5916,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.IGaySD = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -6332,7 +5926,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.IMaledomSD = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -6343,7 +5936,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.IGeneralSD = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -6354,7 +5946,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.ICaptionsSD = False
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -6372,7 +5963,6 @@ WhyUMakeMeDoDis:
 				My.Settings.CBIHardcore = False
 			End If
 			Debug.Print("My.Settings.CBIHardcore = " & My.Settings.CBIHardcore)
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6383,7 +5973,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBISoftcore = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6394,7 +5983,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBILesbian = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6405,7 +5993,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBIBlowjob = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6416,7 +6003,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBIFemdom = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6427,7 +6013,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBILezdom = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6438,7 +6023,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBIHentai = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6449,7 +6033,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBIGay = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6460,7 +6043,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBIMaledom = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6471,7 +6053,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBICaptions = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6482,7 +6063,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.CBIGeneral = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6490,7 +6070,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLICaptions.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.ICaptions = LBLICaptions.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -6498,7 +6077,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLDomImageDir.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.DomImageDir = LBLDomImageDir.Text
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -7187,6 +6765,7 @@ WhyUMakeMeDoDis:
 	End Sub
 
 	Public Sub GetScriptStatus()
+		'BUG: This Function is not checking all Commands and their contditions
 		ScriptStatusUnlock(True)
 		Dim ScriptReader As New StreamReader(ScriptFile)
 		ScriptList.Clear()
@@ -7335,13 +6914,13 @@ WhyUMakeMeDoDis:
 			If ScriptList(i).Contains("@ShowButtImage") Then
 				If Not RTBScriptReq.Text.Contains("* BnB Butt path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Butt path must be set to a valid directory or URL File *" & Environment.NewLine
 				If CBIButts.Checked = True And Not Directory.Exists(LBLButtPath.Text) Then ScriptReqFailed = True
-				If CBURLButts.Checked = True And Not File.Exists(LBLButtURL.Text) Then ScriptReqFailed = True
+				If ChbImageUrlButts.Checked = True And Not File.Exists(My.Settings.UrlFileButt) Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowBoobsImage") Then
 				If Not RTBScriptReq.Text.Contains("* BnB Boobs path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Boobs path must be set to a valid directory or URL File *" & Environment.NewLine
 				If CBIBoobs.Checked = True And Not Directory.Exists(LBLBoobPath.Text) Then ScriptReqFailed = True
-				If CBURLBoobs.Checked = True And Not File.Exists(LBLBoobURL.Text) Then ScriptReqFailed = True
+				If ChbImageUrlBoobs.Checked = True And Not File.Exists(My.Settings.UrlFileBoobs) Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowHardcoreImage") Then
@@ -7495,9 +7074,6 @@ WhyUMakeMeDoDis:
 	End Sub
 
 
-	Private Sub Button4_Click(sender As System.Object, e As System.EventArgs)
-		CLBStartList.SetItemChecked(2, False)
-	End Sub
 
 	Private Sub Button4_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNScriptOpen.Click
 		If CLBStartList.Visible = True Then
@@ -7768,6 +7344,7 @@ WhyUMakeMeDoDis:
 	End Sub
 
 	Public Sub GetAvailFail()
+		'BUG: This Function is not checking all Commands and their contditions
 
 		For j As Integer = 0 To AvailList.Count - 1
 			If AvailList(j).Contains("@ShowBlogImage") Then
@@ -7886,12 +7463,12 @@ WhyUMakeMeDoDis:
 
 			If AvailList(j).Contains("@ShowButtImage") Then
 				If CBIButts.Checked = True And Not Directory.Exists(LBLButtPath.Text) Then AvailFail = True
-				If CBURLButts.Checked = True And Not File.Exists(LBLButtURL.Text) Then AvailFail = True
+				If ChbImageUrlButts.Checked = True And Not File.Exists(My.Settings.UrlFileButt) Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowBoobsImage") Then
 				If CBIBoobs.Checked = True And Not Directory.Exists(LBLBoobPath.Text) Then AvailFail = True
-				If CBURLBoobs.Checked = True And Not File.Exists(LBLBoobURL.Text) Then AvailFail = True
+				If ChbImageUrlBoobs.Checked = True And Not File.Exists(My.Settings.UrlFileBoobs) Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowHardcoreImage") Then
@@ -8015,19 +7592,12 @@ WhyUMakeMeDoDis:
 
 	End Sub
 
-	Private Sub Button4_Click_2(sender As System.Object, e As System.EventArgs)
-		For i As Integer = 0 To CLBStartList.Items.Count - 1
-			' Debug.Print("CLBStartList.GetItemChecked(i) = " & CLBStartList.GetItemChecked(i))
-		Next
-	End Sub
-
 	Private Sub CBCBTCock_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCBTCock.LostFocus
 		If CBCBTCock.Checked = True Then
 			My.Settings.CBTCock = True
 		Else
 			My.Settings.CBTCock = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBCBTBalls_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCBTBalls.LostFocus
@@ -8036,7 +7606,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.CBTBalls = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TabPage9_Click(sender As System.Object, e As System.EventArgs) Handles TabPage9.Click
@@ -8843,46 +8412,20 @@ WhyUMakeMeDoDis:
 
 	End Sub
 
-	Private Sub Button4_Click_4(sender As System.Object, e As System.EventArgs)
-		'If (SaveSettingsDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-		'My.Settings.Save(SaveSettingsDialog.FileName)
-
-		' Dim SettingsSave As String = Configuration.ConfigurationSettings.AppSettings(My.Settings(0))
-
-		'Dim SettingsSave As String = Configuration.ConfigurationSettings.AppSettings(My.Settings(6))
-
-
-		'End If
-
-	End Sub
-
-	Private Sub Button5_Click_1(sender As System.Object, e As System.EventArgs)
-
-
-		' For Each MySet As My.MySettings In Configuration.ConfigurationSettings.AppSettings
-		'Debug.Print(MySet.ToString)
-
-		'Next
-
-
-	End Sub
 
 	Private Sub NBLongEdge_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBLongEdge.LostFocus
 		My.Settings.LongEdge = NBLongEdge.Value
-		My.Settings.Save()
 	End Sub
 
 
 	Private Sub NBHoldTheEdgeMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBHoldTheEdgeMax.LostFocus
 		My.Settings.HoldTheEdgeMax = NBHoldTheEdgeMax.Value
 		My.Settings.HoldTheEdgeMaxAmount = LBLMaxHold.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBHoldTheEdgeMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBHoldTheEdgeMin.LostFocus
 		My.Settings.HoldTheEdgeMin = NBHoldTheEdgeMin.Value
 		My.Settings.HoldTheEdgeMinAmount = LBLMinHold.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBHoldTheEdgeMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBHoldTheEdgeMax.ValueChanged
@@ -8921,12 +8464,10 @@ WhyUMakeMeDoDis:
 
 	Private Sub NBLongHoldMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBLongHoldMax.LostFocus
 		My.Settings.LongHoldMax = NBLongHoldMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBLongHoldMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBLongHoldMin.LostFocus
 		My.Settings.LongHoldMin = NBLongHoldMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBLongHoldMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBLongHoldMax.ValueChanged
@@ -8952,12 +8493,10 @@ WhyUMakeMeDoDis:
 
 	Private Sub NBExtremeHoldMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBExtremeHoldMax.LostFocus
 		My.Settings.ExtremeHoldMax = NBExtremeHoldMax.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBExtremeHoldMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBExtremeHoldMin.LostFocus
 		My.Settings.ExtremeHoldMin = NBExtremeHoldMin.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBExtremeHoldMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBExtremeHoldMax.ValueChanged
@@ -8980,25 +8519,10 @@ WhyUMakeMeDoDis:
 		End If
 	End Sub
 
-	Private Sub Button11_Click(sender As System.Object, e As System.EventArgs)
-		Dim testreader As New StreamReader(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\StrokeTaunts_1.txt")
-		Dim TestingList As New List(Of String)
-		While testreader.Peek <> -1
-			TestingList.Add(testreader.ReadLine())
-		End While
-
-		testreader.Close()
-		testreader.Dispose()
-
-
-
-
-	End Sub
 
 	Private Sub CBTSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles CBTSlider.Scroll
 		If FrmSettingsLoading = False Then
 			My.Settings.CBTSlider = CBTSlider.Value
-			My.Settings.Save()
 			If CBTSlider.Value = 1 Then LBLCBTSlider.Text = "CBT Level: 1"
 			If CBTSlider.Value = 2 Then LBLCBTSlider.Text = "CBT Level: 2"
 			If CBTSlider.Value = 3 Then LBLCBTSlider.Text = "CBT Level: 3"
@@ -9014,7 +8538,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.SubCircumcised = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -9025,7 +8548,6 @@ WhyUMakeMeDoDis:
 			Else
 				My.Settings.SubPierced = False
 			End If
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -9037,7 +8559,6 @@ WhyUMakeMeDoDis:
 		If NBEmpathy.Value = 4 Then My.Settings.DomEmpathy = 4
 		If NBEmpathy.Value = 5 Then My.Settings.DomEmpathy = 5
 
-		My.Settings.Save()
 
 		Debug.Print(My.Settings.DomEmpathy)
 
@@ -9286,7 +8807,6 @@ WhyUMakeMeDoDis:
 		My.Settings.SubAgeMin = NBSubAgeMin.Value
 		My.Settings.SubAgeMax = NBSubAgeMax.Value
 
-		My.Settings.Save()
 
 
 	End Sub
@@ -9453,9 +8973,6 @@ WhyUMakeMeDoDis:
 	End Sub
 
 
-	Private Sub Button6_Click_1(sender As System.Object, e As System.EventArgs)
-		Form1.CreateTaskLetter()
-	End Sub
 
 	Private Sub CBSaveChatlogExit_CheckedChanged(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles CBSaveChatlogExit.MouseClick
 
@@ -9487,122 +9004,95 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBRangeOrgasm_LostFocus(sender As Object, e As System.EventArgs) Handles CBRangeOrgasm.LostFocus
 		My.Settings.RangeOrgasm = CBRangeOrgasm.Checked
-		My.Settings.Save()
 	End Sub
 	Private Sub CBRangeRuin_LostFocus(sender As Object, e As System.EventArgs) Handles CBRangeRuin.LostFocus
 		My.Settings.RangeRuin = CBRangeRuin.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBAllowOften_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBAllowOften.LostFocus
 		My.Settings.AllowOften = NBAllowOften.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBAllowSometimes_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBAllowSometimes.LostFocus
 		My.Settings.AllowSometimes = NBAllowSometimes.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBAllowRarely_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBAllowRarely.LostFocus
 		My.Settings.AllowRarely = NBAllowRarely.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBRuinOften_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBRuinOften.LostFocus
 		My.Settings.RuinOften = NBRuinOften.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBRuinSometimes_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBRuinSometimes.LostFocus
 		My.Settings.RuinSometimes = NBRuinSometimes.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBRuinRarely_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBRuinRarely.LostFocus
 		My.Settings.RuinRarely = NBRuinRarely.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBSafeword_LostFocus(sender As Object, e As System.EventArgs) Handles TBSafeword.LostFocus
 		My.Settings.Safeword = TBSafeword.Text
-		My.Settings.Save()
 	End Sub
 
 
 	Private Sub BN1_LostFocus(sender As Object, e As System.EventArgs) Handles BN1.LostFocus
 		My.Settings.BN1 = BN1.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub BN2_LostFocus(sender As Object, e As System.EventArgs) Handles BN2.LostFocus
 		My.Settings.BN2 = BN2.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub BN3_LostFocus(sender As Object, e As System.EventArgs) Handles BN3.LostFocus
 		My.Settings.BN3 = BN3.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub BN4_LostFocus(sender As Object, e As System.EventArgs) Handles BN4.LostFocus
 		My.Settings.BN4 = BN4.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub BN5_LostFocus(sender As Object, e As System.EventArgs) Handles BN5.LostFocus
 		My.Settings.BN5 = BN5.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub BN6_LostFocus(sender As Object, e As System.EventArgs) Handles BN6.LostFocus
 		My.Settings.BN6 = BN6.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub SN1_LostFocus(sender As Object, e As System.EventArgs) Handles SN1.LostFocus
 		My.Settings.SN1 = SN1.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub SN2_LostFocus(sender As Object, e As System.EventArgs) Handles SN2.LostFocus
 		My.Settings.SN2 = SN2.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub SN3_LostFocus(sender As Object, e As System.EventArgs) Handles SN3.LostFocus
 		My.Settings.SN3 = SN3.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub SN4_LostFocus(sender As Object, e As System.EventArgs) Handles SN4.LostFocus
 		My.Settings.SN4 = SN4.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub SN5_LostFocus(sender As Object, e As System.EventArgs) Handles SN5.LostFocus
 		My.Settings.SN5 = SN5.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub SN6_LostFocus(sender As Object, e As System.EventArgs) Handles SN6.LostFocus
 		My.Settings.SN6 = SN6.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub GN1_LostFocus(sender As Object, e As System.EventArgs) Handles GN1.LostFocus
 		My.Settings.GN1 = GN1.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub GN2_LostFocus(sender As Object, e As System.EventArgs) Handles GN2.LostFocus
 		My.Settings.GN2 = GN2.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub GN3_LostFocus(sender As Object, e As System.EventArgs) Handles GN3.LostFocus
 		My.Settings.GN3 = GN3.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub GN4_LostFocus(sender As Object, e As System.EventArgs) Handles GN4.LostFocus
 		My.Settings.GN4 = GN4.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub GN5_LostFocus(sender As Object, e As System.EventArgs) Handles GN5.LostFocus
 		My.Settings.GN5 = GN5.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub GN6_LostFocus(sender As Object, e As System.EventArgs) Handles GN6.LostFocus
 		My.Settings.GN6 = GN6.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub BP1_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles BP1.DragEnter, BP2.DragEnter, BP3.DragEnter, BP4.DragEnter, BP5.DragEnter, BP6.DragEnter
@@ -9695,7 +9185,6 @@ WhyUMakeMeDoDis:
 		Try
 			BP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP1.bmp")
 			My.Settings.BP1 = Application.StartupPath & "\Images\Cards\CardBP1.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -9728,7 +9217,6 @@ WhyUMakeMeDoDis:
 			Try
 				BP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP1.bmp")
 				My.Settings.BP1 = Application.StartupPath & "\Images\Cards\CardBP1.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -9756,7 +9244,6 @@ WhyUMakeMeDoDis:
 		Try
 			BP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP2.bmp")
 			My.Settings.BP2 = Application.StartupPath & "\Images\Cards\CardBP2.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -9788,7 +9275,6 @@ WhyUMakeMeDoDis:
 			Try
 				BP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP2.bmp")
 				My.Settings.BP2 = Application.StartupPath & "\Images\Cards\CardBP2.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -9815,7 +9301,6 @@ WhyUMakeMeDoDis:
 		Try
 			BP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP3.bmp")
 			My.Settings.BP3 = Application.StartupPath & "\Images\Cards\CardBP3.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -9846,7 +9331,6 @@ WhyUMakeMeDoDis:
 			Try
 				BP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP3.bmp")
 				My.Settings.BP3 = Application.StartupPath & "\Images\Cards\CardBP3.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -9873,7 +9357,6 @@ WhyUMakeMeDoDis:
 		Try
 			BP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP4.bmp")
 			My.Settings.BP4 = Application.StartupPath & "\Images\Cards\CardBP4.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -9904,7 +9387,6 @@ WhyUMakeMeDoDis:
 			Try
 				BP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP4.bmp")
 				My.Settings.BP4 = Application.StartupPath & "\Images\Cards\CardBP4.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -9931,7 +9413,6 @@ WhyUMakeMeDoDis:
 		Try
 			BP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP5.bmp")
 			My.Settings.BP5 = Application.StartupPath & "\Images\Cards\CardBP5.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -9962,7 +9443,6 @@ WhyUMakeMeDoDis:
 			Try
 				BP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP5.bmp")
 				My.Settings.BP5 = Application.StartupPath & "\Images\Cards\CardBP5.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -9989,7 +9469,6 @@ WhyUMakeMeDoDis:
 		Try
 			BP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP6.bmp")
 			My.Settings.BP6 = Application.StartupPath & "\Images\Cards\CardBP6.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10020,7 +9499,6 @@ WhyUMakeMeDoDis:
 			Try
 				BP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardBP6.bmp")
 				My.Settings.BP6 = Application.StartupPath & "\Images\Cards\CardBP6.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10053,7 +9531,6 @@ WhyUMakeMeDoDis:
 		Try
 			SP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP1.bmp")
 			My.Settings.SP1 = Application.StartupPath & "\Images\Cards\CardSP1.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10084,7 +9561,6 @@ WhyUMakeMeDoDis:
 			Try
 				SP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP1.bmp")
 				My.Settings.SP1 = Application.StartupPath & "\Images\Cards\CardSP1.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10111,7 +9587,6 @@ WhyUMakeMeDoDis:
 		Try
 			SP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP2.bmp")
 			My.Settings.SP2 = Application.StartupPath & "\Images\Cards\CardSP2.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10141,7 +9616,6 @@ WhyUMakeMeDoDis:
 			Try
 				SP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP2.bmp")
 				My.Settings.SP2 = Application.StartupPath & "\Images\Cards\CardSP2.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10168,7 +9642,6 @@ WhyUMakeMeDoDis:
 		Try
 			SP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP3.bmp")
 			My.Settings.SP3 = Application.StartupPath & "\Images\Cards\CardSP3.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10199,7 +9672,6 @@ WhyUMakeMeDoDis:
 			Try
 				SP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP3.bmp")
 				My.Settings.SP3 = Application.StartupPath & "\Images\Cards\CardSP3.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10226,7 +9698,6 @@ WhyUMakeMeDoDis:
 		Try
 			SP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP4.bmp")
 			My.Settings.SP4 = Application.StartupPath & "\Images\Cards\CardSP4.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10257,7 +9728,6 @@ WhyUMakeMeDoDis:
 			Try
 				SP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP4.bmp")
 				My.Settings.SP4 = Application.StartupPath & "\Images\Cards\CardSP4.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10284,7 +9754,6 @@ WhyUMakeMeDoDis:
 		Try
 			SP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP5.bmp")
 			My.Settings.SP5 = Application.StartupPath & "\Images\Cards\CardSP5.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10315,7 +9784,6 @@ WhyUMakeMeDoDis:
 			Try
 				SP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP5.bmp")
 				My.Settings.SP5 = Application.StartupPath & "\Images\Cards\CardSP5.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10342,7 +9810,6 @@ WhyUMakeMeDoDis:
 		Try
 			SP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP6.bmp")
 			My.Settings.SP6 = Application.StartupPath & "\Images\Cards\CardSP6.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10373,7 +9840,6 @@ WhyUMakeMeDoDis:
 			Try
 				SP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardSP6.bmp")
 				My.Settings.SP6 = Application.StartupPath & "\Images\Cards\CardSP6.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10400,7 +9866,6 @@ WhyUMakeMeDoDis:
 		Try
 			GP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP1.bmp")
 			My.Settings.GP1 = Application.StartupPath & "\Images\Cards\CardGP1.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10431,7 +9896,6 @@ WhyUMakeMeDoDis:
 			Try
 				GP1.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP1.bmp")
 				My.Settings.GP1 = Application.StartupPath & "\Images\Cards\CardGP1.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10464,7 +9928,6 @@ WhyUMakeMeDoDis:
 		Try
 			GP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP2.bmp")
 			My.Settings.GP2 = Application.StartupPath & "\Images\Cards\CardGP2.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10495,7 +9958,6 @@ WhyUMakeMeDoDis:
 			Try
 				GP2.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP2.bmp")
 				My.Settings.GP2 = Application.StartupPath & "\Images\Cards\CardGP2.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10522,7 +9984,6 @@ WhyUMakeMeDoDis:
 		Try
 			GP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP3.bmp")
 			My.Settings.GP3 = Application.StartupPath & "\Images\Cards\CardGP3.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10552,7 +10013,6 @@ WhyUMakeMeDoDis:
 			Try
 				GP3.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP3.bmp")
 				My.Settings.GP3 = Application.StartupPath & "\Images\Cards\CardGP3.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10579,7 +10039,6 @@ WhyUMakeMeDoDis:
 		Try
 			GP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP4.bmp")
 			My.Settings.GP4 = Application.StartupPath & "\Images\Cards\CardGP4.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10610,7 +10069,6 @@ WhyUMakeMeDoDis:
 			Try
 				GP4.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP4.bmp")
 				My.Settings.GP4 = Application.StartupPath & "\Images\Cards\CardGP4.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10637,7 +10095,6 @@ WhyUMakeMeDoDis:
 		Try
 			GP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP5.bmp")
 			My.Settings.GP5 = Application.StartupPath & "\Images\Cards\CardGP5.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10668,7 +10125,6 @@ WhyUMakeMeDoDis:
 			Try
 				GP5.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP5.bmp")
 				My.Settings.GP5 = Application.StartupPath & "\Images\Cards\CardGP5.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10695,7 +10151,6 @@ WhyUMakeMeDoDis:
 		Try
 			GP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP6.bmp")
 			My.Settings.GP6 = Application.StartupPath & "\Images\Cards\CardGP6.bmp"
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10726,7 +10181,6 @@ WhyUMakeMeDoDis:
 			Try
 				GP6.Image = Image.FromFile(Application.StartupPath & "\Images\Cards\CardGP6.bmp")
 				My.Settings.GP6 = Application.StartupPath & "\Images\Cards\CardGP6.bmp"
-				My.Settings.Save()
 			Catch ex As Exception
 				MessageBox.Show("An error occurred - Card did not save correctly")
 			End Try
@@ -10747,7 +10201,6 @@ WhyUMakeMeDoDis:
 		Try
 			CardBack.Image = Image.FromFile(CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString)
 			My.Settings.CardBack = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
-			My.Settings.Save()
 		Catch ex As Exception
 			MessageBox.Show("Error Doing Drag/Drop")
 		End Try
@@ -10763,7 +10216,6 @@ WhyUMakeMeDoDis:
 			GC.Collect()
 			CardBack.Load(OpenFileDialog1.FileName)
 			My.Settings.CardBack = OpenFileDialog1.FileName
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -10949,19 +10401,6 @@ WhyUMakeMeDoDis:
 
 	End Sub
 
-	Private Sub Button10_Click(sender As System.Object, e As System.EventArgs)
-
-		For i As Integer = 0 To RTBResponses.Lines.Count - 1
-			' If RTBResponses.Lines(i).Substring(0, 1) = "[" Then
-			RTBResponses.SelectionStart = RTBResponses.Text.IndexOf(RTBResponses.Lines(i))
-			RTBResponses.SelectionLength = RTBResponses.Lines(i).Length
-			RTBResponses.SelectionFont = New Font(RTBResponses.SelectionFont, FontStyle.Bold)
-			'End If
-		Next
-
-	End Sub
-
-
 
 	Private Sub subAgeNumBox_MouseHover(sender As Object, e As System.EventArgs) Handles subAgeNumBox.MouseEnter
 		TTDir.SetToolTip(subAgeNumBox, "Set your age.")
@@ -11113,7 +10552,6 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBEdgeUseAvg_LostFocus(sender As Object, e As System.EventArgs) Handles CBEdgeUseAvg.LostFocus
 		My.Settings.CBEdgeUseAvg = CBEdgeUseAvg.Checked
-		My.Settings.Save()
 	End Sub
 	Private Sub CBEdgeUseAvg_MouseHover(sender As Object, e As System.EventArgs) Handles CBEdgeUseAvg.MouseEnter
 		LBLSubSettingsDescription.Text = "When this is checked, the domme will use the average amount of time it has historically taken you to reach the edge to decide when you have been trying to edge for too long."
@@ -11121,7 +10559,6 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBLongEdgeTaunts_LostFocus(sender As Object, e As System.EventArgs) Handles CBLongEdgeTaunts.LostFocus
 		My.Settings.CBLongEdgeTaunts = CBLongEdgeTaunts.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBLongEdgeTaunts_MouseHover(sender As Object, e As System.EventArgs) Handles CBLongEdgeTaunts.MouseEnter
@@ -11131,7 +10568,6 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBLongEdgeInterrupts_LostFocus(sender As Object, e As System.EventArgs) Handles CBLongEdgeInterrupts.LostFocus
 		My.Settings.CBLongEdgeInterrupts = CBLongEdgeInterrupts.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBLongEdgeInterrupts_MouseHover(sender As Object, e As System.EventArgs) Handles CBLongEdgeInterrupts.MouseEnter
@@ -11157,7 +10593,6 @@ WhyUMakeMeDoDis:
 
 	Private Sub NBNextImageChance_LostFocus(sender As Object, e As System.EventArgs) Handles NBNextImageChance.LostFocus
 		My.Settings.NextImageChance = NBNextImageChance.Value
-		My.Settings.Save()
 	End Sub
 
 
@@ -11229,7 +10664,6 @@ WhyUMakeMeDoDis:
 			orgasmlockrandombutton.Enabled = False
 
 
-			My.Settings.Save()
 
 
 
@@ -11347,7 +10781,6 @@ WhyUMakeMeDoDis:
 			orgasmsperlockButton.Enabled = False
 			orgasmlockrandombutton.Enabled = False
 
-			My.Settings.Save()
 
 		End If
 
@@ -11383,11 +10816,6 @@ WhyUMakeMeDoDis:
 	End Sub
 
 
-	Private Sub Button2_Click(sender As System.Object, e As System.EventArgs)
-		Form1.UpdatesTick = 3
-	End Sub
-
-
 
 	Private Sub NBTeaseLengthMin_MouseHover(sender As Object, e As System.EventArgs) Handles NBTeaseLengthMin.MouseEnter
 		LBLRangeSettingsDescription.Text = "Set the minimum amount of time the program will run before the domme decides if you can have an orgasm." & Environment.NewLine & Environment.NewLine &
@@ -11404,12 +10832,10 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBTeaseLengthDD_LostFocus(sender As Object, e As System.EventArgs) Handles CBTeaseLengthDD.LostFocus
 		My.Settings.CBTeaseLengthDD = CBTeaseLengthDD.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBTauntCycleDD_LostFocus(sender As Object, e As System.EventArgs) Handles CBTauntCycleDD.LostFocus
 		My.Settings.CBTauntCycleDD = CBTauntCycleDD.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBTeaseLengthDD_MouseHover(sender As Object, e As System.EventArgs) Handles CBTeaseLengthDD.MouseEnter
@@ -11622,22 +11048,18 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBOwnChastity_LostFocus(sender As Object, e As System.EventArgs) Handles CBOwnChastity.LostFocus
 		My.Settings.CBOwnChastity = CBOwnChastity.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBChastityPA_LostFocus(sender As Object, e As System.EventArgs) Handles CBChastityPA.LostFocus
 		My.Settings.ChastityPA = CBChastityPA.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBChastitySpikes_LostFocus(sender As Object, e As System.EventArgs) Handles CBChastitySpikes.LostFocus
 		My.Settings.ChastitySpikes = CBChastitySpikes.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBIncludeGifs_LostFocus(sender As Object, e As System.EventArgs) Handles CBIncludeGifs.LostFocus
 		My.Settings.CBIncludeGifs = CBIncludeGifs.Checked
-		My.Settings.Save()
 
 	End Sub
 
@@ -11649,7 +11071,6 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBHimHer_LostFocus(sender As Object, e As System.EventArgs) Handles CBHimHer.LostFocus
 		My.Settings.CBHimHer = CBHimHer.Checked
-		My.Settings.Save()
 
 	End Sub
 
@@ -11664,7 +11085,6 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBDomDel_LostFocus(sender As Object, e As System.EventArgs) Handles CBDomDel.LostFocus
 		My.Settings.DomDeleteMedia = CBDomDel.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub BTNMaintenanceValidate_Click(sender As System.Object, e As System.EventArgs) Handles BTNMaintenanceValidate.Click
@@ -12087,12 +11507,10 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBCockToClit_LostFocus(sender As Object, e As System.EventArgs) Handles CBCockToClit.LostFocus
 		My.Settings.CockToClit = CBCockToClit.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBBallsToPussy_LostFocus(sender As Object, e As System.EventArgs) Handles CBBallsToPussy.LostFocus
 		My.Settings.BallsToPussy = CBBallsToPussy.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBCockToClit_MouseHover(sender As Object, e As System.EventArgs) Handles CBCockToClit.MouseEnter
@@ -12472,7 +11890,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLContact1ImageDir.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.Contact1ImageDir = LBLContact1ImageDir.Text
-			My.Settings.Save()
 			Form1.GetContact1Pics()
 		End If
 	End Sub
@@ -12481,7 +11898,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLContact2ImageDir.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.Contact2ImageDir = LBLContact2ImageDir.Text
-			My.Settings.Save()
 			Form1.GetContact2Pics()
 		End If
 	End Sub
@@ -12490,7 +11906,6 @@ WhyUMakeMeDoDis:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			LBLContact3ImageDir.Text = FolderBrowserDialog1.SelectedPath
 			My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
-			My.Settings.Save()
 			Form1.GetContact3Pics()
 		End If
 	End Sub
@@ -12500,7 +11915,6 @@ WhyUMakeMeDoDis:
 		My.Settings.CBGlitterFeed = CBGlitterFeed.Checked
 		My.Settings.CBGlitterFeedScripts = CBGlitterFeedScripts.Checked
 		My.Settings.CBGlitterFeedOff = CBGlitterFeedOff.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub Button11_Click_1(sender As System.Object, e As System.EventArgs) Handles Button11.Click
@@ -12516,7 +11930,6 @@ WhyUMakeMeDoDis:
 				LBLChastityState.Text = "ON"
 				LBLChastityState.ForeColor = Color.Green
 			End If
-			My.Settings.Save()
 		Else
 			Return
 		End If
@@ -12561,21 +11974,18 @@ WhyUMakeMeDoDis:
 	Private Sub Button14_Click_1(sender As System.Object, e As System.EventArgs) Handles Button14.Click
 		LBLContact1ImageDir.Text = "No path selected"
 		My.Settings.Contact1ImageDir = "No path selected"
-		My.Settings.Save()
 		Form1.Contact1Pics.Clear()
 	End Sub
 
 	Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
 		LBLContact2ImageDir.Text = "No path selected"
 		My.Settings.Contact2ImageDir = "No path selected"
-		My.Settings.Save()
 		Form1.Contact2Pics.Clear()
 	End Sub
 
 	Private Sub Button12_Click_1(sender As System.Object, e As System.EventArgs) Handles Button12.Click
 		LBLContact3ImageDir.Text = "No path selected"
 		My.Settings.Contact3ImageDir = "No path selected"
-		My.Settings.Save()
 		Form1.Contact3Pics.Clear()
 	End Sub
 
@@ -12711,28 +12121,24 @@ WhyUMakeMeDoDis:
 				Try
 					GlitterAV.Image = Image.FromFile(SettingsList(25).Replace("Domme AV: ", ""))
 					My.Settings.GlitterAV = SettingsList(25).Replace("Domme AV: ", "")
-					My.Settings.Save()
 				Catch
 				End Try
 
 				Try
 					GlitterAV1.Image = Image.FromFile(SettingsList(26).Replace("Contact 1 AV: ", ""))
 					My.Settings.GlitterAV1 = SettingsList(26).Replace("Contact 1 AV: ", "")
-					My.Settings.Save()
 				Catch
 				End Try
 
 				Try
 					GlitterAV2.Image = Image.FromFile(SettingsList(27).Replace("Contact 2 AV: ", ""))
 					My.Settings.GlitterAV2 = SettingsList(27).Replace("Contact 2 AV: ", "")
-					My.Settings.Save()
 				Catch
 				End Try
 
 				Try
 					GlitterAV3.Image = Image.FromFile(SettingsList(28).Replace("Contact 3 AV: ", ""))
 					My.Settings.GlitterAV3 = SettingsList(28).Replace("Contact 3 AV: ", "")
-					My.Settings.Save()
 				Catch
 				End Try
 
@@ -12795,7 +12201,6 @@ WhyUMakeMeDoDis:
 		My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
 		My.Settings.Glitter3Slider = GlitterSlider3.Value
 
-		My.Settings.Save()
 
 	End Sub
 
@@ -12958,28 +12363,15 @@ WhyUMakeMeDoDis:
 				My.Settings.TeaseAILanguage = "English"
 			End If
 
-			My.Settings.Save()
 
 		End If
 
 	End Sub
 
-	'Private Sub MetroTest_ValueChanged(sender As System.Object, e As System.EventArgs)
-
-	'Dim bpm As Integer
-	'   bpm = MetroTest.Value
-	'Dim MetroVal As Integer = 60 / bpm * 1000
-	'Form1.StrokePace = MetroTest.Value
-
-
-	' Form1.MetroTimer.Interval = MetroVal
-	'End Sub
-
 
 	Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles Button25.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.BackgroundColor = GetColor.Color
-			My.Settings.Save()
 			Form1.ApplyThemeColor()
 		End If
 	End Sub
@@ -12987,7 +12379,6 @@ WhyUMakeMeDoDis:
 	Private Sub Button27_Click_1(sender As System.Object, e As System.EventArgs) Handles Button27.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.ButtonColor = GetColor.Color
-			My.Settings.Save()
 			Form1.ApplyThemeColor()
 		End If
 	End Sub
@@ -12995,7 +12386,6 @@ WhyUMakeMeDoDis:
 	Private Sub Button20_Click(sender As System.Object, e As System.EventArgs) Handles Button20.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.TextColor = GetColor.Color
-			My.Settings.Save()
 			Form1.ApplyThemeColor()
 		End If
 	End Sub
@@ -13003,7 +12393,6 @@ WhyUMakeMeDoDis:
 	Private Sub Button23_Click(sender As System.Object, e As System.EventArgs) Handles Button23.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.ChatWindowColor = GetColor.Color
-			My.Settings.Save()
 			Form1.ApplyThemeColor()
 		End If
 	End Sub
@@ -13018,7 +12407,6 @@ WhyUMakeMeDoDis:
 			GC.Collect()
 			Form1.BackgroundImage = Image.FromFile(OpenFileDialog1.FileName)
 			My.Settings.BackgroundImage = OpenFileDialog1.FileName
-			My.Settings.Save()
 			Form1.ApplyThemeColor()
 		End If
 	End Sub
@@ -13033,7 +12421,6 @@ WhyUMakeMeDoDis:
 		PBBackgroundPreview.Image = Nothing
 		GC.Collect()
 		My.Settings.BackgroundImage = ""
-		My.Settings.Save()
 	End Sub
 
 
@@ -13078,7 +12465,6 @@ WhyUMakeMeDoDis:
 
 				CBFlipBack.Checked = SettingsList(10).Replace("FlipImage: ", "")
 
-				My.Settings.Save()
 
 
 			Catch
@@ -13094,7 +12480,6 @@ WhyUMakeMeDoDis:
 	Private Sub Button21_Click_1(sender As System.Object, e As System.EventArgs) Handles Button21.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.ChatTextColor = GetColor.Color
-			My.Settings.Save()
 			Form1.ApplyThemeColor()
 		End If
 	End Sub
@@ -13102,7 +12487,6 @@ WhyUMakeMeDoDis:
 	Private Sub CBStretchBack_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBStretchBack.CheckedChanged
 		If Form1.ApplyingTheme = False Then
 			My.Settings.BackgroundStretch = CBStretchBack.Checked
-			My.Settings.Save()
 			Form1.ApplyThemeColor()
 		End If
 
@@ -13113,7 +12497,6 @@ WhyUMakeMeDoDis:
 	Private Sub Button30_Click(sender As System.Object, e As System.EventArgs) Handles Button30.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.DateTextColor = GetColor.Color
-			My.Settings.Save()
 			Form1.ApplyThemeColor()
 		End If
 	End Sub
@@ -13121,7 +12504,6 @@ WhyUMakeMeDoDis:
 	Private Sub Button28_Click(sender As System.Object, e As System.EventArgs) Handles Button28.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.DateBackColor = GetColor.Color
-			My.Settings.Save()
 			Form1.ApplyThemeColor()
 		End If
 	End Sub
@@ -13129,7 +12511,6 @@ WhyUMakeMeDoDis:
 	Private Sub CBTransparentTime_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTransparentTime.CheckedChanged
 		If Form1.ApplyingTheme = False Then
 			My.Settings.CBDateTransparent = CBTransparentTime.Checked
-			My.Settings.Save()
 			Try
 				Form1.ApplyThemeColor()
 			Catch
@@ -13193,14 +12574,6 @@ WhyUMakeMeDoDis:
 
 	End Sub
 
-	Private Sub Button33_Click(sender As System.Object, e As System.EventArgs)
-		Form1.MetroThread.Start()
-	End Sub
-
-	Private Sub Button34_Click(sender As System.Object, e As System.EventArgs)
-		Form1.MetroThread.Suspend()
-	End Sub
-
 	Private Sub TimeBoxWakeUp_ValueChanged(sender As System.Object, e As System.EventArgs) Handles TimeBoxWakeUp.ValueChanged
 		If Form1.FormLoading = False Then
 
@@ -13215,7 +12588,6 @@ WhyUMakeMeDoDis:
 
 			' Github Patch My.Settings.WakeUp = Form1.GetTime("SYS_WakeUp")
 			My.Settings.WakeUp = FormatDateTime(Now, DateFormat.ShortDate) & " " & Form1.GetTime("SYS_WakeUp")
-			My.Settings.Save()
 
 
 
@@ -13229,22 +12601,15 @@ WhyUMakeMeDoDis:
 
 	Private Sub NBTypoChance_LostFocus(sender As Object, e As System.EventArgs) Handles NBTypoChance.LostFocus
 		My.Settings.TypoChance = NBTypoChance.Value
-		My.Settings.Save()
 	End Sub
 
 
 	Private Sub LBLBoobPath_MouseHover(sender As Object, e As System.EventArgs) Handles LBLBoobPath.MouseHover
 		TTDir.SetToolTip(LBLBoobPath, LBLBoobPath.Text)
 	End Sub
-	Private Sub LBLBoobURL_MouseHover(sender As Object, e As System.EventArgs) Handles LBLBoobURL.MouseHover
-		TTDir.SetToolTip(LBLBoobURL, LBLBoobURL.Text)
-	End Sub
 
 	Private Sub LBLButtPath_MouseHover(sender As Object, e As System.EventArgs) Handles LBLButtPath.MouseHover
 		TTDir.SetToolTip(LBLButtPath, LBLButtPath.Text)
-	End Sub
-	Private Sub LBLButtURL_MouseHover(sender As Object, e As System.EventArgs) Handles LBLButtURL.MouseHover
-		TTDir.SetToolTip(LBLButtURL, LBLButtURL.Text)
 	End Sub
 
 	Private Sub LBLIHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIHardcore.MouseHover
@@ -13280,41 +12645,6 @@ WhyUMakeMeDoDis:
 	Private Sub LBLIGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIGeneral.MouseHover
 		TTDir.SetToolTip(LBLIGeneral, LBLIGeneral.Text)
 	End Sub
-
-	Private Sub LBLURLHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLHardcore.MouseHover
-		TTDir.SetToolTip(LBLURLHardcore, LBLURLHardcore.Text)
-	End Sub
-	Private Sub LBLURLSoftcore_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLSoftcore.MouseHover
-		TTDir.SetToolTip(LBLURLSoftcore, LBLURLSoftcore.Text)
-	End Sub
-	Private Sub LBLURLLesbian_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLLesbian.MouseHover
-		TTDir.SetToolTip(LBLURLLesbian, LBLURLLesbian.Text)
-	End Sub
-	Private Sub LBLURLBlowjob_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLBlowjob.MouseHover
-		TTDir.SetToolTip(LBLURLBlowjob, LBLURLBlowjob.Text)
-	End Sub
-	Private Sub LBLURLFemdom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLFemdom.MouseHover
-		TTDir.SetToolTip(LBLURLFemdom, LBLURLFemdom.Text)
-	End Sub
-	Private Sub LBLURLLezdom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLLezdom.MouseHover
-		TTDir.SetToolTip(LBLURLLezdom, LBLURLLezdom.Text)
-	End Sub
-	Private Sub LBLURLHentai_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLHentai.MouseHover
-		TTDir.SetToolTip(LBLURLHentai, LBLURLHentai.Text)
-	End Sub
-	Private Sub LBLURLGay_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLGay.MouseHover
-		TTDir.SetToolTip(LBLURLGay, LBLURLGay.Text)
-	End Sub
-	Private Sub LBLURLMaledom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLMaledom.MouseHover
-		TTDir.SetToolTip(LBLURLMaledom, LBLURLMaledom.Text)
-	End Sub
-	Private Sub LBLURLCaptions_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLCaptions.MouseHover
-		TTDir.SetToolTip(LBLURLCaptions, LBLURLCaptions.Text)
-	End Sub
-	Private Sub LBLURLGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles LBLURLGeneral.MouseHover
-		TTDir.SetToolTip(LBLURLGeneral, LBLURLGeneral.Text)
-	End Sub
-
 
 	Private Sub BTNWICreateURL_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWICreateURL.MouseHover
 		TTDir.SetToolTip(BTNWICreateURL, "Click here to create a new URL File." & Environment.NewLine & Environment.NewLine &
@@ -13460,11 +12790,9 @@ WhyUMakeMeDoDis:
 
 	Private Sub SliderVVolume_LostFocus(sender As Object, e As System.EventArgs) Handles SliderVVolume.LostFocus
 		My.Settings.VVolume = SliderVVolume.Value
-		My.Settings.Save()
 	End Sub
 	Private Sub SliderVRate_LostFocus(sender As Object, e As System.EventArgs) Handles SliderVRate.LostFocus
 		My.Settings.VRate = SliderVRate.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub SliderVVolume_MouseHover(sender As Object, e As System.EventArgs) Handles SliderVVolume.MouseHover
@@ -13488,12 +12816,10 @@ WhyUMakeMeDoDis:
 
 	Private Sub sadisticCheckBox_LostFocus(sender As Object, e As System.EventArgs) Handles sadisticCheckBox.LostFocus
 		My.Settings.DomSadistic = sadisticCheckBox.Checked
-		My.Settings.Save()
 	End Sub
 
 	Private Sub degradingCheckBox_LostFocus(sender As Object, e As System.EventArgs) Handles degradingCheckBox.LostFocus
 		My.Settings.DomDegrading = degradingCheckBox.Checked
-		My.Settings.Save()
 	End Sub
 
 
@@ -13534,7 +12860,6 @@ WhyUMakeMeDoDis:
 
 	Private Sub CBMuteMedia_LostFocus(sender As Object, e As System.EventArgs) Handles CBMuteMedia.LostFocus
 		My.Settings.MuteMedia = CBMuteMedia.Checked
-		My.Settings.Save()
 	End Sub
 
 
@@ -13548,7 +12873,6 @@ WhyUMakeMeDoDis:
 			LBLOfflineMode.Text = "ON"
 			LBLOfflineMode.ForeColor = Color.Green
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub CBNewSlideshow_LostFocus(sender As Object, e As System.EventArgs) Handles CBNewSlideshow.LostFocus
@@ -13557,12 +12881,10 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.CBNewSlideshow = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub NBTauntEdging_LostFocus(sender As Object, e As System.EventArgs) Handles NBTauntEdging.LostFocus
 		My.Settings.TauntEdging = NBTauntEdging.Value
-		My.Settings.Save()
 	End Sub
 
 	Private Sub BTNDebugTeaseTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugTeaseTimer.Click
@@ -13585,167 +12907,90 @@ WhyUMakeMeDoDis:
 		Form1.HoldEdgeTick = 5
 	End Sub
 
+#Region "----------------------------------- GenreImages-Url-Files --------------------------------------"
 
+	Private Sub BtnImageUrlSetFile_Click(sender As System.Object, e As System.EventArgs) Handles BtnImageUrlHardcore.Click,
+					BtnImageUrlSoftcore.Click, BtnImageUrlMaledom.Click, BtnImageUrlLezdom.Click, BtnImageUrlLesbian.Click,
+					BtnImageUrlHentai.Click, BtnImageUrlGeneral.Click, BtnImageUrlGay.Click, BtnImageUrlFemdom.Click,
+					BtnImageUrlCaptions.Click, BtnImageUrlButt.Click, BtnImageUrlBoobs.Click, BtnImageUrlBlowjob.Click
+		Try
+			' Read the Row of the current Button
+			Dim tmpTlpRow As Integer = TlpImageUrls.GetRow(sender)
 
-	Private Sub BTNURLHardcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLHardcore.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLHardcore.Text = WebImageFileDialog.FileName
-			My.Settings.HardcoreURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
+			' Check if the Button is in the TableLayoutPanel.
+			If tmpTlpRow = -1 Then Throw New Exception("Can't find control in TableLayoutPanel. " &
+													   "This is a major Design issue has to be fixed in code.")
 
-	Private Sub BTNURLSoftcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLSoftcore.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLSoftcore.Text = WebImageFileDialog.FileName
-			My.Settings.SoftcoreURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
+			' Get the Checkbox for the current button
+			Dim tmpCheckbox As CheckBox = TlpImageUrls.GetControlFromPosition(0, tmpTlpRow)
 
-	Private Sub BTNURLLesbian_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLLesbian.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLLesbian.Text = WebImageFileDialog.FileName
-			My.Settings.LesbianURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
+			' Check if the Text-Property has an active Databinding.
+			If tmpCheckbox.DataBindings.Item("Checked") Is Nothing Then _
+				Throw New InvalidDataException("Databinding """" Checked """" was not found in Checkbox." &
+												"This is a major design issue and has to be fixed in code.")
 
-	Private Sub BTNURLBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLBlowjob.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLBlowjob.Text = WebImageFileDialog.FileName
-			My.Settings.BlowjobURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
+			' Get the TExtBox for the Current Button
+			Dim tmpTextbox As TextBox = TlpImageUrls.GetControlFromPosition(2, tmpTlpRow)
 
-	Private Sub BTNURLFemdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLFemdom.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLFemdom.Text = WebImageFileDialog.FileName
-			My.Settings.FemdomURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
+			' Check if the Text-Property has an active Databinding.
+			If tmpTextbox.DataBindings.Item("Text") Is Nothing Then _
+				Throw New InvalidDataException("This function is only availabe with a Databound Textbox. " &
+												"This is a major design issue and has to be fixed in code.")
 
-	Private Sub BTNURLLezdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLLezdom.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLLezdom.Text = WebImageFileDialog.FileName
-			My.Settings.LezdomURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
+			'Declare a new instance of An OpenFileDialog. Use the URL-FilePat as initial
+			Dim tmpFS As New OpenFileDialog With {
+				.Filter = "Textfiles|*.txt",
+				.Multiselect = False,
+				.CheckFileExists = True,
+				.Title = "Select an " & tmpCheckbox.Text & " URL-File",
+				.InitialDirectory = Form1.pathUrlFileDir}
 
-	Private Sub BTNURLHentai_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLHentai.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLHentai.Text = WebImageFileDialog.FileName
-			My.Settings.HentaiURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
+			' Check if the URL-FilePath exits -> Otherwise create it.
+			If Not Directory.Exists(tmpFS.InitialDirectory) Then _
+			Directory.CreateDirectory(tmpFS.InitialDirectory)
 
-	Private Sub BTNURLGay_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLGay.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLGay.Text = WebImageFileDialog.FileName
-			My.Settings.GayURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
+			Dim tmpPath As String = tmpTextbox.Text
+			If tmpPath.ToLower.EndsWith(".txt") Then
+				If Path.IsPathRooted(tmpPath) AndAlso Directory.Exists(Path.GetDirectoryName(tmpPath)) Then
+					' Set an alternate Initial directory if filepath is absolute 
+					tmpFS.InitialDirectory = Path.GetDirectoryName(tmpPath)
+					tmpFS.FileName = Path.GetFileName(tmpPath)
+				Else
+					' Set the given Filename
+					tmpFS.FileName = tmpPath
+				End If
+			End If
 
-	Private Sub BTNURLMaledom_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLMaledom.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLMaledom.Text = WebImageFileDialog.FileName
-			My.Settings.MaledomURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
+			If tmpFS.ShowDialog() = DialogResult.OK Then
+				If Path.GetDirectoryName(tmpFS.FileName).ToLower = Path.GetDirectoryName(Form1.pathUrlFileDir).ToLower Then
+					' If the file is located standarddirectory st only the filename
+					tmpTextbox.Text = tmpFS.SafeFileName
+				Else
+					' Otherwise set the absoulte filepath
+					tmpTextbox.Text = tmpFS.FileName
+				End If
+
+				' This will force the Settings to save.
+				tmpCheckbox.Checked = True
+			End If
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'						       All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			MsgBox(ex.Message & vbCrLf & "Please report this error at the Milovana Forum.",
+				   MsgBoxStyle.Critical, "Cant Set URl-File")
+			Log.WriteError(ex.Message, ex, "Error Set Url-File")
+		End Try
 	End Sub
 
-	Private Sub BTNURLCaptions_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLCaptions.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLCaptions.Text = WebImageFileDialog.FileName
-			My.Settings.CaptionsURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
+#End Region 'GenreImages-Url-Files
 
-	Private Sub BTNURLGeneral_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLGeneral.Click
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-			LBLURLGeneral.Text = WebImageFileDialog.FileName
-			My.Settings.GeneralURLFile = WebImageFileDialog.FileName
-			My.Settings.Save()
-		End If
-	End Sub
-
-	Private Sub CBURLHardcore_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLHardcore.LostFocus
-		My.Settings.CBURLHardcore = CBURLHardcore.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLSoftcore_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLSoftcore.LostFocus
-		My.Settings.CBURLSoftcore = CBURLSoftcore.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLLesbian_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLLesbian.LostFocus
-		My.Settings.CBURLLesbian = CBURLLesbian.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLBlowjob_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLBlowjob.LostFocus
-		My.Settings.CBURLBlowjob = CBURLBlowjob.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLFemdom_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLFemdom.LostFocus
-		My.Settings.CBURLFemdom = CBURLFemdom.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLLezdom_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLLezdom.LostFocus
-		My.Settings.CBURLLezdom = CBURLLezdom.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLHentai_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLHentai.LostFocus
-		My.Settings.CBURLHentai = CBURLHentai.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLGay_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLGay.LostFocus
-		My.Settings.CBURLGay = CBURLGay.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLMaledom_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLMaledom.LostFocus
-		My.Settings.CBURLMaledom = CBURLMaledom.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLCaptions_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLCaptions.LostFocus
-		My.Settings.CBURLCaptions = CBURLCaptions.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLGeneral_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLGeneral.LostFocus
-		My.Settings.CBURLGeneral = CBURLGeneral.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLBoobs_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLBoobs.LostFocus
-		My.Settings.CBURLBoobs = CBURLBoobs.Checked
-		My.Settings.Save()
-	End Sub
-	Private Sub CBURLButts_LostFocus(sender As Object, e As System.EventArgs) Handles CBURLButts.LostFocus
-		My.Settings.CBURLButts = CBURLButts.Checked
-		My.Settings.Save()
-	End Sub
 
 	Private Sub CBIButts_LostFocus(sender As Object, e As System.EventArgs) Handles CBIButts.LostFocus
 		My.Settings.CBIButts = CBIButts.Checked
-		My.Settings.Save()
 	End Sub
 	Private Sub CBIBoobs_LostFocus(sender As Object, e As System.EventArgs) Handles CBIBoobs.LostFocus
 		My.Settings.CBIBoobs = CBIBoobs.Checked
-		My.Settings.Save()
 	End Sub
 
 

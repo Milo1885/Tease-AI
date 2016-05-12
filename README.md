@@ -163,6 +163,17 @@ Fixes added from Community Members:
 	Stefaf - Imporvement: @ShowLocalImage() Now the ImageDataContainer-Class is used. It doesn't try to get an single image from a single random genre any more. Instead it tries to get a single image from all given genres.
 
 	Stefaf - Improvement: Added logging at several points.
+	
+	Stefaf - Bugfix: 404 caused the Script to stop. Errors during ImageLoading will create now a LogEntry.
+	
+	Stefaf - Added Support for relative filepaths when using GenreImage-UrlFiles. Files outside the "Images\System\Url Files"-directory are neither included on Rebuild nor Refresh! But they are included in DeleteCommands.
+The PropertyNames containing the URL-FilePaths have been renamed, in order to enhance readability. Those settings have to be reapplied. This will also prevent the use of wrong Url-Files, when the settings were imported.
+
+	Stefaf - Improvement: Changed the way how UserSettings are stored. Now every(!) time a setting has changed, the settingsfile will be saved after a delay of one second(to keep disk traffic low).
+	
+	Stefaf - Improvement: Changed Labels for ImageURL-Files to readonly Textboxes. the Settings are now applied via DataBinding. Same on the ImageUrl-Checkboxes.
+	
+	
 
 	
 Conclusion List:

@@ -9,9 +9,15 @@ Imports System.Text.RegularExpressions
 
 
 Public Class Form1
-	Shared ReadOnly pathLikeList As String = Application.StartupPath & "\Images\System\LikedImageURLs.txt"
-	Shared ReadOnly pathDislikeList As String = Application.StartupPath & "\Images\System\DislikedImageURLs.txt"
-	Shared ReadOnly pathImageTagList As String = Application.StartupPath & "\Images\System\LocalImageTags.txt"
+#Region "-------------------------------------- File Constants ------------------------------------------"
+	Friend Shared ReadOnly pathLikeList As String = Application.StartupPath & "\Images\System\LikedImageURLs.txt"
+	Friend Shared ReadOnly pathDislikeList As String = Application.StartupPath & "\Images\System\DislikedImageURLs.txt"
+	Friend Shared ReadOnly pathImageTagList As String = Application.StartupPath & "\Images\System\LocalImageTags.txt"
+	''' <summary>
+	''' The default directory URL-Files are located.
+	''' </summary>
+	Friend Shared ReadOnly pathUrlFileDir As String = Application.StartupPath & "\Images\System\URL Files\"
+#End Region ' File Constants.
 
 	Public Chat As String
 	Public randomizer As New Random
@@ -1329,9 +1335,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		If My.Settings.CBButtSubDir = True Then FrmSettings.CBButtSubDir.Checked = True
 
 		FrmSettings.LBLBoobPath.Text = My.Settings.LBLBoobPath
-		FrmSettings.LBLBoobURL.Text = My.Settings.LBLBoobURL
 		FrmSettings.LBLButtPath.Text = My.Settings.LBLButtPath
-		FrmSettings.LBLButtURL.Text = My.Settings.LBLButtURL
 
 
 		FrmSplash.PBSplash.Value += 1
@@ -17736,43 +17740,43 @@ Skip_RandomFile:
 		Loop Until PoundCount = 0
 
 
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowButtsImage") Then
-				If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
+		'PoundCount = PoundLine
+		'Do
+		'	Application.DoEvents()
+		'	PoundCount -= 1
+		'	If ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowButtsImage") Then
+		'		If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
+		'			If StrokeFilter = True Then
+		'				For i As Integer = 0 To StrokeTauntCount - 1
+		'					ListClean.Remove(ListClean(PoundCount))
+		'					PoundLine -= 1
+		'				Next
+		'			Else
+		'				ListClean.Remove(ListClean(PoundCount))
+		'				PoundLine -= 1
+		'			End If
+		'		End If
+		'	End If
+		'Loop Until PoundCount = 0
 
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowBoobsImage") Or ListClean(PoundCount).Contains("@ShowBoobImage") Then
-				If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
+		'PoundCount = PoundLine
+		'Do
+		'	Application.DoEvents()
+		'	PoundCount -= 1
+		'	If ListClean(PoundCount).Contains("@ShowBoobsImage") Or ListClean(PoundCount).Contains("@ShowBoobImage") Then
+		'		If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
+		'			If StrokeFilter = True Then
+		'				For i As Integer = 0 To StrokeTauntCount - 1
+		'					ListClean.Remove(ListClean(PoundCount))
+		'					PoundLine -= 1
+		'				Next
+		'			Else
+		'				ListClean.Remove(ListClean(PoundCount))
+		'				PoundLine -= 1
+		'			End If
+		'		End If
+		'	End If
+		'Loop Until PoundCount = 0
 
 		PoundCount = PoundLine
 		Do
@@ -20801,10 +20805,10 @@ Skip_RandomFile:
 					  Or (FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And FrmSettings.CBIBlowjob.Checked = False _
 					   And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And FrmSettings.CBIGay.Checked = False _
 					   And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False))
-				.Add("@ShowButtImage", Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
-				.Add("@ShowButtsImage", __ConditionDic("@ShowButtImage")) ' duplicate Command, lets get the Value af the other one.
-				.Add("@ShowBoobImage", Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
-				.Add("@ShowBoobsImage", __ConditionDic("@ShowBoobImage")) ' duplicate Command, lets get the Value af the other one.
+				'.Add("@ShowButtImage", Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
+				'.Add("@ShowButtsImage", __ConditionDic("@ShowButtImage")) ' duplicate Command, lets get the Value af the other one.
+				'.Add("@ShowBoobImage", Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
+				'.Add("@ShowBoobsImage", __ConditionDic("@ShowBoobImage")) ' duplicate Command, lets get the Value af the other one.
 				.Add("@1MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119)
 				.Add("@2MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179)
 				.Add("@3MinuteHold", SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239)
