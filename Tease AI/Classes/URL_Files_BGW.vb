@@ -163,13 +163,13 @@ System.ComponentModel.Description("Determines the Target Directory of the URL-Fi
 		''' <summary>
 		''' Stores the Filepath to Dislikelist.
 		''' </summary>
-		<System.ComponentModel.Category("Behavior"),
-System.ComponentModel.Description("Gets or Sets the Filepath to the Dislikelist.")>
 		Private _DislikeListPath As String = "Images\System\DislikedImageURLs.txt"
 		''' <summary>
 		''' Gets or Sets the Filepath To the Dislikelist.
 		''' </summary>
 		''' <returns>Returns the Filepath to the Dislikelist.</returns>
+		<System.ComponentModel.Category("Behavior"),
+System.ComponentModel.Description("Gets or Sets the Filepath to the Dislikelist.")>
 		Public Property DislikeListPath As String
 			Get
 				Return _DislikeListPath

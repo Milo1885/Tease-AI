@@ -1111,6 +1111,7 @@ Partial Class FrmSettings
 		Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 		Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 		Me.TextBox2 = New System.Windows.Forms.TextBox()
+		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
 		Me.SettingsPanel.SuspendLayout()
 		Me.SettingsTabs.SuspendLayout()
 		Me.TabPage1.SuspendLayout()
@@ -14396,6 +14397,14 @@ Partial Class FrmSettings
 		Me.TextBox2.Size = New System.Drawing.Size(189, 20)
 		Me.TextBox2.TabIndex = 145
 		'
+		'BWURLFiles
+		'
+		Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
+		Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
+		Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
+		Me.BWURLFiles.WorkerReportsProgress = True
+		Me.BWURLFiles.WorkerSupportsCancellation = True
+		'
 		'FrmSettings
 		'
 		Me.AllowDrop = True
@@ -15717,7 +15726,6 @@ Partial Class FrmSettings
 	Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
 	Friend WithEvents Label135 As System.Windows.Forms.Label
 	Friend WithEvents TrackBar2 As System.Windows.Forms.TrackBar
-	Friend WithEvents BWURLFiles As Tease_AI.URL_Files.URL_File_BGW
 	Friend WithEvents BTNOfflineMode As System.Windows.Forms.Button
 	Friend WithEvents LBLOfflineMode As System.Windows.Forms.Label
 	Friend WithEvents Label140 As System.Windows.Forms.Label
@@ -15833,4 +15841,5 @@ Partial Class FrmSettings
 	Friend WithEvents TxbImageUrlButts As TextBox
 	Friend WithEvents TxbImgUrlHardcore As TextBox
 	Friend WithEvents TextBox2 As TextBox
+	Friend WithEvents BWURLFiles As URL_Files.URL_File_BGW
 End Class
