@@ -1540,13 +1540,13 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property LBLBoobURL() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property UrlFileBoobs() As String
             Get
-                Return CType(Me("LBLBoobURL"),String)
+                Return CType(Me("UrlFileBoobs"),String)
             End Get
             Set
-                Me("LBLBoobURL") = value
+                Me("UrlFileBoobs") = value
             End Set
         End Property
         
@@ -1564,13 +1564,13 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property LBLButtURL() As String
+         Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
+        Public Property UrlFileButt() As String
             Get
-                Return CType(Me("LBLButtURL"),String)
+                Return CType(Me("UrlFileButt"),String)
             End Get
             Set
-                Me("LBLButtURL") = value
+                Me("UrlFileButt") = value
             End Set
         End Property
         
@@ -5255,264 +5255,264 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property HardcoreURLFile() As String
+        Public Property UrlFileHardcore() As String
             Get
-                Return CType(Me("HardcoreURLFile"),String)
+                Return CType(Me("UrlFileHardcore"),String)
             End Get
             Set
-                Me("HardcoreURLFile") = value
+                Me("UrlFileHardcore") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property SoftcoreURLFile() As String
+        Public Property UrlFileSoftcore() As String
             Get
-                Return CType(Me("SoftcoreURLFile"),String)
+                Return CType(Me("UrlFileSoftcore"),String)
             End Get
             Set
-                Me("SoftcoreURLFile") = value
+                Me("UrlFileSoftcore") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property LesbianURLFile() As String
+        Public Property UrlFileLesbian() As String
             Get
-                Return CType(Me("LesbianURLFile"),String)
+                Return CType(Me("UrlFileLesbian"),String)
             End Get
             Set
-                Me("LesbianURLFile") = value
+                Me("UrlFileLesbian") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property BlowjobURLFile() As String
+        Public Property UrlFileBlowjob() As String
             Get
-                Return CType(Me("BlowjobURLFile"),String)
+                Return CType(Me("UrlFileBlowjob"),String)
             End Get
             Set
-                Me("BlowjobURLFile") = value
+                Me("UrlFileBlowjob") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property FemdomURLFile() As String
+        Public Property UrlFileFemdom() As String
             Get
-                Return CType(Me("FemdomURLFile"),String)
+                Return CType(Me("UrlFileFemdom"),String)
             End Get
             Set
-                Me("FemdomURLFile") = value
+                Me("UrlFileFemdom") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property LezdomURLFile() As String
+        Public Property UrlFileLezdom() As String
             Get
-                Return CType(Me("LezdomURLFile"),String)
+                Return CType(Me("UrlFileLezdom"),String)
             End Get
             Set
-                Me("LezdomURLFile") = value
+                Me("UrlFileLezdom") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property HentaiURLFile() As String
+        Public Property UrlFileHentai() As String
             Get
-                Return CType(Me("HentaiURLFile"),String)
+                Return CType(Me("UrlFileHentai"),String)
             End Get
             Set
-                Me("HentaiURLFile") = value
+                Me("UrlFileHentai") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property GayURLFile() As String
+        Public Property UrlFileGay() As String
             Get
-                Return CType(Me("GayURLFile"),String)
+                Return CType(Me("UrlFileGay"),String)
             End Get
             Set
-                Me("GayURLFile") = value
+                Me("UrlFileGay") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property MaledomURLFile() As String
+        Public Property UrlFileMaledom() As String
             Get
-                Return CType(Me("MaledomURLFile"),String)
+                Return CType(Me("UrlFileMaledom"),String)
             End Get
             Set
-                Me("MaledomURLFile") = value
+                Me("UrlFileMaledom") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property CaptionsURLFile() As String
+        Public Property UrlFileCaptions() As String
             Get
-                Return CType(Me("CaptionsURLFile"),String)
+                Return CType(Me("UrlFileCaptions"),String)
             End Get
             Set
-                Me("CaptionsURLFile") = value
+                Me("UrlFileCaptions") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("No URL File selected")>  _
-        Public Property GeneralURLFile() As String
+        Public Property UrlFileGeneral() As String
             Get
-                Return CType(Me("GeneralURLFile"),String)
+                Return CType(Me("UrlFileGeneral"),String)
             End Get
             Set
-                Me("GeneralURLFile") = value
+                Me("UrlFileGeneral") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLHardcore() As Boolean
+        Public Property UrlFileHardcoreEnabled() As Boolean
             Get
-                Return CType(Me("CBURLHardcore"),Boolean)
+                Return CType(Me("UrlFileHardcoreEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLHardcore") = value
+                Me("UrlFileHardcoreEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLSoftcore() As Boolean
+        Public Property UrlFileSoftcoreEnabled() As Boolean
             Get
-                Return CType(Me("CBURLSoftcore"),Boolean)
+                Return CType(Me("UrlFileSoftcoreEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLSoftcore") = value
+                Me("UrlFileSoftcoreEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLLesbian() As Boolean
+        Public Property UrlFileLesbianEnabled() As Boolean
             Get
-                Return CType(Me("CBURLLesbian"),Boolean)
+                Return CType(Me("UrlFileLesbianEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLLesbian") = value
+                Me("UrlFileLesbianEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLBlowjob() As Boolean
+        Public Property UrlFileBlowjobEnabled() As Boolean
             Get
-                Return CType(Me("CBURLBlowjob"),Boolean)
+                Return CType(Me("UrlFileBlowjobEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLBlowjob") = value
+                Me("UrlFileBlowjobEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLFemdom() As Boolean
+        Public Property UrlFileFemdomEnabled() As Boolean
             Get
-                Return CType(Me("CBURLFemdom"),Boolean)
+                Return CType(Me("UrlFileFemdomEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLFemdom") = value
+                Me("UrlFileFemdomEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLLezdom() As Boolean
+        Public Property UrlFileLezdomEnabled() As Boolean
             Get
-                Return CType(Me("CBURLLezdom"),Boolean)
+                Return CType(Me("UrlFileLezdomEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLLezdom") = value
+                Me("UrlFileLezdomEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLHentai() As Boolean
+        Public Property UrlFileHentaiEnabled() As Boolean
             Get
-                Return CType(Me("CBURLHentai"),Boolean)
+                Return CType(Me("UrlFileHentaiEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLHentai") = value
+                Me("UrlFileHentaiEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLGay() As Boolean
+        Public Property UrlFileGayEnabled() As Boolean
             Get
-                Return CType(Me("CBURLGay"),Boolean)
+                Return CType(Me("UrlFileGayEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLGay") = value
+                Me("UrlFileGayEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLMaledom() As Boolean
+        Public Property UrlFileMaledomEnabled() As Boolean
             Get
-                Return CType(Me("CBURLMaledom"),Boolean)
+                Return CType(Me("UrlFileMaledomEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLMaledom") = value
+                Me("UrlFileMaledomEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLCaptions() As Boolean
+        Public Property UrlFileCaptionsEnabled() As Boolean
             Get
-                Return CType(Me("CBURLCaptions"),Boolean)
+                Return CType(Me("UrlFileCaptionsEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLCaptions") = value
+                Me("UrlFileCaptionsEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLGeneral() As Boolean
+        Public Property UrlFileGeneralEnabled() As Boolean
             Get
-                Return CType(Me("CBURLGeneral"),Boolean)
+                Return CType(Me("UrlFileGeneralEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLGeneral") = value
+                Me("UrlFileGeneralEnabled") = value
             End Set
         End Property
         
@@ -5543,24 +5543,24 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLBoobs() As Boolean
+        Public Property UrlFileBoobsEnabled() As Boolean
             Get
-                Return CType(Me("CBURLBoobs"),Boolean)
+                Return CType(Me("UrlFileBoobsEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLBoobs") = value
+                Me("UrlFileBoobsEnabled") = value
             End Set
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property CBURLButts() As Boolean
+        Public Property UrlFileButtEnabled() As Boolean
             Get
-                Return CType(Me("CBURLButts"),Boolean)
+                Return CType(Me("UrlFileButtEnabled"),Boolean)
             End Get
             Set
-                Me("CBURLButts") = value
+                Me("UrlFileButtEnabled") = value
             End Set
         End Property
         
@@ -5723,9 +5723,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property WritingProgress() As String
+        Public Property WritingProgress() As Boolean
             Get
-                Return CType(Me("WritingProgress"),String)
+                Return CType(Me("WritingProgress"),Boolean)
             End Get
             Set
                 Me("WritingProgress") = value
@@ -5735,9 +5735,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property TimedWriting() As String
+        Public Property TimedWriting() As Boolean
             Get
-                Return CType(Me("TimedWriting"),String)
+                Return CType(Me("TimedWriting"),Boolean)
             End Get
             Set
                 Me("TimedWriting") = value
@@ -5747,9 +5747,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("50")>  _
-        Public Property TypeSpeed() As String
+        Public Property TypeSpeed() As Integer
             Get
-                Return CType(Me("TypeSpeed"),String)
+                Return CType(Me("TypeSpeed"),Integer)
             End Get
             Set
                 Me("TypeSpeed") = value

@@ -37,7 +37,43 @@ Partial Class Form1
     Friend Class ImageDataContainer
 		'TODO: ImageDataContainer Improve the usage of System Ressources.
 		Public Name As ImageGenre
-		Public URLFile As String = ""
+
+		''' =========================================================================================================
+		''' <summary>
+		''' Stores the absolute or relative Url-File-Path.
+		''' <para>Do not access this direct. Use the Property instead!</para>
+		''' </summary>
+		Private _URLFile As String = ""
+		''' <summary>
+		''' Gets or sets the Url-File-Path. Make sure you set this value with extension. Otherwise the value won't 
+		''' be accepted. The filepath can be a relatative or an absolute. A relative path will rooted with the 
+		''' standard URL-File directory
+		''' </summary>
+		''' <returns>The absolute Url-File-Path. </returns>
+		Public Property UrlFile As String
+			Get
+				If _URLFile = "" Then Return _URLFile
+				If _URLFile.ToLower.EndsWith(".txt") = False Then Return ""
+
+				If Path.IsPathRooted(_URLFile) Then
+					' Return an absolute FilePath
+					Return _URLFile
+				Else
+					' Return the relative path absolute.
+					Return pathUrlFileDir & _URLFile
+				End If
+            End Get
+			Set(value As String)
+				If value Is Nothing Then
+					_URLFile = ""
+				ElseIf value.ToLower.EndsWith(".txt") = False
+					_URLFile = ""
+				Else
+					_URLFile = value
+				End If
+			End Set
+		End Property
+
 		Public LocalDirectory As String = ""
 		Public LocalSubDirectories As Boolean = False
 		Public OfflineMode As Boolean = My.Settings.OfflineMode
@@ -330,7 +366,7 @@ NoneFound:
 					.Name = ImageGenre.Butt,
 					.LocalDirectory = If(My.Settings.CBIButts, My.Settings.LBLButtPath, ""),
 					.LocalSubDirectories = My.Settings.CBButtSubDir,
-					.URLFile = If(My.Settings.CBURLButts, My.Settings.LBLButtURL, ""),
+					.UrlFile = If(My.Settings.UrlFileButtEnabled, My.Settings.UrlFileButt, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -339,7 +375,7 @@ NoneFound:
 					.Name = ImageGenre.Boobs,
 					.LocalDirectory = If(My.Settings.CBIBoobs, My.Settings.LBLBoobPath, ""),
 					.LocalSubDirectories = My.Settings.CBButtSubDir,
-					.URLFile = If(My.Settings.CBURLBoobs, My.Settings.LBLBoobURL, ""),
+					.UrlFile = If(My.Settings.UrlFileBoobsEnabled, My.Settings.UrlFileBoobs, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -348,7 +384,7 @@ NoneFound:
 					.Name = ImageGenre.Hardcore,
 					.LocalDirectory = If(My.Settings.CBIHardcore, My.Settings.IHardcore, ""),
 					.LocalSubDirectories = My.Settings.CBHardcore,
-					.URLFile = If(My.Settings.CBURLHardcore, My.Settings.HardcoreURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileHardcoreEnabled, My.Settings.UrlFileHardcore, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -357,7 +393,7 @@ NoneFound:
 					.Name = ImageGenre.Softcore,
 					.LocalDirectory = If(My.Settings.CBISoftcore, My.Settings.ISoftcore, ""),
 					.LocalSubDirectories = My.Settings.CBSoftcore,
-					.URLFile = If(My.Settings.CBURLSoftcore, My.Settings.SoftcoreURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileSoftcoreEnabled, My.Settings.UrlFileSoftcore, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -366,7 +402,7 @@ NoneFound:
 					.Name = ImageGenre.Lesbian,
 					.LocalDirectory = If(My.Settings.CBILesbian, My.Settings.ILesbian, ""),
 					.LocalSubDirectories = My.Settings.CBLesbian,
-					.URLFile = If(My.Settings.CBURLLesbian, My.Settings.LesbianURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileLesbianEnabled, My.Settings.UrlFileLesbian, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -375,7 +411,7 @@ NoneFound:
 					.Name = ImageGenre.Blowjob,
 					.LocalDirectory = If(My.Settings.CBIBlowjob, My.Settings.IBlowjob, ""),
 					.LocalSubDirectories = My.Settings.CBBlowjob,
-					.URLFile = If(My.Settings.CBURLBlowjob, My.Settings.BlowjobURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileBlowjobEnabled, My.Settings.UrlFileBlowjob, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -384,7 +420,7 @@ NoneFound:
 					.Name = ImageGenre.Femdom,
 					.LocalDirectory = If(My.Settings.CBIFemdom, My.Settings.IFemdom, ""),
 					.LocalSubDirectories = My.Settings.CBFemdom,
-					.URLFile = If(My.Settings.CBURLFemdom, My.Settings.FemdomURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileFemdomEnabled, My.Settings.UrlFileFemdom, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -393,7 +429,7 @@ NoneFound:
 					.Name = ImageGenre.Lezdom,
 					.LocalDirectory = If(My.Settings.CBILezdom, My.Settings.ILezdom, ""),
 					.LocalSubDirectories = My.Settings.ILezdomSD,
-					.URLFile = If(My.Settings.CBURLLezdom, My.Settings.LezdomURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileLezdomEnabled, My.Settings.UrlFileLezdom, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -402,7 +438,7 @@ NoneFound:
 					.Name = ImageGenre.Hentai,
 					.LocalDirectory = If(My.Settings.CBIHentai, My.Settings.IHentai, ""),
 					.LocalSubDirectories = My.Settings.IHentaiSD,
-					.URLFile = If(My.Settings.CBURLHentai, My.Settings.HentaiURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileHentaiEnabled, My.Settings.UrlFileHentai, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -411,7 +447,7 @@ NoneFound:
 					.Name = ImageGenre.Gay,
 					.LocalDirectory = If(My.Settings.CBIGay, My.Settings.IGay, ""),
 					.LocalSubDirectories = My.Settings.IGaySD,
-					.URLFile = If(My.Settings.CBURLGay, My.Settings.GayURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileGayEnabled, My.Settings.UrlFileGay, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -420,7 +456,7 @@ NoneFound:
 					.Name = ImageGenre.Maledom,
 					.LocalDirectory = If(My.Settings.CBIMaledom, My.Settings.IMaledom, ""),
 					.LocalSubDirectories = My.Settings.IMaledomSD,
-					.URLFile = If(My.Settings.CBURLMaledom, My.Settings.MaledomURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileMaledomEnabled, My.Settings.UrlFileMaledom, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -429,7 +465,7 @@ NoneFound:
 					.Name = ImageGenre.Captions,
 					.LocalDirectory = If(My.Settings.CBICaptions, My.Settings.ICaptions, ""),
 					.LocalSubDirectories = My.Settings.ICaptionsSD,
-					.URLFile = If(My.Settings.CBURLCaptions, My.Settings.CaptionsURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileCaptionsEnabled, My.Settings.UrlFileCaptions, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
@@ -438,7 +474,7 @@ NoneFound:
 					.Name = ImageGenre.General,
 					.LocalDirectory = If(My.Settings.CBIGeneral, My.Settings.IGeneral, ""),
 					.LocalSubDirectories = My.Settings.IGeneralSD,
-					.URLFile = If(My.Settings.CBURLGeneral, My.Settings.GeneralURLFile, ""),
+					.UrlFile = If(My.Settings.UrlFileGeneralEnabled, My.Settings.UrlFileGeneral, ""),
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 		End With
@@ -606,7 +642,7 @@ NoNeFound:
 				End With
 
 			Catch ex As Exception
-				' Do nothing, Just for Debug.
+				Log.WriteError("Error loading Image: " & FetchContainer.ImageLocation, ex, "Error loading Image")
 				Throw
 			End Try
 			' Return the fetched data to the UI-Thread

@@ -26,11 +26,20 @@ Namespace My
 
     Partial Class MySettings
 
-        ''' =========================================================================================================
-        ''' <summary>
-        ''' Determins the path the path to store and load the user.config-file from/to.
-        ''' </summary>
-        Private Shared BackupDir As String = Application.Info.DirectoryPath & "\System\Settings\"
+		''' =========================================================================================================
+		''' <summary>
+		''' Determins the path the path to store and load the user.config-file from/to.
+		''' </summary>
+		Private Shared BackupDir As String = Application.Info.DirectoryPath & "\System\Settings\"
+
+		Private WithEvents Savetimer As New Timer With {.Interval = 1000}
+
+		Private Sub Savetimer_Tick(sender As Object, e As EventArgs) Handles Savetimer.Tick
+			Save()
+			Savetimer.Stop()
+		End Sub
+
+		Private loaded As Boolean
 
         ''' =========================================================================================================
         ''' <summary>
@@ -39,12 +48,12 @@ Namespace My
         Friend Shared Sub StartupCheck()
             Dim importSettingFile As String = Application.CommandLineArgs.FirstOrDefault(Function(x) x.StartsWith("ImportSettings-"))
 
-            If importSettingFile IsNot Nothing Then
-                importConfig(importSettingFile)
-            Else
-                loadCustomUserConfig()
-            End If
-        End Sub
+			If importSettingFile IsNot Nothing Then
+				importConfig(importSettingFile)
+			Else
+				loadCustomUserConfig()
+			End If
+		End Sub
 
         ''' =========================================================================================================
         ''' <summary>
@@ -63,12 +72,14 @@ Namespace My
 
                     'check if the directory in %LocalAppData% exits and create it if not
                     If Directory.Exists(configAppDataDir) = False Then _
-                                Directory.CreateDirectory(configAppDataDir)
+								Directory.CreateDirectory(configAppDataDir)
 
                     ' Copy the duplicated file to %LoaclAppData%-Dir.
                     File.Copy(dupeFilePath, configAppData, True)
-
-                End If
+				ElseIf Directory.Exists(configAppDataDir) = False And File.Exists(configAppData)
+					' No settings Found, try an Upgrade if there a Version in %LocaAppDir%
+					My.Settings.Upgrade()
+				End If
             Catch ex As Exception
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 '                                            All Errors
@@ -81,31 +92,44 @@ Namespace My
 
 #Region "---------------------------------------MyBaseRelated--------------------------------------------"
 
-        ''' =========================================================================================================
-        ''' <summary>
-        ''' Raises the SettingsSaving Event and copies afterwards the File to the 
-        ''' specific filepath.
-        ''' </summary>
-        ''' <param name="sender"></param>
-        ''' <param name="e"></param>
-        Protected Overrides Sub OnSettingsSaving(sender As Object, e As CancelEventArgs)
-            MyBase.OnSettingsSaving(sender, e)
-            Try
-                Dim configAppDataPath As String = GetLocalFilepath()
-                Dim dupeFilePath As String = GetDuplicatePath()
+
+		Protected Overrides Sub OnSettingsLoaded(sender As Object, e As SettingsLoadedEventArgs)
+			MyBase.OnSettingsLoaded(sender, e)
+			loaded = True
+		End Sub
+
+		Protected Overrides Sub OnPropertyChanged(sender As Object, e As PropertyChangedEventArgs)
+			MyBase.OnPropertyChanged(sender, e)
+			If loaded And Savetimer.Enabled = False Then
+				Savetimer.Start()
+			End If
+		End Sub
+
+		''' =========================================================================================================
+		''' <summary>
+		''' Raises the SettingsSaving Event and copies afterwards the File to the 
+		''' specific filepath.
+		''' </summary>
+		''' <param name="sender"></param>
+		''' <param name="e"></param>
+		Protected Overrides Sub OnSettingsSaving(sender As Object, e As CancelEventArgs)
+			MyBase.OnSettingsSaving(sender, e)
+			Try
+				Dim configAppDataPath As String = GetLocalFilepath()
+				Dim dupeFilePath As String = GetDuplicatePath()
 
                 ' Check if Directory and file to copy exist.
                 If Directory.Exists(Path.GetDirectoryName(configAppDataPath)) _
-                AndAlso File.Exists(configAppDataPath) Then
+				AndAlso File.Exists(configAppDataPath) Then
 
                     ' Create Traget directoy if needed.
                     If Directory.Exists(BackupDir) = False Then _
-                    Directory.CreateDirectory(BackupDir)
+					Directory.CreateDirectory(BackupDir)
 
                     ' Copy File
                     My.Computer.FileSystem.CopyFile(configAppDataPath, dupeFilePath, True)
-                End If
-            Catch ex As Exception
+				End If
+			Catch ex As Exception
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 '                                            All Errors
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
@@ -114,15 +138,16 @@ Namespace My
         End Sub
 
         Shadows Sub Reset()
-
-            Dim dupeFilePath As String = GetDuplicatePath()
+			loaded = False
+			Dim dupeFilePath As String = GetDuplicatePath()
 
             If Directory.Exists(BackupDir) = True AndAlso File.Exists(dupeFilePath) Then
                 File.Delete(dupeFilePath)
             End If
 
-            MyBase.Reset()
-        End Sub
+			MyBase.Reset()
+			loaded = True
+		End Sub
 
 
 #End Region ' MyBaseRelated
@@ -290,7 +315,9 @@ Namespace My
 
                     ' Delete directory and all content
                     Directory.Delete(ImportDir, True)
-                End If
+
+					MsgBox("The settings have been successfully imported", MsgBoxStyle.Information, "Import Settings")
+				End If
 
             Catch ex As Exception
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
@@ -304,5 +331,5 @@ Namespace My
 
 #End Region  ' Import file
 
-    End Class
+	End Class
 End Namespace
