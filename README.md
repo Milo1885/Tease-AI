@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
+BugFix: @CheckDate() should now work correctly
+
 BugFix: @LockImages didn't function when Glitter Contacts were in the room. It's now also performed after all @Show... Commands. 
 
 BugFix: The program was filtering out @ShowImage type Commands in Linear acripts when @LockImages was activated, which goes against its function. It even prevented the lines from getting displayed in the first place. Added a Boolean to GetFilter to discern between filtering List or Linear type scripts

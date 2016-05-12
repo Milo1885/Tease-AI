@@ -11606,13 +11606,9 @@ TaskCleanSet:
 		If TaskClean = True Then Return StringClean
 
 
-
-
-
 		' The @CheckDate() Command checks a previously saved Variable created with the @SetDate() Command and goes to the specified line if the current time and date is on or after the date in the Variable.
 		' Correct format is @CheckDate(VarName, Goto Line) . For example, @CheckDate(NoPorn, Look At Porn Again) will go to the line (Look At Porn Again) if the current time and date has passed the value set
 		' for the Variable "NoPorn" by @SetDate()
-
 
 		If StringClean.Contains("@CheckDate(") Then
 
@@ -11622,96 +11618,22 @@ TaskCleanSet:
 
 				If CheckArray(i).Contains("@CheckDate(") Then
 
-					'CheckArray(i) = CheckArray(i) & "]"
-
-					Dim CheckFlag As String = GetParentheses(CheckArray(i), "@CheckDate(")
-					Dim OriginalCheck As String = CheckFlag
-
-					CheckFlag = FixCommas(CheckFlag)
-
-					Dim DateArray() As String = CheckFlag.Split(",")
-
-					If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & DateArray(0)) Then
-
-						Debug.Print(GetDate(DateArray(0)))
-
-						If DateArray.Count = 2 Then
-							If CompareDatesWithTime(GetDate(DateArray(0))) <> 1 Then
-								SkipGotoLine = True
-								FileGoto = DateArray(1).Replace(")", "")
-								GetGoto()
-							End If
-						End If
-
-						If DateArray.Count = 3 Then
-
-							Dim DDiff As Integer
-
-							Debug.Print("GetDate(DateArray(0) = " & GetDate(DateArray(0)))
-
-							If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
-							If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
-
-							Debug.Print("DDiff = " & DDiff)
-							Debug.Print("Val(DateArray(1)) = " & Val(DateArray(1)))
-
-							If DDiff >= Val(DateArray(1)) Then
-								SkipGotoLine = True
-								FileGoto = DateArray(2).Replace(")", "")
-								GetGoto()
-							End If
-
-						End If
-
-
-						If DateArray.Count = 4 Then
-
-							Dim DDiff As Integer
-							Dim DDiff2 As Integer
-
-							If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
-							If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
-
-							If UCase(DateArray(2)).Contains("SECOND") Then DDiff2 = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("MINUTE") Then DDiff2 = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("HOUR") Then DDiff2 = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("DAY") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("WEEK") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
-							If UCase(DateArray(2)).Contains("MONTH") Then DDiff2 = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-							If UCase(DateArray(2)).Contains("YEAR") Then DDiff2 = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
-
-							If DDiff >= Val(DateArray(1)) And DDiff2 <= Val(DateArray(2)) Then
-								SkipGotoLine = True
-								FileGoto = DateArray(3).Replace(")", "")
-								GetGoto()
-							End If
-
-						End If
-
+					If CheckDateList(CheckArray(i), True) = True Then
+						Dim DateFlag As String = GetParentheses(CheckArray(i), "@CheckDate(")
+						DateFlag = FixCommas(DateFlag)
+						Dim DateArray As String() = DateFlag.Split(",")
+						SkipGotoLine = True
+						FileGoto = DateArray(1).Replace(")", "")
+						GetGoto()
 					End If
 
-					' CheckArray(i) = CheckArray(i).Replace("@CheckDate(" & OriginalCheck, "")
-
-					StringClean = StringClean.Replace("@CheckDate(" & OriginalCheck & ")", "")
+					StringClean = StringClean.Replace("@CheckDate(" & GetParentheses(CheckArray(i), "@CheckDate(") & ")", "")
 
 				End If
 
 			Next
 
-			'  StringClean = Join(CheckArray, Nothing)
-
 		End If
-
 
 		' The @If[] Command allows you to compare Variables and go to a specific line if the statement is true. The correct format is @If[VarName]>[varName2]Then(Goto Line)
 		' For example, If[StrokeTotal]>[1000]Then(Thousand Strokes) would check if the Variable "StrokeTotal" is greater than 1000, and go to (Thousand Strokes) if so. 
@@ -15257,75 +15179,107 @@ VTSkip:
 
 	End Function
 
-	Public Function CheckDateList(ByVal DateString As String) As Boolean
-
-		Dim DateCheck As Boolean = False
+	Public Function CheckDateList(ByVal DateString As String, Optional ByVal Linear As Boolean = False) As Boolean
 
 		Dim DateFlag As String = GetParentheses(DateString, "@CheckDate(")
-
 
 		If DateFlag.Contains(",") Then
 
 			DateFlag = FixCommas(DateFlag)
 
 			Dim DateArray() As String = DateFlag.Split(",")
-			Dim DDiff As Integer = 18855881
-			Dim DDiff2 As Integer = 18855881
+			Dim DDiff As Long = 18855881
+			Dim DDiff2 As Long = 18855881
 
-			If DateArray.Count = 2 Then
+			Dim DCompare As Long
+			Dim DCompare2 As Long
 
-				If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
-				If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+			If Linear = False Then
 
-				If DDiff >= Val(DateArray(1)) Then DateCheck = True
+				If DateArray.Count = 2 Then
+					DDiff = GetDateDifference(DateArray(0), DateArray(1))
+					DCompare = GetDateCompare(DateArray(0), DateArray(1))
+					If DDiff >= DCompare Then Return True
+					Return False
+				End If
 
-			End If
+				If DateArray.Count = 3 Then
+					DDiff = GetDateDifference(DateArray(0), DateArray(1))
+					DCompare = GetDateCompare(DateArray(0), DateArray(1))
+					DDiff2 = GetDateDifference(DateArray(0), DateArray(2))
+					DCompare2 = GetDateCompare(DateArray(0), DateArray(1))
+					If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
+					Return False
+				End If
 
-			If DateArray.Count = 3 Then
+			Else
 
-				If UCase(DateArray(1)).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
-				If UCase(DateArray(1)).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(1)).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+				If DateArray.Count = 2 Then
+					If CompareDatesWithTime(GetDate(DateArray(0))) <> 1 Then Return True
+					Return False
+				End If
 
-				If UCase(DateArray(2)).Contains("SECOND") Then DDiff2 = DateDiff(DateInterval.Second, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(2)).Contains("MINUTE") Then DDiff2 = DateDiff(DateInterval.Minute, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(2)).Contains("HOUR") Then DDiff2 = DateDiff(DateInterval.Hour, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(2)).Contains("DAY") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(2)).Contains("WEEK") Then DDiff2 = DateDiff(DateInterval.Day, GetDate(DateArray(0)), Now) / 7
-				If UCase(DateArray(2)).Contains("MONTH") Then DDiff2 = DateDiff(DateInterval.Month, GetDate(DateArray(0)), Now)
-				If UCase(DateArray(2)).Contains("YEAR") Then DDiff2 = DateDiff(DateInterval.Year, GetDate(DateArray(0)), Now)
+				If DateArray.Count = 3 Then
+					DDiff = GetDateDifference(DateArray(0), DateArray(2))
+					DCompare = GetDateCompare(DateArray(0), DateArray(2))
+					If DDiff >= DCompare Then Return True
+					Return False
+				End If
 
-				If DDiff >= Val(DateArray(1)) And DDiff2 <= Val(DateArray(2)) Then DateCheck = True
+				If DateArray.Count = 4 Then
+					DDiff = GetDateDifference(DateArray(0), DateArray(2))
+					DCompare = GetDateCompare(DateArray(0), DateArray(2))
+					DDiff2 = GetDateDifference(DateArray(0), DateArray(3))
+					DCompare2 = GetDateCompare(DateArray(0), DateArray(3))
+					If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
+					Return False
+				End If
 
-			End If
+				End If
 
 		Else
-
-			If CompareDatesWithTime(GetDate(DateFlag)) <> 1 Then DateCheck = True
-
+				If CompareDatesWithTime(GetDate(DateFlag)) <> 1 Then Return True
+				Return False
 		End If
 
+		Return False
 
-		'If DDiff >= Val(DateArray(1)) Then DateCheck = True
+	End Function
 
-		'If Not DateArray(2) Is Nothing And DateCheck = True Then
+	Public Function GetDateDifference(ByVal DateVar As String, ByVal DateString As String) As Long
 
-		'FileGoto = DateArray(2)
-		'SkipGotoLine = True
-		'GetGoto()
+		Dim DDiff As Long = 0
 
-		'End If
+		If UCase(DateString).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateVar), Now)
+		If UCase(DateString).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateVar), Now) * 60
+		If UCase(DateString).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateVar), Now) * 3600
+		If UCase(DateString).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateVar), Now) * 86400
+		If UCase(DateString).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateVar), Now) * 604800
+		If UCase(DateString).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateVar), Now) * 2629746
+		If UCase(DateString).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateVar), Now) * 31536000
 
-		Return DateCheck
+		Return DDiff
+
+	End Function
+
+	Public Function GetDateCompare(ByVal DateVar As String, ByVal DateString As String) As Long
+
+		Dim DDiff As Long = 0
+		Dim DDiff2 As Long
+
+		Dim Amount As Long = Val(DateString)
+
+		If UCase(DateString).Contains("SECOND") Then DDiff = Amount
+		If UCase(DateString).Contains("MINUTE") Then DDiff = Amount * 60
+		If UCase(DateString).Contains("HOUR") Then DDiff = Amount * 3600
+		If UCase(DateString).Contains("DAY") Then DDiff = Amount * 86400
+		If UCase(DateString).Contains("WEEK") Then DDiff = Amount * 604800
+		If UCase(DateString).Contains("MONTH") Then DDiff = Amount * 2629746
+		If UCase(DateString).Contains("YEAR") Then DDiff = Amount * 31536000
+
+		DDiff2 = DateDiff(DateInterval.Second, GetDate(DateVar), DateAdd(DateInterval.Second, DDiff, GetDate(DateVar)))
+
+		Return DDiff2
 
 	End Function
 
@@ -20409,7 +20363,7 @@ Skip_RandomFile:
 		If FilterString.Contains("@SubNotCircumcised") And FrmSettings.CBSubCircumcised.Checked = True Then Return False
 		If FilterString.Contains("@SubPierced") And FrmSettings.CBSubPierced.Checked = False Then Return False
 		If FilterString.Contains("@SubNotPierced") And FrmSettings.CBSubPierced.Checked = True Then Return False
-		If FilterString.Contains("@ShowTaggedImage") And LocalTagImageList.Count = 0 Then Return False
+		'If FilterString.Contains("@ShowTaggedImage") And LocalTagImageList.Count = 0 Then Return False
 		If FilterString.Contains("@BeforeTease") And BeforeTease = False Then Return False
 		If FilterString.Contains("@OrgasmDenied") And OrgasmDenied = False Then Return False
 		If FilterString.Contains("@OrgasmAllowed") And OrgasmAllowed = False Then Return False
@@ -20499,7 +20453,7 @@ Skip_RandomFile:
 			If CheckVariable(FilterString) = False Then Return False
 		End If
 
-		If FilterString.Contains("@CheckDate(") Then
+		If FilterString.Contains("@CheckDate(") And Linear = False Then
 			If CheckDateList(FilterString) = False Then Return False
 		End If
 
