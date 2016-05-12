@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
+BugFix: "Like This Image" and "Dislike This Image" disabled the wrong menu strip items when clicked
+
 BugFix: @CheckDate() should now work correctly
 
 BugFix: @LockImages didn't function when Glitter Contacts were in the room. It's now also performed after all @Show... Commands. 

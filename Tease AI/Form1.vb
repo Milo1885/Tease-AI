@@ -23559,7 +23559,8 @@ RestartFunction:
 			Else
 				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FoundString, True)
 			End If
-			PictureStrip.Items(3).Enabled = False
+			'PictureStrip.Items(3).Enabled = False
+			PicStripTSMIlikeImage.Enabled = False
 		End If
 
 
@@ -23574,7 +23575,8 @@ RestartFunction:
 			Else
 				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FoundString, True)
 			End If
-			PictureStrip.Items(4).Enabled = False
+			'PictureStrip.Items(4).Enabled = False
+			PicStripTSMIdislikeImage.Enabled = False
 		End If
 
 	End Sub
