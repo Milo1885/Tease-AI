@@ -6710,10 +6710,6 @@ SkipIsTyping:
 
 NullResponseLine:
 
-
-
-				If GlitterTease = True And JustShowedBlogImage = False Then GoTo TryNextWithTease
-
 				If DomChat.Contains("@ShowHardcoreImage") Then JustShowedBlogImage = True
 				If DomChat.Contains("@ShowSoftcoreImage") Then JustShowedBlogImage = True
 				If DomChat.Contains("@ShowLesbianImage") Then JustShowedBlogImage = True
@@ -6735,7 +6731,7 @@ NullResponseLine:
 				If DomChat.Contains("@SlideshowPrevious") Then JustShowedSlideshowImage = True
 				If DomChat.Contains("@SlideshowLast") Then JustShowedSlideshowImage = True
 
-
+				If GlitterTease = True And JustShowedBlogImage = False Then GoTo TryNextWithTease
 
 				If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
 					And SlideshowLoaded = True And Not DomChat.Contains("@ShowButtImage") And Not DomChat.Contains("@ShowBoobsImage") And Not DomChat.Contains("@ShowButtsImage") _
@@ -15265,8 +15261,6 @@ VTSkip:
 	Public Function GetDateCompare(ByVal DateVar As String, ByVal DateString As String) As Long
 
 		Dim DDiff As Long = 0
-		Dim DDiff2 As Long
-
 		Dim Amount As Long = Val(DateString)
 
 		If UCase(DateString).Contains("SECOND") Then DDiff = Amount
@@ -15277,9 +15271,7 @@ VTSkip:
 		If UCase(DateString).Contains("MONTH") Then DDiff = Amount * 2629746
 		If UCase(DateString).Contains("YEAR") Then DDiff = Amount * 31536000
 
-		DDiff2 = DateDiff(DateInterval.Second, GetDate(DateVar), DateAdd(DateInterval.Second, DDiff, GetDate(DateVar)))
-
-		Return DDiff2
+		Return DDiff
 
 	End Function
 
@@ -29162,7 +29154,7 @@ SkipNew:
 		EdgeCountTick = 0
 		EdgeCountTimer.Start()
 		SubEdging = True
-		EdgeTauntInt = randomizer.Next(30, 46)
+		EdgeTauntInt = randomizer.Next(15, 31)
 		EdgeTauntTimer.Start()
 		If OrgasmAllowed = True Or OrgasmDenied = True Or OrgasmRuined = True Then OrgasmYesNo = True
 		EdgePace()

@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
  
 # Changelog - Patch 54
 
+Decreased the amount of time it takes for the domme to make her first Edging taunt by 15 seconds
+
 BugFix: "Like This Image" and "Dislike This Image" disabled the wrong menu strip items when clicked
 
 BugFix: @CheckDate() should now work correctly
@@ -147,6 +149,8 @@ Fixes added from Community Members:
 	Daragorn: Clean-up of 1885's implementation of Daragorn's original Timed Writing code
 	
 	Daragorn: BugFix: Some aspects of the program didn't pause when Settings Menu was open and "Pause Program When Settings Menu is Visible" wasn't checked
+	
+	Daragorn; BugFix: When Glitter contacts were present and an image was shown as part of a response, the image would immediately get replaced by a picture of the domme or contact
 	
 	Stefaf: BugFix and Cause... Remote Images where stored to the RootDirectory, if Save Blog Images From Session was deactivated. 
 	
