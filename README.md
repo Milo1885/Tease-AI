@@ -6,6 +6,15 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: Status Initial
 	
+# Changelog - Patch 55	
+	
+	
+# Changelog - Patch 54.1
+
+BugFix: @ShowImage[] did not allow specified relative paths beginning with "\"
+
+BugFix: StringClean did not get cleaned up correctly when @ShowImage[] was called	
+	
  
 # Changelog - Patch 54
 

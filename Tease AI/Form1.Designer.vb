@@ -216,6 +216,20 @@ Partial Class Form1
 		Me.GroupBox1 = New System.Windows.Forms.GroupBox()
 		Me.LBLGeneralSettings = New System.Windows.Forms.Label()
 		Me.PNLTabs = New System.Windows.Forms.Panel()
+		Me.PNLWritingTask = New System.Windows.Forms.Panel()
+		Me.CBWritingProgress = New System.Windows.Forms.CheckBox()
+		Me.Button15 = New System.Windows.Forms.Button()
+		Me.Button1 = New System.Windows.Forms.Button()
+		Me.Label76 = New System.Windows.Forms.Label()
+		Me.LBLMistakesMade = New System.Windows.Forms.Label()
+		Me.LNLMistakesMade = New System.Windows.Forms.Label()
+		Me.LBLMistakesAllowed = New System.Windows.Forms.Label()
+		Me.Label74 = New System.Windows.Forms.Label()
+		Me.LBLLinesRemaining = New System.Windows.Forms.Label()
+		Me.Label15 = New System.Windows.Forms.Label()
+		Me.LBLWritingTaskText = New System.Windows.Forms.Label()
+		Me.LBLWritingTask = New System.Windows.Forms.Label()
+		Me.LBLLinesWritten = New System.Windows.Forms.Label()
 		Me.PNLAppRandomizer = New System.Windows.Forms.Panel()
 		Me.Button12 = New System.Windows.Forms.Button()
 		Me.BTNRandomLocal = New System.Windows.Forms.Button()
@@ -297,18 +311,6 @@ Partial Class Form1
 		Me.NBMaxPace = New System.Windows.Forms.NumericUpDown()
 		Me.LBLMaxSpeed = New System.Windows.Forms.Label()
 		Me.CBMetronome = New System.Windows.Forms.CheckBox()
-		Me.PNLWritingTask = New System.Windows.Forms.Panel()
-		Me.Button1 = New System.Windows.Forms.Button()
-		Me.Label76 = New System.Windows.Forms.Label()
-		Me.LBLMistakesMade = New System.Windows.Forms.Label()
-		Me.LNLMistakesMade = New System.Windows.Forms.Label()
-		Me.LBLMistakesAllowed = New System.Windows.Forms.Label()
-		Me.Label74 = New System.Windows.Forms.Label()
-		Me.LBLLinesRemaining = New System.Windows.Forms.Label()
-		Me.Label15 = New System.Windows.Forms.Label()
-		Me.LBLWritingTaskText = New System.Windows.Forms.Label()
-		Me.LBLWritingTask = New System.Windows.Forms.Label()
-		Me.LBLLinesWritten = New System.Windows.Forms.Label()
 		Me.PNLPlaylist = New System.Windows.Forms.Panel()
 		Me.LBPlaylist = New System.Windows.Forms.ListBox()
 		Me.BTNPlaylist = New System.Windows.Forms.Button()
@@ -359,8 +361,6 @@ Partial Class Form1
 		Me.Button4 = New System.Windows.Forms.Button()
 		Me.Panel3 = New System.Windows.Forms.Panel()
 		Me.Panel4 = New System.Windows.Forms.Panel()
-		Me.Button15 = New System.Windows.Forms.Button()
-		Me.CBWritingProgress = New System.Windows.Forms.CheckBox()
 		Me.ScriptTimer = New Tease_AI.teaseAI_Timer()
 		Me.Timer1 = New Tease_AI.teaseAI_Timer()
 		Me.IsTypingTimer = New Tease_AI.teaseAI_Timer()
@@ -419,6 +419,7 @@ Partial Class Form1
 		Me.MenuStrip2.SuspendLayout()
 		Me.PNLDate.SuspendLayout()
 		Me.PNLTabs.SuspendLayout()
+		Me.PNLWritingTask.SuspendLayout()
 		Me.PNLAppRandomizer.SuspendLayout()
 		Me.PNLChatBox2.SuspendLayout()
 		Me.AppPanelVitalSub.SuspendLayout()
@@ -437,7 +438,6 @@ Partial Class Form1
 		Me.PNLMetronome.SuspendLayout()
 		CType(Me.NBMinPace, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.NBMaxPace, System.ComponentModel.ISupportInitialize).BeginInit()
-		Me.PNLWritingTask.SuspendLayout()
 		Me.PNLPlaylist.SuspendLayout()
 		Me.PNLLazySub.SuspendLayout()
 		Me.PNLAvatar.SuspendLayout()
@@ -1252,7 +1252,7 @@ Partial Class Form1
 		'OpenFileDialog1
 		'
 		Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" &
+		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" & _
 		  "s (*.*)|*.*"
 		Me.OpenFileDialog1.Title = "Select an image file"
 		'
@@ -2124,6 +2124,184 @@ Partial Class Form1
 		Me.PNLTabs.Size = New System.Drawing.Size(253, 646)
 		Me.PNLTabs.TabIndex = 778
 		'
+		'PNLWritingTask
+		'
+		Me.PNLWritingTask.BackColor = System.Drawing.Color.SteelBlue
+		Me.PNLWritingTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+		Me.PNLWritingTask.Controls.Add(Me.CBWritingProgress)
+		Me.PNLWritingTask.Controls.Add(Me.Button15)
+		Me.PNLWritingTask.Controls.Add(Me.Button1)
+		Me.PNLWritingTask.Controls.Add(Me.Label76)
+		Me.PNLWritingTask.Controls.Add(Me.LBLMistakesMade)
+		Me.PNLWritingTask.Controls.Add(Me.LNLMistakesMade)
+		Me.PNLWritingTask.Controls.Add(Me.LBLMistakesAllowed)
+		Me.PNLWritingTask.Controls.Add(Me.Label74)
+		Me.PNLWritingTask.Controls.Add(Me.LBLLinesRemaining)
+		Me.PNLWritingTask.Controls.Add(Me.Label15)
+		Me.PNLWritingTask.Controls.Add(Me.LBLWritingTaskText)
+		Me.PNLWritingTask.Controls.Add(Me.LBLWritingTask)
+		Me.PNLWritingTask.Controls.Add(Me.LBLLinesWritten)
+		Me.PNLWritingTask.Location = New System.Drawing.Point(2, 2)
+		Me.PNLWritingTask.Name = "PNLWritingTask"
+		Me.PNLWritingTask.Size = New System.Drawing.Size(245, 346)
+		Me.PNLWritingTask.TabIndex = 774
+		'
+		'CBWritingProgress
+		'
+		Me.CBWritingProgress.AutoSize = True
+		Me.CBWritingProgress.Checked = Global.Tease_AI.My.MySettings.Default.WritingProgress
+		Me.CBWritingProgress.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBWritingProgress.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "WritingProgress", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBWritingProgress.ForeColor = System.Drawing.Color.White
+		Me.CBWritingProgress.Location = New System.Drawing.Point(9, 241)
+		Me.CBWritingProgress.Name = "CBWritingProgress"
+		Me.CBWritingProgress.Size = New System.Drawing.Size(182, 17)
+		Me.CBWritingProgress.TabIndex = 139
+		Me.CBWritingProgress.Text = "Display Progress in Chat Window"
+		Me.CBWritingProgress.UseVisualStyleBackColor = True
+		'
+		'Button15
+		'
+		Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.Button15.ForeColor = System.Drawing.Color.White
+		Me.Button15.Location = New System.Drawing.Point(8, 266)
+		Me.Button15.Name = "Button15"
+		Me.Button15.Size = New System.Drawing.Size(228, 28)
+		Me.Button15.TabIndex = 138
+		Me.Button15.Text = "Close This Window and Open Side Chat"
+		Me.Button15.UseVisualStyleBackColor = True
+		'
+		'Button1
+		'
+		Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.Button1.ForeColor = System.Drawing.Color.White
+		Me.Button1.Location = New System.Drawing.Point(8, 300)
+		Me.Button1.Name = "Button1"
+		Me.Button1.Size = New System.Drawing.Size(228, 28)
+		Me.Button1.TabIndex = 137
+		Me.Button1.Text = "Perform Random Writing Task"
+		Me.Button1.UseVisualStyleBackColor = True
+		'
+		'Label76
+		'
+		Me.Label76.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Label76.ForeColor = System.Drawing.Color.White
+		Me.Label76.Location = New System.Drawing.Point(8, 187)
+		Me.Label76.Name = "Label76"
+		Me.Label76.Size = New System.Drawing.Size(108, 17)
+		Me.Label76.TabIndex = 136
+		Me.Label76.Text = "Mistakes Allowed"
+		Me.Label76.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLMistakesMade
+		'
+		Me.LBLMistakesMade.BackColor = System.Drawing.Color.White
+		Me.LBLMistakesMade.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLMistakesMade.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.LBLMistakesMade.ForeColor = System.Drawing.Color.Black
+		Me.LBLMistakesMade.Location = New System.Drawing.Point(126, 206)
+		Me.LBLMistakesMade.Name = "LBLMistakesMade"
+		Me.LBLMistakesMade.Size = New System.Drawing.Size(108, 24)
+		Me.LBLMistakesMade.TabIndex = 135
+		Me.LBLMistakesMade.Text = "1000"
+		Me.LBLMistakesMade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LNLMistakesMade
+		'
+		Me.LNLMistakesMade.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.LNLMistakesMade.ForeColor = System.Drawing.Color.White
+		Me.LNLMistakesMade.Location = New System.Drawing.Point(126, 187)
+		Me.LNLMistakesMade.Name = "LNLMistakesMade"
+		Me.LNLMistakesMade.Size = New System.Drawing.Size(108, 17)
+		Me.LNLMistakesMade.TabIndex = 134
+		Me.LNLMistakesMade.Text = "Mistakes Made"
+		Me.LNLMistakesMade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLMistakesAllowed
+		'
+		Me.LBLMistakesAllowed.BackColor = System.Drawing.Color.White
+		Me.LBLMistakesAllowed.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLMistakesAllowed.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.LBLMistakesAllowed.ForeColor = System.Drawing.Color.Black
+		Me.LBLMistakesAllowed.Location = New System.Drawing.Point(8, 206)
+		Me.LBLMistakesAllowed.Name = "LBLMistakesAllowed"
+		Me.LBLMistakesAllowed.Size = New System.Drawing.Size(108, 24)
+		Me.LBLMistakesAllowed.TabIndex = 133
+		Me.LBLMistakesAllowed.Text = "1000"
+		Me.LBLMistakesAllowed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'Label74
+		'
+		Me.Label74.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Label74.ForeColor = System.Drawing.Color.White
+		Me.Label74.Location = New System.Drawing.Point(126, 139)
+		Me.Label74.Name = "Label74"
+		Me.Label74.Size = New System.Drawing.Size(108, 17)
+		Me.Label74.TabIndex = 132
+		Me.Label74.Text = "Lines Remaining"
+		Me.Label74.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLLinesRemaining
+		'
+		Me.LBLLinesRemaining.BackColor = System.Drawing.Color.White
+		Me.LBLLinesRemaining.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLLinesRemaining.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.LBLLinesRemaining.ForeColor = System.Drawing.Color.Black
+		Me.LBLLinesRemaining.Location = New System.Drawing.Point(126, 158)
+		Me.LBLLinesRemaining.Name = "LBLLinesRemaining"
+		Me.LBLLinesRemaining.Size = New System.Drawing.Size(108, 24)
+		Me.LBLLinesRemaining.TabIndex = 131
+		Me.LBLLinesRemaining.Text = "1000"
+		Me.LBLLinesRemaining.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'Label15
+		'
+		Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Label15.ForeColor = System.Drawing.Color.White
+		Me.Label15.Location = New System.Drawing.Point(8, 139)
+		Me.Label15.Name = "Label15"
+		Me.Label15.Size = New System.Drawing.Size(108, 17)
+		Me.Label15.TabIndex = 130
+		Me.Label15.Text = "Lines Written"
+		Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLWritingTaskText
+		'
+		Me.LBLWritingTaskText.BackColor = System.Drawing.Color.White
+		Me.LBLWritingTaskText.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLWritingTaskText.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.LBLWritingTaskText.ForeColor = System.Drawing.Color.Black
+		Me.LBLWritingTaskText.Location = New System.Drawing.Point(8, 64)
+		Me.LBLWritingTaskText.Name = "LBLWritingTaskText"
+		Me.LBLWritingTaskText.Size = New System.Drawing.Size(226, 61)
+		Me.LBLWritingTaskText.TabIndex = 128
+		Me.LBLWritingTaskText.Text = "WritingTask"
+		Me.LBLWritingTaskText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLWritingTask
+		'
+		Me.LBLWritingTask.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.LBLWritingTask.ForeColor = System.Drawing.Color.White
+		Me.LBLWritingTask.Location = New System.Drawing.Point(0, 3)
+		Me.LBLWritingTask.Name = "LBLWritingTask"
+		Me.LBLWritingTask.Size = New System.Drawing.Size(245, 54)
+		Me.LBLWritingTask.TabIndex = 125
+		Me.LBLWritingTask.Text = "Write the following line 100 times:"
+		Me.LBLWritingTask.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'LBLLinesWritten
+		'
+		Me.LBLLinesWritten.BackColor = System.Drawing.Color.White
+		Me.LBLLinesWritten.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+		Me.LBLLinesWritten.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.LBLLinesWritten.ForeColor = System.Drawing.Color.Black
+		Me.LBLLinesWritten.Location = New System.Drawing.Point(8, 158)
+		Me.LBLLinesWritten.Name = "LBLLinesWritten"
+		Me.LBLLinesWritten.Size = New System.Drawing.Size(108, 24)
+		Me.LBLLinesWritten.TabIndex = 129
+		Me.LBLLinesWritten.Text = "1000"
+		Me.LBLLinesWritten.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
 		'PNLAppRandomizer
 		'
 		Me.PNLAppRandomizer.BackColor = System.Drawing.Color.SteelBlue
@@ -2761,7 +2939,7 @@ Partial Class Form1
 		Me.LBLWishListText.Name = "LBLWishListText"
 		Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
 		Me.LBLWishListText.TabIndex = 108
-		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" &
+		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" & _
 		  "uld buy it for me because you know you like buying stuff for me. "
 		'
 		'LBLWishlistCost
@@ -3054,159 +3232,6 @@ Partial Class Form1
 		Me.CBMetronome.TabIndex = 0
 		Me.CBMetronome.Text = "Enable Metronome"
 		Me.CBMetronome.UseVisualStyleBackColor = False
-		'
-		'PNLWritingTask
-		'
-		Me.PNLWritingTask.BackColor = System.Drawing.Color.SteelBlue
-		Me.PNLWritingTask.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-		Me.PNLWritingTask.Controls.Add(Me.CBWritingProgress)
-		Me.PNLWritingTask.Controls.Add(Me.Button15)
-		Me.PNLWritingTask.Controls.Add(Me.Button1)
-		Me.PNLWritingTask.Controls.Add(Me.Label76)
-		Me.PNLWritingTask.Controls.Add(Me.LBLMistakesMade)
-		Me.PNLWritingTask.Controls.Add(Me.LNLMistakesMade)
-		Me.PNLWritingTask.Controls.Add(Me.LBLMistakesAllowed)
-		Me.PNLWritingTask.Controls.Add(Me.Label74)
-		Me.PNLWritingTask.Controls.Add(Me.LBLLinesRemaining)
-		Me.PNLWritingTask.Controls.Add(Me.Label15)
-		Me.PNLWritingTask.Controls.Add(Me.LBLWritingTaskText)
-		Me.PNLWritingTask.Controls.Add(Me.LBLWritingTask)
-		Me.PNLWritingTask.Controls.Add(Me.LBLLinesWritten)
-		Me.PNLWritingTask.Location = New System.Drawing.Point(2, 2)
-		Me.PNLWritingTask.Name = "PNLWritingTask"
-		Me.PNLWritingTask.Size = New System.Drawing.Size(245, 346)
-		Me.PNLWritingTask.TabIndex = 774
-		'
-		'Button1
-		'
-		Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button1.ForeColor = System.Drawing.Color.White
-		Me.Button1.Location = New System.Drawing.Point(8, 300)
-		Me.Button1.Name = "Button1"
-		Me.Button1.Size = New System.Drawing.Size(228, 28)
-		Me.Button1.TabIndex = 137
-		Me.Button1.Text = "Perform Random Writing Task"
-		Me.Button1.UseVisualStyleBackColor = True
-		'
-		'Label76
-		'
-		Me.Label76.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Label76.ForeColor = System.Drawing.Color.White
-		Me.Label76.Location = New System.Drawing.Point(8, 187)
-		Me.Label76.Name = "Label76"
-		Me.Label76.Size = New System.Drawing.Size(108, 17)
-		Me.Label76.TabIndex = 136
-		Me.Label76.Text = "Mistakes Allowed"
-		Me.Label76.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'LBLMistakesMade
-		'
-		Me.LBLMistakesMade.BackColor = System.Drawing.Color.White
-		Me.LBLMistakesMade.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLMistakesMade.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLMistakesMade.ForeColor = System.Drawing.Color.Black
-		Me.LBLMistakesMade.Location = New System.Drawing.Point(126, 206)
-		Me.LBLMistakesMade.Name = "LBLMistakesMade"
-		Me.LBLMistakesMade.Size = New System.Drawing.Size(108, 24)
-		Me.LBLMistakesMade.TabIndex = 135
-		Me.LBLMistakesMade.Text = "1000"
-		Me.LBLMistakesMade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'LNLMistakesMade
-		'
-		Me.LNLMistakesMade.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LNLMistakesMade.ForeColor = System.Drawing.Color.White
-		Me.LNLMistakesMade.Location = New System.Drawing.Point(126, 187)
-		Me.LNLMistakesMade.Name = "LNLMistakesMade"
-		Me.LNLMistakesMade.Size = New System.Drawing.Size(108, 17)
-		Me.LNLMistakesMade.TabIndex = 134
-		Me.LNLMistakesMade.Text = "Mistakes Made"
-		Me.LNLMistakesMade.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'LBLMistakesAllowed
-		'
-		Me.LBLMistakesAllowed.BackColor = System.Drawing.Color.White
-		Me.LBLMistakesAllowed.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLMistakesAllowed.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLMistakesAllowed.ForeColor = System.Drawing.Color.Black
-		Me.LBLMistakesAllowed.Location = New System.Drawing.Point(8, 206)
-		Me.LBLMistakesAllowed.Name = "LBLMistakesAllowed"
-		Me.LBLMistakesAllowed.Size = New System.Drawing.Size(108, 24)
-		Me.LBLMistakesAllowed.TabIndex = 133
-		Me.LBLMistakesAllowed.Text = "1000"
-		Me.LBLMistakesAllowed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'Label74
-		'
-		Me.Label74.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Label74.ForeColor = System.Drawing.Color.White
-		Me.Label74.Location = New System.Drawing.Point(126, 139)
-		Me.Label74.Name = "Label74"
-		Me.Label74.Size = New System.Drawing.Size(108, 17)
-		Me.Label74.TabIndex = 132
-		Me.Label74.Text = "Lines Remaining"
-		Me.Label74.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'LBLLinesRemaining
-		'
-		Me.LBLLinesRemaining.BackColor = System.Drawing.Color.White
-		Me.LBLLinesRemaining.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLLinesRemaining.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLLinesRemaining.ForeColor = System.Drawing.Color.Black
-		Me.LBLLinesRemaining.Location = New System.Drawing.Point(126, 158)
-		Me.LBLLinesRemaining.Name = "LBLLinesRemaining"
-		Me.LBLLinesRemaining.Size = New System.Drawing.Size(108, 24)
-		Me.LBLLinesRemaining.TabIndex = 131
-		Me.LBLLinesRemaining.Text = "1000"
-		Me.LBLLinesRemaining.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'Label15
-		'
-		Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Label15.ForeColor = System.Drawing.Color.White
-		Me.Label15.Location = New System.Drawing.Point(8, 139)
-		Me.Label15.Name = "Label15"
-		Me.Label15.Size = New System.Drawing.Size(108, 17)
-		Me.Label15.TabIndex = 130
-		Me.Label15.Text = "Lines Written"
-		Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'LBLWritingTaskText
-		'
-		Me.LBLWritingTaskText.BackColor = System.Drawing.Color.White
-		Me.LBLWritingTaskText.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLWritingTaskText.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLWritingTaskText.ForeColor = System.Drawing.Color.Black
-		Me.LBLWritingTaskText.Location = New System.Drawing.Point(8, 64)
-		Me.LBLWritingTaskText.Name = "LBLWritingTaskText"
-		Me.LBLWritingTaskText.Size = New System.Drawing.Size(226, 61)
-		Me.LBLWritingTaskText.TabIndex = 128
-		Me.LBLWritingTaskText.Text = "WritingTask"
-		Me.LBLWritingTaskText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'LBLWritingTask
-		'
-		Me.LBLWritingTask.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLWritingTask.ForeColor = System.Drawing.Color.White
-		Me.LBLWritingTask.Location = New System.Drawing.Point(0, 3)
-		Me.LBLWritingTask.Name = "LBLWritingTask"
-		Me.LBLWritingTask.Size = New System.Drawing.Size(245, 54)
-		Me.LBLWritingTask.TabIndex = 125
-		Me.LBLWritingTask.Text = "Write the following line 100 times:"
-		Me.LBLWritingTask.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'LBLLinesWritten
-		'
-		Me.LBLLinesWritten.BackColor = System.Drawing.Color.White
-		Me.LBLLinesWritten.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLLinesWritten.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLLinesWritten.ForeColor = System.Drawing.Color.Black
-		Me.LBLLinesWritten.Location = New System.Drawing.Point(8, 158)
-		Me.LBLLinesWritten.Name = "LBLLinesWritten"
-		Me.LBLLinesWritten.Size = New System.Drawing.Size(108, 24)
-		Me.LBLLinesWritten.TabIndex = 129
-		Me.LBLLinesWritten.Text = "1000"
-		Me.LBLLinesWritten.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'PNLPlaylist
 		'
@@ -3899,31 +3924,6 @@ Partial Class Form1
 		Me.Panel4.Size = New System.Drawing.Size(245, 31)
 		Me.Panel4.TabIndex = 779
 		'
-		'Button15
-		'
-		Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button15.ForeColor = System.Drawing.Color.White
-		Me.Button15.Location = New System.Drawing.Point(8, 266)
-		Me.Button15.Name = "Button15"
-		Me.Button15.Size = New System.Drawing.Size(228, 28)
-		Me.Button15.TabIndex = 138
-		Me.Button15.Text = "Close This Window and Open Side Chat"
-		Me.Button15.UseVisualStyleBackColor = True
-		'
-		'CBWritingProgress
-		'
-		Me.CBWritingProgress.AutoSize = True
-		Me.CBWritingProgress.Checked = Global.Tease_AI.My.MySettings.Default.WritingProgress
-		Me.CBWritingProgress.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBWritingProgress.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "WritingProgress", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.CBWritingProgress.ForeColor = System.Drawing.Color.White
-		Me.CBWritingProgress.Location = New System.Drawing.Point(9, 241)
-		Me.CBWritingProgress.Name = "CBWritingProgress"
-		Me.CBWritingProgress.Size = New System.Drawing.Size(182, 17)
-		Me.CBWritingProgress.TabIndex = 139
-		Me.CBWritingProgress.Text = "Display Progress in Chat Window"
-		Me.CBWritingProgress.UseVisualStyleBackColor = True
-		'
 		'ScriptTimer
 		'
 		Me.ScriptTimer.Interval = 1000
@@ -4104,7 +4104,7 @@ Partial Class Form1
 		Me.Name = "Form1"
 		Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-		Me.Text = "Tease A.I. - PATCH 54"
+		Me.Text = "Tease A.I. - PATCH 54.1"
 		CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -4127,6 +4127,8 @@ Partial Class Form1
 		Me.MenuStrip2.PerformLayout()
 		Me.PNLDate.ResumeLayout(False)
 		Me.PNLTabs.ResumeLayout(False)
+		Me.PNLWritingTask.ResumeLayout(False)
+		Me.PNLWritingTask.PerformLayout()
 		Me.PNLAppRandomizer.ResumeLayout(False)
 		Me.PNLChatBox2.ResumeLayout(False)
 		Me.PNLChatBox2.PerformLayout()
@@ -4150,8 +4152,6 @@ Partial Class Form1
 		Me.PNLMetronome.PerformLayout()
 		CType(Me.NBMinPace, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.NBMaxPace, System.ComponentModel.ISupportInitialize).EndInit()
-		Me.PNLWritingTask.ResumeLayout(False)
-		Me.PNLWritingTask.PerformLayout()
 		Me.PNLPlaylist.ResumeLayout(False)
 		Me.PNLLazySub.ResumeLayout(False)
 		Me.PNLLazySub.PerformLayout()

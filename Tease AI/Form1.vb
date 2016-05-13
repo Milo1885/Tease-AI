@@ -10454,11 +10454,9 @@ RinseLatherRepeat:
 
 				' Change evtl. wrong given Slashes
 				ImageToShow = ImageToShow.Replace("/", "\")
-				' Transform relative to absolute path
-				If Path.IsPathRooted(ImageToShow) = False Then
-					ImageToShow = Application.StartupPath & "\Images\" & ImageToShow
-					ImageToShow = ImageToShow.Replace("\\", "\")
-				End If
+				
+				ImageToShow = Application.StartupPath & "\Images\" & ImageToShow
+				ImageToShow = ImageToShow.Replace("\\", "\")
 
 				If ImageToShow.Contains("*") Then
 					'######################### Directory was given #########################
@@ -10468,9 +10466,9 @@ RinseLatherRepeat:
 
 					If Directory.Exists(tmpDir) = False Then
 						Throw New Exception(
-							"The given directory """ & tmpDir & """ does not exist." &
-							vbCrLf & vbCrLf &
-							"Please make sure the directory exists and it is spelled correctly in the script.")
+						 "The given directory """ & tmpDir & """ does not exist." &
+						 vbCrLf & vbCrLf &
+						 "Please make sure the directory exists and it is spelled correctly in the script.")
 					End If
 
 					If tmpFilter = "*" Then
@@ -10481,10 +10479,10 @@ RinseLatherRepeat:
 
 					If ImageList.Count = 0 Then
 						Throw New FileNotFoundException(
-							"No images matching the filter """ & tmpFilter &
-							""" were found in """ & tmpDir & """!" &
-							vbCrLf & vbCrLf &
-							"Please make sure that valid files exist and the wildcards are applied correctly in the script.")
+						 "No images matching the filter """ & tmpFilter &
+						 """ were found in """ & tmpDir & """!" &
+						 vbCrLf & vbCrLf &
+						 "Please make sure that valid files exist and the wildcards are applied correctly in the script.")
 					End If
 
 					tmpImgLoc = ImageList(New Random().Next(0, ImageList.Count))
@@ -10494,9 +10492,9 @@ RinseLatherRepeat:
 						tmpImgLoc = ImageToShow
 					Else
 						Throw New Exception(
-							"""" & Path.GetFileName(ImageToShow) & """ was not found in """ & Path.GetDirectoryName(ImageToShow) & """!" &
-							vbCrLf & vbCrLf &
-							"Please make sure the file exists and it is spelled correctly in the script.")
+						 """" & Path.GetFileName(ImageToShow) & """ was not found in """ & Path.GetDirectoryName(ImageToShow) & """!" &
+						 vbCrLf & vbCrLf &
+						 "Please make sure the file exists and it is spelled correctly in the script.")
 					End If
 				End If
 				'############### Display the Image ##################
@@ -10507,10 +10505,10 @@ ShowedBlogImage:
 				'                   All Errors
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Log.WriteError("Command @ShowImage[] was unable to display the image.",
-							   ex, "Error at @ShowImage[]")
+				   ex, "Error at @ShowImage[]")
 				MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error at @ShowImage[]")
 			End Try
-			StringClean = StringClean.Replace("@ShowImage[" & ImageToShow & "]", "")
+			StringClean = StringClean.Replace("@ShowImage[" & GetParentheses(StringClean, "@ShowImage[") & "]", "")
 		End If
 		'----------------------------------------
 		' @ShowImage[]- End
@@ -10540,7 +10538,7 @@ ShowedBlogImage:
 				TnASlides.Start()
 			Catch ex As Exception
 				Log.WriteError("Unable to start TnA Slideshow: " & vbCrLf &
-							   ex.Message, ex, "CommandClean()")
+					  ex.Message, ex, "CommandClean()")
 			End Try
 
 			StringClean = StringClean.Replace("@TnAFastSlides", "")
