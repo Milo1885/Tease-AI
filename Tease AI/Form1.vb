@@ -5415,81 +5415,84 @@ SkipGotoSearch:
 		Else
 			GotoText = FileText
 		End If
+		Try
 
+			'TODO: Add Errorhandling.
+			If File.Exists(GotoText) Then
+				' Read all lines of the given file.
+				Dim gotolines As List(Of String) = Txt2List(GotoText)
+				Dim CountGotoLines As Integer = gotolines.Count
 
-		'TODO: Add Errorhandling.
-		If File.Exists(GotoText) Then
-			' Read all lines of the given file.
-			Dim gotolines As List(Of String) = Txt2List(GotoText)
-			Dim CountGotoLines As Integer = gotolines.Count
+				If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
+				If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
+				Debug.Print(FileGoto)
+				Debug.Print(StripGoto)
+				DomTask = DomTask.Replace("@Goto" & StripGoto, "")
 
-			If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
-			If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
-			Debug.Print(FileGoto)
-			Debug.Print(StripGoto)
-			DomTask = DomTask.Replace("@Goto" & StripGoto, "")
+				'If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
 
-			'If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
+				'DomTask = DomTask.Replace("@Goto" & StripGoto, "")
+				Debug.Print("StripGoto = " & StripGoto)
 
-			'DomTask = DomTask.Replace("@Goto" & StripGoto, "")
-			Debug.Print("StripGoto = " & StripGoto)
+				Debug.Print("FileGoto = " & FileGoto)
 
-			Debug.Print("FileGoto = " & FileGoto)
+				Dim gotoline As Integer = -1
+				Do
+					gotoline += 1
+					If GotoDommeLevel = True And gotoline = CountGotoLines Then
+						FileGoto = "(DommeLevel)"
+						GoTo SkipGotoSearch
+					End If
+					'Loop Until gotolines(gotoline) = FileGoto
 
-			Dim gotoline As Integer = -1
-			Do
-				gotoline += 1
-				If GotoDommeLevel = True And gotoline = CountGotoLines Then
-					FileGoto = "(DommeLevel)"
-					GoTo SkipGotoSearch
-				End If
-				'Loop Until gotolines(gotoline) = FileGoto
+					'github patch begin
+					'Loop Until InStr(gotolines(gotoline), FileGoto) <> 0 And InStr(gotolines(gotoline), "@Goto") = 0 And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
+					'And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
+					'And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
+					'github patch end
 
-				'github patch begin
-				'Loop Until InStr(gotolines(gotoline), FileGoto) <> 0 And InStr(gotolines(gotoline), "@Goto") = 0 And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
+				Loop Until gotolines(gotoline).StartsWith(FileGoto)
+
+				'And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
 				'And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
 				'And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
-				'github patch end
-
-			Loop Until gotolines(gotoline).StartsWith(FileGoto)
-
-			'And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
-			'And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
-			'And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
 
 
 
 
-			' If ShowThought = True Or ShowEdgeThought = True Then
+				' If ShowThought = True Or ShowEdgeThought = True Then
 
 
-			If MiniScript = True Then
-				MiniTauntVal = gotoline
-			Else
-				StrokeTauntVal = gotoline
+				If MiniScript = True Then
+					MiniTauntVal = gotoline
+				Else
+					StrokeTauntVal = gotoline
+				End If
+
+
+				'  ThoughtTauntVal = gotoline
+				'Else
+				'   If ShowModule = True Then
+				'ModuleTauntVal = gotoline
+				'Else
+				'   StrokeTauntVal = gotoline
+				'End If
+				'End If
+
+				'Debug.Print("GetGoto() Task GotoLine  = " & gotoline)
 			End If
+			' End If
 
 
-			'  ThoughtTauntVal = gotoline
-			'Else
-			'   If ShowModule = True Then
-			'ModuleTauntVal = gotoline
-			'Else
-			'   StrokeTauntVal = gotoline
-			'End If
-			'End If
-
-			'Debug.Print("GetGoto() Task GotoLine  = " & gotoline)
-		End If
-		' End If
-
-
-		GotoDommeLevel = False
-		SkipGotoLine = False
-
-
-
-
+			GotoDommeLevel = False
+			SkipGotoLine = False
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Exception occured finding GotoLabel """ & FileGoto & """ in file """ & GotoText & """")
+			Throw
+		End Try
 	End Sub
 
 	Public Sub TypingDelay()
