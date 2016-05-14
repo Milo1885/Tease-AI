@@ -583,19 +583,19 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 
-	Private Sub Form1_FormClosed(sender As Object, e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
-
+	Private Sub Form1_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
 
 		mainPictureBox.Image = Nothing
 		Debug.Print("Here?")
 
+		TeaseAIClock.Stop()
 		UpdatesTimer.Stop()
 		StrokeTimeTotalTimer.Stop()
 		StopEverything()
 
-		'ScriptTimer.Stop()
-		'StrokeTimer.Stop()
+
+
 
 
 
@@ -10454,7 +10454,7 @@ RinseLatherRepeat:
 
 				' Change evtl. wrong given Slashes
 				ImageToShow = ImageToShow.Replace("/", "\")
-				
+
 				ImageToShow = Application.StartupPath & "\Images\" & ImageToShow
 				ImageToShow = ImageToShow.Replace("\\", "\")
 
@@ -15229,11 +15229,11 @@ VTSkip:
 					Return False
 				End If
 
-				End If
+			End If
 
 		Else
-				If CompareDatesWithTime(GetDate(DateFlag)) <> 1 Then Return True
-				Return False
+			If CompareDatesWithTime(GetDate(DateFlag)) <> 1 Then Return True
+			Return False
 		End If
 
 		Return False
