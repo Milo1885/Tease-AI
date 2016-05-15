@@ -401,6 +401,7 @@ Partial Class Form1
 		Me.TimeoutTimer = New Tease_AI.teaseAI_Timer()
 		Me.VideoTimer = New Tease_AI.teaseAI_Timer()
 		Me.MultipleEdgesTimer = New Tease_AI.teaseAI_Timer()
+		Me.ClearMainpictureboxToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1252,8 +1253,8 @@ Partial Class Form1
 		'OpenFileDialog1
 		'
 		Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" & _
-		  "s (*.*)|*.*"
+		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" &
+	"s (*.*)|*.*"
 		Me.OpenFileDialog1.Title = "Select an image file"
 		'
 		'GetColor
@@ -2037,7 +2038,7 @@ Partial Class Form1
 		'
 		'DebugToolStripMenuItem
 		'
-		Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunScriptToolStripMenuItem, Me.DebugMenuToolStripMenuItem, Me.ToolStripSeparator13, Me.RefreshRandomizerToolStripMenuItem})
+		Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunScriptToolStripMenuItem, Me.DebugMenuToolStripMenuItem, Me.ToolStripSeparator13, Me.RefreshRandomizerToolStripMenuItem, Me.ClearMainpictureboxToolStripMenuItem})
 		Me.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem"
 		Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
 		Me.DebugToolStripMenuItem.Text = "Debug"
@@ -2045,24 +2046,24 @@ Partial Class Form1
 		'RunScriptToolStripMenuItem
 		'
 		Me.RunScriptToolStripMenuItem.Name = "RunScriptToolStripMenuItem"
-		Me.RunScriptToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+		Me.RunScriptToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
 		Me.RunScriptToolStripMenuItem.Text = "Run Script"
 		'
 		'DebugMenuToolStripMenuItem
 		'
 		Me.DebugMenuToolStripMenuItem.Name = "DebugMenuToolStripMenuItem"
-		Me.DebugMenuToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+		Me.DebugMenuToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
 		Me.DebugMenuToolStripMenuItem.Text = "Debug Menu"
 		'
 		'ToolStripSeparator13
 		'
 		Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-		Me.ToolStripSeparator13.Size = New System.Drawing.Size(176, 6)
+		Me.ToolStripSeparator13.Size = New System.Drawing.Size(184, 6)
 		'
 		'RefreshRandomizerToolStripMenuItem
 		'
 		Me.RefreshRandomizerToolStripMenuItem.Name = "RefreshRandomizerToolStripMenuItem"
-		Me.RefreshRandomizerToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+		Me.RefreshRandomizerToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
 		Me.RefreshRandomizerToolStripMenuItem.Text = "Refresh Randomizer"
 		'
 		'AboutToolStripMenuItem
@@ -2939,8 +2940,8 @@ Partial Class Form1
 		Me.LBLWishListText.Name = "LBLWishListText"
 		Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
 		Me.LBLWishListText.TabIndex = 108
-		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" & _
-		  "uld buy it for me because you know you like buying stuff for me. "
+		Me.LBLWishListText.Text = "This is something I really want, let me tell you all about why I want it, you sho" &
+	"uld buy it for me because you know you like buying stuff for me. "
 		'
 		'LBLWishlistCost
 		'
@@ -4084,6 +4085,12 @@ Partial Class Form1
 		'
 		Me.MultipleEdgesTimer.Interval = 1000
 		'
+		'ClearMainpictureboxToolStripMenuItem
+		'
+		Me.ClearMainpictureboxToolStripMenuItem.Name = "ClearMainpictureboxToolStripMenuItem"
+		Me.ClearMainpictureboxToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+		Me.ClearMainpictureboxToolStripMenuItem.Text = "Clear Mainpicturebox"
+		'
 		'Form1
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4542,5 +4549,5 @@ Partial Class Form1
 	Friend WithEvents CBWritingProgress As System.Windows.Forms.CheckBox
 	Friend WithEvents DommeTagBtnNextImage As System.Windows.Forms.Button
 	Friend WithEvents DommeTagBtnLastImage As System.Windows.Forms.Button
-
+	Friend WithEvents ClearMainpictureboxToolStripMenuItem As ToolStripMenuItem
 End Class

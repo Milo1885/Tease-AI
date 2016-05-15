@@ -1,5 +1,5 @@
 ﻿Imports System.IO
-
+Imports System.Net
 
 Partial Class Form1
 
@@ -62,7 +62,7 @@ Partial Class Form1
 					' Return the relative path absolute.
 					Return pathUrlFileDir & _URLFile
 				End If
-            End Get
+			End Get
 			Set(value As String)
 				If value Is Nothing Then
 					_URLFile = ""
@@ -188,7 +188,7 @@ Partial Class Form1
 					'                                  Liked Images
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					Try
-						Dim addlist As List(Of String) = Txt2List(PathLikeList)
+						Dim addlist As List(Of String) = Txt2List(pathLikeList)
 
 						' Remove all URLs if Offline-Mode is activated
 						If OfflineMode Or Type = ImageSourceType.Local Then
@@ -238,12 +238,33 @@ Partial Class Form1
 					End If
 
 					' Load an URL-File
-					If Type = ImageSourceType.Remote And URLFile <> "" And URLFile IsNot Nothing Then
-						rtnList.AddRange(Txt2List(URLFile))
+					If Type = ImageSourceType.Remote And UrlFile <> "" And UrlFile IsNot Nothing Then
+						rtnList.AddRange(Txt2List(UrlFile))
 					End If
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 					' Regular Genres - End
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				End If
+
+
+				If Type = ImageSourceType.Local Then
+					If My.Application.CommandLineArgs.Contains("-forceLocalGif") Then
+						' Removae all non-Gif images
+						rtnList.RemoveAll(Function(x) x.ToLower.EndsWith(".gif") = False)
+					ElseIf My.Application.CommandLineArgs.Contains("-disableLocalGif") Then
+						' Remove all gif images
+						rtnList.RemoveAll(Function(x) x.ToLower.EndsWith(".gif"))
+					End If
+				End If
+
+				If Type = ImageSourceType.Remote Then
+					If My.Application.CommandLineArgs.Contains("-forceRemoteGif") Then
+						' Removae all non-Gif images
+						rtnList.RemoveAll(Function(x) x.ToLower.EndsWith(".gif") = False)
+					ElseIf My.Application.CommandLineArgs.Contains("-disableRemoteGif") Then
+						' Remove all gif images
+						rtnList.RemoveAll(Function(x) x.ToLower.EndsWith(".gif"))
+					End If
 				End If
 			Catch ex As Exception
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
@@ -319,7 +340,7 @@ NoneFound:
 		Public Overrides Function ToString() As String
 			Return "ImageDataContainer containing:" & vbCrLf &
 					"	GenreName: " & Name.ToString & vbCrLf &
-					"	URLFile: " & URLFile.ToString & vbCrLf &
+					"	URLFile: " & UrlFile.ToString & vbCrLf &
 					"	LocalDirectory: " & LocalDirectory.ToString & vbCrLf &
 					"	LocalSubDirectories: " & LocalSubDirectories.ToString & vbCrLf &
 					"	OfflineMode: " & OfflineMode.ToString
@@ -616,39 +637,66 @@ NoNeFound:
 	''' </summary>
 	Private Sub BWimageFetcher_DoWork(ByVal sender As Object,
 							 ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BWimageFetcher.DoWork
+		'TODO: Create a specific image for Displaying an imageerror
+		Dim errorimagepath As String = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
 
-		If TypeOf e.Argument Is ImageFetchObject Then
-			Dim FetchContainer As ImageFetchObject = e.Argument
+
+		With CType(e.Argument, ImageFetchObject)
 			Try
-				With FetchContainer
-					If .ImageLocation.Contains("/") And .ImageLocation.Contains("://") Then
-                        ' ###################### Online Image #########################
-                        .Source = ImageSourceType.Remote
-                        ' Download the image
-                        .FetchedImage = New Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(.ImageLocation)))
-						'check if Folder is set and exists.
-						If .SaveImageDirectory <> "" _
-					AndAlso Directory.Exists(.SaveImageDirectory) Then
-							'Check if the destination Filename exists.
-							If Not File.Exists(.SaveImageDirectory & Path.GetFileName(.ImageLocation)) Then
-								.FetchedImage.Save(.SaveImageDirectory & Path.GetFileName(.ImageLocation))
-							End If
-						End If
-					Else
-                        ' ####################### Local Image #########################
-                        .Source = ImageSourceType.Local
-						.FetchedImage = Image.FromFile(.ImageLocation)
-					End If
-				End With
+retryLocal: ' If an exception occures the funcion is restarted and the Errorimage is loaded.
 
+				'.ImageLocation = "http://41.media.tumblr.com/ce4f1fb66ee4042fa48a84cd413e783f/tumblr_ne4kvtKMo51u0o6agohttp://40.media.tumblr.com/d4f6ab34fe44b3b503d12178194fdc50/tumblr_ne4kvtKMo51u0o6agohttp://41.media.tumblr.com/4db4ffdd308bd45265dc59fe546e93e0/tumblr_ne4kvtKMo51u0o6agohttp://36.media.tumblr.com/cc976ed00f44404acef776bc7f85b9f3/tumblr_ne4kvtKMo51u0o6agohttp://36.media.tumblr.com/07f38ed64670c7b515152ec3c86358b7/tumblr_ne4kvtKMo51u0o6agohttp://40.media.tumblr.com/072cd5da86c6e76e6ebf2e671f743aee/tumblr_ne4kvtKMo51u0o6agohttp://40.media.tumblr.com/b88ff27ee1df0d9e01a2631f8c0cccf8/tumblr_ne4kvtKMo51u0o6agohttp://41.media.tumblr.com/59ae93ddb7100d5c39ddcabf7a2fb770/tumblr_ne4kvtKMo51u0o6agohttp://49.media.tumblr.com/5d789fa181a6c3bff31859e79e8f08cc/tumblr_ne3et9QcWK1tnz9bbo1_500.gif"
+				If .ImageLocation.Contains("/") And .ImageLocation.Contains("://") Then
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'						Download and Save Online Image 
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					Dim s As String = ""
+
+					If .ImageLocation <> "" Then
+						s = .SaveImageDirectory & Path.GetFileName(.ImageLocation)
+
+						If Not Directory.Exists(s) AndAlso File.Exists(s) Then
+							s = ""
+						End If
+					End If
+
+					.Source = ImageSourceType.Remote
+
+					' Download the image
+					.FetchedImage = Common.DownloadRemoteImageFile(.ImageLocation, s)
+
+					If .FetchedImage Is Nothing Then _
+						Throw New NullReferenceException("The result downloading """ &
+														 .ImageLocation.ToString & """ was empty.")
+				Else
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'						Local images and Fallback
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					.Source = ImageSourceType.Local
+					.FetchedImage = Image.FromFile(.ImageLocation)
+				End If
+				Debug.Print("ImageFetch - DoWork - Done")
+			Catch ex As Exception When .ImageLocation <> errorimagepath
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'                                     All Errors - !first! time
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Debug.Print("ImageFetch - DoWork - 1st Exception perfomaing fallback")
+				Log.WriteError("Error loading Image: " & .ImageLocation, ex,
+							   "Error loading image. Performing fallback to errorimage.")
+				.ImageLocation = errorimagepath
+				GoTo retryLocal
 			Catch ex As Exception
-				Log.WriteError("Error loading Image: " & FetchContainer.ImageLocation, ex, "Error loading Image")
-				Throw
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				'                                     All Errors - !first! time
+				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+				Debug.Print("ImageFetch - DoWork - 2nd Exception - fallback failed.")
+				Log.WriteError("Fallback to errorimage """ & .ImageLocation & """ failed ",
+							   ex, "Error loading image")
 			End Try
-			' Return the fetched data to the UI-Thread
-			e.Result = FetchContainer
-		End If
-		Debug.Print("ImageFetch - DoWork - Done")
+		End With
+
+		' Return the fetched data to the UI-Thread
+		e.Result = e.Argument
 	End Sub
 
 	Private Sub BWimageFetcher_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BWimageFetcher.RunWorkerCompleted
@@ -662,6 +710,21 @@ NoNeFound:
 		If TypeOf e.Result Is ImageFetchObject Then
 			'TODO-Next: Add the picturebox-Streching Stuff.?.
 			Dim FetchResult As ImageFetchObject = e.Result
+
+			If FetchResult.FetchedImage Is Nothing Then
+
+				PicStripTSMIcopyImageLocation.Enabled = True
+				PicStripTSMIsaveImage.Enabled = True
+				PicStripTSMISaveImageTo.Enabled = True
+				PicStripTSMIlikeImage.Enabled = True
+				PicStripTSMIdislikeImage.Enabled = True
+				PicStripTSMIremoveFromURL.Enabled = True
+
+				Log.Write("Imageresult for """ & FetchResult.ImageLocation & """ was empty.")
+				Debug.Print("ImageFetch - RunWorkerCompleted - Failure " & vbCrLf &
+						"	ImageLocation: " & FetchResult.ImageLocation)
+
+			End If
 			Dim OldImage As Image = mainPictureBox.Image
 			Dim NewImage As Bitmap = FetchResult.FetchedImage.Clone
 
@@ -890,8 +953,8 @@ NoNeFound:
 		' Get all URL-Files associated with image-Genres 
 		' Their location can be outside of \Images\System\URL Files\
 		For Each imgDC As ImageDataContainer In GetImageData.Values
-			If imgDC.URLFile IsNot Nothing AndAlso imgDC.URLFile <> "" Then
-				CustomURLFileList.Add(imgDC.URLFile)
+			If imgDC.UrlFile IsNot Nothing AndAlso imgDC.UrlFile <> "" Then
+				CustomURLFileList.Add(imgDC.UrlFile)
 			End If
 		Next
 

@@ -584,102 +584,104 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 	Private Sub Form1_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-
-
-		mainPictureBox.Image = Nothing
-		Debug.Print("Here?")
-
-		TeaseAIClock.Stop()
-		UpdatesTimer.Stop()
-		StrokeTimeTotalTimer.Stop()
-		StopEverything()
-
-
-
-
-
-
-		'If BeforeTease = False And My.Settings.Sys_SubLeftEarly <> 0 Then My.Settings.Sys_SubLeftEarlyTotal += 1
-
-		If BeforeTease = False And Val(GetVariable("SYS_SubLeftEarly")) <> 0 Then SetVariable("SYS_SubLeftEarlyTotal", Val(GetVariable("SYS_SubLeftEarlyTotal")) + 1)
-
-		My.Settings.Save()
-
-
-		'TempGif.Dispose()
-		'original.Dispose()
-		'resized.Dispose()
-
 		Try
-			GC.Collect()
-		Catch
-		End Try
+
+			mainPictureBox.Image = Nothing
+			Debug.Print("Here?")
+
+			TeaseAIClock.Stop()
+			UpdatesTimer.Stop()
+			StrokeTimeTotalTimer.Stop()
+			StopEverything()
 
 
 
-		If File.Exists(Application.StartupPath & "\System\Metronome") Then
-			File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
-			My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
-		End If
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif") Then
-			My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif")
-		End If
 
 
-		Try
-			For Each prog As Process In Process.GetProcesses
-				If prog.ProcessName = "Tease AI Metronome" Then
-					prog.Kill()
-				End If
-			Next
+
+			'If BeforeTease = False And My.Settings.Sys_SubLeftEarly <> 0 Then My.Settings.Sys_SubLeftEarlyTotal += 1
+
+			If BeforeTease = False And Val(GetVariable("SYS_SubLeftEarly")) <> 0 Then SetVariable("SYS_SubLeftEarlyTotal", Val(GetVariable("SYS_SubLeftEarlyTotal")) + 1)
+
+			My.Settings.Save()
+
+
+			'TempGif.Dispose()
+			'original.Dispose()
+			'resized.Dispose()
+
+			Try
+				GC.Collect()
+			Catch
+			End Try
+
+
+
+			If File.Exists(Application.StartupPath & "\System\Metronome") Then
+				File.SetAttributes(Application.StartupPath & "\System\Metronome", FileAttributes.Normal)
+				My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\Metronome")
+			End If
+
+			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif") Then
+				My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif")
+			End If
+
+
+			Try
+				For Each prog As Process In Process.GetProcesses
+					If prog.ProcessName = "Tease AI Metronome" Then
+						prog.Kill()
+					End If
+				Next
+			Catch ex As Exception
+
+			End Try
+
+
+			Dim TempDate As String
+			Dim TempDateNow As DateTime = DateTime.Now
+
+			TempDate = TempDateNow.ToString("MM.dd.yyyy hhmm")
+
+			'Github Patch Begin
+
+			' If FrmSettings.CBSaveChatlogExit.Checked = True Then
+
+			'If (Not System.IO.Directory.Exists(Application.StartupPath & "\Chatlogs\")) Then
+			'System.IO.Directory.CreateDirectory(Application.StartupPath & "\Chatlogs\")
+			'End If
+
+			'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\" & TempDate & " chatlog.html", ChatText.DocumentText, False)
+
+			'End If
+
+			' Github Patch End
+
+			SaveChatLog(TempDate)
+
+			Try
+				FrmSettings.Close()
+				FrmSettings.Dispose()
+			Catch ex As Exception
+			End Try
+
+			Try
+				FrmCardList.Close()
+				FrmCardList.Dispose()
+			Catch ex As Exception
+			End Try
+
+			End
+
+			TeaseAINotify.Visible = False
+			TeaseAINotify.Icon = Nothing
+			TeaseAINotify.Dispose()
+
+
+			System.Windows.Forms.Application.DoEvents()
 		Catch ex As Exception
 
 		End Try
-
-
-		Dim TempDate As String
-		Dim TempDateNow As DateTime = DateTime.Now
-
-		TempDate = TempDateNow.ToString("MM.dd.yyyy hhmm")
-
-		'Github Patch Begin
-
-		' If FrmSettings.CBSaveChatlogExit.Checked = True Then
-
-		'If (Not System.IO.Directory.Exists(Application.StartupPath & "\Chatlogs\")) Then
-		'System.IO.Directory.CreateDirectory(Application.StartupPath & "\Chatlogs\")
-		'End If
-
-		'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\" & TempDate & " chatlog.html", ChatText.DocumentText, False)
-
-		'End If
-
-		' Github Patch End
-
-		SaveChatLog(TempDate)
-
-		Try
-			FrmSettings.Close()
-			FrmSettings.Dispose()
-		Catch ex As Exception
-		End Try
-
-		Try
-			FrmCardList.Close()
-			FrmCardList.Dispose()
-		Catch ex As Exception
-		End Try
-
-		End
-
-		TeaseAINotify.Visible = False
-		TeaseAINotify.Icon = Nothing
-		TeaseAINotify.Dispose()
-
-
-		System.Windows.Forms.Application.DoEvents()
-
 	End Sub
 
 	Private Sub SaveChatLog(LogDate As String)
@@ -26218,6 +26220,10 @@ GetDommeSlideshow:
 		FrmSettings.SettingsTabs.SelectTab(15)
 		FrmSettings.Show()
 		FrmSettings.Focus()
+	End Sub
+
+	Private Sub ClearMainpictureboxToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearMainpictureboxToolStripMenuItem.Click
+		ClearMainPictureBox()
 	End Sub
 
 #End Region ' Menu
