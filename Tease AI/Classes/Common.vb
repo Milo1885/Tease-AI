@@ -5,7 +5,7 @@
 ' This file contains general functions not related to specific Tasks in Tease-AI.
 '===========================================================================================
 Imports System.IO
-
+Imports System.Net
 
 ''' <summary>
 ''' Exposes static methods for common tasks.
@@ -158,5 +158,70 @@ Public Class Common
 			Return False
 		End If
 	End Function
+
+
+	''' <summary>
+	''' Download an image ffrom url.
+	''' </summary>
+	''' <param name="uri"></param>
+	''' <param name="fileName"></param>
+	Friend Shared Function DownloadRemoteImageFile(uri As String, Optional fileName As String = "") As Image
+		Dim request As HttpWebRequest = DirectCast(WebRequest.Create(uri), HttpWebRequest)
+		Dim response As HttpWebResponse = Nothing
+		Dim rtnImage As Image = Nothing
+		Try
+			request.Timeout = 30000
+			response = DirectCast(request.GetResponse(), HttpWebResponse)
+
+
+			' Check that the remote file was found. The ContentType
+			' check is performed since a request for a non-existent
+			' image file might be redirected to a 404-page, which would
+			' yield the StatusCode "OK", even though the image was not
+			' found.
+			If (response.StatusCode = HttpStatusCode.OK OrElse response.StatusCode =
+			HttpStatusCode.Moved OrElse response.StatusCode = HttpStatusCode.Redirect) AndAlso
+			response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase) Then
+
+				' if the remote file was found, download oit
+				Using inputStream As Stream = response.GetResponseStream()
+
+					' Use a Memorystream to get a free rewindable stream
+					' Otherwise gifs are not animated after saving anymore
+					Dim MS As New MemoryStream
+					inputStream.CopyTo(ms)
+					MS.Position = 0
+					rtnImage = Image.FromStream(MS)
+
+					' Check if image has to be saved.
+					If fileName = "" Then Return rtnImage
+					rtnImage.Save(fileName)
+
+					Debug.Print("Saved image: " & fileName)
+				End Using
+			End If
+		Catch ex As Exception When rtnImage IsNot Nothing
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                               All Errors - But image was loaded so return it.
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Debug.Print("Exception while saving image: """ & uri & "")
+			Log.WriteError("Exception while saving image:  """ & uri & "", ex, "Exception while saving image")
+			Return rtnImage
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Debug.Print("Exception before saving the image from Uri: " & uri)
+			Throw
+		Finally
+			'⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
+			If response IsNot Nothing Then response.Close()
+			request.Abort()
+		End Try
+		Return rtnImage
+	End Function
+
+
+
 
 End Class
