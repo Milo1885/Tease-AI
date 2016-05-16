@@ -2000,13 +2000,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 			Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 			ChatText.DocumentText = Chat
-			While ChatText.ReadyState <> WebBrowserReadyState.Complete
-				Application.DoEvents()
-			End While
 			ChatText2.DocumentText = Chat
-			While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-				Application.DoEvents()
-			End While
+			ChatReadyState()
 			ScrollChatDown()
 
 			chatBox.Text = ""
@@ -2038,13 +2033,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ChatString & "<br></font></body>"
 			Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 			ChatText.DocumentText = Chat
-			While ChatText.ReadyState <> WebBrowserReadyState.Complete
-				Application.DoEvents()
-			End While
 			ChatText2.DocumentText = Chat
-			While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-				Application.DoEvents()
-			End While
+			ChatReadyState()
 			ScrollChatDown()
 
 
@@ -2054,13 +2044,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 				SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ChatString & "<br></font></body>"
 			Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 			ChatText.DocumentText = Chat
-			While ChatText.ReadyState <> WebBrowserReadyState.Complete
-				Application.DoEvents()
-			End While
 			ChatText2.DocumentText = Chat
-			While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-				Application.DoEvents()
-			End While
+			ChatReadyState()
 			ScrollChatDown()
 
 		End If
@@ -2074,13 +2059,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		If IsTyping = True Then
 
 			ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
-			While ChatText.ReadyState <> WebBrowserReadyState.Complete
-				Application.DoEvents()
-			End While
 			ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
-			While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-				Application.DoEvents()
-			End While
+			ChatReadyState()
 			ScrollChatDown()
 		End If
 
@@ -2357,13 +2337,8 @@ WritingTaskLine:
 					End If
 
 					ChatText.DocumentText = Chat
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 
 				Else
@@ -2382,13 +2357,8 @@ WritingTaskLine:
 					End If
 
 					ChatText.DocumentText = Chat
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 
 				End If
@@ -2398,16 +2368,8 @@ WritingTaskLine:
 				If IsTyping = True Then
 
 					ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
-
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
-
 					ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
-
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 				End If
 
@@ -2450,13 +2412,8 @@ WritingTaskLine:
 
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 					ChatText.DocumentText = Chat
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 
 				Else
@@ -2476,13 +2433,8 @@ WritingTaskLine:
 
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 					ChatText.DocumentText = Chat
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 
 				End If
@@ -2492,13 +2444,8 @@ WritingTaskLine:
 				If IsTyping = True Then
 
 					ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 				End If
 
@@ -5598,33 +5545,21 @@ SkipGotoSearch:
 
 					' If FrmSettings.CBWebtease.Checked = True Then GoTo SkipIsTyping
 
+						If FrmSettings.CBWebtease.Checked = True Then
 
-					If FrmSettings.CBWebtease.Checked = True Then
+							ChatText.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
+							ChatText2.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
+							ChatReadyState()
+							ScrollChatDown()
 
-						ChatText.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
-						While ChatText.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ChatText2.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
-						While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
+						Else
 
+							ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
+							ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
+							ChatReadyState()
+							ScrollChatDown()
 
-					Else
-
-						ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-						While ChatText.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-						While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ScrollChatDown()
-
-					End If
-
+						End If
 
 SkipIsTyping:
 
@@ -5643,929 +5578,909 @@ SkipIsTyping:
 				If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True Then StringLength = 0
 				If HypnoGen = True And CBHypnoGenNoText.Checked = True Then StringLength = 0
 				TypingDelayGeneric()
-			End If
+				End If
 
 		Else
 
-			If TypeDelay > 0 Then
-				TypeDelay -= 1
-				If DomTask.Contains("@SystemMessage") Then TypeDelay = 0
+				If TypeDelay > 0 Then
+					TypeDelay -= 1
+					If DomTask.Contains("@SystemMessage") Then TypeDelay = 0
 
-			Else
-				TypeToggle = 0
-				Timer1.Stop()
-				IsTyping = False
-				If RiskyDeal = True Then FrmCardList.LblRiskType.Visible = False
+				Else
+					TypeToggle = 0
+					Timer1.Stop()
+					IsTyping = False
+					If RiskyDeal = True Then FrmCardList.LblRiskType.Visible = False
 
-				ResponseYes = ""
-				ResponseNo = ""
+					ResponseYes = ""
+					ResponseNo = ""
 
-				' If PreCleanString.Contains("#") Then GoTo PoundLoop
+					' If PreCleanString.Contains("#") Then GoTo PoundLoop
 
-				' DomTask = PreCleanString
-
-
-				If DomTask.Contains("@ShowHardcoreImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowSoftcoreImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowLesbianImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowBlowjobImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowFemdomImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowLezdomImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowHentaiImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowGayImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowMaledomImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowCaptionsImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowGeneralImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowLocalImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@ShowBlogImage") Then JustShowedBlogImage = True
-				If DomTask.Contains("@NewBlogImage") Then JustShowedBlogImage = True
-
-				If DomTask.Contains("@SlideshowFirst") Then JustShowedSlideshowImage = True
-				If DomTask.Contains("@SlideshowNext") Then JustShowedSlideshowImage = True
-				If DomTask.Contains("@SlideshowPrevious") Then JustShowedSlideshowImage = True
-				If DomTask.Contains("@SlideshowLast") Then JustShowedSlideshowImage = True
+					' DomTask = PreCleanString
 
 
+					If DomTask.Contains("@ShowHardcoreImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowSoftcoreImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowLesbianImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowBlowjobImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowFemdomImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowLezdomImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowHentaiImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowGayImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowMaledomImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowCaptionsImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowGeneralImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowLocalImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@ShowBlogImage") Then JustShowedBlogImage = True
+					If DomTask.Contains("@NewBlogImage") Then JustShowedBlogImage = True
 
-				'Debug.Print("TeaseRadio = " & FrmSettings.teaseRadio.Checked)
-				'Debug.Print("JustShowedBlogImage = " & JustShowedBlogImage)
-				'Debug.Print("TeaseVideo  = " & TeaseVideo)
-				'Debug.Print("DomTask = " & DomTask)
-				'Debug.Print("NullResponse = " & NullResponse)
-				'Debug.Print("SlideshowLoaded = " & SlideshowLoaded)
-				'Debug.Print("SubStroking = " & SubStroking)
-				'Debug.Print("SubEdging  = " & SubEdging)
-				'Debug.Print("SubHoldingEdge = " & SubHoldingEdge)
+					If DomTask.Contains("@SlideshowFirst") Then JustShowedSlideshowImage = True
+					If DomTask.Contains("@SlideshowNext") Then JustShowedSlideshowImage = True
+					If DomTask.Contains("@SlideshowPrevious") Then JustShowedSlideshowImage = True
+					If DomTask.Contains("@SlideshowLast") Then JustShowedSlideshowImage = True
 
 
 
-				If GlitterTease = True And JustShowedBlogImage = False And LockImage = False Then GoTo TryNextWithTease
+					'Debug.Print("TeaseRadio = " & FrmSettings.teaseRadio.Checked)
+					'Debug.Print("JustShowedBlogImage = " & JustShowedBlogImage)
+					'Debug.Print("TeaseVideo  = " & TeaseVideo)
+					'Debug.Print("DomTask = " & DomTask)
+					'Debug.Print("NullResponse = " & NullResponse)
+					'Debug.Print("SlideshowLoaded = " & SlideshowLoaded)
+					'Debug.Print("SubStroking = " & SubStroking)
+					'Debug.Print("SubEdging  = " & SubEdging)
+					'Debug.Print("SubHoldingEdge = " & SubHoldingEdge)
 
 
-				If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
-					And SlideshowLoaded = True And Not DomTask.Contains("@ShowButtImage") And Not DomTask.Contains("@ShowBoobsImage") And Not DomTask.Contains("@ShowButtsImage") _
-					And Not DomTask.Contains("@ShowBoobsImage") And LockImage = False And CustomSlideshow = False And RapidFire = False _
-					And UCase(DomTask) <> "<B>TEASE AI HAS BEEN RESET</B>" And JustShowedSlideshowImage = False Then
-					If SubStroking = False Or SubEdging = True Or SubHoldingEdge = True Then
-						' Begin Next Button
 
-						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+					If GlitterTease = True And JustShowedBlogImage = False And LockImage = False Then GoTo TryNextWithTease
+
+
+					If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
+					 And SlideshowLoaded = True And Not DomTask.Contains("@ShowButtImage") And Not DomTask.Contains("@ShowBoobsImage") And Not DomTask.Contains("@ShowButtsImage") _
+					 And Not DomTask.Contains("@ShowBoobsImage") And LockImage = False And CustomSlideshow = False And RapidFire = False _
+					 And UCase(DomTask) <> "<B>TEASE AI HAS BEEN RESET</B>" And JustShowedSlideshowImage = False Then
+						If SubStroking = False Or SubEdging = True Or SubHoldingEdge = True Then
+							' Begin Next Button
+
+							' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
 
-						Dim TeaseDirection As Integer = randomizer.Next(1, 101)
+							Dim TeaseDirection As Integer = randomizer.Next(1, 101)
 
-						'Debug.Print("TeaseDirection = " & TeaseDirection)
+							'Debug.Print("TeaseDirection = " & TeaseDirection)
 
-						If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
+							If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
 
-							FileCount -= 1
-							If FileCount < 0 Then
-								FileCount = 0
+								FileCount -= 1
+								If FileCount < 0 Then
+									FileCount = 0
+								End If
+
+								If DomTask.Contains("@Contact1") Then
+									Contact1PicsCount -= 1
+									If Contact1PicsCount < 0 Then
+										Contact1PicsCount = 0
+									End If
+								End If
+
+								If DomTask.Contains("@Contact2") Then
+									Contact2PicsCount -= 1
+									If Contact2PicsCount < 0 Then
+										Contact2PicsCount = 0
+									End If
+								End If
+
+								If DomTask.Contains("@Contact3") Then
+									Contact3PicsCount -= 1
+									If Contact3PicsCount < 0 Then
+										Contact3PicsCount = 0
+									End If
+								End If
+
+							Else
+
+
+								FileCount += 1
+								If FileCount > FileCountMax Then
+									If FrmSettings.CBNewSlideshow.Checked = True Then
+										NewDommeSlideshow = True
+										OriginalDommeSlideshow = _ImageFileNames(0)
+										LoadDommeImageFolder()
+										NewDommeSlideshow = False
+										DomPic = _ImageFileNames(FileCount)
+									Else
+										FileCount = FileCountMax
+									End If
+								End If
+
+								If DomTask.Contains("@Contact1") Then
+									Contact1PicsCount += 1
+									Try
+										If Contact1PicsCount > Contact1Pics.Count - 1 Then
+											Contact1PicsCount = Contact1Pics.Count - 1
+										End If
+									Catch
+									End Try
+								End If
+
+								If DomTask.Contains("@Contact2") Then
+									Contact2PicsCount += 1
+									Try
+										If Contact2PicsCount > Contact2Pics.Count - 1 Then
+											Contact2PicsCount = Contact2Pics.Count - 1
+										End If
+									Catch
+									End Try
+								End If
+
+								If DomTask.Contains("@Contact3") Then
+									Contact3PicsCount += 1
+									Try
+										If Contact3PicsCount > Contact3Pics.Count - 1 Then
+											Contact3PicsCount = Contact3Pics.Count - 1
+										End If
+									Catch
+									End Try
+								End If
+
 							End If
+
+							' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+							If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNextWithTease
+
+							DomPic = _ImageFileNames(FileCount)
 
 							If DomTask.Contains("@Contact1") Then
-								Contact1PicsCount -= 1
-								If Contact1PicsCount < 0 Then
-									Contact1PicsCount = 0
-								End If
-							End If
-
-							If DomTask.Contains("@Contact2") Then
-								Contact2PicsCount -= 1
-								If Contact2PicsCount < 0 Then
-									Contact2PicsCount = 0
-								End If
-							End If
-
-							If DomTask.Contains("@Contact3") Then
-								Contact3PicsCount -= 1
-								If Contact3PicsCount < 0 Then
-									Contact3PicsCount = 0
-								End If
-							End If
-
-						Else
-
-
-							FileCount += 1
-							If FileCount > FileCountMax Then
-								If FrmSettings.CBNewSlideshow.Checked = True Then
-									NewDommeSlideshow = True
-									OriginalDommeSlideshow = _ImageFileNames(0)
-									LoadDommeImageFolder()
-									NewDommeSlideshow = False
+								Try
+									DomPic = Contact1Pics(Contact1PicsCount)
+								Catch
 									DomPic = _ImageFileNames(FileCount)
-								Else
-									FileCount = FileCountMax
-								End If
-							End If
-
-							If DomTask.Contains("@Contact1") Then
-								Contact1PicsCount += 1
-								Try
-									If Contact1PicsCount > Contact1Pics.Count - 1 Then
-										Contact1PicsCount = Contact1Pics.Count - 1
-									End If
-								Catch
 								End Try
 							End If
 
 							If DomTask.Contains("@Contact2") Then
-								Contact2PicsCount += 1
 								Try
-									If Contact2PicsCount > Contact2Pics.Count - 1 Then
-										Contact2PicsCount = Contact2Pics.Count - 1
-									End If
+									DomPic = Contact2Pics(Contact2PicsCount)
 								Catch
+									DomPic = _ImageFileNames(FileCount)
 								End Try
 							End If
 
 							If DomTask.Contains("@Contact3") Then
-								Contact3PicsCount += 1
 								Try
-									If Contact3PicsCount > Contact3Pics.Count - 1 Then
-										Contact3PicsCount = Contact3Pics.Count - 1
-									End If
+									DomPic = Contact3Pics(Contact3PicsCount)
 								Catch
+									DomPic = _ImageFileNames(FileCount)
 								End Try
 							End If
 
 						End If
+						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+						' github patch If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-						If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNextWithTease
-
-						DomPic = _ImageFileNames(FileCount)
-
-						If DomTask.Contains("@Contact1") Then
-							Try
-								DomPic = Contact1Pics(Contact1PicsCount)
-							Catch
-								DomPic = _ImageFileNames(FileCount)
-							End Try
+						If FrmSettings.CBSlideshowRandom.Checked = True Then
+							FileCount = randomizer.Next(0, FileCountMax + 1)
+							If Contact1Pics.Count > 0 Then Contact1PicsCount = randomizer.Next(0, Contact1Pics.Count)
+							If Contact2Pics.Count > 0 Then Contact2PicsCount = randomizer.Next(0, Contact2Pics.Count)
+							If Contact3Pics.Count > 0 Then Contact3PicsCount = randomizer.Next(0, Contact3Pics.Count)
 						End If
 
-						If DomTask.Contains("@Contact2") Then
-							Try
-								DomPic = Contact2Pics(Contact2PicsCount)
-							Catch
-								DomPic = _ImageFileNames(FileCount)
-							End Try
-						End If
 
-						If DomTask.Contains("@Contact3") Then
-							Try
-								DomPic = Contact3Pics(Contact3PicsCount)
-							Catch
-								DomPic = _ImageFileNames(FileCount)
-							End Try
-						End If
+						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+						ShowPicture = True
+
+						' End Next Button
+						'On Error GoTo TryNextWithTease
+						'On Error Resume Next
+						' End Next Button
 					End If
-					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-					' github patch If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
-
-					If FrmSettings.CBSlideshowRandom.Checked = True Then
-						FileCount = randomizer.Next(0, FileCountMax + 1)
-						If Contact1Pics.Count > 0 Then Contact1PicsCount = randomizer.Next(0, Contact1Pics.Count)
-						If Contact2Pics.Count > 0 Then Contact2PicsCount = randomizer.Next(0, Contact2Pics.Count)
-						If Contact3Pics.Count > 0 Then Contact3PicsCount = randomizer.Next(0, Contact3Pics.Count)
-					End If
-
-
-					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-					ShowPicture = True
-
-					' End Next Button
-					'On Error GoTo TryNextWithTease
-					'On Error Resume Next
-					' End Next Button
-				End If
 
 
 
 NullResponse:
 
 
-				If DomTask.Contains("@WritingTask(") Then
-					Dim WriteFlag As String = GetParentheses(DomTask, "@WritingTask(")
-					DomTask = DomTask.Replace(WriteFlag, PoundClean(WriteFlag))
-				End If
+					If DomTask.Contains("@WritingTask(") Then
+						Dim WriteFlag As String = GetParentheses(DomTask, "@WritingTask(")
+						DomTask = DomTask.Replace(WriteFlag, PoundClean(WriteFlag))
+					End If
 
-				If DomTask.Contains("@Contact1") Or DomTask.Contains("@Contact2") Or DomTask.Contains("@Contact3") Then SubWroteLast = True
+					If DomTask.Contains("@Contact1") Or DomTask.Contains("@Contact2") Or DomTask.Contains("@Contact3") Then SubWroteLast = True
 
-				Dim TypeName As String = domName.Text
-				Dim TypeColor As String = DomColor
-				Dim TypeFont As String = FrmSettings.FontComboBoxD.Text
-				Dim TypeSize As String = FrmSettings.NBFontSizeD.Value
-				Dim LineSpeaker As String = ""
-				If DomTask.Contains("@Contact1") Then
-					TypeName = FrmSettings.TBGlitter1.Text
-					TypeColor = Color2Html(FrmSettings.LBLGlitterNC1.ForeColor)
-					TypeFont = "Cambria"
-					TypeSize = "3"
-					LineSpeaker = "@Contact1 "
-				End If
-				If DomTask.Contains("@Contact2") Then
-					TypeName = FrmSettings.TBGlitter2.Text
-					TypeColor = Color2Html(FrmSettings.LBLGlitterNC2.ForeColor)
-					TypeFont = "Cambria"
-					TypeSize = "3"
-					LineSpeaker = "@Contact2 "
-				End If
-				If DomTask.Contains("@Contact3") Then
-					TypeName = FrmSettings.TBGlitter3.Text
-					TypeColor = Color2Html(FrmSettings.LBLGlitterNC3.ForeColor)
-					TypeFont = "Cambria"
-					TypeSize = "3"
-					LineSpeaker = "@Contact3 "
-				End If
+					Dim TypeName As String = domName.Text
+					Dim TypeColor As String = DomColor
+					Dim TypeFont As String = FrmSettings.FontComboBoxD.Text
+					Dim TypeSize As String = FrmSettings.NBFontSizeD.Value
+					Dim LineSpeaker As String = ""
+					If DomTask.Contains("@Contact1") Then
+						TypeName = FrmSettings.TBGlitter1.Text
+						TypeColor = Color2Html(FrmSettings.LBLGlitterNC1.ForeColor)
+						TypeFont = "Cambria"
+						TypeSize = "3"
+						LineSpeaker = "@Contact1 "
+					End If
+					If DomTask.Contains("@Contact2") Then
+						TypeName = FrmSettings.TBGlitter2.Text
+						TypeColor = Color2Html(FrmSettings.LBLGlitterNC2.ForeColor)
+						TypeFont = "Cambria"
+						TypeSize = "3"
+						LineSpeaker = "@Contact2 "
+					End If
+					If DomTask.Contains("@Contact3") Then
+						TypeName = FrmSettings.TBGlitter3.Text
+						TypeColor = Color2Html(FrmSettings.LBLGlitterNC3.ForeColor)
+						TypeFont = "Cambria"
+						TypeSize = "3"
+						LineSpeaker = "@Contact3 "
+					End If
 
 
-				If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
-					Dim EmoteArray() As String = Split(DomTask)
-					For i As Integer = 0 To EmoteArray.Length - 1
+					If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
+						Dim EmoteArray() As String = Split(DomTask)
+						For i As Integer = 0 To EmoteArray.Length - 1
+							Try
+								If EmoteArray(i).Contains("#") And LCase(EmoteArray(i)).Contains("emote") Then
+									EmoteArray(i) = EmoteArray(i).Replace(EmoteArray(i), "")
+								End If
+							Catch
+							End Try
+						Next
+						DomTask = Join(EmoteArray)
+					End If
+
+					'SaveBlogImage.Text = ""
+
+					'If RiskyDeal = True Then Me.Focus()
+
+					Dim LoopBuffer As Integer = 0
+
+
+
+					Do
+						LoopBuffer += 1
+
+						Debug.Print("############################### DomTask = " & DomTask)
+
+						DomTask = DomTask.Replace("#Null", "")
+						DomTask = PoundClean(DomTask)
+						If DomTask.Contains("@EmoteMessage") Then EmoMes = True
+						DomTask = CommandClean(DomTask)
+						DomTask = StripCommands(DomTask)
+						DomTask = DomTask.Replace("#Null", "")
+						DomTask = PoundClean(DomTask)
+
+						If LoopBuffer > 4 Then Exit Do
+
+					Loop Until Not DomTask.Contains("#") And Not DomTask.Contains("@")
+
+
+
+
+					'Debug.Print("NullResponse = " & NullResponse)
+					If CBHypnoGenNoText.Checked = True And HypnoGen = True Then GoTo HypNoResponse
+					If NullResponse = True Then GoTo NoResponse
+
+					' Dim AtArray() As String = Split(DomTask)
+					' For i As Integer = 0 To AtArray.Length - 1
+					'If AtArray(i) = "" Then GoTo AtBreak
+					'If AtArray(i) = "" Then GoTo AtNext
+					' If AtArray(i).Contains("@") Then
+					'AtArray(i) = AtArray(i).Replace(AtArray(i), "")
+					'End If
+					'AtNext:
+
+					' Next
+
+					'DomTask = Join(AtArray)
+
+					'AtBreak:
+
+
+					If DomTask.Contains("(") And DomTask.Contains(")") Then
+						Dim ParenReg As RegularExpressions.Regex
+						ParenReg = New RegularExpressions.Regex("\(([^\)]*)\)")
+						DomTask = DomTask.Replace(ParenReg.Match(DomTask).Value(), "")
+					End If
+
+					' Github Patch If SysMes = False And EmoMes = False Then
+					If SysMes = False And EmoMes = False And Not DomTask = "" Then
+
 						Try
-							If EmoteArray(i).Contains("#") And LCase(EmoteArray(i)).Contains("emote") Then
-								EmoteArray(i) = EmoteArray(i).Replace(EmoteArray(i), "")
-							End If
+							Dim UCASELine As String = UCase(DomTask.Substring(0, 1))
+							DomTask = DomTask.Remove(0, 1).Insert(0, UCASELine)
 						Catch
 						End Try
-					Next
-					DomTask = Join(EmoteArray)
-				End If
-
-				'SaveBlogImage.Text = ""
-
-				'If RiskyDeal = True Then Me.Focus()
-
-				Dim LoopBuffer As Integer = 0
 
 
+						If FrmSettings.LCaseCheckBox.Checked = True Then DomTask = LCase(DomTask)
+						If FrmSettings.CBMeMyMine.Checked = True Then
+							Dim MeArray() As String = Split(DomTask)
+							For i As Integer = MeArray.Length - 1 To 0 Step -1
+								If UCase(MeArray(i)) = "ME" Then MeArray(i) = "Me"
+								If UCase(MeArray(i)) = "MY" Then MeArray(i) = "My"
+								If UCase(MeArray(i)) = "MINE" Then MeArray(i) = "Mine"
+								If UCase(MeArray(i)) = "I" Then MeArray(i) = "I"
+								If UCase(MeArray(i)) = "I'D" Then MeArray(i) = "I'd"
+								If UCase(MeArray(i)) = "I'M" Then MeArray(i) = "I'm"
+								If UCase(MeArray(i)) = "I'LL" Then MeArray(i) = "I'll"
+								If UCase(MeArray(i)) = "YOU" Then MeArray(i) = "you"
+								If UCase(MeArray(i)) = "YOUR" Then MeArray(i) = "your"
+								If UCase(MeArray(i)) = "YOURS" Then MeArray(i) = "yours"
+								If UCase(MeArray(i)) = "YOU'RE" Then MeArray(i) = "you're"
+								If UCase(MeArray(i)) = "YOU'D" Then MeArray(i) = "you'd"
+								If UCase(MeArray(i)) = "YOU'LL" Then MeArray(i) = "you'll"
+							Next
+							DomTask = Join(MeArray)
+						End If
+						If FrmSettings.apostropheCheckBox.Checked = True Then DomTask = DomTask.Replace("'", "")
+						If FrmSettings.commaCheckBox.Checked = True Then DomTask = DomTask.Replace(",", "")
+						If FrmSettings.periodCheckBox.Checked = True Then DomTask = DomTask.Replace(".", "")
 
-				Do
-					LoopBuffer += 1
+						' Try
+						'DomTask = DomTask.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
+						'Catch
+						'End Try
 
-					Debug.Print("############################### DomTask = " & DomTask)
-
-					DomTask = DomTask.Replace("#Null", "")
-					DomTask = PoundClean(DomTask)
-					If DomTask.Contains("@EmoteMessage") Then EmoMes = True
-					DomTask = CommandClean(DomTask)
-					DomTask = StripCommands(DomTask)
-					DomTask = DomTask.Replace("#Null", "")
-					DomTask = PoundClean(DomTask)
-
-					If LoopBuffer > 4 Then Exit Do
-
-				Loop Until Not DomTask.Contains("#") And Not DomTask.Contains("@")
-
-
-
-
-				'Debug.Print("NullResponse = " & NullResponse)
-				If CBHypnoGenNoText.Checked = True And HypnoGen = True Then GoTo HypNoResponse
-				If NullResponse = True Then GoTo NoResponse
-
-				' Dim AtArray() As String = Split(DomTask)
-				' For i As Integer = 0 To AtArray.Length - 1
-				'If AtArray(i) = "" Then GoTo AtBreak
-				'If AtArray(i) = "" Then GoTo AtNext
-				' If AtArray(i).Contains("@") Then
-				'AtArray(i) = AtArray(i).Replace(AtArray(i), "")
-				'End If
-				'AtNext:
-
-				' Next
-
-				'DomTask = Join(AtArray)
-
-				'AtBreak:
-
-
-				If DomTask.Contains("(") And DomTask.Contains(")") Then
-					Dim ParenReg As RegularExpressions.Regex
-					ParenReg = New RegularExpressions.Regex("\(([^\)]*)\)")
-					DomTask = DomTask.Replace(ParenReg.Match(DomTask).Value(), "")
-				End If
-
-				' Github Patch If SysMes = False And EmoMes = False Then
-				If SysMes = False And EmoMes = False And Not DomTask = "" Then
-
-					Try
-						Dim UCASELine As String = UCase(DomTask.Substring(0, 1))
-						DomTask = DomTask.Remove(0, 1).Insert(0, UCASELine)
-					Catch
-					End Try
-
-
-					If FrmSettings.LCaseCheckBox.Checked = True Then DomTask = LCase(DomTask)
-					If FrmSettings.CBMeMyMine.Checked = True Then
-						Dim MeArray() As String = Split(DomTask)
-						For i As Integer = MeArray.Length - 1 To 0 Step -1
-							If UCase(MeArray(i)) = "ME" Then MeArray(i) = "Me"
-							If UCase(MeArray(i)) = "MY" Then MeArray(i) = "My"
-							If UCase(MeArray(i)) = "MINE" Then MeArray(i) = "Mine"
-							If UCase(MeArray(i)) = "I" Then MeArray(i) = "I"
-							If UCase(MeArray(i)) = "I'D" Then MeArray(i) = "I'd"
-							If UCase(MeArray(i)) = "I'M" Then MeArray(i) = "I'm"
-							If UCase(MeArray(i)) = "I'LL" Then MeArray(i) = "I'll"
-							If UCase(MeArray(i)) = "YOU" Then MeArray(i) = "you"
-							If UCase(MeArray(i)) = "YOUR" Then MeArray(i) = "your"
-							If UCase(MeArray(i)) = "YOURS" Then MeArray(i) = "yours"
-							If UCase(MeArray(i)) = "YOU'RE" Then MeArray(i) = "you're"
-							If UCase(MeArray(i)) = "YOU'D" Then MeArray(i) = "you'd"
-							If UCase(MeArray(i)) = "YOU'LL" Then MeArray(i) = "you'll"
+						Dim EmoToggle As Boolean = True
+						For i As Integer = DomTask.Length - 1 To 0 Step -1
+							If DomTask.Substring(i, 1) = "*" Then
+								If EmoToggle = False Then
+									EmoToggle = True
+									DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
+								Else
+									EmoToggle = False
+									DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
+								End If
+							End If
 						Next
-						DomTask = Join(MeArray)
+
+						DomTask = DomTask.Replace(":d", ":D")
+						DomTask = DomTask.Replace(": d", ": D")
+
+
+						'Typo Test
+
+						Try
+
+							Dim RestoreDomTask As String = DomTask
+
+							If Not DomTask.Substring(0, 1) = FrmSettings.TBEmote.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False And TypoSwitch <> 0 And TyposDisabled = False _
+							 And FrmSettings.TTSCheckBox.Checked = False Then
+
+								Dim TypoChance As Integer = randomizer.Next(0, 101)
+
+								If TypoChance < FrmSettings.NBTypoChance.Value Or TypoSwitch = 2 Then
+
+									Try
+
+										Dim TypoString As String
+
+										Dim TypoSplit As String() = DomTask.Split(" ")
+
+										TempVal = randomizer.Next(0, TypoSplit.Count)
+
+										CorrectedWord = TypoSplit(TempVal)
+
+										CorrectedWord = CorrectedWord.Replace(",", "")
+										CorrectedWord = CorrectedWord.Replace(".", "")
+										CorrectedWord = CorrectedWord.Replace("!", "")
+										CorrectedWord = CorrectedWord.Replace("?", "")
+
+										TypoString = "w d s f x"
+
+
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "a" Then TypoString = "q w s z x"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "b" Then TypoString = "f v g h n"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "c" Then TypoString = "x d f v b"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "d" Then TypoString = "s c f x e"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "e" Then TypoString = "s r w 3 d"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "f" Then TypoString = "d r g v c"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "g" Then TypoString = "f t b h y"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "h" Then TypoString = "g b n u j"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "i" Then TypoString = "o u j k l"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "j" Then TypoString = "k u i n h"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "k" Then TypoString = "j m , l i"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "l" Then TypoString = "; p . , i"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "m" Then TypoString = "n j k , l"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "n" Then TypoString = "b h j k m"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "o" Then TypoString = "p 0 i k ;"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "p" Then TypoString = "[ - o ; l"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "q" Then TypoString = "1 w s a 2"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "r" Then TypoString = "4 5 t f d"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "s" Then TypoString = "w d a z x"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "t" Then TypoString = "5 6 g y r"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "u" Then TypoString = "y 7 j i k"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "v" Then TypoString = "c f g h b"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "w" Then TypoString = "2 a e q s"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "x" Then TypoString = "z s d f c"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "y" Then TypoString = "t 7 h u g"
+										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "z" Then TypoString = "a s x d c"
+
+
+										Dim UpperChance As Integer = randomizer.Next(0, 101)
+										If UpperChance < 26 Then TypoString = UCase(TypoString)
+
+
+
+										Dim GetTypo As String() = TypoString.Split(" ")
+
+										Dim MadeTypo As String = GetTypo(randomizer.Next(0, GetTypo.Count))
+
+
+										Dim DoubleChance As Integer = randomizer.Next(0, 101)
+										If DoubleChance < 11 Then MadeTypo = MadeTypo & LCase(GetTypo(randomizer.Next(0, GetTypo.Count)))
+
+
+										TypoSplit(TempVal) = TypoSplit(TempVal).Remove(0, 1)
+
+										Dim SpaceChance As Integer = randomizer.Next(0, 101)
+										If SpaceChance < 7 Then
+											TypoSplit(TempVal) = MadeTypo & " " & TypoSplit(TempVal)
+										Else
+											TypoSplit(TempVal) = MadeTypo & TypoSplit(TempVal)
+
+										End If
+
+										DomTask = Join(TypoSplit)
+
+										CorrectedTypo = True
+
+									Catch
+
+										DomTask = RestoreDomTask
+										CorrectedTypo = False
+									End Try
+
+								End If
+
+							End If
+
+							TypoSwitch = 1
+
+						Catch
+						End Try
+
+
 					End If
-					If FrmSettings.apostropheCheckBox.Checked = True Then DomTask = DomTask.Replace("'", "")
-					If FrmSettings.commaCheckBox.Checked = True Then DomTask = DomTask.Replace(",", "")
-					If FrmSettings.periodCheckBox.Checked = True Then DomTask = DomTask.Replace(".", "")
 
-					' Try
-					'DomTask = DomTask.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
-					'Catch
-					'End Try
+					DomTask = DomTask.Replace("ATSYMBOL", "@")
+					DomTask = DomTask.Replace("atsymbol", "@")
 
-					Dim EmoToggle As Boolean = True
-					For i As Integer = DomTask.Length - 1 To 0 Step -1
-						If DomTask.Substring(i, 1) = "*" Then
-							If EmoToggle = False Then
-								EmoToggle = True
-								DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
+					If InputIcon = True Then
+						' github patch DomTask = DomTask & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png""/>"
+						DomTask = DomTask & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png"" title=""This icon means your Domme will remember your answer!""/>"
+						InputIcon = False
+					End If
+
+					DomTask = DomTask.Replace(" a a", " an a")
+					DomTask = DomTask.Replace(" a e", " an e")
+					DomTask = DomTask.Replace(" a i", " an i")
+					DomTask = DomTask.Replace(" a o", " an o")
+					DomTask = DomTask.Replace(" a u", " an u")
+
+					DomTask = DomTask.Replace(" an uni", " a uni")
+					DomTask = DomTask.Replace(" an utensil", " a utensil")
+					DomTask = DomTask.Replace(" an ukulele", " a ukulele")
+					DomTask = DomTask.Replace(" an use", " a use")
+					DomTask = DomTask.Replace(" an urethra", " a urethra")
+					DomTask = DomTask.Replace(" an urine", " a urine")
+					DomTask = DomTask.Replace(" an usual", " a usual")
+					DomTask = DomTask.Replace(" an utility", " a utility")
+					DomTask = DomTask.Replace(" an uterus", " a uterus")
+					DomTask = DomTask.Replace(" an utopia", " a utopia")
+
+
+					'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
+					' If Sync of Reseults is activated
+					' Wait for the ImageFetcher to Finish 
+					If BWimageFetcher.TriggerRequired _
+					Then BWimageFetcher.WaitToFinish()
+
+					Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
+
+					If NullResponse = False And DomTask <> "" Then
+
+						If UCase(DomTask) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomTask = "<b>Tease AI has been reset</b>"
+
+
+						If SysMes = True Then
+							Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & DomTask & "</b><br></font></body>"
+							SysMes = False
+							ChatText.DocumentText = Chat
+							ChatText2.DocumentText = Chat
+							ChatReadyState()
+							ScrollChatDown()
+							GoTo EndSysMes
+						End If
+
+						If EmoMes = True Then
+							Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""" &
+						   TypeColor & """><b><i>" & DomTask & "</i></b><br></font></body>"
+							EmoMes = False
+							ChatText.DocumentText = Chat
+							ChatText2.DocumentText = Chat
+							ChatReadyState()
+							ScrollChatDown()
+							GoTo EndSysMes
+						End If
+
+						' Add timestamps to domme response if the option is checked in the menu
+						If FrmSettings.timestampCheckBox.Checked = True And FrmSettings.CBWebtease.Checked = False Then
+							Chat = Chat & "<font face=""Cambria"" size=""2"" color=""DimGray"">" & (Date.Now.ToString("hh:mm tt ")) & "</font>"
+						End If
+
+
+
+						If SubWroteLast = False And FrmSettings.shownamesCheckBox.Checked = False Then
+
+
+							If FrmSettings.CBWebtease.Checked = True Then
+								Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
+								 TextColor & """><center>" & DomTask & "</center><br></font></body>"
 							Else
-								EmoToggle = False
-								DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
-							End If
-						End If
-					Next
-
-					DomTask = DomTask.Replace(":d", ":D")
-					DomTask = DomTask.Replace(": d", ": D")
-
-
-					'Typo Test
-
-					Try
-
-						Dim RestoreDomTask As String = DomTask
-
-						If Not DomTask.Substring(0, 1) = FrmSettings.TBEmote.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False And TypoSwitch <> 0 And TyposDisabled = False _
-							And FrmSettings.TTSCheckBox.Checked = False Then
-
-							Dim TypoChance As Integer = randomizer.Next(0, 101)
-
-							If TypoChance < FrmSettings.NBTypoChance.Value Or TypoSwitch = 2 Then
-
-								Try
-
-									Dim TypoString As String
-
-									Dim TypoSplit As String() = DomTask.Split(" ")
-
-									TempVal = randomizer.Next(0, TypoSplit.Count)
-
-									CorrectedWord = TypoSplit(TempVal)
-
-									CorrectedWord = CorrectedWord.Replace(",", "")
-									CorrectedWord = CorrectedWord.Replace(".", "")
-									CorrectedWord = CorrectedWord.Replace("!", "")
-									CorrectedWord = CorrectedWord.Replace("?", "")
-
-									TypoString = "w d s f x"
-
-
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "a" Then TypoString = "q w s z x"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "b" Then TypoString = "f v g h n"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "c" Then TypoString = "x d f v b"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "d" Then TypoString = "s c f x e"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "e" Then TypoString = "s r w 3 d"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "f" Then TypoString = "d r g v c"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "g" Then TypoString = "f t b h y"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "h" Then TypoString = "g b n u j"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "i" Then TypoString = "o u j k l"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "j" Then TypoString = "k u i n h"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "k" Then TypoString = "j m , l i"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "l" Then TypoString = "; p . , i"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "m" Then TypoString = "n j k , l"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "n" Then TypoString = "b h j k m"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "o" Then TypoString = "p 0 i k ;"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "p" Then TypoString = "[ - o ; l"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "q" Then TypoString = "1 w s a 2"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "r" Then TypoString = "4 5 t f d"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "s" Then TypoString = "w d a z x"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "t" Then TypoString = "5 6 g y r"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "u" Then TypoString = "y 7 j i k"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "v" Then TypoString = "c f g h b"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "w" Then TypoString = "2 a e q s"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "x" Then TypoString = "z s d f c"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "y" Then TypoString = "t 7 h u g"
-									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "z" Then TypoString = "a s x d c"
-
-
-									Dim UpperChance As Integer = randomizer.Next(0, 101)
-									If UpperChance < 26 Then TypoString = UCase(TypoString)
-
-
-
-									Dim GetTypo As String() = TypoString.Split(" ")
-
-									Dim MadeTypo As String = GetTypo(randomizer.Next(0, GetTypo.Count))
-
-
-									Dim DoubleChance As Integer = randomizer.Next(0, 101)
-									If DoubleChance < 11 Then MadeTypo = MadeTypo & LCase(GetTypo(randomizer.Next(0, GetTypo.Count)))
-
-
-									TypoSplit(TempVal) = TypoSplit(TempVal).Remove(0, 1)
-
-									Dim SpaceChance As Integer = randomizer.Next(0, 101)
-									If SpaceChance < 7 Then
-										TypoSplit(TempVal) = MadeTypo & " " & TypoSplit(TempVal)
-									Else
-										TypoSplit(TempVal) = MadeTypo & TypoSplit(TempVal)
-
-									End If
-
-									DomTask = Join(TypoSplit)
-
-									CorrectedTypo = True
-
-								Catch
-
-									DomTask = RestoreDomTask
-									CorrectedTypo = False
-								End Try
-
+								Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
+								 TextColor & """>" & Chat & DomTask & "<br></font></body>"
 							End If
 
-						End If
 
-						TypoSwitch = 1
+							ChatText.DocumentText = Chat
+							ChatText2.DocumentText = Chat
+							ChatReadyState()
+							ScrollChatDown()
 
-					Catch
-					End Try
-
-
-				End If
-
-				DomTask = DomTask.Replace("ATSYMBOL", "@")
-				DomTask = DomTask.Replace("atsymbol", "@")
-
-				If InputIcon = True Then
-					' github patch DomTask = DomTask & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png""/>"
-					DomTask = DomTask & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png"" title=""This icon means your Domme will remember your answer!""/>"
-					InputIcon = False
-				End If
-
-				DomTask = DomTask.Replace(" a a", " an a")
-				DomTask = DomTask.Replace(" a e", " an e")
-				DomTask = DomTask.Replace(" a i", " an i")
-				DomTask = DomTask.Replace(" a o", " an o")
-				DomTask = DomTask.Replace(" a u", " an u")
-
-				DomTask = DomTask.Replace(" an uni", " a uni")
-				DomTask = DomTask.Replace(" an utensil", " a utensil")
-				DomTask = DomTask.Replace(" an ukulele", " a ukulele")
-				DomTask = DomTask.Replace(" an use", " a use")
-				DomTask = DomTask.Replace(" an urethra", " a urethra")
-				DomTask = DomTask.Replace(" an urine", " a urine")
-				DomTask = DomTask.Replace(" an usual", " a usual")
-				DomTask = DomTask.Replace(" an utility", " a utility")
-				DomTask = DomTask.Replace(" an uterus", " a uterus")
-				DomTask = DomTask.Replace(" an utopia", " a utopia")
+							If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
+						  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
 
 
-				'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
-				' If Sync of Reseults is activated
-				' Wait for the ImageFetcher to Finish 
-				If BWimageFetcher.TriggerRequired _
-				Then BWimageFetcher.WaitToFinish()
-
-				Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
-
-				If NullResponse = False And DomTask <> "" Then
-
-					If UCase(DomTask) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomTask = "<b>Tease AI has been reset</b>"
-
-
-					If SysMes = True Then
-						Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & DomTask & "</b><br></font></body>"
-						SysMes = False
-						ChatText.DocumentText = Chat
-						While ChatText.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ChatText2.DocumentText = Chat
-						While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ScrollChatDown()
-						GoTo EndSysMes
-					End If
-
-					If EmoMes = True Then
-						Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""" &
-		   TypeColor & """><b><i>" & DomTask & "</i></b><br></font></body>"
-						EmoMes = False
-						ChatText.DocumentText = Chat
-						While ChatText.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ChatText2.DocumentText = Chat
-						While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ScrollChatDown()
-						GoTo EndSysMes
-					End If
-
-					' Add timestamps to domme response if the option is checked in the menu
-					If FrmSettings.timestampCheckBox.Checked = True And FrmSettings.CBWebtease.Checked = False Then
-						Chat = Chat & "<font face=""Cambria"" size=""2"" color=""DimGray"">" & (Date.Now.ToString("hh:mm tt ")) & "</font>"
-					End If
-
-
-
-					If SubWroteLast = False And FrmSettings.shownamesCheckBox.Checked = False Then
-
-
-						If FrmSettings.CBWebtease.Checked = True Then
-							Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-						  TextColor & """><center>" & DomTask & "</center><br></font></body>"
 						Else
-							Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-						  TextColor & """>" & Chat & DomTask & "<br></font></body>"
+
+
+							If FrmSettings.CBWebtease.Checked = True Then
+								Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
+							  TextColor & """><center>" & DomTask & "</center><br></font></body>"
+							Else
+								Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""Cambria"" size=""3"" font color=""" &
+							TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
+							End If
+
+
+
+
+
+							TypeToggle = 0
+							ChatText.DocumentText = Chat
+							ChatText2.DocumentText = Chat
+							ChatReadyState()
+							ScrollChatDown()
+
+							If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
+						  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
+
 						End If
-
-
-						ChatText.DocumentText = Chat
-						While ChatText.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ChatText2.DocumentText = Chat
-						While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ScrollChatDown()
-
-						If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
-				TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
-
-
-					Else
-
-
-						If FrmSettings.CBWebtease.Checked = True Then
-							Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-					TextColor & """><center>" & DomTask & "</center><br></font></body>"
-						Else
-							Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-	  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
-						End If
-
-
-
-
-
-						TypeToggle = 0
-						ChatText.DocumentText = Chat
-						While ChatText.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ChatText2.DocumentText = Chat
-						While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-							Application.DoEvents()
-						End While
-						ScrollChatDown()
-
-						If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
-				TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
-
-					End If
 
 EndSysMes:
 
 
 
-					ScrollChatDown()
+						ScrollChatDown()
 
-					If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
+						If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
 
-					' Dsplay the next picture in the slideshow as the domme responds if "With Tease" radio button is checked
-
-
-
-					SubWroteLast = False
-
-				End If
-
-				' If Sync of Reseults is activated
-				' Wait for the ImageFetcher to Finish 
-				If BWimageFetcher.TriggerRequired _
-				Then BWimageFetcher.WaitToFinish()
-
-				If JustShowedBlogImage = True Then GoTo HypNoResponse
-
-
-				If ShowPicture = True Or DommeImageFound = True Then
+						' Dsplay the next picture in the slideshow as the domme responds if "With Tease" radio button is checked
 
 
 
-					Try
-						If RiskyDeal = True Then
-							' ######################## Risky Pick #########################
-							FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
-						ElseIf DommeImageFound = True Then
-							' ######################## Domme Tags #########################
-							ShowImage(DommeImageSTR, True)
-							DommeImageFound = False
-						ElseIf LocalImageFound = True Then
-							' ######################## Local Img. #########################
-							ShowImage(LocalImageSTR, True)
-							LocalImageFound = False
-						Else
-							' ######################## Slideshow ##########################
-							ShowImage(DomPic, True)
-						End If
-					Catch ex As Exception
-						'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
-						Debug.Print(ex.Message & vbCrLf & ex.StackTrace)
-						ClearMainPictureBox()
-						' GoTo TryNextWithTease
-					End Try
-					If FrmSettings.landscapeCheckBox.Checked = True Then
-						If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
-							mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
+						SubWroteLast = False
+
+					End If
+
+					' If Sync of Reseults is activated
+					' Wait for the ImageFetcher to Finish 
+					If BWimageFetcher.TriggerRequired _
+					Then BWimageFetcher.WaitToFinish()
+
+					If JustShowedBlogImage = True Then GoTo HypNoResponse
+
+
+					If ShowPicture = True Or DommeImageFound = True Then
+
+
+
+						Try
+							If RiskyDeal = True Then
+								' ######################## Risky Pick #########################
+								FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
+							ElseIf DommeImageFound = True Then
+								' ######################## Domme Tags #########################
+								ShowImage(DommeImageSTR, True)
+								DommeImageFound = False
+							ElseIf LocalImageFound = True Then
+								' ######################## Local Img. #########################
+								ShowImage(LocalImageSTR, True)
+								LocalImageFound = False
+							Else
+								' ######################## Slideshow ##########################
+								ShowImage(DomPic, True)
+							End If
+						Catch ex As Exception
+							'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
+							Debug.Print(ex.Message & vbCrLf & ex.StackTrace)
+							ClearMainPictureBox()
+							' GoTo TryNextWithTease
+						End Try
+						If FrmSettings.landscapeCheckBox.Checked = True Then
+							If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
+								mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
+							Else
+								mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+							End If
 						Else
 							mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
 						End If
-					Else
-						mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-					End If
 
-					mainPictureBox.Refresh()
-					mainPictureBox.Invalidate()
-					ShowPicture = False
-				End If
+						mainPictureBox.Refresh()
+						mainPictureBox.Invalidate()
+						ShowPicture = False
+					End If
 
 
 
 HypNoResponse:
 
-				If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
-					Debug.Print(DomTask)
-					DomTask = StripFormat(DomTask)
+					If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
+						Debug.Print(DomTask)
+						DomTask = StripFormat(DomTask)
 
-					mciSendString("CLOSE Speech1", String.Empty, 0, 0)
-					mciSendString("CLOSE Echo1", String.Empty, 0, 0)
+						mciSendString("CLOSE Speech1", String.Empty, 0, 0)
+						mciSendString("CLOSE Echo1", String.Empty, 0, 0)
 
-					Dim SpeechDir As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\TempWav.wav"
+						Dim SpeechDir As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\TempWav.wav"
 
-					synth2.SelectVoice(FrmSettings.TTSComboBox.Text)
-					synth2.SetOutputToWaveFile(SpeechDir, New SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono))
-					synth2.Speak(DomTask)
-					synth2.SetOutputToNull()
+						synth2.SelectVoice(FrmSettings.TTSComboBox.Text)
+						synth2.SetOutputToWaveFile(SpeechDir, New SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono))
+						synth2.Speak(DomTask)
+						synth2.SetOutputToNull()
 
-					SpeechDir = GetShortPathName(SpeechDir)
+						SpeechDir = GetShortPathName(SpeechDir)
 
-					mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Speech1", String.Empty, 0, 0)
-					mciSendString("PLAY Speech1 FROM 0", String.Empty, 0, 0)
+						mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Speech1", String.Empty, 0, 0)
+						mciSendString("PLAY Speech1 FROM 0", String.Empty, 0, 0)
 
 
-					If CBHypnoGenPhase.Checked And HypnoGen = True Then
-						Delay(0.4)
-						mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Echo1", String.Empty, 0, 0)
-						mciSendString("PLAY Echo1 FROM 0", String.Empty, 0, 0)
+						If CBHypnoGenPhase.Checked And HypnoGen = True Then
+							Delay(0.4)
+							mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Echo1", String.Empty, 0, 0)
+							mciSendString("PLAY Echo1 FROM 0", String.Empty, 0, 0)
+						End If
+
 					End If
-
-				End If
 
 NoResponse:
-				' If Sync of Reseults is activated
-				' Wait for the ImageFetcher to Finish 
-				If BWimageFetcher.TriggerRequired _
-				Then BWimageFetcher.WaitToFinish()
+					' If Sync of Reseults is activated
+					' Wait for the ImageFetcher to Finish 
+					If BWimageFetcher.TriggerRequired _
+					Then BWimageFetcher.WaitToFinish()
 
-				Try
-					If mainPictureBox.Visible = True Then
-						If ImageLocation.Contains("/") Then
-							Debug.Print("Timer1 PictureStrip")
-							PictureStrip.Items(0).Enabled = True
-							PictureStrip.Items(1).Enabled = True
-							PictureStrip.Items(2).Enabled = True
-							PictureStrip.Items(3).Enabled = True
-							PictureStrip.Items(4).Enabled = True
-							PictureStrip.Items(5).Enabled = True
-						Else
-							Debug.Print("Timer1 PictureStrip")
-							PictureStrip.Items(0).Enabled = True
-							PictureStrip.Items(1).Enabled = False
-							PictureStrip.Items(2).Enabled = False
-							PictureStrip.Items(3).Enabled = False
-							PictureStrip.Items(4).Enabled = False
-							PictureStrip.Items(5).Enabled = False
+					Try
+						If mainPictureBox.Visible = True Then
+							If ImageLocation.Contains("/") Then
+								Debug.Print("Timer1 PictureStrip")
+								PictureStrip.Items(0).Enabled = True
+								PictureStrip.Items(1).Enabled = True
+								PictureStrip.Items(2).Enabled = True
+								PictureStrip.Items(3).Enabled = True
+								PictureStrip.Items(4).Enabled = True
+								PictureStrip.Items(5).Enabled = True
+							Else
+								Debug.Print("Timer1 PictureStrip")
+								PictureStrip.Items(0).Enabled = True
+								PictureStrip.Items(1).Enabled = False
+								PictureStrip.Items(2).Enabled = False
+								PictureStrip.Items(3).Enabled = False
+								PictureStrip.Items(4).Enabled = False
+								PictureStrip.Items(5).Enabled = False
+							End If
+						End If
+					Catch
+						PictureStrip.Items(0).Enabled = False
+						PictureStrip.Items(1).Enabled = False
+						PictureStrip.Items(2).Enabled = False
+						PictureStrip.Items(3).Enabled = False
+						PictureStrip.Items(4).Enabled = False
+						PictureStrip.Items(5).Enabled = False
+					End Try
+
+
+					If CorrectedTypo = True Then
+						CorrectedTypo = False
+						'DomTask = "*" & CorrectedWord
+						DomTask = LineSpeaker & "*" & CorrectedWord
+						TypingDelayGeneric()
+						Return
+					End If
+
+					StrokeSpeedCheck()
+
+					If SubStroking = False Then
+						StrokePace = 0
+						If FrmSettings.TBWebStop.Text <> "" Then
+							Try
+								FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
+							Catch
+							End Try
 						End If
 					End If
-				Catch
-					PictureStrip.Items(0).Enabled = False
-					PictureStrip.Items(1).Enabled = False
-					PictureStrip.Items(2).Enabled = False
-					PictureStrip.Items(3).Enabled = False
-					PictureStrip.Items(4).Enabled = False
-					PictureStrip.Items(5).Enabled = False
-				End Try
+
+					If RLGLGame = True And RedLight = False Then
+						If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused) Then
+							DomWMP.Ctlcontrols.play()
 
 
-				If CorrectedTypo = True Then
-					CorrectedTypo = False
-					'DomTask = "*" & CorrectedWord
-					DomTask = LineSpeaker & "*" & CorrectedWord
-					TypingDelayGeneric()
-					Return
-				End If
+							AskedToSpeedUp = False
+							AskedToSlowDown = False
+							SubStroking = True
+							SubEdging = False
+							SubHoldingEdge = False
+							StopMetronome = False
+							StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+							StrokePace = 50 * Math.Round(StrokePace / 50)
+							StrokePaceTimer.Interval = StrokePace
+							RLGLTauntTick = randomizer.Next(20, 31)
+							' VideoTauntTick = randomizer.Next(20, 31)
+							RLGLTauntTimer.Start()
 
-				StrokeSpeedCheck()
-
-				If SubStroking = False Then
-					StrokePace = 0
-					If FrmSettings.TBWebStop.Text <> "" Then
-						Try
-							FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
-						Catch
-						End Try
+						End If
 					End If
-				End If
 
-				If RLGLGame = True And RedLight = False Then
-					If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused) Then
-						DomWMP.Ctlcontrols.play()
-
-
-						AskedToSpeedUp = False
-						AskedToSlowDown = False
-						SubStroking = True
-						SubEdging = False
-						SubHoldingEdge = False
-						StopMetronome = False
-						StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
-						StrokePace = 50 * Math.Round(StrokePace / 50)
-						StrokePaceTimer.Interval = StrokePace
-						RLGLTauntTick = randomizer.Next(20, 31)
-						' VideoTauntTick = randomizer.Next(20, 31)
-						RLGLTauntTimer.Start()
-
+					If RLGLGame = True And RedLight = True Then
+						If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
+							DomWMP.Ctlcontrols.pause()
+							SubStroking = False
+							StopMetronome = True
+							StrokePace = 0
+							'VideoTauntTimer.Stop()
+						End If
 					End If
-				End If
 
-				If RLGLGame = True And RedLight = True Then
-					If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
-						DomWMP.Ctlcontrols.pause()
-						SubStroking = False
-						StopMetronome = True
+
+
+					NullResponse = False
+
+					If FollowUp <> "" Then
+						DomTask = FollowUp
+						Debug.Print("FollowUp DomTask = " & DomTask)
+						FollowUp = ""
+						TypingDelayGeneric()
+						Exit Sub
+					End If
+
+					DomTypeCheck = False
+					DomTyping = False
+					'StringLength = 20
+					StringLength = randomizer.Next(8, 16)
+
+					If SubStroking = False Then StopMetronome = True
+					If SubHoldingEdge = True Then
 						StrokePace = 0
-						'VideoTauntTimer.Stop()
 					End If
-				End If
+					'Debug.Print("End of DomTask #######################################################################################################################")
+					'JustShowedBlogImage = False
 
-
-
-				NullResponse = False
-
-				If FollowUp <> "" Then
-					DomTask = FollowUp
-					Debug.Print("FollowUp DomTask = " & DomTask)
-					FollowUp = ""
-					TypingDelayGeneric()
-					Exit Sub
-				End If
-
-				DomTypeCheck = False
-				DomTyping = False
-				'StringLength = 20
-				StringLength = randomizer.Next(8, 16)
-
-				If SubStroking = False Then StopMetronome = True
-				If SubHoldingEdge = True Then
-					StrokePace = 0
-				End If
-				'Debug.Print("End of DomTask #######################################################################################################################")
-				'JustShowedBlogImage = False
-
-				If TempScriptCount = 0 Then
-					JustShowedBlogImage = False
-					JustShowedSlideshowImage = False
-				End If
-
-
-				If CBTCockActive = True Then
-					CBTCockActive = False
-					CBTCock()
-				End If
-
-				If CBTBallsActive = True Then
-					CBTBallsActive = False
-					CBTBalls()
-				End If
-
-				If CBTBothActive = True Then
-					CBTBothActive = False
-					CBTBoth()
-				End If
-
-				If CustomTaskActive = True Then
-					CustomTaskActive = False
-					RunCustomTask()
-				End If
-
-				If YesOrNo = False Then
-					If RapidCode = True Then
-						RunFileText()
-					Else
-						ScriptTick = randomizer.Next(4, 7)
-						If RapidFire = True Then ScriptTick = 1
-						If RiskyDeal = True Then ScriptTick = 2
-						ScriptTimer.Start()
+					If TempScriptCount = 0 Then
+						JustShowedBlogImage = False
+						JustShowedSlideshowImage = False
 					End If
-				End If
-
-				If YesOrNo = True And RiskyDeal = True Then
-					FrmCardList.BTNPickIt.Visible = True
-					FrmCardList.BTNRiskIt.Visible = True
-					FrmCardList.HighlightCaseLabelsOffer()
-
-				End If
-
-				GotoFlag = False
 
 
-				If SubGaveUp = True Then
+					If CBTCockActive = True Then
+						CBTCockActive = False
+						CBTCock()
+					End If
 
-					SubGaveUp = False
+					If CBTBallsActive = True Then
+						CBTBallsActive = False
+						CBTBalls()
+					End If
 
-					AskedToGiveUpSection = False
-					If TnASlides.Enabled = True Then TnASlides.Stop()
+					If CBTBothActive = True Then
+						CBTBothActive = False
+						CBTBoth()
+					End If
 
-					Dim WasStroking As Boolean = SubStroking
-					Dim WasEdging As Boolean = SubEdging
-					Dim WasHolding As Boolean = SubHoldingEdge
+					If CustomTaskActive = True Then
+						CustomTaskActive = False
+						RunCustomTask()
+					End If
 
-					StopEverything()
-					ModuleEnd = False
-					ShowModule = False
+					If YesOrNo = False Then
+						If RapidCode = True Then
+							RunFileText()
+						Else
+							ScriptTick = randomizer.Next(4, 7)
+							If RapidFire = True Then ScriptTick = 1
+							If RiskyDeal = True Then ScriptTick = 2
+							ScriptTimer.Start()
+						End If
+					End If
 
-					'DelayFlag = True
-					'DelayTick = randomizer.Next(3, 6)
+					If YesOrNo = True And RiskyDeal = True Then
+						FrmCardList.BTNPickIt.Visible = True
+						FrmCardList.BTNRiskIt.Visible = True
+						FrmCardList.HighlightCaseLabelsOffer()
 
-					'DelayTimer.Start()
+					End If
 
-					'Do
-					'   Application.DoEvents()
-					'Loop Until DelayFlag = False
-
-					'LastScriptCountdown -= 1
-					'Debug.Print("LastScriptCountdown = " & LastScriptCountdown)
-
-					'FrmSettings.LBLOrgasmCountdown.Text = LastScriptCountdown
-
-					'StrokeTauntVal = -1
-
-					'If TeaseTick < 1 And Playlist = False Then
-					'RunLastScript()
-					'ElseIf WasStroking Then
-					'RunModuleScript(False)
-					'Else
-					'RunLinkScript()
-					'End If
+					GotoFlag = False
 
 
+					If SubGaveUp = True Then
 
-					If ReturnFlag Then
-						ShowModule = True
-						ScriptTimer.Start()
-					ElseIf TeaseTick < 1 And Playlist = False Then
-						StrokeTauntVal = -1
-						RunLastScript()
-					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
-						StrokeTauntVal = -1
-						RunModuleScript(False)
-					Else
-						StrokeTauntVal = -1
-						RunLinkScript()
+						SubGaveUp = False
+
+						AskedToGiveUpSection = False
+						If TnASlides.Enabled = True Then TnASlides.Stop()
+
+						Dim WasStroking As Boolean = SubStroking
+						Dim WasEdging As Boolean = SubEdging
+						Dim WasHolding As Boolean = SubHoldingEdge
+
+						StopEverything()
+						ModuleEnd = False
+						ShowModule = False
+
+						'DelayFlag = True
+						'DelayTick = randomizer.Next(3, 6)
+
+						'DelayTimer.Start()
+
+						'Do
+						'   Application.DoEvents()
+						'Loop Until DelayFlag = False
+
+						'LastScriptCountdown -= 1
+						'Debug.Print("LastScriptCountdown = " & LastScriptCountdown)
+
+						'FrmSettings.LBLOrgasmCountdown.Text = LastScriptCountdown
+
+						'StrokeTauntVal = -1
+
+						'If TeaseTick < 1 And Playlist = False Then
+						'RunLastScript()
+						'ElseIf WasStroking Then
+						'RunModuleScript(False)
+						'Else
+						'RunLinkScript()
+						'End If
+
+
+
+						If ReturnFlag Then
+							ShowModule = True
+							ScriptTimer.Start()
+						ElseIf TeaseTick < 1 And Playlist = False Then
+							StrokeTauntVal = -1
+							RunLastScript()
+						ElseIf WasStroking And Not WasEdging And Not WasHolding Then
+							StrokeTauntVal = -1
+							RunModuleScript(False)
+						Else
+							StrokeTauntVal = -1
+							RunLinkScript()
+						End If
+
+
+
 					End If
 
 
 
 				End If
-
-
-
-			End If
 		End If
 
 	End Sub
@@ -6659,25 +6574,15 @@ NoResponse:
 				If FrmSettings.CBWebtease.Checked = True Then
 
 					ChatText.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
-
+					ChatReadyState()
+					ScrollChatDown()
 
 				Else
 
 					ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 
 				End If
@@ -7062,13 +6967,8 @@ TryNextWithTease:
 					Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & DomChat & "</b><br></font></body>"
 					SysMes = False
 					ChatText.DocumentText = Chat
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 					GoTo EndSysMes
 				End If
@@ -7078,13 +6978,8 @@ TryNextWithTease:
 			  TypeColor & """><b><i>" & DomChat & "</i></b><br></font></body>"
 					EmoMes = False
 					ChatText.DocumentText = Chat
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 					GoTo EndSysMes
 				End If
@@ -7109,13 +7004,8 @@ TryNextWithTease:
 
 
 					ChatText.DocumentText = Chat
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+				ChatReadyState()
 					ScrollChatDown()
 
 					If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
@@ -7133,13 +7023,8 @@ TryNextWithTease:
 
 					TypeToggle = 0
 					ChatText.DocumentText = Chat
-					While ChatText.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
 					ChatText2.DocumentText = Chat
-					While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-						Application.DoEvents()
-					End While
+					ChatReadyState()
 					ScrollChatDown()
 
 					If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
@@ -24272,26 +24157,16 @@ GetDommeSlideshow:
 				GlitterTease = True
 				Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter1.Text & " has joined the chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = Chat
-				While ChatText.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
 				ChatText2.DocumentText = Chat
-				While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
+				ChatReadyState()
 				ScrollChatDown()
 			Else
 				Group = Group.Replace("1", "")
 				If Group = "D" Then GlitterTease = False
 				Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter1.Text & " has left the chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = Chat
-				While ChatText.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
 				ChatText2.DocumentText = Chat
-				While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
+				ChatReadyState()
 				ScrollChatDown()
 			End If
 		End If
@@ -24309,26 +24184,16 @@ GetDommeSlideshow:
 				GlitterTease = True
 				Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter2.Text & " has joined the chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = Chat
-				While ChatText.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
 				ChatText2.DocumentText = Chat
-				While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
+				ChatReadyState()
 				ScrollChatDown()
 			Else
 				Group = Group.Replace("2", "")
 				If Group = "D" Then GlitterTease = False
 				Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter2.Text & " has left the chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = Chat
-				While ChatText.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
 				ChatText2.DocumentText = Chat
-				While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
+				ChatReadyState()
 				ScrollChatDown()
 			End If
 		End If
@@ -24346,26 +24211,16 @@ GetDommeSlideshow:
 				GlitterTease = True
 				Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter3.Text & " has joined the chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = Chat
-				While ChatText.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
 				ChatText2.DocumentText = Chat
-				While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
+				ChatReadyState()
 				ScrollChatDown()
 			Else
 				Group = Group.Replace("3", "")
 				If Group = "D" Then GlitterTease = False
 				Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter3.Text & " has left the chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = Chat
-				While ChatText.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
 				ChatText2.DocumentText = Chat
-				While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
+				ChatReadyState()
 				ScrollChatDown()
 			End If
 		End If
@@ -24385,26 +24240,16 @@ GetDommeSlideshow:
 				If Group = "D" Then GlitterTease = False
 				Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & domName.Text & " has joined the chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = Chat
-				While ChatText.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
 				ChatText2.DocumentText = Chat
-				While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
+				ChatReadyState()
 				ScrollChatDown()
 			Else
 				Group = Group.Replace("D", "")
 				GlitterTease = True
 				Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & domName.Text & " has left the chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = Chat
-				While ChatText.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
 				ChatText2.DocumentText = Chat
-				While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-					Application.DoEvents()
-				End While
+				ChatReadyState()
 				ScrollChatDown()
 			End If
 		End If
@@ -25462,13 +25307,8 @@ GetDommeSlideshow:
 		End If
 
 		ChatText.DocumentText = Chat
-		While ChatText.ReadyState <> WebBrowserReadyState.Complete
-			Application.DoEvents()
-		End While
 		ChatText2.DocumentText = Chat
-		While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-			Application.DoEvents()
-		End While
+		ChatReadyState()
 		ScrollChatDown()
 
 
@@ -26847,14 +26687,9 @@ SkipNew:
 		' github patch
 		StatusUpdates.DocumentText = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & StatusUpdates.DocumentText & "</body>"
 		Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
-		ChatText.DocumentText = Chat
-		While ChatText.ReadyState <> WebBrowserReadyState.Complete
-			Application.DoEvents()
-		End While
+	ChatText.DocumentText = Chat
 		ChatText2.DocumentText = Chat
-		While ChatText2.ReadyState <> WebBrowserReadyState.Complete
-			Application.DoEvents()
-		End While
+		ChatReadyState()
 		ScrollChatDown()
 
 		Try
@@ -29203,14 +29038,17 @@ SkipNew:
 
 		Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """></body>"
 		ChatText.DocumentText = Chat
-		While ChatText.ReadyState <> WebBrowserReadyState.Complete
-			Application.DoEvents()
-		End While
 		ChatText2.DocumentText = Chat
-		While ChatText2.ReadyState <> WebBrowserReadyState.Complete
+		ChatReadyState()
+		ScrollChatDown()
+
+	End Sub
+
+	Public Sub ChatReadyState()
+
+		While ChatText.ReadyState <> WebBrowserReadyState.Complete And ChatText2.ReadyState <> WebBrowserReadyState.Complete
 			Application.DoEvents()
 		End While
-		ScrollChatDown()
 
 	End Sub
 
