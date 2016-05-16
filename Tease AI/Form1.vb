@@ -603,7 +603,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 			If BeforeTease = False And Val(GetVariable("SYS_SubLeftEarly")) <> 0 Then SetVariable("SYS_SubLeftEarlyTotal", Val(GetVariable("SYS_SubLeftEarlyTotal")) + 1)
 
-			My.Settings.Save()
 
 
 			'TempGif.Dispose()
@@ -725,7 +724,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.Refresh()
 
 		If My.Settings.OrgasmLockDate = Nothing Then My.Settings.OrgasmLockDate = FormatDateTime(Now, DateFormat.ShortDate)
-		My.Settings.Save()
 		Debug.Print("OrgasmLockDate = " & My.Settings.OrgasmLockDate)
 
 
@@ -1427,22 +1425,18 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BronzeTokens += 100
 			My.Settings.Patch45Tokens = True
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 		End If
 
 		If BronzeTokens < 0 Then
 			BronzeTokens = 0
-			My.Settings.Save()
 		End If
 
 		If SilverTokens < 0 Then
 			SilverTokens = 0
-			My.Settings.Save()
 		End If
 
 		If GoldTokens < 0 Then
 			GoldTokens = 0
-			My.Settings.Save()
 		End If
 
 
@@ -1461,14 +1455,12 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		If My.Settings.LastOrgasm = Nothing Then
 			My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-			My.Settings.Save()
 		End If
 
 		FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm.ToString()
 
 		If My.Settings.LastRuined = Nothing Then
 			My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-			My.Settings.Save()
 		End If
 
 		FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined.ToString()
@@ -1505,7 +1497,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		If CompareDates(My.Settings.WishlistDate) <> 0 Then
 			My.Settings.ClearWishlist = False
-			My.Settings.Save()
 		End If
 		Debug.Print("Test?")
 
@@ -1648,7 +1639,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		Else
 			CaloriesConsumed = 0
 			My.Settings.CaloriesConsumed = 0
-			My.Settings.Save()
 			LBLCalorie.Text = CaloriesConsumed
 		End If
 
@@ -1679,7 +1669,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		Control.CheckForIllegalCrossThreadCalls = False
 
-		MetroThread = New Thread(AddressOf MetronomeTick)
+		MetroThread = New Thread(AddressOf MetronomeTick) With {.Name = "Metronome-Thread"}
 		MetroThread.IsBackground = True
 		MetroThread.Start()
 
@@ -1756,7 +1746,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		'TabControl1.ColorScheme.TabBackground = Color.Transparent
 		'TabControl1.ColorScheme.TabBackground2 = Color.Transparent
 		'TabControl1.BackColor = Color.Transparent
-
+		My.Settings.Save()
 		Debug.Print("Form1 Loading Finished")
 
 	End Sub
@@ -1888,7 +1878,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS1Edit.BackColor = My.Settings.ButtonColor
 			BTNLS1Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS1 = BTNLS1.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -1904,7 +1893,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS2Edit.BackColor = My.Settings.ButtonColor
 			BTNLS2Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS2 = BTNLS2.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -1920,7 +1908,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS3Edit.BackColor = My.Settings.ButtonColor
 			BTNLS3Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS3 = BTNLS3.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -1936,7 +1923,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS4Edit.BackColor = My.Settings.ButtonColor
 			BTNLS4Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS4 = BTNLS4.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -1952,7 +1938,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS5Edit.BackColor = My.Settings.ButtonColor
 			BTNLS5Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS5 = BTNLS5.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -2724,7 +2709,6 @@ WritingTaskLine:
 					My.Settings.AvgEdgeCountRest = AvgEdgeCountRest
 				End If
 
-				My.Settings.Save()
 
 				If My.Settings.AvgEdgeCount > 4 Then
 					AvgEdgeStroking = My.Settings.AvgEdgeStroking
@@ -2928,7 +2912,6 @@ NoRepeatFiles:
 RuinedOrgasm:
 
 				My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-				My.Settings.Save()
 				FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
 
 				If FrmSettings.CBDomOrgasmEnds.Checked = False And OrgasmRuined = True And TeaseTick < 1 Then
@@ -3043,14 +3026,12 @@ AllowedOrgasm:
 
 					My.Settings.OrgasmsRemaining -= 1
 
-					My.Settings.Save()
 
 				End If
 
 NoNoCumFiles:
 
 				My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-				My.Settings.Save()
 				FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
 
 				If FrmSettings.CBDomOrgasmEnds.Checked = False And TeaseTick < 1 Then
@@ -7435,7 +7416,6 @@ NullResponseLine2:
 				My.Settings.RecentSlideshows.Add(RecentSlideshows(i))
 			Next
 
-			My.Settings.Save()
 
 			SlideshowLoaded = True
 
@@ -8742,11 +8722,9 @@ CensorConstant:
 
 	Private Sub domName_Leave(sender As System.Object, e As System.EventArgs) Handles domName.Leave
 		My.Settings.DomName = domName.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub subName_Leave(sender As System.Object, e As System.EventArgs) Handles subName.Leave
 		My.Settings.SubName = subName.Text
-		My.Settings.Save()
 	End Sub
 
 
@@ -9191,7 +9169,6 @@ StatusUpdateEnd:
 
 			domAvatar.Image = Image.FromFile(OpenFileDialog1.FileName)
 			My.Settings.DomAvatarSave = OpenFileDialog1.FileName
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -11256,7 +11233,6 @@ TaskCleanSet:
 
 		If StringClean.Contains("@ChastityOn") Then
 			My.Settings.Chastity = True
-			My.Settings.Save()
 			FrmSettings.LBLChastityState.Text = "ON"
 			FrmSettings.LBLChastityState.ForeColor = Color.Green
 			StringClean = StringClean.Replace("@ChastityOn", "")
@@ -11264,7 +11240,6 @@ TaskCleanSet:
 
 		If StringClean.Contains("@ChastityOff") Then
 			My.Settings.Chastity = False
-			My.Settings.Save()
 			FrmSettings.LBLChastityState.Text = "OFF"
 			FrmSettings.LBLChastityState.ForeColor = Color.Red
 			StringClean = StringClean.Replace("@ChastityOff", "")
@@ -11295,7 +11270,6 @@ TaskCleanSet:
 			My.Settings.SilverTokens = SilverTokens
 			My.Settings.GoldTokens = GoldTokens
 
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@AddTokens(" & TokenFlag & ")", "")
 
@@ -11331,7 +11305,6 @@ TaskCleanSet:
 			My.Settings.SilverTokens = SilverTokens
 			My.Settings.GoldTokens = GoldTokens
 
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@RemoveTokens(" & TokenFlag & ")", "")
 
@@ -11340,7 +11313,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add1Token") Then
 			BronzeTokens += 1
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 1 Bronze token!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add1Token", "")
@@ -11349,7 +11321,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add3Tokens") Then
 			BronzeTokens += 3
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 3 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add3Tokens", "")
@@ -11358,7 +11329,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add5Tokens") Then
 			BronzeTokens += 5
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			StringClean = StringClean.Replace("@Add5Tokens", "")
 			MessageBox.Show(Me, domName.Text & " has given you 5 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -11367,7 +11337,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add10Tokens") Then
 			BronzeTokens += 10
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 10 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add10Tokens", "")
@@ -11376,7 +11345,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add25Tokens") Then
 			BronzeTokens += 25
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 25 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add25Tokens", "")
@@ -11385,7 +11353,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add50Tokens") Then
 			BronzeTokens += 50
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 50 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add50Tokens", "")
@@ -11394,7 +11361,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add100Tokens") Then
 			BronzeTokens += 100
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add50Tokens", "")
@@ -11403,7 +11369,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Remove100Tokens") Then
 			BronzeTokens -= 100
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has taken 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@@Remove100Tokens", "")
@@ -11416,7 +11381,6 @@ TaskCleanSet:
 			'Github Patch
 			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
 
-			My.Settings.Save()
 			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
 			StringClean = StringClean.Replace("@UpdateOrgasm", "")
 		End If
@@ -11427,7 +11391,6 @@ TaskCleanSet:
 			' GithubPatch
 			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
 
-			My.Settings.Save()
 			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
 			StringClean = StringClean.Replace("@UpdateRuined", "")
 		End If
@@ -11556,7 +11519,6 @@ TaskCleanSet:
 			If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
 
 			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@DecreaseOrgasmChance", "")
 		End If
@@ -11569,7 +11531,6 @@ TaskCleanSet:
 			If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
 
 			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@IncreaseOrgasmChance", "")
 		End If
@@ -11582,7 +11543,6 @@ TaskCleanSet:
 			If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
 
 			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@DecreaseRuinChance", "")
 		End If
@@ -11595,7 +11555,6 @@ TaskCleanSet:
 			If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
 
 			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@IncreaseRuinChance", "")
 		End If
@@ -11955,7 +11914,6 @@ TaskCleanSet:
 			If StartStrokingCount = 0 Then FirstRound = True
 			'If FirstRound = True Then My.Settings.Sys_SubLeftEarly += 1
 			If FirstRound = True Then SetVariable("SYS_SubLeftEarly", Val(GetVariable("SYS_SubLeftEarly")) + 1)
-			My.Settings.Save()
 			StartStrokingCount += 1
 			StopMetronome = False
 			StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
@@ -12774,7 +12732,6 @@ OrgasmDecided:
 		If StringClean.Contains("@EndTease") Then
 			SetVariable("SYS_SubLeftEarly", 0)
 			'My.Settings.Sys_SubLeftEarly = 0
-			'My.Settings.Save()
 			StopEverything()
 			ResetButton()
 			ResetFlag = True
@@ -13200,7 +13157,6 @@ OrgasmDecided:
 			SaveExercise()
 			CBVitalSubDomTask.Checked = False
 			My.Settings.VitalSubAssignments = False
-			My.Settings.Save()
 			StringClean = StringClean.Replace("@VitalSubAssignment", "")
 		End If
 
@@ -21494,7 +21450,6 @@ NoPlaylistLinkFile:
 		'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1, False)
 
 
-		My.Settings.Save()
 
 		'Debug.Print("RunLastScript() Called")
 
@@ -21752,7 +21707,6 @@ NoPlaylistEndFile:
 		HoldEdgeTimeTotal += 1
 
 		My.Settings.HoldEdgeTimeTotal = HoldEdgeTimeTotal
-		My.Settings.Save()
 
 		If InputFlag = True Then Return
 
@@ -21868,7 +21822,6 @@ NoRepeatFiles:
 RuinedOrgasm:
 
 			My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-			My.Settings.Save()
 			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
 
 			If FrmSettings.CBDomOrgasmEnds.Checked = False And OrgasmRuined = True And TeaseTick < 1 Then
@@ -21979,7 +21932,6 @@ AllowedOrgasm:
 
 				My.Settings.OrgasmsRemaining -= 1
 
-				My.Settings.Save()
 
 			End If
 
@@ -21987,7 +21939,6 @@ NoNoCumFiles:
 
 
 			My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-			My.Settings.Save()
 			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
 
 			If FrmSettings.CBDomOrgasmEnds.Checked = False And TeaseTick < 1 Then
@@ -22521,7 +22472,6 @@ TryNext:
 		'Debug.Print("StrokeTimeTotal = " & StrokeTimeTotal)
 
 		My.Settings.StrokeTimeTotal = StrokeTimeTotal
-		My.Settings.Save()
 
 		Dim STT As TimeSpan = TimeSpan.FromSeconds(StrokeTimeTotal)
 
@@ -22783,7 +22733,6 @@ RestartFunction:
 					My.Settings.RecentSlideshows.Add(RecentSlideshows(i))
 				Next
 
-				My.Settings.Save()
 
 
 				SlideshowLoaded = True
@@ -23066,7 +23015,7 @@ RestartFunction:
 			VidFile = VidFile + VidSplit(i)
 		Next
 		'Debug.Print(VidFile)
-
+		If VidFile = "" Then Exit Sub
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & VidFile & ".txt") Then
 			Dim SubCheck As String()
 			Dim PlayPos As Integer
@@ -23114,7 +23063,6 @@ RestartFunction:
 			domAvatar.SizeMode = PictureBoxSizeMode.StretchImage
 			My.Settings.DomAVStretch = True
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -23298,7 +23246,6 @@ RestartFunction:
 		My.Settings.BronzeTokens = BronzeTokens
 		My.Settings.SilverTokens = SilverTokens
 		My.Settings.GoldTokens = GoldTokens
-		My.Settings.Save()
 
 	End Sub
 
@@ -23516,6 +23463,50 @@ RestartFunction:
 
 #Region "-------------------------------------------------- PictureStrip ------------------------------------------------------"
 
+
+
+	Private Sub PictureStrip_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles PictureStrip.Opening
+
+		If mainPictureBox.Image IsNot Nothing Then
+
+			If ImageAnimator.CanAnimate(mainPictureBox.Image) Then
+				PicStripTmsiDisableAnimation.Visible = True
+			Else
+				PicStripTmsiDisableAnimation.Visible = False
+			End If
+
+			If ImageLocation = "" Then
+				PictureStrip.Controls.AsQueryable.Cast(Of Control).ToList.ForEach(Sub(x) x.Enabled = False)
+				Exit Sub
+			ElseIf isURL(ImageLocation) Then
+
+				PicStripTSMIsaveImage.Enabled = True
+				PicStripTSMISaveImageTo.Enabled = True
+				PicStripTSMIremoveFromURL.Enabled = True
+
+			End If
+
+			PicStripTSMIcopyImageLocation.Enabled = True
+			PicStripTSMIlikeImage.Enabled = True
+			PicStripTSMIlikeImage.Checked = False
+			PicStripTSMIdislikeImage.Enabled = True
+			PicStripTSMIdislikeImage.Checked = False
+
+			Dim tmp As List(Of String) = Txt2List(pathLikeList)
+			If tmp.Contains(ImageLocation) Then PicStripTSMIlikeImage.Checked = True
+
+			tmp = Txt2List(pathDislikeList)
+			If tmp.Contains(ImageLocation) Then PicStripTSMIdislikeImage.Checked = True
+
+		End If
+
+	End Sub
+
+	Private Sub PictureStripTmsiDisableAnimation_Click(sender As Object, e As EventArgs) Handles PicStripTmsiDisableAnimation.Click
+		' Signals the ImageAnimatorThread to pause.
+		mreImageanimator.Reset()
+	End Sub
+
 	Private Sub PicStripTSMIcopyImageLocation_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIcopyImageLocation.Click
 
 		My.Computer.Clipboard.SetText(ImageLocation)
@@ -23546,34 +23537,51 @@ RestartFunction:
 
 	End Sub
 
-	Private Sub PicStripTSMIlikeImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIlikeImage.Click
+	Private Sub PicStripTSMIlikeImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIlikeImage.Click,
+																									PicStripTSMIdislikeImage.Click
+		' Exit if ImageLocation is unkown
+		If ImageLocation = "" Then Exit Sub
 
-		If FoundString <> "" Then
-			If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & FoundString, True)
+		Dim tmpFilePath As String = ""
+		Dim lazytext As String = ""
+		Try
+			Dim tmpTsmi As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+
+
+			' Set the filepath to delete from or add to
+			If tmpTsmi Is PicStripTSMIlikeImage Then
+				tmpFilePath = pathLikeList
+			ElseIf tmpTsmi Is PicStripTSMIdislikeImage
+				tmpFilePath = pathDislikeList
 			Else
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FoundString, True)
+				Throw New NotImplementedException("This Toolstripmenuitem is not implemented yet")
 			End If
-			'PictureStrip.Items(3).Enabled = False
-			PicStripTSMIlikeImage.Enabled = False
-		End If
 
 
-	End Sub
-
-	Private Sub PicStripTSMIdislikeImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdislikeImage.Click
-
-		If FoundString <> "" Then
-
-			If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & FoundString, True)
+			If tmpTsmi.Checked Then
+				' Remove from the given file 
+				lazytext = "remove path from file :" & tmpFilePath
+				TxtRemoveLine(tmpFilePath, ImageLocation)
+				tmpTsmi.Checked = False
+			ElseIf File.Exists(tmpFilePath) Then
+				lazytext = "append path  to file :" & tmpFilePath
+				' Append to existing file 
+				My.Computer.FileSystem.WriteAllText(tmpFilePath, Environment.NewLine & ImageLocation, True)
 			Else
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FoundString, True)
+				lazytext = "add path to new file :" & tmpFilePath
+				' create a new file
+				My.Computer.FileSystem.WriteAllText(tmpFilePath, ImageLocation, True)
 			End If
-			'PictureStrip.Items(4).Enabled = False
-			PicStripTSMIdislikeImage.Enabled = False
-		End If
-
+			tmpTsmi.Checked = True
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'						       All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			lazytext = "Unable to " & lazytext
+			Log.WriteError(lazytext, ex, "Error updating List")
+			MessageBox.Show(Me, lazytext & vbCrLf _
+							& ex.Message, MsgBoxStyle.Exclamation, "Error updating list.")
+		End Try
 	End Sub
 
 	Private Sub PicStripTSMIremoveFromURL_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIremoveFromURL.Click
@@ -23690,7 +23698,7 @@ RestartFunction:
 		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -23727,7 +23735,7 @@ RestartFunction:
 		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -25487,14 +25495,12 @@ GetDommeSlideshow:
 
 	Private Sub dompersonalitycombobox_LostFocus(sender As Object, e As System.EventArgs) Handles dompersonalitycombobox.LostFocus
 		My.Settings.DomPersonality = dompersonalitycombobox.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub dompersonalitycombobox_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles dompersonalitycombobox.SelectedIndexChanged
 		If FormLoading = False Then
 
 			My.Settings.DomPersonality = dompersonalitycombobox.Text
-			My.Settings.Save()
 
 			FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
 
@@ -25860,7 +25866,6 @@ GetDommeSlideshow:
 
 				My.Settings.WishlistDate = FormatDateTime(Now, DateFormat.ShortDate)
 
-				My.Settings.Save()
 
 
 
@@ -26078,7 +26083,6 @@ GetDommeSlideshow:
 			My.Settings.MirrorWindows = False
 		End If
 
-		My.Settings.Save()
 		AdjustWindow()
 	End Sub
 
@@ -26095,7 +26099,6 @@ GetDommeSlideshow:
 			CloseApp()
 			My.Settings.SideChat = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub LazySubAVToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles LazySubAVToolStripMenuItem1.Click
@@ -26108,7 +26111,6 @@ GetDommeSlideshow:
 			LazySubAVToolStripMenuItem1.Checked = False
 			My.Settings.LazySubAV = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub ThemesToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ThemesToolStripMenuItem1.Click
@@ -26131,7 +26133,6 @@ GetDommeSlideshow:
 		End If
 
 		My.Settings.CBWebtease = FrmSettings.CBWebtease.Checked
-		My.Settings.Save()
 
 	End Sub
 
@@ -26222,9 +26223,7 @@ GetDommeSlideshow:
 		FrmSettings.Focus()
 	End Sub
 
-	Private Sub ClearMainpictureboxToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearMainpictureboxToolStripMenuItem.Click
-		ClearMainPictureBox()
-	End Sub
+
 
 #End Region ' Menu
 
@@ -26263,7 +26262,6 @@ GetDommeSlideshow:
 
 		My.Settings.WindowHeight = Me.Height
 		My.Settings.WindowWidth = Me.Width
-		My.Settings.Save()
 
 	End Sub
 
@@ -26506,7 +26504,6 @@ GetDommeSlideshow:
 			SplitContainerHeight = SplitContainer1.Panel2.Height
 
 			My.Settings.SplitterPosition = SplitContainer1.Height - SplitContainer1.Panel1.Height
-			My.Settings.Save()
 
 			Debug.Print("SplitContainer1.Height = " & SplitContainer1.Height)
 			Debug.Print("SplitContainer1.Panel1.Height = " & SplitContainer1.Panel1.Height)
@@ -26589,7 +26586,6 @@ SkipNew:
 
 		If FormLoading = False And FormFinishedLoading = True Then
 			My.Settings.SplitterDistance = SplitContainer1.SplitterDistance
-			My.Settings.Save()
 
 		End If
 
@@ -27894,7 +27890,6 @@ SkipNew:
 		If FormLoading = False Then
 			GetShortcutChecked()
 			My.Settings.ShowShortcuts = CBHideShortcuts.Checked
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -27957,58 +27952,47 @@ SkipNew:
 	Private Sub CBShortcuts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBShortcuts.CheckedChanged
 		If FormLoading = False Then
 			My.Settings.Shortcuts = CBShortcuts.Checked
-			My.Settings.Save()
 		End If
 	End Sub
 
 	Private Sub TBShortYes_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortYes.LostFocus
 		My.Settings.ShortYes = TBShortYes.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortNo_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortNo.LostFocus
 		My.Settings.ShortNo = TBShortNo.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortEdge_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortEdge.LostFocus
 		My.Settings.ShortEdge = TBShortEdge.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortSpeedUp_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSpeedUp.LostFocus
 		My.Settings.ShortSpeedUp = TBShortSpeedUp.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortSlowDown_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSlowDown.LostFocus
 		My.Settings.ShortSlowDown = TBShortSlowDown.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortStop_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStop.LostFocus
 		My.Settings.ShortStop = TBShortStop.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortStroke_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStroke.LostFocus
 		My.Settings.ShortStroke = TBShortStroke.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortCum_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortCum.LostFocus
 		My.Settings.ShortCum = TBShortCum.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortGreet_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortGreet.LostFocus
 		My.Settings.ShortGreet = TBShortGreet.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortSafeword_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSafeword.LostFocus
 		My.Settings.ShortSafeword = TBShortSafeword.Text
-		My.Settings.Save()
 	End Sub
 
 	Public Sub CheatCheck()
@@ -28404,7 +28388,6 @@ SkipNew:
 
 			My.Settings.ClearWishlist = True
 
-			My.Settings.Save()
 
 			WishlistCostGold.Visible = False
 			WishlistCostSilver.Visible = False
@@ -28454,7 +28437,6 @@ SkipNew:
 
 			My.Settings.ClearWishlist = True
 
-			My.Settings.Save()
 
 			Dim GoldList As New List(Of String)
 
@@ -28621,7 +28603,6 @@ SkipNew:
 			My.Settings.CaloriesConsumed = CaloriesConsumed
 			TBCalorieItem.Text = ""
 			TBCalorieAmount.Text = ""
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -28639,7 +28620,6 @@ SkipNew:
 			CaloriesConsumed += TempCal
 			LBLCalorie.Text = CaloriesConsumed
 			My.Settings.CaloriesConsumed = CaloriesConsumed
-			My.Settings.Save()
 			If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
 			For i As Integer = 0 To LBCalorie.Items.Count - 1
 				If Not File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then
@@ -28671,7 +28651,6 @@ SkipNew:
 		Else
 			My.Settings.VitalSub = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub LBCalorie_DoubleClick(sender As Object, e As System.EventArgs) Handles LBCalorie.DoubleClick
@@ -28684,7 +28663,6 @@ SkipNew:
 		CaloriesConsumed -= TempCal
 		LBLCalorie.Text = CaloriesConsumed
 		My.Settings.CaloriesConsumed = CaloriesConsumed
-		My.Settings.Save()
 		LBCalorie.Items.Remove(LBCalorie.SelectedItem)
 		If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
 		If LBCalorie.Items.Count > 0 Then
@@ -28753,7 +28731,6 @@ SkipNew:
 			LBLCalorie.Text = 0
 			CaloriesConsumed = 0
 			My.Settings.CaloriesConsumed = 0
-			My.Settings.Save()
 
 			FileText = VitalList(randomizer.Next(0, VitalList.Count))
 
@@ -28780,7 +28757,6 @@ SkipNew:
 	Private Sub CBVitalSubDomTask_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVitalSubDomTask.CheckedChanged
 		If FormLoading = False Then
 			My.Settings.VitalSubAssignments = CBVitalSubDomTask.Checked
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -28788,29 +28764,46 @@ SkipNew:
 
 	Public Sub MetronomeTick()
 
-		' Begin GitHub Patch
-		'Do
-		'If StrokePace <> 0 And CBMetronome.Checked = True Then
-		'My.Computer.Audio.Stop()
-		'My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\metronome.wav")
-		'Thread.Sleep(StrokePace)
-		'End If
-		'Loop
-		' End GitHub Patch
+		Dim wavFilepath As String = Application.StartupPath & "\Audio\System\metronome.wav"
+		Dim MetroSoundPlayer As Media.SoundPlayer = Nothing
+		Dim wavStream As MemoryStream
+		Dim Errorcounter As Integer = 0
 
-		Do
-			If StrokePace > 0 Then
-				If CBMetronome.Checked Then
-					My.Computer.Audio.Stop()
-					My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\metronome.wav")
+restartNoFile:
+		Try
+			If Directory.Exists(Path.GetDirectoryName(wavFilepath)) AndAlso File.Exists(wavFilepath) Then
+
+				wavStream = New MemoryStream(File.ReadAllBytes(wavFilepath))
+				MetroSoundPlayer = New Media.SoundPlayer(wavStream)
+				MetroSoundPlayer.Load()
+playLoop:
+				If StrokePace > 0 AndAlso CBMetronome.Checked Then
+					MetroSoundPlayer.Stop()
+					MetroSoundPlayer.PlaySync()
 					Thread.Sleep(StrokePace)
+				Else
+					Thread.Sleep(1000)
 				End If
+
+				GoTo playLoop
 			Else
-				Threading.Thread.Sleep(1000)
+				Thread.Sleep(10 * 1000)
+				GoTo restartNoFile
 			End If
-
-		Loop
-
+		Catch ex As Exception When Errorcounter < 120
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                  All Errors until 119 Errors occured
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'TODO: MetronomeExceptions: Log error - but first add synclock to logging.
+			Errorcounter += 1
+			Thread.Sleep(1000)
+			GoTo restartNoFile
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'TODO: MetronomeExceptions: Add possibility to restart the thread.
+		End Try
 	End Sub
 
 #Region "-------------------------------------------------- Metronome-App -----------------------------------------------------"
@@ -28836,7 +28829,6 @@ SkipNew:
 			If NBMaxPace.Value > NBMinPace.Value - 50 Then NBMaxPace.Value = NBMinPace.Value - 50
 			If SubStroking = False Then StrokePace = NBMaxPace.Value
 			My.Settings.MaxPace = NBMaxPace.Value
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -28845,7 +28837,6 @@ SkipNew:
 			If NBMinPace.Value < NBMaxPace.Value + 50 Then NBMinPace.Value = NBMaxPace.Value + 50
 			If SubStroking = False Then StrokePace = NBMinPace.Value
 			My.Settings.MinPace = NBMinPace.Value
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -28877,7 +28868,6 @@ SkipNew:
 
 	Private Sub CBMetronome_LostFocus(sender As Object, e As System.EventArgs) Handles CBMetronome.LostFocus
 		My.Settings.MetroOn = CBMetronome.Checked
-		My.Settings.Save()
 	End Sub
 
 #End Region
@@ -29179,7 +29169,6 @@ SkipNew:
 		OpenApp()
 		SideChatToolStripMenuItem1.Checked = True
 		My.Settings.SideChat = True
-		My.Settings.Save()
 	End Sub
 
 	Public Sub ClearWriteTask()
@@ -29195,7 +29184,6 @@ SkipNew:
 			OpenApp()
 			SideChatToolStripMenuItem1.Checked = True
 			My.Settings.SideChat = True
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -29213,5 +29201,6 @@ SkipNew:
 		ScrollChatDown()
 
 	End Sub
+
 
 End Class

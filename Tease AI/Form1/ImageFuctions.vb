@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Threading
 
 Partial Class Form1
 
@@ -638,7 +639,7 @@ NoNeFound:
 	Private Sub BWimageFetcher_DoWork(ByVal sender As Object,
 							 ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BWimageFetcher.DoWork
 		'TODO: Create a specific image for Displaying an imageerror
-		Dim errorimagepath As String = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+		Dim errorimagepath As String = Application.StartupPath & "\Images\System\ErrorLoadingImage.jpg"
 
 
 		With CType(e.Argument, ImageFetchObject)
@@ -728,11 +729,22 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 			Dim OldImage As Image = mainPictureBox.Image
 			Dim NewImage As Bitmap = FetchResult.FetchedImage.Clone
 
+			' This starts the ImageAnimator-Thread again.
+			mreImageanimator.Set()
+
 			FetchResult.FetchedImage.Dispose()
 
 			mainPictureBox.Image = NewImage
 			mainPictureBox.Invalidate()
 			mainPictureBox.Refresh()
+
+			' Add a custom eventhandler to the imageanimator, if an 
+			' animatable Image is displayed.
+			If ImageAnimator_OnFrameChangedAdded = False _
+			AndAlso ImageAnimator.CanAnimate(mainPictureBox.Image) Then
+				ImageAnimator.Animate(mainPictureBox.Image, AddressOf ImageAnimator_OnFrameChanged)
+				ImageAnimator_OnFrameChangedAdded = True
+			End If
 
 			PBImage = FetchResult.ImageLocation
 			ImageLocation = FetchResult.ImageLocation
@@ -744,32 +756,38 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 			GC.Collect()
 			CheckDommeTags()
 
-			If FetchResult.Source = ImageSourceType.Local Then
-				Debug.Print("Local Image PictureStrip")
-
-				PicStripTSMIcopyImageLocation.Enabled = True
-				PicStripTSMIsaveImage.Enabled = False
-				PicStripTSMISaveImageTo.Enabled = False
-				PicStripTSMIlikeImage.Enabled = False
-				PicStripTSMIdislikeImage.Enabled = False
-				PicStripTSMIremoveFromURL.Enabled = False
-
-			Else
-				Debug.Print("Blog Image PictureStrip")
-
-				PicStripTSMIcopyImageLocation.Enabled = True
-				PicStripTSMIsaveImage.Enabled = True
-				PicStripTSMISaveImageTo.Enabled = True
-				PicStripTSMIlikeImage.Enabled = True
-				PicStripTSMIdislikeImage.Enabled = True
-				PicStripTSMIremoveFromURL.Enabled = True
-
+			' Update the the picturestrip, when it's opened.
+			If PictureStrip.Visible Then
+				PictureStrip_Opening(Nothing, Nothing)
 			End If
 
 			Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
-						"	ImageLocation: " & FetchResult.ImageLocation)
-		End If
+					"	ImageLocation: " & FetchResult.ImageLocation)
+			End If
+    End Sub
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Indicates if the Eventhandler  ImageAnimator_OnFrameChanged has been added to ImageAnimatorThread.
+	''' </summary>
+	Dim ImageAnimator_OnFrameChangedAdded As Boolean
+	''' <summary>
+	''' Signals the ImageAnimatorThread to suspend until started again.
+	''' </summary>
+	Shared mreImageanimator As New ManualResetEvent(True)
+	''' <summary>
+	''' Eventhandler for 
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
+	Sub ImageAnimator_OnFrameChanged(sender As Object, e As EventArgs)
+		'×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+		'						ImageAnimator Thread - Beyond this Line: INVOKE IS REQUIRED...
+		' If the manual reset event is not set, the Thread will wait until it is set.
+		mreImageanimator.WaitOne()
+		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Thread °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 	End Sub
+
 
 #End Region ' BWimageSync
 

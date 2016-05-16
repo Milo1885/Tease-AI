@@ -14,6 +14,105 @@ Public Class Common
 
 #Region "--------------------------------------- TextFiles ----------------------------------------------"
 
+#Region "---------------------------------------- Caching -----------------------------------------------"
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Synclocked Object!
+	''' <para> Do not Access directly. Use the Property instead.</para>
+	''' </summary>
+	Shared _txtcache As New Dictionary(Of String, List(Of String))
+	''' <summary>
+	''' Synclock-Storage for TxtCache.
+	''' </summary>
+	Shared _synclockTxtCache As New Object
+
+	''' <summary>
+	''' A Dictionary containing all textfiles read by txt3List(string)
+	''' </summary>
+	Private Shared Property TxtCache As Dictionary(Of String, List(Of String))
+		Get
+			SyncLock _synclockTxtCache
+				Return _txtcache
+			End SyncLock
+		End Get
+		Set(value As Dictionary(Of String, List(Of String)))
+
+			SyncLock _synclockTxtCache
+				value = _txtcache
+			End SyncLock
+		End Set
+	End Property
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Synclocked Object!
+	''' <para> Do not Access directly. Use the Property instead.</para>
+	''' </summary>
+	Shared _FswTxtCache As New Dictionary(Of String, FileSystemWatcher)
+	''' <summary>
+	''' Synclock-Storage for TxtCache.
+	''' </summary>
+	Shared _synclockFswTxtCache As New Object
+	''' <summary>
+	''' A Dictionary containing all filesystemwatchers for directories 
+	''' containing files of the TxtCache.
+	''' </summary>
+	Shared Property FswChache As Dictionary(Of String, FileSystemWatcher)
+		Get
+			SyncLock _synclockFswTxtCache
+				Return _FswTxtCache
+			End SyncLock
+		End Get
+		Set(value As Dictionary(Of String, FileSystemWatcher))
+			SyncLock _synclockFswTxtCache
+				_FswTxtCache = value
+			End SyncLock
+		End Set
+	End Property
+
+
+	Private Shared Sub createFileSystemWatcher(ByVal Filepath As String)
+		Try
+			Dim tmpString As String = Path.GetDirectoryName(Filepath)
+
+			If tmpString = Application.StartupPath Then Exit Sub
+			If FswChache.Keys.Contains(tmpString) Then Exit Sub
+
+			Dim tmpFsw As New FileSystemWatcher With
+			{
+				.IncludeSubdirectories = True,
+				.Path = tmpString
+			}
+
+			AddHandler tmpFsw.Changed, AddressOf UpdateTextfileCache
+			AddHandler tmpFsw.Renamed, AddressOf UpdateTextfileCache
+
+			tmpFsw.EnableRaisingEvents = True
+
+			FswChache.Add(tmpString, tmpFsw)
+		Catch ex As Exception
+			Debug.Print("Unable to Create FileSystemWatcher for:" & Filepath)
+		End Try
+	End Sub
+
+	Private Shared Sub UpdateTextfileCache(sender As Object, e As FileSystemEventArgs)
+		If TxtCache.Keys.Contains(e.FullPath.ToLower) Then
+			Debug.Print("Removing modified file from cache:  " & e.FullPath)
+			TxtCache.Remove(e.FullPath.ToLower)
+		End If
+	End Sub
+
+#End Region ' Caching
+
+
+
+
+
+
+
+
+
 	''' =========================================================================================================
 	''' <summary>
 	''' Reads a TextFile into a generic List(of String). EmptyLines are removed from the list.
@@ -33,13 +132,27 @@ Public Class Common
 				Throw New ArgumentException("The given filepath was empty """ & GetText & """")
 			End If
 
+			Dim TextList As New List(Of String)
+
+			If TxtCache.Keys.Contains(GetText.ToLower) Then
+				Log.Write("Loading cached Text-File: " & GetText, 5)
+
+				Txt2List = TxtCache(GetText.ToLower).ToList
+
+				Exit Function
+				'Return TxtCache(GetText.ToLower).ToList
+			End If
+
+
+
+
 			' Check if the given Directory exists. MyDirectory.Exists will 
 			' try to create the directory, if it's an App-sub-dir.
 			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(GetText))) Then
-				Log.Write("Loading Text-File: " & GetText, 5)
+				Log.Write("Reading Text-File: " & GetText, 5)
 				If File.Exists(GetText) Then
+
 					Using TextReader As New StreamReader(GetText)
-						Dim TextList As New List(Of String)
 
 						While TextReader.Peek <> -1
 							TextList.Add(TextReader.ReadLine())
@@ -48,6 +161,9 @@ Public Class Common
 						' Remove all empty Lines from list.
 						TextList.RemoveAll(Function(x) x = "")
 
+						TxtCache.Add(GetText.ToLower, TextList.ToList)
+
+						createFileSystemWatcher(GetText)
 						Return TextList
 					End Using
 				Else
