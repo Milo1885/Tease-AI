@@ -589,6 +589,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			mainPictureBox.Image = Nothing
 			Debug.Print("Here?")
 
+			TeaseTimer.Stop()
 			TeaseAIClock.Stop()
 			UpdatesTimer.Stop()
 			StrokeTimeTotalTimer.Stop()
@@ -603,7 +604,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 			If BeforeTease = False And Val(GetVariable("SYS_SubLeftEarly")) <> 0 Then SetVariable("SYS_SubLeftEarlyTotal", Val(GetVariable("SYS_SubLeftEarlyTotal")) + 1)
 
-			My.Settings.Save()
 
 
 			'TempGif.Dispose()
@@ -714,7 +714,11 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		Debug.Print("Form 2 Opened")
 
-
+		Dim tv As Version = My.Application.Info.Version
+		Me.Text = String.Format("Tease A.I. - PATCH {0}.{1}{2}",
+								tv.Minor,
+								tv.Build,
+								If(tv.MinorRevision > 0, "." & tv.MinorRevision, ""))
 
 		FormLoading = True
 
@@ -725,7 +729,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.Refresh()
 
 		If My.Settings.OrgasmLockDate = Nothing Then My.Settings.OrgasmLockDate = FormatDateTime(Now, DateFormat.ShortDate)
-		My.Settings.Save()
 		Debug.Print("OrgasmLockDate = " & My.Settings.OrgasmLockDate)
 
 
@@ -1427,22 +1430,18 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BronzeTokens += 100
 			My.Settings.Patch45Tokens = True
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 		End If
 
 		If BronzeTokens < 0 Then
 			BronzeTokens = 0
-			My.Settings.Save()
 		End If
 
 		If SilverTokens < 0 Then
 			SilverTokens = 0
-			My.Settings.Save()
 		End If
 
 		If GoldTokens < 0 Then
 			GoldTokens = 0
-			My.Settings.Save()
 		End If
 
 
@@ -1461,14 +1460,12 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		If My.Settings.LastOrgasm = Nothing Then
 			My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-			My.Settings.Save()
 		End If
 
 		FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm.ToString()
 
 		If My.Settings.LastRuined = Nothing Then
 			My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-			My.Settings.Save()
 		End If
 
 		FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined.ToString()
@@ -1505,7 +1502,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		If CompareDates(My.Settings.WishlistDate) <> 0 Then
 			My.Settings.ClearWishlist = False
-			My.Settings.Save()
 		End If
 		Debug.Print("Test?")
 
@@ -1648,7 +1644,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		Else
 			CaloriesConsumed = 0
 			My.Settings.CaloriesConsumed = 0
-			My.Settings.Save()
 			LBLCalorie.Text = CaloriesConsumed
 		End If
 
@@ -1679,7 +1674,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		Control.CheckForIllegalCrossThreadCalls = False
 
-		MetroThread = New Thread(AddressOf MetronomeTick)
+		MetroThread = New Thread(AddressOf MetronomeTick) With {.Name = "Metronome-Thread"}
 		MetroThread.IsBackground = True
 		MetroThread.Start()
 
@@ -1756,7 +1751,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		'TabControl1.ColorScheme.TabBackground = Color.Transparent
 		'TabControl1.ColorScheme.TabBackground2 = Color.Transparent
 		'TabControl1.BackColor = Color.Transparent
-
+		My.Settings.Save()
 		Debug.Print("Form1 Loading Finished")
 
 	End Sub
@@ -1888,7 +1883,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS1Edit.BackColor = My.Settings.ButtonColor
 			BTNLS1Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS1 = BTNLS1.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -1904,7 +1898,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS2Edit.BackColor = My.Settings.ButtonColor
 			BTNLS2Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS2 = BTNLS2.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -1920,7 +1913,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS3Edit.BackColor = My.Settings.ButtonColor
 			BTNLS3Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS3 = BTNLS3.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -1936,7 +1928,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS4Edit.BackColor = My.Settings.ButtonColor
 			BTNLS4Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS4 = BTNLS4.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -1952,7 +1943,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			BTNLS5Edit.BackColor = My.Settings.ButtonColor
 			BTNLS5Edit.ForeColor = My.Settings.TextColor
 			My.Settings.LS5 = BTNLS5.Text
-			My.Settings.Save()
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 			Return
@@ -2002,7 +1992,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			ChatText.DocumentText = Chat
 			ChatText2.DocumentText = Chat
 			ChatReadyState()
-			ScrollChatDown()
 
 			chatBox.Text = ""
 			ChatBox2.Text = ""
@@ -2035,7 +2024,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			ChatText.DocumentText = Chat
 			ChatText2.DocumentText = Chat
 			ChatReadyState()
-			ScrollChatDown()
 
 
 		Else
@@ -2046,7 +2034,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			ChatText.DocumentText = Chat
 			ChatText2.DocumentText = Chat
 			ChatReadyState()
-			ScrollChatDown()
 
 		End If
 
@@ -2061,7 +2048,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
 			ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
 			ChatReadyState()
-			ScrollChatDown()
 		End If
 
 
@@ -2339,7 +2325,6 @@ WritingTaskLine:
 					ChatText.DocumentText = Chat
 					ChatText2.DocumentText = Chat
 					ChatReadyState()
-					ScrollChatDown()
 
 				Else
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
@@ -2359,7 +2344,6 @@ WritingTaskLine:
 					ChatText.DocumentText = Chat
 					ChatText2.DocumentText = Chat
 					ChatReadyState()
-					ScrollChatDown()
 
 				End If
 
@@ -2370,7 +2354,6 @@ WritingTaskLine:
 					ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
 					ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
 					ChatReadyState()
-					ScrollChatDown()
 				End If
 
 				chatBox.Text = ""
@@ -2414,7 +2397,6 @@ WritingTaskLine:
 					ChatText.DocumentText = Chat
 					ChatText2.DocumentText = Chat
 					ChatReadyState()
-					ScrollChatDown()
 
 				Else
 
@@ -2435,7 +2417,6 @@ WritingTaskLine:
 					ChatText.DocumentText = Chat
 					ChatText2.DocumentText = Chat
 					ChatReadyState()
-					ScrollChatDown()
 
 				End If
 
@@ -2446,7 +2427,6 @@ WritingTaskLine:
 					ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
 					ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
 					ChatReadyState()
-					ScrollChatDown()
 				End If
 
 				SubWroteLast = True
@@ -2671,7 +2651,6 @@ WritingTaskLine:
 					My.Settings.AvgEdgeCountRest = AvgEdgeCountRest
 				End If
 
-				My.Settings.Save()
 
 				If My.Settings.AvgEdgeCount > 4 Then
 					AvgEdgeStroking = My.Settings.AvgEdgeStroking
@@ -2875,7 +2854,6 @@ NoRepeatFiles:
 RuinedOrgasm:
 
 				My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-				My.Settings.Save()
 				FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
 
 				If FrmSettings.CBDomOrgasmEnds.Checked = False And OrgasmRuined = True And TeaseTick < 1 Then
@@ -2990,14 +2968,12 @@ AllowedOrgasm:
 
 					My.Settings.OrgasmsRemaining -= 1
 
-					My.Settings.Save()
 
 				End If
 
 NoNoCumFiles:
 
 				My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-				My.Settings.Save()
 				FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
 
 				If FrmSettings.CBDomOrgasmEnds.Checked = False And TeaseTick < 1 Then
@@ -5545,21 +5521,19 @@ SkipGotoSearch:
 
 					' If FrmSettings.CBWebtease.Checked = True Then GoTo SkipIsTyping
 
-						If FrmSettings.CBWebtease.Checked = True Then
+					If FrmSettings.CBWebtease.Checked = True Then
 
-							ChatText.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
-							ChatText2.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
-							ChatReadyState()
-							ScrollChatDown()
+						ChatText.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
+						ChatText2.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
+						ChatReadyState()
 
-						Else
+					Else
 
-							ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-							ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-							ChatReadyState()
-							ScrollChatDown()
+						ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
+						ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
+						ChatReadyState()
 
-						End If
+					End If
 
 SkipIsTyping:
 
@@ -5578,909 +5552,905 @@ SkipIsTyping:
 				If FrmSettings.typeinstantlyCheckBox.Checked = True Or RapidCode = True Then StringLength = 0
 				If HypnoGen = True And CBHypnoGenNoText.Checked = True Then StringLength = 0
 				TypingDelayGeneric()
-				End If
+			End If
 
 		Else
 
-				If TypeDelay > 0 Then
-					TypeDelay -= 1
-					If DomTask.Contains("@SystemMessage") Then TypeDelay = 0
+			If TypeDelay > 0 Then
+				TypeDelay -= 1
+				If DomTask.Contains("@SystemMessage") Then TypeDelay = 0
 
-				Else
-					TypeToggle = 0
-					Timer1.Stop()
-					IsTyping = False
-					If RiskyDeal = True Then FrmCardList.LblRiskType.Visible = False
+			Else
+				TypeToggle = 0
+				Timer1.Stop()
+				IsTyping = False
+				If RiskyDeal = True Then FrmCardList.LblRiskType.Visible = False
 
-					ResponseYes = ""
-					ResponseNo = ""
+				ResponseYes = ""
+				ResponseNo = ""
 
-					' If PreCleanString.Contains("#") Then GoTo PoundLoop
+				' If PreCleanString.Contains("#") Then GoTo PoundLoop
 
-					' DomTask = PreCleanString
-
-
-					If DomTask.Contains("@ShowHardcoreImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowSoftcoreImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowLesbianImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowBlowjobImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowFemdomImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowLezdomImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowHentaiImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowGayImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowMaledomImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowCaptionsImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowGeneralImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowLocalImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@ShowBlogImage") Then JustShowedBlogImage = True
-					If DomTask.Contains("@NewBlogImage") Then JustShowedBlogImage = True
-
-					If DomTask.Contains("@SlideshowFirst") Then JustShowedSlideshowImage = True
-					If DomTask.Contains("@SlideshowNext") Then JustShowedSlideshowImage = True
-					If DomTask.Contains("@SlideshowPrevious") Then JustShowedSlideshowImage = True
-					If DomTask.Contains("@SlideshowLast") Then JustShowedSlideshowImage = True
+				' DomTask = PreCleanString
 
 
+				If DomTask.Contains("@ShowHardcoreImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowSoftcoreImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowLesbianImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowBlowjobImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowFemdomImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowLezdomImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowHentaiImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowGayImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowMaledomImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowCaptionsImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowGeneralImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowLocalImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@ShowBlogImage") Then JustShowedBlogImage = True
+				If DomTask.Contains("@NewBlogImage") Then JustShowedBlogImage = True
 
-					'Debug.Print("TeaseRadio = " & FrmSettings.teaseRadio.Checked)
-					'Debug.Print("JustShowedBlogImage = " & JustShowedBlogImage)
-					'Debug.Print("TeaseVideo  = " & TeaseVideo)
-					'Debug.Print("DomTask = " & DomTask)
-					'Debug.Print("NullResponse = " & NullResponse)
-					'Debug.Print("SlideshowLoaded = " & SlideshowLoaded)
-					'Debug.Print("SubStroking = " & SubStroking)
-					'Debug.Print("SubEdging  = " & SubEdging)
-					'Debug.Print("SubHoldingEdge = " & SubHoldingEdge)
+				If DomTask.Contains("@SlideshowFirst") Then JustShowedSlideshowImage = True
+				If DomTask.Contains("@SlideshowNext") Then JustShowedSlideshowImage = True
+				If DomTask.Contains("@SlideshowPrevious") Then JustShowedSlideshowImage = True
+				If DomTask.Contains("@SlideshowLast") Then JustShowedSlideshowImage = True
 
 
 
-					If GlitterTease = True And JustShowedBlogImage = False And LockImage = False Then GoTo TryNextWithTease
+				'Debug.Print("TeaseRadio = " & FrmSettings.teaseRadio.Checked)
+				'Debug.Print("JustShowedBlogImage = " & JustShowedBlogImage)
+				'Debug.Print("TeaseVideo  = " & TeaseVideo)
+				'Debug.Print("DomTask = " & DomTask)
+				'Debug.Print("NullResponse = " & NullResponse)
+				'Debug.Print("SlideshowLoaded = " & SlideshowLoaded)
+				'Debug.Print("SubStroking = " & SubStroking)
+				'Debug.Print("SubEdging  = " & SubEdging)
+				'Debug.Print("SubHoldingEdge = " & SubHoldingEdge)
 
 
-					If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
+
+				If GlitterTease = True And JustShowedBlogImage = False And LockImage = False Then GoTo TryNextWithTease
+
+
+				If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") And NullResponse = False _
 					 And SlideshowLoaded = True And Not DomTask.Contains("@ShowButtImage") And Not DomTask.Contains("@ShowBoobsImage") And Not DomTask.Contains("@ShowButtsImage") _
 					 And Not DomTask.Contains("@ShowBoobsImage") And LockImage = False And CustomSlideshow = False And RapidFire = False _
 					 And UCase(DomTask) <> "<B>TEASE AI HAS BEEN RESET</B>" And JustShowedSlideshowImage = False Then
-						If SubStroking = False Or SubEdging = True Or SubHoldingEdge = True Then
-							' Begin Next Button
+					If SubStroking = False Or SubEdging = True Or SubHoldingEdge = True Then
+						' Begin Next Button
 
-							' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
 
-							Dim TeaseDirection As Integer = randomizer.Next(1, 101)
+						Dim TeaseDirection As Integer = randomizer.Next(1, 101)
 
-							'Debug.Print("TeaseDirection = " & TeaseDirection)
+						'Debug.Print("TeaseDirection = " & TeaseDirection)
 
-							If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
+						If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
 
-								FileCount -= 1
-								If FileCount < 0 Then
-									FileCount = 0
-								End If
-
-								If DomTask.Contains("@Contact1") Then
-									Contact1PicsCount -= 1
-									If Contact1PicsCount < 0 Then
-										Contact1PicsCount = 0
-									End If
-								End If
-
-								If DomTask.Contains("@Contact2") Then
-									Contact2PicsCount -= 1
-									If Contact2PicsCount < 0 Then
-										Contact2PicsCount = 0
-									End If
-								End If
-
-								If DomTask.Contains("@Contact3") Then
-									Contact3PicsCount -= 1
-									If Contact3PicsCount < 0 Then
-										Contact3PicsCount = 0
-									End If
-								End If
-
-							Else
-
-
-								FileCount += 1
-								If FileCount > FileCountMax Then
-									If FrmSettings.CBNewSlideshow.Checked = True Then
-										NewDommeSlideshow = True
-										OriginalDommeSlideshow = _ImageFileNames(0)
-										LoadDommeImageFolder()
-										NewDommeSlideshow = False
-										DomPic = _ImageFileNames(FileCount)
-									Else
-										FileCount = FileCountMax
-									End If
-								End If
-
-								If DomTask.Contains("@Contact1") Then
-									Contact1PicsCount += 1
-									Try
-										If Contact1PicsCount > Contact1Pics.Count - 1 Then
-											Contact1PicsCount = Contact1Pics.Count - 1
-										End If
-									Catch
-									End Try
-								End If
-
-								If DomTask.Contains("@Contact2") Then
-									Contact2PicsCount += 1
-									Try
-										If Contact2PicsCount > Contact2Pics.Count - 1 Then
-											Contact2PicsCount = Contact2Pics.Count - 1
-										End If
-									Catch
-									End Try
-								End If
-
-								If DomTask.Contains("@Contact3") Then
-									Contact3PicsCount += 1
-									Try
-										If Contact3PicsCount > Contact3Pics.Count - 1 Then
-											Contact3PicsCount = Contact3Pics.Count - 1
-										End If
-									Catch
-									End Try
-								End If
-
+							FileCount -= 1
+							If FileCount < 0 Then
+								FileCount = 0
 							End If
 
-							' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+							If DomTask.Contains("@Contact1") Then
+								Contact1PicsCount -= 1
+								If Contact1PicsCount < 0 Then
+									Contact1PicsCount = 0
+								End If
+							End If
 
-							If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNextWithTease
+							If DomTask.Contains("@Contact2") Then
+								Contact2PicsCount -= 1
+								If Contact2PicsCount < 0 Then
+									Contact2PicsCount = 0
+								End If
+							End If
 
-							DomPic = _ImageFileNames(FileCount)
+							If DomTask.Contains("@Contact3") Then
+								Contact3PicsCount -= 1
+								If Contact3PicsCount < 0 Then
+									Contact3PicsCount = 0
+								End If
+							End If
+
+						Else
+
+
+							FileCount += 1
+							If FileCount > FileCountMax Then
+								If FrmSettings.CBNewSlideshow.Checked = True Then
+									NewDommeSlideshow = True
+									OriginalDommeSlideshow = _ImageFileNames(0)
+									LoadDommeImageFolder()
+									NewDommeSlideshow = False
+									DomPic = _ImageFileNames(FileCount)
+								Else
+									FileCount = FileCountMax
+								End If
+							End If
 
 							If DomTask.Contains("@Contact1") Then
+								Contact1PicsCount += 1
 								Try
-									DomPic = Contact1Pics(Contact1PicsCount)
+									If Contact1PicsCount > Contact1Pics.Count - 1 Then
+										Contact1PicsCount = Contact1Pics.Count - 1
+									End If
 								Catch
-									DomPic = _ImageFileNames(FileCount)
 								End Try
 							End If
 
 							If DomTask.Contains("@Contact2") Then
+								Contact2PicsCount += 1
 								Try
-									DomPic = Contact2Pics(Contact2PicsCount)
+									If Contact2PicsCount > Contact2Pics.Count - 1 Then
+										Contact2PicsCount = Contact2Pics.Count - 1
+									End If
 								Catch
-									DomPic = _ImageFileNames(FileCount)
 								End Try
 							End If
 
 							If DomTask.Contains("@Contact3") Then
+								Contact3PicsCount += 1
 								Try
-									DomPic = Contact3Pics(Contact3PicsCount)
+									If Contact3PicsCount > Contact3Pics.Count - 1 Then
+										Contact3PicsCount = Contact3Pics.Count - 1
+									End If
 								Catch
-									DomPic = _ImageFileNames(FileCount)
 								End Try
 							End If
 
 						End If
-						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-						' github patch If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
+						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-						If FrmSettings.CBSlideshowRandom.Checked = True Then
-							FileCount = randomizer.Next(0, FileCountMax + 1)
-							If Contact1Pics.Count > 0 Then Contact1PicsCount = randomizer.Next(0, Contact1Pics.Count)
-							If Contact2Pics.Count > 0 Then Contact2PicsCount = randomizer.Next(0, Contact2Pics.Count)
-							If Contact3Pics.Count > 0 Then Contact3PicsCount = randomizer.Next(0, Contact3Pics.Count)
+						If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNextWithTease
+
+						DomPic = _ImageFileNames(FileCount)
+
+						If DomTask.Contains("@Contact1") Then
+							Try
+								DomPic = Contact1Pics(Contact1PicsCount)
+							Catch
+								DomPic = _ImageFileNames(FileCount)
+							End Try
 						End If
 
+						If DomTask.Contains("@Contact2") Then
+							Try
+								DomPic = Contact2Pics(Contact2PicsCount)
+							Catch
+								DomPic = _ImageFileNames(FileCount)
+							End Try
+						End If
 
-						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+						If DomTask.Contains("@Contact3") Then
+							Try
+								DomPic = Contact3Pics(Contact3PicsCount)
+							Catch
+								DomPic = _ImageFileNames(FileCount)
+							End Try
+						End If
 
-						ShowPicture = True
-
-						' End Next Button
-						'On Error GoTo TryNextWithTease
-						'On Error Resume Next
-						' End Next Button
 					End If
+					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+					' github patch If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
+
+					If FrmSettings.CBSlideshowRandom.Checked = True Then
+						FileCount = randomizer.Next(0, FileCountMax + 1)
+						If Contact1Pics.Count > 0 Then Contact1PicsCount = randomizer.Next(0, Contact1Pics.Count)
+						If Contact2Pics.Count > 0 Then Contact2PicsCount = randomizer.Next(0, Contact2Pics.Count)
+						If Contact3Pics.Count > 0 Then Contact3PicsCount = randomizer.Next(0, Contact3Pics.Count)
+					End If
+
+
+					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+					ShowPicture = True
+
+					' End Next Button
+					'On Error GoTo TryNextWithTease
+					'On Error Resume Next
+					' End Next Button
+				End If
 
 
 
 NullResponse:
 
 
-					If DomTask.Contains("@WritingTask(") Then
-						Dim WriteFlag As String = GetParentheses(DomTask, "@WritingTask(")
-						DomTask = DomTask.Replace(WriteFlag, PoundClean(WriteFlag))
-					End If
+				If DomTask.Contains("@WritingTask(") Then
+					Dim WriteFlag As String = GetParentheses(DomTask, "@WritingTask(")
+					DomTask = DomTask.Replace(WriteFlag, PoundClean(WriteFlag))
+				End If
 
-					If DomTask.Contains("@Contact1") Or DomTask.Contains("@Contact2") Or DomTask.Contains("@Contact3") Then SubWroteLast = True
+				If DomTask.Contains("@Contact1") Or DomTask.Contains("@Contact2") Or DomTask.Contains("@Contact3") Then SubWroteLast = True
 
-					Dim TypeName As String = domName.Text
-					Dim TypeColor As String = DomColor
-					Dim TypeFont As String = FrmSettings.FontComboBoxD.Text
-					Dim TypeSize As String = FrmSettings.NBFontSizeD.Value
-					Dim LineSpeaker As String = ""
-					If DomTask.Contains("@Contact1") Then
-						TypeName = FrmSettings.TBGlitter1.Text
-						TypeColor = Color2Html(FrmSettings.LBLGlitterNC1.ForeColor)
-						TypeFont = "Cambria"
-						TypeSize = "3"
-						LineSpeaker = "@Contact1 "
-					End If
-					If DomTask.Contains("@Contact2") Then
-						TypeName = FrmSettings.TBGlitter2.Text
-						TypeColor = Color2Html(FrmSettings.LBLGlitterNC2.ForeColor)
-						TypeFont = "Cambria"
-						TypeSize = "3"
-						LineSpeaker = "@Contact2 "
-					End If
-					If DomTask.Contains("@Contact3") Then
-						TypeName = FrmSettings.TBGlitter3.Text
-						TypeColor = Color2Html(FrmSettings.LBLGlitterNC3.ForeColor)
-						TypeFont = "Cambria"
-						TypeSize = "3"
-						LineSpeaker = "@Contact3 "
-					End If
-
-
-					If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
-						Dim EmoteArray() As String = Split(DomTask)
-						For i As Integer = 0 To EmoteArray.Length - 1
-							Try
-								If EmoteArray(i).Contains("#") And LCase(EmoteArray(i)).Contains("emote") Then
-									EmoteArray(i) = EmoteArray(i).Replace(EmoteArray(i), "")
-								End If
-							Catch
-							End Try
-						Next
-						DomTask = Join(EmoteArray)
-					End If
-
-					'SaveBlogImage.Text = ""
-
-					'If RiskyDeal = True Then Me.Focus()
-
-					Dim LoopBuffer As Integer = 0
+				Dim TypeName As String = domName.Text
+				Dim TypeColor As String = DomColor
+				Dim TypeFont As String = FrmSettings.FontComboBoxD.Text
+				Dim TypeSize As String = FrmSettings.NBFontSizeD.Value
+				Dim LineSpeaker As String = ""
+				If DomTask.Contains("@Contact1") Then
+					TypeName = FrmSettings.TBGlitter1.Text
+					TypeColor = Color2Html(FrmSettings.LBLGlitterNC1.ForeColor)
+					TypeFont = "Cambria"
+					TypeSize = "3"
+					LineSpeaker = "@Contact1 "
+				End If
+				If DomTask.Contains("@Contact2") Then
+					TypeName = FrmSettings.TBGlitter2.Text
+					TypeColor = Color2Html(FrmSettings.LBLGlitterNC2.ForeColor)
+					TypeFont = "Cambria"
+					TypeSize = "3"
+					LineSpeaker = "@Contact2 "
+				End If
+				If DomTask.Contains("@Contact3") Then
+					TypeName = FrmSettings.TBGlitter3.Text
+					TypeColor = Color2Html(FrmSettings.LBLGlitterNC3.ForeColor)
+					TypeFont = "Cambria"
+					TypeSize = "3"
+					LineSpeaker = "@Contact3 "
+				End If
 
 
-
-					Do
-						LoopBuffer += 1
-
-						Debug.Print("############################### DomTask = " & DomTask)
-
-						DomTask = DomTask.Replace("#Null", "")
-						DomTask = PoundClean(DomTask)
-						If DomTask.Contains("@EmoteMessage") Then EmoMes = True
-						DomTask = CommandClean(DomTask)
-						DomTask = StripCommands(DomTask)
-						DomTask = DomTask.Replace("#Null", "")
-						DomTask = PoundClean(DomTask)
-
-						If LoopBuffer > 4 Then Exit Do
-
-					Loop Until Not DomTask.Contains("#") And Not DomTask.Contains("@")
-
-
-
-
-					'Debug.Print("NullResponse = " & NullResponse)
-					If CBHypnoGenNoText.Checked = True And HypnoGen = True Then GoTo HypNoResponse
-					If NullResponse = True Then GoTo NoResponse
-
-					' Dim AtArray() As String = Split(DomTask)
-					' For i As Integer = 0 To AtArray.Length - 1
-					'If AtArray(i) = "" Then GoTo AtBreak
-					'If AtArray(i) = "" Then GoTo AtNext
-					' If AtArray(i).Contains("@") Then
-					'AtArray(i) = AtArray(i).Replace(AtArray(i), "")
-					'End If
-					'AtNext:
-
-					' Next
-
-					'DomTask = Join(AtArray)
-
-					'AtBreak:
-
-
-					If DomTask.Contains("(") And DomTask.Contains(")") Then
-						Dim ParenReg As RegularExpressions.Regex
-						ParenReg = New RegularExpressions.Regex("\(([^\)]*)\)")
-						DomTask = DomTask.Replace(ParenReg.Match(DomTask).Value(), "")
-					End If
-
-					' Github Patch If SysMes = False And EmoMes = False Then
-					If SysMes = False And EmoMes = False And Not DomTask = "" Then
-
+				If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
+					Dim EmoteArray() As String = Split(DomTask)
+					For i As Integer = 0 To EmoteArray.Length - 1
 						Try
-							Dim UCASELine As String = UCase(DomTask.Substring(0, 1))
-							DomTask = DomTask.Remove(0, 1).Insert(0, UCASELine)
+							If EmoteArray(i).Contains("#") And LCase(EmoteArray(i)).Contains("emote") Then
+								EmoteArray(i) = EmoteArray(i).Replace(EmoteArray(i), "")
+							End If
 						Catch
 						End Try
+					Next
+					DomTask = Join(EmoteArray)
+				End If
+
+				'SaveBlogImage.Text = ""
+
+				'If RiskyDeal = True Then Me.Focus()
+
+				Dim LoopBuffer As Integer = 0
 
 
-						If FrmSettings.LCaseCheckBox.Checked = True Then DomTask = LCase(DomTask)
-						If FrmSettings.CBMeMyMine.Checked = True Then
-							Dim MeArray() As String = Split(DomTask)
-							For i As Integer = MeArray.Length - 1 To 0 Step -1
-								If UCase(MeArray(i)) = "ME" Then MeArray(i) = "Me"
-								If UCase(MeArray(i)) = "MY" Then MeArray(i) = "My"
-								If UCase(MeArray(i)) = "MINE" Then MeArray(i) = "Mine"
-								If UCase(MeArray(i)) = "I" Then MeArray(i) = "I"
-								If UCase(MeArray(i)) = "I'D" Then MeArray(i) = "I'd"
-								If UCase(MeArray(i)) = "I'M" Then MeArray(i) = "I'm"
-								If UCase(MeArray(i)) = "I'LL" Then MeArray(i) = "I'll"
-								If UCase(MeArray(i)) = "YOU" Then MeArray(i) = "you"
-								If UCase(MeArray(i)) = "YOUR" Then MeArray(i) = "your"
-								If UCase(MeArray(i)) = "YOURS" Then MeArray(i) = "yours"
-								If UCase(MeArray(i)) = "YOU'RE" Then MeArray(i) = "you're"
-								If UCase(MeArray(i)) = "YOU'D" Then MeArray(i) = "you'd"
-								If UCase(MeArray(i)) = "YOU'LL" Then MeArray(i) = "you'll"
-							Next
-							DomTask = Join(MeArray)
-						End If
-						If FrmSettings.apostropheCheckBox.Checked = True Then DomTask = DomTask.Replace("'", "")
-						If FrmSettings.commaCheckBox.Checked = True Then DomTask = DomTask.Replace(",", "")
-						If FrmSettings.periodCheckBox.Checked = True Then DomTask = DomTask.Replace(".", "")
 
-						' Try
-						'DomTask = DomTask.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
-						'Catch
-						'End Try
+				Do
+					LoopBuffer += 1
 
-						Dim EmoToggle As Boolean = True
-						For i As Integer = DomTask.Length - 1 To 0 Step -1
-							If DomTask.Substring(i, 1) = "*" Then
-								If EmoToggle = False Then
-									EmoToggle = True
-									DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
-								Else
-									EmoToggle = False
-									DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
-								End If
-							End If
+					Debug.Print("############################### DomTask = " & DomTask)
+
+					DomTask = DomTask.Replace("#Null", "")
+					DomTask = PoundClean(DomTask)
+					If DomTask.Contains("@EmoteMessage") Then EmoMes = True
+					DomTask = CommandClean(DomTask)
+					DomTask = StripCommands(DomTask)
+					DomTask = DomTask.Replace("#Null", "")
+					DomTask = PoundClean(DomTask)
+
+					If LoopBuffer > 4 Then Exit Do
+
+				Loop Until Not DomTask.Contains("#") And Not DomTask.Contains("@")
+
+
+
+
+				'Debug.Print("NullResponse = " & NullResponse)
+				If CBHypnoGenNoText.Checked = True And HypnoGen = True Then GoTo HypNoResponse
+				If NullResponse = True Then GoTo NoResponse
+
+				' Dim AtArray() As String = Split(DomTask)
+				' For i As Integer = 0 To AtArray.Length - 1
+				'If AtArray(i) = "" Then GoTo AtBreak
+				'If AtArray(i) = "" Then GoTo AtNext
+				' If AtArray(i).Contains("@") Then
+				'AtArray(i) = AtArray(i).Replace(AtArray(i), "")
+				'End If
+				'AtNext:
+
+				' Next
+
+				'DomTask = Join(AtArray)
+
+				'AtBreak:
+
+
+				If DomTask.Contains("(") And DomTask.Contains(")") Then
+					Dim ParenReg As RegularExpressions.Regex
+					ParenReg = New RegularExpressions.Regex("\(([^\)]*)\)")
+					DomTask = DomTask.Replace(ParenReg.Match(DomTask).Value(), "")
+				End If
+
+				' Github Patch If SysMes = False And EmoMes = False Then
+				If SysMes = False And EmoMes = False And Not DomTask = "" Then
+
+					Try
+						Dim UCASELine As String = UCase(DomTask.Substring(0, 1))
+						DomTask = DomTask.Remove(0, 1).Insert(0, UCASELine)
+					Catch
+					End Try
+
+
+					If FrmSettings.LCaseCheckBox.Checked = True Then DomTask = LCase(DomTask)
+					If FrmSettings.CBMeMyMine.Checked = True Then
+						Dim MeArray() As String = Split(DomTask)
+						For i As Integer = MeArray.Length - 1 To 0 Step -1
+							If UCase(MeArray(i)) = "ME" Then MeArray(i) = "Me"
+							If UCase(MeArray(i)) = "MY" Then MeArray(i) = "My"
+							If UCase(MeArray(i)) = "MINE" Then MeArray(i) = "Mine"
+							If UCase(MeArray(i)) = "I" Then MeArray(i) = "I"
+							If UCase(MeArray(i)) = "I'D" Then MeArray(i) = "I'd"
+							If UCase(MeArray(i)) = "I'M" Then MeArray(i) = "I'm"
+							If UCase(MeArray(i)) = "I'LL" Then MeArray(i) = "I'll"
+							If UCase(MeArray(i)) = "YOU" Then MeArray(i) = "you"
+							If UCase(MeArray(i)) = "YOUR" Then MeArray(i) = "your"
+							If UCase(MeArray(i)) = "YOURS" Then MeArray(i) = "yours"
+							If UCase(MeArray(i)) = "YOU'RE" Then MeArray(i) = "you're"
+							If UCase(MeArray(i)) = "YOU'D" Then MeArray(i) = "you'd"
+							If UCase(MeArray(i)) = "YOU'LL" Then MeArray(i) = "you'll"
 						Next
+						DomTask = Join(MeArray)
+					End If
+					If FrmSettings.apostropheCheckBox.Checked = True Then DomTask = DomTask.Replace("'", "")
+					If FrmSettings.commaCheckBox.Checked = True Then DomTask = DomTask.Replace(",", "")
+					If FrmSettings.periodCheckBox.Checked = True Then DomTask = DomTask.Replace(".", "")
 
-						DomTask = DomTask.Replace(":d", ":D")
-						DomTask = DomTask.Replace(": d", ": D")
+					' Try
+					'DomTask = DomTask.Replace("*", FrmSettings.domemoteComboBox.Text.Substring(0, 1))
+					'Catch
+					'End Try
+
+					Dim EmoToggle As Boolean = True
+					For i As Integer = DomTask.Length - 1 To 0 Step -1
+						If DomTask.Substring(i, 1) = "*" Then
+							If EmoToggle = False Then
+								EmoToggle = True
+								DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
+							Else
+								EmoToggle = False
+								DomTask = DomTask.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
+							End If
+						End If
+					Next
+
+					DomTask = DomTask.Replace(":d", ":D")
+					DomTask = DomTask.Replace(": d", ": D")
 
 
-						'Typo Test
+					'Typo Test
 
-						Try
+					Try
 
-							Dim RestoreDomTask As String = DomTask
+						Dim RestoreDomTask As String = DomTask
 
-							If Not DomTask.Substring(0, 1) = FrmSettings.TBEmote.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False And TypoSwitch <> 0 And TyposDisabled = False _
+						If Not DomTask.Substring(0, 1) = FrmSettings.TBEmote.Text.Substring(0, 1) And Not DomTask.Contains("<") And YesOrNo = False And TypoSwitch <> 0 And TyposDisabled = False _
 							 And FrmSettings.TTSCheckBox.Checked = False Then
 
-								Dim TypoChance As Integer = randomizer.Next(0, 101)
+							Dim TypoChance As Integer = randomizer.Next(0, 101)
 
-								If TypoChance < FrmSettings.NBTypoChance.Value Or TypoSwitch = 2 Then
+							If TypoChance < FrmSettings.NBTypoChance.Value Or TypoSwitch = 2 Then
 
-									Try
+								Try
 
-										Dim TypoString As String
+									Dim TypoString As String
 
-										Dim TypoSplit As String() = DomTask.Split(" ")
+									Dim TypoSplit As String() = DomTask.Split(" ")
 
-										TempVal = randomizer.Next(0, TypoSplit.Count)
+									TempVal = randomizer.Next(0, TypoSplit.Count)
 
-										CorrectedWord = TypoSplit(TempVal)
+									CorrectedWord = TypoSplit(TempVal)
 
-										CorrectedWord = CorrectedWord.Replace(",", "")
-										CorrectedWord = CorrectedWord.Replace(".", "")
-										CorrectedWord = CorrectedWord.Replace("!", "")
-										CorrectedWord = CorrectedWord.Replace("?", "")
+									CorrectedWord = CorrectedWord.Replace(",", "")
+									CorrectedWord = CorrectedWord.Replace(".", "")
+									CorrectedWord = CorrectedWord.Replace("!", "")
+									CorrectedWord = CorrectedWord.Replace("?", "")
 
-										TypoString = "w d s f x"
-
-
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "a" Then TypoString = "q w s z x"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "b" Then TypoString = "f v g h n"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "c" Then TypoString = "x d f v b"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "d" Then TypoString = "s c f x e"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "e" Then TypoString = "s r w 3 d"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "f" Then TypoString = "d r g v c"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "g" Then TypoString = "f t b h y"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "h" Then TypoString = "g b n u j"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "i" Then TypoString = "o u j k l"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "j" Then TypoString = "k u i n h"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "k" Then TypoString = "j m , l i"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "l" Then TypoString = "; p . , i"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "m" Then TypoString = "n j k , l"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "n" Then TypoString = "b h j k m"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "o" Then TypoString = "p 0 i k ;"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "p" Then TypoString = "[ - o ; l"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "q" Then TypoString = "1 w s a 2"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "r" Then TypoString = "4 5 t f d"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "s" Then TypoString = "w d a z x"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "t" Then TypoString = "5 6 g y r"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "u" Then TypoString = "y 7 j i k"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "v" Then TypoString = "c f g h b"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "w" Then TypoString = "2 a e q s"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "x" Then TypoString = "z s d f c"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "y" Then TypoString = "t 7 h u g"
-										If LCase(TypoSplit(TempVal).Substring(0, 1)) = "z" Then TypoString = "a s x d c"
+									TypoString = "w d s f x"
 
 
-										Dim UpperChance As Integer = randomizer.Next(0, 101)
-										If UpperChance < 26 Then TypoString = UCase(TypoString)
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "a" Then TypoString = "q w s z x"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "b" Then TypoString = "f v g h n"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "c" Then TypoString = "x d f v b"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "d" Then TypoString = "s c f x e"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "e" Then TypoString = "s r w 3 d"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "f" Then TypoString = "d r g v c"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "g" Then TypoString = "f t b h y"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "h" Then TypoString = "g b n u j"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "i" Then TypoString = "o u j k l"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "j" Then TypoString = "k u i n h"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "k" Then TypoString = "j m , l i"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "l" Then TypoString = "; p . , i"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "m" Then TypoString = "n j k , l"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "n" Then TypoString = "b h j k m"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "o" Then TypoString = "p 0 i k ;"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "p" Then TypoString = "[ - o ; l"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "q" Then TypoString = "1 w s a 2"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "r" Then TypoString = "4 5 t f d"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "s" Then TypoString = "w d a z x"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "t" Then TypoString = "5 6 g y r"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "u" Then TypoString = "y 7 j i k"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "v" Then TypoString = "c f g h b"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "w" Then TypoString = "2 a e q s"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "x" Then TypoString = "z s d f c"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "y" Then TypoString = "t 7 h u g"
+									If LCase(TypoSplit(TempVal).Substring(0, 1)) = "z" Then TypoString = "a s x d c"
+
+
+									Dim UpperChance As Integer = randomizer.Next(0, 101)
+									If UpperChance < 26 Then TypoString = UCase(TypoString)
 
 
 
-										Dim GetTypo As String() = TypoString.Split(" ")
+									Dim GetTypo As String() = TypoString.Split(" ")
 
-										Dim MadeTypo As String = GetTypo(randomizer.Next(0, GetTypo.Count))
-
-
-										Dim DoubleChance As Integer = randomizer.Next(0, 101)
-										If DoubleChance < 11 Then MadeTypo = MadeTypo & LCase(GetTypo(randomizer.Next(0, GetTypo.Count)))
+									Dim MadeTypo As String = GetTypo(randomizer.Next(0, GetTypo.Count))
 
 
-										TypoSplit(TempVal) = TypoSplit(TempVal).Remove(0, 1)
+									Dim DoubleChance As Integer = randomizer.Next(0, 101)
+									If DoubleChance < 11 Then MadeTypo = MadeTypo & LCase(GetTypo(randomizer.Next(0, GetTypo.Count)))
 
-										Dim SpaceChance As Integer = randomizer.Next(0, 101)
-										If SpaceChance < 7 Then
-											TypoSplit(TempVal) = MadeTypo & " " & TypoSplit(TempVal)
-										Else
-											TypoSplit(TempVal) = MadeTypo & TypoSplit(TempVal)
 
-										End If
+									TypoSplit(TempVal) = TypoSplit(TempVal).Remove(0, 1)
 
-										DomTask = Join(TypoSplit)
+									Dim SpaceChance As Integer = randomizer.Next(0, 101)
+									If SpaceChance < 7 Then
+										TypoSplit(TempVal) = MadeTypo & " " & TypoSplit(TempVal)
+									Else
+										TypoSplit(TempVal) = MadeTypo & TypoSplit(TempVal)
 
-										CorrectedTypo = True
+									End If
 
-									Catch
+									DomTask = Join(TypoSplit)
 
-										DomTask = RestoreDomTask
-										CorrectedTypo = False
-									End Try
+									CorrectedTypo = True
 
-								End If
+								Catch
+
+									DomTask = RestoreDomTask
+									CorrectedTypo = False
+								End Try
 
 							End If
 
-							TypoSwitch = 1
+						End If
 
-						Catch
-						End Try
+						TypoSwitch = 1
 
-
-					End If
-
-					DomTask = DomTask.Replace("ATSYMBOL", "@")
-					DomTask = DomTask.Replace("atsymbol", "@")
-
-					If InputIcon = True Then
-						' github patch DomTask = DomTask & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png""/>"
-						DomTask = DomTask & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png"" title=""This icon means your Domme will remember your answer!""/>"
-						InputIcon = False
-					End If
-
-					DomTask = DomTask.Replace(" a a", " an a")
-					DomTask = DomTask.Replace(" a e", " an e")
-					DomTask = DomTask.Replace(" a i", " an i")
-					DomTask = DomTask.Replace(" a o", " an o")
-					DomTask = DomTask.Replace(" a u", " an u")
-
-					DomTask = DomTask.Replace(" an uni", " a uni")
-					DomTask = DomTask.Replace(" an utensil", " a utensil")
-					DomTask = DomTask.Replace(" an ukulele", " a ukulele")
-					DomTask = DomTask.Replace(" an use", " a use")
-					DomTask = DomTask.Replace(" an urethra", " a urethra")
-					DomTask = DomTask.Replace(" an urine", " a urine")
-					DomTask = DomTask.Replace(" an usual", " a usual")
-					DomTask = DomTask.Replace(" an utility", " a utility")
-					DomTask = DomTask.Replace(" an uterus", " a uterus")
-					DomTask = DomTask.Replace(" an utopia", " a utopia")
+					Catch
+					End Try
 
 
-					'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
-					' If Sync of Reseults is activated
-					' Wait for the ImageFetcher to Finish 
-					If BWimageFetcher.TriggerRequired _
+				End If
+
+				DomTask = DomTask.Replace("ATSYMBOL", "@")
+				DomTask = DomTask.Replace("atsymbol", "@")
+
+				If InputIcon = True Then
+					' github patch DomTask = DomTask & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png""/>"
+					DomTask = DomTask & " <img src=""file://" & Application.StartupPath & "/Images/System/input.png"" title=""This icon means your Domme will remember your answer!""/>"
+					InputIcon = False
+				End If
+
+				DomTask = DomTask.Replace(" a a", " an a")
+				DomTask = DomTask.Replace(" a e", " an e")
+				DomTask = DomTask.Replace(" a i", " an i")
+				DomTask = DomTask.Replace(" a o", " an o")
+				DomTask = DomTask.Replace(" a u", " an u")
+
+				DomTask = DomTask.Replace(" an uni", " a uni")
+				DomTask = DomTask.Replace(" an utensil", " a utensil")
+				DomTask = DomTask.Replace(" an ukulele", " a ukulele")
+				DomTask = DomTask.Replace(" an use", " a use")
+				DomTask = DomTask.Replace(" an urethra", " a urethra")
+				DomTask = DomTask.Replace(" an urine", " a urine")
+				DomTask = DomTask.Replace(" an usual", " a usual")
+				DomTask = DomTask.Replace(" an utility", " a utility")
+				DomTask = DomTask.Replace(" an uterus", " a uterus")
+				DomTask = DomTask.Replace(" an utopia", " a utopia")
+
+
+				'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
+				' If Sync of Reseults is activated
+				' Wait for the ImageFetcher to Finish 
+				If BWimageFetcher.TriggerRequired _
 					Then BWimageFetcher.WaitToFinish()
 
-					Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
+				Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
-					If NullResponse = False And DomTask <> "" Then
+				If NullResponse = False And DomTask <> "" Then
 
-						If UCase(DomTask) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomTask = "<b>Tease AI has been reset</b>"
+					If UCase(DomTask) = "<B>TEASE AI HAS BEEN RESET</B>" Then DomTask = "<b>Tease AI has been reset</b>"
 
 
-						If SysMes = True Then
-							Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & DomTask & "</b><br></font></body>"
-							SysMes = False
-							ChatText.DocumentText = Chat
-							ChatText2.DocumentText = Chat
-							ChatReadyState()
-							ScrollChatDown()
-							GoTo EndSysMes
-						End If
+					If SysMes = True Then
+						Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""SteelBlue""><b>" & DomTask & "</b><br></font></body>"
+						SysMes = False
+						ChatText.DocumentText = Chat
+						ChatText2.DocumentText = Chat
+						ChatReadyState()
+						GoTo EndSysMes
+					End If
 
-						If EmoMes = True Then
-							Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""" &
+					If EmoMes = True Then
+						Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & Chat & "<font color=""" &
 						   TypeColor & """><b><i>" & DomTask & "</i></b><br></font></body>"
-							EmoMes = False
-							ChatText.DocumentText = Chat
-							ChatText2.DocumentText = Chat
-							ChatReadyState()
-							ScrollChatDown()
-							GoTo EndSysMes
-						End If
+						EmoMes = False
+						ChatText.DocumentText = Chat
+						ChatText2.DocumentText = Chat
+						ChatReadyState()
+						GoTo EndSysMes
+					End If
 
-						' Add timestamps to domme response if the option is checked in the menu
-						If FrmSettings.timestampCheckBox.Checked = True And FrmSettings.CBWebtease.Checked = False Then
-							Chat = Chat & "<font face=""Cambria"" size=""2"" color=""DimGray"">" & (Date.Now.ToString("hh:mm tt ")) & "</font>"
-						End If
-
+					' Add timestamps to domme response if the option is checked in the menu
+					If FrmSettings.timestampCheckBox.Checked = True And FrmSettings.CBWebtease.Checked = False Then
+						Chat = Chat & "<font face=""Cambria"" size=""2"" color=""DimGray"">" & (Date.Now.ToString("hh:mm tt ")) & "</font>"
+					End If
 
 
-						If SubWroteLast = False And FrmSettings.shownamesCheckBox.Checked = False Then
+
+					If SubWroteLast = False And FrmSettings.shownamesCheckBox.Checked = False Then
 
 
-							If FrmSettings.CBWebtease.Checked = True Then
-								Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
+						If FrmSettings.CBWebtease.Checked = True Then
+							Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
 								 TextColor & """><center>" & DomTask & "</center><br></font></body>"
-							Else
-								Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-								 TextColor & """>" & Chat & DomTask & "<br></font></body>"
-							End If
-
-
-							ChatText.DocumentText = Chat
-							ChatText2.DocumentText = Chat
-							ChatReadyState()
-							ScrollChatDown()
-
-							If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
-						  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
-
-
 						Else
+							Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
+								 TextColor & """>" & Chat & DomTask & "<br></font></body>"
+						End If
 
 
-							If FrmSettings.CBWebtease.Checked = True Then
-								Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
-							  TextColor & """><center>" & DomTask & "</center><br></font></body>"
-							Else
-								Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-							TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
-							End If
+						ChatText.DocumentText = Chat
+						ChatText2.DocumentText = Chat
+						ChatReadyState()
 
-
-
-
-
-							TypeToggle = 0
-							ChatText.DocumentText = Chat
-							ChatText2.DocumentText = Chat
-							ChatReadyState()
-							ScrollChatDown()
-
-							If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
+						If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
 						  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
 
+
+					Else
+
+
+						If FrmSettings.CBWebtease.Checked = True Then
+							Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & "</body><body style=""word-wrap:break-word;"">" & "<font face=""" & FrmSettings.FontComboBoxD.Text & """ size=""" & FrmSettings.NBFontSizeD.Value & """ color=""" &
+							  TextColor & """><center>" & DomTask & "</center><br></font></body>"
+						Else
+							Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""Cambria"" size=""3"" font color=""" &
+							TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
 						End If
+
+
+
+
+
+						TypeToggle = 0
+						ChatText.DocumentText = Chat
+						ChatText2.DocumentText = Chat
+						ChatReadyState()
+
+						If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
+						  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomTask & "<br></font></body>"
+
+					End If
 
 EndSysMes:
 
 
 
-						ScrollChatDown()
+					ScrollChatDown()
 
-						If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
+					If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
 
-						' Dsplay the next picture in the slideshow as the domme responds if "With Tease" radio button is checked
+					' Dsplay the next picture in the slideshow as the domme responds if "With Tease" radio button is checked
 
 
 
-						SubWroteLast = False
+					SubWroteLast = False
 
-					End If
+				End If
 
-					' If Sync of Reseults is activated
-					' Wait for the ImageFetcher to Finish 
-					If BWimageFetcher.TriggerRequired _
+				' If Sync of Reseults is activated
+				' Wait for the ImageFetcher to Finish 
+				If BWimageFetcher.TriggerRequired _
 					Then BWimageFetcher.WaitToFinish()
 
-					If JustShowedBlogImage = True Then GoTo HypNoResponse
+				If JustShowedBlogImage = True Then GoTo HypNoResponse
 
 
-					If ShowPicture = True Or DommeImageFound = True Then
+				If ShowPicture = True Or DommeImageFound = True Then
 
 
 
-						Try
-							If RiskyDeal = True Then
-								' ######################## Risky Pick #########################
-								FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
-							ElseIf DommeImageFound = True Then
-								' ######################## Domme Tags #########################
-								ShowImage(DommeImageSTR, True)
-								DommeImageFound = False
-							ElseIf LocalImageFound = True Then
-								' ######################## Local Img. #########################
-								ShowImage(LocalImageSTR, True)
-								LocalImageFound = False
-							Else
-								' ######################## Slideshow ##########################
-								ShowImage(DomPic, True)
-							End If
-						Catch ex As Exception
-							'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
-							Debug.Print(ex.Message & vbCrLf & ex.StackTrace)
-							ClearMainPictureBox()
-							' GoTo TryNextWithTease
-						End Try
-						If FrmSettings.landscapeCheckBox.Checked = True Then
-							If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
-								mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
-							Else
-								mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-							End If
+					Try
+						If RiskyDeal = True Then
+							' ######################## Risky Pick #########################
+							FrmCardList.PBRiskyPic.Image = Image.FromFile(DomPic)
+						ElseIf DommeImageFound = True Then
+							' ######################## Domme Tags #########################
+							ShowImage(DommeImageSTR, True)
+							DommeImageFound = False
+						ElseIf LocalImageFound = True Then
+							' ######################## Local Img. #########################
+							ShowImage(LocalImageSTR, True)
+							LocalImageFound = False
+						Else
+							' ######################## Slideshow ##########################
+							ShowImage(DomPic, True)
+						End If
+					Catch ex As Exception
+						'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
+						Debug.Print(ex.Message & vbCrLf & ex.StackTrace)
+						ClearMainPictureBox()
+						' GoTo TryNextWithTease
+					End Try
+					If FrmSettings.landscapeCheckBox.Checked = True Then
+						If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
+							mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
 						Else
 							mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
 						End If
-
-						mainPictureBox.Refresh()
-						mainPictureBox.Invalidate()
-						ShowPicture = False
+					Else
+						mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
 					End If
+
+					mainPictureBox.Refresh()
+					mainPictureBox.Invalidate()
+					ShowPicture = False
+				End If
 
 
 
 HypNoResponse:
 
-					If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
-						Debug.Print(DomTask)
-						DomTask = StripFormat(DomTask)
+				If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
+					Debug.Print(DomTask)
+					DomTask = StripFormat(DomTask)
 
-						mciSendString("CLOSE Speech1", String.Empty, 0, 0)
-						mciSendString("CLOSE Echo1", String.Empty, 0, 0)
+					mciSendString("CLOSE Speech1", String.Empty, 0, 0)
+					mciSendString("CLOSE Echo1", String.Empty, 0, 0)
 
-						Dim SpeechDir As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\TempWav.wav"
+					Dim SpeechDir As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\TempWav.wav"
 
-						synth2.SelectVoice(FrmSettings.TTSComboBox.Text)
-						synth2.SetOutputToWaveFile(SpeechDir, New SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono))
-						synth2.Speak(DomTask)
-						synth2.SetOutputToNull()
+					synth2.SelectVoice(FrmSettings.TTSComboBox.Text)
+					synth2.SetOutputToWaveFile(SpeechDir, New SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono))
+					synth2.Speak(DomTask)
+					synth2.SetOutputToNull()
 
-						SpeechDir = GetShortPathName(SpeechDir)
+					SpeechDir = GetShortPathName(SpeechDir)
 
-						mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Speech1", String.Empty, 0, 0)
-						mciSendString("PLAY Speech1 FROM 0", String.Empty, 0, 0)
+					mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Speech1", String.Empty, 0, 0)
+					mciSendString("PLAY Speech1 FROM 0", String.Empty, 0, 0)
 
 
-						If CBHypnoGenPhase.Checked And HypnoGen = True Then
-							Delay(0.4)
-							mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Echo1", String.Empty, 0, 0)
-							mciSendString("PLAY Echo1 FROM 0", String.Empty, 0, 0)
-						End If
-
+					If CBHypnoGenPhase.Checked And HypnoGen = True Then
+						Delay(0.4)
+						mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Echo1", String.Empty, 0, 0)
+						mciSendString("PLAY Echo1 FROM 0", String.Empty, 0, 0)
 					End If
+
+				End If
 
 NoResponse:
-					' If Sync of Reseults is activated
-					' Wait for the ImageFetcher to Finish 
-					If BWimageFetcher.TriggerRequired _
+				' If Sync of Reseults is activated
+				' Wait for the ImageFetcher to Finish 
+				If BWimageFetcher.TriggerRequired _
 					Then BWimageFetcher.WaitToFinish()
 
-					Try
-						If mainPictureBox.Visible = True Then
-							If ImageLocation.Contains("/") Then
-								Debug.Print("Timer1 PictureStrip")
-								PictureStrip.Items(0).Enabled = True
-								PictureStrip.Items(1).Enabled = True
-								PictureStrip.Items(2).Enabled = True
-								PictureStrip.Items(3).Enabled = True
-								PictureStrip.Items(4).Enabled = True
-								PictureStrip.Items(5).Enabled = True
-							Else
-								Debug.Print("Timer1 PictureStrip")
-								PictureStrip.Items(0).Enabled = True
-								PictureStrip.Items(1).Enabled = False
-								PictureStrip.Items(2).Enabled = False
-								PictureStrip.Items(3).Enabled = False
-								PictureStrip.Items(4).Enabled = False
-								PictureStrip.Items(5).Enabled = False
-							End If
-						End If
-					Catch
-						PictureStrip.Items(0).Enabled = False
-						PictureStrip.Items(1).Enabled = False
-						PictureStrip.Items(2).Enabled = False
-						PictureStrip.Items(3).Enabled = False
-						PictureStrip.Items(4).Enabled = False
-						PictureStrip.Items(5).Enabled = False
-					End Try
-
-
-					If CorrectedTypo = True Then
-						CorrectedTypo = False
-						'DomTask = "*" & CorrectedWord
-						DomTask = LineSpeaker & "*" & CorrectedWord
-						TypingDelayGeneric()
-						Return
-					End If
-
-					StrokeSpeedCheck()
-
-					If SubStroking = False Then
-						StrokePace = 0
-						If FrmSettings.TBWebStop.Text <> "" Then
-							Try
-								FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
-							Catch
-							End Try
-						End If
-					End If
-
-					If RLGLGame = True And RedLight = False Then
-						If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused) Then
-							DomWMP.Ctlcontrols.play()
-
-
-							AskedToSpeedUp = False
-							AskedToSlowDown = False
-							SubStroking = True
-							SubEdging = False
-							SubHoldingEdge = False
-							StopMetronome = False
-							StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
-							StrokePace = 50 * Math.Round(StrokePace / 50)
-							StrokePaceTimer.Interval = StrokePace
-							RLGLTauntTick = randomizer.Next(20, 31)
-							' VideoTauntTick = randomizer.Next(20, 31)
-							RLGLTauntTimer.Start()
-
-						End If
-					End If
-
-					If RLGLGame = True And RedLight = True Then
-						If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
-							DomWMP.Ctlcontrols.pause()
-							SubStroking = False
-							StopMetronome = True
-							StrokePace = 0
-							'VideoTauntTimer.Stop()
-						End If
-					End If
-
-
-
-					NullResponse = False
-
-					If FollowUp <> "" Then
-						DomTask = FollowUp
-						Debug.Print("FollowUp DomTask = " & DomTask)
-						FollowUp = ""
-						TypingDelayGeneric()
-						Exit Sub
-					End If
-
-					DomTypeCheck = False
-					DomTyping = False
-					'StringLength = 20
-					StringLength = randomizer.Next(8, 16)
-
-					If SubStroking = False Then StopMetronome = True
-					If SubHoldingEdge = True Then
-						StrokePace = 0
-					End If
-					'Debug.Print("End of DomTask #######################################################################################################################")
-					'JustShowedBlogImage = False
-
-					If TempScriptCount = 0 Then
-						JustShowedBlogImage = False
-						JustShowedSlideshowImage = False
-					End If
-
-
-					If CBTCockActive = True Then
-						CBTCockActive = False
-						CBTCock()
-					End If
-
-					If CBTBallsActive = True Then
-						CBTBallsActive = False
-						CBTBalls()
-					End If
-
-					If CBTBothActive = True Then
-						CBTBothActive = False
-						CBTBoth()
-					End If
-
-					If CustomTaskActive = True Then
-						CustomTaskActive = False
-						RunCustomTask()
-					End If
-
-					If YesOrNo = False Then
-						If RapidCode = True Then
-							RunFileText()
+				Try
+					If mainPictureBox.Visible = True Then
+						If ImageLocation.Contains("/") Then
+							Debug.Print("Timer1 PictureStrip")
+							PictureStrip.Items(0).Enabled = True
+							PictureStrip.Items(1).Enabled = True
+							PictureStrip.Items(2).Enabled = True
+							PictureStrip.Items(3).Enabled = True
+							PictureStrip.Items(4).Enabled = True
+							PictureStrip.Items(5).Enabled = True
 						Else
-							ScriptTick = randomizer.Next(4, 7)
-							If RapidFire = True Then ScriptTick = 1
-							If RiskyDeal = True Then ScriptTick = 2
-							ScriptTimer.Start()
+							Debug.Print("Timer1 PictureStrip")
+							PictureStrip.Items(0).Enabled = True
+							PictureStrip.Items(1).Enabled = False
+							PictureStrip.Items(2).Enabled = False
+							PictureStrip.Items(3).Enabled = False
+							PictureStrip.Items(4).Enabled = False
+							PictureStrip.Items(5).Enabled = False
 						End If
 					End If
+				Catch
+					PictureStrip.Items(0).Enabled = False
+					PictureStrip.Items(1).Enabled = False
+					PictureStrip.Items(2).Enabled = False
+					PictureStrip.Items(3).Enabled = False
+					PictureStrip.Items(4).Enabled = False
+					PictureStrip.Items(5).Enabled = False
+				End Try
 
-					If YesOrNo = True And RiskyDeal = True Then
-						FrmCardList.BTNPickIt.Visible = True
-						FrmCardList.BTNRiskIt.Visible = True
-						FrmCardList.HighlightCaseLabelsOffer()
+
+				If CorrectedTypo = True Then
+					CorrectedTypo = False
+					'DomTask = "*" & CorrectedWord
+					DomTask = LineSpeaker & "*" & CorrectedWord
+					TypingDelayGeneric()
+					Return
+				End If
+
+				StrokeSpeedCheck()
+
+				If SubStroking = False Then
+					StrokePace = 0
+					If FrmSettings.TBWebStop.Text <> "" Then
+						Try
+							FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
+						Catch
+						End Try
+					End If
+				End If
+
+				If RLGLGame = True And RedLight = False Then
+					If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused) Then
+						DomWMP.Ctlcontrols.play()
+
+
+						AskedToSpeedUp = False
+						AskedToSlowDown = False
+						SubStroking = True
+						SubEdging = False
+						SubHoldingEdge = False
+						StopMetronome = False
+						StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+						StrokePace = 50 * Math.Round(StrokePace / 50)
+						StrokePaceTimer.Interval = StrokePace
+						RLGLTauntTick = randomizer.Next(20, 31)
+						' VideoTauntTick = randomizer.Next(20, 31)
+						RLGLTauntTimer.Start()
 
 					End If
+				End If
 
-					GotoFlag = False
-
-
-					If SubGaveUp = True Then
-
-						SubGaveUp = False
-
-						AskedToGiveUpSection = False
-						If TnASlides.Enabled = True Then TnASlides.Stop()
-
-						Dim WasStroking As Boolean = SubStroking
-						Dim WasEdging As Boolean = SubEdging
-						Dim WasHolding As Boolean = SubHoldingEdge
-
-						StopEverything()
-						ModuleEnd = False
-						ShowModule = False
-
-						'DelayFlag = True
-						'DelayTick = randomizer.Next(3, 6)
-
-						'DelayTimer.Start()
-
-						'Do
-						'   Application.DoEvents()
-						'Loop Until DelayFlag = False
-
-						'LastScriptCountdown -= 1
-						'Debug.Print("LastScriptCountdown = " & LastScriptCountdown)
-
-						'FrmSettings.LBLOrgasmCountdown.Text = LastScriptCountdown
-
-						'StrokeTauntVal = -1
-
-						'If TeaseTick < 1 And Playlist = False Then
-						'RunLastScript()
-						'ElseIf WasStroking Then
-						'RunModuleScript(False)
-						'Else
-						'RunLinkScript()
-						'End If
+				If RLGLGame = True And RedLight = True Then
+					If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
+						DomWMP.Ctlcontrols.pause()
+						SubStroking = False
+						StopMetronome = True
+						StrokePace = 0
+						'VideoTauntTimer.Stop()
+					End If
+				End If
 
 
 
-						If ReturnFlag Then
-							ShowModule = True
-							ScriptTimer.Start()
-						ElseIf TeaseTick < 1 And Playlist = False Then
-							StrokeTauntVal = -1
-							RunLastScript()
-						ElseIf WasStroking And Not WasEdging And Not WasHolding Then
-							StrokeTauntVal = -1
-							RunModuleScript(False)
-						Else
-							StrokeTauntVal = -1
-							RunLinkScript()
-						End If
+				NullResponse = False
+
+				If FollowUp <> "" Then
+					DomTask = FollowUp
+					Debug.Print("FollowUp DomTask = " & DomTask)
+					FollowUp = ""
+					TypingDelayGeneric()
+					Exit Sub
+				End If
+
+				DomTypeCheck = False
+				DomTyping = False
+				'StringLength = 20
+				StringLength = randomizer.Next(8, 16)
+
+				If SubStroking = False Then StopMetronome = True
+				If SubHoldingEdge = True Then
+					StrokePace = 0
+				End If
+				'Debug.Print("End of DomTask #######################################################################################################################")
+				'JustShowedBlogImage = False
+
+				If TempScriptCount = 0 Then
+					JustShowedBlogImage = False
+					JustShowedSlideshowImage = False
+				End If
+
+
+				If CBTCockActive = True Then
+					CBTCockActive = False
+					CBTCock()
+				End If
+
+				If CBTBallsActive = True Then
+					CBTBallsActive = False
+					CBTBalls()
+				End If
+
+				If CBTBothActive = True Then
+					CBTBothActive = False
+					CBTBoth()
+				End If
+
+				If CustomTaskActive = True Then
+					CustomTaskActive = False
+					RunCustomTask()
+				End If
+
+				If YesOrNo = False Then
+					If RapidCode = True Then
+						RunFileText()
+					Else
+						ScriptTick = randomizer.Next(4, 7)
+						If RapidFire = True Then ScriptTick = 1
+						If RiskyDeal = True Then ScriptTick = 2
+						ScriptTimer.Start()
+					End If
+				End If
+
+				If YesOrNo = True And RiskyDeal = True Then
+					FrmCardList.BTNPickIt.Visible = True
+					FrmCardList.BTNRiskIt.Visible = True
+					FrmCardList.HighlightCaseLabelsOffer()
+
+				End If
+
+				GotoFlag = False
+
+
+				If SubGaveUp = True Then
+
+					SubGaveUp = False
+
+					AskedToGiveUpSection = False
+					If TnASlides.Enabled = True Then TnASlides.Stop()
+
+					Dim WasStroking As Boolean = SubStroking
+					Dim WasEdging As Boolean = SubEdging
+					Dim WasHolding As Boolean = SubHoldingEdge
+
+					StopEverything()
+					ModuleEnd = False
+					ShowModule = False
+
+					'DelayFlag = True
+					'DelayTick = randomizer.Next(3, 6)
+
+					'DelayTimer.Start()
+
+					'Do
+					'   Application.DoEvents()
+					'Loop Until DelayFlag = False
+
+					'LastScriptCountdown -= 1
+					'Debug.Print("LastScriptCountdown = " & LastScriptCountdown)
+
+					'FrmSettings.LBLOrgasmCountdown.Text = LastScriptCountdown
+
+					'StrokeTauntVal = -1
+
+					'If TeaseTick < 1 And Playlist = False Then
+					'RunLastScript()
+					'ElseIf WasStroking Then
+					'RunModuleScript(False)
+					'Else
+					'RunLinkScript()
+					'End If
 
 
 
+					If ReturnFlag Then
+						ShowModule = True
+						ScriptTimer.Start()
+					ElseIf TeaseTick < 1 And Playlist = False Then
+						StrokeTauntVal = -1
+						RunLastScript()
+					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
+						StrokeTauntVal = -1
+						RunModuleScript(False)
+					Else
+						StrokeTauntVal = -1
+						RunLinkScript()
 					End If
 
 
 
 				End If
+
+
+
+			End If
 		End If
 
 	End Sub
@@ -6576,14 +6546,12 @@ NoResponse:
 					ChatText.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
 					ChatText2.DocumentText = Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
 					ChatReadyState()
-					ScrollChatDown()
 
 				Else
 
 					ChatText.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
 					ChatText2.DocumentText = Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
 					ChatReadyState()
-					ScrollChatDown()
 
 				End If
 
@@ -6969,7 +6937,6 @@ TryNextWithTease:
 					ChatText.DocumentText = Chat
 					ChatText2.DocumentText = Chat
 					ChatReadyState()
-					ScrollChatDown()
 					GoTo EndSysMes
 				End If
 
@@ -6980,7 +6947,6 @@ TryNextWithTease:
 					ChatText.DocumentText = Chat
 					ChatText2.DocumentText = Chat
 					ChatReadyState()
-					ScrollChatDown()
 					GoTo EndSysMes
 				End If
 
@@ -7005,8 +6971,7 @@ TryNextWithTease:
 
 					ChatText.DocumentText = Chat
 					ChatText2.DocumentText = Chat
-				ChatReadyState()
-					ScrollChatDown()
+					ChatReadyState()
 
 					If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
 			  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomChat & "<br></font></body>"
@@ -7025,7 +6990,6 @@ TryNextWithTease:
 					ChatText.DocumentText = Chat
 					ChatText2.DocumentText = Chat
 					ChatReadyState()
-					ScrollChatDown()
 
 					If RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
 			  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & DomChat & "<br></font></body>"
@@ -7320,7 +7284,6 @@ NullResponseLine2:
 				My.Settings.RecentSlideshows.Add(RecentSlideshows(i))
 			Next
 
-			My.Settings.Save()
 
 			SlideshowLoaded = True
 
@@ -8627,11 +8590,9 @@ CensorConstant:
 
 	Private Sub domName_Leave(sender As System.Object, e As System.EventArgs) Handles domName.Leave
 		My.Settings.DomName = domName.Text
-		My.Settings.Save()
 	End Sub
 	Private Sub subName_Leave(sender As System.Object, e As System.EventArgs) Handles subName.Leave
 		My.Settings.SubName = subName.Text
-		My.Settings.Save()
 	End Sub
 
 
@@ -9076,7 +9037,6 @@ StatusUpdateEnd:
 
 			domAvatar.Image = Image.FromFile(OpenFileDialog1.FileName)
 			My.Settings.DomAvatarSave = OpenFileDialog1.FileName
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -11141,7 +11101,6 @@ TaskCleanSet:
 
 		If StringClean.Contains("@ChastityOn") Then
 			My.Settings.Chastity = True
-			My.Settings.Save()
 			FrmSettings.LBLChastityState.Text = "ON"
 			FrmSettings.LBLChastityState.ForeColor = Color.Green
 			StringClean = StringClean.Replace("@ChastityOn", "")
@@ -11149,7 +11108,6 @@ TaskCleanSet:
 
 		If StringClean.Contains("@ChastityOff") Then
 			My.Settings.Chastity = False
-			My.Settings.Save()
 			FrmSettings.LBLChastityState.Text = "OFF"
 			FrmSettings.LBLChastityState.ForeColor = Color.Red
 			StringClean = StringClean.Replace("@ChastityOff", "")
@@ -11180,7 +11138,6 @@ TaskCleanSet:
 			My.Settings.SilverTokens = SilverTokens
 			My.Settings.GoldTokens = GoldTokens
 
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@AddTokens(" & TokenFlag & ")", "")
 
@@ -11216,7 +11173,6 @@ TaskCleanSet:
 			My.Settings.SilverTokens = SilverTokens
 			My.Settings.GoldTokens = GoldTokens
 
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@RemoveTokens(" & TokenFlag & ")", "")
 
@@ -11225,7 +11181,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add1Token") Then
 			BronzeTokens += 1
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 1 Bronze token!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add1Token", "")
@@ -11234,7 +11189,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add3Tokens") Then
 			BronzeTokens += 3
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 3 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add3Tokens", "")
@@ -11243,7 +11197,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add5Tokens") Then
 			BronzeTokens += 5
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			StringClean = StringClean.Replace("@Add5Tokens", "")
 			MessageBox.Show(Me, domName.Text & " has given you 5 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -11252,7 +11205,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add10Tokens") Then
 			BronzeTokens += 10
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 10 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add10Tokens", "")
@@ -11261,7 +11213,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add25Tokens") Then
 			BronzeTokens += 25
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 25 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add25Tokens", "")
@@ -11270,7 +11221,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add50Tokens") Then
 			BronzeTokens += 50
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 50 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add50Tokens", "")
@@ -11279,7 +11229,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Add100Tokens") Then
 			BronzeTokens += 100
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has given you 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add50Tokens", "")
@@ -11288,7 +11237,6 @@ TaskCleanSet:
 		If StringClean.Contains("@Remove100Tokens") Then
 			BronzeTokens -= 100
 			My.Settings.BronzeTokens = BronzeTokens
-			My.Settings.Save()
 			FrmCardList.UpdateBronzeTokens()
 			MessageBox.Show(Me, domName.Text & " has taken 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@@Remove100Tokens", "")
@@ -11301,7 +11249,6 @@ TaskCleanSet:
 			'Github Patch
 			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
 
-			My.Settings.Save()
 			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
 			StringClean = StringClean.Replace("@UpdateOrgasm", "")
 		End If
@@ -11312,7 +11259,6 @@ TaskCleanSet:
 			' GithubPatch
 			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
 
-			My.Settings.Save()
 			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
 			StringClean = StringClean.Replace("@UpdateRuined", "")
 		End If
@@ -11441,7 +11387,6 @@ TaskCleanSet:
 			If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
 
 			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@DecreaseOrgasmChance", "")
 		End If
@@ -11454,7 +11399,6 @@ TaskCleanSet:
 			If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
 
 			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@IncreaseOrgasmChance", "")
 		End If
@@ -11467,7 +11411,6 @@ TaskCleanSet:
 			If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
 
 			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@DecreaseRuinChance", "")
 		End If
@@ -11480,7 +11423,6 @@ TaskCleanSet:
 			If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
 
 			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
-			My.Settings.Save()
 
 			StringClean = StringClean.Replace("@IncreaseRuinChance", "")
 		End If
@@ -11840,7 +11782,6 @@ TaskCleanSet:
 			If StartStrokingCount = 0 Then FirstRound = True
 			'If FirstRound = True Then My.Settings.Sys_SubLeftEarly += 1
 			If FirstRound = True Then SetVariable("SYS_SubLeftEarly", Val(GetVariable("SYS_SubLeftEarly")) + 1)
-			My.Settings.Save()
 			StartStrokingCount += 1
 			StopMetronome = False
 			StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
@@ -12659,7 +12600,6 @@ OrgasmDecided:
 		If StringClean.Contains("@EndTease") Then
 			SetVariable("SYS_SubLeftEarly", 0)
 			'My.Settings.Sys_SubLeftEarly = 0
-			'My.Settings.Save()
 			StopEverything()
 			ResetButton()
 			ResetFlag = True
@@ -13085,7 +13025,6 @@ OrgasmDecided:
 			SaveExercise()
 			CBVitalSubDomTask.Checked = False
 			My.Settings.VitalSubAssignments = False
-			My.Settings.Save()
 			StringClean = StringClean.Replace("@VitalSubAssignment", "")
 		End If
 
@@ -15557,4321 +15496,6 @@ Skip_RandomFile:
 	End Sub
 
 
-	Public Function FilterListBak(ByVal ListClean As List(Of String)) As List(Of String)
-
-		ListClean.Add("### BUFFER LINE ###")
-
-		'For i As Integer = 0 To ListClean.Count - 1
-		'Debug.Print(i & ". " & ListClean(i))
-		'Next
-
-		FoundTag = "NULL"
-
-		Try
-			If File.Exists(_ImageFileNames(FileCount)) Then MainPictureImage = Path.GetDirectoryName(_ImageFileNames(FileCount))
-		Catch
-		End Try
-
-		'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
-		If File.Exists(MainPictureImage & "\ImageTags.txt") Then
-			' Read all lines of the given file.
-			Dim TagList As List(Of String) = Txt2List(MainPictureImage & "\ImageTags.txt")
-
-
-			'If SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And domVLC.Visible = False Then
-			If SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And DomWMP.Visible = False Then
-				Try
-					For t As Integer = 0 To TagList.Count - 1
-						'Debug.Print("TagList(t) = " & TagList(t))
-						If TagList(t).Contains(Path.GetFileName(_ImageFileNames(FileCount))) Then
-							FoundTag = TagList(t)
-							Dim FoundTagSplit As String() = Split(FoundTag)
-							For j As Integer = 0 To FoundTagSplit.Length - 1
-								If FoundTagSplit(j).Contains("TagGarment") Then
-									TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
-									TagGarment = TagGarment.Replace("-", " ")
-								End If
-
-								If FoundTagSplit(j).Contains("TagUnderwear") Then
-									TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
-									TagUnderwear = TagUnderwear.Replace("-", " ")
-								End If
-
-								If FoundTagSplit(j).Contains("TagTattoo") Then
-									TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
-									TagTattoo = TagTattoo.Replace("-", " ")
-								End If
-
-								If FoundTagSplit(j).Contains("TagSexToy") Then
-									TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
-									TagSexToy = TagSexToy.Replace("-", " ")
-								End If
-
-								If FoundTagSplit(j).Contains("TagFurniture") Then
-									TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
-									TagFurniture = TagFurniture.Replace("-", " ")
-								End If
-							Next
-							Exit For
-						End If
-					Next
-				Catch
-				End Try
-			End If
-
-
-			'Debug.Print("TagGarment = " & TagGarment)
-			'Debug.Print("TagUnderwear = " & TagUnderwear)
-			'Debug.Print("TagTattoo = " & TagTattoo)
-			'Debug.Print("TagSexToy = " & TagSexToy)
-			'Debug.Print("TagFurniture = " & TagFurniture)
-			'Debug.Print("FoundTag = " & FoundTag)
-
-
-
-		End If
-
-
-
-
-
-
-
-		Dim PoundCount As Integer = ListClean.Count
-		Dim PoundLine As Integer = PoundCount
-
-		Debug.Print("Begin FilterTest")
-
-
-
-
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Crazy") Then
-				If FrmSettings.crazyCheckBox.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@Crazy", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Vulgar") Then
-				If FrmSettings.vulgarCheckBox.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@Vulgar", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Supremacist") Then
-				If FrmSettings.supremacistCheckBox.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@Supremacist", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Sadistic") Then
-				If FrmSettings.sadisticCheckBox.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Degrading") Then
-				If FrmSettings.degradingCheckBox.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DommeLevel(") Then
-				If FilterCheck(GetParentheses(ListClean(PoundCount), "@DommeLevel("), FrmSettings.domlevelNumBox) = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DommeLevel1") Then
-				If FrmSettings.domlevelNumBox.Value <> 1 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@DommeLevel1", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DommeLevel2") Then
-				If FrmSettings.domlevelNumBox.Value <> 2 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@DommeLevel2", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DommeLevel3") Then
-				If FrmSettings.domlevelNumBox.Value <> 3 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@DommeLevel3", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DommeLevel4") Then
-				If FrmSettings.domlevelNumBox.Value <> 4 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@DommeLevel4", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DommeLevel5") Then
-				If FrmSettings.domlevelNumBox.Value <> 5 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@DommeLevel5", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SelfYoung") Then
-				If FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then 'Or DommeVideo = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SelfYoung") Then
-				If VideoTease = True Or TeaseVideo = True Then
-					If DommeVideo = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SelfOld") Then
-				If FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then 'Or DommeVideo = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SelfOld") Then
-				If VideoTease = True Or TeaseVideo = True Then
-					If DommeVideo = False Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Cup(") Then
-				If FilterCheck(GetParentheses(ListClean(PoundCount), "@Cup("), FrmSettings.boobComboBox) = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ACup") Then
-				If FrmSettings.boobComboBox.Text <> "A" Or JustShowedBlogImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@ACup", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BCup") Then
-				If FrmSettings.boobComboBox.Text <> "B" Or JustShowedBlogImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@BCup", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CCup") Then
-				If FrmSettings.boobComboBox.Text <> "C" Or JustShowedBlogImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@CCup", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DCup") Then
-				If FrmSettings.boobComboBox.Text <> "D" Or JustShowedBlogImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@DCup", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DDCup") Then
-				If FrmSettings.boobComboBox.Text <> "DD" Or JustShowedBlogImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@DDCup", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DDD+Cup") Then
-				If FrmSettings.boobComboBox.Text <> "DDD+" Or JustShowedBlogImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@DDD+Cup", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CockSmall") Then
-				If FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@CockSmall", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CockLarge") Then
-				If FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@CockLarge", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CockAverage") Then
-				If FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@CockLarge", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SubYoung") Then
-				If FrmSettings.subAgeNumBox.Value >= FrmSettings.NBSubAgeMin.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@SubYoung", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SubOld") Then
-				If FrmSettings.subAgeNumBox.Value <= FrmSettings.NBSubAgeMax.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@SubOld", "")
-			End If
-		Loop Until PoundCount = 0
-
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SubBirthday") Then
-				If FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@SubBirthday", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ValentinesDay") Then
-				If Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@ValentinesDay", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ChristmasEve") Then
-				If Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@ChristmasEve", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ChristmasDay") Then
-				If Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@ChristmasDay", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NewYearsEve") Then
-				If Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NewYearsEve", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NewYearsDay") Then
-				If Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NewYearsDay", "")
-			End If
-		Loop Until PoundCount = 0
-
-
-
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagFace") Then
-				If Not FoundTag.Contains("TagFace") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains Face")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagFace", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagBoobs") Then
-				If Not FoundTag.Contains("TagBoobs") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains Boobs")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagBoobs", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagPussy") Then
-				If Not FoundTag.Contains("TagPussy") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains Pussy")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPussy", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagAss") Then
-				If Not FoundTag.Contains("TagAss") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains Ass")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagAss", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagFeet") Then
-				If Not FoundTag.Contains("TagFeet") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains FullBody")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagFeet", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagLegs") Then
-				If Not FoundTag.Contains("TagLegs") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagLegs")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagLegs", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagMasturbating") Then
-				If Not FoundTag.Contains("TagMasturbating") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains Masturbating")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagMasturbating", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagSucking") Then
-				If Not FoundTag.Contains("TagSucking") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains Sucking")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagSucking", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagFullyDressed") Then
-				If Not FoundTag.Contains("TagFullyDressed") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains FullyDressed")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagFullyDressed", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagHalfDressed") Then
-				If Not FoundTag.Contains("TagHalfDressed") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains HalfDressed")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagHalfDressed", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagGarmentCovering") Then
-				If Not FoundTag.Contains("TagGarmentCovering") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagGarmentCovering")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagGarmentCovering", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagHandsCovering") Then
-				If Not FoundTag.Contains("TagHandsCovering") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagHandsCovering")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagHandsCovering", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagNaked") Then
-				If Not FoundTag.Contains("TagNaked") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains Naked")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagNaked", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagSideView") Then
-				If Not FoundTag.Contains("TagSideView") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains Normal")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagNormal", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagCloseUp") Then
-				If Not FoundTag.Contains("TagCloseUp") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains CloseUp")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagCloseUp", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagPiercing") Then
-				If Not FoundTag.Contains("TagPiercing") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagPiercing")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPiercing", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagSmiling") Then
-				If Not FoundTag.Contains("TagSmiling") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagPiercing")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPiercing", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagGlaring") Then
-				If Not FoundTag.Contains("TagGlaring") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagPiercing")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagPiercing", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagGarment") Then
-				If Not FoundTag.Contains("TagGarment") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagGarment")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagGarment", TagGarment)
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagUnderwear") Then
-				If Not FoundTag.Contains("TagUnderwear") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagUnderwear")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagUnderwear", TagUnderwear)
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagTattoo") Then
-				If Not FoundTag.Contains("TagTattoo") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagTattoo")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagTattoo", TagTattoo)
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagSexToy") Then
-				If Not FoundTag.Contains("TagSexToy") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagSexToy")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagSexToy", TagSexToy)
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@TagFurniture") Then
-				If Not FoundTag.Contains("TagFurniture") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				Else
-					'Debug.Print("FoundTag Contains TagFurniture")
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@TagFurniture", TagFurniture)
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@FirstRound") Then
-				If FirstRound = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@FirstRound", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotFirstRound") Then
-				If FirstRound = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@FirstRound", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@StrokeSpeedMax") Then
-				If StrokePace < NBMaxPace.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@StrokeSpeedMax", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@StrokeSpeedMin") Then
-				If StrokePace > NBMinPace.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@StrokeSpeedMin", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@StrokeFaster") Or ListClean(PoundCount).Contains("@StrokeFastest") Then
-				If StrokePace = NBMaxPace.Value Or WorshipMode = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@StrokeSpeedMax", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@StrokeSlower") Or ListClean(PoundCount).Contains("@StrokeSlowest") Then
-				If StrokePace = NBMinPace.Value Or WorshipMode = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@StrokeSpeedMax", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@AllowsOrgasm(") Then
-				If FilterCheck(GetParentheses(ListClean(PoundCount), "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox) = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@AlwaysAllowsOrgasm") Then
-				If FrmSettings.alloworgasmComboBox.Text <> "Always Allows" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@OftenAllowsOrgasm") Then
-				If FrmSettings.alloworgasmComboBox.Text <> "Often Allows" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@OftenAllowsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SometimesAllowsOrgasm") Then
-				If FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@SometimesAllowsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@RarelyAllowsOrgasm") Then
-				If FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@RarelyAllowsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NeverAllowsOrgasm") Then
-				If FrmSettings.alloworgasmComboBox.Text <> "Never Allows" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NeverAllowsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@RuinsOrgasm(") Then
-				If FilterCheck(GetParentheses(ListClean(PoundCount), "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox) = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysAllowsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@AlwaysRuinsOrgasm") Then
-				If FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@AlwaysRuinsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@OftenRuinsOrgasm") Then
-				If FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@OftenRuinsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SometimesRuinsOrgasm") Then
-				If FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@SometimesRuinsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@RarelyRuinsOrgasm") Then
-				If FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@RarelyRuinsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NeverRuinsOrgasm") Then
-				If FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NeverRuinsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotAlwaysAllowsOrgasm") Then
-				If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotAlwaysAllowsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotNeverAllowsOrgasm") Then
-				If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotNeverAllowsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotAlwaysRuinsOrgasm") Then
-				If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotAlwaysRuinsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotNeverRuinsOrgasm") Then
-				If FrmSettings.ruinorgasmComboBox.Text = "Never Allows" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@NotNeverRuinsOrgasm", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@LongEdge") Then
-				If LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@LongEdge", "")
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@InterruptLongEdge") Then
-				If LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or TeaseTick < 1 Or RiskyEdges = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				'ListClean(PoundCount) = ListClean(PoundCount).Replace("@InterruptLongEdge", "")
-			End If
-		Loop Until PoundCount = 0
-
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowHardcoreImage") Then
-				If GetImageData(ImageGenre.Hardcore).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowSoftcoreImage") Then
-				If GetImageData(ImageGenre.Softcore).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowLesbianImage") Then
-				If GetImageData(ImageGenre.Lesbian).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowBlowjobImage") Then
-				If GetImageData(ImageGenre.Blowjob).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowFemdomImage") Then
-				If GetImageData(ImageGenre.Femdom).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowLezdomImage") Then
-				If GetImageData(ImageGenre.Lezdom).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowHentaiImage") Then
-				If GetImageData(ImageGenre.Hentai).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowGayImage") Then
-				If GetImageData(ImageGenre.Gay).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowMaledomImage") Then
-				If GetImageData(ImageGenre.Maledom).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowCaptionsImage") Then
-				If GetImageData(ImageGenre.Captions).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowGeneralImage") Then
-				If GetImageData(ImageGenre.General).IsAvailable = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-
-
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowBlogImage") Or ListClean(PoundCount).Contains("@NewBlogImage") Then
-				If FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowLocalImage") Then
-				If FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And FrmSettings.CBIBlowjob.Checked = False And
-				  FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And FrmSettings.CBIGay.Checked = False And
-				  FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowLocalImage") Then
-				If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		'PoundCount = PoundLine
-		'Do
-		'	Application.DoEvents()
-		'	PoundCount -= 1
-		'	If ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowButtsImage") Then
-		'		If Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-		'			If StrokeFilter = True Then
-		'				For i As Integer = 0 To StrokeTauntCount - 1
-		'					ListClean.Remove(ListClean(PoundCount))
-		'					PoundLine -= 1
-		'				Next
-		'			Else
-		'				ListClean.Remove(ListClean(PoundCount))
-		'				PoundLine -= 1
-		'			End If
-		'		End If
-		'	End If
-		'Loop Until PoundCount = 0
-
-		'PoundCount = PoundLine
-		'Do
-		'	Application.DoEvents()
-		'	PoundCount -= 1
-		'	If ListClean(PoundCount).Contains("@ShowBoobsImage") Or ListClean(PoundCount).Contains("@ShowBoobImage") Then
-		'		If Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then
-		'			If StrokeFilter = True Then
-		'				For i As Integer = 0 To StrokeTauntCount - 1
-		'					ListClean.Remove(ListClean(PoundCount))
-		'					PoundLine -= 1
-		'				Next
-		'			Else
-		'				ListClean.Remove(ListClean(PoundCount))
-		'				PoundLine -= 1
-		'			End If
-		'		End If
-		'	End If
-		'Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowLocalImage") Or ListClean(PoundCount).Contains("@ShowButtImage") Or ListClean(PoundCount).Contains("@ShowBoobsImage") Or ListClean(PoundCount).Contains("@ShowButtsImage") Or ListClean(PoundCount).Contains("@ShowBoobsImage") Then
-				If CustomSlideshow = True Or LockImage = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@EdgeHeld(") Then
-				Dim EdgeFail As Boolean = False
-				Dim EdgeFlag As String = GetParentheses(ListClean(PoundCount), "@EdgeHeld(")
-				If EdgeFlag.Contains(",") Then
-					EdgeFlag = FixCommas(EdgeFlag)
-					Dim EdgeArray As String() = EdgeFlag.Split(",")
-					If HoldEdgeTime < Val(EdgeArray(0)) * 60 Or HoldEdgeTime > Val(EdgeArray(1)) * 60 Then EdgeFail = True
-				Else
-					If Val(EdgeFlag) * 60 > HoldEdgeTime Then EdgeFail = True
-				End If
-				If EdgeFail = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@1MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 60 Or HoldEdgeTime > 119 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@2MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 120 Or HoldEdgeTime > 179 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@3MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 180 Or HoldEdgeTime > 239 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@4MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 240 Or HoldEdgeTime > 299 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@5MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 300 Or HoldEdgeTime > 599 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@10MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 600 Or HoldEdgeTime > 899 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@15MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 900 Or HoldEdgeTime > 1799 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@30MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 1800 Or HoldEdgeTime > 2699 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@45MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 2700 Or HoldEdgeTime > 3599 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@60MinuteHold") Then
-				If SubHoldingEdge = False Or HoldEdgeTime < 3600 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CBTLevel1") Then
-				If FrmSettings.CBTSlider.Value <> 1 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CBTLevel2") Then
-				If FrmSettings.CBTSlider.Value <> 2 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CBTLevel3") Then
-				If FrmSettings.CBTSlider.Value <> 3 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CBTLevel4") Then
-				If FrmSettings.CBTSlider.Value <> 4 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CBTLevel5") Then
-				If FrmSettings.CBTSlider.Value <> 5 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SubCircumcised") Then
-				If FrmSettings.CBSubCircumcised.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SubNotCircumcised") Then
-				If FrmSettings.CBSubCircumcised.Checked = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SubPierced") Then
-				If FrmSettings.CBSubPierced.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SubNotPierced") Then
-				If FrmSettings.CBSubPierced.Checked = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		LocalTagImageList.Clear()
-
-
-		'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
-		If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
-			' Read all lines of given file.
-			LocalTagImageList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
-
-			'If Not supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-
-
-			For i As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-				Dim LocalCheck As String() = Split(LocalTagImageList(i))
-				Dim LocalString As String = LocalCheck(0)
-				Debug.Print("LocalString = " & LocalString)
-				If Not LCase(LocalString).Contains(".jpg") And Not LCase(LocalString).Contains(".jpeg") And Not LCase(LocalString).Contains(".bmp") And
-				 Not LCase(LocalString).Contains(".png") And Not LCase(LocalString).Contains(".gif") Then
-					Debug.Print("LocalTag Check Doesn't contain extension")
-					For x As Integer = 1 To LocalCheck.Count - 1
-						LocalString = LocalString & " " & LocalCheck(x)
-						If LCase(LocalString).Contains(".jpg") Or LCase(LocalString).Contains(".jpeg") Or LCase(LocalString).Contains(".bmp") Or
-						LCase(LocalString).Contains(".png") Or LCase(LocalString).Contains(".gif") Then Exit For
-					Next
-				End If
-				Debug.Print("Local Tag check - " & LocalString)
-				If Not File.Exists(LocalString) Then LocalTagImageList.Remove(LocalTagImageList(i))
-			Next
-
-			'Do
-			'ListCountTotal += 1
-			'Debug.Print("LocalTagImageList(i) = &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&" & LocalTagImageList(ListCountTotal))
-			'If LocalTagImageList(ListCountTotal) = "" Or LocalTagImageList(ListCountTotal) Is Nothing Then
-			'LocalTagImageList.Remove(LocalTagImageList(ListCountTotal))
-			'ListCount -= 1
-			'End If
-			'Loop Until ListCountTotal = ListCount
-		End If
-
-		For i As Integer = 0 To LocalTagImageList.Count - 1
-			'Debug.Print(i & ": LocalTagImageList(i) = " & LocalTagImageList(i))
-		Next
-
-		'ListCountTotal = -1
-		Dim TagCount As Integer = 0
-
-		For i As Integer = ListClean.Count - 1 To 0 Step -1
-			TagCount = 0
-			If ListClean(i).Contains("@ShowTaggedImage") And ListClean(i).Contains("@Tag") Then
-				Dim TSplit As String() = Split(ListClean(i))
-				For j As Integer = 0 To TSplit.Length - 1
-					If TSplit(j).Contains("@Tag") Then
-						Dim TString As String = TSplit(j).Replace("@Tag", "")
-						For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-							If LocalTagImageList(k).Contains(TString) Then TagCount += 1
-						Next
-						If TagCount = 0 Then
-							If StrokeFilter = True Then
-								For l As Integer = 0 To StrokeTauntCount - 1
-									ListClean.RemoveAt(i)
-									PoundLine -= 1
-								Next
-							Else
-								ListClean.RemoveAt(i)
-								PoundLine -= 1
-							End If
-							Exit For
-						End If
-						TagCount = 0
-					End If
-				Next
-			End If
-		Next
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowTaggedImage") Then
-				If LocalTagImageList.Count = 0 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BeforeTease") Then
-				If BeforeTease = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@OrgasmDenied") Then
-				If LastOrgasmType <> "DENIED" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@OrgasmAllowed") Then
-				If LastOrgasmType <> "ALLOWED" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@OrgasmRuined") Then
-				If LastOrgasmType <> "RUINED" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ApathyLevel(") Then
-				If FilterCheck(GetParentheses(ListClean(PoundCount), "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ApathyLevel1") Then
-				If FrmSettings.NBEmpathy.Value <> 1 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ApathyLevel2") Then
-				If FrmSettings.NBEmpathy.Value <> 2 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ApathyLevel3") Then
-				If FrmSettings.NBEmpathy.Value <> 3 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ApathyLevel4") Then
-				If FrmSettings.NBEmpathy.Value <> 4 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ApathyLevel5") Then
-				If FrmSettings.NBEmpathy.Value <> 5 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@InChastity") Then
-				If My.Settings.Chastity = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotInChastity") Then
-				If My.Settings.Chastity = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@HasChastity") Then
-				If FrmSettings.CBOwnChastity.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@DoesNotHaveChastity") Then
-				If FrmSettings.CBOwnChastity.Checked = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ChastityPA") Then
-				If FrmSettings.CBChastityPA.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ChastitySpikes") Then
-				If FrmSettings.CBChastitySpikes.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VitalSub") Then
-				If CBVitalSub.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VitalSubAssignment") Then
-				If CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@RuinTaunt") Then
-				If EdgeToRuin = False Or EdgeToRuinSecret = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowLikedImage") Then
-				If Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ShowDislikedImage") Then
-				If Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoHardcore") Then
-				If VideoTease = False Or VideoType <> "Hardcore" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoSoftcore") Then
-				If VideoTease = False Or VideoType <> "Softcore" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoLesbian") Then
-				If VideoTease = False Or VideoType <> "Lesbian" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoBlowjob") Then
-				If VideoTease = False Or VideoType <> "Blowjob" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoFemdom") Then
-				If VideoTease = False Or VideoType <> "Femdom" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoFemsub") Then
-				If VideoTease = False Or VideoType <> "Femsub" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoGeneral") Then
-				If VideoTease = False Or VideoType <> "General" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoHardcoreDomme") Then
-				If VideoTease = False Or VideoType <> "HardcoreD" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoSoftcoreDomme") Then
-				If VideoTease = False Or VideoType <> "SoftcoreD" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoLesbianDomme") Then
-				If VideoTease = False Or VideoType <> "LesbianD" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoBlowjobDomme") Then
-				If VideoTease = False Or VideoType <> "BlowjobD" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoFemdomDomme") Then
-				If VideoTease = False Or VideoType <> "FemdomD" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoFemsubDomme") Then
-				If VideoTease = False Or VideoType <> "FemsubD" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@VideoGeneralDomme") Then
-				If VideoTease = False Or VideoType <> "GeneralD" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CockTorture") Then
-				If FrmSettings.CBCBTCock.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BallTorture") Then
-				If FrmSettings.CBCBTBalls.Checked = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BallTorture0") Then
-				If CBTBallsCount <> 0 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BallTorture1") Then
-				If CBTBallsCount <> 1 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BallTorture2") Then
-				If CBTBallsCount <> 2 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BallTorture3") Then
-				If CBTBallsCount <> 3 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BallTorture4+") Then
-				If CBTBallsCount < 4 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CockTorture0") Then
-				If CBTCockCount <> 0 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CockTorture1") Then
-				If CBTCockCount <> 1 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CockTorture2") Then
-				If CBTCockCount <> 2 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CockTorture3") Then
-				If CBTCockCount <> 3 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CockTorture4+") Then
-				If CBTCockCount < 4 Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		If SubStroking = False Or StrokeTauntCount = 1 Then
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Contact1") Then
-					If GlitterTease = False Or Not Group.Contains("1") Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Contact2") Then
-					If GlitterTease = False Or Not Group.Contains("2") Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Contact3") Then
-					If GlitterTease = False Or Not Group.Contains("3") Then
-						If StrokeFilter = True Then
-							For i As Integer = 0 To StrokeTauntCount - 1
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							Next
-						Else
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-		Else
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Group(") Then
-					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-					If GroupCheck(0).Contains("D") Then
-						If GlitterTease = False Or Not Group.Contains("D") Then
-							If StrokeFilter = True Then
-								For i As Integer = 0 To StrokeTauntCount - 1
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								Next
-							Else
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							End If
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Group(") Then
-					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-					If GroupCheck(0).Contains("1") Then
-						If GlitterTease = False Or Not Group.Contains("1") Then
-							If StrokeFilter = True Then
-								For i As Integer = 0 To StrokeTauntCount - 1
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								Next
-							Else
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							End If
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Group(") Then
-					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-					If GroupCheck(0).Contains("2") Then
-						If GlitterTease = False Or Not Group.Contains("2") Then
-							If StrokeFilter = True Then
-								For i As Integer = 0 To StrokeTauntCount - 1
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								Next
-							Else
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							End If
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Group(") Then
-					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-					If GroupCheck(0).Contains("3") Then
-						If GlitterTease = False Or Not Group.Contains("3") Then
-							If StrokeFilter = True Then
-								For i As Integer = 0 To StrokeTauntCount - 1
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								Next
-							Else
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							End If
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-
-
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Group(") Then
-					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-					If Group.Contains("D") Then
-						If GlitterTease = False Or Not GroupCheck(0).Contains("D") Then
-							If StrokeFilter = True Then
-								For i As Integer = 0 To StrokeTauntCount - 1
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								Next
-							Else
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							End If
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Group(") Then
-					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-					If Group.Contains("1") Then
-						If GlitterTease = False Or Not GroupCheck(0).Contains("1") Then
-							If StrokeFilter = True Then
-								For i As Integer = 0 To StrokeTauntCount - 1
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								Next
-							Else
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							End If
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Group(") Then
-					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-					If Group.Contains("2") Then
-						If GlitterTease = False Or Not GroupCheck(0).Contains("2") Then
-							If StrokeFilter = True Then
-								For i As Integer = 0 To StrokeTauntCount - 1
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								Next
-							Else
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							End If
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-			PoundCount = PoundLine
-			Do
-				Application.DoEvents()
-				PoundCount -= 1
-				If ListClean(PoundCount).Contains("@Group(") Then
-					Dim GroupCheck As String() = ListClean(PoundCount).Split(")")
-					If Group.Contains("3") Then
-						If GlitterTease = False Or Not GroupCheck(0).Contains("3") Then
-							If StrokeFilter = True Then
-								For i As Integer = 0 To StrokeTauntCount - 1
-									ListClean.Remove(ListClean(PoundCount))
-									PoundLine -= 1
-								Next
-							Else
-								ListClean.Remove(ListClean(PoundCount))
-								PoundLine -= 1
-							End If
-						End If
-					End If
-				End If
-			Loop Until PoundCount = 0
-
-
-
-		End If
-
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Flag(") Then
-				Dim WriteFlag As String = ListClean(PoundCount)
-				Dim WriteStart As Integer
-				WriteStart = WriteFlag.IndexOf("@Flag(") + 6
-				WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-				WriteFlag = WriteFlag.Split(")")(0)
-				WriteFlag = WriteFlag.Replace("@Flag(", "")
-				If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And
-				  Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotFlag(") Then
-				Dim WriteFlag As String = ListClean(PoundCount)
-				Dim WriteStart As Integer
-				WriteStart = WriteFlag.IndexOf("@NotFlag(") + 9
-				WriteFlag = WriteFlag.Substring(WriteStart, WriteFlag.Length - WriteStart)
-				WriteFlag = WriteFlag.Split(")")(0)
-				WriteFlag = WriteFlag.Replace("@NotFlag(", "")
-				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or
-				  File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Variable[") Then
-				If CheckVariable(ListClean(PoundCount)) = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		' The @CheckDate() Command Filter allows you to remove lines if the current date doesn't fall within a specified amount of time of a previously set date. 
-		'The correct format is @CheckDate(DateVariableName, Amount of Time)
-		' For example, @CheckDate(SYS_FirstRun, 2 Weeks) would only be added to the pool of possible lines if the current date is two weeks or more away from the date saved in SYS_FirstRun.
-		' To specify time interval, you can use Seconds, Minutes, Hours, Days, Weeks, Months or Years. Capitalization and pluralization do not matter.
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@CheckDate(") Then
-				If CheckDateList(ListClean(PoundCount)) = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-				ListClean(PoundCount) = ListClean(PoundCount).Replace("@CheckDate(" & GetParentheses(ListClean(PoundCount), "@CheckDate(") & ")", "")
-			End If
-		Loop Until PoundCount = 0
-
-
-
-
-
-		PoundCount = PoundLine
-		Do
-			' Application.DoEvents()
-			PoundCount -= 1
-			'Debug.Print("Check ListClean(PoundCount) = " & ListClean(PoundCount))
-			If ListClean(PoundCount).Contains("@DommeTag(") Then
-				If GetDommeImage(GetParentheses(ListClean(PoundCount), "@DommeTag(")) <> "" Or LockImage = True Then
-					'Debug.Print("DommImageFalse")
-					'Debug.Print("StrokeFilter = " & StrokeFilter)
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							'Debug.Print("StrokeTauntCount - 1 = " & StrokeTauntCount - 1)
-							'Debug.Print("ListClean(PoundCount) = " & ListClean(PoundCount))
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						'Debug.Print("DommImageTrue")
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-					'Debug.Print("DommImageFalseFinished")
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		Debug.Print("Filter Test Bookmark Reached")
-
-
-		LocalImageListCheck = True
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ImageTag(") Then
-				If GetLocalImage(ListClean(PoundCount)) = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		LocalImageListCheck = False
-		LocalImageFound = False
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Stroking") Or ListClean(PoundCount).Contains("@SubStroking") Then
-				If SubStroking = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotStroking") Or ListClean(PoundCount).Contains("@SubNotStroking") Then
-				If SubStroking = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Edging") Or ListClean(PoundCount).Contains("@SubEdging") Then
-				If SubEdging = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotEdging") Or ListClean(PoundCount).Contains("@SubNotEdging") Then
-				If SubEdging = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@HoldingTheEdge") Or ListClean(PoundCount).Contains("@SubHoldingTheEdge") Then
-				If SubHoldingEdge = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NotHoldingTheEdge") Or ListClean(PoundCount).Contains("@SubNotHoldingTheEdge") Then
-				If SubHoldingEdge = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Morning") Then
-				If GeneralTime <> "Morning" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Afternoon") Then
-				If GeneralTime <> "Afternoon" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Night") Then
-				If GeneralTime <> "Night" Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@GoodMood") Then
-				If DommeMood <= FrmSettings.NBDomMoodMax.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BadMood") Then
-				If DommeMood >= FrmSettings.NBDomMoodMin.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@NeutralMood") Then
-				If DommeMood > FrmSettings.NBDomMoodMax.Value Or DommeMood < FrmSettings.NBDomMoodMin.Value Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SetModule(") Then
-				If SetModule <> "" Or BookmarkModule = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@OrgasmRestricted") Then
-				If OrgasmRestricted = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@OrgasmNotRestricted") Then
-				If OrgasmRestricted = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SubWorshipping") Then
-				If WorshipMode = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@SubNotWorshipping") Then
-				If WorshipMode = True Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@LongHold") Then
-				If LongHold = False Or SubHoldingEdge = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@ExtremeHold") Then
-				If ExtremeHold = False Or SubHoldingEdge = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@AssWorship") Then
-				If WorshipTarget <> "Ass" Or WorshipMode = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@BoobWorship") Then
-				If WorshipTarget <> "Boobs" Or WorshipMode = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@PussyWorship") Then
-				If WorshipTarget <> "Pussy" Or WorshipMode = False Then
-					If StrokeFilter = True Then
-						For i As Integer = 0 To StrokeTauntCount - 1
-							ListClean.Remove(ListClean(PoundCount))
-							PoundLine -= 1
-						Next
-					Else
-						ListClean.Remove(ListClean(PoundCount))
-						PoundLine -= 1
-					End If
-				End If
-			End If
-		Loop Until PoundCount = 0
-
-		'If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-
-		'Debug.Print("LocalTagImageList.Count = " & LocalTagImageList.Count)
-
-		PoundCount = PoundLine
-		Do
-			Application.DoEvents()
-			PoundCount -= 1
-			If ListClean(PoundCount).Contains("@Info") Then
-				ListClean.Remove(ListClean(PoundCount))
-				PoundLine -= 1
-			End If
-		Loop Until PoundCount = 0
-
-		ListClean.Remove(ListClean(ListClean.Count - 1))
-
-		For i As Integer = 0 To ListClean.Count - 1
-			Debug.Print(ListClean(i))
-		Next
-
-		'For i As Integer = 0 To ListClean.Count - 1
-		'Debug.Print("AFTER " & i & ". " & ListClean(i))
-		'Next
-
-		'Dim ListReturn As String = ListClean(randomizer.Next(0, ListClean.Count - 1))
-
-		For x As Integer = 0 To ListClean.Count - 1
-			ListClean(x) = ListClean(x).Replace("#TagGarment", TagGarment.Replace("-", " "))
-			ListClean(x) = ListClean(x).Replace("#TagUnderwear", TagUnderwear.Replace("-", " "))
-			ListClean(x) = ListClean(x).Replace("#TagTattoo", TagTattoo.Replace("-", " "))
-			ListClean(x) = ListClean(x).Replace("#TagSexToy", TagSexToy.Replace("-", " "))
-			ListClean(x) = ListClean(x).Replace("#TagFurniture", TagFurniture.Replace("-", " "))
-			'ListClean(x) = ListClean(x).Replace("-", " ")
-		Next
-
-		Debug.Print("Filter List Complete")
-
-		Return ListClean
-
-	End Function
-
 
 	Public Function FilterList(ByVal ListClean As List(Of String)) As List(Of String)
 
@@ -21379,7 +17003,6 @@ NoPlaylistLinkFile:
 		'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1, False)
 
 
-		My.Settings.Save()
 
 		'Debug.Print("RunLastScript() Called")
 
@@ -21637,7 +17260,6 @@ NoPlaylistEndFile:
 		HoldEdgeTimeTotal += 1
 
 		My.Settings.HoldEdgeTimeTotal = HoldEdgeTimeTotal
-		My.Settings.Save()
 
 		If InputFlag = True Then Return
 
@@ -21753,7 +17375,6 @@ NoRepeatFiles:
 RuinedOrgasm:
 
 			My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-			My.Settings.Save()
 			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
 
 			If FrmSettings.CBDomOrgasmEnds.Checked = False And OrgasmRuined = True And TeaseTick < 1 Then
@@ -21864,7 +17485,6 @@ AllowedOrgasm:
 
 				My.Settings.OrgasmsRemaining -= 1
 
-				My.Settings.Save()
 
 			End If
 
@@ -21872,7 +17492,6 @@ NoNoCumFiles:
 
 
 			My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-			My.Settings.Save()
 			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
 
 			If FrmSettings.CBDomOrgasmEnds.Checked = False And TeaseTick < 1 Then
@@ -22406,7 +18025,6 @@ TryNext:
 		'Debug.Print("StrokeTimeTotal = " & StrokeTimeTotal)
 
 		My.Settings.StrokeTimeTotal = StrokeTimeTotal
-		My.Settings.Save()
 
 		Dim STT As TimeSpan = TimeSpan.FromSeconds(StrokeTimeTotal)
 
@@ -22668,7 +18286,6 @@ RestartFunction:
 					My.Settings.RecentSlideshows.Add(RecentSlideshows(i))
 				Next
 
-				My.Settings.Save()
 
 
 				SlideshowLoaded = True
@@ -22951,7 +18568,7 @@ RestartFunction:
 			VidFile = VidFile + VidSplit(i)
 		Next
 		'Debug.Print(VidFile)
-
+		If VidFile = "" Then Exit Sub
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & VidFile & ".txt") Then
 			Dim SubCheck As String()
 			Dim PlayPos As Integer
@@ -22999,7 +18616,6 @@ RestartFunction:
 			domAvatar.SizeMode = PictureBoxSizeMode.StretchImage
 			My.Settings.DomAVStretch = True
 		End If
-		My.Settings.Save()
 
 	End Sub
 
@@ -23183,7 +18799,6 @@ RestartFunction:
 		My.Settings.BronzeTokens = BronzeTokens
 		My.Settings.SilverTokens = SilverTokens
 		My.Settings.GoldTokens = GoldTokens
-		My.Settings.Save()
 
 	End Sub
 
@@ -23401,6 +19016,64 @@ RestartFunction:
 
 #Region "-------------------------------------------------- PictureStrip ------------------------------------------------------"
 
+
+
+	Private Sub PictureStrip_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles PictureStrip.Opening
+
+		If mainPictureBox.Image IsNot Nothing Then
+
+			If ImageAnimator.CanAnimate(mainPictureBox.Image) Then
+				PicStripTmsiDisableAnimation.Enabled = True
+			Else
+				PicStripTmsiDisableAnimation.Enabled = False
+			End If
+
+			If ImageLocation = "" Or _ImageFileNames.Contains(ImageLocation) Then
+
+				PicStripTSMIcopyImageLocation.Enabled = False
+				PicStripTSMIsaveImage.Enabled = False
+				PicStripTSMISaveImageTo.Enabled = False
+				PicStripTSMIlikeImage.Enabled = False
+				PicStripTSMIlikeImage.Checked = False
+				PicStripTSMIdislikeImage.Enabled = False
+				PicStripTSMIdislikeImage.Checked = False
+				PicStripTSMIremoveFromURL.Enabled = False
+
+				If _ImageFileNames.Contains(ImageLocation) Then
+					PicStripTSMIdommeSlideshow.Enabled = True
+					PicStripTSMIcopyImageLocation.Enabled = True
+				End If
+
+				Exit Sub
+			ElseIf isURL(ImageLocation) Then
+
+				PicStripTSMIsaveImage.Enabled = True
+				PicStripTSMISaveImageTo.Enabled = True
+				PicStripTSMIremoveFromURL.Enabled = True
+
+			End If
+
+			PicStripTSMIcopyImageLocation.Enabled = True
+			PicStripTSMIlikeImage.Enabled = True
+			PicStripTSMIlikeImage.Checked = False
+			PicStripTSMIdislikeImage.Enabled = True
+			PicStripTSMIdislikeImage.Checked = False
+
+			Dim tmp As List(Of String) = Txt2List(pathLikeList)
+			If tmp.Contains(ImageLocation) Then PicStripTSMIlikeImage.Checked = True
+
+			tmp = Txt2List(pathDislikeList)
+			If tmp.Contains(ImageLocation) Then PicStripTSMIdislikeImage.Checked = True
+
+		End If
+
+	End Sub
+
+	Private Sub PictureStripTmsiDisableAnimation_Click(sender As Object, e As EventArgs) Handles PicStripTmsiDisableAnimation.Click
+		' Signals the ImageAnimatorThread to pause.
+		mreImageanimator.Reset()
+	End Sub
+
 	Private Sub PicStripTSMIcopyImageLocation_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIcopyImageLocation.Click
 
 		My.Computer.Clipboard.SetText(ImageLocation)
@@ -23431,34 +19104,51 @@ RestartFunction:
 
 	End Sub
 
-	Private Sub PicStripTSMIlikeImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIlikeImage.Click
+	Private Sub PicStripTSMIlikeImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIlikeImage.Click,
+																									PicStripTSMIdislikeImage.Click
+		' Exit if ImageLocation is unkown
+		If ImageLocation = "" Then Exit Sub
 
-		If FoundString <> "" Then
-			If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & FoundString, True)
+		Dim tmpFilePath As String = ""
+		Dim lazytext As String = ""
+		Try
+			Dim tmpTsmi As ToolStripMenuItem = DirectCast(sender, ToolStripMenuItem)
+
+
+			' Set the filepath to delete from or add to
+			If tmpTsmi Is PicStripTSMIlikeImage Then
+				tmpFilePath = pathLikeList
+			ElseIf tmpTsmi Is PicStripTSMIdislikeImage
+				tmpFilePath = pathDislikeList
 			Else
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FoundString, True)
+				Throw New NotImplementedException("This Toolstripmenuitem is not implemented yet")
 			End If
-			'PictureStrip.Items(3).Enabled = False
-			PicStripTSMIlikeImage.Enabled = False
-		End If
 
 
-	End Sub
-
-	Private Sub PicStripTSMIdislikeImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdislikeImage.Click
-
-		If FoundString <> "" Then
-
-			If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & FoundString, True)
+			If tmpTsmi.Checked Then
+				' Remove from the given file 
+				lazytext = "remove path from file :" & tmpFilePath
+				TxtRemoveLine(tmpFilePath, ImageLocation)
+				tmpTsmi.Checked = False
+			ElseIf File.Exists(tmpFilePath) Then
+				lazytext = "append path  to file :" & tmpFilePath
+				' Append to existing file 
+				My.Computer.FileSystem.WriteAllText(tmpFilePath, Environment.NewLine & ImageLocation, True)
 			Else
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FoundString, True)
+				lazytext = "add path to new file :" & tmpFilePath
+				' create a new file
+				My.Computer.FileSystem.WriteAllText(tmpFilePath, ImageLocation, True)
 			End If
-			'PictureStrip.Items(4).Enabled = False
-			PicStripTSMIdislikeImage.Enabled = False
-		End If
-
+			tmpTsmi.Checked = True
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'						       All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			lazytext = "Unable to " & lazytext
+			Log.WriteError(lazytext, ex, "Error updating List")
+			MessageBox.Show(Me, lazytext & vbCrLf _
+							& ex.Message, MsgBoxStyle.Exclamation, "Error updating list.")
+		End Try
 	End Sub
 
 	Private Sub PicStripTSMIremoveFromURL_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIremoveFromURL.Click
@@ -23575,7 +19265,7 @@ RestartFunction:
 		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -23612,7 +19302,7 @@ RestartFunction:
 		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -24159,7 +19849,6 @@ GetDommeSlideshow:
 				ChatText.DocumentText = Chat
 				ChatText2.DocumentText = Chat
 				ChatReadyState()
-				ScrollChatDown()
 			Else
 				Group = Group.Replace("1", "")
 				If Group = "D" Then GlitterTease = False
@@ -24167,7 +19856,6 @@ GetDommeSlideshow:
 				ChatText.DocumentText = Chat
 				ChatText2.DocumentText = Chat
 				ChatReadyState()
-				ScrollChatDown()
 			End If
 		End If
 
@@ -24186,7 +19874,6 @@ GetDommeSlideshow:
 				ChatText.DocumentText = Chat
 				ChatText2.DocumentText = Chat
 				ChatReadyState()
-				ScrollChatDown()
 			Else
 				Group = Group.Replace("2", "")
 				If Group = "D" Then GlitterTease = False
@@ -24194,7 +19881,6 @@ GetDommeSlideshow:
 				ChatText.DocumentText = Chat
 				ChatText2.DocumentText = Chat
 				ChatReadyState()
-				ScrollChatDown()
 			End If
 		End If
 
@@ -24213,7 +19899,6 @@ GetDommeSlideshow:
 				ChatText.DocumentText = Chat
 				ChatText2.DocumentText = Chat
 				ChatReadyState()
-				ScrollChatDown()
 			Else
 				Group = Group.Replace("3", "")
 				If Group = "D" Then GlitterTease = False
@@ -24221,7 +19906,6 @@ GetDommeSlideshow:
 				ChatText.DocumentText = Chat
 				ChatText2.DocumentText = Chat
 				ChatReadyState()
-				ScrollChatDown()
 			End If
 		End If
 
@@ -24242,7 +19926,6 @@ GetDommeSlideshow:
 				ChatText.DocumentText = Chat
 				ChatText2.DocumentText = Chat
 				ChatReadyState()
-				ScrollChatDown()
 			Else
 				Group = Group.Replace("D", "")
 				GlitterTease = True
@@ -24250,7 +19933,6 @@ GetDommeSlideshow:
 				ChatText.DocumentText = Chat
 				ChatText2.DocumentText = Chat
 				ChatReadyState()
-				ScrollChatDown()
 			End If
 		End If
 
@@ -25309,11 +20991,6 @@ GetDommeSlideshow:
 		ChatText.DocumentText = Chat
 		ChatText2.DocumentText = Chat
 		ChatReadyState()
-		ScrollChatDown()
-
-
-
-		ScrollChatDown()
 
 		ResetFlag = False
 
@@ -25327,14 +21004,12 @@ GetDommeSlideshow:
 
 	Private Sub dompersonalitycombobox_LostFocus(sender As Object, e As System.EventArgs) Handles dompersonalitycombobox.LostFocus
 		My.Settings.DomPersonality = dompersonalitycombobox.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub dompersonalitycombobox_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles dompersonalitycombobox.SelectedIndexChanged
 		If FormLoading = False Then
 
 			My.Settings.DomPersonality = dompersonalitycombobox.Text
-			My.Settings.Save()
 
 			FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
 
@@ -25700,7 +21375,6 @@ GetDommeSlideshow:
 
 				My.Settings.WishlistDate = FormatDateTime(Now, DateFormat.ShortDate)
 
-				My.Settings.Save()
 
 
 
@@ -25918,7 +21592,6 @@ GetDommeSlideshow:
 			My.Settings.MirrorWindows = False
 		End If
 
-		My.Settings.Save()
 		AdjustWindow()
 	End Sub
 
@@ -25935,7 +21608,6 @@ GetDommeSlideshow:
 			CloseApp()
 			My.Settings.SideChat = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub LazySubAVToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles LazySubAVToolStripMenuItem1.Click
@@ -25948,7 +21620,6 @@ GetDommeSlideshow:
 			LazySubAVToolStripMenuItem1.Checked = False
 			My.Settings.LazySubAV = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub ThemesToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ThemesToolStripMenuItem1.Click
@@ -25971,7 +21642,6 @@ GetDommeSlideshow:
 		End If
 
 		My.Settings.CBWebtease = FrmSettings.CBWebtease.Checked
-		My.Settings.Save()
 
 	End Sub
 
@@ -26062,9 +21732,7 @@ GetDommeSlideshow:
 		FrmSettings.Focus()
 	End Sub
 
-	Private Sub ClearMainpictureboxToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ClearMainpictureboxToolStripMenuItem.Click
-		ClearMainPictureBox()
-	End Sub
+
 
 #End Region ' Menu
 
@@ -26103,7 +21771,6 @@ GetDommeSlideshow:
 
 		My.Settings.WindowHeight = Me.Height
 		My.Settings.WindowWidth = Me.Width
-		My.Settings.Save()
 
 	End Sub
 
@@ -26346,7 +22013,6 @@ GetDommeSlideshow:
 			SplitContainerHeight = SplitContainer1.Panel2.Height
 
 			My.Settings.SplitterPosition = SplitContainer1.Height - SplitContainer1.Panel1.Height
-			My.Settings.Save()
 
 			Debug.Print("SplitContainer1.Height = " & SplitContainer1.Height)
 			Debug.Print("SplitContainer1.Panel1.Height = " & SplitContainer1.Panel1.Height)
@@ -26429,7 +22095,6 @@ SkipNew:
 
 		If FormLoading = False And FormFinishedLoading = True Then
 			My.Settings.SplitterDistance = SplitContainer1.SplitterDistance
-			My.Settings.Save()
 
 		End If
 
@@ -26687,10 +22352,9 @@ SkipNew:
 		' github patch
 		StatusUpdates.DocumentText = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & StatusUpdates.DocumentText & "</body>"
 		Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
-	ChatText.DocumentText = Chat
+		ChatText.DocumentText = Chat
 		ChatText2.DocumentText = Chat
 		ChatReadyState()
-		ScrollChatDown()
 
 		Try
 			FrmSettings.CBStretchBack.Checked = My.Settings.BackgroundStretch
@@ -27729,7 +23393,6 @@ SkipNew:
 		If FormLoading = False Then
 			GetShortcutChecked()
 			My.Settings.ShowShortcuts = CBHideShortcuts.Checked
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -27792,58 +23455,47 @@ SkipNew:
 	Private Sub CBShortcuts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBShortcuts.CheckedChanged
 		If FormLoading = False Then
 			My.Settings.Shortcuts = CBShortcuts.Checked
-			My.Settings.Save()
 		End If
 	End Sub
 
 	Private Sub TBShortYes_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortYes.LostFocus
 		My.Settings.ShortYes = TBShortYes.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortNo_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortNo.LostFocus
 		My.Settings.ShortNo = TBShortNo.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortEdge_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortEdge.LostFocus
 		My.Settings.ShortEdge = TBShortEdge.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortSpeedUp_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSpeedUp.LostFocus
 		My.Settings.ShortSpeedUp = TBShortSpeedUp.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortSlowDown_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSlowDown.LostFocus
 		My.Settings.ShortSlowDown = TBShortSlowDown.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortStop_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStop.LostFocus
 		My.Settings.ShortStop = TBShortStop.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortStroke_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortStroke.LostFocus
 		My.Settings.ShortStroke = TBShortStroke.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortCum_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortCum.LostFocus
 		My.Settings.ShortCum = TBShortCum.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortGreet_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortGreet.LostFocus
 		My.Settings.ShortGreet = TBShortGreet.Text
-		My.Settings.Save()
 	End Sub
 
 	Private Sub TBShortSafeword_LostFocus(sender As Object, e As System.EventArgs) Handles TBShortSafeword.LostFocus
 		My.Settings.ShortSafeword = TBShortSafeword.Text
-		My.Settings.Save()
 	End Sub
 
 	Public Sub CheatCheck()
@@ -28239,7 +23891,6 @@ SkipNew:
 
 			My.Settings.ClearWishlist = True
 
-			My.Settings.Save()
 
 			WishlistCostGold.Visible = False
 			WishlistCostSilver.Visible = False
@@ -28289,7 +23940,6 @@ SkipNew:
 
 			My.Settings.ClearWishlist = True
 
-			My.Settings.Save()
 
 			Dim GoldList As New List(Of String)
 
@@ -28456,7 +24106,6 @@ SkipNew:
 			My.Settings.CaloriesConsumed = CaloriesConsumed
 			TBCalorieItem.Text = ""
 			TBCalorieAmount.Text = ""
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -28474,7 +24123,6 @@ SkipNew:
 			CaloriesConsumed += TempCal
 			LBLCalorie.Text = CaloriesConsumed
 			My.Settings.CaloriesConsumed = CaloriesConsumed
-			My.Settings.Save()
 			If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
 			For i As Integer = 0 To LBCalorie.Items.Count - 1
 				If Not File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then
@@ -28506,7 +24154,6 @@ SkipNew:
 		Else
 			My.Settings.VitalSub = False
 		End If
-		My.Settings.Save()
 	End Sub
 
 	Private Sub LBCalorie_DoubleClick(sender As Object, e As System.EventArgs) Handles LBCalorie.DoubleClick
@@ -28519,7 +24166,6 @@ SkipNew:
 		CaloriesConsumed -= TempCal
 		LBLCalorie.Text = CaloriesConsumed
 		My.Settings.CaloriesConsumed = CaloriesConsumed
-		My.Settings.Save()
 		LBCalorie.Items.Remove(LBCalorie.SelectedItem)
 		If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\System\VitalSub\CalorieItems.txt")
 		If LBCalorie.Items.Count > 0 Then
@@ -28588,7 +24234,6 @@ SkipNew:
 			LBLCalorie.Text = 0
 			CaloriesConsumed = 0
 			My.Settings.CaloriesConsumed = 0
-			My.Settings.Save()
 
 			FileText = VitalList(randomizer.Next(0, VitalList.Count))
 
@@ -28615,7 +24260,6 @@ SkipNew:
 	Private Sub CBVitalSubDomTask_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVitalSubDomTask.CheckedChanged
 		If FormLoading = False Then
 			My.Settings.VitalSubAssignments = CBVitalSubDomTask.Checked
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -28623,29 +24267,46 @@ SkipNew:
 
 	Public Sub MetronomeTick()
 
-		' Begin GitHub Patch
-		'Do
-		'If StrokePace <> 0 And CBMetronome.Checked = True Then
-		'My.Computer.Audio.Stop()
-		'My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\metronome.wav")
-		'Thread.Sleep(StrokePace)
-		'End If
-		'Loop
-		' End GitHub Patch
+		Dim wavFilepath As String = Application.StartupPath & "\Audio\System\metronome.wav"
+		Dim MetroSoundPlayer As Media.SoundPlayer = Nothing
+		Dim wavStream As MemoryStream
+		Dim Errorcounter As Integer = 0
 
-		Do
-			If StrokePace > 0 Then
-				If CBMetronome.Checked Then
-					My.Computer.Audio.Stop()
-					My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\metronome.wav")
+restartNoFile:
+		Try
+			If Directory.Exists(Path.GetDirectoryName(wavFilepath)) AndAlso File.Exists(wavFilepath) Then
+
+				wavStream = New MemoryStream(File.ReadAllBytes(wavFilepath))
+				MetroSoundPlayer = New Media.SoundPlayer(wavStream)
+				MetroSoundPlayer.Load()
+playLoop:
+				If StrokePace > 0 AndAlso CBMetronome.Checked Then
+					MetroSoundPlayer.Stop()
+					MetroSoundPlayer.PlaySync()
 					Thread.Sleep(StrokePace)
+				Else
+					Thread.Sleep(1000)
 				End If
+
+				GoTo playLoop
 			Else
-				Threading.Thread.Sleep(1000)
+				Thread.Sleep(10 * 1000)
+				GoTo restartNoFile
 			End If
-
-		Loop
-
+		Catch ex As Exception When Errorcounter < 120
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                  All Errors until 119 Errors occured
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'TODO: MetronomeExceptions: Log error - but first add synclock to logging.
+			Errorcounter += 1
+			Thread.Sleep(1000)
+			GoTo restartNoFile
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'TODO: MetronomeExceptions: Add possibility to restart the thread.
+		End Try
 	End Sub
 
 #Region "-------------------------------------------------- Metronome-App -----------------------------------------------------"
@@ -28671,7 +24332,6 @@ SkipNew:
 			If NBMaxPace.Value > NBMinPace.Value - 50 Then NBMaxPace.Value = NBMinPace.Value - 50
 			If SubStroking = False Then StrokePace = NBMaxPace.Value
 			My.Settings.MaxPace = NBMaxPace.Value
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -28680,7 +24340,6 @@ SkipNew:
 			If NBMinPace.Value < NBMaxPace.Value + 50 Then NBMinPace.Value = NBMaxPace.Value + 50
 			If SubStroking = False Then StrokePace = NBMinPace.Value
 			My.Settings.MinPace = NBMinPace.Value
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -28712,7 +24371,6 @@ SkipNew:
 
 	Private Sub CBMetronome_LostFocus(sender As Object, e As System.EventArgs) Handles CBMetronome.LostFocus
 		My.Settings.MetroOn = CBMetronome.Checked
-		My.Settings.Save()
 	End Sub
 
 #End Region
@@ -29014,7 +24672,6 @@ SkipNew:
 		OpenApp()
 		SideChatToolStripMenuItem1.Checked = True
 		My.Settings.SideChat = True
-		My.Settings.Save()
 	End Sub
 
 	Public Sub ClearWriteTask()
@@ -29030,7 +24687,6 @@ SkipNew:
 			OpenApp()
 			SideChatToolStripMenuItem1.Checked = True
 			My.Settings.SideChat = True
-			My.Settings.Save()
 		End If
 	End Sub
 
@@ -29040,16 +24696,15 @@ SkipNew:
 		ChatText.DocumentText = Chat
 		ChatText2.DocumentText = Chat
 		ChatReadyState()
-		ScrollChatDown()
 
 	End Sub
 
 	Public Sub ChatReadyState()
-
 		While ChatText.ReadyState <> WebBrowserReadyState.Complete And ChatText2.ReadyState <> WebBrowserReadyState.Complete
 			Application.DoEvents()
 		End While
-
+		ScrollChatDown()
 	End Sub
+
 
 End Class

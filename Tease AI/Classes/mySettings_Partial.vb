@@ -32,7 +32,7 @@ Namespace My
 		''' </summary>
 		Private Shared BackupDir As String = Application.Info.DirectoryPath & "\System\Settings\"
 
-		Private WithEvents Savetimer As New Timer With {.Interval = 1000}
+		Private WithEvents Savetimer As New Timer With {.Interval = 1000 * 60}
 
 		Private Sub Savetimer_Tick(sender As Object, e As EventArgs) Handles Savetimer.Tick
 			Save()
@@ -134,10 +134,10 @@ Namespace My
                 '                                            All Errors
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 Log.WriteError(ex.Message, ex, "Exception while duplicating user.config.")
-            End Try
-        End Sub
+			End Try
+		End Sub
 
-        Shadows Sub Reset()
+		Shadows Sub Reset()
 			loaded = False
 			Dim dupeFilePath As String = GetDuplicatePath()
 

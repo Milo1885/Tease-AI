@@ -94,6 +94,7 @@ Partial Class Form1
 		Me.LBLFileTransfer = New System.Windows.Forms.Label()
 		Me.PBFileTransfer = New System.Windows.Forms.ProgressBar()
 		Me.PictureStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+		Me.PicStripTmsiDisableAnimation = New System.Windows.Forms.ToolStripMenuItem()
 		Me.PicStripTSMIcopyImageLocation = New System.Windows.Forms.ToolStripMenuItem()
 		Me.PicStripTSS1 = New System.Windows.Forms.ToolStripSeparator()
 		Me.PicStripTSMIsaveImage = New System.Windows.Forms.ToolStripMenuItem()
@@ -401,7 +402,6 @@ Partial Class Form1
 		Me.TimeoutTimer = New Tease_AI.teaseAI_Timer()
 		Me.VideoTimer = New Tease_AI.teaseAI_Timer()
 		Me.MultipleEdgesTimer = New Tease_AI.teaseAI_Timer()
-		Me.ClearMainpictureboxToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1341,32 +1341,39 @@ Partial Class Form1
 		'
 		'PictureStrip
 		'
-		Me.PictureStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIcopyImageLocation, Me.PicStripTSS1, Me.PicStripTSMIsaveImage, Me.PicStripTSMISaveImageTo, Me.PicStripTSS2, Me.PicStripTSMIlikeImage, Me.PicStripTSMIdislikeImage, Me.PicStripTSMIremoveFromURL, Me.PicStripTSS3, Me.PicStripTSMIdommeSlideshow})
+		Me.PictureStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIcopyImageLocation, Me.PicStripTmsiDisableAnimation, Me.PicStripTSS1, Me.PicStripTSMIsaveImage, Me.PicStripTSMISaveImageTo, Me.PicStripTSS2, Me.PicStripTSMIlikeImage, Me.PicStripTSMIdislikeImage, Me.PicStripTSMIremoveFromURL, Me.PicStripTSS3, Me.PicStripTSMIdommeSlideshow})
 		Me.PictureStrip.Name = "PictureStrip"
-		Me.PictureStrip.Size = New System.Drawing.Size(194, 176)
+		Me.PictureStrip.Size = New System.Drawing.Size(203, 198)
+		'
+		'PicStripTmsiDisableAnimation
+		'
+		Me.PicStripTmsiDisableAnimation.Enabled = False
+		Me.PicStripTmsiDisableAnimation.Name = "PicStripTmsiDisableAnimation"
+		Me.PicStripTmsiDisableAnimation.Size = New System.Drawing.Size(202, 22)
+		Me.PicStripTmsiDisableAnimation.Text = "Disable Imageanimation"
 		'
 		'PicStripTSMIcopyImageLocation
 		'
 		Me.PicStripTSMIcopyImageLocation.Name = "PicStripTSMIcopyImageLocation"
-		Me.PicStripTSMIcopyImageLocation.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIcopyImageLocation.Size = New System.Drawing.Size(202, 22)
 		Me.PicStripTSMIcopyImageLocation.Text = "Copy Image Location"
 		'
 		'PicStripTSS1
 		'
 		Me.PicStripTSS1.Name = "PicStripTSS1"
-		Me.PicStripTSS1.Size = New System.Drawing.Size(190, 6)
+		Me.PicStripTSS1.Size = New System.Drawing.Size(199, 6)
 		'
 		'PicStripTSMIsaveImage
 		'
 		Me.PicStripTSMIsaveImage.Name = "PicStripTSMIsaveImage"
-		Me.PicStripTSMIsaveImage.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIsaveImage.Size = New System.Drawing.Size(202, 22)
 		Me.PicStripTSMIsaveImage.Text = "Save Image"
 		'
 		'PicStripTSMISaveImageTo
 		'
 		Me.PicStripTSMISaveImageTo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIsaveHardcore, Me.PicStripTSMIsaveSoftcore, Me.PicStripTSMIsaveLesbian, Me.PicStripTSMIsaveBlowjob, Me.PicStripTSMIsaveFemdom, Me.PicStripTSMIsaveLezdom, Me.PicStripTSMIsaveHentai, Me.PicStripTSMIsaveGay, Me.PicStripTSMIsaveMaledom, Me.PicStripTSMIsaveCaptions, Me.PicStripTSMIsaveGeneral, Me.PicStripTSMIsaveBoobs, Me.PicStripTSMIsaveButts})
 		Me.PicStripTSMISaveImageTo.Name = "PicStripTSMISaveImageTo"
-		Me.PicStripTSMISaveImageTo.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMISaveImageTo.Size = New System.Drawing.Size(202, 22)
 		Me.PicStripTSMISaveImageTo.Text = "Save Image To"
 		'
 		'PicStripTSMIsaveHardcore
@@ -1450,37 +1457,37 @@ Partial Class Form1
 		'PicStripTSS2
 		'
 		Me.PicStripTSS2.Name = "PicStripTSS2"
-		Me.PicStripTSS2.Size = New System.Drawing.Size(190, 6)
+		Me.PicStripTSS2.Size = New System.Drawing.Size(199, 6)
 		'
 		'PicStripTSMIlikeImage
 		'
 		Me.PicStripTSMIlikeImage.Name = "PicStripTSMIlikeImage"
-		Me.PicStripTSMIlikeImage.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIlikeImage.Size = New System.Drawing.Size(202, 22)
 		Me.PicStripTSMIlikeImage.Text = "Like This Image"
 		'
 		'PicStripTSMIdislikeImage
 		'
 		Me.PicStripTSMIdislikeImage.Name = "PicStripTSMIdislikeImage"
-		Me.PicStripTSMIdislikeImage.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIdislikeImage.Size = New System.Drawing.Size(202, 22)
 		Me.PicStripTSMIdislikeImage.Text = "Dislike This Image"
 		'
 		'PicStripTSMIremoveFromURL
 		'
 		Me.PicStripTSMIremoveFromURL.Name = "PicStripTSMIremoveFromURL"
-		Me.PicStripTSMIremoveFromURL.Size = New System.Drawing.Size(193, 22)
-		Me.PicStripTSMIremoveFromURL.Text = "Remove From URL File"
+		Me.PicStripTSMIremoveFromURL.Size = New System.Drawing.Size(202, 22)
+		Me.PicStripTSMIremoveFromURL.Text = "Remove from all Files"
 		'
 		'PicStripTSS3
 		'
 		Me.PicStripTSS3.Name = "PicStripTSS3"
-		Me.PicStripTSS3.Size = New System.Drawing.Size(190, 6)
+		Me.PicStripTSS3.Size = New System.Drawing.Size(199, 6)
 		'
 		'PicStripTSMIdommeSlideshow
 		'
 		Me.PicStripTSMIdommeSlideshow.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIdommeSlideshow_GoToFirst, Me.PicStripTSMIdommeSlideshowGoToLast, Me.PicStripTSMIdommeSlideshowTSS1, Me.PicStripTSMIdommeSlideshowLoadNewSlideshow})
 		Me.PicStripTSMIdommeSlideshow.Enabled = False
 		Me.PicStripTSMIdommeSlideshow.Name = "PicStripTSMIdommeSlideshow"
-		Me.PicStripTSMIdommeSlideshow.Size = New System.Drawing.Size(193, 22)
+		Me.PicStripTSMIdommeSlideshow.Size = New System.Drawing.Size(202, 22)
 		Me.PicStripTSMIdommeSlideshow.Text = "Domme Slideshow"
 		'
 		'PicStripTSMIdommeSlideshow_GoToFirst
@@ -2038,7 +2045,7 @@ Partial Class Form1
 		'
 		'DebugToolStripMenuItem
 		'
-		Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunScriptToolStripMenuItem, Me.DebugMenuToolStripMenuItem, Me.ToolStripSeparator13, Me.RefreshRandomizerToolStripMenuItem, Me.ClearMainpictureboxToolStripMenuItem})
+		Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunScriptToolStripMenuItem, Me.DebugMenuToolStripMenuItem, Me.ToolStripSeparator13, Me.RefreshRandomizerToolStripMenuItem})
 		Me.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem"
 		Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
 		Me.DebugToolStripMenuItem.Text = "Debug"
@@ -2046,24 +2053,24 @@ Partial Class Form1
 		'RunScriptToolStripMenuItem
 		'
 		Me.RunScriptToolStripMenuItem.Name = "RunScriptToolStripMenuItem"
-		Me.RunScriptToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+		Me.RunScriptToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
 		Me.RunScriptToolStripMenuItem.Text = "Run Script"
 		'
 		'DebugMenuToolStripMenuItem
 		'
 		Me.DebugMenuToolStripMenuItem.Name = "DebugMenuToolStripMenuItem"
-		Me.DebugMenuToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+		Me.DebugMenuToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
 		Me.DebugMenuToolStripMenuItem.Text = "Debug Menu"
 		'
 		'ToolStripSeparator13
 		'
 		Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-		Me.ToolStripSeparator13.Size = New System.Drawing.Size(184, 6)
+		Me.ToolStripSeparator13.Size = New System.Drawing.Size(176, 6)
 		'
 		'RefreshRandomizerToolStripMenuItem
 		'
 		Me.RefreshRandomizerToolStripMenuItem.Name = "RefreshRandomizerToolStripMenuItem"
-		Me.RefreshRandomizerToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
+		Me.RefreshRandomizerToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
 		Me.RefreshRandomizerToolStripMenuItem.Text = "Refresh Randomizer"
 		'
 		'AboutToolStripMenuItem
@@ -4085,12 +4092,6 @@ Partial Class Form1
 		'
 		Me.MultipleEdgesTimer.Interval = 1000
 		'
-		'ClearMainpictureboxToolStripMenuItem
-		'
-		Me.ClearMainpictureboxToolStripMenuItem.Name = "ClearMainpictureboxToolStripMenuItem"
-		Me.ClearMainpictureboxToolStripMenuItem.Size = New System.Drawing.Size(187, 22)
-		Me.ClearMainpictureboxToolStripMenuItem.Text = "Clear Mainpicturebox"
-		'
 		'Form1
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4111,7 +4112,7 @@ Partial Class Form1
 		Me.Name = "Form1"
 		Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-		Me.Text = "Tease A.I. - PATCH 54.1"
+		Me.Text = "Tease A.I. - PATCH ##.#"
 		CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -4549,5 +4550,5 @@ Partial Class Form1
 	Friend WithEvents CBWritingProgress As System.Windows.Forms.CheckBox
 	Friend WithEvents DommeTagBtnNextImage As System.Windows.Forms.Button
 	Friend WithEvents DommeTagBtnLastImage As System.Windows.Forms.Button
-	Friend WithEvents ClearMainpictureboxToolStripMenuItem As ToolStripMenuItem
+	Private WithEvents PicStripTmsiDisableAnimation As ToolStripMenuItem
 End Class

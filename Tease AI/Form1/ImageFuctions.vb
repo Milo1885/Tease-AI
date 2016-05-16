@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Threading
 
 Partial Class Form1
 
@@ -609,18 +610,18 @@ NoNeFound:
 
 		Public Source As ImageSourceType
 
-		Private _SaveImageDirectory As String = ""
+		Private _StoreDirectory As String = ""
 
-		Public Property SaveImageDirectory As String
+		Public Property StoreDirectory As String
 			Get
-				Return _SaveImageDirectory
+				Return _StoreDirectory
 			End Get
 			Set(value As String)
-				If value Is Nothing Then _SaveImageDirectory = ""
+				If value Is Nothing Then _StoreDirectory = ""
 				If Not value.EndsWith("\") And value <> "" Then
-					_SaveImageDirectory = value & "\"
+					_StoreDirectory = value & "\"
 				Else
-					_SaveImageDirectory = value
+					_StoreDirectory = value
 
 				End If
 			End Set
@@ -638,22 +639,21 @@ NoNeFound:
 	Private Sub BWimageFetcher_DoWork(ByVal sender As Object,
 							 ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BWimageFetcher.DoWork
 		'TODO: Create a specific image for Displaying an imageerror
-		Dim errorimagepath As String = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+		Dim errorimagepath As String = Application.StartupPath & "\Images\System\ErrorLoadingImage.jpg"
 
 
 		With CType(e.Argument, ImageFetchObject)
 			Try
 retryLocal: ' If an exception occures the funcion is restarted and the Errorimage is loaded.
 
-				'.ImageLocation = "http://41.media.tumblr.com/ce4f1fb66ee4042fa48a84cd413e783f/tumblr_ne4kvtKMo51u0o6agohttp://40.media.tumblr.com/d4f6ab34fe44b3b503d12178194fdc50/tumblr_ne4kvtKMo51u0o6agohttp://41.media.tumblr.com/4db4ffdd308bd45265dc59fe546e93e0/tumblr_ne4kvtKMo51u0o6agohttp://36.media.tumblr.com/cc976ed00f44404acef776bc7f85b9f3/tumblr_ne4kvtKMo51u0o6agohttp://36.media.tumblr.com/07f38ed64670c7b515152ec3c86358b7/tumblr_ne4kvtKMo51u0o6agohttp://40.media.tumblr.com/072cd5da86c6e76e6ebf2e671f743aee/tumblr_ne4kvtKMo51u0o6agohttp://40.media.tumblr.com/b88ff27ee1df0d9e01a2631f8c0cccf8/tumblr_ne4kvtKMo51u0o6agohttp://41.media.tumblr.com/59ae93ddb7100d5c39ddcabf7a2fb770/tumblr_ne4kvtKMo51u0o6agohttp://49.media.tumblr.com/5d789fa181a6c3bff31859e79e8f08cc/tumblr_ne3et9QcWK1tnz9bbo1_500.gif"
 				If .ImageLocation.Contains("/") And .ImageLocation.Contains("://") Then
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					'						Download and Save Online Image 
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					Dim s As String = ""
 
-					If .ImageLocation <> "" Then
-						s = .SaveImageDirectory & Path.GetFileName(.ImageLocation)
+					If .StoreDirectory <> "" Then
+						s = .StoreDirectory & Path.GetFileName(.ImageLocation)
 
 						If Not Directory.Exists(s) AndAlso File.Exists(s) Then
 							s = ""
@@ -695,81 +695,110 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 			End Try
 		End With
 
+		' Change Cursor back to original
+		Me.BeginInvoke(Sub() mainPictureBox.Cursor = Cursors.Arrow)
+		' Stop ImageAnimation
+		mreImageanimator.Reset()
 		' Return the fetched data to the UI-Thread
 		e.Result = e.Argument
 	End Sub
 
 	Private Sub BWimageFetcher_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BWimageFetcher.RunWorkerCompleted
-		If TypeOf e.Error Is TimeoutException Then Debug.Print(e.Error.Message)
-		If e.Error IsNot Nothing Then Exit Sub
+		Try
+			If TypeOf e.Error Is TimeoutException Then Debug.Print(e.Error.Message)
+			If e.Error IsNot Nothing Then Exit Sub
 
-		JustShowedBlogImage = True
+			JustShowedBlogImage = True
 
-		If e.Cancelled Then Exit Sub
+			If e.Cancelled Then Exit Sub
 
-		If TypeOf e.Result Is ImageFetchObject Then
-			'TODO-Next: Add the picturebox-Streching Stuff.?.
-			Dim FetchResult As ImageFetchObject = e.Result
+			If TypeOf e.Result Is ImageFetchObject Then
+				'TODO-Next: Add the picturebox-Streching Stuff.?.
+				Dim FetchResult As ImageFetchObject = e.Result
 
-			If FetchResult.FetchedImage Is Nothing Then
+				If FetchResult.FetchedImage Is Nothing Then
 
-				PicStripTSMIcopyImageLocation.Enabled = True
-				PicStripTSMIsaveImage.Enabled = True
-				PicStripTSMISaveImageTo.Enabled = True
-				PicStripTSMIlikeImage.Enabled = True
-				PicStripTSMIdislikeImage.Enabled = True
-				PicStripTSMIremoveFromURL.Enabled = True
+					PicStripTSMIcopyImageLocation.Enabled = True
+					PicStripTSMIsaveImage.Enabled = True
+					PicStripTSMISaveImageTo.Enabled = True
+					PicStripTSMIlikeImage.Enabled = True
+					PicStripTSMIdislikeImage.Enabled = True
+					PicStripTSMIremoveFromURL.Enabled = True
 
-				Log.Write("Imageresult for """ & FetchResult.ImageLocation & """ was empty.")
-				Debug.Print("ImageFetch - RunWorkerCompleted - Failure " & vbCrLf &
+					Log.Write("Imageresult for """ & FetchResult.ImageLocation & """ was empty.")
+					Debug.Print("ImageFetch - RunWorkerCompleted - Failure " & vbCrLf &
+							"	ImageLocation: " & FetchResult.ImageLocation)
+
+				End If
+				Dim OldImage As Image = mainPictureBox.Image
+				Dim NewImage As Bitmap = FetchResult.FetchedImage.Clone
+
+				' This starts the ImageAnimator-Thread again.
+				mreImageanimator.Set()
+
+				FetchResult.FetchedImage.Dispose()
+
+				mainPictureBox.Image = NewImage
+				mainPictureBox.Invalidate()
+				mainPictureBox.Refresh()
+
+				' Add a custom eventhandler to the imageanimator, if an 
+				' animatable Image is displayed.
+				If ImageAnimator_OnFrameChangedAdded = False _
+				AndAlso ImageAnimator.CanAnimate(mainPictureBox.Image) Then
+					ImageAnimator.Animate(mainPictureBox.Image, AddressOf ImageAnimator_OnFrameChanged)
+					ImageAnimator_OnFrameChangedAdded = True
+				End If
+
+				PBImage = FetchResult.ImageLocation
+				ImageLocation = FetchResult.ImageLocation
+				LBLImageInfo.Text = FetchResult.ImageLocation
+
+				If OldImage IsNot Nothing Then
+					OldImage.Dispose()
+				End If
+				GC.Collect()
+				CheckDommeTags()
+
+				' Update the the picturestrip, when it's opened.
+				If PictureStrip.Visible Then
+					PictureStrip_Opening(Nothing, Nothing)
+				End If
+
+				Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
 						"	ImageLocation: " & FetchResult.ImageLocation)
-
 			End If
-			Dim OldImage As Image = mainPictureBox.Image
-			Dim NewImage As Bitmap = FetchResult.FetchedImage.Clone
-
-			FetchResult.FetchedImage.Dispose()
-
-			mainPictureBox.Image = NewImage
-			mainPictureBox.Invalidate()
-			mainPictureBox.Refresh()
-
-			PBImage = FetchResult.ImageLocation
-			ImageLocation = FetchResult.ImageLocation
-			LBLImageInfo.Text = FetchResult.ImageLocation
-
-			If OldImage IsNot Nothing Then
-				OldImage.Dispose()
-			End If
-			GC.Collect()
-			CheckDommeTags()
-
-			If FetchResult.Source = ImageSourceType.Local Then
-				Debug.Print("Local Image PictureStrip")
-
-				PicStripTSMIcopyImageLocation.Enabled = True
-				PicStripTSMIsaveImage.Enabled = False
-				PicStripTSMISaveImageTo.Enabled = False
-				PicStripTSMIlikeImage.Enabled = False
-				PicStripTSMIdislikeImage.Enabled = False
-				PicStripTSMIremoveFromURL.Enabled = False
-
-			Else
-				Debug.Print("Blog Image PictureStrip")
-
-				PicStripTSMIcopyImageLocation.Enabled = True
-				PicStripTSMIsaveImage.Enabled = True
-				PicStripTSMISaveImageTo.Enabled = True
-				PicStripTSMIlikeImage.Enabled = True
-				PicStripTSMIdislikeImage.Enabled = True
-				PicStripTSMIremoveFromURL.Enabled = True
-
-			End If
-
-			Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
-						"	ImageLocation: " & FetchResult.ImageLocation)
-		End If
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                     All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError("An Exception occured whiledisplaying image: " & vbCrLf & ex.Message,
+						   ex, "Error Displaying image.")
+		End Try
 	End Sub
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Indicates if the Eventhandler  ImageAnimator_OnFrameChanged has been added to ImageAnimatorThread.
+	''' </summary>
+	Dim ImageAnimator_OnFrameChangedAdded As Boolean
+	''' <summary>
+	''' Signals the ImageAnimatorThread to suspend until started again.
+	''' </summary>
+	Shared mreImageanimator As New ManualResetEvent(True)
+	''' <summary>
+	''' Eventhandler for 
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
+	Sub ImageAnimator_OnFrameChanged(sender As Object, e As EventArgs)
+		'×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+		'						ImageAnimator Thread - Beyond this Line: INVOKE IS REQUIRED...
+		' If the manual reset event is not set, the Thread will wait until it is set.
+		mreImageanimator.WaitOne()
+		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Thread °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+	End Sub
+
 
 #End Region ' BWimageSync
 
@@ -793,9 +822,10 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 		FetchContainer.ImageLocation = ImageToShow
 
 		If FrmSettings.CBBlogImageWindow.Checked = True _
-		Then FetchContainer.SaveImageDirectory = Application.StartupPath & "\Images\Session Images\" _
-		Else FetchContainer.SaveImageDirectory = ""
+		Then FetchContainer.StoreDirectory = Application.StartupPath & "\Images\Session Images\" _
+		Else FetchContainer.StoreDirectory = ""
 
+		mainPictureBox.Cursor = Cursors.AppStarting
 		BWimageFetcher.RunWorkerAsync(FetchContainer, True)
 
 
