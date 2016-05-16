@@ -1341,12 +1341,13 @@ Partial Class Form1
 		'
 		'PictureStrip
 		'
-		Me.PictureStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTmsiDisableAnimation, Me.PicStripTSMIcopyImageLocation, Me.PicStripTSS1, Me.PicStripTSMIsaveImage, Me.PicStripTSMISaveImageTo, Me.PicStripTSS2, Me.PicStripTSMIlikeImage, Me.PicStripTSMIdislikeImage, Me.PicStripTSMIremoveFromURL, Me.PicStripTSS3, Me.PicStripTSMIdommeSlideshow})
+		Me.PictureStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PicStripTSMIcopyImageLocation, Me.PicStripTmsiDisableAnimation, Me.PicStripTSS1, Me.PicStripTSMIsaveImage, Me.PicStripTSMISaveImageTo, Me.PicStripTSS2, Me.PicStripTSMIlikeImage, Me.PicStripTSMIdislikeImage, Me.PicStripTSMIremoveFromURL, Me.PicStripTSS3, Me.PicStripTSMIdommeSlideshow})
 		Me.PictureStrip.Name = "PictureStrip"
 		Me.PictureStrip.Size = New System.Drawing.Size(203, 198)
 		'
 		'PicStripTmsiDisableAnimation
 		'
+		Me.PicStripTmsiDisableAnimation.Enabled = False
 		Me.PicStripTmsiDisableAnimation.Name = "PicStripTmsiDisableAnimation"
 		Me.PicStripTmsiDisableAnimation.Size = New System.Drawing.Size(202, 22)
 		Me.PicStripTmsiDisableAnimation.Text = "Disable Imageanimation"
@@ -4111,7 +4112,7 @@ Partial Class Form1
 		Me.Name = "Form1"
 		Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-		Me.Text = "Tease A.I. - PATCH 54.1"
+		Me.Text = "Tease A.I. - PATCH ##.#"
 		CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.SplitContainer1.Panel1.ResumeLayout(False)
@@ -4549,5 +4550,5 @@ Partial Class Form1
 	Friend WithEvents CBWritingProgress As System.Windows.Forms.CheckBox
 	Friend WithEvents DommeTagBtnNextImage As System.Windows.Forms.Button
 	Friend WithEvents DommeTagBtnLastImage As System.Windows.Forms.Button
-	Friend WithEvents PicStripTmsiDisableAnimation As ToolStripMenuItem
+	Private WithEvents PicStripTmsiDisableAnimation As ToolStripMenuItem
 End Class
