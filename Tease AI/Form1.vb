@@ -17,6 +17,8 @@ Public Class Form1
 	''' The default directory URL-Files are located.
 	''' </summary>
 	Friend Shared ReadOnly pathUrlFileDir As String = Application.StartupPath & "\Images\System\URL Files\"
+
+	Friend Shared ReadOnly pathImageErrorOnLoading As String = Application.StartupPath & "\Images\System\ErrorLoadingImage.jpg"
 #End Region ' File Constants.
 
 	Public Chat As String
@@ -587,10 +589,13 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		Try
 
 			mainPictureBox.Image = Nothing
+			WatchDogImageAnimator.Dispose()
+
 			Debug.Print("Here?")
 
 			TeaseTimer.Stop()
 			TeaseAIClock.Stop()
+			UpdateStageTimer.Stop()
 			UpdatesTimer.Stop()
 			StrokeTimeTotalTimer.Stop()
 			StopEverything()
@@ -19549,29 +19554,6 @@ GetDommeSlideshow:
 
 	End Function
 
-	Public Sub ClearMainPictureBox()
-
-		If Not mainPictureBox Is Nothing Then
-			Try
-				mainPictureBox.Image.Dispose()
-				mainPictureBox.Image = Nothing
-
-				GC.Collect()
-				Application.DoEvents()
-
-				PBImage = ""
-				ImageLocation = ""
-			Catch ex As Exception
-				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-				'                                            All Errors
-				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-				Log.WriteError("Unable to dispose the current image From PictureBox: " & ex.Message,
-								ex, "ClearMainPictureBox")
-			End Try
-		End If
-
-	End Sub
-
 	Public Function StripBlankLines(ByVal SpaceClean As List(Of String)) As List(Of String)
 		For i As Integer = SpaceClean.Count - 1 To 0 Step -1
 			If SpaceClean(i) = "" Then SpaceClean.Remove(SpaceClean(i))
@@ -22117,7 +22099,8 @@ SkipNew:
 
 
 	Private Sub TeaseAIClock_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseAIClock.Tick
-
+		' Reset the WatchdogTimer Clock. 
+		WatchDogImageAnimator.Reset(TeaseAIClock.Interval * 3)
 
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
@@ -23118,6 +23101,7 @@ SkipNew:
 		TBSexToy.Text = ""
 		TBFurniture.Text = ""
 
+		If ImageLocation = "" Then Exit Sub
 
 		Dim tmpFileName As String = Path.GetFileName(ImageLocation)
 

@@ -3,8 +3,9 @@
 ''' BackgroundWorker-Class to raise the RunWorkerCompleted-Event manually.
 ''' </summary>
 Public Class BackgroundWorkerSyncable
-	Inherits System.ComponentModel.BackgroundWorker
+	Inherits BackgroundWorker
 
+	Private _Workerthread As Threading.Thread = Nothing
 
 #Region "-----------------------------------------------  Trigger Required -----------------------------------------------------"
 
@@ -20,7 +21,7 @@ Public Class BackgroundWorkerSyncable
 
 #Region "-------------------------------------------------- Trigger Timer ------------------------------------------------------"
 
-	Private WithEvents TriggerTimer As New Timer With {.Interval = 10000}
+	Private WithEvents TriggerTimer As New Timer With {.Interval = 30000}
 
 
 	Private Sub TriggerTimer_Tick(sender As Object, e As EventArgs) Handles TriggerTimer.Tick
@@ -70,26 +71,53 @@ Public Class BackgroundWorkerSyncable
 	''' <exception cref="InvalidOperationException">Occurs if you try to start a new thread, without syncing the 
 	''' previous results.</exception>
 	Public Shadows Sub RunWorkerAsync(Obj As Object, Optional ByVal SyncRequired As Boolean = True)
+		'×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+		'											 Calling-Thread
 		If _ResultCache IsNot Nothing Then Throw New InvalidOperationException("Starting Is Not allowed while a previous result Is cached.")
 		_TriggerRequired = SyncRequired
-		_SyncTimeOut = False
 		MyBase.RunWorkerAsync(Obj)
+		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Thread °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+	End Sub
+	''' <summary>
+	''' Triggers the <see cref="DoWork"/> Event.
+	''' </summary>
+	''' <param name="e"></param>
+	Protected Overrides Sub OnDoWork(e As DoWorkEventArgs)
+		'×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+		'											BackgroundWorker-Thread
+		_Workerthread = Threading.Thread.CurrentThread
+		Try
+			MyBase.OnDoWork(e)
+		Catch ex As Threading.ThreadAbortException
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'	                                    Thread has been Aborted
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			e.Cancel = True
+			'We must set Cancel property to true!
+			'Prevents ThreadAbortException propagation
+			Threading.Thread.ResetAbort()
+		End Try
+		_Workerthread = Nothing
+		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Thread °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 	End Sub
 
-	Protected Overrides Sub OnRunWorkerCompleted(e As System.ComponentModel.RunWorkerCompletedEventArgs)
-		If _SyncTimeOut Then
-			' The BackgroundThread has taken too long. The waiting Thread has aborted.
-			' ReWrtite the Result Argument and trigger the Event.
-			_ResultCache = New RunWorkerCompletedEventArgs(_ResultCache.Result, _ResultCache.Error, True)
-			MyBase.OnRunWorkerCompleted(_ResultCache)
-		End If
-
-		If TriggerRequired Then
+	''' <summary>
+	''' 
+	''' </summary>
+	''' <param name="e"></param>
+	Protected Overrides Sub OnRunWorkerCompleted(e As RunWorkerCompletedEventArgs)
+		'×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+		'											 Calling-Thread
+		If TriggerRequired And e.Cancelled = False Then
+			' Delay the RunWorkerComplete-Event
 			TriggerTimer.Start()
 			_ResultCache = e
 		Else
+			' No delayed EventTriggering
+			' Or the work has been cancelled or aborted.
 			MyBase.OnRunWorkerCompleted(e)
 		End If
+		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Thread °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 	End Sub
 
 #End Region  ' MyBase-Related
@@ -100,23 +128,22 @@ Public Class BackgroundWorkerSyncable
 	''' caches the result of the DoWork.Event, when _SyncReqired = True  
 	''' </summary>
 	''' <remarks></remarks>
-	Private _ResultCache As System.ComponentModel.RunWorkerCompletedEventArgs = Nothing
-
-	Private _SyncTimeOut As Boolean
-
+	Private _ResultCache As RunWorkerCompletedEventArgs = Nothing
 	''' <summary>
 	''' Raises the RunWorkerCompled-Event, when the process in me.DoWork has been
 	''' finished. Otherwise this function starts a Application.DoEvents-Loop on 
-	''' the calling thread until the BackgroundWorker has finished or an the given 
+	''' the calling thread until the BackgroundWorker has finished or the given 
 	''' Time has elapsed.
 	''' </summary>
 	''' <param name="Timeout">Time to wait in seconds, before the timeout occurs. After 
-	''' a Timeout the RunWorkerCompleted-Event will not trigger and the Data processed 
-	''' by the Backgroundthread is lost!</param>
+	''' a Timeout the RunWorkerCompleted-Event will will be raised with it's e.Cancelled=true.
+	''' If the BackgroundWorker Supports Canceellation the thread is cancceled, otherwise
+	''' the backgroundworker is aborted.
+	''' </param>
 	''' <remarks>If a Timeout occurs, CancelAsnyc() is called.</remarks>
 	''' <exception cref="TimeoutException">Occurs if the given time has elapsed.</exception>
 	''' <exception cref="Exception">Rethrows all exceptions occured in me.DoWork!</exception>
-	Public Sub WaitToFinish(Optional ByVal Timeout As Integer = 0)
+	Public Sub WaitToFinish(Optional ByVal Timeout As Integer = 20)
 		' Declare new Stopwatch Instance for measering time 
 		Dim sw As New Stopwatch
 		' Start it, when a timeout is set.
@@ -128,13 +155,14 @@ Public Class BackgroundWorkerSyncable
 			If sw.ElapsedMilliseconds > Timeout * 1000 Then
 				'Stop the Watch
 				sw.Stop()
-				' Set marker -> This will prevent triggering the RunWorkerCompleted
-				' For this Current process.
-				_SyncTimeOut = True
-				' Cancel the Backgroundwork
-				If Me.WorkerSupportsCancellation Then Me.CancelAsync()
-				' Throw an Exception
-				Throw New TimeoutException("Timeout occured during Syncing ThreadResults.")
+
+				Dim Lazytext As String = "Timeout while waiting for the Backgroundworker to Finish."
+				Log.WriteError(Lazytext, New TimeoutException(Lazytext), "WaitToFinish(Intger)")
+
+				' Stop the Backgroundworker.
+				StopAsync()
+				Exit Do
+				'Throw New TimeoutException("Timeout occured during Syncing ThreadResults.")
 			End If
 			' Don't block the calling thread.
 			Application.DoEvents()
@@ -151,15 +179,25 @@ Public Class BackgroundWorkerSyncable
 	''' Cancels the current Thread, manual Triggering and deletes all fetched data.
 	''' </summary>
 	''' <remarks></remarks>
-	Public Sub CancelTrigger()
-		If Me.WorkerSupportsCancellation = False Then Me.WorkerSupportsCancellation = True
-		Me.CancelAsync()
+	Public Sub StopAsync()
+		'TODO: StopAsync() implement wait timeout.
+		If WorkerSupportsCancellation _
+		Then CancelAsync() _
+		Else AbortAsync()
 
-		Do Until MyBase.IsBusy = False
+		Do Until MyBase.IsBusy = False 'OrElse (_Workerthread IsNot Nothing AndAlso _Workerthread.ThreadState = Threading.ThreadState.Aborted)
 			Application.DoEvents()
 		Loop
 		Reset()
-		If MyBase.IsBusy = False Then MyBase.OnRunWorkerCompleted(New RunWorkerCompletedEventArgs(Nothing, Nothing, True))
+	End Sub
+
+	''' <summary>
+	''' Aborts the BackgroundThread.
+	''' </summary>
+	Public Sub AbortAsync()
+		If _Workerthread IsNot Nothing Then
+			_Workerthread.Abort()
+		End If
 	End Sub
 
 	Private Sub Reset()
