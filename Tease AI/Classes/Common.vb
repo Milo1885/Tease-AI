@@ -287,8 +287,8 @@ Public Class Common
 		Dim rtnImage As Image = Nothing
 		Try
 			request.Timeout = 30000
+			request.KeepAlive = False
 			response = DirectCast(request.GetResponse(), HttpWebResponse)
-
 
 			' Check that the remote file was found. The ContentType
 			' check is performed since a request for a non-existent
@@ -298,17 +298,27 @@ Public Class Common
 			If (response.StatusCode = HttpStatusCode.OK OrElse response.StatusCode =
 			HttpStatusCode.Moved OrElse response.StatusCode = HttpStatusCode.Redirect) AndAlso
 			response.ContentType.StartsWith("image", StringComparison.OrdinalIgnoreCase) Then
-
 				' if the remote file was found, download oit
-				Using inputStream As Stream = response.GetResponseStream()
+				Using inputStream As Stream = response.GetResponseStream
+					inputStream.ReadTimeout = 25 * 1000
+					inputStream.WriteTimeout = 25 * 1000
 
 					' Use a Memorystream to get a free rewindable stream
 					' Otherwise gifs are not animated after saving anymore
-					Dim MS As New MemoryStream
-					inputStream.CopyTo(ms)
-					MS.Position = 0
-					rtnImage = Image.FromStream(MS)
+					Dim tempMemStream As New MemoryStream()
 
+					' Load the Memborystream in a loop until no data 
+					' is transfered form server.
+					Dim buffer As Byte() = New Byte(127) {}
+
+					While True
+						Dim read As Integer = inputStream.Read(buffer, 0, buffer.Length)
+						If read <= 0 Then Exit While
+						tempMemStream.Write(buffer, 0, read)
+					End While
+
+					rtnImage = Image.FromStream(tempMemStream)
+					
 					' Check if image has to be saved.
 					If fileName = "" Then Return rtnImage
 					rtnImage.Save(fileName)
