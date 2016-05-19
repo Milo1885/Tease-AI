@@ -10126,7 +10126,7 @@ RinseLatherRepeat:
 			StringClean = StringClean.Replace("@NewBlogImage", "")
 		End If
 
-		If StringClean.Contains("@ShowLocalImage") Then
+		If StringClean.Contains("@ShowLocalImage") And Not StringClean.Contains("@ShowLocalImage(") Then
 			GetLocalImage()
 			StringClean = StringClean.Replace("@ShowLocalImage", "")
 		End If
@@ -11454,7 +11454,7 @@ TaskCleanSet:
 						DateFlag = FixCommas(DateFlag)
 						Dim DateArray As String() = DateFlag.Split(",")
 						SkipGotoLine = True
-						FileGoto = DateArray(1).Replace(")", "")
+						FileGoto = DateArray(DateArray.Count - 1).Replace(")", "")
 						GetGoto()
 					End If
 
@@ -14576,14 +14576,14 @@ VTSkip:
 		End If
 
 
-		'If StringClean.Contains("@CheckBnB") Then
-		'If FrmSettings.CBEnableBnB.Checked = False Then
-		'FileGoto = "(No BnB)"
-		'SkipGotoLine = True
-		'GetGoto()
-		'End If
-		'StringClean = StringClean.Replace("@CheckBnB", "")
-		'End If
+		If StringClean.Contains("@CheckBnB") Then
+			If Not GetImageData(ImageGenre.Boobs).IsAvailable Or Not GetImageData(ImageGenre.Butt).IsAvailable Then
+				FileGoto = "(No BnB)"
+				SkipGotoLine = True
+				GetGoto()
+			End If
+			StringClean = StringClean.Replace("@CheckBnB", "")
+		End If
 
 
 
@@ -15035,7 +15035,7 @@ VTSkip:
 					DDiff = GetDateDifference(DateArray(0), DateArray(1))
 					DCompare = GetDateCompare(DateArray(0), DateArray(1))
 					DDiff2 = GetDateDifference(DateArray(0), DateArray(2))
-					DCompare2 = GetDateCompare(DateArray(0), DateArray(1))
+					DCompare2 = GetDateCompare(DateArray(0), DateArray(2))
 					If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
 					Return False
 				End If
@@ -15048,17 +15048,17 @@ VTSkip:
 				End If
 
 				If DateArray.Count = 3 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(2))
-					DCompare = GetDateCompare(DateArray(0), DateArray(2))
+					DDiff = GetDateDifference(DateArray(0), DateArray(1))
+					DCompare = GetDateCompare(DateArray(0), DateArray(1))
 					If DDiff >= DCompare Then Return True
 					Return False
 				End If
 
 				If DateArray.Count = 4 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(2))
-					DCompare = GetDateCompare(DateArray(0), DateArray(2))
-					DDiff2 = GetDateDifference(DateArray(0), DateArray(3))
-					DCompare2 = GetDateCompare(DateArray(0), DateArray(3))
+					DDiff = GetDateDifference(DateArray(0), DateArray(1))
+					DCompare = GetDateCompare(DateArray(0), DateArray(1))
+					DDiff2 = GetDateDifference(DateArray(0), DateArray(2))
+					DCompare2 = GetDateCompare(DateArray(0), DateArray(2))
 					If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
 					Return False
 				End If
@@ -24684,11 +24684,10 @@ playLoop:
 	End Sub
 
 	Public Sub ChatReadyState()
-		While ChatText.ReadyState <> WebBrowserReadyState.Complete And ChatText2.ReadyState <> WebBrowserReadyState.Complete
+		While ChatText.ReadyState <> WebBrowserReadyState.Complete Or ChatText2.ReadyState <> WebBrowserReadyState.Complete
 			Application.DoEvents()
 		End While
 		ScrollChatDown()
 	End Sub
-
 
 End Class

@@ -8,6 +8,30 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 # Changelog - Patch 55	
 	
+# Changelog - Patch 54.2
+
+The code to parse @CheckDate() in the last patch contained syntax errors. It should now work correctly according to the usage established by the Command Guide  
+
+Legacy Command @CheckBnB reinstated by checking for available Boobs and Butt pictures rather than the defunct "Enabled BnB Games" checkbox
+
+Fixes added from Community Members:
+
+    Stefaf: Bugfix freezing imageDownload caused by not serverside closed connection. Now the Connection is closed on clientside, if no data is received anymore.
+	 
+	Stefaf: Added automated ImageAnimation disabling, when a gif is displayed and the UI-Thread is not reponding.
+
+    Stefaf: Improvement IO.Access
+    Removed all My.Settings.Save() except after loading the application. Increased My.Settings autosavetime to 60 seconds. Now the application does not create the "ösldkflkm".newcfg files that much. Settings are still saved on regular application close.
+	 
+	Stefaf: Metronome is now loading the wav file into a memory-stream and plays it using a Media.Soundplayer. This way the file is not loaded again after startup unless an exception occurs. If so it will try to recover 120 times with a delay of a second in between. Positive side effect: now the metronome volume is adjustable with Tease-AI application and not System-Sounds any more.
+
+    Stefaf: BugFix: Exceptions on Closing
+	
+	Stefaf: Added new ToolStripMenuitem to PictureStrip, to stop the current ImageAnimation
+	
+	Stefaf: Reworked PictureStrip The checks now on opening what type if image is displayed and shows Informations according the Image.
+    
+	Stefaf: Reworked Button behaviour Dislike and Like Image. Their check-state indicate now if an image is in a certain list. If they are checked and clicked, the current image will removed from the file.
 	
 # Changelog - Patch 54.1
 

@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.Threading
+Imports System.Windows.Forms
 
 Partial Class Form1
 
@@ -746,7 +747,7 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 
 		' Exit sub, when the function was called on a BackgroundWorker Thread.
 		If InvokeRequired Then Exit Sub
-		BWimageFetcher_RunWorkerCompleted(Nothing, New ComponentModel.RunWorkerCompletedEventArgs(e.Argument, Nothing, False))
+		BWimageFetcher_RunWorkerCompleted(Nothing, New System.ComponentModel.RunWorkerCompletedEventArgs(e.Argument, Nothing, False))
 		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Thread °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 	End Sub
 
@@ -794,7 +795,8 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 	''' </summary>
 	Public Sub ClearMainPictureBox()
 
-		MainPictureboxSetImage(Nothing, "")
+		'MainPictureboxSetImage(Nothing, "")
+		MainPictureboxSetImage(New Bitmap(Image.FromFile(Application.StartupPath & "\Images\System\Black.jpg")), "")
 
 	End Sub
 	''' <summary>
