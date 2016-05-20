@@ -6,6 +6,8 @@ Imports System.Speech.Synthesis
 Imports System.Speech.AudioFormat
 Imports System.Drawing.Drawing2D
 Imports System.Text.RegularExpressions
+Imports System.Xml.Serialization
+Imports System.Xml
 
 
 Public Class Form1
@@ -21035,16 +21037,16 @@ GetDommeSlideshow:
 		End If
 
 
-		If File.Exists(Application.StartupPath & "\System\SavedState.txt") Then
+		If File.Exists(Application.StartupPath & "\System\SavedState.xml") Then
 			Dim Result As Integer = MessageBox.Show(Me, "A previous saved state already exists!" & Environment.NewLine & Environment.NewLine &
-												   "Do you wish to overwrite it?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+						"Do you wish to overwrite it?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
 			If Result = DialogResult.No Then
 				Return
 			End If
 		End If
 
 		Try
-			SuspendSession()
+			SaveProgramState()
 		Catch
 			MessageBox.Show(Me, "An error occurred and the state did not save correctly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 		End Try
@@ -21068,7 +21070,7 @@ GetDommeSlideshow:
 			End If
 		End If
 
-		ResumeSession()
+		LoadProgramState()
 
 	End Sub
 
@@ -24690,4 +24692,794 @@ playLoop:
 		ScrollChatDown()
 	End Sub
 
+	Public Sub SaveProgramState(Optional ByVal AutoSave As Boolean = False)
+
+		Dim SavedState As New SaveState( _
+		Chat, _
+		ScriptOperator, _
+		ScriptCompare, _
+		DomTyping, _
+		CheckYes, _
+		CheckNo, _
+		Playlist, _
+		PlaylistFile, _
+		PlaylistCurrent, _
+		FormLoading, _
+		Responding, _
+		StrokeTauntVal, _
+		FileText, _
+		TempStrokeTauntVal, _
+		TempFileText, _
+		TeaseTick, _
+		StrokeTauntCount, _
+		TauntTextTotal, _
+		TauntLines, _
+		StrokeFilter, _
+		ScriptTick, _
+		StringLength, _
+		FileGoto, _
+		SkipGotoLine, _
+		ChatString, _
+		DomTask, _
+		DomChat, _
+		TypeDelay, _
+		TempVal, _
+		NullResponse, _
+		TagCount, _
+		LocalTagCount, _
+		TaskFile, _
+		TaskText, _
+		TaskTextDir, _
+		ResponseFile, _
+		ResponseLine, _
+		CBTCockActive, _
+		CBTBallsActive, _
+		CBTCockFlag, _
+		CBTBallsFlag, _
+		CBTBallsFirst, _
+		CBTCockFirst, _
+		CBTBallsCount, _
+		CBTCockCount, _
+		TasksCount, _
+		GotoDommeLevel, _
+		DommeMood, _
+		AFK, _
+		HypnoGen, _
+		Induction, _
+		TempHypno, _
+		DomColor, _
+		SubColor, _
+		StrokeTick, _
+		StrokeTauntTick, _
+		StrokePaceRight, _
+		StrokePace, _
+		StrokeTimeTotal, _
+		HoldEdgeTime, _
+		HoldEdgeTimeTotal, _
+		EdgeTauntInt, _
+		DelayTick, _
+		DomTypeCheck, _
+		TypeToggle, _
+		IsTyping, _
+		SubWroteLast, _
+		YesOrNo, _
+		GotoFlag, _
+		CBT, _
+		RunningScript, _
+		BeforeTease, _
+		SubStroking, _
+		SubEdging, _
+		SubHoldingEdge, _
+		EndTease, _
+		ShowModule, _
+		ModuleEnd, _
+		DivideText, _
+		HoldEdgeTick, _
+		HoldEdgeChance, _
+		EdgeHold, _
+		EdgeNoHold, _
+		EdgeToRuin, _
+		EdgeToRuinSecret, _
+		LongEdge, _
+		AskedToGiveUp, _
+		AskedToGiveUpSection, _
+		SubGaveUp, _
+		AskedToSpeedUp, _
+		AskedToSlowDown, _
+		ThoughtEnd, _
+		VTLength, _
+		DommeVideo, _
+		VideoType, _
+		CensorshipGame, _
+		CensorshipTick, _
+		CensorDuration, _
+		AvoidTheEdgeGame, _
+		AvoidTheEdgeTick, _
+		AvoidTheEdgeTimerTick, _
+		AvoidTheEdgeDuration, _
+		AvoidTheEdgeStroking, _
+		AtECountdown, _
+		VTPath, _
+		NoVideo, _
+		NoSpecialVideo, _
+		VideoCheck, _
+		VideoTease, _
+		RLGLGame, _
+		RLGLStroking, _
+		RLGLTick, _
+		RedLight, _
+		RLGLTauntTick, _
+		RandomizerVideo, _
+		RandomizerVideoTease, _
+		ScriptVideoTease, _
+		ScriptVideoTeaseFlag, _
+		VideoTauntTick, _
+		SlideshowLoaded, _
+		RefreshVideoTotal, _
+		GlitterImageAV, _
+		GlitterNCDomme, _
+		GlitterNC1, _
+		GlitterNC2, _
+		GlitterNC3, _
+		GlitterTempColor, _
+		UpdatesTick, _
+		UpdatingPost, _
+		UpdateStage, _
+		UpdateStageTick, _
+		StatusText, _
+		ContactNumber, _
+		ContactTick, _
+		ContactFlag, _
+		StatusText1, _
+		StatusText2, _
+		StatusText3, _
+		StatusChance1, _
+		StatusChance2, _
+		StatusChance3, _
+		Update1, _
+		Update2, _
+		Update3, _
+		GetFolder, _
+		FileCount, _
+		FileCountMax, _
+		_ImageFileNames, _
+		_CurrentImage, _
+		WithTeaseImgDir, _
+		ApproveImage, _
+		WIExit, _
+		RecentSlideshows, _
+		MainPictureImage, _
+		DomPic, _
+		LockImage, _
+		LockVideo, _
+		LocalTagImageList, _
+		Crazy, _
+		Vulgar, _
+		Supremacist, _
+		CockSize, _
+		TempDick, _
+		PetName, _
+		PetName2, _
+		TauntText, _
+		ScriptCount, _
+		TempScriptCount, _
+		TauntTextCount, _
+		StartIndex, _
+		EndIndex, _
+		SlideshowTimerTick, _
+		ReadBlog, _
+		ReadBlogRate, _
+		SearchImageBlog, _
+		FoundString, _
+		WebImage, _
+		WebImageLines, _
+		WebImageLine, _
+		WebImageLineTotal, _
+		WebImagePath, _
+		ReaderString, _
+		ReaderStringTotal, _
+		StrokePaceInt, _
+		LastScriptCountdown, _
+		LastScript, _
+		JustShowedBlogImage, _
+		SaidHello, _
+		StopMetronome, _
+		AvgEdgeStroking, _
+		AvgEdgeNoTouch, _
+		EdgeCountTick, _
+		AvgEdgeStrokingFlag, _
+		AvgEdgeCount, _
+		AvgEdgeCountRest, _
+		EdgeTickCheck, _
+		EdgeNOT, _
+		AlreadyStrokingEdge, _
+		WritingTaskLinesAmount, _
+		WritingTaskLinesWritten, _
+		WritingTaskLinesRemaining, _
+		WritingTaskMistakesAllowed, _
+		WritingTaskMistakesMade, _
+		WritingTaskFlag, _
+		FirstRound, _
+		StartStrokingCount, _
+		TeaseJOI, _
+		TeaseVideo, _
+		TnAList, _
+		BoobList, _
+		AssList, _
+		AssImage, _
+		BoobImage, _
+		FoundTag, _
+		TagGarment, _
+		TagUnderwear, _
+		TagTattoo, _
+		TagSexToy, _
+		TagFurniture, _
+		BookmarkModule, _
+		BookmarkModuleFile, _
+		BookmarkModuleLine, _
+		BookmarkLink, _
+		BookmarkLinkFile, _
+		BookmarkLinkLine, _
+		WaitTick, _
+		OrgasmDenied, _
+		OrgasmAllowed, _
+		OrgasmRuined, _
+		LastOrgasmType, _
+		StupidTick, _
+		StupidFlag, _
+		CaloriesConsumed, _
+		CaloriesGoal, _
+		GoldTokens, _
+		SilverTokens, _
+		BronzeTokens, _
+		EdgeFound, _
+		OrgasmYesNo, _
+		VTFlag, _
+		DomPersonality, _
+		UpdateList, _
+		GlitterDocument, _
+		CustomSlideshow, _
+		CustomSlideshowTick, _
+		CustomSlideshowList, _
+		ImageString, _
+		RapidFire, _
+		GlitterTease, _
+		AddContactTick, _
+		Contact1Pics, _
+		Contact2Pics, _
+		Contact3Pics, _
+		Contact1PicsCount, _
+		Contact2PicsCount, _
+		Contact3PicsCount, _
+		Group, _
+		CustomTask, _
+		CustomTaskFirst, _
+		CustomTaskText, _
+		CustomTaskTextFirst, _
+		CustomTaskActive, _
+		SubtitleCount, _
+		VidFile, _
+		RiskyDeal, _
+		RiskyEdges, _
+		RiskyDelay, _
+		FinalRiskyPick, _
+		SysMes, _
+		EmoMes, _
+		Contact1Edge, _
+		Contact2Edge, _
+		Contact3Edge, _
+		Contact1Stroke, _
+		Contact2Stroke, _
+		Contact3Stroke, _
+		ReturnFileText, _
+		ReturnStrokeTauntVal, _
+		ReturnSubState, _
+		ReturnFlag, _
+		SessionEdges, _
+		WindowCheck, _
+		StrokeFaster, _
+		StrokeFastest, _
+		StrokeSlower, _
+		StrokeSlowest, _
+		InputFlag, _
+		InputString, _
+		RapidCode, _
+		CorrectedTypo, _
+		CorrectedWord, _
+		DoNotDisturb, _
+		TypoSwitch, _
+		TyposDisabled, _
+		EdgeHoldSeconds, _
+		EdgeHoldFlag, _
+		SlideshowInt, _
+		JustShowedSlideshowImage, _
+		RandomSlideshowCategory, _
+		ResetFlag, _
+		DommeTags, _
+		ThemeSettings, _
+		InputIcon, _
+		ApplyingTheme, _
+		AdjustingWindow, _
+		SplitContainerHeight, _
+		DommeImageFound, _
+		LocalImageFound, _
+		LocalImageListCheck, _
+		CBTBothActive, _
+		CBTBothFlag, _
+		CBTBothCount, _
+		CBTBothFirst, _
+		GeneralTime, _
+		NewDommeSlideshow, _
+		OriginalDommeSlideshow, _
+		TimeoutTick, _
+		PBImage, _
+		DommeImageSTR, _
+		LocalImageSTR, _
+		ImageLocation, _
+		ResponseYes, _
+		ResponseNo, _
+		SetModule, _
+		SetLink, _
+		SetModuleGoto, _
+		SetLinkGoto, _
+		OrgasmRestricted, _
+		FollowUp, _
+		WorshipMode, _
+		WorshipTarget, _
+		LongHold, _
+		ExtremeHold, _
+		LongTaunts, _
+		LazyEdit1, _
+		LazyEdit2, _
+		LazyEdit3, _
+		LazyEdit4, _
+		LazyEdit5, _
+		FormFinishedLoading, _
+		MiniScript, _
+		MiniScriptText, _
+		MiniTauntVal, _
+		MiniTimerCheck, _
+		JumpVideo, _
+		VideoTick, _
+		EdgeGoto, _
+		EdgeMessage, _
+		EdgeVideo, _
+		EdgeMessageText, _
+		EdgeGotoLine, _
+		MultipleEdges, _
+		MultipleEdgesAmount, _
+		MultipleEdgesInterval, _
+		MultipleEdgesTick, _
+		MultipleEdgesMetronome, _
+		YesGoto, _
+		YesVideo, _
+		NoGoto, _
+		NoVideo_Mode, _
+		CameGoto, _
+		CameVideo, _
+		CameMessage, _
+		CameMessageText, _
+		RuinedGoto, _
+		RuinedVideo, _
+		RuinedMessage, _
+		RuinedMessageText, _
+		YesGotoLine, _
+		NoGotoLine, _
+		CameGotoLine, _
+		RuinedGotoLine, _
+		TauntEdging, _
+		TauntEdgingAsked, _
+		WritingTaskCurrentTime)
+
+
+		Dim xml_serializer As New XmlSerializer(GetType(SaveState))
+		Dim string_writer As New StringWriter
+		xml_serializer.Serialize(string_writer, SavedState)
+
+		Dim SaveLocation As String
+
+		If AutoSave = False Then
+			SaveLocation = Application.StartupPath & "\System\SavedState.xml"
+		Else
+			SaveLocation = Application.StartupPath & "\System\AutoSave.xml"
+		End If
+
+		My.Computer.FileSystem.WriteAllText(SaveLocation, string_writer.ToString(), False)
+
+		string_writer.Close()
+
+		If AutoSave = False Then MsgBox("State has been saved")
+
+	End Sub
+
+	Public Sub LoadProgramState()
+
+		Dim xml_serializer As New XmlSerializer(GetType(SaveState))
+		Dim StateReader As New StreamReader(Application.StartupPath & "\System\SavedState.xml")
+
+		Dim LoadedState As SaveState = DirectCast(xml_serializer.Deserialize(StateReader), SaveState)
+
+
+		Chat = LoadedState.Chat
+		ScriptOperator = LoadedState.ScriptOperator
+		ScriptCompare = LoadedState.ScriptCompare
+		DomTyping = LoadedState.DomTyping
+		CheckYes = LoadedState.CheckYes
+		CheckNo = LoadedState.CheckNo
+		Playlist = LoadedState.Playlist
+		PlaylistFile = LoadedState.PlaylistFile
+		PlaylistCurrent = LoadedState.PlaylistCurrent
+		FormLoading = LoadedState.FormLoading
+		Responding = LoadedState.Responding
+		StrokeTauntVal = LoadedState.StrokeTauntVal
+		FileText = LoadedState.FileText
+		TempStrokeTauntVal = LoadedState.TempStrokeTauntVal
+		TempFileText = LoadedState.TempFileText
+		TeaseTick = LoadedState.TeaseTick
+		StrokeTauntCount = LoadedState.StrokeTauntCount
+		TauntTextTotal = LoadedState.TauntTextTotal
+		TauntLines = LoadedState.TauntLines
+		StrokeFilter = LoadedState.StrokeFilter
+		ScriptTick = LoadedState.ScriptTick
+		StringLength = LoadedState.StringLength
+		FileGoto = LoadedState.FileGoto
+		SkipGotoLine = LoadedState.SkipGotoLine
+		ChatString = LoadedState.ChatString
+		DomTask = LoadedState.DomTask
+		DomChat = LoadedState.DomChat
+		TypeDelay = LoadedState.TypeDelay
+		TempVal = LoadedState.TempVal
+		NullResponse = LoadedState.NullResponse
+		TagCount = LoadedState.TagCount
+		LocalTagCount = LoadedState.LocalTagCount
+		TaskFile = LoadedState.TaskFile
+		TaskText = LoadedState.TaskText
+		TaskTextDir = LoadedState.TaskTextDir
+		ResponseFile = LoadedState.ResponseFile
+		ResponseLine = LoadedState.ResponseLine
+		CBTCockActive = LoadedState.CBTCockActive
+		CBTBallsActive = LoadedState.CBTBallsActive
+		CBTCockFlag = LoadedState.CBTCockFlag
+		CBTBallsFlag = LoadedState.CBTBallsFlag
+		CBTBallsFirst = LoadedState.CBTBallsFirst
+		CBTCockFirst = LoadedState.CBTCockFirst
+		CBTBallsCount = LoadedState.CBTBallsCount
+		CBTCockCount = LoadedState.CBTCockCount
+		TasksCount = LoadedState.TasksCount
+		GotoDommeLevel = LoadedState.GotoDommeLevel
+		DommeMood = LoadedState.DommeMood
+		AFK = LoadedState.AFK
+		HypnoGen = LoadedState.HypnoGen
+		Induction = LoadedState.Induction
+		TempHypno = LoadedState.TempHypno
+		DomColor = LoadedState.DomColor
+		SubColor = LoadedState.SubColor
+		StrokeTick = LoadedState.StrokeTick
+		StrokeTauntTick = LoadedState.StrokeTauntTick
+		StrokePaceRight = LoadedState.StrokePaceRight
+		StrokePace = LoadedState.StrokePace
+		StrokeTimeTotal = LoadedState.StrokeTimeTotal
+		HoldEdgeTime = LoadedState.HoldEdgeTime
+		HoldEdgeTimeTotal = LoadedState.HoldEdgeTimeTotal
+		EdgeTauntInt = LoadedState.EdgeTauntInt
+		DelayTick = LoadedState.DelayTick
+		DomTypeCheck = LoadedState.DomTypeCheck
+		TypeToggle = LoadedState.TypeToggle
+		IsTyping = LoadedState.IsTyping
+		SubWroteLast = LoadedState.SubWroteLast
+		YesOrNo = LoadedState.YesOrNo
+		GotoFlag = LoadedState.GotoFlag
+		CBT = LoadedState.CBT
+		RunningScript = LoadedState.RunningScript
+		BeforeTease = LoadedState.BeforeTease
+		SubStroking = LoadedState.SubStroking
+		SubEdging = LoadedState.SubEdging
+		SubHoldingEdge = LoadedState.SubHoldingEdge
+		EndTease = LoadedState.EndTease
+		ShowModule = LoadedState.ShowModule
+		ModuleEnd = LoadedState.ModuleEnd
+		DivideText = LoadedState.DivideText
+		HoldEdgeTick = LoadedState.HoldEdgeTick
+		HoldEdgeChance = LoadedState.HoldEdgeChance
+		EdgeHold = LoadedState.EdgeHold
+		EdgeNoHold = LoadedState.EdgeNoHold
+		EdgeToRuin = LoadedState.EdgeToRuin
+		EdgeToRuinSecret = LoadedState.EdgeToRuinSecret
+		LongEdge = LoadedState.LongEdge
+		AskedToGiveUp = LoadedState.AskedToGiveUp
+		AskedToGiveUpSection = LoadedState.AskedToGiveUpSection
+		SubGaveUp = LoadedState.SubGaveUp
+		AskedToSpeedUp = LoadedState.AskedToSpeedUp
+		AskedToSlowDown = LoadedState.AskedToSlowDown
+		ThoughtEnd = LoadedState.ThoughtEnd
+		VTLength = LoadedState.VTLength
+		DommeVideo = LoadedState.DommeVideo
+		VideoType = LoadedState.VideoType
+		CensorshipGame = LoadedState.CensorshipGame
+		CensorshipTick = LoadedState.CensorshipTick
+		CensorDuration = LoadedState.CensorDuration
+		AvoidTheEdgeGame = LoadedState.AvoidTheEdgeGame
+		AvoidTheEdgeTick = LoadedState.AvoidTheEdgeTick
+		AvoidTheEdgeTimerTick = LoadedState.AvoidTheEdgeTimerTick
+		AvoidTheEdgeDuration = LoadedState.AvoidTheEdgeDuration
+		AvoidTheEdgeStroking = LoadedState.AvoidTheEdgeStroking
+		AtECountdown = LoadedState.AtECountdown
+		VTPath = LoadedState.VTPath
+		NoVideo = LoadedState.NoVideo
+		NoSpecialVideo = LoadedState.NoSpecialVideo
+		VideoCheck = LoadedState.VideoCheck
+		VideoTease = LoadedState.VideoTease
+		RLGLGame = LoadedState.RLGLGame
+		RLGLStroking = LoadedState.RLGLStroking
+		RLGLTick = LoadedState.RLGLTick
+		RedLight = LoadedState.RedLight
+		RLGLTauntTick = LoadedState.RLGLTauntTick
+		RandomizerVideo = LoadedState.RandomizerVideo
+		RandomizerVideoTease = LoadedState.RandomizerVideoTease
+		ScriptVideoTease = LoadedState.ScriptVideoTease
+		ScriptVideoTeaseFlag = LoadedState.ScriptVideoTeaseFlag
+		VideoTauntTick = LoadedState.VideoTauntTick
+		SlideshowLoaded = LoadedState.SlideshowLoaded
+		RefreshVideoTotal = LoadedState.RefreshVideoTotal
+		GlitterImageAV = LoadedState.GlitterImageAV
+		GlitterNCDomme = LoadedState.GlitterNCDomme
+		GlitterNC1 = LoadedState.GlitterNC1
+		GlitterNC2 = LoadedState.GlitterNC2
+		GlitterNC3 = LoadedState.GlitterNC3
+		GlitterTempColor = LoadedState.GlitterTempColor
+		UpdatesTick = LoadedState.UpdatesTick
+		UpdatingPost = LoadedState.UpdatingPost
+		UpdateStage = LoadedState.UpdateStage
+		UpdateStageTick = LoadedState.UpdateStageTick
+		StatusText = LoadedState.StatusText
+		ContactNumber = LoadedState.ContactNumber
+		ContactTick = LoadedState.ContactTick
+		ContactFlag = LoadedState.ContactFlag
+		StatusText1 = LoadedState.StatusText1
+		StatusText2 = LoadedState.StatusText2
+		StatusText3 = LoadedState.StatusText3
+		StatusChance1 = LoadedState.StatusChance1
+		StatusChance2 = LoadedState.StatusChance2
+		StatusChance3 = LoadedState.StatusChance3
+		Update1 = LoadedState.Update1
+		Update2 = LoadedState.Update2
+		Update3 = LoadedState.Update3
+		GetFolder = LoadedState.GetFolder
+		FileCount = LoadedState.FileCount
+		FileCountMax = LoadedState.FileCountMax
+		_ImageFileNames = LoadedState._ImageFileNames
+		_CurrentImage = LoadedState._CurrentImage
+		WithTeaseImgDir = LoadedState.WithTeaseImgDir
+		ApproveImage = LoadedState.ApproveImage
+		WIExit = LoadedState.WIExit
+		RecentSlideshows = LoadedState.RecentSlideshows
+		MainPictureImage = LoadedState.MainPictureImage
+		DomPic = LoadedState.DomPic
+		LockImage = LoadedState.LockImage
+		LockVideo = LoadedState.LockVideo
+		LocalTagImageList = LoadedState.LocalTagImageList
+		Crazy = LoadedState.Crazy
+		Vulgar = LoadedState.Vulgar
+		Supremacist = LoadedState.Supremacist
+		CockSize = LoadedState.CockSize
+		TempDick = LoadedState.TempDick
+		PetName = LoadedState.PetName
+		PetName2 = LoadedState.PetName2
+		TauntText = LoadedState.TauntText
+		ScriptCount = LoadedState.ScriptCount
+		TempScriptCount = LoadedState.TempScriptCount
+		TauntTextCount = LoadedState.TauntTextCount
+		StartIndex = LoadedState.StartIndex
+		EndIndex = LoadedState.EndIndex
+		SlideshowTimerTick = LoadedState.SlideshowTimerTick
+		ReadBlog = LoadedState.ReadBlog
+		ReadBlogRate = LoadedState.ReadBlogRate
+		SearchImageBlog = LoadedState.SearchImageBlog
+		FoundString = LoadedState.FoundString
+		WebImage = LoadedState.WebImage
+		WebImageLines = LoadedState.WebImageLines
+		WebImageLine = LoadedState.WebImageLine
+		WebImageLineTotal = LoadedState.WebImageLineTotal
+		WebImagePath = LoadedState.WebImagePath
+		ReaderString = LoadedState.ReaderString
+		ReaderStringTotal = LoadedState.ReaderStringTotal
+		StrokePaceInt = LoadedState.StrokePaceInt
+		LastScriptCountdown = LoadedState.LastScriptCountdown
+		LastScript = LoadedState.LastScript
+		JustShowedBlogImage = LoadedState.JustShowedBlogImage
+		SaidHello = LoadedState.SaidHello
+		StopMetronome = LoadedState.StopMetronome
+		AvgEdgeStroking = LoadedState.AvgEdgeStroking
+		AvgEdgeNoTouch = LoadedState.AvgEdgeNoTouch
+		EdgeCountTick = LoadedState.EdgeCountTick
+		AvgEdgeStrokingFlag = LoadedState.AvgEdgeStrokingFlag
+		AvgEdgeCount = LoadedState.AvgEdgeCount
+		AvgEdgeCountRest = LoadedState.AvgEdgeCountRest
+		EdgeTickCheck = LoadedState.EdgeTickCheck
+		EdgeNOT = LoadedState.EdgeNOT
+		AlreadyStrokingEdge = LoadedState.AlreadyStrokingEdge
+		WritingTaskLinesAmount = LoadedState.WritingTaskLinesAmount
+		WritingTaskLinesWritten = LoadedState.WritingTaskLinesWritten
+		WritingTaskLinesRemaining = LoadedState.WritingTaskLinesRemaining
+		WritingTaskMistakesAllowed = LoadedState.WritingTaskMistakesAllowed
+		WritingTaskMistakesMade = LoadedState.WritingTaskMistakesMade
+		WritingTaskFlag = LoadedState.WritingTaskFlag
+		FirstRound = LoadedState.FirstRound
+		StartStrokingCount = LoadedState.StartStrokingCount
+		TeaseJOI = LoadedState.TeaseJOI
+		TeaseVideo = LoadedState.TeaseVideo
+		TnAList = LoadedState.TnAList
+		BoobList = LoadedState.BoobList
+		AssList = LoadedState.AssList
+		AssImage = LoadedState.AssImage
+		BoobImage = LoadedState.BoobImage
+		FoundTag = LoadedState.FoundTag
+		TagGarment = LoadedState.TagGarment
+		TagUnderwear = LoadedState.TagUnderwear
+		TagTattoo = LoadedState.TagTattoo
+		TagSexToy = LoadedState.TagSexToy
+		TagFurniture = LoadedState.TagFurniture
+		BookmarkModule = LoadedState.BookmarkModule
+		BookmarkModuleFile = LoadedState.BookmarkModuleFile
+		BookmarkModuleLine = LoadedState.BookmarkModuleLine
+		BookmarkLink = LoadedState.BookmarkLink
+		BookmarkLinkFile = LoadedState.BookmarkLinkFile
+		BookmarkLinkLine = LoadedState.BookmarkLinkLine
+		WaitTick = LoadedState.WaitTick
+		OrgasmDenied = LoadedState.OrgasmDenied
+		OrgasmAllowed = LoadedState.OrgasmAllowed
+		OrgasmRuined = LoadedState.OrgasmRuined
+		LastOrgasmType = LoadedState.LastOrgasmType
+		StupidTick = LoadedState.StupidTick
+		StupidFlag = LoadedState.StupidFlag
+		CaloriesConsumed = LoadedState.CaloriesConsumed
+		CaloriesGoal = LoadedState.CaloriesGoal
+		GoldTokens = LoadedState.GoldTokens
+		SilverTokens = LoadedState.SilverTokens
+		BronzeTokens = LoadedState.BronzeTokens
+		EdgeFound = LoadedState.EdgeFound
+		OrgasmYesNo = LoadedState.OrgasmYesNo
+		VTFlag = LoadedState.VTFlag
+		DomPersonality = LoadedState.DomPersonality
+		UpdateList = LoadedState.UpdateList
+		GlitterDocument = LoadedState.GlitterDocument
+		CustomSlideshow = LoadedState.CustomSlideshow
+		CustomSlideshowTick = LoadedState.CustomSlideshowTick
+		CustomSlideshowList = LoadedState.CustomSlideshowList
+		ImageString = LoadedState.ImageString
+		RapidFire = LoadedState.RapidFire
+		GlitterTease = LoadedState.GlitterTease
+		AddContactTick = LoadedState.AddContactTick
+		Contact1Pics = LoadedState.Contact1Pics
+		Contact2Pics = LoadedState.Contact2Pics
+		Contact3Pics = LoadedState.Contact3Pics
+		Contact1PicsCount = LoadedState.Contact1PicsCount
+		Contact2PicsCount = LoadedState.Contact2PicsCount
+		Contact3PicsCount = LoadedState.Contact3PicsCount
+		Group = LoadedState.Group
+		CustomTask = LoadedState.CustomTask
+		CustomTaskFirst = LoadedState.CustomTaskFirst
+		CustomTaskText = LoadedState.CustomTaskText
+		CustomTaskTextFirst = LoadedState.CustomTaskTextFirst
+		CustomTaskActive = LoadedState.CustomTaskActive
+		SubtitleCount = LoadedState.SubtitleCount
+		VidFile = LoadedState.VidFile
+		RiskyDeal = LoadedState.RiskyDeal
+		RiskyEdges = LoadedState.RiskyEdges
+		RiskyDelay = LoadedState.RiskyDelay
+		FinalRiskyPick = LoadedState.FinalRiskyPick
+		SysMes = LoadedState.SysMes
+		EmoMes = LoadedState.EmoMes
+		Contact1Edge = LoadedState.Contact1Edge
+		Contact2Edge = LoadedState.Contact2Edge
+		Contact3Edge = LoadedState.Contact3Edge
+		Contact1Stroke = LoadedState.Contact1Stroke
+		Contact2Stroke = LoadedState.Contact2Stroke
+		Contact3Stroke = LoadedState.Contact3Stroke
+		ReturnFileText = LoadedState.ReturnFileText
+		ReturnStrokeTauntVal = LoadedState.ReturnStrokeTauntVal
+		ReturnSubState = LoadedState.ReturnSubState
+		ReturnFlag = LoadedState.ReturnFlag
+		SessionEdges = LoadedState.SessionEdges
+		WindowCheck = LoadedState.WindowCheck
+		StrokeFaster = LoadedState.StrokeFaster
+		StrokeFastest = LoadedState.StrokeFastest
+		StrokeSlower = LoadedState.StrokeSlower
+		StrokeSlowest = LoadedState.StrokeSlowest
+		InputFlag = LoadedState.InputFlag
+		InputString = LoadedState.InputString
+		RapidCode = LoadedState.RapidCode
+		CorrectedTypo = LoadedState.CorrectedTypo
+		CorrectedWord = LoadedState.CorrectedWord
+		DoNotDisturb = LoadedState.DoNotDisturb
+		TypoSwitch = LoadedState.TypoSwitch
+		TyposDisabled = LoadedState.TyposDisabled
+		EdgeHoldSeconds = LoadedState.EdgeHoldSeconds
+		EdgeHoldFlag = LoadedState.EdgeHoldFlag
+		SlideshowInt = LoadedState.SlideshowInt
+		JustShowedSlideshowImage = LoadedState.JustShowedSlideshowImage
+		RandomSlideshowCategory = LoadedState.RandomSlideshowCategory
+		ResetFlag = LoadedState.ResetFlag
+		DommeTags = LoadedState.DommeTags
+		ThemeSettings = LoadedState.ThemeSettings
+		InputIcon = LoadedState.InputIcon
+		ApplyingTheme = LoadedState.ApplyingTheme
+		AdjustingWindow = LoadedState.AdjustingWindow
+		SplitContainerHeight = LoadedState.SplitContainerHeight
+		DommeImageFound = LoadedState.DommeImageFound
+		LocalImageFound = LoadedState.LocalImageFound
+		LocalImageListCheck = LoadedState.LocalImageListCheck
+		CBTBothActive = LoadedState.CBTBothActive
+		CBTBothFlag = LoadedState.CBTBothFlag
+		CBTBothCount = LoadedState.CBTBothCount
+		CBTBothFirst = LoadedState.CBTBothFirst
+		GeneralTime = LoadedState.GeneralTime
+		NewDommeSlideshow = LoadedState.NewDommeSlideshow
+		OriginalDommeSlideshow = LoadedState.OriginalDommeSlideshow
+		TimeoutTick = LoadedState.TimeoutTick
+		PBImage = LoadedState.PBImage
+		DommeImageSTR = LoadedState.DommeImageSTR
+		LocalImageSTR = LoadedState.LocalImageSTR
+		ImageLocation = LoadedState.ImageLocation
+		ResponseYes = LoadedState.ResponseYes
+		ResponseNo = LoadedState.ResponseNo
+		SetModule = LoadedState.SetModule
+		SetLink = LoadedState.SetLink
+		SetModuleGoto = LoadedState.SetModuleGoto
+		SetLinkGoto = LoadedState.SetLinkGoto
+		OrgasmRestricted = LoadedState.OrgasmRestricted
+		FollowUp = LoadedState.FollowUp
+		WorshipMode = LoadedState.WorshipMode
+		WorshipTarget = LoadedState.WorshipTarget
+		LongHold = LoadedState.LongHold
+		ExtremeHold = LoadedState.ExtremeHold
+		LongTaunts = LoadedState.LongTaunts
+		LazyEdit1 = LoadedState.LazyEdit1
+		LazyEdit2 = LoadedState.LazyEdit2
+		LazyEdit3 = LoadedState.LazyEdit3
+		LazyEdit4 = LoadedState.LazyEdit4
+		LazyEdit5 = LoadedState.LazyEdit5
+		FormFinishedLoading = LoadedState.FormFinishedLoading
+		MiniScript = LoadedState.MiniScript
+		MiniScriptText = LoadedState.MiniScriptText
+		MiniTauntVal = LoadedState.MiniTauntVal
+		MiniTimerCheck = LoadedState.MiniTimerCheck
+		JumpVideo = LoadedState.JumpVideo
+		VideoTick = LoadedState.VideoTick
+		EdgeGoto = LoadedState.EdgeGoto
+		EdgeMessage = LoadedState.EdgeMessage
+		EdgeVideo = LoadedState.EdgeVideo
+		EdgeMessageText = LoadedState.EdgeMessageText
+		EdgeGotoLine = LoadedState.EdgeGotoLine
+		MultipleEdges = LoadedState.MultipleEdges
+		MultipleEdgesAmount = LoadedState.MultipleEdgesAmount
+		MultipleEdgesInterval = LoadedState.MultipleEdgesInterval
+		MultipleEdgesTick = LoadedState.MultipleEdgesTick
+		MultipleEdgesMetronome = LoadedState.MultipleEdgesMetronome
+		YesGoto = LoadedState.YesGoto
+		YesVideo = LoadedState.YesVideo
+		NoGoto = LoadedState.NoGoto
+		NoVideo_Mode = LoadedState.NoVideo_Mode
+		CameGoto = LoadedState.CameGoto
+		CameVideo = LoadedState.CameVideo
+		CameMessage = LoadedState.CameMessage
+		CameMessageText = LoadedState.CameMessageText
+		RuinedGoto = LoadedState.RuinedGoto
+		RuinedVideo = LoadedState.RuinedVideo
+		RuinedMessage = LoadedState.RuinedMessage
+		RuinedMessageText = LoadedState.RuinedMessageText
+		YesGotoLine = LoadedState.YesGotoLine
+		NoGotoLine = LoadedState.NoGotoLine
+		CameGotoLine = LoadedState.CameGotoLine
+		RuinedGotoLine = LoadedState.RuinedGotoLine
+		TauntEdging = LoadedState.TauntEdging
+		TauntEdgingAsked = LoadedState.TauntEdgingAsked
+		WritingTaskCurrentTime = LoadedState.WritingTaskCurrentTime
+
+	End Sub
+
+
+
+
+	
 End Class

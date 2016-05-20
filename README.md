@@ -6,9 +6,11 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: Status Initial
 	
-# Changelog - Patch 55	
+# Changelog - Patch 55.0.0	
+
+WIP - SaveState overhaul. Added SaveState Class and replaced Suspend and Resume Session options in File menu with SaveProgramState() and LoadProgramState() subroutines. These are only saving and loading the variables declared in Form 1, they are not functional yet. I'll need to do more work to reset the chat, check timer states, determine whether video was playing and resume accordingly, etc.
 	
-# Changelog - Patch 54.2
+# Changelog - Patch 54.0.2
 
 The code to parse @CheckDate() in the last patch contained syntax errors. It should now work correctly according to the usage established by the Command Guide  
 
