@@ -933,8 +933,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		Me.ActiveControl = Me.chatBox
 
-		MsgBox(My.Settings.CBGlitterFeed & My.Settings.CBGlitterFeedScripts & My.Settings.CBGlitterFeedOff)
-
 
 		If My.Settings.CBGlitterFeed = False And My.Settings.CBGlitterFeedScripts = False And My.Settings.CBGlitterFeedOff = False Then
 			My.Settings.CBGlitterFeedOff = True
