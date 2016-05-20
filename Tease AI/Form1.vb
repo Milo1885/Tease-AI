@@ -223,6 +223,7 @@ Public Class Form1
 	Dim FileCount As Integer
 	Dim FileCountMax As Integer
 	Private _ImageFileNames As New List(Of String)
+	<Obsolete("Not used anymore. Or change Filecount to this one, to enhance readablility")>
 	Private _CurrentImage As Integer = -1
 	Dim WithTeaseImgDir As String
 	<Obsolete("Belongs to frmSettings.")>
@@ -387,6 +388,7 @@ Public Class Form1
 	Public GlitterDocument As String
 
 	Dim CustomSlideshow As Boolean
+	<Obsolete("Not used anymore.")>
 	Dim CustomSlideshowTick As Integer
 	Dim CustomSlideshowList As New List(Of String)
 	Dim ImageString As String
@@ -459,6 +461,9 @@ Public Class Form1
 	Public EdgeHoldSeconds As Integer
 	Public EdgeHoldFlag As Boolean
 
+	''' <summary>
+	''' Addresses the current CustomSlideshow image.
+	''' </summary>
 	Public SlideshowInt As Integer
 	Dim JustShowedSlideshowImage As Boolean
 
@@ -7202,7 +7207,7 @@ NullResponseLine2:
 
 
 
-#Region " Images "
+#Region "------------------------------------------ Images ----------------------------------------------"
 
 	Private Sub browsefolderButton_Click(sender As System.Object, e As System.EventArgs) Handles browsefolderButton.Click
 		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
@@ -7352,133 +7357,445 @@ NullResponseLine2:
 
 	End Sub
 
-	Private Sub imagesNextButton_Click(sender As System.Object, e As System.EventArgs) Handles nextButton.Click
+	Private Sub imagesNextButton_Click(sender As System.Object, e As System.EventArgs) Handles nextButton.Click, previousButton.Click
 		'TODO-Next: Implement ShowImage(String, Boolean) + Rework
-		' Begin Next Button
+
+		Try
+			If My.Settings.CBSettingsPause And FrmSettings.SettingsPanel.Visible = True Then
+				MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
+				Exit Sub
+			End If
+
+			If SlideshowLoaded = False Or TeaseVideo = True Then Return
+
+
+Retry:
+			If sender Is nextButton Then
+				' ====================== Next Image =======================
+				FileCount += 1
+				If FileCount > _ImageFileNames.Count Then FileCount = 0
+			ElseIf sender Is previousButton
+				' ==================== Previous Image =====================
+				FileCount -= 1
+				If FileCount < 0 Then FileCount = _ImageFileNames.Count
+			Else
+				' ======================== Error ==========================
+				Throw New NotImplementedException("Action for button not implemented.")
+			End If
+
+			If Not (File.Exists(_ImageFileNames(FileCount)) _
+					Or isURL(_ImageFileNames(FileCount))) Then
+				ClearMainPictureBox()
+				Return
+			End If
+
+			If _ImageFileNames(FileCount).Contains(".db") Then GoTo Retry
+
+
+			If My.Settings.CBSlideshowRandom = True Then FileCount = randomizer.Next(0, _ImageFileNames.Count)
+
+
+
+			Try
+				browsefolderButton.Enabled = False
+				ImageFolderComboBox.Enabled = False
+				nextButton.Enabled = False
+				previousButton.Enabled = False
+
+				ShowImage(_ImageFileNames(FileCount), True)
+
+				JustShowedBlogImage = False
+
+			Catch
+				GoTo Retry
+			Finally
+				browsefolderButton.Enabled = True
+				ImageFolderComboBox.Enabled = True
+				nextButton.Enabled = True
+				previousButton.Enabled = True
+			End Try
+
+
+			If FrmSettings.landscapeCheckBox.Checked = True Then
+				If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
+					mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
+				Else
+					mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+				End If
+			Else
+				mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+			End If
+
+
+			mainPictureBox.Refresh()
+			mainPictureBox.Invalidate()
+
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Move in slideshow Failed")
+			MessageBox.Show(ex.Message, "Move in Slideshow failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
+		End Try
+	End Sub
+
+	Private Sub ImageFolderComboBox_MouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles ImageFolderComboBox.MouseWheel
+		Dim mwe As HandledMouseEventArgs = DirectCast(e, HandledMouseEventArgs)
+		mwe.Handled = True
+	End Sub
+
+	Private Sub ImageFolderComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ImageFolderComboBox.SelectedIndexChanged
+		'TODO-Next: Implement ShowImage(Of String, Boolean)() And myDirectory.GetFilesImages(Of String)
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
 			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
-		If SlideshowLoaded = False Or TeaseVideo = True Then Return
 
 
-TryNext:
-		FileCount += 1
-		'Debug.Print("Filecount = " & FileCount)
-		'Debug.Print("FileCOuntMax = " & FileCountMax)
-		If FileCount > FileCountMax Then
+		If My.Computer.FileSystem.DirectoryExists(ImageFolderComboBox.Text) Then
+
+			SlideshowLoaded = True
+
+			'domVLC.playlist.pause()
+			'domVLC.Visible = False
+			DomWMP.Visible = False
+			DomWMP.Ctlcontrols.pause()
+			mainPictureBox.Visible = True
+			'programsettingsPanel.Visible = False
+
+
+			FrmSettings.timedRadio.Enabled = True
+			FrmSettings.teaseRadio.Enabled = True
+
 			FileCount = 0
-		End If
+			FileCountMax = -1
+			_ImageFileNames.Clear()
 
-		If File.Exists(_ImageFileNames(FileCount)) Then
-		Else
-			ClearMainPictureBox()
-			Return
-		End If
+			GetFolder = ImageFolderComboBox.Text
 
-		If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryNext
+			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
+			'Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+
+			Dim files As String()
+
+			If FrmSettings.CBSlideshowSubDir.Checked = True Then
+				files = myDirectory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+			Else
+				files = myDirectory.GetFiles(GetFolder, "*.*")
+			End If
 
 
-		' ClearMainPictureBox()
+			' Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*")
+			Array.Sort(files)
+			' For Each fi As String In files
+			'If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
+			'_ImageFileNames.AddRange(files)
+			'End If
+			'   Next
 
-		If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
+			Dim TestCOUnt As Integer = 0
+			For Each fi As String In files
+				If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
+					TestCOUnt += 1
+					'Debug.Print("fi = " & fi)
+					_ImageFileNames.Add(fi)
+				End If
+			Next
+
+			' If FrmSettings.CBSlideshowSubDir.Checked = True Then
+			'FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
+			'Else
+			'   FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg").Count
+			'  FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png").Count
+			' FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif").Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp").Count
+			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg").Count
+			'End If
+
+			FileCountMax = _ImageFileNames.Count - 1
+
+			'Debug.Print("FileCOuntMax = " & FileCountMax)
+
+			' If FileCountMax = -1 Then
+			If FileCountMax < 1 Then
+				MessageBox.Show(Me, "There are no images in the specified folder.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+				Exit Sub
+			End If
+
+
+			' Begin Next Button
+			FileCount = 0
+
+			'ClearMainPictureBox()
 
 
 
-		Try
+			If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
+
 			ShowImage(_ImageFileNames(FileCount))
-
 			JustShowedBlogImage = False
 
-		Catch
-			GoTo TryNext
-		End Try
+			nextButton.Enabled = True
+			previousButton.Enabled = True
+			PicStripTSMIdommeSlideshow.Enabled = True
 
-
-		If FrmSettings.landscapeCheckBox.Checked = True Then
-			If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
-				mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
+			If FrmSettings.landscapeCheckBox.Checked = True Then
+				If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
+					mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
+				Else
+					mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+				End If
 			Else
 				mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
 			End If
+
+			mainPictureBox.Refresh()
+			mainPictureBox.Invalidate()
+
+			If FrmSettings.timedRadio.Checked = True Then
+				SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
+				SlideshowTimer.Start()
+			End If
+
 		Else
-			mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+
+			ImageFolderComboBox.Text = "Not a valid directory"
+
 		End If
 
 
-		mainPictureBox.Refresh()
-		mainPictureBox.Invalidate()
-		' End Next Button
-		'On Error GoTo TryNext
-		'On Error Resume Next
+
+
+
 
 	End Sub
 
-	Private Sub imagesPreviousButton_Click(sender As System.Object, e As System.EventArgs) Handles previousButton.Click
-		'TODO-Next: Implement ShowImage(String, Boolean) + Rework
-		' Begin Previous Button
+	Private Sub ImageFolderComboBox_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles ImageFolderComboBox.KeyPress
+		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
+
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
 			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
+		If e.KeyChar = Convert.ToChar(13) Then
 
-		If SlideshowLoaded = False Or TeaseVideo = True Then Return
+			e.Handled = True
+			' sendButton.PerformClick()
+			e.KeyChar = Chr(0)
 
-TryPrevious:
-		FileCount -= 1
-		'Debug.Print("Filecount = " & FileCount)
-		'Debug.Print("FileCOuntMax = " & FileCountMax)
+			If My.Computer.FileSystem.DirectoryExists(ImageFolderComboBox.Text) Then
 
-		If FileCount < 0 Then
-			FileCount = FileCountMax
-		End If
+				GetFolder = ImageFolderComboBox.Text
 
-		If File.Exists(_ImageFileNames(FileCount)) Then
-		Else
-			ClearMainPictureBox()
-			Return
-		End If
+				RecentSlideshows.Add(GetFolder)
 
-		If _ImageFileNames(FileCount).Contains(".db") Then GoTo TryPrevious
+				Do Until RecentSlideshows.Count < 11
+					RecentSlideshows.Remove(RecentSlideshows(0))
+				Loop
 
-		If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
+				'Debug.Print(RecentSlideshows(0))
+
+				ImageFolderComboBox.Items.Clear()
+
+				For Each comboitem As String In RecentSlideshows
+					ImageFolderComboBox.Items.Add(comboitem)
+				Next
+
+				ImageFolderComboBox.Text = GetFolder
+
+				My.Settings.RecentSlideshows.Add(GetFolder)
+
+				My.Settings.RecentSlideshows.Clear()
+
+				For i As Integer = 0 To RecentSlideshows.Count - 1
+					My.Settings.RecentSlideshows.Add(RecentSlideshows(i))
+				Next
 
 
-		Try
-			ShowImage(_ImageFileNames(FileCount))
+
+				SlideshowLoaded = True
+
+				' domVLC.playlist.pause()
+				'domVLC.Visible = False
+				DomWMP.Visible = False
+				DomWMP.Ctlcontrols.pause()
+				mainPictureBox.Visible = True
+				'programsettingsPanel.Visible = False
 
 
-			JustShowedBlogImage = False
-		Catch
-			GoTo TryPrevious
-		End Try
+				FrmSettings.timedRadio.Enabled = True
+				FrmSettings.teaseRadio.Enabled = True
 
-		If FrmSettings.landscapeCheckBox.Checked = True Then
-			If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
-				mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
+				FileCount = 0
+				FileCountMax = -1
+				_ImageFileNames.Clear()
+
+
+
+				Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
+				'Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+
+				Dim files As String()
+
+				If FrmSettings.CBSlideshowSubDir.Checked = True Then
+					files = myDirectory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
+				Else
+					files = myDirectory.GetFiles(GetFolder, "*.*")
+				End If
+
+
+				' Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*")
+				Array.Sort(files)
+
+				' For Each fi As String In files
+				'If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
+				'_ImageFileNames.AddRange(files)
+				'End If
+				'   Next
+
+				Dim TestCOUnt As Integer = 0
+				For Each fi As String In files
+					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
+						TestCOUnt += 1
+						'Debug.Print("fi = " & fi)
+						_ImageFileNames.Add(fi)
+					End If
+				Next
+
+				' If FrmSettings.CBSlideshowSubDir.Checked = True Then
+				'FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
+				'Else
+				'   FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg").Count
+				'  FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png").Count
+				' FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif").Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp").Count
+				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg").Count
+				'End If
+
+				FileCountMax = _ImageFileNames.Count - 1
+
+				'Debug.Print("FileCOuntMax = " & FileCountMax)
+
+				' If FileCountMax = -1 Then
+				If FileCountMax < 1 Then
+					MessageBox.Show(Me, "There are no images in the specified folder.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+					Exit Sub
+				End If
+
+
+				' Begin Next Button
+				FileCount = 0
+
+				'ClearMainPictureBox()
+
+
+
+				If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
+
+				ShowImage(_ImageFileNames(FileCount))
+				JustShowedBlogImage = False
+
+
+				nextButton.Enabled = True
+				previousButton.Enabled = True
+				PicStripTSMIdommeSlideshow.Enabled = True
+
+				If FrmSettings.landscapeCheckBox.Checked = True Then
+					If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
+						mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
+					Else
+						mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+					End If
+				Else
+					mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+				End If
+
+				mainPictureBox.Refresh()
+				mainPictureBox.Invalidate()
+
+				If FrmSettings.timedRadio.Checked = True Then
+					SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
+					SlideshowTimer.Start()
+				End If
+
+			ElseIf isURL(ImageFolderComboBox.Text) And Debugger.IsAttached Then
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'						Blog SlideShow (!)Experimental
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				Dim tmpReq As Net.HttpWebRequest
+				Dim tmpRes As Net.HttpWebResponse
+
+				tmpReq = Net.HttpWebRequest.Create(ImageFolderComboBox.Text & "api/read?start=" & 1 & "&num=5000")
+				tmpRes = tmpReq.GetResponse
+
+				Using reader As New Xml.XmlTextReader(tmpRes.GetResponseStream)
+					Dim tmpDoc As New Xml.XmlDocument()
+					tmpDoc.Load(reader)
+
+					tmpReq.Abort()
+					tmpRes.Close()
+
+					_ImageFileNames.Clear()
+
+					For Each ___PhotoNode As Xml.XmlNode In tmpDoc.DocumentElement.SelectNodes("//photo-url")
+						If CInt(___PhotoNode.Attributes.ItemOf("max-width").InnerText) = 1280 Then
+							_ImageFileNames.Add(___PhotoNode.InnerXml)
+
+						End If
+					Next
+					FileCountMax = _ImageFileNames.Count - 1
+
+				End Using
+
+				FileCount = 0
+
+				If _ImageFileNames.Count <= 0 Then
+					CustomSlideshow = False
+					SlideshowLoaded = False
+					Exit Sub
+				End If
+
+				SlideshowLoaded = True
+
+				ShowImage(_ImageFileNames(FileCount), True)
+
+				nextButton.Enabled = True
+				previousButton.Enabled = True
+				PicStripTSMIdommeSlideshow.Enabled = True
+
+				If FrmSettings.timedRadio.Checked = True Then
+					SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
+					SlideshowTimer.Start()
+				End If
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				' Blog SlideShow - End
+				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 			Else
-				mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+
+				ImageFolderComboBox.Text = "Not a valid directory"
+
 			End If
-		Else
-			mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+
+
+
 		End If
 
-		mainPictureBox.Refresh()
-		mainPictureBox.Invalidate()
-		'On Error GoTo TryPrevious
-		'On Error Resume Next
+
 	End Sub
 
-
-
-
-
-
-#End Region
+#End Region ' Images
 
 #Region " VLC "
 
@@ -18062,315 +18379,6 @@ RestartFunction:
 
 
 
-
-
-
-	Private Sub ImageFolderComboBox_MouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles ImageFolderComboBox.MouseWheel
-		Dim mwe As HandledMouseEventArgs = DirectCast(e, HandledMouseEventArgs)
-		mwe.Handled = True
-	End Sub
-
-	Private Sub ImageFolderComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ImageFolderComboBox.SelectedIndexChanged
-		'TODO-Next: Implement ShowImage(Of String, Boolean)() And myDirectory.GetFilesImages(Of String)
-
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
-			Return
-		End If
-
-
-
-		If My.Computer.FileSystem.DirectoryExists(ImageFolderComboBox.Text) Then
-
-			SlideshowLoaded = True
-
-			'domVLC.playlist.pause()
-			'domVLC.Visible = False
-			DomWMP.Visible = False
-			DomWMP.Ctlcontrols.pause()
-			mainPictureBox.Visible = True
-			'programsettingsPanel.Visible = False
-
-
-			FrmSettings.timedRadio.Enabled = True
-			FrmSettings.teaseRadio.Enabled = True
-
-			FileCount = 0
-			FileCountMax = -1
-			_ImageFileNames.Clear()
-
-			GetFolder = ImageFolderComboBox.Text
-
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			'Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
-
-			Dim files As String()
-
-			If FrmSettings.CBSlideshowSubDir.Checked = True Then
-				files = myDirectory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
-			Else
-				files = myDirectory.GetFiles(GetFolder, "*.*")
-			End If
-
-
-			' Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*")
-			Array.Sort(files)
-			' For Each fi As String In files
-			'If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-			'_ImageFileNames.AddRange(files)
-			'End If
-			'   Next
-
-			Dim TestCOUnt As Integer = 0
-			For Each fi As String In files
-				If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-					TestCOUnt += 1
-					'Debug.Print("fi = " & fi)
-					_ImageFileNames.Add(fi)
-				End If
-			Next
-
-			' If FrmSettings.CBSlideshowSubDir.Checked = True Then
-			'FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
-			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
-			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
-			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
-			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
-			'Else
-			'   FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg").Count
-			'  FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png").Count
-			' FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif").Count
-			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp").Count
-			'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg").Count
-			'End If
-
-			FileCountMax = _ImageFileNames.Count - 1
-
-			'Debug.Print("FileCOuntMax = " & FileCountMax)
-
-			' If FileCountMax = -1 Then
-			If FileCountMax < 1 Then
-				MessageBox.Show(Me, "There are no images in the specified folder.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				Exit Sub
-			End If
-
-
-			' Begin Next Button
-			FileCount = 0
-
-			'ClearMainPictureBox()
-
-
-
-			If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
-
-			ShowImage(_ImageFileNames(FileCount))
-			JustShowedBlogImage = False
-
-			nextButton.Enabled = True
-			previousButton.Enabled = True
-			PicStripTSMIdommeSlideshow.Enabled = True
-
-			If FrmSettings.landscapeCheckBox.Checked = True Then
-				If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
-					mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
-				Else
-					mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-				End If
-			Else
-				mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-			End If
-
-			mainPictureBox.Refresh()
-			mainPictureBox.Invalidate()
-
-			If FrmSettings.timedRadio.Checked = True Then
-				SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
-				SlideshowTimer.Start()
-			End If
-
-		Else
-
-			ImageFolderComboBox.Text = "Not a valid directory"
-
-		End If
-
-
-
-
-
-
-	End Sub
-
-
-
-	Private Sub ImageFolderComboBox_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles ImageFolderComboBox.KeyPress
-		'TODO-Next: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
-
-
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
-			Return
-		End If
-
-		If e.KeyChar = Convert.ToChar(13) Then
-
-			e.Handled = True
-			' sendButton.PerformClick()
-			e.KeyChar = Chr(0)
-
-			If My.Computer.FileSystem.DirectoryExists(ImageFolderComboBox.Text) Then
-
-				GetFolder = ImageFolderComboBox.Text
-
-				RecentSlideshows.Add(GetFolder)
-
-				Do Until RecentSlideshows.Count < 11
-					RecentSlideshows.Remove(RecentSlideshows(0))
-				Loop
-
-				'Debug.Print(RecentSlideshows(0))
-
-				ImageFolderComboBox.Items.Clear()
-
-				For Each comboitem As String In RecentSlideshows
-					ImageFolderComboBox.Items.Add(comboitem)
-				Next
-
-				ImageFolderComboBox.Text = GetFolder
-
-				My.Settings.RecentSlideshows.Add(GetFolder)
-
-				My.Settings.RecentSlideshows.Clear()
-
-				For i As Integer = 0 To RecentSlideshows.Count - 1
-					My.Settings.RecentSlideshows.Add(RecentSlideshows(i))
-				Next
-
-
-
-				SlideshowLoaded = True
-
-				' domVLC.playlist.pause()
-				'domVLC.Visible = False
-				DomWMP.Visible = False
-				DomWMP.Ctlcontrols.pause()
-				mainPictureBox.Visible = True
-				'programsettingsPanel.Visible = False
-
-
-				FrmSettings.timedRadio.Enabled = True
-				FrmSettings.teaseRadio.Enabled = True
-
-				FileCount = 0
-				FileCountMax = -1
-				_ImageFileNames.Clear()
-
-
-
-				Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-				'Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
-
-				Dim files As String()
-
-				If FrmSettings.CBSlideshowSubDir.Checked = True Then
-					files = myDirectory.GetFiles(GetFolder, "*.*", SearchOption.AllDirectories)
-				Else
-					files = myDirectory.GetFiles(GetFolder, "*.*")
-				End If
-
-
-				' Dim files As String() = DirectoryExt.GetFiles(GetFolder, "*.*")
-				Array.Sort(files)
-
-				' For Each fi As String In files
-				'If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-				'_ImageFileNames.AddRange(files)
-				'End If
-				'   Next
-
-				Dim TestCOUnt As Integer = 0
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						TestCOUnt += 1
-						'Debug.Print("fi = " & fi)
-						_ImageFileNames.Add(fi)
-					End If
-				Next
-
-				' If FrmSettings.CBSlideshowSubDir.Checked = True Then
-				'FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg", SearchOption.AllDirectories).Count
-				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png", SearchOption.AllDirectories).Count
-				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif", SearchOption.AllDirectories).Count
-				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp", SearchOption.AllDirectories).Count
-				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg", SearchOption.AllDirectories).Count
-				'Else
-				'   FileCountMax = DirectoryExt.GetFiles(GetFolder, "*.jpg").Count
-				'  FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.png").Count
-				' FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.gif").Count
-				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.bmp").Count
-				'FileCountMax += DirectoryExt.GetFiles(GetFolder, "*.jpeg").Count
-				'End If
-
-				FileCountMax = _ImageFileNames.Count - 1
-
-				'Debug.Print("FileCOuntMax = " & FileCountMax)
-
-				' If FileCountMax = -1 Then
-				If FileCountMax < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified folder.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					Exit Sub
-				End If
-
-
-				' Begin Next Button
-				FileCount = 0
-
-				'ClearMainPictureBox()
-
-
-
-				If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
-
-				ShowImage(_ImageFileNames(FileCount))
-				JustShowedBlogImage = False
-
-
-				nextButton.Enabled = True
-				previousButton.Enabled = True
-				PicStripTSMIdommeSlideshow.Enabled = True
-
-				If FrmSettings.landscapeCheckBox.Checked = True Then
-					If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
-						mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
-					Else
-						mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-					End If
-				Else
-					mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-				End If
-
-				mainPictureBox.Refresh()
-				mainPictureBox.Invalidate()
-
-				If FrmSettings.timedRadio.Checked = True Then
-					SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
-					SlideshowTimer.Start()
-				End If
-
-			Else
-
-				ImageFolderComboBox.Text = "Not a valid directory"
-
-			End If
-
-
-
-		End If
-
-
-	End Sub
-
 #Region "---------------------------------------------------- Domme-WMP -------------------------------------------------------"
 
 	Private Sub DomWMP_PlayStateChange(sender As Object, e As AxWMPLib._WMPOCXEvents_PlayStateChangeEvent) Handles DomWMP.PlayStateChange
@@ -18999,7 +19007,13 @@ RestartFunction:
 				PicStripTmsiDisableAnimation.Checked = False
 			End If
 
-			If ImageLocation = "" Or _ImageFileNames.Contains(ImageLocation) Then
+			If isURL(ImageLocation) Then
+
+				PicStripTSMIsaveImage.Enabled = True
+				PicStripTSMISaveImageTo.Enabled = True
+				PicStripTSMIremoveFromURL.Enabled = True
+
+			ElseIf ImageLocation = "" Or _ImageFileNames.Contains(ImageLocation) Then
 
 				PicStripTSMIcopyImageLocation.Enabled = False
 				PicStripTSMIsaveImage.Enabled = False
@@ -19016,11 +19030,6 @@ RestartFunction:
 				End If
 
 				Exit Sub
-			ElseIf isURL(ImageLocation) Then
-
-				PicStripTSMIsaveImage.Enabled = True
-				PicStripTSMISaveImageTo.Enabled = True
-				PicStripTSMIremoveFromURL.Enabled = True
 
 			End If
 
@@ -19084,7 +19093,7 @@ retry:
 				SaveFileDialog1.FilterIndex = 1
 				SaveFileDialog1.RestoreDirectory = True
 				SaveFileDialog1.FileName = fileName
-				SaveFileDialog1.CheckFileExists = True
+				SaveFileDialog1.CheckFileExists = False
 
 				If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
 					fileName = Path.GetFileName(SaveFileDialog1.FileName)
