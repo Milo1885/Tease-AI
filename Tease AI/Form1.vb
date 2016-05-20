@@ -102,9 +102,6 @@ Public Class Form1
 	Public Induction As Boolean
 	Public TempHypno As String
 
-	Public DomColor As String
-	Public SubColor As String
-
 	Public StrokeTick As Integer
 	Public StrokeTauntTick As Integer
 	Public StrokePaceRight As Boolean
@@ -196,10 +193,7 @@ Public Class Form1
 	Public RefreshVideoTotal As Integer
 
 	Dim GlitterImageAV As String = Application.StartupPath & "\Images\Glitter\01.jpg"
-	Public GlitterNCDomme As String
-	Public GlitterNC1 As String
-	Public GlitterNC2 As String
-	Public GlitterNC3 As String
+	
 	Dim GlitterTempColor As String
 	Public UpdatesTick As Integer
 	Dim UpdatingPost As Boolean
@@ -606,13 +600,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 
-
-
-
-
-
-
 	Private Sub Form1_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+
+
 		Try
 
 			mainPictureBox.Image = Nothing
@@ -903,53 +893,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.LBLSplash.Text = "Checking local videos..."
 		FrmSplash.Refresh()
 
-		FrmSettings.LblVideoHardCore.Text = My.Settings.VideoHardcore
-		FrmSettings.LblVideoSoftCore.Text = My.Settings.VideoSoftcore
-		FrmSettings.LblVideoLesbian.Text = My.Settings.VideoLesbian
-		FrmSettings.LblVideoBlowjob.Text = My.Settings.VideoBlowjob
-		FrmSettings.LblVideoFemdom.Text = My.Settings.VideoFemdom
-		FrmSettings.LblVideoFemsub.Text = My.Settings.VideoFemsub
-		FrmSettings.LblVideoJOI.Text = My.Settings.VideoJOI
-		FrmSettings.LblVideoCH.Text = My.Settings.VideoCH
-		FrmSettings.LblVideoGeneral.Text = My.Settings.VideoGeneral
-
-		FrmSettings.LblVideoHardCoreD.Text = My.Settings.VideoHardcoreD
-		FrmSettings.LblVideoSoftCoreD.Text = My.Settings.VideoSoftcoreD
-		FrmSettings.LblVideoLesbianD.Text = My.Settings.VideoLesbianD
-		FrmSettings.LblVideoBlowjobD.Text = My.Settings.VideoBlowjobD
-		FrmSettings.LblVideoFemdomD.Text = My.Settings.VideoFemdomD
-		FrmSettings.LblVideoFemsubD.Text = My.Settings.VideoFemsubD
-		FrmSettings.LblVideoJOID.Text = My.Settings.VideoJOID
-		FrmSettings.LblVideoCHD.Text = My.Settings.VideoCHD
-		FrmSettings.LblVideoGeneralD.Text = My.Settings.VideoGeneralD
-
-		If My.Settings.CBHardcore = True Then FrmSettings.CBVideoHardcore.Checked = True
-		If My.Settings.CBSoftcore = True Then FrmSettings.CBVideoSoftCore.Checked = True
-		If My.Settings.CBLesbian = True Then FrmSettings.CBVideoLesbian.Checked = True
-		If My.Settings.CBBlowjob = True Then FrmSettings.CBVideoBlowjob.Checked = True
-		If My.Settings.CBFemdom = True Then FrmSettings.CBVideoFemdom.Checked = True
-		If My.Settings.CBFemsub = True Then FrmSettings.CBVideoFemsub.Checked = True
-		If My.Settings.CBJOI = True Then FrmSettings.CBVideoJOI.Checked = True
-		If My.Settings.CBCH = True Then FrmSettings.CBVideoCH.Checked = True
-		If My.Settings.CBGeneral = True Then FrmSettings.CBVideoGeneral.Checked = True
-
-		If My.Settings.CBHardcoreD = True Then FrmSettings.CBVideoHardcoreD.Checked = True
-		If My.Settings.CBSoftcoreD = True Then FrmSettings.CBVideoSoftCoreD.Checked = True
-		If My.Settings.CBLesbianD = True Then FrmSettings.CBVideoLesbianD.Checked = True
-		If My.Settings.CBBlowjobD = True Then FrmSettings.CBVideoBlowjobD.Checked = True
-		If My.Settings.CBFemdomD = True Then FrmSettings.CBVideoFemdomD.Checked = True
-		If My.Settings.CBFemsubD = True Then FrmSettings.CBVideoFemsubD.Checked = True
-		If My.Settings.CBJOID = True Then FrmSettings.CBVideoJOID.Checked = True
-		If My.Settings.CBCHD = True Then FrmSettings.CBVideoCHD.Checked = True
-		If My.Settings.CBGeneralD = True Then FrmSettings.CBVideoGeneralD.Checked = True
-
-		If My.Settings.NBCensorShowMin > 0 Then FrmSettings.NBCensorShowMin.Value = My.Settings.NBCensorShowMin
-		If My.Settings.NBCensorShowMax > 0 Then FrmSettings.NBCensorShowMax.Value = My.Settings.NBCensorShowMax
-		If My.Settings.NBCensorHideMin > 0 Then FrmSettings.NBCensorHideMin.Value = My.Settings.NBCensorHideMin
-		If My.Settings.NBCensorHideMax > 0 Then FrmSettings.NBCensorHideMax.Value = My.Settings.NBCensorHideMax
-
-		If My.Settings.CBCensorConstant = True Then FrmSettings.CBCensorConstant.Checked = True
-
 		HardCoreVideoTotal()
 		SoftcoreVideoTotal()
 		LesbianVideoTotal()
@@ -988,62 +931,13 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		UpdatesTick = 120
 		UpdatesTimer.Start()
 
-		GlitterNC1 = "DeepPink"
-		GlitterNC2 = "Green"
-		GlitterNC3 = "Firebrick"
-
 		Me.ActiveControl = Me.chatBox
 
+		MsgBox(My.Settings.CBGlitterFeed & My.Settings.CBGlitterFeedScripts & My.Settings.CBGlitterFeedOff)
 
 
-		If My.Settings.GlitterSN <> "" Then FrmSettings.TBGlitterShortName.Text = My.Settings.GlitterSN
-		If My.Settings.Glitter1 <> "" Then FrmSettings.TBGlitter1.Text = My.Settings.Glitter1
-		If My.Settings.Glitter2 <> "" Then FrmSettings.TBGlitter2.Text = My.Settings.Glitter2
-		If My.Settings.Glitter3 <> "" Then FrmSettings.TBGlitter3.Text = My.Settings.Glitter3
-
-		If My.Settings.GlitterNCDomme <> "" Then
-			GlitterNCDomme = My.Settings.GlitterNCDomme
-			FrmSettings.LBLGlitterNCDomme.ForeColor = My.Settings.GlitterNCDommeColor
-		End If
-
-		If My.Settings.GlitterNC1 <> "" Then
-			GlitterNC1 = My.Settings.GlitterNC1
-			FrmSettings.LBLGlitterNC1.ForeColor = My.Settings.GlitterNC1Color
-		End If
-
-		If My.Settings.GlitterNC2 <> "" Then
-			GlitterNC2 = My.Settings.GlitterNC2
-			FrmSettings.LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
-		End If
-
-		If My.Settings.GlitterNC3 <> "" Then
-			GlitterNC3 = My.Settings.GlitterNC3
-			FrmSettings.LBLGlitterNC3.ForeColor = My.Settings.GlitterNC3Color
-		End If
-
-		If My.Settings.DomColor <> "" Then
-			DomColor = My.Settings.DomColor
-			FrmSettings.LBLDomColor.ForeColor = My.Settings.DomColorColor
-		End If
-
-		If My.Settings.SubColor <> "" Then
-			SubColor = My.Settings.SubColor
-			FrmSettings.LBLSubColor.ForeColor = My.Settings.SubColorColor
-		End If
-
-		If My.Settings.GlitterDSlider <> 0 Then FrmSettings.GlitterSlider.Value = My.Settings.GlitterDSlider
-		If My.Settings.Glitter1Slider <> 0 Then FrmSettings.GlitterSlider1.Value = My.Settings.Glitter1Slider
-		If My.Settings.Glitter2Slider <> 0 Then FrmSettings.GlitterSlider2.Value = My.Settings.Glitter2Slider
-		If My.Settings.Glitter3Slider <> 0 Then FrmSettings.GlitterSlider3.Value = My.Settings.Glitter3Slider
-
-
-
-		FrmSettings.CBGlitterFeed.Checked = My.Settings.CBGlitterFeed
-		FrmSettings.CBGlitterFeedScripts.Checked = My.Settings.CBGlitterFeedScripts
-		FrmSettings.CBGlitterFeedOff.Checked = My.Settings.CBGlitterFeedOff
-
-		If FrmSettings.CBGlitterFeed.Checked = False And FrmSettings.CBGlitterFeedScripts.Checked = False And FrmSettings.CBGlitterFeedOff.Checked = False Then
-			FrmSettings.CBGlitterFeedOff.Checked = True
+		If My.Settings.CBGlitterFeed = False And My.Settings.CBGlitterFeedScripts = False And My.Settings.CBGlitterFeedOff = False Then
+			My.Settings.CBGlitterFeedOff = True
 		End If
 
 		If My.Settings.CBGlitter1 = True Then
@@ -1817,10 +1711,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		UpdatesTick = 120
 		UpdatesTimer.Start()
 
-		GlitterNC1 = "DeepPink"
-		GlitterNC2 = "Green"
-		GlitterNC3 = "Firebrick"
-
 		Me.ActiveControl = Me.chatBox
 
 		StrokePaceInt = 1
@@ -2045,7 +1935,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		Else
 
 			Chat = "<body style=""word-wrap:break-word;"">" & Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-				SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ChatString & "<br></font></body>"
+			 My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""" & TextColor & """>" & ChatString & "<br></font></body>"
 			Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
 			ChatText.DocumentText = Chat
 			ChatText2.DocumentText = Chat
@@ -2347,14 +2237,14 @@ WritingTaskLine:
 
 					If CBWritingProgress.Checked = True Then
 						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>" _
+						 My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>" _
 						 & "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#006400"">" & "Correct: " & WritingTaskLinesRemaining & " lines remaining<br></font>"
 						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Correct: " & WritingTaskLinesRemaining & " lines remaining", "Time Expired")
 						Chat = Chat.Replace(" 1 lines", " 1 line")
 						Chat = Chat.Replace(" 0 lines remaining", " Task Completed")
 					Else
 						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>"
+						 My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#000000"">" & ChatString & "<br></font>"
 					End If
 
 					ChatText.DocumentText = Chat
@@ -2418,7 +2308,7 @@ WritingTaskLine:
 
 					If CBWritingProgress.Checked = True Then
 						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-						   SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>" &
+						   My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>" &
 						  "<font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#CD0000"">" & "Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 &
 						  " mistakes remaining<br></font>"
 						If FrmSettings.TimedWriting.Checked = True And WritingTaskCurrentTime < 1 Then Chat = Chat.Replace("Wrong: " & (WritingTaskMistakesAllowed - WritingTaskMistakesMade) - 1 & " mistakes remaining", "Time Expired")
@@ -2426,7 +2316,7 @@ WritingTaskLine:
 						Chat = Chat.Replace(" 0 mistakes remaining", " Task Failed")
 					Else
 						Chat = Chat & "<font face=""Cambria"" size=""3"" font color=""" &
-						 SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>"
+						 My.Settings.SubColor & """><b>" & subName.Text & ": </b></font><font face=""" & FrmSettings.FontComboBox.Text & """ size=""" & FrmSettings.NBFontSize.Value & """ color=""#FF0000"">" & ChatString & "<br></font>"
 					End If
 
 					Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & Chat & "</body>"
@@ -5784,27 +5674,27 @@ NullResponse:
 				If DomTask.Contains("@Contact1") Or DomTask.Contains("@Contact2") Or DomTask.Contains("@Contact3") Then SubWroteLast = True
 
 				Dim TypeName As String = domName.Text
-				Dim TypeColor As String = DomColor
+				Dim TypeColor As String = My.Settings.DomColor
 				Dim TypeFont As String = FrmSettings.FontComboBoxD.Text
 				Dim TypeSize As String = FrmSettings.NBFontSizeD.Value
 				Dim LineSpeaker As String = ""
 				If DomTask.Contains("@Contact1") Then
 					TypeName = FrmSettings.TBGlitter1.Text
-					TypeColor = Color2Html(FrmSettings.LBLGlitterNC1.ForeColor)
+					TypeColor = Color2Html(My.Settings.GlitterNC1Color)
 					TypeFont = "Cambria"
 					TypeSize = "3"
 					LineSpeaker = "@Contact1 "
 				End If
 				If DomTask.Contains("@Contact2") Then
 					TypeName = FrmSettings.TBGlitter2.Text
-					TypeColor = Color2Html(FrmSettings.LBLGlitterNC2.ForeColor)
+					TypeColor = Color2Html(My.Settings.GlitterNC2Color)
 					TypeFont = "Cambria"
 					TypeSize = "3"
 					LineSpeaker = "@Contact2 "
 				End If
 				If DomTask.Contains("@Contact3") Then
 					TypeName = FrmSettings.TBGlitter3.Text
-					TypeColor = Color2Html(FrmSettings.LBLGlitterNC3.ForeColor)
+					TypeColor = Color2Html(My.Settings.GlitterNC3Color)
 					TypeFont = "Cambria"
 					TypeSize = "3"
 					LineSpeaker = "@Contact3 "
@@ -6747,24 +6637,24 @@ TryNextWithTease:
 				If DomChat.Contains("@Contact1") Or DomChat.Contains("@Contact2") Or DomChat.Contains("@Contact3") Then SubWroteLast = True
 
 				Dim TypeName As String = domName.Text
-				Dim TypeColor As String = DomColor
+				Dim TypeColor As String = My.Settings.DomColor
 				Dim TypeFont As String = FrmSettings.FontComboBoxD.Text
 				Dim TypeSize As String = FrmSettings.NBFontSizeD.Value
 				If DomChat.Contains("@Contact1") Then
 					TypeName = FrmSettings.TBGlitter1.Text
-					TypeColor = Color2Html(FrmSettings.LBLGlitterNC1.ForeColor)
+					TypeColor = Color2Html(My.Settings.GlitterNC1Color)
 					TypeFont = "Cambria"
 					TypeSize = "3"
 				End If
 				If DomChat.Contains("@Contact2") Then
 					TypeName = FrmSettings.TBGlitter2.Text
-					TypeColor = Color2Html(FrmSettings.LBLGlitterNC2.ForeColor)
+					TypeColor = Color2Html(My.Settings.GlitterNC2Color)
 					TypeFont = "Cambria"
 					TypeSize = "3"
 				End If
 				If DomChat.Contains("@Contact3") Then
 					TypeName = FrmSettings.TBGlitter3.Text
-					TypeColor = Color2Html(FrmSettings.LBLGlitterNC3.ForeColor)
+					TypeColor = Color2Html(My.Settings.GlitterNC3Color)
 					TypeFont = "Cambria"
 					TypeSize = "3"
 				End If
@@ -8619,7 +8509,7 @@ CensorConstant:
 
 		Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
-		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNCDomme & """><b>" & domName.Text & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
+		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNCDomme & """><b>" & domName.Text & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
 		StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText & "</font><br><br>"
 
 		'Debug.Print(GlitterImageAV)
@@ -8823,8 +8713,8 @@ StatusUpdate1:
 
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
-		If StatusChance1 < FrmSettings.GlitterSlider1.Value * 10 And FrmSettings.CBGlitter1.Checked = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNC1 & """><b>" & FrmSettings.TBGlitter1.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+		If StatusChance1 < My.Settings.Glitter1Slider * 10 And FrmSettings.CBGlitter1.Checked = True Then
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC1 & """><b>" & FrmSettings.TBGlitter1.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText1 & "</font><br><br>"
 
 
@@ -8846,8 +8736,8 @@ StatusUpdate2:
 
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
-		If StatusChance2 < FrmSettings.GlitterSlider2.Value * 10 And FrmSettings.CBGlitter2.Checked = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNC2 & """><b>" & FrmSettings.TBGlitter2.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+		If StatusChance2 < My.Settings.Glitter2Slider * 10 And FrmSettings.CBGlitter2.Checked = True Then
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC2 & """><b>" & FrmSettings.TBGlitter2.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText2 & "</font><br><br>"
 
 
@@ -8869,8 +8759,8 @@ StatusUpdate3:
 
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
-		If StatusChance3 < FrmSettings.GlitterSlider3.Value * 10 And FrmSettings.CBGlitter3.Checked = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & GlitterNC3 & """><b>" & FrmSettings.TBGlitter3.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+		If StatusChance3 < My.Settings.Glitter3Slider * 10 And FrmSettings.CBGlitter3.Checked = True Then
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC3 & """><b>" & FrmSettings.TBGlitter3.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText3 & "</font><br><br>"
 
 
@@ -9002,13 +8892,13 @@ StatusUpdateEnd:
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
-		If FrmSettings.CBGlitterFeed.Checked = True And UpdatingPost = False Then
+		If My.Settings.CBGlitterFeed = True And UpdatingPost = False Then
 
 			UpdatesTick -= 1
 
 			If UpdatesTick < 1 Then
 
-				UpdatesTick = 1080 / FrmSettings.GlitterSlider.Value
+				UpdatesTick = 1080 / My.Settings.GlitterDSlider
 
 				UpdateList.Clear()
 
@@ -9049,7 +8939,7 @@ StatusUpdateEnd:
 				End If
 
 				If UpdateList.Count < 1 Then
-					FrmSettings.CBGlitterFeed.Checked = False
+					My.Settings.CBGlitterFeed = False
 					'MessageBox.Show(Me, "Tease AI attempted to create a Glitter update, but no files were found! Please make sure at least one category containing Glitter txt files has been selected.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 					MessageBox.Show(Me, "Tease AI attempted to create a Glitter update, but no files were found! Please make sure at least one category containing Glitter txt files has been selected." & Environment.NewLine _
 					& Environment.NewLine & "Glitter feed has been automatically disabled.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -12370,7 +12260,7 @@ OrgasmDecided:
 			' GitHub Patch: Dim GlitterFlag As Integer = GetParentheses(StringClean, "@Glitter(")
 			Dim GlitterFlag As String = GetParentheses(StringClean, "@Glitter(")
 
-			If FrmSettings.CBGlitterFeedOff.Checked = False And UpdatingPost = False Then
+			If My.Settings.CBGlitterFeedOff = False And UpdatingPost = False Then
 				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt") And UpdatingPost = False Then
 					UpdateList.Clear()
 					UpdateList.Add(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt")
@@ -14440,8 +14330,10 @@ VTSkip:
 
 			'Dim wy As Long = DateDiff(DateInterval.Day, Val(GetVariable("TB_AFKSlideshow")), Date.Now)
 
-			MsgBox(DateDiff(DateInterval.Hour, GetDate("TB_AFKSlideshow"), Now))
-
+			MsgBox(GetParentheses("Testing If - @If[42]>[7]Then(Go here) okay", "@If["))
+			MsgBox(GetParentheses("Testing If2 - @If[42]>[7]Then(Go here) okay", "@If[", 2))
+			MsgBox(GetParentheses("Testing If2 - @If(candle) okay", "@If("))
+			MsgBox(GetParentheses("Testing If2 - @If(candle)and(wax) okay", "@If(", 2))
 
 
 			'MsgBox(GetVariable("Sys_EndTotal") & " less than 30? " & CheckVariable("@Variable[Sys_EndTotal]<[30] blah blah blah"))
@@ -15064,7 +14956,7 @@ VTSkip:
 
 
 
-	Public Function GetParentheses(ByVal ParenCheck As String, ByVal CommandCheck As String) As String
+	Public Function GetParentheses(ByVal ParenCheck As String, ByVal CommandCheck As String, Optional ByVal Iterations As Integer = 1) As String
 
 
 
@@ -15089,18 +14981,30 @@ VTSkip:
 
 		'ParenFlag = ParenFlag.Substring(ParenStart, ParenFlag.Length - ParenStart)
 
-		Dim ParenEnd As Integer = ParenFlag.IndexOf(ParenType, ParenStart)
+		'Dim ParenEnd As Integer = ParenFlag.IndexOf(ParenType, ParenStart)
+		Dim ParenEnd As Integer = GetNthIndex(ParenFlag, ParenType, Iterations)
+
+		Debug.Print("ParenEnd = " & ParenEnd)
+
 		If ParenEnd = -1 Then ParenEnd = ParenFlag.Length
 		ParenFlag = ParenFlag.Substring(ParenStart, ParenEnd - ParenStart)
 
-		ParenFlag = ParenFlag.Split(")")(0)
+		'ParenFlag = ParenFlag.Split(")")(0)
 		'ParenFlag = ParenFlag.Split(ParenType)(0)
-		ParenFlag = ParenFlag.Replace(ParenType, "")
+		'ParenFlag = ParenFlag.Replace(ParenType, "")
+		'ParenFlag = ParenFlag.Substring(0, ParenFlag.Length - 1)
 		Debug.Print("ParenFlag = " & ParenFlag)
 
 		Return ParenFlag
 
 
+	End Function
+
+	Public Function GetNthIndex(searchString As String, charToFind As Char, n As Integer) As Integer
+		Dim charIndexPair = searchString.Select(Function(c, i) New With {.Character = c, .Index = i}) _
+										.Where(Function(x) x.Character = charToFind) _
+										.ElementAtOrDefault(n - 1)
+		Return If(charIndexPair IsNot Nothing, charIndexPair.Index, -1)
 	End Function
 
 	Public Function FixCommas(ByVal CommaString) As String
@@ -19962,8 +19866,8 @@ GetDommeSlideshow:
 		SettingsList.Add("HypnoGen: " & HypnoGen)
 		SettingsList.Add("Induction: " & Induction)
 		SettingsList.Add("TempHypno: " & TempHypno)
-		SettingsList.Add("DomColor: " & DomColor)
-		SettingsList.Add("SubColor: " & SubColor)
+		SettingsList.Add("DomColor: --obsolete--") ' for compatibility
+		SettingsList.Add("SubColor: --obsolete--") ' for compatibility
 		SettingsList.Add("StrokeCycle: --obsolete--") ' for compatibility
 		SettingsList.Add("StrokeTick: " & StrokeTick)
 		SettingsList.Add("StrokeTauntTick: " & StrokeTauntTick)
@@ -20042,10 +19946,10 @@ GetDommeSlideshow:
 		SettingsList.Add("SlideshowLoaded: " & SlideshowLoaded)
 		SettingsList.Add("RefreshVideoTotal: " & RefreshVideoTotal)
 		SettingsList.Add("GlitterImageAV: " & GlitterImageAV)
-		SettingsList.Add("GlitterNCDomme: " & GlitterNCDomme)
-		SettingsList.Add("GlitterNC1: " & GlitterNC1)
-		SettingsList.Add("GlitterNC2: " & GlitterNC2)
-		SettingsList.Add("GlitterNC3: " & GlitterNC3)
+		SettingsList.Add("GlitterNCDomme: --obsolete--") ' for compatibility
+		SettingsList.Add("GlitterNC1: --obsolete--") ' for compatibility
+		SettingsList.Add("GlitterNC2: --obsolete--") ' for compatibility
+		SettingsList.Add("GlitterNC3: --obsolete--") ' for compatibility
 		SettingsList.Add("GlitterTempColor: " & GlitterTempColor)
 		SettingsList.Add("UpdatesTick: " & UpdatesTick)
 		SettingsList.Add("UpdatingPost: " & UpdatingPost)
@@ -20576,8 +20480,8 @@ GetDommeSlideshow:
 		HypnoGen = SettingsList(59).Replace("HypnoGen: ", "")
 		Induction = SettingsList(60).Replace("Induction: ", "")
 		TempHypno = SettingsList(61).Replace("TempHypno: ", "")
-		DomColor = SettingsList(62).Replace("DomColor: ", "")
-		SubColor = SettingsList(63).Replace("SubColor: ", "")
+		'DomColor = SettingsList(62).Replace("DomColor: ", "")
+		'SubColor = SettingsList(63).Replace("SubColor: ", "")
 		'StrokeCycle = SettingsList(64).Replace("StrokeCycle: ", "")
 		StrokeTick = SettingsList(65).Replace("StrokeTick: ", "")
 		StrokeTauntTick = SettingsList(66).Replace("StrokeTauntTick: ", "")
@@ -20656,10 +20560,7 @@ GetDommeSlideshow:
 		SlideshowLoaded = SettingsList(139).Replace("SlideshowLoaded: ", "")
 		RefreshVideoTotal = SettingsList(140).Replace("RefreshVideoTotal: ", "")
 		GlitterImageAV = SettingsList(141).Replace("GlitterImageAV: ", "")
-		GlitterNCDomme = SettingsList(142).Replace("GlitterNCDomme: ", "")
-		GlitterNC1 = SettingsList(143).Replace("GlitterNC1: ", "")
-		GlitterNC2 = SettingsList(144).Replace("GlitterNC2: ", "")
-		GlitterNC3 = SettingsList(145).Replace("GlitterNC3: ", "")
+		
 		GlitterTempColor = SettingsList(146).Replace("GlitterTempColor: ", "")
 		UpdatesTick = SettingsList(147).Replace("UpdatesTick: ", "")
 		UpdatingPost = SettingsList(148).Replace("UpdatingPost: ", "")
@@ -24694,8 +24595,6 @@ playLoop:
 		HypnoGen, _
 		Induction, _
 		TempHypno, _
-		DomColor, _
-		SubColor, _
 		StrokeTick, _
 		StrokeTauntTick, _
 		StrokePaceRight, _
@@ -24764,10 +24663,6 @@ playLoop:
 		SlideshowLoaded, _
 		RefreshVideoTotal, _
 		GlitterImageAV, _
-		GlitterNCDomme, _
-		GlitterNC1, _
-		GlitterNC2, _
-		GlitterNC3, _
 		GlitterTempColor, _
 		UpdatesTick, _
 		UpdatingPost, _
@@ -25099,8 +24994,6 @@ playLoop:
 		HypnoGen = LoadedState.HypnoGen
 		Induction = LoadedState.Induction
 		TempHypno = LoadedState.TempHypno
-		DomColor = LoadedState.DomColor
-		SubColor = LoadedState.SubColor
 		StrokeTick = LoadedState.StrokeTick
 		StrokeTauntTick = LoadedState.StrokeTauntTick
 		StrokePaceRight = LoadedState.StrokePaceRight
@@ -25169,10 +25062,6 @@ playLoop:
 		SlideshowLoaded = LoadedState.SlideshowLoaded
 		RefreshVideoTotal = LoadedState.RefreshVideoTotal
 		GlitterImageAV = LoadedState.GlitterImageAV
-		GlitterNCDomme = LoadedState.GlitterNCDomme
-		GlitterNC1 = LoadedState.GlitterNC1
-		GlitterNC2 = LoadedState.GlitterNC2
-		GlitterNC3 = LoadedState.GlitterNC3
 		GlitterTempColor = LoadedState.GlitterTempColor
 		UpdatesTick = LoadedState.UpdatesTick
 		UpdatingPost = LoadedState.UpdatingPost
@@ -25426,7 +25315,69 @@ playLoop:
 	End Sub
 
 
+	Public Function GetIf(ByVal CompareString As String) As Boolean
+
+		' CompareString = [x]operator[y]
+
+		Dim ReturnVal As Boolean = False
+
+		Dim CompareArray As String() = CompareString.Split("]")
+		Dim C_Operator As String = CompareArray(1).Split("[")(0)
+		Dim Val1 As String = CompareArray(0).Replace("[", "")
+		Dim Val2 As String = CompareArray(1).Replace(C_Operator & "[", "")
+
+		Debug.Print("CompareString = " & CompareString)
+		Debug.Print("C_Operator = " & C_Operator)
+		Debug.Print("Val1 = " & Val1)
+		Debug.Print("Val2 = " & Val2)
+
+		If Not IsNumeric(Val1) Then
+			Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & Val1
+			If File.Exists(VarCheck) Then
+				Val1 = TxtReadLine(VarCheck)
+			Else
+				Val1 = "0"
+			End If
+		End If
+
+		If Not IsNumeric(Val2) Then
+			Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & Val2
+			If File.Exists(VarCheck) Then
+				Val2 = TxtReadLine(VarCheck)
+			Else
+				Val2 = "0"
+			End If
+		End If
+
+		If C_Operator = "=" Then
+			If UCase(Val1) = UCase(Val2) Then Return True
+		End If
+
+		If C_Operator = "<>" Then
+			If UCase(Val1) <> UCase(Val2) Then Return True
+		End If
+
+		If Not IsNumeric(Val1) And Not IsNumeric(Val2) Then Return False
+
+		If C_Operator = ">" Then
+			If Val(Val1) > Val(Val2) Then Return True
+		End If
+
+		If C_Operator = "<" Then
+			If Val(Val1) < Val(Val2) Then Return True
+		End If
+
+		If C_Operator = ">=" Then
+			If Val(Val1) >= Val(Val2) Then Return True
+		End If
+
+		If C_Operator = "<=" Then
+			If Val(Val1) <= Val(Val2) Then Return True
+		End If
+
+		Return ReturnVal
+
+	End Function
 
 
-	
 End Class

@@ -58,8 +58,6 @@ Public Class SaveState
 	Public HypnoGen As Boolean
 	Public Induction As Boolean
 	Public TempHypno As String
-	Public DomColor As String
-	Public SubColor As String
 	Public StrokeTick As Integer
 	Public StrokeTauntTick As Integer
 	Public StrokePaceRight As Boolean
@@ -128,10 +126,6 @@ Public Class SaveState
 	Public SlideshowLoaded As Boolean
 	Public RefreshVideoTotal As Integer
 	Public GlitterImageAV As String
-	Public GlitterNCDomme As String
-	Public GlitterNC1 As String
-	Public GlitterNC2 As String
-	Public GlitterNC3 As String
 	Public GlitterTempColor As String
 	Public UpdatesTick As Integer
 	Public UpdatingPost As Boolean
@@ -441,8 +435,6 @@ Public Class SaveState
 	 ByVal NEW_HypnoGen As Boolean, _
 	 ByVal NEW_Induction As Boolean, _
 	 ByVal NEW_TempHypno As String, _
-	 ByVal NEW_DomColor As String, _
-	 ByVal NEW_SubColor As String, _
 	 ByVal NEW_StrokeTick As Integer, _
 	 ByVal NEW_StrokeTauntTick As Integer, _
 	 ByVal NEW_StrokePaceRight As Boolean, _
@@ -511,10 +503,6 @@ Public Class SaveState
 	 ByVal NEW_SlideshowLoaded As Boolean, _
 	 ByVal NEW_RefreshVideoTotal As Integer, _
 	 ByVal NEW_GlitterImageAV As String, _
-	 ByVal NEW_GlitterNCDomme As String, _
-	 ByVal NEW_GlitterNC1 As String, _
-	 ByVal NEW_GlitterNC2 As String, _
-	 ByVal NEW_GlitterNC3 As String, _
 	 ByVal NEW_GlitterTempColor As String, _
 	 ByVal NEW_UpdatesTick As Integer, _
 	 ByVal NEW_UpdatingPost As Boolean, _
@@ -817,8 +805,6 @@ Public Class SaveState
 		HypnoGen = NEW_HypnoGen
 		Induction = NEW_Induction
 		TempHypno = NEW_TempHypno
-		DomColor = NEW_DomColor
-		SubColor = NEW_SubColor
 		StrokeTick = NEW_StrokeTick
 		StrokeTauntTick = NEW_StrokeTauntTick
 		StrokePaceRight = NEW_StrokePaceRight
@@ -887,10 +873,6 @@ Public Class SaveState
 		SlideshowLoaded = NEW_SlideshowLoaded
 		RefreshVideoTotal = NEW_RefreshVideoTotal
 		GlitterImageAV = NEW_GlitterImageAV
-		GlitterNCDomme = NEW_GlitterNCDomme
-		GlitterNC1 = NEW_GlitterNC1
-		GlitterNC2 = NEW_GlitterNC2
-		GlitterNC3 = NEW_GlitterNC3
 		GlitterTempColor = NEW_GlitterTempColor
 		UpdatesTick = NEW_UpdatesTick
 		UpdatingPost = NEW_UpdatingPost

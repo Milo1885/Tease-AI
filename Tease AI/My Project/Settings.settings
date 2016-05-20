@@ -3,31 +3,31 @@
   <Profiles />
   <Settings>
     <Setting Name="VideoHardcore" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoSoftcore" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoLesbian" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoBlowjob" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoFemdom" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoFemsub" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoJOI" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoCH" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoGeneral" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="CBHardcore" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -62,17 +62,17 @@
     <Setting Name="SubAvatarSave" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="NBCensorShowMin" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+    <Setting Name="NBCensorShowMin" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="NBCensorShowMax" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+    <Setting Name="NBCensorShowMax" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">60</Value>
     </Setting>
-    <Setting Name="NBCensorHideMin" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+    <Setting Name="NBCensorHideMin" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="NBCensorHideMax" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">5</Value>
+    <Setting Name="NBCensorHideMax" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="CBCensorConstant" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -105,31 +105,31 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="VideoHardcoreD" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoSoftcoreD" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoLesbianD" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoBlowjobD" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoFemdomD" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoFemsubD" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoJOID" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoCHD" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="VideoGeneralD" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="GlitterAV" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -144,40 +144,40 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="GlitterSN" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Domme</Value>
     </Setting>
     <Setting Name="Glitter1" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Contact 1</Value>
     </Setting>
     <Setting Name="Glitter2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Contact 2</Value>
     </Setting>
     <Setting Name="Glitter3" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">Contact 3</Value>
     </Setting>
     <Setting Name="GlitterNCDomme" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">#0080FF</Value>
     </Setting>
     <Setting Name="GlitterNC1" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">#FF0080</Value>
     </Setting>
     <Setting Name="GlitterNC2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">#8080C0</Value>
     </Setting>
     <Setting Name="GlitterNC3" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">#0080C0</Value>
     </Setting>
     <Setting Name="GlitterNCDommeColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">0, 128, 255</Value>
     </Setting>
     <Setting Name="GlitterNC1Color" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">255, 0, 128</Value>
     </Setting>
     <Setting Name="GlitterNC2Color" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">128, 128, 192</Value>
     </Setting>
     <Setting Name="GlitterNC3Color" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">255, 128, 255</Value>
     </Setting>
     <Setting Name="GlitterDSlider" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>

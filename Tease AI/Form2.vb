@@ -1258,36 +1258,28 @@ Public Class FrmSettings
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.GlitterNCDommeColor = GetColor.Color
 			LBLGlitterNCDomme.ForeColor = GetColor.Color
-			Form1.GlitterNCDomme = Color2Html(GetColor.Color)
-			My.Settings.GlitterNCDomme = Form1.GlitterNCDomme
-			Debug.Print("GlitterNCDomme = " & Form1.GlitterNCDomme)
+			My.Settings.GlitterNCDomme = Color2Html(GetColor.Color)
 		End If
 	End Sub
 	Private Sub Button27_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter1.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.GlitterNC1Color = GetColor.Color
 			LBLGlitterNC1.ForeColor = GetColor.Color
-			Form1.GlitterNC1 = Color2Html(GetColor.Color)
-			My.Settings.GlitterNC1 = Form1.GlitterNC1
-			Debug.Print("GlitterNC1 = " & Form1.GlitterNC1)
+			My.Settings.GlitterNC1 = Color2Html(GetColor.Color)
 		End If
 	End Sub
 	Private Sub Button4_Click_3(sender As System.Object, e As System.EventArgs) Handles BTNGlitter2.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.GlitterNC2Color = GetColor.Color
-			LBLGlitterNC2.ForeColor = GetColor.Color
-			Form1.GlitterNC2 = Color2Html(GetColor.Color)
-			My.Settings.GlitterNC2 = Form1.GlitterNC2
-			Debug.Print("GlitterNC2 = " & Form1.GlitterNC2)
+			LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
+			My.Settings.GlitterNC2 = Color2Html(GetColor.Color)
 		End If
 	End Sub
 	Private Sub Button26_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter3.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.GlitterNC3Color = GetColor.Color
 			LBLGlitterNC3.ForeColor = GetColor.Color
-			Form1.GlitterNC3 = Color2Html(GetColor.Color)
-			My.Settings.GlitterNC3 = Form1.GlitterNC3
-			Debug.Print("GlitterNC3 = " & Form1.GlitterNC3)
+			My.Settings.GlitterNC3 = Color2Html(GetColor.Color)
 		End If
 	End Sub
 	Private Sub TBGlitterShortName_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.Leave
@@ -2521,8 +2513,7 @@ trypreviousimage:
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.DomColorColor = GetColor.Color
 			LBLDomColor.ForeColor = GetColor.Color
-			Form1.DomColor = Color2Html(GetColor.Color)
-			My.Settings.DomColor = Form1.DomColor
+			My.Settings.DomColor = Color2Html(GetColor.Color)
 		End If
 
 
@@ -2533,8 +2524,7 @@ trypreviousimage:
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			My.Settings.SubColorColor = GetColor.Color
 			LBLSubColor.ForeColor = GetColor.Color
-			Form1.SubColor = Color2Html(GetColor.Color)
-			My.Settings.SubColor = Form1.SubColor
+			My.Settings.SubColor = Color2Html(GetColor.Color)
 		End If
 
 	End Sub
@@ -11911,12 +11901,6 @@ WhyUMakeMeDoDis:
 	End Sub
 
 
-	Private Sub CBGlitterFeed_LostFocus(sender As Object, e As System.EventArgs) Handles CBGlitterFeed.LostFocus, CBGlitterFeedScripts.LostFocus, CBGlitterFeedOff.LostFocus
-		My.Settings.CBGlitterFeed = CBGlitterFeed.Checked
-		My.Settings.CBGlitterFeedScripts = CBGlitterFeedScripts.Checked
-		My.Settings.CBGlitterFeedOff = CBGlitterFeedOff.Checked
-	End Sub
-
 	Private Sub Button11_Click_1(sender As System.Object, e As System.EventArgs) Handles Button11.Click
 
 		If MsgBox("This will change the Chastity state of Tease AI. Depending on the Personality or Scripts used so far, this could cause unexpected behavior or break certain scripts." & Environment.NewLine _
@@ -12003,8 +11987,8 @@ WhyUMakeMeDoDis:
 			SettingsList.Clear()
 
 
-			If CBGlitterFeed.Checked = True Then SettingsList.Add("Glitter Feed: On")
-			If CBGlitterFeedScripts.Checked = True Then SettingsList.Add("Glitter Feed: Scripts")
+			If My.Settings.CBGlitterFeed = True Then SettingsList.Add("Glitter Feed: On")
+			If My.Settings.CBGlitterFeedScripts = True Then SettingsList.Add("Glitter Feed: Scripts")
 			If CBGlitterFeedOff.Checked = True Then SettingsList.Add("Glitter Feed: Off")
 
 			SettingsList.Add("Short Name: " & TBGlitterShortName.Text)
@@ -12015,25 +11999,25 @@ WhyUMakeMeDoDis:
 			SettingsList.Add("Daily: " & CBDaily.Checked)
 			SettingsList.Add("Custom 1: " & CBCustom1.Checked)
 			SettingsList.Add("Custom 2: " & CBCustom2.Checked)
-			SettingsList.Add("Domme Post Frequency: " & GlitterSlider.Value)
+			SettingsList.Add("Domme Post Frequency: " & My.Settings.GlitterDSlider)
 
 			SettingsList.Add("Contact 1 Enabled: " & CBGlitter1.Checked)
 			SettingsList.Add("Contact 1 Name: " & TBGlitter1.Text)
 			SettingsList.Add("Contact 1 Color: " & LBLGlitterNC1.ForeColor.ToArgb.ToString)
 			SettingsList.Add("Contact 1 Image Directory: " & LBLContact1ImageDir.Text)
-			SettingsList.Add("Contact 1 Post Frequency: " & GlitterSlider1.Value)
+			SettingsList.Add("Contact 1 Post Frequency: " & My.Settings.Glitter1Slider)
 
 			SettingsList.Add("Contact 2 Enabled: " & CBGlitter2.Checked)
 			SettingsList.Add("Contact 2 Name: " & TBGlitter2.Text)
 			SettingsList.Add("Contact 2 Color: " & LBLGlitterNC2.ForeColor.ToArgb.ToString)
 			SettingsList.Add("Contact 2 Image Directory: " & LBLContact2ImageDir.Text)
-			SettingsList.Add("Contact 2 Post Frequency: " & GlitterSlider2.Value)
+			SettingsList.Add("Contact 2 Post Frequency: " & My.Settings.Glitter2Slider)
 
 			SettingsList.Add("Contact 3 Enabled: " & CBGlitter3.Checked)
 			SettingsList.Add("Contact 3 Name: " & TBGlitter3.Text)
 			SettingsList.Add("Contact 3 Color: " & LBLGlitterNC3.ForeColor.ToArgb.ToString)
 			SettingsList.Add("Contact 3 Image Directory: " & LBLContact3ImageDir.Text)
-			SettingsList.Add("Contact 3 Post Frequency: " & GlitterSlider3.Value)
+			SettingsList.Add("Contact 3 Post Frequency: " & My.Settings.Glitter3Slider)
 
 			SettingsList.Add("Domme AV: " & My.Settings.GlitterAV)
 			SettingsList.Add("Contact 1 AV: " & My.Settings.GlitterAV1)
@@ -12079,8 +12063,8 @@ WhyUMakeMeDoDis:
 			Try
 
 				Dim CheckState As String = SettingsList(0).Replace("Glitter Feed: ", "")
-				If CheckState = "On" Then CBGlitterFeed.Checked = True
-				If CheckState = "Scripts" Then CBGlitterFeedScripts.Checked = True
+				If CheckState = "On" Then My.Settings.CBGlitterFeed = True
+				If CheckState = "Scripts" Then My.Settings.CBGlitterFeedScripts = True
 				If CheckState = "Off" Then CBGlitterFeedOff.Checked = True
 
 				TBGlitterShortName.Text = SettingsList(1).Replace("Short Name: ", "")

@@ -56,7 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoHardcore() As String
             Get
                 Return CType(Me("VideoHardcore"),String)
@@ -68,7 +68,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoSoftcore() As String
             Get
                 Return CType(Me("VideoSoftcore"),String)
@@ -80,7 +80,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoLesbian() As String
             Get
                 Return CType(Me("VideoLesbian"),String)
@@ -92,7 +92,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoBlowjob() As String
             Get
                 Return CType(Me("VideoBlowjob"),String)
@@ -104,7 +104,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoFemdom() As String
             Get
                 Return CType(Me("VideoFemdom"),String)
@@ -116,7 +116,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoFemsub() As String
             Get
                 Return CType(Me("VideoFemsub"),String)
@@ -128,7 +128,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoJOI() As String
             Get
                 Return CType(Me("VideoJOI"),String)
@@ -140,7 +140,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoCH() As String
             Get
                 Return CType(Me("VideoCH"),String)
@@ -152,7 +152,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoGeneral() As String
             Get
                 Return CType(Me("VideoGeneral"),String)
@@ -296,10 +296,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property NBCensorShowMin() As Integer
+         Global.System.Configuration.DefaultSettingValueAttribute("20")>  _
+        Public Property NBCensorShowMin() As Decimal
             Get
-                Return CType(Me("NBCensorShowMin"),Integer)
+                Return CType(Me("NBCensorShowMin"),Decimal)
             End Get
             Set
                 Me("NBCensorShowMin") = value
@@ -308,10 +308,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property NBCensorShowMax() As Integer
+         Global.System.Configuration.DefaultSettingValueAttribute("60")>  _
+        Public Property NBCensorShowMax() As Decimal
             Get
-                Return CType(Me("NBCensorShowMax"),Integer)
+                Return CType(Me("NBCensorShowMax"),Decimal)
             End Get
             Set
                 Me("NBCensorShowMax") = value
@@ -320,10 +320,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property NBCensorHideMin() As Integer
+         Global.System.Configuration.DefaultSettingValueAttribute("10")>  _
+        Public Property NBCensorHideMin() As Decimal
             Get
-                Return CType(Me("NBCensorHideMin"),Integer)
+                Return CType(Me("NBCensorHideMin"),Decimal)
             End Get
             Set
                 Me("NBCensorHideMin") = value
@@ -332,10 +332,10 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property NBCensorHideMax() As Integer
+         Global.System.Configuration.DefaultSettingValueAttribute("30")>  _
+        Public Property NBCensorHideMax() As Decimal
             Get
-                Return CType(Me("NBCensorHideMax"),Integer)
+                Return CType(Me("NBCensorHideMax"),Decimal)
             End Get
             Set
                 Me("NBCensorHideMax") = value
@@ -464,7 +464,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoHardcoreD() As String
             Get
                 Return CType(Me("VideoHardcoreD"),String)
@@ -476,7 +476,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoSoftcoreD() As String
             Get
                 Return CType(Me("VideoSoftcoreD"),String)
@@ -488,7 +488,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoLesbianD() As String
             Get
                 Return CType(Me("VideoLesbianD"),String)
@@ -500,7 +500,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoBlowjobD() As String
             Get
                 Return CType(Me("VideoBlowjobD"),String)
@@ -512,7 +512,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoFemdomD() As String
             Get
                 Return CType(Me("VideoFemdomD"),String)
@@ -524,7 +524,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoFemsubD() As String
             Get
                 Return CType(Me("VideoFemsubD"),String)
@@ -536,7 +536,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoJOID() As String
             Get
                 Return CType(Me("VideoJOID"),String)
@@ -548,7 +548,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoCHD() As String
             Get
                 Return CType(Me("VideoCHD"),String)
@@ -560,7 +560,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property VideoGeneralD() As String
             Get
                 Return CType(Me("VideoGeneralD"),String)
@@ -620,7 +620,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Domme")>  _
         Public Property GlitterSN() As String
             Get
                 Return CType(Me("GlitterSN"),String)
@@ -632,7 +632,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Contact 1")>  _
         Public Property Glitter1() As String
             Get
                 Return CType(Me("Glitter1"),String)
@@ -644,7 +644,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Contact 2")>  _
         Public Property Glitter2() As String
             Get
                 Return CType(Me("Glitter2"),String)
@@ -656,7 +656,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Contact 3")>  _
         Public Property Glitter3() As String
             Get
                 Return CType(Me("Glitter3"),String)
@@ -668,7 +668,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("#0080FF")>  _
         Public Property GlitterNCDomme() As String
             Get
                 Return CType(Me("GlitterNCDomme"),String)
@@ -680,7 +680,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("#FF0080")>  _
         Public Property GlitterNC1() As String
             Get
                 Return CType(Me("GlitterNC1"),String)
@@ -692,7 +692,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("#8080C0")>  _
         Public Property GlitterNC2() As String
             Get
                 Return CType(Me("GlitterNC2"),String)
@@ -704,7 +704,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("#0080C0")>  _
         Public Property GlitterNC3() As String
             Get
                 Return CType(Me("GlitterNC3"),String)
@@ -715,7 +715,8 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 128, 255")>  _
         Public Property GlitterNCDommeColor() As Global.System.Drawing.Color
             Get
                 Return CType(Me("GlitterNCDommeColor"),Global.System.Drawing.Color)
@@ -726,7 +727,8 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("255, 0, 128")>  _
         Public Property GlitterNC1Color() As Global.System.Drawing.Color
             Get
                 Return CType(Me("GlitterNC1Color"),Global.System.Drawing.Color)
@@ -737,7 +739,8 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("128, 128, 192")>  _
         Public Property GlitterNC2Color() As Global.System.Drawing.Color
             Get
                 Return CType(Me("GlitterNC2Color"),Global.System.Drawing.Color)
@@ -748,7 +751,8 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("255, 128, 255")>  _
         Public Property GlitterNC3Color() As Global.System.Drawing.Color
             Get
                 Return CType(Me("GlitterNC3Color"),Global.System.Drawing.Color)
