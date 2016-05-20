@@ -13050,4 +13050,24 @@ WhyUMakeMeDoDis:
 	Private Sub Button33_Click(sender As System.Object, e As System.EventArgs) Handles Button33.Click
 		Form1.LoadProgramState()
 	End Sub
+
+	Private Sub CBGlitterFeed_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitterFeed.CheckedChanged, CBGlitterFeedScripts.CheckedChanged, CBGlitterFeedOff.CheckedChanged
+		If Form1.FormLoading = False Then
+
+			My.Settings.CBGlitterFeed = CBGlitterFeed.Checked
+			My.Settings.CBGlitterFeedScripts = CBGlitterFeedScripts.Checked
+			My.Settings.CBGlitterFeedOff = CBGlitterFeedOff.Checked
+
+		End If
+	End Sub
+	'Private Sub CBGlitterFeedScripts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitterFeedScripts.CheckedChanged
+	'My.Settings.CBGlitterFeed = False
+	'My.Settings.CBGlitterFeedScripts = True
+	'My.Settings.CBGlitterFeedOff = False
+	'End Sub
+	'Private Sub CBGlitterFeedOff_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitterFeedOff.CheckedChanged
+	'My.Settings.CBGlitterFeed = False
+	'My.Settings.CBGlitterFeedScripts = False
+	'My.Settings.CBGlitterFeedOff = True
+	'End Sub
 End Class

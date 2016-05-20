@@ -8,6 +8,18 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 # Changelog - Patch 55.0.0	
 
+Improved @If[] Command - @If[] can now use "And" and "Or" when making comparisons. For example:
+
+     @If[Var_EdgeCount]>[10]And[#DommeMood]>[@DomMoodMax]Then(GotoLine)
+	 @If[Var_EdgeCount]<[3]Or[Var_TotalAttempts]>[5]Then(GotoLine)
+	 @If[Var_EdgeCount]>[10]And[#DommeMood]>[@DomMoodMax]And[#CBTCockCount]<[1]Then(GotoLine)
+	 
+	 You can use as many "And" or "Or" comparisons per @If[] Command that you like, but you CANNOT use both "And" and "Or" in the same @If[] Command
+
+WIP - DataBinding Overhaul
+   
+	 
+
 WIP - SaveState overhaul. Added SaveState Class and replaced Suspend and Resume Session options in File menu with SaveProgramState() and LoadProgramState() subroutines. These are only saving and loading the variables declared in Form 1, they are not functional yet. I'll need to do more work to reset the chat, check timer states, determine whether video was playing and resume accordingly, etc.
 	
 # Changelog - Patch 54.0.2

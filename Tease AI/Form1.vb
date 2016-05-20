@@ -934,9 +934,15 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		Me.ActiveControl = Me.chatBox
 
 
-		If My.Settings.CBGlitterFeed = False And My.Settings.CBGlitterFeedScripts = False And My.Settings.CBGlitterFeedOff = False Then
-			My.Settings.CBGlitterFeedOff = True
-		End If
+		'If My.Settings.CBGlitterFeed = False And My.Settings.CBGlitterFeedScripts = False And My.Settings.CBGlitterFeedOff = False Then
+		'My.Settings.CBGlitterFeedOff = True
+		'End If
+
+		'TODO: Don't know what to do about these settings. The radio buttons staunchly refuse to be DataBound and non-DataBound settings don't currently save, so ¯\_(ツ)_/¯
+		If My.Settings.CBGlitterFeed = True Then FrmSettings.CBGlitterFeed.Checked = True
+		If My.Settings.CBGlitterFeedScripts = True Then FrmSettings.CBGlitterFeedScripts.Checked = True
+		If My.Settings.CBGlitterFeedOff = True Then FrmSettings.CBGlitterFeedOff.Checked = True
+
 
 		If My.Settings.CBGlitter1 = True Then
 			FrmSettings.CBGlitter1.Checked = True
@@ -11319,7 +11325,6 @@ TaskCleanSet:
 
 				For i As Integer = 0 To SCIfVar.Length - 1
 					If SCIfVar(i).Contains("@If[") Then
-						'Debug.Print("@SetVar SCSetVar(i) = " & SCIfVar(i))
 						Dim IFJoin As Integer = 0
 						If Not SCIfVar(i).Contains(")") Then
 							Do
@@ -11334,175 +11339,54 @@ TaskCleanSet:
 						Do
 							StringClean = StringClean.Replace("  ", " ")
 						Loop Until Not StringClean.Contains("  ")
-						'Debug.Print("@SetVar SCSetVar Joined StringClean = " & StringClean)
 						Exit For
 					End If
 				Next
 
-				SCGotVar = SCGotVar.Replace("@If[", "")
-				Dim SCGotVarSplit As String() = Split(SCGotVar, "]", 2)
+				If SCGotVar.Contains("]And[") Then
 
-				Dim Val1 As Integer = -18855881
-				Dim Str1 As String = SCGotVarSplit(0)
+					Dim AndCheck As Boolean = True
 
-				Debug.Print("SCGotVarSplit(0)= " & SCGotVarSplit(0))
-
-				If IsNumeric(Str1) = True Then
-
-					Debug.Print("InNumeric Called")
-
-					Val1 = Val(SCGotVarSplit(0))
-
-				Else
-
-					Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVarSplit(0)
-					'Debug.Print("VarCheck = " & VarCheck)
-					'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-					If File.Exists(VarCheck) Then
-						'Debug.Print("VarCheck Exists")
-						Dim StrCheck As String = TxtReadLine(VarCheck)
-
-						Debug.Print("StrChec = " & StrCheck)
-
-						If IsNumeric(StrCheck) = True Then
-							Val1 = Val(StrCheck)
-						Else
-							Str1 = StrCheck
+					For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
+						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = False Then
+							AndCheck = False
+							Exit For
 						End If
+						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]And", "")
+					Next
+
+					If AndCheck = True Then
+						FileGoto = GetParentheses(SCGotVar, "Then(")
+						SkipGotoLine = True
+						GetGoto()
 					End If
 
-				End If
+				ElseIf SCGotVar.Contains("]Or[") Then
 
-				Debug.Print("Val1 = " & Val1)
+					Dim OrCheck As Boolean = False
 
-				'Debug.Print("@SetVar VarDifference = " & Val1)
-
-				'Debug.Print("@SetVar Val = " & Val1)
-				SCGotVarSplit(0) = ""
-
-				SCGotVar = Join(SCGotVarSplit)
-				'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
-
-				SCGotVarSplit = Split(SCGotVar, "[", 2)
-				SCGotVarSplit(0) = SCGotVarSplit(0).Replace(" ", "")
-				'Debug.Print("@SetVar SCGotVarSplit = " & SCGotVarSplit(0))
-
-				ScriptCompare = "Null"
-
-				If SCGotVarSplit(0) = "=" Or SCGotVarSplit(0) = "==" Then ScriptCompare = "="
-				If SCGotVarSplit(0) = "<>" Then ScriptCompare = "<>"
-				If SCGotVarSplit(0) = ">" Then ScriptCompare = ">"
-				If SCGotVarSplit(0) = "<" Then ScriptCompare = "<"
-				If SCGotVarSplit(0) = ">=" Then ScriptCompare = ">="
-				If SCGotVarSplit(0) = "<=" Then ScriptCompare = "<="
-
-				'Debug.Print("Script Compare = " & ScriptCompare)
-
-				SCGotVarSplit(0) = ""
-
-				SCGotVar = Join(SCGotVarSplit)
-				'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
-
-				Do Until SCGotVar.Substring(0, 1) <> " "
-					SCGotVar = SCGotVar.Remove(0, 1)
-				Loop
-
-				'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
-
-				SCGotVarSplit = Split(SCGotVar, "]", 2)
-				SCGotVarSplit(0) = SCGotVarSplit(0).Replace(" ", "")
-				'Debug.Print("@SetVar SCGotVarSplit(0) = " & SCGotVarSplit(0))
-				SCGotVarSplit(1) = SCGotVarSplit(1).Replace("Then", "")
-				'Debug.Print("@SetVar SCGotVarSplit(1) = " & SCGotVarSplit(1))
-
-
-				Dim Val2 As Integer = -18855881
-				Dim Str2 As String = SCGotVarSplit(0)
-
-				Debug.Print("SCGotVarSplit(0)= " & SCGotVarSplit(0))
-
-				If IsNumeric(Str2) = True Then
-
-					Debug.Print("InNumeric Called")
-
-					Val2 = Val(SCGotVarSplit(0))
-
-				Else
-
-					Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVarSplit(0)
-					'Debug.Print("VarCheck = " & VarCheck)
-					'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-					If File.Exists(VarCheck) Then
-						'Debug.Print("VarCheck Exists")
-						' Read the first line of the given file.
-						Dim StrCheck As String = TxtReadLine(VarCheck)
-						Debug.Print("StrChec = " & StrCheck)
-						If IsNumeric(StrCheck) = True Then
-							Val2 = Val(StrCheck)
-						Else
-							Str2 = StrCheck
+					For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
+						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+							OrCheck = True
+							Exit For
 						End If
-					End If
+						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]Or", "")
+					Next
 
-				End If
-
-				Debug.Print("Val2 = " & Val2)
-
-
-				Dim CompareCheck As String = "Null"
-
-				If Val1 = -18855881 Or Val2 = -18855881 Then
-
-					Debug.Print("Compare strings called")
-
-					Debug.Print("Str1 = " & Str1)
-					Debug.Print("Str2 = " & Str2)
-
-
-					If ScriptCompare = "=" Then
-						If UCase(Str1) = UCase(Str2) Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = "<>" Then
-						If UCase(Str1) <> UCase(Str2) Then CompareCheck = SCGotVarSplit(1)
+					If OrCheck = True Then
+						FileGoto = GetParentheses(SCGotVar, "Then(")
+						SkipGotoLine = True
+						GetGoto()
 					End If
 
 				Else
 
-					Debug.Print("Compare integers called")
+						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+							FileGoto = GetParentheses(SCGotVar, "Then(")
+							SkipGotoLine = True
+							GetGoto()
+						End If
 
-					If ScriptCompare = "=" Then
-						If Val1 = Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = "<>" Then
-						If Val1 <> Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = ">" Then
-						If Val1 > Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = "<" Then
-						If Val1 < Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = ">=" Then
-						If Val1 >= Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = "<=" Then
-						If Val1 <= Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-				End If
-
-				'Debug.Print("CompareCheck = " & CompareCheck)
-
-				If CompareCheck <> "Null" Then
-					FileGoto = CompareCheck
-					SkipGotoLine = True
-					GetGoto()
 				End If
 
 			Loop Until Not StringClean.Contains("@If")
@@ -25307,23 +25191,15 @@ playLoop:
 
 		If Not IsNumeric(Val1) Then
 			Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & Val1
-			If File.Exists(VarCheck) Then
-				Val1 = TxtReadLine(VarCheck)
-			Else
-				Val1 = "0"
-			End If
+			If File.Exists(VarCheck) Then Val1 = TxtReadLine(VarCheck)
 		End If
 
 		If Not IsNumeric(Val2) Then
 			Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & Val2
-			If File.Exists(VarCheck) Then
-				Val2 = TxtReadLine(VarCheck)
-			Else
-				Val2 = "0"
-			End If
+			If File.Exists(VarCheck) Then Val2 = TxtReadLine(VarCheck)
 		End If
 
-		If C_Operator = "=" Then
+		If C_Operator = "=" Or C_Operator = "==" Then
 			If UCase(Val1) = UCase(Val2) Then Return True
 		End If
 
