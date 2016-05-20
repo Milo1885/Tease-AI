@@ -67,16 +67,19 @@ Namespace My
                 Dim dupeFilePath As String = GetDuplicatePath()
                 Dim dupeFileDir As String = Path.GetDirectoryName(dupeFilePath)
 
-                ' check if there is a duplicate file 
-                If Directory.Exists(dupeFileDir) AndAlso File.Exists(dupeFilePath) Then
+				If Directory.Exists(configAppDataDir) And File.Exists(configAppData) Then
+					' Config in %LocalAppData% older found.
+					Exit Sub
+				ElseIf Directory.Exists(dupeFileDir) AndAlso File.Exists(dupeFilePath) Then
+					' No Config in %LocalAppData% Folder found but found backup
 
-                    'check if the directory in %LocalAppData% exits and create it if not
-                    If Directory.Exists(configAppDataDir) = False Then _
+					'check if the directory in %LocalAppData% exits and create it if not
+					If Directory.Exists(configAppDataDir) = False Then _
 								Directory.CreateDirectory(configAppDataDir)
 
                     ' Copy the duplicated file to %LoaclAppData%-Dir.
                     File.Copy(dupeFilePath, configAppData, True)
-				ElseIf Directory.Exists(configAppDataDir) = False And File.Exists(configAppData)
+				ElseIf Directory.Exists(configAppDataDir) = False Then
 					' No settings Found, try an Upgrade if there a Version in %LocaAppDir%
 					My.Settings.Upgrade()
 				End If
@@ -115,6 +118,7 @@ Namespace My
 		Protected Overrides Sub OnSettingsSaving(sender As Object, e As CancelEventArgs)
 			MyBase.OnSettingsSaving(sender, e)
 			Try
+				'BUG: Duplicating user.config file is performed to early. This way the duplicated file is one save-cycle late.
 				Dim configAppDataPath As String = GetLocalFilepath()
 				Dim dupeFilePath As String = GetDuplicatePath()
 
