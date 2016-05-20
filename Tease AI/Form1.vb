@@ -18889,10 +18889,20 @@ RestartFunction:
 
 		If mainPictureBox.Image IsNot Nothing Then
 
-			If ImageAnimator.CanAnimate(mainPictureBox.Image) Then
+			If ImageAnimator.CanAnimate(mainPictureBox.Image) _
+			And ImageAnimator_OnFrameChangedAdded Then
 				PicStripTmsiDisableAnimation.Enabled = True
+
+				If mreImageanimator.WaitOne(0) = True Then
+					' ImageAnimations are running
+					PicStripTmsiDisableAnimation.Checked = False
+				Else
+					' ImageAnimations are stopped
+					PicStripTmsiDisableAnimation.Checked = True
+				End If
 			Else
 				PicStripTmsiDisableAnimation.Enabled = False
+				PicStripTmsiDisableAnimation.Checked = False
 			End If
 
 			If ImageLocation = "" Or _ImageFileNames.Contains(ImageLocation) Then
@@ -18937,8 +18947,13 @@ RestartFunction:
 	End Sub
 
 	Private Sub PictureStripTmsiDisableAnimation_Click(sender As Object, e As EventArgs) Handles PicStripTmsiDisableAnimation.Click
-		' Signals the ImageAnimatorThread to pause.
-		mreImageanimator.Reset()
+		If mreImageanimator.WaitOne(0) = True Then
+			' Signals the ImageAnimatorThread to pause.
+			mreImageanimator.Reset()
+		Else
+			' Signals the ImageAnimatorThread to resume.
+			mreImageanimator.Set()
+		End If
 	End Sub
 
 	Private Sub PicStripTSMIcopyImageLocation_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIcopyImageLocation.Click
@@ -18947,28 +18962,80 @@ RestartFunction:
 
 	End Sub
 
-	Private Sub PicStripTSMIsaveImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveImage.Click
-		'TODO-Next: Rework in order to remove FoundString-Variable.
 
+	Public Sub PicStripTSMI_SaveImage(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveHardcore.Click,
+		PicStripTSMIsaveSoftcore.Click, PicStripTSMIsaveLesbian.Click, PicStripTSMIsaveBlowjob.Click, PicStripTSMIsaveFemdom.Click,
+		PicStripTSMIsaveLezdom.Click, PicStripTSMIsaveHentai.Click, PicStripTSMIsaveGay.Click, PicStripTSMIsaveMaledom.Click,
+		PicStripTSMIsaveCaptions.Click, PicStripTSMIsaveGeneral.Click, PicStripTSMIsaveBoobs.Click, PicStripTSMIsaveButts.Click, PicStripTSMIsaveImage.Click
+retry:
+		Try
+			Dim BlogPath As String = ""
+			Dim fileName As String = Path.GetFileName(mainPictureBox.ImageLocation)
 
-		SaveFileDialog1.Filter = "jpegs|*.jpg|gifs|*.gif|pngs|*.png|Bitmaps|*.bmp"
-		SaveFileDialog1.FilterIndex = 1
-		SaveFileDialog1.RestoreDirectory = True
+			If sender Is PicStripTSMIsaveHardcore Then : BlogPath = My.Settings.IHardcore
+			ElseIf sender Is PicStripTSMIsaveSoftcore Then : BlogPath = My.Settings.ISoftcore
+			ElseIf sender Is PicStripTSMIsaveLesbian Then : BlogPath = My.Settings.ILesbian
+			ElseIf sender Is PicStripTSMIsaveBlowjob Then : BlogPath = My.Settings.IBlowjob
+			ElseIf sender Is PicStripTSMIsaveFemdom Then : BlogPath = My.Settings.IFemdom
+			ElseIf sender Is PicStripTSMIsaveLezdom Then : BlogPath = My.Settings.ILezdom
+			ElseIf sender Is PicStripTSMIsaveHentai Then : BlogPath = My.Settings.IHentai
+			ElseIf sender Is PicStripTSMIsaveGay Then : BlogPath = My.Settings.IGay
+			ElseIf sender Is PicStripTSMIsaveMaledom Then : BlogPath = My.Settings.IMaledom
+			ElseIf sender Is PicStripTSMIsaveCaptions Then : BlogPath = My.Settings.ICaptions
+			ElseIf sender Is PicStripTSMIsaveGeneral Then : BlogPath = My.Settings.IGeneral
+			ElseIf sender Is PicStripTSMIsaveBoobs Then : BlogPath = My.Settings.LBLBoobPath
+			ElseIf sender Is PicStripTSMIsaveButts Then : BlogPath = My.Settings.LBLButtPath
+			ElseIf sender Is PicStripTSMIsaveImage Then
+				SaveFileDialog1.Filter = "jpegs|*.jpg|gifs|*.gif|pngs|*.png|Bitmaps|*.bmp"
+				SaveFileDialog1.FilterIndex = 1
+				SaveFileDialog1.RestoreDirectory = True
+				SaveFileDialog1.FileName = fileName
+				SaveFileDialog1.CheckFileExists = True
 
-		WebImage = FoundString
-		Do Until Not WebImage.Contains("/")
-			WebImage = WebImage.Remove(0, 1)
-		Loop
+				If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
+					fileName = Path.GetFileName(SaveFileDialog1.FileName)
+					BlogPath = Path.GetDirectoryName(SaveFileDialog1.FileName)
+				Else
+					Exit Sub
+				End If
+			Else : Throw New NotImplementedException("Action for this button is not implemented.")
+			End If
 
-		SaveFileDialog1.FileName = WebImage
+			If Directory.Exists(BlogPath) = False Then
+				Throw New DirectoryNotFoundException(
+							"Unable to find the directroy """ & BlogPath & """" &
+							vbCrLf & vbCrLf &
+							"Please check your image settings.")
+			End If
 
-		If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
+			Dim fullPath As String = BlogPath & "\" & fileName
 
-			My.Computer.Network.DownloadFile(FoundString, SaveFileDialog1.FileName)
+			' Save image directly
+			If Not File.Exists(fullPath) Or SaveFileDialog1.CheckFileExists Then GoTo saveImage
 
-		End If
+			' Confirm overwriting the file
+			If MessageBox.Show(Me, fileName & " already exists in this directory!" &
+							Environment.NewLine & Environment.NewLine &
+							"Do you wish to overwrite?", "Caution!",
+							MessageBoxButtons.YesNo,
+							MessageBoxIcon.Exclamation) = DialogResult.No Then
+				Exit Sub
+			End If
 
+			My.Computer.FileSystem.DeleteFile(fullPath)
+saveImage:
 
+			mainPictureBox.Image.Save(fullPath)
+
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Saving image failed.")
+			If MessageBox.Show(ex.Message, "Saving image failed.",
+							MessageBoxButtons.RetryCancel, MessageBoxIcon.Exclamation,
+							MessageBoxDefaultButton.Button2) = DialogResult.Retry Then GoTo retry
+		End Try
 	End Sub
 
 	Private Sub PicStripTSMIlikeImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIlikeImage.Click,
@@ -19034,97 +19101,6 @@ RestartFunction:
 				   & ex.Message, MsgBoxStyle.Exclamation, "Delete URL from Files")
 		End Try
 	End Sub
-
-#Region "-------------------------------------------------- Save Blog Image ---------------------------------------------------"
-
-	Public Sub PicStripTSMI_SaveImage(ByVal BlogPath As String)
-
-		If BlogPath = "Hardcore" Then BlogPath = FrmSettings.LBLIHardcore.Text
-		If BlogPath = "Softcore" Then BlogPath = FrmSettings.LBLISoftcore.Text
-		If BlogPath = "Lesbian" Then BlogPath = FrmSettings.LBLILesbian.Text
-		If BlogPath = "Blowjob" Then BlogPath = FrmSettings.LBLIBlowjob.Text
-		If BlogPath = "Femdom" Then BlogPath = FrmSettings.LBLIFemdom.Text
-		If BlogPath = "Lezdom" Then BlogPath = FrmSettings.LBLILezdom.Text
-		If BlogPath = "Hentai" Then BlogPath = FrmSettings.LBLIHentai.Text
-		If BlogPath = "Gay" Then BlogPath = FrmSettings.LBLIGay.Text
-		If BlogPath = "Maledom" Then BlogPath = FrmSettings.LBLIMaledom.Text
-		If BlogPath = "Captions" Then BlogPath = FrmSettings.LBLICaptions.Text
-		If BlogPath = "General" Then BlogPath = FrmSettings.LBLIGeneral.Text
-		If BlogPath = "Boobs" Then BlogPath = FrmSettings.LBLBoobPath.Text
-		If BlogPath = "Butt" Then BlogPath = FrmSettings.LBLButtPath.Text
-
-
-		If Directory.Exists(BlogPath) Then
-
-			WebImage = ImageLocation
-
-			Do Until Not WebImage.Contains("/")
-				WebImage = WebImage.Remove(0, 1)
-			Loop
-
-			Debug.Print(BlogPath & "\" & WebImage)
-
-			If File.Exists(BlogPath & "\" & WebImage) Then
-
-				Dim Result As Integer = MessageBox.Show(Me, WebImage & " already exists in this directory!" & Environment.NewLine & Environment.NewLine &
-													 "Do you wish to overwrite?", "Caution!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-				If Result = DialogResult.Yes Then
-					My.Computer.FileSystem.DeleteFile(BlogPath & "\" & WebImage)
-					My.Computer.Network.DownloadFile(FoundString, BlogPath & "\" & WebImage)
-				End If
-
-			Else
-
-				My.Computer.Network.DownloadFile(FoundString, BlogPath & "\" & WebImage)
-
-			End If
-
-		End If
-
-
-	End Sub
-
-	Private Sub PicStripTSMIsaveHardcore_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveHardcore.Click
-		PicStripTSMI_SaveImage("Hardcore")
-	End Sub
-	Private Sub PicStripTSMIsaveSoftcore_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveSoftcore.Click
-		PicStripTSMI_SaveImage("Softcore")
-	End Sub
-	Private Sub PicStripTSMIsaveLesbian_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveLesbian.Click
-		PicStripTSMI_SaveImage("Lesbian")
-	End Sub
-	Private Sub PicStripTSMIsaveBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveBlowjob.Click
-		PicStripTSMI_SaveImage("Blowjob")
-	End Sub
-	Private Sub PicStripTSMIsaveFemdom_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveFemdom.Click
-		PicStripTSMI_SaveImage("Femdom")
-	End Sub
-	Private Sub PicStripTSMIsaveLezdom_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveLezdom.Click
-		PicStripTSMI_SaveImage("Lezdom")
-	End Sub
-	Private Sub PicStripTSMIsaveHentai_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveHentai.Click
-		PicStripTSMI_SaveImage("Hentai")
-	End Sub
-	Private Sub PicStripTSMIsaveGay_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveGay.Click
-		PicStripTSMI_SaveImage("Gay")
-	End Sub
-	Private Sub PicStripTSMIsaveMaledom_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveMaledom.Click
-		PicStripTSMI_SaveImage("Maledom")
-	End Sub
-	Private Sub PicStripTSMIsaveCaptions_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveCaptions.Click
-		PicStripTSMI_SaveImage("Captions")
-	End Sub
-	Private Sub PicStripTSMIsaveGeneral_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveGeneral.Click
-		PicStripTSMI_SaveImage("General")
-	End Sub
-	Private Sub PicStripTSMIsaveBoobs_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveBoobs.Click
-		PicStripTSMI_SaveImage("Boobs")
-	End Sub
-	Private Sub PicStripTSMIsaveButts_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveButts.Click
-		PicStripTSMI_SaveImage("Butt")
-	End Sub
-
-#End Region ' Save Blog Image
 
 #Region "-------------------------------------------------- DommeSlideshow ----------------------------------------------------"
 
