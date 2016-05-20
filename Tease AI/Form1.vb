@@ -225,9 +225,12 @@ Public Class Form1
 	Private _ImageFileNames As New List(Of String)
 	Private _CurrentImage As Integer = -1
 	Dim WithTeaseImgDir As String
+	<Obsolete("Belongs to frmSettings.")>
 	Public ApproveImage As Integer = 0
+	<Obsolete("Not used anymore.")>
 	Public WIExit As Boolean
 	Public RecentSlideshows As New List(Of String)
+	<Obsolete("Read data using MainPictureBox.ImageLocation. Set data using ShowImage(String, Boolean) in future releases.")>
 	Dim MainPictureImage As String
 	Public DomPic As String
 
@@ -236,14 +239,19 @@ Public Class Form1
 
 	Dim LocalTagImageList As New List(Of String)
 
+	<Obsolete("Not used anymore. Never set, but once resetted.")>
 	Dim Crazy As Boolean
+	<Obsolete("Not used anymore. Never set, but once resetted.")>
 	Dim Vulgar As Boolean
+	<Obsolete("Not used anymore. Never set, but once resetted.")>
 	Dim Supremacist As Boolean
 
-
+	<Obsolete("Overrides the User.Config Settings on resumse Session. Not really nice.")>
 	Public CockSize As Integer
+	<Obsolete("Not used anymore.")>
 	Dim TempDick As String
 	Dim PetName As String
+	<Obsolete("Not used anymore.")>
 	Dim PetName2 As String
 
 	Dim TauntText As String
@@ -251,28 +259,42 @@ Public Class Form1
 	Dim TempScriptCount As Integer
 	Dim TauntTextCount As Integer
 
+	<Obsolete("Not used anymore.")>
 	Dim StartIndex As Integer
+	<Obsolete("Not used anymore.")>
 	Dim EndIndex As Integer
 
 	Public SlideshowTimerTick As Integer
 
+	<Obsolete("Not used anymore.")>
 	Dim ReadBlog As String
+	<Obsolete("Not used anymore.")>
 	Dim ReadBlogRate As String
+	<Obsolete("Not used anymore.")>
 	Dim SearchImageBlog As Boolean
 
-	'TODO: Check if Variable can be removed.
+	<Obsolete("Read data using MainPictureBox.ImageLocation. Set data using ShowImage(String, Boolean) in future releases.")>
 	Dim FoundString As String
+	<Obsolete("Ambiguous used in frmSettings and Form1! Read data using MainPictureBox.ImageLocation. Set data using ShowImage(String, Boolean) in future releases.")>
 	Public WebImage As String
 
+	<Obsolete("Belongs to Form2. Unhandled Exception in execution will block the File.")>
 	Public WebImageFile As StreamReader
+	<Obsolete("Belongs to frmSettings.")>
 	Public WebImageLines As New List(Of String)
+	<Obsolete("Belongs to frmSettings.")>
 	Public WebImageLine As Integer
+	<Obsolete("Belongs to frmSettings. Redundant Code. Use WebimageLines.Count instead")>
 	Public WebImageLineTotal As Integer
+	<Obsolete("Belongs to frmSettings.")>
 	Public WebImagePath As String
 
+	<Obsolete("Not used anymore.")>
 	Dim ReaderString As String
+	<Obsolete("Not used anymore.")>
 	Dim ReaderStringTotal As Integer
 
+	<Obsolete("Unused variable. Set to 1 on two lines, stored to disk on SuspensSettings but never used.")>
 	Public StrokePaceInt As Integer
 
 	Dim LastScriptCountdown As Integer
@@ -282,6 +304,7 @@ Public Class Form1
 
 	Public SaidHello As Boolean
 
+	<Obsolete("Unused variable. Set often to some values, but Metronome uses StrokePace and the the CheckBoxValue in Metronome app")>
 	Public StopMetronome As Boolean
 
 	Public AvgEdgeStroking As Integer
@@ -309,7 +332,7 @@ Public Class Form1
 	Dim TeaseJOI As Boolean
 	Dim TeaseVideo As Boolean
 
-	'TODO: Variable TnAList is obsolete
+	<Obsolete("List is splitted up into BoobList and AssList")>
 	Dim TnAList As New List(Of String)
 	Dim BoobList As New List(Of String)
 	Dim AssList As New List(Of String)
@@ -472,7 +495,9 @@ Public Class Form1
 
 	Dim TimeoutTick As Integer
 
+	<Obsolete("Use BWimageFetcher instead")>
 	Public ImageThread As Thread
+	<Obsolete("Read value using MainPictureBox.ImageLocation. Set Value using ShowImage(String, Boolean).")>
 	Dim PBImage As String
 	Dim DommeImageSTR As String
 	Dim LocalImageSTR As String
@@ -1536,14 +1561,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			FrmSettings.LBLAvgEdgeNoTouch.Text = "WAIT"
 		End If
 
-		Debug.Print("Form Load PictureStrip")
-		PictureStrip.Items(0).Enabled = False
-		PictureStrip.Items(1).Enabled = False
-		PictureStrip.Items(2).Enabled = False
-		PictureStrip.Items(3).Enabled = False
-		PictureStrip.Items(4).Enabled = False
-		PictureStrip.Items(5).Enabled = False
-
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Loading Domme Personality..."
 		FrmSplash.Refresh()
@@ -1809,14 +1826,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		StrokePaceTimer.Start()
 
 		DommeMood = randomizer.Next(5, 8)
-
-		Debug.Print("Reset PictureStrip")
-		PictureStrip.Items(0).Enabled = False
-		PictureStrip.Items(1).Enabled = False
-		PictureStrip.Items(2).Enabled = False
-		PictureStrip.Items(3).Enabled = False
-		PictureStrip.Items(4).Enabled = False
-		PictureStrip.Items(5).Enabled = False
 
 		JustShowedBlogImage = False
 
@@ -6242,36 +6251,6 @@ NoResponse:
 				If BWimageFetcher.TriggerRequired _
 					Then BWimageFetcher.WaitToFinish()
 
-				Try
-					If mainPictureBox.Visible = True Then
-						If ImageLocation.Contains("/") Then
-							Debug.Print("Timer1 PictureStrip")
-							PictureStrip.Items(0).Enabled = True
-							PictureStrip.Items(1).Enabled = True
-							PictureStrip.Items(2).Enabled = True
-							PictureStrip.Items(3).Enabled = True
-							PictureStrip.Items(4).Enabled = True
-							PictureStrip.Items(5).Enabled = True
-						Else
-							Debug.Print("Timer1 PictureStrip")
-							PictureStrip.Items(0).Enabled = True
-							PictureStrip.Items(1).Enabled = False
-							PictureStrip.Items(2).Enabled = False
-							PictureStrip.Items(3).Enabled = False
-							PictureStrip.Items(4).Enabled = False
-							PictureStrip.Items(5).Enabled = False
-						End If
-					End If
-				Catch
-					PictureStrip.Items(0).Enabled = False
-					PictureStrip.Items(1).Enabled = False
-					PictureStrip.Items(2).Enabled = False
-					PictureStrip.Items(3).Enabled = False
-					PictureStrip.Items(4).Enabled = False
-					PictureStrip.Items(5).Enabled = False
-				End Try
-
-
 				If CorrectedTypo = True Then
 					CorrectedTypo = False
 					'DomTask = "*" & CorrectedWord
@@ -7087,36 +7066,6 @@ NullResponseLine2:
 					ActivateWebToy()
 					DisableContactStroke()
 				End If
-
-				Try
-					If mainPictureBox.Visible = True Then
-						If ImageLocation.Contains("/") Then
-							Debug.Print("Timer1 PictureStrip")
-							PictureStrip.Items(0).Enabled = True
-							PictureStrip.Items(1).Enabled = True
-							PictureStrip.Items(2).Enabled = True
-							PictureStrip.Items(3).Enabled = True
-							PictureStrip.Items(4).Enabled = True
-							PictureStrip.Items(5).Enabled = True
-						Else
-							Debug.Print("Timer1 PictureStrip")
-							PictureStrip.Items(0).Enabled = True
-							PictureStrip.Items(1).Enabled = False
-							PictureStrip.Items(2).Enabled = False
-							PictureStrip.Items(3).Enabled = False
-							PictureStrip.Items(4).Enabled = False
-							PictureStrip.Items(5).Enabled = False
-						End If
-					End If
-				Catch
-					PictureStrip.Items(0).Enabled = False
-					PictureStrip.Items(1).Enabled = False
-					PictureStrip.Items(2).Enabled = False
-					PictureStrip.Items(3).Enabled = False
-					PictureStrip.Items(4).Enabled = False
-					PictureStrip.Items(5).Enabled = False
-				End Try
-
 
 				StrokeSpeedCheck()
 
@@ -8427,13 +8376,13 @@ GetAnotherRandomVideo:
 #End Region
 
 
-	Private Sub SettingsButton_Click(sender As System.Object, e As System.EventArgs) Handles SettingsButton.Click
+	Private Sub SettingsButton_Click(sender As System.Object, e As System.EventArgs) Handles BtnToggleSettings.Click
 		If FrmSettings.Visible = True Then
 			FrmSettings.Visible = False
-			SettingsButton.Text = "Open Settings Menu"
+			BtnToggleSettings.Text = "Open Settings Menu"
 		Else
 			FrmSettings.Visible = True
-			SettingsButton.Text = "Close Settings Menu"
+			BtnToggleSettings.Text = "Close Settings Menu"
 		End If
 	End Sub
 
@@ -9120,13 +9069,13 @@ StatusUpdateEnd:
 
 
 
-	Private Sub MediaButton_Click(sender As System.Object, e As System.EventArgs) Handles MediaButton.Click
+	Private Sub MediaButton_Click(sender As System.Object, e As System.EventArgs) Handles BtnToggleMediaPanel.Click
 
 		If SplitContainer1.Panel2.Height < 68 Then Return
 
 		If PNLMediaBar.Visible = True Then
 			PNLMediaBar.Visible = False
-			MediaButton.Text = "Show Media Panel"
+			BtnToggleMediaPanel.Text = "Show Media Panel"
 			'ChatText.Location = New Point(0, 0)
 			'ChatText.Height = ChatText.Height + 29
 
@@ -9139,7 +9088,7 @@ StatusUpdateEnd:
 		Else
 
 			PNLMediaBar.Visible = True
-			MediaButton.Text = "Hide Media Panel"
+			BtnToggleMediaPanel.Text = "Hide Media Panel"
 			'ChatText.Location = New Point(0, 29)
 			'ChatText.Height = ChatText.Height - 29
 
@@ -10225,7 +10174,7 @@ RinseLatherRepeat:
 		'								@ShowTaggedImage
 		'===============================================================================
 		If StringClean.Contains("@ShowTaggedImage") Then
-			'TODO-Next: @ShowTaggedImage: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String)
+			'TODO-Next: @ShowTaggedImage: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String). Remove references to Variable FoundString.
 			'Debug.Print("ShowTaggedImage StringClean ^^^^^^^^^^^^^^^^^^^^^^ = " & StringClean)
 
 			'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
@@ -16451,6 +16400,16 @@ Skip_RandomFile:
 		ScrollChatDown()
 	End Sub
 
+	Private Sub ChatText_Resize(sender As Object, e As EventArgs) Handles ChatText.Resize
+		If PNLMediaBar.Visible = True Then
+			ChatText.Location = New Point(2, 33)
+			ChatText.Height = SplitContainer1.Panel2.Height - 67
+		Else
+			ChatText.Location = New Point(2, 0)
+			ChatText.Height = SplitContainer1.Panel2.Height - 34
+		End If
+	End Sub
+
 	Private Sub ChatText2_DocumentCompleted(sender As Object, e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText2.DocumentCompleted
 		Try
 			ChatText2.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
@@ -16480,9 +16439,6 @@ Skip_RandomFile:
 			e.Effect = DragDropEffects.Copy
 		End If
 	End Sub
-
-
-
 
 	Private Sub chatbox_KeyDown(sender As Object, e As KeyEventArgs) Handles chatBox.KeyDown
 		If e.KeyCode = Keys.Return Then
@@ -16695,7 +16651,7 @@ Skip_RandomFile:
 
 
 
-	Private Sub SaveBlogImage_Click_2(sender As System.Object, e As System.EventArgs) Handles SaveBlogImage.Click
+	Private Sub BtnToggleImageVideo_Click(sender As System.Object, e As System.EventArgs) Handles BtnToggleImageVideo.Click
 
 
 		If mainPictureBox.Visible = True Then
@@ -19086,7 +19042,7 @@ RestartFunction:
 	End Sub
 
 	Private Sub PicStripTSMIsaveImage_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIsaveImage.Click
-
+		'TODO-Next: Rework in order to remove FoundString-Variable.
 
 
 		SaveFileDialog1.Filter = "jpegs|*.jpg|gifs|*.gif|pngs|*.png|Bitmaps|*.bmp"
@@ -22050,7 +22006,7 @@ GetDommeSlideshow:
 SkipNew:
 
 
-		If SplitContainer1.Panel2.Height < 68 And MediaButton.Text = "Hide Media Panel" Then
+		If SplitContainer1.Panel2.Height < 68 And BtnToggleMediaPanel.Text = "Hide Media Panel" Then
 			PNLMediaBar.Visible = False
 			browsefolderButton.Visible = False
 			previousButton.Visible = False
@@ -22060,12 +22016,12 @@ SkipNew:
 		End If
 
 		If SplitContainer1.Panel2.Height < 68 Then
-			MediaButton.Enabled = False
+			BtnToggleMediaPanel.Enabled = False
 		Else
-			MediaButton.Enabled = True
+			BtnToggleMediaPanel.Enabled = True
 		End If
 
-		If SplitContainer1.Panel2.Height > 67 And MediaButton.Text = "Hide Media Panel" Then
+		If SplitContainer1.Panel2.Height > 67 And BtnToggleMediaPanel.Text = "Hide Media Panel" Then
 			PNLMediaBar.Visible = True
 			browsefolderButton.Visible = True
 			previousButton.Visible = True
@@ -22254,9 +22210,9 @@ SkipNew:
 		BTNLoadVideo.BackColor = My.Settings.ButtonColor
 		BTNVideoControls.BackColor = My.Settings.ButtonColor
 
-		MediaButton.BackColor = My.Settings.ButtonColor
-		SaveBlogImage.BackColor = My.Settings.ButtonColor
-		SettingsButton.BackColor = My.Settings.ButtonColor
+		BtnToggleMediaPanel.BackColor = My.Settings.ButtonColor
+		BtnToggleImageVideo.BackColor = My.Settings.ButtonColor
+		BtnToggleSettings.BackColor = My.Settings.ButtonColor
 
 		browsefolderButton.ForeColor = My.Settings.TextColor
 		PNLMediaBar.ForeColor = My.Settings.TextColor
@@ -22269,9 +22225,9 @@ SkipNew:
 		BTNLoadVideo.ForeColor = My.Settings.TextColor
 		BTNVideoControls.ForeColor = My.Settings.TextColor
 
-		MediaButton.ForeColor = My.Settings.TextColor
-		SaveBlogImage.ForeColor = My.Settings.TextColor
-		SettingsButton.ForeColor = My.Settings.TextColor
+		BtnToggleMediaPanel.ForeColor = My.Settings.TextColor
+		BtnToggleImageVideo.ForeColor = My.Settings.TextColor
+		BtnToggleSettings.ForeColor = My.Settings.TextColor
 
 		PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
 
@@ -24361,17 +24317,7 @@ playLoop:
 
 #End Region ' Apps
 
-	Private Sub ChatText_Resize(sender As Object, e As EventArgs) Handles ChatText.Resize
-		If PNLMediaBar.Visible = True Then
-			ChatText.Location = New Point(2, 33)
-			ChatText.Height = SplitContainer1.Panel2.Height - 67
-		Else
-			ChatText.Location = New Point(2, 0)
-			ChatText.Height = SplitContainer1.Panel2.Height - 34
-		End If
-	End Sub
-
-
+	<Obsolete("Use ShowImage(String, Boolean) instead")>
 	Public Sub ShowImage(ByVal ImageToShow As String)
 		'TODO-Next: Function ShowImage is decpreciated. Remove all references
 		PBImage = ImageToShow
@@ -24385,6 +24331,7 @@ playLoop:
 	''' <summary>
 	''' Invokes included! This function should be used in a thread.
 	''' </summary>
+	<Obsolete("Use ShowImage(String, Boolean) instead")>
 	Private Sub DisplayImage()
 		'TODO-Next: Function DisplayImage is decpreciated. Remove all references
 		If FormLoading = True Then Return

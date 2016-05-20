@@ -47,7 +47,7 @@ Public Class FrmSettings
 	Private Sub frmProgramma_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
 
 		Me.Visible = False
-		Form1.SettingsButton.Text = "Open Settings Menu"
+		Form1.BtnToggleSettings.Text = "Open Settings Menu"
 		e.Cancel = True
 
 	End Sub
@@ -5162,7 +5162,7 @@ trypreviousimage:
 
 
 	Public Sub VerifyLocalImagePaths()
-
+		'TODO-Next: Validate User-Settings on Startup using myDireectory and assigning the My.Settings default values on failure.
 		Dim ImageList As New List(Of String)
 		ImageList.Clear()
 
@@ -5181,8 +5181,8 @@ trypreviousimage:
 				End If
 				CBIHardcore.Checked = False
 				LBLIHardcore.Text = ""
-				My.Settings.IHardcore = "No path selected"
-				My.Settings.CBIHardcore = False
+				My.Settings.IHardcore = My.MySettings.Default.IHardcore '"No path selected"
+				My.Settings.CBIHardcore = My.MySettings.Default.CBIHardcore
 			Else
 
 
