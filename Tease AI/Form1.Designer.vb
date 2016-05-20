@@ -33,9 +33,9 @@ Partial Class Form1
 		Me.LBLImageInfo = New System.Windows.Forms.Label()
 		Me.DomWMP = New AxWMPLib.AxWindowsMediaPlayer()
 		Me.PNLHope = New System.Windows.Forms.Panel()
-		Me.SettingsButton = New System.Windows.Forms.Button()
-		Me.MediaButton = New System.Windows.Forms.Button()
-		Me.SaveBlogImage = New System.Windows.Forms.Button()
+		Me.BtnToggleSettings = New System.Windows.Forms.Button()
+		Me.BtnToggleMediaPanel = New System.Windows.Forms.Button()
+		Me.BtnToggleImageVideo = New System.Windows.Forms.Button()
 		Me.nextButton = New System.Windows.Forms.Button()
 		Me.PNLChatBox = New System.Windows.Forms.Panel()
 		Me.PNLMediaBar = New System.Windows.Forms.Panel()
@@ -94,8 +94,8 @@ Partial Class Form1
 		Me.LBLFileTransfer = New System.Windows.Forms.Label()
 		Me.PBFileTransfer = New System.Windows.Forms.ProgressBar()
 		Me.PictureStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-		Me.PicStripTmsiDisableAnimation = New System.Windows.Forms.ToolStripMenuItem()
 		Me.PicStripTSMIcopyImageLocation = New System.Windows.Forms.ToolStripMenuItem()
+		Me.PicStripTmsiDisableAnimation = New System.Windows.Forms.ToolStripMenuItem()
 		Me.PicStripTSS1 = New System.Windows.Forms.ToolStripSeparator()
 		Me.PicStripTSMIsaveImage = New System.Windows.Forms.ToolStripMenuItem()
 		Me.PicStripTSMISaveImageTo = New System.Windows.Forms.ToolStripMenuItem()
@@ -123,7 +123,6 @@ Partial Class Form1
 		Me.PicStripTSMIdommeSlideshowTSS1 = New System.Windows.Forms.ToolStripSeparator()
 		Me.PicStripTSMIdommeSlideshowLoadNewSlideshow = New System.Windows.Forms.ToolStripMenuItem()
 		Me.StatusUpdates = New System.Windows.Forms.WebBrowser()
-		Me.BWGlitter = New System.ComponentModel.BackgroundWorker()
 		Me.TeaseAINotify = New System.Windows.Forms.NotifyIcon(Me.components)
 		Me.TeaseAIMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
 		Me.GamesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -561,52 +560,52 @@ Partial Class Form1
 		'
 		'PNLHope
 		'
-		Me.PNLHope.Controls.Add(Me.SettingsButton)
-		Me.PNLHope.Controls.Add(Me.MediaButton)
-		Me.PNLHope.Controls.Add(Me.SaveBlogImage)
+		Me.PNLHope.Controls.Add(Me.BtnToggleSettings)
+		Me.PNLHope.Controls.Add(Me.BtnToggleMediaPanel)
+		Me.PNLHope.Controls.Add(Me.BtnToggleImageVideo)
 		Me.PNLHope.Location = New System.Drawing.Point(779, 216)
 		Me.PNLHope.Name = "PNLHope"
 		Me.PNLHope.Size = New System.Drawing.Size(313, 32)
 		Me.PNLHope.TabIndex = 781
 		'
-		'SettingsButton
+		'BtnToggleSettings
 		'
-		Me.SettingsButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-		Me.SettingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.SettingsButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.SettingsButton.ForeColor = System.Drawing.Color.White
-		Me.SettingsButton.Location = New System.Drawing.Point(190, 0)
-		Me.SettingsButton.Name = "SettingsButton"
-		Me.SettingsButton.Size = New System.Drawing.Size(123, 31)
-		Me.SettingsButton.TabIndex = 19
-		Me.SettingsButton.Text = "Open Settings Menu"
-		Me.SettingsButton.UseVisualStyleBackColor = False
+		Me.BtnToggleSettings.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+		Me.BtnToggleSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.BtnToggleSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BtnToggleSettings.ForeColor = System.Drawing.Color.White
+		Me.BtnToggleSettings.Location = New System.Drawing.Point(190, 0)
+		Me.BtnToggleSettings.Name = "BtnToggleSettings"
+		Me.BtnToggleSettings.Size = New System.Drawing.Size(123, 31)
+		Me.BtnToggleSettings.TabIndex = 19
+		Me.BtnToggleSettings.Text = "Open Settings Menu"
+		Me.BtnToggleSettings.UseVisualStyleBackColor = False
 		'
-		'MediaButton
+		'BtnToggleMediaPanel
 		'
-		Me.MediaButton.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-		Me.MediaButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.MediaButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.MediaButton.ForeColor = System.Drawing.Color.White
-		Me.MediaButton.Location = New System.Drawing.Point(0, 0)
-		Me.MediaButton.Name = "MediaButton"
-		Me.MediaButton.Size = New System.Drawing.Size(112, 31)
-		Me.MediaButton.TabIndex = 147
-		Me.MediaButton.Text = "Hide Media Panel"
-		Me.MediaButton.UseVisualStyleBackColor = False
+		Me.BtnToggleMediaPanel.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+		Me.BtnToggleMediaPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.BtnToggleMediaPanel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BtnToggleMediaPanel.ForeColor = System.Drawing.Color.White
+		Me.BtnToggleMediaPanel.Location = New System.Drawing.Point(0, 0)
+		Me.BtnToggleMediaPanel.Name = "BtnToggleMediaPanel"
+		Me.BtnToggleMediaPanel.Size = New System.Drawing.Size(112, 31)
+		Me.BtnToggleMediaPanel.TabIndex = 147
+		Me.BtnToggleMediaPanel.Text = "Hide Media Panel"
+		Me.BtnToggleMediaPanel.UseVisualStyleBackColor = False
 		'
-		'SaveBlogImage
+		'BtnToggleImageVideo
 		'
-		Me.SaveBlogImage.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
-		Me.SaveBlogImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.SaveBlogImage.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.SaveBlogImage.ForeColor = System.Drawing.Color.White
-		Me.SaveBlogImage.Location = New System.Drawing.Point(114, 0)
-		Me.SaveBlogImage.Name = "SaveBlogImage"
-		Me.SaveBlogImage.Size = New System.Drawing.Size(74, 31)
-		Me.SaveBlogImage.TabIndex = 149
-		Me.SaveBlogImage.Text = "Img <-> Vid"
-		Me.SaveBlogImage.UseVisualStyleBackColor = False
+		Me.BtnToggleImageVideo.BackColor = System.Drawing.Color.FromArgb(CType(CType(66, Byte), Integer), CType(CType(124, Byte), Integer), CType(CType(174, Byte), Integer))
+		Me.BtnToggleImageVideo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.BtnToggleImageVideo.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BtnToggleImageVideo.ForeColor = System.Drawing.Color.White
+		Me.BtnToggleImageVideo.Location = New System.Drawing.Point(114, 0)
+		Me.BtnToggleImageVideo.Name = "BtnToggleImageVideo"
+		Me.BtnToggleImageVideo.Size = New System.Drawing.Size(74, 31)
+		Me.BtnToggleImageVideo.TabIndex = 149
+		Me.BtnToggleImageVideo.Text = "Img <-> Vid"
+		Me.BtnToggleImageVideo.UseVisualStyleBackColor = False
 		'
 		'nextButton
 		'
@@ -1345,18 +1344,18 @@ Partial Class Form1
 		Me.PictureStrip.Name = "PictureStrip"
 		Me.PictureStrip.Size = New System.Drawing.Size(203, 198)
 		'
+		'PicStripTSMIcopyImageLocation
+		'
+		Me.PicStripTSMIcopyImageLocation.Name = "PicStripTSMIcopyImageLocation"
+		Me.PicStripTSMIcopyImageLocation.Size = New System.Drawing.Size(202, 22)
+		Me.PicStripTSMIcopyImageLocation.Text = "Copy Image Location"
+		'
 		'PicStripTmsiDisableAnimation
 		'
 		Me.PicStripTmsiDisableAnimation.Enabled = False
 		Me.PicStripTmsiDisableAnimation.Name = "PicStripTmsiDisableAnimation"
 		Me.PicStripTmsiDisableAnimation.Size = New System.Drawing.Size(202, 22)
 		Me.PicStripTmsiDisableAnimation.Text = "Disable Imageanimation"
-		'
-		'PicStripTSMIcopyImageLocation
-		'
-		Me.PicStripTSMIcopyImageLocation.Name = "PicStripTSMIcopyImageLocation"
-		Me.PicStripTSMIcopyImageLocation.Size = New System.Drawing.Size(202, 22)
-		Me.PicStripTSMIcopyImageLocation.Text = "Copy Image Location"
 		'
 		'PicStripTSS1
 		'
@@ -4193,7 +4192,9 @@ Partial Class Form1
 	Friend WithEvents StrokeTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents StrokeTauntTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents DelayTimer As Tease_AI.teaseAI_Timer
-	Friend WithEvents SettingsButton As System.Windows.Forms.Button
+	Friend WithEvents BtnToggleSettings As System.Windows.Forms.Button
+	Friend WithEvents BtnToggleMediaPanel As System.Windows.Forms.Button
+	Friend WithEvents BtnToggleImageVideo As System.Windows.Forms.Button
 	Friend WithEvents CensorshipBar As System.Windows.Forms.Panel
 	Friend WithEvents CensorshipTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents RLGLTimer As Tease_AI.teaseAI_Timer
@@ -4202,12 +4203,10 @@ Partial Class Form1
 	Friend WithEvents BTNVideoControls As System.Windows.Forms.Button
 	Friend WithEvents UpdatesTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents GetColor As System.Windows.Forms.ColorDialog
-	Friend WithEvents MediaButton As System.Windows.Forms.Button
 	Friend WithEvents sendButton As System.Windows.Forms.Button
 	Friend WithEvents AvoidTheEdge As Tease_AI.teaseAI_Timer
 	Friend WithEvents AvoidTheEdgeResume As Tease_AI.teaseAI_Timer
 	Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
-	Friend WithEvents SaveBlogImage As System.Windows.Forms.Button
 	Friend WithEvents WebImageFileDialog As System.Windows.Forms.OpenFileDialog
 	Friend WithEvents StrokePaceTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents EdgeTauntTimer As Tease_AI.teaseAI_Timer
@@ -4241,7 +4240,6 @@ Partial Class Form1
 	Friend WithEvents ContactTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents AudibleMetronome As Tease_AI.teaseAI_Timer
 	Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
-	Friend WithEvents BWGlitter As System.ComponentModel.BackgroundWorker
 	Friend WithEvents PicStripTSMIcopyImageLocation As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents CustomSlideshowTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents Contact1Timer As Tease_AI.teaseAI_Timer
