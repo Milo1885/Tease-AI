@@ -8,6 +8,13 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 # Changelog - Patch 55.0.0	
 
+
+WIP - SaveState overhaul. Added SaveState Class and replaced Suspend and Resume Session options in File menu with SaveProgramState() and LoadProgramState() subroutines. These are only saving and loading the variables declared in Form 1, they are not functional yet. I'll need to do more work to reset the chat, check timer states, determine whether video was playing and resume accordingly, etc.
+
+WIP - DataBinding Overhaul
+
+# Changelog - Patch 54.3.0
+
 Improved @If[] Command - @If[] can now use "And" and "Or" when making comparisons. For example:
 
      @If[Var_EdgeCount]>[10]And[#DommeMood]>[@DomMoodMax]Then(GotoLine)
@@ -16,7 +23,6 @@ Improved @If[] Command - @If[] can now use "And" and "Or" when making comparison
 	 
 	 You can use as many "And" or "Or" comparisons per @If[] Command that you like, but you CANNOT use both "And" and "Or" in the same @If[] Command
 
-WIP - DataBinding Overhaul
    
 Fixes added from Community Members:
 
@@ -26,8 +32,9 @@ Fixes added from Community Members:
 	
 	Stefaf: Bugfix where the Metronome was randomly not responding to SpeedChanges when the threads got out of sync.
    
+    pepsifreak:  Settings Tagging Cleanup/Update - Domme Tags and Local Tags are now a single Tagging tab, with a tab control inside of that to switch between the two. Added 4 missing domme tags.
 
-WIP - SaveState overhaul. Added SaveState Class and replaced Suspend and Resume Session options in File menu with SaveProgramState() and LoadProgramState() subroutines. These are only saving and loading the variables declared in Form 1, they are not functional yet. I'll need to do more work to reset the chat, check timer states, determine whether video was playing and resume accordingly, etc.
+	pepsifreak:  Add new tags to fancier domme tagger - Tag buttons have also been shrunk down, resizing was updated to use anchors, and fixed a bug I was getting that caused a blank directory to be saved.
 	
 # Changelog - Patch 54.0.2
 

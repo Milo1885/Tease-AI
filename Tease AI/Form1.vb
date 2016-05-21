@@ -4341,14 +4341,7 @@ AcceptAnswer:
 
 	Public Sub GetGotoChat()
 
-
-
 		GotoFlag = True
-
-		'DomTypeCheck = True
-
-		'Debug.Print("GetGotoChat() Chat FileText = " & FileText)
-
 
 		If InStr(UCase(DomChat), UCase("@Goto")) <> 0 Then
 
@@ -4384,31 +4377,13 @@ AcceptAnswer:
 
 				If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
 				If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
-				Debug.Print(FileGoto)
 
 				DomChat = DomChat.Replace("@Goto" & StripGoto, "")
 				Do
 					gotoline += 1
 
-					Debug.Print("FileGoto = " & FileGoto)
-					Debug.Print("GotoLine = " & gotolines(gotoline))
-
-					'github patch begin
-					'Loop Until InStr(gotolines(gotoline), FileGoto) <> 0 And InStr(gotolines(gotoline), "@Goto") = 0 And InStr(gotolines(gotoline), "@CheckFlag") = 0 _
-					'And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
-					'And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0
-					'github patch end
-
 				Loop Until gotolines(gotoline).StartsWith(FileGoto)
 
-				'And InStr(gotolines(gotoline), "@Goto") = 0 And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
-				'And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
-				'And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
-
-
-				'Debug.Print("GetGotoChat() Final gotolines(gotoline) = " & (gotolines(gotoline)))
-
-				'If ShowThought = True Or ShowEdgeThought = True Then
 				StrokeTauntVal = gotoline
 
 				If MiniScript = True Then
@@ -4416,24 +4391,10 @@ AcceptAnswer:
 				Else
 					StrokeTauntVal = gotoline
 				End If
-				'ThoughtTauntVal = gotoline
-				'Else
-				'   If ShowModule = True Then
-				'ModuleTauntVal = gotoline
-				'Else
-				'   StrokeTauntVal = gotoline
-				'End If
-				'End If
-
-
-
-				'Debug.Print("GetGotoChat() StrokeTauntVal = " & StrokeTauntVal)
-
 
 			End If
 
 		End If
-
 
 	End Sub
 
@@ -4455,7 +4416,7 @@ AcceptAnswer:
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
-		If playingStatus() Then
+		If playingStatus() = True Then
 			If ScriptTick < 4 Then Return
 		End If
 
@@ -5271,12 +5232,9 @@ NonModuleEnd:
 	Public Sub GetGoto()
 		'BUG: @Goto Command is sometimes searching in the wrong file. Description: https://milovana.com/forum/viewtopic.php?f=2&t=15776&p=219171#p219169
 
+		'If FileGoto = "" Then GoTo CancelGoto
 
 		GotoFlag = True
-		'Debug.Print("DomTask = " & DomTask)
-		'DomTypeCheck = True
-
-		'Debug.Print("SkipGotoLine = " & SkipGotoLine)
 
 		Dim StripGoto As String
 
@@ -5285,33 +5243,22 @@ NonModuleEnd:
 			GoTo SkipGotoSearch
 		End If
 
-
-
 		Dim TempGoto As String = DomTask & " some garbage"
 		Dim GotoIndex As Integer = TempGoto.IndexOf("@Goto(") + 6
 		TempGoto = TempGoto.Substring(GotoIndex, TempGoto.Length - GotoIndex)
 		TempGoto = TempGoto.Split(")")(0)
 		FileGoto = TempGoto
 
-
 		StripGoto = FileGoto
 
-
-
-
 		If TempGoto.Contains(",") Then
-			Debug.Print("Multiple Goto")
 			TempGoto = TempGoto.Replace(", ", ",")
 			Dim GotoSplit As String() = TempGoto.Split(",")
 			Dim GotoTemp As Integer = randomizer.Next(0, GotoSplit.Count)
 			FileGoto = GotoSplit(GotoTemp)
-			Debug.Print("FileGoto = " & FileGoto)
 		End If
 
-
 SkipGotoSearch:
-
-		'Debug.Print("GetGoto() Domtask R2 = " & FileGoto)
 
 
 		Dim GotoText As String
@@ -5331,43 +5278,18 @@ SkipGotoSearch:
 
 				If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
 				If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
-				Debug.Print(FileGoto)
-				Debug.Print(StripGoto)
+		
 				DomTask = DomTask.Replace("@Goto" & StripGoto, "")
 
-				'If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
-
-				'DomTask = DomTask.Replace("@Goto" & StripGoto, "")
-				Debug.Print("StripGoto = " & StripGoto)
-
-				Debug.Print("FileGoto = " & FileGoto)
-
 				Dim gotoline As Integer = -1
+
 				Do
 					gotoline += 1
 					If GotoDommeLevel = True And gotoline = CountGotoLines Then
 						FileGoto = "(DommeLevel)"
 						GoTo SkipGotoSearch
 					End If
-					'Loop Until gotolines(gotoline) = FileGoto
-
-					'github patch begin
-					'Loop Until InStr(gotolines(gotoline), FileGoto) <> 0 And InStr(gotolines(gotoline), "@Goto") = 0 And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
-					'And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
-					'And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
-					'github patch end
-
 				Loop Until gotolines(gotoline).StartsWith(FileGoto)
-
-				'And InStr(gotolines(gotoline), "@CheckFlag") = 0 And InStr(gotolines(gotoline), "@TempFlag") = 0 _
-				'And InStr(gotolines(gotoline), "@SetFlag") = 0 And InStr(gotolines(gotoline), "@Chance") = 0 And InStr(gotolines(gotoline), "@GotoDommeLevel") = 0 _
-				'And InStr(gotolines(gotoline), "Then(") = 0 And InStr(gotolines(gotoline), "@GoodMood(") = 0 And InStr(gotolines(gotoline), "@BadMood(") = 0 And InStr(gotolines(gotoline), "@NeutralMood(") = 0 'And InStr(gotolines(gotoline), "@GotoDommeApathy") = 0
-
-
-
-
-				' If ShowThought = True Or ShowEdgeThought = True Then
-
 
 				If MiniScript = True Then
 					MiniTauntVal = gotoline
@@ -5375,23 +5297,8 @@ SkipGotoSearch:
 					StrokeTauntVal = gotoline
 				End If
 
-
-				'  ThoughtTauntVal = gotoline
-				'Else
-				'   If ShowModule = True Then
-				'ModuleTauntVal = gotoline
-				'Else
-				'   StrokeTauntVal = gotoline
-				'End If
-				'End If
-
-				'Debug.Print("GetGoto() Task GotoLine  = " & gotoline)
 			End If
-			' End If
 
-
-			GotoDommeLevel = False
-			SkipGotoLine = False
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
@@ -5399,6 +5306,12 @@ SkipGotoSearch:
 			Log.WriteError(ex.Message, ex, "Exception occured finding GotoLabel """ & FileGoto & """ in file """ & GotoText & """")
 			Throw
 		End Try
+
+CancelGoto:
+
+		GotoDommeLevel = False
+		SkipGotoLine = False
+
 	End Sub
 
 	Public Sub TypingDelay()
@@ -6204,6 +6117,7 @@ HypNoResponse:
 					mciSendString("PLAY Speech1 FROM 0", String.Empty, 0, 0)
 
 
+
 					If CBHypnoGenPhase.Checked And HypnoGen = True Then
 						Delay(0.4)
 						mciSendString("OPEN " & SpeechDir & " TYPE WAVEAUDIO ALIAS Echo1", String.Empty, 0, 0)
@@ -6404,13 +6318,12 @@ NoResponse:
 		End If
 
 	End Sub
-
-	Private Function playingStatus() As Boolean
+Private Function playingStatus() As Boolean
 
 		Dim retval As Integer
 		Dim returnData As String = Space(128)
 
-		'retval = mciSendString("status Speech1 mode", returnData, 128, 0)
+		retval = mciSendString("status Speech1 mode", returnData, 128, 0)
 
 		If returnData.Substring(0, 7) = "playing" Then
 
