@@ -22,9 +22,9 @@ Public Class Form8
 
 		'comboDrive.Text = comboDrive.Items(0)
 
-		WBDommeTag.Width = Me.Width - 368
-		WBDommeTag.Height = Me.Height - 67
-		TBURL.Width = Me.Width - 470
+		'WBDommeTag.Width = Me.Width - 248
+		'WBDommeTag.Height = Me.Height - 67
+		'TBURL.Width = Me.Width - 470
 
 		Try
 			WBDommeTag.Navigate(My.Settings.LastDomTagURL)
@@ -34,23 +34,19 @@ Public Class Form8
 			My.Settings.Save()
 		End Try
 
-		WBDommeTag.Width = Me.Width - 378
-		WBDommeTag.Height = Me.Height - 100
-		TBURL.Width = Me.Width - 456
+		'WBDommeTag.Width = Me.Width - 258
+		'WBDommeTag.Height = Me.Height - 100
+		'TBURL.Width = Me.Width - 456
 
 		FormLoading = False
 
 	End Sub
 
 
-	Private Sub Button1_Click(sender As System.Object, e As System.EventArgs)
-		WBDommeTag.Navigate("R:\Downloads\Mellisa Clarke\mellisa-clarke.com\s87")
-		TagDir = "R:\Downloads\Mellisa Clarke\mellisa-clarke.com\s87"
-	End Sub
-
 	Private Sub Tag_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Ass.DragEnter, Face.DragEnter, Boobs.DragEnter, Pussy.DragEnter, Legs.DragEnter,
 		Feet.DragEnter, FullyDressed.DragEnter, HalfDressed.DragEnter, GarmentCovering.DragEnter, HandsCovering.DragEnter, Naked.DragEnter, SideView.DragEnter, CloseUp.DragEnter,
-		Masturbating.DragEnter, Sucking.DragEnter, Smiling.DragEnter, Glaring.DragEnter, Garment.DragEnter, Underwear.DragEnter, Tattoo.DragEnter, SexToy.DragEnter, Furniture.DragEnter
+		Masturbating.DragEnter, Sucking.DragEnter, Smiling.DragEnter, Glaring.DragEnter, Garment.DragEnter, Underwear.DragEnter, Tattoo.DragEnter, SexToy.DragEnter, Furniture.DragEnter,
+		SeeThrough.DragEnter, AllFours.DragEnter
 		If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
 			e.Effect = DragDropEffects.Copy
 		End If
@@ -290,6 +286,31 @@ Public Class Form8
 		End If
 	End Sub
 
+	Private Sub SeeThrough_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles SeeThrough.DragDrop
+
+		If SeeThrough.BackColor = Color.White Then
+			For Each filePath As String In CType(e.Data.GetData(DataFormats.FileDrop), String())
+				WriteTags(filePath, "TagSeeThrough")
+			Next
+		Else
+			For Each filePath As String In CType(e.Data.GetData(DataFormats.FileDrop), String())
+				DeleteTags(filePath, "TagSeeThrough")
+			Next
+		End If
+	End Sub
+
+	Private Sub AllFours_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles AllFours.DragDrop
+
+		If AllFours.BackColor = Color.White Then
+			For Each filePath As String In CType(e.Data.GetData(DataFormats.FileDrop), String())
+				WriteTags(filePath, "TagAllFours")
+			Next
+		Else
+			For Each filePath As String In CType(e.Data.GetData(DataFormats.FileDrop), String())
+				DeleteTags(filePath, "TagAllFours")
+			Next
+		End If
+	End Sub
 
 	Private Sub Garment_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles Garment.DragDrop
 		If TBGarment.Text = "" Then
@@ -558,14 +579,14 @@ Public Class Form8
 
 
 
-	Private Sub Form1_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
+	'Private Sub Form1_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
 
-		WBDommeTag.Width = Me.Width - 378
-		WBDommeTag.Height = Me.Height - 100
-		TBURL.Width = Me.Width - 456
+	'WBDommeTag.Width = Me.Width - 248
+	'WBDommeTag.Height = Me.Height - 100
+	'TBURL.Width = Me.Width - 456
 
 
-	End Sub
+	'End Sub
 
 	Private Sub Face_Click(sender As System.Object, e As System.EventArgs) Handles Face.Click
 		If Face.BackColor = Color.White Then
@@ -797,10 +818,25 @@ Public Class Form8
 		End If
 	End Sub
 
+	Private Sub SeeThrough_Click(sender As System.Object, e As System.EventArgs) Handles SeeThrough.Click
+		If SeeThrough.BackColor = Color.White Then
+			SeeThrough.BackColor = Color.Red
+			SeeThrough.ForeColor = Color.White
+		Else
+			SeeThrough.BackColor = Color.White
+			SeeThrough.ForeColor = Color.Black
+		End If
+	End Sub
 
-
-
-
+	Private Sub AllFours_Click(sender As System.Object, e As System.EventArgs) Handles AllFours.Click
+		If AllFours.BackColor = Color.White Then
+			AllFours.BackColor = Color.Red
+			AllFours.ForeColor = Color.White
+		Else
+			AllFours.BackColor = Color.White
+			AllFours.ForeColor = Color.Black
+		End If
+	End Sub
 
 	Private Sub InfoTimer_Tick(sender As System.Object, e As System.EventArgs) Handles InfoTimer.Tick
 
@@ -831,8 +867,6 @@ Public Class Form8
 	End Sub
 
 
-
-
 	Private Sub Button4_Click(sender As System.Object, e As System.EventArgs)
 		WBDommeTag.GoBack()
 	End Sub
@@ -843,9 +877,11 @@ Public Class Form8
 		URLText = URLText.Replace("%20", " ")
 		TBURL.Text = URLText
 
-		My.Settings.LastDomTagURL = URLText
-		Debug.Print(My.Settings.LastDomTagURL)
-		My.Settings.Save()
+		If Not URLText = "blank" Then
+			My.Settings.LastDomTagURL = URLText
+			Debug.Print(My.Settings.LastDomTagURL)
+			My.Settings.Save()
+		End If
 
 		'If WBDommeTag.CanGoBack Then
 		'BTNBack.Enabled = True
