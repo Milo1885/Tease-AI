@@ -24209,7 +24209,7 @@ restartNoFile:
 playLoop:
 				If StrokePace > 0 AndAlso CBMetronome.Checked Then
 					MetroSoundPlayer.Stop()
-					MetroSoundPlayer.PlaySync()
+					MetroSoundPlayer.Play()
 					Thread.Sleep(StrokePace)
 				Else
 					Thread.Sleep(1000)
