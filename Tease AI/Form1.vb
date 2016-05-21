@@ -682,6 +682,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 			TeaseTimer.Stop()
 			TeaseAIClock.Stop()
+			Timer1.Stop()
 			UpdateStageTimer.Stop()
 			UpdatesTimer.Stop()
 			StrokeTimeTotalTimer.Stop()
@@ -5268,7 +5269,7 @@ NonModuleEnd:
 	End Sub
 
 	Public Sub GetGoto()
-
+		'BUG: @Goto Command is sometimes searching in the wrong file. Description: https://milovana.com/forum/viewtopic.php?f=2&t=15776&p=219171#p219169
 
 
 		GotoFlag = True
