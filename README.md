@@ -22,7 +22,9 @@ Fixes added from Community Members:
 
 	Stefaf: Bugfix where user.config was saved before the actual writing. This outdated file was taken on Startup to Replace the settings. Now the file is duplicated after modifications and the File located in %LocalAppData% won't be overwritten.
 
-	Stefaf: Bugfix Metronome was too slow, because it was played and afterwards the delay was waited. It's played now async and stopped before playing again.
+	Stefaf: Bugfix where Metronome was too slow, because it was played and afterwards the delay was waited. It's played now async and stopped before playing again.
+	
+	Stefaf: Bugfix where the Metronome was randomly not responding to SpeedChanges when the threads got out of sync.
    
 
 WIP - SaveState overhaul. Added SaveState Class and replaced Suspend and Resume Session options in File menu with SaveProgramState() and LoadProgramState() subroutines. These are only saving and loading the variables declared in Form 1, they are not functional yet. I'll need to do more work to reset the chat, check timer states, determine whether video was playing and resume accordingly, etc.

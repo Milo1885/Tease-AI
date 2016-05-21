@@ -104,8 +104,73 @@ Public Class Form1
 
 	Public StrokeTick As Integer
 	Public StrokeTauntTick As Integer
+	<Obsolete("Not used anymore. Set to true but never to false")>
 	Public StrokePaceRight As Boolean
-	Public StrokePace As Integer
+
+#Region "-------------------------------------- StrokePace ----------------------------------------------"
+	''' <summary>
+	''' Synclock Object to prevent datacorruption of <see cref="_StrokePaceMetronomeUnsynced"/>.
+	''' <para>As long as this lock is hold, the metronome thread is blocked!</para>
+	''' </summary>
+	Private _StrokePaceMetronomeSyncLock As New Object
+	''' <summary>
+	'''	Stores the value of the current strokePace. 
+	''' <para>Synchronized MultiThread-Object!</para>
+	''' <para> Use <see cref="StrokePace"/> instead.</para>
+	''' </summary>
+	Private _StrokePaceMetronomeUnsynced As Integer
+	''' <summary>
+	''' Gets the strokepace ThreadSafe. 
+	''' This property is restricted to Metronome-Thread.
+	''' </summary>
+	''' <returns>The current StrokePace.</returns>
+	Private ReadOnly Property StrokePaceMetronome As Integer
+		Get
+			If Thread.CurrentThread IsNot MetroThread Then _
+				Throw New AccessViolationException("Reading StrokePaceMetronome is restricted to MetronomeThread.")
+
+			SyncLock _StrokePaceMetronomeSyncLock
+				Dim tmpInt As Integer = _StrokePaceMetronomeUnsynced
+				Return tmpInt
+			End SyncLock
+		End Get
+	End Property
+
+	''' <summary>
+	''' Synclock Object to prevent datacorruption of <see cref="_StrokePaceUnsynced"/>.
+	''' </summary>
+	Private _StrokePaceSyncLock As New Object
+	''' <summary>
+	'''	Stores the value of the current strokePace
+	''' <para>Synchronized MultiThread-Object!</para>
+	''' <para> Use <see cref="StrokePace"/> instead.</para>
+	''' </summary>
+	Private _StrokePaceUnsynced As Integer
+	''' <summary>
+	''' Gets or sets the strokepace.
+	''' Changing this Value will  delay the MetronomeThread, until all 
+	''' registers are written into the RAM.
+	''' </summary>
+	''' <returns>The current StrokePace.</returns>
+	Private Property StrokePace As Integer
+		Get
+			Return _StrokePaceUnsynced
+		End Get
+		Set(value As Integer)
+			If value <> _StrokePaceUnsynced Then
+				SyncLock _StrokePaceSyncLock
+					_StrokePaceUnsynced = value
+				End SyncLock
+				SyncLock _StrokePaceMetronomeSyncLock
+					_StrokePaceMetronomeUnsynced = value
+				End SyncLock
+			End If
+		End Set
+	End Property
+
+#End Region ' StrokePace
+
+
 
 	Dim StrokeTimeTotal As Integer
 	Dim HoldEdgeTime As Integer
@@ -193,7 +258,7 @@ Public Class Form1
 	Public RefreshVideoTotal As Integer
 
 	Dim GlitterImageAV As String = Application.StartupPath & "\Images\Glitter\01.jpg"
-	
+
 	Dim GlitterTempColor As String
 	Public UpdatesTick As Integer
 	Dim UpdatingPost As Boolean
@@ -1384,7 +1449,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		StrokePaceInt = 1
 		StrokePaceRight = True
-		StrokePaceTimer.Start()
 
 
 
@@ -1726,7 +1790,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		StrokePaceInt = 1
 		StrokePaceRight = True
-		StrokePaceTimer.Start()
 
 		DommeMood = randomizer.Next(5, 8)
 
@@ -6187,7 +6250,6 @@ NoResponse:
 						StopMetronome = False
 						StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 						StrokePace = 50 * Math.Round(StrokePace / 50)
-						StrokePaceTimer.Interval = StrokePace
 						RLGLTauntTick = randomizer.Next(20, 31)
 						' VideoTauntTick = randomizer.Next(20, 31)
 						RLGLTauntTimer.Start()
@@ -10591,7 +10653,6 @@ ShowedBlogImage:
 		'								Slideshow
 		'===============================================================================
 		If StringClean.Contains("@Slideshow(") Then
-
 			Dim SlideFlag As String = StringClean
 
 			Dim SlideStart As Integer
@@ -10709,6 +10770,7 @@ ShowedBlogImage:
 		End If
 
 		If StringClean.Contains("@GotoSlideshow") Then
+			'BUG: @GotoCustomSlideshow is not working. There is no reference what imagegenre a image belongs to.
 			If ImageString.Contains(FrmSettings.LBLIHardcore.Text) Then FileGoto = "Hardcore"
 			If ImageString.Contains(FrmSettings.LBLISoftcore.Text) Then FileGoto = "Softcore"
 			If ImageString.Contains(FrmSettings.LBLILesbian.Text) Then FileGoto = "Lesbian"
@@ -11700,11 +11762,11 @@ TaskCleanSet:
 
 				Else
 
-						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
-							FileGoto = GetParentheses(SCGotVar, "Then(")
-							SkipGotoLine = True
-							GetGoto()
-						End If
+					If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+						FileGoto = GetParentheses(SCGotVar, "Then(")
+						SkipGotoLine = True
+						GetGoto()
+					End If
 
 				End If
 
@@ -13096,8 +13158,6 @@ OrgasmDecided:
 				StopMetronome = False
 				StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 				StrokePace = 50 * Math.Round(StrokePace / 50)
-				StrokePaceTimer.Interval = StrokePace
-				StrokePaceTimer.Start()
 				AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
 				AvoidTheEdgeTaunts.Start()
 
@@ -13116,8 +13176,6 @@ OrgasmDecided:
 			VideoTease = True
 			StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 			StrokePace = 50 * Math.Round(StrokePace / 50)
-			StrokePaceTimer.Interval = StrokePace
-			StrokePaceTimer.Start()
 			AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
 			AvoidTheEdgeTaunts.Start()
 			StringClean = StringClean.Replace("@ResumeAvoidTheEdge", "")
@@ -13147,8 +13205,6 @@ OrgasmDecided:
 				StopMetronome = False
 				StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 				StrokePace = 50 * Math.Round(StrokePace / 50)
-				StrokePaceTimer.Interval = StrokePace
-				StrokePaceTimer.Start()
 				'VideoTauntTick = randomizer.Next(20, 31)
 				'VideoTauntTimer.Start()
 
@@ -13956,7 +14012,6 @@ VTSkip:
 			EdgeTauntTimer.Stop()
 			HoldEdgeTimer.Stop()
 			HoldEdgeTauntTimer.Stop()
-			StrokePaceTimer.Stop()
 			AvoidTheEdgeTaunts.Stop()
 			RLGLTauntTimer.Stop()
 			VideoTauntTimer.Stop()
@@ -17233,7 +17288,6 @@ NoPlaylistEndFile:
 		EdgeTauntTimer.Stop()
 		HoldEdgeTimer.Stop()
 		HoldEdgeTauntTimer.Stop()
-		StrokePaceTimer.Stop()
 		AvoidTheEdgeTaunts.Stop()
 		RLGLTauntTimer.Stop()
 		VideoTauntTimer.Stop()
@@ -19985,7 +20039,7 @@ GetDommeSlideshow:
 		SettingsList.Add("UpdatesTimer Enabled: " & UpdatesTimer.Enabled)
 		SettingsList.Add("AvoidTheEdgeTimer Enabled: " & AvoidTheEdge.Enabled)
 		SettingsList.Add("AvoidTheEdgeResumeTimer Enabled: " & AvoidTheEdgeResume.Enabled)
-		SettingsList.Add("StrokePaceTimer Enabled: " & StrokePaceTimer.Enabled)
+		SettingsList.Add("StrokePaceTimer Enabled: --obsolete--") ' for compatibility
 		SettingsList.Add("EdgeTauntTimer Enabled: " & EdgeTauntTimer.Enabled)
 		SettingsList.Add("HoldEdgeTimer Enabled: " & HoldEdgeTimer.Enabled)
 		SettingsList.Add("HoldEdgeTauntTimer Enabled: " & HoldEdgeTauntTimer.Enabled)
@@ -20429,7 +20483,7 @@ GetDommeSlideshow:
 		SlideshowLoaded = SettingsList(139).Replace("SlideshowLoaded: ", "")
 		RefreshVideoTotal = SettingsList(140).Replace("RefreshVideoTotal: ", "")
 		GlitterImageAV = SettingsList(141).Replace("GlitterImageAV: ", "")
-		
+
 		GlitterTempColor = SettingsList(146).Replace("GlitterTempColor: ", "")
 		UpdatesTick = SettingsList(147).Replace("UpdatesTick: ", "")
 		UpdatingPost = SettingsList(148).Replace("UpdatingPost: ", "")
@@ -20584,7 +20638,7 @@ GetDommeSlideshow:
 		UpdatesTimer.Enabled = SettingsList(296).Replace("UpdatesTimer Enabled: ", "")
 		AvoidTheEdge.Enabled = SettingsList(297).Replace("AvoidTheEdgeTimer Enabled: ", "")
 		AvoidTheEdgeResume.Enabled = SettingsList(298).Replace("AvoidTheEdgeResumeTimer Enabled: ", "")
-		StrokePaceTimer.Enabled = SettingsList(299).Replace("StrokePaceTimer Enabled: ", "")
+		'StrokePaceTimer.Enabled = SettingsList(299).Replace("StrokePaceTimer Enabled: ", "")
 		EdgeTauntTimer.Enabled = SettingsList(300).Replace("EdgeTauntTimer Enabled: ", "")
 		HoldEdgeTimer.Enabled = SettingsList(301).Replace("HoldEdgeTimer Enabled: ", "")
 		HoldEdgeTauntTimer.Enabled = SettingsList(302).Replace("HoldEdgeTauntTimer Enabled: ", "")
@@ -23471,8 +23525,6 @@ SkipNew:
 		StopMetronome = False
 		StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 		StrokePace = 50 * Math.Round(StrokePace / 50)
-		StrokePaceTimer.Interval = StrokePace
-		StrokePaceTimer.Start()
 		AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
 		AvoidTheEdgeTaunts.Start()
 
@@ -23498,8 +23550,6 @@ SkipNew:
 		StopMetronome = False
 		StrokePace = randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 		StrokePace = 50 * Math.Round(StrokePace / 50)
-		StrokePaceTimer.Interval = StrokePace
-		StrokePaceTimer.Start()
 		'VideoTauntTick = randomizer.Next(20, 31)
 		'VideoTauntTimer.Start()
 
@@ -23986,10 +24036,13 @@ restartNoFile:
 				MetroSoundPlayer = New Media.SoundPlayer(wavStream)
 				MetroSoundPlayer.Load()
 playLoop:
-				If StrokePace > 0 AndAlso CBMetronome.Checked Then
+				' copy variable to avoid needless locking delays
+				Dim tmpStrokePace As Integer = StrokePaceMetronome
+
+				If tmpStrokePace > 0 AndAlso CBMetronome.Checked Then
 					MetroSoundPlayer.Stop()
 					MetroSoundPlayer.Play()
-					Thread.Sleep(StrokePace)
+					Thread.Sleep(tmpStrokePace)
 				Else
 					Thread.Sleep(1000)
 				End If
@@ -24405,375 +24458,375 @@ playLoop:
 
 	Public Sub SaveProgramState(Optional ByVal AutoSave As Boolean = False)
 
-		Dim SavedState As New SaveState( _
-		Chat, _
-		ScriptOperator, _
-		ScriptCompare, _
-		DomTyping, _
-		CheckYes, _
-		CheckNo, _
-		Playlist, _
-		PlaylistFile, _
-		PlaylistCurrent, _
-		FormLoading, _
-		Responding, _
-		StrokeTauntVal, _
-		FileText, _
-		TempStrokeTauntVal, _
-		TempFileText, _
-		TeaseTick, _
-		StrokeTauntCount, _
-		TauntTextTotal, _
-		TauntLines, _
-		StrokeFilter, _
-		ScriptTick, _
-		StringLength, _
-		FileGoto, _
-		SkipGotoLine, _
-		ChatString, _
-		DomTask, _
-		DomChat, _
-		TypeDelay, _
-		TempVal, _
-		NullResponse, _
-		TagCount, _
-		LocalTagCount, _
-		TaskFile, _
-		TaskText, _
-		TaskTextDir, _
-		ResponseFile, _
-		ResponseLine, _
-		CBTCockActive, _
-		CBTBallsActive, _
-		CBTCockFlag, _
-		CBTBallsFlag, _
-		CBTBallsFirst, _
-		CBTCockFirst, _
-		CBTBallsCount, _
-		CBTCockCount, _
-		TasksCount, _
-		GotoDommeLevel, _
-		DommeMood, _
-		AFK, _
-		HypnoGen, _
-		Induction, _
-		TempHypno, _
-		StrokeTick, _
-		StrokeTauntTick, _
-		StrokePaceRight, _
-		StrokePace, _
-		StrokeTimeTotal, _
-		HoldEdgeTime, _
-		HoldEdgeTimeTotal, _
-		EdgeTauntInt, _
-		DelayTick, _
-		DomTypeCheck, _
-		TypeToggle, _
-		IsTyping, _
-		SubWroteLast, _
-		YesOrNo, _
-		GotoFlag, _
-		CBT, _
-		RunningScript, _
-		BeforeTease, _
-		SubStroking, _
-		SubEdging, _
-		SubHoldingEdge, _
-		EndTease, _
-		ShowModule, _
-		ModuleEnd, _
-		DivideText, _
-		HoldEdgeTick, _
-		HoldEdgeChance, _
-		EdgeHold, _
-		EdgeNoHold, _
-		EdgeToRuin, _
-		EdgeToRuinSecret, _
-		LongEdge, _
-		AskedToGiveUp, _
-		AskedToGiveUpSection, _
-		SubGaveUp, _
-		AskedToSpeedUp, _
-		AskedToSlowDown, _
-		ThoughtEnd, _
-		VTLength, _
-		DommeVideo, _
-		VideoType, _
-		CensorshipGame, _
-		CensorshipTick, _
-		CensorDuration, _
-		AvoidTheEdgeGame, _
-		AvoidTheEdgeTick, _
-		AvoidTheEdgeTimerTick, _
-		AvoidTheEdgeDuration, _
-		AvoidTheEdgeStroking, _
-		AtECountdown, _
-		VTPath, _
-		NoVideo, _
-		NoSpecialVideo, _
-		VideoCheck, _
-		VideoTease, _
-		RLGLGame, _
-		RLGLStroking, _
-		RLGLTick, _
-		RedLight, _
-		RLGLTauntTick, _
-		RandomizerVideo, _
-		RandomizerVideoTease, _
-		ScriptVideoTease, _
-		ScriptVideoTeaseFlag, _
-		VideoTauntTick, _
-		SlideshowLoaded, _
-		RefreshVideoTotal, _
-		GlitterImageAV, _
-		GlitterTempColor, _
-		UpdatesTick, _
-		UpdatingPost, _
-		UpdateStage, _
-		UpdateStageTick, _
-		StatusText, _
-		ContactNumber, _
-		ContactTick, _
-		ContactFlag, _
-		StatusText1, _
-		StatusText2, _
-		StatusText3, _
-		StatusChance1, _
-		StatusChance2, _
-		StatusChance3, _
-		Update1, _
-		Update2, _
-		Update3, _
-		GetFolder, _
-		FileCount, _
-		FileCountMax, _
-		_ImageFileNames, _
-		_CurrentImage, _
-		WithTeaseImgDir, _
-		ApproveImage, _
-		WIExit, _
-		RecentSlideshows, _
-		MainPictureImage, _
-		DomPic, _
-		LockImage, _
-		LockVideo, _
-		LocalTagImageList, _
-		Crazy, _
-		Vulgar, _
-		Supremacist, _
-		CockSize, _
-		TempDick, _
-		PetName, _
-		PetName2, _
-		TauntText, _
-		ScriptCount, _
-		TempScriptCount, _
-		TauntTextCount, _
-		StartIndex, _
-		EndIndex, _
-		SlideshowTimerTick, _
-		ReadBlog, _
-		ReadBlogRate, _
-		SearchImageBlog, _
-		FoundString, _
-		WebImage, _
-		WebImageLines, _
-		WebImageLine, _
-		WebImageLineTotal, _
-		WebImagePath, _
-		ReaderString, _
-		ReaderStringTotal, _
-		StrokePaceInt, _
-		LastScriptCountdown, _
-		LastScript, _
-		JustShowedBlogImage, _
-		SaidHello, _
-		StopMetronome, _
-		AvgEdgeStroking, _
-		AvgEdgeNoTouch, _
-		EdgeCountTick, _
-		AvgEdgeStrokingFlag, _
-		AvgEdgeCount, _
-		AvgEdgeCountRest, _
-		EdgeTickCheck, _
-		EdgeNOT, _
-		AlreadyStrokingEdge, _
-		WritingTaskLinesAmount, _
-		WritingTaskLinesWritten, _
-		WritingTaskLinesRemaining, _
-		WritingTaskMistakesAllowed, _
-		WritingTaskMistakesMade, _
-		WritingTaskFlag, _
-		FirstRound, _
-		StartStrokingCount, _
-		TeaseJOI, _
-		TeaseVideo, _
-		TnAList, _
-		BoobList, _
-		AssList, _
-		AssImage, _
-		BoobImage, _
-		FoundTag, _
-		TagGarment, _
-		TagUnderwear, _
-		TagTattoo, _
-		TagSexToy, _
-		TagFurniture, _
-		BookmarkModule, _
-		BookmarkModuleFile, _
-		BookmarkModuleLine, _
-		BookmarkLink, _
-		BookmarkLinkFile, _
-		BookmarkLinkLine, _
-		WaitTick, _
-		OrgasmDenied, _
-		OrgasmAllowed, _
-		OrgasmRuined, _
-		LastOrgasmType, _
-		StupidTick, _
-		StupidFlag, _
-		CaloriesConsumed, _
-		CaloriesGoal, _
-		GoldTokens, _
-		SilverTokens, _
-		BronzeTokens, _
-		EdgeFound, _
-		OrgasmYesNo, _
-		VTFlag, _
-		DomPersonality, _
-		UpdateList, _
-		GlitterDocument, _
-		CustomSlideshow, _
-		CustomSlideshowTick, _
-		CustomSlideshowList, _
-		ImageString, _
-		RapidFire, _
-		GlitterTease, _
-		AddContactTick, _
-		Contact1Pics, _
-		Contact2Pics, _
-		Contact3Pics, _
-		Contact1PicsCount, _
-		Contact2PicsCount, _
-		Contact3PicsCount, _
-		Group, _
-		CustomTask, _
-		CustomTaskFirst, _
-		CustomTaskText, _
-		CustomTaskTextFirst, _
-		CustomTaskActive, _
-		SubtitleCount, _
-		VidFile, _
-		RiskyDeal, _
-		RiskyEdges, _
-		RiskyDelay, _
-		FinalRiskyPick, _
-		SysMes, _
-		EmoMes, _
-		Contact1Edge, _
-		Contact2Edge, _
-		Contact3Edge, _
-		Contact1Stroke, _
-		Contact2Stroke, _
-		Contact3Stroke, _
-		ReturnFileText, _
-		ReturnStrokeTauntVal, _
-		ReturnSubState, _
-		ReturnFlag, _
-		SessionEdges, _
-		WindowCheck, _
-		StrokeFaster, _
-		StrokeFastest, _
-		StrokeSlower, _
-		StrokeSlowest, _
-		InputFlag, _
-		InputString, _
-		RapidCode, _
-		CorrectedTypo, _
-		CorrectedWord, _
-		DoNotDisturb, _
-		TypoSwitch, _
-		TyposDisabled, _
-		EdgeHoldSeconds, _
-		EdgeHoldFlag, _
-		SlideshowInt, _
-		JustShowedSlideshowImage, _
-		RandomSlideshowCategory, _
-		ResetFlag, _
-		DommeTags, _
-		ThemeSettings, _
-		InputIcon, _
-		ApplyingTheme, _
-		AdjustingWindow, _
-		SplitContainerHeight, _
-		DommeImageFound, _
-		LocalImageFound, _
-		LocalImageListCheck, _
-		CBTBothActive, _
-		CBTBothFlag, _
-		CBTBothCount, _
-		CBTBothFirst, _
-		GeneralTime, _
-		NewDommeSlideshow, _
-		OriginalDommeSlideshow, _
-		TimeoutTick, _
-		PBImage, _
-		DommeImageSTR, _
-		LocalImageSTR, _
-		ImageLocation, _
-		ResponseYes, _
-		ResponseNo, _
-		SetModule, _
-		SetLink, _
-		SetModuleGoto, _
-		SetLinkGoto, _
-		OrgasmRestricted, _
-		FollowUp, _
-		WorshipMode, _
-		WorshipTarget, _
-		LongHold, _
-		ExtremeHold, _
-		LongTaunts, _
-		LazyEdit1, _
-		LazyEdit2, _
-		LazyEdit3, _
-		LazyEdit4, _
-		LazyEdit5, _
-		FormFinishedLoading, _
-		MiniScript, _
-		MiniScriptText, _
-		MiniTauntVal, _
-		MiniTimerCheck, _
-		JumpVideo, _
-		VideoTick, _
-		EdgeGoto, _
-		EdgeMessage, _
-		EdgeVideo, _
-		EdgeMessageText, _
-		EdgeGotoLine, _
-		MultipleEdges, _
-		MultipleEdgesAmount, _
-		MultipleEdgesInterval, _
-		MultipleEdgesTick, _
-		MultipleEdgesMetronome, _
-		YesGoto, _
-		YesVideo, _
-		NoGoto, _
-		NoVideo_Mode, _
-		CameGoto, _
-		CameVideo, _
-		CameMessage, _
-		CameMessageText, _
-		RuinedGoto, _
-		RuinedVideo, _
-		RuinedMessage, _
-		RuinedMessageText, _
-		YesGotoLine, _
-		NoGotoLine, _
-		CameGotoLine, _
-		RuinedGotoLine, _
-		TauntEdging, _
-		TauntEdgingAsked, _
+		Dim SavedState As New SaveState(
+		Chat,
+		ScriptOperator,
+		ScriptCompare,
+		DomTyping,
+		CheckYes,
+		CheckNo,
+		Playlist,
+		PlaylistFile,
+		PlaylistCurrent,
+		FormLoading,
+		Responding,
+		StrokeTauntVal,
+		FileText,
+		TempStrokeTauntVal,
+		TempFileText,
+		TeaseTick,
+		StrokeTauntCount,
+		TauntTextTotal,
+		TauntLines,
+		StrokeFilter,
+		ScriptTick,
+		StringLength,
+		FileGoto,
+		SkipGotoLine,
+		ChatString,
+		DomTask,
+		DomChat,
+		TypeDelay,
+		TempVal,
+		NullResponse,
+		TagCount,
+		LocalTagCount,
+		TaskFile,
+		TaskText,
+		TaskTextDir,
+		ResponseFile,
+		ResponseLine,
+		CBTCockActive,
+		CBTBallsActive,
+		CBTCockFlag,
+		CBTBallsFlag,
+		CBTBallsFirst,
+		CBTCockFirst,
+		CBTBallsCount,
+		CBTCockCount,
+		TasksCount,
+		GotoDommeLevel,
+		DommeMood,
+		AFK,
+		HypnoGen,
+		Induction,
+		TempHypno,
+		StrokeTick,
+		StrokeTauntTick,
+		StrokePaceRight,
+		StrokePace,
+		StrokeTimeTotal,
+		HoldEdgeTime,
+		HoldEdgeTimeTotal,
+		EdgeTauntInt,
+		DelayTick,
+		DomTypeCheck,
+		TypeToggle,
+		IsTyping,
+		SubWroteLast,
+		YesOrNo,
+		GotoFlag,
+		CBT,
+		RunningScript,
+		BeforeTease,
+		SubStroking,
+		SubEdging,
+		SubHoldingEdge,
+		EndTease,
+		ShowModule,
+		ModuleEnd,
+		DivideText,
+		HoldEdgeTick,
+		HoldEdgeChance,
+		EdgeHold,
+		EdgeNoHold,
+		EdgeToRuin,
+		EdgeToRuinSecret,
+		LongEdge,
+		AskedToGiveUp,
+		AskedToGiveUpSection,
+		SubGaveUp,
+		AskedToSpeedUp,
+		AskedToSlowDown,
+		ThoughtEnd,
+		VTLength,
+		DommeVideo,
+		VideoType,
+		CensorshipGame,
+		CensorshipTick,
+		CensorDuration,
+		AvoidTheEdgeGame,
+		AvoidTheEdgeTick,
+		AvoidTheEdgeTimerTick,
+		AvoidTheEdgeDuration,
+		AvoidTheEdgeStroking,
+		AtECountdown,
+		VTPath,
+		NoVideo,
+		NoSpecialVideo,
+		VideoCheck,
+		VideoTease,
+		RLGLGame,
+		RLGLStroking,
+		RLGLTick,
+		RedLight,
+		RLGLTauntTick,
+		RandomizerVideo,
+		RandomizerVideoTease,
+		ScriptVideoTease,
+		ScriptVideoTeaseFlag,
+		VideoTauntTick,
+		SlideshowLoaded,
+		RefreshVideoTotal,
+		GlitterImageAV,
+		GlitterTempColor,
+		UpdatesTick,
+		UpdatingPost,
+		UpdateStage,
+		UpdateStageTick,
+		StatusText,
+		ContactNumber,
+		ContactTick,
+		ContactFlag,
+		StatusText1,
+		StatusText2,
+		StatusText3,
+		StatusChance1,
+		StatusChance2,
+		StatusChance3,
+		Update1,
+		Update2,
+		Update3,
+		GetFolder,
+		FileCount,
+		FileCountMax,
+		_ImageFileNames,
+		_CurrentImage,
+		WithTeaseImgDir,
+		ApproveImage,
+		WIExit,
+		RecentSlideshows,
+		MainPictureImage,
+		DomPic,
+		LockImage,
+		LockVideo,
+		LocalTagImageList,
+		Crazy,
+		Vulgar,
+		Supremacist,
+		CockSize,
+		TempDick,
+		PetName,
+		PetName2,
+		TauntText,
+		ScriptCount,
+		TempScriptCount,
+		TauntTextCount,
+		StartIndex,
+		EndIndex,
+		SlideshowTimerTick,
+		ReadBlog,
+		ReadBlogRate,
+		SearchImageBlog,
+		FoundString,
+		WebImage,
+		WebImageLines,
+		WebImageLine,
+		WebImageLineTotal,
+		WebImagePath,
+		ReaderString,
+		ReaderStringTotal,
+		StrokePaceInt,
+		LastScriptCountdown,
+		LastScript,
+		JustShowedBlogImage,
+		SaidHello,
+		StopMetronome,
+		AvgEdgeStroking,
+		AvgEdgeNoTouch,
+		EdgeCountTick,
+		AvgEdgeStrokingFlag,
+		AvgEdgeCount,
+		AvgEdgeCountRest,
+		EdgeTickCheck,
+		EdgeNOT,
+		AlreadyStrokingEdge,
+		WritingTaskLinesAmount,
+		WritingTaskLinesWritten,
+		WritingTaskLinesRemaining,
+		WritingTaskMistakesAllowed,
+		WritingTaskMistakesMade,
+		WritingTaskFlag,
+		FirstRound,
+		StartStrokingCount,
+		TeaseJOI,
+		TeaseVideo,
+		TnAList,
+		BoobList,
+		AssList,
+		AssImage,
+		BoobImage,
+		FoundTag,
+		TagGarment,
+		TagUnderwear,
+		TagTattoo,
+		TagSexToy,
+		TagFurniture,
+		BookmarkModule,
+		BookmarkModuleFile,
+		BookmarkModuleLine,
+		BookmarkLink,
+		BookmarkLinkFile,
+		BookmarkLinkLine,
+		WaitTick,
+		OrgasmDenied,
+		OrgasmAllowed,
+		OrgasmRuined,
+		LastOrgasmType,
+		StupidTick,
+		StupidFlag,
+		CaloriesConsumed,
+		CaloriesGoal,
+		GoldTokens,
+		SilverTokens,
+		BronzeTokens,
+		EdgeFound,
+		OrgasmYesNo,
+		VTFlag,
+		DomPersonality,
+		UpdateList,
+		GlitterDocument,
+		CustomSlideshow,
+		CustomSlideshowTick,
+		CustomSlideshowList,
+		ImageString,
+		RapidFire,
+		GlitterTease,
+		AddContactTick,
+		Contact1Pics,
+		Contact2Pics,
+		Contact3Pics,
+		Contact1PicsCount,
+		Contact2PicsCount,
+		Contact3PicsCount,
+		Group,
+		CustomTask,
+		CustomTaskFirst,
+		CustomTaskText,
+		CustomTaskTextFirst,
+		CustomTaskActive,
+		SubtitleCount,
+		VidFile,
+		RiskyDeal,
+		RiskyEdges,
+		RiskyDelay,
+		FinalRiskyPick,
+		SysMes,
+		EmoMes,
+		Contact1Edge,
+		Contact2Edge,
+		Contact3Edge,
+		Contact1Stroke,
+		Contact2Stroke,
+		Contact3Stroke,
+		ReturnFileText,
+		ReturnStrokeTauntVal,
+		ReturnSubState,
+		ReturnFlag,
+		SessionEdges,
+		WindowCheck,
+		StrokeFaster,
+		StrokeFastest,
+		StrokeSlower,
+		StrokeSlowest,
+		InputFlag,
+		InputString,
+		RapidCode,
+		CorrectedTypo,
+		CorrectedWord,
+		DoNotDisturb,
+		TypoSwitch,
+		TyposDisabled,
+		EdgeHoldSeconds,
+		EdgeHoldFlag,
+		SlideshowInt,
+		JustShowedSlideshowImage,
+		RandomSlideshowCategory,
+		ResetFlag,
+		DommeTags,
+		ThemeSettings,
+		InputIcon,
+		ApplyingTheme,
+		AdjustingWindow,
+		SplitContainerHeight,
+		DommeImageFound,
+		LocalImageFound,
+		LocalImageListCheck,
+		CBTBothActive,
+		CBTBothFlag,
+		CBTBothCount,
+		CBTBothFirst,
+		GeneralTime,
+		NewDommeSlideshow,
+		OriginalDommeSlideshow,
+		TimeoutTick,
+		PBImage,
+		DommeImageSTR,
+		LocalImageSTR,
+		ImageLocation,
+		ResponseYes,
+		ResponseNo,
+		SetModule,
+		SetLink,
+		SetModuleGoto,
+		SetLinkGoto,
+		OrgasmRestricted,
+		FollowUp,
+		WorshipMode,
+		WorshipTarget,
+		LongHold,
+		ExtremeHold,
+		LongTaunts,
+		LazyEdit1,
+		LazyEdit2,
+		LazyEdit3,
+		LazyEdit4,
+		LazyEdit5,
+		FormFinishedLoading,
+		MiniScript,
+		MiniScriptText,
+		MiniTauntVal,
+		MiniTimerCheck,
+		JumpVideo,
+		VideoTick,
+		EdgeGoto,
+		EdgeMessage,
+		EdgeVideo,
+		EdgeMessageText,
+		EdgeGotoLine,
+		MultipleEdges,
+		MultipleEdgesAmount,
+		MultipleEdgesInterval,
+		MultipleEdgesTick,
+		MultipleEdgesMetronome,
+		YesGoto,
+		YesVideo,
+		NoGoto,
+		NoVideo_Mode,
+		CameGoto,
+		CameVideo,
+		CameMessage,
+		CameMessageText,
+		RuinedGoto,
+		RuinedVideo,
+		RuinedMessage,
+		RuinedMessageText,
+		YesGotoLine,
+		NoGotoLine,
+		CameGotoLine,
+		RuinedGotoLine,
+		TauntEdging,
+		TauntEdgingAsked,
 		WritingTaskCurrentTime)
 
 
