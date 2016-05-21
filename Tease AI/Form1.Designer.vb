@@ -372,7 +372,6 @@ Partial Class Form1
 		Me.UpdatesTimer = New Tease_AI.teaseAI_Timer()
 		Me.AvoidTheEdge = New Tease_AI.teaseAI_Timer()
 		Me.AvoidTheEdgeResume = New Tease_AI.teaseAI_Timer()
-		Me.StrokePaceTimer = New Tease_AI.teaseAI_Timer()
 		Me.EdgeTauntTimer = New Tease_AI.teaseAI_Timer()
 		Me.HoldEdgeTimer = New Tease_AI.teaseAI_Timer()
 		Me.HoldEdgeTauntTimer = New Tease_AI.teaseAI_Timer()
@@ -3972,10 +3971,6 @@ Partial Class Form1
 		'
 		Me.AvoidTheEdgeResume.Interval = 1000
 		'
-		'StrokePaceTimer
-		'
-		Me.StrokePaceTimer.Interval = 30
-		'
 		'EdgeTauntTimer
 		'
 		Me.EdgeTauntTimer.Interval = 1000
@@ -4201,7 +4196,6 @@ Partial Class Form1
 	Friend WithEvents AvoidTheEdgeResume As Tease_AI.teaseAI_Timer
 	Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
 	Friend WithEvents WebImageFileDialog As System.Windows.Forms.OpenFileDialog
-	Friend WithEvents StrokePaceTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents EdgeTauntTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents HoldEdgeTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents HoldEdgeTauntTimer As Tease_AI.teaseAI_Timer
