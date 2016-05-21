@@ -3051,114 +3051,7 @@ trypreviousimage:
 			Form1.mainPictureBox.LoadAsync(ImageTagDir(0))
 			CurrentImageTagImage = ImageTagDir(0)
 
-			If File.Exists(TagImageFolder & "\ImageTags.txt") Then
-				Dim TagReader As New StreamReader(TagImageFolder & "\ImageTags.txt")
-				Dim TagCheckList As New List(Of String)
-				While TagReader.Peek <> -1
-					TagCheckList.Add(TagImageFolder & TagReader.ReadLine())
-				End While
-
-				TagReader.Close()
-				TagReader.Dispose()
-
-				For i As Integer = 0 To TagCheckList.Count - 1
-					If TagCheckList(i).Contains(Path.GetFileName(ImageTagDir(0))) Then
-						Debug.Print(TagCheckList(i))
-						CBTagFace.Checked = False
-						CBTagBoobs.Checked = False
-						CBTagPussy.Checked = False
-						CBTagAss.Checked = False
-						CBTagLegs.Checked = False
-						CBTagFeet.Checked = False
-						CBTagFullyDressed.Checked = False
-						CBTagHalfDressed.Checked = False
-						CBTagGarmentCovering.Checked = False
-						CBTagHandsCovering.Checked = False
-						CBTagNaked.Checked = False
-						CBTagSideView.Checked = False
-						CBTagCloseUp.Checked = False
-						CBTagMasturbating.Checked = False
-						CBTagSucking.Checked = False
-						CBTagPiercing.Checked = False
-						CBTagGarment.Checked = False
-						CBTagUnderwear.Checked = False
-						CBTagTattoo.Checked = False
-						CBTagSexToy.Checked = False
-						CBTagFurniture.Checked = False
-						TBTagGarment.Text = ""
-						TBTagUnderwear.Text = ""
-						TBTagTattoo.Text = ""
-						TBTagSexToy.Text = ""
-						TBTagFurniture.Text = ""
-						If TagCheckList(i).Contains("TagFace") Then CBTagFace.Checked = True
-						If TagCheckList(i).Contains("TagBoobs") Then CBTagBoobs.Checked = True
-						If TagCheckList(i).Contains("TagPussy") Then CBTagPussy.Checked = True
-						If TagCheckList(i).Contains("TagAss") Then CBTagAss.Checked = True
-						If TagCheckList(i).Contains("TagLegs") Then CBTagLegs.Checked = True
-						If TagCheckList(i).Contains("TagFeet") Then CBTagFeet.Checked = True
-						If TagCheckList(i).Contains("TagFullyDressed") Then CBTagFullyDressed.Checked = True
-						If TagCheckList(i).Contains("TagHalfDressed") Then CBTagHalfDressed.Checked = True
-						If TagCheckList(i).Contains("TagGarmentCovering") Then CBTagGarmentCovering.Checked = True
-						If TagCheckList(i).Contains("TagHandsCovering") Then CBTagHandsCovering.Checked = True
-						If TagCheckList(i).Contains("TagNaked") Then CBTagNaked.Checked = True
-						If TagCheckList(i).Contains("TagSideView") Then CBTagSideView.Checked = True
-						If TagCheckList(i).Contains("TagCloseUp") Then CBTagCloseUp.Checked = True
-						If TagCheckList(i).Contains("TagMasturbating") Then CBTagMasturbating.Checked = True
-						If TagCheckList(i).Contains("TagSucking") Then CBTagSucking.Checked = True
-						If TagCheckList(i).Contains("TagPiercing") Then CBTagPiercing.Checked = True
-
-						If TagCheckList(i).Contains("TagGarment") Then
-							Dim TagSplit As String() = Split(TagCheckList(i))
-							For j As Integer = 0 To TagSplit.Length - 1
-								If TagSplit(j).Contains("TagGarment") Then
-									TBTagGarment.Text = TagSplit(j).Replace("TagGarment", "")
-									CBTagGarment.Checked = True
-								End If
-							Next
-						End If
-
-						If TagCheckList(i).Contains("TagUnderwear") Then
-							Dim TagSplit As String() = Split(TagCheckList(i))
-							For j As Integer = 0 To TagSplit.Length - 1
-								If TagSplit(j).Contains("TagUnderwear") Then
-									TBTagUnderwear.Text = TagSplit(j).Replace("TagUnderwear", "")
-									CBTagUnderwear.Checked = True
-								End If
-							Next
-						End If
-
-						If TagCheckList(i).Contains("TagTattoo") Then
-							Dim TagSplit As String() = Split(TagCheckList(i))
-							For j As Integer = 0 To TagSplit.Length - 1
-								If TagSplit(j).Contains("TagTattoo") Then
-									TBTagTattoo.Text = TagSplit(j).Replace("TagTattoo", "")
-									CBTagTattoo.Checked = True
-								End If
-							Next
-						End If
-
-						If TagCheckList(i).Contains("TagSexToy") Then
-							Dim TagSplit As String() = Split(TagCheckList(i))
-							For j As Integer = 0 To TagSplit.Length - 1
-								If TagSplit(j).Contains("TagSexToy") Then
-									TBTagSexToy.Text = TagSplit(j).Replace("TagSexToy", "")
-									CBTagSexToy.Checked = True
-								End If
-							Next
-						End If
-
-						If TagCheckList(i).Contains("TagFurniture") Then
-							Dim TagSplit As String() = Split(TagCheckList(i))
-							For j As Integer = 0 To TagSplit.Length - 1
-								If TagSplit(j).Contains("TagFurniture") Then
-									TBTagFurniture.Text = TagSplit(j).Replace("TagFurniture", "")
-									CBTagFurniture.Checked = True
-								End If
-							Next
-						End If
-					End If
-				Next
-			End If
+			LoadDommeTags()
 
 			Form1.TagCount = 1
 			LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
@@ -3189,6 +3082,10 @@ trypreviousimage:
 			CBTagMasturbating.Enabled = True
 			CBTagSucking.Enabled = True
 			CBTagPiercing.Enabled = True
+			CBTagSmiling.Enabled = True
+			CBTagGlaring.Enabled = True
+			CBTagSeeThrough.Enabled = True
+			CBTagAllFours.Enabled = True
 
 			CBTagGarment.Enabled = True
 			CBTagUnderwear.Enabled = True
@@ -3259,115 +3156,7 @@ trypreviousimage:
 
 
 
-				If File.Exists(TagImageFolder & "\ImageTags.txt") Then
-					Debug.Print(TagImageFolder & "\ImageTags.txt  - File Exists")
-					Dim TagReader As New StreamReader(TagImageFolder & "\ImageTags.txt")
-					Dim TagCheckList As New List(Of String)
-					While TagReader.Peek <> -1
-						TagCheckList.Add(TagReader.ReadLine())
-					End While
-
-					TagReader.Close()
-					TagReader.Dispose()
-
-					For i As Integer = 0 To TagCheckList.Count - 1
-						If TagCheckList(i).Contains(Path.GetFileName(ImageTagDir(0))) Then
-							Debug.Print("For Next " & TagCheckList(i))
-							CBTagFace.Checked = False
-							CBTagBoobs.Checked = False
-							CBTagPussy.Checked = False
-							CBTagAss.Checked = False
-							CBTagLegs.Checked = False
-							CBTagFeet.Checked = False
-							CBTagFullyDressed.Checked = False
-							CBTagHalfDressed.Checked = False
-							CBTagGarmentCovering.Checked = False
-							CBTagHandsCovering.Checked = False
-							CBTagNaked.Checked = False
-							CBTagSideView.Checked = False
-							CBTagCloseUp.Checked = False
-							CBTagMasturbating.Checked = False
-							CBTagSucking.Checked = False
-							CBTagPiercing.Checked = False
-							CBTagGarment.Checked = False
-							CBTagUnderwear.Checked = False
-							CBTagTattoo.Checked = False
-							CBTagSexToy.Checked = False
-							CBTagFurniture.Checked = False
-							TBTagGarment.Text = ""
-							TBTagUnderwear.Text = ""
-							TBTagTattoo.Text = ""
-							TBTagSexToy.Text = ""
-							TBTagFurniture.Text = ""
-							If TagCheckList(i).Contains("TagFace") Then CBTagFace.Checked = True
-							If TagCheckList(i).Contains("TagBoobs") Then CBTagBoobs.Checked = True
-							If TagCheckList(i).Contains("TagPussy") Then CBTagPussy.Checked = True
-							If TagCheckList(i).Contains("TagAss") Then CBTagAss.Checked = True
-							If TagCheckList(i).Contains("TagLegs") Then CBTagLegs.Checked = True
-							If TagCheckList(i).Contains("TagFeet") Then CBTagFeet.Checked = True
-							If TagCheckList(i).Contains("TagFullyDressed") Then CBTagFullyDressed.Checked = True
-							If TagCheckList(i).Contains("TagHalfDressed") Then CBTagHalfDressed.Checked = True
-							If TagCheckList(i).Contains("TagGarmentCovering") Then CBTagGarmentCovering.Checked = True
-							If TagCheckList(i).Contains("TagHandsCovering") Then CBTagHandsCovering.Checked = True
-							If TagCheckList(i).Contains("TagNaked") Then CBTagNaked.Checked = True
-							If TagCheckList(i).Contains("TagSideView") Then CBTagSideView.Checked = True
-							If TagCheckList(i).Contains("TagCloseUp") Then CBTagCloseUp.Checked = True
-							If TagCheckList(i).Contains("TagMasturbating") Then CBTagMasturbating.Checked = True
-							If TagCheckList(i).Contains("TagSucking") Then CBTagSucking.Checked = True
-							If TagCheckList(i).Contains("TagPiercing") Then CBTagPiercing.Checked = True
-
-							If TagCheckList(i).Contains("TagGarment") Then
-								Dim TagSplit As String() = Split(TagCheckList(i))
-								For j As Integer = 0 To TagSplit.Length - 1
-									If TagSplit(j).Contains("TagGarment") Then
-										TBTagGarment.Text = TagSplit(j).Replace("TagGarment", "")
-										CBTagGarment.Checked = True
-									End If
-								Next
-							End If
-
-							If TagCheckList(i).Contains("TagUnderwear") Then
-								Dim TagSplit As String() = Split(TagCheckList(i))
-								For j As Integer = 0 To TagSplit.Length - 1
-									If TagSplit(j).Contains("TagUnderwear") Then
-										TBTagUnderwear.Text = TagSplit(j).Replace("TagUnderwear", "")
-										CBTagUnderwear.Checked = True
-									End If
-								Next
-							End If
-
-							If TagCheckList(i).Contains("TagTattoo") Then
-								Dim TagSplit As String() = Split(TagCheckList(i))
-								For j As Integer = 0 To TagSplit.Length - 1
-									If TagSplit(j).Contains("TagTattoo") Then
-										TBTagTattoo.Text = TagSplit(j).Replace("TagTattoo", "")
-										CBTagTattoo.Checked = True
-									End If
-								Next
-							End If
-
-							If TagCheckList(i).Contains("TagSexToy") Then
-								Dim TagSplit As String() = Split(TagCheckList(i))
-								For j As Integer = 0 To TagSplit.Length - 1
-									If TagSplit(j).Contains("TagSexToy") Then
-										TBTagSexToy.Text = TagSplit(j).Replace("TagSexToy", "")
-										CBTagSexToy.Checked = True
-									End If
-								Next
-							End If
-
-							If TagCheckList(i).Contains("TagFurniture") Then
-								Dim TagSplit As String() = Split(TagCheckList(i))
-								For j As Integer = 0 To TagSplit.Length - 1
-									If TagSplit(j).Contains("TagFurniture") Then
-										TBTagFurniture.Text = TagSplit(j).Replace("TagFurniture", "")
-										CBTagFurniture.Checked = True
-									End If
-								Next
-							End If
-						End If
-					Next
-				End If
+				LoadDommeTags()
 
 				Form1.TagCount = 1
 				LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
@@ -3398,6 +3187,10 @@ trypreviousimage:
 				CBTagMasturbating.Enabled = True
 				CBTagSucking.Enabled = True
 				CBTagPiercing.Enabled = True
+				CBTagSmiling.Enabled = True
+				CBTagGlaring.Enabled = True
+				CBTagSeeThrough.Enabled = True
+				CBTagAllFours.Enabled = True
 
 				CBTagGarment.Enabled = True
 				CBTagUnderwear.Enabled = True
@@ -3426,105 +3219,7 @@ trypreviousimage:
 
 	Private Sub BTNTagSave_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagSave.Click
 
-		Dim TempImageDir As String = Path.GetFileName(CurrentImageTagImage)
-
-
-		If CBTagFace.Checked = True Then TempImageDir = TempImageDir & " " & "TagFace"
-		If CBTagBoobs.Checked = True Then TempImageDir = TempImageDir & " " & "TagBoobs"
-		If CBTagPussy.Checked = True Then TempImageDir = TempImageDir & " " & "TagPussy"
-		If CBTagAss.Checked = True Then TempImageDir = TempImageDir & " " & "TagAss"
-		If CBTagLegs.Checked = True Then TempImageDir = TempImageDir & " " & "TagLegs"
-		If CBTagFeet.Checked = True Then TempImageDir = TempImageDir & " " & "TagFeet"
-		If CBTagFullyDressed.Checked = True Then TempImageDir = TempImageDir & " " & "TagFullyDressed"
-		If CBTagHalfDressed.Checked = True Then TempImageDir = TempImageDir & " " & "TagHalfDressed"
-		If CBTagGarmentCovering.Checked = True Then TempImageDir = TempImageDir & " " & "TagGarmentCovering"
-		If CBTagHandsCovering.Checked = True Then TempImageDir = TempImageDir & " " & "TagHandsCovering"
-		If CBTagNaked.Checked = True Then TempImageDir = TempImageDir & " " & "TagNaked"
-		If CBTagSideView.Checked = True Then TempImageDir = TempImageDir & " " & "TagSideView"
-		If CBTagCloseUp.Checked = True Then TempImageDir = TempImageDir & " " & "TagCloseUp"
-		If CBTagMasturbating.Checked = True Then TempImageDir = TempImageDir & " " & "TagMasturbating"
-		If CBTagSucking.Checked = True Then TempImageDir = TempImageDir & " " & "TagSucking"
-		If CBTagPiercing.Checked = True Then TempImageDir = TempImageDir & " " & "TagPiercing"
-
-		If CBTagGarment.Checked = True Then
-			If TBTagGarment.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Garment field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagGarment" & TBTagGarment.Text
-			End If
-		End If
-
-		If CBTagUnderwear.Checked = True Then
-			If TBTagUnderwear.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Underwear field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagUnderwear" & TBTagUnderwear.Text
-			End If
-		End If
-
-		If CBTagTattoo.Checked = True Then
-			If TBTagTattoo.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Tattoo field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagTattoo" & TBTagTattoo.Text
-			End If
-		End If
-
-		If CBTagSexToy.Checked = True Then
-			If TBTagSexToy.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Room field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagSexToy" & TBTagSexToy.Text
-			End If
-		End If
-
-		If CBTagFurniture.Checked = True Then
-			If TBTagFurniture.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Furniture field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagFurniture" & TBTagFurniture.Text
-			End If
-		End If
-
-		If File.Exists(TagImageFolder & "\ImageTags.txt") Then
-
-
-			Dim TagCheckList As New List(Of String)
-			TagCheckList = Txt2List(TagImageFolder & "\ImageTags.txt")
-			TagCheckList = StripBlankLines(TagCheckList)
-
-			'Dim TagReader As New StreamReader(TagImageFolder & "\ImageTags.txt")
-			'Dim TagCheckList As New List(Of String)
-			'While TagReader.Peek <> -1
-			'TagCheckList.Add(TagReader.ReadLine())
-			'End While
-			'TagReader.Close()
-			'TagReader.Dispose()
-
-			Dim LineExists As Boolean
-			LineExists = False
-
-			For i As Integer = 0 To TagCheckList.Count - 1
-				If TagCheckList(i).Contains(Path.GetFileName(CurrentImageTagImage)) Then
-					TagCheckList(i) = TempImageDir
-					LineExists = True
-					System.IO.File.WriteAllLines(TagImageFolder & "\ImageTags.txt", TagCheckList)
-				End If
-			Next
-
-			If LineExists = False Then
-				My.Computer.FileSystem.WriteAllText(TagImageFolder & "\ImageTags.txt", Environment.NewLine & TempImageDir, True)
-				LineExists = False
-			End If
-
-		Else
-			My.Computer.FileSystem.WriteAllText(TagImageFolder & "\ImageTags.txt", TempImageDir, True)
-		End If
+		SaveDommeTags()
 
 		BTNTagDir.Enabled = True
 		TBTagDir.Enabled = True
@@ -3559,6 +3254,10 @@ trypreviousimage:
 		CBTagMasturbating.Checked = False
 		CBTagSucking.Checked = False
 		CBTagPiercing.Checked = False
+		CBTagSmiling.Checked = False
+		CBTagGlaring.Checked = False
+		CBTagSeeThrough.Checked = False
+		CBTagAllFours.Checked = False
 
 		CBTagFace.Enabled = False
 		CBTagBoobs.Enabled = False
@@ -3576,6 +3275,10 @@ trypreviousimage:
 		CBTagMasturbating.Enabled = False
 		CBTagSucking.Enabled = False
 		CBTagPiercing.Enabled = False
+		CBTagSmiling.Enabled = False
+		CBTagGlaring.Enabled = False
+		CBTagSeeThrough.Enabled = False
+		CBTagAllFours.Enabled = False
 
 		CBTagGarment.Checked = False
 		CBTagUnderwear.Checked = False
@@ -3618,96 +3321,7 @@ trypreviousimage:
 		BTNTagPrevious.Enabled = True
 
 
-		Dim TempImageDir As String = Path.GetFileName(CurrentImageTagImage)
-
-
-		If CBTagFace.Checked = True Then TempImageDir = TempImageDir & " " & "TagFace"
-		If CBTagBoobs.Checked = True Then TempImageDir = TempImageDir & " " & "TagBoobs"
-		If CBTagPussy.Checked = True Then TempImageDir = TempImageDir & " " & "TagPussy"
-		If CBTagAss.Checked = True Then TempImageDir = TempImageDir & " " & "TagAss"
-		If CBTagLegs.Checked = True Then TempImageDir = TempImageDir & " " & "TagLegs"
-		If CBTagFeet.Checked = True Then TempImageDir = TempImageDir & " " & "TagFeet"
-		If CBTagFullyDressed.Checked = True Then TempImageDir = TempImageDir & " " & "TagFullyDressed"
-		If CBTagHalfDressed.Checked = True Then TempImageDir = TempImageDir & " " & "TagHalfDressed"
-		If CBTagGarmentCovering.Checked = True Then TempImageDir = TempImageDir & " " & "TagGarmentCovering"
-		If CBTagHandsCovering.Checked = True Then TempImageDir = TempImageDir & " " & "TagHandsCovering"
-		If CBTagNaked.Checked = True Then TempImageDir = TempImageDir & " " & "TagNaked"
-		If CBTagSideView.Checked = True Then TempImageDir = TempImageDir & " " & "TagSideView"
-		If CBTagCloseUp.Checked = True Then TempImageDir = TempImageDir & " " & "TagCloseUp"
-		If CBTagMasturbating.Checked = True Then TempImageDir = TempImageDir & " " & "TagMasturbating"
-		If CBTagSucking.Checked = True Then TempImageDir = TempImageDir & " " & "TagSucking"
-		If CBTagPiercing.Checked = True Then TempImageDir = TempImageDir & " " & "TagPiercing"
-
-		If CBTagGarment.Checked = True Then
-			If TBTagGarment.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Garment field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagGarment" & TBTagGarment.Text
-			End If
-		End If
-
-		If CBTagUnderwear.Checked = True Then
-			If TBTagUnderwear.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Underwear field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagUnderwear" & TBTagUnderwear.Text
-			End If
-		End If
-
-		If CBTagTattoo.Checked = True Then
-			If TBTagTattoo.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Tattoo field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagTattoo" & TBTagTattoo.Text
-			End If
-		End If
-
-		If CBTagSexToy.Checked = True Then
-			If TBTagSexToy.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Room field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagSexToy" & TBTagSexToy.Text
-			End If
-		End If
-
-		If CBTagFurniture.Checked = True Then
-			If TBTagFurniture.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Underwear field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagFurniture" & TBTagFurniture.Text
-			End If
-		End If
-
-		If File.Exists(TagImageFolder & "\ImageTags.txt") Then
-
-			Dim TagCheckList As New List(Of String)
-			TagCheckList = Txt2List(TagImageFolder & "\ImageTags.txt")
-			TagCheckList = StripBlankLines(TagCheckList)
-
-			Dim LineExists As Boolean
-			LineExists = False
-
-			For i As Integer = 0 To TagCheckList.Count - 1
-				If TagCheckList(i).Contains(Path.GetFileName(CurrentImageTagImage)) Then
-					TagCheckList(i) = TempImageDir
-					LineExists = True
-					System.IO.File.WriteAllLines(TagImageFolder & "\ImageTags.txt", TagCheckList)
-				End If
-			Next
-
-			If LineExists = False Then
-				My.Computer.FileSystem.WriteAllText(TagImageFolder & "\ImageTags.txt", Environment.NewLine & TempImageDir, True)
-				LineExists = False
-			End If
-
-		Else
-			My.Computer.FileSystem.WriteAllText(TagImageFolder & "\ImageTags.txt", TempImageDir, True)
-		End If
+		SaveDommeTags()
 
 
 
@@ -3730,110 +3344,7 @@ trypreviousimage:
 		If ImageTagCount = ImageTagDir.Count - 1 Then BTNTagNext.Enabled = False
 
 
-		If File.Exists(TagImageFolder & "\ImageTags.txt") Then
-			Dim TagCheckList As New List(Of String)
-			TagCheckList = Txt2List(TagImageFolder & "\ImageTags.txt")
-			TagCheckList = StripBlankLines(TagCheckList)
-
-			For i As Integer = 0 To TagCheckList.Count - 1
-				If TagCheckList(i).Contains(Path.GetFileName(CurrentImageTagImage)) Then
-					CBTagFace.Checked = False
-					CBTagBoobs.Checked = False
-					CBTagPussy.Checked = False
-					CBTagAss.Checked = False
-					CBTagLegs.Checked = False
-					CBTagFeet.Checked = False
-					CBTagFullyDressed.Checked = False
-					CBTagHalfDressed.Checked = False
-					CBTagGarmentCovering.Checked = False
-					CBTagHandsCovering.Checked = False
-					CBTagNaked.Checked = False
-					CBTagSideView.Checked = False
-					CBTagCloseUp.Checked = False
-					CBTagMasturbating.Checked = False
-					CBTagSucking.Checked = False
-					CBTagPiercing.Checked = False
-					CBTagGarment.Checked = False
-					CBTagUnderwear.Checked = False
-					CBTagTattoo.Checked = False
-					CBTagSexToy.Checked = False
-					CBTagFurniture.Checked = False
-					TBTagGarment.Text = ""
-					TBTagUnderwear.Text = ""
-					TBTagTattoo.Text = ""
-					TBTagSexToy.Text = ""
-					TBTagFurniture.Text = ""
-
-					If TagCheckList(i).Contains("TagFace") Then CBTagFace.Checked = True
-					If TagCheckList(i).Contains("TagBoobs") Then CBTagBoobs.Checked = True
-					If TagCheckList(i).Contains("TagPussy") Then CBTagPussy.Checked = True
-					If TagCheckList(i).Contains("TagAss") Then CBTagAss.Checked = True
-					If TagCheckList(i).Contains("TagLegs") Then CBTagLegs.Checked = True
-					If TagCheckList(i).Contains("TagFeet") Then CBTagFeet.Checked = True
-					If TagCheckList(i).Contains("TagFullyDressed") Then CBTagFullyDressed.Checked = True
-					If TagCheckList(i).Contains("TagHalfDressed") Then CBTagHalfDressed.Checked = True
-					If TagCheckList(i).Contains("TagGarmentCovering") Then CBTagGarmentCovering.Checked = True
-					If TagCheckList(i).Contains("TagHandsCovering") Then CBTagHandsCovering.Checked = True
-					If TagCheckList(i).Contains("TagNaked") Then CBTagNaked.Checked = True
-					If TagCheckList(i).Contains("TagSideView") Then CBTagSideView.Checked = True
-					If TagCheckList(i).Contains("TagCloseUp") Then CBTagCloseUp.Checked = True
-					If TagCheckList(i).Contains("TagMasturbating") Then CBTagMasturbating.Checked = True
-					If TagCheckList(i).Contains("TagSucking") Then CBTagSucking.Checked = True
-					If TagCheckList(i).Contains("TagPiercing") Then CBTagPiercing.Checked = True
-
-					If TagCheckList(i).Contains("TagGarment") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagGarment") Then
-								TBTagGarment.Text = TagSplit(j).Replace("TagGarment", "")
-								CBTagGarment.Checked = True
-							End If
-						Next
-					End If
-
-					If TagCheckList(i).Contains("TagUnderwear") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagUnderwear") Then
-								TBTagUnderwear.Text = TagSplit(j).Replace("TagUnderwear", "")
-								CBTagUnderwear.Checked = True
-							End If
-						Next
-					End If
-
-					If TagCheckList(i).Contains("TagTattoo") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagTattoo") Then
-								TBTagTattoo.Text = TagSplit(j).Replace("TagTattoo", "")
-								CBTagTattoo.Checked = True
-							End If
-						Next
-					End If
-
-					If TagCheckList(i).Contains("TagSexToy") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagSexToy") Then
-								TBTagSexToy.Text = TagSplit(j).Replace("TagSexToy", "")
-								CBTagSexToy.Checked = True
-							End If
-						Next
-					End If
-
-					If TagCheckList(i).Contains("TagFurniture") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagFurniture") Then
-								TBTagFurniture.Text = TagSplit(j).Replace("TagFurniture", "")
-								CBTagFurniture.Checked = True
-							End If
-						Next
-					End If
-
-				End If
-			Next
-		End If
+		LoadDommeTags()
 
 	End Sub
 
@@ -3844,96 +3355,7 @@ trypreviousimage:
 		BTNTagNext.Enabled = True
 
 
-		Dim TempImageDir As String = Path.GetFileName(CurrentImageTagImage)
-
-
-		If CBTagFace.Checked = True Then TempImageDir = TempImageDir & " " & "TagFace"
-		If CBTagBoobs.Checked = True Then TempImageDir = TempImageDir & " " & "TagBoobs"
-		If CBTagPussy.Checked = True Then TempImageDir = TempImageDir & " " & "TagPussy"
-		If CBTagAss.Checked = True Then TempImageDir = TempImageDir & " " & "TagAss"
-		If CBTagLegs.Checked = True Then TempImageDir = TempImageDir & " " & "TagLegs"
-		If CBTagFeet.Checked = True Then TempImageDir = TempImageDir & " " & "TagFeet"
-		If CBTagFullyDressed.Checked = True Then TempImageDir = TempImageDir & " " & "TagFullyDressed"
-		If CBTagHalfDressed.Checked = True Then TempImageDir = TempImageDir & " " & "TagHalfDressed"
-		If CBTagGarmentCovering.Checked = True Then TempImageDir = TempImageDir & " " & "TagGarmentCovering"
-		If CBTagHandsCovering.Checked = True Then TempImageDir = TempImageDir & " " & "TagHandsCovering"
-		If CBTagNaked.Checked = True Then TempImageDir = TempImageDir & " " & "TagNaked"
-		If CBTagSideView.Checked = True Then TempImageDir = TempImageDir & " " & "TagSideView"
-		If CBTagCloseUp.Checked = True Then TempImageDir = TempImageDir & " " & "TagCloseUp"
-		If CBTagMasturbating.Checked = True Then TempImageDir = TempImageDir & " " & "TagMasturbating"
-		If CBTagSucking.Checked = True Then TempImageDir = TempImageDir & " " & "TagSucking"
-		If CBTagPiercing.Checked = True Then TempImageDir = TempImageDir & " " & "TagPiercing"
-
-		If CBTagGarment.Checked = True Then
-			If TBTagGarment.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Garment field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagGarment" & TBTagGarment.Text
-			End If
-		End If
-
-		If CBTagUnderwear.Checked = True Then
-			If TBTagUnderwear.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Underwear field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagUnderwear" & TBTagUnderwear.Text
-			End If
-		End If
-
-		If CBTagTattoo.Checked = True Then
-			If TBTagTattoo.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Tattoo field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagTattoo" & TBTagTattoo.Text
-			End If
-		End If
-
-		If CBTagSexToy.Checked = True Then
-			If TBTagSexToy.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Room field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagSexToy" & TBTagSexToy.Text
-			End If
-		End If
-
-		If CBTagFurniture.Checked = True Then
-			If TBTagFurniture.Text = "" Then
-				MessageBox.Show(Me, "Please enter a description in the Furniture field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			Else
-				TempImageDir = TempImageDir & " " & "TagFurniture" & TBTagFurniture.Text
-			End If
-		End If
-
-		If File.Exists(TagImageFolder & "\ImageTags.txt") Then
-
-			Dim TagCheckList As New List(Of String)
-			TagCheckList = Txt2List(TagImageFolder & "\ImageTags.txt")
-			TagCheckList = StripBlankLines(TagCheckList)
-
-			Dim LineExists As Boolean
-			LineExists = False
-
-			For i As Integer = 0 To TagCheckList.Count - 1
-				If TagCheckList(i).Contains(Path.GetFileName(CurrentImageTagImage)) Then
-					TagCheckList(i) = TempImageDir
-					LineExists = True
-					System.IO.File.WriteAllLines(TagImageFolder & "\ImageTags.txt", TagCheckList)
-				End If
-			Next
-
-			If LineExists = False Then
-				My.Computer.FileSystem.WriteAllText(TagImageFolder & "\ImageTags.txt", Environment.NewLine & TempImageDir, True)
-				LineExists = False
-			End If
-
-		Else
-			My.Computer.FileSystem.WriteAllText(TagImageFolder & "\ImageTags.txt", TempImageDir, True)
-		End If
+		SaveDommeTags()
 
 		ImageTagCount -= 1
 
@@ -3952,110 +3374,7 @@ trypreviousimage:
 		If ImageTagCount = 0 Then BTNTagPrevious.Enabled = False
 
 
-		If File.Exists(TagImageFolder & "\ImageTags.txt") Then
-
-			Dim TagCheckList As New List(Of String)
-			TagCheckList = Txt2List(TagImageFolder & "\ImageTags.txt")
-			TagCheckList = StripBlankLines(TagCheckList)
-
-			For i As Integer = 0 To TagCheckList.Count - 1
-				If TagCheckList(i).Contains(Path.GetFileName(CurrentImageTagImage)) Then
-					CBTagFace.Checked = False
-					CBTagBoobs.Checked = False
-					CBTagPussy.Checked = False
-					CBTagAss.Checked = False
-					CBTagLegs.Checked = False
-					CBTagFeet.Checked = False
-					CBTagFullyDressed.Checked = False
-					CBTagHalfDressed.Checked = False
-					CBTagGarmentCovering.Checked = False
-					CBTagHandsCovering.Checked = False
-					CBTagNaked.Checked = False
-					CBTagSideView.Checked = False
-					CBTagCloseUp.Checked = False
-					CBTagMasturbating.Checked = False
-					CBTagSucking.Checked = False
-					CBTagPiercing.Checked = False
-					CBTagGarment.Checked = False
-					CBTagUnderwear.Checked = False
-					CBTagTattoo.Checked = False
-					CBTagSexToy.Checked = False
-					CBTagFurniture.Checked = False
-					TBTagGarment.Text = ""
-					TBTagUnderwear.Text = ""
-					TBTagTattoo.Text = ""
-					TBTagSexToy.Text = ""
-					TBTagFurniture.Text = ""
-					If TagCheckList(i).Contains("TagFace") Then CBTagFace.Checked = True
-					If TagCheckList(i).Contains("TagBoobs") Then CBTagBoobs.Checked = True
-					If TagCheckList(i).Contains("TagPussy") Then CBTagPussy.Checked = True
-					If TagCheckList(i).Contains("TagAss") Then CBTagAss.Checked = True
-					If TagCheckList(i).Contains("TagLegs") Then CBTagLegs.Checked = True
-					If TagCheckList(i).Contains("TagFeet") Then CBTagFeet.Checked = True
-					If TagCheckList(i).Contains("TagFullyDressed") Then CBTagFullyDressed.Checked = True
-					If TagCheckList(i).Contains("TagHalfDressed") Then CBTagHalfDressed.Checked = True
-					If TagCheckList(i).Contains("TagGarmentCovering") Then CBTagGarmentCovering.Checked = True
-					If TagCheckList(i).Contains("TagHandsCovering") Then CBTagHandsCovering.Checked = True
-					If TagCheckList(i).Contains("TagNaked") Then CBTagNaked.Checked = True
-					If TagCheckList(i).Contains("TagSideView") Then CBTagSideView.Checked = True
-					If TagCheckList(i).Contains("TagCloseUp") Then CBTagCloseUp.Checked = True
-					If TagCheckList(i).Contains("TagMasturbating") Then CBTagMasturbating.Checked = True
-					If TagCheckList(i).Contains("TagSucking") Then CBTagSucking.Checked = True
-					If TagCheckList(i).Contains("TagPiercing") Then CBTagPiercing.Checked = True
-
-					If TagCheckList(i).Contains("TagGarment") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagGarment") Then
-								TBTagGarment.Text = TagSplit(j).Replace("TagGarment", "")
-								CBTagGarment.Checked = True
-							End If
-						Next
-					End If
-
-					If TagCheckList(i).Contains("TagUnderwear") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagUnderwear") Then
-								TBTagUnderwear.Text = TagSplit(j).Replace("TagUnderwear", "")
-								CBTagUnderwear.Checked = True
-							End If
-						Next
-					End If
-
-					If TagCheckList(i).Contains("TagTattoo") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagTattoo") Then
-								TBTagTattoo.Text = TagSplit(j).Replace("TagTattoo", "")
-								CBTagTattoo.Checked = True
-							End If
-						Next
-					End If
-
-					If TagCheckList(i).Contains("TagSexToy") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagSexToy") Then
-								TBTagSexToy.Text = TagSplit(j).Replace("TagSexToy", "")
-								CBTagSexToy.Checked = True
-							End If
-						Next
-					End If
-
-					If TagCheckList(i).Contains("TagFurniture") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagFurniture") Then
-								TBTagFurniture.Text = TagSplit(j).Replace("TagFurniture", "")
-								CBTagFurniture.Checked = True
-							End If
-						Next
-					End If
-
-				End If
-			Next
-		End If
+		LoadDommeTags()
 
 	End Sub
 
@@ -7600,10 +6919,6 @@ WhyUMakeMeDoDis:
 		Else
 			My.Settings.CBTBalls = False
 		End If
-	End Sub
-
-	Private Sub TabPage9_Click(sender As System.Object, e As System.EventArgs) Handles TabPage9.Click
-
 	End Sub
 
 	Private Sub Button9_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNLocalTagDir.Click
@@ -13063,6 +12378,224 @@ WhyUMakeMeDoDis:
 			My.Settings.CBGlitterFeedOff = CBGlitterFeedOff.Checked
 
 		End If
+	End Sub
+
+	Public Sub SaveDommeTags()
+
+		Dim TempImageDir As String = Path.GetFileName(CurrentImageTagImage)
+
+
+		If CBTagFace.Checked = True Then TempImageDir = TempImageDir & " " & "TagFace"
+		If CBTagBoobs.Checked = True Then TempImageDir = TempImageDir & " " & "TagBoobs"
+		If CBTagPussy.Checked = True Then TempImageDir = TempImageDir & " " & "TagPussy"
+		If CBTagAss.Checked = True Then TempImageDir = TempImageDir & " " & "TagAss"
+		If CBTagLegs.Checked = True Then TempImageDir = TempImageDir & " " & "TagLegs"
+		If CBTagFeet.Checked = True Then TempImageDir = TempImageDir & " " & "TagFeet"
+		If CBTagFullyDressed.Checked = True Then TempImageDir = TempImageDir & " " & "TagFullyDressed"
+		If CBTagHalfDressed.Checked = True Then TempImageDir = TempImageDir & " " & "TagHalfDressed"
+		If CBTagGarmentCovering.Checked = True Then TempImageDir = TempImageDir & " " & "TagGarmentCovering"
+		If CBTagHandsCovering.Checked = True Then TempImageDir = TempImageDir & " " & "TagHandsCovering"
+		If CBTagNaked.Checked = True Then TempImageDir = TempImageDir & " " & "TagNaked"
+		If CBTagSideView.Checked = True Then TempImageDir = TempImageDir & " " & "TagSideView"
+		If CBTagCloseUp.Checked = True Then TempImageDir = TempImageDir & " " & "TagCloseUp"
+		If CBTagMasturbating.Checked = True Then TempImageDir = TempImageDir & " " & "TagMasturbating"
+		If CBTagSucking.Checked = True Then TempImageDir = TempImageDir & " " & "TagSucking"
+		If CBTagPiercing.Checked = True Then TempImageDir = TempImageDir & " " & "TagPiercing"
+		If CBTagSmiling.Checked = True Then TempImageDir = TempImageDir & " " & "TagSmiling"
+		If CBTagGlaring.Checked = True Then TempImageDir = TempImageDir & " " & "TagGlaring"
+		If CBTagSeeThrough.Checked = True Then TempImageDir = TempImageDir & " " & "TagSeeThrough"
+		If CBTagAllFours.Checked = True Then TempImageDir = TempImageDir & " " & "TagAllFours"
+
+		If CBTagGarment.Checked = True Then
+			If TBTagGarment.Text = "" Then
+				MessageBox.Show(Me, "Please enter a description in the Garment field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Return
+			Else
+				TempImageDir = TempImageDir & " " & "TagGarment" & TBTagGarment.Text
+			End If
+		End If
+
+		If CBTagUnderwear.Checked = True Then
+			If TBTagUnderwear.Text = "" Then
+				MessageBox.Show(Me, "Please enter a description in the Underwear field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Return
+			Else
+				TempImageDir = TempImageDir & " " & "TagUnderwear" & TBTagUnderwear.Text
+			End If
+		End If
+
+		If CBTagTattoo.Checked = True Then
+			If TBTagTattoo.Text = "" Then
+				MessageBox.Show(Me, "Please enter a description in the Tattoo field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Return
+			Else
+				TempImageDir = TempImageDir & " " & "TagTattoo" & TBTagTattoo.Text
+			End If
+		End If
+
+		If CBTagSexToy.Checked = True Then
+			If TBTagSexToy.Text = "" Then
+				MessageBox.Show(Me, "Please enter a description in the Room field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Return
+			Else
+				TempImageDir = TempImageDir & " " & "TagSexToy" & TBTagSexToy.Text
+			End If
+		End If
+
+		If CBTagFurniture.Checked = True Then
+			If TBTagFurniture.Text = "" Then
+				MessageBox.Show(Me, "Please enter a description in the Furniture field!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Return
+			Else
+				TempImageDir = TempImageDir & " " & "TagFurniture" & TBTagFurniture.Text
+			End If
+		End If
+
+
+		If File.Exists(TagImageFolder & "\ImageTags.txt") Then
+
+			Dim TagCheckList As New List(Of String)
+			TagCheckList = Txt2List(TagImageFolder & "\ImageTags.txt")
+			TagCheckList = StripBlankLines(TagCheckList)
+
+			Dim LineExists As Boolean
+			LineExists = False
+
+			For i As Integer = 0 To TagCheckList.Count - 1
+				If TagCheckList(i).Contains(Path.GetFileName(CurrentImageTagImage)) Then
+					TagCheckList(i) = TempImageDir
+					LineExists = True
+					System.IO.File.WriteAllLines(TagImageFolder & "\ImageTags.txt", TagCheckList)
+				End If
+			Next
+
+			If LineExists = False Then
+				My.Computer.FileSystem.WriteAllText(TagImageFolder & "\ImageTags.txt", Environment.NewLine & TempImageDir, True)
+				LineExists = False
+			End If
+
+		Else
+			My.Computer.FileSystem.WriteAllText(TagImageFolder & "\ImageTags.txt", TempImageDir, True)
+		End If
+	End Sub
+
+
+	Public Sub LoadDommeTags()
+
+		If File.Exists(TagImageFolder & "\ImageTags.txt") Then
+
+			Dim TagCheckList As New List(Of String)
+			TagCheckList = Txt2List(TagImageFolder & "\ImageTags.txt")
+			TagCheckList = StripBlankLines(TagCheckList)
+
+			For i As Integer = 0 To TagCheckList.Count - 1
+				If TagCheckList(i).Contains(Path.GetFileName(CurrentImageTagImage)) Then
+					CBTagFace.Checked = False
+					CBTagBoobs.Checked = False
+					CBTagPussy.Checked = False
+					CBTagAss.Checked = False
+					CBTagLegs.Checked = False
+					CBTagFeet.Checked = False
+					CBTagFullyDressed.Checked = False
+					CBTagHalfDressed.Checked = False
+					CBTagGarmentCovering.Checked = False
+					CBTagHandsCovering.Checked = False
+					CBTagNaked.Checked = False
+					CBTagSideView.Checked = False
+					CBTagCloseUp.Checked = False
+					CBTagMasturbating.Checked = False
+					CBTagSucking.Checked = False
+					CBTagPiercing.Checked = False
+					CBTagGarment.Checked = False
+					CBTagUnderwear.Checked = False
+					CBTagTattoo.Checked = False
+					CBTagSexToy.Checked = False
+					CBTagFurniture.Checked = False
+					CBTagSmiling.Checked = False
+					CBTagGlaring.Checked = False
+					CBTagSeeThrough.Checked = False
+					CBTagAllFours.Checked = False
+					TBTagGarment.Text = ""
+					TBTagUnderwear.Text = ""
+					TBTagTattoo.Text = ""
+					TBTagSexToy.Text = ""
+					TBTagFurniture.Text = ""
+
+					If TagCheckList(i).Contains("TagFace") Then CBTagFace.Checked = True
+					If TagCheckList(i).Contains("TagBoobs") Then CBTagBoobs.Checked = True
+					If TagCheckList(i).Contains("TagPussy") Then CBTagPussy.Checked = True
+					If TagCheckList(i).Contains("TagAss") Then CBTagAss.Checked = True
+					If TagCheckList(i).Contains("TagLegs") Then CBTagLegs.Checked = True
+					If TagCheckList(i).Contains("TagFeet") Then CBTagFeet.Checked = True
+					If TagCheckList(i).Contains("TagFullyDressed") Then CBTagFullyDressed.Checked = True
+					If TagCheckList(i).Contains("TagHalfDressed") Then CBTagHalfDressed.Checked = True
+					If TagCheckList(i).Contains("TagGarmentCovering") Then CBTagGarmentCovering.Checked = True
+					If TagCheckList(i).Contains("TagHandsCovering") Then CBTagHandsCovering.Checked = True
+					If TagCheckList(i).Contains("TagNaked") Then CBTagNaked.Checked = True
+					If TagCheckList(i).Contains("TagSideView") Then CBTagSideView.Checked = True
+					If TagCheckList(i).Contains("TagCloseUp") Then CBTagCloseUp.Checked = True
+					If TagCheckList(i).Contains("TagMasturbating") Then CBTagMasturbating.Checked = True
+					If TagCheckList(i).Contains("TagSucking") Then CBTagSucking.Checked = True
+					If TagCheckList(i).Contains("TagPiercing") Then CBTagPiercing.Checked = True
+					If TagCheckList(i).Contains("TagSmiling") Then CBTagSmiling.Checked = True
+					If TagCheckList(i).Contains("TagGlaring") Then CBTagGlaring.Checked = True
+					If TagCheckList(i).Contains("TagSeeThrough") Then CBTagSeeThrough.Checked = True
+					If TagCheckList(i).Contains("TagAllFours") Then CBTagAllFours.Checked = True
+
+					If TagCheckList(i).Contains("TagGarment") Then
+						Dim TagSplit As String() = Split(TagCheckList(i))
+						For j As Integer = 0 To TagSplit.Length - 1
+							If TagSplit(j).Contains("TagGarment") Then
+								TBTagGarment.Text = TagSplit(j).Replace("TagGarment", "")
+								CBTagGarment.Checked = True
+							End If
+						Next
+					End If
+
+					If TagCheckList(i).Contains("TagUnderwear") Then
+						Dim TagSplit As String() = Split(TagCheckList(i))
+						For j As Integer = 0 To TagSplit.Length - 1
+							If TagSplit(j).Contains("TagUnderwear") Then
+								TBTagUnderwear.Text = TagSplit(j).Replace("TagUnderwear", "")
+								CBTagUnderwear.Checked = True
+							End If
+						Next
+					End If
+
+					If TagCheckList(i).Contains("TagTattoo") Then
+						Dim TagSplit As String() = Split(TagCheckList(i))
+						For j As Integer = 0 To TagSplit.Length - 1
+							If TagSplit(j).Contains("TagTattoo") Then
+								TBTagTattoo.Text = TagSplit(j).Replace("TagTattoo", "")
+								CBTagTattoo.Checked = True
+							End If
+						Next
+					End If
+
+					If TagCheckList(i).Contains("TagSexToy") Then
+						Dim TagSplit As String() = Split(TagCheckList(i))
+						For j As Integer = 0 To TagSplit.Length - 1
+							If TagSplit(j).Contains("TagSexToy") Then
+								TBTagSexToy.Text = TagSplit(j).Replace("TagSexToy", "")
+								CBTagSexToy.Checked = True
+							End If
+						Next
+					End If
+
+					If TagCheckList(i).Contains("TagFurniture") Then
+						Dim TagSplit As String() = Split(TagCheckList(i))
+						For j As Integer = 0 To TagSplit.Length - 1
+							If TagSplit(j).Contains("TagFurniture") Then
+								TBTagFurniture.Text = TagSplit(j).Replace("TagFurniture", "")
+								CBTagFurniture.Checked = True
+							End If
+						Next
+					End If
+
+				End If
+			Next
+		End If
+
 	End Sub
 	'Private Sub CBGlitterFeedScripts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitterFeedScripts.CheckedChanged
 	'My.Settings.CBGlitterFeed = False

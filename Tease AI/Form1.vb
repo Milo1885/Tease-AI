@@ -20860,50 +20860,44 @@ GetDommeSlideshow:
 		FrmSettings.Focus()
 	End Sub
 
-	Private Sub DommeTagsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DommeTagsToolStripMenuItem.Click
+	Private Sub TaggingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles TaggingToolStripMenuItem.Click
 		FrmSettings.SettingsTabs.SelectTab(5)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
 
-	Private Sub LocalTagsToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LocalTagsToolStripMenuItem.Click
+	Private Sub URLFilesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles URLFilesToolStripMenuItem.Click
 		FrmSettings.SettingsTabs.SelectTab(6)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
 
-	Private Sub URLFilesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles URLFilesToolStripMenuItem.Click
+	Private Sub VideoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles VideoToolStripMenuItem.Click
 		FrmSettings.SettingsTabs.SelectTab(7)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
 
-	Private Sub VideoToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles VideoToolStripMenuItem.Click
+	Private Sub AppsToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles AppsToolStripMenuItem1.Click
 		FrmSettings.SettingsTabs.SelectTab(8)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
 
-	Private Sub AppsToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles AppsToolStripMenuItem1.Click
-		FrmSettings.SettingsTabs.SelectTab(9)
-		FrmSettings.Show()
-		FrmSettings.Focus()
-	End Sub
-
 	Private Sub RangesToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RangesToolStripMenuItem.Click
-		FrmSettings.SettingsTabs.SelectTab(11)
+		FrmSettings.SettingsTabs.SelectTab(10)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
 
 	Private Sub ModdingToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ModdingToolStripMenuItem.Click
-		FrmSettings.SettingsTabs.SelectTab(12)
+		FrmSettings.SettingsTabs.SelectTab(11)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
 
 	Private Sub MiscToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MiscToolStripMenuItem.Click
-		FrmSettings.SettingsTabs.SelectTab(13)
+		FrmSettings.SettingsTabs.SelectTab(12)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
@@ -21333,7 +21327,7 @@ GetDommeSlideshow:
 	End Sub
 
 	Private Sub ThemesToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles ThemesToolStripMenuItem1.Click
-		FrmSettings.SettingsTabs.SelectTab(10)
+		FrmSettings.SettingsTabs.SelectTab(9)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
