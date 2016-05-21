@@ -5,9 +5,12 @@
 ' This file contains functions to extend the mySettings-Object with the capabilities to
 ' store and load the current user.config-file to/from a designated filepath.
 ' 
-' The Local usersetting-file is duplicated on saving into the application-subdirectory.
-' On startup this duplicated file is used to replace the user.config file in the 
-' %localAppData%-directory.
+' The Local usersetting-file is duplicated when it's altered into a subdirectory of the 
+' application. 
+' If no user.config is found on startup in the %LocalAppData%-dir, the duplicated file
+' is copied into the directory.
+' If on startup neither the original nor the duplicated file is found, a DataUpgrade
+' form previous versions is tried to be perform.
 '
 ' For safely importing Setting-files from other versions there is also an importfunction 
 ' included. This funciton will ask the user to select a file to import and restarts the 
@@ -26,26 +29,64 @@ Namespace My
 
     Partial Class MySettings
 
-		''' =========================================================================================================
+
+
 		''' <summary>
 		''' Determins the path the path to store and load the user.config-file from/to.
 		''' </summary>
 		Private Shared BackupDir As String = Application.Info.DirectoryPath & "\System\Settings\"
-
-		Private WithEvents Savetimer As New Timer With {.Interval = 1000 * 60}
-
+#Region "-------------------------------------- Save timer ----------------------------------------------"
+		''' <summary>
+		''' TimerObject to delay the saving of settings-file on changing 
+		''' </summary>
+		Private WithEvents Savetimer As New Timer With {.Interval = 1000 * 30}
+		''' <summary>
+		''' Starts the saving delayed on property changing
+		''' </summary>
+		''' <param name="sender"></param>
+		''' <param name="e"></param>
 		Private Sub Savetimer_Tick(sender As Object, e As EventArgs) Handles Savetimer.Tick
+			On Error GoTo Error_All
 			Save()
 			Savetimer.Stop()
+Error_All:
+		End Sub
+#End Region ' SaveTimer
+		' Automated Setting File duplicating is currently deactivated, because of a threading issue
+#Region "-------------------------------- AppDir FileSystemwatcher --------------------------------------"
+		Dim dupeThread As Threading.Thread = Nothing
+		Sub delayedDuplicate()
+			Threading.Thread.Sleep(50)
+
+			Duplicate()
 		End Sub
 
-		Private loaded As Boolean
+		Private WithEvents fswLocalAppData As New FileSystemWatcher With
+			{
+				.EnableRaisingEvents = False,
+				.IncludeSubdirectories = False
+			}
 
-        ''' =========================================================================================================
-        ''' <summary>
-        ''' Procedure to check whether to load or import a custom user.config-file. 
-        ''' </summary>
-        Friend Shared Sub StartupCheck()
+
+		Private Sub fswLocalAppData_Changed(sender As Object, e As FileSystemEventArgs) Handles fswLocalAppData.Changed, fswLocalAppData.Renamed
+			If e.FullPath <> LocalAppFilePath Then Exit Sub
+
+			If dupeThread Is Nothing OrElse dupeThread.IsAlive = False Then
+				dupeThread = New Threading.Thread(AddressOf delayedDuplicate) With {.Name = "DupeSettings", .IsBackground = True}
+				dupeThread.Start()
+			End If
+
+		End Sub
+
+
+#End Region
+
+
+		''' =========================================================================================================
+		''' <summary>
+		''' Procedure to check whether to load or import a custom user.config-file. 
+		''' </summary>
+		Friend Shared Sub StartupCheck()
             Dim importSettingFile As String = Application.CommandLineArgs.FirstOrDefault(Function(x) x.StartsWith("ImportSettings-"))
 
 			If importSettingFile IsNot Nothing Then
@@ -61,8 +102,8 @@ Namespace My
         ''' </summary>
         Private Shared Sub loadCustomUserConfig()
             Try
-                Dim configAppData As String = GetLocalFilepath()
-                Dim configAppDataDir As String = Path.GetDirectoryName(configAppData)
+				Dim configAppData As String = LocalAppFilePath()
+				Dim configAppDataDir As String = Path.GetDirectoryName(configAppData)
 
                 Dim dupeFilePath As String = GetDuplicatePath()
                 Dim dupeFileDir As String = Path.GetDirectoryName(dupeFilePath)
@@ -95,17 +136,16 @@ Namespace My
 
 #Region "---------------------------------------MyBaseRelated--------------------------------------------"
 
-
 		Protected Overrides Sub OnSettingsLoaded(sender As Object, e As SettingsLoadedEventArgs)
 			MyBase.OnSettingsLoaded(sender, e)
-			loaded = True
+
+			fswLocalAppData.Path = Path.GetDirectoryName(LocalAppFilePath )
+			fswLocalAppData.EnableRaisingEvents = True
 		End Sub
 
 		Protected Overrides Sub OnPropertyChanged(sender As Object, e As PropertyChangedEventArgs)
 			MyBase.OnPropertyChanged(sender, e)
-			If loaded And Savetimer.Enabled = False Then
-				Savetimer.Start()
-			End If
+			If Savetimer.Enabled = False Then Savetimer.Start()
 		End Sub
 
 		''' =========================================================================================================
@@ -117,9 +157,70 @@ Namespace My
 		''' <param name="e"></param>
 		Protected Overrides Sub OnSettingsSaving(sender As Object, e As CancelEventArgs)
 			MyBase.OnSettingsSaving(sender, e)
+		End Sub
+
+		Shadows Sub Reset()
+			fswLocalAppData.EnableRaisingEvents = False
+
+			Dim dupeFilePath As String = GetDuplicatePath()
+
+            If Directory.Exists(BackupDir) = True AndAlso File.Exists(dupeFilePath) Then
+                File.Delete(dupeFilePath)
+            End If
+
+			MyBase.Reset()
+
+			fswLocalAppData.EnableRaisingEvents = True
+		End Sub
+
+
+#End Region ' MyBaseRelated
+
+#Region "------------------------------------ General Functions -----------------------------------------"
+
+		''' <summary>
+		''' SyncLocked Member. Do not access direct.
+		''' </summary>
+		Shared _LocalAppFilePath As String = ""
+
+		Shared _LocalAppFilePathSyncLock As New Object
+
+		''' =========================================================================================================
+		''' <summary>
+		''' Returns the current user.config-file path.
+		''' </summary>
+		''' <returns>A String representing the path to the current user.config-file.</returns>
+		Private Shared ReadOnly Property LocalAppFilePath As String
+			Get
+				SyncLock _LocalAppFilePathSyncLock
+					If _LocalAppFilePath = "" Then
+						Dim roamingConfig As Configuration =
+							ConfigurationManager.OpenExeConfiguration(
+							ConfigurationUserLevel.PerUserRoamingAndLocal)
+
+						_LocalAppFilePath = roamingConfig.FilePath
+					End If
+
+					Return _LocalAppFilePath
+				End SyncLock
+			End Get
+		End Property
+
+
+		Friend Shared Function GetDuplicatePath() As String
+
+            ' get the Filepath 
+            Dim SettingsFilePath As String = LocalAppFilePath
+			Dim TargetPath As String = BackupDir & Application.Info.Version.ToString & "." & Path.GetFileName(SettingsFilePath)
+
+            Return TargetPath
+        End Function
+
+
+
+		Friend Sub Duplicate()
 			Try
-				'BUG: Duplicating user.config file is performed to early. This way the duplicated file is one save-cycle late.
-				Dim configAppDataPath As String = GetLocalFilepath()
+				Dim configAppDataPath As String = LocalAppFilePath()
 				Dim dupeFilePath As String = GetDuplicatePath()
 
                 ' Check if Directory and file to copy exist.
@@ -141,59 +242,16 @@ Namespace My
 			End Try
 		End Sub
 
-		Shadows Sub Reset()
-			loaded = False
-			Dim dupeFilePath As String = GetDuplicatePath()
-
-            If Directory.Exists(BackupDir) = True AndAlso File.Exists(dupeFilePath) Then
-                File.Delete(dupeFilePath)
-            End If
-
-			MyBase.Reset()
-			loaded = True
-		End Sub
-
-
-#End Region ' MyBaseRelated
-
-#Region "------------------------------------ General Functions -----------------------------------------"
-
-        Friend Shared Function GetDuplicatePath() As String
-
-            ' get the Filepath 
-            Dim SettingsFilePath As String = GetLocalFilepath()
-            Dim TargetPath As String = BackupDir & Application.Info.Version.ToString & "." & Path.GetFileName(SettingsFilePath)
-
-            Return TargetPath
-        End Function
-
-        ''' =========================================================================================================
-        ''' <summary>
-        ''' Returns the current user.config-file path.
-        ''' </summary>
-        ''' <returns>A String representing the path to the current user.config-file.</returns>
-        Friend Shared Function GetLocalFilepath() As String
-
-            Dim roamingConfig As Configuration =
-            ConfigurationManager.OpenExeConfiguration(
-            ConfigurationUserLevel.PerUserRoamingAndLocal)
-
-            Dim filePAth As String = roamingConfig.FilePath
-
-            Return filePAth
-
-        End Function
-
 #End Region ' General functions 
 
 #Region "---------------------------------------- Import file -------------------------------------------"
 
-        ''' =========================================================================================================
-        ''' <summary>
-        ''' Asks the user for an user-contig file to import. If a file is selected, the current application
-        ''' is hard-stopped and restarted with new CommandLine Args. Existing CommandLineArgs are overwritten.
-        ''' </summary>
-        Friend Shared Sub importOnRestart()
+		''' =========================================================================================================
+		''' <summary>
+		''' Asks the user for an user-contig file to import. If a file is selected, the current application
+		''' is hard-stopped and restarted with new CommandLine Args. Existing CommandLineArgs are overwritten.
+		''' </summary>
+		Friend Shared Sub importOnRestart()
             Try
 				Dim fs As New OpenFileDialog With
 				{.Filter = "config|*.config",
@@ -288,13 +346,13 @@ Namespace My
                     '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
                     ' Get directory path for the current user.config-file.
-                    Dim ImportDir As String = Path.GetDirectoryName(GetLocalFilepath())
+                    Dim ImportDir As String = Path.GetDirectoryName(LocalAppFilePath)
 
                     ' Determine the destination directory 
                     ImportDir = Path.GetDirectoryName(ImportDir) & "\" & prevVersion.ToString & "\"
 
                     ' Extract the filename, if something changes over time
-                    Dim targetFile As String = Path.GetFileName(GetLocalFilepath)
+                    Dim targetFile As String = Path.GetFileName(LocalAppFilePath)
 
                     ' Ask for confirmation if there is already a directory.
                     If Directory.Exists(ImportDir) Then
