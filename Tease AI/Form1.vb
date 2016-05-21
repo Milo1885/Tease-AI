@@ -716,6 +716,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			System.Windows.Forms.Application.DoEvents()
 		Catch ex As Exception
 
+		Finally
+			My.Settings.Save()
 		End Try
 	End Sub
 

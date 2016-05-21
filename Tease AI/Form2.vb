@@ -53,6 +53,10 @@ Public Class FrmSettings
 	End Sub
 
 
+	Private Sub FrmSettings_LostFocus(sender As Object, e As EventArgs) Handles Me.Deactivate
+		My.Settings.Save()
+	End Sub
+
 	Public Sub FrmSettingStartUp()
 
 		FrmSettingsLoading = True
