@@ -21421,7 +21421,7 @@ GetDommeSlideshow:
 	End Sub
 
 	Private Sub DebugMenuToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DebugMenuToolStripMenuItem.Click
-		FrmSettings.SettingsTabs.SelectTab(14)
+		FrmSettings.SettingsTabs.SelectTab(13)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
@@ -21431,7 +21431,7 @@ GetDommeSlideshow:
 	End Sub
 
 	Private Sub AboutToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles AboutToolStripMenuItem.Click
-		FrmSettings.SettingsTabs.SelectTab(15)
+		FrmSettings.SettingsTabs.SelectTab(14)
 		FrmSettings.Show()
 		FrmSettings.Focus()
 	End Sub
