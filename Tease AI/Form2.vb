@@ -4969,13 +4969,10 @@ GeneralGood:
 	Public Sub RefreshURLList()
 
 
-WhyUMakeMeDoDis:
-
-		For i As Integer = 0 To URLFileList.Items.Count - 1
+		For i As Integer = URLFileList.Items.Count - 1 To 0 Step -1
 			'Debug.Print(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.Items(i) & ".txt")
 			If Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.Items(i) & ".txt") Then
 				URLFileList.Items.Remove(URLFileList.Items(i))
-				GoTo WhyUMakeMeDoDis
 				Exit For
 			End If
 		Next
@@ -5978,13 +5975,10 @@ WhyUMakeMeDoDis:
 
 	Public Sub StartTab()
 
-WhyUMakeMeDoDis:
-
-		For i As Integer = 0 To CLBStartList.Items.Count - 1
+		For i As Integer = CLBStartList.Items.Count - 1 To 0 Step -1
 			'Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt")
 			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt") Then
 				CLBStartList.Items.Remove(CLBStartList.Items(i))
-				GoTo WhyUMakeMeDoDis
 				Exit For
 			End If
 		Next
@@ -6000,13 +5994,10 @@ WhyUMakeMeDoDis:
 
 		If FrmSettingsLoading = True Then Return
 
-WhyUMakeMeDoDis:
-
-		For i As Integer = 0 To CLBModuleList.Items.Count - 1
+		For i As Integer = CLBModuleList.Items.Count - 1 To 0 Step -1
 			' Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt")
 			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt") Then
 				CLBModuleList.Items.Remove(CLBModuleList.Items(i))
-				GoTo WhyUMakeMeDoDis
 				Exit For
 			End If
 		Next
@@ -6021,13 +6012,10 @@ WhyUMakeMeDoDis:
 
 		If FrmSettingsLoading = True Then Return
 
-WhyUMakeMeDoDis:
-
-		For i As Integer = 0 To CLBLinkList.Items.Count - 1
+		For i As Integer = CLBLinkList.Items.Count - 1 To 0 Step -1
 			' Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt")
 			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt") Then
 				CLBLinkList.Items.Remove(CLBLinkList.Items(i))
-				GoTo WhyUMakeMeDoDis
 				Exit For
 			End If
 		Next
@@ -6042,13 +6030,10 @@ WhyUMakeMeDoDis:
 
 		If FrmSettingsLoading = True Then Return
 
-WhyUMakeMeDoDis:
-
-		For i As Integer = 0 To CLBEndList.Items.Count - 1
+		For i As Integer = CLBEndList.Items.Count - 1 To 0 Step -1
 			' Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt")
 			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt") Then
 				CLBEndList.Items.Remove(CLBEndList.Items(i))
-				GoTo WhyUMakeMeDoDis
 				Exit For
 			End If
 		Next

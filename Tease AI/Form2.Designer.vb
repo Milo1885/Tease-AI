@@ -9277,7 +9277,7 @@ Partial Class FrmSettings
 		Me.GroupBox69.Size = New System.Drawing.Size(166, 83)
 		Me.GroupBox69.TabIndex = 173
 		Me.GroupBox69.TabStop = False
-		Me.GroupBox69.Text = "WritingTasks"
+		Me.GroupBox69.Text = "Writing Tasks"
 		'
 		'TypesSpeedVal
 		'
