@@ -5054,7 +5054,11 @@ GeneralGood:
 		If CBURLPreview.Checked = True Then
 			Dim PreviewList As New List(Of String)
 			PreviewList = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.SelectedItem & ".txt")
-			PBURLPreview.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PreviewList(Form1.randomizer.Next(0, PreviewList.Count)))))
+			Dim testimage As String = PreviewList(Form1.randomizer.Next(0, PreviewList.Count))
+			While testimage.Contains("56.media.tumblr")
+				testimage = PreviewList(Form1.randomizer.Next(0, PreviewList.Count))
+			End While
+			PBURLPreview.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(testimage)))
 		End If
 
 		SaveURLFileSelection()
