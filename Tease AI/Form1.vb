@@ -15152,7 +15152,7 @@ VTSkip:
 		'ParenFlag = ParenFlag.Substring(ParenStart, ParenFlag.Length - ParenStart)
 
 		'Dim ParenEnd As Integer = ParenFlag.IndexOf(ParenType, ParenStart)
-		Dim ParenEnd As Integer = GetNthIndex(ParenFlag, ParenType, Iterations)
+		Dim ParenEnd As Integer = GetNthIndex(ParenFlag, ParenType, ParenStart, Iterations)
 
 		Debug.Print("ParenEnd = " & ParenEnd)
 
@@ -15170,9 +15170,9 @@ VTSkip:
 
 	End Function
 
-	Public Function GetNthIndex(searchString As String, charToFind As Char, n As Integer) As Integer
+	Public Function GetNthIndex(searchString As String, charToFind As Char, startIndex As Integer, n As Integer) As Integer
 		Dim charIndexPair = searchString.Select(Function(c, i) New With {.Character = c, .Index = i}) _
-										.Where(Function(x) x.Character = charToFind) _
+										.Where(Function(x) x.Character = charToFind And x.Index > startIndex) _
 										.ElementAtOrDefault(n - 1)
 		Return If(charIndexPair IsNot Nothing, charIndexPair.Index, -1)
 	End Function
