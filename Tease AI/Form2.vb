@@ -4475,7 +4475,7 @@ trypreviousimage:
 
 
 	Public Sub VerifyLocalImagePaths()
-		'TODO-Next: Validate User-Settings on Startup using myDireectory and assigning the My.Settings default values on failure.
+		'TODO-Next-Stefaf: Validate User-Settings on Startup using myDireectory and assigning the My.Settings default values on failure.
 		Dim ImageList As New List(Of String)
 		ImageList.Clear()
 

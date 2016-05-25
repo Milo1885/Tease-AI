@@ -1,5 +1,4 @@
 ﻿Imports System.IO
-Imports System.Reflection
 
 ''' <summary>
 ''' Provides Static procedures to write Messages to predefined TextFiles.
@@ -44,10 +43,8 @@ Restart:
 				' Create new file
 				'===============================================================================
 				Using sw As New StreamWriter(Logfile)
-					Dim fecha As Date = IO.File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location)
 					sw.Write("=========================== LogFile Created =============================" & vbCrLf &
-							 "Build Date (UTC): " & fecha.ToUniversalTime.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
-							 "File Date (UTC): " & Now.ToUniversalTime.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
+							 "File Date: " & Now.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
 							 "If you want to remove the Stacktrace: Use NotePad++ and search Regex with" & vbCrLf &
 							 "MatchPattern: \t@>~@>~[^\a]*?~<@~<@+?\r\n" & vbCrLf &
 							 "ReplacePatten: Leave it Empty" & vbCrLf &
@@ -90,7 +87,7 @@ Restart:
 		Try
 			Write("Exception occured: " & msg)
 			Dim TargetFilePath As String = Application.StartupPath &
-			"\ErrorLogs\" & Today.ToUniversalTime.ToString("yyyy-MM-dd") & "_errorlog.txt"
+			"\ErrorLogs\" & Today.ToString("yyyy-MM-dd") & "_errorlog.txt"
 
 			Dim StList As List(Of String) = Environment.StackTrace.Replace(vbLf, "").Split(vbCrLf).ToList
 			StList.RemoveRange(0, 3)
@@ -110,9 +107,8 @@ Restart:
 			Using fs1 As New FileStream(TargetFilePath, FileMode.Append, FileAccess.Write)
 				Using s1 As New StreamWriter(fs1)
 					s1.Write("###################################################################" & vbCrLf)
-					s1.Write("Date/Time: " & DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf)
+					s1.Write("Date/Time: " & Now.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf)
 					s1.Write("Version: " & My.Application.Info.Version.ToString & vbCrLf)
-					s1.Write("BuildDate (UTC): " & File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location).ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf)
 					s1.Write("Title: " & title & vbCrLf)
 					s1.Write("Message: " & msg & vbCrLf)
 					s1.Write("Exceptions: " & Replace(ExceptonToString(Exception), vbCrLf, vbCrLf & vbTab) & vbCrLf)

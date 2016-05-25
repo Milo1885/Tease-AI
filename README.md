@@ -13,6 +13,21 @@ WIP - SaveState overhaul. Added SaveState Class and replaced Suspend and Resume 
 
 WIP - DataBinding Overhaul
 
+# Changelog - Patch 54.4.0
+
+######Fixes added from Community Members:
+	
+* Stefaf: Fixed TargetInvocationException, when loading an image and the fallback failed.
+* Stefaf: Added Additional check, if the imagepath to load is empty/NULL. This is checked and logged before the Backgroundworker starts. This way we can track the source of this error better.
+* Stefaf: Stretching landscape images applies to all images loaded with the designated Backgroundworker.
+* Stefaf: Fixed if .net does not create the localAppData%-directory on start-up, the setting-file duplication is suspended until the settings are automatically saved for the first time. If here an exception occurs, it will be suspended until next time.
+* Stefaf: Reworked Custom MainSlideshow. Merged redundant code. The image extensions are the global ones. Added check if a folder exists. Images are now loaded using the designated Backgroundworker.
+* Stefaf: Fixed Custom timed slideshow. This was stepping 2 images forward instead of one. Images are loading with the designated Backgroundworker.
+* Stefaf: Fixed Combobox for Custom slideshows was overwriting inputs like Control+C and stuff like that. 
+* Stefaf: Fixed when the CustomSlideshow fails to load, it was recognized as valid.
+* Stefaf: Reworked time usage in logs. After introducing proper versioning, there is no need to a identify the assembly-version, using the filetime. All times in logs are now local times.
+* Stefaf: Fixed IndexOutOfRangeException when clicking next or previous image button at the end or start of the slideshow.
+	
 # Changelog - Patch 54.3.0
 
 Improved @If[] Command - @If[] can now use "And" and "Or" when making comparisons. For example:
