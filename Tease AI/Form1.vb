@@ -14175,6 +14175,30 @@ VTSkip:
 			StringClean = StringClean.Replace("@ClearChat", "")
 		End If
 
+		If StringClean.Contains("@ChatImage[") Then
+			Dim ImageDir As String = Application.StartupPath & "\Images\" & GetParentheses(StringClean, "@ChatImage[")
+			ImageDir = ImageDir.Replace("/", "\")
+			ImageDir = ImageDir.Replace("\\", "\")
+
+
+			If File.Exists(ImageDir.Split(",")(0)) Then
+
+				If GetCharCount(ImageDir, ",") = 2 Then
+
+					Dim PicAttributes As String() = GetArrayString(ImageDir)
+
+					StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "<img id=""ChatPic"" src=""" & PicAttributes(0) & """ width=" & PicAttributes(1) & _
+					 " height=" & PicAttributes(2) & """/>")
+
+				Else
+					StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "<img id=""ChatPic"" src=""" & ImageDir & """/>")
+				End If
+
+			Else
+				StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "")
+			End If
+		End If
+
 		If StringClean.Contains("@Debug") Then
 
 			'Dim wy As Long = DateDiff(DateInterval.Day, Val(GetVariable("TB_AFKSlideshow")), Date.Now)
@@ -14480,187 +14504,76 @@ VTSkip:
 
 	End Function
 
-	Public Function CheckVariable(ByVal VarCheckList As String) As Boolean
+	Public Function CheckVariable(ByVal StringCLean As String) As Boolean
 
-		Dim VarCompare As Boolean = False
+		Do
 
-
-		Dim VarSplit As String() = Split(VarCheckList)
-
-		For i As Integer = 0 To VarSplit.Count - 1
-
+			Dim SCIfVar As String() = Split(StringCLean)
 			Dim SCGotVar As String = "Null"
 
-			If VarSplit(i).Contains("@Variable[") Then
+			For i As Integer = 0 To SCIfVar.Length - 1
+				If SCIfVar(i).Contains("@Variable[") Then
+					Dim IFJoin As Integer = 0
+					If Not SCIfVar(i).Contains("] ") Then
+						Do
+							IFJoin += 1
+							SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
+							SCIfVar(i + IFJoin) = ""
+						Loop Until SCIfVar(i).Contains("] ") Or SCIfVar(i).EndsWith("]")
+					End If
+					SCGotVar = SCIfVar(i).Trim
+					SCIfVar(i) = ""
+					StringCLean = Join(SCIfVar)
+					Do
+						StringCLean = StringCLean.Replace("  ", " ")
+					Loop Until Not StringCLean.Contains("  ")
+					Exit For
+				End If
+			Next
 
+			If SCGotVar.Contains("]And[") Then
 
+				Dim AndCheck As Boolean = True
 
-				SCGotVar = VarSplit(i).Replace("@Variable[", "")
-				Dim SCGotVarSplit As String() = Split(SCGotVar, "]", 2)
+				For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
+					If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = False Then
+						AndCheck = False
+						Exit For
+					End If
+					SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]And", "")
+				Next
 
-				Debug.Print("SCGotVars = " & SCGotVarSplit(0) & SCGotVarSplit(1))
+				Return AndCheck
 
-				Dim Val1 As Integer = -18855881
-				Dim Str1 As String = SCGotVarSplit(0)
+			ElseIf SCGotVar.Contains("]Or[") Then
 
-				Debug.Print("SCGotVarSplit(0)= " & SCGotVarSplit(0))
+				Dim OrCheck As Boolean = False
 
-				If IsNumeric(Str1) = True Then
+				For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
+					If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = True Then
+						OrCheck = True
+						Exit For
+					End If
+					SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]Or", "")
+				Next
 
-					Debug.Print("InNumeric Called")
+				Return OrCheck
 
-					Val1 = Val(SCGotVarSplit(0))
+			Else
+
+				If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = True Then
+
+					Return True
 
 				Else
 
-					Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVarSplit(0)
-					'Debug.Print("VarCheck = " & VarCheck)
-					'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-					If File.Exists(VarCheck) Then
-						'Debug.Print("VarCheck Exists")
-						Dim StrCheck As String = TxtReadLine(VarCheck)
-
-						Debug.Print("StrChec = " & StrCheck)
-
-						If IsNumeric(StrCheck) = True Then
-							Val1 = Val(StrCheck)
-						Else
-							Str1 = StrCheck
-						End If
-
-
-					End If
+					Return False
 
 				End If
-
-				Debug.Print("Val1 = " & Val1)
-
-				'Debug.Print("@SetVar VarDifference = " & Val1)
-
-				'Debug.Print("@SetVar Val = " & Val1)
-				SCGotVarSplit(0) = ""
-
-				SCGotVar = Join(SCGotVarSplit)
-				'Debug.Print("@SetVar SCGotVar = " & SCGotVar)
-
-				SCGotVarSplit = Split(SCGotVar, "[", 2)
-				SCGotVarSplit(0) = SCGotVarSplit(0).Replace(" ", "")
-				'Debug.Print("@SetVar SCGotVarSplit = " & SCGotVarSplit(0))
-
-				ScriptCompare = "Null"
-
-				If SCGotVarSplit(0) = "=" Or SCGotVarSplit(0) = "==" Then ScriptCompare = "="
-				If SCGotVarSplit(0) = "<>" Then ScriptCompare = "<>"
-				If SCGotVarSplit(0) = ">" Then ScriptCompare = ">"
-				If SCGotVarSplit(0) = "<" Then ScriptCompare = "<"
-				If SCGotVarSplit(0) = ">=" Then ScriptCompare = ">="
-				If SCGotVarSplit(0) = "<=" Then ScriptCompare = "<="
-
-
-
-				SCGotVarSplit(0) = ""
-
-				SCGotVar = Join(SCGotVarSplit)
-
-
-
-
-
-
-				SCGotVarSplit = Split(SCGotVar, "]", 2)
-				SCGotVarSplit(0) = SCGotVarSplit(0).Replace(" ", "")
-
-
-
-
-
-				Dim Val2 As Integer = -18855881
-				Dim Str2 As String = SCGotVarSplit(0)
-
-				Debug.Print("SCGotVarSplit(0)= " & SCGotVarSplit(0))
-
-				If IsNumeric(Str2) = True Then
-
-					Debug.Print("InNumeric Called")
-
-					Val2 = Val(SCGotVarSplit(0))
-
-				Else
-
-					Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & SCGotVarSplit(0)
-					'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
-					If File.Exists(VarCheck) Then
-						Dim StrCheck As String = TxtReadLine(VarCheck)
-						Debug.Print("StrChec = " & StrCheck)
-						If IsNumeric(StrCheck) = True Then
-							Val2 = Val(StrCheck)
-						Else
-							Str2 = StrCheck
-						End If
-					End If
-
-				End If
-
-				Debug.Print("Val2 = " & Val2)
-
-
-				Dim CompareCheck As String = "Null"
-
-				If Val1 = -18855881 Or Val2 = -18855881 Then
-
-					Debug.Print("Compare strings called")
-
-					Debug.Print("Str1 = " & Str1)
-					Debug.Print("Str2 = " & Str2)
-
-
-					If ScriptCompare = "=" Then
-						If UCase(Str1) = UCase(Str2) Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = "<>" Then
-						If UCase(Str1) <> UCase(Str2) Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-				Else
-
-					Debug.Print("Compare integers called")
-
-					If ScriptCompare = "=" Then
-						If Val1 = Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = "<>" Then
-						If Val1 <> Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = ">" Then
-						If Val1 > Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = "<" Then
-						If Val1 < Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = ">=" Then
-						If Val1 >= Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-					If ScriptCompare = "<=" Then
-						If Val1 <= Val2 Then CompareCheck = SCGotVarSplit(1)
-					End If
-
-				End If
-
-
-
-				If CompareCheck <> "Null" Then VarCompare = True
 
 			End If
-		Next
 
-
-		Return VarCompare
+		Loop Until Not StringCLean.Contains("@Variable")
 
 
 	End Function
@@ -18907,8 +18820,11 @@ GetDommeSlideshow:
 		'Debug.Print("CFClean Joined = " & CFClean)
 
 
-
-
+		If CFClean.Contains("@Variable[") Then
+			CFClean = CFClean.Replace("@Variable[" & GetParentheses(CFClean, "@Variable[", 2) & "]", "")
+			If CFClean.Contains("And[") Then CFClean = CFClean.Replace("And[" & GetParentheses(CFClean, "And[", 2) & "]", "")
+			If CFClean.Contains("Or[") Then CFClean = CFClean.Replace("Or[" & GetParentheses(CFClean, "Or[", 2) & "]", "")
+		End If
 
 		If CFClean.Contains("@Cup(") Then CFClean = CFClean.Replace("@Cup(" & GetParentheses(CFClean, "@Cup(") & ")", "")
 		If CFClean.Contains("@AllowsOrgasm(") Then CFClean = CFClean.Replace("@AllowsOrgasm(" & GetParentheses(CFClean, "@AllowsOrgasm(") & ")", "")
@@ -24779,6 +24695,9 @@ playLoop:
 		Dim Val1 As String = CompareArray(0).Replace("[", "")
 		Dim Val2 As String = CompareArray(1).Replace(C_Operator & "[", "")
 
+		If Val1.StartsWith("#") Then Val1 = PoundClean(Val1)
+		If Val2.StartsWith("#") Then Val2 = PoundClean(Val2)
+
 		Debug.Print("CompareString = " & CompareString)
 		Debug.Print("C_Operator = " & C_Operator)
 		Debug.Print("Val1 = " & Val1)
@@ -24822,6 +24741,16 @@ playLoop:
 
 		Return ReturnVal
 
+	End Function
+
+	Public Function GetArrayString(ByVal StringToSplit As String) As String()
+		StringToSplit = FixCommas(StringToSplit)
+		Dim ArrayString As String() = StringToSplit.Split(",")
+		Return ArrayString
+	End Function
+
+	Public Function GetCharCount(ByVal StringClean As String, ByVal Character As String) As Integer
+		Return Len(StringClean) - Len(Replace(StringClean, Character, ""))
 	End Function
 
 
