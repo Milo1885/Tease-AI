@@ -384,161 +384,6 @@ Partial Class FrmSettings
 		Me.CBICaptionsSD = New System.Windows.Forms.CheckBox()
 		Me.CBIHardcore = New System.Windows.Forms.CheckBox()
 		Me.CBIMaledom = New System.Windows.Forms.CheckBox()
-		Me.TabPage33 = New System.Windows.Forms.TabPage()
-		Me.TabControl5 = New System.Windows.Forms.TabControl()
-		Me.TabPage34 = New System.Windows.Forms.TabPage()
-		Me.CBTagSeeThrough = New System.Windows.Forms.RadioButton()
-		Me.CBTagAllFours = New System.Windows.Forms.CheckBox()
-		Me.CBTagGlaring = New System.Windows.Forms.CheckBox()
-		Me.CBTagSmiling = New System.Windows.Forms.CheckBox()
-		Me.TBTagDir = New System.Windows.Forms.TextBox()
-		Me.CBTagPiercing = New System.Windows.Forms.CheckBox()
-		Me.CBTagLegs = New System.Windows.Forms.CheckBox()
-		Me.TBTagFurniture = New System.Windows.Forms.TextBox()
-		Me.CBTagFurniture = New System.Windows.Forms.CheckBox()
-		Me.TBTagSexToy = New System.Windows.Forms.TextBox()
-		Me.CBTagSexToy = New System.Windows.Forms.CheckBox()
-		Me.TBTagTattoo = New System.Windows.Forms.TextBox()
-		Me.CBTagTattoo = New System.Windows.Forms.CheckBox()
-		Me.TBTagUnderwear = New System.Windows.Forms.TextBox()
-		Me.CBTagUnderwear = New System.Windows.Forms.CheckBox()
-		Me.TBTagGarment = New System.Windows.Forms.TextBox()
-		Me.CBTagGarment = New System.Windows.Forms.CheckBox()
-		Me.Label72 = New System.Windows.Forms.Label()
-		Me.CBTagHandsCovering = New System.Windows.Forms.RadioButton()
-		Me.CBTagGarmentCovering = New System.Windows.Forms.RadioButton()
-		Me.CBTagCloseUp = New System.Windows.Forms.CheckBox()
-		Me.CBTagNaked = New System.Windows.Forms.RadioButton()
-		Me.CBTagSideView = New System.Windows.Forms.CheckBox()
-		Me.BTNTagPrevious = New System.Windows.Forms.Button()
-		Me.CBTagHalfDressed = New System.Windows.Forms.RadioButton()
-		Me.BTNTagNext = New System.Windows.Forms.Button()
-		Me.CBTagFullyDressed = New System.Windows.Forms.RadioButton()
-		Me.LBLTagCount = New System.Windows.Forms.Label()
-		Me.CBTagSucking = New System.Windows.Forms.CheckBox()
-		Me.CBTagMasturbating = New System.Windows.Forms.CheckBox()
-		Me.CBTagFeet = New System.Windows.Forms.CheckBox()
-		Me.CBTagBoobs = New System.Windows.Forms.CheckBox()
-		Me.CBTagAss = New System.Windows.Forms.CheckBox()
-		Me.CBTagPussy = New System.Windows.Forms.CheckBox()
-		Me.BTNTagSave = New System.Windows.Forms.Button()
-		Me.BTNTagDir = New System.Windows.Forms.Button()
-		Me.ImageTagPictureBox = New System.Windows.Forms.PictureBox()
-		Me.CBTagFace = New System.Windows.Forms.CheckBox()
-		Me.TabPage35 = New System.Windows.Forms.TabPage()
-		Me.GroupBox55 = New System.Windows.Forms.GroupBox()
-		Me.CBTagNurse = New System.Windows.Forms.CheckBox()
-		Me.CBTagSchoolgirl = New System.Windows.Forms.CheckBox()
-		Me.CBTagMaid = New System.Windows.Forms.CheckBox()
-		Me.CBTagTeacher = New System.Windows.Forms.CheckBox()
-		Me.CBTagSuperhero = New System.Windows.Forms.CheckBox()
-		Me.GroupBox53 = New System.Windows.Forms.GroupBox()
-		Me.CBTagTrap = New System.Windows.Forms.CheckBox()
-		Me.CBTagTentacles = New System.Windows.Forms.CheckBox()
-		Me.CBTagMonsterGirl = New System.Windows.Forms.CheckBox()
-		Me.CBTagBukkake = New System.Windows.Forms.CheckBox()
-		Me.CBTagGanguro = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyWriting = New System.Windows.Forms.CheckBox()
-		Me.CBTagMahouShoujo = New System.Windows.Forms.CheckBox()
-		Me.CBTagBakunyuu = New System.Windows.Forms.CheckBox()
-		Me.CBTagAhegao = New System.Windows.Forms.CheckBox()
-		Me.CBTagShibari = New System.Windows.Forms.CheckBox()
-		Me.GroupBox49 = New System.Windows.Forms.GroupBox()
-		Me.CBTagBodyMouth = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyAss = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyFace = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyLegs = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyBalls = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyCock = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyFeet = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyNipples = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyPussy = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyTits = New System.Windows.Forms.CheckBox()
-		Me.CBTagBodyFingers = New System.Windows.Forms.CheckBox()
-		Me.GroupBox46 = New System.Windows.Forms.GroupBox()
-		Me.CBTagMultiSub = New System.Windows.Forms.CheckBox()
-		Me.CBTagMultiDom = New System.Windows.Forms.CheckBox()
-		Me.CBTagFemdom = New System.Windows.Forms.CheckBox()
-		Me.CBTag2M = New System.Windows.Forms.CheckBox()
-		Me.CBTagFutadom = New System.Windows.Forms.CheckBox()
-		Me.CBTagFemsub = New System.Windows.Forms.CheckBox()
-		Me.CBTag2Futa = New System.Windows.Forms.CheckBox()
-		Me.CBTagMaledom = New System.Windows.Forms.CheckBox()
-		Me.CBTag3M = New System.Windows.Forms.CheckBox()
-		Me.CBTagFutasub = New System.Windows.Forms.CheckBox()
-		Me.CBTag3Futa = New System.Windows.Forms.CheckBox()
-		Me.CBTagMalesub = New System.Windows.Forms.CheckBox()
-		Me.CBTag2F = New System.Windows.Forms.CheckBox()
-		Me.CBTag1Futa = New System.Windows.Forms.CheckBox()
-		Me.CBTag1M = New System.Windows.Forms.CheckBox()
-		Me.CBTag1F = New System.Windows.Forms.CheckBox()
-		Me.CBTag3F = New System.Windows.Forms.CheckBox()
-		Me.GroupBox54 = New System.Windows.Forms.GroupBox()
-		Me.CBTagTattoos = New System.Windows.Forms.CheckBox()
-		Me.CBTagAnalToy = New System.Windows.Forms.CheckBox()
-		Me.CBTagDomme = New System.Windows.Forms.CheckBox()
-		Me.CBTagPocketPussy = New System.Windows.Forms.CheckBox()
-		Me.CBTagWatersports = New System.Windows.Forms.CheckBox()
-		Me.CBTagStockings = New System.Windows.Forms.CheckBox()
-		Me.CBTagCumshot = New System.Windows.Forms.CheckBox()
-		Me.CBTagCumEating = New System.Windows.Forms.CheckBox()
-		Me.CBTagVibrator = New System.Windows.Forms.CheckBox()
-		Me.CBTagDildo = New System.Windows.Forms.CheckBox()
-		Me.CBTagKissing = New System.Windows.Forms.CheckBox()
-		Me.GroupBox51 = New System.Windows.Forms.GroupBox()
-		Me.CBTagBallTorture = New System.Windows.Forms.CheckBox()
-		Me.CBTagGag = New System.Windows.Forms.CheckBox()
-		Me.CBTagBlindfold = New System.Windows.Forms.CheckBox()
-		Me.CBTagWhipping = New System.Windows.Forms.CheckBox()
-		Me.CBTagCockTorture = New System.Windows.Forms.CheckBox()
-		Me.CBTagElectro = New System.Windows.Forms.CheckBox()
-		Me.CBTagHotWax = New System.Windows.Forms.CheckBox()
-		Me.CBTagClamps = New System.Windows.Forms.CheckBox()
-		Me.CBTagStrapon = New System.Windows.Forms.CheckBox()
-		Me.CBTagSpanking = New System.Windows.Forms.CheckBox()
-		Me.CBTagNeedles = New System.Windows.Forms.CheckBox()
-		Me.GroupBox50 = New System.Windows.Forms.GroupBox()
-		Me.CBTagRimming = New System.Windows.Forms.CheckBox()
-		Me.CBTagFacesitting = New System.Windows.Forms.CheckBox()
-		Me.CBTagMissionary = New System.Windows.Forms.CheckBox()
-		Me.CBTagMasturbation = New System.Windows.Forms.CheckBox()
-		Me.CBTagRCowgirl = New System.Windows.Forms.CheckBox()
-		Me.CBTagFingering = New System.Windows.Forms.CheckBox()
-		Me.CBTagGangbang = New System.Windows.Forms.CheckBox()
-		Me.CBTagBlowjob = New System.Windows.Forms.CheckBox()
-		Me.CBTagDP = New System.Windows.Forms.CheckBox()
-		Me.CBTagHandjob = New System.Windows.Forms.CheckBox()
-		Me.CBTagStanding = New System.Windows.Forms.CheckBox()
-		Me.CBTagFootjob = New System.Windows.Forms.CheckBox()
-		Me.CBTagCowgirl = New System.Windows.Forms.CheckBox()
-		Me.CBTagDoggyStyle = New System.Windows.Forms.CheckBox()
-		Me.CBTagTitjob = New System.Windows.Forms.CheckBox()
-		Me.CBTagCunnilingus = New System.Windows.Forms.CheckBox()
-		Me.CBTagAnalSex = New System.Windows.Forms.CheckBox()
-		Me.GroupBox48 = New System.Windows.Forms.GroupBox()
-		Me.CBTagArtwork = New System.Windows.Forms.CheckBox()
-		Me.CBTagOutdoors = New System.Windows.Forms.CheckBox()
-		Me.CBTagPOV = New System.Windows.Forms.CheckBox()
-		Me.CBTagHardcore = New System.Windows.Forms.CheckBox()
-		Me.CBTagTD = New System.Windows.Forms.CheckBox()
-		Me.CBTagGay = New System.Windows.Forms.CheckBox()
-		Me.CBTagBath = New System.Windows.Forms.CheckBox()
-		Me.CBTagBisexual = New System.Windows.Forms.CheckBox()
-		Me.CBTagCFNM = New System.Windows.Forms.CheckBox()
-		Me.CBTagLesbian = New System.Windows.Forms.CheckBox()
-		Me.CBTagSoloFuta = New System.Windows.Forms.CheckBox()
-		Me.CBTagSM = New System.Windows.Forms.CheckBox()
-		Me.CBTagBondage = New System.Windows.Forms.CheckBox()
-		Me.CBTagSoloM = New System.Windows.Forms.CheckBox()
-		Me.CBTagSoloF = New System.Windows.Forms.CheckBox()
-		Me.CBTagChastity = New System.Windows.Forms.CheckBox()
-		Me.CBTagShower = New System.Windows.Forms.CheckBox()
-		Me.TBLocalTagDir = New System.Windows.Forms.TextBox()
-		Me.BTNLocalTagPrevious = New System.Windows.Forms.Button()
-		Me.BTNLocalTagNext = New System.Windows.Forms.Button()
-		Me.LBLLocalTagCount = New System.Windows.Forms.Label()
-		Me.BTNLocalTagSave = New System.Windows.Forms.Button()
-		Me.BTNLocalTagDir = New System.Windows.Forms.Button()
 		Me.TabPage11 = New System.Windows.Forms.TabPage()
 		Me.Panel7 = New System.Windows.Forms.Panel()
 		Me.BTNWIContinue = New System.Windows.Forms.Button()
@@ -1114,6 +959,161 @@ Partial Class FrmSettings
 		Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 		Me.TextBox2 = New System.Windows.Forms.TextBox()
 		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
+		Me.TabPage33 = New System.Windows.Forms.TabPage()
+		Me.TabControl5 = New System.Windows.Forms.TabControl()
+		Me.TabPage34 = New System.Windows.Forms.TabPage()
+		Me.TabPage35 = New System.Windows.Forms.TabPage()
+		Me.CBTagSeeThrough = New System.Windows.Forms.RadioButton()
+		Me.CBTagAllFours = New System.Windows.Forms.CheckBox()
+		Me.CBTagGlaring = New System.Windows.Forms.CheckBox()
+		Me.CBTagSmiling = New System.Windows.Forms.CheckBox()
+		Me.TBTagDir = New System.Windows.Forms.TextBox()
+		Me.CBTagPiercing = New System.Windows.Forms.CheckBox()
+		Me.CBTagLegs = New System.Windows.Forms.CheckBox()
+		Me.TBTagFurniture = New System.Windows.Forms.TextBox()
+		Me.CBTagFurniture = New System.Windows.Forms.CheckBox()
+		Me.TBTagSexToy = New System.Windows.Forms.TextBox()
+		Me.CBTagSexToy = New System.Windows.Forms.CheckBox()
+		Me.TBTagTattoo = New System.Windows.Forms.TextBox()
+		Me.CBTagTattoo = New System.Windows.Forms.CheckBox()
+		Me.TBTagUnderwear = New System.Windows.Forms.TextBox()
+		Me.CBTagUnderwear = New System.Windows.Forms.CheckBox()
+		Me.TBTagGarment = New System.Windows.Forms.TextBox()
+		Me.CBTagGarment = New System.Windows.Forms.CheckBox()
+		Me.Label72 = New System.Windows.Forms.Label()
+		Me.CBTagHandsCovering = New System.Windows.Forms.RadioButton()
+		Me.CBTagGarmentCovering = New System.Windows.Forms.RadioButton()
+		Me.CBTagCloseUp = New System.Windows.Forms.CheckBox()
+		Me.CBTagNaked = New System.Windows.Forms.RadioButton()
+		Me.CBTagSideView = New System.Windows.Forms.CheckBox()
+		Me.BTNTagPrevious = New System.Windows.Forms.Button()
+		Me.CBTagHalfDressed = New System.Windows.Forms.RadioButton()
+		Me.BTNTagNext = New System.Windows.Forms.Button()
+		Me.CBTagFullyDressed = New System.Windows.Forms.RadioButton()
+		Me.LBLTagCount = New System.Windows.Forms.Label()
+		Me.CBTagSucking = New System.Windows.Forms.CheckBox()
+		Me.CBTagMasturbating = New System.Windows.Forms.CheckBox()
+		Me.CBTagFeet = New System.Windows.Forms.CheckBox()
+		Me.CBTagBoobs = New System.Windows.Forms.CheckBox()
+		Me.CBTagAss = New System.Windows.Forms.CheckBox()
+		Me.CBTagPussy = New System.Windows.Forms.CheckBox()
+		Me.BTNTagSave = New System.Windows.Forms.Button()
+		Me.BTNTagDir = New System.Windows.Forms.Button()
+		Me.ImageTagPictureBox = New System.Windows.Forms.PictureBox()
+		Me.CBTagFace = New System.Windows.Forms.CheckBox()
+		Me.GroupBox55 = New System.Windows.Forms.GroupBox()
+		Me.CBTagNurse = New System.Windows.Forms.CheckBox()
+		Me.CBTagSchoolgirl = New System.Windows.Forms.CheckBox()
+		Me.CBTagMaid = New System.Windows.Forms.CheckBox()
+		Me.CBTagTeacher = New System.Windows.Forms.CheckBox()
+		Me.CBTagSuperhero = New System.Windows.Forms.CheckBox()
+		Me.GroupBox53 = New System.Windows.Forms.GroupBox()
+		Me.CBTagTrap = New System.Windows.Forms.CheckBox()
+		Me.CBTagTentacles = New System.Windows.Forms.CheckBox()
+		Me.CBTagMonsterGirl = New System.Windows.Forms.CheckBox()
+		Me.CBTagBukkake = New System.Windows.Forms.CheckBox()
+		Me.CBTagGanguro = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyWriting = New System.Windows.Forms.CheckBox()
+		Me.CBTagMahouShoujo = New System.Windows.Forms.CheckBox()
+		Me.CBTagBakunyuu = New System.Windows.Forms.CheckBox()
+		Me.CBTagAhegao = New System.Windows.Forms.CheckBox()
+		Me.CBTagShibari = New System.Windows.Forms.CheckBox()
+		Me.GroupBox49 = New System.Windows.Forms.GroupBox()
+		Me.CBTagBodyMouth = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyAss = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyFace = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyLegs = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyBalls = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyCock = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyFeet = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyNipples = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyPussy = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyTits = New System.Windows.Forms.CheckBox()
+		Me.CBTagBodyFingers = New System.Windows.Forms.CheckBox()
+		Me.GroupBox46 = New System.Windows.Forms.GroupBox()
+		Me.CBTagMultiSub = New System.Windows.Forms.CheckBox()
+		Me.CBTagMultiDom = New System.Windows.Forms.CheckBox()
+		Me.CBTagFemdom = New System.Windows.Forms.CheckBox()
+		Me.CBTag2M = New System.Windows.Forms.CheckBox()
+		Me.CBTagFutadom = New System.Windows.Forms.CheckBox()
+		Me.CBTagFemsub = New System.Windows.Forms.CheckBox()
+		Me.CBTag2Futa = New System.Windows.Forms.CheckBox()
+		Me.CBTagMaledom = New System.Windows.Forms.CheckBox()
+		Me.CBTag3M = New System.Windows.Forms.CheckBox()
+		Me.CBTagFutasub = New System.Windows.Forms.CheckBox()
+		Me.CBTag3Futa = New System.Windows.Forms.CheckBox()
+		Me.CBTagMalesub = New System.Windows.Forms.CheckBox()
+		Me.CBTag2F = New System.Windows.Forms.CheckBox()
+		Me.CBTag1Futa = New System.Windows.Forms.CheckBox()
+		Me.CBTag1M = New System.Windows.Forms.CheckBox()
+		Me.CBTag1F = New System.Windows.Forms.CheckBox()
+		Me.CBTag3F = New System.Windows.Forms.CheckBox()
+		Me.GroupBox54 = New System.Windows.Forms.GroupBox()
+		Me.CBTagTattoos = New System.Windows.Forms.CheckBox()
+		Me.CBTagAnalToy = New System.Windows.Forms.CheckBox()
+		Me.CBTagDomme = New System.Windows.Forms.CheckBox()
+		Me.CBTagPocketPussy = New System.Windows.Forms.CheckBox()
+		Me.CBTagWatersports = New System.Windows.Forms.CheckBox()
+		Me.CBTagStockings = New System.Windows.Forms.CheckBox()
+		Me.CBTagCumshot = New System.Windows.Forms.CheckBox()
+		Me.CBTagCumEating = New System.Windows.Forms.CheckBox()
+		Me.CBTagVibrator = New System.Windows.Forms.CheckBox()
+		Me.CBTagDildo = New System.Windows.Forms.CheckBox()
+		Me.CBTagKissing = New System.Windows.Forms.CheckBox()
+		Me.GroupBox51 = New System.Windows.Forms.GroupBox()
+		Me.CBTagBallTorture = New System.Windows.Forms.CheckBox()
+		Me.CBTagGag = New System.Windows.Forms.CheckBox()
+		Me.CBTagBlindfold = New System.Windows.Forms.CheckBox()
+		Me.CBTagWhipping = New System.Windows.Forms.CheckBox()
+		Me.CBTagCockTorture = New System.Windows.Forms.CheckBox()
+		Me.CBTagElectro = New System.Windows.Forms.CheckBox()
+		Me.CBTagHotWax = New System.Windows.Forms.CheckBox()
+		Me.CBTagClamps = New System.Windows.Forms.CheckBox()
+		Me.CBTagStrapon = New System.Windows.Forms.CheckBox()
+		Me.CBTagSpanking = New System.Windows.Forms.CheckBox()
+		Me.CBTagNeedles = New System.Windows.Forms.CheckBox()
+		Me.GroupBox50 = New System.Windows.Forms.GroupBox()
+		Me.CBTagRimming = New System.Windows.Forms.CheckBox()
+		Me.CBTagFacesitting = New System.Windows.Forms.CheckBox()
+		Me.CBTagMissionary = New System.Windows.Forms.CheckBox()
+		Me.CBTagMasturbation = New System.Windows.Forms.CheckBox()
+		Me.CBTagRCowgirl = New System.Windows.Forms.CheckBox()
+		Me.CBTagFingering = New System.Windows.Forms.CheckBox()
+		Me.CBTagGangbang = New System.Windows.Forms.CheckBox()
+		Me.CBTagBlowjob = New System.Windows.Forms.CheckBox()
+		Me.CBTagDP = New System.Windows.Forms.CheckBox()
+		Me.CBTagHandjob = New System.Windows.Forms.CheckBox()
+		Me.CBTagStanding = New System.Windows.Forms.CheckBox()
+		Me.CBTagFootjob = New System.Windows.Forms.CheckBox()
+		Me.CBTagCowgirl = New System.Windows.Forms.CheckBox()
+		Me.CBTagDoggyStyle = New System.Windows.Forms.CheckBox()
+		Me.CBTagTitjob = New System.Windows.Forms.CheckBox()
+		Me.CBTagCunnilingus = New System.Windows.Forms.CheckBox()
+		Me.CBTagAnalSex = New System.Windows.Forms.CheckBox()
+		Me.GroupBox48 = New System.Windows.Forms.GroupBox()
+		Me.CBTagArtwork = New System.Windows.Forms.CheckBox()
+		Me.CBTagOutdoors = New System.Windows.Forms.CheckBox()
+		Me.CBTagPOV = New System.Windows.Forms.CheckBox()
+		Me.CBTagHardcore = New System.Windows.Forms.CheckBox()
+		Me.CBTagTD = New System.Windows.Forms.CheckBox()
+		Me.CBTagGay = New System.Windows.Forms.CheckBox()
+		Me.CBTagBath = New System.Windows.Forms.CheckBox()
+		Me.CBTagBisexual = New System.Windows.Forms.CheckBox()
+		Me.CBTagCFNM = New System.Windows.Forms.CheckBox()
+		Me.CBTagLesbian = New System.Windows.Forms.CheckBox()
+		Me.CBTagSoloFuta = New System.Windows.Forms.CheckBox()
+		Me.CBTagSM = New System.Windows.Forms.CheckBox()
+		Me.CBTagBondage = New System.Windows.Forms.CheckBox()
+		Me.CBTagSoloM = New System.Windows.Forms.CheckBox()
+		Me.CBTagSoloF = New System.Windows.Forms.CheckBox()
+		Me.CBTagChastity = New System.Windows.Forms.CheckBox()
+		Me.CBTagShower = New System.Windows.Forms.CheckBox()
+		Me.TBLocalTagDir = New System.Windows.Forms.TextBox()
+		Me.BTNLocalTagPrevious = New System.Windows.Forms.Button()
+		Me.BTNLocalTagNext = New System.Windows.Forms.Button()
+		Me.LBLLocalTagCount = New System.Windows.Forms.Label()
+		Me.BTNLocalTagSave = New System.Windows.Forms.Button()
+		Me.BTNLocalTagDir = New System.Windows.Forms.Button()
 		Me.SettingsPanel.SuspendLayout()
 		Me.SettingsTabs.SuspendLayout()
 		Me.TabPage1.SuspendLayout()
@@ -1205,19 +1205,6 @@ Partial Class FrmSettings
 		Me.GrbImageUrlFiles.SuspendLayout()
 		Me.TlpImageUrls.SuspendLayout()
 		Me.GroupBox14.SuspendLayout()
-		Me.TabPage33.SuspendLayout()
-		Me.TabControl5.SuspendLayout()
-		Me.TabPage34.SuspendLayout()
-		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-		Me.TabPage35.SuspendLayout()
-		Me.GroupBox55.SuspendLayout()
-		Me.GroupBox53.SuspendLayout()
-		Me.GroupBox49.SuspendLayout()
-		Me.GroupBox46.SuspendLayout()
-		Me.GroupBox54.SuspendLayout()
-		Me.GroupBox51.SuspendLayout()
-		Me.GroupBox50.SuspendLayout()
-		Me.GroupBox48.SuspendLayout()
 		Me.TabPage11.SuspendLayout()
 		Me.Panel7.SuspendLayout()
 		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1371,6 +1358,19 @@ Partial Class FrmSettings
 		Me.GroupBox65.SuspendLayout()
 		CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TabPage33.SuspendLayout()
+		Me.TabControl5.SuspendLayout()
+		Me.TabPage34.SuspendLayout()
+		Me.TabPage35.SuspendLayout()
+		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox55.SuspendLayout()
+		Me.GroupBox53.SuspendLayout()
+		Me.GroupBox49.SuspendLayout()
+		Me.GroupBox46.SuspendLayout()
+		Me.GroupBox54.SuspendLayout()
+		Me.GroupBox51.SuspendLayout()
+		Me.GroupBox50.SuspendLayout()
+		Me.GroupBox48.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'SettingsPanel
@@ -4600,6 +4600,7 @@ Partial Class FrmSettings
 		'
 		'URLFileList
 		'
+		Me.URLFileList.CheckOnClick = True
 		Me.URLFileList.FormattingEnabled = True
 		Me.URLFileList.Location = New System.Drawing.Point(6, 9)
 		Me.URLFileList.Name = "URLFileList"
@@ -5910,1952 +5911,6 @@ Partial Class FrmSettings
 		Me.CBIMaledom.TabIndex = 158
 		Me.CBIMaledom.Text = "Maledom"
 		Me.CBIMaledom.UseVisualStyleBackColor = True
-		'
-		'TabPage33
-		'
-		Me.TabPage33.BackColor = System.Drawing.Color.Silver
-		Me.TabPage33.Controls.Add(Me.TabControl5)
-		Me.TabPage33.Location = New System.Drawing.Point(4, 22)
-		Me.TabPage33.Name = "TabPage33"
-		Me.TabPage33.Padding = New System.Windows.Forms.Padding(3)
-		Me.TabPage33.Size = New System.Drawing.Size(720, 448)
-		Me.TabPage33.TabIndex = 21
-		Me.TabPage33.Text = "Tagging"
-		'
-		'TabControl5
-		'
-		Me.TabControl5.Controls.Add(Me.TabPage34)
-		Me.TabControl5.Controls.Add(Me.TabPage35)
-		Me.TabControl5.Location = New System.Drawing.Point(6, 6)
-		Me.TabControl5.Name = "TabControl5"
-		Me.TabControl5.SelectedIndex = 0
-		Me.TabControl5.Size = New System.Drawing.Size(708, 437)
-		Me.TabControl5.TabIndex = 0
-		'
-		'TabPage34
-		'
-		Me.TabPage34.BackColor = System.Drawing.Color.LightGray
-		Me.TabPage34.Controls.Add(Me.CBTagSeeThrough)
-		Me.TabPage34.Controls.Add(Me.CBTagAllFours)
-		Me.TabPage34.Controls.Add(Me.CBTagGlaring)
-		Me.TabPage34.Controls.Add(Me.CBTagSmiling)
-		Me.TabPage34.Controls.Add(Me.TBTagDir)
-		Me.TabPage34.Controls.Add(Me.CBTagPiercing)
-		Me.TabPage34.Controls.Add(Me.CBTagLegs)
-		Me.TabPage34.Controls.Add(Me.TBTagFurniture)
-		Me.TabPage34.Controls.Add(Me.CBTagFurniture)
-		Me.TabPage34.Controls.Add(Me.TBTagSexToy)
-		Me.TabPage34.Controls.Add(Me.CBTagSexToy)
-		Me.TabPage34.Controls.Add(Me.TBTagTattoo)
-		Me.TabPage34.Controls.Add(Me.CBTagTattoo)
-		Me.TabPage34.Controls.Add(Me.TBTagUnderwear)
-		Me.TabPage34.Controls.Add(Me.CBTagUnderwear)
-		Me.TabPage34.Controls.Add(Me.TBTagGarment)
-		Me.TabPage34.Controls.Add(Me.CBTagGarment)
-		Me.TabPage34.Controls.Add(Me.Label72)
-		Me.TabPage34.Controls.Add(Me.CBTagHandsCovering)
-		Me.TabPage34.Controls.Add(Me.CBTagGarmentCovering)
-		Me.TabPage34.Controls.Add(Me.CBTagCloseUp)
-		Me.TabPage34.Controls.Add(Me.CBTagNaked)
-		Me.TabPage34.Controls.Add(Me.CBTagSideView)
-		Me.TabPage34.Controls.Add(Me.BTNTagPrevious)
-		Me.TabPage34.Controls.Add(Me.CBTagHalfDressed)
-		Me.TabPage34.Controls.Add(Me.BTNTagNext)
-		Me.TabPage34.Controls.Add(Me.CBTagFullyDressed)
-		Me.TabPage34.Controls.Add(Me.LBLTagCount)
-		Me.TabPage34.Controls.Add(Me.CBTagSucking)
-		Me.TabPage34.Controls.Add(Me.CBTagMasturbating)
-		Me.TabPage34.Controls.Add(Me.CBTagFeet)
-		Me.TabPage34.Controls.Add(Me.CBTagBoobs)
-		Me.TabPage34.Controls.Add(Me.CBTagAss)
-		Me.TabPage34.Controls.Add(Me.CBTagPussy)
-		Me.TabPage34.Controls.Add(Me.BTNTagSave)
-		Me.TabPage34.Controls.Add(Me.BTNTagDir)
-		Me.TabPage34.Controls.Add(Me.ImageTagPictureBox)
-		Me.TabPage34.Controls.Add(Me.CBTagFace)
-		Me.TabPage34.Location = New System.Drawing.Point(4, 22)
-		Me.TabPage34.Name = "TabPage34"
-		Me.TabPage34.Padding = New System.Windows.Forms.Padding(3)
-		Me.TabPage34.Size = New System.Drawing.Size(700, 411)
-		Me.TabPage34.TabIndex = 0
-		Me.TabPage34.Text = "Domme Tags"
-		'
-		'CBTagSeeThrough
-		'
-		Me.CBTagSeeThrough.AutoSize = True
-		Me.CBTagSeeThrough.Enabled = False
-		Me.CBTagSeeThrough.Location = New System.Drawing.Point(577, 117)
-		Me.CBTagSeeThrough.Name = "CBTagSeeThrough"
-		Me.CBTagSeeThrough.Size = New System.Drawing.Size(87, 17)
-		Me.CBTagSeeThrough.TabIndex = 226
-		Me.CBTagSeeThrough.Text = "See Through"
-		Me.CBTagSeeThrough.UseVisualStyleBackColor = True
-		'
-		'CBTagAllFours
-		'
-		Me.CBTagAllFours.AutoSize = True
-		Me.CBTagAllFours.Enabled = False
-		Me.CBTagAllFours.ForeColor = System.Drawing.Color.Black
-		Me.CBTagAllFours.Location = New System.Drawing.Point(577, 207)
-		Me.CBTagAllFours.Name = "CBTagAllFours"
-		Me.CBTagAllFours.Size = New System.Drawing.Size(66, 17)
-		Me.CBTagAllFours.TabIndex = 225
-		Me.CBTagAllFours.Text = "All Fours"
-		Me.CBTagAllFours.UseVisualStyleBackColor = True
-		'
-		'CBTagGlaring
-		'
-		Me.CBTagGlaring.AutoSize = True
-		Me.CBTagGlaring.Enabled = False
-		Me.CBTagGlaring.ForeColor = System.Drawing.Color.Black
-		Me.CBTagGlaring.Location = New System.Drawing.Point(484, 227)
-		Me.CBTagGlaring.Name = "CBTagGlaring"
-		Me.CBTagGlaring.Size = New System.Drawing.Size(59, 17)
-		Me.CBTagGlaring.TabIndex = 224
-		Me.CBTagGlaring.Text = "Glaring"
-		Me.CBTagGlaring.UseVisualStyleBackColor = True
-		'
-		'CBTagSmiling
-		'
-		Me.CBTagSmiling.AutoSize = True
-		Me.CBTagSmiling.Enabled = False
-		Me.CBTagSmiling.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSmiling.Location = New System.Drawing.Point(484, 207)
-		Me.CBTagSmiling.Name = "CBTagSmiling"
-		Me.CBTagSmiling.Size = New System.Drawing.Size(59, 17)
-		Me.CBTagSmiling.TabIndex = 223
-		Me.CBTagSmiling.Text = "Smiling"
-		Me.CBTagSmiling.UseVisualStyleBackColor = True
-		'
-		'TBTagDir
-		'
-		Me.TBTagDir.Location = New System.Drawing.Point(55, 9)
-		Me.TBTagDir.Name = "TBTagDir"
-		Me.TBTagDir.Size = New System.Drawing.Size(330, 20)
-		Me.TBTagDir.TabIndex = 222
-		Me.TBTagDir.Text = "Enter Image Directory"
-		'
-		'CBTagPiercing
-		'
-		Me.CBTagPiercing.AutoSize = True
-		Me.CBTagPiercing.Enabled = False
-		Me.CBTagPiercing.ForeColor = System.Drawing.Color.Black
-		Me.CBTagPiercing.Location = New System.Drawing.Point(577, 227)
-		Me.CBTagPiercing.Name = "CBTagPiercing"
-		Me.CBTagPiercing.Size = New System.Drawing.Size(64, 17)
-		Me.CBTagPiercing.TabIndex = 221
-		Me.CBTagPiercing.Text = "Piercing"
-		Me.CBTagPiercing.UseVisualStyleBackColor = True
-		'
-		'CBTagLegs
-		'
-		Me.CBTagLegs.AutoSize = True
-		Me.CBTagLegs.Enabled = False
-		Me.CBTagLegs.ForeColor = System.Drawing.Color.Black
-		Me.CBTagLegs.Location = New System.Drawing.Point(484, 117)
-		Me.CBTagLegs.Name = "CBTagLegs"
-		Me.CBTagLegs.Size = New System.Drawing.Size(49, 17)
-		Me.CBTagLegs.TabIndex = 220
-		Me.CBTagLegs.Text = "Legs"
-		Me.CBTagLegs.UseVisualStyleBackColor = True
-		'
-		'TBTagFurniture
-		'
-		Me.TBTagFurniture.Enabled = False
-		Me.TBTagFurniture.Location = New System.Drawing.Point(559, 370)
-		Me.TBTagFurniture.Name = "TBTagFurniture"
-		Me.TBTagFurniture.Size = New System.Drawing.Size(108, 20)
-		Me.TBTagFurniture.TabIndex = 219
-		'
-		'CBTagFurniture
-		'
-		Me.CBTagFurniture.AutoSize = True
-		Me.CBTagFurniture.Enabled = False
-		Me.CBTagFurniture.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFurniture.Location = New System.Drawing.Point(476, 372)
-		Me.CBTagFurniture.Name = "CBTagFurniture"
-		Me.CBTagFurniture.Size = New System.Drawing.Size(67, 17)
-		Me.CBTagFurniture.TabIndex = 218
-		Me.CBTagFurniture.Text = "Furniture"
-		Me.CBTagFurniture.UseVisualStyleBackColor = True
-		'
-		'TBTagSexToy
-		'
-		Me.TBTagSexToy.Enabled = False
-		Me.TBTagSexToy.Location = New System.Drawing.Point(560, 346)
-		Me.TBTagSexToy.Name = "TBTagSexToy"
-		Me.TBTagSexToy.Size = New System.Drawing.Size(108, 20)
-		Me.TBTagSexToy.TabIndex = 217
-		'
-		'CBTagSexToy
-		'
-		Me.CBTagSexToy.AutoSize = True
-		Me.CBTagSexToy.Enabled = False
-		Me.CBTagSexToy.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSexToy.Location = New System.Drawing.Point(476, 348)
-		Me.CBTagSexToy.Name = "CBTagSexToy"
-		Me.CBTagSexToy.Size = New System.Drawing.Size(65, 17)
-		Me.CBTagSexToy.TabIndex = 216
-		Me.CBTagSexToy.Text = "Sex Toy"
-		Me.CBTagSexToy.UseVisualStyleBackColor = True
-		'
-		'TBTagTattoo
-		'
-		Me.TBTagTattoo.Enabled = False
-		Me.TBTagTattoo.Location = New System.Drawing.Point(560, 322)
-		Me.TBTagTattoo.Name = "TBTagTattoo"
-		Me.TBTagTattoo.Size = New System.Drawing.Size(108, 20)
-		Me.TBTagTattoo.TabIndex = 215
-		'
-		'CBTagTattoo
-		'
-		Me.CBTagTattoo.AutoSize = True
-		Me.CBTagTattoo.Enabled = False
-		Me.CBTagTattoo.ForeColor = System.Drawing.Color.Black
-		Me.CBTagTattoo.Location = New System.Drawing.Point(476, 324)
-		Me.CBTagTattoo.Name = "CBTagTattoo"
-		Me.CBTagTattoo.Size = New System.Drawing.Size(57, 17)
-		Me.CBTagTattoo.TabIndex = 214
-		Me.CBTagTattoo.Text = "Tattoo"
-		Me.CBTagTattoo.UseVisualStyleBackColor = True
-		'
-		'TBTagUnderwear
-		'
-		Me.TBTagUnderwear.Enabled = False
-		Me.TBTagUnderwear.Location = New System.Drawing.Point(560, 298)
-		Me.TBTagUnderwear.Name = "TBTagUnderwear"
-		Me.TBTagUnderwear.Size = New System.Drawing.Size(108, 20)
-		Me.TBTagUnderwear.TabIndex = 213
-		'
-		'CBTagUnderwear
-		'
-		Me.CBTagUnderwear.AutoSize = True
-		Me.CBTagUnderwear.Enabled = False
-		Me.CBTagUnderwear.ForeColor = System.Drawing.Color.Black
-		Me.CBTagUnderwear.Location = New System.Drawing.Point(476, 300)
-		Me.CBTagUnderwear.Name = "CBTagUnderwear"
-		Me.CBTagUnderwear.Size = New System.Drawing.Size(78, 17)
-		Me.CBTagUnderwear.TabIndex = 212
-		Me.CBTagUnderwear.Text = "Underwear"
-		Me.CBTagUnderwear.UseVisualStyleBackColor = True
-		'
-		'TBTagGarment
-		'
-		Me.TBTagGarment.Enabled = False
-		Me.TBTagGarment.Location = New System.Drawing.Point(560, 274)
-		Me.TBTagGarment.Name = "TBTagGarment"
-		Me.TBTagGarment.Size = New System.Drawing.Size(108, 20)
-		Me.TBTagGarment.TabIndex = 211
-		'
-		'CBTagGarment
-		'
-		Me.CBTagGarment.AutoSize = True
-		Me.CBTagGarment.Enabled = False
-		Me.CBTagGarment.ForeColor = System.Drawing.Color.Black
-		Me.CBTagGarment.Location = New System.Drawing.Point(476, 276)
-		Me.CBTagGarment.Name = "CBTagGarment"
-		Me.CBTagGarment.Size = New System.Drawing.Size(66, 17)
-		Me.CBTagGarment.TabIndex = 210
-		Me.CBTagGarment.Text = "Garment"
-		Me.CBTagGarment.UseVisualStyleBackColor = True
-		'
-		'Label72
-		'
-		Me.Label72.BackColor = System.Drawing.Color.Transparent
-		Me.Label72.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Label72.ForeColor = System.Drawing.Color.Black
-		Me.Label72.Location = New System.Drawing.Point(5, 368)
-		Me.Label72.Name = "Label72"
-		Me.Label72.Size = New System.Drawing.Size(451, 35)
-		Me.Label72.TabIndex = 189
-		Me.Label72.Text = "Open a directory containing images. Check all tags that apply to each image displ" &
-	"ayed, and enter one-word tag descriptions in the text fields when appropriate. (" &
-	"e.g. Garment: dress)"
-		Me.Label72.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-		'
-		'CBTagHandsCovering
-		'
-		Me.CBTagHandsCovering.AutoSize = True
-		Me.CBTagHandsCovering.Enabled = False
-		Me.CBTagHandsCovering.Location = New System.Drawing.Point(577, 97)
-		Me.CBTagHandsCovering.Name = "CBTagHandsCovering"
-		Me.CBTagHandsCovering.Size = New System.Drawing.Size(101, 17)
-		Me.CBTagHandsCovering.TabIndex = 209
-		Me.CBTagHandsCovering.Text = "Hands Covering"
-		Me.CBTagHandsCovering.UseVisualStyleBackColor = True
-		'
-		'CBTagGarmentCovering
-		'
-		Me.CBTagGarmentCovering.AutoSize = True
-		Me.CBTagGarmentCovering.Enabled = False
-		Me.CBTagGarmentCovering.Location = New System.Drawing.Point(577, 77)
-		Me.CBTagGarmentCovering.Name = "CBTagGarmentCovering"
-		Me.CBTagGarmentCovering.Size = New System.Drawing.Size(110, 17)
-		Me.CBTagGarmentCovering.TabIndex = 208
-		Me.CBTagGarmentCovering.Text = "Garment Covering"
-		Me.CBTagGarmentCovering.UseVisualStyleBackColor = True
-		'
-		'CBTagCloseUp
-		'
-		Me.CBTagCloseUp.AutoSize = True
-		Me.CBTagCloseUp.Enabled = False
-		Me.CBTagCloseUp.ForeColor = System.Drawing.Color.Black
-		Me.CBTagCloseUp.Location = New System.Drawing.Point(577, 187)
-		Me.CBTagCloseUp.Name = "CBTagCloseUp"
-		Me.CBTagCloseUp.Size = New System.Drawing.Size(69, 17)
-		Me.CBTagCloseUp.TabIndex = 205
-		Me.CBTagCloseUp.Text = "Close Up"
-		Me.CBTagCloseUp.UseVisualStyleBackColor = True
-		'
-		'CBTagNaked
-		'
-		Me.CBTagNaked.AutoSize = True
-		Me.CBTagNaked.Enabled = False
-		Me.CBTagNaked.Location = New System.Drawing.Point(577, 136)
-		Me.CBTagNaked.Name = "CBTagNaked"
-		Me.CBTagNaked.Size = New System.Drawing.Size(57, 17)
-		Me.CBTagNaked.TabIndex = 199
-		Me.CBTagNaked.Text = "Naked"
-		Me.CBTagNaked.UseVisualStyleBackColor = True
-		'
-		'CBTagSideView
-		'
-		Me.CBTagSideView.AutoSize = True
-		Me.CBTagSideView.Enabled = False
-		Me.CBTagSideView.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSideView.Location = New System.Drawing.Point(577, 167)
-		Me.CBTagSideView.Name = "CBTagSideView"
-		Me.CBTagSideView.Size = New System.Drawing.Size(73, 17)
-		Me.CBTagSideView.TabIndex = 204
-		Me.CBTagSideView.Text = "Side View"
-		Me.CBTagSideView.UseVisualStyleBackColor = True
-		'
-		'BTNTagPrevious
-		'
-		Me.BTNTagPrevious.BackColor = System.Drawing.Color.LightGray
-		Me.BTNTagPrevious.Enabled = False
-		Me.BTNTagPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.BTNTagPrevious.ForeColor = System.Drawing.Color.Black
-		Me.BTNTagPrevious.Location = New System.Drawing.Point(391, 8)
-		Me.BTNTagPrevious.Name = "BTNTagPrevious"
-		Me.BTNTagPrevious.Size = New System.Drawing.Size(47, 24)
-		Me.BTNTagPrevious.TabIndex = 207
-		Me.BTNTagPrevious.Text = "<<"
-		Me.BTNTagPrevious.UseVisualStyleBackColor = False
-		'
-		'CBTagHalfDressed
-		'
-		Me.CBTagHalfDressed.AutoSize = True
-		Me.CBTagHalfDressed.Enabled = False
-		Me.CBTagHalfDressed.Location = New System.Drawing.Point(577, 57)
-		Me.CBTagHalfDressed.Name = "CBTagHalfDressed"
-		Me.CBTagHalfDressed.Size = New System.Drawing.Size(86, 17)
-		Me.CBTagHalfDressed.TabIndex = 198
-		Me.CBTagHalfDressed.Text = "Half Dressed"
-		Me.CBTagHalfDressed.UseVisualStyleBackColor = True
-		'
-		'BTNTagNext
-		'
-		Me.BTNTagNext.BackColor = System.Drawing.Color.LightGray
-		Me.BTNTagNext.Enabled = False
-		Me.BTNTagNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.BTNTagNext.ForeColor = System.Drawing.Color.Black
-		Me.BTNTagNext.Location = New System.Drawing.Point(560, 8)
-		Me.BTNTagNext.Name = "BTNTagNext"
-		Me.BTNTagNext.Size = New System.Drawing.Size(47, 24)
-		Me.BTNTagNext.TabIndex = 206
-		Me.BTNTagNext.Text = ">>"
-		Me.BTNTagNext.UseVisualStyleBackColor = False
-		'
-		'CBTagFullyDressed
-		'
-		Me.CBTagFullyDressed.AutoSize = True
-		Me.CBTagFullyDressed.Enabled = False
-		Me.CBTagFullyDressed.Location = New System.Drawing.Point(577, 37)
-		Me.CBTagFullyDressed.Name = "CBTagFullyDressed"
-		Me.CBTagFullyDressed.Size = New System.Drawing.Size(88, 17)
-		Me.CBTagFullyDressed.TabIndex = 197
-		Me.CBTagFullyDressed.Text = "Fully Dressed"
-		Me.CBTagFullyDressed.UseVisualStyleBackColor = True
-		'
-		'LBLTagCount
-		'
-		Me.LBLTagCount.BackColor = System.Drawing.Color.Transparent
-		Me.LBLTagCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLTagCount.Enabled = False
-		Me.LBLTagCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLTagCount.ForeColor = System.Drawing.Color.Black
-		Me.LBLTagCount.Location = New System.Drawing.Point(444, 10)
-		Me.LBLTagCount.Name = "LBLTagCount"
-		Me.LBLTagCount.Size = New System.Drawing.Size(110, 20)
-		Me.LBLTagCount.TabIndex = 203
-		Me.LBLTagCount.Text = "0/0"
-		Me.LBLTagCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'CBTagSucking
-		'
-		Me.CBTagSucking.AutoSize = True
-		Me.CBTagSucking.Enabled = False
-		Me.CBTagSucking.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSucking.Location = New System.Drawing.Point(484, 187)
-		Me.CBTagSucking.Name = "CBTagSucking"
-		Me.CBTagSucking.Size = New System.Drawing.Size(65, 17)
-		Me.CBTagSucking.TabIndex = 202
-		Me.CBTagSucking.Text = "Sucking"
-		Me.CBTagSucking.UseVisualStyleBackColor = True
-		'
-		'CBTagMasturbating
-		'
-		Me.CBTagMasturbating.AutoSize = True
-		Me.CBTagMasturbating.Enabled = False
-		Me.CBTagMasturbating.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMasturbating.Location = New System.Drawing.Point(484, 167)
-		Me.CBTagMasturbating.Name = "CBTagMasturbating"
-		Me.CBTagMasturbating.Size = New System.Drawing.Size(87, 17)
-		Me.CBTagMasturbating.TabIndex = 201
-		Me.CBTagMasturbating.Text = "Masturbating"
-		Me.CBTagMasturbating.UseVisualStyleBackColor = True
-		'
-		'CBTagFeet
-		'
-		Me.CBTagFeet.AutoSize = True
-		Me.CBTagFeet.Enabled = False
-		Me.CBTagFeet.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFeet.Location = New System.Drawing.Point(484, 137)
-		Me.CBTagFeet.Name = "CBTagFeet"
-		Me.CBTagFeet.Size = New System.Drawing.Size(47, 17)
-		Me.CBTagFeet.TabIndex = 200
-		Me.CBTagFeet.Text = "Feet"
-		Me.CBTagFeet.UseVisualStyleBackColor = True
-		'
-		'CBTagBoobs
-		'
-		Me.CBTagBoobs.AutoSize = True
-		Me.CBTagBoobs.Enabled = False
-		Me.CBTagBoobs.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBoobs.Location = New System.Drawing.Point(484, 57)
-		Me.CBTagBoobs.Name = "CBTagBoobs"
-		Me.CBTagBoobs.Size = New System.Drawing.Size(56, 17)
-		Me.CBTagBoobs.TabIndex = 196
-		Me.CBTagBoobs.Text = "Boobs"
-		Me.CBTagBoobs.UseVisualStyleBackColor = True
-		'
-		'CBTagAss
-		'
-		Me.CBTagAss.AutoSize = True
-		Me.CBTagAss.Enabled = False
-		Me.CBTagAss.ForeColor = System.Drawing.Color.Black
-		Me.CBTagAss.Location = New System.Drawing.Point(484, 97)
-		Me.CBTagAss.Name = "CBTagAss"
-		Me.CBTagAss.Size = New System.Drawing.Size(43, 17)
-		Me.CBTagAss.TabIndex = 195
-		Me.CBTagAss.Text = "Ass"
-		Me.CBTagAss.UseVisualStyleBackColor = True
-		'
-		'CBTagPussy
-		'
-		Me.CBTagPussy.AutoSize = True
-		Me.CBTagPussy.Enabled = False
-		Me.CBTagPussy.ForeColor = System.Drawing.Color.Black
-		Me.CBTagPussy.Location = New System.Drawing.Point(484, 77)
-		Me.CBTagPussy.Name = "CBTagPussy"
-		Me.CBTagPussy.Size = New System.Drawing.Size(54, 17)
-		Me.CBTagPussy.TabIndex = 194
-		Me.CBTagPussy.Text = "Pussy"
-		Me.CBTagPussy.UseVisualStyleBackColor = True
-		'
-		'BTNTagSave
-		'
-		Me.BTNTagSave.Enabled = False
-		Me.BTNTagSave.Location = New System.Drawing.Point(613, 9)
-		Me.BTNTagSave.Name = "BTNTagSave"
-		Me.BTNTagSave.Size = New System.Drawing.Size(83, 23)
-		Me.BTNTagSave.TabIndex = 193
-		Me.BTNTagSave.Text = "Finished"
-		Me.BTNTagSave.UseVisualStyleBackColor = True
-		'
-		'BTNTagDir
-		'
-		Me.BTNTagDir.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-		Me.BTNTagDir.Location = New System.Drawing.Point(6, 8)
-		Me.BTNTagDir.Name = "BTNTagDir"
-		Me.BTNTagDir.Size = New System.Drawing.Size(43, 23)
-		Me.BTNTagDir.TabIndex = 192
-		Me.BTNTagDir.Text = "1"
-		Me.BTNTagDir.UseVisualStyleBackColor = True
-		'
-		'ImageTagPictureBox
-		'
-		Me.ImageTagPictureBox.BackColor = System.Drawing.Color.Black
-		Me.ImageTagPictureBox.Location = New System.Drawing.Point(5, 37)
-		Me.ImageTagPictureBox.Name = "ImageTagPictureBox"
-		Me.ImageTagPictureBox.Size = New System.Drawing.Size(451, 328)
-		Me.ImageTagPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-		Me.ImageTagPictureBox.TabIndex = 191
-		Me.ImageTagPictureBox.TabStop = False
-		'
-		'CBTagFace
-		'
-		Me.CBTagFace.AutoSize = True
-		Me.CBTagFace.Enabled = False
-		Me.CBTagFace.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFace.Location = New System.Drawing.Point(484, 37)
-		Me.CBTagFace.Name = "CBTagFace"
-		Me.CBTagFace.Size = New System.Drawing.Size(50, 17)
-		Me.CBTagFace.TabIndex = 190
-		Me.CBTagFace.Text = "Face"
-		Me.CBTagFace.UseVisualStyleBackColor = True
-		'
-		'TabPage35
-		'
-		Me.TabPage35.BackColor = System.Drawing.Color.LightGray
-		Me.TabPage35.Controls.Add(Me.GroupBox55)
-		Me.TabPage35.Controls.Add(Me.GroupBox53)
-		Me.TabPage35.Controls.Add(Me.GroupBox49)
-		Me.TabPage35.Controls.Add(Me.GroupBox46)
-		Me.TabPage35.Controls.Add(Me.GroupBox54)
-		Me.TabPage35.Controls.Add(Me.GroupBox51)
-		Me.TabPage35.Controls.Add(Me.GroupBox50)
-		Me.TabPage35.Controls.Add(Me.GroupBox48)
-		Me.TabPage35.Controls.Add(Me.TBLocalTagDir)
-		Me.TabPage35.Controls.Add(Me.BTNLocalTagPrevious)
-		Me.TabPage35.Controls.Add(Me.BTNLocalTagNext)
-		Me.TabPage35.Controls.Add(Me.LBLLocalTagCount)
-		Me.TabPage35.Controls.Add(Me.BTNLocalTagSave)
-		Me.TabPage35.Controls.Add(Me.BTNLocalTagDir)
-		Me.TabPage35.Location = New System.Drawing.Point(4, 22)
-		Me.TabPage35.Name = "TabPage35"
-		Me.TabPage35.Padding = New System.Windows.Forms.Padding(3)
-		Me.TabPage35.Size = New System.Drawing.Size(700, 411)
-		Me.TabPage35.TabIndex = 1
-		Me.TabPage35.Text = "Local Tags"
-		'
-		'GroupBox55
-		'
-		Me.GroupBox55.Controls.Add(Me.CBTagNurse)
-		Me.GroupBox55.Controls.Add(Me.CBTagSchoolgirl)
-		Me.GroupBox55.Controls.Add(Me.CBTagMaid)
-		Me.GroupBox55.Controls.Add(Me.CBTagTeacher)
-		Me.GroupBox55.Controls.Add(Me.CBTagSuperhero)
-		Me.GroupBox55.Location = New System.Drawing.Point(341, 277)
-		Me.GroupBox55.Name = "GroupBox55"
-		Me.GroupBox55.Size = New System.Drawing.Size(103, 118)
-		Me.GroupBox55.TabIndex = 241
-		Me.GroupBox55.TabStop = False
-		Me.GroupBox55.Text = "Outfit"
-		'
-		'CBTagNurse
-		'
-		Me.CBTagNurse.AutoSize = True
-		Me.CBTagNurse.Enabled = False
-		Me.CBTagNurse.ForeColor = System.Drawing.Color.Black
-		Me.CBTagNurse.Location = New System.Drawing.Point(15, 17)
-		Me.CBTagNurse.Name = "CBTagNurse"
-		Me.CBTagNurse.Size = New System.Drawing.Size(54, 17)
-		Me.CBTagNurse.TabIndex = 203
-		Me.CBTagNurse.Text = "Nurse"
-		Me.CBTagNurse.UseVisualStyleBackColor = True
-		'
-		'CBTagSchoolgirl
-		'
-		Me.CBTagSchoolgirl.AutoSize = True
-		Me.CBTagSchoolgirl.Enabled = False
-		Me.CBTagSchoolgirl.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSchoolgirl.Location = New System.Drawing.Point(15, 57)
-		Me.CBTagSchoolgirl.Name = "CBTagSchoolgirl"
-		Me.CBTagSchoolgirl.Size = New System.Drawing.Size(72, 17)
-		Me.CBTagSchoolgirl.TabIndex = 204
-		Me.CBTagSchoolgirl.Text = "Schoolgirl"
-		Me.CBTagSchoolgirl.UseVisualStyleBackColor = True
-		'
-		'CBTagMaid
-		'
-		Me.CBTagMaid.AutoSize = True
-		Me.CBTagMaid.Enabled = False
-		Me.CBTagMaid.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMaid.Location = New System.Drawing.Point(15, 77)
-		Me.CBTagMaid.Name = "CBTagMaid"
-		Me.CBTagMaid.Size = New System.Drawing.Size(49, 17)
-		Me.CBTagMaid.TabIndex = 205
-		Me.CBTagMaid.Text = "Maid"
-		Me.CBTagMaid.UseVisualStyleBackColor = True
-		'
-		'CBTagTeacher
-		'
-		Me.CBTagTeacher.AutoSize = True
-		Me.CBTagTeacher.Enabled = False
-		Me.CBTagTeacher.ForeColor = System.Drawing.Color.Black
-		Me.CBTagTeacher.Location = New System.Drawing.Point(15, 37)
-		Me.CBTagTeacher.Name = "CBTagTeacher"
-		Me.CBTagTeacher.Size = New System.Drawing.Size(66, 17)
-		Me.CBTagTeacher.TabIndex = 206
-		Me.CBTagTeacher.Text = "Teacher"
-		Me.CBTagTeacher.UseVisualStyleBackColor = True
-		'
-		'CBTagSuperhero
-		'
-		Me.CBTagSuperhero.AutoSize = True
-		Me.CBTagSuperhero.Enabled = False
-		Me.CBTagSuperhero.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSuperhero.Location = New System.Drawing.Point(15, 97)
-		Me.CBTagSuperhero.Name = "CBTagSuperhero"
-		Me.CBTagSuperhero.Size = New System.Drawing.Size(75, 17)
-		Me.CBTagSuperhero.TabIndex = 213
-		Me.CBTagSuperhero.Text = "Superhero"
-		Me.CBTagSuperhero.UseVisualStyleBackColor = True
-		'
-		'GroupBox53
-		'
-		Me.GroupBox53.Controls.Add(Me.CBTagTrap)
-		Me.GroupBox53.Controls.Add(Me.CBTagTentacles)
-		Me.GroupBox53.Controls.Add(Me.CBTagMonsterGirl)
-		Me.GroupBox53.Controls.Add(Me.CBTagBukkake)
-		Me.GroupBox53.Controls.Add(Me.CBTagGanguro)
-		Me.GroupBox53.Controls.Add(Me.CBTagBodyWriting)
-		Me.GroupBox53.Controls.Add(Me.CBTagMahouShoujo)
-		Me.GroupBox53.Controls.Add(Me.CBTagBakunyuu)
-		Me.GroupBox53.Controls.Add(Me.CBTagAhegao)
-		Me.GroupBox53.Controls.Add(Me.CBTagShibari)
-		Me.GroupBox53.Location = New System.Drawing.Point(450, 277)
-		Me.GroupBox53.Name = "GroupBox53"
-		Me.GroupBox53.Size = New System.Drawing.Size(246, 118)
-		Me.GroupBox53.TabIndex = 240
-		Me.GroupBox53.TabStop = False
-		Me.GroupBox53.Text = "Hentai/JAV Themes"
-		'
-		'CBTagTrap
-		'
-		Me.CBTagTrap.AutoSize = True
-		Me.CBTagTrap.Enabled = False
-		Me.CBTagTrap.ForeColor = System.Drawing.Color.Black
-		Me.CBTagTrap.Location = New System.Drawing.Point(126, 37)
-		Me.CBTagTrap.Name = "CBTagTrap"
-		Me.CBTagTrap.Size = New System.Drawing.Size(48, 17)
-		Me.CBTagTrap.TabIndex = 226
-		Me.CBTagTrap.Text = "Trap"
-		Me.CBTagTrap.UseVisualStyleBackColor = True
-		'
-		'CBTagTentacles
-		'
-		Me.CBTagTentacles.AutoSize = True
-		Me.CBTagTentacles.Enabled = False
-		Me.CBTagTentacles.ForeColor = System.Drawing.Color.Black
-		Me.CBTagTentacles.Location = New System.Drawing.Point(15, 37)
-		Me.CBTagTentacles.Name = "CBTagTentacles"
-		Me.CBTagTentacles.Size = New System.Drawing.Size(73, 17)
-		Me.CBTagTentacles.TabIndex = 204
-		Me.CBTagTentacles.Text = "Tentacles"
-		Me.CBTagTentacles.UseVisualStyleBackColor = True
-		'
-		'CBTagMonsterGirl
-		'
-		Me.CBTagMonsterGirl.AutoSize = True
-		Me.CBTagMonsterGirl.Enabled = False
-		Me.CBTagMonsterGirl.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMonsterGirl.Location = New System.Drawing.Point(126, 97)
-		Me.CBTagMonsterGirl.Name = "CBTagMonsterGirl"
-		Me.CBTagMonsterGirl.Size = New System.Drawing.Size(82, 17)
-		Me.CBTagMonsterGirl.TabIndex = 214
-		Me.CBTagMonsterGirl.Text = "Monster Girl"
-		Me.CBTagMonsterGirl.UseVisualStyleBackColor = True
-		'
-		'CBTagBukkake
-		'
-		Me.CBTagBukkake.AutoSize = True
-		Me.CBTagBukkake.Enabled = False
-		Me.CBTagBukkake.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBukkake.Location = New System.Drawing.Point(15, 57)
-		Me.CBTagBukkake.Name = "CBTagBukkake"
-		Me.CBTagBukkake.Size = New System.Drawing.Size(69, 17)
-		Me.CBTagBukkake.TabIndex = 210
-		Me.CBTagBukkake.Text = "Bukkake"
-		Me.CBTagBukkake.UseVisualStyleBackColor = True
-		'
-		'CBTagGanguro
-		'
-		Me.CBTagGanguro.AutoSize = True
-		Me.CBTagGanguro.Enabled = False
-		Me.CBTagGanguro.ForeColor = System.Drawing.Color.Black
-		Me.CBTagGanguro.Location = New System.Drawing.Point(126, 57)
-		Me.CBTagGanguro.Name = "CBTagGanguro"
-		Me.CBTagGanguro.Size = New System.Drawing.Size(67, 17)
-		Me.CBTagGanguro.TabIndex = 205
-		Me.CBTagGanguro.Text = "Ganguro"
-		Me.CBTagGanguro.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyWriting
-		'
-		Me.CBTagBodyWriting.AutoSize = True
-		Me.CBTagBodyWriting.Enabled = False
-		Me.CBTagBodyWriting.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyWriting.Location = New System.Drawing.Point(126, 17)
-		Me.CBTagBodyWriting.Name = "CBTagBodyWriting"
-		Me.CBTagBodyWriting.Size = New System.Drawing.Size(86, 17)
-		Me.CBTagBodyWriting.TabIndex = 208
-		Me.CBTagBodyWriting.Text = "Body Writing"
-		Me.CBTagBodyWriting.UseVisualStyleBackColor = True
-		'
-		'CBTagMahouShoujo
-		'
-		Me.CBTagMahouShoujo.AutoSize = True
-		Me.CBTagMahouShoujo.Enabled = False
-		Me.CBTagMahouShoujo.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMahouShoujo.Location = New System.Drawing.Point(126, 77)
-		Me.CBTagMahouShoujo.Name = "CBTagMahouShoujo"
-		Me.CBTagMahouShoujo.Size = New System.Drawing.Size(95, 17)
-		Me.CBTagMahouShoujo.TabIndex = 209
-		Me.CBTagMahouShoujo.Text = "Mahou Shoujo"
-		Me.CBTagMahouShoujo.UseVisualStyleBackColor = True
-		'
-		'CBTagBakunyuu
-		'
-		Me.CBTagBakunyuu.AutoSize = True
-		Me.CBTagBakunyuu.Enabled = False
-		Me.CBTagBakunyuu.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBakunyuu.Location = New System.Drawing.Point(15, 77)
-		Me.CBTagBakunyuu.Name = "CBTagBakunyuu"
-		Me.CBTagBakunyuu.Size = New System.Drawing.Size(74, 17)
-		Me.CBTagBakunyuu.TabIndex = 213
-		Me.CBTagBakunyuu.Text = "Bakunyuu"
-		Me.CBTagBakunyuu.UseVisualStyleBackColor = True
-		'
-		'CBTagAhegao
-		'
-		Me.CBTagAhegao.AutoSize = True
-		Me.CBTagAhegao.Enabled = False
-		Me.CBTagAhegao.ForeColor = System.Drawing.Color.Black
-		Me.CBTagAhegao.Location = New System.Drawing.Point(15, 97)
-		Me.CBTagAhegao.Name = "CBTagAhegao"
-		Me.CBTagAhegao.Size = New System.Drawing.Size(63, 17)
-		Me.CBTagAhegao.TabIndex = 207
-		Me.CBTagAhegao.Text = "Ahegao"
-		Me.CBTagAhegao.UseVisualStyleBackColor = True
-		'
-		'CBTagShibari
-		'
-		Me.CBTagShibari.AutoSize = True
-		Me.CBTagShibari.Enabled = False
-		Me.CBTagShibari.ForeColor = System.Drawing.Color.Black
-		Me.CBTagShibari.Location = New System.Drawing.Point(15, 17)
-		Me.CBTagShibari.Name = "CBTagShibari"
-		Me.CBTagShibari.Size = New System.Drawing.Size(58, 17)
-		Me.CBTagShibari.TabIndex = 203
-		Me.CBTagShibari.Text = "Shibari"
-		Me.CBTagShibari.UseVisualStyleBackColor = True
-		'
-		'GroupBox49
-		'
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyMouth)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyAss)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyFace)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyLegs)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyBalls)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyCock)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyFeet)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyNipples)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyPussy)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyTits)
-		Me.GroupBox49.Controls.Add(Me.CBTagBodyFingers)
-		Me.GroupBox49.Location = New System.Drawing.Point(341, 37)
-		Me.GroupBox49.Name = "GroupBox49"
-		Me.GroupBox49.Size = New System.Drawing.Size(103, 238)
-		Me.GroupBox49.TabIndex = 236
-		Me.GroupBox49.TabStop = False
-		Me.GroupBox49.Text = "Body Part"
-		'
-		'CBTagBodyMouth
-		'
-		Me.CBTagBodyMouth.AutoSize = True
-		Me.CBTagBodyMouth.Enabled = False
-		Me.CBTagBodyMouth.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyMouth.Location = New System.Drawing.Point(14, 57)
-		Me.CBTagBodyMouth.Name = "CBTagBodyMouth"
-		Me.CBTagBodyMouth.Size = New System.Drawing.Size(56, 17)
-		Me.CBTagBodyMouth.TabIndex = 220
-		Me.CBTagBodyMouth.Text = "Mouth"
-		Me.CBTagBodyMouth.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyAss
-		'
-		Me.CBTagBodyAss.AutoSize = True
-		Me.CBTagBodyAss.Enabled = False
-		Me.CBTagBodyAss.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyAss.Location = New System.Drawing.Point(15, 137)
-		Me.CBTagBodyAss.Name = "CBTagBodyAss"
-		Me.CBTagBodyAss.Size = New System.Drawing.Size(43, 17)
-		Me.CBTagBodyAss.TabIndex = 219
-		Me.CBTagBodyAss.Text = "Ass"
-		Me.CBTagBodyAss.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyFace
-		'
-		Me.CBTagBodyFace.AutoSize = True
-		Me.CBTagBodyFace.Enabled = False
-		Me.CBTagBodyFace.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyFace.Location = New System.Drawing.Point(15, 17)
-		Me.CBTagBodyFace.Name = "CBTagBodyFace"
-		Me.CBTagBodyFace.Size = New System.Drawing.Size(50, 17)
-		Me.CBTagBodyFace.TabIndex = 203
-		Me.CBTagBodyFace.Text = "Face"
-		Me.CBTagBodyFace.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyLegs
-		'
-		Me.CBTagBodyLegs.AutoSize = True
-		Me.CBTagBodyLegs.Enabled = False
-		Me.CBTagBodyLegs.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyLegs.Location = New System.Drawing.Point(15, 157)
-		Me.CBTagBodyLegs.Name = "CBTagBodyLegs"
-		Me.CBTagBodyLegs.Size = New System.Drawing.Size(49, 17)
-		Me.CBTagBodyLegs.TabIndex = 218
-		Me.CBTagBodyLegs.Text = "Legs"
-		Me.CBTagBodyLegs.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyBalls
-		'
-		Me.CBTagBodyBalls.AutoSize = True
-		Me.CBTagBodyBalls.Enabled = False
-		Me.CBTagBodyBalls.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyBalls.Location = New System.Drawing.Point(15, 217)
-		Me.CBTagBodyBalls.Name = "CBTagBodyBalls"
-		Me.CBTagBodyBalls.Size = New System.Drawing.Size(48, 17)
-		Me.CBTagBodyBalls.TabIndex = 217
-		Me.CBTagBodyBalls.Text = "Balls"
-		Me.CBTagBodyBalls.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyCock
-		'
-		Me.CBTagBodyCock.AutoSize = True
-		Me.CBTagBodyCock.Enabled = False
-		Me.CBTagBodyCock.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyCock.Location = New System.Drawing.Point(15, 197)
-		Me.CBTagBodyCock.Name = "CBTagBodyCock"
-		Me.CBTagBodyCock.Size = New System.Drawing.Size(51, 17)
-		Me.CBTagBodyCock.TabIndex = 216
-		Me.CBTagBodyCock.Text = "Cock"
-		Me.CBTagBodyCock.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyFeet
-		'
-		Me.CBTagBodyFeet.AutoSize = True
-		Me.CBTagBodyFeet.Enabled = False
-		Me.CBTagBodyFeet.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyFeet.Location = New System.Drawing.Point(15, 177)
-		Me.CBTagBodyFeet.Name = "CBTagBodyFeet"
-		Me.CBTagBodyFeet.Size = New System.Drawing.Size(47, 17)
-		Me.CBTagBodyFeet.TabIndex = 215
-		Me.CBTagBodyFeet.Text = "Feet"
-		Me.CBTagBodyFeet.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyNipples
-		'
-		Me.CBTagBodyNipples.AutoSize = True
-		Me.CBTagBodyNipples.Enabled = False
-		Me.CBTagBodyNipples.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyNipples.Location = New System.Drawing.Point(15, 97)
-		Me.CBTagBodyNipples.Name = "CBTagBodyNipples"
-		Me.CBTagBodyNipples.Size = New System.Drawing.Size(61, 17)
-		Me.CBTagBodyNipples.TabIndex = 207
-		Me.CBTagBodyNipples.Text = "Nipples"
-		Me.CBTagBodyNipples.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyPussy
-		'
-		Me.CBTagBodyPussy.AutoSize = True
-		Me.CBTagBodyPussy.Enabled = False
-		Me.CBTagBodyPussy.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyPussy.Location = New System.Drawing.Point(15, 117)
-		Me.CBTagBodyPussy.Name = "CBTagBodyPussy"
-		Me.CBTagBodyPussy.Size = New System.Drawing.Size(54, 17)
-		Me.CBTagBodyPussy.TabIndex = 209
-		Me.CBTagBodyPussy.Text = "Pussy"
-		Me.CBTagBodyPussy.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyTits
-		'
-		Me.CBTagBodyTits.AutoSize = True
-		Me.CBTagBodyTits.Enabled = False
-		Me.CBTagBodyTits.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyTits.Location = New System.Drawing.Point(15, 77)
-		Me.CBTagBodyTits.Name = "CBTagBodyTits"
-		Me.CBTagBodyTits.Size = New System.Drawing.Size(43, 17)
-		Me.CBTagBodyTits.TabIndex = 213
-		Me.CBTagBodyTits.Text = "Tits"
-		Me.CBTagBodyTits.UseVisualStyleBackColor = True
-		'
-		'CBTagBodyFingers
-		'
-		Me.CBTagBodyFingers.AutoSize = True
-		Me.CBTagBodyFingers.Enabled = False
-		Me.CBTagBodyFingers.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBodyFingers.Location = New System.Drawing.Point(15, 37)
-		Me.CBTagBodyFingers.Name = "CBTagBodyFingers"
-		Me.CBTagBodyFingers.Size = New System.Drawing.Size(60, 17)
-		Me.CBTagBodyFingers.TabIndex = 210
-		Me.CBTagBodyFingers.Text = "Fingers"
-		Me.CBTagBodyFingers.UseVisualStyleBackColor = True
-		'
-		'GroupBox46
-		'
-		Me.GroupBox46.Controls.Add(Me.CBTagMultiSub)
-		Me.GroupBox46.Controls.Add(Me.CBTagMultiDom)
-		Me.GroupBox46.Controls.Add(Me.CBTagFemdom)
-		Me.GroupBox46.Controls.Add(Me.CBTag2M)
-		Me.GroupBox46.Controls.Add(Me.CBTagFutadom)
-		Me.GroupBox46.Controls.Add(Me.CBTagFemsub)
-		Me.GroupBox46.Controls.Add(Me.CBTag2Futa)
-		Me.GroupBox46.Controls.Add(Me.CBTagMaledom)
-		Me.GroupBox46.Controls.Add(Me.CBTag3M)
-		Me.GroupBox46.Controls.Add(Me.CBTagFutasub)
-		Me.GroupBox46.Controls.Add(Me.CBTag3Futa)
-		Me.GroupBox46.Controls.Add(Me.CBTagMalesub)
-		Me.GroupBox46.Controls.Add(Me.CBTag2F)
-		Me.GroupBox46.Controls.Add(Me.CBTag1Futa)
-		Me.GroupBox46.Controls.Add(Me.CBTag1M)
-		Me.GroupBox46.Controls.Add(Me.CBTag1F)
-		Me.GroupBox46.Controls.Add(Me.CBTag3F)
-		Me.GroupBox46.Location = New System.Drawing.Point(230, 37)
-		Me.GroupBox46.Name = "GroupBox46"
-		Me.GroupBox46.Size = New System.Drawing.Size(105, 358)
-		Me.GroupBox46.TabIndex = 234
-		Me.GroupBox46.TabStop = False
-		Me.GroupBox46.Text = "Genders && Roles"
-		'
-		'CBTagMultiSub
-		'
-		Me.CBTagMultiSub.AutoSize = True
-		Me.CBTagMultiSub.Enabled = False
-		Me.CBTagMultiSub.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMultiSub.Location = New System.Drawing.Point(15, 337)
-		Me.CBTagMultiSub.Name = "CBTagMultiSub"
-		Me.CBTagMultiSub.Size = New System.Drawing.Size(70, 17)
-		Me.CBTagMultiSub.TabIndex = 207
-		Me.CBTagMultiSub.Text = "Multi-Sub"
-		Me.CBTagMultiSub.UseVisualStyleBackColor = True
-		'
-		'CBTagMultiDom
-		'
-		Me.CBTagMultiDom.AutoSize = True
-		Me.CBTagMultiDom.Enabled = False
-		Me.CBTagMultiDom.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMultiDom.Location = New System.Drawing.Point(15, 317)
-		Me.CBTagMultiDom.Name = "CBTagMultiDom"
-		Me.CBTagMultiDom.Size = New System.Drawing.Size(73, 17)
-		Me.CBTagMultiDom.TabIndex = 230
-		Me.CBTagMultiDom.Text = "Multi-Dom"
-		Me.CBTagMultiDom.UseVisualStyleBackColor = True
-		'
-		'CBTagFemdom
-		'
-		Me.CBTagFemdom.AutoSize = True
-		Me.CBTagFemdom.Enabled = False
-		Me.CBTagFemdom.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFemdom.Location = New System.Drawing.Point(15, 197)
-		Me.CBTagFemdom.Name = "CBTagFemdom"
-		Me.CBTagFemdom.Size = New System.Drawing.Size(66, 17)
-		Me.CBTagFemdom.TabIndex = 229
-		Me.CBTagFemdom.Text = "Femdom"
-		Me.CBTagFemdom.UseVisualStyleBackColor = True
-		'
-		'CBTag2M
-		'
-		Me.CBTag2M.AutoSize = True
-		Me.CBTag2M.Enabled = False
-		Me.CBTag2M.ForeColor = System.Drawing.Color.Black
-		Me.CBTag2M.Location = New System.Drawing.Point(15, 97)
-		Me.CBTag2M.Name = "CBTag2M"
-		Me.CBTag2M.Size = New System.Drawing.Size(56, 17)
-		Me.CBTag2M.TabIndex = 206
-		Me.CBTag2M.Text = "2 Men"
-		Me.CBTag2M.UseVisualStyleBackColor = True
-		'
-		'CBTagFutadom
-		'
-		Me.CBTagFutadom.AutoSize = True
-		Me.CBTagFutadom.Enabled = False
-		Me.CBTagFutadom.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFutadom.Location = New System.Drawing.Point(15, 237)
-		Me.CBTagFutadom.Name = "CBTagFutadom"
-		Me.CBTagFutadom.Size = New System.Drawing.Size(67, 17)
-		Me.CBTagFutadom.TabIndex = 204
-		Me.CBTagFutadom.Text = "Futadom"
-		Me.CBTagFutadom.UseVisualStyleBackColor = True
-		'
-		'CBTagFemsub
-		'
-		Me.CBTagFemsub.AutoSize = True
-		Me.CBTagFemsub.Enabled = False
-		Me.CBTagFemsub.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFemsub.Location = New System.Drawing.Point(15, 257)
-		Me.CBTagFemsub.Name = "CBTagFemsub"
-		Me.CBTagFemsub.Size = New System.Drawing.Size(63, 17)
-		Me.CBTagFemsub.TabIndex = 205
-		Me.CBTagFemsub.Text = "Femsub"
-		Me.CBTagFemsub.UseVisualStyleBackColor = True
-		'
-		'CBTag2Futa
-		'
-		Me.CBTag2Futa.AutoSize = True
-		Me.CBTag2Futa.Enabled = False
-		Me.CBTag2Futa.ForeColor = System.Drawing.Color.Black
-		Me.CBTag2Futa.Location = New System.Drawing.Point(15, 157)
-		Me.CBTag2Futa.Name = "CBTag2Futa"
-		Me.CBTag2Futa.Size = New System.Drawing.Size(56, 17)
-		Me.CBTag2Futa.TabIndex = 186
-		Me.CBTag2Futa.Text = "2 Futa"
-		Me.CBTag2Futa.UseVisualStyleBackColor = True
-		'
-		'CBTagMaledom
-		'
-		Me.CBTagMaledom.AutoSize = True
-		Me.CBTagMaledom.Enabled = False
-		Me.CBTagMaledom.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMaledom.Location = New System.Drawing.Point(15, 217)
-		Me.CBTagMaledom.Name = "CBTagMaledom"
-		Me.CBTagMaledom.Size = New System.Drawing.Size(69, 17)
-		Me.CBTagMaledom.TabIndex = 206
-		Me.CBTagMaledom.Text = "Maledom"
-		Me.CBTagMaledom.UseVisualStyleBackColor = True
-		'
-		'CBTag3M
-		'
-		Me.CBTag3M.AutoSize = True
-		Me.CBTag3M.Enabled = False
-		Me.CBTag3M.ForeColor = System.Drawing.Color.Black
-		Me.CBTag3M.Location = New System.Drawing.Point(15, 117)
-		Me.CBTag3M.Name = "CBTag3M"
-		Me.CBTag3M.Size = New System.Drawing.Size(56, 17)
-		Me.CBTag3M.TabIndex = 190
-		Me.CBTag3M.Text = "3 Men"
-		Me.CBTag3M.UseVisualStyleBackColor = True
-		'
-		'CBTagFutasub
-		'
-		Me.CBTagFutasub.AutoSize = True
-		Me.CBTagFutasub.Enabled = False
-		Me.CBTagFutasub.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFutasub.Location = New System.Drawing.Point(15, 297)
-		Me.CBTagFutasub.Name = "CBTagFutasub"
-		Me.CBTagFutasub.Size = New System.Drawing.Size(64, 17)
-		Me.CBTagFutasub.TabIndex = 213
-		Me.CBTagFutasub.Text = "Futasub"
-		Me.CBTagFutasub.UseVisualStyleBackColor = True
-		'
-		'CBTag3Futa
-		'
-		Me.CBTag3Futa.AutoSize = True
-		Me.CBTag3Futa.Enabled = False
-		Me.CBTag3Futa.ForeColor = System.Drawing.Color.Black
-		Me.CBTag3Futa.Location = New System.Drawing.Point(15, 177)
-		Me.CBTag3Futa.Name = "CBTag3Futa"
-		Me.CBTag3Futa.Size = New System.Drawing.Size(56, 17)
-		Me.CBTag3Futa.TabIndex = 197
-		Me.CBTag3Futa.Text = "3 Futa"
-		Me.CBTag3Futa.UseVisualStyleBackColor = True
-		'
-		'CBTagMalesub
-		'
-		Me.CBTagMalesub.AutoSize = True
-		Me.CBTagMalesub.Enabled = False
-		Me.CBTagMalesub.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMalesub.Location = New System.Drawing.Point(15, 277)
-		Me.CBTagMalesub.Name = "CBTagMalesub"
-		Me.CBTagMalesub.Size = New System.Drawing.Size(66, 17)
-		Me.CBTagMalesub.TabIndex = 210
-		Me.CBTagMalesub.Text = "Malesub"
-		Me.CBTagMalesub.UseVisualStyleBackColor = True
-		'
-		'CBTag2F
-		'
-		Me.CBTag2F.AutoSize = True
-		Me.CBTag2F.Enabled = False
-		Me.CBTag2F.ForeColor = System.Drawing.Color.Black
-		Me.CBTag2F.Location = New System.Drawing.Point(15, 37)
-		Me.CBTag2F.Name = "CBTag2F"
-		Me.CBTag2F.Size = New System.Drawing.Size(72, 17)
-		Me.CBTag2F.TabIndex = 188
-		Me.CBTag2F.Text = "2 Women"
-		Me.CBTag2F.UseVisualStyleBackColor = True
-		'
-		'CBTag1Futa
-		'
-		Me.CBTag1Futa.AutoSize = True
-		Me.CBTag1Futa.Enabled = False
-		Me.CBTag1Futa.ForeColor = System.Drawing.Color.Black
-		Me.CBTag1Futa.Location = New System.Drawing.Point(15, 137)
-		Me.CBTag1Futa.Name = "CBTag1Futa"
-		Me.CBTag1Futa.Size = New System.Drawing.Size(56, 17)
-		Me.CBTag1Futa.TabIndex = 191
-		Me.CBTag1Futa.Text = "1 Futa"
-		Me.CBTag1Futa.UseVisualStyleBackColor = True
-		'
-		'CBTag1M
-		'
-		Me.CBTag1M.AutoSize = True
-		Me.CBTag1M.Enabled = False
-		Me.CBTag1M.ForeColor = System.Drawing.Color.Black
-		Me.CBTag1M.Location = New System.Drawing.Point(15, 77)
-		Me.CBTag1M.Name = "CBTag1M"
-		Me.CBTag1M.Size = New System.Drawing.Size(56, 17)
-		Me.CBTag1M.TabIndex = 189
-		Me.CBTag1M.Text = "1 Man"
-		Me.CBTag1M.UseVisualStyleBackColor = True
-		'
-		'CBTag1F
-		'
-		Me.CBTag1F.AutoSize = True
-		Me.CBTag1F.Enabled = False
-		Me.CBTag1F.ForeColor = System.Drawing.Color.Black
-		Me.CBTag1F.Location = New System.Drawing.Point(15, 17)
-		Me.CBTag1F.Name = "CBTag1F"
-		Me.CBTag1F.Size = New System.Drawing.Size(72, 17)
-		Me.CBTag1F.TabIndex = 185
-		Me.CBTag1F.Text = "1 Woman"
-		Me.CBTag1F.UseVisualStyleBackColor = True
-		'
-		'CBTag3F
-		'
-		Me.CBTag3F.AutoSize = True
-		Me.CBTag3F.Enabled = False
-		Me.CBTag3F.ForeColor = System.Drawing.Color.Black
-		Me.CBTag3F.Location = New System.Drawing.Point(15, 57)
-		Me.CBTag3F.Name = "CBTag3F"
-		Me.CBTag3F.Size = New System.Drawing.Size(72, 17)
-		Me.CBTag3F.TabIndex = 192
-		Me.CBTag3F.Text = "3 Women"
-		Me.CBTag3F.UseVisualStyleBackColor = True
-		'
-		'GroupBox54
-		'
-		Me.GroupBox54.Controls.Add(Me.CBTagTattoos)
-		Me.GroupBox54.Controls.Add(Me.CBTagAnalToy)
-		Me.GroupBox54.Controls.Add(Me.CBTagDomme)
-		Me.GroupBox54.Controls.Add(Me.CBTagPocketPussy)
-		Me.GroupBox54.Controls.Add(Me.CBTagWatersports)
-		Me.GroupBox54.Controls.Add(Me.CBTagStockings)
-		Me.GroupBox54.Controls.Add(Me.CBTagCumshot)
-		Me.GroupBox54.Controls.Add(Me.CBTagCumEating)
-		Me.GroupBox54.Controls.Add(Me.CBTagVibrator)
-		Me.GroupBox54.Controls.Add(Me.CBTagDildo)
-		Me.GroupBox54.Controls.Add(Me.CBTagKissing)
-		Me.GroupBox54.Location = New System.Drawing.Point(561, 37)
-		Me.GroupBox54.Name = "GroupBox54"
-		Me.GroupBox54.Size = New System.Drawing.Size(135, 238)
-		Me.GroupBox54.TabIndex = 239
-		Me.GroupBox54.TabStop = False
-		Me.GroupBox54.Text = "Misc"
-		'
-		'CBTagTattoos
-		'
-		Me.CBTagTattoos.AutoSize = True
-		Me.CBTagTattoos.Enabled = False
-		Me.CBTagTattoos.ForeColor = System.Drawing.Color.Black
-		Me.CBTagTattoos.Location = New System.Drawing.Point(15, 97)
-		Me.CBTagTattoos.Name = "CBTagTattoos"
-		Me.CBTagTattoos.Size = New System.Drawing.Size(62, 17)
-		Me.CBTagTattoos.TabIndex = 214
-		Me.CBTagTattoos.Text = "Tattoos"
-		Me.CBTagTattoos.UseVisualStyleBackColor = True
-		'
-		'CBTagAnalToy
-		'
-		Me.CBTagAnalToy.AutoSize = True
-		Me.CBTagAnalToy.Enabled = False
-		Me.CBTagAnalToy.ForeColor = System.Drawing.Color.Black
-		Me.CBTagAnalToy.Location = New System.Drawing.Point(15, 197)
-		Me.CBTagAnalToy.Name = "CBTagAnalToy"
-		Me.CBTagAnalToy.Size = New System.Drawing.Size(68, 17)
-		Me.CBTagAnalToy.TabIndex = 215
-		Me.CBTagAnalToy.Text = "Anal Toy"
-		Me.CBTagAnalToy.UseVisualStyleBackColor = True
-		'
-		'CBTagDomme
-		'
-		Me.CBTagDomme.AutoSize = True
-		Me.CBTagDomme.Enabled = False
-		Me.CBTagDomme.ForeColor = System.Drawing.Color.Black
-		Me.CBTagDomme.Location = New System.Drawing.Point(15, 17)
-		Me.CBTagDomme.Name = "CBTagDomme"
-		Me.CBTagDomme.Size = New System.Drawing.Size(114, 17)
-		Me.CBTagDomme.TabIndex = 219
-		Me.CBTagDomme.Text = "Tease A.I. Domme"
-		Me.CBTagDomme.UseVisualStyleBackColor = True
-		'
-		'CBTagPocketPussy
-		'
-		Me.CBTagPocketPussy.AutoSize = True
-		Me.CBTagPocketPussy.Enabled = False
-		Me.CBTagPocketPussy.ForeColor = System.Drawing.Color.Black
-		Me.CBTagPocketPussy.Location = New System.Drawing.Point(15, 177)
-		Me.CBTagPocketPussy.Name = "CBTagPocketPussy"
-		Me.CBTagPocketPussy.Size = New System.Drawing.Size(91, 17)
-		Me.CBTagPocketPussy.TabIndex = 205
-		Me.CBTagPocketPussy.Text = "Pocket Pussy"
-		Me.CBTagPocketPussy.UseVisualStyleBackColor = True
-		'
-		'CBTagWatersports
-		'
-		Me.CBTagWatersports.AutoSize = True
-		Me.CBTagWatersports.Enabled = False
-		Me.CBTagWatersports.ForeColor = System.Drawing.Color.Black
-		Me.CBTagWatersports.Location = New System.Drawing.Point(15, 217)
-		Me.CBTagWatersports.Name = "CBTagWatersports"
-		Me.CBTagWatersports.Size = New System.Drawing.Size(83, 17)
-		Me.CBTagWatersports.TabIndex = 218
-		Me.CBTagWatersports.Text = "Watersports"
-		Me.CBTagWatersports.UseVisualStyleBackColor = True
-		'
-		'CBTagStockings
-		'
-		Me.CBTagStockings.AutoSize = True
-		Me.CBTagStockings.Enabled = False
-		Me.CBTagStockings.ForeColor = System.Drawing.Color.Black
-		Me.CBTagStockings.Location = New System.Drawing.Point(15, 117)
-		Me.CBTagStockings.Name = "CBTagStockings"
-		Me.CBTagStockings.Size = New System.Drawing.Size(73, 17)
-		Me.CBTagStockings.TabIndex = 217
-		Me.CBTagStockings.Text = "Stockings"
-		Me.CBTagStockings.UseVisualStyleBackColor = True
-		'
-		'CBTagCumshot
-		'
-		Me.CBTagCumshot.AutoSize = True
-		Me.CBTagCumshot.Enabled = False
-		Me.CBTagCumshot.ForeColor = System.Drawing.Color.Black
-		Me.CBTagCumshot.Location = New System.Drawing.Point(15, 37)
-		Me.CBTagCumshot.Name = "CBTagCumshot"
-		Me.CBTagCumshot.Size = New System.Drawing.Size(67, 17)
-		Me.CBTagCumshot.TabIndex = 206
-		Me.CBTagCumshot.Text = "Cumshot"
-		Me.CBTagCumshot.UseVisualStyleBackColor = True
-		'
-		'CBTagCumEating
-		'
-		Me.CBTagCumEating.AutoSize = True
-		Me.CBTagCumEating.Enabled = False
-		Me.CBTagCumEating.ForeColor = System.Drawing.Color.Black
-		Me.CBTagCumEating.Location = New System.Drawing.Point(15, 57)
-		Me.CBTagCumEating.Name = "CBTagCumEating"
-		Me.CBTagCumEating.Size = New System.Drawing.Size(80, 17)
-		Me.CBTagCumEating.TabIndex = 204
-		Me.CBTagCumEating.Text = "Cum Eating"
-		Me.CBTagCumEating.UseVisualStyleBackColor = True
-		'
-		'CBTagVibrator
-		'
-		Me.CBTagVibrator.AutoSize = True
-		Me.CBTagVibrator.Enabled = False
-		Me.CBTagVibrator.ForeColor = System.Drawing.Color.Black
-		Me.CBTagVibrator.Location = New System.Drawing.Point(15, 137)
-		Me.CBTagVibrator.Name = "CBTagVibrator"
-		Me.CBTagVibrator.Size = New System.Drawing.Size(62, 17)
-		Me.CBTagVibrator.TabIndex = 210
-		Me.CBTagVibrator.Text = "Vibrator"
-		Me.CBTagVibrator.UseVisualStyleBackColor = True
-		'
-		'CBTagDildo
-		'
-		Me.CBTagDildo.AutoSize = True
-		Me.CBTagDildo.Enabled = False
-		Me.CBTagDildo.ForeColor = System.Drawing.Color.Black
-		Me.CBTagDildo.Location = New System.Drawing.Point(15, 157)
-		Me.CBTagDildo.Name = "CBTagDildo"
-		Me.CBTagDildo.Size = New System.Drawing.Size(50, 17)
-		Me.CBTagDildo.TabIndex = 213
-		Me.CBTagDildo.Text = "Dildo"
-		Me.CBTagDildo.UseVisualStyleBackColor = True
-		'
-		'CBTagKissing
-		'
-		Me.CBTagKissing.AutoSize = True
-		Me.CBTagKissing.Enabled = False
-		Me.CBTagKissing.ForeColor = System.Drawing.Color.Black
-		Me.CBTagKissing.Location = New System.Drawing.Point(15, 77)
-		Me.CBTagKissing.Name = "CBTagKissing"
-		Me.CBTagKissing.Size = New System.Drawing.Size(59, 17)
-		Me.CBTagKissing.TabIndex = 203
-		Me.CBTagKissing.Text = "Kissing"
-		Me.CBTagKissing.UseVisualStyleBackColor = True
-		'
-		'GroupBox51
-		'
-		Me.GroupBox51.Controls.Add(Me.CBTagBallTorture)
-		Me.GroupBox51.Controls.Add(Me.CBTagGag)
-		Me.GroupBox51.Controls.Add(Me.CBTagBlindfold)
-		Me.GroupBox51.Controls.Add(Me.CBTagWhipping)
-		Me.GroupBox51.Controls.Add(Me.CBTagCockTorture)
-		Me.GroupBox51.Controls.Add(Me.CBTagElectro)
-		Me.GroupBox51.Controls.Add(Me.CBTagHotWax)
-		Me.GroupBox51.Controls.Add(Me.CBTagClamps)
-		Me.GroupBox51.Controls.Add(Me.CBTagStrapon)
-		Me.GroupBox51.Controls.Add(Me.CBTagSpanking)
-		Me.GroupBox51.Controls.Add(Me.CBTagNeedles)
-		Me.GroupBox51.Location = New System.Drawing.Point(450, 37)
-		Me.GroupBox51.Name = "GroupBox51"
-		Me.GroupBox51.Size = New System.Drawing.Size(105, 238)
-		Me.GroupBox51.TabIndex = 238
-		Me.GroupBox51.TabStop = False
-		Me.GroupBox51.Text = "BDSM"
-		'
-		'CBTagBallTorture
-		'
-		Me.CBTagBallTorture.AutoSize = True
-		Me.CBTagBallTorture.Enabled = False
-		Me.CBTagBallTorture.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBallTorture.Location = New System.Drawing.Point(15, 77)
-		Me.CBTagBallTorture.Name = "CBTagBallTorture"
-		Me.CBTagBallTorture.Size = New System.Drawing.Size(80, 17)
-		Me.CBTagBallTorture.TabIndex = 220
-		Me.CBTagBallTorture.Text = "Ball Torture"
-		Me.CBTagBallTorture.UseVisualStyleBackColor = True
-		'
-		'CBTagGag
-		'
-		Me.CBTagGag.AutoSize = True
-		Me.CBTagGag.Enabled = False
-		Me.CBTagGag.ForeColor = System.Drawing.Color.Black
-		Me.CBTagGag.Location = New System.Drawing.Point(15, 137)
-		Me.CBTagGag.Name = "CBTagGag"
-		Me.CBTagGag.Size = New System.Drawing.Size(46, 17)
-		Me.CBTagGag.TabIndex = 214
-		Me.CBTagGag.Text = "Gag"
-		Me.CBTagGag.UseVisualStyleBackColor = True
-		'
-		'CBTagBlindfold
-		'
-		Me.CBTagBlindfold.AutoSize = True
-		Me.CBTagBlindfold.Enabled = False
-		Me.CBTagBlindfold.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBlindfold.Location = New System.Drawing.Point(15, 117)
-		Me.CBTagBlindfold.Name = "CBTagBlindfold"
-		Me.CBTagBlindfold.Size = New System.Drawing.Size(66, 17)
-		Me.CBTagBlindfold.TabIndex = 208
-		Me.CBTagBlindfold.Text = "Blindfold"
-		Me.CBTagBlindfold.UseVisualStyleBackColor = True
-		'
-		'CBTagWhipping
-		'
-		Me.CBTagWhipping.AutoSize = True
-		Me.CBTagWhipping.Enabled = False
-		Me.CBTagWhipping.ForeColor = System.Drawing.Color.Black
-		Me.CBTagWhipping.Location = New System.Drawing.Point(15, 17)
-		Me.CBTagWhipping.Name = "CBTagWhipping"
-		Me.CBTagWhipping.Size = New System.Drawing.Size(71, 17)
-		Me.CBTagWhipping.TabIndex = 203
-		Me.CBTagWhipping.Text = "Whipping"
-		Me.CBTagWhipping.UseVisualStyleBackColor = True
-		'
-		'CBTagCockTorture
-		'
-		Me.CBTagCockTorture.AutoSize = True
-		Me.CBTagCockTorture.Enabled = False
-		Me.CBTagCockTorture.ForeColor = System.Drawing.Color.Black
-		Me.CBTagCockTorture.Location = New System.Drawing.Point(15, 57)
-		Me.CBTagCockTorture.Name = "CBTagCockTorture"
-		Me.CBTagCockTorture.Size = New System.Drawing.Size(88, 17)
-		Me.CBTagCockTorture.TabIndex = 204
-		Me.CBTagCockTorture.Text = "Cock Torture"
-		Me.CBTagCockTorture.UseVisualStyleBackColor = True
-		'
-		'CBTagElectro
-		'
-		Me.CBTagElectro.AutoSize = True
-		Me.CBTagElectro.Enabled = False
-		Me.CBTagElectro.ForeColor = System.Drawing.Color.Black
-		Me.CBTagElectro.Location = New System.Drawing.Point(15, 217)
-		Me.CBTagElectro.Name = "CBTagElectro"
-		Me.CBTagElectro.Size = New System.Drawing.Size(59, 17)
-		Me.CBTagElectro.TabIndex = 207
-		Me.CBTagElectro.Text = "Electro"
-		Me.CBTagElectro.UseVisualStyleBackColor = True
-		'
-		'CBTagHotWax
-		'
-		Me.CBTagHotWax.AutoSize = True
-		Me.CBTagHotWax.Enabled = False
-		Me.CBTagHotWax.ForeColor = System.Drawing.Color.Black
-		Me.CBTagHotWax.Location = New System.Drawing.Point(15, 177)
-		Me.CBTagHotWax.Name = "CBTagHotWax"
-		Me.CBTagHotWax.Size = New System.Drawing.Size(68, 17)
-		Me.CBTagHotWax.TabIndex = 213
-		Me.CBTagHotWax.Text = "Hot Wax"
-		Me.CBTagHotWax.UseVisualStyleBackColor = True
-		'
-		'CBTagClamps
-		'
-		Me.CBTagClamps.AutoSize = True
-		Me.CBTagClamps.Enabled = False
-		Me.CBTagClamps.ForeColor = System.Drawing.Color.Black
-		Me.CBTagClamps.Location = New System.Drawing.Point(15, 157)
-		Me.CBTagClamps.Name = "CBTagClamps"
-		Me.CBTagClamps.Size = New System.Drawing.Size(60, 17)
-		Me.CBTagClamps.TabIndex = 210
-		Me.CBTagClamps.Text = "Clamps"
-		Me.CBTagClamps.UseVisualStyleBackColor = True
-		'
-		'CBTagStrapon
-		'
-		Me.CBTagStrapon.AutoSize = True
-		Me.CBTagStrapon.Enabled = False
-		Me.CBTagStrapon.ForeColor = System.Drawing.Color.Black
-		Me.CBTagStrapon.Location = New System.Drawing.Point(15, 97)
-		Me.CBTagStrapon.Name = "CBTagStrapon"
-		Me.CBTagStrapon.Size = New System.Drawing.Size(66, 17)
-		Me.CBTagStrapon.TabIndex = 205
-		Me.CBTagStrapon.Text = "Strap-on"
-		Me.CBTagStrapon.UseVisualStyleBackColor = True
-		'
-		'CBTagSpanking
-		'
-		Me.CBTagSpanking.AutoSize = True
-		Me.CBTagSpanking.Enabled = False
-		Me.CBTagSpanking.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSpanking.Location = New System.Drawing.Point(15, 37)
-		Me.CBTagSpanking.Name = "CBTagSpanking"
-		Me.CBTagSpanking.Size = New System.Drawing.Size(71, 17)
-		Me.CBTagSpanking.TabIndex = 206
-		Me.CBTagSpanking.Text = "Spanking"
-		Me.CBTagSpanking.UseVisualStyleBackColor = True
-		'
-		'CBTagNeedles
-		'
-		Me.CBTagNeedles.AutoSize = True
-		Me.CBTagNeedles.Enabled = False
-		Me.CBTagNeedles.ForeColor = System.Drawing.Color.Black
-		Me.CBTagNeedles.Location = New System.Drawing.Point(15, 197)
-		Me.CBTagNeedles.Name = "CBTagNeedles"
-		Me.CBTagNeedles.Size = New System.Drawing.Size(65, 17)
-		Me.CBTagNeedles.TabIndex = 209
-		Me.CBTagNeedles.Text = "Needles"
-		Me.CBTagNeedles.UseVisualStyleBackColor = True
-		'
-		'GroupBox50
-		'
-		Me.GroupBox50.Controls.Add(Me.CBTagRimming)
-		Me.GroupBox50.Controls.Add(Me.CBTagFacesitting)
-		Me.GroupBox50.Controls.Add(Me.CBTagMissionary)
-		Me.GroupBox50.Controls.Add(Me.CBTagMasturbation)
-		Me.GroupBox50.Controls.Add(Me.CBTagRCowgirl)
-		Me.GroupBox50.Controls.Add(Me.CBTagFingering)
-		Me.GroupBox50.Controls.Add(Me.CBTagGangbang)
-		Me.GroupBox50.Controls.Add(Me.CBTagBlowjob)
-		Me.GroupBox50.Controls.Add(Me.CBTagDP)
-		Me.GroupBox50.Controls.Add(Me.CBTagHandjob)
-		Me.GroupBox50.Controls.Add(Me.CBTagStanding)
-		Me.GroupBox50.Controls.Add(Me.CBTagFootjob)
-		Me.GroupBox50.Controls.Add(Me.CBTagCowgirl)
-		Me.GroupBox50.Controls.Add(Me.CBTagDoggyStyle)
-		Me.GroupBox50.Controls.Add(Me.CBTagTitjob)
-		Me.GroupBox50.Controls.Add(Me.CBTagCunnilingus)
-		Me.GroupBox50.Controls.Add(Me.CBTagAnalSex)
-		Me.GroupBox50.Location = New System.Drawing.Point(119, 37)
-		Me.GroupBox50.Name = "GroupBox50"
-		Me.GroupBox50.Size = New System.Drawing.Size(105, 358)
-		Me.GroupBox50.TabIndex = 237
-		Me.GroupBox50.TabStop = False
-		Me.GroupBox50.Text = "Sex"
-		'
-		'CBTagRimming
-		'
-		Me.CBTagRimming.AutoSize = True
-		Me.CBTagRimming.Enabled = False
-		Me.CBTagRimming.ForeColor = System.Drawing.Color.Black
-		Me.CBTagRimming.Location = New System.Drawing.Point(15, 177)
-		Me.CBTagRimming.Name = "CBTagRimming"
-		Me.CBTagRimming.Size = New System.Drawing.Size(66, 17)
-		Me.CBTagRimming.TabIndex = 219
-		Me.CBTagRimming.Text = "Rimming"
-		Me.CBTagRimming.UseVisualStyleBackColor = True
-		'
-		'CBTagFacesitting
-		'
-		Me.CBTagFacesitting.AutoSize = True
-		Me.CBTagFacesitting.Enabled = False
-		Me.CBTagFacesitting.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFacesitting.Location = New System.Drawing.Point(15, 157)
-		Me.CBTagFacesitting.Name = "CBTagFacesitting"
-		Me.CBTagFacesitting.Size = New System.Drawing.Size(77, 17)
-		Me.CBTagFacesitting.TabIndex = 226
-		Me.CBTagFacesitting.Text = "Facesitting"
-		Me.CBTagFacesitting.UseVisualStyleBackColor = True
-		'
-		'CBTagMissionary
-		'
-		Me.CBTagMissionary.AutoSize = True
-		Me.CBTagMissionary.Enabled = False
-		Me.CBTagMissionary.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMissionary.Location = New System.Drawing.Point(15, 197)
-		Me.CBTagMissionary.Name = "CBTagMissionary"
-		Me.CBTagMissionary.Size = New System.Drawing.Size(75, 17)
-		Me.CBTagMissionary.TabIndex = 208
-		Me.CBTagMissionary.Text = "Missionary"
-		Me.CBTagMissionary.UseVisualStyleBackColor = True
-		'
-		'CBTagMasturbation
-		'
-		Me.CBTagMasturbation.AutoSize = True
-		Me.CBTagMasturbation.Enabled = False
-		Me.CBTagMasturbation.ForeColor = System.Drawing.Color.Black
-		Me.CBTagMasturbation.Location = New System.Drawing.Point(15, 17)
-		Me.CBTagMasturbation.Name = "CBTagMasturbation"
-		Me.CBTagMasturbation.Size = New System.Drawing.Size(87, 17)
-		Me.CBTagMasturbation.TabIndex = 203
-		Me.CBTagMasturbation.Text = "Masturbation"
-		Me.CBTagMasturbation.UseVisualStyleBackColor = True
-		'
-		'CBTagRCowgirl
-		'
-		Me.CBTagRCowgirl.AutoSize = True
-		Me.CBTagRCowgirl.Enabled = False
-		Me.CBTagRCowgirl.ForeColor = System.Drawing.Color.Black
-		Me.CBTagRCowgirl.Location = New System.Drawing.Point(15, 257)
-		Me.CBTagRCowgirl.Name = "CBTagRCowgirl"
-		Me.CBTagRCowgirl.Size = New System.Drawing.Size(74, 17)
-		Me.CBTagRCowgirl.TabIndex = 218
-		Me.CBTagRCowgirl.Text = "R. Cowgirl"
-		Me.CBTagRCowgirl.UseVisualStyleBackColor = True
-		'
-		'CBTagFingering
-		'
-		Me.CBTagFingering.AutoSize = True
-		Me.CBTagFingering.Enabled = False
-		Me.CBTagFingering.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFingering.Location = New System.Drawing.Point(15, 57)
-		Me.CBTagFingering.Name = "CBTagFingering"
-		Me.CBTagFingering.Size = New System.Drawing.Size(69, 17)
-		Me.CBTagFingering.TabIndex = 204
-		Me.CBTagFingering.Text = "Fingering"
-		Me.CBTagFingering.UseVisualStyleBackColor = True
-		'
-		'CBTagGangbang
-		'
-		Me.CBTagGangbang.AutoSize = True
-		Me.CBTagGangbang.Enabled = False
-		Me.CBTagGangbang.ForeColor = System.Drawing.Color.Black
-		Me.CBTagGangbang.Location = New System.Drawing.Point(15, 337)
-		Me.CBTagGangbang.Name = "CBTagGangbang"
-		Me.CBTagGangbang.Size = New System.Drawing.Size(76, 17)
-		Me.CBTagGangbang.TabIndex = 217
-		Me.CBTagGangbang.Text = "Gangbang"
-		Me.CBTagGangbang.UseVisualStyleBackColor = True
-		'
-		'CBTagBlowjob
-		'
-		Me.CBTagBlowjob.AutoSize = True
-		Me.CBTagBlowjob.Enabled = False
-		Me.CBTagBlowjob.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBlowjob.Location = New System.Drawing.Point(15, 77)
-		Me.CBTagBlowjob.Name = "CBTagBlowjob"
-		Me.CBTagBlowjob.Size = New System.Drawing.Size(63, 17)
-		Me.CBTagBlowjob.TabIndex = 205
-		Me.CBTagBlowjob.Text = "Blowjob"
-		Me.CBTagBlowjob.UseVisualStyleBackColor = True
-		'
-		'CBTagDP
-		'
-		Me.CBTagDP.AutoSize = True
-		Me.CBTagDP.Enabled = False
-		Me.CBTagDP.ForeColor = System.Drawing.Color.Black
-		Me.CBTagDP.Location = New System.Drawing.Point(15, 317)
-		Me.CBTagDP.Name = "CBTagDP"
-		Me.CBTagDP.Size = New System.Drawing.Size(41, 17)
-		Me.CBTagDP.TabIndex = 216
-		Me.CBTagDP.Text = "DP"
-		Me.CBTagDP.UseVisualStyleBackColor = True
-		'
-		'CBTagHandjob
-		'
-		Me.CBTagHandjob.AutoSize = True
-		Me.CBTagHandjob.Enabled = False
-		Me.CBTagHandjob.ForeColor = System.Drawing.Color.Black
-		Me.CBTagHandjob.Location = New System.Drawing.Point(15, 37)
-		Me.CBTagHandjob.Name = "CBTagHandjob"
-		Me.CBTagHandjob.Size = New System.Drawing.Size(66, 17)
-		Me.CBTagHandjob.TabIndex = 206
-		Me.CBTagHandjob.Text = "Handjob"
-		Me.CBTagHandjob.UseVisualStyleBackColor = True
-		'
-		'CBTagStanding
-		'
-		Me.CBTagStanding.AutoSize = True
-		Me.CBTagStanding.Enabled = False
-		Me.CBTagStanding.ForeColor = System.Drawing.Color.Black
-		Me.CBTagStanding.Location = New System.Drawing.Point(15, 277)
-		Me.CBTagStanding.Name = "CBTagStanding"
-		Me.CBTagStanding.Size = New System.Drawing.Size(68, 17)
-		Me.CBTagStanding.TabIndex = 215
-		Me.CBTagStanding.Text = "Standing"
-		Me.CBTagStanding.UseVisualStyleBackColor = True
-		'
-		'CBTagFootjob
-		'
-		Me.CBTagFootjob.AutoSize = True
-		Me.CBTagFootjob.Enabled = False
-		Me.CBTagFootjob.ForeColor = System.Drawing.Color.Black
-		Me.CBTagFootjob.Location = New System.Drawing.Point(15, 137)
-		Me.CBTagFootjob.Name = "CBTagFootjob"
-		Me.CBTagFootjob.Size = New System.Drawing.Size(61, 17)
-		Me.CBTagFootjob.TabIndex = 207
-		Me.CBTagFootjob.Text = "Footjob"
-		Me.CBTagFootjob.UseVisualStyleBackColor = True
-		'
-		'CBTagCowgirl
-		'
-		Me.CBTagCowgirl.AutoSize = True
-		Me.CBTagCowgirl.Enabled = False
-		Me.CBTagCowgirl.ForeColor = System.Drawing.Color.Black
-		Me.CBTagCowgirl.Location = New System.Drawing.Point(15, 237)
-		Me.CBTagCowgirl.Name = "CBTagCowgirl"
-		Me.CBTagCowgirl.Size = New System.Drawing.Size(60, 17)
-		Me.CBTagCowgirl.TabIndex = 214
-		Me.CBTagCowgirl.Text = "Cowgirl"
-		Me.CBTagCowgirl.UseVisualStyleBackColor = True
-		'
-		'CBTagDoggyStyle
-		'
-		Me.CBTagDoggyStyle.AutoSize = True
-		Me.CBTagDoggyStyle.Enabled = False
-		Me.CBTagDoggyStyle.ForeColor = System.Drawing.Color.Black
-		Me.CBTagDoggyStyle.Location = New System.Drawing.Point(15, 217)
-		Me.CBTagDoggyStyle.Name = "CBTagDoggyStyle"
-		Me.CBTagDoggyStyle.Size = New System.Drawing.Size(83, 17)
-		Me.CBTagDoggyStyle.TabIndex = 209
-		Me.CBTagDoggyStyle.Text = "Doggy Style"
-		Me.CBTagDoggyStyle.UseVisualStyleBackColor = True
-		'
-		'CBTagTitjob
-		'
-		Me.CBTagTitjob.AutoSize = True
-		Me.CBTagTitjob.Enabled = False
-		Me.CBTagTitjob.ForeColor = System.Drawing.Color.Black
-		Me.CBTagTitjob.Location = New System.Drawing.Point(15, 117)
-		Me.CBTagTitjob.Name = "CBTagTitjob"
-		Me.CBTagTitjob.Size = New System.Drawing.Size(52, 17)
-		Me.CBTagTitjob.TabIndex = 213
-		Me.CBTagTitjob.Text = "Titjob"
-		Me.CBTagTitjob.UseVisualStyleBackColor = True
-		'
-		'CBTagCunnilingus
-		'
-		Me.CBTagCunnilingus.AutoSize = True
-		Me.CBTagCunnilingus.Enabled = False
-		Me.CBTagCunnilingus.ForeColor = System.Drawing.Color.Black
-		Me.CBTagCunnilingus.Location = New System.Drawing.Point(15, 97)
-		Me.CBTagCunnilingus.Name = "CBTagCunnilingus"
-		Me.CBTagCunnilingus.Size = New System.Drawing.Size(80, 17)
-		Me.CBTagCunnilingus.TabIndex = 210
-		Me.CBTagCunnilingus.Text = "Cunnilingus"
-		Me.CBTagCunnilingus.UseVisualStyleBackColor = True
-		'
-		'CBTagAnalSex
-		'
-		Me.CBTagAnalSex.AutoSize = True
-		Me.CBTagAnalSex.Enabled = False
-		Me.CBTagAnalSex.ForeColor = System.Drawing.Color.Black
-		Me.CBTagAnalSex.Location = New System.Drawing.Point(15, 297)
-		Me.CBTagAnalSex.Name = "CBTagAnalSex"
-		Me.CBTagAnalSex.Size = New System.Drawing.Size(68, 17)
-		Me.CBTagAnalSex.TabIndex = 212
-		Me.CBTagAnalSex.Text = "Anal Sex"
-		Me.CBTagAnalSex.UseVisualStyleBackColor = True
-		'
-		'GroupBox48
-		'
-		Me.GroupBox48.Controls.Add(Me.CBTagArtwork)
-		Me.GroupBox48.Controls.Add(Me.CBTagOutdoors)
-		Me.GroupBox48.Controls.Add(Me.CBTagPOV)
-		Me.GroupBox48.Controls.Add(Me.CBTagHardcore)
-		Me.GroupBox48.Controls.Add(Me.CBTagTD)
-		Me.GroupBox48.Controls.Add(Me.CBTagGay)
-		Me.GroupBox48.Controls.Add(Me.CBTagBath)
-		Me.GroupBox48.Controls.Add(Me.CBTagBisexual)
-		Me.GroupBox48.Controls.Add(Me.CBTagCFNM)
-		Me.GroupBox48.Controls.Add(Me.CBTagLesbian)
-		Me.GroupBox48.Controls.Add(Me.CBTagSoloFuta)
-		Me.GroupBox48.Controls.Add(Me.CBTagSM)
-		Me.GroupBox48.Controls.Add(Me.CBTagBondage)
-		Me.GroupBox48.Controls.Add(Me.CBTagSoloM)
-		Me.GroupBox48.Controls.Add(Me.CBTagSoloF)
-		Me.GroupBox48.Controls.Add(Me.CBTagChastity)
-		Me.GroupBox48.Controls.Add(Me.CBTagShower)
-		Me.GroupBox48.Location = New System.Drawing.Point(8, 37)
-		Me.GroupBox48.Name = "GroupBox48"
-		Me.GroupBox48.Size = New System.Drawing.Size(105, 358)
-		Me.GroupBox48.TabIndex = 235
-		Me.GroupBox48.TabStop = False
-		Me.GroupBox48.Text = "Category"
-		'
-		'CBTagArtwork
-		'
-		Me.CBTagArtwork.AutoSize = True
-		Me.CBTagArtwork.Enabled = False
-		Me.CBTagArtwork.ForeColor = System.Drawing.Color.Black
-		Me.CBTagArtwork.Location = New System.Drawing.Point(15, 337)
-		Me.CBTagArtwork.Name = "CBTagArtwork"
-		Me.CBTagArtwork.Size = New System.Drawing.Size(62, 17)
-		Me.CBTagArtwork.TabIndex = 225
-		Me.CBTagArtwork.Text = "Artwork"
-		Me.CBTagArtwork.UseVisualStyleBackColor = True
-		'
-		'CBTagOutdoors
-		'
-		Me.CBTagOutdoors.AutoSize = True
-		Me.CBTagOutdoors.Enabled = False
-		Me.CBTagOutdoors.ForeColor = System.Drawing.Color.Black
-		Me.CBTagOutdoors.Location = New System.Drawing.Point(15, 317)
-		Me.CBTagOutdoors.Name = "CBTagOutdoors"
-		Me.CBTagOutdoors.Size = New System.Drawing.Size(69, 17)
-		Me.CBTagOutdoors.TabIndex = 219
-		Me.CBTagOutdoors.Text = "Outdoors"
-		Me.CBTagOutdoors.UseVisualStyleBackColor = True
-		'
-		'CBTagPOV
-		'
-		Me.CBTagPOV.AutoSize = True
-		Me.CBTagPOV.Enabled = False
-		Me.CBTagPOV.ForeColor = System.Drawing.Color.Black
-		Me.CBTagPOV.Location = New System.Drawing.Point(15, 157)
-		Me.CBTagPOV.Name = "CBTagPOV"
-		Me.CBTagPOV.Size = New System.Drawing.Size(48, 17)
-		Me.CBTagPOV.TabIndex = 208
-		Me.CBTagPOV.Text = "POV"
-		Me.CBTagPOV.UseVisualStyleBackColor = True
-		'
-		'CBTagHardcore
-		'
-		Me.CBTagHardcore.AutoSize = True
-		Me.CBTagHardcore.Enabled = False
-		Me.CBTagHardcore.ForeColor = System.Drawing.Color.Black
-		Me.CBTagHardcore.Location = New System.Drawing.Point(15, 17)
-		Me.CBTagHardcore.Name = "CBTagHardcore"
-		Me.CBTagHardcore.Size = New System.Drawing.Size(70, 17)
-		Me.CBTagHardcore.TabIndex = 203
-		Me.CBTagHardcore.Text = "Hardcore"
-		Me.CBTagHardcore.UseVisualStyleBackColor = True
-		'
-		'CBTagTD
-		'
-		Me.CBTagTD.AutoSize = True
-		Me.CBTagTD.Enabled = False
-		Me.CBTagTD.ForeColor = System.Drawing.Color.Black
-		Me.CBTagTD.Location = New System.Drawing.Point(15, 217)
-		Me.CBTagTD.Name = "CBTagTD"
-		Me.CBTagTD.Size = New System.Drawing.Size(47, 17)
-		Me.CBTagTD.TabIndex = 218
-		Me.CBTagTD.Text = "T&&D"
-		Me.CBTagTD.UseVisualStyleBackColor = True
-		'
-		'CBTagGay
-		'
-		Me.CBTagGay.AutoSize = True
-		Me.CBTagGay.Enabled = False
-		Me.CBTagGay.ForeColor = System.Drawing.Color.Black
-		Me.CBTagGay.Location = New System.Drawing.Point(15, 57)
-		Me.CBTagGay.Name = "CBTagGay"
-		Me.CBTagGay.Size = New System.Drawing.Size(45, 17)
-		Me.CBTagGay.TabIndex = 204
-		Me.CBTagGay.Text = "Gay"
-		Me.CBTagGay.UseVisualStyleBackColor = True
-		'
-		'CBTagBath
-		'
-		Me.CBTagBath.AutoSize = True
-		Me.CBTagBath.Enabled = False
-		Me.CBTagBath.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBath.Location = New System.Drawing.Point(15, 277)
-		Me.CBTagBath.Name = "CBTagBath"
-		Me.CBTagBath.Size = New System.Drawing.Size(48, 17)
-		Me.CBTagBath.TabIndex = 217
-		Me.CBTagBath.Text = "Bath"
-		Me.CBTagBath.UseVisualStyleBackColor = True
-		'
-		'CBTagBisexual
-		'
-		Me.CBTagBisexual.AutoSize = True
-		Me.CBTagBisexual.Enabled = False
-		Me.CBTagBisexual.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBisexual.Location = New System.Drawing.Point(15, 77)
-		Me.CBTagBisexual.Name = "CBTagBisexual"
-		Me.CBTagBisexual.Size = New System.Drawing.Size(65, 17)
-		Me.CBTagBisexual.TabIndex = 205
-		Me.CBTagBisexual.Text = "Bisexual"
-		Me.CBTagBisexual.UseVisualStyleBackColor = True
-		'
-		'CBTagCFNM
-		'
-		Me.CBTagCFNM.AutoSize = True
-		Me.CBTagCFNM.Enabled = False
-		Me.CBTagCFNM.ForeColor = System.Drawing.Color.Black
-		Me.CBTagCFNM.Location = New System.Drawing.Point(15, 257)
-		Me.CBTagCFNM.Name = "CBTagCFNM"
-		Me.CBTagCFNM.Size = New System.Drawing.Size(56, 17)
-		Me.CBTagCFNM.TabIndex = 216
-		Me.CBTagCFNM.Text = "CFNM"
-		Me.CBTagCFNM.UseVisualStyleBackColor = True
-		'
-		'CBTagLesbian
-		'
-		Me.CBTagLesbian.AutoSize = True
-		Me.CBTagLesbian.Enabled = False
-		Me.CBTagLesbian.ForeColor = System.Drawing.Color.Black
-		Me.CBTagLesbian.Location = New System.Drawing.Point(15, 37)
-		Me.CBTagLesbian.Name = "CBTagLesbian"
-		Me.CBTagLesbian.Size = New System.Drawing.Size(63, 17)
-		Me.CBTagLesbian.TabIndex = 206
-		Me.CBTagLesbian.Text = "Lesbian"
-		Me.CBTagLesbian.UseVisualStyleBackColor = True
-		'
-		'CBTagSoloFuta
-		'
-		Me.CBTagSoloFuta.AutoSize = True
-		Me.CBTagSoloFuta.Enabled = False
-		Me.CBTagSoloFuta.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSoloFuta.Location = New System.Drawing.Point(15, 137)
-		Me.CBTagSoloFuta.Name = "CBTagSoloFuta"
-		Me.CBTagSoloFuta.Size = New System.Drawing.Size(71, 17)
-		Me.CBTagSoloFuta.TabIndex = 207
-		Me.CBTagSoloFuta.Text = "Solo Futa"
-		Me.CBTagSoloFuta.UseVisualStyleBackColor = True
-		'
-		'CBTagSM
-		'
-		Me.CBTagSM.AutoSize = True
-		Me.CBTagSM.Enabled = False
-		Me.CBTagSM.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSM.Location = New System.Drawing.Point(15, 197)
-		Me.CBTagSM.Name = "CBTagSM"
-		Me.CBTagSM.Size = New System.Drawing.Size(48, 17)
-		Me.CBTagSM.TabIndex = 214
-		Me.CBTagSM.Text = "S&&M"
-		Me.CBTagSM.UseVisualStyleBackColor = True
-		'
-		'CBTagBondage
-		'
-		Me.CBTagBondage.AutoSize = True
-		Me.CBTagBondage.Enabled = False
-		Me.CBTagBondage.ForeColor = System.Drawing.Color.Black
-		Me.CBTagBondage.Location = New System.Drawing.Point(15, 177)
-		Me.CBTagBondage.Name = "CBTagBondage"
-		Me.CBTagBondage.Size = New System.Drawing.Size(69, 17)
-		Me.CBTagBondage.TabIndex = 209
-		Me.CBTagBondage.Text = "Bondage"
-		Me.CBTagBondage.UseVisualStyleBackColor = True
-		'
-		'CBTagSoloM
-		'
-		Me.CBTagSoloM.AutoSize = True
-		Me.CBTagSoloM.Enabled = False
-		Me.CBTagSoloM.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSoloM.Location = New System.Drawing.Point(15, 117)
-		Me.CBTagSoloM.Name = "CBTagSoloM"
-		Me.CBTagSoloM.Size = New System.Drawing.Size(59, 17)
-		Me.CBTagSoloM.TabIndex = 213
-		Me.CBTagSoloM.Text = "Solo M"
-		Me.CBTagSoloM.UseVisualStyleBackColor = True
-		'
-		'CBTagSoloF
-		'
-		Me.CBTagSoloF.AutoSize = True
-		Me.CBTagSoloF.Enabled = False
-		Me.CBTagSoloF.ForeColor = System.Drawing.Color.Black
-		Me.CBTagSoloF.Location = New System.Drawing.Point(15, 97)
-		Me.CBTagSoloF.Name = "CBTagSoloF"
-		Me.CBTagSoloF.Size = New System.Drawing.Size(56, 17)
-		Me.CBTagSoloF.TabIndex = 210
-		Me.CBTagSoloF.Text = "Solo F"
-		Me.CBTagSoloF.UseVisualStyleBackColor = True
-		'
-		'CBTagChastity
-		'
-		Me.CBTagChastity.AutoSize = True
-		Me.CBTagChastity.Enabled = False
-		Me.CBTagChastity.ForeColor = System.Drawing.Color.Black
-		Me.CBTagChastity.Location = New System.Drawing.Point(15, 237)
-		Me.CBTagChastity.Name = "CBTagChastity"
-		Me.CBTagChastity.Size = New System.Drawing.Size(63, 17)
-		Me.CBTagChastity.TabIndex = 212
-		Me.CBTagChastity.Text = "Chastity"
-		Me.CBTagChastity.UseVisualStyleBackColor = True
-		'
-		'CBTagShower
-		'
-		Me.CBTagShower.AutoSize = True
-		Me.CBTagShower.Enabled = False
-		Me.CBTagShower.ForeColor = System.Drawing.Color.Black
-		Me.CBTagShower.Location = New System.Drawing.Point(15, 297)
-		Me.CBTagShower.Name = "CBTagShower"
-		Me.CBTagShower.Size = New System.Drawing.Size(62, 17)
-		Me.CBTagShower.TabIndex = 211
-		Me.CBTagShower.Text = "Shower"
-		Me.CBTagShower.UseVisualStyleBackColor = True
-		'
-		'TBLocalTagDir
-		'
-		Me.TBLocalTagDir.Location = New System.Drawing.Point(55, 9)
-		Me.TBLocalTagDir.Name = "TBLocalTagDir"
-		Me.TBLocalTagDir.Size = New System.Drawing.Size(330, 20)
-		Me.TBLocalTagDir.TabIndex = 233
-		Me.TBLocalTagDir.Text = "Enter Image Directory"
-		'
-		'BTNLocalTagPrevious
-		'
-		Me.BTNLocalTagPrevious.BackColor = System.Drawing.Color.LightGray
-		Me.BTNLocalTagPrevious.Enabled = False
-		Me.BTNLocalTagPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.BTNLocalTagPrevious.ForeColor = System.Drawing.Color.Black
-		Me.BTNLocalTagPrevious.Location = New System.Drawing.Point(391, 8)
-		Me.BTNLocalTagPrevious.Name = "BTNLocalTagPrevious"
-		Me.BTNLocalTagPrevious.Size = New System.Drawing.Size(47, 24)
-		Me.BTNLocalTagPrevious.TabIndex = 232
-		Me.BTNLocalTagPrevious.Text = "<<"
-		Me.BTNLocalTagPrevious.UseVisualStyleBackColor = False
-		'
-		'BTNLocalTagNext
-		'
-		Me.BTNLocalTagNext.BackColor = System.Drawing.Color.LightGray
-		Me.BTNLocalTagNext.Enabled = False
-		Me.BTNLocalTagNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.BTNLocalTagNext.ForeColor = System.Drawing.Color.Black
-		Me.BTNLocalTagNext.Location = New System.Drawing.Point(560, 8)
-		Me.BTNLocalTagNext.Name = "BTNLocalTagNext"
-		Me.BTNLocalTagNext.Size = New System.Drawing.Size(47, 24)
-		Me.BTNLocalTagNext.TabIndex = 231
-		Me.BTNLocalTagNext.Text = ">>"
-		Me.BTNLocalTagNext.UseVisualStyleBackColor = False
-		'
-		'LBLLocalTagCount
-		'
-		Me.LBLLocalTagCount.BackColor = System.Drawing.Color.Transparent
-		Me.LBLLocalTagCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLLocalTagCount.Enabled = False
-		Me.LBLLocalTagCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLLocalTagCount.ForeColor = System.Drawing.Color.Black
-		Me.LBLLocalTagCount.Location = New System.Drawing.Point(444, 10)
-		Me.LBLLocalTagCount.Name = "LBLLocalTagCount"
-		Me.LBLLocalTagCount.Size = New System.Drawing.Size(110, 20)
-		Me.LBLLocalTagCount.TabIndex = 230
-		Me.LBLLocalTagCount.Text = "0/0"
-		Me.LBLLocalTagCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-		'
-		'BTNLocalTagSave
-		'
-		Me.BTNLocalTagSave.Enabled = False
-		Me.BTNLocalTagSave.Location = New System.Drawing.Point(613, 9)
-		Me.BTNLocalTagSave.Name = "BTNLocalTagSave"
-		Me.BTNLocalTagSave.Size = New System.Drawing.Size(83, 23)
-		Me.BTNLocalTagSave.TabIndex = 229
-		Me.BTNLocalTagSave.Text = "Finished"
-		Me.BTNLocalTagSave.UseVisualStyleBackColor = True
-		'
-		'BTNLocalTagDir
-		'
-		Me.BTNLocalTagDir.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
-		Me.BTNLocalTagDir.Location = New System.Drawing.Point(6, 8)
-		Me.BTNLocalTagDir.Name = "BTNLocalTagDir"
-		Me.BTNLocalTagDir.Size = New System.Drawing.Size(43, 23)
-		Me.BTNLocalTagDir.TabIndex = 228
-		Me.BTNLocalTagDir.Text = "1"
-		Me.BTNLocalTagDir.UseVisualStyleBackColor = True
 		'
 		'TabPage11
 		'
@@ -14500,6 +12555,1952 @@ Partial Class FrmSettings
 		Me.BWURLFiles.WorkerReportsProgress = True
 		Me.BWURLFiles.WorkerSupportsCancellation = True
 		'
+		'TabPage33
+		'
+		Me.TabPage33.BackColor = System.Drawing.Color.Silver
+		Me.TabPage33.Controls.Add(Me.TabControl5)
+		Me.TabPage33.Location = New System.Drawing.Point(4, 22)
+		Me.TabPage33.Name = "TabPage33"
+		Me.TabPage33.Padding = New System.Windows.Forms.Padding(3)
+		Me.TabPage33.Size = New System.Drawing.Size(720, 448)
+		Me.TabPage33.TabIndex = 21
+		Me.TabPage33.Text = "Tagging"
+		'
+		'TabControl5
+		'
+		Me.TabControl5.Controls.Add(Me.TabPage34)
+		Me.TabControl5.Controls.Add(Me.TabPage35)
+		Me.TabControl5.Location = New System.Drawing.Point(6, 6)
+		Me.TabControl5.Name = "TabControl5"
+		Me.TabControl5.SelectedIndex = 0
+		Me.TabControl5.Size = New System.Drawing.Size(708, 437)
+		Me.TabControl5.TabIndex = 0
+		'
+		'TabPage34
+		'
+		Me.TabPage34.BackColor = System.Drawing.Color.LightGray
+		Me.TabPage34.Controls.Add(Me.CBTagSeeThrough)
+		Me.TabPage34.Controls.Add(Me.CBTagAllFours)
+		Me.TabPage34.Controls.Add(Me.CBTagGlaring)
+		Me.TabPage34.Controls.Add(Me.CBTagSmiling)
+		Me.TabPage34.Controls.Add(Me.TBTagDir)
+		Me.TabPage34.Controls.Add(Me.CBTagPiercing)
+		Me.TabPage34.Controls.Add(Me.CBTagLegs)
+		Me.TabPage34.Controls.Add(Me.TBTagFurniture)
+		Me.TabPage34.Controls.Add(Me.CBTagFurniture)
+		Me.TabPage34.Controls.Add(Me.TBTagSexToy)
+		Me.TabPage34.Controls.Add(Me.CBTagSexToy)
+		Me.TabPage34.Controls.Add(Me.TBTagTattoo)
+		Me.TabPage34.Controls.Add(Me.CBTagTattoo)
+		Me.TabPage34.Controls.Add(Me.TBTagUnderwear)
+		Me.TabPage34.Controls.Add(Me.CBTagUnderwear)
+		Me.TabPage34.Controls.Add(Me.TBTagGarment)
+		Me.TabPage34.Controls.Add(Me.CBTagGarment)
+		Me.TabPage34.Controls.Add(Me.Label72)
+		Me.TabPage34.Controls.Add(Me.CBTagHandsCovering)
+		Me.TabPage34.Controls.Add(Me.CBTagGarmentCovering)
+		Me.TabPage34.Controls.Add(Me.CBTagCloseUp)
+		Me.TabPage34.Controls.Add(Me.CBTagNaked)
+		Me.TabPage34.Controls.Add(Me.CBTagSideView)
+		Me.TabPage34.Controls.Add(Me.BTNTagPrevious)
+		Me.TabPage34.Controls.Add(Me.CBTagHalfDressed)
+		Me.TabPage34.Controls.Add(Me.BTNTagNext)
+		Me.TabPage34.Controls.Add(Me.CBTagFullyDressed)
+		Me.TabPage34.Controls.Add(Me.LBLTagCount)
+		Me.TabPage34.Controls.Add(Me.CBTagSucking)
+		Me.TabPage34.Controls.Add(Me.CBTagMasturbating)
+		Me.TabPage34.Controls.Add(Me.CBTagFeet)
+		Me.TabPage34.Controls.Add(Me.CBTagBoobs)
+		Me.TabPage34.Controls.Add(Me.CBTagAss)
+		Me.TabPage34.Controls.Add(Me.CBTagPussy)
+		Me.TabPage34.Controls.Add(Me.BTNTagSave)
+		Me.TabPage34.Controls.Add(Me.BTNTagDir)
+		Me.TabPage34.Controls.Add(Me.ImageTagPictureBox)
+		Me.TabPage34.Controls.Add(Me.CBTagFace)
+		Me.TabPage34.Location = New System.Drawing.Point(4, 22)
+		Me.TabPage34.Name = "TabPage34"
+		Me.TabPage34.Padding = New System.Windows.Forms.Padding(3)
+		Me.TabPage34.Size = New System.Drawing.Size(700, 411)
+		Me.TabPage34.TabIndex = 0
+		Me.TabPage34.Text = "Domme Tags"
+		'
+		'TabPage35
+		'
+		Me.TabPage35.BackColor = System.Drawing.Color.LightGray
+		Me.TabPage35.Controls.Add(Me.GroupBox55)
+		Me.TabPage35.Controls.Add(Me.GroupBox53)
+		Me.TabPage35.Controls.Add(Me.GroupBox49)
+		Me.TabPage35.Controls.Add(Me.GroupBox46)
+		Me.TabPage35.Controls.Add(Me.GroupBox54)
+		Me.TabPage35.Controls.Add(Me.GroupBox51)
+		Me.TabPage35.Controls.Add(Me.GroupBox50)
+		Me.TabPage35.Controls.Add(Me.GroupBox48)
+		Me.TabPage35.Controls.Add(Me.TBLocalTagDir)
+		Me.TabPage35.Controls.Add(Me.BTNLocalTagPrevious)
+		Me.TabPage35.Controls.Add(Me.BTNLocalTagNext)
+		Me.TabPage35.Controls.Add(Me.LBLLocalTagCount)
+		Me.TabPage35.Controls.Add(Me.BTNLocalTagSave)
+		Me.TabPage35.Controls.Add(Me.BTNLocalTagDir)
+		Me.TabPage35.Location = New System.Drawing.Point(4, 22)
+		Me.TabPage35.Name = "TabPage35"
+		Me.TabPage35.Padding = New System.Windows.Forms.Padding(3)
+		Me.TabPage35.Size = New System.Drawing.Size(700, 411)
+		Me.TabPage35.TabIndex = 1
+		Me.TabPage35.Text = "Local Tags"
+		'
+		'CBTagSeeThrough
+		'
+		Me.CBTagSeeThrough.AutoSize = True
+		Me.CBTagSeeThrough.Enabled = False
+		Me.CBTagSeeThrough.Location = New System.Drawing.Point(577, 117)
+		Me.CBTagSeeThrough.Name = "CBTagSeeThrough"
+		Me.CBTagSeeThrough.Size = New System.Drawing.Size(87, 17)
+		Me.CBTagSeeThrough.TabIndex = 226
+		Me.CBTagSeeThrough.Text = "See Through"
+		Me.CBTagSeeThrough.UseVisualStyleBackColor = True
+		'
+		'CBTagAllFours
+		'
+		Me.CBTagAllFours.AutoSize = True
+		Me.CBTagAllFours.Enabled = False
+		Me.CBTagAllFours.ForeColor = System.Drawing.Color.Black
+		Me.CBTagAllFours.Location = New System.Drawing.Point(577, 207)
+		Me.CBTagAllFours.Name = "CBTagAllFours"
+		Me.CBTagAllFours.Size = New System.Drawing.Size(66, 17)
+		Me.CBTagAllFours.TabIndex = 225
+		Me.CBTagAllFours.Text = "All Fours"
+		Me.CBTagAllFours.UseVisualStyleBackColor = True
+		'
+		'CBTagGlaring
+		'
+		Me.CBTagGlaring.AutoSize = True
+		Me.CBTagGlaring.Enabled = False
+		Me.CBTagGlaring.ForeColor = System.Drawing.Color.Black
+		Me.CBTagGlaring.Location = New System.Drawing.Point(484, 227)
+		Me.CBTagGlaring.Name = "CBTagGlaring"
+		Me.CBTagGlaring.Size = New System.Drawing.Size(59, 17)
+		Me.CBTagGlaring.TabIndex = 224
+		Me.CBTagGlaring.Text = "Glaring"
+		Me.CBTagGlaring.UseVisualStyleBackColor = True
+		'
+		'CBTagSmiling
+		'
+		Me.CBTagSmiling.AutoSize = True
+		Me.CBTagSmiling.Enabled = False
+		Me.CBTagSmiling.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSmiling.Location = New System.Drawing.Point(484, 207)
+		Me.CBTagSmiling.Name = "CBTagSmiling"
+		Me.CBTagSmiling.Size = New System.Drawing.Size(59, 17)
+		Me.CBTagSmiling.TabIndex = 223
+		Me.CBTagSmiling.Text = "Smiling"
+		Me.CBTagSmiling.UseVisualStyleBackColor = True
+		'
+		'TBTagDir
+		'
+		Me.TBTagDir.Location = New System.Drawing.Point(55, 9)
+		Me.TBTagDir.Name = "TBTagDir"
+		Me.TBTagDir.Size = New System.Drawing.Size(330, 20)
+		Me.TBTagDir.TabIndex = 222
+		Me.TBTagDir.Text = "Enter Image Directory"
+		'
+		'CBTagPiercing
+		'
+		Me.CBTagPiercing.AutoSize = True
+		Me.CBTagPiercing.Enabled = False
+		Me.CBTagPiercing.ForeColor = System.Drawing.Color.Black
+		Me.CBTagPiercing.Location = New System.Drawing.Point(577, 227)
+		Me.CBTagPiercing.Name = "CBTagPiercing"
+		Me.CBTagPiercing.Size = New System.Drawing.Size(64, 17)
+		Me.CBTagPiercing.TabIndex = 221
+		Me.CBTagPiercing.Text = "Piercing"
+		Me.CBTagPiercing.UseVisualStyleBackColor = True
+		'
+		'CBTagLegs
+		'
+		Me.CBTagLegs.AutoSize = True
+		Me.CBTagLegs.Enabled = False
+		Me.CBTagLegs.ForeColor = System.Drawing.Color.Black
+		Me.CBTagLegs.Location = New System.Drawing.Point(484, 117)
+		Me.CBTagLegs.Name = "CBTagLegs"
+		Me.CBTagLegs.Size = New System.Drawing.Size(49, 17)
+		Me.CBTagLegs.TabIndex = 220
+		Me.CBTagLegs.Text = "Legs"
+		Me.CBTagLegs.UseVisualStyleBackColor = True
+		'
+		'TBTagFurniture
+		'
+		Me.TBTagFurniture.Enabled = False
+		Me.TBTagFurniture.Location = New System.Drawing.Point(559, 370)
+		Me.TBTagFurniture.Name = "TBTagFurniture"
+		Me.TBTagFurniture.Size = New System.Drawing.Size(108, 20)
+		Me.TBTagFurniture.TabIndex = 219
+		'
+		'CBTagFurniture
+		'
+		Me.CBTagFurniture.AutoSize = True
+		Me.CBTagFurniture.Enabled = False
+		Me.CBTagFurniture.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFurniture.Location = New System.Drawing.Point(476, 372)
+		Me.CBTagFurniture.Name = "CBTagFurniture"
+		Me.CBTagFurniture.Size = New System.Drawing.Size(67, 17)
+		Me.CBTagFurniture.TabIndex = 218
+		Me.CBTagFurniture.Text = "Furniture"
+		Me.CBTagFurniture.UseVisualStyleBackColor = True
+		'
+		'TBTagSexToy
+		'
+		Me.TBTagSexToy.Enabled = False
+		Me.TBTagSexToy.Location = New System.Drawing.Point(560, 346)
+		Me.TBTagSexToy.Name = "TBTagSexToy"
+		Me.TBTagSexToy.Size = New System.Drawing.Size(108, 20)
+		Me.TBTagSexToy.TabIndex = 217
+		'
+		'CBTagSexToy
+		'
+		Me.CBTagSexToy.AutoSize = True
+		Me.CBTagSexToy.Enabled = False
+		Me.CBTagSexToy.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSexToy.Location = New System.Drawing.Point(476, 348)
+		Me.CBTagSexToy.Name = "CBTagSexToy"
+		Me.CBTagSexToy.Size = New System.Drawing.Size(65, 17)
+		Me.CBTagSexToy.TabIndex = 216
+		Me.CBTagSexToy.Text = "Sex Toy"
+		Me.CBTagSexToy.UseVisualStyleBackColor = True
+		'
+		'TBTagTattoo
+		'
+		Me.TBTagTattoo.Enabled = False
+		Me.TBTagTattoo.Location = New System.Drawing.Point(560, 322)
+		Me.TBTagTattoo.Name = "TBTagTattoo"
+		Me.TBTagTattoo.Size = New System.Drawing.Size(108, 20)
+		Me.TBTagTattoo.TabIndex = 215
+		'
+		'CBTagTattoo
+		'
+		Me.CBTagTattoo.AutoSize = True
+		Me.CBTagTattoo.Enabled = False
+		Me.CBTagTattoo.ForeColor = System.Drawing.Color.Black
+		Me.CBTagTattoo.Location = New System.Drawing.Point(476, 324)
+		Me.CBTagTattoo.Name = "CBTagTattoo"
+		Me.CBTagTattoo.Size = New System.Drawing.Size(57, 17)
+		Me.CBTagTattoo.TabIndex = 214
+		Me.CBTagTattoo.Text = "Tattoo"
+		Me.CBTagTattoo.UseVisualStyleBackColor = True
+		'
+		'TBTagUnderwear
+		'
+		Me.TBTagUnderwear.Enabled = False
+		Me.TBTagUnderwear.Location = New System.Drawing.Point(560, 298)
+		Me.TBTagUnderwear.Name = "TBTagUnderwear"
+		Me.TBTagUnderwear.Size = New System.Drawing.Size(108, 20)
+		Me.TBTagUnderwear.TabIndex = 213
+		'
+		'CBTagUnderwear
+		'
+		Me.CBTagUnderwear.AutoSize = True
+		Me.CBTagUnderwear.Enabled = False
+		Me.CBTagUnderwear.ForeColor = System.Drawing.Color.Black
+		Me.CBTagUnderwear.Location = New System.Drawing.Point(476, 300)
+		Me.CBTagUnderwear.Name = "CBTagUnderwear"
+		Me.CBTagUnderwear.Size = New System.Drawing.Size(78, 17)
+		Me.CBTagUnderwear.TabIndex = 212
+		Me.CBTagUnderwear.Text = "Underwear"
+		Me.CBTagUnderwear.UseVisualStyleBackColor = True
+		'
+		'TBTagGarment
+		'
+		Me.TBTagGarment.Enabled = False
+		Me.TBTagGarment.Location = New System.Drawing.Point(560, 274)
+		Me.TBTagGarment.Name = "TBTagGarment"
+		Me.TBTagGarment.Size = New System.Drawing.Size(108, 20)
+		Me.TBTagGarment.TabIndex = 211
+		'
+		'CBTagGarment
+		'
+		Me.CBTagGarment.AutoSize = True
+		Me.CBTagGarment.Enabled = False
+		Me.CBTagGarment.ForeColor = System.Drawing.Color.Black
+		Me.CBTagGarment.Location = New System.Drawing.Point(476, 276)
+		Me.CBTagGarment.Name = "CBTagGarment"
+		Me.CBTagGarment.Size = New System.Drawing.Size(66, 17)
+		Me.CBTagGarment.TabIndex = 210
+		Me.CBTagGarment.Text = "Garment"
+		Me.CBTagGarment.UseVisualStyleBackColor = True
+		'
+		'Label72
+		'
+		Me.Label72.BackColor = System.Drawing.Color.Transparent
+		Me.Label72.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Label72.ForeColor = System.Drawing.Color.Black
+		Me.Label72.Location = New System.Drawing.Point(5, 368)
+		Me.Label72.Name = "Label72"
+		Me.Label72.Size = New System.Drawing.Size(451, 35)
+		Me.Label72.TabIndex = 189
+		Me.Label72.Text = "Open a directory containing images. Check all tags that apply to each image displ" &
+	"ayed, and enter one-word tag descriptions in the text fields when appropriate. (" &
+	"e.g. Garment: dress)"
+		Me.Label72.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		'
+		'CBTagHandsCovering
+		'
+		Me.CBTagHandsCovering.AutoSize = True
+		Me.CBTagHandsCovering.Enabled = False
+		Me.CBTagHandsCovering.Location = New System.Drawing.Point(577, 97)
+		Me.CBTagHandsCovering.Name = "CBTagHandsCovering"
+		Me.CBTagHandsCovering.Size = New System.Drawing.Size(101, 17)
+		Me.CBTagHandsCovering.TabIndex = 209
+		Me.CBTagHandsCovering.Text = "Hands Covering"
+		Me.CBTagHandsCovering.UseVisualStyleBackColor = True
+		'
+		'CBTagGarmentCovering
+		'
+		Me.CBTagGarmentCovering.AutoSize = True
+		Me.CBTagGarmentCovering.Enabled = False
+		Me.CBTagGarmentCovering.Location = New System.Drawing.Point(577, 77)
+		Me.CBTagGarmentCovering.Name = "CBTagGarmentCovering"
+		Me.CBTagGarmentCovering.Size = New System.Drawing.Size(110, 17)
+		Me.CBTagGarmentCovering.TabIndex = 208
+		Me.CBTagGarmentCovering.Text = "Garment Covering"
+		Me.CBTagGarmentCovering.UseVisualStyleBackColor = True
+		'
+		'CBTagCloseUp
+		'
+		Me.CBTagCloseUp.AutoSize = True
+		Me.CBTagCloseUp.Enabled = False
+		Me.CBTagCloseUp.ForeColor = System.Drawing.Color.Black
+		Me.CBTagCloseUp.Location = New System.Drawing.Point(577, 187)
+		Me.CBTagCloseUp.Name = "CBTagCloseUp"
+		Me.CBTagCloseUp.Size = New System.Drawing.Size(69, 17)
+		Me.CBTagCloseUp.TabIndex = 205
+		Me.CBTagCloseUp.Text = "Close Up"
+		Me.CBTagCloseUp.UseVisualStyleBackColor = True
+		'
+		'CBTagNaked
+		'
+		Me.CBTagNaked.AutoSize = True
+		Me.CBTagNaked.Enabled = False
+		Me.CBTagNaked.Location = New System.Drawing.Point(577, 136)
+		Me.CBTagNaked.Name = "CBTagNaked"
+		Me.CBTagNaked.Size = New System.Drawing.Size(57, 17)
+		Me.CBTagNaked.TabIndex = 199
+		Me.CBTagNaked.Text = "Naked"
+		Me.CBTagNaked.UseVisualStyleBackColor = True
+		'
+		'CBTagSideView
+		'
+		Me.CBTagSideView.AutoSize = True
+		Me.CBTagSideView.Enabled = False
+		Me.CBTagSideView.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSideView.Location = New System.Drawing.Point(577, 167)
+		Me.CBTagSideView.Name = "CBTagSideView"
+		Me.CBTagSideView.Size = New System.Drawing.Size(73, 17)
+		Me.CBTagSideView.TabIndex = 204
+		Me.CBTagSideView.Text = "Side View"
+		Me.CBTagSideView.UseVisualStyleBackColor = True
+		'
+		'BTNTagPrevious
+		'
+		Me.BTNTagPrevious.BackColor = System.Drawing.Color.LightGray
+		Me.BTNTagPrevious.Enabled = False
+		Me.BTNTagPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BTNTagPrevious.ForeColor = System.Drawing.Color.Black
+		Me.BTNTagPrevious.Location = New System.Drawing.Point(391, 8)
+		Me.BTNTagPrevious.Name = "BTNTagPrevious"
+		Me.BTNTagPrevious.Size = New System.Drawing.Size(47, 24)
+		Me.BTNTagPrevious.TabIndex = 207
+		Me.BTNTagPrevious.Text = "<<"
+		Me.BTNTagPrevious.UseVisualStyleBackColor = False
+		'
+		'CBTagHalfDressed
+		'
+		Me.CBTagHalfDressed.AutoSize = True
+		Me.CBTagHalfDressed.Enabled = False
+		Me.CBTagHalfDressed.Location = New System.Drawing.Point(577, 57)
+		Me.CBTagHalfDressed.Name = "CBTagHalfDressed"
+		Me.CBTagHalfDressed.Size = New System.Drawing.Size(86, 17)
+		Me.CBTagHalfDressed.TabIndex = 198
+		Me.CBTagHalfDressed.Text = "Half Dressed"
+		Me.CBTagHalfDressed.UseVisualStyleBackColor = True
+		'
+		'BTNTagNext
+		'
+		Me.BTNTagNext.BackColor = System.Drawing.Color.LightGray
+		Me.BTNTagNext.Enabled = False
+		Me.BTNTagNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BTNTagNext.ForeColor = System.Drawing.Color.Black
+		Me.BTNTagNext.Location = New System.Drawing.Point(560, 8)
+		Me.BTNTagNext.Name = "BTNTagNext"
+		Me.BTNTagNext.Size = New System.Drawing.Size(47, 24)
+		Me.BTNTagNext.TabIndex = 206
+		Me.BTNTagNext.Text = ">>"
+		Me.BTNTagNext.UseVisualStyleBackColor = False
+		'
+		'CBTagFullyDressed
+		'
+		Me.CBTagFullyDressed.AutoSize = True
+		Me.CBTagFullyDressed.Enabled = False
+		Me.CBTagFullyDressed.Location = New System.Drawing.Point(577, 37)
+		Me.CBTagFullyDressed.Name = "CBTagFullyDressed"
+		Me.CBTagFullyDressed.Size = New System.Drawing.Size(88, 17)
+		Me.CBTagFullyDressed.TabIndex = 197
+		Me.CBTagFullyDressed.Text = "Fully Dressed"
+		Me.CBTagFullyDressed.UseVisualStyleBackColor = True
+		'
+		'LBLTagCount
+		'
+		Me.LBLTagCount.BackColor = System.Drawing.Color.Transparent
+		Me.LBLTagCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLTagCount.Enabled = False
+		Me.LBLTagCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.LBLTagCount.ForeColor = System.Drawing.Color.Black
+		Me.LBLTagCount.Location = New System.Drawing.Point(444, 10)
+		Me.LBLTagCount.Name = "LBLTagCount"
+		Me.LBLTagCount.Size = New System.Drawing.Size(110, 20)
+		Me.LBLTagCount.TabIndex = 203
+		Me.LBLTagCount.Text = "0/0"
+		Me.LBLTagCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'CBTagSucking
+		'
+		Me.CBTagSucking.AutoSize = True
+		Me.CBTagSucking.Enabled = False
+		Me.CBTagSucking.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSucking.Location = New System.Drawing.Point(484, 187)
+		Me.CBTagSucking.Name = "CBTagSucking"
+		Me.CBTagSucking.Size = New System.Drawing.Size(65, 17)
+		Me.CBTagSucking.TabIndex = 202
+		Me.CBTagSucking.Text = "Sucking"
+		Me.CBTagSucking.UseVisualStyleBackColor = True
+		'
+		'CBTagMasturbating
+		'
+		Me.CBTagMasturbating.AutoSize = True
+		Me.CBTagMasturbating.Enabled = False
+		Me.CBTagMasturbating.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMasturbating.Location = New System.Drawing.Point(484, 167)
+		Me.CBTagMasturbating.Name = "CBTagMasturbating"
+		Me.CBTagMasturbating.Size = New System.Drawing.Size(87, 17)
+		Me.CBTagMasturbating.TabIndex = 201
+		Me.CBTagMasturbating.Text = "Masturbating"
+		Me.CBTagMasturbating.UseVisualStyleBackColor = True
+		'
+		'CBTagFeet
+		'
+		Me.CBTagFeet.AutoSize = True
+		Me.CBTagFeet.Enabled = False
+		Me.CBTagFeet.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFeet.Location = New System.Drawing.Point(484, 137)
+		Me.CBTagFeet.Name = "CBTagFeet"
+		Me.CBTagFeet.Size = New System.Drawing.Size(47, 17)
+		Me.CBTagFeet.TabIndex = 200
+		Me.CBTagFeet.Text = "Feet"
+		Me.CBTagFeet.UseVisualStyleBackColor = True
+		'
+		'CBTagBoobs
+		'
+		Me.CBTagBoobs.AutoSize = True
+		Me.CBTagBoobs.Enabled = False
+		Me.CBTagBoobs.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBoobs.Location = New System.Drawing.Point(484, 57)
+		Me.CBTagBoobs.Name = "CBTagBoobs"
+		Me.CBTagBoobs.Size = New System.Drawing.Size(56, 17)
+		Me.CBTagBoobs.TabIndex = 196
+		Me.CBTagBoobs.Text = "Boobs"
+		Me.CBTagBoobs.UseVisualStyleBackColor = True
+		'
+		'CBTagAss
+		'
+		Me.CBTagAss.AutoSize = True
+		Me.CBTagAss.Enabled = False
+		Me.CBTagAss.ForeColor = System.Drawing.Color.Black
+		Me.CBTagAss.Location = New System.Drawing.Point(484, 97)
+		Me.CBTagAss.Name = "CBTagAss"
+		Me.CBTagAss.Size = New System.Drawing.Size(43, 17)
+		Me.CBTagAss.TabIndex = 195
+		Me.CBTagAss.Text = "Ass"
+		Me.CBTagAss.UseVisualStyleBackColor = True
+		'
+		'CBTagPussy
+		'
+		Me.CBTagPussy.AutoSize = True
+		Me.CBTagPussy.Enabled = False
+		Me.CBTagPussy.ForeColor = System.Drawing.Color.Black
+		Me.CBTagPussy.Location = New System.Drawing.Point(484, 77)
+		Me.CBTagPussy.Name = "CBTagPussy"
+		Me.CBTagPussy.Size = New System.Drawing.Size(54, 17)
+		Me.CBTagPussy.TabIndex = 194
+		Me.CBTagPussy.Text = "Pussy"
+		Me.CBTagPussy.UseVisualStyleBackColor = True
+		'
+		'BTNTagSave
+		'
+		Me.BTNTagSave.Enabled = False
+		Me.BTNTagSave.Location = New System.Drawing.Point(613, 9)
+		Me.BTNTagSave.Name = "BTNTagSave"
+		Me.BTNTagSave.Size = New System.Drawing.Size(83, 23)
+		Me.BTNTagSave.TabIndex = 193
+		Me.BTNTagSave.Text = "Finished"
+		Me.BTNTagSave.UseVisualStyleBackColor = True
+		'
+		'BTNTagDir
+		'
+		Me.BTNTagDir.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
+		Me.BTNTagDir.Location = New System.Drawing.Point(6, 8)
+		Me.BTNTagDir.Name = "BTNTagDir"
+		Me.BTNTagDir.Size = New System.Drawing.Size(43, 23)
+		Me.BTNTagDir.TabIndex = 192
+		Me.BTNTagDir.Text = "1"
+		Me.BTNTagDir.UseVisualStyleBackColor = True
+		'
+		'ImageTagPictureBox
+		'
+		Me.ImageTagPictureBox.BackColor = System.Drawing.Color.Black
+		Me.ImageTagPictureBox.Location = New System.Drawing.Point(5, 37)
+		Me.ImageTagPictureBox.Name = "ImageTagPictureBox"
+		Me.ImageTagPictureBox.Size = New System.Drawing.Size(451, 328)
+		Me.ImageTagPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+		Me.ImageTagPictureBox.TabIndex = 191
+		Me.ImageTagPictureBox.TabStop = False
+		'
+		'CBTagFace
+		'
+		Me.CBTagFace.AutoSize = True
+		Me.CBTagFace.Enabled = False
+		Me.CBTagFace.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFace.Location = New System.Drawing.Point(484, 37)
+		Me.CBTagFace.Name = "CBTagFace"
+		Me.CBTagFace.Size = New System.Drawing.Size(50, 17)
+		Me.CBTagFace.TabIndex = 190
+		Me.CBTagFace.Text = "Face"
+		Me.CBTagFace.UseVisualStyleBackColor = True
+		'
+		'GroupBox55
+		'
+		Me.GroupBox55.Controls.Add(Me.CBTagNurse)
+		Me.GroupBox55.Controls.Add(Me.CBTagSchoolgirl)
+		Me.GroupBox55.Controls.Add(Me.CBTagMaid)
+		Me.GroupBox55.Controls.Add(Me.CBTagTeacher)
+		Me.GroupBox55.Controls.Add(Me.CBTagSuperhero)
+		Me.GroupBox55.Location = New System.Drawing.Point(341, 277)
+		Me.GroupBox55.Name = "GroupBox55"
+		Me.GroupBox55.Size = New System.Drawing.Size(103, 118)
+		Me.GroupBox55.TabIndex = 241
+		Me.GroupBox55.TabStop = False
+		Me.GroupBox55.Text = "Outfit"
+		'
+		'CBTagNurse
+		'
+		Me.CBTagNurse.AutoSize = True
+		Me.CBTagNurse.Enabled = False
+		Me.CBTagNurse.ForeColor = System.Drawing.Color.Black
+		Me.CBTagNurse.Location = New System.Drawing.Point(15, 17)
+		Me.CBTagNurse.Name = "CBTagNurse"
+		Me.CBTagNurse.Size = New System.Drawing.Size(54, 17)
+		Me.CBTagNurse.TabIndex = 203
+		Me.CBTagNurse.Text = "Nurse"
+		Me.CBTagNurse.UseVisualStyleBackColor = True
+		'
+		'CBTagSchoolgirl
+		'
+		Me.CBTagSchoolgirl.AutoSize = True
+		Me.CBTagSchoolgirl.Enabled = False
+		Me.CBTagSchoolgirl.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSchoolgirl.Location = New System.Drawing.Point(15, 57)
+		Me.CBTagSchoolgirl.Name = "CBTagSchoolgirl"
+		Me.CBTagSchoolgirl.Size = New System.Drawing.Size(72, 17)
+		Me.CBTagSchoolgirl.TabIndex = 204
+		Me.CBTagSchoolgirl.Text = "Schoolgirl"
+		Me.CBTagSchoolgirl.UseVisualStyleBackColor = True
+		'
+		'CBTagMaid
+		'
+		Me.CBTagMaid.AutoSize = True
+		Me.CBTagMaid.Enabled = False
+		Me.CBTagMaid.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMaid.Location = New System.Drawing.Point(15, 77)
+		Me.CBTagMaid.Name = "CBTagMaid"
+		Me.CBTagMaid.Size = New System.Drawing.Size(49, 17)
+		Me.CBTagMaid.TabIndex = 205
+		Me.CBTagMaid.Text = "Maid"
+		Me.CBTagMaid.UseVisualStyleBackColor = True
+		'
+		'CBTagTeacher
+		'
+		Me.CBTagTeacher.AutoSize = True
+		Me.CBTagTeacher.Enabled = False
+		Me.CBTagTeacher.ForeColor = System.Drawing.Color.Black
+		Me.CBTagTeacher.Location = New System.Drawing.Point(15, 37)
+		Me.CBTagTeacher.Name = "CBTagTeacher"
+		Me.CBTagTeacher.Size = New System.Drawing.Size(66, 17)
+		Me.CBTagTeacher.TabIndex = 206
+		Me.CBTagTeacher.Text = "Teacher"
+		Me.CBTagTeacher.UseVisualStyleBackColor = True
+		'
+		'CBTagSuperhero
+		'
+		Me.CBTagSuperhero.AutoSize = True
+		Me.CBTagSuperhero.Enabled = False
+		Me.CBTagSuperhero.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSuperhero.Location = New System.Drawing.Point(15, 97)
+		Me.CBTagSuperhero.Name = "CBTagSuperhero"
+		Me.CBTagSuperhero.Size = New System.Drawing.Size(75, 17)
+		Me.CBTagSuperhero.TabIndex = 213
+		Me.CBTagSuperhero.Text = "Superhero"
+		Me.CBTagSuperhero.UseVisualStyleBackColor = True
+		'
+		'GroupBox53
+		'
+		Me.GroupBox53.Controls.Add(Me.CBTagTrap)
+		Me.GroupBox53.Controls.Add(Me.CBTagTentacles)
+		Me.GroupBox53.Controls.Add(Me.CBTagMonsterGirl)
+		Me.GroupBox53.Controls.Add(Me.CBTagBukkake)
+		Me.GroupBox53.Controls.Add(Me.CBTagGanguro)
+		Me.GroupBox53.Controls.Add(Me.CBTagBodyWriting)
+		Me.GroupBox53.Controls.Add(Me.CBTagMahouShoujo)
+		Me.GroupBox53.Controls.Add(Me.CBTagBakunyuu)
+		Me.GroupBox53.Controls.Add(Me.CBTagAhegao)
+		Me.GroupBox53.Controls.Add(Me.CBTagShibari)
+		Me.GroupBox53.Location = New System.Drawing.Point(450, 277)
+		Me.GroupBox53.Name = "GroupBox53"
+		Me.GroupBox53.Size = New System.Drawing.Size(246, 118)
+		Me.GroupBox53.TabIndex = 240
+		Me.GroupBox53.TabStop = False
+		Me.GroupBox53.Text = "Hentai/JAV Themes"
+		'
+		'CBTagTrap
+		'
+		Me.CBTagTrap.AutoSize = True
+		Me.CBTagTrap.Enabled = False
+		Me.CBTagTrap.ForeColor = System.Drawing.Color.Black
+		Me.CBTagTrap.Location = New System.Drawing.Point(126, 37)
+		Me.CBTagTrap.Name = "CBTagTrap"
+		Me.CBTagTrap.Size = New System.Drawing.Size(48, 17)
+		Me.CBTagTrap.TabIndex = 226
+		Me.CBTagTrap.Text = "Trap"
+		Me.CBTagTrap.UseVisualStyleBackColor = True
+		'
+		'CBTagTentacles
+		'
+		Me.CBTagTentacles.AutoSize = True
+		Me.CBTagTentacles.Enabled = False
+		Me.CBTagTentacles.ForeColor = System.Drawing.Color.Black
+		Me.CBTagTentacles.Location = New System.Drawing.Point(15, 37)
+		Me.CBTagTentacles.Name = "CBTagTentacles"
+		Me.CBTagTentacles.Size = New System.Drawing.Size(73, 17)
+		Me.CBTagTentacles.TabIndex = 204
+		Me.CBTagTentacles.Text = "Tentacles"
+		Me.CBTagTentacles.UseVisualStyleBackColor = True
+		'
+		'CBTagMonsterGirl
+		'
+		Me.CBTagMonsterGirl.AutoSize = True
+		Me.CBTagMonsterGirl.Enabled = False
+		Me.CBTagMonsterGirl.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMonsterGirl.Location = New System.Drawing.Point(126, 97)
+		Me.CBTagMonsterGirl.Name = "CBTagMonsterGirl"
+		Me.CBTagMonsterGirl.Size = New System.Drawing.Size(82, 17)
+		Me.CBTagMonsterGirl.TabIndex = 214
+		Me.CBTagMonsterGirl.Text = "Monster Girl"
+		Me.CBTagMonsterGirl.UseVisualStyleBackColor = True
+		'
+		'CBTagBukkake
+		'
+		Me.CBTagBukkake.AutoSize = True
+		Me.CBTagBukkake.Enabled = False
+		Me.CBTagBukkake.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBukkake.Location = New System.Drawing.Point(15, 57)
+		Me.CBTagBukkake.Name = "CBTagBukkake"
+		Me.CBTagBukkake.Size = New System.Drawing.Size(69, 17)
+		Me.CBTagBukkake.TabIndex = 210
+		Me.CBTagBukkake.Text = "Bukkake"
+		Me.CBTagBukkake.UseVisualStyleBackColor = True
+		'
+		'CBTagGanguro
+		'
+		Me.CBTagGanguro.AutoSize = True
+		Me.CBTagGanguro.Enabled = False
+		Me.CBTagGanguro.ForeColor = System.Drawing.Color.Black
+		Me.CBTagGanguro.Location = New System.Drawing.Point(126, 57)
+		Me.CBTagGanguro.Name = "CBTagGanguro"
+		Me.CBTagGanguro.Size = New System.Drawing.Size(67, 17)
+		Me.CBTagGanguro.TabIndex = 205
+		Me.CBTagGanguro.Text = "Ganguro"
+		Me.CBTagGanguro.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyWriting
+		'
+		Me.CBTagBodyWriting.AutoSize = True
+		Me.CBTagBodyWriting.Enabled = False
+		Me.CBTagBodyWriting.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyWriting.Location = New System.Drawing.Point(126, 17)
+		Me.CBTagBodyWriting.Name = "CBTagBodyWriting"
+		Me.CBTagBodyWriting.Size = New System.Drawing.Size(86, 17)
+		Me.CBTagBodyWriting.TabIndex = 208
+		Me.CBTagBodyWriting.Text = "Body Writing"
+		Me.CBTagBodyWriting.UseVisualStyleBackColor = True
+		'
+		'CBTagMahouShoujo
+		'
+		Me.CBTagMahouShoujo.AutoSize = True
+		Me.CBTagMahouShoujo.Enabled = False
+		Me.CBTagMahouShoujo.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMahouShoujo.Location = New System.Drawing.Point(126, 77)
+		Me.CBTagMahouShoujo.Name = "CBTagMahouShoujo"
+		Me.CBTagMahouShoujo.Size = New System.Drawing.Size(95, 17)
+		Me.CBTagMahouShoujo.TabIndex = 209
+		Me.CBTagMahouShoujo.Text = "Mahou Shoujo"
+		Me.CBTagMahouShoujo.UseVisualStyleBackColor = True
+		'
+		'CBTagBakunyuu
+		'
+		Me.CBTagBakunyuu.AutoSize = True
+		Me.CBTagBakunyuu.Enabled = False
+		Me.CBTagBakunyuu.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBakunyuu.Location = New System.Drawing.Point(15, 77)
+		Me.CBTagBakunyuu.Name = "CBTagBakunyuu"
+		Me.CBTagBakunyuu.Size = New System.Drawing.Size(74, 17)
+		Me.CBTagBakunyuu.TabIndex = 213
+		Me.CBTagBakunyuu.Text = "Bakunyuu"
+		Me.CBTagBakunyuu.UseVisualStyleBackColor = True
+		'
+		'CBTagAhegao
+		'
+		Me.CBTagAhegao.AutoSize = True
+		Me.CBTagAhegao.Enabled = False
+		Me.CBTagAhegao.ForeColor = System.Drawing.Color.Black
+		Me.CBTagAhegao.Location = New System.Drawing.Point(15, 97)
+		Me.CBTagAhegao.Name = "CBTagAhegao"
+		Me.CBTagAhegao.Size = New System.Drawing.Size(63, 17)
+		Me.CBTagAhegao.TabIndex = 207
+		Me.CBTagAhegao.Text = "Ahegao"
+		Me.CBTagAhegao.UseVisualStyleBackColor = True
+		'
+		'CBTagShibari
+		'
+		Me.CBTagShibari.AutoSize = True
+		Me.CBTagShibari.Enabled = False
+		Me.CBTagShibari.ForeColor = System.Drawing.Color.Black
+		Me.CBTagShibari.Location = New System.Drawing.Point(15, 17)
+		Me.CBTagShibari.Name = "CBTagShibari"
+		Me.CBTagShibari.Size = New System.Drawing.Size(58, 17)
+		Me.CBTagShibari.TabIndex = 203
+		Me.CBTagShibari.Text = "Shibari"
+		Me.CBTagShibari.UseVisualStyleBackColor = True
+		'
+		'GroupBox49
+		'
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyMouth)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyAss)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyFace)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyLegs)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyBalls)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyCock)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyFeet)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyNipples)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyPussy)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyTits)
+		Me.GroupBox49.Controls.Add(Me.CBTagBodyFingers)
+		Me.GroupBox49.Location = New System.Drawing.Point(341, 37)
+		Me.GroupBox49.Name = "GroupBox49"
+		Me.GroupBox49.Size = New System.Drawing.Size(103, 238)
+		Me.GroupBox49.TabIndex = 236
+		Me.GroupBox49.TabStop = False
+		Me.GroupBox49.Text = "Body Part"
+		'
+		'CBTagBodyMouth
+		'
+		Me.CBTagBodyMouth.AutoSize = True
+		Me.CBTagBodyMouth.Enabled = False
+		Me.CBTagBodyMouth.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyMouth.Location = New System.Drawing.Point(14, 57)
+		Me.CBTagBodyMouth.Name = "CBTagBodyMouth"
+		Me.CBTagBodyMouth.Size = New System.Drawing.Size(56, 17)
+		Me.CBTagBodyMouth.TabIndex = 220
+		Me.CBTagBodyMouth.Text = "Mouth"
+		Me.CBTagBodyMouth.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyAss
+		'
+		Me.CBTagBodyAss.AutoSize = True
+		Me.CBTagBodyAss.Enabled = False
+		Me.CBTagBodyAss.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyAss.Location = New System.Drawing.Point(15, 137)
+		Me.CBTagBodyAss.Name = "CBTagBodyAss"
+		Me.CBTagBodyAss.Size = New System.Drawing.Size(43, 17)
+		Me.CBTagBodyAss.TabIndex = 219
+		Me.CBTagBodyAss.Text = "Ass"
+		Me.CBTagBodyAss.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyFace
+		'
+		Me.CBTagBodyFace.AutoSize = True
+		Me.CBTagBodyFace.Enabled = False
+		Me.CBTagBodyFace.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyFace.Location = New System.Drawing.Point(15, 17)
+		Me.CBTagBodyFace.Name = "CBTagBodyFace"
+		Me.CBTagBodyFace.Size = New System.Drawing.Size(50, 17)
+		Me.CBTagBodyFace.TabIndex = 203
+		Me.CBTagBodyFace.Text = "Face"
+		Me.CBTagBodyFace.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyLegs
+		'
+		Me.CBTagBodyLegs.AutoSize = True
+		Me.CBTagBodyLegs.Enabled = False
+		Me.CBTagBodyLegs.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyLegs.Location = New System.Drawing.Point(15, 157)
+		Me.CBTagBodyLegs.Name = "CBTagBodyLegs"
+		Me.CBTagBodyLegs.Size = New System.Drawing.Size(49, 17)
+		Me.CBTagBodyLegs.TabIndex = 218
+		Me.CBTagBodyLegs.Text = "Legs"
+		Me.CBTagBodyLegs.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyBalls
+		'
+		Me.CBTagBodyBalls.AutoSize = True
+		Me.CBTagBodyBalls.Enabled = False
+		Me.CBTagBodyBalls.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyBalls.Location = New System.Drawing.Point(15, 217)
+		Me.CBTagBodyBalls.Name = "CBTagBodyBalls"
+		Me.CBTagBodyBalls.Size = New System.Drawing.Size(48, 17)
+		Me.CBTagBodyBalls.TabIndex = 217
+		Me.CBTagBodyBalls.Text = "Balls"
+		Me.CBTagBodyBalls.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyCock
+		'
+		Me.CBTagBodyCock.AutoSize = True
+		Me.CBTagBodyCock.Enabled = False
+		Me.CBTagBodyCock.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyCock.Location = New System.Drawing.Point(15, 197)
+		Me.CBTagBodyCock.Name = "CBTagBodyCock"
+		Me.CBTagBodyCock.Size = New System.Drawing.Size(51, 17)
+		Me.CBTagBodyCock.TabIndex = 216
+		Me.CBTagBodyCock.Text = "Cock"
+		Me.CBTagBodyCock.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyFeet
+		'
+		Me.CBTagBodyFeet.AutoSize = True
+		Me.CBTagBodyFeet.Enabled = False
+		Me.CBTagBodyFeet.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyFeet.Location = New System.Drawing.Point(15, 177)
+		Me.CBTagBodyFeet.Name = "CBTagBodyFeet"
+		Me.CBTagBodyFeet.Size = New System.Drawing.Size(47, 17)
+		Me.CBTagBodyFeet.TabIndex = 215
+		Me.CBTagBodyFeet.Text = "Feet"
+		Me.CBTagBodyFeet.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyNipples
+		'
+		Me.CBTagBodyNipples.AutoSize = True
+		Me.CBTagBodyNipples.Enabled = False
+		Me.CBTagBodyNipples.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyNipples.Location = New System.Drawing.Point(15, 97)
+		Me.CBTagBodyNipples.Name = "CBTagBodyNipples"
+		Me.CBTagBodyNipples.Size = New System.Drawing.Size(61, 17)
+		Me.CBTagBodyNipples.TabIndex = 207
+		Me.CBTagBodyNipples.Text = "Nipples"
+		Me.CBTagBodyNipples.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyPussy
+		'
+		Me.CBTagBodyPussy.AutoSize = True
+		Me.CBTagBodyPussy.Enabled = False
+		Me.CBTagBodyPussy.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyPussy.Location = New System.Drawing.Point(15, 117)
+		Me.CBTagBodyPussy.Name = "CBTagBodyPussy"
+		Me.CBTagBodyPussy.Size = New System.Drawing.Size(54, 17)
+		Me.CBTagBodyPussy.TabIndex = 209
+		Me.CBTagBodyPussy.Text = "Pussy"
+		Me.CBTagBodyPussy.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyTits
+		'
+		Me.CBTagBodyTits.AutoSize = True
+		Me.CBTagBodyTits.Enabled = False
+		Me.CBTagBodyTits.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyTits.Location = New System.Drawing.Point(15, 77)
+		Me.CBTagBodyTits.Name = "CBTagBodyTits"
+		Me.CBTagBodyTits.Size = New System.Drawing.Size(43, 17)
+		Me.CBTagBodyTits.TabIndex = 213
+		Me.CBTagBodyTits.Text = "Tits"
+		Me.CBTagBodyTits.UseVisualStyleBackColor = True
+		'
+		'CBTagBodyFingers
+		'
+		Me.CBTagBodyFingers.AutoSize = True
+		Me.CBTagBodyFingers.Enabled = False
+		Me.CBTagBodyFingers.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBodyFingers.Location = New System.Drawing.Point(15, 37)
+		Me.CBTagBodyFingers.Name = "CBTagBodyFingers"
+		Me.CBTagBodyFingers.Size = New System.Drawing.Size(60, 17)
+		Me.CBTagBodyFingers.TabIndex = 210
+		Me.CBTagBodyFingers.Text = "Fingers"
+		Me.CBTagBodyFingers.UseVisualStyleBackColor = True
+		'
+		'GroupBox46
+		'
+		Me.GroupBox46.Controls.Add(Me.CBTagMultiSub)
+		Me.GroupBox46.Controls.Add(Me.CBTagMultiDom)
+		Me.GroupBox46.Controls.Add(Me.CBTagFemdom)
+		Me.GroupBox46.Controls.Add(Me.CBTag2M)
+		Me.GroupBox46.Controls.Add(Me.CBTagFutadom)
+		Me.GroupBox46.Controls.Add(Me.CBTagFemsub)
+		Me.GroupBox46.Controls.Add(Me.CBTag2Futa)
+		Me.GroupBox46.Controls.Add(Me.CBTagMaledom)
+		Me.GroupBox46.Controls.Add(Me.CBTag3M)
+		Me.GroupBox46.Controls.Add(Me.CBTagFutasub)
+		Me.GroupBox46.Controls.Add(Me.CBTag3Futa)
+		Me.GroupBox46.Controls.Add(Me.CBTagMalesub)
+		Me.GroupBox46.Controls.Add(Me.CBTag2F)
+		Me.GroupBox46.Controls.Add(Me.CBTag1Futa)
+		Me.GroupBox46.Controls.Add(Me.CBTag1M)
+		Me.GroupBox46.Controls.Add(Me.CBTag1F)
+		Me.GroupBox46.Controls.Add(Me.CBTag3F)
+		Me.GroupBox46.Location = New System.Drawing.Point(230, 37)
+		Me.GroupBox46.Name = "GroupBox46"
+		Me.GroupBox46.Size = New System.Drawing.Size(105, 358)
+		Me.GroupBox46.TabIndex = 234
+		Me.GroupBox46.TabStop = False
+		Me.GroupBox46.Text = "Genders && Roles"
+		'
+		'CBTagMultiSub
+		'
+		Me.CBTagMultiSub.AutoSize = True
+		Me.CBTagMultiSub.Enabled = False
+		Me.CBTagMultiSub.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMultiSub.Location = New System.Drawing.Point(15, 337)
+		Me.CBTagMultiSub.Name = "CBTagMultiSub"
+		Me.CBTagMultiSub.Size = New System.Drawing.Size(70, 17)
+		Me.CBTagMultiSub.TabIndex = 207
+		Me.CBTagMultiSub.Text = "Multi-Sub"
+		Me.CBTagMultiSub.UseVisualStyleBackColor = True
+		'
+		'CBTagMultiDom
+		'
+		Me.CBTagMultiDom.AutoSize = True
+		Me.CBTagMultiDom.Enabled = False
+		Me.CBTagMultiDom.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMultiDom.Location = New System.Drawing.Point(15, 317)
+		Me.CBTagMultiDom.Name = "CBTagMultiDom"
+		Me.CBTagMultiDom.Size = New System.Drawing.Size(73, 17)
+		Me.CBTagMultiDom.TabIndex = 230
+		Me.CBTagMultiDom.Text = "Multi-Dom"
+		Me.CBTagMultiDom.UseVisualStyleBackColor = True
+		'
+		'CBTagFemdom
+		'
+		Me.CBTagFemdom.AutoSize = True
+		Me.CBTagFemdom.Enabled = False
+		Me.CBTagFemdom.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFemdom.Location = New System.Drawing.Point(15, 197)
+		Me.CBTagFemdom.Name = "CBTagFemdom"
+		Me.CBTagFemdom.Size = New System.Drawing.Size(66, 17)
+		Me.CBTagFemdom.TabIndex = 229
+		Me.CBTagFemdom.Text = "Femdom"
+		Me.CBTagFemdom.UseVisualStyleBackColor = True
+		'
+		'CBTag2M
+		'
+		Me.CBTag2M.AutoSize = True
+		Me.CBTag2M.Enabled = False
+		Me.CBTag2M.ForeColor = System.Drawing.Color.Black
+		Me.CBTag2M.Location = New System.Drawing.Point(15, 97)
+		Me.CBTag2M.Name = "CBTag2M"
+		Me.CBTag2M.Size = New System.Drawing.Size(56, 17)
+		Me.CBTag2M.TabIndex = 206
+		Me.CBTag2M.Text = "2 Men"
+		Me.CBTag2M.UseVisualStyleBackColor = True
+		'
+		'CBTagFutadom
+		'
+		Me.CBTagFutadom.AutoSize = True
+		Me.CBTagFutadom.Enabled = False
+		Me.CBTagFutadom.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFutadom.Location = New System.Drawing.Point(15, 237)
+		Me.CBTagFutadom.Name = "CBTagFutadom"
+		Me.CBTagFutadom.Size = New System.Drawing.Size(67, 17)
+		Me.CBTagFutadom.TabIndex = 204
+		Me.CBTagFutadom.Text = "Futadom"
+		Me.CBTagFutadom.UseVisualStyleBackColor = True
+		'
+		'CBTagFemsub
+		'
+		Me.CBTagFemsub.AutoSize = True
+		Me.CBTagFemsub.Enabled = False
+		Me.CBTagFemsub.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFemsub.Location = New System.Drawing.Point(15, 257)
+		Me.CBTagFemsub.Name = "CBTagFemsub"
+		Me.CBTagFemsub.Size = New System.Drawing.Size(63, 17)
+		Me.CBTagFemsub.TabIndex = 205
+		Me.CBTagFemsub.Text = "Femsub"
+		Me.CBTagFemsub.UseVisualStyleBackColor = True
+		'
+		'CBTag2Futa
+		'
+		Me.CBTag2Futa.AutoSize = True
+		Me.CBTag2Futa.Enabled = False
+		Me.CBTag2Futa.ForeColor = System.Drawing.Color.Black
+		Me.CBTag2Futa.Location = New System.Drawing.Point(15, 157)
+		Me.CBTag2Futa.Name = "CBTag2Futa"
+		Me.CBTag2Futa.Size = New System.Drawing.Size(56, 17)
+		Me.CBTag2Futa.TabIndex = 186
+		Me.CBTag2Futa.Text = "2 Futa"
+		Me.CBTag2Futa.UseVisualStyleBackColor = True
+		'
+		'CBTagMaledom
+		'
+		Me.CBTagMaledom.AutoSize = True
+		Me.CBTagMaledom.Enabled = False
+		Me.CBTagMaledom.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMaledom.Location = New System.Drawing.Point(15, 217)
+		Me.CBTagMaledom.Name = "CBTagMaledom"
+		Me.CBTagMaledom.Size = New System.Drawing.Size(69, 17)
+		Me.CBTagMaledom.TabIndex = 206
+		Me.CBTagMaledom.Text = "Maledom"
+		Me.CBTagMaledom.UseVisualStyleBackColor = True
+		'
+		'CBTag3M
+		'
+		Me.CBTag3M.AutoSize = True
+		Me.CBTag3M.Enabled = False
+		Me.CBTag3M.ForeColor = System.Drawing.Color.Black
+		Me.CBTag3M.Location = New System.Drawing.Point(15, 117)
+		Me.CBTag3M.Name = "CBTag3M"
+		Me.CBTag3M.Size = New System.Drawing.Size(56, 17)
+		Me.CBTag3M.TabIndex = 190
+		Me.CBTag3M.Text = "3 Men"
+		Me.CBTag3M.UseVisualStyleBackColor = True
+		'
+		'CBTagFutasub
+		'
+		Me.CBTagFutasub.AutoSize = True
+		Me.CBTagFutasub.Enabled = False
+		Me.CBTagFutasub.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFutasub.Location = New System.Drawing.Point(15, 297)
+		Me.CBTagFutasub.Name = "CBTagFutasub"
+		Me.CBTagFutasub.Size = New System.Drawing.Size(64, 17)
+		Me.CBTagFutasub.TabIndex = 213
+		Me.CBTagFutasub.Text = "Futasub"
+		Me.CBTagFutasub.UseVisualStyleBackColor = True
+		'
+		'CBTag3Futa
+		'
+		Me.CBTag3Futa.AutoSize = True
+		Me.CBTag3Futa.Enabled = False
+		Me.CBTag3Futa.ForeColor = System.Drawing.Color.Black
+		Me.CBTag3Futa.Location = New System.Drawing.Point(15, 177)
+		Me.CBTag3Futa.Name = "CBTag3Futa"
+		Me.CBTag3Futa.Size = New System.Drawing.Size(56, 17)
+		Me.CBTag3Futa.TabIndex = 197
+		Me.CBTag3Futa.Text = "3 Futa"
+		Me.CBTag3Futa.UseVisualStyleBackColor = True
+		'
+		'CBTagMalesub
+		'
+		Me.CBTagMalesub.AutoSize = True
+		Me.CBTagMalesub.Enabled = False
+		Me.CBTagMalesub.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMalesub.Location = New System.Drawing.Point(15, 277)
+		Me.CBTagMalesub.Name = "CBTagMalesub"
+		Me.CBTagMalesub.Size = New System.Drawing.Size(66, 17)
+		Me.CBTagMalesub.TabIndex = 210
+		Me.CBTagMalesub.Text = "Malesub"
+		Me.CBTagMalesub.UseVisualStyleBackColor = True
+		'
+		'CBTag2F
+		'
+		Me.CBTag2F.AutoSize = True
+		Me.CBTag2F.Enabled = False
+		Me.CBTag2F.ForeColor = System.Drawing.Color.Black
+		Me.CBTag2F.Location = New System.Drawing.Point(15, 37)
+		Me.CBTag2F.Name = "CBTag2F"
+		Me.CBTag2F.Size = New System.Drawing.Size(72, 17)
+		Me.CBTag2F.TabIndex = 188
+		Me.CBTag2F.Text = "2 Women"
+		Me.CBTag2F.UseVisualStyleBackColor = True
+		'
+		'CBTag1Futa
+		'
+		Me.CBTag1Futa.AutoSize = True
+		Me.CBTag1Futa.Enabled = False
+		Me.CBTag1Futa.ForeColor = System.Drawing.Color.Black
+		Me.CBTag1Futa.Location = New System.Drawing.Point(15, 137)
+		Me.CBTag1Futa.Name = "CBTag1Futa"
+		Me.CBTag1Futa.Size = New System.Drawing.Size(56, 17)
+		Me.CBTag1Futa.TabIndex = 191
+		Me.CBTag1Futa.Text = "1 Futa"
+		Me.CBTag1Futa.UseVisualStyleBackColor = True
+		'
+		'CBTag1M
+		'
+		Me.CBTag1M.AutoSize = True
+		Me.CBTag1M.Enabled = False
+		Me.CBTag1M.ForeColor = System.Drawing.Color.Black
+		Me.CBTag1M.Location = New System.Drawing.Point(15, 77)
+		Me.CBTag1M.Name = "CBTag1M"
+		Me.CBTag1M.Size = New System.Drawing.Size(56, 17)
+		Me.CBTag1M.TabIndex = 189
+		Me.CBTag1M.Text = "1 Man"
+		Me.CBTag1M.UseVisualStyleBackColor = True
+		'
+		'CBTag1F
+		'
+		Me.CBTag1F.AutoSize = True
+		Me.CBTag1F.Enabled = False
+		Me.CBTag1F.ForeColor = System.Drawing.Color.Black
+		Me.CBTag1F.Location = New System.Drawing.Point(15, 17)
+		Me.CBTag1F.Name = "CBTag1F"
+		Me.CBTag1F.Size = New System.Drawing.Size(72, 17)
+		Me.CBTag1F.TabIndex = 185
+		Me.CBTag1F.Text = "1 Woman"
+		Me.CBTag1F.UseVisualStyleBackColor = True
+		'
+		'CBTag3F
+		'
+		Me.CBTag3F.AutoSize = True
+		Me.CBTag3F.Enabled = False
+		Me.CBTag3F.ForeColor = System.Drawing.Color.Black
+		Me.CBTag3F.Location = New System.Drawing.Point(15, 57)
+		Me.CBTag3F.Name = "CBTag3F"
+		Me.CBTag3F.Size = New System.Drawing.Size(72, 17)
+		Me.CBTag3F.TabIndex = 192
+		Me.CBTag3F.Text = "3 Women"
+		Me.CBTag3F.UseVisualStyleBackColor = True
+		'
+		'GroupBox54
+		'
+		Me.GroupBox54.Controls.Add(Me.CBTagTattoos)
+		Me.GroupBox54.Controls.Add(Me.CBTagAnalToy)
+		Me.GroupBox54.Controls.Add(Me.CBTagDomme)
+		Me.GroupBox54.Controls.Add(Me.CBTagPocketPussy)
+		Me.GroupBox54.Controls.Add(Me.CBTagWatersports)
+		Me.GroupBox54.Controls.Add(Me.CBTagStockings)
+		Me.GroupBox54.Controls.Add(Me.CBTagCumshot)
+		Me.GroupBox54.Controls.Add(Me.CBTagCumEating)
+		Me.GroupBox54.Controls.Add(Me.CBTagVibrator)
+		Me.GroupBox54.Controls.Add(Me.CBTagDildo)
+		Me.GroupBox54.Controls.Add(Me.CBTagKissing)
+		Me.GroupBox54.Location = New System.Drawing.Point(561, 37)
+		Me.GroupBox54.Name = "GroupBox54"
+		Me.GroupBox54.Size = New System.Drawing.Size(135, 238)
+		Me.GroupBox54.TabIndex = 239
+		Me.GroupBox54.TabStop = False
+		Me.GroupBox54.Text = "Misc"
+		'
+		'CBTagTattoos
+		'
+		Me.CBTagTattoos.AutoSize = True
+		Me.CBTagTattoos.Enabled = False
+		Me.CBTagTattoos.ForeColor = System.Drawing.Color.Black
+		Me.CBTagTattoos.Location = New System.Drawing.Point(15, 97)
+		Me.CBTagTattoos.Name = "CBTagTattoos"
+		Me.CBTagTattoos.Size = New System.Drawing.Size(62, 17)
+		Me.CBTagTattoos.TabIndex = 214
+		Me.CBTagTattoos.Text = "Tattoos"
+		Me.CBTagTattoos.UseVisualStyleBackColor = True
+		'
+		'CBTagAnalToy
+		'
+		Me.CBTagAnalToy.AutoSize = True
+		Me.CBTagAnalToy.Enabled = False
+		Me.CBTagAnalToy.ForeColor = System.Drawing.Color.Black
+		Me.CBTagAnalToy.Location = New System.Drawing.Point(15, 197)
+		Me.CBTagAnalToy.Name = "CBTagAnalToy"
+		Me.CBTagAnalToy.Size = New System.Drawing.Size(68, 17)
+		Me.CBTagAnalToy.TabIndex = 215
+		Me.CBTagAnalToy.Text = "Anal Toy"
+		Me.CBTagAnalToy.UseVisualStyleBackColor = True
+		'
+		'CBTagDomme
+		'
+		Me.CBTagDomme.AutoSize = True
+		Me.CBTagDomme.Enabled = False
+		Me.CBTagDomme.ForeColor = System.Drawing.Color.Black
+		Me.CBTagDomme.Location = New System.Drawing.Point(15, 17)
+		Me.CBTagDomme.Name = "CBTagDomme"
+		Me.CBTagDomme.Size = New System.Drawing.Size(114, 17)
+		Me.CBTagDomme.TabIndex = 219
+		Me.CBTagDomme.Text = "Tease A.I. Domme"
+		Me.CBTagDomme.UseVisualStyleBackColor = True
+		'
+		'CBTagPocketPussy
+		'
+		Me.CBTagPocketPussy.AutoSize = True
+		Me.CBTagPocketPussy.Enabled = False
+		Me.CBTagPocketPussy.ForeColor = System.Drawing.Color.Black
+		Me.CBTagPocketPussy.Location = New System.Drawing.Point(15, 177)
+		Me.CBTagPocketPussy.Name = "CBTagPocketPussy"
+		Me.CBTagPocketPussy.Size = New System.Drawing.Size(91, 17)
+		Me.CBTagPocketPussy.TabIndex = 205
+		Me.CBTagPocketPussy.Text = "Pocket Pussy"
+		Me.CBTagPocketPussy.UseVisualStyleBackColor = True
+		'
+		'CBTagWatersports
+		'
+		Me.CBTagWatersports.AutoSize = True
+		Me.CBTagWatersports.Enabled = False
+		Me.CBTagWatersports.ForeColor = System.Drawing.Color.Black
+		Me.CBTagWatersports.Location = New System.Drawing.Point(15, 217)
+		Me.CBTagWatersports.Name = "CBTagWatersports"
+		Me.CBTagWatersports.Size = New System.Drawing.Size(83, 17)
+		Me.CBTagWatersports.TabIndex = 218
+		Me.CBTagWatersports.Text = "Watersports"
+		Me.CBTagWatersports.UseVisualStyleBackColor = True
+		'
+		'CBTagStockings
+		'
+		Me.CBTagStockings.AutoSize = True
+		Me.CBTagStockings.Enabled = False
+		Me.CBTagStockings.ForeColor = System.Drawing.Color.Black
+		Me.CBTagStockings.Location = New System.Drawing.Point(15, 117)
+		Me.CBTagStockings.Name = "CBTagStockings"
+		Me.CBTagStockings.Size = New System.Drawing.Size(73, 17)
+		Me.CBTagStockings.TabIndex = 217
+		Me.CBTagStockings.Text = "Stockings"
+		Me.CBTagStockings.UseVisualStyleBackColor = True
+		'
+		'CBTagCumshot
+		'
+		Me.CBTagCumshot.AutoSize = True
+		Me.CBTagCumshot.Enabled = False
+		Me.CBTagCumshot.ForeColor = System.Drawing.Color.Black
+		Me.CBTagCumshot.Location = New System.Drawing.Point(15, 37)
+		Me.CBTagCumshot.Name = "CBTagCumshot"
+		Me.CBTagCumshot.Size = New System.Drawing.Size(67, 17)
+		Me.CBTagCumshot.TabIndex = 206
+		Me.CBTagCumshot.Text = "Cumshot"
+		Me.CBTagCumshot.UseVisualStyleBackColor = True
+		'
+		'CBTagCumEating
+		'
+		Me.CBTagCumEating.AutoSize = True
+		Me.CBTagCumEating.Enabled = False
+		Me.CBTagCumEating.ForeColor = System.Drawing.Color.Black
+		Me.CBTagCumEating.Location = New System.Drawing.Point(15, 57)
+		Me.CBTagCumEating.Name = "CBTagCumEating"
+		Me.CBTagCumEating.Size = New System.Drawing.Size(80, 17)
+		Me.CBTagCumEating.TabIndex = 204
+		Me.CBTagCumEating.Text = "Cum Eating"
+		Me.CBTagCumEating.UseVisualStyleBackColor = True
+		'
+		'CBTagVibrator
+		'
+		Me.CBTagVibrator.AutoSize = True
+		Me.CBTagVibrator.Enabled = False
+		Me.CBTagVibrator.ForeColor = System.Drawing.Color.Black
+		Me.CBTagVibrator.Location = New System.Drawing.Point(15, 137)
+		Me.CBTagVibrator.Name = "CBTagVibrator"
+		Me.CBTagVibrator.Size = New System.Drawing.Size(62, 17)
+		Me.CBTagVibrator.TabIndex = 210
+		Me.CBTagVibrator.Text = "Vibrator"
+		Me.CBTagVibrator.UseVisualStyleBackColor = True
+		'
+		'CBTagDildo
+		'
+		Me.CBTagDildo.AutoSize = True
+		Me.CBTagDildo.Enabled = False
+		Me.CBTagDildo.ForeColor = System.Drawing.Color.Black
+		Me.CBTagDildo.Location = New System.Drawing.Point(15, 157)
+		Me.CBTagDildo.Name = "CBTagDildo"
+		Me.CBTagDildo.Size = New System.Drawing.Size(50, 17)
+		Me.CBTagDildo.TabIndex = 213
+		Me.CBTagDildo.Text = "Dildo"
+		Me.CBTagDildo.UseVisualStyleBackColor = True
+		'
+		'CBTagKissing
+		'
+		Me.CBTagKissing.AutoSize = True
+		Me.CBTagKissing.Enabled = False
+		Me.CBTagKissing.ForeColor = System.Drawing.Color.Black
+		Me.CBTagKissing.Location = New System.Drawing.Point(15, 77)
+		Me.CBTagKissing.Name = "CBTagKissing"
+		Me.CBTagKissing.Size = New System.Drawing.Size(59, 17)
+		Me.CBTagKissing.TabIndex = 203
+		Me.CBTagKissing.Text = "Kissing"
+		Me.CBTagKissing.UseVisualStyleBackColor = True
+		'
+		'GroupBox51
+		'
+		Me.GroupBox51.Controls.Add(Me.CBTagBallTorture)
+		Me.GroupBox51.Controls.Add(Me.CBTagGag)
+		Me.GroupBox51.Controls.Add(Me.CBTagBlindfold)
+		Me.GroupBox51.Controls.Add(Me.CBTagWhipping)
+		Me.GroupBox51.Controls.Add(Me.CBTagCockTorture)
+		Me.GroupBox51.Controls.Add(Me.CBTagElectro)
+		Me.GroupBox51.Controls.Add(Me.CBTagHotWax)
+		Me.GroupBox51.Controls.Add(Me.CBTagClamps)
+		Me.GroupBox51.Controls.Add(Me.CBTagStrapon)
+		Me.GroupBox51.Controls.Add(Me.CBTagSpanking)
+		Me.GroupBox51.Controls.Add(Me.CBTagNeedles)
+		Me.GroupBox51.Location = New System.Drawing.Point(450, 37)
+		Me.GroupBox51.Name = "GroupBox51"
+		Me.GroupBox51.Size = New System.Drawing.Size(105, 238)
+		Me.GroupBox51.TabIndex = 238
+		Me.GroupBox51.TabStop = False
+		Me.GroupBox51.Text = "BDSM"
+		'
+		'CBTagBallTorture
+		'
+		Me.CBTagBallTorture.AutoSize = True
+		Me.CBTagBallTorture.Enabled = False
+		Me.CBTagBallTorture.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBallTorture.Location = New System.Drawing.Point(15, 77)
+		Me.CBTagBallTorture.Name = "CBTagBallTorture"
+		Me.CBTagBallTorture.Size = New System.Drawing.Size(80, 17)
+		Me.CBTagBallTorture.TabIndex = 220
+		Me.CBTagBallTorture.Text = "Ball Torture"
+		Me.CBTagBallTorture.UseVisualStyleBackColor = True
+		'
+		'CBTagGag
+		'
+		Me.CBTagGag.AutoSize = True
+		Me.CBTagGag.Enabled = False
+		Me.CBTagGag.ForeColor = System.Drawing.Color.Black
+		Me.CBTagGag.Location = New System.Drawing.Point(15, 137)
+		Me.CBTagGag.Name = "CBTagGag"
+		Me.CBTagGag.Size = New System.Drawing.Size(46, 17)
+		Me.CBTagGag.TabIndex = 214
+		Me.CBTagGag.Text = "Gag"
+		Me.CBTagGag.UseVisualStyleBackColor = True
+		'
+		'CBTagBlindfold
+		'
+		Me.CBTagBlindfold.AutoSize = True
+		Me.CBTagBlindfold.Enabled = False
+		Me.CBTagBlindfold.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBlindfold.Location = New System.Drawing.Point(15, 117)
+		Me.CBTagBlindfold.Name = "CBTagBlindfold"
+		Me.CBTagBlindfold.Size = New System.Drawing.Size(66, 17)
+		Me.CBTagBlindfold.TabIndex = 208
+		Me.CBTagBlindfold.Text = "Blindfold"
+		Me.CBTagBlindfold.UseVisualStyleBackColor = True
+		'
+		'CBTagWhipping
+		'
+		Me.CBTagWhipping.AutoSize = True
+		Me.CBTagWhipping.Enabled = False
+		Me.CBTagWhipping.ForeColor = System.Drawing.Color.Black
+		Me.CBTagWhipping.Location = New System.Drawing.Point(15, 17)
+		Me.CBTagWhipping.Name = "CBTagWhipping"
+		Me.CBTagWhipping.Size = New System.Drawing.Size(71, 17)
+		Me.CBTagWhipping.TabIndex = 203
+		Me.CBTagWhipping.Text = "Whipping"
+		Me.CBTagWhipping.UseVisualStyleBackColor = True
+		'
+		'CBTagCockTorture
+		'
+		Me.CBTagCockTorture.AutoSize = True
+		Me.CBTagCockTorture.Enabled = False
+		Me.CBTagCockTorture.ForeColor = System.Drawing.Color.Black
+		Me.CBTagCockTorture.Location = New System.Drawing.Point(15, 57)
+		Me.CBTagCockTorture.Name = "CBTagCockTorture"
+		Me.CBTagCockTorture.Size = New System.Drawing.Size(88, 17)
+		Me.CBTagCockTorture.TabIndex = 204
+		Me.CBTagCockTorture.Text = "Cock Torture"
+		Me.CBTagCockTorture.UseVisualStyleBackColor = True
+		'
+		'CBTagElectro
+		'
+		Me.CBTagElectro.AutoSize = True
+		Me.CBTagElectro.Enabled = False
+		Me.CBTagElectro.ForeColor = System.Drawing.Color.Black
+		Me.CBTagElectro.Location = New System.Drawing.Point(15, 217)
+		Me.CBTagElectro.Name = "CBTagElectro"
+		Me.CBTagElectro.Size = New System.Drawing.Size(59, 17)
+		Me.CBTagElectro.TabIndex = 207
+		Me.CBTagElectro.Text = "Electro"
+		Me.CBTagElectro.UseVisualStyleBackColor = True
+		'
+		'CBTagHotWax
+		'
+		Me.CBTagHotWax.AutoSize = True
+		Me.CBTagHotWax.Enabled = False
+		Me.CBTagHotWax.ForeColor = System.Drawing.Color.Black
+		Me.CBTagHotWax.Location = New System.Drawing.Point(15, 177)
+		Me.CBTagHotWax.Name = "CBTagHotWax"
+		Me.CBTagHotWax.Size = New System.Drawing.Size(68, 17)
+		Me.CBTagHotWax.TabIndex = 213
+		Me.CBTagHotWax.Text = "Hot Wax"
+		Me.CBTagHotWax.UseVisualStyleBackColor = True
+		'
+		'CBTagClamps
+		'
+		Me.CBTagClamps.AutoSize = True
+		Me.CBTagClamps.Enabled = False
+		Me.CBTagClamps.ForeColor = System.Drawing.Color.Black
+		Me.CBTagClamps.Location = New System.Drawing.Point(15, 157)
+		Me.CBTagClamps.Name = "CBTagClamps"
+		Me.CBTagClamps.Size = New System.Drawing.Size(60, 17)
+		Me.CBTagClamps.TabIndex = 210
+		Me.CBTagClamps.Text = "Clamps"
+		Me.CBTagClamps.UseVisualStyleBackColor = True
+		'
+		'CBTagStrapon
+		'
+		Me.CBTagStrapon.AutoSize = True
+		Me.CBTagStrapon.Enabled = False
+		Me.CBTagStrapon.ForeColor = System.Drawing.Color.Black
+		Me.CBTagStrapon.Location = New System.Drawing.Point(15, 97)
+		Me.CBTagStrapon.Name = "CBTagStrapon"
+		Me.CBTagStrapon.Size = New System.Drawing.Size(66, 17)
+		Me.CBTagStrapon.TabIndex = 205
+		Me.CBTagStrapon.Text = "Strap-on"
+		Me.CBTagStrapon.UseVisualStyleBackColor = True
+		'
+		'CBTagSpanking
+		'
+		Me.CBTagSpanking.AutoSize = True
+		Me.CBTagSpanking.Enabled = False
+		Me.CBTagSpanking.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSpanking.Location = New System.Drawing.Point(15, 37)
+		Me.CBTagSpanking.Name = "CBTagSpanking"
+		Me.CBTagSpanking.Size = New System.Drawing.Size(71, 17)
+		Me.CBTagSpanking.TabIndex = 206
+		Me.CBTagSpanking.Text = "Spanking"
+		Me.CBTagSpanking.UseVisualStyleBackColor = True
+		'
+		'CBTagNeedles
+		'
+		Me.CBTagNeedles.AutoSize = True
+		Me.CBTagNeedles.Enabled = False
+		Me.CBTagNeedles.ForeColor = System.Drawing.Color.Black
+		Me.CBTagNeedles.Location = New System.Drawing.Point(15, 197)
+		Me.CBTagNeedles.Name = "CBTagNeedles"
+		Me.CBTagNeedles.Size = New System.Drawing.Size(65, 17)
+		Me.CBTagNeedles.TabIndex = 209
+		Me.CBTagNeedles.Text = "Needles"
+		Me.CBTagNeedles.UseVisualStyleBackColor = True
+		'
+		'GroupBox50
+		'
+		Me.GroupBox50.Controls.Add(Me.CBTagRimming)
+		Me.GroupBox50.Controls.Add(Me.CBTagFacesitting)
+		Me.GroupBox50.Controls.Add(Me.CBTagMissionary)
+		Me.GroupBox50.Controls.Add(Me.CBTagMasturbation)
+		Me.GroupBox50.Controls.Add(Me.CBTagRCowgirl)
+		Me.GroupBox50.Controls.Add(Me.CBTagFingering)
+		Me.GroupBox50.Controls.Add(Me.CBTagGangbang)
+		Me.GroupBox50.Controls.Add(Me.CBTagBlowjob)
+		Me.GroupBox50.Controls.Add(Me.CBTagDP)
+		Me.GroupBox50.Controls.Add(Me.CBTagHandjob)
+		Me.GroupBox50.Controls.Add(Me.CBTagStanding)
+		Me.GroupBox50.Controls.Add(Me.CBTagFootjob)
+		Me.GroupBox50.Controls.Add(Me.CBTagCowgirl)
+		Me.GroupBox50.Controls.Add(Me.CBTagDoggyStyle)
+		Me.GroupBox50.Controls.Add(Me.CBTagTitjob)
+		Me.GroupBox50.Controls.Add(Me.CBTagCunnilingus)
+		Me.GroupBox50.Controls.Add(Me.CBTagAnalSex)
+		Me.GroupBox50.Location = New System.Drawing.Point(119, 37)
+		Me.GroupBox50.Name = "GroupBox50"
+		Me.GroupBox50.Size = New System.Drawing.Size(105, 358)
+		Me.GroupBox50.TabIndex = 237
+		Me.GroupBox50.TabStop = False
+		Me.GroupBox50.Text = "Sex"
+		'
+		'CBTagRimming
+		'
+		Me.CBTagRimming.AutoSize = True
+		Me.CBTagRimming.Enabled = False
+		Me.CBTagRimming.ForeColor = System.Drawing.Color.Black
+		Me.CBTagRimming.Location = New System.Drawing.Point(15, 177)
+		Me.CBTagRimming.Name = "CBTagRimming"
+		Me.CBTagRimming.Size = New System.Drawing.Size(66, 17)
+		Me.CBTagRimming.TabIndex = 219
+		Me.CBTagRimming.Text = "Rimming"
+		Me.CBTagRimming.UseVisualStyleBackColor = True
+		'
+		'CBTagFacesitting
+		'
+		Me.CBTagFacesitting.AutoSize = True
+		Me.CBTagFacesitting.Enabled = False
+		Me.CBTagFacesitting.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFacesitting.Location = New System.Drawing.Point(15, 157)
+		Me.CBTagFacesitting.Name = "CBTagFacesitting"
+		Me.CBTagFacesitting.Size = New System.Drawing.Size(77, 17)
+		Me.CBTagFacesitting.TabIndex = 226
+		Me.CBTagFacesitting.Text = "Facesitting"
+		Me.CBTagFacesitting.UseVisualStyleBackColor = True
+		'
+		'CBTagMissionary
+		'
+		Me.CBTagMissionary.AutoSize = True
+		Me.CBTagMissionary.Enabled = False
+		Me.CBTagMissionary.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMissionary.Location = New System.Drawing.Point(15, 197)
+		Me.CBTagMissionary.Name = "CBTagMissionary"
+		Me.CBTagMissionary.Size = New System.Drawing.Size(75, 17)
+		Me.CBTagMissionary.TabIndex = 208
+		Me.CBTagMissionary.Text = "Missionary"
+		Me.CBTagMissionary.UseVisualStyleBackColor = True
+		'
+		'CBTagMasturbation
+		'
+		Me.CBTagMasturbation.AutoSize = True
+		Me.CBTagMasturbation.Enabled = False
+		Me.CBTagMasturbation.ForeColor = System.Drawing.Color.Black
+		Me.CBTagMasturbation.Location = New System.Drawing.Point(15, 17)
+		Me.CBTagMasturbation.Name = "CBTagMasturbation"
+		Me.CBTagMasturbation.Size = New System.Drawing.Size(87, 17)
+		Me.CBTagMasturbation.TabIndex = 203
+		Me.CBTagMasturbation.Text = "Masturbation"
+		Me.CBTagMasturbation.UseVisualStyleBackColor = True
+		'
+		'CBTagRCowgirl
+		'
+		Me.CBTagRCowgirl.AutoSize = True
+		Me.CBTagRCowgirl.Enabled = False
+		Me.CBTagRCowgirl.ForeColor = System.Drawing.Color.Black
+		Me.CBTagRCowgirl.Location = New System.Drawing.Point(15, 257)
+		Me.CBTagRCowgirl.Name = "CBTagRCowgirl"
+		Me.CBTagRCowgirl.Size = New System.Drawing.Size(74, 17)
+		Me.CBTagRCowgirl.TabIndex = 218
+		Me.CBTagRCowgirl.Text = "R. Cowgirl"
+		Me.CBTagRCowgirl.UseVisualStyleBackColor = True
+		'
+		'CBTagFingering
+		'
+		Me.CBTagFingering.AutoSize = True
+		Me.CBTagFingering.Enabled = False
+		Me.CBTagFingering.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFingering.Location = New System.Drawing.Point(15, 57)
+		Me.CBTagFingering.Name = "CBTagFingering"
+		Me.CBTagFingering.Size = New System.Drawing.Size(69, 17)
+		Me.CBTagFingering.TabIndex = 204
+		Me.CBTagFingering.Text = "Fingering"
+		Me.CBTagFingering.UseVisualStyleBackColor = True
+		'
+		'CBTagGangbang
+		'
+		Me.CBTagGangbang.AutoSize = True
+		Me.CBTagGangbang.Enabled = False
+		Me.CBTagGangbang.ForeColor = System.Drawing.Color.Black
+		Me.CBTagGangbang.Location = New System.Drawing.Point(15, 337)
+		Me.CBTagGangbang.Name = "CBTagGangbang"
+		Me.CBTagGangbang.Size = New System.Drawing.Size(76, 17)
+		Me.CBTagGangbang.TabIndex = 217
+		Me.CBTagGangbang.Text = "Gangbang"
+		Me.CBTagGangbang.UseVisualStyleBackColor = True
+		'
+		'CBTagBlowjob
+		'
+		Me.CBTagBlowjob.AutoSize = True
+		Me.CBTagBlowjob.Enabled = False
+		Me.CBTagBlowjob.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBlowjob.Location = New System.Drawing.Point(15, 77)
+		Me.CBTagBlowjob.Name = "CBTagBlowjob"
+		Me.CBTagBlowjob.Size = New System.Drawing.Size(63, 17)
+		Me.CBTagBlowjob.TabIndex = 205
+		Me.CBTagBlowjob.Text = "Blowjob"
+		Me.CBTagBlowjob.UseVisualStyleBackColor = True
+		'
+		'CBTagDP
+		'
+		Me.CBTagDP.AutoSize = True
+		Me.CBTagDP.Enabled = False
+		Me.CBTagDP.ForeColor = System.Drawing.Color.Black
+		Me.CBTagDP.Location = New System.Drawing.Point(15, 317)
+		Me.CBTagDP.Name = "CBTagDP"
+		Me.CBTagDP.Size = New System.Drawing.Size(41, 17)
+		Me.CBTagDP.TabIndex = 216
+		Me.CBTagDP.Text = "DP"
+		Me.CBTagDP.UseVisualStyleBackColor = True
+		'
+		'CBTagHandjob
+		'
+		Me.CBTagHandjob.AutoSize = True
+		Me.CBTagHandjob.Enabled = False
+		Me.CBTagHandjob.ForeColor = System.Drawing.Color.Black
+		Me.CBTagHandjob.Location = New System.Drawing.Point(15, 37)
+		Me.CBTagHandjob.Name = "CBTagHandjob"
+		Me.CBTagHandjob.Size = New System.Drawing.Size(66, 17)
+		Me.CBTagHandjob.TabIndex = 206
+		Me.CBTagHandjob.Text = "Handjob"
+		Me.CBTagHandjob.UseVisualStyleBackColor = True
+		'
+		'CBTagStanding
+		'
+		Me.CBTagStanding.AutoSize = True
+		Me.CBTagStanding.Enabled = False
+		Me.CBTagStanding.ForeColor = System.Drawing.Color.Black
+		Me.CBTagStanding.Location = New System.Drawing.Point(15, 277)
+		Me.CBTagStanding.Name = "CBTagStanding"
+		Me.CBTagStanding.Size = New System.Drawing.Size(68, 17)
+		Me.CBTagStanding.TabIndex = 215
+		Me.CBTagStanding.Text = "Standing"
+		Me.CBTagStanding.UseVisualStyleBackColor = True
+		'
+		'CBTagFootjob
+		'
+		Me.CBTagFootjob.AutoSize = True
+		Me.CBTagFootjob.Enabled = False
+		Me.CBTagFootjob.ForeColor = System.Drawing.Color.Black
+		Me.CBTagFootjob.Location = New System.Drawing.Point(15, 137)
+		Me.CBTagFootjob.Name = "CBTagFootjob"
+		Me.CBTagFootjob.Size = New System.Drawing.Size(61, 17)
+		Me.CBTagFootjob.TabIndex = 207
+		Me.CBTagFootjob.Text = "Footjob"
+		Me.CBTagFootjob.UseVisualStyleBackColor = True
+		'
+		'CBTagCowgirl
+		'
+		Me.CBTagCowgirl.AutoSize = True
+		Me.CBTagCowgirl.Enabled = False
+		Me.CBTagCowgirl.ForeColor = System.Drawing.Color.Black
+		Me.CBTagCowgirl.Location = New System.Drawing.Point(15, 237)
+		Me.CBTagCowgirl.Name = "CBTagCowgirl"
+		Me.CBTagCowgirl.Size = New System.Drawing.Size(60, 17)
+		Me.CBTagCowgirl.TabIndex = 214
+		Me.CBTagCowgirl.Text = "Cowgirl"
+		Me.CBTagCowgirl.UseVisualStyleBackColor = True
+		'
+		'CBTagDoggyStyle
+		'
+		Me.CBTagDoggyStyle.AutoSize = True
+		Me.CBTagDoggyStyle.Enabled = False
+		Me.CBTagDoggyStyle.ForeColor = System.Drawing.Color.Black
+		Me.CBTagDoggyStyle.Location = New System.Drawing.Point(15, 217)
+		Me.CBTagDoggyStyle.Name = "CBTagDoggyStyle"
+		Me.CBTagDoggyStyle.Size = New System.Drawing.Size(83, 17)
+		Me.CBTagDoggyStyle.TabIndex = 209
+		Me.CBTagDoggyStyle.Text = "Doggy Style"
+		Me.CBTagDoggyStyle.UseVisualStyleBackColor = True
+		'
+		'CBTagTitjob
+		'
+		Me.CBTagTitjob.AutoSize = True
+		Me.CBTagTitjob.Enabled = False
+		Me.CBTagTitjob.ForeColor = System.Drawing.Color.Black
+		Me.CBTagTitjob.Location = New System.Drawing.Point(15, 117)
+		Me.CBTagTitjob.Name = "CBTagTitjob"
+		Me.CBTagTitjob.Size = New System.Drawing.Size(52, 17)
+		Me.CBTagTitjob.TabIndex = 213
+		Me.CBTagTitjob.Text = "Titjob"
+		Me.CBTagTitjob.UseVisualStyleBackColor = True
+		'
+		'CBTagCunnilingus
+		'
+		Me.CBTagCunnilingus.AutoSize = True
+		Me.CBTagCunnilingus.Enabled = False
+		Me.CBTagCunnilingus.ForeColor = System.Drawing.Color.Black
+		Me.CBTagCunnilingus.Location = New System.Drawing.Point(15, 97)
+		Me.CBTagCunnilingus.Name = "CBTagCunnilingus"
+		Me.CBTagCunnilingus.Size = New System.Drawing.Size(80, 17)
+		Me.CBTagCunnilingus.TabIndex = 210
+		Me.CBTagCunnilingus.Text = "Cunnilingus"
+		Me.CBTagCunnilingus.UseVisualStyleBackColor = True
+		'
+		'CBTagAnalSex
+		'
+		Me.CBTagAnalSex.AutoSize = True
+		Me.CBTagAnalSex.Enabled = False
+		Me.CBTagAnalSex.ForeColor = System.Drawing.Color.Black
+		Me.CBTagAnalSex.Location = New System.Drawing.Point(15, 297)
+		Me.CBTagAnalSex.Name = "CBTagAnalSex"
+		Me.CBTagAnalSex.Size = New System.Drawing.Size(68, 17)
+		Me.CBTagAnalSex.TabIndex = 212
+		Me.CBTagAnalSex.Text = "Anal Sex"
+		Me.CBTagAnalSex.UseVisualStyleBackColor = True
+		'
+		'GroupBox48
+		'
+		Me.GroupBox48.Controls.Add(Me.CBTagArtwork)
+		Me.GroupBox48.Controls.Add(Me.CBTagOutdoors)
+		Me.GroupBox48.Controls.Add(Me.CBTagPOV)
+		Me.GroupBox48.Controls.Add(Me.CBTagHardcore)
+		Me.GroupBox48.Controls.Add(Me.CBTagTD)
+		Me.GroupBox48.Controls.Add(Me.CBTagGay)
+		Me.GroupBox48.Controls.Add(Me.CBTagBath)
+		Me.GroupBox48.Controls.Add(Me.CBTagBisexual)
+		Me.GroupBox48.Controls.Add(Me.CBTagCFNM)
+		Me.GroupBox48.Controls.Add(Me.CBTagLesbian)
+		Me.GroupBox48.Controls.Add(Me.CBTagSoloFuta)
+		Me.GroupBox48.Controls.Add(Me.CBTagSM)
+		Me.GroupBox48.Controls.Add(Me.CBTagBondage)
+		Me.GroupBox48.Controls.Add(Me.CBTagSoloM)
+		Me.GroupBox48.Controls.Add(Me.CBTagSoloF)
+		Me.GroupBox48.Controls.Add(Me.CBTagChastity)
+		Me.GroupBox48.Controls.Add(Me.CBTagShower)
+		Me.GroupBox48.Location = New System.Drawing.Point(8, 37)
+		Me.GroupBox48.Name = "GroupBox48"
+		Me.GroupBox48.Size = New System.Drawing.Size(105, 358)
+		Me.GroupBox48.TabIndex = 235
+		Me.GroupBox48.TabStop = False
+		Me.GroupBox48.Text = "Category"
+		'
+		'CBTagArtwork
+		'
+		Me.CBTagArtwork.AutoSize = True
+		Me.CBTagArtwork.Enabled = False
+		Me.CBTagArtwork.ForeColor = System.Drawing.Color.Black
+		Me.CBTagArtwork.Location = New System.Drawing.Point(15, 337)
+		Me.CBTagArtwork.Name = "CBTagArtwork"
+		Me.CBTagArtwork.Size = New System.Drawing.Size(62, 17)
+		Me.CBTagArtwork.TabIndex = 225
+		Me.CBTagArtwork.Text = "Artwork"
+		Me.CBTagArtwork.UseVisualStyleBackColor = True
+		'
+		'CBTagOutdoors
+		'
+		Me.CBTagOutdoors.AutoSize = True
+		Me.CBTagOutdoors.Enabled = False
+		Me.CBTagOutdoors.ForeColor = System.Drawing.Color.Black
+		Me.CBTagOutdoors.Location = New System.Drawing.Point(15, 317)
+		Me.CBTagOutdoors.Name = "CBTagOutdoors"
+		Me.CBTagOutdoors.Size = New System.Drawing.Size(69, 17)
+		Me.CBTagOutdoors.TabIndex = 219
+		Me.CBTagOutdoors.Text = "Outdoors"
+		Me.CBTagOutdoors.UseVisualStyleBackColor = True
+		'
+		'CBTagPOV
+		'
+		Me.CBTagPOV.AutoSize = True
+		Me.CBTagPOV.Enabled = False
+		Me.CBTagPOV.ForeColor = System.Drawing.Color.Black
+		Me.CBTagPOV.Location = New System.Drawing.Point(15, 157)
+		Me.CBTagPOV.Name = "CBTagPOV"
+		Me.CBTagPOV.Size = New System.Drawing.Size(48, 17)
+		Me.CBTagPOV.TabIndex = 208
+		Me.CBTagPOV.Text = "POV"
+		Me.CBTagPOV.UseVisualStyleBackColor = True
+		'
+		'CBTagHardcore
+		'
+		Me.CBTagHardcore.AutoSize = True
+		Me.CBTagHardcore.Enabled = False
+		Me.CBTagHardcore.ForeColor = System.Drawing.Color.Black
+		Me.CBTagHardcore.Location = New System.Drawing.Point(15, 17)
+		Me.CBTagHardcore.Name = "CBTagHardcore"
+		Me.CBTagHardcore.Size = New System.Drawing.Size(70, 17)
+		Me.CBTagHardcore.TabIndex = 203
+		Me.CBTagHardcore.Text = "Hardcore"
+		Me.CBTagHardcore.UseVisualStyleBackColor = True
+		'
+		'CBTagTD
+		'
+		Me.CBTagTD.AutoSize = True
+		Me.CBTagTD.Enabled = False
+		Me.CBTagTD.ForeColor = System.Drawing.Color.Black
+		Me.CBTagTD.Location = New System.Drawing.Point(15, 217)
+		Me.CBTagTD.Name = "CBTagTD"
+		Me.CBTagTD.Size = New System.Drawing.Size(47, 17)
+		Me.CBTagTD.TabIndex = 218
+		Me.CBTagTD.Text = "T&&D"
+		Me.CBTagTD.UseVisualStyleBackColor = True
+		'
+		'CBTagGay
+		'
+		Me.CBTagGay.AutoSize = True
+		Me.CBTagGay.Enabled = False
+		Me.CBTagGay.ForeColor = System.Drawing.Color.Black
+		Me.CBTagGay.Location = New System.Drawing.Point(15, 57)
+		Me.CBTagGay.Name = "CBTagGay"
+		Me.CBTagGay.Size = New System.Drawing.Size(45, 17)
+		Me.CBTagGay.TabIndex = 204
+		Me.CBTagGay.Text = "Gay"
+		Me.CBTagGay.UseVisualStyleBackColor = True
+		'
+		'CBTagBath
+		'
+		Me.CBTagBath.AutoSize = True
+		Me.CBTagBath.Enabled = False
+		Me.CBTagBath.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBath.Location = New System.Drawing.Point(15, 277)
+		Me.CBTagBath.Name = "CBTagBath"
+		Me.CBTagBath.Size = New System.Drawing.Size(48, 17)
+		Me.CBTagBath.TabIndex = 217
+		Me.CBTagBath.Text = "Bath"
+		Me.CBTagBath.UseVisualStyleBackColor = True
+		'
+		'CBTagBisexual
+		'
+		Me.CBTagBisexual.AutoSize = True
+		Me.CBTagBisexual.Enabled = False
+		Me.CBTagBisexual.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBisexual.Location = New System.Drawing.Point(15, 77)
+		Me.CBTagBisexual.Name = "CBTagBisexual"
+		Me.CBTagBisexual.Size = New System.Drawing.Size(65, 17)
+		Me.CBTagBisexual.TabIndex = 205
+		Me.CBTagBisexual.Text = "Bisexual"
+		Me.CBTagBisexual.UseVisualStyleBackColor = True
+		'
+		'CBTagCFNM
+		'
+		Me.CBTagCFNM.AutoSize = True
+		Me.CBTagCFNM.Enabled = False
+		Me.CBTagCFNM.ForeColor = System.Drawing.Color.Black
+		Me.CBTagCFNM.Location = New System.Drawing.Point(15, 257)
+		Me.CBTagCFNM.Name = "CBTagCFNM"
+		Me.CBTagCFNM.Size = New System.Drawing.Size(56, 17)
+		Me.CBTagCFNM.TabIndex = 216
+		Me.CBTagCFNM.Text = "CFNM"
+		Me.CBTagCFNM.UseVisualStyleBackColor = True
+		'
+		'CBTagLesbian
+		'
+		Me.CBTagLesbian.AutoSize = True
+		Me.CBTagLesbian.Enabled = False
+		Me.CBTagLesbian.ForeColor = System.Drawing.Color.Black
+		Me.CBTagLesbian.Location = New System.Drawing.Point(15, 37)
+		Me.CBTagLesbian.Name = "CBTagLesbian"
+		Me.CBTagLesbian.Size = New System.Drawing.Size(63, 17)
+		Me.CBTagLesbian.TabIndex = 206
+		Me.CBTagLesbian.Text = "Lesbian"
+		Me.CBTagLesbian.UseVisualStyleBackColor = True
+		'
+		'CBTagSoloFuta
+		'
+		Me.CBTagSoloFuta.AutoSize = True
+		Me.CBTagSoloFuta.Enabled = False
+		Me.CBTagSoloFuta.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSoloFuta.Location = New System.Drawing.Point(15, 137)
+		Me.CBTagSoloFuta.Name = "CBTagSoloFuta"
+		Me.CBTagSoloFuta.Size = New System.Drawing.Size(71, 17)
+		Me.CBTagSoloFuta.TabIndex = 207
+		Me.CBTagSoloFuta.Text = "Solo Futa"
+		Me.CBTagSoloFuta.UseVisualStyleBackColor = True
+		'
+		'CBTagSM
+		'
+		Me.CBTagSM.AutoSize = True
+		Me.CBTagSM.Enabled = False
+		Me.CBTagSM.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSM.Location = New System.Drawing.Point(15, 197)
+		Me.CBTagSM.Name = "CBTagSM"
+		Me.CBTagSM.Size = New System.Drawing.Size(48, 17)
+		Me.CBTagSM.TabIndex = 214
+		Me.CBTagSM.Text = "S&&M"
+		Me.CBTagSM.UseVisualStyleBackColor = True
+		'
+		'CBTagBondage
+		'
+		Me.CBTagBondage.AutoSize = True
+		Me.CBTagBondage.Enabled = False
+		Me.CBTagBondage.ForeColor = System.Drawing.Color.Black
+		Me.CBTagBondage.Location = New System.Drawing.Point(15, 177)
+		Me.CBTagBondage.Name = "CBTagBondage"
+		Me.CBTagBondage.Size = New System.Drawing.Size(69, 17)
+		Me.CBTagBondage.TabIndex = 209
+		Me.CBTagBondage.Text = "Bondage"
+		Me.CBTagBondage.UseVisualStyleBackColor = True
+		'
+		'CBTagSoloM
+		'
+		Me.CBTagSoloM.AutoSize = True
+		Me.CBTagSoloM.Enabled = False
+		Me.CBTagSoloM.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSoloM.Location = New System.Drawing.Point(15, 117)
+		Me.CBTagSoloM.Name = "CBTagSoloM"
+		Me.CBTagSoloM.Size = New System.Drawing.Size(59, 17)
+		Me.CBTagSoloM.TabIndex = 213
+		Me.CBTagSoloM.Text = "Solo M"
+		Me.CBTagSoloM.UseVisualStyleBackColor = True
+		'
+		'CBTagSoloF
+		'
+		Me.CBTagSoloF.AutoSize = True
+		Me.CBTagSoloF.Enabled = False
+		Me.CBTagSoloF.ForeColor = System.Drawing.Color.Black
+		Me.CBTagSoloF.Location = New System.Drawing.Point(15, 97)
+		Me.CBTagSoloF.Name = "CBTagSoloF"
+		Me.CBTagSoloF.Size = New System.Drawing.Size(56, 17)
+		Me.CBTagSoloF.TabIndex = 210
+		Me.CBTagSoloF.Text = "Solo F"
+		Me.CBTagSoloF.UseVisualStyleBackColor = True
+		'
+		'CBTagChastity
+		'
+		Me.CBTagChastity.AutoSize = True
+		Me.CBTagChastity.Enabled = False
+		Me.CBTagChastity.ForeColor = System.Drawing.Color.Black
+		Me.CBTagChastity.Location = New System.Drawing.Point(15, 237)
+		Me.CBTagChastity.Name = "CBTagChastity"
+		Me.CBTagChastity.Size = New System.Drawing.Size(63, 17)
+		Me.CBTagChastity.TabIndex = 212
+		Me.CBTagChastity.Text = "Chastity"
+		Me.CBTagChastity.UseVisualStyleBackColor = True
+		'
+		'CBTagShower
+		'
+		Me.CBTagShower.AutoSize = True
+		Me.CBTagShower.Enabled = False
+		Me.CBTagShower.ForeColor = System.Drawing.Color.Black
+		Me.CBTagShower.Location = New System.Drawing.Point(15, 297)
+		Me.CBTagShower.Name = "CBTagShower"
+		Me.CBTagShower.Size = New System.Drawing.Size(62, 17)
+		Me.CBTagShower.TabIndex = 211
+		Me.CBTagShower.Text = "Shower"
+		Me.CBTagShower.UseVisualStyleBackColor = True
+		'
+		'TBLocalTagDir
+		'
+		Me.TBLocalTagDir.Location = New System.Drawing.Point(55, 9)
+		Me.TBLocalTagDir.Name = "TBLocalTagDir"
+		Me.TBLocalTagDir.Size = New System.Drawing.Size(330, 20)
+		Me.TBLocalTagDir.TabIndex = 233
+		Me.TBLocalTagDir.Text = "Enter Image Directory"
+		'
+		'BTNLocalTagPrevious
+		'
+		Me.BTNLocalTagPrevious.BackColor = System.Drawing.Color.LightGray
+		Me.BTNLocalTagPrevious.Enabled = False
+		Me.BTNLocalTagPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BTNLocalTagPrevious.ForeColor = System.Drawing.Color.Black
+		Me.BTNLocalTagPrevious.Location = New System.Drawing.Point(391, 8)
+		Me.BTNLocalTagPrevious.Name = "BTNLocalTagPrevious"
+		Me.BTNLocalTagPrevious.Size = New System.Drawing.Size(47, 24)
+		Me.BTNLocalTagPrevious.TabIndex = 232
+		Me.BTNLocalTagPrevious.Text = "<<"
+		Me.BTNLocalTagPrevious.UseVisualStyleBackColor = False
+		'
+		'BTNLocalTagNext
+		'
+		Me.BTNLocalTagNext.BackColor = System.Drawing.Color.LightGray
+		Me.BTNLocalTagNext.Enabled = False
+		Me.BTNLocalTagNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BTNLocalTagNext.ForeColor = System.Drawing.Color.Black
+		Me.BTNLocalTagNext.Location = New System.Drawing.Point(560, 8)
+		Me.BTNLocalTagNext.Name = "BTNLocalTagNext"
+		Me.BTNLocalTagNext.Size = New System.Drawing.Size(47, 24)
+		Me.BTNLocalTagNext.TabIndex = 231
+		Me.BTNLocalTagNext.Text = ">>"
+		Me.BTNLocalTagNext.UseVisualStyleBackColor = False
+		'
+		'LBLLocalTagCount
+		'
+		Me.LBLLocalTagCount.BackColor = System.Drawing.Color.Transparent
+		Me.LBLLocalTagCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.LBLLocalTagCount.Enabled = False
+		Me.LBLLocalTagCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.LBLLocalTagCount.ForeColor = System.Drawing.Color.Black
+		Me.LBLLocalTagCount.Location = New System.Drawing.Point(444, 10)
+		Me.LBLLocalTagCount.Name = "LBLLocalTagCount"
+		Me.LBLLocalTagCount.Size = New System.Drawing.Size(110, 20)
+		Me.LBLLocalTagCount.TabIndex = 230
+		Me.LBLLocalTagCount.Text = "0/0"
+		Me.LBLLocalTagCount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'BTNLocalTagSave
+		'
+		Me.BTNLocalTagSave.Enabled = False
+		Me.BTNLocalTagSave.Location = New System.Drawing.Point(613, 9)
+		Me.BTNLocalTagSave.Name = "BTNLocalTagSave"
+		Me.BTNLocalTagSave.Size = New System.Drawing.Size(83, 23)
+		Me.BTNLocalTagSave.TabIndex = 229
+		Me.BTNLocalTagSave.Text = "Finished"
+		Me.BTNLocalTagSave.UseVisualStyleBackColor = True
+		'
+		'BTNLocalTagDir
+		'
+		Me.BTNLocalTagDir.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
+		Me.BTNLocalTagDir.Location = New System.Drawing.Point(6, 8)
+		Me.BTNLocalTagDir.Name = "BTNLocalTagDir"
+		Me.BTNLocalTagDir.Size = New System.Drawing.Size(43, 23)
+		Me.BTNLocalTagDir.TabIndex = 228
+		Me.BTNLocalTagDir.Text = "1"
+		Me.BTNLocalTagDir.UseVisualStyleBackColor = True
+		'
 		'FrmSettings
 		'
 		Me.AllowDrop = True
@@ -14634,29 +14635,6 @@ Partial Class FrmSettings
 		Me.TlpImageUrls.PerformLayout()
 		Me.GroupBox14.ResumeLayout(False)
 		Me.GroupBox14.PerformLayout()
-		Me.TabPage33.ResumeLayout(False)
-		Me.TabControl5.ResumeLayout(False)
-		Me.TabPage34.ResumeLayout(False)
-		Me.TabPage34.PerformLayout()
-		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-		Me.TabPage35.ResumeLayout(False)
-		Me.TabPage35.PerformLayout()
-		Me.GroupBox55.ResumeLayout(False)
-		Me.GroupBox55.PerformLayout()
-		Me.GroupBox53.ResumeLayout(False)
-		Me.GroupBox53.PerformLayout()
-		Me.GroupBox49.ResumeLayout(False)
-		Me.GroupBox49.PerformLayout()
-		Me.GroupBox46.ResumeLayout(False)
-		Me.GroupBox46.PerformLayout()
-		Me.GroupBox54.ResumeLayout(False)
-		Me.GroupBox54.PerformLayout()
-		Me.GroupBox51.ResumeLayout(False)
-		Me.GroupBox51.PerformLayout()
-		Me.GroupBox50.ResumeLayout(False)
-		Me.GroupBox50.PerformLayout()
-		Me.GroupBox48.ResumeLayout(False)
-		Me.GroupBox48.PerformLayout()
 		Me.TabPage11.ResumeLayout(False)
 		Me.Panel7.ResumeLayout(False)
 		Me.Panel7.PerformLayout()
@@ -14845,6 +14823,29 @@ Partial Class FrmSettings
 		Me.GroupBox65.PerformLayout()
 		CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TabPage33.ResumeLayout(False)
+		Me.TabControl5.ResumeLayout(False)
+		Me.TabPage34.ResumeLayout(False)
+		Me.TabPage34.PerformLayout()
+		Me.TabPage35.ResumeLayout(False)
+		Me.TabPage35.PerformLayout()
+		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox55.ResumeLayout(False)
+		Me.GroupBox55.PerformLayout()
+		Me.GroupBox53.ResumeLayout(False)
+		Me.GroupBox53.PerformLayout()
+		Me.GroupBox49.ResumeLayout(False)
+		Me.GroupBox49.PerformLayout()
+		Me.GroupBox46.ResumeLayout(False)
+		Me.GroupBox46.PerformLayout()
+		Me.GroupBox54.ResumeLayout(False)
+		Me.GroupBox54.PerformLayout()
+		Me.GroupBox51.ResumeLayout(False)
+		Me.GroupBox51.PerformLayout()
+		Me.GroupBox50.ResumeLayout(False)
+		Me.GroupBox50.PerformLayout()
+		Me.GroupBox48.ResumeLayout(False)
+		Me.GroupBox48.PerformLayout()
 		Me.ResumeLayout(False)
 
 	End Sub
