@@ -699,7 +699,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="HoldTheEdgeMax" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">60</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="HoldEdgeTimeTotal" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
