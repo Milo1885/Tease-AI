@@ -693,7 +693,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="LongEdge" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">120</Value>
+      <Value Profile="(Default)">2</Value>
     </Setting>
     <Setting Name="CBLongEdgeInterrupt" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

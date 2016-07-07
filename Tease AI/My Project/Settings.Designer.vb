@@ -2816,7 +2816,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("120")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("2")>  _
         Public Property LongEdge() As Integer
             Get
                 Return CType(Me("LongEdge"),Integer)
