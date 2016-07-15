@@ -615,7 +615,21 @@ NoNeFound:
 		If BWimageFetcher.isBusy Then BWimageFetcher.StopAsync()
 
 		Dim FetchContainer As New ImageFetchObject
-		FetchContainer.ImageLocation = ImageToShow
+
+		If ImageToShow Is Nothing Then
+			' ===================== NULL Reference =======================
+			FetchContainer.ImageLocation = pathImageErrorOnLoading
+			Dim lazyText As String = "The given imagepath was NULL."
+			Log.WriteError(lazyText, New ArgumentNullException(lazyText), "ShowImage with no valid imagepath.")
+		ElseIf ImageToShow = "" Then
+			' ====================== String.Empty ========================
+			FetchContainer.ImageLocation = pathImageErrorOnLoading
+			Dim lazyText As String = "The given imagepath was empty."
+			Log.WriteError(lazyText, New ArgumentException(lazyText), "ShowImage with no valid imagepath.")
+		Else
+			' ======================== All fine ==========================
+			FetchContainer.ImageLocation = ImageToShow
+		End If
 
 		If FrmSettings.CBBlogImageWindow.Checked = True _
 		Then FetchContainer.StoreDirectory = Application.StartupPath & "\Images\Session Images\" _
@@ -688,7 +702,11 @@ NoNeFound:
 			Try
 retryLocal: ' If an exception occures the funcion is restarted and the Errorimage is loaded.
 
-				If .ImageLocation.Contains("/") And .ImageLocation.Contains("://") Then
+				If .ImageLocation = "" Or .ImageLocation = Nothing Then
+					Throw New ArgumentException("The given filepath was empty.")
+				ElseIf .ImageLocation = "" Then
+					Throw New ArgumentNullException("The given filepath was NULL.")
+				ElseIf .ImageLocation.Contains("/") And .ImageLocation.Contains("://") Then
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					'						Download and Save Online Image
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -726,7 +744,7 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 				'										All Errors - !first! time
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Debug.Print("ImageFetch - DoWork - 1st Exception perfomaing fallback")
-				Log.WriteError("Error loading Image: " & .ImageLocation, ex,
+				Log.WriteError("Error loading Image: """ & .ImageLocation & """", ex,
 						"Error loading image. Performing fallback to errorimage.")
 				.ImageLocation = errorimagepath
 				GoTo retryLocal
@@ -767,14 +785,15 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 			End If
 
 			If TypeOf e.Result Is ImageFetchObject Then
-				'TODO-Next: Add the picturebox-Streching Stuff.?.
+
 				Dim FetchResult As ImageFetchObject = e.Result
 
 				' Set the fetched image and release thte fetched one.
 				MainPictureboxSetImage(FetchResult.FetchedImage,
 									   FetchResult.ImageLocation)
 
-				FetchResult.FetchedImage.Dispose()
+				If FetchResult.FetchedImage IsNot Nothing Then _
+					FetchResult.FetchedImage.Dispose()
 
 				Debug.Print("ImageFetch - RunWorkerCompleted - Done" & vbCrLf &
 						"	ImageLocation: " & FetchResult.ImageLocation)
@@ -783,7 +802,7 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                     All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError("An Exception occured whiledisplaying image: " & vbCrLf & ex.Message,
+			Log.WriteError("An Exception occurred while displaying image: " & vbCrLf & ex.Message,
 					 ex, "Error Displaying image.")
 		End Try
 	End Sub
@@ -823,6 +842,18 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 			'Set the new image and redraw the control
 			If newImage IsNot Nothing Then
 				mainPictureBox.Image = newImage.Clone
+
+				If My.Settings.CBStretchLandscape Then
+
+					If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
+						mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
+					Else
+						mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+					End If
+				Else
+					mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+				End If
+
 				mainPictureBox.Invalidate()
 				mainPictureBox.Refresh()
 			Else

@@ -48,7 +48,15 @@ Namespace My
 		Private Sub Savetimer_Tick(sender As Object, e As EventArgs) Handles Savetimer.Tick
 			On Error GoTo Error_All
 			Save()
+
+			If Directory.Exists(Path.GetDirectoryName(LocalAppFilePath)) _
+			And fswLocalAppData.EnableRaisingEvents = False Then
+				fswLocalAppData.Path = Path.GetDirectoryName(LocalAppFilePath)
+				fswLocalAppData.EnableRaisingEvents = True
+			End If
+
 			Savetimer.Stop()
+			Exit Sub
 Error_All:
 		End Sub
 #End Region ' SaveTimer
@@ -136,16 +144,17 @@ Error_All:
 
 #Region "---------------------------------------MyBaseRelated--------------------------------------------"
 
+		Private _loaded As Boolean = False
+
 		Protected Overrides Sub OnSettingsLoaded(sender As Object, e As SettingsLoadedEventArgs)
 			MyBase.OnSettingsLoaded(sender, e)
 
-			fswLocalAppData.Path = Path.GetDirectoryName(LocalAppFilePath )
-			fswLocalAppData.EnableRaisingEvents = True
+			_loaded = False
 		End Sub
 
 		Protected Overrides Sub OnPropertyChanged(sender As Object, e As PropertyChangedEventArgs)
 			MyBase.OnPropertyChanged(sender, e)
-			If Savetimer.Enabled = False Then Savetimer.Start()
+			If Savetimer.Enabled = False And _loaded = True Then Savetimer.Start()
 		End Sub
 
 		''' =========================================================================================================
@@ -161,6 +170,7 @@ Error_All:
 
 		Shadows Sub Reset()
 			fswLocalAppData.EnableRaisingEvents = False
+			_loaded = False
 
 			Dim dupeFilePath As String = GetDuplicatePath()
 
@@ -170,6 +180,7 @@ Error_All:
 
 			MyBase.Reset()
 
+			_loaded = True
 			fswLocalAppData.EnableRaisingEvents = True
 		End Sub
 

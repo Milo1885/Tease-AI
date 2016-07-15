@@ -13,11 +13,49 @@ WIP - SaveState overhaul. Added SaveState Class and replaced Suspend and Resume 
 
 WIP - DataBinding Overhaul
 
+
+# Changelog - Patch 54.4.0
+
+Added Command @ChatImage[] - Displays a local image in the chat text itself, as opposed to the main picture window. Image locations specified in brackets are relative to [Tease AI Root Folder]\Images\, much like @ShowImage[]. For example:
+
+     @ChatImage[1885\smile.jpg] - would display the image [Tease AI Root Folder]\Images\1885\smile.jpg on the domme's current line in chat.
+	 
+	 You can also use commas to force the pictures dimensions, using width then height. BOTH width and height must be specified if you use this function. For example:
+	 
+	 @ChatImage[1885\smile.jpg, 18, 18] - would display the image [Tease AI Root Folder]\Images\1885\smile.jpg resized to 18x18 on the domme's current line in chat.
+
+
+Improved @Variable[] Command Filter - @Variable[] can now use "And" and "Or" when making comparisons. For example:
+
+     @Variable[#SessionEdges]<[3]And[#SessionCBTCock]<[3] You know, I've barely made that #Cock suffer #GeneralTime
+	 @Variable[#DomMood]>[#DomMoodMax]Or[#SubCockSize]>[8] I don't know what it is, but I feel really lucky #GeneralTime #Lol
+	 @Variable[#DomLevel]=[5]And[#DomApathy]=[5]And[#DomOrgasmRate]=[Never] I love knowing I'm the cruelest bitch on the planet #Grin
+	 
+	 (For whatever reason I came up with three examples that all use System Keywords, but stored variables work as well)
+	 
+	 You can use as many "And" or "Or" comparisons per @Variable[] Command Filter that you like, but you CANNOT use both "And" and "Or" in the same @Variable[] Command Filter
+	 
+Fixes added from Community Members:
+
+     
+    Stefaf: Fixed TargetInvocationException, when loading an image and the fallback failed.
+    Stefaf: Added Additional check, if the imagepath to load is empty/NULL. This is checked and logged before the Backgroundworker starts. This way we can track the source of this error better.
+    Stefaf: Stretching landscape images applies to all images loaded with the designated Backgroundworker.
+    Stefaf: Fixed if .net does not create the localAppData%-directory on start-up, the setting-file duplication is suspended until the settings are automatically saved for the first time. If here an exception occurs, it will be suspended until next time.
+    Stefaf: Reworked Custom MainSlideshow. Merged redundant code. The image extensions are the global ones. Added check if a folder exists. Images are now loaded using the designated Backgroundworker.
+    Stefaf: Fixed Custom timed slideshow. This was stepping 2 images forward instead of one. Images are loading with the designated Backgroundworker.
+    Stefaf: Fixed Combobox for Custom slideshows was overwriting inputs like Control+C and stuff like that.
+    Stefaf: Fixed when the CustomSlideshow fails to load, it was recognized as valid.
+    Stefaf: Reworked time usage in logs. After introducing proper versioning, there is no need to a identify the assembly-version, using the filetime. All times in logs are now local times.
+    Stefaf: Fixed IndexOutOfRangeException when clicking next or previous image button at the end or start of the slideshow.
+
+	pepsifreak: BugFix: Lines with multiple commands containing parenthesis would always return the index of the first closing bracket when searching and cause an exception.
+
 # Changelog - Patch 54.3.0
 
 Improved @If[] Command - @If[] can now use "And" and "Or" when making comparisons. For example:
 
-     @If[Var_EdgeCount]>[10]And[#DommeMood]>[@DomMoodMax]Then(GotoLine)
+     @If[Var_EdgeCount]>[10]And[#DommeMood]>[#DomMoodMax]Then(GotoLine)
 	 @If[Var_EdgeCount]<[3]Or[Var_TotalAttempts]>[5]Then(GotoLine)
 	 @If[Var_EdgeCount]>[10]And[#DommeMood]>[@DomMoodMax]And[#CBTCockCount]<[1]Then(GotoLine)
 	 
