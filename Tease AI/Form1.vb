@@ -10149,7 +10149,7 @@ RinseLatherRepeat:
 
 		If StringClean.Contains("@ImageTag(") Then
 			Dim TagFlag As String = GetParentheses(StringClean, "@ImageTag(")
-			GetLocalImage(TagFlag)
+			ShowImage(GetLocalImage(TagFlag), False)
 			StringClean = StringClean.Replace("@ImageTag(" & TagFlag & ")", "")
 		End If
 
@@ -15424,7 +15424,7 @@ Skip_RandomFile:
 		End Try
 	End Function
 
-	Public Function GetLocalImage(ByVal LocTag As String) As Boolean
+	Public Function GetLocalImage(ByVal LocTag As String) As String
 
 		If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
 
@@ -15468,24 +15468,14 @@ Skip_RandomFile:
 
 				If LocalImageListCheck = False Then
 					'LocalImage = Image.FromFile(PicDir)
-					LocalImageSTR = PicDir
+					Return PicDir
 				End If
-
-				LocalImageFound = True
-
-
 			Else
-
-				LocalImageFound = False
+				Return String.Empty
 
 			End If
 
 		End If
-
-
-
-		Return LocalImageFound
-
 	End Function
 
 
@@ -15998,7 +15988,7 @@ Skip_RandomFile:
 		End If
 
 		If FilterString.Contains("@ImageTag(") Then
-			If GetLocalImage(FilterString) = False Then Return False
+			If GetLocalImage(GetParentheses(FilterString, "@ImageTag(")) = String.Empty Then Return False
 		End If
 
 		If FilterString.Contains("@Stroking") Or FilterString.Contains("@SubStroking") Then
@@ -16112,10 +16102,6 @@ Skip_RandomFile:
 
 		If FilterString.Contains("@Day(") Then
 			If GetMatch(FilterString, "@Day(", DateAndTime.Now.Day) = False Then Return False
-		End If
-
-		If FilterString.Contains("@ImageTag(") Then
-			If GetLocalImage(FilterString) = False Then Return False
 		End If
 
 
