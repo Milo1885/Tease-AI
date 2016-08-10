@@ -3835,7 +3835,20 @@ trypreviousimage:
 		TTDir.SetToolTip(TBEmoteEnd, "This determines what symbol(s) the domme uses to end an emote.")
 	End Sub
 
-	Private Sub CBDomDenialEnds_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBDomDenialEnds.LostFocus
+    Private Sub LockOrgasmChances_LostFocus(sender As System.Object, e As System.EventArgs) Handles LockOrgasmChances.LostFocus
+        If LockOrgasmChances.Checked = True Then
+            My.Settings.LockOrgasmChances = True
+        Else
+            My.Settings.LockOrgasmChances = False
+        End If
+    End Sub
+
+    Private Sub LockOrgasmChances_MouseHover(sender As System.Object, e As System.EventArgs) Handles LockOrgasmChances.MouseHover
+        TTDir.SetToolTip(LockOrgasmChances, "If checked the orgasm chances will be locked and unchangeable once you start the tease." & Environment.NewLine & Environment.NewLine &
+            "Orgasm chances will be changeable and unlocked when out of a tease.")
+    End Sub
+
+    Private Sub CBDomDenialEnds_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBDomDenialEnds.LostFocus
 		If CBDomDenialEnds.Checked = True Then
 			My.Settings.DomDenialEnd = True
 		Else
@@ -8081,8 +8094,9 @@ GeneralGood:
 		My.Settings.pnSetting8 = petnameBox8.Text
 
 		My.Settings.OrgasmAllow = alloworgasmComboBox.Text
-		My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
-		My.Settings.DomDenialEnd = CBDomDenialEnds.Checked
+        My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
+        My.Settings.LockOrgasmChances = LockOrgasmChances.Checked
+        My.Settings.DomDenialEnd = CBDomDenialEnds.Checked
 		My.Settings.DomOrgasmEnd = CBDomOrgasmEnds.Checked
 		' My.Settings.DomPOT = CBDomPOT.Checked
 		My.Settings.DomLowercase = LCaseCheckBox.Checked
@@ -8136,8 +8150,9 @@ GeneralGood:
 		petnameBox8.Text = My.Settings.pnSetting8
 
 		alloworgasmComboBox.Text = My.Settings.OrgasmAllow
-		ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
-		CBDomDenialEnds.Checked = My.Settings.DomDenialEnd
+        ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
+        LockOrgasmChances.Checked = My.Settings.LockOrgasmChances
+        CBDomDenialEnds.Checked = My.Settings.DomDenialEnd
 		CBDomOrgasmEnds.Checked = My.Settings.DomOrgasmEnd
 		'CBDomPOT.Checked = My.Settings.DomPOT
 		LCaseCheckBox.Checked = My.Settings.DomLowercase
@@ -8273,24 +8288,24 @@ GeneralGood:
 	End Sub
 
 	Private Sub CBRangeOrgasm_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBRangeOrgasm.CheckedChanged
-		If CBRangeOrgasm.Checked = False Then
-			NBAllowOften.Enabled = True
-			NBAllowSometimes.Enabled = True
-			NBAllowRarely.Enabled = True
-		Else
-			NBAllowOften.Enabled = False
+        If CBRangeOrgasm.Checked = False And alloworgasmComboBox.Enabled = True Then
+            NBAllowOften.Enabled = True
+            NBAllowSometimes.Enabled = True
+            NBAllowRarely.Enabled = True
+        Else
+            NBAllowOften.Enabled = False
 			NBAllowSometimes.Enabled = False
 			NBAllowRarely.Enabled = False
 		End If
 	End Sub
 
 	Private Sub CBRangeRuin_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBRangeRuin.CheckedChanged
-		If CBRangeRuin.Checked = False Then
-			NBRuinOften.Enabled = True
-			NBRuinSometimes.Enabled = True
-			NBRuinRarely.Enabled = True
-		Else
-			NBRuinOften.Enabled = False
+        If CBRangeRuin.Checked = False And ruinorgasmComboBox.Enabled = True Then
+            NBRuinOften.Enabled = True
+            NBRuinSometimes.Enabled = True
+            NBRuinRarely.Enabled = True
+        Else
+            NBRuinOften.Enabled = False
 			NBRuinSometimes.Enabled = False
 			NBRuinRarely.Enabled = False
 		End If

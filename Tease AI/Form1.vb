@@ -1273,9 +1273,25 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		If FrmSettings.TBEmoteEnd.Text = "" Then FrmSettings.TBEmoteEnd.Text = "*"
 
 		FrmSettings.alloworgasmComboBox.Text = My.Settings.OrgasmAllow
-		FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
+        FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
 
-		If My.Settings.DomDenialEnd = True Then
+        FrmSettings.LockOrgasmChances.Checked = My.Settings.LockOrgasmChances
+        FrmSettings.alloworgasmComboBox.Enabled = True
+        FrmSettings.ruinorgasmComboBox.Enabled = True
+        FrmSettings.CBRangeOrgasm.Enabled = True
+        If FrmSettings.CBRangeOrgasm.Checked = False Then
+            FrmSettings.NBAllowOften.Enabled = True
+            FrmSettings.NBAllowSometimes.Enabled = True
+            FrmSettings.NBAllowRarely.Enabled = True
+        End If
+        FrmSettings.CBRangeRuin.Enabled = True
+        If FrmSettings.CBRangeRuin.Checked = False Then
+            FrmSettings.NBRuinOften.Enabled = True
+            FrmSettings.NBRuinSometimes.Enabled = True
+            FrmSettings.NBRuinRarely.Enabled = True
+        End If
+
+        If My.Settings.DomDenialEnd = True Then
 			FrmSettings.CBDomDenialEnds.Checked = True
 		Else
 			FrmSettings.CBDomDenialEnds.Checked = False
@@ -1807,9 +1823,24 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		SubWroteLast = False
 		WritingTaskFlag = False
 
-		OrgasmYesNo = False
+        OrgasmYesNo = False
 
-		ShowModule = False
+        FrmSettings.alloworgasmComboBox.Enabled = True
+        FrmSettings.ruinorgasmComboBox.Enabled = True
+        FrmSettings.CBRangeOrgasm.Enabled = True
+        If FrmSettings.CBRangeOrgasm.Checked = False Then
+            FrmSettings.NBAllowOften.Enabled = True
+            FrmSettings.NBAllowSometimes.Enabled = True
+            FrmSettings.NBAllowRarely.Enabled = True
+        End If
+        FrmSettings.CBRangeRuin.Enabled = True
+        If FrmSettings.CBRangeRuin.Checked = False Then
+            FrmSettings.NBRuinOften.Enabled = True
+            FrmSettings.NBRuinSometimes.Enabled = True
+            FrmSettings.NBRuinRarely.Enabled = True
+        End If
+
+        ShowModule = False
 		BookmarkLink = False
 		BookmarkModule = False
 		YesOrNo = False
@@ -2172,9 +2203,22 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 					End If
 
 
-					TeaseTimer.Start()
+                    TeaseTimer.Start()
 
-					If PlaylistFile.Count = 0 Then GoTo NoPlaylistStartFile
+                    If FrmSettings.LockOrgasmChances.Checked = True Then
+                        FrmSettings.alloworgasmComboBox.Enabled = False
+                        FrmSettings.ruinorgasmComboBox.Enabled = False
+                        FrmSettings.CBRangeOrgasm.Enabled = False
+                        FrmSettings.NBAllowOften.Enabled = False
+                        FrmSettings.NBAllowSometimes.Enabled = False
+                        FrmSettings.NBAllowRarely.Enabled = False
+                        FrmSettings.CBRangeRuin.Enabled = False
+                        FrmSettings.NBRuinOften.Enabled = False
+                        FrmSettings.NBRuinSometimes.Enabled = False
+                        FrmSettings.NBRuinRarely.Enabled = False
+                    End If
+
+                    If PlaylistFile.Count = 0 Then GoTo NoPlaylistStartFile
 
 					If Playlist = False Or PlaylistFile(0).Contains("Random Start") Then
 
@@ -16812,7 +16856,22 @@ NoPlaylistEndFile:
 
 		MiniScript = False
 
-		ClearModes()
+        FrmSettings.alloworgasmComboBox.Enabled = True
+        FrmSettings.ruinorgasmComboBox.Enabled = True
+        FrmSettings.CBRangeOrgasm.Enabled = True
+        If FrmSettings.CBRangeOrgasm.Checked = False Then
+            FrmSettings.NBAllowOften.Enabled = True
+            FrmSettings.NBAllowSometimes.Enabled = True
+            FrmSettings.NBAllowRarely.Enabled = True
+        End If
+        FrmSettings.CBRangeRuin.Enabled = True
+        If FrmSettings.CBRangeRuin.Checked = False Then
+            FrmSettings.NBRuinOften.Enabled = True
+            FrmSettings.NBRuinSometimes.Enabled = True
+            FrmSettings.NBRuinRarely.Enabled = True
+        End If
+
+        ClearModes()
 
 
 		If FrmSettings.TBWebStop.Text <> "" Then
