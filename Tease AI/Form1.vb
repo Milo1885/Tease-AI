@@ -104,8 +104,6 @@ Public Class Form1
 
 	Public StrokeTick As Integer
 	Public StrokeTauntTick As Integer
-	<Obsolete("Not used anymore. Set to true but never to false")>
-	Public StrokePaceRight As Boolean
 
 #Region "-------------------------------------- StrokePace ----------------------------------------------"
 	''' <summary>
@@ -315,33 +313,15 @@ Public Class Form1
 
 	<Obsolete("Overrides the User.Config Settings on resumse Session. Not really nice.")>
 	Public CockSize As Integer
-	<Obsolete("Not used anymore.")>
-	Dim TempDick As String
 	Dim PetName As String
-	<Obsolete("Not used anymore.")>
-	Dim PetName2 As String
 
 	Dim TauntText As String
 	Dim ScriptCount As Integer
 	Dim TempScriptCount As Integer
 	Dim TauntTextCount As Integer
 
-	<Obsolete("Not used anymore.")>
-	Dim StartIndex As Integer
-	<Obsolete("Not used anymore.")>
-	Dim EndIndex As Integer
-
 	Public SlideshowTimerTick As Integer
 
-	<Obsolete("Not used anymore.")>
-	Dim ReadBlog As String
-	<Obsolete("Not used anymore.")>
-	Dim ReadBlogRate As String
-	<Obsolete("Not used anymore.")>
-	Dim SearchImageBlog As Boolean
-
-	<Obsolete("Read data using MainPictureBox.ImageLocation. Set data using ShowImage(String, Boolean) in future releases.")>
-	Dim FoundString As String
 	<Obsolete("Ambiguous used in frmSettings and Form1! Read data using MainPictureBox.ImageLocation. Set data using ShowImage(String, Boolean) in future releases.")>
 	Public WebImage As String
 
@@ -356,13 +336,7 @@ Public Class Form1
 	<Obsolete("Belongs to frmSettings.")>
 	Public WebImagePath As String
 
-	<Obsolete("Not used anymore.")>
-	Dim ReaderString As String
-	<Obsolete("Not used anymore.")>
-	Dim ReaderStringTotal As Integer
 
-	<Obsolete("Unused variable. Set to 1 on two lines, stored to disk on SuspensSettings but never used.")>
-	Public StrokePaceInt As Integer
 
 	Dim LastScriptCountdown As Integer
 	Dim LastScript As Boolean
@@ -566,10 +540,6 @@ Public Class Form1
 
 	Dim TimeoutTick As Integer
 
-	<Obsolete("Use BWimageFetcher instead")>
-	Public ImageThread As Thread
-	<Obsolete("Read value using MainPictureBox.ImageLocation. Set Value using ShowImage(String, Boolean).")>
-	Dim PBImage As String
 	Dim DommeImageSTR As String
 	Dim LocalImageSTR As String
 	''' <summary>
@@ -645,8 +615,15 @@ Public Class Form1
 	Dim CameGotoLine As String
 	Dim RuinedGotoLine As String
 
+	''' <summary>
+	''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
+	''' </summary>
+	''' <remarks>
+	''' Uses following vocabulary Files:
+	''' #SYS_TauntEdging.txt when the taunting begins.
+	''' #SYS_TauntEdgingAsked.txt if the sub continues to tell he's on the edge.
+	''' </remarks>
 	Dim TauntEdging As Boolean
-	Dim TauntEdgingAsked As Boolean
 
 	Dim Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
 
@@ -1471,10 +1448,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		End If
 
 
-		StrokePaceInt = 1
-		StrokePaceRight = True
-
-
 
 		DommeMood = randomizer.Next(5, 8)
 
@@ -1797,7 +1770,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		StopMetronome = True
 
-		TauntEdgingAsked = False
 		TauntEdging = False
 
 		CBTBallsFirst = True
@@ -1811,9 +1783,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		UpdatesTimer.Start()
 
 		Me.ActiveControl = Me.chatBox
-
-		StrokePaceInt = 1
-		StrokePaceRight = True
 
 		DommeMood = randomizer.Next(5, 8)
 
@@ -2547,16 +2516,16 @@ WritingTaskLine:
 
 			SetVariable("SYS_EdgeTotal", Val(GetVariable("SYS_EdgeTotal") + 1))
 
-			If TauntEdging = True And ShowModule = False Then
-				If TauntEdgingAsked = True Then
-					DomChat = "#SYS_TauntEdgingAsked"
-					TypingDelay()
-				Else
-					TauntEdgingAsked = True
-					DomChat = "#SYS_TauntEdging"
-					TypingDelay()
+			If TauntEdging = True And SubEdging = False And ShowModule = False Then
+				DomChat = "#SYS_TauntEdgingAsked"
+				TypingDelay()
+
+				' Recalculate TantEdging-Chance
+				If randomizer.Next(1, 101) <= FrmSettings.NBTauntEdging.Value Then
+					TauntEdging = False
 				End If
-				Return
+
+				Exit Sub
 			End If
 
 
@@ -3140,11 +3109,8 @@ NoRepeatOFiles:
 				Else
 
 					TauntEdging = True
-					TauntEdgingAsked = True
-
 					DomChat = "#SYS_TauntEdging"
 					TypingDelay()
-
 
 				End If
 
@@ -4655,7 +4621,6 @@ AcceptAnswer:
 		If TeaseVideo = True Then Return
 
 
-		'If SearchImageBlog = True Then Return
 
 		If RiskyDelay = True Then Return
 
@@ -5017,7 +4982,6 @@ NonModuleEnd:
 
 			If DomTask.Contains("@SearchImageBlogAgain") Then
 
-				SearchImageBlog = True
 				GetBlogImage()
 
 			End If
@@ -5025,7 +4989,6 @@ NonModuleEnd:
 
 			If DomTask.Contains("@SearchImageBlog") And Not DomTask.Contains("@SearchImageBlogAgain") Then
 
-				SearchImageBlog = True
 				GetBlogImage()
 
 			End If
@@ -9337,28 +9300,6 @@ StatusUpdateEnd:
 
 
 
-		'If PreCleanString.Contains("@CockSizeSmall") Then
-		'If FrmSettings.CockSizeNumBox.Value < 6 Then
-		'StartIndex = PreCleanString.IndexOf("@CockSizeSmall") + 13
-		'EndIndex = PreCleanString.IndexOf("@CockSizeMedium", StartIndex)
-		'PreCleanString = PreCleanString.Substring(StartIndex, EndIndex - StartIndex).Trim
-		'PreCleanString = PreCleanString.Remove(0, 2)
-		'End If
-		'If FrmSettings.CockSizeNumBox.Value > 5 And FrmSettings.CockSizeNumBox.Value < 9 Then
-		'StartIndex = PreCleanString.IndexOf("@CockSizeMedium") + 14
-		'EndIndex = PreCleanString.IndexOf("@CockSizeLarge", StartIndex)
-		'PreCleanString = PreCleanString.Substring(StartIndex, EndIndex - StartIndex).Trim
-		'PreCleanString = PreCleanString.Remove(0, 2)
-		'End If
-		'If FrmSettings.CockSizeNumBox.Value > 8 Then
-		'StartIndex = PreCleanString.IndexOf("@CockSizeLarge") + 13
-		'EndIndex = PreCleanString.IndexOf("@CockSizeEnd", StartIndex)
-		'PreCleanString = PreCleanString.Substring(StartIndex, EndIndex - StartIndex).Trim
-		'PreCleanString = PreCleanString.Remove(0, 2)
-		'End If
-		'End If
-
-
 		StringClean = StringClean.Replace("#RP_ChosenCase", FrmCardList.RiskyPickNumber)
 		StringClean = StringClean.Replace("#RP_RespondCase", FrmCardList.RiskyResponse)
 		'StringClean = StringClean.Replace("#RP_CaseNumber", FrmCardList.RiskyCase)
@@ -9894,115 +9835,97 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@ShowImage") And Not StringClean.Contains("@ShowImage[") Then
-			FoundString = GetRandomImage()
-			ShowImage(FoundString, False)
+			ShowImage(GetRandomImage(), False)
 			StringClean = StringClean.Replace("@ShowImage", "")
 		End If
 
 		If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
-			FoundString = GetImageData(ImageGenre.Butt).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Butt).Random(), False)
 
 			StringClean = StringClean.Replace("@ShowButtImage", "")
 			StringClean = StringClean.Replace("@ShowButtsImage", "")
 		End If
 
 		If StringClean.Contains("@ShowBoobsImage") Or StringClean.Contains("@ShowBoobImage") Then
-			FoundString = GetImageData(ImageGenre.Boobs).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Boobs).Random(), False)
 
 			StringClean = StringClean.Replace("@ShowBoobsImage", "")
 			StringClean = StringClean.Replace("@ShowBoobImage", "")
 		End If
 
 		If StringClean.Contains("@ShowHardcoreImage") Then
-			FoundString = GetImageData(ImageGenre.Hardcore).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Hardcore).Random(), False)
 			StringClean = StringClean.Replace("@ShowHardcoreImage", "")
 		End If
 
 		If StringClean.Contains("@ShowSoftcoreImage") Then
-			FoundString = GetImageData(ImageGenre.Softcore).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Softcore).Random(), False)
 			StringClean = StringClean.Replace("@ShowSoftcoreImage", "")
 		End If
 
 		If StringClean.Contains("@ShowLesbianImage") Then
-			FoundString = GetImageData(ImageGenre.Lesbian).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Lesbian).Random(), False)
 			StringClean = StringClean.Replace("@ShowLesbianImage", "")
 		End If
 
 		If StringClean.Contains("@ShowBlowjobImage") Then
-			FoundString = GetImageData(ImageGenre.Blowjob).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Blowjob).Random(), False)
 			StringClean = StringClean.Replace("@ShowBlowjobImage", "")
 		End If
 
 		If StringClean.Contains("@ShowFemdomImage") Then
-			FoundString = GetImageData(ImageGenre.Femdom).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Femdom).Random(), False)
 			StringClean = StringClean.Replace("@ShowFemdomImage", "")
 		End If
 
 		If StringClean.Contains("@ShowLezdomImage") Then
-			FoundString = GetImageData(ImageGenre.Lezdom).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Lezdom).Random(), False)
 			StringClean = StringClean.Replace("@ShowLezdomImage", "")
 		End If
 
 		If StringClean.Contains("@ShowHentaiImage") Then
-			FoundString = GetImageData(ImageGenre.Hentai).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Hentai).Random(), False)
 			StringClean = StringClean.Replace("@ShowHentaiImage", "")
 		End If
 
 		If StringClean.Contains("@ShowGayImage") Then
-			FoundString = GetImageData(ImageGenre.Gay).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Gay).Random(), False)
 			StringClean = StringClean.Replace("@ShowGayImage", "")
 		End If
 
 		If StringClean.Contains("@ShowMaledomImage") Then
-			FoundString = GetImageData(ImageGenre.Maledom).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Maledom).Random(), False)
 			StringClean = StringClean.Replace("@ShowMaledomImage", "")
 		End If
 
 		If StringClean.Contains("@ShowCaptionsImage") Then
-			FoundString = GetImageData(ImageGenre.Captions).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Captions).Random(), False)
 			StringClean = StringClean.Replace("@ShowCaptionsImage", "")
 		End If
 
 		If StringClean.Contains("@ShowGeneralImage") Then
-			FoundString = GetImageData(ImageGenre.General).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.General).Random(), False)
 			StringClean = StringClean.Replace("@ShowGeneralImage", "")
 		End If
 
 		If StringClean.Contains("@ShowLikedImage") Then
-			FoundString = GetImageData(ImageGenre.Liked).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Liked).Random(), False)
 			StringClean = StringClean.Replace("@ShowLikedImage", "")
 		End If
 
 		If StringClean.Contains("@ShowDislikedImage") Then
-			FoundString = GetImageData(ImageGenre.Disliked).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Disliked).Random(), False)
 			StringClean = StringClean.Replace("@ShowDislikedImage", "")
 		End If
 
 		If StringClean.Contains("@ShowBlogImage") Then
-			FoundString = GetImageData(ImageGenre.Blog).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Blog).Random(), False)
 			StringClean = StringClean.Replace("@ShowBlogImage", "")
 		End If
 
 		' The @NewBlogImage Command is a defunct Command that has been replaced by @ShowBlogImage
 		If StringClean.Contains("@NewBlogImage") Then
-			FoundString = GetImageData(ImageGenre.Blog).Random()
-			ShowImage(FoundString, False)
+			ShowImage(GetImageData(ImageGenre.Blog).Random(), False)
 			StringClean = StringClean.Replace("@NewBlogImage", "")
 		End If
 
@@ -10107,6 +10030,8 @@ RinseLatherRepeat:
 		If StringClean.Contains("@ShowTaggedImage") Then
 			'TODO-Next: @ShowTaggedImage: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String). Remove references to Variable FoundString.
 			'Debug.Print("ShowTaggedImage StringClean ^^^^^^^^^^^^^^^^^^^^^^ = " & StringClean)
+
+			Dim FoundString As String
 
 			'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
 			If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
@@ -16414,7 +16339,6 @@ Skip_RandomFile:
 		ShowModule = True
 
 		TauntEdging = False
-		TauntEdgingAsked = False
 
 		AskedToGiveUpSection = False
 		Dim ModuleList As New List(Of String)
@@ -18748,7 +18672,7 @@ GetDommeSlideshow:
 
 		If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-		ShowImage(_ImageFileNames(FileCount))
+		ShowImage(_ImageFileNames(FileCount), False)
 		JustShowedBlogImage = False
 
 		nextButton.Enabled = True
@@ -19303,7 +19227,7 @@ GetDommeSlideshow:
 		SettingsList.Add("StrokeCycle: --obsolete--") ' for compatibility
 		SettingsList.Add("StrokeTick: " & StrokeTick)
 		SettingsList.Add("StrokeTauntTick: " & StrokeTauntTick)
-		SettingsList.Add("StrokePaceRight: " & StrokePaceRight)
+		SettingsList.Add("StrokePaceRight: --obsolete--") ' for compatibility
 		SettingsList.Add("StrokePace: " & StrokePace)
 		SettingsList.Add("AudibleTick: --obsolete--") ' for compatibility
 		SettingsList.Add("StrokeTimeTotal: " & StrokeTimeTotal)
@@ -19418,20 +19342,20 @@ GetDommeSlideshow:
 		SettingsList.Add("Vulgar: " & Vulgar)
 		SettingsList.Add("Supremacist: " & Supremacist)
 		SettingsList.Add("CockSize: " & CockSize)
-		SettingsList.Add("TempDick: " & TempDick)
+		SettingsList.Add("TempDick: --obsolete--") ' for compatibility
 		SettingsList.Add("PetName: " & PetName)
-		SettingsList.Add("PetName2: " & PetName2)
+		SettingsList.Add("PetName2: --obsolete--") ' for compatibility
 		SettingsList.Add("TauntText: " & TauntText)
 		SettingsList.Add("ScriptCount: " & ScriptCount)
 		SettingsList.Add("TempScriptCount: " & TempScriptCount)
 		SettingsList.Add("TauntTextCount: " & TauntTextCount)
-		SettingsList.Add("StartIndex: " & StartIndex)
-		SettingsList.Add("EndIndex: " & EndIndex)
+		SettingsList.Add("StartIndex: --obsolete--") ' for compatibility
+		SettingsList.Add("EndIndex: --obsolete--") ' for compatibility
 		SettingsList.Add("SlideshowTimerTick: " & SlideshowTimerTick)
-		SettingsList.Add("ReadBlog: " & ReadBlog)
-		SettingsList.Add("ReadBlogRate: " & ReadBlogRate)
-		SettingsList.Add("SearchImageBlog: " & SearchImageBlog)
-		SettingsList.Add("FoundString: " & FoundString)
+		SettingsList.Add("ReadBlog: --obsolete--") ' for compatibility
+		SettingsList.Add("ReadBlogRate: --obsolete--") ' for compatibility
+		SettingsList.Add("SearchImageBlog:  --obsolete--") ' for compatibility
+		SettingsList.Add("FoundString: --obsolete--") ' for compatibility
 		SettingsList.Add("WebImage: " & WebImage)
 		'SettingsList.Add("WebImageLines: " & WebImageLines)
 		SettingsList.Add("WebImageLine: " & WebImageLine)
@@ -19439,9 +19363,9 @@ GetDommeSlideshow:
 		SettingsList.Add("WebImagePath: " & WebImagePath)
 		SettingsList.Add("ImageUrlFilePath: --obsolete--") ' for compatibility
 		SettingsList.Add("ImageUrlFileIndex: --obsolete--") ' for compatibility
-		SettingsList.Add("ReaderString: " & ReaderString)
-		SettingsList.Add("ReaderStringTotal: " & ReaderStringTotal)
-		SettingsList.Add("StrokePaceInt: " & StrokePaceInt)
+		SettingsList.Add("ReaderString: --obsolete--") ' for compatibility
+		SettingsList.Add("ReaderStringTotal:  --obsolete--") ' for compatibility
+		SettingsList.Add("StrokePaceInt: --obsolete--") ' for compatibility 
 		SettingsList.Add("LastScriptCountdown: " & LastScriptCountdown)
 		SettingsList.Add("LastScript: " & LastScript)
 		SettingsList.Add("JustShowedBlogImage: " & JustShowedBlogImage)
@@ -19634,7 +19558,7 @@ GetDommeSlideshow:
 		SettingsList.Add("NewDommeSlideshow: " & NewDommeSlideshow)
 		SettingsList.Add("OriginalDommeSlideshow: " & OriginalDommeSlideshow)
 		SettingsList.Add("TimeoutTick: " & TimeoutTick)
-		SettingsList.Add("PBImage: " & PBImage)
+		SettingsList.Add("PBImage: --obsolete--") ' for compatibility 
 		SettingsList.Add("DommeImageSTR: " & DommeImageSTR)
 		SettingsList.Add("LocalImageSTR: " & LocalImageSTR)
 		SettingsList.Add("ImageLocation: " & ImageLocation)
@@ -19917,7 +19841,7 @@ GetDommeSlideshow:
 		'StrokeCycle = SettingsList(64).Replace("StrokeCycle: ", "")
 		StrokeTick = SettingsList(65).Replace("StrokeTick: ", "")
 		StrokeTauntTick = SettingsList(66).Replace("StrokeTauntTick: ", "")
-		StrokePaceRight = SettingsList(67).Replace("StrokePaceRight: ", "")
+		'StrokePaceRight = SettingsList(67).Replace("StrokePaceRight: ", "")
 		StrokePace = SettingsList(68).Replace("StrokePace: ", "")
 		'AudibleTick = SettingsList(69).Replace("AudibleTick: ", "")
 		StrokeTimeTotal = SettingsList(70).Replace("StrokeTimeTotal: ", "")
@@ -20026,29 +19950,29 @@ GetDommeSlideshow:
 		Vulgar = SettingsList(176).Replace("Vulgar: ", "")
 		Supremacist = SettingsList(177).Replace("Supremacist: ", "")
 		CockSize = SettingsList(178).Replace("CockSize: ", "")
-		TempDick = SettingsList(179).Replace("TempDick: ", "")
+		'TempDick = SettingsList(179).Replace("TempDick: ", "")
 		PetName = SettingsList(180).Replace("PetName: ", "")
-		PetName2 = SettingsList(181).Replace("PetName2: ", "")
+		'PetName2 = SettingsList(181).Replace("PetName2: ", "")
 		TauntText = SettingsList(182).Replace("TauntText: ", "")
 		ScriptCount = SettingsList(183).Replace("ScriptCount: ", "")
 		TempScriptCount = SettingsList(184).Replace("TempScriptCount: ", "")
 		TauntTextCount = SettingsList(185).Replace("TauntTextCount: ", "")
-		StartIndex = SettingsList(186).Replace("StartIndex: ", "")
-		EndIndex = SettingsList(187).Replace("EndIndex: ", "")
+		'StartIndex = SettingsList(186).Replace("StartIndex: ", "")
+		'EndIndex = SettingsList(187).Replace("EndIndex: ", "")
 		SlideshowTimerTick = SettingsList(188).Replace("SlideshowTimerTick: ", "")
-		ReadBlog = SettingsList(189).Replace("ReadBlog: ", "")
-		ReadBlogRate = SettingsList(190).Replace("ReadBlogRate: ", "")
-		SearchImageBlog = SettingsList(191).Replace("SearchImageBlog: ", "")
-		FoundString = SettingsList(192).Replace("FoundString: ", "")
+		'ReadBlog = SettingsList(189).Replace("ReadBlog: ", "")
+		'ReadBlogRate = SettingsList(190).Replace("ReadBlogRate: ", "")
+		'SearchImageBlog = SettingsList(191).Replace("SearchImageBlog: ", "")
+		'FoundString = SettingsList(192).Replace("FoundString: ", "")
 		WebImage = SettingsList(193).Replace("WebImage: ", "")
 		WebImageLine = SettingsList(194).Replace("WebImageLine: ", "")
 		WebImageLineTotal = SettingsList(195).Replace("WebImageLineTotal: ", "")
 		WebImagePath = SettingsList(196).Replace("WebImagePath: ", "")
 		'ImageUrlFilePath = SettingsList(197).Replace("ImageUrlFilePath: ", "")
 		'ImageUrlFileIndex = SettingsList(198).Replace("ImageUrlFileIndex: ", "")
-		ReaderString = SettingsList(199).Replace("ReaderString: ", "")
-		ReaderStringTotal = SettingsList(200).Replace("ReaderStringTotal: ", "")
-		StrokePaceInt = SettingsList(201).Replace("StrokePaceInt: ", "")
+		'ReaderString = SettingsList(199).Replace("ReaderString: ", "")
+		'ReaderStringTotal = SettingsList(200).Replace("ReaderStringTotal: ", "")
+		'StrokePaceInt = SettingsList(201).Replace("StrokePaceInt: ", "")
 		LastScriptCountdown = SettingsList(202).Replace("LastScriptCountdown: ", "")
 		LastScript = SettingsList(203).Replace("LastScript: ", "")
 		JustShowedBlogImage = SettingsList(204).Replace("JustShowedBlogImage: ", "")
@@ -20231,7 +20155,7 @@ GetDommeSlideshow:
 		NewDommeSlideshow = SettingsList(366).Replace("NewDommeSlideshow: ", "")
 		OriginalDommeSlideshow = SettingsList(367).Replace("OriginalDommeSlideshow: ", "")
 		TimeoutTick = SettingsList(368).Replace("TimeoutTick: ", "")
-		PBImage = SettingsList(369).Replace("PBImage: ", "")
+		'PBImage = SettingsList(369).Replace("PBImage: ", "")
 		DommeImageSTR = SettingsList(370).Replace("DommeImageSTR: ", "")
 		LocalImageSTR = SettingsList(371).Replace("LocalImageSTR: ", "")
 		ImageLocation = SettingsList(372).Replace("ImageLocation: ", "")
@@ -20255,9 +20179,8 @@ GetDommeSlideshow:
 
 		If SlideshowLoaded = True Then
 			If File.Exists(_ImageFileNames(FileCount)) Then
-				PBImage = _ImageFileNames(FileCount)
 				' Github Patch ImageThread.Start()
-				ShowImage(PBImage, True)
+				ShowImage(_ImageFileNames(FileCount), True)
 			End If
 		End If
 
@@ -23645,70 +23568,9 @@ playLoop:
 		My.Settings.MetroOn = CBMetronome.Checked
 	End Sub
 
-#End Region
+#End Region ' Metronome App
 
 #End Region ' Apps
-
-	<Obsolete("Use ShowImage(String, Boolean) instead")>
-	Public Sub ShowImage(ByVal ImageToShow As String)
-		'TODO-Next-Stefaf: Function ShowImage is decpreciated. Remove all references
-		PBImage = ImageToShow
-		ImageLocation = ImageToShow
-		ImageThread = New Thread(AddressOf DisplayImage) With {.Name = "ImageThread"}
-		ImageThread.IsBackground = True
-		ImageThread.Start()
-
-	End Sub
-
-	''' <summary>
-	''' Invokes included! This function should be used in a thread.
-	''' </summary>
-	<Obsolete("Use ShowImage(String, Boolean) instead")>
-	Private Sub DisplayImage()
-		'TODO-Next-Stefaf: Function DisplayImage is decpreciated. Remove all references
-		If FormLoading = True Then Return
-		If PBImage = "" Then Return
-
-		Control.CheckForIllegalCrossThreadCalls = False
-
-
-		Dim OldImage As Image = mainPictureBox.Image
-
-
-		If PBImage.Contains("/") And PBImage.Contains("://") Then
-			Try
-				' Load the Image.
-				mainPictureBox.Image = New Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PBImage)))
-			Catch ex As Net.WebException
-				Exit Sub
-			End Try
-		Else
-			mainPictureBox.Image = Image.FromFile(PBImage)
-		End If
-
-
-		Try
-			Me.UIThread(Sub() LBLImageInfo.Text = ImageLocation)
-		Catch
-			LBLImageInfo.Text = "Error!"
-		End Try
-
-		If Not OldImage Is Nothing Then
-			OldImage.Dispose()
-		End If
-		GC.Collect()
-
-		Me.Invoke(New Action(AddressOf CheckDommeTags))
-
-		If Me.InvokeRequired Then
-			Debug.Print("PBImageThread --- On different Thread")
-		Else
-			Debug.Print("PBImageThread --- On UI-Thread")
-		End If
-
-
-	End Sub
-
 
 	Private Sub VideoTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTimer.Tick
 
@@ -24026,7 +23888,6 @@ playLoop:
 		TempHypno,
 		StrokeTick,
 		StrokeTauntTick,
-		StrokePaceRight,
 		StrokePace,
 		StrokeTimeTotal,
 		HoldEdgeTime,
@@ -24128,28 +23989,17 @@ playLoop:
 		Vulgar,
 		Supremacist,
 		CockSize,
-		TempDick,
 		PetName,
-		PetName2,
 		TauntText,
 		ScriptCount,
 		TempScriptCount,
 		TauntTextCount,
-		StartIndex,
-		EndIndex,
 		SlideshowTimerTick,
-		ReadBlog,
-		ReadBlogRate,
-		SearchImageBlog,
-		FoundString,
 		WebImage,
 		WebImageLines,
 		WebImageLine,
 		WebImageLineTotal,
 		WebImagePath,
-		ReaderString,
-		ReaderStringTotal,
-		StrokePaceInt,
 		LastScriptCountdown,
 		LastScript,
 		JustShowedBlogImage,
@@ -24283,7 +24133,6 @@ playLoop:
 		NewDommeSlideshow,
 		OriginalDommeSlideshow,
 		TimeoutTick,
-		PBImage,
 		DommeImageSTR,
 		LocalImageSTR,
 		ImageLocation,
@@ -24339,7 +24188,6 @@ playLoop:
 		CameGotoLine,
 		RuinedGotoLine,
 		TauntEdging,
-		TauntEdgingAsked,
 		WritingTaskCurrentTime)
 
 
@@ -24425,7 +24273,6 @@ playLoop:
 		TempHypno = LoadedState.TempHypno
 		StrokeTick = LoadedState.StrokeTick
 		StrokeTauntTick = LoadedState.StrokeTauntTick
-		StrokePaceRight = LoadedState.StrokePaceRight
 		StrokePace = LoadedState.StrokePace
 		StrokeTimeTotal = LoadedState.StrokeTimeTotal
 		HoldEdgeTime = LoadedState.HoldEdgeTime
@@ -24527,28 +24374,17 @@ playLoop:
 		Vulgar = LoadedState.Vulgar
 		Supremacist = LoadedState.Supremacist
 		CockSize = LoadedState.CockSize
-		TempDick = LoadedState.TempDick
 		PetName = LoadedState.PetName
-		PetName2 = LoadedState.PetName2
 		TauntText = LoadedState.TauntText
 		ScriptCount = LoadedState.ScriptCount
 		TempScriptCount = LoadedState.TempScriptCount
 		TauntTextCount = LoadedState.TauntTextCount
-		StartIndex = LoadedState.StartIndex
-		EndIndex = LoadedState.EndIndex
 		SlideshowTimerTick = LoadedState.SlideshowTimerTick
-		ReadBlog = LoadedState.ReadBlog
-		ReadBlogRate = LoadedState.ReadBlogRate
-		SearchImageBlog = LoadedState.SearchImageBlog
-		FoundString = LoadedState.FoundString
 		WebImage = LoadedState.WebImage
 		WebImageLines = LoadedState.WebImageLines
 		WebImageLine = LoadedState.WebImageLine
 		WebImageLineTotal = LoadedState.WebImageLineTotal
 		WebImagePath = LoadedState.WebImagePath
-		ReaderString = LoadedState.ReaderString
-		ReaderStringTotal = LoadedState.ReaderStringTotal
-		StrokePaceInt = LoadedState.StrokePaceInt
 		LastScriptCountdown = LoadedState.LastScriptCountdown
 		LastScript = LoadedState.LastScript
 		JustShowedBlogImage = LoadedState.JustShowedBlogImage
@@ -24682,7 +24518,6 @@ playLoop:
 		NewDommeSlideshow = LoadedState.NewDommeSlideshow
 		OriginalDommeSlideshow = LoadedState.OriginalDommeSlideshow
 		TimeoutTick = LoadedState.TimeoutTick
-		PBImage = LoadedState.PBImage
 		DommeImageSTR = LoadedState.DommeImageSTR
 		LocalImageSTR = LoadedState.LocalImageSTR
 		ImageLocation = LoadedState.ImageLocation
@@ -24738,7 +24573,6 @@ playLoop:
 		CameGotoLine = LoadedState.CameGotoLine
 		RuinedGotoLine = LoadedState.RuinedGotoLine
 		TauntEdging = LoadedState.TauntEdging
-		TauntEdgingAsked = LoadedState.TauntEdgingAsked
 		WritingTaskCurrentTime = LoadedState.WritingTaskCurrentTime
 
 	End Sub

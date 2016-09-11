@@ -885,12 +885,10 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 
 			' Updeate the pathimformations.
 			If ImagePath <> pathImageErrorOnLoading Then
-				PBImage = ImagePath
 				ImageLocation = ImagePath
 				LBLImageInfo.Text = ImagePath
 				mainPictureBox.ImageLocation = ImagePath
 			Else
-				PBImage = ""
 				ImageLocation = ""
 				LBLImageInfo.Text = ""
 				mainPictureBox.ImageLocation = ""
