@@ -14,9 +14,15 @@ WIP - DataBinding Overhaul
 
 Added Features: 
 	Check Box to lock orgasm chances after tease starts. by OxiKlein
+	Download online-image progress bar added. by Stefaf
 
 Bugfixes:
 	@ImageTag()-Command displays now tagged images. Up to 3 Tags are allowed. by Stefaf
+	Resolved an infinite loop, when TauntEdging was started. by Stefaf
+
+Miscellaneous:
+	Removed several unused variables. by Stefaf
+
 
 # Changelog - Patch 54.4.0
 
