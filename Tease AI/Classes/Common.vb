@@ -4,6 +4,7 @@
 '
 ' This file contains general functions not related to specific Tasks in Tease-AI.
 '===========================================================================================
+Imports System.ComponentModel
 Imports System.IO
 Imports System.Net
 
@@ -277,18 +278,26 @@ Public Class Common
 
 
 	''' <summary>
-	''' Download an image ffrom url.
+	''' Download an image from url.
 	''' </summary>
 	''' <param name="uri"></param>
 	''' <param name="fileName"></param>
-	Friend Shared Function DownloadRemoteImageFile(uri As String, Optional fileName As String = "") As Image
+	Friend Shared Function DownloadRemoteImageFile(uri As String, Optional fileName As String = "", Optional ByRef backgroundWorker As BackgroundWorker = Nothing) As Image
 		Dim request As HttpWebRequest = DirectCast(WebRequest.Create(uri), HttpWebRequest)
 		Dim response As HttpWebResponse = Nothing
 		Dim rtnImage As Image = Nothing
 		Try
+			' To keep writework simple
+			Dim BGW_reports As Boolean = backgroundWorker IsNot Nothing AndAlso backgroundWorker.WorkerReportsProgress
+			' Report start of download
+			If BGW_reports Then backgroundWorker.ReportProgress(1)
+
 			request.Timeout = 30000
 			request.KeepAlive = False
 			response = DirectCast(request.GetResponse(), HttpWebResponse)
+
+			' Report established Connection
+			If BGW_reports Then backgroundWorker.ReportProgress(10)
 
 			' Check that the remote file was found. The ContentType
 			' check is performed since a request for a non-existent
@@ -311,14 +320,23 @@ Public Class Common
 					' is transfered form server.
 					Dim buffer As Byte() = New Byte(127) {}
 
+					Dim contentLength_loaded As Integer = 0
+
 					While True
+
 						Dim read As Integer = inputStream.Read(buffer, 0, buffer.Length)
 						If read <= 0 Then Exit While
 						tempMemStream.Write(buffer, 0, read)
+
+						' Report actual Progress
+						If BGW_reports Then
+							contentLength_loaded += buffer.Length
+							backgroundWorker.ReportProgress(CInt(90 / response.ContentLength * contentLength_loaded) + 10)
+						End If
 					End While
 
 					rtnImage = Image.FromStream(tempMemStream)
-					
+
 					' Check if image has to be saved.
 					If fileName = "" Then Return rtnImage
 					rtnImage.Save(fileName)

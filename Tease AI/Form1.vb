@@ -4430,11 +4430,26 @@ AcceptAnswer:
 				If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
 
 				DomChat = DomChat.Replace("@Goto" & StripGoto, "")
-				Do
-					gotoline += 1
+				Try
+					Do
+						gotoline += 1
 
-				Loop Until gotolines(gotoline).StartsWith(FileGoto)
+					Loop Until gotolines(gotoline).StartsWith(FileGoto)
+				Catch ex As ArgumentOutOfRangeException When MiniScript = True
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					'                                 ArgumentOutOfRangeException - Miniscript
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					Throw New ArgumentOutOfRangeException("The Miniscript-Goto-Destination """ & FileGoto &
+														  """ in file """ & GotoText & """ was not found.", ex)
+				Catch ex As ArgumentOutOfRangeException When MiniScript = True
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					'                                 ArgumentOutOfRangeException - Regular Script
+					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+					Throw New ArgumentOutOfRangeException("The Goto-Destination """ & FileGoto &
+														  """ in file """ & GotoText & """ was not found.", ex)
+				End Try
 
+				'QUESTION (stefaf): Is this line an error?
 				StrokeTauntVal = gotoline
 
 				If MiniScript = True Then
@@ -4443,6 +4458,8 @@ AcceptAnswer:
 					StrokeTauntVal = gotoline
 				End If
 
+			Else
+				Throw New FileNotFoundException("The Goto-File """ & GotoText & """ was not found.")
 			End If
 
 		End If
@@ -16362,37 +16379,31 @@ Skip_RandomFile:
 
 	End Sub
 
-
+	''' <summary>
+	''' Displays a random Blog image. Waits to finish download before proceeding.
+	''' </summary>
 	Public Sub GetBlogImage()
 
-		If FrmSettings.URLFileList.CheckedItems.Count = 0 Then
-			GetLocalImage()
-			Exit Sub
-		End If
-
 		Try
-			FoundString = GetRandomImage(ImageGenre.Blog)
+			If FrmSettings.URLFileList.CheckedItems.Count = 0 Then
+				Throw New Exception("No URL-Files selected.")
+			End If
 
-			ClearMainPictureBox()
-
-			ShowImage(FoundString, True)
+			ShowImage(GetRandomImage(ImageGenre.Blog), True)
 			JustShowedBlogImage = True
 
 		Catch ex As Exception
 			GetLocalImage()
-			Exit Sub
 		End Try
 
 	End Sub
 
-
+	''' <summary>
+	''' Displays an random local image. Waits to finish download before proceeding.
+	''' </summary>
 	Public Sub GetLocalImage()
 
-		FoundString = GetRandomImage(ImageSourceType.Local)
-
-		ClearMainPictureBox()
-
-		ShowImage(FoundString, True)
+		ShowImage(GetRandomImage(ImageSourceType.Local), True)
 		JustShowedBlogImage = True
 
 	End Sub
@@ -22972,11 +22983,15 @@ SkipNew:
 #Region "-------------------------------------------------- Randomizer-App ----------------------------------------------------"
 
 	Private Sub BTNRandomBlog_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomBlog.Click
+		BTNRandomBlog.Enabled = False
 		GetBlogImage()
+		BTNRandomBlog.Enabled = True
 	End Sub
 
 	Private Sub BTNRandomLocal_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomLocal.Click
+		BTNRandomLocal.Enabled = False
 		GetLocalImage()
+		BTNRandomLocal.Enabled = True
 	End Sub
 
 	Private Sub BTNRandomVideo_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomVideo.Click
