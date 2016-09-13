@@ -60,7 +60,6 @@ Public Class SaveState
 	Public TempHypno As String
 	Public StrokeTick As Integer
 	Public StrokeTauntTick As Integer
-	Public StrokePaceRight As Boolean
 	Public StrokePace As Integer
 	Public StrokeTimeTotal As Integer
 	Public HoldEdgeTime As Integer
@@ -162,28 +161,17 @@ Public Class SaveState
 	Public Vulgar As Boolean
 	Public Supremacist As Boolean
 	Public CockSize As Integer
-	Public TempDick As String
 	Public PetName As String
-	Public PetName2 As String
 	Public TauntText As String
 	Public ScriptCount As Integer
 	Public TempScriptCount As Integer
 	Public TauntTextCount As Integer
-	Public StartIndex As Integer
-	Public EndIndex As Integer
 	Public SlideshowTimerTick As Integer
-	Public ReadBlog As String
-	Public ReadBlogRate As String
-	Public SearchImageBlog As Boolean
-	Public FoundString As String
 	Public WebImage As String
 	Public WebImageLines As New List(Of String)
 	Public WebImageLine As Integer
 	Public WebImageLineTotal As Integer
 	Public WebImagePath As String
-	Public ReaderString As String
-	Public ReaderStringTotal As Integer
-	Public StrokePaceInt As Integer
 	Public LastScriptCountdown As Integer
 	Public LastScript As Boolean
 	Public JustShowedBlogImage As Boolean
@@ -317,7 +305,6 @@ Public Class SaveState
 	Public NewDommeSlideshow As Boolean
 	Public OriginalDommeSlideshow As String
 	Public TimeoutTick As Integer
-	Public PBImage As String
 	Public DommeImageSTR As String
 	Public LocalImageSTR As String
 	Public ImageLocation As String
@@ -373,7 +360,6 @@ Public Class SaveState
 	Public CameGotoLine As String
 	Public RuinedGotoLine As String
 	Public TauntEdging As Boolean
-	Public TauntEdgingAsked As Boolean
 	Public WritingTaskCurrentTime As Single
 
 
@@ -382,375 +368,361 @@ Public Class SaveState
 	End Sub
 
 
-	Public Sub New( _
-	ByVal NEW_Chat As String, _
-	 ByVal NEW_ScriptOperator As String, _
-	 ByVal NEW_ScriptCompare As String, _
-	 ByVal NEW_DomTyping As Boolean, _
-	 ByVal NEW_CheckYes As Boolean, _
-	 ByVal NEW_CheckNo As Boolean, _
-	 ByVal NEW_Playlist As Boolean, _
-	 ByVal NEW_PlaylistFile As List(Of String), _
-	 ByVal NEW_PlaylistCurrent As Integer, _
-	 ByVal NEW_FormLoading As Boolean, _
-	 ByVal NEW_Responding As Boolean, _
-	 ByVal NEW_StrokeTauntVal As Integer, _
-	 ByVal NEW_FileText As String, _
-	 ByVal NEW_TempStrokeTauntVal As Integer, _
-	 ByVal NEW_TempFileText As String, _
-	 ByVal NEW_TeaseTick As Integer, _
-	 ByVal NEW_StrokeTauntCount As Integer, _
-	 ByVal NEW_TauntTextTotal As Integer, _
-	 ByVal NEW_TauntLines As List(Of String), _
-	 ByVal NEW_StrokeFilter As Boolean, _
-	 ByVal NEW_ScriptTick As Integer, _
-	 ByVal NEW_StringLength As Integer, _
-	 ByVal NEW_FileGoto As String, _
-	 ByVal NEW_SkipGotoLine As Boolean, _
-	 ByVal NEW_ChatString As String, _
-	 ByVal NEW_DomTask As String, _
-	 ByVal NEW_DomChat As String, _
-	 ByVal NEW_TypeDelay As Integer, _
-	 ByVal NEW_TempVal As Integer, _
-	 ByVal NEW_NullResponse As Boolean, _
-	 ByVal NEW_TagCount As Integer, _
-	 ByVal NEW_LocalTagCount As Integer, _
-	 ByVal NEW_TaskFile As String, _
-	 ByVal NEW_TaskText As String, _
-	 ByVal NEW_TaskTextDir As String, _
-	 ByVal NEW_ResponseFile As String, _
-	 ByVal NEW_ResponseLine As Integer, _
-	 ByVal NEW_CBTCockActive As Boolean, _
-	 ByVal NEW_CBTBallsActive As Boolean, _
-	 ByVal NEW_CBTCockFlag As Boolean, _
-	 ByVal NEW_CBTBallsFlag As Boolean, _
-	 ByVal NEW_CBTBallsFirst As Boolean, _
-	 ByVal NEW_CBTCockFirst As Boolean, _
-	 ByVal NEW_CBTBallsCount As Integer, _
-	 ByVal NEW_CBTCockCount As Integer, _
-	 ByVal NEW_TasksCount As Integer, _
-	 ByVal NEW_GotoDommeLevel As Boolean, _
-	 ByVal NEW_DommeMood As Integer, _
-	 ByVal NEW_AFK As Boolean, _
-	 ByVal NEW_HypnoGen As Boolean, _
-	 ByVal NEW_Induction As Boolean, _
-	 ByVal NEW_TempHypno As String, _
-	 ByVal NEW_StrokeTick As Integer, _
-	 ByVal NEW_StrokeTauntTick As Integer, _
-	 ByVal NEW_StrokePaceRight As Boolean, _
-	 ByVal NEW_StrokePace As Integer, _
-	 ByVal NEW_StrokeTimeTotal As Integer, _
-	 ByVal NEW_HoldEdgeTime As Integer, _
-	 ByVal NEW_HoldEdgeTimeTotal As Integer, _
-	 ByVal NEW_EdgeTauntInt As Integer, _
-	 ByVal NEW_DelayTick As Integer, _
-	 ByVal NEW_DomTypeCheck As Boolean, _
-	 ByVal NEW_TypeToggle As Boolean, _
-	 ByVal NEW_IsTyping As Boolean, _
-	 ByVal NEW_SubWroteLast As Boolean, _
-	 ByVal NEW_YesOrNo As Boolean, _
-	 ByVal NEW_GotoFlag As Boolean, _
-	 ByVal NEW_CBT As Boolean, _
-	 ByVal NEW_RunningScript As Boolean, _
-	 ByVal NEW_BeforeTease As Boolean, _
-	 ByVal NEW_SubStroking As Boolean, _
-	 ByVal NEW_SubEdging As Boolean, _
-	 ByVal NEW_SubHoldingEdge As Boolean, _
-	 ByVal NEW_EndTease As Boolean, _
-	 ByVal NEW_ShowModule As Boolean, _
-	 ByVal NEW_ModuleEnd As Boolean, _
-	 ByVal NEW_DivideText As Boolean, _
-	 ByVal NEW_HoldEdgeTick As Integer, _
-	 ByVal NEW_HoldEdgeChance As Integer, _
-	 ByVal NEW_EdgeHold As Boolean, _
-	 ByVal NEW_EdgeNoHold As Boolean, _
-	 ByVal NEW_EdgeToRuin As Boolean, _
-	 ByVal NEW_EdgeToRuinSecret As Boolean, _
-	 ByVal NEW_LongEdge As Boolean, _
-	 ByVal NEW_AskedToGiveUp As Boolean, _
-	 ByVal NEW_AskedToGiveUpSection As Boolean, _
-	 ByVal NEW_SubGaveUp As Boolean, _
-	 ByVal NEW_AskedToSpeedUp As Boolean, _
-	 ByVal NEW_AskedToSlowDown As Boolean, _
-	 ByVal NEW_ThoughtEnd As Boolean, _
-	 ByVal NEW_VTLength As Integer, _
-	 ByVal NEW_DommeVideo As Boolean, _
-	 ByVal NEW_VideoType As String, _
-	 ByVal NEW_CensorshipGame As Boolean, _
-	 ByVal NEW_CensorshipTick As Integer, _
-	 ByVal NEW_CensorDuration As String, _
-	 ByVal NEW_AvoidTheEdgeGame As Boolean, _
-	 ByVal NEW_AvoidTheEdgeTick As Integer, _
-	 ByVal NEW_AvoidTheEdgeTimerTick As Integer, _
-	 ByVal NEW_AvoidTheEdgeDuration As String, _
-	 ByVal NEW_AvoidTheEdgeStroking As Boolean, _
-	 ByVal NEW_AtECountdown As Integer, _
-	 ByVal NEW_VTPath As String, _
-	 ByVal NEW_NoVideo As Boolean, _
-	 ByVal NEW_NoSpecialVideo As Boolean, _
-	 ByVal NEW_VideoCheck As Boolean, _
-	 ByVal NEW_VideoTease As Boolean, _
-	 ByVal NEW_RLGLGame As Boolean, _
-	 ByVal NEW_RLGLStroking As Boolean, _
-	 ByVal NEW_RLGLTick As Integer, _
-	 ByVal NEW_RedLight As Boolean, _
-	 ByVal NEW_RLGLTauntTick As Integer, _
-	 ByVal NEW_RandomizerVideo As Boolean, _
-	 ByVal NEW_RandomizerVideoTease As Boolean, _
-	 ByVal NEW_ScriptVideoTease As String, _
-	 ByVal NEW_ScriptVideoTeaseFlag As Boolean, _
-	 ByVal NEW_VideoTauntTick As Integer, _
-	 ByVal NEW_SlideshowLoaded As Boolean, _
-	 ByVal NEW_RefreshVideoTotal As Integer, _
-	 ByVal NEW_GlitterImageAV As String, _
-	 ByVal NEW_GlitterTempColor As String, _
-	 ByVal NEW_UpdatesTick As Integer, _
-	 ByVal NEW_UpdatingPost As Boolean, _
-	 ByVal NEW_UpdateStage As Integer, _
-	 ByVal NEW_UpdateStageTick As Integer, _
-	 ByVal NEW_StatusText As String, _
-	 ByVal NEW_ContactNumber As Integer, _
-	 ByVal NEW_ContactTick As Integer, _
-	 ByVal NEW_ContactFlag As Boolean, _
-	 ByVal NEW_StatusText1 As String, _
-	 ByVal NEW_StatusText2 As String, _
-	 ByVal NEW_StatusText3 As String, _
-	 ByVal NEW_StatusChance1 As Integer, _
-	 ByVal NEW_StatusChance2 As Integer, _
-	 ByVal NEW_StatusChance3 As Integer, _
-	 ByVal NEW_Update1 As Boolean, _
-	 ByVal NEW_Update2 As Boolean, _
-	 ByVal NEW_Update3 As Boolean, _
-	 ByVal NEW_GetFolder As String, _
-	 ByVal NEW_FileCount As Integer, _
-	 ByVal NEW_FileCountMax As Integer, _
-	 ByVal NEW__ImageFileNames As List(Of String), _
-	 ByVal NEW__CurrentImage As Integer, _
-	 ByVal NEW_WithTeaseImgDir As String, _
-	 ByVal NEW_ApproveImage As Integer, _
-	 ByVal NEW_WIExit As Boolean, _
-	 ByVal NEW_RecentSlideshows As List(Of String), _
-	 ByVal NEW_MainPictureImage As String, _
-	 ByVal NEW_DomPic As String, _
-	 ByVal NEW_LockImage As Boolean, _
-	 ByVal NEW_LockVideo As Boolean, _
-	 ByVal NEW_LocalTagImageList As List(Of String), _
-	 ByVal NEW_Crazy As Boolean, _
-	 ByVal NEW_Vulgar As Boolean, _
-	 ByVal NEW_Supremacist As Boolean, _
-	 ByVal NEW_CockSize As Integer, _
-	 ByVal NEW_TempDick As String, _
-	 ByVal NEW_PetName As String, _
-	 ByVal NEW_PetName2 As String, _
-	 ByVal NEW_TauntText As String, _
-	 ByVal NEW_ScriptCount As Integer, _
-	 ByVal NEW_TempScriptCount As Integer, _
-	 ByVal NEW_TauntTextCount As Integer, _
-	 ByVal NEW_StartIndex As Integer, _
-	 ByVal NEW_EndIndex As Integer, _
-	 ByVal NEW_SlideshowTimerTick As Integer, _
-	 ByVal NEW_ReadBlog As String, _
-	 ByVal NEW_ReadBlogRate As String, _
-	 ByVal NEW_SearchImageBlog As Boolean, _
-	 ByVal NEW_FoundString As String, _
-	 ByVal NEW_WebImage As String, _
-	 ByVal NEW_WebImageLines As List(Of String), _
-	 ByVal NEW_WebImageLine As Integer, _
-	 ByVal NEW_WebImageLineTotal As Integer, _
-	 ByVal NEW_WebImagePath As String, _
-	 ByVal NEW_ReaderString As String, _
-	 ByVal NEW_ReaderStringTotal As Integer, _
-	 ByVal NEW_StrokePaceInt As Integer, _
-	 ByVal NEW_LastScriptCountdown As Integer, _
-	 ByVal NEW_LastScript As Boolean, _
-	 ByVal NEW_JustShowedBlogImage As Boolean, _
-	 ByVal NEW_SaidHello As Boolean, _
-	 ByVal NEW_StopMetronome As Boolean, _
-	 ByVal NEW_AvgEdgeStroking As Integer, _
-	 ByVal NEW_AvgEdgeNoTouch As Integer, _
-	 ByVal NEW_EdgeCountTick As Integer, _
-	 ByVal NEW_AvgEdgeStrokingFlag As Boolean, _
-	 ByVal NEW_AvgEdgeCount As Integer, _
-	 ByVal NEW_AvgEdgeCountRest As Integer, _
-	 ByVal NEW_EdgeTickCheck As Integer, _
-	 ByVal NEW_EdgeNOT As Boolean, _
-	 ByVal NEW_AlreadyStrokingEdge As Boolean, _
-	 ByVal NEW_WritingTaskLinesAmount As Integer, _
-	 ByVal NEW_WritingTaskLinesWritten As Integer, _
-	 ByVal NEW_WritingTaskLinesRemaining As Integer, _
-	 ByVal NEW_WritingTaskMistakesAllowed As Integer, _
-	 ByVal NEW_WritingTaskMistakesMade As Integer, _
-	 ByVal NEW_WritingTaskFlag As Boolean, _
-	 ByVal NEW_FirstRound As Boolean, _
-	 ByVal NEW_StartStrokingCount As Integer, _
-	 ByVal NEW_TeaseJOI As Boolean, _
-	 ByVal NEW_TeaseVideo As Boolean, _
-	 ByVal NEW_TnAList As List(Of String), _
-	 ByVal NEW_BoobList As List(Of String), _
-	 ByVal NEW_AssList As List(Of String), _
-	 ByVal NEW_AssImage As Boolean, _
-	 ByVal NEW_BoobImage As Boolean, _
-	 ByVal NEW_FoundTag As String, _
-	 ByVal NEW_TagGarment As String, _
-	 ByVal NEW_TagUnderwear As String, _
-	 ByVal NEW_TagTattoo As String, _
-	 ByVal NEW_TagSexToy As String, _
-	 ByVal NEW_TagFurniture As String, _
-	 ByVal NEW_BookmarkModule As Boolean, _
-	 ByVal NEW_BookmarkModuleFile As String, _
-	 ByVal NEW_BookmarkModuleLine As Integer, _
-	 ByVal NEW_BookmarkLink As Boolean, _
-	 ByVal NEW_BookmarkLinkFile As String, _
-	 ByVal NEW_BookmarkLinkLine As Integer, _
-	 ByVal NEW_WaitTick As Integer, _
-	 ByVal NEW_OrgasmDenied As Boolean, _
-	 ByVal NEW_OrgasmAllowed As Boolean, _
-	 ByVal NEW_OrgasmRuined As Boolean, _
-	 ByVal NEW_LastOrgasmType As String, _
-	 ByVal NEW_StupidTick As Integer, _
-	 ByVal NEW_StupidFlag As Boolean, _
-	 ByVal NEW_CaloriesConsumed As Integer, _
-	 ByVal NEW_CaloriesGoal As Integer, _
-	 ByVal NEW_GoldTokens As Integer, _
-	 ByVal NEW_SilverTokens As Integer, _
-	 ByVal NEW_BronzeTokens As Integer, _
-	 ByVal NEW_EdgeFound As Boolean, _
-	 ByVal NEW_OrgasmYesNo As Boolean, _
-	 ByVal NEW_VTFlag As Boolean, _
-	 ByVal NEW_DomPersonality As String, _
-	 ByVal NEW_UpdateList As List(Of String), _
-	 ByVal NEW_GlitterDocument As String, _
-	 ByVal NEW_CustomSlideshow As Boolean, _
-	 ByVal NEW_CustomSlideshowTick As Integer, _
-	 ByVal NEW_CustomSlideshowList As List(Of String), _
-	 ByVal NEW_ImageString As String, _
-	 ByVal NEW_RapidFire As Boolean, _
-	 ByVal NEW_GlitterTease As Boolean, _
-	 ByVal NEW_AddContactTick As Integer, _
-	 ByVal NEW_Contact1Pics As List(Of String), _
-	 ByVal NEW_Contact2Pics As List(Of String), _
-	 ByVal NEW_Contact3Pics As List(Of String), _
-	 ByVal NEW_Contact1PicsCount As Integer, _
-	 ByVal NEW_Contact2PicsCount As Integer, _
-	 ByVal NEW_Contact3PicsCount As Integer, _
-	 ByVal NEW_Group As String, _
-	 ByVal NEW_CustomTask As Boolean, _
-	 ByVal NEW_CustomTaskFirst As Boolean, _
-	 ByVal NEW_CustomTaskText As String, _
-	 ByVal NEW_CustomTaskTextFirst As String, _
-	 ByVal NEW_CustomTaskActive As Boolean, _
-	 ByVal NEW_SubtitleCount As Integer, _
-	 ByVal NEW_VidFile As String, _
-	 ByVal NEW_RiskyDeal As Boolean, _
-	 ByVal NEW_RiskyEdges As Boolean, _
-	 ByVal NEW_RiskyDelay As Boolean, _
-	 ByVal NEW_FinalRiskyPick As Boolean, _
-	 ByVal NEW_SysMes As Boolean, _
-	 ByVal NEW_EmoMes As Boolean, _
-	 ByVal NEW_Contact1Edge As Boolean, _
-	 ByVal NEW_Contact2Edge As Boolean, _
-	 ByVal NEW_Contact3Edge As Boolean, _
-	 ByVal NEW_Contact1Stroke As Boolean, _
-	 ByVal NEW_Contact2Stroke As Boolean, _
-	 ByVal NEW_Contact3Stroke As Boolean, _
-	 ByVal NEW_ReturnFileText As String, _
-	 ByVal NEW_ReturnStrokeTauntVal As String, _
-	 ByVal NEW_ReturnSubState As String, _
-	 ByVal NEW_ReturnFlag As Boolean, _
-	 ByVal NEW_SessionEdges As Integer, _
-	 ByVal NEW_WindowCheck As Boolean, _
-	 ByVal NEW_StrokeFaster As Boolean, _
-	 ByVal NEW_StrokeFastest As Boolean, _
-	 ByVal NEW_StrokeSlower As Boolean, _
-	 ByVal NEW_StrokeSlowest As Boolean, _
-	 ByVal NEW_InputFlag As Boolean, _
-	 ByVal NEW_InputString As String, _
-	 ByVal NEW_RapidCode As Boolean, _
-	 ByVal NEW_CorrectedTypo As Boolean, _
-	 ByVal NEW_CorrectedWord As String, _
-	 ByVal NEW_DoNotDisturb As Boolean, _
-	 ByVal NEW_TypoSwitch As Integer, _
-	 ByVal NEW_TyposDisabled As Boolean, _
-	 ByVal NEW_EdgeHoldSeconds As Integer, _
-	 ByVal NEW_EdgeHoldFlag As Boolean, _
-	 ByVal NEW_SlideshowInt As Integer, _
-	 ByVal NEW_JustShowedSlideshowImage As Boolean, _
-	 ByVal NEW_RandomSlideshowCategory As String, _
-	 ByVal NEW_ResetFlag As Boolean, _
-	 ByVal NEW_DommeTags As Boolean, _
-	 ByVal NEW_ThemeSettings As Boolean, _
-	 ByVal NEW_InputIcon As Boolean, _
-	 ByVal NEW_ApplyingTheme As Boolean, _
-	 ByVal NEW_AdjustingWindow As Boolean, _
-	 ByVal NEW_SplitContainerHeight As Integer, _
-	 ByVal NEW_DommeImageFound As Boolean, _
-	 ByVal NEW_LocalImageFound As Boolean, _
-	 ByVal NEW_LocalImageListCheck As Boolean, _
-	 ByVal NEW_CBTBothActive As Boolean, _
-	 ByVal NEW_CBTBothFlag As Boolean, _
-	 ByVal NEW_CBTBothCount As Integer, _
-	 ByVal NEW_CBTBothFirst As Boolean, _
-	 ByVal NEW_GeneralTime As String, _
-	 ByVal NEW_NewDommeSlideshow As Boolean, _
-	 ByVal NEW_OriginalDommeSlideshow As String, _
-	 ByVal NEW_TimeoutTick As Integer, _
-	 ByVal NEW_PBImage As String, _
-	 ByVal NEW_DommeImageSTR As String, _
-	 ByVal NEW_LocalImageSTR As String, _
-	 ByVal NEW_ImageLocation As String, _
-	 ByVal NEW_ResponseYes As String, _
-	 ByVal NEW_ResponseNo As String, _
-	 ByVal NEW_SetModule As String, _
-	 ByVal NEW_SetLink As String, _
-	 ByVal NEW_SetModuleGoto As String, _
-	 ByVal NEW_SetLinkGoto As String, _
-	 ByVal NEW_OrgasmRestricted As Boolean, _
-	 ByVal NEW_FollowUp As String, _
-	 ByVal NEW_WorshipMode As Boolean, _
-	 ByVal NEW_WorshipTarget As String, _
-	 ByVal NEW_LongHold As Boolean, _
-	 ByVal NEW_ExtremeHold As Boolean, _
-	 ByVal NEW_LongTaunts As Boolean, _
-	 ByVal NEW_LazyEdit1 As Boolean, _
-	 ByVal NEW_LazyEdit2 As Boolean, _
-	 ByVal NEW_LazyEdit3 As Boolean, _
-	 ByVal NEW_LazyEdit4 As Boolean, _
-	 ByVal NEW_LazyEdit5 As Boolean, _
-	 ByVal NEW_FormFinishedLoading As Boolean, _
-	 ByVal NEW_MiniScript As Boolean, _
-	 ByVal NEW_MiniScriptText As String, _
-	 ByVal NEW_MiniTauntVal As Integer, _
-	 ByVal NEW_MiniTimerCheck As Boolean, _
-	 ByVal NEW_JumpVideo As Boolean, _
-	 ByVal NEW_VideoTick As Integer, _
-	 ByVal NEW_EdgeGoto As Boolean, _
-	 ByVal NEW_EdgeMessage As Boolean, _
-	 ByVal NEW_EdgeVideo As Boolean, _
-	 ByVal NEW_EdgeMessageText As String, _
-	 ByVal NEW_EdgeGotoLine As String, _
-	 ByVal NEW_MultipleEdges As Boolean, _
-	 ByVal NEW_MultipleEdgesAmount As Integer, _
-	 ByVal NEW_MultipleEdgesInterval As Integer, _
-	 ByVal NEW_MultipleEdgesTick As Integer, _
-	 ByVal NEW_MultipleEdgesMetronome As String, _
-	 ByVal NEW_YesGoto As Boolean, _
-	 ByVal NEW_YesVideo As Boolean, _
-	 ByVal NEW_NoGoto As Boolean, _
-	 ByVal NEW_NoVideo_Mode As Boolean, _
-	 ByVal NEW_CameGoto As Boolean, _
-	 ByVal NEW_CameVideo As Boolean, _
-	 ByVal NEW_CameMessage As Boolean, _
-	 ByVal NEW_CameMessageText As String, _
-	 ByVal NEW_RuinedGoto As Boolean, _
-	 ByVal NEW_RuinedVideo As Boolean, _
-	 ByVal NEW_RuinedMessage As Boolean, _
-	 ByVal NEW_RuinedMessageText As String, _
-	 ByVal NEW_YesGotoLine As String, _
-	 ByVal NEW_NoGotoLine As String, _
-	 ByVal NEW_CameGotoLine As String, _
-	 ByVal NEW_RuinedGotoLine As String, _
-	 ByVal NEW_TauntEdging As Boolean, _
-	 ByVal NEW_TauntEdgingAsked As Boolean, _
+	Public Sub New(
+	ByVal NEW_Chat As String,
+	 ByVal NEW_ScriptOperator As String,
+	 ByVal NEW_ScriptCompare As String,
+	 ByVal NEW_DomTyping As Boolean,
+	 ByVal NEW_CheckYes As Boolean,
+	 ByVal NEW_CheckNo As Boolean,
+	 ByVal NEW_Playlist As Boolean,
+	 ByVal NEW_PlaylistFile As List(Of String),
+	 ByVal NEW_PlaylistCurrent As Integer,
+	 ByVal NEW_FormLoading As Boolean,
+	 ByVal NEW_Responding As Boolean,
+	 ByVal NEW_StrokeTauntVal As Integer,
+	 ByVal NEW_FileText As String,
+	 ByVal NEW_TempStrokeTauntVal As Integer,
+	 ByVal NEW_TempFileText As String,
+	 ByVal NEW_TeaseTick As Integer,
+	 ByVal NEW_StrokeTauntCount As Integer,
+	 ByVal NEW_TauntTextTotal As Integer,
+	 ByVal NEW_TauntLines As List(Of String),
+	 ByVal NEW_StrokeFilter As Boolean,
+	 ByVal NEW_ScriptTick As Integer,
+	 ByVal NEW_StringLength As Integer,
+	 ByVal NEW_FileGoto As String,
+	 ByVal NEW_SkipGotoLine As Boolean,
+	 ByVal NEW_ChatString As String,
+	 ByVal NEW_DomTask As String,
+	 ByVal NEW_DomChat As String,
+	 ByVal NEW_TypeDelay As Integer,
+	 ByVal NEW_TempVal As Integer,
+	 ByVal NEW_NullResponse As Boolean,
+	 ByVal NEW_TagCount As Integer,
+	 ByVal NEW_LocalTagCount As Integer,
+	 ByVal NEW_TaskFile As String,
+	 ByVal NEW_TaskText As String,
+	 ByVal NEW_TaskTextDir As String,
+	 ByVal NEW_ResponseFile As String,
+	 ByVal NEW_ResponseLine As Integer,
+	 ByVal NEW_CBTCockActive As Boolean,
+	 ByVal NEW_CBTBallsActive As Boolean,
+	 ByVal NEW_CBTCockFlag As Boolean,
+	 ByVal NEW_CBTBallsFlag As Boolean,
+	 ByVal NEW_CBTBallsFirst As Boolean,
+	 ByVal NEW_CBTCockFirst As Boolean,
+	 ByVal NEW_CBTBallsCount As Integer,
+	 ByVal NEW_CBTCockCount As Integer,
+	 ByVal NEW_TasksCount As Integer,
+	 ByVal NEW_GotoDommeLevel As Boolean,
+	 ByVal NEW_DommeMood As Integer,
+	 ByVal NEW_AFK As Boolean,
+	 ByVal NEW_HypnoGen As Boolean,
+	 ByVal NEW_Induction As Boolean,
+	 ByVal NEW_TempHypno As String,
+	 ByVal NEW_StrokeTick As Integer,
+	 ByVal NEW_StrokeTauntTick As Integer,
+	 ByVal NEW_StrokePace As Integer,
+	 ByVal NEW_StrokeTimeTotal As Integer,
+	 ByVal NEW_HoldEdgeTime As Integer,
+	 ByVal NEW_HoldEdgeTimeTotal As Integer,
+	 ByVal NEW_EdgeTauntInt As Integer,
+	 ByVal NEW_DelayTick As Integer,
+	 ByVal NEW_DomTypeCheck As Boolean,
+	 ByVal NEW_TypeToggle As Boolean,
+	 ByVal NEW_IsTyping As Boolean,
+	 ByVal NEW_SubWroteLast As Boolean,
+	 ByVal NEW_YesOrNo As Boolean,
+	 ByVal NEW_GotoFlag As Boolean,
+	 ByVal NEW_CBT As Boolean,
+	 ByVal NEW_RunningScript As Boolean,
+	 ByVal NEW_BeforeTease As Boolean,
+	 ByVal NEW_SubStroking As Boolean,
+	 ByVal NEW_SubEdging As Boolean,
+	 ByVal NEW_SubHoldingEdge As Boolean,
+	 ByVal NEW_EndTease As Boolean,
+	 ByVal NEW_ShowModule As Boolean,
+	 ByVal NEW_ModuleEnd As Boolean,
+	 ByVal NEW_DivideText As Boolean,
+	 ByVal NEW_HoldEdgeTick As Integer,
+	 ByVal NEW_HoldEdgeChance As Integer,
+	 ByVal NEW_EdgeHold As Boolean,
+	 ByVal NEW_EdgeNoHold As Boolean,
+	 ByVal NEW_EdgeToRuin As Boolean,
+	 ByVal NEW_EdgeToRuinSecret As Boolean,
+	 ByVal NEW_LongEdge As Boolean,
+	 ByVal NEW_AskedToGiveUp As Boolean,
+	 ByVal NEW_AskedToGiveUpSection As Boolean,
+	 ByVal NEW_SubGaveUp As Boolean,
+	 ByVal NEW_AskedToSpeedUp As Boolean,
+	 ByVal NEW_AskedToSlowDown As Boolean,
+	 ByVal NEW_ThoughtEnd As Boolean,
+	 ByVal NEW_VTLength As Integer,
+	 ByVal NEW_DommeVideo As Boolean,
+	 ByVal NEW_VideoType As String,
+	 ByVal NEW_CensorshipGame As Boolean,
+	 ByVal NEW_CensorshipTick As Integer,
+	 ByVal NEW_CensorDuration As String,
+	 ByVal NEW_AvoidTheEdgeGame As Boolean,
+	 ByVal NEW_AvoidTheEdgeTick As Integer,
+	 ByVal NEW_AvoidTheEdgeTimerTick As Integer,
+	 ByVal NEW_AvoidTheEdgeDuration As String,
+	 ByVal NEW_AvoidTheEdgeStroking As Boolean,
+	 ByVal NEW_AtECountdown As Integer,
+	 ByVal NEW_VTPath As String,
+	 ByVal NEW_NoVideo As Boolean,
+	 ByVal NEW_NoSpecialVideo As Boolean,
+	 ByVal NEW_VideoCheck As Boolean,
+	 ByVal NEW_VideoTease As Boolean,
+	 ByVal NEW_RLGLGame As Boolean,
+	 ByVal NEW_RLGLStroking As Boolean,
+	 ByVal NEW_RLGLTick As Integer,
+	 ByVal NEW_RedLight As Boolean,
+	 ByVal NEW_RLGLTauntTick As Integer,
+	 ByVal NEW_RandomizerVideo As Boolean,
+	 ByVal NEW_RandomizerVideoTease As Boolean,
+	 ByVal NEW_ScriptVideoTease As String,
+	 ByVal NEW_ScriptVideoTeaseFlag As Boolean,
+	 ByVal NEW_VideoTauntTick As Integer,
+	 ByVal NEW_SlideshowLoaded As Boolean,
+	 ByVal NEW_RefreshVideoTotal As Integer,
+	 ByVal NEW_GlitterImageAV As String,
+	 ByVal NEW_GlitterTempColor As String,
+	 ByVal NEW_UpdatesTick As Integer,
+	 ByVal NEW_UpdatingPost As Boolean,
+	 ByVal NEW_UpdateStage As Integer,
+	 ByVal NEW_UpdateStageTick As Integer,
+	 ByVal NEW_StatusText As String,
+	 ByVal NEW_ContactNumber As Integer,
+	 ByVal NEW_ContactTick As Integer,
+	 ByVal NEW_ContactFlag As Boolean,
+	 ByVal NEW_StatusText1 As String,
+	 ByVal NEW_StatusText2 As String,
+	 ByVal NEW_StatusText3 As String,
+	 ByVal NEW_StatusChance1 As Integer,
+	 ByVal NEW_StatusChance2 As Integer,
+	 ByVal NEW_StatusChance3 As Integer,
+	 ByVal NEW_Update1 As Boolean,
+	 ByVal NEW_Update2 As Boolean,
+	 ByVal NEW_Update3 As Boolean,
+	 ByVal NEW_GetFolder As String,
+	 ByVal NEW_FileCount As Integer,
+	 ByVal NEW_FileCountMax As Integer,
+	 ByVal NEW__ImageFileNames As List(Of String),
+	 ByVal NEW__CurrentImage As Integer,
+	 ByVal NEW_WithTeaseImgDir As String,
+	 ByVal NEW_ApproveImage As Integer,
+	 ByVal NEW_WIExit As Boolean,
+	 ByVal NEW_RecentSlideshows As List(Of String),
+	 ByVal NEW_MainPictureImage As String,
+	 ByVal NEW_DomPic As String,
+	 ByVal NEW_LockImage As Boolean,
+	 ByVal NEW_LockVideo As Boolean,
+	 ByVal NEW_LocalTagImageList As List(Of String),
+	 ByVal NEW_Crazy As Boolean,
+	 ByVal NEW_Vulgar As Boolean,
+	 ByVal NEW_Supremacist As Boolean,
+	 ByVal NEW_CockSize As Integer,
+	 ByVal NEW_PetName As String,
+	 ByVal NEW_TauntText As String,
+	 ByVal NEW_ScriptCount As Integer,
+	 ByVal NEW_TempScriptCount As Integer,
+	 ByVal NEW_TauntTextCount As Integer,
+	 ByVal NEW_SlideshowTimerTick As Integer,
+	 ByVal NEW_WebImage As String,
+	 ByVal NEW_WebImageLines As List(Of String),
+	 ByVal NEW_WebImageLine As Integer,
+	 ByVal NEW_WebImageLineTotal As Integer,
+	 ByVal NEW_WebImagePath As String,
+	 ByVal NEW_LastScriptCountdown As Integer,
+	 ByVal NEW_LastScript As Boolean,
+	 ByVal NEW_JustShowedBlogImage As Boolean,
+	 ByVal NEW_SaidHello As Boolean,
+	 ByVal NEW_StopMetronome As Boolean,
+	 ByVal NEW_AvgEdgeStroking As Integer,
+	 ByVal NEW_AvgEdgeNoTouch As Integer,
+	 ByVal NEW_EdgeCountTick As Integer,
+	 ByVal NEW_AvgEdgeStrokingFlag As Boolean,
+	 ByVal NEW_AvgEdgeCount As Integer,
+	 ByVal NEW_AvgEdgeCountRest As Integer,
+	 ByVal NEW_EdgeTickCheck As Integer,
+	 ByVal NEW_EdgeNOT As Boolean,
+	 ByVal NEW_AlreadyStrokingEdge As Boolean,
+	 ByVal NEW_WritingTaskLinesAmount As Integer,
+	 ByVal NEW_WritingTaskLinesWritten As Integer,
+	 ByVal NEW_WritingTaskLinesRemaining As Integer,
+	 ByVal NEW_WritingTaskMistakesAllowed As Integer,
+	 ByVal NEW_WritingTaskMistakesMade As Integer,
+	 ByVal NEW_WritingTaskFlag As Boolean,
+	 ByVal NEW_FirstRound As Boolean,
+	 ByVal NEW_StartStrokingCount As Integer,
+	 ByVal NEW_TeaseJOI As Boolean,
+	 ByVal NEW_TeaseVideo As Boolean,
+	 ByVal NEW_TnAList As List(Of String),
+	 ByVal NEW_BoobList As List(Of String),
+	 ByVal NEW_AssList As List(Of String),
+	 ByVal NEW_AssImage As Boolean,
+	 ByVal NEW_BoobImage As Boolean,
+	 ByVal NEW_FoundTag As String,
+	 ByVal NEW_TagGarment As String,
+	 ByVal NEW_TagUnderwear As String,
+	 ByVal NEW_TagTattoo As String,
+	 ByVal NEW_TagSexToy As String,
+	 ByVal NEW_TagFurniture As String,
+	 ByVal NEW_BookmarkModule As Boolean,
+	 ByVal NEW_BookmarkModuleFile As String,
+	 ByVal NEW_BookmarkModuleLine As Integer,
+	 ByVal NEW_BookmarkLink As Boolean,
+	 ByVal NEW_BookmarkLinkFile As String,
+	 ByVal NEW_BookmarkLinkLine As Integer,
+	 ByVal NEW_WaitTick As Integer,
+	 ByVal NEW_OrgasmDenied As Boolean,
+	 ByVal NEW_OrgasmAllowed As Boolean,
+	 ByVal NEW_OrgasmRuined As Boolean,
+	 ByVal NEW_LastOrgasmType As String,
+	 ByVal NEW_StupidTick As Integer,
+	 ByVal NEW_StupidFlag As Boolean,
+	 ByVal NEW_CaloriesConsumed As Integer,
+	 ByVal NEW_CaloriesGoal As Integer,
+	 ByVal NEW_GoldTokens As Integer,
+	 ByVal NEW_SilverTokens As Integer,
+	 ByVal NEW_BronzeTokens As Integer,
+	 ByVal NEW_EdgeFound As Boolean,
+	 ByVal NEW_OrgasmYesNo As Boolean,
+	 ByVal NEW_VTFlag As Boolean,
+	 ByVal NEW_DomPersonality As String,
+	 ByVal NEW_UpdateList As List(Of String),
+	 ByVal NEW_GlitterDocument As String,
+	 ByVal NEW_CustomSlideshow As Boolean,
+	 ByVal NEW_CustomSlideshowTick As Integer,
+	 ByVal NEW_CustomSlideshowList As List(Of String),
+	 ByVal NEW_ImageString As String,
+	 ByVal NEW_RapidFire As Boolean,
+	 ByVal NEW_GlitterTease As Boolean,
+	 ByVal NEW_AddContactTick As Integer,
+	 ByVal NEW_Contact1Pics As List(Of String),
+	 ByVal NEW_Contact2Pics As List(Of String),
+	 ByVal NEW_Contact3Pics As List(Of String),
+	 ByVal NEW_Contact1PicsCount As Integer,
+	 ByVal NEW_Contact2PicsCount As Integer,
+	 ByVal NEW_Contact3PicsCount As Integer,
+	 ByVal NEW_Group As String,
+	 ByVal NEW_CustomTask As Boolean,
+	 ByVal NEW_CustomTaskFirst As Boolean,
+	 ByVal NEW_CustomTaskText As String,
+	 ByVal NEW_CustomTaskTextFirst As String,
+	 ByVal NEW_CustomTaskActive As Boolean,
+	 ByVal NEW_SubtitleCount As Integer,
+	 ByVal NEW_VidFile As String,
+	 ByVal NEW_RiskyDeal As Boolean,
+	 ByVal NEW_RiskyEdges As Boolean,
+	 ByVal NEW_RiskyDelay As Boolean,
+	 ByVal NEW_FinalRiskyPick As Boolean,
+	 ByVal NEW_SysMes As Boolean,
+	 ByVal NEW_EmoMes As Boolean,
+	 ByVal NEW_Contact1Edge As Boolean,
+	 ByVal NEW_Contact2Edge As Boolean,
+	 ByVal NEW_Contact3Edge As Boolean,
+	 ByVal NEW_Contact1Stroke As Boolean,
+	 ByVal NEW_Contact2Stroke As Boolean,
+	 ByVal NEW_Contact3Stroke As Boolean,
+	 ByVal NEW_ReturnFileText As String,
+	 ByVal NEW_ReturnStrokeTauntVal As String,
+	 ByVal NEW_ReturnSubState As String,
+	 ByVal NEW_ReturnFlag As Boolean,
+	 ByVal NEW_SessionEdges As Integer,
+	 ByVal NEW_WindowCheck As Boolean,
+	 ByVal NEW_StrokeFaster As Boolean,
+	 ByVal NEW_StrokeFastest As Boolean,
+	 ByVal NEW_StrokeSlower As Boolean,
+	 ByVal NEW_StrokeSlowest As Boolean,
+	 ByVal NEW_InputFlag As Boolean,
+	 ByVal NEW_InputString As String,
+	 ByVal NEW_RapidCode As Boolean,
+	 ByVal NEW_CorrectedTypo As Boolean,
+	 ByVal NEW_CorrectedWord As String,
+	 ByVal NEW_DoNotDisturb As Boolean,
+	 ByVal NEW_TypoSwitch As Integer,
+	 ByVal NEW_TyposDisabled As Boolean,
+	 ByVal NEW_EdgeHoldSeconds As Integer,
+	 ByVal NEW_EdgeHoldFlag As Boolean,
+	 ByVal NEW_SlideshowInt As Integer,
+	 ByVal NEW_JustShowedSlideshowImage As Boolean,
+	 ByVal NEW_RandomSlideshowCategory As String,
+	 ByVal NEW_ResetFlag As Boolean,
+	 ByVal NEW_DommeTags As Boolean,
+	 ByVal NEW_ThemeSettings As Boolean,
+	 ByVal NEW_InputIcon As Boolean,
+	 ByVal NEW_ApplyingTheme As Boolean,
+	 ByVal NEW_AdjustingWindow As Boolean,
+	 ByVal NEW_SplitContainerHeight As Integer,
+	 ByVal NEW_DommeImageFound As Boolean,
+	 ByVal NEW_LocalImageFound As Boolean,
+	 ByVal NEW_LocalImageListCheck As Boolean,
+	 ByVal NEW_CBTBothActive As Boolean,
+	 ByVal NEW_CBTBothFlag As Boolean,
+	 ByVal NEW_CBTBothCount As Integer,
+	 ByVal NEW_CBTBothFirst As Boolean,
+	 ByVal NEW_GeneralTime As String,
+	 ByVal NEW_NewDommeSlideshow As Boolean,
+	 ByVal NEW_OriginalDommeSlideshow As String,
+	 ByVal NEW_TimeoutTick As Integer,
+	 ByVal NEW_DommeImageSTR As String,
+	 ByVal NEW_LocalImageSTR As String,
+	 ByVal NEW_ImageLocation As String,
+	 ByVal NEW_ResponseYes As String,
+	 ByVal NEW_ResponseNo As String,
+	 ByVal NEW_SetModule As String,
+	 ByVal NEW_SetLink As String,
+	 ByVal NEW_SetModuleGoto As String,
+	 ByVal NEW_SetLinkGoto As String,
+	 ByVal NEW_OrgasmRestricted As Boolean,
+	 ByVal NEW_FollowUp As String,
+	 ByVal NEW_WorshipMode As Boolean,
+	 ByVal NEW_WorshipTarget As String,
+	 ByVal NEW_LongHold As Boolean,
+	 ByVal NEW_ExtremeHold As Boolean,
+	 ByVal NEW_LongTaunts As Boolean,
+	 ByVal NEW_LazyEdit1 As Boolean,
+	 ByVal NEW_LazyEdit2 As Boolean,
+	 ByVal NEW_LazyEdit3 As Boolean,
+	 ByVal NEW_LazyEdit4 As Boolean,
+	 ByVal NEW_LazyEdit5 As Boolean,
+	 ByVal NEW_FormFinishedLoading As Boolean,
+	 ByVal NEW_MiniScript As Boolean,
+	 ByVal NEW_MiniScriptText As String,
+	 ByVal NEW_MiniTauntVal As Integer,
+	 ByVal NEW_MiniTimerCheck As Boolean,
+	 ByVal NEW_JumpVideo As Boolean,
+	 ByVal NEW_VideoTick As Integer,
+	 ByVal NEW_EdgeGoto As Boolean,
+	 ByVal NEW_EdgeMessage As Boolean,
+	 ByVal NEW_EdgeVideo As Boolean,
+	 ByVal NEW_EdgeMessageText As String,
+	 ByVal NEW_EdgeGotoLine As String,
+	 ByVal NEW_MultipleEdges As Boolean,
+	 ByVal NEW_MultipleEdgesAmount As Integer,
+	 ByVal NEW_MultipleEdgesInterval As Integer,
+	 ByVal NEW_MultipleEdgesTick As Integer,
+	 ByVal NEW_MultipleEdgesMetronome As String,
+	 ByVal NEW_YesGoto As Boolean,
+	 ByVal NEW_YesVideo As Boolean,
+	 ByVal NEW_NoGoto As Boolean,
+	 ByVal NEW_NoVideo_Mode As Boolean,
+	 ByVal NEW_CameGoto As Boolean,
+	 ByVal NEW_CameVideo As Boolean,
+	 ByVal NEW_CameMessage As Boolean,
+	 ByVal NEW_CameMessageText As String,
+	 ByVal NEW_RuinedGoto As Boolean,
+	 ByVal NEW_RuinedVideo As Boolean,
+	 ByVal NEW_RuinedMessage As Boolean,
+	 ByVal NEW_RuinedMessageText As String,
+	 ByVal NEW_YesGotoLine As String,
+	 ByVal NEW_NoGotoLine As String,
+	 ByVal NEW_CameGotoLine As String,
+	 ByVal NEW_RuinedGotoLine As String,
+	 ByVal NEW_TauntEdging As Boolean,
 	 ByVal NEW_WritingTaskCurrentTime As Single)
 
 		Chat = NEW_Chat
@@ -807,7 +779,6 @@ Public Class SaveState
 		TempHypno = NEW_TempHypno
 		StrokeTick = NEW_StrokeTick
 		StrokeTauntTick = NEW_StrokeTauntTick
-		StrokePaceRight = NEW_StrokePaceRight
 		StrokePace = NEW_StrokePace
 		StrokeTimeTotal = NEW_StrokeTimeTotal
 		HoldEdgeTime = NEW_HoldEdgeTime
@@ -909,28 +880,17 @@ Public Class SaveState
 		Vulgar = NEW_Vulgar
 		Supremacist = NEW_Supremacist
 		CockSize = NEW_CockSize
-		TempDick = NEW_TempDick
 		PetName = NEW_PetName
-		PetName2 = NEW_PetName2
 		TauntText = NEW_TauntText
 		ScriptCount = NEW_ScriptCount
 		TempScriptCount = NEW_TempScriptCount
 		TauntTextCount = NEW_TauntTextCount
-		StartIndex = NEW_StartIndex
-		EndIndex = NEW_EndIndex
 		SlideshowTimerTick = NEW_SlideshowTimerTick
-		ReadBlog = NEW_ReadBlog
-		ReadBlogRate = NEW_ReadBlogRate
-		SearchImageBlog = NEW_SearchImageBlog
-		FoundString = NEW_FoundString
 		WebImage = NEW_WebImage
 		WebImageLines = NEW_WebImageLines
 		WebImageLine = NEW_WebImageLine
 		WebImageLineTotal = NEW_WebImageLineTotal
 		WebImagePath = NEW_WebImagePath
-		ReaderString = NEW_ReaderString
-		ReaderStringTotal = NEW_ReaderStringTotal
-		StrokePaceInt = NEW_StrokePaceInt
 		LastScriptCountdown = NEW_LastScriptCountdown
 		LastScript = NEW_LastScript
 		JustShowedBlogImage = NEW_JustShowedBlogImage
@@ -1064,7 +1024,6 @@ Public Class SaveState
 		NewDommeSlideshow = NEW_NewDommeSlideshow
 		OriginalDommeSlideshow = NEW_OriginalDommeSlideshow
 		TimeoutTick = NEW_TimeoutTick
-		PBImage = NEW_PBImage
 		DommeImageSTR = NEW_DommeImageSTR
 		LocalImageSTR = NEW_LocalImageSTR
 		ImageLocation = NEW_ImageLocation
@@ -1120,7 +1079,6 @@ Public Class SaveState
 		CameGotoLine = NEW_CameGotoLine
 		RuinedGotoLine = NEW_RuinedGotoLine
 		TauntEdging = NEW_TauntEdging
-		TauntEdgingAsked = NEW_TauntEdgingAsked
 		WritingTaskCurrentTime = NEW_WritingTaskCurrentTime
 
 

@@ -360,6 +360,7 @@ Partial Class Form1
 		Me.Button4 = New System.Windows.Forms.Button()
 		Me.Panel3 = New System.Windows.Forms.Panel()
 		Me.Panel4 = New System.Windows.Forms.Panel()
+		Me.ProgressBar_BGW_Images = New System.Windows.Forms.ProgressBar()
 		Me.ScriptTimer = New Tease_AI.teaseAI_Timer()
 		Me.Timer1 = New Tease_AI.teaseAI_Timer()
 		Me.IsTypingTimer = New Tease_AI.teaseAI_Timer()
@@ -499,6 +500,7 @@ Partial Class Form1
 		'SplitContainer1.Panel1
 		'
 		Me.SplitContainer1.Panel1.BackColor = System.Drawing.Color.Transparent
+		Me.SplitContainer1.Panel1.Controls.Add(Me.ProgressBar_BGW_Images)
 		Me.SplitContainer1.Panel1.Controls.Add(Me.CensorshipBar)
 		Me.SplitContainer1.Panel1.Controls.Add(Me.LBLImageInfo)
 		Me.SplitContainer1.Panel1.Controls.Add(Me.mainPictureBox)
@@ -1725,73 +1727,73 @@ Partial Class Form1
 		'GeneralSettingsToolStripMenuItem
 		'
 		Me.GeneralSettingsToolStripMenuItem.Name = "GeneralSettingsToolStripMenuItem"
-		Me.GeneralSettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.GeneralSettingsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.GeneralSettingsToolStripMenuItem.Text = "General"
 		'
 		'DommeToolStripMenuItem
 		'
 		Me.DommeToolStripMenuItem.Name = "DommeToolStripMenuItem"
-		Me.DommeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.DommeToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.DommeToolStripMenuItem.Text = "Domme"
 		'
 		'SubToolStripMenuItem
 		'
 		Me.SubToolStripMenuItem.Name = "SubToolStripMenuItem"
-		Me.SubToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.SubToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.SubToolStripMenuItem.Text = "Sub"
 		'
 		'ScriptsToolStripMenuItem
 		'
 		Me.ScriptsToolStripMenuItem.Name = "ScriptsToolStripMenuItem"
-		Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.ScriptsToolStripMenuItem.Text = "Scripts"
 		'
 		'ImagesToolStripMenuItem
 		'
 		Me.ImagesToolStripMenuItem.Name = "ImagesToolStripMenuItem"
-		Me.ImagesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.ImagesToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.ImagesToolStripMenuItem.Text = "Images"
 		'
 		'TaggingToolStripMenuItem
 		'
 		Me.TaggingToolStripMenuItem.Name = "TaggingToolStripMenuItem"
-		Me.TaggingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.TaggingToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.TaggingToolStripMenuItem.Text = "Tagging"
 		'
 		'URLFilesToolStripMenuItem
 		'
 		Me.URLFilesToolStripMenuItem.Name = "URLFilesToolStripMenuItem"
-		Me.URLFilesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.URLFilesToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.URLFilesToolStripMenuItem.Text = "URL Files"
 		'
 		'VideoToolStripMenuItem
 		'
 		Me.VideoToolStripMenuItem.Name = "VideoToolStripMenuItem"
-		Me.VideoToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.VideoToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.VideoToolStripMenuItem.Text = "Video"
 		'
 		'AppsToolStripMenuItem1
 		'
 		Me.AppsToolStripMenuItem1.Name = "AppsToolStripMenuItem1"
-		Me.AppsToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+		Me.AppsToolStripMenuItem1.Size = New System.Drawing.Size(123, 22)
 		Me.AppsToolStripMenuItem1.Text = "Apps"
 		'
 		'RangesToolStripMenuItem
 		'
 		Me.RangesToolStripMenuItem.Name = "RangesToolStripMenuItem"
-		Me.RangesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.RangesToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.RangesToolStripMenuItem.Text = "Ranges"
 		'
 		'ModdingToolStripMenuItem
 		'
 		Me.ModdingToolStripMenuItem.Name = "ModdingToolStripMenuItem"
-		Me.ModdingToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.ModdingToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.ModdingToolStripMenuItem.Text = "Modding"
 		'
 		'MiscToolStripMenuItem
 		'
 		Me.MiscToolStripMenuItem.Name = "MiscToolStripMenuItem"
-		Me.MiscToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.MiscToolStripMenuItem.Size = New System.Drawing.Size(123, 22)
 		Me.MiscToolStripMenuItem.Text = "Misc"
 		'
 		'AppsToolStripMenuItem
@@ -3923,6 +3925,17 @@ Partial Class Form1
 		Me.Panel4.Size = New System.Drawing.Size(245, 31)
 		Me.Panel4.TabIndex = 779
 		'
+		'ProgressBar_BGW_Images
+		'
+		Me.ProgressBar_BGW_Images.Dock = System.Windows.Forms.DockStyle.Bottom
+		Me.ProgressBar_BGW_Images.Location = New System.Drawing.Point(0, 724)
+		Me.ProgressBar_BGW_Images.MarqueeAnimationSpeed = 10000
+		Me.ProgressBar_BGW_Images.Name = "ProgressBar_BGW_Images"
+		Me.ProgressBar_BGW_Images.Size = New System.Drawing.Size(1086, 6)
+		Me.ProgressBar_BGW_Images.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+		Me.ProgressBar_BGW_Images.TabIndex = 97
+		Me.ProgressBar_BGW_Images.Visible = False
+		'
 		'ScriptTimer
 		'
 		Me.ScriptTimer.Interval = 1000
@@ -4535,4 +4548,5 @@ Partial Class Form1
 	Friend WithEvents DommeTagBtnNextImage As System.Windows.Forms.Button
 	Friend WithEvents DommeTagBtnLastImage As System.Windows.Forms.Button
 	Private WithEvents PicStripTmsiDisableAnimation As ToolStripMenuItem
+	Friend WithEvents ProgressBar_BGW_Images As ProgressBar
 End Class

@@ -1,4 +1,5 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Threading
 Imports System.Windows.Forms
 
@@ -652,7 +653,7 @@ NoNeFound:
 	''' Modified Backgroundworker to load and save images on a different thread, with tth possibility to trigger 
 	''' the RunWorkerCompleted-Event manually
 	''' </summary>
-	Private WithEvents BWimageFetcher As New Tease_AI.BackgroundWorkerSyncable
+	Private WithEvents BWimageFetcher As New Tease_AI.BackgroundWorkerSyncable With {.WorkerReportsProgress = True}
 
 	''' <summary>
 	''' Object to pass data to a differnt thread.
@@ -700,7 +701,7 @@ NoNeFound:
 
 		With CType(e.Argument, ImageFetchObject)
 			Try
-retryLocal: ' If an exception occures the funcion is restarted and the Errorimage is loaded.
+retryLocal: ' If an exception occures the function is restarted and the Errorimage is loaded.
 
 				If .ImageLocation = "" Or .ImageLocation = Nothing Then
 					Throw New ArgumentException("The given filepath was empty.")
@@ -721,7 +722,7 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 					End If
 
 					' Download the image
-					.FetchedImage = Common.DownloadRemoteImageFile(.ImageLocation, s)
+					.FetchedImage = Common.DownloadRemoteImageFile(.ImageLocation, s, BWimageFetcher)
 
 					If .FetchedImage Is Nothing Then _
 				  Throw New NullReferenceException("The result downloading """ &
@@ -769,10 +770,32 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Thread °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 	End Sub
 
+	''' <summary>
+	''' Reports the download progress of an onlineimage.
+	''' </summary>
+	Private Sub BWimageFetcher_ProgressChanged(sender As Object, e As ProgressChangedEventArgs) Handles BWimageFetcher.ProgressChanged
+		' Unhide Progressbar 
+		If e.ProgressPercentage > 0 Then ProgressBar_BGW_Images.Visible = True
+
+		' Set Maximum
+		ProgressBar_BGW_Images.Maximum = 100
+
+		' Verify value
+		If e.ProgressPercentage > ProgressBar_BGW_Images.Maximum Then Exit Sub
+
+		' Display Value
+		ProgressBar_BGW_Images.Value = e.ProgressPercentage
+
+		If e.ProgressPercentage >= 100 Then ProgressBar_BGW_Images.Visible = False
+	End Sub
+
 	Private Sub BWimageFetcher_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BWimageFetcher.RunWorkerCompleted
 		Try
 			' Change Cursor back to original
 			Me.BeginInvoke(Sub() mainPictureBox.Cursor = Cursors.Arrow)
+
+			' Hide ProgressBar 
+			ProgressBar_BGW_Images.Visible = False
 
 			If TypeOf e.Error Is TimeoutException Then Debug.Print(e.Error.Message)
 			If e.Error IsNot Nothing Then Exit Sub
@@ -862,12 +885,10 @@ retryLocal: ' If an exception occures the funcion is restarted and the Errorimag
 
 			' Updeate the pathimformations.
 			If ImagePath <> pathImageErrorOnLoading Then
-				PBImage = ImagePath
 				ImageLocation = ImagePath
 				LBLImageInfo.Text = ImagePath
 				mainPictureBox.ImageLocation = ImagePath
 			Else
-				PBImage = ""
 				ImageLocation = ""
 				LBLImageInfo.Text = ""
 				mainPictureBox.ImageLocation = ""
