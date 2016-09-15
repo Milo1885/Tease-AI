@@ -853,331 +853,602 @@ Public Class FrmSettings
 		My.Settings.SubCockSize = CockSizeNumBox.Value
 	End Sub
 
+#Region "--------------------------------------- Videos -------------------------------------------------"
+
+	Friend Shared Function Video_FolderCheck(ByVal directoryDescription As String, ByVal directoryPath As String, ByVal defaultPath As String) As String
+		' Exit if the directory exists.
+		If Directory.Exists(directoryPath) Then Return directoryPath
+		' Exit if default value.
+		If directoryPath = defaultPath Then Return defaultPath
+
+		' Tell User, the dir. wasn't found. Ask to search manually for the folder.
+		If MessageBox.Show(ActiveForm,
+						   "The directory """ & directoryPath & """ was not found." & vbCrLf & "Do you want to search for it?",
+						   directoryDescription & " directory not found.",
+						   MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+			' Find the first available parent-directory. 
+			' This way the user hasn't to browse through his hole IO-System.
+			Dim __tmp_dir As String = directoryPath
+			Do Until Directory.Exists(__tmp_dir) Or __tmp_dir Is Nothing
+				__tmp_dir = Path.GetDirectoryName(__tmp_dir)
+			Loop
+
+			' Initialize new Dialog-Form
+			Dim FolSel As New FolderBrowserDialog With {.SelectedPath = __tmp_dir,
+														.Description = "Select " & directoryDescription & " folder."}
+			' Display the Dialog -> Now the user has to set the new dir.
+			If FolSel.ShowDialog(ActiveForm) = DialogResult.OK Then
+				Return FolSel.SelectedPath
+			End If
+
+		End If ' END IF - Messagebox.
+		Return defaultPath
+	End Function
+
+	Friend Function Video_CheckAllFolders() As Integer
+		Dim t As Integer = 0
+
+		LblVideoHardCoreTotal.Text = VideoHardcore_Count() : t += CInt(LblVideoHardCoreTotal.Text)
+		LblVideoSoftCoreTotal.Text = VideoSoftcore_Count() : t += CInt(LblVideoSoftCoreTotal.Text)
+		LblVideoLesbianTotal.Text = VideoLesbian_Count() : t += CInt(LblVideoLesbianTotal.Text)
+		LblVideoBlowjobTotal.Text = VideoBlowjob_Count() : t += CInt(LblVideoBlowjobTotal.Text)
+		LblVideoFemdomTotal.Text = VideoFemdom_Count() : t += CInt(LblVideoFemdomTotal.Text)
+		LblVideoFemsubTotal.Text = VideoFemsub_Count() : t += CInt(LblVideoFemsubTotal.Text)
+		LblVideoJOITotal.Text = VideoJOI_Count() : t += CInt(LblVideoJOITotal.Text)
+		LblVideoCHTotal.Text = VideoCH_Count() : t += CInt(LblVideoCHTotal.Text)
+		LblVideoGeneralTotal.Text = VideoGeneral_Count() : t += CInt(LblVideoGeneralTotal.Text)
+
+		LblVideoHardCoreTotalD.Text = VideoHardcoreD_Count() : t += CInt(LblVideoHardCoreTotalD.Text)
+		LblVideoSoftCoreTotalD.Text = VideoSoftcoreD_Count() : t += CInt(LblVideoSoftCoreTotalD.Text)
+		LblVideoLesbianTotalD.Text = VideoLesbianD_Count() : t += CInt(LblVideoLesbianTotalD.Text)
+		LblVideoBlowjobTotalD.Text = VideoBlowjobD_Count() : t += CInt(LblVideoBlowjobTotalD.Text)
+		LblVideoFemdomTotalD.Text = VideoFemdomD_Count() : t += CInt(LblVideoFemdomTotalD.Text)
+		LblVideoFemsubTotalD.Text = VideoFemsubD_Count() : t += CInt(LblVideoFemsubTotalD.Text)
+		LblVideoJOITotalD.Text = VideoJOID_Count() : t += CInt(LblVideoJOITotalD.Text)
+		LblVideoCHTotalD.Text = VideoCHD_Count() : t += CInt(LblVideoCHTotalD.Text)
+		LblVideoGeneralTotalD.Text = VideoGeneralD_Count() : t += CInt(LblVideoGeneralTotalD.Text)
+
+		Return t
+	End Function
+
+
+#Region "----------------------------------------- Regular -----------------------------------------------"
+
+#Region "------------------------------------- Hardcore Videos -------------------------------------------"
+
 	Private Sub BTNVideoHardCore_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoHardCore.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoHardCore.Text = FolderBrowserDialog1.SelectedPath
-			Form1.HardCoreVideoTotal()
-			My.Settings.VideoHardcore = LblVideoHardCore.Text
+			My.Settings.VideoHardcore = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBHardcore = True
+			LblVideoHardCoreTotal.Text = VideoHardcore_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoHardcore_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoHardcore").Property.DefaultValue
+
+		My.Settings.VideoHardcore =
+			Video_FolderCheck("Hardcore Video", My.Settings.VideoHardcore, def)
+
+		If My.Settings.VideoHardcore = def Then My.Settings.CBHardcore = False
+
+		Return My.Settings.CBHardcore
+	End Function
+
+	Friend Shared Function VideoHardcore_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoHardcore_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoHardcore).Count
+	End Function
+
+#End Region ' Hardcore
+
+#Region "------------------------------------- Softcore Videos -------------------------------------------"
 
 	Private Sub BTNVideoSoftCore_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoSoftCore.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoSoftCore.Text = FolderBrowserDialog1.SelectedPath
-			Form1.SoftcoreVideoTotal()
-			My.Settings.VideoSoftcore = LblVideoSoftCore.Text
+			My.Settings.VideoSoftcore = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBSoftcore = True
+			LblVideoSoftCoreTotal.Text = VideoSoftcore_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoSoftcore_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoSoftcore").Property.DefaultValue
+
+		My.Settings.VideoSoftcore =
+			Video_FolderCheck("Softcore Video", My.Settings.VideoSoftcore, def)
+
+		If My.Settings.VideoSoftcore = def Then My.Settings.CBSoftcore = False
+
+		Return My.Settings.CBSoftcore
+	End Function
+
+	Friend Shared Function VideoSoftcore_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoSoftcore_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoSoftcore).Count
+	End Function
+
+#End Region ' Softcore
+
+#Region "------------------------------------- Lesbian Videos --------------------------------------------"
 
 	Private Sub BTNVideoLesbian_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoLesbian.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoLesbian.Text = FolderBrowserDialog1.SelectedPath
-			Form1.LesbianVideoTotal()
-			My.Settings.VideoLesbian = LblVideoLesbian.Text
+			My.Settings.VideoLesbian = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBLesbian = True
+			LblVideoLesbianTotal.Text = VideoLesbian_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoLesbian_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoLesbian").Property.DefaultValue
+
+		My.Settings.VideoLesbian =
+			Video_FolderCheck("Lesbian Video", My.Settings.VideoLesbian, def)
+
+		If My.Settings.VideoLesbian = def Then My.Settings.CBLesbian = False
+
+		Return My.Settings.CBLesbian
+	End Function
+
+	Friend Shared Function VideoLesbian_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoLesbian_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoLesbian).Count
+	End Function
+
+#End Region ' Lesbian
+
+#Region "------------------------------------- Blowjob Videos --------------------------------------------"
 
 	Private Sub BTNVideoBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoBlowjob.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoBlowjob.Text = FolderBrowserDialog1.SelectedPath
-			Form1.BlowjobVideoTotal()
-			My.Settings.VideoBlowjob = LblVideoBlowjob.Text
+			My.Settings.VideoBlowjob = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBBlowjob = True
+			LblVideoBlowjobTotal.Text = VideoBlowjob_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoBlowjob_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoBlowjob").Property.DefaultValue
+
+		My.Settings.VideoBlowjob =
+			Video_FolderCheck("Blowjob Video", My.Settings.VideoBlowjob, def)
+
+		If My.Settings.VideoBlowjob = def Then My.Settings.CBBlowjob = False
+
+		Return My.Settings.CBBlowjob
+	End Function
+
+	Friend Shared Function VideoBlowjob_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoBlowjob_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoBlowjob).Count
+	End Function
+
+#End Region ' Blowjob
+
+#Region "---------------------------------------- Femdom -------------------------------------------------"
 
 	Private Sub BTNVideoFemDom_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemDom.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoFemdom.Text = FolderBrowserDialog1.SelectedPath
-			Form1.FemdomVideoTotal()
-			My.Settings.VideoFemdom = LblVideoFemdom.Text
+			My.Settings.VideoFemdom = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBFemdom = True
+			LblVideoFemdomTotal.Text = VideoFemdom_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoFemdom_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoFemdom").Property.DefaultValue
+
+		My.Settings.VideoFemdom =
+			Video_FolderCheck("Femdom Video", My.Settings.VideoFemdom, def)
+
+		If My.Settings.VideoFemdom = def Then My.Settings.CBFemdom = False
+
+		Return My.Settings.CBFemdom
+	End Function
+
+	Friend Shared Function VideoFemdom_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoFemdom_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoFemdom).Count
+	End Function
+
+#End Region ' Femdom
+
+#Region "------------------------------------- Femsub Videos ---------------------------------------------"
 
 	Private Sub BTNVideoFemSub_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemSub.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoFemsub.Text = FolderBrowserDialog1.SelectedPath
-			Form1.FemsubVideoTotal()
-			My.Settings.VideoFemsub = LblVideoFemsub.Text
+			My.Settings.VideoFemsub = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBFemsub = True
+			LblVideoFemsubTotal.Text = VideoFemsub_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoFemsub_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoFemsub").Property.DefaultValue
+
+		My.Settings.VideoFemsub =
+			Video_FolderCheck("Femsub Video", My.Settings.VideoFemsub, def)
+
+		If My.Settings.VideoFemsub = def Then My.Settings.CBFemsub = False
+
+		Return My.Settings.CBFemsub
+	End Function
+
+	Friend Shared Function VideoFemsub_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoFemsub_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoFemsub).Count
+	End Function
+
+#End Region ' Femsub
+
+#Region "------------------------------------- JOI Videos ------------------------------------------------"
 
 	Private Sub BTNVideoJOI_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoJOI.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoJOI.Text = FolderBrowserDialog1.SelectedPath
-			Form1.JOIVideoTotal()
-			My.Settings.VideoJOI = LblVideoJOI.Text
+			My.Settings.VideoJOI = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBJOI = True
+			LblVideoJOITotal.Text = VideoJOI_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoJOI_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoJOI").Property.DefaultValue
+
+		My.Settings.VideoJOI =
+			Video_FolderCheck("JOI Video", My.Settings.VideoJOI, def)
+
+		If My.Settings.VideoJOI = def Then My.Settings.CBJOI = False
+
+		Return My.Settings.CBJOI
+	End Function
+
+	Friend Shared Function VideoJOI_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoJOI_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoJOI).Count
+	End Function
+
+#End Region ' JOI
+
+#Region "------------------------------------- CH Videos -------------------------------------------------"
 
 	Private Sub BTNVideoCH_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoCH.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoCH.Text = FolderBrowserDialog1.SelectedPath
-			Form1.CHVideoTotal()
-			My.Settings.VideoCH = LblVideoCH.Text
+			My.Settings.VideoCH = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBCH = True
+			LblVideoCHTotal.Text = VideoCH_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoCH_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoCH").Property.DefaultValue
+
+		My.Settings.VideoCH =
+			Video_FolderCheck("CH Video", My.Settings.VideoCH, def)
+
+		If My.Settings.VideoCH = def Then My.Settings.CBCH = False
+
+		Return My.Settings.CBCH
+	End Function
+
+	Friend Shared Function VideoCH_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoCH_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoCH).Count
+	End Function
+
+#End Region ' CH
+
+#Region "------------------------------------- General Videos --------------------------------------------"
 
 	Private Sub BTNVideoGeneral_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoGeneral.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoGeneral.Text = FolderBrowserDialog1.SelectedPath
-			Form1.GeneralVideoTotal()
-			My.Settings.VideoGeneral = LblVideoGeneral.Text
+			My.Settings.VideoGeneral = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBGeneral = True
+			LblVideoGeneralTotal.Text = VideoGeneral_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoGeneral_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoGeneral").Property.DefaultValue
+
+		My.Settings.VideoGeneral =
+			Video_FolderCheck("General Video", My.Settings.VideoGeneral, def)
+
+		If My.Settings.VideoGeneral = def Then My.Settings.CBGeneral = False
+
+		Return My.Settings.CBGeneral
+	End Function
+
+	Friend Shared Function VideoGeneral_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoGeneral_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoGeneral).Count
+	End Function
+
+#End Region ' General
+
+#End Region ' Regular
+
+#Region "------------------------------------------ Domme ------------------------------------------------"
+
+#Region "---------------------------------------- HardcoreD ----------------------------------------------"
 
 	Private Sub BTNVideoHardcoreD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoHardCoreD.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoHardCoreD.Text = FolderBrowserDialog1.SelectedPath
-			Form1.HardcoreDVideoTotal()
-			My.Settings.VideoHardcoreD = LblVideoHardCoreD.Text
+			My.Settings.VideoHardcoreD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBHardcoreD = True
+			LblVideoHardCoreTotalD.Text = VideoHardcoreD_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoHardcoreD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoHardcoreD").Property.DefaultValue
+
+		My.Settings.VideoHardcoreD =
+			Video_FolderCheck("HardcoreD Video", My.Settings.VideoHardcoreD, def)
+
+		If My.Settings.VideoHardcoreD = def Then My.Settings.CBHardcoreD = False
+
+		Return My.Settings.CBHardcoreD
+	End Function
+
+	Friend Shared Function VideoHardcoreD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoHardcoreD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoHardcoreD).Count
+	End Function
+
+#End Region ' HardcoreD
+
+#Region "---------------------------------------- SoftcoreD ----------------------------------------------"
 
 	Private Sub BTNVideoSoftcoreD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoSoftCoreD.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoSoftCoreD.Text = FolderBrowserDialog1.SelectedPath
-			Form1.SoftcoreDVideoTotal()
-			My.Settings.VideoSoftcoreD = LblVideoSoftCoreD.Text
+			My.Settings.VideoSoftcoreD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBSoftcoreD = True
+			LblVideoSoftCoreTotalD.Text = VideoSoftcoreD_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoSoftcoreD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoSoftcoreD").Property.DefaultValue
+
+		My.Settings.VideoSoftcoreD =
+			Video_FolderCheck("SoftcoreD Video", My.Settings.VideoSoftcoreD, def)
+
+		If My.Settings.VideoSoftcoreD = def Then My.Settings.CBSoftcoreD = False
+
+		Return My.Settings.CBSoftcoreD
+	End Function
+
+	Friend Shared Function VideoSoftcoreD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoSoftcoreD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoSoftcoreD).Count
+	End Function
+
+#End Region ' SoftcoreD
+
+#Region "---------------------------------------- LesbianD -----------------------------------------------"
 
 	Private Sub BTNVideoLesbianD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoLesbianD.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoLesbianD.Text = FolderBrowserDialog1.SelectedPath
-			Form1.LesbianDVideoTotal()
-			My.Settings.VideoLesbianD = LblVideoLesbianD.Text
+			My.Settings.VideoLesbianD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBLesbianD = True
+			LblVideoLesbianTotalD.Text = VideoLesbianD_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoLesbianD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoLesbianD").Property.DefaultValue
+
+		My.Settings.VideoLesbianD =
+			Video_FolderCheck("LesbianD Video", My.Settings.VideoLesbianD, def)
+
+		If My.Settings.VideoLesbianD = def Then My.Settings.CBLesbianD = False
+
+		Return My.Settings.CBLesbianD
+	End Function
+
+	Friend Shared Function VideoLesbianD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoLesbianD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoLesbianD).Count
+	End Function
+
+#End Region ' LesbianD
+
+#Region "---------------------------------------- BlowjobD -----------------------------------------------"
 
 	Private Sub BTNVideoBlowjobD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoBlowjobD.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoBlowjobD.Text = FolderBrowserDialog1.SelectedPath
-			Form1.BlowjobDVideoTotal()
-			My.Settings.VideoBlowjobD = LblVideoBlowjobD.Text
+			My.Settings.VideoBlowjobD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBBlowjobD = True
+			LblVideoBlowjobTotalD.Text = VideoBlowjobD_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoBlowjobD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoBlowjobD").Property.DefaultValue
+
+		My.Settings.VideoBlowjobD =
+			Video_FolderCheck("BlowjobD Video", My.Settings.VideoBlowjobD, def)
+
+		If My.Settings.VideoBlowjobD = def Then My.Settings.CBBlowjobD = False
+
+		Return My.Settings.CBBlowjobD
+	End Function
+
+	Friend Shared Function VideoBlowjobD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoBlowjobD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoBlowjobD).Count
+	End Function
+
+#End Region ' BlowjobD
+
+#Region "---------------------------------------- FemdomD ------------------------------------------------"
 
 	Private Sub BTNVideoFemdomD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemDomD.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoFemdomD.Text = FolderBrowserDialog1.SelectedPath
-			Form1.FemdomDVideoTotal()
-			My.Settings.VideoFemdomD = LblVideoFemdomD.Text
+			My.Settings.VideoFemdomD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBFemdomD = True
+			LblVideoFemdomTotalD.Text = VideoFemdomD_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoFemdomD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoFemdomD").Property.DefaultValue
+
+		My.Settings.VideoFemdomD =
+			Video_FolderCheck("FemdomD Video", My.Settings.VideoFemdomD, def)
+
+		If My.Settings.VideoFemdomD = def Then My.Settings.CBFemdomD = False
+
+		Return My.Settings.CBFemdomD
+	End Function
+
+	Friend Shared Function VideoFemdomD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoFemdomD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoFemdomD).Count
+	End Function
+
+#End Region ' FemdomD
+
+#Region "---------------------------------------- FemsubD ------------------------------------------------"
 
 	Private Sub BTNVideoFemsubD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemSubD.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoFemsubD.Text = FolderBrowserDialog1.SelectedPath
-			Form1.FemsubDVideoTotal()
-			My.Settings.VideoFemsubD = LblVideoFemsubD.Text
+			My.Settings.VideoFemsubD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBFemsubD = True
+			LblVideoFemsubTotalD.Text = VideoFemsubD_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoFemsubD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoFemsubD").Property.DefaultValue
+
+		My.Settings.VideoFemsubD =
+			Video_FolderCheck("FemsubD Video", My.Settings.VideoFemsubD, def)
+
+		If My.Settings.VideoFemsubD = def Then My.Settings.CBFemsubD = False
+
+		Return My.Settings.CBFemsubD
+	End Function
+
+	Friend Shared Function VideoFemsubD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoFemsubD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoFemsubD).Count
+	End Function
+
+#End Region ' FemsubD
+
+#Region "---------------------------------------- JOI-D --------------------------------------------------"
 
 	Private Sub BTNVideoJOID_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoJOID.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoJOID.Text = FolderBrowserDialog1.SelectedPath
-			Form1.JOIDVideoTotal()
-			My.Settings.VideoJOID = LblVideoJOID.Text
+			My.Settings.VideoJOID = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBJOID = True
+			LblVideoJOITotalD.Text = VideoJOID_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoJOID_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoJOID").Property.DefaultValue
+
+		My.Settings.VideoJOID =
+			Video_FolderCheck("JOID Video", My.Settings.VideoJOID, def)
+
+		If My.Settings.VideoJOID = def Then My.Settings.CBJOID = False
+
+		Return My.Settings.CBJOID
+	End Function
+
+	Friend Shared Function VideoJOID_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoJOID_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoJOID).Count
+	End Function
+
+#End Region ' JOI-D
+
+#Region "---------------------------------------- CH-D ---------------------------------------------------"
 
 	Private Sub BTNVideoCHD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoCHD.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoCHD.Text = FolderBrowserDialog1.SelectedPath
-			Form1.CHDVideoTotal()
-			My.Settings.VideoCHD = LblVideoCHD.Text
+			My.Settings.VideoCHD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBCHD = True
+			LblVideoCHTotalD.Text = VideoCHD_Count(False)
 		End If
-
 	End Sub
+
+	Friend Shared Function VideoCHD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoCHD").Property.DefaultValue
+
+		My.Settings.VideoCHD =
+			Video_FolderCheck("CHD Video", My.Settings.VideoCHD, def)
+
+		If My.Settings.VideoCHD = def Then My.Settings.CBCHD = False
+
+		Return My.Settings.CBCHD
+	End Function
+
+	Friend Shared Function VideoCHD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoCHD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoCHD).Count
+	End Function
+
+#End Region ' CH-D
+
+#Region "---------------------------------------- GeneralD -----------------------------------------------"
 
 	Private Sub BTNVideoGeneralD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoGeneralD.Click
-
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LblVideoGeneralD.Text = FolderBrowserDialog1.SelectedPath
-			Form1.GeneralDVideoTotal()
-			My.Settings.VideoGeneralD = LblVideoGeneralD.Text
-		End If
-
-	End Sub
-
-
-	Private Sub CBVideoHardcore_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoHardcore.CheckedChanged
-		If CBVideoHardcore.Checked = True Then
-			My.Settings.CBHardcore = True
-		Else
-			My.Settings.CBHardcore = False
-		End If
-	End Sub
-
-	Private Sub CBVideoSoftCore_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoSoftCore.CheckedChanged
-		If CBVideoSoftCore.Checked = True Then
-			My.Settings.CBSoftcore = True
-		Else
-			My.Settings.CBSoftcore = False
-		End If
-	End Sub
-
-	Private Sub CBVideoLesbian_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoLesbian.CheckedChanged
-		If CBVideoLesbian.Checked = True Then
-			My.Settings.CBLesbian = True
-		Else
-			My.Settings.CBLesbian = False
-		End If
-	End Sub
-
-	Private Sub CBVideoBlowjob_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoBlowjob.CheckedChanged
-		If CBVideoBlowjob.Checked = True Then
-			My.Settings.CBBlowjob = True
-		Else
-			My.Settings.CBBlowjob = False
-		End If
-	End Sub
-
-	Private Sub CBVideoFemdom_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoFemdom.CheckedChanged
-		If CBVideoFemdom.Checked = True Then
-			My.Settings.CBFemdom = True
-		Else
-			My.Settings.CBFemdom = False
-		End If
-	End Sub
-
-	Private Sub CBVideoFemSub_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoFemsub.CheckedChanged
-		If CBVideoFemsub.Checked = True Then
-			My.Settings.CBFemsub = True
-		Else
-			My.Settings.CBFemsub = False
-		End If
-	End Sub
-
-	Private Sub CBVideoJOI_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoJOI.CheckedChanged
-		If CBVideoJOI.Checked = True Then
-			My.Settings.CBJOI = True
-		Else
-			My.Settings.CBJOI = False
-		End If
-	End Sub
-
-	Private Sub CBVideoCH_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoCH.CheckedChanged
-		If CBVideoCH.Checked = True Then
-			My.Settings.CBCH = True
-		Else
-			My.Settings.CBCH = False
-		End If
-	End Sub
-
-	Private Sub CBVideoGeneral_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoGeneral.CheckedChanged
-		If CBVideoGeneral.Checked = True Then
-			My.Settings.CBGeneral = True
-		Else
-			My.Settings.CBGeneral = False
-		End If
-	End Sub
-
-
-	Private Sub CBVideoHardcoreD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoHardcoreD.CheckedChanged
-		If CBVideoHardcoreD.Checked = True Then
-			My.Settings.CBHardcoreD = True
-		Else
-			My.Settings.CBHardcoreD = False
-		End If
-	End Sub
-
-	Private Sub CBVideoSoftcoreD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoSoftCoreD.CheckedChanged
-		If CBVideoSoftCoreD.Checked = True Then
-			My.Settings.CBSoftcoreD = True
-		Else
-			My.Settings.CBSoftcoreD = False
-		End If
-	End Sub
-
-	Private Sub CBVideoLesbianD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoLesbianD.CheckedChanged
-		If CBVideoLesbianD.Checked = True Then
-			My.Settings.CBLesbianD = True
-		Else
-			My.Settings.CBLesbianD = False
-		End If
-	End Sub
-
-	Private Sub CBVideoBlowjobD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoBlowjobD.CheckedChanged
-		If CBVideoBlowjobD.Checked = True Then
-			My.Settings.CBBlowjobD = True
-		Else
-			My.Settings.CBBlowjobD = False
-		End If
-	End Sub
-
-	Private Sub CBVideoFemdomD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoFemdomD.CheckedChanged
-		If CBVideoFemdomD.Checked = True Then
-			My.Settings.CBFemdomD = True
-		Else
-			My.Settings.CBFemdomD = False
-		End If
-	End Sub
-
-	Private Sub CBVideoFemsubD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoFemsubD.CheckedChanged
-		If CBVideoFemsubD.Checked = True Then
-			My.Settings.CBFemsubD = True
-		Else
-			My.Settings.CBFemsubD = False
-		End If
-	End Sub
-
-	Private Sub CBVideoJOID_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoJOID.CheckedChanged
-		If CBVideoJOID.Checked = True Then
-			My.Settings.CBJOID = True
-		Else
-			My.Settings.CBJOID = False
-		End If
-	End Sub
-
-	Private Sub CBVideoCHD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoCHD.CheckedChanged
-		If CBVideoCHD.Checked = True Then
-			My.Settings.CBCHD = True
-		Else
-			My.Settings.CBCHD = False
-		End If
-	End Sub
-
-	Private Sub CBVideoGeneralD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBVideoGeneralD.CheckedChanged
-		If CBVideoGeneralD.Checked = True Then
+			My.Settings.VideoGeneralD = FolderBrowserDialog1.SelectedPath
 			My.Settings.CBGeneralD = True
-		Else
-			My.Settings.CBGeneralD = False
+			LblVideoGeneralTotalD.Text = VideoGeneralD_Count(False)
 		End If
 	End Sub
+
+	Friend Shared Function VideoGeneralD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoGeneralD").Property.DefaultValue
+
+		My.Settings.VideoGeneralD =
+			Video_FolderCheck("GeneralD Video", My.Settings.VideoGeneralD, def)
+
+		If My.Settings.VideoGeneralD = def Then My.Settings.CBGeneralD = False
+
+		Return My.Settings.CBGeneralD
+	End Function
+
+	Friend Shared Function VideoGeneralD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoGeneralD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoGeneralD).Count
+	End Function
+
+#End Region ' GeneralD
+
+#End Region ' Domme
+
+	Private Sub BTNRefreshVideos_Click(sender As System.Object, e As System.EventArgs) Handles BTNRefreshVideos.Click
+		VideoDescriptionLabel.Text = "Refresh complete: " & Video_CheckAllFolders() & " videos found!"
+		VideoDescriptionLabel.Text = VideoDescriptionLabel.Text.Replace(": 1 videos", ": 1 video")
+	End Sub
+
+#End Region ' Videos
 
 
 	Private Sub NBCensorShowMin_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMin.Leave
@@ -1562,32 +1833,7 @@ Public Class FrmSettings
 		If NBCensorHideMax.Value < NBCensorHideMin.Value Then NBCensorHideMax.Value = NBCensorHideMin.Value
 	End Sub
 
-	Private Sub Button24_Click(sender As System.Object, e As System.EventArgs) Handles BTNRefreshVideos.Click
-		Form1.RefreshVideoTotal = 0
 
-		Form1.HardCoreVideoTotal()
-		Form1.SoftcoreVideoTotal()
-		Form1.LesbianVideoTotal()
-		Form1.BlowjobVideoTotal()
-		Form1.FemdomVideoTotal()
-		Form1.FemsubVideoTotal()
-		Form1.JOIVideoTotal()
-		Form1.CHVideoTotal()
-		Form1.GeneralVideoTotal()
-
-		Form1.HardcoreDVideoTotal()
-		Form1.SoftcoreDVideoTotal()
-		Form1.LesbianDVideoTotal()
-		Form1.BlowjobDVideoTotal()
-		Form1.FemdomDVideoTotal()
-		Form1.FemsubDVideoTotal()
-		Form1.JOIDVideoTotal()
-		Form1.CHDVideoTotal()
-		Form1.GeneralDVideoTotal()
-
-		VideoDescriptionLabel.Text = "Refresh complete: " & Form1.RefreshVideoTotal & " videos found!"
-		VideoDescriptionLabel.Text = VideoDescriptionLabel.Text.Replace(": 1 videos", ": 1 video")
-	End Sub
 
 
 
