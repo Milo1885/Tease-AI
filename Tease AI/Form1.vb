@@ -4372,7 +4372,7 @@ AcceptAnswer:
 			If File.Exists(GotoText) Then
 				' Read all lines of File
 				Dim gotolines As List(Of String) = Txt2List(GotoText)
-				Dim gotoline As Integer
+				Dim gotoline As Integer = -1
 
 				If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
 				If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
