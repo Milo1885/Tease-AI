@@ -7996,43 +7996,43 @@ GetAnotherRandomVideo:
 		If My.Settings.CBGeneral = True And InStr(__domVideo, My.Settings.VideoGeneral) <> 0 Then VideoType = "General"
 
 
-		If My.Settings.CBHardcoreD And InStr(__domVideo, FrmSettings.LblVideoHardCoreD.Text) <> 0 Then
+		If My.Settings.CBHardcoreD And InStr(__domVideo, My.Settings.VideoHardcoreD) <> 0 Then
 			VideoType = "HardcoreD"
 			DommeVideo = True
 		End If
-		If My.Settings.CBSoftcoreD And InStr(__domVideo, FrmSettings.LblVideoSoftCoreD.Text) <> 0 Then
+		If My.Settings.CBSoftcoreD And InStr(__domVideo, My.Settings.VideoSoftcoreD) <> 0 Then
 			VideoType = "SoftcoreD"
 			DommeVideo = True
 		End If
-		If My.Settings.CBLesbianD And InStr(__domVideo, FrmSettings.LblVideoLesbianD.Text) <> 0 Then
+		If My.Settings.CBLesbianD And InStr(__domVideo, My.Settings.VideoLesbianD) <> 0 Then
 			VideoType = "LesbianD"
 			DommeVideo = True
 		End If
 
-		If My.Settings.CBBlowjobD And InStr(__domVideo, FrmSettings.LblVideoBlowjobD.Text) <> 0 Then
+		If My.Settings.CBBlowjobD And InStr(__domVideo, My.Settings.VideoBlowjobD) <> 0 Then
 			VideoType = "BlowjobD"
 			DommeVideo = True
 		End If
-		If My.Settings.CBFemdomD And InStr(__domVideo, FrmSettings.LblVideoFemdomD.Text) <> 0 Then
+		If My.Settings.CBFemdomD And InStr(__domVideo, My.Settings.VideoFemdomD) <> 0 Then
 			VideoType = "FemdomD"
 			DommeVideo = True
 		End If
-		If My.Settings.CBFemsubD And InStr(__domVideo, FrmSettings.LblVideoFemsubD.Text) <> 0 Then
+		If My.Settings.CBFemsubD And InStr(__domVideo, My.Settings.VideoFemsubD) <> 0 Then
 			VideoType = "FemsubD"
 			DommeVideo = True
 		End If
 
-		If My.Settings.CBJOID And InStr(__domVideo, FrmSettings.LblVideoJOID.Text) <> 0 Then
+		If My.Settings.CBJOID And InStr(__domVideo, My.Settings.VideoJOID) <> 0 Then
 			VideoType = "JOID"
 			DommeVideo = True
 		End If
 
-		If My.Settings.CBCHD = True And InStr(__domVideo, FrmSettings.LblVideoCHD.Text) <> 0 Then
+		If My.Settings.CBCHD = True And InStr(__domVideo, My.Settings.VideoCHD) <> 0 Then
 			VideoType = "CHD"
 			DommeVideo = True
 		End If
 
-		If My.Settings.CBGeneralD = True And InStr(__domVideo, FrmSettings.LblVideoGeneralD.Text) <> 0 Then
+		If My.Settings.CBGeneralD = True And InStr(__domVideo, My.Settings.VideoGeneral) <> 0 Then
 			VideoType = "GeneralD"
 			DommeVideo = True
 		End If
@@ -8082,14 +8082,14 @@ GetAnotherRandomVideo:
 		Dim JOIVideos As New List(Of String)
 		JOIVideos.Clear()
 
-		If FrmSettings.LblVideoJOITotal.Text <> "0" And FrmSettings.CBVideoJOI.Checked = True Then
+		If FrmSettings.LblVideoJOITotal.Text <> "0" And My.Settings.CBJOI = True Then
 
-			JOIVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text,
+			JOIVideos.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOI,
 														 System.IO.SearchOption.AllDirectories))
 		End If
 
-		If FrmSettings.LblVideoJOITotalD.Text <> "0" And FrmSettings.CBVideoJOID.Checked = True Then
-			JOIVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text,
+		If FrmSettings.LblVideoJOITotalD.Text <> "0" And My.Settings.CBJOID = True Then
+			JOIVideos.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOI,
 														 System.IO.SearchOption.AllDirectories))
 		End If
 
@@ -8120,11 +8120,11 @@ GetAnotherRandomVideo:
 		Dim CHVideos As New List(Of String)
 		CHVideos.Clear()
 
-		If FrmSettings.LblVideoCHTotal.Text <> "0" And FrmSettings.CBVideoCH.Checked = True Then
-			CHVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCH.Text))
+		If FrmSettings.LblVideoCHTotal.Text <> "0" And My.Settings.CBCH = True Then
+			CHVideos.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCH))
 		End If
-		If FrmSettings.LblVideoCHTotalD.Text <> "0" And FrmSettings.CBVideoCHD.Checked = True Then
-			CHVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCHD.Text))
+		If FrmSettings.LblVideoCHTotalD.Text <> "0" And My.Settings.CBCHD = True Then
+			CHVideos.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCHD))
 		End If
 
 		If CHVideos.Count < 1 Then
@@ -12067,7 +12067,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@CheckJOIVideo") Then
 
-			If Directory.Exists(FrmSettings.LblVideoJOI.Text) Or Directory.Exists(FrmSettings.LblVideoJOID.Text) Then
+			If Directory.Exists(My.Settings.VideoJOI) Or Directory.Exists(My.Settings.VideoJOID) Then
 				If FrmSettings.LblVideoJOITotal.Text <> "0" Or FrmSettings.LblVideoJOITotalD.Text <> "0" Then
 				Else
 					SkipGotoLine = True
@@ -12087,7 +12087,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@PlayJOIVideo") Then
 
-			If Directory.Exists(FrmSettings.LblVideoJOI.Text) Or Directory.Exists(FrmSettings.LblVideoJOID.Text) Then
+			If Directory.Exists(My.Settings.VideoJOI) Or Directory.Exists(My.Settings.VideoJOID) Then
 
 				TeaseVideo = True
 				PlayRandomJOI()
@@ -12099,7 +12099,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@PlayCHVideo") Then
 
-			If Directory.Exists(FrmSettings.LblVideoCH.Text) Or Directory.Exists(FrmSettings.LblVideoCH.Text) Then
+			If Directory.Exists(My.Settings.VideoCH) Or Directory.Exists(My.Settings.VideoCH) Then
 
 				TeaseVideo = True
 				PlayRandomCH()

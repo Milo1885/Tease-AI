@@ -912,6 +912,18 @@ Public Class FrmSettings
 		Return t
 	End Function
 
+	Private Sub TxbVideoFolder_MouseHover(sender As Object, e As System.EventArgs) Handles TxbVideoHardCore.MouseHover,
+				TxbVideoHardCoreD.MouseHover, TxbVideoSoftCore.MouseHover, TxbVideoSoftCoreD.MouseHover, TxbVideoLesbian.MouseHover,
+				TxbVideoLesbianD.MouseHover, TxbVideoBlowjob.MouseHover, TxbVideoBlowjobD.MouseHover, TxbVideoFemdom.MouseHover,
+				TxbVideoFemdomD.MouseHover, TxbVideoFemsub.MouseHover, TxbVideoFemsubD.MouseHover, TxbVideoJOI.MouseHover,
+				TxbVideoJOID.MouseHover, TxbVideoCH.MouseHover, TxbVideoCHD.MouseHover, TxbVideoGeneral.MouseHover, TxbVideoGeneralD.MouseHover
+
+		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
+	End Sub
+
+	Private Sub BTNRefreshVideos_MouseHover(sender As Object, e As System.EventArgs) Handles BTNRefreshVideos.MouseHover
+		TTDir.SetToolTip(BTNRefreshVideos, "Use this button to refresh video paths.")
+	End Sub
 
 #Region "----------------------------------------- Regular -----------------------------------------------"
 
@@ -6451,16 +6463,16 @@ GeneralGood:
 				If Not RTBScriptReq.Text.Contains("* JOI or JOI Domme Video path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* JOI or JOI Domme Video path selected with a valid directory *" & Environment.NewLine
 				If CBVideoJOI.Checked = False And CBVideoJOID.Checked = False Then ScriptReqFailed = True
 				If LblVideoJOITotal.Text = "0" And LblVideoJOITotalD.Text = "0" Then ScriptReqFailed = True
-				If CBVideoJOI.Checked = True And Not Directory.Exists(LblVideoJOI.Text) Then ScriptReqFailed = True
-				If CBVideoJOID.Checked = True And Not Directory.Exists(LblVideoJOID.Text) Then ScriptReqFailed = True
+				If CBVideoJOI.Checked = True And Not Directory.Exists(TxbVideoJOI.Text) Then ScriptReqFailed = True
+				If CBVideoJOID.Checked = True And Not Directory.Exists(TxbVideoJOID.Text) Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@PlayCHVideo") Then
 				If Not RTBScriptReq.Text.Contains("* CH or CH Domme Video path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* CH or CH Domme Video path selected with a valid directory *" & Environment.NewLine
 				If CBVideoCH.Checked = False And CBVideoCHD.Checked = False Then ScriptReqFailed = True
 				If LblVideoCHTotal.Text = "0" And LblVideoCHTotalD.Text = "0" Then ScriptReqFailed = True
-				If CBVideoCH.Checked = True And Not Directory.Exists(LblVideoCH.Text) Then ScriptReqFailed = True
-				If CBVideoCHD.Checked = True And Not Directory.Exists(LblVideoCHD.Text) Then ScriptReqFailed = True
+				If CBVideoCH.Checked = True And Not Directory.Exists(TxbVideoCH.Text) Then ScriptReqFailed = True
+				If CBVideoCHD.Checked = True And Not Directory.Exists(TxbVideoCHD.Text) Then ScriptReqFailed = True
 			End If
 
 			'If ScriptList(i).Contains("@TnAFastSlides") Or ScriptList(i).Contains("@TnASlowSlides") Or ScriptList(i).Contains("@TnASlides") Or ScriptList(i).Contains("@CheckTnA") Then
@@ -7003,15 +7015,15 @@ GeneralGood:
 			If AvailList(j).Contains("@PlayJOIVideo") Then
 				If CBVideoJOI.Checked = False And CBVideoJOID.Checked = False Then AvailFail = True
 				If LblVideoJOITotal.Text = "0" And LblVideoJOITotalD.Text = "0" Then AvailFail = True
-				If CBVideoJOI.Checked = True And Not Directory.Exists(LblVideoJOI.Text) Then AvailFail = True
-				If CBVideoJOID.Checked = True And Not Directory.Exists(LblVideoJOID.Text) Then AvailFail = True
+				If CBVideoJOI.Checked = True And Not Directory.Exists(TxbVideoJOI.Text) Then AvailFail = True
+				If CBVideoJOID.Checked = True And Not Directory.Exists(TxbVideoJOID.Text) Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@PlayCHVideo") Then
 				If CBVideoCH.Checked = False And CBVideoCHD.Checked = False Then AvailFail = True
 				If LblVideoCHTotal.Text = "0" And LblVideoCHTotalD.Text = "0" Then AvailFail = True
-				If CBVideoCH.Checked = True And Not Directory.Exists(LblVideoCH.Text) Then AvailFail = True
-				If CBVideoCHD.Checked = True And Not Directory.Exists(LblVideoCHD.Text) Then AvailFail = True
+				If CBVideoCH.Checked = True And Not Directory.Exists(TxbVideoCH.Text) Then AvailFail = True
+				If CBVideoCHD.Checked = True And Not Directory.Exists(TxbVideoCHD.Text) Then AvailFail = True
 			End If
 
 			'If AvailList(j).Contains("@TnAFastSlides") Or AvailList(j).Contains("@TnASlowSlides") Or AvailList(j).Contains("@TnASlides") Or AvailList(j).Contains("@CheckTnA") Then
@@ -8340,9 +8352,9 @@ GeneralGood:
 		My.Settings.pnSetting8 = petnameBox8.Text
 
 		My.Settings.OrgasmAllow = alloworgasmComboBox.Text
-        My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
-        My.Settings.LockOrgasmChances = LockOrgasmChances.Checked
-        My.Settings.DomDenialEnd = CBDomDenialEnds.Checked
+		My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
+		My.Settings.LockOrgasmChances = LockOrgasmChances.Checked
+		My.Settings.DomDenialEnd = CBDomDenialEnds.Checked
 		My.Settings.DomOrgasmEnd = CBDomOrgasmEnds.Checked
 		' My.Settings.DomPOT = CBDomPOT.Checked
 		My.Settings.DomLowercase = LCaseCheckBox.Checked
@@ -8396,9 +8408,9 @@ GeneralGood:
 		petnameBox8.Text = My.Settings.pnSetting8
 
 		alloworgasmComboBox.Text = My.Settings.OrgasmAllow
-        ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
-        LockOrgasmChances.Checked = My.Settings.LockOrgasmChances
-        CBDomDenialEnds.Checked = My.Settings.DomDenialEnd
+		ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
+		LockOrgasmChances.Checked = My.Settings.LockOrgasmChances
+		CBDomDenialEnds.Checked = My.Settings.DomDenialEnd
 		CBDomOrgasmEnds.Checked = My.Settings.DomOrgasmEnd
 		'CBDomPOT.Checked = My.Settings.DomPOT
 		LCaseCheckBox.Checked = My.Settings.DomLowercase
@@ -8534,24 +8546,24 @@ GeneralGood:
 	End Sub
 
 	Private Sub CBRangeOrgasm_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBRangeOrgasm.CheckedChanged
-        If CBRangeOrgasm.Checked = False And alloworgasmComboBox.Enabled = True Then
-            NBAllowOften.Enabled = True
-            NBAllowSometimes.Enabled = True
-            NBAllowRarely.Enabled = True
-        Else
-            NBAllowOften.Enabled = False
+		If CBRangeOrgasm.Checked = False And alloworgasmComboBox.Enabled = True Then
+			NBAllowOften.Enabled = True
+			NBAllowSometimes.Enabled = True
+			NBAllowRarely.Enabled = True
+		Else
+			NBAllowOften.Enabled = False
 			NBAllowSometimes.Enabled = False
 			NBAllowRarely.Enabled = False
 		End If
 	End Sub
 
 	Private Sub CBRangeRuin_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBRangeRuin.CheckedChanged
-        If CBRangeRuin.Checked = False And ruinorgasmComboBox.Enabled = True Then
-            NBRuinOften.Enabled = True
-            NBRuinSometimes.Enabled = True
-            NBRuinRarely.Enabled = True
-        Else
-            NBRuinOften.Enabled = False
+		If CBRangeRuin.Checked = False And ruinorgasmComboBox.Enabled = True Then
+			NBRuinOften.Enabled = True
+			NBRuinSometimes.Enabled = True
+			NBRuinRarely.Enabled = True
+		Else
+			NBRuinOften.Enabled = False
 			NBRuinSometimes.Enabled = False
 			NBRuinRarely.Enabled = False
 		End If
@@ -12261,81 +12273,6 @@ GeneralGood:
 		TTDir.SetToolTip(BTNWIBrowse, "Select the directory where images will be saved to disk.")
 	End Sub
 
-	Private Sub LBLVideoHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoHardCore.MouseHover
-		TTDir.SetToolTip(LblVideoHardCore, LblVideoHardCore.Text)
-	End Sub
-
-	Private Sub LBLVideoHardcoreD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoHardCoreD.MouseHover
-		TTDir.SetToolTip(LblVideoHardCoreD, LblVideoHardCoreD.Text)
-	End Sub
-
-	Private Sub LBLVideoSoftcore_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoSoftCore.MouseHover
-		TTDir.SetToolTip(LblVideoSoftCore, LblVideoSoftCore.Text)
-	End Sub
-
-	Private Sub LBLVideoSoftcoreD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoSoftCoreD.MouseHover
-		TTDir.SetToolTip(LblVideoSoftCoreD, LblVideoSoftCoreD.Text)
-	End Sub
-
-	Private Sub LBLVideoLesbian_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoLesbian.MouseHover
-		TTDir.SetToolTip(LblVideoLesbian, LblVideoLesbian.Text)
-	End Sub
-
-	Private Sub LBLVideoLesbianD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoLesbianD.MouseHover
-		TTDir.SetToolTip(LblVideoLesbianD, LblVideoLesbianD.Text)
-	End Sub
-
-	Private Sub LBLVideoBlowjob_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoBlowjob.MouseHover
-		TTDir.SetToolTip(LblVideoBlowjob, LblVideoBlowjob.Text)
-	End Sub
-
-	Private Sub LBLVideoBlowjobD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoBlowjobD.MouseHover
-		TTDir.SetToolTip(LblVideoBlowjobD, LblVideoBlowjobD.Text)
-	End Sub
-
-	Private Sub LBLVideoFemdom_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoFemdom.MouseHover
-		TTDir.SetToolTip(LblVideoFemdom, LblVideoFemdom.Text)
-	End Sub
-
-	Private Sub LBLVideoFemdomD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoFemdomD.MouseHover
-		TTDir.SetToolTip(LblVideoFemdomD, LblVideoFemdomD.Text)
-	End Sub
-
-	Private Sub LBLVideoFemsub_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoFemsub.MouseHover
-		TTDir.SetToolTip(LblVideoFemsub, LblVideoFemsub.Text)
-	End Sub
-
-	Private Sub LBLVideoFemsubD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoFemsubD.MouseHover
-		TTDir.SetToolTip(LblVideoFemsubD, LblVideoFemsubD.Text)
-	End Sub
-
-	Private Sub LBLVideoJOI_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoJOI.MouseHover
-		TTDir.SetToolTip(LblVideoJOI, LblVideoJOI.Text)
-	End Sub
-
-	Private Sub LBLVideoJOID_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoJOID.MouseHover
-		TTDir.SetToolTip(LblVideoJOID, LblVideoJOID.Text)
-	End Sub
-
-	Private Sub LBLVideoCH_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoCH.MouseHover
-		TTDir.SetToolTip(LblVideoCH, LblVideoCH.Text)
-	End Sub
-
-	Private Sub LBLVideoCHD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoCHD.MouseHover
-		TTDir.SetToolTip(LblVideoCHD, LblVideoCHD.Text)
-	End Sub
-
-	Private Sub LBLVideoGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoGeneral.MouseHover
-		TTDir.SetToolTip(LblVideoGeneral, LblVideoGeneral.Text)
-	End Sub
-
-	Private Sub LBLVideoGeneralD_MouseHover(sender As Object, e As System.EventArgs) Handles LblVideoGeneralD.MouseHover
-		TTDir.SetToolTip(LblVideoGeneralD, LblVideoGeneralD.Text)
-	End Sub
-
-	Private Sub BTNRefreshVideos_MouseHover(sender As Object, e As System.EventArgs) Handles BTNRefreshVideos.MouseHover
-		TTDir.SetToolTip(BTNRefreshVideos, "Use this button to refresh video paths.")
-	End Sub
 
 	Private Sub SliderVVolume_LostFocus(sender As Object, e As System.EventArgs) Handles SliderVVolume.LostFocus
 		My.Settings.VVolume = SliderVVolume.Value
