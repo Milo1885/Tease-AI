@@ -28,6 +28,7 @@ Partial Class FrmSettings
 		Me.SettingsTabs = New System.Windows.Forms.TabControl()
 		Me.TabPage1 = New System.Windows.Forms.TabPage()
 		Me.PNLGeneralSettings = New System.Windows.Forms.Panel()
+		Me.BtnImportSettings = New System.Windows.Forms.Button()
 		Me.LblImportSettings = New System.Windows.Forms.Label()
 		Me.GroupBox64 = New System.Windows.Forms.GroupBox()
 		Me.CBMuteMedia = New System.Windows.Forms.CheckBox()
@@ -63,6 +64,7 @@ Partial Class FrmSettings
 		Me.landscapeCheckBox = New System.Windows.Forms.CheckBox()
 		Me.CBBlogImageWindow = New System.Windows.Forms.CheckBox()
 		Me.CBSlideshowSubDir = New System.Windows.Forms.CheckBox()
+		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
 		Me.GBGeneralSettings = New System.Windows.Forms.GroupBox()
 		Me.CBWebtease = New System.Windows.Forms.CheckBox()
 		Me.GBSubFont = New System.Windows.Forms.GroupBox()
@@ -84,8 +86,11 @@ Partial Class FrmSettings
 		Me.LBLGeneralSettings = New System.Windows.Forms.Label()
 		Me.TabPage2 = New System.Windows.Forms.TabPage()
 		Me.Panel3 = New System.Windows.Forms.Panel()
+		Me.BTNLoadDomSet = New System.Windows.Forms.Button()
+		Me.BTNSaveDomSet = New System.Windows.Forms.Button()
 		Me.Label127 = New System.Windows.Forms.Label()
 		Me.Label126 = New System.Windows.Forms.Label()
+		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
 		Me.GBDomTypingStyle = New System.Windows.Forms.GroupBox()
 		Me.TBEmoteEnd = New System.Windows.Forms.TextBox()
 		Me.Label67 = New System.Windows.Forms.Label()
@@ -227,6 +232,7 @@ Partial Class FrmSettings
 		Me.NBHoldTheEdgeMax = New System.Windows.Forms.NumericUpDown()
 		Me.CBLongEdgeTaunts = New System.Windows.Forms.CheckBox()
 		Me.Label131 = New System.Windows.Forms.Label()
+		Me.PictureBox12 = New System.Windows.Forms.PictureBox()
 		Me.GroupBox32 = New System.Windows.Forms.GroupBox()
 		Me.LBLSubBdayFormat = New System.Windows.Forms.Label()
 		Me.CBChastitySpikes = New System.Windows.Forms.CheckBox()
@@ -271,18 +277,20 @@ Partial Class FrmSettings
 		Me.CLBEndList = New System.Windows.Forms.CheckedListBox()
 		Me.GroupBox42 = New System.Windows.Forms.GroupBox()
 		Me.RTBScriptDesc = New System.Windows.Forms.RichTextBox()
+		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
 		Me.GroupBox43 = New System.Windows.Forms.GroupBox()
 		Me.Label98 = New System.Windows.Forms.Label()
 		Me.Label104 = New System.Windows.Forms.Label()
 		Me.TabPage7 = New System.Windows.Forms.TabPage()
 		Me.TabControl4 = New System.Windows.Forms.TabControl()
-		Me.TabPage31 = New System.Windows.Forms.TabPage()
+		Me.TpImagesUrlFiles = New System.Windows.Forms.TabPage()
 		Me.CBURLPreview = New System.Windows.Forms.CheckBox()
 		Me.GroupBox66 = New System.Windows.Forms.GroupBox()
+		Me.PBURLPreview = New System.Windows.Forms.PictureBox()
 		Me.BTNURLFilesAll = New System.Windows.Forms.Button()
 		Me.BTNURLFilesNone = New System.Windows.Forms.Button()
 		Me.URLFileList = New System.Windows.Forms.CheckedListBox()
-		Me.TabPage32 = New System.Windows.Forms.TabPage()
+		Me.TpImagesGenre = New System.Windows.Forms.TabPage()
 		Me.GrbImageUrlFiles = New System.Windows.Forms.GroupBox()
 		Me.TlpImageUrls = New System.Windows.Forms.TableLayoutPanel()
 		Me.BtnImageUrlButt = New System.Windows.Forms.Button()
@@ -324,19 +332,19 @@ Partial Class FrmSettings
 		Me.TxbImageUrlGeneral = New System.Windows.Forms.TextBox()
 		Me.TxbImageUrlBoobs = New System.Windows.Forms.TextBox()
 		Me.TxbImageUrlButts = New System.Windows.Forms.TextBox()
-		Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+		Me.GbxImagesGenre = New System.Windows.Forms.GroupBox()
 		Me.CBIButts = New System.Windows.Forms.CheckBox()
 		Me.CBIBoobs = New System.Windows.Forms.CheckBox()
 		Me.CBButtSubDir = New System.Windows.Forms.CheckBox()
-		Me.LBLButtPath = New System.Windows.Forms.Label()
+		Me.TbxIButts = New System.Windows.Forms.TextBox()
 		Me.CBBoobSubDir = New System.Windows.Forms.CheckBox()
-		Me.LBLIFemdom = New System.Windows.Forms.Label()
+		Me.TbxIFemdom = New System.Windows.Forms.TextBox()
 		Me.BTNButtPath = New System.Windows.Forms.Button()
-		Me.LBLBoobPath = New System.Windows.Forms.Label()
+		Me.TbxIBoobs = New System.Windows.Forms.TextBox()
 		Me.BTNIGeneral = New System.Windows.Forms.Button()
 		Me.CBILezdomSD = New System.Windows.Forms.CheckBox()
 		Me.BTNBoobPath = New System.Windows.Forms.Button()
-		Me.LBLIHentai = New System.Windows.Forms.Label()
+		Me.TbxIHentai = New System.Windows.Forms.TextBox()
 		Me.CBILesbian = New System.Windows.Forms.CheckBox()
 		Me.BTNICaptions = New System.Windows.Forms.Button()
 		Me.CBIBlowjob = New System.Windows.Forms.CheckBox()
@@ -350,30 +358,30 @@ Partial Class FrmSettings
 		Me.CBILezdom = New System.Windows.Forms.CheckBox()
 		Me.BTNIHentai = New System.Windows.Forms.Button()
 		Me.CBIBlowjobSD = New System.Windows.Forms.CheckBox()
-		Me.LBLILezdom = New System.Windows.Forms.Label()
+		Me.TbxILezdom = New System.Windows.Forms.TextBox()
 		Me.CBIGaySD = New System.Windows.Forms.CheckBox()
 		Me.BTNILezdom = New System.Windows.Forms.Button()
 		Me.CBIFemdom = New System.Windows.Forms.CheckBox()
 		Me.BTNIFemdom = New System.Windows.Forms.Button()
 		Me.CBILesbianSD = New System.Windows.Forms.CheckBox()
-		Me.LBLIBlowjob = New System.Windows.Forms.Label()
+		Me.TbxIBlowjob = New System.Windows.Forms.TextBox()
 		Me.CBIMaledomSD = New System.Windows.Forms.CheckBox()
 		Me.BTNIBlowjob = New System.Windows.Forms.Button()
 		Me.CBISoftcoreSD = New System.Windows.Forms.CheckBox()
-		Me.LBLILesbian = New System.Windows.Forms.Label()
+		Me.TbxILesbian = New System.Windows.Forms.TextBox()
 		Me.CBICaptions = New System.Windows.Forms.CheckBox()
 		Me.BTNILesbian = New System.Windows.Forms.Button()
 		Me.CBIHardcoreSD = New System.Windows.Forms.CheckBox()
-		Me.LBLISoftcore = New System.Windows.Forms.Label()
-		Me.LBLIGeneral = New System.Windows.Forms.Label()
+		Me.TbxISoftcore = New System.Windows.Forms.TextBox()
+		Me.TbxIGeneral = New System.Windows.Forms.TextBox()
 		Me.BTNISoftcore = New System.Windows.Forms.Button()
-		Me.LBLICaptions = New System.Windows.Forms.Label()
-		Me.LBLIGay = New System.Windows.Forms.Label()
+		Me.TbxICaptions = New System.Windows.Forms.TextBox()
+		Me.TbxIGay = New System.Windows.Forms.TextBox()
 		Me.CBIGeneral = New System.Windows.Forms.CheckBox()
 		Me.BTNIHardcore = New System.Windows.Forms.Button()
 		Me.CBIGeneralSD = New System.Windows.Forms.CheckBox()
-		Me.LBLIHardcore = New System.Windows.Forms.Label()
-		Me.LBLIMaledom = New System.Windows.Forms.Label()
+		Me.TbxIHardcore = New System.Windows.Forms.TextBox()
+		Me.TbxIMaledom = New System.Windows.Forms.TextBox()
 		Me.CBICaptionsSD = New System.Windows.Forms.CheckBox()
 		Me.CBIHardcore = New System.Windows.Forms.CheckBox()
 		Me.CBIMaledom = New System.Windows.Forms.CheckBox()
@@ -416,6 +424,7 @@ Partial Class FrmSettings
 		Me.CBTagPussy = New System.Windows.Forms.CheckBox()
 		Me.BTNTagSave = New System.Windows.Forms.Button()
 		Me.BTNTagDir = New System.Windows.Forms.Button()
+		Me.ImageTagPictureBox = New System.Windows.Forms.PictureBox()
 		Me.CBTagFace = New System.Windows.Forms.CheckBox()
 		Me.TabPage35 = New System.Windows.Forms.TabPage()
 		Me.GroupBox55 = New System.Windows.Forms.GroupBox()
@@ -543,6 +552,7 @@ Partial Class FrmSettings
 		Me.BTNWILiked = New System.Windows.Forms.Button()
 		Me.BTNWIRemove = New System.Windows.Forms.Button()
 		Me.CBWISaveToDisk = New System.Windows.Forms.CheckBox()
+		Me.PictureBox5 = New System.Windows.Forms.PictureBox()
 		Me.WebImageProgressBar = New System.Windows.Forms.ProgressBar()
 		Me.BTNWICreateURL = New System.Windows.Forms.Button()
 		Me.LBLWebImageCount = New System.Windows.Forms.Label()
@@ -550,9 +560,12 @@ Partial Class FrmSettings
 		Me.BTNWIOpenURL = New System.Windows.Forms.Button()
 		Me.BTNWIPrevious = New System.Windows.Forms.Button()
 		Me.BTNWINext = New System.Windows.Forms.Button()
+		Me.WebPictureBox = New System.Windows.Forms.PictureBox()
 		Me.Label71 = New System.Windows.Forms.Label()
 		Me.TpVideoSettings = New System.Windows.Forms.TabPage()
 		Me.PnlVideoSettings = New System.Windows.Forms.Panel()
+		Me.PbBannerVideoSettings = New System.Windows.Forms.PictureBox()
+		Me.BTNRefreshVideos = New System.Windows.Forms.Button()
 		Me.GbxVideoGeneralD = New System.Windows.Forms.GroupBox()
 		Me.LblVideoGeneralTotalD = New System.Windows.Forms.Label()
 		Me.TxbVideoGeneralD = New System.Windows.Forms.TextBox()
@@ -638,6 +651,8 @@ Partial Class FrmSettings
 		Me.TabControl1 = New System.Windows.Forms.TabControl()
 		Me.TabPage22 = New System.Windows.Forms.TabPage()
 		Me.PNLGlitter = New System.Windows.Forms.Panel()
+		Me.Button15 = New System.Windows.Forms.Button()
+		Me.Button16 = New System.Windows.Forms.Button()
 		Me.Label121 = New System.Windows.Forms.Label()
 		Me.Label122 = New System.Windows.Forms.Label()
 		Me.GBGlitterD = New System.Windows.Forms.GroupBox()
@@ -656,6 +671,7 @@ Partial Class FrmSettings
 		Me.TBGlitterShortName = New System.Windows.Forms.TextBox()
 		Me.CBEgotist = New System.Windows.Forms.CheckBox()
 		Me.CBTease = New System.Windows.Forms.CheckBox()
+		Me.GlitterAV = New System.Windows.Forms.PictureBox()
 		Me.GBGlitter1 = New System.Windows.Forms.GroupBox()
 		Me.Button14 = New System.Windows.Forms.Button()
 		Me.Button2 = New System.Windows.Forms.Button()
@@ -666,6 +682,7 @@ Partial Class FrmSettings
 		Me.GlitterSlider1 = New System.Windows.Forms.TrackBar()
 		Me.CBGlitter1 = New System.Windows.Forms.CheckBox()
 		Me.TBGlitter1 = New System.Windows.Forms.TextBox()
+		Me.GlitterAV1 = New System.Windows.Forms.PictureBox()
 		Me.GBGlitter3 = New System.Windows.Forms.GroupBox()
 		Me.Button12 = New System.Windows.Forms.Button()
 		Me.Button10 = New System.Windows.Forms.Button()
@@ -676,6 +693,7 @@ Partial Class FrmSettings
 		Me.GlitterSlider3 = New System.Windows.Forms.TrackBar()
 		Me.CBGlitter3 = New System.Windows.Forms.CheckBox()
 		Me.TBGlitter3 = New System.Windows.Forms.TextBox()
+		Me.GlitterAV3 = New System.Windows.Forms.PictureBox()
 		Me.GBGlitter2 = New System.Windows.Forms.GroupBox()
 		Me.Button13 = New System.Windows.Forms.Button()
 		Me.Button8 = New System.Windows.Forms.Button()
@@ -686,32 +704,52 @@ Partial Class FrmSettings
 		Me.GlitterSlider2 = New System.Windows.Forms.TrackBar()
 		Me.CBGlitter2 = New System.Windows.Forms.CheckBox()
 		Me.TBGlitter2 = New System.Windows.Forms.TextBox()
+		Me.GlitterAV2 = New System.Windows.Forms.PictureBox()
 		Me.TabPage23 = New System.Windows.Forms.TabPage()
 		Me.CBIncludeGifs = New System.Windows.Forms.CheckBox()
 		Me.Label53 = New System.Windows.Forms.Label()
 		Me.CBGameSounds = New System.Windows.Forms.CheckBox()
 		Me.GroupBox61 = New System.Windows.Forms.GroupBox()
 		Me.GN6 = New System.Windows.Forms.TextBox()
+		Me.GP6 = New System.Windows.Forms.PictureBox()
 		Me.GN2 = New System.Windows.Forms.TextBox()
+		Me.GP2 = New System.Windows.Forms.PictureBox()
+		Me.GP5 = New System.Windows.Forms.PictureBox()
 		Me.GN1 = New System.Windows.Forms.TextBox()
+		Me.GP1 = New System.Windows.Forms.PictureBox()
 		Me.GN5 = New System.Windows.Forms.TextBox()
 		Me.GN3 = New System.Windows.Forms.TextBox()
+		Me.GP3 = New System.Windows.Forms.PictureBox()
+		Me.GP4 = New System.Windows.Forms.PictureBox()
 		Me.GN4 = New System.Windows.Forms.TextBox()
 		Me.GroupBox60 = New System.Windows.Forms.GroupBox()
+		Me.CardBack = New System.Windows.Forms.PictureBox()
 		Me.GroupBox58 = New System.Windows.Forms.GroupBox()
 		Me.BN6 = New System.Windows.Forms.TextBox()
 		Me.BN3 = New System.Windows.Forms.TextBox()
+		Me.BP3 = New System.Windows.Forms.PictureBox()
+		Me.BP6 = New System.Windows.Forms.PictureBox()
 		Me.BN2 = New System.Windows.Forms.TextBox()
 		Me.BN5 = New System.Windows.Forms.TextBox()
+		Me.BP5 = New System.Windows.Forms.PictureBox()
+		Me.BP2 = New System.Windows.Forms.PictureBox()
 		Me.BN1 = New System.Windows.Forms.TextBox()
 		Me.BN4 = New System.Windows.Forms.TextBox()
+		Me.BP4 = New System.Windows.Forms.PictureBox()
+		Me.BP1 = New System.Windows.Forms.PictureBox()
 		Me.GroupBox59 = New System.Windows.Forms.GroupBox()
 		Me.SN6 = New System.Windows.Forms.TextBox()
+		Me.SP6 = New System.Windows.Forms.PictureBox()
 		Me.SN2 = New System.Windows.Forms.TextBox()
+		Me.SP2 = New System.Windows.Forms.PictureBox()
 		Me.SN1 = New System.Windows.Forms.TextBox()
+		Me.SP5 = New System.Windows.Forms.PictureBox()
+		Me.SP1 = New System.Windows.Forms.PictureBox()
 		Me.SN5 = New System.Windows.Forms.TextBox()
 		Me.SN3 = New System.Windows.Forms.TextBox()
 		Me.SN4 = New System.Windows.Forms.TextBox()
+		Me.SP3 = New System.Windows.Forms.PictureBox()
+		Me.SP4 = New System.Windows.Forms.PictureBox()
 		Me.TabPage6 = New System.Windows.Forms.TabPage()
 		Me.Panel10 = New System.Windows.Forms.Panel()
 		Me.TBWishlistComment = New System.Windows.Forms.TextBox()
@@ -728,32 +766,47 @@ Partial Class FrmSettings
 		Me.BTNWishlistCreate = New System.Windows.Forms.Button()
 		Me.Label18 = New System.Windows.Forms.Label()
 		Me.PNLWishList = New System.Windows.Forms.Panel()
+		Me.WishlistCostSilver = New System.Windows.Forms.PictureBox()
 		Me.LBLWishListText = New System.Windows.Forms.Label()
 		Me.LBLWishlistCost = New System.Windows.Forms.Label()
+		Me.WishlistCostGold = New System.Windows.Forms.PictureBox()
 		Me.LBLWishListName = New System.Windows.Forms.Label()
+		Me.WishlistPreview = New System.Windows.Forms.PictureBox()
 		Me.TabPage26 = New System.Windows.Forms.TabPage()
 		Me.Panel12 = New System.Windows.Forms.Panel()
 		Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+		Me.Button32 = New System.Windows.Forms.Button()
+		Me.Button31 = New System.Windows.Forms.Button()
+		Me.PictureBox10 = New System.Windows.Forms.PictureBox()
 		Me.GroupBox5 = New System.Windows.Forms.GroupBox()
 		Me.CBTransparentTime = New System.Windows.Forms.CheckBox()
 		Me.LBLDateTimeColor2 = New System.Windows.Forms.Label()
 		Me.Label137 = New System.Windows.Forms.Label()
 		Me.Label138 = New System.Windows.Forms.Label()
+		Me.Button28 = New System.Windows.Forms.Button()
+		Me.Button30 = New System.Windows.Forms.Button()
 		Me.LBLDateBackColor2 = New System.Windows.Forms.Label()
 		Me.LBLTextColor = New System.Windows.Forms.Label()
 		Me.LBLChatWindowColor2 = New System.Windows.Forms.Label()
+		Me.Button20 = New System.Windows.Forms.Button()
 		Me.LBLTextColor2 = New System.Windows.Forms.Label()
 		Me.LBLChatTextColor = New System.Windows.Forms.Label()
 		Me.LBLBackColor2 = New System.Windows.Forms.Label()
 		Me.LBLButtonColor = New System.Windows.Forms.Label()
 		Me.LBLChatWindowColor = New System.Windows.Forms.Label()
 		Me.LBLBackColor = New System.Windows.Forms.Label()
+		Me.Button21 = New System.Windows.Forms.Button()
+		Me.Button23 = New System.Windows.Forms.Button()
 		Me.LBLChatTextColor2 = New System.Windows.Forms.Label()
+		Me.Button25 = New System.Windows.Forms.Button()
+		Me.Button27 = New System.Windows.Forms.Button()
 		Me.LBLButtonColor2 = New System.Windows.Forms.Label()
 		Me.GroupBox11 = New System.Windows.Forms.GroupBox()
 		Me.Label144 = New System.Windows.Forms.Label()
 		Me.GroupBox1 = New System.Windows.Forms.GroupBox()
 		Me.CBFlipBack = New System.Windows.Forms.CheckBox()
+		Me.PBBackgroundPreview = New System.Windows.Forms.PictureBox()
+		Me.Button17 = New System.Windows.Forms.Button()
 		Me.CBStretchBack = New System.Windows.Forms.CheckBox()
 		Me.Button18 = New System.Windows.Forms.Button()
 		Me.Label164 = New System.Windows.Forms.Label()
@@ -861,6 +914,7 @@ Partial Class FrmSettings
 		Me.NBAllowRarely = New System.Windows.Forms.NumericUpDown()
 		Me.NBAllowOften = New System.Windows.Forms.NumericUpDown()
 		Me.CBRangeOrgasm = New System.Windows.Forms.CheckBox()
+		Me.PictureBox8 = New System.Windows.Forms.PictureBox()
 		Me.Label38 = New System.Windows.Forms.Label()
 		Me.TabPage13 = New System.Windows.Forms.TabPage()
 		Me.TabControl2 = New System.Windows.Forms.TabControl()
@@ -965,6 +1019,7 @@ Partial Class FrmSettings
 		Me.TBWebStop = New System.Windows.Forms.TextBox()
 		Me.TBWebStart = New System.Windows.Forms.TextBox()
 		Me.Label114 = New System.Windows.Forms.Label()
+		Me.PictureBox9 = New System.Windows.Forms.PictureBox()
 		Me.Label148 = New System.Windows.Forms.Label()
 		Me.TabPage28 = New System.Windows.Forms.TabPage()
 		Me.TabControl3 = New System.Windows.Forms.TabControl()
@@ -1012,6 +1067,7 @@ Partial Class FrmSettings
 		Me.Label33 = New System.Windows.Forms.Label()
 		Me.Label17 = New System.Windows.Forms.Label()
 		Me.Label3 = New System.Windows.Forms.Label()
+		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.Label41 = New System.Windows.Forms.Label()
 		Me.GroupBox47 = New System.Windows.Forms.GroupBox()
 		Me.GroupBox41 = New System.Windows.Forms.GroupBox()
@@ -1059,62 +1115,6 @@ Partial Class FrmSettings
 		Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 		Me.TextBox2 = New System.Windows.Forms.TextBox()
 		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
-		Me.BtnImportSettings = New System.Windows.Forms.Button()
-		Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-		Me.BTNLoadDomSet = New System.Windows.Forms.Button()
-		Me.BTNSaveDomSet = New System.Windows.Forms.Button()
-		Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-		Me.PictureBox12 = New System.Windows.Forms.PictureBox()
-		Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-		Me.PBURLPreview = New System.Windows.Forms.PictureBox()
-		Me.ImageTagPictureBox = New System.Windows.Forms.PictureBox()
-		Me.PictureBox5 = New System.Windows.Forms.PictureBox()
-		Me.WebPictureBox = New System.Windows.Forms.PictureBox()
-		Me.PbBannerVideoSettings = New System.Windows.Forms.PictureBox()
-		Me.BTNRefreshVideos = New System.Windows.Forms.Button()
-		Me.Button15 = New System.Windows.Forms.Button()
-		Me.Button16 = New System.Windows.Forms.Button()
-		Me.GlitterAV = New System.Windows.Forms.PictureBox()
-		Me.GlitterAV1 = New System.Windows.Forms.PictureBox()
-		Me.GlitterAV3 = New System.Windows.Forms.PictureBox()
-		Me.GlitterAV2 = New System.Windows.Forms.PictureBox()
-		Me.GP6 = New System.Windows.Forms.PictureBox()
-		Me.GP2 = New System.Windows.Forms.PictureBox()
-		Me.GP5 = New System.Windows.Forms.PictureBox()
-		Me.GP1 = New System.Windows.Forms.PictureBox()
-		Me.GP3 = New System.Windows.Forms.PictureBox()
-		Me.GP4 = New System.Windows.Forms.PictureBox()
-		Me.CardBack = New System.Windows.Forms.PictureBox()
-		Me.BP3 = New System.Windows.Forms.PictureBox()
-		Me.BP6 = New System.Windows.Forms.PictureBox()
-		Me.BP5 = New System.Windows.Forms.PictureBox()
-		Me.BP2 = New System.Windows.Forms.PictureBox()
-		Me.BP4 = New System.Windows.Forms.PictureBox()
-		Me.BP1 = New System.Windows.Forms.PictureBox()
-		Me.SP6 = New System.Windows.Forms.PictureBox()
-		Me.SP2 = New System.Windows.Forms.PictureBox()
-		Me.SP5 = New System.Windows.Forms.PictureBox()
-		Me.SP1 = New System.Windows.Forms.PictureBox()
-		Me.SP3 = New System.Windows.Forms.PictureBox()
-		Me.SP4 = New System.Windows.Forms.PictureBox()
-		Me.WishlistCostSilver = New System.Windows.Forms.PictureBox()
-		Me.WishlistCostGold = New System.Windows.Forms.PictureBox()
-		Me.WishlistPreview = New System.Windows.Forms.PictureBox()
-		Me.Button32 = New System.Windows.Forms.Button()
-		Me.Button31 = New System.Windows.Forms.Button()
-		Me.PictureBox10 = New System.Windows.Forms.PictureBox()
-		Me.Button28 = New System.Windows.Forms.Button()
-		Me.Button30 = New System.Windows.Forms.Button()
-		Me.Button20 = New System.Windows.Forms.Button()
-		Me.Button21 = New System.Windows.Forms.Button()
-		Me.Button23 = New System.Windows.Forms.Button()
-		Me.Button25 = New System.Windows.Forms.Button()
-		Me.Button27 = New System.Windows.Forms.Button()
-		Me.PBBackgroundPreview = New System.Windows.Forms.PictureBox()
-		Me.Button17 = New System.Windows.Forms.Button()
-		Me.PictureBox8 = New System.Windows.Forms.PictureBox()
-		Me.PictureBox9 = New System.Windows.Forms.PictureBox()
-		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.SettingsPanel.SuspendLayout()
 		Me.SettingsTabs.SuspendLayout()
 		Me.TabPage1.SuspendLayout()
@@ -1128,6 +1128,7 @@ Partial Class FrmSettings
 		Me.GBSafeword.SuspendLayout()
 		Me.GBGeneralSystem.SuspendLayout()
 		Me.GBGeneralImages.SuspendLayout()
+		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GBGeneralSettings.SuspendLayout()
 		Me.GBSubFont.SuspendLayout()
 		CType(Me.NBFontSize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1135,6 +1136,7 @@ Partial Class FrmSettings
 		CType(Me.NBFontSizeD, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.TabPage2.SuspendLayout()
 		Me.Panel3.SuspendLayout()
+		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GBDomTypingStyle.SuspendLayout()
 		CType(Me.NBTypoChance, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GroupBox63.SuspendLayout()
@@ -1178,6 +1180,7 @@ Partial Class FrmSettings
 		CType(Me.NBLongEdge, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.NBHoldTheEdgeMin, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.NBHoldTheEdgeMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GroupBox32.SuspendLayout()
 		CType(Me.NBBirthdayDay, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.subAgeNumBox, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1192,18 +1195,21 @@ Partial Class FrmSettings
 		Me.TabPage18.SuspendLayout()
 		Me.TabPage19.SuspendLayout()
 		Me.GroupBox42.SuspendLayout()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GroupBox43.SuspendLayout()
 		Me.TabPage7.SuspendLayout()
 		Me.TabControl4.SuspendLayout()
-		Me.TabPage31.SuspendLayout()
+		Me.TpImagesUrlFiles.SuspendLayout()
 		Me.GroupBox66.SuspendLayout()
-		Me.TabPage32.SuspendLayout()
+		CType(Me.PBURLPreview, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TpImagesGenre.SuspendLayout()
 		Me.GrbImageUrlFiles.SuspendLayout()
 		Me.TlpImageUrls.SuspendLayout()
-		Me.GroupBox14.SuspendLayout()
+		Me.GbxImagesGenre.SuspendLayout()
 		Me.TabPage33.SuspendLayout()
 		Me.TabControl5.SuspendLayout()
 		Me.TabPage34.SuspendLayout()
+		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.TabPage35.SuspendLayout()
 		Me.GroupBox55.SuspendLayout()
 		Me.GroupBox53.SuspendLayout()
@@ -1215,8 +1221,11 @@ Partial Class FrmSettings
 		Me.GroupBox48.SuspendLayout()
 		Me.TabPage11.SuspendLayout()
 		Me.Panel7.SuspendLayout()
+		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.WebPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.TpVideoSettings.SuspendLayout()
 		Me.PnlVideoSettings.SuspendLayout()
+		CType(Me.PbBannerVideoSettings, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GbxVideoGeneralD.SuspendLayout()
 		Me.GbxVideoSpecialD.SuspendLayout()
 		Me.GbxVideoGenreD.SuspendLayout()
@@ -1230,27 +1239,55 @@ Partial Class FrmSettings
 		Me.PNLGlitter.SuspendLayout()
 		Me.GBGlitterD.SuspendLayout()
 		CType(Me.GlitterSlider, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GlitterAV, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GBGlitter1.SuspendLayout()
 		CType(Me.GlitterSlider1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GlitterAV1, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GBGlitter3.SuspendLayout()
 		CType(Me.GlitterSlider3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GlitterAV3, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GBGlitter2.SuspendLayout()
 		CType(Me.GlitterSlider2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GlitterAV2, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.TabPage23.SuspendLayout()
 		Me.GroupBox61.SuspendLayout()
+		CType(Me.GP6, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP5, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP4, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GroupBox60.SuspendLayout()
+		CType(Me.CardBack, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GroupBox58.SuspendLayout()
+		CType(Me.BP3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP6, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP5, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP4, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP1, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GroupBox59.SuspendLayout()
+		CType(Me.SP6, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP5, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP4, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.TabPage6.SuspendLayout()
 		Me.Panel10.SuspendLayout()
 		CType(Me.NBWishlistCost, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.PNLWishList.SuspendLayout()
+		CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.TabPage26.SuspendLayout()
 		Me.Panel12.SuspendLayout()
 		Me.GroupBox9.SuspendLayout()
+		CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GroupBox5.SuspendLayout()
 		Me.GroupBox11.SuspendLayout()
 		Me.GroupBox1.SuspendLayout()
+		CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.TabPage4.SuspendLayout()
 		Me.Panel6.SuspendLayout()
 		Me.GroupBox69.SuspendLayout()
@@ -1298,6 +1335,7 @@ Partial Class FrmSettings
 		CType(Me.NBAllowSometimes, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.NBAllowRarely, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.NBAllowOften, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.TabPage13.SuspendLayout()
 		Me.TabControl2.SuspendLayout()
 		Me.TabPage27.SuspendLayout()
@@ -1316,6 +1354,7 @@ Partial Class FrmSettings
 		Me.GroupBox27.SuspendLayout()
 		Me.GroupBox20.SuspendLayout()
 		Me.GroupBox15.SuspendLayout()
+		CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.TabPage28.SuspendLayout()
 		Me.TabControl3.SuspendLayout()
 		Me.TabPage29.SuspendLayout()
@@ -1323,6 +1362,7 @@ Partial Class FrmSettings
 		Me.TabPage30.SuspendLayout()
 		Me.TabPage5.SuspendLayout()
 		Me.Panel5.SuspendLayout()
+		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.GroupBox47.SuspendLayout()
 		Me.GroupBox41.SuspendLayout()
 		Me.GroupBox44.SuspendLayout()
@@ -1332,46 +1372,6 @@ Partial Class FrmSettings
 		Me.GroupBox65.SuspendLayout()
 		CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PBURLPreview, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.WebPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PbBannerVideoSettings, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GlitterAV, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GlitterAV1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GlitterAV3, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GlitterAV2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GP6, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GP2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GP5, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GP1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GP3, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.GP4, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.CardBack, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.BP3, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.BP6, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.BP5, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.BP2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.BP4, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.BP1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.SP6, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.SP2, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.SP5, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.SP1, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.SP3, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.SP4, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
-		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
 		Me.SuspendLayout()
 		'
 		'SettingsPanel
@@ -1437,6 +1437,23 @@ Partial Class FrmSettings
 		Me.PNLGeneralSettings.Name = "PNLGeneralSettings"
 		Me.PNLGeneralSettings.Size = New System.Drawing.Size(708, 437)
 		Me.PNLGeneralSettings.TabIndex = 0
+		'
+		'BtnImportSettings
+		'
+		Me.BtnImportSettings.BackColor = System.Drawing.Color.Transparent
+		Me.BtnImportSettings.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Export
+		Me.BtnImportSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.BtnImportSettings.FlatAppearance.BorderSize = 0
+		Me.BtnImportSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+		Me.BtnImportSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+		Me.BtnImportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.BtnImportSettings.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BtnImportSettings.ForeColor = System.Drawing.Color.Black
+		Me.BtnImportSettings.Location = New System.Drawing.Point(669, 14)
+		Me.BtnImportSettings.Name = "BtnImportSettings"
+		Me.BtnImportSettings.Size = New System.Drawing.Size(30, 26)
+		Me.BtnImportSettings.TabIndex = 158
+		Me.BtnImportSettings.UseVisualStyleBackColor = False
 		'
 		'LblImportSettings
 		'
@@ -1867,6 +1884,17 @@ Partial Class FrmSettings
 		Me.CBSlideshowSubDir.Text = "Slideshow Includes Subdirectories"
 		Me.CBSlideshowSubDir.UseVisualStyleBackColor = True
 		'
+		'PictureBox2
+		'
+		Me.PictureBox2.BackColor = System.Drawing.Color.LightGray
+		Me.PictureBox2.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
+		Me.PictureBox2.Location = New System.Drawing.Point(9, 6)
+		Me.PictureBox2.Name = "PictureBox2"
+		Me.PictureBox2.Size = New System.Drawing.Size(160, 19)
+		Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+		Me.PictureBox2.TabIndex = 148
+		Me.PictureBox2.TabStop = False
+		'
 		'GBGeneralSettings
 		'
 		Me.GBGeneralSettings.BackColor = System.Drawing.Color.LightGray
@@ -2141,6 +2169,40 @@ Partial Class FrmSettings
 		Me.Panel3.Size = New System.Drawing.Size(708, 437)
 		Me.Panel3.TabIndex = 93
 		'
+		'BTNLoadDomSet
+		'
+		Me.BTNLoadDomSet.BackColor = System.Drawing.Color.LightGray
+		Me.BTNLoadDomSet.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Export
+		Me.BTNLoadDomSet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.BTNLoadDomSet.FlatAppearance.BorderSize = 0
+		Me.BTNLoadDomSet.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+		Me.BTNLoadDomSet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+		Me.BTNLoadDomSet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.BTNLoadDomSet.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BTNLoadDomSet.ForeColor = System.Drawing.Color.Black
+		Me.BTNLoadDomSet.Location = New System.Drawing.Point(671, 11)
+		Me.BTNLoadDomSet.Name = "BTNLoadDomSet"
+		Me.BTNLoadDomSet.Size = New System.Drawing.Size(30, 26)
+		Me.BTNLoadDomSet.TabIndex = 150
+		Me.BTNLoadDomSet.UseVisualStyleBackColor = False
+		'
+		'BTNSaveDomSet
+		'
+		Me.BTNSaveDomSet.BackColor = System.Drawing.Color.LightGray
+		Me.BTNSaveDomSet.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Save
+		Me.BTNSaveDomSet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.BTNSaveDomSet.FlatAppearance.BorderSize = 0
+		Me.BTNSaveDomSet.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+		Me.BTNSaveDomSet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+		Me.BTNSaveDomSet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.BTNSaveDomSet.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BTNSaveDomSet.ForeColor = System.Drawing.Color.Black
+		Me.BTNSaveDomSet.Location = New System.Drawing.Point(636, 8)
+		Me.BTNSaveDomSet.Name = "BTNSaveDomSet"
+		Me.BTNSaveDomSet.Size = New System.Drawing.Size(30, 26)
+		Me.BTNSaveDomSet.TabIndex = 151
+		Me.BTNSaveDomSet.UseVisualStyleBackColor = False
+		'
 		'Label127
 		'
 		Me.Label127.AutoSize = True
@@ -2164,6 +2226,17 @@ Partial Class FrmSettings
 		Me.Label126.TabIndex = 152
 		Me.Label126.Text = "save"
 		Me.Label126.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'PictureBox4
+		'
+		Me.PictureBox4.BackColor = System.Drawing.Color.LightGray
+		Me.PictureBox4.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
+		Me.PictureBox4.Location = New System.Drawing.Point(9, 6)
+		Me.PictureBox4.Name = "PictureBox4"
+		Me.PictureBox4.Size = New System.Drawing.Size(160, 19)
+		Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+		Me.PictureBox4.TabIndex = 149
+		Me.PictureBox4.TabStop = False
 		'
 		'GBDomTypingStyle
 		'
@@ -3886,6 +3959,17 @@ Partial Class FrmSettings
 		Me.Label131.Text = "Max Extreme Hold Time:"
 		Me.Label131.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
+		'PictureBox12
+		'
+		Me.PictureBox12.BackColor = System.Drawing.Color.LightGray
+		Me.PictureBox12.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
+		Me.PictureBox12.Location = New System.Drawing.Point(9, 6)
+		Me.PictureBox12.Name = "PictureBox12"
+		Me.PictureBox12.Size = New System.Drawing.Size(160, 19)
+		Me.PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+		Me.PictureBox12.TabIndex = 149
+		Me.PictureBox12.TabStop = False
+		'
 		'GroupBox32
 		'
 		Me.GroupBox32.BackColor = System.Drawing.Color.LightGray
@@ -4394,6 +4478,17 @@ Partial Class FrmSettings
 		Me.RTBScriptDesc.TabIndex = 0
 		Me.RTBScriptDesc.Text = ""
 		'
+		'PictureBox1
+		'
+		Me.PictureBox1.BackColor = System.Drawing.Color.LightGray
+		Me.PictureBox1.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
+		Me.PictureBox1.Location = New System.Drawing.Point(9, 6)
+		Me.PictureBox1.Name = "PictureBox1"
+		Me.PictureBox1.Size = New System.Drawing.Size(160, 19)
+		Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+		Me.PictureBox1.TabIndex = 151
+		Me.PictureBox1.TabStop = False
+		'
 		'GroupBox43
 		'
 		Me.GroupBox43.BackColor = System.Drawing.Color.LightGray
@@ -4443,28 +4538,28 @@ Partial Class FrmSettings
 		'
 		'TabControl4
 		'
-		Me.TabControl4.Controls.Add(Me.TabPage31)
-		Me.TabControl4.Controls.Add(Me.TabPage32)
+		Me.TabControl4.Controls.Add(Me.TpImagesUrlFiles)
+		Me.TabControl4.Controls.Add(Me.TpImagesGenre)
 		Me.TabControl4.Location = New System.Drawing.Point(6, 6)
 		Me.TabControl4.Name = "TabControl4"
 		Me.TabControl4.SelectedIndex = 0
 		Me.TabControl4.Size = New System.Drawing.Size(708, 437)
 		Me.TabControl4.TabIndex = 154
 		'
-		'TabPage31
+		'TpImagesUrlFiles
 		'
-		Me.TabPage31.BackColor = System.Drawing.Color.LightGray
-		Me.TabPage31.Controls.Add(Me.CBURLPreview)
-		Me.TabPage31.Controls.Add(Me.GroupBox66)
-		Me.TabPage31.Controls.Add(Me.BTNURLFilesAll)
-		Me.TabPage31.Controls.Add(Me.BTNURLFilesNone)
-		Me.TabPage31.Controls.Add(Me.URLFileList)
-		Me.TabPage31.Location = New System.Drawing.Point(4, 22)
-		Me.TabPage31.Name = "TabPage31"
-		Me.TabPage31.Padding = New System.Windows.Forms.Padding(3)
-		Me.TabPage31.Size = New System.Drawing.Size(700, 411)
-		Me.TabPage31.TabIndex = 0
-		Me.TabPage31.Text = "URL Files"
+		Me.TpImagesUrlFiles.BackColor = System.Drawing.Color.LightGray
+		Me.TpImagesUrlFiles.Controls.Add(Me.CBURLPreview)
+		Me.TpImagesUrlFiles.Controls.Add(Me.GroupBox66)
+		Me.TpImagesUrlFiles.Controls.Add(Me.BTNURLFilesAll)
+		Me.TpImagesUrlFiles.Controls.Add(Me.BTNURLFilesNone)
+		Me.TpImagesUrlFiles.Controls.Add(Me.URLFileList)
+		Me.TpImagesUrlFiles.Location = New System.Drawing.Point(4, 22)
+		Me.TpImagesUrlFiles.Name = "TpImagesUrlFiles"
+		Me.TpImagesUrlFiles.Padding = New System.Windows.Forms.Padding(3)
+		Me.TpImagesUrlFiles.Size = New System.Drawing.Size(700, 411)
+		Me.TpImagesUrlFiles.TabIndex = 0
+		Me.TpImagesUrlFiles.Text = "URL Files"
 		'
 		'CBURLPreview
 		'
@@ -4487,6 +4582,16 @@ Partial Class FrmSettings
 		Me.GroupBox66.TabIndex = 162
 		Me.GroupBox66.TabStop = False
 		Me.GroupBox66.Text = "Example Preview"
+		'
+		'PBURLPreview
+		'
+		Me.PBURLPreview.BackColor = System.Drawing.Color.Black
+		Me.PBURLPreview.Location = New System.Drawing.Point(6, 19)
+		Me.PBURLPreview.Name = "PBURLPreview"
+		Me.PBURLPreview.Size = New System.Drawing.Size(338, 284)
+		Me.PBURLPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+		Me.PBURLPreview.TabIndex = 0
+		Me.PBURLPreview.TabStop = False
 		'
 		'BTNURLFilesAll
 		'
@@ -4516,17 +4621,17 @@ Partial Class FrmSettings
 		Me.URLFileList.Sorted = True
 		Me.URLFileList.TabIndex = 154
 		'
-		'TabPage32
+		'TpImagesGenre
 		'
-		Me.TabPage32.BackColor = System.Drawing.Color.LightGray
-		Me.TabPage32.Controls.Add(Me.GrbImageUrlFiles)
-		Me.TabPage32.Controls.Add(Me.GroupBox14)
-		Me.TabPage32.Location = New System.Drawing.Point(4, 22)
-		Me.TabPage32.Name = "TabPage32"
-		Me.TabPage32.Padding = New System.Windows.Forms.Padding(3)
-		Me.TabPage32.Size = New System.Drawing.Size(700, 411)
-		Me.TabPage32.TabIndex = 1
-		Me.TabPage32.Text = "Genre Images"
+		Me.TpImagesGenre.BackColor = System.Drawing.Color.LightGray
+		Me.TpImagesGenre.Controls.Add(Me.GrbImageUrlFiles)
+		Me.TpImagesGenre.Controls.Add(Me.GbxImagesGenre)
+		Me.TpImagesGenre.Location = New System.Drawing.Point(4, 22)
+		Me.TpImagesGenre.Name = "TpImagesGenre"
+		Me.TpImagesGenre.Padding = New System.Windows.Forms.Padding(3)
+		Me.TpImagesGenre.Size = New System.Drawing.Size(700, 411)
+		Me.TpImagesGenre.TabIndex = 1
+		Me.TpImagesGenre.Text = "Genre Images"
 		'
 		'GrbImageUrlFiles
 		'
@@ -4534,7 +4639,7 @@ Partial Class FrmSettings
 		Me.GrbImageUrlFiles.Location = New System.Drawing.Point(383, 8)
 		Me.GrbImageUrlFiles.Name = "GrbImageUrlFiles"
 		Me.GrbImageUrlFiles.Size = New System.Drawing.Size(311, 400)
-		Me.GrbImageUrlFiles.TabIndex = 156
+		Me.GrbImageUrlFiles.TabIndex = 1
 		Me.GrbImageUrlFiles.TabStop = False
 		Me.GrbImageUrlFiles.Text = "URL Files"
 		'
@@ -4965,9 +5070,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlBlowjob.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlBlowjob.Location = New System.Drawing.Point(115, 92)
 		Me.TxbImageUrlBlowjob.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlBlowjob.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlBlowjob.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlBlowjob.Name = "TxbImageUrlBlowjob"
 		Me.TxbImageUrlBlowjob.ReadOnly = True
-		Me.TxbImageUrlBlowjob.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlBlowjob.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlBlowjob.TabIndex = 12
 		Me.TxbImageUrlBlowjob.Text = Global.Tease_AI.My.MySettings.Default.UrlFileBlowjob
 		'
@@ -4979,9 +5086,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlSoftcore.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlSoftcore.Location = New System.Drawing.Point(115, 34)
 		Me.TxbImageUrlSoftcore.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlSoftcore.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlSoftcore.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlSoftcore.Name = "TxbImageUrlSoftcore"
 		Me.TxbImageUrlSoftcore.ReadOnly = True
-		Me.TxbImageUrlSoftcore.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlSoftcore.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlSoftcore.TabIndex = 6
 		Me.TxbImageUrlSoftcore.Text = Global.Tease_AI.My.MySettings.Default.UrlFileSoftcore
 		'
@@ -4993,9 +5102,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlLezdom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlLezdom.Location = New System.Drawing.Point(115, 150)
 		Me.TxbImageUrlLezdom.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlLezdom.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlLezdom.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlLezdom.Name = "TxbImageUrlLezdom"
 		Me.TxbImageUrlLezdom.ReadOnly = True
-		Me.TxbImageUrlLezdom.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlLezdom.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlLezdom.TabIndex = 18
 		Me.TxbImageUrlLezdom.Text = Global.Tease_AI.My.MySettings.Default.UrlFileLezdom
 		'
@@ -5007,9 +5118,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlFemdom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlFemdom.Location = New System.Drawing.Point(115, 121)
 		Me.TxbImageUrlFemdom.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlFemdom.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlFemdom.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlFemdom.Name = "TxbImageUrlFemdom"
 		Me.TxbImageUrlFemdom.ReadOnly = True
-		Me.TxbImageUrlFemdom.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlFemdom.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlFemdom.TabIndex = 15
 		Me.TxbImageUrlFemdom.Text = Global.Tease_AI.My.MySettings.Default.UrlFileFemdom
 		'
@@ -5021,9 +5134,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlHardcore.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlHardcore.Location = New System.Drawing.Point(115, 5)
 		Me.TxbImageUrlHardcore.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlHardcore.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlHardcore.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlHardcore.Name = "TxbImageUrlHardcore"
 		Me.TxbImageUrlHardcore.ReadOnly = True
-		Me.TxbImageUrlHardcore.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlHardcore.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlHardcore.TabIndex = 3
 		Me.TxbImageUrlHardcore.Text = Global.Tease_AI.My.MySettings.Default.UrlFileHardcore
 		'
@@ -5035,9 +5150,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlHentai.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlHentai.Location = New System.Drawing.Point(115, 179)
 		Me.TxbImageUrlHentai.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlHentai.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlHentai.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlHentai.Name = "TxbImageUrlHentai"
 		Me.TxbImageUrlHentai.ReadOnly = True
-		Me.TxbImageUrlHentai.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlHentai.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlHentai.TabIndex = 21
 		Me.TxbImageUrlHentai.Text = Global.Tease_AI.My.MySettings.Default.UrlFileHentai
 		'
@@ -5049,9 +5166,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlGay.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlGay.Location = New System.Drawing.Point(115, 208)
 		Me.TxbImageUrlGay.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlGay.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlGay.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlGay.Name = "TxbImageUrlGay"
 		Me.TxbImageUrlGay.ReadOnly = True
-		Me.TxbImageUrlGay.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlGay.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlGay.TabIndex = 24
 		Me.TxbImageUrlGay.Text = Global.Tease_AI.My.MySettings.Default.UrlFileGay
 		'
@@ -5063,9 +5182,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlLesbian.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlLesbian.Location = New System.Drawing.Point(115, 63)
 		Me.TxbImageUrlLesbian.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlLesbian.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlLesbian.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlLesbian.Name = "TxbImageUrlLesbian"
 		Me.TxbImageUrlLesbian.ReadOnly = True
-		Me.TxbImageUrlLesbian.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlLesbian.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlLesbian.TabIndex = 9
 		Me.TxbImageUrlLesbian.Text = Global.Tease_AI.My.MySettings.Default.UrlFileLesbian
 		'
@@ -5077,9 +5198,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlMaledom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlMaledom.Location = New System.Drawing.Point(115, 237)
 		Me.TxbImageUrlMaledom.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlMaledom.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlMaledom.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlMaledom.Name = "TxbImageUrlMaledom"
 		Me.TxbImageUrlMaledom.ReadOnly = True
-		Me.TxbImageUrlMaledom.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlMaledom.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlMaledom.TabIndex = 27
 		Me.TxbImageUrlMaledom.Text = Global.Tease_AI.My.MySettings.Default.UrlFileMaledom
 		'
@@ -5091,9 +5214,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlCaptions.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlCaptions.Location = New System.Drawing.Point(115, 266)
 		Me.TxbImageUrlCaptions.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlCaptions.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlCaptions.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlCaptions.Name = "TxbImageUrlCaptions"
 		Me.TxbImageUrlCaptions.ReadOnly = True
-		Me.TxbImageUrlCaptions.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlCaptions.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlCaptions.TabIndex = 30
 		Me.TxbImageUrlCaptions.Text = Global.Tease_AI.My.MySettings.Default.UrlFileCaptions
 		'
@@ -5105,9 +5230,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlGeneral.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlGeneral.Location = New System.Drawing.Point(115, 295)
 		Me.TxbImageUrlGeneral.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlGeneral.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlGeneral.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlGeneral.Name = "TxbImageUrlGeneral"
 		Me.TxbImageUrlGeneral.ReadOnly = True
-		Me.TxbImageUrlGeneral.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlGeneral.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlGeneral.TabIndex = 33
 		Me.TxbImageUrlGeneral.Text = Global.Tease_AI.My.MySettings.Default.UrlFileGeneral
 		'
@@ -5119,9 +5246,11 @@ Partial Class FrmSettings
 		Me.TxbImageUrlBoobs.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlBoobs.Location = New System.Drawing.Point(115, 324)
 		Me.TxbImageUrlBoobs.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlBoobs.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlBoobs.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlBoobs.Name = "TxbImageUrlBoobs"
 		Me.TxbImageUrlBoobs.ReadOnly = True
-		Me.TxbImageUrlBoobs.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlBoobs.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlBoobs.TabIndex = 36
 		Me.TxbImageUrlBoobs.Text = Global.Tease_AI.My.MySettings.Default.UrlFileBoobs
 		'
@@ -5133,140 +5262,158 @@ Partial Class FrmSettings
 		Me.TxbImageUrlButts.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlButts.Location = New System.Drawing.Point(115, 353)
 		Me.TxbImageUrlButts.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
+		Me.TxbImageUrlButts.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TxbImageUrlButts.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlButts.Name = "TxbImageUrlButts"
 		Me.TxbImageUrlButts.ReadOnly = True
-		Me.TxbImageUrlButts.Size = New System.Drawing.Size(182, 20)
+		Me.TxbImageUrlButts.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlButts.TabIndex = 39
 		Me.TxbImageUrlButts.Text = Global.Tease_AI.My.MySettings.Default.UrlFileButt
 		'
-		'GroupBox14
+		'GbxImagesGenre
 		'
-		Me.GroupBox14.Controls.Add(Me.CBIButts)
-		Me.GroupBox14.Controls.Add(Me.CBIBoobs)
-		Me.GroupBox14.Controls.Add(Me.CBButtSubDir)
-		Me.GroupBox14.Controls.Add(Me.LBLButtPath)
-		Me.GroupBox14.Controls.Add(Me.CBBoobSubDir)
-		Me.GroupBox14.Controls.Add(Me.LBLIFemdom)
-		Me.GroupBox14.Controls.Add(Me.BTNButtPath)
-		Me.GroupBox14.Controls.Add(Me.LBLBoobPath)
-		Me.GroupBox14.Controls.Add(Me.BTNIGeneral)
-		Me.GroupBox14.Controls.Add(Me.CBILezdomSD)
-		Me.GroupBox14.Controls.Add(Me.BTNBoobPath)
-		Me.GroupBox14.Controls.Add(Me.LBLIHentai)
-		Me.GroupBox14.Controls.Add(Me.CBILesbian)
-		Me.GroupBox14.Controls.Add(Me.BTNICaptions)
-		Me.GroupBox14.Controls.Add(Me.CBIBlowjob)
-		Me.GroupBox14.Controls.Add(Me.BTNIMaledom)
-		Me.GroupBox14.Controls.Add(Me.CBIFemdomSD)
-		Me.GroupBox14.Controls.Add(Me.CBIGay)
-		Me.GroupBox14.Controls.Add(Me.CBIHentaiSD)
-		Me.GroupBox14.Controls.Add(Me.BTNIGay)
-		Me.GroupBox14.Controls.Add(Me.CBISoftcore)
-		Me.GroupBox14.Controls.Add(Me.CBIHentai)
-		Me.GroupBox14.Controls.Add(Me.CBILezdom)
-		Me.GroupBox14.Controls.Add(Me.BTNIHentai)
-		Me.GroupBox14.Controls.Add(Me.CBIBlowjobSD)
-		Me.GroupBox14.Controls.Add(Me.LBLILezdom)
-		Me.GroupBox14.Controls.Add(Me.CBIGaySD)
-		Me.GroupBox14.Controls.Add(Me.BTNILezdom)
-		Me.GroupBox14.Controls.Add(Me.CBIFemdom)
-		Me.GroupBox14.Controls.Add(Me.BTNIFemdom)
-		Me.GroupBox14.Controls.Add(Me.CBILesbianSD)
-		Me.GroupBox14.Controls.Add(Me.LBLIBlowjob)
-		Me.GroupBox14.Controls.Add(Me.CBIMaledomSD)
-		Me.GroupBox14.Controls.Add(Me.BTNIBlowjob)
-		Me.GroupBox14.Controls.Add(Me.CBISoftcoreSD)
-		Me.GroupBox14.Controls.Add(Me.LBLILesbian)
-		Me.GroupBox14.Controls.Add(Me.CBICaptions)
-		Me.GroupBox14.Controls.Add(Me.BTNILesbian)
-		Me.GroupBox14.Controls.Add(Me.CBIHardcoreSD)
-		Me.GroupBox14.Controls.Add(Me.LBLISoftcore)
-		Me.GroupBox14.Controls.Add(Me.LBLIGeneral)
-		Me.GroupBox14.Controls.Add(Me.BTNISoftcore)
-		Me.GroupBox14.Controls.Add(Me.LBLICaptions)
-		Me.GroupBox14.Controls.Add(Me.LBLIGay)
-		Me.GroupBox14.Controls.Add(Me.CBIGeneral)
-		Me.GroupBox14.Controls.Add(Me.BTNIHardcore)
-		Me.GroupBox14.Controls.Add(Me.CBIGeneralSD)
-		Me.GroupBox14.Controls.Add(Me.LBLIHardcore)
-		Me.GroupBox14.Controls.Add(Me.LBLIMaledom)
-		Me.GroupBox14.Controls.Add(Me.CBICaptionsSD)
-		Me.GroupBox14.Controls.Add(Me.CBIHardcore)
-		Me.GroupBox14.Controls.Add(Me.CBIMaledom)
-		Me.GroupBox14.Location = New System.Drawing.Point(6, 8)
-		Me.GroupBox14.Name = "GroupBox14"
-		Me.GroupBox14.Size = New System.Drawing.Size(371, 400)
-		Me.GroupBox14.TabIndex = 155
-		Me.GroupBox14.TabStop = False
-		Me.GroupBox14.Text = "Local Images"
+		Me.GbxImagesGenre.Controls.Add(Me.CBIHardcore)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNIHardcore)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxIHardcore)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIHardcoreSD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBISoftcore)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNISoftcore)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxISoftcore)
+		Me.GbxImagesGenre.Controls.Add(Me.CBISoftcoreSD)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNILesbian)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxILesbian)
+		Me.GbxImagesGenre.Controls.Add(Me.CBILesbianSD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBILezdomSD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBILesbian)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIBlowjob)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNIBlowjob)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxIBlowjob)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIBlowjobSD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIFemdom)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNIFemdom)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxIFemdom)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIFemdomSD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBILezdom)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNILezdom)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxILezdom)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIHentai)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNIHentai)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxIHentai)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIHentaiSD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIGay)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNIGay)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxIGay)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIGaySD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIMaledom)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNIMaledom)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxIMaledom)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIMaledomSD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBICaptions)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNICaptions)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxICaptions)
+		Me.GbxImagesGenre.Controls.Add(Me.CBICaptionsSD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIGeneral)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNIGeneral)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxIGeneral)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIGeneralSD)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIBoobs)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNBoobPath)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxIBoobs)
+		Me.GbxImagesGenre.Controls.Add(Me.CBBoobSubDir)
+		Me.GbxImagesGenre.Controls.Add(Me.CBIButts)
+		Me.GbxImagesGenre.Controls.Add(Me.BTNButtPath)
+		Me.GbxImagesGenre.Controls.Add(Me.TbxIButts)
+		Me.GbxImagesGenre.Controls.Add(Me.CBButtSubDir)
+		Me.GbxImagesGenre.Location = New System.Drawing.Point(6, 8)
+		Me.GbxImagesGenre.Name = "GbxImagesGenre"
+		Me.GbxImagesGenre.Size = New System.Drawing.Size(371, 400)
+		Me.GbxImagesGenre.TabIndex = 0
+		Me.GbxImagesGenre.TabStop = False
+		Me.GbxImagesGenre.Text = "Local Images"
 		'
 		'CBIButts
 		'
 		Me.CBIButts.AutoSize = True
+		Me.CBIButts.Checked = Global.Tease_AI.My.MySettings.Default.CBIButts
+		Me.CBIButts.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIButts", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIButts.ForeColor = System.Drawing.Color.Black
 		Me.CBIButts.Location = New System.Drawing.Point(15, 371)
 		Me.CBIButts.Name = "CBIButts"
 		Me.CBIButts.Size = New System.Drawing.Size(50, 17)
-		Me.CBIButts.TabIndex = 182
+		Me.CBIButts.TabIndex = 48
 		Me.CBIButts.Text = "Butts"
 		Me.CBIButts.UseVisualStyleBackColor = True
 		'
 		'CBIBoobs
 		'
 		Me.CBIBoobs.AutoSize = True
+		Me.CBIBoobs.Checked = Global.Tease_AI.My.MySettings.Default.CBIBoobs
+		Me.CBIBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIBoobs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIBoobs.ForeColor = System.Drawing.Color.Black
 		Me.CBIBoobs.Location = New System.Drawing.Point(15, 342)
 		Me.CBIBoobs.Name = "CBIBoobs"
 		Me.CBIBoobs.Size = New System.Drawing.Size(56, 17)
-		Me.CBIBoobs.TabIndex = 181
+		Me.CBIBoobs.TabIndex = 44
 		Me.CBIBoobs.Text = "Boobs"
 		Me.CBIBoobs.UseVisualStyleBackColor = True
 		'
 		'CBButtSubDir
 		'
 		Me.CBButtSubDir.AutoSize = True
+		Me.CBButtSubDir.Checked = Global.Tease_AI.My.MySettings.Default.CBButtSubDir
+		Me.CBButtSubDir.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBButtSubDir.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBButtSubDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBButtSubDir.ForeColor = System.Drawing.Color.Black
 		Me.CBButtSubDir.Location = New System.Drawing.Point(347, 372)
 		Me.CBButtSubDir.Name = "CBButtSubDir"
 		Me.CBButtSubDir.Size = New System.Drawing.Size(15, 14)
-		Me.CBButtSubDir.TabIndex = 140
+		Me.CBButtSubDir.TabIndex = 51
 		Me.CBButtSubDir.UseVisualStyleBackColor = True
 		'
-		'LBLButtPath
+		'TbxIButts
 		'
-		Me.LBLButtPath.BackColor = System.Drawing.Color.Transparent
-		Me.LBLButtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLButtPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLButtPath.ForeColor = System.Drawing.Color.Black
-		Me.LBLButtPath.Location = New System.Drawing.Point(122, 370)
-		Me.LBLButtPath.Name = "LBLButtPath"
-		Me.LBLButtPath.Size = New System.Drawing.Size(217, 17)
-		Me.LBLButtPath.TabIndex = 135
-		Me.LBLButtPath.Text = "No path selected"
-		Me.LBLButtPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxIButts.BackColor = System.Drawing.Color.LightGray
+		Me.TbxIButts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxIButts.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LBLButtPath", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIButts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxIButts.ForeColor = System.Drawing.Color.Black
+		Me.TbxIButts.Location = New System.Drawing.Point(122, 370)
+		Me.TbxIButts.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxIButts.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxIButts.Name = "TbxIButts"
+		Me.TbxIButts.ReadOnly = True
+		Me.TbxIButts.Size = New System.Drawing.Size(217, 17)
+		Me.TbxIButts.TabIndex = 50
+		Me.TbxIButts.Text = Global.Tease_AI.My.MySettings.Default.LBLButtPath
 		'
 		'CBBoobSubDir
 		'
 		Me.CBBoobSubDir.AutoSize = True
+		Me.CBBoobSubDir.Checked = Global.Tease_AI.My.MySettings.Default.CBBoobSubDir
+		Me.CBBoobSubDir.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBBoobSubDir.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBBoobSubDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBBoobSubDir.ForeColor = System.Drawing.Color.Black
 		Me.CBBoobSubDir.Location = New System.Drawing.Point(347, 343)
 		Me.CBBoobSubDir.Name = "CBBoobSubDir"
 		Me.CBBoobSubDir.Size = New System.Drawing.Size(15, 14)
-		Me.CBBoobSubDir.TabIndex = 140
+		Me.CBBoobSubDir.TabIndex = 47
 		Me.CBBoobSubDir.UseVisualStyleBackColor = True
 		'
-		'LBLIFemdom
+		'TbxIFemdom
 		'
-		Me.LBLIFemdom.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIFemdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIFemdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLIFemdom.ForeColor = System.Drawing.Color.Black
-		Me.LBLIFemdom.Location = New System.Drawing.Point(122, 138)
-		Me.LBLIFemdom.Name = "LBLIFemdom"
-		Me.LBLIFemdom.Size = New System.Drawing.Size(217, 17)
-		Me.LBLIFemdom.TabIndex = 154
-		Me.LBLIFemdom.Text = "No path selected"
-		Me.LBLIFemdom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxIFemdom.BackColor = System.Drawing.Color.LightGray
+		Me.TbxIFemdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxIFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IFemdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIFemdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxIFemdom.ForeColor = System.Drawing.Color.Black
+		Me.TbxIFemdom.Location = New System.Drawing.Point(122, 138)
+		Me.TbxIFemdom.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxIFemdom.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxIFemdom.Name = "TbxIFemdom"
+		Me.TbxIFemdom.ReadOnly = True
+		Me.TbxIFemdom.Size = New System.Drawing.Size(217, 17)
+		Me.TbxIFemdom.TabIndex = 18
+		Me.TbxIFemdom.Text = Global.Tease_AI.My.MySettings.Default.IFemdom
 		'
 		'BTNButtPath
 		'
@@ -5276,22 +5423,25 @@ Partial Class FrmSettings
 		Me.BTNButtPath.Location = New System.Drawing.Point(82, 364)
 		Me.BTNButtPath.Name = "BTNButtPath"
 		Me.BTNButtPath.Size = New System.Drawing.Size(34, 28)
-		Me.BTNButtPath.TabIndex = 131
+		Me.BTNButtPath.TabIndex = 49
 		Me.BTNButtPath.Text = "1"
 		Me.BTNButtPath.UseVisualStyleBackColor = False
 		'
-		'LBLBoobPath
+		'TbxIBoobs
 		'
-		Me.LBLBoobPath.BackColor = System.Drawing.Color.Transparent
-		Me.LBLBoobPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLBoobPath.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLBoobPath.ForeColor = System.Drawing.Color.Black
-		Me.LBLBoobPath.Location = New System.Drawing.Point(122, 341)
-		Me.LBLBoobPath.Name = "LBLBoobPath"
-		Me.LBLBoobPath.Size = New System.Drawing.Size(217, 17)
-		Me.LBLBoobPath.TabIndex = 135
-		Me.LBLBoobPath.Text = "No path selected"
-		Me.LBLBoobPath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxIBoobs.BackColor = System.Drawing.Color.LightGray
+		Me.TbxIBoobs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxIBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LBLBoobPath", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIBoobs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxIBoobs.ForeColor = System.Drawing.Color.Black
+		Me.TbxIBoobs.Location = New System.Drawing.Point(122, 341)
+		Me.TbxIBoobs.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxIBoobs.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxIBoobs.Name = "TbxIBoobs"
+		Me.TbxIBoobs.ReadOnly = True
+		Me.TbxIBoobs.Size = New System.Drawing.Size(217, 17)
+		Me.TbxIBoobs.TabIndex = 46
+		Me.TbxIBoobs.Text = Global.Tease_AI.My.MySettings.Default.LBLBoobPath
 		'
 		'BTNIGeneral
 		'
@@ -5301,20 +5451,21 @@ Partial Class FrmSettings
 		Me.BTNIGeneral.Location = New System.Drawing.Point(82, 306)
 		Me.BTNIGeneral.Name = "BTNIGeneral"
 		Me.BTNIGeneral.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIGeneral.TabIndex = 166
+		Me.BTNIGeneral.TabIndex = 41
 		Me.BTNIGeneral.Text = "1"
 		Me.BTNIGeneral.UseVisualStyleBackColor = False
 		'
 		'CBILezdomSD
 		'
 		Me.CBILezdomSD.AutoSize = True
-		Me.CBILezdomSD.Checked = True
+		Me.CBILezdomSD.Checked = Global.Tease_AI.My.MySettings.Default.ILezdomSD
 		Me.CBILezdomSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBILezdomSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ILezdomSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBILezdomSD.ForeColor = System.Drawing.Color.Black
 		Me.CBILezdomSD.Location = New System.Drawing.Point(347, 169)
 		Me.CBILezdomSD.Name = "CBILezdomSD"
 		Me.CBILezdomSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBILezdomSD.TabIndex = 172
+		Me.CBILezdomSD.TabIndex = 23
 		Me.CBILezdomSD.UseVisualStyleBackColor = True
 		'
 		'BTNBoobPath
@@ -5325,31 +5476,36 @@ Partial Class FrmSettings
 		Me.BTNBoobPath.Location = New System.Drawing.Point(82, 335)
 		Me.BTNBoobPath.Name = "BTNBoobPath"
 		Me.BTNBoobPath.Size = New System.Drawing.Size(34, 28)
-		Me.BTNBoobPath.TabIndex = 131
+		Me.BTNBoobPath.TabIndex = 45
 		Me.BTNBoobPath.Text = "1"
 		Me.BTNBoobPath.UseVisualStyleBackColor = False
 		'
-		'LBLIHentai
+		'TbxIHentai
 		'
-		Me.LBLIHentai.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIHentai.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIHentai.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLIHentai.ForeColor = System.Drawing.Color.Black
-		Me.LBLIHentai.Location = New System.Drawing.Point(122, 196)
-		Me.LBLIHentai.Name = "LBLIHentai"
-		Me.LBLIHentai.Size = New System.Drawing.Size(217, 17)
-		Me.LBLIHentai.TabIndex = 162
-		Me.LBLIHentai.Text = "No path selected"
-		Me.LBLIHentai.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxIHentai.BackColor = System.Drawing.Color.LightGray
+		Me.TbxIHentai.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxIHentai.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IHentai", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIHentai.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxIHentai.ForeColor = System.Drawing.Color.Black
+		Me.TbxIHentai.Location = New System.Drawing.Point(122, 196)
+		Me.TbxIHentai.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxIHentai.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxIHentai.Name = "TbxIHentai"
+		Me.TbxIHentai.ReadOnly = True
+		Me.TbxIHentai.Size = New System.Drawing.Size(217, 17)
+		Me.TbxIHentai.TabIndex = 26
+		Me.TbxIHentai.Text = Global.Tease_AI.My.MySettings.Default.IHentai
 		'
 		'CBILesbian
 		'
 		Me.CBILesbian.AutoSize = True
+		Me.CBILesbian.Checked = Global.Tease_AI.My.MySettings.Default.CBILesbian
+		Me.CBILesbian.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBILesbian", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBILesbian.ForeColor = System.Drawing.Color.Black
 		Me.CBILesbian.Location = New System.Drawing.Point(15, 81)
 		Me.CBILesbian.Name = "CBILesbian"
 		Me.CBILesbian.Size = New System.Drawing.Size(63, 17)
-		Me.CBILesbian.TabIndex = 140
+		Me.CBILesbian.TabIndex = 8
 		Me.CBILesbian.Text = "Lesbian"
 		Me.CBILesbian.UseVisualStyleBackColor = True
 		'
@@ -5361,18 +5517,20 @@ Partial Class FrmSettings
 		Me.BTNICaptions.Location = New System.Drawing.Point(82, 277)
 		Me.BTNICaptions.Name = "BTNICaptions"
 		Me.BTNICaptions.Size = New System.Drawing.Size(34, 28)
-		Me.BTNICaptions.TabIndex = 178
+		Me.BTNICaptions.TabIndex = 37
 		Me.BTNICaptions.Text = "1"
 		Me.BTNICaptions.UseVisualStyleBackColor = False
 		'
 		'CBIBlowjob
 		'
 		Me.CBIBlowjob.AutoSize = True
+		Me.CBIBlowjob.Checked = Global.Tease_AI.My.MySettings.Default.CBIBlowjob
+		Me.CBIBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIBlowjob", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.CBIBlowjob.Location = New System.Drawing.Point(15, 110)
 		Me.CBIBlowjob.Name = "CBIBlowjob"
 		Me.CBIBlowjob.Size = New System.Drawing.Size(63, 17)
-		Me.CBIBlowjob.TabIndex = 141
+		Me.CBIBlowjob.TabIndex = 12
 		Me.CBIBlowjob.Text = "Blowjob"
 		Me.CBIBlowjob.UseVisualStyleBackColor = True
 		'
@@ -5384,43 +5542,47 @@ Partial Class FrmSettings
 		Me.BTNIMaledom.Location = New System.Drawing.Point(82, 248)
 		Me.BTNIMaledom.Name = "BTNIMaledom"
 		Me.BTNIMaledom.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIMaledom.TabIndex = 161
+		Me.BTNIMaledom.TabIndex = 33
 		Me.BTNIMaledom.Text = "1"
 		Me.BTNIMaledom.UseVisualStyleBackColor = False
 		'
 		'CBIFemdomSD
 		'
 		Me.CBIFemdomSD.AutoSize = True
-		Me.CBIFemdomSD.Checked = True
+		Me.CBIFemdomSD.Checked = Global.Tease_AI.My.MySettings.Default.IFemdomSD
 		Me.CBIFemdomSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIFemdomSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IFemdomSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIFemdomSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIFemdomSD.Location = New System.Drawing.Point(347, 140)
 		Me.CBIFemdomSD.Name = "CBIFemdomSD"
 		Me.CBIFemdomSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIFemdomSD.TabIndex = 171
+		Me.CBIFemdomSD.TabIndex = 19
 		Me.CBIFemdomSD.UseVisualStyleBackColor = True
 		'
 		'CBIGay
 		'
 		Me.CBIGay.AutoSize = True
+		Me.CBIGay.Checked = Global.Tease_AI.My.MySettings.Default.CBIGay
+		Me.CBIGay.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIGay", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIGay.ForeColor = System.Drawing.Color.Black
 		Me.CBIGay.Location = New System.Drawing.Point(15, 226)
 		Me.CBIGay.Name = "CBIGay"
 		Me.CBIGay.Size = New System.Drawing.Size(45, 17)
-		Me.CBIGay.TabIndex = 157
+		Me.CBIGay.TabIndex = 28
 		Me.CBIGay.Text = "Gay"
 		Me.CBIGay.UseVisualStyleBackColor = True
 		'
 		'CBIHentaiSD
 		'
 		Me.CBIHentaiSD.AutoSize = True
-		Me.CBIHentaiSD.Checked = True
+		Me.CBIHentaiSD.Checked = Global.Tease_AI.My.MySettings.Default.IHentaiSD
 		Me.CBIHentaiSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIHentaiSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IHentaiSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIHentaiSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIHentaiSD.Location = New System.Drawing.Point(347, 199)
 		Me.CBIHentaiSD.Name = "CBIHentaiSD"
 		Me.CBIHentaiSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIHentaiSD.TabIndex = 173
+		Me.CBIHentaiSD.TabIndex = 27
 		Me.CBIHentaiSD.UseVisualStyleBackColor = True
 		'
 		'BTNIGay
@@ -5431,40 +5593,46 @@ Partial Class FrmSettings
 		Me.BTNIGay.Location = New System.Drawing.Point(82, 219)
 		Me.BTNIGay.Name = "BTNIGay"
 		Me.BTNIGay.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIGay.TabIndex = 160
+		Me.BTNIGay.TabIndex = 29
 		Me.BTNIGay.Text = "1"
 		Me.BTNIGay.UseVisualStyleBackColor = False
 		'
 		'CBISoftcore
 		'
 		Me.CBISoftcore.AutoSize = True
+		Me.CBISoftcore.Checked = Global.Tease_AI.My.MySettings.Default.CBISoftcore
+		Me.CBISoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBISoftcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBISoftcore.ForeColor = System.Drawing.Color.Black
 		Me.CBISoftcore.Location = New System.Drawing.Point(15, 52)
 		Me.CBISoftcore.Name = "CBISoftcore"
 		Me.CBISoftcore.Size = New System.Drawing.Size(66, 17)
-		Me.CBISoftcore.TabIndex = 139
+		Me.CBISoftcore.TabIndex = 4
 		Me.CBISoftcore.Text = "Softcore"
 		Me.CBISoftcore.UseVisualStyleBackColor = True
 		'
 		'CBIHentai
 		'
 		Me.CBIHentai.AutoSize = True
+		Me.CBIHentai.Checked = Global.Tease_AI.My.MySettings.Default.CBIHentai
+		Me.CBIHentai.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIHentai", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIHentai.ForeColor = System.Drawing.Color.Black
 		Me.CBIHentai.Location = New System.Drawing.Point(15, 197)
 		Me.CBIHentai.Name = "CBIHentai"
 		Me.CBIHentai.Size = New System.Drawing.Size(57, 17)
-		Me.CBIHentai.TabIndex = 156
+		Me.CBIHentai.TabIndex = 24
 		Me.CBIHentai.Text = "Hentai"
 		Me.CBIHentai.UseVisualStyleBackColor = True
 		'
 		'CBILezdom
 		'
 		Me.CBILezdom.AutoSize = True
+		Me.CBILezdom.Checked = Global.Tease_AI.My.MySettings.Default.CBILezdom
+		Me.CBILezdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBILezdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBILezdom.ForeColor = System.Drawing.Color.Black
 		Me.CBILezdom.Location = New System.Drawing.Point(15, 168)
 		Me.CBILezdom.Name = "CBILezdom"
 		Me.CBILezdom.Size = New System.Drawing.Size(63, 17)
-		Me.CBILezdom.TabIndex = 143
+		Me.CBILezdom.TabIndex = 20
 		Me.CBILezdom.Text = "Lezdom"
 		Me.CBILezdom.UseVisualStyleBackColor = True
 		'
@@ -5476,45 +5644,50 @@ Partial Class FrmSettings
 		Me.BTNIHentai.Location = New System.Drawing.Point(82, 190)
 		Me.BTNIHentai.Name = "BTNIHentai"
 		Me.BTNIHentai.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIHentai.TabIndex = 159
+		Me.BTNIHentai.TabIndex = 25
 		Me.BTNIHentai.Text = "1"
 		Me.BTNIHentai.UseVisualStyleBackColor = False
 		'
 		'CBIBlowjobSD
 		'
 		Me.CBIBlowjobSD.AutoSize = True
-		Me.CBIBlowjobSD.Checked = True
+		Me.CBIBlowjobSD.Checked = Global.Tease_AI.My.MySettings.Default.IBlowjobSD
 		Me.CBIBlowjobSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIBlowjobSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IBlowjobSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIBlowjobSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIBlowjobSD.Location = New System.Drawing.Point(347, 111)
 		Me.CBIBlowjobSD.Name = "CBIBlowjobSD"
 		Me.CBIBlowjobSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIBlowjobSD.TabIndex = 170
+		Me.CBIBlowjobSD.TabIndex = 15
 		Me.CBIBlowjobSD.UseVisualStyleBackColor = True
 		'
-		'LBLILezdom
+		'TbxILezdom
 		'
-		Me.LBLILezdom.BackColor = System.Drawing.Color.Transparent
-		Me.LBLILezdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLILezdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLILezdom.ForeColor = System.Drawing.Color.Black
-		Me.LBLILezdom.Location = New System.Drawing.Point(122, 167)
-		Me.LBLILezdom.Name = "LBLILezdom"
-		Me.LBLILezdom.Size = New System.Drawing.Size(217, 17)
-		Me.LBLILezdom.TabIndex = 155
-		Me.LBLILezdom.Text = "No path selected"
-		Me.LBLILezdom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxILezdom.BackColor = System.Drawing.Color.LightGray
+		Me.TbxILezdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxILezdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ILezdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxILezdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxILezdom.ForeColor = System.Drawing.Color.Black
+		Me.TbxILezdom.Location = New System.Drawing.Point(122, 167)
+		Me.TbxILezdom.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxILezdom.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxILezdom.Name = "TbxILezdom"
+		Me.TbxILezdom.ReadOnly = True
+		Me.TbxILezdom.Size = New System.Drawing.Size(217, 17)
+		Me.TbxILezdom.TabIndex = 22
+		Me.TbxILezdom.Text = Global.Tease_AI.My.MySettings.Default.ILezdom
 		'
 		'CBIGaySD
 		'
 		Me.CBIGaySD.AutoSize = True
-		Me.CBIGaySD.Checked = True
+		Me.CBIGaySD.Checked = Global.Tease_AI.My.MySettings.Default.IGaySD
 		Me.CBIGaySD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIGaySD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IGaySD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIGaySD.ForeColor = System.Drawing.Color.Black
 		Me.CBIGaySD.Location = New System.Drawing.Point(347, 227)
 		Me.CBIGaySD.Name = "CBIGaySD"
 		Me.CBIGaySD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIGaySD.TabIndex = 174
+		Me.CBIGaySD.TabIndex = 31
 		Me.CBIGaySD.UseVisualStyleBackColor = True
 		'
 		'BTNILezdom
@@ -5525,18 +5698,20 @@ Partial Class FrmSettings
 		Me.BTNILezdom.Location = New System.Drawing.Point(82, 161)
 		Me.BTNILezdom.Name = "BTNILezdom"
 		Me.BTNILezdom.Size = New System.Drawing.Size(34, 28)
-		Me.BTNILezdom.TabIndex = 149
+		Me.BTNILezdom.TabIndex = 21
 		Me.BTNILezdom.Text = "1"
 		Me.BTNILezdom.UseVisualStyleBackColor = False
 		'
 		'CBIFemdom
 		'
 		Me.CBIFemdom.AutoSize = True
+		Me.CBIFemdom.Checked = Global.Tease_AI.My.MySettings.Default.CBIFemdom
+		Me.CBIFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIFemdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIFemdom.ForeColor = System.Drawing.Color.Black
 		Me.CBIFemdom.Location = New System.Drawing.Point(15, 139)
 		Me.CBIFemdom.Name = "CBIFemdom"
 		Me.CBIFemdom.Size = New System.Drawing.Size(66, 17)
-		Me.CBIFemdom.TabIndex = 142
+		Me.CBIFemdom.TabIndex = 16
 		Me.CBIFemdom.Text = "Femdom"
 		Me.CBIFemdom.UseVisualStyleBackColor = True
 		'
@@ -5548,45 +5723,50 @@ Partial Class FrmSettings
 		Me.BTNIFemdom.Location = New System.Drawing.Point(82, 132)
 		Me.BTNIFemdom.Name = "BTNIFemdom"
 		Me.BTNIFemdom.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIFemdom.TabIndex = 148
+		Me.BTNIFemdom.TabIndex = 17
 		Me.BTNIFemdom.Text = "1"
 		Me.BTNIFemdom.UseVisualStyleBackColor = False
 		'
 		'CBILesbianSD
 		'
 		Me.CBILesbianSD.AutoSize = True
-		Me.CBILesbianSD.Checked = True
+		Me.CBILesbianSD.Checked = Global.Tease_AI.My.MySettings.Default.ILesbianSD
 		Me.CBILesbianSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBILesbianSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ILesbianSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBILesbianSD.ForeColor = System.Drawing.Color.Black
 		Me.CBILesbianSD.Location = New System.Drawing.Point(347, 82)
 		Me.CBILesbianSD.Name = "CBILesbianSD"
 		Me.CBILesbianSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBILesbianSD.TabIndex = 169
+		Me.CBILesbianSD.TabIndex = 11
 		Me.CBILesbianSD.UseVisualStyleBackColor = True
 		'
-		'LBLIBlowjob
+		'TbxIBlowjob
 		'
-		Me.LBLIBlowjob.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIBlowjob.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIBlowjob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLIBlowjob.ForeColor = System.Drawing.Color.Black
-		Me.LBLIBlowjob.Location = New System.Drawing.Point(122, 109)
-		Me.LBLIBlowjob.Name = "LBLIBlowjob"
-		Me.LBLIBlowjob.Size = New System.Drawing.Size(217, 17)
-		Me.LBLIBlowjob.TabIndex = 153
-		Me.LBLIBlowjob.Text = "No path selected"
-		Me.LBLIBlowjob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxIBlowjob.BackColor = System.Drawing.Color.LightGray
+		Me.TbxIBlowjob.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxIBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IBlowjob", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIBlowjob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxIBlowjob.ForeColor = System.Drawing.Color.Black
+		Me.TbxIBlowjob.Location = New System.Drawing.Point(122, 109)
+		Me.TbxIBlowjob.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxIBlowjob.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxIBlowjob.Name = "TbxIBlowjob"
+		Me.TbxIBlowjob.ReadOnly = True
+		Me.TbxIBlowjob.Size = New System.Drawing.Size(217, 17)
+		Me.TbxIBlowjob.TabIndex = 14
+		Me.TbxIBlowjob.Text = Global.Tease_AI.My.MySettings.Default.IBlowjob
 		'
 		'CBIMaledomSD
 		'
 		Me.CBIMaledomSD.AutoSize = True
-		Me.CBIMaledomSD.Checked = True
+		Me.CBIMaledomSD.Checked = Global.Tease_AI.My.MySettings.Default.IMaledomSD
 		Me.CBIMaledomSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIMaledomSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IMaledomSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIMaledomSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIMaledomSD.Location = New System.Drawing.Point(347, 256)
 		Me.CBIMaledomSD.Name = "CBIMaledomSD"
 		Me.CBIMaledomSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIMaledomSD.TabIndex = 175
+		Me.CBIMaledomSD.TabIndex = 35
 		Me.CBIMaledomSD.UseVisualStyleBackColor = True
 		'
 		'BTNIBlowjob
@@ -5597,43 +5777,49 @@ Partial Class FrmSettings
 		Me.BTNIBlowjob.Location = New System.Drawing.Point(82, 103)
 		Me.BTNIBlowjob.Name = "BTNIBlowjob"
 		Me.BTNIBlowjob.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIBlowjob.TabIndex = 147
+		Me.BTNIBlowjob.TabIndex = 13
 		Me.BTNIBlowjob.Text = "1"
 		Me.BTNIBlowjob.UseVisualStyleBackColor = False
 		'
 		'CBISoftcoreSD
 		'
 		Me.CBISoftcoreSD.AutoSize = True
-		Me.CBISoftcoreSD.Checked = True
+		Me.CBISoftcoreSD.Checked = Global.Tease_AI.My.MySettings.Default.ISoftcoreSD
 		Me.CBISoftcoreSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBISoftcoreSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ISoftcoreSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBISoftcoreSD.ForeColor = System.Drawing.Color.Black
 		Me.CBISoftcoreSD.Location = New System.Drawing.Point(347, 53)
 		Me.CBISoftcoreSD.Name = "CBISoftcoreSD"
 		Me.CBISoftcoreSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBISoftcoreSD.TabIndex = 168
+		Me.CBISoftcoreSD.TabIndex = 7
 		Me.CBISoftcoreSD.UseVisualStyleBackColor = True
 		'
-		'LBLILesbian
+		'TbxILesbian
 		'
-		Me.LBLILesbian.BackColor = System.Drawing.Color.Transparent
-		Me.LBLILesbian.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLILesbian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLILesbian.ForeColor = System.Drawing.Color.Black
-		Me.LBLILesbian.Location = New System.Drawing.Point(122, 80)
-		Me.LBLILesbian.Name = "LBLILesbian"
-		Me.LBLILesbian.Size = New System.Drawing.Size(217, 17)
-		Me.LBLILesbian.TabIndex = 152
-		Me.LBLILesbian.Text = "No path selected"
-		Me.LBLILesbian.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxILesbian.BackColor = System.Drawing.Color.LightGray
+		Me.TbxILesbian.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxILesbian.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ILesbian", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxILesbian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxILesbian.ForeColor = System.Drawing.Color.Black
+		Me.TbxILesbian.Location = New System.Drawing.Point(122, 80)
+		Me.TbxILesbian.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxILesbian.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxILesbian.Name = "TbxILesbian"
+		Me.TbxILesbian.ReadOnly = True
+		Me.TbxILesbian.Size = New System.Drawing.Size(217, 17)
+		Me.TbxILesbian.TabIndex = 10
+		Me.TbxILesbian.Text = Global.Tease_AI.My.MySettings.Default.ILesbian
 		'
 		'CBICaptions
 		'
 		Me.CBICaptions.AutoSize = True
+		Me.CBICaptions.Checked = Global.Tease_AI.My.MySettings.Default.CBICaptions
+		Me.CBICaptions.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBICaptions", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBICaptions.ForeColor = System.Drawing.Color.Black
 		Me.CBICaptions.Location = New System.Drawing.Point(15, 284)
 		Me.CBICaptions.Name = "CBICaptions"
 		Me.CBICaptions.Size = New System.Drawing.Size(67, 17)
-		Me.CBICaptions.TabIndex = 177
+		Me.CBICaptions.TabIndex = 36
 		Me.CBICaptions.Text = "Captions"
 		Me.CBICaptions.UseVisualStyleBackColor = True
 		'
@@ -5645,47 +5831,54 @@ Partial Class FrmSettings
 		Me.BTNILesbian.Location = New System.Drawing.Point(82, 74)
 		Me.BTNILesbian.Name = "BTNILesbian"
 		Me.BTNILesbian.Size = New System.Drawing.Size(34, 28)
-		Me.BTNILesbian.TabIndex = 146
+		Me.BTNILesbian.TabIndex = 9
 		Me.BTNILesbian.Text = "1"
 		Me.BTNILesbian.UseVisualStyleBackColor = False
 		'
 		'CBIHardcoreSD
 		'
 		Me.CBIHardcoreSD.AutoSize = True
-		Me.CBIHardcoreSD.Checked = True
+		Me.CBIHardcoreSD.Checked = Global.Tease_AI.My.MySettings.Default.IHardcoreSD
 		Me.CBIHardcoreSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIHardcoreSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IHardcoreSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIHardcoreSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIHardcoreSD.Location = New System.Drawing.Point(347, 25)
 		Me.CBIHardcoreSD.Name = "CBIHardcoreSD"
 		Me.CBIHardcoreSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIHardcoreSD.TabIndex = 141
+		Me.CBIHardcoreSD.TabIndex = 3
 		Me.CBIHardcoreSD.UseVisualStyleBackColor = True
 		'
-		'LBLISoftcore
+		'TbxISoftcore
 		'
-		Me.LBLISoftcore.BackColor = System.Drawing.Color.Transparent
-		Me.LBLISoftcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLISoftcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLISoftcore.ForeColor = System.Drawing.Color.Black
-		Me.LBLISoftcore.Location = New System.Drawing.Point(122, 51)
-		Me.LBLISoftcore.Name = "LBLISoftcore"
-		Me.LBLISoftcore.Size = New System.Drawing.Size(217, 17)
-		Me.LBLISoftcore.TabIndex = 151
-		Me.LBLISoftcore.Text = "No path selected"
-		Me.LBLISoftcore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxISoftcore.BackColor = System.Drawing.Color.LightGray
+		Me.TbxISoftcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxISoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ISoftcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxISoftcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxISoftcore.ForeColor = System.Drawing.Color.Black
+		Me.TbxISoftcore.Location = New System.Drawing.Point(122, 51)
+		Me.TbxISoftcore.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxISoftcore.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxISoftcore.Name = "TbxISoftcore"
+		Me.TbxISoftcore.ReadOnly = True
+		Me.TbxISoftcore.Size = New System.Drawing.Size(217, 17)
+		Me.TbxISoftcore.TabIndex = 6
+		Me.TbxISoftcore.Text = Global.Tease_AI.My.MySettings.Default.ISoftcore
 		'
-		'LBLIGeneral
+		'TbxIGeneral
 		'
-		Me.LBLIGeneral.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIGeneral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLIGeneral.ForeColor = System.Drawing.Color.Black
-		Me.LBLIGeneral.Location = New System.Drawing.Point(122, 312)
-		Me.LBLIGeneral.Name = "LBLIGeneral"
-		Me.LBLIGeneral.Size = New System.Drawing.Size(217, 17)
-		Me.LBLIGeneral.TabIndex = 167
-		Me.LBLIGeneral.Text = "No path selected"
-		Me.LBLIGeneral.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxIGeneral.BackColor = System.Drawing.Color.LightGray
+		Me.TbxIGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxIGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IGeneral", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIGeneral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxIGeneral.ForeColor = System.Drawing.Color.Black
+		Me.TbxIGeneral.Location = New System.Drawing.Point(122, 312)
+		Me.TbxIGeneral.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxIGeneral.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxIGeneral.Name = "TbxIGeneral"
+		Me.TbxIGeneral.ReadOnly = True
+		Me.TbxIGeneral.Size = New System.Drawing.Size(217, 17)
+		Me.TbxIGeneral.TabIndex = 42
+		Me.TbxIGeneral.Text = Global.Tease_AI.My.MySettings.Default.IGeneral
 		'
 		'BTNISoftcore
 		'
@@ -5695,44 +5888,52 @@ Partial Class FrmSettings
 		Me.BTNISoftcore.Location = New System.Drawing.Point(82, 45)
 		Me.BTNISoftcore.Name = "BTNISoftcore"
 		Me.BTNISoftcore.Size = New System.Drawing.Size(34, 28)
-		Me.BTNISoftcore.TabIndex = 145
+		Me.BTNISoftcore.TabIndex = 5
 		Me.BTNISoftcore.Text = "1"
 		Me.BTNISoftcore.UseVisualStyleBackColor = False
 		'
-		'LBLICaptions
+		'TbxICaptions
 		'
-		Me.LBLICaptions.BackColor = System.Drawing.Color.Transparent
-		Me.LBLICaptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLICaptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLICaptions.ForeColor = System.Drawing.Color.Black
-		Me.LBLICaptions.Location = New System.Drawing.Point(122, 283)
-		Me.LBLICaptions.Name = "LBLICaptions"
-		Me.LBLICaptions.Size = New System.Drawing.Size(217, 17)
-		Me.LBLICaptions.TabIndex = 179
-		Me.LBLICaptions.Text = "No path selected"
-		Me.LBLICaptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxICaptions.BackColor = System.Drawing.Color.LightGray
+		Me.TbxICaptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxICaptions.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ICaptions", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxICaptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxICaptions.ForeColor = System.Drawing.Color.Black
+		Me.TbxICaptions.Location = New System.Drawing.Point(122, 283)
+		Me.TbxICaptions.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxICaptions.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxICaptions.Name = "TbxICaptions"
+		Me.TbxICaptions.ReadOnly = True
+		Me.TbxICaptions.Size = New System.Drawing.Size(217, 17)
+		Me.TbxICaptions.TabIndex = 38
+		Me.TbxICaptions.Text = Global.Tease_AI.My.MySettings.Default.ICaptions
 		'
-		'LBLIGay
+		'TbxIGay
 		'
-		Me.LBLIGay.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIGay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIGay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLIGay.ForeColor = System.Drawing.Color.Black
-		Me.LBLIGay.Location = New System.Drawing.Point(122, 225)
-		Me.LBLIGay.Name = "LBLIGay"
-		Me.LBLIGay.Size = New System.Drawing.Size(217, 17)
-		Me.LBLIGay.TabIndex = 163
-		Me.LBLIGay.Text = "No path selected"
-		Me.LBLIGay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxIGay.BackColor = System.Drawing.Color.LightGray
+		Me.TbxIGay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxIGay.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IGay", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIGay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxIGay.ForeColor = System.Drawing.Color.Black
+		Me.TbxIGay.Location = New System.Drawing.Point(122, 225)
+		Me.TbxIGay.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxIGay.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxIGay.Name = "TbxIGay"
+		Me.TbxIGay.ReadOnly = True
+		Me.TbxIGay.Size = New System.Drawing.Size(217, 17)
+		Me.TbxIGay.TabIndex = 30
+		Me.TbxIGay.Text = Global.Tease_AI.My.MySettings.Default.IGay
 		'
 		'CBIGeneral
 		'
 		Me.CBIGeneral.AutoSize = True
+		Me.CBIGeneral.Checked = Global.Tease_AI.My.MySettings.Default.CBIGeneral
+		Me.CBIGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIGeneral", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIGeneral.ForeColor = System.Drawing.Color.Black
 		Me.CBIGeneral.Location = New System.Drawing.Point(15, 313)
 		Me.CBIGeneral.Name = "CBIGeneral"
 		Me.CBIGeneral.Size = New System.Drawing.Size(63, 17)
-		Me.CBIGeneral.TabIndex = 165
+		Me.CBIGeneral.TabIndex = 40
 		Me.CBIGeneral.Text = "General"
 		Me.CBIGeneral.UseVisualStyleBackColor = True
 		'
@@ -5744,79 +5945,91 @@ Partial Class FrmSettings
 		Me.BTNIHardcore.Location = New System.Drawing.Point(82, 16)
 		Me.BTNIHardcore.Name = "BTNIHardcore"
 		Me.BTNIHardcore.Size = New System.Drawing.Size(34, 28)
-		Me.BTNIHardcore.TabIndex = 144
+		Me.BTNIHardcore.TabIndex = 1
 		Me.BTNIHardcore.Text = "1"
 		Me.BTNIHardcore.UseVisualStyleBackColor = False
 		'
 		'CBIGeneralSD
 		'
 		Me.CBIGeneralSD.AutoSize = True
-		Me.CBIGeneralSD.Checked = True
+		Me.CBIGeneralSD.Checked = Global.Tease_AI.My.MySettings.Default.IGeneralSD
 		Me.CBIGeneralSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBIGeneralSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IGeneralSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIGeneralSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIGeneralSD.Location = New System.Drawing.Point(347, 314)
 		Me.CBIGeneralSD.Name = "CBIGeneralSD"
 		Me.CBIGeneralSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBIGeneralSD.TabIndex = 176
+		Me.CBIGeneralSD.TabIndex = 43
 		Me.CBIGeneralSD.UseVisualStyleBackColor = True
 		'
-		'LBLIHardcore
+		'TbxIHardcore
 		'
-		Me.LBLIHardcore.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIHardcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIHardcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLIHardcore.ForeColor = System.Drawing.Color.Black
-		Me.LBLIHardcore.Location = New System.Drawing.Point(122, 23)
-		Me.LBLIHardcore.Name = "LBLIHardcore"
-		Me.LBLIHardcore.Size = New System.Drawing.Size(217, 17)
-		Me.LBLIHardcore.TabIndex = 150
-		Me.LBLIHardcore.Text = "No path selected"
-		Me.LBLIHardcore.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxIHardcore.BackColor = System.Drawing.Color.LightGray
+		Me.TbxIHardcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxIHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IHardcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIHardcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxIHardcore.ForeColor = System.Drawing.Color.Black
+		Me.TbxIHardcore.Location = New System.Drawing.Point(122, 23)
+		Me.TbxIHardcore.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxIHardcore.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxIHardcore.Name = "TbxIHardcore"
+		Me.TbxIHardcore.ReadOnly = True
+		Me.TbxIHardcore.Size = New System.Drawing.Size(217, 17)
+		Me.TbxIHardcore.TabIndex = 2
+		Me.TbxIHardcore.Text = Global.Tease_AI.My.MySettings.Default.IHardcore
 		'
-		'LBLIMaledom
+		'TbxIMaledom
 		'
-		Me.LBLIMaledom.BackColor = System.Drawing.Color.Transparent
-		Me.LBLIMaledom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLIMaledom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLIMaledom.ForeColor = System.Drawing.Color.Black
-		Me.LBLIMaledom.Location = New System.Drawing.Point(122, 254)
-		Me.LBLIMaledom.Name = "LBLIMaledom"
-		Me.LBLIMaledom.Size = New System.Drawing.Size(217, 17)
-		Me.LBLIMaledom.TabIndex = 164
-		Me.LBLIMaledom.Text = "No path selected"
-		Me.LBLIMaledom.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxIMaledom.BackColor = System.Drawing.Color.LightGray
+		Me.TbxIMaledom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxIMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IMaledom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIMaledom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxIMaledom.ForeColor = System.Drawing.Color.Black
+		Me.TbxIMaledom.Location = New System.Drawing.Point(122, 254)
+		Me.TbxIMaledom.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxIMaledom.MinimumSize = New System.Drawing.Size(217, 17)
+		Me.TbxIMaledom.Name = "TbxIMaledom"
+		Me.TbxIMaledom.ReadOnly = True
+		Me.TbxIMaledom.Size = New System.Drawing.Size(217, 17)
+		Me.TbxIMaledom.TabIndex = 34
+		Me.TbxIMaledom.Text = Global.Tease_AI.My.MySettings.Default.IMaledom
 		'
 		'CBICaptionsSD
 		'
 		Me.CBICaptionsSD.AutoSize = True
-		Me.CBICaptionsSD.Checked = True
+		Me.CBICaptionsSD.Checked = Global.Tease_AI.My.MySettings.Default.ICaptionsSD
 		Me.CBICaptionsSD.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBICaptionsSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ICaptionsSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBICaptionsSD.ForeColor = System.Drawing.Color.Black
 		Me.CBICaptionsSD.Location = New System.Drawing.Point(347, 285)
 		Me.CBICaptionsSD.Name = "CBICaptionsSD"
 		Me.CBICaptionsSD.Size = New System.Drawing.Size(15, 14)
-		Me.CBICaptionsSD.TabIndex = 180
+		Me.CBICaptionsSD.TabIndex = 39
 		Me.CBICaptionsSD.UseVisualStyleBackColor = True
 		'
 		'CBIHardcore
 		'
 		Me.CBIHardcore.AutoSize = True
+		Me.CBIHardcore.Checked = Global.Tease_AI.My.MySettings.Default.CBIHardcore
+		Me.CBIHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIHardcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIHardcore.ForeColor = System.Drawing.Color.Black
 		Me.CBIHardcore.Location = New System.Drawing.Point(15, 23)
 		Me.CBIHardcore.Name = "CBIHardcore"
 		Me.CBIHardcore.Size = New System.Drawing.Size(70, 17)
-		Me.CBIHardcore.TabIndex = 138
+		Me.CBIHardcore.TabIndex = 0
 		Me.CBIHardcore.Text = "Hardcore"
 		Me.CBIHardcore.UseVisualStyleBackColor = True
 		'
 		'CBIMaledom
 		'
 		Me.CBIMaledom.AutoSize = True
+		Me.CBIMaledom.Checked = Global.Tease_AI.My.MySettings.Default.CBIMaledom
+		Me.CBIMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIMaledom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIMaledom.ForeColor = System.Drawing.Color.Black
 		Me.CBIMaledom.Location = New System.Drawing.Point(15, 255)
 		Me.CBIMaledom.Name = "CBIMaledom"
 		Me.CBIMaledom.Size = New System.Drawing.Size(69, 17)
-		Me.CBIMaledom.TabIndex = 158
+		Me.CBIMaledom.TabIndex = 32
 		Me.CBIMaledom.Text = "Maledom"
 		Me.CBIMaledom.UseVisualStyleBackColor = True
 		'
@@ -6292,6 +6505,16 @@ Partial Class FrmSettings
 		Me.BTNTagDir.TabIndex = 192
 		Me.BTNTagDir.Text = "1"
 		Me.BTNTagDir.UseVisualStyleBackColor = True
+		'
+		'ImageTagPictureBox
+		'
+		Me.ImageTagPictureBox.BackColor = System.Drawing.Color.Black
+		Me.ImageTagPictureBox.Location = New System.Drawing.Point(5, 37)
+		Me.ImageTagPictureBox.Name = "ImageTagPictureBox"
+		Me.ImageTagPictureBox.Size = New System.Drawing.Size(451, 328)
+		Me.ImageTagPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+		Me.ImageTagPictureBox.TabIndex = 191
+		Me.ImageTagPictureBox.TabStop = False
 		'
 		'CBTagFace
 		'
@@ -7915,6 +8138,17 @@ Partial Class FrmSettings
 		Me.CBWISaveToDisk.Text = "Save Images to Disk"
 		Me.CBWISaveToDisk.UseVisualStyleBackColor = True
 		'
+		'PictureBox5
+		'
+		Me.PictureBox5.BackColor = System.Drawing.Color.LightGray
+		Me.PictureBox5.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
+		Me.PictureBox5.Location = New System.Drawing.Point(9, 6)
+		Me.PictureBox5.Name = "PictureBox5"
+		Me.PictureBox5.Size = New System.Drawing.Size(160, 19)
+		Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+		Me.PictureBox5.TabIndex = 156
+		Me.PictureBox5.TabStop = False
+		'
 		'WebImageProgressBar
 		'
 		Me.WebImageProgressBar.Location = New System.Drawing.Point(567, 218)
@@ -7999,6 +8233,16 @@ Partial Class FrmSettings
 		Me.BTNWINext.Text = ">>"
 		Me.BTNWINext.UseVisualStyleBackColor = False
 		'
+		'WebPictureBox
+		'
+		Me.WebPictureBox.BackColor = System.Drawing.Color.Black
+		Me.WebPictureBox.Location = New System.Drawing.Point(6, 38)
+		Me.WebPictureBox.Name = "WebPictureBox"
+		Me.WebPictureBox.Size = New System.Drawing.Size(555, 358)
+		Me.WebPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+		Me.WebPictureBox.TabIndex = 148
+		Me.WebPictureBox.TabStop = False
+		'
 		'Label71
 		'
 		Me.Label71.BackColor = System.Drawing.Color.Transparent
@@ -8042,6 +8286,34 @@ Partial Class FrmSettings
 		Me.PnlVideoSettings.Name = "PnlVideoSettings"
 		Me.PnlVideoSettings.Size = New System.Drawing.Size(708, 436)
 		Me.PnlVideoSettings.TabIndex = 92
+		'
+		'PbBannerVideoSettings
+		'
+		Me.PbBannerVideoSettings.BackColor = System.Drawing.Color.LightGray
+		Me.PbBannerVideoSettings.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
+		Me.PbBannerVideoSettings.Location = New System.Drawing.Point(9, 6)
+		Me.PbBannerVideoSettings.Name = "PbBannerVideoSettings"
+		Me.PbBannerVideoSettings.Size = New System.Drawing.Size(160, 19)
+		Me.PbBannerVideoSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+		Me.PbBannerVideoSettings.TabIndex = 151
+		Me.PbBannerVideoSettings.TabStop = False
+		'
+		'BTNRefreshVideos
+		'
+		Me.BTNRefreshVideos.BackColor = System.Drawing.Color.LightGray
+		Me.BTNRefreshVideos.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Refresh
+		Me.BTNRefreshVideos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+		Me.BTNRefreshVideos.FlatAppearance.BorderSize = 0
+		Me.BTNRefreshVideos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+		Me.BTNRefreshVideos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+		Me.BTNRefreshVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.BTNRefreshVideos.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BTNRefreshVideos.ForeColor = System.Drawing.Color.Black
+		Me.BTNRefreshVideos.Location = New System.Drawing.Point(671, 6)
+		Me.BTNRefreshVideos.Name = "BTNRefreshVideos"
+		Me.BTNRefreshVideos.Size = New System.Drawing.Size(30, 26)
+		Me.BTNRefreshVideos.TabIndex = 149
+		Me.BTNRefreshVideos.UseVisualStyleBackColor = False
 		'
 		'GbxVideoGeneralD
 		'
@@ -9222,6 +9494,40 @@ Partial Class FrmSettings
 		Me.PNLGlitter.Size = New System.Drawing.Size(708, 404)
 		Me.PNLGlitter.TabIndex = 91
 		'
+		'Button15
+		'
+		Me.Button15.BackColor = System.Drawing.Color.LightGray
+		Me.Button15.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Export
+		Me.Button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button15.FlatAppearance.BorderSize = 0
+		Me.Button15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+		Me.Button15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+		Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.Button15.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Button15.ForeColor = System.Drawing.Color.Black
+		Me.Button15.Location = New System.Drawing.Point(670, 366)
+		Me.Button15.Name = "Button15"
+		Me.Button15.Size = New System.Drawing.Size(30, 26)
+		Me.Button15.TabIndex = 163
+		Me.Button15.UseVisualStyleBackColor = False
+		'
+		'Button16
+		'
+		Me.Button16.BackColor = System.Drawing.Color.LightGray
+		Me.Button16.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Save
+		Me.Button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button16.FlatAppearance.BorderSize = 0
+		Me.Button16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
+		Me.Button16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
+		Me.Button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+		Me.Button16.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.Button16.ForeColor = System.Drawing.Color.Black
+		Me.Button16.Location = New System.Drawing.Point(667, 324)
+		Me.Button16.Name = "Button16"
+		Me.Button16.Size = New System.Drawing.Size(30, 26)
+		Me.Button16.TabIndex = 164
+		Me.Button16.UseVisualStyleBackColor = False
+		'
 		'Label121
 		'
 		Me.Label121.AutoSize = True
@@ -9446,6 +9752,16 @@ Partial Class FrmSettings
 		Me.CBTease.Text = "Tease"
 		Me.CBTease.UseVisualStyleBackColor = True
 		'
+		'GlitterAV
+		'
+		Me.GlitterAV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GlitterAV.Location = New System.Drawing.Point(9, 16)
+		Me.GlitterAV.Name = "GlitterAV"
+		Me.GlitterAV.Size = New System.Drawing.Size(64, 64)
+		Me.GlitterAV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GlitterAV.TabIndex = 149
+		Me.GlitterAV.TabStop = False
+		'
 		'GBGlitter1
 		'
 		Me.GBGlitter1.BackColor = System.Drawing.Color.LightGray
@@ -9577,6 +9893,16 @@ Partial Class FrmSettings
 		Me.TBGlitter1.TabIndex = 49
 		Me.TBGlitter1.Text = Global.Tease_AI.My.MySettings.Default.Glitter1
 		Me.TBGlitter1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+		'
+		'GlitterAV1
+		'
+		Me.GlitterAV1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GlitterAV1.Location = New System.Drawing.Point(9, 16)
+		Me.GlitterAV1.Name = "GlitterAV1"
+		Me.GlitterAV1.Size = New System.Drawing.Size(64, 64)
+		Me.GlitterAV1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GlitterAV1.TabIndex = 149
+		Me.GlitterAV1.TabStop = False
 		'
 		'GBGlitter3
 		'
@@ -9710,6 +10036,16 @@ Partial Class FrmSettings
 		Me.TBGlitter3.Text = Global.Tease_AI.My.MySettings.Default.Glitter3
 		Me.TBGlitter3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
 		'
+		'GlitterAV3
+		'
+		Me.GlitterAV3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GlitterAV3.Location = New System.Drawing.Point(9, 16)
+		Me.GlitterAV3.Name = "GlitterAV3"
+		Me.GlitterAV3.Size = New System.Drawing.Size(64, 64)
+		Me.GlitterAV3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GlitterAV3.TabIndex = 149
+		Me.GlitterAV3.TabStop = False
+		'
 		'GBGlitter2
 		'
 		Me.GBGlitter2.BackColor = System.Drawing.Color.LightGray
@@ -9842,6 +10178,16 @@ Partial Class FrmSettings
 		Me.TBGlitter2.Text = Global.Tease_AI.My.MySettings.Default.Glitter2
 		Me.TBGlitter2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
 		'
+		'GlitterAV2
+		'
+		Me.GlitterAV2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GlitterAV2.Location = New System.Drawing.Point(9, 16)
+		Me.GlitterAV2.Name = "GlitterAV2"
+		Me.GlitterAV2.Size = New System.Drawing.Size(64, 64)
+		Me.GlitterAV2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GlitterAV2.TabIndex = 149
+		Me.GlitterAV2.TabStop = False
+		'
 		'TabPage23
 		'
 		Me.TabPage23.BackColor = System.Drawing.Color.LightGray
@@ -9925,6 +10271,17 @@ Partial Class FrmSettings
 		Me.GN6.Text = "Gold 6"
 		Me.GN6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
 		'
+		'GP6
+		'
+		Me.GP6.BackColor = System.Drawing.Color.Silver
+		Me.GP6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GP6.Location = New System.Drawing.Point(86, 268)
+		Me.GP6.Name = "GP6"
+		Me.GP6.Size = New System.Drawing.Size(71, 93)
+		Me.GP6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GP6.TabIndex = 17
+		Me.GP6.TabStop = False
+		'
 		'GN2
 		'
 		Me.GN2.Location = New System.Drawing.Point(86, 117)
@@ -9934,6 +10291,28 @@ Partial Class FrmSettings
 		Me.GN2.Text = "Gold 2"
 		Me.GN2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
 		'
+		'GP2
+		'
+		Me.GP2.BackColor = System.Drawing.Color.Silver
+		Me.GP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GP2.Location = New System.Drawing.Point(86, 17)
+		Me.GP2.Name = "GP2"
+		Me.GP2.Size = New System.Drawing.Size(71, 94)
+		Me.GP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GP2.TabIndex = 9
+		Me.GP2.TabStop = False
+		'
+		'GP5
+		'
+		Me.GP5.BackColor = System.Drawing.Color.Silver
+		Me.GP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GP5.Location = New System.Drawing.Point(9, 268)
+		Me.GP5.Name = "GP5"
+		Me.GP5.Size = New System.Drawing.Size(71, 93)
+		Me.GP5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GP5.TabIndex = 15
+		Me.GP5.TabStop = False
+		'
 		'GN1
 		'
 		Me.GN1.Location = New System.Drawing.Point(9, 117)
@@ -9942,6 +10321,17 @@ Partial Class FrmSettings
 		Me.GN1.TabIndex = 8
 		Me.GN1.Text = "Gold 1"
 		Me.GN1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+		'
+		'GP1
+		'
+		Me.GP1.BackColor = System.Drawing.Color.Silver
+		Me.GP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GP1.Location = New System.Drawing.Point(9, 17)
+		Me.GP1.Name = "GP1"
+		Me.GP1.Size = New System.Drawing.Size(71, 94)
+		Me.GP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GP1.TabIndex = 0
+		Me.GP1.TabStop = False
 		'
 		'GN5
 		'
@@ -9961,6 +10351,28 @@ Partial Class FrmSettings
 		Me.GN3.Text = "Gold 3"
 		Me.GN3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
 		'
+		'GP3
+		'
+		Me.GP3.BackColor = System.Drawing.Color.Silver
+		Me.GP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GP3.Location = New System.Drawing.Point(9, 143)
+		Me.GP3.Name = "GP3"
+		Me.GP3.Size = New System.Drawing.Size(71, 93)
+		Me.GP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GP3.TabIndex = 11
+		Me.GP3.TabStop = False
+		'
+		'GP4
+		'
+		Me.GP4.BackColor = System.Drawing.Color.Silver
+		Me.GP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.GP4.Location = New System.Drawing.Point(86, 143)
+		Me.GP4.Name = "GP4"
+		Me.GP4.Size = New System.Drawing.Size(71, 93)
+		Me.GP4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.GP4.TabIndex = 13
+		Me.GP4.TabStop = False
+		'
 		'GN4
 		'
 		Me.GN4.Location = New System.Drawing.Point(86, 242)
@@ -9979,6 +10391,17 @@ Partial Class FrmSettings
 		Me.GroupBox60.TabIndex = 15
 		Me.GroupBox60.TabStop = False
 		Me.GroupBox60.Text = "Card Background"
+		'
+		'CardBack
+		'
+		Me.CardBack.BackColor = System.Drawing.Color.Silver
+		Me.CardBack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.CardBack.Location = New System.Drawing.Point(17, 28)
+		Me.CardBack.Name = "CardBack"
+		Me.CardBack.Size = New System.Drawing.Size(138, 179)
+		Me.CardBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.CardBack.TabIndex = 18
+		Me.CardBack.TabStop = False
 		'
 		'GroupBox58
 		'
@@ -10019,6 +10442,28 @@ Partial Class FrmSettings
 		Me.BN3.Text = "Bronze 3"
 		Me.BN3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
 		'
+		'BP3
+		'
+		Me.BP3.BackColor = System.Drawing.Color.Silver
+		Me.BP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.BP3.Location = New System.Drawing.Point(9, 144)
+		Me.BP3.Name = "BP3"
+		Me.BP3.Size = New System.Drawing.Size(71, 93)
+		Me.BP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.BP3.TabIndex = 11
+		Me.BP3.TabStop = False
+		'
+		'BP6
+		'
+		Me.BP6.BackColor = System.Drawing.Color.Silver
+		Me.BP6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.BP6.Location = New System.Drawing.Point(86, 269)
+		Me.BP6.Name = "BP6"
+		Me.BP6.Size = New System.Drawing.Size(71, 93)
+		Me.BP6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.BP6.TabIndex = 17
+		Me.BP6.TabStop = False
+		'
 		'BN2
 		'
 		Me.BN2.Location = New System.Drawing.Point(86, 118)
@@ -10037,6 +10482,28 @@ Partial Class FrmSettings
 		Me.BN5.Text = "Bronze 5"
 		Me.BN5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
 		'
+		'BP5
+		'
+		Me.BP5.BackColor = System.Drawing.Color.Silver
+		Me.BP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.BP5.Location = New System.Drawing.Point(9, 269)
+		Me.BP5.Name = "BP5"
+		Me.BP5.Size = New System.Drawing.Size(71, 93)
+		Me.BP5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.BP5.TabIndex = 15
+		Me.BP5.TabStop = False
+		'
+		'BP2
+		'
+		Me.BP2.BackColor = System.Drawing.Color.Silver
+		Me.BP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.BP2.Location = New System.Drawing.Point(86, 19)
+		Me.BP2.Name = "BP2"
+		Me.BP2.Size = New System.Drawing.Size(71, 93)
+		Me.BP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.BP2.TabIndex = 9
+		Me.BP2.TabStop = False
+		'
 		'BN1
 		'
 		Me.BN1.Location = New System.Drawing.Point(9, 118)
@@ -10054,6 +10521,28 @@ Partial Class FrmSettings
 		Me.BN4.TabIndex = 14
 		Me.BN4.Text = "Bronze 4"
 		Me.BN4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+		'
+		'BP4
+		'
+		Me.BP4.BackColor = System.Drawing.Color.Silver
+		Me.BP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.BP4.Location = New System.Drawing.Point(86, 144)
+		Me.BP4.Name = "BP4"
+		Me.BP4.Size = New System.Drawing.Size(71, 93)
+		Me.BP4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.BP4.TabIndex = 13
+		Me.BP4.TabStop = False
+		'
+		'BP1
+		'
+		Me.BP1.BackColor = System.Drawing.Color.Silver
+		Me.BP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.BP1.Location = New System.Drawing.Point(9, 19)
+		Me.BP1.Name = "BP1"
+		Me.BP1.Size = New System.Drawing.Size(71, 93)
+		Me.BP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.BP1.TabIndex = 0
+		Me.BP1.TabStop = False
 		'
 		'GroupBox59
 		'
@@ -10085,6 +10574,17 @@ Partial Class FrmSettings
 		Me.SN6.Text = "Silver 6"
 		Me.SN6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
 		'
+		'SP6
+		'
+		Me.SP6.BackColor = System.Drawing.Color.Silver
+		Me.SP6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.SP6.Location = New System.Drawing.Point(86, 269)
+		Me.SP6.Name = "SP6"
+		Me.SP6.Size = New System.Drawing.Size(71, 93)
+		Me.SP6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.SP6.TabIndex = 17
+		Me.SP6.TabStop = False
+		'
 		'SN2
 		'
 		Me.SN2.Location = New System.Drawing.Point(86, 118)
@@ -10094,6 +10594,17 @@ Partial Class FrmSettings
 		Me.SN2.Text = "Silver 2"
 		Me.SN2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
 		'
+		'SP2
+		'
+		Me.SP2.BackColor = System.Drawing.Color.Silver
+		Me.SP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.SP2.Location = New System.Drawing.Point(86, 19)
+		Me.SP2.Name = "SP2"
+		Me.SP2.Size = New System.Drawing.Size(71, 93)
+		Me.SP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.SP2.TabIndex = 9
+		Me.SP2.TabStop = False
+		'
 		'SN1
 		'
 		Me.SN1.Location = New System.Drawing.Point(9, 118)
@@ -10102,6 +10613,28 @@ Partial Class FrmSettings
 		Me.SN1.TabIndex = 8
 		Me.SN1.Text = "Silver 1"
 		Me.SN1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+		'
+		'SP5
+		'
+		Me.SP5.BackColor = System.Drawing.Color.Silver
+		Me.SP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.SP5.Location = New System.Drawing.Point(9, 269)
+		Me.SP5.Name = "SP5"
+		Me.SP5.Size = New System.Drawing.Size(71, 93)
+		Me.SP5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.SP5.TabIndex = 15
+		Me.SP5.TabStop = False
+		'
+		'SP1
+		'
+		Me.SP1.BackColor = System.Drawing.Color.Silver
+		Me.SP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.SP1.Location = New System.Drawing.Point(9, 19)
+		Me.SP1.Name = "SP1"
+		Me.SP1.Size = New System.Drawing.Size(71, 93)
+		Me.SP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.SP1.TabIndex = 0
+		Me.SP1.TabStop = False
 		'
 		'SN5
 		'
@@ -10129,6 +10662,28 @@ Partial Class FrmSettings
 		Me.SN4.TabIndex = 14
 		Me.SN4.Text = "Silver 4"
 		Me.SN4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+		'
+		'SP3
+		'
+		Me.SP3.BackColor = System.Drawing.Color.Silver
+		Me.SP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.SP3.Location = New System.Drawing.Point(9, 144)
+		Me.SP3.Name = "SP3"
+		Me.SP3.Size = New System.Drawing.Size(71, 93)
+		Me.SP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.SP3.TabIndex = 11
+		Me.SP3.TabStop = False
+		'
+		'SP4
+		'
+		Me.SP4.BackColor = System.Drawing.Color.Silver
+		Me.SP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.SP4.Location = New System.Drawing.Point(86, 144)
+		Me.SP4.Name = "SP4"
+		Me.SP4.Size = New System.Drawing.Size(71, 93)
+		Me.SP4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.SP4.TabIndex = 13
+		Me.SP4.TabStop = False
 		'
 		'TabPage6
 		'
@@ -10297,6 +10852,17 @@ Partial Class FrmSettings
 		Me.PNLWishList.Size = New System.Drawing.Size(250, 367)
 		Me.PNLWishList.TabIndex = 165
 		'
+		'WishlistCostSilver
+		'
+		Me.WishlistCostSilver.BackColor = System.Drawing.Color.Transparent
+		Me.WishlistCostSilver.Image = CType(resources.GetObject("WishlistCostSilver.Image"), System.Drawing.Image)
+		Me.WishlistCostSilver.Location = New System.Drawing.Point(107, 206)
+		Me.WishlistCostSilver.Name = "WishlistCostSilver"
+		Me.WishlistCostSilver.Size = New System.Drawing.Size(28, 28)
+		Me.WishlistCostSilver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.WishlistCostSilver.TabIndex = 111
+		Me.WishlistCostSilver.TabStop = False
+		'
 		'LBLWishListText
 		'
 		Me.LBLWishListText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -10316,6 +10882,18 @@ Partial Class FrmSettings
 		Me.LBLWishlistCost.Text = "3"
 		Me.LBLWishlistCost.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
+		'WishlistCostGold
+		'
+		Me.WishlistCostGold.BackColor = System.Drawing.Color.Transparent
+		Me.WishlistCostGold.Image = CType(resources.GetObject("WishlistCostGold.Image"), System.Drawing.Image)
+		Me.WishlistCostGold.Location = New System.Drawing.Point(107, 206)
+		Me.WishlistCostGold.Name = "WishlistCostGold"
+		Me.WishlistCostGold.Size = New System.Drawing.Size(28, 28)
+		Me.WishlistCostGold.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.WishlistCostGold.TabIndex = 106
+		Me.WishlistCostGold.TabStop = False
+		Me.WishlistCostGold.Visible = False
+		'
 		'LBLWishListName
 		'
 		Me.LBLWishListName.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -10326,6 +10904,16 @@ Partial Class FrmSettings
 		Me.LBLWishListName.TabIndex = 104
 		Me.LBLWishListName.Text = "Item Name Goes Here"
 		Me.LBLWishListName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		'
+		'WishlistPreview
+		'
+		Me.WishlistPreview.ImageLocation = ""
+		Me.WishlistPreview.Location = New System.Drawing.Point(50, 54)
+		Me.WishlistPreview.Name = "WishlistPreview"
+		Me.WishlistPreview.Size = New System.Drawing.Size(145, 143)
+		Me.WishlistPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+		Me.WishlistPreview.TabIndex = 101
+		Me.WishlistPreview.TabStop = False
 		'
 		'TabPage26
 		'
@@ -10363,6 +10951,43 @@ Partial Class FrmSettings
 		Me.GroupBox9.TabIndex = 152
 		Me.GroupBox9.TabStop = False
 		Me.GroupBox9.Text = "System"
+		'
+		'Button32
+		'
+		Me.Button32.BackColor = System.Drawing.Color.Transparent
+		Me.Button32.Image = Global.Tease_AI.My.Resources.Resources.Button_Save_Big
+		Me.Button32.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.Button32.Location = New System.Drawing.Point(196, 24)
+		Me.Button32.Name = "Button32"
+		Me.Button32.Size = New System.Drawing.Size(135, 55)
+		Me.Button32.TabIndex = 55
+		Me.Button32.Text = "  Save Theme"
+		Me.Button32.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+		Me.Button32.UseVisualStyleBackColor = False
+		'
+		'Button31
+		'
+		Me.Button31.BackColor = System.Drawing.Color.Transparent
+		Me.Button31.Image = Global.Tease_AI.My.Resources.Resources.Button_Import_Big
+		Me.Button31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.Button31.Location = New System.Drawing.Point(17, 24)
+		Me.Button31.Name = "Button31"
+		Me.Button31.Size = New System.Drawing.Size(135, 55)
+		Me.Button31.TabIndex = 54
+		Me.Button31.Text = "  Open Theme"
+		Me.Button31.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+		Me.Button31.UseVisualStyleBackColor = False
+		'
+		'PictureBox10
+		'
+		Me.PictureBox10.BackColor = System.Drawing.Color.LightGray
+		Me.PictureBox10.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
+		Me.PictureBox10.Location = New System.Drawing.Point(9, 6)
+		Me.PictureBox10.Name = "PictureBox10"
+		Me.PictureBox10.Size = New System.Drawing.Size(160, 19)
+		Me.PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+		Me.PictureBox10.TabIndex = 151
+		Me.PictureBox10.TabStop = False
 		'
 		'GroupBox5
 		'
@@ -10434,6 +11059,28 @@ Partial Class FrmSettings
 		Me.Label138.Text = "Date/Time Text Color"
 		Me.Label138.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
+		'Button28
+		'
+		Me.Button28.BackColor = System.Drawing.Color.Transparent
+		Me.Button28.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
+		Me.Button28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button28.Location = New System.Drawing.Point(296, 221)
+		Me.Button28.Name = "Button28"
+		Me.Button28.Size = New System.Drawing.Size(32, 32)
+		Me.Button28.TabIndex = 21
+		Me.Button28.UseVisualStyleBackColor = False
+		'
+		'Button30
+		'
+		Me.Button30.BackColor = System.Drawing.Color.Transparent
+		Me.Button30.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
+		Me.Button30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button30.Location = New System.Drawing.Point(296, 187)
+		Me.Button30.Name = "Button30"
+		Me.Button30.Size = New System.Drawing.Size(32, 32)
+		Me.Button30.TabIndex = 18
+		Me.Button30.UseVisualStyleBackColor = False
+		'
 		'LBLDateBackColor2
 		'
 		Me.LBLDateBackColor2.BackColor = System.Drawing.Color.SteelBlue
@@ -10461,6 +11108,17 @@ Partial Class FrmSettings
 		Me.LBLChatWindowColor2.Name = "LBLChatWindowColor2"
 		Me.LBLChatWindowColor2.Size = New System.Drawing.Size(103, 28)
 		Me.LBLChatWindowColor2.TabIndex = 12
+		'
+		'Button20
+		'
+		Me.Button20.BackColor = System.Drawing.Color.Transparent
+		Me.Button20.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
+		Me.Button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button20.Location = New System.Drawing.Point(296, 85)
+		Me.Button20.Name = "Button20"
+		Me.Button20.Size = New System.Drawing.Size(32, 32)
+		Me.Button20.TabIndex = 8
+		Me.Button20.UseVisualStyleBackColor = False
 		'
 		'LBLTextColor2
 		'
@@ -10520,6 +11178,28 @@ Partial Class FrmSettings
 		Me.LBLBackColor.Text = "Background Color"
 		Me.LBLBackColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
+		'Button21
+		'
+		Me.Button21.BackColor = System.Drawing.Color.Transparent
+		Me.Button21.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
+		Me.Button21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button21.Location = New System.Drawing.Point(296, 153)
+		Me.Button21.Name = "Button21"
+		Me.Button21.Size = New System.Drawing.Size(32, 32)
+		Me.Button21.TabIndex = 15
+		Me.Button21.UseVisualStyleBackColor = False
+		'
+		'Button23
+		'
+		Me.Button23.BackColor = System.Drawing.Color.Transparent
+		Me.Button23.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
+		Me.Button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button23.Location = New System.Drawing.Point(296, 119)
+		Me.Button23.Name = "Button23"
+		Me.Button23.Size = New System.Drawing.Size(32, 32)
+		Me.Button23.TabIndex = 11
+		Me.Button23.UseVisualStyleBackColor = False
+		'
 		'LBLChatTextColor2
 		'
 		Me.LBLChatTextColor2.BackColor = System.Drawing.Color.SteelBlue
@@ -10528,6 +11208,28 @@ Partial Class FrmSettings
 		Me.LBLChatTextColor2.Name = "LBLChatTextColor2"
 		Me.LBLChatTextColor2.Size = New System.Drawing.Size(103, 28)
 		Me.LBLChatTextColor2.TabIndex = 16
+		'
+		'Button25
+		'
+		Me.Button25.BackColor = System.Drawing.Color.Transparent
+		Me.Button25.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
+		Me.Button25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button25.Location = New System.Drawing.Point(296, 17)
+		Me.Button25.Name = "Button25"
+		Me.Button25.Size = New System.Drawing.Size(32, 32)
+		Me.Button25.TabIndex = 2
+		Me.Button25.UseVisualStyleBackColor = False
+		'
+		'Button27
+		'
+		Me.Button27.BackColor = System.Drawing.Color.Transparent
+		Me.Button27.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
+		Me.Button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button27.Location = New System.Drawing.Point(296, 51)
+		Me.Button27.Name = "Button27"
+		Me.Button27.Size = New System.Drawing.Size(32, 32)
+		Me.Button27.TabIndex = 5
+		Me.Button27.UseVisualStyleBackColor = False
 		'
 		'LBLButtonColor2
 		'
@@ -10585,6 +11287,27 @@ Partial Class FrmSettings
 		Me.CBFlipBack.TabIndex = 4
 		Me.CBFlipBack.Text = "Flip Background"
 		Me.CBFlipBack.UseVisualStyleBackColor = True
+		'
+		'PBBackgroundPreview
+		'
+		Me.PBBackgroundPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.PBBackgroundPreview.Location = New System.Drawing.Point(6, 19)
+		Me.PBBackgroundPreview.Name = "PBBackgroundPreview"
+		Me.PBBackgroundPreview.Size = New System.Drawing.Size(202, 133)
+		Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.PBBackgroundPreview.TabIndex = 0
+		Me.PBBackgroundPreview.TabStop = False
+		'
+		'Button17
+		'
+		Me.Button17.BackColor = System.Drawing.Color.Transparent
+		Me.Button17.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Background_Load
+		Me.Button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+		Me.Button17.Location = New System.Drawing.Point(228, 36)
+		Me.Button17.Name = "Button17"
+		Me.Button17.Size = New System.Drawing.Size(103, 93)
+		Me.Button17.TabIndex = 1
+		Me.Button17.UseVisualStyleBackColor = False
 		'
 		'CBStretchBack
 		'
@@ -11874,6 +12597,17 @@ Partial Class FrmSettings
 		Me.CBRangeOrgasm.Text = "Domme Decide"
 		Me.CBRangeOrgasm.UseVisualStyleBackColor = True
 		'
+		'PictureBox8
+		'
+		Me.PictureBox8.BackColor = System.Drawing.Color.LightGray
+		Me.PictureBox8.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
+		Me.PictureBox8.Location = New System.Drawing.Point(9, 6)
+		Me.PictureBox8.Name = "PictureBox8"
+		Me.PictureBox8.Size = New System.Drawing.Size(160, 19)
+		Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+		Me.PictureBox8.TabIndex = 166
+		Me.PictureBox8.TabStop = False
+		'
 		'Label38
 		'
 		Me.Label38.BackColor = System.Drawing.Color.Transparent
@@ -12954,6 +13688,17 @@ Partial Class FrmSettings
 		Me.Label114.TabIndex = 168
 		Me.Label114.Text = "Start URL"
 		'
+		'PictureBox9
+		'
+		Me.PictureBox9.BackColor = System.Drawing.Color.LightGray
+		Me.PictureBox9.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
+		Me.PictureBox9.Location = New System.Drawing.Point(9, 6)
+		Me.PictureBox9.Name = "PictureBox9"
+		Me.PictureBox9.Size = New System.Drawing.Size(160, 19)
+		Me.PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+		Me.PictureBox9.TabIndex = 166
+		Me.PictureBox9.TabStop = False
+		'
 		'Label148
 		'
 		Me.Label148.BackColor = System.Drawing.Color.Transparent
@@ -13451,6 +14196,17 @@ Partial Class FrmSettings
 		Me.Label3.TabIndex = 167
 		Me.Label3.Text = " Tease AI © 2015 1885 All Rights Reserved"
 		'
+		'PictureBox3
+		'
+		Me.PictureBox3.BackColor = System.Drawing.Color.LightGray
+		Me.PictureBox3.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_big
+		Me.PictureBox3.Location = New System.Drawing.Point(84, 17)
+		Me.PictureBox3.Name = "PictureBox3"
+		Me.PictureBox3.Size = New System.Drawing.Size(531, 58)
+		Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+		Me.PictureBox3.TabIndex = 166
+		Me.PictureBox3.TabStop = False
+		'
 		'Label41
 		'
 		Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -13904,654 +14660,6 @@ Partial Class FrmSettings
 		Me.BWURLFiles.WorkerReportsProgress = True
 		Me.BWURLFiles.WorkerSupportsCancellation = True
 		'
-		'BtnImportSettings
-		'
-		Me.BtnImportSettings.BackColor = System.Drawing.Color.Transparent
-		Me.BtnImportSettings.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Export
-		Me.BtnImportSettings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.BtnImportSettings.FlatAppearance.BorderSize = 0
-		Me.BtnImportSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-		Me.BtnImportSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-		Me.BtnImportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.BtnImportSettings.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.BtnImportSettings.ForeColor = System.Drawing.Color.Black
-		Me.BtnImportSettings.Location = New System.Drawing.Point(669, 14)
-		Me.BtnImportSettings.Name = "BtnImportSettings"
-		Me.BtnImportSettings.Size = New System.Drawing.Size(30, 26)
-		Me.BtnImportSettings.TabIndex = 158
-		Me.BtnImportSettings.UseVisualStyleBackColor = False
-		'
-		'PictureBox2
-		'
-		Me.PictureBox2.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox2.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
-		Me.PictureBox2.Location = New System.Drawing.Point(9, 6)
-		Me.PictureBox2.Name = "PictureBox2"
-		Me.PictureBox2.Size = New System.Drawing.Size(160, 19)
-		Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PictureBox2.TabIndex = 148
-		Me.PictureBox2.TabStop = False
-		'
-		'BTNLoadDomSet
-		'
-		Me.BTNLoadDomSet.BackColor = System.Drawing.Color.LightGray
-		Me.BTNLoadDomSet.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Export
-		Me.BTNLoadDomSet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.BTNLoadDomSet.FlatAppearance.BorderSize = 0
-		Me.BTNLoadDomSet.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-		Me.BTNLoadDomSet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-		Me.BTNLoadDomSet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.BTNLoadDomSet.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.BTNLoadDomSet.ForeColor = System.Drawing.Color.Black
-		Me.BTNLoadDomSet.Location = New System.Drawing.Point(671, 11)
-		Me.BTNLoadDomSet.Name = "BTNLoadDomSet"
-		Me.BTNLoadDomSet.Size = New System.Drawing.Size(30, 26)
-		Me.BTNLoadDomSet.TabIndex = 150
-		Me.BTNLoadDomSet.UseVisualStyleBackColor = False
-		'
-		'BTNSaveDomSet
-		'
-		Me.BTNSaveDomSet.BackColor = System.Drawing.Color.LightGray
-		Me.BTNSaveDomSet.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Save
-		Me.BTNSaveDomSet.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.BTNSaveDomSet.FlatAppearance.BorderSize = 0
-		Me.BTNSaveDomSet.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-		Me.BTNSaveDomSet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-		Me.BTNSaveDomSet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.BTNSaveDomSet.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.BTNSaveDomSet.ForeColor = System.Drawing.Color.Black
-		Me.BTNSaveDomSet.Location = New System.Drawing.Point(636, 8)
-		Me.BTNSaveDomSet.Name = "BTNSaveDomSet"
-		Me.BTNSaveDomSet.Size = New System.Drawing.Size(30, 26)
-		Me.BTNSaveDomSet.TabIndex = 151
-		Me.BTNSaveDomSet.UseVisualStyleBackColor = False
-		'
-		'PictureBox4
-		'
-		Me.PictureBox4.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox4.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
-		Me.PictureBox4.Location = New System.Drawing.Point(9, 6)
-		Me.PictureBox4.Name = "PictureBox4"
-		Me.PictureBox4.Size = New System.Drawing.Size(160, 19)
-		Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PictureBox4.TabIndex = 149
-		Me.PictureBox4.TabStop = False
-		'
-		'PictureBox12
-		'
-		Me.PictureBox12.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox12.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
-		Me.PictureBox12.Location = New System.Drawing.Point(9, 6)
-		Me.PictureBox12.Name = "PictureBox12"
-		Me.PictureBox12.Size = New System.Drawing.Size(160, 19)
-		Me.PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PictureBox12.TabIndex = 149
-		Me.PictureBox12.TabStop = False
-		'
-		'PictureBox1
-		'
-		Me.PictureBox1.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox1.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
-		Me.PictureBox1.Location = New System.Drawing.Point(9, 6)
-		Me.PictureBox1.Name = "PictureBox1"
-		Me.PictureBox1.Size = New System.Drawing.Size(160, 19)
-		Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PictureBox1.TabIndex = 151
-		Me.PictureBox1.TabStop = False
-		'
-		'PBURLPreview
-		'
-		Me.PBURLPreview.BackColor = System.Drawing.Color.Black
-		Me.PBURLPreview.Location = New System.Drawing.Point(6, 19)
-		Me.PBURLPreview.Name = "PBURLPreview"
-		Me.PBURLPreview.Size = New System.Drawing.Size(338, 284)
-		Me.PBURLPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-		Me.PBURLPreview.TabIndex = 0
-		Me.PBURLPreview.TabStop = False
-		'
-		'ImageTagPictureBox
-		'
-		Me.ImageTagPictureBox.BackColor = System.Drawing.Color.Black
-		Me.ImageTagPictureBox.Location = New System.Drawing.Point(5, 37)
-		Me.ImageTagPictureBox.Name = "ImageTagPictureBox"
-		Me.ImageTagPictureBox.Size = New System.Drawing.Size(451, 328)
-		Me.ImageTagPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-		Me.ImageTagPictureBox.TabIndex = 191
-		Me.ImageTagPictureBox.TabStop = False
-		'
-		'PictureBox5
-		'
-		Me.PictureBox5.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox5.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
-		Me.PictureBox5.Location = New System.Drawing.Point(9, 6)
-		Me.PictureBox5.Name = "PictureBox5"
-		Me.PictureBox5.Size = New System.Drawing.Size(160, 19)
-		Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PictureBox5.TabIndex = 156
-		Me.PictureBox5.TabStop = False
-		'
-		'WebPictureBox
-		'
-		Me.WebPictureBox.BackColor = System.Drawing.Color.Black
-		Me.WebPictureBox.Location = New System.Drawing.Point(6, 38)
-		Me.WebPictureBox.Name = "WebPictureBox"
-		Me.WebPictureBox.Size = New System.Drawing.Size(555, 358)
-		Me.WebPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-		Me.WebPictureBox.TabIndex = 148
-		Me.WebPictureBox.TabStop = False
-		'
-		'PbBannerVideoSettings
-		'
-		Me.PbBannerVideoSettings.BackColor = System.Drawing.Color.LightGray
-		Me.PbBannerVideoSettings.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
-		Me.PbBannerVideoSettings.Location = New System.Drawing.Point(9, 6)
-		Me.PbBannerVideoSettings.Name = "PbBannerVideoSettings"
-		Me.PbBannerVideoSettings.Size = New System.Drawing.Size(160, 19)
-		Me.PbBannerVideoSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PbBannerVideoSettings.TabIndex = 151
-		Me.PbBannerVideoSettings.TabStop = False
-		'
-		'BTNRefreshVideos
-		'
-		Me.BTNRefreshVideos.BackColor = System.Drawing.Color.LightGray
-		Me.BTNRefreshVideos.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Refresh
-		Me.BTNRefreshVideos.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-		Me.BTNRefreshVideos.FlatAppearance.BorderSize = 0
-		Me.BTNRefreshVideos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-		Me.BTNRefreshVideos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-		Me.BTNRefreshVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.BTNRefreshVideos.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.BTNRefreshVideos.ForeColor = System.Drawing.Color.Black
-		Me.BTNRefreshVideos.Location = New System.Drawing.Point(671, 6)
-		Me.BTNRefreshVideos.Name = "BTNRefreshVideos"
-		Me.BTNRefreshVideos.Size = New System.Drawing.Size(30, 26)
-		Me.BTNRefreshVideos.TabIndex = 149
-		Me.BTNRefreshVideos.UseVisualStyleBackColor = False
-		'
-		'Button15
-		'
-		Me.Button15.BackColor = System.Drawing.Color.LightGray
-		Me.Button15.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Export
-		Me.Button15.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button15.FlatAppearance.BorderSize = 0
-		Me.Button15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-		Me.Button15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-		Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button15.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Button15.ForeColor = System.Drawing.Color.Black
-		Me.Button15.Location = New System.Drawing.Point(670, 366)
-		Me.Button15.Name = "Button15"
-		Me.Button15.Size = New System.Drawing.Size(30, 26)
-		Me.Button15.TabIndex = 163
-		Me.Button15.UseVisualStyleBackColor = False
-		'
-		'Button16
-		'
-		Me.Button16.BackColor = System.Drawing.Color.LightGray
-		Me.Button16.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_Save
-		Me.Button16.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button16.FlatAppearance.BorderSize = 0
-		Me.Button16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
-		Me.Button16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
-		Me.Button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button16.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.Button16.ForeColor = System.Drawing.Color.Black
-		Me.Button16.Location = New System.Drawing.Point(667, 324)
-		Me.Button16.Name = "Button16"
-		Me.Button16.Size = New System.Drawing.Size(30, 26)
-		Me.Button16.TabIndex = 164
-		Me.Button16.UseVisualStyleBackColor = False
-		'
-		'GlitterAV
-		'
-		Me.GlitterAV.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GlitterAV.Location = New System.Drawing.Point(9, 16)
-		Me.GlitterAV.Name = "GlitterAV"
-		Me.GlitterAV.Size = New System.Drawing.Size(64, 64)
-		Me.GlitterAV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GlitterAV.TabIndex = 149
-		Me.GlitterAV.TabStop = False
-		'
-		'GlitterAV1
-		'
-		Me.GlitterAV1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GlitterAV1.Location = New System.Drawing.Point(9, 16)
-		Me.GlitterAV1.Name = "GlitterAV1"
-		Me.GlitterAV1.Size = New System.Drawing.Size(64, 64)
-		Me.GlitterAV1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GlitterAV1.TabIndex = 149
-		Me.GlitterAV1.TabStop = False
-		'
-		'GlitterAV3
-		'
-		Me.GlitterAV3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GlitterAV3.Location = New System.Drawing.Point(9, 16)
-		Me.GlitterAV3.Name = "GlitterAV3"
-		Me.GlitterAV3.Size = New System.Drawing.Size(64, 64)
-		Me.GlitterAV3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GlitterAV3.TabIndex = 149
-		Me.GlitterAV3.TabStop = False
-		'
-		'GlitterAV2
-		'
-		Me.GlitterAV2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GlitterAV2.Location = New System.Drawing.Point(9, 16)
-		Me.GlitterAV2.Name = "GlitterAV2"
-		Me.GlitterAV2.Size = New System.Drawing.Size(64, 64)
-		Me.GlitterAV2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GlitterAV2.TabIndex = 149
-		Me.GlitterAV2.TabStop = False
-		'
-		'GP6
-		'
-		Me.GP6.BackColor = System.Drawing.Color.Silver
-		Me.GP6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP6.Location = New System.Drawing.Point(86, 268)
-		Me.GP6.Name = "GP6"
-		Me.GP6.Size = New System.Drawing.Size(71, 93)
-		Me.GP6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GP6.TabIndex = 17
-		Me.GP6.TabStop = False
-		'
-		'GP2
-		'
-		Me.GP2.BackColor = System.Drawing.Color.Silver
-		Me.GP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP2.Location = New System.Drawing.Point(86, 17)
-		Me.GP2.Name = "GP2"
-		Me.GP2.Size = New System.Drawing.Size(71, 94)
-		Me.GP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GP2.TabIndex = 9
-		Me.GP2.TabStop = False
-		'
-		'GP5
-		'
-		Me.GP5.BackColor = System.Drawing.Color.Silver
-		Me.GP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP5.Location = New System.Drawing.Point(9, 268)
-		Me.GP5.Name = "GP5"
-		Me.GP5.Size = New System.Drawing.Size(71, 93)
-		Me.GP5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GP5.TabIndex = 15
-		Me.GP5.TabStop = False
-		'
-		'GP1
-		'
-		Me.GP1.BackColor = System.Drawing.Color.Silver
-		Me.GP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP1.Location = New System.Drawing.Point(9, 17)
-		Me.GP1.Name = "GP1"
-		Me.GP1.Size = New System.Drawing.Size(71, 94)
-		Me.GP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GP1.TabIndex = 0
-		Me.GP1.TabStop = False
-		'
-		'GP3
-		'
-		Me.GP3.BackColor = System.Drawing.Color.Silver
-		Me.GP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP3.Location = New System.Drawing.Point(9, 143)
-		Me.GP3.Name = "GP3"
-		Me.GP3.Size = New System.Drawing.Size(71, 93)
-		Me.GP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GP3.TabIndex = 11
-		Me.GP3.TabStop = False
-		'
-		'GP4
-		'
-		Me.GP4.BackColor = System.Drawing.Color.Silver
-		Me.GP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP4.Location = New System.Drawing.Point(86, 143)
-		Me.GP4.Name = "GP4"
-		Me.GP4.Size = New System.Drawing.Size(71, 93)
-		Me.GP4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.GP4.TabIndex = 13
-		Me.GP4.TabStop = False
-		'
-		'CardBack
-		'
-		Me.CardBack.BackColor = System.Drawing.Color.Silver
-		Me.CardBack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.CardBack.Location = New System.Drawing.Point(17, 28)
-		Me.CardBack.Name = "CardBack"
-		Me.CardBack.Size = New System.Drawing.Size(138, 179)
-		Me.CardBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.CardBack.TabIndex = 18
-		Me.CardBack.TabStop = False
-		'
-		'BP3
-		'
-		Me.BP3.BackColor = System.Drawing.Color.Silver
-		Me.BP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP3.Location = New System.Drawing.Point(9, 144)
-		Me.BP3.Name = "BP3"
-		Me.BP3.Size = New System.Drawing.Size(71, 93)
-		Me.BP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.BP3.TabIndex = 11
-		Me.BP3.TabStop = False
-		'
-		'BP6
-		'
-		Me.BP6.BackColor = System.Drawing.Color.Silver
-		Me.BP6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP6.Location = New System.Drawing.Point(86, 269)
-		Me.BP6.Name = "BP6"
-		Me.BP6.Size = New System.Drawing.Size(71, 93)
-		Me.BP6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.BP6.TabIndex = 17
-		Me.BP6.TabStop = False
-		'
-		'BP5
-		'
-		Me.BP5.BackColor = System.Drawing.Color.Silver
-		Me.BP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP5.Location = New System.Drawing.Point(9, 269)
-		Me.BP5.Name = "BP5"
-		Me.BP5.Size = New System.Drawing.Size(71, 93)
-		Me.BP5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.BP5.TabIndex = 15
-		Me.BP5.TabStop = False
-		'
-		'BP2
-		'
-		Me.BP2.BackColor = System.Drawing.Color.Silver
-		Me.BP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP2.Location = New System.Drawing.Point(86, 19)
-		Me.BP2.Name = "BP2"
-		Me.BP2.Size = New System.Drawing.Size(71, 93)
-		Me.BP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.BP2.TabIndex = 9
-		Me.BP2.TabStop = False
-		'
-		'BP4
-		'
-		Me.BP4.BackColor = System.Drawing.Color.Silver
-		Me.BP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP4.Location = New System.Drawing.Point(86, 144)
-		Me.BP4.Name = "BP4"
-		Me.BP4.Size = New System.Drawing.Size(71, 93)
-		Me.BP4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.BP4.TabIndex = 13
-		Me.BP4.TabStop = False
-		'
-		'BP1
-		'
-		Me.BP1.BackColor = System.Drawing.Color.Silver
-		Me.BP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP1.Location = New System.Drawing.Point(9, 19)
-		Me.BP1.Name = "BP1"
-		Me.BP1.Size = New System.Drawing.Size(71, 93)
-		Me.BP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.BP1.TabIndex = 0
-		Me.BP1.TabStop = False
-		'
-		'SP6
-		'
-		Me.SP6.BackColor = System.Drawing.Color.Silver
-		Me.SP6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP6.Location = New System.Drawing.Point(86, 269)
-		Me.SP6.Name = "SP6"
-		Me.SP6.Size = New System.Drawing.Size(71, 93)
-		Me.SP6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.SP6.TabIndex = 17
-		Me.SP6.TabStop = False
-		'
-		'SP2
-		'
-		Me.SP2.BackColor = System.Drawing.Color.Silver
-		Me.SP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP2.Location = New System.Drawing.Point(86, 19)
-		Me.SP2.Name = "SP2"
-		Me.SP2.Size = New System.Drawing.Size(71, 93)
-		Me.SP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.SP2.TabIndex = 9
-		Me.SP2.TabStop = False
-		'
-		'SP5
-		'
-		Me.SP5.BackColor = System.Drawing.Color.Silver
-		Me.SP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP5.Location = New System.Drawing.Point(9, 269)
-		Me.SP5.Name = "SP5"
-		Me.SP5.Size = New System.Drawing.Size(71, 93)
-		Me.SP5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.SP5.TabIndex = 15
-		Me.SP5.TabStop = False
-		'
-		'SP1
-		'
-		Me.SP1.BackColor = System.Drawing.Color.Silver
-		Me.SP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP1.Location = New System.Drawing.Point(9, 19)
-		Me.SP1.Name = "SP1"
-		Me.SP1.Size = New System.Drawing.Size(71, 93)
-		Me.SP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.SP1.TabIndex = 0
-		Me.SP1.TabStop = False
-		'
-		'SP3
-		'
-		Me.SP3.BackColor = System.Drawing.Color.Silver
-		Me.SP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP3.Location = New System.Drawing.Point(9, 144)
-		Me.SP3.Name = "SP3"
-		Me.SP3.Size = New System.Drawing.Size(71, 93)
-		Me.SP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.SP3.TabIndex = 11
-		Me.SP3.TabStop = False
-		'
-		'SP4
-		'
-		Me.SP4.BackColor = System.Drawing.Color.Silver
-		Me.SP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP4.Location = New System.Drawing.Point(86, 144)
-		Me.SP4.Name = "SP4"
-		Me.SP4.Size = New System.Drawing.Size(71, 93)
-		Me.SP4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.SP4.TabIndex = 13
-		Me.SP4.TabStop = False
-		'
-		'WishlistCostSilver
-		'
-		Me.WishlistCostSilver.BackColor = System.Drawing.Color.Transparent
-		Me.WishlistCostSilver.Image = CType(resources.GetObject("WishlistCostSilver.Image"), System.Drawing.Image)
-		Me.WishlistCostSilver.Location = New System.Drawing.Point(107, 206)
-		Me.WishlistCostSilver.Name = "WishlistCostSilver"
-		Me.WishlistCostSilver.Size = New System.Drawing.Size(28, 28)
-		Me.WishlistCostSilver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.WishlistCostSilver.TabIndex = 111
-		Me.WishlistCostSilver.TabStop = False
-		'
-		'WishlistCostGold
-		'
-		Me.WishlistCostGold.BackColor = System.Drawing.Color.Transparent
-		Me.WishlistCostGold.Image = CType(resources.GetObject("WishlistCostGold.Image"), System.Drawing.Image)
-		Me.WishlistCostGold.Location = New System.Drawing.Point(107, 206)
-		Me.WishlistCostGold.Name = "WishlistCostGold"
-		Me.WishlistCostGold.Size = New System.Drawing.Size(28, 28)
-		Me.WishlistCostGold.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.WishlistCostGold.TabIndex = 106
-		Me.WishlistCostGold.TabStop = False
-		Me.WishlistCostGold.Visible = False
-		'
-		'WishlistPreview
-		'
-		Me.WishlistPreview.ImageLocation = ""
-		Me.WishlistPreview.Location = New System.Drawing.Point(50, 54)
-		Me.WishlistPreview.Name = "WishlistPreview"
-		Me.WishlistPreview.Size = New System.Drawing.Size(145, 143)
-		Me.WishlistPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-		Me.WishlistPreview.TabIndex = 101
-		Me.WishlistPreview.TabStop = False
-		'
-		'Button32
-		'
-		Me.Button32.BackColor = System.Drawing.Color.Transparent
-		Me.Button32.Image = Global.Tease_AI.My.Resources.Resources.Button_Save_Big
-		Me.Button32.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-		Me.Button32.Location = New System.Drawing.Point(196, 24)
-		Me.Button32.Name = "Button32"
-		Me.Button32.Size = New System.Drawing.Size(135, 55)
-		Me.Button32.TabIndex = 55
-		Me.Button32.Text = "  Save Theme"
-		Me.Button32.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-		Me.Button32.UseVisualStyleBackColor = False
-		'
-		'Button31
-		'
-		Me.Button31.BackColor = System.Drawing.Color.Transparent
-		Me.Button31.Image = Global.Tease_AI.My.Resources.Resources.Button_Import_Big
-		Me.Button31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-		Me.Button31.Location = New System.Drawing.Point(17, 24)
-		Me.Button31.Name = "Button31"
-		Me.Button31.Size = New System.Drawing.Size(135, 55)
-		Me.Button31.TabIndex = 54
-		Me.Button31.Text = "  Open Theme"
-		Me.Button31.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-		Me.Button31.UseVisualStyleBackColor = False
-		'
-		'PictureBox10
-		'
-		Me.PictureBox10.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox10.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
-		Me.PictureBox10.Location = New System.Drawing.Point(9, 6)
-		Me.PictureBox10.Name = "PictureBox10"
-		Me.PictureBox10.Size = New System.Drawing.Size(160, 19)
-		Me.PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PictureBox10.TabIndex = 151
-		Me.PictureBox10.TabStop = False
-		'
-		'Button28
-		'
-		Me.Button28.BackColor = System.Drawing.Color.Transparent
-		Me.Button28.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
-		Me.Button28.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button28.Location = New System.Drawing.Point(296, 221)
-		Me.Button28.Name = "Button28"
-		Me.Button28.Size = New System.Drawing.Size(32, 32)
-		Me.Button28.TabIndex = 21
-		Me.Button28.UseVisualStyleBackColor = False
-		'
-		'Button30
-		'
-		Me.Button30.BackColor = System.Drawing.Color.Transparent
-		Me.Button30.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
-		Me.Button30.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button30.Location = New System.Drawing.Point(296, 187)
-		Me.Button30.Name = "Button30"
-		Me.Button30.Size = New System.Drawing.Size(32, 32)
-		Me.Button30.TabIndex = 18
-		Me.Button30.UseVisualStyleBackColor = False
-		'
-		'Button20
-		'
-		Me.Button20.BackColor = System.Drawing.Color.Transparent
-		Me.Button20.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
-		Me.Button20.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button20.Location = New System.Drawing.Point(296, 85)
-		Me.Button20.Name = "Button20"
-		Me.Button20.Size = New System.Drawing.Size(32, 32)
-		Me.Button20.TabIndex = 8
-		Me.Button20.UseVisualStyleBackColor = False
-		'
-		'Button21
-		'
-		Me.Button21.BackColor = System.Drawing.Color.Transparent
-		Me.Button21.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
-		Me.Button21.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button21.Location = New System.Drawing.Point(296, 153)
-		Me.Button21.Name = "Button21"
-		Me.Button21.Size = New System.Drawing.Size(32, 32)
-		Me.Button21.TabIndex = 15
-		Me.Button21.UseVisualStyleBackColor = False
-		'
-		'Button23
-		'
-		Me.Button23.BackColor = System.Drawing.Color.Transparent
-		Me.Button23.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
-		Me.Button23.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button23.Location = New System.Drawing.Point(296, 119)
-		Me.Button23.Name = "Button23"
-		Me.Button23.Size = New System.Drawing.Size(32, 32)
-		Me.Button23.TabIndex = 11
-		Me.Button23.UseVisualStyleBackColor = False
-		'
-		'Button25
-		'
-		Me.Button25.BackColor = System.Drawing.Color.Transparent
-		Me.Button25.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
-		Me.Button25.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button25.Location = New System.Drawing.Point(296, 17)
-		Me.Button25.Name = "Button25"
-		Me.Button25.Size = New System.Drawing.Size(32, 32)
-		Me.Button25.TabIndex = 2
-		Me.Button25.UseVisualStyleBackColor = False
-		'
-		'Button27
-		'
-		Me.Button27.BackColor = System.Drawing.Color.Transparent
-		Me.Button27.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Button_ColorPicker
-		Me.Button27.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button27.Location = New System.Drawing.Point(296, 51)
-		Me.Button27.Name = "Button27"
-		Me.Button27.Size = New System.Drawing.Size(32, 32)
-		Me.Button27.TabIndex = 5
-		Me.Button27.UseVisualStyleBackColor = False
-		'
-		'PBBackgroundPreview
-		'
-		Me.PBBackgroundPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.PBBackgroundPreview.Location = New System.Drawing.Point(6, 19)
-		Me.PBBackgroundPreview.Name = "PBBackgroundPreview"
-		Me.PBBackgroundPreview.Size = New System.Drawing.Size(202, 133)
-		Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.PBBackgroundPreview.TabIndex = 0
-		Me.PBBackgroundPreview.TabStop = False
-		'
-		'Button17
-		'
-		Me.Button17.BackColor = System.Drawing.Color.Transparent
-		Me.Button17.BackgroundImage = Global.Tease_AI.My.Resources.Resources.Background_Load
-		Me.Button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-		Me.Button17.Location = New System.Drawing.Point(228, 36)
-		Me.Button17.Name = "Button17"
-		Me.Button17.Size = New System.Drawing.Size(103, 93)
-		Me.Button17.TabIndex = 1
-		Me.Button17.UseVisualStyleBackColor = False
-		'
-		'PictureBox8
-		'
-		Me.PictureBox8.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox8.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
-		Me.PictureBox8.Location = New System.Drawing.Point(9, 6)
-		Me.PictureBox8.Name = "PictureBox8"
-		Me.PictureBox8.Size = New System.Drawing.Size(160, 19)
-		Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PictureBox8.TabIndex = 166
-		Me.PictureBox8.TabStop = False
-		'
-		'PictureBox9
-		'
-		Me.PictureBox9.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox9.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_small
-		Me.PictureBox9.Location = New System.Drawing.Point(9, 6)
-		Me.PictureBox9.Name = "PictureBox9"
-		Me.PictureBox9.Size = New System.Drawing.Size(160, 19)
-		Me.PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-		Me.PictureBox9.TabIndex = 166
-		Me.PictureBox9.TabStop = False
-		'
-		'PictureBox3
-		'
-		Me.PictureBox3.BackColor = System.Drawing.Color.LightGray
-		Me.PictureBox3.Image = Global.Tease_AI.My.Resources.Resources.TAI_Banner_big
-		Me.PictureBox3.Location = New System.Drawing.Point(84, 17)
-		Me.PictureBox3.Name = "PictureBox3"
-		Me.PictureBox3.Size = New System.Drawing.Size(531, 58)
-		Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-		Me.PictureBox3.TabIndex = 166
-		Me.PictureBox3.TabStop = False
-		'
 		'FrmSettings
 		'
 		Me.AllowDrop = True
@@ -14591,6 +14699,7 @@ Partial Class FrmSettings
 		Me.GBGeneralSystem.PerformLayout()
 		Me.GBGeneralImages.ResumeLayout(False)
 		Me.GBGeneralImages.PerformLayout()
+		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GBGeneralSettings.ResumeLayout(False)
 		Me.GBGeneralSettings.PerformLayout()
 		Me.GBSubFont.ResumeLayout(False)
@@ -14600,6 +14709,7 @@ Partial Class FrmSettings
 		Me.TabPage2.ResumeLayout(False)
 		Me.Panel3.ResumeLayout(False)
 		Me.Panel3.PerformLayout()
+		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GBDomTypingStyle.ResumeLayout(False)
 		Me.GBDomTypingStyle.PerformLayout()
 		CType(Me.NBTypoChance, System.ComponentModel.ISupportInitialize).EndInit()
@@ -14654,6 +14764,7 @@ Partial Class FrmSettings
 		CType(Me.NBLongEdge, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.NBHoldTheEdgeMin, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.NBHoldTheEdgeMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GroupBox32.ResumeLayout(False)
 		Me.GroupBox32.PerformLayout()
 		CType(Me.NBBirthdayDay, System.ComponentModel.ISupportInitialize).EndInit()
@@ -14669,22 +14780,25 @@ Partial Class FrmSettings
 		Me.TabPage18.ResumeLayout(False)
 		Me.TabPage19.ResumeLayout(False)
 		Me.GroupBox42.ResumeLayout(False)
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GroupBox43.ResumeLayout(False)
 		Me.TabPage7.ResumeLayout(False)
 		Me.TabControl4.ResumeLayout(False)
-		Me.TabPage31.ResumeLayout(False)
-		Me.TabPage31.PerformLayout()
+		Me.TpImagesUrlFiles.ResumeLayout(False)
+		Me.TpImagesUrlFiles.PerformLayout()
 		Me.GroupBox66.ResumeLayout(False)
-		Me.TabPage32.ResumeLayout(False)
+		CType(Me.PBURLPreview, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TpImagesGenre.ResumeLayout(False)
 		Me.GrbImageUrlFiles.ResumeLayout(False)
 		Me.TlpImageUrls.ResumeLayout(False)
 		Me.TlpImageUrls.PerformLayout()
-		Me.GroupBox14.ResumeLayout(False)
-		Me.GroupBox14.PerformLayout()
+		Me.GbxImagesGenre.ResumeLayout(False)
+		Me.GbxImagesGenre.PerformLayout()
 		Me.TabPage33.ResumeLayout(False)
 		Me.TabControl5.ResumeLayout(False)
 		Me.TabPage34.ResumeLayout(False)
 		Me.TabPage34.PerformLayout()
+		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.TabPage35.ResumeLayout(False)
 		Me.TabPage35.PerformLayout()
 		Me.GroupBox55.ResumeLayout(False)
@@ -14706,8 +14820,11 @@ Partial Class FrmSettings
 		Me.TabPage11.ResumeLayout(False)
 		Me.Panel7.ResumeLayout(False)
 		Me.Panel7.PerformLayout()
+		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.WebPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.TpVideoSettings.ResumeLayout(False)
 		Me.PnlVideoSettings.ResumeLayout(False)
+		CType(Me.PbBannerVideoSettings, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GbxVideoGeneralD.ResumeLayout(False)
 		Me.GbxVideoGeneralD.PerformLayout()
 		Me.GbxVideoSpecialD.ResumeLayout(False)
@@ -14729,36 +14846,64 @@ Partial Class FrmSettings
 		Me.GBGlitterD.ResumeLayout(False)
 		Me.GBGlitterD.PerformLayout()
 		CType(Me.GlitterSlider, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GlitterAV, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GBGlitter1.ResumeLayout(False)
 		Me.GBGlitter1.PerformLayout()
 		CType(Me.GlitterSlider1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GlitterAV1, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GBGlitter3.ResumeLayout(False)
 		Me.GBGlitter3.PerformLayout()
 		CType(Me.GlitterSlider3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GlitterAV3, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GBGlitter2.ResumeLayout(False)
 		Me.GBGlitter2.PerformLayout()
 		CType(Me.GlitterSlider2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GlitterAV2, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.TabPage23.ResumeLayout(False)
 		Me.TabPage23.PerformLayout()
 		Me.GroupBox61.ResumeLayout(False)
 		Me.GroupBox61.PerformLayout()
+		CType(Me.GP6, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP5, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP4, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GroupBox60.ResumeLayout(False)
+		CType(Me.CardBack, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GroupBox58.ResumeLayout(False)
 		Me.GroupBox58.PerformLayout()
+		CType(Me.BP3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP6, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP5, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP4, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP1, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GroupBox59.ResumeLayout(False)
 		Me.GroupBox59.PerformLayout()
+		CType(Me.SP6, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP5, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP4, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.TabPage6.ResumeLayout(False)
 		Me.Panel10.ResumeLayout(False)
 		Me.Panel10.PerformLayout()
 		CType(Me.NBWishlistCost, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.PNLWishList.ResumeLayout(False)
+		CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.TabPage26.ResumeLayout(False)
 		Me.Panel12.ResumeLayout(False)
 		Me.GroupBox9.ResumeLayout(False)
+		CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GroupBox5.ResumeLayout(False)
 		Me.GroupBox5.PerformLayout()
 		Me.GroupBox11.ResumeLayout(False)
 		Me.GroupBox1.ResumeLayout(False)
+		CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.TabPage4.ResumeLayout(False)
 		Me.Panel6.ResumeLayout(False)
 		Me.GroupBox69.ResumeLayout(False)
@@ -14811,6 +14956,7 @@ Partial Class FrmSettings
 		CType(Me.NBAllowSometimes, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.NBAllowRarely, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.NBAllowOften, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.TabPage13.ResumeLayout(False)
 		Me.TabControl2.ResumeLayout(False)
 		Me.TabPage27.ResumeLayout(False)
@@ -14837,6 +14983,7 @@ Partial Class FrmSettings
 		Me.GroupBox20.PerformLayout()
 		Me.GroupBox15.ResumeLayout(False)
 		Me.GroupBox15.PerformLayout()
+		CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.TabPage28.ResumeLayout(False)
 		Me.TabControl3.ResumeLayout(False)
 		Me.TabPage29.ResumeLayout(False)
@@ -14846,6 +14993,7 @@ Partial Class FrmSettings
 		Me.TabPage5.ResumeLayout(False)
 		Me.Panel5.ResumeLayout(False)
 		Me.Panel5.PerformLayout()
+		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.GroupBox47.ResumeLayout(False)
 		Me.GroupBox41.ResumeLayout(False)
 		Me.GroupBox44.ResumeLayout(False)
@@ -14857,46 +15005,6 @@ Partial Class FrmSettings
 		Me.GroupBox65.PerformLayout()
 		CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PBURLPreview, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.WebPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PbBannerVideoSettings, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GlitterAV, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GlitterAV1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GlitterAV3, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GlitterAV2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GP6, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GP2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GP5, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GP1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GP3, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.GP4, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.CardBack, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.BP3, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.BP6, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.BP5, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.BP2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.BP4, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.BP1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.SP6, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.SP2, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.SP5, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.SP1, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.SP3, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.SP4, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit()
-		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
 		Me.ResumeLayout(False)
 
 	End Sub
@@ -15041,12 +15149,12 @@ Partial Class FrmSettings
 	Friend WithEvents GroupBox47 As System.Windows.Forms.GroupBox
 	Friend WithEvents GroupBox41 As System.Windows.Forms.GroupBox
 	Friend WithEvents CBButtSubDir As System.Windows.Forms.CheckBox
-	Friend WithEvents LBLButtPath As System.Windows.Forms.Label
+	Friend WithEvents TbxIButts As System.Windows.Forms.TextBox
 	Friend WithEvents BTNButtPath As System.Windows.Forms.Button
 	Friend WithEvents BtnImageUrlButt As System.Windows.Forms.Button
 	Friend WithEvents GroupBox40 As System.Windows.Forms.GroupBox
 	Friend WithEvents CBBoobSubDir As System.Windows.Forms.CheckBox
-	Friend WithEvents LBLBoobPath As System.Windows.Forms.Label
+	Friend WithEvents TbxIBoobs As System.Windows.Forms.TextBox
 	Friend WithEvents BTNBoobPath As System.Windows.Forms.Button
 	Friend WithEvents BtnImageUrlBoobs As System.Windows.Forms.Button
 	Friend WithEvents TabPage11 As System.Windows.Forms.TabPage
@@ -15297,21 +15405,21 @@ Partial Class FrmSettings
 	Friend WithEvents CBImageInfo As System.Windows.Forms.CheckBox
 	Friend WithEvents Label88 As System.Windows.Forms.Label
 	Friend WithEvents URLFileList As System.Windows.Forms.CheckedListBox
-	Friend WithEvents LBLIMaledom As System.Windows.Forms.Label
-	Friend WithEvents LBLIGay As System.Windows.Forms.Label
-	Friend WithEvents LBLIHentai As System.Windows.Forms.Label
+	Friend WithEvents TbxIMaledom As System.Windows.Forms.TextBox
+	Friend WithEvents TbxIGay As System.Windows.Forms.TextBox
+	Friend WithEvents TbxIHentai As System.Windows.Forms.TextBox
 	Friend WithEvents BTNIMaledom As System.Windows.Forms.Button
 	Friend WithEvents BTNIGay As System.Windows.Forms.Button
 	Friend WithEvents BTNIHentai As System.Windows.Forms.Button
 	Friend WithEvents CBIHentai As System.Windows.Forms.CheckBox
 	Friend WithEvents CBIMaledom As System.Windows.Forms.CheckBox
 	Friend WithEvents CBIGay As System.Windows.Forms.CheckBox
-	Friend WithEvents LBLILezdom As System.Windows.Forms.Label
-	Friend WithEvents LBLIFemdom As System.Windows.Forms.Label
-	Friend WithEvents LBLIBlowjob As System.Windows.Forms.Label
-	Friend WithEvents LBLILesbian As System.Windows.Forms.Label
-	Friend WithEvents LBLISoftcore As System.Windows.Forms.Label
-	Friend WithEvents LBLIHardcore As System.Windows.Forms.Label
+	Friend WithEvents TbxILezdom As System.Windows.Forms.TextBox
+	Friend WithEvents TbxIFemdom As System.Windows.Forms.TextBox
+	Friend WithEvents TbxIBlowjob As System.Windows.Forms.TextBox
+	Friend WithEvents TbxILesbian As System.Windows.Forms.TextBox
+	Friend WithEvents TbxISoftcore As System.Windows.Forms.TextBox
+	Friend WithEvents TbxIHardcore As System.Windows.Forms.TextBox
 	Friend WithEvents BTNILezdom As System.Windows.Forms.Button
 	Friend WithEvents BTNIFemdom As System.Windows.Forms.Button
 	Friend WithEvents BTNIBlowjob As System.Windows.Forms.Button
@@ -15324,7 +15432,7 @@ Partial Class FrmSettings
 	Friend WithEvents CBIBlowjob As System.Windows.Forms.CheckBox
 	Friend WithEvents CBILezdom As System.Windows.Forms.CheckBox
 	Friend WithEvents CBIFemdom As System.Windows.Forms.CheckBox
-	Friend WithEvents LBLIGeneral As System.Windows.Forms.Label
+	Friend WithEvents TbxIGeneral As System.Windows.Forms.TextBox
 	Friend WithEvents BTNIGeneral As System.Windows.Forms.Button
 	Friend WithEvents CBIGeneral As System.Windows.Forms.CheckBox
 	Friend WithEvents CBIHardcoreSD As System.Windows.Forms.CheckBox
@@ -15338,7 +15446,7 @@ Partial Class FrmSettings
 	Friend WithEvents CBILesbianSD As System.Windows.Forms.CheckBox
 	Friend WithEvents CBISoftcoreSD As System.Windows.Forms.CheckBox
 	Friend WithEvents CBICaptionsSD As System.Windows.Forms.CheckBox
-	Friend WithEvents LBLICaptions As System.Windows.Forms.Label
+	Friend WithEvents TbxICaptions As System.Windows.Forms.TextBox
 	Friend WithEvents BTNICaptions As System.Windows.Forms.Button
 	Friend WithEvents CBICaptions As System.Windows.Forms.CheckBox
 	Friend WithEvents GBDommeImages As System.Windows.Forms.GroupBox
@@ -15742,11 +15850,11 @@ Partial Class FrmSettings
 	Friend WithEvents Label143 As System.Windows.Forms.Label
 	Friend WithEvents LBLDebugScriptTime As System.Windows.Forms.Label
 	Friend WithEvents TabControl4 As System.Windows.Forms.TabControl
-	Friend WithEvents TabPage31 As System.Windows.Forms.TabPage
-	Friend WithEvents TabPage32 As System.Windows.Forms.TabPage
+	Friend WithEvents TpImagesUrlFiles As System.Windows.Forms.TabPage
+	Friend WithEvents TpImagesGenre As System.Windows.Forms.TabPage
 	Friend WithEvents BTNURLFilesNone As System.Windows.Forms.Button
 	Friend WithEvents BTNURLFilesAll As System.Windows.Forms.Button
-	Friend WithEvents GroupBox14 As System.Windows.Forms.GroupBox
+	Friend WithEvents GbxImagesGenre As System.Windows.Forms.GroupBox
 	Friend WithEvents GrbImageUrlFiles As System.Windows.Forms.GroupBox
 	Friend WithEvents ChbImageUrlButts As System.Windows.Forms.CheckBox
 	Friend WithEvents ChbImageUrlBoobs As System.Windows.Forms.CheckBox

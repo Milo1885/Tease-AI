@@ -372,13 +372,13 @@
       <Value Profile="(Default)">20</Value>
     </Setting>
     <Setting Name="LBLBoobPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="UrlFileBoobs" Type="System.String" Scope="User">
       <Value Profile="(Default)">No URL File selected</Value>
     </Setting>
     <Setting Name="LBLButtPath" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">No path selected</Value>
     </Setting>
     <Setting Name="UrlFileButt" Type="System.String" Scope="User">
       <Value Profile="(Default)">No URL File selected</Value>
@@ -390,10 +390,10 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CBBoobSubDir" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CBButtSubDir" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CBEnableBnB" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

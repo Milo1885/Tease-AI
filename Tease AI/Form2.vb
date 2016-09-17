@@ -148,159 +148,23 @@ Public Class FrmSettings
 		FrmSplash.LBLSplash.Text = "Checking Local Image settings..."
 		FrmSplash.Refresh()
 
-		LBLIHardcore.Text = My.Settings.IHardcore
-		LBLISoftcore.Text = My.Settings.ISoftcore
-		LBLILesbian.Text = My.Settings.ILesbian
-		LBLIBlowjob.Text = My.Settings.IBlowjob
-		LBLIFemdom.Text = My.Settings.IFemdom
-		LBLILezdom.Text = My.Settings.ILezdom
-		LBLIHentai.Text = My.Settings.IHentai
-		LBLIGay.Text = My.Settings.IGay
-		LBLIMaledom.Text = My.Settings.IMaledom
-		LBLICaptions.Text = My.Settings.ICaptions
-		LBLIGeneral.Text = My.Settings.IGeneral
+		Debug.Print("Checking Local image Settings...")
 
-		Debug.Print("FRM2 STAGE ONE reached")
+		' Check image Folders
+		ImagesHardcore_CheckFolder()
+		ImagesSoftcore_CheckFolder()
+		ImagesLesbian_CheckFolder()
+		ImagesBlowjob_CheckFolder()
+		ImagesFemdom_CheckFolder()
+		ImagesLezdom_CheckFolder()
+		ImagesHentai_CheckFolder()
+		ImagesGay_CheckFolder()
+		ImagesMaledom_CheckFolder()
+		ImagesGeneral_CheckFolder()
+		ImagesCaptions_CheckFolder()
+		ImagesBoobs_CheckFolder()
+		ImagesButts_CheckFolder()
 
-		If My.Settings.CBIHardcore = True Then
-			CBIHardcore.Checked = True
-		Else
-			CBIHardcore.Checked = False
-		End If
-
-		If My.Settings.CBISoftcore = True Then
-			CBISoftcore.Checked = True
-		Else
-			CBISoftcore.Checked = False
-		End If
-
-		If My.Settings.CBILesbian = True Then
-			CBILesbian.Checked = True
-		Else
-			CBILesbian.Checked = False
-		End If
-
-		If My.Settings.CBIBlowjob = True Then
-			CBIBlowjob.Checked = True
-		Else
-			CBIBlowjob.Checked = False
-		End If
-
-		If My.Settings.CBIFemdom = True Then
-			CBIFemdom.Checked = True
-		Else
-			CBIFemdom.Checked = False
-		End If
-
-		If My.Settings.CBILezdom = True Then
-			CBILezdom.Checked = True
-		Else
-			CBILezdom.Checked = False
-		End If
-
-		If My.Settings.CBIHentai = True Then
-			CBIHentai.Checked = True
-		Else
-			CBIHentai.Checked = False
-		End If
-
-		If My.Settings.CBIGay = True Then
-			CBIGay.Checked = True
-		Else
-			CBIGay.Checked = False
-		End If
-
-		If My.Settings.CBIMaledom = True Then
-			CBIMaledom.Checked = True
-		Else
-			CBIMaledom.Checked = False
-		End If
-
-		If My.Settings.CBICaptions = True Then
-			CBICaptions.Checked = True
-		Else
-			CBICaptions.Checked = False
-		End If
-
-		If My.Settings.CBIGeneral = True Then
-			CBIGeneral.Checked = True
-		Else
-			CBIGeneral.Checked = False
-		End If
-
-		CBIButts.Checked = My.Settings.CBIButts
-		CBIBoobs.Checked = My.Settings.CBIBoobs
-
-		Debug.Print(My.Settings.IHardcoreSD & "????????")
-
-
-		If My.Settings.IHardcoreSD = True Then
-			CBIHardcoreSD.Checked = True
-		Else
-			CBIHardcoreSD.Checked = False
-		End If
-
-		If My.Settings.ISoftcoreSD = True Then
-			CBISoftcoreSD.Checked = True
-		Else
-			CBISoftcoreSD.Checked = False
-		End If
-
-		If My.Settings.ILesbianSD = True Then
-			CBILesbianSD.Checked = True
-		Else
-			CBILesbianSD.Checked = False
-		End If
-
-		If My.Settings.IBlowjobSD = True Then
-			CBIBlowjobSD.Checked = True
-		Else
-			CBIBlowjobSD.Checked = False
-		End If
-
-		If My.Settings.IFemdomSD = True Then
-			CBIFemdomSD.Checked = True
-		Else
-			CBIFemdomSD.Checked = False
-		End If
-
-		If My.Settings.ILezdomSD = True Then
-			CBILezdomSD.Checked = True
-		Else
-			CBILezdomSD.Checked = False
-		End If
-
-		If My.Settings.IHentaiSD = True Then
-			CBIHentaiSD.Checked = True
-		Else
-			CBIHentaiSD.Checked = False
-		End If
-
-		If My.Settings.IGaySD = True Then
-			CBIGaySD.Checked = True
-		Else
-			CBIGaySD.Checked = False
-		End If
-
-		If My.Settings.IMaledomSD = True Then
-			CBIMaledomSD.Checked = True
-		Else
-			CBIMaledomSD.Checked = False
-		End If
-
-		If My.Settings.ICaptionsSD = True Then
-			CBICaptionsSD.Checked = True
-		Else
-			CBICaptionsSD.Checked = False
-		End If
-
-		If My.Settings.IGeneralSD = True Then
-			CBIGeneralSD.Checked = True
-		Else
-			CBIGeneralSD.Checked = False
-		End If
-
-		'VerifyLocalImagePaths()
 
 		Debug.Print("FRM2 STAGE Two reached")
 
@@ -3233,37 +3097,6 @@ trypreviousimage:
 	End Sub
 
 
-
-
-
-	Private Sub BTNBoobPath_Click(sender As System.Object, e As System.EventArgs) Handles BTNBoobPath.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLBoobPath.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.LBLBoobPath = LBLBoobPath.Text
-		End If
-	End Sub
-
-	Private Sub BTNButtPath_Click(sender As System.Object, e As System.EventArgs) Handles BTNButtPath.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLButtPath.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.LBLButtPath = LBLButtPath.Text
-		End If
-	End Sub
-
-	Private Sub CBBoobSubDir_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBBoobSubDir.CheckedChanged
-		If CBBoobSubDir.Checked = True Then
-			My.Settings.CBBoobSubDir = True
-		End If
-	End Sub
-
-	Private Sub CBButtSubDir_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBButtSubDir.CheckedChanged
-		If CBButtSubDir.Checked = True Then
-			My.Settings.CBButtSubDir = True
-		End If
-	End Sub
-
-
-
 	Private Sub CheckBox6_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTagBoobs.CheckedChanged
 
 	End Sub
@@ -4093,20 +3926,20 @@ trypreviousimage:
 		TTDir.SetToolTip(TBEmoteEnd, "This determines what symbol(s) the domme uses to end an emote.")
 	End Sub
 
-    Private Sub LockOrgasmChances_LostFocus(sender As System.Object, e As System.EventArgs) Handles LockOrgasmChances.LostFocus
-        If LockOrgasmChances.Checked = True Then
-            My.Settings.LockOrgasmChances = True
-        Else
-            My.Settings.LockOrgasmChances = False
-        End If
-    End Sub
+	Private Sub LockOrgasmChances_LostFocus(sender As System.Object, e As System.EventArgs) Handles LockOrgasmChances.LostFocus
+		If LockOrgasmChances.Checked = True Then
+			My.Settings.LockOrgasmChances = True
+		Else
+			My.Settings.LockOrgasmChances = False
+		End If
+	End Sub
 
-    Private Sub LockOrgasmChances_MouseHover(sender As System.Object, e As System.EventArgs) Handles LockOrgasmChances.MouseHover
-        TTDir.SetToolTip(LockOrgasmChances, "If checked the orgasm chances will be locked and unchangeable once you start the tease." & Environment.NewLine & Environment.NewLine &
-            "Orgasm chances will be changeable and unlocked when out of a tease.")
-    End Sub
+	Private Sub LockOrgasmChances_MouseHover(sender As System.Object, e As System.EventArgs) Handles LockOrgasmChances.MouseHover
+		TTDir.SetToolTip(LockOrgasmChances, "If checked the orgasm chances will be locked and unchangeable once you start the tease." & Environment.NewLine & Environment.NewLine &
+			"Orgasm chances will be changeable and unlocked when out of a tease.")
+	End Sub
 
-    Private Sub CBDomDenialEnds_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBDomDenialEnds.LostFocus
+	Private Sub CBDomDenialEnds_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBDomDenialEnds.LostFocus
 		If CBDomDenialEnds.Checked = True Then
 			My.Settings.DomDenialEnd = True
 		Else
@@ -4756,22 +4589,20 @@ trypreviousimage:
 		Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 		Dim files As String()
 
-		If CBIHardcore.Checked = True Then
+		If My.Settings.CBIHardcore = True Then
 			LBLMaintenance.Text = "Checking Hardcore image path..."
-			If Not Directory.Exists(LBLIHardcore.Text) Then
-				If LBLIHardcore.Text <> "" Or LBLIHardcore.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.IHardcore) Then
+				If My.Settings.IHardcore <> "" Or My.Settings.IHardcore <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Hardcore images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Hardcore Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBIHardcore.Checked = False
-				LBLIHardcore.Text = ""
 				My.Settings.IHardcore = My.MySettings.Default.IHardcore '"No path selected"
 				My.Settings.CBIHardcore = My.MySettings.Default.CBIHardcore
 			Else
 
 
 
-				Dim ImageFolder As String = LBLIHardcore.Text
+				Dim ImageFolder As String = My.Settings.IHardcore
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -4787,8 +4618,7 @@ HardcoreGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Hardcore folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Hardcore Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBIHardcore.Checked = False
-					LBLIHardcore.Text = ""
+
 					My.Settings.IHardcore = "No path selected"
 					My.Settings.CBIHardcore = False
 				End If
@@ -4799,20 +4629,18 @@ HardcoreGood:
 
 		PBMaintenance.Value += 1
 
-		If CBISoftcore.Checked = True Then
+		If My.Settings.CBISoftcore = True Then
 			LBLMaintenance.Text = "Checking Softcore image path..."
-			If Not Directory.Exists(LBLISoftcore.Text) Then
-				If LBLISoftcore.Text <> "" Or LBLISoftcore.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.ISoftcore) Then
+				If My.Settings.ISoftcore <> "" Or My.Settings.ISoftcore <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Softcore images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Softcore Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBISoftcore.Checked = False
-				LBLISoftcore.Text = ""
 				My.Settings.ISoftcore = "No path selected"
 				My.Settings.CBISoftcore = False
 			Else
 
-				Dim ImageFolder As String = LBLISoftcore.Text
+				Dim ImageFolder As String = My.Settings.ISoftcore
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -4829,8 +4657,6 @@ SoftcoreGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Softcore folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Softcore Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBISoftcore.Checked = False
-					LBLISoftcore.Text = ""
 					My.Settings.ISoftcore = "No path selected"
 					My.Settings.CBISoftcore = False
 				End If
@@ -4841,20 +4667,18 @@ SoftcoreGood:
 
 		PBMaintenance.Value += 1
 
-		If CBILesbian.Checked = True Then
+		If My.Settings.CBILesbian = True Then
 			LBLMaintenance.Text = "Checking Lesbian image path..."
-			If Not Directory.Exists(LBLILesbian.Text) Then
-				If LBLILesbian.Text <> "" Or LBLILesbian.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.ILesbian) Then
+				If My.Settings.ILesbian <> "" Or My.Settings.ILesbian <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Lesbian images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Lesbian Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBILesbian.Checked = False
-				LBLILesbian.Text = ""
 				My.Settings.ILesbian = "No path selected"
 				My.Settings.CBILesbian = False
 			Else
 
-				Dim ImageFolder As String = LBLILesbian.Text
+				Dim ImageFolder As String = My.Settings.ILesbian
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -4871,8 +4695,6 @@ LesbianGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Lesbian folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Lesbian Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBILesbian.Checked = False
-					LBLILesbian.Text = ""
 					My.Settings.ILesbian = "No path selected"
 					My.Settings.CBILesbian = False
 				End If
@@ -4883,20 +4705,18 @@ LesbianGood:
 
 		PBMaintenance.Value += 1
 
-		If CBIBlowjob.Checked = True Then
+		If My.Settings.CBIBlowjob = True Then
 			LBLMaintenance.Text = "Checking Blowjob image path..."
-			If Not Directory.Exists(LBLIBlowjob.Text) Then
-				If LBLIBlowjob.Text <> "" Or LBLIBlowjob.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.IBlowjob) Then
+				If My.Settings.IBlowjob <> "" Or My.Settings.IBlowjob <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Blowjob images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Blowjob Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBIBlowjob.Checked = False
-				LBLIBlowjob.Text = ""
 				My.Settings.IBlowjob = "No path selected"
 				My.Settings.CBIBlowjob = False
 			Else
 
-				Dim ImageFolder As String = LBLIBlowjob.Text
+				Dim ImageFolder As String = My.Settings.IBlowjob
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -4913,8 +4733,6 @@ BlowjobGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Blowjob folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Blowjob Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBIBlowjob.Checked = False
-					LBLIBlowjob.Text = ""
 					My.Settings.IBlowjob = "No path selected"
 					My.Settings.CBIBlowjob = False
 				End If
@@ -4925,20 +4743,18 @@ BlowjobGood:
 
 		PBMaintenance.Value += 1
 
-		If CBIFemdom.Checked = True Then
+		If My.Settings.CBIFemdom = True Then
 			LBLMaintenance.Text = "Checking Femdom image path..."
-			If Not Directory.Exists(LBLIFemdom.Text) Then
-				If LBLIFemdom.Text <> "" Or LBLIFemdom.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.IFemdom) Then
+				If My.Settings.IFemdom <> "" Or My.Settings.IFemdom <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Femdom images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Femdom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBIFemdom.Checked = False
-				LBLIFemdom.Text = ""
 				My.Settings.IFemdom = "No path selected"
 				My.Settings.CBIFemdom = False
 			Else
 
-				Dim ImageFolder As String = LBLIFemdom.Text
+				Dim ImageFolder As String = My.Settings.IFemdom
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -4956,8 +4772,6 @@ FemdomGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Femdom folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Femdom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBIFemdom.Checked = False
-					LBLIFemdom.Text = ""
 					My.Settings.IFemdom = "No path selected"
 					My.Settings.CBIFemdom = False
 				End If
@@ -4968,20 +4782,18 @@ FemdomGood:
 
 		PBMaintenance.Value += 1
 
-		If CBILezdom.Checked = True Then
+		If My.Settings.CBILezdom = True Then
 			LBLMaintenance.Text = "Checking Lezdom image path..."
-			If Not Directory.Exists(LBLILezdom.Text) Then
-				If LBLILezdom.Text <> "" Or LBLILezdom.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.ILezdom) Then
+				If My.Settings.ILezdom <> "" Or My.Settings.ILezdom <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Lezdom images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Lezdom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBILezdom.Checked = False
-				LBLILezdom.Text = ""
 				My.Settings.ILezdom = "No path selected"
 				My.Settings.CBILezdom = False
 			Else
 
-				Dim ImageFolder As String = LBLILezdom.Text
+				Dim ImageFolder As String = My.Settings.ILezdom
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -4998,8 +4810,6 @@ LezdomGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Lezdom folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Lezdom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBILezdom.Checked = False
-					LBLILezdom.Text = ""
 					My.Settings.ILezdom = "No path selected"
 					My.Settings.CBILezdom = False
 				End If
@@ -5010,20 +4820,18 @@ LezdomGood:
 
 		PBMaintenance.Value += 1
 
-		If CBIHentai.Checked = True Then
+		If My.Settings.CBIHentai = True Then
 			LBLMaintenance.Text = "Checking Hentai image path..."
-			If Not Directory.Exists(LBLIHentai.Text) Then
-				If LBLIHentai.Text <> "" Or LBLIHentai.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.IHentai) Then
+				If My.Settings.IHentai <> "" Or My.Settings.IHentai <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Hentai images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Hentai Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBIHentai.Checked = False
-				LBLIHentai.Text = ""
 				My.Settings.IHentai = "No path selected"
 				My.Settings.CBIHentai = False
 			Else
 
-				Dim ImageFolder As String = LBLIHentai.Text
+				Dim ImageFolder As String = My.Settings.IHentai
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -5040,8 +4848,6 @@ HentaiGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Hentai folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Hentai Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBIHentai.Checked = False
-					LBLIHentai.Text = ""
 					My.Settings.IHentai = "No path selected"
 					My.Settings.CBIHentai = False
 				End If
@@ -5052,20 +4858,18 @@ HentaiGood:
 
 		PBMaintenance.Value += 1
 
-		If CBIGay.Checked = True Then
+		If My.Settings.CBIGay = True Then
 			LBLMaintenance.Text = "Checking Gay image path..."
-			If Not Directory.Exists(LBLIGay.Text) Then
-				If LBLIGay.Text <> "" Or LBLIGay.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.IGay) Then
+				If My.Settings.IGay <> "" Or My.Settings.IGay <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Gay images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Gay Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBIGay.Checked = False
-				LBLIGay.Text = ""
 				My.Settings.IGay = "No path selected"
 				My.Settings.CBIGay = False
 			Else
 
-				Dim ImageFolder As String = LBLIGay.Text
+				Dim ImageFolder As String = My.Settings.IGay
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -5082,8 +4886,6 @@ GayGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Gay folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Gay Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBIGay.Checked = False
-					LBLIGay.Text = ""
 					My.Settings.IGay = "No path selected"
 					My.Settings.CBIGay = False
 				End If
@@ -5094,20 +4896,18 @@ GayGood:
 
 		PBMaintenance.Value += 1
 
-		If CBIMaledom.Checked = True Then
+		If My.Settings.CBIMaledom = True Then
 			LBLMaintenance.Text = "Checking Maledom image path..."
-			If Not Directory.Exists(LBLIMaledom.Text) Then
-				If LBLIMaledom.Text <> "" Or LBLIMaledom.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.IMaledom) Then
+				If My.Settings.IMaledom <> "" Or My.Settings.IMaledom <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Maledom images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Maledom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBIMaledom.Checked = False
-				LBLIMaledom.Text = ""
 				My.Settings.IMaledom = "No path selected"
 				My.Settings.CBIMaledom = False
 			Else
 
-				Dim ImageFolder As String = LBLIMaledom.Text
+				Dim ImageFolder As String = My.Settings.IMaledom
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -5125,8 +4925,6 @@ MaledomGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Maledom folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Maledom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBIMaledom.Checked = False
-					LBLIMaledom.Text = ""
 					My.Settings.IMaledom = "No path selected"
 					My.Settings.CBIMaledom = False
 				End If
@@ -5137,20 +4935,18 @@ MaledomGood:
 
 		PBMaintenance.Value += 1
 
-		If CBICaptions.Checked = True Then
+		If My.Settings.CBICaptions = True Then
 			LBLMaintenance.Text = "Checking Captions image path..."
-			If Not Directory.Exists(LBLICaptions.Text) Then
-				If LBLICaptions.Text <> "" Or LBLICaptions.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.ICaptions) Then
+				If My.Settings.ICaptions <> "" Or My.Settings.ICaptions <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local Captions images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local Captions Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBICaptions.Checked = False
-				LBLICaptions.Text = ""
 				My.Settings.ICaptions = "No path selected"
 				My.Settings.CBICaptions = False
 			Else
 
-				Dim ImageFolder As String = LBLICaptions.Text
+				Dim ImageFolder As String = My.Settings.ICaptions
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -5167,8 +4963,6 @@ CaptionsGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified Captions folder!" & Environment.NewLine & Environment.NewLine &
 									"Local Captions Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBICaptions.Checked = False
-					LBLICaptions.Text = ""
 					My.Settings.ICaptions = "No path selected"
 					My.Settings.CBICaptions = False
 				End If
@@ -5179,20 +4973,18 @@ CaptionsGood:
 
 		PBMaintenance.Value += 1
 
-		If CBIGeneral.Checked = True Then
+		If My.Settings.CBIGeneral = True Then
 			LBLMaintenance.Text = "Checking General image path..."
-			If Not Directory.Exists(LBLIGeneral.Text) Then
-				If LBLIGeneral.Text <> "" Or LBLIGeneral.Text <> "No path selected" Then
+			If Not Directory.Exists(My.Settings.IGeneral) Then
+				If My.Settings.IGeneral <> "" Or My.Settings.IGeneral <> "No path selected" Then
 					MessageBox.Show(Me, "The directory for local General images was not found!" & Environment.NewLine & Environment.NewLine &
 									"Local General Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				End If
-				CBIGeneral.Checked = False
-				LBLIGeneral.Text = ""
 				My.Settings.IGeneral = "No path selected"
 				My.Settings.CBIGeneral = False
 			Else
 
-				Dim ImageFolder As String = LBLIGeneral.Text
+				Dim ImageFolder As String = My.Settings.IGeneral
 
 				files = myDirectory.GetFiles(ImageFolder, "*.*")
 				Array.Sort(files)
@@ -5209,8 +5001,6 @@ GeneralGood:
 				If ImageList.Count < 1 Then
 					MessageBox.Show(Me, "There are no images in the specified General folder!" & Environment.NewLine & Environment.NewLine &
 									"Local General Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					CBIGeneral.Checked = False
-					LBLIGeneral.Text = ""
 					My.Settings.IGeneral = "No path selected"
 					My.Settings.CBIGeneral = False
 				End If
@@ -5346,313 +5136,494 @@ GeneralGood:
 		SaveURLFileSelection()
 	End Sub
 
-	Private Sub BTNIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNIHardcore.Click
+#Region "--------------------------------------- Images --------------------------------------------------"
 
+	Friend Shared Function Image_FolderCheck(ByVal directoryDescription As String,
+											 ByVal directoryPath As String,
+											 ByVal defaultPath As String,
+											 ByRef subDirectories As Boolean) As String
+		Dim rtnPath As String
+
+		' Exit if default value.
+		If directoryPath = defaultPath Then subDirectories = False : Return defaultPath
+
+		' check it if the directory exists.
+		If Directory.Exists(directoryPath) Then rtnPath = directoryPath : GoTo checkFolder
+
+		' Tell User, the dir. wasn't found. Ask to search manually for the folder.
+		If MessageBox.Show(ActiveForm,
+						   "The directory """ & directoryPath & """ was not found." & vbCrLf & "Do you want to search for it?",
+						   directoryDescription & " image directory not found.",
+						   MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) <> DialogResult.Yes Then
+set_default:
+			Return defaultPath
+		Else
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+			'								Set new Folder
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+set_newFolder:
+			' Find the first available parent-directory. 
+			' This way the user hasn't to browse through his hole IO-System.
+			Dim __tmp_dir As String = directoryPath
+			Do Until Directory.Exists(__tmp_dir) Or __tmp_dir Is Nothing
+				__tmp_dir = Path.GetDirectoryName(__tmp_dir)
+			Loop
+
+			' Initialize new Dialog-Form
+			Dim FolSel As New FolderBrowserDialog With {.SelectedPath = __tmp_dir,
+															.Description = "Select " & directoryDescription & " image folder."}
+			' Display the Dialog -> Now the user has to set the new dir.
+			If FolSel.ShowDialog(ActiveForm) = DialogResult.OK Then
+				rtnPath = FolSel.SelectedPath
+			Else
+				GoTo set_default
+			End If
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			' Set new Folder - End
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		End If ' END IF - Messagebox.
+
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		'							   Check folder content
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+checkFolder:
+		Dim count_top As Integer = myDirectory.GetFilesImages(rtnPath, SearchOption.TopDirectoryOnly).Count
+		Dim count_all As Integer = myDirectory.GetFilesImages(rtnPath, SearchOption.AllDirectories).Count
+
+		If count_top = 0 And count_all = 0 Then
+			' ================================= No images in folder ===============================
+			If MessageBox.Show(ActiveForm,
+			   "The directory """ & directoryPath & """ doesn't contain images." & vbCrLf & "Do you want to set a new folder?",
+			   directoryDescription & " image folder empty",
+			   MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.Yes Then
+				GoTo set_newFolder
+			Else
+				GoTo set_default
+			End If
+		ElseIf count_top = 0 And count_all > count_top And subDirectories = False
+			' ======================== none in top, but in sub ->enable sub? ======================
+			If MessageBox.Show(ActiveForm,
+			   "The directory """ & directoryPath & """ doesn't contain images, but it's " &
+			   "subdirectories. Do you want to include subdirectories? If you click no the " &
+			   "default value will be set.",
+			   directoryDescription & " image folder empty",
+			   MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+				subDirectories = True
+				Return rtnPath
+			Else
+				GoTo set_default
+			End If
+		Else
+			'================================= everything fine ====================================
+			Return rtnPath
+		End If
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		' Check folder content - End
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+	End Function
+
+#Region "------------------------------------- Hardcore Images -------------------------------------------"
+
+	Private Sub BTNIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNIHardcore.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLIHardcore.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.IHardcore = LBLIHardcore.Text
+			My.Settings.IHardcore = FolderBrowserDialog1.SelectedPath
+			ImagesHardcore_CheckFolder()
 		End If
 	End Sub
 
+	Friend Shared Function ImagesHardcore_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IHardcoreSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IHardcore").Property.DefaultValue
+
+		My.Settings.IHardcore =
+			Image_FolderCheck("Hardcore", My.Settings.IHardcore, def, subdir)
+
+		If My.Settings.IHardcore = def Then
+			My.Settings.CBIHardcore = False
+			My.Settings.IHardcoreSD = My.Settings.PropertyValues("IHardcoreSD").Property.DefaultValue
+		Else
+			My.Settings.CBIHardcore = True
+			My.Settings.IHardcoreSD = subdir
+		End If
+
+		Return My.Settings.CBIHardcore
+	End Function
+
+#End Region ' Hardcore
+
+#Region "------------------------------------- Softcore Images -------------------------------------------"
 
 	Private Sub BTNISoftcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNISoftcore.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLISoftcore.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.ISoftcore = LBLISoftcore.Text
+			My.Settings.ISoftcore = FolderBrowserDialog1.SelectedPath
+			ImagesSoftcore_CheckFolder()
 		End If
 	End Sub
+
+	Friend Shared Function ImagesSoftcore_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.ISoftcoreSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("ISoftcore").Property.DefaultValue
+
+		My.Settings.ISoftcore =
+			Image_FolderCheck("Softcore", My.Settings.ISoftcore, def, subdir)
+
+		If My.Settings.ISoftcore = def Then
+			My.Settings.CBISoftcore = False
+			My.Settings.ISoftcoreSD = My.Settings.PropertyValues("ISoftcoreSD").Property.DefaultValue
+		Else
+			My.Settings.CBISoftcore = True
+			My.Settings.ISoftcoreSD = subdir
+		End If
+
+		Return My.Settings.CBISoftcore
+	End Function
+
+#End Region ' Softcore
+
+#Region "------------------------------------- Lesbian Images --------------------------------------------"
 
 	Private Sub BTNILesbian_Click(sender As System.Object, e As System.EventArgs) Handles BTNILesbian.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLILesbian.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.ILesbian = LBLILesbian.Text
+			My.Settings.ILesbian = FolderBrowserDialog1.SelectedPath
+			ImagesLesbian_CheckFolder()
 		End If
 	End Sub
+
+	Friend Shared Function ImagesLesbian_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.ILesbianSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("ILesbian").Property.DefaultValue
+
+		My.Settings.ILesbian =
+			Image_FolderCheck("Lesbian", My.Settings.ILesbian, def, subdir)
+
+		If My.Settings.ILesbian = def Then
+			My.Settings.CBILesbian = False
+			My.Settings.ILesbianSD = My.Settings.PropertyValues("ILesbianSD").Property.DefaultValue
+		Else
+			My.Settings.CBILesbian = True
+			My.Settings.ILesbianSD = subdir
+		End If
+
+		Return My.Settings.CBILesbian
+	End Function
+
+#End Region ' Lesbian
+
+#Region "------------------------------------- Blowjob Images --------------------------------------------"
 
 	Private Sub BTNIBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles BTNIBlowjob.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLIBlowjob.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.IBlowjob = LBLIBlowjob.Text
+			My.Settings.IBlowjob = FolderBrowserDialog1.SelectedPath
+			ImagesBlowjob_CheckFolder()
 		End If
 	End Sub
+
+	Friend Shared Function ImagesBlowjob_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IBlowjobSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IBlowjob").Property.DefaultValue
+
+		My.Settings.IBlowjob =
+			Image_FolderCheck("Blowjob", My.Settings.IBlowjob, def, subdir)
+
+		If My.Settings.IBlowjob = def Then
+			My.Settings.CBIBlowjob = False
+			My.Settings.IBlowjobSD = My.Settings.PropertyValues("IBlowjobSD").Property.DefaultValue
+		Else
+			My.Settings.CBIBlowjob = True
+			My.Settings.IBlowjobSD = subdir
+		End If
+
+		Return My.Settings.CBIBlowjob
+	End Function
+
+#End Region ' Blowjob
+
+#Region "------------------------------------- Femdom Images ---------------------------------------------"
 
 	Private Sub BTNIFemdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNIFemdom.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLIFemdom.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.IFemdom = LBLIFemdom.Text
+			My.Settings.IFemdom = FolderBrowserDialog1.SelectedPath
+			ImagesFemdom_CheckFolder()
 		End If
 	End Sub
+
+	Friend Shared Function ImagesFemdom_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IFemdomSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IFemdom").Property.DefaultValue
+
+		My.Settings.IFemdom =
+			Image_FolderCheck("Femdom", My.Settings.IFemdom, def, subdir)
+
+		If My.Settings.IFemdom = def Then
+			My.Settings.CBIFemdom = False
+			My.Settings.IFemdomSD = My.Settings.PropertyValues("IFemdomSD").Property.DefaultValue
+		Else
+			My.Settings.CBIFemdom = True
+			My.Settings.IFemdomSD = subdir
+		End If
+
+		Return My.Settings.CBIFemdom
+	End Function
+
+#End Region ' Femdom
+
+#Region "------------------------------------- Lezdom Images ---------------------------------------------"
 
 	Private Sub BTNILezdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNILezdom.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLILezdom.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.ILezdom = LBLILezdom.Text
+			My.Settings.ILezdom = FolderBrowserDialog1.SelectedPath
+			ImagesLezdom_CheckFolder()
 		End If
 	End Sub
+
+	Friend Shared Function ImagesLezdom_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.ILezdomSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("ILezdom").Property.DefaultValue
+
+		My.Settings.ILezdom =
+			Image_FolderCheck("Lezdom", My.Settings.ILezdom, def, subdir)
+
+		If My.Settings.ILezdom = def Then
+			My.Settings.CBILezdom = False
+			My.Settings.ILezdomSD = My.Settings.PropertyValues("ILezdomSD").Property.DefaultValue
+		Else
+			My.Settings.CBILezdom = True
+			My.Settings.ILezdomSD = subdir
+		End If
+
+		Return My.Settings.CBILezdom
+	End Function
+
+#End Region ' Lezdon
+
+#Region "------------------------------------- Hentai Images ---------------------------------------------"
 
 	Private Sub BTNIHentai_Click(sender As System.Object, e As System.EventArgs) Handles BTNIHentai.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLIHentai.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.IHentai = LBLIHentai.Text
+			My.Settings.IHentai = FolderBrowserDialog1.SelectedPath
+			ImagesHentai_CheckFolder()
 		End If
 	End Sub
+
+	Friend Shared Function ImagesHentai_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IHentaiSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IHentai").Property.DefaultValue
+
+		My.Settings.IHentai =
+			Image_FolderCheck("Hentai", My.Settings.IHentai, def, subdir)
+
+		If My.Settings.IHentai = def Then
+			My.Settings.CBIHentai = False
+			My.Settings.IHentaiSD = My.Settings.PropertyValues("IHentaiSD").Property.DefaultValue
+		Else
+			My.Settings.CBIHentai = True
+			My.Settings.IHentaiSD = subdir
+		End If
+
+		Return My.Settings.CBIHentai
+	End Function
+
+#End Region ' Hentai
+
+#Region "------------------------------------- Gay Images ------------------------------------------------"
 
 	Private Sub BTNIGay_Click(sender As System.Object, e As System.EventArgs) Handles BTNIGay.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLIGay.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.IGay = LBLIGay.Text
+			My.Settings.IGay = FolderBrowserDialog1.SelectedPath
+			ImagesGay_CheckFolder()
 		End If
 	End Sub
+
+	Friend Shared Function ImagesGay_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IGaySD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IGay").Property.DefaultValue
+
+		My.Settings.IGay =
+			Image_FolderCheck("Gay", My.Settings.IGay, def, subdir)
+
+		If My.Settings.IGay = def Then
+			My.Settings.CBIGay = False
+			My.Settings.IGaySD = My.Settings.PropertyValues("IGaySD").Property.DefaultValue
+		Else
+			My.Settings.CBIGay = True
+			My.Settings.IGaySD = subdir
+		End If
+
+		Return My.Settings.CBIGay
+	End Function
+
+#End Region ' Gay
+
+#Region "------------------------------------- Maledom Images ---------------------------------------------"
 
 	Private Sub BTNIMaledom_Click(sender As System.Object, e As System.EventArgs) Handles BTNIMaledom.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLIMaledom.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.IMaledom = LBLIMaledom.Text
+			My.Settings.IMaledom = FolderBrowserDialog1.SelectedPath
+			ImagesMaledom_CheckFolder()
 		End If
 	End Sub
+
+	Friend Shared Function ImagesMaledom_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IMaledomSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IMaledom").Property.DefaultValue
+
+		My.Settings.IMaledom =
+			Image_FolderCheck("Maledom", My.Settings.IMaledom, def, subdir)
+
+		If My.Settings.IMaledom = def Then
+			My.Settings.CBIMaledom = False
+			My.Settings.IMaledomSD = My.Settings.PropertyValues("IMaledomSD").Property.DefaultValue
+		Else
+			My.Settings.CBIMaledom = True
+			My.Settings.IMaledomSD = subdir
+		End If
+
+		Return My.Settings.CBIMaledom
+	End Function
+
+#End Region ' Maledom
+
+#Region "------------------------------------- General Images ---------------------------------------------"
 
 	Private Sub BTNIGeneral_Click(sender As System.Object, e As System.EventArgs) Handles BTNIGeneral.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLIGeneral.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.IGeneral = LBLIGeneral.Text
+			My.Settings.IGeneral = FolderBrowserDialog1.SelectedPath
+			ImagesGeneral_CheckFolder()
 		End If
 	End Sub
 
-	Private Sub CBIHardcoreSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIHardcoreSD.LostFocus
-		Debug.Print("HardcoreSD CheckedChanged Called")
-		If CBIHardcoreSD.Checked = True Then
-			My.Settings.IHardcoreSD = True
+	Friend Shared Function ImagesGeneral_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IGeneralSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IGeneral").Property.DefaultValue
+
+		My.Settings.IGeneral =
+			Image_FolderCheck("General", My.Settings.IGeneral, def, subdir)
+
+		If My.Settings.IGeneral = def Then
+			My.Settings.CBIGeneral = False
+			My.Settings.IGeneralSD = My.Settings.PropertyValues("IGeneralSD").Property.DefaultValue
 		Else
-			My.Settings.IHardcoreSD = False
-		End If
-		Debug.Print("My.Settings.IHardcoreSD = " & My.Settings.IHardcoreSD)
-
-	End Sub
-
-	Private Sub CBISoftcoreSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBISoftcoreSD.LostFocus
-
-		If CBISoftcoreSD.Checked = True Then
-			My.Settings.ISoftcoreSD = True
-		Else
-			My.Settings.ISoftcoreSD = False
+			My.Settings.CBIGeneral = True
+			My.Settings.IGeneralSD = subdir
 		End If
 
-	End Sub
+		Return My.Settings.CBIGeneral
+	End Function
 
-	Private Sub CBILesbianSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBILesbianSD.LostFocus
+#End Region ' General
 
-		If CBILesbianSD.Checked = True Then
-			My.Settings.ILesbianSD = True
-		Else
-			My.Settings.ILesbianSD = False
-		End If
-
-	End Sub
-
-	Private Sub CBIBlowjobSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIBlowjobSD.LostFocus
-
-		If CBIBlowjobSD.Checked = True Then
-			My.Settings.IBlowjobSD = True
-		Else
-			My.Settings.IBlowjobSD = False
-		End If
-
-	End Sub
-
-	Private Sub CBIFemdomSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIFemdomSD.LostFocus
-
-		If CBIFemdomSD.Checked = True Then
-			My.Settings.IFemdomSD = True
-		Else
-			My.Settings.IFemdomSD = False
-		End If
-
-
-	End Sub
-
-	Private Sub CBILezdomSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBILezdomSD.LostFocus
-
-		If CBILezdomSD.Checked = True Then
-			My.Settings.ILezdomSD = True
-		Else
-			My.Settings.ILezdomSD = False
-		End If
-
-	End Sub
-
-	Private Sub CBIHentaiSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIHentaiSD.LostFocus
-
-		If CBIHentaiSD.Checked = True Then
-			My.Settings.IHentaiSD = True
-		Else
-			My.Settings.IHentaiSD = False
-		End If
-
-	End Sub
-
-	Private Sub CBIGaySD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIGaySD.LostFocus
-
-		If CBIGaySD.Checked = True Then
-			My.Settings.IGaySD = True
-		Else
-			My.Settings.IGaySD = False
-		End If
-
-	End Sub
-
-	Private Sub CBIMaledomSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIMaledomSD.LostFocus
-
-		If CBIMaledomSD.Checked = True Then
-			My.Settings.IMaledomSD = True
-		Else
-			My.Settings.IMaledomSD = False
-		End If
-
-	End Sub
-
-	Private Sub CBIGeneralSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIGeneralSD.LostFocus
-
-		If CBIGeneralSD.Checked = True Then
-			My.Settings.IGeneralSD = True
-		Else
-			My.Settings.IGeneralSD = False
-		End If
-
-	End Sub
-
-	Private Sub CBICaptionsSD_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBICaptionsSD.LostFocus
-
-		If CBICaptionsSD.Checked = True Then
-			My.Settings.ICaptionsSD = True
-		Else
-			My.Settings.ICaptionsSD = False
-		End If
-
-	End Sub
-
-
-
-
-	Private Sub CBIHardcore_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIHardcore.CheckedChanged
-		Debug.Print("Hardcore CheckedChanged Called WTF")
-		Debug.Print("FrmSettingsLoading = " & FrmSettingsLoading)
-		If FrmSettingsLoading = False Then
-			Debug.Print("Hardcore CheckedChanged Called")
-			If CBIHardcore.Checked = True Then
-				My.Settings.CBIHardcore = True
-			Else
-				My.Settings.CBIHardcore = False
-			End If
-			Debug.Print("My.Settings.CBIHardcore = " & My.Settings.CBIHardcore)
-		End If
-	End Sub
-
-	Private Sub CBISoftcore_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBISoftcore.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBISoftcore.Checked = True Then
-				My.Settings.CBISoftcore = True
-			Else
-				My.Settings.CBISoftcore = False
-			End If
-		End If
-	End Sub
-
-	Private Sub CBILesbian_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBILesbian.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBILesbian.Checked = True Then
-				My.Settings.CBILesbian = True
-			Else
-				My.Settings.CBILesbian = False
-			End If
-		End If
-	End Sub
-
-	Private Sub CBIBlowjob_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIBlowjob.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBIBlowjob.Checked = True Then
-				My.Settings.CBIBlowjob = True
-			Else
-				My.Settings.CBIBlowjob = False
-			End If
-		End If
-	End Sub
-
-	Private Sub CBIFemdom_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIFemdom.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBIFemdom.Checked = True Then
-				My.Settings.CBIFemdom = True
-			Else
-				My.Settings.CBIFemdom = False
-			End If
-		End If
-	End Sub
-
-	Private Sub CBILezdom_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBILezdom.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBILezdom.Checked = True Then
-				My.Settings.CBILezdom = True
-			Else
-				My.Settings.CBILezdom = False
-			End If
-		End If
-	End Sub
-
-	Private Sub CBIHentai_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIHentai.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBIHentai.Checked = True Then
-				My.Settings.CBIHentai = True
-			Else
-				My.Settings.CBIHentai = False
-			End If
-		End If
-	End Sub
-
-	Private Sub CBIGay_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIGay.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBIGay.Checked = True Then
-				My.Settings.CBIGay = True
-			Else
-				My.Settings.CBIGay = False
-			End If
-		End If
-	End Sub
-
-	Private Sub CBIMaledom_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIMaledom.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBIMaledom.Checked = True Then
-				My.Settings.CBIMaledom = True
-			Else
-				My.Settings.CBIMaledom = False
-			End If
-		End If
-	End Sub
-
-	Private Sub CBICaptions_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBICaptions.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBICaptions.Checked = True Then
-				My.Settings.CBICaptions = True
-			Else
-				My.Settings.CBICaptions = False
-			End If
-		End If
-	End Sub
-
-	Private Sub CBIGeneral_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBIGeneral.CheckedChanged
-		If FrmSettingsLoading = False Then
-			If CBIGeneral.Checked = True Then
-				My.Settings.CBIGeneral = True
-			Else
-				My.Settings.CBIGeneral = False
-			End If
-		End If
-	End Sub
+#Region "------------------------------------- Captions Images ---------------------------------------------"
 
 	Private Sub BTNICaptions_Click(sender As System.Object, e As System.EventArgs) Handles BTNICaptions.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLICaptions.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.ICaptions = LBLICaptions.Text
+			My.Settings.ICaptions = FolderBrowserDialog1.SelectedPath
+			ImagesCaptions_CheckFolder()
 		End If
 	End Sub
+
+	Friend Shared Function ImagesCaptions_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.ICaptionsSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("ICaptions").Property.DefaultValue
+
+		My.Settings.ICaptions =
+			Image_FolderCheck("Captions", My.Settings.ICaptions, def, subdir)
+
+		If My.Settings.ICaptions = def Then
+			My.Settings.CBICaptions = False
+			My.Settings.ICaptionsSD = My.Settings.PropertyValues("ICaptionsSD").Property.DefaultValue
+		Else
+			My.Settings.CBICaptions = True
+			My.Settings.ICaptionsSD = subdir
+		End If
+
+		Return My.Settings.CBICaptions
+	End Function
+
+#End Region ' Captions
+
+#Region "------------------------------------- Boobs Images ----------------------------------------------"
+
+	Private Sub BTNBoobPath_Click(sender As System.Object, e As System.EventArgs) Handles BTNBoobPath.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.LBLBoobPath = FolderBrowserDialog1.SelectedPath
+			ImagesBoobs_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesBoobs_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.CBBoobSubDir
+
+		Dim def As String =
+			My.Settings.PropertyValues("LBLBoobPath").Property.DefaultValue
+
+		My.Settings.LBLBoobPath =
+			Image_FolderCheck("Boobs", My.Settings.LBLBoobPath, def, subdir)
+
+		If My.Settings.LBLBoobPath = def Then
+			My.Settings.CBIBoobs = False
+			My.Settings.CBBoobSubDir = My.Settings.PropertyValues("CBBoobSubDir").Property.DefaultValue
+		Else
+			My.Settings.CBIBoobs = True
+			My.Settings.CBBoobSubDir = subdir
+		End If
+
+		Return My.Settings.CBIBoobs
+	End Function
+
+#End Region ' Boobs
+
+#Region "------------------------------------- Butts Images ----------------------------------------------"
+
+	Private Sub BTNButtPath_Click(sender As System.Object, e As System.EventArgs) Handles BTNButtPath.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.LBLButtPath = FolderBrowserDialog1.SelectedPath
+			ImagesButts_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesButts_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.CBButtSubDir
+
+		Dim def As String =
+			My.Settings.PropertyValues("LBLButtPath").Property.DefaultValue
+
+		My.Settings.LBLButtPath =
+			Image_FolderCheck("Butts", My.Settings.LBLButtPath, def, subdir)
+
+		If My.Settings.LBLButtPath = def Then
+			My.Settings.CBIButts = False
+			My.Settings.CBButtSubDir = My.Settings.PropertyValues("CBButtSubDir").Property.DefaultValue
+		Else
+			My.Settings.CBIButts = True
+			My.Settings.CBButtSubDir = subdir
+		End If
+
+		Return My.Settings.CBIButts
+	End Function
+
+#End Region ' Butt
 
 	Private Sub BTNDomImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
@@ -5661,49 +5632,171 @@ GeneralGood:
 		End If
 	End Sub
 
-	Private Sub LBLIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles LBLIHardcore.DoubleClick
-		LBLIHardcore.Text = "No path selected"
+	Private Sub LBLIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles TbxIHardcore.DoubleClick
+		TbxIHardcore.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLISoftcore_Click(sender As System.Object, e As System.EventArgs) Handles LBLISoftcore.DoubleClick
-		LBLISoftcore.Text = "No path selected"
+	Private Sub LBLISoftcore_Click(sender As System.Object, e As System.EventArgs) Handles TbxISoftcore.DoubleClick
+		TbxISoftcore.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLILesbian_Click(sender As System.Object, e As System.EventArgs) Handles LBLILesbian.DoubleClick
-		LBLILesbian.Text = "No path selected"
+	Private Sub LBLILesbian_Click(sender As System.Object, e As System.EventArgs) Handles TbxILesbian.DoubleClick
+		TbxILesbian.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLIBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles LBLIBlowjob.DoubleClick
-		LBLIBlowjob.Text = "No path selected"
+	Private Sub LBLIBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles TbxIBlowjob.DoubleClick
+		TbxIBlowjob.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLIFemdom_Click(sender As System.Object, e As System.EventArgs) Handles LBLIFemdom.DoubleClick
-		LBLIFemdom.Text = "No path selected"
+	Private Sub LBLIFemdom_Click(sender As System.Object, e As System.EventArgs) Handles TbxIFemdom.DoubleClick
+		TbxIFemdom.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLILezdom_Click(sender As System.Object, e As System.EventArgs) Handles LBLILezdom.DoubleClick
-		LBLILezdom.Text = "No path selected"
+	Private Sub LBLILezdom_Click(sender As System.Object, e As System.EventArgs) Handles TbxILezdom.DoubleClick
+		TbxILezdom.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLIHentai_Click(sender As System.Object, e As System.EventArgs) Handles LBLIHentai.DoubleClick
-		LBLIHentai.Text = "No path selected"
+	Private Sub LBLIHentai_Click(sender As System.Object, e As System.EventArgs) Handles TbxIHentai.DoubleClick
+		TbxIHentai.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLIGay_Click(sender As System.Object, e As System.EventArgs) Handles LBLIGay.DoubleClick
-		LBLIGay.Text = "No path selected"
+	Private Sub LBLIGay_Click(sender As System.Object, e As System.EventArgs) Handles TbxIGay.DoubleClick
+		TbxIGay.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLIMaledom_Click(sender As System.Object, e As System.EventArgs) Handles LBLIMaledom.DoubleClick
-		LBLIMaledom.Text = "No path selected"
+	Private Sub LBLIMaledom_Click(sender As System.Object, e As System.EventArgs) Handles TbxIMaledom.DoubleClick
+		TbxIMaledom.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLICaptions_Click(sender As System.Object, e As System.EventArgs) Handles LBLICaptions.DoubleClick
-		LBLICaptions.Text = "No path selected"
+	Private Sub LBLICaptions_Click(sender As System.Object, e As System.EventArgs) Handles TbxICaptions.DoubleClick
+		TbxICaptions.Text = "No path selected"
 	End Sub
 
-	Private Sub LBLIGeneral_Click(sender As System.Object, e As System.EventArgs) Handles LBLIGeneral.DoubleClick
-		LBLIGeneral.Text = "No path selected"
+	Private Sub LBLIGeneral_Click(sender As System.Object, e As System.EventArgs) Handles TbxIGeneral.DoubleClick
+		TbxIGeneral.Text = "No path selected"
 	End Sub
+
+	Private Sub LBLIHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIHardcore.MouseHover
+		TTDir.SetToolTip(TbxIHardcore, TbxIHardcore.Text)
+	End Sub
+	Private Sub LBLISoftcore_MouseHover(sender As Object, e As System.EventArgs) Handles TbxISoftcore.MouseHover
+		TTDir.SetToolTip(TbxISoftcore, TbxISoftcore.Text)
+	End Sub
+	Private Sub LBLILesbian_MouseHover(sender As Object, e As System.EventArgs) Handles TbxILesbian.MouseHover
+		TTDir.SetToolTip(TbxILesbian, TbxILesbian.Text)
+	End Sub
+	Private Sub LBLIBlowjob_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIBlowjob.MouseHover
+		TTDir.SetToolTip(TbxIBlowjob, TbxIBlowjob.Text)
+	End Sub
+	Private Sub LBLIFemdom_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIFemdom.MouseHover
+		TTDir.SetToolTip(TbxIFemdom, TbxIFemdom.Text)
+	End Sub
+	Private Sub LBLILezdom_MouseHover(sender As Object, e As System.EventArgs) Handles TbxILezdom.MouseHover
+		TTDir.SetToolTip(TbxILezdom, TbxILezdom.Text)
+	End Sub
+	Private Sub LBLIHentai_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIHentai.MouseHover
+		TTDir.SetToolTip(TbxIHentai, TbxIHentai.Text)
+	End Sub
+	Private Sub LBLIGay_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIGay.MouseHover
+		TTDir.SetToolTip(TbxIGay, TbxIGay.Text)
+	End Sub
+	Private Sub LBLIMaledom_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIMaledom.MouseHover
+		TTDir.SetToolTip(TbxIMaledom, TbxIMaledom.Text)
+	End Sub
+	Private Sub LBLICaptions_MouseHover(sender As Object, e As System.EventArgs) Handles TbxICaptions.MouseHover
+		TTDir.SetToolTip(TbxICaptions, TbxICaptions.Text)
+	End Sub
+	Private Sub LBLIGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIGeneral.MouseHover
+		TTDir.SetToolTip(TbxIGeneral, TbxIGeneral.Text)
+	End Sub
+
+	Private Sub LBLBoobPath_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIBoobs.MouseHover
+		TTDir.SetToolTip(TbxIBoobs, TbxIBoobs.Text)
+	End Sub
+
+	Private Sub LBLButtPath_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIButts.MouseHover
+		TTDir.SetToolTip(TbxIButts, TbxIButts.Text)
+	End Sub
+
+#Region "----------------------------------- GenreImages-Url-Files --------------------------------------"
+
+	Private Sub BtnImageUrlSetFile_Click(sender As System.Object, e As System.EventArgs) Handles BtnImageUrlHardcore.Click,
+					BtnImageUrlSoftcore.Click, BtnImageUrlMaledom.Click, BtnImageUrlLezdom.Click, BtnImageUrlLesbian.Click,
+					BtnImageUrlHentai.Click, BtnImageUrlGeneral.Click, BtnImageUrlGay.Click, BtnImageUrlFemdom.Click,
+					BtnImageUrlCaptions.Click, BtnImageUrlButt.Click, BtnImageUrlBoobs.Click, BtnImageUrlBlowjob.Click
+		Try
+			' Read the Row of the current Button
+			Dim tmpTlpRow As Integer = TlpImageUrls.GetRow(sender)
+
+			' Check if the Button is in the TableLayoutPanel.
+			If tmpTlpRow = -1 Then Throw New Exception("Can't find control in TableLayoutPanel. " &
+													   "This is a major Design issue has to be fixed in code.")
+
+			' Get the Checkbox for the current button
+			Dim tmpCheckbox As CheckBox = TlpImageUrls.GetControlFromPosition(0, tmpTlpRow)
+
+			' Check if the Text-Property has an active Databinding.
+			If tmpCheckbox.DataBindings.Item("Checked") Is Nothing Then _
+				Throw New InvalidDataException("Databinding """" Checked """" was not found in Checkbox." &
+												"This is a major design issue and has to be fixed in code.")
+
+			' Get the TExtBox for the Current Button
+			Dim tmpTextbox As TextBox = TlpImageUrls.GetControlFromPosition(2, tmpTlpRow)
+
+			' Check if the Text-Property has an active Databinding.
+			If tmpTextbox.DataBindings.Item("Text") Is Nothing Then _
+				Throw New InvalidDataException("This function is only availabe with a Databound Textbox. " &
+												"This is a major design issue and has to be fixed in code.")
+
+			'Declare a new instance of An OpenFileDialog. Use the URL-FilePat as initial
+			Dim tmpFS As New OpenFileDialog With {
+				.Filter = "Textfiles|*.txt",
+				.Multiselect = False,
+				.CheckFileExists = True,
+				.Title = "Select an " & tmpCheckbox.Text & " URL-File",
+				.InitialDirectory = Form1.pathUrlFileDir}
+
+			' Check if the URL-FilePath exits -> Otherwise create it.
+			If Not Directory.Exists(tmpFS.InitialDirectory) Then _
+			Directory.CreateDirectory(tmpFS.InitialDirectory)
+
+			Dim tmpPath As String = tmpTextbox.Text
+			If tmpPath.ToLower.EndsWith(".txt") Then
+				If Path.IsPathRooted(tmpPath) AndAlso Directory.Exists(Path.GetDirectoryName(tmpPath)) Then
+					' Set an alternate Initial directory if filepath is absolute 
+					tmpFS.InitialDirectory = Path.GetDirectoryName(tmpPath)
+					tmpFS.FileName = Path.GetFileName(tmpPath)
+				Else
+					' Set the given Filename
+					tmpFS.FileName = tmpPath
+				End If
+			End If
+
+			If tmpFS.ShowDialog() = DialogResult.OK Then
+				If Path.GetDirectoryName(tmpFS.FileName).ToLower = Path.GetDirectoryName(Form1.pathUrlFileDir).ToLower Then
+					' If the file is located standarddirectory st only the filename
+					tmpTextbox.Text = tmpFS.SafeFileName
+				Else
+					' Otherwise set the absoulte filepath
+					tmpTextbox.Text = tmpFS.FileName
+				End If
+
+				' This will force the Settings to save.
+				tmpCheckbox.Checked = True
+			End If
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'						       All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			MsgBox(ex.Message & vbCrLf & "Please report this error at the Milovana Forum.",
+				   MsgBoxStyle.Critical, "Cant Set URl-File")
+			Log.WriteError(ex.Message, ex, "Error Set Url-File")
+		End Try
+	End Sub
+
+#End Region 'GenreImages-Url-Files
+
+#End Region ' Images
 
 	Private Sub SettingsTabs_TabIndexChanged(sender As Object, e As System.EventArgs) Handles SettingsTabs.SelectedIndexChanged
 
@@ -6365,38 +6458,38 @@ GeneralGood:
 			If ScriptList(i).Contains("@ShowLocalImage") Then
 				If Not RTBScriptReq.Text.Contains("* At least one Local Image path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Local Image path selected with a valid directory *" & Environment.NewLine
 				Dim LocalCount As Integer = 0
-				If CBIHardcore.Checked = True Then
-					If Directory.Exists(LBLIHardcore.Text) Then LocalCount += 1
+				If My.Settings.CBIHardcore = True Then
+					If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
 				End If
-				If CBISoftcore.Checked = True Then
-					If Directory.Exists(LBLISoftcore.Text) Then LocalCount += 1
+				If My.Settings.CBISoftcore = True Then
+					If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
 				End If
-				If CBILesbian.Checked = True Then
-					If Directory.Exists(LBLILesbian.Text) Then LocalCount += 1
+				If My.Settings.CBILesbian = True Then
+					If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
 				End If
-				If CBIBlowjob.Checked = True Then
-					If Directory.Exists(LBLIBlowjob.Text) Then LocalCount += 1
+				If My.Settings.CBIBlowjob = True Then
+					If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
 				End If
-				If CBIFemdom.Checked = True Then
-					If Directory.Exists(LBLIFemdom.Text) Then LocalCount += 1
+				If My.Settings.CBIFemdom = True Then
+					If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
 				End If
-				If CBILezdom.Checked = True Then
-					If Directory.Exists(LBLILezdom.Text) Then LocalCount += 1
+				If My.Settings.CBILezdom = True Then
+					If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
 				End If
-				If CBIHentai.Checked = True Then
-					If Directory.Exists(LBLIHentai.Text) Then LocalCount += 1
+				If My.Settings.CBIHentai = True Then
+					If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
 				End If
-				If CBIGay.Checked = True Then
-					If Directory.Exists(LBLIGay.Text) Then LocalCount += 1
+				If My.Settings.CBIGay = True Then
+					If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
 				End If
-				If CBIMaledom.Checked = True Then
-					If Directory.Exists(LBLIMaledom.Text) Then LocalCount += 1
+				If My.Settings.CBIMaledom = True Then
+					If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
 				End If
-				If CBICaptions.Checked = True Then
-					If Directory.Exists(LBLICaptions.Text) Then LocalCount += 1
+				If My.Settings.CBICaptions = True Then
+					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
 				End If
-				If CBIGeneral.Checked = True Then
-					If Directory.Exists(LBLIGeneral.Text) Then LocalCount += 1
+				If My.Settings.CBIGeneral = True Then
+					If Directory.Exists(My.Settings.IGeneral) Then LocalCount += 1
 				End If
 				If LocalCount = 0 Then ScriptReqFailed = True
 			End If
@@ -6406,38 +6499,38 @@ GeneralGood:
 				If Not RTBScriptReq.Text.Contains("* At least one Local Image path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Local Image path selected with a valid directory *" & Environment.NewLine
 				If URLFileList.CheckedItems.Count = 0 Then ScriptReqFailed = True
 				Dim LocalCount As Integer = 0
-				If CBIHardcore.Checked = True Then
-					If Directory.Exists(LBLIHardcore.Text) Then LocalCount += 1
+				If My.Settings.CBIHardcore = True Then
+					If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
 				End If
-				If CBISoftcore.Checked = True Then
-					If Directory.Exists(LBLISoftcore.Text) Then LocalCount += 1
+				If My.Settings.CBISoftcore = True Then
+					If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
 				End If
-				If CBILesbian.Checked = True Then
-					If Directory.Exists(LBLILesbian.Text) Then LocalCount += 1
+				If My.Settings.CBILesbian = True Then
+					If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
 				End If
-				If CBIBlowjob.Checked = True Then
-					If Directory.Exists(LBLIBlowjob.Text) Then LocalCount += 1
+				If My.Settings.CBIBlowjob = True Then
+					If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
 				End If
-				If CBIFemdom.Checked = True Then
-					If Directory.Exists(LBLIFemdom.Text) Then LocalCount += 1
+				If My.Settings.CBIFemdom = True Then
+					If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
 				End If
-				If CBILezdom.Checked = True Then
-					If Directory.Exists(LBLILezdom.Text) Then LocalCount += 1
+				If My.Settings.CBILezdom = True Then
+					If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
 				End If
-				If CBIHentai.Checked = True Then
-					If Directory.Exists(LBLIHentai.Text) Then LocalCount += 1
+				If My.Settings.CBIHentai = True Then
+					If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
 				End If
-				If CBIGay.Checked = True Then
-					If Directory.Exists(LBLIGay.Text) Then LocalCount += 1
+				If My.Settings.CBIGay = True Then
+					If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
 				End If
-				If CBIMaledom.Checked = True Then
-					If Directory.Exists(LBLIMaledom.Text) Then LocalCount += 1
+				If My.Settings.CBIMaledom = True Then
+					If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
 				End If
-				If CBICaptions.Checked = True Then
-					If Directory.Exists(LBLICaptions.Text) Then LocalCount += 1
+				If My.Settings.CBICaptions = True Then
+					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
 				End If
-				If CBIGeneral.Checked = True Then
-					If Directory.Exists(LBLIGeneral.Text) Then LocalCount += 1
+				If My.Settings.CBIGeneral = True Then
+					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
 				End If
 				If LocalCount = 0 Then ScriptReqFailed = True
 			End If
@@ -6482,69 +6575,69 @@ GeneralGood:
 
 			If ScriptList(i).Contains("@ShowButtImage") Then
 				If Not RTBScriptReq.Text.Contains("* BnB Butt path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Butt path must be set to a valid directory or URL File *" & Environment.NewLine
-				If CBIButts.Checked = True And Not Directory.Exists(LBLButtPath.Text) Then ScriptReqFailed = True
+				If My.Settings.CBIButts = True And Not Directory.Exists(My.Settings.LBLButtPath) Then ScriptReqFailed = True
 				If ChbImageUrlButts.Checked = True And Not File.Exists(My.Settings.UrlFileButt) Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowBoobsImage") Then
 				If Not RTBScriptReq.Text.Contains("* BnB Boobs path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Boobs path must be set to a valid directory or URL File *" & Environment.NewLine
-				If CBIBoobs.Checked = True And Not Directory.Exists(LBLBoobPath.Text) Then ScriptReqFailed = True
+				If My.Settings.CBIBoobs = True And Not Directory.Exists(My.Settings.LBLBoobPath) Then ScriptReqFailed = True
 				If ChbImageUrlBoobs.Checked = True And Not File.Exists(My.Settings.UrlFileBoobs) Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowHardcoreImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Hardcore Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Hardcore Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLIHardcore.Text) Or CBIHardcore.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowSoftcoreImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Softcore Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Softcore Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLISoftcore.Text) Or CBISoftcore.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowLesbianImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Lesbian Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Lesbian Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLILesbian.Text) Or CBILesbian.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowBlowjobImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Blowjob Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Blowjob Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLIBlowjob.Text) Or CBIBlowjob.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowFemdomImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Femdom Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Femdom Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLIFemdom.Text) Or CBIFemdom.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowLezdomImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Lezdom Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Lezdom Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLILezdom.Text) Or CBILezdom.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowHentaiImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Hentai Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Hentai Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLIHentai.Text) Or CBIHentai.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowGayImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Gay Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Gay Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLIGay.Text) Or CBIGay.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowMaledomImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Maledom Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Maledom Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLIMaledom.Text) Or CBIMaledom.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowCaptionsImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local Captions Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Captions Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLICaptions.Text) Or CBICaptions.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowGeneralImage") Then
 				If Not RTBScriptReq.Text.Contains("* Local General Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local General Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(LBLIGeneral.Text) Or CBIGeneral.Checked = False Then ScriptReqFailed = True
+				If Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Then ScriptReqFailed = True
 			End If
 
 			If ScriptList(i).Contains("@ShowTaggedImage") And ScriptList(i).Contains("@Tag") Then
@@ -6924,38 +7017,38 @@ GeneralGood:
 			End If
 			If AvailList(j).Contains("@ShowLocalImage") Then
 				Dim LocalCount As Integer = 0
-				If CBIHardcore.Checked = True Then
-					If Directory.Exists(LBLIHardcore.Text) Then LocalCount += 1
+				If My.Settings.CBIHardcore = True Then
+					If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
 				End If
-				If CBISoftcore.Checked = True Then
-					If Directory.Exists(LBLISoftcore.Text) Then LocalCount += 1
+				If My.Settings.CBISoftcore = True Then
+					If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
 				End If
-				If CBILesbian.Checked = True Then
-					If Directory.Exists(LBLILesbian.Text) Then LocalCount += 1
+				If My.Settings.CBILesbian = True Then
+					If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
 				End If
-				If CBIBlowjob.Checked = True Then
-					If Directory.Exists(LBLIBlowjob.Text) Then LocalCount += 1
+				If My.Settings.CBIBlowjob = True Then
+					If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
 				End If
-				If CBIFemdom.Checked = True Then
-					If Directory.Exists(LBLIFemdom.Text) Then LocalCount += 1
+				If My.Settings.CBIFemdom = True Then
+					If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
 				End If
-				If CBILezdom.Checked = True Then
-					If Directory.Exists(LBLILezdom.Text) Then LocalCount += 1
+				If My.Settings.CBILezdom = True Then
+					If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
 				End If
-				If CBIHentai.Checked = True Then
-					If Directory.Exists(LBLIHentai.Text) Then LocalCount += 1
+				If My.Settings.CBIHentai = True Then
+					If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
 				End If
-				If CBIGay.Checked = True Then
-					If Directory.Exists(LBLIGay.Text) Then LocalCount += 1
+				If My.Settings.CBIGay = True Then
+					If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
 				End If
-				If CBIMaledom.Checked = True Then
-					If Directory.Exists(LBLIMaledom.Text) Then LocalCount += 1
+				If My.Settings.CBIMaledom = True Then
+					If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
 				End If
-				If CBICaptions.Checked = True Then
-					If Directory.Exists(LBLICaptions.Text) Then LocalCount += 1
+				If My.Settings.CBICaptions = True Then
+					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
 				End If
-				If CBIGeneral.Checked = True Then
-					If Directory.Exists(LBLIGeneral.Text) Then LocalCount += 1
+				If My.Settings.CBIGeneral = True Then
+					If Directory.Exists(My.Settings.IGeneral) Then LocalCount += 1
 				End If
 				If LocalCount = 0 Then AvailFail = True
 			End If
@@ -6963,38 +7056,38 @@ GeneralGood:
 			If AvailList(j).Contains("@ShowImage") Then
 				If URLFileList.CheckedItems.Count = 0 Then AvailFail = True
 				Dim LocalCount As Integer = 0
-				If CBIHardcore.Checked = True Then
-					If Directory.Exists(LBLIHardcore.Text) Then LocalCount += 1
+				If My.Settings.CBIHardcore = True Then
+					If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
 				End If
-				If CBISoftcore.Checked = True Then
-					If Directory.Exists(LBLISoftcore.Text) Then LocalCount += 1
+				If My.Settings.CBISoftcore = True Then
+					If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
 				End If
-				If CBILesbian.Checked = True Then
-					If Directory.Exists(LBLILesbian.Text) Then LocalCount += 1
+				If My.Settings.CBILesbian = True Then
+					If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
 				End If
-				If CBIBlowjob.Checked = True Then
-					If Directory.Exists(LBLIBlowjob.Text) Then LocalCount += 1
+				If My.Settings.CBIBlowjob = True Then
+					If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
 				End If
-				If CBIFemdom.Checked = True Then
-					If Directory.Exists(LBLIFemdom.Text) Then LocalCount += 1
+				If My.Settings.CBIFemdom = True Then
+					If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
 				End If
-				If CBILezdom.Checked = True Then
-					If Directory.Exists(LBLILezdom.Text) Then LocalCount += 1
+				If My.Settings.CBILezdom = True Then
+					If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
 				End If
-				If CBIHentai.Checked = True Then
-					If Directory.Exists(LBLIHentai.Text) Then LocalCount += 1
+				If My.Settings.CBIHentai = True Then
+					If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
 				End If
-				If CBIGay.Checked = True Then
-					If Directory.Exists(LBLIGay.Text) Then LocalCount += 1
+				If My.Settings.CBIGay = True Then
+					If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
 				End If
-				If CBIMaledom.Checked = True Then
-					If Directory.Exists(LBLIMaledom.Text) Then LocalCount += 1
+				If My.Settings.CBIMaledom = True Then
+					If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
 				End If
-				If CBICaptions.Checked = True Then
-					If Directory.Exists(LBLICaptions.Text) Then LocalCount += 1
+				If My.Settings.CBICaptions = True Then
+					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
 				End If
-				If CBIGeneral.Checked = True Then
-					If Directory.Exists(LBLIGeneral.Text) Then LocalCount += 1
+				If My.Settings.CBIGeneral = True Then
+					If Directory.Exists(My.Settings.IGeneral) Then LocalCount += 1
 				End If
 				If LocalCount = 0 Then AvailFail = True
 			End If
@@ -7031,57 +7124,57 @@ GeneralGood:
 			'End If
 
 			If AvailList(j).Contains("@ShowButtImage") Then
-				If CBIButts.Checked = True And Not Directory.Exists(LBLButtPath.Text) Then AvailFail = True
+				If My.Settings.CBIButts = True And Not Directory.Exists(My.Settings.LBLButtPath) Then AvailFail = True
 				If ChbImageUrlButts.Checked = True And Not File.Exists(My.Settings.UrlFileButt) Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowBoobsImage") Then
-				If CBIBoobs.Checked = True And Not Directory.Exists(LBLBoobPath.Text) Then AvailFail = True
+				If My.Settings.CBIBoobs = True And Not Directory.Exists(My.Settings.LBLBoobPath) Then AvailFail = True
 				If ChbImageUrlBoobs.Checked = True And Not File.Exists(My.Settings.UrlFileBoobs) Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowHardcoreImage") Then
-				If Not Directory.Exists(LBLIHardcore.Text) Or CBIHardcore.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowSoftcoreImage") Then
-				If Not Directory.Exists(LBLISoftcore.Text) Or CBISoftcore.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowLesbianImage") Then
-				If Not Directory.Exists(LBLILesbian.Text) Or CBILesbian.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowBlowjobImage") Then
-				If Not Directory.Exists(LBLIBlowjob.Text) Or CBIBlowjob.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowFemdomImage") Then
-				If Not Directory.Exists(LBLIFemdom.Text) Or CBIFemdom.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowLezdomImage") Then
-				If Not Directory.Exists(LBLILezdom.Text) Or CBILezdom.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowHentaiImage") Then
-				If Not Directory.Exists(LBLIHentai.Text) Or CBIHentai.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowGayImage") Then
-				If Not Directory.Exists(LBLIGay.Text) Or CBIGay.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowMaledomImage") Then
-				If Not Directory.Exists(LBLIMaledom.Text) Or CBIMaledom.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowCaptionsImage") Then
-				If Not Directory.Exists(LBLICaptions.Text) Or CBICaptions.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Then AvailFail = True
 			End If
 
 			If AvailList(j).Contains("@ShowGeneralImage") Then
-				If Not Directory.Exists(LBLIGeneral.Text) Or CBIGeneral.Checked = False Then AvailFail = True
+				If Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Then AvailFail = True
 			End If
 
 
@@ -12164,49 +12257,6 @@ GeneralGood:
 		My.Settings.TypoChance = NBTypoChance.Value
 	End Sub
 
-
-	Private Sub LBLBoobPath_MouseHover(sender As Object, e As System.EventArgs) Handles LBLBoobPath.MouseHover
-		TTDir.SetToolTip(LBLBoobPath, LBLBoobPath.Text)
-	End Sub
-
-	Private Sub LBLButtPath_MouseHover(sender As Object, e As System.EventArgs) Handles LBLButtPath.MouseHover
-		TTDir.SetToolTip(LBLButtPath, LBLButtPath.Text)
-	End Sub
-
-	Private Sub LBLIHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIHardcore.MouseHover
-		TTDir.SetToolTip(LBLIHardcore, LBLIHardcore.Text)
-	End Sub
-	Private Sub LBLISoftcore_MouseHover(sender As Object, e As System.EventArgs) Handles LBLISoftcore.MouseHover
-		TTDir.SetToolTip(LBLISoftcore, LBLISoftcore.Text)
-	End Sub
-	Private Sub LBLILesbian_MouseHover(sender As Object, e As System.EventArgs) Handles LBLILesbian.MouseHover
-		TTDir.SetToolTip(LBLILesbian, LBLILesbian.Text)
-	End Sub
-	Private Sub LBLIBlowjob_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIBlowjob.MouseHover
-		TTDir.SetToolTip(LBLIBlowjob, LBLIBlowjob.Text)
-	End Sub
-	Private Sub LBLIFemdom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIFemdom.MouseHover
-		TTDir.SetToolTip(LBLIFemdom, LBLIFemdom.Text)
-	End Sub
-	Private Sub LBLILezdom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLILezdom.MouseHover
-		TTDir.SetToolTip(LBLILezdom, LBLILezdom.Text)
-	End Sub
-	Private Sub LBLIHentai_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIHentai.MouseHover
-		TTDir.SetToolTip(LBLIHentai, LBLIHentai.Text)
-	End Sub
-	Private Sub LBLIGay_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIGay.MouseHover
-		TTDir.SetToolTip(LBLIGay, LBLIGay.Text)
-	End Sub
-	Private Sub LBLIMaledom_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIMaledom.MouseHover
-		TTDir.SetToolTip(LBLIMaledom, LBLIMaledom.Text)
-	End Sub
-	Private Sub LBLICaptions_MouseHover(sender As Object, e As System.EventArgs) Handles LBLICaptions.MouseHover
-		TTDir.SetToolTip(LBLICaptions, LBLICaptions.Text)
-	End Sub
-	Private Sub LBLIGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles LBLIGeneral.MouseHover
-		TTDir.SetToolTip(LBLIGeneral, LBLIGeneral.Text)
-	End Sub
-
 	Private Sub BTNWICreateURL_MouseHover(sender As Object, e As System.EventArgs) Handles BTNWICreateURL.MouseHover
 		TTDir.SetToolTip(BTNWICreateURL, "Click here to create a new URL File." & Environment.NewLine & Environment.NewLine &
 										 "URL Files create a txt file containing the URL address" & Environment.NewLine &
@@ -12393,91 +12443,7 @@ GeneralGood:
 		Form1.HoldEdgeTick = 5
 	End Sub
 
-#Region "----------------------------------- GenreImages-Url-Files --------------------------------------"
 
-	Private Sub BtnImageUrlSetFile_Click(sender As System.Object, e As System.EventArgs) Handles BtnImageUrlHardcore.Click,
-					BtnImageUrlSoftcore.Click, BtnImageUrlMaledom.Click, BtnImageUrlLezdom.Click, BtnImageUrlLesbian.Click,
-					BtnImageUrlHentai.Click, BtnImageUrlGeneral.Click, BtnImageUrlGay.Click, BtnImageUrlFemdom.Click,
-					BtnImageUrlCaptions.Click, BtnImageUrlButt.Click, BtnImageUrlBoobs.Click, BtnImageUrlBlowjob.Click
-		Try
-			' Read the Row of the current Button
-			Dim tmpTlpRow As Integer = TlpImageUrls.GetRow(sender)
-
-			' Check if the Button is in the TableLayoutPanel.
-			If tmpTlpRow = -1 Then Throw New Exception("Can't find control in TableLayoutPanel. " &
-													   "This is a major Design issue has to be fixed in code.")
-
-			' Get the Checkbox for the current button
-			Dim tmpCheckbox As CheckBox = TlpImageUrls.GetControlFromPosition(0, tmpTlpRow)
-
-			' Check if the Text-Property has an active Databinding.
-			If tmpCheckbox.DataBindings.Item("Checked") Is Nothing Then _
-				Throw New InvalidDataException("Databinding """" Checked """" was not found in Checkbox." &
-												"This is a major design issue and has to be fixed in code.")
-
-			' Get the TExtBox for the Current Button
-			Dim tmpTextbox As TextBox = TlpImageUrls.GetControlFromPosition(2, tmpTlpRow)
-
-			' Check if the Text-Property has an active Databinding.
-			If tmpTextbox.DataBindings.Item("Text") Is Nothing Then _
-				Throw New InvalidDataException("This function is only availabe with a Databound Textbox. " &
-												"This is a major design issue and has to be fixed in code.")
-
-			'Declare a new instance of An OpenFileDialog. Use the URL-FilePat as initial
-			Dim tmpFS As New OpenFileDialog With {
-				.Filter = "Textfiles|*.txt",
-				.Multiselect = False,
-				.CheckFileExists = True,
-				.Title = "Select an " & tmpCheckbox.Text & " URL-File",
-				.InitialDirectory = Form1.pathUrlFileDir}
-
-			' Check if the URL-FilePath exits -> Otherwise create it.
-			If Not Directory.Exists(tmpFS.InitialDirectory) Then _
-			Directory.CreateDirectory(tmpFS.InitialDirectory)
-
-			Dim tmpPath As String = tmpTextbox.Text
-			If tmpPath.ToLower.EndsWith(".txt") Then
-				If Path.IsPathRooted(tmpPath) AndAlso Directory.Exists(Path.GetDirectoryName(tmpPath)) Then
-					' Set an alternate Initial directory if filepath is absolute 
-					tmpFS.InitialDirectory = Path.GetDirectoryName(tmpPath)
-					tmpFS.FileName = Path.GetFileName(tmpPath)
-				Else
-					' Set the given Filename
-					tmpFS.FileName = tmpPath
-				End If
-			End If
-
-			If tmpFS.ShowDialog() = DialogResult.OK Then
-				If Path.GetDirectoryName(tmpFS.FileName).ToLower = Path.GetDirectoryName(Form1.pathUrlFileDir).ToLower Then
-					' If the file is located standarddirectory st only the filename
-					tmpTextbox.Text = tmpFS.SafeFileName
-				Else
-					' Otherwise set the absoulte filepath
-					tmpTextbox.Text = tmpFS.FileName
-				End If
-
-				' This will force the Settings to save.
-				tmpCheckbox.Checked = True
-			End If
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'						       All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			MsgBox(ex.Message & vbCrLf & "Please report this error at the Milovana Forum.",
-				   MsgBoxStyle.Critical, "Cant Set URl-File")
-			Log.WriteError(ex.Message, ex, "Error Set Url-File")
-		End Try
-	End Sub
-
-#End Region 'GenreImages-Url-Files
-
-
-	Private Sub CBIButts_LostFocus(sender As Object, e As System.EventArgs) Handles CBIButts.LostFocus
-		My.Settings.CBIButts = CBIButts.Checked
-	End Sub
-	Private Sub CBIBoobs_LostFocus(sender As Object, e As System.EventArgs) Handles CBIBoobs.LostFocus
-		My.Settings.CBIBoobs = CBIBoobs.Checked
-	End Sub
 
 
 
