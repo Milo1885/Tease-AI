@@ -32,8 +32,6 @@ Public Class FrmSettings
 
 	'Dim Fringe As New SpeechSynthesizer
 
-	Private Thr As Threading.Thread
-
 	Dim TagImageFolder As String
 
 	' Protected Overrides ReadOnly Property CreateParams() As CreateParams
@@ -2299,7 +2297,7 @@ trypreviousimage:
         ' Group Buttons by inital-State.
         Dim __PreEnabled As New List(Of Control) From
 			{BTNWIOpenURL, BTNWICreateURL, BTNMaintenanceRefresh,
-			BTNMaintenanceRebuild, BTNMaintenanceScripts, BTNMaintenanceValidate}
+			BTNMaintenanceRebuild, BTNMaintenanceScripts}
 		Dim __PreDisabled As New List(Of Control) From
 			{BTNWICancel, BTNMaintenanceCancel}
 
@@ -4578,454 +4576,6 @@ trypreviousimage:
 
 
 
-	Public Sub VerifyLocalImagePaths()
-		'TODO-Next-Stefaf: Validate User-Settings on Startup using myDireectory and assigning the My.Settings default values on failure.
-		Dim ImageList As New List(Of String)
-		ImageList.Clear()
-
-		PBMaintenance.Value = 0
-		PBMaintenance.Maximum = 11
-
-		Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-		Dim files As String()
-
-		If My.Settings.CBIHardcore = True Then
-			LBLMaintenance.Text = "Checking Hardcore image path..."
-			If Not Directory.Exists(My.Settings.IHardcore) Then
-				If My.Settings.IHardcore <> "" Or My.Settings.IHardcore <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Hardcore images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Hardcore Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.IHardcore = My.MySettings.Default.IHardcore '"No path selected"
-				My.Settings.CBIHardcore = My.MySettings.Default.CBIHardcore
-			Else
-
-
-
-				Dim ImageFolder As String = My.Settings.IHardcore
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo HardcoreGood
-				Next
-
-HardcoreGood:
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Hardcore folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Hardcore Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-
-					My.Settings.IHardcore = "No path selected"
-					My.Settings.CBIHardcore = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBISoftcore = True Then
-			LBLMaintenance.Text = "Checking Softcore image path..."
-			If Not Directory.Exists(My.Settings.ISoftcore) Then
-				If My.Settings.ISoftcore <> "" Or My.Settings.ISoftcore <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Softcore images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Softcore Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.ISoftcore = "No path selected"
-				My.Settings.CBISoftcore = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.ISoftcore
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo SoftcoreGood
-				Next
-
-SoftcoreGood:
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Softcore folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Softcore Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.ISoftcore = "No path selected"
-					My.Settings.CBISoftcore = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBILesbian = True Then
-			LBLMaintenance.Text = "Checking Lesbian image path..."
-			If Not Directory.Exists(My.Settings.ILesbian) Then
-				If My.Settings.ILesbian <> "" Or My.Settings.ILesbian <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Lesbian images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Lesbian Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.ILesbian = "No path selected"
-				My.Settings.CBILesbian = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.ILesbian
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo LesbianGood
-				Next
-
-LesbianGood:
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Lesbian folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Lesbian Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.ILesbian = "No path selected"
-					My.Settings.CBILesbian = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBIBlowjob = True Then
-			LBLMaintenance.Text = "Checking Blowjob image path..."
-			If Not Directory.Exists(My.Settings.IBlowjob) Then
-				If My.Settings.IBlowjob <> "" Or My.Settings.IBlowjob <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Blowjob images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Blowjob Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.IBlowjob = "No path selected"
-				My.Settings.CBIBlowjob = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.IBlowjob
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo BlowjobGood
-				Next
-
-BlowjobGood:
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Blowjob folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Blowjob Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.IBlowjob = "No path selected"
-					My.Settings.CBIBlowjob = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBIFemdom = True Then
-			LBLMaintenance.Text = "Checking Femdom image path..."
-			If Not Directory.Exists(My.Settings.IFemdom) Then
-				If My.Settings.IFemdom <> "" Or My.Settings.IFemdom <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Femdom images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Femdom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.IFemdom = "No path selected"
-				My.Settings.CBIFemdom = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.IFemdom
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo FemdomGood
-				Next
-
-FemdomGood:
-
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Femdom folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Femdom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.IFemdom = "No path selected"
-					My.Settings.CBIFemdom = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBILezdom = True Then
-			LBLMaintenance.Text = "Checking Lezdom image path..."
-			If Not Directory.Exists(My.Settings.ILezdom) Then
-				If My.Settings.ILezdom <> "" Or My.Settings.ILezdom <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Lezdom images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Lezdom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.ILezdom = "No path selected"
-				My.Settings.CBILezdom = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.ILezdom
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo LezdomGood
-				Next
-
-LezdomGood:
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Lezdom folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Lezdom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.ILezdom = "No path selected"
-					My.Settings.CBILezdom = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBIHentai = True Then
-			LBLMaintenance.Text = "Checking Hentai image path..."
-			If Not Directory.Exists(My.Settings.IHentai) Then
-				If My.Settings.IHentai <> "" Or My.Settings.IHentai <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Hentai images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Hentai Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.IHentai = "No path selected"
-				My.Settings.CBIHentai = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.IHentai
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo HentaiGood
-				Next
-
-HentaiGood:
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Hentai folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Hentai Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.IHentai = "No path selected"
-					My.Settings.CBIHentai = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBIGay = True Then
-			LBLMaintenance.Text = "Checking Gay image path..."
-			If Not Directory.Exists(My.Settings.IGay) Then
-				If My.Settings.IGay <> "" Or My.Settings.IGay <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Gay images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Gay Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.IGay = "No path selected"
-				My.Settings.CBIGay = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.IGay
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo GayGood
-				Next
-
-GayGood:
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Gay folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Gay Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.IGay = "No path selected"
-					My.Settings.CBIGay = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBIMaledom = True Then
-			LBLMaintenance.Text = "Checking Maledom image path..."
-			If Not Directory.Exists(My.Settings.IMaledom) Then
-				If My.Settings.IMaledom <> "" Or My.Settings.IMaledom <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Maledom images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Maledom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.IMaledom = "No path selected"
-				My.Settings.CBIMaledom = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.IMaledom
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo MaledomGood
-				Next
-
-MaledomGood:
-
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Maledom folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Maledom Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.IMaledom = "No path selected"
-					My.Settings.CBIMaledom = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBICaptions = True Then
-			LBLMaintenance.Text = "Checking Captions image path..."
-			If Not Directory.Exists(My.Settings.ICaptions) Then
-				If My.Settings.ICaptions <> "" Or My.Settings.ICaptions <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local Captions images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local Captions Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.ICaptions = "No path selected"
-				My.Settings.CBICaptions = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.ICaptions
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo CaptionsGood
-				Next
-
-CaptionsGood:
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified Captions folder!" & Environment.NewLine & Environment.NewLine &
-									"Local Captions Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.ICaptions = "No path selected"
-					My.Settings.CBICaptions = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value += 1
-
-		If My.Settings.CBIGeneral = True Then
-			LBLMaintenance.Text = "Checking General image path..."
-			If Not Directory.Exists(My.Settings.IGeneral) Then
-				If My.Settings.IGeneral <> "" Or My.Settings.IGeneral <> "No path selected" Then
-					MessageBox.Show(Me, "The directory for local General images was not found!" & Environment.NewLine & Environment.NewLine &
-									"Local General Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				End If
-				My.Settings.IGeneral = "No path selected"
-				My.Settings.CBIGeneral = False
-			Else
-
-				Dim ImageFolder As String = My.Settings.IGeneral
-
-				files = myDirectory.GetFiles(ImageFolder, "*.*")
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageList.Add(fi)
-					End If
-					If ImageList.Count > 0 Then GoTo GeneralGood
-				Next
-
-GeneralGood:
-
-				If ImageList.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified General folder!" & Environment.NewLine & Environment.NewLine &
-									"Local General Image setting has been deselected and cleared.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					My.Settings.IGeneral = "No path selected"
-					My.Settings.CBIGeneral = False
-				End If
-			End If
-
-			ImageList.Clear()
-		End If
-
-		PBMaintenance.Value = PBMaintenance.Maximum
-
-
-
-
-		MessageBox.Show(Me, "All Local Image paths have been validated.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-		LBLMaintenance.Text = ""
-
-		BTNMaintenanceRebuild.Enabled = True
-		BTNMaintenanceRefresh.Enabled = True
-		BTNMaintenanceCancel.Enabled = False
-		BTNMaintenanceValidate.Enabled = True
-
-		PBMaintenance.Value = 0
-
-	End Sub
 
 	Public Sub RefreshURLList()
 
@@ -10747,27 +10297,6 @@ checkFolder:
 		My.Settings.DomDeleteMedia = CBDomDel.Checked
 	End Sub
 
-	Private Sub BTNMaintenanceValidate_Click(sender As System.Object, e As System.EventArgs) Handles BTNMaintenanceValidate.Click
-		'TODO: ValidateLocalFiles Change to proper Backgroundworker usage
-		BTNMaintenanceRebuild.Enabled = False
-		BTNMaintenanceRefresh.Enabled = False
-		BTNMaintenanceValidate.Enabled = False
-		BTNMaintenanceCancel.Enabled = True
-
-		BWValidateLocalFiles.RunWorkerAsync()
-	End Sub
-
-	Private Sub BWValidateLocalFiles_DoWork(sender As System.Object, e As System.ComponentModel.DoWorkEventArgs) Handles BWValidateLocalFiles.DoWork
-		'TODO: ValidateLocalFiles Change to proper Backgroundworker usage
-
-		Control.CheckForIllegalCrossThreadCalls = False
-
-		Thr = New Threading.Thread(New Threading.ThreadStart(AddressOf VerifyLocalImagePaths))
-		Thr.SetApartmentState(ApartmentState.STA)
-		Thr.Start()
-
-	End Sub
-
 	Private Sub Button1_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNMaintenanceCancel.Click
 		If BWURLFiles.IsBusy Then BWURLFiles.CancelAsync()
 	End Sub
@@ -10783,7 +10312,6 @@ checkFolder:
 
 		BTNMaintenanceRebuild.Enabled = False
 		BTNMaintenanceRefresh.Enabled = False
-		BTNMaintenanceValidate.Enabled = False
 
 		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
 
@@ -10923,7 +10451,6 @@ checkFolder:
 
 		BTNMaintenanceRebuild.Enabled = True
 		BTNMaintenanceRefresh.Enabled = True
-		BTNMaintenanceValidate.Enabled = True
 
 
 	End Sub
@@ -10938,7 +10465,6 @@ checkFolder:
 
 		BTNMaintenanceRebuild.Enabled = False
 		BTNMaintenanceRefresh.Enabled = False
-		BTNMaintenanceValidate.Enabled = False
 
 		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text, FileIO.SearchOption.SearchAllSubDirectories, "*.txt")
 
@@ -11073,7 +10599,6 @@ checkFolder:
 
 		BTNMaintenanceRebuild.Enabled = True
 		BTNMaintenanceRefresh.Enabled = True
-		BTNMaintenanceValidate.Enabled = True
 
 	End Sub
 
