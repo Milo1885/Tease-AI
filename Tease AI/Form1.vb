@@ -253,7 +253,6 @@ Public Class Form1
 
 
 	Public SlideshowLoaded As Boolean
-	Public RefreshVideoTotal As Integer
 
 	Dim GlitterImageAV As String = Application.StartupPath & "\Images\Glitter\01.jpg"
 
@@ -948,25 +947,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.LBLSplash.Text = "Checking local videos..."
 		FrmSplash.Refresh()
 
-		HardCoreVideoTotal()
-		SoftcoreVideoTotal()
-		LesbianVideoTotal()
-		BlowjobVideoTotal()
-		FemdomVideoTotal()
-		FemsubVideoTotal()
-		JOIVideoTotal()
-		CHVideoTotal()
-		GeneralVideoTotal()
-
-		HardcoreDVideoTotal()
-		SoftcoreDVideoTotal()
-		LesbianDVideoTotal()
-		BlowjobDVideoTotal()
-		FemdomDVideoTotal()
-		FemsubDVideoTotal()
-		JOIDVideoTotal()
-		CHDVideoTotal()
-		GeneralDVideoTotal()
+		' Checks all folders and Sets the VideoCount as LabelText
+		FrmSettings.Video_CheckAllFolders()
 
 		VideoType = "General"
 
@@ -1250,25 +1232,25 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		If FrmSettings.TBEmoteEnd.Text = "" Then FrmSettings.TBEmoteEnd.Text = "*"
 
 		FrmSettings.alloworgasmComboBox.Text = My.Settings.OrgasmAllow
-        FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
+		FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
 
-        FrmSettings.LockOrgasmChances.Checked = My.Settings.LockOrgasmChances
-        FrmSettings.alloworgasmComboBox.Enabled = True
-        FrmSettings.ruinorgasmComboBox.Enabled = True
-        FrmSettings.CBRangeOrgasm.Enabled = True
-        If FrmSettings.CBRangeOrgasm.Checked = False Then
-            FrmSettings.NBAllowOften.Enabled = True
-            FrmSettings.NBAllowSometimes.Enabled = True
-            FrmSettings.NBAllowRarely.Enabled = True
-        End If
-        FrmSettings.CBRangeRuin.Enabled = True
-        If FrmSettings.CBRangeRuin.Checked = False Then
-            FrmSettings.NBRuinOften.Enabled = True
-            FrmSettings.NBRuinSometimes.Enabled = True
-            FrmSettings.NBRuinRarely.Enabled = True
-        End If
+		FrmSettings.LockOrgasmChances.Checked = My.Settings.LockOrgasmChances
+		FrmSettings.alloworgasmComboBox.Enabled = True
+		FrmSettings.ruinorgasmComboBox.Enabled = True
+		FrmSettings.CBRangeOrgasm.Enabled = True
+		If FrmSettings.CBRangeOrgasm.Checked = False Then
+			FrmSettings.NBAllowOften.Enabled = True
+			FrmSettings.NBAllowSometimes.Enabled = True
+			FrmSettings.NBAllowRarely.Enabled = True
+		End If
+		FrmSettings.CBRangeRuin.Enabled = True
+		If FrmSettings.CBRangeRuin.Checked = False Then
+			FrmSettings.NBRuinOften.Enabled = True
+			FrmSettings.NBRuinSometimes.Enabled = True
+			FrmSettings.NBRuinRarely.Enabled = True
+		End If
 
-        If My.Settings.DomDenialEnd = True Then
+		If My.Settings.DomDenialEnd = True Then
 			FrmSettings.CBDomDenialEnds.Checked = True
 		Else
 			FrmSettings.CBDomDenialEnds.Checked = False
@@ -1337,13 +1319,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Loading Image settings..."
 		FrmSplash.Refresh()
-
-
-		If My.Settings.CBBoobSubDir = True Then FrmSettings.CBBoobSubDir.Checked = True
-		If My.Settings.CBButtSubDir = True Then FrmSettings.CBButtSubDir.Checked = True
-
-		FrmSettings.LBLBoobPath.Text = My.Settings.LBLBoobPath
-		FrmSettings.LBLButtPath.Text = My.Settings.LBLButtPath
 
 
 		FrmSplash.PBSplash.Value += 1
@@ -1792,24 +1767,24 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		SubWroteLast = False
 		WritingTaskFlag = False
 
-        OrgasmYesNo = False
+		OrgasmYesNo = False
 
-        FrmSettings.alloworgasmComboBox.Enabled = True
-        FrmSettings.ruinorgasmComboBox.Enabled = True
-        FrmSettings.CBRangeOrgasm.Enabled = True
-        If FrmSettings.CBRangeOrgasm.Checked = False Then
-            FrmSettings.NBAllowOften.Enabled = True
-            FrmSettings.NBAllowSometimes.Enabled = True
-            FrmSettings.NBAllowRarely.Enabled = True
-        End If
-        FrmSettings.CBRangeRuin.Enabled = True
-        If FrmSettings.CBRangeRuin.Checked = False Then
-            FrmSettings.NBRuinOften.Enabled = True
-            FrmSettings.NBRuinSometimes.Enabled = True
-            FrmSettings.NBRuinRarely.Enabled = True
-        End If
+		FrmSettings.alloworgasmComboBox.Enabled = True
+		FrmSettings.ruinorgasmComboBox.Enabled = True
+		FrmSettings.CBRangeOrgasm.Enabled = True
+		If FrmSettings.CBRangeOrgasm.Checked = False Then
+			FrmSettings.NBAllowOften.Enabled = True
+			FrmSettings.NBAllowSometimes.Enabled = True
+			FrmSettings.NBAllowRarely.Enabled = True
+		End If
+		FrmSettings.CBRangeRuin.Enabled = True
+		If FrmSettings.CBRangeRuin.Checked = False Then
+			FrmSettings.NBRuinOften.Enabled = True
+			FrmSettings.NBRuinSometimes.Enabled = True
+			FrmSettings.NBRuinRarely.Enabled = True
+		End If
 
-        ShowModule = False
+		ShowModule = False
 		BookmarkLink = False
 		BookmarkModule = False
 		YesOrNo = False
@@ -2172,22 +2147,22 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 					End If
 
 
-                    TeaseTimer.Start()
+					TeaseTimer.Start()
 
-                    If FrmSettings.LockOrgasmChances.Checked = True Then
-                        FrmSettings.alloworgasmComboBox.Enabled = False
-                        FrmSettings.ruinorgasmComboBox.Enabled = False
-                        FrmSettings.CBRangeOrgasm.Enabled = False
-                        FrmSettings.NBAllowOften.Enabled = False
-                        FrmSettings.NBAllowSometimes.Enabled = False
-                        FrmSettings.NBAllowRarely.Enabled = False
-                        FrmSettings.CBRangeRuin.Enabled = False
-                        FrmSettings.NBRuinOften.Enabled = False
-                        FrmSettings.NBRuinSometimes.Enabled = False
-                        FrmSettings.NBRuinRarely.Enabled = False
-                    End If
+					If FrmSettings.LockOrgasmChances.Checked = True Then
+						FrmSettings.alloworgasmComboBox.Enabled = False
+						FrmSettings.ruinorgasmComboBox.Enabled = False
+						FrmSettings.CBRangeOrgasm.Enabled = False
+						FrmSettings.NBAllowOften.Enabled = False
+						FrmSettings.NBAllowSometimes.Enabled = False
+						FrmSettings.NBAllowRarely.Enabled = False
+						FrmSettings.CBRangeRuin.Enabled = False
+						FrmSettings.NBRuinOften.Enabled = False
+						FrmSettings.NBRuinSometimes.Enabled = False
+						FrmSettings.NBRuinRarely.Enabled = False
+					End If
 
-                    If PlaylistFile.Count = 0 Then GoTo NoPlaylistStartFile
+					If PlaylistFile.Count = 0 Then GoTo NoPlaylistStartFile
 
 					If Playlist = False Or PlaylistFile(0).Contains("Random Start") Then
 
@@ -4390,7 +4365,7 @@ AcceptAnswer:
 			If File.Exists(GotoText) Then
 				' Read all lines of File
 				Dim gotolines As List(Of String) = Txt2List(GotoText)
-				Dim gotoline As Integer
+				Dim gotoline As Integer = -1
 
 				If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
 				If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
@@ -5309,7 +5284,7 @@ SkipGotoSearch:
 
 				If StripGoto.Substring(0, 1) <> "(" Then StripGoto = "(" & StripGoto & ")"
 				If FileGoto.Substring(0, 1) <> "(" Then FileGoto = "(" & FileGoto & ")"
-		
+
 				DomTask = DomTask.Replace("@Goto" & StripGoto, "")
 
 				Dim gotoline As Integer = -1
@@ -6349,7 +6324,7 @@ NoResponse:
 		End If
 
 	End Sub
-Private Function playingStatus() As Boolean
+	Private Function playingStatus() As Boolean
 
 		Dim retval As Integer
 		Dim returnData As String = Space(128)
@@ -7900,23 +7875,23 @@ TryNextWithTease:
 		'======================================================================================
 		'									Genre Videos
 		'======================================================================================
-		If FrmSettings.CBVideoHardcore.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoHardCore.Text))
+		If My.Settings.CBHardcore = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoHardcore))
 
-		If FrmSettings.CBVideoSoftCore.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoSoftCore.Text))
+		If My.Settings.CBSoftcore = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoSoftcore))
 
-		If FrmSettings.CBVideoLesbian.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoLesbian.Text))
+		If My.Settings.CBLesbian = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoLesbian))
 
-		If FrmSettings.CBVideoBlowjob.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoBlowjob.Text))
+		If My.Settings.CBBlowjob = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoBlowjob))
 
-		If FrmSettings.CBVideoFemdom.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoFemdom.Text))
+		If My.Settings.CBFemdom = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemdom))
 
-		If FrmSettings.CBVideoFemsub.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoFemsub.Text))
+		If My.Settings.CBFemsub = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemsub))
 
 		If NoSpecialVideo = True Then GoTo SkipSpecial
 
@@ -7929,39 +7904,39 @@ TryNextWithTease:
 		'======================================================================================
 		'								Special - Videos
 		'======================================================================================
-		If FrmSettings.CBVideoJOI.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text))
+		If My.Settings.CBJOI = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOI))
 
-		If FrmSettings.CBVideoCH.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCH.Text))
+		If My.Settings.CBCH = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCH))
 
 SkipSpecial:
 		'======================================================================================
 		'									General Videos
 		'======================================================================================
-		If FrmSettings.CBVideoGeneral.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoGeneral.Text))
+		If My.Settings.CBGeneral = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoGeneral))
 
 		'======================================================================================
 		'									Domme - Videos
 		'======================================================================================
-		If FrmSettings.CBVideoHardcoreD.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoHardCoreD.Text))
+		If My.Settings.CBHardcoreD = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoHardcoreD))
 
-		If FrmSettings.CBVideoSoftCoreD.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoSoftCoreD.Text))
+		If My.Settings.CBSoftcoreD = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoSoftcoreD))
 
-		If FrmSettings.CBVideoLesbianD.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoLesbianD.Text))
+		If My.Settings.CBLesbianD = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoLesbianD))
 
-		If FrmSettings.CBVideoBlowjobD.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoBlowjobD.Text))
+		If My.Settings.CBBlowjobD = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoBlowjobD))
 
-		If FrmSettings.CBVideoFemdomD.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoFemdomD.Text))
+		If My.Settings.CBFemdomD = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemdomD))
 
-		If FrmSettings.CBVideoFemsubD.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoFemsubD.Text))
+		If My.Settings.CBFemsubD = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemsubD))
 
 		If NoSpecialVideo = True Then GoTo SkipSpecialD
 		If ScriptVideoTeaseFlag = True Then
@@ -7973,18 +7948,18 @@ SkipSpecial:
 		'======================================================================================
 		'								Domme - Special - Videos
 		'======================================================================================
-		If FrmSettings.CBVideoJOID.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOID.Text))
+		If My.Settings.CBJOID = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOID))
 
-		If FrmSettings.CBVideoCHD.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCHD.Text))
+		If My.Settings.CBCHD = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCHD))
 
 SkipSpecialD:
 		'======================================================================================
 		'								Domme - General Videos
 		'======================================================================================
-		If FrmSettings.CBVideoGeneralD.Checked = True Then _
-			__TotalFiles.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoGeneralD.Text))
+		If My.Settings.CBGeneralD = True Then _
+			__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoGeneralD))
 
 
 
@@ -8003,54 +7978,54 @@ GetAnotherRandomVideo:
 			__TotalFiles.ForEach(Sub(x) Debug.Print("RndVideoCheck: " & x))
 
 
-		If FrmSettings.CBVideoHardcore.Checked = True And InStr(__domVideo, FrmSettings.LblVideoHardCore.Text) <> 0 Then VideoType = "Hardcore"
-		If FrmSettings.CBVideoSoftCore.Checked = True And InStr(__domVideo, FrmSettings.LblVideoSoftCore.Text) <> 0 Then VideoType = "Softcore"
-		If FrmSettings.CBVideoLesbian.Checked = True And InStr(__domVideo, FrmSettings.LblVideoLesbian.Text) <> 0 Then VideoType = "Lesbian"
-		If FrmSettings.CBVideoBlowjob.Checked = True And InStr(__domVideo, FrmSettings.LblVideoBlowjob.Text) <> 0 Then VideoType = "Blowjob"
-		If FrmSettings.CBVideoFemdom.Checked = True And InStr(__domVideo, FrmSettings.LblVideoFemdom.Text) <> 0 Then VideoType = "Femdom"
-		If FrmSettings.CBVideoFemsub.Checked = True And InStr(__domVideo, FrmSettings.LblVideoFemsub.Text) <> 0 Then VideoType = "Femsub"
-		If FrmSettings.CBVideoJOI.Checked = True And InStr(__domVideo, FrmSettings.LblVideoJOI.Text) <> 0 Then VideoType = "JOI"
-		If FrmSettings.CBVideoCH.Checked = True And InStr(__domVideo, FrmSettings.LblVideoCH.Text) <> 0 Then VideoType = "CH"
-		If FrmSettings.CBVideoGeneral.Checked = True And InStr(__domVideo, FrmSettings.LblVideoGeneral.Text) <> 0 Then VideoType = "General"
+		If My.Settings.CBHardcore And InStr(__domVideo, My.Settings.VideoHardcore) <> 0 Then VideoType = "Hardcore"
+		If My.Settings.CBSoftcore And InStr(__domVideo, My.Settings.VideoSoftcore) <> 0 Then VideoType = "Softcore"
+		If My.Settings.CBLesbian = True And InStr(__domVideo, My.Settings.VideoLesbian) <> 0 Then VideoType = "Lesbian"
+		If My.Settings.CBBlowjob = True And InStr(__domVideo, My.Settings.VideoBlowjob) <> 0 Then VideoType = "Blowjob"
+		If My.Settings.CBFemdom = True And InStr(__domVideo, My.Settings.VideoFemdom) <> 0 Then VideoType = "Femdom"
+		If My.Settings.CBFemsub = True And InStr(__domVideo, My.Settings.VideoFemsub) <> 0 Then VideoType = "Femsub"
+		If My.Settings.CBJOI = True And InStr(__domVideo, My.Settings.VideoJOI) <> 0 Then VideoType = "JOI"
+		If My.Settings.CBCH = True And InStr(__domVideo, My.Settings.VideoCH) <> 0 Then VideoType = "CH"
+		If My.Settings.CBGeneral = True And InStr(__domVideo, My.Settings.VideoGeneral) <> 0 Then VideoType = "General"
 
 
-		If FrmSettings.CBVideoHardcoreD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoHardCoreD.Text) <> 0 Then
+		If My.Settings.CBHardcoreD And InStr(__domVideo, My.Settings.VideoHardcoreD) <> 0 Then
 			VideoType = "HardcoreD"
 			DommeVideo = True
 		End If
-		If FrmSettings.CBVideoSoftCoreD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoSoftCoreD.Text) <> 0 Then
+		If My.Settings.CBSoftcoreD And InStr(__domVideo, My.Settings.VideoSoftcoreD) <> 0 Then
 			VideoType = "SoftcoreD"
 			DommeVideo = True
 		End If
-		If FrmSettings.CBVideoLesbianD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoLesbianD.Text) <> 0 Then
+		If My.Settings.CBLesbianD And InStr(__domVideo, My.Settings.VideoLesbianD) <> 0 Then
 			VideoType = "LesbianD"
 			DommeVideo = True
 		End If
 
-		If FrmSettings.CBVideoBlowjobD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoBlowjobD.Text) <> 0 Then
+		If My.Settings.CBBlowjobD And InStr(__domVideo, My.Settings.VideoBlowjobD) <> 0 Then
 			VideoType = "BlowjobD"
 			DommeVideo = True
 		End If
-		If FrmSettings.CBVideoFemdomD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoFemdomD.Text) <> 0 Then
+		If My.Settings.CBFemdomD And InStr(__domVideo, My.Settings.VideoFemdomD) <> 0 Then
 			VideoType = "FemdomD"
 			DommeVideo = True
 		End If
-		If FrmSettings.CBVideoFemsubD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoFemsubD.Text) <> 0 Then
+		If My.Settings.CBFemsubD And InStr(__domVideo, My.Settings.VideoFemsubD) <> 0 Then
 			VideoType = "FemsubD"
 			DommeVideo = True
 		End If
 
-		If FrmSettings.CBVideoJOID.Checked = True And InStr(__domVideo, FrmSettings.LblVideoJOID.Text) <> 0 Then
+		If My.Settings.CBJOID And InStr(__domVideo, My.Settings.VideoJOID) <> 0 Then
 			VideoType = "JOID"
 			DommeVideo = True
 		End If
 
-		If FrmSettings.CBVideoCHD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoCHD.Text) <> 0 Then
+		If My.Settings.CBCHD = True And InStr(__domVideo, My.Settings.VideoCHD) <> 0 Then
 			VideoType = "CHD"
 			DommeVideo = True
 		End If
 
-		If FrmSettings.CBVideoGeneralD.Checked = True And InStr(__domVideo, FrmSettings.LblVideoGeneralD.Text) <> 0 Then
+		If My.Settings.CBGeneralD = True And InStr(__domVideo, My.Settings.VideoGeneral) <> 0 Then
 			VideoType = "GeneralD"
 			DommeVideo = True
 		End If
@@ -8100,14 +8075,14 @@ GetAnotherRandomVideo:
 		Dim JOIVideos As New List(Of String)
 		JOIVideos.Clear()
 
-		If FrmSettings.LblVideoJOITotal.Text <> "0" And FrmSettings.CBVideoJOI.Checked = True Then
+		If FrmSettings.LblVideoJOITotal.Text <> "0" And My.Settings.CBJOI = True Then
 
-			JOIVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text,
+			JOIVideos.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOI,
 														 System.IO.SearchOption.AllDirectories))
 		End If
 
-		If FrmSettings.LblVideoJOITotalD.Text <> "0" And FrmSettings.CBVideoJOID.Checked = True Then
-			JOIVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text,
+		If FrmSettings.LblVideoJOITotalD.Text <> "0" And My.Settings.CBJOID = True Then
+			JOIVideos.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOI,
 														 System.IO.SearchOption.AllDirectories))
 		End If
 
@@ -8138,11 +8113,11 @@ GetAnotherRandomVideo:
 		Dim CHVideos As New List(Of String)
 		CHVideos.Clear()
 
-		If FrmSettings.LblVideoCHTotal.Text <> "0" And FrmSettings.CBVideoCH.Checked = True Then
-			CHVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCH.Text))
+		If FrmSettings.LblVideoCHTotal.Text <> "0" And My.Settings.CBCH = True Then
+			CHVideos.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCH))
 		End If
-		If FrmSettings.LblVideoCHTotalD.Text <> "0" And FrmSettings.CBVideoCHD.Checked = True Then
-			CHVideos.AddRange(myDirectory.GetFilesVideo(FrmSettings.LblVideoCHD.Text))
+		If FrmSettings.LblVideoCHTotalD.Text <> "0" And My.Settings.CBCHD = True Then
+			CHVideos.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCHD))
 		End If
 
 		If CHVideos.Count < 1 Then
@@ -8164,108 +8139,6 @@ GetAnotherRandomVideo:
 
 
 	End Sub
-
-
-#Region "----------------------------------------------------- Video-Totals ---------------------------------------------------"
-
-	Public Sub HardCoreVideoTotal()
-		FrmSettings.LblVideoHardCoreTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoHardCore.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoHardCoreTotal.Text)
-	End Sub
-
-	Public Sub SoftcoreVideoTotal()
-		FrmSettings.LblVideoSoftCoreTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoSoftCore.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoSoftCoreTotal.Text)
-	End Sub
-
-	Public Sub LesbianVideoTotal()
-		FrmSettings.LblVideoLesbianTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoLesbian.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoLesbianTotal.Text)
-	End Sub
-
-	Public Sub BlowjobVideoTotal()
-		FrmSettings.LblVideoBlowjobTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoBlowjob.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoBlowjobTotal.Text)
-	End Sub
-
-	Public Sub FemdomVideoTotal()
-		FrmSettings.LblVideoFemdomTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoFemdom.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemdomTotal.Text)
-	End Sub
-
-	Public Sub FemsubVideoTotal()
-		FrmSettings.LblVideoFemsubTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoFemsub.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemsubTotal.Text)
-	End Sub
-
-	Public Sub JOIVideoTotal()
-		FrmSettings.LblVideoJOITotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoJOI.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoJOITotal.Text)
-	End Sub
-
-	Public Sub CHVideoTotal()
-		FrmSettings.LblVideoCHTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoCH.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoCHTotal.Text)
-	End Sub
-
-	Public Sub GeneralVideoTotal()
-		FrmSettings.LblVideoGeneralTotal.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoGeneral.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoGeneralTotal.Text)
-	End Sub
-
-	Public Sub HardcoreDVideoTotal()
-		FrmSettings.LblVideoHardCoreTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoHardCoreD.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoHardCoreTotalD.Text)
-	End Sub
-
-
-	Public Sub SoftcoreDVideoTotal()
-		FrmSettings.LblVideoSoftCoreTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoSoftCoreD.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoSoftCoreTotalD.Text)
-	End Sub
-
-
-	Public Sub LesbianDVideoTotal()
-		FrmSettings.LblVideoLesbianTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoLesbianD.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoLesbianTotalD.Text)
-	End Sub
-
-
-	Public Sub BlowjobDVideoTotal()
-		FrmSettings.LblVideoBlowjobTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoBlowjobD.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoBlowjobTotalD.Text)
-	End Sub
-
-	Public Sub FemdomDVideoTotal()
-		FrmSettings.LblVideoFemdomTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoFemdomD.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemdomTotalD.Text)
-	End Sub
-
-
-	Public Sub FemsubDVideoTotal()
-		FrmSettings.LblVideoFemsubTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoFemsubD.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoFemsubTotalD.Text)
-	End Sub
-
-
-	Public Sub JOIDVideoTotal()
-		FrmSettings.LblVideoJOITotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoJOID.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoJOITotalD.Text)
-	End Sub
-
-
-	Public Sub CHDVideoTotal()
-		FrmSettings.LblVideoCHTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoCHD.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoCHTotalD.Text)
-	End Sub
-
-
-	Public Sub GeneralDVideoTotal()
-		FrmSettings.LblVideoGeneralTotalD.Text = myDirectory.GetFilesVideo(FrmSettings.LblVideoGeneralD.Text).Count
-		RefreshVideoTotal += CInt(FrmSettings.LblVideoGeneralTotalD.Text)
-	End Sub
-
-#End Region
 
 #End Region
 
@@ -10350,19 +10223,19 @@ ShowedBlogImage:
 
 		If StringClean.Contains("@GotoSlideshow") Then
 			'BUG: @GotoCustomSlideshow is not working. There is no reference what imagegenre a image belongs to.
-			If ImageString.Contains(FrmSettings.LBLIHardcore.Text) Then FileGoto = "Hardcore"
-			If ImageString.Contains(FrmSettings.LBLISoftcore.Text) Then FileGoto = "Softcore"
-			If ImageString.Contains(FrmSettings.LBLILesbian.Text) Then FileGoto = "Lesbian"
-			If ImageString.Contains(FrmSettings.LBLIBlowjob.Text) Then FileGoto = "Blowjob"
-			If ImageString.Contains(FrmSettings.LBLIFemdom.Text) Then FileGoto = "Femdom"
-			If ImageString.Contains(FrmSettings.LBLILezdom.Text) Then FileGoto = "Lezdom"
-			If ImageString.Contains(FrmSettings.LBLIHentai.Text) Then FileGoto = "Hentai"
-			If ImageString.Contains(FrmSettings.LBLIGay.Text) Then FileGoto = "Gay"
-			If ImageString.Contains(FrmSettings.LBLIMaledom.Text) Then FileGoto = "Maledom"
-			If ImageString.Contains(FrmSettings.LBLICaptions.Text) Then FileGoto = "Captions"
-			If ImageString.Contains(FrmSettings.LBLIGeneral.Text) Then FileGoto = "General"
-			If ImageString.Contains(FrmSettings.LBLBoobPath.Text) Then FileGoto = "Boobs"
-			If ImageString.Contains(FrmSettings.LBLButtPath.Text) Then FileGoto = "Butts"
+			If ImageString.Contains(My.Settings.IHardcore) Then FileGoto = "Hardcore"
+			If ImageString.Contains(My.Settings.ISoftcore) Then FileGoto = "Softcore"
+			If ImageString.Contains(My.Settings.ILesbian) Then FileGoto = "Lesbian"
+			If ImageString.Contains(My.Settings.IBlowjob) Then FileGoto = "Blowjob"
+			If ImageString.Contains(My.Settings.IFemdom) Then FileGoto = "Femdom"
+			If ImageString.Contains(My.Settings.ILezdom) Then FileGoto = "Lezdom"
+			If ImageString.Contains(My.Settings.IHentai) Then FileGoto = "Hentai"
+			If ImageString.Contains(My.Settings.IGay) Then FileGoto = "Gay"
+			If ImageString.Contains(My.Settings.IMaledom) Then FileGoto = "Maledom"
+			If ImageString.Contains(My.Settings.ICaptions) Then FileGoto = "Captions"
+			If ImageString.Contains(My.Settings.IGeneral) Then FileGoto = "General"
+			If ImageString.Contains(My.Settings.LBLBoobPath) Then FileGoto = "Boobs"
+			If ImageString.Contains(My.Settings.LBLButtPath) Then FileGoto = "Butts"
 
 			Debug.Print("GotoSlideshow called, FileGoto = " & FileGoto)
 
@@ -12187,7 +12060,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@CheckJOIVideo") Then
 
-			If Directory.Exists(FrmSettings.LblVideoJOI.Text) Or Directory.Exists(FrmSettings.LblVideoJOID.Text) Then
+			If Directory.Exists(My.Settings.VideoJOI) Or Directory.Exists(My.Settings.VideoJOID) Then
 				If FrmSettings.LblVideoJOITotal.Text <> "0" Or FrmSettings.LblVideoJOITotalD.Text <> "0" Then
 				Else
 					SkipGotoLine = True
@@ -12207,7 +12080,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@PlayJOIVideo") Then
 
-			If Directory.Exists(FrmSettings.LblVideoJOI.Text) Or Directory.Exists(FrmSettings.LblVideoJOID.Text) Then
+			If Directory.Exists(My.Settings.VideoJOI) Or Directory.Exists(My.Settings.VideoJOID) Then
 
 				TeaseVideo = True
 				PlayRandomJOI()
@@ -12219,7 +12092,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@PlayCHVideo") Then
 
-			If Directory.Exists(FrmSettings.LblVideoCH.Text) Or Directory.Exists(FrmSettings.LblVideoCH.Text) Then
+			If Directory.Exists(My.Settings.VideoCH) Or Directory.Exists(My.Settings.VideoCH) Then
 
 				TeaseVideo = True
 				PlayRandomCH()
@@ -14173,7 +14046,7 @@ VTSkip:
 
 					Dim PicAttributes As String() = GetArrayString(ImageDir)
 
-					StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "<img id=""ChatPic"" src=""" & PicAttributes(0) & """ width=" & PicAttributes(1) & _
+					StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "<img id=""ChatPic"" src=""" & PicAttributes(0) & """ width=" & PicAttributes(1) &
 					 " height=" & PicAttributes(2) & """/>")
 
 				Else
@@ -15408,9 +15281,9 @@ Skip_RandomFile:
 			End If
 
 			'TODO: Add ImageDataContainerUsage to filter @ShowLocalImage correct.
-			If FilterString.Contains("@ShowLocalImage") And FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And
-			   FrmSettings.CBIBlowjob.Checked = False And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And
-				  FrmSettings.CBIGay.Checked = False And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False Then Return False
+			If FilterString.Contains("@ShowLocalImage") And My.Settings.CBIHardcore = False And My.Settings.CBISoftcore = False And My.Settings.CBILesbian = False And
+			   My.Settings.CBIBlowjob = False And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And
+				  My.Settings.CBIGay = False And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False Then Return False
 			If FilterString.Contains("@ShowLocalImage") Then
 				If FlagExists("SYS_NoPornAllowed") = True Or LockImage = True Then Return False
 			End If
@@ -15840,23 +15713,23 @@ Skip_RandomFile:
 				.Add("@NotNeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Never Allows")
 				.Add("@LongEdge", LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False)
 				.Add("@InterruptLongEdge", LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or TeaseTick < 1 Or RiskyEdges = True)
-				.Add("@ShowHardcoreImage", Not Directory.Exists(FrmSettings.LBLIHardcore.Text) Or FrmSettings.CBIHardcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowSoftcoreImage", Not Directory.Exists(FrmSettings.LBLISoftcore.Text) Or FrmSettings.CBISoftcore.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowLesbianImage", Not Directory.Exists(FrmSettings.LBLILesbian.Text) Or FrmSettings.CBILesbian.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowBlowjobImage", Not Directory.Exists(FrmSettings.LBLIBlowjob.Text) Or FrmSettings.CBIBlowjob.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowFemdomImage", Not Directory.Exists(FrmSettings.LBLIFemdom.Text) Or FrmSettings.CBIFemdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowLezdomImage", Not Directory.Exists(FrmSettings.LBLILezdom.Text) Or FrmSettings.CBILezdom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowHentaiImage", Not Directory.Exists(FrmSettings.LBLIHentai.Text) Or FrmSettings.CBIHentai.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowGayImage", Not Directory.Exists(FrmSettings.LBLIGay.Text) Or FrmSettings.CBIGay.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowMaledomImage", Not Directory.Exists(FrmSettings.LBLIMaledom.Text) Or FrmSettings.CBIMaledom.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowCaptionsImage", Not Directory.Exists(FrmSettings.LBLICaptions.Text) Or FrmSettings.CBICaptions.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
-				.Add("@ShowGeneralImage", Not Directory.Exists(FrmSettings.LBLIGeneral.Text) Or FrmSettings.CBIGeneral.Checked = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowHardcoreImage", Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowSoftcoreImage", Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowLesbianImage", Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowBlowjobImage", Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowFemdomImage", Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowLezdomImage", Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowHentaiImage", Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowGayImage", Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowMaledomImage", Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowCaptionsImage", Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
+				.Add("@ShowGeneralImage", Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
 				.Add("@ShowBlogImage", FrmSettings.URLFileList.CheckedItems.Count = 0 Or CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or LockImage = True)
 				.Add("@NewBlogImage", __ConditionDic("@ShowBlogImage")) ' duplicate Command, lets get the Value af the other one.
 				.Add("@ShowLocalImage", FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True _
-					  Or (FrmSettings.CBIHardcore.Checked = False And FrmSettings.CBISoftcore.Checked = False And FrmSettings.CBILesbian.Checked = False And FrmSettings.CBIBlowjob.Checked = False _
-					   And FrmSettings.CBIFemdom.Checked = False And FrmSettings.CBILezdom.Checked = False And FrmSettings.CBIHentai.Checked = False And FrmSettings.CBIGay.Checked = False _
-					   And FrmSettings.CBIMaledom.Checked = False And FrmSettings.CBICaptions.Checked = False And FrmSettings.CBIGeneral.Checked = False))
+					  Or (My.Settings.CBIHardcore = False And My.Settings.CBISoftcore = False And My.Settings.CBILesbian = False And My.Settings.CBIBlowjob = False _
+					   And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And My.Settings.CBIGay = False _
+					   And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False))
 				'.Add("@ShowButtImage", Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
 				'.Add("@ShowButtsImage", __ConditionDic("@ShowButtImage")) ' duplicate Command, lets get the Value af the other one.
 				'.Add("@ShowBoobImage", Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
@@ -16777,22 +16650,22 @@ NoPlaylistEndFile:
 
 		MiniScript = False
 
-        FrmSettings.alloworgasmComboBox.Enabled = True
-        FrmSettings.ruinorgasmComboBox.Enabled = True
-        FrmSettings.CBRangeOrgasm.Enabled = True
-        If FrmSettings.CBRangeOrgasm.Checked = False Then
-            FrmSettings.NBAllowOften.Enabled = True
-            FrmSettings.NBAllowSometimes.Enabled = True
-            FrmSettings.NBAllowRarely.Enabled = True
-        End If
-        FrmSettings.CBRangeRuin.Enabled = True
-        If FrmSettings.CBRangeRuin.Checked = False Then
-            FrmSettings.NBRuinOften.Enabled = True
-            FrmSettings.NBRuinSometimes.Enabled = True
-            FrmSettings.NBRuinRarely.Enabled = True
-        End If
+		FrmSettings.alloworgasmComboBox.Enabled = True
+		FrmSettings.ruinorgasmComboBox.Enabled = True
+		FrmSettings.CBRangeOrgasm.Enabled = True
+		If FrmSettings.CBRangeOrgasm.Checked = False Then
+			FrmSettings.NBAllowOften.Enabled = True
+			FrmSettings.NBAllowSometimes.Enabled = True
+			FrmSettings.NBAllowRarely.Enabled = True
+		End If
+		FrmSettings.CBRangeRuin.Enabled = True
+		If FrmSettings.CBRangeRuin.Checked = False Then
+			FrmSettings.NBRuinOften.Enabled = True
+			FrmSettings.NBRuinSometimes.Enabled = True
+			FrmSettings.NBRuinRarely.Enabled = True
+		End If
 
-        ClearModes()
+		ClearModes()
 
 
 		If FrmSettings.TBWebStop.Text <> "" Then
@@ -19300,7 +19173,7 @@ GetDommeSlideshow:
 		SettingsList.Add("ScriptVideoTeaseFlag: " & ScriptVideoTeaseFlag)
 		SettingsList.Add("VideoTauntTick: " & VideoTauntTick)
 		SettingsList.Add("SlideshowLoaded: " & SlideshowLoaded)
-		SettingsList.Add("RefreshVideoTotal: " & RefreshVideoTotal)
+		SettingsList.Add("RefreshVideoTotal: --obsolete--") ' for compatibility
 		SettingsList.Add("GlitterImageAV: " & GlitterImageAV)
 		SettingsList.Add("GlitterNCDomme: --obsolete--") ' for compatibility
 		SettingsList.Add("GlitterNC1: --obsolete--") ' for compatibility
@@ -19914,7 +19787,7 @@ GetDommeSlideshow:
 		ScriptVideoTeaseFlag = SettingsList(137).Replace("ScriptVideoTeaseFlag: ", "")
 		VideoTauntTick = SettingsList(138).Replace("VideoTauntTick: ", "")
 		SlideshowLoaded = SettingsList(139).Replace("SlideshowLoaded: ", "")
-		RefreshVideoTotal = SettingsList(140).Replace("RefreshVideoTotal: ", "")
+		'RefreshVideoTotal = SettingsList(140).Replace("RefreshVideoTotal: ", "")
 		GlitterImageAV = SettingsList(141).Replace("GlitterImageAV: ", "")
 
 		GlitterTempColor = SettingsList(146).Replace("GlitterTempColor: ", "")
@@ -23618,12 +23491,12 @@ playLoop:
 
 		OffString = OffString.Replace("@ShowBlogImage", "@ShowLocalImage")
 
-		If FrmSettings.CBIButts.Checked = False Then
+		If My.Settings.CBIButts = False Then
 			OffString = OffString.Replace("@ShowButtImage", "")
 			OffString = OffString.Replace("@ShowButtsImage", "")
 		End If
 
-		If FrmSettings.CBIBoobs.Checked = False Then
+		If My.Settings.CBIBoobs = False Then
 			OffString = OffString.Replace("@ShowBoobImage", "")
 			OffString = OffString.Replace("@ShowBoobsImage", "")
 		End If
@@ -23951,7 +23824,6 @@ playLoop:
 		ScriptVideoTeaseFlag,
 		VideoTauntTick,
 		SlideshowLoaded,
-		RefreshVideoTotal,
 		GlitterImageAV,
 		GlitterTempColor,
 		UpdatesTick,
@@ -24336,7 +24208,6 @@ playLoop:
 		ScriptVideoTeaseFlag = LoadedState.ScriptVideoTeaseFlag
 		VideoTauntTick = LoadedState.VideoTauntTick
 		SlideshowLoaded = LoadedState.SlideshowLoaded
-		RefreshVideoTotal = LoadedState.RefreshVideoTotal
 		GlitterImageAV = LoadedState.GlitterImageAV
 		GlitterTempColor = LoadedState.GlitterTempColor
 		UpdatesTick = LoadedState.UpdatesTick

@@ -123,7 +123,6 @@ Public Class SaveState
 	Public ScriptVideoTeaseFlag As Boolean
 	Public VideoTauntTick As Integer
 	Public SlideshowLoaded As Boolean
-	Public RefreshVideoTotal As Integer
 	Public GlitterImageAV As String
 	Public GlitterTempColor As String
 	Public UpdatesTick As Integer
@@ -486,7 +485,6 @@ Public Class SaveState
 	 ByVal NEW_ScriptVideoTeaseFlag As Boolean,
 	 ByVal NEW_VideoTauntTick As Integer,
 	 ByVal NEW_SlideshowLoaded As Boolean,
-	 ByVal NEW_RefreshVideoTotal As Integer,
 	 ByVal NEW_GlitterImageAV As String,
 	 ByVal NEW_GlitterTempColor As String,
 	 ByVal NEW_UpdatesTick As Integer,
@@ -842,7 +840,6 @@ Public Class SaveState
 		ScriptVideoTeaseFlag = NEW_ScriptVideoTeaseFlag
 		VideoTauntTick = NEW_VideoTauntTick
 		SlideshowLoaded = NEW_SlideshowLoaded
-		RefreshVideoTotal = NEW_RefreshVideoTotal
 		GlitterImageAV = NEW_GlitterImageAV
 		GlitterTempColor = NEW_GlitterTempColor
 		UpdatesTick = NEW_UpdatesTick

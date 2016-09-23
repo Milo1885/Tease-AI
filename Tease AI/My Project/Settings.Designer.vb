@@ -1532,7 +1532,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property LBLBoobPath() As String
             Get
                 Return CType(Me("LBLBoobPath"),String)
@@ -1556,7 +1556,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("No path selected")>  _
         Public Property LBLButtPath() As String
             Get
                 Return CType(Me("LBLButtPath"),String)
@@ -1604,7 +1604,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property CBBoobSubDir() As Boolean
             Get
                 Return CType(Me("CBBoobSubDir"),Boolean)
@@ -1616,7 +1616,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property CBButtSubDir() As Boolean
             Get
                 Return CType(Me("CBButtSubDir"),Boolean)

@@ -13,15 +13,23 @@ WIP - SaveState overhaul. Added SaveState Class and replaced Suspend and Resume 
 WIP - DataBinding Overhaul
 
 Added Features: 
+
 	Check Box to lock orgasm chances after tease starts. by OxiKlein
 	Download online-image progress bar added. by Stefaf
+	Video Folders are now checked on startup. The user is asked to search for missing folders. by Stefaf
+	Image Folders are now checked on startup. The user is asked to search for missing folders or if a folder is empty. by Stefaf
 
 Bugfixes:
+
 	@ImageTag()-Command displays now tagged images. Up to 3 Tags are allowed. by Stefaf
 	Resolved an infinite loop, when TauntEdging was started. by Stefaf
+	Goto was unable to jump to the first line of a file, when a question was asked. by Stefaf
 
 Miscellaneous:
+
 	Removed several unused variables. by Stefaf
+	SettingsForm VideoSettings GUI reworked. by Stefaf
+	SettingsForm ImageSettings GUI reworked. by Stefaf
 
 
 # Changelog - Patch 54.4.0
