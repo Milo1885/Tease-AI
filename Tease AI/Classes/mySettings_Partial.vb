@@ -404,5 +404,34 @@ Error_All:
 
 #End Region  ' Import file
 
+		''' =========================================================================================================
+		''' <summary>
+		''' Resets a field using a databound control.
+		''' </summary>
+		''' <param name="cntl">The databound control, containing the databinding.</param>
+		''' <param name="prop">The controls databound property to reset.</param>
+		Friend Sub ResetField(ByVal cntl As Control, prop As String)
+			Try
+				Dim bindingField As String = cntl.DataBindings.Item(prop).BindingMemberInfo.BindingField
+				My.Settings(bindingField) = My.Settings.PropertyValues(bindingField).Property.DefaultValue
+			Catch ex As Exception
+				Throw
+			End Try
+		End Sub
+		''' =========================================================================================================
+		''' <summary>
+		''' Returns the initial value for a databound field using a databound control.
+		''' </summary>
+		''' <param name="cntl">The databound control, containing the databinding.</param>
+		''' <param name="prop">The controls databound property.</param>
+		Friend Function GetDefault(ByVal cntl As Control, prop As String) As String
+			Try
+				Dim bindingField As String = cntl.DataBindings.Item(prop).BindingMemberInfo.BindingField
+				Return My.Settings.PropertyValues(bindingField).Property.DefaultValue
+			Catch ex As Exception
+				Throw
+			End Try
+		End Function
+
 	End Class
 End Namespace

@@ -241,7 +241,7 @@ Public Class FrmCardList
 			End If
 		Next
 
-		If FrmSettings.CBIncludeGifs.Checked = False Then
+		If My.Settings.CBIncludeGifs = False Then
 			For i As Integer = MatchList.Count - 1 To 0 Step -1
 				If MatchList(i).Contains(".gif") Then MatchList.Remove(MatchList(i))
 			Next
@@ -250,7 +250,7 @@ Public Class FrmCardList
 
 		Dim supportedExtensions As String
 
-		If FrmSettings.CBIncludeGifs.Checked = True Then
+		If My.Settings.CBIncludeGifs = True Then
 			supportedExtensions = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 		Else
 			supportedExtensions = "*.png,*.jpg,*.bmp,*.jpeg"
@@ -471,7 +471,7 @@ Public Class FrmCardList
 			End If
 		Next
 
-		If FrmSettings.CBIncludeGifs.Checked = False Then
+		If My.Settings.CBIncludeGifs = False Then
 			For i As Integer = MatchList.Count - 1 To 0 Step -1
 				If MatchList(i).Contains(".gif") Then MatchList.Remove(MatchList(i))
 			Next
@@ -480,7 +480,7 @@ Public Class FrmCardList
 
 		Dim supportedExtensions As String
 
-		If FrmSettings.CBIncludeGifs.Checked = True Then
+		If My.Settings.CBIncludeGifs = True Then
 			supportedExtensions = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 		Else
 			supportedExtensions = "*.png,*.jpg,*.bmp,*.jpeg"
@@ -2452,47 +2452,11 @@ Card9:
 
 	Public Sub ClearSlots()
 
-		Try
-			Slot1.Image.Dispose()
-		Catch
-		End Try
-		Slot1.Image = Nothing
-
-		Try
-			Slot2.Image.Dispose()
-		Catch
-		End Try
-		Slot2.Image = Nothing
-
-		Try
-			Slot3.Image.Dispose()
-		Catch
-		End Try
-		Slot3.Image = Nothing
-
-		Try
-			SlotLeft1.Image.Dispose()
-		Catch
-		End Try
-		SlotLeft1.Image = Nothing
-
-		Try
-			SlotLeft2.Image.Dispose()
-		Catch
-		End Try
-		SlotLeft2.Image = Nothing
-
-		Try
-			SlotRight1.Image.Dispose()
-		Catch
-		End Try
-		SlotRight1.Image = Nothing
-
-		Try
-			SlotRight2.Image.Dispose()
-		Catch
-		End Try
-		SlotRight2.Image = Nothing
+		For Each tmp As PictureBox In New List(Of PictureBox) From
+				{Slot1, Slot2, Slot3, SlotLeft1, SlotLeft2, SlotRight1, SlotRight2}
+			If tmp.Image IsNot Nothing Then tmp.Image.Dispose()
+			tmp.Image = Nothing
+		Next
 
 		Try
 			GC.Collect()
@@ -5935,132 +5899,19 @@ Card9:
 
 	Public Sub ClearAllCards()
 
-		Try
-			Slot1.Image.Dispose()
-		Catch
-		End Try
-		Slot1.Image = Nothing
+		For Each tmp As PictureBox In New List(Of PictureBox) From
+				{Slot1, Slot2, Slot3, SlotLeft1, SlotLeft2, SlotRight1, SlotRight2,
+				BronzeP1, BronzeP2, BronzeP3, BronzeP4, BronzeP5, BronzeP6,
+				SilverP1, SilverP2, SilverP3, SilverP4, SilverP5, SilverP6,
+				GoldP1, GoldP2, GoldP3, GoldP3, GoldP4, GoldP5, GoldP6}
+			If tmp.Image IsNot Nothing Then tmp.Image.Dispose()
+			tmp.Image = Nothing
+		Next
 
 		Try
-			Slot2.Image.Dispose()
+			GC.Collect()
 		Catch
 		End Try
-		Slot2.Image = Nothing
-
-		Try
-			Slot3.Image.Dispose()
-		Catch
-		End Try
-		Slot3.Image = Nothing
-
-		Try
-			BronzeP1.Image.Dispose()
-		Catch
-		End Try
-		BronzeP1.Image = Nothing
-
-		Try
-			BronzeP2.Image.Dispose()
-		Catch
-		End Try
-		BronzeP2.Image = Nothing
-
-		Try
-			BronzeP3.Image.Dispose()
-		Catch
-		End Try
-		BronzeP3.Image = Nothing
-
-		Try
-			BronzeP4.Image.Dispose()
-		Catch
-		End Try
-		BronzeP4.Image = Nothing
-
-		Try
-			BronzeP5.Image.Dispose()
-		Catch
-		End Try
-		BronzeP5.Image = Nothing
-
-		Try
-			BronzeP6.Image.Dispose()
-		Catch
-		End Try
-		BronzeP6.Image = Nothing
-
-		Try
-			SilverP1.Image.Dispose()
-		Catch
-		End Try
-		SilverP1.Image = Nothing
-
-		Try
-			SilverP2.Image.Dispose()
-		Catch
-		End Try
-		SilverP2.Image = Nothing
-
-		Try
-			SilverP3.Image.Dispose()
-		Catch
-		End Try
-		SilverP3.Image = Nothing
-
-		Try
-			SilverP4.Image.Dispose()
-		Catch
-		End Try
-		SilverP4.Image = Nothing
-
-		Try
-			SilverP5.Image.Dispose()
-		Catch
-		End Try
-		SilverP5.Image = Nothing
-
-		Try
-			SilverP6.Image.Dispose()
-		Catch
-		End Try
-		SilverP6.Image = Nothing
-
-		Try
-			GoldP1.Image.Dispose()
-		Catch
-		End Try
-		GoldP1.Image = Nothing
-
-		Try
-			GoldP2.Image.Dispose()
-		Catch
-		End Try
-		GoldP2.Image = Nothing
-
-		Try
-			GoldP3.Image.Dispose()
-		Catch
-		End Try
-		GoldP3.Image = Nothing
-
-		Try
-			GoldP4.Image.Dispose()
-		Catch
-		End Try
-		GoldP4.Image = Nothing
-
-		Try
-			GoldP5.Image.Dispose()
-		Catch
-		End Try
-		GoldP5.Image = Nothing
-
-		Try
-			GoldP6.Image.Dispose()
-		Catch
-		End Try
-		GoldP6.Image = Nothing
-
 
 	End Sub
 

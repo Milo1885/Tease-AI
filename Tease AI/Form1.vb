@@ -17859,16 +17859,6 @@ RestartFunction:
 
 	Public Sub RefreshCards()
 
-		'Dim GoldReader As New StreamReader(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\Apps\Cards\Gold.txt")
-		'Dim GoldList As New List(Of String)
-
-		'While GoldReader.Peek <> -1
-		'GoldList.Add(GoldReader.ReadLine())
-		'End While
-
-		'GoldReader.Close()
-		'GoldReader.Dispose()
-
 		FrmCardList.GoldN1.Text = FrmSettings.GN1.Text
 		FrmCardList.GoldN2.Text = FrmSettings.GN2.Text
 		FrmCardList.GoldN3.Text = FrmSettings.GN3.Text
@@ -17883,20 +17873,12 @@ RestartFunction:
 		FrmCardList.GoldP5.Image = Image.FromFile(My.Settings.GP5)
 		FrmCardList.GoldP6.Image = Image.FromFile(My.Settings.GP6)
 
-		'FrmCardList.GoldP1.Load(My.Settings.GP1)
-		'FrmCardList.GoldP2.Load(My.Settings.GP2)
-		'FrmCardList.GoldP3.Load(My.Settings.GP3)
-		'FrmCardList.GoldP4.Load(My.Settings.GP4)
-		'FrmCardList.GoldP5.Load(My.Settings.GP5)
-		'FrmCardList.GoldP6.Load(My.Settings.GP6)
-
 		FrmCardList.SilverN1.Text = FrmSettings.SN1.Text
 		FrmCardList.SilverN2.Text = FrmSettings.SN2.Text
 		FrmCardList.SilverN3.Text = FrmSettings.SN3.Text
 		FrmCardList.SilverN4.Text = FrmSettings.SN4.Text
 		FrmCardList.SilverN5.Text = FrmSettings.SN5.Text
 		FrmCardList.SilverN6.Text = FrmSettings.SN6.Text
-
 
 		FrmCardList.SilverP1.Image = Image.FromFile(My.Settings.SP1)
 		FrmCardList.SilverP2.Image = Image.FromFile(My.Settings.SP2)
@@ -17905,14 +17887,6 @@ RestartFunction:
 		FrmCardList.SilverP5.Image = Image.FromFile(My.Settings.SP5)
 		FrmCardList.SilverP6.Image = Image.FromFile(My.Settings.SP6)
 
-
-		'FrmCardList.SilverP1.Load(My.Settings.SP1)
-		'FrmCardList.SilverP2.Load(My.Settings.SP2)
-		'FrmCardList.SilverP3.Load(My.Settings.SP3)
-		'FrmCardList.SilverP4.Load(My.Settings.SP4)
-		'FrmCardList.SilverP5.Load(My.Settings.SP5)
-		'FrmCardList.SilverP6.Load(My.Settings.SP6)
-
 		FrmCardList.BronzeN1.Text = FrmSettings.BN1.Text
 		FrmCardList.BronzeN2.Text = FrmSettings.BN2.Text
 		FrmCardList.BronzeN3.Text = FrmSettings.BN3.Text
@@ -17920,26 +17894,12 @@ RestartFunction:
 		FrmCardList.BronzeN5.Text = FrmSettings.BN5.Text
 		FrmCardList.BronzeN6.Text = FrmSettings.BN6.Text
 
-		'FrmCardList.BronzeP1.Load(My.Settings.BP1)
 		FrmCardList.BronzeP1.Image = Image.FromFile(My.Settings.BP1)
 		FrmCardList.BronzeP2.Image = Image.FromFile(My.Settings.BP2)
 		FrmCardList.BronzeP3.Image = Image.FromFile(My.Settings.BP3)
 		FrmCardList.BronzeP4.Image = Image.FromFile(My.Settings.BP4)
 		FrmCardList.BronzeP5.Image = Image.FromFile(My.Settings.BP5)
 		FrmCardList.BronzeP6.Image = Image.FromFile(My.Settings.BP6)
-		'FrmCardList.BronzeP2.Load(My.Settings.BP2)
-		'FrmCardList.BronzeP3.Load(My.Settings.BP3)
-		'FrmCardList.BronzeP4.Load(My.Settings.BP4)
-		'FrmCardList.BronzeP5.Load(My.Settings.BP5)
-		'FrmCardList.BronzeP6.Load(My.Settings.BP6)
-
-
-
-
-
-
-
-
 
 	End Sub
 
