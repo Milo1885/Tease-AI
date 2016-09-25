@@ -434,6 +434,7 @@ Public Class FrmSettings
 		WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
 
 
+		Count_SlideshowsInFolder(My.Settings.Contact1ImageDir)
 		LBLContact1ImageDir.Text = My.Settings.Contact1ImageDir
 		LBLContact2ImageDir.Text = My.Settings.Contact2ImageDir
 		LBLContact3ImageDir.Text = My.Settings.Contact3ImageDir
@@ -482,2054 +483,11 @@ Public Class FrmSettings
 
 	End Sub
 
-#Region "-------------------------------------- GeneralTab ----------------------------------------------"
+#Region "------------------------------------- GeneralTab -----------------------------------------------"
 
 	Private Sub BtnImportSettings_Click(sender As Object, e As EventArgs) Handles BtnImportSettings.Click
 		My.MySettings.importOnRestart()
 	End Sub
-
-#End Region ' GeneralTab
-
-	Private Sub BindCombo()
-		FontComboBox.DrawMode = DrawMode.OwnerDrawFixed
-		FontComboBox.Font = New Font("Microsoft Sans Serif, 11.25pt", 11.25)
-		FontComboBox.ItemHeight = 20
-		Dim objFontFamily As FontFamily
-		Dim objFontCollection As System.Drawing.Text.FontCollection
-		Dim tempFont As Font
-		objFontCollection = New System.Drawing.Text.InstalledFontCollection()
-		For Each objFontFamily In objFontCollection.Families
-			FontComboBox.Items.Add(objFontFamily.Name)
-
-		Next
-	End Sub
-
-	Private Sub BindCombo2()
-		FontComboBoxD.DrawMode = DrawMode.OwnerDrawFixed
-		FontComboBoxD.Font = New Font("Microsoft Sans Serif, 11.25pt", 11.25)
-		FontComboBoxD.ItemHeight = 20
-		Dim objFontFamily As FontFamily
-		Dim objFontCollection As System.Drawing.Text.FontCollection
-		Dim tempFont As Font
-		objFontCollection = New System.Drawing.Text.InstalledFontCollection()
-		For Each objFontFamily In objFontCollection.Families
-			FontComboBoxD.Items.Add(objFontFamily.Name)
-
-		Next
-	End Sub
-
-	Private Sub ComboBox1_DrawItem(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles FontComboBox.DrawItem
-		e.DrawBackground()
-		If (e.State And DrawItemState.Focus) <> 0 Then
-			e.DrawFocusRectangle()
-		End If
-		Dim objBrush As Brush = Nothing
-		Try
-			objBrush = New SolidBrush(e.ForeColor)
-			Dim _FontName As String = FontComboBox.Items(e.Index)
-			Dim _font As Font
-			Dim _fontfamily = New FontFamily(_FontName)
-			If _fontfamily.IsStyleAvailable(FontStyle.Regular) Then
-				_font = New Font(_fontfamily, 14, FontStyle.Regular)
-			ElseIf _fontfamily.IsStyleAvailable(FontStyle.Bold) Then
-				_font = New Font(_fontfamily, 14, FontStyle.Bold)
-			ElseIf _fontfamily.IsStyleAvailable(FontStyle.Italic) Then
-				_font = New Font(_fontfamily, 14, FontStyle.Italic)
-			End If
-			e.Graphics.DrawString(_FontName, _font, objBrush, e.Bounds)
-		Finally
-			If objBrush IsNot Nothing Then
-				objBrush.Dispose()
-			End If
-			objBrush = Nothing
-		End Try
-	End Sub
-
-	Private Sub ComboBox1D_DrawItem(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles FontComboBoxD.DrawItem
-		e.DrawBackground()
-		If (e.State And DrawItemState.Focus) <> 0 Then
-			e.DrawFocusRectangle()
-		End If
-		Dim objBrush As Brush = Nothing
-		Try
-			objBrush = New SolidBrush(e.ForeColor)
-			Dim _FontName As String = FontComboBoxD.Items(e.Index)
-			Dim _font As Font
-			Dim _fontfamily = New FontFamily(_FontName)
-			If _fontfamily.IsStyleAvailable(FontStyle.Regular) Then
-				_font = New Font(_fontfamily, 14, FontStyle.Regular)
-			ElseIf _fontfamily.IsStyleAvailable(FontStyle.Bold) Then
-				_font = New Font(_fontfamily, 14, FontStyle.Bold)
-			ElseIf _fontfamily.IsStyleAvailable(FontStyle.Italic) Then
-				_font = New Font(_fontfamily, 14, FontStyle.Italic)
-			End If
-			e.Graphics.DrawString(_FontName, _font, objBrush, e.Bounds)
-		Finally
-			If objBrush IsNot Nothing Then
-				objBrush.Dispose()
-			End If
-			objBrush = Nothing
-		End Try
-	End Sub
-
-
-
-
-
-
-
-
-
-
-	Private Sub CockSizeNumBox_ValueChanged(sender As System.Object, e As System.EventArgs) Handles CockSizeNumBox.ValueChanged
-		Form1.CockSize = CockSizeNumBox.Value
-	End Sub
-
-	Private Sub CockSizeNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles CockSizeNumBox.LostFocus
-		My.Settings.SubCockSize = CockSizeNumBox.Value
-	End Sub
-
-#Region "--------------------------------------- Videos -------------------------------------------------"
-
-	Friend Shared Function Video_FolderCheck(ByVal directoryDescription As String, ByVal directoryPath As String, ByVal defaultPath As String) As String
-		' Exit if the directory exists.
-		If Directory.Exists(directoryPath) Then Return directoryPath
-		' Exit if default value.
-		If directoryPath = defaultPath Then Return defaultPath
-
-		' Tell User, the dir. wasn't found. Ask to search manually for the folder.
-		If MessageBox.Show(ActiveForm,
-						   "The directory """ & directoryPath & """ was not found." & vbCrLf & "Do you want to search for it?",
-						   directoryDescription & " directory not found.",
-						   MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-
-			' Find the first available parent-directory. 
-			' This way the user hasn't to browse through his hole IO-System.
-			Dim __tmp_dir As String = directoryPath
-			Do Until Directory.Exists(__tmp_dir) Or __tmp_dir Is Nothing
-				__tmp_dir = Path.GetDirectoryName(__tmp_dir)
-			Loop
-
-			' Initialize new Dialog-Form
-			Dim FolSel As New FolderBrowserDialog With {.SelectedPath = __tmp_dir,
-														.Description = "Select " & directoryDescription & " folder."}
-			' Display the Dialog -> Now the user has to set the new dir.
-			If FolSel.ShowDialog(ActiveForm) = DialogResult.OK Then
-				Return FolSel.SelectedPath
-			End If
-
-		End If ' END IF - Messagebox.
-		Return defaultPath
-	End Function
-
-	Friend Function Video_CheckAllFolders() As Integer
-		Dim t As Integer = 0
-
-		LblVideoHardCoreTotal.Text = VideoHardcore_Count() : t += CInt(LblVideoHardCoreTotal.Text)
-		LblVideoSoftCoreTotal.Text = VideoSoftcore_Count() : t += CInt(LblVideoSoftCoreTotal.Text)
-		LblVideoLesbianTotal.Text = VideoLesbian_Count() : t += CInt(LblVideoLesbianTotal.Text)
-		LblVideoBlowjobTotal.Text = VideoBlowjob_Count() : t += CInt(LblVideoBlowjobTotal.Text)
-		LblVideoFemdomTotal.Text = VideoFemdom_Count() : t += CInt(LblVideoFemdomTotal.Text)
-		LblVideoFemsubTotal.Text = VideoFemsub_Count() : t += CInt(LblVideoFemsubTotal.Text)
-		LblVideoJOITotal.Text = VideoJOI_Count() : t += CInt(LblVideoJOITotal.Text)
-		LblVideoCHTotal.Text = VideoCH_Count() : t += CInt(LblVideoCHTotal.Text)
-		LblVideoGeneralTotal.Text = VideoGeneral_Count() : t += CInt(LblVideoGeneralTotal.Text)
-
-		LblVideoHardCoreTotalD.Text = VideoHardcoreD_Count() : t += CInt(LblVideoHardCoreTotalD.Text)
-		LblVideoSoftCoreTotalD.Text = VideoSoftcoreD_Count() : t += CInt(LblVideoSoftCoreTotalD.Text)
-		LblVideoLesbianTotalD.Text = VideoLesbianD_Count() : t += CInt(LblVideoLesbianTotalD.Text)
-		LblVideoBlowjobTotalD.Text = VideoBlowjobD_Count() : t += CInt(LblVideoBlowjobTotalD.Text)
-		LblVideoFemdomTotalD.Text = VideoFemdomD_Count() : t += CInt(LblVideoFemdomTotalD.Text)
-		LblVideoFemsubTotalD.Text = VideoFemsubD_Count() : t += CInt(LblVideoFemsubTotalD.Text)
-		LblVideoJOITotalD.Text = VideoJOID_Count() : t += CInt(LblVideoJOITotalD.Text)
-		LblVideoCHTotalD.Text = VideoCHD_Count() : t += CInt(LblVideoCHTotalD.Text)
-		LblVideoGeneralTotalD.Text = VideoGeneralD_Count() : t += CInt(LblVideoGeneralTotalD.Text)
-
-		Return t
-	End Function
-
-	Private Sub TxbVideoFolder_MouseHover(sender As Object, e As System.EventArgs) Handles TxbVideoHardCore.MouseHover,
-				TxbVideoHardCoreD.MouseHover, TxbVideoSoftCore.MouseHover, TxbVideoSoftCoreD.MouseHover, TxbVideoLesbian.MouseHover,
-				TxbVideoLesbianD.MouseHover, TxbVideoBlowjob.MouseHover, TxbVideoBlowjobD.MouseHover, TxbVideoFemdom.MouseHover,
-				TxbVideoFemdomD.MouseHover, TxbVideoFemsub.MouseHover, TxbVideoFemsubD.MouseHover, TxbVideoJOI.MouseHover,
-				TxbVideoJOID.MouseHover, TxbVideoCH.MouseHover, TxbVideoCHD.MouseHover, TxbVideoGeneral.MouseHover, TxbVideoGeneralD.MouseHover
-
-		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
-	End Sub
-
-	Private Sub BTNRefreshVideos_MouseHover(sender As Object, e As System.EventArgs) Handles BTNRefreshVideos.MouseHover
-		TTDir.SetToolTip(BTNRefreshVideos, "Use this button to refresh video paths.")
-	End Sub
-
-#Region "----------------------------------------- Regular -----------------------------------------------"
-
-#Region "------------------------------------- Hardcore Videos -------------------------------------------"
-
-	Private Sub BTNVideoHardCore_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoHardCore.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoHardcore = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBHardcore = True
-			LblVideoHardCoreTotal.Text = VideoHardcore_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoHardcore_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoHardcore").Property.DefaultValue
-
-		My.Settings.VideoHardcore =
-			Video_FolderCheck("Hardcore Video", My.Settings.VideoHardcore, def)
-
-		If My.Settings.VideoHardcore = def Then My.Settings.CBHardcore = False
-
-		Return My.Settings.CBHardcore
-	End Function
-
-	Friend Shared Function VideoHardcore_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoHardcore_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoHardcore).Count
-	End Function
-
-#End Region ' Hardcore
-
-#Region "------------------------------------- Softcore Videos -------------------------------------------"
-
-	Private Sub BTNVideoSoftCore_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoSoftCore.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoSoftcore = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBSoftcore = True
-			LblVideoSoftCoreTotal.Text = VideoSoftcore_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoSoftcore_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoSoftcore").Property.DefaultValue
-
-		My.Settings.VideoSoftcore =
-			Video_FolderCheck("Softcore Video", My.Settings.VideoSoftcore, def)
-
-		If My.Settings.VideoSoftcore = def Then My.Settings.CBSoftcore = False
-
-		Return My.Settings.CBSoftcore
-	End Function
-
-	Friend Shared Function VideoSoftcore_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoSoftcore_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoSoftcore).Count
-	End Function
-
-#End Region ' Softcore
-
-#Region "------------------------------------- Lesbian Videos --------------------------------------------"
-
-	Private Sub BTNVideoLesbian_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoLesbian.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoLesbian = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBLesbian = True
-			LblVideoLesbianTotal.Text = VideoLesbian_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoLesbian_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoLesbian").Property.DefaultValue
-
-		My.Settings.VideoLesbian =
-			Video_FolderCheck("Lesbian Video", My.Settings.VideoLesbian, def)
-
-		If My.Settings.VideoLesbian = def Then My.Settings.CBLesbian = False
-
-		Return My.Settings.CBLesbian
-	End Function
-
-	Friend Shared Function VideoLesbian_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoLesbian_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoLesbian).Count
-	End Function
-
-#End Region ' Lesbian
-
-#Region "------------------------------------- Blowjob Videos --------------------------------------------"
-
-	Private Sub BTNVideoBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoBlowjob.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoBlowjob = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBBlowjob = True
-			LblVideoBlowjobTotal.Text = VideoBlowjob_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoBlowjob_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoBlowjob").Property.DefaultValue
-
-		My.Settings.VideoBlowjob =
-			Video_FolderCheck("Blowjob Video", My.Settings.VideoBlowjob, def)
-
-		If My.Settings.VideoBlowjob = def Then My.Settings.CBBlowjob = False
-
-		Return My.Settings.CBBlowjob
-	End Function
-
-	Friend Shared Function VideoBlowjob_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoBlowjob_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoBlowjob).Count
-	End Function
-
-#End Region ' Blowjob
-
-#Region "---------------------------------------- Femdom -------------------------------------------------"
-
-	Private Sub BTNVideoFemDom_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemDom.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoFemdom = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBFemdom = True
-			LblVideoFemdomTotal.Text = VideoFemdom_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoFemdom_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoFemdom").Property.DefaultValue
-
-		My.Settings.VideoFemdom =
-			Video_FolderCheck("Femdom Video", My.Settings.VideoFemdom, def)
-
-		If My.Settings.VideoFemdom = def Then My.Settings.CBFemdom = False
-
-		Return My.Settings.CBFemdom
-	End Function
-
-	Friend Shared Function VideoFemdom_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoFemdom_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoFemdom).Count
-	End Function
-
-#End Region ' Femdom
-
-#Region "------------------------------------- Femsub Videos ---------------------------------------------"
-
-	Private Sub BTNVideoFemSub_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemSub.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoFemsub = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBFemsub = True
-			LblVideoFemsubTotal.Text = VideoFemsub_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoFemsub_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoFemsub").Property.DefaultValue
-
-		My.Settings.VideoFemsub =
-			Video_FolderCheck("Femsub Video", My.Settings.VideoFemsub, def)
-
-		If My.Settings.VideoFemsub = def Then My.Settings.CBFemsub = False
-
-		Return My.Settings.CBFemsub
-	End Function
-
-	Friend Shared Function VideoFemsub_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoFemsub_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoFemsub).Count
-	End Function
-
-#End Region ' Femsub
-
-#Region "------------------------------------- JOI Videos ------------------------------------------------"
-
-	Private Sub BTNVideoJOI_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoJOI.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoJOI = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBJOI = True
-			LblVideoJOITotal.Text = VideoJOI_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoJOI_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoJOI").Property.DefaultValue
-
-		My.Settings.VideoJOI =
-			Video_FolderCheck("JOI Video", My.Settings.VideoJOI, def)
-
-		If My.Settings.VideoJOI = def Then My.Settings.CBJOI = False
-
-		Return My.Settings.CBJOI
-	End Function
-
-	Friend Shared Function VideoJOI_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoJOI_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoJOI).Count
-	End Function
-
-#End Region ' JOI
-
-#Region "------------------------------------- CH Videos -------------------------------------------------"
-
-	Private Sub BTNVideoCH_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoCH.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoCH = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBCH = True
-			LblVideoCHTotal.Text = VideoCH_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoCH_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoCH").Property.DefaultValue
-
-		My.Settings.VideoCH =
-			Video_FolderCheck("CH Video", My.Settings.VideoCH, def)
-
-		If My.Settings.VideoCH = def Then My.Settings.CBCH = False
-
-		Return My.Settings.CBCH
-	End Function
-
-	Friend Shared Function VideoCH_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoCH_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoCH).Count
-	End Function
-
-#End Region ' CH
-
-#Region "------------------------------------- General Videos --------------------------------------------"
-
-	Private Sub BTNVideoGeneral_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoGeneral.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoGeneral = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBGeneral = True
-			LblVideoGeneralTotal.Text = VideoGeneral_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoGeneral_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoGeneral").Property.DefaultValue
-
-		My.Settings.VideoGeneral =
-			Video_FolderCheck("General Video", My.Settings.VideoGeneral, def)
-
-		If My.Settings.VideoGeneral = def Then My.Settings.CBGeneral = False
-
-		Return My.Settings.CBGeneral
-	End Function
-
-	Friend Shared Function VideoGeneral_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoGeneral_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoGeneral).Count
-	End Function
-
-#End Region ' General
-
-#End Region ' Regular
-
-#Region "------------------------------------------ Domme ------------------------------------------------"
-
-#Region "---------------------------------------- HardcoreD ----------------------------------------------"
-
-	Private Sub BTNVideoHardcoreD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoHardCoreD.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoHardcoreD = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBHardcoreD = True
-			LblVideoHardCoreTotalD.Text = VideoHardcoreD_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoHardcoreD_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoHardcoreD").Property.DefaultValue
-
-		My.Settings.VideoHardcoreD =
-			Video_FolderCheck("HardcoreD Video", My.Settings.VideoHardcoreD, def)
-
-		If My.Settings.VideoHardcoreD = def Then My.Settings.CBHardcoreD = False
-
-		Return My.Settings.CBHardcoreD
-	End Function
-
-	Friend Shared Function VideoHardcoreD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoHardcoreD_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoHardcoreD).Count
-	End Function
-
-#End Region ' HardcoreD
-
-#Region "---------------------------------------- SoftcoreD ----------------------------------------------"
-
-	Private Sub BTNVideoSoftcoreD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoSoftCoreD.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoSoftcoreD = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBSoftcoreD = True
-			LblVideoSoftCoreTotalD.Text = VideoSoftcoreD_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoSoftcoreD_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoSoftcoreD").Property.DefaultValue
-
-		My.Settings.VideoSoftcoreD =
-			Video_FolderCheck("SoftcoreD Video", My.Settings.VideoSoftcoreD, def)
-
-		If My.Settings.VideoSoftcoreD = def Then My.Settings.CBSoftcoreD = False
-
-		Return My.Settings.CBSoftcoreD
-	End Function
-
-	Friend Shared Function VideoSoftcoreD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoSoftcoreD_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoSoftcoreD).Count
-	End Function
-
-#End Region ' SoftcoreD
-
-#Region "---------------------------------------- LesbianD -----------------------------------------------"
-
-	Private Sub BTNVideoLesbianD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoLesbianD.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoLesbianD = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBLesbianD = True
-			LblVideoLesbianTotalD.Text = VideoLesbianD_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoLesbianD_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoLesbianD").Property.DefaultValue
-
-		My.Settings.VideoLesbianD =
-			Video_FolderCheck("LesbianD Video", My.Settings.VideoLesbianD, def)
-
-		If My.Settings.VideoLesbianD = def Then My.Settings.CBLesbianD = False
-
-		Return My.Settings.CBLesbianD
-	End Function
-
-	Friend Shared Function VideoLesbianD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoLesbianD_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoLesbianD).Count
-	End Function
-
-#End Region ' LesbianD
-
-#Region "---------------------------------------- BlowjobD -----------------------------------------------"
-
-	Private Sub BTNVideoBlowjobD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoBlowjobD.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoBlowjobD = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBBlowjobD = True
-			LblVideoBlowjobTotalD.Text = VideoBlowjobD_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoBlowjobD_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoBlowjobD").Property.DefaultValue
-
-		My.Settings.VideoBlowjobD =
-			Video_FolderCheck("BlowjobD Video", My.Settings.VideoBlowjobD, def)
-
-		If My.Settings.VideoBlowjobD = def Then My.Settings.CBBlowjobD = False
-
-		Return My.Settings.CBBlowjobD
-	End Function
-
-	Friend Shared Function VideoBlowjobD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoBlowjobD_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoBlowjobD).Count
-	End Function
-
-#End Region ' BlowjobD
-
-#Region "---------------------------------------- FemdomD ------------------------------------------------"
-
-	Private Sub BTNVideoFemdomD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemDomD.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoFemdomD = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBFemdomD = True
-			LblVideoFemdomTotalD.Text = VideoFemdomD_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoFemdomD_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoFemdomD").Property.DefaultValue
-
-		My.Settings.VideoFemdomD =
-			Video_FolderCheck("FemdomD Video", My.Settings.VideoFemdomD, def)
-
-		If My.Settings.VideoFemdomD = def Then My.Settings.CBFemdomD = False
-
-		Return My.Settings.CBFemdomD
-	End Function
-
-	Friend Shared Function VideoFemdomD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoFemdomD_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoFemdomD).Count
-	End Function
-
-#End Region ' FemdomD
-
-#Region "---------------------------------------- FemsubD ------------------------------------------------"
-
-	Private Sub BTNVideoFemsubD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemSubD.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoFemsubD = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBFemsubD = True
-			LblVideoFemsubTotalD.Text = VideoFemsubD_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoFemsubD_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoFemsubD").Property.DefaultValue
-
-		My.Settings.VideoFemsubD =
-			Video_FolderCheck("FemsubD Video", My.Settings.VideoFemsubD, def)
-
-		If My.Settings.VideoFemsubD = def Then My.Settings.CBFemsubD = False
-
-		Return My.Settings.CBFemsubD
-	End Function
-
-	Friend Shared Function VideoFemsubD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoFemsubD_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoFemsubD).Count
-	End Function
-
-#End Region ' FemsubD
-
-#Region "---------------------------------------- JOI-D --------------------------------------------------"
-
-	Private Sub BTNVideoJOID_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoJOID.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoJOID = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBJOID = True
-			LblVideoJOITotalD.Text = VideoJOID_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoJOID_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoJOID").Property.DefaultValue
-
-		My.Settings.VideoJOID =
-			Video_FolderCheck("JOID Video", My.Settings.VideoJOID, def)
-
-		If My.Settings.VideoJOID = def Then My.Settings.CBJOID = False
-
-		Return My.Settings.CBJOID
-	End Function
-
-	Friend Shared Function VideoJOID_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoJOID_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoJOID).Count
-	End Function
-
-#End Region ' JOI-D
-
-#Region "---------------------------------------- CH-D ---------------------------------------------------"
-
-	Private Sub BTNVideoCHD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoCHD.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoCHD = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBCHD = True
-			LblVideoCHTotalD.Text = VideoCHD_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoCHD_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoCHD").Property.DefaultValue
-
-		My.Settings.VideoCHD =
-			Video_FolderCheck("CHD Video", My.Settings.VideoCHD, def)
-
-		If My.Settings.VideoCHD = def Then My.Settings.CBCHD = False
-
-		Return My.Settings.CBCHD
-	End Function
-
-	Friend Shared Function VideoCHD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoCHD_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoCHD).Count
-	End Function
-
-#End Region ' CH-D
-
-#Region "---------------------------------------- GeneralD -----------------------------------------------"
-
-	Private Sub BTNVideoGeneralD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoGeneralD.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.VideoGeneralD = FolderBrowserDialog1.SelectedPath
-			My.Settings.CBGeneralD = True
-			LblVideoGeneralTotalD.Text = VideoGeneralD_Count(False)
-		End If
-	End Sub
-
-	Friend Shared Function VideoGeneralD_CheckFolder() As Boolean
-		Dim def As String =
-			My.Settings.PropertyValues("VideoGeneralD").Property.DefaultValue
-
-		My.Settings.VideoGeneralD =
-			Video_FolderCheck("GeneralD Video", My.Settings.VideoGeneralD, def)
-
-		If My.Settings.VideoGeneralD = def Then My.Settings.CBGeneralD = False
-
-		Return My.Settings.CBGeneralD
-	End Function
-
-	Friend Shared Function VideoGeneralD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
-		If checkfolder Then VideoGeneralD_CheckFolder()
-		Return myDirectory.GetFilesVideo(My.Settings.VideoGeneralD).Count
-	End Function
-
-#End Region ' GeneralD
-
-#End Region ' Domme
-
-	Private Sub BTNRefreshVideos_Click(sender As System.Object, e As System.EventArgs) Handles BTNRefreshVideos.Click
-		VideoDescriptionLabel.Text = "Refresh complete: " & Video_CheckAllFolders() & " videos found!"
-		VideoDescriptionLabel.Text = VideoDescriptionLabel.Text.Replace(": 1 videos", ": 1 video")
-	End Sub
-
-#End Region ' Videos
-
-
-	Private Sub NBCensorShowMin_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMin.Leave
-		My.Settings.NBCensorShowMin = NBCensorShowMin.Value
-		Debug.Print(My.Settings.NBCensorShowMin & " " & NBCensorShowMin.Value)
-	End Sub
-
-	Private Sub NBCensorShowMax_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMax.Leave
-		My.Settings.NBCensorShowMax = NBCensorShowMax.Value
-	End Sub
-
-	Private Sub NBCensorHideMin_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMin.Leave
-		My.Settings.NBCensorHideMin = NBCensorHideMin.Value
-	End Sub
-
-	Private Sub NBCensorHideMax_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMax.Leave
-		My.Settings.NBCensorHideMax = NBCensorHideMax.Value
-	End Sub
-
-	Private Sub CBCensorConstant_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCensorConstant.CheckedChanged
-		If CBCensorConstant.Checked = True Then
-			My.Settings.CBCensorConstant = True
-		Else
-			My.Settings.CBCensorConstant = False
-		End If
-	End Sub
-
-	Public Function Color2Html(ByVal MyColor As Color) As String
-		Return "#" & MyColor.ToArgb().ToString("x").Substring(2).ToUpper
-	End Function
-
-#Region "Glitter"
-	Private Sub GlitterAV_Click_1(sender As System.Object, e As System.EventArgs) Handles GlitterAV.Click
-		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-			Try
-				GlitterAV.Image.Dispose()
-			Catch
-			End Try
-			GlitterAV.Image = Nothing
-			GC.Collect()
-			GlitterAV.Image = Image.FromFile(OpenFileDialog1.FileName)
-			My.Settings.GlitterAV = OpenFileDialog1.FileName
-		End If
-	End Sub
-	Private Sub GlitterAV1_Click(sender As System.Object, e As System.EventArgs) Handles GlitterAV1.Click
-		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-			Try
-				GlitterAV1.Image.Dispose()
-			Catch
-			End Try
-			GlitterAV1.Image = Nothing
-			GC.Collect()
-			GlitterAV1.Image = Image.FromFile(OpenFileDialog1.FileName)
-			My.Settings.GlitterAV1 = OpenFileDialog1.FileName
-		End If
-	End Sub
-	Private Sub GlitterAV2_Click(sender As System.Object, e As System.EventArgs) Handles GlitterAV2.Click
-		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-			Try
-				GlitterAV2.Image.Dispose()
-			Catch
-			End Try
-			GlitterAV2.Image = Nothing
-			GC.Collect()
-			GlitterAV2.Image = Image.FromFile(OpenFileDialog1.FileName)
-			My.Settings.GlitterAV2 = OpenFileDialog1.FileName
-		End If
-	End Sub
-	Private Sub GlitterAV3_Click(sender As System.Object, e As System.EventArgs) Handles GlitterAV3.Click
-		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-			Try
-				GlitterAV3.Image.Dispose()
-			Catch
-			End Try
-			GlitterAV3.Image = Nothing
-			GC.Collect()
-			GlitterAV3.Image = Image.FromFile(OpenFileDialog1.FileName)
-			My.Settings.GlitterAV3 = OpenFileDialog1.FileName
-		End If
-	End Sub
-	Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitterD.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.GlitterNCDommeColor = GetColor.Color
-			LBLGlitterNCDomme.ForeColor = GetColor.Color
-			My.Settings.GlitterNCDomme = Color2Html(GetColor.Color)
-		End If
-	End Sub
-	Private Sub Button27_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter1.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.GlitterNC1Color = GetColor.Color
-			LBLGlitterNC1.ForeColor = GetColor.Color
-			My.Settings.GlitterNC1 = Color2Html(GetColor.Color)
-		End If
-	End Sub
-	Private Sub Button4_Click_3(sender As System.Object, e As System.EventArgs) Handles BTNGlitter2.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.GlitterNC2Color = GetColor.Color
-			LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
-			My.Settings.GlitterNC2 = Color2Html(GetColor.Color)
-		End If
-	End Sub
-	Private Sub Button26_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter3.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.GlitterNC3Color = GetColor.Color
-			LBLGlitterNC3.ForeColor = GetColor.Color
-			My.Settings.GlitterNC3 = Color2Html(GetColor.Color)
-		End If
-	End Sub
-	Private Sub TBGlitterShortName_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.Leave
-		My.Settings.GlitterSN = TBGlitterShortName.Text
-	End Sub
-	Private Sub TBGlitter1_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter1.Leave
-		My.Settings.Glitter1 = TBGlitter1.Text
-	End Sub
-	Private Sub TBGlitter2_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter2.Leave
-		My.Settings.Glitter2 = TBGlitter2.Text
-	End Sub
-	Private Sub TBGlitter3_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter3.Leave
-		My.Settings.Glitter3 = TBGlitter3.Text
-	End Sub
-	Private Sub GlitterSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider.Scroll
-		My.Settings.GlitterDSlider = GlitterSlider.Value
-	End Sub
-	Private Sub GlitterSlider1_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider1.Scroll
-		My.Settings.Glitter1Slider = GlitterSlider1.Value
-	End Sub
-	Private Sub GlitterSlider2_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider2.Scroll
-		My.Settings.Glitter2Slider = GlitterSlider2.Value
-	End Sub
-	Private Sub GlitterSlider3_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider3.Scroll
-		My.Settings.Glitter3Slider = GlitterSlider3.Value
-	End Sub
-	Private Sub CBGlitter1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter1.CheckedChanged
-		If CBGlitter1.Checked = True Then
-			My.Settings.CBGlitter1 = True
-		Else
-			My.Settings.CBGlitter1 = False
-		End If
-	End Sub
-	Private Sub CBGlitter2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter2.CheckedChanged
-		If CBGlitter2.Checked = True Then
-			My.Settings.CBGlitter2 = True
-		Else
-			My.Settings.CBGlitter2 = False
-		End If
-	End Sub
-	Private Sub CBGlitter3_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter3.CheckedChanged
-		If CBGlitter3.Checked = True Then
-			My.Settings.CBGlitter3 = True
-		Else
-			My.Settings.CBGlitter3 = False
-		End If
-	End Sub
-	Private Sub CBTease_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTease.CheckedChanged
-		If CBTease.Checked = True Then
-			My.Settings.CBTease = True
-		Else
-			My.Settings.CBTease = False
-		End If
-	End Sub
-	Private Sub CBEgotist_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBEgotist.CheckedChanged
-		If CBEgotist.Checked = True Then
-			My.Settings.CBEgotist = True
-		Else
-			My.Settings.CBEgotist = False
-		End If
-	End Sub
-	Private Sub CBTrivia_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTrivia.CheckedChanged
-		If CBTrivia.Checked = True Then
-			My.Settings.CBTrivia = True
-		Else
-			My.Settings.CBTrivia = False
-		End If
-	End Sub
-	Private Sub CBDaily_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBDaily.CheckedChanged
-		If CBDaily.Checked = True Then
-			My.Settings.CBDaily = True
-		Else
-			My.Settings.CBDaily = False
-		End If
-	End Sub
-	Private Sub CBCustom1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCustom1.CheckedChanged
-		If CBCustom1.Checked = True Then
-			My.Settings.CBCustom1 = True
-		Else
-			My.Settings.CBCustom1 = False
-		End If
-	End Sub
-	Private Sub CBCustom2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCustom2.CheckedChanged
-		If CBCustom2.Checked = True Then
-			My.Settings.CBCustom2 = True
-		Else
-			My.Settings.CBCustom2 = False
-		End If
-	End Sub
-
-
-	' Private Sub CBGlitterFeed_MouseHover(sender As Object, e As System.EventArgs)
-	'    LblGlitterSettingsDescription.Text = "This check box turns Glitter functionality on and off. Glitter is a fictional app located in the sidebar on the left side of the window. It is meant to emulate a social media feed " _
-	'       & "where the domme posts various thoughts that her contacts might then comment on. When this box is checked, the domme's posts and responses will appear in the Glitter app according to the settings above. " _
-	'      & "If this box is unchecked, no new posts or responses will appear in the feed."
-	'End Sub
-	Private Sub BTNGlitterD_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitterD.MouseHover
-
-		TTDir.SetToolTip(BTNGlitterD, "This button allows you to change the color of the domme's name as it appears in the Glitter app." & Environment.NewLine &
-									  "A preview will appear in the text box below this button once a color has been selected.")
-
-	End Sub
-	Private Sub GlitterAV_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV.MouseHover
-		TTDir.SetToolTip(GlitterAV, "Click here to set the image the domme will use as her Glitter avatar.")
-	End Sub
-	Private Sub LBLGlitterNCDomme_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNCDomme.MouseHover
-		TTDir.SetToolTip(LBLGlitterNCDomme, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
-	End Sub
-	Private Sub LBLGlitterNC1_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC1.MouseHover
-		TTDir.SetToolTip(LBLGlitterNC1, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
-	End Sub
-	Private Sub LBLGlitterNC2_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC2.MouseHover
-		TTDir.SetToolTip(LBLGlitterNC2, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
-	End Sub
-	Private Sub LBLGlitterNC3_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC3.MouseHover
-		TTDir.SetToolTip(LBLGlitterNC3, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
-	End Sub
-	Private Sub TBGlitterShortName_TextChanged_1(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.MouseHover
-		TTDir.SetToolTip(TBGlitterShortName, "This is the name that the domme's contacts will refer to her as in the Glitter feed.")
-	End Sub
-	Private Sub CBTease_MouseHover(sender As Object, e As System.EventArgs) Handles CBTease.MouseHover
-		TTDir.SetToolTip(CBTease, "When this box is checked, the domme will make posts referencing your ongoing teasing and denial.")
-	End Sub
-	Private Sub CBEgotist_MouseHover(sender As Object, e As System.EventArgs) Handles CBEgotist.MouseHover
-		TTDir.SetToolTip(CBEgotist, "When this box is checked, the domme will make self-centered posts stating how amazing she is.")
-	End Sub
-	Private Sub CBTrivia_MouseHover(sender As Object, e As System.EventArgs) Handles CBTrivia.MouseHover
-		TTDir.SetToolTip(CBTrivia, "When this box is checked, the domme will make posts containing quotes or general trivia.")
-	End Sub
-	Private Sub CBDaily_MouseHover(sender As Object, e As System.EventArgs) Handles CBDaily.MouseHover
-		TTDir.SetToolTip(CBDaily, "When this box is checked, the domme will make mundane posts about her day.")
-	End Sub
-	Private Sub CBCustom1_MouseHover(sender As Object, e As System.EventArgs) Handles CBCustom1.MouseHover
-		TTDir.SetToolTip(CBCustom1, "When this box is checked, the domme will make posts taken from Custom 1" & Environment.NewLine &
-								  "folder in the Glitter scripts directory for her personality style.")
-	End Sub
-	Private Sub CBCustom2_MouseHover(sender As Object, e As System.EventArgs) Handles CBCustom2.MouseHover
-		TTDir.SetToolTip(CBCustom2, "When this box is checked, the domme will make posts taken from Custom 2" & Environment.NewLine &
-								  "folder in the Glitter scripts directory for her personality style.")
-	End Sub
-	Private Sub GlitterSlider_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider.MouseHover
-		TTDir.SetToolTip(GlitterSlider, "This slider determines how often the domme makes Glitter posts on her own." & Environment.NewLine &
-											 "The further to the right the slider is, the more often she posts.")
-	End Sub
-	Private Sub LBLGlitterSlider_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider.MouseHover
-		TTDir.SetToolTip(LBLGlitterSlider, "This slider determines how often the domme makes Glitter posts on her own." & Environment.NewLine &
-											 "The further to the right the slider is, the more often she posts.")
-	End Sub
-
-	Private Sub TBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter1.MouseHover
-		TTDir.SetToolTip(TBGlitter1, "This will be the name of this contact as it appears in the Glitter feed.")
-	End Sub
-	Private Sub TBGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter2.MouseHover
-		TTDir.SetToolTip(TBGlitter2, "This will be the name of this contact as it appears in the Glitter feed.")
-	End Sub
-	Private Sub TBGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter3.MouseHover
-		TTDir.SetToolTip(TBGlitter3, "This will be the name of this contact as it appears in the Glitter feed.")
-	End Sub
-	Private Sub GlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider1.MouseHover
-		TTDir.SetToolTip(GlitterSlider1, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
-	End Sub
-	Private Sub GlitterSlider2_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider2.MouseHover
-		TTDir.SetToolTip(GlitterSlider2, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
-	End Sub
-	Private Sub GlitterSlider3_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider3.MouseHover
-		TTDir.SetToolTip(GlitterSlider3, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
-	End Sub
-	Private Sub LBLGlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider1.MouseHover
-		TTDir.SetToolTip(LBLGlitterSlider1, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
-	End Sub
-	Private Sub LBLGlitterSlider2_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider2.MouseHover
-		TTDir.SetToolTip(LBLGlitterSlider2, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
-	End Sub
-	Private Sub LBLGlitterSlider3_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider3.MouseHover
-		TTDir.SetToolTip(LBLGlitterSlider3, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
-	End Sub
-	Private Sub GlitterAV1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV1.MouseHover
-		TTDir.SetToolTip(GlitterAV1, "Click here to set the image that this contact will use as her Glitter avatar.")
-	End Sub
-	Private Sub GlitterAV2_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV2.MouseHover
-		TTDir.SetToolTip(GlitterAV2, "Click here to set the image that this contact will use as her Glitter avatar.")
-	End Sub
-	Private Sub GlitterAV3_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV3.MouseHover
-		TTDir.SetToolTip(GlitterAV3, "Click here to set the image that this contact will use as her Glitter avatar.")
-	End Sub
-	Private Sub CBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter1.MouseHover
-		TTDir.SetToolTip(CBGlitter1, "This check box enables this contact's participation in the Glitter feed.")
-	End Sub
-	Private Sub CBGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter2.MouseHover
-		TTDir.SetToolTip(CBGlitter2, "This check box enables this contact's participation in the Glitter feed.")
-	End Sub
-	Private Sub CBGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter3.MouseHover
-		TTDir.SetToolTip(CBGlitter3, "This check box enables this contact's participation in the Glitter feed.")
-	End Sub
-	Private Sub BTNGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter1.MouseHover
-		TTDir.SetToolTip(BTNGlitter1, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
-	End Sub
-	Private Sub BTNGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter2.MouseHover
-		TTDir.SetToolTip(BTNGlitter2, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
-	End Sub
-	Private Sub BTNGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter3.MouseHover
-		TTDir.SetToolTip(BTNGlitter3, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
-	End Sub
-#End Region
-
-
-
-
-	Private Sub NBCensorShowMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMin.ValueChanged
-		If NBCensorShowMin.Value > NBCensorShowMax.Value Then NBCensorShowMin.Value = NBCensorShowMax.Value
-	End Sub
-
-	Private Sub NBCensorShowMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMax.ValueChanged
-		If NBCensorShowMax.Value < NBCensorShowMin.Value Then NBCensorShowMax.Value = NBCensorShowMin.Value
-	End Sub
-
-	Private Sub NBTeaseLengthMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBTeaseLengthMin.LostFocus
-		My.Settings.TeaseLengthMin = NBTeaseLengthMin.Value
-	End Sub
-
-	Private Sub NBTeaseLengthMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBTeaseLengthMax.LostFocus
-		My.Settings.TeaseLengthMax = NBTeaseLengthMax.Value
-	End Sub
-
-	Private Sub NBTauntCycleMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBTauntCycleMin.LostFocus
-		My.Settings.TauntCycleMin = NBTauntCycleMin.Value
-	End Sub
-
-	Private Sub NBTauntCycleMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBTauntCycleMax.LostFocus
-		My.Settings.TauntCycleMax = NBTauntCycleMax.Value
-	End Sub
-	Private Sub NBRedLightMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBRedLightMin.LostFocus
-		My.Settings.RedLightMin = NBRedLightMin.Value
-	End Sub
-
-	Private Sub NBRedLightMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBRedLightMax.LostFocus
-		My.Settings.RedLightMax = NBRedLightMax.Value
-	End Sub
-	Private Sub NBGreenLightMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBGreenLightMin.LostFocus
-		My.Settings.GreenLightMin = NBGreenLightMin.Value
-	End Sub
-
-	Private Sub NBGreenLightMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBGreenLightMax.LostFocus
-		My.Settings.GreenLightMax = NBGreenLightMax.Value
-	End Sub
-
-	Private Sub NBTeaseLengthMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTeaseLengthMin.ValueChanged
-		If NBTeaseLengthMin.Value > NBTeaseLengthMax.Value Then NBTeaseLengthMin.Value = NBTeaseLengthMax.Value
-	End Sub
-
-	Private Sub NBTeaseLengthMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTeaseLengthMax.ValueChanged
-		If NBTeaseLengthMax.Value < NBTeaseLengthMin.Value Then NBTeaseLengthMax.Value = NBTeaseLengthMin.Value
-	End Sub
-
-	Private Sub NBTauntCycleMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTauntCycleMin.ValueChanged
-		If NBTauntCycleMin.Value > NBTauntCycleMax.Value Then NBTauntCycleMin.Value = NBTauntCycleMax.Value
-	End Sub
-
-	Private Sub NBTauntCycleMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTauntCycleMax.ValueChanged
-		If NBTauntCycleMax.Value < NBTauntCycleMin.Value Then NBTauntCycleMax.Value = NBTauntCycleMin.Value
-	End Sub
-
-
-
-	Private Sub NBCensorHideMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMin.ValueChanged
-		If NBCensorHideMin.Value > NBCensorHideMax.Value Then NBCensorHideMin.Value = NBCensorHideMax.Value
-	End Sub
-
-	Private Sub NBCensorHideMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMax.ValueChanged
-		If NBCensorHideMax.Value < NBCensorHideMin.Value Then NBCensorHideMax.Value = NBCensorHideMin.Value
-	End Sub
-
-
-
-
-
-
-
-
-
-#Region "Save PetNames"
-
-	Private Sub petnameBox1_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox1.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox1.Text = "" Then petnameBox1.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-
-	Private Sub petnameBox2_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox3.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox3.Text = "" Then petnameBox3.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox3_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox4.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox4.Text = "" Then petnameBox4.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox4_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox7.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox7.Text = "" Then petnameBox7.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox5_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox2.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox2.Text = "" Then petnameBox2.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox6_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox5.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "loser"
-		If NameVal = 3 Then BlankName = "slave"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox5.Text = "" Then petnameBox5.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox7_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox6.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "slave"
-		If NameVal = 3 Then BlankName = "pet"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox6.Text = "" Then petnameBox6.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-	Private Sub petnameBox8_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox8.LostFocus
-
-		Dim BlankName As String
-		BlankName = "stroker"
-		Dim NameVal As Integer
-		NameVal = Form1.randomizer.Next(1, 6)
-
-		If NameVal = 1 Then BlankName = "stroker"
-		If NameVal = 2 Then BlankName = "slave"
-		If NameVal = 3 Then BlankName = "pet"
-		If NameVal = 4 Then BlankName = "bitch boy"
-		If NameVal = 5 Then BlankName = "wanker"
-
-		If petnameBox8.Text = "" Then petnameBox8.Text = BlankName
-
-		SavePetNames()
-
-	End Sub
-
-
-	Public Sub SavePetNames()
-
-		My.Settings.pnSetting1 = petnameBox1.Text
-		My.Settings.pnSetting2 = petnameBox2.Text
-		My.Settings.pnSetting3 = petnameBox3.Text
-		My.Settings.pnSetting4 = petnameBox4.Text
-		My.Settings.pnSetting5 = petnameBox5.Text
-		My.Settings.pnSetting6 = petnameBox6.Text
-		My.Settings.pnSetting7 = petnameBox7.Text
-		My.Settings.pnSetting8 = petnameBox8.Text
-
-
-	End Sub
-
-#End Region
-
-
-	Private Sub Button26_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNVideoModLoad.Click
-
-		Dim CensorText As String = "NULL"
-
-		If CBVTType.Text = "Censorship Sucks" Then
-			If LBVidScript.SelectedItem = "CensorBarOff" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Censorship Sucks\CensorBarOff.txt"
-			If LBVidScript.SelectedItem = "CensorBarOn" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Censorship Sucks\CensorBarOn.txt"
-		End If
-
-		If CBVTType.Text = "Avoid The Edge" Then
-			If LBVidScript.SelectedItem = "Taunts" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Avoid The Edge\Taunts.txt"
-		End If
-
-		If CBVTType.Text = "Red Light Green Light" Then
-			If LBVidScript.SelectedItem = "Green Light" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Green Light.txt"
-			If LBVidScript.SelectedItem = "Red Light" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Red Light.txt"
-			If LBVidScript.SelectedItem = "Taunts" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Taunts.txt"
-		End If
-
-		Form1.VTPath = CensorText
-
-		Try
-			Dim VidReader As New StreamReader(CensorText)
-			Dim VidList As New List(Of String)
-
-			While VidReader.Peek <> -1
-				VidList.Add(VidReader.ReadLine())
-			End While
-
-			VidReader.Close()
-			VidReader.Dispose()
-
-			Dim VidString As String
-
-			For i As Integer = 0 To VidList.Count - 1
-				If i <> VidList.Count - 1 Then
-					VidString = VidString & VidList(i) & Environment.NewLine
-				Else
-					VidString = VidString & VidList(i)
-				End If
-			Next
-
-			RTBVideoMod.Text = VidString
-
-			LBVidScript.Enabled = False
-			CBVTType.Enabled = False
-			BTNVideoModClear.Enabled = True
-			BTNVideoModLoad.Enabled = False
-			RTBVideoMod.Enabled = True
-			BTNVideoModSave.Enabled = False
-		Catch
-		End Try
-
-
-
-	End Sub
-
-	Private Sub RTBVideoMod_TextChanged(sender As System.Object, e As System.EventArgs) Handles RTBVideoMod.TextChanged
-		BTNVideoModSave.Enabled = True
-	End Sub
-
-	Private Sub BTNVideoModClear_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoModClear.Click
-		BTNVideoModClear.Enabled = False
-		BTNVideoModLoad.Enabled = True
-		CBVTType.Enabled = True
-		RTBVideoMod.Text = ""
-		RTBVideoMod.Enabled = False
-		BTNVideoModSave.Enabled = False
-		LBVidScript.Enabled = True
-	End Sub
-
-	Private Sub BTNVideoModSave_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoModSave.Click
-
-
-
-
-		If MsgBox("This will overwrite the current " & CBVTType.Text & " script!" & Environment.NewLine & Environment.NewLine & "Are you sure?", vbYesNo, "Warning!") = MsgBoxResult.Yes Then
-			Debug.Print("Worked?")
-		Else
-			Debug.Print("Did not work")
-			Return
-		End If
-
-
-		My.Computer.FileSystem.DeleteFile(Form1.VTPath)
-
-		Dim WriteList As New List(Of String)
-
-		WriteList.Clear()
-
-		For i As Integer = 0 To RTBVideoMod.Lines.Count - 1
-			If i <> RTBVideoMod.Lines.Count - 1 Then
-				WriteList.Add(RTBVideoMod.Lines(i) & Environment.NewLine)
-			Else
-				WriteList.Add(RTBVideoMod.Lines(i))
-			End If
-		Next
-
-
-		For i As Integer = 0 To WriteList.Count - 1
-			If i <> WriteList.Count - 1 Then
-				My.Computer.FileSystem.WriteAllText(Form1.VTPath, WriteList(i), True)
-			Else
-				My.Computer.FileSystem.WriteAllText(Form1.VTPath, WriteList(i), True)
-			End If
-		Next
-
-		MessageBox.Show(Me, "File saved successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-		BTNVideoModSave.Enabled = False
-
-	End Sub
-
-
-
-	Private Sub Button26_Click_2(sender As System.Object, e As System.EventArgs) Handles Button26.Click
-		TBGlitModFileName.Text = ""
-		RTBGlitModDommePost.Text = ""
-		RTBGlitModResponses.Text = ""
-		LBGlitModScripts.ClearSelected()
-
-	End Sub
-
-	Private Sub CBGlitModType_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitModType.SelectedIndexChanged
-
-		If Form1.FormLoading = False Then
-
-			Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\")
-			Dim GlitterScriptCount As Integer
-
-			LBGlitModScripts.Items.Clear()
-
-			For Each file As String In files
-
-				GlitterScriptCount += 1
-				LBGlitModScripts.Items.Add(Path.GetFileName(file).Replace(".txt", ""))
-
-			Next
-
-			LBLGlitModScriptCount.Text = CBGlitModType.Text & " Scripts Found (" & GlitterScriptCount & ")"
-
-		End If
-	End Sub
-
-	Private Sub LBGlitModScripts_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles LBGlitModScripts.SelectedIndexChanged
-
-		Dim GlitPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\" & LBGlitModScripts.SelectedItem & ".txt"
-
-		If Not File.Exists(GlitPath) Then Return
-
-		If GlitPath = Form1.StatusText Then
-			MsgBox("This file is currently in use by the program. Saving changes may be slow until the Glitter process has finished.", , "Warning!")
-		End If
-
-
-		TBGlitModFileName.Text = LBGlitModScripts.SelectedItem
-
-		RTBGlitModDommePost.Text = ""
-		RTBGlitModResponses.Text = ""
-
-
-
-		Dim ioFile As New StreamReader(GlitPath)
-		Dim lines As New List(Of String)
-
-		Dim GlitCount As Integer
-		Dim GlitEnd As Integer
-
-		GlitCount = -1
-
-		While ioFile.Peek <> -1
-			GlitCount += 1
-			lines.Add(ioFile.ReadLine())
-		End While
-
-
-		GlitEnd = GlitCount
-		GlitCount = 1
-
-		RTBGlitModDommePost.Text = lines(0)
-
-
-		Do
-			RTBGlitModResponses.Text = RTBGlitModResponses.Text & lines(GlitCount) & Environment.NewLine
-			GlitCount += 1
-		Loop Until GlitCount = GlitEnd + 1
-
-		ioFile.Close()
-		ioFile.Dispose()
-
-		Debug.Print(RTBGlitModResponses.Lines.Count)
-
-
-	End Sub
-
-	Private Sub Button29_Click(sender As System.Object, e As System.EventArgs) Handles Button29.Click
-
-		If TBGlitModFileName.Text = "" Or RTBGlitModDommePost.Text = "" Or RTBGlitModResponses.Text = "" Then
-			MsgBox("Please make sure all fields have been filled out!", , "Error!")
-			Return
-		End If
-
-		If RTBGlitModResponses.Lines.Count < 3 Then
-			MsgBox("Please make sure the Responses text box has at least three responses!", , "Error!")
-			Return
-		End If
-		'If LBGlitModScripts.Items.Contains Then
-
-
-
-		Dim GlitPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\" & TBGlitModFileName.Text & ".txt"
-
-
-		'My.Computer.FileSystem.WriteAllText(GlitPath, RTBGlitModDommePost.Text & Environment.NewLine & RTBGlitModResponses.Text, False)
-
-		' My.Computer.FileSystem.WriteAllText(GlitPath, Environment.NewLine, True)
-
-		'For Each sLine As String In RTBGlitModResponses.Text
-		'My.Computer.FileSystem.WriteAllText(GlitPath, sLine & Environment.NewLine, True)
-		'Next
-
-		' File.WriteAllLines(GlitPath, File.ReadAllLines(GlitPath).Where(Function(s) s <> String.Empty))
-
-		'LBGlitModScripts.Items.Add(TBGlitModFileName.Text)
-
-		If Not LBGlitModScripts.Items.Contains(TBGlitModFileName.Text) Then
-			LBGlitModScripts.Items.Add(TBGlitModFileName.Text)
-			My.Computer.FileSystem.WriteAllText(GlitPath, RTBGlitModDommePost.Text & Environment.NewLine & RTBGlitModResponses.Text, False)
-			File.WriteAllLines(GlitPath, File.ReadAllLines(GlitPath).Where(Function(s) s <> String.Empty))
-		Else
-			If MsgBox(TBGlitModFileName.Text & ".txt already exists! Overwrite?", vbYesNo, "Warning!") = MsgBoxResult.Yes Then
-				My.Computer.FileSystem.WriteAllText(GlitPath, RTBGlitModDommePost.Text & Environment.NewLine & RTBGlitModResponses.Text, False)
-				File.WriteAllLines(GlitPath, File.ReadAllLines(GlitPath).Where(Function(s) s <> String.Empty))
-			Else
-				Debug.Print("Did not work")
-				Return
-			End If
-		End If
-
-
-
-	End Sub
-
-
-
-
-	Private Sub Button36_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIOpenURL.Click
-
-		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
-
-		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
-
-			Form1.WebImageFile = New IO.StreamReader(WebImageFileDialog.FileName)
-			Form1.WebImagePath = WebImageFileDialog.FileName
-
-			Form1.WebImageLines.Clear()
-
-			Form1.WebImageLine = 0
-			Form1.WebImageLineTotal = 0
-
-			While Form1.WebImageFile.Peek <> -1
-				Form1.WebImageLineTotal += 1
-				Form1.WebImageLines.Add(Form1.WebImageFile.ReadLine())
-			End While
-
-			Try
-				WebPictureBox.Image.Dispose()
-			Catch
-			End Try
-			WebPictureBox.Image = Nothing
-			GC.Collect()
-
-			Try
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(0))))
-			Catch
-				MessageBox.Show(Me, "Failed to load URL File image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-			End Try
-
-			Form1.WebImageFile.Close()
-			Form1.WebImageFile.Dispose()
-
-			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
-
-
-			BTNWINext.Enabled = True
-			BTNWIPrevious.Enabled = True
-			BTNWIRemove.Enabled = True
-			BTNWILiked.Enabled = True
-			BTNWIDisliked.Enabled = True
-			BTNWISave.Enabled = True
-
-
-		End If
-
-
-
-
-	End Sub
-
-
-	Private Sub Button35_Click_2(sender As System.Object, e As System.EventArgs) Handles BTNWINext.Click
-
-TryNextImage:
-
-		Form1.WebImageLine += 1
-
-		If Form1.WebImageLine > Form1.WebImageLineTotal - 1 Then
-			Form1.WebImageLine = Form1.WebImageLineTotal
-			MsgBox("No more images to display!", , "Warning!")
-			Return
-		End If
-
-		Try
-			WebPictureBox.Image.Dispose()
-		Catch
-		End Try
-
-		WebPictureBox.Image = Nothing
-		GC.Collect()
-		Try
-			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
-			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
-		Catch ex As Exception
-			GoTo TryNextImage
-		End Try
-
-
-
-	End Sub
-
-	Private Sub Button18_Click_2(sender As System.Object, e As System.EventArgs) Handles BTNWIPrevious.Click
-
-trypreviousimage:
-
-		Form1.WebImageLine -= 1
-
-		If Form1.WebImageLine < 0 Then
-			Form1.WebImageLine = 0
-			MsgBox("No more images to display!", , "Warning!")
-			Return
-		End If
-
-		Try
-			WebPictureBox.Image.Dispose()
-		Catch
-		End Try
-
-		WebPictureBox.Image = Nothing
-		GC.Collect()
-		Try
-			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
-			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
-		Catch ex As Exception
-			GoTo trypreviousimage
-		End Try
-
-	End Sub
-
-	Private Sub Button37_Click(sender As System.Object, e As System.EventArgs) Handles BTNWISave.Click
-
-		If WebPictureBox.Image Is Nothing Then
-			MsgBox("Nothing to save!", , "Error!")
-			Return
-		End If
-
-
-		SaveFileDialog1.Filter = "jpegs|*.jpg|gifs|*.gif|pngs|*.png|Bitmaps|*.bmp"
-		SaveFileDialog1.FilterIndex = 1
-		SaveFileDialog1.RestoreDirectory = True
-
-
-		Try
-
-			Form1.WebImage = Form1.WebImageLines(Form1.WebImageLine)
-
-			Dim DirSplit As String() = Form1.WebImage.Split("/")
-			Form1.WebImage = DirSplit(DirSplit.Length - 1)
-
-			' ### Clean Code
-			'Do Until Not Form1.WebImage.Contains("/")
-			'Form1.WebImage = Form1.WebImage.Remove(0, 1)
-			'Loop
-
-			SaveFileDialog1.FileName = Form1.WebImage
-
-		Catch ex As Exception
-
-			SaveFileDialog1.FileName = "image.jpg"
-
-		End Try
-
-
-
-
-
-		If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
-
-			WebPictureBox.Image.Save(SaveFileDialog1.FileName)
-
-		End If
-
-	End Sub
-
-	Private Sub Button38_Click(sender As System.Object, e As System.EventArgs) Handles BTNWICreateURL.Click,
-																					   BTNMaintenanceRefresh.Click,
-																					   BTNMaintenanceRebuild.Click
-        ' Group Buttons by inital-State.
-        Dim __PreEnabled As New List(Of Control) From
-			{BTNWIOpenURL, BTNWICreateURL, BTNMaintenanceRefresh,
-			BTNMaintenanceRebuild, BTNMaintenanceScripts}
-		Dim __PreDisabled As New List(Of Control) From
-			{BTNWICancel, BTNMaintenanceCancel}
-
-		Try
-            ' Set their new State, so the User can't disturb.
-            __PreEnabled.ForEach(Sub(x) x.Enabled = False)
-			__PreDisabled.ForEach(Sub(x) x.Enabled = True)
-
-			Select Case sender.name
-				Case BTNWICreateURL.Name
-                    '**************************************************************************************************************
-                    '                                                Create URL-File
-                    '**************************************************************************************************************
-                    Dim __BtnLocalURL As New List(Of Control) From {
-						BTNWINext, BTNWIPrevious, BTNWIRemove, BTNWILiked, BTNWIDisliked, BTNWISave}
-					Try
-                        ' Disable Buttons for Opening-URL-Files
-                        __BtnLocalURL.ForEach(Sub(x) x.Enabled = False)
-
-                        ' Run Backgroundworker
-                        Dim __tmpResult As URL_File_BGW.CreateUrlFileResult = BWURLFiles.CreateURLFileAsync()
-
-                        ' Activate the created URL-File
-                        URL_File_Set(__tmpResult.Filename)
-
-						' UserInfo
-						If __tmpResult._Error Is Nothing Then
-							MsgBox("URL File has been saved to:" &
-							   vbCrLf & vbCrLf & Application.StartupPath & "\Images\System\URL Files\" & __tmpResult.Filename & ".txt" &
-							   vbCrLf & vbCrLf & "Use the ""Open URL File"" button to load and view your collections.",  , "Success!")
-						Else
-							MsgBox("It is encountered an error during URL-File-Creation." & vbCrLf &
-								   __tmpResult._Error.Message & vbCrLf &
-									   "URL File has been saved to:" &
-									vbCrLf & vbCrLf & Application.StartupPath & "\Images\System\URL Files\" & __tmpResult.Filename & ".txt" &
-									vbCrLf & vbCrLf & "Use the ""Open URL File"" button to load and view your collections.",  , "Successful despite errors!")
-						End If
-					Catch
-                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-                        '                                            All Errors
-                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-                        Throw
-					Finally
-                        '⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
-                        __BtnLocalURL.ForEach(Sub(x) x.Enabled = True)
-					End Try
-				Case BTNMaintenanceRefresh.Name
-                    '**************************************************************************************************************
-                    '                                             Refresh URL-Files
-                    '**************************************************************************************************************
-                    Try
-
-                        ' Run Backgroundworker
-                        Dim __tmpResult As URL_File_BGW.MaintainUrlResult = BWURLFiles.RefreshURLFilesAsync()
-
-                        ' Activate the URL-Files
-                        __tmpResult.MaintainedUrlFiles.ForEach(AddressOf URL_File_Set)
-
-						If __tmpResult.Cancelled Then
-							MessageBox.Show(Me, "Refreshing URL-File has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL-Files." &
-											vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added.",
-											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-						ElseIf __tmpResult.ErrorText.Capacity > 0
-							MessageBox.Show(Me, "URL Files have been refreshed with errors!" &
-											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added." &
-											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
-											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-						Else
-							MessageBox.Show(Me, "All URL Files have been refreshed!" &
-											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added.",
-											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-						End If
-					Catch
-                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-                        '                                            All Errors
-                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-                        Throw
-					Finally
-                        '⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
-                        LBLMaintenance.Text = String.Empty
-						PBCurrent.Value = 0
-						PBMaintenance.Value = 0
-					End Try
-				Case BTNMaintenanceRebuild.Name
-                    '**************************************************************************************************************
-                    '                                             Rebuild URL-Files
-                    '**************************************************************************************************************
-                    Try
-                        ' Run Backgroundworker
-                        Dim __tmpResult As URL_File_BGW.MaintainUrlResult = BWURLFiles.RebuildURLFilesAsync()
-
-                        ' Activate the URL-Files
-                        __tmpResult.MaintainedUrlFiles.ForEach(AddressOf URL_File_Set)
-
-						If __tmpResult.Cancelled Then
-							MessageBox.Show(Me, "Rebuilding URL-File has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL-Files." &
-											vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed.",
-											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-						ElseIf __tmpResult.ErrorText.Capacity > 0
-							MessageBox.Show(Me, "URL Files have been rebuilded with errors!" &
-											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed." &
-											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total." &
-											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
-											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-						Else
-							MessageBox.Show(Me, "All URL Files have been rebuilded!" &
-											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed." &
-											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total.",
-											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-						End If
-					Catch
-                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-                        '                                            All Errors
-                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-                        Throw
-					Finally
-                        '⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
-                        LBLMaintenance.Text = String.Empty
-						PBCurrent.Value = 0
-						PBMaintenance.Value = 0
-					End Try
-			End Select
-		Catch ex As Exception
-            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            '                                            All Errors
-            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            If ex.InnerException IsNot Nothing Then
-                ' If an Error ocurred in the other Thread, initial Exception is innner one.
-                MsgBox(ex.InnerException.Message, MsgBoxStyle.Critical, "Error Creating URL-File")
-			Else
-                ' Otherwise show it normal.
-                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error Creating URL-File")
-			End If
-		Finally
-            '⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
-            ' Restore the initial State of the Buttons
-            __PreEnabled.ForEach(Sub(x) x.Enabled = True)
-			__PreDisabled.ForEach(Sub(x) x.Enabled = False)
-		End Try
-	End Sub
-
-    ''' =========================================================================================================
-    ''' <summary>
-    ''' Activates the specified is activaed in Listbox and saves the Listboxstate.
-    ''' </summary>
-    ''' <param name="URL_FileName"></param>
-    Private Sub URL_File_Set(ByVal URL_FileName As String)
-		Try
-            ' Set the new URL-File
-            If Not URLFileList.Items.Contains(URL_FileName) Then
-				URLFileList.Items.Add(URL_FileName)
-				For i As Integer = 0 To URLFileList.Items.Count - 1
-					If URLFileList.Items(i) = URL_FileName Then URLFileList.SetItemChecked(i, True)
-				Next
-			End If
-            ' Save ListState
-            Using FileStream As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Create)
-				Using BinaryWriter As New System.IO.BinaryWriter(FileStream)
-					For i = 0 To URLFileList.Items.Count - 1
-						BinaryWriter.Write(CStr(URLFileList.Items(i)))
-						BinaryWriter.Write(CBool(URLFileList.GetItemChecked(i)))
-					Next
-					BinaryWriter.Close()
-				End Using
-			End Using
-		Catch ex As Exception
-			Throw
-		End Try
-	End Sub
-#Region "-------------------------------------- Backgroundworker URL Files --------------------------------------"
-
-	''' =========================================================================================================
-	''' <summary>
-	''' This Event is used, to gather Variables, for the BackgroundThread, the User can change during runtime.
-	''' </summary>
-	''' <param name="sender"></param>
-	''' <param name="e"></param>
-	Private Sub BWURLFiles_URLCreate_User_Interactions(ByVal sender As URL_File_BGW, ByRef e As URL_File_BGW.UserActions) Handles BWURLFiles.URL_FileCreate_UserInteractions
-		If Me.InvokeRequired Then
-			Dim Callbak As New URL_File_BGW.URL_FileCreate_UserInteractions_Delegate(AddressOf BWURLFiles_URLCreate_User_Interactions)
-			Me.Invoke(Callbak, sender, e)
-		Else
-			e.ReviewImages = CBWIReview.Checked
-			e.ApproveImage = Form1.ApproveImage
-			e.SaveImages = CBWISaveToDisk.Checked
-			e.ImgSaveDir = TBWIDirectory.Text
-		End If
-	End Sub
-
-    ''' =========================================================================================================
-    ''' <summary>
-    ''' This Event will be triggered, when the Working Stage of the BGW changes
-    ''' </summary>
-    ''' <param name="Sender"></param>
-    ''' <param name="e"></param>
-    Private Sub BWURLFiles_ProgressChanged(ByVal Sender As Object, ByRef e As URL_File_BGW.URL_File_ProgressChangedEventArgs) Handles BWURLFiles.URL_File_ProgressChanged
-		If Me.InvokeRequired Then
-            ' Beware: Event is fired in Worker Thread, so you need to do a Function Callback.
-            Dim CallBack As New URL_File_BGW.URL_File_ProgressChanged_Delegate(AddressOf BWURLFiles_ProgressChanged)
-			Me.Invoke(CallBack, Sender, e)
-		Else
-            ' Reset remanent Marker for Image Approval
-            If Form1.ApproveImage <> 0 Then Form1.ApproveImage = 0
-			Select Case e.CurrentTask
-				Case URL_File_Tasks.CreateURLFile
-                    '===============================================================================
-                    '                           Create URL-File
-                    '===============================================================================
-                    Select Case e.ActStage
-                        ' ------------------------ Image Approval -------------------------------
-                        Case WorkingStages.ImageApproval
-							If e.ImageToReview IsNot Nothing Then
-                                ' Dispose old Image & Set new Image
-                                Try : WebPictureBox.Image.Dispose() : Catch : End Try
-								WebPictureBox.Image = e.ImageToReview
-                                ' Enabled UI Elements
-                                BTNWIContinue.Enabled = True
-								BTNWIAddandContinue.Enabled = True
-							End If
-						Case WorkingStages.Writing_File
-                            ' ---------------------- Write to File -------------------------------
-                            'State info to User
-                            LBLWebImageCount.Text = "Writing"
-                            ' At this state no cnancel possible
-                            BTNWICancel.Enabled = False
-							WebPictureBox.Image = Nothing
-						Case Else
-                            ' ---------------------- Everthing else ------------------------------
-                            ' Refresh Progressbars
-                            WebImageProgressBar.Maximum = e.BlogPageTotal + 1
-							WebImageProgressBar.Value = e.BlogPage
-                            ' Disable Image Approval-UI
-                            BTNWIContinue.Enabled = False
-							BTNWIAddandContinue.Enabled = False
-                            ' Inform User about BGW-State
-                            LBLWebImageCount.Text = String.Format("{0}/{1} ({2})", e.BlogPage, e.BlogPageTotal, e.ImageCount)
-					End Select
-				Case Else
-                    '===============================================================================
-                    '                           Refresh URL-File
-                    '===============================================================================
-                    LBLMaintenance.Text = e.InfoText
-					PBCurrent.Maximum = e.BlogPageTotal
-					PBCurrent.Value = e.BlogPage
-					PBMaintenance.Maximum = e.OverallProgressTotal
-					PBMaintenance.Value = e.OverallProgress
-			End Select
-		End If
-	End Sub
-
-#End Region
-
-
-	Private Sub WebPictureBox_MouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles WebPictureBox.MouseWheel
-
-
-
-
-		Select Case e.Delta
-			Case -120 'Scrolling down
-				Form1.WebImageLine += 1
-
-				If Form1.WebImageLine > Form1.WebImageLineTotal - 1 Then
-					Form1.WebImageLine = Form1.WebImageLineTotal
-					MsgBox("No more images to display!", , "Warning!")
-					Return
-				End If
-
-				Try
-					WebPictureBox.Image.Dispose()
-				Catch
-				End Try
-				WebPictureBox.Image = Nothing
-				GC.Collect()
-
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
-				LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
-			Case 120 'Scrolling up
-				Form1.WebImageLine -= 1
-
-				If Form1.WebImageLine < 0 Then
-					Form1.WebImageLine = 0
-					MsgBox("No more images to display!", , "Warning!")
-					Return
-				End If
-
-				Try
-					WebPictureBox.Image.Dispose()
-				Catch
-				End Try
-				WebPictureBox.Image = Nothing
-				GC.Collect()
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
-				LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
-		End Select
-
-
-	End Sub
-
-
-	Private Sub PictureBox1_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles WebPictureBox.MouseEnter
-		WebPictureBox.Focus()
-	End Sub
-
-	Private Sub SliderSTF_Scroll(sender As System.Object, e As System.EventArgs) Handles SliderSTF.Scroll
-		If SliderSTF.Value = 1 Then LBLStf.Text = "Preoccupied"
-		If SliderSTF.Value = 2 Then LBLStf.Text = "Distracted"
-		If SliderSTF.Value = 3 Then LBLStf.Text = "Normal"
-		If SliderSTF.Value = 4 Then LBLStf.Text = "Talkative"
-		If SliderSTF.Value = 5 Then LBLStf.Text = "Verbose"
-
-	End Sub
-
-	Private Sub TauntSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles TauntSlider.Scroll
-		If TauntSlider.Value = 1 Then LBLVtf.Text = "Preoccupied"
-		If TauntSlider.Value = 2 Or TauntSlider.Value = 3 Then LBLVtf.Text = "Distracted"
-		If TauntSlider.Value = 4 Or TauntSlider.Value = 5 Then LBLVtf.Text = "Normal"
-		If TauntSlider.Value = 6 Or TauntSlider.Value = 7 Or TauntSlider.Value = 8 Then LBLVtf.Text = "Talkative"
-		If TauntSlider.Value = 9 Or TauntSlider.Value = 10 Then LBLVtf.Text = "Verbose"
-
-	End Sub
-
-
-
-	Private Sub TauntSlider_LostFocus(sender As System.Object, e As System.EventArgs) Handles TauntSlider.LostFocus
-		My.Settings.TimerVTF = TauntSlider.Value
-
-	End Sub
-
-	Private Sub SliderSTF_LostFocus(sender As System.Object, e As System.EventArgs) Handles SliderSTF.LostFocus
-		My.Settings.TimerSTF = SliderSTF.Value
-
-	End Sub
-
-	Private Sub BTNDomColor_Click(sender As System.Object, e As System.EventArgs) Handles BTNDomColor.Click
-
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.DomColorColor = GetColor.Color
-			LBLDomColor.ForeColor = GetColor.Color
-			My.Settings.DomColor = Color2Html(GetColor.Color)
-		End If
-
-
-	End Sub
-
-	Private Sub BTNSubColor_Click(sender As System.Object, e As System.EventArgs) Handles BTNSubColor.Click
-
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.SubColorColor = GetColor.Color
-			LBLSubColor.ForeColor = GetColor.Color
-			My.Settings.SubColor = Color2Html(GetColor.Color)
-		End If
-
-	End Sub
-
-
-
-
 
 
 	Private Sub timestampCheckBox_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles timestampCheckBox.MouseClick
@@ -2706,31 +664,6 @@ trypreviousimage:
 		'If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Wenn dies aktiviert ist, wird der Lokale Dateipfad oder die URL-Adresse von jedem Bild in der oberen linken Ecke des Bildschirms angezeigt."
 	End Sub
 
-
-	Private Sub Button2_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button2.MouseHover
-
-		If RBEnglish.Checked = True Then TTDir.SetToolTip(Button2, "Use this button to select a directory containing several image" & Environment.NewLine &
-"set folders of the same model you're using as your contact.")
-		If RBGerman.Checked = True Then TTDir.SetToolTip(Button2, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
-"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
-	End Sub
-	Private Sub Button8_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button8.MouseHover
-
-		If RBEnglish.Checked = True Then TTDir.SetToolTip(Button8, "Use this button to select a directory containing several image" & Environment.NewLine &
-"set folders of the same model you're using as your contact.")
-		If RBGerman.Checked = True Then TTDir.SetToolTip(Button8, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
-"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
-	End Sub
-	Private Sub Button10_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button10.MouseHover
-
-		If RBEnglish.Checked = True Then TTDir.SetToolTip(Button10, "Use this button to select a directory containing several image" & Environment.NewLine &
-"set folders of the same model you're using as your contact.")
-		If RBGerman.Checked = True Then TTDir.SetToolTip(Button10, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
-"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
-	End Sub
-
-
-
 	Private Sub BTNDomImageDir_MouseHover(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.MouseHover
 
 		If RBEnglish.Checked = True Then TTDir.SetToolTip(BTNDomImageDir, "Use this button to select a directory containing several image" & Environment.NewLine &
@@ -2906,27 +839,6 @@ trypreviousimage:
 	'   If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
 	'End Sub
 
-	Private Sub domlevelNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.LostFocus
-		My.Settings.DomLevel = domlevelNumBox.Value
-	End Sub
-
-	Private Sub alloworgasmComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles alloworgasmComboBox.LostFocus
-
-
-
-		My.Settings.OrgasmAllow = alloworgasmComboBox.Text
-	End Sub
-
-	Private Sub ruinorgasmComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ruinorgasmComboBox.LostFocus
-
-
-
-		My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
-
-
-
-	End Sub
-
 
 	Private Sub CBAutosaveChatlog_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBAutosaveChatlog.MouseClick
 		If CBAutosaveChatlog.Checked = True Then
@@ -2951,398 +863,6 @@ trypreviousimage:
 			My.Settings.AuditStartup = False
 		End If
 	End Sub
-
-	Private Sub NBWritingTaskMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBWritingTaskMin.LostFocus
-		My.Settings.NBWritingTaskMin = NBWritingTaskMin.Value
-	End Sub
-
-	Private Sub NBWritingTaskMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBWritingTaskMin.ValueChanged
-		If NBWritingTaskMin.Value > NBWritingTaskMax.Value Then NBWritingTaskMin.Value = NBWritingTaskMax.Value
-	End Sub
-
-	Private Sub NBWritingTaskMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBWritingTaskMax.LostFocus
-		My.Settings.NBWritingTaskMax = NBWritingTaskMax.Value
-	End Sub
-
-	Private Sub NBWritingTaskMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBWritingTaskMax.ValueChanged
-		If NBWritingTaskMax.Value < NBWritingTaskMin.Value Then NBWritingTaskMax.Value = NBWritingTaskMin.Value
-	End Sub
-
-
-	Private Sub CheckBox6_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTagBoobs.CheckedChanged
-
-	End Sub
-
-	Private Sub BTNTagDir_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagDir.Click
-
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-
-
-			' BTNTagSave.Text = "Save and Display Next Image"
-
-			ImageTagDir.Clear()
-
-			TagImageFolder = FolderBrowserDialog1.SelectedPath
-
-			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-			Dim files As String()
-
-			files = myDirectory.GetFiles(TagImageFolder, "*.*")
-
-			Array.Sort(files)
-
-			For Each fi As String In files
-				If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-					ImageTagDir.Add(fi)
-				End If
-			Next
-
-			If ImageTagDir.Count < 1 Then
-				MessageBox.Show(Me, "There are no images in the specified folder.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				Return
-			End If
-
-			Try
-				ImageTagPictureBox.Image.Dispose()
-			Catch
-			End Try
-
-			ImageTagPictureBox.Image = Nothing
-			GC.Collect()
-
-			ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
-			Form1.mainPictureBox.LoadAsync(ImageTagDir(0))
-			CurrentImageTagImage = ImageTagDir(0)
-
-			LoadDommeTags()
-
-			Form1.TagCount = 1
-			LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
-
-			'If ImageTagDir.Count = 1 Then BTNTagSave.Text = "Save and Finish"
-
-			ImageTagCount = 0
-
-			BTNTagSave.Enabled = True
-			BTNTagNext.Enabled = True
-			BTNTagPrevious.Enabled = False
-			BTNTagDir.Enabled = False
-			TBTagDir.Enabled = False
-
-			CBTagFace.Enabled = True
-			CBTagBoobs.Enabled = True
-			CBTagPussy.Enabled = True
-			CBTagAss.Enabled = True
-			CBTagLegs.Enabled = True
-			CBTagFeet.Enabled = True
-			CBTagFullyDressed.Enabled = True
-			CBTagHalfDressed.Enabled = True
-			CBTagGarmentCovering.Enabled = True
-			CBTagHandsCovering.Enabled = True
-			CBTagNaked.Enabled = True
-			CBTagSideView.Enabled = True
-			CBTagCloseUp.Enabled = True
-			CBTagMasturbating.Enabled = True
-			CBTagSucking.Enabled = True
-			CBTagPiercing.Enabled = True
-			CBTagSmiling.Enabled = True
-			CBTagGlaring.Enabled = True
-			CBTagSeeThrough.Enabled = True
-			CBTagAllFours.Enabled = True
-
-			CBTagGarment.Enabled = True
-			CBTagUnderwear.Enabled = True
-			CBTagTattoo.Enabled = True
-			CBTagSexToy.Enabled = True
-			CBTagFurniture.Enabled = True
-
-			TBTagGarment.Enabled = True
-			TBTagUnderwear.Enabled = True
-			TBTagTattoo.Enabled = True
-			TBTagSexToy.Enabled = True
-			TBTagFurniture.Enabled = True
-
-			LBLTagCount.Enabled = True
-
-
-
-		End If
-
-	End Sub
-
-	Private Sub TBTagDir_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TBTagDir.KeyPress
-
-		If e.KeyChar = Convert.ToChar(13) Then
-
-			e.Handled = True
-			' sendButton.PerformClick()
-			e.KeyChar = Chr(0)
-
-			If My.Computer.FileSystem.DirectoryExists(TBTagDir.Text) Then
-
-				ImageTagDir.Clear()
-
-				TagImageFolder = TBTagDir.Text
-
-				Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-				Dim files As String()
-
-				files = myDirectory.GetFiles(TagImageFolder, "*.*")
-
-				Array.Sort(files)
-
-				For Each fi As String In files
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						ImageTagDir.Add(fi)
-					End If
-				Next
-
-				If ImageTagDir.Count < 1 Then
-					MessageBox.Show(Me, "There are no images in the specified folder.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-					Return
-				End If
-
-				Try
-					ImageTagPictureBox.Image.Dispose()
-				Catch
-				End Try
-
-				ImageTagPictureBox.Image = Nothing
-				GC.Collect()
-
-				Debug.Print("find")
-				ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
-				Form1.mainPictureBox.LoadAsync(ImageTagDir(0))
-
-
-				CurrentImageTagImage = ImageTagDir(0)
-
-
-
-				LoadDommeTags()
-
-				Form1.TagCount = 1
-				LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
-
-				'If ImageTagDir.Count = 1 Then BTNTagSave.Text = "Save and Finish"
-
-				ImageTagCount = 0
-
-				BTNTagSave.Enabled = True
-				BTNTagNext.Enabled = True
-				BTNTagPrevious.Enabled = False
-				BTNTagDir.Enabled = False
-				TBTagDir.Enabled = False
-
-				CBTagFace.Enabled = True
-				CBTagBoobs.Enabled = True
-				CBTagPussy.Enabled = True
-				CBTagAss.Enabled = True
-				CBTagLegs.Enabled = True
-				CBTagFeet.Enabled = True
-				CBTagFullyDressed.Enabled = True
-				CBTagHalfDressed.Enabled = True
-				CBTagGarmentCovering.Enabled = True
-				CBTagHandsCovering.Enabled = True
-				CBTagNaked.Enabled = True
-				CBTagSideView.Enabled = True
-				CBTagCloseUp.Enabled = True
-				CBTagMasturbating.Enabled = True
-				CBTagSucking.Enabled = True
-				CBTagPiercing.Enabled = True
-				CBTagSmiling.Enabled = True
-				CBTagGlaring.Enabled = True
-				CBTagSeeThrough.Enabled = True
-				CBTagAllFours.Enabled = True
-
-				CBTagGarment.Enabled = True
-				CBTagUnderwear.Enabled = True
-				CBTagTattoo.Enabled = True
-				CBTagSexToy.Enabled = True
-				CBTagFurniture.Enabled = True
-
-				TBTagGarment.Enabled = True
-				TBTagUnderwear.Enabled = True
-				TBTagTattoo.Enabled = True
-				TBTagSexToy.Enabled = True
-				TBTagFurniture.Enabled = True
-
-				LBLTagCount.Enabled = True
-
-			Else
-
-				TBTagDir.Text = "Not a Valid Directory!"
-
-			End If
-
-		End If
-
-
-	End Sub
-
-	Private Sub BTNTagSave_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagSave.Click
-
-		SaveDommeTags()
-
-		BTNTagDir.Enabled = True
-		TBTagDir.Enabled = True
-		BTNTagSave.Enabled = False
-		BTNTagNext.Enabled = False
-		BTNTagPrevious.Enabled = False
-
-
-
-
-		' If BTNTagSave.Text = "Save and Finish" Then
-		'BTNTagSave.Text = "Save and Display Next Image"
-		'BTNTagSave.Enabled = False
-		'MessageBox.Show(Me, "All images in this folder have been successfully tagged.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-		'ImageTagPictureBox.Image = Nothing
-		'Return
-		'End If
-
-		CBTagFace.Checked = False
-		CBTagBoobs.Checked = False
-		CBTagPussy.Checked = False
-		CBTagAss.Checked = False
-		CBTagLegs.Checked = False
-		CBTagFeet.Checked = False
-		CBTagFullyDressed.Checked = False
-		CBTagHalfDressed.Checked = False
-		CBTagGarmentCovering.Checked = False
-		CBTagHandsCovering.Checked = False
-		CBTagNaked.Checked = False
-		CBTagSideView.Checked = False
-		CBTagCloseUp.Checked = False
-		CBTagMasturbating.Checked = False
-		CBTagSucking.Checked = False
-		CBTagPiercing.Checked = False
-		CBTagSmiling.Checked = False
-		CBTagGlaring.Checked = False
-		CBTagSeeThrough.Checked = False
-		CBTagAllFours.Checked = False
-
-		CBTagFace.Enabled = False
-		CBTagBoobs.Enabled = False
-		CBTagPussy.Enabled = False
-		CBTagAss.Enabled = False
-		CBTagLegs.Enabled = False
-		CBTagFeet.Enabled = False
-		CBTagFullyDressed.Enabled = False
-		CBTagHalfDressed.Enabled = False
-		CBTagGarmentCovering.Enabled = False
-		CBTagHandsCovering.Enabled = False
-		CBTagNaked.Enabled = False
-		CBTagSideView.Enabled = False
-		CBTagCloseUp.Enabled = False
-		CBTagMasturbating.Enabled = False
-		CBTagSucking.Enabled = False
-		CBTagPiercing.Enabled = False
-		CBTagSmiling.Enabled = False
-		CBTagGlaring.Enabled = False
-		CBTagSeeThrough.Enabled = False
-		CBTagAllFours.Enabled = False
-
-		CBTagGarment.Checked = False
-		CBTagUnderwear.Checked = False
-		CBTagTattoo.Checked = False
-		CBTagSexToy.Checked = False
-		CBTagFurniture.Checked = False
-
-		CBTagGarment.Enabled = False
-		CBTagUnderwear.Enabled = False
-		CBTagTattoo.Enabled = False
-		CBTagSexToy.Enabled = False
-		CBTagFurniture.Enabled = False
-
-		TBTagGarment.Enabled = False
-		TBTagUnderwear.Enabled = False
-		TBTagTattoo.Enabled = False
-		TBTagSexToy.Enabled = False
-		TBTagFurniture.Enabled = False
-
-		TBTagGarment.Text = ""
-		TBTagUnderwear.Text = ""
-		TBTagTattoo.Text = ""
-		TBTagSexToy.Text = ""
-		TBTagFurniture.Text = ""
-
-		LBLTagCount.Text = "0/0"
-		LBLTagCount.Enabled = False
-
-
-		ImageTagPictureBox.Image = Nothing
-
-
-
-	End Sub
-
-	Private Sub BTNTagNext_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagNext.Click
-
-		Form1.TagCount += 1
-		LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
-		BTNTagPrevious.Enabled = True
-
-
-		SaveDommeTags()
-
-
-
-		ImageTagCount += 1
-
-		Try
-			ImageTagPictureBox.Image.Dispose()
-		Catch
-		End Try
-
-		ImageTagPictureBox.Image = Nothing
-		GC.Collect()
-
-		ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
-		Form1.mainPictureBox.LoadAsync(ImageTagDir(ImageTagCount))
-
-
-		CurrentImageTagImage = ImageTagDir(ImageTagCount)
-
-		If ImageTagCount = ImageTagDir.Count - 1 Then BTNTagNext.Enabled = False
-
-
-		LoadDommeTags()
-
-	End Sub
-
-	Private Sub BTNTagPrevious_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagPrevious.Click
-
-		Form1.TagCount -= 1
-		LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
-		BTNTagNext.Enabled = True
-
-
-		SaveDommeTags()
-
-		ImageTagCount -= 1
-
-		Try
-			ImageTagPictureBox.Image.Dispose()
-		Catch
-		End Try
-
-		ImageTagPictureBox.Image = Nothing
-		GC.Collect()
-
-		ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
-		Form1.mainPictureBox.LoadAsync(ImageTagDir(ImageTagCount))
-		CurrentImageTagImage = ImageTagDir(ImageTagCount)
-
-		If ImageTagCount = 0 Then BTNTagPrevious.Enabled = False
-
-
-		LoadDommeTags()
-
-	End Sub
-
-
-
 
 	Private Sub CBSlideshowSubDir_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBSlideshowSubDir.LostFocus
 		If CBSlideshowSubDir.Checked = True Then
@@ -3493,8 +1013,283 @@ trypreviousimage:
 	'    If RBGerman.Checked = True Then LBLGeneralSettingsDescription.Text = "Ziehe die Maus über irgendeine Einstellung um eine genaure Beschreibung der Einstellung zu bekommen."
 	'End Sub
 
+	Private Sub CBLockWindow_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBInputIcon.LostFocus
+		If CBInputIcon.Checked = True Then
+			My.Settings.CBInputIcon = True
+		Else
+			My.Settings.CBInputIcon = False
+		End If
+	End Sub
 
-#Region " Domme Settings "
+	Private Sub BTNDomColor_Click(sender As System.Object, e As System.EventArgs) Handles BTNDomColor.Click
+
+		If GetColor.ShowDialog() = DialogResult.OK Then
+			My.Settings.DomColorColor = GetColor.Color
+			LBLDomColor.ForeColor = GetColor.Color
+			My.Settings.DomColor = Color2Html(GetColor.Color)
+		End If
+
+
+	End Sub
+
+	Private Sub BTNSubColor_Click(sender As System.Object, e As System.EventArgs) Handles BTNSubColor.Click
+
+		If GetColor.ShowDialog() = DialogResult.OK Then
+			My.Settings.SubColorColor = GetColor.Color
+			LBLSubColor.ForeColor = GetColor.Color
+			My.Settings.SubColor = Color2Html(GetColor.Color)
+		End If
+
+	End Sub
+
+
+
+	Private Sub timedRadio_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles timedRadio.CheckedChanged
+		If Form1.SlideshowLoaded = True And timedRadio.Checked = True Then
+			Form1.SlideshowTimerTick = slideshowNumBox.Value
+			Form1.SlideshowTimer.Start()
+		End If
+	End Sub
+
+	Private Sub teaseRadio_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles teaseRadio.CheckedChanged
+		If timedRadio.Checked = False And Form1.FormLoading = False Then
+			Form1.SlideshowTimer.Stop()
+		End If
+	End Sub
+
+	Private Sub offRadio_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles offRadio.CheckedChanged
+		If timedRadio.Checked = False Then
+			Form1.SlideshowTimer.Stop()
+		End If
+	End Sub
+
+	Private Sub FontComboBoxD_LostFocus(sender As System.Object, e As System.EventArgs) Handles FontComboBoxD.LostFocus
+		My.Settings.DomFont = FontComboBoxD.Text
+	End Sub
+
+	Private Sub FontComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles FontComboBox.LostFocus
+		My.Settings.SubFont = FontComboBox.Text
+	End Sub
+
+	Private Sub NBFontSizeD_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBFontSizeD.LostFocus
+		My.Settings.DomFontSize = NBFontSizeD.Value
+	End Sub
+
+	Private Sub NBFontSize_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBFontSize.LostFocus
+		My.Settings.SubFontSize = NBFontSize.Value
+	End Sub
+
+
+
+
+	Private Sub CBImageInfo_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBImageInfo.CheckedChanged
+		If CBImageInfo.Checked = True Then
+			Form1.LBLImageInfo.Visible = True
+			'Form1.ShowImageInfo()
+			My.Settings.CBImageInfo = True
+		Else
+			Form1.LBLImageInfo.Visible = False
+			'Form1.LBLImageInfo.Text = ""
+			My.Settings.CBImageInfo = False
+		End If
+	End Sub
+
+#End Region ' General
+
+#Region "-------------------------------------- Domme Tab -----------------------------------------------"
+
+#Region "Save PetNames"
+
+	Private Sub petnameBox1_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox1.LostFocus
+
+		Dim BlankName As String
+		BlankName = "stroker"
+		Dim NameVal As Integer
+		NameVal = Form1.randomizer.Next(1, 6)
+
+		If NameVal = 1 Then BlankName = "stroker"
+		If NameVal = 2 Then BlankName = "loser"
+		If NameVal = 3 Then BlankName = "slave"
+		If NameVal = 4 Then BlankName = "bitch boy"
+		If NameVal = 5 Then BlankName = "wanker"
+
+		If petnameBox1.Text = "" Then petnameBox1.Text = BlankName
+
+		SavePetNames()
+
+	End Sub
+
+
+	Private Sub petnameBox2_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox3.LostFocus
+
+		Dim BlankName As String
+		BlankName = "stroker"
+		Dim NameVal As Integer
+		NameVal = Form1.randomizer.Next(1, 6)
+
+		If NameVal = 1 Then BlankName = "stroker"
+		If NameVal = 2 Then BlankName = "loser"
+		If NameVal = 3 Then BlankName = "slave"
+		If NameVal = 4 Then BlankName = "bitch boy"
+		If NameVal = 5 Then BlankName = "wanker"
+
+		If petnameBox3.Text = "" Then petnameBox3.Text = BlankName
+
+		SavePetNames()
+
+	End Sub
+
+	Private Sub petnameBox3_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox4.LostFocus
+
+		Dim BlankName As String
+		BlankName = "stroker"
+		Dim NameVal As Integer
+		NameVal = Form1.randomizer.Next(1, 6)
+
+		If NameVal = 1 Then BlankName = "stroker"
+		If NameVal = 2 Then BlankName = "loser"
+		If NameVal = 3 Then BlankName = "slave"
+		If NameVal = 4 Then BlankName = "bitch boy"
+		If NameVal = 5 Then BlankName = "wanker"
+
+		If petnameBox4.Text = "" Then petnameBox4.Text = BlankName
+
+		SavePetNames()
+
+	End Sub
+
+	Private Sub petnameBox4_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox7.LostFocus
+
+		Dim BlankName As String
+		BlankName = "stroker"
+		Dim NameVal As Integer
+		NameVal = Form1.randomizer.Next(1, 6)
+
+		If NameVal = 1 Then BlankName = "stroker"
+		If NameVal = 2 Then BlankName = "loser"
+		If NameVal = 3 Then BlankName = "slave"
+		If NameVal = 4 Then BlankName = "bitch boy"
+		If NameVal = 5 Then BlankName = "wanker"
+
+		If petnameBox7.Text = "" Then petnameBox7.Text = BlankName
+
+		SavePetNames()
+
+	End Sub
+
+	Private Sub petnameBox5_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox2.LostFocus
+
+		Dim BlankName As String
+		BlankName = "stroker"
+		Dim NameVal As Integer
+		NameVal = Form1.randomizer.Next(1, 6)
+
+		If NameVal = 1 Then BlankName = "stroker"
+		If NameVal = 2 Then BlankName = "loser"
+		If NameVal = 3 Then BlankName = "slave"
+		If NameVal = 4 Then BlankName = "bitch boy"
+		If NameVal = 5 Then BlankName = "wanker"
+
+		If petnameBox2.Text = "" Then petnameBox2.Text = BlankName
+
+		SavePetNames()
+
+	End Sub
+
+	Private Sub petnameBox6_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox5.LostFocus
+
+		Dim BlankName As String
+		BlankName = "stroker"
+		Dim NameVal As Integer
+		NameVal = Form1.randomizer.Next(1, 6)
+
+		If NameVal = 1 Then BlankName = "stroker"
+		If NameVal = 2 Then BlankName = "loser"
+		If NameVal = 3 Then BlankName = "slave"
+		If NameVal = 4 Then BlankName = "bitch boy"
+		If NameVal = 5 Then BlankName = "wanker"
+
+		If petnameBox5.Text = "" Then petnameBox5.Text = BlankName
+
+		SavePetNames()
+
+	End Sub
+
+	Private Sub petnameBox7_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox6.LostFocus
+
+		Dim BlankName As String
+		BlankName = "stroker"
+		Dim NameVal As Integer
+		NameVal = Form1.randomizer.Next(1, 6)
+
+		If NameVal = 1 Then BlankName = "stroker"
+		If NameVal = 2 Then BlankName = "slave"
+		If NameVal = 3 Then BlankName = "pet"
+		If NameVal = 4 Then BlankName = "bitch boy"
+		If NameVal = 5 Then BlankName = "wanker"
+
+		If petnameBox6.Text = "" Then petnameBox6.Text = BlankName
+
+		SavePetNames()
+
+	End Sub
+
+	Private Sub petnameBox8_LostFocus(sender As System.Object, e As System.EventArgs) Handles petnameBox8.LostFocus
+
+		Dim BlankName As String
+		BlankName = "stroker"
+		Dim NameVal As Integer
+		NameVal = Form1.randomizer.Next(1, 6)
+
+		If NameVal = 1 Then BlankName = "stroker"
+		If NameVal = 2 Then BlankName = "slave"
+		If NameVal = 3 Then BlankName = "pet"
+		If NameVal = 4 Then BlankName = "bitch boy"
+		If NameVal = 5 Then BlankName = "wanker"
+
+		If petnameBox8.Text = "" Then petnameBox8.Text = BlankName
+
+		SavePetNames()
+
+	End Sub
+
+
+	Public Sub SavePetNames()
+
+		My.Settings.pnSetting1 = petnameBox1.Text
+		My.Settings.pnSetting2 = petnameBox2.Text
+		My.Settings.pnSetting3 = petnameBox3.Text
+		My.Settings.pnSetting4 = petnameBox4.Text
+		My.Settings.pnSetting5 = petnameBox5.Text
+		My.Settings.pnSetting6 = petnameBox6.Text
+		My.Settings.pnSetting7 = petnameBox7.Text
+		My.Settings.pnSetting8 = petnameBox8.Text
+
+
+	End Sub
+
+#End Region
+
+	Private Sub domlevelNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.LostFocus
+		My.Settings.DomLevel = domlevelNumBox.Value
+	End Sub
+
+	Private Sub alloworgasmComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles alloworgasmComboBox.LostFocus
+
+
+
+		My.Settings.OrgasmAllow = alloworgasmComboBox.Text
+	End Sub
+
+	Private Sub ruinorgasmComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ruinorgasmComboBox.LostFocus
+
+
+
+		My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
+
+
+
+	End Sub
 
 	Private Sub domageNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domageNumBox.LostFocus
 		My.Settings.DomAge = domageNumBox.Value
@@ -4056,1171 +1851,45 @@ trypreviousimage:
 	End Sub
 
 
-#End Region
+	Private Sub NBEmpathy_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBEmpathy.LostFocus
+
+		If NBEmpathy.Value = 1 Then My.Settings.DomEmpathy = 1
+		If NBEmpathy.Value = 2 Then My.Settings.DomEmpathy = 2
+		If NBEmpathy.Value = 3 Then My.Settings.DomEmpathy = 3
+		If NBEmpathy.Value = 4 Then My.Settings.DomEmpathy = 4
+		If NBEmpathy.Value = 5 Then My.Settings.DomEmpathy = 5
 
 
-	Private Sub CBLockWindow_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBInputIcon.LostFocus
-		If CBInputIcon.Checked = True Then
-			My.Settings.CBInputIcon = True
-		Else
-			My.Settings.CBInputIcon = False
+		Debug.Print(My.Settings.DomEmpathy)
+
+
+
+
+	End Sub
+
+	Private Sub domlevelNumBox_ValueChanged(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.ValueChanged
+		If FrmSettingsLoading = False Then
+			If domlevelNumBox.Value = 1 Then DomLevelDescLabel.Text = "Gentle"
+			If domlevelNumBox.Value = 2 Then DomLevelDescLabel.Text = "Lenient"
+			If domlevelNumBox.Value = 3 Then DomLevelDescLabel.Text = "Tease"
+			If domlevelNumBox.Value = 4 Then DomLevelDescLabel.Text = "Rough"
+			If domlevelNumBox.Value = 5 Then DomLevelDescLabel.Text = "Sadistic"
 		End If
 	End Sub
 
-
-
-
-	Private Sub Button50_Click(sender As System.Object, e As System.EventArgs) Handles Button50.Click
-
-		TBKeyWords.Text = ""
-		RTBKeyWords.Text = ""
-
-		Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\")
-
-		LBKeyWords.Items.Clear()
-
-		For Each file As String In files
-			LBKeyWords.Items.Add(Path.GetFileName(file).Replace(".txt", ""))
-		Next
-
-	End Sub
-
-	Private Sub LBKeyWords_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles LBKeyWords.SelectedIndexChanged
-
-		Dim KeyWordPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & LBKeyWords.SelectedItem & ".txt"
-
-		If Not File.Exists(KeyWordPath) Then Return
-
-		' If GlitPath = StatusText Then
-		'MsgBox("This file is currently in use by the program. Saving changes may be slow until the Glitter process has finished.", , "Warning!")
-		'End If
-
-
-		TBKeyWords.Text = LBKeyWords.SelectedItem
-
-		RTBKeyWords.Text = ""
-
-
-		Dim ioFile As New StreamReader(KeyWordPath)
-		Dim lines As New List(Of String)
-
-		Dim KeyWordCount As Integer
-		Dim KeyWordEnd As Integer
-
-		KeyWordCount = -1
-
-		While ioFile.Peek <> -1
-			KeyWordCount += 1
-			lines.Add(ioFile.ReadLine())
-		End While
-
-
-		KeyWordEnd = KeyWordCount
-		KeyWordCount = 0
-
-
-
-		Do
-			RTBKeyWords.Text = RTBKeyWords.Text & lines(KeyWordCount) & Environment.NewLine
-			KeyWordCount += 1
-		Loop Until KeyWordCount = KeyWordEnd + 1
-
-		ioFile.Close()
-		ioFile.Dispose()
-
-		Debug.Print(RTBKeyWords.Lines.Count)
-
-	End Sub
-
-	Private Sub Button22_Click(sender As System.Object, e As System.EventArgs) Handles Button22.Click
-
-		Try
-			If TBKeyWords.Text = "" Or InStr(TBKeyWords.Text, "#") <> 1 Or Not TBKeyWords.Text.Substring(0, 1) = "#" Then
-				MessageBox.Show(Me, "Please enter a correct file name for this Keyword script!" & Environment.NewLine & Environment.NewLine & "Keyword file names must contain one ""#"" sign, " &
-								"placed at the beginning of the word or phrase.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			End If
-		Catch
-			MessageBox.Show(Me, "Please enter a file name for this Keyword script!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			Return
-		End Try
-
-
-		If RTBKeyWords.Text = "" Then
-			MessageBox.Show(Me, "The Keyword file you are attempting to save is blank!" & Environment.NewLine & Environment.NewLine & "Please add some lines before saving.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			Return
-		End If
-
-		Dim KeyWordSaveDir As String = TBKeyWords.Text
-		KeyWordSaveDir = KeyWordSaveDir.Replace(".txt", "")
-
-		If Not LBKeyWords.Items.Contains(KeyWordSaveDir) Then
-			LBKeyWords.Items.Add(KeyWordSaveDir)
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", RTBKeyWords.Text, False)
-			File.WriteAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt").Where(Function(s) s <> String.Empty))
-		Else
-			Dim Result As Integer = MessageBox.Show(Me, KeyWordSaveDir & " already exists!" & Environment.NewLine & Environment.NewLine & "Do you wish to overwrite?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-			If Result = DialogResult.Yes Then
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", RTBKeyWords.Text, False)
-				File.WriteAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt").Where(Function(s) s <> String.Empty))
-			Else
-				Debug.Print("Did not work")
-				Return
-			End If
-		End If
-
-		MessageBox.Show(Me, "Keyword file has been saved!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-	End Sub
-
-	Private Sub Button57_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIBrowse.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			TBWIDirectory.Text = FolderBrowserDialog1.SelectedPath
+	Private Sub NBEmpathy_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBEmpathy.ValueChanged
+		If FrmSettingsLoading = False Then
+			If NBEmpathy.Value = 1 Then LBLEmpathy.Text = "Cautious"
+			If NBEmpathy.Value = 2 Then LBLEmpathy.Text = "Caring"
+			If NBEmpathy.Value = 3 Then LBLEmpathy.Text = "Moderate"
+			If NBEmpathy.Value = 4 Then LBLEmpathy.Text = "Cruel"
+			If NBEmpathy.Value = 5 Then LBLEmpathy.Text = "Merciless"
 		End If
 	End Sub
 
-	Private Sub CBWISaveToDisk_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBWISaveToDisk.CheckedChanged
+#End Region ' Domme
 
-		If CBWISaveToDisk.Checked = True Then
-			If Not Directory.Exists(TBWIDirectory.Text) Then
-				MessageBox.Show(Me, "Please enter or browse for a valid Saved Image Directory first!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				CBWISaveToDisk.Checked = False
-			End If
-		End If
-
-
-	End Sub
-
-	Private Sub BTNWIAddandContinue_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIAddandContinue.Click
-		Form1.ApproveImage = 1
-	End Sub
-
-	Private Sub BTNWIContinue_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIContinue.Click
-		Form1.ApproveImage = 2
-	End Sub
-
-	Private Sub BTNCancel_Click(sender As System.Object, e As System.EventArgs) Handles BTNWICancel.Click
-		If BWURLFiles.IsBusy Then BWURLFiles.CancelAsync()
-	End Sub
-
-	Private Sub BTNWIRemove_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIRemove.Click
-
-
-		Form1.WebImageLines.Remove(Form1.WebImageLines(Form1.WebImageLine))
-
-
-		If Form1.WebImageLine = Form1.WebImageLines.Count Then Form1.WebImageLine = 0
-		'
-		'Else
-		'WebImageLine += 1
-		'End If
-
-		Try
-			WebPictureBox.Image.Dispose()
-		Catch
-		End Try
-
-		WebPictureBox.Image = Nothing
-		GC.Collect()
-
-		WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
-
-		Debug.Print(Form1.WebImageLines(Form1.WebImageLine))
-
-		My.Computer.FileSystem.DeleteFile(Form1.WebImagePath)
-
-		If File.Exists(Form1.WebImagePath) Then
-			Debug.Print("File Exists")
-		Else
-			Debug.Print("Nope")
-		End If
-
-		My.Computer.FileSystem.WriteAllText(Form1.WebImagePath, String.Join(Environment.NewLine, Form1.WebImageLines), False)
-
-	End Sub
-
-	Private Sub BTNWILiked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWILiked.Click
-
-
-		If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & Form1.WebImageLines(Form1.WebImageLine), True)
-		Else
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Form1.WebImageLines(Form1.WebImageLine), True)
-		End If
-
-
-	End Sub
-
-	Private Sub BTNWIDisliked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIDisliked.Click
-
-		If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & Form1.WebImageLines(Form1.WebImageLine), True)
-		Else
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Form1.WebImageLines(Form1.WebImageLine), True)
-		End If
-
-	End Sub
-
-	Private Sub TBGreeting_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBGreeting.LostFocus
-		My.Settings.SubGreeting = TBGreeting.Text
-	End Sub
-
-	Private Sub TBYes_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBYes.LostFocus
-		My.Settings.SubYes = TBYes.Text
-	End Sub
-
-	Private Sub TBNo_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBNo.LostFocus
-		My.Settings.SubNo = TBNo.Text
-	End Sub
-
-	Private Sub TBHonorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBHonorific.LostFocus
-		If TBHonorific.Text = "" Or TBHonorific.Text Is Nothing Then TBHonorific.Text = "Mistress"
-		My.Settings.SubHonorific = TBHonorific.Text
-	End Sub
-
-	Private Sub CBHonorificInclude_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBHonorificInclude.LostFocus
-		If CBHonorificInclude.Checked = True Then
-			My.Settings.CBUseHonor = True
-		Else
-			My.Settings.CBUseHonor = False
-		End If
-	End Sub
-
-	Private Sub CBHonorificCapitalized_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBHonorificCapitalized.LostFocus
-		If CBHonorificCapitalized.Checked = True Then
-			My.Settings.CBCapHonor = True
-		Else
-			My.Settings.CBCapHonor = False
-		End If
-	End Sub
-
-	Private Sub subAgeNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles subAgeNumBox.LostFocus
-		My.Settings.SubAge = subAgeNumBox.Value
-	End Sub
-
-	Private Sub NBDomBirthdayMonth_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomBirthdayMonth.LostFocus
-		My.Settings.DomBirthMonth = NBDomBirthdayMonth.Value
-	End Sub
-
-	Private Sub NBDomBirthdayDay_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomBirthdayDay.LostFocus
-		My.Settings.DomBirthDay = NBDomBirthdayDay.Value
-	End Sub
-
-
-	Private Sub NBBirthdayMonth_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBBirthdayMonth.LostFocus
-		My.Settings.SubBirthMonth = NBBirthdayMonth.Value
-	End Sub
-
-	Private Sub NBBirthdayDay_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBBirthdayDay.LostFocus
-		My.Settings.SubBirthDay = NBBirthdayDay.Value
-	End Sub
-
-	Private Sub TBSubHairColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBSubHairColor.LostFocus
-		My.Settings.SubHair = TBSubHairColor.Text
-	End Sub
-
-	Private Sub TBSubEyeColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBSubEyeColor.LostFocus
-		My.Settings.SubEyes = TBSubEyeColor.Text
-	End Sub
-
-	Private Sub Button37_Click_1(sender As System.Object, e As System.EventArgs) Handles Button37.Click
-		If TBKeywordPreview.Text = "" Then Return
-
-		LBLKeywordPreview.Text = Form1.PoundClean(TBKeywordPreview.Text)
-	End Sub
-
-	Private Sub NBBirthdayMonth_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBBirthdayMonth.MouseLeave
-
-		If NBBirthdayMonth.Value = 2 And NBBirthdayDay.Value > 28 Then
-			NBBirthdayDay.Value = 28
-		End If
-
-		If NBBirthdayMonth.Value = 4 Or NBBirthdayMonth.Value = 6 Or NBBirthdayMonth.Value = 9 Or NBBirthdayMonth.Value = 11 Then
-			If NBBirthdayDay.Value > 30 Then
-				NBBirthdayDay.Value = 30
-			End If
-			NBBirthdayDay.Maximum = 30
-		Else
-			NBBirthdayDay.Maximum = 31
-		End If
-
-		If NBBirthdayMonth.Value = 2 Then
-			NBBirthdayDay.Maximum = 28
-		End If
-
-	End Sub
-
-	Private Sub NBDomBirthdayMonth_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBDomBirthdayMonth.MouseLeave
-
-		If NBDomBirthdayMonth.Value = 2 And NBDomBirthdayDay.Value > 28 Then
-			NBDomBirthdayDay.Value = 28
-		End If
-
-		If NBDomBirthdayMonth.Value = 4 Or NBDomBirthdayMonth.Value = 6 Or NBDomBirthdayMonth.Value = 9 Or NBDomBirthdayMonth.Value = 11 Then
-			If NBDomBirthdayDay.Value > 30 Then
-				NBDomBirthdayDay.Value = 30
-			End If
-			NBDomBirthdayDay.Maximum = 30
-		Else
-			NBDomBirthdayDay.Maximum = 31
-		End If
-
-		If NBDomBirthdayMonth.Value = 2 Then
-			NBDomBirthdayDay.Maximum = 28
-		End If
-
-	End Sub
-
-
-
-	Private Sub timedRadio_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles timedRadio.CheckedChanged
-		If Form1.SlideshowLoaded = True And timedRadio.Checked = True Then
-			Form1.SlideshowTimerTick = slideshowNumBox.Value
-			Form1.SlideshowTimer.Start()
-		End If
-	End Sub
-
-	Private Sub teaseRadio_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles teaseRadio.CheckedChanged
-		If timedRadio.Checked = False And Form1.FormLoading = False Then
-			Form1.SlideshowTimer.Stop()
-		End If
-	End Sub
-
-	Private Sub offRadio_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles offRadio.CheckedChanged
-		If timedRadio.Checked = False Then
-			Form1.SlideshowTimer.Stop()
-		End If
-	End Sub
-
-	Private Sub FontComboBoxD_LostFocus(sender As System.Object, e As System.EventArgs) Handles FontComboBoxD.LostFocus
-		My.Settings.DomFont = FontComboBoxD.Text
-	End Sub
-
-	Private Sub FontComboBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles FontComboBox.LostFocus
-		My.Settings.SubFont = FontComboBox.Text
-	End Sub
-
-	Private Sub NBFontSizeD_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBFontSizeD.LostFocus
-		My.Settings.DomFontSize = NBFontSizeD.Value
-	End Sub
-
-	Private Sub NBFontSize_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBFontSize.LostFocus
-		My.Settings.SubFontSize = NBFontSize.Value
-	End Sub
-
-
-
-
-	Private Sub CBImageInfo_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBImageInfo.CheckedChanged
-		If CBImageInfo.Checked = True Then
-			Form1.LBLImageInfo.Visible = True
-			'Form1.ShowImageInfo()
-			My.Settings.CBImageInfo = True
-		Else
-			Form1.LBLImageInfo.Visible = False
-			'Form1.LBLImageInfo.Text = ""
-			My.Settings.CBImageInfo = False
-		End If
-	End Sub
-
-
-	Function InstrCount(StringToSearch As String,
-		   StringToFind As String) As Long
-
-		If Len(StringToFind) Then
-			InstrCount = UBound(Split(StringToSearch, StringToFind))
-		End If
-
-		Return InstrCount
-	End Function
-
-
-
-
-	Private Sub TBTagDir_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles TBTagDir.MouseClick
-		TBTagDir.SelectionStart = 0
-		TBTagDir.SelectionLength = Len(TBTagDir.Text)
-	End Sub
-
-	Private Sub TBWIDirectory_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles TBWIDirectory.MouseClick
-		TBWIDirectory.SelectionStart = 0
-		TBWIDirectory.SelectionLength = Len(TBWIDirectory.Text)
-	End Sub
-
-
-
-
-
-	Public Sub RefreshURLList()
-
-
-		For i As Integer = URLFileList.Items.Count - 1 To 0 Step -1
-			'Debug.Print(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.Items(i) & ".txt")
-			If Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.Items(i) & ".txt") Then
-				URLFileList.Items.Remove(URLFileList.Items(i))
-				Exit For
-			End If
-		Next
-
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Create)
-		Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
-		For i = 0 To URLFileList.Items.Count - 1
-			BinaryWriter.Write(CStr(URLFileList.Items(i)))
-			BinaryWriter.Write(CBool(URLFileList.GetItemChecked(i)))
-		Next
-		BinaryWriter.Close()
-		FileStream.Dispose()
-
-		If File.Exists(Application.StartupPath & "\Images\System\URLFileCheckList.cld") Then
-			URLFileList.Items.Clear()
-			Dim FileStream2 As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Open)
-			Dim BinaryReader As New System.IO.BinaryReader(FileStream2)
-			URLFileList.BeginUpdate()
-			Do While FileStream2.Position < FileStream2.Length
-				URLFileList.Items.Add(BinaryReader.ReadString)
-				URLFileList.SetItemChecked(URLFileList.Items.Count - 1, BinaryReader.ReadBoolean)
-			Loop
-			URLFileList.EndUpdate()
-			BinaryReader.Close()
-			FileStream2.Dispose()
-			If URLFileList.Items.Count > 0 Then
-				For i As Integer = 0 To URLFileList.Items.Count - 1 Step -1
-					If Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.Items(i) & ".txt") Then URLFileList.Items.Remove(URLFileList.Items(i))
-				Next
-			End If
-		Else
-			URLFileList.Items.Clear()
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\URL Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-				Dim TempUrl As String = foundFile
-				TempUrl = Path.GetFileName(TempUrl).Replace(".txt", "")
-				'TempUrl = TempUrl.Replace(".txt", "")
-				'Do Until Not TempUrl.Contains("\")
-				'TempUrl = TempUrl.Remove(0, 1)
-				'Loop
-				URLFileList.Items.Add(TempUrl)
-			Next
-			For i As Integer = 0 To URLFileList.Items.Count - 1
-				URLFileList.SetItemChecked(i, True)
-			Next
-			Dim FileStream3 As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Create)
-			Dim BinaryWriter3 As New System.IO.BinaryWriter(FileStream3)
-			For i = 0 To URLFileList.Items.Count - 1
-				BinaryWriter3.Write(CStr(URLFileList.Items(i)))
-				BinaryWriter3.Write(CBool(URLFileList.GetItemChecked(i)))
-			Next
-			BinaryWriter3.Close()
-			FileStream3.Dispose()
-		End If
-
-	End Sub
-
-	Private Sub SaveURLFileSelection()
-
-		If FrmSettingsLoading = True Then Return
-
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Create)
-		Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
-		For i = 0 To URLFileList.Items.Count - 1
-			BinaryWriter.Write(CStr(URLFileList.Items(i)))
-			BinaryWriter.Write(CBool(URLFileList.GetItemChecked(i)))
-		Next
-		BinaryWriter.Close()
-		FileStream.Dispose()
-
-	End Sub
-
-	Private Sub URLFileList_LostFocus(sender As Object, e As System.EventArgs) Handles URLFileList.LostFocus
-		SaveURLFileSelection()
-	End Sub
-
-
-	Private Sub URLFileList_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles URLFileList.SelectedIndexChanged
-
-		If CBURLPreview.Checked = True Then
-			Dim PreviewList As New List(Of String)
-			PreviewList = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.SelectedItem & ".txt")
-			PBURLPreview.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PreviewList(Form1.randomizer.Next(0, PreviewList.Count)))))
-		End If
-
-		SaveURLFileSelection()
-
-	End Sub
-
-	Private Sub BTNURLFilesAll_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLFilesAll.Click
-		For i As Integer = 0 To URLFileList.Items.Count - 1
-			URLFileList.SetItemChecked(i, True)
-		Next
-		SaveURLFileSelection()
-	End Sub
-
-	Private Sub BTNURLFilesNone_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLFilesNone.Click
-		For i As Integer = 0 To URLFileList.Items.Count - 1
-			URLFileList.SetItemChecked(i, False)
-		Next
-		SaveURLFileSelection()
-	End Sub
-
-#Region "--------------------------------------- Images --------------------------------------------------"
-
-	Friend Shared Function Image_FolderCheck(ByVal directoryDescription As String,
-											 ByVal directoryPath As String,
-											 ByVal defaultPath As String,
-											 ByRef subDirectories As Boolean) As String
-		Dim rtnPath As String
-
-		' Exit if default value.
-		If directoryPath = defaultPath Then subDirectories = False : Return defaultPath
-
-		' check it if the directory exists.
-		If Directory.Exists(directoryPath) Then rtnPath = directoryPath : GoTo checkFolder
-
-		' Tell User, the dir. wasn't found. Ask to search manually for the folder.
-		If MessageBox.Show(ActiveForm,
-						   "The directory """ & directoryPath & """ was not found." & vbCrLf & "Do you want to search for it?",
-						   directoryDescription & " image directory not found.",
-						   MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) <> DialogResult.Yes Then
-set_default:
-			Return defaultPath
-		Else
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'								Set new Folder
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-set_newFolder:
-			' Find the first available parent-directory. 
-			' This way the user hasn't to browse through his hole IO-System.
-			Dim __tmp_dir As String = directoryPath
-			Do Until Directory.Exists(__tmp_dir) Or __tmp_dir Is Nothing
-				__tmp_dir = Path.GetDirectoryName(__tmp_dir)
-			Loop
-
-			' Initialize new Dialog-Form
-			Dim FolSel As New FolderBrowserDialog With {.SelectedPath = __tmp_dir,
-															.Description = "Select " & directoryDescription & " image folder."}
-			' Display the Dialog -> Now the user has to set the new dir.
-			If FolSel.ShowDialog(ActiveForm) = DialogResult.OK Then
-				rtnPath = FolSel.SelectedPath
-			Else
-				GoTo set_default
-			End If
-			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			' Set new Folder - End
-			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-		End If ' END IF - Messagebox.
-
-		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-		'							   Check folder content
-		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-checkFolder:
-		Dim count_top As Integer = myDirectory.GetFilesImages(rtnPath, SearchOption.TopDirectoryOnly).Count
-		Dim count_all As Integer = myDirectory.GetFilesImages(rtnPath, SearchOption.AllDirectories).Count
-
-		If count_top = 0 And count_all = 0 Then
-			' ================================= No images in folder ===============================
-			If MessageBox.Show(ActiveForm,
-			   "The directory """ & directoryPath & """ doesn't contain images." & vbCrLf & "Do you want to set a new folder?",
-			   directoryDescription & " image folder empty",
-			   MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.Yes Then
-				GoTo set_newFolder
-			Else
-				GoTo set_default
-			End If
-		ElseIf count_top = 0 And count_all > count_top And subDirectories = False
-			' ======================== none in top, but in sub ->enable sub? ======================
-			If MessageBox.Show(ActiveForm,
-			   "The directory """ & directoryPath & """ doesn't contain images, but it's " &
-			   "subdirectories. Do you want to include subdirectories? If you click no the " &
-			   "default value will be set.",
-			   directoryDescription & " image folder empty",
-			   MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-				subDirectories = True
-				Return rtnPath
-			Else
-				GoTo set_default
-			End If
-		Else
-			'================================= everything fine ====================================
-			Return rtnPath
-		End If
-		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-		' Check folder content - End
-		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-	End Function
-
-#Region "------------------------------------- Hardcore Images -------------------------------------------"
-
-	Private Sub BTNIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNIHardcore.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.IHardcore = FolderBrowserDialog1.SelectedPath
-			ImagesHardcore_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesHardcore_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.IHardcoreSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("IHardcore").Property.DefaultValue
-
-		My.Settings.IHardcore =
-			Image_FolderCheck("Hardcore", My.Settings.IHardcore, def, subdir)
-
-		If My.Settings.IHardcore = def Then
-			My.Settings.CBIHardcore = False
-			My.Settings.IHardcoreSD = My.Settings.PropertyValues("IHardcoreSD").Property.DefaultValue
-		Else
-			My.Settings.CBIHardcore = True
-			My.Settings.IHardcoreSD = subdir
-		End If
-
-		Return My.Settings.CBIHardcore
-	End Function
-
-#End Region ' Hardcore
-
-#Region "------------------------------------- Softcore Images -------------------------------------------"
-
-	Private Sub BTNISoftcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNISoftcore.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.ISoftcore = FolderBrowserDialog1.SelectedPath
-			ImagesSoftcore_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesSoftcore_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.ISoftcoreSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("ISoftcore").Property.DefaultValue
-
-		My.Settings.ISoftcore =
-			Image_FolderCheck("Softcore", My.Settings.ISoftcore, def, subdir)
-
-		If My.Settings.ISoftcore = def Then
-			My.Settings.CBISoftcore = False
-			My.Settings.ISoftcoreSD = My.Settings.PropertyValues("ISoftcoreSD").Property.DefaultValue
-		Else
-			My.Settings.CBISoftcore = True
-			My.Settings.ISoftcoreSD = subdir
-		End If
-
-		Return My.Settings.CBISoftcore
-	End Function
-
-#End Region ' Softcore
-
-#Region "------------------------------------- Lesbian Images --------------------------------------------"
-
-	Private Sub BTNILesbian_Click(sender As System.Object, e As System.EventArgs) Handles BTNILesbian.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.ILesbian = FolderBrowserDialog1.SelectedPath
-			ImagesLesbian_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesLesbian_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.ILesbianSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("ILesbian").Property.DefaultValue
-
-		My.Settings.ILesbian =
-			Image_FolderCheck("Lesbian", My.Settings.ILesbian, def, subdir)
-
-		If My.Settings.ILesbian = def Then
-			My.Settings.CBILesbian = False
-			My.Settings.ILesbianSD = My.Settings.PropertyValues("ILesbianSD").Property.DefaultValue
-		Else
-			My.Settings.CBILesbian = True
-			My.Settings.ILesbianSD = subdir
-		End If
-
-		Return My.Settings.CBILesbian
-	End Function
-
-#End Region ' Lesbian
-
-#Region "------------------------------------- Blowjob Images --------------------------------------------"
-
-	Private Sub BTNIBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles BTNIBlowjob.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.IBlowjob = FolderBrowserDialog1.SelectedPath
-			ImagesBlowjob_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesBlowjob_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.IBlowjobSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("IBlowjob").Property.DefaultValue
-
-		My.Settings.IBlowjob =
-			Image_FolderCheck("Blowjob", My.Settings.IBlowjob, def, subdir)
-
-		If My.Settings.IBlowjob = def Then
-			My.Settings.CBIBlowjob = False
-			My.Settings.IBlowjobSD = My.Settings.PropertyValues("IBlowjobSD").Property.DefaultValue
-		Else
-			My.Settings.CBIBlowjob = True
-			My.Settings.IBlowjobSD = subdir
-		End If
-
-		Return My.Settings.CBIBlowjob
-	End Function
-
-#End Region ' Blowjob
-
-#Region "------------------------------------- Femdom Images ---------------------------------------------"
-
-	Private Sub BTNIFemdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNIFemdom.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.IFemdom = FolderBrowserDialog1.SelectedPath
-			ImagesFemdom_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesFemdom_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.IFemdomSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("IFemdom").Property.DefaultValue
-
-		My.Settings.IFemdom =
-			Image_FolderCheck("Femdom", My.Settings.IFemdom, def, subdir)
-
-		If My.Settings.IFemdom = def Then
-			My.Settings.CBIFemdom = False
-			My.Settings.IFemdomSD = My.Settings.PropertyValues("IFemdomSD").Property.DefaultValue
-		Else
-			My.Settings.CBIFemdom = True
-			My.Settings.IFemdomSD = subdir
-		End If
-
-		Return My.Settings.CBIFemdom
-	End Function
-
-#End Region ' Femdom
-
-#Region "------------------------------------- Lezdom Images ---------------------------------------------"
-
-	Private Sub BTNILezdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNILezdom.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.ILezdom = FolderBrowserDialog1.SelectedPath
-			ImagesLezdom_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesLezdom_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.ILezdomSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("ILezdom").Property.DefaultValue
-
-		My.Settings.ILezdom =
-			Image_FolderCheck("Lezdom", My.Settings.ILezdom, def, subdir)
-
-		If My.Settings.ILezdom = def Then
-			My.Settings.CBILezdom = False
-			My.Settings.ILezdomSD = My.Settings.PropertyValues("ILezdomSD").Property.DefaultValue
-		Else
-			My.Settings.CBILezdom = True
-			My.Settings.ILezdomSD = subdir
-		End If
-
-		Return My.Settings.CBILezdom
-	End Function
-
-#End Region ' Lezdon
-
-#Region "------------------------------------- Hentai Images ---------------------------------------------"
-
-	Private Sub BTNIHentai_Click(sender As System.Object, e As System.EventArgs) Handles BTNIHentai.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.IHentai = FolderBrowserDialog1.SelectedPath
-			ImagesHentai_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesHentai_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.IHentaiSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("IHentai").Property.DefaultValue
-
-		My.Settings.IHentai =
-			Image_FolderCheck("Hentai", My.Settings.IHentai, def, subdir)
-
-		If My.Settings.IHentai = def Then
-			My.Settings.CBIHentai = False
-			My.Settings.IHentaiSD = My.Settings.PropertyValues("IHentaiSD").Property.DefaultValue
-		Else
-			My.Settings.CBIHentai = True
-			My.Settings.IHentaiSD = subdir
-		End If
-
-		Return My.Settings.CBIHentai
-	End Function
-
-#End Region ' Hentai
-
-#Region "------------------------------------- Gay Images ------------------------------------------------"
-
-	Private Sub BTNIGay_Click(sender As System.Object, e As System.EventArgs) Handles BTNIGay.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.IGay = FolderBrowserDialog1.SelectedPath
-			ImagesGay_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesGay_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.IGaySD
-
-		Dim def As String =
-			My.Settings.PropertyValues("IGay").Property.DefaultValue
-
-		My.Settings.IGay =
-			Image_FolderCheck("Gay", My.Settings.IGay, def, subdir)
-
-		If My.Settings.IGay = def Then
-			My.Settings.CBIGay = False
-			My.Settings.IGaySD = My.Settings.PropertyValues("IGaySD").Property.DefaultValue
-		Else
-			My.Settings.CBIGay = True
-			My.Settings.IGaySD = subdir
-		End If
-
-		Return My.Settings.CBIGay
-	End Function
-
-#End Region ' Gay
-
-#Region "------------------------------------- Maledom Images ---------------------------------------------"
-
-	Private Sub BTNIMaledom_Click(sender As System.Object, e As System.EventArgs) Handles BTNIMaledom.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.IMaledom = FolderBrowserDialog1.SelectedPath
-			ImagesMaledom_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesMaledom_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.IMaledomSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("IMaledom").Property.DefaultValue
-
-		My.Settings.IMaledom =
-			Image_FolderCheck("Maledom", My.Settings.IMaledom, def, subdir)
-
-		If My.Settings.IMaledom = def Then
-			My.Settings.CBIMaledom = False
-			My.Settings.IMaledomSD = My.Settings.PropertyValues("IMaledomSD").Property.DefaultValue
-		Else
-			My.Settings.CBIMaledom = True
-			My.Settings.IMaledomSD = subdir
-		End If
-
-		Return My.Settings.CBIMaledom
-	End Function
-
-#End Region ' Maledom
-
-#Region "------------------------------------- General Images ---------------------------------------------"
-
-	Private Sub BTNIGeneral_Click(sender As System.Object, e As System.EventArgs) Handles BTNIGeneral.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.IGeneral = FolderBrowserDialog1.SelectedPath
-			ImagesGeneral_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesGeneral_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.IGeneralSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("IGeneral").Property.DefaultValue
-
-		My.Settings.IGeneral =
-			Image_FolderCheck("General", My.Settings.IGeneral, def, subdir)
-
-		If My.Settings.IGeneral = def Then
-			My.Settings.CBIGeneral = False
-			My.Settings.IGeneralSD = My.Settings.PropertyValues("IGeneralSD").Property.DefaultValue
-		Else
-			My.Settings.CBIGeneral = True
-			My.Settings.IGeneralSD = subdir
-		End If
-
-		Return My.Settings.CBIGeneral
-	End Function
-
-#End Region ' General
-
-#Region "------------------------------------- Captions Images ---------------------------------------------"
-
-	Private Sub BTNICaptions_Click(sender As System.Object, e As System.EventArgs) Handles BTNICaptions.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.ICaptions = FolderBrowserDialog1.SelectedPath
-			ImagesCaptions_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesCaptions_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.ICaptionsSD
-
-		Dim def As String =
-			My.Settings.PropertyValues("ICaptions").Property.DefaultValue
-
-		My.Settings.ICaptions =
-			Image_FolderCheck("Captions", My.Settings.ICaptions, def, subdir)
-
-		If My.Settings.ICaptions = def Then
-			My.Settings.CBICaptions = False
-			My.Settings.ICaptionsSD = My.Settings.PropertyValues("ICaptionsSD").Property.DefaultValue
-		Else
-			My.Settings.CBICaptions = True
-			My.Settings.ICaptionsSD = subdir
-		End If
-
-		Return My.Settings.CBICaptions
-	End Function
-
-#End Region ' Captions
-
-#Region "------------------------------------- Boobs Images ----------------------------------------------"
-
-	Private Sub BTNBoobPath_Click(sender As System.Object, e As System.EventArgs) Handles BTNBoobPath.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.LBLBoobPath = FolderBrowserDialog1.SelectedPath
-			ImagesBoobs_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesBoobs_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.CBBoobSubDir
-
-		Dim def As String =
-			My.Settings.PropertyValues("LBLBoobPath").Property.DefaultValue
-
-		My.Settings.LBLBoobPath =
-			Image_FolderCheck("Boobs", My.Settings.LBLBoobPath, def, subdir)
-
-		If My.Settings.LBLBoobPath = def Then
-			My.Settings.CBIBoobs = False
-			My.Settings.CBBoobSubDir = My.Settings.PropertyValues("CBBoobSubDir").Property.DefaultValue
-		Else
-			My.Settings.CBIBoobs = True
-			My.Settings.CBBoobSubDir = subdir
-		End If
-
-		Return My.Settings.CBIBoobs
-	End Function
-
-#End Region ' Boobs
-
-#Region "------------------------------------- Butts Images ----------------------------------------------"
-
-	Private Sub BTNButtPath_Click(sender As System.Object, e As System.EventArgs) Handles BTNButtPath.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.LBLButtPath = FolderBrowserDialog1.SelectedPath
-			ImagesButts_CheckFolder()
-		End If
-	End Sub
-
-	Friend Shared Function ImagesButts_CheckFolder() As Boolean
-		Dim subdir As Boolean = My.Settings.CBButtSubDir
-
-		Dim def As String =
-			My.Settings.PropertyValues("LBLButtPath").Property.DefaultValue
-
-		My.Settings.LBLButtPath =
-			Image_FolderCheck("Butts", My.Settings.LBLButtPath, def, subdir)
-
-		If My.Settings.LBLButtPath = def Then
-			My.Settings.CBIButts = False
-			My.Settings.CBButtSubDir = My.Settings.PropertyValues("CBButtSubDir").Property.DefaultValue
-		Else
-			My.Settings.CBIButts = True
-			My.Settings.CBButtSubDir = subdir
-		End If
-
-		Return My.Settings.CBIButts
-	End Function
-
-#End Region ' Butt
-
-	Private Sub BTNDomImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLDomImageDir.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.DomImageDir = LBLDomImageDir.Text
-		End If
-	End Sub
-
-	Private Sub LBLIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles TbxIHardcore.DoubleClick
-		TbxIHardcore.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLISoftcore_Click(sender As System.Object, e As System.EventArgs) Handles TbxISoftcore.DoubleClick
-		TbxISoftcore.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLILesbian_Click(sender As System.Object, e As System.EventArgs) Handles TbxILesbian.DoubleClick
-		TbxILesbian.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLIBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles TbxIBlowjob.DoubleClick
-		TbxIBlowjob.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLIFemdom_Click(sender As System.Object, e As System.EventArgs) Handles TbxIFemdom.DoubleClick
-		TbxIFemdom.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLILezdom_Click(sender As System.Object, e As System.EventArgs) Handles TbxILezdom.DoubleClick
-		TbxILezdom.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLIHentai_Click(sender As System.Object, e As System.EventArgs) Handles TbxIHentai.DoubleClick
-		TbxIHentai.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLIGay_Click(sender As System.Object, e As System.EventArgs) Handles TbxIGay.DoubleClick
-		TbxIGay.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLIMaledom_Click(sender As System.Object, e As System.EventArgs) Handles TbxIMaledom.DoubleClick
-		TbxIMaledom.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLICaptions_Click(sender As System.Object, e As System.EventArgs) Handles TbxICaptions.DoubleClick
-		TbxICaptions.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLIGeneral_Click(sender As System.Object, e As System.EventArgs) Handles TbxIGeneral.DoubleClick
-		TbxIGeneral.Text = "No path selected"
-	End Sub
-
-	Private Sub LBLIHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIHardcore.MouseHover
-		TTDir.SetToolTip(TbxIHardcore, TbxIHardcore.Text)
-	End Sub
-	Private Sub LBLISoftcore_MouseHover(sender As Object, e As System.EventArgs) Handles TbxISoftcore.MouseHover
-		TTDir.SetToolTip(TbxISoftcore, TbxISoftcore.Text)
-	End Sub
-	Private Sub LBLILesbian_MouseHover(sender As Object, e As System.EventArgs) Handles TbxILesbian.MouseHover
-		TTDir.SetToolTip(TbxILesbian, TbxILesbian.Text)
-	End Sub
-	Private Sub LBLIBlowjob_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIBlowjob.MouseHover
-		TTDir.SetToolTip(TbxIBlowjob, TbxIBlowjob.Text)
-	End Sub
-	Private Sub LBLIFemdom_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIFemdom.MouseHover
-		TTDir.SetToolTip(TbxIFemdom, TbxIFemdom.Text)
-	End Sub
-	Private Sub LBLILezdom_MouseHover(sender As Object, e As System.EventArgs) Handles TbxILezdom.MouseHover
-		TTDir.SetToolTip(TbxILezdom, TbxILezdom.Text)
-	End Sub
-	Private Sub LBLIHentai_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIHentai.MouseHover
-		TTDir.SetToolTip(TbxIHentai, TbxIHentai.Text)
-	End Sub
-	Private Sub LBLIGay_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIGay.MouseHover
-		TTDir.SetToolTip(TbxIGay, TbxIGay.Text)
-	End Sub
-	Private Sub LBLIMaledom_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIMaledom.MouseHover
-		TTDir.SetToolTip(TbxIMaledom, TbxIMaledom.Text)
-	End Sub
-	Private Sub LBLICaptions_MouseHover(sender As Object, e As System.EventArgs) Handles TbxICaptions.MouseHover
-		TTDir.SetToolTip(TbxICaptions, TbxICaptions.Text)
-	End Sub
-	Private Sub LBLIGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIGeneral.MouseHover
-		TTDir.SetToolTip(TbxIGeneral, TbxIGeneral.Text)
-	End Sub
-
-	Private Sub LBLBoobPath_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIBoobs.MouseHover
-		TTDir.SetToolTip(TbxIBoobs, TbxIBoobs.Text)
-	End Sub
-
-	Private Sub LBLButtPath_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIButts.MouseHover
-		TTDir.SetToolTip(TbxIButts, TbxIButts.Text)
-	End Sub
-
-#Region "----------------------------------- GenreImages-Url-Files --------------------------------------"
-
-	Private Sub BtnImageUrlSetFile_Click(sender As System.Object, e As System.EventArgs) Handles BtnImageUrlHardcore.Click,
-					BtnImageUrlSoftcore.Click, BtnImageUrlMaledom.Click, BtnImageUrlLezdom.Click, BtnImageUrlLesbian.Click,
-					BtnImageUrlHentai.Click, BtnImageUrlGeneral.Click, BtnImageUrlGay.Click, BtnImageUrlFemdom.Click,
-					BtnImageUrlCaptions.Click, BtnImageUrlButt.Click, BtnImageUrlBoobs.Click, BtnImageUrlBlowjob.Click
-		Try
-			' Read the Row of the current Button
-			Dim tmpTlpRow As Integer = TlpImageUrls.GetRow(sender)
-
-			' Check if the Button is in the TableLayoutPanel.
-			If tmpTlpRow = -1 Then Throw New Exception("Can't find control in TableLayoutPanel. " &
-													   "This is a major Design issue has to be fixed in code.")
-
-			' Get the Checkbox for the current button
-			Dim tmpCheckbox As CheckBox = TlpImageUrls.GetControlFromPosition(0, tmpTlpRow)
-
-			' Check if the Text-Property has an active Databinding.
-			If tmpCheckbox.DataBindings.Item("Checked") Is Nothing Then _
-				Throw New InvalidDataException("Databinding """" Checked """" was not found in Checkbox." &
-												"This is a major design issue and has to be fixed in code.")
-
-			' Get the TExtBox for the Current Button
-			Dim tmpTextbox As TextBox = TlpImageUrls.GetControlFromPosition(2, tmpTlpRow)
-
-			' Check if the Text-Property has an active Databinding.
-			If tmpTextbox.DataBindings.Item("Text") Is Nothing Then _
-				Throw New InvalidDataException("This function is only availabe with a Databound Textbox. " &
-												"This is a major design issue and has to be fixed in code.")
-
-			'Declare a new instance of An OpenFileDialog. Use the URL-FilePat as initial
-			Dim tmpFS As New OpenFileDialog With {
-				.Filter = "Textfiles|*.txt",
-				.Multiselect = False,
-				.CheckFileExists = True,
-				.Title = "Select an " & tmpCheckbox.Text & " URL-File",
-				.InitialDirectory = Form1.pathUrlFileDir}
-
-			' Check if the URL-FilePath exits -> Otherwise create it.
-			If Not Directory.Exists(tmpFS.InitialDirectory) Then _
-			Directory.CreateDirectory(tmpFS.InitialDirectory)
-
-			Dim tmpPath As String = tmpTextbox.Text
-			If tmpPath.ToLower.EndsWith(".txt") Then
-				If Path.IsPathRooted(tmpPath) AndAlso Directory.Exists(Path.GetDirectoryName(tmpPath)) Then
-					' Set an alternate Initial directory if filepath is absolute 
-					tmpFS.InitialDirectory = Path.GetDirectoryName(tmpPath)
-					tmpFS.FileName = Path.GetFileName(tmpPath)
-				Else
-					' Set the given Filename
-					tmpFS.FileName = tmpPath
-				End If
-			End If
-
-			If tmpFS.ShowDialog() = DialogResult.OK Then
-				If Path.GetDirectoryName(tmpFS.FileName).ToLower = Path.GetDirectoryName(Form1.pathUrlFileDir).ToLower Then
-					' If the file is located standarddirectory st only the filename
-					tmpTextbox.Text = tmpFS.SafeFileName
-				Else
-					' Otherwise set the absoulte filepath
-					tmpTextbox.Text = tmpFS.FileName
-				End If
-
-				' This will force the Settings to save.
-				tmpCheckbox.Checked = True
-			End If
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'						       All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			MsgBox(ex.Message & vbCrLf & "Please report this error at the Milovana Forum.",
-				   MsgBoxStyle.Critical, "Cant Set URl-File")
-			Log.WriteError(ex.Message, ex, "Error Set Url-File")
-		End Try
-	End Sub
-
-#End Region 'GenreImages-Url-Files
-
-#End Region ' Images
+#Region "-------------------------------------- Scripts -------------------------------------------------"
 
 	Private Sub SettingsTabs_TabIndexChanged(sender As Object, e As System.EventArgs) Handles SettingsTabs.SelectedIndexChanged
 
@@ -6678,6 +3347,3907 @@ checkFolder:
 
 	End Sub
 
+#End Region ' Scripts
+
+#Region "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Apps ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
+#Region "----------------------------------------- Glitter ----------------------------------------------"
+
+	Private Sub GlitterAV_Click_1(sender As System.Object, e As System.EventArgs) Handles GlitterAV.Click
+		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+			Try
+				GlitterAV.Image.Dispose()
+			Catch
+			End Try
+			GlitterAV.Image = Nothing
+			GC.Collect()
+			GlitterAV.Image = Image.FromFile(OpenFileDialog1.FileName)
+			My.Settings.GlitterAV = OpenFileDialog1.FileName
+		End If
+	End Sub
+	Private Sub GlitterAV1_Click(sender As System.Object, e As System.EventArgs) Handles GlitterAV1.Click
+		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+			Try
+				GlitterAV1.Image.Dispose()
+			Catch
+			End Try
+			GlitterAV1.Image = Nothing
+			GC.Collect()
+			GlitterAV1.Image = Image.FromFile(OpenFileDialog1.FileName)
+			My.Settings.GlitterAV1 = OpenFileDialog1.FileName
+		End If
+	End Sub
+	Private Sub GlitterAV2_Click(sender As System.Object, e As System.EventArgs) Handles GlitterAV2.Click
+		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+			Try
+				GlitterAV2.Image.Dispose()
+			Catch
+			End Try
+			GlitterAV2.Image = Nothing
+			GC.Collect()
+			GlitterAV2.Image = Image.FromFile(OpenFileDialog1.FileName)
+			My.Settings.GlitterAV2 = OpenFileDialog1.FileName
+		End If
+	End Sub
+	Private Sub GlitterAV3_Click(sender As System.Object, e As System.EventArgs) Handles GlitterAV3.Click
+		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+			Try
+				GlitterAV3.Image.Dispose()
+			Catch
+			End Try
+			GlitterAV3.Image = Nothing
+			GC.Collect()
+			GlitterAV3.Image = Image.FromFile(OpenFileDialog1.FileName)
+			My.Settings.GlitterAV3 = OpenFileDialog1.FileName
+		End If
+	End Sub
+
+
+	''' <summary>
+	''' Returns the number of possible Slideshows in the given directory
+	''' </summary>
+	''' <param name="directoryPath">The directory-path to search in.</param>
+	''' <returns>Returns the number of Subfolders containing images.</returns>
+	Friend Shared Function Count_SlideshowsInFolder(ByVal directoryPath As String) As Integer
+		Dim rtnInt As Integer = 0
+		Try
+
+			If Directory.Exists(directoryPath) = False Then Return 0
+
+			For Each str As String In Directory.GetDirectories(directoryPath)
+				If My.Settings.CBSlideshowSubDir Then
+					If myDirectory.GetFilesImages(str, SearchOption.AllDirectories).Count > 0 Then rtnInt += 1
+				Else
+					If myDirectory.GetFilesImages(str, SearchOption.TopDirectoryOnly).Count > 0 Then rtnInt += 1
+				End If
+			Next
+
+		Catch ex As Exception
+			Throw
+		End Try
+
+		Return rtnInt
+	End Function
+
+	Private Sub Button2_Click_1(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			LBLContact1ImageDir.Text = FolderBrowserDialog1.SelectedPath
+			My.Settings.Contact1ImageDir = LBLContact1ImageDir.Text
+			Form1.GetContact1Pics()
+		End If
+	End Sub
+
+	Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			LBLContact2ImageDir.Text = FolderBrowserDialog1.SelectedPath
+			My.Settings.Contact2ImageDir = LBLContact2ImageDir.Text
+			Form1.GetContact2Pics()
+		End If
+	End Sub
+
+	Private Sub Button10_Click_1(sender As System.Object, e As System.EventArgs) Handles Button10.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			LBLContact3ImageDir.Text = FolderBrowserDialog1.SelectedPath
+			My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
+			Form1.GetContact3Pics()
+		End If
+	End Sub
+
+
+	Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitterD.Click
+		If GetColor.ShowDialog() = DialogResult.OK Then
+			My.Settings.GlitterNCDommeColor = GetColor.Color
+			LBLGlitterNCDomme.ForeColor = GetColor.Color
+			My.Settings.GlitterNCDomme = Color2Html(GetColor.Color)
+		End If
+	End Sub
+	Private Sub Button27_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter1.Click
+		If GetColor.ShowDialog() = DialogResult.OK Then
+			My.Settings.GlitterNC1Color = GetColor.Color
+			LBLGlitterNC1.ForeColor = GetColor.Color
+			My.Settings.GlitterNC1 = Color2Html(GetColor.Color)
+		End If
+	End Sub
+	Private Sub Button4_Click_3(sender As System.Object, e As System.EventArgs) Handles BTNGlitter2.Click
+		If GetColor.ShowDialog() = DialogResult.OK Then
+			My.Settings.GlitterNC2Color = GetColor.Color
+			LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
+			My.Settings.GlitterNC2 = Color2Html(GetColor.Color)
+		End If
+	End Sub
+	Private Sub Button26_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter3.Click
+		If GetColor.ShowDialog() = DialogResult.OK Then
+			My.Settings.GlitterNC3Color = GetColor.Color
+			LBLGlitterNC3.ForeColor = GetColor.Color
+			My.Settings.GlitterNC3 = Color2Html(GetColor.Color)
+		End If
+	End Sub
+	Private Sub TBGlitterShortName_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.Leave
+		My.Settings.GlitterSN = TBGlitterShortName.Text
+	End Sub
+	Private Sub TBGlitter1_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter1.Leave
+		My.Settings.Glitter1 = TBGlitter1.Text
+	End Sub
+	Private Sub TBGlitter2_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter2.Leave
+		My.Settings.Glitter2 = TBGlitter2.Text
+	End Sub
+	Private Sub TBGlitter3_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter3.Leave
+		My.Settings.Glitter3 = TBGlitter3.Text
+	End Sub
+	Private Sub GlitterSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider.Scroll
+		My.Settings.GlitterDSlider = GlitterSlider.Value
+	End Sub
+	Private Sub GlitterSlider1_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider1.Scroll
+		My.Settings.Glitter1Slider = GlitterSlider1.Value
+	End Sub
+	Private Sub GlitterSlider2_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider2.Scroll
+		My.Settings.Glitter2Slider = GlitterSlider2.Value
+	End Sub
+	Private Sub GlitterSlider3_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider3.Scroll
+		My.Settings.Glitter3Slider = GlitterSlider3.Value
+	End Sub
+	Private Sub CBGlitter1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter1.CheckedChanged
+		If CBGlitter1.Checked = True Then
+			My.Settings.CBGlitter1 = True
+		Else
+			My.Settings.CBGlitter1 = False
+		End If
+	End Sub
+	Private Sub CBGlitter2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter2.CheckedChanged
+		If CBGlitter2.Checked = True Then
+			My.Settings.CBGlitter2 = True
+		Else
+			My.Settings.CBGlitter2 = False
+		End If
+	End Sub
+	Private Sub CBGlitter3_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter3.CheckedChanged
+		If CBGlitter3.Checked = True Then
+			My.Settings.CBGlitter3 = True
+		Else
+			My.Settings.CBGlitter3 = False
+		End If
+	End Sub
+	Private Sub CBTease_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTease.CheckedChanged
+		If CBTease.Checked = True Then
+			My.Settings.CBTease = True
+		Else
+			My.Settings.CBTease = False
+		End If
+	End Sub
+	Private Sub CBEgotist_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBEgotist.CheckedChanged
+		If CBEgotist.Checked = True Then
+			My.Settings.CBEgotist = True
+		Else
+			My.Settings.CBEgotist = False
+		End If
+	End Sub
+	Private Sub CBTrivia_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTrivia.CheckedChanged
+		If CBTrivia.Checked = True Then
+			My.Settings.CBTrivia = True
+		Else
+			My.Settings.CBTrivia = False
+		End If
+	End Sub
+	Private Sub CBDaily_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBDaily.CheckedChanged
+		If CBDaily.Checked = True Then
+			My.Settings.CBDaily = True
+		Else
+			My.Settings.CBDaily = False
+		End If
+	End Sub
+	Private Sub CBCustom1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCustom1.CheckedChanged
+		If CBCustom1.Checked = True Then
+			My.Settings.CBCustom1 = True
+		Else
+			My.Settings.CBCustom1 = False
+		End If
+	End Sub
+	Private Sub CBCustom2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCustom2.CheckedChanged
+		If CBCustom2.Checked = True Then
+			My.Settings.CBCustom2 = True
+		Else
+			My.Settings.CBCustom2 = False
+		End If
+	End Sub
+
+
+	' Private Sub CBGlitterFeed_MouseHover(sender As Object, e As System.EventArgs)
+	'    LblGlitterSettingsDescription.Text = "This check box turns Glitter functionality on and off. Glitter is a fictional app located in the sidebar on the left side of the window. It is meant to emulate a social media feed " _
+	'       & "where the domme posts various thoughts that her contacts might then comment on. When this box is checked, the domme's posts and responses will appear in the Glitter app according to the settings above. " _
+	'      & "If this box is unchecked, no new posts or responses will appear in the feed."
+	'End Sub
+	Private Sub BTNGlitterD_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitterD.MouseHover
+
+		TTDir.SetToolTip(BTNGlitterD, "This button allows you to change the color of the domme's name as it appears in the Glitter app." & Environment.NewLine &
+									  "A preview will appear in the text box below this button once a color has been selected.")
+
+	End Sub
+	Private Sub GlitterAV_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV.MouseHover
+		TTDir.SetToolTip(GlitterAV, "Click here to set the image the domme will use as her Glitter avatar.")
+	End Sub
+	Private Sub LBLGlitterNCDomme_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNCDomme.MouseHover
+		TTDir.SetToolTip(LBLGlitterNCDomme, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
+	End Sub
+	Private Sub LBLGlitterNC1_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC1.MouseHover
+		TTDir.SetToolTip(LBLGlitterNC1, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
+	End Sub
+	Private Sub LBLGlitterNC2_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC2.MouseHover
+		TTDir.SetToolTip(LBLGlitterNC2, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
+	End Sub
+	Private Sub LBLGlitterNC3_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC3.MouseHover
+		TTDir.SetToolTip(LBLGlitterNC3, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
+	End Sub
+	Private Sub TBGlitterShortName_TextChanged_1(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.MouseHover
+		TTDir.SetToolTip(TBGlitterShortName, "This is the name that the domme's contacts will refer to her as in the Glitter feed.")
+	End Sub
+	Private Sub CBTease_MouseHover(sender As Object, e As System.EventArgs) Handles CBTease.MouseHover
+		TTDir.SetToolTip(CBTease, "When this box is checked, the domme will make posts referencing your ongoing teasing and denial.")
+	End Sub
+	Private Sub CBEgotist_MouseHover(sender As Object, e As System.EventArgs) Handles CBEgotist.MouseHover
+		TTDir.SetToolTip(CBEgotist, "When this box is checked, the domme will make self-centered posts stating how amazing she is.")
+	End Sub
+	Private Sub CBTrivia_MouseHover(sender As Object, e As System.EventArgs) Handles CBTrivia.MouseHover
+		TTDir.SetToolTip(CBTrivia, "When this box is checked, the domme will make posts containing quotes or general trivia.")
+	End Sub
+	Private Sub CBDaily_MouseHover(sender As Object, e As System.EventArgs) Handles CBDaily.MouseHover
+		TTDir.SetToolTip(CBDaily, "When this box is checked, the domme will make mundane posts about her day.")
+	End Sub
+	Private Sub CBCustom1_MouseHover(sender As Object, e As System.EventArgs) Handles CBCustom1.MouseHover
+		TTDir.SetToolTip(CBCustom1, "When this box is checked, the domme will make posts taken from Custom 1" & Environment.NewLine &
+								  "folder in the Glitter scripts directory for her personality style.")
+	End Sub
+	Private Sub CBCustom2_MouseHover(sender As Object, e As System.EventArgs) Handles CBCustom2.MouseHover
+		TTDir.SetToolTip(CBCustom2, "When this box is checked, the domme will make posts taken from Custom 2" & Environment.NewLine &
+								  "folder in the Glitter scripts directory for her personality style.")
+	End Sub
+	Private Sub GlitterSlider_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider.MouseHover
+		TTDir.SetToolTip(GlitterSlider, "This slider determines how often the domme makes Glitter posts on her own." & Environment.NewLine &
+											 "The further to the right the slider is, the more often she posts.")
+	End Sub
+	Private Sub LBLGlitterSlider_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider.MouseHover
+		TTDir.SetToolTip(LBLGlitterSlider, "This slider determines how often the domme makes Glitter posts on her own." & Environment.NewLine &
+											 "The further to the right the slider is, the more often she posts.")
+	End Sub
+
+	Private Sub TBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter1.MouseHover
+		TTDir.SetToolTip(TBGlitter1, "This will be the name of this contact as it appears in the Glitter feed.")
+	End Sub
+	Private Sub TBGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter2.MouseHover
+		TTDir.SetToolTip(TBGlitter2, "This will be the name of this contact as it appears in the Glitter feed.")
+	End Sub
+	Private Sub TBGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter3.MouseHover
+		TTDir.SetToolTip(TBGlitter3, "This will be the name of this contact as it appears in the Glitter feed.")
+	End Sub
+	Private Sub GlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider1.MouseHover
+		TTDir.SetToolTip(GlitterSlider1, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
+										 "The further to the right the slider is, the more often she responds.")
+	End Sub
+	Private Sub GlitterSlider2_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider2.MouseHover
+		TTDir.SetToolTip(GlitterSlider2, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
+										 "The further to the right the slider is, the more often she responds.")
+	End Sub
+	Private Sub GlitterSlider3_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider3.MouseHover
+		TTDir.SetToolTip(GlitterSlider3, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
+										 "The further to the right the slider is, the more often she responds.")
+	End Sub
+	Private Sub LBLGlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider1.MouseHover
+		TTDir.SetToolTip(LBLGlitterSlider1, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
+										 "The further to the right the slider is, the more often she responds.")
+	End Sub
+	Private Sub LBLGlitterSlider2_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider2.MouseHover
+		TTDir.SetToolTip(LBLGlitterSlider2, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
+										 "The further to the right the slider is, the more often she responds.")
+	End Sub
+	Private Sub LBLGlitterSlider3_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider3.MouseHover
+		TTDir.SetToolTip(LBLGlitterSlider3, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
+										 "The further to the right the slider is, the more often she responds.")
+	End Sub
+	Private Sub GlitterAV1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV1.MouseHover
+		TTDir.SetToolTip(GlitterAV1, "Click here to set the image that this contact will use as her Glitter avatar.")
+	End Sub
+	Private Sub GlitterAV2_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV2.MouseHover
+		TTDir.SetToolTip(GlitterAV2, "Click here to set the image that this contact will use as her Glitter avatar.")
+	End Sub
+	Private Sub GlitterAV3_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV3.MouseHover
+		TTDir.SetToolTip(GlitterAV3, "Click here to set the image that this contact will use as her Glitter avatar.")
+	End Sub
+	Private Sub CBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter1.MouseHover
+		TTDir.SetToolTip(CBGlitter1, "This check box enables this contact's participation in the Glitter feed.")
+	End Sub
+	Private Sub CBGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter2.MouseHover
+		TTDir.SetToolTip(CBGlitter2, "This check box enables this contact's participation in the Glitter feed.")
+	End Sub
+	Private Sub CBGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter3.MouseHover
+		TTDir.SetToolTip(CBGlitter3, "This check box enables this contact's participation in the Glitter feed.")
+	End Sub
+	Private Sub BTNGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter1.MouseHover
+		TTDir.SetToolTip(BTNGlitter1, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
+	End Sub
+	Private Sub BTNGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter2.MouseHover
+		TTDir.SetToolTip(BTNGlitter2, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
+	End Sub
+	Private Sub BTNGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter3.MouseHover
+		TTDir.SetToolTip(BTNGlitter3, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
+	End Sub
+
+	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact1ImageDir.MouseHover
+		If LBLContact1ImageDir.Text <> Nothing = True And LBLContact1ImageDir.Text <> "No path selected" Then
+			TTDir.SetToolTip(LBLContact1ImageDir, LBLContact1ImageDir.Text)
+		Else
+			TTDir.SetToolTip(LBLContact1ImageDir, "No path selected")
+		End If
+	End Sub
+
+	Private Sub LBLContact2ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact2ImageDir.MouseHover
+		If LBLContact2ImageDir.Text <> Nothing = True And LBLContact2ImageDir.Text <> "No path selected" Then
+			TTDir.SetToolTip(LBLContact2ImageDir, LBLContact2ImageDir.Text)
+		Else
+			TTDir.SetToolTip(LBLContact2ImageDir, "No path selected")
+		End If
+	End Sub
+
+	Private Sub LBLContact3ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact3ImageDir.MouseHover
+		If LBLContact3ImageDir.Text <> Nothing = True And LBLContact3ImageDir.Text <> "No path selected" Then
+			TTDir.SetToolTip(LBLContact3ImageDir, LBLContact3ImageDir.Text)
+		Else
+			TTDir.SetToolTip(LBLContact3ImageDir, "No path selected")
+		End If
+	End Sub
+
+	Private Sub LBLDomImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLDomImageDir.MouseEnter
+		If LBLDomImageDir.Text <> Nothing = True And LBLDomImageDir.Text <> "No path selected" Then
+			TTDir.SetToolTip(LBLDomImageDir, LBLDomImageDir.Text)
+		Else
+			TTDir.SetToolTip(LBLDomImageDir, "No path selected")
+		End If
+	End Sub
+
+	Private Sub Button14_Click_1(sender As System.Object, e As System.EventArgs) Handles Button14.Click
+		LBLContact1ImageDir.Text = "No path selected"
+		My.Settings.Contact1ImageDir = "No path selected"
+		Form1.Contact1Pics.Clear()
+	End Sub
+
+	Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
+		LBLContact2ImageDir.Text = "No path selected"
+		My.Settings.Contact2ImageDir = "No path selected"
+		Form1.Contact2Pics.Clear()
+	End Sub
+
+	Private Sub Button12_Click_1(sender As System.Object, e As System.EventArgs) Handles Button12.Click
+		LBLContact3ImageDir.Text = "No path selected"
+		My.Settings.Contact3ImageDir = "No path selected"
+		Form1.Contact3Pics.Clear()
+	End Sub
+
+	Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click
+
+		SaveSettingsDialog.Title = "Select a location to save current Glitter settings"
+		SaveSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
+
+
+		SaveSettingsDialog.FileName = Form1.dompersonalitycombobox.Text & " Glitter Settings"
+
+		If SaveSettingsDialog.ShowDialog() = DialogResult.OK Then
+			Dim SettingsPath As String = SaveSettingsDialog.FileName
+			Dim SettingsList As New List(Of String)
+			SettingsList.Clear()
+
+
+			If My.Settings.CBGlitterFeed = True Then SettingsList.Add("Glitter Feed: On")
+			If My.Settings.CBGlitterFeedScripts = True Then SettingsList.Add("Glitter Feed: Scripts")
+			If CBGlitterFeedOff.Checked = True Then SettingsList.Add("Glitter Feed: Off")
+
+			SettingsList.Add("Short Name: " & TBGlitterShortName.Text)
+			SettingsList.Add("Domme Color: " & LBLGlitterNCDomme.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Tease: " & CBTease.Checked)
+			SettingsList.Add("Egotist: " & CBEgotist.Checked)
+			SettingsList.Add("Trivia: " & CBTrivia.Checked)
+			SettingsList.Add("Daily: " & CBDaily.Checked)
+			SettingsList.Add("Custom 1: " & CBCustom1.Checked)
+			SettingsList.Add("Custom 2: " & CBCustom2.Checked)
+			SettingsList.Add("Domme Post Frequency: " & My.Settings.GlitterDSlider)
+
+			SettingsList.Add("Contact 1 Enabled: " & CBGlitter1.Checked)
+			SettingsList.Add("Contact 1 Name: " & TBGlitter1.Text)
+			SettingsList.Add("Contact 1 Color: " & LBLGlitterNC1.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Contact 1 Image Directory: " & LBLContact1ImageDir.Text)
+			SettingsList.Add("Contact 1 Post Frequency: " & My.Settings.Glitter1Slider)
+
+			SettingsList.Add("Contact 2 Enabled: " & CBGlitter2.Checked)
+			SettingsList.Add("Contact 2 Name: " & TBGlitter2.Text)
+			SettingsList.Add("Contact 2 Color: " & LBLGlitterNC2.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Contact 2 Image Directory: " & LBLContact2ImageDir.Text)
+			SettingsList.Add("Contact 2 Post Frequency: " & My.Settings.Glitter2Slider)
+
+			SettingsList.Add("Contact 3 Enabled: " & CBGlitter3.Checked)
+			SettingsList.Add("Contact 3 Name: " & TBGlitter3.Text)
+			SettingsList.Add("Contact 3 Color: " & LBLGlitterNC3.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Contact 3 Image Directory: " & LBLContact3ImageDir.Text)
+			SettingsList.Add("Contact 3 Post Frequency: " & My.Settings.Glitter3Slider)
+
+			SettingsList.Add("Domme AV: " & My.Settings.GlitterAV)
+			SettingsList.Add("Contact 1 AV: " & My.Settings.GlitterAV1)
+			SettingsList.Add("Contact 2 AV: " & My.Settings.GlitterAV2)
+			SettingsList.Add("Contact 3 AV: " & My.Settings.GlitterAV3)
+
+
+
+			Dim SettingsString As String = ""
+
+			For i As Integer = 0 To SettingsList.Count - 1
+				SettingsString = SettingsString & SettingsList(i)
+				If i <> SettingsList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+			Next
+
+			My.Computer.FileSystem.WriteAllText(SettingsPath, SettingsString, False)
+		End If
+
+
+	End Sub
+
+	Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
+
+		OpenSettingsDialog.Title = "Select a Glitter settings file"
+		OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
+
+		If OpenSettingsDialog.ShowDialog() = DialogResult.OK Then
+
+			Dim SettingsList As New List(Of String)
+
+			Try
+				Dim SettingsReader As New StreamReader(OpenSettingsDialog.FileName)
+				While SettingsReader.Peek <> -1
+					SettingsList.Add(SettingsReader.ReadLine())
+				End While
+				SettingsReader.Close()
+				SettingsReader.Dispose()
+			Catch ex As Exception
+				MessageBox.Show(Me, "This file could not be opened!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Return
+			End Try
+
+			Try
+
+				Dim CheckState As String = SettingsList(0).Replace("Glitter Feed: ", "")
+				If CheckState = "On" Then My.Settings.CBGlitterFeed = True
+				If CheckState = "Scripts" Then My.Settings.CBGlitterFeedScripts = True
+				If CheckState = "Off" Then CBGlitterFeedOff.Checked = True
+
+				TBGlitterShortName.Text = SettingsList(1).Replace("Short Name: ", "")
+
+				Dim GlitterColor As Color = Color.FromArgb(SettingsList(2).Replace("Domme Color: ", ""))
+				LBLGlitterNCDomme.ForeColor = GlitterColor
+
+				CBTease.Checked = SettingsList(3).Replace("Tease: ", "")
+				CBEgotist.Checked = SettingsList(4).Replace("Egotist: ", "")
+				CBTrivia.Checked = SettingsList(5).Replace("Trivia: ", "")
+				CBDaily.Checked = SettingsList(6).Replace("Daily: ", "")
+				CBCustom1.Checked = SettingsList(7).Replace("Custom 1: ", "")
+				CBCustom2.Checked = SettingsList(8).Replace("Custom 2: ", "")
+				GlitterSlider.Value = SettingsList(9).Replace("Domme Post Frequency: ", "")
+
+
+				CBGlitter1.Checked = SettingsList(10).Replace("Contact 1 Enabled: ", "")
+				TBGlitter1.Text = SettingsList(11).Replace("Contact 1 Name: ", "")
+				GlitterColor = Color.FromArgb(SettingsList(12).Replace("Contact 1 Color: ", ""))
+				LBLGlitterNC1.ForeColor = GlitterColor
+				LBLContact1ImageDir.Text = SettingsList(13).Replace("Contact 1 Image Directory: ", "")
+				GlitterSlider1.Value = SettingsList(14).Replace("Contact 1 Post Frequency: ", "")
+
+				CBGlitter2.Checked = SettingsList(15).Replace("Contact 2 Enabled: ", "")
+				TBGlitter2.Text = SettingsList(16).Replace("Contact 2 Name: ", "")
+				GlitterColor = Color.FromArgb(SettingsList(17).Replace("Contact 2 Color: ", ""))
+				LBLGlitterNC2.ForeColor = GlitterColor
+				LBLContact2ImageDir.Text = SettingsList(18).Replace("Contact 2 Image Directory: ", "")
+				GlitterSlider2.Value = SettingsList(19).Replace("Contact 2 Post Frequency: ", "")
+
+				CBGlitter3.Checked = SettingsList(20).Replace("Contact 3 Enabled: ", "")
+				TBGlitter3.Text = SettingsList(21).Replace("Contact 3 Name: ", "")
+				GlitterColor = Color.FromArgb(SettingsList(22).Replace("Contact 3 Color: ", ""))
+				LBLGlitterNC3.ForeColor = GlitterColor
+				LBLContact3ImageDir.Text = SettingsList(23).Replace("Contact 3 Image Directory: ", "")
+				GlitterSlider3.Value = SettingsList(24).Replace("Contact 3 Post Frequency: ", "")
+
+				Try
+					GlitterAV.Image = Image.FromFile(SettingsList(25).Replace("Domme AV: ", ""))
+					My.Settings.GlitterAV = SettingsList(25).Replace("Domme AV: ", "")
+				Catch
+				End Try
+
+				Try
+					GlitterAV1.Image = Image.FromFile(SettingsList(26).Replace("Contact 1 AV: ", ""))
+					My.Settings.GlitterAV1 = SettingsList(26).Replace("Contact 1 AV: ", "")
+				Catch
+				End Try
+
+				Try
+					GlitterAV2.Image = Image.FromFile(SettingsList(27).Replace("Contact 2 AV: ", ""))
+					My.Settings.GlitterAV2 = SettingsList(27).Replace("Contact 2 AV: ", "")
+				Catch
+				End Try
+
+				Try
+					GlitterAV3.Image = Image.FromFile(SettingsList(28).Replace("Contact 3 AV: ", ""))
+					My.Settings.GlitterAV3 = SettingsList(28).Replace("Contact 3 AV: ", "")
+				Catch
+				End Try
+
+
+				SaveGlitterSettings()
+
+			Catch
+				MessageBox.Show(Me, "This Glitter settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				LoadGlitterSettings()
+			End Try
+
+		End If
+	End Sub
+
+	Public Sub SaveGlitterSettings()
+
+		If CBGlitterFeed.Checked = True Then
+			My.Settings.CBGlitterFeed = True
+			My.Settings.CBGlitterFeedScripts = False
+			My.Settings.CBGlitterFeedOff = False
+		End If
+		If CBGlitterFeedScripts.Checked = True Then
+			My.Settings.CBGlitterFeed = False
+			My.Settings.CBGlitterFeedScripts = True
+			My.Settings.CBGlitterFeedOff = False
+		End If
+		If CBGlitterFeedOff.Checked = True Then
+			My.Settings.CBGlitterFeed = False
+			My.Settings.CBGlitterFeedScripts = False
+			My.Settings.CBGlitterFeedOff = True
+		End If
+
+		My.Settings.GlitterSN = TBGlitterShortName.Text
+
+		My.Settings.GlitterNCDommeColor = LBLGlitterNCDomme.ForeColor
+
+		My.Settings.CBTease = CBTease.Checked
+		My.Settings.CBEgotist = CBEgotist.Checked
+		My.Settings.CBTrivia = CBTrivia.Checked
+		My.Settings.CBDaily = CBDaily.Checked
+		My.Settings.CBCustom1 = CBCustom1.Checked
+		My.Settings.CBCustom2 = CBCustom2.Checked
+		My.Settings.GlitterDSlider = GlitterSlider.Value
+
+		My.Settings.CBGlitter1 = CBGlitter1.Checked
+		My.Settings.Glitter1 = TBGlitter1.Text
+		My.Settings.GlitterNC1Color = LBLGlitterNC1.ForeColor
+		My.Settings.Contact1ImageDir = LBLContact1ImageDir.Text
+		My.Settings.Glitter1Slider = GlitterSlider1.Value
+
+		My.Settings.CBGlitter2 = CBGlitter2.Checked
+		My.Settings.Glitter2 = TBGlitter2.Text
+		My.Settings.GlitterNC2Color = LBLGlitterNC2.ForeColor
+		My.Settings.Contact2ImageDir = LBLContact2ImageDir.Text
+		My.Settings.Glitter2Slider = GlitterSlider2.Value
+
+		My.Settings.CBGlitter3 = CBGlitter3.Checked
+		My.Settings.Glitter3 = TBGlitter3.Text
+		My.Settings.GlitterNC3Color = LBLGlitterNC3.ForeColor
+		My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
+		My.Settings.Glitter3Slider = GlitterSlider3.Value
+
+
+	End Sub
+
+	Public Sub LoadGlitterSettings()
+
+		If My.Settings.CBGlitterFeed = True Then CBGlitterFeed.Checked = True
+		If My.Settings.CBGlitterFeedScripts = True Then CBGlitterFeedScripts.Checked = True
+		If My.Settings.CBGlitterFeedOff = True Then CBGlitterFeedOff.Checked = True
+
+		TBGlitterShortName.Text = My.Settings.GlitterSN
+
+		LBLGlitterNCDomme.ForeColor = My.Settings.GlitterNCDommeColor
+
+		CBTease.Checked = My.Settings.CBTease
+		CBEgotist.Checked = My.Settings.CBEgotist
+		CBTrivia.Checked = My.Settings.CBTrivia
+		CBDaily.Checked = My.Settings.CBDaily
+		CBCustom1.Checked = My.Settings.CBCustom1
+		CBCustom2.Checked = My.Settings.CBCustom2
+		GlitterSlider.Value = My.Settings.GlitterDSlider
+
+		CBGlitter1.Checked = My.Settings.CBGlitter1
+		TBGlitter1.Text = My.Settings.Glitter1
+		LBLGlitterNC1.ForeColor = My.Settings.GlitterNC1Color
+		LBLContact1ImageDir.Text = My.Settings.Contact1ImageDir
+		GlitterSlider1.Value = My.Settings.Glitter1Slider
+
+		CBGlitter2.Checked = My.Settings.CBGlitter2
+		TBGlitter2.Text = My.Settings.Glitter2
+		LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
+		LBLContact2ImageDir.Text = My.Settings.Contact2ImageDir
+		GlitterSlider2.Value = My.Settings.Glitter2Slider
+
+		CBGlitter3.Checked = My.Settings.CBGlitter3
+		TBGlitter3.Text = My.Settings.Glitter3
+		LBLGlitterNC3.ForeColor = My.Settings.GlitterNC3Color
+		LBLContact3ImageDir.Text = My.Settings.Contact3ImageDir
+		GlitterSlider3.Value = My.Settings.Glitter3Slider
+
+	End Sub
+
+#End Region ' Glitter
+
+#Region "----------------------------------------- Games ------------------------------------------------"
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Checks if all the conditions for card games are met.
+	''' </summary>
+	''' <returns>Returns true if all conditions are met.</returns>
+	Friend Function CardGameCheck() As Boolean
+		Dim rtnVal As Boolean = True
+
+		For Each tmpPicBox As PictureBox In New List(Of PictureBox) From
+		{BP1, BP2, BP3, BP4, BP5, BP6, SP1, SP2, SP3, SP4, SP5, SP6,
+		GP1, GP2, GP3, GP4, GP5, GP6, CardBack}
+
+			' Check if the Databinding is properly set.
+			If tmpPicBox.DataBindings.Item("ImageLocation") Is Nothing Then
+				Throw New Exception("There is no databinding set on """ & tmpPicBox.Name &
+									"""'s image location. Set the databinding and recompile!")
+			End If
+
+			tmpPicBox.AllowDrop = True
+
+			If tmpPicBox.ImageLocation = My.Settings.GetDefault(tmpPicBox, "ImageLocation") Then
+				rtnVal = False
+			ElseIf File.Exists(tmpPicBox.ImageLocation) Then
+				tmpPicBox.Image = Image.FromFile(tmpPicBox.ImageLocation)
+			Else
+				rtnVal = False
+				My.Settings.ResetField(tmpPicBox, "ImageLocation")
+			End If
+		Next
+
+		'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Card names <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		For Each tmpTbx As TextBox In New List(Of TextBox) From
+				{BN1, BN2, BN3, BN4, BN5, BN6,
+				SN1, SN2, SN3, SN4, SN5, SN6,
+				GN1, GN2, GN3, GN4, GN5, GN6}
+
+			If tmpTbx.DataBindings.Item("Text") Is Nothing Then
+				Throw New Exception("There is no databinding set on """ & tmpTbx.Name &
+									"""'s text property. Set the databinding and recompile!")
+			End If
+
+			If tmpTbx.Text.Length < 1 Then My.Settings.ResetField(tmpTbx, "Text")
+		Next
+		Return rtnVal
+	End Function
+
+	''' =========================================================================================================
+	''' <summary>
+	''' Sets a Cardimage for the given picturebox.
+	''' </summary>
+	''' <param name="sender">The PictureBox to set the Image.</param>
+	''' <param name="filepath">The image filepath to set.</param>
+	''' <remarks>The PictureBox must have a databinding between the 
+	''' ImageLoaction-Property and My.Settings.</remarks>
+	Private Sub CardImageSet(sender As PictureBox, filepath As String)
+		Try
+			Dim target As PictureBox = CType(sender, PictureBox)
+			Dim savePath As String = String.Format("{0}\Images\Cards\Card{1}.bmp",
+												   Application.StartupPath,
+												   target.Name)
+
+			savePath = savePath.Replace("CardCard", "Card")
+
+			' Close Games form and end file access.
+			If FrmCardList.Visible Then FrmCardList.Dispose()
+			FrmCardList.ClearAllCards()
+
+			' Release all ressources.
+			If target.Image IsNot Nothing Then target.Image.Dispose()
+			target.Image = Nothing
+			target.ImageLocation = ""
+
+			GC.Collect()
+			Application.DoEvents()
+
+			' Check if the file is locked. Sometimes the GC needs some time
+			' to finally release the file lock after the image was disposed.
+			Dim retrycounter As Integer = 5
+			Do While IsFileLocked(savePath) AndAlso retrycounter > 0
+				retrycounter -= 1
+				GC.Collect()
+				Application.DoEvents()
+			Loop
+
+			If retrycounter <= 0 Then Throw New IO.IOException(
+				String.Format("The file """"{0}"" is already in use."), savePath)
+
+			' Check if the Databinding is properly set.
+			If target.DataBindings.Item("ImageLocation") Is Nothing Then
+				Throw New Exception("There is no databinding set on """ & target.Name &
+									"""'s image location. Set the databinding and recompile!")
+			End If
+
+			' Set the resized image as picturebox image and write it to disk
+			target.Image = ResizeImage(filepath, New Size(138, 179))
+			target.Image.Save(savePath)
+
+			' Set the image Location-Property. Property has to be databound with My.Settings!
+			target.ImageLocation = savePath
+
+			' Writing to databound Imagelocation doesn't update My.Settings!
+			' Now we write the value directly using the binding to get the My.Settings.Member to write to.
+			My.Settings(target.DataBindings.Item("ImageLocation").BindingMemberInfo.BindingField) = savePath
+
+
+			Form1.GamesToolStripMenuItem1.Enabled = CardGameCheck()
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			MsgBox(ex.Message, MsgBoxStyle.Critical, "Unable to set Card Image")
+		End Try
+	End Sub
+
+	Private Sub CardPictureboxes_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles _
+										BP1.DragEnter, BP2.DragEnter, BP3.DragEnter, BP4.DragEnter, BP5.DragEnter, BP6.DragEnter,
+										SP1.DragEnter, SP2.DragEnter, SP3.DragEnter, SP4.DragEnter, SP5.DragEnter, SP6.DragEnter,
+										GP1.DragEnter, GP2.DragEnter, GP3.DragEnter, GP4.DragEnter, GP5.DragEnter, GP6.DragEnter,
+										CardBack.DragEnter
+		If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
+			e.Effect = DragDropEffects.Copy
+		End If
+	End Sub
+
+	Private Sub CardPictureboxes_DragDrop(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles _
+										BP1.DragDrop, BP2.DragDrop, BP3.DragDrop, BP4.DragDrop, BP5.DragDrop, BP6.DragDrop,
+										SP1.DragDrop, SP2.DragDrop, SP3.DragDrop, SP4.DragDrop, SP5.DragDrop, SP6.DragDrop,
+										GP1.DragDrop, GP2.DragDrop, GP3.DragDrop, GP4.DragDrop, GP5.DragDrop, GP6.DragDrop,
+										CardBack.DragDrop
+		CardImageSet(CType(sender, PictureBox), CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0))
+	End Sub
+
+	Private Sub CardPictureboxes_Click(sender As System.Object, e As System.EventArgs) Handles _
+										BP1.Click, BP2.Click, BP3.Click, BP4.Click, BP5.Click, BP6.Click,
+										SP1.Click, SP2.Click, SP3.Click, SP4.Click, SP5.Click, SP6.Click,
+										GP1.Click, GP2.Click, GP3.Click, GP4.Click, GP5.Click, GP6.Click,
+										CardBack.Click
+		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+			CardImageSet(CType(sender, PictureBox), OpenFileDialog1.FileName)
+		End If
+	End Sub
+
+	''' <summary>
+	''' Resets the databinding source of a TextBox to its initial value, if there is no Text entered.
+	''' </summary>
+	Private Sub CardTextboxes_Validating(sender As Object, e As CancelEventArgs) Handles _
+										BN1.Validating, BN2.Validating, BN3.Validating, BN4.Validating, BN5.Validating, BN6.Validating,
+										SN1.Validating, SN2.Validating, SN3.Validating, SN4.Validating, SN5.Validating, SN6.Validating,
+										GN1.Validating, GN2.Validating, GN3.Validating, GN4.Validating, GN5.Validating, GN6.Validating
+		Dim tmpTbx As TextBox = CType(sender, TextBox)
+
+		If tmpTbx.Text = "" AndAlso tmpTbx.DataBindings("Text") IsNot Nothing Then
+			My.Settings.ResetField(tmpTbx, "Text")
+			e.Cancel = False
+		End If
+	End Sub
+
+#End Region ' Games
+
+#End Region ' Apps
+
+#Region "-------------------------------------- URL Files -----------------------------------------------"
+
+	Private Sub Button57_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIBrowse.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			TBWIDirectory.Text = FolderBrowserDialog1.SelectedPath
+		End If
+	End Sub
+
+	Private Sub CBWISaveToDisk_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBWISaveToDisk.CheckedChanged
+
+		If CBWISaveToDisk.Checked = True Then
+			If Not Directory.Exists(TBWIDirectory.Text) Then
+				MessageBox.Show(Me, "Please enter or browse for a valid Saved Image Directory first!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				CBWISaveToDisk.Checked = False
+			End If
+		End If
+
+
+	End Sub
+
+	Private Sub BTNWIAddandContinue_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIAddandContinue.Click
+		Form1.ApproveImage = 1
+	End Sub
+
+	Private Sub BTNWIContinue_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIContinue.Click
+		Form1.ApproveImage = 2
+	End Sub
+
+	Private Sub BTNCancel_Click(sender As System.Object, e As System.EventArgs) Handles BTNWICancel.Click
+		If BWURLFiles.IsBusy Then BWURLFiles.CancelAsync()
+	End Sub
+
+	Private Sub BTNWIRemove_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIRemove.Click
+
+
+		Form1.WebImageLines.Remove(Form1.WebImageLines(Form1.WebImageLine))
+
+
+		If Form1.WebImageLine = Form1.WebImageLines.Count Then Form1.WebImageLine = 0
+		'
+		'Else
+		'WebImageLine += 1
+		'End If
+
+		Try
+			WebPictureBox.Image.Dispose()
+		Catch
+		End Try
+
+		WebPictureBox.Image = Nothing
+		GC.Collect()
+
+		WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+
+		Debug.Print(Form1.WebImageLines(Form1.WebImageLine))
+
+		My.Computer.FileSystem.DeleteFile(Form1.WebImagePath)
+
+		If File.Exists(Form1.WebImagePath) Then
+			Debug.Print("File Exists")
+		Else
+			Debug.Print("Nope")
+		End If
+
+		My.Computer.FileSystem.WriteAllText(Form1.WebImagePath, String.Join(Environment.NewLine, Form1.WebImageLines), False)
+
+	End Sub
+
+	Private Sub BTNWILiked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWILiked.Click
+
+
+		If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & Form1.WebImageLines(Form1.WebImageLine), True)
+		Else
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Form1.WebImageLines(Form1.WebImageLine), True)
+		End If
+
+
+	End Sub
+
+	Private Sub BTNWIDisliked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIDisliked.Click
+
+		If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & Form1.WebImageLines(Form1.WebImageLine), True)
+		Else
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Form1.WebImageLines(Form1.WebImageLine), True)
+		End If
+
+	End Sub
+
+	Private Sub WebPictureBox_MouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles WebPictureBox.MouseWheel
+
+		Select Case e.Delta
+			Case -120 'Scrolling down
+				Form1.WebImageLine += 1
+
+				If Form1.WebImageLine > Form1.WebImageLineTotal - 1 Then
+					Form1.WebImageLine = Form1.WebImageLineTotal
+					MsgBox("No more images to display!", , "Warning!")
+					Return
+				End If
+
+				Try
+					WebPictureBox.Image.Dispose()
+				Catch
+				End Try
+				WebPictureBox.Image = Nothing
+				GC.Collect()
+
+				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+				LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+			Case 120 'Scrolling up
+				Form1.WebImageLine -= 1
+
+				If Form1.WebImageLine < 0 Then
+					Form1.WebImageLine = 0
+					MsgBox("No more images to display!", , "Warning!")
+					Return
+				End If
+
+				Try
+					WebPictureBox.Image.Dispose()
+				Catch
+				End Try
+				WebPictureBox.Image = Nothing
+				GC.Collect()
+				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+				LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+		End Select
+
+
+	End Sub
+
+	Private Sub PictureBox1_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles WebPictureBox.MouseEnter
+		WebPictureBox.Focus()
+	End Sub
+
+
+	Private Sub Button36_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIOpenURL.Click
+
+		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
+
+		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
+
+			Form1.WebImageFile = New IO.StreamReader(WebImageFileDialog.FileName)
+			Form1.WebImagePath = WebImageFileDialog.FileName
+
+			Form1.WebImageLines.Clear()
+
+			Form1.WebImageLine = 0
+			Form1.WebImageLineTotal = 0
+
+			While Form1.WebImageFile.Peek <> -1
+				Form1.WebImageLineTotal += 1
+				Form1.WebImageLines.Add(Form1.WebImageFile.ReadLine())
+			End While
+
+			Try
+				WebPictureBox.Image.Dispose()
+			Catch
+			End Try
+			WebPictureBox.Image = Nothing
+			GC.Collect()
+
+			Try
+				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(0))))
+			Catch
+				MessageBox.Show(Me, "Failed to load URL File image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+			End Try
+
+			Form1.WebImageFile.Close()
+			Form1.WebImageFile.Dispose()
+
+			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+
+
+			BTNWINext.Enabled = True
+			BTNWIPrevious.Enabled = True
+			BTNWIRemove.Enabled = True
+			BTNWILiked.Enabled = True
+			BTNWIDisliked.Enabled = True
+			BTNWISave.Enabled = True
+
+
+		End If
+
+
+
+
+	End Sub
+
+
+	Private Sub Button35_Click_2(sender As System.Object, e As System.EventArgs) Handles BTNWINext.Click
+
+TryNextImage:
+
+		Form1.WebImageLine += 1
+
+		If Form1.WebImageLine > Form1.WebImageLineTotal - 1 Then
+			Form1.WebImageLine = Form1.WebImageLineTotal
+			MsgBox("No more images to display!", , "Warning!")
+			Return
+		End If
+
+		Try
+			WebPictureBox.Image.Dispose()
+		Catch
+		End Try
+
+		WebPictureBox.Image = Nothing
+		GC.Collect()
+		Try
+			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+		Catch ex As Exception
+			GoTo TryNextImage
+		End Try
+
+
+
+	End Sub
+
+	Private Sub Button18_Click_2(sender As System.Object, e As System.EventArgs) Handles BTNWIPrevious.Click
+
+trypreviousimage:
+
+		Form1.WebImageLine -= 1
+
+		If Form1.WebImageLine < 0 Then
+			Form1.WebImageLine = 0
+			MsgBox("No more images to display!", , "Warning!")
+			Return
+		End If
+
+		Try
+			WebPictureBox.Image.Dispose()
+		Catch
+		End Try
+
+		WebPictureBox.Image = Nothing
+		GC.Collect()
+		Try
+			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+		Catch ex As Exception
+			GoTo trypreviousimage
+		End Try
+
+	End Sub
+
+	Private Sub Button37_Click(sender As System.Object, e As System.EventArgs) Handles BTNWISave.Click
+
+		If WebPictureBox.Image Is Nothing Then
+			MsgBox("Nothing to save!", , "Error!")
+			Return
+		End If
+
+
+		SaveFileDialog1.Filter = "jpegs|*.jpg|gifs|*.gif|pngs|*.png|Bitmaps|*.bmp"
+		SaveFileDialog1.FilterIndex = 1
+		SaveFileDialog1.RestoreDirectory = True
+
+
+		Try
+
+			Form1.WebImage = Form1.WebImageLines(Form1.WebImageLine)
+
+			Dim DirSplit As String() = Form1.WebImage.Split("/")
+			Form1.WebImage = DirSplit(DirSplit.Length - 1)
+
+			' ### Clean Code
+			'Do Until Not Form1.WebImage.Contains("/")
+			'Form1.WebImage = Form1.WebImage.Remove(0, 1)
+			'Loop
+
+			SaveFileDialog1.FileName = Form1.WebImage
+
+		Catch ex As Exception
+
+			SaveFileDialog1.FileName = "image.jpg"
+
+		End Try
+
+
+
+
+
+		If SaveFileDialog1.ShowDialog() = DialogResult.OK Then
+
+			WebPictureBox.Image.Save(SaveFileDialog1.FileName)
+
+		End If
+
+	End Sub
+
+	Private Sub Button38_Click(sender As System.Object, e As System.EventArgs) Handles BTNWICreateURL.Click,
+																					   BTNMaintenanceRefresh.Click,
+																					   BTNMaintenanceRebuild.Click
+        ' Group Buttons by inital-State.
+        Dim __PreEnabled As New List(Of Control) From
+			{BTNWIOpenURL, BTNWICreateURL, BTNMaintenanceRefresh,
+			BTNMaintenanceRebuild, BTNMaintenanceScripts}
+		Dim __PreDisabled As New List(Of Control) From
+			{BTNWICancel, BTNMaintenanceCancel}
+
+		Try
+            ' Set their new State, so the User can't disturb.
+            __PreEnabled.ForEach(Sub(x) x.Enabled = False)
+			__PreDisabled.ForEach(Sub(x) x.Enabled = True)
+
+			Select Case sender.name
+				Case BTNWICreateURL.Name
+                    '**************************************************************************************************************
+                    '                                                Create URL-File
+                    '**************************************************************************************************************
+                    Dim __BtnLocalURL As New List(Of Control) From {
+						BTNWINext, BTNWIPrevious, BTNWIRemove, BTNWILiked, BTNWIDisliked, BTNWISave}
+					Try
+                        ' Disable Buttons for Opening-URL-Files
+                        __BtnLocalURL.ForEach(Sub(x) x.Enabled = False)
+
+                        ' Run Backgroundworker
+                        Dim __tmpResult As URL_File_BGW.CreateUrlFileResult = BWURLFiles.CreateURLFileAsync()
+
+                        ' Activate the created URL-File
+                        URL_File_Set(__tmpResult.Filename)
+
+						' UserInfo
+						If __tmpResult._Error Is Nothing Then
+							MsgBox("URL File has been saved to:" &
+							   vbCrLf & vbCrLf & Application.StartupPath & "\Images\System\URL Files\" & __tmpResult.Filename & ".txt" &
+							   vbCrLf & vbCrLf & "Use the ""Open URL File"" button to load and view your collections.",  , "Success!")
+						Else
+							MsgBox("It is encountered an error during URL-File-Creation." & vbCrLf &
+								   __tmpResult._Error.Message & vbCrLf &
+									   "URL File has been saved to:" &
+									vbCrLf & vbCrLf & Application.StartupPath & "\Images\System\URL Files\" & __tmpResult.Filename & ".txt" &
+									vbCrLf & vbCrLf & "Use the ""Open URL File"" button to load and view your collections.",  , "Successful despite errors!")
+						End If
+					Catch
+                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+                        '                                            All Errors
+                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+                        Throw
+					Finally
+                        '⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
+                        __BtnLocalURL.ForEach(Sub(x) x.Enabled = True)
+					End Try
+				Case BTNMaintenanceRefresh.Name
+                    '**************************************************************************************************************
+                    '                                             Refresh URL-Files
+                    '**************************************************************************************************************
+                    Try
+
+                        ' Run Backgroundworker
+                        Dim __tmpResult As URL_File_BGW.MaintainUrlResult = BWURLFiles.RefreshURLFilesAsync()
+
+                        ' Activate the URL-Files
+                        __tmpResult.MaintainedUrlFiles.ForEach(AddressOf URL_File_Set)
+
+						If __tmpResult.Cancelled Then
+							MessageBox.Show(Me, "Refreshing URL-File has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL-Files." &
+											vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added.",
+											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+						ElseIf __tmpResult.ErrorText.Capacity > 0
+							MessageBox.Show(Me, "URL Files have been refreshed with errors!" &
+											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added." &
+											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
+											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+						Else
+							MessageBox.Show(Me, "All URL Files have been refreshed!" &
+											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added.",
+											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+						End If
+					Catch
+                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+                        '                                            All Errors
+                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+                        Throw
+					Finally
+                        '⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
+                        LBLMaintenance.Text = String.Empty
+						PBCurrent.Value = 0
+						PBMaintenance.Value = 0
+					End Try
+				Case BTNMaintenanceRebuild.Name
+                    '**************************************************************************************************************
+                    '                                             Rebuild URL-Files
+                    '**************************************************************************************************************
+                    Try
+                        ' Run Backgroundworker
+                        Dim __tmpResult As URL_File_BGW.MaintainUrlResult = BWURLFiles.RebuildURLFilesAsync()
+
+                        ' Activate the URL-Files
+                        __tmpResult.MaintainedUrlFiles.ForEach(AddressOf URL_File_Set)
+
+						If __tmpResult.Cancelled Then
+							MessageBox.Show(Me, "Rebuilding URL-File has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL-Files." &
+											vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed.",
+											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+						ElseIf __tmpResult.ErrorText.Capacity > 0
+							MessageBox.Show(Me, "URL Files have been rebuilded with errors!" &
+											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed." &
+											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total." &
+											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
+											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+						Else
+							MessageBox.Show(Me, "All URL Files have been rebuilded!" &
+											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed." &
+											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total.",
+											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+						End If
+					Catch
+                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+                        '                                            All Errors
+                        '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+                        Throw
+					Finally
+                        '⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
+                        LBLMaintenance.Text = String.Empty
+						PBCurrent.Value = 0
+						PBMaintenance.Value = 0
+					End Try
+			End Select
+		Catch ex As Exception
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            '                                            All Errors
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            If ex.InnerException IsNot Nothing Then
+                ' If an Error ocurred in the other Thread, initial Exception is innner one.
+                MsgBox(ex.InnerException.Message, MsgBoxStyle.Critical, "Error Creating URL-File")
+			Else
+                ' Otherwise show it normal.
+                MsgBox(ex.Message, MsgBoxStyle.Critical, "Error Creating URL-File")
+			End If
+		Finally
+            '⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
+            ' Restore the initial State of the Buttons
+            __PreEnabled.ForEach(Sub(x) x.Enabled = True)
+			__PreDisabled.ForEach(Sub(x) x.Enabled = False)
+		End Try
+	End Sub
+
+#Region "-------------------------------------- Backgroundworker URL Files --------------------------------------"
+
+	''' =========================================================================================================
+	''' <summary>
+	''' This Event is used, to gather Variables, for the BackgroundThread, the User can change during runtime.
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
+	Private Sub BWURLFiles_URLCreate_User_Interactions(ByVal sender As URL_File_BGW, ByRef e As URL_File_BGW.UserActions) Handles BWURLFiles.URL_FileCreate_UserInteractions
+		If Me.InvokeRequired Then
+			Dim Callbak As New URL_File_BGW.URL_FileCreate_UserInteractions_Delegate(AddressOf BWURLFiles_URLCreate_User_Interactions)
+			Me.Invoke(Callbak, sender, e)
+		Else
+			e.ReviewImages = CBWIReview.Checked
+			e.ApproveImage = Form1.ApproveImage
+			e.SaveImages = CBWISaveToDisk.Checked
+			e.ImgSaveDir = TBWIDirectory.Text
+		End If
+	End Sub
+
+    ''' =========================================================================================================
+    ''' <summary>
+    ''' This Event will be triggered, when the Working Stage of the BGW changes
+    ''' </summary>
+    ''' <param name="Sender"></param>
+    ''' <param name="e"></param>
+    Private Sub BWURLFiles_ProgressChanged(ByVal Sender As Object, ByRef e As URL_File_BGW.URL_File_ProgressChangedEventArgs) Handles BWURLFiles.URL_File_ProgressChanged
+		If Me.InvokeRequired Then
+            ' Beware: Event is fired in Worker Thread, so you need to do a Function Callback.
+            Dim CallBack As New URL_File_BGW.URL_File_ProgressChanged_Delegate(AddressOf BWURLFiles_ProgressChanged)
+			Me.Invoke(CallBack, Sender, e)
+		Else
+            ' Reset remanent Marker for Image Approval
+            If Form1.ApproveImage <> 0 Then Form1.ApproveImage = 0
+			Select Case e.CurrentTask
+				Case URL_File_Tasks.CreateURLFile
+                    '===============================================================================
+                    '                           Create URL-File
+                    '===============================================================================
+                    Select Case e.ActStage
+                        ' ------------------------ Image Approval -------------------------------
+                        Case WorkingStages.ImageApproval
+							If e.ImageToReview IsNot Nothing Then
+                                ' Dispose old Image & Set new Image
+                                Try : WebPictureBox.Image.Dispose() : Catch : End Try
+								WebPictureBox.Image = e.ImageToReview
+                                ' Enabled UI Elements
+                                BTNWIContinue.Enabled = True
+								BTNWIAddandContinue.Enabled = True
+							End If
+						Case WorkingStages.Writing_File
+                            ' ---------------------- Write to File -------------------------------
+                            'State info to User
+                            LBLWebImageCount.Text = "Writing"
+                            ' At this state no cnancel possible
+                            BTNWICancel.Enabled = False
+							WebPictureBox.Image = Nothing
+						Case Else
+                            ' ---------------------- Everthing else ------------------------------
+                            ' Refresh Progressbars
+                            WebImageProgressBar.Maximum = e.BlogPageTotal + 1
+							WebImageProgressBar.Value = e.BlogPage
+                            ' Disable Image Approval-UI
+                            BTNWIContinue.Enabled = False
+							BTNWIAddandContinue.Enabled = False
+                            ' Inform User about BGW-State
+                            LBLWebImageCount.Text = String.Format("{0}/{1} ({2})", e.BlogPage, e.BlogPageTotal, e.ImageCount)
+					End Select
+				Case Else
+                    '===============================================================================
+                    '                           Refresh URL-File
+                    '===============================================================================
+                    LBLMaintenance.Text = e.InfoText
+					PBCurrent.Maximum = e.BlogPageTotal
+					PBCurrent.Value = e.BlogPage
+					PBMaintenance.Maximum = e.OverallProgressTotal
+					PBMaintenance.Value = e.OverallProgress
+			End Select
+		End If
+	End Sub
+
+#End Region
+
+#End Region ' Url Files
+
+#Region "--------------------------------------- Images -------------------------------------------------"
+
+	Friend Shared Function Image_FolderCheck(ByVal directoryDescription As String,
+											 ByVal directoryPath As String,
+											 ByVal defaultPath As String,
+											 ByRef subDirectories As Boolean) As String
+		Dim rtnPath As String
+
+		' Exit if default value.
+		If directoryPath = defaultPath Then subDirectories = False : Return defaultPath
+
+		' check it if the directory exists.
+		If Directory.Exists(directoryPath) Then rtnPath = directoryPath : GoTo checkFolder
+
+		' Tell User, the dir. wasn't found. Ask to search manually for the folder.
+		If MessageBox.Show(ActiveForm,
+						   "The directory """ & directoryPath & """ was not found." & vbCrLf & "Do you want to search for it?",
+						   directoryDescription & " image directory not found.",
+						   MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) <> DialogResult.Yes Then
+set_default:
+			Return defaultPath
+		Else
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+			'								Set new Folder
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+set_newFolder:
+			' Find the first available parent-directory. 
+			' This way the user hasn't to browse through his hole IO-System.
+			Dim __tmp_dir As String = directoryPath
+			Do Until Directory.Exists(__tmp_dir) Or __tmp_dir Is Nothing
+				__tmp_dir = Path.GetDirectoryName(__tmp_dir)
+			Loop
+
+			' Initialize new Dialog-Form
+			Dim FolSel As New FolderBrowserDialog With {.SelectedPath = __tmp_dir,
+															.Description = "Select " & directoryDescription & " image folder."}
+			' Display the Dialog -> Now the user has to set the new dir.
+			If FolSel.ShowDialog(ActiveForm) = DialogResult.OK Then
+				rtnPath = FolSel.SelectedPath
+			Else
+				GoTo set_default
+			End If
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			' Set new Folder - End
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		End If ' END IF - Messagebox.
+
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		'							   Check folder content
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+checkFolder:
+		Dim count_top As Integer = myDirectory.GetFilesImages(rtnPath, SearchOption.TopDirectoryOnly).Count
+		Dim count_all As Integer = myDirectory.GetFilesImages(rtnPath, SearchOption.AllDirectories).Count
+
+		If count_top = 0 And count_all = 0 Then
+			' ================================= No images in folder ===============================
+			If MessageBox.Show(ActiveForm,
+			   "The directory """ & directoryPath & """ doesn't contain images." & vbCrLf & "Do you want to set a new folder?",
+			   directoryDescription & " image folder empty",
+			   MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.Yes Then
+				GoTo set_newFolder
+			Else
+				GoTo set_default
+			End If
+		ElseIf count_top = 0 And count_all > count_top And subDirectories = False
+			' ======================== none in top, but in sub ->enable sub? ======================
+			If MessageBox.Show(ActiveForm,
+			   "The directory """ & directoryPath & """ doesn't contain images, but it's " &
+			   "subdirectories. Do you want to include subdirectories? If you click no the " &
+			   "default value will be set.",
+			   directoryDescription & " image folder empty",
+			   MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+				subDirectories = True
+				Return rtnPath
+			Else
+				GoTo set_default
+			End If
+		Else
+			'================================= everything fine ====================================
+			Return rtnPath
+		End If
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		' Check folder content - End
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+	End Function
+
+#Region "------------------------------------- Hardcore Images -------------------------------------------"
+
+	Private Sub BTNIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNIHardcore.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.IHardcore = FolderBrowserDialog1.SelectedPath
+			ImagesHardcore_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesHardcore_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IHardcoreSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IHardcore").Property.DefaultValue
+
+		My.Settings.IHardcore =
+			Image_FolderCheck("Hardcore", My.Settings.IHardcore, def, subdir)
+
+		If My.Settings.IHardcore = def Then
+			My.Settings.CBIHardcore = False
+			My.Settings.IHardcoreSD = My.Settings.PropertyValues("IHardcoreSD").Property.DefaultValue
+		Else
+			My.Settings.CBIHardcore = True
+			My.Settings.IHardcoreSD = subdir
+		End If
+
+		Return My.Settings.CBIHardcore
+	End Function
+
+#End Region ' Hardcore
+
+#Region "------------------------------------- Softcore Images -------------------------------------------"
+
+	Private Sub BTNISoftcore_Click(sender As System.Object, e As System.EventArgs) Handles BTNISoftcore.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.ISoftcore = FolderBrowserDialog1.SelectedPath
+			ImagesSoftcore_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesSoftcore_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.ISoftcoreSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("ISoftcore").Property.DefaultValue
+
+		My.Settings.ISoftcore =
+			Image_FolderCheck("Softcore", My.Settings.ISoftcore, def, subdir)
+
+		If My.Settings.ISoftcore = def Then
+			My.Settings.CBISoftcore = False
+			My.Settings.ISoftcoreSD = My.Settings.PropertyValues("ISoftcoreSD").Property.DefaultValue
+		Else
+			My.Settings.CBISoftcore = True
+			My.Settings.ISoftcoreSD = subdir
+		End If
+
+		Return My.Settings.CBISoftcore
+	End Function
+
+#End Region ' Softcore
+
+#Region "------------------------------------- Lesbian Images --------------------------------------------"
+
+	Private Sub BTNILesbian_Click(sender As System.Object, e As System.EventArgs) Handles BTNILesbian.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.ILesbian = FolderBrowserDialog1.SelectedPath
+			ImagesLesbian_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesLesbian_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.ILesbianSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("ILesbian").Property.DefaultValue
+
+		My.Settings.ILesbian =
+			Image_FolderCheck("Lesbian", My.Settings.ILesbian, def, subdir)
+
+		If My.Settings.ILesbian = def Then
+			My.Settings.CBILesbian = False
+			My.Settings.ILesbianSD = My.Settings.PropertyValues("ILesbianSD").Property.DefaultValue
+		Else
+			My.Settings.CBILesbian = True
+			My.Settings.ILesbianSD = subdir
+		End If
+
+		Return My.Settings.CBILesbian
+	End Function
+
+#End Region ' Lesbian
+
+#Region "------------------------------------- Blowjob Images --------------------------------------------"
+
+	Private Sub BTNIBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles BTNIBlowjob.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.IBlowjob = FolderBrowserDialog1.SelectedPath
+			ImagesBlowjob_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesBlowjob_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IBlowjobSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IBlowjob").Property.DefaultValue
+
+		My.Settings.IBlowjob =
+			Image_FolderCheck("Blowjob", My.Settings.IBlowjob, def, subdir)
+
+		If My.Settings.IBlowjob = def Then
+			My.Settings.CBIBlowjob = False
+			My.Settings.IBlowjobSD = My.Settings.PropertyValues("IBlowjobSD").Property.DefaultValue
+		Else
+			My.Settings.CBIBlowjob = True
+			My.Settings.IBlowjobSD = subdir
+		End If
+
+		Return My.Settings.CBIBlowjob
+	End Function
+
+#End Region ' Blowjob
+
+#Region "------------------------------------- Femdom Images ---------------------------------------------"
+
+	Private Sub BTNIFemdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNIFemdom.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.IFemdom = FolderBrowserDialog1.SelectedPath
+			ImagesFemdom_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesFemdom_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IFemdomSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IFemdom").Property.DefaultValue
+
+		My.Settings.IFemdom =
+			Image_FolderCheck("Femdom", My.Settings.IFemdom, def, subdir)
+
+		If My.Settings.IFemdom = def Then
+			My.Settings.CBIFemdom = False
+			My.Settings.IFemdomSD = My.Settings.PropertyValues("IFemdomSD").Property.DefaultValue
+		Else
+			My.Settings.CBIFemdom = True
+			My.Settings.IFemdomSD = subdir
+		End If
+
+		Return My.Settings.CBIFemdom
+	End Function
+
+#End Region ' Femdom
+
+#Region "------------------------------------- Lezdom Images ---------------------------------------------"
+
+	Private Sub BTNILezdom_Click(sender As System.Object, e As System.EventArgs) Handles BTNILezdom.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.ILezdom = FolderBrowserDialog1.SelectedPath
+			ImagesLezdom_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesLezdom_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.ILezdomSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("ILezdom").Property.DefaultValue
+
+		My.Settings.ILezdom =
+			Image_FolderCheck("Lezdom", My.Settings.ILezdom, def, subdir)
+
+		If My.Settings.ILezdom = def Then
+			My.Settings.CBILezdom = False
+			My.Settings.ILezdomSD = My.Settings.PropertyValues("ILezdomSD").Property.DefaultValue
+		Else
+			My.Settings.CBILezdom = True
+			My.Settings.ILezdomSD = subdir
+		End If
+
+		Return My.Settings.CBILezdom
+	End Function
+
+#End Region ' Lezdon
+
+#Region "------------------------------------- Hentai Images ---------------------------------------------"
+
+	Private Sub BTNIHentai_Click(sender As System.Object, e As System.EventArgs) Handles BTNIHentai.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.IHentai = FolderBrowserDialog1.SelectedPath
+			ImagesHentai_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesHentai_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IHentaiSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IHentai").Property.DefaultValue
+
+		My.Settings.IHentai =
+			Image_FolderCheck("Hentai", My.Settings.IHentai, def, subdir)
+
+		If My.Settings.IHentai = def Then
+			My.Settings.CBIHentai = False
+			My.Settings.IHentaiSD = My.Settings.PropertyValues("IHentaiSD").Property.DefaultValue
+		Else
+			My.Settings.CBIHentai = True
+			My.Settings.IHentaiSD = subdir
+		End If
+
+		Return My.Settings.CBIHentai
+	End Function
+
+#End Region ' Hentai
+
+#Region "------------------------------------- Gay Images ------------------------------------------------"
+
+	Private Sub BTNIGay_Click(sender As System.Object, e As System.EventArgs) Handles BTNIGay.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.IGay = FolderBrowserDialog1.SelectedPath
+			ImagesGay_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesGay_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IGaySD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IGay").Property.DefaultValue
+
+		My.Settings.IGay =
+			Image_FolderCheck("Gay", My.Settings.IGay, def, subdir)
+
+		If My.Settings.IGay = def Then
+			My.Settings.CBIGay = False
+			My.Settings.IGaySD = My.Settings.PropertyValues("IGaySD").Property.DefaultValue
+		Else
+			My.Settings.CBIGay = True
+			My.Settings.IGaySD = subdir
+		End If
+
+		Return My.Settings.CBIGay
+	End Function
+
+#End Region ' Gay
+
+#Region "------------------------------------- Maledom Images ---------------------------------------------"
+
+	Private Sub BTNIMaledom_Click(sender As System.Object, e As System.EventArgs) Handles BTNIMaledom.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.IMaledom = FolderBrowserDialog1.SelectedPath
+			ImagesMaledom_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesMaledom_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IMaledomSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IMaledom").Property.DefaultValue
+
+		My.Settings.IMaledom =
+			Image_FolderCheck("Maledom", My.Settings.IMaledom, def, subdir)
+
+		If My.Settings.IMaledom = def Then
+			My.Settings.CBIMaledom = False
+			My.Settings.IMaledomSD = My.Settings.PropertyValues("IMaledomSD").Property.DefaultValue
+		Else
+			My.Settings.CBIMaledom = True
+			My.Settings.IMaledomSD = subdir
+		End If
+
+		Return My.Settings.CBIMaledom
+	End Function
+
+#End Region ' Maledom
+
+#Region "------------------------------------- General Images ---------------------------------------------"
+
+	Private Sub BTNIGeneral_Click(sender As System.Object, e As System.EventArgs) Handles BTNIGeneral.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.IGeneral = FolderBrowserDialog1.SelectedPath
+			ImagesGeneral_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesGeneral_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.IGeneralSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("IGeneral").Property.DefaultValue
+
+		My.Settings.IGeneral =
+			Image_FolderCheck("General", My.Settings.IGeneral, def, subdir)
+
+		If My.Settings.IGeneral = def Then
+			My.Settings.CBIGeneral = False
+			My.Settings.IGeneralSD = My.Settings.PropertyValues("IGeneralSD").Property.DefaultValue
+		Else
+			My.Settings.CBIGeneral = True
+			My.Settings.IGeneralSD = subdir
+		End If
+
+		Return My.Settings.CBIGeneral
+	End Function
+
+#End Region ' General
+
+#Region "------------------------------------- Captions Images ---------------------------------------------"
+
+	Private Sub BTNICaptions_Click(sender As System.Object, e As System.EventArgs) Handles BTNICaptions.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.ICaptions = FolderBrowserDialog1.SelectedPath
+			ImagesCaptions_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesCaptions_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.ICaptionsSD
+
+		Dim def As String =
+			My.Settings.PropertyValues("ICaptions").Property.DefaultValue
+
+		My.Settings.ICaptions =
+			Image_FolderCheck("Captions", My.Settings.ICaptions, def, subdir)
+
+		If My.Settings.ICaptions = def Then
+			My.Settings.CBICaptions = False
+			My.Settings.ICaptionsSD = My.Settings.PropertyValues("ICaptionsSD").Property.DefaultValue
+		Else
+			My.Settings.CBICaptions = True
+			My.Settings.ICaptionsSD = subdir
+		End If
+
+		Return My.Settings.CBICaptions
+	End Function
+
+#End Region ' Captions
+
+#Region "------------------------------------- Boobs Images ----------------------------------------------"
+
+	Private Sub BTNBoobPath_Click(sender As System.Object, e As System.EventArgs) Handles BTNBoobPath.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.LBLBoobPath = FolderBrowserDialog1.SelectedPath
+			ImagesBoobs_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesBoobs_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.CBBoobSubDir
+
+		Dim def As String =
+			My.Settings.PropertyValues("LBLBoobPath").Property.DefaultValue
+
+		My.Settings.LBLBoobPath =
+			Image_FolderCheck("Boobs", My.Settings.LBLBoobPath, def, subdir)
+
+		If My.Settings.LBLBoobPath = def Then
+			My.Settings.CBIBoobs = False
+			My.Settings.CBBoobSubDir = My.Settings.PropertyValues("CBBoobSubDir").Property.DefaultValue
+		Else
+			My.Settings.CBIBoobs = True
+			My.Settings.CBBoobSubDir = subdir
+		End If
+
+		Return My.Settings.CBIBoobs
+	End Function
+
+#End Region ' Boobs
+
+#Region "------------------------------------- Butts Images ----------------------------------------------"
+
+	Private Sub BTNButtPath_Click(sender As System.Object, e As System.EventArgs) Handles BTNButtPath.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.LBLButtPath = FolderBrowserDialog1.SelectedPath
+			ImagesButts_CheckFolder()
+		End If
+	End Sub
+
+	Friend Shared Function ImagesButts_CheckFolder() As Boolean
+		Dim subdir As Boolean = My.Settings.CBButtSubDir
+
+		Dim def As String =
+			My.Settings.PropertyValues("LBLButtPath").Property.DefaultValue
+
+		My.Settings.LBLButtPath =
+			Image_FolderCheck("Butts", My.Settings.LBLButtPath, def, subdir)
+
+		If My.Settings.LBLButtPath = def Then
+			My.Settings.CBIButts = False
+			My.Settings.CBButtSubDir = My.Settings.PropertyValues("CBButtSubDir").Property.DefaultValue
+		Else
+			My.Settings.CBIButts = True
+			My.Settings.CBButtSubDir = subdir
+		End If
+
+		Return My.Settings.CBIButts
+	End Function
+
+#End Region ' Butt
+
+	Private Sub BTNDomImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			LBLDomImageDir.Text = FolderBrowserDialog1.SelectedPath
+			My.Settings.DomImageDir = LBLDomImageDir.Text
+		End If
+	End Sub
+
+	Private Sub LBLIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles TbxIHardcore.DoubleClick
+		TbxIHardcore.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLISoftcore_Click(sender As System.Object, e As System.EventArgs) Handles TbxISoftcore.DoubleClick
+		TbxISoftcore.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLILesbian_Click(sender As System.Object, e As System.EventArgs) Handles TbxILesbian.DoubleClick
+		TbxILesbian.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLIBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles TbxIBlowjob.DoubleClick
+		TbxIBlowjob.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLIFemdom_Click(sender As System.Object, e As System.EventArgs) Handles TbxIFemdom.DoubleClick
+		TbxIFemdom.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLILezdom_Click(sender As System.Object, e As System.EventArgs) Handles TbxILezdom.DoubleClick
+		TbxILezdom.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLIHentai_Click(sender As System.Object, e As System.EventArgs) Handles TbxIHentai.DoubleClick
+		TbxIHentai.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLIGay_Click(sender As System.Object, e As System.EventArgs) Handles TbxIGay.DoubleClick
+		TbxIGay.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLIMaledom_Click(sender As System.Object, e As System.EventArgs) Handles TbxIMaledom.DoubleClick
+		TbxIMaledom.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLICaptions_Click(sender As System.Object, e As System.EventArgs) Handles TbxICaptions.DoubleClick
+		TbxICaptions.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLIGeneral_Click(sender As System.Object, e As System.EventArgs) Handles TbxIGeneral.DoubleClick
+		TbxIGeneral.Text = "No path selected"
+	End Sub
+
+	Private Sub LBLIHardcore_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIHardcore.MouseHover
+		TTDir.SetToolTip(TbxIHardcore, TbxIHardcore.Text)
+	End Sub
+	Private Sub LBLISoftcore_MouseHover(sender As Object, e As System.EventArgs) Handles TbxISoftcore.MouseHover
+		TTDir.SetToolTip(TbxISoftcore, TbxISoftcore.Text)
+	End Sub
+	Private Sub LBLILesbian_MouseHover(sender As Object, e As System.EventArgs) Handles TbxILesbian.MouseHover
+		TTDir.SetToolTip(TbxILesbian, TbxILesbian.Text)
+	End Sub
+	Private Sub LBLIBlowjob_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIBlowjob.MouseHover
+		TTDir.SetToolTip(TbxIBlowjob, TbxIBlowjob.Text)
+	End Sub
+	Private Sub LBLIFemdom_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIFemdom.MouseHover
+		TTDir.SetToolTip(TbxIFemdom, TbxIFemdom.Text)
+	End Sub
+	Private Sub LBLILezdom_MouseHover(sender As Object, e As System.EventArgs) Handles TbxILezdom.MouseHover
+		TTDir.SetToolTip(TbxILezdom, TbxILezdom.Text)
+	End Sub
+	Private Sub LBLIHentai_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIHentai.MouseHover
+		TTDir.SetToolTip(TbxIHentai, TbxIHentai.Text)
+	End Sub
+	Private Sub LBLIGay_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIGay.MouseHover
+		TTDir.SetToolTip(TbxIGay, TbxIGay.Text)
+	End Sub
+	Private Sub LBLIMaledom_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIMaledom.MouseHover
+		TTDir.SetToolTip(TbxIMaledom, TbxIMaledom.Text)
+	End Sub
+	Private Sub LBLICaptions_MouseHover(sender As Object, e As System.EventArgs) Handles TbxICaptions.MouseHover
+		TTDir.SetToolTip(TbxICaptions, TbxICaptions.Text)
+	End Sub
+	Private Sub LBLIGeneral_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIGeneral.MouseHover
+		TTDir.SetToolTip(TbxIGeneral, TbxIGeneral.Text)
+	End Sub
+
+	Private Sub LBLBoobPath_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIBoobs.MouseHover
+		TTDir.SetToolTip(TbxIBoobs, TbxIBoobs.Text)
+	End Sub
+
+	Private Sub LBLButtPath_MouseHover(sender As Object, e As System.EventArgs) Handles TbxIButts.MouseHover
+		TTDir.SetToolTip(TbxIButts, TbxIButts.Text)
+	End Sub
+
+#Region "----------------------------------- GenreImages-Url-Files --------------------------------------"
+
+	Private Sub BtnImageUrlSetFile_Click(sender As System.Object, e As System.EventArgs) Handles BtnImageUrlHardcore.Click,
+					BtnImageUrlSoftcore.Click, BtnImageUrlMaledom.Click, BtnImageUrlLezdom.Click, BtnImageUrlLesbian.Click,
+					BtnImageUrlHentai.Click, BtnImageUrlGeneral.Click, BtnImageUrlGay.Click, BtnImageUrlFemdom.Click,
+					BtnImageUrlCaptions.Click, BtnImageUrlButt.Click, BtnImageUrlBoobs.Click, BtnImageUrlBlowjob.Click
+		Try
+			' Read the Row of the current Button
+			Dim tmpTlpRow As Integer = TlpImageUrls.GetRow(sender)
+
+			' Check if the Button is in the TableLayoutPanel.
+			If tmpTlpRow = -1 Then Throw New Exception("Can't find control in TableLayoutPanel. " &
+													   "This is a major Design issue has to be fixed in code.")
+
+			' Get the Checkbox for the current button
+			Dim tmpCheckbox As CheckBox = TlpImageUrls.GetControlFromPosition(0, tmpTlpRow)
+
+			' Check if the Text-Property has an active Databinding.
+			If tmpCheckbox.DataBindings.Item("Checked") Is Nothing Then _
+				Throw New InvalidDataException("Databinding """" Checked """" was not found in Checkbox." &
+												"This is a major design issue and has to be fixed in code.")
+
+			' Get the TExtBox for the Current Button
+			Dim tmpTextbox As TextBox = TlpImageUrls.GetControlFromPosition(2, tmpTlpRow)
+
+			' Check if the Text-Property has an active Databinding.
+			If tmpTextbox.DataBindings.Item("Text") Is Nothing Then _
+				Throw New InvalidDataException("This function is only availabe with a Databound Textbox. " &
+												"This is a major design issue and has to be fixed in code.")
+
+			'Declare a new instance of An OpenFileDialog. Use the URL-FilePat as initial
+			Dim tmpFS As New OpenFileDialog With {
+				.Filter = "Textfiles|*.txt",
+				.Multiselect = False,
+				.CheckFileExists = True,
+				.Title = "Select an " & tmpCheckbox.Text & " URL-File",
+				.InitialDirectory = Form1.pathUrlFileDir}
+
+			' Check if the URL-FilePath exits -> Otherwise create it.
+			If Not Directory.Exists(tmpFS.InitialDirectory) Then _
+			Directory.CreateDirectory(tmpFS.InitialDirectory)
+
+			Dim tmpPath As String = tmpTextbox.Text
+			If tmpPath.ToLower.EndsWith(".txt") Then
+				If Path.IsPathRooted(tmpPath) AndAlso Directory.Exists(Path.GetDirectoryName(tmpPath)) Then
+					' Set an alternate Initial directory if filepath is absolute 
+					tmpFS.InitialDirectory = Path.GetDirectoryName(tmpPath)
+					tmpFS.FileName = Path.GetFileName(tmpPath)
+				Else
+					' Set the given Filename
+					tmpFS.FileName = tmpPath
+				End If
+			End If
+
+			If tmpFS.ShowDialog() = DialogResult.OK Then
+				If Path.GetDirectoryName(tmpFS.FileName).ToLower = Path.GetDirectoryName(Form1.pathUrlFileDir).ToLower Then
+					' If the file is located standarddirectory st only the filename
+					tmpTextbox.Text = tmpFS.SafeFileName
+				Else
+					' Otherwise set the absoulte filepath
+					tmpTextbox.Text = tmpFS.FileName
+				End If
+
+				' This will force the Settings to save.
+				tmpCheckbox.Checked = True
+			End If
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'						       All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			MsgBox(ex.Message & vbCrLf & "Please report this error at the Milovana Forum.",
+				   MsgBoxStyle.Critical, "Cant Set URl-File")
+			Log.WriteError(ex.Message, ex, "Error Set Url-File")
+		End Try
+	End Sub
+
+#End Region 'GenreImages-Url-Files
+
+#End Region ' Images
+
+#Region "--------------------------------------- Videos -------------------------------------------------"
+
+	Friend Shared Function Video_FolderCheck(ByVal directoryDescription As String, ByVal directoryPath As String, ByVal defaultPath As String) As String
+		' Exit if the directory exists.
+		If Directory.Exists(directoryPath) Then Return directoryPath
+		' Exit if default value.
+		If directoryPath = defaultPath Then Return defaultPath
+
+		' Tell User, the dir. wasn't found. Ask to search manually for the folder.
+		If MessageBox.Show(ActiveForm,
+						   "The directory """ & directoryPath & """ was not found." & vbCrLf & "Do you want to search for it?",
+						   directoryDescription & " directory not found.",
+						   MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+
+			' Find the first available parent-directory. 
+			' This way the user hasn't to browse through his hole IO-System.
+			Dim __tmp_dir As String = directoryPath
+			Do Until Directory.Exists(__tmp_dir) Or __tmp_dir Is Nothing
+				__tmp_dir = Path.GetDirectoryName(__tmp_dir)
+			Loop
+
+			' Initialize new Dialog-Form
+			Dim FolSel As New FolderBrowserDialog With {.SelectedPath = __tmp_dir,
+														.Description = "Select " & directoryDescription & " folder."}
+			' Display the Dialog -> Now the user has to set the new dir.
+			If FolSel.ShowDialog(ActiveForm) = DialogResult.OK Then
+				Return FolSel.SelectedPath
+			End If
+
+		End If ' END IF - Messagebox.
+		Return defaultPath
+	End Function
+
+	Friend Function Video_CheckAllFolders() As Integer
+		Dim t As Integer = 0
+
+		LblVideoHardCoreTotal.Text = VideoHardcore_Count() : t += CInt(LblVideoHardCoreTotal.Text)
+		LblVideoSoftCoreTotal.Text = VideoSoftcore_Count() : t += CInt(LblVideoSoftCoreTotal.Text)
+		LblVideoLesbianTotal.Text = VideoLesbian_Count() : t += CInt(LblVideoLesbianTotal.Text)
+		LblVideoBlowjobTotal.Text = VideoBlowjob_Count() : t += CInt(LblVideoBlowjobTotal.Text)
+		LblVideoFemdomTotal.Text = VideoFemdom_Count() : t += CInt(LblVideoFemdomTotal.Text)
+		LblVideoFemsubTotal.Text = VideoFemsub_Count() : t += CInt(LblVideoFemsubTotal.Text)
+		LblVideoJOITotal.Text = VideoJOI_Count() : t += CInt(LblVideoJOITotal.Text)
+		LblVideoCHTotal.Text = VideoCH_Count() : t += CInt(LblVideoCHTotal.Text)
+		LblVideoGeneralTotal.Text = VideoGeneral_Count() : t += CInt(LblVideoGeneralTotal.Text)
+
+		LblVideoHardCoreTotalD.Text = VideoHardcoreD_Count() : t += CInt(LblVideoHardCoreTotalD.Text)
+		LblVideoSoftCoreTotalD.Text = VideoSoftcoreD_Count() : t += CInt(LblVideoSoftCoreTotalD.Text)
+		LblVideoLesbianTotalD.Text = VideoLesbianD_Count() : t += CInt(LblVideoLesbianTotalD.Text)
+		LblVideoBlowjobTotalD.Text = VideoBlowjobD_Count() : t += CInt(LblVideoBlowjobTotalD.Text)
+		LblVideoFemdomTotalD.Text = VideoFemdomD_Count() : t += CInt(LblVideoFemdomTotalD.Text)
+		LblVideoFemsubTotalD.Text = VideoFemsubD_Count() : t += CInt(LblVideoFemsubTotalD.Text)
+		LblVideoJOITotalD.Text = VideoJOID_Count() : t += CInt(LblVideoJOITotalD.Text)
+		LblVideoCHTotalD.Text = VideoCHD_Count() : t += CInt(LblVideoCHTotalD.Text)
+		LblVideoGeneralTotalD.Text = VideoGeneralD_Count() : t += CInt(LblVideoGeneralTotalD.Text)
+
+		Return t
+	End Function
+
+	Private Sub TxbVideoFolder_MouseHover(sender As Object, e As System.EventArgs) Handles TxbVideoHardCore.MouseHover,
+				TxbVideoHardCoreD.MouseHover, TxbVideoSoftCore.MouseHover, TxbVideoSoftCoreD.MouseHover, TxbVideoLesbian.MouseHover,
+				TxbVideoLesbianD.MouseHover, TxbVideoBlowjob.MouseHover, TxbVideoBlowjobD.MouseHover, TxbVideoFemdom.MouseHover,
+				TxbVideoFemdomD.MouseHover, TxbVideoFemsub.MouseHover, TxbVideoFemsubD.MouseHover, TxbVideoJOI.MouseHover,
+				TxbVideoJOID.MouseHover, TxbVideoCH.MouseHover, TxbVideoCHD.MouseHover, TxbVideoGeneral.MouseHover, TxbVideoGeneralD.MouseHover
+
+		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
+	End Sub
+
+	Private Sub BTNRefreshVideos_MouseHover(sender As Object, e As System.EventArgs) Handles BTNRefreshVideos.MouseHover
+		TTDir.SetToolTip(BTNRefreshVideos, "Use this button to refresh video paths.")
+	End Sub
+
+#Region "----------------------------------------- Regular -----------------------------------------------"
+
+#Region "------------------------------------- Hardcore Videos -------------------------------------------"
+
+	Private Sub BTNVideoHardCore_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoHardCore.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoHardcore = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBHardcore = True
+			LblVideoHardCoreTotal.Text = VideoHardcore_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoHardcore_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoHardcore").Property.DefaultValue
+
+		My.Settings.VideoHardcore =
+			Video_FolderCheck("Hardcore Video", My.Settings.VideoHardcore, def)
+
+		If My.Settings.VideoHardcore = def Then My.Settings.CBHardcore = False
+
+		Return My.Settings.CBHardcore
+	End Function
+
+	Friend Shared Function VideoHardcore_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoHardcore_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoHardcore).Count
+	End Function
+
+#End Region ' Hardcore
+
+#Region "------------------------------------- Softcore Videos -------------------------------------------"
+
+	Private Sub BTNVideoSoftCore_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoSoftCore.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoSoftcore = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBSoftcore = True
+			LblVideoSoftCoreTotal.Text = VideoSoftcore_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoSoftcore_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoSoftcore").Property.DefaultValue
+
+		My.Settings.VideoSoftcore =
+			Video_FolderCheck("Softcore Video", My.Settings.VideoSoftcore, def)
+
+		If My.Settings.VideoSoftcore = def Then My.Settings.CBSoftcore = False
+
+		Return My.Settings.CBSoftcore
+	End Function
+
+	Friend Shared Function VideoSoftcore_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoSoftcore_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoSoftcore).Count
+	End Function
+
+#End Region ' Softcore
+
+#Region "------------------------------------- Lesbian Videos --------------------------------------------"
+
+	Private Sub BTNVideoLesbian_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoLesbian.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoLesbian = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBLesbian = True
+			LblVideoLesbianTotal.Text = VideoLesbian_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoLesbian_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoLesbian").Property.DefaultValue
+
+		My.Settings.VideoLesbian =
+			Video_FolderCheck("Lesbian Video", My.Settings.VideoLesbian, def)
+
+		If My.Settings.VideoLesbian = def Then My.Settings.CBLesbian = False
+
+		Return My.Settings.CBLesbian
+	End Function
+
+	Friend Shared Function VideoLesbian_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoLesbian_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoLesbian).Count
+	End Function
+
+#End Region ' Lesbian
+
+#Region "------------------------------------- Blowjob Videos --------------------------------------------"
+
+	Private Sub BTNVideoBlowjob_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoBlowjob.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoBlowjob = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBBlowjob = True
+			LblVideoBlowjobTotal.Text = VideoBlowjob_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoBlowjob_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoBlowjob").Property.DefaultValue
+
+		My.Settings.VideoBlowjob =
+			Video_FolderCheck("Blowjob Video", My.Settings.VideoBlowjob, def)
+
+		If My.Settings.VideoBlowjob = def Then My.Settings.CBBlowjob = False
+
+		Return My.Settings.CBBlowjob
+	End Function
+
+	Friend Shared Function VideoBlowjob_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoBlowjob_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoBlowjob).Count
+	End Function
+
+#End Region ' Blowjob
+
+#Region "---------------------------------------- Femdom -------------------------------------------------"
+
+	Private Sub BTNVideoFemDom_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemDom.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoFemdom = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBFemdom = True
+			LblVideoFemdomTotal.Text = VideoFemdom_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoFemdom_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoFemdom").Property.DefaultValue
+
+		My.Settings.VideoFemdom =
+			Video_FolderCheck("Femdom Video", My.Settings.VideoFemdom, def)
+
+		If My.Settings.VideoFemdom = def Then My.Settings.CBFemdom = False
+
+		Return My.Settings.CBFemdom
+	End Function
+
+	Friend Shared Function VideoFemdom_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoFemdom_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoFemdom).Count
+	End Function
+
+#End Region ' Femdom
+
+#Region "------------------------------------- Femsub Videos ---------------------------------------------"
+
+	Private Sub BTNVideoFemSub_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemSub.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoFemsub = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBFemsub = True
+			LblVideoFemsubTotal.Text = VideoFemsub_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoFemsub_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoFemsub").Property.DefaultValue
+
+		My.Settings.VideoFemsub =
+			Video_FolderCheck("Femsub Video", My.Settings.VideoFemsub, def)
+
+		If My.Settings.VideoFemsub = def Then My.Settings.CBFemsub = False
+
+		Return My.Settings.CBFemsub
+	End Function
+
+	Friend Shared Function VideoFemsub_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoFemsub_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoFemsub).Count
+	End Function
+
+#End Region ' Femsub
+
+#Region "------------------------------------- JOI Videos ------------------------------------------------"
+
+	Private Sub BTNVideoJOI_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoJOI.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoJOI = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBJOI = True
+			LblVideoJOITotal.Text = VideoJOI_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoJOI_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoJOI").Property.DefaultValue
+
+		My.Settings.VideoJOI =
+			Video_FolderCheck("JOI Video", My.Settings.VideoJOI, def)
+
+		If My.Settings.VideoJOI = def Then My.Settings.CBJOI = False
+
+		Return My.Settings.CBJOI
+	End Function
+
+	Friend Shared Function VideoJOI_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoJOI_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoJOI).Count
+	End Function
+
+#End Region ' JOI
+
+#Region "------------------------------------- CH Videos -------------------------------------------------"
+
+	Private Sub BTNVideoCH_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoCH.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoCH = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBCH = True
+			LblVideoCHTotal.Text = VideoCH_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoCH_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoCH").Property.DefaultValue
+
+		My.Settings.VideoCH =
+			Video_FolderCheck("CH Video", My.Settings.VideoCH, def)
+
+		If My.Settings.VideoCH = def Then My.Settings.CBCH = False
+
+		Return My.Settings.CBCH
+	End Function
+
+	Friend Shared Function VideoCH_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoCH_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoCH).Count
+	End Function
+
+#End Region ' CH
+
+#Region "------------------------------------- General Videos --------------------------------------------"
+
+	Private Sub BTNVideoGeneral_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoGeneral.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoGeneral = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBGeneral = True
+			LblVideoGeneralTotal.Text = VideoGeneral_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoGeneral_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoGeneral").Property.DefaultValue
+
+		My.Settings.VideoGeneral =
+			Video_FolderCheck("General Video", My.Settings.VideoGeneral, def)
+
+		If My.Settings.VideoGeneral = def Then My.Settings.CBGeneral = False
+
+		Return My.Settings.CBGeneral
+	End Function
+
+	Friend Shared Function VideoGeneral_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoGeneral_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoGeneral).Count
+	End Function
+
+#End Region ' General
+
+#End Region ' Regular
+
+#Region "------------------------------------------ Domme ------------------------------------------------"
+
+#Region "---------------------------------------- HardcoreD ----------------------------------------------"
+
+	Private Sub BTNVideoHardcoreD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoHardCoreD.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoHardcoreD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBHardcoreD = True
+			LblVideoHardCoreTotalD.Text = VideoHardcoreD_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoHardcoreD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoHardcoreD").Property.DefaultValue
+
+		My.Settings.VideoHardcoreD =
+			Video_FolderCheck("HardcoreD Video", My.Settings.VideoHardcoreD, def)
+
+		If My.Settings.VideoHardcoreD = def Then My.Settings.CBHardcoreD = False
+
+		Return My.Settings.CBHardcoreD
+	End Function
+
+	Friend Shared Function VideoHardcoreD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoHardcoreD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoHardcoreD).Count
+	End Function
+
+#End Region ' HardcoreD
+
+#Region "---------------------------------------- SoftcoreD ----------------------------------------------"
+
+	Private Sub BTNVideoSoftcoreD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoSoftCoreD.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoSoftcoreD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBSoftcoreD = True
+			LblVideoSoftCoreTotalD.Text = VideoSoftcoreD_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoSoftcoreD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoSoftcoreD").Property.DefaultValue
+
+		My.Settings.VideoSoftcoreD =
+			Video_FolderCheck("SoftcoreD Video", My.Settings.VideoSoftcoreD, def)
+
+		If My.Settings.VideoSoftcoreD = def Then My.Settings.CBSoftcoreD = False
+
+		Return My.Settings.CBSoftcoreD
+	End Function
+
+	Friend Shared Function VideoSoftcoreD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoSoftcoreD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoSoftcoreD).Count
+	End Function
+
+#End Region ' SoftcoreD
+
+#Region "---------------------------------------- LesbianD -----------------------------------------------"
+
+	Private Sub BTNVideoLesbianD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoLesbianD.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoLesbianD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBLesbianD = True
+			LblVideoLesbianTotalD.Text = VideoLesbianD_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoLesbianD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoLesbianD").Property.DefaultValue
+
+		My.Settings.VideoLesbianD =
+			Video_FolderCheck("LesbianD Video", My.Settings.VideoLesbianD, def)
+
+		If My.Settings.VideoLesbianD = def Then My.Settings.CBLesbianD = False
+
+		Return My.Settings.CBLesbianD
+	End Function
+
+	Friend Shared Function VideoLesbianD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoLesbianD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoLesbianD).Count
+	End Function
+
+#End Region ' LesbianD
+
+#Region "---------------------------------------- BlowjobD -----------------------------------------------"
+
+	Private Sub BTNVideoBlowjobD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoBlowjobD.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoBlowjobD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBBlowjobD = True
+			LblVideoBlowjobTotalD.Text = VideoBlowjobD_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoBlowjobD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoBlowjobD").Property.DefaultValue
+
+		My.Settings.VideoBlowjobD =
+			Video_FolderCheck("BlowjobD Video", My.Settings.VideoBlowjobD, def)
+
+		If My.Settings.VideoBlowjobD = def Then My.Settings.CBBlowjobD = False
+
+		Return My.Settings.CBBlowjobD
+	End Function
+
+	Friend Shared Function VideoBlowjobD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoBlowjobD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoBlowjobD).Count
+	End Function
+
+#End Region ' BlowjobD
+
+#Region "---------------------------------------- FemdomD ------------------------------------------------"
+
+	Private Sub BTNVideoFemdomD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemDomD.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoFemdomD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBFemdomD = True
+			LblVideoFemdomTotalD.Text = VideoFemdomD_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoFemdomD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoFemdomD").Property.DefaultValue
+
+		My.Settings.VideoFemdomD =
+			Video_FolderCheck("FemdomD Video", My.Settings.VideoFemdomD, def)
+
+		If My.Settings.VideoFemdomD = def Then My.Settings.CBFemdomD = False
+
+		Return My.Settings.CBFemdomD
+	End Function
+
+	Friend Shared Function VideoFemdomD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoFemdomD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoFemdomD).Count
+	End Function
+
+#End Region ' FemdomD
+
+#Region "---------------------------------------- FemsubD ------------------------------------------------"
+
+	Private Sub BTNVideoFemsubD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoFemSubD.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoFemsubD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBFemsubD = True
+			LblVideoFemsubTotalD.Text = VideoFemsubD_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoFemsubD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoFemsubD").Property.DefaultValue
+
+		My.Settings.VideoFemsubD =
+			Video_FolderCheck("FemsubD Video", My.Settings.VideoFemsubD, def)
+
+		If My.Settings.VideoFemsubD = def Then My.Settings.CBFemsubD = False
+
+		Return My.Settings.CBFemsubD
+	End Function
+
+	Friend Shared Function VideoFemsubD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoFemsubD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoFemsubD).Count
+	End Function
+
+#End Region ' FemsubD
+
+#Region "---------------------------------------- JOI-D --------------------------------------------------"
+
+	Private Sub BTNVideoJOID_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoJOID.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoJOID = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBJOID = True
+			LblVideoJOITotalD.Text = VideoJOID_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoJOID_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoJOID").Property.DefaultValue
+
+		My.Settings.VideoJOID =
+			Video_FolderCheck("JOID Video", My.Settings.VideoJOID, def)
+
+		If My.Settings.VideoJOID = def Then My.Settings.CBJOID = False
+
+		Return My.Settings.CBJOID
+	End Function
+
+	Friend Shared Function VideoJOID_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoJOID_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoJOID).Count
+	End Function
+
+#End Region ' JOI-D
+
+#Region "---------------------------------------- CH-D ---------------------------------------------------"
+
+	Private Sub BTNVideoCHD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoCHD.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoCHD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBCHD = True
+			LblVideoCHTotalD.Text = VideoCHD_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoCHD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoCHD").Property.DefaultValue
+
+		My.Settings.VideoCHD =
+			Video_FolderCheck("CHD Video", My.Settings.VideoCHD, def)
+
+		If My.Settings.VideoCHD = def Then My.Settings.CBCHD = False
+
+		Return My.Settings.CBCHD
+	End Function
+
+	Friend Shared Function VideoCHD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoCHD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoCHD).Count
+	End Function
+
+#End Region ' CH-D
+
+#Region "---------------------------------------- GeneralD -----------------------------------------------"
+
+	Private Sub BTNVideoGeneralD_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoGeneralD.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.VideoGeneralD = FolderBrowserDialog1.SelectedPath
+			My.Settings.CBGeneralD = True
+			LblVideoGeneralTotalD.Text = VideoGeneralD_Count(False)
+		End If
+	End Sub
+
+	Friend Shared Function VideoGeneralD_CheckFolder() As Boolean
+		Dim def As String =
+			My.Settings.PropertyValues("VideoGeneralD").Property.DefaultValue
+
+		My.Settings.VideoGeneralD =
+			Video_FolderCheck("GeneralD Video", My.Settings.VideoGeneralD, def)
+
+		If My.Settings.VideoGeneralD = def Then My.Settings.CBGeneralD = False
+
+		Return My.Settings.CBGeneralD
+	End Function
+
+	Friend Shared Function VideoGeneralD_Count(Optional ByVal checkfolder As Boolean = True) As Integer
+		If checkfolder Then VideoGeneralD_CheckFolder()
+		Return myDirectory.GetFilesVideo(My.Settings.VideoGeneralD).Count
+	End Function
+
+#End Region ' GeneralD
+
+#End Region ' Domme
+
+	Private Sub BTNRefreshVideos_Click(sender As System.Object, e As System.EventArgs) Handles BTNRefreshVideos.Click
+		VideoDescriptionLabel.Text = "Refresh complete: " & Video_CheckAllFolders() & " videos found!"
+		VideoDescriptionLabel.Text = VideoDescriptionLabel.Text.Replace(": 1 videos", ": 1 video")
+	End Sub
+
+#End Region ' Videos
+
+
+	Private Sub BindCombo()
+		FontComboBox.DrawMode = DrawMode.OwnerDrawFixed
+		FontComboBox.Font = New Font("Microsoft Sans Serif, 11.25pt", 11.25)
+		FontComboBox.ItemHeight = 20
+		Dim objFontFamily As FontFamily
+		Dim objFontCollection As System.Drawing.Text.FontCollection
+		Dim tempFont As Font
+		objFontCollection = New System.Drawing.Text.InstalledFontCollection()
+		For Each objFontFamily In objFontCollection.Families
+			FontComboBox.Items.Add(objFontFamily.Name)
+
+		Next
+	End Sub
+
+	Private Sub BindCombo2()
+		FontComboBoxD.DrawMode = DrawMode.OwnerDrawFixed
+		FontComboBoxD.Font = New Font("Microsoft Sans Serif, 11.25pt", 11.25)
+		FontComboBoxD.ItemHeight = 20
+		Dim objFontFamily As FontFamily
+		Dim objFontCollection As System.Drawing.Text.FontCollection
+		Dim tempFont As Font
+		objFontCollection = New System.Drawing.Text.InstalledFontCollection()
+		For Each objFontFamily In objFontCollection.Families
+			FontComboBoxD.Items.Add(objFontFamily.Name)
+
+		Next
+	End Sub
+
+	Private Sub ComboBox1_DrawItem(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles FontComboBox.DrawItem
+		e.DrawBackground()
+		If (e.State And DrawItemState.Focus) <> 0 Then
+			e.DrawFocusRectangle()
+		End If
+		Dim objBrush As Brush = Nothing
+		Try
+			objBrush = New SolidBrush(e.ForeColor)
+			Dim _FontName As String = FontComboBox.Items(e.Index)
+			Dim _font As Font
+			Dim _fontfamily = New FontFamily(_FontName)
+			If _fontfamily.IsStyleAvailable(FontStyle.Regular) Then
+				_font = New Font(_fontfamily, 14, FontStyle.Regular)
+			ElseIf _fontfamily.IsStyleAvailable(FontStyle.Bold) Then
+				_font = New Font(_fontfamily, 14, FontStyle.Bold)
+			ElseIf _fontfamily.IsStyleAvailable(FontStyle.Italic) Then
+				_font = New Font(_fontfamily, 14, FontStyle.Italic)
+			End If
+			e.Graphics.DrawString(_FontName, _font, objBrush, e.Bounds)
+		Finally
+			If objBrush IsNot Nothing Then
+				objBrush.Dispose()
+			End If
+			objBrush = Nothing
+		End Try
+	End Sub
+
+	Private Sub ComboBox1D_DrawItem(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DrawItemEventArgs) Handles FontComboBoxD.DrawItem
+		e.DrawBackground()
+		If (e.State And DrawItemState.Focus) <> 0 Then
+			e.DrawFocusRectangle()
+		End If
+		Dim objBrush As Brush = Nothing
+		Try
+			objBrush = New SolidBrush(e.ForeColor)
+			Dim _FontName As String = FontComboBoxD.Items(e.Index)
+			Dim _font As Font
+			Dim _fontfamily = New FontFamily(_FontName)
+			If _fontfamily.IsStyleAvailable(FontStyle.Regular) Then
+				_font = New Font(_fontfamily, 14, FontStyle.Regular)
+			ElseIf _fontfamily.IsStyleAvailable(FontStyle.Bold) Then
+				_font = New Font(_fontfamily, 14, FontStyle.Bold)
+			ElseIf _fontfamily.IsStyleAvailable(FontStyle.Italic) Then
+				_font = New Font(_fontfamily, 14, FontStyle.Italic)
+			End If
+			e.Graphics.DrawString(_FontName, _font, objBrush, e.Bounds)
+		Finally
+			If objBrush IsNot Nothing Then
+				objBrush.Dispose()
+			End If
+			objBrush = Nothing
+		End Try
+	End Sub
+
+
+
+
+
+
+
+
+
+
+	Private Sub CockSizeNumBox_ValueChanged(sender As System.Object, e As System.EventArgs) Handles CockSizeNumBox.ValueChanged
+		Form1.CockSize = CockSizeNumBox.Value
+	End Sub
+
+	Private Sub CockSizeNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles CockSizeNumBox.LostFocus
+		My.Settings.SubCockSize = CockSizeNumBox.Value
+	End Sub
+
+
+	Private Sub NBCensorShowMin_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMin.Leave
+		My.Settings.NBCensorShowMin = NBCensorShowMin.Value
+		Debug.Print(My.Settings.NBCensorShowMin & " " & NBCensorShowMin.Value)
+	End Sub
+
+	Private Sub NBCensorShowMax_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMax.Leave
+		My.Settings.NBCensorShowMax = NBCensorShowMax.Value
+	End Sub
+
+	Private Sub NBCensorHideMin_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMin.Leave
+		My.Settings.NBCensorHideMin = NBCensorHideMin.Value
+	End Sub
+
+	Private Sub NBCensorHideMax_Leave(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMax.Leave
+		My.Settings.NBCensorHideMax = NBCensorHideMax.Value
+	End Sub
+
+	Private Sub CBCensorConstant_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCensorConstant.CheckedChanged
+		If CBCensorConstant.Checked = True Then
+			My.Settings.CBCensorConstant = True
+		Else
+			My.Settings.CBCensorConstant = False
+		End If
+	End Sub
+
+	Public Function Color2Html(ByVal MyColor As Color) As String
+		Return "#" & MyColor.ToArgb().ToString("x").Substring(2).ToUpper
+	End Function
+
+
+
+
+	Private Sub NBCensorShowMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMin.ValueChanged
+		If NBCensorShowMin.Value > NBCensorShowMax.Value Then NBCensorShowMin.Value = NBCensorShowMax.Value
+	End Sub
+
+	Private Sub NBCensorShowMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBCensorShowMax.ValueChanged
+		If NBCensorShowMax.Value < NBCensorShowMin.Value Then NBCensorShowMax.Value = NBCensorShowMin.Value
+	End Sub
+
+	Private Sub NBTeaseLengthMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBTeaseLengthMin.LostFocus
+		My.Settings.TeaseLengthMin = NBTeaseLengthMin.Value
+	End Sub
+
+	Private Sub NBTeaseLengthMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBTeaseLengthMax.LostFocus
+		My.Settings.TeaseLengthMax = NBTeaseLengthMax.Value
+	End Sub
+
+	Private Sub NBTauntCycleMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBTauntCycleMin.LostFocus
+		My.Settings.TauntCycleMin = NBTauntCycleMin.Value
+	End Sub
+
+	Private Sub NBTauntCycleMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBTauntCycleMax.LostFocus
+		My.Settings.TauntCycleMax = NBTauntCycleMax.Value
+	End Sub
+	Private Sub NBRedLightMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBRedLightMin.LostFocus
+		My.Settings.RedLightMin = NBRedLightMin.Value
+	End Sub
+
+	Private Sub NBRedLightMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBRedLightMax.LostFocus
+		My.Settings.RedLightMax = NBRedLightMax.Value
+	End Sub
+	Private Sub NBGreenLightMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBGreenLightMin.LostFocus
+		My.Settings.GreenLightMin = NBGreenLightMin.Value
+	End Sub
+
+	Private Sub NBGreenLightMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBGreenLightMax.LostFocus
+		My.Settings.GreenLightMax = NBGreenLightMax.Value
+	End Sub
+
+	Private Sub NBTeaseLengthMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTeaseLengthMin.ValueChanged
+		If NBTeaseLengthMin.Value > NBTeaseLengthMax.Value Then NBTeaseLengthMin.Value = NBTeaseLengthMax.Value
+	End Sub
+
+	Private Sub NBTeaseLengthMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTeaseLengthMax.ValueChanged
+		If NBTeaseLengthMax.Value < NBTeaseLengthMin.Value Then NBTeaseLengthMax.Value = NBTeaseLengthMin.Value
+	End Sub
+
+	Private Sub NBTauntCycleMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTauntCycleMin.ValueChanged
+		If NBTauntCycleMin.Value > NBTauntCycleMax.Value Then NBTauntCycleMin.Value = NBTauntCycleMax.Value
+	End Sub
+
+	Private Sub NBTauntCycleMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBTauntCycleMax.ValueChanged
+		If NBTauntCycleMax.Value < NBTauntCycleMin.Value Then NBTauntCycleMax.Value = NBTauntCycleMin.Value
+	End Sub
+
+	Private Sub NBCensorHideMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMin.ValueChanged
+		If NBCensorHideMin.Value > NBCensorHideMax.Value Then NBCensorHideMin.Value = NBCensorHideMax.Value
+	End Sub
+
+	Private Sub NBCensorHideMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBCensorHideMax.ValueChanged
+		If NBCensorHideMax.Value < NBCensorHideMin.Value Then NBCensorHideMax.Value = NBCensorHideMin.Value
+	End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+	Private Sub Button26_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNVideoModLoad.Click
+
+		Dim CensorText As String = "NULL"
+
+		If CBVTType.Text = "Censorship Sucks" Then
+			If LBVidScript.SelectedItem = "CensorBarOff" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Censorship Sucks\CensorBarOff.txt"
+			If LBVidScript.SelectedItem = "CensorBarOn" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Censorship Sucks\CensorBarOn.txt"
+		End If
+
+		If CBVTType.Text = "Avoid The Edge" Then
+			If LBVidScript.SelectedItem = "Taunts" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Avoid The Edge\Taunts.txt"
+		End If
+
+		If CBVTType.Text = "Red Light Green Light" Then
+			If LBVidScript.SelectedItem = "Green Light" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Green Light.txt"
+			If LBVidScript.SelectedItem = "Red Light" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Red Light.txt"
+			If LBVidScript.SelectedItem = "Taunts" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Taunts.txt"
+		End If
+
+		Form1.VTPath = CensorText
+
+		Try
+			Dim VidReader As New StreamReader(CensorText)
+			Dim VidList As New List(Of String)
+
+			While VidReader.Peek <> -1
+				VidList.Add(VidReader.ReadLine())
+			End While
+
+			VidReader.Close()
+			VidReader.Dispose()
+
+			Dim VidString As String
+
+			For i As Integer = 0 To VidList.Count - 1
+				If i <> VidList.Count - 1 Then
+					VidString = VidString & VidList(i) & Environment.NewLine
+				Else
+					VidString = VidString & VidList(i)
+				End If
+			Next
+
+			RTBVideoMod.Text = VidString
+
+			LBVidScript.Enabled = False
+			CBVTType.Enabled = False
+			BTNVideoModClear.Enabled = True
+			BTNVideoModLoad.Enabled = False
+			RTBVideoMod.Enabled = True
+			BTNVideoModSave.Enabled = False
+		Catch
+		End Try
+
+
+
+	End Sub
+
+	Private Sub RTBVideoMod_TextChanged(sender As System.Object, e As System.EventArgs) Handles RTBVideoMod.TextChanged
+		BTNVideoModSave.Enabled = True
+	End Sub
+
+	Private Sub BTNVideoModClear_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoModClear.Click
+		BTNVideoModClear.Enabled = False
+		BTNVideoModLoad.Enabled = True
+		CBVTType.Enabled = True
+		RTBVideoMod.Text = ""
+		RTBVideoMod.Enabled = False
+		BTNVideoModSave.Enabled = False
+		LBVidScript.Enabled = True
+	End Sub
+
+	Private Sub BTNVideoModSave_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoModSave.Click
+
+
+
+
+		If MsgBox("This will overwrite the current " & CBVTType.Text & " script!" & Environment.NewLine & Environment.NewLine & "Are you sure?", vbYesNo, "Warning!") = MsgBoxResult.Yes Then
+			Debug.Print("Worked?")
+		Else
+			Debug.Print("Did not work")
+			Return
+		End If
+
+
+		My.Computer.FileSystem.DeleteFile(Form1.VTPath)
+
+		Dim WriteList As New List(Of String)
+
+		WriteList.Clear()
+
+		For i As Integer = 0 To RTBVideoMod.Lines.Count - 1
+			If i <> RTBVideoMod.Lines.Count - 1 Then
+				WriteList.Add(RTBVideoMod.Lines(i) & Environment.NewLine)
+			Else
+				WriteList.Add(RTBVideoMod.Lines(i))
+			End If
+		Next
+
+
+		For i As Integer = 0 To WriteList.Count - 1
+			If i <> WriteList.Count - 1 Then
+				My.Computer.FileSystem.WriteAllText(Form1.VTPath, WriteList(i), True)
+			Else
+				My.Computer.FileSystem.WriteAllText(Form1.VTPath, WriteList(i), True)
+			End If
+		Next
+
+		MessageBox.Show(Me, "File saved successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+		BTNVideoModSave.Enabled = False
+
+	End Sub
+
+
+
+	Private Sub Button26_Click_2(sender As System.Object, e As System.EventArgs) Handles Button26.Click
+		TBGlitModFileName.Text = ""
+		RTBGlitModDommePost.Text = ""
+		RTBGlitModResponses.Text = ""
+		LBGlitModScripts.ClearSelected()
+
+	End Sub
+
+	Private Sub CBGlitModType_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitModType.SelectedIndexChanged
+
+		If Form1.FormLoading = False Then
+
+			Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\")
+			Dim GlitterScriptCount As Integer
+
+			LBGlitModScripts.Items.Clear()
+
+			For Each file As String In files
+
+				GlitterScriptCount += 1
+				LBGlitModScripts.Items.Add(Path.GetFileName(file).Replace(".txt", ""))
+
+			Next
+
+			LBLGlitModScriptCount.Text = CBGlitModType.Text & " Scripts Found (" & GlitterScriptCount & ")"
+
+		End If
+	End Sub
+
+	Private Sub LBGlitModScripts_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles LBGlitModScripts.SelectedIndexChanged
+
+		Dim GlitPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\" & LBGlitModScripts.SelectedItem & ".txt"
+
+		If Not File.Exists(GlitPath) Then Return
+
+		If GlitPath = Form1.StatusText Then
+			MsgBox("This file is currently in use by the program. Saving changes may be slow until the Glitter process has finished.", , "Warning!")
+		End If
+
+
+		TBGlitModFileName.Text = LBGlitModScripts.SelectedItem
+
+		RTBGlitModDommePost.Text = ""
+		RTBGlitModResponses.Text = ""
+
+
+
+		Dim ioFile As New StreamReader(GlitPath)
+		Dim lines As New List(Of String)
+
+		Dim GlitCount As Integer
+		Dim GlitEnd As Integer
+
+		GlitCount = -1
+
+		While ioFile.Peek <> -1
+			GlitCount += 1
+			lines.Add(ioFile.ReadLine())
+		End While
+
+
+		GlitEnd = GlitCount
+		GlitCount = 1
+
+		RTBGlitModDommePost.Text = lines(0)
+
+
+		Do
+			RTBGlitModResponses.Text = RTBGlitModResponses.Text & lines(GlitCount) & Environment.NewLine
+			GlitCount += 1
+		Loop Until GlitCount = GlitEnd + 1
+
+		ioFile.Close()
+		ioFile.Dispose()
+
+		Debug.Print(RTBGlitModResponses.Lines.Count)
+
+
+	End Sub
+
+	Private Sub Button29_Click(sender As System.Object, e As System.EventArgs) Handles Button29.Click
+
+		If TBGlitModFileName.Text = "" Or RTBGlitModDommePost.Text = "" Or RTBGlitModResponses.Text = "" Then
+			MsgBox("Please make sure all fields have been filled out!", , "Error!")
+			Return
+		End If
+
+		If RTBGlitModResponses.Lines.Count < 3 Then
+			MsgBox("Please make sure the Responses text box has at least three responses!", , "Error!")
+			Return
+		End If
+		'If LBGlitModScripts.Items.Contains Then
+
+
+
+		Dim GlitPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Glitter\" & CBGlitModType.Text & "\" & TBGlitModFileName.Text & ".txt"
+
+
+		'My.Computer.FileSystem.WriteAllText(GlitPath, RTBGlitModDommePost.Text & Environment.NewLine & RTBGlitModResponses.Text, False)
+
+		' My.Computer.FileSystem.WriteAllText(GlitPath, Environment.NewLine, True)
+
+		'For Each sLine As String In RTBGlitModResponses.Text
+		'My.Computer.FileSystem.WriteAllText(GlitPath, sLine & Environment.NewLine, True)
+		'Next
+
+		' File.WriteAllLines(GlitPath, File.ReadAllLines(GlitPath).Where(Function(s) s <> String.Empty))
+
+		'LBGlitModScripts.Items.Add(TBGlitModFileName.Text)
+
+		If Not LBGlitModScripts.Items.Contains(TBGlitModFileName.Text) Then
+			LBGlitModScripts.Items.Add(TBGlitModFileName.Text)
+			My.Computer.FileSystem.WriteAllText(GlitPath, RTBGlitModDommePost.Text & Environment.NewLine & RTBGlitModResponses.Text, False)
+			File.WriteAllLines(GlitPath, File.ReadAllLines(GlitPath).Where(Function(s) s <> String.Empty))
+		Else
+			If MsgBox(TBGlitModFileName.Text & ".txt already exists! Overwrite?", vbYesNo, "Warning!") = MsgBoxResult.Yes Then
+				My.Computer.FileSystem.WriteAllText(GlitPath, RTBGlitModDommePost.Text & Environment.NewLine & RTBGlitModResponses.Text, False)
+				File.WriteAllLines(GlitPath, File.ReadAllLines(GlitPath).Where(Function(s) s <> String.Empty))
+			Else
+				Debug.Print("Did not work")
+				Return
+			End If
+		End If
+
+
+
+	End Sub
+
+
+
+
+    ''' =========================================================================================================
+    ''' <summary>
+    ''' Activates the specified is activaed in Listbox and saves the Listboxstate.
+    ''' </summary>
+    ''' <param name="URL_FileName"></param>
+    Private Sub URL_File_Set(ByVal URL_FileName As String)
+		Try
+            ' Set the new URL-File
+            If Not URLFileList.Items.Contains(URL_FileName) Then
+				URLFileList.Items.Add(URL_FileName)
+				For i As Integer = 0 To URLFileList.Items.Count - 1
+					If URLFileList.Items(i) = URL_FileName Then URLFileList.SetItemChecked(i, True)
+				Next
+			End If
+            ' Save ListState
+            Using FileStream As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Create)
+				Using BinaryWriter As New System.IO.BinaryWriter(FileStream)
+					For i = 0 To URLFileList.Items.Count - 1
+						BinaryWriter.Write(CStr(URLFileList.Items(i)))
+						BinaryWriter.Write(CBool(URLFileList.GetItemChecked(i)))
+					Next
+					BinaryWriter.Close()
+				End Using
+			End Using
+		Catch ex As Exception
+			Throw
+		End Try
+	End Sub
+
+
+
+
+	Private Sub SliderSTF_Scroll(sender As System.Object, e As System.EventArgs) Handles SliderSTF.Scroll
+		If SliderSTF.Value = 1 Then LBLStf.Text = "Preoccupied"
+		If SliderSTF.Value = 2 Then LBLStf.Text = "Distracted"
+		If SliderSTF.Value = 3 Then LBLStf.Text = "Normal"
+		If SliderSTF.Value = 4 Then LBLStf.Text = "Talkative"
+		If SliderSTF.Value = 5 Then LBLStf.Text = "Verbose"
+
+	End Sub
+
+	Private Sub TauntSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles TauntSlider.Scroll
+		If TauntSlider.Value = 1 Then LBLVtf.Text = "Preoccupied"
+		If TauntSlider.Value = 2 Or TauntSlider.Value = 3 Then LBLVtf.Text = "Distracted"
+		If TauntSlider.Value = 4 Or TauntSlider.Value = 5 Then LBLVtf.Text = "Normal"
+		If TauntSlider.Value = 6 Or TauntSlider.Value = 7 Or TauntSlider.Value = 8 Then LBLVtf.Text = "Talkative"
+		If TauntSlider.Value = 9 Or TauntSlider.Value = 10 Then LBLVtf.Text = "Verbose"
+
+	End Sub
+
+
+
+	Private Sub TauntSlider_LostFocus(sender As System.Object, e As System.EventArgs) Handles TauntSlider.LostFocus
+		My.Settings.TimerVTF = TauntSlider.Value
+
+	End Sub
+
+	Private Sub SliderSTF_LostFocus(sender As System.Object, e As System.EventArgs) Handles SliderSTF.LostFocus
+		My.Settings.TimerSTF = SliderSTF.Value
+
+	End Sub
+
+
+
+
+
+
+
+	Private Sub Button2_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button2.MouseHover
+
+		If RBEnglish.Checked = True Then TTDir.SetToolTip(Button2, "Use this button to select a directory containing several image" & Environment.NewLine &
+"set folders of the same model you're using as your contact.")
+		If RBGerman.Checked = True Then TTDir.SetToolTip(Button2, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+	End Sub
+	Private Sub Button8_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button8.MouseHover
+
+		If RBEnglish.Checked = True Then TTDir.SetToolTip(Button8, "Use this button to select a directory containing several image" & Environment.NewLine &
+"set folders of the same model you're using as your contact.")
+		If RBGerman.Checked = True Then TTDir.SetToolTip(Button8, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+	End Sub
+	Private Sub Button10_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button10.MouseHover
+
+		If RBEnglish.Checked = True Then TTDir.SetToolTip(Button10, "Use this button to select a directory containing several image" & Environment.NewLine &
+"set folders of the same model you're using as your contact.")
+		If RBGerman.Checked = True Then TTDir.SetToolTip(Button10, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+	End Sub
+
+
+
+
+
+	Private Sub NBWritingTaskMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBWritingTaskMin.LostFocus
+		My.Settings.NBWritingTaskMin = NBWritingTaskMin.Value
+	End Sub
+
+	Private Sub NBWritingTaskMin_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBWritingTaskMin.ValueChanged
+		If NBWritingTaskMin.Value > NBWritingTaskMax.Value Then NBWritingTaskMin.Value = NBWritingTaskMax.Value
+	End Sub
+
+	Private Sub NBWritingTaskMax_LostFocus(sender As Object, e As System.EventArgs) Handles NBWritingTaskMax.LostFocus
+		My.Settings.NBWritingTaskMax = NBWritingTaskMax.Value
+	End Sub
+
+	Private Sub NBWritingTaskMax_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBWritingTaskMax.ValueChanged
+		If NBWritingTaskMax.Value < NBWritingTaskMin.Value Then NBWritingTaskMax.Value = NBWritingTaskMin.Value
+	End Sub
+
+
+	Private Sub BTNTagDir_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagDir.Click
+
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+
+
+			' BTNTagSave.Text = "Save and Display Next Image"
+
+			ImageTagDir.Clear()
+
+			TagImageFolder = FolderBrowserDialog1.SelectedPath
+
+			Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
+			Dim files As String()
+
+			files = myDirectory.GetFiles(TagImageFolder, "*.*")
+
+			Array.Sort(files)
+
+			For Each fi As String In files
+				If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
+					ImageTagDir.Add(fi)
+				End If
+			Next
+
+			If ImageTagDir.Count < 1 Then
+				MessageBox.Show(Me, "There are no images in the specified folder.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+				Return
+			End If
+
+			Try
+				ImageTagPictureBox.Image.Dispose()
+			Catch
+			End Try
+
+			ImageTagPictureBox.Image = Nothing
+			GC.Collect()
+
+			ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
+			Form1.mainPictureBox.LoadAsync(ImageTagDir(0))
+			CurrentImageTagImage = ImageTagDir(0)
+
+			LoadDommeTags()
+
+			Form1.TagCount = 1
+			LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
+
+			'If ImageTagDir.Count = 1 Then BTNTagSave.Text = "Save and Finish"
+
+			ImageTagCount = 0
+
+			BTNTagSave.Enabled = True
+			BTNTagNext.Enabled = True
+			BTNTagPrevious.Enabled = False
+			BTNTagDir.Enabled = False
+			TBTagDir.Enabled = False
+
+			CBTagFace.Enabled = True
+			CBTagBoobs.Enabled = True
+			CBTagPussy.Enabled = True
+			CBTagAss.Enabled = True
+			CBTagLegs.Enabled = True
+			CBTagFeet.Enabled = True
+			CBTagFullyDressed.Enabled = True
+			CBTagHalfDressed.Enabled = True
+			CBTagGarmentCovering.Enabled = True
+			CBTagHandsCovering.Enabled = True
+			CBTagNaked.Enabled = True
+			CBTagSideView.Enabled = True
+			CBTagCloseUp.Enabled = True
+			CBTagMasturbating.Enabled = True
+			CBTagSucking.Enabled = True
+			CBTagPiercing.Enabled = True
+			CBTagSmiling.Enabled = True
+			CBTagGlaring.Enabled = True
+			CBTagSeeThrough.Enabled = True
+			CBTagAllFours.Enabled = True
+
+			CBTagGarment.Enabled = True
+			CBTagUnderwear.Enabled = True
+			CBTagTattoo.Enabled = True
+			CBTagSexToy.Enabled = True
+			CBTagFurniture.Enabled = True
+
+			TBTagGarment.Enabled = True
+			TBTagUnderwear.Enabled = True
+			TBTagTattoo.Enabled = True
+			TBTagSexToy.Enabled = True
+			TBTagFurniture.Enabled = True
+
+			LBLTagCount.Enabled = True
+
+
+
+		End If
+
+	End Sub
+
+	Private Sub TBTagDir_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles TBTagDir.KeyPress
+
+		If e.KeyChar = Convert.ToChar(13) Then
+
+			e.Handled = True
+			' sendButton.PerformClick()
+			e.KeyChar = Chr(0)
+
+			If My.Computer.FileSystem.DirectoryExists(TBTagDir.Text) Then
+
+				ImageTagDir.Clear()
+
+				TagImageFolder = TBTagDir.Text
+
+				Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
+				Dim files As String()
+
+				files = myDirectory.GetFiles(TagImageFolder, "*.*")
+
+				Array.Sort(files)
+
+				For Each fi As String In files
+					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
+						ImageTagDir.Add(fi)
+					End If
+				Next
+
+				If ImageTagDir.Count < 1 Then
+					MessageBox.Show(Me, "There are no images in the specified folder.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+					Return
+				End If
+
+				Try
+					ImageTagPictureBox.Image.Dispose()
+				Catch
+				End Try
+
+				ImageTagPictureBox.Image = Nothing
+				GC.Collect()
+
+				Debug.Print("find")
+				ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(0))
+				Form1.mainPictureBox.LoadAsync(ImageTagDir(0))
+
+
+				CurrentImageTagImage = ImageTagDir(0)
+
+
+
+				LoadDommeTags()
+
+				Form1.TagCount = 1
+				LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
+
+				'If ImageTagDir.Count = 1 Then BTNTagSave.Text = "Save and Finish"
+
+				ImageTagCount = 0
+
+				BTNTagSave.Enabled = True
+				BTNTagNext.Enabled = True
+				BTNTagPrevious.Enabled = False
+				BTNTagDir.Enabled = False
+				TBTagDir.Enabled = False
+
+				CBTagFace.Enabled = True
+				CBTagBoobs.Enabled = True
+				CBTagPussy.Enabled = True
+				CBTagAss.Enabled = True
+				CBTagLegs.Enabled = True
+				CBTagFeet.Enabled = True
+				CBTagFullyDressed.Enabled = True
+				CBTagHalfDressed.Enabled = True
+				CBTagGarmentCovering.Enabled = True
+				CBTagHandsCovering.Enabled = True
+				CBTagNaked.Enabled = True
+				CBTagSideView.Enabled = True
+				CBTagCloseUp.Enabled = True
+				CBTagMasturbating.Enabled = True
+				CBTagSucking.Enabled = True
+				CBTagPiercing.Enabled = True
+				CBTagSmiling.Enabled = True
+				CBTagGlaring.Enabled = True
+				CBTagSeeThrough.Enabled = True
+				CBTagAllFours.Enabled = True
+
+				CBTagGarment.Enabled = True
+				CBTagUnderwear.Enabled = True
+				CBTagTattoo.Enabled = True
+				CBTagSexToy.Enabled = True
+				CBTagFurniture.Enabled = True
+
+				TBTagGarment.Enabled = True
+				TBTagUnderwear.Enabled = True
+				TBTagTattoo.Enabled = True
+				TBTagSexToy.Enabled = True
+				TBTagFurniture.Enabled = True
+
+				LBLTagCount.Enabled = True
+
+			Else
+
+				TBTagDir.Text = "Not a Valid Directory!"
+
+			End If
+
+		End If
+
+
+	End Sub
+
+	Private Sub BTNTagSave_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagSave.Click
+
+		SaveDommeTags()
+
+		BTNTagDir.Enabled = True
+		TBTagDir.Enabled = True
+		BTNTagSave.Enabled = False
+		BTNTagNext.Enabled = False
+		BTNTagPrevious.Enabled = False
+
+
+
+
+		' If BTNTagSave.Text = "Save and Finish" Then
+		'BTNTagSave.Text = "Save and Display Next Image"
+		'BTNTagSave.Enabled = False
+		'MessageBox.Show(Me, "All images in this folder have been successfully tagged.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+		'ImageTagPictureBox.Image = Nothing
+		'Return
+		'End If
+
+		CBTagFace.Checked = False
+		CBTagBoobs.Checked = False
+		CBTagPussy.Checked = False
+		CBTagAss.Checked = False
+		CBTagLegs.Checked = False
+		CBTagFeet.Checked = False
+		CBTagFullyDressed.Checked = False
+		CBTagHalfDressed.Checked = False
+		CBTagGarmentCovering.Checked = False
+		CBTagHandsCovering.Checked = False
+		CBTagNaked.Checked = False
+		CBTagSideView.Checked = False
+		CBTagCloseUp.Checked = False
+		CBTagMasturbating.Checked = False
+		CBTagSucking.Checked = False
+		CBTagPiercing.Checked = False
+		CBTagSmiling.Checked = False
+		CBTagGlaring.Checked = False
+		CBTagSeeThrough.Checked = False
+		CBTagAllFours.Checked = False
+
+		CBTagFace.Enabled = False
+		CBTagBoobs.Enabled = False
+		CBTagPussy.Enabled = False
+		CBTagAss.Enabled = False
+		CBTagLegs.Enabled = False
+		CBTagFeet.Enabled = False
+		CBTagFullyDressed.Enabled = False
+		CBTagHalfDressed.Enabled = False
+		CBTagGarmentCovering.Enabled = False
+		CBTagHandsCovering.Enabled = False
+		CBTagNaked.Enabled = False
+		CBTagSideView.Enabled = False
+		CBTagCloseUp.Enabled = False
+		CBTagMasturbating.Enabled = False
+		CBTagSucking.Enabled = False
+		CBTagPiercing.Enabled = False
+		CBTagSmiling.Enabled = False
+		CBTagGlaring.Enabled = False
+		CBTagSeeThrough.Enabled = False
+		CBTagAllFours.Enabled = False
+
+		CBTagGarment.Checked = False
+		CBTagUnderwear.Checked = False
+		CBTagTattoo.Checked = False
+		CBTagSexToy.Checked = False
+		CBTagFurniture.Checked = False
+
+		CBTagGarment.Enabled = False
+		CBTagUnderwear.Enabled = False
+		CBTagTattoo.Enabled = False
+		CBTagSexToy.Enabled = False
+		CBTagFurniture.Enabled = False
+
+		TBTagGarment.Enabled = False
+		TBTagUnderwear.Enabled = False
+		TBTagTattoo.Enabled = False
+		TBTagSexToy.Enabled = False
+		TBTagFurniture.Enabled = False
+
+		TBTagGarment.Text = ""
+		TBTagUnderwear.Text = ""
+		TBTagTattoo.Text = ""
+		TBTagSexToy.Text = ""
+		TBTagFurniture.Text = ""
+
+		LBLTagCount.Text = "0/0"
+		LBLTagCount.Enabled = False
+
+
+		ImageTagPictureBox.Image = Nothing
+
+
+
+	End Sub
+
+	Private Sub BTNTagNext_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagNext.Click
+
+		Form1.TagCount += 1
+		LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
+		BTNTagPrevious.Enabled = True
+
+
+		SaveDommeTags()
+
+
+
+		ImageTagCount += 1
+
+		Try
+			ImageTagPictureBox.Image.Dispose()
+		Catch
+		End Try
+
+		ImageTagPictureBox.Image = Nothing
+		GC.Collect()
+
+		ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
+		Form1.mainPictureBox.LoadAsync(ImageTagDir(ImageTagCount))
+
+
+		CurrentImageTagImage = ImageTagDir(ImageTagCount)
+
+		If ImageTagCount = ImageTagDir.Count - 1 Then BTNTagNext.Enabled = False
+
+
+		LoadDommeTags()
+
+	End Sub
+
+	Private Sub BTNTagPrevious_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagPrevious.Click
+
+		Form1.TagCount -= 1
+		LBLTagCount.Text = Form1.TagCount & "/" & ImageTagDir.Count
+		BTNTagNext.Enabled = True
+
+
+		SaveDommeTags()
+
+		ImageTagCount -= 1
+
+		Try
+			ImageTagPictureBox.Image.Dispose()
+		Catch
+		End Try
+
+		ImageTagPictureBox.Image = Nothing
+		GC.Collect()
+
+		ImageTagPictureBox.Image = Image.FromFile(ImageTagDir(ImageTagCount))
+		Form1.mainPictureBox.LoadAsync(ImageTagDir(ImageTagCount))
+		CurrentImageTagImage = ImageTagDir(ImageTagCount)
+
+		If ImageTagCount = 0 Then BTNTagPrevious.Enabled = False
+
+
+		LoadDommeTags()
+
+	End Sub
+
+
+
+
+
+
+
+
+
+	Private Sub Button50_Click(sender As System.Object, e As System.EventArgs) Handles Button50.Click
+
+		TBKeyWords.Text = ""
+		RTBKeyWords.Text = ""
+
+		Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\")
+
+		LBKeyWords.Items.Clear()
+
+		For Each file As String In files
+			LBKeyWords.Items.Add(Path.GetFileName(file).Replace(".txt", ""))
+		Next
+
+	End Sub
+
+	Private Sub LBKeyWords_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles LBKeyWords.SelectedIndexChanged
+
+		Dim KeyWordPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & LBKeyWords.SelectedItem & ".txt"
+
+		If Not File.Exists(KeyWordPath) Then Return
+
+		' If GlitPath = StatusText Then
+		'MsgBox("This file is currently in use by the program. Saving changes may be slow until the Glitter process has finished.", , "Warning!")
+		'End If
+
+
+		TBKeyWords.Text = LBKeyWords.SelectedItem
+
+		RTBKeyWords.Text = ""
+
+
+		Dim ioFile As New StreamReader(KeyWordPath)
+		Dim lines As New List(Of String)
+
+		Dim KeyWordCount As Integer
+		Dim KeyWordEnd As Integer
+
+		KeyWordCount = -1
+
+		While ioFile.Peek <> -1
+			KeyWordCount += 1
+			lines.Add(ioFile.ReadLine())
+		End While
+
+
+		KeyWordEnd = KeyWordCount
+		KeyWordCount = 0
+
+
+
+		Do
+			RTBKeyWords.Text = RTBKeyWords.Text & lines(KeyWordCount) & Environment.NewLine
+			KeyWordCount += 1
+		Loop Until KeyWordCount = KeyWordEnd + 1
+
+		ioFile.Close()
+		ioFile.Dispose()
+
+		Debug.Print(RTBKeyWords.Lines.Count)
+
+	End Sub
+
+	Private Sub Button22_Click(sender As System.Object, e As System.EventArgs) Handles Button22.Click
+
+		Try
+			If TBKeyWords.Text = "" Or InStr(TBKeyWords.Text, "#") <> 1 Or Not TBKeyWords.Text.Substring(0, 1) = "#" Then
+				MessageBox.Show(Me, "Please enter a correct file name for this Keyword script!" & Environment.NewLine & Environment.NewLine & "Keyword file names must contain one ""#"" sign, " &
+								"placed at the beginning of the word or phrase.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Return
+			End If
+		Catch
+			MessageBox.Show(Me, "Please enter a file name for this Keyword script!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			Return
+		End Try
+
+
+		If RTBKeyWords.Text = "" Then
+			MessageBox.Show(Me, "The Keyword file you are attempting to save is blank!" & Environment.NewLine & Environment.NewLine & "Please add some lines before saving.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			Return
+		End If
+
+		Dim KeyWordSaveDir As String = TBKeyWords.Text
+		KeyWordSaveDir = KeyWordSaveDir.Replace(".txt", "")
+
+		If Not LBKeyWords.Items.Contains(KeyWordSaveDir) Then
+			LBKeyWords.Items.Add(KeyWordSaveDir)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", RTBKeyWords.Text, False)
+			File.WriteAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt").Where(Function(s) s <> String.Empty))
+		Else
+			Dim Result As Integer = MessageBox.Show(Me, KeyWordSaveDir & " already exists!" & Environment.NewLine & Environment.NewLine & "Do you wish to overwrite?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
+			If Result = DialogResult.Yes Then
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", RTBKeyWords.Text, False)
+				File.WriteAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt", File.ReadAllLines(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Vocabulary\" & KeyWordSaveDir & ".txt").Where(Function(s) s <> String.Empty))
+			Else
+				Debug.Print("Did not work")
+				Return
+			End If
+		End If
+
+		MessageBox.Show(Me, "Keyword file has been saved!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+	End Sub
+
+	Private Sub TBGreeting_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBGreeting.LostFocus
+		My.Settings.SubGreeting = TBGreeting.Text
+	End Sub
+
+	Private Sub TBYes_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBYes.LostFocus
+		My.Settings.SubYes = TBYes.Text
+	End Sub
+
+	Private Sub TBNo_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBNo.LostFocus
+		My.Settings.SubNo = TBNo.Text
+	End Sub
+
+	Private Sub TBHonorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBHonorific.LostFocus
+		If TBHonorific.Text = "" Or TBHonorific.Text Is Nothing Then TBHonorific.Text = "Mistress"
+		My.Settings.SubHonorific = TBHonorific.Text
+	End Sub
+
+	Private Sub CBHonorificInclude_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBHonorificInclude.LostFocus
+		If CBHonorificInclude.Checked = True Then
+			My.Settings.CBUseHonor = True
+		Else
+			My.Settings.CBUseHonor = False
+		End If
+	End Sub
+
+	Private Sub CBHonorificCapitalized_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBHonorificCapitalized.LostFocus
+		If CBHonorificCapitalized.Checked = True Then
+			My.Settings.CBCapHonor = True
+		Else
+			My.Settings.CBCapHonor = False
+		End If
+	End Sub
+
+	Private Sub subAgeNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles subAgeNumBox.LostFocus
+		My.Settings.SubAge = subAgeNumBox.Value
+	End Sub
+
+	Private Sub NBDomBirthdayMonth_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomBirthdayMonth.LostFocus
+		My.Settings.DomBirthMonth = NBDomBirthdayMonth.Value
+	End Sub
+
+	Private Sub NBDomBirthdayDay_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBDomBirthdayDay.LostFocus
+		My.Settings.DomBirthDay = NBDomBirthdayDay.Value
+	End Sub
+
+
+	Private Sub NBBirthdayMonth_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBBirthdayMonth.LostFocus
+		My.Settings.SubBirthMonth = NBBirthdayMonth.Value
+	End Sub
+
+	Private Sub NBBirthdayDay_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBBirthdayDay.LostFocus
+		My.Settings.SubBirthDay = NBBirthdayDay.Value
+	End Sub
+
+	Private Sub TBSubHairColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBSubHairColor.LostFocus
+		My.Settings.SubHair = TBSubHairColor.Text
+	End Sub
+
+	Private Sub TBSubEyeColor_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBSubEyeColor.LostFocus
+		My.Settings.SubEyes = TBSubEyeColor.Text
+	End Sub
+
+	Private Sub Button37_Click_1(sender As System.Object, e As System.EventArgs) Handles Button37.Click
+		If TBKeywordPreview.Text = "" Then Return
+
+		LBLKeywordPreview.Text = Form1.PoundClean(TBKeywordPreview.Text)
+	End Sub
+
+	Private Sub NBBirthdayMonth_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBBirthdayMonth.MouseLeave
+
+		If NBBirthdayMonth.Value = 2 And NBBirthdayDay.Value > 28 Then
+			NBBirthdayDay.Value = 28
+		End If
+
+		If NBBirthdayMonth.Value = 4 Or NBBirthdayMonth.Value = 6 Or NBBirthdayMonth.Value = 9 Or NBBirthdayMonth.Value = 11 Then
+			If NBBirthdayDay.Value > 30 Then
+				NBBirthdayDay.Value = 30
+			End If
+			NBBirthdayDay.Maximum = 30
+		Else
+			NBBirthdayDay.Maximum = 31
+		End If
+
+		If NBBirthdayMonth.Value = 2 Then
+			NBBirthdayDay.Maximum = 28
+		End If
+
+	End Sub
+
+	Private Sub NBDomBirthdayMonth_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBDomBirthdayMonth.MouseLeave
+
+		If NBDomBirthdayMonth.Value = 2 And NBDomBirthdayDay.Value > 28 Then
+			NBDomBirthdayDay.Value = 28
+		End If
+
+		If NBDomBirthdayMonth.Value = 4 Or NBDomBirthdayMonth.Value = 6 Or NBDomBirthdayMonth.Value = 9 Or NBDomBirthdayMonth.Value = 11 Then
+			If NBDomBirthdayDay.Value > 30 Then
+				NBDomBirthdayDay.Value = 30
+			End If
+			NBDomBirthdayDay.Maximum = 30
+		Else
+			NBDomBirthdayDay.Maximum = 31
+		End If
+
+		If NBDomBirthdayMonth.Value = 2 Then
+			NBDomBirthdayDay.Maximum = 28
+		End If
+
+	End Sub
+
+
+
+
+	Function InstrCount(StringToSearch As String,
+		   StringToFind As String) As Long
+
+		If Len(StringToFind) Then
+			InstrCount = UBound(Split(StringToSearch, StringToFind))
+		End If
+
+		Return InstrCount
+	End Function
+
+
+
+
+	Private Sub TBTagDir_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles TBTagDir.MouseClick
+		TBTagDir.SelectionStart = 0
+		TBTagDir.SelectionLength = Len(TBTagDir.Text)
+	End Sub
+
+	Private Sub TBWIDirectory_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles TBWIDirectory.MouseClick
+		TBWIDirectory.SelectionStart = 0
+		TBWIDirectory.SelectionLength = Len(TBWIDirectory.Text)
+	End Sub
+
+
+
+
+
+	Public Sub RefreshURLList()
+
+
+		For i As Integer = URLFileList.Items.Count - 1 To 0 Step -1
+			'Debug.Print(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.Items(i) & ".txt")
+			If Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.Items(i) & ".txt") Then
+				URLFileList.Items.Remove(URLFileList.Items(i))
+				Exit For
+			End If
+		Next
+
+		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Create)
+		Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
+		For i = 0 To URLFileList.Items.Count - 1
+			BinaryWriter.Write(CStr(URLFileList.Items(i)))
+			BinaryWriter.Write(CBool(URLFileList.GetItemChecked(i)))
+		Next
+		BinaryWriter.Close()
+		FileStream.Dispose()
+
+		If File.Exists(Application.StartupPath & "\Images\System\URLFileCheckList.cld") Then
+			URLFileList.Items.Clear()
+			Dim FileStream2 As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Open)
+			Dim BinaryReader As New System.IO.BinaryReader(FileStream2)
+			URLFileList.BeginUpdate()
+			Do While FileStream2.Position < FileStream2.Length
+				URLFileList.Items.Add(BinaryReader.ReadString)
+				URLFileList.SetItemChecked(URLFileList.Items.Count - 1, BinaryReader.ReadBoolean)
+			Loop
+			URLFileList.EndUpdate()
+			BinaryReader.Close()
+			FileStream2.Dispose()
+			If URLFileList.Items.Count > 0 Then
+				For i As Integer = 0 To URLFileList.Items.Count - 1 Step -1
+					If Not File.Exists(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.Items(i) & ".txt") Then URLFileList.Items.Remove(URLFileList.Items(i))
+				Next
+			End If
+		Else
+			URLFileList.Items.Clear()
+			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\URL Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+				Dim TempUrl As String = foundFile
+				TempUrl = Path.GetFileName(TempUrl).Replace(".txt", "")
+				'TempUrl = TempUrl.Replace(".txt", "")
+				'Do Until Not TempUrl.Contains("\")
+				'TempUrl = TempUrl.Remove(0, 1)
+				'Loop
+				URLFileList.Items.Add(TempUrl)
+			Next
+			For i As Integer = 0 To URLFileList.Items.Count - 1
+				URLFileList.SetItemChecked(i, True)
+			Next
+			Dim FileStream3 As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Create)
+			Dim BinaryWriter3 As New System.IO.BinaryWriter(FileStream3)
+			For i = 0 To URLFileList.Items.Count - 1
+				BinaryWriter3.Write(CStr(URLFileList.Items(i)))
+				BinaryWriter3.Write(CBool(URLFileList.GetItemChecked(i)))
+			Next
+			BinaryWriter3.Close()
+			FileStream3.Dispose()
+		End If
+
+	End Sub
+
+	Private Sub SaveURLFileSelection()
+
+		If FrmSettingsLoading = True Then Return
+
+		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Images\System\URLFileCheckList.cld", IO.FileMode.Create)
+		Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
+		For i = 0 To URLFileList.Items.Count - 1
+			BinaryWriter.Write(CStr(URLFileList.Items(i)))
+			BinaryWriter.Write(CBool(URLFileList.GetItemChecked(i)))
+		Next
+		BinaryWriter.Close()
+		FileStream.Dispose()
+
+	End Sub
+
+	Private Sub URLFileList_LostFocus(sender As Object, e As System.EventArgs) Handles URLFileList.LostFocus
+		SaveURLFileSelection()
+	End Sub
+
+
+	Private Sub URLFileList_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles URLFileList.SelectedIndexChanged
+
+		If CBURLPreview.Checked = True Then
+			Dim PreviewList As New List(Of String)
+			PreviewList = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.SelectedItem & ".txt")
+			PBURLPreview.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PreviewList(Form1.randomizer.Next(0, PreviewList.Count)))))
+		End If
+
+		SaveURLFileSelection()
+
+	End Sub
+
+	Private Sub BTNURLFilesAll_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLFilesAll.Click
+		For i As Integer = 0 To URLFileList.Items.Count - 1
+			URLFileList.SetItemChecked(i, True)
+		Next
+		SaveURLFileSelection()
+	End Sub
+
+	Private Sub BTNURLFilesNone_Click(sender As System.Object, e As System.EventArgs) Handles BTNURLFilesNone.Click
+		For i As Integer = 0 To URLFileList.Items.Count - 1
+			URLFileList.SetItemChecked(i, False)
+		Next
+		SaveURLFileSelection()
+	End Sub
+
 	Private Sub CBCBTCock_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCBTCock.LostFocus
 		If CBCBTCock.Checked = True Then
 			My.Settings.CBTCock = True
@@ -7633,42 +8203,6 @@ checkFolder:
 		End If
 	End Sub
 
-	Private Sub NBEmpathy_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBEmpathy.LostFocus
-
-		If NBEmpathy.Value = 1 Then My.Settings.DomEmpathy = 1
-		If NBEmpathy.Value = 2 Then My.Settings.DomEmpathy = 2
-		If NBEmpathy.Value = 3 Then My.Settings.DomEmpathy = 3
-		If NBEmpathy.Value = 4 Then My.Settings.DomEmpathy = 4
-		If NBEmpathy.Value = 5 Then My.Settings.DomEmpathy = 5
-
-
-		Debug.Print(My.Settings.DomEmpathy)
-
-
-
-
-	End Sub
-
-	Private Sub domlevelNumBox_ValueChanged(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.ValueChanged
-		If FrmSettingsLoading = False Then
-			If domlevelNumBox.Value = 1 Then DomLevelDescLabel.Text = "Gentle"
-			If domlevelNumBox.Value = 2 Then DomLevelDescLabel.Text = "Lenient"
-			If domlevelNumBox.Value = 3 Then DomLevelDescLabel.Text = "Tease"
-			If domlevelNumBox.Value = 4 Then DomLevelDescLabel.Text = "Rough"
-			If domlevelNumBox.Value = 5 Then DomLevelDescLabel.Text = "Sadistic"
-		End If
-	End Sub
-
-	Private Sub NBEmpathy_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBEmpathy.ValueChanged
-		If FrmSettingsLoading = False Then
-			If NBEmpathy.Value = 1 Then LBLEmpathy.Text = "Cautious"
-			If NBEmpathy.Value = 2 Then LBLEmpathy.Text = "Caring"
-			If NBEmpathy.Value = 3 Then LBLEmpathy.Text = "Moderate"
-			If NBEmpathy.Value = 4 Then LBLEmpathy.Text = "Cruel"
-			If NBEmpathy.Value = 5 Then LBLEmpathy.Text = "Merciless"
-		End If
-	End Sub
-
 	Private Sub Button14_Click(sender As System.Object, e As System.EventArgs) Handles BTNSaveDomSet.Click
 
 		SaveSettingsDialog.Title = "Select a location to save current Domme settings"
@@ -8056,12 +8590,6 @@ checkFolder:
 
 	End Sub
 
-
-
-	Private Sub CBSaveChatlogExit_CheckedChanged(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles CBSaveChatlogExit.MouseClick
-
-	End Sub
-
 	Private Sub CBRangeOrgasm_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBRangeOrgasm.CheckedChanged
 		If CBRangeOrgasm.Checked = False And alloworgasmComboBox.Enabled = True Then
 			NBAllowOften.Enabled = True
@@ -8121,170 +8649,7 @@ checkFolder:
 		My.Settings.Safeword = TBSafeword.Text
 	End Sub
 
-#Region "----------------------------------------- Apps --------------------------------------------------"
 
-#Region "----------------------------------------- Games -------------------------------------------------"
-
-	''' =========================================================================================================
-	''' <summary>
-	''' Checks if all the conditions for card games are met.
-	''' </summary>
-	''' <returns>Returns true if all conditions are met.</returns>
-	Friend Function CardGameCheck() As Boolean
-		Dim rtnVal As Boolean = True
-
-		For Each tmpPicBox As PictureBox In New List(Of PictureBox) From
-		{BP1, BP2, BP3, BP4, BP5, BP6, SP1, SP2, SP3, SP4, SP5, SP6,
-		GP1, GP2, GP3, GP4, GP5, GP6, CardBack}
-
-			' Check if the Databinding is properly set.
-			If tmpPicBox.DataBindings.Item("ImageLocation") Is Nothing Then
-				Throw New Exception("There is no databinding set on """ & tmpPicBox.Name &
-									"""'s image location. Set the databinding and recompile!")
-			End If
-
-			tmpPicBox.AllowDrop = True
-
-			If tmpPicBox.ImageLocation = My.Settings.GetDefault(tmpPicBox, "ImageLocation") Then
-				rtnVal = False
-			ElseIf File.Exists(tmpPicBox.ImageLocation) Then
-				tmpPicBox.Image = Image.FromFile(tmpPicBox.ImageLocation)
-			Else
-				rtnVal = False
-				My.Settings.ResetField(tmpPicBox, "ImageLocation")
-			End If
-		Next
-
-		'>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Card names <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-		For Each tmpTbx As TextBox In New List(Of TextBox) From
-				{BN1, BN2, BN3, BN4, BN5, BN6,
-				SN1, SN2, SN3, SN4, SN5, SN6,
-				GN1, GN2, GN3, GN4, GN5, GN6}
-
-			If tmpTbx.DataBindings.Item("Text") Is Nothing Then
-				Throw New Exception("There is no databinding set on """ & tmpTbx.Name &
-									"""'s text property. Set the databinding and recompile!")
-			End If
-
-			If tmpTbx.Text.Length < 1 Then My.Settings.ResetField(tmpTbx, "Text")
-		Next
-		Return rtnVal
-	End Function
-
-	''' =========================================================================================================
-	''' <summary>
-	''' Sets a Cardimage for the given picturebox.
-	''' </summary>
-	''' <param name="sender">The PictureBox to set the Image.</param>
-	''' <param name="filepath">The image filepath to set.</param>
-	''' <remarks>The PictureBox must have a databinding between the 
-	''' ImageLoaction-Property and My.Settings.</remarks>
-	Private Sub CardImageSet(sender As PictureBox, filepath As String)
-		Try
-			Dim target As PictureBox = CType(sender, PictureBox)
-			Dim savePath As String = String.Format("{0}\Images\Cards\Card{1}.bmp",
-												   Application.StartupPath,
-												   target.Name)
-
-			savePath = savePath.Replace("CardCard", "Card")
-
-			' Close Games form and end file access.
-			If FrmCardList.Visible Then FrmCardList.Dispose()
-			FrmCardList.ClearAllCards()
-
-			' Release all ressources.
-			If target.Image IsNot Nothing Then target.Image.Dispose()
-			target.Image = Nothing
-			target.ImageLocation = ""
-
-			GC.Collect()
-			Application.DoEvents()
-
-			' Check if the file is locked. Sometimes the GC needs some time
-			' to finally release the file lock after the image was disposed.
-			Dim retrycounter As Integer = 5
-			Do While IsFileLocked(savePath) AndAlso retrycounter > 0
-				retrycounter -= 1
-				GC.Collect()
-				Application.DoEvents()
-			Loop
-
-			If retrycounter <= 0 Then Throw New IO.IOException(
-				String.Format("The file """"{0}"" is already in use."), savePath)
-
-			' Check if the Databinding is properly set.
-			If target.DataBindings.Item("ImageLocation") Is Nothing Then
-				Throw New Exception("There is no databinding set on """ & target.Name &
-									"""'s image location. Set the databinding and recompile!")
-			End If
-
-			' Set the resized image as picturebox image and write it to disk
-			target.Image = ResizeImage(filepath, New Size(138, 179))
-			target.Image.Save(savePath)
-
-			' Set the image Location-Property. Property has to be databound with My.Settings!
-			target.ImageLocation = savePath
-
-			' Writing to databound Imagelocation doesn't update My.Settings!
-			' Now we write the value directly using the binding to get the My.Settings.Member to write to.
-			My.Settings(target.DataBindings.Item("ImageLocation").BindingMemberInfo.BindingField) = savePath
-
-
-			Form1.GamesToolStripMenuItem1.Enabled = CardGameCheck()
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'                                            All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			MsgBox(ex.Message, MsgBoxStyle.Critical, "Unable to set Card Image")
-		End Try
-	End Sub
-
-	Private Sub CardPictureboxes_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles _
-										BP1.DragEnter, BP2.DragEnter, BP3.DragEnter, BP4.DragEnter, BP5.DragEnter, BP6.DragEnter,
-										SP1.DragEnter, SP2.DragEnter, SP3.DragEnter, SP4.DragEnter, SP5.DragEnter, SP6.DragEnter,
-										GP1.DragEnter, GP2.DragEnter, GP3.DragEnter, GP4.DragEnter, GP5.DragEnter, GP6.DragEnter,
-										CardBack.DragEnter
-		If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
-			e.Effect = DragDropEffects.Copy
-		End If
-	End Sub
-
-	Private Sub CardPictureboxes_DragDrop(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles _
-										BP1.DragDrop, BP2.DragDrop, BP3.DragDrop, BP4.DragDrop, BP5.DragDrop, BP6.DragDrop,
-										SP1.DragDrop, SP2.DragDrop, SP3.DragDrop, SP4.DragDrop, SP5.DragDrop, SP6.DragDrop,
-										GP1.DragDrop, GP2.DragDrop, GP3.DragDrop, GP4.DragDrop, GP5.DragDrop, GP6.DragDrop,
-										CardBack.DragDrop
-		CardImageSet(CType(sender, PictureBox), CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0))
-	End Sub
-
-	Private Sub CardPictureboxes_Click(sender As System.Object, e As System.EventArgs) Handles _
-										BP1.Click, BP2.Click, BP3.Click, BP4.Click, BP5.Click, BP6.Click,
-										SP1.Click, SP2.Click, SP3.Click, SP4.Click, SP5.Click, SP6.Click,
-										GP1.Click, GP2.Click, GP3.Click, GP4.Click, GP5.Click, GP6.Click,
-										CardBack.Click
-		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-			CardImageSet(CType(sender, PictureBox), OpenFileDialog1.FileName)
-		End If
-	End Sub
-
-	''' <summary>
-	''' Resets the databinding source of a TextBox to its initial value, if there is no Text entered.
-	''' </summary>
-	Private Sub CardTextboxes_Validating(sender As Object, e As CancelEventArgs) Handles _
-										BN1.Validating, BN2.Validating, BN3.Validating, BN4.Validating, BN5.Validating, BN6.Validating,
-										SN1.Validating, SN2.Validating, SN3.Validating, SN4.Validating, SN5.Validating, SN6.Validating,
-										GN1.Validating, GN2.Validating, GN3.Validating, GN4.Validating, GN5.Validating, GN6.Validating
-		Dim tmpTbx As TextBox = CType(sender, TextBox)
-
-		If tmpTbx.Text = "" AndAlso tmpTbx.DataBindings("Text") IsNot Nothing Then
-			My.Settings.ResetField(tmpTbx, "Text")
-			e.Cancel = False
-		End If
-	End Sub
-
-#End Region ' Games
-
-#End Region
 
 	Private Sub Button4_Click_5(sender As System.Object, e As System.EventArgs) Handles Button4.Click
 
@@ -9123,21 +9488,9 @@ checkFolder:
 		My.Settings.ChastitySpikes = CBChastitySpikes.Checked
 	End Sub
 
-
-
 	Private Sub CBHimHer_LostFocus(sender As Object, e As System.EventArgs) Handles CBHimHer.LostFocus
 		My.Settings.CBHimHer = CBHimHer.Checked
-
 	End Sub
-
-	Private Sub CBSettingsPause_CheckedChanged(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles CBSettingsPause.MouseClick
-
-	End Sub
-
-	Private Sub CheckBox1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBDomDel.CheckedChanged
-
-	End Sub
-
 
 	Private Sub CBDomDel_LostFocus(sender As Object, e As System.EventArgs) Handles CBDomDel.LostFocus
 		My.Settings.DomDeleteMedia = CBDomDel.Checked
@@ -9457,9 +9810,7 @@ checkFolder:
 	End Sub
 
 	Private Sub Button3_Click_2(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-
 		Process.Start(Application.StartupPath & "\Images\Session Images\")
-
 	End Sub
 
 	Public Sub CalculateSessionImages()
@@ -9467,19 +9818,15 @@ checkFolder:
 		Dim SesImgCount As Integer = 0
 		Dim SesImgSpace As Long = 0
 
-
 		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\Session Images\", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
 			SesImgCount += 1
 			SesImgSpace += My.Computer.FileSystem.GetFileInfo(foundFile).Length
 		Next
 
-
-
 		LBLSesFiles.Text = SesImgCount
 		LBLSesSpace.Text = FormatBytes(SesImgSpace)
 
 	End Sub
-
 
 	Private Function FormatBytes(ByVal Bytes As Long) As String
 		Try
@@ -9512,10 +9859,6 @@ checkFolder:
 
 			CalculateSessionImages()
 		End If
-
-
-
-
 	End Sub
 
 
@@ -9917,31 +10260,6 @@ checkFolder:
 
 	End Sub
 
-	Private Sub Button2_Click_1(sender As System.Object, e As System.EventArgs) Handles Button2.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLContact1ImageDir.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.Contact1ImageDir = LBLContact1ImageDir.Text
-			Form1.GetContact1Pics()
-		End If
-	End Sub
-
-	Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLContact2ImageDir.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.Contact2ImageDir = LBLContact2ImageDir.Text
-			Form1.GetContact2Pics()
-		End If
-	End Sub
-
-	Private Sub Button10_Click_1(sender As System.Object, e As System.EventArgs) Handles Button10.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLContact3ImageDir.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
-			Form1.GetContact3Pics()
-		End If
-	End Sub
-
-
 	Private Sub Button11_Click_1(sender As System.Object, e As System.EventArgs) Handles Button11.Click
 
 		If MsgBox("This will change the Chastity state of Tease AI. Depending on the Personality or Scripts used so far, this could cause unexpected behavior or break certain scripts." & Environment.NewLine _
@@ -9962,310 +10280,7 @@ checkFolder:
 
 	End Sub
 
-	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact1ImageDir.MouseHover
-		If LBLContact1ImageDir.Text <> Nothing = True And LBLContact1ImageDir.Text <> "No path selected" Then
-			TTDir.SetToolTip(LBLContact1ImageDir, LBLContact1ImageDir.Text)
-		Else
-			TTDir.SetToolTip(LBLContact1ImageDir, "No path selected")
-		End If
-	End Sub
 
-	Private Sub LBLContact2ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact2ImageDir.MouseHover
-		If LBLContact2ImageDir.Text <> Nothing = True And LBLContact2ImageDir.Text <> "No path selected" Then
-			TTDir.SetToolTip(LBLContact2ImageDir, LBLContact2ImageDir.Text)
-		Else
-			TTDir.SetToolTip(LBLContact2ImageDir, "No path selected")
-		End If
-	End Sub
-
-	Private Sub LBLContact3ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact3ImageDir.MouseHover
-		If LBLContact3ImageDir.Text <> Nothing = True And LBLContact3ImageDir.Text <> "No path selected" Then
-			TTDir.SetToolTip(LBLContact3ImageDir, LBLContact3ImageDir.Text)
-		Else
-			TTDir.SetToolTip(LBLContact3ImageDir, "No path selected")
-		End If
-	End Sub
-
-	Private Sub LBLDomImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLDomImageDir.MouseEnter
-		If LBLDomImageDir.Text <> Nothing = True And LBLDomImageDir.Text <> "No path selected" Then
-			TTDir.SetToolTip(LBLDomImageDir, LBLDomImageDir.Text)
-		Else
-			TTDir.SetToolTip(LBLDomImageDir, "No path selected")
-		End If
-	End Sub
-
-
-
-	Private Sub Button14_Click_1(sender As System.Object, e As System.EventArgs) Handles Button14.Click
-		LBLContact1ImageDir.Text = "No path selected"
-		My.Settings.Contact1ImageDir = "No path selected"
-		Form1.Contact1Pics.Clear()
-	End Sub
-
-	Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
-		LBLContact2ImageDir.Text = "No path selected"
-		My.Settings.Contact2ImageDir = "No path selected"
-		Form1.Contact2Pics.Clear()
-	End Sub
-
-	Private Sub Button12_Click_1(sender As System.Object, e As System.EventArgs) Handles Button12.Click
-		LBLContact3ImageDir.Text = "No path selected"
-		My.Settings.Contact3ImageDir = "No path selected"
-		Form1.Contact3Pics.Clear()
-	End Sub
-
-	Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click
-
-		SaveSettingsDialog.Title = "Select a location to save current Glitter settings"
-		SaveSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
-
-
-		SaveSettingsDialog.FileName = Form1.dompersonalitycombobox.Text & " Glitter Settings"
-
-		If SaveSettingsDialog.ShowDialog() = DialogResult.OK Then
-			Dim SettingsPath As String = SaveSettingsDialog.FileName
-			Dim SettingsList As New List(Of String)
-			SettingsList.Clear()
-
-
-			If My.Settings.CBGlitterFeed = True Then SettingsList.Add("Glitter Feed: On")
-			If My.Settings.CBGlitterFeedScripts = True Then SettingsList.Add("Glitter Feed: Scripts")
-			If CBGlitterFeedOff.Checked = True Then SettingsList.Add("Glitter Feed: Off")
-
-			SettingsList.Add("Short Name: " & TBGlitterShortName.Text)
-			SettingsList.Add("Domme Color: " & LBLGlitterNCDomme.ForeColor.ToArgb.ToString)
-			SettingsList.Add("Tease: " & CBTease.Checked)
-			SettingsList.Add("Egotist: " & CBEgotist.Checked)
-			SettingsList.Add("Trivia: " & CBTrivia.Checked)
-			SettingsList.Add("Daily: " & CBDaily.Checked)
-			SettingsList.Add("Custom 1: " & CBCustom1.Checked)
-			SettingsList.Add("Custom 2: " & CBCustom2.Checked)
-			SettingsList.Add("Domme Post Frequency: " & My.Settings.GlitterDSlider)
-
-			SettingsList.Add("Contact 1 Enabled: " & CBGlitter1.Checked)
-			SettingsList.Add("Contact 1 Name: " & TBGlitter1.Text)
-			SettingsList.Add("Contact 1 Color: " & LBLGlitterNC1.ForeColor.ToArgb.ToString)
-			SettingsList.Add("Contact 1 Image Directory: " & LBLContact1ImageDir.Text)
-			SettingsList.Add("Contact 1 Post Frequency: " & My.Settings.Glitter1Slider)
-
-			SettingsList.Add("Contact 2 Enabled: " & CBGlitter2.Checked)
-			SettingsList.Add("Contact 2 Name: " & TBGlitter2.Text)
-			SettingsList.Add("Contact 2 Color: " & LBLGlitterNC2.ForeColor.ToArgb.ToString)
-			SettingsList.Add("Contact 2 Image Directory: " & LBLContact2ImageDir.Text)
-			SettingsList.Add("Contact 2 Post Frequency: " & My.Settings.Glitter2Slider)
-
-			SettingsList.Add("Contact 3 Enabled: " & CBGlitter3.Checked)
-			SettingsList.Add("Contact 3 Name: " & TBGlitter3.Text)
-			SettingsList.Add("Contact 3 Color: " & LBLGlitterNC3.ForeColor.ToArgb.ToString)
-			SettingsList.Add("Contact 3 Image Directory: " & LBLContact3ImageDir.Text)
-			SettingsList.Add("Contact 3 Post Frequency: " & My.Settings.Glitter3Slider)
-
-			SettingsList.Add("Domme AV: " & My.Settings.GlitterAV)
-			SettingsList.Add("Contact 1 AV: " & My.Settings.GlitterAV1)
-			SettingsList.Add("Contact 2 AV: " & My.Settings.GlitterAV2)
-			SettingsList.Add("Contact 3 AV: " & My.Settings.GlitterAV3)
-
-
-
-			Dim SettingsString As String = ""
-
-			For i As Integer = 0 To SettingsList.Count - 1
-				SettingsString = SettingsString & SettingsList(i)
-				If i <> SettingsList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-			Next
-
-			My.Computer.FileSystem.WriteAllText(SettingsPath, SettingsString, False)
-		End If
-
-
-	End Sub
-
-	Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
-
-		OpenSettingsDialog.Title = "Select a Glitter settings file"
-		OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
-
-		If OpenSettingsDialog.ShowDialog() = DialogResult.OK Then
-
-			Dim SettingsList As New List(Of String)
-
-			Try
-				Dim SettingsReader As New StreamReader(OpenSettingsDialog.FileName)
-				While SettingsReader.Peek <> -1
-					SettingsList.Add(SettingsReader.ReadLine())
-				End While
-				SettingsReader.Close()
-				SettingsReader.Dispose()
-			Catch ex As Exception
-				MessageBox.Show(Me, "This file could not be opened!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			End Try
-
-			Try
-
-				Dim CheckState As String = SettingsList(0).Replace("Glitter Feed: ", "")
-				If CheckState = "On" Then My.Settings.CBGlitterFeed = True
-				If CheckState = "Scripts" Then My.Settings.CBGlitterFeedScripts = True
-				If CheckState = "Off" Then CBGlitterFeedOff.Checked = True
-
-				TBGlitterShortName.Text = SettingsList(1).Replace("Short Name: ", "")
-
-				Dim GlitterColor As Color = Color.FromArgb(SettingsList(2).Replace("Domme Color: ", ""))
-				LBLGlitterNCDomme.ForeColor = GlitterColor
-
-				CBTease.Checked = SettingsList(3).Replace("Tease: ", "")
-				CBEgotist.Checked = SettingsList(4).Replace("Egotist: ", "")
-				CBTrivia.Checked = SettingsList(5).Replace("Trivia: ", "")
-				CBDaily.Checked = SettingsList(6).Replace("Daily: ", "")
-				CBCustom1.Checked = SettingsList(7).Replace("Custom 1: ", "")
-				CBCustom2.Checked = SettingsList(8).Replace("Custom 2: ", "")
-				GlitterSlider.Value = SettingsList(9).Replace("Domme Post Frequency: ", "")
-
-
-				CBGlitter1.Checked = SettingsList(10).Replace("Contact 1 Enabled: ", "")
-				TBGlitter1.Text = SettingsList(11).Replace("Contact 1 Name: ", "")
-				GlitterColor = Color.FromArgb(SettingsList(12).Replace("Contact 1 Color: ", ""))
-				LBLGlitterNC1.ForeColor = GlitterColor
-				LBLContact1ImageDir.Text = SettingsList(13).Replace("Contact 1 Image Directory: ", "")
-				GlitterSlider1.Value = SettingsList(14).Replace("Contact 1 Post Frequency: ", "")
-
-				CBGlitter2.Checked = SettingsList(15).Replace("Contact 2 Enabled: ", "")
-				TBGlitter2.Text = SettingsList(16).Replace("Contact 2 Name: ", "")
-				GlitterColor = Color.FromArgb(SettingsList(17).Replace("Contact 2 Color: ", ""))
-				LBLGlitterNC2.ForeColor = GlitterColor
-				LBLContact2ImageDir.Text = SettingsList(18).Replace("Contact 2 Image Directory: ", "")
-				GlitterSlider2.Value = SettingsList(19).Replace("Contact 2 Post Frequency: ", "")
-
-				CBGlitter3.Checked = SettingsList(20).Replace("Contact 3 Enabled: ", "")
-				TBGlitter3.Text = SettingsList(21).Replace("Contact 3 Name: ", "")
-				GlitterColor = Color.FromArgb(SettingsList(22).Replace("Contact 3 Color: ", ""))
-				LBLGlitterNC3.ForeColor = GlitterColor
-				LBLContact3ImageDir.Text = SettingsList(23).Replace("Contact 3 Image Directory: ", "")
-				GlitterSlider3.Value = SettingsList(24).Replace("Contact 3 Post Frequency: ", "")
-
-				Try
-					GlitterAV.Image = Image.FromFile(SettingsList(25).Replace("Domme AV: ", ""))
-					My.Settings.GlitterAV = SettingsList(25).Replace("Domme AV: ", "")
-				Catch
-				End Try
-
-				Try
-					GlitterAV1.Image = Image.FromFile(SettingsList(26).Replace("Contact 1 AV: ", ""))
-					My.Settings.GlitterAV1 = SettingsList(26).Replace("Contact 1 AV: ", "")
-				Catch
-				End Try
-
-				Try
-					GlitterAV2.Image = Image.FromFile(SettingsList(27).Replace("Contact 2 AV: ", ""))
-					My.Settings.GlitterAV2 = SettingsList(27).Replace("Contact 2 AV: ", "")
-				Catch
-				End Try
-
-				Try
-					GlitterAV3.Image = Image.FromFile(SettingsList(28).Replace("Contact 3 AV: ", ""))
-					My.Settings.GlitterAV3 = SettingsList(28).Replace("Contact 3 AV: ", "")
-				Catch
-				End Try
-
-
-				SaveGlitterSettings()
-
-			Catch
-				MessageBox.Show(Me, "This Glitter settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				LoadGlitterSettings()
-			End Try
-
-		End If
-	End Sub
-
-	Public Sub SaveGlitterSettings()
-
-		If CBGlitterFeed.Checked = True Then
-			My.Settings.CBGlitterFeed = True
-			My.Settings.CBGlitterFeedScripts = False
-			My.Settings.CBGlitterFeedOff = False
-		End If
-		If CBGlitterFeedScripts.Checked = True Then
-			My.Settings.CBGlitterFeed = False
-			My.Settings.CBGlitterFeedScripts = True
-			My.Settings.CBGlitterFeedOff = False
-		End If
-		If CBGlitterFeedOff.Checked = True Then
-			My.Settings.CBGlitterFeed = False
-			My.Settings.CBGlitterFeedScripts = False
-			My.Settings.CBGlitterFeedOff = True
-		End If
-
-		My.Settings.GlitterSN = TBGlitterShortName.Text
-
-		My.Settings.GlitterNCDommeColor = LBLGlitterNCDomme.ForeColor
-
-		My.Settings.CBTease = CBTease.Checked
-		My.Settings.CBEgotist = CBEgotist.Checked
-		My.Settings.CBTrivia = CBTrivia.Checked
-		My.Settings.CBDaily = CBDaily.Checked
-		My.Settings.CBCustom1 = CBCustom1.Checked
-		My.Settings.CBCustom2 = CBCustom2.Checked
-		My.Settings.GlitterDSlider = GlitterSlider.Value
-
-		My.Settings.CBGlitter1 = CBGlitter1.Checked
-		My.Settings.Glitter1 = TBGlitter1.Text
-		My.Settings.GlitterNC1Color = LBLGlitterNC1.ForeColor
-		My.Settings.Contact1ImageDir = LBLContact1ImageDir.Text
-		My.Settings.Glitter1Slider = GlitterSlider1.Value
-
-		My.Settings.CBGlitter2 = CBGlitter2.Checked
-		My.Settings.Glitter2 = TBGlitter2.Text
-		My.Settings.GlitterNC2Color = LBLGlitterNC2.ForeColor
-		My.Settings.Contact2ImageDir = LBLContact2ImageDir.Text
-		My.Settings.Glitter2Slider = GlitterSlider2.Value
-
-		My.Settings.CBGlitter3 = CBGlitter3.Checked
-		My.Settings.Glitter3 = TBGlitter3.Text
-		My.Settings.GlitterNC3Color = LBLGlitterNC3.ForeColor
-		My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
-		My.Settings.Glitter3Slider = GlitterSlider3.Value
-
-
-	End Sub
-
-	Public Sub LoadGlitterSettings()
-
-		If My.Settings.CBGlitterFeed = True Then CBGlitterFeed.Checked = True
-		If My.Settings.CBGlitterFeedScripts = True Then CBGlitterFeedScripts.Checked = True
-		If My.Settings.CBGlitterFeedOff = True Then CBGlitterFeedOff.Checked = True
-
-		TBGlitterShortName.Text = My.Settings.GlitterSN
-
-		LBLGlitterNCDomme.ForeColor = My.Settings.GlitterNCDommeColor
-
-		CBTease.Checked = My.Settings.CBTease
-		CBEgotist.Checked = My.Settings.CBEgotist
-		CBTrivia.Checked = My.Settings.CBTrivia
-		CBDaily.Checked = My.Settings.CBDaily
-		CBCustom1.Checked = My.Settings.CBCustom1
-		CBCustom2.Checked = My.Settings.CBCustom2
-		GlitterSlider.Value = My.Settings.GlitterDSlider
-
-		CBGlitter1.Checked = My.Settings.CBGlitter1
-		TBGlitter1.Text = My.Settings.Glitter1
-		LBLGlitterNC1.ForeColor = My.Settings.GlitterNC1Color
-		LBLContact1ImageDir.Text = My.Settings.Contact1ImageDir
-		GlitterSlider1.Value = My.Settings.Glitter1Slider
-
-		CBGlitter2.Checked = My.Settings.CBGlitter2
-		TBGlitter2.Text = My.Settings.Glitter2
-		LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
-		LBLContact2ImageDir.Text = My.Settings.Contact2ImageDir
-		GlitterSlider2.Value = My.Settings.Glitter2Slider
-
-		CBGlitter3.Checked = My.Settings.CBGlitter3
-		TBGlitter3.Text = My.Settings.Glitter3
-		LBLGlitterNC3.ForeColor = My.Settings.GlitterNC3Color
-		LBLContact3ImageDir.Text = My.Settings.Contact3ImageDir
-		GlitterSlider3.Value = My.Settings.Glitter3Slider
-
-	End Sub
 
 	Public Sub EnglishMenu()
 
@@ -10375,7 +10390,6 @@ checkFolder:
 
 
 	Private Sub RBGerman_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles RBGerman.CheckedChanged, RBEnglish.CheckedChanged
-
 		If FrmSettingsLoading = False Then
 
 			If RBGerman.Checked = True Then
@@ -10387,12 +10401,8 @@ checkFolder:
 				EnglishMenu()
 				My.Settings.TeaseAILanguage = "English"
 			End If
-
-
 		End If
-
 	End Sub
-
 
 	Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles Button25.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
@@ -10514,7 +10524,6 @@ checkFolder:
 			My.Settings.BackgroundStretch = CBStretchBack.Checked
 			Form1.ApplyThemeColor()
 		End If
-
 	End Sub
 
 
@@ -10694,7 +10703,6 @@ checkFolder:
 		TTDir.SetToolTip(BTNWIBrowse, "Select the directory where images will be saved to disk.")
 	End Sub
 
-
 	Private Sub SliderVVolume_LostFocus(sender As Object, e As System.EventArgs) Handles SliderVVolume.LostFocus
 		My.Settings.VVolume = SliderVVolume.Value
 	End Sub
@@ -10753,10 +10761,6 @@ checkFolder:
 
 	Private Sub Button19_Click(sender As System.Object, e As System.EventArgs) Handles Button19.Click
 		Form1.StrokeTick = 5
-	End Sub
-
-	Private Sub CBWebtease_CheckedChanged(sender As System.Object, e As System.Windows.Forms.MouseEventArgs) Handles CBWebtease.MouseClick
-
 	End Sub
 
 	Private Sub CBMuteMedia_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBMuteMedia.CheckedChanged
@@ -11118,17 +11122,4 @@ checkFolder:
 
 	End Sub
 
-	Private Sub GroupBox58_Enter(sender As Object, e As EventArgs) Handles GbxCardsBronze.Enter
-
-	End Sub
-	'Private Sub CBGlitterFeedScripts_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitterFeedScripts.CheckedChanged
-	'My.Settings.CBGlitterFeed = False
-	'My.Settings.CBGlitterFeedScripts = True
-	'My.Settings.CBGlitterFeedOff = False
-	'End Sub
-	'Private Sub CBGlitterFeedOff_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitterFeedOff.CheckedChanged
-	'My.Settings.CBGlitterFeed = False
-	'My.Settings.CBGlitterFeedScripts = False
-	'My.Settings.CBGlitterFeedOff = True
-	'End Sub
 End Class
