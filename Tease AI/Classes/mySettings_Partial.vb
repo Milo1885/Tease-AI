@@ -27,7 +27,7 @@ Imports System.IO
 
 Namespace My
 
-    Partial Class MySettings
+	Partial Class MySettings
 
 
 
@@ -95,7 +95,7 @@ Error_All:
 		''' Procedure to check whether to load or import a custom user.config-file. 
 		''' </summary>
 		Friend Shared Sub StartupCheck()
-            Dim importSettingFile As String = Application.CommandLineArgs.FirstOrDefault(Function(x) x.StartsWith("ImportSettings-"))
+			Dim importSettingFile As String = Application.CommandLineArgs.FirstOrDefault(Function(x) x.StartsWith("ImportSettings-"))
 
 			If importSettingFile IsNot Nothing Then
 				importConfig(importSettingFile)
@@ -109,12 +109,12 @@ Error_All:
         ''' Replace the user.config-file located in %LocalAppData% with the duplicated filöe.
         ''' </summary>
         Private Shared Sub loadCustomUserConfig()
-            Try
+			Try
 				Dim configAppData As String = LocalAppFilePath()
 				Dim configAppDataDir As String = Path.GetDirectoryName(configAppData)
 
-                Dim dupeFilePath As String = GetDuplicatePath()
-                Dim dupeFileDir As String = Path.GetDirectoryName(dupeFilePath)
+				Dim dupeFilePath As String = GetDuplicatePath()
+				Dim dupeFileDir As String = Path.GetDirectoryName(dupeFilePath)
 
 				If Directory.Exists(configAppDataDir) And File.Exists(configAppData) Then
 					' Config in %LocalAppData% older found.
@@ -132,15 +132,15 @@ Error_All:
 					' No settings Found, try an Upgrade if there a Version in %LocaAppDir%
 					My.Settings.Upgrade()
 				End If
-            Catch ex As Exception
+			Catch ex As Exception
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 '                                            All Errors
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 MsgBox("Exception on loading custom-user.config." & vbCrLf & ex.Message,
-                       MsgBoxStyle.Exclamation, "Load user.config")
-                Log.WriteError(ex.Message, ex, "Exception on loading custom-user.config.")
-            End Try
-        End Sub
+					   MsgBoxStyle.Exclamation, "Load user.config")
+				Log.WriteError(ex.Message, ex, "Exception on loading custom-user.config.")
+			End Try
+		End Sub
 
 #Region "---------------------------------------MyBaseRelated--------------------------------------------"
 
@@ -174,9 +174,9 @@ Error_All:
 
 			Dim dupeFilePath As String = GetDuplicatePath()
 
-            If Directory.Exists(BackupDir) = True AndAlso File.Exists(dupeFilePath) Then
-                File.Delete(dupeFilePath)
-            End If
+			If Directory.Exists(BackupDir) = True AndAlso File.Exists(dupeFilePath) Then
+				File.Delete(dupeFilePath)
+			End If
 
 			MyBase.Reset()
 
@@ -224,8 +224,8 @@ Error_All:
             Dim SettingsFilePath As String = LocalAppFilePath
 			Dim TargetPath As String = BackupDir & Application.Info.Version.ToString & "." & Path.GetFileName(SettingsFilePath)
 
-            Return TargetPath
-        End Function
+			Return TargetPath
+		End Function
 
 
 
@@ -263,7 +263,7 @@ Error_All:
 		''' is hard-stopped and restarted with new CommandLine Args. Existing CommandLineArgs are overwritten.
 		''' </summary>
 		Friend Shared Sub importOnRestart()
-            Try
+			Try
 				Dim fs As New OpenFileDialog With
 				{.Filter = "config|*.config",
 				.Multiselect = False,
@@ -273,37 +273,37 @@ Error_All:
 				If fs.ShowDialog = DialogResult.OK And fs.FileName <> "" And File.Exists(fs.FileName) Then
                     ' Restart the application with new Start-parameters
                     Dim startInfo As New ProcessStartInfo()
-                    startInfo.FileName = Reflection.Assembly.GetExecutingAssembly().CodeBase
-                    startInfo.Arguments = "ImportSettings-""" & fs.FileName & """"
+					startInfo.FileName = Reflection.Assembly.GetExecutingAssembly().CodeBase
+					startInfo.Arguments = "ImportSettings-""" & fs.FileName & """"
 
-                    If MessageBox.Show("Do you want to import the setting from file: " & vbCrLf &
-                                       fs.FileName & vbCrLf &
-                                        "If you continue, the program will restart and load the specified config-file. " &
-                                        "This will overwrite your current settings. " & vbCrLf & vbCrLf &
-                                        "Would you like to continue?",
-                                       "Import Settings",
-                                       MessageBoxButtons.OKCancel,
-                                       MessageBoxIcon.Question,
-                                       MessageBoxDefaultButton.Button2) = DialogResult.OK Then
+					If MessageBox.Show("Do you want to import the setting from file: " & vbCrLf &
+									   fs.FileName & vbCrLf &
+										"If you continue, the program will restart and load the specified config-file. " &
+										"This will overwrite your current settings. " & vbCrLf & vbCrLf &
+										"Would you like to continue?",
+									   "Import Settings",
+									   MessageBoxButtons.OKCancel,
+									   MessageBoxIcon.Question,
+									   MessageBoxDefaultButton.Button2) = DialogResult.OK Then
 
-                        Process.Start(startInfo)
-                        Process.GetCurrentProcess().Kill()
-                    End If
-                End If
-            Catch ex As Win32Exception When ex.ErrorCode = -2147467259
+						Process.Start(startInfo)
+						Process.GetCurrentProcess().Kill()
+					End If
+				End If
+			Catch ex As Win32Exception When ex.ErrorCode = -2147467259
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 '                                      Process.Start() cancelled
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 MsgBox("Import has benn cancelled.", MsgBoxStyle.Information)
-            Catch ex As Exception
+			Catch ex As Exception
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 '                                            All Errors
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 Log.WriteError(ex.Message, ex, "Exception while determining the import file.")
-                MsgBox("An exception occured while determining the import file: " &
-                       ex.Message, MsgBoxStyle.Exclamation, "Exception occured")
-            End Try
-        End Sub
+				MsgBox("An exception occured while determining the import file: " &
+					   ex.Message, MsgBoxStyle.Exclamation, "Exception occured")
+			End Try
+		End Sub
 
         ''' =========================================================================================================
         ''' <summary>
@@ -315,22 +315,22 @@ Error_All:
         ''' used to create a new version-folder in the %LocalAppData%-Folder. If there is already
         ''' another folder with this Version Number the user has to confirm overwriting. </remarks>
         Private Shared Sub importConfig(ByVal filepath As String)
-            Try
-                If filepath = Nothing Then Exit Sub
+			Try
+				If filepath = Nothing Then Exit Sub
 
-                Dim fileToLoad As String = filepath.Replace("ImportSettings-", "")
+				Dim fileToLoad As String = filepath.Replace("ImportSettings-", "")
 
-                If File.Exists(fileToLoad) Then
+				If File.Exists(fileToLoad) Then
                     '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
                     '                     Calculate-Previous-Version-Start 
                     '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
                     Dim splitVersion() As String = Application.Info.Version.ToString.Split(".")
-                    Dim calcVersion As New List(Of Integer)
+					Dim calcVersion As New List(Of Integer)
 					Dim copyRest As Boolean = False
 
 					For i = splitVersion.Count - 1 To 0 Step -1
-                        Dim currNumber As Integer = Integer.Parse(splitVersion(i))
-                        Dim prevNumber As Integer = currNumber - 1
+						Dim currNumber As Integer = Integer.Parse(splitVersion(i))
+						Dim prevNumber As Integer = currNumber - 1
 
 						If copyRest Then
 							' Calculated a non-negative number before Copy rest
@@ -344,14 +344,14 @@ Error_All:
 							calcVersion.Insert(0, prevNumber)
 						Else
 							Throw New ArgumentException("Unknown case while calculation previous Version.")
-                        End If
-                    Next
+						End If
+					Next
 
-                    Dim prevVersion As New Version(String.Join(".", calcVersion))
+					Dim prevVersion As New Version(String.Join(".", calcVersion))
 
-                    If prevVersion >= Application.Info.Version Then
-                        Throw New ArithmeticException("The calculated version number is not smaller than the current.")
-                    End If
+					If prevVersion >= Application.Info.Version Then
+						Throw New ArithmeticException("The calculated version number is not smaller than the current.")
+					End If
                     '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
                     '    Calculate-Previous-Version-END 
                     '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -367,15 +367,15 @@ Error_All:
 
                     ' Ask for confirmation if there is already a directory.
                     If Directory.Exists(ImportDir) Then
-                        If MsgBox("There is already a directory '""" & ImportDir &
-                                """ if you continue, the content in this directory " &
-                                " will be overriden. " & vbCrLf &
-                                "Do you wish to overwrite the content?",
-                                  MsgBoxStyle.YesNo, "Overwrite Content") = MsgBoxResult.No Then
-                            MsgBox("Import has been cancelled.", MsgBoxStyle.Information, "Import")
-                            Exit Sub
-                        End If
-                    End If
+						If MsgBox("There is already a directory '""" & ImportDir &
+								""" if you continue, the content in this directory " &
+								" will be overriden. " & vbCrLf &
+								"Do you wish to overwrite the content?",
+								  MsgBoxStyle.YesNo, "Overwrite Content") = MsgBoxResult.No Then
+							MsgBox("Import has been cancelled.", MsgBoxStyle.Information, "Import")
+							Exit Sub
+						End If
+					End If
 
                     ' Create target directory 
                     Directory.CreateDirectory(ImportDir)
@@ -392,15 +392,15 @@ Error_All:
 					MsgBox("The settings have been successfully imported", MsgBoxStyle.Information, "Import Settings")
 				End If
 
-            Catch ex As Exception
+			Catch ex As Exception
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 '                                            All Errors
                 '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
                 Log.WriteError(ex.Message, ex, "Import settings")
-                MsgBox("An exception occured while importing settings: " & vbCrLf & ex.Message,
-                       MsgBoxStyle.Exclamation, "Import settings")
-            End Try
-        End Sub
+				MsgBox("An exception occured while importing settings: " & vbCrLf & ex.Message,
+					   MsgBoxStyle.Exclamation, "Import settings")
+			End Try
+		End Sub
 
 #End Region  ' Import file
 
@@ -418,6 +418,15 @@ Error_All:
 				Throw
 			End Try
 		End Sub
+
+		''' =========================================================================================================
+		''' <summary>
+		''' Returns the initial value of a Member.
+		''' </summary>
+		''' <param name="Member">The Name of the Member, to retrieve the initial value.</param>
+		Friend Function GetDefault(ByVal Member As String) As String
+			Return My.Settings.PropertyValues(Member).Property.DefaultValue
+		End Function
 		''' =========================================================================================================
 		''' <summary>
 		''' Returns the initial value for a databound field using a databound control.

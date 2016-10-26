@@ -122,55 +122,6 @@
 
  If you simply wish to activate all scripts you meet the requirements for, then click "Select Available".</value>
   </data>
-  <data name="Label51.Text" xml:space="preserve">
-    <value>Select a Video Tease Type and Script, then click the "Load Script" button. This will load all relevant lines from the selected script. Add as many new taunts or comments as you wish, entering a new line for each one just as you would in a word processor. You may also delete any existing lines. Once you are satisfied with your changes, click the "Save Changes" button to overwrite the script file on your computer. To start over without saving, click the "Clear Text" button.  </value>
-  </data>
-  <data name="Label52.Text" xml:space="preserve">
-    <value>Select a Glitter post type, and then select a post from the populated list to edit it, or enter a file name to create a new one.
-
-Enter what the domme will say in the "Domme's Post" box, and then at leat 3 responses in the box below. If you are creating a Tease glitter post, you will need to include 3 responses for each of the contact personality types.
-
-Once you are finished with your changes, click "Save Glitter File".</value>
-  </data>
-  <data name="Label33.Text" xml:space="preserve">
-    <value>Open Beta: This version of Tease AI contains all the features of the original vision.
-However, since this project has been designed with the T&amp;&amp;D community in mind, I feel it's important
-to give people a chance to try it out and suggest new features before finalizing the release. This version will be subject to bugs in its current state and as features and content get added.</value>
-  </data>
-  <data name="Label100.Text" xml:space="preserve">
-    <value>Boobs and Butts - Set Local and/or URL file locations for pictures of boobs and butts.
-
-URL Files - Select which created URL Files you would like the program to use.
-
-Local Images - Select which genres and paths you would like to use for local images. Checkboxes = Include subfolders.</value>
-  </data>
-  <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>133, 17</value>
-  </metadata>
-  <metadata name="GetColor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>275, 17</value>
-  </metadata>
-  <metadata name="FolderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>375, 17</value>
-  </metadata>
-  <metadata name="WebImageFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>546, 17</value>
-  </metadata>
-  <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>711, 17</value>
-  </metadata>
-  <metadata name="OpenScriptDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>848, 17</value>
-  </metadata>
-  <metadata name="OpenSettingsDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>996, 17</value>
-  </metadata>
-  <metadata name="SaveSettingsDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1157, 17</value>
-  </metadata>
-  <metadata name="TTDir.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1304, 17</value>
-  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="WishlistCostSilver.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -332,6 +283,55 @@ Local Images - Select which genres and paths you would like to use for local ima
         RK5CYII=
 </value>
   </data>
+  <data name="Label51.Text" xml:space="preserve">
+    <value>Select a Video Tease Type and Script, then click the "Load Script" button. This will load all relevant lines from the selected script. Add as many new taunts or comments as you wish, entering a new line for each one just as you would in a word processor. You may also delete any existing lines. Once you are satisfied with your changes, click the "Save Changes" button to overwrite the script file on your computer. To start over without saving, click the "Clear Text" button.  </value>
+  </data>
+  <data name="Label52.Text" xml:space="preserve">
+    <value>Select a Glitter post type, and then select a post from the populated list to edit it, or enter a file name to create a new one.
+
+Enter what the domme will say in the "Domme's Post" box, and then at leat 3 responses in the box below. If you are creating a Tease glitter post, you will need to include 3 responses for each of the contact personality types.
+
+Once you are finished with your changes, click "Save Glitter File".</value>
+  </data>
+  <data name="Label33.Text" xml:space="preserve">
+    <value>Open Beta: This version of Tease AI contains all the features of the original vision.
+However, since this project has been designed with the T&amp;&amp;D community in mind, I feel it's important
+to give people a chance to try it out and suggest new features before finalizing the release. This version will be subject to bugs in its current state and as features and content get added.</value>
+  </data>
+  <data name="Label100.Text" xml:space="preserve">
+    <value>Boobs and Butts - Set Local and/or URL file locations for pictures of boobs and butts.
+
+URL Files - Select which created URL Files you would like the program to use.
+
+Local Images - Select which genres and paths you would like to use for local images. Checkboxes = Include subfolders.</value>
+  </data>
+  <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>133, 17</value>
+  </metadata>
+  <metadata name="GetColor.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>275, 17</value>
+  </metadata>
+  <metadata name="FolderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>375, 17</value>
+  </metadata>
+  <metadata name="WebImageFileDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>546, 17</value>
+  </metadata>
+  <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>711, 17</value>
+  </metadata>
+  <metadata name="OpenScriptDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>848, 17</value>
+  </metadata>
+  <metadata name="OpenSettingsDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>996, 17</value>
+  </metadata>
+  <metadata name="SaveSettingsDialog.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1157, 17</value>
+  </metadata>
+  <metadata name="TTDir.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>1304, 17</value>
+  </metadata>
   <metadata name="BWURLFiles.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>5, 12</value>
   </metadata>

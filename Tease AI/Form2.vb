@@ -434,10 +434,19 @@ Public Class FrmSettings
 		WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
 
 
-		Count_SlideshowsInFolder(My.Settings.Contact1ImageDir)
-		LBLContact1ImageDir.Text = My.Settings.Contact1ImageDir
-		LBLContact2ImageDir.Text = My.Settings.Contact2ImageDir
-		LBLContact3ImageDir.Text = My.Settings.Contact3ImageDir
+		For Each tmptbx As TextBox In New List(Of TextBox) From {LBLContact1ImageDir, LBLContact2ImageDir, LBLContact3ImageDir}
+			If tmptbx.DataBindings("Text") Is Nothing Then
+				Throw New Exception("There is no databinding set on """ & tmptbx.Name &
+					"""'s text-property. Set the databinding and recompile!")
+			End If
+		Next
+
+		For Each tmptbx As CheckBox In New List(Of CheckBox) From {CBGlitter1, CBGlitter2, CBGlitter3}
+			If tmptbx.DataBindings("Checked") Is Nothing Then
+				Throw New Exception("There is no databinding set on """ & tmptbx.Name &
+					"""'s checked-property. Set the databinding and recompile!")
+			End If
+		Next
 
 		If My.Settings.TeaseAILanguage = "English" Then EnglishMenu()
 		If My.Settings.TeaseAILanguage = "German" Then GermanMenu()
@@ -3403,53 +3412,31 @@ Public Class FrmSettings
 	End Sub
 
 
-	''' <summary>
-	''' Returns the number of possible Slideshows in the given directory
-	''' </summary>
-	''' <param name="directoryPath">The directory-path to search in.</param>
-	''' <returns>Returns the number of Subfolders containing images.</returns>
-	Friend Shared Function Count_SlideshowsInFolder(ByVal directoryPath As String) As Integer
-		Dim rtnInt As Integer = 0
-		Try
-
-			If Directory.Exists(directoryPath) = False Then Return 0
-
-			For Each str As String In Directory.GetDirectories(directoryPath)
-				If My.Settings.CBSlideshowSubDir Then
-					If myDirectory.GetFilesImages(str, SearchOption.AllDirectories).Count > 0 Then rtnInt += 1
-				Else
-					If myDirectory.GetFilesImages(str, SearchOption.TopDirectoryOnly).Count > 0 Then rtnInt += 1
-				End If
-			Next
-
-		Catch ex As Exception
-			Throw
-		End Try
-
-		Return rtnInt
-	End Function
-
-	Private Sub Button2_Click_1(sender As System.Object, e As System.EventArgs) Handles Button2.Click
+	Private Sub BTNDomImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLContact1ImageDir.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.Contact1ImageDir = LBLContact1ImageDir.Text
-			Form1.GetContact1Pics()
+			LBLDomImageDir.Text = FolderBrowserDialog1.SelectedPath
+			My.Settings.DomImageDir = LBLDomImageDir.Text
 		End If
 	End Sub
 
-	Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles Button8.Click
+	Private Sub BtnContact1ImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLContact2ImageDir.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.Contact2ImageDir = LBLContact2ImageDir.Text
-			Form1.GetContact2Pics()
+			My.Settings.Contact1ImageDir = FolderBrowserDialog1.SelectedPath
+			Form1.Contact1Pics_Load()
 		End If
 	End Sub
 
-	Private Sub Button10_Click_1(sender As System.Object, e As System.EventArgs) Handles Button10.Click
+	Private Sub BtnContact2ImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact2ImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLContact3ImageDir.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
-			Form1.GetContact3Pics()
+			My.Settings.Contact2ImageDir = FolderBrowserDialog1.SelectedPath
+			Form1.Contact2Pics_Load()
+		End If
+	End Sub
+
+	Private Sub BtnContact3ImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact3ImageDir.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.Contact3ImageDir = FolderBrowserDialog1.SelectedPath
+			Form1.Contact3Pics_Load()
 		End If
 	End Sub
 
@@ -3482,9 +3469,6 @@ Public Class FrmSettings
 			My.Settings.GlitterNC3 = Color2Html(GetColor.Color)
 		End If
 	End Sub
-	Private Sub TBGlitterShortName_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.Leave
-		My.Settings.GlitterSN = TBGlitterShortName.Text
-	End Sub
 	Private Sub TBGlitter1_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter1.Leave
 		My.Settings.Glitter1 = TBGlitter1.Text
 	End Sub
@@ -3496,36 +3480,6 @@ Public Class FrmSettings
 	End Sub
 	Private Sub GlitterSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider.Scroll
 		My.Settings.GlitterDSlider = GlitterSlider.Value
-	End Sub
-	Private Sub GlitterSlider1_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider1.Scroll
-		My.Settings.Glitter1Slider = GlitterSlider1.Value
-	End Sub
-	Private Sub GlitterSlider2_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider2.Scroll
-		My.Settings.Glitter2Slider = GlitterSlider2.Value
-	End Sub
-	Private Sub GlitterSlider3_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider3.Scroll
-		My.Settings.Glitter3Slider = GlitterSlider3.Value
-	End Sub
-	Private Sub CBGlitter1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter1.CheckedChanged
-		If CBGlitter1.Checked = True Then
-			My.Settings.CBGlitter1 = True
-		Else
-			My.Settings.CBGlitter1 = False
-		End If
-	End Sub
-	Private Sub CBGlitter2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter2.CheckedChanged
-		If CBGlitter2.Checked = True Then
-			My.Settings.CBGlitter2 = True
-		Else
-			My.Settings.CBGlitter2 = False
-		End If
-	End Sub
-	Private Sub CBGlitter3_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitter3.CheckedChanged
-		If CBGlitter3.Checked = True Then
-			My.Settings.CBGlitter3 = True
-		Else
-			My.Settings.CBGlitter3 = False
-		End If
 	End Sub
 	Private Sub CBTease_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTease.CheckedChanged
 		If CBTease.Checked = True Then
@@ -3570,34 +3524,17 @@ Public Class FrmSettings
 		End If
 	End Sub
 
-
-	' Private Sub CBGlitterFeed_MouseHover(sender As Object, e As System.EventArgs)
-	'    LblGlitterSettingsDescription.Text = "This check box turns Glitter functionality on and off. Glitter is a fictional app located in the sidebar on the left side of the window. It is meant to emulate a social media feed " _
-	'       & "where the domme posts various thoughts that her contacts might then comment on. When this box is checked, the domme's posts and responses will appear in the Glitter app according to the settings above. " _
-	'      & "If this box is unchecked, no new posts or responses will appear in the feed."
-	'End Sub
 	Private Sub BTNGlitterD_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitterD.MouseHover
-
 		TTDir.SetToolTip(BTNGlitterD, "This button allows you to change the color of the domme's name as it appears in the Glitter app." & Environment.NewLine &
 									  "A preview will appear in the text box below this button once a color has been selected.")
-
 	End Sub
 	Private Sub GlitterAV_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV.MouseHover
 		TTDir.SetToolTip(GlitterAV, "Click here to set the image the domme will use as her Glitter avatar.")
 	End Sub
-	Private Sub LBLGlitterNCDomme_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNCDomme.MouseHover
-		TTDir.SetToolTip(LBLGlitterNCDomme, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
+	Private Sub LBLGlitterNCDomme_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNCDomme.MouseHover, LBLGlitterNC1.MouseHover, LBLGlitterNC2.MouseHover, LBLGlitterNC3.MouseHover
+		TTDir.SetToolTip(sender, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
 	End Sub
-	Private Sub LBLGlitterNC1_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC1.MouseHover
-		TTDir.SetToolTip(LBLGlitterNC1, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
-	End Sub
-	Private Sub LBLGlitterNC2_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC2.MouseHover
-		TTDir.SetToolTip(LBLGlitterNC2, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
-	End Sub
-	Private Sub LBLGlitterNC3_Click(sender As System.Object, e As System.EventArgs) Handles LBLGlitterNC3.MouseHover
-		TTDir.SetToolTip(LBLGlitterNC3, "After clicking the ""Choose Name Color"" button above, a preview of the selected color will appear here.")
-	End Sub
-	Private Sub TBGlitterShortName_TextChanged_1(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.MouseHover
+	Private Sub TBGlitterShortName_MouseHover(sender As System.Object, e As System.EventArgs) Handles TBGlitterShortName.MouseHover
 		TTDir.SetToolTip(TBGlitterShortName, "This is the name that the domme's contacts will refer to her as in the Glitter feed.")
 	End Sub
 	Private Sub CBTease_MouseHover(sender As Object, e As System.EventArgs) Handles CBTease.MouseHover
@@ -3629,115 +3566,48 @@ Public Class FrmSettings
 											 "The further to the right the slider is, the more often she posts.")
 	End Sub
 
-	Private Sub TBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter1.MouseHover
-		TTDir.SetToolTip(TBGlitter1, "This will be the name of this contact as it appears in the Glitter feed.")
+	Private Sub TBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter1.MouseHover, TBGlitter2.MouseHover, TBGlitter3.MouseHover
+		TTDir.SetToolTip(sender, "This will be the name of this contact as it appears in the Glitter feed.")
 	End Sub
-	Private Sub TBGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter2.MouseHover
-		TTDir.SetToolTip(TBGlitter2, "This will be the name of this contact as it appears in the Glitter feed.")
-	End Sub
-	Private Sub TBGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles TBGlitter3.MouseHover
-		TTDir.SetToolTip(TBGlitter3, "This will be the name of this contact as it appears in the Glitter feed.")
-	End Sub
-	Private Sub GlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider1.MouseHover
-		TTDir.SetToolTip(GlitterSlider1, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
+	Private Sub GlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider1.MouseHover, GlitterSlider2.MouseHover, GlitterSlider3.MouseHover, LBLGlitterSlider1.MouseHover, LBLGlitterSlider2.MouseHover, LBLGlitterSlider3.MouseHover
+		TTDir.SetToolTip(sender, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
 										 "The further to the right the slider is, the more often she responds.")
 	End Sub
-	Private Sub GlitterSlider2_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider2.MouseHover
-		TTDir.SetToolTip(GlitterSlider2, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
+	Private Sub GlitterAV1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV1.MouseHover, GlitterAV2.MouseHover, GlitterAV3.MouseHover
+		TTDir.SetToolTip(sender, "Click here to set the image that this contact will use as her Glitter avatar.")
 	End Sub
-	Private Sub GlitterSlider3_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterSlider3.MouseHover
-		TTDir.SetToolTip(GlitterSlider3, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
+	Private Sub CBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter1.MouseHover, CBGlitter2.MouseHover, CBGlitter3.MouseHover
+		TTDir.SetToolTip(sender, "This check box enables this contact's participation in the Glitter feed.")
 	End Sub
-	Private Sub LBLGlitterSlider1_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider1.MouseHover
-		TTDir.SetToolTip(LBLGlitterSlider1, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
-	End Sub
-	Private Sub LBLGlitterSlider2_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider2.MouseHover
-		TTDir.SetToolTip(LBLGlitterSlider2, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
-	End Sub
-	Private Sub LBLGlitterSlider3_MouseHover(sender As Object, e As System.EventArgs) Handles LBLGlitterSlider3.MouseHover
-		TTDir.SetToolTip(LBLGlitterSlider3, "This slider determines how often this contact responds to the domme's Glitter posts." & Environment.NewLine &
-										 "The further to the right the slider is, the more often she responds.")
-	End Sub
-	Private Sub GlitterAV1_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV1.MouseHover
-		TTDir.SetToolTip(GlitterAV1, "Click here to set the image that this contact will use as her Glitter avatar.")
-	End Sub
-	Private Sub GlitterAV2_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV2.MouseHover
-		TTDir.SetToolTip(GlitterAV2, "Click here to set the image that this contact will use as her Glitter avatar.")
-	End Sub
-	Private Sub GlitterAV3_MouseHover(sender As Object, e As System.EventArgs) Handles GlitterAV3.MouseHover
-		TTDir.SetToolTip(GlitterAV3, "Click here to set the image that this contact will use as her Glitter avatar.")
-	End Sub
-	Private Sub CBGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter1.MouseHover
-		TTDir.SetToolTip(CBGlitter1, "This check box enables this contact's participation in the Glitter feed.")
-	End Sub
-	Private Sub CBGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter2.MouseHover
-		TTDir.SetToolTip(CBGlitter2, "This check box enables this contact's participation in the Glitter feed.")
-	End Sub
-	Private Sub CBGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles CBGlitter3.MouseHover
-		TTDir.SetToolTip(CBGlitter3, "This check box enables this contact's participation in the Glitter feed.")
-	End Sub
-	Private Sub BTNGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter1.MouseHover
-		TTDir.SetToolTip(BTNGlitter1, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
-	End Sub
-	Private Sub BTNGlitter2_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter2.MouseHover
-		TTDir.SetToolTip(BTNGlitter2, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
-	End Sub
-	Private Sub BTNGlitter3_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter3.MouseHover
-		TTDir.SetToolTip(BTNGlitter3, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
+	Private Sub BTNGlitter1_MouseHover(sender As Object, e As System.EventArgs) Handles BTNGlitter1.MouseHover, BTNGlitter2.MouseHover, BTNGlitter3.MouseHover
+		TTDir.SetToolTip(sender, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
 	End Sub
 
-	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact1ImageDir.MouseHover
-		If LBLContact1ImageDir.Text <> Nothing = True And LBLContact1ImageDir.Text <> "No path selected" Then
-			TTDir.SetToolTip(LBLContact1ImageDir, LBLContact1ImageDir.Text)
-		Else
-			TTDir.SetToolTip(LBLContact1ImageDir, "No path selected")
-		End If
+	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact1ImageDir.MouseHover, LBLContact2ImageDir.MouseHover, LBLContact3ImageDir.MouseHover, LBLDomImageDir.MouseHover
+		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
 	End Sub
 
-	Private Sub LBLContact2ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact2ImageDir.MouseHover
-		If LBLContact2ImageDir.Text <> Nothing = True And LBLContact2ImageDir.Text <> "No path selected" Then
-			TTDir.SetToolTip(LBLContact2ImageDir, LBLContact2ImageDir.Text)
-		Else
-			TTDir.SetToolTip(LBLContact2ImageDir, "No path selected")
-		End If
+	Private Sub Button2_MouseHover(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDir.MouseHover, BtnContact2ImageDir.MouseHover, BtnContact3ImageDir.MouseHover
+
+		If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory containing several image" & Environment.NewLine &
+"set folders of the same model you're using as your contact.")
+		If RBGerman.Checked = True Then TTDir.SetToolTip(sender, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
 	End Sub
 
-	Private Sub LBLContact3ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact3ImageDir.MouseHover
-		If LBLContact3ImageDir.Text <> Nothing = True And LBLContact3ImageDir.Text <> "No path selected" Then
-			TTDir.SetToolTip(LBLContact3ImageDir, LBLContact3ImageDir.Text)
-		Else
-			TTDir.SetToolTip(LBLContact3ImageDir, "No path selected")
-		End If
+	Private Sub BtnContact1ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDirClear.Click
+		My.Settings.ResetField(LBLContact1ImageDir, "Text")
+		Form1.Contact1Pics_Clear()
 	End Sub
 
-	Private Sub LBLDomImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLDomImageDir.MouseEnter
-		If LBLDomImageDir.Text <> Nothing = True And LBLDomImageDir.Text <> "No path selected" Then
-			TTDir.SetToolTip(LBLDomImageDir, LBLDomImageDir.Text)
-		Else
-			TTDir.SetToolTip(LBLDomImageDir, "No path selected")
-		End If
+	Private Sub BtnContact2ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact2ImageDirClear.Click
+		My.Settings.ResetField(LBLContact2ImageDir, "Text")
+		Form1.Contact2Pics_Clear()
 	End Sub
 
-	Private Sub Button14_Click_1(sender As System.Object, e As System.EventArgs) Handles Button14.Click
-		LBLContact1ImageDir.Text = "No path selected"
-		My.Settings.Contact1ImageDir = "No path selected"
-		Form1.Contact1Pics.Clear()
-	End Sub
-
-	Private Sub Button13_Click(sender As System.Object, e As System.EventArgs) Handles Button13.Click
-		LBLContact2ImageDir.Text = "No path selected"
-		My.Settings.Contact2ImageDir = "No path selected"
-		Form1.Contact2Pics.Clear()
-	End Sub
-
-	Private Sub Button12_Click_1(sender As System.Object, e As System.EventArgs) Handles Button12.Click
-		LBLContact3ImageDir.Text = "No path selected"
-		My.Settings.Contact3ImageDir = "No path selected"
-		Form1.Contact3Pics.Clear()
+	Private Sub BtnContact3ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact3ImageDirClear.Click
+		My.Settings.ResetField(LBLContact3ImageDir, "Text")
+		Form1.Contact3Pics_Clear()
 	End Sub
 
 	Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click
@@ -3922,7 +3792,6 @@ Public Class FrmSettings
 			My.Settings.CBGlitterFeedOff = True
 		End If
 
-		My.Settings.GlitterSN = TBGlitterShortName.Text
 
 		My.Settings.GlitterNCDommeColor = LBLGlitterNCDomme.ForeColor
 
@@ -3938,20 +3807,15 @@ Public Class FrmSettings
 		My.Settings.Glitter1 = TBGlitter1.Text
 		My.Settings.GlitterNC1Color = LBLGlitterNC1.ForeColor
 		My.Settings.Contact1ImageDir = LBLContact1ImageDir.Text
-		My.Settings.Glitter1Slider = GlitterSlider1.Value
 
 		My.Settings.CBGlitter2 = CBGlitter2.Checked
 		My.Settings.Glitter2 = TBGlitter2.Text
 		My.Settings.GlitterNC2Color = LBLGlitterNC2.ForeColor
 		My.Settings.Contact2ImageDir = LBLContact2ImageDir.Text
-		My.Settings.Glitter2Slider = GlitterSlider2.Value
 
-		My.Settings.CBGlitter3 = CBGlitter3.Checked
 		My.Settings.Glitter3 = TBGlitter3.Text
 		My.Settings.GlitterNC3Color = LBLGlitterNC3.ForeColor
 		My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
-		My.Settings.Glitter3Slider = GlitterSlider3.Value
-
 
 	End Sub
 
@@ -3961,7 +3825,6 @@ Public Class FrmSettings
 		If My.Settings.CBGlitterFeedScripts = True Then CBGlitterFeedScripts.Checked = True
 		If My.Settings.CBGlitterFeedOff = True Then CBGlitterFeedOff.Checked = True
 
-		TBGlitterShortName.Text = My.Settings.GlitterSN
 
 		LBLGlitterNCDomme.ForeColor = My.Settings.GlitterNCDommeColor
 
@@ -3973,23 +3836,17 @@ Public Class FrmSettings
 		CBCustom2.Checked = My.Settings.CBCustom2
 		GlitterSlider.Value = My.Settings.GlitterDSlider
 
-		CBGlitter1.Checked = My.Settings.CBGlitter1
 		TBGlitter1.Text = My.Settings.Glitter1
 		LBLGlitterNC1.ForeColor = My.Settings.GlitterNC1Color
 		LBLContact1ImageDir.Text = My.Settings.Contact1ImageDir
-		GlitterSlider1.Value = My.Settings.Glitter1Slider
 
-		CBGlitter2.Checked = My.Settings.CBGlitter2
 		TBGlitter2.Text = My.Settings.Glitter2
 		LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
 		LBLContact2ImageDir.Text = My.Settings.Contact2ImageDir
-		GlitterSlider2.Value = My.Settings.Glitter2Slider
 
-		CBGlitter3.Checked = My.Settings.CBGlitter3
 		TBGlitter3.Text = My.Settings.Glitter3
 		LBLGlitterNC3.ForeColor = My.Settings.GlitterNC3Color
 		LBLContact3ImageDir.Text = My.Settings.Contact3ImageDir
-		GlitterSlider3.Value = My.Settings.Glitter3Slider
 
 	End Sub
 
@@ -5175,12 +5032,6 @@ checkFolder:
 
 #End Region ' Butt
 
-	Private Sub BTNDomImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.Click
-		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLDomImageDir.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.DomImageDir = LBLDomImageDir.Text
-		End If
-	End Sub
 
 	Private Sub LBLIHardcore_Click(sender As System.Object, e As System.EventArgs) Handles TbxIHardcore.DoubleClick
 		TbxIHardcore.Text = "No path selected"
@@ -6472,32 +6323,6 @@ checkFolder:
 	End Sub
 
 
-
-
-
-
-
-	Private Sub Button2_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button2.MouseHover
-
-		If RBEnglish.Checked = True Then TTDir.SetToolTip(Button2, "Use this button to select a directory containing several image" & Environment.NewLine &
-"set folders of the same model you're using as your contact.")
-		If RBGerman.Checked = True Then TTDir.SetToolTip(Button2, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
-"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
-	End Sub
-	Private Sub Button8_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button8.MouseHover
-
-		If RBEnglish.Checked = True Then TTDir.SetToolTip(Button8, "Use this button to select a directory containing several image" & Environment.NewLine &
-"set folders of the same model you're using as your contact.")
-		If RBGerman.Checked = True Then TTDir.SetToolTip(Button8, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
-"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
-	End Sub
-	Private Sub Button10_MouseHover(sender As System.Object, e As System.EventArgs) Handles Button10.MouseHover
-
-		If RBEnglish.Checked = True Then TTDir.SetToolTip(Button10, "Use this button to select a directory containing several image" & Environment.NewLine &
-"set folders of the same model you're using as your contact.")
-		If RBGerman.Checked = True Then TTDir.SetToolTip(Button10, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
-"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
-	End Sub
 
 
 

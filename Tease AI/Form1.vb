@@ -983,23 +983,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		If My.Settings.CBGlitterFeedOff = True Then FrmSettings.CBGlitterFeedOff.Checked = True
 
 
-		If My.Settings.CBGlitter1 = True Then
-			FrmSettings.CBGlitter1.Checked = True
-		Else
-			FrmSettings.CBGlitter1.Checked = False
-		End If
-		If My.Settings.CBGlitter2 = True Then
-			FrmSettings.CBGlitter2.Checked = True
-		Else
-			FrmSettings.CBGlitter2.Checked = False
-		End If
-		If My.Settings.CBGlitter3 = True Then
-			FrmSettings.CBGlitter3.Checked = True
-		Else
-			FrmSettings.CBGlitter3.Checked = False
-		End If
-
-
 		If My.Settings.CBTease = True Then
 			FrmSettings.CBTease.Checked = True
 		Else
@@ -1524,9 +1507,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
 		FrmSplash.Refresh()
 
-		GetContact1Pics()
-		GetContact2Pics()
-		GetContact3Pics()
+		Contact1Pics_Load()
+		Contact2Pics_Load()
+		Contact3Pics_Load()
 
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
 			Dim ContactList As New List(Of String)
@@ -8456,9 +8439,9 @@ CensorConstant:
 
 
 
-		StatusText1 = StatusText1.Replace("#ShortName", FrmSettings.TBGlitterShortName.Text)
-		StatusText2 = StatusText2.Replace("#ShortName", FrmSettings.TBGlitterShortName.Text)
-		StatusText3 = StatusText3.Replace("#ShortName", FrmSettings.TBGlitterShortName.Text)
+		StatusText1 = StatusText1.Replace("#ShortName", My.Settings.GlitterSN)
+		StatusText2 = StatusText2.Replace("#ShortName", My.Settings.GlitterSN)
+		StatusText3 = StatusText3.Replace("#ShortName", My.Settings.GlitterSN)
 
 		StatusText1 = StatusText1.Replace("#SubName", subName.Text)
 		StatusText2 = StatusText2.Replace("#SubName", subName.Text)
@@ -8588,7 +8571,7 @@ StatusUpdate1:
 
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
-		If StatusChance1 < My.Settings.Glitter1Slider * 10 And FrmSettings.CBGlitter1.Checked = True Then
+		If StatusChance1 < My.Settings.Glitter1Slider * 10 And My.Settings.CBGlitter1 = True Then
 			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC1 & """><b>" & FrmSettings.TBGlitter1.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText1 & "</font><br><br>"
 
@@ -8611,7 +8594,7 @@ StatusUpdate2:
 
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
-		If StatusChance2 < My.Settings.Glitter2Slider * 10 And FrmSettings.CBGlitter2.Checked = True Then
+		If StatusChance2 < My.Settings.Glitter2Slider * 10 And My.Settings.CBGlitter2 = True Then
 			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC2 & """><b>" & FrmSettings.TBGlitter2.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText2 & "</font><br><br>"
 
@@ -8634,7 +8617,7 @@ StatusUpdate3:
 
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
-		If StatusChance3 < My.Settings.Glitter3Slider * 10 And FrmSettings.CBGlitter3.Checked = True Then
+		If StatusChance3 < My.Settings.Glitter3Slider * 10 And My.Settings.CBGlitter3 = True Then
 			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC3 & """><b>" & FrmSettings.TBGlitter3.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & StatusText3 & "</font><br><br>"
 
@@ -9005,7 +8988,7 @@ StatusUpdateEnd:
 
 		' StringClean = StringClean.Replace("#SubWritingTaskRAND", randomizer.Next(NBWritingTaskMin.Value / 10, (NBWritingTaskMax.Value / 10) + 1)) * 10
 
-		StringClean = StringClean.Replace("#ShortName", FrmSettings.TBGlitterShortName.Text)
+		StringClean = StringClean.Replace("#ShortName", My.Settings.GlitterSN)
 
 		StringClean = StringClean.Replace("#GlitterContact1", FrmSettings.TBGlitter1.Text)
 		StringClean = StringClean.Replace("#Contact1", FrmSettings.TBGlitter1.Text)
@@ -10223,19 +10206,19 @@ ShowedBlogImage:
 
 		If StringClean.Contains("@GotoSlideshow") Then
 			'BUG: @GotoCustomSlideshow is not working. There is no reference what imagegenre a image belongs to.
-			If ImageString.Contains(My.Settings.IHardcore) Then FileGoto = "Hardcore"
-			If ImageString.Contains(My.Settings.ISoftcore) Then FileGoto = "Softcore"
-			If ImageString.Contains(My.Settings.ILesbian) Then FileGoto = "Lesbian"
-			If ImageString.Contains(My.Settings.IBlowjob) Then FileGoto = "Blowjob"
-			If ImageString.Contains(My.Settings.IFemdom) Then FileGoto = "Femdom"
-			If ImageString.Contains(My.Settings.ILezdom) Then FileGoto = "Lezdom"
-			If ImageString.Contains(My.Settings.IHentai) Then FileGoto = "Hentai"
-			If ImageString.Contains(My.Settings.IGay) Then FileGoto = "Gay"
-			If ImageString.Contains(My.Settings.IMaledom) Then FileGoto = "Maledom"
-			If ImageString.Contains(My.Settings.ICaptions) Then FileGoto = "Captions"
-			If ImageString.Contains(My.Settings.IGeneral) Then FileGoto = "General"
-			If ImageString.Contains(My.Settings.LBLBoobPath) Then FileGoto = "Boobs"
-			If ImageString.Contains(My.Settings.LBLButtPath) Then FileGoto = "Butts"
+			If ImageString.Contains(My.Settings.IHardcore) Then FileGoto = "(Hardcore)"
+			If ImageString.Contains(My.Settings.ISoftcore) Then FileGoto = "(Softcore)"
+			If ImageString.Contains(My.Settings.ILesbian) Then FileGoto = "(Lesbian)"
+			If ImageString.Contains(My.Settings.IBlowjob) Then FileGoto = "(Blowjob)"
+			If ImageString.Contains(My.Settings.IFemdom) Then FileGoto = "(Femdom)"
+			If ImageString.Contains(My.Settings.ILezdom) Then FileGoto = "(Lezdom)"
+			If ImageString.Contains(My.Settings.IHentai) Then FileGoto = "(Hentai)"
+			If ImageString.Contains(My.Settings.IGay) Then FileGoto = "(Gay)"
+			If ImageString.Contains(My.Settings.IMaledom) Then FileGoto = "(Maledom)"
+			If ImageString.Contains(My.Settings.ICaptions) Then FileGoto = "(Captions)"
+			If ImageString.Contains(My.Settings.IGeneral) Then FileGoto = "(General)"
+			If ImageString.Contains(My.Settings.LBLBoobPath) Then FileGoto = "(Boobs)"
+			If ImageString.Contains(My.Settings.LBLButtPath) Then FileGoto = "(Butts)"
 
 			Debug.Print("GotoSlideshow called, FileGoto = " & FileGoto)
 
@@ -18719,153 +18702,34 @@ GetDommeSlideshow:
 
 #Region "-------------------------------------------------- Contact 1-3 -------------------------------------------------------"
 
-	Public Sub GetContact1Pics()
+	Public Sub Contact1Pics_Load()
+		Contact1Pics_Clear()
+		Contact1Pics = Slideshow.Get_Contact1Images()
+	End Sub
 
-		Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-		Dim ContactPics As String()
-		Dim ContactFolder As String
-
-		Dim Contact1Folder As New List(Of String)
-		Contact1Folder.Clear()
+	Public Sub Contact1Pics_Clear()
 		Contact1Pics.Clear()
-		If Directory.Exists(FrmSettings.LBLContact1ImageDir.Text) Then
-			For Each Dir As String In myDirectory.GetDirectories(FrmSettings.LBLContact1ImageDir.Text)
-				Try
-					Contact1Folder.Add(Dir)
-				Catch
-				End Try
-			Next
-
-			If Contact1Folder.Count < 1 Then
-				MessageBox.Show(Me, "There are no directories in the specified Contact 1 Images Directory folder." & Environment.NewLine & Environment.NewLine &
-				"Please make sure the Contact 1 Images Directory points to a location containing at least one subdirectory of images.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			End If
-
-			If Contact1Folder.Count <> 0 Then
-
-				ContactFolder = Contact1Folder(randomizer.Next(0, Contact1Folder.Count))
-
-				ContactPics = myDirectory.GetFiles(ContactFolder, "*.*")
-				Array.Sort(ContactPics)
-
-
-				For Each fi As String In ContactPics
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						Contact1Pics.Add(fi)
-					End If
-				Next
-
-				If Contact1Pics.Count < 0 Then
-					MessageBox.Show(Me, "There are no images in the specified Contact 1 Image folder!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-					Return
-				End If
-
-
-			End If
-		End If
-
 		Contact1PicsCount = -1
-
 	End Sub
 
-	Public Sub GetContact2Pics()
+	Public Sub Contact2Pics_Load()
+		Contact2Pics_Clear()
+		Contact2Pics = Slideshow.Get_Contact2Images()
+	End Sub
 
-		Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-		Dim ContactPics As String()
-		Dim ContactFolder As String
-
-		Dim Contact2Folder As New List(Of String)
-		Contact2Folder.Clear()
+	Public Sub Contact2Pics_Clear()
 		Contact2Pics.Clear()
-		If Directory.Exists(FrmSettings.LBLContact2ImageDir.Text) Then
-			For Each Dir As String In myDirectory.GetDirectories(FrmSettings.LBLContact2ImageDir.Text)
-				Try
-					Contact2Folder.Add(Dir)
-				Catch
-				End Try
-			Next
-
-			If Contact2Folder.Count < 1 Then
-				MessageBox.Show(Me, "There are no directories in the specified Contact 2 Images Directory folder." & Environment.NewLine & Environment.NewLine &
-			 "Please make sure the Contact 2 Images Directory points to a location containing at least one subdirectory of images.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			End If
-
-			If Contact2Folder.Count <> 0 Then
-
-				ContactFolder = Contact2Folder(randomizer.Next(0, Contact2Folder.Count))
-
-				ContactPics = myDirectory.GetFiles(ContactFolder, "*.*")
-				Array.Sort(ContactPics)
-
-
-				For Each fi As String In ContactPics
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						Contact2Pics.Add(fi)
-					End If
-				Next
-
-				If Contact2Pics.Count < 0 Then
-					MessageBox.Show(Me, "There are no images in the specified Contact 2 Image folder!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-					Return
-				End If
-
-			End If
-		End If
-
 		Contact2PicsCount = -1
-
 	End Sub
 
-	Public Sub GetContact3Pics()
+	Public Sub Contact3Pics_Load()
+		Contact3Pics_Clear()
+		Contact3Pics = Slideshow.Get_Contact3Images()
+	End Sub
 
-		Dim supportedExtensions As String = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
-		Dim ContactPics As String()
-		Dim ContactFolder As String
-
-		Dim Contact3Folder As New List(Of String)
-		Contact3Folder.Clear()
+	Public Sub Contact3Pics_Clear()
 		Contact3Pics.Clear()
-		If Directory.Exists(FrmSettings.LBLContact3ImageDir.Text) Then
-			For Each Dir As String In myDirectory.GetDirectories(FrmSettings.LBLContact3ImageDir.Text)
-				Try
-					Contact3Folder.Add(Dir)
-				Catch
-				End Try
-			Next
-
-
-			If Contact3Folder.Count < 1 Then
-				MessageBox.Show(Me, "There are no directories in the specified Contact 3 Images Directory folder." & Environment.NewLine & Environment.NewLine &
-	   "Please make sure the Contact 3 Images Directory points to a location containing at least one subdirectory of images.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				Return
-			End If
-
-			If Contact3Folder.Count <> 0 Then
-
-				ContactFolder = Contact3Folder(randomizer.Next(0, Contact3Folder.Count))
-
-				ContactPics = myDirectory.GetFiles(ContactFolder, "*.*")
-				Array.Sort(ContactPics)
-
-
-				For Each fi As String In ContactPics
-					If supportedExtensions.Contains(Path.GetExtension(LCase(fi))) Then
-						Contact3Pics.Add(fi)
-					End If
-				Next
-
-				If Contact3Pics.Count < 0 Then
-					MessageBox.Show(Me, "There are no images in the specified Contact 3 Image folder!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-					Return
-				End If
-
-			End If
-		End If
-
 		Contact3PicsCount = -1
-
 	End Sub
 
 
