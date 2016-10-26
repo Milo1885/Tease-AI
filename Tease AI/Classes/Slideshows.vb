@@ -24,6 +24,7 @@ Friend Class Slideshow
 
 	Sub New(ByVal type As ContactType)
 		Contact = type
+		Check_ImageDir(type)
 	End Sub
 
 	Shared Function FolderCheck(ByVal directoryDescription As String,
@@ -175,7 +176,7 @@ nextSubDir:
 		Me.Index = 0
 	End Sub
 
-	Friend Sub CheckInit()
+	Sub CheckInit()
 		If Me.Index = -1 And Me.Contact <> ContactType.Nothing Then Me.LoadNew()
 	End Sub
 
@@ -226,10 +227,16 @@ nextSubDir:
 		If My.Settings.CBSlideshowRandom Then
 			' get Random Image
 			Index = New Random().Next(0, ImageList.Count)
-		ElseIf New Random().Next(0, 101) < My.Settings.NextImageChance
+		ElseIf My.Settings.NextImageChance < New Random().Next(0, 101)
 			' Randomly backwards
 			Index -= 1
 			If Index < 0 Then Index = 0
+		ElseIf Index >= ImageList.Count - 1 AndAlso My.Settings.CBNewSlideshow Then
+			' End of Slideshow start new
+			LoadNew()
+		ElseIf Index >= ImageList.Count - 1 Then
+			' End of Slideshow return last
+			Index = ImageList.Count - 1
 		Else
 			' Next image
 			Index += 1
