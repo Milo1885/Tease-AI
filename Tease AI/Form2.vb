@@ -10712,11 +10712,9 @@ checkFolder:
 	End Sub
 
 	Private Sub Button24_Click_1(sender As System.Object, e As System.EventArgs) Handles Button24.Click
-		Form1.SaveProgramState()
 	End Sub
 
 	Private Sub Button33_Click(sender As System.Object, e As System.EventArgs) Handles Button33.Click
-		Form1.LoadProgramState()
 	End Sub
 
 	Private Sub CBGlitterFeed_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitterFeed.CheckedChanged, CBGlitterFeedScripts.CheckedChanged, CBGlitterFeedOff.CheckedChanged
