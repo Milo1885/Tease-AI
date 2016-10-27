@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 
 
-Friend Enum ContactType
+Public Enum ContactType
 	[Nothing]
 	Domme
 	Contact1
@@ -10,7 +10,7 @@ Friend Enum ContactType
 End Enum
 
 <Serializable>
-Friend Class Slideshow
+Public Class Slideshow
 
 	Public Property Contact As ContactType = ContactType.Nothing
 
