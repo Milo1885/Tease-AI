@@ -14604,11 +14604,11 @@ Skip_RandomFile:
 		If FilterString.ToLower.Contains("@sadistic") And FrmSettings.sadisticCheckBox.Checked = False Then Return False
 		If FilterString.ToLower.Contains("@degrading") And FrmSettings.degradingCheckBox.Checked = False Then Return False
 
-		If FilterString.ToLower.Contains("@dommeLevel1") And FrmSettings.domlevelNumBox.Value <> 1 Then Return False
-		If FilterString.ToLower.Contains("@dommeLevel2") And FrmSettings.domlevelNumBox.Value <> 2 Then Return False
-		If FilterString.ToLower.Contains("@dommeLevel3") And FrmSettings.domlevelNumBox.Value <> 3 Then Return False
-		If FilterString.ToLower.Contains("@dommeLevel4") And FrmSettings.domlevelNumBox.Value <> 4 Then Return False
-		If FilterString.ToLower.Contains("@dommeLevel5") And FrmSettings.domlevelNumBox.Value <> 5 Then Return False
+		If FilterString.ToLower.Contains("@dommelevel1") And FrmSettings.domlevelNumBox.Value <> 1 Then Return False
+		If FilterString.ToLower.Contains("@dommelevel2") And FrmSettings.domlevelNumBox.Value <> 2 Then Return False
+		If FilterString.ToLower.Contains("@dommelevel3") And FrmSettings.domlevelNumBox.Value <> 3 Then Return False
+		If FilterString.ToLower.Contains("@dommelevel4") And FrmSettings.domlevelNumBox.Value <> 4 Then Return False
+		If FilterString.ToLower.Contains("@dommelevel5") And FrmSettings.domlevelNumBox.Value <> 5 Then Return False
 
 		If FilterString.ToLower.Contains("@selfyoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then Return False
 		If FilterString.ToLower.Contains("@selfold") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then Return False
