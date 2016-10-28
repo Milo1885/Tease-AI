@@ -21,6 +21,8 @@ Public Class Form1
 	Friend Shared ReadOnly pathUrlFileDir As String = Application.StartupPath & "\Images\System\URL Files\"
 
 	Friend Shared ReadOnly pathImageErrorOnLoading As String = Application.StartupPath & "\Images\System\ErrorLoadingImage.jpg"
+
+	Friend Shared ReadOnly SavedSessionDefaultPath As String = Application.StartupPath & "\System\SavedState.save"
 #End Region ' File Constants.
 
 	' Github Patch  Public FormLoading As Boolean
@@ -64,24 +66,18 @@ Public Class Form1
 
 #Region "-------------------------------------- StrokePace ----------------------------------------------"
 	''' <summary>
-	''' Synclock Object to prevent datacorruption of <see cref="_StrokePaceUnsynced"/>.
+	''' Synclock Object to prevent datacorruption of <see cref="ssh.StrokePace"/>.
 	''' </summary>
 	Public _StrokePaceSyncLock As New Object
-	'''' <summary>
-	''''	Stores the value of the current strokePace
-	'''' <para>Synchronized MultiThread-Object!</para>
-	'''' <para> Use <see cref="StrokePace"/> instead.</para>
-	'''' </summary>
-	''Public _StrokePaceUnsynced As Integer
 	''' <summary>
 	''' Gets or sets the strokepace.
-	''' Changing this Value will  delay the MetronomeThread, until all 
-	''' registers are written into the RAM.
+	''' Changing this value will  delay the MetronomeThread, until all 
+	''' registers are written to RAM.
 	''' </summary>
 	''' <returns>The current StrokePace.</returns>
 	Public Property StrokePace As Integer
 		Get
-			Return ssh.StrokePace '_StrokePaceUnsynced
+			Return ssh.StrokePace
 		End Get
 		Set(value As Integer)
 			If value <> ssh.StrokePace Then
@@ -123,9 +119,6 @@ Public Class Form1
 			End SyncLock
 		End Get
 	End Property
-
-
-
 #End Region ' StrokePace
 
 	Public synth As New SpeechSynthesizer
@@ -19462,86 +19455,100 @@ GetDommeSlideshow:
 	End Sub
 
 	Private Sub SuspendSessionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SuspendSessionToolStripMenuItem.Click
-		Dim filename As String = Application.StartupPath & "\System\SavedState.save"
-		If ssh.SaidHello = False Then
-			MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			Return
-		End If
-
-
-		If File.Exists(filename) Then
-			Dim Result As Integer = MessageBox.Show(Me, "A previous saved state already exists!" & Environment.NewLine & Environment.NewLine &
-						"Do you wish to overwrite it?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-			If Result = DialogResult.No Then
-				Return
-			End If
-		End If
-
 		Try
+			Dim filename As String = SavedSessionDefaultPath
 
-			'TODO-NEXT: Add Serializing
+			If ssh.SaidHello = False Then
+				MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!",
+								MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Exit Sub
+			End If
 
-			'' XML Serialization cannot serialize Dictionaries!
-			'Dim ser As XmlSerializer = New binarySerializer(GetType(My.SessionState))
-			'Dim writer As TextWriter = New StreamWriter(Application.StartupPath & "\System\SavedState.xml")
-			'ser.Serialize(writer, My.Application.Session)
-			'writer.Close()
+			'	 ===============================================================================
+			'						 Custom Location if Control-Key pressed
+			'	 ===============================================================================
+			If My.Computer.Keyboard.CtrlKeyDown Then
+				Dim fsd As New SaveFileDialog With {.Filter = "Saved Session|*" & Path.GetExtension(SavedSessionDefaultPath) & "",
+													.InitialDirectory = Path.GetDirectoryName(SavedSessionDefaultPath),
+													.Title = "Select a destination to safe the sessin to.",
+													.FileName = Now.ToString("yy-MM-dd_HH-mm-ss") & "_" & dompersonalitycombobox.Text,
+													.AddExtension = True,
+													.CheckPathExists = True,
+													.OverwritePrompt = True,
+													.ValidateNames = True}
+				If fsd.ShowDialog() = DialogResult.Cancel Then Exit Sub
 
-			' Persist to file
+				filename = fsd.FileName
+				'===============================================================================
+				'						Check if default-File exists
+				'===============================================================================
+			ElseIf File.Exists(filename) _
+			AndAlso MessageBox.Show(Me, "A previous saved state already exists!" &
+									vbCrLf & vbCrLf &
+									"Do you wish to overwrite it?", "Warning!",
+									MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.No Then
+				Exit Sub
+			End If
 
-			ssh.Store(filename)
-			'Dim stream As FileStream = File.Create(filename)
-			'Dim formatter As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
-			'Console.WriteLine("Serializing vector")
-			'formatter.Serialize(stream, ssh)
-			'stream.Close()
+			' Store Session to disk
+			ssh.Store(filename, Me)
+
+			MessageBox.Show(Me, "Session state has been saved successfully!", "Success!",
+							MessageBoxButtons.OK, MessageBoxIcon.Information)
 		Catch ex As Exception
-			MessageBox.Show(Me, "An error occurred and the state did not save correctly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			MessageBox.Show(Me, "An error occurred and the state did not save correctly!" &
+							vbCrLf & vbCrLf & ex.Message,
+							"Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 		End Try
-
-		MessageBox.Show(Me, "Session state has been saved successfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
 	End Sub
 
 	Private Sub ResumeSessionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ResumeSessionToolStripMenuItem.Click
-		Dim filename As String = Application.StartupPath & "\System\SavedState.save"
+		Try
+			Dim filename As String = SavedSessionDefaultPath
 
-		If Not File.Exists(filename) Then
-			MessageBox.Show(Me, "SavedState.txt could not be found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			Return
-		End If
 
-		If ssh.SaidHello = True Then
-			Dim Result As Integer = MessageBox.Show(Me, "Resuming a previous state will cause you to lose your progress in this session!" & Environment.NewLine & Environment.NewLine &
-												   "Do you wish to proceed?", "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
-			If Result = DialogResult.No Then
-				Return
+			'	 ===============================================================================
+			'						 Custom Location if Control-Key pressed
+			'	 ===============================================================================
+			If My.Computer.Keyboard.CtrlKeyDown Then
+				Dim fsd As New OpenFileDialog With {.Filter = "Saved Session|*" & Path.GetExtension(SavedSessionDefaultPath) & "",
+													.InitialDirectory = Path.GetDirectoryName(SavedSessionDefaultPath),
+													.Title = "Select a saved session to resume.",
+													.CheckPathExists = True,
+													.CheckFileExists = True,
+													.AddExtension = True,
+													.ValidateNames = True}
+				If fsd.ShowDialog() = DialogResult.Cancel Then Exit Sub
+
+				filename = fsd.FileName
+				'===============================================================================
+				'						Check if default-File exists
+				'===============================================================================
+			ElseIf Not File.Exists(filename) Then
+				MessageBox.Show(Me, Path.GetFileName(SavedSessionDefaultPath) & " could not be found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				Exit Sub
 			End If
-		End If
 
-		'TODO-NEXT: Add Deserializing
+			If ssh.SaidHello = True _
+			AndAlso MessageBox.Show(Me, "Resuming a previous state will cause you to lose your progress in this session!" &
+									vbCrLf & vbCrLf &
+									"Do you wish to proceed?", "Warning!",
+									MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) = DialogResult.No Then
+				Exit Sub
+			End If
 
-		'' Construct an instance of the XmlSerializer with the type
-		'' of object that is being deserialized.  
-		'Dim mySerializer As XmlSerializer = New XmlSerializer(GetType(My.SessionState))
-		'' To read the file, create a FileStream.  
-		'Dim myFileStream As FileStream = New FileStream(Application.StartupPath & "\System\SavedState.xml", FileMode.Open)
-		'' Call the Deserialize method and cast to the object type.  
-		'My.Application.Session = CType(mySerializer.Deserialize(myFileStream), My.SessionState)
-
-		'myFileStream.Close()
-
-		' Restore from file
-		'Dim stream As FileStream = File.OpenRead(filename)
-		'Dim formatter As New Runtime.Serialization.Formatters.Binary.BinaryFormatter()
-		'stream = File.OpenRead(filename)
-		'Console.WriteLine("Deserializing vector")
-		'Dim v As My.SessionState = formatter.Deserialize(stream)
-		'ssh = v
-		'stream.Close()
-		Dim newState As My.SessionState = My.SessionState.Load(filename)
-		ssh = newState
-		ssh.activate(Me)
+			My.SessionState.Load(filename, Me)
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			MessageBox.Show(Me, "An error occurred and the state was not loaded correctly!" &
+							vbCrLf & vbCrLf & ex.Message,
+							"Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		End Try
 	End Sub
 
 	Private Sub ResetSessionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ResetSessionToolStripMenuItem.Click
@@ -19550,7 +19557,10 @@ GetDommeSlideshow:
 			MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
+		ssh = New My.SessionState()
+		ssh.activate(Me)
 
+		Exit Sub
 		StopEverything()
 		ResetButton()
 

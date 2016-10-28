@@ -1,7 +1,8 @@
-﻿Imports System.IO
+﻿Option Explicit On
+
+Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
-Imports System.Threading
-Imports Runtime.Serialization.Formatters.Binary
+
 Namespace My
 
 	Partial Friend Class MyApplication
@@ -10,9 +11,13 @@ Namespace My
 	''' <summary>
 	''' Class to store/serialize and deserialize all nessecary session(!) informations.
 	''' </summary>
+	''' <remarks>
+	''' After loading from file, the object needs to be set and activated! 
+	''' </remarks>
 	<Serializable>
 	Public Class SessionState
-
+		'TODO-Next: Add serializing of flags and variables.
+		'TODO-Next: Clode Cleanup
 		Public Property Chat As String
 
 		Public Property SlideshowDomme As Slideshow
@@ -56,7 +61,7 @@ Namespace My
 		Public SkipGotoLine As Boolean
 
 		Public ChatString As String
-		Public DomTask As String
+		Public DomTask As String = String.Empty
 		Public DomChat As String
 		Public TypeDelay As Integer
 		Public TempVal As Integer
@@ -150,8 +155,9 @@ Namespace My
 
 		<Obsolete("Only used in Supend/Resume")>
 		Public ThoughtEnd As Boolean
-
+		<Obsolete("Used in #VTLenth but delivers a wrong value.")>
 		Public VTLength As Integer
+
 
 		Public DommeVideo As Boolean
 		Public VideoType As String
@@ -293,7 +299,7 @@ Namespace My
 
 		Public FirstRound As Boolean
 		Public StartStrokingCount As Integer
-
+		<Obsolete("Not used anymore.")>
 		Public TeaseJOI As Boolean
 		Public TeaseVideo As Boolean
 
@@ -344,10 +350,10 @@ Namespace My
 		Public EdgeFound As Boolean
 
 		Public OrgasmYesNo As Boolean
-
+		<Obsolete("Not used anymore.")>
 		Public VTFlag As Boolean
 
-		Public Shared DomPersonality As String
+		Public DomPersonality As String = String.Empty
 		Public UpdateList As New List(Of String)
 
 		Public GlitterDocument As String
@@ -474,7 +480,7 @@ Namespace My
 		''' This Variable contains the Path of origin of the displayed Image. CheckDommeTag() uses 
 		''' this string to get the curremt ImageData for the DommeTagApp.
 		''' </summary>
-		Public ImageLocation As String
+		Public ImageLocation As String = ""
 
 		Public ResponseYes As String
 		Public ResponseNo As String
@@ -537,43 +543,90 @@ Namespace My
 		Public CameGotoLine As String
 		Public RuinedGotoLine As String
 
+#Region "----------------------------------------- Form1.WMP --------------------------------------------"
 
+		Public serialized_WMP_Visible As Boolean
+		Public serialized_WMP_URL As String
+		Public serialized_WMP_Position As Double
+		Public serialized_WMP_Playstate As Long
 
+#End Region ' Form1.WWMP
 
-		Public _
-			Timer1_enabled,
-			SendTimer_enabled,
-			IsTypingTimer_enabled,
-			StrokeTimer_enabled,
-			StrokeTauntTimer_enabled,
-			DelayTimer_enabled,
-			CensorshipTimer_enabled,
-			AudibleMetronome_enabled,
-			ContactTimer_enabled,
-			CustomSlideshowTimer_enabled,
-			RLGLTimer_enabled,
-			StrokeTimeTotalTimer_enabled,
-			EdgeCountTimer_enabled,
-			TnASlides_enabled,
-			SlideshowTimer_enabled,
-			WaitTimer_enabled,
-			StupidTimer_enabled,
-			VideoTauntTimer_enabled,
-			RLGLTauntTimer_enabled,
-			AvoidTheEdgeTaunts_enabled,
-			TeaseTimer_enabled,
-			UpdatesTimer_enabled,
-			AvoidTheEdge_enabled,
-			AvoidTheEdgeResume_enabled,
-			EdgeTauntTimer_enabled,
-			HoldEdgeTimer_enabled,
-			HoldEdgeTauntTimer_enabled,
-			Contact1Timer_enabled,
-			Contact2Timer_enabled,
-			Contact3Timer_enabled,
-			UpdateStageTimer_enabled,
-			WMPTimer_enabled As Boolean
+#Region "-----------------------------------------Form1.Timers-------------------------------------------"
 
+		'===============================================================================
+		'							Timer enable states
+		'===============================================================================
+		Public AudibleMetronome_enabled As Boolean = False
+		Public AvoidTheEdge_enabled As Boolean = False
+		Public AvoidTheEdgeResume_enabled As Boolean = False
+		Public AvoidTheEdgeTaunts_enabled As Boolean = False
+		Public CensorshipTimer_enabled As Boolean = False
+		Public Contact1Timer_enabled As Boolean = False
+		Public Contact2Timer_enabled As Boolean = False
+		Public Contact3Timer_enabled As Boolean = False
+		Public ContactTimer_enabled As Boolean = False
+		Public CustomSlideshowTimer_enabled As Boolean = False
+		Public DelayTimer_enabled As Boolean = False
+		Public EdgeCountTimer_enabled As Boolean = False
+		Public EdgeTauntTimer_enabled As Boolean = False
+		Public HoldEdgeTauntTimer_enabled As Boolean = False
+		Public HoldEdgeTimer_enabled As Boolean = False
+		Public IsTypingTimer_enabled As Boolean = True
+		Public RLGLTauntTimer_enabled As Boolean = False
+		Public RLGLTimer_enabled As Boolean = False
+		Public SendTimer_enabled As Boolean = False
+		Public SlideshowTimer_enabled As Boolean = False
+		Public StrokeTauntTimer_enabled As Boolean = False
+		Public StrokeTimer_enabled As Boolean = False
+		Public StrokeTimeTotalTimer_enabled As Boolean = True
+		Public StupidTimer_enabled As Boolean = False
+		Public TeaseTimer_enabled As Boolean = False
+		Public Timer1_enabled As Boolean = False
+		Public TnASlides_enabled As Boolean = False
+		Public UpdateStageTimer_enabled As Boolean = False
+		Public UpdatesTimer_enabled As Boolean = True
+		Public VideoTauntTimer_enabled As Boolean = False
+		Public WaitTimer_enabled As Boolean = False
+		Public WMPTimer_enabled As Boolean = True
+
+		'===============================================================================
+		'							Timer intervals
+		'===============================================================================
+		Public AudibleMetronome_Interval As Integer = 30
+		Public AvoidTheEdge_Interval As Integer = 1000
+		Public AvoidTheEdgeResume_Interval As Integer = 1000
+		Public AvoidTheEdgeTaunts_Interval As Integer = 1000
+		Public CensorshipTimer_Interval As Integer = 1000
+		Public Contact1Timer_Interval As Integer = 1000
+		Public Contact2Timer_Interval As Integer = 1000
+		Public Contact3Timer_Interval As Integer = 1000
+		Public ContactTimer_Interval As Integer = 1000
+		Public CustomSlideshowTimer_Interval As Integer = 1000
+		Public DelayTimer_Interval As Integer = 1000
+		Public EdgeCountTimer_Interval As Integer = 1000
+		Public EdgeTauntTimer_Interval As Integer = 1000
+		Public HoldEdgeTauntTimer_Interval As Integer = 1000
+		Public HoldEdgeTimer_Interval As Integer = 1000
+		Public IsTypingTimer_Interval As Integer = 110
+		Public RLGLTauntTimer_Interval As Integer = 1000
+		Public RLGLTimer_Interval As Integer = 1000
+		Public SendTimer_Interval As Integer = 110
+		Public SlideshowTimer_Interval As Integer = 1000
+		Public StrokeTauntTimer_Interval As Integer = 1000
+		Public StrokeTimer_Interval As Integer = 1000
+		Public StrokeTimeTotalTimer_Interval As Integer = 1000
+		Public StupidTimer_Interval As Integer = 300
+		Public TeaseTimer_Interval As Integer = 1000
+		Public Timer1_Interval As Integer = 110
+		Public TnASlides_Interval As Integer = 334
+		Public UpdateStageTimer_Interval As Integer = 1000
+		Public UpdatesTimer_Interval As Integer = 1000
+		Public VideoTauntTimer_Interval As Integer = 1000
+		Public WaitTimer_Interval As Integer = 1000
+		Public WMPTimer_Interval As Integer = 1000
+
+#End Region ' Form1.Timers
 
 		''' <summary>
 		''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
@@ -591,101 +644,236 @@ Namespace My
 
 		Sub New() : End Sub
 
-		<NonSerialized>
-		Dim _Activator As Form1 = Nothing
 
-		Friend Sub activate(ByVal Activator As Form1)
-			_Activator = Activator
-			With Activator
-				.Timer1.Enabled = Timer1_enabled
-				.SendTimer.Enabled = SendTimer_enabled
-				.IsTypingTimer.Enabled = IsTypingTimer_enabled
-				.StrokeTimer.Enabled = StrokeTimer_enabled
-				.StrokeTauntTimer.Enabled = StrokeTauntTimer_enabled
-				.DelayTimer.Enabled = DelayTimer_enabled
-				.CensorshipTimer.Enabled = CensorshipTimer_enabled
-				.AudibleMetronome.Enabled = AudibleMetronome_enabled
-				.ContactTimer.Enabled = ContactTimer_enabled
-				.CustomSlideshowTimer.Enabled = CustomSlideshowTimer_enabled
-				.RLGLTimer.Enabled = RLGLTimer_enabled
-				.StrokeTimeTotalTimer.Enabled = StrokeTimeTotalTimer_enabled
-				.EdgeCountTimer.Enabled = EdgeCountTimer_enabled
-				.TnASlides.Enabled = TnASlides_enabled
-				.SlideshowTimer.Enabled = SlideshowTimer_enabled
-				.WaitTimer.Enabled = WaitTimer_enabled
-				.StupidTimer.Enabled = StupidTimer_enabled
-				.VideoTauntTimer.Enabled = VideoTauntTimer_enabled
-				.RLGLTauntTimer.Enabled = RLGLTauntTimer_enabled
-				.AvoidTheEdgeTaunts.Enabled = AvoidTheEdgeTaunts_enabled
-				.TeaseTimer.Enabled = TeaseTimer_enabled
-				.UpdatesTimer.Enabled = UpdatesTimer_enabled
-				.AvoidTheEdge.Enabled = AvoidTheEdge_enabled
-				.AvoidTheEdgeResume.Enabled = AvoidTheEdgeResume_enabled
-				.EdgeTauntTimer.Enabled = EdgeTauntTimer_enabled
-				.HoldEdgeTimer.Enabled = HoldEdgeTimer_enabled
-				.HoldEdgeTauntTimer.Enabled = HoldEdgeTauntTimer_enabled
-				.Contact1Timer.Enabled = Contact1Timer_enabled
-				.Contact2Timer.Enabled = Contact2Timer_enabled
-				.Contact3Timer.Enabled = Contact3Timer_enabled
-				.UpdateStageTimer.Enabled = UpdateStageTimer_enabled
-				.WMPTimer.Enabled = WMPTimer_enabled
+		Friend Sub activate(ByVal ActivationForm As Form1)
+			With ActivationForm
+				.ssh = Me
 
-				If SlideshowLoaded = True And File.Exists(_ImageFileNames(FileCount)) Then
-					.ShowImage(_ImageFileNames(FileCount), True)
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'							Set Domme Personality
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				If DomPersonality = String.Empty Then
+					DomPersonality = Settings.DomPersonality
 				End If
+
+				If .dompersonalitycombobox.Items.Contains(DomPersonality) = False Then
+					Throw New Exception("The personality """ & DomPersonality & """ was not found.")
+				Else
+					.dompersonalitycombobox.SelectedItem = DomPersonality
+				End If
+
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'							Set Picturebox & WMP
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				If isURL(ImageLocation) Then
+					.ShowImage(ImageLocation, True)
+				ElseIf File.Exists(ImageLocation) Then
+					.ShowImage(ImageLocation, True)
+				ElseIf SlideshowLoaded = True And _ImageFileNames.Count > 0 AndAlso File.Exists(_ImageFileNames(FileCount)) Then
+					.ShowImage(_ImageFileNames(FileCount), True)
+				Else
+					.ClearMainPictureBox()
+				End If
+
+				.mainPictureBox.Visible = Not serialized_WMP_Visible
+				.DomWMP.Visible = serialized_WMP_Visible
+				.DomWMP.URL = serialized_WMP_URL
+				.DomWMP.Ctlcontrols.currentPosition = serialized_WMP_Position
+
+				If serialized_WMP_Playstate = 1 Then
+					.DomWMP.Ctlcontrols.stop()
+				ElseIf serialized_WMP_Playstate = 2 Then
+					.DomWMP.Ctlcontrols.pause()
+				ElseIf serialized_WMP_Playstate = 3 Then
+					.DomWMP.Ctlcontrols.play()
+				End If
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'							Set Chat and StrokePace
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
 				.ChatText.DocumentText = Chat
 				.ChatText2.DocumentText = Chat
 				.ChatReadyState()
 
+				' To update the threadsafe Metronome StrokePace 
+				' Only needs to be done on activation
 				.StrokePace = StrokePace
+
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'								Set Timer Intervals
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				.AudibleMetronome.Interval = AudibleMetronome_Interval
+				.AvoidTheEdge.Interval = AvoidTheEdge_Interval
+				.AvoidTheEdgeResume.Interval = AvoidTheEdgeResume_Interval
+				.AvoidTheEdgeTaunts.Interval = AvoidTheEdgeTaunts_Interval
+				.CensorshipTimer.Interval = CensorshipTimer_Interval
+				.Contact1Timer.Interval = Contact1Timer_Interval
+				.Contact2Timer.Interval = Contact2Timer_Interval
+				.Contact3Timer.Interval = Contact3Timer_Interval
+				.ContactTimer.Interval = ContactTimer_Interval
+				.CustomSlideshowTimer.Interval = CustomSlideshowTimer_Interval
+				.DelayTimer.Interval = DelayTimer_Interval
+				.EdgeCountTimer.Interval = EdgeCountTimer_Interval
+				.EdgeTauntTimer.Interval = EdgeTauntTimer_Interval
+				.HoldEdgeTauntTimer.Interval = HoldEdgeTauntTimer_Interval
+				.HoldEdgeTimer.Interval = HoldEdgeTimer_Interval
+				.IsTypingTimer.Interval = IsTypingTimer_Interval
+				.RLGLTauntTimer.Interval = RLGLTauntTimer_Interval
+				.RLGLTimer.Interval = RLGLTimer_Interval
+				.SendTimer.Interval = SendTimer_Interval
+				.SlideshowTimer.Interval = SlideshowTimer_Interval
+				.StrokeTauntTimer.Interval = StrokeTauntTimer_Interval
+				.StrokeTimer.Interval = StrokeTimer_Interval
+				.StrokeTimeTotalTimer.Interval = StrokeTimeTotalTimer_Interval
+				.StupidTimer.Interval = StupidTimer_Interval
+				.TeaseTimer.Interval = TeaseTimer_Interval
+				.Timer1.Interval = Timer1_Interval
+				.TnASlides.Interval = TnASlides_Interval
+				.UpdateStageTimer.Interval = UpdateStageTimer_Interval
+				.UpdatesTimer.Interval = UpdatesTimer_Interval
+				.VideoTauntTimer.Interval = VideoTauntTimer_Interval
+				.WaitTimer.Interval = WaitTimer_Interval
+				.WMPTimer.Interval = WMPTimer_Interval
+
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'							Set Timer EnableStates
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				.AudibleMetronome.Enabled = AudibleMetronome_enabled
+				.AvoidTheEdge.Enabled = AvoidTheEdge_enabled
+				.AvoidTheEdgeResume.Enabled = AvoidTheEdgeResume_enabled
+				.AvoidTheEdgeTaunts.Enabled = AvoidTheEdgeTaunts_enabled
+				.CensorshipTimer.Enabled = CensorshipTimer_enabled
+				.Contact1Timer.Enabled = Contact1Timer_enabled
+				.Contact2Timer.Enabled = Contact2Timer_enabled
+				.Contact3Timer.Enabled = Contact3Timer_enabled
+				.ContactTimer.Enabled = ContactTimer_enabled
+				.CustomSlideshowTimer.Enabled = CustomSlideshowTimer_enabled
+				.DelayTimer.Enabled = DelayTimer_enabled
+				.EdgeCountTimer.Enabled = EdgeCountTimer_enabled
+				.EdgeTauntTimer.Enabled = EdgeTauntTimer_enabled
+				.HoldEdgeTauntTimer.Enabled = HoldEdgeTauntTimer_enabled
+				.HoldEdgeTimer.Enabled = HoldEdgeTimer_enabled
+				.IsTypingTimer.Enabled = IsTypingTimer_enabled
+				.RLGLTauntTimer.Enabled = RLGLTauntTimer_enabled
+				.RLGLTimer.Enabled = RLGLTimer_enabled
+				.SendTimer.Enabled = SendTimer_enabled
+				.SlideshowTimer.Enabled = SlideshowTimer_enabled
+				.StrokeTauntTimer.Enabled = StrokeTauntTimer_enabled
+				.StrokeTimer.Enabled = StrokeTimer_enabled
+				.StrokeTimeTotalTimer.Enabled = StrokeTimeTotalTimer_enabled
+				.StupidTimer.Enabled = StupidTimer_enabled
+				.TeaseTimer.Enabled = TeaseTimer_enabled
+				.Timer1.Enabled = Timer1_enabled
+				.TnASlides.Enabled = TnASlides_enabled
+				.UpdateStageTimer.Enabled = UpdateStageTimer_enabled
+				.UpdatesTimer.Enabled = UpdatesTimer_enabled
+				.VideoTauntTimer.Enabled = VideoTauntTimer_enabled
+				.WaitTimer.Enabled = WaitTimer_enabled
+				.WMPTimer.Enabled = WMPTimer_enabled
+
 
 			End With
 
 		End Sub
 
-		Friend Sub Store(ByVal filepath As String)
+#Region "------------------------------------serialize/deserialize---------------------------------------"
+
+		''' =========================================================================================================
+		''' <summary>
+		''' Stores a running session to disk. 
+		''' </summary>
+		''' <param name="filepath">The Filepath to store to.</param>
+		''' <param name="serializeForm">The Form to gather informations(Timer-States etc.) from.</param>
+		''' <exception cref="Exception">Rethrows all exceptions.</exception>
+		Friend Sub Store(ByVal filepath As String, ByVal serializeForm As Form1)
 			Dim stream As FileStream = Nothing
 			Try
-				If _Activator Is Nothing Then _Activator = My.Application.ApplicationContext.MainForm
-				With _Activator
-					Timer1_enabled = .Timer1.Enabled
-					SendTimer_enabled = .SendTimer.Enabled
-					IsTypingTimer_enabled = .IsTypingTimer.Enabled
-					StrokeTimer_enabled = .StrokeTimer.Enabled
-					StrokeTauntTimer_enabled = .StrokeTauntTimer.Enabled
-					DelayTimer_enabled = .DelayTimer.Enabled
-					CensorshipTimer_enabled = .CensorshipTimer.Enabled
+				With serializeForm
+					DomPersonality = .dompersonalitycombobox.SelectedItem
+
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'							Get Timer EnableStates
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					AudibleMetronome_enabled = .AudibleMetronome.Enabled
-					ContactTimer_enabled = .ContactTimer.Enabled
-					CustomSlideshowTimer_enabled = .CustomSlideshowTimer.Enabled
-					RLGLTimer_enabled = .RLGLTimer.Enabled
-					StrokeTimeTotalTimer_enabled = .StrokeTimeTotalTimer.Enabled
-					EdgeCountTimer_enabled = .EdgeCountTimer.Enabled
-					TnASlides_enabled = .TnASlides.Enabled
-					SlideshowTimer_enabled = .SlideshowTimer.Enabled
-					WaitTimer_enabled = .WaitTimer.Enabled
-					StupidTimer_enabled = .StupidTimer.Enabled
-					VideoTauntTimer_enabled = .VideoTauntTimer.Enabled
-					RLGLTauntTimer_enabled = .RLGLTauntTimer.Enabled
-					AvoidTheEdgeTaunts_enabled = .AvoidTheEdgeTaunts.Enabled
-					TeaseTimer_enabled = .TeaseTimer.Enabled
-					UpdatesTimer_enabled = .UpdatesTimer.Enabled
 					AvoidTheEdge_enabled = .AvoidTheEdge.Enabled
 					AvoidTheEdgeResume_enabled = .AvoidTheEdgeResume.Enabled
-					EdgeTauntTimer_enabled = .EdgeTauntTimer.Enabled
-					HoldEdgeTimer_enabled = .HoldEdgeTimer.Enabled
-					HoldEdgeTauntTimer_enabled = .HoldEdgeTauntTimer.Enabled
+					AvoidTheEdgeTaunts_enabled = .AvoidTheEdgeTaunts.Enabled
+					CensorshipTimer_enabled = .CensorshipTimer.Enabled
 					Contact1Timer_enabled = .Contact1Timer.Enabled
 					Contact2Timer_enabled = .Contact2Timer.Enabled
 					Contact3Timer_enabled = .Contact3Timer.Enabled
+					ContactTimer_enabled = .ContactTimer.Enabled
+					CustomSlideshowTimer_enabled = .CustomSlideshowTimer.Enabled
+					DelayTimer_enabled = .DelayTimer.Enabled
+					EdgeCountTimer_enabled = .EdgeCountTimer.Enabled
+					EdgeTauntTimer_enabled = .EdgeTauntTimer.Enabled
+					HoldEdgeTauntTimer_enabled = .HoldEdgeTauntTimer.Enabled
+					HoldEdgeTimer_enabled = .HoldEdgeTimer.Enabled
+					IsTypingTimer_enabled = .IsTypingTimer.Enabled
+					RLGLTauntTimer_enabled = .RLGLTauntTimer.Enabled
+					RLGLTimer_enabled = .RLGLTimer.Enabled
+					SendTimer_enabled = .SendTimer.Enabled
+					SlideshowTimer_enabled = .SlideshowTimer.Enabled
+					StrokeTauntTimer_enabled = .StrokeTauntTimer.Enabled
+					StrokeTimer_enabled = .StrokeTimer.Enabled
+					StrokeTimeTotalTimer_enabled = .StrokeTimeTotalTimer.Enabled
+					StupidTimer_enabled = .StupidTimer.Enabled
+					TeaseTimer_enabled = .TeaseTimer.Enabled
+					Timer1_enabled = .Timer1.Enabled
+					TnASlides_enabled = .TnASlides.Enabled
 					UpdateStageTimer_enabled = .UpdateStageTimer.Enabled
+					UpdatesTimer_enabled = .UpdatesTimer.Enabled
+					VideoTauntTimer_enabled = .VideoTauntTimer.Enabled
+					WaitTimer_enabled = .WaitTimer.Enabled
 					WMPTimer_enabled = .WMPTimer.Enabled
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'								Get Timer Intervals
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					AudibleMetronome_Interval = .AudibleMetronome.Interval
+					AvoidTheEdge_Interval = .AvoidTheEdge.Interval
+					AvoidTheEdgeResume_Interval = .AvoidTheEdgeResume.Interval
+					AvoidTheEdgeTaunts_Interval = .AvoidTheEdgeTaunts.Interval
+					CensorshipTimer_Interval = .CensorshipTimer.Interval
+					Contact1Timer_Interval = .Contact1Timer.Interval
+					Contact2Timer_Interval = .Contact2Timer.Interval
+					Contact3Timer_Interval = .Contact3Timer.Interval
+					ContactTimer_Interval = .ContactTimer.Interval
+					CustomSlideshowTimer_Interval = .CustomSlideshowTimer.Interval
+					DelayTimer_Interval = .DelayTimer.Interval
+					EdgeCountTimer_Interval = .EdgeCountTimer.Interval
+					EdgeTauntTimer_Interval = .EdgeTauntTimer.Interval
+					HoldEdgeTauntTimer_Interval = .HoldEdgeTauntTimer.Interval
+					HoldEdgeTimer_Interval = .HoldEdgeTimer.Interval
+					IsTypingTimer_Interval = .IsTypingTimer.Interval
+					RLGLTauntTimer_Interval = .RLGLTauntTimer.Interval
+					RLGLTimer_Interval = .RLGLTimer.Interval
+					SendTimer_Interval = .SendTimer.Interval
+					SlideshowTimer_Interval = .SlideshowTimer.Interval
+					StrokeTauntTimer_Interval = .StrokeTauntTimer.Interval
+					StrokeTimer_Interval = .StrokeTimer.Interval
+					StrokeTimeTotalTimer_Interval = .StrokeTimeTotalTimer.Interval
+					StupidTimer_Interval = .StupidTimer.Interval
+					TeaseTimer_Interval = .TeaseTimer.Interval
+					Timer1_Interval = .Timer1.Interval
+					TnASlides_Interval = .TnASlides.Interval
+					UpdateStageTimer_Interval = .UpdateStageTimer.Interval
+					UpdatesTimer_Interval = .UpdatesTimer.Interval
+					VideoTauntTimer_Interval = .VideoTauntTimer.Interval
+					WaitTimer_Interval = .WaitTimer.Interval
+					WMPTimer_Interval = .WMPTimer.Interval
+
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'								Get WMP-Data
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					serialized_WMP_Visible = .DomWMP.Visible
+					serialized_WMP_URL = .DomWMP.URL
+					serialized_WMP_Playstate = .DomWMP.playState
+					serialized_WMP_Position = .DomWMP.Ctlcontrols.currentPosition
+
 				End With
 
 				stream = File.Create(filepath)
 				Dim formatter As New BinaryFormatter()
-				Console.WriteLine("Serializing vector")
 				formatter.Serialize(stream, Me)
 			Catch ex As Exception
 				Throw
@@ -693,7 +881,13 @@ Namespace My
 				If stream IsNot Nothing Then stream.Close()
 			End Try
 		End Sub
-
+		''' =========================================================================================================
+		''' <summary>
+		''' Loads a stored session from the given path. To start the session call <see cref="activate(Form1)"/>.
+		''' </summary>
+		''' <param name="filepath">The filepath to load the stored <see cref="SessionEdges"/> from.</param>
+		''' <returns>Returns the stored deserialized unactivated(!) sessionState-Object.</returns>
+		''' <exception cref="Exception">Rethrows all exceptions.</exception>
 		Shared Function Load(ByVal filepath As String) As SessionState
 			Dim stream As FileStream = Nothing
 			Try
@@ -708,8 +902,23 @@ Namespace My
 				If stream IsNot Nothing Then stream.Close()
 			End Try
 		End Function
+		''' =========================================================================================================
+		''' <summary>
+		''' Loads and activates a stored session from the given path.
+		''' </summary>
+		''' <param name="filepath">The path to load the state from.</param>
+		''' <param name="ActivationForm">The form to activate the session on.</param>
+		''' <exception cref="Exception">Rethrows all exceptions.</exception>
+		Shared Sub Load(ByVal filepath As String, ByVal ActivationForm As Form1)
+			Try
+				Dim tmpState As SessionState = Load(filepath)
+				tmpState.activate(ActivationForm)
+			Catch ex As Exception
+				Throw
+			End Try
+		End Sub
 
 	End Class
-
+#End Region 'serialize/deserialize
 End Namespace
 
