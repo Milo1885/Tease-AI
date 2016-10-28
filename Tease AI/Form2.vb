@@ -1054,8 +1054,8 @@ Public Class FrmSettings
 
 
 	Private Sub timedRadio_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles timedRadio.CheckedChanged
-		If Form1.ssh_SlideshowLoaded = True And timedRadio.Checked = True Then
-			Form1.ssh_SlideshowTimerTick = slideshowNumBox.Value
+		If Form1.ssh.SlideshowLoaded = True And timedRadio.Checked = True Then
+			Form1.ssh.SlideshowTimerTick = slideshowNumBox.Value
 			Form1.SlideshowTimer.Start()
 		End If
 	End Sub
@@ -1114,7 +1114,7 @@ Public Class FrmSettings
 		Dim BlankName As String
 		BlankName = "stroker"
 		Dim NameVal As Integer
-		NameVal = Form1.ssh_randomizer.Next(1, 6)
+		NameVal = Form1.ssh.randomizer.Next(1, 6)
 
 		If NameVal = 1 Then BlankName = "stroker"
 		If NameVal = 2 Then BlankName = "loser"
@@ -1134,7 +1134,7 @@ Public Class FrmSettings
 		Dim BlankName As String
 		BlankName = "stroker"
 		Dim NameVal As Integer
-		NameVal = Form1.ssh_randomizer.Next(1, 6)
+		NameVal = Form1.ssh.randomizer.Next(1, 6)
 
 		If NameVal = 1 Then BlankName = "stroker"
 		If NameVal = 2 Then BlankName = "loser"
@@ -1153,7 +1153,7 @@ Public Class FrmSettings
 		Dim BlankName As String
 		BlankName = "stroker"
 		Dim NameVal As Integer
-		NameVal = Form1.ssh_randomizer.Next(1, 6)
+		NameVal = Form1.ssh.randomizer.Next(1, 6)
 
 		If NameVal = 1 Then BlankName = "stroker"
 		If NameVal = 2 Then BlankName = "loser"
@@ -1172,7 +1172,7 @@ Public Class FrmSettings
 		Dim BlankName As String
 		BlankName = "stroker"
 		Dim NameVal As Integer
-		NameVal = Form1.ssh_randomizer.Next(1, 6)
+		NameVal = Form1.ssh.randomizer.Next(1, 6)
 
 		If NameVal = 1 Then BlankName = "stroker"
 		If NameVal = 2 Then BlankName = "loser"
@@ -1191,7 +1191,7 @@ Public Class FrmSettings
 		Dim BlankName As String
 		BlankName = "stroker"
 		Dim NameVal As Integer
-		NameVal = Form1.ssh_randomizer.Next(1, 6)
+		NameVal = Form1.ssh.randomizer.Next(1, 6)
 
 		If NameVal = 1 Then BlankName = "stroker"
 		If NameVal = 2 Then BlankName = "loser"
@@ -1210,7 +1210,7 @@ Public Class FrmSettings
 		Dim BlankName As String
 		BlankName = "stroker"
 		Dim NameVal As Integer
-		NameVal = Form1.ssh_randomizer.Next(1, 6)
+		NameVal = Form1.ssh.randomizer.Next(1, 6)
 
 		If NameVal = 1 Then BlankName = "stroker"
 		If NameVal = 2 Then BlankName = "loser"
@@ -1229,7 +1229,7 @@ Public Class FrmSettings
 		Dim BlankName As String
 		BlankName = "stroker"
 		Dim NameVal As Integer
-		NameVal = Form1.ssh_randomizer.Next(1, 6)
+		NameVal = Form1.ssh.randomizer.Next(1, 6)
 
 		If NameVal = 1 Then BlankName = "stroker"
 		If NameVal = 2 Then BlankName = "slave"
@@ -1248,7 +1248,7 @@ Public Class FrmSettings
 		Dim BlankName As String
 		BlankName = "stroker"
 		Dim NameVal As Integer
-		NameVal = Form1.ssh_randomizer.Next(1, 6)
+		NameVal = Form1.ssh.randomizer.Next(1, 6)
 
 		If NameVal = 1 Then BlankName = "stroker"
 		If NameVal = 2 Then BlankName = "slave"
@@ -2788,23 +2788,23 @@ Public Class FrmSettings
 
 			If ScriptList(i).Contains("@CheckVideo") Then
 				If Not RTBScriptReq.Text.Contains("* At least one Genre or Domme Video path set and selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Genre or Domme Video path set and selected *" & Environment.NewLine
-				Form1.ssh_VideoCheck = True
+				Form1.ssh.VideoCheck = True
 				Form1.RandomVideo()
-				If Form1.ssh_NoVideo = True Then ScriptReqFailed = True
-				Form1.ssh_VideoCheck = False
-				Form1.ssh_NoVideo = False
+				If Form1.ssh.NoVideo = True Then ScriptReqFailed = True
+				Form1.ssh.VideoCheck = False
+				Form1.ssh.NoVideo = False
 			End If
 
 
 			If ScriptList(i).Contains("@PlayCensorshipSucks") Or ScriptList(i).Contains("@PlayAvoidTheEdge") Or ScriptList(i).Contains("@PlayRedLightGreenLight") Then
 				If Not RTBScriptReq.Text.Contains("* At least one non-Special Genre or Domme Video path set and selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one non-Special Genre or Domme Video path set and selected *" & Environment.NewLine
-				Form1.ssh_VideoCheck = True
-				Form1.ssh_NoSpecialVideo = True
+				Form1.ssh.VideoCheck = True
+				Form1.ssh.NoSpecialVideo = True
 				Form1.RandomVideo()
-				If Form1.ssh_NoVideo = True Then ScriptReqFailed = True
-				Form1.ssh_VideoCheck = False
-				Form1.ssh_NoSpecialVideo = False
-				Form1.ssh_NoVideo = False
+				If Form1.ssh.NoVideo = True Then ScriptReqFailed = True
+				Form1.ssh.VideoCheck = False
+				Form1.ssh.NoSpecialVideo = False
+				Form1.ssh.NoVideo = False
 			End If
 
 			If ScriptList(i).Contains("@ChastityOn") Or ScriptList(i).Contains("@ChastityOff") Then
@@ -3322,21 +3322,21 @@ Public Class FrmSettings
 			End If
 
 			If AvailList(j).Contains("@CheckVideo") Then
-				Form1.ssh_VideoCheck = True
+				Form1.ssh.VideoCheck = True
 				Form1.RandomVideo()
-				If Form1.ssh_NoVideo = True Then AvailFail = True
-				Form1.ssh_VideoCheck = False
-				Form1.ssh_NoVideo = False
+				If Form1.ssh.NoVideo = True Then AvailFail = True
+				Form1.ssh.VideoCheck = False
+				Form1.ssh.NoVideo = False
 			End If
 
 			If AvailList(j).Contains("@PlayCensorshipSucks") Or AvailList(j).Contains("@PlayAvoidTheEdge") Or AvailList(j).Contains("@PlayRedLightGreenLight") Then
-				Form1.ssh_VideoCheck = True
-				Form1.ssh_NoSpecialVideo = True
+				Form1.ssh.VideoCheck = True
+				Form1.ssh.NoSpecialVideo = True
 				Form1.RandomVideo()
-				If Form1.ssh_NoVideo = True Then AvailFail = True
-				Form1.ssh_VideoCheck = False
-				Form1.ssh_NoSpecialVideo = False
-				Form1.ssh_NoVideo = False
+				If Form1.ssh.NoVideo = True Then AvailFail = True
+				Form1.ssh.VideoCheck = False
+				Form1.ssh.NoSpecialVideo = False
+				Form1.ssh.NoVideo = False
 			End If
 
 			If AvailList(j).Contains("@ChastityOn") Or AvailList(j).Contains("@ChastityOff") Then
@@ -4036,11 +4036,11 @@ Public Class FrmSettings
 	End Sub
 
 	Private Sub BTNWIAddandContinue_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIAddandContinue.Click
-		Form1.ssh_ApproveImage = 1
+		Form1.ssh.ApproveImage = 1
 	End Sub
 
 	Private Sub BTNWIContinue_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIContinue.Click
-		Form1.ssh_ApproveImage = 2
+		Form1.ssh.ApproveImage = 2
 	End Sub
 
 	Private Sub BTNCancel_Click(sender As System.Object, e As System.EventArgs) Handles BTNWICancel.Click
@@ -4050,10 +4050,10 @@ Public Class FrmSettings
 	Private Sub BTNWIRemove_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIRemove.Click
 
 
-		Form1.ssh_WebImageLines.Remove(Form1.ssh_WebImageLines(Form1.ssh_WebImageLine))
+		Form1.WebImageLines.Remove(Form1.WebImageLines(Form1.WebImageLine))
 
 
-		If Form1.ssh_WebImageLine = Form1.ssh_WebImageLines.Count Then Form1.ssh_WebImageLine = 0
+		If Form1.WebImageLine = Form1.WebImageLines.Count Then Form1.WebImageLine = 0
 		'
 		'Else
 		'WebImageLine += 1
@@ -4067,19 +4067,19 @@ Public Class FrmSettings
 		WebPictureBox.Image = Nothing
 		GC.Collect()
 
-		WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.ssh_WebImageLines(Form1.ssh_WebImageLine))))
+		WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
 
-		Debug.Print(Form1.ssh_WebImageLines(Form1.ssh_WebImageLine))
+		Debug.Print(Form1.WebImageLines(Form1.WebImageLine))
 
-		My.Computer.FileSystem.DeleteFile(Form1.ssh_WebImagePath)
+		My.Computer.FileSystem.DeleteFile(Form1.WebImagePath)
 
-		If File.Exists(Form1.ssh_WebImagePath) Then
+		If File.Exists(Form1.WebImagePath) Then
 			Debug.Print("File Exists")
 		Else
 			Debug.Print("Nope")
 		End If
 
-		My.Computer.FileSystem.WriteAllText(Form1.ssh_WebImagePath, String.Join(Environment.NewLine, Form1.ssh_WebImageLines), False)
+		My.Computer.FileSystem.WriteAllText(Form1.WebImagePath, String.Join(Environment.NewLine, Form1.WebImageLines), False)
 
 	End Sub
 
@@ -4087,9 +4087,9 @@ Public Class FrmSettings
 
 
 		If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & Form1.ssh_WebImageLines(Form1.ssh_WebImageLine), True)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & Form1.WebImageLines(Form1.WebImageLine), True)
 		Else
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Form1.ssh_WebImageLines(Form1.ssh_WebImageLine), True)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Form1.WebImageLines(Form1.WebImageLine), True)
 		End If
 
 
@@ -4098,9 +4098,9 @@ Public Class FrmSettings
 	Private Sub BTNWIDisliked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIDisliked.Click
 
 		If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & Form1.ssh_WebImageLines(Form1.ssh_WebImageLine), True)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & Form1.WebImageLines(Form1.WebImageLine), True)
 		Else
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Form1.ssh_WebImageLines(Form1.ssh_WebImageLine), True)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Form1.WebImageLines(Form1.WebImageLine), True)
 		End If
 
 	End Sub
@@ -4109,10 +4109,10 @@ Public Class FrmSettings
 
 		Select Case e.Delta
 			Case -120 'Scrolling down
-				Form1.ssh_WebImageLine += 1
+				Form1.WebImageLine += 1
 
-				If Form1.ssh_WebImageLine > Form1.ssh_WebImageLineTotal - 1 Then
-					Form1.ssh_WebImageLine = Form1.ssh_WebImageLineTotal
+				If Form1.WebImageLine > Form1.WebImageLineTotal - 1 Then
+					Form1.WebImageLine = Form1.WebImageLineTotal
 					MsgBox("No more images to display!", , "Warning!")
 					Return
 				End If
@@ -4124,13 +4124,13 @@ Public Class FrmSettings
 				WebPictureBox.Image = Nothing
 				GC.Collect()
 
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.ssh_WebImageLines(Form1.ssh_WebImageLine))))
-				LBLWebImageCount.Text = Form1.ssh_WebImageLine + 1 & "/" & Form1.ssh_WebImageLineTotal
+				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+				LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
 			Case 120 'Scrolling up
-				Form1.ssh_WebImageLine -= 1
+				Form1.WebImageLine -= 1
 
-				If Form1.ssh_WebImageLine < 0 Then
-					Form1.ssh_WebImageLine = 0
+				If Form1.WebImageLine < 0 Then
+					Form1.WebImageLine = 0
 					MsgBox("No more images to display!", , "Warning!")
 					Return
 				End If
@@ -4141,8 +4141,8 @@ Public Class FrmSettings
 				End Try
 				WebPictureBox.Image = Nothing
 				GC.Collect()
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.ssh_WebImageLines(Form1.ssh_WebImageLine))))
-				LBLWebImageCount.Text = Form1.ssh_WebImageLine + 1 & "/" & Form1.ssh_WebImageLineTotal
+				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+				LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
 		End Select
 
 
@@ -4159,17 +4159,17 @@ Public Class FrmSettings
 
 		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
 
-			Form1.ssh_WebImageFile = New IO.StreamReader(WebImageFileDialog.FileName)
-			Form1.ssh_WebImagePath = WebImageFileDialog.FileName
+			Form1.WebImageFile = New IO.StreamReader(WebImageFileDialog.FileName)
+			Form1.WebImagePath = WebImageFileDialog.FileName
 
-			Form1.ssh_WebImageLines.Clear()
+			Form1.WebImageLines.Clear()
 
-			Form1.ssh_WebImageLine = 0
-			Form1.ssh_WebImageLineTotal = 0
+			Form1.WebImageLine = 0
+			Form1.WebImageLineTotal = 0
 
-			While Form1.ssh_WebImageFile.Peek <> -1
-				Form1.ssh_WebImageLineTotal += 1
-				Form1.ssh_WebImageLines.Add(Form1.ssh_WebImageFile.ReadLine())
+			While Form1.WebImageFile.Peek <> -1
+				Form1.WebImageLineTotal += 1
+				Form1.WebImageLines.Add(Form1.WebImageFile.ReadLine())
 			End While
 
 			Try
@@ -4180,15 +4180,15 @@ Public Class FrmSettings
 			GC.Collect()
 
 			Try
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.ssh_WebImageLines(0))))
+				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(0))))
 			Catch
 				MessageBox.Show(Me, "Failed to load URL File image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			End Try
 
-			Form1.ssh_WebImageFile.Close()
-			Form1.ssh_WebImageFile.Dispose()
+			Form1.WebImageFile.Close()
+			Form1.WebImageFile.Dispose()
 
-			LBLWebImageCount.Text = Form1.ssh_WebImageLine + 1 & "/" & Form1.ssh_WebImageLineTotal
+			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
 
 
 			BTNWINext.Enabled = True
@@ -4211,10 +4211,10 @@ Public Class FrmSettings
 
 TryNextImage:
 
-		Form1.ssh_WebImageLine += 1
+		Form1.WebImageLine += 1
 
-		If Form1.ssh_WebImageLine > Form1.ssh_WebImageLineTotal - 1 Then
-			Form1.ssh_WebImageLine = Form1.ssh_WebImageLineTotal
+		If Form1.WebImageLine > Form1.WebImageLineTotal - 1 Then
+			Form1.WebImageLine = Form1.WebImageLineTotal
 			MsgBox("No more images to display!", , "Warning!")
 			Return
 		End If
@@ -4227,8 +4227,8 @@ TryNextImage:
 		WebPictureBox.Image = Nothing
 		GC.Collect()
 		Try
-			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.ssh_WebImageLines(Form1.ssh_WebImageLine))))
-			LBLWebImageCount.Text = Form1.ssh_WebImageLine + 1 & "/" & Form1.ssh_WebImageLineTotal
+			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
 		Catch ex As Exception
 			GoTo TryNextImage
 		End Try
@@ -4241,10 +4241,10 @@ TryNextImage:
 
 trypreviousimage:
 
-		Form1.ssh_WebImageLine -= 1
+		Form1.WebImageLine -= 1
 
-		If Form1.ssh_WebImageLine < 0 Then
-			Form1.ssh_WebImageLine = 0
+		If Form1.WebImageLine < 0 Then
+			Form1.WebImageLine = 0
 			MsgBox("No more images to display!", , "Warning!")
 			Return
 		End If
@@ -4257,8 +4257,8 @@ trypreviousimage:
 		WebPictureBox.Image = Nothing
 		GC.Collect()
 		Try
-			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.ssh_WebImageLines(Form1.ssh_WebImageLine))))
-			LBLWebImageCount.Text = Form1.ssh_WebImageLine + 1 & "/" & Form1.ssh_WebImageLineTotal
+			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
 		Catch ex As Exception
 			GoTo trypreviousimage
 		End Try
@@ -4280,17 +4280,17 @@ trypreviousimage:
 
 		Try
 
-			Form1.ssh_WebImage = Form1.ssh_WebImageLines(Form1.ssh_WebImageLine)
+			Form1.WebImage = Form1.WebImageLines(Form1.WebImageLine)
 
-			Dim DirSplit As String() = Form1.ssh_WebImage.Split("/")
-			Form1.ssh_WebImage = DirSplit(DirSplit.Length - 1)
+			Dim DirSplit As String() = Form1.WebImage.Split("/")
+			Form1.WebImage = DirSplit(DirSplit.Length - 1)
 
 			' ### Clean Code
 			'Do Until Not Form1.WebImage.Contains("/")
 			'Form1.WebImage = Form1.WebImage.Remove(0, 1)
 			'Loop
 
-			SaveFileDialog1.FileName = Form1.ssh_WebImage
+			SaveFileDialog1.FileName = Form1.WebImage
 
 		Catch ex As Exception
 
@@ -4472,7 +4472,7 @@ trypreviousimage:
 			Me.Invoke(Callbak, sender, e)
 		Else
 			e.ReviewImages = CBWIReview.Checked
-			e.ApproveImage = Form1.ssh_ApproveImage
+			e.ApproveImage = Form1.ssh.ApproveImage
 			e.SaveImages = CBWISaveToDisk.Checked
 			e.ImgSaveDir = TBWIDirectory.Text
 		End If
@@ -4491,7 +4491,7 @@ trypreviousimage:
 			Me.Invoke(CallBack, Sender, e)
 		Else
             ' Reset remanent Marker for Image Approval
-            If Form1.ssh_ApproveImage <> 0 Then Form1.ssh_ApproveImage = 0
+            If Form1.ssh.ApproveImage <> 0 Then Form1.ssh.ApproveImage = 0
 			Select Case e.CurrentTask
 				Case URL_File_Tasks.CreateURLFile
                     '===============================================================================
@@ -5901,7 +5901,7 @@ checkFolder:
 
 
 	Private Sub CockSizeNumBox_ValueChanged(sender As System.Object, e As System.EventArgs) Handles CockSizeNumBox.ValueChanged
-		Form1.ssh_CockSize = CockSizeNumBox.Value
+		Form1.ssh.CockSize = CockSizeNumBox.Value
 	End Sub
 
 	Private Sub CockSizeNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles CockSizeNumBox.LostFocus
@@ -6033,7 +6033,7 @@ checkFolder:
 			If LBVidScript.SelectedItem = "Taunts" Then CensorText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Video\Red Light Green Light\Taunts.txt"
 		End If
 
-		Form1.ssh_VTPath = CensorText
+		Form1.ssh.VTPath = CensorText
 
 		Try
 			Dim VidReader As New StreamReader(CensorText)
@@ -6098,7 +6098,7 @@ checkFolder:
 		End If
 
 
-		My.Computer.FileSystem.DeleteFile(Form1.ssh_VTPath)
+		My.Computer.FileSystem.DeleteFile(Form1.ssh.VTPath)
 
 		Dim WriteList As New List(Of String)
 
@@ -6115,9 +6115,9 @@ checkFolder:
 
 		For i As Integer = 0 To WriteList.Count - 1
 			If i <> WriteList.Count - 1 Then
-				My.Computer.FileSystem.WriteAllText(Form1.ssh_VTPath, WriteList(i), True)
+				My.Computer.FileSystem.WriteAllText(Form1.ssh.VTPath, WriteList(i), True)
 			Else
-				My.Computer.FileSystem.WriteAllText(Form1.ssh_VTPath, WriteList(i), True)
+				My.Computer.FileSystem.WriteAllText(Form1.ssh.VTPath, WriteList(i), True)
 			End If
 		Next
 
@@ -6164,7 +6164,7 @@ checkFolder:
 
 		If Not File.Exists(GlitPath) Then Return
 
-		If GlitPath = Form1.ssh_StatusText Then
+		If GlitPath = Form1.ssh.StatusText Then
 			MsgBox("This file is currently in use by the program. Saving changes may be slow until the Glitter process has finished.", , "Warning!")
 		End If
 
@@ -6388,8 +6388,8 @@ checkFolder:
 
 			LoadDommeTags()
 
-			Form1.ssh_TagCount = 1
-			LBLTagCount.Text = Form1.ssh_TagCount & "/" & ImageTagDir.Count
+			Form1.ssh.TagCount = 1
+			LBLTagCount.Text = Form1.ssh.TagCount & "/" & ImageTagDir.Count
 
 			'If ImageTagDir.Count = 1 Then BTNTagSave.Text = "Save and Finish"
 
@@ -6493,8 +6493,8 @@ checkFolder:
 
 				LoadDommeTags()
 
-				Form1.ssh_TagCount = 1
-				LBLTagCount.Text = Form1.ssh_TagCount & "/" & ImageTagDir.Count
+				Form1.ssh.TagCount = 1
+				LBLTagCount.Text = Form1.ssh.TagCount & "/" & ImageTagDir.Count
 
 				'If ImageTagDir.Count = 1 Then BTNTagSave.Text = "Save and Finish"
 
@@ -6651,8 +6651,8 @@ checkFolder:
 
 	Private Sub BTNTagNext_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagNext.Click
 
-		Form1.ssh_TagCount += 1
-		LBLTagCount.Text = Form1.ssh_TagCount & "/" & ImageTagDir.Count
+		Form1.ssh.TagCount += 1
+		LBLTagCount.Text = Form1.ssh.TagCount & "/" & ImageTagDir.Count
 		BTNTagPrevious.Enabled = True
 
 
@@ -6685,8 +6685,8 @@ checkFolder:
 
 	Private Sub BTNTagPrevious_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagPrevious.Click
 
-		Form1.ssh_TagCount -= 1
-		LBLTagCount.Text = Form1.ssh_TagCount & "/" & ImageTagDir.Count
+		Form1.ssh.TagCount -= 1
+		LBLTagCount.Text = Form1.ssh.TagCount & "/" & ImageTagDir.Count
 		BTNTagNext.Enabled = True
 
 
@@ -7052,7 +7052,7 @@ checkFolder:
 		If CBURLPreview.Checked = True Then
 			Dim PreviewList As New List(Of String)
 			PreviewList = Txt2List(Application.StartupPath & "\Images\System\URL Files\" & URLFileList.SelectedItem & ".txt")
-			PBURLPreview.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PreviewList(Form1.ssh_randomizer.Next(0, PreviewList.Count)))))
+			PBURLPreview.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(PreviewList(Form1.ssh.randomizer.Next(0, PreviewList.Count)))))
 		End If
 
 		SaveURLFileSelection()
@@ -7127,8 +7127,8 @@ checkFolder:
 
 
 
-			Form1.ssh_LocalTagCount = 1
-			LBLLocalTagCount.Text = Form1.ssh_LocalTagCount & "/" & LocalImageTagDir.Count
+			Form1.ssh.LocalTagCount = 1
+			LBLLocalTagCount.Text = Form1.ssh.LocalTagCount & "/" & LocalImageTagDir.Count
 
 
 			LocalImageTagCount = 0
@@ -7151,8 +7151,8 @@ checkFolder:
 
 	Private Sub BTNLocalTagNext_Click(sender As System.Object, e As System.EventArgs) Handles BTNLocalTagNext.Click
 
-		Form1.ssh_LocalTagCount += 1
-		LBLLocalTagCount.Text = Form1.ssh_LocalTagCount & "/" & LocalImageTagDir.Count
+		Form1.ssh.LocalTagCount += 1
+		LBLLocalTagCount.Text = Form1.ssh.LocalTagCount & "/" & LocalImageTagDir.Count
 		BTNLocalTagPrevious.Enabled = True
 
 		SetLocalImageTags()
@@ -8309,8 +8309,8 @@ checkFolder:
 
 	Private Sub BTNLocalTagPrevious_Click(sender As System.Object, e As System.EventArgs) Handles BTNLocalTagPrevious.Click
 
-		Form1.ssh_LocalTagCount -= 1
-		LBLLocalTagCount.Text = Form1.ssh_LocalTagCount & "/" & LocalImageTagDir.Count
+		Form1.ssh.LocalTagCount -= 1
+		LBLLocalTagCount.Text = Form1.ssh.LocalTagCount & "/" & LocalImageTagDir.Count
 		BTNLocalTagNext.Enabled = True
 
 		SetLocalImageTags()
@@ -8387,8 +8387,8 @@ checkFolder:
 
 
 
-				Form1.ssh_LocalTagCount = 1
-				LBLLocalTagCount.Text = Form1.ssh_LocalTagCount & "/" & LocalImageTagDir.Count
+				Form1.ssh.LocalTagCount = 1
+				LBLLocalTagCount.Text = Form1.ssh.LocalTagCount & "/" & LocalImageTagDir.Count
 
 
 				LocalImageTagCount = 0
@@ -8949,7 +8949,7 @@ checkFolder:
 
 		If result = DialogResult.Yes Then
 
-			Dim RandomOrgasms As Integer = Form1.ssh_randomizer.Next(1, 6)
+			Dim RandomOrgasms As Integer = Form1.ssh.randomizer.Next(1, 6)
 
 
 			My.Settings.OrgasmsRemaining = RandomOrgasms
@@ -8957,7 +8957,7 @@ checkFolder:
 
 			orgasmsPerNumBox.Value = RandomOrgasms
 
-			Dim RandomTime As Integer = Form1.ssh_randomizer.Next(1, 4)
+			Dim RandomTime As Integer = Form1.ssh.randomizer.Next(1, 4)
 
 			If domlevelNumBox.Value = 1 Then
 
@@ -10345,7 +10345,7 @@ checkFolder:
 	End Sub
 
 	Private Sub CBStretchBack_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBStretchBack.CheckedChanged
-		If Form1.ssh_ApplyingTheme = False Then
+		If Form1.ssh.ApplyingTheme = False Then
 			My.Settings.BackgroundStretch = CBStretchBack.Checked
 			Form1.ApplyThemeColor()
 		End If
@@ -10368,7 +10368,7 @@ checkFolder:
 	End Sub
 
 	Private Sub CBTransparentTime_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTransparentTime.CheckedChanged
-		If Form1.ssh_ApplyingTheme = False Then
+		If Form1.ssh.ApplyingTheme = False Then
 			My.Settings.CBDateTransparent = CBTransparentTime.Checked
 			Try
 				Form1.ApplyThemeColor()
@@ -10389,7 +10389,7 @@ checkFolder:
 	Private Sub CheckBox1_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBFlipBack.CheckedChanged
 
 		Try
-			If Form1.FormLoading = False And Form1.ssh_ApplyingTheme = False Then Form1.ApplyThemeColor()
+			If Form1.FormLoading = False And Form1.ssh.ApplyingTheme = False Then Form1.ApplyThemeColor()
 		Catch
 		End Try
 
@@ -10450,7 +10450,7 @@ checkFolder:
 
 
 
-			Debug.Print(Form1.ssh_GeneralTime)
+			Debug.Print(Form1.ssh.GeneralTime)
 
 
 
@@ -10544,13 +10544,13 @@ checkFolder:
 	End Sub
 
 	Private Sub SliderVVolume_Scroll(sender As System.Object, e As System.EventArgs) Handles SliderVVolume.Scroll
-		Form1.ssh_synth.Volume = SliderVVolume.Value
-		Form1.ssh_synth2.Volume = SliderVVolume.Value
+		Form1.synth.Volume = SliderVVolume.Value
+		Form1.synth2.Volume = SliderVVolume.Value
 		LBLVVolume.Text = SliderVVolume.Value
 	End Sub
 	Private Sub SliderVRate_Scroll(sender As System.Object, e As System.EventArgs) Handles SliderVRate.Scroll
-		Form1.ssh_synth.Rate = SliderVRate.Value
-		Form1.ssh_synth2.Rate = SliderVRate.Value
+		Form1.synth.Rate = SliderVRate.Value
+		Form1.synth2.Rate = SliderVRate.Value
 		LBLVRate.Text = SliderVRate.Value
 	End Sub
 
@@ -10585,7 +10585,7 @@ checkFolder:
 	End Sub
 
 	Private Sub Button19_Click(sender As System.Object, e As System.EventArgs) Handles Button19.Click
-		Form1.ssh_StrokeTick = 5
+		Form1.ssh.StrokeTick = 5
 	End Sub
 
 	Private Sub CBMuteMedia_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBMuteMedia.CheckedChanged
@@ -10624,23 +10624,23 @@ checkFolder:
 	End Sub
 
 	Private Sub BTNDebugTeaseTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugTeaseTimer.Click
-		Form1.ssh_TeaseTick = 5
+		Form1.ssh.TeaseTick = 5
 	End Sub
 
 	Private Sub BTNDebugStrokeTime_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugStrokeTime.Click
-		Form1.ssh_StrokeTick = 5
+		Form1.ssh.StrokeTick = 5
 	End Sub
 
 	Private Sub BTNDebugStrokeTauntTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugStrokeTauntTimer.Click
-		Form1.ssh_StrokeTauntTick = 5
+		Form1.ssh.StrokeTauntTick = 5
 	End Sub
 
 	Private Sub BTNDebugEdgeTauntTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugEdgeTauntTimer.Click
-		Form1.ssh_EdgeTauntInt = 5
+		Form1.ssh.EdgeTauntInt = 5
 	End Sub
 
 	Private Sub BTNDebugHoldEdgeTimer_Click(sender As System.Object, e As System.EventArgs) Handles BTNDebugHoldEdgeTimer.Click
-		Form1.ssh_HoldEdgeTick = 5
+		Form1.ssh.HoldEdgeTick = 5
 	End Sub
 
 

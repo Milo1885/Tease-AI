@@ -800,7 +800,7 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 			If TypeOf e.Error Is TimeoutException Then Debug.Print(e.Error.Message)
 			If e.Error IsNot Nothing Then Exit Sub
 
-			ssh_JustShowedBlogImage = True
+			ssh.JustShowedBlogImage = True
 
 			If e.Cancelled Then
 				MainPictureboxSetImage(New Bitmap(Image.FromFile(pathImageErrorOnLoading)), "")
@@ -885,11 +885,11 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 
 			' Updeate the pathimformations.
 			If ImagePath <> pathImageErrorOnLoading Then
-				ssh_ImageLocation = ImagePath
+				ssh.ImageLocation = ImagePath
 				LBLImageInfo.Text = ImagePath
 				mainPictureBox.ImageLocation = ImagePath
 			Else
-				ssh_ImageLocation = ""
+				ssh.ImageLocation = ""
 				LBLImageInfo.Text = ""
 				mainPictureBox.ImageLocation = ""
 			End If
@@ -935,7 +935,7 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 	<DebuggerStepThrough>
 	Sub WatchDogImageAnimator_WatchDogReset(sender As Object,
 											ByVal e As EventArgs) Handles WatchDogImageAnimator.WatchDogReset
-		Debug.Print("ImageAnimator-WatchDogReset on Image: " & ssh_ImageLocation)
+		Debug.Print("ImageAnimator-WatchDogReset on Image: " & ssh.ImageLocation)
 		' Prevent the ImageAnimator to stop
 		mreImageanimator.Reset()
 
@@ -988,28 +988,28 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 	''' images as well as remote image links</param>
 	''' </summary>
 	Private Sub DeleteCurrentImage(ByVal restrictToLocal As Boolean)
-		If ssh_ImageLocation Is Nothing Then Throw New ArgumentException("The given path was empty.")
-		If ssh_ImageLocation = "" Then Throw New ArgumentException("The given path was empty.")
+		If ssh.ImageLocation Is Nothing Then Throw New ArgumentException("The given path was empty.")
+		If ssh.ImageLocation = "" Then Throw New ArgumentException("The given path was empty.")
 		Try
-			If isURL(ssh_ImageLocation) Then
+			If isURL(ssh.ImageLocation) Then
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 				'									Online Images
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				Debug.Print("××××××××××××××××××××××× Deleting remote Image: " & ssh_ImageLocation & "×××××××××××××××××××××××")
+				Debug.Print("××××××××××××××××××××××× Deleting remote Image: " & ssh.ImageLocation & "×××××××××××××××××××××××")
 
 				If restrictToLocal Then Throw New ArgumentException("Can't delete remote files!")
 				Dim rtnInt As Integer = 0
 				' #################### Remove from LikeList ####################
-				rtnInt += RemoveFromLikeList(ssh_ImageLocation)
+				rtnInt += RemoveFromLikeList(ssh.ImageLocation)
 				' ################## Remove from DislikeList ###################
-				rtnInt += RemoveFromDislikeList(ssh_ImageLocation)
+				rtnInt += RemoveFromDislikeList(ssh.ImageLocation)
 				' ################## Remove from LocalTagList ##################
-				rtnInt += RemoveFromLocalTagList(ssh_ImageLocation)
+				rtnInt += RemoveFromLocalTagList(ssh.ImageLocation)
 				' #################### Remove from URL-Lists ###################
-				rtnInt += RemoveFromUrlFiles(ssh_ImageLocation)
+				rtnInt += RemoveFromUrlFiles(ssh.ImageLocation)
 
 				' Save the Path temporary -> CLearMainPictureBox will flush ImageLocation
-				Dim tmpPath As String = ssh_ImageLocation
+				Dim tmpPath As String = ssh.ImageLocation
 				' Dispose the Image from RAM
 				ClearMainPictureBox()
 				If rtnInt < 1 Then Throw New Exception("The URL was not successfully deleted.")
@@ -1022,50 +1022,50 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 				'									Local Images
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				Debug.Print("××××××××××××××××××××××× Deleting local Image: " & ssh_ImageLocation & "×××××××××××××××××××××××")
+				Debug.Print("××××××××××××××××××××××× Deleting local Image: " & ssh.ImageLocation & "×××××××××××××××××××××××")
 
 				' Check if all requirements are met.
-				Dim tmpstring As String = Path.GetDirectoryName(ssh_ImageLocation)
+				Dim tmpstring As String = Path.GetDirectoryName(ssh.ImageLocation)
 				If myDirectory.Exists(tmpstring) = False Then
 					Throw New DirectoryNotFoundException("The given directory was not found: """ &
 														 Path.GetDirectoryName(tmpstring) & """")
 				End If
 
-				If File.Exists(ssh_ImageLocation) = False Then
+				If File.Exists(ssh.ImageLocation) = False Then
 					Throw New FileNotFoundException("The given File was not found: """ &
-													ssh_ImageLocation & """")
+													ssh.ImageLocation & """")
 				End If
 
-				If ssh_ImageLocation.ToLower.StartsWith(Application.StartupPath.ToLower & "\Images\System\".ToLower) Then _
+				If ssh.ImageLocation.ToLower.StartsWith(Application.StartupPath.ToLower & "\Images\System\".ToLower) Then _
 					Throw New ArgumentException("System iamges are not allowed to delete.")
-				If ssh__ImageFileNames.Contains(ssh_ImageLocation) Then _
+				If ssh._ImageFileNames.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Domme-Slideshow images are not allowed to delete!")
-				If ssh_Contact1Pics.Contains(ssh_ImageLocation) Then _
+				If ssh.Contact1Pics.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Contact1-Slideshow images are not allowed to delete!")
-				If ssh_Contact2Pics.Contains(ssh_ImageLocation) Then _
+				If ssh.Contact2Pics.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Contact2-Slideshow images are not allowed to delete!")
-				If ssh_Contact3Pics.Contains(ssh_ImageLocation) Then _
+				If ssh.Contact3Pics.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Contact3-Slideshow images are not allowed to delete!")
 
-				If ssh_ImageLocation.ToLower.StartsWith(My.Settings.DomImageDir.ToLower) Then _
+				If ssh.ImageLocation.ToLower.StartsWith(My.Settings.DomImageDir.ToLower) Then _
 					Throw New Exception("Images in Domme-Image-Dir are not allowed to delete!")
-				If ssh_ImageLocation.ToLower.StartsWith(My.Settings.Contact1ImageDir.ToLower) Then _
+				If ssh.ImageLocation.ToLower.StartsWith(My.Settings.Contact1ImageDir.ToLower) Then _
 					Throw New Exception("Images in Contact1-Image-Dir are not allowed to delete!")
-				If ssh_ImageLocation.ToLower.StartsWith(My.Settings.Contact1ImageDir.ToLower) Then _
+				If ssh.ImageLocation.ToLower.StartsWith(My.Settings.Contact1ImageDir.ToLower) Then _
 					Throw New Exception("Images in Contact2-Image-Dir are not allowed to delete!")
-				If ssh_ImageLocation.ToLower.StartsWith(My.Settings.Contact1ImageDir.ToLower) Then _
+				If ssh.ImageLocation.ToLower.StartsWith(My.Settings.Contact1ImageDir.ToLower) Then _
 					Throw New Exception("Images in contact3-Image-Dir are not allowed to delete!")
 
 
 				' #################### Remove from ####################
-				RemoveFromLikeList(ssh_ImageLocation)
+				RemoveFromLikeList(ssh.ImageLocation)
 				' ################## Remove from DislikeList ###################
-				RemoveFromDislikeList(ssh_ImageLocation)
+				RemoveFromDislikeList(ssh.ImageLocation)
 				' ################## Remove from LocalTagList ##################
-				RemoveFromLocalTagList(ssh_ImageLocation)
+				RemoveFromLocalTagList(ssh.ImageLocation)
 
 				' Save the Path temporary -> CLearMainPictureBox will flush ImageLocation
-				Dim tmpPath As String = ssh_ImageLocation
+				Dim tmpPath As String = ssh.ImageLocation
 				' Dispose the Image from RAM
 				ClearMainPictureBox()
 				' Delete the File from disk
