@@ -216,21 +216,6 @@ Namespace My
 		Public Update2 As Boolean
 		Public Update3 As Boolean
 
-		Public GetFolder As String
-		Public FileCount As Integer
-		''' <summary>
-		''' The highest accessible address in List. Same as:<see cref="_ImageFileNames"/>.Count - 1 
-		''' </summary>
-		<Obsolete("Duplicate Data! Use _ImageFileNames.count -1 instead")>
-		Public FileCountMax As Integer
-		Public _ImageFileNames As New List(Of String)
-		<Obsolete("Not used anymore. Or change Filecount to this one, to enhance readablility")>
-		Public _CurrentImage As Integer = -1
-		Public WithTeaseImgDir As String
-		<Obsolete("Belongs to frmSettings.")>
-		Public ApproveImage As Integer = 0
-		<Obsolete("Not used anymore.")>
-		Public WIExit As Boolean
 		<Obsolete("Non threadsafe duplicate of My.Settings.RecentSlideshows. Use this instead.")>
 		Public RecentSlideshows As New List(Of String)
 		<Obsolete("Read data using MainPictureBox.ImageLocation. Set data using ShowImage(String, Boolean) in future releases.")>
@@ -839,8 +824,8 @@ Namespace My
 					.ShowImage(ImageLocation, True)
 				ElseIf File.Exists(ImageLocation) Then
 					.ShowImage(ImageLocation, True)
-				ElseIf SlideshowLoaded = True And _ImageFileNames.Count > 0 AndAlso File.Exists(_ImageFileNames(FileCount)) Then
-					.ShowImage(_ImageFileNames(FileCount), True)
+				ElseIf SlideshowLoaded = True And SlideshowDomme.ImageList.Count > 0 AndAlso File.Exists(SlideshowDomme.CurrentImage) Then
+					.ShowImage(SlideshowDomme.CurrentImage, True)
 				Else
 					.ClearMainPictureBox()
 				End If

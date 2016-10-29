@@ -34,6 +34,7 @@ Public Class FrmSettings
 	Public WebImageLine As Integer
 	Public WebImageLineTotal As Integer
 	Public WebImagePath As String
+	Public ApproveImage As Integer = 0
 
 	Dim CheckImgDir As New List(Of String)
 
@@ -4043,11 +4044,11 @@ Public Class FrmSettings
 	End Sub
 
 	Private Sub BTNWIAddandContinue_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIAddandContinue.Click
-		Form1.ssh.ApproveImage = 1
+		ApproveImage = 1
 	End Sub
 
 	Private Sub BTNWIContinue_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIContinue.Click
-		Form1.ssh.ApproveImage = 2
+		ApproveImage = 2
 	End Sub
 
 	Private Sub BTNCancel_Click(sender As System.Object, e As System.EventArgs) Handles BTNWICancel.Click
@@ -4479,7 +4480,7 @@ trypreviousimage:
 			Me.Invoke(Callbak, sender, e)
 		Else
 			e.ReviewImages = CBWIReview.Checked
-			e.ApproveImage = Form1.ssh.ApproveImage
+			e.ApproveImage = ApproveImage
 			e.SaveImages = CBWISaveToDisk.Checked
 			e.ImgSaveDir = TBWIDirectory.Text
 		End If
@@ -4498,7 +4499,7 @@ trypreviousimage:
 			Me.Invoke(CallBack, Sender, e)
 		Else
             ' Reset remanent Marker for Image Approval
-            If Form1.ssh.ApproveImage <> 0 Then Form1.ssh.ApproveImage = 0
+            If ApproveImage <> 0 Then ApproveImage = 0
 			Select Case e.CurrentTask
 				Case URL_File_Tasks.CreateURLFile
                     '===============================================================================

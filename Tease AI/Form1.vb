@@ -5009,13 +5009,10 @@ TryNextWithTease:
 						Dim TeaseDirection As Integer = ssh.randomizer.Next(1, 101)
 
 						'Debug.Print("TeaseDirection = " & TeaseDirection)
-
+						'TODO-Next: Optimize Code
 						If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
 
-							ssh.FileCount -= 1
-							If ssh.FileCount < 0 Then
-								ssh.FileCount = 0
-							End If
+							ssh.SlideshowDomme.NavigateNextTease()
 
 							If ssh.DomTask.Contains("@Contact1") Then _
 								ssh.SlideshowContact1.NavigateNextTease()
@@ -5028,19 +5025,7 @@ TryNextWithTease:
 
 						Else
 
-
-							ssh.FileCount += 1
-							If ssh.FileCount > ssh.FileCountMax Then
-								If FrmSettings.CBNewSlideshow.Checked = True Then
-									ssh.NewDommeSlideshow = True
-									ssh.OriginalDommeSlideshow = ssh._ImageFileNames(0)
-									LoadDommeImageFolder()
-									ssh.NewDommeSlideshow = False
-									ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
-								Else
-									ssh.FileCount = ssh.FileCountMax
-								End If
-							End If
+							ssh.SlideshowDomme.NavigateNextTease()
 
 							If ssh.DomTask.Contains("@Contact1") Then _
 								ssh.SlideshowContact1.NavigateNextTease()
@@ -5054,17 +5039,16 @@ TryNextWithTease:
 
 						End If
 
-							' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-							If ssh._ImageFileNames(ssh.FileCount).Contains(".db") Then GoTo TryNextWithTease
 
-						ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+						ssh.DomPic = ssh.SlideshowDomme.CurrentImage
 
 						If ssh.DomTask.Contains("@Contact1") Then
 							Try
 								ssh.DomPic = ssh.SlideshowContact1.CurrentImage 'ssh.Contact1Pics(ssh.Contact1PicsCount)
 							Catch
-								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
 							End Try
 						End If
 
@@ -5072,7 +5056,7 @@ TryNextWithTease:
 							Try
 								ssh.DomPic = ssh.SlideshowContact2.CurrentImage 'ssh.Contact2Pics(ssh.Contact2PicsCount)
 							Catch
-								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
 							End Try
 						End If
 
@@ -5080,31 +5064,18 @@ TryNextWithTease:
 							Try
 								ssh.DomPic = ssh.SlideshowContact3.CurrentImage 'ssh.Contact3Pics(ssh.Contact3PicsCount)
 							Catch
-								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
 							End Try
 						End If
 
 					End If
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-					' github patch If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
-					If FrmSettings.CBSlideshowRandom.Checked = True Then
-						ssh.FileCount = ssh.randomizer.Next(0, ssh.FileCountMax + 1)
-						'If ssh.Contact1Pics.Count > 0 Then ssh.Contact1PicsCount = ssh.randomizer.Next(0, ssh.Contact1Pics.Count)
-						'If ssh.Contact2Pics.Count > 0 Then ssh.Contact2PicsCount = ssh.randomizer.Next(0, ssh.Contact2Pics.Count)
-						'If ssh.Contact3Pics.Count > 0 Then ssh.Contact3PicsCount = ssh.randomizer.Next(0, ssh.Contact3Pics.Count)
-					End If
-
-
-					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 					ShowPicture = True
 
-					' End Next Button
-					'On Error GoTo TryNextWithTease
-					'On Error Resume Next
-					' End Next Button
+
 				End If
 
 
@@ -5948,10 +5919,7 @@ TryNextWithTease:
 
 						If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
 
-							ssh.FileCount -= 1
-							If ssh.FileCount < 0 Then
-								ssh.FileCount = 0
-							End If
+							ssh.SlideshowDomme.NavigateNextTease()
 
 							If ssh.DomTask.Contains("@Contact1") Then _
 								ssh.SlideshowContact1.NavigateNextTease()
@@ -5965,19 +5933,7 @@ TryNextWithTease:
 
 						Else
 
-
-							ssh.FileCount += 1
-							If ssh.FileCount > ssh.FileCountMax Then
-								If FrmSettings.CBNewSlideshow.Checked = True Then
-									ssh.NewDommeSlideshow = True
-									ssh.OriginalDommeSlideshow = ssh._ImageFileNames(0)
-									LoadDommeImageFolder()
-									ssh.NewDommeSlideshow = False
-									ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
-								Else
-									ssh.FileCount = ssh.FileCountMax
-								End If
-							End If
+							ssh.SlideshowDomme.NavigateNextTease()
 
 							If ssh.DomTask.Contains("@Contact1") Then _
 								ssh.SlideshowContact1.NavigateNextTease()
@@ -5993,15 +5949,14 @@ TryNextWithTease:
 
 						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-						If ssh._ImageFileNames(ssh.FileCount).Contains(".db") Then GoTo TryNextWithTease
 
-						ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+						ssh.DomPic = ssh.SlideshowDomme.CurrentImage
 
 						If ssh.DomChat.Contains("@Contact1") Then
 							Try
 								ssh.DomPic = ssh.SlideshowContact1.CurrentImage 'ssh.Contact1Pics(ssh.Contact1PicsCount)
 							Catch
-								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
 							End Try
 						End If
 
@@ -6009,7 +5964,7 @@ TryNextWithTease:
 							Try
 								ssh.DomPic = ssh.SlideshowContact2.CurrentImage 'ssh.Contact2Pics(ssh.Contact2PicsCount)
 							Catch
-								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
 							End Try
 						End If
 
@@ -6017,30 +5972,16 @@ TryNextWithTease:
 							Try
 								ssh.DomPic = ssh.SlideshowContact3.CurrentImage 'ssh.Contact3Pics(ssh.Contact3PicsCount)
 							Catch
-								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
 							End Try
 						End If
 
 					End If
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-					' github patch If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
-
-					If FrmSettings.CBSlideshowRandom.Checked = True Then
-						'If ssh.Contact1Pics.Count > 0 Then ssh.Contact1PicsCount = ssh.randomizer.Next(0, ssh.Contact1Pics.Count)
-						'If ssh.Contact2Pics.Count > 0 Then ssh.Contact2PicsCount = ssh.randomizer.Next(0, ssh.Contact2Pics.Count)
-						'If ssh.Contact3Pics.Count > 0 Then ssh.Contact3PicsCount = ssh.randomizer.Next(0, ssh.Contact3Pics.Count)
-					End If
-
-
-					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 					ShowPicture = True
 
-					' End Next Button
-					'On Error GoTo TryNextWithTease
-					'On Error Resume Next
-					' End Next Button
 				End If
 
 				If ssh.DomChat.Contains("@WritingTask(") Then
@@ -6597,15 +6538,14 @@ chooseComboboxText:
 				FrmSettings.teaseRadio.Enabled = True
 
 				ssh.SlideshowLoaded = False
-				ssh.FileCount = 0
-				ssh.FileCountMax = -1
-				ssh._ImageFileNames.Clear()
 
 				If FrmSettings.CBSlideshowSubDir.Checked = True Then
-					ssh._ImageFileNames = myDirectory.GetFilesImages(GetFolder, SearchOption.AllDirectories)
+					ssh.SlideshowDomme.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.AllDirectories)
 				Else
-					ssh._ImageFileNames = myDirectory.GetFilesImages(GetFolder, SearchOption.TopDirectoryOnly)
+					ssh.SlideshowDomme.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.TopDirectoryOnly)
 				End If
+
+				ssh.SlideshowDomme.Index = 0
 
 				GoTo listLoaded
 
@@ -6634,16 +6574,13 @@ chooseComboboxText:
 					FrmSettings.teaseRadio.Enabled = True
 
 					ssh.SlideshowLoaded = False
-					ssh.FileCount = 0
-					ssh.FileCountMax = -1
-					ssh._ImageFileNames.Clear()
 
 					For Each ___PhotoNode As Xml.XmlNode In tmpDoc.DocumentElement.SelectNodes("//photo-url")
 						If CInt(___PhotoNode.Attributes.ItemOf("max-width").InnerText) = 1280 Then
-							ssh._ImageFileNames.Add(___PhotoNode.InnerXml)
-
+							ssh.SlideshowDomme.ImageList.Add(___PhotoNode.InnerXml)
 						End If
 					Next
+					ssh.SlideshowDomme.Index = 0
 				End Using
 
 				GoTo listLoaded
@@ -6658,20 +6595,18 @@ chooseComboboxText:
 			Exit Sub
 
 listLoaded:
-			If ssh._ImageFileNames.Count <= 0 Then
+			If ssh.SlideshowDomme.ImageList.Count <= 0 Then
 
 				MessageBox.Show(Me, "There are no images in the specified folder.", "Error!",
 									MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				Exit Sub
 			Else
 				ssh.SlideshowLoaded = True
-				ssh.FileCountMax = ssh._ImageFileNames.Count - 1
 			End If
 
-			If My.Settings.CBSlideshowRandom = True Then _
-				ssh.FileCount = ssh.randomizer.Next(0, ssh._ImageFileNames.Count)
 
-			ShowImage(ssh._ImageFileNames(ssh.FileCount), True)
+
+			ShowImage(ssh.SlideshowDomme.NavigateNextTease, True)
 			ssh.JustShowedBlogImage = False
 
 			'TODO: FrmSettings.timedRadio.Checked - Remove CrossForm DataAccess
@@ -6705,33 +6640,26 @@ listLoaded:
 
 			If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Then Return
 
-
+			Dim sh As Slideshow = ssh.SlideshowDomme
 Retry:
-			If sender Is nextButton Then
+			If My.Settings.CBSlideshowRandom Then
+				sh.NavigateNextTease()
+			ElseIf sender Is nextButton Then
 				' ====================== Next Image =======================
-				ssh.FileCount += 1
-				If ssh.FileCount >= ssh._ImageFileNames.Count - 1 Then ssh.FileCount = 0
+				sh.NavigateForward()
 			ElseIf sender Is previousButton
 				' ==================== Previous Image =====================
-				ssh.FileCount -= 1
-				If ssh.FileCount <= 0 Then ssh.FileCount = ssh._ImageFileNames.Count - 1
+				sh.NavigateBackward()
 			Else
 				' ======================== Error ==========================
 				Throw New NotImplementedException("Action for button not implemented.")
 			End If
 
-			If Not (File.Exists(ssh._ImageFileNames(ssh.FileCount)) _
-					Or isURL(ssh._ImageFileNames(ssh.FileCount))) Then
+			If Not (File.Exists(sh.CurrentImage) _
+					Or isURL(sh.CurrentImage)) Then
 				ClearMainPictureBox()
 				Return
 			End If
-
-			If ssh._ImageFileNames(ssh.FileCount).Contains(".db") Then GoTo Retry
-
-
-			If My.Settings.CBSlideshowRandom = True Then ssh.FileCount = ssh.randomizer.Next(0, ssh._ImageFileNames.Count)
-
-
 
 			Try
 				browsefolderButton.Enabled = False
@@ -6740,7 +6668,7 @@ Retry:
 				previousButton.Enabled = False
 				PicStripTSMIdommeSlideshow.Enabled = False
 
-				ShowImage(ssh._ImageFileNames(ssh.FileCount), True)
+				ShowImage(sh.CurrentImage, True)
 
 				ssh.JustShowedBlogImage = False
 
@@ -6972,45 +6900,29 @@ SkipTick:
 
 				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomTask.Contains("@NewBlogImage") And ssh.SlideshowLoaded = True And ssh.CustomSlideshow = False And ssh.RapidFire = False Then
 					'If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") Then
-TryNextWithTease:
 
+					'TODO-Next:Otimize Code
 					Dim TeaseDirection As Integer = ssh.randomizer.Next(1, 101)
 
 					If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
 
-						ssh.FileCount -= 1
+						ssh.SlideshowDomme.NavigateNextTease()
 
-						If ssh.FileCount < 0 Then
-							ssh.FileCount = 0
-						End If
 
 					Else
 
+						ssh.SlideshowDomme.NavigateNextTease()
 
-						ssh.FileCount += 1
-						If ssh.FileCount > ssh.FileCountMax Then
-							If FrmSettings.CBNewSlideshow.Checked = True Then
-								ssh.NewDommeSlideshow = True
-								ssh.OriginalDommeSlideshow = ssh._ImageFileNames(0)
-								LoadDommeImageFolder()
-								ssh.NewDommeSlideshow = False
-								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
-							Else
-								ssh.FileCount = ssh.FileCountMax
-							End If
-						End If
 
 					End If
 
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-					If ssh._ImageFileNames(ssh.FileCount).Contains(".db") Then GoTo TryNextWithTease
-
-					ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+					ssh.DomPic = ssh.SlideshowDomme.CurrentImage()
 
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-					If FrmSettings.CBSlideshowRandom.Checked = True Then ssh.FileCount = ssh.randomizer.Next(0, ssh.FileCountMax + 1)
+					'If FrmSettings.CBSlideshowRandom.Checked = True Then ssh.FileCount = ssh.randomizer.Next(0, ssh.FileCountMax + 1)
 
 
 
@@ -8854,79 +8766,73 @@ StatusUpdateEnd:
 		Debug.Print("PoundClean System Keyword Checkpoint")
 
 
-
+		'TDOD: Optimze Code "TextedTags"
 		ssh.FoundTag = "NULL"
+		Dim slide As Slideshow = ssh.SlideshowDomme
+		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
 
-		Try
-			If File.Exists(ssh._ImageFileNames(ssh.FileCount)) Then ssh.MainPictureImage = Path.GetDirectoryName(ssh._ImageFileNames(ssh.FileCount))
-		Catch
-		End Try
+		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
 
-		'TODO: remove unsecure IO.Access to file, for there is no DirectoryCheck.
-		If File.Exists(ssh.MainPictureImage & "\ImageTags.txt") Then
+		If (ssh.SlideshowLoaded = True And mainPictureBox.Image IsNot Nothing And DomWMP.Visible = False) _
+		AndAlso File.Exists(TagFilePath) Then
 			' Read all lines of the given file.
-			Dim TagList As List(Of String) = Txt2List(ssh.MainPictureImage & "\ImageTags.txt")
+			Dim TagList As List(Of String) = Txt2List(TagFilePath)
 
-			'If SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And domVLC.Visible = False Then
-			If ssh.SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And DomWMP.Visible = False Then
-				Try
-					For t As Integer = 0 To TagList.Count - 1
-						'Debug.Print("TagList(t) = " & TagList(t))
-						If TagList(t).Contains(Path.GetFileName(ssh._ImageFileNames(ssh.FileCount))) Then
-							ssh.FoundTag = TagList(t)
-							Dim FoundTagSplit As String() = Split(ssh.FoundTag)
-							For j As Integer = 0 To FoundTagSplit.Length - 1
-								If FoundTagSplit(j).Contains("TagGarment") Then
-									ssh.TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
-									ssh.TagGarment = ssh.TagGarment.Replace("-", " ")
-								End If
+			Try
+				For t As Integer = 0 To TagList.Count - 1
+					'Debug.Print("TagList(t) = " & TagList(t))
+					If TagList(t).Contains(Path.GetFileName(slide.CurrentImage)) Then
+						ssh.FoundTag = TagList(t)
+						Dim FoundTagSplit As String() = Split(ssh.FoundTag)
+						For j As Integer = 0 To FoundTagSplit.Length - 1
+							If FoundTagSplit(j).Contains("TagGarment") Then
+								ssh.TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
+								ssh.TagGarment = ssh.TagGarment.Replace("-", " ")
+							End If
 
-								If FoundTagSplit(j).Contains("TagUnderwear") Then
-									ssh.TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
-									ssh.TagUnderwear = ssh.TagUnderwear.Replace("-", " ")
-								End If
+							If FoundTagSplit(j).Contains("TagUnderwear") Then
+								ssh.TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
+								ssh.TagUnderwear = ssh.TagUnderwear.Replace("-", " ")
+							End If
 
-								If FoundTagSplit(j).Contains("TagTattoo") Then
-									ssh.TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
-									ssh.TagTattoo = ssh.TagTattoo.Replace("-", " ")
-								End If
+							If FoundTagSplit(j).Contains("TagTattoo") Then
+								ssh.TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
+								ssh.TagTattoo = ssh.TagTattoo.Replace("-", " ")
+							End If
 
-								If FoundTagSplit(j).Contains("TagSexToy") Then
-									ssh.TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
-									ssh.TagSexToy = ssh.TagSexToy.Replace("-", " ")
-								End If
+							If FoundTagSplit(j).Contains("TagSexToy") Then
+								ssh.TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
+								ssh.TagSexToy = ssh.TagSexToy.Replace("-", " ")
+							End If
 
-								If FoundTagSplit(j).Contains("TagFurniture") Then
-									ssh.TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
-									ssh.TagFurniture = ssh.TagFurniture.Replace("-", " ")
-								End If
+							If FoundTagSplit(j).Contains("TagFurniture") Then
+								ssh.TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
+								ssh.TagFurniture = ssh.TagFurniture.Replace("-", " ")
+							End If
 
-							Next
-							Exit For
-						End If
-					Next
-				Catch
-				End Try
-			End If
-
-
-			'Debug.Print("TagGarment = " & TagGarment)
-			'Debug.Print("TagUnderwear = " & TagUnderwear)
-			'Debug.Print("TagTattoo = " & TagTattoo)
-			'Debug.Print("TagSexToy = " & TagSexToy)
-			'Debug.Print("TagFurniture = " & TagFurniture)
-			'Debug.Print("FoundTag = " & FoundTag)
-
-
-
+						Next
+						Exit For
+					End If
+				Next
+			Catch
+			End Try
 		End If
+
+
+		'Debug.Print("TagGarment = " & TagGarment)
+		'Debug.Print("TagUnderwear = " & TagUnderwear)
+		'Debug.Print("TagTattoo = " & TagTattoo)
+		'Debug.Print("TagSexToy = " & TagSexToy)
+		'Debug.Print("TagFurniture = " & TagFurniture)
+		'Debug.Print("FoundTag = " & FoundTag)
+
 
 		StringClean = StringClean.Replace("#TagGarment", ssh.TagGarment)
 		StringClean = StringClean.Replace("#TagUnderwear", ssh.TagUnderwear)
 		StringClean = StringClean.Replace("#TagTattoo", ssh.TagTattoo)
 		StringClean = StringClean.Replace("#TagSexToy", ssh.TagSexToy)
 		StringClean = StringClean.Replace("#TagFurniture", ssh.TagFurniture)
-
+SkipTextedTags:
 
 		If StringClean.Contains("#") Or StringClean.Contains("@Tag") Then
 
@@ -9105,11 +9011,8 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@NewDommeSlideshow") Then
-			ssh.NewDommeSlideshow = True
-			ssh.OriginalDommeSlideshow = ssh._ImageFileNames(0)
-			LoadDommeImageFolder()
-			ssh.NewDommeSlideshow = False
-			ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+			ssh.SlideshowDomme.LoadNew()
+			ssh.DomPic = ssh.SlideshowDomme.CurrentImage
 			StringClean = StringClean.Replace("@NewDommeSlideshow", "")
 		End If
 
@@ -14100,14 +14003,15 @@ VTSkip:
 	'''   </remarks>
 	Public Function GetDommeImage(ByVal DomTag As String) As String
 		Try
-			Dim __targetFolder As String = Path.GetDirectoryName(ssh._ImageFileNames(ssh.FileCount))
+			Dim slide As Slideshow = ssh.SlideshowDomme
+			Dim __targetFolder As String = Path.GetDirectoryName(slide.CurrentImage)
 
 			If File.Exists(__targetFolder & "\ImageTags.txt") Then
 				Dim task1 As Tasks.Task(Of String) = Tasks.Task.Factory.StartNew(
 					Function() As String
-                        '×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
-                        '                           Parallel Task - Beyond this Line: INVOKE IS REQUIRED...
-                        CheckForIllegalCrossThreadCalls = True  ' Plz Leave it True, and inform me, if there is an error
+						'×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+						'                           Parallel Task - Beyond this Line: INVOKE IS REQUIRED...
+						CheckForIllegalCrossThreadCalls = True  ' Plz Leave it True, and inform me, if there is an error
                         Dim ___retryStage As Integer = 0
 						Dim ___DomTag_Base As String = DomTag
 						Dim ___DomTag_Work As String = ___DomTag_Base
@@ -14226,10 +14130,10 @@ FileNotFound_GetNext:
 						Dim ___CurrDist As Integer = 999999
 						'############################### Get nearest Image ###############################
 						For Each ___ForFile As String In ___FoundFiles
-							' Calculate the distance of ListIndex from the FoundFile to CurrentImage
-							Dim ___FileDist As Integer = ssh._ImageFileNames.IndexOf(__targetFolder & "\" & ___ForFile) - ssh.FileCount
-							' Convert negative values to positive by multipling (-) x (-) = (+) 
-							If ___FileDist < 0 Then ___FileDist *= -1
+					' Calculate the distance of ListIndex from the FoundFile to CurrentImage
+					Dim ___FileDist As Integer = slide.ImageList.IndexOf(__targetFolder & "\" & ___ForFile) - slide.ImageList.Count
+					' Convert negative values to positive by multipling (-) x (-) = (+) 
+					If ___FileDist < 0 Then ___FileDist *= -1
 							' Check if the distance is bigger than the previous one
 							If ___FileDist < ___CurrDist Then
 								' Yes: We will set this file and save its distance
@@ -14276,8 +14180,8 @@ Skip_RandomFile:
 						'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Task °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				End Function)
 
-                ' Wait for Task to end, Withour freezing UI
-                Do Until task1.IsCompleted Or task1.IsFaulted
+				' Wait for Task to end, Withour freezing UI
+				Do Until task1.IsCompleted Or task1.IsFaulted
 					Application.DoEvents()
 				Loop
                 ' Check if there was an exception, if yes rethrow it.
@@ -14391,58 +14295,56 @@ Skip_RandomFile:
 
 	Public Function FilterList(ByVal ListClean As List(Of String)) As List(Of String)
 
-
+		'TDOD: Optimze Code "TextedTags"
 		ssh.FoundTag = "NULL"
+		Dim slide As Slideshow = ssh.SlideshowDomme
+		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
 
-		Try
-			If File.Exists(ssh._ImageFileNames(ssh.FileCount)) Then ssh.MainPictureImage = Path.GetDirectoryName(ssh._ImageFileNames(ssh.FileCount))
-		Catch
-		End Try
+		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
 
-		If File.Exists(ssh.MainPictureImage & "\ImageTags.txt") Then
-			Dim TagList As List(Of String) = Txt2List(ssh.MainPictureImage & "\ImageTags.txt")
+		If (ssh.SlideshowLoaded = True And mainPictureBox.Image IsNot Nothing And DomWMP.Visible = False) _
+		AndAlso File.Exists(TagFilePath) Then
+			Try
+				Dim TagList As List(Of String) = Txt2List(TagFilePath)
 
-			If ssh.SlideshowLoaded = True And Not mainPictureBox.Image Is Nothing And DomWMP.Visible = False Then
-				Try
-					For t As Integer = 0 To TagList.Count - 1
-						'Debug.Print("TagList(t) = " & TagList(t))
-						If TagList(t).Contains(Path.GetFileName(ssh._ImageFileNames(ssh.FileCount))) Then
-							ssh.FoundTag = TagList(t)
-							Dim FoundTagSplit As String() = Split(ssh.FoundTag)
-							For j As Integer = 0 To FoundTagSplit.Length - 1
-								If FoundTagSplit(j).Contains("TagGarment") Then
-									ssh.TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
-									ssh.TagGarment = ssh.TagGarment.Replace("-", " ")
-								End If
+				For t As Integer = 0 To TagList.Count - 1
+					'Debug.Print("TagList(t) = " & TagList(t))
+					If TagList(t).Contains(Path.GetFileName(slide.CurrentImage)) Then
+						ssh.FoundTag = TagList(t)
+						Dim FoundTagSplit As String() = Split(ssh.FoundTag)
+						For j As Integer = 0 To FoundTagSplit.Length - 1
+							If FoundTagSplit(j).Contains("TagGarment") Then
+								ssh.TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
+								ssh.TagGarment = ssh.TagGarment.Replace("-", " ")
+							End If
 
-								If FoundTagSplit(j).Contains("TagUnderwear") Then
-									ssh.TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
-									ssh.TagUnderwear = ssh.TagUnderwear.Replace("-", " ")
-								End If
+							If FoundTagSplit(j).Contains("TagUnderwear") Then
+								ssh.TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
+								ssh.TagUnderwear = ssh.TagUnderwear.Replace("-", " ")
+							End If
 
-								If FoundTagSplit(j).Contains("TagTattoo") Then
-									ssh.TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
-									ssh.TagTattoo = ssh.TagTattoo.Replace("-", " ")
-								End If
+							If FoundTagSplit(j).Contains("TagTattoo") Then
+								ssh.TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
+								ssh.TagTattoo = ssh.TagTattoo.Replace("-", " ")
+							End If
 
-								If FoundTagSplit(j).Contains("TagSexToy") Then
-									ssh.TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
-									ssh.TagSexToy = ssh.TagSexToy.Replace("-", " ")
-								End If
+							If FoundTagSplit(j).Contains("TagSexToy") Then
+								ssh.TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
+								ssh.TagSexToy = ssh.TagSexToy.Replace("-", " ")
+							End If
 
-								If FoundTagSplit(j).Contains("TagFurniture") Then
-									ssh.TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
-									ssh.TagFurniture = ssh.TagFurniture.Replace("-", " ")
-								End If
-							Next
-							Exit For
-						End If
-					Next
-				Catch
-				End Try
-			End If
-
+							If FoundTagSplit(j).Contains("TagFurniture") Then
+								ssh.TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
+								ssh.TagFurniture = ssh.TagFurniture.Replace("-", " ")
+							End If
+						Next
+						Exit For
+					End If
+				Next
+			Catch
+			End Try
 		End If
+SkipTextedTags:
 
 		Dim FilterPass As Boolean
 		Dim ListIncrement As Integer = 1
@@ -16811,35 +16713,21 @@ PoundLoop:
 		If ssh.SlideshowTimerTick < 1 Then
 
 TryNext:
-			'--------------FileCount += 1
-			ssh.FileCount += 1
-			If ssh.FileCount > ssh._ImageFileNames.Count - 1 Then
-				If FrmSettings.CBNewSlideshow.Checked = True Then
-					ssh.NewDommeSlideshow = True
-					ssh.OriginalDommeSlideshow = ssh._ImageFileNames(0)
-					LoadDommeImageFolder()
-					ssh.NewDommeSlideshow = False
-					ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
-				Else
-					ssh.FileCount = 0
-				End If
+			If My.Settings.CBSlideshowRandom Then
+				ssh.SlideshowDomme.NavigateNextTease()
+			Else
+				ssh.SlideshowDomme.NavigateForward()
 			End If
 
-			If Not (File.Exists(ssh._ImageFileNames(ssh.FileCount)) _
-					Or isURL(ssh._ImageFileNames(ssh.FileCount))) Then
+
+			If Not (File.Exists(ssh.SlideshowDomme.CurrentImage) _
+					Or isURL(ssh.SlideshowDomme.CurrentImage)) Then
 				ClearMainPictureBox()
 				Exit Sub
 			End If
 
-			If ssh._ImageFileNames(ssh.FileCount).Contains(".db") Then GoTo TryNext
-
-
-
-			If My.Settings.CBSlideshowRandom = True Then ssh.FileCount = ssh.randomizer.Next(0, ssh._ImageFileNames.Count)
-
-
 			Try
-				ShowImage(ssh._ImageFileNames(ssh.FileCount), True)
+				ShowImage(ssh.SlideshowDomme.CurrentImage, True)
 				ssh.JustShowedBlogImage = False
 				ssh.JustShowedSlideshowImage = True
 
@@ -17560,6 +17448,7 @@ RestartFunction:
 	Private Sub PictureStrip_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles PictureStrip.Opening
 
 		If mainPictureBox.Image IsNot Nothing Then
+			Dim sh As Slideshow = ssh.SlideshowDomme
 
 			If ImageAnimator.CanAnimate(mainPictureBox.Image) _
 			And ImageAnimator_OnFrameChangedAdded Then
@@ -17583,7 +17472,7 @@ RestartFunction:
 				PicStripTSMISaveImageTo.Enabled = True
 				PicStripTSMIremoveFromURL.Enabled = True
 
-			ElseIf ssh.ImageLocation = "" Or ssh._ImageFileNames.Contains(ssh.ImageLocation) Then
+			ElseIf ssh.ImageLocation = "" Or sh.ImageList.Contains(ssh.ImageLocation) Then
 
 				PicStripTSMIcopyImageLocation.Enabled = False
 				PicStripTSMIsaveImage.Enabled = False
@@ -17594,7 +17483,7 @@ RestartFunction:
 				PicStripTSMIdislikeImage.Checked = False
 				PicStripTSMIremoveFromURL.Enabled = False
 
-				If ssh._ImageFileNames.Contains(ssh.ImageLocation) Then
+				If sh.ImageList.Contains(ssh.ImageLocation) Then
 					PicStripTSMIdommeSlideshow.Enabled = True
 					PicStripTSMIcopyImageLocation.Enabled = True
 				End If
@@ -17786,10 +17675,8 @@ saveImage:
 
 		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
 
-		ssh.FileCount = ssh.FileCountMax
-
 		Try
-			ShowImage(ssh._ImageFileNames(ssh.FileCount), True)
+			ShowImage(ssh.SlideshowDomme.NavigateLast, True)
 			ssh.JustShowedBlogImage = False
 		Catch
 
@@ -17805,10 +17692,8 @@ saveImage:
 
 		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
 
-		ssh.FileCount = 0
-
 		Try
-			ShowImage(ssh._ImageFileNames(ssh.FileCount), True)
+			ShowImage(ssh.SlideshowDomme.NavigateFirst, True)
 			ssh.JustShowedBlogImage = False
 		Catch
 
@@ -17817,11 +17702,21 @@ saveImage:
 
 	Private Sub PicStripTSMIdommeSlideshowLoadNewSlideshow_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshowLoadNewSlideshow.Click
 
-		ssh.NewDommeSlideshow = True
-		ssh.OriginalDommeSlideshow = ssh._ImageFileNames(0)
-		LoadDommeImageFolder()
-		ssh.NewDommeSlideshow = False
-		ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
+			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
+			Return
+		End If
+
+		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
+
+		Try
+			ssh.SlideshowDomme.LoadNew()
+			ShowImage(ssh.SlideshowDomme.NavigateFirst, True)
+
+		Catch
+
+		End Try
+
 
 	End Sub
 
@@ -17860,105 +17755,21 @@ saveImage:
 
 
 	Public Sub LoadDommeImageFolder()
-		'TODO-Next-Stefaf: Implement ShowImage(String, Boolean) and myDirectory.GetFilesImages(String) + Rework
-
-		Dim NewSlideshowAttempts As Integer = 0
-
-GetDommeSlideshow:
-
-		Dim GreetFolder As New List(Of String)
-		GreetFolder.Clear()
-
-
-
-		For Each Dir As String In myDirectory.GetDirectories(FrmSettings.LBLDomImageDir.Text)
-			Try
-				GreetFolder.Add(Dir)
-			Catch
-			End Try
-		Next
-
-		' Try
-		If GreetFolder.Count < 1 Then
-			MessageBox.Show(Me, "There are no directories in the specified Domme Images Directory folder." & Environment.NewLine & Environment.NewLine &
-							"Please make sure the Domme Images Directory points to a location containing at least one subdirectory of images.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			Return
-		End If
-
-		ssh.GetFolder = GreetFolder(ssh.randomizer.Next(0, GreetFolder.Count))
-
+		ssh.SlideshowDomme.LoadNew()
+		ShowImage(ssh.SlideshowDomme.CurrentImage, False)
 		ssh.SlideshowLoaded = True
-
-		DomWMP.Visible = False
-		DomWMP.Ctlcontrols.pause()
-		mainPictureBox.Visible = True
-
-		FrmSettings.timedRadio.Enabled = True
-		FrmSettings.teaseRadio.Enabled = True
-
-		ssh.FileCount = 0
-		ssh.FileCountMax = -1
-		ssh._ImageFileNames.Clear()
-
-
-		If FrmSettings.CBSlideshowSubDir.Checked = True Then
-			ssh._ImageFileNames = myDirectory.GetFilesImages(ssh.GetFolder, SearchOption.AllDirectories)
-		Else
-			ssh._ImageFileNames = myDirectory.GetFilesImages(ssh.GetFolder, SearchOption.TopDirectoryOnly)
-		End If
-
-		ssh.FileCountMax = ssh._ImageFileNames.Count - 1
-
-
-
-		If ssh.FileCountMax < 0 Then
-			MessageBox.Show(Me, "There are no images in the specified Domme Image folder!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			Return
-		End If
-
-		ssh.FileCount = 0
-
-
-		If ssh.NewDommeSlideshow = True Then
-			NewSlideshowAttempts += 1
-			If ssh._ImageFileNames(0) = ssh.OriginalDommeSlideshow And NewSlideshowAttempts < 6 Then GoTo GetDommeSlideshow
-		End If
-
-
-
-		If FrmSettings.CBSlideshowRandom.Checked = True Then ssh.FileCount = ssh.randomizer.Next(0, ssh.FileCountMax + 1)
-
-		ShowImage(ssh._ImageFileNames(ssh.FileCount), False)
 		ssh.JustShowedBlogImage = False
 
 		nextButton.Enabled = True
 		previousButton.Enabled = True
 		PicStripTSMIdommeSlideshow.Enabled = True
 
-		If ssh.RiskyDeal = True Then FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh._ImageFileNames(ssh.FileCount))
-
-
-		If FrmSettings.landscapeCheckBox.Checked = True Then
-			If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
-				mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
-			Else
-				mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-			End If
-		Else
-			mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-		End If
-
-
-		mainPictureBox.Refresh()
-		mainPictureBox.Invalidate()
+		If ssh.RiskyDeal = True Then FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.SlideshowDomme.CurrentImage)
 
 		If FrmSettings.timedRadio.Checked = True Then
 			ssh.SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
 			SlideshowTimer.Start()
 		End If
-
-
-
 
 
 	End Sub
@@ -18433,14 +18244,14 @@ GetDommeSlideshow:
 		SettingsList.Add("Update2: " & ssh.Update2)
 		SettingsList.Add("Update3: " & ssh.Update3)
 		SettingsList.Add("LastSuccessfulImage: --obsolete--") ' for compatibility
-		SettingsList.Add("GetFolder: " & ssh.GetFolder)
-		SettingsList.Add("FileCount: " & ssh.FileCount)
-		SettingsList.Add("FileCountMax: " & ssh.FileCountMax)
+		SettingsList.Add("GetFolder: --obsolete--") ' for compatibility
+		SettingsList.Add("FileCount: --obsolete--") ' for compatibility
+		SettingsList.Add("FileCountMax: --obsolete--") ' for compatibility
 		'SettingsList.Add("_ImageFileNames: " & _ImageFileNames)
-		SettingsList.Add("_CurrentImage: " & ssh._CurrentImage)
-		SettingsList.Add("WithTeaseImgDir: " & ssh.WithTeaseImgDir)
-		SettingsList.Add("ApproveImage: " & ssh.ApproveImage)
-		SettingsList.Add("WIExit: " & ssh.WIExit)
+		SettingsList.Add("_CurrentImage: --obsolete--") ' for compatibility
+		SettingsList.Add("WithTeaseImgDir: --obsolete--") ' for compatibility
+		SettingsList.Add("ApproveImage: --obsolete--") ' for compatibility
+		SettingsList.Add("WIExit: --obsolete--") ' for compatibility
 		'SettingsList.Add("RecentSlideshows: " & RecentSlideshows)
 		SettingsList.Add("MainPictureImage: " & ssh.MainPictureImage)
 		SettingsList.Add("DomPic: " & ssh.DomPic)
@@ -18717,16 +18528,16 @@ GetDommeSlideshow:
 			If File.Exists(SettingsPath & ResumePrefix & "TauntLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "TauntLines.txt")
 		End If
 
-		If ssh._ImageFileNames.Count > 0 Then
-			SettingsString = ""
-			For i As Integer = 0 To ssh._ImageFileNames.Count - 1
-				SettingsString = SettingsString & ssh._ImageFileNames(i)
-				If i <> ssh._ImageFileNames.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-			Next
-			My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "_ImageFileNames.txt", SettingsString, False)
-		Else
-			If File.Exists(SettingsPath & ResumePrefix & "_ImageFileNames.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "_ImageFileNames.txt")
-		End If
+		'If ssh._ImageFileNames.Count > 0 Then
+		'	SettingsString = ""
+		'	For i As Integer = 0 To ssh._ImageFileNames.Count - 1
+		'		SettingsString = SettingsString & ssh._ImageFileNames(i)
+		'		If i <> ssh._ImageFileNames.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+		'	Next
+		'	My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "_ImageFileNames.txt", SettingsString, False)
+		'Else
+		'	If File.Exists(SettingsPath & ResumePrefix & "_ImageFileNames.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "_ImageFileNames.txt")
+		'End If
 
 		If ssh.RecentSlideshows.Count > 0 Then
 			SettingsString = ""
@@ -19044,13 +18855,13 @@ GetDommeSlideshow:
 		ssh.Update2 = SettingsList(162).Replace("Update2: ", "")
 		ssh.Update3 = SettingsList(163).Replace("Update3: ", "")
 		'LastSuccessfulImage = SettingsList(164).Replace("LastSuccessfulImage: ", "")
-		ssh.GetFolder = SettingsList(165).Replace("GetFolder: ", "")
-		ssh.FileCount = SettingsList(166).Replace("FileCount: ", "")
-		ssh.FileCountMax = SettingsList(167).Replace("FileCountMax: ", "")
-		ssh._CurrentImage = SettingsList(168).Replace("_CurrentImage: ", "")
-		ssh.WithTeaseImgDir = SettingsList(169).Replace("WithTeaseImgDir: ", "")
-		ssh.ApproveImage = SettingsList(170).Replace("ApproveImage: ", "")
-		ssh.WIExit = SettingsList(171).Replace("WIExit: ", "")
+		'ssh.GetFolder = SettingsList(165).Replace("GetFolder: ", "")
+		'ssh.FileCount = SettingsList(166).Replace("FileCount: ", "")
+		'ssh.FileCountMax = SettingsList(167).Replace("FileCountMax: ", "")
+		'ssh._CurrentImage = SettingsList(168).Replace("_CurrentImage: ", "")
+		'ssh.WithTeaseImgDir = SettingsList(169).Replace("WithTeaseImgDir: ", "")
+		'ssh.ApproveImage = SettingsList(170).Replace("ApproveImage: ", "")
+		'ssh.WIExit = SettingsList(171).Replace("WIExit: ", "")
 		ssh.MainPictureImage = SettingsList(172).Replace("MainPictureImage: ", "")
 		ssh.DomPic = SettingsList(173).Replace("DomPic: ", "")
 		ssh.LockImage = SettingsList(174).Replace("LockImage: ", "")
@@ -19271,7 +19082,7 @@ GetDommeSlideshow:
 
 		If File.Exists(SettingsPath & ResumePrefix & "PlayListFile.txt") Then ssh.PlaylistFile = Txt2List(SettingsPath & ResumePrefix & "PlayListFile.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "TauntLines.txt") Then ssh.TauntLines = Txt2List(SettingsPath & ResumePrefix & "TauntLines.txt")
-		If File.Exists(SettingsPath & ResumePrefix & "_ImageFileNames.txt") Then ssh._ImageFileNames = Txt2List(SettingsPath & ResumePrefix & "_ImageFileNames.txt")
+		'If File.Exists(SettingsPath & ResumePrefix & "_ImageFileNames.txt") Then ssh._ImageFileNames = Txt2List(SettingsPath & ResumePrefix & "_ImageFileNames.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "RecentSlideshows.txt") Then ssh.RecentSlideshows = Txt2List(SettingsPath & ResumePrefix & "RecentSlideshows.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "LocalTagImageList.txt") Then ssh.LocalTagImageList = Txt2List(SettingsPath & ResumePrefix & "LocalTagImageList.txt")
 		'If File.Exists(SettingsPath & ResumePrefix & "WebImageLines.txt") Then WebImageLines = Txt2List(SettingsPath & ResumePrefix & "WebImageLines.txt")
@@ -19285,12 +19096,12 @@ GetDommeSlideshow:
 		' Github Patch If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then Contact3Pics = Txt2List(SettingsPath & "Contact3Pics.txt")
 		'If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then ssh.Contact3Pics = Txt2List(SettingsPath & ResumePrefix & "Contact3Pics.txt")
 
-		If ssh.SlideshowLoaded = True Then
-			If File.Exists(ssh._ImageFileNames(ssh.FileCount)) Then
-				' Github Patch ImageThread.Start()
-				ShowImage(ssh._ImageFileNames(ssh.FileCount), True)
-			End If
-		End If
+		'If ssh.SlideshowLoaded = True Then
+		'	If File.Exists(ssh._ImageFileNames(ssh.FileCount)) Then
+		'		' Github Patch ImageThread.Start()
+		'		ShowImage(ssh._ImageFileNames(ssh.FileCount), True)
+		'	End If
+		'End If
 
 		ChatText.DocumentText = ssh.Chat
 		ChatText2.DocumentText = ssh.Chat
@@ -21299,7 +21110,7 @@ SkipNew:
 				My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(ssh.ImageLocation) & "\ImageTags.txt", SettingsString, False)
 			End If
 
-		ElseIf Path.GetDirectoryName(ssh._ImageFileNames(ssh.FileCount)) = Path.GetDirectoryName(ssh.ImageLocation)
+		ElseIf Path.GetDirectoryName(TagFile) = Path.GetDirectoryName(ssh.ImageLocation)
 			' Only Create new file for the loaded Slidshow. This Prevents URL-Image-Tagging.
 			My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(ssh.ImageLocation) & "\ImageTags.txt", Path.GetFileName(ssh.ImageLocation) & " " & DomTag & Custom, True)
 

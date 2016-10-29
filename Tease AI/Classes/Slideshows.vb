@@ -18,6 +18,8 @@ Public Class Slideshow
 
 	Public Property ImageList As New List(Of String)
 
+	Public Property RecentFolders As New List(Of String)
+
 	Public Property Index As Integer = -1
 
 	Sub New() : End Sub
@@ -27,7 +29,7 @@ Public Class Slideshow
 		Check_ImageDir(type)
 	End Sub
 
-	Shared Function FolderCheck(ByVal directoryDescription As String,
+	Function FolderCheck(ByVal directoryDescription As String,
 												ByVal directoryPath As String,
 												ByVal defaultPath As String)
 		Try
@@ -78,7 +80,23 @@ set_newFolder:
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 checkFolder:
 			Try
-				LoadRandom(rtnPath)
+				If Directory.Exists(rtnPath) = False Then _
+					Throw New DirectoryNotFoundException("The given slideshow base diretory """ & rtnPath & """ was not found.")
+
+				Dim imgCount As Integer = 0
+
+				For Each folder In myDirectory.GetDirectories(rtnPath).ToList
+					If My.Settings.CBSlideshowSubDir Then
+						imgCount += myDirectory.GetFilesImages(rtnPath, SearchOption.AllDirectories).Count
+					Else
+						imgCount += myDirectory.GetFilesImages(rtnPath, SearchOption.TopDirectoryOnly).Count
+					End If
+					If imgCount > 0 Then Exit For
+				Next
+
+				If imgCount <= 0 Then Throw New DirectoryNotFoundException(
+					"There are no subdirectories conataining images in """ & rtnPath & """.")
+
 				Return rtnPath
 			Catch ex As Exception
 				' @@@@@@@@@@@@@@@@@@@@@@@ Slideshow loading failed @@@@@@@@@@@@@@@@@@@@@@@@@
@@ -104,20 +122,32 @@ checkFolder:
 		End Try
 	End Function
 
-	Shared Function LoadRandom(ByVal baseDirectory As String) As List(Of String)
+	Function LoadRandom(ByVal baseDirectory As String) As List(Of String)
 		If Directory.Exists(baseDirectory) = False Then _
 			Throw New DirectoryNotFoundException("The given slideshow base diretory """ & baseDirectory & """ was not found.")
 
 		' Read all subdirectories in base folder.
 		Dim subDirs As List(Of String) = myDirectory.GetDirectories(baseDirectory).ToList
-
+		Dim exclude As New List(Of String)
 nextSubDir:
 		' Check if there are folders left.
-		If subDirs.Count <= 0 Then _
+		If subDirs.Count = 0 And exclude.Count > 0 Then
+			Dim first As String = RecentFolders(0)
+			RecentFolders.Remove(first)
+			exclude.Remove(first)
+			subDirs.Add(first)
+		ElseIf subDirs.Count <= 0 And exclude.Count = 0 Then
 			Throw New DirectoryNotFoundException("There are no subdirectories conataining images in """ & baseDirectory & """.")
+		End If
 
 		' Get a random folder in base directory.
 		Dim rndFolder As String = subDirs(New Random().Next(0, subDirs.Count))
+
+		If RecentFolders.Contains(rndFolder) Then
+			exclude.Add(rndFolder)
+			subDirs.Remove(rndFolder)
+			GoTo nextSubDir
+		End If
 
 		' Read all imagefiles in random folder.
 		Dim imageFiles As New List(Of String)
@@ -134,6 +164,7 @@ nextSubDir:
 			GoTo nextSubDir
 		Else
 			' Imagefiles found -> Everything fine and done
+			RecentFolders.Add(rndFolder)
 			Return imageFiles
 		End If
 
@@ -141,7 +172,7 @@ nextSubDir:
 
 #Region "My.Settings"
 
-	Shared Function getMySettingsMember(tp As ContactType) As String
+	Function getMySettingsMember(tp As ContactType) As String
 		Select Case tp
 			Case ContactType.Domme
 				Return "DomImageDir"
@@ -156,15 +187,15 @@ nextSubDir:
 		End Select
 	End Function
 
-	Shared Function getDefaultFolder(ByVal tp As ContactType) As String
+	Function getDefaultFolder(ByVal tp As ContactType) As String
 		Return My.Settings.GetDefault(getMySettingsMember(tp))
 	End Function
 
-	Shared Function getCurrentBaseFolder(ByVal tp As ContactType) As String
+	Function getCurrentBaseFolder(ByVal tp As ContactType) As String
 		Return My.Settings(getMySettingsMember(tp))
 	End Function
 
-	Shared Sub SetBaseFolder(ByVal tp As ContactType, ByVal path As String)
+	Sub SetBaseFolder(ByVal tp As ContactType, ByVal path As String)
 		My.Settings(getMySettingsMember(tp)) = path
 	End Sub
 
@@ -266,7 +297,7 @@ nextSubDir:
 	Friend Function NavigateLast() As String
 		CheckInit()
 		If Me.ImageList.Count > 0 Then
-			Index = ImageList.Count
+			Index = ImageList.Count - 1
 			Return CurrentImage()
 		Else
 			Return String.Empty
@@ -275,7 +306,7 @@ nextSubDir:
 
 #End Region
 
-	Friend Shared Function Check_ImageDir(tp As ContactType)
+	Friend Function Check_ImageDir(tp As ContactType)
 		Dim def As String = getDefaultFolder(tp)
 		Dim val As String = getCurrentBaseFolder(tp)
 		Dim text As String = ""
@@ -297,7 +328,7 @@ nextSubDir:
 		End If
 	End Function
 
-	Friend Shared Function GetRandom(tp As ContactType) As List(Of String)
+	Friend Function GetRandom(tp As ContactType) As List(Of String)
 		If Check_ImageDir(tp) Then
 			Return LoadRandom(getCurrentBaseFolder(tp))
 		Else
@@ -305,52 +336,5 @@ nextSubDir:
 		End If
 	End Function
 
-#Region "Domme"
-
-	Friend Shared Function Check_DommeImageDir()
-		Return Check_ImageDir(ContactType.Domme)
-	End Function
-
-	Friend Shared Function Get_DommeImages() As List(Of String)
-		Return GetRandom(ContactType.Domme)
-	End Function
-
-#End Region
-
-#Region "Contact 1"
-
-	Friend Shared Function Check_Contact1ImageDir()
-		Return Check_ImageDir(ContactType.Contact1)
-	End Function
-
-	Friend Shared Function Get_Contact1Images() As List(Of String)
-		Return GetRandom(ContactType.Contact1)
-	End Function
-
-#End Region
-
-#Region "Contact 2"
-
-	Friend Shared Function Check_Contact2ImageDir()
-		Return Check_ImageDir(ContactType.Contact2)
-	End Function
-
-	Friend Shared Function Get_Contact2Images() As List(Of String)
-		Return GetRandom(ContactType.Contact2)
-	End Function
-
-#End Region
-
-#Region "Contact 3"
-
-	Friend Shared Function Check_Contact3ImageDir()
-		Return Check_ImageDir(ContactType.Contact3)
-	End Function
-
-	Friend Shared Function Get_Contact3Images() As List(Of String)
-		Return GetRandom(ContactType.Contact3)
-	End Function
-
-#End Region
 
 End Class
