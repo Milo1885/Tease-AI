@@ -48,19 +48,9 @@ Public Class Form1
 		End Set
 	End Property
 
-	<Obsolete("Ambiguous used in frmSettings and Form1! Read data using MainPictureBox.ImageLocation. Set data using ShowImage(String, Boolean) in future releases.")>
-	Public WebImage As String
 
-	<Obsolete("Belongs to Form2. Unhandled Exception in execution will block the File.")>
-	Public WebImageFile As StreamReader
-	<Obsolete("Belongs to frmSettings.")>
-	Public WebImageLines As New List(Of String)
-	<Obsolete("Belongs to frmSettings.")>
-	Public WebImageLine As Integer
-	<Obsolete("Belongs to frmSettings. Redundant Code. Use WebimageLines.Count instead")>
-	Public WebImageLineTotal As Integer
-	<Obsolete("Belongs to frmSettings.")>
-	Public WebImagePath As String
+
+
 
 	Public MetroThread As Thread
 
@@ -18569,11 +18559,11 @@ GetDommeSlideshow:
 		SettingsList.Add("ReadBlogRate: --obsolete--") ' for compatibility
 		SettingsList.Add("SearchImageBlog:  --obsolete--") ' for compatibility
 		SettingsList.Add("FoundString: --obsolete--") ' for compatibility
-		SettingsList.Add("WebImage: " & WebImage)
+		SettingsList.Add("WebImage: --obsolete--") ' for compatibility
 		'SettingsList.Add("WebImageLines: " & WebImageLines)
-		SettingsList.Add("WebImageLine: " & WebImageLine)
-		SettingsList.Add("WebImageLineTotal: " & WebImageLineTotal)
-		SettingsList.Add("WebImagePath: " & WebImagePath)
+		SettingsList.Add("WebImageLine: --obsolete--") ' for compatibility 
+		SettingsList.Add("WebImageLineTotal: --obsolete--") ' for compatibility 
+		SettingsList.Add("WebImagePath: --obsolete--") ' for compatibility 
 		SettingsList.Add("ImageUrlFilePath: --obsolete--") ' for compatibility
 		SettingsList.Add("ImageUrlFileIndex: --obsolete--") ' for compatibility
 		SettingsList.Add("ReaderString: --obsolete--") ' for compatibility
@@ -18855,16 +18845,16 @@ GetDommeSlideshow:
 			If File.Exists(SettingsPath & ResumePrefix & "LocalTagImageList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "LocalTagImageList.txt")
 		End If
 
-		If WebImageLines.Count > 0 Then
-			SettingsString = ""
-			For i As Integer = 0 To WebImageLines.Count - 1
-				SettingsString = SettingsString & WebImageLines(i)
-				If i <> WebImageLines.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-			Next
-			My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "WebImageLines.txt", SettingsString, False)
-		Else
-			If File.Exists(SettingsPath & ResumePrefix & "WebImageLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "WebImageLines.txt")
-		End If
+		'If WebImageLines.Count > 0 Then
+		'	SettingsString = ""
+		'	For i As Integer = 0 To WebImageLines.Count - 1
+		'		SettingsString = SettingsString & WebImageLines(i)
+		'		If i <> WebImageLines.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+		'	Next
+		'	My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "WebImageLines.txt", SettingsString, False)
+		'Else
+		'	If File.Exists(SettingsPath & ResumePrefix & "WebImageLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "WebImageLines.txt")
+		'End If
 
 		If ssh.TnAList.Count > 0 Then
 			SettingsString = ""
@@ -19177,10 +19167,10 @@ GetDommeSlideshow:
 		'ReadBlogRate = SettingsList(190).Replace("ReadBlogRate: ", "")
 		'SearchImageBlog = SettingsList(191).Replace("SearchImageBlog: ", "")
 		'FoundString = SettingsList(192).Replace("FoundString: ", "")
-		WebImage = SettingsList(193).Replace("WebImage: ", "")
-		WebImageLine = SettingsList(194).Replace("WebImageLine: ", "")
-		WebImageLineTotal = SettingsList(195).Replace("WebImageLineTotal: ", "")
-		WebImagePath = SettingsList(196).Replace("WebImagePath: ", "")
+		'WebImage = SettingsList(193).Replace("WebImage: ", "")
+		'WebImageLine = SettingsList(194).Replace("WebImageLine: ", "")
+		'WebImageLineTotal = SettingsList(195).Replace("WebImageLineTotal: ", "")
+		'WebImagePath = SettingsList(196).Replace("WebImagePath: ", "")
 		'ImageUrlFilePath = SettingsList(197).Replace("ImageUrlFilePath: ", "")
 		'ImageUrlFileIndex = SettingsList(198).Replace("ImageUrlFileIndex: ", "")
 		'ReaderString = SettingsList(199).Replace("ReaderString: ", "")
@@ -19379,7 +19369,7 @@ GetDommeSlideshow:
 		If File.Exists(SettingsPath & ResumePrefix & "_ImageFileNames.txt") Then ssh._ImageFileNames = Txt2List(SettingsPath & ResumePrefix & "_ImageFileNames.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "RecentSlideshows.txt") Then ssh.RecentSlideshows = Txt2List(SettingsPath & ResumePrefix & "RecentSlideshows.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "LocalTagImageList.txt") Then ssh.LocalTagImageList = Txt2List(SettingsPath & ResumePrefix & "LocalTagImageList.txt")
-		If File.Exists(SettingsPath & ResumePrefix & "WebImageLines.txt") Then WebImageLines = Txt2List(SettingsPath & ResumePrefix & "WebImageLines.txt")
+		'If File.Exists(SettingsPath & ResumePrefix & "WebImageLines.txt") Then WebImageLines = Txt2List(SettingsPath & ResumePrefix & "WebImageLines.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "TnAList.txt") Then ssh.TnAList = Txt2List(SettingsPath & ResumePrefix & "TnAList.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "BoobList.txt") Then ssh.BoobList = Txt2List(SettingsPath & ResumePrefix & "BoobList.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "AssList.txt") Then ssh.AssList = Txt2List(SettingsPath & ResumePrefix & "AssList.txt")

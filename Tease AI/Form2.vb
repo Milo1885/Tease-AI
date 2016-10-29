@@ -28,6 +28,13 @@ Public Class FrmSettings
 	Dim CurrentLocalImageTagImage As String
 
 
+	Public WebImage As String
+	Public WebImageFile As StreamReader
+	Public WebImageLines As New List(Of String)
+	Public WebImageLine As Integer
+	Public WebImageLineTotal As Integer
+	Public WebImagePath As String
+
 	Dim CheckImgDir As New List(Of String)
 
 	'Dim Fringe As New SpeechSynthesizer
@@ -4050,10 +4057,10 @@ Public Class FrmSettings
 	Private Sub BTNWIRemove_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIRemove.Click
 
 
-		Form1.WebImageLines.Remove(Form1.WebImageLines(Form1.WebImageLine))
+		WebImageLines.Remove(WebImageLines(WebImageLine))
 
 
-		If Form1.WebImageLine = Form1.WebImageLines.Count Then Form1.WebImageLine = 0
+		If WebImageLine = WebImageLines.Count Then WebImageLine = 0
 		'
 		'Else
 		'WebImageLine += 1
@@ -4067,19 +4074,19 @@ Public Class FrmSettings
 		WebPictureBox.Image = Nothing
 		GC.Collect()
 
-		WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
+		WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
 
-		Debug.Print(Form1.WebImageLines(Form1.WebImageLine))
+		Debug.Print(WebImageLines(WebImageLine))
 
-		My.Computer.FileSystem.DeleteFile(Form1.WebImagePath)
+		My.Computer.FileSystem.DeleteFile(WebImagePath)
 
-		If File.Exists(Form1.WebImagePath) Then
+		If File.Exists(WebImagePath) Then
 			Debug.Print("File Exists")
 		Else
 			Debug.Print("Nope")
 		End If
 
-		My.Computer.FileSystem.WriteAllText(Form1.WebImagePath, String.Join(Environment.NewLine, Form1.WebImageLines), False)
+		My.Computer.FileSystem.WriteAllText(WebImagePath, String.Join(Environment.NewLine, WebImageLines), False)
 
 	End Sub
 
@@ -4087,9 +4094,9 @@ Public Class FrmSettings
 
 
 		If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & Form1.WebImageLines(Form1.WebImageLine), True)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & WebImageLines(WebImageLine), True)
 		Else
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Form1.WebImageLines(Form1.WebImageLine), True)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", WebImageLines(WebImageLine), True)
 		End If
 
 
@@ -4098,9 +4105,9 @@ Public Class FrmSettings
 	Private Sub BTNWIDisliked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIDisliked.Click
 
 		If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & Form1.WebImageLines(Form1.WebImageLine), True)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & WebImageLines(WebImageLine), True)
 		Else
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Form1.WebImageLines(Form1.WebImageLine), True)
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", WebImageLines(WebImageLine), True)
 		End If
 
 	End Sub
@@ -4109,10 +4116,10 @@ Public Class FrmSettings
 
 		Select Case e.Delta
 			Case -120 'Scrolling down
-				Form1.WebImageLine += 1
+				WebImageLine += 1
 
-				If Form1.WebImageLine > Form1.WebImageLineTotal - 1 Then
-					Form1.WebImageLine = Form1.WebImageLineTotal
+				If WebImageLine > WebImageLineTotal - 1 Then
+					WebImageLine = WebImageLineTotal
 					MsgBox("No more images to display!", , "Warning!")
 					Return
 				End If
@@ -4124,13 +4131,13 @@ Public Class FrmSettings
 				WebPictureBox.Image = Nothing
 				GC.Collect()
 
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
-				LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
+				LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
 			Case 120 'Scrolling up
-				Form1.WebImageLine -= 1
+				WebImageLine -= 1
 
-				If Form1.WebImageLine < 0 Then
-					Form1.WebImageLine = 0
+				If WebImageLine < 0 Then
+					WebImageLine = 0
 					MsgBox("No more images to display!", , "Warning!")
 					Return
 				End If
@@ -4141,8 +4148,8 @@ Public Class FrmSettings
 				End Try
 				WebPictureBox.Image = Nothing
 				GC.Collect()
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
-				LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
+				LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
 		End Select
 
 
@@ -4159,17 +4166,17 @@ Public Class FrmSettings
 
 		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
 
-			Form1.WebImageFile = New IO.StreamReader(WebImageFileDialog.FileName)
-			Form1.WebImagePath = WebImageFileDialog.FileName
+			WebImageFile = New IO.StreamReader(WebImageFileDialog.FileName)
+			WebImagePath = WebImageFileDialog.FileName
 
-			Form1.WebImageLines.Clear()
+			WebImageLines.Clear()
 
-			Form1.WebImageLine = 0
-			Form1.WebImageLineTotal = 0
+			WebImageLine = 0
+			WebImageLineTotal = 0
 
-			While Form1.WebImageFile.Peek <> -1
-				Form1.WebImageLineTotal += 1
-				Form1.WebImageLines.Add(Form1.WebImageFile.ReadLine())
+			While WebImageFile.Peek <> -1
+				WebImageLineTotal += 1
+				WebImageLines.Add(WebImageFile.ReadLine())
 			End While
 
 			Try
@@ -4180,15 +4187,15 @@ Public Class FrmSettings
 			GC.Collect()
 
 			Try
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(0))))
+				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(0))))
 			Catch
 				MessageBox.Show(Me, "Failed to load URL File image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			End Try
 
-			Form1.WebImageFile.Close()
-			Form1.WebImageFile.Dispose()
+			WebImageFile.Close()
+			WebImageFile.Dispose()
 
-			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+			LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
 
 
 			BTNWINext.Enabled = True
@@ -4211,10 +4218,10 @@ Public Class FrmSettings
 
 TryNextImage:
 
-		Form1.WebImageLine += 1
+		WebImageLine += 1
 
-		If Form1.WebImageLine > Form1.WebImageLineTotal - 1 Then
-			Form1.WebImageLine = Form1.WebImageLineTotal
+		If WebImageLine > WebImageLineTotal - 1 Then
+			WebImageLine = WebImageLineTotal
 			MsgBox("No more images to display!", , "Warning!")
 			Return
 		End If
@@ -4227,8 +4234,8 @@ TryNextImage:
 		WebPictureBox.Image = Nothing
 		GC.Collect()
 		Try
-			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
-			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
+			LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
 		Catch ex As Exception
 			GoTo TryNextImage
 		End Try
@@ -4241,10 +4248,10 @@ TryNextImage:
 
 trypreviousimage:
 
-		Form1.WebImageLine -= 1
+		WebImageLine -= 1
 
-		If Form1.WebImageLine < 0 Then
-			Form1.WebImageLine = 0
+		If WebImageLine < 0 Then
+			WebImageLine = 0
 			MsgBox("No more images to display!", , "Warning!")
 			Return
 		End If
@@ -4257,8 +4264,8 @@ trypreviousimage:
 		WebPictureBox.Image = Nothing
 		GC.Collect()
 		Try
-			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(Form1.WebImageLines(Form1.WebImageLine))))
-			LBLWebImageCount.Text = Form1.WebImageLine + 1 & "/" & Form1.WebImageLineTotal
+			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
+			LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
 		Catch ex As Exception
 			GoTo trypreviousimage
 		End Try
@@ -4280,17 +4287,17 @@ trypreviousimage:
 
 		Try
 
-			Form1.WebImage = Form1.WebImageLines(Form1.WebImageLine)
+			WebImage = WebImageLines(WebImageLine)
 
-			Dim DirSplit As String() = Form1.WebImage.Split("/")
-			Form1.WebImage = DirSplit(DirSplit.Length - 1)
+			Dim DirSplit As String() = WebImage.Split("/")
+			WebImage = DirSplit(DirSplit.Length - 1)
 
 			' ### Clean Code
 			'Do Until Not Form1.WebImage.Contains("/")
 			'Form1.WebImage = Form1.WebImage.Remove(0, 1)
 			'Loop
 
-			SaveFileDialog1.FileName = Form1.WebImage
+			SaveFileDialog1.FileName = WebImage
 
 		Catch ex As Exception
 
