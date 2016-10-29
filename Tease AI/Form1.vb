@@ -13567,43 +13567,41 @@ VTSkip:
 
 #Region "---------------------------------------- Script-Flags ------------------------------------------"
 
-	Public Function CreateFlag(ByVal FlagDir As String, Optional ByVal Temp As Boolean = False)
-
+	''' <summary>Creates the given flag.</summary>
+	''' <param name="FlagName">The flag name to set.</param>
+	''' <param name="Temp">If set to true, the flag is temporary set otherwise permanent.</param>
+	Friend Sub CreateFlag(ByVal FlagName As String, Optional ByVal Temp As Boolean = False)
 		If Temp = False Then
-			FlagDir = "Flags\" & FlagDir
+			FlagName = ssh.PersonalityFlagPath & FlagName
 		Else
-			FlagDir = "Flags\Temp\" & FlagDir
+			FlagName = ssh.PersonalityFlagTempPath & FlagName
 		End If
 
-		Dim FlagCreate As FileStream = File.Create(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\" & FlagDir)
-		FlagCreate.Close()
-		FlagCreate.Dispose()
+		Using fs As New FileStream(FlagName, FileMode.Create) : End Using
 
-	End Function
+	End Sub
+	''' <summary>Deletes the given flag. Deletes permanent and temporary flags.</summary>
+	''' <param name="FlagName">The name of the flag to delete.</param>
+	Friend Sub DeleteFlag(ByVal FlagName As String)
 
-	Public Function DeleteFlag(ByVal FlagDir As String)
+		If File.Exists(ssh.PersonalityFlagPath & FlagName) Then _
+			File.Delete(ssh.PersonalityFlagPath & FlagName)
 
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & FlagDir) Then _
-					My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & FlagDir)
+		If File.Exists(ssh.PersonalityFlagTempPath & FlagName) Then _
+			File.Delete(ssh.PersonalityFlagTempPath & FlagName)
 
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagDir) Then _
-		 My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagDir)
+	End Sub
+	''' <summary> Checks if the given flag is set, permanent and temporary.</summary>
+	''' <param name="FlagName">The flag name to search for.</param>
+	''' <returns>Returns true if a permanent or temporary flag with the name is found.</returns>
+	Friend Function FlagExists(ByVal FlagName As String) As Boolean
 
-
-	End Function
-
-	Friend Function FlagExists(ByVal FlagDir As String) As Boolean
-
-		Dim CheckFlag As Boolean
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & FlagDir) Or
-			File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagDir) Then
-			CheckFlag = True
+		If File.Exists(ssh.PersonalityFlagPath & FlagName) OrElse
+			File.Exists(ssh.PersonalityFlagTempPath & FlagName) Then
+			Return True
 		Else
-			CheckFlag = False
+			Return False
 		End If
-
-		Return CheckFlag
 
 	End Function
 
@@ -14854,22 +14852,38 @@ SkipTextedTags:
 			End If
 		End If
 
-		If FilterString.Contains("@Flag(") Then
-			'TODO: @Flag() Add multiple Flag-support.
-			Dim WriteFlag As String = GetParentheses(FilterString, "@Flag(")
+		If FilterString.Contains("@Flag(") Or FilterString.Contains("@NotFlag(") Then
+			Dim result As Boolean = True
+			Dim writeFlag As String
+			Dim splitFlag As String()
 
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) And
-			Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then Return False
+			If FilterString.Contains("@Flag(") Then
+				writeFlag = GetParentheses(FilterString, "@Flag(")
+				writeFlag = FixCommas(writeFlag)
+				splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
 
-		End If
+				For Each s In splitFlag
+					If Not FlagExists(s) Then
+						result = False
+						Exit For
+					End If
+				Next
+			End If
+			If result = False Then Return result
 
-		If FilterString.Contains("@NotFlag(") Then
-			'TODO: @NotFlag() Add multiple Flag-support.
-			Dim WriteFlag As String = GetParentheses(FilterString, "@NotFlag(")
+			If FilterString.Contains("@NotFlag(") Then
+				writeFlag = GetParentheses(FilterString, "@NotFlag(")
+				writeFlag = FixCommas(writeFlag)
+				splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
 
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & WriteFlag) Or
-			File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & WriteFlag) Then Return False
-
+				For Each s In splitFlag
+					If FlagExists(s) Then
+						result = False
+						Exit For
+					End If
+				Next
+			End If
+			Return result
 		End If
 
 		If FilterString.Contains("@Month(") Then
@@ -17866,21 +17880,24 @@ saveImage:
 
 		'Debug.Print("CFClean Joined = " & CFClean)
 
-
+		'===============================================================================
+		'							Clean leftover @Commands(
+		'===============================================================================
 		If CFClean.Contains("@Variable[") Then
 			CFClean = CFClean.Replace("@Variable[" & GetParentheses(CFClean, "@Variable[", 2) & "]", "")
 			If CFClean.Contains("And[") Then CFClean = CFClean.Replace("And[" & GetParentheses(CFClean, "And[", 2) & "]", "")
 			If CFClean.Contains("Or[") Then CFClean = CFClean.Replace("Or[" & GetParentheses(CFClean, "Or[", 2) & "]", "")
 		End If
 
-		If CFClean.Contains("@Cup(") Then CFClean = CFClean.Replace("@Cup(" & GetParentheses(CFClean, "@Cup(") & ")", "")
-		If CFClean.Contains("@AllowsOrgasm(") Then CFClean = CFClean.Replace("@AllowsOrgasm(" & GetParentheses(CFClean, "@AllowsOrgasm(") & ")", "")
-		If CFClean.Contains("@RuinsOrgasm(") Then CFClean = CFClean.Replace("@RuinsOrgasm(" & GetParentheses(CFClean, "@RuinsOrgasm(") & ")", "")
-		If CFClean.Contains("@DommeLevel(") Then CFClean = CFClean.Replace("@DommeLevel(" & GetParentheses(CFClean, "@DommeLevel(") & ")", "")
-		If CFClean.Contains("@ApathyLevel(") Then CFClean = CFClean.Replace("@ApathyLevel(" & GetParentheses(CFClean, "@ApathyLevel(") & ")", "")
-		If CFClean.Contains("@Month(") Then CFClean = CFClean.Replace("@Month(" & GetParentheses(CFClean, "@Month(") & ")", "")
-		If CFClean.Contains("@Day(") Then CFClean = CFClean.Replace("@Day(" & GetParentheses(CFClean, "@Day(") & ")", "")
+		For Each com As String In New List(Of String) From
+				{"@Cup(", "@AllowsOrgasm(", "@RuinsOrgasm(", "@DommeLevel(",
+				"@ApathyLevel(", "@Month(", "@Day(", "@Flag(", "@NotFlag("}
+			If CFClean.Contains(com) Then CFClean = CFClean.Replace(com & GetParentheses(CFClean, com) & ")", "")
+		Next
 
+		'===============================================================================
+		'					  Clean all other remaining @Commands
+		'===============================================================================
 		Dim AtArray() As String = Split(CFClean)
 		For i As Integer = 0 To AtArray.Length - 1
 			Try
