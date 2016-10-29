@@ -3429,21 +3429,21 @@ Public Class FrmSettings
 	Private Sub BtnContact1ImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			My.Settings.Contact1ImageDir = FolderBrowserDialog1.SelectedPath
-			Form1.Contact1Pics_Load()
+			My.Application.Session.SlideshowContact1 = New Slideshow(ContactType.Contact1)
 		End If
 	End Sub
 
 	Private Sub BtnContact2ImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact2ImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			My.Settings.Contact2ImageDir = FolderBrowserDialog1.SelectedPath
-			Form1.Contact2Pics_Load()
+			My.Application.Session.SlideshowContact2 = New Slideshow(ContactType.Contact2)
 		End If
 	End Sub
 
 	Private Sub BtnContact3ImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact3ImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			My.Settings.Contact3ImageDir = FolderBrowserDialog1.SelectedPath
-			Form1.Contact3Pics_Load()
+			My.Application.Session.SlideshowContact3 = New Slideshow(ContactType.Contact3)
 		End If
 	End Sub
 
@@ -3604,17 +3604,17 @@ Public Class FrmSettings
 
 	Private Sub BtnContact1ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDirClear.Click
 		My.Settings.ResetField(LBLContact1ImageDir, "Text")
-		Form1.Contact1Pics_Clear()
+		My.Application.Session.SlideshowContact1 = New Slideshow()
 	End Sub
 
 	Private Sub BtnContact2ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact2ImageDirClear.Click
 		My.Settings.ResetField(LBLContact2ImageDir, "Text")
-		Form1.Contact2Pics_Clear()
+		My.Application.Session.SlideshowContact2 = New Slideshow()
 	End Sub
 
 	Private Sub BtnContact3ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact3ImageDirClear.Click
 		My.Settings.ResetField(LBLContact3ImageDir, "Text")
-		Form1.Contact3Pics_Clear()
+		My.Application.Session.SlideshowContact3 = New Slideshow()
 	End Sub
 
 	Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click

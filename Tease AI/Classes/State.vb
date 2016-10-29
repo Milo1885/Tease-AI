@@ -21,40 +21,35 @@ Namespace My
 #Region "------------------------------------------- Data -----------------------------------------------"
 		Public Property Chat As String
 
-		Public Property SlideshowDomme As Slideshow
-		Public Property SlideshowContact1 As Slideshow
-		Public Property SlideshowContact2 As Slideshow
-		Public Property SlideshowContact3 As Slideshow
-
 		Public randomizer As New Random
 		Public ScriptOperator As String
 		<Obsolete("Only used in Supend/resmue. Don not use anymore")>
 		Public ScriptCompare As String
 
-		Public DomTyping As Boolean
+		Public Property DomTyping As Boolean
 
-		Public CheckYes As Boolean
-		Public CheckNo As Boolean
+		Public Property CheckYes As Boolean
+		Public Property CheckNo As Boolean
 
-		Public Playlist As Boolean
-		Public PlaylistFile As New List(Of String)
-		Public PlaylistCurrent As Integer
+		Public Property Playlist As Boolean
+		Public Property PlaylistFile As New List(Of String)
+		Public Property PlaylistCurrent As Integer
 
 
 
-		Public Responding As Boolean
+		Public Property Responding As Boolean
 
-		Public StrokeTauntVal As Integer = -1
-		Public FileText As String
-		Public TempStrokeTauntVal As Integer
-		Public TempFileText As String
+		Public Property StrokeTauntVal As Integer = -1
+		Public Property FileText As String
+		Public Property TempStrokeTauntVal As Integer
+		Public Property TempFileText As String
 
-		Public TeaseTick As Integer
+		Public Property TeaseTick As Integer
 
-		Public StrokeTauntCount As Integer
-		Public TauntTextTotal As Integer
-		Public TauntLines As New List(Of String)
-		Public StrokeFilter As Boolean
+		Public Property StrokeTauntCount As Integer
+		Public Property TauntTextTotal As Integer
+		Public Property TauntLines As New List(Of String)
+		Public Property StrokeFilter As Boolean
 
 		Public ScriptTick As Integer
 		Public StringLength As Integer
@@ -369,12 +364,19 @@ Namespace My
 
 		Public GlitterTease As Boolean
 		Public AddContactTick As Integer
-		Public Contact1Pics As New List(Of String)
-		Public Contact2Pics As New List(Of String)
-		Public Contact3Pics As New List(Of String)
-		Public Contact1PicsCount As Integer
-		Public Contact2PicsCount As Integer
-		Public Contact3PicsCount As Integer
+
+		Public Property SlideshowDomme As Slideshow
+		<System.ComponentModel.Category("Contact1")>
+		Public Property SlideshowContact1 As Slideshow
+		Public Property SlideshowContact2 As Slideshow
+		Public Property SlideshowContact3 As Slideshow
+
+		'Public Contact1Pics As New List(Of String)
+		'Public Contact2Pics As New List(Of String)
+		'Public Contact3Pics As New List(Of String)
+		'Public Contact1PicsCount As Integer
+		'Public Contact2PicsCount As Integer
+		'Public Contact3PicsCount As Integer
 		Public Group As String = "D"
 
 		Public CustomTask As Boolean
@@ -822,6 +824,13 @@ Namespace My
 												   FileMode.Create) : End Using
 					Next
 				End If
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'								Set Slideshows
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				If SlideshowDomme Is Nothing Then SlideshowDomme = New Slideshow(ContactType.Domme)
+				If SlideshowContact1 Is Nothing Then SlideshowContact1 = New Slideshow(ContactType.Contact1)
+				If SlideshowContact2 Is Nothing Then SlideshowContact2 = New Slideshow(ContactType.Contact2)
+				If SlideshowContact3 Is Nothing Then SlideshowContact3 = New Slideshow(ContactType.Contact3)
 
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 				'							Set Picturebox & WMP
@@ -936,6 +945,10 @@ Namespace My
 			End With
 
 		End Sub
+
+		Public Function Clone() As SessionState
+			Return DirectCast(Me.MemberwiseClone(), SessionState)
+		End Function
 
 #Region "------------------------------------serialize/deserialize---------------------------------------"
 

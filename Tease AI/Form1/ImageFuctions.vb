@@ -1040,11 +1040,11 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 					Throw New ArgumentException("System iamges are not allowed to delete.")
 				If ssh._ImageFileNames.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Domme-Slideshow images are not allowed to delete!")
-				If ssh.Contact1Pics.Contains(ssh.ImageLocation) Then _
+				If ssh.SlideshowContact1.ImageList.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Contact1-Slideshow images are not allowed to delete!")
-				If ssh.Contact2Pics.Contains(ssh.ImageLocation) Then _
+				If ssh.SlideshowContact2.ImageList.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Contact2-Slideshow images are not allowed to delete!")
-				If ssh.Contact3Pics.Contains(ssh.ImageLocation) Then _
+				If ssh.SlideshowContact3.ImageList.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Contact3-Slideshow images are not allowed to delete!")
 
 				If ssh.ImageLocation.ToLower.StartsWith(My.Settings.DomImageDir.ToLower) Then _

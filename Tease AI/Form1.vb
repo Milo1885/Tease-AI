@@ -1009,9 +1009,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		End Try
 
-		Contact1Pics_Load()
-		Contact2Pics_Load()
-		Contact3Pics_Load()
 
 		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
 			Dim ContactList As New List(Of String)
@@ -5008,7 +5005,7 @@ SkipIsTyping:
 
 						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
-
+						'TODO-Next: Optimize Code
 						Dim TeaseDirection As Integer = ssh.randomizer.Next(1, 101)
 
 						'Debug.Print("TeaseDirection = " & TeaseDirection)
@@ -5020,26 +5017,14 @@ TryNextWithTease:
 								ssh.FileCount = 0
 							End If
 
-							If ssh.DomTask.Contains("@Contact1") Then
-								ssh.Contact1PicsCount -= 1
-								If ssh.Contact1PicsCount < 0 Then
-									ssh.Contact1PicsCount = 0
-								End If
-							End If
+							If ssh.DomTask.Contains("@Contact1") Then _
+								ssh.SlideshowContact1.NavigateNextTease()
 
-							If ssh.DomTask.Contains("@Contact2") Then
-								ssh.Contact2PicsCount -= 1
-								If ssh.Contact2PicsCount < 0 Then
-									ssh.Contact2PicsCount = 0
-								End If
-							End If
+							If ssh.DomTask.Contains("@Contact2") Then _
+								ssh.SlideshowContact2.NavigateNextTease()
 
-							If ssh.DomTask.Contains("@Contact3") Then
-								ssh.Contact3PicsCount -= 1
-								If ssh.Contact3PicsCount < 0 Then
-									ssh.Contact3PicsCount = 0
-								End If
-							End If
+							If ssh.DomTask.Contains("@Contact3") Then _
+								ssh.SlideshowContact3.NavigateNextTease()
 
 						Else
 
@@ -5057,47 +5042,27 @@ TryNextWithTease:
 								End If
 							End If
 
-							If ssh.DomTask.Contains("@Contact1") Then
-								ssh.Contact1PicsCount += 1
-								Try
-									If ssh.Contact1PicsCount > ssh.Contact1Pics.Count - 1 Then
-										ssh.Contact1PicsCount = ssh.Contact1Pics.Count - 1
-									End If
-								Catch
-								End Try
-							End If
+							If ssh.DomTask.Contains("@Contact1") Then _
+								ssh.SlideshowContact1.NavigateNextTease()
 
-							If ssh.DomTask.Contains("@Contact2") Then
-								ssh.Contact2PicsCount += 1
-								Try
-									If ssh.Contact2PicsCount > ssh.Contact2Pics.Count - 1 Then
-										ssh.Contact2PicsCount = ssh.Contact2Pics.Count - 1
-									End If
-								Catch
-								End Try
-							End If
+							If ssh.DomTask.Contains("@Contact2") Then _
+								ssh.SlideshowContact1.NavigateNextTease()
 
-							If ssh.DomTask.Contains("@Contact3") Then
-								ssh.Contact3PicsCount += 1
-								Try
-									If ssh.Contact3PicsCount > ssh.Contact3Pics.Count - 1 Then
-										ssh.Contact3PicsCount = ssh.Contact3Pics.Count - 1
-									End If
-								Catch
-								End Try
-							End If
+							If ssh.DomTask.Contains("@Contact3") Then _
+								ssh.SlideshowContact3.NavigateNextTease()
+
 
 						End If
 
-						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+							' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-						If ssh._ImageFileNames(ssh.FileCount).Contains(".db") Then GoTo TryNextWithTease
+							If ssh._ImageFileNames(ssh.FileCount).Contains(".db") Then GoTo TryNextWithTease
 
 						ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
 
 						If ssh.DomTask.Contains("@Contact1") Then
 							Try
-								ssh.DomPic = ssh.Contact1Pics(ssh.Contact1PicsCount)
+								ssh.DomPic = ssh.SlideshowContact1.CurrentImage 'ssh.Contact1Pics(ssh.Contact1PicsCount)
 							Catch
 								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
 							End Try
@@ -5105,7 +5070,7 @@ TryNextWithTease:
 
 						If ssh.DomTask.Contains("@Contact2") Then
 							Try
-								ssh.DomPic = ssh.Contact2Pics(ssh.Contact2PicsCount)
+								ssh.DomPic = ssh.SlideshowContact2.CurrentImage 'ssh.Contact2Pics(ssh.Contact2PicsCount)
 							Catch
 								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
 							End Try
@@ -5113,7 +5078,7 @@ TryNextWithTease:
 
 						If ssh.DomTask.Contains("@Contact3") Then
 							Try
-								ssh.DomPic = ssh.Contact3Pics(ssh.Contact3PicsCount)
+								ssh.DomPic = ssh.SlideshowContact3.CurrentImage 'ssh.Contact3Pics(ssh.Contact3PicsCount)
 							Catch
 								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
 							End Try
@@ -5126,9 +5091,9 @@ TryNextWithTease:
 
 					If FrmSettings.CBSlideshowRandom.Checked = True Then
 						ssh.FileCount = ssh.randomizer.Next(0, ssh.FileCountMax + 1)
-						If ssh.Contact1Pics.Count > 0 Then ssh.Contact1PicsCount = ssh.randomizer.Next(0, ssh.Contact1Pics.Count)
-						If ssh.Contact2Pics.Count > 0 Then ssh.Contact2PicsCount = ssh.randomizer.Next(0, ssh.Contact2Pics.Count)
-						If ssh.Contact3Pics.Count > 0 Then ssh.Contact3PicsCount = ssh.randomizer.Next(0, ssh.Contact3Pics.Count)
+						'If ssh.Contact1Pics.Count > 0 Then ssh.Contact1PicsCount = ssh.randomizer.Next(0, ssh.Contact1Pics.Count)
+						'If ssh.Contact2Pics.Count > 0 Then ssh.Contact2PicsCount = ssh.randomizer.Next(0, ssh.Contact2Pics.Count)
+						'If ssh.Contact3Pics.Count > 0 Then ssh.Contact3PicsCount = ssh.randomizer.Next(0, ssh.Contact3Pics.Count)
 					End If
 
 
@@ -5976,7 +5941,7 @@ NullResponseLine:
 
 						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
-
+						'TODO-Next: Optimize Code
 						Dim TeaseDirection As Integer = ssh.randomizer.Next(1, 101)
 
 						'Debug.Print("TeaseDirection = " & TeaseDirection)
@@ -5988,26 +5953,15 @@ TryNextWithTease:
 								ssh.FileCount = 0
 							End If
 
-							If ssh.DomTask.Contains("@Contact1") Then
-								ssh.Contact1PicsCount -= 1
-								If ssh.Contact1PicsCount < 0 Then
-									ssh.Contact1PicsCount = 0
-								End If
-							End If
+							If ssh.DomTask.Contains("@Contact1") Then _
+								ssh.SlideshowContact1.NavigateNextTease()
 
-							If ssh.DomTask.Contains("@Contact2") Then
-								ssh.Contact2PicsCount -= 1
-								If ssh.Contact2PicsCount < 0 Then
-									ssh.Contact2PicsCount = 0
-								End If
-							End If
+							If ssh.DomTask.Contains("@Contact2") Then _
+								ssh.SlideshowContact2.NavigateNextTease()
 
-							If ssh.DomTask.Contains("@Contact3") Then
-								ssh.Contact3PicsCount -= 1
-								If ssh.Contact3PicsCount < 0 Then
-									ssh.Contact3PicsCount = 0
-								End If
-							End If
+							If ssh.DomTask.Contains("@Contact3") Then _
+								ssh.SlideshowContact3.NavigateNextTease()
+
 
 						Else
 
@@ -6025,35 +5979,15 @@ TryNextWithTease:
 								End If
 							End If
 
-							If ssh.DomTask.Contains("@Contact1") Then
-								ssh.Contact1PicsCount += 1
-								Try
-									If ssh.Contact1PicsCount > ssh.Contact1Pics.Count - 1 Then
-										ssh.Contact1PicsCount = ssh.Contact1Pics.Count - 1
-									End If
-								Catch
-								End Try
-							End If
+							If ssh.DomTask.Contains("@Contact1") Then _
+								ssh.SlideshowContact1.NavigateNextTease()
 
-							If ssh.DomTask.Contains("@Contact2") Then
-								ssh.Contact2PicsCount += 1
-								Try
-									If ssh.Contact2PicsCount > ssh.Contact2Pics.Count - 1 Then
-										ssh.Contact2PicsCount = ssh.Contact2Pics.Count - 1
-									End If
-								Catch
-								End Try
-							End If
+							If ssh.DomTask.Contains("@Contact2") Then _
+								ssh.SlideshowContact2.NavigateNextTease()
 
-							If ssh.DomTask.Contains("@Contact3") Then
-								ssh.Contact3PicsCount += 1
-								Try
-									If ssh.Contact3PicsCount > ssh.Contact3Pics.Count - 1 Then
-										ssh.Contact3PicsCount = ssh.Contact3Pics.Count - 1
-									End If
-								Catch
-								End Try
-							End If
+							If ssh.DomTask.Contains("@Contact3") Then _
+								ssh.SlideshowContact3.NavigateNextTease()
+
 
 						End If
 
@@ -6065,7 +5999,7 @@ TryNextWithTease:
 
 						If ssh.DomChat.Contains("@Contact1") Then
 							Try
-								ssh.DomPic = ssh.Contact1Pics(ssh.Contact1PicsCount)
+								ssh.DomPic = ssh.SlideshowContact1.CurrentImage 'ssh.Contact1Pics(ssh.Contact1PicsCount)
 							Catch
 								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
 							End Try
@@ -6073,7 +6007,7 @@ TryNextWithTease:
 
 						If ssh.DomChat.Contains("@Contact2") Then
 							Try
-								ssh.DomPic = ssh.Contact2Pics(ssh.Contact2PicsCount)
+								ssh.DomPic = ssh.SlideshowContact2.CurrentImage 'ssh.Contact2Pics(ssh.Contact2PicsCount)
 							Catch
 								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
 							End Try
@@ -6081,7 +6015,7 @@ TryNextWithTease:
 
 						If ssh.DomChat.Contains("@Contact3") Then
 							Try
-								ssh.DomPic = ssh.Contact3Pics(ssh.Contact3PicsCount)
+								ssh.DomPic = ssh.SlideshowContact3.CurrentImage 'ssh.Contact3Pics(ssh.Contact3PicsCount)
 							Catch
 								ssh.DomPic = ssh._ImageFileNames(ssh.FileCount)
 							End Try
@@ -6093,9 +6027,9 @@ TryNextWithTease:
 					' github patch If FrmSettings.CBSlideshowRandom.Checked = True Then FileCount = randomizer.Next(0, FileCountMax + 1)
 
 					If FrmSettings.CBSlideshowRandom.Checked = True Then
-						If ssh.Contact1Pics.Count > 0 Then ssh.Contact1PicsCount = ssh.randomizer.Next(0, ssh.Contact1Pics.Count)
-						If ssh.Contact2Pics.Count > 0 Then ssh.Contact2PicsCount = ssh.randomizer.Next(0, ssh.Contact2Pics.Count)
-						If ssh.Contact3Pics.Count > 0 Then ssh.Contact3PicsCount = ssh.randomizer.Next(0, ssh.Contact3Pics.Count)
+						'If ssh.Contact1Pics.Count > 0 Then ssh.Contact1PicsCount = ssh.randomizer.Next(0, ssh.Contact1Pics.Count)
+						'If ssh.Contact2Pics.Count > 0 Then ssh.Contact2PicsCount = ssh.randomizer.Next(0, ssh.Contact2Pics.Count)
+						'If ssh.Contact3Pics.Count > 0 Then ssh.Contact3PicsCount = ssh.randomizer.Next(0, ssh.Contact3Pics.Count)
 					End If
 
 
@@ -18208,35 +18142,6 @@ GetDommeSlideshow:
 
 #Region "-------------------------------------------------- Contact 1-3 -------------------------------------------------------"
 
-	Public Sub Contact1Pics_Load()
-		Contact1Pics_Clear()
-		ssh.Contact1Pics = Slideshow.Get_Contact1Images()
-	End Sub
-
-	Public Sub Contact1Pics_Clear()
-		ssh.Contact1Pics.Clear()
-		ssh.Contact1PicsCount = -1
-	End Sub
-
-	Public Sub Contact2Pics_Load()
-		Contact2Pics_Clear()
-		ssh.Contact2Pics = Slideshow.Get_Contact2Images()
-	End Sub
-
-	Public Sub Contact2Pics_Clear()
-		ssh.Contact2Pics.Clear()
-		ssh.Contact2PicsCount = -1
-	End Sub
-
-	Public Sub Contact3Pics_Load()
-		Contact3Pics_Clear()
-		ssh.Contact3Pics = Slideshow.Get_Contact3Images()
-	End Sub
-
-	Public Sub Contact3Pics_Clear()
-		ssh.Contact3Pics.Clear()
-		ssh.Contact3PicsCount = -1
-	End Sub
 
 
 	Private Sub Contact1Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact1Timer.Tick
@@ -18639,9 +18544,9 @@ GetDommeSlideshow:
 		'SettingsList.Add("Contact1Pics: " & Contact1Pics)
 		'SettingsList.Add("Contact2Pics: " & Contact2Pics)
 		'SettingsList.Add("Contact3Pics: " & Contact3Pics)
-		SettingsList.Add("Contact1PicsCount: " & ssh.Contact1PicsCount)
-		SettingsList.Add("Contact2PicsCount: " & ssh.Contact2PicsCount)
-		SettingsList.Add("Contact3PicsCount: " & ssh.Contact3PicsCount)
+		SettingsList.Add("Contact1PicsCount: --obsolete--") ' for compatibility
+		SettingsList.Add("Contact2PicsCount: --obsolete--") ' for compatibility
+		SettingsList.Add("Contact3PicsCount: --obsolete--") ' for compatibility
 		SettingsList.Add("Group: " & ssh.Group)
 		SettingsList.Add("CustomTask: " & ssh.CustomTask)
 		SettingsList.Add("CustomTaskFirst: " & ssh.CustomTaskFirst)
@@ -18911,38 +18816,38 @@ GetDommeSlideshow:
 			If File.Exists(SettingsPath & ResumePrefix & "CustomSlideshowList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "CustomSlideshowList.txt")
 		End If
 
-		If ssh.Contact1Pics.Count > 0 Then
-			SettingsString = ""
-			For i As Integer = 0 To ssh.Contact1Pics.Count - 1
-				SettingsString = SettingsString & ssh.Contact1Pics(i)
-				If i <> ssh.Contact1Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-			Next
-			My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "Contact1Pics.txt", SettingsString, False)
-		Else
-			If File.Exists(SettingsPath & ResumePrefix & "Contact1Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "Contact1Pics.txt")
-		End If
+		'If ssh.Contact1Pics.Count > 0 Then
+		'	SettingsString = ""
+		'	For i As Integer = 0 To ssh.Contact1Pics.Count - 1
+		'		SettingsString = SettingsString & ssh.Contact1Pics(i)
+		'		If i <> ssh.Contact1Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+		'	Next
+		'	My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "Contact1Pics.txt", SettingsString, False)
+		'Else
+		'	If File.Exists(SettingsPath & ResumePrefix & "Contact1Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "Contact1Pics.txt")
+		'End If
 
-		If ssh.Contact2Pics.Count > 0 Then
-			SettingsString = ""
-			For i As Integer = 0 To ssh.Contact2Pics.Count - 1
-				SettingsString = SettingsString & ssh.Contact2Pics(i)
-				If i <> ssh.Contact2Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-			Next
-			My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "Contact2Pics.txt", SettingsString, False)
-		Else
-			If File.Exists(SettingsPath & ResumePrefix & "Contact2Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "Contact2Pics.txt")
-		End If
+		'If ssh.Contact2Pics.Count > 0 Then
+		'	SettingsString = ""
+		'	For i As Integer = 0 To ssh.Contact2Pics.Count - 1
+		'		SettingsString = SettingsString & ssh.Contact2Pics(i)
+		'		If i <> ssh.Contact2Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+		'	Next
+		'	My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "Contact2Pics.txt", SettingsString, False)
+		'Else
+		'	If File.Exists(SettingsPath & ResumePrefix & "Contact2Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "Contact2Pics.txt")
+		'End If
 
-		If ssh.Contact3Pics.Count > 0 Then
-			SettingsString = ""
-			For i As Integer = 0 To ssh.Contact3Pics.Count - 1
-				SettingsString = SettingsString & ssh.Contact3Pics(i)
-				If i <> ssh.Contact3Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-			Next
-			My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "Contact3Pics.txt", SettingsString, False)
-		Else
-			If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "Contact3Pics.txt")
-		End If
+		'If ssh.Contact3Pics.Count > 0 Then
+		'	SettingsString = ""
+		'	For i As Integer = 0 To ssh.Contact3Pics.Count - 1
+		'		SettingsString = SettingsString & ssh.Contact3Pics(i)
+		'		If i <> ssh.Contact3Pics.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+		'	Next
+		'	My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "Contact3Pics.txt", SettingsString, False)
+		'Else
+		'	If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "Contact3Pics.txt")
+		'End If
 
 		ssh.ResetFlag = False
 
@@ -19238,9 +19143,9 @@ GetDommeSlideshow:
 		ssh.RapidFire = SettingsList(261).Replace("RapidFire: ", "")
 		ssh.GlitterTease = SettingsList(262).Replace("GlitterTease: ", "")
 		ssh.AddContactTick = SettingsList(263).Replace("AddContactTick: ", "")
-		ssh.Contact1PicsCount = SettingsList(264).Replace("Contact1PicsCount: ", "")
-		ssh.Contact2PicsCount = SettingsList(265).Replace("Contact2PicsCount: ", "")
-		ssh.Contact3PicsCount = SettingsList(266).Replace("Contact3PicsCount: ", "")
+		'ssh.Contact1PicsCount = SettingsList(264).Replace("Contact1PicsCount: ", "")
+		'ssh.Contact2PicsCount = SettingsList(265).Replace("Contact2PicsCount: ", "")
+		'ssh.Contact3PicsCount = SettingsList(266).Replace("Contact3PicsCount: ", "")
 		ssh.Group = SettingsList(267).Replace("Group: ", "")
 		ssh.CustomTask = SettingsList(268).Replace("CustomTask: ", "")
 		ssh.CustomTaskFirst = SettingsList(269).Replace("CustomTaskFirst: ", "")
@@ -19375,10 +19280,10 @@ GetDommeSlideshow:
 		If File.Exists(SettingsPath & ResumePrefix & "AssList.txt") Then ssh.AssList = Txt2List(SettingsPath & ResumePrefix & "AssList.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "UpdateList.txt") Then ssh.UpdateList = Txt2List(SettingsPath & ResumePrefix & "UpdateList.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "CustomSlideshowList.txt") Then ssh.CustomSlideshowList = Txt2List(SettingsPath & ResumePrefix & "CustomSlideshowList.txt")
-		If File.Exists(SettingsPath & ResumePrefix & "Contact1Pics.txt") Then ssh.Contact1Pics = Txt2List(SettingsPath & ResumePrefix & "Contact1Pics.txt")
-		If File.Exists(SettingsPath & ResumePrefix & "Contact2Pics.txt") Then ssh.Contact2Pics = Txt2List(SettingsPath & ResumePrefix & "Contact2Pics.txt")
+		'If File.Exists(SettingsPath & ResumePrefix & "Contact1Pics.txt") Then ssh.Contact1Pics = Txt2List(SettingsPath & ResumePrefix & "Contact1Pics.txt")
+		'If File.Exists(SettingsPath & ResumePrefix & "Contact2Pics.txt") Then ssh.Contact2Pics = Txt2List(SettingsPath & ResumePrefix & "Contact2Pics.txt")
 		' Github Patch If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then Contact3Pics = Txt2List(SettingsPath & "Contact3Pics.txt")
-		If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then ssh.Contact3Pics = Txt2List(SettingsPath & ResumePrefix & "Contact3Pics.txt")
+		'If File.Exists(SettingsPath & ResumePrefix & "Contact3Pics.txt") Then ssh.Contact3Pics = Txt2List(SettingsPath & ResumePrefix & "Contact3Pics.txt")
 
 		If ssh.SlideshowLoaded = True Then
 			If File.Exists(ssh._ImageFileNames(ssh.FileCount)) Then
