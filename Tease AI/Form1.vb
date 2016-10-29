@@ -19557,8 +19557,12 @@ GetDommeSlideshow:
 			MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
-		ssh = New My.SessionState()
-		ssh.activate(Me)
+		ssh = New My.SessionState(Me)
+
+		If ssh.DomTypeCheck = False Then
+			ssh.DomTask = "<b>Tease AI has been reset</b>"
+			TypingDelayGeneric()
+		End If
 
 		Exit Sub
 		StopEverything()

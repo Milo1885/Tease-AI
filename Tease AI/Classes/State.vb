@@ -16,8 +16,9 @@ Namespace My
 	''' </remarks>
 	<Serializable>
 	Public Class SessionState
-		'TODO-Next: Add serializing of flags and variables.
 		'TODO-Next: Clode Cleanup
+
+#Region "------------------------------------------- Data -----------------------------------------------"
 		Public Property Chat As String
 
 		Public Property SlideshowDomme As Slideshow
@@ -43,7 +44,7 @@ Namespace My
 
 		Public Responding As Boolean
 
-		Public StrokeTauntVal As Integer
+		Public StrokeTauntVal As Integer = -1
 		Public FileText As String
 		Public TempStrokeTauntVal As Integer
 		Public TempFileText As String
@@ -61,8 +62,8 @@ Namespace My
 		Public SkipGotoLine As Boolean
 
 		Public ChatString As String
-		Public DomTask As String = String.Empty
-		Public DomChat As String
+		Public DomTask As String = "@SystemMessage <b>Tease AI has been reset</b>"
+		Public DomChat As String = "@SystemMessage <b>Tease AI has been reset</b>"
 		Public TypeDelay As Integer
 		Public TempVal As Integer
 		Public NullResponse As Boolean
@@ -84,8 +85,8 @@ Namespace My
 		Public CBTCockFlag As Boolean
 		Public CBTBallsFlag As Boolean
 
-		Public CBTBallsFirst As Boolean
-		Public CBTCockFirst As Boolean
+		Public CBTBallsFirst As Boolean = True
+		Public CBTCockFirst As Boolean = True
 
 		Public CBTBallsCount As Integer
 		Public CBTCockCount As Integer
@@ -119,8 +120,8 @@ Namespace My
 		Public DomTypeCheck As Boolean
 		Public TypeToggle As Boolean
 		Public IsTyping As Boolean
-		Public SubWroteLast As Boolean
-		Public YesOrNo As Boolean
+		Public SubWroteLast As Boolean = False
+		Public YesOrNo As Boolean = False
 		Public GotoFlag As Boolean
 
 		Public CBT As Boolean
@@ -128,12 +129,12 @@ Namespace My
 		Public RunningScript As Boolean
 
 		Public BeforeTease As Boolean
-		Public SubStroking As Boolean
-		Public SubEdging As Boolean
-		Public SubHoldingEdge As Boolean
+		Public SubStroking As Boolean = False
+		Public SubEdging As Boolean = False
+		Public SubHoldingEdge As Boolean = False
 		Public EndTease As Boolean
 
-		Public ShowModule As Boolean
+		Public ShowModule As Boolean = False
 		Public ModuleEnd As Boolean
 
 		Public DivideText As Boolean
@@ -144,14 +145,14 @@ Namespace My
 		Public EdgeHold As Boolean
 		Public EdgeNoHold As Boolean
 		Public EdgeToRuin As Boolean
-		Public EdgeToRuinSecret As Boolean
+		Public EdgeToRuinSecret As Boolean = True
 		Public LongEdge As Boolean
 
 		Public AskedToGiveUp As Boolean
 		Public AskedToGiveUpSection As Boolean
 		Public SubGaveUp As Boolean
-		Public AskedToSpeedUp As Boolean
-		Public AskedToSlowDown As Boolean
+		Public AskedToSpeedUp As Boolean = False
+		Public AskedToSlowDown As Boolean = False
 
 		<Obsolete("Only used in Supend/Resume")>
 		Public ThoughtEnd As Boolean
@@ -160,7 +161,7 @@ Namespace My
 
 
 		Public DommeVideo As Boolean
-		Public VideoType As String
+		Public VideoType As String = "General"
 		Public CensorshipGame As Boolean
 		Public CensorshipTick As Integer
 		Public CensorDuration As String
@@ -198,7 +199,7 @@ Namespace My
 		<Obsolete("Only used in Supend/resume")>
 		Public GlitterTempColor As String
 
-		Public UpdatesTick As Integer
+		Public UpdatesTick As Integer = 120
 		Public UpdatingPost As Boolean
 		Public UpdateStage As Integer
 		Public UpdateStageTick As Integer
@@ -271,12 +272,12 @@ Namespace My
 		Public LastScriptCountdown As Integer
 		Public LastScript As Boolean
 
-		Public JustShowedBlogImage As Boolean
+		Public JustShowedBlogImage As Boolean = False
 
-		Public SaidHello As Boolean
+		Public SaidHello As Boolean = False
 
 		<Obsolete("Unused variable. Set often to some values, but Metronome uses StrokePace and the the CheckBoxValue in Metronome app")>
-		Public StopMetronome As Boolean
+		Public StopMetronome As Boolean = True
 
 		Public AvgEdgeStroking As Integer
 		Public AvgEdgeNoTouch As Integer
@@ -295,10 +296,10 @@ Namespace My
 		Public WritingTaskLinesRemaining As Integer
 		Public WritingTaskMistakesAllowed As Integer
 		Public WritingTaskMistakesMade As Integer
-		Public WritingTaskFlag As Boolean
+		Public WritingTaskFlag As Boolean = False
 
 		Public FirstRound As Boolean
-		Public StartStrokingCount As Integer
+		Public StartStrokingCount As Integer = 0
 		<Obsolete("Not used anymore.")>
 		Public TeaseJOI As Boolean
 		Public TeaseVideo As Boolean
@@ -317,10 +318,10 @@ Namespace My
 		Public TagSexToy As String = "NULL"
 		Public TagFurniture As String = "NULL"
 
-		Public BookmarkModule As Boolean
+		Public BookmarkModule As Boolean = False
 		Public BookmarkModuleFile As String
 		Public BookmarkModuleLine As Integer
-		Public BookmarkLink As Boolean
+		Public BookmarkLink As Boolean = False
 		Public BookmarkLinkFile As String
 		Public BookmarkLinkLine As Integer
 
@@ -349,7 +350,7 @@ Namespace My
 
 		Public EdgeFound As Boolean
 
-		Public OrgasmYesNo As Boolean
+		Public OrgasmYesNo As Boolean = False
 		<Obsolete("Not used anymore.")>
 		Public VTFlag As Boolean
 
@@ -377,7 +378,7 @@ Namespace My
 		Public Group As String = "D"
 
 		Public CustomTask As Boolean
-		Public CustomTaskFirst As Boolean
+		Public CustomTaskFirst As Boolean = True
 		Public CustomTaskText As String
 		Public CustomTaskTextFirst As String
 		Public CustomTaskActive As Boolean
@@ -460,12 +461,11 @@ Namespace My
 		Public CBTBothActive As Boolean
 		Public CBTBothFlag As Boolean
 		Public CBTBothCount As Integer
-		Public CBTBothFirst As Boolean
+		Public CBTBothFirst As Boolean = True
 
 
-		Public Event StrokePaceChanged(ByVal Pace As Integer)
 
-		Public StrokePace As Integer
+		Public StrokePace As Integer = 0
 
 		Public GeneralTime As String = "Afternoon"
 
@@ -495,16 +495,16 @@ Namespace My
 
 		Public FollowUp As String = ""
 
-		Public WorshipMode As Boolean
+		Public WorshipMode As Boolean = False
 		Public WorshipTarget As String = ""
 
-		Public LongHold As Boolean
-		Public ExtremeHold As Boolean
+		Public LongHold As Boolean = False
+		Public ExtremeHold As Boolean = False
 		Public LongTaunts As Boolean
 
 
 
-		Public MiniScript As Boolean
+		Public MiniScript As Boolean = False
 		Public MiniScriptText As String
 		Public MiniTauntVal As Integer
 		Public MiniTimerCheck As Boolean
@@ -513,9 +513,9 @@ Namespace My
 		Public JumpVideo As Boolean
 		Public VideoTick As Integer
 
-		Public EdgeGoto As Boolean
-		Public EdgeMessage As Boolean
-		Public EdgeVideo As Boolean
+		Public EdgeGoto As Boolean = False
+		Public EdgeMessage As Boolean = False
+		Public EdgeVideo As Boolean = False
 
 		Public EdgeMessageText As String
 		Public EdgeGotoLine As String
@@ -526,22 +526,38 @@ Namespace My
 		Public MultipleEdgesTick As Integer
 		Public MultipleEdgesMetronome As String = ""
 
-		Public YesGoto As Boolean
-		Public YesVideo As Boolean
-		Public NoGoto As Boolean
-		Public NoVideo_Mode As Boolean
-		Public CameGoto As Boolean
-		Public CameVideo As Boolean
-		Public CameMessage As Boolean
+		Public YesGoto As Boolean = False
+		Public YesVideo As Boolean = False
+		Public NoGoto As Boolean = False
+		Public NoVideo_Mode As Boolean = False
+		Public CameGoto As Boolean = False
+		Public CameVideo As Boolean = False
+		Public CameMessage As Boolean = False
 		Public CameMessageText As String
-		Public RuinedGoto As Boolean
-		Public RuinedVideo As Boolean
-		Public RuinedMessage As Boolean
+		Public RuinedGoto As Boolean = False
+		Public RuinedVideo As Boolean = False
+		Public RuinedMessage As Boolean = False
 		Public RuinedMessageText As String
 		Public YesGotoLine As String
 		Public NoGotoLine As String
 		Public CameGotoLine As String
 		Public RuinedGotoLine As String
+
+		''' <summary>
+		''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
+		''' </summary>
+		''' <remarks>
+		''' Uses following vocabulary Files:
+		''' #SYS_TauntEdging.txt when the taunting begins.
+		''' #SYS_TauntEdgingAsked.txt if the sub continues to tell he's on the edge.
+		''' </remarks>
+		Public TauntEdging As Boolean = False
+
+		Public Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
+
+		Public WritingTaskCurrentTime As Single
+
+#Region "----------------------------------- Only for Serialization -------------------------------------"
 
 #Region "----------------------------------------- Form1.WMP --------------------------------------------"
 
@@ -628,25 +644,117 @@ Namespace My
 
 #End Region ' Form1.Timers
 
+#Region "--------------------------------------- Flags/Variables ----------------------------------------"
+
+		Public serialized_Flags As List(Of String) = New List(Of String)
+		Public serialized_FlagsTemp As List(Of String) = New List(Of String)
+		Public serialized_Variables As New Dictionary(Of String, String)
+
+#End Region ' Flags/Variables
+
+#End Region ' Only for Serialization
+
+#End Region ' DataSection
+
+#Region "------------------------------------- Constructors----------------------------------------------"
+
 		''' <summary>
-		''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
+		''' Creates a new unactivaed instance.
 		''' </summary>
-		''' <remarks>
-		''' Uses following vocabulary Files:
-		''' #SYS_TauntEdging.txt when the taunting begins.
-		''' #SYS_TauntEdgingAsked.txt if the sub continues to tell he's on the edge.
-		''' </remarks>
-		Public TauntEdging As Boolean
-
-		Public Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
-
-		Public WritingTaskCurrentTime As Single
-
 		Sub New() : End Sub
 
+		''' <summary>
+		''' Creates a new instance and activates it on the given Form.
+		''' </summary>
+		''' <param name="ActivationForm">The Form on which to apply the session.</param>
+		Sub New(ByVal ActivationForm As Form1)
+			activate(ActivationForm)
+		End Sub
+
+#End Region ' Constructors
+
+#Region "----------------------------------------- Paths ------------------------------------------------"
+		''' <summary>
+		''' Returns the Path for the selected personality. Ends with Backslash!
+		''' </summary>
+		''' <returns>The Path for the selected personality. Ends with Backslash!</returns>
+		Friend ReadOnly Property PersonalityPath As String
+			Get
+				Return String.Format("{0}\Scripts\{1}\",
+									  Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly.Location),
+									  DomPersonality)
+			End Get
+		End Property
+		''' <summary>
+		''' Returns the Path for the selected personalities flags. Ends with Backslash!
+		''' </summary>
+		''' <returns>The Path for the selected personalities flags. Ends with Backslash!</returns>
+		Friend ReadOnly Property PersonalityFlagPath As String
+			Get
+				Return String.Format("{0}System\Flags\", PersonalityPath)
+			End Get
+		End Property
+		''' <summary>
+		''' Returns the Path for the selected personalities temporary flags. Ends with Backslash!
+		''' </summary>
+		''' <returns>The Path for the selected personalities temporary flags. Ends with Backslash!</returns>
+		Friend ReadOnly Property PersonalityFlagTempPath As String
+			Get
+				Return String.Format("{0}Temp\", PersonalityFlagPath)
+			End Get
+		End Property
+		''' <summary>
+		''' Returns the Path for the selected personalities variables. Ends with Backslash!
+		''' </summary>
+		''' <returns>The Path for the selected personalities variables. Ends with Backslash!</returns>
+		Friend ReadOnly Property PersonalityVariablesPath As String
+			Get
+				Return String.Format("{0}System\Variables\", PersonalityPath)
+			End Get
+		End Property
+
+#End Region ' Paths
 
 		Friend Sub activate(ByVal ActivationForm As Form1)
 			With ActivationForm
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'							Disable Timers to avoid Exceptions
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				.AudibleMetronome.Enabled = False
+				.AvoidTheEdge.Enabled = False
+				.AvoidTheEdgeResume.Enabled = False
+				.AvoidTheEdgeTaunts.Enabled = False
+				.CensorshipTimer.Enabled = False
+				.Contact1Timer.Enabled = False
+				.Contact2Timer.Enabled = False
+				.Contact3Timer.Enabled = False
+				.ContactTimer.Enabled = False
+				.CustomSlideshowTimer.Enabled = False
+				.DelayTimer.Enabled = False
+				.EdgeCountTimer.Enabled = False
+				.EdgeTauntTimer.Enabled = False
+				.HoldEdgeTauntTimer.Enabled = False
+				.HoldEdgeTimer.Enabled = False
+				.IsTypingTimer.Enabled = False
+				.RLGLTauntTimer.Enabled = False
+				.RLGLTimer.Enabled = False
+				.SendTimer.Enabled = False
+				.SlideshowTimer.Enabled = False
+				.StrokeTauntTimer.Enabled = False
+				.StrokeTimer.Enabled = False
+				.StrokeTimeTotalTimer.Enabled = False
+				.StupidTimer.Enabled = False
+				.TeaseTimer.Enabled = False
+				.Timer1.Enabled = False
+				.TnASlides.Enabled = False
+				.UpdateStageTimer.Enabled = False
+				.UpdatesTimer.Enabled = False
+				.VideoTauntTimer.Enabled = False
+				.WaitTimer.Enabled = False
+				.WMPTimer.Enabled = False
+
+
+
 				.ssh = Me
 
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -660,6 +768,59 @@ Namespace My
 					Throw New Exception("The personality """ & DomPersonality & """ was not found.")
 				Else
 					.dompersonalitycombobox.SelectedItem = DomPersonality
+				End If
+
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'							Restore Variables 
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				If serialized_Variables.Count > 0 Then
+					If Directory.Exists(PersonalityVariablesPath) = False Then
+						Directory.CreateDirectory(PersonalityVariablesPath)
+					Else
+						For Each fn As String In Directory.GetFiles(PersonalityVariablesPath)
+							File.Delete(fn)
+						Next
+					End If
+
+					For Each fn As String In serialized_Variables.Keys
+						Computer.FileSystem.WriteAllText(PersonalityVariablesPath & fn,
+														serialized_Variables(fn), False)
+					Next
+				End If
+
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'							Restore flags 
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				If serialized_Flags.Count > 0 Then
+					If Directory.Exists(PersonalityFlagPath) = False Then
+						Directory.CreateDirectory(PersonalityFlagPath)
+					Else
+						For Each fn As String In Directory.GetFiles(PersonalityFlagPath)
+							File.Delete(fn)
+						Next
+					End If
+
+					For Each fn As String In serialized_Flags
+						Using fs As New FileStream(PersonalityFlagPath & fn,
+												   FileMode.Create) : End Using
+					Next
+				End If
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'						Restore temporary flags 
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				If serialized_FlagsTemp.Count > 0 Then
+					If Directory.Exists(PersonalityFlagTempPath) = False Then
+						Directory.CreateDirectory(PersonalityFlagTempPath)
+					Else
+						For Each fn As String In Directory.GetFiles(PersonalityFlagTempPath)
+							File.Delete(fn)
+						Next
+					End If
+
+					For Each fn As String In serialized_FlagsTemp
+						Using fs As New FileStream(PersonalityFlagTempPath & fn,
+												   FileMode.Create) : End Using
+					Next
 				End If
 
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -869,6 +1030,47 @@ Namespace My
 					serialized_WMP_URL = .DomWMP.URL
 					serialized_WMP_Playstate = .DomWMP.playState
 					serialized_WMP_Position = .DomWMP.Ctlcontrols.currentPosition
+
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'								Get Flags
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					If serialized_Flags Is Nothing Then _
+						serialized_Flags = New List(Of String)
+
+					serialized_Flags.Clear()
+
+					If Directory.Exists(PersonalityFlagPath) Then
+						For Each fn As String In Directory.GetFiles(PersonalityFlagPath)
+							serialized_Flags.Add(Path.GetFileName(fn))
+						Next
+					End If
+
+					' Get temporary Flags
+					If serialized_FlagsTemp Is Nothing Then _
+						serialized_FlagsTemp = New List(Of String)
+					serialized_FlagsTemp.Clear()
+
+					If Directory.Exists(PersonalityFlagTempPath) Then
+						For Each fn As String In Directory.GetFiles(PersonalityFlagTempPath)
+							serialized_FlagsTemp.Add(fn)
+						Next
+					End If
+
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					'								Get Variables
+					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+					If serialized_Variables Is Nothing Then _
+						serialized_Variables = New Dictionary(Of String, String)
+
+					serialized_Variables.Clear()
+
+					If Directory.Exists(PersonalityVariablesPath) Then
+						For Each fn As String In Directory.GetFiles(PersonalityVariablesPath)
+							Dim val As String = TxtReadLine(fn)
+							serialized_Variables.Add(Path.GetFileName(fn), val)
+						Next
+					End If
+
 
 				End With
 
