@@ -24,6 +24,8 @@ Bugfixes:
 	@ImageTag()-Command displays now tagged images. Up to 3 Tags are allowed. by Stefaf
 	Resolved an infinite loop, when TauntEdging was started. by Stefaf
 	Goto was unable to jump to the first line of a file, when a question was asked. by Stefaf
+	@Chance##()-Command now gets cleaned from the line correctly. by Pepsifreak
+	@FollowUp##()-Command now gets cleaned from the line correctly, also stopped the followup message from still partially showing in "failure" cases. by Pepsifreak
 
 Miscellaneous:
 
