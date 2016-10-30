@@ -9602,8 +9602,8 @@ ShowedBlogImage:
 			Dim ChanceSplit As String() = Split(ChanceString, ")")
 
 
-			Debug.Print("CHanceCheck = " & "@Chance" & ChanceVal & ChanceSplit(0) & ")")
-			StringClean = StringClean.Replace("@Chance" & ChanceVal & ChanceSplit(0) & ")", "")
+			Debug.Print("CHanceCheck = " & "@Chance" & ChanceTemp & ChanceSplit(0) & ")")
+			StringClean = StringClean.Replace("@Chance" & ChanceTemp & ChanceSplit(0) & ")", "")
 
 			If ssh.TempVal <= ChanceVal Then
 
@@ -13070,19 +13070,27 @@ VTSkip:
 
 		If StringClean.Contains("@FollowUp") And ssh.FollowUp = "" Then
 
+			Dim FollowTemp As String
 			Dim TSStartIndex As Integer
 			Dim TSEndIndex As Integer
 
 			TSStartIndex = StringClean.IndexOf("@FollowUp") + 9
 			TSEndIndex = StringClean.IndexOf("@FollowUp") + 11
 
-			Dim FollowVal As Integer = Val(StringClean.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim)
+			FollowTemp = StringClean.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim
+
+			Dim FollowVal As Integer
+
+			FollowVal = Val(FollowTemp)
 
 			ssh.TempVal = ssh.randomizer.Next(1, 101)
 
-			If ssh.TempVal <= FollowVal Then ssh.FollowUp = GetParentheses(StringClean, "@FollowUp" & FollowVal & "(")
+			Dim FollowLineTemp As String
+			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(")
 
-			StringClean = StringClean.Replace("@FollowUp" & FollowVal & "(" & ssh.FollowUp & ")", "")
+			If ssh.TempVal <= FollowVal Then ssh.FollowUp = FollowLineTemp
+
+			StringClean = StringClean.Replace("@FollowUp" & FollowTemp & "(" & FollowLineTemp & ")", "")
 
 		End If
 
@@ -13989,9 +13997,9 @@ VTSkip:
 			If File.Exists(__targetFolder & "\ImageTags.txt") Then
 				Dim task1 As Tasks.Task(Of String) = Tasks.Task.Factory.StartNew(
 					Function() As String
-						'×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
-						'                           Parallel Task - Beyond this Line: INVOKE IS REQUIRED...
-						CheckForIllegalCrossThreadCalls = True  ' Plz Leave it True, and inform me, if there is an error
+                        '×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+                        '                           Parallel Task - Beyond this Line: INVOKE IS REQUIRED...
+                        CheckForIllegalCrossThreadCalls = True  ' Plz Leave it True, and inform me, if there is an error
                         Dim ___retryStage As Integer = 0
 						Dim ___DomTag_Base As String = DomTag
 						Dim ___DomTag_Work As String = ___DomTag_Base
@@ -14110,10 +14118,10 @@ FileNotFound_GetNext:
 						Dim ___CurrDist As Integer = 999999
 						'############################### Get nearest Image ###############################
 						For Each ___ForFile As String In ___FoundFiles
-					' Calculate the distance of ListIndex from the FoundFile to CurrentImage
-					Dim ___FileDist As Integer = slide.ImageList.IndexOf(__targetFolder & "\" & ___ForFile) - slide.ImageList.Count
-					' Convert negative values to positive by multipling (-) x (-) = (+) 
-					If ___FileDist < 0 Then ___FileDist *= -1
+							' Calculate the distance of ListIndex from the FoundFile to CurrentImage
+							Dim ___FileDist As Integer = slide.ImageList.IndexOf(__targetFolder & "\" & ___ForFile) - slide.ImageList.Count
+							' Convert negative values to positive by multipling (-) x (-) = (+) 
+							If ___FileDist < 0 Then ___FileDist *= -1
 							' Check if the distance is bigger than the previous one
 							If ___FileDist < ___CurrDist Then
 								' Yes: We will set this file and save its distance
@@ -14160,8 +14168,8 @@ Skip_RandomFile:
 						'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Task °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 				End Function)
 
-				' Wait for Task to end, Withour freezing UI
-				Do Until task1.IsCompleted Or task1.IsFaulted
+                ' Wait for Task to end, Withour freezing UI
+                Do Until task1.IsCompleted Or task1.IsFaulted
 					Application.DoEvents()
 				Loop
                 ' Check if there was an exception, if yes rethrow it.

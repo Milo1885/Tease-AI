@@ -28,6 +28,8 @@ Bugfixes:
 	Goto was unable to jump to the first line of a file, when a question was asked.
 	Card images were saved in different sizes, when using drag-drop or file dialog.
 	@DommeLevel1-5 didn't filter correct in vocabulary files.
+	@Chance##()-Command now gets cleaned from the line correctly. by Pepsifreak
+	@FollowUp##()-Command now gets cleaned from the line correctly, also stopped the followup message from still partially showing in "failure" cases. by Pepsifreak
 
 Miscellaneous:
 
@@ -37,7 +39,7 @@ Miscellaneous:
 	SettingsForm Apps-Games GUI reworked.
 	Suspending/Resuming/Resetting Session reworked.
 		Now all necessary data is stored into a single binary *.save file. This includes all Variables, Flags, Slideshows, TimerStates and regular Data. By Holding down the control key while clicking suspend or resume the user is asked for a custom file to save to or load from.
-	
+
 
 # Changelog - Patch 54.4.0
 
