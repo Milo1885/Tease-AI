@@ -10290,8 +10290,8 @@ ShowedBlogImage:
 			Dim ChanceSplit As String() = Split(ChanceString, ")")
 
 
-			Debug.Print("CHanceCheck = " & "@Chance" & ChanceVal & ChanceSplit(0) & ")")
-			StringClean = StringClean.Replace("@Chance" & ChanceVal & ChanceSplit(0) & ")", "")
+			Debug.Print("CHanceCheck = " & "@Chance" & ChanceTemp & ChanceSplit(0) & ")")
+			StringClean = StringClean.Replace("@Chance" & ChanceTemp & ChanceSplit(0) & ")", "")
 
 			If TempVal <= ChanceVal Then
 
@@ -13764,19 +13764,27 @@ VTSkip:
 
 		If StringClean.Contains("@FollowUp") And FollowUp = "" Then
 
+			Dim FollowTemp As String
 			Dim TSStartIndex As Integer
 			Dim TSEndIndex As Integer
 
 			TSStartIndex = StringClean.IndexOf("@FollowUp") + 9
 			TSEndIndex = StringClean.IndexOf("@FollowUp") + 11
 
-			Dim FollowVal As Integer = Val(StringClean.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim)
+			FollowTemp = StringClean.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim
+
+			Dim FollowVal As Integer
+
+			FollowVal = Val(FollowTemp)
 
 			TempVal = randomizer.Next(1, 101)
 
-			If TempVal <= FollowVal Then FollowUp = GetParentheses(StringClean, "@FollowUp" & FollowVal & "(")
+			Dim FollowLineTemp As String
+			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(")
 
-			StringClean = StringClean.Replace("@FollowUp" & FollowVal & "(" & FollowUp & ")", "")
+			If TempVal <= FollowVal Then FollowUp = FollowLineTemp
+
+			StringClean = StringClean.Replace("@FollowUp" & FollowTemp & "(" & FollowLineTemp & ")", "")
 
 		End If
 
