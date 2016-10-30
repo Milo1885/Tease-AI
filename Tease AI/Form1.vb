@@ -124,6 +124,7 @@ Public Class Form1
 	Public ApplyingTheme As Boolean
 	Public AdjustingWindow As Boolean
 	Public SplitContainerHeight As Integer
+	Public WindowCheck As Boolean
 
 	Private Const DISABLE_SOUNDS As Integer = 21
 	Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -339,7 +340,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			Loop Until My.Settings.TC2Agreed = True
 		End If
 
-
+		''===============================================================================
+		''					Create a new Session-State instance
+		''===============================================================================
+		'ssh = New My.SessionState()
 
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
@@ -18858,19 +18862,19 @@ saveImage:
 	Private Sub Form1_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
 
 		Debug.Print("Resize Called")
-		Debug.Print(Me.WindowState)
-		Debug.Print(Me.ssh.WindowCheck)
+		Debug.Print(WindowState)
+		Debug.Print(WindowCheck)
 
 		Select Case Me.WindowState
 
 			Case FormWindowState.Maximized
 				Debug.Print("Maximized")
-				ssh.WindowCheck = True
+				WindowCheck = True
 				AdjustWindow()
 
-			Case FormWindowState.Normal And ssh.WindowCheck = True
+			Case FormWindowState.Normal And WindowCheck = True
 				Debug.Print("Resized From Maximized")
-				ssh.WindowCheck = False
+				WindowCheck = False
 				AdjustWindow()
 
 		End Select
@@ -21824,5 +21828,7 @@ playLoop:
 		Return Len(StringClean) - Len(Replace(StringClean, Character, ""))
 	End Function
 
-
+	Private Sub DebugSessionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DebugSessionToolStripMenuItem.Click
+		dbgSessionForm.Show()
+	End Sub
 End Class

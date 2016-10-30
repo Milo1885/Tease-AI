@@ -29,6 +29,7 @@ Partial Class Form1
 		Me.mainPictureBox = New System.Windows.Forms.PictureBox()
 		Me.domAvatar = New System.Windows.Forms.PictureBox()
 		Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+		Me.ProgressBar_BGW_Images = New System.Windows.Forms.ProgressBar()
 		Me.CensorshipBar = New System.Windows.Forms.Panel()
 		Me.LBLImageInfo = New System.Windows.Forms.Label()
 		Me.DomWMP = New AxWMPLib.AxWindowsMediaPlayer()
@@ -207,6 +208,7 @@ Partial Class Form1
 		Me.ForumToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.DebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.RunScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.DebugSessionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.DebugMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
 		Me.RefreshRandomizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -360,7 +362,6 @@ Partial Class Form1
 		Me.Button4 = New System.Windows.Forms.Button()
 		Me.Panel3 = New System.Windows.Forms.Panel()
 		Me.Panel4 = New System.Windows.Forms.Panel()
-		Me.ProgressBar_BGW_Images = New System.Windows.Forms.ProgressBar()
 		Me.ScriptTimer = New Tease_AI.teaseAI_Timer()
 		Me.Timer1 = New Tease_AI.teaseAI_Timer()
 		Me.IsTypingTimer = New Tease_AI.teaseAI_Timer()
@@ -523,6 +524,17 @@ Partial Class Form1
 		Me.SplitContainer1.Size = New System.Drawing.Size(1090, 988)
 		Me.SplitContainer1.SplitterDistance = 734
 		Me.SplitContainer1.TabIndex = 136
+		'
+		'ProgressBar_BGW_Images
+		'
+		Me.ProgressBar_BGW_Images.Dock = System.Windows.Forms.DockStyle.Bottom
+		Me.ProgressBar_BGW_Images.Location = New System.Drawing.Point(0, 724)
+		Me.ProgressBar_BGW_Images.MarqueeAnimationSpeed = 10000
+		Me.ProgressBar_BGW_Images.Name = "ProgressBar_BGW_Images"
+		Me.ProgressBar_BGW_Images.Size = New System.Drawing.Size(1086, 6)
+		Me.ProgressBar_BGW_Images.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+		Me.ProgressBar_BGW_Images.TabIndex = 97
+		Me.ProgressBar_BGW_Images.Visible = False
 		'
 		'CensorshipBar
 		'
@@ -2038,7 +2050,7 @@ Partial Class Form1
 		'
 		'DebugToolStripMenuItem
 		'
-		Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunScriptToolStripMenuItem, Me.DebugMenuToolStripMenuItem, Me.ToolStripSeparator13, Me.RefreshRandomizerToolStripMenuItem})
+		Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunScriptToolStripMenuItem, Me.DebugSessionToolStripMenuItem, Me.DebugMenuToolStripMenuItem, Me.ToolStripSeparator13, Me.RefreshRandomizerToolStripMenuItem})
 		Me.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem"
 		Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
 		Me.DebugToolStripMenuItem.Text = "Debug"
@@ -2048,6 +2060,12 @@ Partial Class Form1
 		Me.RunScriptToolStripMenuItem.Name = "RunScriptToolStripMenuItem"
 		Me.RunScriptToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
 		Me.RunScriptToolStripMenuItem.Text = "Run Script"
+		'
+		'DebugSessionToolStripMenuItem
+		'
+		Me.DebugSessionToolStripMenuItem.Name = "DebugSessionToolStripMenuItem"
+		Me.DebugSessionToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+		Me.DebugSessionToolStripMenuItem.Text = "Debug Session"
 		'
 		'DebugMenuToolStripMenuItem
 		'
@@ -3925,17 +3943,6 @@ Partial Class Form1
 		Me.Panel4.Size = New System.Drawing.Size(245, 31)
 		Me.Panel4.TabIndex = 779
 		'
-		'ProgressBar_BGW_Images
-		'
-		Me.ProgressBar_BGW_Images.Dock = System.Windows.Forms.DockStyle.Bottom
-		Me.ProgressBar_BGW_Images.Location = New System.Drawing.Point(0, 724)
-		Me.ProgressBar_BGW_Images.MarqueeAnimationSpeed = 10000
-		Me.ProgressBar_BGW_Images.Name = "ProgressBar_BGW_Images"
-		Me.ProgressBar_BGW_Images.Size = New System.Drawing.Size(1086, 6)
-		Me.ProgressBar_BGW_Images.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-		Me.ProgressBar_BGW_Images.TabIndex = 97
-		Me.ProgressBar_BGW_Images.Visible = False
-		'
 		'ScriptTimer
 		'
 		Me.ScriptTimer.Interval = 1000
@@ -4549,4 +4556,5 @@ Partial Class Form1
 	Friend WithEvents DommeTagBtnLastImage As System.Windows.Forms.Button
 	Private WithEvents PicStripTmsiDisableAnimation As ToolStripMenuItem
 	Friend WithEvents ProgressBar_BGW_Images As ProgressBar
+	Friend WithEvents DebugSessionToolStripMenuItem As ToolStripMenuItem
 End Class
