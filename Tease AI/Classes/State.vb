@@ -19,12 +19,12 @@ Namespace My
 		'TODO-Next: Clode Cleanup
 
 #Region "------------------------------------------- Data -----------------------------------------------"
+		Public Property DomPersonality As String = "" 'My.Settings.DomPersonality
+
 		Public Property Chat As String
 
 		Public randomizer As New Random
 		Public ScriptOperator As String
-		<Obsolete("Only used in Supend/resmue. Don not use anymore")>
-		Public ScriptCompare As String
 
 		Public Property DomTyping As Boolean
 
@@ -143,14 +143,13 @@ Namespace My
 		Public EdgeToRuinSecret As Boolean = True
 		Public LongEdge As Boolean
 
+		<Obsolete("Never set to true but never used.")>
 		Public AskedToGiveUp As Boolean
 		Public AskedToGiveUpSection As Boolean
 		Public SubGaveUp As Boolean
 		Public AskedToSpeedUp As Boolean = False
 		Public AskedToSlowDown As Boolean = False
 
-		<Obsolete("Only used in Supend/Resume")>
-		Public ThoughtEnd As Boolean
 		<Obsolete("Used in #VTLenth but delivers a wrong value.")>
 		Public VTLength As Integer
 
@@ -159,11 +158,8 @@ Namespace My
 		Public VideoType As String = "General"
 		Public CensorshipGame As Boolean
 		Public CensorshipTick As Integer
-		Public CensorDuration As String
 		Public AvoidTheEdgeGame As Boolean
 		Public AvoidTheEdgeTick As Integer
-		Public AvoidTheEdgeTimerTick As Integer
-		Public AvoidTheEdgeDuration As String
 		Public AvoidTheEdgeStroking As Boolean
 		Public AtECountdown As Integer
 
@@ -174,7 +170,6 @@ Namespace My
 		Public VideoTease As Boolean
 
 		Public RLGLGame As Boolean
-		Public RLGLStroking As Boolean
 		Public RLGLTick As Integer
 		Public RedLight As Boolean
 		Public RLGLTauntTick As Integer
@@ -189,10 +184,6 @@ Namespace My
 
 
 		Public SlideshowLoaded As Boolean
-		<Obsolete("Only used in Supend/resume")>
-		Public GlitterImageAV As String = IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) & "\Images\Glitter\01.jpg"
-		<Obsolete("Only used in Supend/resume")>
-		Public GlitterTempColor As String
 
 		Public UpdatesTick As Integer = 120
 		Public UpdatingPost As Boolean
@@ -202,8 +193,6 @@ Namespace My
 		Public ContactNumber As Integer
 		Public ContactTick As Integer
 
-		<Obsolete("Only used in Supend/resume. Only once set to false")>
-		Public ContactFlag As Boolean
 		Public StatusText1 As String
 		Public StatusText2 As String
 		Public StatusText3 As String
@@ -218,8 +207,6 @@ Namespace My
 
 		<Obsolete("Non threadsafe duplicate of My.Settings.RecentSlideshows. Use this instead.")>
 		Public RecentSlideshows As New List(Of String)
-		<Obsolete("Read data using MainPictureBox.ImageLocation. Set data using ShowImage(String, Boolean) in future releases.")>
-		Public MainPictureImage As String
 		Public DomPic As String
 
 		Public LockImage As Boolean
@@ -227,15 +214,6 @@ Namespace My
 
 		Public LocalTagImageList As New List(Of String)
 
-		<Obsolete("Not used anymore. Never set, but once resetted.")>
-		Public Crazy As Boolean
-		<Obsolete("Not used anymore. Never set, but once resetted.")>
-		Public Vulgar As Boolean
-		<Obsolete("Not used anymore. Never set, but once resetted.")>
-		Public Supremacist As Boolean
-
-		<Obsolete("Overrides the User.Config Settings on resumse Session. Not really nice.")>
-		Public CockSize As Integer
 		Public PetName As String
 
 		Public TauntText As String
@@ -256,8 +234,6 @@ Namespace My
 
 		Public SaidHello As Boolean = False
 
-		<Obsolete("Unused variable. Set often to some values, but Metronome uses StrokePace and the the CheckBoxValue in Metronome app")>
-		Public StopMetronome As Boolean = True
 
 		Public AvgEdgeStroking As Integer
 		Public AvgEdgeNoTouch As Integer
@@ -284,8 +260,6 @@ Namespace My
 		Public TeaseJOI As Boolean
 		Public TeaseVideo As Boolean
 
-		<Obsolete("List is splitted up into BoobList and AssList")>
-		Public TnAList As New List(Of String)
 		Public BoobList As New List(Of String)
 		Public AssList As New List(Of String)
 		Public AssImage As Boolean = False
@@ -316,11 +290,6 @@ Namespace My
 		Public OrgasmRuined As Boolean
 		Public LastOrgasmType As String = ""
 
-		<Obsolete("Not used anymore.")>
-		Public StupidTick As Integer
-		<Obsolete("Not used anymore.")>
-		Public StupidFlag As Boolean
-
 		Public CaloriesConsumed As Integer
 		Public CaloriesGoal As Integer
 
@@ -331,18 +300,16 @@ Namespace My
 		Public EdgeFound As Boolean
 
 		Public OrgasmYesNo As Boolean = False
-		<Obsolete("Not used anymore.")>
-		Public VTFlag As Boolean
 
-		Public DomPersonality As String = String.Empty
+
 		Public UpdateList As New List(Of String)
 
-		Public GlitterDocument As String
-
 		Public CustomSlideshow As Boolean
-		<Obsolete("Not used anymore.")>
-		Public CustomSlideshowTick As Integer
 		Public CustomSlideshowList As New List(Of String)
+		''' <summary>
+		''' Addresses the current CustomSlideshow image.
+		''' </summary>
+		Public SlideshowInt As Integer
 		Public ImageString As String
 
 		Public RapidFire As Boolean
@@ -355,13 +322,6 @@ Namespace My
 		Public Property SlideshowContact1 As Slideshow
 		Public Property SlideshowContact2 As Slideshow
 		Public Property SlideshowContact3 As Slideshow
-
-		'Public Contact1Pics As New List(Of String)
-		'Public Contact2Pics As New List(Of String)
-		'Public Contact3Pics As New List(Of String)
-		'Public Contact1PicsCount As Integer
-		'Public Contact2PicsCount As Integer
-		'Public Contact3PicsCount As Integer
 		Public Group As String = "D"
 
 		Public CustomTask As Boolean
@@ -370,14 +330,12 @@ Namespace My
 		Public CustomTaskTextFirst As String
 		Public CustomTaskActive As Boolean
 
-		Public SubtitleCount As Integer
 		Public VidFile As String
 
 
 		Public RiskyDeal As Boolean
 		Public RiskyEdges As Boolean
 		Public RiskyDelay As Boolean
-		Public FinalRiskyPick As Boolean
 
 		Public SysMes As Boolean
 		Public EmoMes As Boolean
@@ -418,36 +376,28 @@ Namespace My
 		Public TyposDisabled As Boolean
 
 		Public EdgeHoldSeconds As Integer
+		<Obsolete("Never set to true")>
 		Public EdgeHoldFlag As Boolean
 
-		''' <summary>
-		''' Addresses the current CustomSlideshow image.
-		''' </summary>
-		Public SlideshowInt As Integer
+
 		Public JustShowedSlideshowImage As Boolean
 
 		Public RandomSlideshowCategory As String
 
+		<Obsolete("Legacy suspend and resume functions are depracted")>
 		Public ResetFlag As Boolean
-
-		Public DommeTags As Boolean
-		Public ThemeSettings As Boolean
 
 		Public InputIcon As Boolean
 
-		Public ApplyingTheme As Boolean
-		Public AdjustingWindow As Boolean
-
-		Public SplitContainerHeight As Integer
-
 		Public DommeImageFound As Boolean
 
+		<Obsolete("Never set.")>
 		Public LocalImageFound As Boolean
-		Public LocalImageListCheck As Boolean
+		<Obsolete("Never set.")>
+		Public LocalImageSTR As String
 
 		Public CBTBothActive As Boolean
 		Public CBTBothFlag As Boolean
-		Public CBTBothCount As Integer
 		Public CBTBothFirst As Boolean = True
 
 
@@ -456,13 +406,10 @@ Namespace My
 
 		Public GeneralTime As String = "Afternoon"
 
-		Public NewDommeSlideshow As Boolean
-		Public OriginalDommeSlideshow As String
-
 		Public TimeoutTick As Integer
 
 		Public DommeImageSTR As String
-		Public LocalImageSTR As String
+
 		''' <summary>
 		''' This Variable contains the Path of origin of the displayed Image. CheckDommeTag() uses 
 		''' this string to get the curremt ImageData for the DommeTagApp.
@@ -487,6 +434,7 @@ Namespace My
 
 		Public LongHold As Boolean = False
 		Public ExtremeHold As Boolean = False
+		<Obsolete("LongTaunts-Member is not used right now.")>
 		Public LongTaunts As Boolean
 
 

@@ -121,6 +121,10 @@ Public Class Form1
 	Public LazyEdit4 As Boolean
 	Public LazyEdit5 As Boolean
 
+	Public ApplyingTheme As Boolean
+	Public AdjustingWindow As Boolean
+	Public SplitContainerHeight As Integer
+
 	Private Const DISABLE_SOUNDS As Integer = 21
 	Private Const SET_FEATURE_ON_PROCESS As Integer = 2
 
@@ -384,9 +388,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		Do
 			Application.DoEvents()
 		Loop Until FrmSettings.FrmSettingsLoading = False
-
-		ssh.StopMetronome = True
-
 
 
 		ssh.StrokeTimeTotal = My.Settings.StrokeTimeTotal
@@ -1225,8 +1226,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		End If
 
 		System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\")
-
-		ssh.StopMetronome = True
 
 		ssh.TauntEdging = False
 
@@ -5591,7 +5590,6 @@ NoResponse:
 						ssh.SubStroking = True
 						ssh.SubEdging = False
 						ssh.SubHoldingEdge = False
-						ssh.StopMetronome = False
 						StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 						StrokePace = 50 * Math.Round(StrokePace / 50)
 						ssh.RLGLTauntTick = ssh.randomizer.Next(20, 31)
@@ -5605,7 +5603,6 @@ NoResponse:
 					If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
 						DomWMP.Ctlcontrols.pause()
 						ssh.SubStroking = False
-						ssh.StopMetronome = True
 						StrokePace = 0
 						'VideoTauntTimer.Stop()
 					End If
@@ -5628,7 +5625,6 @@ NoResponse:
 				'StringLength = 20
 				ssh.StringLength = ssh.randomizer.Next(8, 16)
 
-				If ssh.SubStroking = False Then ssh.StopMetronome = True
 				If ssh.SubHoldingEdge = True Then
 					StrokePace = 0
 				End If
@@ -6344,8 +6340,6 @@ NullResponseLine2:
 				ssh.DomTypeCheck = False
 				'StringLength = 20
 				ssh.StringLength = ssh.randomizer.Next(8, 16)
-
-				If ssh.SubStroking = False Then ssh.StopMetronome = True
 
 				If ssh.TempScriptCount = 0 Then
 					ssh.JustShowedBlogImage = False
@@ -8872,9 +8866,6 @@ SkipTextedTags:
 
 						Try
 							lines = FilterList(lines)
-							ssh.Crazy = False
-							ssh.Vulgar = False
-							ssh.Supremacist = False
 							Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
 							'Debug.Print("PoundLine = " & PoundLine)
 							'Debug.Print("PoundVal = " & PoundVal)
@@ -10668,7 +10659,6 @@ TaskCleanSet:
 			'If FirstRound = True Then My.Settings.Sys_SubLeftEarly += 1
 			If ssh.FirstRound = True Then SetVariable("SYS_SubLeftEarly", Val(GetVariable("SYS_SubLeftEarly")) + 1)
 			ssh.StartStrokingCount += 1
-			ssh.StopMetronome = False
 			StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 			StrokePace = 50 * Math.Round(StrokePace / 50)
 
@@ -10723,7 +10713,6 @@ TaskCleanSet:
 			ssh.StartStrokingCount += 1
 			' github patch StrokePace = 0
 			' github patch StrokePaceTimer.Interval = StrokePace
-			ssh.StopMetronome = False
 
 			ClearModes()
 
@@ -11931,7 +11920,6 @@ OrgasmDecided:
 				ssh.ScriptVideoTeaseFlag = False
 				ssh.VideoTease = True
 				ssh.StartStrokingCount += 1
-				ssh.StopMetronome = False
 				StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 				StrokePace = 50 * Math.Round(StrokePace / 50)
 				ssh.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
@@ -11948,7 +11936,6 @@ OrgasmDecided:
 			ssh.AvoidTheEdgeStroking = True
 			ssh.SubStroking = True
 			ssh.StartStrokingCount += 1
-			ssh.StopMetronome = False
 			ssh.VideoTease = True
 			StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 			StrokePace = 50 * Math.Round(StrokePace / 50)
@@ -11978,7 +11965,6 @@ OrgasmDecided:
 				ssh.RLGLTick = ssh.randomizer.Next(FrmSettings.NBGreenLightMin.Value, FrmSettings.NBGreenLightMax.Value + 1)
 				RLGLTimer.Start()
 				ssh.StartStrokingCount += 1
-				ssh.StopMetronome = False
 				StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 				StrokePace = 50 * Math.Round(StrokePace / 50)
 				'VideoTauntTick = randomizer.Next(20, 31)
@@ -14240,10 +14226,8 @@ Skip_RandomFile:
 					If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
 				Next
 
-				If ssh.LocalImageListCheck = False Then
-					'LocalImage = Image.FromFile(PicDir)
-					Return PicDir
-				End If
+				Return PicDir
+
 			Else
 				Return String.Empty
 
@@ -17746,7 +17730,6 @@ saveImage:
 
 		If ssh.ContactTick < 1 Then
 			ContactTimer.Stop()
-			ssh.ContactFlag = False
 		End If
 
 	End Sub
@@ -18095,7 +18078,7 @@ saveImage:
 
 		SettingsList.Add("Personality: " & dompersonalitycombobox.Text)
 		SettingsList.Add("ScriptOperator: " & ssh.ScriptOperator)
-		SettingsList.Add("ScriptCompare: " & ssh.ScriptCompare)
+		SettingsList.Add("ScriptCompare: --obsolete--") ' for compatibility
 		SettingsList.Add("DomTyping: " & ssh.DomTyping)
 		SettingsList.Add("CheckYes: " & ssh.CheckYes)
 		SettingsList.Add("CheckNo: " & ssh.CheckNo)
@@ -18207,17 +18190,17 @@ saveImage:
 		SettingsList.Add("SubGaveUp: " & ssh.SubGaveUp)
 		SettingsList.Add("AskedToSpeedUp: " & ssh.AskedToSpeedUp)
 		SettingsList.Add("AskedToSlowDown: " & ssh.AskedToSlowDown)
-		SettingsList.Add("ThoughtEnd: " & ssh.ThoughtEnd)
+		SettingsList.Add("ThoughtEnd: --obsolete--") ' for compatibility
 		SettingsList.Add("VTLength: " & ssh.VTLength)
 		SettingsList.Add("DommeVideo: " & ssh.DommeVideo)
 		SettingsList.Add("VideoType: " & ssh.VideoType)
 		SettingsList.Add("CensorshipGame: " & ssh.CensorshipGame)
 		SettingsList.Add("CensorshipTick: " & ssh.CensorshipTick)
-		SettingsList.Add("CensorDuration: " & ssh.CensorDuration)
+		SettingsList.Add("CensorDuration: --obsolete--") ' for compatibility
 		SettingsList.Add("AvoidTheEdgeGame: " & ssh.AvoidTheEdgeGame)
 		SettingsList.Add("AvoidTheEdgeTick: " & ssh.AvoidTheEdgeTick)
-		SettingsList.Add("AvoidTheEdgeTimerTick: " & ssh.AvoidTheEdgeTimerTick)
-		SettingsList.Add("AvoidTheEdgeDuration: " & ssh.AvoidTheEdgeDuration)
+		SettingsList.Add("AvoidTheEdgeTimerTick: --obsolete--") ' for compatibility
+		SettingsList.Add("AvoidTheEdgeDuration: --obsolete--") ' for compatibility
 		SettingsList.Add("AvoidTheEdgeStroking: " & ssh.AvoidTheEdgeStroking)
 		SettingsList.Add("AtECountdown: " & ssh.AtECountdown)
 		SettingsList.Add("VTPath: " & ssh.VTPath)
@@ -18226,7 +18209,7 @@ saveImage:
 		SettingsList.Add("VideoCheck: " & ssh.VideoCheck)
 		SettingsList.Add("VideoTease: " & ssh.VideoTease)
 		SettingsList.Add("RLGLGame: " & ssh.RLGLGame)
-		SettingsList.Add("RLGLStroking: " & ssh.RLGLStroking)
+		SettingsList.Add("RLGLStroking: --obsolete--") ' for compatibility
 		SettingsList.Add("RLGLTick: " & ssh.RLGLTick)
 		SettingsList.Add("RedLight: " & ssh.RedLight)
 		SettingsList.Add("RLGLTauntTick: " & ssh.RLGLTauntTick)
@@ -18237,12 +18220,12 @@ saveImage:
 		SettingsList.Add("VideoTauntTick: " & ssh.VideoTauntTick)
 		SettingsList.Add("SlideshowLoaded: " & ssh.SlideshowLoaded)
 		SettingsList.Add("RefreshVideoTotal: --obsolete--") ' for compatibility
-		SettingsList.Add("GlitterImageAV: " & ssh.GlitterImageAV)
+		SettingsList.Add("GlitterImageAV: --obsolete--") ' for compatibility
 		SettingsList.Add("GlitterNCDomme: --obsolete--") ' for compatibility
 		SettingsList.Add("GlitterNC1: --obsolete--") ' for compatibility
 		SettingsList.Add("GlitterNC2: --obsolete--") ' for compatibility
 		SettingsList.Add("GlitterNC3: --obsolete--") ' for compatibility
-		SettingsList.Add("GlitterTempColor: " & ssh.GlitterTempColor)
+		SettingsList.Add("GlitterTempColor: --obsolete--") ' for compatibility
 		SettingsList.Add("UpdatesTick: " & ssh.UpdatesTick)
 		SettingsList.Add("UpdatingPost: " & ssh.UpdatingPost)
 		SettingsList.Add("UpdateStage: " & ssh.UpdateStage)
@@ -18250,7 +18233,7 @@ saveImage:
 		SettingsList.Add("StatusText: " & ssh.StatusText)
 		SettingsList.Add("ContactNumber: " & ssh.ContactNumber)
 		SettingsList.Add("ContactTick: " & ssh.ContactTick)
-		SettingsList.Add("ContactFlag: " & ssh.ContactFlag)
+		SettingsList.Add("ContactFlag: --obsolete--") ' for compatibility
 		SettingsList.Add("StatusText1: " & ssh.StatusText1)
 		SettingsList.Add("StatusText2: " & ssh.StatusText2)
 		SettingsList.Add("StatusText3: " & ssh.StatusText3)
@@ -18270,14 +18253,14 @@ saveImage:
 		SettingsList.Add("ApproveImage: --obsolete--") ' for compatibility
 		SettingsList.Add("WIExit: --obsolete--") ' for compatibility
 		'SettingsList.Add("RecentSlideshows: " & RecentSlideshows)
-		SettingsList.Add("MainPictureImage: " & ssh.MainPictureImage)
+		SettingsList.Add("MainPictureImage: --obsolete--") ' for compatibility
 		SettingsList.Add("DomPic: " & ssh.DomPic)
 		SettingsList.Add("LockImage: " & ssh.LockImage)
 		'SettingsList.Add("LocalTagImageList: " & LocalTagImageList)
-		SettingsList.Add("Crazy: " & ssh.Crazy)
-		SettingsList.Add("Vulgar: " & ssh.Vulgar)
-		SettingsList.Add("Supremacist: " & ssh.Supremacist)
-		SettingsList.Add("CockSize: " & ssh.CockSize)
+		SettingsList.Add("Crazy: --obsolete--") ' for compatibility
+		SettingsList.Add("Vulgar: --obsolete--") ' for compatibility
+		SettingsList.Add("Supremacist: --obsolete--") ' for compatibility
+		SettingsList.Add("CockSize: --obsolete--") ' for compatibility
 		SettingsList.Add("TempDick: --obsolete--") ' for compatibility
 		SettingsList.Add("PetName: " & ssh.PetName)
 		SettingsList.Add("PetName2: --obsolete--") ' for compatibility
@@ -18306,7 +18289,7 @@ saveImage:
 		SettingsList.Add("LastScript: " & ssh.LastScript)
 		SettingsList.Add("JustShowedBlogImage: " & ssh.JustShowedBlogImage)
 		SettingsList.Add("SaidHello: " & ssh.SaidHello)
-		SettingsList.Add("StopMetronome: " & ssh.StopMetronome)
+		SettingsList.Add("StopMetronome: --obsolete--") ' for compatibility 
 		SettingsList.Add("AvgEdgeStroking: " & ssh.AvgEdgeStroking)
 		SettingsList.Add("AvgEdgeNoTouch: " & ssh.AvgEdgeNoTouch)
 		SettingsList.Add("EdgeCountTick: " & ssh.EdgeCountTick)
@@ -18349,8 +18332,8 @@ saveImage:
 		SettingsList.Add("OrgasmDenied: " & ssh.OrgasmDenied)
 		SettingsList.Add("OrgasmAllowed: " & ssh.OrgasmAllowed)
 		SettingsList.Add("OrgasmRuined: " & ssh.OrgasmRuined)
-		SettingsList.Add("StupidTick: " & ssh.StupidTick)
-		SettingsList.Add("StupidFlag: " & ssh.StupidFlag)
+		SettingsList.Add("StupidTick: --obsolete--") ' for compatibility
+		SettingsList.Add("StupidFlag: --obsolete--") ' for compatibility
 		SettingsList.Add("CaloriesConsumed: " & ssh.CaloriesConsumed)
 		SettingsList.Add("CaloriesGoal: " & ssh.CaloriesGoal)
 		SettingsList.Add("GoldTokens: " & ssh.GoldTokens)
@@ -18358,12 +18341,12 @@ saveImage:
 		SettingsList.Add("BronzeTokens: " & ssh.BronzeTokens)
 		SettingsList.Add("EdgeFound: " & ssh.EdgeFound)
 		SettingsList.Add("OrgasmYesNo: " & ssh.OrgasmYesNo)
-		SettingsList.Add("VTFlag: " & ssh.VTFlag)
+		SettingsList.Add("VTFlag: --obsolete--") ' for compatibility
 		SettingsList.Add("DomPersonality: " & ssh.DomPersonality)
 		'SettingsList.Add("UpdateList: " & UpdateList)
-		SettingsList.Add("GlitterDocument: " & ssh.GlitterDocument)
+		SettingsList.Add("GlitterDocument: --obsolete--") ' for compatibility
 		SettingsList.Add("CustomSlideshow: " & ssh.CustomSlideshow)
-		SettingsList.Add("CustomSlideshowTick: " & ssh.CustomSlideshowTick)
+		SettingsList.Add("CustomSlideshowTick: --obsolete--") ' for compatibility
 		'SettingsList.Add("CustomSlideshowList: " & CustomSlideshowList)
 		SettingsList.Add("ImageString: " & ssh.ImageString)
 		SettingsList.Add("RapidFire: " & ssh.RapidFire)
@@ -18381,7 +18364,7 @@ saveImage:
 		SettingsList.Add("CustomTaskText: " & ssh.CustomTaskText)
 		SettingsList.Add("CustomTaskTextFirst: " & ssh.CustomTaskTextFirst)
 		SettingsList.Add("CustomTaskActive: " & ssh.CustomTaskActive)
-		SettingsList.Add("SubtitleCount: " & ssh.SubtitleCount)
+		SettingsList.Add("SubtitleCount: --obsolete--") ' for compatibility
 		SettingsList.Add("VidFile: " & ssh.VidFile)
 
 		SettingsList.Add("Timer1 Enabled: " & Timer1.Enabled)
@@ -18435,7 +18418,7 @@ saveImage:
 		SettingsList.Add("RiskyDeal: " & ssh.RiskyDeal)
 		SettingsList.Add("RiskyEdges: " & ssh.RiskyEdges)
 		SettingsList.Add("RiskyDelay: " & ssh.RiskyDelay)
-		SettingsList.Add("FinalRiskyPick: " & ssh.FinalRiskyPick)
+		SettingsList.Add("FinalRiskyPick: --obsolete--") ' for compatibility
 
 		SettingsList.Add("SysMes: " & ssh.SysMes)
 		SettingsList.Add("EmoMes: " & ssh.EmoMes)
@@ -18475,24 +18458,24 @@ saveImage:
 		SettingsList.Add("DeleteLocalImageFilePath: --obsolete--") ' for compatibility
 		SettingsList.Add("RandomSlideshowCategory: " & ssh.RandomSlideshowCategory)
 		SettingsList.Add("ResetFlag: " & ssh.ResetFlag)
-		SettingsList.Add("DommeTags: " & ssh.DommeTags)
-		SettingsList.Add("ThemeSettings: " & ssh.ThemeSettings)
-		SettingsList.Add("InputIcon: " & ssh.InputIcon)
-		SettingsList.Add("ApplyingTheme: " & ssh.ApplyingTheme)
-		SettingsList.Add("AdjustingWindow: " & ssh.AdjustingWindow)
-		SettingsList.Add("SplitContainerHeight: " & ssh.SplitContainerHeight)
+		SettingsList.Add("DommeTags: --obsolete--") ' for compatibility
+		SettingsList.Add("ThemeSettings: --obsolete--") ' for compatibility
+		SettingsList.Add("InputIcon: --obsolete--") ' for compatibility
+		SettingsList.Add("ApplyingTheme: --obsolete--") ' for compatibility
+		SettingsList.Add("AdjustingWindow: --obsolete--") ' for compatibility
+		SettingsList.Add("SplitContainerHeight: --obsolete--") ' for compatibility
 		SettingsList.Add("DommeImageFound: " & ssh.DommeImageFound)
 		SettingsList.Add("DommeImageListCheck: --obsolete--") ' for compatibility
 		SettingsList.Add("LocalImageFound: " & ssh.LocalImageFound)
-		SettingsList.Add("LocalImageListCheck: " & ssh.LocalImageListCheck)
+		SettingsList.Add("LocalImageListCheck: --obsolete--") ' for compatibility
 		SettingsList.Add("CBTBothActive: " & ssh.CBTBothActive)
 		SettingsList.Add("CBTBothFlag: " & ssh.CBTBothFlag)
-		SettingsList.Add("CBTBothCount: " & ssh.CBTBothCount)
+		SettingsList.Add("CBTBothCount: --obsolete--") ' for compatibility
 		SettingsList.Add("CBTBothFirst: " & ssh.CBTBothFirst)
 		SettingsList.Add("MetroGet: --obsolete--") ' for compatibility
 		SettingsList.Add("GeneralTime: " & ssh.GeneralTime)
-		SettingsList.Add("NewDommeSlideshow: " & ssh.NewDommeSlideshow)
-		SettingsList.Add("OriginalDommeSlideshow: " & ssh.OriginalDommeSlideshow)
+		SettingsList.Add("NewDommeSlideshow: --obsolete--") ' for compatibility
+		SettingsList.Add("OriginalDommeSlideshow: --obsolete--") ' for compatibility
 		SettingsList.Add("TimeoutTick: " & ssh.TimeoutTick)
 		SettingsList.Add("PBImage: --obsolete--") ' for compatibility 
 		SettingsList.Add("DommeImageSTR: " & ssh.DommeImageSTR)
@@ -18589,16 +18572,16 @@ saveImage:
 		'	If File.Exists(SettingsPath & ResumePrefix & "WebImageLines.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "WebImageLines.txt")
 		'End If
 
-		If ssh.TnAList.Count > 0 Then
-			SettingsString = ""
-			For i As Integer = 0 To ssh.TnAList.Count - 1
-				SettingsString = SettingsString & ssh.TnAList(i)
-				If i <> ssh.TnAList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
-			Next
-			My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "TnAList.txt", SettingsString, False)
-		Else
-			If File.Exists(SettingsPath & ResumePrefix & "TnAList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "TnAList.txt")
-		End If
+		'If ssh.TnAList.Count > 0 Then
+		'	SettingsString = ""
+		'	For i As Integer = 0 To ssh.TnAList.Count - 1
+		'		SettingsString = SettingsString & ssh.TnAList(i)
+		'		If i <> ssh.TnAList.Count - 1 Then SettingsString = SettingsString & Environment.NewLine
+		'	Next
+		'	My.Computer.FileSystem.WriteAllText(SettingsPath & ResumePrefix & "TnAList.txt", SettingsString, False)
+		'Else
+		'	If File.Exists(SettingsPath & ResumePrefix & "TnAList.txt") Then My.Computer.FileSystem.DeleteFile(SettingsPath & ResumePrefix & "TnAList.txt")
+		'End If
 
 		If ssh.BoobList.Count > 0 Then
 			SettingsString = ""
@@ -18712,7 +18695,7 @@ saveImage:
 		dompersonalitycombobox.Text = SettingsList(0).Replace("Personality: ", "")
 
 		ssh.ScriptOperator = SettingsList(1).Replace("ScriptOperator: ", "")
-		ssh.ScriptCompare = SettingsList(2).Replace("ScriptCompare: ", "")
+		'ssh.ScriptCompare = SettingsList(2).Replace("ScriptCompare: ", "")
 		ssh.DomTyping = SettingsList(3).Replace("DomTyping: ", "")
 		ssh.CheckYes = SettingsList(4).Replace("CheckYes: ", "")
 		ssh.CheckNo = SettingsList(5).Replace("CheckNo: ", "")
@@ -18821,17 +18804,17 @@ saveImage:
 		ssh.SubGaveUp = SettingsList(108).Replace("SubGaveUp: ", "")
 		ssh.AskedToSpeedUp = SettingsList(109).Replace("AskedToSpeedUp: ", "")
 		ssh.AskedToSlowDown = SettingsList(110).Replace("AskedToSlowDown: ", "")
-		ssh.ThoughtEnd = SettingsList(111).Replace("ThoughtEnd: ", "")
+		'ssh.ThoughtEnd = SettingsList(111).Replace("ThoughtEnd: ", "")
 		ssh.VTLength = SettingsList(112).Replace("VTLength: ", "")
 		ssh.DommeVideo = SettingsList(113).Replace("DommeVideo: ", "")
 		ssh.VideoType = SettingsList(114).Replace("VideoType: ", "")
 		ssh.CensorshipGame = SettingsList(115).Replace("CensorshipGame: ", "")
 		ssh.CensorshipTick = SettingsList(116).Replace("CensorshipTick: ", "")
-		ssh.CensorDuration = SettingsList(117).Replace("CensorDuration: ", "")
+		'ssh.CensorDuration = SettingsList(117).Replace("CensorDuration: ", "")
 		ssh.AvoidTheEdgeGame = SettingsList(118).Replace("AvoidTheEdgeGame: ", "")
 		ssh.AvoidTheEdgeTick = SettingsList(119).Replace("AvoidTheEdgeTick: ", "")
-		ssh.AvoidTheEdgeTimerTick = SettingsList(120).Replace("AvoidTheEdgeTimerTick: ", "")
-		ssh.AvoidTheEdgeDuration = SettingsList(121).Replace("AvoidTheEdgeDuration: ", "")
+		'ssh.AvoidTheEdgeTimerTick = SettingsList(120).Replace("AvoidTheEdgeTimerTick: ", "")
+		'ssh.AvoidTheEdgeDuration = SettingsList(121).Replace("AvoidTheEdgeDuration: ", "")
 		ssh.AvoidTheEdgeStroking = SettingsList(122).Replace("AvoidTheEdgeStroking: ", "")
 		ssh.AtECountdown = SettingsList(123).Replace("AtECountdown: ", "")
 		ssh.VTPath = SettingsList(124).Replace("VTPath: ", "")
@@ -18840,7 +18823,7 @@ saveImage:
 		ssh.VideoCheck = SettingsList(127).Replace("VideoCheck: ", "")
 		ssh.VideoTease = SettingsList(128).Replace("VideoTease: ", "")
 		ssh.RLGLGame = SettingsList(129).Replace("RLGLGame: ", "")
-		ssh.RLGLStroking = SettingsList(130).Replace("RLGLStroking: ", "")
+		'ssh.RLGLStroking = SettingsList(130).Replace("RLGLStroking: ", "")
 		ssh.RLGLTick = SettingsList(131).Replace("RLGLTick: ", "")
 		ssh.RedLight = SettingsList(132).Replace("RedLight: ", "")
 		ssh.RLGLTauntTick = SettingsList(133).Replace("RLGLTauntTick: ", "")
@@ -18851,9 +18834,9 @@ saveImage:
 		ssh.VideoTauntTick = SettingsList(138).Replace("VideoTauntTick: ", "")
 		ssh.SlideshowLoaded = SettingsList(139).Replace("SlideshowLoaded: ", "")
 		'RefreshVideoTotal = SettingsList(140).Replace("RefreshVideoTotal: ", "")
-		ssh.GlitterImageAV = SettingsList(141).Replace("GlitterImageAV: ", "")
+		'ssh.GlitterImageAV = SettingsList(141).Replace("GlitterImageAV: ", "")
 
-		ssh.GlitterTempColor = SettingsList(146).Replace("GlitterTempColor: ", "")
+		'ssh.GlitterTempColor = SettingsList(146).Replace("GlitterTempColor: ", "")
 		ssh.UpdatesTick = SettingsList(147).Replace("UpdatesTick: ", "")
 		ssh.UpdatingPost = SettingsList(148).Replace("UpdatingPost: ", "")
 		ssh.UpdateStage = SettingsList(149).Replace("UpdateStage: ", "")
@@ -18861,7 +18844,7 @@ saveImage:
 		ssh.StatusText = SettingsList(151).Replace("StatusText: ", "")
 		ssh.ContactNumber = SettingsList(152).Replace("ContactNumber: ", "")
 		ssh.ContactTick = SettingsList(153).Replace("ContactTick: ", "")
-		ssh.ContactFlag = SettingsList(154).Replace("ContactFlag: ", "")
+		'ssh.ContactFlag = SettingsList(154).Replace("ContactFlag: ", "")
 		ssh.StatusText1 = SettingsList(155).Replace("StatusText1: ", "")
 		ssh.StatusText2 = SettingsList(156).Replace("StatusText2: ", "")
 		ssh.StatusText3 = SettingsList(157).Replace("StatusText3: ", "")
@@ -18879,13 +18862,13 @@ saveImage:
 		'ssh.WithTeaseImgDir = SettingsList(169).Replace("WithTeaseImgDir: ", "")
 		'ssh.ApproveImage = SettingsList(170).Replace("ApproveImage: ", "")
 		'ssh.WIExit = SettingsList(171).Replace("WIExit: ", "")
-		ssh.MainPictureImage = SettingsList(172).Replace("MainPictureImage: ", "")
+		'ssh.MainPictureImage = SettingsList(172).Replace("MainPictureImage: ", "")
 		ssh.DomPic = SettingsList(173).Replace("DomPic: ", "")
 		ssh.LockImage = SettingsList(174).Replace("LockImage: ", "")
-		ssh.Crazy = SettingsList(175).Replace("Crazy: ", "")
-		ssh.Vulgar = SettingsList(176).Replace("Vulgar: ", "")
-		ssh.Supremacist = SettingsList(177).Replace("Supremacist: ", "")
-		ssh.CockSize = SettingsList(178).Replace("CockSize: ", "")
+		'ssh.Crazy = SettingsList(175).Replace("Crazy: ", "")
+		'ssh.Vulgar = SettingsList(176).Replace("Vulgar: ", "")
+		'ssh.Supremacist = SettingsList(177).Replace("Supremacist: ", "")
+		'ssh.CockSize = SettingsList(178).Replace("CockSize: ", "")
 		'TempDick = SettingsList(179).Replace("TempDick: ", "")
 		ssh.PetName = SettingsList(180).Replace("PetName: ", "")
 		'PetName2 = SettingsList(181).Replace("PetName2: ", "")
@@ -18913,7 +18896,7 @@ saveImage:
 		ssh.LastScript = SettingsList(203).Replace("LastScript: ", "")
 		ssh.JustShowedBlogImage = SettingsList(204).Replace("JustShowedBlogImage: ", "")
 		ssh.SaidHello = SettingsList(205).Replace("SaidHello: ", "")
-		ssh.StopMetronome = SettingsList(206).Replace("StopMetronome: ", "")
+		'ssh.StopMetronome = SettingsList(206).Replace("StopMetronome: ", "")
 		ssh.AvgEdgeStroking = SettingsList(207).Replace("AvgEdgeStroking: ", "")
 		ssh.AvgEdgeNoTouch = SettingsList(208).Replace("AvgEdgeNoTouch: ", "")
 		ssh.EdgeCountTick = SettingsList(209).Replace("EdgeCountTick: ", "")
@@ -18953,8 +18936,8 @@ saveImage:
 		ssh.OrgasmDenied = SettingsList(243).Replace("OrgasmDenied: ", "")
 		ssh.OrgasmAllowed = SettingsList(244).Replace("OrgasmAllowed: ", "")
 		ssh.OrgasmRuined = SettingsList(245).Replace("OrgasmRuined: ", "")
-		ssh.StupidTick = SettingsList(246).Replace("StupidTick: ", "")
-		ssh.StupidFlag = SettingsList(247).Replace("StupidFlag: ", "")
+		'ssh.StupidTick = SettingsList(246).Replace("StupidTick: ", "")
+		'ssh.StupidFlag = SettingsList(247).Replace("StupidFlag: ", "")
 		ssh.CaloriesConsumed = SettingsList(248).Replace("CaloriesConsumed: ", "")
 		ssh.CaloriesGoal = SettingsList(249).Replace("CaloriesGoal: ", "")
 		ssh.GoldTokens = SettingsList(250).Replace("GoldTokens: ", "")
@@ -18962,11 +18945,11 @@ saveImage:
 		ssh.BronzeTokens = SettingsList(252).Replace("BronzeTokens: ", "")
 		ssh.EdgeFound = SettingsList(253).Replace("EdgeFound: ", "")
 		ssh.OrgasmYesNo = SettingsList(254).Replace("OrgasmYesNo: ", "")
-		ssh.VTFlag = SettingsList(255).Replace("VTFlag: ", "")
+		'ssh.VTFlag = SettingsList(255).Replace("VTFlag: ", "")
 		ssh.DomPersonality = SettingsList(256).Replace("DomPersonality: ", "")
-		ssh.GlitterDocument = SettingsList(257).Replace("GlitterDocument: ", "")
+		'ssh.GlitterDocument = SettingsList(257).Replace("GlitterDocument: ", "")
 		ssh.CustomSlideshow = SettingsList(258).Replace("CustomSlideshow: ", "")
-		ssh.CustomSlideshowTick = SettingsList(259).Replace("CustomSlideshowTick: ", "")
+		'ssh.CustomSlideshowTick = SettingsList(259).Replace("CustomSlideshowTick: ", "")
 		ssh.ImageString = SettingsList(260).Replace("ImageString: ", "")
 		ssh.RapidFire = SettingsList(261).Replace("RapidFire: ", "")
 		ssh.GlitterTease = SettingsList(262).Replace("GlitterTease: ", "")
@@ -18980,7 +18963,7 @@ saveImage:
 		ssh.CustomTaskText = SettingsList(270).Replace("CustomTaskText: ", "")
 		ssh.CustomTaskTextFirst = SettingsList(271).Replace("CustomTaskTextFirst: ", "")
 		ssh.CustomTaskActive = SettingsList(272).Replace("CustomTaskActive: ", "")
-		ssh.SubtitleCount = SettingsList(273).Replace("SubtitleCount: ", "")
+		'ssh.SubtitleCount = SettingsList(273).Replace("SubtitleCount: ", "")
 		ssh.VidFile = SettingsList(274).Replace("VidFile: ", "")
 
 		Timer1.Enabled = SettingsList(275).Replace("Timer1 Enabled: ", "")
@@ -19035,7 +19018,7 @@ saveImage:
 		ssh.RiskyDeal = SettingsList(313).Replace("RiskyDeal: ", "")
 		ssh.RiskyEdges = SettingsList(314).Replace("RiskyEdges: ", "")
 		ssh.RiskyDelay = SettingsList(315).Replace("RiskyDelay: ", "")
-		ssh.FinalRiskyPick = SettingsList(316).Replace("FinalRiskyPick: ", "")
+		'ssh.FinalRiskyPick = SettingsList(316).Replace("FinalRiskyPick: ", "")
 		ssh.SysMes = SettingsList(317).Replace("SysMes: ", "")
 		ssh.EmoMes = SettingsList(318).Replace("EmoMes: ", "")
 		ssh.Contact1Edge = SettingsList(319).Replace("Contact1Edge: ", "")
@@ -19072,24 +19055,24 @@ saveImage:
 		'DeleteLocalImageFilePath = SettingsList(347).Replace("DeleteLocalImageFilePath: ", "")
 		ssh.RandomSlideshowCategory = SettingsList(348).Replace("RandomSlideshowCategory: ", "")
 		ssh.ResetFlag = SettingsList(349).Replace("ResetFlag: ", "")
-		ssh.DommeTags = SettingsList(350).Replace("DommeTags: ", "")
-		ssh.ThemeSettings = SettingsList(351).Replace("ThemeSettings: ", "")
+		'ssh.DommeTags = SettingsList(350).Replace("DommeTags: ", "")
+		'ssh.ThemeSettings = SettingsList(351).Replace("ThemeSettings: ", "")
 		ssh.InputIcon = SettingsList(352).Replace("InputIcon: ", "")
-		ssh.ApplyingTheme = SettingsList(353).Replace("ApplyingTheme: ", "")
-		ssh.AdjustingWindow = SettingsList(354).Replace("AdjustingWindow: ", "")
-		ssh.SplitContainerHeight = SettingsList(355).Replace("SplitContainerHeight: ", "")
+		'ssh.ApplyingTheme = SettingsList(353).Replace("ApplyingTheme: ", "")
+		'ssh.AdjustingWindow = SettingsList(354).Replace("AdjustingWindow: ", "")
+		'ssh.SplitContainerHeight = SettingsList(355).Replace("SplitContainerHeight: ", "")
 		ssh.DommeImageFound = SettingsList(356).Replace("DommeImageFound: ", "")
 		'DommeImageListCheck = SettingsList(357).Replace("DommeImageListCheck: ", "")
 		ssh.LocalImageFound = SettingsList(358).Replace("LocalImageFound: ", "")
-		ssh.LocalImageListCheck = SettingsList(359).Replace("LocalImageListCheck: ", "")
+		'ssh.LocalImageListCheck = SettingsList(359).Replace("LocalImageListCheck: ", "")
 		ssh.CBTBothActive = SettingsList(360).Replace("CBTBothActive: ", "")
 		ssh.CBTBothFlag = SettingsList(361).Replace("CBTBothFlag: ", "")
-		ssh.CBTBothCount = SettingsList(362).Replace("CBTBothCount: ", "")
+		'ssh.CBTBothCount = SettingsList(362).Replace("CBTBothCount: ", "")
 		ssh.CBTBothFirst = SettingsList(363).Replace("CBTBothFirst: ", "")
 		'MetroGet = SettingsList(364).Replace("MetroGet: ", "")
 		ssh.GeneralTime = SettingsList(365).Replace("GeneralTime: ", "")
-		ssh.NewDommeSlideshow = SettingsList(366).Replace("NewDommeSlideshow: ", "")
-		ssh.OriginalDommeSlideshow = SettingsList(367).Replace("OriginalDommeSlideshow: ", "")
+		'ssh.NewDommeSlideshow = SettingsList(366).Replace("NewDommeSlideshow: ", "")
+		'ssh.OriginalDommeSlideshow = SettingsList(367).Replace("OriginalDommeSlideshow: ", "")
 		ssh.TimeoutTick = SettingsList(368).Replace("TimeoutTick: ", "")
 		'PBImage = SettingsList(369).Replace("PBImage: ", "")
 		ssh.DommeImageSTR = SettingsList(370).Replace("DommeImageSTR: ", "")
@@ -19103,7 +19086,7 @@ saveImage:
 		If File.Exists(SettingsPath & ResumePrefix & "RecentSlideshows.txt") Then ssh.RecentSlideshows = Txt2List(SettingsPath & ResumePrefix & "RecentSlideshows.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "LocalTagImageList.txt") Then ssh.LocalTagImageList = Txt2List(SettingsPath & ResumePrefix & "LocalTagImageList.txt")
 		'If File.Exists(SettingsPath & ResumePrefix & "WebImageLines.txt") Then WebImageLines = Txt2List(SettingsPath & ResumePrefix & "WebImageLines.txt")
-		If File.Exists(SettingsPath & ResumePrefix & "TnAList.txt") Then ssh.TnAList = Txt2List(SettingsPath & ResumePrefix & "TnAList.txt")
+		'If File.Exists(SettingsPath & ResumePrefix & "TnAList.txt") Then ssh.TnAList = Txt2List(SettingsPath & ResumePrefix & "TnAList.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "BoobList.txt") Then ssh.BoobList = Txt2List(SettingsPath & ResumePrefix & "BoobList.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "AssList.txt") Then ssh.AssList = Txt2List(SettingsPath & ResumePrefix & "AssList.txt")
 		If File.Exists(SettingsPath & ResumePrefix & "UpdateList.txt") Then ssh.UpdateList = Txt2List(SettingsPath & ResumePrefix & "UpdateList.txt")
@@ -19966,7 +19949,7 @@ saveImage:
 
 		SuspendLayout()
 
-		ssh.AdjustingWindow = True
+		AdjustingWindow = True
 
 		Debug.Print("Adjust Window Called")
 
@@ -20035,7 +20018,7 @@ saveImage:
 		Debug.Print("SplitContainer1.Panel1.Height = " & SplitContainer1.Panel1.Height)
 		Debug.Print("SplitContainer1.Panel2.Height = " & SplitContainer1.Panel2.Height)
 		Debug.Print("SplitContainer1.SplitterDistance = " & SplitContainer1.SplitterDistance)
-		Debug.Print("SplitContainerHeight = " & ssh.SplitContainerHeight)
+		Debug.Print("SplitContainerHeight = " & SplitContainerHeight)
 
 		'SplitContainer1.Panel2.Height = My.Settings.SplitterPosition
 
@@ -20167,7 +20150,7 @@ saveImage:
 		PNLTabs.VerticalScroll.Visible = False
 		PNLTabs.AutoScroll = True
 
-		ssh.AdjustingWindow = False
+		AdjustingWindow = False
 
 		'If My.Settings.SplitterPosition <> 0 Then SplitContainer1.SplitterDistance = My.Settings.SplitterPosition
 
@@ -20182,7 +20165,7 @@ saveImage:
 
 		If FormLoading = True Then Return
 
-		If ssh.ApplyingTheme = False And ssh.AdjustingWindow = False Then
+		If ApplyingTheme = False And AdjustingWindow = False Then
 
 			If PNLMediaBar.Visible = True Then
 				ChatText.Location = New Point(2, 33)
@@ -20195,7 +20178,7 @@ saveImage:
 			PNLChatBox.Location = New Point(2, SplitContainer1.Panel2.Height - 32)
 			PNLHope.Location = New Point(SplitContainer1.Width - 314, PNLChatBox.Location.Y)
 
-			ssh.SplitContainerHeight = SplitContainer1.Panel2.Height
+			SplitContainerHeight = SplitContainer1.Panel2.Height
 
 			My.Settings.SplitterPosition = SplitContainer1.Height - SplitContainer1.Panel1.Height
 
@@ -20203,7 +20186,7 @@ saveImage:
 			Debug.Print("SplitContainer1.Panel1.Height = " & SplitContainer1.Panel1.Height)
 			Debug.Print("SplitContainer1.Panel2.Height = " & SplitContainer1.Panel2.Height)
 			Debug.Print("SplitContainer1.SplitterDistance = " & SplitContainer1.SplitterDistance)
-			Debug.Print("SplitContainerHeight = " & ssh.SplitContainerHeight)
+			Debug.Print("SplitContainerHeight = " & SplitContainerHeight)
 
 
 
@@ -20283,7 +20266,7 @@ SkipNew:
 
 		End If
 
-		If ssh.ApplyingTheme = False And ssh.AdjustingWindow = False Then AdjustWindow()
+		If ApplyingTheme = False And AdjustingWindow = False Then AdjustWindow()
 
 		ScrollChatDown()
 
@@ -20437,7 +20420,7 @@ SkipNew:
 
 	Public Sub ApplyThemeColor()
 
-		ssh.ApplyingTheme = True
+		ApplyingTheme = True
 
 		subName.BackColor = My.Settings.ButtonColor
 		subName.ForeColor = My.Settings.TextColor
@@ -20645,7 +20628,7 @@ SkipNew:
 		Catch
 		End Try
 
-		ssh.ApplyingTheme = False
+		ApplyingTheme = False
 
 
         'TabControl1.DefaultBackColor = My.Settings.BackgroundColor
@@ -21953,7 +21936,6 @@ SkipNew:
 		ssh.ScriptVideoTeaseFlag = False
 		ssh.VideoTease = True
 		ssh.StartStrokingCount += 1
-		ssh.StopMetronome = False
 		StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 		StrokePace = 50 * Math.Round(StrokePace / 50)
 		ssh.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
@@ -21978,7 +21960,6 @@ SkipNew:
 		ssh.RLGLTick = ssh.randomizer.Next(FrmSettings.NBGreenLightMin.Value, FrmSettings.NBGreenLightMax.Value + 1)
 		RLGLTimer.Start()
 		ssh.StartStrokingCount += 1
-		ssh.StopMetronome = False
 		StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 		StrokePace = 50 * Math.Round(StrokePace / 50)
 		'VideoTauntTick = randomizer.Next(20, 31)

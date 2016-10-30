@@ -5908,9 +5908,6 @@ checkFolder:
 
 
 
-	Private Sub CockSizeNumBox_ValueChanged(sender As System.Object, e As System.EventArgs) Handles CockSizeNumBox.ValueChanged
-		Form1.ssh.CockSize = CockSizeNumBox.Value
-	End Sub
 
 	Private Sub CockSizeNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles CockSizeNumBox.LostFocus
 		My.Settings.SubCockSize = CockSizeNumBox.Value
@@ -10353,7 +10350,7 @@ checkFolder:
 	End Sub
 
 	Private Sub CBStretchBack_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBStretchBack.CheckedChanged
-		If Form1.ssh.ApplyingTheme = False Then
+		If Form1.ApplyingTheme = False Then
 			My.Settings.BackgroundStretch = CBStretchBack.Checked
 			Form1.ApplyThemeColor()
 		End If
@@ -10376,7 +10373,7 @@ checkFolder:
 	End Sub
 
 	Private Sub CBTransparentTime_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTransparentTime.CheckedChanged
-		If Form1.ssh.ApplyingTheme = False Then
+		If Form1.ApplyingTheme = False Then
 			My.Settings.CBDateTransparent = CBTransparentTime.Checked
 			Try
 				Form1.ApplyThemeColor()
@@ -10397,7 +10394,7 @@ checkFolder:
 	Private Sub CheckBox1_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBFlipBack.CheckedChanged
 
 		Try
-			If Form1.FormLoading = False And Form1.ssh.ApplyingTheme = False Then Form1.ApplyThemeColor()
+			If Form1.FormLoading = False And Form1.ApplyingTheme = False Then Form1.ApplyThemeColor()
 		Catch
 		End Try
 
