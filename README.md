@@ -8,30 +8,37 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 # Changelog - Patch 54.5.0	
 
-WIP - SaveState overhaul. Added SaveState Class and replaced Suspend and Resume Session options in File menu with SaveProgramState() and LoadProgramState() subroutines. These are only saving and loading the variables declared in Form 1, they are not functional yet. I'll need to do more work to reset the chat, check timer states, determine whether video was playing and resume accordingly, etc.
-
 WIP - DataBinding Overhaul
 
 Added Features: 
 
 	Check Box to lock orgasm chances after tease starts. by OxiKlein
-	Download online-image progress bar added. by Stefaf
-	Video Folders are now checked on startup. The user is asked to search for missing folders. by Stefaf
-	Image Folders are now checked on startup. The user is asked to search for missing folders or if a folder is empty. by Stefaf
+	Download online-image progress bar added.
+	Video Folders are now checked on startup. The user is asked to search for missing folders.
+	Image Folders are now checked on startup. The user is asked to search for missing folders or if a folder is empty.
+	Games are now locked until all card images are set.
+	Card images are now checked on startup.
+	@Flag() support for multiple "AND" connected parameters added. (All) of 'em or line is excluded.)  by Daragorn
+	@NotFlag() support for multiple "AND" connected parameters added. (None of 'em or line is excluded) by Daragorn
 
 Bugfixes:
 
-	@ImageTag()-Command displays now tagged images. Up to 3 Tags are allowed. by Stefaf
-	Resolved an infinite loop, when TauntEdging was started. by Stefaf
-	Goto was unable to jump to the first line of a file, when a question was asked. by Stefaf
+	@ImageTag()-Command displays now tagged images. Up to 3 Tags are allowed.
+	Resolved an infinite loop, when TauntEdging was started.
+	Goto was unable to jump to the first line of a file, when a question was asked.
+	Card images were saved in different sizes, when using drag-drop or file dialog.
+	@DommeLevel1-5 didn't filter correct in vocabulary files.
 	@Chance##()-Command now gets cleaned from the line correctly. by Pepsifreak
 	@FollowUp##()-Command now gets cleaned from the line correctly, also stopped the followup message from still partially showing in "failure" cases. by Pepsifreak
 
 Miscellaneous:
 
-	Removed several unused variables. by Stefaf
-	SettingsForm VideoSettings GUI reworked. by Stefaf
-	SettingsForm ImageSettings GUI reworked. by Stefaf
+	Removed several unused variables.
+	SettingsForm VideoSettings GUI reworked.
+	SettingsForm ImageSettings GUI reworked.
+	SettingsForm Apps-Games GUI reworked.
+	Suspending/Resuming/Resetting Session reworked.
+		Now all necessary data is stored into a single binary *.save file. This includes all Variables, Flags, Slideshows, TimerStates and regular Data. By Holding down the control key while clicking suspend or resume the user is asked for a custom file to save to or load from.
 
 
 # Changelog - Patch 54.4.0

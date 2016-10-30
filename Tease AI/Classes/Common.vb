@@ -264,6 +264,25 @@ Public Class Common
 
 	''' =========================================================================================================
 	''' <summary>
+	''' Checks if a file is already in use.
+	''' </summary>
+	''' <param name="filePath">The filepath to check.</param>
+	''' <returns>Returns true, if the file is in use.</returns>
+	Friend Shared Function IsFileLocked(filePath As String) As Boolean
+		If File.Exists(filePath) = False Then Return False
+		Dim stream As FileStream = Nothing
+		Try
+			stream = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None)
+		Catch ex As Exception
+			Return True
+		Finally
+			If stream IsNot Nothing Then stream.Close()
+		End Try
+		Return False
+	End Function
+
+	''' =========================================================================================================
+	''' <summary>
 	''' Checks if the given string is an URL.
 	''' </summary>
 	''' <param name="path">The string to be tested.</param>
@@ -366,6 +385,54 @@ Public Class Common
 	End Function
 
 
+
+	Public Shared Function ResizeImage(ByVal ImagePath As String, ByVal size As System.Drawing.Size) As Image
+		Try
+
+			If System.IO.File.Exists(ImagePath) Then
+				Dim imgOrg As Bitmap
+				Dim imgShow As Bitmap
+				Dim g As Graphics
+				Dim divideBy, divideByH, divideByW As Double
+				imgOrg = DirectCast(Bitmap.FromFile(ImagePath), Bitmap).Clone
+
+				divideByW = imgOrg.Width / size.Width
+				divideByH = imgOrg.Height / size.Height
+				If divideByW > 1 Or divideByH > 1 Then
+					If divideByW > divideByH Then
+						divideBy = divideByW
+					Else
+						divideBy = divideByH
+					End If
+
+					imgShow = New Bitmap(CInt(CDbl(imgOrg.Width) / divideBy), CInt(CDbl(imgOrg.Height) / divideBy))
+					imgShow.SetResolution(imgOrg.HorizontalResolution, imgOrg.VerticalResolution)
+					g = Graphics.FromImage(imgShow)
+					g.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+					g.DrawImage(imgOrg, New Rectangle(0, 0, CInt(CDbl(imgOrg.Width) / divideBy), CInt(CDbl(imgOrg.Height) / divideBy)), 0, 0, imgOrg.Width, imgOrg.Height, GraphicsUnit.Pixel)
+					g.Dispose()
+				Else
+					imgShow = New Bitmap(imgOrg.Width, imgOrg.Height)
+					imgShow.SetResolution(imgOrg.HorizontalResolution, imgOrg.VerticalResolution)
+					g = Graphics.FromImage(imgShow)
+					g.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+					g.DrawImage(imgOrg, New Rectangle(0, 0, imgOrg.Width, imgOrg.Height), 0, 0, imgOrg.Width, imgOrg.Height, GraphicsUnit.Pixel)
+					g.Dispose()
+				End If
+				imgOrg.Dispose()
+
+				Return imgShow
+			Else
+				Return Nothing
+			End If
+
+
+		Catch ex As Exception
+			MsgBox(ex.ToString)
+			Return Nothing
+		End Try
+
+	End Function
 
 
 End Class

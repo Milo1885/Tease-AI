@@ -241,7 +241,7 @@ Public Class FrmCardList
 			End If
 		Next
 
-		If FrmSettings.CBIncludeGifs.Checked = False Then
+		If My.Settings.CBIncludeGifs = False Then
 			For i As Integer = MatchList.Count - 1 To 0 Step -1
 				If MatchList(i).Contains(".gif") Then MatchList.Remove(MatchList(i))
 			Next
@@ -250,7 +250,7 @@ Public Class FrmCardList
 
 		Dim supportedExtensions As String
 
-		If FrmSettings.CBIncludeGifs.Checked = True Then
+		If My.Settings.CBIncludeGifs = True Then
 			supportedExtensions = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 		Else
 			supportedExtensions = "*.png,*.jpg,*.bmp,*.jpeg"
@@ -471,7 +471,7 @@ Public Class FrmCardList
 			End If
 		Next
 
-		If FrmSettings.CBIncludeGifs.Checked = False Then
+		If My.Settings.CBIncludeGifs = False Then
 			For i As Integer = MatchList.Count - 1 To 0 Step -1
 				If MatchList(i).Contains(".gif") Then MatchList.Remove(MatchList(i))
 			Next
@@ -480,7 +480,7 @@ Public Class FrmCardList
 
 		Dim supportedExtensions As String
 
-		If FrmSettings.CBIncludeGifs.Checked = True Then
+		If My.Settings.CBIncludeGifs = True Then
 			supportedExtensions = "*.png,*.jpg,*.gif,*.bmp,*.jpeg"
 		Else
 			supportedExtensions = "*.png,*.jpg,*.bmp,*.jpeg"
@@ -659,7 +659,7 @@ Public Class FrmCardList
 	Public Sub ShowCard1()
 		Debug.Print("ShowCard1 Called")
 Card1:
-		CardVal = Form1.randomizer.Next(0, MatchList.Count)
+		CardVal = Form1.ssh.randomizer.Next(0, MatchList.Count)
 		Pair1 = MatchList(CardVal)
 		MatchList.Remove(MatchList(CardVal))
 		Try
@@ -689,7 +689,7 @@ Card1:
 	Public Sub ShowCard2()
 		Debug.Print("ShowCard 2")
 Card2:
-		CardVal = Form1.randomizer.Next(0, MatchList.Count)
+		CardVal = Form1.ssh.randomizer.Next(0, MatchList.Count)
 		Pair2 = MatchList(CardVal)
 		MatchList.Remove(MatchList(CardVal))
 		Try
@@ -726,7 +726,7 @@ Card2:
 
 	Public Sub ShowCard3()
 Card3:
-		CardVal = Form1.randomizer.Next(0, MatchList.Count)
+		CardVal = Form1.ssh.randomizer.Next(0, MatchList.Count)
 		Pair3 = MatchList(CardVal)
 		MatchList.Remove(MatchList(CardVal))
 		Try
@@ -766,7 +766,7 @@ Card3:
 	Public Sub ShowCard4()
 
 Card4:
-		CardVal = Form1.randomizer.Next(0, MatchList.Count)
+		CardVal = Form1.ssh.randomizer.Next(0, MatchList.Count)
 		Pair4 = MatchList(CardVal)
 		MatchList.Remove(MatchList(CardVal))
 		Try
@@ -806,7 +806,7 @@ Card4:
 
 	Public Sub ShowCard5()
 Card5:
-		CardVal = Form1.randomizer.Next(0, MatchList.Count)
+		CardVal = Form1.ssh.randomizer.Next(0, MatchList.Count)
 		Pair5 = MatchList(CardVal)
 		MatchList.Remove(MatchList(CardVal))
 		Try
@@ -845,7 +845,7 @@ Card5:
 	Public Sub ShowCard6()
 
 Card6:
-		CardVal = Form1.randomizer.Next(0, MatchList.Count)
+		CardVal = Form1.ssh.randomizer.Next(0, MatchList.Count)
 		Pair6 = MatchList(CardVal)
 		MatchList.Remove(MatchList(CardVal))
 		Try
@@ -884,7 +884,7 @@ Card6:
 	Public Sub ShowCard7()
 
 Card7:
-		CardVal = Form1.randomizer.Next(0, MatchList.Count)
+		CardVal = Form1.ssh.randomizer.Next(0, MatchList.Count)
 		Pair7 = MatchList(CardVal)
 		MatchList.Remove(MatchList(CardVal))
 		Try
@@ -922,7 +922,7 @@ Card7:
 
 	Public Sub ShowCard8()
 Card8:
-		CardVal = Form1.randomizer.Next(0, MatchList.Count)
+		CardVal = Form1.ssh.randomizer.Next(0, MatchList.Count)
 		Pair8 = MatchList(CardVal)
 		MatchList.Remove(MatchList(CardVal))
 		Try
@@ -959,7 +959,7 @@ Card8:
 	Public Sub ShowCard9()
 
 Card9:
-		CardVal = Form1.randomizer.Next(0, MatchList.Count)
+		CardVal = Form1.ssh.randomizer.Next(0, MatchList.Count)
 		Pair9 = MatchList(CardVal)
 		Try
 			'M5C.Load(Pair9)
@@ -1057,43 +1057,43 @@ Card9:
 				Debug.Print(MatchList(I))
 			Next
 
-			Match1A = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match1A = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match1A)
-			Match2A = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match2A = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match2A)
-			Match3A = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match3A = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match3A)
-			Match4A = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match4A = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match4A)
-			Match5A = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match5A = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match5A)
-			Match6A = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match6A = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match6A)
 
-			Match1B = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match1B = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match1B)
-			Match2B = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match2B = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match2B)
-			Match3B = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match3B = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match3B)
-			Match4B = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match4B = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match4B)
-			Match5B = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match5B = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match5B)
-			Match6B = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match6B = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match6B)
 
-			Match1C = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match1C = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match1C)
-			Match2C = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match2C = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match2C)
-			Match3C = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match3C = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match3C)
-			Match4C = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match4C = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match4C)
-			Match5C = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match5C = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			MatchList.Remove(Match5C)
-			Match6C = MatchList(Form1.randomizer.Next(0, MatchList.Count))
+			Match6C = MatchList(Form1.ssh.randomizer.Next(0, MatchList.Count))
 			'MatchList.Remove(Match6C)
 
 			RevealTick = 3
@@ -1381,10 +1381,10 @@ Card9:
 
 			LBLMatchChance.Text = "You Win!"
 			GameOn = False
-			Form1.BronzeTokens = Form1.BronzeTokens + MatchPot
-			My.Settings.BronzeTokens = Form1.BronzeTokens
+			Form1.ssh.BronzeTokens = Form1.ssh.BronzeTokens + MatchPot
+			My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
 			My.Settings.Save()
-			LBLMatchTokens.Text = Form1.BronzeTokens
+			LBLMatchTokens.Text = Form1.ssh.BronzeTokens
 
 
 			If FrmSettings.CBGameSounds.Checked = True And File.Exists(Application.StartupPath & "\Audio\System\PayoutSmall.wav") Then
@@ -2180,8 +2180,8 @@ Card9:
 		'My.Computer.Audio.Play(Application.StartupPath & "\Audio\System\Slots.wav", AudioPlayMode.Background)
 
 
-		Form1.BronzeTokens -= LBLSlotBet.Text
-		LBLSlotTokens.Text = Form1.BronzeTokens
+		Form1.ssh.BronzeTokens -= LBLSlotBet.Text
+		LBLSlotTokens.Text = Form1.ssh.BronzeTokens
 
 		If Val(LBLSlotBet.Text) > Val(LBLSlotTokens.Text) Then
 			LBLSlotBet.Text = LBLSlotTokens.Text
@@ -2370,11 +2370,11 @@ Card9:
 			End If
 
 
-			Form1.BronzeTokens += Payout
+			Form1.ssh.BronzeTokens += Payout
 
-			LBLSlotTokens.Text = Form1.BronzeTokens
+			LBLSlotTokens.Text = Form1.ssh.BronzeTokens
 
-			My.Settings.BronzeTokens = Form1.BronzeTokens
+			My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
 			My.Settings.Save()
 
 
@@ -2446,53 +2446,17 @@ Card9:
 		SlotRight1.Image = Image.FromFile(SlotImage)
 		SlotRight2.Image = Image.FromFile(SlotImage)
 
-		LBLSlotTokens.Text = Form1.BronzeTokens
+		LBLSlotTokens.Text = Form1.ssh.BronzeTokens
 
 	End Sub
 
 	Public Sub ClearSlots()
 
-		Try
-			Slot1.Image.Dispose()
-		Catch
-		End Try
-		Slot1.Image = Nothing
-
-		Try
-			Slot2.Image.Dispose()
-		Catch
-		End Try
-		Slot2.Image = Nothing
-
-		Try
-			Slot3.Image.Dispose()
-		Catch
-		End Try
-		Slot3.Image = Nothing
-
-		Try
-			SlotLeft1.Image.Dispose()
-		Catch
-		End Try
-		SlotLeft1.Image = Nothing
-
-		Try
-			SlotLeft2.Image.Dispose()
-		Catch
-		End Try
-		SlotLeft2.Image = Nothing
-
-		Try
-			SlotRight1.Image.Dispose()
-		Catch
-		End Try
-		SlotRight1.Image = Nothing
-
-		Try
-			SlotRight2.Image.Dispose()
-		Catch
-		End Try
-		SlotRight2.Image = Nothing
+		For Each tmp As PictureBox In New List(Of PictureBox) From
+				{Slot1, Slot2, Slot3, SlotLeft1, SlotLeft2, SlotRight1, SlotRight2}
+			If tmp.Image IsNot Nothing Then tmp.Image.Dispose()
+			tmp.Image = Nothing
+		Next
 
 		Try
 			GC.Collect()
@@ -2529,13 +2493,13 @@ Card9:
 
 	Private Sub Button7_Click(sender As System.Object, e As System.EventArgs)
 
-		Form1.BronzeTokens += 5
-		LBLSlotTokens.Text = Form1.BronzeTokens
+		Form1.ssh.BronzeTokens += 5
+		LBLSlotTokens.Text = Form1.ssh.BronzeTokens
 	End Sub
 
 	Private Sub Button8_Click(sender As System.Object, e As System.EventArgs) Handles BTNMatchEasy.Click
 
-		If Form1.BronzeTokens < 1 Then Return
+		If Form1.ssh.BronzeTokens < 1 Then Return
 
 
 		InitializeCards()
@@ -2551,10 +2515,10 @@ Card9:
 
 		EraseCards()
 
-		Form1.BronzeTokens -= 1
-		My.Settings.BronzeTokens = Form1.BronzeTokens
+		Form1.ssh.BronzeTokens -= 1
+		My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
 		My.Settings.Save()
-		LBLMatchTokens.Text = Form1.BronzeTokens
+		LBLMatchTokens.Text = Form1.ssh.BronzeTokens
 
 		CardSetup = True
 
@@ -2568,7 +2532,7 @@ Card9:
 
 	Private Sub BTNMatchNormal_Click(sender As System.Object, e As System.EventArgs) Handles BTNMatchNormal.Click
 
-		If Form1.BronzeTokens < 1 Then Return
+		If Form1.ssh.BronzeTokens < 1 Then Return
 
 		InitializeCards()
 
@@ -2583,10 +2547,10 @@ Card9:
 
 		EraseCards()
 
-		Form1.BronzeTokens -= 1
-		My.Settings.BronzeTokens = Form1.BronzeTokens
+		Form1.ssh.BronzeTokens -= 1
+		My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
 		My.Settings.Save()
-		LBLMatchTokens.Text = Form1.BronzeTokens
+		LBLMatchTokens.Text = Form1.ssh.BronzeTokens
 
 		CardSetup = True
 
@@ -2600,7 +2564,7 @@ Card9:
 
 	Private Sub BTNMatchHard_Click(sender As System.Object, e As System.EventArgs) Handles BTNMatchHard.Click
 
-		If Form1.BronzeTokens < 1 Then Return
+		If Form1.ssh.BronzeTokens < 1 Then Return
 
 		InitializeCards()
 
@@ -2615,10 +2579,10 @@ Card9:
 
 		EraseCards()
 
-		Form1.BronzeTokens -= 1
-		My.Settings.BronzeTokens = Form1.BronzeTokens
+		Form1.ssh.BronzeTokens -= 1
+		My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
 		My.Settings.Save()
-		LBLMatchTokens.Text = Form1.BronzeTokens
+		LBLMatchTokens.Text = Form1.ssh.BronzeTokens
 
 		CardSetup = True
 
@@ -2785,7 +2749,7 @@ Card9:
 
 		If TCGames.SelectedIndex = 0 Then
 			InitializeSlots()
-			LBLSlotTokens.Text = Form1.BronzeTokens
+			LBLSlotTokens.Text = Form1.ssh.BronzeTokens
 		End If
 
 		If TCGames.SelectedIndex <> 1 Then
@@ -2794,12 +2758,12 @@ Card9:
 
 		If TCGames.SelectedIndex = 1 Then
 			InitializeCards()
-			LBLMatchTokens.Text = Form1.BronzeTokens
+			LBLMatchTokens.Text = Form1.ssh.BronzeTokens
 		End If
 
 		If TCGames.SelectedIndex = 2 Then
 
-			LBLRiskTokens.Text = Form1.BronzeTokens
+			LBLRiskTokens.Text = Form1.ssh.BronzeTokens
 		End If
 
 		If TCGames.SelectedIndex = 3 Then
@@ -2826,9 +2790,9 @@ Card9:
 			Else
 				BoosterBack.Image = Image.FromFile(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Games\_CardBackPicture.png")
 			End If
-			LBLExchangeBronze.Text = Form1.BronzeTokens
-			LBLExchangeSilver.Text = Form1.SilverTokens
-			LBLExchangeGold.Text = Form1.GoldTokens
+			LBLExchangeBronze.Text = Form1.ssh.BronzeTokens
+			LBLExchangeSilver.Text = Form1.ssh.SilverTokens
+			LBLExchangeGold.Text = Form1.ssh.GoldTokens
 		End If
 
 		If TCGames.SelectedIndex = 4 Then
@@ -3096,11 +3060,11 @@ Card9:
 
 	Private Sub Button1_Click(sender As System.Object, e As System.EventArgs) Handles BTNBoosterBuy.Click
 
-		If Form1.BronzeTokens < 25 Then Return
+		If Form1.ssh.BronzeTokens < 25 Then Return
 
-		Form1.BronzeTokens -= 25
-		LBLExchangeBronze.Text = Form1.BronzeTokens
-		My.Settings.BronzeTokens = Form1.BronzeTokens
+		Form1.ssh.BronzeTokens -= 25
+		LBLExchangeBronze.Text = Form1.ssh.BronzeTokens
+		My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
 		My.Settings.Save()
 
 		BoosterListBronze.Clear()
@@ -3796,9 +3760,9 @@ Card9:
 
 	Public Sub UpdateBronzeTokens()
 
-		LBLSlotTokens.Text = Form1.BronzeTokens
-		LBLMatchTokens.Text = Form1.BronzeTokens
-		LBLExchangeBronze.Text = Form1.BronzeTokens
+		LBLSlotTokens.Text = Form1.ssh.BronzeTokens
+		LBLMatchTokens.Text = Form1.ssh.BronzeTokens
+		LBLExchangeBronze.Text = Form1.ssh.BronzeTokens
 
 	End Sub
 
@@ -3829,13 +3793,13 @@ Card9:
 			BTNExchange5.Enabled = False
 		End If
 
-		If Form1.SilverTokens > 0 Then
+		If Form1.ssh.SilverTokens > 0 Then
 			BTNExchange6.Enabled = True
 		Else
 			BTNExchange6.Enabled = False
 		End If
 
-		If Form1.BronzeTokens > 24 And BoosterTimer.Enabled = False Then
+		If Form1.ssh.BronzeTokens > 24 And BoosterTimer.Enabled = False Then
 			BTNBoosterBuy.Enabled = True
 		Else
 			BTNBoosterBuy.Enabled = False
@@ -3948,9 +3912,9 @@ Card9:
 			GameWMP.URL = Application.StartupPath & "\Audio\System\PayoutSmall.wav"
 		End If
 
-		Form1.BronzeTokens += 12
-		My.Settings.BronzeTokens = Form1.BronzeTokens
-		LBLExchangeBronze.Text = Form1.BronzeTokens
+		Form1.ssh.BronzeTokens += 12
+		My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
+		LBLExchangeBronze.Text = Form1.ssh.BronzeTokens
 
 
 
@@ -4054,9 +4018,9 @@ Card9:
 			GameWMP.URL = Application.StartupPath & "\Audio\System\PayoutOne.wav"
 		End If
 
-		Form1.SilverTokens += 1
-		My.Settings.SilverTokens = Form1.SilverTokens
-		LBLExchangeSilver.Text = Form1.SilverTokens
+		Form1.ssh.SilverTokens += 1
+		My.Settings.SilverTokens = Form1.ssh.SilverTokens
+		LBLExchangeSilver.Text = Form1.ssh.SilverTokens
 
 
 
@@ -4084,9 +4048,9 @@ Card9:
 			GameWMP.URL = Application.StartupPath & "\Audio\System\PayoutOne.wav"
 		End If
 
-		Form1.GoldTokens += 1
-		My.Settings.GoldTokens = Form1.GoldTokens
-		LBLExchangeGold.Text = Form1.GoldTokens
+		Form1.ssh.GoldTokens += 1
+		My.Settings.GoldTokens = Form1.ssh.GoldTokens
+		LBLExchangeGold.Text = Form1.ssh.GoldTokens
 
 
 
@@ -4106,13 +4070,13 @@ Card9:
 			GameWMP.URL = Application.StartupPath & "\Audio\System\PayoutSmall.wav"
 		End If
 
-		Form1.SilverTokens -= 1
-		Form1.BronzeTokens += 50
-		My.Settings.BronzeTokens = Form1.BronzeTokens
-		My.Settings.BronzeTokens = Form1.BronzeTokens
+		Form1.ssh.SilverTokens -= 1
+		Form1.ssh.BronzeTokens += 50
+		My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
+		My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
 
-		LBLExchangeBronze.Text = Form1.BronzeTokens
-		LBLExchangeSilver.Text = Form1.SilverTokens
+		LBLExchangeBronze.Text = Form1.ssh.BronzeTokens
+		LBLExchangeSilver.Text = Form1.ssh.SilverTokens
 
 		My.Settings.Save()
 
@@ -4130,11 +4094,11 @@ Card9:
 		Next
 		If TokenList.Count > 0 Then
 
-			Form1.SaidHello = True
-			Form1.ShowModule = True
-			Form1.FileText = TokenList(randomizer.Next(0, TokenList.Count))
-			Form1.StrokeTauntVal = -1
-			Form1.ScriptTick = 2
+			Form1.ssh.SaidHello = True
+			Form1.ssh.ShowModule = True
+			Form1.ssh.FileText = TokenList(randomizer.Next(0, TokenList.Count))
+			Form1.ssh.StrokeTauntVal = -1
+			Form1.ssh.ScriptTick = 2
 			Form1.ScriptTimer.Start()
 
 			My.Settings.TokenTasks = FormatDateTime(Now, DateFormat.ShortDate)
@@ -4153,12 +4117,12 @@ Card9:
 
 	Private Sub Button1_Click_2(sender As System.Object, e As System.EventArgs)
 
-		Form1.BronzeTokens += 50
-		My.Settings.BronzeTokens = Form1.BronzeTokens
+		Form1.ssh.BronzeTokens += 50
+		My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
 
 		My.Settings.Save()
 
-		LBLExchangeBronze.Text = Form1.BronzeTokens
+		LBLExchangeBronze.Text = Form1.ssh.BronzeTokens
 		BTNBoosterBuy.Enabled = True
 
 	End Sub
@@ -4740,27 +4704,27 @@ Card9:
 		If RiskyRound = 0 Then
 			DisableCases()
 			RiskyPick = RiskyChoices(0)
-			Form1.RiskyDelay = False
+			Form1.ssh.RiskyDelay = False
 		End If
 
 		If RiskyRound = 1 Or RiskyRound = 2 Then
 			If RiskyChoiceCount = 6 Then
 				DisableCases()
-				Form1.RiskyDelay = False
+				Form1.ssh.RiskyDelay = False
 			End If
 		End If
 
 		If RiskyRound = 3 Or RiskyRound = 4 Then
 			If RiskyChoiceCount = 3 Then
 				DisableCases()
-				Form1.RiskyDelay = False
+				Form1.ssh.RiskyDelay = False
 			End If
 		End If
 
 		If RiskyRound = 5 Or RiskyRound = 6 Then
 			If RiskyChoiceCount = 2 Then
 				DisableCases()
-				Form1.RiskyDelay = False
+				Form1.ssh.RiskyDelay = False
 			End If
 		End If
 
@@ -5150,22 +5114,22 @@ Card9:
 
 	Private Sub Button1_Click_3(sender As System.Object, e As System.EventArgs) Handles BTNRiskyPlay.Click
 
-		If Form1.SaidHello = True Then
+		If Form1.ssh.SaidHello = True Then
 			MessageBox.Show(Me, "Risky Pick cannot be started from the Games window when there is a session in progress!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
 
-		If Form1.RiskyDeal = True Then
+		If Form1.ssh.RiskyDeal = True Then
 			MessageBox.Show(Me, "A new Risky Pick game cannot be started until the current game is finished!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
 
-		If Form1.RiskyEdges = True Then
+		If Form1.ssh.RiskyEdges = True Then
 			MessageBox.Show(Me, "You still owe edges from your previous game!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
 
-		If Form1.BronzeTokens < 100 Then
+		If Form1.ssh.BronzeTokens < 100 Then
 			MessageBox.Show(Me, "It costs 100 Bronze Tokens to play Risky Pick!", "Not enough Tokens!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
@@ -5175,27 +5139,27 @@ Card9:
 			Return
 		End If
 
-		Form1.BronzeTokens -= 100
-		My.Settings.BronzeTokens = Form1.BronzeTokens
+		Form1.ssh.BronzeTokens -= 100
+		My.Settings.BronzeTokens = Form1.ssh.BronzeTokens
 		My.Settings.Save()
 
 		RiskyState = True
-		Form1.RiskyDeal = True
+		Form1.ssh.RiskyDeal = True
 
 		BTNRiskyPlay.Text = ""
 		BTNRiskyPlay.Enabled = False
 
-		Form1.StrokeTauntVal = -1
+		Form1.ssh.StrokeTauntVal = -1
 
-		If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And Form1.SlideshowLoaded = False Then
+		If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And Form1.ssh.SlideshowLoaded = False Then
 			Form1.LoadDommeImageFolder()
 		End If
 
-		Form1.FileText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Games\Risky Pick\Risky Pick.txt"
-		Form1.BeforeTease = False
-		Form1.ShowModule = True
-		Form1.SaidHello = True
-		Form1.ScriptTick = 1
+		Form1.ssh.FileText = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Apps\Games\Risky Pick\Risky Pick.txt"
+		Form1.ssh.BeforeTease = False
+		Form1.ssh.ShowModule = True
+		Form1.ssh.SaidHello = True
+		Form1.ssh.ScriptTick = 1
 		Form1.ScriptTimer.Start()
 
 	End Sub
@@ -5935,132 +5899,19 @@ Card9:
 
 	Public Sub ClearAllCards()
 
-		Try
-			Slot1.Image.Dispose()
-		Catch
-		End Try
-		Slot1.Image = Nothing
+		For Each tmp As PictureBox In New List(Of PictureBox) From
+				{Slot1, Slot2, Slot3, SlotLeft1, SlotLeft2, SlotRight1, SlotRight2,
+				BronzeP1, BronzeP2, BronzeP3, BronzeP4, BronzeP5, BronzeP6,
+				SilverP1, SilverP2, SilverP3, SilverP4, SilverP5, SilverP6,
+				GoldP1, GoldP2, GoldP3, GoldP3, GoldP4, GoldP5, GoldP6}
+			If tmp.Image IsNot Nothing Then tmp.Image.Dispose()
+			tmp.Image = Nothing
+		Next
 
 		Try
-			Slot2.Image.Dispose()
+			GC.Collect()
 		Catch
 		End Try
-		Slot2.Image = Nothing
-
-		Try
-			Slot3.Image.Dispose()
-		Catch
-		End Try
-		Slot3.Image = Nothing
-
-		Try
-			BronzeP1.Image.Dispose()
-		Catch
-		End Try
-		BronzeP1.Image = Nothing
-
-		Try
-			BronzeP2.Image.Dispose()
-		Catch
-		End Try
-		BronzeP2.Image = Nothing
-
-		Try
-			BronzeP3.Image.Dispose()
-		Catch
-		End Try
-		BronzeP3.Image = Nothing
-
-		Try
-			BronzeP4.Image.Dispose()
-		Catch
-		End Try
-		BronzeP4.Image = Nothing
-
-		Try
-			BronzeP5.Image.Dispose()
-		Catch
-		End Try
-		BronzeP5.Image = Nothing
-
-		Try
-			BronzeP6.Image.Dispose()
-		Catch
-		End Try
-		BronzeP6.Image = Nothing
-
-		Try
-			SilverP1.Image.Dispose()
-		Catch
-		End Try
-		SilverP1.Image = Nothing
-
-		Try
-			SilverP2.Image.Dispose()
-		Catch
-		End Try
-		SilverP2.Image = Nothing
-
-		Try
-			SilverP3.Image.Dispose()
-		Catch
-		End Try
-		SilverP3.Image = Nothing
-
-		Try
-			SilverP4.Image.Dispose()
-		Catch
-		End Try
-		SilverP4.Image = Nothing
-
-		Try
-			SilverP5.Image.Dispose()
-		Catch
-		End Try
-		SilverP5.Image = Nothing
-
-		Try
-			SilverP6.Image.Dispose()
-		Catch
-		End Try
-		SilverP6.Image = Nothing
-
-		Try
-			GoldP1.Image.Dispose()
-		Catch
-		End Try
-		GoldP1.Image = Nothing
-
-		Try
-			GoldP2.Image.Dispose()
-		Catch
-		End Try
-		GoldP2.Image = Nothing
-
-		Try
-			GoldP3.Image.Dispose()
-		Catch
-		End Try
-		GoldP3.Image = Nothing
-
-		Try
-			GoldP4.Image.Dispose()
-		Catch
-		End Try
-		GoldP4.Image = Nothing
-
-		Try
-			GoldP5.Image.Dispose()
-		Catch
-		End Try
-		GoldP5.Image = Nothing
-
-		Try
-			GoldP6.Image.Dispose()
-		Catch
-		End Try
-		GoldP6.Image = Nothing
-
 
 	End Sub
 
@@ -6152,8 +6003,8 @@ Card9:
 		BTNRiskIt.Text = "DECLINE OFFER"
 		BTNPickIt.Text = "ACCEPT OFFER"
 
-		Form1.RiskyDeal = False
-		Form1.RiskyEdges = True
+		Form1.ssh.RiskyDeal = False
+		Form1.ssh.RiskyEdges = True
 
 		Me.Close()
 

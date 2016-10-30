@@ -109,7 +109,8 @@
     <Compile Include="Classes\My.Watchdog.vb" />
     <Compile Include="Classes\myDirectory.vb" />
     <Compile Include="Classes\mySettings_Partial.vb" />
-    <Compile Include="Classes\SaveState.vb" />
+    <Compile Include="Classes\Slideshows.vb" />
+    <Compile Include="Classes\State.vb" />
     <Compile Include="Classes\teaseAI_Timer.vb">
       <SubType>Component</SubType>
     </Compile>

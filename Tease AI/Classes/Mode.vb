@@ -1,4 +1,5 @@
-﻿Public Class Mode
+﻿<Serializable>
+Public Class Mode
 
 	Public Keyword As String
 	Public Type As String
