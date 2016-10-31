@@ -26,6 +26,8 @@ Public Class FrmSettings
 	Dim LocalImageTagCount As Integer
 	Dim CurrentImageTagImage As String
 	Dim CurrentLocalImageTagImage As String
+	Dim TagCount As Integer
+	Dim LocalTagCount As Integer
 
 
 	Public WebImage As String
@@ -6393,8 +6395,8 @@ checkFolder:
 
 			LoadDommeTags()
 
-			Form1.ssh.TagCount = 1
-			LBLTagCount.Text = Form1.ssh.TagCount & "/" & ImageTagDir.Count
+			TagCount = 1
+			LBLTagCount.Text = TagCount & "/" & ImageTagDir.Count
 
 			'If ImageTagDir.Count = 1 Then BTNTagSave.Text = "Save and Finish"
 
@@ -6498,8 +6500,8 @@ checkFolder:
 
 				LoadDommeTags()
 
-				Form1.ssh.TagCount = 1
-				LBLTagCount.Text = Form1.ssh.TagCount & "/" & ImageTagDir.Count
+				TagCount = 1
+				LBLTagCount.Text = TagCount & "/" & ImageTagDir.Count
 
 				'If ImageTagDir.Count = 1 Then BTNTagSave.Text = "Save and Finish"
 
@@ -6656,8 +6658,8 @@ checkFolder:
 
 	Private Sub BTNTagNext_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagNext.Click
 
-		Form1.ssh.TagCount += 1
-		LBLTagCount.Text = Form1.ssh.TagCount & "/" & ImageTagDir.Count
+		TagCount += 1
+		LBLTagCount.Text = TagCount & "/" & ImageTagDir.Count
 		BTNTagPrevious.Enabled = True
 
 
@@ -6690,8 +6692,8 @@ checkFolder:
 
 	Private Sub BTNTagPrevious_Click(sender As System.Object, e As System.EventArgs) Handles BTNTagPrevious.Click
 
-		Form1.ssh.TagCount -= 1
-		LBLTagCount.Text = Form1.ssh.TagCount & "/" & ImageTagDir.Count
+		TagCount -= 1
+		LBLTagCount.Text = TagCount & "/" & ImageTagDir.Count
 		BTNTagNext.Enabled = True
 
 
@@ -7132,8 +7134,8 @@ checkFolder:
 
 
 
-			Form1.ssh.LocalTagCount = 1
-			LBLLocalTagCount.Text = Form1.ssh.LocalTagCount & "/" & LocalImageTagDir.Count
+			LocalTagCount = 1
+			LBLLocalTagCount.Text = LocalTagCount & "/" & LocalImageTagDir.Count
 
 
 			LocalImageTagCount = 0
@@ -7156,8 +7158,8 @@ checkFolder:
 
 	Private Sub BTNLocalTagNext_Click(sender As System.Object, e As System.EventArgs) Handles BTNLocalTagNext.Click
 
-		Form1.ssh.LocalTagCount += 1
-		LBLLocalTagCount.Text = Form1.ssh.LocalTagCount & "/" & LocalImageTagDir.Count
+		LocalTagCount += 1
+		LBLLocalTagCount.Text = LocalTagCount & "/" & LocalImageTagDir.Count
 		BTNLocalTagPrevious.Enabled = True
 
 		SetLocalImageTags()
@@ -8314,8 +8316,8 @@ checkFolder:
 
 	Private Sub BTNLocalTagPrevious_Click(sender As System.Object, e As System.EventArgs) Handles BTNLocalTagPrevious.Click
 
-		Form1.ssh.LocalTagCount -= 1
-		LBLLocalTagCount.Text = Form1.ssh.LocalTagCount & "/" & LocalImageTagDir.Count
+		LocalTagCount -= 1
+		LBLLocalTagCount.Text = LocalTagCount & "/" & LocalImageTagDir.Count
 		BTNLocalTagNext.Enabled = True
 
 		SetLocalImageTags()
@@ -8392,8 +8394,8 @@ checkFolder:
 
 
 
-				Form1.ssh.LocalTagCount = 1
-				LBLLocalTagCount.Text = Form1.ssh.LocalTagCount & "/" & LocalImageTagDir.Count
+				LocalTagCount = 1
+				LBLLocalTagCount.Text = LocalTagCount & "/" & LocalImageTagDir.Count
 
 
 				LocalImageTagCount = 0

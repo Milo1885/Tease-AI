@@ -1,12 +1,13 @@
 ﻿Option Explicit On
-
+Imports System.ComponentModel
+Imports System.Drawing.Design
 Imports System.IO
 Imports System.Runtime.Serialization.Formatters.Binary
 
 Namespace My
 
 	Partial Friend Class MyApplication
-		Friend Session As New SessionState
+		Friend Session As SessionState
 	End Class
 	''' <summary>
 	''' Class to store/serialize and deserialize all nessecary session(!) informations.
@@ -19,12 +20,14 @@ Namespace My
 		'TODO-Next: Clode Cleanup
 
 #Region "------------------------------------------- Data -----------------------------------------------"
+		Const EditorGenericStringList As String = "System.Windows.Forms.Design.ListControlStringCollectionEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+
 		Public Property DomPersonality As String = "" 'My.Settings.DomPersonality
 
 		Public Property Chat As String
 
-		Public randomizer As New Random
-		Public ScriptOperator As String
+		Public Property randomizer As New Random
+		Public Property ScriptOperator As String
 
 		Public Property DomTyping As Boolean
 
@@ -32,451 +35,432 @@ Namespace My
 		Public Property CheckNo As Boolean
 
 		Public Property Playlist As Boolean
+		<Editor(EditorGenericStringList, GetType(UITypeEditor))>
 		Public Property PlaylistFile As New List(Of String)
 		Public Property PlaylistCurrent As Integer
 
 
-
+		Public Property TeaseTick As Integer
 		Public Property Responding As Boolean
 
-		Public Property StrokeTauntVal As Integer = -1
-		Public Property FileText As String
-		Public Property TempStrokeTauntVal As Integer
-		Public Property TempFileText As String
-
-		Public Property TeaseTick As Integer
-
-		Public Property StrokeTauntCount As Integer
-		Public Property TauntTextTotal As Integer
+		<Category("Taunts")> Public Property StrokeTauntVal As Integer = -1
+		<Category("Taunts")> Public Property TempStrokeTauntVal As Integer
+		<Category("Taunts")> Public Property TempFileText As String
+		<Category("Taunts")> Public Property TauntText As String
+		<Category("Taunts")> Public Property StrokeTauntCount As Integer
+		<Category("Taunts")> Public Property TauntTextTotal As Integer
+		<Category("Taunts")>
+		<Editor(EditorGenericStringList, GetType(UITypeEditor))>
 		Public Property TauntLines As New List(Of String)
-		Public Property StrokeFilter As Boolean
-
-		Public ScriptTick As Integer
-		Public StringLength As Integer
-		Public FileGoto As String
-		Public SkipGotoLine As Boolean
-
-		Public ChatString As String
-		Public DomTask As String = "@SystemMessage <b>Tease AI has been reset</b>"
-		Public DomChat As String = "@SystemMessage <b>Tease AI has been reset</b>"
-		Public TypeDelay As Integer
-		Public TempVal As Integer
-		Public NullResponse As Boolean
-
-		Public TagCount As Integer
-		Public LocalTagCount As Integer
-
-		Public TaskFile As String
-		Public TaskText As String
-		Public TaskTextDir As String
+		<Category("Taunts")> Public Property StrokeFilter As Boolean
+		<Category("Taunts")> Public Property TauntTextCount As Integer
 
 
-		Public ResponseFile As String
-		Public ResponseLine As Integer
+		<Category("Script")> Public Property FileText As String
+		<Category("Script")> Public Property ScriptTick As Integer
+		<Category("Script")> Public Property StringLength As Integer
+		<Category("Script")> Public Property FileGoto As String
+		<Category("Script")> Public Property SkipGotoLine As Boolean
 
-		Public CBTCockActive As Boolean
-		Public CBTBallsActive As Boolean
+		Public Property ChatString As String
+		Public Property DomTask As String = "@SystemMessage <b>Tease AI has been reset</b>"
+		Public Property DomChat As String = "@SystemMessage <b>Tease AI has been reset</b>"
+		Public Property TypeDelay As Integer
+		Public Property TempVal As Integer
+		Public Property NullResponse As Boolean
 
-		Public CBTCockFlag As Boolean
-		Public CBTBallsFlag As Boolean
-
-		Public CBTBallsFirst As Boolean = True
-		Public CBTCockFirst As Boolean = True
-
-		Public CBTBallsCount As Integer
-		Public CBTCockCount As Integer
-
-		Public TasksCount As Integer = "0"
-
-		Public GotoDommeLevel As Boolean
-
-		Public DommeMood As Integer
-
-		Public AFK As Boolean
+		Public Property TaskFile As String
+		Public Property TaskText As String
+		Public Property TaskTextDir As String
 
 
-		Public HypnoGen As Boolean
-		Public Induction As Boolean
-		Public TempHypno As String
+		Public Property ResponseFile As String
+		Public Property ResponseLine As Integer
 
-		Public StrokeTick As Integer
-		Public StrokeTauntTick As Integer
+		<Category("CBT")> Public Property CBTCockActive As Boolean
+		<Category("CBT")> Public Property CBTBallsActive As Boolean
 
+		<Category("CBT")> Public Property CBTCockFlag As Boolean
+		<Category("CBT")> Public Property CBTBallsFlag As Boolean
 
+		<Category("CBT")> Public Property CBTBallsFirst As Boolean = True
+		<Category("CBT")> Public Property CBTCockFirst As Boolean = True
 
-		Public StrokeTimeTotal As Integer
-		Public HoldEdgeTime As Integer
-		Public HoldEdgeTimeTotal As Integer
+		<Category("CBT")> Public Property CBTBallsCount As Integer
+		<Category("CBT")> Public Property CBTCockCount As Integer
 
-		Public EdgeTauntInt As Integer
+		Public Property TasksCount As Integer = "0"
 
-		Public DelayTick As Integer
+		Public Property GotoDommeLevel As Boolean
 
-		Public DomTypeCheck As Boolean
-		Public TypeToggle As Boolean
-		Public IsTyping As Boolean
-		Public SubWroteLast As Boolean = False
-		Public YesOrNo As Boolean = False
-		Public GotoFlag As Boolean
+		Public Property DommeMood As Integer = -1
 
-		Public CBT As Boolean
-
-		Public RunningScript As Boolean
-
-		Public BeforeTease As Boolean
-		Public SubStroking As Boolean = False
-		Public SubEdging As Boolean = False
-		Public SubHoldingEdge As Boolean = False
-		Public EndTease As Boolean
-
-		Public ShowModule As Boolean = False
-		Public ModuleEnd As Boolean
-
-		Public DivideText As Boolean
-
-		Public HoldEdgeTick As Integer
-		Public HoldEdgeChance As Integer
-
-		Public EdgeHold As Boolean
-		Public EdgeNoHold As Boolean
-		Public EdgeToRuin As Boolean
-		Public EdgeToRuinSecret As Boolean = True
-		Public LongEdge As Boolean
-
-		<Obsolete("Never set to true but never used.")>
-		Public AskedToGiveUp As Boolean
-		Public AskedToGiveUpSection As Boolean
-		Public SubGaveUp As Boolean
-		Public AskedToSpeedUp As Boolean = False
-		Public AskedToSlowDown As Boolean = False
-
-		<Obsolete("Used in #VTLenth but delivers a wrong value.")>
-		Public VTLength As Integer
+		Public Property AFK As Boolean
 
 
-		Public DommeVideo As Boolean
-		Public VideoType As String = "General"
-		Public CensorshipGame As Boolean
-		Public CensorshipTick As Integer
-		Public AvoidTheEdgeGame As Boolean
-		Public AvoidTheEdgeTick As Integer
-		Public AvoidTheEdgeStroking As Boolean
-		Public AtECountdown As Integer
+		Public Property HypnoGen As Boolean
+		Public Property Induction As Boolean
+		Public Property TempHypno As String
 
-		Public VTPath As String
-		Public NoVideo As Boolean
-		Public NoSpecialVideo As Boolean
-		Public VideoCheck As Boolean
-		Public VideoTease As Boolean
-
-		Public RLGLGame As Boolean
-		Public RLGLTick As Integer
-		Public RedLight As Boolean
-		Public RLGLTauntTick As Integer
-
-		Public RandomizerVideo As Boolean
-		Public RandomizerVideoTease As Boolean
-
-		Public ScriptVideoTease As String
-		Public ScriptVideoTeaseFlag As Boolean
-
-		Public VideoTauntTick As Integer
+		Public Property StrokeTick As Integer
+		Public Property StrokeTauntTick As Integer
 
 
-		Public SlideshowLoaded As Boolean
 
-		Public UpdatesTick As Integer = 120
-		Public UpdatingPost As Boolean
-		Public UpdateStage As Integer
-		Public UpdateStageTick As Integer
-		Public StatusText As String
-		Public ContactNumber As Integer
-		Public ContactTick As Integer
+		Public Property StrokeTimeTotal As Integer
+		Public Property HoldEdgeTime As Integer
+		Public Property HoldEdgeTimeTotal As Integer
 
-		Public StatusText1 As String
-		Public StatusText2 As String
-		Public StatusText3 As String
+		Public Property EdgeTauntInt As Integer
 
-		Public StatusChance1 As Integer
-		Public StatusChance2 As Integer
-		Public StatusChance3 As Integer
+		Public Property DelayTick As Integer
 
-		Public Update1 As Boolean
-		Public Update2 As Boolean
-		Public Update3 As Boolean
+		Public Property DomTypeCheck As Boolean
+		Public Property TypeToggle As Boolean
+		Public Property IsTyping As Boolean
+		Public Property SubWroteLast As Boolean = False
+		<Description("True if sub has been asked a Yes/No Question.")>
+		Public Property YesOrNo As Boolean = False
+		Public Property GotoFlag As Boolean
+
+		Public Property CBT As Boolean
+
+		Public Property RunningScript As Boolean
+
+		Public Property BeforeTease As Boolean
+		Public Property SubStroking As Boolean = False
+		Public Property SubEdging As Boolean = False
+		Public Property SubHoldingEdge As Boolean = False
+		Public Property EndTease As Boolean
+
+		Public Property ShowModule As Boolean = False
+		Public Property ModuleEnd As Boolean
+
+		Public Property DivideText As Boolean
+
+		Public Property HoldEdgeTick As Integer
+		Public Property HoldEdgeChance As Integer
+
+		Public Property EdgeHold As Boolean
+		Public Property EdgeNoHold As Boolean
+		Public Property EdgeToRuin As Boolean
+		Public Property EdgeToRuinSecret As Boolean = True
+		Public Property LongEdge As Boolean
+
+		<Obsolete("Set to true but never used.")>
+		Public Property AskedToGiveUp As Boolean
+		Public Property AskedToGiveUpSection As Boolean
+		Public Property SubGaveUp As Boolean
+		Public Property AskedToSpeedUp As Boolean = False
+		Public Property AskedToSlowDown As Boolean = False
+
+
+		<Category("Video")> Public Property LockVideo As Boolean
+		<Category("Video")> Public Property DommeVideo As Boolean
+		<Category("Video")> Public Property JumpVideo As Boolean
+		<Category("Video")> Public Property NoSpecialVideo As Boolean
+		<Category("Video")> Public Property RandomizerVideo As Boolean
+		<Category("Video")> Public Property RandomizerVideoTease As Boolean
+		<Category("Video")> Public Property ScriptVideoTease As String
+		<Category("Video")> Public Property ScriptVideoTeaseFlag As Boolean
+		<Category("Video")> Public Property VideoCheck As Boolean
+		<Category("Video")> Public Property VideoTauntTick As Integer
+		<Category("Video")> Public Property VideoTease As Boolean
+		<Category("Video")> Public Property VideoTick As Integer
+		<Category("Video")> Public Property VideoType As String = "General"
+		<Category("Video")> Public Property VidFile As String
+		<Category("Video")> Public Property VTPath As String
+		<Category("Video")> <Obsolete("Used in #VTLenth but delivers a wrong value.")>
+		Public Property VTLength As Integer
+		<Category("Video - Avoid the Edge")> Public Property AtECountdown As Integer
+		<Category("Video - Avoid the Edge")> Public Property AvoidTheEdgeGame As Boolean
+		<Category("Video - Avoid the Edge")> Public Property AvoidTheEdgeStroking As Boolean
+		<Category("Video - Avoid the Edge")> Public Property AvoidTheEdgeTick As Integer
+		<Category("Video - Censorship")> Public Property CensorshipGame As Boolean
+		<Category("Video - Censorship")> Public Property CensorshipTick As Integer
+		<Category("Video - Red light green light")> Public Property RedLight As Boolean
+		<Category("Video - Red light green light")> Public Property RLGLGame As Boolean
+		<Category("Video - Red light green light")> Public Property RLGLTauntTick As Integer
+		<Category("Video - Red light green light")> Public Property RLGLTick As Integer
+		<Category("Video")> <Obsolete("Never set to TRUE")> Public Property NoVideo As Boolean
+
+		<Category("Glitter")> <Editor(EditorGenericStringList, GetType(UITypeEditor))>
+		Public Property UpdateList As New List(Of String)
+
+		<Category("Glitter")> Public Property UpdatesTick As Integer = 120
+		<Category("Glitter")> Public Property UpdatingPost As Boolean
+		<Category("Glitter")> Public Property UpdateStage As Integer
+		<Category("Glitter")> Public Property UpdateStageTick As Integer
+		<Category("Glitter")> Public Property StatusText As String
+		<Category("Glitter")> Public Property ContactNumber As Integer
+		<Category("Glitter")> Public Property ContactTick As Integer
+
+		<Category("Glitter")> Public Property StatusText1 As String
+		<Category("Glitter")> Public Property StatusText2 As String
+		<Category("Glitter")> Public Property StatusText3 As String
+
+		<Category("Glitter")> Public Property StatusChance1 As Integer
+		<Category("Glitter")> Public Property StatusChance2 As Integer
+		<Category("Glitter")> Public Property StatusChance3 As Integer
+
+		<Category("Glitter")> Public Property Update1 As Boolean
+		<Category("Glitter")> Public Property Update2 As Boolean
+		<Category("Glitter")> Public Property Update3 As Boolean
 
 		<Obsolete("Non threadsafe duplicate of My.Settings.RecentSlideshows. Use this instead.")>
-		Public RecentSlideshows As New List(Of String)
-		Public DomPic As String
+		Public Property RecentSlideshows As New List(Of String)
 
-		Public LockImage As Boolean
-		Public LockVideo As Boolean
+		<Editor(EditorGenericStringList, GetType(UITypeEditor))>
+		Public Property LocalTagImageList As New List(Of String)
 
-		Public LocalTagImageList As New List(Of String)
+		Public Property PetName As String
 
-		Public PetName As String
+		Public Property ScriptCount As Integer
+		Public Property TempScriptCount As Integer
 
-		Public TauntText As String
-		Public ScriptCount As Integer
-		Public TempScriptCount As Integer
-		Public TauntTextCount As Integer
-
-		Public SlideshowTimerTick As Integer
+		Public Property SlideshowTimerTick As Integer
 
 
 
 
 
-		Public LastScriptCountdown As Integer
-		Public LastScript As Boolean
+		Public Property LastScriptCountdown As Integer
+		Public Property LastScript As Boolean
 
-		Public JustShowedBlogImage As Boolean = False
-
-		Public SaidHello As Boolean = False
+		Public Property SaidHello As Boolean = False
 
 
-		Public AvgEdgeStroking As Integer
-		Public AvgEdgeNoTouch As Integer
-		Public EdgeCountTick As Integer
-		Public AvgEdgeStrokingFlag As Boolean
-		Public AvgEdgeCount As Integer
-		Public AvgEdgeCountRest As Integer
-		Public EdgeTickCheck As Integer
+		Public Property AvgEdgeStroking As Integer
+		Public Property AvgEdgeNoTouch As Integer
+		Public Property EdgeCountTick As Integer
+		Public Property AvgEdgeStrokingFlag As Boolean
+		Public Property AvgEdgeCount As Integer
+		Public Property AvgEdgeCountRest As Integer
+		Public Property EdgeTickCheck As Integer
 
-		Public EdgeNOT As Boolean
+		Public Property EdgeNOT As Boolean
 
-		Public AlreadyStrokingEdge As Boolean
+		Public Property AlreadyStrokingEdge As Boolean
 
-		Public WritingTaskLinesAmount As Integer
-		Public WritingTaskLinesWritten As Integer
-		Public WritingTaskLinesRemaining As Integer
-		Public WritingTaskMistakesAllowed As Integer
-		Public WritingTaskMistakesMade As Integer
-		Public WritingTaskFlag As Boolean = False
+		<Category("WritingTask")> Public Property WritingTaskLinesAmount As Integer
+		<Category("WritingTask")> Public Property WritingTaskLinesWritten As Integer
+		<Category("WritingTask")> Public Property WritingTaskLinesRemaining As Integer
+		<Category("WritingTask")> Public Property WritingTaskMistakesAllowed As Integer
+		<Category("WritingTask")> Public Property WritingTaskMistakesMade As Integer
+		<Category("WritingTask")> Public Property WritingTaskFlag As Boolean = False
+		<Category("WritingTask")> Public Property WritingTaskCurrentTime As Single
 
-		Public FirstRound As Boolean
-		Public StartStrokingCount As Integer = 0
+		Public Property FirstRound As Boolean
+		Public Property StartStrokingCount As Integer = 0
 		<Obsolete("Not used anymore.")>
 		Public TeaseJOI As Boolean
-		Public TeaseVideo As Boolean
+		Public Property TeaseVideo As Boolean
 
-		Public BoobList As New List(Of String)
-		Public AssList As New List(Of String)
-		Public AssImage As Boolean = False
-		Public BoobImage As Boolean = False
+		<Category("Games - TnA")> <Description("This list contains all boob-images of TNA game.")>
+		<Editor(EditorGenericStringList, GetType(UITypeEditor))>
+		Public Property BoobList As New List(Of String)
+		<Category("Games - TnA")> <Description("This list contains all butt-images of TNA game.")>
+		<Editor(EditorGenericStringList, GetType(UITypeEditor))>
+		Public Property AssList As New List(Of String)
+		<Category("Games - TnA")> Public Property AssImage As Boolean = False
+		<Category("Games - TnA")> Public Property BoobImage As Boolean = False
 
-		Public FoundTag As String = "Null"
-		Public TagGarment As String = "NULL"
-		Public TagUnderwear As String = "NULL"
-		Public TagTattoo As String = "NULL"
-		Public TagSexToy As String = "NULL"
-		Public TagFurniture As String = "NULL"
+		<Category("Tags")> Public Property FoundTag As String = "Null"
+		<Category("Tags")> Public Property TagGarment As String = "NULL"
+		<Category("Tags")> Public Property TagUnderwear As String = "NULL"
+		<Category("Tags")> Public Property TagTattoo As String = "NULL"
+		<Category("Tags")> Public Property TagSexToy As String = "NULL"
+		<Category("Tags")> Public Property TagFurniture As String = "NULL"
 
-		Public BookmarkModule As Boolean = False
-		Public BookmarkModuleFile As String
-		Public BookmarkModuleLine As Integer
-		Public BookmarkLink As Boolean = False
-		Public BookmarkLinkFile As String
-		Public BookmarkLinkLine As Integer
+		<Category("Bookmark")> Public Property BookmarkModule As Boolean = False
+		<Category("Bookmark")> Public Property BookmarkModuleFile As String
+		<Category("Bookmark")> Public Property BookmarkModuleLine As Integer
+		<Category("Bookmark")> Public Property BookmarkLink As Boolean = False
+		<Category("Bookmark")> Public Property BookmarkLinkFile As String
+		<Category("Bookmark")> Public Property BookmarkLinkLine As Integer
 
-		Public WaitTick As Integer
-
-
-
-
-
-		Public OrgasmDenied As Boolean
-		Public OrgasmAllowed As Boolean
-		Public OrgasmRuined As Boolean
-		Public LastOrgasmType As String = ""
-
-		Public CaloriesConsumed As Integer
-		Public CaloriesGoal As Integer
-
-		Public GoldTokens As Integer
-		Public SilverTokens As Integer
-		Public BronzeTokens As Integer
-
-		Public EdgeFound As Boolean
-
-		Public OrgasmYesNo As Boolean = False
+		Public Property WaitTick As Integer
 
 
-		Public UpdateList As New List(Of String)
-
-		Public CustomSlideshow As Boolean
-		Public CustomSlideshowList As New List(Of String)
-		''' <summary>
-		''' Addresses the current CustomSlideshow image.
-		''' </summary>
-		Public SlideshowInt As Integer
-		Public ImageString As String
-
-		Public RapidFire As Boolean
-
-		Public GlitterTease As Boolean
-		Public AddContactTick As Integer
-
-		Public Property SlideshowDomme As Slideshow
-		<System.ComponentModel.Category("Contact1")>
-		Public Property SlideshowContact1 As Slideshow
-		Public Property SlideshowContact2 As Slideshow
-		Public Property SlideshowContact3 As Slideshow
-		Public Group As String = "D"
-
-		Public CustomTask As Boolean
-		Public CustomTaskFirst As Boolean = True
-		Public CustomTaskText As String
-		Public CustomTaskTextFirst As String
-		Public CustomTaskActive As Boolean
-
-		Public VidFile As String
 
 
-		Public RiskyDeal As Boolean
-		Public RiskyEdges As Boolean
-		Public RiskyDelay As Boolean
 
-		Public SysMes As Boolean
-		Public EmoMes As Boolean
+		Public Property OrgasmDenied As Boolean
+		Public Property OrgasmAllowed As Boolean
+		Public Property OrgasmRuined As Boolean
+		Public Property LastOrgasmType As String = ""
 
-		Public Contact1Edge As Boolean
-		Public Contact2Edge As Boolean
-		Public Contact3Edge As Boolean
+		Public Property CaloriesConsumed As Integer
+		Public Property CaloriesGoal As Integer
 
-		Public Contact1Stroke As Boolean
-		Public Contact2Stroke As Boolean
-		Public Contact3Stroke As Boolean
+		<Category("Tokens")> <Browsable(False)> Public Property GoldTokens As Integer
+		<Category("Tokens")> <Browsable(False)> Public Property SilverTokens As Integer
+		<Category("Tokens")> <Browsable(False)> Public Property BronzeTokens As Integer
 
-		Public ReturnFileText As String
-		Public ReturnStrokeTauntVal As String
-		Public ReturnSubState As String
-		Public ReturnFlag As Boolean
+		Public Property EdgeFound As Boolean
 
-		Public SessionEdges As Integer
+		Public Property OrgasmYesNo As Boolean = False
+		
+		<Category("Images")> Public Property CustomSlideshow As Boolean
+		<Category("Images")> Public Property CustomSlideshowList As New List(Of String)
+		<Category("Images")> Public Property DommeImageFound As Boolean
+		<Category("Images")> Public Property DommeImageSTR As String
+		<Category("Images")> Public Property DomPic As String
+		<Category("Images")> Public Property ImageString As String
+		<Category("Images")> Public Property JustShowedBlogImage As Boolean = False
+		<Category("Images")> Public Property JustShowedSlideshowImage As Boolean
+		<Category("Images")> Public Property LockImage As Boolean
+		<Category("Images")> Public Property RandomSlideshowCategory As String
+		''' <summary> Addresses the current CustomSlideshow image. </summary>
+		<Category("Images")> Public Property SlideshowInt As Integer
+		<Category("Images")> <Description("True if main slideshow is loaded.")>
+		Public Property SlideshowLoaded As Boolean
+		<Category("Images")> Public Property SlideshowDomme As Slideshow
+		<Category("Images")> Public Property SlideshowContact1 As Slideshow
+		<Category("Images")> Public Property SlideshowContact2 As Slideshow
+		<Category("Images")> Public Property SlideshowContact3 As Slideshow
 
-		Public WindowCheck As Boolean
+		<Category("Custom Task")> Public Property CustomTask As Boolean
+		<Category("Custom Task")> Public Property CustomTaskFirst As Boolean = True
+		<Category("Custom Task")> Public Property CustomTaskText As String
+		<Category("Custom Task")> Public Property CustomTaskTextFirst As String
+		<Category("Custom Task")> Public Property CustomTaskActive As Boolean
 
-		Public StrokeFaster As Boolean
-		Public StrokeFastest As Boolean
-		Public StrokeSlower As Boolean
-		Public StrokeSlowest As Boolean
 
-		Public InputFlag As Boolean
-		Public InputString As String
+		<Category("Risky Pick")> Public Property RiskyDeal As Boolean
+		<Category("Risky Pick")> Public Property RiskyEdges As Boolean
+		<Category("Risky Pick")> Public Property RiskyDelay As Boolean
 
-		Public RapidCode As Boolean
+		Public Property SysMes As Boolean
+		Public Property EmoMes As Boolean
 
-		Public CorrectedTypo As Boolean
-		Public CorrectedWord As String
+		Public Property Group As String = "D"
+		Public Property GlitterTease As Boolean
+		Public Property AddContactTick As Integer
 
-		Public DoNotDisturb As Boolean
+		Public Property Contact1Edge As Boolean
+		Public Property Contact2Edge As Boolean
+		Public Property Contact3Edge As Boolean
 
-		Public TypoSwitch As Integer = 1
-		Public TyposDisabled As Boolean
+		Public Property Contact1Stroke As Boolean
+		Public Property Contact2Stroke As Boolean
+		Public Property Contact3Stroke As Boolean
 
-		Public EdgeHoldSeconds As Integer
+		Public Property ReturnFileText As String
+		Public Property ReturnStrokeTauntVal As String
+		Public Property ReturnSubState As String
+		Public Property ReturnFlag As Boolean
+
+		Public Property SessionEdges As Integer
+
+
+		Public Property StrokeFaster As Boolean
+		Public Property StrokeFastest As Boolean
+		Public Property StrokeSlower As Boolean
+		Public Property StrokeSlowest As Boolean
+
+		Public Property InputFlag As Boolean
+		Public Property InputString As String
+
+		Public Property RapidCode As Boolean
+		Public Property RapidFire As Boolean
+
+		<Category("Typos")> Public Property CorrectedTypo As Boolean
+		<Category("Typos")> Public Property CorrectedWord As String
+		<Category("Typos")> Public Property TypoSwitch As Integer = 1
+		<Category("Typos")> Public Property TyposDisabled As Boolean
+
+		<Description("True if Interrupts are disabled.")> Public Property DoNotDisturb As Boolean
+
+		Public Property EdgeHoldSeconds As Integer
 		<Obsolete("Never set to true")>
 		Public EdgeHoldFlag As Boolean
 
 
-		Public JustShowedSlideshowImage As Boolean
+		Public Property InputIcon As Boolean
 
-		Public RandomSlideshowCategory As String
-
-		<Obsolete("Legacy suspend and resume functions are depracted")>
-		Public ResetFlag As Boolean
-
-		Public InputIcon As Boolean
-
-		Public DommeImageFound As Boolean
 
 		<Obsolete("Never set.")>
 		Public LocalImageFound As Boolean
 		<Obsolete("Never set.")>
 		Public LocalImageSTR As String
 
-		Public CBTBothActive As Boolean
-		Public CBTBothFlag As Boolean
-		Public CBTBothFirst As Boolean = True
+		<Category("CBT")> Public Property CBTBothActive As Boolean
+		<Category("CBT")> Public Property CBTBothFlag As Boolean
+		<Category("CBT")> Public Property CBTBothFirst As Boolean = True
 
 
 
-		Public StrokePace As Integer = 0
+		Public Property StrokePace As Integer = 0
 
-		Public GeneralTime As String = "Afternoon"
+		Public Property GeneralTime As String
 
-		Public TimeoutTick As Integer
-
-		Public DommeImageSTR As String
+		Public Property TimeoutTick As Integer
 
 		''' <summary>
 		''' This Variable contains the Path of origin of the displayed Image. CheckDommeTag() uses 
 		''' this string to get the curremt ImageData for the DommeTagApp.
 		''' </summary>
-		Public ImageLocation As String = ""
+		<Category("Images")> Public Property ImageLocation As String = ""
 
-		Public ResponseYes As String
-		Public ResponseNo As String
+		Public Property ResponseYes As String
+		Public Property ResponseNo As String
 
-		Public SetModule As String = ""
-		Public SetLink As String = ""
-		Public SetModuleGoto As String = ""
-		Public SetLinkGoto As String = ""
+		Public Property SetModule As String = ""
+		Public Property SetLink As String = ""
+		Public Property SetModuleGoto As String = ""
+		Public Property SetLinkGoto As String = ""
 
 
-		Public OrgasmRestricted As Boolean
+		Public Property OrgasmRestricted As Boolean
 
-		Public FollowUp As String = ""
+		Public Property FollowUp As String = ""
 
-		Public WorshipMode As Boolean = False
-		Public WorshipTarget As String = ""
+		Public Property WorshipMode As Boolean = False
+		Public Property WorshipTarget As String = ""
 
-		Public LongHold As Boolean = False
-		Public ExtremeHold As Boolean = False
+		Public Property LongHold As Boolean = False
+		Public Property ExtremeHold As Boolean = False
 		<Obsolete("LongTaunts-Member is not used right now.")>
 		Public LongTaunts As Boolean
 
 
 
-		Public MiniScript As Boolean = False
-		Public MiniScriptText As String
-		Public MiniTauntVal As Integer
-		Public MiniTimerCheck As Boolean
+		<Category("MiniScript")> Public Property MiniScript As Boolean = False
+		<Category("MiniScript")> Public Property MiniScriptText As String
+		<Category("MiniScript")> Public Property MiniTauntVal As Integer
+		<Category("MiniScript")> Public Property MiniTimerCheck As Boolean
 
 
-		Public JumpVideo As Boolean
-		Public VideoTick As Integer
+		Public Property EdgeGoto As Boolean = False
+		Public Property EdgeMessage As Boolean = False
+		Public Property EdgeVideo As Boolean = False
 
-		Public EdgeGoto As Boolean = False
-		Public EdgeMessage As Boolean = False
-		Public EdgeVideo As Boolean = False
+		Public Property EdgeMessageText As String
+		Public Property EdgeGotoLine As String
 
-		Public EdgeMessageText As String
-		Public EdgeGotoLine As String
+		<Category("Multiple Edges")> Public Property MultipleEdges As Boolean
+		<Category("Multiple Edges")> Public Property MultipleEdgesAmount As Integer
+		<Category("Multiple Edges")> Public Property MultipleEdgesInterval As Integer
+		<Category("Multiple Edges")> Public Property MultipleEdgesTick As Integer
+		<Category("Multiple Edges")> Public Property MultipleEdgesMetronome As String = ""
 
-		Public MultipleEdges As Boolean
-		Public MultipleEdgesAmount As Integer
-		Public MultipleEdgesInterval As Integer
-		Public MultipleEdgesTick As Integer
-		Public MultipleEdgesMetronome As String = ""
-
-		Public YesGoto As Boolean = False
-		Public YesVideo As Boolean = False
-		Public NoGoto As Boolean = False
-		Public NoVideo_Mode As Boolean = False
-		Public CameGoto As Boolean = False
-		Public CameVideo As Boolean = False
-		Public CameMessage As Boolean = False
-		Public CameMessageText As String
-		Public RuinedGoto As Boolean = False
-		Public RuinedVideo As Boolean = False
-		Public RuinedMessage As Boolean = False
-		Public RuinedMessageText As String
-		Public YesGotoLine As String
-		Public NoGotoLine As String
-		Public CameGotoLine As String
-		Public RuinedGotoLine As String
+		Public Property YesGoto As Boolean = False
+		Public Property YesVideo As Boolean = False
+		Public Property NoGoto As Boolean = False
+		Public Property NoVideo_Mode As Boolean = False
+		Public Property CameGoto As Boolean = False
+		Public Property CameVideo As Boolean = False
+		Public Property CameMessage As Boolean = False
+		Public Property CameMessageText As String
+		Public Property RuinedGoto As Boolean = False
+		Public Property RuinedVideo As Boolean = False
+		Public Property RuinedMessage As Boolean = False
+		Public Property RuinedMessageText As String
+		Public Property YesGotoLine As String
+		Public Property NoGotoLine As String
+		Public Property CameGotoLine As String
+		Public Property RuinedGotoLine As String
 
 		''' <summary>
 		''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
@@ -486,11 +470,10 @@ Namespace My
 		''' #SYS_TauntEdging.txt when the taunting begins.
 		''' #SYS_TauntEdgingAsked.txt if the sub continues to tell he's on the edge.
 		''' </remarks>
-		Public TauntEdging As Boolean = False
+		<Description("If True stroking continues when sub is on edge.")>
+		Public Property TauntEdging As Boolean = False
 
-		Public Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
-
-		Public WritingTaskCurrentTime As Single
+		Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
 
 #Region "----------------------------------- Only for Serialization -------------------------------------"
 
@@ -596,17 +579,25 @@ Namespace My
 		''' <summary>
 		''' Creates a new unactivaed instance.
 		''' </summary>
-		Sub New() : End Sub
-
+		Sub New()
+			InitializeComponent()
+		End Sub
 		''' <summary>
 		''' Creates a new instance and activates it on the given Form.
 		''' </summary>
 		''' <param name="ActivationForm">The Form on which to apply the session.</param>
 		Sub New(ByVal ActivationForm As Form1)
+			InitializeComponent()
 			activate(ActivationForm)
 		End Sub
 
 #End Region ' Constructors
+
+		Private Sub InitializeComponent()
+			If DommeMood < 0 Then DommeMood = New Random().Next(Settings.DomMoodMin, Settings.DomMoodMax)
+			If StrokePace < 0 Then StrokePace = 0
+
+		End Sub
 
 #Region "----------------------------------------- Paths ------------------------------------------------"
 		''' <summary>
@@ -998,7 +989,7 @@ Namespace My
 
 					If Directory.Exists(PersonalityFlagTempPath) Then
 						For Each fn As String In Directory.GetFiles(PersonalityFlagTempPath)
-							serialized_FlagsTemp.Add(fn)
+							serialized_FlagsTemp.Add(Path.GetFileName(fn))
 						Next
 					End If
 

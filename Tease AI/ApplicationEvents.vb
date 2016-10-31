@@ -11,7 +11,9 @@ Namespace My
         Private Sub MyApplication_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
             ' Load or import a specific user.config-file.
             MySettings.StartupCheck()
-        End Sub
+
+			Session = New SessionState
+		End Sub
 
     End Class
 End Namespace
