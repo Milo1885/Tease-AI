@@ -35,13 +35,13 @@ Public Class Form1
 	''' Shorthand Property to access My.Application.Session
 	''' </summary>
 	''' <returns></returns>
-	Public Property ssh As My.SessionState
+	Public Property ssh As SessionState
 		Get
 			SyncLock sshSyncLock
 				Return My.Application.Session
 			End SyncLock
 		End Get
-		Set(value As My.SessionState)
+		Set(value As SessionState)
 			SyncLock sshSyncLock
 				My.Application.Session = value
 			End SyncLock
@@ -340,10 +340,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			Loop Until My.Settings.TC2Agreed = True
 		End If
 
-		''===============================================================================
-		''					Create a new Session-State instance
-		''===============================================================================
-		'ssh = New My.SessionState()
 
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
@@ -415,6 +411,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		CoInternetSetFeatureEnabled(DISABLE_SOUNDS, SET_FEATURE_ON_PROCESS, True)
 
+		ssh.Chat = ""
+		IsTypingTimer.Start()
 
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Loading Domme and Sub avatar images..."
@@ -428,18 +426,16 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.LBLSplash.Text = "Checking recent slideshows..."
 		FrmSplash.Refresh()
 
-		For Each comboitem As String In My.Settings.RecentSlideshows
-			ImageFolderComboBox.Items.Add(comboitem)
+		For Each path As String In My.Settings.RecentSlideshows
+			If Directory.Exists(path) Then ImageFolderComboBox.Items.Add(path)
 		Next
+		' because Specialized.StringCollections are crap, 
+		' we have to clear And refill it using For-Each...
+		My.Settings.RecentSlideshows.Clear()
 
-		ssh.RecentSlideshows.Clear()
-
-		For Each comboitem As String In My.Settings.RecentSlideshows
-			ssh.RecentSlideshows.Add(comboitem)
+		For Each comboitem As String In ImageFolderComboBox.Items
+			My.Settings.RecentSlideshows.Add(comboitem)
 		Next
-
-		ssh.Chat = ""
-		IsTypingTimer.Start()
 
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Checking local videos..."
@@ -905,8 +901,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 
-		ssh.DommeMood = ssh.randomizer.Next(5, 8)
-
 
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Checking previous orgasms..."
@@ -1194,7 +1188,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			LazySubAVToolStripMenuItem1.Checked = True
 		End If
 
-		ssh.activate(Me)
+		ssh.Activate(Me)
 
 		FormFinishedLoading = True
 
@@ -1241,8 +1235,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		UpdatesTimer.Start()
 
 		Me.ActiveControl = Me.chatBox
-
-		ssh.DommeMood = ssh.randomizer.Next(5, 8)
 
 		ssh.JustShowedBlogImage = False
 
@@ -5023,15 +5015,15 @@ TryNextWithTease:
 							If ssh.DomTask.Contains("@Contact3") Then _
 								ssh.SlideshowContact3.NavigateNextTease()
 
-						Else
+							Else
 
-							ssh.SlideshowDomme.NavigateNextTease()
+								ssh.SlideshowDomme.NavigateNextTease()
 
 							If ssh.DomTask.Contains("@Contact1") Then _
 								ssh.SlideshowContact1.NavigateNextTease()
 
 							If ssh.DomTask.Contains("@Contact2") Then _
-								ssh.SlideshowContact1.NavigateNextTease()
+								ssh.SlideshowContact2.NavigateNextTease()
 
 							If ssh.DomTask.Contains("@Contact3") Then _
 								ssh.SlideshowContact3.NavigateNextTease()
@@ -6470,28 +6462,19 @@ NullResponseLine2:
 				If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
 					GetFolder = FolderBrowserDialog1.SelectedPath
 
-					ssh.RecentSlideshows.Add(GetFolder)
+					My.Settings.RecentSlideshows.Add(GetFolder)
 
-					Do Until ssh.RecentSlideshows.Count < 11
-						ssh.RecentSlideshows.Remove(ssh.RecentSlideshows(0))
+					Do Until My.Settings.RecentSlideshows.Count < 11
+						My.Settings.RecentSlideshows.Remove(My.Settings.RecentSlideshows(0))
 					Loop
 
 					ImageFolderComboBox.Items.Clear()
 
-					For Each comboitem As String In ssh.RecentSlideshows
+					For Each comboitem As String In My.Settings.RecentSlideshows
 						ImageFolderComboBox.Items.Add(comboitem)
 					Next
 
 					ImageFolderComboBox.Text = GetFolder
-
-					My.Settings.RecentSlideshows.Add(GetFolder)
-
-					My.Settings.RecentSlideshows.Clear()
-
-					For i As Integer = 0 To ssh.RecentSlideshows.Count - 1
-						My.Settings.RecentSlideshows.Add(ssh.RecentSlideshows(i))
-					Next
-
 				End If
 			ElseIf sender Is ImageFolderComboBox And TypeOf e Is KeyEventArgs
 				'===============================================================================
@@ -11475,9 +11458,11 @@ OrgasmDecided:
 		If StringClean.Contains("@EndTease") Then
 			SetVariable("SYS_SubLeftEarly", 0)
 			'My.Settings.Sys_SubLeftEarly = 0
-			StopEverything()
-			ResetButton()
-			ssh = New My.SessionState(Me)
+			'StopEverything()
+			'ResetButton()
+			ssh.Reset()
+			ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
+			ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
 			StringClean = StringClean.Replace("@EndTease", "")
 		End If
 
@@ -13997,6 +13982,9 @@ VTSkip:
 		Try
 			Dim slide As Slideshow = ssh.SlideshowDomme
 			Dim __targetFolder As String = Path.GetDirectoryName(slide.CurrentImage)
+			' Set a local function reference to the global instance. Otherwise the global 
+			' instance is out of parallel Tasks scope! The result would be an empty reference.
+			Dim __session As SessionState = ssh
 
 			If File.Exists(__targetFolder & "\ImageTags.txt") Then
 				Dim task1 As Tasks.Task(Of String) = Tasks.Task.Factory.StartNew(
@@ -14137,9 +14125,9 @@ FileNotFound_GetNext:
 								Exit For
 							End If
 						Next
-						If ssh.randomizer.Next(0, 100) <= 99 Then GoTo Skip_RandomFile ' 1% can be a nice surprise
+						If __session.randomizer.Next(0, 100) <= 99 Then GoTo Skip_RandomFile ' 1% can be a nice surprise
 						'########################+####### Get random Image ###############################
-						___FileName = ___FoundFiles.Item(ssh.randomizer.Next(0, ___FoundFiles.Count))
+						___FileName = ___FoundFiles.Item(__session.randomizer.Next(0, ___FoundFiles.Count))
 Skip_RandomFile:
 						If File.Exists(__targetFolder & "\" & ___FileName) Then
 							' File Found: Return absolute path
@@ -18160,7 +18148,7 @@ saveImage:
 			End If
 
 			' Store Session to disk
-			ssh.Store(filename, Me)
+			ssh.Save(filename)
 
 			MessageBox.Show(Me, "Session state has been saved successfully!", "Success!",
 							MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -18209,7 +18197,7 @@ saveImage:
 				Exit Sub
 			End If
 
-			My.SessionState.Load(filename, Me)
+			ssh.Load(filename, True)
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
@@ -18226,7 +18214,8 @@ saveImage:
 			MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
-		ssh = New My.SessionState(Me)
+
+		ssh.Reset()
 
 		If ssh.DomTypeCheck = False Then
 			ssh.DomTask = "<b>Tease AI has been reset</b>"
