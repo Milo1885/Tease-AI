@@ -12,7 +12,7 @@ WIP - DataBinding Overhaul
 
 Added Features: 
 
-	Check Box to lock orgasm chances after tease starts. by OxiKlein
+	Check Box to lock orgasm chances after tease starts. by OxiKlein -> Broken right now 
 	Download online-image progress bar added.
 	Video Folders are now checked on startup. The user is asked to search for missing folders.
 	Image Folders are now checked on startup. The user is asked to search for missing folders or if a folder is empty.
@@ -30,6 +30,8 @@ Bugfixes:
 	@DommeLevel1-5 didn't filter correct in vocabulary files.
 	@Chance##()-Command now gets cleaned from the line correctly. by Pepsifreak
 	@FollowUp##()-Command now gets cleaned from the line correctly, also stopped the followup message from still partially showing in "failure" cases. by Pepsifreak
+	Recent slideshow folders are now really checked on start-up and missing folders removed.
+	Dom Mood settings were ignored.
 
 Miscellaneous:
 
