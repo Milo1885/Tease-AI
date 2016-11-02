@@ -20,6 +20,8 @@ Added Features:
 	Card images are now checked on startup.
 	@Flag() support for multiple "AND" connected parameters added. (All) of 'em or line is excluded.)  by Daragorn
 	@NotFlag() support for multiple "AND" connected parameters added. (None of 'em or line is excluded) by Daragorn
+	Slideshow Settings(Random, NewFolder if last image, Range Settings, Subfolders) apply now also on Contact Images.
+	Added a new debug window. It is now possible to view and manipulte all session variables (At least simple DataTypes) on Runtime.
 
 Bugfixes:
 
@@ -41,6 +43,7 @@ Miscellaneous:
 	SettingsForm Apps-Games GUI reworked.
 	Suspending/Resuming/Resetting Session reworked.
 		Now all necessary data is stored into a single binary *.save file. This includes all Variables, Flags, Slideshows, TimerStates and regular Data. By Holding down the control key while clicking suspend or resume the user is asked for a custom file to save to or load from.
+	Reworked Code to Display Images.
 
 
 # Changelog - Patch 54.4.0
