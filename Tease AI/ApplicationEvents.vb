@@ -15,7 +15,7 @@ Namespace My
 		Shared _Session As SessionState
 		Shared _SessionSynclock As New Object
 
-		Friend Shared Property Session As SessionState
+		Friend Property Session As SessionState
 			Get
 				SyncLock _SessionSynclock
 					Return _Session

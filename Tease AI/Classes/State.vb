@@ -380,12 +380,6 @@ Public Class SessionState
 	Public Property InputIcon As Boolean
 
 
-	<Obsolete("Never set.")>
-	Public LocalImageFound As Boolean
-	<Obsolete("Never set.")>
-	Public LocalImageSTR As String
-
-
 
 
 	Public Property StrokePace As Integer = 0
