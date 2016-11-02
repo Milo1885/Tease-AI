@@ -18612,6 +18612,10 @@ saveImage:
 
 #End Region ' Milovana
 
+	Private Sub StartTimer1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartTimer1ToolStripMenuItem.Click
+		Timer1.Start()
+	End Sub
+
 	Private Sub RunScriptToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RunScriptToolStripMenuItem.Click
 
 		If OpenScriptDialog.ShowDialog() = DialogResult.OK Then
@@ -18635,10 +18639,18 @@ saveImage:
 
 	End Sub
 
+	Private Sub DebugSessionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DebugSessionWindowToolStripMenuItem.Click
+		dbgSessionForm.Show()
+	End Sub
+
 	Private Sub DebugMenuToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DebugMenuToolStripMenuItem.Click
 		FrmSettings.SettingsTabs.SelectTab(13)
 		FrmSettings.Show()
 		FrmSettings.Focus()
+	End Sub
+
+	Private Sub DebugToolStripMenuItem_DropDownOpening(sender As Object, e As EventArgs) Handles DebugToolStripMenuItem.DropDownOpening
+		If Timer1.Enabled Then StartTimer1ToolStripMenuItem.Enabled = False
 	End Sub
 
 	Private Sub RefreshRandomizerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RefreshRandomizerToolStripMenuItem.Click
@@ -21628,7 +21640,4 @@ playLoop:
 		Return Len(StringClean) - Len(Replace(StringClean, Character, ""))
 	End Function
 
-	Private Sub DebugSessionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DebugSessionToolStripMenuItem.Click
-		dbgSessionForm.Show()
-	End Sub
 End Class
