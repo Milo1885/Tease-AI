@@ -4429,17 +4429,17 @@ NonModuleEnd:
 
 			If InStr(ssh.DomTask, "@CockSizeSmall") <> 0 Then ssh.DivideText = True
 
-
+			'QUESTION: What is this Code doing here? Shouldn't it be in CommandClean?
 			If ssh.DomTask.Contains("@SearchImageBlogAgain") Then
 
-				GetBlogImage()
+				ShowImage(GetRandomImage(ImageGenre.Blog), False)
 
 			End If
 
 
 			If ssh.DomTask.Contains("@SearchImageBlog") And Not ssh.DomTask.Contains("@SearchImageBlogAgain") Then
 
-				GetBlogImage()
+				ShowImage(GetRandomImage(ImageGenre.Blog), False)
 
 			End If
 
@@ -8913,7 +8913,7 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@ShowLocalImage") And Not StringClean.Contains("@ShowLocalImage(") Then
-			GetLocalImage()
+			ShowImage(GetRandomImage(ImageSourceType.Local), false)
 			StringClean = StringClean.Replace("@ShowLocalImage", "")
 		End If
 
@@ -15307,35 +15307,6 @@ SkipTextedTags:
 
 	End Sub
 
-	''' <summary>
-	''' Displays a random Blog image. Waits to finish download before proceeding.
-	''' </summary>
-	Public Sub GetBlogImage()
-
-		Try
-			If FrmSettings.URLFileList.CheckedItems.Count = 0 Then
-				Throw New Exception("No URL-Files selected.")
-			End If
-
-			ShowImage(GetRandomImage(ImageGenre.Blog), True)
-			ssh.JustShowedBlogImage = True
-
-		Catch ex As Exception
-			GetLocalImage()
-		End Try
-
-	End Sub
-
-	''' <summary>
-	''' Displays an random local image. Waits to finish download before proceeding.
-	''' </summary>
-	Public Sub GetLocalImage()
-
-		ShowImage(GetRandomImage(ImageSourceType.Local), True)
-		ssh.JustShowedBlogImage = True
-
-	End Sub
-
 
 	Public Sub RunModuleScript(IsEdging As Boolean)
 
@@ -20648,13 +20619,19 @@ SkipNew:
 
 	Private Sub BTNRandomBlog_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomBlog.Click
 		BTNRandomBlog.Enabled = False
-		GetBlogImage()
+
+		ShowImage(GetRandomImage(ImageGenre.Blog), True)
+		ssh.JustShowedBlogImage = True
+
 		BTNRandomBlog.Enabled = True
 	End Sub
 
 	Private Sub BTNRandomLocal_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomLocal.Click
 		BTNRandomLocal.Enabled = False
-		GetLocalImage()
+
+		ShowImage(GetRandomImage(ImageSourceType.Local), True)
+		ssh.JustShowedBlogImage = True
+
 		BTNRandomLocal.Enabled = True
 	End Sub
 

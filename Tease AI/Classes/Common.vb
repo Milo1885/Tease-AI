@@ -438,7 +438,7 @@ Public Class Common
 #Region "------------------------------------serialize/deserialize---------------------------------------"
 
 	''' <summary>
-	''' Stores the SessionState object to disk. 
+	''' Stores the object to disk. 
 	''' </summary>
 	''' <param name="objectToSerialize">The object to serialize.</param>
 	''' <param name="filepath">The Filepath to store to.</param>
