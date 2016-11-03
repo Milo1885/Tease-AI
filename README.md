@@ -12,7 +12,7 @@ WIP - DataBinding Overhaul
 
 Added Features: 
 
-	Check Box to lock orgasm chances after tease starts. by OxiKlein
+	Check Box to lock orgasm chances after tease starts. by OxiKlein -> Broken right now 
 	Download online-image progress bar added.
 	Video Folders are now checked on startup. The user is asked to search for missing folders.
 	Image Folders are now checked on startup. The user is asked to search for missing folders or if a folder is empty.
@@ -20,6 +20,8 @@ Added Features:
 	Card images are now checked on startup.
 	@Flag() support for multiple "AND" connected parameters added. (All) of 'em or line is excluded.)  by Daragorn
 	@NotFlag() support for multiple "AND" connected parameters added. (None of 'em or line is excluded) by Daragorn
+	Slideshow Settings(Random, NewFolder if last image, Range Settings, Subfolders) apply now also on Contact Images.
+	Added a new debug window. It is now possible to view and manipulte all session variables (At least simple DataTypes) on Runtime.
 
 Bugfixes:
 
@@ -30,6 +32,8 @@ Bugfixes:
 	@DommeLevel1-5 didn't filter correct in vocabulary files.
 	@Chance##()-Command now gets cleaned from the line correctly. by Pepsifreak
 	@FollowUp##()-Command now gets cleaned from the line correctly, also stopped the followup message from still partially showing in "failure" cases. by Pepsifreak
+	Recent slideshow folders are now really checked on start-up and missing folders removed.
+	Dom Mood settings were ignored.
 
 Miscellaneous:
 
@@ -39,6 +43,7 @@ Miscellaneous:
 	SettingsForm Apps-Games GUI reworked.
 	Suspending/Resuming/Resetting Session reworked.
 		Now all necessary data is stored into a single binary *.save file. This includes all Variables, Flags, Slideshows, TimerStates and regular Data. By Holding down the control key while clicking suspend or resume the user is asked for a custom file to save to or load from.
+	Reworked Code to Display Images.
 
 
 # Changelog - Patch 54.4.0

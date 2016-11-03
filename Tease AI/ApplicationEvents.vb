@@ -8,12 +8,32 @@ Namespace My
 	' StartupNextInstance: Raised when launching a single-instance application and the application is already active. 
 	' NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
 	Partial Friend Class MyApplication
-        Private Sub MyApplication_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
+
+		''' <summary>
+		''' The currently non syncronized running session.
+		''' </summary>
+		Shared _Session As SessionState
+		Shared _SessionSynclock As New Object
+
+		Friend Property Session As SessionState
+			Get
+				SyncLock _SessionSynclock
+					Return _Session
+				End SyncLock
+			End Get
+			Set(value As SessionState)
+				SyncLock _SessionSynclock
+					_Session = value
+				End SyncLock
+			End Set
+		End Property
+
+		Private Sub MyApplication_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
             ' Load or import a specific user.config-file.
             MySettings.StartupCheck()
 
 			Session = New SessionState
 		End Sub
 
-    End Class
+	End Class
 End Namespace

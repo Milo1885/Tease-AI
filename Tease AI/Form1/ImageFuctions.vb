@@ -640,8 +640,12 @@ NoNeFound:
 
 		BWimageFetcher.RunWorkerAsync(FetchContainer, True)
 
-
-		If WaitToFinish Then BWimageFetcher.WaitToFinish()
+		Try
+			If WaitToFinish Then BWimageFetcher.WaitToFinish()
+		Catch ex As Exception
+			Log.WriteError("Error occurred while displaying image. Fallback Failed.",
+							 ex, "ShowImage(String, Boolean)")
+		End Try
 
 	End Sub
 

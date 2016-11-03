@@ -73,7 +73,12 @@ Public Class BackgroundWorkerSyncable
 	Public Shadows Sub RunWorkerAsync(Obj As Object, Optional ByVal SyncRequired As Boolean = True)
 		'×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
 		'											 Calling-Thread
-		If _ResultCache IsNot Nothing Then Throw New InvalidOperationException("Starting Is Not allowed while a previous result Is cached.")
+		If _ResultCache IsNot Nothing AndAlso _ResultCache.Error IsNot Nothing Then
+			Throw New InvalidOperationException("Starting Is Not allowed while a previous result Is cached.")
+		ElseIf _ResultCache IsNot Nothing
+			StopAsync()
+		End If
+
 		_TriggerRequired = SyncRequired
 		MyBase.RunWorkerAsync(Obj)
 		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Thread °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
@@ -140,10 +145,11 @@ Public Class BackgroundWorkerSyncable
 	''' If the BackgroundWorker Supports Canceellation the thread is cancceled, otherwise
 	''' the backgroundworker is aborted.
 	''' </param>
+	''' <returns>Returns True when the RunWorkerCompleted Event was raised.</returns>
 	''' <remarks>If a Timeout occurs, CancelAsnyc() is called.</remarks>
 	''' <exception cref="TimeoutException">Occurs if the given time has elapsed.</exception>
 	''' <exception cref="Exception">Rethrows all exceptions occured in me.DoWork!</exception>
-	Public Sub WaitToFinish(Optional ByVal Timeout As Integer = 20)
+	Public Function WaitToFinish(Optional ByVal Timeout As Integer = 20) As Boolean
 		' Declare new Stopwatch Instance for measering time 
 		Dim sw As New Stopwatch
 		' Start it, when a timeout is set.
@@ -167,13 +173,14 @@ Public Class BackgroundWorkerSyncable
 			' Don't block the calling thread.
 			Application.DoEvents()
 		Loop
-		If _ResultCache Is Nothing Then Exit Sub
+		If _ResultCache Is Nothing Then Return False
 		' if an Error occured in BGW.DoWork the Error is "rethrown" here.
-		'QnD-Bugfix: 404 caused scripts to stop
-		'If Me._ResultCache.Error IsNot Nothing Then Throw Me._ResultCache.Error
+		'QnD-Bugfix -> teporary removed: 404 caused scripts to stop
+		If Me._ResultCache.Error IsNot Nothing Then Throw Me._ResultCache.Error
 		MyBase.OnRunWorkerCompleted(_ResultCache)
 		Reset()
-	End Sub
+		Return True
+	End Function
 
 	''' <summary>
 	''' Cancels the current Thread, manual Triggering and deletes all fetched data.

@@ -7,6 +7,7 @@
 Imports System.ComponentModel
 Imports System.IO
 Imports System.Net
+Imports System.Runtime.Serialization.Formatters.Binary
 
 ''' <summary>
 ''' Exposes static methods for common tasks.
@@ -434,5 +435,46 @@ Public Class Common
 
 	End Function
 
+#Region "------------------------------------serialize/deserialize---------------------------------------"
+
+	''' <summary>
+	''' Stores the object to disk. 
+	''' </summary>
+	''' <param name="objectToSerialize">The object to serialize.</param>
+	''' <param name="filepath">The Filepath to store to.</param>
+	Public Shared Sub BinarySerialize(ByVal objectToSerialize As Object, ByVal filePath As String)
+		Dim stream As FileStream = Nothing
+		Try
+			stream = File.Create(filePath)
+			Dim formatter As New BinaryFormatter()
+			formatter.Serialize(stream, objectToSerialize)
+		Catch ex As Exception
+			Throw
+		Finally
+			If stream IsNot Nothing Then stream.Close()
+		End Try
+	End Sub
+
+	''' <summary>
+	''' Deserializes an object from the given path.
+	''' </summary>
+	''' <param name="filepath">The filepath to the serialized object.</param>
+	''' <exception cref="Exception">Rethrows all exceptions.</exception>
+	Public Shared Function BinaryDeserialize(ByVal filepath As String) As Object
+		Dim stream As FileStream = Nothing
+		Try
+			' Restore from file
+			stream = File.OpenRead(filepath)
+			Dim formatter As New BinaryFormatter()
+			stream = File.OpenRead(filepath)
+			Return formatter.Deserialize(stream)
+		Catch ex As Exception
+			Throw
+		Finally
+			If stream IsNot Nothing Then stream.Close()
+		End Try
+	End Function
+
+#End Region 'serialize/deserialize
 
 End Class

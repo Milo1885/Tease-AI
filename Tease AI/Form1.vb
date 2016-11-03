@@ -35,13 +35,13 @@ Public Class Form1
 	''' Shorthand Property to access My.Application.Session
 	''' </summary>
 	''' <returns></returns>
-	Public Property ssh As My.SessionState
+	Public Property ssh As SessionState
 		Get
 			SyncLock sshSyncLock
 				Return My.Application.Session
 			End SyncLock
 		End Get
-		Set(value As My.SessionState)
+		Set(value As SessionState)
 			SyncLock sshSyncLock
 				My.Application.Session = value
 			End SyncLock
@@ -340,10 +340,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			Loop Until My.Settings.TC2Agreed = True
 		End If
 
-		''===============================================================================
-		''					Create a new Session-State instance
-		''===============================================================================
-		'ssh = New My.SessionState()
 
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
@@ -415,6 +411,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		CoInternetSetFeatureEnabled(DISABLE_SOUNDS, SET_FEATURE_ON_PROCESS, True)
 
+		ssh.Chat = ""
+		IsTypingTimer.Start()
 
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Loading Domme and Sub avatar images..."
@@ -428,18 +426,16 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.LBLSplash.Text = "Checking recent slideshows..."
 		FrmSplash.Refresh()
 
-		For Each comboitem As String In My.Settings.RecentSlideshows
-			ImageFolderComboBox.Items.Add(comboitem)
+		For Each path As String In My.Settings.RecentSlideshows
+			If Directory.Exists(path) Then ImageFolderComboBox.Items.Add(path)
 		Next
+		' because Specialized.StringCollections are crap, 
+		' we have to clear And refill it using For-Each...
+		My.Settings.RecentSlideshows.Clear()
 
-		ssh.RecentSlideshows.Clear()
-
-		For Each comboitem As String In My.Settings.RecentSlideshows
-			ssh.RecentSlideshows.Add(comboitem)
+		For Each comboitem As String In ImageFolderComboBox.Items
+			My.Settings.RecentSlideshows.Add(comboitem)
 		Next
-
-		ssh.Chat = ""
-		IsTypingTimer.Start()
 
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Checking local videos..."
@@ -905,8 +901,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 
-		ssh.DommeMood = ssh.randomizer.Next(5, 8)
-
 
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Checking previous orgasms..."
@@ -1194,7 +1188,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			LazySubAVToolStripMenuItem1.Checked = True
 		End If
 
-		ssh.activate(Me)
+		ssh.Activate(Me)
 
 		FormFinishedLoading = True
 
@@ -1241,8 +1235,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		UpdatesTimer.Start()
 
 		Me.ActiveControl = Me.chatBox
-
-		ssh.DommeMood = ssh.randomizer.Next(5, 8)
 
 		ssh.JustShowedBlogImage = False
 
@@ -4437,17 +4429,17 @@ NonModuleEnd:
 
 			If InStr(ssh.DomTask, "@CockSizeSmall") <> 0 Then ssh.DivideText = True
 
-
+			'QUESTION: What is this Code doing here? Shouldn't it be in CommandClean?
 			If ssh.DomTask.Contains("@SearchImageBlogAgain") Then
 
-				GetBlogImage()
+				ShowImage(GetRandomImage(ImageGenre.Blog), False)
 
 			End If
 
 
 			If ssh.DomTask.Contains("@SearchImageBlog") And Not ssh.DomTask.Contains("@SearchImageBlogAgain") Then
 
-				GetBlogImage()
+				ShowImage(GetRandomImage(ImageGenre.Blog), False)
 
 			End If
 
@@ -4836,6 +4828,7 @@ CancelGoto:
 
 		ssh.DomTyping = True
 		Dim ShowPicture As Boolean = False
+		Dim SlideshowToUse As Slideshow = Nothing
 
 
 		' Let the program know that the domme is currently typing
@@ -5005,76 +4998,27 @@ SkipIsTyping:
 
 						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
-						'TODO-Next: Optimize Code
-						Dim TeaseDirection As Integer = ssh.randomizer.Next(1, 101)
-
-						'Debug.Print("TeaseDirection = " & TeaseDirection)
-						'TODO-Next: Optimize Code
-						If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
-
-							ssh.SlideshowDomme.NavigateNextTease()
+						'TODO-Next: Test Code
+						Try
+							SlideshowToUse = ssh.SlideshowDomme
 
 							If ssh.DomTask.Contains("@Contact1") Then _
-								ssh.SlideshowContact1.NavigateNextTease()
+								SlideshowToUse = ssh.SlideshowContact1
 
 							If ssh.DomTask.Contains("@Contact2") Then _
-								ssh.SlideshowContact2.NavigateNextTease()
+								SlideshowToUse = ssh.SlideshowContact2
 
 							If ssh.DomTask.Contains("@Contact3") Then _
-								ssh.SlideshowContact3.NavigateNextTease()
+								SlideshowToUse = ssh.SlideshowContact3
 
-						Else
-
-							ssh.SlideshowDomme.NavigateNextTease()
-
-							If ssh.DomTask.Contains("@Contact1") Then _
-								ssh.SlideshowContact1.NavigateNextTease()
-
-							If ssh.DomTask.Contains("@Contact2") Then _
-								ssh.SlideshowContact1.NavigateNextTease()
-
-							If ssh.DomTask.Contains("@Contact3") Then _
-								ssh.SlideshowContact3.NavigateNextTease()
-
-
-						End If
-
-						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-						ssh.DomPic = ssh.SlideshowDomme.CurrentImage
-
-						If ssh.DomTask.Contains("@Contact1") Then
-							Try
-								ssh.DomPic = ssh.SlideshowContact1.CurrentImage 'ssh.Contact1Pics(ssh.Contact1PicsCount)
-							Catch
-								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
-							End Try
-						End If
-
-						If ssh.DomTask.Contains("@Contact2") Then
-							Try
-								ssh.DomPic = ssh.SlideshowContact2.CurrentImage 'ssh.Contact2Pics(ssh.Contact2PicsCount)
-							Catch
-								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
-							End Try
-						End If
-
-						If ssh.DomTask.Contains("@Contact3") Then
-							Try
-								ssh.DomPic = ssh.SlideshowContact3.CurrentImage 'ssh.Contact3Pics(ssh.Contact3PicsCount)
-							Catch
-								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
-							End Try
-						End If
+						Catch ex As Exception
+							Log.WriteError("Unable to set next Tease-Slideshow.", ex, "Timer1.Tick")
+						End Try
 
 					End If
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-
-
 					ShowPicture = True
-
 
 				End If
 
@@ -5374,10 +5318,7 @@ NullResponse:
 
 
 				'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
-				' If Sync of Reseults is activated
-				' Wait for the ImageFetcher to Finish 
-				If BWimageFetcher.TriggerRequired _
-					Then BWimageFetcher.WaitToFinish()
+
 
 				Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
@@ -5473,55 +5414,47 @@ EndSysMes:
 
 				End If
 
-				' If Sync of Reseults is activated
-				' Wait for the ImageFetcher to Finish 
-				If BWimageFetcher.TriggerRequired _
-					Then BWimageFetcher.WaitToFinish()
-
-				If ssh.JustShowedBlogImage = True Then GoTo HypNoResponse
 
 
-				If ShowPicture = True Or ssh.DommeImageFound = True Then
+				Try
+					If BWimageFetcher.TriggerRequired AndAlso BWimageFetcher.WaitToFinish() Then
+						' ################## Image already loading ####################
+						' If Sync of results is activated, wait for the ImageFetcher to finish .
+						' Do nothing else -> WaitToFinish has already displayed an image.
 
+					ElseIf ssh.RiskyDeal = True Then
+						' ######################## Risky Pick #########################
+						FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.DomPic)
 
+					ElseIf ssh.DommeImageFound = True Then
+						' ######################## Domme Tags #########################
+						ShowImage(ssh.DommeImageSTR, True)
+						ssh.DommeImageFound = False
 
-					Try
-						If ssh.RiskyDeal = True Then
-							' ######################## Risky Pick #########################
-							FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.DomPic)
-						ElseIf ssh.DommeImageFound = True Then
-							' ######################## Domme Tags #########################
-							ShowImage(ssh.DommeImageSTR, True)
-							ssh.DommeImageFound = False
-						ElseIf ssh.LocalImageFound = True Then
-							' ######################## Local Img. #########################
-							ShowImage(ssh.LocalImageSTR, True)
-							ssh.LocalImageFound = False
-						Else
-							' ######################## Slideshow ##########################
-							ShowImage(ssh.DomPic, True)
-						End If
-					Catch ex As Exception
-						'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
-						Debug.Print(ex.Message & vbCrLf & ex.StackTrace)
-						ClearMainPictureBox()
-						' GoTo TryNextWithTease
-					End Try
-					If FrmSettings.landscapeCheckBox.Checked = True Then
-						If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
-							mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
-						Else
-							mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-						End If
-					Else
-						mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+					ElseIf ShowPicture = True AndAlso SlideshowToUse IsNot Nothing Then
+						' ######################## Slideshow ##########################
+						ShowImage(SlideshowToUse.NavigateNextTease, True)
+
+					ElseIf ShowPicture = True
+						' #################### Domme Slideshow ########################
+DommeSlideshowFallback:
+						ShowImage(ssh.SlideshowDomme.NavigateNextTease, True)
 					End If
 
-					mainPictureBox.Refresh()
-					mainPictureBox.Invalidate()
+				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowDomme
+					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
+					SlideshowToUse = Nothing
+					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
+								   ex, "Display Image")
+					GoTo DommeSlideshowFallback
+				Catch ex As Exception
+					'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
+					Log.WriteError("Error occurred while displaying image. Fallback Failed.",
+								   ex, "Display Image")
+					ClearMainPictureBox()
+				Finally
 					ShowPicture = False
-				End If
-
+				End Try
 
 
 HypNoResponse:
@@ -5556,10 +5489,7 @@ HypNoResponse:
 				End If
 
 NoResponse:
-				' If Sync of Reseults is activated
-				' Wait for the ImageFetcher to Finish 
-				If BWimageFetcher.TriggerRequired _
-					Then BWimageFetcher.WaitToFinish()
+
 
 				If ssh.CorrectedTypo = True Then
 					ssh.CorrectedTypo = False
@@ -5779,6 +5709,8 @@ NoResponse:
 
 	Private Sub SendTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SendTimer.Tick
 
+		Dim SlideshowToUse As Slideshow = Nothing
+
 		If ssh.DomChat.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
 		If ssh.DomChat.Contains("@NullResponse") Then
 			ssh.NullResponse = True
@@ -5909,69 +5841,22 @@ NullResponseLine:
 
 						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
-						'TODO-Next: Optimize Code
-						Dim TeaseDirection As Integer = ssh.randomizer.Next(1, 101)
-
-						'Debug.Print("TeaseDirection = " & TeaseDirection)
-
-						If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
-
-							ssh.SlideshowDomme.NavigateNextTease()
+						'TODO-Next: Test Code
+						Try
+							SlideshowToUse = ssh.SlideshowDomme
 
 							If ssh.DomTask.Contains("@Contact1") Then _
-								ssh.SlideshowContact1.NavigateNextTease()
+								SlideshowToUse = ssh.SlideshowContact1
 
 							If ssh.DomTask.Contains("@Contact2") Then _
-								ssh.SlideshowContact2.NavigateNextTease()
+								SlideshowToUse = ssh.SlideshowContact2
 
 							If ssh.DomTask.Contains("@Contact3") Then _
-								ssh.SlideshowContact3.NavigateNextTease()
+								SlideshowToUse = ssh.SlideshowContact3
 
-
-						Else
-
-							ssh.SlideshowDomme.NavigateNextTease()
-
-							If ssh.DomTask.Contains("@Contact1") Then _
-								ssh.SlideshowContact1.NavigateNextTease()
-
-							If ssh.DomTask.Contains("@Contact2") Then _
-								ssh.SlideshowContact2.NavigateNextTease()
-
-							If ssh.DomTask.Contains("@Contact3") Then _
-								ssh.SlideshowContact3.NavigateNextTease()
-
-
-						End If
-
-						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-
-						ssh.DomPic = ssh.SlideshowDomme.CurrentImage
-
-						If ssh.DomChat.Contains("@Contact1") Then
-							Try
-								ssh.DomPic = ssh.SlideshowContact1.CurrentImage 'ssh.Contact1Pics(ssh.Contact1PicsCount)
-							Catch
-								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
-							End Try
-						End If
-
-						If ssh.DomChat.Contains("@Contact2") Then
-							Try
-								ssh.DomPic = ssh.SlideshowContact2.CurrentImage 'ssh.Contact2Pics(ssh.Contact2PicsCount)
-							Catch
-								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
-							End Try
-						End If
-
-						If ssh.DomChat.Contains("@Contact3") Then
-							Try
-								ssh.DomPic = ssh.SlideshowContact3.CurrentImage 'ssh.Contact3Pics(ssh.Contact3PicsCount)
-							Catch
-								ssh.DomPic = ssh.SlideshowDomme.CurrentImage
-							End Try
-						End If
+						Catch ex As Exception
+							Log.WriteError("Unable to set next Tease-Slideshow.", ex, "SendTimer.Tick")
+						End Try
 
 					End If
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -6148,10 +6033,6 @@ TryNextWithTease:
 				ssh.DomChat = ssh.DomChat.Replace(" an utopia", " a utopia")
 
 				'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
-				' If Sync of Reseults is activated
-				' Wait for the ImageFetcher to Finish 
-				If BWimageFetcher.TriggerRequired _
-				Then BWimageFetcher.WaitToFinish()
 
 				If ssh.NullResponse = True Or ssh.DomChat = "" Or ssh.DomChat Is Nothing Then GoTo NullResponseLine2
 
@@ -6235,51 +6116,45 @@ EndSysMes:
 
 				ssh.SubWroteLast = False
 
-				' If Sync of Reseults is activated
-				' Wait for the ImageFetcher to Finish 
-				If BWimageFetcher.TriggerRequired _
-				Then BWimageFetcher.WaitToFinish()
+				Try
+					If BWimageFetcher.TriggerRequired AndAlso BWimageFetcher.WaitToFinish() Then
+						' ################## Image already loading ####################
+						' If Sync of results is activated, wait for the ImageFetcher to finish .
+						' Do nothing else -> WaitToFinish has already displayed an image.
 
-				If ShowPicture = True Or ssh.DommeImageFound = True Then
+					ElseIf ssh.RiskyDeal = True Then
+						' ######################## Risky Pick #########################
+						FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.DomPic)
 
+					ElseIf ssh.DommeImageFound = True Then
+						' ######################## Domme Tags #########################
+						ShowImage(ssh.DommeImageSTR, True)
+						ssh.DommeImageFound = False
 
-					Try
-						If ssh.RiskyDeal = True Then
-							' ######################## Risky Pick #########################
-							FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.DomPic)
-						ElseIf ssh.DommeImageFound = True Then
-							' ######################## Domme Tags #########################
-							ShowImage(ssh.DommeImageSTR, True)
-							ssh.DommeImageFound = False
-						ElseIf ssh.LocalImageFound = True Then
-							' ######################## Local Img. #########################
-							ShowImage(ssh.LocalImageSTR, True)
-							ssh.LocalImageFound = False
-						Else
-							' ######################## Slideshow ##########################
-							ShowImage(ssh.DomPic, True)
-						End If
-					Catch ex As Exception
-						'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
-						Debug.Print(ex.Message & vbCrLf & ex.StackTrace)
-						ClearMainPictureBox()
-						' GoTo TryNextWithTease
-					End Try
+					ElseIf ShowPicture = True AndAlso SlideshowToUse IsNot Nothing Then
+						' ################### Variable Slideshow ######################
+						ShowImage(SlideshowToUse.NavigateNextTease, True)
 
-					If FrmSettings.landscapeCheckBox.Checked = True Then
-						If mainPictureBox.Image.Width > mainPictureBox.Image.Height Then
-							mainPictureBox.SizeMode = PictureBoxSizeMode.StretchImage
-						Else
-							mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
-						End If
-					Else
-						mainPictureBox.SizeMode = PictureBoxSizeMode.Zoom
+					ElseIf ShowPicture = True
+						' #################### Domme Slideshow ########################
+DommeSlideshowFallback:
+						ShowImage(ssh.SlideshowDomme.NavigateNextTease, True)
 					End If
 
-					mainPictureBox.Refresh()
-					mainPictureBox.Invalidate()
+				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowDomme
+					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
+					SlideshowToUse = Nothing
+					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
+								   ex, "Display Image")
+					GoTo DommeSlideshowFallback
+				Catch ex As Exception
+					'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
+					Log.WriteError("Error occurred while displaying image. Fallback Failed.",
+								   ex, "Display Image")
+					ClearMainPictureBox()
+				Finally
 					ShowPicture = False
-				End If
+				End Try
 
 				If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
 					ssh.DomChat = StripFormat(ssh.DomChat)
@@ -6289,10 +6164,6 @@ EndSysMes:
 
 NullResponseLine2:
 
-				' If Sync of Reseults is activated
-				' Wait for the ImageFetcher to Finish 
-				If BWimageFetcher.TriggerRequired _
-				Then BWimageFetcher.WaitToFinish()
 
 				If ssh.MultipleEdgesMetronome = "STOP" Then
 					ssh.MultipleEdgesMetronome = ""
@@ -6446,10 +6317,6 @@ NullResponseLine2:
 
 #Region "------------------------------------------ Images ----------------------------------------------"
 
-	Private Sub CustomMainSlidehhowLoad(ByVal Getfolder As String)
-
-	End Sub
-
 	Private Sub LoadCustomizedSlideshow(sender As System.Object, e As System.EventArgs) Handles browsefolderButton.Click, ImageFolderComboBox.KeyDown, ImageFolderComboBox.SelectedIndexChanged
 		'TODO-Next-Stefaf: Implement enhanced RecentSlideshows.Item handling
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
@@ -6462,7 +6329,7 @@ NullResponseLine2:
 			nextButton.Enabled = False
 			previousButton.Enabled = False
 			PicStripTSMIdommeSlideshow.Enabled = False
-
+			'TODO-Next: Move ImageNavigation-Lock to BWImageSync
 			If sender Is browsefolderButton Then
 				'===============================================================================
 				'								browsefolderButton
@@ -6470,28 +6337,19 @@ NullResponseLine2:
 				If FolderBrowserDialog1.ShowDialog() = DialogResult.OK Then
 					GetFolder = FolderBrowserDialog1.SelectedPath
 
-					ssh.RecentSlideshows.Add(GetFolder)
+					My.Settings.RecentSlideshows.Add(GetFolder)
 
-					Do Until ssh.RecentSlideshows.Count < 11
-						ssh.RecentSlideshows.Remove(ssh.RecentSlideshows(0))
+					Do Until My.Settings.RecentSlideshows.Count < 11
+						My.Settings.RecentSlideshows.Remove(My.Settings.RecentSlideshows(0))
 					Loop
 
 					ImageFolderComboBox.Items.Clear()
 
-					For Each comboitem As String In ssh.RecentSlideshows
+					For Each comboitem As String In My.Settings.RecentSlideshows
 						ImageFolderComboBox.Items.Add(comboitem)
 					Next
 
 					ImageFolderComboBox.Text = GetFolder
-
-					My.Settings.RecentSlideshows.Add(GetFolder)
-
-					My.Settings.RecentSlideshows.Clear()
-
-					For i As Integer = 0 To ssh.RecentSlideshows.Count - 1
-						My.Settings.RecentSlideshows.Add(ssh.RecentSlideshows(i))
-					Next
-
 				End If
 			ElseIf sender Is ImageFolderComboBox And TypeOf e Is KeyEventArgs
 				'===============================================================================
@@ -6657,6 +6515,7 @@ Retry:
 			End If
 
 			Try
+				'TODO-Next: Move ImageNavigation-Lock to BWImageSync
 				browsefolderButton.Enabled = False
 				ImageFolderComboBox.Enabled = False
 				nextButton.Enabled = False
@@ -6816,49 +6675,6 @@ Retry:
 	End Sub
 
 
-	Public Sub StrokeLoop()
-
-
-		Do
-
-			'If InputFlag = True Or DomTyping = True Then GoTo SkipTick
-			'If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then GoTo SkipTick
-			'If DomTypeCheck = True And StrokeTick < 5 Then GoTo SkipTick
-			'If chatBox.Text <> "" And StrokeTick < 5 Then GoTo SkipTick
-			'If StrokeTick < 4 And TempScriptCount > 0 Then GoTo SkipTick
-
-			ssh.StrokeTick -= 1
-			Debug.Print("Threaded StrokeTick = " & ssh.StrokeTick)
-SkipTick:
-
-			Thread.Sleep(1000)
-
-		Loop Until ssh.StrokeTick = 0
-
-		If ssh.StrokeTick = 0 Then
-
-			ssh.FirstRound = False
-
-			StrokeTimer.Stop()
-			StrokeTauntTimer.Stop()
-
-			If ssh.RunningScript = True Then
-				ssh.ScriptTick = 3
-				ScriptTimer.Start()
-			Else
-
-				RunModuleScript(False)
-
-			End If
-
-
-		End If
-
-
-
-	End Sub
-
-
 	Private Sub StrokeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTauntTimer.Tick
 
 		If ssh.MiniScript = True Then Return
@@ -6896,30 +6712,8 @@ SkipTick:
 				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomTask.Contains("@NewBlogImage") And ssh.SlideshowLoaded = True And ssh.CustomSlideshow = False And ssh.RapidFire = False Then
 					'If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") Then
 
-					'TODO-Next:Otimize Code
-					Dim TeaseDirection As Integer = ssh.randomizer.Next(1, 101)
-
-					If TeaseDirection > FrmSettings.NBNextImageChance.Value Then
-
-						ssh.SlideshowDomme.NavigateNextTease()
-
-
-					Else
-
-						ssh.SlideshowDomme.NavigateNextTease()
-
-
-					End If
-
-					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-					ssh.DomPic = ssh.SlideshowDomme.CurrentImage()
-
-					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-					'If FrmSettings.CBSlideshowRandom.Checked = True Then ssh.FileCount = ssh.randomizer.Next(0, ssh.FileCountMax + 1)
-
-
+					'Question (Stefaf):  Isn't selecting an image at this point redundant?
+					ssh.DomPic = ssh.SlideshowDomme.NavigateNextTease()
 
 				End If
 
@@ -7173,7 +6967,7 @@ SkipTick:
 
 
 	Private Sub DelayTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DelayTimer.Tick
-
+		'TODO-Next: Remove unused Timer DelayTimer.
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
 		If ssh.DelayTick < 10 And chatBox.Text <> "" Then Return
@@ -9119,7 +8913,7 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@ShowLocalImage") And Not StringClean.Contains("@ShowLocalImage(") Then
-			GetLocalImage()
+			ShowImage(GetRandomImage(ImageSourceType.Local), false)
 			StringClean = StringClean.Replace("@ShowLocalImage", "")
 		End If
 
@@ -11475,9 +11269,11 @@ OrgasmDecided:
 		If StringClean.Contains("@EndTease") Then
 			SetVariable("SYS_SubLeftEarly", 0)
 			'My.Settings.Sys_SubLeftEarly = 0
-			StopEverything()
-			ResetButton()
-			ssh = New My.SessionState(Me)
+			'StopEverything()
+			'ResetButton()
+			ssh.Reset()
+			ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
+			ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
 			StringClean = StringClean.Replace("@EndTease", "")
 		End If
 
@@ -13997,6 +13793,9 @@ VTSkip:
 		Try
 			Dim slide As Slideshow = ssh.SlideshowDomme
 			Dim __targetFolder As String = Path.GetDirectoryName(slide.CurrentImage)
+			' Set a local function reference to the global instance. Otherwise the global 
+			' instance is out of parallel Tasks scope! The result would be an empty reference.
+			Dim __session As SessionState = ssh
 
 			If File.Exists(__targetFolder & "\ImageTags.txt") Then
 				Dim task1 As Tasks.Task(Of String) = Tasks.Task.Factory.StartNew(
@@ -14137,9 +13936,9 @@ FileNotFound_GetNext:
 								Exit For
 							End If
 						Next
-						If ssh.randomizer.Next(0, 100) <= 99 Then GoTo Skip_RandomFile ' 1% can be a nice surprise
+						If __session.randomizer.Next(0, 100) <= 99 Then GoTo Skip_RandomFile ' 1% can be a nice surprise
 						'########################+####### Get random Image ###############################
-						___FileName = ___FoundFiles.Item(ssh.randomizer.Next(0, ___FoundFiles.Count))
+						___FileName = ___FoundFiles.Item(__session.randomizer.Next(0, ___FoundFiles.Count))
 Skip_RandomFile:
 						If File.Exists(__targetFolder & "\" & ___FileName) Then
 							' File Found: Return absolute path
@@ -15505,35 +15304,6 @@ SkipTextedTags:
 			mainPictureBox.Visible = True
 			DomWMP.Visible = False
 		End If
-
-	End Sub
-
-	''' <summary>
-	''' Displays a random Blog image. Waits to finish download before proceeding.
-	''' </summary>
-	Public Sub GetBlogImage()
-
-		Try
-			If FrmSettings.URLFileList.CheckedItems.Count = 0 Then
-				Throw New Exception("No URL-Files selected.")
-			End If
-
-			ShowImage(GetRandomImage(ImageGenre.Blog), True)
-			ssh.JustShowedBlogImage = True
-
-		Catch ex As Exception
-			GetLocalImage()
-		End Try
-
-	End Sub
-
-	''' <summary>
-	''' Displays an random local image. Waits to finish download before proceeding.
-	''' </summary>
-	Public Sub GetLocalImage()
-
-		ShowImage(GetRandomImage(ImageSourceType.Local), True)
-		ssh.JustShowedBlogImage = True
 
 	End Sub
 
@@ -17730,7 +17500,7 @@ saveImage:
 
 #End Region ' PictureStrip
 
-
+	'TODO-Next: Remove useless timer
 	Private Sub ContactTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ContactTimer.Tick
 		'QUESTION: (stefaF) This Timer seems to be useless. Is this correct?
 		ssh.ContactTick -= 1
@@ -18160,7 +17930,7 @@ saveImage:
 			End If
 
 			' Store Session to disk
-			ssh.Store(filename, Me)
+			ssh.Save(filename)
 
 			MessageBox.Show(Me, "Session state has been saved successfully!", "Success!",
 							MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -18209,7 +17979,7 @@ saveImage:
 				Exit Sub
 			End If
 
-			My.SessionState.Load(filename, Me)
+			ssh.Load(filename, True)
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
@@ -18226,7 +17996,8 @@ saveImage:
 			MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
-		ssh = New My.SessionState(Me)
+
+		ssh.Reset()
 
 		If ssh.DomTypeCheck = False Then
 			ssh.DomTask = "<b>Tease AI has been reset</b>"
@@ -18812,6 +18583,10 @@ saveImage:
 
 #End Region ' Milovana
 
+	Private Sub StartTimer1ToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles StartTimer1ToolStripMenuItem.Click
+		Timer1.Start()
+	End Sub
+
 	Private Sub RunScriptToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RunScriptToolStripMenuItem.Click
 
 		If OpenScriptDialog.ShowDialog() = DialogResult.OK Then
@@ -18835,10 +18610,18 @@ saveImage:
 
 	End Sub
 
+	Private Sub DebugSessionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DebugSessionWindowToolStripMenuItem.Click
+		dbgSessionForm.Show()
+	End Sub
+
 	Private Sub DebugMenuToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DebugMenuToolStripMenuItem.Click
 		FrmSettings.SettingsTabs.SelectTab(13)
 		FrmSettings.Show()
 		FrmSettings.Focus()
+	End Sub
+
+	Private Sub DebugToolStripMenuItem_DropDownOpening(sender As Object, e As EventArgs) Handles DebugToolStripMenuItem.DropDownOpening
+		If Timer1.Enabled Then StartTimer1ToolStripMenuItem.Enabled = False
 	End Sub
 
 	Private Sub RefreshRandomizerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RefreshRandomizerToolStripMenuItem.Click
@@ -20836,13 +20619,19 @@ SkipNew:
 
 	Private Sub BTNRandomBlog_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomBlog.Click
 		BTNRandomBlog.Enabled = False
-		GetBlogImage()
+
+		ShowImage(GetRandomImage(ImageGenre.Blog), True)
+		ssh.JustShowedBlogImage = True
+
 		BTNRandomBlog.Enabled = True
 	End Sub
 
 	Private Sub BTNRandomLocal_Click(sender As System.Object, e As System.EventArgs) Handles BTNRandomLocal.Click
 		BTNRandomLocal.Enabled = False
-		GetLocalImage()
+
+		ShowImage(GetRandomImage(ImageSourceType.Local), True)
+		ssh.JustShowedBlogImage = True
+
 		BTNRandomLocal.Enabled = True
 	End Sub
 
@@ -21828,7 +21617,4 @@ playLoop:
 		Return Len(StringClean) - Len(Replace(StringClean, Character, ""))
 	End Function
 
-	Private Sub DebugSessionToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DebugSessionToolStripMenuItem.Click
-		dbgSessionForm.Show()
-	End Sub
 End Class

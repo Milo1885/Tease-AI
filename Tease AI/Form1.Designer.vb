@@ -208,7 +208,7 @@ Partial Class Form1
 		Me.ForumToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.DebugToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.RunScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.DebugSessionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.DebugSessionWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.DebugMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
 		Me.RefreshRandomizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -401,6 +401,9 @@ Partial Class Form1
 		Me.TimeoutTimer = New Tease_AI.teaseAI_Timer()
 		Me.VideoTimer = New Tease_AI.teaseAI_Timer()
 		Me.MultipleEdgesTimer = New Tease_AI.teaseAI_Timer()
+		Me.DebugTimersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+		Me.StartTimer1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2050,7 +2053,7 @@ Partial Class Form1
 		'
 		'DebugToolStripMenuItem
 		'
-		Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunScriptToolStripMenuItem, Me.DebugSessionToolStripMenuItem, Me.DebugMenuToolStripMenuItem, Me.ToolStripSeparator13, Me.RefreshRandomizerToolStripMenuItem})
+		Me.DebugToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RunScriptToolStripMenuItem, Me.DebugSessionWindowToolStripMenuItem, Me.DebugMenuToolStripMenuItem, Me.ToolStripSeparator6, Me.DebugTimersToolStripMenuItem, Me.ToolStripSeparator13, Me.RefreshRandomizerToolStripMenuItem})
 		Me.DebugToolStripMenuItem.Name = "DebugToolStripMenuItem"
 		Me.DebugToolStripMenuItem.Size = New System.Drawing.Size(54, 20)
 		Me.DebugToolStripMenuItem.Text = "Debug"
@@ -2058,30 +2061,30 @@ Partial Class Form1
 		'RunScriptToolStripMenuItem
 		'
 		Me.RunScriptToolStripMenuItem.Name = "RunScriptToolStripMenuItem"
-		Me.RunScriptToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+		Me.RunScriptToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
 		Me.RunScriptToolStripMenuItem.Text = "Run Script"
 		'
-		'DebugSessionToolStripMenuItem
+		'DebugSessionWindowToolStripMenuItem
 		'
-		Me.DebugSessionToolStripMenuItem.Name = "DebugSessionToolStripMenuItem"
-		Me.DebugSessionToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-		Me.DebugSessionToolStripMenuItem.Text = "Debug Session"
+		Me.DebugSessionWindowToolStripMenuItem.Name = "DebugSessionWindowToolStripMenuItem"
+		Me.DebugSessionWindowToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+		Me.DebugSessionWindowToolStripMenuItem.Text = "Debug Session Window"
 		'
 		'DebugMenuToolStripMenuItem
 		'
 		Me.DebugMenuToolStripMenuItem.Name = "DebugMenuToolStripMenuItem"
-		Me.DebugMenuToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+		Me.DebugMenuToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
 		Me.DebugMenuToolStripMenuItem.Text = "Debug Menu"
 		'
 		'ToolStripSeparator13
 		'
 		Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-		Me.ToolStripSeparator13.Size = New System.Drawing.Size(176, 6)
+		Me.ToolStripSeparator13.Size = New System.Drawing.Size(195, 6)
 		'
 		'RefreshRandomizerToolStripMenuItem
 		'
 		Me.RefreshRandomizerToolStripMenuItem.Name = "RefreshRandomizerToolStripMenuItem"
-		Me.RefreshRandomizerToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
+		Me.RefreshRandomizerToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
 		Me.RefreshRandomizerToolStripMenuItem.Text = "Refresh Randomizer"
 		'
 		'AboutToolStripMenuItem
@@ -4099,6 +4102,24 @@ Partial Class Form1
 		'
 		Me.MultipleEdgesTimer.Interval = 1000
 		'
+		'DebugTimersToolStripMenuItem
+		'
+		Me.DebugTimersToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartTimer1ToolStripMenuItem})
+		Me.DebugTimersToolStripMenuItem.Name = "DebugTimersToolStripMenuItem"
+		Me.DebugTimersToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+		Me.DebugTimersToolStripMenuItem.Text = "Timers"
+		'
+		'ToolStripSeparator6
+		'
+		Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+		Me.ToolStripSeparator6.Size = New System.Drawing.Size(195, 6)
+		'
+		'StartTimer1ToolStripMenuItem
+		'
+		Me.StartTimer1ToolStripMenuItem.Name = "StartTimer1ToolStripMenuItem"
+		Me.StartTimer1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+		Me.StartTimer1ToolStripMenuItem.Text = "Start Timer 1"
+		'
 		'Form1
 		'
 		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -4556,5 +4577,8 @@ Partial Class Form1
 	Friend WithEvents DommeTagBtnLastImage As System.Windows.Forms.Button
 	Private WithEvents PicStripTmsiDisableAnimation As ToolStripMenuItem
 	Friend WithEvents ProgressBar_BGW_Images As ProgressBar
-	Friend WithEvents DebugSessionToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents DebugSessionWindowToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents ToolStripSeparator6 As ToolStripSeparator
+	Friend WithEvents DebugTimersToolStripMenuItem As ToolStripMenuItem
+	Friend WithEvents StartTimer1ToolStripMenuItem As ToolStripMenuItem
 End Class
