@@ -315,7 +315,7 @@ Public Class SessionState
 	<Category("Images")> Public Property SlideshowInt As Integer
 	<Category("Images")> <Description("True if main slideshow is loaded.")>
 	Public Property SlideshowLoaded As Boolean
-	<Category("Images")> Public Property SlideshowDomme As Slideshow
+	<Category("Images")> Public Property SlideshowMain As Slideshow
 	<Category("Images")> Public Property SlideshowContact1 As Slideshow
 	<Category("Images")> Public Property SlideshowContact2 As Slideshow
 	<Category("Images")> Public Property SlideshowContact3 As Slideshow
@@ -603,7 +603,7 @@ Public Class SessionState
 
 		DommeMood = randomizer.Next(My.Settings.DomMoodMin, My.Settings.DomMoodMax + 1)
 
-		SlideshowDomme = New Slideshow(ContactType.Domme)
+		SlideshowMain = New Slideshow(ContactType.Domme)
 		SlideshowContact1 = New Slideshow(ContactType.Contact1)
 		SlideshowContact2 = New Slideshow(ContactType.Contact2)
 		SlideshowContact3 = New Slideshow(ContactType.Contact3)
@@ -688,7 +688,8 @@ Public Class SessionState
 		If serializeForm IsNot Nothing _
 		AndAlso serializeForm.InvokeRequired Then
 			' Calling from another Thread -> Invoke on controls UI-Thread
-			serializeForm.UIThread(AddressOf Reset)
+			Dim Act As Action(Of Form1) = Sub(s1) FetchFormData(s1)
+			serializeForm.Invoke(Act)
 			Exit Sub
 		End If
 		' Called from Controls UI-Thread -> Execute Code.
@@ -831,8 +832,8 @@ Public Class SessionState
 		If activateForm IsNot Nothing _
 		AndAlso activateForm.InvokeRequired Then
 			' Calling from another Thread -> Invoke on controls UI-Thread
-			activateForm.UIThread(AddressOf Reset)
-			Exit Sub
+			Dim Act As Action(Of Form1) = Sub(s1) Activate(s1)
+			activateForm.Invoke(Act)
 		End If
 		' Called from Controls UI-Thread -> Execute Code.
 
@@ -929,15 +930,15 @@ Public Class SessionState
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'						Restore temporary flags 
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If serialized_FlagsTemp.Count > 0 Then
-				If Directory.Exists(PersonalityFlagTempPath) = False Then
-					Directory.CreateDirectory(PersonalityFlagTempPath)
-				Else
-					For Each fn As String In Directory.GetFiles(PersonalityFlagTempPath)
-						File.Delete(fn)
-					Next
-				End If
+			If Directory.Exists(PersonalityFlagTempPath) = False Then
+				Directory.CreateDirectory(PersonalityFlagTempPath)
+			Else
+				For Each fn As String In Directory.GetFiles(PersonalityFlagTempPath)
+					File.Delete(fn)
+				Next
+			End If
 
+			If serialized_FlagsTemp.Count > 0 Then
 				For Each fn As String In serialized_FlagsTemp
 					Using fs As New FileStream(PersonalityFlagTempPath & fn,
 											   FileMode.Create) : End Using
@@ -946,7 +947,7 @@ Public Class SessionState
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'								Set Slideshows
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If SlideshowDomme Is Nothing Then SlideshowDomme = New Slideshow(ContactType.Domme)
+			If SlideshowMain Is Nothing Then SlideshowMain = New Slideshow(ContactType.Domme)
 			If SlideshowContact1 Is Nothing Then SlideshowContact1 = New Slideshow(ContactType.Contact1)
 			If SlideshowContact2 Is Nothing Then SlideshowContact2 = New Slideshow(ContactType.Contact2)
 			If SlideshowContact3 Is Nothing Then SlideshowContact3 = New Slideshow(ContactType.Contact3)
@@ -958,8 +959,8 @@ Public Class SessionState
 				.ShowImage(ImageLocation, True)
 			ElseIf File.Exists(ImageLocation) Then
 				.ShowImage(ImageLocation, True)
-			ElseIf SlideshowLoaded = True And SlideshowDomme.ImageList.Count > 0 AndAlso File.Exists(SlideshowDomme.CurrentImage) Then
-				.ShowImage(SlideshowDomme.CurrentImage, True)
+			ElseIf SlideshowLoaded = True And SlideshowMain.ImageList.Count > 0 AndAlso File.Exists(SlideshowMain.CurrentImage) Then
+				.ShowImage(SlideshowMain.CurrentImage, True)
 			Else
 				.ClearMainPictureBox()
 			End If
@@ -972,6 +973,13 @@ Public Class SessionState
 			If serialized_WMP_Playstate <= 1 Then
 				.DomWMP.Ctlcontrols.stop()
 			ElseIf serialized_WMP_Playstate = 2 Then
+				Dim sw As New Stopwatch
+				sw.Start()
+
+				Do Until .DomWMP.playState = WMPPlayState.wmppsPlaying Or sw.ElapsedMilliseconds > 5000
+					Application.DoEvents()
+				Loop
+
 				.DomWMP.Ctlcontrols.pause()
 			ElseIf serialized_WMP_Playstate = 3 Then
 				.DomWMP.Ctlcontrols.play()
@@ -1081,7 +1089,8 @@ Public Class SessionState
 			AndAlso ActivationForm IsNot Nothing _
 			AndAlso ActivationForm.InvokeRequired Then
 				' Calling from another Thread -> Invoke on controls UI-Thread
-				ActivationForm.UIThread(AddressOf Reset)
+				Dim Act As Action(Of String, Boolean) = Sub(s1, s2) Load(s1, s2)
+				ActivationForm.Invoke(Act)
 				Exit Sub
 			End If
 			' Called from Controls UI-Thread -> Execute Code.

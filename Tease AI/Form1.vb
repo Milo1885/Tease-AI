@@ -711,21 +711,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSettings.alloworgasmComboBox.Text = My.Settings.OrgasmAllow
 		FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
 
-		FrmSettings.LockOrgasmChances.Checked = My.Settings.LockOrgasmChances
-		FrmSettings.alloworgasmComboBox.Enabled = True
-		FrmSettings.ruinorgasmComboBox.Enabled = True
-		FrmSettings.CBRangeOrgasm.Enabled = True
-		If FrmSettings.CBRangeOrgasm.Checked = False Then
-			FrmSettings.NBAllowOften.Enabled = True
-			FrmSettings.NBAllowSometimes.Enabled = True
-			FrmSettings.NBAllowRarely.Enabled = True
-		End If
-		FrmSettings.CBRangeRuin.Enabled = True
-		If FrmSettings.CBRangeRuin.Checked = False Then
-			FrmSettings.NBRuinOften.Enabled = True
-			FrmSettings.NBRuinSometimes.Enabled = True
-			FrmSettings.NBRuinRarely.Enabled = True
-		End If
+
 
 		If My.Settings.DomDenialEnd = True Then
 			FrmSettings.CBDomDenialEnds.Checked = True
@@ -1000,7 +986,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.Refresh()
 
 		Try
-			ssh.SlideshowDomme = New Slideshow(ContactType.Domme)
+			ssh.SlideshowMain = New Slideshow(ContactType.Domme)
 			ssh.SlideshowContact1 = New Slideshow(ContactType.Contact1)
 			ssh.SlideshowContact2 = New Slideshow(ContactType.Contact2)
 			ssh.SlideshowContact3 = New Slideshow(ContactType.Contact3)
@@ -1200,6 +1186,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 	End Sub
 
+	<Obsolete("Do not use anymore")>
 	Public Sub ResetButton()
 
 		ScriptTimer.Stop()
@@ -1244,20 +1231,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		ssh.OrgasmYesNo = False
 
-		FrmSettings.alloworgasmComboBox.Enabled = True
-		FrmSettings.ruinorgasmComboBox.Enabled = True
-		FrmSettings.CBRangeOrgasm.Enabled = True
-		If FrmSettings.CBRangeOrgasm.Checked = False Then
-			FrmSettings.NBAllowOften.Enabled = True
-			FrmSettings.NBAllowSometimes.Enabled = True
-			FrmSettings.NBAllowRarely.Enabled = True
-		End If
-		FrmSettings.CBRangeRuin.Enabled = True
-		If FrmSettings.CBRangeRuin.Checked = False Then
-			FrmSettings.NBRuinOften.Enabled = True
-			FrmSettings.NBRuinSometimes.Enabled = True
-			FrmSettings.NBRuinRarely.Enabled = True
-		End If
+		FrmSettings.LockOrgasmChances(False)
 
 		ssh.ShowModule = False
 		ssh.BookmarkLink = False
@@ -1624,18 +1598,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 					TeaseTimer.Start()
 
-					If FrmSettings.LockOrgasmChances.Checked = True Then
-						FrmSettings.alloworgasmComboBox.Enabled = False
-						FrmSettings.ruinorgasmComboBox.Enabled = False
-						FrmSettings.CBRangeOrgasm.Enabled = False
-						FrmSettings.NBAllowOften.Enabled = False
-						FrmSettings.NBAllowSometimes.Enabled = False
-						FrmSettings.NBAllowRarely.Enabled = False
-						FrmSettings.CBRangeRuin.Enabled = False
-						FrmSettings.NBRuinOften.Enabled = False
-						FrmSettings.NBRuinSometimes.Enabled = False
-						FrmSettings.NBRuinRarely.Enabled = False
-					End If
+					' Lock Orgasm Chances if setting is activated. 
+					If My.Settings.LockOrgasmChances Then _
+						FrmSettings.LockOrgasmChances(True)
 
 					If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistStartFile
 
@@ -5000,7 +4965,7 @@ SkipIsTyping:
 TryNextWithTease:
 						'TODO-Next: Test Code
 						Try
-							SlideshowToUse = ssh.SlideshowDomme
+							SlideshowToUse = ssh.SlideshowMain
 
 							If ssh.DomTask.Contains("@Contact1") Then _
 								SlideshowToUse = ssh.SlideshowContact1
@@ -5438,10 +5403,10 @@ EndSysMes:
 					ElseIf ShowPicture = True
 						' #################### Domme Slideshow ########################
 DommeSlideshowFallback:
-						ShowImage(ssh.SlideshowDomme.NavigateNextTease, True)
+						ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 					End If
 
-				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowDomme
+				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
 					SlideshowToUse = Nothing
 					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
@@ -5843,7 +5808,7 @@ NullResponseLine:
 TryNextWithTease:
 						'TODO-Next: Test Code
 						Try
-							SlideshowToUse = ssh.SlideshowDomme
+							SlideshowToUse = ssh.SlideshowMain
 
 							If ssh.DomTask.Contains("@Contact1") Then _
 								SlideshowToUse = ssh.SlideshowContact1
@@ -6138,10 +6103,10 @@ EndSysMes:
 					ElseIf ShowPicture = True
 						' #################### Domme Slideshow ########################
 DommeSlideshowFallback:
-						ShowImage(ssh.SlideshowDomme.NavigateNextTease, True)
+						ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 					End If
 
-				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowDomme
+				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
 					SlideshowToUse = Nothing
 					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
@@ -6393,12 +6358,12 @@ chooseComboboxText:
 				ssh.SlideshowLoaded = False
 
 				If FrmSettings.CBSlideshowSubDir.Checked = True Then
-					ssh.SlideshowDomme.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.AllDirectories)
+					ssh.SlideshowMain.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.AllDirectories)
 				Else
-					ssh.SlideshowDomme.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.TopDirectoryOnly)
+					ssh.SlideshowMain.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.TopDirectoryOnly)
 				End If
 
-				ssh.SlideshowDomme.Index = 0
+				ssh.SlideshowMain.Index = 0
 
 				GoTo listLoaded
 
@@ -6430,10 +6395,10 @@ chooseComboboxText:
 
 					For Each ___PhotoNode As Xml.XmlNode In tmpDoc.DocumentElement.SelectNodes("//photo-url")
 						If CInt(___PhotoNode.Attributes.ItemOf("max-width").InnerText) = 1280 Then
-							ssh.SlideshowDomme.ImageList.Add(___PhotoNode.InnerXml)
+							ssh.SlideshowMain.ImageList.Add(___PhotoNode.InnerXml)
 						End If
 					Next
-					ssh.SlideshowDomme.Index = 0
+					ssh.SlideshowMain.Index = 0
 				End Using
 
 				GoTo listLoaded
@@ -6448,7 +6413,7 @@ chooseComboboxText:
 			Exit Sub
 
 listLoaded:
-			If ssh.SlideshowDomme.ImageList.Count <= 0 Then
+			If ssh.SlideshowMain.ImageList.Count <= 0 Then
 
 				MessageBox.Show(Me, "There are no images in the specified folder.", "Error!",
 									MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -6459,7 +6424,7 @@ listLoaded:
 
 
 
-			ShowImage(ssh.SlideshowDomme.NavigateNextTease, True)
+			ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 			ssh.JustShowedBlogImage = False
 
 			'TODO: FrmSettings.timedRadio.Checked - Remove CrossForm DataAccess
@@ -6493,7 +6458,7 @@ listLoaded:
 
 			If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Then Return
 
-			Dim sh As Slideshow = ssh.SlideshowDomme
+			Dim sh As Slideshow = ssh.SlideshowMain
 Retry:
 			If My.Settings.CBSlideshowRandom Then
 				sh.NavigateNextTease()
@@ -6713,7 +6678,7 @@ Retry:
 					'If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") Then
 
 					'Question (Stefaf):  Isn't selecting an image at this point redundant?
-					ssh.DomPic = ssh.SlideshowDomme.NavigateNextTease()
+					ssh.DomPic = ssh.SlideshowMain.NavigateNextTease()
 
 				End If
 
@@ -8557,7 +8522,7 @@ StatusUpdateEnd:
 
 		'TDOD: Optimze Code "TextedTags"
 		ssh.FoundTag = "NULL"
-		Dim slide As Slideshow = ssh.SlideshowDomme
+		Dim slide As Slideshow = ssh.SlideshowMain
 		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
 
 		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
@@ -8797,8 +8762,8 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@NewDommeSlideshow") Then
-			ssh.SlideshowDomme.LoadNew()
-			ssh.DomPic = ssh.SlideshowDomme.CurrentImage
+			ssh.SlideshowMain.LoadNew()
+			ssh.DomPic = ssh.SlideshowMain.CurrentImage
 			StringClean = StringClean.Replace("@NewDommeSlideshow", "")
 		End If
 
@@ -8913,7 +8878,7 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@ShowLocalImage") And Not StringClean.Contains("@ShowLocalImage(") Then
-			ShowImage(GetRandomImage(ImageSourceType.Local), false)
+			ShowImage(GetRandomImage(ImageSourceType.Local), False)
 			StringClean = StringClean.Replace("@ShowLocalImage", "")
 		End If
 
@@ -11272,6 +11237,7 @@ OrgasmDecided:
 			'StopEverything()
 			'ResetButton()
 			ssh.Reset()
+			FrmSettings.LockOrgasmChances(False)
 			ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
 			ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
 			StringClean = StringClean.Replace("@EndTease", "")
@@ -13791,7 +13757,7 @@ VTSkip:
 	'''   </remarks>
 	Public Function GetDommeImage(ByVal DomTag As String) As String
 		Try
-			Dim slide As Slideshow = ssh.SlideshowDomme
+			Dim slide As Slideshow = ssh.SlideshowMain
 			Dim __targetFolder As String = Path.GetDirectoryName(slide.CurrentImage)
 			' Set a local function reference to the global instance. Otherwise the global 
 			' instance is out of parallel Tasks scope! The result would be an empty reference.
@@ -14086,7 +14052,7 @@ Skip_RandomFile:
 
 		'TDOD: Optimze Code "TextedTags"
 		ssh.FoundTag = "NULL"
-		Dim slide As Slideshow = ssh.SlideshowDomme
+		Dim slide As Slideshow = ssh.SlideshowMain
 		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
 
 		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
@@ -15751,20 +15717,8 @@ NoPlaylistEndFile:
 
 		ssh.MiniScript = False
 
-		FrmSettings.alloworgasmComboBox.Enabled = True
-		FrmSettings.ruinorgasmComboBox.Enabled = True
-		FrmSettings.CBRangeOrgasm.Enabled = True
-		If FrmSettings.CBRangeOrgasm.Checked = False Then
-			FrmSettings.NBAllowOften.Enabled = True
-			FrmSettings.NBAllowSometimes.Enabled = True
-			FrmSettings.NBAllowRarely.Enabled = True
-		End If
-		FrmSettings.CBRangeRuin.Enabled = True
-		If FrmSettings.CBRangeRuin.Checked = False Then
-			FrmSettings.NBRuinOften.Enabled = True
-			FrmSettings.NBRuinSometimes.Enabled = True
-			FrmSettings.NBRuinRarely.Enabled = True
-		End If
+		' Unlock OrgasmChances
+		FrmSettings.LockOrgasmChances(False)
 
 		ClearModes()
 
@@ -16490,20 +16444,20 @@ PoundLoop:
 
 TryNext:
 			If My.Settings.CBSlideshowRandom Then
-				ssh.SlideshowDomme.NavigateNextTease()
+				ssh.SlideshowMain.NavigateNextTease()
 			Else
-				ssh.SlideshowDomme.NavigateForward()
+				ssh.SlideshowMain.NavigateForward()
 			End If
 
 
-			If Not (File.Exists(ssh.SlideshowDomme.CurrentImage) _
-					Or isURL(ssh.SlideshowDomme.CurrentImage)) Then
+			If Not (File.Exists(ssh.SlideshowMain.CurrentImage) _
+					Or isURL(ssh.SlideshowMain.CurrentImage)) Then
 				ClearMainPictureBox()
 				Exit Sub
 			End If
 
 			Try
-				ShowImage(ssh.SlideshowDomme.CurrentImage, True)
+				ShowImage(ssh.SlideshowMain.CurrentImage, True)
 				ssh.JustShowedBlogImage = False
 				ssh.JustShowedSlideshowImage = True
 
@@ -17224,7 +17178,7 @@ RestartFunction:
 	Private Sub PictureStrip_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles PictureStrip.Opening
 
 		If mainPictureBox.Image IsNot Nothing Then
-			Dim sh As Slideshow = ssh.SlideshowDomme
+			Dim sh As Slideshow = ssh.SlideshowMain
 
 			If ImageAnimator.CanAnimate(mainPictureBox.Image) _
 			And ImageAnimator_OnFrameChangedAdded Then
@@ -17452,7 +17406,7 @@ saveImage:
 		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
 
 		Try
-			ShowImage(ssh.SlideshowDomme.NavigateLast, True)
+			ShowImage(ssh.SlideshowMain.NavigateLast, True)
 			ssh.JustShowedBlogImage = False
 		Catch
 
@@ -17469,7 +17423,7 @@ saveImage:
 		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
 
 		Try
-			ShowImage(ssh.SlideshowDomme.NavigateFirst, True)
+			ShowImage(ssh.SlideshowMain.NavigateFirst, True)
 			ssh.JustShowedBlogImage = False
 		Catch
 
@@ -17486,8 +17440,8 @@ saveImage:
 		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
 
 		Try
-			ssh.SlideshowDomme.LoadNew()
-			ShowImage(ssh.SlideshowDomme.NavigateFirst, True)
+			ssh.SlideshowMain.LoadNew()
+			ShowImage(ssh.SlideshowMain.NavigateFirst, True)
 
 		Catch
 
@@ -17530,8 +17484,8 @@ saveImage:
 
 
 	Public Sub LoadDommeImageFolder()
-		ssh.SlideshowDomme.LoadNew()
-		ShowImage(ssh.SlideshowDomme.CurrentImage, False)
+		ssh.SlideshowMain.LoadNew()
+		ShowImage(ssh.SlideshowMain.CurrentImage, False)
 		ssh.SlideshowLoaded = True
 		ssh.JustShowedBlogImage = False
 
@@ -17539,7 +17493,7 @@ saveImage:
 		previousButton.Enabled = True
 		PicStripTSMIdommeSlideshow.Enabled = True
 
-		If ssh.RiskyDeal = True Then FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.SlideshowDomme.CurrentImage)
+		If ssh.RiskyDeal = True Then FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.SlideshowMain.CurrentImage)
 
 		If FrmSettings.timedRadio.Checked = True Then
 			ssh.SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
@@ -17980,6 +17934,10 @@ saveImage:
 			End If
 
 			ssh.Load(filename, True)
+
+			If ssh.SaidHello And My.Settings.LockOrgasmChances Then _
+				FrmSettings.LockOrgasmChances(True)
+
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
@@ -17998,6 +17956,7 @@ saveImage:
 		End If
 
 		ssh.Reset()
+		FrmSettings.LockOrgasmChances(False)
 
 		If ssh.DomTypeCheck = False Then
 			ssh.DomTask = "<b>Tease AI has been reset</b>"

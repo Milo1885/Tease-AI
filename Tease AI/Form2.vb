@@ -1289,6 +1289,22 @@ Public Class FrmSettings
 
 #End Region
 
+
+	''' <summary>
+	''' Locks the Orgasm Chances.
+	''' </summary>
+	''' <param name="lock">If True the Controls regarding orgasms are locked.</param>
+	Friend Sub LockOrgasmChances(ByVal lock As Boolean)
+
+		alloworgasmComboBox.Enabled = Not lock
+		ruinorgasmComboBox.Enabled = Not lock
+
+		GBRangeOrgasmChance.Enabled = Not lock
+		GBRangeRuinChance.Enabled = Not lock
+
+	End Sub
+
+
 	Private Sub domlevelNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.LostFocus
 		My.Settings.DomLevel = domlevelNumBox.Value
 	End Sub
@@ -1612,16 +1628,10 @@ Public Class FrmSettings
 		TTDir.SetToolTip(TBEmoteEnd, "This determines what symbol(s) the domme uses to end an emote.")
 	End Sub
 
-	Private Sub LockOrgasmChances_LostFocus(sender As System.Object, e As System.EventArgs) Handles LockOrgasmChances.LostFocus
-		If LockOrgasmChances.Checked = True Then
-			My.Settings.LockOrgasmChances = True
-		Else
-			My.Settings.LockOrgasmChances = False
-		End If
-	End Sub
 
-	Private Sub LockOrgasmChances_MouseHover(sender As System.Object, e As System.EventArgs) Handles LockOrgasmChances.MouseHover
-		TTDir.SetToolTip(LockOrgasmChances, "If checked the orgasm chances will be locked and unchangeable once you start the tease." & Environment.NewLine & Environment.NewLine &
+
+	Private Sub LockOrgasmChances_MouseHover(sender As System.Object, e As System.EventArgs) Handles CBLockOrgasmChances.MouseHover
+		TTDir.SetToolTip(CBLockOrgasmChances, "If checked the orgasm chances will be locked and unchangeable once you start the tease." & Environment.NewLine & Environment.NewLine &
 			"Orgasm chances will be changeable and unlocked when out of a tease.")
 	End Sub
 
@@ -8236,7 +8246,7 @@ checkFolder:
 
 		My.Settings.OrgasmAllow = alloworgasmComboBox.Text
 		My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
-		My.Settings.LockOrgasmChances = LockOrgasmChances.Checked
+		My.Settings.LockOrgasmChances = CBLockOrgasmChances.Checked
 		My.Settings.DomDenialEnd = CBDomDenialEnds.Checked
 		My.Settings.DomOrgasmEnd = CBDomOrgasmEnds.Checked
 		' My.Settings.DomPOT = CBDomPOT.Checked
@@ -8292,7 +8302,7 @@ checkFolder:
 
 		alloworgasmComboBox.Text = My.Settings.OrgasmAllow
 		ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
-		LockOrgasmChances.Checked = My.Settings.LockOrgasmChances
+		CBLockOrgasmChances.Checked = My.Settings.LockOrgasmChances
 		CBDomDenialEnds.Checked = My.Settings.DomDenialEnd
 		CBDomOrgasmEnds.Checked = My.Settings.DomOrgasmEnd
 		'CBDomPOT.Checked = My.Settings.DomPOT
@@ -8423,7 +8433,7 @@ checkFolder:
 	End Sub
 
 	Private Sub CBRangeOrgasm_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBRangeOrgasm.CheckedChanged
-		If CBRangeOrgasm.Checked = False And alloworgasmComboBox.Enabled = True Then
+		If CBRangeOrgasm.Checked = False Then
 			NBAllowOften.Enabled = True
 			NBAllowSometimes.Enabled = True
 			NBAllowRarely.Enabled = True
@@ -8435,7 +8445,7 @@ checkFolder:
 	End Sub
 
 	Private Sub CBRangeRuin_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBRangeRuin.CheckedChanged
-		If CBRangeRuin.Checked = False And ruinorgasmComboBox.Enabled = True Then
+		If CBRangeRuin.Checked = False Then
 			NBRuinOften.Enabled = True
 			NBRuinSometimes.Enabled = True
 			NBRuinRarely.Enabled = True
@@ -9204,7 +9214,7 @@ checkFolder:
 		LBLRangeSettingsDescription.Text = "This determines the maximum amount of time the domme will keep the video playing while playing Red Light Green Light."
 	End Sub
 
-	Private Sub RangeSet_MouseHover(sender As Object, e As System.EventArgs) Handles Panel6.MouseEnter, GroupBox21.MouseEnter, GroupBox18.MouseEnter, GroupBox19.MouseEnter, GroupBox10.MouseEnter, GroupBox56.MouseEnter, GroupBox52.MouseEnter, GroupBox57.MouseEnter
+	Private Sub RangeSet_MouseHover(sender As Object, e As System.EventArgs) Handles Panel6.MouseEnter, GroupBox21.MouseEnter, GroupBox18.MouseEnter, GroupBox19.MouseEnter, GroupBox10.MouseEnter, GBRangeRuinChance.MouseEnter, GBRangeOrgasmChance.MouseEnter, GroupBox57.MouseEnter
 		LBLRangeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its function."
 	End Sub
 
