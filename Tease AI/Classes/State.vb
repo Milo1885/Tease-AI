@@ -60,7 +60,9 @@ Public Class SessionState
 	<Category("Script")> Public Property SkipGotoLine As Boolean
 
 	Public Property ChatString As String
+	<Description("Used for regular talk.")>
 	Public Property DomTask As String = "Null"
+	<Description("Used for responses.")>
 	Public Property DomChat As String = "Null"
 	Public Property TypeDelay As Integer
 	Public Property TempVal As Integer
@@ -301,18 +303,17 @@ Public Class SessionState
 
 	Public Property OrgasmYesNo As Boolean = False
 
-	<Category("Images")> Public Property CustomSlideshow As Boolean
-	<Category("Images")> Public Property CustomSlideshowList As New List(Of String)
+	<Category("Images")> <Description("Determines if the custom slideshow should run.")>
+	Public Property CustomSlideEnabled As Boolean
+	<Category("Images")> <Description("Stores all images and genre informations for CustomSlideshow")>
+	Public Property CustomSlideshow As New CustomSlideshow
 	<Category("Images")> Public Property DommeImageFound As Boolean
 	<Category("Images")> Public Property DommeImageSTR As String
 	<Category("Images")> Public Property DomPic As String
-	<Category("Images")> Public Property ImageString As String
 	<Category("Images")> Public Property JustShowedBlogImage As Boolean = False
 	<Category("Images")> Public Property JustShowedSlideshowImage As Boolean = False
 	<Category("Images")> Public Property LockImage As Boolean
 	<Category("Images")> Public Property RandomSlideshowCategory As String
-	''' <summary> Addresses the current CustomSlideshow image. </summary>
-	<Category("Images")> Public Property SlideshowInt As Integer
 	<Category("Images")> <Description("True if main slideshow is loaded.")>
 	Public Property SlideshowLoaded As Boolean
 	<Category("Images")> Public Property SlideshowMain As Slideshow

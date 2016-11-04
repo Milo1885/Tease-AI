@@ -35,6 +35,8 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>Tease AI.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugSymbols>true</DebugSymbols>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -109,6 +111,7 @@
     <Compile Include="Classes\My.Watchdog.vb" />
     <Compile Include="Classes\myDirectory.vb" />
     <Compile Include="Classes\mySettings_Partial.vb" />
+    <Compile Include="Classes\CustomSlideshow.vb" />
     <Compile Include="Classes\Slideshows.vb" />
     <Compile Include="Classes\State.vb" />
     <Compile Include="Classes\teaseAI_Timer.vb">
