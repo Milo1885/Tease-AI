@@ -34,19 +34,21 @@ Bugfixes:
 	@FollowUp##()-Command now gets cleaned from the line correctly, also stopped the followup message from still partially showing in "failure" cases. by Pepsifreak
 	Recent slideshow folders are now really checked on start-up and missing folders removed.
 	Dom Mood settings were ignored.
-	Fixed issue where a domme images were displayed, when a contact was responding.
+	Fixed issue where a domme images was displayed, when a contact was responding.
 	Fixed issue, where slideshows continued after @SlideshowOff. Now the CustomSlideshow-Timer checks if he is supposed to be running.
+	Fixed command @GotoSlideshow. Now you can jump to a specific line based on the current slideshow-image.
 
 Miscellaneous:
 
 	Removed several unused variables.
 	SettingsForm VideoSettings GUI reworked.
 	SettingsForm ImageSettings GUI reworked.
-	SettingsForm Apps-Games GUI reworked.
+	SettingsForm Apps-Games GUI reworked. Still WIP -> Unchanged references causing sometimes glitter names to be blank in chat.
 	Suspending/Resuming/Resetting Session reworked.
 		Now all necessary data is stored into a single binary *.save file. This includes all Variables, Flags, Slideshows, TimerStates and regular Data. By Holding down the control key while clicking suspend or resume the user is asked for a custom file to save to or load from.
 	Reworked Code to Display Images.
-	Added a ToolstripItem in Debug menu, to start Timer1, if he is stopped. This could probably fix some or eventually all "Freeze-Crashs". But this has to be tested. So if your Session freezes goto: Debug->Timers->Start Timer 1. 
+	Added a ToolstripItem in Debug menu, to start Timer1, if he is stopped. This could probably fix some or eventually all "Script-Freeze-Crashs". But this has to be tested. So if your Session freezes goto: Debug->Timers->Start Timer 1. Please let us know, if it worked.
+	Reworked custom Slideshow. The slideshow will pick now random images from random genres. This way an unbalanced amount of images doesn't matter any more. All genres have the same chances, even if they are outnumbered by a million times. There is also a check if the last image was of the same genre. If that's the case, it will randomly use the same genre or tries to pick another one. 
 
 
 # Changelog - Patch 54.4.0
