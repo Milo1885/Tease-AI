@@ -476,7 +476,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		If My.Settings.CBGlitterFeedScripts = True Then FrmSettings.CBGlitterFeedScripts.Checked = True
 		If My.Settings.CBGlitterFeedOff = True Then FrmSettings.CBGlitterFeedOff.Checked = True
 
-
+		'TODO-Next-Stefaf: Optimize Code
 		If My.Settings.CBTease = True Then
 			FrmSettings.CBTease.Checked = True
 		Else
@@ -986,10 +986,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.Refresh()
 
 		Try
-			ssh.SlideshowMain = New Slideshow(ContactType.Domme)
-			ssh.SlideshowContact1 = New Slideshow(ContactType.Contact1)
-			ssh.SlideshowContact2 = New Slideshow(ContactType.Contact2)
-			ssh.SlideshowContact3 = New Slideshow(ContactType.Contact3)
+			ssh.SlideshowMain = New ContactData(ContactType.Domme)
+			ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
+			ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
+			ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
 		Catch ex As Exception
 
 		End Try
@@ -4793,7 +4793,7 @@ CancelGoto:
 
 		ssh.DomTyping = True
 		Dim ShowPicture As Boolean = False
-		Dim SlideshowToUse As Slideshow = Nothing
+		Dim ContactToUse As ContactData = Nothing
 
 
 		' Let the program know that the domme is currently typing
@@ -4914,6 +4914,8 @@ SkipIsTyping:
 
 				' DomTask = PreCleanString
 
+				'################## Display a Slideimage? #################
+				'TODO: Optimize Code. Since images loaded by the Backgroundworker are prioritized, this section can be shrinked down.
 				If ssh.DomTask.Contains("@ImageTag") Then ssh.JustShowedBlogImage = True
 
 				If ssh.DomTask.Contains("@ShowHardcoreImage") Then ssh.JustShowedBlogImage = True
@@ -4938,19 +4940,6 @@ SkipIsTyping:
 				If ssh.DomTask.Contains("@SlideshowLast") Then ssh.JustShowedSlideshowImage = True
 
 
-
-				'Debug.Print("TeaseRadio = " & FrmSettings.teaseRadio.Checked)
-				'Debug.Print("JustShowedBlogImage = " & JustShowedBlogImage)
-				'Debug.Print("TeaseVideo  = " & TeaseVideo)
-				'Debug.Print("DomTask = " & DomTask)
-				'Debug.Print("NullResponse = " & NullResponse)
-				'Debug.Print("SlideshowLoaded = " & SlideshowLoaded)
-				'Debug.Print("SubStroking = " & SubStroking)
-				'Debug.Print("SubEdging  = " & SubEdging)
-				'Debug.Print("SubHoldingEdge = " & SubHoldingEdge)
-
-
-
 				If ssh.GlitterTease = True And ssh.JustShowedBlogImage = False And ssh.LockImage = False Then GoTo TryNextWithTease
 
 
@@ -4963,22 +4952,8 @@ SkipIsTyping:
 
 						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
-						'TODO-Next: Test Code
-						Try
-							SlideshowToUse = ssh.SlideshowMain
 
-							If ssh.DomTask.Contains("@Contact1") Then _
-								SlideshowToUse = ssh.SlideshowContact1
 
-							If ssh.DomTask.Contains("@Contact2") Then _
-								SlideshowToUse = ssh.SlideshowContact2
-
-							If ssh.DomTask.Contains("@Contact3") Then _
-								SlideshowToUse = ssh.SlideshowContact3
-
-						Catch ex As Exception
-							Log.WriteError("Unable to set next Tease-Slideshow.", ex, "Timer1.Tick")
-						End Try
 
 					End If
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -4999,35 +4974,41 @@ NullResponse:
 
 				If ssh.DomTask.Contains("@Contact1") Or ssh.DomTask.Contains("@Contact2") Or ssh.DomTask.Contains("@Contact3") Then ssh.SubWroteLast = True
 
-				Dim TypeName As String = domName.Text
-				Dim TypeColor As String = My.Settings.DomColor
-				Dim TypeFont As String = FrmSettings.FontComboBoxD.Text
-				Dim TypeSize As String = FrmSettings.NBFontSizeD.Value
+				'################### Gather Response Data #################
+				'TODO-Next: Test Code
+				ContactToUse = ssh.SlideshowMain
+
+				If ssh.DomTask.Contains("@Contact1") Then _
+					ContactToUse = ssh.SlideshowContact1
+
+				If ssh.DomTask.Contains("@Contact2") Then _
+					ContactToUse = ssh.SlideshowContact2
+
+				If ssh.DomTask.Contains("@Contact3") Then _
+					ContactToUse = ssh.SlideshowContact3
+
+				Dim TypeName As String = ContactToUse.TypeName
+				Dim TypeColor As String = ContactToUse.TypeColorHtml
+				Dim TypeFont As String = ContactToUse.TypeFont
+				Dim TypeSize As String = ContactToUse.TypeSize
+
+				Dim TTSVoice As String = FrmSettings.TTSComboBox.Text
+				Dim TTSrate As Integer = ContactToUse.TTSrate
+				Dim TTSvolume As String = ContactToUse.TTSvolume
+
+				' Set LineSpeaker for typo corrections.
 				Dim LineSpeaker As String = ""
-				If ssh.DomTask.Contains("@Contact1") Then
-					TypeName = FrmSettings.TBGlitter1.Text
-					TypeColor = Color2Html(My.Settings.GlitterNC1Color)
-					TypeFont = "Cambria"
-					TypeSize = "3"
+
+				If ContactToUse.Equals(ssh.SlideshowContact1) Then
 					LineSpeaker = "@Contact1 "
-				End If
-				If ssh.DomTask.Contains("@Contact2") Then
-					TypeName = FrmSettings.TBGlitter2.Text
-					TypeColor = Color2Html(My.Settings.GlitterNC2Color)
-					TypeFont = "Cambria"
-					TypeSize = "3"
+				ElseIf ContactToUse.Equals(ssh.SlideshowContact2) Then
 					LineSpeaker = "@Contact2 "
-				End If
-				If ssh.DomTask.Contains("@Contact3") Then
-					TypeName = FrmSettings.TBGlitter3.Text
-					TypeColor = Color2Html(My.Settings.GlitterNC3Color)
-					TypeFont = "Cambria"
-					TypeSize = "3"
+				ElseIf ContactToUse.Equals(ssh.SlideshowContact3) Then
 					LineSpeaker = "@Contact3 "
 				End If
 
 
-				If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
+				If FrmSettings.TTSCheckBox.Checked = True And TTSVoice <> "No voices installed" Then
 					Dim EmoteArray() As String = Split(ssh.DomTask)
 					For i As Integer = 0 To EmoteArray.Length - 1
 						Try
@@ -5396,9 +5377,9 @@ NoResponse:
 						ShowImage(ssh.DommeImageSTR, True)
 						ssh.DommeImageFound = False
 
-					ElseIf ShowPicture = True AndAlso SlideshowToUse IsNot Nothing Then
+					ElseIf ShowPicture = True AndAlso ContactToUse IsNot Nothing Then
 						' ######################## Slideshow ##########################
-						ShowImage(SlideshowToUse.NavigateNextTease, True)
+						ShowImage(ContactToUse.NavigateNextTease, True)
 
 					ElseIf ShowPicture = True
 						' #################### Domme Slideshow ########################
@@ -5406,9 +5387,9 @@ DommeSlideshowFallback:
 						ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 					End If
 
-				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowMain
+				Catch ex As Exception When ContactToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
-					SlideshowToUse = Nothing
+					ContactToUse = Nothing
 					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
 								   ex, "Display Image")
 					GoTo DommeSlideshowFallback
@@ -5425,7 +5406,7 @@ DommeSlideshowFallback:
 
 
 				If FrmSettings.TTSCheckBox.Checked = True _
-				And FrmSettings.TTSComboBox.Text <> "No voices installed" _
+				And TTSVoice <> "No voices installed" _
 				And ssh.DomTask <> "" Then
 					Debug.Print(ssh.DomTask)
 					ssh.DomTask = StripFormat(ssh.DomTask)
@@ -5435,7 +5416,9 @@ DommeSlideshowFallback:
 
 					Dim SpeechDir As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Hypnotic Guide\TempWav.wav"
 
-					synth2.SelectVoice(FrmSettings.TTSComboBox.Text)
+					synth2.Volume = TTSvolume
+					synth2.Rate = TTSrate
+					synth2.SelectVoice(TTSVoice)
 					synth2.SetOutputToWaveFile(SpeechDir, New SpeechAudioFormatInfo(32000, AudioBitsPerSample.Sixteen, AudioChannel.Mono))
 					synth2.Speak(ssh.DomTask)
 					synth2.SetOutputToNull()
@@ -5675,7 +5658,7 @@ DommeSlideshowFallback:
 
 	Private Sub SendTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SendTimer.Tick
 
-		Dim SlideshowToUse As Slideshow = Nothing
+		Dim ContactToUse As ContactData = Nothing
 
 		If ssh.DomChat.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
 		If ssh.DomChat.Contains("@NullResponse") Then
@@ -5774,7 +5757,8 @@ SkipIsTyping:
 				If ssh.RiskyDeal = True Then FrmCardList.LblRiskType.Visible = False
 
 NullResponseLine:
-
+				'################## Display a Slideimage? #################
+				'TODO: Optimize Code. Since images loaded by the Backgroundworker are prioritized, this section can be shrinked down.
 				If ssh.DomChat.Contains("@ShowHardcoreImage") Then ssh.JustShowedBlogImage = True
 				If ssh.DomChat.Contains("@ShowSoftcoreImage") Then ssh.JustShowedBlogImage = True
 				If ssh.DomChat.Contains("@ShowLesbianImage") Then ssh.JustShowedBlogImage = True
@@ -5807,22 +5791,8 @@ NullResponseLine:
 
 						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
-						'TODO-Next: Test Code
-						Try
-							SlideshowToUse = ssh.SlideshowMain
 
-							If ssh.DomChat.Contains("@Contact1") Then _
-								SlideshowToUse = ssh.SlideshowContact1
 
-							If ssh.DomChat.Contains("@Contact2") Then _
-								SlideshowToUse = ssh.SlideshowContact2
-
-							If ssh.DomChat.Contains("@Contact3") Then _
-								SlideshowToUse = ssh.SlideshowContact3
-
-						Catch ex As Exception
-							Log.WriteError("Unable to set next Tease-Slideshow.", ex, "SendTimer.Tick")
-						End Try
 
 					End If
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -5832,6 +5802,7 @@ TryNextWithTease:
 
 				End If
 
+
 				If ssh.DomChat.Contains("@WritingTask(") Then
 					Dim WriteFlag As String = GetParentheses(ssh.DomChat, "@WritingTask(")
 					ssh.DomChat = ssh.DomChat.Replace(WriteFlag, PoundClean(WriteFlag))
@@ -5839,31 +5810,32 @@ TryNextWithTease:
 
 				If ssh.DomChat.Contains("@Contact1") Or ssh.DomChat.Contains("@Contact2") Or ssh.DomChat.Contains("@Contact3") Then ssh.SubWroteLast = True
 
-				Dim TypeName As String = domName.Text
-				Dim TypeColor As String = My.Settings.DomColor
-				Dim TypeFont As String = FrmSettings.FontComboBoxD.Text
-				Dim TypeSize As String = FrmSettings.NBFontSizeD.Value
-				If ssh.DomChat.Contains("@Contact1") Then
-					TypeName = FrmSettings.TBGlitter1.Text
-					TypeColor = Color2Html(My.Settings.GlitterNC1Color)
-					TypeFont = "Cambria"
-					TypeSize = "3"
-				End If
-				If ssh.DomChat.Contains("@Contact2") Then
-					TypeName = FrmSettings.TBGlitter2.Text
-					TypeColor = Color2Html(My.Settings.GlitterNC2Color)
-					TypeFont = "Cambria"
-					TypeSize = "3"
-				End If
-				If ssh.DomChat.Contains("@Contact3") Then
-					TypeName = FrmSettings.TBGlitter3.Text
-					TypeColor = Color2Html(My.Settings.GlitterNC3Color)
-					TypeFont = "Cambria"
-					TypeSize = "3"
-				End If
+
+				'################### Gather Response Data #################
+				'TODO-Next: Test Code
+				ContactToUse = ssh.SlideshowMain
+
+				If ssh.DomChat.Contains("@Contact1") Then _
+					ContactToUse = ssh.SlideshowContact1
+
+				If ssh.DomChat.Contains("@Contact2") Then _
+					ContactToUse = ssh.SlideshowContact2
+
+				If ssh.DomChat.Contains("@Contact3") Then _
+					ContactToUse = ssh.SlideshowContact3
+
+				Dim TypeName As String = ContactToUse.TypeName
+				Dim TypeColor As String = ContactToUse.TypeColorHtml
+				Dim TypeFont As String = ContactToUse.TypeFont
+				Dim TypeSize As String = ContactToUse.TypeSize
+
+				Dim TTSVoice As String = FrmSettings.TTSComboBox.Text
+				Dim TTSrate As Integer = ContactToUse.TTSrate
+				Dim TTSvolume As String = ContactToUse.TTSvolume
 
 
-				If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
+
+				If FrmSettings.TTSCheckBox.Checked = True And TTSVoice <> "No voices installed" Then
 					Dim EmoteArray() As String = Split(ssh.DomChat)
 					For i As Integer = 0 To EmoteArray.Length - 1
 						Try
@@ -6099,9 +6071,9 @@ NullResponseLine2:
 						ShowImage(ssh.DommeImageSTR, True)
 						ssh.DommeImageFound = False
 
-					ElseIf ShowPicture = True AndAlso SlideshowToUse IsNot Nothing Then
+					ElseIf ShowPicture = True AndAlso ContactToUse IsNot Nothing Then
 						' ################### Variable Slideshow ######################
-						ShowImage(SlideshowToUse.NavigateNextTease, True)
+						ShowImage(ContactToUse.NavigateNextTease, True)
 
 					ElseIf ShowPicture = True
 						' #################### Domme Slideshow ########################
@@ -6109,26 +6081,28 @@ DommeSlideshowFallback:
 						ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 					End If
 
-				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowMain
+				Catch ex As Exception When ContactToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
-					SlideshowToUse = Nothing
+					ContactToUse = Nothing
 					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
-								   ex, "Display Image")
+									ex, "Display Image")
 					GoTo DommeSlideshowFallback
 				Catch ex As Exception
 					'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
 					Log.WriteError("Error occurred while displaying image. Fallback Failed.",
-								   ex, "Display Image")
+									ex, "Display Image")
 					ClearMainPictureBox()
 				Finally
 					ShowPicture = False
 				End Try
 
 				If FrmSettings.TTSCheckBox.Checked = True _
-				And FrmSettings.TTSComboBox.Text <> "No voices installed" _
+				And TTSVoice <> "No voices installed" _
 				And ssh.DomChat <> "" Then
 					ssh.DomChat = StripFormat(ssh.DomChat)
-					synth.SelectVoice(FrmSettings.TTSComboBox.Text)
+					synth.Volume = TTSvolume
+					synth.Rate = TTSrate
+					synth.SelectVoice(TTSVoice)
 					synth.Speak(ssh.DomChat)
 				End If
 
@@ -6340,7 +6314,6 @@ chooseComboboxText:
 				If Directory.Exists(ImageFolderComboBox.Text) Or isURL(ImageFolderComboBox.Text) Then
 					GetFolder = ImageFolderComboBox.Text
 				Else
-					'TODO-Next-Stefaf: Rework Recent SlideShow Variable and remove invalid directories.
 					Throw New DirectoryNotFoundException("The given directory """ & ImageFolderComboBox.Text & """ does not exist.")
 				End If
 			Else
@@ -6462,7 +6435,7 @@ listLoaded:
 
 			If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Then Return
 
-			Dim sh As Slideshow = ssh.SlideshowMain
+			Dim sh As ContactData = ssh.SlideshowMain
 Retry:
 			If My.Settings.CBSlideshowRandom Then
 				sh.NavigateNextTease()
@@ -7703,7 +7676,7 @@ StatusUpdate2:
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
 		If ssh.StatusChance2 < My.Settings.Glitter2Slider * 10 And My.Settings.CBGlitter2 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC2 & """><b>" & FrmSettings.TBGlitter2.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC2 & """><b>" & My.Settings.Glitter2 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText2 & "</font><br><br>"
 
 
@@ -7726,7 +7699,7 @@ StatusUpdate3:
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
 		If ssh.StatusChance3 < My.Settings.Glitter3Slider * 10 And My.Settings.CBGlitter3 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC3 & """><b>" & FrmSettings.TBGlitter3.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC3 & """><b>" & My.Settings.Glitter3 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText3 & "</font><br><br>"
 
 
@@ -7964,10 +7937,6 @@ StatusUpdateEnd:
 
 	End Sub
 
-	Public Function Color2Html(ByVal MyColor As Color) As String
-		Return "#" & MyColor.ToArgb().ToString("x").Substring(2).ToUpper
-	End Function
-
 	Public Function SysKeywordClean(ByVal StringClean As String) As String
 
 		If StringClean.Contains("@RandomText(") Then
@@ -8098,12 +8067,12 @@ StatusUpdateEnd:
 
 		StringClean = StringClean.Replace("#ShortName", My.Settings.GlitterSN)
 
-		StringClean = StringClean.Replace("#GlitterContact1", FrmSettings.TBGlitter1.Text)
-		StringClean = StringClean.Replace("#Contact1", FrmSettings.TBGlitter1.Text)
-		StringClean = StringClean.Replace("#GlitterContact2", FrmSettings.TBGlitter2.Text)
-		StringClean = StringClean.Replace("#Contact2", FrmSettings.TBGlitter2.Text)
-		StringClean = StringClean.Replace("#GlitterContact3", FrmSettings.TBGlitter3.Text)
-		StringClean = StringClean.Replace("#Contact3", FrmSettings.TBGlitter3.Text)
+		StringClean = StringClean.Replace("#GlitterContact1", My.Settings.Glitter1)
+		StringClean = StringClean.Replace("#Contact1", My.Settings.Glitter1)
+		StringClean = StringClean.Replace("#GlitterContact2", My.Settings.Glitter2)
+		StringClean = StringClean.Replace("#Contact2", My.Settings.Glitter2)
+		StringClean = StringClean.Replace("#GlitterContact3", My.Settings.Glitter3)
+		StringClean = StringClean.Replace("#Contact3", My.Settings.Glitter3)
 
 		StringClean = StringClean.Replace("#CBTCockCount", ssh.CBTCockCount)
 		StringClean = StringClean.Replace("#CBTBallsCount", ssh.CBTBallsCount)
@@ -8526,7 +8495,7 @@ StatusUpdateEnd:
 
 		'TDOD: Optimze Code "TextedTags"
 		ssh.FoundTag = "NULL"
-		Dim slide As Slideshow = ssh.SlideshowMain
+		Dim slide As ContactData = ssh.SlideshowMain
 		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
 
 		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
@@ -9296,7 +9265,6 @@ ShowedBlogImage:
 		End If
 
 		If StringClean.Contains("@GotoSlideshow") Then
-			'BUG: @GotoCustomSlideshow is not working. There is no reference what imagegenre a image belongs to.
 			Dim ImageString As String = ssh.CustomSlideshow.CurrentImage
 
 			If ImageString IsNot Nothing OrElse ImageString = "" Then
@@ -9324,12 +9292,12 @@ ShowedBlogImage:
 			End If
 
 			StringClean = StringClean.Replace("@GotoSlideshow", "")
-			End If
-			'----------------------------------------
-			' Slideshow - End
-			'----------------------------------------
-			' This Command will not work in the same line, because the Images are loaded async and not available yet.
-			If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", ssh.ImageLocation)
+		End If
+		'----------------------------------------
+		' Slideshow - End
+		'----------------------------------------
+		' This Command will not work in the same line, because the Images are loaded async and not available yet.
+		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", ssh.ImageLocation)
 
 		' The @LockImages Commnd prevents the Domme Slideshow from moving forward or back when set to "Tease" or "Timed". Manual operation of Domme Slideshow images is still allowed,
 		' and pictures displayed through other means will still work. Images are automatically unlocked whenever Tease AI moves into a Link script, an End script, any Interrupt occurs
@@ -13763,7 +13731,7 @@ VTSkip:
 	'''   </remarks>
 	Public Function GetDommeImage(ByVal DomTag As String) As String
 		Try
-			Dim slide As Slideshow = ssh.SlideshowMain
+			Dim slide As ContactData = ssh.SlideshowMain
 			Dim __targetFolder As String = Path.GetDirectoryName(slide.CurrentImage)
 			' Set a local function reference to the global instance. Otherwise the global 
 			' instance is out of parallel Tasks scope! The result would be an empty reference.
@@ -14058,7 +14026,7 @@ Skip_RandomFile:
 
 		'TDOD: Optimze Code "TextedTags"
 		ssh.FoundTag = "NULL"
-		Dim slide As Slideshow = ssh.SlideshowMain
+		Dim slide As ContactData = ssh.SlideshowMain
 		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
 
 		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
@@ -17184,7 +17152,7 @@ RestartFunction:
 	Private Sub PictureStrip_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles PictureStrip.Opening
 
 		If mainPictureBox.Image IsNot Nothing Then
-			Dim sh As Slideshow = ssh.SlideshowMain
+			Dim sh As ContactData = ssh.SlideshowMain
 
 			If ImageAnimator.CanAnimate(mainPictureBox.Image) _
 			And ImageAnimator_OnFrameChangedAdded Then
@@ -17739,14 +17707,14 @@ restartInstantly:
 			If Not ssh.Group.Contains("2") Then
 				ssh.Group = ssh.Group & "2"
 				ssh.GlitterTease = True
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter2.Text & " has joined the Chat room</b>" & "<br></font></body>"
+				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter2 & " has joined the Chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = ssh.Chat
 				ChatText2.DocumentText = ssh.Chat
 				ChatReadyState()
 			Else
 				ssh.Group = ssh.Group.Replace("2", "")
 				If ssh.Group = "D" Then ssh.GlitterTease = False
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter2.Text & " has left the Chat room</b>" & "<br></font></body>"
+				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter2 & " has left the Chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = ssh.Chat
 				ChatText2.DocumentText = ssh.Chat
 				ChatReadyState()
@@ -17764,14 +17732,14 @@ restartInstantly:
 			If Not ssh.Group.Contains("3") Then
 				ssh.Group = ssh.Group & "3"
 				ssh.GlitterTease = True
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter3.Text & " has joined the Chat room</b>" & "<br></font></body>"
+				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter3 & " has joined the Chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = ssh.Chat
 				ChatText2.DocumentText = ssh.Chat
 				ChatReadyState()
 			Else
 				ssh.Group = ssh.Group.Replace("3", "")
 				If ssh.Group = "D" Then ssh.GlitterTease = False
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter3.Text & " has left the Chat room</b>" & "<br></font></body>"
+				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter3 & " has left the Chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = ssh.Chat
 				ChatText2.DocumentText = ssh.Chat
 				ChatReadyState()

@@ -316,10 +316,10 @@ Public Class SessionState
 	<Category("Images")> Public Property RandomSlideshowCategory As String
 	<Category("Images")> <Description("True if main slideshow is loaded.")>
 	Public Property SlideshowLoaded As Boolean
-	<Category("Images")> Public Property SlideshowMain As Slideshow
-	<Category("Images")> Public Property SlideshowContact1 As Slideshow
-	<Category("Images")> Public Property SlideshowContact2 As Slideshow
-	<Category("Images")> Public Property SlideshowContact3 As Slideshow
+	<Category("Images")> Public Property SlideshowMain As ContactData
+	<Category("Images")> Public Property SlideshowContact1 As ContactData
+	<Category("Images")> Public Property SlideshowContact2 As ContactData
+	<Category("Images")> Public Property SlideshowContact3 As ContactData
 
 	<Category("Custom Task")> Public Property CustomTask As Boolean
 	<Category("Custom Task")> Public Property CustomTaskFirst As Boolean = True
@@ -604,10 +604,10 @@ Public Class SessionState
 
 		DommeMood = randomizer.Next(My.Settings.DomMoodMin, My.Settings.DomMoodMax + 1)
 
-		SlideshowMain = New Slideshow(ContactType.Domme)
-		SlideshowContact1 = New Slideshow(ContactType.Contact1)
-		SlideshowContact2 = New Slideshow(ContactType.Contact2)
-		SlideshowContact3 = New Slideshow(ContactType.Contact3)
+		SlideshowMain = New ContactData(ContactType.Domme)
+		SlideshowContact1 = New ContactData(ContactType.Contact1)
+		SlideshowContact2 = New ContactData(ContactType.Contact2)
+		SlideshowContact3 = New ContactData(ContactType.Contact3)
 
 		CaloriesConsumed = My.Settings.CaloriesConsumed
 
@@ -948,10 +948,10 @@ Public Class SessionState
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'								Set Slideshows
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If SlideshowMain Is Nothing Then SlideshowMain = New Slideshow(ContactType.Domme)
-			If SlideshowContact1 Is Nothing Then SlideshowContact1 = New Slideshow(ContactType.Contact1)
-			If SlideshowContact2 Is Nothing Then SlideshowContact2 = New Slideshow(ContactType.Contact2)
-			If SlideshowContact3 Is Nothing Then SlideshowContact3 = New Slideshow(ContactType.Contact3)
+			If SlideshowMain Is Nothing Then SlideshowMain = New ContactData(ContactType.Domme)
+			If SlideshowContact1 Is Nothing Then SlideshowContact1 = New ContactData(ContactType.Contact1)
+			If SlideshowContact2 Is Nothing Then SlideshowContact2 = New ContactData(ContactType.Contact2)
+			If SlideshowContact3 Is Nothing Then SlideshowContact3 = New ContactData(ContactType.Contact3)
 
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'							Set Picturebox & WMP

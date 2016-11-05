@@ -3442,21 +3442,21 @@ Public Class FrmSettings
 	Private Sub BtnContact1ImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			My.Settings.Contact1ImageDir = FolderBrowserDialog1.SelectedPath
-			My.Application.Session.SlideshowContact1 = New Slideshow(ContactType.Contact1)
+			My.Application.Session.SlideshowContact1 = New ContactData(ContactType.Contact1)
 		End If
 	End Sub
 
 	Private Sub BtnContact2ImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact2ImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			My.Settings.Contact2ImageDir = FolderBrowserDialog1.SelectedPath
-			My.Application.Session.SlideshowContact2 = New Slideshow(ContactType.Contact2)
+			My.Application.Session.SlideshowContact2 = New ContactData(ContactType.Contact2)
 		End If
 	End Sub
 
 	Private Sub BtnContact3ImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact3ImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			My.Settings.Contact3ImageDir = FolderBrowserDialog1.SelectedPath
-			My.Application.Session.SlideshowContact3 = New Slideshow(ContactType.Contact3)
+			My.Application.Session.SlideshowContact3 = New ContactData(ContactType.Contact3)
 		End If
 	End Sub
 
@@ -3489,15 +3489,7 @@ Public Class FrmSettings
 			My.Settings.GlitterNC3 = Color2Html(GetColor.Color)
 		End If
 	End Sub
-	Private Sub TBGlitter1_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter1.Leave
-		My.Settings.Glitter1 = TBGlitter1.Text
-	End Sub
-	Private Sub TBGlitter2_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter2.Leave
-		My.Settings.Glitter2 = TBGlitter2.Text
-	End Sub
-	Private Sub TBGlitter3_TextChanged(sender As System.Object, e As System.EventArgs) Handles TBGlitter3.Leave
-		My.Settings.Glitter3 = TBGlitter3.Text
-	End Sub
+
 	Private Sub GlitterSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider.Scroll
 		My.Settings.GlitterDSlider = GlitterSlider.Value
 	End Sub
@@ -3617,17 +3609,17 @@ Public Class FrmSettings
 
 	Private Sub BtnContact1ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDirClear.Click
 		My.Settings.ResetField(LBLContact1ImageDir, "Text")
-		My.Application.Session.SlideshowContact1 = New Slideshow()
+		My.Application.Session.SlideshowContact1 = New ContactData()
 	End Sub
 
 	Private Sub BtnContact2ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact2ImageDirClear.Click
 		My.Settings.ResetField(LBLContact2ImageDir, "Text")
-		My.Application.Session.SlideshowContact2 = New Slideshow()
+		My.Application.Session.SlideshowContact2 = New ContactData()
 	End Sub
 
 	Private Sub BtnContact3ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact3ImageDirClear.Click
 		My.Settings.ResetField(LBLContact3ImageDir, "Text")
-		My.Application.Session.SlideshowContact3 = New Slideshow()
+		My.Application.Session.SlideshowContact3 = New ContactData()
 	End Sub
 
 	Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click

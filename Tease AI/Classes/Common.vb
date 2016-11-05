@@ -477,4 +477,7 @@ Public Class Common
 
 #End Region 'serialize/deserialize
 
+	Public Shared Function Color2Html(ByVal MyColor As Color) As String
+		Return "#" & MyColor.ToArgb().ToString("x").Substring(2).ToUpper
+	End Function
 End Class
