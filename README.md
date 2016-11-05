@@ -12,14 +12,14 @@ WIP - DataBinding Overhaul
 
 Added Features: 
 
-	Check Box to lock orgasm chances after tease starts. by OxiKlein -> Broken right now 
+	Check Box to lock orgasm chances after tease starts. by OxiKlein
 	Download online-image progress bar added.
 	Video Folders are now checked on startup. The user is asked to search for missing folders.
 	Image Folders are now checked on startup. The user is asked to search for missing folders or if a folder is empty.
 	Games are now locked until all card images are set.
 	Card images are now checked on startup.
-	@Flag() support for multiple "AND" connected parameters added. (All) of 'em or line is excluded.)  by Daragorn
-	@NotFlag() support for multiple "AND" connected parameters added. (None of 'em or line is excluded) by Daragorn
+	@Flag() support for multiple logical "AND" connected parameters added. Usage: @Flag(Flag1, Flag2, Flag3) => All of 'em or line is excluded.  by Daragorn
+	@NotFlag() support for multiple logical "AND" connected parameters added. Usage: @NotFlag(Flag1, Flag2, Flag3) => None of 'em or line is excluded. by Daragorn
 	Slideshow Settings(Random, NewFolder if last image, Range Settings, Subfolders) apply now also on Contact Images.
 	Added a new debug window. It is now possible to view and manipulte all session variables (At least simple DataTypes) on Runtime.
 
@@ -34,16 +34,21 @@ Bugfixes:
 	@FollowUp##()-Command now gets cleaned from the line correctly, also stopped the followup message from still partially showing in "failure" cases. by Pepsifreak
 	Recent slideshow folders are now really checked on start-up and missing folders removed.
 	Dom Mood settings were ignored.
+	Fixed issue where a domme images was displayed, when a contact was responding.
+	Fixed issue, where slideshows continued after @SlideshowOff. Now the CustomSlideshow-Timer checks if he is supposed to be running.
+	Fixed command @GotoSlideshow. Now you can jump to a specific line based on the current slideshow-image.
 
 Miscellaneous:
 
 	Removed several unused variables.
 	SettingsForm VideoSettings GUI reworked.
 	SettingsForm ImageSettings GUI reworked.
-	SettingsForm Apps-Games GUI reworked.
+	SettingsForm Apps-Games GUI reworked. Still WIP -> Unchanged references causing sometimes glitter names to be blank in chat.
 	Suspending/Resuming/Resetting Session reworked.
 		Now all necessary data is stored into a single binary *.save file. This includes all Variables, Flags, Slideshows, TimerStates and regular Data. By Holding down the control key while clicking suspend or resume the user is asked for a custom file to save to or load from.
 	Reworked Code to Display Images.
+	Added a ToolstripItem in Debug menu, to start Timer1, if he is stopped. This could probably fix some or eventually all "Script-Freeze-Crashs". But this has to be tested. So if your Session freezes goto: Debug->Timers->Start Timer 1. Please let us know, if it worked.
+	Reworked custom Slideshow. The slideshow will pick now random images from random genres. This way an unbalanced amount of images doesn't matter any more. All genres have the same chances, even if they are outnumbered by a million times. There is also a check if the last image was of the same genre. If that's the case, it will randomly use the same genre or tries to pick another one. 
 
 
 # Changelog - Patch 54.4.0

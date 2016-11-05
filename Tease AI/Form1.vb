@@ -711,21 +711,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSettings.alloworgasmComboBox.Text = My.Settings.OrgasmAllow
 		FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
 
-		FrmSettings.LockOrgasmChances.Checked = My.Settings.LockOrgasmChances
-		FrmSettings.alloworgasmComboBox.Enabled = True
-		FrmSettings.ruinorgasmComboBox.Enabled = True
-		FrmSettings.CBRangeOrgasm.Enabled = True
-		If FrmSettings.CBRangeOrgasm.Checked = False Then
-			FrmSettings.NBAllowOften.Enabled = True
-			FrmSettings.NBAllowSometimes.Enabled = True
-			FrmSettings.NBAllowRarely.Enabled = True
-		End If
-		FrmSettings.CBRangeRuin.Enabled = True
-		If FrmSettings.CBRangeRuin.Checked = False Then
-			FrmSettings.NBRuinOften.Enabled = True
-			FrmSettings.NBRuinSometimes.Enabled = True
-			FrmSettings.NBRuinRarely.Enabled = True
-		End If
+
 
 		If My.Settings.DomDenialEnd = True Then
 			FrmSettings.CBDomDenialEnds.Checked = True
@@ -1000,7 +986,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.Refresh()
 
 		Try
-			ssh.SlideshowDomme = New Slideshow(ContactType.Domme)
+			ssh.SlideshowMain = New Slideshow(ContactType.Domme)
 			ssh.SlideshowContact1 = New Slideshow(ContactType.Contact1)
 			ssh.SlideshowContact2 = New Slideshow(ContactType.Contact2)
 			ssh.SlideshowContact3 = New Slideshow(ContactType.Contact3)
@@ -1200,6 +1186,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 	End Sub
 
+	<Obsolete("Do not use anymore")>
 	Public Sub ResetButton()
 
 		ScriptTimer.Stop()
@@ -1244,20 +1231,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		ssh.OrgasmYesNo = False
 
-		FrmSettings.alloworgasmComboBox.Enabled = True
-		FrmSettings.ruinorgasmComboBox.Enabled = True
-		FrmSettings.CBRangeOrgasm.Enabled = True
-		If FrmSettings.CBRangeOrgasm.Checked = False Then
-			FrmSettings.NBAllowOften.Enabled = True
-			FrmSettings.NBAllowSometimes.Enabled = True
-			FrmSettings.NBAllowRarely.Enabled = True
-		End If
-		FrmSettings.CBRangeRuin.Enabled = True
-		If FrmSettings.CBRangeRuin.Checked = False Then
-			FrmSettings.NBRuinOften.Enabled = True
-			FrmSettings.NBRuinSometimes.Enabled = True
-			FrmSettings.NBRuinRarely.Enabled = True
-		End If
+		FrmSettings.LockOrgasmChances(False)
 
 		ssh.ShowModule = False
 		ssh.BookmarkLink = False
@@ -1624,18 +1598,9 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 					TeaseTimer.Start()
 
-					If FrmSettings.LockOrgasmChances.Checked = True Then
-						FrmSettings.alloworgasmComboBox.Enabled = False
-						FrmSettings.ruinorgasmComboBox.Enabled = False
-						FrmSettings.CBRangeOrgasm.Enabled = False
-						FrmSettings.NBAllowOften.Enabled = False
-						FrmSettings.NBAllowSometimes.Enabled = False
-						FrmSettings.NBAllowRarely.Enabled = False
-						FrmSettings.CBRangeRuin.Enabled = False
-						FrmSettings.NBRuinOften.Enabled = False
-						FrmSettings.NBRuinSometimes.Enabled = False
-						FrmSettings.NBRuinRarely.Enabled = False
-					End If
+					' Lock Orgasm Chances if setting is activated. 
+					If My.Settings.LockOrgasmChances Then _
+						FrmSettings.LockOrgasmChances(True)
 
 					If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistStartFile
 
@@ -4882,9 +4847,9 @@ CancelGoto:
 				If ssh.NullResponse = False Then
 					ssh.IsTyping = True
 					Dim TypingName As String = domName.Text
-					If ssh.DomTask.Contains("@Contact1") Then TypingName = FrmSettings.TBGlitter1.Text
-					If ssh.DomTask.Contains("@Contact2") Then TypingName = FrmSettings.TBGlitter2.Text
-					If ssh.DomTask.Contains("@Contact3") Then TypingName = FrmSettings.TBGlitter3.Text
+					If ssh.DomTask.Contains("@Contact1") Then TypingName = My.Settings.Glitter1
+					If ssh.DomTask.Contains("@Contact2") Then TypingName = My.Settings.Glitter2
+					If ssh.DomTask.Contains("@Contact3") Then TypingName = My.Settings.Glitter3
 					'If TypingName <> domName.Text Then JustShowedBlogImage = True
 
 					If ssh.DomTask.Contains("@EmoteMessage") Then ssh.EmoMes = True
@@ -4991,7 +4956,7 @@ SkipIsTyping:
 
 				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomTask.Contains("@NewBlogImage") And ssh.NullResponse = False _
 					 And ssh.SlideshowLoaded = True And Not ssh.DomTask.Contains("@ShowButtImage") And Not ssh.DomTask.Contains("@ShowBoobsImage") And Not ssh.DomTask.Contains("@ShowButtsImage") _
-					 And Not ssh.DomTask.Contains("@ShowBoobsImage") And ssh.LockImage = False And ssh.CustomSlideshow = False And ssh.RapidFire = False _
+					 And Not ssh.DomTask.Contains("@ShowBoobsImage") And ssh.LockImage = False And ssh.CustomSlideEnabled = False And ssh.RapidFire = False _
 					 And UCase(ssh.DomTask) <> "<B>TEASE AI HAS BEEN RESET</B>" And ssh.JustShowedSlideshowImage = False Then
 					If ssh.SubStroking = False Or ssh.SubEdging = True Or ssh.SubHoldingEdge = True Then
 						' Begin Next Button
@@ -5000,7 +4965,7 @@ SkipIsTyping:
 TryNextWithTease:
 						'TODO-Next: Test Code
 						Try
-							SlideshowToUse = ssh.SlideshowDomme
+							SlideshowToUse = ssh.SlideshowMain
 
 							If ssh.DomTask.Contains("@Contact1") Then _
 								SlideshowToUse = ssh.SlideshowContact1
@@ -5414,8 +5379,8 @@ EndSysMes:
 
 				End If
 
-
-
+HypNoResponse:
+NoResponse:
 				Try
 					If BWimageFetcher.TriggerRequired AndAlso BWimageFetcher.WaitToFinish() Then
 						' ################## Image already loading ####################
@@ -5438,10 +5403,10 @@ EndSysMes:
 					ElseIf ShowPicture = True
 						' #################### Domme Slideshow ########################
 DommeSlideshowFallback:
-						ShowImage(ssh.SlideshowDomme.NavigateNextTease, True)
+						ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 					End If
 
-				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowDomme
+				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
 					SlideshowToUse = Nothing
 					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
@@ -5457,9 +5422,11 @@ DommeSlideshowFallback:
 				End Try
 
 
-HypNoResponse:
 
-				If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
+
+				If FrmSettings.TTSCheckBox.Checked = True _
+				And FrmSettings.TTSComboBox.Text <> "No voices installed" _
+				And ssh.DomTask <> "" Then
 					Debug.Print(ssh.DomTask)
 					ssh.DomTask = StripFormat(ssh.DomTask)
 
@@ -5488,7 +5455,6 @@ HypNoResponse:
 
 				End If
 
-NoResponse:
 
 
 				If ssh.CorrectedTypo = True Then
@@ -5750,9 +5716,9 @@ NoResponse:
 				If ssh.RiskyDeal = True Then FrmCardList.LblRiskType.Visible = True
 				ssh.IsTyping = True
 				Dim TypingName As String = domName.Text
-				If ssh.DomChat.Contains("@Contact1") Then TypingName = FrmSettings.TBGlitter1.Text
-				If ssh.DomChat.Contains("@Contact2") Then TypingName = FrmSettings.TBGlitter2.Text
-				If ssh.DomChat.Contains("@Contact3") Then TypingName = FrmSettings.TBGlitter3.Text
+				If ssh.DomChat.Contains("@Contact1") Then TypingName = My.Settings.Glitter1
+				If ssh.DomChat.Contains("@Contact2") Then TypingName = My.Settings.Glitter2
+				If ssh.DomChat.Contains("@Contact3") Then TypingName = My.Settings.Glitter3
 
 				If ssh.DomChat.Contains("@EmoteMessage") Then ssh.EmoMes = True
 
@@ -5832,9 +5798,9 @@ NullResponseLine:
 
 				If ssh.GlitterTease = True And ssh.JustShowedBlogImage = False Then GoTo TryNextWithTease
 
-				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomTask.Contains("@NewBlogImage") And ssh.NullResponse = False _
+				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomChat.Contains("@NewBlogImage") And ssh.NullResponse = False _
 					And ssh.SlideshowLoaded = True And Not ssh.DomChat.Contains("@ShowButtImage") And Not ssh.DomChat.Contains("@ShowBoobsImage") And Not ssh.DomChat.Contains("@ShowButtsImage") _
-					And Not ssh.DomChat.Contains("@ShowBoobImage") And ssh.LockImage = False And ssh.CustomSlideshow = False And ssh.RapidFire = False _
+					And Not ssh.DomChat.Contains("@ShowBoobImage") And ssh.LockImage = False And ssh.CustomSlideEnabled = False And ssh.RapidFire = False _
 					And UCase(ssh.DomChat) <> "<B>TEASE AI HAS BEEN RESET</B>" And ssh.JustShowedSlideshowImage = False Then
 					If ssh.SubStroking = False Or ssh.SubEdging = True Or ssh.SubHoldingEdge = True Then
 						' Begin Next Button
@@ -5843,15 +5809,15 @@ NullResponseLine:
 TryNextWithTease:
 						'TODO-Next: Test Code
 						Try
-							SlideshowToUse = ssh.SlideshowDomme
+							SlideshowToUse = ssh.SlideshowMain
 
-							If ssh.DomTask.Contains("@Contact1") Then _
+							If ssh.DomChat.Contains("@Contact1") Then _
 								SlideshowToUse = ssh.SlideshowContact1
 
-							If ssh.DomTask.Contains("@Contact2") Then _
+							If ssh.DomChat.Contains("@Contact2") Then _
 								SlideshowToUse = ssh.SlideshowContact2
 
-							If ssh.DomTask.Contains("@Contact3") Then _
+							If ssh.DomChat.Contains("@Contact3") Then _
 								SlideshowToUse = ssh.SlideshowContact3
 
 						Catch ex As Exception
@@ -6116,6 +6082,8 @@ EndSysMes:
 
 				ssh.SubWroteLast = False
 
+NullResponseLine2:
+
 				Try
 					If BWimageFetcher.TriggerRequired AndAlso BWimageFetcher.WaitToFinish() Then
 						' ################## Image already loading ####################
@@ -6138,10 +6106,10 @@ EndSysMes:
 					ElseIf ShowPicture = True
 						' #################### Domme Slideshow ########################
 DommeSlideshowFallback:
-						ShowImage(ssh.SlideshowDomme.NavigateNextTease, True)
+						ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 					End If
 
-				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowDomme
+				Catch ex As Exception When SlideshowToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
 					SlideshowToUse = Nothing
 					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
@@ -6156,13 +6124,14 @@ DommeSlideshowFallback:
 					ShowPicture = False
 				End Try
 
-				If FrmSettings.TTSCheckBox.Checked = True And FrmSettings.TTSComboBox.Text <> "No voices installed" Then
+				If FrmSettings.TTSCheckBox.Checked = True _
+				And FrmSettings.TTSComboBox.Text <> "No voices installed" _
+				And ssh.DomChat <> "" Then
 					ssh.DomChat = StripFormat(ssh.DomChat)
 					synth.SelectVoice(FrmSettings.TTSComboBox.Text)
 					synth.Speak(ssh.DomChat)
 				End If
 
-NullResponseLine2:
 
 
 				If ssh.MultipleEdgesMetronome = "STOP" Then
@@ -6393,12 +6362,12 @@ chooseComboboxText:
 				ssh.SlideshowLoaded = False
 
 				If FrmSettings.CBSlideshowSubDir.Checked = True Then
-					ssh.SlideshowDomme.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.AllDirectories)
+					ssh.SlideshowMain.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.AllDirectories)
 				Else
-					ssh.SlideshowDomme.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.TopDirectoryOnly)
+					ssh.SlideshowMain.ImageList = myDirectory.GetFilesImages(GetFolder, SearchOption.TopDirectoryOnly)
 				End If
 
-				ssh.SlideshowDomme.Index = 0
+				ssh.SlideshowMain.Index = 0
 
 				GoTo listLoaded
 
@@ -6430,10 +6399,10 @@ chooseComboboxText:
 
 					For Each ___PhotoNode As Xml.XmlNode In tmpDoc.DocumentElement.SelectNodes("//photo-url")
 						If CInt(___PhotoNode.Attributes.ItemOf("max-width").InnerText) = 1280 Then
-							ssh.SlideshowDomme.ImageList.Add(___PhotoNode.InnerXml)
+							ssh.SlideshowMain.ImageList.Add(___PhotoNode.InnerXml)
 						End If
 					Next
-					ssh.SlideshowDomme.Index = 0
+					ssh.SlideshowMain.Index = 0
 				End Using
 
 				GoTo listLoaded
@@ -6448,7 +6417,7 @@ chooseComboboxText:
 			Exit Sub
 
 listLoaded:
-			If ssh.SlideshowDomme.ImageList.Count <= 0 Then
+			If ssh.SlideshowMain.ImageList.Count <= 0 Then
 
 				MessageBox.Show(Me, "There are no images in the specified folder.", "Error!",
 									MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -6459,7 +6428,7 @@ listLoaded:
 
 
 
-			ShowImage(ssh.SlideshowDomme.NavigateNextTease, True)
+			ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 			ssh.JustShowedBlogImage = False
 
 			'TODO: FrmSettings.timedRadio.Checked - Remove CrossForm DataAccess
@@ -6493,7 +6462,7 @@ listLoaded:
 
 			If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Then Return
 
-			Dim sh As Slideshow = ssh.SlideshowDomme
+			Dim sh As Slideshow = ssh.SlideshowMain
 Retry:
 			If My.Settings.CBSlideshowRandom Then
 				sh.NavigateNextTease()
@@ -6709,11 +6678,11 @@ Retry:
 
 				'Debug.Print("TempScriptCount = 0")
 
-				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomTask.Contains("@NewBlogImage") And ssh.SlideshowLoaded = True And ssh.CustomSlideshow = False And ssh.RapidFire = False Then
+				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomTask.Contains("@NewBlogImage") And ssh.SlideshowLoaded = True And ssh.CustomSlideEnabled = False And ssh.RapidFire = False Then
 					'If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") Then
 
 					'Question (Stefaf):  Isn't selecting an image at this point redundant?
-					ssh.DomPic = ssh.SlideshowDomme.NavigateNextTease()
+					ssh.DomPic = ssh.SlideshowMain.NavigateNextTease()
 
 				End If
 
@@ -7711,7 +7680,7 @@ StatusUpdate1:
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
 		If ssh.StatusChance1 < My.Settings.Glitter1Slider * 10 And My.Settings.CBGlitter1 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC1 & """><b>" & FrmSettings.TBGlitter1.Text & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC1 & """><b>" & My.Settings.Glitter1 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText1 & "</font><br><br>"
 
 
@@ -8320,9 +8289,9 @@ StatusUpdateEnd:
 		'StringClean = StringClean.Replace("#Sys_SubLeftEarly", My.Settings.Sys_SubLeftEarly)
 		'StringClean = StringClean.Replace("#Sys_SubLeftEarlyTotal", My.Settings.Sys_SubLeftEarlyTotal)
 
-		StringClean = StringClean.Replace("#SlideshowCount", ssh.CustomSlideshowList.Count - 1)
-		StringClean = StringClean.Replace("#SlideshowCurrent", ssh.SlideshowInt)
-		StringClean = StringClean.Replace("#SlideshowRemaining", (ssh.CustomSlideshowList.Count - 1) - ssh.SlideshowInt)
+		StringClean = StringClean.Replace("#SlideshowCount", ssh.CustomSlideshow.Count - 1)
+		StringClean = StringClean.Replace("#SlideshowCurrent", ssh.CustomSlideshow.Index)
+		StringClean = StringClean.Replace("#SlideshowRemaining", (ssh.CustomSlideshow.Count - 1) - ssh.CustomSlideshow.Index)
 
 		StringClean = StringClean.Replace("#CurrentTime", Format(Now, "h:mm"))
 		StringClean = StringClean.Replace("#CurrentDay", Format(Now, "dddd"))
@@ -8557,7 +8526,7 @@ StatusUpdateEnd:
 
 		'TDOD: Optimze Code "TextedTags"
 		ssh.FoundTag = "NULL"
-		Dim slide As Slideshow = ssh.SlideshowDomme
+		Dim slide As Slideshow = ssh.SlideshowMain
 		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
 
 		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
@@ -8797,8 +8766,8 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@NewDommeSlideshow") Then
-			ssh.SlideshowDomme.LoadNew()
-			ssh.DomPic = ssh.SlideshowDomme.CurrentImage
+			ssh.SlideshowMain.LoadNew()
+			ssh.DomPic = ssh.SlideshowMain.CurrentImage
 			StringClean = StringClean.Replace("@NewDommeSlideshow", "")
 		End If
 
@@ -8913,7 +8882,7 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@ShowLocalImage") And Not StringClean.Contains("@ShowLocalImage(") Then
-			ShowImage(GetRandomImage(ImageSourceType.Local), false)
+			ShowImage(GetRandomImage(ImageSourceType.Local), False)
 			StringClean = StringClean.Replace("@ShowLocalImage", "")
 		End If
 
@@ -9159,6 +9128,7 @@ ShowedBlogImage:
 		'===============================================================================
 		'								Legacy TnA-Slideshow
 		'===============================================================================
+		' TODO: Rework TnA-Game to use CustomSlideshow instead of its own code.
 		' @TnAFastSlides starts a fast slideshow with Boobs and Butts. Use with local images, to avoid the download delay. otherwise the images will stutter.
 		' @TnASlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per second.
 		' @TnASlowSlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per 5 seconds.
@@ -9224,58 +9194,58 @@ ShowedBlogImage:
 			SlideFlag = SlideFlag.Split(")")(0)
 			SlideFlag = SlideFlag.Replace("@Slideshow(", "")
 
-			ssh.CustomSlideshowList.Clear()
+			ssh.CustomSlideshow.Clear()
 
 			If SlideFlag.ToLower.Contains("hardcore") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Hardcore).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Hardcore).ToList(), ImageGenre.Hardcore)
 			End If
 
 			If SlideFlag.ToLower.Contains("softcore") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Softcore).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Softcore).ToList(), ImageGenre.Softcore)
 			End If
 
 			If SlideFlag.ToLower.Contains("lesbian") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Lesbian).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Lesbian).ToList(), ImageGenre.Lesbian)
 			End If
 
 			If SlideFlag.ToLower.Contains("blowjob") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Blowjob).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Blowjob).ToList(), ImageGenre.Blowjob)
 			End If
 
 			If SlideFlag.ToLower.Contains("femdom") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Femdom).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Femdom).ToList(), ImageGenre.Femdom)
 			End If
 
 			If SlideFlag.ToLower.Contains("lezdom") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Lezdom).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Lezdom).ToList(), ImageGenre.Lezdom)
 			End If
 
 			If SlideFlag.ToLower.Contains("hentai") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Hentai).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Hentai).ToList(), ImageGenre.Hentai)
 			End If
 
 			If SlideFlag.ToLower.Contains("gay") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Gay).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Gay).ToList(), ImageGenre.Gay)
 			End If
 
 			If SlideFlag.ToLower.Contains("maledom") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Maledom).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Maledom).ToList(), ImageGenre.Maledom)
 			End If
 
 			If SlideFlag.ToLower.Contains("captions") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Captions).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Captions).ToList(), ImageGenre.Captions)
 			End If
 
 			If SlideFlag.ToLower.Contains("general") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.General).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.General).ToList(), ImageGenre.General)
 			End If
 
 			If SlideFlag.ToLower.Contains("boob") Or LCase(SlideFlag).Contains("boobs") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Boobs).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Boobs).ToList(), ImageGenre.Boobs)
 			End If
 
 			If SlideFlag.ToLower.Contains("butt") Or LCase(SlideFlag).Contains("butts") Then
-				ssh.CustomSlideshowList.AddRange(GetImageData(ImageGenre.Butt).ToList())
+				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Butt).ToList(), ImageGenre.Butt)
 			End If
 
 
@@ -9288,77 +9258,78 @@ ShowedBlogImage:
 		End If
 
 		If StringClean.Contains("@SlideshowOn") Then
-			If ssh.CustomSlideshowList.Count > 0 Then
-				ssh.CustomSlideshow = True
+			If ssh.CustomSlideshow.Count > 0 Then
+				ssh.CustomSlideEnabled = True
 				CustomSlideshowTimer.Start()
 			End If
 			StringClean = StringClean.Replace("@SlideshowOn", "")
 		End If
 
 		If StringClean.Contains("@SlideshowOff") Then
-			ssh.CustomSlideshow = False
+			ssh.CustomSlideEnabled = False
 			CustomSlideshowTimer.Stop()
 			StringClean = StringClean.Replace("@SlideshowOff", "")
 		End If
 
 		If StringClean.Contains("@SlideshowFirst") Then
-			ssh.SlideshowInt = 0
-			ssh.CustomSlideshow = True
-			ShowImage(ssh.CustomSlideshowList(ssh.SlideshowInt), False)
+			ssh.CustomSlideEnabled = True
+			ShowImage(ssh.CustomSlideshow.FirstImage, False)
 			StringClean = StringClean.Replace("@SlideshowFirst", "")
 		End If
 
 		If StringClean.Contains("@SlideshowLast") Then
-			ssh.SlideshowInt = ssh.CustomSlideshowList.Count - 1
-			ssh.CustomSlideshow = True
-			ShowImage(ssh.CustomSlideshowList(ssh.SlideshowInt), False)
+			ssh.CustomSlideEnabled = True
+			ShowImage(ssh.CustomSlideshow.LastImage, False)
 			StringClean = StringClean.Replace("@SlideshowLast", "")
 		End If
 
 		If StringClean.Contains("@SlideshowNext") Then
-			ssh.SlideshowInt += 1
-			If ssh.SlideshowInt > ssh.CustomSlideshowList.Count - 1 Then ssh.SlideshowInt = ssh.CustomSlideshowList.Count - 1
-			ssh.CustomSlideshow = True
-			ShowImage(ssh.CustomSlideshowList(ssh.SlideshowInt), False)
+			ssh.CustomSlideEnabled = True
+			ShowImage(ssh.CustomSlideshow.NextImage, False)
 			StringClean = StringClean.Replace("@SlideshowNext", "")
 		End If
 
 		If StringClean.Contains("@SlideshowPrevious") Then
-			ssh.SlideshowInt -= 1
-			If ssh.SlideshowInt < 0 Then ssh.SlideshowInt = 0
-			ssh.CustomSlideshow = True
-			ShowImage(ssh.CustomSlideshowList(ssh.SlideshowInt), False)
+			ssh.CustomSlideEnabled = True
+			ShowImage(ssh.CustomSlideshow.PreviousImage, False)
 			StringClean = StringClean.Replace("@SlideshowPrevious", "")
 		End If
 
 		If StringClean.Contains("@GotoSlideshow") Then
 			'BUG: @GotoCustomSlideshow is not working. There is no reference what imagegenre a image belongs to.
-			If ssh.ImageString.Contains(My.Settings.IHardcore) Then ssh.FileGoto = "(Hardcore)"
-			If ssh.ImageString.Contains(My.Settings.ISoftcore) Then ssh.FileGoto = "(Softcore)"
-			If ssh.ImageString.Contains(My.Settings.ILesbian) Then ssh.FileGoto = "(Lesbian)"
-			If ssh.ImageString.Contains(My.Settings.IBlowjob) Then ssh.FileGoto = "(Blowjob)"
-			If ssh.ImageString.Contains(My.Settings.IFemdom) Then ssh.FileGoto = "(Femdom)"
-			If ssh.ImageString.Contains(My.Settings.ILezdom) Then ssh.FileGoto = "(Lezdom)"
-			If ssh.ImageString.Contains(My.Settings.IHentai) Then ssh.FileGoto = "(Hentai)"
-			If ssh.ImageString.Contains(My.Settings.IGay) Then ssh.FileGoto = "(Gay)"
-			If ssh.ImageString.Contains(My.Settings.IMaledom) Then ssh.FileGoto = "(Maledom)"
-			If ssh.ImageString.Contains(My.Settings.ICaptions) Then ssh.FileGoto = "(Captions)"
-			If ssh.ImageString.Contains(My.Settings.IGeneral) Then ssh.FileGoto = "(General)"
-			If ssh.ImageString.Contains(My.Settings.LBLBoobPath) Then ssh.FileGoto = "(Boobs)"
-			If ssh.ImageString.Contains(My.Settings.LBLButtPath) Then ssh.FileGoto = "(Butts)"
+			Dim ImageString As String = ssh.CustomSlideshow.CurrentImage
 
-			Debug.Print("GotoSlideshow called, FileGoto = " & ssh.FileGoto)
+			If ImageString IsNot Nothing OrElse ImageString = "" Then
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Hardcore Then ssh.FileGoto = "(Hardcore)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Softcore Then ssh.FileGoto = "(Softcore)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Lesbian Then ssh.FileGoto = "(Lesbian)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Blowjob Then ssh.FileGoto = "(Blowjob)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Femdom Then ssh.FileGoto = "(Femdom)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Lezdom Then ssh.FileGoto = "(Lezdom)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Hentai Then ssh.FileGoto = "(Hentai)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Gay Then ssh.FileGoto = "(Gay)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Maledom Then ssh.FileGoto = "(Maledom)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Captions Then ssh.FileGoto = "(Captions)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.General Then ssh.FileGoto = "(General)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Boobs Then ssh.FileGoto = "(Boobs)"
+				If ssh.CustomSlideshow(ImageString) = ImageGenre.Butt Then ssh.FileGoto = "(Butts)"
 
-			ssh.SkipGotoLine = True
-			GetGoto()
+				Debug.Print("GotoSlideshow called, FileGoto = " & ssh.FileGoto)
+
+				ssh.SkipGotoLine = True
+				GetGoto()
+			Else
+				Dim lazytext As String = "@GotoSlideshow can't determine the current CustomSlideshow image. Please make sure to start it before using @GotoSlideshow."
+				Log.WriteError(lazytext, New NullReferenceException(lazytext), "@GotoSlideshow")
+			End If
 
 			StringClean = StringClean.Replace("@GotoSlideshow", "")
-		End If
-		'----------------------------------------
-		' Slideshow - End
-		'----------------------------------------
-		' This Command will not work in the same line, because the Images are loaded async and not available yet.
-		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", ssh.ImageLocation)
+			End If
+			'----------------------------------------
+			' Slideshow - End
+			'----------------------------------------
+			' This Command will not work in the same line, because the Images are loaded async and not available yet.
+			If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", ssh.ImageLocation)
 
 		' The @LockImages Commnd prevents the Domme Slideshow from moving forward or back when set to "Tease" or "Timed". Manual operation of Domme Slideshow images is still allowed,
 		' and pictures displayed through other means will still work. Images are automatically unlocked whenever Tease AI moves into a Link script, an End script, any Interrupt occurs
@@ -11272,6 +11243,7 @@ OrgasmDecided:
 			'StopEverything()
 			'ResetButton()
 			ssh.Reset()
+			FrmSettings.LockOrgasmChances(False)
 			ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
 			ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
 			StringClean = StringClean.Replace("@EndTease", "")
@@ -13791,7 +13763,7 @@ VTSkip:
 	'''   </remarks>
 	Public Function GetDommeImage(ByVal DomTag As String) As String
 		Try
-			Dim slide As Slideshow = ssh.SlideshowDomme
+			Dim slide As Slideshow = ssh.SlideshowMain
 			Dim __targetFolder As String = Path.GetDirectoryName(slide.CurrentImage)
 			' Set a local function reference to the global instance. Otherwise the global 
 			' instance is out of parallel Tasks scope! The result would be an empty reference.
@@ -14086,7 +14058,7 @@ Skip_RandomFile:
 
 		'TDOD: Optimze Code "TextedTags"
 		ssh.FoundTag = "NULL"
-		Dim slide As Slideshow = ssh.SlideshowDomme
+		Dim slide As Slideshow = ssh.SlideshowMain
 		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
 
 		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
@@ -14349,47 +14321,47 @@ SkipTextedTags:
 		If Linear = False Then
 
 			If FilterString.Contains("@ShowHardcoreImage") Then
-				If Not GetImageData(ImageGenre.Hardcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Hardcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowSoftcoreImage") Then
-				If Not GetImageData(ImageGenre.Softcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Softcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowLesbianImage") Then
-				If Not GetImageData(ImageGenre.Lesbian).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Lesbian).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowBlowjobImage") Then
-				If Not GetImageData(ImageGenre.Blowjob).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Blowjob).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowFemdomImage") Then
-				If Not GetImageData(ImageGenre.Femdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Femdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowLezdomImage") Then
-				If Not GetImageData(ImageGenre.Lezdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Lezdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowHentaiImage") Then
-				If Not GetImageData(ImageGenre.Hentai).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Hentai).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowGayImage") Then
-				If Not GetImageData(ImageGenre.Gay).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Gay).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowMaledomImage") Then
-				If Not GetImageData(ImageGenre.Maledom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Maledom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowCaptionsImage") Then
-				If Not GetImageData(ImageGenre.Captions).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Captions).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowGeneralImage") Then
-				If Not GetImageData(ImageGenre.General).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.General).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 
 			If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
-				If Not GetImageData(ImageGenre.Blog).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Blog).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowLikedImage") Then
-				If Not GetImageData(ImageGenre.Liked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Liked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowDislikedImage") Then
-				If Not GetImageData(ImageGenre.Disliked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Disliked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 
 			'TODO: Add ImageDataContainerUsage to filter @ShowLocalImage correct.
@@ -14400,13 +14372,13 @@ SkipTextedTags:
 				If FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True Then Return False
 			End If
 			If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
-				If Not GetImageData(ImageGenre.Butt).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Butt).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
-				If Not GetImageData(ImageGenre.Boobs).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideshow = True Then Return False
+				If Not GetImageData(ImageGenre.Boobs).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
 			End If
 			If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
-				If ssh.CustomSlideshow = True Or ssh.LockImage = True Then Return False
+				If ssh.CustomSlideEnabled = True Or ssh.LockImage = True Then Return False
 			End If
 		End If
 
@@ -14843,20 +14815,20 @@ SkipTextedTags:
 				.Add("@NotNeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Never Allows")
 				.Add("@LongEdge", ssh.LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False)
 				.Add("@InterruptLongEdge", ssh.LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or ssh.TeaseTick < 1 Or ssh.RiskyEdges = True)
-				.Add("@ShowHardcoreImage", Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowSoftcoreImage", Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowLesbianImage", Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowBlowjobImage", Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowFemdomImage", Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowLezdomImage", Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowHentaiImage", Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowGayImage", Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowMaledomImage", Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowCaptionsImage", Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowGeneralImage", Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowBlogImage", FrmSettings.URLFileList.CheckedItems.Count = 0 Or ssh.CustomSlideshow = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowHardcoreImage", Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowSoftcoreImage", Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowLesbianImage", Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowBlowjobImage", Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowFemdomImage", Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowLezdomImage", Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowHentaiImage", Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowGayImage", Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowMaledomImage", Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowCaptionsImage", Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowGeneralImage", Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+				.Add("@ShowBlogImage", FrmSettings.URLFileList.CheckedItems.Count = 0 Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
 				.Add("@NewBlogImage", __ConditionDic("@ShowBlogImage")) ' duplicate Command, lets get the Value af the other one.
-				.Add("@ShowLocalImage", FlagExists("SYS_NoPornAllowed") = True Or ssh.CustomSlideshow = True Or ssh.LockImage = True _
+				.Add("@ShowLocalImage", FlagExists("SYS_NoPornAllowed") = True Or ssh.CustomSlideEnabled = True Or ssh.LockImage = True _
 					  Or (My.Settings.CBIHardcore = False And My.Settings.CBISoftcore = False And My.Settings.CBILesbian = False And My.Settings.CBIBlowjob = False _
 					   And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And My.Settings.CBIGay = False _
 					   And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False))
@@ -15751,20 +15723,8 @@ NoPlaylistEndFile:
 
 		ssh.MiniScript = False
 
-		FrmSettings.alloworgasmComboBox.Enabled = True
-		FrmSettings.ruinorgasmComboBox.Enabled = True
-		FrmSettings.CBRangeOrgasm.Enabled = True
-		If FrmSettings.CBRangeOrgasm.Checked = False Then
-			FrmSettings.NBAllowOften.Enabled = True
-			FrmSettings.NBAllowSometimes.Enabled = True
-			FrmSettings.NBAllowRarely.Enabled = True
-		End If
-		FrmSettings.CBRangeRuin.Enabled = True
-		If FrmSettings.CBRangeRuin.Checked = False Then
-			FrmSettings.NBRuinOften.Enabled = True
-			FrmSettings.NBRuinSometimes.Enabled = True
-			FrmSettings.NBRuinRarely.Enabled = True
-		End If
+		' Unlock OrgasmChances
+		FrmSettings.LockOrgasmChances(False)
 
 		ClearModes()
 
@@ -16482,7 +16442,7 @@ PoundLoop:
 		'TODO: Remove CrossForm data access
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
-		If ssh.SlideshowLoaded = False Or FrmSettings.timedRadio.Checked = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Or ssh.JustShowedBlogImage = True Or ssh.CustomSlideshow = True Then Return
+		If ssh.SlideshowLoaded = False Or FrmSettings.timedRadio.Checked = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Or ssh.JustShowedBlogImage = True Or ssh.CustomSlideEnabled = True Then Return
 
 		ssh.SlideshowTimerTick -= 1
 
@@ -16490,20 +16450,20 @@ PoundLoop:
 
 TryNext:
 			If My.Settings.CBSlideshowRandom Then
-				ssh.SlideshowDomme.NavigateNextTease()
+				ssh.SlideshowMain.NavigateNextTease()
 			Else
-				ssh.SlideshowDomme.NavigateForward()
+				ssh.SlideshowMain.NavigateForward()
 			End If
 
 
-			If Not (File.Exists(ssh.SlideshowDomme.CurrentImage) _
-					Or isURL(ssh.SlideshowDomme.CurrentImage)) Then
+			If Not (File.Exists(ssh.SlideshowMain.CurrentImage) _
+					Or isURL(ssh.SlideshowMain.CurrentImage)) Then
 				ClearMainPictureBox()
 				Exit Sub
 			End If
 
 			Try
-				ShowImage(ssh.SlideshowDomme.CurrentImage, True)
+				ShowImage(ssh.SlideshowMain.CurrentImage, True)
 				ssh.JustShowedBlogImage = False
 				ssh.JustShowedSlideshowImage = True
 
@@ -17224,7 +17184,7 @@ RestartFunction:
 	Private Sub PictureStrip_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles PictureStrip.Opening
 
 		If mainPictureBox.Image IsNot Nothing Then
-			Dim sh As Slideshow = ssh.SlideshowDomme
+			Dim sh As Slideshow = ssh.SlideshowMain
 
 			If ImageAnimator.CanAnimate(mainPictureBox.Image) _
 			And ImageAnimator_OnFrameChangedAdded Then
@@ -17452,7 +17412,7 @@ saveImage:
 		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
 
 		Try
-			ShowImage(ssh.SlideshowDomme.NavigateLast, True)
+			ShowImage(ssh.SlideshowMain.NavigateLast, True)
 			ssh.JustShowedBlogImage = False
 		Catch
 
@@ -17469,7 +17429,7 @@ saveImage:
 		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
 
 		Try
-			ShowImage(ssh.SlideshowDomme.NavigateFirst, True)
+			ShowImage(ssh.SlideshowMain.NavigateFirst, True)
 			ssh.JustShowedBlogImage = False
 		Catch
 
@@ -17486,8 +17446,8 @@ saveImage:
 		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
 
 		Try
-			ssh.SlideshowDomme.LoadNew()
-			ShowImage(ssh.SlideshowDomme.NavigateFirst, True)
+			ssh.SlideshowMain.LoadNew()
+			ShowImage(ssh.SlideshowMain.NavigateFirst, True)
 
 		Catch
 
@@ -17530,8 +17490,8 @@ saveImage:
 
 
 	Public Sub LoadDommeImageFolder()
-		ssh.SlideshowDomme.LoadNew()
-		ShowImage(ssh.SlideshowDomme.CurrentImage, False)
+		ssh.SlideshowMain.LoadNew()
+		ShowImage(ssh.SlideshowMain.CurrentImage, False)
 		ssh.SlideshowLoaded = True
 		ssh.JustShowedBlogImage = False
 
@@ -17539,7 +17499,7 @@ saveImage:
 		previousButton.Enabled = True
 		PicStripTSMIdommeSlideshow.Enabled = True
 
-		If ssh.RiskyDeal = True Then FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.SlideshowDomme.CurrentImage)
+		If ssh.RiskyDeal = True Then FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.SlideshowMain.CurrentImage)
 
 		If FrmSettings.timedRadio.Checked = True Then
 			ssh.SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
@@ -17687,18 +17647,30 @@ saveImage:
 	End Function
 
 
+
 	Private Sub CustomSlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles CustomSlideshowTimer.Tick
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 		Try
-			CustomSlideshowTimer.Stop()
+			Dim sw As New Stopwatch
+restartInstantly:
+			sw.Restart()
 
-			ssh.ImageString = ssh.CustomSlideshowList(ssh.randomizer.Next(0, ssh.CustomSlideshowList.Count))
+			' Check if the timer is supposed to be running 
+			If ssh.CustomSlideEnabled = False Then
+				CustomSlideshowTimer.Stop()
+				Exit Sub
+			End If
 
-			ShowImage(ssh.ImageString, True)
+			' Determine if local images are preferred .
+			Dim PreferOffline As Boolean = If(CustomSlideshowTimer.Interval < 1000, True, False)
+
+			' Display a random image.
+			ShowImage(ssh.CustomSlideshow.GetRandom(PreferOffline), True)
+
+			' If displaying the image took longer as the interval, restart instantly.
+			If sw.ElapsedMilliseconds > CustomSlideshowTimer.Interval Then GoTo restartInstantly
 		Catch ex As Exception
 			Exit Sub
-		Finally
-			CustomSlideshowTimer.Start()
 		End Try
 	End Sub
 
@@ -17742,14 +17714,14 @@ saveImage:
 			If Not ssh.Group.Contains("1") Then
 				ssh.Group = ssh.Group & "1"
 				ssh.GlitterTease = True
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter1.Text & " has joined the Chat room</b>" & "<br></font></body>"
+				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter1 & " has joined the Chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = ssh.Chat
 				ChatText2.DocumentText = ssh.Chat
 				ChatReadyState()
 			Else
 				ssh.Group = ssh.Group.Replace("1", "")
 				If ssh.Group = "D" Then ssh.GlitterTease = False
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & FrmSettings.TBGlitter1.Text & " has left the Chat room</b>" & "<br></font></body>"
+				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter1 & " has left the Chat room</b>" & "<br></font></body>"
 				ChatText.DocumentText = ssh.Chat
 				ChatText2.DocumentText = ssh.Chat
 				ChatReadyState()
@@ -17980,6 +17952,10 @@ saveImage:
 			End If
 
 			ssh.Load(filename, True)
+
+			If ssh.SaidHello And My.Settings.LockOrgasmChances Then _
+				FrmSettings.LockOrgasmChances(True)
+
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
@@ -17998,6 +17974,7 @@ saveImage:
 		End If
 
 		ssh.Reset()
+		FrmSettings.LockOrgasmChances(False)
 
 		If ssh.DomTypeCheck = False Then
 			ssh.DomTask = "<b>Tease AI has been reset</b>"

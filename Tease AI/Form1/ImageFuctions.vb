@@ -1042,7 +1042,7 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 
 				If ssh.ImageLocation.ToLower.StartsWith(Application.StartupPath.ToLower & "\Images\System\".ToLower) Then _
 					Throw New ArgumentException("System iamges are not allowed to delete.")
-				If ssh.SlideshowDomme.ImageList.Contains(ssh.ImageLocation) Then _
+				If ssh.SlideshowMain.ImageList.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Domme-Slideshow images are not allowed to delete!")
 				If ssh.SlideshowContact1.ImageList.Contains(ssh.ImageLocation) Then _
 					Throw New ArgumentException("Contact1-Slideshow images are not allowed to delete!")
