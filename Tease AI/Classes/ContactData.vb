@@ -10,7 +10,7 @@ Public Enum ContactType
 End Enum
 
 <Serializable>
-Public Class Slideshow
+Public Class ContactData
 
 	Public Property Contact As ContactType = ContactType.Nothing
 
@@ -21,6 +21,65 @@ Public Class Slideshow
 	Public Property RecentFolders As New List(Of String)
 
 	Public Property Index As Integer = -1
+
+	Public ReadOnly Property TypeName As String
+		Get
+			If Contact = ContactType.Contact1 Then
+				Return My.Settings.Glitter1
+			ElseIf Contact = ContactType.Contact2 Then
+				Return My.Settings.Glitter2
+			ElseIf Contact = ContactType.Contact3 Then
+				Return My.Settings.Glitter3
+			Else
+				Return My.Settings.DomName
+			End If
+		End Get
+	End Property
+
+	Public ReadOnly Property TypeColorHtml As String
+		Get
+			If Contact = ContactType.Contact1 Then
+				Return Color2Html(My.Settings.GlitterNC1Color)
+			ElseIf Contact = ContactType.Contact2 Then
+				Return Color2Html(My.Settings.GlitterNC2Color)
+			ElseIf Contact = ContactType.Contact3 Then
+				Return Color2Html(My.Settings.GlitterNC3Color)
+			Else
+				Return My.Settings.DomColor
+			End If
+		End Get
+	End Property
+
+	Public ReadOnly Property TypeFont As String  '= FrmSettings.FontComboBoxD.Text
+		Get
+			Return My.Settings.DomFont
+		End Get
+	End Property
+
+	Public ReadOnly Property TypeSize As Integer '= FrmSettings.NBFontSizeD.Value
+		Get
+			Return My.Settings.DomFontSize
+		End Get
+	End Property
+
+	Public ReadOnly Property TTSvoice As String
+		Get
+			Throw New NotImplementedException("Not implemented yet.")
+		End Get
+	End Property
+
+	Public ReadOnly Property TTSvolume As Integer
+		Get
+			Return My.Settings.VVolume
+		End Get
+	End Property
+
+	Public ReadOnly Property TTSrate As Integer
+		Get
+			Return My.Settings.VRate
+		End Get
+	End Property
+
 
 	Sub New() : End Sub
 
