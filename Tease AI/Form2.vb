@@ -8,7 +8,14 @@ Imports Tease_AI.URL_Files
 
 Public Class FrmSettings
 
-
+	Private Property Ssh As SessionState
+		Get
+			Return My.Application.Session
+		End Get
+		Set(value As SessionState)
+			My.Application.Session = value
+		End Set
+	End Property
 
 
 
@@ -170,17 +177,12 @@ Public Class FrmSettings
 		FrmSplash.Refresh()
 
 		Try
-			CLBStartList.Items.Clear()
 
-			InitializeStartScripts()
+			LoadStartScripts()
+			LoadModuleScripts()
+			LoadLinkScripts()
+			LoadEndScripts()
 
-			InitializeModuleScripts()
-
-			Debug.Print("frmsettings2 wtf now")
-			InitializeLinkScripts()
-			InitializeEndScripts()
-
-			StartTab()
 		Catch
 		End Try
 
@@ -499,6 +501,13 @@ Public Class FrmSettings
 
 		Debug.Print("Form2 Loading Finished")
 
+
+	End Sub
+
+	Private Sub SettingsTabs_TabIndexChanged(sender As Object, e As System.EventArgs) Handles SettingsTabs.SelectedIndexChanged
+
+		' If current Tab is Scripts force focus onto CheckedListBoxes.
+		If SettingsTabs.SelectedTab Is TabPage16 Then TCScripts_TabIndexChanged(TCScripts, Nothing)
 
 	End Sub
 
@@ -1920,614 +1929,244 @@ Public Class FrmSettings
 
 #Region "-------------------------------------- Scripts -------------------------------------------------"
 
-	Private Sub SettingsTabs_TabIndexChanged(sender As Object, e As System.EventArgs) Handles SettingsTabs.SelectedIndexChanged
-
-		If SettingsTabs.SelectedIndex = 3 Then
-			If CLBStartList.Visible = True Then
-				Debug.Print("PersonChange Starttab")
-				StartTab()
-			End If
-
-			If CLBModuleList.Visible = True Then
-				Debug.Print("PersonChange Moduletab")
-				ModuleTab()
-			End If
-
-			If CLBLinkList.Visible = True Then
-				Debug.Print("PersonChange Linktab")
-				LinkTab()
-			End If
-
-			If CLBEndList.Visible = True Then
-				Debug.Print("PersonChange Endab")
-				EndTab()
-			End If
-		End If
-
-		If TCScripts.SelectedIndex = 0 Then
-			CLBStartList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 1 Then
-			CLBModuleList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 2 Then
-			CLBLinkList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 3 Then
-			CLBEndList.Focus()
-		End If
-
-
-	End Sub
-
+	''' <summary>
+	''' Forces the Focus onto the CheckedListBoxes in Tabcontrol.
+	''' </summary>
+	''' <param name="sender"></param>
+	''' <param name="e"></param>
 	Private Sub TCScripts_TabIndexChanged(sender As Object, e As System.EventArgs) Handles TCScripts.SelectedIndexChanged
-		Debug.Print(TCScripts.SelectedIndex)
 
-		If TCScripts.SelectedIndex = 0 Then
-			If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\StartCheckList.cld") Then
-				LoadStartScripts()
-				If CLBStartList.Items.Count > 0 Then
-					CLBStartList.SetSelected(0, True)
-					StartTab()
-				End If
-
-				Dim i, j As Long
-				For i = 0 To CLBStartList.Items.Count - 1
-					For j = CLBStartList.Items.Count - 1 To (i + 1) Step -1
-						If CLBStartList.Items(i) = CLBStartList.Items(j) Then
-							CLBStartList.Items.Remove(CLBStartList.Items(j))
-						End If
-					Next
-				Next
-
-			Else
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-					Dim TempFile As String = foundFile
-					TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-					CLBStartList.Items.Add(TempFile)
-				Next
-				SaveStartScripts()
-				If CLBStartList.Items.Count > 0 Then
-					CLBStartList.SetSelected(0, True)
-					StartTab()
-				End If
-			End If
+		If TCScripts.SelectedTab Is TabPage21 Then
 			CLBStartList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 1 Then
-			If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\ModuleCheckList.cld") Then
-				LoadModuleScripts()
-
-				If CLBModuleList.Items.Count > 0 Then
-					CLBModuleList.SetSelected(0, True)
-					ModuleTab()
-				End If
-				' Dim dupes(CLBModuleList.Items.Count - 1) As Object
-				'CLBModuleList.Items.CopyTo(dupes, 0)
-				'CLBModuleList.Items.Clear()
-				Debug.Print("Doing it?")
-				'CLBModuleList.Items.AddRange(dupes.AsEnumerable().Distinct().ToArray())
-
-				Dim i, j As Long
-				For i = 0 To CLBModuleList.Items.Count - 1
-					For j = CLBModuleList.Items.Count - 1 To (i + 1) Step -1
-						If CLBModuleList.Items(i) = CLBModuleList.Items(j) Then
-							CLBModuleList.Items.Remove(CLBModuleList.Items(j))
-						End If
-					Next
-				Next
-			Else
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-					Dim TempFile As String = foundFile
-					TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-					CLBModuleList.Items.Add(TempFile)
-				Next
-				SaveModuleScripts()
-				If CLBModuleList.Items.Count > 0 Then
-					CLBModuleList.SetSelected(0, True)
-					ModuleTab()
-				End If
-			End If
+		ElseIf TCScripts.SelectedTab Is TabPage17 Then
 			CLBModuleList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 2 Then
-			If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\LinkCheckList.cld") Then
-				LoadLinkScripts()
-				If CLBLinkList.Items.Count > 0 Then
-					CLBLinkList.SetSelected(0, True)
-					LinkTab()
-				End If
-				Dim i, j As Long
-				For i = 0 To CLBLinkList.Items.Count - 1
-					For j = CLBLinkList.Items.Count - 1 To (i + 1) Step -1
-						If CLBLinkList.Items(i) = CLBLinkList.Items(j) Then
-							CLBLinkList.Items.Remove(CLBLinkList.Items(j))
-						End If
-					Next
-				Next
-			Else
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-					Dim TempFile As String = foundFile
-					TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-					CLBLinkList.Items.Add(TempFile)
-				Next
-				SaveLinkScripts()
-				If CLBLinkList.Items.Count > 0 Then
-					CLBLinkList.SetSelected(0, True)
-					LinkTab()
-				End If
-			End If
+		ElseIf TCScripts.SelectedTab Is TabPage18 Then
 			CLBLinkList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 3 Then
-			If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\EndCheckList.cld") Then
-				LoadEndScripts()
-				If CLBEndList.Items.Count > 0 Then
-					CLBEndList.SetSelected(0, True)
-					EndTab()
-				End If
-
-				Dim i, j As Long
-				For i = 0 To CLBEndList.Items.Count - 1
-					For j = CLBEndList.Items.Count - 1 To (i + 1) Step -1
-						If CLBEndList.Items(i) = CLBEndList.Items(j) Then
-							CLBEndList.Items.Remove(CLBEndList.Items(j))
-						End If
-					Next
-				Next
-
-			Else
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-					Dim TempFile As String = foundFile
-					TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-					CLBEndList.Items.Add(TempFile)
-				Next
-				SaveEndScripts()
-				If CLBEndList.Items.Count > 0 Then
-					CLBEndList.SetSelected(0, True)
-					EndTab()
-				End If
-			End If
+		ElseIf TCScripts.SelectedTab Is TabPage19 Then
 			CLBEndList.Focus()
 		End If
-
 	End Sub
 
-	Public Sub SaveStartScripts()
+	Public Shared Sub saveCheckedListBox(target As CheckedListBox, filePath As String)
+		Try
+			If Not Directory.Exists(Path.GetDirectoryName(filePath)) Then _
+				Directory.CreateDirectory(Path.GetDirectoryName(filePath))
 
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\StartCheckList.cld", IO.FileMode.Create)
-		Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
-		For i = 0 To CLBStartList.Items.Count - 1
-			BinaryWriter.Write(CStr(CLBStartList.Items(i)))
-			BinaryWriter.Write(CBool(CLBStartList.GetItemChecked(i)))
-		Next
-		BinaryWriter.Close()
-		FileStream.Dispose()
+			Using fs As New FileStream(filePath, IO.FileMode.Create), BinWrite As New BinaryWriter(fs)
+				For i = 0 To target.Items.Count - 1
+					BinWrite.Write(CStr(target.Items(i)))
+					BinWrite.Write(CBool(target.GetItemChecked(i)))
+				Next
+			End Using
 
+		Catch ex As Exception
+			Throw
+		End Try
 	End Sub
 
-	Public Sub SaveModuleScripts()
-
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\ModuleCheckList.cld", IO.FileMode.Create)
-		Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
-		For i = 0 To CLBModuleList.Items.Count - 1
-			BinaryWriter.Write(CStr(CLBModuleList.Items(i)))
-			BinaryWriter.Write(CBool(CLBModuleList.GetItemChecked(i)))
-		Next
-		BinaryWriter.Close()
-		FileStream.Dispose()
-
+	Private Sub SaveStartScripts() Handles CLBStartList.LostFocus
+		Try
+			saveCheckedListBox(CLBStartList, Ssh.Files.StartChecklist)
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Error on saving checkstate")
+			MessageBox.Show(ex.Message, "Error on saving checkstate", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		End Try
 	End Sub
 
-	Public Sub SaveLinkScripts()
-
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\LinkCheckList.cld", IO.FileMode.Create)
-		Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
-		For i = 0 To CLBLinkList.Items.Count - 1
-			BinaryWriter.Write(CStr(CLBLinkList.Items(i)))
-			BinaryWriter.Write(CBool(CLBLinkList.GetItemChecked(i)))
-		Next
-		BinaryWriter.Close()
-		FileStream.Dispose()
-
+	Private Sub SaveModuleScripts() Handles CLBModuleList.LostFocus
+		Try
+			saveCheckedListBox(CLBModuleList, Ssh.Files.ModuleChecklist)
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Error on saving checkstate")
+			MessageBox.Show(ex.Message, "Error on saving checkstate", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		End Try
 	End Sub
 
-	Public Sub SaveEndScripts()
-
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\EndCheckList.cld", IO.FileMode.Create)
-		Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
-		For i = 0 To CLBEndList.Items.Count - 1
-			BinaryWriter.Write(CStr(CLBEndList.Items(i)))
-			BinaryWriter.Write(CBool(CLBEndList.GetItemChecked(i)))
-		Next
-		BinaryWriter.Close()
-		FileStream.Dispose()
-
+	Private Sub SaveLinkScripts() Handles CLBLinkList.LostFocus
+		Try
+			saveCheckedListBox(CLBLinkList, Ssh.Files.LinkChecklist)
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Error on saving checkstate")
+			MessageBox.Show(ex.Message, "Error on saving checkstate", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		End Try
 	End Sub
 
+	Private Sub SaveEndScripts() Handles CLBEndList.LostFocus
+		Try
+			saveCheckedListBox(CLBEndList, Ssh.Files.EndChecklist)
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Error on saving checkstate")
+			MessageBox.Show(ex.Message, "Error on saving checkstate", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		End Try
+	End Sub
 
-	Public Sub InitializeStartScripts()
+	Private Sub loadCheckedListBox(target As CheckedListBox,
+								   ByVal loadPath As String,
+								   ByVal scriptDir As String,
+								   ByVal Optional preEnable As Boolean = True)
+		Try
+			Dim Modified As Boolean = False
 
-		If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\StartCheckList.cld") Then
+			Dim LastIndex As Integer = target.SelectedIndex
+			Dim LastItem As String = target.SelectedItem
 
-			LoadStartScripts()
+			target.Items.Clear()
+			target.BeginUpdate()
 
-			If CLBStartList.Items.Count > 0 Then
-				CLBStartList.SetSelected(0, True)
-				StartTab()
-			End If
+			If Not Directory.Exists(Path.GetDirectoryName(loadPath)) Then GoTo SkipDeserializing
+			If Not File.Exists(loadPath) Then GoTo SkipDeserializing
 
-			Dim i, j As Long
-			For i = 0 To CLBStartList.Items.Count - 1
-				For j = CLBStartList.Items.Count - 1 To (i + 1) Step -1
-					If CLBStartList.Items(i) = CLBStartList.Items(j) Then
-						CLBStartList.Items.Remove(CLBStartList.Items(j))
+			Using fs As New FileStream(loadPath, FileMode.Open), binRead As New BinaryReader(fs)
+				Do While fs.Position < fs.Length
+					Dim FileName As String = binRead.ReadString
+					Dim enabled As Boolean = binRead.ReadBoolean
+					Dim FilePath As String = scriptDir & FileName & ".txt"
+
+					If File.Exists(FilePath) And target.Items.Contains(FileName) = False Then
+						target.Items.Add(FileName, enabled)
+					Else
+						Modified = True
+						Debug.Print("File """ & FilePath & """ was Not found.")
 					End If
-				Next
+				Loop
+			End Using
+
+SkipDeserializing:
+
+			' Create script directory if it doesn't exist.
+			If Directory.Exists(scriptDir) = False Then Directory.CreateDirectory(scriptDir)
+
+			' Add each file to Listbox.
+			For Each FilePath As String In Directory.GetFiles(scriptDir, "*.txt", SearchOption.TopDirectoryOnly)
+				Dim FileName As String = Path.GetFileNameWithoutExtension(FilePath)
+
+				If Not target.Items.Contains(FileName) Then
+					Debug.Print(target.Name & " does Not contain " & FileName)
+					target.Items.Add(FileName, preEnable)
+				Else
+					Modified = True
+				End If
 			Next
 
-		Else
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-				Dim TempFile As String = foundFile
-				TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-				CLBStartList.Items.Add(TempFile)
+			' If there was somethng to fix during loading save it.
+			If Modified Then saveCheckedListBox(target, loadPath)
+
+			If LastIndex = -1 Then
+				ScriptStatusUnlock(False)
+			ElseIf target.Items.Contains(LastItem) Then
+				target.SelectedItem = LastItem
+			ElseIf target.Items.Count >= LastIndex Then
+				target.SelectedIndex = LastIndex
+			End If
+
+		Catch ex As Exception
+			Throw
+		Finally
+			target.EndUpdate()
+		End Try
+	End Sub
+
+	Public Sub LoadStartScripts() Handles CLBStartList.GotFocus
+		Try
+			If InvokeRequired Then
+				Invoke(New Action(AddressOf LoadStartScripts))
+				Exit Sub
+			End If
+
+			loadCheckedListBox(CLBStartList, Ssh.Files.StartChecklist, Ssh.Folders.StartScripts)
+		Catch ex As Exception
+			Throw
+		End Try
+	End Sub
+
+	Public Sub LoadModuleScripts() Handles CLBModuleList.GotFocus
+		Try
+			If InvokeRequired Then
+				Invoke(New Action(AddressOf LoadModuleScripts))
+				Exit Sub
+			End If
+
+			loadCheckedListBox(CLBModuleList, Ssh.Files.ModuleChecklist, Ssh.Folders.ModuleScripts)
+		Catch ex As Exception
+			Throw
+		End Try
+	End Sub
+
+	Public Sub LoadLinkScripts() Handles CLBLinkList.GotFocus
+		Try
+			If InvokeRequired Then
+				Invoke(New Action(AddressOf LoadLinkScripts))
+				Exit Sub
+			End If
+
+			loadCheckedListBox(CLBLinkList, Ssh.Files.LinkChecklist, Ssh.Folders.LinkScripts)
+		Catch ex As Exception
+			Throw
+		End Try
+	End Sub
+
+	Public Sub LoadEndScripts() Handles CLBEndList.GotFocus
+		Try
+			If InvokeRequired Then
+				Invoke(New Action(AddressOf LoadEndScripts))
+				Exit Sub
+			End If
+
+			loadCheckedListBox(CLBEndList, Ssh.Files.EndChecklist, Ssh.Folders.EndScripts)
+		Catch ex As Exception
+			Throw
+		End Try
+	End Sub
+
+	Private Sub CLBStartList_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CLBStartList.SelectedIndexChanged, CLBModuleList.SelectedIndexChanged, CLBLinkList.SelectedIndexChanged, CLBEndList.SelectedIndexChanged
+		Try
+			Dim target As CheckedListBox = DirectCast(sender, CheckedListBox)
+			Dim Scriptfolder As String = ""
+
+			If target Is CLBStartList Then
+				Scriptfolder = Ssh.Folders.StartScripts
+			ElseIf target Is CLBModuleList Then
+				Scriptfolder = Ssh.Folders.ModuleScripts
+			ElseIf target Is CLBLinkList Then
+				Scriptfolder = Ssh.Folders.LinkScripts
+			ElseIf target Is CLBEndList Then
+				Scriptfolder = Ssh.Folders.EndScripts
+			Else
+				Throw New NotImplementedException("The starting conrol is not implemnted in this method.")
+			End If
+
+			Debug.WriteLine(target.Name)
+
+			For i As Integer = target.Items.Count - 1 To 0 Step -1
+				Dim checkfile As String = Scriptfolder & target.Items(i) & ".txt"
+				If Not File.Exists(Scriptfolder & target.Items(i) & ".txt") Then
+					target.Items.Remove(target.Items(i))
+					'Exit For
+				End If
 			Next
-			For i As Integer = 0 To CLBStartList.Items.Count - 1
-				CLBStartList.SetItemChecked(i, True)
-			Next
-			SaveStartScripts()
-			If CLBStartList.Items.Count > 0 Then
-				CLBStartList.SetSelected(0, True)
-				CLBStartList.SelectedIndex = 0
-				StartTab()
-			End If
-		End If
 
-	End Sub
-
-	Public Sub InitializeModuleScripts()
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\ModuleCheckList.cld") Then
-
-			LoadModuleScripts()
-
-
-
-			If CLBModuleList.Items.Count > 0 Then
-
-				'If CLBModuleList.Visible = True Then CLBModuleList.SetSelected(0, True)
-
-				ModuleTab()
-
-				Dim i, j As Long
-				For i = 0 To CLBModuleList.Items.Count - 1
-					For j = CLBModuleList.Items.Count - 1 To (i + 1) Step -1
-						If CLBModuleList.Items(i) = CLBModuleList.Items(j) Then
-							CLBModuleList.Items.Remove(CLBModuleList.Items(j))
-						End If
-					Next
-				Next
-
-			End If
-		Else
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-				Dim TempFile As String = foundFile
-				TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-				CLBModuleList.Items.Add(TempFile)
-			Next
-
-			For i As Integer = 0 To CLBModuleList.Items.Count - 1
-				CLBModuleList.SetItemChecked(i, True)
-			Next
-
-
-
-			SaveModuleScripts()
-			If CLBModuleList.Items.Count > 0 Then
-				CLBModuleList.SetSelected(0, True)
-				ModuleTab()
-			End If
-		End If
-
-
-	End Sub
-
-	Public Sub InitializeLinkScripts()
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\LinkCheckList.cld") Then
-
-			LoadLinkScripts()
-
-			If CLBLinkList.Items.Count > 0 Then
-				' CLBLinkList.SetSelected(0, True)
-				LinkTab()
-
-				Dim i, j As Long
-				For i = 0 To CLBLinkList.Items.Count - 1
-					For j = CLBLinkList.Items.Count - 1 To (i + 1) Step -1
-						If CLBLinkList.Items(i) = CLBLinkList.Items(j) Then
-							CLBLinkList.Items.Remove(CLBLinkList.Items(j))
-						End If
-					Next
-				Next
-
-			End If
-
-		Else
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-				Dim TempFile As String = foundFile
-				TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-				CLBLinkList.Items.Add(TempFile)
-			Next
-			For i As Integer = 0 To CLBLinkList.Items.Count - 1
-				CLBLinkList.SetItemChecked(i, True)
-			Next
-			SaveLinkScripts()
-			If CLBLinkList.Items.Count > 0 Then
-				CLBLinkList.SetSelected(0, True)
-				LinkTab()
-			End If
-		End If
-
-	End Sub
-
-	Public Sub InitializeEndScripts()
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\EndCheckList.cld") Then
-
-			LoadEndScripts()
-
-			If CLBEndList.Items.Count > 0 Then
-				'CLBEndList.SetSelected(0, True)
-				EndTab()
-
-				Dim i, j As Long
-				For i = 0 To CLBEndList.Items.Count - 1
-					For j = CLBEndList.Items.Count - 1 To (i + 1) Step -1
-						If CLBEndList.Items(i) = CLBEndList.Items(j) Then
-							CLBEndList.Items.Remove(CLBEndList.Items(j))
-						End If
-					Next
-				Next
-
-			End If
-		Else
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-				Dim TempFile As String = foundFile
-				TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-				CLBEndList.Items.Add(TempFile)
-			Next
-			For i As Integer = 0 To CLBEndList.Items.Count - 1
-				CLBEndList.SetItemChecked(i, True)
-			Next
-			SaveEndScripts()
-			If CLBEndList.Items.Count > 0 Then
-				CLBEndList.SetSelected(0, True)
-				EndTab()
-			End If
-		End If
-
-	End Sub
-
-
-	Public Sub LoadStartScripts()
-
-		CLBStartList.Items.Clear()
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\StartCheckList.cld", IO.FileMode.Open)
-		Dim BinaryReader As New System.IO.BinaryReader(FileStream)
-		CLBStartList.BeginUpdate()
-		Do While FileStream.Position < FileStream.Length
-			CLBStartList.Items.Add(BinaryReader.ReadString)
-			CLBStartList.SetItemChecked(CLBStartList.Items.Count - 1, BinaryReader.ReadBoolean)
-		Loop
-		CLBStartList.EndUpdate()
-		BinaryReader.Close()
-		FileStream.Dispose()
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-			Dim TempFile As String = foundFile
-			TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-			If Not CLBStartList.Items.Contains(TempFile) Then
-				Debug.Print("CLBStartList does not contain " & TempFile)
-				CLBStartList.Items.Add(TempFile)
-			End If
-		Next
-		For i As Integer = 0 To CLBStartList.Items.Count - 1 Step -1
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt") Then CLBStartList.Items.Remove(CLBStartList.Items(i))
-		Next
-
-	End Sub
-
-	Public Sub LoadModuleScripts()
-
-		CLBModuleList.Items.Clear()
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\ModuleCheckList.cld", IO.FileMode.Open)
-		Dim BinaryReader As New System.IO.BinaryReader(FileStream)
-		CLBModuleList.BeginUpdate()
-		Do While FileStream.Position < FileStream.Length
-			CLBModuleList.Items.Add(BinaryReader.ReadString)
-			CLBModuleList.SetItemChecked(CLBModuleList.Items.Count - 1, BinaryReader.ReadBoolean)
-		Loop
-		CLBModuleList.EndUpdate()
-		BinaryReader.Close()
-		FileStream.Dispose()
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-			Dim TempFile As String = foundFile
-			TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-			Debug.Print("Module Tempfile = " & TempFile)
-			If Not CLBModuleList.Items.Contains(TempFile) Then
-				Debug.Print("CLBModuleList does not contain " & TempFile)
-				CLBModuleList.Items.Add(TempFile)
-			End If
-		Next
-		For i As Integer = 0 To CLBModuleList.Items.Count - 1 Step -1
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt") Then CLBModuleList.Items.Remove(CLBModuleList.Items(i))
-		Next
-
-
-
-
-
-	End Sub
-
-	Public Sub LoadLinkScripts()
-
-		CLBLinkList.Items.Clear()
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\LinkCheckList.cld", IO.FileMode.Open)
-		Dim BinaryReader As New System.IO.BinaryReader(FileStream)
-		CLBLinkList.BeginUpdate()
-		Do While FileStream.Position < FileStream.Length
-			CLBLinkList.Items.Add(BinaryReader.ReadString)
-			CLBLinkList.SetItemChecked(CLBLinkList.Items.Count - 1, BinaryReader.ReadBoolean)
-		Loop
-		CLBLinkList.EndUpdate()
-		BinaryReader.Close()
-		FileStream.Dispose()
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-			Dim TempFile As String = foundFile
-			TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-			If Not CLBLinkList.Items.Contains(TempFile) Then
-				CLBLinkList.Items.Add(TempFile)
-			End If
-		Next
-		For i As Integer = 0 To CLBLinkList.Items.Count - 1 Step -1
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt") Then CLBLinkList.Items.Remove(CLBLinkList.Items(i))
-		Next
-
-	End Sub
-
-	Public Sub LoadEndScripts()
-
-		CLBEndList.Items.Clear()
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\EndCheckList.cld", IO.FileMode.Open)
-		Dim BinaryReader As New System.IO.BinaryReader(FileStream)
-		CLBEndList.BeginUpdate()
-		Do While FileStream.Position < FileStream.Length
-			CLBEndList.Items.Add(BinaryReader.ReadString)
-			CLBEndList.SetItemChecked(CLBEndList.Items.Count - 1, BinaryReader.ReadBoolean)
-		Loop
-		CLBEndList.EndUpdate()
-		BinaryReader.Close()
-		FileStream.Dispose()
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-			Dim TempFile As String = foundFile
-			TempFile = Path.GetFileName(TempFile).Replace(".txt", "")
-			If Not CLBEndList.Items.Contains(TempFile) Then
-				CLBEndList.Items.Add(TempFile)
-			End If
-		Next
-		For i As Integer = 0 To CLBEndList.Items.Count - 1 Step -1
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt") Then CLBEndList.Items.Remove(CLBEndList.Items(i))
-		Next
-
-	End Sub
-
-	Private Sub CLBStartList_LostFocus(sender As Object, e As System.EventArgs) Handles CLBStartList.LostFocus
-		SaveStartScripts()
-	End Sub
-
-	Private Sub CLBModuleList_LostFocus(sender As Object, e As System.EventArgs) Handles CLBModuleList.LostFocus
-		SaveModuleScripts()
-	End Sub
-
-	Private Sub CLBLinkList_LostFocus(sender As Object, e As System.EventArgs) Handles CLBLinkList.LostFocus
-		SaveLinkScripts()
-	End Sub
-
-	Private Sub CLBEndList_LostFocus(sender As Object, e As System.EventArgs) Handles CLBEndList.LostFocus
-		SaveEndScripts()
-	End Sub
-
-	Private Sub CLBStartList_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CLBStartList.SelectedIndexChanged
-		StartTab()
-	End Sub
-
-	Private Sub CLBModuleList_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CLBModuleList.SelectedIndexChanged
-		ModuleTab()
-	End Sub
-
-	Private Sub CLBLinkList_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CLBLinkList.SelectedIndexChanged
-		LinkTab()
-	End Sub
-
-	Private Sub CLBEndList_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles CLBEndList.SelectedIndexChanged
-		EndTab()
-	End Sub
-
-	Public Sub StartTab()
-
-		For i As Integer = CLBStartList.Items.Count - 1 To 0 Step -1
-			'Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt")
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt") Then
-				CLBStartList.Items.Remove(CLBStartList.Items(i))
-				Exit For
-			End If
-		Next
-		'QnD-Bugfix: Prevent GetScriptStatus when no index is selected
-		If CLBStartList.SelectedIndex = -1 Then ScriptStatusUnlock(False) : Exit Sub
-		ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(CLBStartList.SelectedIndex) & ".txt"
-		GetScriptStatus()
-
-	End Sub
-
-	Public Sub ModuleTab()
-
-
-		If FrmSettingsLoading = True Then Return
-
-		For i As Integer = CLBModuleList.Items.Count - 1 To 0 Step -1
-			' Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt")
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt") Then
-				CLBModuleList.Items.Remove(CLBModuleList.Items(i))
-				Exit For
-			End If
-		Next
-		'QnD-Bugfix: Prevent GetScriptStatus when no index is selected
-		If CLBModuleList.SelectedIndex = -1 Then ScriptStatusUnlock(False) : Exit Sub
-		ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(CLBModuleList.SelectedIndex) & ".txt"
-		GetScriptStatus()
-
-	End Sub
-
-	Public Sub LinkTab()
-
-		If FrmSettingsLoading = True Then Return
-
-		For i As Integer = CLBLinkList.Items.Count - 1 To 0 Step -1
-			' Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt")
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt") Then
-				CLBLinkList.Items.Remove(CLBLinkList.Items(i))
-				Exit For
-			End If
-		Next
-		'QnD-Bugfix: Prevent GetScriptStatus when no index is selected
-		If CLBLinkList.SelectedIndex = -1 Then ScriptStatusUnlock(False) : Exit Sub
-		ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(CLBLinkList.SelectedIndex) & ".txt"
-		GetScriptStatus()
-
-	End Sub
-
-	Public Sub EndTab()
-
-		If FrmSettingsLoading = True Then Return
-
-		For i As Integer = CLBEndList.Items.Count - 1 To 0 Step -1
-			' Debug.Print(Application.StartupPath & "\Scripts\" & Form1.dompersonalityComboBox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt")
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt") Then
-				CLBEndList.Items.Remove(CLBEndList.Items(i))
-				Exit For
-			End If
-		Next
-		'QnD-Bugfix: Prevent GetScriptStatus when no index is selected
-		If CLBEndList.SelectedIndex = -1 Then ScriptStatusUnlock(False) : Exit Sub
-		ScriptFile = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(CLBEndList.SelectedIndex) & ".txt"
-		GetScriptStatus()
-
+			If target.SelectedIndex = -1 Then ScriptStatusUnlock(False) : Exit Sub
+
+			ScriptFile = Scriptfolder & target.Items(target.SelectedIndex) & ".txt"
+			If File.Exists(ScriptFile) Then GetScriptStatus()
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			MessageBox.Show(ex.Message, "Error on changing Item", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		End Try
 	End Sub
 
 
@@ -2550,830 +2189,691 @@ Public Class FrmSettings
 
 	Public Sub GetScriptStatus()
 		'BUG: This Function is not checking all Commands and their contditions
-		ScriptStatusUnlock(True)
-		Dim ScriptReader As New StreamReader(ScriptFile)
-		ScriptList.Clear()
-		While ScriptReader.Peek <> -1
-			ScriptList.Add(ScriptReader.ReadLine())
-		End While
+		Try
+			Dim ScriptReader As New StreamReader(ScriptFile)
+			ScriptList.Clear()
+			While ScriptReader.Peek <> -1
+				ScriptList.Add(ScriptReader.ReadLine())
+			End While
 
-		ScriptReader.Close()
-		ScriptReader.Dispose()
-		RTBScriptDesc.Text = ""
-		RTBScriptReq.Text = ""
-		Dim ScriptReqFailed As Boolean = False
+			ScriptReader.Close()
+			ScriptReader.Dispose()
+			RTBScriptDesc.Text = ""
+			RTBScriptReq.Text = ""
+			Dim ScriptReqFailed As Boolean = False
 
-		For i As Integer = 0 To ScriptList.Count - 1
+			For i As Integer = 0 To ScriptList.Count - 1
 
-			If ScriptList(i).Contains("@Info") Then RTBScriptDesc.Text = ScriptList(i).Replace("@Info ", "")
+				If ScriptList(i).Contains("@Info") Then RTBScriptDesc.Text = ScriptList(i).Replace("@Info ", "")
 
-			If ScriptList(i).Contains("@ShowBlogImage") Then
-				If Not RTBScriptReq.Text.Contains("* At least one URL File selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one URL File selected *" & Environment.NewLine
-				If URLFileList.CheckedItems.Count = 0 Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@NewBlogImage") Then
-				If Not RTBScriptReq.Text.Contains("* At least one URL File selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one URL File selected *" & Environment.NewLine
-				If URLFileList.CheckedItems.Count = 0 Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowLocalImage") Then
-				If Not RTBScriptReq.Text.Contains("* At least one Local Image path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Local Image path selected with a valid directory *" & Environment.NewLine
-				Dim LocalCount As Integer = 0
-				If My.Settings.CBIHardcore = True Then
-					If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
-				End If
-				If My.Settings.CBISoftcore = True Then
-					If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
-				End If
-				If My.Settings.CBILesbian = True Then
-					If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
-				End If
-				If My.Settings.CBIBlowjob = True Then
-					If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
-				End If
-				If My.Settings.CBIFemdom = True Then
-					If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
-				End If
-				If My.Settings.CBILezdom = True Then
-					If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
-				End If
-				If My.Settings.CBIHentai = True Then
-					If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
-				End If
-				If My.Settings.CBIGay = True Then
-					If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
-				End If
-				If My.Settings.CBIMaledom = True Then
-					If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
-				End If
-				If My.Settings.CBICaptions = True Then
-					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
-				End If
-				If My.Settings.CBIGeneral = True Then
-					If Directory.Exists(My.Settings.IGeneral) Then LocalCount += 1
-				End If
-				If LocalCount = 0 Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowImage") Then
-				If Not RTBScriptReq.Text.Contains("* At least one URL File selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one URL File selected *" & Environment.NewLine
-				If Not RTBScriptReq.Text.Contains("* At least one Local Image path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Local Image path selected with a valid directory *" & Environment.NewLine
-				If URLFileList.CheckedItems.Count = 0 Then ScriptReqFailed = True
-				Dim LocalCount As Integer = 0
-				If My.Settings.CBIHardcore = True Then
-					If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
-				End If
-				If My.Settings.CBISoftcore = True Then
-					If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
-				End If
-				If My.Settings.CBILesbian = True Then
-					If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
-				End If
-				If My.Settings.CBIBlowjob = True Then
-					If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
-				End If
-				If My.Settings.CBIFemdom = True Then
-					If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
-				End If
-				If My.Settings.CBILezdom = True Then
-					If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
-				End If
-				If My.Settings.CBIHentai = True Then
-					If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
-				End If
-				If My.Settings.CBIGay = True Then
-					If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
-				End If
-				If My.Settings.CBIMaledom = True Then
-					If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
-				End If
-				If My.Settings.CBICaptions = True Then
-					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
-				End If
-				If My.Settings.CBIGeneral = True Then
-					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
-				End If
-				If LocalCount = 0 Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@CBTBalls") Then
-				If Not RTBScriptReq.Text.Contains("* Ball Torture must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Ball Torture must be enabled *" & Environment.NewLine
-				If CBCBTBalls.Checked = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@CBTCock") Then
-				If Not RTBScriptReq.Text.Contains("* Cock Torture must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Cock Torture must be enabled *" & Environment.NewLine
-				If CBCBTCock.Checked = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@CBT") Then
-				If Not RTBScriptReq.Text.Contains("* Cock Torture must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Cock Torture must be enabled *" & Environment.NewLine
-				If Not RTBScriptReq.Text.Contains("* Ball Torture must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Ball Torture must be enabled *" & Environment.NewLine
-				If CBCBTCock.Checked = False Then ScriptReqFailed = True
-				If CBCBTBalls.Checked = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@PlayJOIVideo") Then
-				If Not RTBScriptReq.Text.Contains("* JOI or JOI Domme Video path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* JOI or JOI Domme Video path selected with a valid directory *" & Environment.NewLine
-				If CBVideoJOI.Checked = False And CBVideoJOID.Checked = False Then ScriptReqFailed = True
-				If LblVideoJOITotal.Text = "0" And LblVideoJOITotalD.Text = "0" Then ScriptReqFailed = True
-				If CBVideoJOI.Checked = True And Not Directory.Exists(TxbVideoJOI.Text) Then ScriptReqFailed = True
-				If CBVideoJOID.Checked = True And Not Directory.Exists(TxbVideoJOID.Text) Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@PlayCHVideo") Then
-				If Not RTBScriptReq.Text.Contains("* CH or CH Domme Video path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* CH or CH Domme Video path selected with a valid directory *" & Environment.NewLine
-				If CBVideoCH.Checked = False And CBVideoCHD.Checked = False Then ScriptReqFailed = True
-				If LblVideoCHTotal.Text = "0" And LblVideoCHTotalD.Text = "0" Then ScriptReqFailed = True
-				If CBVideoCH.Checked = True And Not Directory.Exists(TxbVideoCH.Text) Then ScriptReqFailed = True
-				If CBVideoCHD.Checked = True And Not Directory.Exists(TxbVideoCHD.Text) Then ScriptReqFailed = True
-			End If
-
-			'If ScriptList(i).Contains("@TnAFastSlides") Or ScriptList(i).Contains("@TnASlowSlides") Or ScriptList(i).Contains("@TnASlides") Or ScriptList(i).Contains("@CheckTnA") Then
-			'If Not RTBScriptReq.Text.Contains("* BnB Games must be enabled in Image Settings *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Games must be enabled in Image Settings *" & Environment.NewLine
-			'If CBEnableBnB.Checked = False Then ScriptReqFailed = True
-			'End If
-
-			If ScriptList(i).Contains("@ShowButtImage") Then
-				If Not RTBScriptReq.Text.Contains("* BnB Butt path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Butt path must be set to a valid directory or URL File *" & Environment.NewLine
-				If My.Settings.CBIButts = True And Not Directory.Exists(My.Settings.LBLButtPath) Then ScriptReqFailed = True
-				If ChbImageUrlButts.Checked = True And Not File.Exists(My.Settings.UrlFileButt) Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowBoobsImage") Then
-				If Not RTBScriptReq.Text.Contains("* BnB Boobs path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Boobs path must be set to a valid directory or URL File *" & Environment.NewLine
-				If My.Settings.CBIBoobs = True And Not Directory.Exists(My.Settings.LBLBoobPath) Then ScriptReqFailed = True
-				If ChbImageUrlBoobs.Checked = True And Not File.Exists(My.Settings.UrlFileBoobs) Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowHardcoreImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Hardcore Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Hardcore Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowSoftcoreImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Softcore Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Softcore Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowLesbianImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Lesbian Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Lesbian Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowBlowjobImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Blowjob Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Blowjob Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowFemdomImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Femdom Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Femdom Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowLezdomImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Lezdom Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Lezdom Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowHentaiImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Hentai Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Hentai Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowGayImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Gay Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Gay Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowMaledomImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Maledom Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Maledom Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowCaptionsImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local Captions Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Captions Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowGeneralImage") Then
-				If Not RTBScriptReq.Text.Contains("* Local General Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local General Image path must be selected and set to a valid directory *" & Environment.NewLine
-				If Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@ShowTaggedImage") And ScriptList(i).Contains("@Tag") Then
-				Dim TagDesc As String = "* Images in LocalImageTags.txt tagged with: "
-
-				Dim LocalTagImageList As New List(Of String)
-				LocalTagImageList.Clear()
-
-				If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
-					Dim LocalReader As New StreamReader(Application.StartupPath & "\Images\System\LocalImageTags.txt")
-					While LocalReader.Peek <> -1
-						LocalTagImageList.Add(LocalReader.ReadLine())
-					End While
-					LocalReader.Close()
-					LocalReader.Dispose()
-					For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-						If LocalTagImageList(k) = "" Or LocalTagImageList(k) Is Nothing Then LocalTagImageList.RemoveAt(k)
-					Next
+				If ScriptList(i).Contains("@ShowBlogImage") Then
+					If Not RTBScriptReq.Text.Contains("* At least one URL File selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one URL File selected *" & Environment.NewLine
+					If URLFileList.CheckedItems.Count = 0 Then ScriptReqFailed = True
 				End If
 
-				Dim TagCount As Integer = 0
+				If ScriptList(i).Contains("@NewBlogImage") Then
+					If Not RTBScriptReq.Text.Contains("* At least one URL File selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one URL File selected *" & Environment.NewLine
+					If URLFileList.CheckedItems.Count = 0 Then ScriptReqFailed = True
+				End If
 
-				Dim TSplit As String() = Split(ScriptList(i))
-				For j As Integer = 0 To TSplit.Length - 1
-					If TSplit(j).Contains("@Tag") Then
-						Dim TString As String = TSplit(j).Replace("@Tag", "")
-						TagDesc = TagDesc & TSplit(j) & " "
-						For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-							If LocalTagImageList(k).Contains(TString) Then TagCount += 1
-						Next
-						If TagCount = 0 Then
-							ScriptReqFailed = True
-						End If
-						TagCount = 0
+				If ScriptList(i).Contains("@ShowLocalImage") Then
+					If Not RTBScriptReq.Text.Contains("* At least one Local Image path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Local Image path selected with a valid directory *" & Environment.NewLine
+					Dim LocalCount As Integer = 0
+					If My.Settings.CBIHardcore = True Then
+						If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
 					End If
+					If My.Settings.CBISoftcore = True Then
+						If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
+					End If
+					If My.Settings.CBILesbian = True Then
+						If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
+					End If
+					If My.Settings.CBIBlowjob = True Then
+						If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
+					End If
+					If My.Settings.CBIFemdom = True Then
+						If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
+					End If
+					If My.Settings.CBILezdom = True Then
+						If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
+					End If
+					If My.Settings.CBIHentai = True Then
+						If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
+					End If
+					If My.Settings.CBIGay = True Then
+						If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
+					End If
+					If My.Settings.CBIMaledom = True Then
+						If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
+					End If
+					If My.Settings.CBICaptions = True Then
+						If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
+					End If
+					If My.Settings.CBIGeneral = True Then
+						If Directory.Exists(My.Settings.IGeneral) Then LocalCount += 1
+					End If
+					If LocalCount = 0 Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowImage") Then
+					If Not RTBScriptReq.Text.Contains("* At least one URL File selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one URL File selected *" & Environment.NewLine
+					If Not RTBScriptReq.Text.Contains("* At least one Local Image path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Local Image path selected with a valid directory *" & Environment.NewLine
+					If URLFileList.CheckedItems.Count = 0 Then ScriptReqFailed = True
+					Dim LocalCount As Integer = 0
+					If My.Settings.CBIHardcore = True Then
+						If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
+					End If
+					If My.Settings.CBISoftcore = True Then
+						If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
+					End If
+					If My.Settings.CBILesbian = True Then
+						If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
+					End If
+					If My.Settings.CBIBlowjob = True Then
+						If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
+					End If
+					If My.Settings.CBIFemdom = True Then
+						If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
+					End If
+					If My.Settings.CBILezdom = True Then
+						If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
+					End If
+					If My.Settings.CBIHentai = True Then
+						If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
+					End If
+					If My.Settings.CBIGay = True Then
+						If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
+					End If
+					If My.Settings.CBIMaledom = True Then
+						If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
+					End If
+					If My.Settings.CBICaptions = True Then
+						If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
+					End If
+					If My.Settings.CBIGeneral = True Then
+						If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
+					End If
+					If LocalCount = 0 Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@CBTBalls") Then
+					If Not RTBScriptReq.Text.Contains("* Ball Torture must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Ball Torture must be enabled *" & Environment.NewLine
+					If CBCBTBalls.Checked = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@CBTCock") Then
+					If Not RTBScriptReq.Text.Contains("* Cock Torture must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Cock Torture must be enabled *" & Environment.NewLine
+					If CBCBTCock.Checked = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@CBT") Then
+					If Not RTBScriptReq.Text.Contains("* Cock Torture must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Cock Torture must be enabled *" & Environment.NewLine
+					If Not RTBScriptReq.Text.Contains("* Ball Torture must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Ball Torture must be enabled *" & Environment.NewLine
+					If CBCBTCock.Checked = False Then ScriptReqFailed = True
+					If CBCBTBalls.Checked = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@PlayJOIVideo") Then
+					If Not RTBScriptReq.Text.Contains("* JOI or JOI Domme Video path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* JOI or JOI Domme Video path selected with a valid directory *" & Environment.NewLine
+					If CBVideoJOI.Checked = False And CBVideoJOID.Checked = False Then ScriptReqFailed = True
+					If LblVideoJOITotal.Text = "0" And LblVideoJOITotalD.Text = "0" Then ScriptReqFailed = True
+					If CBVideoJOI.Checked = True And Not Directory.Exists(TxbVideoJOI.Text) Then ScriptReqFailed = True
+					If CBVideoJOID.Checked = True And Not Directory.Exists(TxbVideoJOID.Text) Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@PlayCHVideo") Then
+					If Not RTBScriptReq.Text.Contains("* CH or CH Domme Video path selected with a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* CH or CH Domme Video path selected with a valid directory *" & Environment.NewLine
+					If CBVideoCH.Checked = False And CBVideoCHD.Checked = False Then ScriptReqFailed = True
+					If LblVideoCHTotal.Text = "0" And LblVideoCHTotalD.Text = "0" Then ScriptReqFailed = True
+					If CBVideoCH.Checked = True And Not Directory.Exists(TxbVideoCH.Text) Then ScriptReqFailed = True
+					If CBVideoCHD.Checked = True And Not Directory.Exists(TxbVideoCHD.Text) Then ScriptReqFailed = True
+				End If
+
+				'If ScriptList(i).Contains("@TnAFastSlides") Or ScriptList(i).Contains("@TnASlowSlides") Or ScriptList(i).Contains("@TnASlides") Or ScriptList(i).Contains("@CheckTnA") Then
+				'If Not RTBScriptReq.Text.Contains("* BnB Games must be enabled in Image Settings *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Games must be enabled in Image Settings *" & Environment.NewLine
+				'If CBEnableBnB.Checked = False Then ScriptReqFailed = True
+				'End If
+
+				If ScriptList(i).Contains("@ShowButtImage") Then
+					If Not RTBScriptReq.Text.Contains("* BnB Butt path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Butt path must be set to a valid directory or URL File *" & Environment.NewLine
+					If My.Settings.CBIButts = True And Not Directory.Exists(My.Settings.LBLButtPath) Then ScriptReqFailed = True
+					If ChbImageUrlButts.Checked = True And Not File.Exists(My.Settings.UrlFileButt) Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowBoobsImage") Then
+					If Not RTBScriptReq.Text.Contains("* BnB Boobs path must be set to a valid directory or URL File *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* BnB Boobs path must be set to a valid directory or URL File *" & Environment.NewLine
+					If My.Settings.CBIBoobs = True And Not Directory.Exists(My.Settings.LBLBoobPath) Then ScriptReqFailed = True
+					If ChbImageUrlBoobs.Checked = True And Not File.Exists(My.Settings.UrlFileBoobs) Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowHardcoreImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Hardcore Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Hardcore Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowSoftcoreImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Softcore Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Softcore Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowLesbianImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Lesbian Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Lesbian Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowBlowjobImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Blowjob Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Blowjob Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowFemdomImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Femdom Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Femdom Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowLezdomImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Lezdom Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Lezdom Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowHentaiImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Hentai Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Hentai Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowGayImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Gay Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Gay Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowMaledomImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Maledom Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Maledom Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowCaptionsImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local Captions Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local Captions Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowGeneralImage") Then
+					If Not RTBScriptReq.Text.Contains("* Local General Image path must be selected and set to a valid directory *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* Local General Image path must be selected and set to a valid directory *" & Environment.NewLine
+					If Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@ShowTaggedImage") And ScriptList(i).Contains("@Tag") Then
+					Dim TagDesc As String = "* Images in LocalImageTags.txt tagged with: "
+
+					Dim LocalTagImageList As New List(Of String)
+					LocalTagImageList.Clear()
+
+					If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+						Dim LocalReader As New StreamReader(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+						While LocalReader.Peek <> -1
+							LocalTagImageList.Add(LocalReader.ReadLine())
+						End While
+						LocalReader.Close()
+						LocalReader.Dispose()
+						For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+							If LocalTagImageList(k) = "" Or LocalTagImageList(k) Is Nothing Then LocalTagImageList.RemoveAt(k)
+						Next
+					End If
+
+					Dim TagCount As Integer = 0
+
+					Dim TSplit As String() = Split(ScriptList(i))
+					For j As Integer = 0 To TSplit.Length - 1
+						If TSplit(j).Contains("@Tag") Then
+							Dim TString As String = TSplit(j).Replace("@Tag", "")
+							TagDesc = TagDesc & TSplit(j) & " "
+							For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+								If LocalTagImageList(k).Contains(TString) Then TagCount += 1
+							Next
+							If TagCount = 0 Then
+								ScriptReqFailed = True
+							End If
+							TagCount = 0
+						End If
+					Next
+
+					If Not RTBScriptReq.Text.Contains(TagDesc & "*") Then RTBScriptReq.Text = RTBScriptReq.Text & TagDesc & "*" & Environment.NewLine
+
+				End If
+
+				If ScriptList(i).Contains("@ShowTaggedImage") And Not ScriptList(i).Contains("@Tag") Then
+					If Not RTBScriptReq.Text.Contains("* LocalImageTags.txt must exist in \Images\System\ *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* LocalImageTags.txt must exist in \Images\System\ *" & Environment.NewLine
+					If Not File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@CheckVideo") Then
+					If Not RTBScriptReq.Text.Contains("* At least one Genre or Domme Video path set and selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Genre or Domme Video path set and selected *" & Environment.NewLine
+					Form1.ssh.VideoCheck = True
+					Form1.RandomVideo()
+					If Form1.ssh.NoVideo = True Then ScriptReqFailed = True
+					Form1.ssh.VideoCheck = False
+					Form1.ssh.NoVideo = False
+				End If
+
+
+				If ScriptList(i).Contains("@PlayCensorshipSucks") Or ScriptList(i).Contains("@PlayAvoidTheEdge") Or ScriptList(i).Contains("@PlayRedLightGreenLight") Then
+					If Not RTBScriptReq.Text.Contains("* At least one non-Special Genre or Domme Video path set and selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one non-Special Genre or Domme Video path set and selected *" & Environment.NewLine
+					Form1.ssh.VideoCheck = True
+					Form1.ssh.NoSpecialVideo = True
+					Form1.RandomVideo()
+					If Form1.ssh.NoVideo = True Then ScriptReqFailed = True
+					Form1.ssh.VideoCheck = False
+					Form1.ssh.NoSpecialVideo = False
+					Form1.ssh.NoVideo = False
+				End If
+
+				If ScriptList(i).Contains("@ChastityOn") Or ScriptList(i).Contains("@ChastityOff") Then
+					If Not RTBScriptReq.Text.Contains("* You must indicate you own a chastity device *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* You must indicate you own a chastity device *" & Environment.NewLine
+					If CBOwnChastity.Checked = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@DeleteLocalImage") Then
+					If Not RTBScriptReq.Text.Contains("* ""Allow Domme to Delete Local Media"" muct be checked *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* ""Allow Domme to Delete Local Media"" muct be checked *" & Environment.NewLine
+					If CBDomDel.Checked = False Then ScriptReqFailed = True
+				End If
+
+				If ScriptList(i).Contains("@VitalSubAssignment") Then
+					If Not RTBScriptReq.Text.Contains("* VitalSub must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* VitalSub must be enabled *" & Environment.NewLine
+					If Not RTBScriptReq.Text.Contains("* ""Domme Assignments"" must be checked in the VitalSub app *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* ""Domme Assignments"" must be checked in the VitalSub app *" & Environment.NewLine
+					If Form1.CBVitalSub.Checked = False Or Form1.CBVitalSubDomTask.Checked = False Then ScriptReqFailed = True
+				End If
+
+			Next
+
+			ScriptStatusUnlock(True)
+
+			RTBScriptReq.Text = RTBScriptReq.Text.Replace("**", "* *")
+
+			If ScriptReqFailed = True Then
+				LBLScriptReq.ForeColor = Color.Red
+				LBLScriptReq.Text = "All requirements not met!"
+			Else
+				LBLScriptReq.ForeColor = Color.Green
+				LBLScriptReq.Text = "All requirements met!"
+			End If
+		Catch ex As Exception
+			ScriptStatusUnlock(False)
+			MessageBox.Show(ex.Message, "Error Checking ScriptStatus", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		End Try
+	End Sub
+
+
+
+	Private Sub BtnScriptsOpen_Click(sender As System.Object, e As System.EventArgs) Handles BTNScriptOpen.Click
+		Dim Filepath As String = ""
+		Try
+			If CLBStartList.Visible = True Then
+				Filepath = Ssh.Folders.StartScripts & CLBStartList.Items(CLBStartList.SelectedIndex) & ".txt"
+			ElseIf CLBModuleList.Visible = True Then
+				Filepath = Ssh.Folders.ModuleScripts & CLBModuleList.Items(CLBModuleList.SelectedIndex) & ".txt"
+			ElseIf CLBLinkList.Visible = True Then
+				Filepath = Ssh.Folders.LinkScripts & CLBLinkList.Items(CLBLinkList.SelectedIndex) & ".txt"
+			ElseIf CLBEndList.Visible = True Then
+				Filepath = Ssh.Folders.EndScripts & CLBEndList.Items(CLBEndList.SelectedIndex) & ".txt"
+			Else
+				Throw New Exception("Unable to determine CheckedListBox.")
+			End If
+
+			If Not File.Exists(Filepath) Then _
+				Throw New FileNotFoundException("Unable to locate file """ & Filepath & """.")
+
+			Form1.ShellExecute(Filepath)
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			MessageBox.Show(ex.Message, "Error opening Script", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		End Try
+	End Sub
+
+
+	Private Sub BtnScriptsSelectAutomated_Click(sender As System.Object, e As System.EventArgs) Handles BTNScriptAvailable.Click, BTNScriptNone.Click, BTNScriptAll.Click
+		' Lock Buttons to prevent double trigger
+		BTNScriptAvailable.Enabled = False
+		BTNScriptNone.Enabled = False
+		BTNScriptAll.Enabled = False
+
+		' The CheckedListBox to use.
+		Dim Target As CheckedListBox = Nothing
+
+		' The corresponding Folder containing scripts
+		Dim Scriptfolder As String
+
+		' A Lamda Object for saving the changes.
+		Dim SaveAction As Action
+
+		Try
+			' Dertermine variable data
+			If TCScripts.SelectedTab Is TabPage21 = True Then
+				Target = CLBStartList
+				Scriptfolder = Ssh.Folders.StartScripts
+				SaveAction = AddressOf SaveStartScripts
+			ElseIf TCScripts.SelectedTab Is TabPage17 Then
+				Target = CLBModuleList
+				Scriptfolder = Ssh.Folders.ModuleScripts
+				SaveAction = AddressOf SaveModuleScripts
+			ElseIf TCScripts.SelectedTab Is TabPage18 Then
+				Target = CLBLinkList
+				Scriptfolder = Ssh.Folders.LinkScripts
+				SaveAction = AddressOf SaveLinkScripts
+			ElseIf TCScripts.SelectedTab Is TabPage19 Then
+				Target = CLBEndList
+				Scriptfolder = Ssh.Folders.EndScripts
+				SaveAction = AddressOf SaveEndScripts
+			Else
+				Throw New Exception("Unable to determine CheckedListBox.")
+			End If
+
+			Target.BeginUpdate()
+
+			If sender Is BTNScriptNone Then
+				' ####################### Select None #########################
+				Debug.Print(Target.Name & " select none")
+
+				For i As Integer = 0 To Target.Items.Count - 1
+					Target.SetItemChecked(i, False)
 				Next
 
-				If Not RTBScriptReq.Text.Contains(TagDesc & "*") Then RTBScriptReq.Text = RTBScriptReq.Text & TagDesc & "*" & Environment.NewLine
+			ElseIf sender Is BTNScriptAll Then
+				' ####################### Select All ##########################
+				Debug.Print(Target.Name & " select all")
 
+				For i As Integer = 0 To Target.Items.Count - 1
+					Target.SetItemChecked(i, True)
+				Next
+
+			ElseIf sender Is BTNScriptAvailable Then
+				' #################### Select Available #######################
+				Debug.Print(Target.Name & " select available")
+
+				For i As Integer = 0 To Target.Items.Count - 1
+
+					AvailFail = False
+
+					AvailList = Common.Txt2List(Scriptfolder & Target.Items(i) & ".txt")
+					GetAvailFail()
+
+					If AvailFail = True Then
+						Target.SetItemChecked(i, False)
+					Else
+						Target.SetItemChecked(i, True)
+					End If
+
+				Next
 			End If
 
-			If ScriptList(i).Contains("@ShowTaggedImage") And Not ScriptList(i).Contains("@Tag") Then
-				If Not RTBScriptReq.Text.Contains("* LocalImageTags.txt must exist in \Images\System\ *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* LocalImageTags.txt must exist in \Images\System\ *" & Environment.NewLine
-				If Not File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then ScriptReqFailed = True
+			SaveAction()
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			MessageBox.Show(ex.Message, "Error selecting Scripts", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		Finally
+			If Target IsNot Nothing Then
+				Target.EndUpdate()
+				Target.Focus()
 			End If
-
-			If ScriptList(i).Contains("@CheckVideo") Then
-				If Not RTBScriptReq.Text.Contains("* At least one Genre or Domme Video path set and selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Genre or Domme Video path set and selected *" & Environment.NewLine
-				Form1.ssh.VideoCheck = True
-				Form1.RandomVideo()
-				If Form1.ssh.NoVideo = True Then ScriptReqFailed = True
-				Form1.ssh.VideoCheck = False
-				Form1.ssh.NoVideo = False
-			End If
-
-
-			If ScriptList(i).Contains("@PlayCensorshipSucks") Or ScriptList(i).Contains("@PlayAvoidTheEdge") Or ScriptList(i).Contains("@PlayRedLightGreenLight") Then
-				If Not RTBScriptReq.Text.Contains("* At least one non-Special Genre or Domme Video path set and selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one non-Special Genre or Domme Video path set and selected *" & Environment.NewLine
-				Form1.ssh.VideoCheck = True
-				Form1.ssh.NoSpecialVideo = True
-				Form1.RandomVideo()
-				If Form1.ssh.NoVideo = True Then ScriptReqFailed = True
-				Form1.ssh.VideoCheck = False
-				Form1.ssh.NoSpecialVideo = False
-				Form1.ssh.NoVideo = False
-			End If
-
-			If ScriptList(i).Contains("@ChastityOn") Or ScriptList(i).Contains("@ChastityOff") Then
-				If Not RTBScriptReq.Text.Contains("* You must indicate you own a chastity device *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* You must indicate you own a chastity device *" & Environment.NewLine
-				If CBOwnChastity.Checked = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@DeleteLocalImage") Then
-				If Not RTBScriptReq.Text.Contains("* ""Allow Domme to Delete Local Media"" muct be checked *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* ""Allow Domme to Delete Local Media"" muct be checked *" & Environment.NewLine
-				If CBDomDel.Checked = False Then ScriptReqFailed = True
-			End If
-
-			If ScriptList(i).Contains("@VitalSubAssignment") Then
-				If Not RTBScriptReq.Text.Contains("* VitalSub must be enabled *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* VitalSub must be enabled *" & Environment.NewLine
-				If Not RTBScriptReq.Text.Contains("* ""Domme Assignments"" must be checked in the VitalSub app *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* ""Domme Assignments"" must be checked in the VitalSub app *" & Environment.NewLine
-				If Form1.CBVitalSub.Checked = False Or Form1.CBVitalSubDomTask.Checked = False Then ScriptReqFailed = True
-			End If
-
-		Next
-
-		RTBScriptReq.Text = RTBScriptReq.Text.Replace("**", "* *")
-
-		If ScriptReqFailed = True Then
-			LBLScriptReq.ForeColor = Color.Red
-			LBLScriptReq.Text = "All requirements not met!"
-		Else
-			LBLScriptReq.ForeColor = Color.Green
-			LBLScriptReq.Text = "All requirements met!"
-		End If
-
-	End Sub
-
-
-
-	Private Sub Button4_Click_1(sender As System.Object, e As System.EventArgs) Handles BTNScriptOpen.Click
-		If CLBStartList.Visible = True Then
-			Form1.ShellExecute(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(CLBStartList.SelectedIndex) & ".txt")
-		End If
-
-		If CLBModuleList.Visible = True Then
-			Form1.ShellExecute(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(CLBModuleList.SelectedIndex) & ".txt")
-		End If
-
-		If CLBLinkList.Visible = True Then
-			Form1.ShellExecute(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(CLBLinkList.SelectedIndex) & ".txt")
-		End If
-
-		If CLBEndList.Visible = True Then
-			Form1.ShellExecute(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(CLBEndList.SelectedIndex) & ".txt")
-		End If
-	End Sub
-
-	Private Sub Button5_Click(sender As System.Object, e As System.EventArgs) Handles BTNScriptAll.Click
-		If CLBStartList.Visible = True Then
-			Debug.Print("CLBStartList Select All")
-			For i As Integer = 0 To CLBStartList.Items.Count - 1
-				CLBStartList.SetItemChecked(i, True)
-			Next
-			SaveStartScripts()
-		End If
-
-		If CLBModuleList.Visible = True Then
-			Debug.Print("CLBModuleList Select All")
-			For i As Integer = 0 To CLBModuleList.Items.Count - 1
-				CLBModuleList.SetItemChecked(i, True)
-			Next
-			SaveModuleScripts()
-		End If
-
-		If CLBLinkList.Visible = True Then
-			Debug.Print("CLBLinkList Select All")
-			For i As Integer = 0 To CLBLinkList.Items.Count - 1
-				CLBLinkList.SetItemChecked(i, True)
-			Next
-			SaveLinkScripts()
-		End If
-
-		If CLBEndList.Visible = True Then
-			Debug.Print("CLBEndList Select All")
-			For i As Integer = 0 To CLBEndList.Items.Count - 1
-				CLBEndList.SetItemChecked(i, True)
-			Next
-			SaveEndScripts()
-		End If
-
-		If TCScripts.SelectedIndex = 0 Then
-			CLBStartList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 1 Then
-			CLBModuleList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 2 Then
-			CLBLinkList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 3 Then
-			CLBEndList.Focus()
-		End If
-
-	End Sub
-
-	Private Sub Button6_Click(sender As System.Object, e As System.EventArgs) Handles BTNScriptNone.Click
-		If CLBStartList.Visible = True Then
-			Debug.Print("CLBStartList Select None")
-			For i As Integer = 0 To CLBStartList.Items.Count - 1
-				CLBStartList.SetItemChecked(i, False)
-			Next
-			SaveStartScripts()
-		End If
-
-		If CLBModuleList.Visible = True Then
-			Debug.Print("CLBModuleList Select None")
-			For i As Integer = 0 To CLBModuleList.Items.Count - 1
-				CLBModuleList.SetItemChecked(i, False)
-			Next
-			SaveModuleScripts()
-		End If
-
-		If CLBLinkList.Visible = True Then
-			Debug.Print("CLBLinkList Select None")
-			For i As Integer = 0 To CLBLinkList.Items.Count - 1
-				CLBLinkList.SetItemChecked(i, False)
-			Next
-			SaveLinkScripts()
-		End If
-
-		If CLBEndList.Visible = True Then
-			Debug.Print("CLBEndList Select None")
-			For i As Integer = 0 To CLBEndList.Items.Count - 1
-				CLBEndList.SetItemChecked(i, False)
-			Next
-			SaveEndScripts()
-		End If
-
-		If TCScripts.SelectedIndex = 0 Then
-			CLBStartList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 1 Then
-			CLBModuleList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 2 Then
-			CLBLinkList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 3 Then
-			CLBEndList.Focus()
-		End If
-
-	End Sub
-
-	Private Sub Button9_Click(sender As System.Object, e As System.EventArgs) Handles BTNScriptAvailable.Click
-
-
-		If CLBStartList.Visible = True Then
-
-			For i As Integer = 0 To CLBStartList.Items.Count - 1
-
-				AvailFail = False
-
-				Dim AvailPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Start\" & CLBStartList.Items(i) & ".txt"
-				Dim AvailReader As New StreamReader(AvailPath)
-				AvailList.Clear()
-
-				While AvailReader.Peek <> -1
-					AvailList.Add(AvailReader.ReadLine())
-				End While
-
-				AvailReader.Close()
-				AvailReader.Dispose()
-
-				GetAvailFail()
-
-				If AvailFail = True Then
-					CLBStartList.SetItemChecked(i, False)
-				Else
-					CLBStartList.SetItemChecked(i, True)
-				End If
-
-			Next
-
-			SaveStartScripts()
-
-		End If
-
-
-		If CLBModuleList.Visible = True Then
-
-			For i As Integer = 0 To CLBModuleList.Items.Count - 1
-
-				AvailFail = False
-				Dim AvailPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Modules\" & CLBModuleList.Items(i) & ".txt"
-
-				Dim AvailReader As New StreamReader(AvailPath)
-				AvailList.Clear()
-
-				While AvailReader.Peek <> -1
-					AvailList.Add(AvailReader.ReadLine())
-				End While
-
-				AvailReader.Close()
-				AvailReader.Dispose()
-
-				GetAvailFail()
-
-				If AvailFail = True Then
-					CLBModuleList.SetItemChecked(i, False)
-				Else
-					CLBModuleList.SetItemChecked(i, True)
-				End If
-
-			Next
-
-			SaveModuleScripts()
-
-		End If
-
-		If CLBLinkList.Visible = True Then
-
-			For i As Integer = 0 To CLBLinkList.Items.Count - 1
-
-				AvailFail = False
-
-				Dim AvailPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\Link\" & CLBLinkList.Items(i) & ".txt"
-				Dim AvailReader As New StreamReader(AvailPath)
-				AvailList.Clear()
-
-				While AvailReader.Peek <> -1
-					AvailList.Add(AvailReader.ReadLine())
-				End While
-
-				AvailReader.Close()
-				AvailReader.Dispose()
-
-				GetAvailFail()
-
-				If AvailFail = True Then
-					CLBLinkList.SetItemChecked(i, False)
-				Else
-					CLBLinkList.SetItemChecked(i, True)
-				End If
-
-			Next
-
-			SaveLinkScripts()
-
-		End If
-
-		If CLBEndList.Visible = True Then
-
-			For i As Integer = 0 To CLBEndList.Items.Count - 1
-
-				AvailFail = False
-
-				Dim AvailPath As String = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Stroke\End\" & CLBEndList.Items(i) & ".txt"
-				Dim AvailReader As New StreamReader(AvailPath)
-				AvailList.Clear()
-
-				While AvailReader.Peek <> -1
-					AvailList.Add(AvailReader.ReadLine())
-				End While
-
-				AvailReader.Close()
-				AvailReader.Dispose()
-
-				GetAvailFail()
-
-				If AvailFail = True Then
-					CLBEndList.SetItemChecked(i, False)
-				Else
-					CLBEndList.SetItemChecked(i, True)
-				End If
-
-			Next
-
-			SaveEndScripts()
-
-		End If
-
-		If TCScripts.SelectedIndex = 0 Then
-			CLBStartList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 1 Then
-			CLBModuleList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 2 Then
-			CLBLinkList.Focus()
-		End If
-
-		If TCScripts.SelectedIndex = 3 Then
-			CLBEndList.Focus()
-		End If
-
-
-
+		End Try
+
+		' Unlock Buttons
+		BTNScriptAvailable.Enabled = True
+		BTNScriptNone.Enabled = True
+		BTNScriptAll.Enabled = True
 	End Sub
 
 	Public Sub GetAvailFail()
 		'BUG: This Function is not checking all Commands and their contditions
-
-		For j As Integer = 0 To AvailList.Count - 1
-			If AvailList(j).Contains("@ShowBlogImage") Then
-				If URLFileList.CheckedItems.Count = 0 Then AvailFail = True
-			End If
-			If AvailList(j).Contains("@NewBlogImage") Then
-				If URLFileList.CheckedItems.Count = 0 Then AvailFail = True
-			End If
-			If AvailList(j).Contains("@ShowLocalImage") Then
-				Dim LocalCount As Integer = 0
-				If My.Settings.CBIHardcore = True Then
-					If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
+		Try
+			For j As Integer = 0 To AvailList.Count - 1
+				If AvailList(j).Contains("@ShowBlogImage") Then
+					If URLFileList.CheckedItems.Count = 0 Then AvailFail = True
 				End If
-				If My.Settings.CBISoftcore = True Then
-					If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
+				If AvailList(j).Contains("@NewBlogImage") Then
+					If URLFileList.CheckedItems.Count = 0 Then AvailFail = True
 				End If
-				If My.Settings.CBILesbian = True Then
-					If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
+				If AvailList(j).Contains("@ShowLocalImage") Then
+					Dim LocalCount As Integer = 0
+					If My.Settings.CBIHardcore = True Then
+						If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
+					End If
+					If My.Settings.CBISoftcore = True Then
+						If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
+					End If
+					If My.Settings.CBILesbian = True Then
+						If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
+					End If
+					If My.Settings.CBIBlowjob = True Then
+						If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
+					End If
+					If My.Settings.CBIFemdom = True Then
+						If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
+					End If
+					If My.Settings.CBILezdom = True Then
+						If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
+					End If
+					If My.Settings.CBIHentai = True Then
+						If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
+					End If
+					If My.Settings.CBIGay = True Then
+						If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
+					End If
+					If My.Settings.CBIMaledom = True Then
+						If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
+					End If
+					If My.Settings.CBICaptions = True Then
+						If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
+					End If
+					If My.Settings.CBIGeneral = True Then
+						If Directory.Exists(My.Settings.IGeneral) Then LocalCount += 1
+					End If
+					If LocalCount = 0 Then AvailFail = True
 				End If
-				If My.Settings.CBIBlowjob = True Then
-					If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowImage") Then
+					If URLFileList.CheckedItems.Count = 0 Then AvailFail = True
+					Dim LocalCount As Integer = 0
+					If My.Settings.CBIHardcore = True Then
+						If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
+					End If
+					If My.Settings.CBISoftcore = True Then
+						If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
+					End If
+					If My.Settings.CBILesbian = True Then
+						If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
+					End If
+					If My.Settings.CBIBlowjob = True Then
+						If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
+					End If
+					If My.Settings.CBIFemdom = True Then
+						If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
+					End If
+					If My.Settings.CBILezdom = True Then
+						If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
+					End If
+					If My.Settings.CBIHentai = True Then
+						If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
+					End If
+					If My.Settings.CBIGay = True Then
+						If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
+					End If
+					If My.Settings.CBIMaledom = True Then
+						If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
+					End If
+					If My.Settings.CBICaptions = True Then
+						If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
+					End If
+					If My.Settings.CBIGeneral = True Then
+						If Directory.Exists(My.Settings.IGeneral) Then LocalCount += 1
+					End If
+					If LocalCount = 0 Then AvailFail = True
 				End If
-				If My.Settings.CBIFemdom = True Then
-					If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
+
+				If AvailList(j).Contains("@CBTBalls") Then
+					If CBCBTBalls.Checked = False Then AvailFail = True
 				End If
-				If My.Settings.CBILezdom = True Then
-					If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
+
+				If AvailList(j).Contains("@CBTCock") Then
+					If CBCBTCock.Checked = False Then AvailFail = True
 				End If
-				If My.Settings.CBIHentai = True Then
-					If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
+
+				If AvailList(j).Contains("@CBT") Then
+					If CBCBTCock.Checked = False Then AvailFail = True
+					If CBCBTBalls.Checked = False Then AvailFail = True
 				End If
-				If My.Settings.CBIGay = True Then
-					If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
+
+				If AvailList(j).Contains("@PlayJOIVideo") Then
+					If CBVideoJOI.Checked = False And CBVideoJOID.Checked = False Then AvailFail = True
+					If LblVideoJOITotal.Text = "0" And LblVideoJOITotalD.Text = "0" Then AvailFail = True
+					If CBVideoJOI.Checked = True And Not Directory.Exists(TxbVideoJOI.Text) Then AvailFail = True
+					If CBVideoJOID.Checked = True And Not Directory.Exists(TxbVideoJOID.Text) Then AvailFail = True
 				End If
-				If My.Settings.CBIMaledom = True Then
-					If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
+
+				If AvailList(j).Contains("@PlayCHVideo") Then
+					If CBVideoCH.Checked = False And CBVideoCHD.Checked = False Then AvailFail = True
+					If LblVideoCHTotal.Text = "0" And LblVideoCHTotalD.Text = "0" Then AvailFail = True
+					If CBVideoCH.Checked = True And Not Directory.Exists(TxbVideoCH.Text) Then AvailFail = True
+					If CBVideoCHD.Checked = True And Not Directory.Exists(TxbVideoCHD.Text) Then AvailFail = True
 				End If
-				If My.Settings.CBICaptions = True Then
-					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
+
+				'If AvailList(j).Contains("@TnAFastSlides") Or AvailList(j).Contains("@TnASlowSlides") Or AvailList(j).Contains("@TnASlides") Or AvailList(j).Contains("@CheckTnA") Then
+				'If CBEnableBnB.Checked = False Then AvailFail = True
+				'End If
+
+				If AvailList(j).Contains("@ShowButtImage") Then
+					If My.Settings.CBIButts = True And Not Directory.Exists(My.Settings.LBLButtPath) Then AvailFail = True
+					If ChbImageUrlButts.Checked = True And Not File.Exists(My.Settings.UrlFileButt) Then AvailFail = True
 				End If
-				If My.Settings.CBIGeneral = True Then
-					If Directory.Exists(My.Settings.IGeneral) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowBoobsImage") Then
+					If My.Settings.CBIBoobs = True And Not Directory.Exists(My.Settings.LBLBoobPath) Then AvailFail = True
+					If ChbImageUrlBoobs.Checked = True And Not File.Exists(My.Settings.UrlFileBoobs) Then AvailFail = True
 				End If
-				If LocalCount = 0 Then AvailFail = True
-			End If
 
-			If AvailList(j).Contains("@ShowImage") Then
-				If URLFileList.CheckedItems.Count = 0 Then AvailFail = True
-				Dim LocalCount As Integer = 0
-				If My.Settings.CBIHardcore = True Then
-					If Directory.Exists(My.Settings.IHardcore) Then LocalCount += 1
+				If AvailList(j).Contains("@ShowHardcoreImage") Then
+					If Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Then AvailFail = True
 				End If
-				If My.Settings.CBISoftcore = True Then
-					If Directory.Exists(My.Settings.ISoftcore) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowSoftcoreImage") Then
+					If Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Then AvailFail = True
 				End If
-				If My.Settings.CBILesbian = True Then
-					If Directory.Exists(My.Settings.ILesbian) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowLesbianImage") Then
+					If Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Then AvailFail = True
 				End If
-				If My.Settings.CBIBlowjob = True Then
-					If Directory.Exists(My.Settings.IBlowjob) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowBlowjobImage") Then
+					If Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Then AvailFail = True
 				End If
-				If My.Settings.CBIFemdom = True Then
-					If Directory.Exists(My.Settings.IFemdom) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowFemdomImage") Then
+					If Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Then AvailFail = True
 				End If
-				If My.Settings.CBILezdom = True Then
-					If Directory.Exists(My.Settings.ILezdom) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowLezdomImage") Then
+					If Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Then AvailFail = True
 				End If
-				If My.Settings.CBIHentai = True Then
-					If Directory.Exists(My.Settings.IHentai) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowHentaiImage") Then
+					If Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Then AvailFail = True
 				End If
-				If My.Settings.CBIGay = True Then
-					If Directory.Exists(My.Settings.IGay) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowGayImage") Then
+					If Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Then AvailFail = True
 				End If
-				If My.Settings.CBIMaledom = True Then
-					If Directory.Exists(My.Settings.IMaledom) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowMaledomImage") Then
+					If Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Then AvailFail = True
 				End If
-				If My.Settings.CBICaptions = True Then
-					If Directory.Exists(My.Settings.ICaptions) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowCaptionsImage") Then
+					If Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Then AvailFail = True
 				End If
-				If My.Settings.CBIGeneral = True Then
-					If Directory.Exists(My.Settings.IGeneral) Then LocalCount += 1
+
+				If AvailList(j).Contains("@ShowGeneralImage") Then
+					If Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Then AvailFail = True
 				End If
-				If LocalCount = 0 Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@CBTBalls") Then
-				If CBCBTBalls.Checked = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@CBTCock") Then
-				If CBCBTCock.Checked = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@CBT") Then
-				If CBCBTCock.Checked = False Then AvailFail = True
-				If CBCBTBalls.Checked = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@PlayJOIVideo") Then
-				If CBVideoJOI.Checked = False And CBVideoJOID.Checked = False Then AvailFail = True
-				If LblVideoJOITotal.Text = "0" And LblVideoJOITotalD.Text = "0" Then AvailFail = True
-				If CBVideoJOI.Checked = True And Not Directory.Exists(TxbVideoJOI.Text) Then AvailFail = True
-				If CBVideoJOID.Checked = True And Not Directory.Exists(TxbVideoJOID.Text) Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@PlayCHVideo") Then
-				If CBVideoCH.Checked = False And CBVideoCHD.Checked = False Then AvailFail = True
-				If LblVideoCHTotal.Text = "0" And LblVideoCHTotalD.Text = "0" Then AvailFail = True
-				If CBVideoCH.Checked = True And Not Directory.Exists(TxbVideoCH.Text) Then AvailFail = True
-				If CBVideoCHD.Checked = True And Not Directory.Exists(TxbVideoCHD.Text) Then AvailFail = True
-			End If
-
-			'If AvailList(j).Contains("@TnAFastSlides") Or AvailList(j).Contains("@TnASlowSlides") Or AvailList(j).Contains("@TnASlides") Or AvailList(j).Contains("@CheckTnA") Then
-			'If CBEnableBnB.Checked = False Then AvailFail = True
-			'End If
-
-			If AvailList(j).Contains("@ShowButtImage") Then
-				If My.Settings.CBIButts = True And Not Directory.Exists(My.Settings.LBLButtPath) Then AvailFail = True
-				If ChbImageUrlButts.Checked = True And Not File.Exists(My.Settings.UrlFileButt) Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowBoobsImage") Then
-				If My.Settings.CBIBoobs = True And Not Directory.Exists(My.Settings.LBLBoobPath) Then AvailFail = True
-				If ChbImageUrlBoobs.Checked = True And Not File.Exists(My.Settings.UrlFileBoobs) Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowHardcoreImage") Then
-				If Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowSoftcoreImage") Then
-				If Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowLesbianImage") Then
-				If Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowBlowjobImage") Then
-				If Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowFemdomImage") Then
-				If Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowLezdomImage") Then
-				If Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowHentaiImage") Then
-				If Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowGayImage") Then
-				If Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowMaledomImage") Then
-				If Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowCaptionsImage") Then
-				If Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Then AvailFail = True
-			End If
-
-			If AvailList(j).Contains("@ShowGeneralImage") Then
-				If Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Then AvailFail = True
-			End If
 
 
 
-			If AvailList(j).Contains("@ShowTaggedImage") And AvailList(j).Contains("@Tag") Then
+				If AvailList(j).Contains("@ShowTaggedImage") And AvailList(j).Contains("@Tag") Then
 
-				Dim LocalTagImageList As New List(Of String)
-				LocalTagImageList.Clear()
+					Dim LocalTagImageList As New List(Of String)
+					LocalTagImageList.Clear()
 
-				If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
-					Dim LocalReader As New StreamReader(Application.StartupPath & "\Images\System\LocalImageTags.txt")
-					While LocalReader.Peek <> -1
-						LocalTagImageList.Add(LocalReader.ReadLine())
-					End While
-					LocalReader.Close()
-					LocalReader.Dispose()
-					For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-						If LocalTagImageList(k) = "" Or LocalTagImageList(k) Is Nothing Then LocalTagImageList.RemoveAt(k)
+					If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+						Dim LocalReader As New StreamReader(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+						While LocalReader.Peek <> -1
+							LocalTagImageList.Add(LocalReader.ReadLine())
+						End While
+						LocalReader.Close()
+						LocalReader.Dispose()
+						For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+							If LocalTagImageList(k) = "" Or LocalTagImageList(k) Is Nothing Then LocalTagImageList.RemoveAt(k)
+						Next
+					End If
+
+					Dim TagCount As Integer = 0
+
+					Dim TSplit As String() = Split(AvailList(j))
+					For m As Integer = 0 To TSplit.Length - 1
+						If TSplit(m).Contains("@Tag") Then
+							Dim TString As String = TSplit(m).Replace("@Tag", "")
+							For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
+								If LocalTagImageList(k).Contains(TString) Then TagCount += 1
+							Next
+							If TagCount = 0 Then
+								AvailFail = True
+							End If
+							TagCount = 0
+						End If
 					Next
 				End If
 
-				Dim TagCount As Integer = 0
-
-				Dim TSplit As String() = Split(AvailList(j))
-				For m As Integer = 0 To TSplit.Length - 1
-					If TSplit(m).Contains("@Tag") Then
-						Dim TString As String = TSplit(m).Replace("@Tag", "")
-						For k As Integer = LocalTagImageList.Count - 1 To 0 Step -1
-							If LocalTagImageList(k).Contains(TString) Then TagCount += 1
-						Next
-						If TagCount = 0 Then
-							AvailFail = True
-						End If
-						TagCount = 0
-					End If
-				Next
-			End If
 
 
+				If AvailList(j).Contains("@ShowTaggedImage") And Not AvailList(j).Contains("@Tag") Then
+					If Not File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then AvailFail = True
+				End If
 
-			If AvailList(j).Contains("@ShowTaggedImage") And Not AvailList(j).Contains("@Tag") Then
-				If Not File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then AvailFail = True
-			End If
+				If AvailList(j).Contains("@CheckVideo") Then
+					Form1.ssh.VideoCheck = True
+					Form1.RandomVideo()
+					If Form1.ssh.NoVideo = True Then AvailFail = True
+					Form1.ssh.VideoCheck = False
+					Form1.ssh.NoVideo = False
+				End If
 
-			If AvailList(j).Contains("@CheckVideo") Then
-				Form1.ssh.VideoCheck = True
-				Form1.RandomVideo()
-				If Form1.ssh.NoVideo = True Then AvailFail = True
-				Form1.ssh.VideoCheck = False
-				Form1.ssh.NoVideo = False
-			End If
+				If AvailList(j).Contains("@PlayCensorshipSucks") Or AvailList(j).Contains("@PlayAvoidTheEdge") Or AvailList(j).Contains("@PlayRedLightGreenLight") Then
+					Form1.ssh.VideoCheck = True
+					Form1.ssh.NoSpecialVideo = True
+					Form1.RandomVideo()
+					If Form1.ssh.NoVideo = True Then AvailFail = True
+					Form1.ssh.VideoCheck = False
+					Form1.ssh.NoSpecialVideo = False
+					Form1.ssh.NoVideo = False
+				End If
 
-			If AvailList(j).Contains("@PlayCensorshipSucks") Or AvailList(j).Contains("@PlayAvoidTheEdge") Or AvailList(j).Contains("@PlayRedLightGreenLight") Then
-				Form1.ssh.VideoCheck = True
-				Form1.ssh.NoSpecialVideo = True
-				Form1.RandomVideo()
-				If Form1.ssh.NoVideo = True Then AvailFail = True
-				Form1.ssh.VideoCheck = False
-				Form1.ssh.NoSpecialVideo = False
-				Form1.ssh.NoVideo = False
-			End If
+				If AvailList(j).Contains("@ChastityOn") Or AvailList(j).Contains("@ChastityOff") Then
+					If CBOwnChastity.Checked = False Then AvailFail = True
+				End If
 
-			If AvailList(j).Contains("@ChastityOn") Or AvailList(j).Contains("@ChastityOff") Then
-				If CBOwnChastity.Checked = False Then AvailFail = True
-			End If
+				If AvailList(j).Contains("@DeleteLocalImage") Then
+					If CBDomDel.Checked = False Then AvailFail = True
+				End If
 
-			If AvailList(j).Contains("@DeleteLocalImage") Then
-				If CBDomDel.Checked = False Then AvailFail = True
-			End If
+				If AvailList(j).Contains("@VitalSubAssignment") Then
+					If Form1.CBVitalSub.Checked = False Or Form1.CBVitalSubDomTask.Checked = False Then AvailFail = True
+				End If
 
-			If AvailList(j).Contains("@VitalSubAssignment") Then
-				If Form1.CBVitalSub.Checked = False Or Form1.CBVitalSubDomTask.Checked = False Then AvailFail = True
-			End If
+			Next
 
-		Next
-
-
+		Catch ex As Exception
+			Throw
+		End Try
 	End Sub
 
 #End Region ' Scripts

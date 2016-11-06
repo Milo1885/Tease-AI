@@ -565,6 +565,10 @@ Public Class SessionState
 #End Region ' Only for Serialization
 
 #End Region ' DataSection
+
+	<NonSerialized> Friend Files As New FileClass(Me)
+	<NonSerialized> Friend Folders As New FoldersClass(Me)
+
 	<NonSerialized> Dim ActivationForm As Form1
 
 #Region "------------------------------------- Constructors----------------------------------------------"

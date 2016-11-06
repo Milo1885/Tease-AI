@@ -17810,24 +17810,20 @@ restartInstantly:
 	End Sub
 
 	Private Sub dompersonalitycombobox_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles dompersonalitycombobox.SelectedIndexChanged
-		If FormLoading = False Then
+		If FormLoading = True Then Exit Sub
 
+		Try
 			My.Settings.DomPersonality = dompersonalitycombobox.Text
 
 			FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
 
-			Try
-				FrmSettings.InitializeStartScripts()
-				FrmSettings.InitializeModuleScripts()
-				FrmSettings.InitializeLinkScripts()
-				FrmSettings.InitializeEndScripts()
-			Catch
-			End Try
+			ssh.DomPersonality = dompersonalitycombobox.Text
 
-			FrmSettings.TCScripts.SelectTab(3)
-			FrmSettings.TCScripts.SelectTab(2)
-			FrmSettings.TCScripts.SelectTab(1)
-			FrmSettings.TCScripts.SelectTab(0)
+			FrmSettings.LoadStartScripts()
+			FrmSettings.LoadModuleScripts()
+			FrmSettings.LoadLinkScripts()
+			FrmSettings.LoadEndScripts()
+
 
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
 				Dim ContactList As New List(Of String)
@@ -17844,8 +17840,13 @@ restartInstantly:
 			Form9.LBLPersonality.Text = dompersonalitycombobox.Text
 
 			Debug.Print("Personality Changed")
-
-		End If
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Error on changing Personality")
+			MessageBox.Show(ex.Message, "Error on changing Personality", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+		End Try
 	End Sub
 
 	Private Sub SuspendSessionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles SuspendSessionToolStripMenuItem.Click
