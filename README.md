@@ -30,13 +30,14 @@ Bugfixes:
 	Goto was unable to jump to the first line of a file, when a question was asked.
 	Card images were saved in different sizes, when using drag-drop or file dialog.
 	@DommeLevel1-5 didn't filter correct in vocabulary files.
-	@Chance##()-Command now gets cleaned from the line correctly. by Pepsifreak
-	@FollowUp##()-Command now gets cleaned from the line correctly, also stopped the followup message from still partially showing in "failure" cases. by Pepsifreak
+	@Chance##()-Command now gets cleaned from the line correctly.
+	@FollowUp##()-Command now gets cleaned from the line correctly, also stopped the followup message from still partially showing in "failure" cases.
 	Recent slideshow folders are now really checked on start-up and missing folders removed.
 	Dom Mood settings were ignored.
 	Fixed issue where a domme images was displayed, when a contact was responding.
 	Fixed issue, where slideshows continued after @SlideshowOff. Now the CustomSlideshow-Timer checks if he is supposed to be running.
 	Fixed command @GotoSlideshow. Now you can jump to a specific line based on the current slideshow-image.
+	Program now attempts to separate filters from a line, fixing issues where Commands could incorrectly get interpreted as Filters.
 
 Miscellaneous:
 
