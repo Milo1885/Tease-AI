@@ -13302,9 +13302,9 @@ VTSkip:
 	''' <param name="Temp">If set to true, the flag is temporary set otherwise permanent.</param>
 	Friend Sub CreateFlag(ByVal FlagName As String, Optional ByVal Temp As Boolean = False)
 		If Temp = False Then
-			FlagName = ssh.PersonalityFlagPath & FlagName
+			FlagName = ssh.Folders.Flags & FlagName
 		Else
-			FlagName = ssh.PersonalityFlagTempPath & FlagName
+			FlagName = ssh.Folders.TempFlags & FlagName
 		End If
 
 		Using fs As New FileStream(FlagName, FileMode.Create) : End Using
@@ -13314,11 +13314,11 @@ VTSkip:
 	''' <param name="FlagName">The name of the flag to delete.</param>
 	Friend Sub DeleteFlag(ByVal FlagName As String)
 
-		If File.Exists(ssh.PersonalityFlagPath & FlagName) Then _
-			File.Delete(ssh.PersonalityFlagPath & FlagName)
+		If File.Exists(ssh.Folders.Flags & FlagName) Then _
+			File.Delete(ssh.Folders.Flags & FlagName)
 
-		If File.Exists(ssh.PersonalityFlagTempPath & FlagName) Then _
-			File.Delete(ssh.PersonalityFlagTempPath & FlagName)
+		If File.Exists(ssh.Folders.TempFlags & FlagName) Then _
+			File.Delete(ssh.Folders.TempFlags & FlagName)
 
 	End Sub
 	''' <summary> Checks if the given flag is set, permanent and temporary.</summary>
@@ -13326,8 +13326,8 @@ VTSkip:
 	''' <returns>Returns true if a permanent or temporary flag with the name is found.</returns>
 	Friend Function FlagExists(ByVal FlagName As String) As Boolean
 
-		If File.Exists(ssh.PersonalityFlagPath & FlagName) OrElse
-			File.Exists(ssh.PersonalityFlagTempPath & FlagName) Then
+		If File.Exists(ssh.Folders.Flags & FlagName) OrElse
+			File.Exists(ssh.Folders.TempFlags & FlagName) Then
 			Return True
 		Else
 			Return False
