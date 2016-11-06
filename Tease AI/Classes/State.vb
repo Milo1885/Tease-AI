@@ -1,15 +1,32 @@
-﻿Option Explicit On
+﻿'===========================================================================================
+'
+'                                   SessionState-Class
+'
+'
+' This File contains a Class to store all nessesary informations about a session.
+'
+' This Class is Version-Tolerant Serializable!
+'
+' Please take a look at: https://msdn.microsoft.com/en-us/library/ms229752(v=vs.110).aspx
+'===========================================================================================
+Option Explicit On
 Option Strict On
 
 Imports System.ComponentModel
 Imports System.Drawing.Design
 Imports System.IO
+Imports System.Runtime.Serialization
 
 ''' <summary>
 ''' Class to store/serialize and deserialize all nessecary session(!) informations.
 ''' </summary>
 ''' <remarks>
-''' After loading from file, the object needs to be set and activated! 
+''' After loading from file, the object needs to be set and activated!  
+''' <para></para>
+''' To ensure compatiblity between versions, new added fields have to be marked as 
+''' <see cref="OptionalFieldAttribute"/>. The inital value if an old version is loaded, 
+''' without that field, has to be set in <see cref="SessionState.onDeserialized_FixFields(StreamingContext)"/>.
+''' For more inforations take a look at: https://msdn.microsoft.com/en-us/library/ms733734(v=vs.110).aspx
 ''' </remarks>
 <Serializable>
 Public Class SessionState
@@ -566,8 +583,8 @@ Public Class SessionState
 
 #End Region ' DataSection
 
-	<NonSerialized> Friend Files As New FileClass(Me)
-	<NonSerialized> Friend Folders As New FoldersClass(Me)
+	<NonSerialized> <OptionalField> Friend Files As New FileClass(Me)
+	<NonSerialized> <OptionalField> Friend Folders As New FoldersClass(Me)
 
 	<NonSerialized> Dim ActivationForm As Form1
 
@@ -639,49 +656,25 @@ Public Class SessionState
 		Return DirectCast(Me.MemberwiseClone(), SessionState)
 	End Function
 
-#Region "---------------------------------------- Paths -------------------------------------------------"
-	''' <summary>
-	''' Returns the Path for the selected personality. Ends with Backslash!
-	''' </summary>
-	''' <returns>The Path for the selected personality. Ends with Backslash!</returns>
-	Friend ReadOnly Property PersonalityPath As String
-		Get
-			Return String.Format("{0}\Scripts\{1}\",
-									  Path.GetDirectoryName(Reflection.Assembly.GetExecutingAssembly.Location),
-									  DomPersonality)
-		End Get
-	End Property
-	''' <summary>
-	''' Returns the Path for the selected personalities flags. Ends with Backslash!
-	''' </summary>
-	''' <returns>The Path for the selected personalities flags. Ends with Backslash!</returns>
-	Friend ReadOnly Property PersonalityFlagPath As String
-		Get
-			Return String.Format("{0}System\Flags\", PersonalityPath)
-		End Get
-	End Property
-	''' <summary>
-	''' Returns the Path for the selected personalities temporary flags. Ends with Backslash!
-	''' </summary>
-	''' <returns>The Path for the selected personalities temporary flags. Ends with Backslash!</returns>
-	Friend ReadOnly Property PersonalityFlagTempPath As String
-		Get
-			Return String.Format("{0}Temp\", PersonalityFlagPath)
-		End Get
-	End Property
-	''' <summary>
-	''' Returns the Path for the selected personalities variables. Ends with Backslash!
-	''' </summary>
-	''' <returns>The Path for the selected personalities variables. Ends with Backslash!</returns>
-	Friend ReadOnly Property PersonalityVariablesPath As String
-		Get
-			Return String.Format("{0}System\Variables\", PersonalityPath)
-		End Get
-	End Property
+#Region "--------------------------------- Serialization Callbacks --------------------------------------"
 
-#End Region ' Paths
+	''' <summary>
+	''' This Method is started after deserialization. It is used to fix issues with optional fields.
+	''' To ensure future compatiblity, all additional added members in SessioState-Class have to be marked
+	''' as optional and initialized using this method.
+	''' </summary>
+	''' <param name="sc"></param>
+	<OnDeserialized>
+	Sub onDeserialized_FixFields(sc As StreamingContext)
+		' Marked as <NonSerialized> <OptionalField> have to be initialized on every deserialization.
+		If Files Is Nothing Then Files = New FileClass(Me)
+		If Folders Is Nothing Then Folders = New FoldersClass(Me)
 
-#Region "------------------------------------- Get/Set Form1 Data ---------------------------------------"
+	End Sub
+
+#End Region
+
+#Region "----------------------------------- Get/Set Form1 Data -----------------------------------------"
 
 	''' <summary>
 	''' Stores a running session to disk. 
@@ -790,8 +783,8 @@ Public Class SessionState
 
 			serialized_Flags.Clear()
 
-			If Directory.Exists(PersonalityFlagPath) Then
-				For Each fn As String In Directory.GetFiles(PersonalityFlagPath)
+			If Directory.Exists(Folders.Flags) Then
+				For Each fn As String In Directory.GetFiles(Folders.Flags)
 					serialized_Flags.Add(Path.GetFileName(fn))
 				Next
 			End If
@@ -801,8 +794,8 @@ Public Class SessionState
 							serialized_FlagsTemp = New List(Of String)
 			serialized_FlagsTemp.Clear()
 
-			If Directory.Exists(PersonalityFlagTempPath) Then
-				For Each fn As String In Directory.GetFiles(PersonalityFlagTempPath)
+			If Directory.Exists(Folders.TempFlags) Then
+				For Each fn As String In Directory.GetFiles(Folders.TempFlags)
 					serialized_FlagsTemp.Add(Path.GetFileName(fn))
 				Next
 			End If
@@ -815,8 +808,8 @@ Public Class SessionState
 
 			serialized_Variables.Clear()
 
-			If Directory.Exists(PersonalityVariablesPath) Then
-				For Each fn As String In Directory.GetFiles(PersonalityVariablesPath)
+			If Directory.Exists(Folders.Variables) Then
+				For Each fn As String In Directory.GetFiles(Folders.Variables)
 					Dim val As String = TxtReadLine(fn)
 					serialized_Variables.Add(Path.GetFileName(fn), val)
 				Next
@@ -901,16 +894,16 @@ Public Class SessionState
 			'							Restore Variables 
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			If serialized_Variables.Count > 0 Then
-				If Directory.Exists(PersonalityVariablesPath) = False Then
-					Directory.CreateDirectory(PersonalityVariablesPath)
+				If Directory.Exists(Folders.Variables) = False Then
+					Directory.CreateDirectory(Folders.Variables)
 				Else
-					For Each fn As String In Directory.GetFiles(PersonalityVariablesPath)
+					For Each fn As String In Directory.GetFiles(Folders.Variables)
 						File.Delete(fn)
 					Next
 				End If
 
 				For Each fn As String In serialized_Variables.Keys
-					My.Computer.FileSystem.WriteAllText(PersonalityVariablesPath & fn,
+					My.Computer.FileSystem.WriteAllText(Folders.Variables & fn,
 													serialized_Variables(fn), False)
 				Next
 			End If
@@ -919,33 +912,33 @@ Public Class SessionState
 			'							Restore flags 
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			If serialized_Flags.Count > 0 Then
-				If Directory.Exists(PersonalityFlagPath) = False Then
-					Directory.CreateDirectory(PersonalityFlagPath)
+				If Directory.Exists(Folders.Flags) = False Then
+					Directory.CreateDirectory(Folders.Flags)
 				Else
-					For Each fn As String In Directory.GetFiles(PersonalityFlagPath)
+					For Each fn As String In Directory.GetFiles(Folders.Flags)
 						File.Delete(fn)
 					Next
 				End If
 
 				For Each fn As String In serialized_Flags
-					Using fs As New FileStream(PersonalityFlagPath & fn,
+					Using fs As New FileStream(Folders.Flags & fn,
 											   FileMode.Create) : End Using
 				Next
 			End If
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'						Restore temporary flags 
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			If Directory.Exists(PersonalityFlagTempPath) = False Then
-				Directory.CreateDirectory(PersonalityFlagTempPath)
+			If Directory.Exists(Folders.TempFlags) = False Then
+				Directory.CreateDirectory(Folders.TempFlags)
 			Else
-				For Each fn As String In Directory.GetFiles(PersonalityFlagTempPath)
+				For Each fn As String In Directory.GetFiles(Folders.TempFlags)
 					File.Delete(fn)
 				Next
 			End If
 
 			If serialized_FlagsTemp.Count > 0 Then
 				For Each fn As String In serialized_FlagsTemp
-					Using fs As New FileStream(PersonalityFlagTempPath & fn,
+					Using fs As New FileStream(Folders.TempFlags & fn,
 											   FileMode.Create) : End Using
 				Next
 			End If
@@ -989,6 +982,10 @@ Public Class SessionState
 			ElseIf serialized_WMP_Playstate = 3 Then
 				.DomWMP.Ctlcontrols.play()
 			End If
+
+			' Hide Cencorshipbar , if no game is running 
+			If CensorshipGame = True Or CensorshipTimer_enabled = False Then .CensorshipBar.Visible = False
+
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'							Set Chat and StrokePace
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
