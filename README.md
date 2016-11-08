@@ -38,6 +38,7 @@ Bugfixes:
 	Fixed issue, where slideshows continued after @SlideshowOff. Now the CustomSlideshow-Timer checks if he is supposed to be running.
 	Fixed command @GotoSlideshow. Now you can jump to a specific line based on the current slideshow-image.
 	Program now attempts to separate filters from a line, fixing issues where Commands could incorrectly get interpreted as Filters.
+	Fixed issue of loading CheckedListBox-States when swapping Personalities. Now there should be no need to delete StartLCheckist.cld EndCheckList.cld, LinkCheckedList.cld and EndCheckedList.cld anymore. Swapping personalities, editing, removing and renaming scriptfiles on runtime is possible.
 
 Miscellaneous:
 
@@ -49,7 +50,8 @@ Miscellaneous:
 		Now all necessary data is stored into a single binary *.save file. This includes all Variables, Flags, Slideshows, TimerStates and regular Data. By Holding down the control key while clicking suspend or resume the user is asked for a custom file to save to or load from.
 	Reworked Code to Display Images.
 	Added a ToolstripItem in Debug menu, to start Timer1, if he is stopped. This could probably fix some or eventually all "Script-Freeze-Crashs". But this has to be tested. So if your Session freezes goto: Debug->Timers->Start Timer 1. Please let us know, if it worked.
-	Reworked custom Slideshow. The slideshow will pick now random images from random genres. This way an unbalanced amount of images doesn't matter any more. All genres have the same chances, even if they are outnumbered by a million times. There is also a check if the last image was of the same genre. If that's the case, it will randomly use the same genre or tries to pick another one. 
+	Reworked custom Slideshow. The slideshow will pick now random images from random genres (Only the ones defined in @Slideshow().). This way an unbalanced amount of images doesn't matter any more. All genres have the same chances, even if they are outnumbered by a million times. There is also a check if the last image was of the same genre. If that's the case, it will randomly use the same genre or tries to pick another one. 
+
 
 
 # Changelog - Patch 54.4.0
