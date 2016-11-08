@@ -14153,20 +14153,19 @@ SkipTextedTags:
 	Public Function GetFilter(ByVal FilterString As String, Optional ByVal Linear As Boolean = False) As Boolean
 
 		Dim FilterList As String()
-		Dim FilterLength As Integer = 0
 
 		FilterList = FilterString.Split(" ")
+		FilterString = ""
 
 		For f As Integer = 0 To FilterList.Count - 1
 			If Not FilterList(f).StartsWith("@") Or FilterList(f).Contains("@NullResponse") Then
 				Exit For
 			End If
 
-			FilterLength += FilterList(f).Length + 1
+			FilterString = FilterString & FilterList(f) & " "
 		Next
 
-		If FilterLength = 0 Then Return True
-		FilterString = FilterString.Substring(0, FilterLength)
+		If FilterString = "" Then Return True
 
 		If FilterString.ToLower.Contains("@crazy") And FrmSettings.crazyCheckBox.Checked = False Then Return False
 		If FilterString.ToLower.Contains("@vulgar") And FrmSettings.vulgarCheckBox.Checked = False Then Return False
