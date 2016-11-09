@@ -1258,9 +1258,6 @@
   <metadata name="AvoidTheEdgeTaunts.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1025, 95</value>
   </metadata>
-  <metadata name="AudibleMetronome.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>538, 56</value>
-  </metadata>
   <metadata name="CustomSlideshowTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>821, 56</value>
   </metadata>

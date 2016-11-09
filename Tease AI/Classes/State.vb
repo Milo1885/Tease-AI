@@ -696,7 +696,6 @@ Public Class SessionState
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'							Get Timer EnableStates
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			AudibleMetronome_enabled = .AudibleMetronome.Enabled
 			AvoidTheEdge_enabled = .AvoidTheEdge.Enabled
 			AvoidTheEdgeResume_enabled = .AvoidTheEdgeResume.Enabled
 			AvoidTheEdgeTaunts_enabled = .AvoidTheEdgeTaunts.Enabled
@@ -729,7 +728,6 @@ Public Class SessionState
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'								Get Timer Intervals
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			AudibleMetronome_Interval = .AudibleMetronome.Interval
 			AvoidTheEdge_Interval = .AvoidTheEdge.Interval
 			AvoidTheEdgeResume_Interval = .AvoidTheEdgeResume.Interval
 			AvoidTheEdgeTaunts_Interval = .AvoidTheEdgeTaunts.Interval
@@ -834,7 +832,6 @@ Public Class SessionState
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'							Disable Timers to avoid Exceptions
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			.AudibleMetronome.Enabled = False
 			.AvoidTheEdge.Enabled = False
 			.AvoidTheEdgeResume.Enabled = False
 			.AvoidTheEdgeTaunts.Enabled = False
@@ -992,7 +989,6 @@ Public Class SessionState
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'								Set Timer Intervals
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			.AudibleMetronome.Interval = AudibleMetronome_Interval
 			.AvoidTheEdge.Interval = AvoidTheEdge_Interval
 			.AvoidTheEdgeResume.Interval = AvoidTheEdgeResume_Interval
 			.AvoidTheEdgeTaunts.Interval = AvoidTheEdgeTaunts_Interval
@@ -1026,7 +1022,6 @@ Public Class SessionState
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'							Set Timer EnableStates
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			.AudibleMetronome.Enabled = AudibleMetronome_enabled
 			.AvoidTheEdge.Enabled = AvoidTheEdge_enabled
 			.AvoidTheEdgeResume.Enabled = AvoidTheEdgeResume_enabled
 			.AvoidTheEdgeTaunts.Enabled = AvoidTheEdgeTaunts_enabled

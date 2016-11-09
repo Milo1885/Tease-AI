@@ -388,7 +388,6 @@ Partial Class Form1
 		Me.TeaseTimer = New Tease_AI.teaseAI_Timer()
 		Me.RLGLTauntTimer = New Tease_AI.teaseAI_Timer()
 		Me.AvoidTheEdgeTaunts = New Tease_AI.teaseAI_Timer()
-		Me.AudibleMetronome = New Tease_AI.teaseAI_Timer()
 		Me.CustomSlideshowTimer = New Tease_AI.teaseAI_Timer()
 		Me.Contact1Timer = New Tease_AI.teaseAI_Timer()
 		Me.Contact2Timer = New Tease_AI.teaseAI_Timer()
@@ -4051,10 +4050,6 @@ Partial Class Form1
 		'
 		Me.AvoidTheEdgeTaunts.Interval = 1000
 		'
-		'AudibleMetronome
-		'
-		Me.AudibleMetronome.Interval = 30
-		'
 		'CustomSlideshowTimer
 		'
 		Me.CustomSlideshowTimer.Interval = 1000
@@ -4242,7 +4237,6 @@ Partial Class Form1
 	Friend WithEvents PicStripTSMIlikeImage As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents PicStripTSMIdislikeImage As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents PicStripTSMIremoveFromURL As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents AudibleMetronome As Tease_AI.teaseAI_Timer
 	Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
 	Friend WithEvents PicStripTSMIcopyImageLocation As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents CustomSlideshowTimer As Tease_AI.teaseAI_Timer
