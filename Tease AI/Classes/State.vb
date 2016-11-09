@@ -134,8 +134,6 @@ Public Class SessionState
 
 	Public Property EdgeTauntInt As Integer
 
-	Public Property DelayTick As Integer
-
 	Public Property DomTypeCheck As Boolean
 	Public Property TypeToggle As Boolean
 	Public Property IsTyping As Boolean
@@ -214,7 +212,6 @@ Public Class SessionState
 	<Category("Glitter")> Public Property UpdateStageTick As Integer
 	<Category("Glitter")> Public Property StatusText As String
 	<Category("Glitter")> Public Property ContactNumber As Integer
-	<Category("Glitter")> Public Property ContactTick As Integer
 
 	<Category("Glitter")> Public Property StatusText1 As String
 	<Category("Glitter")> Public Property StatusText2 As String
@@ -707,9 +704,7 @@ Public Class SessionState
 			Contact1Timer_enabled = .Contact1Timer.Enabled
 			Contact2Timer_enabled = .Contact2Timer.Enabled
 			Contact3Timer_enabled = .Contact3Timer.Enabled
-			ContactTimer_enabled = .ContactTimer.Enabled
 			CustomSlideshowTimer_enabled = .CustomSlideshowTimer.Enabled
-			DelayTimer_enabled = .DelayTimer.Enabled
 			EdgeCountTimer_enabled = .EdgeCountTimer.Enabled
 			EdgeTauntTimer_enabled = .EdgeTauntTimer.Enabled
 			HoldEdgeTauntTimer_enabled = .HoldEdgeTauntTimer.Enabled
@@ -742,9 +737,7 @@ Public Class SessionState
 			Contact1Timer_Interval = .Contact1Timer.Interval
 			Contact2Timer_Interval = .Contact2Timer.Interval
 			Contact3Timer_Interval = .Contact3Timer.Interval
-			ContactTimer_Interval = .ContactTimer.Interval
 			CustomSlideshowTimer_Interval = .CustomSlideshowTimer.Interval
-			DelayTimer_Interval = .DelayTimer.Interval
 			EdgeCountTimer_Interval = .EdgeCountTimer.Interval
 			EdgeTauntTimer_Interval = .EdgeTauntTimer.Interval
 			HoldEdgeTauntTimer_Interval = .HoldEdgeTauntTimer.Interval
@@ -849,9 +842,7 @@ Public Class SessionState
 			.Contact1Timer.Enabled = False
 			.Contact2Timer.Enabled = False
 			.Contact3Timer.Enabled = False
-			.ContactTimer.Enabled = False
 			.CustomSlideshowTimer.Enabled = False
-			.DelayTimer.Enabled = False
 			.EdgeCountTimer.Enabled = False
 			.EdgeTauntTimer.Enabled = False
 			.HoldEdgeTauntTimer.Enabled = False
@@ -1009,9 +1000,7 @@ Public Class SessionState
 			.Contact1Timer.Interval = Contact1Timer_Interval
 			.Contact2Timer.Interval = Contact2Timer_Interval
 			.Contact3Timer.Interval = Contact3Timer_Interval
-			.ContactTimer.Interval = ContactTimer_Interval
 			.CustomSlideshowTimer.Interval = CustomSlideshowTimer_Interval
-			.DelayTimer.Interval = DelayTimer_Interval
 			.EdgeCountTimer.Interval = EdgeCountTimer_Interval
 			.EdgeTauntTimer.Interval = EdgeTauntTimer_Interval
 			.HoldEdgeTauntTimer.Interval = HoldEdgeTauntTimer_Interval
@@ -1045,9 +1034,7 @@ Public Class SessionState
 			.Contact1Timer.Enabled = Contact1Timer_enabled
 			.Contact2Timer.Enabled = Contact2Timer_enabled
 			.Contact3Timer.Enabled = Contact3Timer_enabled
-			.ContactTimer.Enabled = ContactTimer_enabled
 			.CustomSlideshowTimer.Enabled = CustomSlideshowTimer_enabled
-			.DelayTimer.Enabled = DelayTimer_enabled
 			.EdgeCountTimer.Enabled = EdgeCountTimer_enabled
 			.EdgeTauntTimer.Enabled = EdgeTauntTimer_enabled
 			.HoldEdgeTauntTimer.Enabled = HoldEdgeTauntTimer_enabled
