@@ -398,7 +398,6 @@ Partial Class Form1
 		Me.WMPTimer = New Tease_AI.teaseAI_Timer()
 		Me.DommeTimer = New Tease_AI.teaseAI_Timer()
 		Me.TeaseAIClock = New Tease_AI.teaseAI_Timer()
-		Me.tmrResize = New Tease_AI.teaseAI_Timer()
 		Me.TimeoutTimer = New Tease_AI.teaseAI_Timer()
 		Me.VideoTimer = New Tease_AI.teaseAI_Timer()
 		Me.MultipleEdgesTimer = New Tease_AI.teaseAI_Timer()
@@ -4094,10 +4093,6 @@ Partial Class Form1
 		'
 		Me.TeaseAIClock.Interval = 1000
 		'
-		'tmrResize
-		'
-		Me.tmrResize.Interval = 250
-		'
 		'TimeoutTimer
 		'
 		Me.TimeoutTimer.Interval = 1000
@@ -4285,7 +4280,6 @@ Partial Class Form1
 	Friend WithEvents LBLTime As System.Windows.Forms.Label
 	Friend WithEvents LBLDate As System.Windows.Forms.Label
 	Friend WithEvents LBLAMPM As System.Windows.Forms.Label
-	Friend WithEvents tmrResize As Tease_AI.teaseAI_Timer
 	Friend WithEvents MenuStrip2 As System.Windows.Forms.MenuStrip
 	Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents AppsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
