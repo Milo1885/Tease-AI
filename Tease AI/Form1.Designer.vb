@@ -87,7 +87,6 @@ Partial Class Form1
 		Me.GetColor = New System.Windows.Forms.ColorDialog()
 		Me.sendButton = New System.Windows.Forms.Button()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-		Me.WebImageFileDialog = New System.Windows.Forms.OpenFileDialog()
 		Me.PNLFileTransfer = New System.Windows.Forms.Panel()
 		Me.PictureBox11 = New System.Windows.Forms.PictureBox()
 		Me.BTNFileTransferOpen = New System.Windows.Forms.Button()
@@ -1283,11 +1282,6 @@ Partial Class Form1
 		Me.sendButton.TabIndex = 147
 		Me.sendButton.Text = "SEND"
 		Me.sendButton.UseVisualStyleBackColor = False
-		'
-		'WebImageFileDialog
-		'
-		Me.WebImageFileDialog.Filter = "TXT Files (*.txt)|*.txt"
-		Me.WebImageFileDialog.Title = "Please select an Image Blog URL File"
 		'
 		'PNLFileTransfer
 		'
@@ -4220,7 +4214,6 @@ Partial Class Form1
 	Friend WithEvents AvoidTheEdge As Tease_AI.teaseAI_Timer
 	Friend WithEvents AvoidTheEdgeResume As Tease_AI.teaseAI_Timer
 	Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
-	Friend WithEvents WebImageFileDialog As System.Windows.Forms.OpenFileDialog
 	Friend WithEvents EdgeTauntTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents HoldEdgeTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents HoldEdgeTauntTimer As Tease_AI.teaseAI_Timer
