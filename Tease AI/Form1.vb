@@ -6908,22 +6908,6 @@ Retry:
 
 
 
-	Private Sub DelayTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DelayTimer.Tick
-		'TODO-Next: Remove unused Timer DelayTimer.
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-
-		If ssh.DelayTick < 10 And chatBox.Text <> "" Then Return
-		If ssh.DelayTick < 10 And ChatBox2.Text <> "" Then Return
-		If ssh.DelayTick < 3 And ssh.DomTypeCheck = True Then Return
-
-		ssh.DelayTick -= 1
-
-		If ssh.DelayTick < 1 Then
-			DelayTimer.Stop()
-		End If
-
-
-	End Sub
 
 #Region "----------------------------------------------------- Video-Files ----------------------------------------------------"
 
@@ -17442,17 +17426,6 @@ saveImage:
 
 #End Region ' PictureStrip
 
-	'TODO-Next: Remove useless timer
-	Private Sub ContactTimer_Tick(sender As System.Object, e As System.EventArgs) Handles ContactTimer.Tick
-		'QUESTION: (stefaF) This Timer seems to be useless. Is this correct?
-		ssh.ContactTick -= 1
-
-
-		If ssh.ContactTick < 1 Then
-			ContactTimer.Stop()
-		End If
-
-	End Sub
 
 
 

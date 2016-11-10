@@ -87,7 +87,6 @@ Partial Class Form1
 		Me.GetColor = New System.Windows.Forms.ColorDialog()
 		Me.sendButton = New System.Windows.Forms.Button()
 		Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-		Me.WebImageFileDialog = New System.Windows.Forms.OpenFileDialog()
 		Me.PNLFileTransfer = New System.Windows.Forms.Panel()
 		Me.PictureBox11 = New System.Windows.Forms.PictureBox()
 		Me.BTNFileTransferOpen = New System.Windows.Forms.Button()
@@ -210,6 +209,9 @@ Partial Class Form1
 		Me.RunScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.DebugSessionWindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.DebugMenuToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
+		Me.DebugTimersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+		Me.StartTimer1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
 		Me.RefreshRandomizerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -368,7 +370,6 @@ Partial Class Form1
 		Me.SendTimer = New Tease_AI.teaseAI_Timer()
 		Me.StrokeTimer = New Tease_AI.teaseAI_Timer()
 		Me.StrokeTauntTimer = New Tease_AI.teaseAI_Timer()
-		Me.DelayTimer = New Tease_AI.teaseAI_Timer()
 		Me.CensorshipTimer = New Tease_AI.teaseAI_Timer()
 		Me.RLGLTimer = New Tease_AI.teaseAI_Timer()
 		Me.UpdatesTimer = New Tease_AI.teaseAI_Timer()
@@ -387,8 +388,6 @@ Partial Class Form1
 		Me.TeaseTimer = New Tease_AI.teaseAI_Timer()
 		Me.RLGLTauntTimer = New Tease_AI.teaseAI_Timer()
 		Me.AvoidTheEdgeTaunts = New Tease_AI.teaseAI_Timer()
-		Me.ContactTimer = New Tease_AI.teaseAI_Timer()
-		Me.AudibleMetronome = New Tease_AI.teaseAI_Timer()
 		Me.CustomSlideshowTimer = New Tease_AI.teaseAI_Timer()
 		Me.Contact1Timer = New Tease_AI.teaseAI_Timer()
 		Me.Contact2Timer = New Tease_AI.teaseAI_Timer()
@@ -397,13 +396,9 @@ Partial Class Form1
 		Me.WMPTimer = New Tease_AI.teaseAI_Timer()
 		Me.DommeTimer = New Tease_AI.teaseAI_Timer()
 		Me.TeaseAIClock = New Tease_AI.teaseAI_Timer()
-		Me.tmrResize = New Tease_AI.teaseAI_Timer()
 		Me.TimeoutTimer = New Tease_AI.teaseAI_Timer()
 		Me.VideoTimer = New Tease_AI.teaseAI_Timer()
 		Me.MultipleEdgesTimer = New Tease_AI.teaseAI_Timer()
-		Me.DebugTimersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-		Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-		Me.StartTimer1ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
 		CType(Me.mainPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.domAvatar, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1287,11 +1282,6 @@ Partial Class Form1
 		Me.sendButton.Text = "SEND"
 		Me.sendButton.UseVisualStyleBackColor = False
 		'
-		'WebImageFileDialog
-		'
-		Me.WebImageFileDialog.Filter = "TXT Files (*.txt)|*.txt"
-		Me.WebImageFileDialog.Title = "Please select an Image Blog URL File"
-		'
 		'PNLFileTransfer
 		'
 		Me.PNLFileTransfer.BackColor = System.Drawing.Color.White
@@ -2075,6 +2065,24 @@ Partial Class Form1
 		Me.DebugMenuToolStripMenuItem.Name = "DebugMenuToolStripMenuItem"
 		Me.DebugMenuToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
 		Me.DebugMenuToolStripMenuItem.Text = "Debug Menu"
+		'
+		'ToolStripSeparator6
+		'
+		Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+		Me.ToolStripSeparator6.Size = New System.Drawing.Size(195, 6)
+		'
+		'DebugTimersToolStripMenuItem
+		'
+		Me.DebugTimersToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartTimer1ToolStripMenuItem})
+		Me.DebugTimersToolStripMenuItem.Name = "DebugTimersToolStripMenuItem"
+		Me.DebugTimersToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
+		Me.DebugTimersToolStripMenuItem.Text = "Timers"
+		'
+		'StartTimer1ToolStripMenuItem
+		'
+		Me.StartTimer1ToolStripMenuItem.Name = "StartTimer1ToolStripMenuItem"
+		Me.StartTimer1ToolStripMenuItem.Size = New System.Drawing.Size(141, 22)
+		Me.StartTimer1ToolStripMenuItem.Text = "Start Timer 1"
 		'
 		'ToolStripSeparator13
 		'
@@ -3970,10 +3978,6 @@ Partial Class Form1
 		'
 		Me.StrokeTauntTimer.Interval = 1000
 		'
-		'DelayTimer
-		'
-		Me.DelayTimer.Interval = 1000
-		'
 		'CensorshipTimer
 		'
 		Me.CensorshipTimer.Interval = 1000
@@ -4046,14 +4050,6 @@ Partial Class Form1
 		'
 		Me.AvoidTheEdgeTaunts.Interval = 1000
 		'
-		'ContactTimer
-		'
-		Me.ContactTimer.Interval = 1000
-		'
-		'AudibleMetronome
-		'
-		Me.AudibleMetronome.Interval = 30
-		'
 		'CustomSlideshowTimer
 		'
 		Me.CustomSlideshowTimer.Interval = 1000
@@ -4086,10 +4082,6 @@ Partial Class Form1
 		'
 		Me.TeaseAIClock.Interval = 1000
 		'
-		'tmrResize
-		'
-		Me.tmrResize.Interval = 250
-		'
 		'TimeoutTimer
 		'
 		Me.TimeoutTimer.Interval = 1000
@@ -4101,24 +4093,6 @@ Partial Class Form1
 		'MultipleEdgesTimer
 		'
 		Me.MultipleEdgesTimer.Interval = 1000
-		'
-		'DebugTimersToolStripMenuItem
-		'
-		Me.DebugTimersToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StartTimer1ToolStripMenuItem})
-		Me.DebugTimersToolStripMenuItem.Name = "DebugTimersToolStripMenuItem"
-		Me.DebugTimersToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
-		Me.DebugTimersToolStripMenuItem.Text = "Timers"
-		'
-		'ToolStripSeparator6
-		'
-		Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-		Me.ToolStripSeparator6.Size = New System.Drawing.Size(195, 6)
-		'
-		'StartTimer1ToolStripMenuItem
-		'
-		Me.StartTimer1ToolStripMenuItem.Name = "StartTimer1ToolStripMenuItem"
-		Me.StartTimer1ToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-		Me.StartTimer1ToolStripMenuItem.Text = "Start Timer 1"
 		'
 		'Form1
 		'
@@ -4220,7 +4194,6 @@ Partial Class Form1
 	Friend WithEvents OpenFileDialog2 As System.Windows.Forms.OpenFileDialog
 	Friend WithEvents StrokeTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents StrokeTauntTimer As Tease_AI.teaseAI_Timer
-	Friend WithEvents DelayTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents BtnToggleSettings As System.Windows.Forms.Button
 	Friend WithEvents BtnToggleMediaPanel As System.Windows.Forms.Button
 	Friend WithEvents BtnToggleImageVideo As System.Windows.Forms.Button
@@ -4236,7 +4209,6 @@ Partial Class Form1
 	Friend WithEvents AvoidTheEdge As Tease_AI.teaseAI_Timer
 	Friend WithEvents AvoidTheEdgeResume As Tease_AI.teaseAI_Timer
 	Friend WithEvents SaveFileDialog1 As System.Windows.Forms.SaveFileDialog
-	Friend WithEvents WebImageFileDialog As System.Windows.Forms.OpenFileDialog
 	Friend WithEvents EdgeTauntTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents HoldEdgeTimer As Tease_AI.teaseAI_Timer
 	Friend WithEvents HoldEdgeTauntTimer As Tease_AI.teaseAI_Timer
@@ -4265,8 +4237,6 @@ Partial Class Form1
 	Friend WithEvents PicStripTSMIlikeImage As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents PicStripTSMIdislikeImage As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents PicStripTSMIremoveFromURL As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents ContactTimer As Tease_AI.teaseAI_Timer
-	Friend WithEvents AudibleMetronome As Tease_AI.teaseAI_Timer
 	Friend WithEvents StatusUpdates As System.Windows.Forms.WebBrowser
 	Friend WithEvents PicStripTSMIcopyImageLocation As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents CustomSlideshowTimer As Tease_AI.teaseAI_Timer
@@ -4297,7 +4267,6 @@ Partial Class Form1
 	Friend WithEvents LBLTime As System.Windows.Forms.Label
 	Friend WithEvents LBLDate As System.Windows.Forms.Label
 	Friend WithEvents LBLAMPM As System.Windows.Forms.Label
-	Friend WithEvents tmrResize As Tease_AI.teaseAI_Timer
 	Friend WithEvents MenuStrip2 As System.Windows.Forms.MenuStrip
 	Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 	Friend WithEvents AppsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
