@@ -1029,6 +1029,8 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		'===============================================================================
 		'								Restore View
 		'===============================================================================
+		CloseApp(Nothing)
+
 		RestoreFormPosition()
 
 		If File.Exists(My.Settings.BackgroundImage) Then
