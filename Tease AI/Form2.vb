@@ -9738,55 +9738,34 @@ checkFolder:
 		End If
 	End Sub
 
-	Private Sub Button25_Click(sender As System.Object, e As System.EventArgs) Handles Button25.Click
+	Private Sub ThemeLbl_Click(sender As System.Object, e As System.EventArgs) Handles LBLBackColor2.Click, LBLButtonColor2.Click, LBLTextColor2.Click, LBLDateTimeColor2.Click, LBLDateBackColor2.Click, LBLChatWindowColor2.Click, LBLChatTextColor2.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.BackgroundColor = GetColor.Color
-			Form1.ApplyThemeColor()
-		End If
-	End Sub
-
-	Private Sub Button27_Click_1(sender As System.Object, e As System.EventArgs) Handles Button27.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.ButtonColor = GetColor.Color
-			Form1.ApplyThemeColor()
-		End If
-	End Sub
-
-	Private Sub Button20_Click(sender As System.Object, e As System.EventArgs) Handles Button20.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.TextColor = GetColor.Color
-			Form1.ApplyThemeColor()
-		End If
-	End Sub
-
-	Private Sub Button23_Click(sender As System.Object, e As System.EventArgs) Handles Button23.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.ChatWindowColor = GetColor.Color
-			Form1.ApplyThemeColor()
+			Form1.SuspendLayout()
+			CType(sender, Label).BackColor = GetColor.Color
+			Form1.ResumeLayout()
 		End If
 	End Sub
 
 	Private Sub Button17_Click(sender As System.Object, e As System.EventArgs) Handles Button17.Click
 		If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
 			Try
-				Form1.BackgroundImage.Dispose()
+				Form1.PnlLayoutForm.BackgroundImage.Dispose()
 			Catch
 			End Try
-			Form1.BackgroundImage = Nothing
+			Form1.PnlLayoutForm.BackgroundImage = Nothing
 			GC.Collect()
-			Form1.BackgroundImage = Image.FromFile(OpenFileDialog1.FileName)
+			Form1.PnlLayoutForm.BackgroundImage = Image.FromFile(OpenFileDialog1.FileName)
 			My.Settings.BackgroundImage = OpenFileDialog1.FileName
-			Form1.ApplyThemeColor()
 		End If
 	End Sub
 
 	Private Sub Button18_Click(sender As System.Object, e As System.EventArgs) Handles Button18.Click
 		Try
-			Form1.BackgroundImage.Dispose()
+			Form1.PnlLayoutForm.BackgroundImage.Dispose()
 			PBBackgroundPreview.Image.Dispose()
 		Catch
 		End Try
-		Form1.BackgroundImage = Nothing
+		Form1.PnlLayoutForm.BackgroundImage = Nothing
 		PBBackgroundPreview.Image = Nothing
 		GC.Collect()
 		My.Settings.BackgroundImage = ""
@@ -9846,45 +9825,16 @@ checkFolder:
 		End If
 	End Sub
 
-	Private Sub Button21_Click_1(sender As System.Object, e As System.EventArgs) Handles Button21.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.ChatTextColor = GetColor.Color
-			Form1.ApplyThemeColor()
-		End If
-	End Sub
 
 	Private Sub CBStretchBack_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBStretchBack.CheckedChanged
-		If Form1.ApplyingTheme = False Then
-			My.Settings.BackgroundStretch = CBStretchBack.Checked
-			Form1.ApplyThemeColor()
-		End If
+		My.Settings.BackgroundStretch = CBStretchBack.Checked
 	End Sub
 
 
 
-	Private Sub Button30_Click(sender As System.Object, e As System.EventArgs) Handles Button30.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.DateTextColor = GetColor.Color
-			Form1.ApplyThemeColor()
-		End If
-	End Sub
-
-	Private Sub Button28_Click(sender As System.Object, e As System.EventArgs) Handles Button28.Click
-		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.DateBackColor = GetColor.Color
-			Form1.ApplyThemeColor()
-		End If
-	End Sub
 
 	Private Sub CBTransparentTime_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTransparentTime.CheckedChanged
-		If Form1.ApplyingTheme = False Then
-			My.Settings.CBDateTransparent = CBTransparentTime.Checked
-			Try
-				Form1.ApplyThemeColor()
-			Catch
-			End Try
-		End If
-
+		My.Settings.CBDateTransparent = CBTransparentTime.Checked
 	End Sub
 
 
