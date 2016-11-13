@@ -6,6 +6,14 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: Status Initial
 	
+# Changelog - Patch 54.5.1
+
+	Added Features:
+		
+	Bugfixes:
+
+	Miscellaneous:
+	
 # Changelog - Patch 54.5.0	
 
 WIP - DataBinding Overhaul
@@ -21,7 +29,13 @@ Added Features:
 	@Flag() support for multiple logical "AND" connected parameters added. Usage: @Flag(Flag1, Flag2, Flag3) => All of 'em or line is excluded.  by Daragorn
 	@NotFlag() support for multiple logical "AND" connected parameters added. Usage: @NotFlag(Flag1, Flag2, Flag3) => None of 'em or line is excluded. by Daragorn
 	Slideshow Settings(Random, NewFolder if last image, Range Settings, Subfolders) apply now also on Contact Images.
-	Added a new debug window. It is now possible to view and manipulte all session variables (At least simple DataTypes) on Runtime.
+	Added a new debug window. It is now possible to view and manipulate all session variables (At least simple DataTypes) on Runtime.
+	Now all filters have to be in Front of a @NullResponse or Chat Text. This is used to identify double used Filter/Command-statements.
+	Added full screen mode.
+    Bottom Chatbox is now accessible, when MaximizeMediaWindow is activated, unless Sidechat is activated.
+    Restoring window state on start up supports now multi monitor systems and maximized windows.
+    Added option to deactivate the sidepanel.
+
 
 Bugfixes:
 
@@ -51,6 +65,7 @@ Miscellaneous:
 	Reworked Code to Display Images.
 	Added a ToolstripItem in Debug menu, to start Timer1, if he is stopped. This could probably fix some or eventually all "Script-Freeze-Crashs". But this has to be tested. So if your Session freezes goto: Debug->Timers->Start Timer 1. Please let us know, if it worked.
 	Reworked custom Slideshow. The slideshow will pick now random images from random genres (Only the ones defined in @Slideshow().). This way an unbalanced amount of images doesn't matter any more. All genres have the same chances, even if they are outnumbered by a million times. There is also a check if the last image was of the same genre. If that's the case, it will randomly use the same genre or tries to pick another one. 
+	Reworked Main UI
 
 
 
