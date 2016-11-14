@@ -81,7 +81,8 @@ Public Class ContactData
 	End Property
 
 
-	Sub New() : End Sub
+	Sub New()
+	End Sub
 
 	Sub New(ByVal type As ContactType)
 		Contact = type

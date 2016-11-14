@@ -1188,7 +1188,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SplitterPosition" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">706</Value>
     </Setting>
     <Setting Name="MirrorWindows" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -1433,6 +1433,12 @@
     </Setting>
     <Setting Name="LockOrgasmChances" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MaximizeMediaWindow" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DisplaySidePanel" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

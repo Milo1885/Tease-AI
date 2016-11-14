@@ -4790,7 +4790,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("706")>  _
         Public Property SplitterPosition() As Integer
             Get
                 Return CType(Me("SplitterPosition"),Integer)
@@ -5769,6 +5769,30 @@ Namespace My
             End Get
             Set
                 Me("LockOrgasmChances") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property MaximizeMediaWindow() As Boolean
+            Get
+                Return CType(Me("MaximizeMediaWindow"),Boolean)
+            End Get
+            Set
+                Me("MaximizeMediaWindow") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property DisplaySidePanel() As Boolean
+            Get
+                Return CType(Me("DisplaySidePanel"),Boolean)
+            End Get
+            Set
+                Me("DisplaySidePanel") = value
             End Set
         End Property
     End Class

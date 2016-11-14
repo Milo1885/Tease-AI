@@ -122,9 +122,6 @@ Public Class Form1
 	Public LazyEdit5 As Boolean
 
 	Public ApplyingTheme As Boolean
-	Public AdjustingWindow As Boolean
-	Public SplitContainerHeight As Integer
-	Public WindowCheck As Boolean
 
 	Private Const DISABLE_SOUNDS As Integer = 21
 	Private Const SET_FEATURE_ON_PROCESS As Integer = 2
@@ -133,8 +130,6 @@ Public Class Form1
 		 Lib "user32" _
 		 (ByVal nVirtKey As Long) As Integer
 	Private Const VK_LBUTTON = &H1
-	'flag True when resizing being processed
-	Private bResize As Boolean
 
 
 
@@ -198,7 +193,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 				My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Temp\Temp.gif")
 			End If
 
-
+			'TODO-Next: Remove Legacy-Code.
 			Try
 				For Each prog As Process In Process.GetProcesses
 					If prog.ProcessName = "Tease AI Metronome" Then
@@ -243,11 +238,12 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			Catch ex As Exception
 			End Try
 
-			End
+
 
 			TeaseAINotify.Visible = False
 			TeaseAINotify.Icon = Nothing
 			TeaseAINotify.Dispose()
+			TeaseAINotify = Nothing
 
 
 			System.Windows.Forms.Application.DoEvents()
@@ -322,15 +318,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		' If My.Settings.TCAgreed = True Then
 		'frmApps.ClearAgree()
 		'End If
-
-		If File.Exists(My.Settings.BackgroundImage) Then
-			Me.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
-		Else
-			Me.BackgroundImage = Nothing
-		End If
-
-
-		ApplyThemeColor()
 
 
 		If My.Settings.TC2Agreed = False Then
@@ -1039,14 +1026,32 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Checking saved dimensions..."
 		FrmSplash.Refresh()
+		'===============================================================================
+		'								Restore View
+		'===============================================================================
+		CloseApp(Nothing)
 
-		If My.Settings.WindowWidth = 0 Or My.Settings.WindowHeight = 0 Then
-			Me.WindowState = FormWindowState.Maximized
+		RestoreFormPosition()
+
+		If File.Exists(My.Settings.BackgroundImage) Then
+			Me.PnlLayoutForm.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
 		Else
-			Me.Width = My.Settings.WindowWidth
-			Me.Height = My.Settings.WindowHeight
+			Me.PnlLayoutForm.BackgroundImage = Nothing
 		End If
 
+		If My.Settings.BackgroundStretch Then PnlLayoutForm.BackgroundImageLayout = ImageLayout.Stretch
+		If My.Settings.CBDateTransparent Then PNLDate.BackColor = Color.Transparent
+
+		' Setting the Checked-State will raise the Control's CheckedChanged-Event.
+		SwitchSidesToolStripMenuItem.Checked = My.Settings.MirrorWindows
+		SidepanelToolStripMenuItem.Checked = My.Settings.DisplaySidePanel
+		LazySubAVToolStripMenuItem.Checked = My.Settings.LazySubAV
+		MaximizeImageToolStripMenuItem.Checked = My.Settings.MaximizeMediaWindow
+		SideChatToolStripMenuItem1.Checked = My.Settings.SideChat
+
+		'----------------------------------------
+		' Restore View - End
+		'----------------------------------------
 
 
 		TeaseAIClock.Start()
@@ -1054,8 +1059,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		FrmSplash.PBSplash.Value += 1
 		FrmSplash.LBLSplash.Text = "Loading theme..."
 		FrmSplash.Refresh()
-
-		CloseApp()
 
 		LBLCalorie.Text = My.Settings.CaloriesConsumed
 		Debug.Print("HOW MANY FUCKING CALORIES!!!! " & My.Settings.CaloriesConsumed)
@@ -1138,41 +1141,6 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 			End If
 		End If
 
-
-		Me.Left = (Screen.PrimaryScreen.WorkingArea.Width - Me.Width) / 2
-3:
-		Me.Top = (Screen.PrimaryScreen.WorkingArea.Height - Me.Height) / 2
-
-
-		Debug.Print("This getting called------------------------------?")
-
-		mainPictureBox.Location = New Point(0, 0)
-		mainPictureBox.Width = SplitContainer1.Width
-		mainPictureBox.Height = SplitContainer1.Panel1.Height
-
-		Debug.Print(SplitContainer1.Width & " & " & mainPictureBox.Width)
-
-		AdjustWindow()
-
-		Debug.Print(SplitContainer1.Width & " & " & mainPictureBox.Width)
-
-
-		If My.Settings.SplitterDistance <> -1 Then
-			If My.Settings.SplitterDistance > SplitContainer1.Height Then My.Settings.SplitterDistance = SplitContainer1.Height * 0.75
-			SplitContainer1.SplitterDistance = My.Settings.SplitterDistance
-		End If
-
-		If My.Settings.SideChat = True Then
-			ChatText2.Visible = True
-			PNLChatBox2.Visible = True
-			OpenApp()
-			SideChatToolStripMenuItem1.Checked = True
-		End If
-
-		If My.Settings.LazySubAV = True Then
-			PNLLazySubAV.Visible = True
-			LazySubAVToolStripMenuItem1.Checked = True
-		End If
 
 		ssh.Activate(Me)
 
@@ -1265,7 +1233,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		' Github Patch
 		BTNPlaylist.Enabled = True
 
-		If PNLWritingTask.Visible Then CloseApp()
+		If PNLWritingTask.Visible Then CloseApp(PNLWritingTask)
 
 	End Sub
 
@@ -6537,17 +6505,6 @@ Retry:
 
 	Private Sub BTNVideoControls_Click(sender As System.Object, e As System.EventArgs) Handles BTNVideoControls.Click
 
-		'If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-		'MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
-		'Return
-		'End If
-
-		'If domVLC.Visible = True Then
-
-		'domVLC.playlist.stop()
-
-		'End If
-
 		If DomWMP.Height = SplitContainer1.Panel1.Height Then
 			DomWMP.Height = SplitContainer1.Panel1.Height + 60
 			BTNVideoControls.Text = "Show Video Controls"
@@ -7264,6 +7221,7 @@ CensorConstant:
 
 				CensorshipBar.Visible = False
 				CensorshipBar.Visible = True
+				CensorshipBar.BringToFront()
 
 				ssh.CensorshipTick = ssh.randomizer.Next(FrmSettings.NBCensorShowMin.Value, FrmSettings.NBCensorShowMax.Value + 1)
 
@@ -7883,7 +7841,7 @@ StatusUpdateEnd:
 
 
 
-
+	'TODO-Next: Move to proper Region
 	Private Sub MediaButton_Click(sender As System.Object, e As System.EventArgs) Handles BtnToggleMediaPanel.Click
 
 		If SplitContainer1.Panel2.Height < 68 Then Return
@@ -7891,31 +7849,11 @@ StatusUpdateEnd:
 		If PNLMediaBar.Visible = True Then
 			PNLMediaBar.Visible = False
 			BtnToggleMediaPanel.Text = "Show Media Panel"
-			'ChatText.Location = New Point(0, 0)
-			'ChatText.Height = ChatText.Height + 29
-
-			browsefolderButton.Visible = False
-			previousButton.Visible = False
-			nextButton.Visible = False
-			BTNLoadVideo.Visible = False
-			BTNVideoControls.Visible = False
-
 		Else
 
 			PNLMediaBar.Visible = True
 			BtnToggleMediaPanel.Text = "Hide Media Panel"
-			'ChatText.Location = New Point(0, 29)
-			'ChatText.Height = ChatText.Height - 29
-
-			browsefolderButton.Visible = True
-			previousButton.Visible = True
-			nextButton.Visible = True
-			BTNLoadVideo.Visible = True
-			BTNVideoControls.Visible = True
-
 		End If
-
-		AdjustWindow()
 
 		ScrollChatDown()
 
@@ -11046,9 +10984,7 @@ OrgasmDecided:
 			LBLLinesRemaining.Text = ssh.WritingTaskLinesAmount
 
 			If PNLWritingTask.Visible = False Then
-				CloseApp()
-				OpenApp()
-				PNLWritingTask.Visible = True
+				CloseApp(PNLWritingTask)
 			End If
 
 			'WritingTaskMistakesAllowed = randomizer.Next(3, 9)
@@ -14981,15 +14917,6 @@ SkipTextedTags:
 		ScrollChatDown()
 	End Sub
 
-	Private Sub ChatText_Resize(sender As Object, e As EventArgs) Handles ChatText.Resize
-		If PNLMediaBar.Visible = True Then
-			ChatText.Location = New Point(2, 33)
-			ChatText.Height = SplitContainer1.Panel2.Height - 67
-		Else
-			ChatText.Location = New Point(2, 0)
-			ChatText.Height = SplitContainer1.Panel2.Height - 34
-		End If
-	End Sub
 
 	Private Sub ChatText2_DocumentCompleted(sender As Object, e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText2.DocumentCompleted
 		Try
@@ -18026,58 +17953,32 @@ restartInstantly:
 #Region "-------------------------------------------------------- APPs --------------------------------------------------------"
 
 	Private Sub CloseAppPanelToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles CloseAppPanelToolStripMenuItem.Click
-		CloseApp()
+		CloseApp(Nothing)
 	End Sub
 
 	Private Sub MetronomeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MetronomeToolStripMenuItem.Click
-		If PNLMetronome.Visible = False Then
-			CloseApp()
-			OpenApp()
-			PNLMetronome.Visible = True
-		End If
+		CloseApp(PNLMetronome)
 	End Sub
 
 	Private Sub GlitterToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles GlitterToolStripMenuItem.Click
-		If StatusUpdates.Visible = False Then
-			CloseApp()
-			StatusUpdates.Visible = True
-			OpenApp()
-		End If
+		CloseApp(PnlGlitter)
 	End Sub
 
 	Private Sub DommeTagsToolStripMenuItem2_Click(sender As System.Object, e As System.EventArgs) Handles DommeTagsToolStripMenuItem2.Click
-
-		If PNLDomTagBTN.Visible = False Then
-			CloseApp()
-			OpenApp()
-			PNLDomTagBTN.Visible = True
-		End If
-
+		CloseApp(PNLDomTagBTN)
 	End Sub
 
 	Private Sub LazySubToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles LazySubToolStripMenuItem.Click
-
-		If PNLLazySub.Visible = False Then
-			CloseApp()
-			OpenApp()
-			PNLLazySub.Visible = True
-		End If
-
+		CloseApp(PNLLazySub)
 	End Sub
 
 	Private Sub RandomizerToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles RandomizerToolStripMenuItem.Click
-		If PNLAppRandomizer.Visible = False Then
-			CloseApp()
-			OpenApp()
-			PNLAppRandomizer.Visible = True
-		End If
+		CloseApp(PNLAppRandomizer)
 	End Sub
 
 	Private Sub PlaylistToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles PlaylistToolStripMenuItem.Click
 		If PNLPlaylist.Visible = False Then
-			CloseApp()
-			OpenApp()
-			PNLPlaylist.Visible = True
+			CloseApp(PNLPlaylist)
 			LBPlaylist.Items.Clear()
 			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 				LBPlaylist.Items.Add(Path.GetFileName(foundFile).Replace(".txt", ""))
@@ -18086,11 +17987,7 @@ restartInstantly:
 	End Sub
 
 	Private Sub WritingTasksToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles WritingTasksToolStripMenuItem.Click
-		If PNLWritingTask.Visible = False Then
-			CloseApp()
-			OpenApp()
-			PNLWritingTask.Visible = True
-		End If
+		CloseApp(PNLWritingTask)
 	End Sub
 
 	Private Sub WishlistToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles WishlistToolStripMenuItem.Click
@@ -18286,18 +18183,13 @@ restartInstantly:
 
 
 
-			CloseApp()
-			OpenApp()
-			PNLWishList.Visible = True
+			CloseApp(PNLWishList)
 		End If
 	End Sub
 
 	Private Sub HypnoticGuideToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles HypnoticGuideToolStripMenuItem.Click
-
+		CloseApp(PNLHypnoGen)
 		If PNLHypnoGen.Visible = False Then
-			CloseApp()
-			OpenApp()
-			PNLHypnoGen.Visible = True
 
 
 
@@ -18345,11 +18237,8 @@ restartInstantly:
 	End Sub
 
 	Private Sub VitalSubToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles VitalSubToolStripMenuItem.Click
-
+		CloseApp(AppPanelVitalSub)
 		If AppPanelVitalSub.Visible = False Then
-			CloseApp()
-			OpenApp()
-			AppPanelVitalSub.Visible = True
 
 			If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieList.txt") And ComboBoxCalorie.Items.Count = 0 Then
 				Debug.Print("called itttttttt")
@@ -18408,40 +18297,54 @@ restartInstantly:
 
 #Region "----------------------------------------------------- Interface ------------------------------------------------------"
 
-	Private Sub SwitchSidesToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles SwitchSidesToolStripMenuItem1.Click
-		If My.Settings.MirrorWindows = False Then
-			My.Settings.MirrorWindows = True
-		Else
-			My.Settings.MirrorWindows = False
-		End If
+	Private Sub SwitchSidesToolStripMenuItem_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles SwitchSidesToolStripMenuItem.CheckedChanged
+		' Prevent further execution during Form's InitializeComponent()-Method.
+		If IsHandleCreated = False Then Exit Sub
 
-		AdjustWindow()
+		With PnlSidepanelLayout
+			If SwitchSidesToolStripMenuItem.Checked Then
+				My.Settings.MirrorWindows = True
+				PnlSidepanelLayout.Dock = DockStyle.Right
+			Else
+				My.Settings.MirrorWindows = False
+				PnlSidepanelLayout.Dock = DockStyle.Left
+			End If
+
+			.Padding = New Padding(.Padding.Right, .Padding.Top, .Padding.Left, .Padding.Bottom)
+			PnlLayoutForm.Padding = New Padding(PnlLayoutForm.Padding.Right,
+					 PnlLayoutForm.Padding.Top,
+					 PnlLayoutForm.Padding.Left,
+					 PnlLayoutForm.Padding.Bottom)
+		End With
 	End Sub
 
-	Private Sub SideChatToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles SideChatToolStripMenuItem1.Click
-		If SideChatToolStripMenuItem1.Checked = True Then SideChatToolStripMenuItem1.Checked = False
-		If ChatText2.Visible = False Then
-			CloseApp()
-			ChatText2.Visible = True
-			PNLChatBox2.Visible = True
-			OpenApp()
-			SideChatToolStripMenuItem1.Checked = True
-			My.Settings.SideChat = True
-		Else
-			CloseApp()
+	Private Sub SideChatToolStripMenuItem1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles SideChatToolStripMenuItem1.CheckedChanged
+		' Prevent further execution during Form's InitializeComponent()-Method.
+		If IsHandleCreated = False Then Exit Sub
+
+		If SideChatToolStripMenuItem1.Checked = False Then
 			My.Settings.SideChat = False
+			CloseApp(Nothing)
+		Else
+			My.Settings.SideChat = True
+			CloseApp(PnlSidechat)
 		End If
 	End Sub
 
-	Private Sub LazySubAVToolStripMenuItem1_Click(sender As System.Object, e As System.EventArgs) Handles LazySubAVToolStripMenuItem1.Click
-		If PNLLazySubAV.Visible = False Then
-			PNLLazySubAV.Visible = True
-			LazySubAVToolStripMenuItem1.Checked = True
+	Private Sub LazySubAVToolStripMenuItem_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles LazySubAVToolStripMenuItem.CheckedChanged
+		' Prevent further execution during Form's InitializeComponent()-Method.
+		If IsHandleCreated = False Then Exit Sub
+
+		If LazySubAVToolStripMenuItem.Checked = True Then
+			'#################### Display LazySubAv ###################
 			My.Settings.LazySubAV = True
+			PNLLazySubAV.BringToFront()
+			PnlAvatarInner.SendToBack()
 		Else
-			PNLLazySubAV.Visible = False
-			LazySubAVToolStripMenuItem1.Checked = False
+			'##################### Hide LazySubAv #####################
 			My.Settings.LazySubAV = False
+			PNLLazySubAV.SendToBack()
+			PnlAvatarInner.BringToFront()
 		End If
 	End Sub
 
@@ -18451,8 +18354,65 @@ restartInstantly:
 		FrmSettings.Focus()
 	End Sub
 
-	Private Sub MaximizeImageToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles MaximizeImageToolStripMenuItem.Click
-		SplitContainer1.SplitterDistance = SplitContainer1.Height
+	Private Sub MaximizeImageToolStripMenuItem_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles MaximizeImageToolStripMenuItem.CheckedChanged
+		' Prevent further execution during Form's InitializeComponent()-Method.
+		If IsHandleCreated = False Then Exit Sub
+
+		If MaximizeImageToolStripMenuItem.Checked = False Then
+			'########################## Normal ########################
+			My.Settings.MaximizeMediaWindow = False
+			SplitContainer1.Panel2Collapsed = False
+			PnlChatBoxLayout.Visible = True
+			SplitContainer1.SplitterDistance = SplitContainer1.Height * 0.75
+		Else
+			'######################### Maximize #######################
+			My.Settings.MaximizeMediaWindow = True
+			SplitContainer1.Panel2Collapsed = True
+			If PnlSidechat.Visible AndAlso PnlSidepanelLayout.Visible Then PnlChatBoxLayout.Visible = False
+		End If
+
+		'SplitContainer1.SplitterDistance = SplitContainer1.Height
+	End Sub
+
+	Private Sub SidepanelToolStripMenuItem_CheckedChanged(sender As Object, e As EventArgs) Handles SidepanelToolStripMenuItem.CheckedChanged
+		' Prevent further execution during Form's InitializeComponent()-Method.
+		If IsHandleCreated = False Then Exit Sub
+
+		If SidepanelToolStripMenuItem.Checked Then
+			'########################## Display #######################
+			PnlSidepanelLayout.Visible = True
+			My.Settings.DisplaySidePanel = True
+
+			If PnlSidepanelLayout.Dock = DockStyle.Left Then
+				PnlLayoutForm.Padding = New Padding(0,
+													 PnlLayoutForm.Padding.Top,
+													 PnlLayoutForm.Padding.Right,
+													 PnlLayoutForm.Padding.Bottom)
+			Else
+				PnlLayoutForm.Padding = New Padding(PnlLayoutForm.Padding.Left,
+													 PnlLayoutForm.Padding.Top,
+													0,
+													 PnlLayoutForm.Padding.Bottom)
+			End If
+		Else
+			'########################### Hide #########################
+			PnlSidepanelLayout.Visible = False
+			My.Settings.DisplaySidePanel = False
+
+			If PnlSidepanelLayout.Dock = DockStyle.Left Then
+				PnlLayoutForm.Padding = New Padding(PnlLayoutForm.Padding.Right,
+													 PnlLayoutForm.Padding.Top,
+													 PnlLayoutForm.Padding.Right,
+													 PnlLayoutForm.Padding.Bottom)
+			Else
+				PnlLayoutForm.Padding = New Padding(PnlLayoutForm.Padding.Left,
+													 PnlLayoutForm.Padding.Top,
+													PnlLayoutForm.Padding.Left,
+													 PnlLayoutForm.Padding.Bottom)
+			End If
+
+			If MaximizeImageToolStripMenuItem.Checked Then PnlChatBoxLayout.Visible = True
+		End If
 	End Sub
 
 	Private Sub WebteaseModeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles WebteaseModeToolStripMenuItem.Click
@@ -18470,6 +18430,41 @@ restartInstantly:
 
 	Private Sub DefaultImageSizeToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles DefaultImageSizeToolStripMenuItem.Click
 		If SplitContainer1.Height > 430 Then SplitContainer1.SplitterDistance = SplitContainer1.Height - 252
+	End Sub
+
+	Private Sub FullscreenToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles FullscreenToolStripMenuItem.Click
+		If Me.FormBorderStyle <> Windows.Forms.FormBorderStyle.None Then
+			Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None
+
+			Dim WA As Rectangle = Screen.GetBounds(Me)
+
+			Me.Location = New Point(WA.Location.X, WA.Location.Y)
+			Me.Size = New Size(WA.Width, WA.Height)
+
+			Me.WindowState = FormWindowState.Normal
+			Me.MainMenuStrip.Visible = False
+		Else
+			Me.FormBorderStyle = Windows.Forms.FormBorderStyle.Sizable
+			Me.Location = New Point(0, 0)
+			Me.Size = New Size(My.Settings.WindowWidth, My.Settings.WindowHeight)
+			Me.MainMenuStrip.Visible = True
+
+			RestoreFormPosition()
+		End If
+	End Sub
+
+	Private Sub RestoreFormPosition()
+		Dim WA As Rectangle = Screen.GetWorkingArea(Cursor.Position)
+
+		If My.Settings.WindowWidth = 0 Or My.Settings.WindowHeight = 0 Then
+			Me.WindowState = FormWindowState.Maximized
+		Else
+			Me.Width = If(WA.Width > Me.Width, My.Settings.WindowWidth, WA.Width)
+			Me.Height = If(WA.Height > Me.Height, My.Settings.WindowHeight, WA.Height)
+		End If
+
+		Me.Left = WA.Location.X + (WA.Width - Me.Width) / 2
+		Me.Top = WA.Location.Y + (WA.Height - Me.Height) / 2
 	End Sub
 
 #End Region ' Interface
@@ -18571,381 +18566,20 @@ restartInstantly:
 
 #End Region ' Menu
 
-	Private Sub Form1_MouseClick(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles Me.MouseClick
-		If SplitContainer1.Width + 270 > Me.Width Then AdjustWindow()
-	End Sub
 
-	Private Sub Form1_Resize(sender As Object, e As System.EventArgs) Handles Me.Resize
-
-		Debug.Print("Resize Called")
-		Debug.Print(WindowState)
-		Debug.Print(WindowCheck)
-
-		Select Case Me.WindowState
-
-			Case FormWindowState.Maximized
-				Debug.Print("Maximized")
-				WindowCheck = True
-				AdjustWindow()
-
-			Case FormWindowState.Normal And WindowCheck = True
-				Debug.Print("Resized From Maximized")
-				WindowCheck = False
-				AdjustWindow()
-
-		End Select
-	End Sub
-
-	Private Sub Form1_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd
-
-		Debug.Print(Me.Width & " " & Me.Height)
-
-		AdjustWindow()
-
-		SplitContainer1.Width = Me.Width - 296
-
-		My.Settings.WindowHeight = Me.Height
-		My.Settings.WindowWidth = Me.Width
+	Private Sub Form1_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd, Me.Resize
+		If Me.IsHandleCreated = False Then Exit Sub
+		If Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None Then
+			Exit Sub
+		ElseIf Me.WindowState = FormWindowState.Maximized Then
+			My.Settings.WindowHeight = 0
+			My.Settings.WindowWidth = 0
+		Else
+			My.Settings.WindowHeight = Me.Height
+			My.Settings.WindowWidth = Me.Width
+		End If
 
 	End Sub
-
-	Public Sub AdjustWindow()
-
-
-		'Test
-
-		SuspendLayout()
-
-		AdjustingWindow = True
-
-		Debug.Print("Adjust Window Called")
-
-
-		If Me.Height < 734 Then Me.Height = 734
-		If Me.Width < 978 Then Me.Width = 978
-
-		' PNLAV.Location = New Point(10, Me.Height - 294)
-		' PNLApp.Height = Me.Height - 84
-		'If PNLTabs.Height <> 0 Then PNLTabs.Height = PNLApp.Height - 333
-
-
-
-		'If PNLTabs.VerticalScroll.Visible = False Then
-		'PNLTabs.Width = 253
-		'Else
-		'PNLTabs.Width = 258
-		'End If
-
-		If PNLTabs.Height <> 0 Then PNLTabs.Height = Me.Height - 426
-
-		'subName.Location = New Point(3, PNLApp.Height - 31)
-		'domAvatar.Location = New Point(3, PNLApp.Height - 212)
-		'domName.Location = New Point(3, PNLApp.Height - 243)
-
-		If PNLTabs.Height <> 0 Then StatusUpdates.Height = PNLTabs.Height - 8
-		'If PNLTabs.Height <> 0 Then ChatText2.Height = PNLTabs.Height - 8
-		If PNLTabs.Height <> 0 Then ChatText2.Height = PNLTabs.Height - 39
-		PNLChatBox2.Location = New Point(2, ChatText2.Height)
-
-		If My.Settings.MirrorWindows = False Then
-			PNLAvatar.Location = New Point(9, Me.Height - 294)
-			PNLTabs.Location = New Point(9, 120)
-			PNLDate.Location = New Point(9, 37)
-			SplitContainer1.Location = New Point(271, 37)
-		Else
-			PNLAvatar.Location = New Point(Me.Width - 278, Me.Height - 294)
-			PNLTabs.Location = New Point(Me.Width - 278, 120)
-			PNLDate.Location = New Point(Me.Width - 278, 37)
-			SplitContainer1.Location = New Point(9, 37)
-		End If
-
-
-
-
-
-
-		SplitContainer1.Height = Me.Height - 83
-		'SplitContainer1.Width = Me.Width - 39
-
-		'SplitContainer1.Height = Me.Height - 58
-		SplitContainer1.Width = Me.Width - 296
-
-		'mainPictureBox.Location = New Point(0, 0)
-		'mainPictureBox.Width = SplitContainer1.Width
-		'mainPictureBox.Height = SplitContainer1.Panel1.Height
-
-		'If SplitContainerHeight <> 0 Then SplitContainer1.SplitterDistance = (SplitContainer1.Height - SplitContainerHeight) - 4
-		Try
-			SplitContainer1.SplitterDistance = My.Settings.SplitterDistance
-		Catch
-		End Try
-
-
-		Debug.Print("SplitContainer1.Height = " & SplitContainer1.Height)
-		Debug.Print("SplitContainer1.Panel1.Height = " & SplitContainer1.Panel1.Height)
-		Debug.Print("SplitContainer1.Panel2.Height = " & SplitContainer1.Panel2.Height)
-		Debug.Print("SplitContainer1.SplitterDistance = " & SplitContainer1.SplitterDistance)
-		Debug.Print("SplitContainerHeight = " & SplitContainerHeight)
-
-		'SplitContainer1.Panel2.Height = My.Settings.SplitterPosition
-
-		mainPictureBox.Location = New Point(0, 0)
-		mainPictureBox.Width = SplitContainer1.Width
-		mainPictureBox.Height = SplitContainer1.Panel1.Height
-
-		If PNLMediaBar.Visible = True Then
-			ChatText.Location = New Point(2, 33)
-			ChatText.Height = SplitContainer1.Panel2.Height - 67
-		Else
-			ChatText.Location = New Point(2, 0)
-			ChatText.Height = SplitContainer1.Panel2.Height - 34
-		End If
-
-		ChatText.Width = SplitContainer1.Width - 3
-
-		PNLMediaBar.Width = SplitContainer1.Width - 367
-		ImageFolderComboBox.Width = PNLMediaBar.Width - 13
-
-		previousButton.Location = New Point(SplitContainer1.Width - 314, 0)
-		nextButton.Location = New Point(SplitContainer1.Width - 257, 0)
-		BTNLoadVideo.Location = New Point(SplitContainer1.Width - 200, 0)
-		BTNVideoControls.Location = New Point(SplitContainer1.Width - 124, 0)
-
-
-
-		'chatBox.Location = New Point(3, 5)
-
-		'MediaButton.Location = New Point(0, 3)
-		'SaveBlogImage.Location = New Point(114, 3)
-		'SettingsButton.Location = New Point(190, 3)
-
-
-		PNLChatBox.Width = SplitContainer1.Width - 318
-		chatBox.Width = PNLChatBox.Width - 13
-
-		BTNVideoControls.BringToFront()
-
-
-		If PNLMediaBar.Visible = True Then
-			PNLChatBox.Location = New Point(2, SplitContainer1.Panel2.Height - 32)
-			PNLHope.Location = New Point(SplitContainer1.Width - 314, PNLChatBox.Location.Y)
-		Else
-			PNLChatBox.Location = New Point(2, SplitContainer1.Panel2.Height - 32)
-			PNLHope.Location = New Point(SplitContainer1.Width - 314, PNLChatBox.Location.Y)
-		End If
-
-		'PNLHope.Location = New Point(779, 214)
-
-		'BTNShowHideApps.Location = New Point(10, Me.Height - 292)
-
-		'subName.Location = New Point(10, Me.Height - 69)
-		'subAvatar.Location = New Point(10, Me.Height - 258)
-
-		'PNLGlitter.Height = Me.Height - 597
-		'StatusUpdates.Height = Me.Height - 602
-
-		DomWMP.Location = New Point(0, 0)
-		DomWMP.Width = SplitContainer1.Width
-
-
-		If PNLTabs.Height > 476 Then
-			PNLDomTagBTN.Height = PNLTabs.Height - 8
-		Else
-			PNLDomTagBTN.Height = 468
-		End If
-
-		If PNLTabs.Height > 452 Then
-			PNLLazySub.Height = PNLTabs.Height - 8
-		Else
-			PNLLazySub.Height = 444
-		End If
-
-		If PNLTabs.Height > 452 Then
-			PNLLazySub2.Height = PNLTabs.Height - 8
-		Else
-			PNLLazySub2.Height = 444
-		End If
-
-		If PNLTabs.Height > 387 Then
-			PNLAppRandomizer.Height = PNLTabs.Height - 8
-		Else
-			PNLAppRandomizer.Height = 379
-		End If
-
-		If PNLTabs.Height > 402 Then
-			PNLPlaylist.Height = PNLTabs.Height - 8
-		Else
-			PNLPlaylist.Height = 394
-		End If
-
-		If PNLTabs.Height > 275 Then
-			PNLWritingTask.Height = PNLTabs.Height - 8
-		Else
-			PNLWritingTask.Height = 267
-		End If
-
-		If PNLTabs.Height > 492 Then
-			PNLWishList.Height = PNLTabs.Height - 8
-		Else
-			PNLWishList.Height = 485
-		End If
-
-		If PNLTabs.Height > 426 Then
-			PNLHypnoGen.Height = PNLTabs.Height - 8
-		Else
-			PNLHypnoGen.Height = 418
-		End If
-
-		If PNLTabs.Height > 431 Then
-			AppPanelVitalSub.Height = PNLTabs.Height - 8
-		Else
-			AppPanelVitalSub.Height = 422
-		End If
-
-		If PNLTabs.Height > 175 Then
-			PNLMetronome.Height = PNLTabs.Height - 8
-		Else
-			PNLMetronome.Height = 167
-		End If
-
-
-		PNLTabs.HorizontalScroll.Visible = False
-
-
-		PNLTabs.HorizontalScroll.Maximum = 0
-		PNLTabs.AutoScroll = False
-		PNLTabs.VerticalScroll.Visible = False
-		PNLTabs.AutoScroll = True
-
-		AdjustingWindow = False
-
-		'If My.Settings.SplitterPosition <> 0 Then SplitContainer1.SplitterDistance = My.Settings.SplitterPosition
-
-		' SplitContainer1.Height = Me.Height - 83
-
-		ResumeLayout()
-
-
-	End Sub
-
-	Private Sub SplitContainer1_SplitterMoved(sender As Object, e As System.Windows.Forms.SplitterEventArgs) Handles SplitContainer1.SplitterMoved
-
-		If FormLoading = True Then Return
-
-		If ApplyingTheme = False And AdjustingWindow = False Then
-
-			If PNLMediaBar.Visible = True Then
-				ChatText.Location = New Point(2, 33)
-				ChatText.Height = SplitContainer1.Panel2.Height - 67
-			Else
-				ChatText.Location = New Point(2, 0)
-				ChatText.Height = SplitContainer1.Panel2.Height - 68
-			End If
-
-			PNLChatBox.Location = New Point(2, SplitContainer1.Panel2.Height - 32)
-			PNLHope.Location = New Point(SplitContainer1.Width - 314, PNLChatBox.Location.Y)
-
-			SplitContainerHeight = SplitContainer1.Panel2.Height
-
-			My.Settings.SplitterPosition = SplitContainer1.Height - SplitContainer1.Panel1.Height
-
-			Debug.Print("SplitContainer1.Height = " & SplitContainer1.Height)
-			Debug.Print("SplitContainer1.Panel1.Height = " & SplitContainer1.Panel1.Height)
-			Debug.Print("SplitContainer1.Panel2.Height = " & SplitContainer1.Panel2.Height)
-			Debug.Print("SplitContainer1.SplitterDistance = " & SplitContainer1.SplitterDistance)
-			Debug.Print("SplitContainerHeight = " & SplitContainerHeight)
-
-
-
-
-			GoTo SkipNew
-
-
-		End If
-
-
-
-
-		GoTo SkipNew
-
-		If PNLMediaBar.Visible = True Then
-			PNLChatBox.Location = New Point(2, ChatText.Height + 30)
-			PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height + 29)
-		Else
-			PNLChatBox.Location = New Point(2, ChatText.Height - 11)
-			PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height - 12)
-		End If
-
-
-
-		If PNLMediaBar.Visible = True Then
-			PNLChatBox.Location = New Point(2, ChatText.Height + 30)
-			PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height + 29)
-		Else
-			PNLChatBox.Location = New Point(2, ChatText.Height - 11)
-			PNLHope.Location = New Point(SplitContainer1.Width - 313, ChatText.Height - 12)
-		End If
-
-		'PNLDomTags.Height = SplitContainer1.Panel1.Height
-		'PNLDomTagBTN.Location = New Point(10, (PNLDomTags.Height - 479) / 2)
-
-		'PNLTheme.Height = SplitContainer1.Panel1.Height - 82
-		'PNLThemeBTN.Location = New Point(0, (PNLTheme.Height - 480) / 2)
-
-		' PNLTheme.HorizontalScroll.Visible = False
-		' PNLThemeBTN.HorizontalScroll.Visible = False
-
-		'If PNLDomTagBTN.Location.Y < 30 Then PNLDomTagBTN.Location = New Point(10, 30)
-		'If PNLThemeBTN.Location.Y < 30 Then PNLThemeBTN.Location = New Point(0, 30)
-
-
-
-SkipNew:
-
-
-		If SplitContainer1.Panel2.Height < 68 And BtnToggleMediaPanel.Text = "Hide Media Panel" Then
-			PNLMediaBar.Visible = False
-			browsefolderButton.Visible = False
-			previousButton.Visible = False
-			nextButton.Visible = False
-			BTNLoadVideo.Visible = False
-			BTNVideoControls.Visible = False
-		End If
-
-		If SplitContainer1.Panel2.Height < 68 Then
-			BtnToggleMediaPanel.Enabled = False
-		Else
-			BtnToggleMediaPanel.Enabled = True
-		End If
-
-		If SplitContainer1.Panel2.Height > 67 And BtnToggleMediaPanel.Text = "Hide Media Panel" Then
-			PNLMediaBar.Visible = True
-			browsefolderButton.Visible = True
-			previousButton.Visible = True
-			nextButton.Visible = True
-			BTNLoadVideo.Visible = True
-			BTNVideoControls.Visible = True
-		End If
-
-
-		If FormLoading = False And FormFinishedLoading = True Then
-			My.Settings.SplitterDistance = SplitContainer1.SplitterDistance
-
-		End If
-
-		If ApplyingTheme = False And AdjustingWindow = False Then AdjustWindow()
-
-		ScrollChatDown()
-
-
-
-
-		Debug.Print("SplitContainer1.SplitterDistance = " & SplitContainer1.SplitterDistance)
-
-
-
-	End Sub
-
 
 
 
@@ -19086,270 +18720,47 @@ SkipNew:
 	End Sub
 
 	Public Sub ApplyThemeColor()
-
-		ApplyingTheme = True
-
-		subName.BackColor = My.Settings.ButtonColor
-		subName.ForeColor = My.Settings.TextColor
-		'BTNShowHideApps.BackColor = My.Settings.ButtonColor
-		'BTNShowHideApps.ForeColor = My.Settings.TextColor
-		domName.BackColor = My.Settings.ButtonColor
-		domName.ForeColor = My.Settings.TextColor
-
-		browsefolderButton.BackColor = My.Settings.ButtonColor
-		PNLMediaBar.BackColor = My.Settings.ButtonColor
-		'PNLHope.BackColor = My.Settings.ButtonColor
-		PNLChatBox.BackColor = My.Settings.ButtonColor
-		PNLChatBox2.BackColor = My.Settings.ButtonColor
-
-		previousButton.BackColor = My.Settings.ButtonColor
-		nextButton.BackColor = My.Settings.ButtonColor
-		BTNLoadVideo.BackColor = My.Settings.ButtonColor
-		BTNVideoControls.BackColor = My.Settings.ButtonColor
-
-		BtnToggleMediaPanel.BackColor = My.Settings.ButtonColor
-		BtnToggleImageVideo.BackColor = My.Settings.ButtonColor
-		BtnToggleSettings.BackColor = My.Settings.ButtonColor
-
-		browsefolderButton.ForeColor = My.Settings.TextColor
-		PNLMediaBar.ForeColor = My.Settings.TextColor
-		PNLHope.ForeColor = My.Settings.TextColor
-		PNLChatBox.ForeColor = My.Settings.TextColor
-		PNLChatBox2.ForeColor = My.Settings.TextColor
-
-		previousButton.ForeColor = My.Settings.TextColor
-		nextButton.ForeColor = My.Settings.TextColor
-		BTNLoadVideo.ForeColor = My.Settings.TextColor
-		BTNVideoControls.ForeColor = My.Settings.TextColor
-
-		BtnToggleMediaPanel.ForeColor = My.Settings.TextColor
-		BtnToggleImageVideo.ForeColor = My.Settings.TextColor
-		BtnToggleSettings.ForeColor = My.Settings.TextColor
-
-		PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
-
-		Me.BackColor = My.Settings.BackgroundColor
-
-		' If File.Exists(My.Settings.BackgroundImage) Then
-		'FrmSettings.PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
-		'Me.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
-		'End If
-
-
-		'SplitContainer1.Panel2.BackColor = My.Settings.BackgroundColor
-
-
-
-
-
-		'PNLLazySub.BackColor = my.settings.BackgroundColor
-		'Label27.ForeColor = my.settings.BackgroundColor
-		'Panel1.BackColor = my.settings.BackgroundColor
-		'LBLWishListName.ForeColor = my.settings.BackgroundColor
-		'Panel2.BackColor = my.settings.BackgroundColor
-		'PNLPlaylist.BackColor = my.settings.BackgroundColor
-		'PNLAppRandomizer.BackColor = my.settings.BackgroundColor
-		'PictureBox3.BackColor = my.settings.BackgroundColor
-
-
-
-		Try
-			FrmSettings.LBLBackColor2.BackColor = My.Settings.BackgroundColor
-			FrmSettings.LBLButtonColor2.BackColor = My.Settings.ButtonColor
-			FrmSettings.LBLTextColor2.BackColor = My.Settings.TextColor
-			FrmSettings.LBLChatWindowColor2.BackColor = My.Settings.ChatWindowColor
-			FrmSettings.LBLChatTextColor2.BackColor = My.Settings.ChatTextColor
-			FrmSettings.LBLDateTimeColor2.BackColor = My.Settings.DateTextColor
-			FrmSettings.LBLDateBackColor2.BackColor = My.Settings.DateBackColor
-		Catch
-		End Try
-
-		chatBox.BackColor = My.Settings.ChatWindowColor
-		ChatBox2.BackColor = My.Settings.ChatWindowColor
-		ImageFolderComboBox.BackColor = My.Settings.ChatWindowColor
-		chatBox.ForeColor = My.Settings.ChatTextColor
-		ChatBox2.ForeColor = My.Settings.ChatTextColor
-		ImageFolderComboBox.ForeColor = My.Settings.ChatTextColor
-
-		LBLDate.ForeColor = My.Settings.DateTextColor
-		LBLTime.ForeColor = My.Settings.DateTextColor
-
-		Try
-			FrmSettings.CBTransparentTime.Checked = My.Settings.CBDateTransparent
-
-			If FrmSettings.CBTransparentTime.Checked = True Then
-				PNLDate.BackColor = Color.Transparent
-			Else
-				PNLDate.BackColor = My.Settings.DateBackColor
-			End If
-		Catch
-		End Try
-
-		' github patch
-		StatusUpdates.DocumentText = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & StatusUpdates.DocumentText & "</body>"
-		ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """>" & ssh.Chat & "</body>"
-		ChatText.DocumentText = ssh.Chat
-		ChatText2.DocumentText = ssh.Chat
-		ChatReadyState()
-
-		Try
-			FrmSettings.CBStretchBack.Checked = My.Settings.BackgroundStretch
-
-			If FrmSettings.CBStretchBack.Checked = True Then
-				Me.BackgroundImageLayout = ImageLayout.Stretch
-			Else
-				Me.BackgroundImageLayout = ImageLayout.None
-			End If
-		Catch
-		End Try
-
-		PNLTabs.BackColor = My.Settings.BackgroundColor
-		PNLDomTagBTN.BackColor = My.Settings.BackgroundColor
-		PNLLazySub.BackColor = My.Settings.BackgroundColor
-		PNLLazySub2.BackColor = My.Settings.BackgroundColor
-		PNLAppRandomizer.BackColor = My.Settings.BackgroundColor
-		PNLPlaylist.BackColor = My.Settings.BackgroundColor
-		PNLWritingTask.BackColor = My.Settings.BackgroundColor
-		PNLWishlistHeader.BackColor = My.Settings.BackgroundColor
-		PNLWishlistTokenBack.BackColor = My.Settings.BackgroundColor
-		PNLMetronome.BackColor = My.Settings.BackgroundColor
-
-		PNLHypnoGen.BackColor = My.Settings.BackgroundColor
-
-		CBHypnoGenInduction.ForeColor = My.Settings.TextColor
-		LBLHypnoFile.ForeColor = My.Settings.TextColor
-		CBHypnoGenSlideshow.ForeColor = My.Settings.TextColor
-		LBLHypnoImageTag.ForeColor = My.Settings.TextColor
-		LBLBackTrack.ForeColor = My.Settings.TextColor
-		CBHypnoGenNoText.ForeColor = My.Settings.TextColor
-		CBHypnoGenPhase.ForeColor = My.Settings.TextColor
-
-		BTNHypnoGenStart.ForeColor = My.Settings.TextColor
-		BTNHypnoGenStart.BackColor = My.Settings.ButtonColor
-
-		AppPanelVitalSub.BackColor = My.Settings.BackgroundColor
-
-		CBVitalSubDomTask.ForeColor = My.Settings.TextColor
-		GBGoals.ForeColor = My.Settings.TextColor
-		GBCalories.ForeColor = My.Settings.TextColor
-		LBLConsumed.ForeColor = My.Settings.TextColor
-		LBLGoal.ForeColor = My.Settings.TextColor
-		LBLCalorie.ForeColor = My.Settings.TextColor
-		TBCalorie.ForeColor = My.Settings.TextColor
-		TBCalorie.BackColor = My.Settings.BackgroundColor
-
-		BTNExercise.BackColor = My.Settings.ButtonColor
-		BTNCalorie.BackColor = My.Settings.ButtonColor
-		BTNExercise.ForeColor = My.Settings.TextColor
-		BTNCalorie.ForeColor = My.Settings.TextColor
-
-		BTNMetroPreview1.BackColor = My.Settings.ButtonColor
-		BTNMetroPreview2.BackColor = My.Settings.ButtonColor
-		BTNMetroStop1.BackColor = My.Settings.ButtonColor
-		BTNMetroStop2.BackColor = My.Settings.ButtonColor
-
-		BTNMetroPreview1.ForeColor = My.Settings.TextColor
-		BTNMetroPreview2.ForeColor = My.Settings.TextColor
-		BTNMetroStop1.ForeColor = My.Settings.TextColor
-		BTNMetroStop2.ForeColor = My.Settings.TextColor
-
-		CBMetronome.ForeColor = My.Settings.TextColor
-		LBLMaxSpeed.ForeColor = My.Settings.TextColor
-		LBLMinSpeed.ForeColor = My.Settings.TextColor
-		LBLLow.ForeColor = My.Settings.TextColor
-		LBLHigh.ForeColor = My.Settings.TextColor
-
-
-		BTNLS1Edit.BackColor = My.Settings.ButtonColor
-		BTNLS1Edit.ForeColor = My.Settings.TextColor
-		BTNLS2Edit.BackColor = My.Settings.ButtonColor
-		BTNLS2Edit.ForeColor = My.Settings.TextColor
-		BTNLS3Edit.BackColor = My.Settings.ButtonColor
-		BTNLS3Edit.ForeColor = My.Settings.TextColor
-		BTNLS4Edit.BackColor = My.Settings.ButtonColor
-		BTNLS4Edit.ForeColor = My.Settings.TextColor
-		BTNLS5Edit.BackColor = My.Settings.ButtonColor
-		BTNLS5Edit.ForeColor = My.Settings.TextColor
-
-
-		Try
-			If FrmSettings.CBFlipBack.Checked = True Then
-
-
-				Dim BGIMage As Image = CType(Bitmap.FromFile(My.Settings.BackgroundImage), Bitmap)
-				BGIMage.RotateFlip(RotateFlipType.Rotate180FlipY)
-
-				BackgroundImage = BGIMage
-				FrmSettings.PBBackgroundPreview.Image = BGIMage
-
-
-
-			Else
-
-
-				BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
-				FrmSettings.PBBackgroundPreview.Image = Image.FromFile(My.Settings.BackgroundImage)
-
-			End If
-
-		Catch
-		End Try
-
-		ApplyingTheme = False
-
-
-        'TabControl1.DefaultBackColor = My.Settings.BackgroundColor
-
-    End Sub
-
-
-
-
-
-
-
-
-
-
-
-
-	Public Sub OpenApp()
-
-		PNLTabs.Height = Me.Height - 429
-
-		AdjustWindow()
-
 	End Sub
 
-	Public Sub CloseApp()
 
-		PNLDomTagBTN.Visible = False
-		StatusUpdates.Visible = False
-		If SideChatToolStripMenuItem1.Checked = False Then
-			ChatText2.Visible = False
-			PNLChatBox2.Visible = False
-		Else
-			ChatText2.SendToBack()
-			PNLChatBox2.SendToBack()
-		End If
-		PNLLazySub.Visible = False
-		PNLLazySub2.Visible = False
-		PNLAppRandomizer.Visible = False
-		PNLPlaylist.Visible = False
-		PNLWritingTask.Visible = False
-		PNLWishList.Visible = False
-		PNLHypnoGen.Visible = False
-		AppPanelVitalSub.Visible = False
-		PNLMetronome.Visible = False
 
-		If ChatText2.Visible = False Then
-			PNLTabs.Height = 0
-		Else
-			OpenApp()
+
+
+
+
+
+
+
+
+
+
+	Public Sub CloseApp(ByVal appToOpen As Panel)
+		If appToOpen Is Nothing AndAlso My.Settings.SideChat Then
+			appToOpen = PnlSidechat
 		End If
 
+		For Each pnl As Control In PNLTabs.Controls
+			If appToOpen IsNot Nothing AndAlso pnl Is appToOpen Then
+				pnl.Visible = True
+			Else
+				pnl.Visible = False
+			End If
+		Next
 
-		AdjustWindow()
+		If appToOpen Is Nothing Then
+			PNLTabs.Visible = False
+			PnlTabsLayout.Visible = False
+		Else
+			PNLTabs.Visible = True
+			PnlTabsLayout.Visible = True
+		End If
+
+		If MaximizeImageToolStripMenuItem.Checked AndAlso SidepanelToolStripMenuItem.Checked AndAlso PnlSidechat.Visible = True Then
+			PnlChatBoxLayout.Visible = False
+		Else
+			PnlChatBoxLayout.Visible = True
+		End If
+
 	End Sub
 
 #Region "------------------------------------------------------- Apps ---------------------------------------------------------"
@@ -19777,7 +19188,7 @@ SkipNew:
 				My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(ssh.ImageLocation) & "\ImageTags.txt", SettingsString, False)
 			End If
 
-		ElseIf Path.GetDirectoryName(TagFile) = Path.GetDirectoryName(ssh.ImageLocation)
+		ElseIf Path.GetDirectoryName(TagFile) = Path.GetDirectoryName(ssh.ImageLocation) Then
 			' Only Create new file for the loaded Slidshow. This Prevents URL-Image-Tagging.
 			My.Computer.FileSystem.WriteAllText(Path.GetDirectoryName(ssh.ImageLocation) & "\ImageTags.txt", Path.GetFileName(ssh.ImageLocation) & " " & DomTag & Custom, True)
 
@@ -20673,7 +20084,7 @@ SkipNew:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			If sender IsNot Nothing Then
 				MsgBox("Error on jumping to Random Position in Video!" & vbCrLf & ex.Message,
-						vbExclamation, "Jump to random Position")
+				  vbExclamation, "Jump to random Position")
 			Else
 				Throw
 			End If
@@ -21440,28 +20851,16 @@ playLoop:
 
 
 	Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
-		CloseApp()
-		ChatText2.Visible = True
-		PNLChatBox2.Visible = True
-		OpenApp()
-		SideChatToolStripMenuItem1.Checked = True
 		My.Settings.SideChat = True
+		CloseApp(PNLChatBox2)
 	End Sub
 
 	Public Sub ClearWriteTask()
-		'WritingTaskTimer.Stop()
 		ssh.WritingTaskCurrentTime = 0
 		ssh.WritingTaskFlag = False
 		chatBox.ShortcutsEnabled = True
 		ChatBox2.ShortcutsEnabled = True
-		CloseApp()
-		If ChatText.Height < 31 Then
-			ChatText2.Visible = True
-			PNLChatBox2.Visible = True
-			OpenApp()
-			SideChatToolStripMenuItem1.Checked = True
-			My.Settings.SideChat = True
-		End If
+		CloseApp(Nothing)
 	End Sub
 
 	Public Sub ClearChat()
@@ -21550,4 +20949,23 @@ playLoop:
 		Return Len(StringClean) - Len(Replace(StringClean, Character, ""))
 	End Function
 
+	Private Sub Form1_PreviewKeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+		If e.KeyCode = (Keys.F Or Keys.Control) Then
+			FullscreenToolStripMenuItem_Click(Nothing, Nothing)
+		ElseIf e.Alt AndAlso MainMenuStrip.Visible = False Then
+			MainMenuStrip.Visible = True
+			MainMenuStrip.Focus()
+		ElseIf e.Alt AndAlso FormBorderStyle = Windows.Forms.FormBorderStyle.None Then
+			MainMenuStrip.Visible = False
+		End If
+	End Sub
+
+	Private Sub MenuStrip2_Leave(sender As System.Object, e As System.EventArgs) Handles MenuStrip2.Leave
+		If FormBorderStyle = Windows.Forms.FormBorderStyle.None Then
+			MainMenuStrip.Visible = False
+		End If
+	End Sub
+
+
 End Class
+
