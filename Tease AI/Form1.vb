@@ -451,52 +451,19 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		Me.ActiveControl = Me.chatBox
 
-
-		'If My.Settings.CBGlitterFeed = False And My.Settings.CBGlitterFeedScripts = False And My.Settings.CBGlitterFeedOff = False Then
-		'My.Settings.CBGlitterFeedOff = True
-		'End If
-
-		'QUESTION: (1885) Don't know what to do about these settings. The radio buttons staunchly refuse to be DataBound and non-DataBound settings don't currently save, so ¯\_(ツ)_/¯
-		'ANSWER: (Stefaf) I'll take a look at this based on this link: http://stackoverflow.com/questions/11405020/radio-buttons-and-databinding-in-vb-net
-		'TODO-Next-Stefaf: Add Databinding to RadioButtons.
-		If My.Settings.CBGlitterFeed = True Then FrmSettings.CBGlitterFeed.Checked = True
-		If My.Settings.CBGlitterFeedScripts = True Then FrmSettings.CBGlitterFeedScripts.Checked = True
-		If My.Settings.CBGlitterFeedOff = True Then FrmSettings.CBGlitterFeedOff.Checked = True
-
-		'TODO-Next-Stefaf: Optimize Code
-		If My.Settings.CBTease = True Then
-			FrmSettings.CBTease.Checked = True
-		Else
-			FrmSettings.CBTease.Checked = False
+		'################## Validate RadioButtons #################
+		If My.Settings.CBGlitterFeedOff Then
+			My.Settings.CBGlitterFeed = False
+			My.Settings.CBGlitterFeedScripts = False
+		ElseIf My.Settings.CBGlitterFeed
+			' No need to unset My.Settings.CBGlitterFeedOff. 
+			' If it would be true, this branch Is unreachable
+			My.Settings.CBGlitterFeedScripts = False
+		ElseIf My.Settings.CBGlitterFeed = False _
+		AndAlso My.Settings.CBGlitterFeedOff = False _
+		AndAlso My.Settings.CBGlitterFeedScripts = False Then
+			My.Settings.CBGlitterFeedOff = True
 		End If
-		If My.Settings.CBEgotist = True Then
-			FrmSettings.CBEgotist.Checked = True
-		Else
-			FrmSettings.CBEgotist.Checked = False
-		End If
-		If My.Settings.CBTrivia = True Then
-			FrmSettings.CBTrivia.Checked = True
-		Else
-			FrmSettings.CBTrivia.Checked = False
-		End If
-		If My.Settings.CBDaily = True Then
-			FrmSettings.CBDaily.Checked = True
-		Else
-			FrmSettings.CBDaily.Checked = False
-		End If
-		If My.Settings.CBCustom1 = True Then
-			FrmSettings.CBCustom1.Checked = True
-		Else
-			FrmSettings.CBCustom1.Checked = False
-		End If
-		If My.Settings.CBCustom2 = True Then
-			FrmSettings.CBCustom2.Checked = True
-		Else
-			FrmSettings.CBCustom2.Checked = False
-		End If
-
-
-
 
 
 		FrmSplash.PBSplash.Value += 1
@@ -7783,37 +7750,37 @@ StatusUpdateEnd:
 
 				ssh.UpdateList.Clear()
 
-				If FrmSettings.CBTease.Checked = True Then
+				If My.Settings.CBTease = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Tease\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBEgotist.Checked = True Then
+				If My.Settings.CBEgotist = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Egotist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBTrivia.Checked = True Then
+				If My.Settings.CBTrivia = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Trivia\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBDaily.Checked = True Then
+				If My.Settings.CBDaily = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Daily\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBCustom1.Checked = True Then
+				If My.Settings.CBCustom1 = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Custom 1\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBCustom2.Checked = True Then
+				If My.Settings.CBCustom2 = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Custom 2\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next

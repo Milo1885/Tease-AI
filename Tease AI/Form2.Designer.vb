@@ -657,10 +657,10 @@ Partial Class FrmSettings
 		Me.Label121 = New System.Windows.Forms.Label()
 		Me.Label122 = New System.Windows.Forms.Label()
 		Me.GBGlitterD = New System.Windows.Forms.GroupBox()
+		Me.GrbGlitterfeed = New System.Windows.Forms.GroupBox()
+		Me.CBGlitterFeed = New System.Windows.Forms.RadioButton()
 		Me.CBGlitterFeedOff = New System.Windows.Forms.RadioButton()
 		Me.CBGlitterFeedScripts = New System.Windows.Forms.RadioButton()
-		Me.CBGlitterFeed = New System.Windows.Forms.RadioButton()
-		Me.Label118 = New System.Windows.Forms.Label()
 		Me.BTNGlitterD = New System.Windows.Forms.Button()
 		Me.LBLGlitterNCDomme = New System.Windows.Forms.Label()
 		Me.LBLGlitterSlider = New System.Windows.Forms.Label()
@@ -1107,265 +1107,266 @@ Partial Class FrmSettings
 		Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 		Me.TextBox2 = New System.Windows.Forms.TextBox()
 		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
-		Me.SettingsPanel.SuspendLayout
-		Me.SettingsTabs.SuspendLayout
-		Me.TabPage1.SuspendLayout
-		Me.PNLGeneralSettings.SuspendLayout
-		Me.GroupBox64.SuspendLayout
-		Me.GBDommeImages.SuspendLayout
-		CType(Me.slideshowNumBox,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBGeneralTextToSpeech.SuspendLayout
-		CType(Me.SliderVRate,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.SliderVVolume,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBSafeword.SuspendLayout
-		Me.GBGeneralSystem.SuspendLayout
-		Me.GBGeneralImages.SuspendLayout
-		CType(Me.PictureBox2,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBGeneralSettings.SuspendLayout
-		Me.GBSubFont.SuspendLayout
-		CType(Me.NBFontSize,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBDommeFont.SuspendLayout
-		CType(Me.NBFontSizeD,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TabPage2.SuspendLayout
-		Me.Panel3.SuspendLayout
-		CType(Me.PictureBox4,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBDomTypingStyle.SuspendLayout
-		CType(Me.NBTypoChance,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox63.SuspendLayout
-		Me.GBDomRanges.SuspendLayout
-		CType(Me.NBDomMoodMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBDomMoodMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBSubAgeMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBSubAgeMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBSelfAgeMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBSelfAgeMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBAvgCockMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBAvgCockMin,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBDomStats.SuspendLayout
-		CType(Me.NBEmpathy,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBDomBirthdayDay,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.domageNumBox,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBDomBirthdayMonth,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.domlevelNumBox,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBDomPersonality.SuspendLayout
-		Me.GBDomOrgasms.SuspendLayout
-		CType(Me.orgasmsPerNumBox,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBDomPetNames.SuspendLayout
-		Me.TabPage10.SuspendLayout
-		Me.Panel2.SuspendLayout
-		Me.GroupBox22.SuspendLayout
-		CType(Me.NBWritingTaskMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBWritingTaskMin,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox45.SuspendLayout
-		CType(Me.CBTSlider,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox35.SuspendLayout
-		Me.GroupBox39.SuspendLayout
-		Me.GroupBox38.SuspendLayout
-		Me.GroupBox37.SuspendLayout
-		Me.GroupBox36.SuspendLayout
-		Me.GroupBox13.SuspendLayout
-		Me.GroupBox7.SuspendLayout
-		CType(Me.NBExtremeHoldMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBExtremeHoldMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBLongHoldMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBLongHoldMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBLongEdge,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBHoldTheEdgeMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBHoldTheEdgeMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.PictureBox12,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox32.SuspendLayout
-		CType(Me.NBBirthdayDay,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.subAgeNumBox,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBBirthdayMonth,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.CockSizeNumBox,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TabPage16.SuspendLayout
-		Me.Panel9.SuspendLayout
-		Me.GroupBox31.SuspendLayout
-		Me.TCScripts.SuspendLayout
-		Me.TabPage21.SuspendLayout
-		Me.TabPage17.SuspendLayout
-		Me.TabPage18.SuspendLayout
-		Me.TabPage19.SuspendLayout
-		Me.GroupBox42.SuspendLayout
-		CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox43.SuspendLayout
-		Me.TabPage7.SuspendLayout
-		Me.TabControl4.SuspendLayout
-		Me.TpImagesUrlFiles.SuspendLayout
-		Me.GroupBox66.SuspendLayout
-		CType(Me.PBURLPreview,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TpImagesGenre.SuspendLayout
-		Me.GrbImageUrlFiles.SuspendLayout
-		Me.TlpImageUrls.SuspendLayout
-		Me.GbxImagesGenre.SuspendLayout
-		Me.TableLayoutPanel1.SuspendLayout
-		Me.TabPage33.SuspendLayout
-		Me.TabControl5.SuspendLayout
-		Me.TabPage34.SuspendLayout
-		CType(Me.ImageTagPictureBox,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TabPage35.SuspendLayout
-		Me.GroupBox55.SuspendLayout
-		Me.GroupBox53.SuspendLayout
-		Me.GroupBox49.SuspendLayout
-		Me.GroupBox46.SuspendLayout
-		Me.GroupBox54.SuspendLayout
-		Me.GroupBox51.SuspendLayout
-		Me.GroupBox50.SuspendLayout
-		Me.GroupBox48.SuspendLayout
-		Me.TabPage11.SuspendLayout
-		Me.Panel7.SuspendLayout
-		CType(Me.PictureBox5,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.WebPictureBox,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TpVideoSettings.SuspendLayout
-		Me.PnlVideoSettings.SuspendLayout
-		CType(Me.PbBannerVideoSettings,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GbxVideoGeneralD.SuspendLayout
-		Me.GbxVideoSpecialD.SuspendLayout
-		Me.GbxVideoGenreD.SuspendLayout
-		Me.GbxVideoDescription.SuspendLayout
-		Me.GbxVideoGeneral.SuspendLayout
-		Me.GbxVideoSpecial.SuspendLayout
-		Me.GbxVideoGenre.SuspendLayout
-		Me.TabPage20.SuspendLayout
-		Me.TabControl1.SuspendLayout
-		Me.TabPage22.SuspendLayout
-		Me.PNLGlitter.SuspendLayout
-		Me.GBGlitterD.SuspendLayout
-		CType(Me.GlitterSlider,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.GlitterAV,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBGlitter1.SuspendLayout
-		CType(Me.GlitterSlider1,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.GlitterAV1,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBGlitter3.SuspendLayout
-		CType(Me.GlitterSlider3,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.GlitterAV3,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBGlitter2.SuspendLayout
-		CType(Me.GlitterSlider2,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.GlitterAV2,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TpGames.SuspendLayout
-		Me.GbxCardsGold.SuspendLayout
-		CType(Me.GP6,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.GP2,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.GP5,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.GP1,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.GP3,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.GP4,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GbxCardsBackground.SuspendLayout
-		CType(Me.CardBack,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GbxCardsBronze.SuspendLayout
-		CType(Me.BP3,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.BP6,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.BP5,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.BP2,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.BP4,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.BP1,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GbxCardsSilver.SuspendLayout
-		CType(Me.SP6,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.SP2,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.SP5,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.SP1,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.SP3,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.SP4,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TabPage6.SuspendLayout
-		Me.Panel10.SuspendLayout
-		CType(Me.NBWishlistCost,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.PNLWishList.SuspendLayout
-		CType(Me.WishlistCostSilver,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.WishlistCostGold,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.WishlistPreview,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TabPage26.SuspendLayout
-		Me.Panel12.SuspendLayout
-		Me.GroupBox9.SuspendLayout
-		CType(Me.PictureBox10,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox5.SuspendLayout
-		Me.GroupBox11.SuspendLayout
-		Me.GroupBox1.SuspendLayout
-		CType(Me.PBBackgroundPreview,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TabPage4.SuspendLayout
-		Me.Panel6.SuspendLayout
-		Me.GroupBox69.SuspendLayout
-		CType(Me.TypeSpeedSlider,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox68.SuspendLayout
-		CType(Me.NBTasksMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTasksMin,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox67.SuspendLayout
-		CType(Me.NBTaskCBTTimeMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTaskCBTTimeMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTaskEdgeHoldTimeMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTaskEdgeHoldTimeMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTaskEdgesMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTaskEdgesMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTaskStrokingTimeMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTaskStrokingTimeMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTaskStrokesMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTaskStrokesMin,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox10.SuspendLayout
-		CType(Me.NBNextImageChance,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox57.SuspendLayout
-		CType(Me.NBTauntEdging,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.SliderSTF,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.TauntSlider,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTauntCycleMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTauntCycleMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTeaseLengthMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBTeaseLengthMin,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBRangeRuinChance.SuspendLayout
-		CType(Me.NBRuinSometimes,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBRuinRarely,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBRuinOften,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox17.SuspendLayout
-		Me.GroupBox19.SuspendLayout
-		CType(Me.NBGreenLightMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBGreenLightMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBRedLightMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBRedLightMin,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox18.SuspendLayout
-		CType(Me.NBCensorShowMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBCensorHideMax,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBCensorHideMin,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBCensorShowMax,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GBRangeOrgasmChance.SuspendLayout
-		CType(Me.NBAllowSometimes,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBAllowRarely,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.NBAllowOften,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.PictureBox8,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TabPage13.SuspendLayout
-		Me.TabControl2.SuspendLayout
-		Me.TabPage27.SuspendLayout
-		Me.TabPage14.SuspendLayout
-		Me.TabPage24.SuspendLayout
-		Me.TabPage8.SuspendLayout
-		Me.GroupBox29.SuspendLayout
-		Me.GroupBox28.SuspendLayout
-		Me.GroupBox30.SuspendLayout
-		Me.TabPage15.SuspendLayout
-		Me.GroupBox34.SuspendLayout
-		Me.TabPage25.SuspendLayout
-		Me.Panel11.SuspendLayout
-		Me.GroupBox62.SuspendLayout
-		Me.GroupBox33.SuspendLayout
-		Me.GroupBox27.SuspendLayout
-		Me.GroupBox20.SuspendLayout
-		Me.GroupBox15.SuspendLayout
-		CType(Me.PictureBox9,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.TabPage28.SuspendLayout
-		Me.TabControl3.SuspendLayout
-		Me.TabPage29.SuspendLayout
-		Me.GroupBox26.SuspendLayout
-		Me.TabPage30.SuspendLayout
-		Me.TabPage5.SuspendLayout
-		Me.Panel5.SuspendLayout
-		CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.GroupBox47.SuspendLayout
-		Me.GroupBox41.SuspendLayout
-		Me.GroupBox44.SuspendLayout
-		Me.GroupBox6.SuspendLayout
-		Me.GroupBox21.SuspendLayout
-		Me.GroupBox12.SuspendLayout
-		Me.GroupBox65.SuspendLayout
-		CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).BeginInit
-		CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).BeginInit
-		Me.SuspendLayout
+		Me.SettingsPanel.SuspendLayout()
+		Me.SettingsTabs.SuspendLayout()
+		Me.TabPage1.SuspendLayout()
+		Me.PNLGeneralSettings.SuspendLayout()
+		Me.GroupBox64.SuspendLayout()
+		Me.GBDommeImages.SuspendLayout()
+		CType(Me.slideshowNumBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBGeneralTextToSpeech.SuspendLayout()
+		CType(Me.SliderVRate, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SliderVVolume, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBSafeword.SuspendLayout()
+		Me.GBGeneralSystem.SuspendLayout()
+		Me.GBGeneralImages.SuspendLayout()
+		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBGeneralSettings.SuspendLayout()
+		Me.GBSubFont.SuspendLayout()
+		CType(Me.NBFontSize, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBDommeFont.SuspendLayout()
+		CType(Me.NBFontSizeD, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TabPage2.SuspendLayout()
+		Me.Panel3.SuspendLayout()
+		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBDomTypingStyle.SuspendLayout()
+		CType(Me.NBTypoChance, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox63.SuspendLayout()
+		Me.GBDomRanges.SuspendLayout()
+		CType(Me.NBDomMoodMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBDomMoodMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBSubAgeMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBSubAgeMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBSelfAgeMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBSelfAgeMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBAvgCockMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBAvgCockMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBDomStats.SuspendLayout()
+		CType(Me.NBEmpathy, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBDomBirthdayDay, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.domageNumBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBDomBirthdayMonth, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.domlevelNumBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBDomPersonality.SuspendLayout()
+		Me.GBDomOrgasms.SuspendLayout()
+		CType(Me.orgasmsPerNumBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBDomPetNames.SuspendLayout()
+		Me.TabPage10.SuspendLayout()
+		Me.Panel2.SuspendLayout()
+		Me.GroupBox22.SuspendLayout()
+		CType(Me.NBWritingTaskMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBWritingTaskMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox45.SuspendLayout()
+		CType(Me.CBTSlider, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox35.SuspendLayout()
+		Me.GroupBox39.SuspendLayout()
+		Me.GroupBox38.SuspendLayout()
+		Me.GroupBox37.SuspendLayout()
+		Me.GroupBox36.SuspendLayout()
+		Me.GroupBox13.SuspendLayout()
+		Me.GroupBox7.SuspendLayout()
+		CType(Me.NBExtremeHoldMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBExtremeHoldMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBLongHoldMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBLongHoldMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBLongEdge, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBHoldTheEdgeMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBHoldTheEdgeMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox32.SuspendLayout()
+		CType(Me.NBBirthdayDay, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.subAgeNumBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBBirthdayMonth, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.CockSizeNumBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TabPage16.SuspendLayout()
+		Me.Panel9.SuspendLayout()
+		Me.GroupBox31.SuspendLayout()
+		Me.TCScripts.SuspendLayout()
+		Me.TabPage21.SuspendLayout()
+		Me.TabPage17.SuspendLayout()
+		Me.TabPage18.SuspendLayout()
+		Me.TabPage19.SuspendLayout()
+		Me.GroupBox42.SuspendLayout()
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox43.SuspendLayout()
+		Me.TabPage7.SuspendLayout()
+		Me.TabControl4.SuspendLayout()
+		Me.TpImagesUrlFiles.SuspendLayout()
+		Me.GroupBox66.SuspendLayout()
+		CType(Me.PBURLPreview, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TpImagesGenre.SuspendLayout()
+		Me.GrbImageUrlFiles.SuspendLayout()
+		Me.TlpImageUrls.SuspendLayout()
+		Me.GbxImagesGenre.SuspendLayout()
+		Me.TableLayoutPanel1.SuspendLayout()
+		Me.TabPage33.SuspendLayout()
+		Me.TabControl5.SuspendLayout()
+		Me.TabPage34.SuspendLayout()
+		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TabPage35.SuspendLayout()
+		Me.GroupBox55.SuspendLayout()
+		Me.GroupBox53.SuspendLayout()
+		Me.GroupBox49.SuspendLayout()
+		Me.GroupBox46.SuspendLayout()
+		Me.GroupBox54.SuspendLayout()
+		Me.GroupBox51.SuspendLayout()
+		Me.GroupBox50.SuspendLayout()
+		Me.GroupBox48.SuspendLayout()
+		Me.TabPage11.SuspendLayout()
+		Me.Panel7.SuspendLayout()
+		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.WebPictureBox, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TpVideoSettings.SuspendLayout()
+		Me.PnlVideoSettings.SuspendLayout()
+		CType(Me.PbBannerVideoSettings, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GbxVideoGeneralD.SuspendLayout()
+		Me.GbxVideoSpecialD.SuspendLayout()
+		Me.GbxVideoGenreD.SuspendLayout()
+		Me.GbxVideoDescription.SuspendLayout()
+		Me.GbxVideoGeneral.SuspendLayout()
+		Me.GbxVideoSpecial.SuspendLayout()
+		Me.GbxVideoGenre.SuspendLayout()
+		Me.TabPage20.SuspendLayout()
+		Me.TabControl1.SuspendLayout()
+		Me.TabPage22.SuspendLayout()
+		Me.PNLGlitter.SuspendLayout()
+		Me.GBGlitterD.SuspendLayout()
+		Me.GrbGlitterfeed.SuspendLayout()
+		CType(Me.GlitterSlider, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GlitterAV, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBGlitter1.SuspendLayout()
+		CType(Me.GlitterSlider1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GlitterAV1, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBGlitter3.SuspendLayout()
+		CType(Me.GlitterSlider3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GlitterAV3, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBGlitter2.SuspendLayout()
+		CType(Me.GlitterSlider2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GlitterAV2, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TpGames.SuspendLayout()
+		Me.GbxCardsGold.SuspendLayout()
+		CType(Me.GP6, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP5, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.GP4, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GbxCardsBackground.SuspendLayout()
+		CType(Me.CardBack, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GbxCardsBronze.SuspendLayout()
+		CType(Me.BP3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP6, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP5, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP4, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.BP1, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GbxCardsSilver.SuspendLayout()
+		CType(Me.SP6, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP2, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP5, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP3, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SP4, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TabPage6.SuspendLayout()
+		Me.Panel10.SuspendLayout()
+		CType(Me.NBWishlistCost, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.PNLWishList.SuspendLayout()
+		CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TabPage26.SuspendLayout()
+		Me.Panel12.SuspendLayout()
+		Me.GroupBox9.SuspendLayout()
+		CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox5.SuspendLayout()
+		Me.GroupBox11.SuspendLayout()
+		Me.GroupBox1.SuspendLayout()
+		CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TabPage4.SuspendLayout()
+		Me.Panel6.SuspendLayout()
+		Me.GroupBox69.SuspendLayout()
+		CType(Me.TypeSpeedSlider, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox68.SuspendLayout()
+		CType(Me.NBTasksMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTasksMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox67.SuspendLayout()
+		CType(Me.NBTaskCBTTimeMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTaskCBTTimeMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTaskEdgeHoldTimeMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTaskEdgeHoldTimeMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTaskEdgesMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTaskEdgesMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTaskStrokingTimeMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTaskStrokingTimeMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTaskStrokesMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTaskStrokesMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox10.SuspendLayout()
+		CType(Me.NBNextImageChance, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox57.SuspendLayout()
+		CType(Me.NBTauntEdging, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.SliderSTF, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.TauntSlider, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTauntCycleMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTauntCycleMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTeaseLengthMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBTeaseLengthMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBRangeRuinChance.SuspendLayout()
+		CType(Me.NBRuinSometimes, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBRuinRarely, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBRuinOften, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox17.SuspendLayout()
+		Me.GroupBox19.SuspendLayout()
+		CType(Me.NBGreenLightMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBGreenLightMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBRedLightMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBRedLightMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox18.SuspendLayout()
+		CType(Me.NBCensorShowMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBCensorHideMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBCensorHideMin, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBCensorShowMax, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBRangeOrgasmChance.SuspendLayout()
+		CType(Me.NBAllowSometimes, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBAllowRarely, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.NBAllowOften, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TabPage13.SuspendLayout()
+		Me.TabControl2.SuspendLayout()
+		Me.TabPage27.SuspendLayout()
+		Me.TabPage14.SuspendLayout()
+		Me.TabPage24.SuspendLayout()
+		Me.TabPage8.SuspendLayout()
+		Me.GroupBox29.SuspendLayout()
+		Me.GroupBox28.SuspendLayout()
+		Me.GroupBox30.SuspendLayout()
+		Me.TabPage15.SuspendLayout()
+		Me.GroupBox34.SuspendLayout()
+		Me.TabPage25.SuspendLayout()
+		Me.Panel11.SuspendLayout()
+		Me.GroupBox62.SuspendLayout()
+		Me.GroupBox33.SuspendLayout()
+		Me.GroupBox27.SuspendLayout()
+		Me.GroupBox20.SuspendLayout()
+		Me.GroupBox15.SuspendLayout()
+		CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.TabPage28.SuspendLayout()
+		Me.TabControl3.SuspendLayout()
+		Me.TabPage29.SuspendLayout()
+		Me.GroupBox26.SuspendLayout()
+		Me.TabPage30.SuspendLayout()
+		Me.TabPage5.SuspendLayout()
+		Me.Panel5.SuspendLayout()
+		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox47.SuspendLayout()
+		Me.GroupBox41.SuspendLayout()
+		Me.GroupBox44.SuspendLayout()
+		Me.GroupBox6.SuspendLayout()
+		Me.GroupBox21.SuspendLayout()
+		Me.GroupBox12.SuspendLayout()
+		Me.GroupBox65.SuspendLayout()
+		CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
+		CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.SuspendLayout()
 		'
 		'SettingsPanel
 		'
@@ -1440,18 +1441,18 @@ Partial Class FrmSettings
 		Me.BtnImportSettings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
 		Me.BtnImportSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
 		Me.BtnImportSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.BtnImportSettings.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BtnImportSettings.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BtnImportSettings.ForeColor = System.Drawing.Color.Black
 		Me.BtnImportSettings.Location = New System.Drawing.Point(669, 14)
 		Me.BtnImportSettings.Name = "BtnImportSettings"
 		Me.BtnImportSettings.Size = New System.Drawing.Size(30, 26)
 		Me.BtnImportSettings.TabIndex = 158
-		Me.BtnImportSettings.UseVisualStyleBackColor = false
+		Me.BtnImportSettings.UseVisualStyleBackColor = False
 		'
 		'LblImportSettings
 		'
-		Me.LblImportSettings.AutoSize = true
-		Me.LblImportSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 7!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblImportSettings.AutoSize = True
+		Me.LblImportSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblImportSettings.ForeColor = System.Drawing.Color.Black
 		Me.LblImportSettings.Location = New System.Drawing.Point(664, 0)
 		Me.LblImportSettings.Name = "LblImportSettings"
@@ -1469,22 +1470,22 @@ Partial Class FrmSettings
 		Me.GroupBox64.Name = "GroupBox64"
 		Me.GroupBox64.Size = New System.Drawing.Size(259, 49)
 		Me.GroupBox64.TabIndex = 157
-		Me.GroupBox64.TabStop = false
+		Me.GroupBox64.TabStop = False
 		Me.GroupBox64.Text = "Media Options"
 		'
 		'CBMuteMedia
 		'
-		Me.CBMuteMedia.AutoSize = true
+		Me.CBMuteMedia.AutoSize = True
 		Me.CBMuteMedia.Checked = Global.Tease_AI.My.MySettings.Default.MuteMedia
-		Me.CBMuteMedia.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "MuteMedia", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBMuteMedia.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "MuteMedia", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBMuteMedia.ForeColor = System.Drawing.Color.Black
 		Me.CBMuteMedia.Location = New System.Drawing.Point(7, 21)
 		Me.CBMuteMedia.Name = "CBMuteMedia"
 		Me.CBMuteMedia.Size = New System.Drawing.Size(241, 17)
 		Me.CBMuteMedia.TabIndex = 6
-		Me.CBMuteMedia.TabStop = false
+		Me.CBMuteMedia.TabStop = False
 		Me.CBMuteMedia.Text = "Mute Video and Audio Played in Media Player"
-		Me.CBMuteMedia.UseVisualStyleBackColor = true
+		Me.CBMuteMedia.UseVisualStyleBackColor = True
 		'
 		'GBDommeImages
 		'
@@ -1501,13 +1502,13 @@ Partial Class FrmSettings
 		Me.GBDommeImages.Name = "GBDommeImages"
 		Me.GBDommeImages.Size = New System.Drawing.Size(210, 128)
 		Me.GBDommeImages.TabIndex = 156
-		Me.GBDommeImages.TabStop = false
+		Me.GBDommeImages.TabStop = False
 		Me.GBDommeImages.Text = "Slideshow Options"
 		'
 		'slideshowNumBox
 		'
 		Me.slideshowNumBox.BackColor = System.Drawing.Color.White
-		Me.slideshowNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.slideshowNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.slideshowNumBox.ForeColor = System.Drawing.Color.Black
 		Me.slideshowNumBox.Location = New System.Drawing.Point(93, 20)
 		Me.slideshowNumBox.Maximum = New Decimal(New Integer() {120, 0, 0, 0})
@@ -1519,73 +1520,73 @@ Partial Class FrmSettings
 		'
 		'teaseRadio
 		'
-		Me.teaseRadio.AutoSize = true
-		Me.teaseRadio.Checked = true
-		Me.teaseRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.teaseRadio.AutoSize = True
+		Me.teaseRadio.Checked = True
+		Me.teaseRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.teaseRadio.ForeColor = System.Drawing.Color.Black
 		Me.teaseRadio.Location = New System.Drawing.Point(149, 21)
 		Me.teaseRadio.Name = "teaseRadio"
 		Me.teaseRadio.Size = New System.Drawing.Size(55, 17)
 		Me.teaseRadio.TabIndex = 21
-		Me.teaseRadio.TabStop = true
+		Me.teaseRadio.TabStop = True
 		Me.teaseRadio.Text = "Tease"
-		Me.teaseRadio.UseVisualStyleBackColor = true
+		Me.teaseRadio.UseVisualStyleBackColor = True
 		'
 		'CBNewSlideshow
 		'
-		Me.CBNewSlideshow.AutoSize = true
-		Me.CBNewSlideshow.Checked = true
+		Me.CBNewSlideshow.AutoSize = True
+		Me.CBNewSlideshow.Checked = True
 		Me.CBNewSlideshow.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBNewSlideshow.ForeColor = System.Drawing.Color.Black
 		Me.CBNewSlideshow.Location = New System.Drawing.Point(6, 100)
 		Me.CBNewSlideshow.Name = "CBNewSlideshow"
 		Me.CBNewSlideshow.Size = New System.Drawing.Size(200, 17)
 		Me.CBNewSlideshow.TabIndex = 18
-		Me.CBNewSlideshow.TabStop = false
+		Me.CBNewSlideshow.TabStop = False
 		Me.CBNewSlideshow.Text = "Load New Slideshow When Finished"
-		Me.CBNewSlideshow.UseVisualStyleBackColor = true
+		Me.CBNewSlideshow.UseVisualStyleBackColor = True
 		'
 		'offRadio
 		'
-		Me.offRadio.AutoSize = true
-		Me.offRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.offRadio.AutoSize = True
+		Me.offRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.offRadio.ForeColor = System.Drawing.Color.Black
 		Me.offRadio.Location = New System.Drawing.Point(6, 21)
 		Me.offRadio.Name = "offRadio"
 		Me.offRadio.Size = New System.Drawing.Size(60, 17)
 		Me.offRadio.TabIndex = 18
 		Me.offRadio.Text = "Manual"
-		Me.offRadio.UseVisualStyleBackColor = true
+		Me.offRadio.UseVisualStyleBackColor = True
 		'
 		'BTNDomImageDir
 		'
 		Me.BTNDomImageDir.BackColor = System.Drawing.Color.LightGray
-		Me.BTNDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNDomImageDir.ForeColor = System.Drawing.Color.Black
 		Me.BTNDomImageDir.Location = New System.Drawing.Point(6, 45)
 		Me.BTNDomImageDir.Name = "BTNDomImageDir"
 		Me.BTNDomImageDir.Size = New System.Drawing.Size(198, 22)
 		Me.BTNDomImageDir.TabIndex = 17
 		Me.BTNDomImageDir.Text = "Set Domme Images Directory"
-		Me.BTNDomImageDir.UseVisualStyleBackColor = false
+		Me.BTNDomImageDir.UseVisualStyleBackColor = False
 		'
 		'timedRadio
 		'
-		Me.timedRadio.AutoSize = true
-		Me.timedRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.timedRadio.AutoSize = True
+		Me.timedRadio.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.timedRadio.ForeColor = System.Drawing.Color.Black
 		Me.timedRadio.Location = New System.Drawing.Point(72, 23)
 		Me.timedRadio.Name = "timedRadio"
 		Me.timedRadio.Size = New System.Drawing.Size(14, 13)
 		Me.timedRadio.TabIndex = 19
-		Me.timedRadio.UseVisualStyleBackColor = true
+		Me.timedRadio.UseVisualStyleBackColor = True
 		'
 		'LBLDomImageDir
 		'
 		Me.LBLDomImageDir.BackColor = System.Drawing.Color.Transparent
 		Me.LBLDomImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLDomImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "DomImageDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLDomImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "DomImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLDomImageDir.ForeColor = System.Drawing.Color.Black
 		Me.LBLDomImageDir.Location = New System.Drawing.Point(6, 73)
 		Me.LBLDomImageDir.Name = "LBLDomImageDir"
@@ -1610,7 +1611,7 @@ Partial Class FrmSettings
 		Me.GBGeneralTextToSpeech.Name = "GBGeneralTextToSpeech"
 		Me.GBGeneralTextToSpeech.Size = New System.Drawing.Size(259, 117)
 		Me.GBGeneralTextToSpeech.TabIndex = 0
-		Me.GBGeneralTextToSpeech.TabStop = false
+		Me.GBGeneralTextToSpeech.TabStop = False
 		Me.GBGeneralTextToSpeech.Text = "Text to Speech"
 		'
 		'LBLVRate
@@ -1624,7 +1625,7 @@ Partial Class FrmSettings
 		'
 		'Label93
 		'
-		Me.Label93.AutoSize = true
+		Me.Label93.AutoSize = True
 		Me.Label93.Location = New System.Drawing.Point(141, 52)
 		Me.Label93.Name = "Label93"
 		Me.Label93.Size = New System.Drawing.Size(33, 13)
@@ -1642,7 +1643,7 @@ Partial Class FrmSettings
 		'
 		'Label68
 		'
-		Me.Label68.AutoSize = true
+		Me.Label68.AutoSize = True
 		Me.Label68.Location = New System.Drawing.Point(14, 52)
 		Me.Label68.Name = "Label68"
 		Me.Label68.Size = New System.Drawing.Size(45, 13)
@@ -1668,27 +1669,27 @@ Partial Class FrmSettings
 		'
 		'TTSCheckBox
 		'
-		Me.TTSCheckBox.AutoSize = true
+		Me.TTSCheckBox.AutoSize = True
 		Me.TTSCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.TTSCheckBox.Location = New System.Drawing.Point(10, 21)
 		Me.TTSCheckBox.Name = "TTSCheckBox"
 		Me.TTSCheckBox.Size = New System.Drawing.Size(59, 17)
 		Me.TTSCheckBox.TabIndex = 28
-		Me.TTSCheckBox.TabStop = false
+		Me.TTSCheckBox.TabStop = False
 		Me.TTSCheckBox.Text = "Enable"
-		Me.TTSCheckBox.UseVisualStyleBackColor = true
+		Me.TTSCheckBox.UseVisualStyleBackColor = True
 		'
 		'TTSComboBox
 		'
 		Me.TTSComboBox.BackColor = System.Drawing.SystemColors.Window
 		Me.TTSComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.TTSComboBox.ForeColor = System.Drawing.SystemColors.WindowText
-		Me.TTSComboBox.FormattingEnabled = true
+		Me.TTSComboBox.FormattingEnabled = True
 		Me.TTSComboBox.Location = New System.Drawing.Point(71, 19)
 		Me.TTSComboBox.Name = "TTSComboBox"
 		Me.TTSComboBox.Size = New System.Drawing.Size(178, 21)
 		Me.TTSComboBox.TabIndex = 29
-		Me.TTSComboBox.TabStop = false
+		Me.TTSComboBox.TabStop = False
 		'
 		'GBSafeword
 		'
@@ -1700,7 +1701,7 @@ Partial Class FrmSettings
 		Me.GBSafeword.Name = "GBSafeword"
 		Me.GBSafeword.Size = New System.Drawing.Size(259, 74)
 		Me.GBSafeword.TabIndex = 0
-		Me.GBSafeword.TabStop = false
+		Me.GBSafeword.TabStop = False
 		Me.GBSafeword.Text = "Safeword"
 		'
 		'LBLSafeword
@@ -1709,8 +1710,8 @@ Partial Class FrmSettings
 		Me.LBLSafeword.Name = "LBLSafeword"
 		Me.LBLSafeword.Size = New System.Drawing.Size(225, 29)
 		Me.LBLSafeword.TabIndex = 0
-		Me.LBLSafeword.Text = "Enter a safeword that will stop all activity until the domme is sure you're able "& _ 
-    "to continue."
+		Me.LBLSafeword.Text = "Enter a safeword that will stop all activity until the domme is sure you're able " &
+	"to continue."
 		Me.LBLSafeword.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'TBSafeword
@@ -1733,72 +1734,72 @@ Partial Class FrmSettings
 		Me.GBGeneralSystem.Name = "GBGeneralSystem"
 		Me.GBGeneralSystem.Size = New System.Drawing.Size(259, 140)
 		Me.GBGeneralSystem.TabIndex = 0
-		Me.GBGeneralSystem.TabStop = false
+		Me.GBGeneralSystem.TabStop = False
 		Me.GBGeneralSystem.Text = "System"
 		'
 		'CBAuditStartup
 		'
-		Me.CBAuditStartup.AutoSize = true
+		Me.CBAuditStartup.AutoSize = True
 		Me.CBAuditStartup.ForeColor = System.Drawing.Color.Black
 		Me.CBAuditStartup.Location = New System.Drawing.Point(7, 19)
 		Me.CBAuditStartup.Name = "CBAuditStartup"
 		Me.CBAuditStartup.Size = New System.Drawing.Size(137, 17)
 		Me.CBAuditStartup.TabIndex = 26
-		Me.CBAuditStartup.TabStop = false
+		Me.CBAuditStartup.TabStop = False
 		Me.CBAuditStartup.Text = "Audit Scripts on Startup"
-		Me.CBAuditStartup.UseVisualStyleBackColor = true
+		Me.CBAuditStartup.UseVisualStyleBackColor = True
 		'
 		'CBDomDel
 		'
-		Me.CBDomDel.AutoSize = true
+		Me.CBDomDel.AutoSize = True
 		Me.CBDomDel.ForeColor = System.Drawing.Color.Black
 		Me.CBDomDel.Location = New System.Drawing.Point(7, 110)
 		Me.CBDomDel.Name = "CBDomDel"
 		Me.CBDomDel.Size = New System.Drawing.Size(197, 17)
 		Me.CBDomDel.TabIndex = 27
-		Me.CBDomDel.TabStop = false
+		Me.CBDomDel.TabStop = False
 		Me.CBDomDel.Text = "Allow Domme to Delete Local Media"
-		Me.CBDomDel.UseVisualStyleBackColor = true
+		Me.CBDomDel.UseVisualStyleBackColor = True
 		'
 		'CBSettingsPause
 		'
-		Me.CBSettingsPause.AutoSize = true
+		Me.CBSettingsPause.AutoSize = True
 		Me.CBSettingsPause.ForeColor = System.Drawing.Color.Black
 		Me.CBSettingsPause.Location = New System.Drawing.Point(7, 41)
 		Me.CBSettingsPause.Name = "CBSettingsPause"
 		Me.CBSettingsPause.Size = New System.Drawing.Size(244, 17)
 		Me.CBSettingsPause.TabIndex = 22
-		Me.CBSettingsPause.TabStop = false
+		Me.CBSettingsPause.TabStop = False
 		Me.CBSettingsPause.Text = "Pause Program When Settings Menu is Visible"
-		Me.CBSettingsPause.UseVisualStyleBackColor = true
+		Me.CBSettingsPause.UseVisualStyleBackColor = True
 		'
 		'CBSaveChatlogExit
 		'
-		Me.CBSaveChatlogExit.AutoSize = true
-		Me.CBSaveChatlogExit.Checked = true
+		Me.CBSaveChatlogExit.AutoSize = True
+		Me.CBSaveChatlogExit.Checked = True
 		Me.CBSaveChatlogExit.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBSaveChatlogExit.ForeColor = System.Drawing.Color.Black
 		Me.CBSaveChatlogExit.Location = New System.Drawing.Point(7, 87)
 		Me.CBSaveChatlogExit.Name = "CBSaveChatlogExit"
 		Me.CBSaveChatlogExit.Size = New System.Drawing.Size(162, 17)
 		Me.CBSaveChatlogExit.TabIndex = 25
-		Me.CBSaveChatlogExit.TabStop = false
+		Me.CBSaveChatlogExit.TabStop = False
 		Me.CBSaveChatlogExit.Text = "Save Unique Chatlog on Exit"
-		Me.CBSaveChatlogExit.UseVisualStyleBackColor = true
+		Me.CBSaveChatlogExit.UseVisualStyleBackColor = True
 		'
 		'CBAutosaveChatlog
 		'
-		Me.CBAutosaveChatlog.AutoSize = true
-		Me.CBAutosaveChatlog.Checked = true
+		Me.CBAutosaveChatlog.AutoSize = True
+		Me.CBAutosaveChatlog.Checked = True
 		Me.CBAutosaveChatlog.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBAutosaveChatlog.ForeColor = System.Drawing.Color.Black
 		Me.CBAutosaveChatlog.Location = New System.Drawing.Point(7, 64)
 		Me.CBAutosaveChatlog.Name = "CBAutosaveChatlog"
 		Me.CBAutosaveChatlog.Size = New System.Drawing.Size(110, 17)
 		Me.CBAutosaveChatlog.TabIndex = 24
-		Me.CBAutosaveChatlog.TabStop = false
+		Me.CBAutosaveChatlog.TabStop = False
 		Me.CBAutosaveChatlog.Text = "Autosave Chatlog"
-		Me.CBAutosaveChatlog.UseVisualStyleBackColor = true
+		Me.CBAutosaveChatlog.UseVisualStyleBackColor = True
 		'
 		'GBGeneralImages
 		'
@@ -1811,72 +1812,72 @@ Partial Class FrmSettings
 		Me.GBGeneralImages.Name = "GBGeneralImages"
 		Me.GBGeneralImages.Size = New System.Drawing.Size(210, 140)
 		Me.GBGeneralImages.TabIndex = 0
-		Me.GBGeneralImages.TabStop = false
+		Me.GBGeneralImages.TabStop = False
 		Me.GBGeneralImages.Text = "Images"
 		'
 		'CBImageInfo
 		'
-		Me.CBImageInfo.AutoSize = true
+		Me.CBImageInfo.AutoSize = True
 		Me.CBImageInfo.ForeColor = System.Drawing.Color.Black
 		Me.CBImageInfo.Location = New System.Drawing.Point(6, 110)
 		Me.CBImageInfo.Name = "CBImageInfo"
 		Me.CBImageInfo.Size = New System.Drawing.Size(147, 17)
 		Me.CBImageInfo.TabIndex = 16
-		Me.CBImageInfo.TabStop = false
+		Me.CBImageInfo.TabStop = False
 		Me.CBImageInfo.Text = "Display Image Information"
-		Me.CBImageInfo.UseVisualStyleBackColor = true
+		Me.CBImageInfo.UseVisualStyleBackColor = True
 		'
 		'CBSlideshowRandom
 		'
-		Me.CBSlideshowRandom.AutoSize = true
+		Me.CBSlideshowRandom.AutoSize = True
 		Me.CBSlideshowRandom.ForeColor = System.Drawing.Color.Black
 		Me.CBSlideshowRandom.Location = New System.Drawing.Point(6, 64)
 		Me.CBSlideshowRandom.Name = "CBSlideshowRandom"
 		Me.CBSlideshowRandom.Size = New System.Drawing.Size(202, 17)
 		Me.CBSlideshowRandom.TabIndex = 14
-		Me.CBSlideshowRandom.TabStop = false
+		Me.CBSlideshowRandom.TabStop = False
 		Me.CBSlideshowRandom.Text = "Display Slideshow Pictures Randomly"
-		Me.CBSlideshowRandom.UseVisualStyleBackColor = true
+		Me.CBSlideshowRandom.UseVisualStyleBackColor = True
 		'
 		'landscapeCheckBox
 		'
-		Me.landscapeCheckBox.AutoSize = true
+		Me.landscapeCheckBox.AutoSize = True
 		Me.landscapeCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.landscapeCheckBox.Location = New System.Drawing.Point(6, 87)
 		Me.landscapeCheckBox.Name = "landscapeCheckBox"
 		Me.landscapeCheckBox.Size = New System.Drawing.Size(153, 17)
 		Me.landscapeCheckBox.TabIndex = 15
-		Me.landscapeCheckBox.TabStop = false
+		Me.landscapeCheckBox.TabStop = False
 		Me.landscapeCheckBox.Text = "Stretch Landscape Images"
-		Me.landscapeCheckBox.UseVisualStyleBackColor = true
+		Me.landscapeCheckBox.UseVisualStyleBackColor = True
 		'
 		'CBBlogImageWindow
 		'
-		Me.CBBlogImageWindow.AutoSize = true
-		Me.CBBlogImageWindow.Checked = true
+		Me.CBBlogImageWindow.AutoSize = True
+		Me.CBBlogImageWindow.Checked = True
 		Me.CBBlogImageWindow.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBBlogImageWindow.ForeColor = System.Drawing.Color.Black
 		Me.CBBlogImageWindow.Location = New System.Drawing.Point(6, 18)
 		Me.CBBlogImageWindow.Name = "CBBlogImageWindow"
 		Me.CBBlogImageWindow.Size = New System.Drawing.Size(178, 17)
 		Me.CBBlogImageWindow.TabIndex = 12
-		Me.CBBlogImageWindow.TabStop = false
+		Me.CBBlogImageWindow.TabStop = False
 		Me.CBBlogImageWindow.Text = "Save Blog Images From Session"
-		Me.CBBlogImageWindow.UseVisualStyleBackColor = true
+		Me.CBBlogImageWindow.UseVisualStyleBackColor = True
 		'
 		'CBSlideshowSubDir
 		'
-		Me.CBSlideshowSubDir.AutoSize = true
-		Me.CBSlideshowSubDir.Checked = true
+		Me.CBSlideshowSubDir.AutoSize = True
+		Me.CBSlideshowSubDir.Checked = True
 		Me.CBSlideshowSubDir.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBSlideshowSubDir.ForeColor = System.Drawing.Color.Black
 		Me.CBSlideshowSubDir.Location = New System.Drawing.Point(6, 41)
 		Me.CBSlideshowSubDir.Name = "CBSlideshowSubDir"
 		Me.CBSlideshowSubDir.Size = New System.Drawing.Size(187, 17)
 		Me.CBSlideshowSubDir.TabIndex = 13
-		Me.CBSlideshowSubDir.TabStop = false
+		Me.CBSlideshowSubDir.TabStop = False
 		Me.CBSlideshowSubDir.Text = "Slideshow Includes Subdirectories"
-		Me.CBSlideshowSubDir.UseVisualStyleBackColor = true
+		Me.CBSlideshowSubDir.UseVisualStyleBackColor = True
 		'
 		'PictureBox2
 		'
@@ -1887,7 +1888,7 @@ Partial Class FrmSettings
 		Me.PictureBox2.Size = New System.Drawing.Size(160, 19)
 		Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
 		Me.PictureBox2.TabIndex = 148
-		Me.PictureBox2.TabStop = false
+		Me.PictureBox2.TabStop = False
 		'
 		'GBGeneralSettings
 		'
@@ -1904,20 +1905,20 @@ Partial Class FrmSettings
 		Me.GBGeneralSettings.Name = "GBGeneralSettings"
 		Me.GBGeneralSettings.Size = New System.Drawing.Size(211, 326)
 		Me.GBGeneralSettings.TabIndex = 0
-		Me.GBGeneralSettings.TabStop = false
+		Me.GBGeneralSettings.TabStop = False
 		Me.GBGeneralSettings.Text = "Chat Window"
 		'
 		'CBWebtease
 		'
-		Me.CBWebtease.AutoSize = true
+		Me.CBWebtease.AutoSize = True
 		Me.CBWebtease.ForeColor = System.Drawing.Color.Black
 		Me.CBWebtease.Location = New System.Drawing.Point(6, 110)
 		Me.CBWebtease.Name = "CBWebtease"
 		Me.CBWebtease.Size = New System.Drawing.Size(105, 17)
 		Me.CBWebtease.TabIndex = 5
-		Me.CBWebtease.TabStop = false
+		Me.CBWebtease.TabStop = False
 		Me.CBWebtease.Text = "Webtease Mode"
-		Me.CBWebtease.UseVisualStyleBackColor = true
+		Me.CBWebtease.UseVisualStyleBackColor = True
 		'
 		'GBSubFont
 		'
@@ -1930,27 +1931,27 @@ Partial Class FrmSettings
 		Me.GBSubFont.Name = "GBSubFont"
 		Me.GBSubFont.Size = New System.Drawing.Size(200, 77)
 		Me.GBSubFont.TabIndex = 0
-		Me.GBSubFont.TabStop = false
+		Me.GBSubFont.TabStop = False
 		Me.GBSubFont.Text = "Sub Font Settings"
 		'
 		'BTNSubColor
 		'
 		Me.BTNSubColor.BackColor = System.Drawing.Color.LightGray
-		Me.BTNSubColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNSubColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNSubColor.ForeColor = System.Drawing.Color.Black
 		Me.BTNSubColor.Location = New System.Drawing.Point(6, 19)
 		Me.BTNSubColor.Name = "BTNSubColor"
 		Me.BTNSubColor.Size = New System.Drawing.Size(110, 25)
 		Me.BTNSubColor.TabIndex = 8
 		Me.BTNSubColor.Text = "Sub Name Color"
-		Me.BTNSubColor.UseVisualStyleBackColor = false
+		Me.BTNSubColor.UseVisualStyleBackColor = False
 		'
 		'LBLSubColor
 		'
 		Me.LBLSubColor.BackColor = System.Drawing.Color.White
 		Me.LBLSubColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLSubColor.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "SubColorColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLSubColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLSubColor.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "SubColorColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLSubColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLSubColor.ForeColor = Global.Tease_AI.My.MySettings.Default.SubColorColor
 		Me.LBLSubColor.Location = New System.Drawing.Point(120, 20)
 		Me.LBLSubColor.Name = "LBLSubColor"
@@ -1962,7 +1963,7 @@ Partial Class FrmSettings
 		'NBFontSize
 		'
 		Me.NBFontSize.BackColor = System.Drawing.Color.White
-		Me.NBFontSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.NBFontSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.NBFontSize.ForeColor = System.Drawing.Color.Black
 		Me.NBFontSize.Location = New System.Drawing.Point(147, 47)
 		Me.NBFontSize.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -1975,7 +1976,7 @@ Partial Class FrmSettings
 		'Label2
 		'
 		Me.Label2.BackColor = System.Drawing.Color.Transparent
-		Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label2.ForeColor = System.Drawing.Color.Black
 		Me.Label2.Location = New System.Drawing.Point(117, 45)
 		Me.Label2.Name = "Label2"
@@ -1986,7 +1987,7 @@ Partial Class FrmSettings
 		'
 		'FontComboBox
 		'
-		Me.FontComboBox.FormattingEnabled = true
+		Me.FontComboBox.FormattingEnabled = True
 		Me.FontComboBox.Location = New System.Drawing.Point(6, 46)
 		Me.FontComboBox.Name = "FontComboBox"
 		Me.FontComboBox.Size = New System.Drawing.Size(110, 21)
@@ -2003,27 +2004,27 @@ Partial Class FrmSettings
 		Me.GBDommeFont.Name = "GBDommeFont"
 		Me.GBDommeFont.Size = New System.Drawing.Size(200, 77)
 		Me.GBDommeFont.TabIndex = 0
-		Me.GBDommeFont.TabStop = false
+		Me.GBDommeFont.TabStop = False
 		Me.GBDommeFont.Text = "Domme Font Settings"
 		'
 		'BTNDomColor
 		'
 		Me.BTNDomColor.BackColor = System.Drawing.Color.LightGray
-		Me.BTNDomColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNDomColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNDomColor.ForeColor = System.Drawing.Color.Black
 		Me.BTNDomColor.Location = New System.Drawing.Point(6, 19)
 		Me.BTNDomColor.Name = "BTNDomColor"
 		Me.BTNDomColor.Size = New System.Drawing.Size(110, 25)
 		Me.BTNDomColor.TabIndex = 5
 		Me.BTNDomColor.Text = "Domme Name Color"
-		Me.BTNDomColor.UseVisualStyleBackColor = false
+		Me.BTNDomColor.UseVisualStyleBackColor = False
 		'
 		'LBLDomColor
 		'
 		Me.LBLDomColor.BackColor = System.Drawing.Color.White
 		Me.LBLDomColor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLDomColor.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "DomColorColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLDomColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLDomColor.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "DomColorColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLDomColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLDomColor.ForeColor = Global.Tease_AI.My.MySettings.Default.DomColorColor
 		Me.LBLDomColor.Location = New System.Drawing.Point(120, 20)
 		Me.LBLDomColor.Name = "LBLDomColor"
@@ -2034,7 +2035,7 @@ Partial Class FrmSettings
 		'
 		'FontComboBoxD
 		'
-		Me.FontComboBoxD.FormattingEnabled = true
+		Me.FontComboBoxD.FormattingEnabled = True
 		Me.FontComboBoxD.Location = New System.Drawing.Point(6, 46)
 		Me.FontComboBoxD.Name = "FontComboBoxD"
 		Me.FontComboBoxD.Size = New System.Drawing.Size(110, 21)
@@ -2043,7 +2044,7 @@ Partial Class FrmSettings
 		'NBFontSizeD
 		'
 		Me.NBFontSizeD.BackColor = System.Drawing.Color.White
-		Me.NBFontSizeD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.NBFontSizeD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.NBFontSizeD.ForeColor = System.Drawing.Color.Black
 		Me.NBFontSizeD.Location = New System.Drawing.Point(147, 47)
 		Me.NBFontSizeD.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -2056,7 +2057,7 @@ Partial Class FrmSettings
 		'Label7
 		'
 		Me.Label7.BackColor = System.Drawing.Color.Transparent
-		Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label7.ForeColor = System.Drawing.Color.Black
 		Me.Label7.Location = New System.Drawing.Point(117, 45)
 		Me.Label7.Name = "Label7"
@@ -2067,62 +2068,62 @@ Partial Class FrmSettings
 		'
 		'CBInputIcon
 		'
-		Me.CBInputIcon.AutoSize = true
-		Me.CBInputIcon.Checked = true
+		Me.CBInputIcon.AutoSize = True
+		Me.CBInputIcon.Checked = True
 		Me.CBInputIcon.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBInputIcon.ForeColor = System.Drawing.Color.Black
 		Me.CBInputIcon.Location = New System.Drawing.Point(6, 87)
 		Me.CBInputIcon.Name = "CBInputIcon"
 		Me.CBInputIcon.Size = New System.Drawing.Size(188, 17)
 		Me.CBInputIcon.TabIndex = 4
-		Me.CBInputIcon.TabStop = false
+		Me.CBInputIcon.TabStop = False
 		Me.CBInputIcon.Text = "Show Icon During Input Questions"
-		Me.CBInputIcon.UseVisualStyleBackColor = true
+		Me.CBInputIcon.UseVisualStyleBackColor = True
 		'
 		'typeinstantlyCheckBox
 		'
-		Me.typeinstantlyCheckBox.AutoSize = true
+		Me.typeinstantlyCheckBox.AutoSize = True
 		Me.typeinstantlyCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.typeinstantlyCheckBox.Location = New System.Drawing.Point(6, 64)
 		Me.typeinstantlyCheckBox.Name = "typeinstantlyCheckBox"
 		Me.typeinstantlyCheckBox.Size = New System.Drawing.Size(136, 17)
 		Me.typeinstantlyCheckBox.TabIndex = 3
-		Me.typeinstantlyCheckBox.TabStop = false
+		Me.typeinstantlyCheckBox.TabStop = False
 		Me.typeinstantlyCheckBox.Text = "Domme Types Instantly"
-		Me.typeinstantlyCheckBox.UseVisualStyleBackColor = true
+		Me.typeinstantlyCheckBox.UseVisualStyleBackColor = True
 		'
 		'timestampCheckBox
 		'
-		Me.timestampCheckBox.AutoSize = true
-		Me.timestampCheckBox.Checked = true
+		Me.timestampCheckBox.AutoSize = True
+		Me.timestampCheckBox.Checked = True
 		Me.timestampCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.timestampCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.timestampCheckBox.Location = New System.Drawing.Point(6, 18)
 		Me.timestampCheckBox.Name = "timestampCheckBox"
 		Me.timestampCheckBox.Size = New System.Drawing.Size(112, 17)
 		Me.timestampCheckBox.TabIndex = 1
-		Me.timestampCheckBox.TabStop = false
+		Me.timestampCheckBox.TabStop = False
 		Me.timestampCheckBox.Text = "Show Timestamps"
-		Me.timestampCheckBox.UseVisualStyleBackColor = true
+		Me.timestampCheckBox.UseVisualStyleBackColor = True
 		'
 		'shownamesCheckBox
 		'
-		Me.shownamesCheckBox.AutoSize = true
-		Me.shownamesCheckBox.Checked = true
+		Me.shownamesCheckBox.AutoSize = True
+		Me.shownamesCheckBox.Checked = True
 		Me.shownamesCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.shownamesCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.shownamesCheckBox.Location = New System.Drawing.Point(6, 41)
 		Me.shownamesCheckBox.Name = "shownamesCheckBox"
 		Me.shownamesCheckBox.Size = New System.Drawing.Size(125, 17)
 		Me.shownamesCheckBox.TabIndex = 2
-		Me.shownamesCheckBox.TabStop = false
+		Me.shownamesCheckBox.TabStop = False
 		Me.shownamesCheckBox.Text = "Always Show Names"
-		Me.shownamesCheckBox.UseVisualStyleBackColor = true
+		Me.shownamesCheckBox.UseVisualStyleBackColor = True
 		'
 		'LBLGeneralSettings
 		'
 		Me.LBLGeneralSettings.BackColor = System.Drawing.Color.Transparent
-		Me.LBLGeneralSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGeneralSettings.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGeneralSettings.ForeColor = System.Drawing.Color.Black
 		Me.LBLGeneralSettings.Location = New System.Drawing.Point(7, 6)
 		Me.LBLGeneralSettings.Name = "LBLGeneralSettings"
@@ -2172,13 +2173,13 @@ Partial Class FrmSettings
 		Me.BTNLoadDomSet.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
 		Me.BTNLoadDomSet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
 		Me.BTNLoadDomSet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.BTNLoadDomSet.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNLoadDomSet.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNLoadDomSet.ForeColor = System.Drawing.Color.Black
 		Me.BTNLoadDomSet.Location = New System.Drawing.Point(671, 11)
 		Me.BTNLoadDomSet.Name = "BTNLoadDomSet"
 		Me.BTNLoadDomSet.Size = New System.Drawing.Size(30, 26)
 		Me.BTNLoadDomSet.TabIndex = 150
-		Me.BTNLoadDomSet.UseVisualStyleBackColor = false
+		Me.BTNLoadDomSet.UseVisualStyleBackColor = False
 		'
 		'BTNSaveDomSet
 		'
@@ -2189,18 +2190,18 @@ Partial Class FrmSettings
 		Me.BTNSaveDomSet.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
 		Me.BTNSaveDomSet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
 		Me.BTNSaveDomSet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.BTNSaveDomSet.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNSaveDomSet.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNSaveDomSet.ForeColor = System.Drawing.Color.Black
 		Me.BTNSaveDomSet.Location = New System.Drawing.Point(636, 8)
 		Me.BTNSaveDomSet.Name = "BTNSaveDomSet"
 		Me.BTNSaveDomSet.Size = New System.Drawing.Size(30, 26)
 		Me.BTNSaveDomSet.TabIndex = 151
-		Me.BTNSaveDomSet.UseVisualStyleBackColor = false
+		Me.BTNSaveDomSet.UseVisualStyleBackColor = False
 		'
 		'Label127
 		'
-		Me.Label127.AutoSize = true
-		Me.Label127.Font = New System.Drawing.Font("Microsoft Sans Serif", 7!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label127.AutoSize = True
+		Me.Label127.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label127.ForeColor = System.Drawing.Color.Black
 		Me.Label127.Location = New System.Drawing.Point(670, -3)
 		Me.Label127.Name = "Label127"
@@ -2211,8 +2212,8 @@ Partial Class FrmSettings
 		'
 		'Label126
 		'
-		Me.Label126.AutoSize = true
-		Me.Label126.Font = New System.Drawing.Font("Microsoft Sans Serif", 7!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label126.AutoSize = True
+		Me.Label126.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label126.ForeColor = System.Drawing.Color.Black
 		Me.Label126.Location = New System.Drawing.Point(636, -3)
 		Me.Label126.Name = "Label126"
@@ -2230,7 +2231,7 @@ Partial Class FrmSettings
 		Me.PictureBox4.Size = New System.Drawing.Size(160, 19)
 		Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
 		Me.PictureBox4.TabIndex = 149
-		Me.PictureBox4.TabStop = false
+		Me.PictureBox4.TabStop = False
 		'
 		'GBDomTypingStyle
 		'
@@ -2242,19 +2243,19 @@ Partial Class FrmSettings
 		Me.GBDomTypingStyle.Controls.Add(Me.CBMeMyMine)
 		Me.GBDomTypingStyle.Controls.Add(Me.GroupBox63)
 		Me.GBDomTypingStyle.Controls.Add(Me.Label64)
-		Me.GBDomTypingStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.GBDomTypingStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.GBDomTypingStyle.ForeColor = System.Drawing.Color.Black
 		Me.GBDomTypingStyle.Location = New System.Drawing.Point(7, 299)
 		Me.GBDomTypingStyle.Name = "GBDomTypingStyle"
 		Me.GBDomTypingStyle.Size = New System.Drawing.Size(427, 124)
 		Me.GBDomTypingStyle.TabIndex = 138
-		Me.GBDomTypingStyle.TabStop = false
+		Me.GBDomTypingStyle.TabStop = False
 		Me.GBDomTypingStyle.Text = "Typing Style"
 		'
 		'TBEmoteEnd
 		'
 		Me.TBEmoteEnd.BackColor = System.Drawing.Color.White
-		Me.TBEmoteEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBEmoteEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBEmoteEnd.ForeColor = System.Drawing.Color.Black
 		Me.TBEmoteEnd.Location = New System.Drawing.Point(115, 91)
 		Me.TBEmoteEnd.Name = "TBEmoteEnd"
@@ -2265,8 +2266,8 @@ Partial Class FrmSettings
 		'
 		'Label67
 		'
-		Me.Label67.AutoSize = true
-		Me.Label67.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label67.AutoSize = True
+		Me.Label67.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label67.ForeColor = System.Drawing.Color.Black
 		Me.Label67.Location = New System.Drawing.Point(237, 77)
 		Me.Label67.Name = "Label67"
@@ -2278,7 +2279,7 @@ Partial Class FrmSettings
 		'TBEmote
 		'
 		Me.TBEmote.BackColor = System.Drawing.Color.White
-		Me.TBEmote.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBEmote.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBEmote.ForeColor = System.Drawing.Color.Black
 		Me.TBEmote.Location = New System.Drawing.Point(9, 91)
 		Me.TBEmote.Name = "TBEmote"
@@ -2297,8 +2298,8 @@ Partial Class FrmSettings
 		'
 		'Label66
 		'
-		Me.Label66.AutoSize = true
-		Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label66.AutoSize = True
+		Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label66.ForeColor = System.Drawing.Color.Black
 		Me.Label66.Location = New System.Drawing.Point(322, 77)
 		Me.Label66.Name = "Label66"
@@ -2309,15 +2310,15 @@ Partial Class FrmSettings
 		'
 		'CBMeMyMine
 		'
-		Me.CBMeMyMine.AutoSize = true
-		Me.CBMeMyMine.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBMeMyMine.AutoSize = True
+		Me.CBMeMyMine.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBMeMyMine.ForeColor = System.Drawing.Color.Black
 		Me.CBMeMyMine.Location = New System.Drawing.Point(325, 97)
 		Me.CBMeMyMine.Name = "CBMeMyMine"
 		Me.CBMeMyMine.Size = New System.Drawing.Size(88, 17)
 		Me.CBMeMyMine.TabIndex = 40
 		Me.CBMeMyMine.Text = "Me/My/Mine"
-		Me.CBMeMyMine.UseVisualStyleBackColor = true
+		Me.CBMeMyMine.UseVisualStyleBackColor = True
 		'
 		'GroupBox63
 		'
@@ -2329,61 +2330,61 @@ Partial Class FrmSettings
 		Me.GroupBox63.Name = "GroupBox63"
 		Me.GroupBox63.Size = New System.Drawing.Size(407, 48)
 		Me.GroupBox63.TabIndex = 41
-		Me.GroupBox63.TabStop = false
+		Me.GroupBox63.TabStop = False
 		Me.GroupBox63.Text = "Remove"
 		'
 		'LCaseCheckBox
 		'
-		Me.LCaseCheckBox.AutoSize = true
-		Me.LCaseCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LCaseCheckBox.AutoSize = True
+		Me.LCaseCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LCaseCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.LCaseCheckBox.Location = New System.Drawing.Point(16, 19)
 		Me.LCaseCheckBox.Name = "LCaseCheckBox"
 		Me.LCaseCheckBox.Size = New System.Drawing.Size(88, 17)
 		Me.LCaseCheckBox.TabIndex = 38
 		Me.LCaseCheckBox.Text = "Capitalization"
-		Me.LCaseCheckBox.UseVisualStyleBackColor = true
+		Me.LCaseCheckBox.UseVisualStyleBackColor = True
 		'
 		'apostropheCheckBox
 		'
-		Me.apostropheCheckBox.AutoSize = true
-		Me.apostropheCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.apostropheCheckBox.AutoSize = True
+		Me.apostropheCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.apostropheCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.apostropheCheckBox.Location = New System.Drawing.Point(116, 19)
 		Me.apostropheCheckBox.Name = "apostropheCheckBox"
 		Me.apostropheCheckBox.Size = New System.Drawing.Size(85, 17)
 		Me.apostropheCheckBox.TabIndex = 39
 		Me.apostropheCheckBox.Text = "Apostrophes"
-		Me.apostropheCheckBox.UseVisualStyleBackColor = true
+		Me.apostropheCheckBox.UseVisualStyleBackColor = True
 		'
 		'periodCheckBox
 		'
-		Me.periodCheckBox.AutoSize = true
-		Me.periodCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.periodCheckBox.AutoSize = True
+		Me.periodCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.periodCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.periodCheckBox.Location = New System.Drawing.Point(316, 19)
 		Me.periodCheckBox.Name = "periodCheckBox"
 		Me.periodCheckBox.Size = New System.Drawing.Size(61, 17)
 		Me.periodCheckBox.TabIndex = 37
 		Me.periodCheckBox.Text = "Periods"
-		Me.periodCheckBox.UseVisualStyleBackColor = true
+		Me.periodCheckBox.UseVisualStyleBackColor = True
 		'
 		'commaCheckBox
 		'
-		Me.commaCheckBox.AutoSize = true
-		Me.commaCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.commaCheckBox.AutoSize = True
+		Me.commaCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.commaCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.commaCheckBox.Location = New System.Drawing.Point(216, 19)
 		Me.commaCheckBox.Name = "commaCheckBox"
 		Me.commaCheckBox.Size = New System.Drawing.Size(66, 17)
 		Me.commaCheckBox.TabIndex = 36
 		Me.commaCheckBox.Text = "Commas"
-		Me.commaCheckBox.UseVisualStyleBackColor = true
+		Me.commaCheckBox.UseVisualStyleBackColor = True
 		'
 		'Label64
 		'
-		Me.Label64.AutoSize = true
-		Me.Label64.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label64.AutoSize = True
+		Me.Label64.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label64.ForeColor = System.Drawing.Color.Black
 		Me.Label64.Location = New System.Drawing.Point(8, 77)
 		Me.Label64.Name = "Label64"
@@ -2414,7 +2415,7 @@ Partial Class FrmSettings
 		Me.GBDomRanges.Name = "GBDomRanges"
 		Me.GBDomRanges.Size = New System.Drawing.Size(259, 94)
 		Me.GBDomRanges.TabIndex = 148
-		Me.GBDomRanges.TabStop = false
+		Me.GBDomRanges.TabStop = False
 		Me.GBDomRanges.Text = "Ranges"
 		'
 		'NBDomMoodMax
@@ -2440,7 +2441,7 @@ Partial Class FrmSettings
 		'Label37
 		'
 		Me.Label37.BackColor = System.Drawing.Color.Transparent
-		Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label37.ForeColor = System.Drawing.Color.Black
 		Me.Label37.Location = New System.Drawing.Point(184, 11)
 		Me.Label37.Name = "Label37"
@@ -2452,7 +2453,7 @@ Partial Class FrmSettings
 		'Label39
 		'
 		Me.Label39.BackColor = System.Drawing.Color.Transparent
-		Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label39.ForeColor = System.Drawing.Color.Black
 		Me.Label39.Location = New System.Drawing.Point(12, 11)
 		Me.Label39.Name = "Label39"
@@ -2484,7 +2485,7 @@ Partial Class FrmSettings
 		'Label31
 		'
 		Me.Label31.BackColor = System.Drawing.Color.Transparent
-		Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label31.ForeColor = System.Drawing.Color.Black
 		Me.Label31.Location = New System.Drawing.Point(184, 68)
 		Me.Label31.Name = "Label31"
@@ -2496,7 +2497,7 @@ Partial Class FrmSettings
 		'Label36
 		'
 		Me.Label36.BackColor = System.Drawing.Color.Transparent
-		Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label36.ForeColor = System.Drawing.Color.Black
 		Me.Label36.Location = New System.Drawing.Point(12, 68)
 		Me.Label36.Name = "Label36"
@@ -2528,7 +2529,7 @@ Partial Class FrmSettings
 		'Label21
 		'
 		Me.Label21.BackColor = System.Drawing.Color.Transparent
-		Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label21.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label21.ForeColor = System.Drawing.Color.Black
 		Me.Label21.Location = New System.Drawing.Point(184, 49)
 		Me.Label21.Name = "Label21"
@@ -2540,7 +2541,7 @@ Partial Class FrmSettings
 		'Label22
 		'
 		Me.Label22.BackColor = System.Drawing.Color.Transparent
-		Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label22.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label22.ForeColor = System.Drawing.Color.Black
 		Me.Label22.Location = New System.Drawing.Point(12, 49)
 		Me.Label22.Name = "Label22"
@@ -2572,7 +2573,7 @@ Partial Class FrmSettings
 		'Label23
 		'
 		Me.Label23.BackColor = System.Drawing.Color.Transparent
-		Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label23.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label23.ForeColor = System.Drawing.Color.Black
 		Me.Label23.Location = New System.Drawing.Point(184, 30)
 		Me.Label23.Name = "Label23"
@@ -2584,7 +2585,7 @@ Partial Class FrmSettings
 		'Label30
 		'
 		Me.Label30.BackColor = System.Drawing.Color.Transparent
-		Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label30.ForeColor = System.Drawing.Color.Black
 		Me.Label30.Location = New System.Drawing.Point(12, 30)
 		Me.Label30.Name = "Label30"
@@ -2626,13 +2627,13 @@ Partial Class FrmSettings
 		Me.GBDomStats.Name = "GBDomStats"
 		Me.GBDomStats.Size = New System.Drawing.Size(171, 263)
 		Me.GBDomStats.TabIndex = 62
-		Me.GBDomStats.TabStop = false
+		Me.GBDomStats.TabStop = False
 		Me.GBDomStats.Text = "Stats/Appearance"
 		'
 		'Label128
 		'
-		Me.Label128.AutoSize = true
-		Me.Label128.Font = New System.Drawing.Font("Microsoft Sans Serif", 7!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label128.AutoSize = True
+		Me.Label128.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label128.Location = New System.Drawing.Point(125, 68)
 		Me.Label128.Name = "Label128"
 		Me.Label128.Size = New System.Drawing.Size(38, 13)
@@ -2652,7 +2653,7 @@ Partial Class FrmSettings
 		'NBEmpathy
 		'
 		Me.NBEmpathy.BackColor = System.Drawing.Color.White
-		Me.NBEmpathy.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.NBEmpathy.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.NBEmpathy.ForeColor = System.Drawing.Color.Black
 		Me.NBEmpathy.Location = New System.Drawing.Point(73, 38)
 		Me.NBEmpathy.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -2665,7 +2666,7 @@ Partial Class FrmSettings
 		'Label83
 		'
 		Me.Label83.BackColor = System.Drawing.Color.Transparent
-		Me.Label83.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label83.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label83.ForeColor = System.Drawing.Color.Black
 		Me.Label83.Location = New System.Drawing.Point(6, 37)
 		Me.Label83.Name = "Label83"
@@ -2677,7 +2678,7 @@ Partial Class FrmSettings
 		'NBDomBirthdayDay
 		'
 		Me.NBDomBirthdayDay.BackColor = System.Drawing.Color.White
-		Me.NBDomBirthdayDay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.NBDomBirthdayDay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.NBDomBirthdayDay.ForeColor = System.Drawing.Color.Black
 		Me.NBDomBirthdayDay.Location = New System.Drawing.Point(125, 83)
 		Me.NBDomBirthdayDay.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
@@ -2690,7 +2691,7 @@ Partial Class FrmSettings
 		'TBDomEyeColor
 		'
 		Me.TBDomEyeColor.BackColor = System.Drawing.Color.White
-		Me.TBDomEyeColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBDomEyeColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBDomEyeColor.ForeColor = System.Drawing.Color.Black
 		Me.TBDomEyeColor.Location = New System.Drawing.Point(73, 155)
 		Me.TBDomEyeColor.Name = "TBDomEyeColor"
@@ -2701,7 +2702,7 @@ Partial Class FrmSettings
 		'TBDomHairColor
 		'
 		Me.TBDomHairColor.BackColor = System.Drawing.Color.White
-		Me.TBDomHairColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBDomHairColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBDomHairColor.ForeColor = System.Drawing.Color.Black
 		Me.TBDomHairColor.Location = New System.Drawing.Point(73, 105)
 		Me.TBDomHairColor.Name = "TBDomHairColor"
@@ -2713,7 +2714,7 @@ Partial Class FrmSettings
 		'
 		Me.domageNumBox.BackColor = System.Drawing.Color.White
 		Me.domageNumBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.domageNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.domageNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.domageNumBox.ForeColor = System.Drawing.Color.Black
 		Me.domageNumBox.Location = New System.Drawing.Point(73, 61)
 		Me.domageNumBox.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
@@ -2726,7 +2727,7 @@ Partial Class FrmSettings
 		'Label47
 		'
 		Me.Label47.BackColor = System.Drawing.Color.Transparent
-		Me.Label47.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label47.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label47.ForeColor = System.Drawing.Color.Black
 		Me.Label47.Location = New System.Drawing.Point(6, 60)
 		Me.Label47.Name = "Label47"
@@ -2737,8 +2738,8 @@ Partial Class FrmSettings
 		'
 		'Label76
 		'
-		Me.Label76.AutoSize = true
-		Me.Label76.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label76.AutoSize = True
+		Me.Label76.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label76.ForeColor = System.Drawing.Color.Black
 		Me.Label76.Location = New System.Drawing.Point(113, 87)
 		Me.Label76.Name = "Label76"
@@ -2750,7 +2751,7 @@ Partial Class FrmSettings
 		'NBDomBirthdayMonth
 		'
 		Me.NBDomBirthdayMonth.BackColor = System.Drawing.Color.White
-		Me.NBDomBirthdayMonth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.NBDomBirthdayMonth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.NBDomBirthdayMonth.ForeColor = System.Drawing.Color.Black
 		Me.NBDomBirthdayMonth.Location = New System.Drawing.Point(73, 83)
 		Me.NBDomBirthdayMonth.Maximum = New Decimal(New Integer() {12, 0, 0, 0})
@@ -2763,7 +2764,7 @@ Partial Class FrmSettings
 		'Label84
 		'
 		Me.Label84.BackColor = System.Drawing.Color.Transparent
-		Me.Label84.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label84.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label84.ForeColor = System.Drawing.Color.Black
 		Me.Label84.Location = New System.Drawing.Point(6, 84)
 		Me.Label84.Name = "Label84"
@@ -2774,35 +2775,35 @@ Partial Class FrmSettings
 		'
 		'CBDomTattoos
 		'
-		Me.CBDomTattoos.AutoSize = true
-		Me.CBDomTattoos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBDomTattoos.AutoSize = True
+		Me.CBDomTattoos.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBDomTattoos.ForeColor = System.Drawing.Color.Black
 		Me.CBDomTattoos.Location = New System.Drawing.Point(13, 237)
 		Me.CBDomTattoos.Name = "CBDomTattoos"
 		Me.CBDomTattoos.Size = New System.Drawing.Size(62, 17)
 		Me.CBDomTattoos.TabIndex = 148
 		Me.CBDomTattoos.Text = "Tattoos"
-		Me.CBDomTattoos.UseVisualStyleBackColor = true
+		Me.CBDomTattoos.UseVisualStyleBackColor = True
 		'
 		'CBDomFreckles
 		'
-		Me.CBDomFreckles.AutoSize = true
-		Me.CBDomFreckles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBDomFreckles.AutoSize = True
+		Me.CBDomFreckles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBDomFreckles.ForeColor = System.Drawing.Color.Black
 		Me.CBDomFreckles.Location = New System.Drawing.Point(88, 237)
 		Me.CBDomFreckles.Name = "CBDomFreckles"
 		Me.CBDomFreckles.Size = New System.Drawing.Size(66, 17)
 		Me.CBDomFreckles.TabIndex = 147
 		Me.CBDomFreckles.Text = "Freckles"
-		Me.CBDomFreckles.UseVisualStyleBackColor = true
+		Me.CBDomFreckles.UseVisualStyleBackColor = True
 		'
 		'domhairlengthComboBox
 		'
 		Me.domhairlengthComboBox.BackColor = System.Drawing.Color.White
 		Me.domhairlengthComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-		Me.domhairlengthComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.domhairlengthComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.domhairlengthComboBox.ForeColor = System.Drawing.Color.Black
-		Me.domhairlengthComboBox.FormattingEnabled = true
+		Me.domhairlengthComboBox.FormattingEnabled = True
 		Me.domhairlengthComboBox.Items.AddRange(New Object() {"Shaved", "Buzz cut", "Short", "Medium", "Long", "Very Long"})
 		Me.domhairlengthComboBox.Location = New System.Drawing.Point(73, 132)
 		Me.domhairlengthComboBox.Name = "domhairlengthComboBox"
@@ -2812,7 +2813,7 @@ Partial Class FrmSettings
 		'Label10
 		'
 		Me.Label10.BackColor = System.Drawing.Color.Transparent
-		Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label10.ForeColor = System.Drawing.Color.Black
 		Me.Label10.Location = New System.Drawing.Point(6, 133)
 		Me.Label10.Name = "Label10"
@@ -2825,9 +2826,9 @@ Partial Class FrmSettings
 		'
 		Me.dompubichairComboBox.BackColor = System.Drawing.Color.White
 		Me.dompubichairComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-		Me.dompubichairComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.dompubichairComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.dompubichairComboBox.ForeColor = System.Drawing.Color.Black
-		Me.dompubichairComboBox.FormattingEnabled = true
+		Me.dompubichairComboBox.FormattingEnabled = True
 		Me.dompubichairComboBox.Items.AddRange(New Object() {"Shaved", "Sparse", "Trimmed", "Natural", "Hairy"})
 		Me.dompubichairComboBox.Location = New System.Drawing.Point(73, 208)
 		Me.dompubichairComboBox.Name = "dompubichairComboBox"
@@ -2837,7 +2838,7 @@ Partial Class FrmSettings
 		'Label9
 		'
 		Me.Label9.BackColor = System.Drawing.Color.Transparent
-		Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label9.ForeColor = System.Drawing.Color.Black
 		Me.Label9.Location = New System.Drawing.Point(6, 209)
 		Me.Label9.Name = "Label9"
@@ -2850,9 +2851,9 @@ Partial Class FrmSettings
 		'
 		Me.boobComboBox.BackColor = System.Drawing.Color.White
 		Me.boobComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-		Me.boobComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.boobComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.boobComboBox.ForeColor = System.Drawing.Color.Black
-		Me.boobComboBox.FormattingEnabled = true
+		Me.boobComboBox.FormattingEnabled = True
 		Me.boobComboBox.Items.AddRange(New Object() {"A", "B", "C", "D", "DD", "DDD+"})
 		Me.boobComboBox.Location = New System.Drawing.Point(73, 182)
 		Me.boobComboBox.Name = "boobComboBox"
@@ -2871,7 +2872,7 @@ Partial Class FrmSettings
 		'domlevelNumBox
 		'
 		Me.domlevelNumBox.BackColor = System.Drawing.Color.White
-		Me.domlevelNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.domlevelNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.domlevelNumBox.ForeColor = System.Drawing.Color.Black
 		Me.domlevelNumBox.Location = New System.Drawing.Point(73, 15)
 		Me.domlevelNumBox.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -2884,7 +2885,7 @@ Partial Class FrmSettings
 		'Label43
 		'
 		Me.Label43.BackColor = System.Drawing.Color.Transparent
-		Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label43.ForeColor = System.Drawing.Color.Black
 		Me.Label43.Location = New System.Drawing.Point(6, 183)
 		Me.Label43.Name = "Label43"
@@ -2896,7 +2897,7 @@ Partial Class FrmSettings
 		'Label44
 		'
 		Me.Label44.BackColor = System.Drawing.Color.Transparent
-		Me.Label44.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label44.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label44.ForeColor = System.Drawing.Color.Black
 		Me.Label44.Location = New System.Drawing.Point(6, 158)
 		Me.Label44.Name = "Label44"
@@ -2908,7 +2909,7 @@ Partial Class FrmSettings
 		'Label45
 		'
 		Me.Label45.BackColor = System.Drawing.Color.Transparent
-		Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label45.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label45.ForeColor = System.Drawing.Color.Black
 		Me.Label45.Location = New System.Drawing.Point(6, 108)
 		Me.Label45.Name = "Label45"
@@ -2920,7 +2921,7 @@ Partial Class FrmSettings
 		'Label46
 		'
 		Me.Label46.BackColor = System.Drawing.Color.Transparent
-		Me.Label46.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label46.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label46.ForeColor = System.Drawing.Color.Black
 		Me.Label46.Location = New System.Drawing.Point(6, 15)
 		Me.Label46.Name = "Label46"
@@ -2937,85 +2938,85 @@ Partial Class FrmSettings
 		Me.GBDomPersonality.Controls.Add(Me.vulgarCheckBox)
 		Me.GBDomPersonality.Controls.Add(Me.crazyCheckBox)
 		Me.GBDomPersonality.Controls.Add(Me.condescendingCheckBox)
-		Me.GBDomPersonality.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.GBDomPersonality.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.GBDomPersonality.ForeColor = System.Drawing.Color.Black
 		Me.GBDomPersonality.Location = New System.Drawing.Point(184, 30)
 		Me.GBDomPersonality.Name = "GBDomPersonality"
 		Me.GBDomPersonality.Size = New System.Drawing.Size(250, 67)
 		Me.GBDomPersonality.TabIndex = 131
-		Me.GBDomPersonality.TabStop = false
+		Me.GBDomPersonality.TabStop = False
 		Me.GBDomPersonality.Text = "Personality"
 		'
 		'degradingCheckBox
 		'
-		Me.degradingCheckBox.AutoSize = true
-		Me.degradingCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.degradingCheckBox.AutoSize = True
+		Me.degradingCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.degradingCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.degradingCheckBox.Location = New System.Drawing.Point(73, 43)
 		Me.degradingCheckBox.Name = "degradingCheckBox"
 		Me.degradingCheckBox.Size = New System.Drawing.Size(75, 17)
 		Me.degradingCheckBox.TabIndex = 40
 		Me.degradingCheckBox.Text = "Degrading"
-		Me.degradingCheckBox.UseVisualStyleBackColor = true
+		Me.degradingCheckBox.UseVisualStyleBackColor = True
 		'
 		'sadisticCheckBox
 		'
-		Me.sadisticCheckBox.AutoSize = true
-		Me.sadisticCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.sadisticCheckBox.AutoSize = True
+		Me.sadisticCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.sadisticCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.sadisticCheckBox.Location = New System.Drawing.Point(11, 43)
 		Me.sadisticCheckBox.Name = "sadisticCheckBox"
 		Me.sadisticCheckBox.Size = New System.Drawing.Size(63, 17)
 		Me.sadisticCheckBox.TabIndex = 39
 		Me.sadisticCheckBox.Text = "Sadistic"
-		Me.sadisticCheckBox.UseVisualStyleBackColor = true
+		Me.sadisticCheckBox.UseVisualStyleBackColor = True
 		'
 		'supremacistCheckBox
 		'
-		Me.supremacistCheckBox.AutoSize = true
-		Me.supremacistCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.supremacistCheckBox.AutoSize = True
+		Me.supremacistCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.supremacistCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.supremacistCheckBox.Location = New System.Drawing.Point(148, 20)
 		Me.supremacistCheckBox.Name = "supremacistCheckBox"
 		Me.supremacistCheckBox.Size = New System.Drawing.Size(84, 17)
 		Me.supremacistCheckBox.TabIndex = 38
 		Me.supremacistCheckBox.Text = "Supremacist"
-		Me.supremacistCheckBox.UseVisualStyleBackColor = true
+		Me.supremacistCheckBox.UseVisualStyleBackColor = True
 		'
 		'vulgarCheckBox
 		'
-		Me.vulgarCheckBox.AutoSize = true
-		Me.vulgarCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.vulgarCheckBox.AutoSize = True
+		Me.vulgarCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.vulgarCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.vulgarCheckBox.Location = New System.Drawing.Point(73, 20)
 		Me.vulgarCheckBox.Name = "vulgarCheckBox"
 		Me.vulgarCheckBox.Size = New System.Drawing.Size(56, 17)
 		Me.vulgarCheckBox.TabIndex = 37
 		Me.vulgarCheckBox.Text = "Vulgar"
-		Me.vulgarCheckBox.UseVisualStyleBackColor = true
+		Me.vulgarCheckBox.UseVisualStyleBackColor = True
 		'
 		'crazyCheckBox
 		'
-		Me.crazyCheckBox.AutoSize = true
-		Me.crazyCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.crazyCheckBox.AutoSize = True
+		Me.crazyCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.crazyCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.crazyCheckBox.Location = New System.Drawing.Point(11, 20)
 		Me.crazyCheckBox.Name = "crazyCheckBox"
 		Me.crazyCheckBox.Size = New System.Drawing.Size(52, 17)
 		Me.crazyCheckBox.TabIndex = 36
 		Me.crazyCheckBox.Text = "Crazy"
-		Me.crazyCheckBox.UseVisualStyleBackColor = true
+		Me.crazyCheckBox.UseVisualStyleBackColor = True
 		'
 		'condescendingCheckBox
 		'
-		Me.condescendingCheckBox.AutoSize = true
-		Me.condescendingCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.condescendingCheckBox.AutoSize = True
+		Me.condescendingCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.condescendingCheckBox.ForeColor = System.Drawing.Color.Black
 		Me.condescendingCheckBox.Location = New System.Drawing.Point(148, 43)
 		Me.condescendingCheckBox.Name = "condescendingCheckBox"
 		Me.condescendingCheckBox.Size = New System.Drawing.Size(15, 14)
 		Me.condescendingCheckBox.TabIndex = 41
-		Me.condescendingCheckBox.UseVisualStyleBackColor = true
+		Me.condescendingCheckBox.UseVisualStyleBackColor = True
 		'
 		'GBDomOrgasms
 		'
@@ -3032,55 +3033,55 @@ Partial Class FrmSettings
 		Me.GBDomOrgasms.Controls.Add(Me.CBDomDenialEnds)
 		Me.GBDomOrgasms.Controls.Add(Me.alloworgasmComboBox)
 		Me.GBDomOrgasms.Controls.Add(Me.ruinorgasmComboBox)
-		Me.GBDomOrgasms.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.GBDomOrgasms.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.GBDomOrgasms.ForeColor = System.Drawing.Color.Black
 		Me.GBDomOrgasms.Location = New System.Drawing.Point(440, 30)
 		Me.GBDomOrgasms.Name = "GBDomOrgasms"
 		Me.GBDomOrgasms.Size = New System.Drawing.Size(259, 194)
 		Me.GBDomOrgasms.TabIndex = 132
-		Me.GBDomOrgasms.TabStop = false
+		Me.GBDomOrgasms.TabStop = False
 		Me.GBDomOrgasms.Text = "Orgasms"
 		'
 		'CBLockOrgasmChances
 		'
 		Me.CBLockOrgasmChances.Checked = Global.Tease_AI.My.MySettings.Default.LockOrgasmChances
-		Me.CBLockOrgasmChances.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "LockOrgasmChances", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.CBLockOrgasmChances.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBLockOrgasmChances.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "LockOrgasmChances", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBLockOrgasmChances.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBLockOrgasmChances.ForeColor = System.Drawing.Color.Black
 		Me.CBLockOrgasmChances.Location = New System.Drawing.Point(15, 73)
 		Me.CBLockOrgasmChances.Name = "CBLockOrgasmChances"
 		Me.CBLockOrgasmChances.Size = New System.Drawing.Size(237, 24)
 		Me.CBLockOrgasmChances.TabIndex = 146
 		Me.CBLockOrgasmChances.Text = "Orgasm Chance Locked when Tease Starts"
-		Me.CBLockOrgasmChances.UseVisualStyleBackColor = true
+		Me.CBLockOrgasmChances.UseVisualStyleBackColor = True
 		'
 		'orgasmlockrandombutton
 		'
 		Me.orgasmlockrandombutton.BackColor = System.Drawing.Color.LightGray
-		Me.orgasmlockrandombutton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.orgasmlockrandombutton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.orgasmlockrandombutton.ForeColor = System.Drawing.Color.Black
 		Me.orgasmlockrandombutton.Location = New System.Drawing.Point(134, 161)
 		Me.orgasmlockrandombutton.Name = "orgasmlockrandombutton"
 		Me.orgasmlockrandombutton.Size = New System.Drawing.Size(110, 21)
 		Me.orgasmlockrandombutton.TabIndex = 145
 		Me.orgasmlockrandombutton.Text = "Lock Random"
-		Me.orgasmlockrandombutton.UseVisualStyleBackColor = false
+		Me.orgasmlockrandombutton.UseVisualStyleBackColor = False
 		'
 		'CBDomOrgasmEnds
 		'
-		Me.CBDomOrgasmEnds.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBDomOrgasmEnds.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBDomOrgasmEnds.ForeColor = System.Drawing.Color.Black
 		Me.CBDomOrgasmEnds.Location = New System.Drawing.Point(145, 95)
 		Me.CBDomOrgasmEnds.Name = "CBDomOrgasmEnds"
 		Me.CBDomOrgasmEnds.Size = New System.Drawing.Size(104, 37)
 		Me.CBDomOrgasmEnds.TabIndex = 144
 		Me.CBDomOrgasmEnds.Text = "Orgasm Always Ends Tease"
-		Me.CBDomOrgasmEnds.UseVisualStyleBackColor = true
+		Me.CBDomOrgasmEnds.UseVisualStyleBackColor = True
 		'
 		'Label16
 		'
 		Me.Label16.BackColor = System.Drawing.Color.Transparent
-		Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label16.ForeColor = System.Drawing.Color.Black
 		Me.Label16.Location = New System.Drawing.Point(12, 47)
 		Me.Label16.Name = "Label16"
@@ -3092,7 +3093,7 @@ Partial Class FrmSettings
 		'Label12
 		'
 		Me.Label12.BackColor = System.Drawing.Color.Transparent
-		Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label12.ForeColor = System.Drawing.Color.Black
 		Me.Label12.Location = New System.Drawing.Point(12, 19)
 		Me.Label12.Name = "Label12"
@@ -3104,23 +3105,23 @@ Partial Class FrmSettings
 		'orgasmsperlockButton
 		'
 		Me.orgasmsperlockButton.BackColor = System.Drawing.Color.LightGray
-		Me.orgasmsperlockButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.orgasmsperlockButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.orgasmsperlockButton.ForeColor = System.Drawing.Color.Black
 		Me.orgasmsperlockButton.Location = New System.Drawing.Point(15, 161)
 		Me.orgasmsperlockButton.Name = "orgasmsperlockButton"
 		Me.orgasmsperlockButton.Size = New System.Drawing.Size(110, 21)
 		Me.orgasmsperlockButton.TabIndex = 97
 		Me.orgasmsperlockButton.Text = "Lock Selected"
-		Me.orgasmsperlockButton.UseVisualStyleBackColor = false
+		Me.orgasmsperlockButton.UseVisualStyleBackColor = False
 		'
 		'orgasmsperComboBox
 		'
 		Me.orgasmsperComboBox.BackColor = System.Drawing.Color.White
 		Me.orgasmsperComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.orgasmsperComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.orgasmsperComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.orgasmsperComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.orgasmsperComboBox.ForeColor = System.Drawing.Color.Black
-		Me.orgasmsperComboBox.FormattingEnabled = true
+		Me.orgasmsperComboBox.FormattingEnabled = True
 		Me.orgasmsperComboBox.Items.AddRange(New Object() {"Week", "2 Weeks", "Month", "2 Months", "3 Months", "6 Months", "9 Months", "Year", "2 Years", "3 Years", "5 Years", "10 Years", "25 Years", "Lifetime"})
 		Me.orgasmsperComboBox.Location = New System.Drawing.Point(143, 133)
 		Me.orgasmsperComboBox.Name = "orgasmsperComboBox"
@@ -3129,8 +3130,8 @@ Partial Class FrmSettings
 		'
 		'orgasmsperLabel
 		'
-		Me.orgasmsperLabel.AutoSize = true
-		Me.orgasmsperLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.orgasmsperLabel.AutoSize = True
+		Me.orgasmsperLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.orgasmsperLabel.ForeColor = System.Drawing.Color.Black
 		Me.orgasmsperLabel.Location = New System.Drawing.Point(115, 137)
 		Me.orgasmsperLabel.Name = "orgasmsperLabel"
@@ -3141,20 +3142,20 @@ Partial Class FrmSettings
 		'
 		'limitcheckbox
 		'
-		Me.limitcheckbox.AutoSize = true
-		Me.limitcheckbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.limitcheckbox.AutoSize = True
+		Me.limitcheckbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.limitcheckbox.ForeColor = System.Drawing.Color.Black
 		Me.limitcheckbox.Location = New System.Drawing.Point(15, 135)
 		Me.limitcheckbox.Name = "limitcheckbox"
 		Me.limitcheckbox.Size = New System.Drawing.Size(47, 17)
 		Me.limitcheckbox.TabIndex = 39
 		Me.limitcheckbox.Text = "Limit"
-		Me.limitcheckbox.UseVisualStyleBackColor = true
+		Me.limitcheckbox.UseVisualStyleBackColor = True
 		'
 		'orgasmsPerNumBox
 		'
 		Me.orgasmsPerNumBox.BackColor = System.Drawing.Color.White
-		Me.orgasmsPerNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.orgasmsPerNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.orgasmsPerNumBox.ForeColor = System.Drawing.Color.Black
 		Me.orgasmsPerNumBox.Location = New System.Drawing.Point(68, 134)
 		Me.orgasmsPerNumBox.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
@@ -3166,23 +3167,23 @@ Partial Class FrmSettings
 		'
 		'CBDomDenialEnds
 		'
-		Me.CBDomDenialEnds.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBDomDenialEnds.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBDomDenialEnds.ForeColor = System.Drawing.Color.Black
 		Me.CBDomDenialEnds.Location = New System.Drawing.Point(15, 95)
 		Me.CBDomDenialEnds.Name = "CBDomDenialEnds"
 		Me.CBDomDenialEnds.Size = New System.Drawing.Size(94, 37)
 		Me.CBDomDenialEnds.TabIndex = 38
 		Me.CBDomDenialEnds.Text = "Denial Always Ends Tease"
-		Me.CBDomDenialEnds.UseVisualStyleBackColor = true
+		Me.CBDomDenialEnds.UseVisualStyleBackColor = True
 		'
 		'alloworgasmComboBox
 		'
 		Me.alloworgasmComboBox.BackColor = System.Drawing.Color.White
 		Me.alloworgasmComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.alloworgasmComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.alloworgasmComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.alloworgasmComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.alloworgasmComboBox.ForeColor = System.Drawing.Color.Black
-		Me.alloworgasmComboBox.FormattingEnabled = true
+		Me.alloworgasmComboBox.FormattingEnabled = True
 		Me.alloworgasmComboBox.Items.AddRange(New Object() {"Never Allows", "Rarely Allows", "Sometimes Allows", "Often Allows", "Always Allows"})
 		Me.alloworgasmComboBox.Location = New System.Drawing.Point(98, 18)
 		Me.alloworgasmComboBox.Name = "alloworgasmComboBox"
@@ -3194,9 +3195,9 @@ Partial Class FrmSettings
 		Me.ruinorgasmComboBox.BackColor = System.Drawing.Color.White
 		Me.ruinorgasmComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.ruinorgasmComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.ruinorgasmComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.ruinorgasmComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.ruinorgasmComboBox.ForeColor = System.Drawing.Color.Black
-		Me.ruinorgasmComboBox.FormattingEnabled = true
+		Me.ruinorgasmComboBox.FormattingEnabled = True
 		Me.ruinorgasmComboBox.Items.AddRange(New Object() {"Never Ruins", "Rarely Ruins", "Sometimes Ruins", "Often Ruins", "Always Ruins"})
 		Me.ruinorgasmComboBox.Location = New System.Drawing.Point(98, 46)
 		Me.ruinorgasmComboBox.Name = "ruinorgasmComboBox"
@@ -3217,18 +3218,18 @@ Partial Class FrmSettings
 		Me.GBDomPetNames.Controls.Add(Me.Label11)
 		Me.GBDomPetNames.Controls.Add(Me.petnameBox5)
 		Me.GBDomPetNames.Controls.Add(Me.petnameBox3)
-		Me.GBDomPetNames.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.GBDomPetNames.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.GBDomPetNames.ForeColor = System.Drawing.Color.Black
 		Me.GBDomPetNames.Location = New System.Drawing.Point(184, 103)
 		Me.GBDomPetNames.Name = "GBDomPetNames"
 		Me.GBDomPetNames.Size = New System.Drawing.Size(250, 190)
 		Me.GBDomPetNames.TabIndex = 134
-		Me.GBDomPetNames.TabStop = false
+		Me.GBDomPetNames.TabStop = False
 		Me.GBDomPetNames.Text = "Pet Names"
 		'
 		'Label74
 		'
-		Me.Label74.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label74.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label74.ForeColor = System.Drawing.Color.Black
 		Me.Label74.Location = New System.Drawing.Point(8, 14)
 		Me.Label74.Name = "Label74"
@@ -3240,7 +3241,7 @@ Partial Class FrmSettings
 		'petnameBox7
 		'
 		Me.petnameBox7.BackColor = System.Drawing.Color.White
-		Me.petnameBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.petnameBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.petnameBox7.ForeColor = System.Drawing.Color.Black
 		Me.petnameBox7.Location = New System.Drawing.Point(8, 154)
 		Me.petnameBox7.Name = "petnameBox7"
@@ -3252,7 +3253,7 @@ Partial Class FrmSettings
 		'petnameBox8
 		'
 		Me.petnameBox8.BackColor = System.Drawing.Color.White
-		Me.petnameBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.petnameBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.petnameBox8.ForeColor = System.Drawing.Color.Black
 		Me.petnameBox8.Location = New System.Drawing.Point(128, 154)
 		Me.petnameBox8.Name = "petnameBox8"
@@ -3264,7 +3265,7 @@ Partial Class FrmSettings
 		'petnameBox1
 		'
 		Me.petnameBox1.BackColor = System.Drawing.Color.White
-		Me.petnameBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.petnameBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.petnameBox1.ForeColor = System.Drawing.Color.Black
 		Me.petnameBox1.Location = New System.Drawing.Point(8, 32)
 		Me.petnameBox1.Name = "petnameBox1"
@@ -3275,7 +3276,7 @@ Partial Class FrmSettings
 		'
 		'Label15
 		'
-		Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label15.ForeColor = System.Drawing.Color.Black
 		Me.Label15.Location = New System.Drawing.Point(8, 136)
 		Me.Label15.Name = "Label15"
@@ -3287,7 +3288,7 @@ Partial Class FrmSettings
 		'petnameBox4
 		'
 		Me.petnameBox4.BackColor = System.Drawing.Color.White
-		Me.petnameBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.petnameBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.petnameBox4.ForeColor = System.Drawing.Color.Black
 		Me.petnameBox4.Location = New System.Drawing.Point(128, 81)
 		Me.petnameBox4.Name = "petnameBox4"
@@ -3299,7 +3300,7 @@ Partial Class FrmSettings
 		'petnameBox6
 		'
 		Me.petnameBox6.BackColor = System.Drawing.Color.White
-		Me.petnameBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.petnameBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.petnameBox6.ForeColor = System.Drawing.Color.Black
 		Me.petnameBox6.Location = New System.Drawing.Point(128, 107)
 		Me.petnameBox6.Name = "petnameBox6"
@@ -3311,7 +3312,7 @@ Partial Class FrmSettings
 		'petnameBox2
 		'
 		Me.petnameBox2.BackColor = System.Drawing.Color.White
-		Me.petnameBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.petnameBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.petnameBox2.ForeColor = System.Drawing.Color.Black
 		Me.petnameBox2.Location = New System.Drawing.Point(128, 32)
 		Me.petnameBox2.Name = "petnameBox2"
@@ -3322,7 +3323,7 @@ Partial Class FrmSettings
 		'
 		'Label11
 		'
-		Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label11.ForeColor = System.Drawing.Color.Black
 		Me.Label11.Location = New System.Drawing.Point(5, 63)
 		Me.Label11.Name = "Label11"
@@ -3334,7 +3335,7 @@ Partial Class FrmSettings
 		'petnameBox5
 		'
 		Me.petnameBox5.BackColor = System.Drawing.Color.White
-		Me.petnameBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.petnameBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.petnameBox5.ForeColor = System.Drawing.Color.Black
 		Me.petnameBox5.Location = New System.Drawing.Point(8, 107)
 		Me.petnameBox5.Name = "petnameBox5"
@@ -3346,7 +3347,7 @@ Partial Class FrmSettings
 		'petnameBox3
 		'
 		Me.petnameBox3.BackColor = System.Drawing.Color.White
-		Me.petnameBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.petnameBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.petnameBox3.ForeColor = System.Drawing.Color.Black
 		Me.petnameBox3.Location = New System.Drawing.Point(8, 81)
 		Me.petnameBox3.Name = "petnameBox3"
@@ -3358,7 +3359,7 @@ Partial Class FrmSettings
 		'Label54
 		'
 		Me.Label54.BackColor = System.Drawing.Color.Transparent
-		Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label54.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label54.ForeColor = System.Drawing.Color.Black
 		Me.Label54.Location = New System.Drawing.Point(7, 6)
 		Me.Label54.Name = "Label54"
@@ -3407,7 +3408,7 @@ Partial Class FrmSettings
 		Me.GroupBox22.Name = "GroupBox22"
 		Me.GroupBox22.Size = New System.Drawing.Size(259, 39)
 		Me.GroupBox22.TabIndex = 158
-		Me.GroupBox22.TabStop = false
+		Me.GroupBox22.TabStop = False
 		Me.GroupBox22.Text = "Writing Tasks"
 		'
 		'NBWritingTaskMax
@@ -3435,7 +3436,7 @@ Partial Class FrmSettings
 		'Label75
 		'
 		Me.Label75.BackColor = System.Drawing.Color.Transparent
-		Me.Label75.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label75.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label75.ForeColor = System.Drawing.Color.Black
 		Me.Label75.Location = New System.Drawing.Point(184, 13)
 		Me.Label75.Name = "Label75"
@@ -3447,7 +3448,7 @@ Partial Class FrmSettings
 		'Label77
 		'
 		Me.Label77.BackColor = System.Drawing.Color.Transparent
-		Me.Label77.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label77.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label77.ForeColor = System.Drawing.Color.Black
 		Me.Label77.Location = New System.Drawing.Point(12, 15)
 		Me.Label77.Name = "Label77"
@@ -3469,13 +3470,13 @@ Partial Class FrmSettings
 		Me.GroupBox45.Name = "GroupBox45"
 		Me.GroupBox45.Size = New System.Drawing.Size(259, 50)
 		Me.GroupBox45.TabIndex = 155
-		Me.GroupBox45.TabStop = false
+		Me.GroupBox45.TabStop = False
 		Me.GroupBox45.Text = "CBT"
 		'
 		'LBLCBTSlider
 		'
 		Me.LBLCBTSlider.BackColor = System.Drawing.Color.Transparent
-		Me.LBLCBTSlider.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLCBTSlider.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLCBTSlider.ForeColor = System.Drawing.Color.Black
 		Me.LBLCBTSlider.Location = New System.Drawing.Point(134, 30)
 		Me.LBLCBTSlider.Name = "LBLCBTSlider"
@@ -3491,7 +3492,7 @@ Partial Class FrmSettings
 		Me.CBCBTBalls.Size = New System.Drawing.Size(66, 31)
 		Me.CBCBTBalls.TabIndex = 1
 		Me.CBCBTBalls.Text = "Ball Torture"
-		Me.CBCBTBalls.UseVisualStyleBackColor = true
+		Me.CBCBTBalls.UseVisualStyleBackColor = True
 		'
 		'CBCBTCock
 		'
@@ -3500,11 +3501,11 @@ Partial Class FrmSettings
 		Me.CBCBTCock.Size = New System.Drawing.Size(68, 31)
 		Me.CBCBTCock.TabIndex = 0
 		Me.CBCBTCock.Text = "Cock Torture"
-		Me.CBCBTCock.UseVisualStyleBackColor = true
+		Me.CBCBTCock.UseVisualStyleBackColor = True
 		'
 		'CBTSlider
 		'
-		Me.CBTSlider.AutoSize = false
+		Me.CBTSlider.AutoSize = False
 		Me.CBTSlider.LargeChange = 1
 		Me.CBTSlider.Location = New System.Drawing.Point(134, 13)
 		Me.CBTSlider.Maximum = 5
@@ -3526,7 +3527,7 @@ Partial Class FrmSettings
 		Me.GroupBox35.Name = "GroupBox35"
 		Me.GroupBox35.Size = New System.Drawing.Size(259, 263)
 		Me.GroupBox35.TabIndex = 154
-		Me.GroupBox35.TabStop = false
+		Me.GroupBox35.TabStop = False
 		Me.GroupBox35.Text = "Key Phrases"
 		'
 		'GroupBox39
@@ -3538,31 +3539,31 @@ Partial Class FrmSettings
 		Me.GroupBox39.Name = "GroupBox39"
 		Me.GroupBox39.Size = New System.Drawing.Size(247, 89)
 		Me.GroupBox39.TabIndex = 3
-		Me.GroupBox39.TabStop = false
+		Me.GroupBox39.TabStop = False
 		Me.GroupBox39.Tag = ""
 		Me.GroupBox39.Text = "Honorific"
 		'
 		'CBHonorificInclude
 		'
-		Me.CBHonorificInclude.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBHonorificInclude.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBHonorificInclude.ForeColor = System.Drawing.Color.Black
 		Me.CBHonorificInclude.Location = New System.Drawing.Point(9, 44)
 		Me.CBHonorificInclude.Name = "CBHonorificInclude"
 		Me.CBHonorificInclude.Size = New System.Drawing.Size(234, 21)
 		Me.CBHonorificInclude.TabIndex = 40
 		Me.CBHonorificInclude.Text = "Honorific Must Be Included w/ Key Phrases"
-		Me.CBHonorificInclude.UseVisualStyleBackColor = true
+		Me.CBHonorificInclude.UseVisualStyleBackColor = True
 		'
 		'CBHonorificCapitalized
 		'
-		Me.CBHonorificCapitalized.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBHonorificCapitalized.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBHonorificCapitalized.ForeColor = System.Drawing.Color.Black
 		Me.CBHonorificCapitalized.Location = New System.Drawing.Point(9, 66)
 		Me.CBHonorificCapitalized.Name = "CBHonorificCapitalized"
 		Me.CBHonorificCapitalized.Size = New System.Drawing.Size(179, 21)
 		Me.CBHonorificCapitalized.TabIndex = 39
 		Me.CBHonorificCapitalized.Text = "Honorific Must Be Capitalized"
-		Me.CBHonorificCapitalized.UseVisualStyleBackColor = true
+		Me.CBHonorificCapitalized.UseVisualStyleBackColor = True
 		'
 		'TBHonorific
 		'
@@ -3579,7 +3580,7 @@ Partial Class FrmSettings
 		Me.GroupBox38.Name = "GroupBox38"
 		Me.GroupBox38.Size = New System.Drawing.Size(247, 46)
 		Me.GroupBox38.TabIndex = 2
-		Me.GroupBox38.TabStop = false
+		Me.GroupBox38.TabStop = False
 		Me.GroupBox38.Tag = ""
 		Me.GroupBox38.Text = "No"
 		'
@@ -3598,7 +3599,7 @@ Partial Class FrmSettings
 		Me.GroupBox37.Name = "GroupBox37"
 		Me.GroupBox37.Size = New System.Drawing.Size(247, 46)
 		Me.GroupBox37.TabIndex = 1
-		Me.GroupBox37.TabStop = false
+		Me.GroupBox37.TabStop = False
 		Me.GroupBox37.Tag = ""
 		Me.GroupBox37.Text = "Yes"
 		'
@@ -3617,7 +3618,7 @@ Partial Class FrmSettings
 		Me.GroupBox36.Name = "GroupBox36"
 		Me.GroupBox36.Size = New System.Drawing.Size(247, 46)
 		Me.GroupBox36.TabIndex = 0
-		Me.GroupBox36.TabStop = false
+		Me.GroupBox36.TabStop = False
 		Me.GroupBox36.Tag = ""
 		Me.GroupBox36.Text = "Greeting"
 		'
@@ -3639,13 +3640,13 @@ Partial Class FrmSettings
 		Me.GroupBox13.Name = "GroupBox13"
 		Me.GroupBox13.Size = New System.Drawing.Size(259, 39)
 		Me.GroupBox13.TabIndex = 157
-		Me.GroupBox13.TabStop = false
+		Me.GroupBox13.TabStop = False
 		Me.GroupBox13.Text = "Routine"
 		'
 		'Label34
 		'
 		Me.Label34.BackColor = System.Drawing.Color.Transparent
-		Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label34.ForeColor = System.Drawing.Color.Black
 		Me.Label34.Location = New System.Drawing.Point(12, 15)
 		Me.Label34.Name = "Label34"
@@ -3659,7 +3660,7 @@ Partial Class FrmSettings
 		Me.TimeBoxWakeUp.Format = System.Windows.Forms.DateTimePickerFormat.Time
 		Me.TimeBoxWakeUp.Location = New System.Drawing.Point(134, 12)
 		Me.TimeBoxWakeUp.Name = "TimeBoxWakeUp"
-		Me.TimeBoxWakeUp.ShowUpDown = true
+		Me.TimeBoxWakeUp.ShowUpDown = True
 		Me.TimeBoxWakeUp.Size = New System.Drawing.Size(110, 20)
 		Me.TimeBoxWakeUp.TabIndex = 0
 		'
@@ -3693,12 +3694,12 @@ Partial Class FrmSettings
 		Me.GroupBox7.Name = "GroupBox7"
 		Me.GroupBox7.Size = New System.Drawing.Size(226, 226)
 		Me.GroupBox7.TabIndex = 152
-		Me.GroupBox7.TabStop = false
+		Me.GroupBox7.TabStop = False
 		Me.GroupBox7.Text = "Edging"
 		'
 		'LBLMaxExtremeHold
 		'
-		Me.LBLMaxExtremeHold.AutoSize = true
+		Me.LBLMaxExtremeHold.AutoSize = True
 		Me.LBLMaxExtremeHold.Location = New System.Drawing.Point(173, 128)
 		Me.LBLMaxExtremeHold.Name = "LBLMaxExtremeHold"
 		Me.LBLMaxExtremeHold.Size = New System.Drawing.Size(43, 13)
@@ -3708,7 +3709,7 @@ Partial Class FrmSettings
 		'
 		'LBLMinExtremeHold
 		'
-		Me.LBLMinExtremeHold.AutoSize = true
+		Me.LBLMinExtremeHold.AutoSize = True
 		Me.LBLMinExtremeHold.Location = New System.Drawing.Point(173, 106)
 		Me.LBLMinExtremeHold.Name = "LBLMinExtremeHold"
 		Me.LBLMinExtremeHold.Size = New System.Drawing.Size(43, 13)
@@ -3729,7 +3730,7 @@ Partial Class FrmSettings
 		'Label133
 		'
 		Me.Label133.BackColor = System.Drawing.Color.Transparent
-		Me.Label133.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label133.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label133.ForeColor = System.Drawing.Color.Black
 		Me.Label133.Location = New System.Drawing.Point(6, 105)
 		Me.Label133.Name = "Label133"
@@ -3750,7 +3751,7 @@ Partial Class FrmSettings
 		'
 		'LBLMaxLongHold
 		'
-		Me.LBLMaxLongHold.AutoSize = true
+		Me.LBLMaxLongHold.AutoSize = True
 		Me.LBLMaxLongHold.Location = New System.Drawing.Point(173, 84)
 		Me.LBLMaxLongHold.Name = "LBLMaxLongHold"
 		Me.LBLMaxLongHold.Size = New System.Drawing.Size(43, 13)
@@ -3761,7 +3762,7 @@ Partial Class FrmSettings
 		'Label78
 		'
 		Me.Label78.BackColor = System.Drawing.Color.Transparent
-		Me.Label78.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label78.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label78.ForeColor = System.Drawing.Color.Black
 		Me.Label78.Location = New System.Drawing.Point(6, 83)
 		Me.Label78.Name = "Label78"
@@ -3772,7 +3773,7 @@ Partial Class FrmSettings
 		'
 		'LBLMinLongHold
 		'
-		Me.LBLMinLongHold.AutoSize = true
+		Me.LBLMinLongHold.AutoSize = True
 		Me.LBLMinLongHold.Location = New System.Drawing.Point(173, 62)
 		Me.LBLMinLongHold.Name = "LBLMinLongHold"
 		Me.LBLMinLongHold.Size = New System.Drawing.Size(43, 13)
@@ -3793,7 +3794,7 @@ Partial Class FrmSettings
 		'Label129
 		'
 		Me.Label129.BackColor = System.Drawing.Color.Transparent
-		Me.Label129.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label129.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label129.ForeColor = System.Drawing.Color.Black
 		Me.Label129.Location = New System.Drawing.Point(6, 61)
 		Me.Label129.Name = "Label129"
@@ -3814,7 +3815,7 @@ Partial Class FrmSettings
 		'
 		'LBLMaxHold
 		'
-		Me.LBLMaxHold.AutoSize = true
+		Me.LBLMaxHold.AutoSize = True
 		Me.LBLMaxHold.Location = New System.Drawing.Point(173, 40)
 		Me.LBLMaxHold.Name = "LBLMaxHold"
 		Me.LBLMaxHold.Size = New System.Drawing.Size(43, 13)
@@ -3825,7 +3826,7 @@ Partial Class FrmSettings
 		'Label79
 		'
 		Me.Label79.BackColor = System.Drawing.Color.Transparent
-		Me.Label79.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label79.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label79.ForeColor = System.Drawing.Color.Black
 		Me.Label79.Location = New System.Drawing.Point(6, 39)
 		Me.Label79.Name = "Label79"
@@ -3846,7 +3847,7 @@ Partial Class FrmSettings
 		'
 		'LBLMinHold
 		'
-		Me.LBLMinHold.AutoSize = true
+		Me.LBLMinHold.AutoSize = True
 		Me.LBLMinHold.Location = New System.Drawing.Point(173, 18)
 		Me.LBLMinHold.Name = "LBLMinHold"
 		Me.LBLMinHold.Size = New System.Drawing.Size(47, 13)
@@ -3856,27 +3857,27 @@ Partial Class FrmSettings
 		'
 		'CBEdgeUseAvg
 		'
-		Me.CBEdgeUseAvg.AutoSize = true
-		Me.CBEdgeUseAvg.Enabled = false
+		Me.CBEdgeUseAvg.AutoSize = True
+		Me.CBEdgeUseAvg.Enabled = False
 		Me.CBEdgeUseAvg.Location = New System.Drawing.Point(9, 170)
 		Me.CBEdgeUseAvg.Name = "CBEdgeUseAvg"
 		Me.CBEdgeUseAvg.Size = New System.Drawing.Size(185, 17)
 		Me.CBEdgeUseAvg.TabIndex = 174
 		Me.CBEdgeUseAvg.Text = "Use Avg Edge Time as Threshold"
-		Me.CBEdgeUseAvg.UseVisualStyleBackColor = true
+		Me.CBEdgeUseAvg.UseVisualStyleBackColor = True
 		'
 		'CBLongEdgeInterrupts
 		'
-		Me.CBLongEdgeInterrupts.Checked = true
+		Me.CBLongEdgeInterrupts.Checked = True
 		Me.CBLongEdgeInterrupts.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBLongEdgeInterrupts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBLongEdgeInterrupts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBLongEdgeInterrupts.ForeColor = System.Drawing.Color.Black
 		Me.CBLongEdgeInterrupts.Location = New System.Drawing.Point(9, 204)
 		Me.CBLongEdgeInterrupts.Name = "CBLongEdgeInterrupts"
 		Me.CBLongEdgeInterrupts.Size = New System.Drawing.Size(177, 21)
 		Me.CBLongEdgeInterrupts.TabIndex = 169
 		Me.CBLongEdgeInterrupts.Text = "Allow Long Edge Interrupts"
-		Me.CBLongEdgeInterrupts.UseVisualStyleBackColor = true
+		Me.CBLongEdgeInterrupts.UseVisualStyleBackColor = True
 		'
 		'NBHoldTheEdgeMin
 		'
@@ -3890,7 +3891,7 @@ Partial Class FrmSettings
 		'Label55
 		'
 		Me.Label55.BackColor = System.Drawing.Color.Transparent
-		Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label55.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label55.ForeColor = System.Drawing.Color.Black
 		Me.Label55.Location = New System.Drawing.Point(7, 149)
 		Me.Label55.Name = "Label55"
@@ -3902,7 +3903,7 @@ Partial Class FrmSettings
 		'Label81
 		'
 		Me.Label81.BackColor = System.Drawing.Color.Transparent
-		Me.Label81.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label81.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label81.ForeColor = System.Drawing.Color.Black
 		Me.Label81.Location = New System.Drawing.Point(6, 17)
 		Me.Label81.Name = "Label81"
@@ -3913,7 +3914,7 @@ Partial Class FrmSettings
 		'
 		'Label5
 		'
-		Me.Label5.AutoSize = true
+		Me.Label5.AutoSize = True
 		Me.Label5.Location = New System.Drawing.Point(174, 151)
 		Me.Label5.Name = "Label5"
 		Me.Label5.Size = New System.Drawing.Size(43, 13)
@@ -3932,21 +3933,21 @@ Partial Class FrmSettings
 		'
 		'CBLongEdgeTaunts
 		'
-		Me.CBLongEdgeTaunts.Checked = true
+		Me.CBLongEdgeTaunts.Checked = True
 		Me.CBLongEdgeTaunts.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBLongEdgeTaunts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBLongEdgeTaunts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBLongEdgeTaunts.ForeColor = System.Drawing.Color.Black
 		Me.CBLongEdgeTaunts.Location = New System.Drawing.Point(9, 186)
 		Me.CBLongEdgeTaunts.Name = "CBLongEdgeTaunts"
 		Me.CBLongEdgeTaunts.Size = New System.Drawing.Size(163, 21)
 		Me.CBLongEdgeTaunts.TabIndex = 172
 		Me.CBLongEdgeTaunts.Text = "Allow Long Edge Taunts"
-		Me.CBLongEdgeTaunts.UseVisualStyleBackColor = true
+		Me.CBLongEdgeTaunts.UseVisualStyleBackColor = True
 		'
 		'Label131
 		'
 		Me.Label131.BackColor = System.Drawing.Color.Transparent
-		Me.Label131.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label131.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label131.ForeColor = System.Drawing.Color.Black
 		Me.Label131.Location = New System.Drawing.Point(6, 127)
 		Me.Label131.Name = "Label131"
@@ -3964,7 +3965,7 @@ Partial Class FrmSettings
 		Me.PictureBox12.Size = New System.Drawing.Size(160, 19)
 		Me.PictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
 		Me.PictureBox12.TabIndex = 149
-		Me.PictureBox12.TabStop = false
+		Me.PictureBox12.TabStop = False
 		'
 		'GroupBox32
 		'
@@ -3996,13 +3997,13 @@ Partial Class FrmSettings
 		Me.GroupBox32.Name = "GroupBox32"
 		Me.GroupBox32.Size = New System.Drawing.Size(427, 165)
 		Me.GroupBox32.TabIndex = 62
-		Me.GroupBox32.TabStop = false
+		Me.GroupBox32.TabStop = False
 		Me.GroupBox32.Text = "Stats && Information"
 		'
 		'LBLSubBdayFormat
 		'
-		Me.LBLSubBdayFormat.AutoSize = true
-		Me.LBLSubBdayFormat.Font = New System.Drawing.Font("Microsoft Sans Serif", 7!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLSubBdayFormat.AutoSize = True
+		Me.LBLSubBdayFormat.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLSubBdayFormat.Location = New System.Drawing.Point(125, 22)
 		Me.LBLSubBdayFormat.Name = "LBLSubBdayFormat"
 		Me.LBLSubBdayFormat.Size = New System.Drawing.Size(38, 13)
@@ -4012,70 +4013,70 @@ Partial Class FrmSettings
 		'
 		'CBChastitySpikes
 		'
-		Me.CBChastitySpikes.AutoSize = true
-		Me.CBChastitySpikes.Enabled = false
+		Me.CBChastitySpikes.AutoSize = True
+		Me.CBChastitySpikes.Enabled = False
 		Me.CBChastitySpikes.Location = New System.Drawing.Point(191, 140)
 		Me.CBChastitySpikes.Name = "CBChastitySpikes"
 		Me.CBChastitySpikes.Size = New System.Drawing.Size(179, 17)
 		Me.CBChastitySpikes.TabIndex = 4
 		Me.CBChastitySpikes.Text = "Chastity Device Contains Spikes"
-		Me.CBChastitySpikes.UseVisualStyleBackColor = true
+		Me.CBChastitySpikes.UseVisualStyleBackColor = True
 		'
 		'CBOwnChastity
 		'
-		Me.CBOwnChastity.AutoSize = true
+		Me.CBOwnChastity.AutoSize = True
 		Me.CBOwnChastity.Location = New System.Drawing.Point(191, 90)
 		Me.CBOwnChastity.Name = "CBOwnChastity"
 		Me.CBOwnChastity.Size = New System.Drawing.Size(171, 17)
 		Me.CBOwnChastity.TabIndex = 5
 		Me.CBOwnChastity.Text = "Own Device a Chastity Device"
-		Me.CBOwnChastity.UseVisualStyleBackColor = true
+		Me.CBOwnChastity.UseVisualStyleBackColor = True
 		'
 		'CBChastityPA
 		'
-		Me.CBChastityPA.AutoSize = true
-		Me.CBChastityPA.Enabled = false
+		Me.CBChastityPA.AutoSize = True
+		Me.CBChastityPA.Enabled = False
 		Me.CBChastityPA.Location = New System.Drawing.Point(191, 115)
 		Me.CBChastityPA.Name = "CBChastityPA"
 		Me.CBChastityPA.Size = New System.Drawing.Size(195, 17)
 		Me.CBChastityPA.TabIndex = 3
 		Me.CBChastityPA.Text = "Chastity Device Requires a Piercing"
-		Me.CBChastityPA.UseVisualStyleBackColor = true
+		Me.CBChastityPA.UseVisualStyleBackColor = True
 		'
 		'CBHimHer
 		'
-		Me.CBHimHer.AutoSize = true
+		Me.CBHimHer.AutoSize = True
 		Me.CBHimHer.Location = New System.Drawing.Point(191, 65)
 		Me.CBHimHer.Name = "CBHimHer"
 		Me.CBHimHer.Size = New System.Drawing.Size(219, 17)
 		Me.CBHimHer.TabIndex = 3
 		Me.CBHimHer.Text = "Replace Male Glitter Pronouns to Female"
-		Me.CBHimHer.UseVisualStyleBackColor = true
+		Me.CBHimHer.UseVisualStyleBackColor = True
 		'
 		'CBBallsToPussy
 		'
-		Me.CBBallsToPussy.AutoSize = true
+		Me.CBBallsToPussy.AutoSize = True
 		Me.CBBallsToPussy.Location = New System.Drawing.Point(191, 40)
 		Me.CBBallsToPussy.Name = "CBBallsToPussy"
 		Me.CBBallsToPussy.Size = New System.Drawing.Size(193, 17)
 		Me.CBBallsToPussy.TabIndex = 160
 		Me.CBBallsToPussy.Text = "Replace #Balls with #BallsToPussy"
-		Me.CBBallsToPussy.UseVisualStyleBackColor = true
+		Me.CBBallsToPussy.UseVisualStyleBackColor = True
 		'
 		'CBCockToClit
 		'
-		Me.CBCockToClit.AutoSize = true
+		Me.CBCockToClit.AutoSize = True
 		Me.CBCockToClit.Location = New System.Drawing.Point(191, 15)
 		Me.CBCockToClit.Name = "CBCockToClit"
 		Me.CBCockToClit.Size = New System.Drawing.Size(185, 17)
 		Me.CBCockToClit.TabIndex = 159
 		Me.CBCockToClit.Text = "Replace #Cock with #CockToClit"
-		Me.CBCockToClit.UseVisualStyleBackColor = true
+		Me.CBCockToClit.UseVisualStyleBackColor = True
 		'
 		'NBBirthdayDay
 		'
 		Me.NBBirthdayDay.BackColor = System.Drawing.Color.White
-		Me.NBBirthdayDay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.NBBirthdayDay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.NBBirthdayDay.ForeColor = System.Drawing.Color.Black
 		Me.NBBirthdayDay.Location = New System.Drawing.Point(125, 37)
 		Me.NBBirthdayDay.Maximum = New Decimal(New Integer() {31, 0, 0, 0})
@@ -4087,32 +4088,32 @@ Partial Class FrmSettings
 		'
 		'CBSubCircumcised
 		'
-		Me.CBSubCircumcised.AutoSize = true
-		Me.CBSubCircumcised.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBSubCircumcised.AutoSize = True
+		Me.CBSubCircumcised.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBSubCircumcised.ForeColor = System.Drawing.Color.Black
 		Me.CBSubCircumcised.Location = New System.Drawing.Point(9, 138)
 		Me.CBSubCircumcised.Name = "CBSubCircumcised"
 		Me.CBSubCircumcised.Size = New System.Drawing.Size(83, 17)
 		Me.CBSubCircumcised.TabIndex = 157
 		Me.CBSubCircumcised.Text = "Circumcised"
-		Me.CBSubCircumcised.UseVisualStyleBackColor = true
+		Me.CBSubCircumcised.UseVisualStyleBackColor = True
 		'
 		'CBSubPierced
 		'
-		Me.CBSubPierced.AutoSize = true
-		Me.CBSubPierced.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBSubPierced.AutoSize = True
+		Me.CBSubPierced.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBSubPierced.ForeColor = System.Drawing.Color.Black
 		Me.CBSubPierced.Location = New System.Drawing.Point(98, 138)
 		Me.CBSubPierced.Name = "CBSubPierced"
 		Me.CBSubPierced.Size = New System.Drawing.Size(62, 17)
 		Me.CBSubPierced.TabIndex = 156
 		Me.CBSubPierced.Text = "Pierced"
-		Me.CBSubPierced.UseVisualStyleBackColor = true
+		Me.CBSubPierced.UseVisualStyleBackColor = True
 		'
 		'TBSubEyeColor
 		'
 		Me.TBSubEyeColor.BackColor = System.Drawing.Color.White
-		Me.TBSubEyeColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBSubEyeColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBSubEyeColor.ForeColor = System.Drawing.Color.Black
 		Me.TBSubEyeColor.Location = New System.Drawing.Point(73, 87)
 		Me.TBSubEyeColor.Name = "TBSubEyeColor"
@@ -4123,7 +4124,7 @@ Partial Class FrmSettings
 		'TBSubHairColor
 		'
 		Me.TBSubHairColor.BackColor = System.Drawing.Color.White
-		Me.TBSubHairColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBSubHairColor.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBSubHairColor.ForeColor = System.Drawing.Color.Black
 		Me.TBSubHairColor.Location = New System.Drawing.Point(73, 60)
 		Me.TBSubHairColor.Name = "TBSubHairColor"
@@ -4133,8 +4134,8 @@ Partial Class FrmSettings
 		'
 		'Label63
 		'
-		Me.Label63.AutoSize = true
-		Me.Label63.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label63.AutoSize = True
+		Me.Label63.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label63.ForeColor = System.Drawing.Color.Black
 		Me.Label63.Location = New System.Drawing.Point(113, 41)
 		Me.Label63.Name = "Label63"
@@ -4145,7 +4146,7 @@ Partial Class FrmSettings
 		'
 		'LBLSubInches
 		'
-		Me.LBLSubInches.AutoSize = true
+		Me.LBLSubInches.AutoSize = True
 		Me.LBLSubInches.Location = New System.Drawing.Point(118, 118)
 		Me.LBLSubInches.Name = "LBLSubInches"
 		Me.LBLSubInches.Size = New System.Drawing.Size(38, 13)
@@ -4157,7 +4158,7 @@ Partial Class FrmSettings
 		'
 		Me.subAgeNumBox.BackColor = System.Drawing.Color.White
 		Me.subAgeNumBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.subAgeNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.subAgeNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.subAgeNumBox.ForeColor = System.Drawing.Color.Black
 		Me.subAgeNumBox.Location = New System.Drawing.Point(73, 14)
 		Me.subAgeNumBox.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
@@ -4170,7 +4171,7 @@ Partial Class FrmSettings
 		'NBBirthdayMonth
 		'
 		Me.NBBirthdayMonth.BackColor = System.Drawing.Color.White
-		Me.NBBirthdayMonth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.NBBirthdayMonth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.NBBirthdayMonth.ForeColor = System.Drawing.Color.Black
 		Me.NBBirthdayMonth.Location = New System.Drawing.Point(73, 37)
 		Me.NBBirthdayMonth.Maximum = New Decimal(New Integer() {12, 0, 0, 0})
@@ -4183,7 +4184,7 @@ Partial Class FrmSettings
 		'LBLSubCockSize
 		'
 		Me.LBLSubCockSize.BackColor = System.Drawing.Color.Transparent
-		Me.LBLSubCockSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLSubCockSize.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLSubCockSize.ForeColor = System.Drawing.Color.Black
 		Me.LBLSubCockSize.Location = New System.Drawing.Point(6, 114)
 		Me.LBLSubCockSize.Name = "LBLSubCockSize"
@@ -4195,7 +4196,7 @@ Partial Class FrmSettings
 		'CockSizeNumBox
 		'
 		Me.CockSizeNumBox.BackColor = System.Drawing.Color.White
-		Me.CockSizeNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CockSizeNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CockSizeNumBox.ForeColor = System.Drawing.Color.Black
 		Me.CockSizeNumBox.Location = New System.Drawing.Point(73, 114)
 		Me.CockSizeNumBox.Maximum = New Decimal(New Integer() {15, 0, 0, 0})
@@ -4208,7 +4209,7 @@ Partial Class FrmSettings
 		'LBLSubEye
 		'
 		Me.LBLSubEye.BackColor = System.Drawing.Color.Transparent
-		Me.LBLSubEye.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLSubEye.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLSubEye.ForeColor = System.Drawing.Color.Black
 		Me.LBLSubEye.Location = New System.Drawing.Point(6, 90)
 		Me.LBLSubEye.Name = "LBLSubEye"
@@ -4220,7 +4221,7 @@ Partial Class FrmSettings
 		'LBLSubHair
 		'
 		Me.LBLSubHair.BackColor = System.Drawing.Color.Transparent
-		Me.LBLSubHair.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLSubHair.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLSubHair.ForeColor = System.Drawing.Color.Black
 		Me.LBLSubHair.Location = New System.Drawing.Point(6, 63)
 		Me.LBLSubHair.Name = "LBLSubHair"
@@ -4232,7 +4233,7 @@ Partial Class FrmSettings
 		'LBLSubBirthday
 		'
 		Me.LBLSubBirthday.BackColor = System.Drawing.Color.Transparent
-		Me.LBLSubBirthday.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLSubBirthday.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLSubBirthday.ForeColor = System.Drawing.Color.Black
 		Me.LBLSubBirthday.Location = New System.Drawing.Point(6, 37)
 		Me.LBLSubBirthday.Name = "LBLSubBirthday"
@@ -4244,7 +4245,7 @@ Partial Class FrmSettings
 		'LBLSubAge
 		'
 		Me.LBLSubAge.BackColor = System.Drawing.Color.Transparent
-		Me.LBLSubAge.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLSubAge.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLSubAge.ForeColor = System.Drawing.Color.Black
 		Me.LBLSubAge.Location = New System.Drawing.Point(6, 15)
 		Me.LBLSubAge.Name = "LBLSubAge"
@@ -4256,7 +4257,7 @@ Partial Class FrmSettings
 		'Label70
 		'
 		Me.Label70.BackColor = System.Drawing.Color.Transparent
-		Me.Label70.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label70.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label70.ForeColor = System.Drawing.Color.Black
 		Me.Label70.Location = New System.Drawing.Point(7, 6)
 		Me.Label70.Name = "Label70"
@@ -4303,7 +4304,7 @@ Partial Class FrmSettings
 		Me.BTNScriptAvailable.Size = New System.Drawing.Size(100, 23)
 		Me.BTNScriptAvailable.TabIndex = 160
 		Me.BTNScriptAvailable.Text = "Select Available"
-		Me.BTNScriptAvailable.UseVisualStyleBackColor = true
+		Me.BTNScriptAvailable.UseVisualStyleBackColor = True
 		'
 		'BTNScriptNone
 		'
@@ -4312,7 +4313,7 @@ Partial Class FrmSettings
 		Me.BTNScriptNone.Size = New System.Drawing.Size(75, 23)
 		Me.BTNScriptNone.TabIndex = 159
 		Me.BTNScriptNone.Text = "Select None"
-		Me.BTNScriptNone.UseVisualStyleBackColor = true
+		Me.BTNScriptNone.UseVisualStyleBackColor = True
 		'
 		'BTNScriptAll
 		'
@@ -4321,7 +4322,7 @@ Partial Class FrmSettings
 		Me.BTNScriptAll.Size = New System.Drawing.Size(75, 23)
 		Me.BTNScriptAll.TabIndex = 158
 		Me.BTNScriptAll.Text = "Select All"
-		Me.BTNScriptAll.UseVisualStyleBackColor = true
+		Me.BTNScriptAll.UseVisualStyleBackColor = True
 		'
 		'BTNScriptOpen
 		'
@@ -4330,13 +4331,13 @@ Partial Class FrmSettings
 		Me.BTNScriptOpen.Size = New System.Drawing.Size(75, 23)
 		Me.BTNScriptOpen.TabIndex = 157
 		Me.BTNScriptOpen.Text = "Open Script"
-		Me.BTNScriptOpen.UseVisualStyleBackColor = true
+		Me.BTNScriptOpen.UseVisualStyleBackColor = True
 		'
 		'LBLScriptReq
 		'
 		Me.LBLScriptReq.BackColor = System.Drawing.Color.LightGray
 		Me.LBLScriptReq.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLScriptReq.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLScriptReq.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLScriptReq.ForeColor = System.Drawing.Color.Green
 		Me.LBLScriptReq.Location = New System.Drawing.Point(314, 292)
 		Me.LBLScriptReq.Name = "LBLScriptReq"
@@ -4351,14 +4352,14 @@ Partial Class FrmSettings
 		Me.GroupBox31.Name = "GroupBox31"
 		Me.GroupBox31.Size = New System.Drawing.Size(385, 110)
 		Me.GroupBox31.TabIndex = 155
-		Me.GroupBox31.TabStop = false
+		Me.GroupBox31.TabStop = False
 		Me.GroupBox31.Text = "Requirements"
 		'
 		'RTBScriptReq
 		'
 		Me.RTBScriptReq.Location = New System.Drawing.Point(6, 16)
 		Me.RTBScriptReq.Name = "RTBScriptReq"
-		Me.RTBScriptReq.ReadOnly = true
+		Me.RTBScriptReq.ReadOnly = True
 		Me.RTBScriptReq.Size = New System.Drawing.Size(373, 85)
 		Me.RTBScriptReq.TabIndex = 0
 		Me.RTBScriptReq.Text = ""
@@ -4388,11 +4389,11 @@ Partial Class FrmSettings
 		'
 		'CLBStartList
 		'
-		Me.CLBStartList.FormattingEnabled = true
+		Me.CLBStartList.FormattingEnabled = True
 		Me.CLBStartList.Location = New System.Drawing.Point(4, 4)
 		Me.CLBStartList.Name = "CLBStartList"
 		Me.CLBStartList.Size = New System.Drawing.Size(283, 214)
-		Me.CLBStartList.Sorted = true
+		Me.CLBStartList.Sorted = True
 		Me.CLBStartList.TabIndex = 155
 		'
 		'TabPage17
@@ -4408,11 +4409,11 @@ Partial Class FrmSettings
 		'
 		'CLBModuleList
 		'
-		Me.CLBModuleList.FormattingEnabled = true
+		Me.CLBModuleList.FormattingEnabled = True
 		Me.CLBModuleList.Location = New System.Drawing.Point(4, 4)
 		Me.CLBModuleList.Name = "CLBModuleList"
 		Me.CLBModuleList.Size = New System.Drawing.Size(283, 214)
-		Me.CLBModuleList.Sorted = true
+		Me.CLBModuleList.Sorted = True
 		Me.CLBModuleList.TabIndex = 156
 		'
 		'TabPage18
@@ -4428,11 +4429,11 @@ Partial Class FrmSettings
 		'
 		'CLBLinkList
 		'
-		Me.CLBLinkList.FormattingEnabled = true
+		Me.CLBLinkList.FormattingEnabled = True
 		Me.CLBLinkList.Location = New System.Drawing.Point(4, 4)
 		Me.CLBLinkList.Name = "CLBLinkList"
 		Me.CLBLinkList.Size = New System.Drawing.Size(283, 214)
-		Me.CLBLinkList.Sorted = true
+		Me.CLBLinkList.Sorted = True
 		Me.CLBLinkList.TabIndex = 156
 		'
 		'TabPage19
@@ -4448,11 +4449,11 @@ Partial Class FrmSettings
 		'
 		'CLBEndList
 		'
-		Me.CLBEndList.FormattingEnabled = true
+		Me.CLBEndList.FormattingEnabled = True
 		Me.CLBEndList.Location = New System.Drawing.Point(4, 4)
 		Me.CLBEndList.Name = "CLBEndList"
 		Me.CLBEndList.Size = New System.Drawing.Size(283, 214)
-		Me.CLBEndList.Sorted = true
+		Me.CLBEndList.Sorted = True
 		Me.CLBEndList.TabIndex = 156
 		'
 		'GroupBox42
@@ -4462,14 +4463,14 @@ Partial Class FrmSettings
 		Me.GroupBox42.Name = "GroupBox42"
 		Me.GroupBox42.Size = New System.Drawing.Size(385, 110)
 		Me.GroupBox42.TabIndex = 153
-		Me.GroupBox42.TabStop = false
+		Me.GroupBox42.TabStop = False
 		Me.GroupBox42.Text = "Description"
 		'
 		'RTBScriptDesc
 		'
 		Me.RTBScriptDesc.Location = New System.Drawing.Point(6, 16)
 		Me.RTBScriptDesc.Name = "RTBScriptDesc"
-		Me.RTBScriptDesc.ReadOnly = true
+		Me.RTBScriptDesc.ReadOnly = True
 		Me.RTBScriptDesc.Size = New System.Drawing.Size(373, 85)
 		Me.RTBScriptDesc.TabIndex = 0
 		Me.RTBScriptDesc.Text = ""
@@ -4483,7 +4484,7 @@ Partial Class FrmSettings
 		Me.PictureBox1.Size = New System.Drawing.Size(160, 19)
 		Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
 		Me.PictureBox1.TabIndex = 151
-		Me.PictureBox1.TabStop = false
+		Me.PictureBox1.TabStop = False
 		'
 		'GroupBox43
 		'
@@ -4494,13 +4495,13 @@ Partial Class FrmSettings
 		Me.GroupBox43.Name = "GroupBox43"
 		Me.GroupBox43.Size = New System.Drawing.Size(692, 92)
 		Me.GroupBox43.TabIndex = 65
-		Me.GroupBox43.TabStop = false
+		Me.GroupBox43.TabStop = False
 		Me.GroupBox43.Text = "Description"
 		'
 		'Label98
 		'
 		Me.Label98.BackColor = System.Drawing.Color.Transparent
-		Me.Label98.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label98.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label98.ForeColor = System.Drawing.Color.Black
 		Me.Label98.Location = New System.Drawing.Point(6, 16)
 		Me.Label98.Name = "Label98"
@@ -4512,7 +4513,7 @@ Partial Class FrmSettings
 		'Label104
 		'
 		Me.Label104.BackColor = System.Drawing.Color.Transparent
-		Me.Label104.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label104.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label104.ForeColor = System.Drawing.Color.Black
 		Me.Label104.Location = New System.Drawing.Point(7, 6)
 		Me.Label104.Name = "Label104"
@@ -4559,15 +4560,15 @@ Partial Class FrmSettings
 		'
 		'CBURLPreview
 		'
-		Me.CBURLPreview.AutoSize = true
-		Me.CBURLPreview.Checked = true
+		Me.CBURLPreview.AutoSize = True
+		Me.CBURLPreview.Checked = True
 		Me.CBURLPreview.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBURLPreview.Location = New System.Drawing.Point(344, 323)
 		Me.CBURLPreview.Name = "CBURLPreview"
 		Me.CBURLPreview.Size = New System.Drawing.Size(240, 17)
 		Me.CBURLPreview.TabIndex = 163
 		Me.CBURLPreview.Text = "Show Previews When A URL File is Selected"
-		Me.CBURLPreview.UseVisualStyleBackColor = true
+		Me.CBURLPreview.UseVisualStyleBackColor = True
 		'
 		'GroupBox66
 		'
@@ -4576,7 +4577,7 @@ Partial Class FrmSettings
 		Me.GroupBox66.Name = "GroupBox66"
 		Me.GroupBox66.Size = New System.Drawing.Size(350, 309)
 		Me.GroupBox66.TabIndex = 162
-		Me.GroupBox66.TabStop = false
+		Me.GroupBox66.TabStop = False
 		Me.GroupBox66.Text = "Example Preview"
 		'
 		'PBURLPreview
@@ -4587,7 +4588,7 @@ Partial Class FrmSettings
 		Me.PBURLPreview.Size = New System.Drawing.Size(338, 284)
 		Me.PBURLPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
 		Me.PBURLPreview.TabIndex = 0
-		Me.PBURLPreview.TabStop = false
+		Me.PBURLPreview.TabStop = False
 		'
 		'BTNURLFilesAll
 		'
@@ -4596,7 +4597,7 @@ Partial Class FrmSettings
 		Me.BTNURLFilesAll.Size = New System.Drawing.Size(75, 23)
 		Me.BTNURLFilesAll.TabIndex = 160
 		Me.BTNURLFilesAll.Text = "Select All"
-		Me.BTNURLFilesAll.UseVisualStyleBackColor = true
+		Me.BTNURLFilesAll.UseVisualStyleBackColor = True
 		'
 		'BTNURLFilesNone
 		'
@@ -4605,16 +4606,16 @@ Partial Class FrmSettings
 		Me.BTNURLFilesNone.Size = New System.Drawing.Size(75, 23)
 		Me.BTNURLFilesNone.TabIndex = 161
 		Me.BTNURLFilesNone.Text = "Select None"
-		Me.BTNURLFilesNone.UseVisualStyleBackColor = true
+		Me.BTNURLFilesNone.UseVisualStyleBackColor = True
 		'
 		'URLFileList
 		'
-		Me.URLFileList.CheckOnClick = true
-		Me.URLFileList.FormattingEnabled = true
+		Me.URLFileList.CheckOnClick = True
+		Me.URLFileList.FormattingEnabled = True
 		Me.URLFileList.Location = New System.Drawing.Point(6, 9)
 		Me.URLFileList.Name = "URLFileList"
 		Me.URLFileList.Size = New System.Drawing.Size(332, 394)
-		Me.URLFileList.Sorted = true
+		Me.URLFileList.Sorted = True
 		Me.URLFileList.TabIndex = 154
 		'
 		'TpImagesGenre
@@ -4636,7 +4637,7 @@ Partial Class FrmSettings
 		Me.GrbImageUrlFiles.Name = "GrbImageUrlFiles"
 		Me.GrbImageUrlFiles.Size = New System.Drawing.Size(311, 400)
 		Me.GrbImageUrlFiles.TabIndex = 1
-		Me.GrbImageUrlFiles.TabStop = false
+		Me.GrbImageUrlFiles.TabStop = False
 		Me.GrbImageUrlFiles.Text = "URL Files"
 		'
 		'TlpImageUrls
@@ -4710,7 +4711,7 @@ Partial Class FrmSettings
 		'BtnImageUrlButt
 		'
 		Me.BtnImageUrlButt.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlButt.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold)
+		Me.BtnImageUrlButt.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold)
 		Me.BtnImageUrlButt.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlButt.Location = New System.Drawing.Point(76, 348)
 		Me.BtnImageUrlButt.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4718,12 +4719,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlButt.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlButt.TabIndex = 38
 		Me.BtnImageUrlButt.Text = "1"
-		Me.BtnImageUrlButt.UseVisualStyleBackColor = false
+		Me.BtnImageUrlButt.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlBoobs
 		'
 		Me.BtnImageUrlBoobs.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlBoobs.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold)
+		Me.BtnImageUrlBoobs.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold)
 		Me.BtnImageUrlBoobs.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlBoobs.Location = New System.Drawing.Point(76, 319)
 		Me.BtnImageUrlBoobs.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4731,12 +4732,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlBoobs.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlBoobs.TabIndex = 35
 		Me.BtnImageUrlBoobs.Text = "1"
-		Me.BtnImageUrlBoobs.UseVisualStyleBackColor = false
+		Me.BtnImageUrlBoobs.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlBlowjob
 		'
 		Me.BtnImageUrlBlowjob.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlBlowjob.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlBlowjob.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlBlowjob.Location = New System.Drawing.Point(76, 87)
 		Me.BtnImageUrlBlowjob.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4744,12 +4745,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlBlowjob.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlBlowjob.TabIndex = 11
 		Me.BtnImageUrlBlowjob.Text = "1"
-		Me.BtnImageUrlBlowjob.UseVisualStyleBackColor = false
+		Me.BtnImageUrlBlowjob.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlCaptions
 		'
 		Me.BtnImageUrlCaptions.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlCaptions.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlCaptions.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlCaptions.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlCaptions.Location = New System.Drawing.Point(76, 261)
 		Me.BtnImageUrlCaptions.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4757,12 +4758,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlCaptions.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlCaptions.TabIndex = 29
 		Me.BtnImageUrlCaptions.Text = "1"
-		Me.BtnImageUrlCaptions.UseVisualStyleBackColor = false
+		Me.BtnImageUrlCaptions.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlHentai
 		'
 		Me.BtnImageUrlHentai.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlHentai.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlHentai.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlHentai.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlHentai.Location = New System.Drawing.Point(76, 174)
 		Me.BtnImageUrlHentai.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4770,12 +4771,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlHentai.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlHentai.TabIndex = 20
 		Me.BtnImageUrlHentai.Text = "1"
-		Me.BtnImageUrlHentai.UseVisualStyleBackColor = false
+		Me.BtnImageUrlHentai.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlGay
 		'
 		Me.BtnImageUrlGay.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlGay.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlGay.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlGay.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlGay.Location = New System.Drawing.Point(76, 203)
 		Me.BtnImageUrlGay.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4783,12 +4784,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlGay.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlGay.TabIndex = 23
 		Me.BtnImageUrlGay.Text = "1"
-		Me.BtnImageUrlGay.UseVisualStyleBackColor = false
+		Me.BtnImageUrlGay.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlGeneral
 		'
 		Me.BtnImageUrlGeneral.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlGeneral.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlGeneral.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlGeneral.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlGeneral.Location = New System.Drawing.Point(76, 290)
 		Me.BtnImageUrlGeneral.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4796,12 +4797,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlGeneral.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlGeneral.TabIndex = 32
 		Me.BtnImageUrlGeneral.Text = "1"
-		Me.BtnImageUrlGeneral.UseVisualStyleBackColor = false
+		Me.BtnImageUrlGeneral.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlHardcore
 		'
 		Me.BtnImageUrlHardcore.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlHardcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlHardcore.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlHardcore.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlHardcore.Location = New System.Drawing.Point(76, 0)
 		Me.BtnImageUrlHardcore.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4809,12 +4810,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlHardcore.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlHardcore.TabIndex = 1
 		Me.BtnImageUrlHardcore.Text = "1"
-		Me.BtnImageUrlHardcore.UseVisualStyleBackColor = false
+		Me.BtnImageUrlHardcore.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlLesbian
 		'
 		Me.BtnImageUrlLesbian.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlLesbian.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlLesbian.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlLesbian.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlLesbian.Location = New System.Drawing.Point(76, 58)
 		Me.BtnImageUrlLesbian.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4822,12 +4823,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlLesbian.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlLesbian.TabIndex = 8
 		Me.BtnImageUrlLesbian.Text = "1"
-		Me.BtnImageUrlLesbian.UseVisualStyleBackColor = false
+		Me.BtnImageUrlLesbian.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlLezdom
 		'
 		Me.BtnImageUrlLezdom.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlLezdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlLezdom.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlLezdom.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlLezdom.Location = New System.Drawing.Point(76, 145)
 		Me.BtnImageUrlLezdom.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4835,12 +4836,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlLezdom.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlLezdom.TabIndex = 17
 		Me.BtnImageUrlLezdom.Text = "1"
-		Me.BtnImageUrlLezdom.UseVisualStyleBackColor = false
+		Me.BtnImageUrlLezdom.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlMaledom
 		'
 		Me.BtnImageUrlMaledom.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlMaledom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlMaledom.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlMaledom.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlMaledom.Location = New System.Drawing.Point(76, 232)
 		Me.BtnImageUrlMaledom.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4848,12 +4849,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlMaledom.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlMaledom.TabIndex = 26
 		Me.BtnImageUrlMaledom.Text = "1"
-		Me.BtnImageUrlMaledom.UseVisualStyleBackColor = false
+		Me.BtnImageUrlMaledom.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlFemdom
 		'
 		Me.BtnImageUrlFemdom.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlFemdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlFemdom.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlFemdom.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlFemdom.Location = New System.Drawing.Point(76, 116)
 		Me.BtnImageUrlFemdom.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4861,12 +4862,12 @@ Partial Class FrmSettings
 		Me.BtnImageUrlFemdom.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlFemdom.TabIndex = 14
 		Me.BtnImageUrlFemdom.Text = "1"
-		Me.BtnImageUrlFemdom.UseVisualStyleBackColor = false
+		Me.BtnImageUrlFemdom.UseVisualStyleBackColor = False
 		'
 		'BtnImageUrlSoftcore
 		'
 		Me.BtnImageUrlSoftcore.BackColor = System.Drawing.Color.LightGray
-		Me.BtnImageUrlSoftcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BtnImageUrlSoftcore.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BtnImageUrlSoftcore.ForeColor = System.Drawing.Color.Black
 		Me.BtnImageUrlSoftcore.Location = New System.Drawing.Point(76, 29)
 		Me.BtnImageUrlSoftcore.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -4874,13 +4875,13 @@ Partial Class FrmSettings
 		Me.BtnImageUrlSoftcore.Size = New System.Drawing.Size(34, 28)
 		Me.BtnImageUrlSoftcore.TabIndex = 5
 		Me.BtnImageUrlSoftcore.Text = "1"
-		Me.BtnImageUrlSoftcore.UseVisualStyleBackColor = false
+		Me.BtnImageUrlSoftcore.UseVisualStyleBackColor = False
 		'
 		'ChbImageUrlHardcore
 		'
-		Me.ChbImageUrlHardcore.AutoSize = true
+		Me.ChbImageUrlHardcore.AutoSize = True
 		Me.ChbImageUrlHardcore.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileHardcoreEnabled
-		Me.ChbImageUrlHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileHardcoreEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileHardcoreEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlHardcore.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlHardcore.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlHardcore.Location = New System.Drawing.Point(3, 3)
@@ -4888,13 +4889,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlHardcore.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlHardcore.TabIndex = 0
 		Me.ChbImageUrlHardcore.Text = "Hardcore"
-		Me.ChbImageUrlHardcore.UseVisualStyleBackColor = true
+		Me.ChbImageUrlHardcore.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlButts
 		'
-		Me.ChbImageUrlButts.AutoSize = true
+		Me.ChbImageUrlButts.AutoSize = True
 		Me.ChbImageUrlButts.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileButtEnabled
-		Me.ChbImageUrlButts.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileButtEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlButts.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileButtEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlButts.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlButts.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlButts.Location = New System.Drawing.Point(3, 351)
@@ -4902,13 +4903,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlButts.Size = New System.Drawing.Size(70, 27)
 		Me.ChbImageUrlButts.TabIndex = 37
 		Me.ChbImageUrlButts.Text = "Butts"
-		Me.ChbImageUrlButts.UseVisualStyleBackColor = true
+		Me.ChbImageUrlButts.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlMaledom
 		'
-		Me.ChbImageUrlMaledom.AutoSize = true
+		Me.ChbImageUrlMaledom.AutoSize = True
 		Me.ChbImageUrlMaledom.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileMaledomEnabled
-		Me.ChbImageUrlMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileMaledomEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileMaledomEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlMaledom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlMaledom.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlMaledom.Location = New System.Drawing.Point(3, 235)
@@ -4916,13 +4917,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlMaledom.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlMaledom.TabIndex = 25
 		Me.ChbImageUrlMaledom.Text = "Maledom"
-		Me.ChbImageUrlMaledom.UseVisualStyleBackColor = true
+		Me.ChbImageUrlMaledom.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlGay
 		'
-		Me.ChbImageUrlGay.AutoSize = true
+		Me.ChbImageUrlGay.AutoSize = True
 		Me.ChbImageUrlGay.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileGayEnabled
-		Me.ChbImageUrlGay.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileGayEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlGay.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileGayEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlGay.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlGay.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlGay.Location = New System.Drawing.Point(3, 206)
@@ -4930,13 +4931,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlGay.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlGay.TabIndex = 22
 		Me.ChbImageUrlGay.Text = "Gay"
-		Me.ChbImageUrlGay.UseVisualStyleBackColor = true
+		Me.ChbImageUrlGay.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlSoftcore
 		'
-		Me.ChbImageUrlSoftcore.AutoSize = true
+		Me.ChbImageUrlSoftcore.AutoSize = True
 		Me.ChbImageUrlSoftcore.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileSoftcoreEnabled
-		Me.ChbImageUrlSoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileSoftcoreEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlSoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileSoftcoreEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlSoftcore.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlSoftcore.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlSoftcore.Location = New System.Drawing.Point(3, 32)
@@ -4944,13 +4945,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlSoftcore.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlSoftcore.TabIndex = 4
 		Me.ChbImageUrlSoftcore.Text = "Softcore"
-		Me.ChbImageUrlSoftcore.UseVisualStyleBackColor = true
+		Me.ChbImageUrlSoftcore.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlBoobs
 		'
-		Me.ChbImageUrlBoobs.AutoSize = true
+		Me.ChbImageUrlBoobs.AutoSize = True
 		Me.ChbImageUrlBoobs.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileBoobsEnabled
-		Me.ChbImageUrlBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileBoobsEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileBoobsEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlBoobs.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlBoobs.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlBoobs.Location = New System.Drawing.Point(3, 322)
@@ -4958,13 +4959,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlBoobs.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlBoobs.TabIndex = 34
 		Me.ChbImageUrlBoobs.Text = "Boobs"
-		Me.ChbImageUrlBoobs.UseVisualStyleBackColor = true
+		Me.ChbImageUrlBoobs.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlLesbian
 		'
-		Me.ChbImageUrlLesbian.AutoSize = true
+		Me.ChbImageUrlLesbian.AutoSize = True
 		Me.ChbImageUrlLesbian.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileLesbianEnabled
-		Me.ChbImageUrlLesbian.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileLesbianEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlLesbian.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileLesbianEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlLesbian.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlLesbian.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlLesbian.Location = New System.Drawing.Point(3, 61)
@@ -4972,13 +4973,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlLesbian.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlLesbian.TabIndex = 7
 		Me.ChbImageUrlLesbian.Text = "Lesbian"
-		Me.ChbImageUrlLesbian.UseVisualStyleBackColor = true
+		Me.ChbImageUrlLesbian.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlBlowjob
 		'
-		Me.ChbImageUrlBlowjob.AutoSize = true
+		Me.ChbImageUrlBlowjob.AutoSize = True
 		Me.ChbImageUrlBlowjob.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileBlowjobEnabled
-		Me.ChbImageUrlBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileBlowjobEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileBlowjobEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlBlowjob.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlBlowjob.Location = New System.Drawing.Point(3, 90)
@@ -4986,13 +4987,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlBlowjob.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlBlowjob.TabIndex = 10
 		Me.ChbImageUrlBlowjob.Text = "Blowjob"
-		Me.ChbImageUrlBlowjob.UseVisualStyleBackColor = true
+		Me.ChbImageUrlBlowjob.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlCaptions
 		'
-		Me.ChbImageUrlCaptions.AutoSize = true
+		Me.ChbImageUrlCaptions.AutoSize = True
 		Me.ChbImageUrlCaptions.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileCaptionsEnabled
-		Me.ChbImageUrlCaptions.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileCaptionsEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlCaptions.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileCaptionsEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlCaptions.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlCaptions.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlCaptions.Location = New System.Drawing.Point(3, 264)
@@ -5000,13 +5001,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlCaptions.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlCaptions.TabIndex = 28
 		Me.ChbImageUrlCaptions.Text = "Captions"
-		Me.ChbImageUrlCaptions.UseVisualStyleBackColor = true
+		Me.ChbImageUrlCaptions.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlGeneral
 		'
-		Me.ChbImageUrlGeneral.AutoSize = true
+		Me.ChbImageUrlGeneral.AutoSize = True
 		Me.ChbImageUrlGeneral.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileGeneralEnabled
-		Me.ChbImageUrlGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileGeneralEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileGeneralEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlGeneral.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlGeneral.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlGeneral.Location = New System.Drawing.Point(3, 293)
@@ -5014,13 +5015,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlGeneral.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlGeneral.TabIndex = 31
 		Me.ChbImageUrlGeneral.Text = "General"
-		Me.ChbImageUrlGeneral.UseVisualStyleBackColor = true
+		Me.ChbImageUrlGeneral.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlFemdom
 		'
-		Me.ChbImageUrlFemdom.AutoSize = true
+		Me.ChbImageUrlFemdom.AutoSize = True
 		Me.ChbImageUrlFemdom.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileFemdomEnabled
-		Me.ChbImageUrlFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileFemdomEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileFemdomEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlFemdom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlFemdom.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlFemdom.Location = New System.Drawing.Point(3, 119)
@@ -5028,13 +5029,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlFemdom.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlFemdom.TabIndex = 13
 		Me.ChbImageUrlFemdom.Text = "Femdom"
-		Me.ChbImageUrlFemdom.UseVisualStyleBackColor = true
+		Me.ChbImageUrlFemdom.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlHentai
 		'
-		Me.ChbImageUrlHentai.AutoSize = true
+		Me.ChbImageUrlHentai.AutoSize = True
 		Me.ChbImageUrlHentai.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileHentaiEnabled
-		Me.ChbImageUrlHentai.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileHentaiEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlHentai.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileHentaiEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlHentai.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlHentai.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlHentai.Location = New System.Drawing.Point(3, 177)
@@ -5042,13 +5043,13 @@ Partial Class FrmSettings
 		Me.ChbImageUrlHentai.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlHentai.TabIndex = 19
 		Me.ChbImageUrlHentai.Text = "Hentai"
-		Me.ChbImageUrlHentai.UseVisualStyleBackColor = true
+		Me.ChbImageUrlHentai.UseVisualStyleBackColor = True
 		'
 		'ChbImageUrlLezdom
 		'
-		Me.ChbImageUrlLezdom.AutoSize = true
+		Me.ChbImageUrlLezdom.AutoSize = True
 		Me.ChbImageUrlLezdom.Checked = Global.Tease_AI.My.MySettings.Default.UrlFileLezdomEnabled
-		Me.ChbImageUrlLezdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileLezdomEnabled", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.ChbImageUrlLezdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "UrlFileLezdomEnabled", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.ChbImageUrlLezdom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.ChbImageUrlLezdom.ForeColor = System.Drawing.Color.Black
 		Me.ChbImageUrlLezdom.Location = New System.Drawing.Point(3, 148)
@@ -5056,20 +5057,20 @@ Partial Class FrmSettings
 		Me.ChbImageUrlLezdom.Size = New System.Drawing.Size(70, 23)
 		Me.ChbImageUrlLezdom.TabIndex = 16
 		Me.ChbImageUrlLezdom.Text = "Lezdom"
-		Me.ChbImageUrlLezdom.UseVisualStyleBackColor = true
+		Me.ChbImageUrlLezdom.UseVisualStyleBackColor = True
 		'
 		'TxbImageUrlBlowjob
 		'
 		Me.TxbImageUrlBlowjob.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlBlowjob.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileBlowjob", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileBlowjob", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlBlowjob.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlBlowjob.Location = New System.Drawing.Point(115, 92)
 		Me.TxbImageUrlBlowjob.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlBlowjob.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlBlowjob.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlBlowjob.Name = "TxbImageUrlBlowjob"
-		Me.TxbImageUrlBlowjob.ReadOnly = true
+		Me.TxbImageUrlBlowjob.ReadOnly = True
 		Me.TxbImageUrlBlowjob.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlBlowjob.TabIndex = 12
 		Me.TxbImageUrlBlowjob.Text = Global.Tease_AI.My.MySettings.Default.UrlFileBlowjob
@@ -5078,14 +5079,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlSoftcore.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlSoftcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlSoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileSoftcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlSoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileSoftcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlSoftcore.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlSoftcore.Location = New System.Drawing.Point(115, 34)
 		Me.TxbImageUrlSoftcore.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlSoftcore.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlSoftcore.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlSoftcore.Name = "TxbImageUrlSoftcore"
-		Me.TxbImageUrlSoftcore.ReadOnly = true
+		Me.TxbImageUrlSoftcore.ReadOnly = True
 		Me.TxbImageUrlSoftcore.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlSoftcore.TabIndex = 6
 		Me.TxbImageUrlSoftcore.Text = Global.Tease_AI.My.MySettings.Default.UrlFileSoftcore
@@ -5094,14 +5095,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlLezdom.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlLezdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlLezdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileLezdom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlLezdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileLezdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlLezdom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlLezdom.Location = New System.Drawing.Point(115, 150)
 		Me.TxbImageUrlLezdom.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlLezdom.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlLezdom.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlLezdom.Name = "TxbImageUrlLezdom"
-		Me.TxbImageUrlLezdom.ReadOnly = true
+		Me.TxbImageUrlLezdom.ReadOnly = True
 		Me.TxbImageUrlLezdom.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlLezdom.TabIndex = 18
 		Me.TxbImageUrlLezdom.Text = Global.Tease_AI.My.MySettings.Default.UrlFileLezdom
@@ -5110,14 +5111,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlFemdom.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlFemdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileFemdom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileFemdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlFemdom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlFemdom.Location = New System.Drawing.Point(115, 121)
 		Me.TxbImageUrlFemdom.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlFemdom.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlFemdom.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlFemdom.Name = "TxbImageUrlFemdom"
-		Me.TxbImageUrlFemdom.ReadOnly = true
+		Me.TxbImageUrlFemdom.ReadOnly = True
 		Me.TxbImageUrlFemdom.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlFemdom.TabIndex = 15
 		Me.TxbImageUrlFemdom.Text = Global.Tease_AI.My.MySettings.Default.UrlFileFemdom
@@ -5126,14 +5127,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlHardcore.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlHardcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileHardcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileHardcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlHardcore.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlHardcore.Location = New System.Drawing.Point(115, 5)
 		Me.TxbImageUrlHardcore.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlHardcore.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlHardcore.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlHardcore.Name = "TxbImageUrlHardcore"
-		Me.TxbImageUrlHardcore.ReadOnly = true
+		Me.TxbImageUrlHardcore.ReadOnly = True
 		Me.TxbImageUrlHardcore.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlHardcore.TabIndex = 3
 		Me.TxbImageUrlHardcore.Text = Global.Tease_AI.My.MySettings.Default.UrlFileHardcore
@@ -5142,14 +5143,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlHentai.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlHentai.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlHentai.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileHentai", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlHentai.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileHentai", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlHentai.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlHentai.Location = New System.Drawing.Point(115, 179)
 		Me.TxbImageUrlHentai.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlHentai.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlHentai.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlHentai.Name = "TxbImageUrlHentai"
-		Me.TxbImageUrlHentai.ReadOnly = true
+		Me.TxbImageUrlHentai.ReadOnly = True
 		Me.TxbImageUrlHentai.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlHentai.TabIndex = 21
 		Me.TxbImageUrlHentai.Text = Global.Tease_AI.My.MySettings.Default.UrlFileHentai
@@ -5158,14 +5159,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlGay.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlGay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlGay.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileGay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlGay.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileGay", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlGay.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlGay.Location = New System.Drawing.Point(115, 208)
 		Me.TxbImageUrlGay.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlGay.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlGay.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlGay.Name = "TxbImageUrlGay"
-		Me.TxbImageUrlGay.ReadOnly = true
+		Me.TxbImageUrlGay.ReadOnly = True
 		Me.TxbImageUrlGay.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlGay.TabIndex = 24
 		Me.TxbImageUrlGay.Text = Global.Tease_AI.My.MySettings.Default.UrlFileGay
@@ -5174,14 +5175,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlLesbian.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlLesbian.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlLesbian.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileLesbian", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlLesbian.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileLesbian", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlLesbian.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlLesbian.Location = New System.Drawing.Point(115, 63)
 		Me.TxbImageUrlLesbian.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlLesbian.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlLesbian.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlLesbian.Name = "TxbImageUrlLesbian"
-		Me.TxbImageUrlLesbian.ReadOnly = true
+		Me.TxbImageUrlLesbian.ReadOnly = True
 		Me.TxbImageUrlLesbian.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlLesbian.TabIndex = 9
 		Me.TxbImageUrlLesbian.Text = Global.Tease_AI.My.MySettings.Default.UrlFileLesbian
@@ -5190,14 +5191,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlMaledom.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlMaledom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileMaledom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileMaledom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlMaledom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlMaledom.Location = New System.Drawing.Point(115, 237)
 		Me.TxbImageUrlMaledom.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlMaledom.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlMaledom.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlMaledom.Name = "TxbImageUrlMaledom"
-		Me.TxbImageUrlMaledom.ReadOnly = true
+		Me.TxbImageUrlMaledom.ReadOnly = True
 		Me.TxbImageUrlMaledom.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlMaledom.TabIndex = 27
 		Me.TxbImageUrlMaledom.Text = Global.Tease_AI.My.MySettings.Default.UrlFileMaledom
@@ -5206,14 +5207,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlCaptions.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlCaptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlCaptions.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileCaptions", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlCaptions.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileCaptions", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlCaptions.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlCaptions.Location = New System.Drawing.Point(115, 266)
 		Me.TxbImageUrlCaptions.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlCaptions.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlCaptions.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlCaptions.Name = "TxbImageUrlCaptions"
-		Me.TxbImageUrlCaptions.ReadOnly = true
+		Me.TxbImageUrlCaptions.ReadOnly = True
 		Me.TxbImageUrlCaptions.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlCaptions.TabIndex = 30
 		Me.TxbImageUrlCaptions.Text = Global.Tease_AI.My.MySettings.Default.UrlFileCaptions
@@ -5222,14 +5223,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlGeneral.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileGeneral", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileGeneral", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlGeneral.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlGeneral.Location = New System.Drawing.Point(115, 295)
 		Me.TxbImageUrlGeneral.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlGeneral.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlGeneral.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlGeneral.Name = "TxbImageUrlGeneral"
-		Me.TxbImageUrlGeneral.ReadOnly = true
+		Me.TxbImageUrlGeneral.ReadOnly = True
 		Me.TxbImageUrlGeneral.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlGeneral.TabIndex = 33
 		Me.TxbImageUrlGeneral.Text = Global.Tease_AI.My.MySettings.Default.UrlFileGeneral
@@ -5238,14 +5239,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlBoobs.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlBoobs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileBoobs", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileBoobs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlBoobs.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlBoobs.Location = New System.Drawing.Point(115, 324)
 		Me.TxbImageUrlBoobs.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlBoobs.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlBoobs.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlBoobs.Name = "TxbImageUrlBoobs"
-		Me.TxbImageUrlBoobs.ReadOnly = true
+		Me.TxbImageUrlBoobs.ReadOnly = True
 		Me.TxbImageUrlBoobs.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlBoobs.TabIndex = 36
 		Me.TxbImageUrlBoobs.Text = Global.Tease_AI.My.MySettings.Default.UrlFileBoobs
@@ -5254,14 +5255,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbImageUrlButts.BackColor = System.Drawing.Color.LightGray
 		Me.TxbImageUrlButts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbImageUrlButts.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileButt", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbImageUrlButts.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "UrlFileButt", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TxbImageUrlButts.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImageUrlButts.Location = New System.Drawing.Point(115, 353)
 		Me.TxbImageUrlButts.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TxbImageUrlButts.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbImageUrlButts.MinimumSize = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlButts.Name = "TxbImageUrlButts"
-		Me.TxbImageUrlButts.ReadOnly = true
+		Me.TxbImageUrlButts.ReadOnly = True
 		Me.TxbImageUrlButts.Size = New System.Drawing.Size(182, 17)
 		Me.TxbImageUrlButts.TabIndex = 39
 		Me.TxbImageUrlButts.Text = Global.Tease_AI.My.MySettings.Default.UrlFileButt
@@ -5273,7 +5274,7 @@ Partial Class FrmSettings
 		Me.GbxImagesGenre.Name = "GbxImagesGenre"
 		Me.GbxImagesGenre.Size = New System.Drawing.Size(371, 400)
 		Me.GbxImagesGenre.TabIndex = 0
-		Me.GbxImagesGenre.TabStop = false
+		Me.GbxImagesGenre.TabStop = False
 		Me.GbxImagesGenre.Text = "Local Images"
 		'
 		'TableLayoutPanel1
@@ -5353,14 +5354,14 @@ Partial Class FrmSettings
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
 		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20!))
+		Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
 		Me.TableLayoutPanel1.Size = New System.Drawing.Size(365, 381)
 		Me.TableLayoutPanel1.TabIndex = 0
 		'
 		'BTNIHardcore
 		'
 		Me.BTNIHardcore.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIHardcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIHardcore.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNIHardcore.ForeColor = System.Drawing.Color.Black
 		Me.BTNIHardcore.Location = New System.Drawing.Point(76, 0)
 		Me.BTNIHardcore.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -5368,44 +5369,44 @@ Partial Class FrmSettings
 		Me.BTNIHardcore.Size = New System.Drawing.Size(34, 28)
 		Me.BTNIHardcore.TabIndex = 1
 		Me.BTNIHardcore.Text = "1"
-		Me.BTNIHardcore.UseVisualStyleBackColor = false
+		Me.BTNIHardcore.UseVisualStyleBackColor = False
 		'
 		'TbxIHardcore
 		'
 		Me.TbxIHardcore.BackColor = System.Drawing.Color.LightGray
 		Me.TbxIHardcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxIHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IHardcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxIHardcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxIHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IHardcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIHardcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxIHardcore.ForeColor = System.Drawing.Color.Black
 		Me.TbxIHardcore.Location = New System.Drawing.Point(115, 5)
 		Me.TbxIHardcore.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxIHardcore.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxIHardcore.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxIHardcore.Name = "TbxIHardcore"
-		Me.TbxIHardcore.ReadOnly = true
+		Me.TbxIHardcore.ReadOnly = True
 		Me.TbxIHardcore.Size = New System.Drawing.Size(217, 17)
 		Me.TbxIHardcore.TabIndex = 2
 		Me.TbxIHardcore.Text = Global.Tease_AI.My.MySettings.Default.IHardcore
 		'
 		'CBIHardcoreSD
 		'
-		Me.CBIHardcoreSD.AutoSize = true
+		Me.CBIHardcoreSD.AutoSize = True
 		Me.CBIHardcoreSD.Checked = Global.Tease_AI.My.MySettings.Default.IHardcoreSD
 		Me.CBIHardcoreSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIHardcoreSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IHardcoreSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIHardcoreSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IHardcoreSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIHardcoreSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIHardcoreSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIHardcoreSD.Location = New System.Drawing.Point(343, 3)
 		Me.CBIHardcoreSD.Name = "CBIHardcoreSD"
 		Me.CBIHardcoreSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBIHardcoreSD.TabIndex = 3
-		Me.CBIHardcoreSD.UseVisualStyleBackColor = true
+		Me.CBIHardcoreSD.UseVisualStyleBackColor = True
 		'
 		'CBIHardcore
 		'
-		Me.CBIHardcore.AutoSize = true
+		Me.CBIHardcore.AutoSize = True
 		Me.CBIHardcore.Checked = Global.Tease_AI.My.MySettings.Default.CBIHardcore
-		Me.CBIHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIHardcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIHardcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIHardcore.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIHardcore.ForeColor = System.Drawing.Color.Black
 		Me.CBIHardcore.Location = New System.Drawing.Point(3, 3)
@@ -5413,13 +5414,13 @@ Partial Class FrmSettings
 		Me.CBIHardcore.Size = New System.Drawing.Size(70, 23)
 		Me.CBIHardcore.TabIndex = 0
 		Me.CBIHardcore.Text = "Hardcore"
-		Me.CBIHardcore.UseVisualStyleBackColor = true
+		Me.CBIHardcore.UseVisualStyleBackColor = True
 		'
 		'CBISoftcore
 		'
-		Me.CBISoftcore.AutoSize = true
+		Me.CBISoftcore.AutoSize = True
 		Me.CBISoftcore.Checked = Global.Tease_AI.My.MySettings.Default.CBISoftcore
-		Me.CBISoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBISoftcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBISoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBISoftcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBISoftcore.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBISoftcore.ForeColor = System.Drawing.Color.Black
 		Me.CBISoftcore.Location = New System.Drawing.Point(3, 32)
@@ -5427,128 +5428,128 @@ Partial Class FrmSettings
 		Me.CBISoftcore.Size = New System.Drawing.Size(70, 23)
 		Me.CBISoftcore.TabIndex = 4
 		Me.CBISoftcore.Text = "Softcore"
-		Me.CBISoftcore.UseVisualStyleBackColor = true
+		Me.CBISoftcore.UseVisualStyleBackColor = True
 		'
 		'TbxISoftcore
 		'
 		Me.TbxISoftcore.BackColor = System.Drawing.Color.LightGray
 		Me.TbxISoftcore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxISoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ISoftcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxISoftcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxISoftcore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ISoftcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxISoftcore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxISoftcore.ForeColor = System.Drawing.Color.Black
 		Me.TbxISoftcore.Location = New System.Drawing.Point(115, 34)
 		Me.TbxISoftcore.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxISoftcore.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxISoftcore.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxISoftcore.Name = "TbxISoftcore"
-		Me.TbxISoftcore.ReadOnly = true
+		Me.TbxISoftcore.ReadOnly = True
 		Me.TbxISoftcore.Size = New System.Drawing.Size(217, 17)
 		Me.TbxISoftcore.TabIndex = 6
 		Me.TbxISoftcore.Text = Global.Tease_AI.My.MySettings.Default.ISoftcore
 		'
 		'CBButtSubDir
 		'
-		Me.CBButtSubDir.AutoSize = true
+		Me.CBButtSubDir.AutoSize = True
 		Me.CBButtSubDir.Checked = Global.Tease_AI.My.MySettings.Default.CBButtSubDir
 		Me.CBButtSubDir.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBButtSubDir.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBButtSubDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBButtSubDir.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBButtSubDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBButtSubDir.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBButtSubDir.ForeColor = System.Drawing.Color.Black
 		Me.CBButtSubDir.Location = New System.Drawing.Point(343, 351)
 		Me.CBButtSubDir.Name = "CBButtSubDir"
 		Me.CBButtSubDir.Size = New System.Drawing.Size(19, 27)
 		Me.CBButtSubDir.TabIndex = 51
-		Me.CBButtSubDir.UseVisualStyleBackColor = true
+		Me.CBButtSubDir.UseVisualStyleBackColor = True
 		'
 		'CBISoftcoreSD
 		'
-		Me.CBISoftcoreSD.AutoSize = true
+		Me.CBISoftcoreSD.AutoSize = True
 		Me.CBISoftcoreSD.Checked = Global.Tease_AI.My.MySettings.Default.ISoftcoreSD
 		Me.CBISoftcoreSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBISoftcoreSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ISoftcoreSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBISoftcoreSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ISoftcoreSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBISoftcoreSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBISoftcoreSD.ForeColor = System.Drawing.Color.Black
 		Me.CBISoftcoreSD.Location = New System.Drawing.Point(343, 32)
 		Me.CBISoftcoreSD.Name = "CBISoftcoreSD"
 		Me.CBISoftcoreSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBISoftcoreSD.TabIndex = 7
-		Me.CBISoftcoreSD.UseVisualStyleBackColor = true
+		Me.CBISoftcoreSD.UseVisualStyleBackColor = True
 		'
 		'CBBoobSubDir
 		'
-		Me.CBBoobSubDir.AutoSize = true
+		Me.CBBoobSubDir.AutoSize = True
 		Me.CBBoobSubDir.Checked = Global.Tease_AI.My.MySettings.Default.CBBoobSubDir
 		Me.CBBoobSubDir.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBBoobSubDir.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBBoobSubDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBBoobSubDir.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBBoobSubDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBBoobSubDir.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBBoobSubDir.ForeColor = System.Drawing.Color.Black
 		Me.CBBoobSubDir.Location = New System.Drawing.Point(343, 322)
 		Me.CBBoobSubDir.Name = "CBBoobSubDir"
 		Me.CBBoobSubDir.Size = New System.Drawing.Size(19, 23)
 		Me.CBBoobSubDir.TabIndex = 47
-		Me.CBBoobSubDir.UseVisualStyleBackColor = true
+		Me.CBBoobSubDir.UseVisualStyleBackColor = True
 		'
 		'CBILezdomSD
 		'
-		Me.CBILezdomSD.AutoSize = true
+		Me.CBILezdomSD.AutoSize = True
 		Me.CBILezdomSD.Checked = Global.Tease_AI.My.MySettings.Default.ILezdomSD
 		Me.CBILezdomSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBILezdomSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ILezdomSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBILezdomSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ILezdomSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBILezdomSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBILezdomSD.ForeColor = System.Drawing.Color.Black
 		Me.CBILezdomSD.Location = New System.Drawing.Point(343, 148)
 		Me.CBILezdomSD.Name = "CBILezdomSD"
 		Me.CBILezdomSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBILezdomSD.TabIndex = 23
-		Me.CBILezdomSD.UseVisualStyleBackColor = true
+		Me.CBILezdomSD.UseVisualStyleBackColor = True
 		'
 		'CBIGeneralSD
 		'
-		Me.CBIGeneralSD.AutoSize = true
+		Me.CBIGeneralSD.AutoSize = True
 		Me.CBIGeneralSD.Checked = Global.Tease_AI.My.MySettings.Default.IGeneralSD
 		Me.CBIGeneralSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIGeneralSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IGeneralSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIGeneralSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IGeneralSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIGeneralSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIGeneralSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIGeneralSD.Location = New System.Drawing.Point(343, 293)
 		Me.CBIGeneralSD.Name = "CBIGeneralSD"
 		Me.CBIGeneralSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBIGeneralSD.TabIndex = 43
-		Me.CBIGeneralSD.UseVisualStyleBackColor = true
+		Me.CBIGeneralSD.UseVisualStyleBackColor = True
 		'
 		'CBILesbianSD
 		'
-		Me.CBILesbianSD.AutoSize = true
+		Me.CBILesbianSD.AutoSize = True
 		Me.CBILesbianSD.Checked = Global.Tease_AI.My.MySettings.Default.ILesbianSD
 		Me.CBILesbianSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBILesbianSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ILesbianSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBILesbianSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ILesbianSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBILesbianSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBILesbianSD.ForeColor = System.Drawing.Color.Black
 		Me.CBILesbianSD.Location = New System.Drawing.Point(343, 61)
 		Me.CBILesbianSD.Name = "CBILesbianSD"
 		Me.CBILesbianSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBILesbianSD.TabIndex = 11
-		Me.CBILesbianSD.UseVisualStyleBackColor = true
+		Me.CBILesbianSD.UseVisualStyleBackColor = True
 		'
 		'CBICaptionsSD
 		'
-		Me.CBICaptionsSD.AutoSize = true
+		Me.CBICaptionsSD.AutoSize = True
 		Me.CBICaptionsSD.Checked = Global.Tease_AI.My.MySettings.Default.ICaptionsSD
 		Me.CBICaptionsSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBICaptionsSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ICaptionsSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBICaptionsSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "ICaptionsSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBICaptionsSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBICaptionsSD.ForeColor = System.Drawing.Color.Black
 		Me.CBICaptionsSD.Location = New System.Drawing.Point(343, 264)
 		Me.CBICaptionsSD.Name = "CBICaptionsSD"
 		Me.CBICaptionsSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBICaptionsSD.TabIndex = 39
-		Me.CBICaptionsSD.UseVisualStyleBackColor = true
+		Me.CBICaptionsSD.UseVisualStyleBackColor = True
 		'
 		'CBILesbian
 		'
-		Me.CBILesbian.AutoSize = true
+		Me.CBILesbian.AutoSize = True
 		Me.CBILesbian.Checked = Global.Tease_AI.My.MySettings.Default.CBILesbian
-		Me.CBILesbian.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBILesbian", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBILesbian.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBILesbian", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBILesbian.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBILesbian.ForeColor = System.Drawing.Color.Black
 		Me.CBILesbian.Location = New System.Drawing.Point(3, 61)
@@ -5556,27 +5557,27 @@ Partial Class FrmSettings
 		Me.CBILesbian.Size = New System.Drawing.Size(70, 23)
 		Me.CBILesbian.TabIndex = 8
 		Me.CBILesbian.Text = "Lesbian"
-		Me.CBILesbian.UseVisualStyleBackColor = true
+		Me.CBILesbian.UseVisualStyleBackColor = True
 		'
 		'CBIMaledomSD
 		'
-		Me.CBIMaledomSD.AutoSize = true
+		Me.CBIMaledomSD.AutoSize = True
 		Me.CBIMaledomSD.Checked = Global.Tease_AI.My.MySettings.Default.IMaledomSD
 		Me.CBIMaledomSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIMaledomSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IMaledomSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIMaledomSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IMaledomSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIMaledomSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIMaledomSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIMaledomSD.Location = New System.Drawing.Point(343, 235)
 		Me.CBIMaledomSD.Name = "CBIMaledomSD"
 		Me.CBIMaledomSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBIMaledomSD.TabIndex = 35
-		Me.CBIMaledomSD.UseVisualStyleBackColor = true
+		Me.CBIMaledomSD.UseVisualStyleBackColor = True
 		'
 		'CBIBlowjob
 		'
-		Me.CBIBlowjob.AutoSize = true
+		Me.CBIBlowjob.AutoSize = True
 		Me.CBIBlowjob.Checked = Global.Tease_AI.My.MySettings.Default.CBIBlowjob
-		Me.CBIBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIBlowjob", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIBlowjob", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIBlowjob.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.CBIBlowjob.Location = New System.Drawing.Point(3, 90)
@@ -5584,86 +5585,86 @@ Partial Class FrmSettings
 		Me.CBIBlowjob.Size = New System.Drawing.Size(70, 23)
 		Me.CBIBlowjob.TabIndex = 12
 		Me.CBIBlowjob.Text = "Blowjob"
-		Me.CBIBlowjob.UseVisualStyleBackColor = true
+		Me.CBIBlowjob.UseVisualStyleBackColor = True
 		'
 		'CBIGaySD
 		'
-		Me.CBIGaySD.AutoSize = true
+		Me.CBIGaySD.AutoSize = True
 		Me.CBIGaySD.Checked = Global.Tease_AI.My.MySettings.Default.IGaySD
 		Me.CBIGaySD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIGaySD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IGaySD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIGaySD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IGaySD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIGaySD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIGaySD.ForeColor = System.Drawing.Color.Black
 		Me.CBIGaySD.Location = New System.Drawing.Point(343, 206)
 		Me.CBIGaySD.Name = "CBIGaySD"
 		Me.CBIGaySD.Size = New System.Drawing.Size(19, 23)
 		Me.CBIGaySD.TabIndex = 31
-		Me.CBIGaySD.UseVisualStyleBackColor = true
+		Me.CBIGaySD.UseVisualStyleBackColor = True
 		'
 		'CBIHentaiSD
 		'
-		Me.CBIHentaiSD.AutoSize = true
+		Me.CBIHentaiSD.AutoSize = True
 		Me.CBIHentaiSD.Checked = Global.Tease_AI.My.MySettings.Default.IHentaiSD
 		Me.CBIHentaiSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIHentaiSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IHentaiSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIHentaiSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IHentaiSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIHentaiSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIHentaiSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIHentaiSD.Location = New System.Drawing.Point(343, 177)
 		Me.CBIHentaiSD.Name = "CBIHentaiSD"
 		Me.CBIHentaiSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBIHentaiSD.TabIndex = 27
-		Me.CBIHentaiSD.UseVisualStyleBackColor = true
+		Me.CBIHentaiSD.UseVisualStyleBackColor = True
 		'
 		'CBIBlowjobSD
 		'
-		Me.CBIBlowjobSD.AutoSize = true
+		Me.CBIBlowjobSD.AutoSize = True
 		Me.CBIBlowjobSD.Checked = Global.Tease_AI.My.MySettings.Default.IBlowjobSD
 		Me.CBIBlowjobSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIBlowjobSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IBlowjobSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIBlowjobSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IBlowjobSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIBlowjobSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIBlowjobSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIBlowjobSD.Location = New System.Drawing.Point(343, 90)
 		Me.CBIBlowjobSD.Name = "CBIBlowjobSD"
 		Me.CBIBlowjobSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBIBlowjobSD.TabIndex = 15
-		Me.CBIBlowjobSD.UseVisualStyleBackColor = true
+		Me.CBIBlowjobSD.UseVisualStyleBackColor = True
 		'
 		'CBIFemdomSD
 		'
-		Me.CBIFemdomSD.AutoSize = true
+		Me.CBIFemdomSD.AutoSize = True
 		Me.CBIFemdomSD.Checked = Global.Tease_AI.My.MySettings.Default.IFemdomSD
 		Me.CBIFemdomSD.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIFemdomSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IFemdomSD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIFemdomSD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "IFemdomSD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIFemdomSD.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIFemdomSD.ForeColor = System.Drawing.Color.Black
 		Me.CBIFemdomSD.Location = New System.Drawing.Point(343, 119)
 		Me.CBIFemdomSD.Name = "CBIFemdomSD"
 		Me.CBIFemdomSD.Size = New System.Drawing.Size(19, 23)
 		Me.CBIFemdomSD.TabIndex = 19
-		Me.CBIFemdomSD.UseVisualStyleBackColor = true
+		Me.CBIFemdomSD.UseVisualStyleBackColor = True
 		'
 		'TbxIButts
 		'
 		Me.TbxIButts.BackColor = System.Drawing.Color.LightGray
 		Me.TbxIButts.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxIButts.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LBLButtPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxIButts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxIButts.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LBLButtPath", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIButts.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxIButts.ForeColor = System.Drawing.Color.Black
 		Me.TbxIButts.Location = New System.Drawing.Point(115, 353)
 		Me.TbxIButts.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxIButts.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxIButts.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxIButts.Name = "TbxIButts"
-		Me.TbxIButts.ReadOnly = true
+		Me.TbxIButts.ReadOnly = True
 		Me.TbxIButts.Size = New System.Drawing.Size(217, 17)
 		Me.TbxIButts.TabIndex = 50
 		Me.TbxIButts.Text = Global.Tease_AI.My.MySettings.Default.LBLButtPath
 		'
 		'CBIFemdom
 		'
-		Me.CBIFemdom.AutoSize = true
+		Me.CBIFemdom.AutoSize = True
 		Me.CBIFemdom.Checked = Global.Tease_AI.My.MySettings.Default.CBIFemdom
-		Me.CBIFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIFemdom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIFemdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIFemdom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIFemdom.ForeColor = System.Drawing.Color.Black
 		Me.CBIFemdom.Location = New System.Drawing.Point(3, 119)
@@ -5671,21 +5672,21 @@ Partial Class FrmSettings
 		Me.CBIFemdom.Size = New System.Drawing.Size(70, 23)
 		Me.CBIFemdom.TabIndex = 16
 		Me.CBIFemdom.Text = "Femdom"
-		Me.CBIFemdom.UseVisualStyleBackColor = true
+		Me.CBIFemdom.UseVisualStyleBackColor = True
 		'
 		'TbxILesbian
 		'
 		Me.TbxILesbian.BackColor = System.Drawing.Color.LightGray
 		Me.TbxILesbian.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxILesbian.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ILesbian", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxILesbian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxILesbian.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ILesbian", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxILesbian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxILesbian.ForeColor = System.Drawing.Color.Black
 		Me.TbxILesbian.Location = New System.Drawing.Point(115, 63)
 		Me.TbxILesbian.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxILesbian.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxILesbian.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxILesbian.Name = "TbxILesbian"
-		Me.TbxILesbian.ReadOnly = true
+		Me.TbxILesbian.ReadOnly = True
 		Me.TbxILesbian.Size = New System.Drawing.Size(217, 17)
 		Me.TbxILesbian.TabIndex = 10
 		Me.TbxILesbian.Text = Global.Tease_AI.My.MySettings.Default.ILesbian
@@ -5693,7 +5694,7 @@ Partial Class FrmSettings
 		'BTNISoftcore
 		'
 		Me.BTNISoftcore.BackColor = System.Drawing.Color.LightGray
-		Me.BTNISoftcore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNISoftcore.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNISoftcore.ForeColor = System.Drawing.Color.Black
 		Me.BTNISoftcore.Location = New System.Drawing.Point(76, 29)
 		Me.BTNISoftcore.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -5701,13 +5702,13 @@ Partial Class FrmSettings
 		Me.BTNISoftcore.Size = New System.Drawing.Size(34, 28)
 		Me.BTNISoftcore.TabIndex = 5
 		Me.BTNISoftcore.Text = "1"
-		Me.BTNISoftcore.UseVisualStyleBackColor = false
+		Me.BTNISoftcore.UseVisualStyleBackColor = False
 		'
 		'CBILezdom
 		'
-		Me.CBILezdom.AutoSize = true
+		Me.CBILezdom.AutoSize = True
 		Me.CBILezdom.Checked = Global.Tease_AI.My.MySettings.Default.CBILezdom
-		Me.CBILezdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBILezdom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBILezdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBILezdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBILezdom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBILezdom.ForeColor = System.Drawing.Color.Black
 		Me.CBILezdom.Location = New System.Drawing.Point(3, 148)
@@ -5715,30 +5716,30 @@ Partial Class FrmSettings
 		Me.CBILezdom.Size = New System.Drawing.Size(70, 23)
 		Me.CBILezdom.TabIndex = 20
 		Me.CBILezdom.Text = "Lezdom"
-		Me.CBILezdom.UseVisualStyleBackColor = true
+		Me.CBILezdom.UseVisualStyleBackColor = True
 		'
 		'TbxIBoobs
 		'
 		Me.TbxIBoobs.BackColor = System.Drawing.Color.LightGray
 		Me.TbxIBoobs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxIBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LBLBoobPath", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxIBoobs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxIBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "LBLBoobPath", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIBoobs.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxIBoobs.ForeColor = System.Drawing.Color.Black
 		Me.TbxIBoobs.Location = New System.Drawing.Point(115, 324)
 		Me.TbxIBoobs.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxIBoobs.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxIBoobs.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxIBoobs.Name = "TbxIBoobs"
-		Me.TbxIBoobs.ReadOnly = true
+		Me.TbxIBoobs.ReadOnly = True
 		Me.TbxIBoobs.Size = New System.Drawing.Size(217, 17)
 		Me.TbxIBoobs.TabIndex = 46
 		Me.TbxIBoobs.Text = Global.Tease_AI.My.MySettings.Default.LBLBoobPath
 		'
 		'CBIHentai
 		'
-		Me.CBIHentai.AutoSize = true
+		Me.CBIHentai.AutoSize = True
 		Me.CBIHentai.Checked = Global.Tease_AI.My.MySettings.Default.CBIHentai
-		Me.CBIHentai.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIHentai", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIHentai.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIHentai", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIHentai.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIHentai.ForeColor = System.Drawing.Color.Black
 		Me.CBIHentai.Location = New System.Drawing.Point(3, 177)
@@ -5746,30 +5747,30 @@ Partial Class FrmSettings
 		Me.CBIHentai.Size = New System.Drawing.Size(70, 23)
 		Me.CBIHentai.TabIndex = 24
 		Me.CBIHentai.Text = "Hentai"
-		Me.CBIHentai.UseVisualStyleBackColor = true
+		Me.CBIHentai.UseVisualStyleBackColor = True
 		'
 		'TbxIBlowjob
 		'
 		Me.TbxIBlowjob.BackColor = System.Drawing.Color.LightGray
 		Me.TbxIBlowjob.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxIBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IBlowjob", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxIBlowjob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxIBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IBlowjob", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIBlowjob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxIBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.TbxIBlowjob.Location = New System.Drawing.Point(115, 92)
 		Me.TbxIBlowjob.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxIBlowjob.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxIBlowjob.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxIBlowjob.Name = "TbxIBlowjob"
-		Me.TbxIBlowjob.ReadOnly = true
+		Me.TbxIBlowjob.ReadOnly = True
 		Me.TbxIBlowjob.Size = New System.Drawing.Size(217, 17)
 		Me.TbxIBlowjob.TabIndex = 14
 		Me.TbxIBlowjob.Text = Global.Tease_AI.My.MySettings.Default.IBlowjob
 		'
 		'CBIGay
 		'
-		Me.CBIGay.AutoSize = true
+		Me.CBIGay.AutoSize = True
 		Me.CBIGay.Checked = Global.Tease_AI.My.MySettings.Default.CBIGay
-		Me.CBIGay.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIGay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIGay.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIGay", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIGay.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIGay.ForeColor = System.Drawing.Color.Black
 		Me.CBIGay.Location = New System.Drawing.Point(3, 206)
@@ -5777,30 +5778,30 @@ Partial Class FrmSettings
 		Me.CBIGay.Size = New System.Drawing.Size(70, 23)
 		Me.CBIGay.TabIndex = 28
 		Me.CBIGay.Text = "Gay"
-		Me.CBIGay.UseVisualStyleBackColor = true
+		Me.CBIGay.UseVisualStyleBackColor = True
 		'
 		'TbxIGeneral
 		'
 		Me.TbxIGeneral.BackColor = System.Drawing.Color.LightGray
 		Me.TbxIGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxIGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IGeneral", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxIGeneral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxIGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IGeneral", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIGeneral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxIGeneral.ForeColor = System.Drawing.Color.Black
 		Me.TbxIGeneral.Location = New System.Drawing.Point(115, 295)
 		Me.TbxIGeneral.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxIGeneral.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxIGeneral.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxIGeneral.Name = "TbxIGeneral"
-		Me.TbxIGeneral.ReadOnly = true
+		Me.TbxIGeneral.ReadOnly = True
 		Me.TbxIGeneral.Size = New System.Drawing.Size(217, 17)
 		Me.TbxIGeneral.TabIndex = 42
 		Me.TbxIGeneral.Text = Global.Tease_AI.My.MySettings.Default.IGeneral
 		'
 		'CBIMaledom
 		'
-		Me.CBIMaledom.AutoSize = true
+		Me.CBIMaledom.AutoSize = True
 		Me.CBIMaledom.Checked = Global.Tease_AI.My.MySettings.Default.CBIMaledom
-		Me.CBIMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIMaledom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIMaledom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIMaledom.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIMaledom.ForeColor = System.Drawing.Color.Black
 		Me.CBIMaledom.Location = New System.Drawing.Point(3, 235)
@@ -5808,21 +5809,21 @@ Partial Class FrmSettings
 		Me.CBIMaledom.Size = New System.Drawing.Size(70, 23)
 		Me.CBIMaledom.TabIndex = 32
 		Me.CBIMaledom.Text = "Maledom"
-		Me.CBIMaledom.UseVisualStyleBackColor = true
+		Me.CBIMaledom.UseVisualStyleBackColor = True
 		'
 		'TbxIFemdom
 		'
 		Me.TbxIFemdom.BackColor = System.Drawing.Color.LightGray
 		Me.TbxIFemdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxIFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IFemdom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxIFemdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxIFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IFemdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIFemdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxIFemdom.ForeColor = System.Drawing.Color.Black
 		Me.TbxIFemdom.Location = New System.Drawing.Point(115, 121)
 		Me.TbxIFemdom.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxIFemdom.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxIFemdom.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxIFemdom.Name = "TbxIFemdom"
-		Me.TbxIFemdom.ReadOnly = true
+		Me.TbxIFemdom.ReadOnly = True
 		Me.TbxIFemdom.Size = New System.Drawing.Size(217, 17)
 		Me.TbxIFemdom.TabIndex = 18
 		Me.TbxIFemdom.Text = Global.Tease_AI.My.MySettings.Default.IFemdom
@@ -5830,7 +5831,7 @@ Partial Class FrmSettings
 		'BTNILesbian
 		'
 		Me.BTNILesbian.BackColor = System.Drawing.Color.LightGray
-		Me.BTNILesbian.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNILesbian.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNILesbian.ForeColor = System.Drawing.Color.Black
 		Me.BTNILesbian.Location = New System.Drawing.Point(76, 58)
 		Me.BTNILesbian.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -5838,30 +5839,30 @@ Partial Class FrmSettings
 		Me.BTNILesbian.Size = New System.Drawing.Size(34, 28)
 		Me.BTNILesbian.TabIndex = 9
 		Me.BTNILesbian.Text = "1"
-		Me.BTNILesbian.UseVisualStyleBackColor = false
+		Me.BTNILesbian.UseVisualStyleBackColor = False
 		'
 		'TbxICaptions
 		'
 		Me.TbxICaptions.BackColor = System.Drawing.Color.LightGray
 		Me.TbxICaptions.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxICaptions.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ICaptions", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxICaptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxICaptions.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ICaptions", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxICaptions.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxICaptions.ForeColor = System.Drawing.Color.Black
 		Me.TbxICaptions.Location = New System.Drawing.Point(115, 266)
 		Me.TbxICaptions.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxICaptions.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxICaptions.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxICaptions.Name = "TbxICaptions"
-		Me.TbxICaptions.ReadOnly = true
+		Me.TbxICaptions.ReadOnly = True
 		Me.TbxICaptions.Size = New System.Drawing.Size(217, 17)
 		Me.TbxICaptions.TabIndex = 38
 		Me.TbxICaptions.Text = Global.Tease_AI.My.MySettings.Default.ICaptions
 		'
 		'CBICaptions
 		'
-		Me.CBICaptions.AutoSize = true
+		Me.CBICaptions.AutoSize = True
 		Me.CBICaptions.Checked = Global.Tease_AI.My.MySettings.Default.CBICaptions
-		Me.CBICaptions.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBICaptions", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBICaptions.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBICaptions", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBICaptions.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBICaptions.ForeColor = System.Drawing.Color.Black
 		Me.CBICaptions.Location = New System.Drawing.Point(3, 264)
@@ -5869,21 +5870,21 @@ Partial Class FrmSettings
 		Me.CBICaptions.Size = New System.Drawing.Size(70, 23)
 		Me.CBICaptions.TabIndex = 36
 		Me.CBICaptions.Text = "Captions"
-		Me.CBICaptions.UseVisualStyleBackColor = true
+		Me.CBICaptions.UseVisualStyleBackColor = True
 		'
 		'TbxILezdom
 		'
 		Me.TbxILezdom.BackColor = System.Drawing.Color.LightGray
 		Me.TbxILezdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxILezdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ILezdom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxILezdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxILezdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "ILezdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxILezdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxILezdom.ForeColor = System.Drawing.Color.Black
 		Me.TbxILezdom.Location = New System.Drawing.Point(115, 150)
 		Me.TbxILezdom.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxILezdom.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxILezdom.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxILezdom.Name = "TbxILezdom"
-		Me.TbxILezdom.ReadOnly = true
+		Me.TbxILezdom.ReadOnly = True
 		Me.TbxILezdom.Size = New System.Drawing.Size(217, 17)
 		Me.TbxILezdom.TabIndex = 22
 		Me.TbxILezdom.Text = Global.Tease_AI.My.MySettings.Default.ILezdom
@@ -5892,15 +5893,15 @@ Partial Class FrmSettings
 		'
 		Me.TbxIMaledom.BackColor = System.Drawing.Color.LightGray
 		Me.TbxIMaledom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxIMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IMaledom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxIMaledom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxIMaledom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IMaledom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIMaledom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxIMaledom.ForeColor = System.Drawing.Color.Black
 		Me.TbxIMaledom.Location = New System.Drawing.Point(115, 237)
 		Me.TbxIMaledom.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxIMaledom.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxIMaledom.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxIMaledom.Name = "TbxIMaledom"
-		Me.TbxIMaledom.ReadOnly = true
+		Me.TbxIMaledom.ReadOnly = True
 		Me.TbxIMaledom.Size = New System.Drawing.Size(217, 17)
 		Me.TbxIMaledom.TabIndex = 34
 		Me.TbxIMaledom.Text = Global.Tease_AI.My.MySettings.Default.IMaledom
@@ -5908,7 +5909,7 @@ Partial Class FrmSettings
 		'BTNButtPath
 		'
 		Me.BTNButtPath.BackColor = System.Drawing.Color.LightGray
-		Me.BTNButtPath.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNButtPath.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNButtPath.ForeColor = System.Drawing.Color.Black
 		Me.BTNButtPath.Location = New System.Drawing.Point(76, 348)
 		Me.BTNButtPath.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -5916,30 +5917,30 @@ Partial Class FrmSettings
 		Me.BTNButtPath.Size = New System.Drawing.Size(34, 28)
 		Me.BTNButtPath.TabIndex = 49
 		Me.BTNButtPath.Text = "1"
-		Me.BTNButtPath.UseVisualStyleBackColor = false
+		Me.BTNButtPath.UseVisualStyleBackColor = False
 		'
 		'TbxIHentai
 		'
 		Me.TbxIHentai.BackColor = System.Drawing.Color.LightGray
 		Me.TbxIHentai.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxIHentai.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IHentai", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxIHentai.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxIHentai.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IHentai", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIHentai.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxIHentai.ForeColor = System.Drawing.Color.Black
 		Me.TbxIHentai.Location = New System.Drawing.Point(115, 179)
 		Me.TbxIHentai.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxIHentai.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxIHentai.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxIHentai.Name = "TbxIHentai"
-		Me.TbxIHentai.ReadOnly = true
+		Me.TbxIHentai.ReadOnly = True
 		Me.TbxIHentai.Size = New System.Drawing.Size(217, 17)
 		Me.TbxIHentai.TabIndex = 26
 		Me.TbxIHentai.Text = Global.Tease_AI.My.MySettings.Default.IHentai
 		'
 		'CBIGeneral
 		'
-		Me.CBIGeneral.AutoSize = true
+		Me.CBIGeneral.AutoSize = True
 		Me.CBIGeneral.Checked = Global.Tease_AI.My.MySettings.Default.CBIGeneral
-		Me.CBIGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIGeneral", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIGeneral", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIGeneral.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIGeneral.ForeColor = System.Drawing.Color.Black
 		Me.CBIGeneral.Location = New System.Drawing.Point(3, 293)
@@ -5947,30 +5948,30 @@ Partial Class FrmSettings
 		Me.CBIGeneral.Size = New System.Drawing.Size(70, 23)
 		Me.CBIGeneral.TabIndex = 40
 		Me.CBIGeneral.Text = "General"
-		Me.CBIGeneral.UseVisualStyleBackColor = true
+		Me.CBIGeneral.UseVisualStyleBackColor = True
 		'
 		'TbxIGay
 		'
 		Me.TbxIGay.BackColor = System.Drawing.Color.LightGray
 		Me.TbxIGay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TbxIGay.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IGay", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TbxIGay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TbxIGay.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "IGay", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxIGay.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TbxIGay.ForeColor = System.Drawing.Color.Black
 		Me.TbxIGay.Location = New System.Drawing.Point(115, 208)
 		Me.TbxIGay.Margin = New System.Windows.Forms.Padding(5, 5, 8, 3)
 		Me.TbxIGay.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TbxIGay.MinimumSize = New System.Drawing.Size(217, 17)
 		Me.TbxIGay.Name = "TbxIGay"
-		Me.TbxIGay.ReadOnly = true
+		Me.TbxIGay.ReadOnly = True
 		Me.TbxIGay.Size = New System.Drawing.Size(217, 17)
 		Me.TbxIGay.TabIndex = 30
 		Me.TbxIGay.Text = Global.Tease_AI.My.MySettings.Default.IGay
 		'
 		'CBIBoobs
 		'
-		Me.CBIBoobs.AutoSize = true
+		Me.CBIBoobs.AutoSize = True
 		Me.CBIBoobs.Checked = Global.Tease_AI.My.MySettings.Default.CBIBoobs
-		Me.CBIBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIBoobs", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIBoobs.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIBoobs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIBoobs.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIBoobs.ForeColor = System.Drawing.Color.Black
 		Me.CBIBoobs.Location = New System.Drawing.Point(3, 322)
@@ -5978,13 +5979,13 @@ Partial Class FrmSettings
 		Me.CBIBoobs.Size = New System.Drawing.Size(70, 23)
 		Me.CBIBoobs.TabIndex = 44
 		Me.CBIBoobs.Text = "Boobs"
-		Me.CBIBoobs.UseVisualStyleBackColor = true
+		Me.CBIBoobs.UseVisualStyleBackColor = True
 		'
 		'CBIButts
 		'
-		Me.CBIButts.AutoSize = true
+		Me.CBIButts.AutoSize = True
 		Me.CBIButts.Checked = Global.Tease_AI.My.MySettings.Default.CBIButts
-		Me.CBIButts.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIButts", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIButts.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIButts", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIButts.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.CBIButts.ForeColor = System.Drawing.Color.Black
 		Me.CBIButts.Location = New System.Drawing.Point(3, 351)
@@ -5992,12 +5993,12 @@ Partial Class FrmSettings
 		Me.CBIButts.Size = New System.Drawing.Size(70, 27)
 		Me.CBIButts.TabIndex = 48
 		Me.CBIButts.Text = "Butts"
-		Me.CBIButts.UseVisualStyleBackColor = true
+		Me.CBIButts.UseVisualStyleBackColor = True
 		'
 		'BTNIBlowjob
 		'
 		Me.BTNIBlowjob.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIBlowjob.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIBlowjob.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNIBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.BTNIBlowjob.Location = New System.Drawing.Point(76, 87)
 		Me.BTNIBlowjob.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -6005,12 +6006,12 @@ Partial Class FrmSettings
 		Me.BTNIBlowjob.Size = New System.Drawing.Size(34, 28)
 		Me.BTNIBlowjob.TabIndex = 13
 		Me.BTNIBlowjob.Text = "1"
-		Me.BTNIBlowjob.UseVisualStyleBackColor = false
+		Me.BTNIBlowjob.UseVisualStyleBackColor = False
 		'
 		'BTNIFemdom
 		'
 		Me.BTNIFemdom.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIFemdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIFemdom.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNIFemdom.ForeColor = System.Drawing.Color.Black
 		Me.BTNIFemdom.Location = New System.Drawing.Point(76, 116)
 		Me.BTNIFemdom.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -6018,12 +6019,12 @@ Partial Class FrmSettings
 		Me.BTNIFemdom.Size = New System.Drawing.Size(34, 28)
 		Me.BTNIFemdom.TabIndex = 17
 		Me.BTNIFemdom.Text = "1"
-		Me.BTNIFemdom.UseVisualStyleBackColor = false
+		Me.BTNIFemdom.UseVisualStyleBackColor = False
 		'
 		'BTNBoobPath
 		'
 		Me.BTNBoobPath.BackColor = System.Drawing.Color.LightGray
-		Me.BTNBoobPath.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNBoobPath.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNBoobPath.ForeColor = System.Drawing.Color.Black
 		Me.BTNBoobPath.Location = New System.Drawing.Point(76, 319)
 		Me.BTNBoobPath.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -6031,12 +6032,12 @@ Partial Class FrmSettings
 		Me.BTNBoobPath.Size = New System.Drawing.Size(34, 28)
 		Me.BTNBoobPath.TabIndex = 45
 		Me.BTNBoobPath.Text = "1"
-		Me.BTNBoobPath.UseVisualStyleBackColor = false
+		Me.BTNBoobPath.UseVisualStyleBackColor = False
 		'
 		'BTNILezdom
 		'
 		Me.BTNILezdom.BackColor = System.Drawing.Color.LightGray
-		Me.BTNILezdom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNILezdom.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNILezdom.ForeColor = System.Drawing.Color.Black
 		Me.BTNILezdom.Location = New System.Drawing.Point(76, 145)
 		Me.BTNILezdom.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -6044,12 +6045,12 @@ Partial Class FrmSettings
 		Me.BTNILezdom.Size = New System.Drawing.Size(34, 28)
 		Me.BTNILezdom.TabIndex = 21
 		Me.BTNILezdom.Text = "1"
-		Me.BTNILezdom.UseVisualStyleBackColor = false
+		Me.BTNILezdom.UseVisualStyleBackColor = False
 		'
 		'BTNIHentai
 		'
 		Me.BTNIHentai.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIHentai.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIHentai.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNIHentai.ForeColor = System.Drawing.Color.Black
 		Me.BTNIHentai.Location = New System.Drawing.Point(76, 174)
 		Me.BTNIHentai.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -6057,12 +6058,12 @@ Partial Class FrmSettings
 		Me.BTNIHentai.Size = New System.Drawing.Size(34, 28)
 		Me.BTNIHentai.TabIndex = 25
 		Me.BTNIHentai.Text = "1"
-		Me.BTNIHentai.UseVisualStyleBackColor = false
+		Me.BTNIHentai.UseVisualStyleBackColor = False
 		'
 		'BTNIGay
 		'
 		Me.BTNIGay.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIGay.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIGay.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNIGay.ForeColor = System.Drawing.Color.Black
 		Me.BTNIGay.Location = New System.Drawing.Point(76, 203)
 		Me.BTNIGay.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -6070,12 +6071,12 @@ Partial Class FrmSettings
 		Me.BTNIGay.Size = New System.Drawing.Size(34, 28)
 		Me.BTNIGay.TabIndex = 29
 		Me.BTNIGay.Text = "1"
-		Me.BTNIGay.UseVisualStyleBackColor = false
+		Me.BTNIGay.UseVisualStyleBackColor = False
 		'
 		'BTNIMaledom
 		'
 		Me.BTNIMaledom.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIMaledom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIMaledom.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNIMaledom.ForeColor = System.Drawing.Color.Black
 		Me.BTNIMaledom.Location = New System.Drawing.Point(76, 232)
 		Me.BTNIMaledom.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -6083,12 +6084,12 @@ Partial Class FrmSettings
 		Me.BTNIMaledom.Size = New System.Drawing.Size(34, 28)
 		Me.BTNIMaledom.TabIndex = 33
 		Me.BTNIMaledom.Text = "1"
-		Me.BTNIMaledom.UseVisualStyleBackColor = false
+		Me.BTNIMaledom.UseVisualStyleBackColor = False
 		'
 		'BTNICaptions
 		'
 		Me.BTNICaptions.BackColor = System.Drawing.Color.LightGray
-		Me.BTNICaptions.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNICaptions.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNICaptions.ForeColor = System.Drawing.Color.Black
 		Me.BTNICaptions.Location = New System.Drawing.Point(76, 261)
 		Me.BTNICaptions.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -6096,12 +6097,12 @@ Partial Class FrmSettings
 		Me.BTNICaptions.Size = New System.Drawing.Size(34, 28)
 		Me.BTNICaptions.TabIndex = 37
 		Me.BTNICaptions.Text = "1"
-		Me.BTNICaptions.UseVisualStyleBackColor = false
+		Me.BTNICaptions.UseVisualStyleBackColor = False
 		'
 		'BTNIGeneral
 		'
 		Me.BTNIGeneral.BackColor = System.Drawing.Color.LightGray
-		Me.BTNIGeneral.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNIGeneral.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNIGeneral.ForeColor = System.Drawing.Color.Black
 		Me.BTNIGeneral.Location = New System.Drawing.Point(76, 290)
 		Me.BTNIGeneral.Margin = New System.Windows.Forms.Padding(0, 0, 0, 1)
@@ -6109,7 +6110,7 @@ Partial Class FrmSettings
 		Me.BTNIGeneral.Size = New System.Drawing.Size(34, 28)
 		Me.BTNIGeneral.TabIndex = 41
 		Me.BTNIGeneral.Text = "1"
-		Me.BTNIGeneral.UseVisualStyleBackColor = false
+		Me.BTNIGeneral.UseVisualStyleBackColor = False
 		'
 		'TabPage33
 		'
@@ -6182,50 +6183,50 @@ Partial Class FrmSettings
 		'
 		'CBTagSeeThrough
 		'
-		Me.CBTagSeeThrough.AutoSize = true
-		Me.CBTagSeeThrough.Enabled = false
+		Me.CBTagSeeThrough.AutoSize = True
+		Me.CBTagSeeThrough.Enabled = False
 		Me.CBTagSeeThrough.Location = New System.Drawing.Point(577, 117)
 		Me.CBTagSeeThrough.Name = "CBTagSeeThrough"
 		Me.CBTagSeeThrough.Size = New System.Drawing.Size(87, 17)
 		Me.CBTagSeeThrough.TabIndex = 226
 		Me.CBTagSeeThrough.Text = "See Through"
-		Me.CBTagSeeThrough.UseVisualStyleBackColor = true
+		Me.CBTagSeeThrough.UseVisualStyleBackColor = True
 		'
 		'CBTagAllFours
 		'
-		Me.CBTagAllFours.AutoSize = true
-		Me.CBTagAllFours.Enabled = false
+		Me.CBTagAllFours.AutoSize = True
+		Me.CBTagAllFours.Enabled = False
 		Me.CBTagAllFours.ForeColor = System.Drawing.Color.Black
 		Me.CBTagAllFours.Location = New System.Drawing.Point(577, 207)
 		Me.CBTagAllFours.Name = "CBTagAllFours"
 		Me.CBTagAllFours.Size = New System.Drawing.Size(66, 17)
 		Me.CBTagAllFours.TabIndex = 225
 		Me.CBTagAllFours.Text = "All Fours"
-		Me.CBTagAllFours.UseVisualStyleBackColor = true
+		Me.CBTagAllFours.UseVisualStyleBackColor = True
 		'
 		'CBTagGlaring
 		'
-		Me.CBTagGlaring.AutoSize = true
-		Me.CBTagGlaring.Enabled = false
+		Me.CBTagGlaring.AutoSize = True
+		Me.CBTagGlaring.Enabled = False
 		Me.CBTagGlaring.ForeColor = System.Drawing.Color.Black
 		Me.CBTagGlaring.Location = New System.Drawing.Point(484, 227)
 		Me.CBTagGlaring.Name = "CBTagGlaring"
 		Me.CBTagGlaring.Size = New System.Drawing.Size(59, 17)
 		Me.CBTagGlaring.TabIndex = 224
 		Me.CBTagGlaring.Text = "Glaring"
-		Me.CBTagGlaring.UseVisualStyleBackColor = true
+		Me.CBTagGlaring.UseVisualStyleBackColor = True
 		'
 		'CBTagSmiling
 		'
-		Me.CBTagSmiling.AutoSize = true
-		Me.CBTagSmiling.Enabled = false
+		Me.CBTagSmiling.AutoSize = True
+		Me.CBTagSmiling.Enabled = False
 		Me.CBTagSmiling.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSmiling.Location = New System.Drawing.Point(484, 207)
 		Me.CBTagSmiling.Name = "CBTagSmiling"
 		Me.CBTagSmiling.Size = New System.Drawing.Size(59, 17)
 		Me.CBTagSmiling.TabIndex = 223
 		Me.CBTagSmiling.Text = "Smiling"
-		Me.CBTagSmiling.UseVisualStyleBackColor = true
+		Me.CBTagSmiling.UseVisualStyleBackColor = True
 		'
 		'TBTagDir
 		'
@@ -6237,31 +6238,31 @@ Partial Class FrmSettings
 		'
 		'CBTagPiercing
 		'
-		Me.CBTagPiercing.AutoSize = true
-		Me.CBTagPiercing.Enabled = false
+		Me.CBTagPiercing.AutoSize = True
+		Me.CBTagPiercing.Enabled = False
 		Me.CBTagPiercing.ForeColor = System.Drawing.Color.Black
 		Me.CBTagPiercing.Location = New System.Drawing.Point(577, 227)
 		Me.CBTagPiercing.Name = "CBTagPiercing"
 		Me.CBTagPiercing.Size = New System.Drawing.Size(64, 17)
 		Me.CBTagPiercing.TabIndex = 221
 		Me.CBTagPiercing.Text = "Piercing"
-		Me.CBTagPiercing.UseVisualStyleBackColor = true
+		Me.CBTagPiercing.UseVisualStyleBackColor = True
 		'
 		'CBTagLegs
 		'
-		Me.CBTagLegs.AutoSize = true
-		Me.CBTagLegs.Enabled = false
+		Me.CBTagLegs.AutoSize = True
+		Me.CBTagLegs.Enabled = False
 		Me.CBTagLegs.ForeColor = System.Drawing.Color.Black
 		Me.CBTagLegs.Location = New System.Drawing.Point(484, 117)
 		Me.CBTagLegs.Name = "CBTagLegs"
 		Me.CBTagLegs.Size = New System.Drawing.Size(49, 17)
 		Me.CBTagLegs.TabIndex = 220
 		Me.CBTagLegs.Text = "Legs"
-		Me.CBTagLegs.UseVisualStyleBackColor = true
+		Me.CBTagLegs.UseVisualStyleBackColor = True
 		'
 		'TBTagFurniture
 		'
-		Me.TBTagFurniture.Enabled = false
+		Me.TBTagFurniture.Enabled = False
 		Me.TBTagFurniture.Location = New System.Drawing.Point(559, 370)
 		Me.TBTagFurniture.Name = "TBTagFurniture"
 		Me.TBTagFurniture.Size = New System.Drawing.Size(108, 20)
@@ -6269,19 +6270,19 @@ Partial Class FrmSettings
 		'
 		'CBTagFurniture
 		'
-		Me.CBTagFurniture.AutoSize = true
-		Me.CBTagFurniture.Enabled = false
+		Me.CBTagFurniture.AutoSize = True
+		Me.CBTagFurniture.Enabled = False
 		Me.CBTagFurniture.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFurniture.Location = New System.Drawing.Point(476, 372)
 		Me.CBTagFurniture.Name = "CBTagFurniture"
 		Me.CBTagFurniture.Size = New System.Drawing.Size(67, 17)
 		Me.CBTagFurniture.TabIndex = 218
 		Me.CBTagFurniture.Text = "Furniture"
-		Me.CBTagFurniture.UseVisualStyleBackColor = true
+		Me.CBTagFurniture.UseVisualStyleBackColor = True
 		'
 		'TBTagSexToy
 		'
-		Me.TBTagSexToy.Enabled = false
+		Me.TBTagSexToy.Enabled = False
 		Me.TBTagSexToy.Location = New System.Drawing.Point(560, 346)
 		Me.TBTagSexToy.Name = "TBTagSexToy"
 		Me.TBTagSexToy.Size = New System.Drawing.Size(108, 20)
@@ -6289,19 +6290,19 @@ Partial Class FrmSettings
 		'
 		'CBTagSexToy
 		'
-		Me.CBTagSexToy.AutoSize = true
-		Me.CBTagSexToy.Enabled = false
+		Me.CBTagSexToy.AutoSize = True
+		Me.CBTagSexToy.Enabled = False
 		Me.CBTagSexToy.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSexToy.Location = New System.Drawing.Point(476, 348)
 		Me.CBTagSexToy.Name = "CBTagSexToy"
 		Me.CBTagSexToy.Size = New System.Drawing.Size(65, 17)
 		Me.CBTagSexToy.TabIndex = 216
 		Me.CBTagSexToy.Text = "Sex Toy"
-		Me.CBTagSexToy.UseVisualStyleBackColor = true
+		Me.CBTagSexToy.UseVisualStyleBackColor = True
 		'
 		'TBTagTattoo
 		'
-		Me.TBTagTattoo.Enabled = false
+		Me.TBTagTattoo.Enabled = False
 		Me.TBTagTattoo.Location = New System.Drawing.Point(560, 322)
 		Me.TBTagTattoo.Name = "TBTagTattoo"
 		Me.TBTagTattoo.Size = New System.Drawing.Size(108, 20)
@@ -6309,19 +6310,19 @@ Partial Class FrmSettings
 		'
 		'CBTagTattoo
 		'
-		Me.CBTagTattoo.AutoSize = true
-		Me.CBTagTattoo.Enabled = false
+		Me.CBTagTattoo.AutoSize = True
+		Me.CBTagTattoo.Enabled = False
 		Me.CBTagTattoo.ForeColor = System.Drawing.Color.Black
 		Me.CBTagTattoo.Location = New System.Drawing.Point(476, 324)
 		Me.CBTagTattoo.Name = "CBTagTattoo"
 		Me.CBTagTattoo.Size = New System.Drawing.Size(57, 17)
 		Me.CBTagTattoo.TabIndex = 214
 		Me.CBTagTattoo.Text = "Tattoo"
-		Me.CBTagTattoo.UseVisualStyleBackColor = true
+		Me.CBTagTattoo.UseVisualStyleBackColor = True
 		'
 		'TBTagUnderwear
 		'
-		Me.TBTagUnderwear.Enabled = false
+		Me.TBTagUnderwear.Enabled = False
 		Me.TBTagUnderwear.Location = New System.Drawing.Point(560, 298)
 		Me.TBTagUnderwear.Name = "TBTagUnderwear"
 		Me.TBTagUnderwear.Size = New System.Drawing.Size(108, 20)
@@ -6329,19 +6330,19 @@ Partial Class FrmSettings
 		'
 		'CBTagUnderwear
 		'
-		Me.CBTagUnderwear.AutoSize = true
-		Me.CBTagUnderwear.Enabled = false
+		Me.CBTagUnderwear.AutoSize = True
+		Me.CBTagUnderwear.Enabled = False
 		Me.CBTagUnderwear.ForeColor = System.Drawing.Color.Black
 		Me.CBTagUnderwear.Location = New System.Drawing.Point(476, 300)
 		Me.CBTagUnderwear.Name = "CBTagUnderwear"
 		Me.CBTagUnderwear.Size = New System.Drawing.Size(78, 17)
 		Me.CBTagUnderwear.TabIndex = 212
 		Me.CBTagUnderwear.Text = "Underwear"
-		Me.CBTagUnderwear.UseVisualStyleBackColor = true
+		Me.CBTagUnderwear.UseVisualStyleBackColor = True
 		'
 		'TBTagGarment
 		'
-		Me.TBTagGarment.Enabled = false
+		Me.TBTagGarment.Enabled = False
 		Me.TBTagGarment.Location = New System.Drawing.Point(560, 274)
 		Me.TBTagGarment.Name = "TBTagGarment"
 		Me.TBTagGarment.Size = New System.Drawing.Size(108, 20)
@@ -6349,141 +6350,141 @@ Partial Class FrmSettings
 		'
 		'CBTagGarment
 		'
-		Me.CBTagGarment.AutoSize = true
-		Me.CBTagGarment.Enabled = false
+		Me.CBTagGarment.AutoSize = True
+		Me.CBTagGarment.Enabled = False
 		Me.CBTagGarment.ForeColor = System.Drawing.Color.Black
 		Me.CBTagGarment.Location = New System.Drawing.Point(476, 276)
 		Me.CBTagGarment.Name = "CBTagGarment"
 		Me.CBTagGarment.Size = New System.Drawing.Size(66, 17)
 		Me.CBTagGarment.TabIndex = 210
 		Me.CBTagGarment.Text = "Garment"
-		Me.CBTagGarment.UseVisualStyleBackColor = true
+		Me.CBTagGarment.UseVisualStyleBackColor = True
 		'
 		'Label72
 		'
 		Me.Label72.BackColor = System.Drawing.Color.Transparent
-		Me.Label72.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label72.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label72.ForeColor = System.Drawing.Color.Black
 		Me.Label72.Location = New System.Drawing.Point(5, 368)
 		Me.Label72.Name = "Label72"
 		Me.Label72.Size = New System.Drawing.Size(451, 35)
 		Me.Label72.TabIndex = 189
-		Me.Label72.Text = "Open a directory containing images. Check all tags that apply to each image displ"& _ 
-    "ayed, and enter one-word tag descriptions in the text fields when appropriate. ("& _ 
-    "e.g. Garment: dress)"
+		Me.Label72.Text = "Open a directory containing images. Check all tags that apply to each image displ" &
+	"ayed, and enter one-word tag descriptions in the text fields when appropriate. (" &
+	"e.g. Garment: dress)"
 		Me.Label72.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 		'
 		'CBTagHandsCovering
 		'
-		Me.CBTagHandsCovering.AutoSize = true
-		Me.CBTagHandsCovering.Enabled = false
+		Me.CBTagHandsCovering.AutoSize = True
+		Me.CBTagHandsCovering.Enabled = False
 		Me.CBTagHandsCovering.Location = New System.Drawing.Point(577, 97)
 		Me.CBTagHandsCovering.Name = "CBTagHandsCovering"
 		Me.CBTagHandsCovering.Size = New System.Drawing.Size(101, 17)
 		Me.CBTagHandsCovering.TabIndex = 209
 		Me.CBTagHandsCovering.Text = "Hands Covering"
-		Me.CBTagHandsCovering.UseVisualStyleBackColor = true
+		Me.CBTagHandsCovering.UseVisualStyleBackColor = True
 		'
 		'CBTagGarmentCovering
 		'
-		Me.CBTagGarmentCovering.AutoSize = true
-		Me.CBTagGarmentCovering.Enabled = false
+		Me.CBTagGarmentCovering.AutoSize = True
+		Me.CBTagGarmentCovering.Enabled = False
 		Me.CBTagGarmentCovering.Location = New System.Drawing.Point(577, 77)
 		Me.CBTagGarmentCovering.Name = "CBTagGarmentCovering"
 		Me.CBTagGarmentCovering.Size = New System.Drawing.Size(110, 17)
 		Me.CBTagGarmentCovering.TabIndex = 208
 		Me.CBTagGarmentCovering.Text = "Garment Covering"
-		Me.CBTagGarmentCovering.UseVisualStyleBackColor = true
+		Me.CBTagGarmentCovering.UseVisualStyleBackColor = True
 		'
 		'CBTagCloseUp
 		'
-		Me.CBTagCloseUp.AutoSize = true
-		Me.CBTagCloseUp.Enabled = false
+		Me.CBTagCloseUp.AutoSize = True
+		Me.CBTagCloseUp.Enabled = False
 		Me.CBTagCloseUp.ForeColor = System.Drawing.Color.Black
 		Me.CBTagCloseUp.Location = New System.Drawing.Point(577, 187)
 		Me.CBTagCloseUp.Name = "CBTagCloseUp"
 		Me.CBTagCloseUp.Size = New System.Drawing.Size(69, 17)
 		Me.CBTagCloseUp.TabIndex = 205
 		Me.CBTagCloseUp.Text = "Close Up"
-		Me.CBTagCloseUp.UseVisualStyleBackColor = true
+		Me.CBTagCloseUp.UseVisualStyleBackColor = True
 		'
 		'CBTagNaked
 		'
-		Me.CBTagNaked.AutoSize = true
-		Me.CBTagNaked.Enabled = false
+		Me.CBTagNaked.AutoSize = True
+		Me.CBTagNaked.Enabled = False
 		Me.CBTagNaked.Location = New System.Drawing.Point(577, 136)
 		Me.CBTagNaked.Name = "CBTagNaked"
 		Me.CBTagNaked.Size = New System.Drawing.Size(57, 17)
 		Me.CBTagNaked.TabIndex = 199
 		Me.CBTagNaked.Text = "Naked"
-		Me.CBTagNaked.UseVisualStyleBackColor = true
+		Me.CBTagNaked.UseVisualStyleBackColor = True
 		'
 		'CBTagSideView
 		'
-		Me.CBTagSideView.AutoSize = true
-		Me.CBTagSideView.Enabled = false
+		Me.CBTagSideView.AutoSize = True
+		Me.CBTagSideView.Enabled = False
 		Me.CBTagSideView.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSideView.Location = New System.Drawing.Point(577, 167)
 		Me.CBTagSideView.Name = "CBTagSideView"
 		Me.CBTagSideView.Size = New System.Drawing.Size(73, 17)
 		Me.CBTagSideView.TabIndex = 204
 		Me.CBTagSideView.Text = "Side View"
-		Me.CBTagSideView.UseVisualStyleBackColor = true
+		Me.CBTagSideView.UseVisualStyleBackColor = True
 		'
 		'BTNTagPrevious
 		'
 		Me.BTNTagPrevious.BackColor = System.Drawing.Color.LightGray
-		Me.BTNTagPrevious.Enabled = false
-		Me.BTNTagPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNTagPrevious.Enabled = False
+		Me.BTNTagPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNTagPrevious.ForeColor = System.Drawing.Color.Black
 		Me.BTNTagPrevious.Location = New System.Drawing.Point(391, 8)
 		Me.BTNTagPrevious.Name = "BTNTagPrevious"
 		Me.BTNTagPrevious.Size = New System.Drawing.Size(47, 24)
 		Me.BTNTagPrevious.TabIndex = 207
 		Me.BTNTagPrevious.Text = "<<"
-		Me.BTNTagPrevious.UseVisualStyleBackColor = false
+		Me.BTNTagPrevious.UseVisualStyleBackColor = False
 		'
 		'CBTagHalfDressed
 		'
-		Me.CBTagHalfDressed.AutoSize = true
-		Me.CBTagHalfDressed.Enabled = false
+		Me.CBTagHalfDressed.AutoSize = True
+		Me.CBTagHalfDressed.Enabled = False
 		Me.CBTagHalfDressed.Location = New System.Drawing.Point(577, 57)
 		Me.CBTagHalfDressed.Name = "CBTagHalfDressed"
 		Me.CBTagHalfDressed.Size = New System.Drawing.Size(86, 17)
 		Me.CBTagHalfDressed.TabIndex = 198
 		Me.CBTagHalfDressed.Text = "Half Dressed"
-		Me.CBTagHalfDressed.UseVisualStyleBackColor = true
+		Me.CBTagHalfDressed.UseVisualStyleBackColor = True
 		'
 		'BTNTagNext
 		'
 		Me.BTNTagNext.BackColor = System.Drawing.Color.LightGray
-		Me.BTNTagNext.Enabled = false
-		Me.BTNTagNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNTagNext.Enabled = False
+		Me.BTNTagNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNTagNext.ForeColor = System.Drawing.Color.Black
 		Me.BTNTagNext.Location = New System.Drawing.Point(560, 8)
 		Me.BTNTagNext.Name = "BTNTagNext"
 		Me.BTNTagNext.Size = New System.Drawing.Size(47, 24)
 		Me.BTNTagNext.TabIndex = 206
 		Me.BTNTagNext.Text = ">>"
-		Me.BTNTagNext.UseVisualStyleBackColor = false
+		Me.BTNTagNext.UseVisualStyleBackColor = False
 		'
 		'CBTagFullyDressed
 		'
-		Me.CBTagFullyDressed.AutoSize = true
-		Me.CBTagFullyDressed.Enabled = false
+		Me.CBTagFullyDressed.AutoSize = True
+		Me.CBTagFullyDressed.Enabled = False
 		Me.CBTagFullyDressed.Location = New System.Drawing.Point(577, 37)
 		Me.CBTagFullyDressed.Name = "CBTagFullyDressed"
 		Me.CBTagFullyDressed.Size = New System.Drawing.Size(88, 17)
 		Me.CBTagFullyDressed.TabIndex = 197
 		Me.CBTagFullyDressed.Text = "Fully Dressed"
-		Me.CBTagFullyDressed.UseVisualStyleBackColor = true
+		Me.CBTagFullyDressed.UseVisualStyleBackColor = True
 		'
 		'LBLTagCount
 		'
 		Me.LBLTagCount.BackColor = System.Drawing.Color.Transparent
 		Me.LBLTagCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLTagCount.Enabled = false
-		Me.LBLTagCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLTagCount.Enabled = False
+		Me.LBLTagCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLTagCount.ForeColor = System.Drawing.Color.Black
 		Me.LBLTagCount.Location = New System.Drawing.Point(444, 10)
 		Me.LBLTagCount.Name = "LBLTagCount"
@@ -6494,95 +6495,95 @@ Partial Class FrmSettings
 		'
 		'CBTagSucking
 		'
-		Me.CBTagSucking.AutoSize = true
-		Me.CBTagSucking.Enabled = false
+		Me.CBTagSucking.AutoSize = True
+		Me.CBTagSucking.Enabled = False
 		Me.CBTagSucking.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSucking.Location = New System.Drawing.Point(484, 187)
 		Me.CBTagSucking.Name = "CBTagSucking"
 		Me.CBTagSucking.Size = New System.Drawing.Size(65, 17)
 		Me.CBTagSucking.TabIndex = 202
 		Me.CBTagSucking.Text = "Sucking"
-		Me.CBTagSucking.UseVisualStyleBackColor = true
+		Me.CBTagSucking.UseVisualStyleBackColor = True
 		'
 		'CBTagMasturbating
 		'
-		Me.CBTagMasturbating.AutoSize = true
-		Me.CBTagMasturbating.Enabled = false
+		Me.CBTagMasturbating.AutoSize = True
+		Me.CBTagMasturbating.Enabled = False
 		Me.CBTagMasturbating.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMasturbating.Location = New System.Drawing.Point(484, 167)
 		Me.CBTagMasturbating.Name = "CBTagMasturbating"
 		Me.CBTagMasturbating.Size = New System.Drawing.Size(87, 17)
 		Me.CBTagMasturbating.TabIndex = 201
 		Me.CBTagMasturbating.Text = "Masturbating"
-		Me.CBTagMasturbating.UseVisualStyleBackColor = true
+		Me.CBTagMasturbating.UseVisualStyleBackColor = True
 		'
 		'CBTagFeet
 		'
-		Me.CBTagFeet.AutoSize = true
-		Me.CBTagFeet.Enabled = false
+		Me.CBTagFeet.AutoSize = True
+		Me.CBTagFeet.Enabled = False
 		Me.CBTagFeet.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFeet.Location = New System.Drawing.Point(484, 137)
 		Me.CBTagFeet.Name = "CBTagFeet"
 		Me.CBTagFeet.Size = New System.Drawing.Size(47, 17)
 		Me.CBTagFeet.TabIndex = 200
 		Me.CBTagFeet.Text = "Feet"
-		Me.CBTagFeet.UseVisualStyleBackColor = true
+		Me.CBTagFeet.UseVisualStyleBackColor = True
 		'
 		'CBTagBoobs
 		'
-		Me.CBTagBoobs.AutoSize = true
-		Me.CBTagBoobs.Enabled = false
+		Me.CBTagBoobs.AutoSize = True
+		Me.CBTagBoobs.Enabled = False
 		Me.CBTagBoobs.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBoobs.Location = New System.Drawing.Point(484, 57)
 		Me.CBTagBoobs.Name = "CBTagBoobs"
 		Me.CBTagBoobs.Size = New System.Drawing.Size(56, 17)
 		Me.CBTagBoobs.TabIndex = 196
 		Me.CBTagBoobs.Text = "Boobs"
-		Me.CBTagBoobs.UseVisualStyleBackColor = true
+		Me.CBTagBoobs.UseVisualStyleBackColor = True
 		'
 		'CBTagAss
 		'
-		Me.CBTagAss.AutoSize = true
-		Me.CBTagAss.Enabled = false
+		Me.CBTagAss.AutoSize = True
+		Me.CBTagAss.Enabled = False
 		Me.CBTagAss.ForeColor = System.Drawing.Color.Black
 		Me.CBTagAss.Location = New System.Drawing.Point(484, 97)
 		Me.CBTagAss.Name = "CBTagAss"
 		Me.CBTagAss.Size = New System.Drawing.Size(43, 17)
 		Me.CBTagAss.TabIndex = 195
 		Me.CBTagAss.Text = "Ass"
-		Me.CBTagAss.UseVisualStyleBackColor = true
+		Me.CBTagAss.UseVisualStyleBackColor = True
 		'
 		'CBTagPussy
 		'
-		Me.CBTagPussy.AutoSize = true
-		Me.CBTagPussy.Enabled = false
+		Me.CBTagPussy.AutoSize = True
+		Me.CBTagPussy.Enabled = False
 		Me.CBTagPussy.ForeColor = System.Drawing.Color.Black
 		Me.CBTagPussy.Location = New System.Drawing.Point(484, 77)
 		Me.CBTagPussy.Name = "CBTagPussy"
 		Me.CBTagPussy.Size = New System.Drawing.Size(54, 17)
 		Me.CBTagPussy.TabIndex = 194
 		Me.CBTagPussy.Text = "Pussy"
-		Me.CBTagPussy.UseVisualStyleBackColor = true
+		Me.CBTagPussy.UseVisualStyleBackColor = True
 		'
 		'BTNTagSave
 		'
-		Me.BTNTagSave.Enabled = false
+		Me.BTNTagSave.Enabled = False
 		Me.BTNTagSave.Location = New System.Drawing.Point(613, 9)
 		Me.BTNTagSave.Name = "BTNTagSave"
 		Me.BTNTagSave.Size = New System.Drawing.Size(83, 23)
 		Me.BTNTagSave.TabIndex = 193
 		Me.BTNTagSave.Text = "Finished"
-		Me.BTNTagSave.UseVisualStyleBackColor = true
+		Me.BTNTagSave.UseVisualStyleBackColor = True
 		'
 		'BTNTagDir
 		'
-		Me.BTNTagDir.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNTagDir.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNTagDir.Location = New System.Drawing.Point(6, 8)
 		Me.BTNTagDir.Name = "BTNTagDir"
 		Me.BTNTagDir.Size = New System.Drawing.Size(43, 23)
 		Me.BTNTagDir.TabIndex = 192
 		Me.BTNTagDir.Text = "1"
-		Me.BTNTagDir.UseVisualStyleBackColor = true
+		Me.BTNTagDir.UseVisualStyleBackColor = True
 		'
 		'ImageTagPictureBox
 		'
@@ -6592,19 +6593,19 @@ Partial Class FrmSettings
 		Me.ImageTagPictureBox.Size = New System.Drawing.Size(451, 328)
 		Me.ImageTagPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
 		Me.ImageTagPictureBox.TabIndex = 191
-		Me.ImageTagPictureBox.TabStop = false
+		Me.ImageTagPictureBox.TabStop = False
 		'
 		'CBTagFace
 		'
-		Me.CBTagFace.AutoSize = true
-		Me.CBTagFace.Enabled = false
+		Me.CBTagFace.AutoSize = True
+		Me.CBTagFace.Enabled = False
 		Me.CBTagFace.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFace.Location = New System.Drawing.Point(484, 37)
 		Me.CBTagFace.Name = "CBTagFace"
 		Me.CBTagFace.Size = New System.Drawing.Size(50, 17)
 		Me.CBTagFace.TabIndex = 190
 		Me.CBTagFace.Text = "Face"
-		Me.CBTagFace.UseVisualStyleBackColor = true
+		Me.CBTagFace.UseVisualStyleBackColor = True
 		'
 		'TabPage35
 		'
@@ -6641,68 +6642,68 @@ Partial Class FrmSettings
 		Me.GroupBox55.Name = "GroupBox55"
 		Me.GroupBox55.Size = New System.Drawing.Size(103, 118)
 		Me.GroupBox55.TabIndex = 241
-		Me.GroupBox55.TabStop = false
+		Me.GroupBox55.TabStop = False
 		Me.GroupBox55.Text = "Outfit"
 		'
 		'CBTagNurse
 		'
-		Me.CBTagNurse.AutoSize = true
-		Me.CBTagNurse.Enabled = false
+		Me.CBTagNurse.AutoSize = True
+		Me.CBTagNurse.Enabled = False
 		Me.CBTagNurse.ForeColor = System.Drawing.Color.Black
 		Me.CBTagNurse.Location = New System.Drawing.Point(15, 17)
 		Me.CBTagNurse.Name = "CBTagNurse"
 		Me.CBTagNurse.Size = New System.Drawing.Size(54, 17)
 		Me.CBTagNurse.TabIndex = 203
 		Me.CBTagNurse.Text = "Nurse"
-		Me.CBTagNurse.UseVisualStyleBackColor = true
+		Me.CBTagNurse.UseVisualStyleBackColor = True
 		'
 		'CBTagSchoolgirl
 		'
-		Me.CBTagSchoolgirl.AutoSize = true
-		Me.CBTagSchoolgirl.Enabled = false
+		Me.CBTagSchoolgirl.AutoSize = True
+		Me.CBTagSchoolgirl.Enabled = False
 		Me.CBTagSchoolgirl.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSchoolgirl.Location = New System.Drawing.Point(15, 57)
 		Me.CBTagSchoolgirl.Name = "CBTagSchoolgirl"
 		Me.CBTagSchoolgirl.Size = New System.Drawing.Size(72, 17)
 		Me.CBTagSchoolgirl.TabIndex = 204
 		Me.CBTagSchoolgirl.Text = "Schoolgirl"
-		Me.CBTagSchoolgirl.UseVisualStyleBackColor = true
+		Me.CBTagSchoolgirl.UseVisualStyleBackColor = True
 		'
 		'CBTagMaid
 		'
-		Me.CBTagMaid.AutoSize = true
-		Me.CBTagMaid.Enabled = false
+		Me.CBTagMaid.AutoSize = True
+		Me.CBTagMaid.Enabled = False
 		Me.CBTagMaid.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMaid.Location = New System.Drawing.Point(15, 77)
 		Me.CBTagMaid.Name = "CBTagMaid"
 		Me.CBTagMaid.Size = New System.Drawing.Size(49, 17)
 		Me.CBTagMaid.TabIndex = 205
 		Me.CBTagMaid.Text = "Maid"
-		Me.CBTagMaid.UseVisualStyleBackColor = true
+		Me.CBTagMaid.UseVisualStyleBackColor = True
 		'
 		'CBTagTeacher
 		'
-		Me.CBTagTeacher.AutoSize = true
-		Me.CBTagTeacher.Enabled = false
+		Me.CBTagTeacher.AutoSize = True
+		Me.CBTagTeacher.Enabled = False
 		Me.CBTagTeacher.ForeColor = System.Drawing.Color.Black
 		Me.CBTagTeacher.Location = New System.Drawing.Point(15, 37)
 		Me.CBTagTeacher.Name = "CBTagTeacher"
 		Me.CBTagTeacher.Size = New System.Drawing.Size(66, 17)
 		Me.CBTagTeacher.TabIndex = 206
 		Me.CBTagTeacher.Text = "Teacher"
-		Me.CBTagTeacher.UseVisualStyleBackColor = true
+		Me.CBTagTeacher.UseVisualStyleBackColor = True
 		'
 		'CBTagSuperhero
 		'
-		Me.CBTagSuperhero.AutoSize = true
-		Me.CBTagSuperhero.Enabled = false
+		Me.CBTagSuperhero.AutoSize = True
+		Me.CBTagSuperhero.Enabled = False
 		Me.CBTagSuperhero.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSuperhero.Location = New System.Drawing.Point(15, 97)
 		Me.CBTagSuperhero.Name = "CBTagSuperhero"
 		Me.CBTagSuperhero.Size = New System.Drawing.Size(75, 17)
 		Me.CBTagSuperhero.TabIndex = 213
 		Me.CBTagSuperhero.Text = "Superhero"
-		Me.CBTagSuperhero.UseVisualStyleBackColor = true
+		Me.CBTagSuperhero.UseVisualStyleBackColor = True
 		'
 		'GroupBox53
 		'
@@ -6720,128 +6721,128 @@ Partial Class FrmSettings
 		Me.GroupBox53.Name = "GroupBox53"
 		Me.GroupBox53.Size = New System.Drawing.Size(246, 118)
 		Me.GroupBox53.TabIndex = 240
-		Me.GroupBox53.TabStop = false
+		Me.GroupBox53.TabStop = False
 		Me.GroupBox53.Text = "Hentai/JAV Themes"
 		'
 		'CBTagTrap
 		'
-		Me.CBTagTrap.AutoSize = true
-		Me.CBTagTrap.Enabled = false
+		Me.CBTagTrap.AutoSize = True
+		Me.CBTagTrap.Enabled = False
 		Me.CBTagTrap.ForeColor = System.Drawing.Color.Black
 		Me.CBTagTrap.Location = New System.Drawing.Point(126, 37)
 		Me.CBTagTrap.Name = "CBTagTrap"
 		Me.CBTagTrap.Size = New System.Drawing.Size(48, 17)
 		Me.CBTagTrap.TabIndex = 226
 		Me.CBTagTrap.Text = "Trap"
-		Me.CBTagTrap.UseVisualStyleBackColor = true
+		Me.CBTagTrap.UseVisualStyleBackColor = True
 		'
 		'CBTagTentacles
 		'
-		Me.CBTagTentacles.AutoSize = true
-		Me.CBTagTentacles.Enabled = false
+		Me.CBTagTentacles.AutoSize = True
+		Me.CBTagTentacles.Enabled = False
 		Me.CBTagTentacles.ForeColor = System.Drawing.Color.Black
 		Me.CBTagTentacles.Location = New System.Drawing.Point(15, 37)
 		Me.CBTagTentacles.Name = "CBTagTentacles"
 		Me.CBTagTentacles.Size = New System.Drawing.Size(73, 17)
 		Me.CBTagTentacles.TabIndex = 204
 		Me.CBTagTentacles.Text = "Tentacles"
-		Me.CBTagTentacles.UseVisualStyleBackColor = true
+		Me.CBTagTentacles.UseVisualStyleBackColor = True
 		'
 		'CBTagMonsterGirl
 		'
-		Me.CBTagMonsterGirl.AutoSize = true
-		Me.CBTagMonsterGirl.Enabled = false
+		Me.CBTagMonsterGirl.AutoSize = True
+		Me.CBTagMonsterGirl.Enabled = False
 		Me.CBTagMonsterGirl.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMonsterGirl.Location = New System.Drawing.Point(126, 97)
 		Me.CBTagMonsterGirl.Name = "CBTagMonsterGirl"
 		Me.CBTagMonsterGirl.Size = New System.Drawing.Size(82, 17)
 		Me.CBTagMonsterGirl.TabIndex = 214
 		Me.CBTagMonsterGirl.Text = "Monster Girl"
-		Me.CBTagMonsterGirl.UseVisualStyleBackColor = true
+		Me.CBTagMonsterGirl.UseVisualStyleBackColor = True
 		'
 		'CBTagBukkake
 		'
-		Me.CBTagBukkake.AutoSize = true
-		Me.CBTagBukkake.Enabled = false
+		Me.CBTagBukkake.AutoSize = True
+		Me.CBTagBukkake.Enabled = False
 		Me.CBTagBukkake.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBukkake.Location = New System.Drawing.Point(15, 57)
 		Me.CBTagBukkake.Name = "CBTagBukkake"
 		Me.CBTagBukkake.Size = New System.Drawing.Size(69, 17)
 		Me.CBTagBukkake.TabIndex = 210
 		Me.CBTagBukkake.Text = "Bukkake"
-		Me.CBTagBukkake.UseVisualStyleBackColor = true
+		Me.CBTagBukkake.UseVisualStyleBackColor = True
 		'
 		'CBTagGanguro
 		'
-		Me.CBTagGanguro.AutoSize = true
-		Me.CBTagGanguro.Enabled = false
+		Me.CBTagGanguro.AutoSize = True
+		Me.CBTagGanguro.Enabled = False
 		Me.CBTagGanguro.ForeColor = System.Drawing.Color.Black
 		Me.CBTagGanguro.Location = New System.Drawing.Point(126, 57)
 		Me.CBTagGanguro.Name = "CBTagGanguro"
 		Me.CBTagGanguro.Size = New System.Drawing.Size(67, 17)
 		Me.CBTagGanguro.TabIndex = 205
 		Me.CBTagGanguro.Text = "Ganguro"
-		Me.CBTagGanguro.UseVisualStyleBackColor = true
+		Me.CBTagGanguro.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyWriting
 		'
-		Me.CBTagBodyWriting.AutoSize = true
-		Me.CBTagBodyWriting.Enabled = false
+		Me.CBTagBodyWriting.AutoSize = True
+		Me.CBTagBodyWriting.Enabled = False
 		Me.CBTagBodyWriting.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyWriting.Location = New System.Drawing.Point(126, 17)
 		Me.CBTagBodyWriting.Name = "CBTagBodyWriting"
 		Me.CBTagBodyWriting.Size = New System.Drawing.Size(86, 17)
 		Me.CBTagBodyWriting.TabIndex = 208
 		Me.CBTagBodyWriting.Text = "Body Writing"
-		Me.CBTagBodyWriting.UseVisualStyleBackColor = true
+		Me.CBTagBodyWriting.UseVisualStyleBackColor = True
 		'
 		'CBTagMahouShoujo
 		'
-		Me.CBTagMahouShoujo.AutoSize = true
-		Me.CBTagMahouShoujo.Enabled = false
+		Me.CBTagMahouShoujo.AutoSize = True
+		Me.CBTagMahouShoujo.Enabled = False
 		Me.CBTagMahouShoujo.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMahouShoujo.Location = New System.Drawing.Point(126, 77)
 		Me.CBTagMahouShoujo.Name = "CBTagMahouShoujo"
 		Me.CBTagMahouShoujo.Size = New System.Drawing.Size(95, 17)
 		Me.CBTagMahouShoujo.TabIndex = 209
 		Me.CBTagMahouShoujo.Text = "Mahou Shoujo"
-		Me.CBTagMahouShoujo.UseVisualStyleBackColor = true
+		Me.CBTagMahouShoujo.UseVisualStyleBackColor = True
 		'
 		'CBTagBakunyuu
 		'
-		Me.CBTagBakunyuu.AutoSize = true
-		Me.CBTagBakunyuu.Enabled = false
+		Me.CBTagBakunyuu.AutoSize = True
+		Me.CBTagBakunyuu.Enabled = False
 		Me.CBTagBakunyuu.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBakunyuu.Location = New System.Drawing.Point(15, 77)
 		Me.CBTagBakunyuu.Name = "CBTagBakunyuu"
 		Me.CBTagBakunyuu.Size = New System.Drawing.Size(74, 17)
 		Me.CBTagBakunyuu.TabIndex = 213
 		Me.CBTagBakunyuu.Text = "Bakunyuu"
-		Me.CBTagBakunyuu.UseVisualStyleBackColor = true
+		Me.CBTagBakunyuu.UseVisualStyleBackColor = True
 		'
 		'CBTagAhegao
 		'
-		Me.CBTagAhegao.AutoSize = true
-		Me.CBTagAhegao.Enabled = false
+		Me.CBTagAhegao.AutoSize = True
+		Me.CBTagAhegao.Enabled = False
 		Me.CBTagAhegao.ForeColor = System.Drawing.Color.Black
 		Me.CBTagAhegao.Location = New System.Drawing.Point(15, 97)
 		Me.CBTagAhegao.Name = "CBTagAhegao"
 		Me.CBTagAhegao.Size = New System.Drawing.Size(63, 17)
 		Me.CBTagAhegao.TabIndex = 207
 		Me.CBTagAhegao.Text = "Ahegao"
-		Me.CBTagAhegao.UseVisualStyleBackColor = true
+		Me.CBTagAhegao.UseVisualStyleBackColor = True
 		'
 		'CBTagShibari
 		'
-		Me.CBTagShibari.AutoSize = true
-		Me.CBTagShibari.Enabled = false
+		Me.CBTagShibari.AutoSize = True
+		Me.CBTagShibari.Enabled = False
 		Me.CBTagShibari.ForeColor = System.Drawing.Color.Black
 		Me.CBTagShibari.Location = New System.Drawing.Point(15, 17)
 		Me.CBTagShibari.Name = "CBTagShibari"
 		Me.CBTagShibari.Size = New System.Drawing.Size(58, 17)
 		Me.CBTagShibari.TabIndex = 203
 		Me.CBTagShibari.Text = "Shibari"
-		Me.CBTagShibari.UseVisualStyleBackColor = true
+		Me.CBTagShibari.UseVisualStyleBackColor = True
 		'
 		'GroupBox49
 		'
@@ -6860,140 +6861,140 @@ Partial Class FrmSettings
 		Me.GroupBox49.Name = "GroupBox49"
 		Me.GroupBox49.Size = New System.Drawing.Size(103, 238)
 		Me.GroupBox49.TabIndex = 236
-		Me.GroupBox49.TabStop = false
+		Me.GroupBox49.TabStop = False
 		Me.GroupBox49.Text = "Body Part"
 		'
 		'CBTagBodyMouth
 		'
-		Me.CBTagBodyMouth.AutoSize = true
-		Me.CBTagBodyMouth.Enabled = false
+		Me.CBTagBodyMouth.AutoSize = True
+		Me.CBTagBodyMouth.Enabled = False
 		Me.CBTagBodyMouth.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyMouth.Location = New System.Drawing.Point(14, 57)
 		Me.CBTagBodyMouth.Name = "CBTagBodyMouth"
 		Me.CBTagBodyMouth.Size = New System.Drawing.Size(56, 17)
 		Me.CBTagBodyMouth.TabIndex = 220
 		Me.CBTagBodyMouth.Text = "Mouth"
-		Me.CBTagBodyMouth.UseVisualStyleBackColor = true
+		Me.CBTagBodyMouth.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyAss
 		'
-		Me.CBTagBodyAss.AutoSize = true
-		Me.CBTagBodyAss.Enabled = false
+		Me.CBTagBodyAss.AutoSize = True
+		Me.CBTagBodyAss.Enabled = False
 		Me.CBTagBodyAss.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyAss.Location = New System.Drawing.Point(15, 137)
 		Me.CBTagBodyAss.Name = "CBTagBodyAss"
 		Me.CBTagBodyAss.Size = New System.Drawing.Size(43, 17)
 		Me.CBTagBodyAss.TabIndex = 219
 		Me.CBTagBodyAss.Text = "Ass"
-		Me.CBTagBodyAss.UseVisualStyleBackColor = true
+		Me.CBTagBodyAss.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyFace
 		'
-		Me.CBTagBodyFace.AutoSize = true
-		Me.CBTagBodyFace.Enabled = false
+		Me.CBTagBodyFace.AutoSize = True
+		Me.CBTagBodyFace.Enabled = False
 		Me.CBTagBodyFace.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyFace.Location = New System.Drawing.Point(15, 17)
 		Me.CBTagBodyFace.Name = "CBTagBodyFace"
 		Me.CBTagBodyFace.Size = New System.Drawing.Size(50, 17)
 		Me.CBTagBodyFace.TabIndex = 203
 		Me.CBTagBodyFace.Text = "Face"
-		Me.CBTagBodyFace.UseVisualStyleBackColor = true
+		Me.CBTagBodyFace.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyLegs
 		'
-		Me.CBTagBodyLegs.AutoSize = true
-		Me.CBTagBodyLegs.Enabled = false
+		Me.CBTagBodyLegs.AutoSize = True
+		Me.CBTagBodyLegs.Enabled = False
 		Me.CBTagBodyLegs.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyLegs.Location = New System.Drawing.Point(15, 157)
 		Me.CBTagBodyLegs.Name = "CBTagBodyLegs"
 		Me.CBTagBodyLegs.Size = New System.Drawing.Size(49, 17)
 		Me.CBTagBodyLegs.TabIndex = 218
 		Me.CBTagBodyLegs.Text = "Legs"
-		Me.CBTagBodyLegs.UseVisualStyleBackColor = true
+		Me.CBTagBodyLegs.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyBalls
 		'
-		Me.CBTagBodyBalls.AutoSize = true
-		Me.CBTagBodyBalls.Enabled = false
+		Me.CBTagBodyBalls.AutoSize = True
+		Me.CBTagBodyBalls.Enabled = False
 		Me.CBTagBodyBalls.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyBalls.Location = New System.Drawing.Point(15, 217)
 		Me.CBTagBodyBalls.Name = "CBTagBodyBalls"
 		Me.CBTagBodyBalls.Size = New System.Drawing.Size(48, 17)
 		Me.CBTagBodyBalls.TabIndex = 217
 		Me.CBTagBodyBalls.Text = "Balls"
-		Me.CBTagBodyBalls.UseVisualStyleBackColor = true
+		Me.CBTagBodyBalls.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyCock
 		'
-		Me.CBTagBodyCock.AutoSize = true
-		Me.CBTagBodyCock.Enabled = false
+		Me.CBTagBodyCock.AutoSize = True
+		Me.CBTagBodyCock.Enabled = False
 		Me.CBTagBodyCock.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyCock.Location = New System.Drawing.Point(15, 197)
 		Me.CBTagBodyCock.Name = "CBTagBodyCock"
 		Me.CBTagBodyCock.Size = New System.Drawing.Size(51, 17)
 		Me.CBTagBodyCock.TabIndex = 216
 		Me.CBTagBodyCock.Text = "Cock"
-		Me.CBTagBodyCock.UseVisualStyleBackColor = true
+		Me.CBTagBodyCock.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyFeet
 		'
-		Me.CBTagBodyFeet.AutoSize = true
-		Me.CBTagBodyFeet.Enabled = false
+		Me.CBTagBodyFeet.AutoSize = True
+		Me.CBTagBodyFeet.Enabled = False
 		Me.CBTagBodyFeet.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyFeet.Location = New System.Drawing.Point(15, 177)
 		Me.CBTagBodyFeet.Name = "CBTagBodyFeet"
 		Me.CBTagBodyFeet.Size = New System.Drawing.Size(47, 17)
 		Me.CBTagBodyFeet.TabIndex = 215
 		Me.CBTagBodyFeet.Text = "Feet"
-		Me.CBTagBodyFeet.UseVisualStyleBackColor = true
+		Me.CBTagBodyFeet.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyNipples
 		'
-		Me.CBTagBodyNipples.AutoSize = true
-		Me.CBTagBodyNipples.Enabled = false
+		Me.CBTagBodyNipples.AutoSize = True
+		Me.CBTagBodyNipples.Enabled = False
 		Me.CBTagBodyNipples.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyNipples.Location = New System.Drawing.Point(15, 97)
 		Me.CBTagBodyNipples.Name = "CBTagBodyNipples"
 		Me.CBTagBodyNipples.Size = New System.Drawing.Size(61, 17)
 		Me.CBTagBodyNipples.TabIndex = 207
 		Me.CBTagBodyNipples.Text = "Nipples"
-		Me.CBTagBodyNipples.UseVisualStyleBackColor = true
+		Me.CBTagBodyNipples.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyPussy
 		'
-		Me.CBTagBodyPussy.AutoSize = true
-		Me.CBTagBodyPussy.Enabled = false
+		Me.CBTagBodyPussy.AutoSize = True
+		Me.CBTagBodyPussy.Enabled = False
 		Me.CBTagBodyPussy.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyPussy.Location = New System.Drawing.Point(15, 117)
 		Me.CBTagBodyPussy.Name = "CBTagBodyPussy"
 		Me.CBTagBodyPussy.Size = New System.Drawing.Size(54, 17)
 		Me.CBTagBodyPussy.TabIndex = 209
 		Me.CBTagBodyPussy.Text = "Pussy"
-		Me.CBTagBodyPussy.UseVisualStyleBackColor = true
+		Me.CBTagBodyPussy.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyTits
 		'
-		Me.CBTagBodyTits.AutoSize = true
-		Me.CBTagBodyTits.Enabled = false
+		Me.CBTagBodyTits.AutoSize = True
+		Me.CBTagBodyTits.Enabled = False
 		Me.CBTagBodyTits.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyTits.Location = New System.Drawing.Point(15, 77)
 		Me.CBTagBodyTits.Name = "CBTagBodyTits"
 		Me.CBTagBodyTits.Size = New System.Drawing.Size(43, 17)
 		Me.CBTagBodyTits.TabIndex = 213
 		Me.CBTagBodyTits.Text = "Tits"
-		Me.CBTagBodyTits.UseVisualStyleBackColor = true
+		Me.CBTagBodyTits.UseVisualStyleBackColor = True
 		'
 		'CBTagBodyFingers
 		'
-		Me.CBTagBodyFingers.AutoSize = true
-		Me.CBTagBodyFingers.Enabled = false
+		Me.CBTagBodyFingers.AutoSize = True
+		Me.CBTagBodyFingers.Enabled = False
 		Me.CBTagBodyFingers.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBodyFingers.Location = New System.Drawing.Point(15, 37)
 		Me.CBTagBodyFingers.Name = "CBTagBodyFingers"
 		Me.CBTagBodyFingers.Size = New System.Drawing.Size(60, 17)
 		Me.CBTagBodyFingers.TabIndex = 210
 		Me.CBTagBodyFingers.Text = "Fingers"
-		Me.CBTagBodyFingers.UseVisualStyleBackColor = true
+		Me.CBTagBodyFingers.UseVisualStyleBackColor = True
 		'
 		'GroupBox46
 		'
@@ -7018,212 +7019,212 @@ Partial Class FrmSettings
 		Me.GroupBox46.Name = "GroupBox46"
 		Me.GroupBox46.Size = New System.Drawing.Size(105, 358)
 		Me.GroupBox46.TabIndex = 234
-		Me.GroupBox46.TabStop = false
+		Me.GroupBox46.TabStop = False
 		Me.GroupBox46.Text = "Genders && Roles"
 		'
 		'CBTagMultiSub
 		'
-		Me.CBTagMultiSub.AutoSize = true
-		Me.CBTagMultiSub.Enabled = false
+		Me.CBTagMultiSub.AutoSize = True
+		Me.CBTagMultiSub.Enabled = False
 		Me.CBTagMultiSub.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMultiSub.Location = New System.Drawing.Point(15, 337)
 		Me.CBTagMultiSub.Name = "CBTagMultiSub"
 		Me.CBTagMultiSub.Size = New System.Drawing.Size(70, 17)
 		Me.CBTagMultiSub.TabIndex = 207
 		Me.CBTagMultiSub.Text = "Multi-Sub"
-		Me.CBTagMultiSub.UseVisualStyleBackColor = true
+		Me.CBTagMultiSub.UseVisualStyleBackColor = True
 		'
 		'CBTagMultiDom
 		'
-		Me.CBTagMultiDom.AutoSize = true
-		Me.CBTagMultiDom.Enabled = false
+		Me.CBTagMultiDom.AutoSize = True
+		Me.CBTagMultiDom.Enabled = False
 		Me.CBTagMultiDom.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMultiDom.Location = New System.Drawing.Point(15, 317)
 		Me.CBTagMultiDom.Name = "CBTagMultiDom"
 		Me.CBTagMultiDom.Size = New System.Drawing.Size(73, 17)
 		Me.CBTagMultiDom.TabIndex = 230
 		Me.CBTagMultiDom.Text = "Multi-Dom"
-		Me.CBTagMultiDom.UseVisualStyleBackColor = true
+		Me.CBTagMultiDom.UseVisualStyleBackColor = True
 		'
 		'CBTagFemdom
 		'
-		Me.CBTagFemdom.AutoSize = true
-		Me.CBTagFemdom.Enabled = false
+		Me.CBTagFemdom.AutoSize = True
+		Me.CBTagFemdom.Enabled = False
 		Me.CBTagFemdom.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFemdom.Location = New System.Drawing.Point(15, 197)
 		Me.CBTagFemdom.Name = "CBTagFemdom"
 		Me.CBTagFemdom.Size = New System.Drawing.Size(66, 17)
 		Me.CBTagFemdom.TabIndex = 229
 		Me.CBTagFemdom.Text = "Femdom"
-		Me.CBTagFemdom.UseVisualStyleBackColor = true
+		Me.CBTagFemdom.UseVisualStyleBackColor = True
 		'
 		'CBTag2M
 		'
-		Me.CBTag2M.AutoSize = true
-		Me.CBTag2M.Enabled = false
+		Me.CBTag2M.AutoSize = True
+		Me.CBTag2M.Enabled = False
 		Me.CBTag2M.ForeColor = System.Drawing.Color.Black
 		Me.CBTag2M.Location = New System.Drawing.Point(15, 97)
 		Me.CBTag2M.Name = "CBTag2M"
 		Me.CBTag2M.Size = New System.Drawing.Size(56, 17)
 		Me.CBTag2M.TabIndex = 206
 		Me.CBTag2M.Text = "2 Men"
-		Me.CBTag2M.UseVisualStyleBackColor = true
+		Me.CBTag2M.UseVisualStyleBackColor = True
 		'
 		'CBTagFutadom
 		'
-		Me.CBTagFutadom.AutoSize = true
-		Me.CBTagFutadom.Enabled = false
+		Me.CBTagFutadom.AutoSize = True
+		Me.CBTagFutadom.Enabled = False
 		Me.CBTagFutadom.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFutadom.Location = New System.Drawing.Point(15, 237)
 		Me.CBTagFutadom.Name = "CBTagFutadom"
 		Me.CBTagFutadom.Size = New System.Drawing.Size(67, 17)
 		Me.CBTagFutadom.TabIndex = 204
 		Me.CBTagFutadom.Text = "Futadom"
-		Me.CBTagFutadom.UseVisualStyleBackColor = true
+		Me.CBTagFutadom.UseVisualStyleBackColor = True
 		'
 		'CBTagFemsub
 		'
-		Me.CBTagFemsub.AutoSize = true
-		Me.CBTagFemsub.Enabled = false
+		Me.CBTagFemsub.AutoSize = True
+		Me.CBTagFemsub.Enabled = False
 		Me.CBTagFemsub.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFemsub.Location = New System.Drawing.Point(15, 257)
 		Me.CBTagFemsub.Name = "CBTagFemsub"
 		Me.CBTagFemsub.Size = New System.Drawing.Size(63, 17)
 		Me.CBTagFemsub.TabIndex = 205
 		Me.CBTagFemsub.Text = "Femsub"
-		Me.CBTagFemsub.UseVisualStyleBackColor = true
+		Me.CBTagFemsub.UseVisualStyleBackColor = True
 		'
 		'CBTag2Futa
 		'
-		Me.CBTag2Futa.AutoSize = true
-		Me.CBTag2Futa.Enabled = false
+		Me.CBTag2Futa.AutoSize = True
+		Me.CBTag2Futa.Enabled = False
 		Me.CBTag2Futa.ForeColor = System.Drawing.Color.Black
 		Me.CBTag2Futa.Location = New System.Drawing.Point(15, 157)
 		Me.CBTag2Futa.Name = "CBTag2Futa"
 		Me.CBTag2Futa.Size = New System.Drawing.Size(56, 17)
 		Me.CBTag2Futa.TabIndex = 186
 		Me.CBTag2Futa.Text = "2 Futa"
-		Me.CBTag2Futa.UseVisualStyleBackColor = true
+		Me.CBTag2Futa.UseVisualStyleBackColor = True
 		'
 		'CBTagMaledom
 		'
-		Me.CBTagMaledom.AutoSize = true
-		Me.CBTagMaledom.Enabled = false
+		Me.CBTagMaledom.AutoSize = True
+		Me.CBTagMaledom.Enabled = False
 		Me.CBTagMaledom.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMaledom.Location = New System.Drawing.Point(15, 217)
 		Me.CBTagMaledom.Name = "CBTagMaledom"
 		Me.CBTagMaledom.Size = New System.Drawing.Size(69, 17)
 		Me.CBTagMaledom.TabIndex = 206
 		Me.CBTagMaledom.Text = "Maledom"
-		Me.CBTagMaledom.UseVisualStyleBackColor = true
+		Me.CBTagMaledom.UseVisualStyleBackColor = True
 		'
 		'CBTag3M
 		'
-		Me.CBTag3M.AutoSize = true
-		Me.CBTag3M.Enabled = false
+		Me.CBTag3M.AutoSize = True
+		Me.CBTag3M.Enabled = False
 		Me.CBTag3M.ForeColor = System.Drawing.Color.Black
 		Me.CBTag3M.Location = New System.Drawing.Point(15, 117)
 		Me.CBTag3M.Name = "CBTag3M"
 		Me.CBTag3M.Size = New System.Drawing.Size(56, 17)
 		Me.CBTag3M.TabIndex = 190
 		Me.CBTag3M.Text = "3 Men"
-		Me.CBTag3M.UseVisualStyleBackColor = true
+		Me.CBTag3M.UseVisualStyleBackColor = True
 		'
 		'CBTagFutasub
 		'
-		Me.CBTagFutasub.AutoSize = true
-		Me.CBTagFutasub.Enabled = false
+		Me.CBTagFutasub.AutoSize = True
+		Me.CBTagFutasub.Enabled = False
 		Me.CBTagFutasub.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFutasub.Location = New System.Drawing.Point(15, 297)
 		Me.CBTagFutasub.Name = "CBTagFutasub"
 		Me.CBTagFutasub.Size = New System.Drawing.Size(64, 17)
 		Me.CBTagFutasub.TabIndex = 213
 		Me.CBTagFutasub.Text = "Futasub"
-		Me.CBTagFutasub.UseVisualStyleBackColor = true
+		Me.CBTagFutasub.UseVisualStyleBackColor = True
 		'
 		'CBTag3Futa
 		'
-		Me.CBTag3Futa.AutoSize = true
-		Me.CBTag3Futa.Enabled = false
+		Me.CBTag3Futa.AutoSize = True
+		Me.CBTag3Futa.Enabled = False
 		Me.CBTag3Futa.ForeColor = System.Drawing.Color.Black
 		Me.CBTag3Futa.Location = New System.Drawing.Point(15, 177)
 		Me.CBTag3Futa.Name = "CBTag3Futa"
 		Me.CBTag3Futa.Size = New System.Drawing.Size(56, 17)
 		Me.CBTag3Futa.TabIndex = 197
 		Me.CBTag3Futa.Text = "3 Futa"
-		Me.CBTag3Futa.UseVisualStyleBackColor = true
+		Me.CBTag3Futa.UseVisualStyleBackColor = True
 		'
 		'CBTagMalesub
 		'
-		Me.CBTagMalesub.AutoSize = true
-		Me.CBTagMalesub.Enabled = false
+		Me.CBTagMalesub.AutoSize = True
+		Me.CBTagMalesub.Enabled = False
 		Me.CBTagMalesub.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMalesub.Location = New System.Drawing.Point(15, 277)
 		Me.CBTagMalesub.Name = "CBTagMalesub"
 		Me.CBTagMalesub.Size = New System.Drawing.Size(66, 17)
 		Me.CBTagMalesub.TabIndex = 210
 		Me.CBTagMalesub.Text = "Malesub"
-		Me.CBTagMalesub.UseVisualStyleBackColor = true
+		Me.CBTagMalesub.UseVisualStyleBackColor = True
 		'
 		'CBTag2F
 		'
-		Me.CBTag2F.AutoSize = true
-		Me.CBTag2F.Enabled = false
+		Me.CBTag2F.AutoSize = True
+		Me.CBTag2F.Enabled = False
 		Me.CBTag2F.ForeColor = System.Drawing.Color.Black
 		Me.CBTag2F.Location = New System.Drawing.Point(15, 37)
 		Me.CBTag2F.Name = "CBTag2F"
 		Me.CBTag2F.Size = New System.Drawing.Size(72, 17)
 		Me.CBTag2F.TabIndex = 188
 		Me.CBTag2F.Text = "2 Women"
-		Me.CBTag2F.UseVisualStyleBackColor = true
+		Me.CBTag2F.UseVisualStyleBackColor = True
 		'
 		'CBTag1Futa
 		'
-		Me.CBTag1Futa.AutoSize = true
-		Me.CBTag1Futa.Enabled = false
+		Me.CBTag1Futa.AutoSize = True
+		Me.CBTag1Futa.Enabled = False
 		Me.CBTag1Futa.ForeColor = System.Drawing.Color.Black
 		Me.CBTag1Futa.Location = New System.Drawing.Point(15, 137)
 		Me.CBTag1Futa.Name = "CBTag1Futa"
 		Me.CBTag1Futa.Size = New System.Drawing.Size(56, 17)
 		Me.CBTag1Futa.TabIndex = 191
 		Me.CBTag1Futa.Text = "1 Futa"
-		Me.CBTag1Futa.UseVisualStyleBackColor = true
+		Me.CBTag1Futa.UseVisualStyleBackColor = True
 		'
 		'CBTag1M
 		'
-		Me.CBTag1M.AutoSize = true
-		Me.CBTag1M.Enabled = false
+		Me.CBTag1M.AutoSize = True
+		Me.CBTag1M.Enabled = False
 		Me.CBTag1M.ForeColor = System.Drawing.Color.Black
 		Me.CBTag1M.Location = New System.Drawing.Point(15, 77)
 		Me.CBTag1M.Name = "CBTag1M"
 		Me.CBTag1M.Size = New System.Drawing.Size(56, 17)
 		Me.CBTag1M.TabIndex = 189
 		Me.CBTag1M.Text = "1 Man"
-		Me.CBTag1M.UseVisualStyleBackColor = true
+		Me.CBTag1M.UseVisualStyleBackColor = True
 		'
 		'CBTag1F
 		'
-		Me.CBTag1F.AutoSize = true
-		Me.CBTag1F.Enabled = false
+		Me.CBTag1F.AutoSize = True
+		Me.CBTag1F.Enabled = False
 		Me.CBTag1F.ForeColor = System.Drawing.Color.Black
 		Me.CBTag1F.Location = New System.Drawing.Point(15, 17)
 		Me.CBTag1F.Name = "CBTag1F"
 		Me.CBTag1F.Size = New System.Drawing.Size(72, 17)
 		Me.CBTag1F.TabIndex = 185
 		Me.CBTag1F.Text = "1 Woman"
-		Me.CBTag1F.UseVisualStyleBackColor = true
+		Me.CBTag1F.UseVisualStyleBackColor = True
 		'
 		'CBTag3F
 		'
-		Me.CBTag3F.AutoSize = true
-		Me.CBTag3F.Enabled = false
+		Me.CBTag3F.AutoSize = True
+		Me.CBTag3F.Enabled = False
 		Me.CBTag3F.ForeColor = System.Drawing.Color.Black
 		Me.CBTag3F.Location = New System.Drawing.Point(15, 57)
 		Me.CBTag3F.Name = "CBTag3F"
 		Me.CBTag3F.Size = New System.Drawing.Size(72, 17)
 		Me.CBTag3F.TabIndex = 192
 		Me.CBTag3F.Text = "3 Women"
-		Me.CBTag3F.UseVisualStyleBackColor = true
+		Me.CBTag3F.UseVisualStyleBackColor = True
 		'
 		'GroupBox54
 		'
@@ -7242,140 +7243,140 @@ Partial Class FrmSettings
 		Me.GroupBox54.Name = "GroupBox54"
 		Me.GroupBox54.Size = New System.Drawing.Size(135, 238)
 		Me.GroupBox54.TabIndex = 239
-		Me.GroupBox54.TabStop = false
+		Me.GroupBox54.TabStop = False
 		Me.GroupBox54.Text = "Misc"
 		'
 		'CBTagTattoos
 		'
-		Me.CBTagTattoos.AutoSize = true
-		Me.CBTagTattoos.Enabled = false
+		Me.CBTagTattoos.AutoSize = True
+		Me.CBTagTattoos.Enabled = False
 		Me.CBTagTattoos.ForeColor = System.Drawing.Color.Black
 		Me.CBTagTattoos.Location = New System.Drawing.Point(15, 97)
 		Me.CBTagTattoos.Name = "CBTagTattoos"
 		Me.CBTagTattoos.Size = New System.Drawing.Size(62, 17)
 		Me.CBTagTattoos.TabIndex = 214
 		Me.CBTagTattoos.Text = "Tattoos"
-		Me.CBTagTattoos.UseVisualStyleBackColor = true
+		Me.CBTagTattoos.UseVisualStyleBackColor = True
 		'
 		'CBTagAnalToy
 		'
-		Me.CBTagAnalToy.AutoSize = true
-		Me.CBTagAnalToy.Enabled = false
+		Me.CBTagAnalToy.AutoSize = True
+		Me.CBTagAnalToy.Enabled = False
 		Me.CBTagAnalToy.ForeColor = System.Drawing.Color.Black
 		Me.CBTagAnalToy.Location = New System.Drawing.Point(15, 197)
 		Me.CBTagAnalToy.Name = "CBTagAnalToy"
 		Me.CBTagAnalToy.Size = New System.Drawing.Size(68, 17)
 		Me.CBTagAnalToy.TabIndex = 215
 		Me.CBTagAnalToy.Text = "Anal Toy"
-		Me.CBTagAnalToy.UseVisualStyleBackColor = true
+		Me.CBTagAnalToy.UseVisualStyleBackColor = True
 		'
 		'CBTagDomme
 		'
-		Me.CBTagDomme.AutoSize = true
-		Me.CBTagDomme.Enabled = false
+		Me.CBTagDomme.AutoSize = True
+		Me.CBTagDomme.Enabled = False
 		Me.CBTagDomme.ForeColor = System.Drawing.Color.Black
 		Me.CBTagDomme.Location = New System.Drawing.Point(15, 17)
 		Me.CBTagDomme.Name = "CBTagDomme"
 		Me.CBTagDomme.Size = New System.Drawing.Size(114, 17)
 		Me.CBTagDomme.TabIndex = 219
 		Me.CBTagDomme.Text = "Tease A.I. Domme"
-		Me.CBTagDomme.UseVisualStyleBackColor = true
+		Me.CBTagDomme.UseVisualStyleBackColor = True
 		'
 		'CBTagPocketPussy
 		'
-		Me.CBTagPocketPussy.AutoSize = true
-		Me.CBTagPocketPussy.Enabled = false
+		Me.CBTagPocketPussy.AutoSize = True
+		Me.CBTagPocketPussy.Enabled = False
 		Me.CBTagPocketPussy.ForeColor = System.Drawing.Color.Black
 		Me.CBTagPocketPussy.Location = New System.Drawing.Point(15, 177)
 		Me.CBTagPocketPussy.Name = "CBTagPocketPussy"
 		Me.CBTagPocketPussy.Size = New System.Drawing.Size(91, 17)
 		Me.CBTagPocketPussy.TabIndex = 205
 		Me.CBTagPocketPussy.Text = "Pocket Pussy"
-		Me.CBTagPocketPussy.UseVisualStyleBackColor = true
+		Me.CBTagPocketPussy.UseVisualStyleBackColor = True
 		'
 		'CBTagWatersports
 		'
-		Me.CBTagWatersports.AutoSize = true
-		Me.CBTagWatersports.Enabled = false
+		Me.CBTagWatersports.AutoSize = True
+		Me.CBTagWatersports.Enabled = False
 		Me.CBTagWatersports.ForeColor = System.Drawing.Color.Black
 		Me.CBTagWatersports.Location = New System.Drawing.Point(15, 217)
 		Me.CBTagWatersports.Name = "CBTagWatersports"
 		Me.CBTagWatersports.Size = New System.Drawing.Size(83, 17)
 		Me.CBTagWatersports.TabIndex = 218
 		Me.CBTagWatersports.Text = "Watersports"
-		Me.CBTagWatersports.UseVisualStyleBackColor = true
+		Me.CBTagWatersports.UseVisualStyleBackColor = True
 		'
 		'CBTagStockings
 		'
-		Me.CBTagStockings.AutoSize = true
-		Me.CBTagStockings.Enabled = false
+		Me.CBTagStockings.AutoSize = True
+		Me.CBTagStockings.Enabled = False
 		Me.CBTagStockings.ForeColor = System.Drawing.Color.Black
 		Me.CBTagStockings.Location = New System.Drawing.Point(15, 117)
 		Me.CBTagStockings.Name = "CBTagStockings"
 		Me.CBTagStockings.Size = New System.Drawing.Size(73, 17)
 		Me.CBTagStockings.TabIndex = 217
 		Me.CBTagStockings.Text = "Stockings"
-		Me.CBTagStockings.UseVisualStyleBackColor = true
+		Me.CBTagStockings.UseVisualStyleBackColor = True
 		'
 		'CBTagCumshot
 		'
-		Me.CBTagCumshot.AutoSize = true
-		Me.CBTagCumshot.Enabled = false
+		Me.CBTagCumshot.AutoSize = True
+		Me.CBTagCumshot.Enabled = False
 		Me.CBTagCumshot.ForeColor = System.Drawing.Color.Black
 		Me.CBTagCumshot.Location = New System.Drawing.Point(15, 37)
 		Me.CBTagCumshot.Name = "CBTagCumshot"
 		Me.CBTagCumshot.Size = New System.Drawing.Size(67, 17)
 		Me.CBTagCumshot.TabIndex = 206
 		Me.CBTagCumshot.Text = "Cumshot"
-		Me.CBTagCumshot.UseVisualStyleBackColor = true
+		Me.CBTagCumshot.UseVisualStyleBackColor = True
 		'
 		'CBTagCumEating
 		'
-		Me.CBTagCumEating.AutoSize = true
-		Me.CBTagCumEating.Enabled = false
+		Me.CBTagCumEating.AutoSize = True
+		Me.CBTagCumEating.Enabled = False
 		Me.CBTagCumEating.ForeColor = System.Drawing.Color.Black
 		Me.CBTagCumEating.Location = New System.Drawing.Point(15, 57)
 		Me.CBTagCumEating.Name = "CBTagCumEating"
 		Me.CBTagCumEating.Size = New System.Drawing.Size(80, 17)
 		Me.CBTagCumEating.TabIndex = 204
 		Me.CBTagCumEating.Text = "Cum Eating"
-		Me.CBTagCumEating.UseVisualStyleBackColor = true
+		Me.CBTagCumEating.UseVisualStyleBackColor = True
 		'
 		'CBTagVibrator
 		'
-		Me.CBTagVibrator.AutoSize = true
-		Me.CBTagVibrator.Enabled = false
+		Me.CBTagVibrator.AutoSize = True
+		Me.CBTagVibrator.Enabled = False
 		Me.CBTagVibrator.ForeColor = System.Drawing.Color.Black
 		Me.CBTagVibrator.Location = New System.Drawing.Point(15, 137)
 		Me.CBTagVibrator.Name = "CBTagVibrator"
 		Me.CBTagVibrator.Size = New System.Drawing.Size(62, 17)
 		Me.CBTagVibrator.TabIndex = 210
 		Me.CBTagVibrator.Text = "Vibrator"
-		Me.CBTagVibrator.UseVisualStyleBackColor = true
+		Me.CBTagVibrator.UseVisualStyleBackColor = True
 		'
 		'CBTagDildo
 		'
-		Me.CBTagDildo.AutoSize = true
-		Me.CBTagDildo.Enabled = false
+		Me.CBTagDildo.AutoSize = True
+		Me.CBTagDildo.Enabled = False
 		Me.CBTagDildo.ForeColor = System.Drawing.Color.Black
 		Me.CBTagDildo.Location = New System.Drawing.Point(15, 157)
 		Me.CBTagDildo.Name = "CBTagDildo"
 		Me.CBTagDildo.Size = New System.Drawing.Size(50, 17)
 		Me.CBTagDildo.TabIndex = 213
 		Me.CBTagDildo.Text = "Dildo"
-		Me.CBTagDildo.UseVisualStyleBackColor = true
+		Me.CBTagDildo.UseVisualStyleBackColor = True
 		'
 		'CBTagKissing
 		'
-		Me.CBTagKissing.AutoSize = true
-		Me.CBTagKissing.Enabled = false
+		Me.CBTagKissing.AutoSize = True
+		Me.CBTagKissing.Enabled = False
 		Me.CBTagKissing.ForeColor = System.Drawing.Color.Black
 		Me.CBTagKissing.Location = New System.Drawing.Point(15, 77)
 		Me.CBTagKissing.Name = "CBTagKissing"
 		Me.CBTagKissing.Size = New System.Drawing.Size(59, 17)
 		Me.CBTagKissing.TabIndex = 203
 		Me.CBTagKissing.Text = "Kissing"
-		Me.CBTagKissing.UseVisualStyleBackColor = true
+		Me.CBTagKissing.UseVisualStyleBackColor = True
 		'
 		'GroupBox51
 		'
@@ -7394,140 +7395,140 @@ Partial Class FrmSettings
 		Me.GroupBox51.Name = "GroupBox51"
 		Me.GroupBox51.Size = New System.Drawing.Size(105, 238)
 		Me.GroupBox51.TabIndex = 238
-		Me.GroupBox51.TabStop = false
+		Me.GroupBox51.TabStop = False
 		Me.GroupBox51.Text = "BDSM"
 		'
 		'CBTagBallTorture
 		'
-		Me.CBTagBallTorture.AutoSize = true
-		Me.CBTagBallTorture.Enabled = false
+		Me.CBTagBallTorture.AutoSize = True
+		Me.CBTagBallTorture.Enabled = False
 		Me.CBTagBallTorture.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBallTorture.Location = New System.Drawing.Point(15, 77)
 		Me.CBTagBallTorture.Name = "CBTagBallTorture"
 		Me.CBTagBallTorture.Size = New System.Drawing.Size(80, 17)
 		Me.CBTagBallTorture.TabIndex = 220
 		Me.CBTagBallTorture.Text = "Ball Torture"
-		Me.CBTagBallTorture.UseVisualStyleBackColor = true
+		Me.CBTagBallTorture.UseVisualStyleBackColor = True
 		'
 		'CBTagGag
 		'
-		Me.CBTagGag.AutoSize = true
-		Me.CBTagGag.Enabled = false
+		Me.CBTagGag.AutoSize = True
+		Me.CBTagGag.Enabled = False
 		Me.CBTagGag.ForeColor = System.Drawing.Color.Black
 		Me.CBTagGag.Location = New System.Drawing.Point(15, 137)
 		Me.CBTagGag.Name = "CBTagGag"
 		Me.CBTagGag.Size = New System.Drawing.Size(46, 17)
 		Me.CBTagGag.TabIndex = 214
 		Me.CBTagGag.Text = "Gag"
-		Me.CBTagGag.UseVisualStyleBackColor = true
+		Me.CBTagGag.UseVisualStyleBackColor = True
 		'
 		'CBTagBlindfold
 		'
-		Me.CBTagBlindfold.AutoSize = true
-		Me.CBTagBlindfold.Enabled = false
+		Me.CBTagBlindfold.AutoSize = True
+		Me.CBTagBlindfold.Enabled = False
 		Me.CBTagBlindfold.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBlindfold.Location = New System.Drawing.Point(15, 117)
 		Me.CBTagBlindfold.Name = "CBTagBlindfold"
 		Me.CBTagBlindfold.Size = New System.Drawing.Size(66, 17)
 		Me.CBTagBlindfold.TabIndex = 208
 		Me.CBTagBlindfold.Text = "Blindfold"
-		Me.CBTagBlindfold.UseVisualStyleBackColor = true
+		Me.CBTagBlindfold.UseVisualStyleBackColor = True
 		'
 		'CBTagWhipping
 		'
-		Me.CBTagWhipping.AutoSize = true
-		Me.CBTagWhipping.Enabled = false
+		Me.CBTagWhipping.AutoSize = True
+		Me.CBTagWhipping.Enabled = False
 		Me.CBTagWhipping.ForeColor = System.Drawing.Color.Black
 		Me.CBTagWhipping.Location = New System.Drawing.Point(15, 17)
 		Me.CBTagWhipping.Name = "CBTagWhipping"
 		Me.CBTagWhipping.Size = New System.Drawing.Size(71, 17)
 		Me.CBTagWhipping.TabIndex = 203
 		Me.CBTagWhipping.Text = "Whipping"
-		Me.CBTagWhipping.UseVisualStyleBackColor = true
+		Me.CBTagWhipping.UseVisualStyleBackColor = True
 		'
 		'CBTagCockTorture
 		'
-		Me.CBTagCockTorture.AutoSize = true
-		Me.CBTagCockTorture.Enabled = false
+		Me.CBTagCockTorture.AutoSize = True
+		Me.CBTagCockTorture.Enabled = False
 		Me.CBTagCockTorture.ForeColor = System.Drawing.Color.Black
 		Me.CBTagCockTorture.Location = New System.Drawing.Point(15, 57)
 		Me.CBTagCockTorture.Name = "CBTagCockTorture"
 		Me.CBTagCockTorture.Size = New System.Drawing.Size(88, 17)
 		Me.CBTagCockTorture.TabIndex = 204
 		Me.CBTagCockTorture.Text = "Cock Torture"
-		Me.CBTagCockTorture.UseVisualStyleBackColor = true
+		Me.CBTagCockTorture.UseVisualStyleBackColor = True
 		'
 		'CBTagElectro
 		'
-		Me.CBTagElectro.AutoSize = true
-		Me.CBTagElectro.Enabled = false
+		Me.CBTagElectro.AutoSize = True
+		Me.CBTagElectro.Enabled = False
 		Me.CBTagElectro.ForeColor = System.Drawing.Color.Black
 		Me.CBTagElectro.Location = New System.Drawing.Point(15, 217)
 		Me.CBTagElectro.Name = "CBTagElectro"
 		Me.CBTagElectro.Size = New System.Drawing.Size(59, 17)
 		Me.CBTagElectro.TabIndex = 207
 		Me.CBTagElectro.Text = "Electro"
-		Me.CBTagElectro.UseVisualStyleBackColor = true
+		Me.CBTagElectro.UseVisualStyleBackColor = True
 		'
 		'CBTagHotWax
 		'
-		Me.CBTagHotWax.AutoSize = true
-		Me.CBTagHotWax.Enabled = false
+		Me.CBTagHotWax.AutoSize = True
+		Me.CBTagHotWax.Enabled = False
 		Me.CBTagHotWax.ForeColor = System.Drawing.Color.Black
 		Me.CBTagHotWax.Location = New System.Drawing.Point(15, 177)
 		Me.CBTagHotWax.Name = "CBTagHotWax"
 		Me.CBTagHotWax.Size = New System.Drawing.Size(68, 17)
 		Me.CBTagHotWax.TabIndex = 213
 		Me.CBTagHotWax.Text = "Hot Wax"
-		Me.CBTagHotWax.UseVisualStyleBackColor = true
+		Me.CBTagHotWax.UseVisualStyleBackColor = True
 		'
 		'CBTagClamps
 		'
-		Me.CBTagClamps.AutoSize = true
-		Me.CBTagClamps.Enabled = false
+		Me.CBTagClamps.AutoSize = True
+		Me.CBTagClamps.Enabled = False
 		Me.CBTagClamps.ForeColor = System.Drawing.Color.Black
 		Me.CBTagClamps.Location = New System.Drawing.Point(15, 157)
 		Me.CBTagClamps.Name = "CBTagClamps"
 		Me.CBTagClamps.Size = New System.Drawing.Size(60, 17)
 		Me.CBTagClamps.TabIndex = 210
 		Me.CBTagClamps.Text = "Clamps"
-		Me.CBTagClamps.UseVisualStyleBackColor = true
+		Me.CBTagClamps.UseVisualStyleBackColor = True
 		'
 		'CBTagStrapon
 		'
-		Me.CBTagStrapon.AutoSize = true
-		Me.CBTagStrapon.Enabled = false
+		Me.CBTagStrapon.AutoSize = True
+		Me.CBTagStrapon.Enabled = False
 		Me.CBTagStrapon.ForeColor = System.Drawing.Color.Black
 		Me.CBTagStrapon.Location = New System.Drawing.Point(15, 97)
 		Me.CBTagStrapon.Name = "CBTagStrapon"
 		Me.CBTagStrapon.Size = New System.Drawing.Size(66, 17)
 		Me.CBTagStrapon.TabIndex = 205
 		Me.CBTagStrapon.Text = "Strap-on"
-		Me.CBTagStrapon.UseVisualStyleBackColor = true
+		Me.CBTagStrapon.UseVisualStyleBackColor = True
 		'
 		'CBTagSpanking
 		'
-		Me.CBTagSpanking.AutoSize = true
-		Me.CBTagSpanking.Enabled = false
+		Me.CBTagSpanking.AutoSize = True
+		Me.CBTagSpanking.Enabled = False
 		Me.CBTagSpanking.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSpanking.Location = New System.Drawing.Point(15, 37)
 		Me.CBTagSpanking.Name = "CBTagSpanking"
 		Me.CBTagSpanking.Size = New System.Drawing.Size(71, 17)
 		Me.CBTagSpanking.TabIndex = 206
 		Me.CBTagSpanking.Text = "Spanking"
-		Me.CBTagSpanking.UseVisualStyleBackColor = true
+		Me.CBTagSpanking.UseVisualStyleBackColor = True
 		'
 		'CBTagNeedles
 		'
-		Me.CBTagNeedles.AutoSize = true
-		Me.CBTagNeedles.Enabled = false
+		Me.CBTagNeedles.AutoSize = True
+		Me.CBTagNeedles.Enabled = False
 		Me.CBTagNeedles.ForeColor = System.Drawing.Color.Black
 		Me.CBTagNeedles.Location = New System.Drawing.Point(15, 197)
 		Me.CBTagNeedles.Name = "CBTagNeedles"
 		Me.CBTagNeedles.Size = New System.Drawing.Size(65, 17)
 		Me.CBTagNeedles.TabIndex = 209
 		Me.CBTagNeedles.Text = "Needles"
-		Me.CBTagNeedles.UseVisualStyleBackColor = true
+		Me.CBTagNeedles.UseVisualStyleBackColor = True
 		'
 		'GroupBox50
 		'
@@ -7552,212 +7553,212 @@ Partial Class FrmSettings
 		Me.GroupBox50.Name = "GroupBox50"
 		Me.GroupBox50.Size = New System.Drawing.Size(105, 358)
 		Me.GroupBox50.TabIndex = 237
-		Me.GroupBox50.TabStop = false
+		Me.GroupBox50.TabStop = False
 		Me.GroupBox50.Text = "Sex"
 		'
 		'CBTagRimming
 		'
-		Me.CBTagRimming.AutoSize = true
-		Me.CBTagRimming.Enabled = false
+		Me.CBTagRimming.AutoSize = True
+		Me.CBTagRimming.Enabled = False
 		Me.CBTagRimming.ForeColor = System.Drawing.Color.Black
 		Me.CBTagRimming.Location = New System.Drawing.Point(15, 177)
 		Me.CBTagRimming.Name = "CBTagRimming"
 		Me.CBTagRimming.Size = New System.Drawing.Size(66, 17)
 		Me.CBTagRimming.TabIndex = 219
 		Me.CBTagRimming.Text = "Rimming"
-		Me.CBTagRimming.UseVisualStyleBackColor = true
+		Me.CBTagRimming.UseVisualStyleBackColor = True
 		'
 		'CBTagFacesitting
 		'
-		Me.CBTagFacesitting.AutoSize = true
-		Me.CBTagFacesitting.Enabled = false
+		Me.CBTagFacesitting.AutoSize = True
+		Me.CBTagFacesitting.Enabled = False
 		Me.CBTagFacesitting.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFacesitting.Location = New System.Drawing.Point(15, 157)
 		Me.CBTagFacesitting.Name = "CBTagFacesitting"
 		Me.CBTagFacesitting.Size = New System.Drawing.Size(77, 17)
 		Me.CBTagFacesitting.TabIndex = 226
 		Me.CBTagFacesitting.Text = "Facesitting"
-		Me.CBTagFacesitting.UseVisualStyleBackColor = true
+		Me.CBTagFacesitting.UseVisualStyleBackColor = True
 		'
 		'CBTagMissionary
 		'
-		Me.CBTagMissionary.AutoSize = true
-		Me.CBTagMissionary.Enabled = false
+		Me.CBTagMissionary.AutoSize = True
+		Me.CBTagMissionary.Enabled = False
 		Me.CBTagMissionary.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMissionary.Location = New System.Drawing.Point(15, 197)
 		Me.CBTagMissionary.Name = "CBTagMissionary"
 		Me.CBTagMissionary.Size = New System.Drawing.Size(75, 17)
 		Me.CBTagMissionary.TabIndex = 208
 		Me.CBTagMissionary.Text = "Missionary"
-		Me.CBTagMissionary.UseVisualStyleBackColor = true
+		Me.CBTagMissionary.UseVisualStyleBackColor = True
 		'
 		'CBTagMasturbation
 		'
-		Me.CBTagMasturbation.AutoSize = true
-		Me.CBTagMasturbation.Enabled = false
+		Me.CBTagMasturbation.AutoSize = True
+		Me.CBTagMasturbation.Enabled = False
 		Me.CBTagMasturbation.ForeColor = System.Drawing.Color.Black
 		Me.CBTagMasturbation.Location = New System.Drawing.Point(15, 17)
 		Me.CBTagMasturbation.Name = "CBTagMasturbation"
 		Me.CBTagMasturbation.Size = New System.Drawing.Size(87, 17)
 		Me.CBTagMasturbation.TabIndex = 203
 		Me.CBTagMasturbation.Text = "Masturbation"
-		Me.CBTagMasturbation.UseVisualStyleBackColor = true
+		Me.CBTagMasturbation.UseVisualStyleBackColor = True
 		'
 		'CBTagRCowgirl
 		'
-		Me.CBTagRCowgirl.AutoSize = true
-		Me.CBTagRCowgirl.Enabled = false
+		Me.CBTagRCowgirl.AutoSize = True
+		Me.CBTagRCowgirl.Enabled = False
 		Me.CBTagRCowgirl.ForeColor = System.Drawing.Color.Black
 		Me.CBTagRCowgirl.Location = New System.Drawing.Point(15, 257)
 		Me.CBTagRCowgirl.Name = "CBTagRCowgirl"
 		Me.CBTagRCowgirl.Size = New System.Drawing.Size(74, 17)
 		Me.CBTagRCowgirl.TabIndex = 218
 		Me.CBTagRCowgirl.Text = "R. Cowgirl"
-		Me.CBTagRCowgirl.UseVisualStyleBackColor = true
+		Me.CBTagRCowgirl.UseVisualStyleBackColor = True
 		'
 		'CBTagFingering
 		'
-		Me.CBTagFingering.AutoSize = true
-		Me.CBTagFingering.Enabled = false
+		Me.CBTagFingering.AutoSize = True
+		Me.CBTagFingering.Enabled = False
 		Me.CBTagFingering.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFingering.Location = New System.Drawing.Point(15, 57)
 		Me.CBTagFingering.Name = "CBTagFingering"
 		Me.CBTagFingering.Size = New System.Drawing.Size(69, 17)
 		Me.CBTagFingering.TabIndex = 204
 		Me.CBTagFingering.Text = "Fingering"
-		Me.CBTagFingering.UseVisualStyleBackColor = true
+		Me.CBTagFingering.UseVisualStyleBackColor = True
 		'
 		'CBTagGangbang
 		'
-		Me.CBTagGangbang.AutoSize = true
-		Me.CBTagGangbang.Enabled = false
+		Me.CBTagGangbang.AutoSize = True
+		Me.CBTagGangbang.Enabled = False
 		Me.CBTagGangbang.ForeColor = System.Drawing.Color.Black
 		Me.CBTagGangbang.Location = New System.Drawing.Point(15, 337)
 		Me.CBTagGangbang.Name = "CBTagGangbang"
 		Me.CBTagGangbang.Size = New System.Drawing.Size(76, 17)
 		Me.CBTagGangbang.TabIndex = 217
 		Me.CBTagGangbang.Text = "Gangbang"
-		Me.CBTagGangbang.UseVisualStyleBackColor = true
+		Me.CBTagGangbang.UseVisualStyleBackColor = True
 		'
 		'CBTagBlowjob
 		'
-		Me.CBTagBlowjob.AutoSize = true
-		Me.CBTagBlowjob.Enabled = false
+		Me.CBTagBlowjob.AutoSize = True
+		Me.CBTagBlowjob.Enabled = False
 		Me.CBTagBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBlowjob.Location = New System.Drawing.Point(15, 77)
 		Me.CBTagBlowjob.Name = "CBTagBlowjob"
 		Me.CBTagBlowjob.Size = New System.Drawing.Size(63, 17)
 		Me.CBTagBlowjob.TabIndex = 205
 		Me.CBTagBlowjob.Text = "Blowjob"
-		Me.CBTagBlowjob.UseVisualStyleBackColor = true
+		Me.CBTagBlowjob.UseVisualStyleBackColor = True
 		'
 		'CBTagDP
 		'
-		Me.CBTagDP.AutoSize = true
-		Me.CBTagDP.Enabled = false
+		Me.CBTagDP.AutoSize = True
+		Me.CBTagDP.Enabled = False
 		Me.CBTagDP.ForeColor = System.Drawing.Color.Black
 		Me.CBTagDP.Location = New System.Drawing.Point(15, 317)
 		Me.CBTagDP.Name = "CBTagDP"
 		Me.CBTagDP.Size = New System.Drawing.Size(41, 17)
 		Me.CBTagDP.TabIndex = 216
 		Me.CBTagDP.Text = "DP"
-		Me.CBTagDP.UseVisualStyleBackColor = true
+		Me.CBTagDP.UseVisualStyleBackColor = True
 		'
 		'CBTagHandjob
 		'
-		Me.CBTagHandjob.AutoSize = true
-		Me.CBTagHandjob.Enabled = false
+		Me.CBTagHandjob.AutoSize = True
+		Me.CBTagHandjob.Enabled = False
 		Me.CBTagHandjob.ForeColor = System.Drawing.Color.Black
 		Me.CBTagHandjob.Location = New System.Drawing.Point(15, 37)
 		Me.CBTagHandjob.Name = "CBTagHandjob"
 		Me.CBTagHandjob.Size = New System.Drawing.Size(66, 17)
 		Me.CBTagHandjob.TabIndex = 206
 		Me.CBTagHandjob.Text = "Handjob"
-		Me.CBTagHandjob.UseVisualStyleBackColor = true
+		Me.CBTagHandjob.UseVisualStyleBackColor = True
 		'
 		'CBTagStanding
 		'
-		Me.CBTagStanding.AutoSize = true
-		Me.CBTagStanding.Enabled = false
+		Me.CBTagStanding.AutoSize = True
+		Me.CBTagStanding.Enabled = False
 		Me.CBTagStanding.ForeColor = System.Drawing.Color.Black
 		Me.CBTagStanding.Location = New System.Drawing.Point(15, 277)
 		Me.CBTagStanding.Name = "CBTagStanding"
 		Me.CBTagStanding.Size = New System.Drawing.Size(68, 17)
 		Me.CBTagStanding.TabIndex = 215
 		Me.CBTagStanding.Text = "Standing"
-		Me.CBTagStanding.UseVisualStyleBackColor = true
+		Me.CBTagStanding.UseVisualStyleBackColor = True
 		'
 		'CBTagFootjob
 		'
-		Me.CBTagFootjob.AutoSize = true
-		Me.CBTagFootjob.Enabled = false
+		Me.CBTagFootjob.AutoSize = True
+		Me.CBTagFootjob.Enabled = False
 		Me.CBTagFootjob.ForeColor = System.Drawing.Color.Black
 		Me.CBTagFootjob.Location = New System.Drawing.Point(15, 137)
 		Me.CBTagFootjob.Name = "CBTagFootjob"
 		Me.CBTagFootjob.Size = New System.Drawing.Size(61, 17)
 		Me.CBTagFootjob.TabIndex = 207
 		Me.CBTagFootjob.Text = "Footjob"
-		Me.CBTagFootjob.UseVisualStyleBackColor = true
+		Me.CBTagFootjob.UseVisualStyleBackColor = True
 		'
 		'CBTagCowgirl
 		'
-		Me.CBTagCowgirl.AutoSize = true
-		Me.CBTagCowgirl.Enabled = false
+		Me.CBTagCowgirl.AutoSize = True
+		Me.CBTagCowgirl.Enabled = False
 		Me.CBTagCowgirl.ForeColor = System.Drawing.Color.Black
 		Me.CBTagCowgirl.Location = New System.Drawing.Point(15, 237)
 		Me.CBTagCowgirl.Name = "CBTagCowgirl"
 		Me.CBTagCowgirl.Size = New System.Drawing.Size(60, 17)
 		Me.CBTagCowgirl.TabIndex = 214
 		Me.CBTagCowgirl.Text = "Cowgirl"
-		Me.CBTagCowgirl.UseVisualStyleBackColor = true
+		Me.CBTagCowgirl.UseVisualStyleBackColor = True
 		'
 		'CBTagDoggyStyle
 		'
-		Me.CBTagDoggyStyle.AutoSize = true
-		Me.CBTagDoggyStyle.Enabled = false
+		Me.CBTagDoggyStyle.AutoSize = True
+		Me.CBTagDoggyStyle.Enabled = False
 		Me.CBTagDoggyStyle.ForeColor = System.Drawing.Color.Black
 		Me.CBTagDoggyStyle.Location = New System.Drawing.Point(15, 217)
 		Me.CBTagDoggyStyle.Name = "CBTagDoggyStyle"
 		Me.CBTagDoggyStyle.Size = New System.Drawing.Size(83, 17)
 		Me.CBTagDoggyStyle.TabIndex = 209
 		Me.CBTagDoggyStyle.Text = "Doggy Style"
-		Me.CBTagDoggyStyle.UseVisualStyleBackColor = true
+		Me.CBTagDoggyStyle.UseVisualStyleBackColor = True
 		'
 		'CBTagTitjob
 		'
-		Me.CBTagTitjob.AutoSize = true
-		Me.CBTagTitjob.Enabled = false
+		Me.CBTagTitjob.AutoSize = True
+		Me.CBTagTitjob.Enabled = False
 		Me.CBTagTitjob.ForeColor = System.Drawing.Color.Black
 		Me.CBTagTitjob.Location = New System.Drawing.Point(15, 117)
 		Me.CBTagTitjob.Name = "CBTagTitjob"
 		Me.CBTagTitjob.Size = New System.Drawing.Size(52, 17)
 		Me.CBTagTitjob.TabIndex = 213
 		Me.CBTagTitjob.Text = "Titjob"
-		Me.CBTagTitjob.UseVisualStyleBackColor = true
+		Me.CBTagTitjob.UseVisualStyleBackColor = True
 		'
 		'CBTagCunnilingus
 		'
-		Me.CBTagCunnilingus.AutoSize = true
-		Me.CBTagCunnilingus.Enabled = false
+		Me.CBTagCunnilingus.AutoSize = True
+		Me.CBTagCunnilingus.Enabled = False
 		Me.CBTagCunnilingus.ForeColor = System.Drawing.Color.Black
 		Me.CBTagCunnilingus.Location = New System.Drawing.Point(15, 97)
 		Me.CBTagCunnilingus.Name = "CBTagCunnilingus"
 		Me.CBTagCunnilingus.Size = New System.Drawing.Size(80, 17)
 		Me.CBTagCunnilingus.TabIndex = 210
 		Me.CBTagCunnilingus.Text = "Cunnilingus"
-		Me.CBTagCunnilingus.UseVisualStyleBackColor = true
+		Me.CBTagCunnilingus.UseVisualStyleBackColor = True
 		'
 		'CBTagAnalSex
 		'
-		Me.CBTagAnalSex.AutoSize = true
-		Me.CBTagAnalSex.Enabled = false
+		Me.CBTagAnalSex.AutoSize = True
+		Me.CBTagAnalSex.Enabled = False
 		Me.CBTagAnalSex.ForeColor = System.Drawing.Color.Black
 		Me.CBTagAnalSex.Location = New System.Drawing.Point(15, 297)
 		Me.CBTagAnalSex.Name = "CBTagAnalSex"
 		Me.CBTagAnalSex.Size = New System.Drawing.Size(68, 17)
 		Me.CBTagAnalSex.TabIndex = 212
 		Me.CBTagAnalSex.Text = "Anal Sex"
-		Me.CBTagAnalSex.UseVisualStyleBackColor = true
+		Me.CBTagAnalSex.UseVisualStyleBackColor = True
 		'
 		'GroupBox48
 		'
@@ -7782,212 +7783,212 @@ Partial Class FrmSettings
 		Me.GroupBox48.Name = "GroupBox48"
 		Me.GroupBox48.Size = New System.Drawing.Size(105, 358)
 		Me.GroupBox48.TabIndex = 235
-		Me.GroupBox48.TabStop = false
+		Me.GroupBox48.TabStop = False
 		Me.GroupBox48.Text = "Category"
 		'
 		'CBTagArtwork
 		'
-		Me.CBTagArtwork.AutoSize = true
-		Me.CBTagArtwork.Enabled = false
+		Me.CBTagArtwork.AutoSize = True
+		Me.CBTagArtwork.Enabled = False
 		Me.CBTagArtwork.ForeColor = System.Drawing.Color.Black
 		Me.CBTagArtwork.Location = New System.Drawing.Point(15, 337)
 		Me.CBTagArtwork.Name = "CBTagArtwork"
 		Me.CBTagArtwork.Size = New System.Drawing.Size(62, 17)
 		Me.CBTagArtwork.TabIndex = 225
 		Me.CBTagArtwork.Text = "Artwork"
-		Me.CBTagArtwork.UseVisualStyleBackColor = true
+		Me.CBTagArtwork.UseVisualStyleBackColor = True
 		'
 		'CBTagOutdoors
 		'
-		Me.CBTagOutdoors.AutoSize = true
-		Me.CBTagOutdoors.Enabled = false
+		Me.CBTagOutdoors.AutoSize = True
+		Me.CBTagOutdoors.Enabled = False
 		Me.CBTagOutdoors.ForeColor = System.Drawing.Color.Black
 		Me.CBTagOutdoors.Location = New System.Drawing.Point(15, 317)
 		Me.CBTagOutdoors.Name = "CBTagOutdoors"
 		Me.CBTagOutdoors.Size = New System.Drawing.Size(69, 17)
 		Me.CBTagOutdoors.TabIndex = 219
 		Me.CBTagOutdoors.Text = "Outdoors"
-		Me.CBTagOutdoors.UseVisualStyleBackColor = true
+		Me.CBTagOutdoors.UseVisualStyleBackColor = True
 		'
 		'CBTagPOV
 		'
-		Me.CBTagPOV.AutoSize = true
-		Me.CBTagPOV.Enabled = false
+		Me.CBTagPOV.AutoSize = True
+		Me.CBTagPOV.Enabled = False
 		Me.CBTagPOV.ForeColor = System.Drawing.Color.Black
 		Me.CBTagPOV.Location = New System.Drawing.Point(15, 157)
 		Me.CBTagPOV.Name = "CBTagPOV"
 		Me.CBTagPOV.Size = New System.Drawing.Size(48, 17)
 		Me.CBTagPOV.TabIndex = 208
 		Me.CBTagPOV.Text = "POV"
-		Me.CBTagPOV.UseVisualStyleBackColor = true
+		Me.CBTagPOV.UseVisualStyleBackColor = True
 		'
 		'CBTagHardcore
 		'
-		Me.CBTagHardcore.AutoSize = true
-		Me.CBTagHardcore.Enabled = false
+		Me.CBTagHardcore.AutoSize = True
+		Me.CBTagHardcore.Enabled = False
 		Me.CBTagHardcore.ForeColor = System.Drawing.Color.Black
 		Me.CBTagHardcore.Location = New System.Drawing.Point(15, 17)
 		Me.CBTagHardcore.Name = "CBTagHardcore"
 		Me.CBTagHardcore.Size = New System.Drawing.Size(70, 17)
 		Me.CBTagHardcore.TabIndex = 203
 		Me.CBTagHardcore.Text = "Hardcore"
-		Me.CBTagHardcore.UseVisualStyleBackColor = true
+		Me.CBTagHardcore.UseVisualStyleBackColor = True
 		'
 		'CBTagTD
 		'
-		Me.CBTagTD.AutoSize = true
-		Me.CBTagTD.Enabled = false
+		Me.CBTagTD.AutoSize = True
+		Me.CBTagTD.Enabled = False
 		Me.CBTagTD.ForeColor = System.Drawing.Color.Black
 		Me.CBTagTD.Location = New System.Drawing.Point(15, 217)
 		Me.CBTagTD.Name = "CBTagTD"
 		Me.CBTagTD.Size = New System.Drawing.Size(47, 17)
 		Me.CBTagTD.TabIndex = 218
 		Me.CBTagTD.Text = "T&&D"
-		Me.CBTagTD.UseVisualStyleBackColor = true
+		Me.CBTagTD.UseVisualStyleBackColor = True
 		'
 		'CBTagGay
 		'
-		Me.CBTagGay.AutoSize = true
-		Me.CBTagGay.Enabled = false
+		Me.CBTagGay.AutoSize = True
+		Me.CBTagGay.Enabled = False
 		Me.CBTagGay.ForeColor = System.Drawing.Color.Black
 		Me.CBTagGay.Location = New System.Drawing.Point(15, 57)
 		Me.CBTagGay.Name = "CBTagGay"
 		Me.CBTagGay.Size = New System.Drawing.Size(45, 17)
 		Me.CBTagGay.TabIndex = 204
 		Me.CBTagGay.Text = "Gay"
-		Me.CBTagGay.UseVisualStyleBackColor = true
+		Me.CBTagGay.UseVisualStyleBackColor = True
 		'
 		'CBTagBath
 		'
-		Me.CBTagBath.AutoSize = true
-		Me.CBTagBath.Enabled = false
+		Me.CBTagBath.AutoSize = True
+		Me.CBTagBath.Enabled = False
 		Me.CBTagBath.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBath.Location = New System.Drawing.Point(15, 277)
 		Me.CBTagBath.Name = "CBTagBath"
 		Me.CBTagBath.Size = New System.Drawing.Size(48, 17)
 		Me.CBTagBath.TabIndex = 217
 		Me.CBTagBath.Text = "Bath"
-		Me.CBTagBath.UseVisualStyleBackColor = true
+		Me.CBTagBath.UseVisualStyleBackColor = True
 		'
 		'CBTagBisexual
 		'
-		Me.CBTagBisexual.AutoSize = true
-		Me.CBTagBisexual.Enabled = false
+		Me.CBTagBisexual.AutoSize = True
+		Me.CBTagBisexual.Enabled = False
 		Me.CBTagBisexual.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBisexual.Location = New System.Drawing.Point(15, 77)
 		Me.CBTagBisexual.Name = "CBTagBisexual"
 		Me.CBTagBisexual.Size = New System.Drawing.Size(65, 17)
 		Me.CBTagBisexual.TabIndex = 205
 		Me.CBTagBisexual.Text = "Bisexual"
-		Me.CBTagBisexual.UseVisualStyleBackColor = true
+		Me.CBTagBisexual.UseVisualStyleBackColor = True
 		'
 		'CBTagCFNM
 		'
-		Me.CBTagCFNM.AutoSize = true
-		Me.CBTagCFNM.Enabled = false
+		Me.CBTagCFNM.AutoSize = True
+		Me.CBTagCFNM.Enabled = False
 		Me.CBTagCFNM.ForeColor = System.Drawing.Color.Black
 		Me.CBTagCFNM.Location = New System.Drawing.Point(15, 257)
 		Me.CBTagCFNM.Name = "CBTagCFNM"
 		Me.CBTagCFNM.Size = New System.Drawing.Size(56, 17)
 		Me.CBTagCFNM.TabIndex = 216
 		Me.CBTagCFNM.Text = "CFNM"
-		Me.CBTagCFNM.UseVisualStyleBackColor = true
+		Me.CBTagCFNM.UseVisualStyleBackColor = True
 		'
 		'CBTagLesbian
 		'
-		Me.CBTagLesbian.AutoSize = true
-		Me.CBTagLesbian.Enabled = false
+		Me.CBTagLesbian.AutoSize = True
+		Me.CBTagLesbian.Enabled = False
 		Me.CBTagLesbian.ForeColor = System.Drawing.Color.Black
 		Me.CBTagLesbian.Location = New System.Drawing.Point(15, 37)
 		Me.CBTagLesbian.Name = "CBTagLesbian"
 		Me.CBTagLesbian.Size = New System.Drawing.Size(63, 17)
 		Me.CBTagLesbian.TabIndex = 206
 		Me.CBTagLesbian.Text = "Lesbian"
-		Me.CBTagLesbian.UseVisualStyleBackColor = true
+		Me.CBTagLesbian.UseVisualStyleBackColor = True
 		'
 		'CBTagSoloFuta
 		'
-		Me.CBTagSoloFuta.AutoSize = true
-		Me.CBTagSoloFuta.Enabled = false
+		Me.CBTagSoloFuta.AutoSize = True
+		Me.CBTagSoloFuta.Enabled = False
 		Me.CBTagSoloFuta.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSoloFuta.Location = New System.Drawing.Point(15, 137)
 		Me.CBTagSoloFuta.Name = "CBTagSoloFuta"
 		Me.CBTagSoloFuta.Size = New System.Drawing.Size(71, 17)
 		Me.CBTagSoloFuta.TabIndex = 207
 		Me.CBTagSoloFuta.Text = "Solo Futa"
-		Me.CBTagSoloFuta.UseVisualStyleBackColor = true
+		Me.CBTagSoloFuta.UseVisualStyleBackColor = True
 		'
 		'CBTagSM
 		'
-		Me.CBTagSM.AutoSize = true
-		Me.CBTagSM.Enabled = false
+		Me.CBTagSM.AutoSize = True
+		Me.CBTagSM.Enabled = False
 		Me.CBTagSM.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSM.Location = New System.Drawing.Point(15, 197)
 		Me.CBTagSM.Name = "CBTagSM"
 		Me.CBTagSM.Size = New System.Drawing.Size(48, 17)
 		Me.CBTagSM.TabIndex = 214
 		Me.CBTagSM.Text = "S&&M"
-		Me.CBTagSM.UseVisualStyleBackColor = true
+		Me.CBTagSM.UseVisualStyleBackColor = True
 		'
 		'CBTagBondage
 		'
-		Me.CBTagBondage.AutoSize = true
-		Me.CBTagBondage.Enabled = false
+		Me.CBTagBondage.AutoSize = True
+		Me.CBTagBondage.Enabled = False
 		Me.CBTagBondage.ForeColor = System.Drawing.Color.Black
 		Me.CBTagBondage.Location = New System.Drawing.Point(15, 177)
 		Me.CBTagBondage.Name = "CBTagBondage"
 		Me.CBTagBondage.Size = New System.Drawing.Size(69, 17)
 		Me.CBTagBondage.TabIndex = 209
 		Me.CBTagBondage.Text = "Bondage"
-		Me.CBTagBondage.UseVisualStyleBackColor = true
+		Me.CBTagBondage.UseVisualStyleBackColor = True
 		'
 		'CBTagSoloM
 		'
-		Me.CBTagSoloM.AutoSize = true
-		Me.CBTagSoloM.Enabled = false
+		Me.CBTagSoloM.AutoSize = True
+		Me.CBTagSoloM.Enabled = False
 		Me.CBTagSoloM.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSoloM.Location = New System.Drawing.Point(15, 117)
 		Me.CBTagSoloM.Name = "CBTagSoloM"
 		Me.CBTagSoloM.Size = New System.Drawing.Size(59, 17)
 		Me.CBTagSoloM.TabIndex = 213
 		Me.CBTagSoloM.Text = "Solo M"
-		Me.CBTagSoloM.UseVisualStyleBackColor = true
+		Me.CBTagSoloM.UseVisualStyleBackColor = True
 		'
 		'CBTagSoloF
 		'
-		Me.CBTagSoloF.AutoSize = true
-		Me.CBTagSoloF.Enabled = false
+		Me.CBTagSoloF.AutoSize = True
+		Me.CBTagSoloF.Enabled = False
 		Me.CBTagSoloF.ForeColor = System.Drawing.Color.Black
 		Me.CBTagSoloF.Location = New System.Drawing.Point(15, 97)
 		Me.CBTagSoloF.Name = "CBTagSoloF"
 		Me.CBTagSoloF.Size = New System.Drawing.Size(56, 17)
 		Me.CBTagSoloF.TabIndex = 210
 		Me.CBTagSoloF.Text = "Solo F"
-		Me.CBTagSoloF.UseVisualStyleBackColor = true
+		Me.CBTagSoloF.UseVisualStyleBackColor = True
 		'
 		'CBTagChastity
 		'
-		Me.CBTagChastity.AutoSize = true
-		Me.CBTagChastity.Enabled = false
+		Me.CBTagChastity.AutoSize = True
+		Me.CBTagChastity.Enabled = False
 		Me.CBTagChastity.ForeColor = System.Drawing.Color.Black
 		Me.CBTagChastity.Location = New System.Drawing.Point(15, 237)
 		Me.CBTagChastity.Name = "CBTagChastity"
 		Me.CBTagChastity.Size = New System.Drawing.Size(63, 17)
 		Me.CBTagChastity.TabIndex = 212
 		Me.CBTagChastity.Text = "Chastity"
-		Me.CBTagChastity.UseVisualStyleBackColor = true
+		Me.CBTagChastity.UseVisualStyleBackColor = True
 		'
 		'CBTagShower
 		'
-		Me.CBTagShower.AutoSize = true
-		Me.CBTagShower.Enabled = false
+		Me.CBTagShower.AutoSize = True
+		Me.CBTagShower.Enabled = False
 		Me.CBTagShower.ForeColor = System.Drawing.Color.Black
 		Me.CBTagShower.Location = New System.Drawing.Point(15, 297)
 		Me.CBTagShower.Name = "CBTagShower"
 		Me.CBTagShower.Size = New System.Drawing.Size(62, 17)
 		Me.CBTagShower.TabIndex = 211
 		Me.CBTagShower.Text = "Shower"
-		Me.CBTagShower.UseVisualStyleBackColor = true
+		Me.CBTagShower.UseVisualStyleBackColor = True
 		'
 		'TBLocalTagDir
 		'
@@ -8000,35 +8001,35 @@ Partial Class FrmSettings
 		'BTNLocalTagPrevious
 		'
 		Me.BTNLocalTagPrevious.BackColor = System.Drawing.Color.LightGray
-		Me.BTNLocalTagPrevious.Enabled = false
-		Me.BTNLocalTagPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNLocalTagPrevious.Enabled = False
+		Me.BTNLocalTagPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNLocalTagPrevious.ForeColor = System.Drawing.Color.Black
 		Me.BTNLocalTagPrevious.Location = New System.Drawing.Point(391, 8)
 		Me.BTNLocalTagPrevious.Name = "BTNLocalTagPrevious"
 		Me.BTNLocalTagPrevious.Size = New System.Drawing.Size(47, 24)
 		Me.BTNLocalTagPrevious.TabIndex = 232
 		Me.BTNLocalTagPrevious.Text = "<<"
-		Me.BTNLocalTagPrevious.UseVisualStyleBackColor = false
+		Me.BTNLocalTagPrevious.UseVisualStyleBackColor = False
 		'
 		'BTNLocalTagNext
 		'
 		Me.BTNLocalTagNext.BackColor = System.Drawing.Color.LightGray
-		Me.BTNLocalTagNext.Enabled = false
-		Me.BTNLocalTagNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNLocalTagNext.Enabled = False
+		Me.BTNLocalTagNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNLocalTagNext.ForeColor = System.Drawing.Color.Black
 		Me.BTNLocalTagNext.Location = New System.Drawing.Point(560, 8)
 		Me.BTNLocalTagNext.Name = "BTNLocalTagNext"
 		Me.BTNLocalTagNext.Size = New System.Drawing.Size(47, 24)
 		Me.BTNLocalTagNext.TabIndex = 231
 		Me.BTNLocalTagNext.Text = ">>"
-		Me.BTNLocalTagNext.UseVisualStyleBackColor = false
+		Me.BTNLocalTagNext.UseVisualStyleBackColor = False
 		'
 		'LBLLocalTagCount
 		'
 		Me.LBLLocalTagCount.BackColor = System.Drawing.Color.Transparent
 		Me.LBLLocalTagCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLLocalTagCount.Enabled = false
-		Me.LBLLocalTagCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLLocalTagCount.Enabled = False
+		Me.LBLLocalTagCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLLocalTagCount.ForeColor = System.Drawing.Color.Black
 		Me.LBLLocalTagCount.Location = New System.Drawing.Point(444, 10)
 		Me.LBLLocalTagCount.Name = "LBLLocalTagCount"
@@ -8039,23 +8040,23 @@ Partial Class FrmSettings
 		'
 		'BTNLocalTagSave
 		'
-		Me.BTNLocalTagSave.Enabled = false
+		Me.BTNLocalTagSave.Enabled = False
 		Me.BTNLocalTagSave.Location = New System.Drawing.Point(613, 9)
 		Me.BTNLocalTagSave.Name = "BTNLocalTagSave"
 		Me.BTNLocalTagSave.Size = New System.Drawing.Size(83, 23)
 		Me.BTNLocalTagSave.TabIndex = 229
 		Me.BTNLocalTagSave.Text = "Finished"
-		Me.BTNLocalTagSave.UseVisualStyleBackColor = true
+		Me.BTNLocalTagSave.UseVisualStyleBackColor = True
 		'
 		'BTNLocalTagDir
 		'
-		Me.BTNLocalTagDir.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNLocalTagDir.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNLocalTagDir.Location = New System.Drawing.Point(6, 8)
 		Me.BTNLocalTagDir.Name = "BTNLocalTagDir"
 		Me.BTNLocalTagDir.Size = New System.Drawing.Size(43, 23)
 		Me.BTNLocalTagDir.TabIndex = 228
 		Me.BTNLocalTagDir.Text = "1"
-		Me.BTNLocalTagDir.UseVisualStyleBackColor = true
+		Me.BTNLocalTagDir.UseVisualStyleBackColor = True
 		'
 		'TabPage11
 		'
@@ -8100,41 +8101,41 @@ Partial Class FrmSettings
 		'BTNWIContinue
 		'
 		Me.BTNWIContinue.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWIContinue.Enabled = false
-		Me.BTNWIContinue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWIContinue.Enabled = False
+		Me.BTNWIContinue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWIContinue.ForeColor = System.Drawing.Color.Black
 		Me.BTNWIContinue.Location = New System.Drawing.Point(566, 158)
 		Me.BTNWIContinue.Name = "BTNWIContinue"
 		Me.BTNWIContinue.Size = New System.Drawing.Size(131, 24)
 		Me.BTNWIContinue.TabIndex = 168
 		Me.BTNWIContinue.Text = "Continue"
-		Me.BTNWIContinue.UseVisualStyleBackColor = false
+		Me.BTNWIContinue.UseVisualStyleBackColor = False
 		'
 		'BTNWIAddandContinue
 		'
 		Me.BTNWIAddandContinue.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWIAddandContinue.Enabled = false
-		Me.BTNWIAddandContinue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWIAddandContinue.Enabled = False
+		Me.BTNWIAddandContinue.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWIAddandContinue.ForeColor = System.Drawing.Color.Black
 		Me.BTNWIAddandContinue.Location = New System.Drawing.Point(566, 128)
 		Me.BTNWIAddandContinue.Name = "BTNWIAddandContinue"
 		Me.BTNWIAddandContinue.Size = New System.Drawing.Size(131, 24)
 		Me.BTNWIAddandContinue.TabIndex = 167
 		Me.BTNWIAddandContinue.Text = "Add and Continue"
-		Me.BTNWIAddandContinue.UseVisualStyleBackColor = false
+		Me.BTNWIAddandContinue.UseVisualStyleBackColor = False
 		'
 		'BTNWICancel
 		'
 		Me.BTNWICancel.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWICancel.Enabled = false
-		Me.BTNWICancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWICancel.Enabled = False
+		Me.BTNWICancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWICancel.ForeColor = System.Drawing.Color.Black
 		Me.BTNWICancel.Location = New System.Drawing.Point(566, 188)
 		Me.BTNWICancel.Name = "BTNWICancel"
 		Me.BTNWICancel.Size = New System.Drawing.Size(131, 24)
 		Me.BTNWICancel.TabIndex = 166
 		Me.BTNWICancel.Text = "Cancel"
-		Me.BTNWICancel.UseVisualStyleBackColor = false
+		Me.BTNWICancel.UseVisualStyleBackColor = False
 		'
 		'CBWIReview
 		'
@@ -8143,24 +8144,24 @@ Partial Class FrmSettings
 		Me.CBWIReview.Size = New System.Drawing.Size(124, 30)
 		Me.CBWIReview.TabIndex = 165
 		Me.CBWIReview.Text = "Review Each Image"
-		Me.CBWIReview.UseVisualStyleBackColor = true
+		Me.CBWIReview.UseVisualStyleBackColor = True
 		'
 		'BTNWIBrowse
 		'
 		Me.BTNWIBrowse.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWIBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWIBrowse.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWIBrowse.ForeColor = System.Drawing.Color.Black
 		Me.BTNWIBrowse.Location = New System.Drawing.Point(105, 402)
 		Me.BTNWIBrowse.Name = "BTNWIBrowse"
 		Me.BTNWIBrowse.Size = New System.Drawing.Size(50, 24)
 		Me.BTNWIBrowse.TabIndex = 163
 		Me.BTNWIBrowse.Text = "Browse"
-		Me.BTNWIBrowse.UseVisualStyleBackColor = false
+		Me.BTNWIBrowse.UseVisualStyleBackColor = False
 		'
 		'TBWIDirectory
 		'
 		Me.TBWIDirectory.BackColor = System.Drawing.Color.White
-		Me.TBWIDirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBWIDirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBWIDirectory.ForeColor = System.Drawing.Color.Black
 		Me.TBWIDirectory.Location = New System.Drawing.Point(161, 404)
 		Me.TBWIDirectory.Name = "TBWIDirectory"
@@ -8171,41 +8172,41 @@ Partial Class FrmSettings
 		'BTNWIDisliked
 		'
 		Me.BTNWIDisliked.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWIDisliked.Enabled = false
-		Me.BTNWIDisliked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWIDisliked.Enabled = False
+		Me.BTNWIDisliked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWIDisliked.ForeColor = System.Drawing.Color.Black
 		Me.BTNWIDisliked.Location = New System.Drawing.Point(567, 372)
 		Me.BTNWIDisliked.Name = "BTNWIDisliked"
 		Me.BTNWIDisliked.Size = New System.Drawing.Size(131, 24)
 		Me.BTNWIDisliked.TabIndex = 162
 		Me.BTNWIDisliked.Text = "Add to Disliked Images"
-		Me.BTNWIDisliked.UseVisualStyleBackColor = false
+		Me.BTNWIDisliked.UseVisualStyleBackColor = False
 		'
 		'BTNWILiked
 		'
 		Me.BTNWILiked.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWILiked.Enabled = false
-		Me.BTNWILiked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWILiked.Enabled = False
+		Me.BTNWILiked.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWILiked.ForeColor = System.Drawing.Color.Black
 		Me.BTNWILiked.Location = New System.Drawing.Point(567, 342)
 		Me.BTNWILiked.Name = "BTNWILiked"
 		Me.BTNWILiked.Size = New System.Drawing.Size(131, 24)
 		Me.BTNWILiked.TabIndex = 161
 		Me.BTNWILiked.Text = "Add to Liked Images"
-		Me.BTNWILiked.UseVisualStyleBackColor = false
+		Me.BTNWILiked.UseVisualStyleBackColor = False
 		'
 		'BTNWIRemove
 		'
 		Me.BTNWIRemove.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWIRemove.Enabled = false
-		Me.BTNWIRemove.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWIRemove.Enabled = False
+		Me.BTNWIRemove.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWIRemove.ForeColor = System.Drawing.Color.Black
 		Me.BTNWIRemove.Location = New System.Drawing.Point(567, 312)
 		Me.BTNWIRemove.Name = "BTNWIRemove"
 		Me.BTNWIRemove.Size = New System.Drawing.Size(131, 24)
 		Me.BTNWIRemove.TabIndex = 160
 		Me.BTNWIRemove.Text = "Remove From URL File"
-		Me.BTNWIRemove.UseVisualStyleBackColor = false
+		Me.BTNWIRemove.UseVisualStyleBackColor = False
 		'
 		'CBWISaveToDisk
 		'
@@ -8214,7 +8215,7 @@ Partial Class FrmSettings
 		Me.CBWISaveToDisk.Size = New System.Drawing.Size(124, 30)
 		Me.CBWISaveToDisk.TabIndex = 157
 		Me.CBWISaveToDisk.Text = "Save Images to Disk"
-		Me.CBWISaveToDisk.UseVisualStyleBackColor = true
+		Me.CBWISaveToDisk.UseVisualStyleBackColor = True
 		'
 		'PictureBox5
 		'
@@ -8225,7 +8226,7 @@ Partial Class FrmSettings
 		Me.PictureBox5.Size = New System.Drawing.Size(160, 19)
 		Me.PictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
 		Me.PictureBox5.TabIndex = 156
-		Me.PictureBox5.TabStop = false
+		Me.PictureBox5.TabStop = False
 		'
 		'WebImageProgressBar
 		'
@@ -8238,20 +8239,20 @@ Partial Class FrmSettings
 		'BTNWICreateURL
 		'
 		Me.BTNWICreateURL.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWICreateURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWICreateURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWICreateURL.ForeColor = System.Drawing.Color.Black
 		Me.BTNWICreateURL.Location = New System.Drawing.Point(567, 39)
 		Me.BTNWICreateURL.Name = "BTNWICreateURL"
 		Me.BTNWICreateURL.Size = New System.Drawing.Size(132, 24)
 		Me.BTNWICreateURL.TabIndex = 154
 		Me.BTNWICreateURL.Text = "Create URL File"
-		Me.BTNWICreateURL.UseVisualStyleBackColor = false
+		Me.BTNWICreateURL.UseVisualStyleBackColor = False
 		'
 		'LBLWebImageCount
 		'
 		Me.LBLWebImageCount.BackColor = System.Drawing.Color.Transparent
 		Me.LBLWebImageCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLWebImageCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLWebImageCount.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLWebImageCount.ForeColor = System.Drawing.Color.Black
 		Me.LBLWebImageCount.Location = New System.Drawing.Point(6, 404)
 		Me.LBLWebImageCount.Name = "LBLWebImageCount"
@@ -8263,53 +8264,53 @@ Partial Class FrmSettings
 		'BTNWISave
 		'
 		Me.BTNWISave.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWISave.Enabled = false
-		Me.BTNWISave.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWISave.Enabled = False
+		Me.BTNWISave.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWISave.ForeColor = System.Drawing.Color.Black
 		Me.BTNWISave.Location = New System.Drawing.Point(567, 401)
 		Me.BTNWISave.Name = "BTNWISave"
 		Me.BTNWISave.Size = New System.Drawing.Size(131, 24)
 		Me.BTNWISave.TabIndex = 152
 		Me.BTNWISave.Text = "Save Image to Disk"
-		Me.BTNWISave.UseVisualStyleBackColor = false
+		Me.BTNWISave.UseVisualStyleBackColor = False
 		'
 		'BTNWIOpenURL
 		'
 		Me.BTNWIOpenURL.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWIOpenURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWIOpenURL.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWIOpenURL.ForeColor = System.Drawing.Color.Black
 		Me.BTNWIOpenURL.Location = New System.Drawing.Point(566, 252)
 		Me.BTNWIOpenURL.Name = "BTNWIOpenURL"
 		Me.BTNWIOpenURL.Size = New System.Drawing.Size(132, 24)
 		Me.BTNWIOpenURL.TabIndex = 151
 		Me.BTNWIOpenURL.Text = "Open URL File"
-		Me.BTNWIOpenURL.UseVisualStyleBackColor = false
+		Me.BTNWIOpenURL.UseVisualStyleBackColor = False
 		'
 		'BTNWIPrevious
 		'
 		Me.BTNWIPrevious.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWIPrevious.Enabled = false
-		Me.BTNWIPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWIPrevious.Enabled = False
+		Me.BTNWIPrevious.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWIPrevious.ForeColor = System.Drawing.Color.Black
 		Me.BTNWIPrevious.Location = New System.Drawing.Point(567, 282)
 		Me.BTNWIPrevious.Name = "BTNWIPrevious"
 		Me.BTNWIPrevious.Size = New System.Drawing.Size(47, 24)
 		Me.BTNWIPrevious.TabIndex = 149
 		Me.BTNWIPrevious.Text = "<<"
-		Me.BTNWIPrevious.UseVisualStyleBackColor = false
+		Me.BTNWIPrevious.UseVisualStyleBackColor = False
 		'
 		'BTNWINext
 		'
 		Me.BTNWINext.BackColor = System.Drawing.Color.LightGray
-		Me.BTNWINext.Enabled = false
-		Me.BTNWINext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNWINext.Enabled = False
+		Me.BTNWINext.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNWINext.ForeColor = System.Drawing.Color.Black
 		Me.BTNWINext.Location = New System.Drawing.Point(651, 282)
 		Me.BTNWINext.Name = "BTNWINext"
 		Me.BTNWINext.Size = New System.Drawing.Size(47, 24)
 		Me.BTNWINext.TabIndex = 150
 		Me.BTNWINext.Text = ">>"
-		Me.BTNWINext.UseVisualStyleBackColor = false
+		Me.BTNWINext.UseVisualStyleBackColor = False
 		'
 		'WebPictureBox
 		'
@@ -8319,12 +8320,12 @@ Partial Class FrmSettings
 		Me.WebPictureBox.Size = New System.Drawing.Size(555, 358)
 		Me.WebPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
 		Me.WebPictureBox.TabIndex = 148
-		Me.WebPictureBox.TabStop = false
+		Me.WebPictureBox.TabStop = False
 		'
 		'Label71
 		'
 		Me.Label71.BackColor = System.Drawing.Color.Transparent
-		Me.Label71.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label71.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label71.ForeColor = System.Drawing.Color.Black
 		Me.Label71.Location = New System.Drawing.Point(7, 6)
 		Me.Label71.Name = "Label71"
@@ -8374,7 +8375,7 @@ Partial Class FrmSettings
 		Me.PbBannerVideoSettings.Size = New System.Drawing.Size(160, 19)
 		Me.PbBannerVideoSettings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
 		Me.PbBannerVideoSettings.TabIndex = 151
-		Me.PbBannerVideoSettings.TabStop = false
+		Me.PbBannerVideoSettings.TabStop = False
 		'
 		'BTNRefreshVideos
 		'
@@ -8385,13 +8386,13 @@ Partial Class FrmSettings
 		Me.BTNRefreshVideos.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
 		Me.BTNRefreshVideos.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
 		Me.BTNRefreshVideos.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.BTNRefreshVideos.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNRefreshVideos.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNRefreshVideos.ForeColor = System.Drawing.Color.Black
 		Me.BTNRefreshVideos.Location = New System.Drawing.Point(671, 6)
 		Me.BTNRefreshVideos.Name = "BTNRefreshVideos"
 		Me.BTNRefreshVideos.Size = New System.Drawing.Size(30, 26)
 		Me.BTNRefreshVideos.TabIndex = 149
-		Me.BTNRefreshVideos.UseVisualStyleBackColor = false
+		Me.BTNRefreshVideos.UseVisualStyleBackColor = False
 		'
 		'GbxVideoGeneralD
 		'
@@ -8405,13 +8406,13 @@ Partial Class FrmSettings
 		Me.GbxVideoGeneralD.Name = "GbxVideoGeneralD"
 		Me.GbxVideoGeneralD.Size = New System.Drawing.Size(340, 48)
 		Me.GbxVideoGeneralD.TabIndex = 5
-		Me.GbxVideoGeneralD.TabStop = false
+		Me.GbxVideoGeneralD.TabStop = False
 		Me.GbxVideoGeneralD.Text = "Domme General"
 		'
 		'LblVideoGeneralTotalD
 		'
 		Me.LblVideoGeneralTotalD.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoGeneralTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoGeneralTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoGeneralTotalD.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoGeneralTotalD.Location = New System.Drawing.Point(299, 19)
 		Me.LblVideoGeneralTotalD.Name = "LblVideoGeneralTotalD"
@@ -8424,14 +8425,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoGeneralD.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoGeneralD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoGeneralD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoGeneralD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoGeneralD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoGeneralD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoGeneralD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoGeneralD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoGeneralD.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoGeneralD.Location = New System.Drawing.Point(113, 18)
 		Me.TxbVideoGeneralD.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoGeneralD.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoGeneralD.Name = "TxbVideoGeneralD"
-		Me.TxbVideoGeneralD.ReadOnly = true
+		Me.TxbVideoGeneralD.ReadOnly = True
 		Me.TxbVideoGeneralD.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoGeneralD.TabIndex = 2
 		Me.TxbVideoGeneralD.Text = Global.Tease_AI.My.MySettings.Default.VideoGeneralD
@@ -8439,27 +8440,27 @@ Partial Class FrmSettings
 		'BTNVideoGeneralD
 		'
 		Me.BTNVideoGeneralD.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoGeneralD.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoGeneralD.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoGeneralD.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoGeneralD.Location = New System.Drawing.Point(73, 13)
 		Me.BTNVideoGeneralD.Name = "BTNVideoGeneralD"
 		Me.BTNVideoGeneralD.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoGeneralD.TabIndex = 1
 		Me.BTNVideoGeneralD.Text = "1"
-		Me.BTNVideoGeneralD.UseVisualStyleBackColor = false
+		Me.BTNVideoGeneralD.UseVisualStyleBackColor = False
 		'
 		'CBVideoGeneralD
 		'
-		Me.CBVideoGeneralD.AutoSize = true
+		Me.CBVideoGeneralD.AutoSize = True
 		Me.CBVideoGeneralD.Checked = Global.Tease_AI.My.MySettings.Default.CBGeneralD
-		Me.CBVideoGeneralD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGeneralD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoGeneralD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGeneralD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoGeneralD.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoGeneralD.Location = New System.Drawing.Point(6, 19)
 		Me.CBVideoGeneralD.Name = "CBVideoGeneralD"
 		Me.CBVideoGeneralD.Size = New System.Drawing.Size(63, 17)
 		Me.CBVideoGeneralD.TabIndex = 0
 		Me.CBVideoGeneralD.Text = "General"
-		Me.CBVideoGeneralD.UseVisualStyleBackColor = true
+		Me.CBVideoGeneralD.UseVisualStyleBackColor = True
 		'
 		'GbxVideoSpecialD
 		'
@@ -8477,13 +8478,13 @@ Partial Class FrmSettings
 		Me.GbxVideoSpecialD.Name = "GbxVideoSpecialD"
 		Me.GbxVideoSpecialD.Size = New System.Drawing.Size(340, 70)
 		Me.GbxVideoSpecialD.TabIndex = 4
-		Me.GbxVideoSpecialD.TabStop = false
+		Me.GbxVideoSpecialD.TabStop = False
 		Me.GbxVideoSpecialD.Text = "Domme Special"
 		'
 		'LblVideoCHTotalD
 		'
 		Me.LblVideoCHTotalD.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoCHTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoCHTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoCHTotalD.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoCHTotalD.Location = New System.Drawing.Point(299, 42)
 		Me.LblVideoCHTotalD.Name = "LblVideoCHTotalD"
@@ -8495,7 +8496,7 @@ Partial Class FrmSettings
 		'LblVideoJOITotalD
 		'
 		Me.LblVideoJOITotalD.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoJOITotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoJOITotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoJOITotalD.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoJOITotalD.Location = New System.Drawing.Point(299, 19)
 		Me.LblVideoJOITotalD.Name = "LblVideoJOITotalD"
@@ -8508,14 +8509,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoCHD.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoCHD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoCHD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoCHD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoCHD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoCHD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoCHD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoCHD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoCHD.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoCHD.Location = New System.Drawing.Point(113, 41)
 		Me.TxbVideoCHD.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoCHD.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoCHD.Name = "TxbVideoCHD"
-		Me.TxbVideoCHD.ReadOnly = true
+		Me.TxbVideoCHD.ReadOnly = True
 		Me.TxbVideoCHD.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoCHD.TabIndex = 6
 		Me.TxbVideoCHD.Text = Global.Tease_AI.My.MySettings.Default.VideoCHD
@@ -8524,14 +8525,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoJOID.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoJOID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoJOID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoJOID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoJOID.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoJOID.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoJOID", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoJOID.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoJOID.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoJOID.Location = New System.Drawing.Point(113, 18)
 		Me.TxbVideoJOID.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoJOID.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoJOID.Name = "TxbVideoJOID"
-		Me.TxbVideoJOID.ReadOnly = true
+		Me.TxbVideoJOID.ReadOnly = True
 		Me.TxbVideoJOID.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoJOID.TabIndex = 2
 		Me.TxbVideoJOID.Text = Global.Tease_AI.My.MySettings.Default.VideoJOID
@@ -8539,52 +8540,52 @@ Partial Class FrmSettings
 		'BTNVideoCHD
 		'
 		Me.BTNVideoCHD.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoCHD.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoCHD.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoCHD.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoCHD.Location = New System.Drawing.Point(73, 36)
 		Me.BTNVideoCHD.Name = "BTNVideoCHD"
 		Me.BTNVideoCHD.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoCHD.TabIndex = 5
 		Me.BTNVideoCHD.Text = "1"
-		Me.BTNVideoCHD.UseVisualStyleBackColor = false
+		Me.BTNVideoCHD.UseVisualStyleBackColor = False
 		'
 		'BTNVideoJOID
 		'
 		Me.BTNVideoJOID.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoJOID.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoJOID.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoJOID.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoJOID.Location = New System.Drawing.Point(73, 13)
 		Me.BTNVideoJOID.Name = "BTNVideoJOID"
 		Me.BTNVideoJOID.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoJOID.TabIndex = 1
 		Me.BTNVideoJOID.Text = "1"
-		Me.BTNVideoJOID.UseVisualStyleBackColor = false
+		Me.BTNVideoJOID.UseVisualStyleBackColor = False
 		'
 		'CBVideoJOID
 		'
-		Me.CBVideoJOID.AutoSize = true
+		Me.CBVideoJOID.AutoSize = True
 		Me.CBVideoJOID.Checked = Global.Tease_AI.My.MySettings.Default.CBJOID
-		Me.CBVideoJOID.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBJOID", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoJOID.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBJOID", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoJOID.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoJOID.Location = New System.Drawing.Point(6, 19)
 		Me.CBVideoJOID.Name = "CBVideoJOID"
 		Me.CBVideoJOID.Size = New System.Drawing.Size(42, 17)
 		Me.CBVideoJOID.TabIndex = 0
 		Me.CBVideoJOID.Text = "JOI"
-		Me.CBVideoJOID.UseVisualStyleBackColor = true
+		Me.CBVideoJOID.UseVisualStyleBackColor = True
 		'
 		'CBVideoCHD
 		'
-		Me.CBVideoCHD.AutoSize = true
+		Me.CBVideoCHD.AutoSize = True
 		Me.CBVideoCHD.Checked = Global.Tease_AI.My.MySettings.Default.CBCHD
-		Me.CBVideoCHD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBCHD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoCHD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBCHD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoCHD.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoCHD.Location = New System.Drawing.Point(6, 43)
 		Me.CBVideoCHD.Name = "CBVideoCHD"
 		Me.CBVideoCHD.Size = New System.Drawing.Size(41, 17)
 		Me.CBVideoCHD.TabIndex = 4
 		Me.CBVideoCHD.Text = "CH"
-		Me.CBVideoCHD.UseVisualStyleBackColor = true
+		Me.CBVideoCHD.UseVisualStyleBackColor = True
 		'
 		'GbxVideoGenreD
 		'
@@ -8618,13 +8619,13 @@ Partial Class FrmSettings
 		Me.GbxVideoGenreD.Name = "GbxVideoGenreD"
 		Me.GbxVideoGenreD.Size = New System.Drawing.Size(340, 165)
 		Me.GbxVideoGenreD.TabIndex = 3
-		Me.GbxVideoGenreD.TabStop = false
+		Me.GbxVideoGenreD.TabStop = False
 		Me.GbxVideoGenreD.Text = "Domme Genre"
 		'
 		'LblVideoFemsubTotalD
 		'
 		Me.LblVideoFemsubTotalD.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoFemsubTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoFemsubTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoFemsubTotalD.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoFemsubTotalD.Location = New System.Drawing.Point(299, 136)
 		Me.LblVideoFemsubTotalD.Name = "LblVideoFemsubTotalD"
@@ -8637,14 +8638,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoFemsubD.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoFemsubD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoFemsubD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoFemsubD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoFemsubD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoFemsubD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoFemsubD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoFemsubD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoFemsubD.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoFemsubD.Location = New System.Drawing.Point(113, 136)
 		Me.TxbVideoFemsubD.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoFemsubD.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoFemsubD.Name = "TxbVideoFemsubD"
-		Me.TxbVideoFemsubD.ReadOnly = true
+		Me.TxbVideoFemsubD.ReadOnly = True
 		Me.TxbVideoFemsubD.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoFemsubD.TabIndex = 22
 		Me.TxbVideoFemsubD.Text = Global.Tease_AI.My.MySettings.Default.VideoFemsubD
@@ -8652,7 +8653,7 @@ Partial Class FrmSettings
 		'LblVideoFemdomTotalD
 		'
 		Me.LblVideoFemdomTotalD.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoFemdomTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoFemdomTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoFemdomTotalD.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoFemdomTotalD.Location = New System.Drawing.Point(299, 112)
 		Me.LblVideoFemdomTotalD.Name = "LblVideoFemdomTotalD"
@@ -8665,14 +8666,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoFemdomD.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoFemdomD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoFemdomD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoFemdomD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoFemdomD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoFemdomD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoFemdomD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoFemdomD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoFemdomD.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoFemdomD.Location = New System.Drawing.Point(113, 112)
 		Me.TxbVideoFemdomD.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoFemdomD.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoFemdomD.Name = "TxbVideoFemdomD"
-		Me.TxbVideoFemdomD.ReadOnly = true
+		Me.TxbVideoFemdomD.ReadOnly = True
 		Me.TxbVideoFemdomD.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoFemdomD.TabIndex = 18
 		Me.TxbVideoFemdomD.Text = Global.Tease_AI.My.MySettings.Default.VideoFemdomD
@@ -8681,14 +8682,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoBlowjobD.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoBlowjobD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoBlowjobD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoBlowjobD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoBlowjobD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoBlowjobD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoBlowjobD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoBlowjobD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoBlowjobD.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoBlowjobD.Location = New System.Drawing.Point(113, 88)
 		Me.TxbVideoBlowjobD.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoBlowjobD.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoBlowjobD.Name = "TxbVideoBlowjobD"
-		Me.TxbVideoBlowjobD.ReadOnly = true
+		Me.TxbVideoBlowjobD.ReadOnly = True
 		Me.TxbVideoBlowjobD.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoBlowjobD.TabIndex = 14
 		Me.TxbVideoBlowjobD.Text = Global.Tease_AI.My.MySettings.Default.VideoBlowjobD
@@ -8696,7 +8697,7 @@ Partial Class FrmSettings
 		'LblVideoBlowjobTotalD
 		'
 		Me.LblVideoBlowjobTotalD.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoBlowjobTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoBlowjobTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoBlowjobTotalD.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoBlowjobTotalD.Location = New System.Drawing.Point(299, 88)
 		Me.LblVideoBlowjobTotalD.Name = "LblVideoBlowjobTotalD"
@@ -8709,14 +8710,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoLesbianD.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoLesbianD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoLesbianD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoLesbianD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoLesbianD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoLesbianD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoLesbianD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoLesbianD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoLesbianD.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoLesbianD.Location = New System.Drawing.Point(113, 65)
 		Me.TxbVideoLesbianD.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoLesbianD.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoLesbianD.Name = "TxbVideoLesbianD"
-		Me.TxbVideoLesbianD.ReadOnly = true
+		Me.TxbVideoLesbianD.ReadOnly = True
 		Me.TxbVideoLesbianD.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoLesbianD.TabIndex = 10
 		Me.TxbVideoLesbianD.Text = Global.Tease_AI.My.MySettings.Default.VideoLesbianD
@@ -8725,14 +8726,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoSoftCoreD.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoSoftCoreD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoSoftCoreD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoSoftcoreD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoSoftCoreD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoSoftCoreD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoSoftcoreD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoSoftCoreD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoSoftCoreD.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoSoftCoreD.Location = New System.Drawing.Point(113, 42)
 		Me.TxbVideoSoftCoreD.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoSoftCoreD.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoSoftCoreD.Name = "TxbVideoSoftCoreD"
-		Me.TxbVideoSoftCoreD.ReadOnly = true
+		Me.TxbVideoSoftCoreD.ReadOnly = True
 		Me.TxbVideoSoftCoreD.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoSoftCoreD.TabIndex = 6
 		Me.TxbVideoSoftCoreD.Text = Global.Tease_AI.My.MySettings.Default.VideoSoftcoreD
@@ -8740,7 +8741,7 @@ Partial Class FrmSettings
 		'LblVideoLesbianTotalD
 		'
 		Me.LblVideoLesbianTotalD.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoLesbianTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoLesbianTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoLesbianTotalD.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoLesbianTotalD.Location = New System.Drawing.Point(299, 66)
 		Me.LblVideoLesbianTotalD.Name = "LblVideoLesbianTotalD"
@@ -8753,14 +8754,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoHardCoreD.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoHardCoreD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoHardCoreD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoHardcoreD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoHardCoreD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoHardCoreD.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoHardcoreD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoHardCoreD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoHardCoreD.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoHardCoreD.Location = New System.Drawing.Point(113, 19)
 		Me.TxbVideoHardCoreD.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoHardCoreD.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoHardCoreD.Name = "TxbVideoHardCoreD"
-		Me.TxbVideoHardCoreD.ReadOnly = true
+		Me.TxbVideoHardCoreD.ReadOnly = True
 		Me.TxbVideoHardCoreD.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoHardCoreD.TabIndex = 2
 		Me.TxbVideoHardCoreD.Text = Global.Tease_AI.My.MySettings.Default.VideoHardcoreD
@@ -8768,19 +8769,19 @@ Partial Class FrmSettings
 		'BTNVideoFemSubD
 		'
 		Me.BTNVideoFemSubD.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoFemSubD.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoFemSubD.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoFemSubD.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoFemSubD.Location = New System.Drawing.Point(73, 130)
 		Me.BTNVideoFemSubD.Name = "BTNVideoFemSubD"
 		Me.BTNVideoFemSubD.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoFemSubD.TabIndex = 21
 		Me.BTNVideoFemSubD.Text = "1"
-		Me.BTNVideoFemSubD.UseVisualStyleBackColor = false
+		Me.BTNVideoFemSubD.UseVisualStyleBackColor = False
 		'
 		'LblVideoSoftCoreTotalD
 		'
 		Me.LblVideoSoftCoreTotalD.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoSoftCoreTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoSoftCoreTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoSoftCoreTotalD.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoSoftCoreTotalD.Location = New System.Drawing.Point(299, 43)
 		Me.LblVideoSoftCoreTotalD.Name = "LblVideoSoftCoreTotalD"
@@ -8792,31 +8793,31 @@ Partial Class FrmSettings
 		'BTNVideoFemDomD
 		'
 		Me.BTNVideoFemDomD.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoFemDomD.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoFemDomD.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoFemDomD.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoFemDomD.Location = New System.Drawing.Point(73, 106)
 		Me.BTNVideoFemDomD.Name = "BTNVideoFemDomD"
 		Me.BTNVideoFemDomD.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoFemDomD.TabIndex = 17
 		Me.BTNVideoFemDomD.Text = "1"
-		Me.BTNVideoFemDomD.UseVisualStyleBackColor = false
+		Me.BTNVideoFemDomD.UseVisualStyleBackColor = False
 		'
 		'BTNVideoBlowjobD
 		'
 		Me.BTNVideoBlowjobD.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoBlowjobD.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoBlowjobD.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoBlowjobD.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoBlowjobD.Location = New System.Drawing.Point(73, 82)
 		Me.BTNVideoBlowjobD.Name = "BTNVideoBlowjobD"
 		Me.BTNVideoBlowjobD.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoBlowjobD.TabIndex = 13
 		Me.BTNVideoBlowjobD.Text = "1"
-		Me.BTNVideoBlowjobD.UseVisualStyleBackColor = false
+		Me.BTNVideoBlowjobD.UseVisualStyleBackColor = False
 		'
 		'LblVideoHardCoreTotalD
 		'
 		Me.LblVideoHardCoreTotalD.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoHardCoreTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoHardCoreTotalD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoHardCoreTotalD.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoHardCoreTotalD.Location = New System.Drawing.Point(299, 19)
 		Me.LblVideoHardCoreTotalD.Name = "LblVideoHardCoreTotalD"
@@ -8828,116 +8829,116 @@ Partial Class FrmSettings
 		'BTNVideoLesbianD
 		'
 		Me.BTNVideoLesbianD.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoLesbianD.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoLesbianD.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoLesbianD.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoLesbianD.Location = New System.Drawing.Point(73, 59)
 		Me.BTNVideoLesbianD.Name = "BTNVideoLesbianD"
 		Me.BTNVideoLesbianD.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoLesbianD.TabIndex = 9
 		Me.BTNVideoLesbianD.Text = "1"
-		Me.BTNVideoLesbianD.UseVisualStyleBackColor = false
+		Me.BTNVideoLesbianD.UseVisualStyleBackColor = False
 		'
 		'BTNVideoSoftCoreD
 		'
 		Me.BTNVideoSoftCoreD.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoSoftCoreD.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoSoftCoreD.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoSoftCoreD.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoSoftCoreD.Location = New System.Drawing.Point(73, 36)
 		Me.BTNVideoSoftCoreD.Name = "BTNVideoSoftCoreD"
 		Me.BTNVideoSoftCoreD.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoSoftCoreD.TabIndex = 5
 		Me.BTNVideoSoftCoreD.Text = "1"
-		Me.BTNVideoSoftCoreD.UseVisualStyleBackColor = false
+		Me.BTNVideoSoftCoreD.UseVisualStyleBackColor = False
 		'
 		'BTNVideoHardCoreD
 		'
 		Me.BTNVideoHardCoreD.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoHardCoreD.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoHardCoreD.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoHardCoreD.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoHardCoreD.Location = New System.Drawing.Point(73, 12)
 		Me.BTNVideoHardCoreD.Name = "BTNVideoHardCoreD"
 		Me.BTNVideoHardCoreD.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoHardCoreD.TabIndex = 1
 		Me.BTNVideoHardCoreD.Text = "1"
-		Me.BTNVideoHardCoreD.UseVisualStyleBackColor = false
+		Me.BTNVideoHardCoreD.UseVisualStyleBackColor = False
 		'
 		'CBVideoHardcoreD
 		'
-		Me.CBVideoHardcoreD.AutoSize = true
+		Me.CBVideoHardcoreD.AutoSize = True
 		Me.CBVideoHardcoreD.Checked = Global.Tease_AI.My.MySettings.Default.CBHardcoreD
-		Me.CBVideoHardcoreD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBHardcoreD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoHardcoreD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBHardcoreD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoHardcoreD.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoHardcoreD.Location = New System.Drawing.Point(6, 19)
 		Me.CBVideoHardcoreD.Name = "CBVideoHardcoreD"
 		Me.CBVideoHardcoreD.Size = New System.Drawing.Size(70, 17)
 		Me.CBVideoHardcoreD.TabIndex = 0
 		Me.CBVideoHardcoreD.Text = "Hardcore"
-		Me.CBVideoHardcoreD.UseVisualStyleBackColor = true
+		Me.CBVideoHardcoreD.UseVisualStyleBackColor = True
 		'
 		'CBVideoSoftCoreD
 		'
-		Me.CBVideoSoftCoreD.AutoSize = true
+		Me.CBVideoSoftCoreD.AutoSize = True
 		Me.CBVideoSoftCoreD.Checked = Global.Tease_AI.My.MySettings.Default.CBSoftcoreD
-		Me.CBVideoSoftCoreD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBSoftcoreD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoSoftCoreD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBSoftcoreD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoSoftCoreD.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoSoftCoreD.Location = New System.Drawing.Point(6, 43)
 		Me.CBVideoSoftCoreD.Name = "CBVideoSoftCoreD"
 		Me.CBVideoSoftCoreD.Size = New System.Drawing.Size(66, 17)
 		Me.CBVideoSoftCoreD.TabIndex = 4
 		Me.CBVideoSoftCoreD.Text = "Softcore"
-		Me.CBVideoSoftCoreD.UseVisualStyleBackColor = true
+		Me.CBVideoSoftCoreD.UseVisualStyleBackColor = True
 		'
 		'CBVideoLesbianD
 		'
-		Me.CBVideoLesbianD.AutoSize = true
+		Me.CBVideoLesbianD.AutoSize = True
 		Me.CBVideoLesbianD.Checked = Global.Tease_AI.My.MySettings.Default.CBLesbianD
-		Me.CBVideoLesbianD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBLesbianD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoLesbianD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBLesbianD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoLesbianD.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoLesbianD.Location = New System.Drawing.Point(6, 66)
 		Me.CBVideoLesbianD.Name = "CBVideoLesbianD"
 		Me.CBVideoLesbianD.Size = New System.Drawing.Size(63, 17)
 		Me.CBVideoLesbianD.TabIndex = 8
 		Me.CBVideoLesbianD.Text = "Lesbian"
-		Me.CBVideoLesbianD.UseVisualStyleBackColor = true
+		Me.CBVideoLesbianD.UseVisualStyleBackColor = True
 		'
 		'CBVideoBlowjobD
 		'
-		Me.CBVideoBlowjobD.AutoSize = true
+		Me.CBVideoBlowjobD.AutoSize = True
 		Me.CBVideoBlowjobD.Checked = Global.Tease_AI.My.MySettings.Default.CBBlowjobD
-		Me.CBVideoBlowjobD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBBlowjobD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoBlowjobD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBBlowjobD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoBlowjobD.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoBlowjobD.Location = New System.Drawing.Point(6, 89)
 		Me.CBVideoBlowjobD.Name = "CBVideoBlowjobD"
 		Me.CBVideoBlowjobD.Size = New System.Drawing.Size(63, 17)
 		Me.CBVideoBlowjobD.TabIndex = 12
 		Me.CBVideoBlowjobD.Text = "Blowjob"
-		Me.CBVideoBlowjobD.UseVisualStyleBackColor = true
+		Me.CBVideoBlowjobD.UseVisualStyleBackColor = True
 		'
 		'CBVideoFemsubD
 		'
-		Me.CBVideoFemsubD.AutoSize = true
+		Me.CBVideoFemsubD.AutoSize = True
 		Me.CBVideoFemsubD.Checked = Global.Tease_AI.My.MySettings.Default.CBFemsubD
-		Me.CBVideoFemsubD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBFemsubD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoFemsubD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBFemsubD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoFemsubD.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoFemsubD.Location = New System.Drawing.Point(6, 137)
 		Me.CBVideoFemsubD.Name = "CBVideoFemsubD"
 		Me.CBVideoFemsubD.Size = New System.Drawing.Size(63, 17)
 		Me.CBVideoFemsubD.TabIndex = 20
 		Me.CBVideoFemsubD.Text = "Femsub"
-		Me.CBVideoFemsubD.UseVisualStyleBackColor = true
+		Me.CBVideoFemsubD.UseVisualStyleBackColor = True
 		'
 		'CBVideoFemdomD
 		'
-		Me.CBVideoFemdomD.AutoSize = true
+		Me.CBVideoFemdomD.AutoSize = True
 		Me.CBVideoFemdomD.Checked = Global.Tease_AI.My.MySettings.Default.CBFemdomD
-		Me.CBVideoFemdomD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBFemdomD", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoFemdomD.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBFemdomD", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoFemdomD.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoFemdomD.Location = New System.Drawing.Point(6, 113)
 		Me.CBVideoFemdomD.Name = "CBVideoFemdomD"
 		Me.CBVideoFemdomD.Size = New System.Drawing.Size(66, 17)
 		Me.CBVideoFemdomD.TabIndex = 16
 		Me.CBVideoFemdomD.Text = "Femdom"
-		Me.CBVideoFemdomD.UseVisualStyleBackColor = true
+		Me.CBVideoFemdomD.UseVisualStyleBackColor = True
 		'
 		'GbxVideoDescription
 		'
@@ -8948,21 +8949,21 @@ Partial Class FrmSettings
 		Me.GbxVideoDescription.Name = "GbxVideoDescription"
 		Me.GbxVideoDescription.Size = New System.Drawing.Size(692, 92)
 		Me.GbxVideoDescription.TabIndex = 6
-		Me.GbxVideoDescription.TabStop = false
+		Me.GbxVideoDescription.TabStop = False
 		Me.GbxVideoDescription.Text = "Description"
 		'
 		'VideoDescriptionLabel
 		'
 		Me.VideoDescriptionLabel.BackColor = System.Drawing.Color.Transparent
-		Me.VideoDescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.VideoDescriptionLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.VideoDescriptionLabel.ForeColor = System.Drawing.Color.Black
 		Me.VideoDescriptionLabel.Location = New System.Drawing.Point(6, 16)
 		Me.VideoDescriptionLabel.Name = "VideoDescriptionLabel"
 		Me.VideoDescriptionLabel.Size = New System.Drawing.Size(680, 73)
 		Me.VideoDescriptionLabel.TabIndex = 62
-		Me.VideoDescriptionLabel.Text = "Use this page to select the videos you would like the program to use and set thei"& _ 
-    "r paths."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"The Domme Genre paths are for videos that feature the model you are "& _ 
-    "using as your domme."
+		Me.VideoDescriptionLabel.Text = "Use this page to select the videos you would like the program to use and set thei" &
+	"r paths." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "The Domme Genre paths are for videos that feature the model you are " &
+	"using as your domme."
 		Me.VideoDescriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'GbxVideoGeneral
@@ -8977,13 +8978,13 @@ Partial Class FrmSettings
 		Me.GbxVideoGeneral.Name = "GbxVideoGeneral"
 		Me.GbxVideoGeneral.Size = New System.Drawing.Size(340, 48)
 		Me.GbxVideoGeneral.TabIndex = 2
-		Me.GbxVideoGeneral.TabStop = false
+		Me.GbxVideoGeneral.TabStop = False
 		Me.GbxVideoGeneral.Text = "General"
 		'
 		'LblVideoGeneralTotal
 		'
 		Me.LblVideoGeneralTotal.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoGeneralTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoGeneralTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoGeneralTotal.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoGeneralTotal.Location = New System.Drawing.Point(299, 19)
 		Me.LblVideoGeneralTotal.Name = "LblVideoGeneralTotal"
@@ -8996,14 +8997,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoGeneral.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoGeneral.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoGeneral", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoGeneral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoGeneral", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoGeneral.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoGeneral.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoGeneral.Location = New System.Drawing.Point(113, 18)
 		Me.TxbVideoGeneral.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoGeneral.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoGeneral.Name = "TxbVideoGeneral"
-		Me.TxbVideoGeneral.ReadOnly = true
+		Me.TxbVideoGeneral.ReadOnly = True
 		Me.TxbVideoGeneral.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoGeneral.TabIndex = 2
 		Me.TxbVideoGeneral.Text = Global.Tease_AI.My.MySettings.Default.VideoGeneral
@@ -9011,27 +9012,27 @@ Partial Class FrmSettings
 		'BTNVideoGeneral
 		'
 		Me.BTNVideoGeneral.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoGeneral.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoGeneral.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoGeneral.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoGeneral.Location = New System.Drawing.Point(73, 13)
 		Me.BTNVideoGeneral.Name = "BTNVideoGeneral"
 		Me.BTNVideoGeneral.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoGeneral.TabIndex = 1
 		Me.BTNVideoGeneral.Text = "1"
-		Me.BTNVideoGeneral.UseVisualStyleBackColor = false
+		Me.BTNVideoGeneral.UseVisualStyleBackColor = False
 		'
 		'CBVideoGeneral
 		'
-		Me.CBVideoGeneral.AutoSize = true
+		Me.CBVideoGeneral.AutoSize = True
 		Me.CBVideoGeneral.Checked = Global.Tease_AI.My.MySettings.Default.CBGeneral
-		Me.CBVideoGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGeneral", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoGeneral.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGeneral", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoGeneral.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoGeneral.Location = New System.Drawing.Point(6, 19)
 		Me.CBVideoGeneral.Name = "CBVideoGeneral"
 		Me.CBVideoGeneral.Size = New System.Drawing.Size(63, 17)
 		Me.CBVideoGeneral.TabIndex = 0
 		Me.CBVideoGeneral.Text = "General"
-		Me.CBVideoGeneral.UseVisualStyleBackColor = true
+		Me.CBVideoGeneral.UseVisualStyleBackColor = True
 		'
 		'GbxVideoSpecial
 		'
@@ -9049,13 +9050,13 @@ Partial Class FrmSettings
 		Me.GbxVideoSpecial.Name = "GbxVideoSpecial"
 		Me.GbxVideoSpecial.Size = New System.Drawing.Size(340, 70)
 		Me.GbxVideoSpecial.TabIndex = 1
-		Me.GbxVideoSpecial.TabStop = false
+		Me.GbxVideoSpecial.TabStop = False
 		Me.GbxVideoSpecial.Text = "Special"
 		'
 		'LblVideoCHTotal
 		'
 		Me.LblVideoCHTotal.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoCHTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoCHTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoCHTotal.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoCHTotal.Location = New System.Drawing.Point(299, 41)
 		Me.LblVideoCHTotal.Name = "LblVideoCHTotal"
@@ -9067,7 +9068,7 @@ Partial Class FrmSettings
 		'LblVideoJOITotal
 		'
 		Me.LblVideoJOITotal.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoJOITotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoJOITotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoJOITotal.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoJOITotal.Location = New System.Drawing.Point(299, 18)
 		Me.LblVideoJOITotal.Name = "LblVideoJOITotal"
@@ -9080,14 +9081,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoCH.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoCH.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoCH.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoCH", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoCH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoCH.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoCH", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoCH.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoCH.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoCH.Location = New System.Drawing.Point(113, 41)
 		Me.TxbVideoCH.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoCH.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoCH.Name = "TxbVideoCH"
-		Me.TxbVideoCH.ReadOnly = true
+		Me.TxbVideoCH.ReadOnly = True
 		Me.TxbVideoCH.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoCH.TabIndex = 6
 		Me.TxbVideoCH.Text = Global.Tease_AI.My.MySettings.Default.VideoCH
@@ -9096,14 +9097,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoJOI.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoJOI.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoJOI.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoJOI", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoJOI.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoJOI.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoJOI", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoJOI.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoJOI.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoJOI.Location = New System.Drawing.Point(113, 18)
 		Me.TxbVideoJOI.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoJOI.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoJOI.Name = "TxbVideoJOI"
-		Me.TxbVideoJOI.ReadOnly = true
+		Me.TxbVideoJOI.ReadOnly = True
 		Me.TxbVideoJOI.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoJOI.TabIndex = 2
 		Me.TxbVideoJOI.Text = Global.Tease_AI.My.MySettings.Default.VideoJOI
@@ -9111,52 +9112,52 @@ Partial Class FrmSettings
 		'BTNVideoCH
 		'
 		Me.BTNVideoCH.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoCH.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoCH.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoCH.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoCH.Location = New System.Drawing.Point(73, 36)
 		Me.BTNVideoCH.Name = "BTNVideoCH"
 		Me.BTNVideoCH.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoCH.TabIndex = 5
 		Me.BTNVideoCH.Text = "1"
-		Me.BTNVideoCH.UseVisualStyleBackColor = false
+		Me.BTNVideoCH.UseVisualStyleBackColor = False
 		'
 		'BTNVideoJOI
 		'
 		Me.BTNVideoJOI.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoJOI.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoJOI.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoJOI.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoJOI.Location = New System.Drawing.Point(73, 13)
 		Me.BTNVideoJOI.Name = "BTNVideoJOI"
 		Me.BTNVideoJOI.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoJOI.TabIndex = 1
 		Me.BTNVideoJOI.Text = "1"
-		Me.BTNVideoJOI.UseVisualStyleBackColor = false
+		Me.BTNVideoJOI.UseVisualStyleBackColor = False
 		'
 		'CBVideoJOI
 		'
-		Me.CBVideoJOI.AutoSize = true
+		Me.CBVideoJOI.AutoSize = True
 		Me.CBVideoJOI.Checked = Global.Tease_AI.My.MySettings.Default.CBJOI
-		Me.CBVideoJOI.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBJOI", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoJOI.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBJOI", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoJOI.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoJOI.Location = New System.Drawing.Point(6, 19)
 		Me.CBVideoJOI.Name = "CBVideoJOI"
 		Me.CBVideoJOI.Size = New System.Drawing.Size(42, 17)
 		Me.CBVideoJOI.TabIndex = 0
 		Me.CBVideoJOI.Text = "JOI"
-		Me.CBVideoJOI.UseVisualStyleBackColor = true
+		Me.CBVideoJOI.UseVisualStyleBackColor = True
 		'
 		'CBVideoCH
 		'
-		Me.CBVideoCH.AutoSize = true
+		Me.CBVideoCH.AutoSize = True
 		Me.CBVideoCH.Checked = Global.Tease_AI.My.MySettings.Default.CBCH
-		Me.CBVideoCH.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBCH", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoCH.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBCH", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoCH.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoCH.Location = New System.Drawing.Point(6, 43)
 		Me.CBVideoCH.Name = "CBVideoCH"
 		Me.CBVideoCH.Size = New System.Drawing.Size(41, 17)
 		Me.CBVideoCH.TabIndex = 4
 		Me.CBVideoCH.Text = "CH"
-		Me.CBVideoCH.UseVisualStyleBackColor = true
+		Me.CBVideoCH.UseVisualStyleBackColor = True
 		'
 		'GbxVideoGenre
 		'
@@ -9190,13 +9191,13 @@ Partial Class FrmSettings
 		Me.GbxVideoGenre.Name = "GbxVideoGenre"
 		Me.GbxVideoGenre.Size = New System.Drawing.Size(340, 165)
 		Me.GbxVideoGenre.TabIndex = 0
-		Me.GbxVideoGenre.TabStop = false
+		Me.GbxVideoGenre.TabStop = False
 		Me.GbxVideoGenre.Text = "Genre"
 		'
 		'LblVideoFemsubTotal
 		'
 		Me.LblVideoFemsubTotal.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoFemsubTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoFemsubTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoFemsubTotal.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoFemsubTotal.Location = New System.Drawing.Point(299, 136)
 		Me.LblVideoFemsubTotal.Name = "LblVideoFemsubTotal"
@@ -9209,14 +9210,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoFemsub.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoFemsub.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoFemsub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoFemsub", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoFemsub.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoFemsub.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoFemsub", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoFemsub.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoFemsub.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoFemsub.Location = New System.Drawing.Point(113, 136)
 		Me.TxbVideoFemsub.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoFemsub.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoFemsub.Name = "TxbVideoFemsub"
-		Me.TxbVideoFemsub.ReadOnly = true
+		Me.TxbVideoFemsub.ReadOnly = True
 		Me.TxbVideoFemsub.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoFemsub.TabIndex = 22
 		Me.TxbVideoFemsub.Text = Global.Tease_AI.My.MySettings.Default.VideoFemsub
@@ -9224,7 +9225,7 @@ Partial Class FrmSettings
 		'LblVideoFemdomTotal
 		'
 		Me.LblVideoFemdomTotal.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoFemdomTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoFemdomTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoFemdomTotal.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoFemdomTotal.Location = New System.Drawing.Point(299, 112)
 		Me.LblVideoFemdomTotal.Name = "LblVideoFemdomTotal"
@@ -9237,14 +9238,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoFemdom.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoFemdom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoFemdom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoFemdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoFemdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoFemdom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoFemdom.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoFemdom.Location = New System.Drawing.Point(113, 112)
 		Me.TxbVideoFemdom.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoFemdom.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoFemdom.Name = "TxbVideoFemdom"
-		Me.TxbVideoFemdom.ReadOnly = true
+		Me.TxbVideoFemdom.ReadOnly = True
 		Me.TxbVideoFemdom.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoFemdom.TabIndex = 18
 		Me.TxbVideoFemdom.Text = Global.Tease_AI.My.MySettings.Default.VideoFemdom
@@ -9253,14 +9254,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoBlowjob.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoBlowjob.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoBlowjob", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoBlowjob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoBlowjob", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoBlowjob.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoBlowjob.Location = New System.Drawing.Point(113, 88)
 		Me.TxbVideoBlowjob.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoBlowjob.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoBlowjob.Name = "TxbVideoBlowjob"
-		Me.TxbVideoBlowjob.ReadOnly = true
+		Me.TxbVideoBlowjob.ReadOnly = True
 		Me.TxbVideoBlowjob.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoBlowjob.TabIndex = 14
 		Me.TxbVideoBlowjob.Text = Global.Tease_AI.My.MySettings.Default.VideoBlowjob
@@ -9268,7 +9269,7 @@ Partial Class FrmSettings
 		'LblVideoBlowjobTotal
 		'
 		Me.LblVideoBlowjobTotal.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoBlowjobTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoBlowjobTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoBlowjobTotal.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoBlowjobTotal.Location = New System.Drawing.Point(299, 88)
 		Me.LblVideoBlowjobTotal.Name = "LblVideoBlowjobTotal"
@@ -9281,14 +9282,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoLesbian.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoLesbian.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoLesbian.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoLesbian", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoLesbian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoLesbian.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoLesbian", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoLesbian.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoLesbian.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoLesbian.Location = New System.Drawing.Point(113, 65)
 		Me.TxbVideoLesbian.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoLesbian.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoLesbian.Name = "TxbVideoLesbian"
-		Me.TxbVideoLesbian.ReadOnly = true
+		Me.TxbVideoLesbian.ReadOnly = True
 		Me.TxbVideoLesbian.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoLesbian.TabIndex = 10
 		Me.TxbVideoLesbian.Text = Global.Tease_AI.My.MySettings.Default.VideoLesbian
@@ -9297,14 +9298,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoSoftCore.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoSoftCore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoSoftCore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoSoftcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoSoftCore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoSoftCore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoSoftcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoSoftCore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoSoftCore.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoSoftCore.Location = New System.Drawing.Point(113, 42)
 		Me.TxbVideoSoftCore.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoSoftCore.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoSoftCore.Name = "TxbVideoSoftCore"
-		Me.TxbVideoSoftCore.ReadOnly = true
+		Me.TxbVideoSoftCore.ReadOnly = True
 		Me.TxbVideoSoftCore.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoSoftCore.TabIndex = 6
 		Me.TxbVideoSoftCore.Text = Global.Tease_AI.My.MySettings.Default.VideoSoftcore
@@ -9312,7 +9313,7 @@ Partial Class FrmSettings
 		'LblVideoLesbianTotal
 		'
 		Me.LblVideoLesbianTotal.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoLesbianTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoLesbianTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoLesbianTotal.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoLesbianTotal.Location = New System.Drawing.Point(299, 66)
 		Me.LblVideoLesbianTotal.Name = "LblVideoLesbianTotal"
@@ -9325,14 +9326,14 @@ Partial Class FrmSettings
 		'
 		Me.TxbVideoHardCore.BackColor = System.Drawing.Color.LightGray
 		Me.TxbVideoHardCore.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.TxbVideoHardCore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoHardcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TxbVideoHardCore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TxbVideoHardCore.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "VideoHardcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TxbVideoHardCore.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TxbVideoHardCore.ForeColor = System.Drawing.Color.Black
 		Me.TxbVideoHardCore.Location = New System.Drawing.Point(113, 19)
 		Me.TxbVideoHardCore.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.TxbVideoHardCore.MinimumSize = New System.Drawing.Size(180, 17)
 		Me.TxbVideoHardCore.Name = "TxbVideoHardCore"
-		Me.TxbVideoHardCore.ReadOnly = true
+		Me.TxbVideoHardCore.ReadOnly = True
 		Me.TxbVideoHardCore.Size = New System.Drawing.Size(180, 17)
 		Me.TxbVideoHardCore.TabIndex = 2
 		Me.TxbVideoHardCore.Text = Global.Tease_AI.My.MySettings.Default.VideoHardcore
@@ -9340,19 +9341,19 @@ Partial Class FrmSettings
 		'BTNVideoFemSub
 		'
 		Me.BTNVideoFemSub.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoFemSub.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoFemSub.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoFemSub.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoFemSub.Location = New System.Drawing.Point(73, 130)
 		Me.BTNVideoFemSub.Name = "BTNVideoFemSub"
 		Me.BTNVideoFemSub.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoFemSub.TabIndex = 21
 		Me.BTNVideoFemSub.Text = "1"
-		Me.BTNVideoFemSub.UseVisualStyleBackColor = false
+		Me.BTNVideoFemSub.UseVisualStyleBackColor = False
 		'
 		'LblVideoSoftCoreTotal
 		'
 		Me.LblVideoSoftCoreTotal.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoSoftCoreTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoSoftCoreTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoSoftCoreTotal.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoSoftCoreTotal.Location = New System.Drawing.Point(299, 43)
 		Me.LblVideoSoftCoreTotal.Name = "LblVideoSoftCoreTotal"
@@ -9364,31 +9365,31 @@ Partial Class FrmSettings
 		'BTNVideoFemDom
 		'
 		Me.BTNVideoFemDom.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoFemDom.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoFemDom.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoFemDom.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoFemDom.Location = New System.Drawing.Point(73, 106)
 		Me.BTNVideoFemDom.Name = "BTNVideoFemDom"
 		Me.BTNVideoFemDom.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoFemDom.TabIndex = 17
 		Me.BTNVideoFemDom.Text = "1"
-		Me.BTNVideoFemDom.UseVisualStyleBackColor = false
+		Me.BTNVideoFemDom.UseVisualStyleBackColor = False
 		'
 		'BTNVideoBlowjob
 		'
 		Me.BTNVideoBlowjob.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoBlowjob.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoBlowjob.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoBlowjob.Location = New System.Drawing.Point(73, 82)
 		Me.BTNVideoBlowjob.Name = "BTNVideoBlowjob"
 		Me.BTNVideoBlowjob.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoBlowjob.TabIndex = 13
 		Me.BTNVideoBlowjob.Text = "1"
-		Me.BTNVideoBlowjob.UseVisualStyleBackColor = false
+		Me.BTNVideoBlowjob.UseVisualStyleBackColor = False
 		'
 		'LblVideoHardCoreTotal
 		'
 		Me.LblVideoHardCoreTotal.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoHardCoreTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoHardCoreTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoHardCoreTotal.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoHardCoreTotal.Location = New System.Drawing.Point(299, 19)
 		Me.LblVideoHardCoreTotal.Name = "LblVideoHardCoreTotal"
@@ -9400,121 +9401,121 @@ Partial Class FrmSettings
 		'BTNVideoLesbian
 		'
 		Me.BTNVideoLesbian.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoLesbian.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoLesbian.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoLesbian.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoLesbian.Location = New System.Drawing.Point(73, 59)
 		Me.BTNVideoLesbian.Name = "BTNVideoLesbian"
 		Me.BTNVideoLesbian.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoLesbian.TabIndex = 9
 		Me.BTNVideoLesbian.Text = "1"
-		Me.BTNVideoLesbian.UseVisualStyleBackColor = false
+		Me.BTNVideoLesbian.UseVisualStyleBackColor = False
 		'
 		'BTNVideoSoftCore
 		'
 		Me.BTNVideoSoftCore.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoSoftCore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoSoftCore.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoSoftCore.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoSoftCore.Location = New System.Drawing.Point(73, 36)
 		Me.BTNVideoSoftCore.Name = "BTNVideoSoftCore"
 		Me.BTNVideoSoftCore.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoSoftCore.TabIndex = 5
 		Me.BTNVideoSoftCore.Text = "1"
-		Me.BTNVideoSoftCore.UseVisualStyleBackColor = false
+		Me.BTNVideoSoftCore.UseVisualStyleBackColor = False
 		'
 		'BTNVideoHardCore
 		'
 		Me.BTNVideoHardCore.BackColor = System.Drawing.Color.LightGray
-		Me.BTNVideoHardCore.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.BTNVideoHardCore.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.BTNVideoHardCore.ForeColor = System.Drawing.Color.Black
 		Me.BTNVideoHardCore.Location = New System.Drawing.Point(73, 12)
 		Me.BTNVideoHardCore.Name = "BTNVideoHardCore"
 		Me.BTNVideoHardCore.Size = New System.Drawing.Size(34, 28)
 		Me.BTNVideoHardCore.TabIndex = 1
 		Me.BTNVideoHardCore.Text = "1"
-		Me.BTNVideoHardCore.UseVisualStyleBackColor = false
+		Me.BTNVideoHardCore.UseVisualStyleBackColor = False
 		'
 		'CBVideoHardcore
 		'
-		Me.CBVideoHardcore.AutoSize = true
+		Me.CBVideoHardcore.AutoSize = True
 		Me.CBVideoHardcore.Checked = Global.Tease_AI.My.MySettings.Default.CBHardcore
-		Me.CBVideoHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBHardcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoHardcore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBHardcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoHardcore.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoHardcore.Location = New System.Drawing.Point(6, 19)
 		Me.CBVideoHardcore.Name = "CBVideoHardcore"
 		Me.CBVideoHardcore.Size = New System.Drawing.Size(70, 17)
 		Me.CBVideoHardcore.TabIndex = 0
 		Me.CBVideoHardcore.Text = "Hardcore"
-		Me.CBVideoHardcore.UseVisualStyleBackColor = true
+		Me.CBVideoHardcore.UseVisualStyleBackColor = True
 		'
 		'CBVideoSoftCore
 		'
-		Me.CBVideoSoftCore.AutoSize = true
+		Me.CBVideoSoftCore.AutoSize = True
 		Me.CBVideoSoftCore.Checked = Global.Tease_AI.My.MySettings.Default.CBSoftcore
-		Me.CBVideoSoftCore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBSoftcore", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoSoftCore.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBSoftcore", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoSoftCore.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoSoftCore.Location = New System.Drawing.Point(6, 43)
 		Me.CBVideoSoftCore.Name = "CBVideoSoftCore"
 		Me.CBVideoSoftCore.Size = New System.Drawing.Size(66, 17)
 		Me.CBVideoSoftCore.TabIndex = 4
 		Me.CBVideoSoftCore.Text = "Softcore"
-		Me.CBVideoSoftCore.UseVisualStyleBackColor = true
+		Me.CBVideoSoftCore.UseVisualStyleBackColor = True
 		'
 		'CBVideoLesbian
 		'
-		Me.CBVideoLesbian.AutoSize = true
+		Me.CBVideoLesbian.AutoSize = True
 		Me.CBVideoLesbian.Checked = Global.Tease_AI.My.MySettings.Default.CBLesbian
-		Me.CBVideoLesbian.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBLesbian", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoLesbian.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBLesbian", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoLesbian.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoLesbian.Location = New System.Drawing.Point(6, 66)
 		Me.CBVideoLesbian.Name = "CBVideoLesbian"
 		Me.CBVideoLesbian.Size = New System.Drawing.Size(63, 17)
 		Me.CBVideoLesbian.TabIndex = 8
 		Me.CBVideoLesbian.Text = "Lesbian"
-		Me.CBVideoLesbian.UseVisualStyleBackColor = true
+		Me.CBVideoLesbian.UseVisualStyleBackColor = True
 		'
 		'CBVideoBlowjob
 		'
-		Me.CBVideoBlowjob.AutoSize = true
+		Me.CBVideoBlowjob.AutoSize = True
 		Me.CBVideoBlowjob.Checked = Global.Tease_AI.My.MySettings.Default.CBBlowjob
-		Me.CBVideoBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBBlowjob", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoBlowjob.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBBlowjob", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoBlowjob.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoBlowjob.Location = New System.Drawing.Point(6, 89)
 		Me.CBVideoBlowjob.Name = "CBVideoBlowjob"
 		Me.CBVideoBlowjob.Size = New System.Drawing.Size(63, 17)
 		Me.CBVideoBlowjob.TabIndex = 12
 		Me.CBVideoBlowjob.Text = "Blowjob"
-		Me.CBVideoBlowjob.UseVisualStyleBackColor = true
+		Me.CBVideoBlowjob.UseVisualStyleBackColor = True
 		'
 		'CBVideoFemsub
 		'
-		Me.CBVideoFemsub.AutoSize = true
+		Me.CBVideoFemsub.AutoSize = True
 		Me.CBVideoFemsub.Checked = Global.Tease_AI.My.MySettings.Default.CBFemsub
-		Me.CBVideoFemsub.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBFemsub", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoFemsub.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBFemsub", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoFemsub.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoFemsub.Location = New System.Drawing.Point(6, 137)
 		Me.CBVideoFemsub.Name = "CBVideoFemsub"
 		Me.CBVideoFemsub.Size = New System.Drawing.Size(63, 17)
 		Me.CBVideoFemsub.TabIndex = 20
 		Me.CBVideoFemsub.Text = "Femsub"
-		Me.CBVideoFemsub.UseVisualStyleBackColor = true
+		Me.CBVideoFemsub.UseVisualStyleBackColor = True
 		'
 		'CBVideoFemdom
 		'
-		Me.CBVideoFemdom.AutoSize = true
+		Me.CBVideoFemdom.AutoSize = True
 		Me.CBVideoFemdom.Checked = Global.Tease_AI.My.MySettings.Default.CBFemdom
-		Me.CBVideoFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBFemdom", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBVideoFemdom.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBFemdom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBVideoFemdom.ForeColor = System.Drawing.Color.Black
 		Me.CBVideoFemdom.Location = New System.Drawing.Point(6, 113)
 		Me.CBVideoFemdom.Name = "CBVideoFemdom"
 		Me.CBVideoFemdom.Size = New System.Drawing.Size(66, 17)
 		Me.CBVideoFemdom.TabIndex = 16
 		Me.CBVideoFemdom.Text = "Femdom"
-		Me.CBVideoFemdom.UseVisualStyleBackColor = true
+		Me.CBVideoFemdom.UseVisualStyleBackColor = True
 		'
 		'LblVideoHeader
 		'
 		Me.LblVideoHeader.BackColor = System.Drawing.Color.Transparent
-		Me.LblVideoHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblVideoHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblVideoHeader.ForeColor = System.Drawing.Color.Black
 		Me.LblVideoHeader.Location = New System.Drawing.Point(7, 6)
 		Me.LblVideoHeader.Name = "LblVideoHeader"
@@ -9581,13 +9582,13 @@ Partial Class FrmSettings
 		Me.Button15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
 		Me.Button15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
 		Me.Button15.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button15.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Button15.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Button15.ForeColor = System.Drawing.Color.Black
 		Me.Button15.Location = New System.Drawing.Point(670, 366)
 		Me.Button15.Name = "Button15"
 		Me.Button15.Size = New System.Drawing.Size(30, 26)
 		Me.Button15.TabIndex = 163
-		Me.Button15.UseVisualStyleBackColor = false
+		Me.Button15.UseVisualStyleBackColor = False
 		'
 		'Button16
 		'
@@ -9598,18 +9599,18 @@ Partial Class FrmSettings
 		Me.Button16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Gray
 		Me.Button16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Silver
 		Me.Button16.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-		Me.Button16.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Button16.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Button16.ForeColor = System.Drawing.Color.Black
 		Me.Button16.Location = New System.Drawing.Point(667, 324)
 		Me.Button16.Name = "Button16"
 		Me.Button16.Size = New System.Drawing.Size(30, 26)
 		Me.Button16.TabIndex = 164
-		Me.Button16.UseVisualStyleBackColor = false
+		Me.Button16.UseVisualStyleBackColor = False
 		'
 		'Label121
 		'
-		Me.Label121.AutoSize = true
-		Me.Label121.Font = New System.Drawing.Font("Microsoft Sans Serif", 7!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label121.AutoSize = True
+		Me.Label121.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label121.ForeColor = System.Drawing.Color.Black
 		Me.Label121.Location = New System.Drawing.Point(669, 352)
 		Me.Label121.Name = "Label121"
@@ -9620,8 +9621,8 @@ Partial Class FrmSettings
 		'
 		'Label122
 		'
-		Me.Label122.AutoSize = true
-		Me.Label122.Font = New System.Drawing.Font("Microsoft Sans Serif", 7!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label122.AutoSize = True
+		Me.Label122.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label122.ForeColor = System.Drawing.Color.Black
 		Me.Label122.Location = New System.Drawing.Point(667, 313)
 		Me.Label122.Name = "Label122"
@@ -9633,10 +9634,7 @@ Partial Class FrmSettings
 		'GBGlitterD
 		'
 		Me.GBGlitterD.BackColor = System.Drawing.Color.LightGray
-		Me.GBGlitterD.Controls.Add(Me.CBGlitterFeedOff)
-		Me.GBGlitterD.Controls.Add(Me.CBGlitterFeedScripts)
-		Me.GBGlitterD.Controls.Add(Me.CBGlitterFeed)
-		Me.GBGlitterD.Controls.Add(Me.Label118)
+		Me.GBGlitterD.Controls.Add(Me.GrbGlitterfeed)
 		Me.GBGlitterD.Controls.Add(Me.BTNGlitterD)
 		Me.GBGlitterD.Controls.Add(Me.LBLGlitterNCDomme)
 		Me.GBGlitterD.Controls.Add(Me.LBLGlitterSlider)
@@ -9653,71 +9651,80 @@ Partial Class FrmSettings
 		Me.GBGlitterD.Name = "GBGlitterD"
 		Me.GBGlitterD.Size = New System.Drawing.Size(344, 150)
 		Me.GBGlitterD.TabIndex = 162
-		Me.GBGlitterD.TabStop = false
+		Me.GBGlitterD.TabStop = False
 		Me.GBGlitterD.Text = "Domme"
+		'
+		'GrbGlitterfeed
+		'
+		Me.GrbGlitterfeed.Controls.Add(Me.CBGlitterFeedScripts)
+		Me.GrbGlitterfeed.Controls.Add(Me.CBGlitterFeed)
+		Me.GrbGlitterfeed.Controls.Add(Me.CBGlitterFeedOff)
+		Me.GrbGlitterfeed.Location = New System.Drawing.Point(79, 16)
+		Me.GrbGlitterfeed.Name = "GrbGlitterfeed"
+		Me.GrbGlitterfeed.Size = New System.Drawing.Size(134, 35)
+		Me.GrbGlitterfeed.TabIndex = 168
+		Me.GrbGlitterfeed.TabStop = False
+		Me.GrbGlitterfeed.Text = "Glitterfeeds"
+		'
+		'CBGlitterFeed
+		'
+		Me.CBGlitterFeed.AutoSize = True
+		Me.CBGlitterFeed.Checked = Global.Tease_AI.My.MySettings.Default.CBGlitterFeed
+		Me.CBGlitterFeed.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitterFeed", True))
+		Me.CBGlitterFeed.Location = New System.Drawing.Point(42, 11)
+		Me.CBGlitterFeed.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
+		Me.CBGlitterFeed.Name = "CBGlitterFeed"
+		Me.CBGlitterFeed.Size = New System.Drawing.Size(39, 17)
+		Me.CBGlitterFeed.TabIndex = 145
+		Me.CBGlitterFeed.Text = "On"
+		Me.CBGlitterFeed.UseVisualStyleBackColor = True
 		'
 		'CBGlitterFeedOff
 		'
-		Me.CBGlitterFeedOff.AutoSize = true
-		Me.CBGlitterFeedOff.Location = New System.Drawing.Point(149, 34)
+		Me.CBGlitterFeedOff.AutoSize = True
+		Me.CBGlitterFeedOff.Checked = Global.Tease_AI.My.MySettings.Default.CBGlitterFeedOff
+		Me.CBGlitterFeedOff.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitterFeedOff", True))
+		Me.CBGlitterFeedOff.Location = New System.Drawing.Point(8, 11)
+		Me.CBGlitterFeedOff.Margin = New System.Windows.Forms.Padding(0)
 		Me.CBGlitterFeedOff.Name = "CBGlitterFeedOff"
 		Me.CBGlitterFeedOff.Size = New System.Drawing.Size(39, 17)
 		Me.CBGlitterFeedOff.TabIndex = 147
+		Me.CBGlitterFeedOff.TabStop = True
 		Me.CBGlitterFeedOff.Text = "Off"
-		Me.CBGlitterFeedOff.UseVisualStyleBackColor = true
+		Me.CBGlitterFeedOff.UseVisualStyleBackColor = True
 		'
 		'CBGlitterFeedScripts
 		'
-		Me.CBGlitterFeedScripts.AutoSize = true
-		Me.CBGlitterFeedScripts.Location = New System.Drawing.Point(82, 34)
+		Me.CBGlitterFeedScripts.AutoSize = True
+		Me.CBGlitterFeedScripts.BackColor = System.Drawing.Color.Transparent
+		Me.CBGlitterFeedScripts.Checked = Global.Tease_AI.My.MySettings.Default.CBGlitterFeedScripts
+		Me.CBGlitterFeedScripts.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitterFeedScripts", True))
+		Me.CBGlitterFeedScripts.Location = New System.Drawing.Point(79, 11)
+		Me.CBGlitterFeedScripts.Margin = New System.Windows.Forms.Padding(0)
 		Me.CBGlitterFeedScripts.Name = "CBGlitterFeedScripts"
 		Me.CBGlitterFeedScripts.Size = New System.Drawing.Size(57, 17)
 		Me.CBGlitterFeedScripts.TabIndex = 146
 		Me.CBGlitterFeedScripts.Text = "Scripts"
-		Me.CBGlitterFeedScripts.UseVisualStyleBackColor = true
-		'
-		'CBGlitterFeed
-		'
-		Me.CBGlitterFeed.AutoSize = true
-		Me.CBGlitterFeed.Checked = true
-		Me.CBGlitterFeed.Location = New System.Drawing.Point(149, 17)
-		Me.CBGlitterFeed.Name = "CBGlitterFeed"
-		Me.CBGlitterFeed.Size = New System.Drawing.Size(39, 17)
-		Me.CBGlitterFeed.TabIndex = 145
-		Me.CBGlitterFeed.TabStop = true
-		Me.CBGlitterFeed.Text = "On"
-		Me.CBGlitterFeed.UseVisualStyleBackColor = true
-		'
-		'Label118
-		'
-		Me.Label118.BackColor = System.Drawing.Color.Transparent
-		Me.Label118.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-		Me.Label118.ForeColor = System.Drawing.Color.Black
-		Me.Label118.Location = New System.Drawing.Point(79, 16)
-		Me.Label118.Name = "Label118"
-		Me.Label118.Size = New System.Drawing.Size(62, 19)
-		Me.Label118.TabIndex = 167
-		Me.Label118.Text = "Glitter Feed"
-		Me.Label118.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		Me.CBGlitterFeedScripts.UseVisualStyleBackColor = False
 		'
 		'BTNGlitterD
 		'
 		Me.BTNGlitterD.BackColor = System.Drawing.Color.LightGray
-		Me.BTNGlitterD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNGlitterD.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNGlitterD.ForeColor = System.Drawing.Color.Black
 		Me.BTNGlitterD.Location = New System.Drawing.Point(220, 23)
 		Me.BTNGlitterD.Name = "BTNGlitterD"
 		Me.BTNGlitterD.Size = New System.Drawing.Size(115, 24)
 		Me.BTNGlitterD.TabIndex = 166
 		Me.BTNGlitterD.Text = "Choose Name Color"
-		Me.BTNGlitterD.UseVisualStyleBackColor = false
+		Me.BTNGlitterD.UseVisualStyleBackColor = False
 		'
 		'LBLGlitterNCDomme
 		'
 		Me.LBLGlitterNCDomme.BackColor = System.Drawing.Color.White
 		Me.LBLGlitterNCDomme.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLGlitterNCDomme.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "GlitterNCDommeColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLGlitterNCDomme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGlitterNCDomme.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "GlitterNCDommeColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLGlitterNCDomme.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGlitterNCDomme.ForeColor = Global.Tease_AI.My.MySettings.Default.GlitterNCDommeColor
 		Me.LBLGlitterNCDomme.Location = New System.Drawing.Point(220, 57)
 		Me.LBLGlitterNCDomme.Name = "LBLGlitterNCDomme"
@@ -9729,7 +9736,7 @@ Partial Class FrmSettings
 		'LBLGlitterSlider
 		'
 		Me.LBLGlitterSlider.BackColor = System.Drawing.Color.Transparent
-		Me.LBLGlitterSlider.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGlitterSlider.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGlitterSlider.ForeColor = System.Drawing.Color.Black
 		Me.LBLGlitterSlider.Location = New System.Drawing.Point(220, 96)
 		Me.LBLGlitterSlider.Name = "LBLGlitterSlider"
@@ -9740,19 +9747,21 @@ Partial Class FrmSettings
 		'
 		'CBCustom2
 		'
-		Me.CBCustom2.AutoSize = true
+		Me.CBCustom2.AutoSize = True
+		Me.CBCustom2.Checked = Global.Tease_AI.My.MySettings.Default.CB2Custom2
+		Me.CBCustom2.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CB2Custom2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBCustom2.ForeColor = System.Drawing.Color.Black
 		Me.CBCustom2.Location = New System.Drawing.Point(149, 121)
 		Me.CBCustom2.Name = "CBCustom2"
 		Me.CBCustom2.Size = New System.Drawing.Size(70, 17)
 		Me.CBCustom2.TabIndex = 161
 		Me.CBCustom2.Text = "Custom 2"
-		Me.CBCustom2.UseVisualStyleBackColor = true
+		Me.CBCustom2.UseVisualStyleBackColor = True
 		'
 		'GlitterSlider
 		'
-		Me.GlitterSlider.AutoSize = false
-		Me.GlitterSlider.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "GlitterDSlider", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GlitterSlider.AutoSize = False
+		Me.GlitterSlider.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "GlitterDSlider", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GlitterSlider.LargeChange = 1
 		Me.GlitterSlider.Location = New System.Drawing.Point(220, 118)
 		Me.GlitterSlider.Maximum = 9
@@ -9764,42 +9773,49 @@ Partial Class FrmSettings
 		'
 		'CBCustom1
 		'
-		Me.CBCustom1.AutoSize = true
+		Me.CBCustom1.AutoSize = True
+		Me.CBCustom1.Checked = Global.Tease_AI.My.MySettings.Default.CB2Custom1
+		Me.CBCustom1.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CB2Custom1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBCustom1.ForeColor = System.Drawing.Color.Black
 		Me.CBCustom1.Location = New System.Drawing.Point(149, 98)
 		Me.CBCustom1.Name = "CBCustom1"
 		Me.CBCustom1.Size = New System.Drawing.Size(70, 17)
 		Me.CBCustom1.TabIndex = 157
 		Me.CBCustom1.Text = "Custom 1"
-		Me.CBCustom1.UseVisualStyleBackColor = true
+		Me.CBCustom1.UseVisualStyleBackColor = True
 		'
 		'CBDaily
 		'
-		Me.CBDaily.AutoSize = true
+		Me.CBDaily.AutoSize = True
+		Me.CBDaily.Checked = Global.Tease_AI.My.MySettings.Default.CBDaily
+		Me.CBDaily.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBDaily", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBDaily.ForeColor = System.Drawing.Color.Black
 		Me.CBDaily.Location = New System.Drawing.Point(79, 121)
 		Me.CBDaily.Name = "CBDaily"
 		Me.CBDaily.Size = New System.Drawing.Size(49, 17)
 		Me.CBDaily.TabIndex = 156
 		Me.CBDaily.Text = "Daily"
-		Me.CBDaily.UseVisualStyleBackColor = true
+		Me.CBDaily.UseVisualStyleBackColor = True
 		'
 		'CBTrivia
 		'
-		Me.CBTrivia.AutoSize = true
+		Me.CBTrivia.AutoSize = True
+		Me.CBTrivia.Checked = Global.Tease_AI.My.MySettings.Default.CBTrivia
+		Me.CBTrivia.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.CBTrivia.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBTrivia", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBTrivia.ForeColor = System.Drawing.Color.Black
 		Me.CBTrivia.Location = New System.Drawing.Point(79, 98)
 		Me.CBTrivia.Name = "CBTrivia"
 		Me.CBTrivia.Size = New System.Drawing.Size(52, 17)
 		Me.CBTrivia.TabIndex = 155
 		Me.CBTrivia.Text = "Trivia"
-		Me.CBTrivia.UseVisualStyleBackColor = true
+		Me.CBTrivia.UseVisualStyleBackColor = True
 		'
 		'TBGlitterShortName
 		'
 		Me.TBGlitterShortName.BackColor = System.Drawing.Color.White
-		Me.TBGlitterShortName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GlitterSN", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TBGlitterShortName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBGlitterShortName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GlitterSN", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TBGlitterShortName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBGlitterShortName.ForeColor = System.Drawing.Color.Black
 		Me.TBGlitterShortName.Location = New System.Drawing.Point(79, 57)
 		Me.TBGlitterShortName.Name = "TBGlitterShortName"
@@ -9810,25 +9826,29 @@ Partial Class FrmSettings
 		'
 		'CBEgotist
 		'
-		Me.CBEgotist.AutoSize = true
+		Me.CBEgotist.AutoSize = True
+		Me.CBEgotist.Checked = Global.Tease_AI.My.MySettings.Default.CBEgotist
+		Me.CBEgotist.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBEgotist", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBEgotist.ForeColor = System.Drawing.Color.Black
 		Me.CBEgotist.Location = New System.Drawing.Point(9, 121)
 		Me.CBEgotist.Name = "CBEgotist"
 		Me.CBEgotist.Size = New System.Drawing.Size(58, 17)
 		Me.CBEgotist.TabIndex = 153
 		Me.CBEgotist.Text = "Egotist"
-		Me.CBEgotist.UseVisualStyleBackColor = true
+		Me.CBEgotist.UseVisualStyleBackColor = True
 		'
 		'CBTease
 		'
-		Me.CBTease.AutoSize = true
+		Me.CBTease.AutoSize = True
+		Me.CBTease.Checked = Global.Tease_AI.My.MySettings.Default.CBTease
+		Me.CBTease.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBTease", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBTease.ForeColor = System.Drawing.Color.Black
 		Me.CBTease.Location = New System.Drawing.Point(9, 98)
 		Me.CBTease.Name = "CBTease"
 		Me.CBTease.Size = New System.Drawing.Size(56, 17)
 		Me.CBTease.TabIndex = 152
 		Me.CBTease.Text = "Tease"
-		Me.CBTease.UseVisualStyleBackColor = true
+		Me.CBTease.UseVisualStyleBackColor = True
 		'
 		'GlitterAV
 		'
@@ -9838,7 +9858,7 @@ Partial Class FrmSettings
 		Me.GlitterAV.Size = New System.Drawing.Size(64, 64)
 		Me.GlitterAV.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GlitterAV.TabIndex = 149
-		Me.GlitterAV.TabStop = false
+		Me.GlitterAV.TabStop = False
 		'
 		'GBGlitter1
 		'
@@ -9857,45 +9877,45 @@ Partial Class FrmSettings
 		Me.GBGlitter1.Name = "GBGlitter1"
 		Me.GBGlitter1.Size = New System.Drawing.Size(344, 150)
 		Me.GBGlitter1.TabIndex = 161
-		Me.GBGlitter1.TabStop = false
+		Me.GBGlitter1.TabStop = False
 		Me.GBGlitter1.Text = "Contact 1"
 		'
 		'BtnContact1ImageDirClear
 		'
 		Me.BtnContact1ImageDirClear.BackColor = System.Drawing.Color.LightGray
-		Me.BtnContact1ImageDirClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BtnContact1ImageDirClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BtnContact1ImageDirClear.ForeColor = System.Drawing.Color.Black
 		Me.BtnContact1ImageDirClear.Location = New System.Drawing.Point(174, 93)
 		Me.BtnContact1ImageDirClear.Name = "BtnContact1ImageDirClear"
 		Me.BtnContact1ImageDirClear.Size = New System.Drawing.Size(39, 22)
 		Me.BtnContact1ImageDirClear.TabIndex = 181
 		Me.BtnContact1ImageDirClear.Text = "Clear"
-		Me.BtnContact1ImageDirClear.UseVisualStyleBackColor = false
+		Me.BtnContact1ImageDirClear.UseVisualStyleBackColor = False
 		'
 		'BtnContact1ImageDir
 		'
 		Me.BtnContact1ImageDir.BackColor = System.Drawing.Color.LightGray
-		Me.BtnContact1ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BtnContact1ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BtnContact1ImageDir.ForeColor = System.Drawing.Color.Black
 		Me.BtnContact1ImageDir.Location = New System.Drawing.Point(9, 93)
 		Me.BtnContact1ImageDir.Name = "BtnContact1ImageDir"
 		Me.BtnContact1ImageDir.Size = New System.Drawing.Size(160, 22)
 		Me.BtnContact1ImageDir.TabIndex = 177
 		Me.BtnContact1ImageDir.Text = "Set Contact1 Images Directory"
-		Me.BtnContact1ImageDir.UseVisualStyleBackColor = false
+		Me.BtnContact1ImageDir.UseVisualStyleBackColor = False
 		'
 		'LBLContact1ImageDir
 		'
 		Me.LBLContact1ImageDir.BackColor = System.Drawing.Color.LightGray
 		Me.LBLContact1ImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLContact1ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact1ImageDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLContact1ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLContact1ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact1ImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLContact1ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLContact1ImageDir.ForeColor = System.Drawing.Color.Black
 		Me.LBLContact1ImageDir.Location = New System.Drawing.Point(9, 121)
 		Me.LBLContact1ImageDir.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.LBLContact1ImageDir.MinimumSize = New System.Drawing.Size(204, 17)
 		Me.LBLContact1ImageDir.Name = "LBLContact1ImageDir"
-		Me.LBLContact1ImageDir.ReadOnly = true
+		Me.LBLContact1ImageDir.ReadOnly = True
 		Me.LBLContact1ImageDir.Size = New System.Drawing.Size(204, 17)
 		Me.LBLContact1ImageDir.TabIndex = 176
 		Me.LBLContact1ImageDir.Text = Global.Tease_AI.My.MySettings.Default.Contact1ImageDir
@@ -9903,21 +9923,21 @@ Partial Class FrmSettings
 		'BTNGlitter1
 		'
 		Me.BTNGlitter1.BackColor = System.Drawing.Color.LightGray
-		Me.BTNGlitter1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNGlitter1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNGlitter1.ForeColor = System.Drawing.Color.Black
 		Me.BTNGlitter1.Location = New System.Drawing.Point(220, 23)
 		Me.BTNGlitter1.Name = "BTNGlitter1"
 		Me.BTNGlitter1.Size = New System.Drawing.Size(115, 24)
 		Me.BTNGlitter1.TabIndex = 175
 		Me.BTNGlitter1.Text = "Choose Name Color"
-		Me.BTNGlitter1.UseVisualStyleBackColor = false
+		Me.BTNGlitter1.UseVisualStyleBackColor = False
 		'
 		'LBLGlitterNC1
 		'
 		Me.LBLGlitterNC1.BackColor = System.Drawing.Color.White
 		Me.LBLGlitterNC1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLGlitterNC1.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "GlitterNC1Color", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLGlitterNC1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGlitterNC1.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "GlitterNC1Color", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLGlitterNC1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGlitterNC1.ForeColor = Global.Tease_AI.My.MySettings.Default.GlitterNC1Color
 		Me.LBLGlitterNC1.Location = New System.Drawing.Point(220, 57)
 		Me.LBLGlitterNC1.Name = "LBLGlitterNC1"
@@ -9929,7 +9949,7 @@ Partial Class FrmSettings
 		'LBLGlitterSlider1
 		'
 		Me.LBLGlitterSlider1.BackColor = System.Drawing.Color.Transparent
-		Me.LBLGlitterSlider1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGlitterSlider1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGlitterSlider1.ForeColor = System.Drawing.Color.Black
 		Me.LBLGlitterSlider1.Location = New System.Drawing.Point(220, 96)
 		Me.LBLGlitterSlider1.Name = "LBLGlitterSlider1"
@@ -9940,8 +9960,8 @@ Partial Class FrmSettings
 		'
 		'GlitterSlider1
 		'
-		Me.GlitterSlider1.AutoSize = false
-		Me.GlitterSlider1.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "Glitter1Slider", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GlitterSlider1.AutoSize = False
+		Me.GlitterSlider1.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "Glitter1Slider", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GlitterSlider1.LargeChange = 1
 		Me.GlitterSlider1.Location = New System.Drawing.Point(220, 118)
 		Me.GlitterSlider1.Maximum = 9
@@ -9953,23 +9973,23 @@ Partial Class FrmSettings
 		'
 		'CBGlitter1
 		'
-		Me.CBGlitter1.AutoSize = true
+		Me.CBGlitter1.AutoSize = True
 		Me.CBGlitter1.Checked = Global.Tease_AI.My.MySettings.Default.CBGlitter1
 		Me.CBGlitter1.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBGlitter1.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitter1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBGlitter1.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitter1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBGlitter1.ForeColor = System.Drawing.Color.Black
 		Me.CBGlitter1.Location = New System.Drawing.Point(79, 26)
 		Me.CBGlitter1.Name = "CBGlitter1"
 		Me.CBGlitter1.Size = New System.Drawing.Size(122, 17)
 		Me.CBGlitter1.TabIndex = 151
 		Me.CBGlitter1.Text = "Enable This Contact"
-		Me.CBGlitter1.UseVisualStyleBackColor = true
+		Me.CBGlitter1.UseVisualStyleBackColor = True
 		'
 		'TBGlitter1
 		'
 		Me.TBGlitter1.BackColor = System.Drawing.Color.White
-		Me.TBGlitter1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Glitter1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TBGlitter1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBGlitter1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Glitter1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TBGlitter1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBGlitter1.ForeColor = System.Drawing.Color.Black
 		Me.TBGlitter1.Location = New System.Drawing.Point(79, 57)
 		Me.TBGlitter1.Name = "TBGlitter1"
@@ -9986,7 +10006,7 @@ Partial Class FrmSettings
 		Me.GlitterAV1.Size = New System.Drawing.Size(64, 64)
 		Me.GlitterAV1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GlitterAV1.TabIndex = 149
-		Me.GlitterAV1.TabStop = false
+		Me.GlitterAV1.TabStop = False
 		'
 		'GBGlitter3
 		'
@@ -10005,45 +10025,45 @@ Partial Class FrmSettings
 		Me.GBGlitter3.Name = "GBGlitter3"
 		Me.GBGlitter3.Size = New System.Drawing.Size(344, 150)
 		Me.GBGlitter3.TabIndex = 160
-		Me.GBGlitter3.TabStop = false
+		Me.GBGlitter3.TabStop = False
 		Me.GBGlitter3.Text = "Contact 3"
 		'
 		'BtnContact3ImageDirClear
 		'
 		Me.BtnContact3ImageDirClear.BackColor = System.Drawing.Color.LightGray
-		Me.BtnContact3ImageDirClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BtnContact3ImageDirClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BtnContact3ImageDirClear.ForeColor = System.Drawing.Color.Black
 		Me.BtnContact3ImageDirClear.Location = New System.Drawing.Point(174, 93)
 		Me.BtnContact3ImageDirClear.Name = "BtnContact3ImageDirClear"
 		Me.BtnContact3ImageDirClear.Size = New System.Drawing.Size(39, 22)
 		Me.BtnContact3ImageDirClear.TabIndex = 180
 		Me.BtnContact3ImageDirClear.Text = "Clear"
-		Me.BtnContact3ImageDirClear.UseVisualStyleBackColor = false
+		Me.BtnContact3ImageDirClear.UseVisualStyleBackColor = False
 		'
 		'BtnContact3ImageDir
 		'
 		Me.BtnContact3ImageDir.BackColor = System.Drawing.Color.LightGray
-		Me.BtnContact3ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BtnContact3ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BtnContact3ImageDir.ForeColor = System.Drawing.Color.Black
 		Me.BtnContact3ImageDir.Location = New System.Drawing.Point(9, 93)
 		Me.BtnContact3ImageDir.Name = "BtnContact3ImageDir"
 		Me.BtnContact3ImageDir.Size = New System.Drawing.Size(160, 22)
 		Me.BtnContact3ImageDir.TabIndex = 179
 		Me.BtnContact3ImageDir.Text = "Set Contact3 Images Directory"
-		Me.BtnContact3ImageDir.UseVisualStyleBackColor = false
+		Me.BtnContact3ImageDir.UseVisualStyleBackColor = False
 		'
 		'LBLContact3ImageDir
 		'
 		Me.LBLContact3ImageDir.BackColor = System.Drawing.Color.LightGray
 		Me.LBLContact3ImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLContact3ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact3ImageDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLContact3ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLContact3ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact3ImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLContact3ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLContact3ImageDir.ForeColor = System.Drawing.Color.Black
 		Me.LBLContact3ImageDir.Location = New System.Drawing.Point(9, 121)
 		Me.LBLContact3ImageDir.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.LBLContact3ImageDir.MinimumSize = New System.Drawing.Size(204, 17)
 		Me.LBLContact3ImageDir.Name = "LBLContact3ImageDir"
-		Me.LBLContact3ImageDir.ReadOnly = true
+		Me.LBLContact3ImageDir.ReadOnly = True
 		Me.LBLContact3ImageDir.Size = New System.Drawing.Size(204, 17)
 		Me.LBLContact3ImageDir.TabIndex = 178
 		Me.LBLContact3ImageDir.Text = Global.Tease_AI.My.MySettings.Default.Contact3ImageDir
@@ -10051,21 +10071,21 @@ Partial Class FrmSettings
 		'BTNGlitter3
 		'
 		Me.BTNGlitter3.BackColor = System.Drawing.Color.LightGray
-		Me.BTNGlitter3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNGlitter3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNGlitter3.ForeColor = System.Drawing.Color.Black
 		Me.BTNGlitter3.Location = New System.Drawing.Point(220, 23)
 		Me.BTNGlitter3.Name = "BTNGlitter3"
 		Me.BTNGlitter3.Size = New System.Drawing.Size(115, 24)
 		Me.BTNGlitter3.TabIndex = 175
 		Me.BTNGlitter3.Text = "Choose Name Color"
-		Me.BTNGlitter3.UseVisualStyleBackColor = false
+		Me.BTNGlitter3.UseVisualStyleBackColor = False
 		'
 		'LBLGlitterNC3
 		'
 		Me.LBLGlitterNC3.BackColor = System.Drawing.Color.White
 		Me.LBLGlitterNC3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLGlitterNC3.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "GlitterNC3Color", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLGlitterNC3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGlitterNC3.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "GlitterNC3Color", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLGlitterNC3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGlitterNC3.ForeColor = Global.Tease_AI.My.MySettings.Default.GlitterNC3Color
 		Me.LBLGlitterNC3.Location = New System.Drawing.Point(220, 57)
 		Me.LBLGlitterNC3.Name = "LBLGlitterNC3"
@@ -10077,7 +10097,7 @@ Partial Class FrmSettings
 		'LBLGlitterSlider3
 		'
 		Me.LBLGlitterSlider3.BackColor = System.Drawing.Color.Transparent
-		Me.LBLGlitterSlider3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGlitterSlider3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGlitterSlider3.ForeColor = System.Drawing.Color.Black
 		Me.LBLGlitterSlider3.Location = New System.Drawing.Point(220, 96)
 		Me.LBLGlitterSlider3.Name = "LBLGlitterSlider3"
@@ -10088,8 +10108,8 @@ Partial Class FrmSettings
 		'
 		'GlitterSlider3
 		'
-		Me.GlitterSlider3.AutoSize = false
-		Me.GlitterSlider3.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "Glitter3Slider", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GlitterSlider3.AutoSize = False
+		Me.GlitterSlider3.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "Glitter3Slider", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GlitterSlider3.LargeChange = 1
 		Me.GlitterSlider3.Location = New System.Drawing.Point(220, 118)
 		Me.GlitterSlider3.Maximum = 9
@@ -10101,23 +10121,23 @@ Partial Class FrmSettings
 		'
 		'CBGlitter3
 		'
-		Me.CBGlitter3.AutoSize = true
+		Me.CBGlitter3.AutoSize = True
 		Me.CBGlitter3.Checked = Global.Tease_AI.My.MySettings.Default.CBGlitter3
 		Me.CBGlitter3.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBGlitter3.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitter3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBGlitter3.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitter3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBGlitter3.ForeColor = System.Drawing.Color.Black
 		Me.CBGlitter3.Location = New System.Drawing.Point(79, 26)
 		Me.CBGlitter3.Name = "CBGlitter3"
 		Me.CBGlitter3.Size = New System.Drawing.Size(122, 17)
 		Me.CBGlitter3.TabIndex = 151
 		Me.CBGlitter3.Text = "Enable This Contact"
-		Me.CBGlitter3.UseVisualStyleBackColor = true
+		Me.CBGlitter3.UseVisualStyleBackColor = True
 		'
 		'TBGlitter3
 		'
 		Me.TBGlitter3.BackColor = System.Drawing.Color.White
-		Me.TBGlitter3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Glitter3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TBGlitter3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBGlitter3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Glitter3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TBGlitter3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBGlitter3.ForeColor = System.Drawing.Color.Black
 		Me.TBGlitter3.Location = New System.Drawing.Point(79, 57)
 		Me.TBGlitter3.Name = "TBGlitter3"
@@ -10134,7 +10154,7 @@ Partial Class FrmSettings
 		Me.GlitterAV3.Size = New System.Drawing.Size(64, 64)
 		Me.GlitterAV3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GlitterAV3.TabIndex = 149
-		Me.GlitterAV3.TabStop = false
+		Me.GlitterAV3.TabStop = False
 		'
 		'GBGlitter2
 		'
@@ -10153,45 +10173,45 @@ Partial Class FrmSettings
 		Me.GBGlitter2.Name = "GBGlitter2"
 		Me.GBGlitter2.Size = New System.Drawing.Size(344, 150)
 		Me.GBGlitter2.TabIndex = 151
-		Me.GBGlitter2.TabStop = false
+		Me.GBGlitter2.TabStop = False
 		Me.GBGlitter2.Text = "Contact 2"
 		'
 		'BtnContact2ImageDirClear
 		'
 		Me.BtnContact2ImageDirClear.BackColor = System.Drawing.Color.LightGray
-		Me.BtnContact2ImageDirClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BtnContact2ImageDirClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BtnContact2ImageDirClear.ForeColor = System.Drawing.Color.Black
 		Me.BtnContact2ImageDirClear.Location = New System.Drawing.Point(174, 93)
 		Me.BtnContact2ImageDirClear.Name = "BtnContact2ImageDirClear"
 		Me.BtnContact2ImageDirClear.Size = New System.Drawing.Size(39, 22)
 		Me.BtnContact2ImageDirClear.TabIndex = 181
 		Me.BtnContact2ImageDirClear.Text = "Clear"
-		Me.BtnContact2ImageDirClear.UseVisualStyleBackColor = false
+		Me.BtnContact2ImageDirClear.UseVisualStyleBackColor = False
 		'
 		'BtnContact2ImageDir
 		'
 		Me.BtnContact2ImageDir.BackColor = System.Drawing.Color.LightGray
-		Me.BtnContact2ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BtnContact2ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BtnContact2ImageDir.ForeColor = System.Drawing.Color.Black
 		Me.BtnContact2ImageDir.Location = New System.Drawing.Point(9, 93)
 		Me.BtnContact2ImageDir.Name = "BtnContact2ImageDir"
 		Me.BtnContact2ImageDir.Size = New System.Drawing.Size(160, 22)
 		Me.BtnContact2ImageDir.TabIndex = 179
 		Me.BtnContact2ImageDir.Text = "Set Contact2 Images Directory"
-		Me.BtnContact2ImageDir.UseVisualStyleBackColor = false
+		Me.BtnContact2ImageDir.UseVisualStyleBackColor = False
 		'
 		'LBLContact2ImageDir
 		'
 		Me.LBLContact2ImageDir.BackColor = System.Drawing.Color.LightGray
 		Me.LBLContact2ImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLContact2ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact2ImageDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLContact2ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLContact2ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact2ImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLContact2ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLContact2ImageDir.ForeColor = System.Drawing.Color.Black
 		Me.LBLContact2ImageDir.Location = New System.Drawing.Point(9, 121)
 		Me.LBLContact2ImageDir.MaximumSize = New System.Drawing.Size(2, 17)
 		Me.LBLContact2ImageDir.MinimumSize = New System.Drawing.Size(204, 17)
 		Me.LBLContact2ImageDir.Name = "LBLContact2ImageDir"
-		Me.LBLContact2ImageDir.ReadOnly = true
+		Me.LBLContact2ImageDir.ReadOnly = True
 		Me.LBLContact2ImageDir.Size = New System.Drawing.Size(204, 17)
 		Me.LBLContact2ImageDir.TabIndex = 178
 		Me.LBLContact2ImageDir.Text = Global.Tease_AI.My.MySettings.Default.Contact2ImageDir
@@ -10199,21 +10219,21 @@ Partial Class FrmSettings
 		'BTNGlitter2
 		'
 		Me.BTNGlitter2.BackColor = System.Drawing.Color.LightGray
-		Me.BTNGlitter2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNGlitter2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNGlitter2.ForeColor = System.Drawing.Color.Black
 		Me.BTNGlitter2.Location = New System.Drawing.Point(220, 23)
 		Me.BTNGlitter2.Name = "BTNGlitter2"
 		Me.BTNGlitter2.Size = New System.Drawing.Size(115, 24)
 		Me.BTNGlitter2.TabIndex = 167
 		Me.BTNGlitter2.Text = "Choose Name Color"
-		Me.BTNGlitter2.UseVisualStyleBackColor = false
+		Me.BTNGlitter2.UseVisualStyleBackColor = False
 		'
 		'LBLGlitterNC2
 		'
 		Me.LBLGlitterNC2.BackColor = System.Drawing.Color.White
 		Me.LBLGlitterNC2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLGlitterNC2.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "GlitterNC2Color", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLGlitterNC2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGlitterNC2.DataBindings.Add(New System.Windows.Forms.Binding("ForeColor", Global.Tease_AI.My.MySettings.Default, "GlitterNC2Color", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLGlitterNC2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGlitterNC2.ForeColor = Global.Tease_AI.My.MySettings.Default.GlitterNC2Color
 		Me.LBLGlitterNC2.Location = New System.Drawing.Point(220, 57)
 		Me.LBLGlitterNC2.Name = "LBLGlitterNC2"
@@ -10225,7 +10245,7 @@ Partial Class FrmSettings
 		'LBLGlitterSlider2
 		'
 		Me.LBLGlitterSlider2.BackColor = System.Drawing.Color.Transparent
-		Me.LBLGlitterSlider2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGlitterSlider2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGlitterSlider2.ForeColor = System.Drawing.Color.Black
 		Me.LBLGlitterSlider2.Location = New System.Drawing.Point(220, 96)
 		Me.LBLGlitterSlider2.Name = "LBLGlitterSlider2"
@@ -10236,8 +10256,8 @@ Partial Class FrmSettings
 		'
 		'GlitterSlider2
 		'
-		Me.GlitterSlider2.AutoSize = false
-		Me.GlitterSlider2.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "Glitter2Slider", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GlitterSlider2.AutoSize = False
+		Me.GlitterSlider2.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "Glitter2Slider", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GlitterSlider2.LargeChange = 1
 		Me.GlitterSlider2.Location = New System.Drawing.Point(220, 118)
 		Me.GlitterSlider2.Maximum = 9
@@ -10249,23 +10269,23 @@ Partial Class FrmSettings
 		'
 		'CBGlitter2
 		'
-		Me.CBGlitter2.AutoSize = true
+		Me.CBGlitter2.AutoSize = True
 		Me.CBGlitter2.Checked = Global.Tease_AI.My.MySettings.Default.CBGlitter2
 		Me.CBGlitter2.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBGlitter2.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitter2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBGlitter2.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitter2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBGlitter2.ForeColor = System.Drawing.Color.Black
 		Me.CBGlitter2.Location = New System.Drawing.Point(79, 26)
 		Me.CBGlitter2.Name = "CBGlitter2"
 		Me.CBGlitter2.Size = New System.Drawing.Size(122, 17)
 		Me.CBGlitter2.TabIndex = 151
 		Me.CBGlitter2.Text = "Enable This Contact"
-		Me.CBGlitter2.UseVisualStyleBackColor = true
+		Me.CBGlitter2.UseVisualStyleBackColor = True
 		'
 		'TBGlitter2
 		'
 		Me.TBGlitter2.BackColor = System.Drawing.Color.White
-		Me.TBGlitter2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Glitter2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.TBGlitter2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.TBGlitter2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Glitter2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TBGlitter2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.TBGlitter2.ForeColor = System.Drawing.Color.Black
 		Me.TBGlitter2.Location = New System.Drawing.Point(79, 57)
 		Me.TBGlitter2.Name = "TBGlitter2"
@@ -10282,7 +10302,7 @@ Partial Class FrmSettings
 		Me.GlitterAV2.Size = New System.Drawing.Size(64, 64)
 		Me.GlitterAV2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GlitterAV2.TabIndex = 149
-		Me.GlitterAV2.TabStop = false
+		Me.GlitterAV2.TabStop = False
 		'
 		'TpGames
 		'
@@ -10303,42 +10323,42 @@ Partial Class FrmSettings
 		'
 		'CBIncludeGifs
 		'
-		Me.CBIncludeGifs.AutoSize = true
+		Me.CBIncludeGifs.AutoSize = True
 		Me.CBIncludeGifs.Checked = Global.Tease_AI.My.MySettings.Default.CBIncludeGifs
 		Me.CBIncludeGifs.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBIncludeGifs.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIncludeGifs", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBIncludeGifs.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBIncludeGifs", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CBIncludeGifs.Location = New System.Drawing.Point(528, 351)
 		Me.CBIncludeGifs.Name = "CBIncludeGifs"
 		Me.CBIncludeGifs.Size = New System.Drawing.Size(154, 17)
 		Me.CBIncludeGifs.TabIndex = 5
 		Me.CBIncludeGifs.Text = "Match Game Includes Gifs "
-		Me.CBIncludeGifs.UseVisualStyleBackColor = true
+		Me.CBIncludeGifs.UseVisualStyleBackColor = True
 		'
 		'LblCardsSetupNote
 		'
 		Me.LblCardsSetupNote.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LblCardsSetupNote.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LblCardsSetupNote.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LblCardsSetupNote.Location = New System.Drawing.Point(523, 249)
 		Me.LblCardsSetupNote.Name = "LblCardsSetupNote"
 		Me.LblCardsSetupNote.Size = New System.Drawing.Size(171, 93)
 		Me.LblCardsSetupNote.TabIndex = 4
-		Me.LblCardsSetupNote.Text = "Each of the pictures in this tab MUST be set before the Games app can be selected"& _ 
-    "!"
+		Me.LblCardsSetupNote.Text = "Each of the pictures in this tab MUST be set before the Games app can be selected" &
+	"!"
 		Me.LblCardsSetupNote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'CBGameSounds
 		'
-		Me.CBGameSounds.AutoSize = true
-		Me.CBGameSounds.Checked = true
+		Me.CBGameSounds.AutoSize = True
+		Me.CBGameSounds.Checked = True
 		Me.CBGameSounds.CheckState = System.Windows.Forms.CheckState.Checked
-		Me.CBGameSounds.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBGameSounds.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBGameSounds.ForeColor = System.Drawing.Color.Black
 		Me.CBGameSounds.Location = New System.Drawing.Point(528, 379)
 		Me.CBGameSounds.Name = "CBGameSounds"
 		Me.CBGameSounds.Size = New System.Drawing.Size(116, 17)
 		Me.CBGameSounds.TabIndex = 6
 		Me.CBGameSounds.Text = "Play Game Sounds"
-		Me.CBGameSounds.UseVisualStyleBackColor = true
+		Me.CBGameSounds.UseVisualStyleBackColor = True
 		'
 		'GbxCardsGold
 		'
@@ -10358,12 +10378,12 @@ Partial Class FrmSettings
 		Me.GbxCardsGold.Name = "GbxCardsGold"
 		Me.GbxCardsGold.Size = New System.Drawing.Size(166, 398)
 		Me.GbxCardsGold.TabIndex = 2
-		Me.GbxCardsGold.TabStop = false
+		Me.GbxCardsGold.TabStop = False
 		Me.GbxCardsGold.Text = "Gold Cards"
 		'
 		'GN6
 		'
-		Me.GN6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN6", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GN6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN6", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GN6.Location = New System.Drawing.Point(86, 367)
 		Me.GN6.Name = "GN6"
 		Me.GN6.Size = New System.Drawing.Size(71, 20)
@@ -10375,7 +10395,7 @@ Partial Class FrmSettings
 		'
 		Me.GP6.BackColor = System.Drawing.Color.Silver
 		Me.GP6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP6.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP6", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GP6.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP6", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GP6.ImageLocation = Global.Tease_AI.My.MySettings.Default.GP6
 		Me.GP6.InitialImage = Nothing
 		Me.GP6.Location = New System.Drawing.Point(86, 268)
@@ -10383,11 +10403,11 @@ Partial Class FrmSettings
 		Me.GP6.Size = New System.Drawing.Size(71, 93)
 		Me.GP6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GP6.TabIndex = 17
-		Me.GP6.TabStop = false
+		Me.GP6.TabStop = False
 		'
 		'GN2
 		'
-		Me.GN2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GN2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GN2.Location = New System.Drawing.Point(86, 117)
 		Me.GN2.Name = "GN2"
 		Me.GN2.Size = New System.Drawing.Size(71, 20)
@@ -10399,7 +10419,7 @@ Partial Class FrmSettings
 		'
 		Me.GP2.BackColor = System.Drawing.Color.Silver
 		Me.GP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP2.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GP2.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GP2.ImageLocation = Global.Tease_AI.My.MySettings.Default.GP2
 		Me.GP2.InitialImage = Nothing
 		Me.GP2.Location = New System.Drawing.Point(86, 17)
@@ -10407,13 +10427,13 @@ Partial Class FrmSettings
 		Me.GP2.Size = New System.Drawing.Size(71, 94)
 		Me.GP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GP2.TabIndex = 9
-		Me.GP2.TabStop = false
+		Me.GP2.TabStop = False
 		'
 		'GP5
 		'
 		Me.GP5.BackColor = System.Drawing.Color.Silver
 		Me.GP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP5.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP5", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GP5.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP5", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GP5.ImageLocation = Global.Tease_AI.My.MySettings.Default.GP5
 		Me.GP5.InitialImage = Nothing
 		Me.GP5.Location = New System.Drawing.Point(9, 268)
@@ -10421,11 +10441,11 @@ Partial Class FrmSettings
 		Me.GP5.Size = New System.Drawing.Size(71, 93)
 		Me.GP5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GP5.TabIndex = 15
-		Me.GP5.TabStop = false
+		Me.GP5.TabStop = False
 		'
 		'GN1
 		'
-		Me.GN1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GN1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GN1.Location = New System.Drawing.Point(9, 117)
 		Me.GN1.Name = "GN1"
 		Me.GN1.Size = New System.Drawing.Size(71, 20)
@@ -10437,7 +10457,7 @@ Partial Class FrmSettings
 		'
 		Me.GP1.BackColor = System.Drawing.Color.Silver
 		Me.GP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GP1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GP1.ImageLocation = Global.Tease_AI.My.MySettings.Default.GP1
 		Me.GP1.InitialImage = Nothing
 		Me.GP1.Location = New System.Drawing.Point(9, 17)
@@ -10445,11 +10465,11 @@ Partial Class FrmSettings
 		Me.GP1.Size = New System.Drawing.Size(71, 94)
 		Me.GP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GP1.TabIndex = 0
-		Me.GP1.TabStop = false
+		Me.GP1.TabStop = False
 		'
 		'GN5
 		'
-		Me.GN5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN5", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GN5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN5", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GN5.Location = New System.Drawing.Point(9, 367)
 		Me.GN5.Name = "GN5"
 		Me.GN5.Size = New System.Drawing.Size(71, 20)
@@ -10459,7 +10479,7 @@ Partial Class FrmSettings
 		'
 		'GN3
 		'
-		Me.GN3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GN3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GN3.Location = New System.Drawing.Point(9, 242)
 		Me.GN3.Name = "GN3"
 		Me.GN3.Size = New System.Drawing.Size(71, 20)
@@ -10471,7 +10491,7 @@ Partial Class FrmSettings
 		'
 		Me.GP3.BackColor = System.Drawing.Color.Silver
 		Me.GP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP3.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GP3.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GP3.ImageLocation = Global.Tease_AI.My.MySettings.Default.GP3
 		Me.GP3.InitialImage = Nothing
 		Me.GP3.Location = New System.Drawing.Point(9, 143)
@@ -10479,13 +10499,13 @@ Partial Class FrmSettings
 		Me.GP3.Size = New System.Drawing.Size(71, 93)
 		Me.GP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GP3.TabIndex = 11
-		Me.GP3.TabStop = false
+		Me.GP3.TabStop = False
 		'
 		'GP4
 		'
 		Me.GP4.BackColor = System.Drawing.Color.Silver
 		Me.GP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.GP4.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP4", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GP4.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "GP4", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GP4.ImageLocation = Global.Tease_AI.My.MySettings.Default.GP4
 		Me.GP4.InitialImage = Nothing
 		Me.GP4.Location = New System.Drawing.Point(86, 143)
@@ -10493,11 +10513,11 @@ Partial Class FrmSettings
 		Me.GP4.Size = New System.Drawing.Size(71, 93)
 		Me.GP4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.GP4.TabIndex = 13
-		Me.GP4.TabStop = false
+		Me.GP4.TabStop = False
 		'
 		'GN4
 		'
-		Me.GN4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN4", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.GN4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "GN4", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.GN4.Location = New System.Drawing.Point(86, 242)
 		Me.GN4.Name = "GN4"
 		Me.GN4.Size = New System.Drawing.Size(71, 20)
@@ -10512,14 +10532,14 @@ Partial Class FrmSettings
 		Me.GbxCardsBackground.Name = "GbxCardsBackground"
 		Me.GbxCardsBackground.Size = New System.Drawing.Size(172, 236)
 		Me.GbxCardsBackground.TabIndex = 3
-		Me.GbxCardsBackground.TabStop = false
+		Me.GbxCardsBackground.TabStop = False
 		Me.GbxCardsBackground.Text = "Card Background"
 		'
 		'CardBack
 		'
 		Me.CardBack.BackColor = System.Drawing.Color.Silver
 		Me.CardBack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.CardBack.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "CardBack", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CardBack.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "CardBack", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.CardBack.ImageLocation = Global.Tease_AI.My.MySettings.Default.CardBack
 		Me.CardBack.InitialImage = Nothing
 		Me.CardBack.Location = New System.Drawing.Point(17, 28)
@@ -10527,7 +10547,7 @@ Partial Class FrmSettings
 		Me.CardBack.Size = New System.Drawing.Size(138, 179)
 		Me.CardBack.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.CardBack.TabIndex = 18
-		Me.CardBack.TabStop = false
+		Me.CardBack.TabStop = False
 		'
 		'GbxCardsBronze
 		'
@@ -10547,12 +10567,12 @@ Partial Class FrmSettings
 		Me.GbxCardsBronze.Name = "GbxCardsBronze"
 		Me.GbxCardsBronze.Size = New System.Drawing.Size(166, 399)
 		Me.GbxCardsBronze.TabIndex = 0
-		Me.GbxCardsBronze.TabStop = false
+		Me.GbxCardsBronze.TabStop = False
 		Me.GbxCardsBronze.Text = "Bronze Cards"
 		'
 		'BN6
 		'
-		Me.BN6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN6", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BN6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN6", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BN6.Location = New System.Drawing.Point(86, 368)
 		Me.BN6.Name = "BN6"
 		Me.BN6.Size = New System.Drawing.Size(71, 20)
@@ -10562,7 +10582,7 @@ Partial Class FrmSettings
 		'
 		'BN3
 		'
-		Me.BN3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BN3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BN3.Location = New System.Drawing.Point(9, 243)
 		Me.BN3.Name = "BN3"
 		Me.BN3.Size = New System.Drawing.Size(71, 20)
@@ -10574,7 +10594,7 @@ Partial Class FrmSettings
 		'
 		Me.BP3.BackColor = System.Drawing.Color.Silver
 		Me.BP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP3.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BP3.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BP3.ImageLocation = Global.Tease_AI.My.MySettings.Default.BP3
 		Me.BP3.InitialImage = Nothing
 		Me.BP3.Location = New System.Drawing.Point(9, 144)
@@ -10582,13 +10602,13 @@ Partial Class FrmSettings
 		Me.BP3.Size = New System.Drawing.Size(71, 93)
 		Me.BP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.BP3.TabIndex = 11
-		Me.BP3.TabStop = false
+		Me.BP3.TabStop = False
 		'
 		'BP6
 		'
 		Me.BP6.BackColor = System.Drawing.Color.Silver
 		Me.BP6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP6.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP6", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BP6.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP6", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BP6.ImageLocation = Global.Tease_AI.My.MySettings.Default.BP6
 		Me.BP6.InitialImage = Nothing
 		Me.BP6.Location = New System.Drawing.Point(86, 269)
@@ -10596,11 +10616,11 @@ Partial Class FrmSettings
 		Me.BP6.Size = New System.Drawing.Size(71, 93)
 		Me.BP6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.BP6.TabIndex = 17
-		Me.BP6.TabStop = false
+		Me.BP6.TabStop = False
 		'
 		'BN2
 		'
-		Me.BN2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BN2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BN2.Location = New System.Drawing.Point(86, 118)
 		Me.BN2.Name = "BN2"
 		Me.BN2.Size = New System.Drawing.Size(71, 20)
@@ -10610,7 +10630,7 @@ Partial Class FrmSettings
 		'
 		'BN5
 		'
-		Me.BN5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN5", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BN5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN5", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BN5.Location = New System.Drawing.Point(9, 368)
 		Me.BN5.Name = "BN5"
 		Me.BN5.Size = New System.Drawing.Size(71, 20)
@@ -10622,7 +10642,7 @@ Partial Class FrmSettings
 		'
 		Me.BP5.BackColor = System.Drawing.Color.Silver
 		Me.BP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP5.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP5", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BP5.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP5", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BP5.ImageLocation = Global.Tease_AI.My.MySettings.Default.BP5
 		Me.BP5.InitialImage = Nothing
 		Me.BP5.Location = New System.Drawing.Point(9, 269)
@@ -10630,13 +10650,13 @@ Partial Class FrmSettings
 		Me.BP5.Size = New System.Drawing.Size(71, 93)
 		Me.BP5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.BP5.TabIndex = 15
-		Me.BP5.TabStop = false
+		Me.BP5.TabStop = False
 		'
 		'BP2
 		'
 		Me.BP2.BackColor = System.Drawing.Color.Silver
 		Me.BP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP2.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BP2.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BP2.ImageLocation = Global.Tease_AI.My.MySettings.Default.BP2
 		Me.BP2.InitialImage = Nothing
 		Me.BP2.Location = New System.Drawing.Point(86, 19)
@@ -10644,11 +10664,11 @@ Partial Class FrmSettings
 		Me.BP2.Size = New System.Drawing.Size(71, 93)
 		Me.BP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.BP2.TabIndex = 9
-		Me.BP2.TabStop = false
+		Me.BP2.TabStop = False
 		'
 		'BN1
 		'
-		Me.BN1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BN1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BN1.Location = New System.Drawing.Point(9, 118)
 		Me.BN1.Name = "BN1"
 		Me.BN1.Size = New System.Drawing.Size(71, 20)
@@ -10658,7 +10678,7 @@ Partial Class FrmSettings
 		'
 		'BN4
 		'
-		Me.BN4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN4", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BN4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "BN4", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BN4.Location = New System.Drawing.Point(86, 243)
 		Me.BN4.Name = "BN4"
 		Me.BN4.Size = New System.Drawing.Size(71, 20)
@@ -10670,7 +10690,7 @@ Partial Class FrmSettings
 		'
 		Me.BP4.BackColor = System.Drawing.Color.Silver
 		Me.BP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP4.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP4", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BP4.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP4", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BP4.ImageLocation = Global.Tease_AI.My.MySettings.Default.BP4
 		Me.BP4.InitialImage = Nothing
 		Me.BP4.Location = New System.Drawing.Point(86, 144)
@@ -10678,14 +10698,14 @@ Partial Class FrmSettings
 		Me.BP4.Size = New System.Drawing.Size(71, 93)
 		Me.BP4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.BP4.TabIndex = 13
-		Me.BP4.TabStop = false
+		Me.BP4.TabStop = False
 		'
 		'BP1
 		'
 		Me.BP1.BackColor = System.Drawing.Color.Silver
 		Me.BP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.BP1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP1", true))
-		Me.BP1.DataBindings.Add(New System.Windows.Forms.Binding("Tag", Global.Tease_AI.My.MySettings.Default, "BP1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.BP1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "BP1", True))
+		Me.BP1.DataBindings.Add(New System.Windows.Forms.Binding("Tag", Global.Tease_AI.My.MySettings.Default, "BP1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.BP1.ImageLocation = Global.Tease_AI.My.MySettings.Default.BP1
 		Me.BP1.InitialImage = Nothing
 		Me.BP1.Location = New System.Drawing.Point(9, 19)
@@ -10693,7 +10713,7 @@ Partial Class FrmSettings
 		Me.BP1.Size = New System.Drawing.Size(71, 93)
 		Me.BP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.BP1.TabIndex = 0
-		Me.BP1.TabStop = false
+		Me.BP1.TabStop = False
 		Me.BP1.Tag = Global.Tease_AI.My.MySettings.Default.BP1
 		'
 		'GbxCardsSilver
@@ -10714,12 +10734,12 @@ Partial Class FrmSettings
 		Me.GbxCardsSilver.Name = "GbxCardsSilver"
 		Me.GbxCardsSilver.Size = New System.Drawing.Size(166, 399)
 		Me.GbxCardsSilver.TabIndex = 1
-		Me.GbxCardsSilver.TabStop = false
+		Me.GbxCardsSilver.TabStop = False
 		Me.GbxCardsSilver.Text = "Silver Cards"
 		'
 		'SN6
 		'
-		Me.SN6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN6", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SN6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN6", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SN6.Location = New System.Drawing.Point(86, 368)
 		Me.SN6.Name = "SN6"
 		Me.SN6.Size = New System.Drawing.Size(71, 20)
@@ -10731,7 +10751,7 @@ Partial Class FrmSettings
 		'
 		Me.SP6.BackColor = System.Drawing.Color.Silver
 		Me.SP6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP6.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP6", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SP6.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP6", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SP6.ImageLocation = Global.Tease_AI.My.MySettings.Default.SP6
 		Me.SP6.InitialImage = Nothing
 		Me.SP6.Location = New System.Drawing.Point(86, 269)
@@ -10739,11 +10759,11 @@ Partial Class FrmSettings
 		Me.SP6.Size = New System.Drawing.Size(71, 93)
 		Me.SP6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.SP6.TabIndex = 17
-		Me.SP6.TabStop = false
+		Me.SP6.TabStop = False
 		'
 		'SN2
 		'
-		Me.SN2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SN2.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SN2.Location = New System.Drawing.Point(86, 118)
 		Me.SN2.Name = "SN2"
 		Me.SN2.Size = New System.Drawing.Size(71, 20)
@@ -10755,7 +10775,7 @@ Partial Class FrmSettings
 		'
 		Me.SP2.BackColor = System.Drawing.Color.Silver
 		Me.SP2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP2.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP2", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SP2.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP2", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SP2.ImageLocation = Global.Tease_AI.My.MySettings.Default.SP2
 		Me.SP2.InitialImage = Nothing
 		Me.SP2.Location = New System.Drawing.Point(86, 19)
@@ -10763,11 +10783,11 @@ Partial Class FrmSettings
 		Me.SP2.Size = New System.Drawing.Size(71, 93)
 		Me.SP2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.SP2.TabIndex = 9
-		Me.SP2.TabStop = false
+		Me.SP2.TabStop = False
 		'
 		'SN1
 		'
-		Me.SN1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SN1.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SN1.Location = New System.Drawing.Point(9, 118)
 		Me.SN1.Name = "SN1"
 		Me.SN1.Size = New System.Drawing.Size(71, 20)
@@ -10779,7 +10799,7 @@ Partial Class FrmSettings
 		'
 		Me.SP5.BackColor = System.Drawing.Color.Silver
 		Me.SP5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP5.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP5", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SP5.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP5", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SP5.ImageLocation = Global.Tease_AI.My.MySettings.Default.SP5
 		Me.SP5.InitialImage = Nothing
 		Me.SP5.Location = New System.Drawing.Point(9, 269)
@@ -10787,13 +10807,13 @@ Partial Class FrmSettings
 		Me.SP5.Size = New System.Drawing.Size(71, 93)
 		Me.SP5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.SP5.TabIndex = 15
-		Me.SP5.TabStop = false
+		Me.SP5.TabStop = False
 		'
 		'SP1
 		'
 		Me.SP1.BackColor = System.Drawing.Color.Silver
 		Me.SP1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP1", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SP1.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP1", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SP1.ImageLocation = Global.Tease_AI.My.MySettings.Default.SP1
 		Me.SP1.InitialImage = Nothing
 		Me.SP1.Location = New System.Drawing.Point(9, 19)
@@ -10801,11 +10821,11 @@ Partial Class FrmSettings
 		Me.SP1.Size = New System.Drawing.Size(71, 93)
 		Me.SP1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.SP1.TabIndex = 0
-		Me.SP1.TabStop = false
+		Me.SP1.TabStop = False
 		'
 		'SN5
 		'
-		Me.SN5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN5", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SN5.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN5", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SN5.Location = New System.Drawing.Point(9, 368)
 		Me.SN5.Name = "SN5"
 		Me.SN5.Size = New System.Drawing.Size(71, 20)
@@ -10815,7 +10835,7 @@ Partial Class FrmSettings
 		'
 		'SN3
 		'
-		Me.SN3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SN3.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SN3.Location = New System.Drawing.Point(9, 243)
 		Me.SN3.Name = "SN3"
 		Me.SN3.Size = New System.Drawing.Size(71, 20)
@@ -10825,7 +10845,7 @@ Partial Class FrmSettings
 		'
 		'SN4
 		'
-		Me.SN4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN4", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SN4.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "SN4", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SN4.Location = New System.Drawing.Point(86, 243)
 		Me.SN4.Name = "SN4"
 		Me.SN4.Size = New System.Drawing.Size(71, 20)
@@ -10837,7 +10857,7 @@ Partial Class FrmSettings
 		'
 		Me.SP3.BackColor = System.Drawing.Color.Silver
 		Me.SP3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP3.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP3", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SP3.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SP3.ImageLocation = Global.Tease_AI.My.MySettings.Default.SP3
 		Me.SP3.InitialImage = Nothing
 		Me.SP3.Location = New System.Drawing.Point(9, 144)
@@ -10845,13 +10865,13 @@ Partial Class FrmSettings
 		Me.SP3.Size = New System.Drawing.Size(71, 93)
 		Me.SP3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.SP3.TabIndex = 11
-		Me.SP3.TabStop = false
+		Me.SP3.TabStop = False
 		'
 		'SP4
 		'
 		Me.SP4.BackColor = System.Drawing.Color.Silver
 		Me.SP4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.SP4.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP4", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.SP4.DataBindings.Add(New System.Windows.Forms.Binding("ImageLocation", Global.Tease_AI.My.MySettings.Default, "SP4", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.SP4.ImageLocation = Global.Tease_AI.My.MySettings.Default.SP4
 		Me.SP4.InitialImage = Nothing
 		Me.SP4.Location = New System.Drawing.Point(86, 144)
@@ -10859,7 +10879,7 @@ Partial Class FrmSettings
 		Me.SP4.Size = New System.Drawing.Size(71, 93)
 		Me.SP4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.SP4.TabIndex = 13
-		Me.SP4.TabStop = false
+		Me.SP4.TabStop = False
 		'
 		'TabPage6
 		'
@@ -10897,14 +10917,14 @@ Partial Class FrmSettings
 		'TBWishlistComment
 		'
 		Me.TBWishlistComment.Location = New System.Drawing.Point(16, 173)
-		Me.TBWishlistComment.Multiline = true
+		Me.TBWishlistComment.Multiline = True
 		Me.TBWishlistComment.Name = "TBWishlistComment"
 		Me.TBWishlistComment.Size = New System.Drawing.Size(217, 118)
 		Me.TBWishlistComment.TabIndex = 172
 		'
 		'Label32
 		'
-		Me.Label32.AutoSize = true
+		Me.Label32.AutoSize = True
 		Me.Label32.Location = New System.Drawing.Point(13, 4)
 		Me.Label32.Name = "Label32"
 		Me.Label32.Size = New System.Drawing.Size(58, 13)
@@ -10920,17 +10940,17 @@ Partial Class FrmSettings
 		'
 		'radioGold
 		'
-		Me.radioGold.AutoSize = true
+		Me.radioGold.AutoSize = True
 		Me.radioGold.Location = New System.Drawing.Point(167, 125)
 		Me.radioGold.Name = "radioGold"
 		Me.radioGold.Size = New System.Drawing.Size(47, 17)
 		Me.radioGold.TabIndex = 176
 		Me.radioGold.Text = "Gold"
-		Me.radioGold.UseVisualStyleBackColor = true
+		Me.radioGold.UseVisualStyleBackColor = True
 		'
 		'Label42
 		'
-		Me.Label42.AutoSize = true
+		Me.Label42.AutoSize = True
 		Me.Label42.Location = New System.Drawing.Point(13, 56)
 		Me.Label42.Name = "Label42"
 		Me.Label42.Size = New System.Drawing.Size(75, 13)
@@ -10939,15 +10959,15 @@ Partial Class FrmSettings
 		'
 		'radioSilver
 		'
-		Me.radioSilver.AutoSize = true
-		Me.radioSilver.Checked = true
+		Me.radioSilver.AutoSize = True
+		Me.radioSilver.Checked = True
 		Me.radioSilver.Location = New System.Drawing.Point(100, 125)
 		Me.radioSilver.Name = "radioSilver"
 		Me.radioSilver.Size = New System.Drawing.Size(51, 17)
 		Me.radioSilver.TabIndex = 175
-		Me.radioSilver.TabStop = true
+		Me.radioSilver.TabStop = True
 		Me.radioSilver.Text = "Silver"
-		Me.radioSilver.UseVisualStyleBackColor = true
+		Me.radioSilver.UseVisualStyleBackColor = True
 		'
 		'TBWishlistURL
 		'
@@ -10968,7 +10988,7 @@ Partial Class FrmSettings
 		'
 		'Label48
 		'
-		Me.Label48.AutoSize = true
+		Me.Label48.AutoSize = True
 		Me.Label48.Location = New System.Drawing.Point(13, 157)
 		Me.Label48.Name = "Label48"
 		Me.Label48.Size = New System.Drawing.Size(74, 13)
@@ -10977,7 +10997,7 @@ Partial Class FrmSettings
 		'
 		'Label73
 		'
-		Me.Label73.AutoSize = true
+		Me.Label73.AutoSize = True
 		Me.Label73.Location = New System.Drawing.Point(13, 108)
 		Me.Label73.Name = "Label73"
 		Me.Label73.Size = New System.Drawing.Size(51, 13)
@@ -10986,7 +11006,7 @@ Partial Class FrmSettings
 		'
 		'Label107
 		'
-		Me.Label107.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label107.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label107.Location = New System.Drawing.Point(38, 5)
 		Me.Label107.Name = "Label107"
 		Me.Label107.Size = New System.Drawing.Size(252, 47)
@@ -11001,11 +11021,11 @@ Partial Class FrmSettings
 		Me.BTNWishlistCreate.Size = New System.Drawing.Size(252, 33)
 		Me.BTNWishlistCreate.TabIndex = 177
 		Me.BTNWishlistCreate.Text = "Create Wishlist File"
-		Me.BTNWishlistCreate.UseVisualStyleBackColor = true
+		Me.BTNWishlistCreate.UseVisualStyleBackColor = True
 		'
 		'Label18
 		'
-		Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label18.Location = New System.Drawing.Point(409, 5)
 		Me.Label18.Name = "Label18"
 		Me.Label18.Size = New System.Drawing.Size(250, 23)
@@ -11031,17 +11051,17 @@ Partial Class FrmSettings
 		'WishlistCostSilver
 		'
 		Me.WishlistCostSilver.BackColor = System.Drawing.Color.Transparent
-		Me.WishlistCostSilver.Image = CType(resources.GetObject("WishlistCostSilver.Image"),System.Drawing.Image)
+		Me.WishlistCostSilver.Image = CType(resources.GetObject("WishlistCostSilver.Image"), System.Drawing.Image)
 		Me.WishlistCostSilver.Location = New System.Drawing.Point(107, 206)
 		Me.WishlistCostSilver.Name = "WishlistCostSilver"
 		Me.WishlistCostSilver.Size = New System.Drawing.Size(28, 28)
 		Me.WishlistCostSilver.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.WishlistCostSilver.TabIndex = 111
-		Me.WishlistCostSilver.TabStop = false
+		Me.WishlistCostSilver.TabStop = False
 		'
 		'LBLWishListText
 		'
-		Me.LBLWishListText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLWishListText.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLWishListText.Location = New System.Drawing.Point(14, 247)
 		Me.LBLWishListText.Name = "LBLWishListText"
 		Me.LBLWishListText.Size = New System.Drawing.Size(220, 109)
@@ -11049,7 +11069,7 @@ Partial Class FrmSettings
 		'
 		'LBLWishlistCost
 		'
-		Me.LBLWishlistCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLWishlistCost.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLWishlistCost.ForeColor = System.Drawing.Color.Black
 		Me.LBLWishlistCost.Location = New System.Drawing.Point(139, 206)
 		Me.LBLWishlistCost.Name = "LBLWishlistCost"
@@ -11061,18 +11081,18 @@ Partial Class FrmSettings
 		'WishlistCostGold
 		'
 		Me.WishlistCostGold.BackColor = System.Drawing.Color.Transparent
-		Me.WishlistCostGold.Image = CType(resources.GetObject("WishlistCostGold.Image"),System.Drawing.Image)
+		Me.WishlistCostGold.Image = CType(resources.GetObject("WishlistCostGold.Image"), System.Drawing.Image)
 		Me.WishlistCostGold.Location = New System.Drawing.Point(107, 206)
 		Me.WishlistCostGold.Name = "WishlistCostGold"
 		Me.WishlistCostGold.Size = New System.Drawing.Size(28, 28)
 		Me.WishlistCostGold.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.WishlistCostGold.TabIndex = 106
-		Me.WishlistCostGold.TabStop = false
-		Me.WishlistCostGold.Visible = false
+		Me.WishlistCostGold.TabStop = False
+		Me.WishlistCostGold.Visible = False
 		'
 		'LBLWishListName
 		'
-		Me.LBLWishListName.Font = New System.Drawing.Font("Microsoft Sans Serif", 11!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLWishListName.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLWishListName.ForeColor = System.Drawing.Color.CornflowerBlue
 		Me.LBLWishListName.Location = New System.Drawing.Point(14, 22)
 		Me.LBLWishListName.Name = "LBLWishListName"
@@ -11089,7 +11109,7 @@ Partial Class FrmSettings
 		Me.WishlistPreview.Size = New System.Drawing.Size(145, 143)
 		Me.WishlistPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
 		Me.WishlistPreview.TabIndex = 101
-		Me.WishlistPreview.TabStop = false
+		Me.WishlistPreview.TabStop = False
 		'
 		'TabPage26
 		'
@@ -11125,7 +11145,7 @@ Partial Class FrmSettings
 		Me.GroupBox9.Name = "GroupBox9"
 		Me.GroupBox9.Size = New System.Drawing.Size(348, 94)
 		Me.GroupBox9.TabIndex = 152
-		Me.GroupBox9.TabStop = false
+		Me.GroupBox9.TabStop = False
 		Me.GroupBox9.Text = "System"
 		'
 		'Button32
@@ -11139,7 +11159,7 @@ Partial Class FrmSettings
 		Me.Button32.TabIndex = 55
 		Me.Button32.Text = "  Save Theme"
 		Me.Button32.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-		Me.Button32.UseVisualStyleBackColor = false
+		Me.Button32.UseVisualStyleBackColor = False
 		'
 		'Button31
 		'
@@ -11152,7 +11172,7 @@ Partial Class FrmSettings
 		Me.Button31.TabIndex = 54
 		Me.Button31.Text = "  Open Theme"
 		Me.Button31.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-		Me.Button31.UseVisualStyleBackColor = false
+		Me.Button31.UseVisualStyleBackColor = False
 		'
 		'PictureBox10
 		'
@@ -11163,7 +11183,7 @@ Partial Class FrmSettings
 		Me.PictureBox10.Size = New System.Drawing.Size(160, 19)
 		Me.PictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
 		Me.PictureBox10.TabIndex = 151
-		Me.PictureBox10.TabStop = false
+		Me.PictureBox10.TabStop = False
 		'
 		'GroupBox5
 		'
@@ -11186,24 +11206,24 @@ Partial Class FrmSettings
 		Me.GroupBox5.Name = "GroupBox5"
 		Me.GroupBox5.Size = New System.Drawing.Size(336, 294)
 		Me.GroupBox5.TabIndex = 58
-		Me.GroupBox5.TabStop = false
+		Me.GroupBox5.TabStop = False
 		Me.GroupBox5.Text = "UI Colors"
 		'
 		'CBTransparentTime
 		'
-		Me.CBTransparentTime.AutoSize = true
+		Me.CBTransparentTime.AutoSize = True
 		Me.CBTransparentTime.Location = New System.Drawing.Point(7, 262)
 		Me.CBTransparentTime.Name = "CBTransparentTime"
 		Me.CBTransparentTime.Size = New System.Drawing.Size(179, 17)
 		Me.CBTransparentTime.TabIndex = 23
 		Me.CBTransparentTime.Text = "Transparent Date/Time Window"
-		Me.CBTransparentTime.UseVisualStyleBackColor = true
+		Me.CBTransparentTime.UseVisualStyleBackColor = True
 		'
 		'LBLDateTimeColor2
 		'
 		Me.LBLDateTimeColor2.BackColor = Global.Tease_AI.My.MySettings.Default.DateTextColor
 		Me.LBLDateTimeColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLDateTimeColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "DateTextColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLDateTimeColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "DateTextColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.LBLDateTimeColor2.Location = New System.Drawing.Point(187, 190)
 		Me.LBLDateTimeColor2.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
 		Me.LBLDateTimeColor2.Name = "LBLDateTimeColor2"
@@ -11234,7 +11254,7 @@ Partial Class FrmSettings
 		'
 		Me.LBLDateBackColor2.BackColor = Global.Tease_AI.My.MySettings.Default.DateBackColor
 		Me.LBLDateBackColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLDateBackColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "DateBackColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLDateBackColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "DateBackColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.LBLDateBackColor2.Location = New System.Drawing.Point(187, 224)
 		Me.LBLDateBackColor2.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
 		Me.LBLDateBackColor2.Name = "LBLDateBackColor2"
@@ -11255,7 +11275,7 @@ Partial Class FrmSettings
 		'
 		Me.LBLChatWindowColor2.BackColor = Global.Tease_AI.My.MySettings.Default.ChatWindowColor
 		Me.LBLChatWindowColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLChatWindowColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "ChatWindowColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLChatWindowColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "ChatWindowColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.LBLChatWindowColor2.Location = New System.Drawing.Point(187, 122)
 		Me.LBLChatWindowColor2.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
 		Me.LBLChatWindowColor2.Name = "LBLChatWindowColor2"
@@ -11266,7 +11286,7 @@ Partial Class FrmSettings
 		'
 		Me.LBLTextColor2.BackColor = Global.Tease_AI.My.MySettings.Default.TextColor
 		Me.LBLTextColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLTextColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "TextColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLTextColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "TextColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.LBLTextColor2.Location = New System.Drawing.Point(187, 88)
 		Me.LBLTextColor2.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
 		Me.LBLTextColor2.Name = "LBLTextColor2"
@@ -11287,7 +11307,7 @@ Partial Class FrmSettings
 		'
 		Me.LBLBackColor2.BackColor = Global.Tease_AI.My.MySettings.Default.BackgroundColor
 		Me.LBLBackColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLBackColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "BackgroundColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLBackColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "BackgroundColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.LBLBackColor2.Location = New System.Drawing.Point(187, 20)
 		Me.LBLBackColor2.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
 		Me.LBLBackColor2.Name = "LBLBackColor2"
@@ -11328,7 +11348,7 @@ Partial Class FrmSettings
 		'
 		Me.LBLChatTextColor2.BackColor = Global.Tease_AI.My.MySettings.Default.ChatTextColor
 		Me.LBLChatTextColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLChatTextColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "ChatTextColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLChatTextColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "ChatTextColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.LBLChatTextColor2.Location = New System.Drawing.Point(187, 156)
 		Me.LBLChatTextColor2.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
 		Me.LBLChatTextColor2.Name = "LBLChatTextColor2"
@@ -11339,7 +11359,7 @@ Partial Class FrmSettings
 		'
 		Me.LBLButtonColor2.BackColor = Global.Tease_AI.My.MySettings.Default.ButtonColor
 		Me.LBLButtonColor2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLButtonColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "ButtonColor", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.LBLButtonColor2.DataBindings.Add(New System.Windows.Forms.Binding("BackColor", Global.Tease_AI.My.MySettings.Default, "ButtonColor", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.LBLButtonColor2.Location = New System.Drawing.Point(187, 54)
 		Me.LBLButtonColor2.Margin = New System.Windows.Forms.Padding(3, 0, 10, 0)
 		Me.LBLButtonColor2.Name = "LBLButtonColor2"
@@ -11355,20 +11375,20 @@ Partial Class FrmSettings
 		Me.GroupBox11.Name = "GroupBox11"
 		Me.GroupBox11.Size = New System.Drawing.Size(692, 92)
 		Me.GroupBox11.TabIndex = 65
-		Me.GroupBox11.TabStop = false
+		Me.GroupBox11.TabStop = False
 		Me.GroupBox11.Text = "Description"
 		'
 		'Label144
 		'
 		Me.Label144.BackColor = System.Drawing.Color.Transparent
-		Me.Label144.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label144.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label144.ForeColor = System.Drawing.Color.Black
 		Me.Label144.Location = New System.Drawing.Point(6, 16)
 		Me.Label144.Name = "Label144"
 		Me.Label144.Size = New System.Drawing.Size(680, 73)
 		Me.Label144.TabIndex = 62
-		Me.Label144.Text = "Use this page to create custom themes for Tease AI."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Themes can then be saved a"& _ 
-    "nd opened from txt files."
+		Me.Label144.Text = "Use this page to create custom themes for Tease AI." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Themes can then be saved a" &
+	"nd opened from txt files."
 		Me.Label144.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'GroupBox1
@@ -11382,7 +11402,7 @@ Partial Class FrmSettings
 		Me.GroupBox1.Name = "GroupBox1"
 		Me.GroupBox1.Size = New System.Drawing.Size(348, 195)
 		Me.GroupBox1.TabIndex = 57
-		Me.GroupBox1.TabStop = false
+		Me.GroupBox1.TabStop = False
 		Me.GroupBox1.Text = "Background"
 		'
 		'CBFlipBack
@@ -11393,7 +11413,7 @@ Partial Class FrmSettings
 		Me.CBFlipBack.Size = New System.Drawing.Size(86, 41)
 		Me.CBFlipBack.TabIndex = 4
 		Me.CBFlipBack.Text = "Flip Background"
-		Me.CBFlipBack.UseVisualStyleBackColor = true
+		Me.CBFlipBack.UseVisualStyleBackColor = True
 		'
 		'PBBackgroundPreview
 		'
@@ -11403,7 +11423,7 @@ Partial Class FrmSettings
 		Me.PBBackgroundPreview.Size = New System.Drawing.Size(202, 133)
 		Me.PBBackgroundPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.PBBackgroundPreview.TabIndex = 0
-		Me.PBBackgroundPreview.TabStop = false
+		Me.PBBackgroundPreview.TabStop = False
 		'
 		'Button17
 		'
@@ -11414,18 +11434,18 @@ Partial Class FrmSettings
 		Me.Button17.Name = "Button17"
 		Me.Button17.Size = New System.Drawing.Size(103, 93)
 		Me.Button17.TabIndex = 1
-		Me.Button17.UseVisualStyleBackColor = false
+		Me.Button17.UseVisualStyleBackColor = False
 		'
 		'CBStretchBack
 		'
-		Me.CBStretchBack.Checked = true
+		Me.CBStretchBack.Checked = True
 		Me.CBStretchBack.CheckState = System.Windows.Forms.CheckState.Checked
 		Me.CBStretchBack.Location = New System.Drawing.Point(122, 153)
 		Me.CBStretchBack.Name = "CBStretchBack"
 		Me.CBStretchBack.Size = New System.Drawing.Size(86, 41)
 		Me.CBStretchBack.TabIndex = 2
 		Me.CBStretchBack.Text = "Stretch Background"
-		Me.CBStretchBack.UseVisualStyleBackColor = true
+		Me.CBStretchBack.UseVisualStyleBackColor = True
 		'
 		'Button18
 		'
@@ -11434,12 +11454,12 @@ Partial Class FrmSettings
 		Me.Button18.Size = New System.Drawing.Size(103, 31)
 		Me.Button18.TabIndex = 3
 		Me.Button18.Text = "Clear"
-		Me.Button18.UseVisualStyleBackColor = true
+		Me.Button18.UseVisualStyleBackColor = True
 		'
 		'Label164
 		'
 		Me.Label164.BackColor = System.Drawing.Color.Transparent
-		Me.Label164.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label164.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label164.ForeColor = System.Drawing.Color.Black
 		Me.Label164.Location = New System.Drawing.Point(7, 6)
 		Me.Label164.Name = "Label164"
@@ -11488,12 +11508,12 @@ Partial Class FrmSettings
 		Me.GroupBox69.Name = "GroupBox69"
 		Me.GroupBox69.Size = New System.Drawing.Size(166, 83)
 		Me.GroupBox69.TabIndex = 173
-		Me.GroupBox69.TabStop = false
+		Me.GroupBox69.TabStop = False
 		Me.GroupBox69.Text = "Writing Tasks"
 		'
 		'TypesSpeedVal
 		'
-		Me.TypesSpeedVal.AutoSize = true
+		Me.TypesSpeedVal.AutoSize = True
 		Me.TypesSpeedVal.Location = New System.Drawing.Point(132, 64)
 		Me.TypesSpeedVal.Name = "TypesSpeedVal"
 		Me.TypesSpeedVal.Size = New System.Drawing.Size(19, 13)
@@ -11503,7 +11523,7 @@ Partial Class FrmSettings
 		'
 		'TypeSpeedLabel
 		'
-		Me.TypeSpeedLabel.AutoSize = true
+		Me.TypeSpeedLabel.AutoSize = True
 		Me.TypeSpeedLabel.Location = New System.Drawing.Point(6, 64)
 		Me.TypeSpeedLabel.Name = "TypeSpeedLabel"
 		Me.TypeSpeedLabel.Size = New System.Drawing.Size(76, 13)
@@ -11512,19 +11532,19 @@ Partial Class FrmSettings
 		'
 		'TimedWriting
 		'
-		Me.TimedWriting.AutoSize = true
+		Me.TimedWriting.AutoSize = True
 		Me.TimedWriting.Checked = Global.Tease_AI.My.MySettings.Default.TimedWriting
-		Me.TimedWriting.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "TimedWriting", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TimedWriting.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "TimedWriting", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TimedWriting.Location = New System.Drawing.Point(9, 19)
 		Me.TimedWriting.Name = "TimedWriting"
 		Me.TimedWriting.Size = New System.Drawing.Size(123, 17)
 		Me.TimedWriting.TabIndex = 1
 		Me.TimedWriting.Text = "Timed Writing Tasks"
-		Me.TimedWriting.UseVisualStyleBackColor = true
+		Me.TimedWriting.UseVisualStyleBackColor = True
 		'
 		'TypeSpeedSlider
 		'
-		Me.TypeSpeedSlider.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TypeSpeed", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TypeSpeedSlider.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TypeSpeed", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.TypeSpeedSlider.Location = New System.Drawing.Point(9, 35)
 		Me.TypeSpeedSlider.Maximum = 100
 		Me.TypeSpeedSlider.Minimum = 33
@@ -11543,12 +11563,12 @@ Partial Class FrmSettings
 		Me.GroupBox68.Name = "GroupBox68"
 		Me.GroupBox68.Size = New System.Drawing.Size(166, 51)
 		Me.GroupBox68.TabIndex = 172
-		Me.GroupBox68.TabStop = false
+		Me.GroupBox68.TabStop = False
 		Me.GroupBox68.Text = "Session Tasks"
 		'
 		'NBTasksMax
 		'
-		Me.NBTasksMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TasksMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTasksMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TasksMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTasksMax.Location = New System.Drawing.Point(113, 20)
 		Me.NBTasksMax.Maximum = New Decimal(New Integer() {500, 0, 0, 0})
 		Me.NBTasksMax.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -11559,7 +11579,7 @@ Partial Class FrmSettings
 		'
 		'NBTasksMin
 		'
-		Me.NBTasksMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TasksMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTasksMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TasksMin", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTasksMin.Location = New System.Drawing.Point(54, 21)
 		Me.NBTasksMin.Minimum = New Decimal(New Integer() {3, 0, 0, 0})
 		Me.NBTasksMin.Name = "NBTasksMin"
@@ -11570,7 +11590,7 @@ Partial Class FrmSettings
 		'Label165
 		'
 		Me.Label165.BackColor = System.Drawing.Color.Transparent
-		Me.Label165.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label165.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label165.ForeColor = System.Drawing.Color.Black
 		Me.Label165.Location = New System.Drawing.Point(100, 20)
 		Me.Label165.Name = "Label165"
@@ -11582,7 +11602,7 @@ Partial Class FrmSettings
 		'Label166
 		'
 		Me.Label166.BackColor = System.Drawing.Color.Transparent
-		Me.Label166.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label166.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label166.ForeColor = System.Drawing.Color.Black
 		Me.Label166.Location = New System.Drawing.Point(6, 21)
 		Me.Label166.Name = "Label166"
@@ -11620,13 +11640,13 @@ Partial Class FrmSettings
 		Me.GroupBox67.Name = "GroupBox67"
 		Me.GroupBox67.Size = New System.Drawing.Size(291, 139)
 		Me.GroupBox67.TabIndex = 171
-		Me.GroupBox67.TabStop = false
+		Me.GroupBox67.TabStop = False
 		Me.GroupBox67.Text = "Letter Tasks"
 		'
 		'Label161
 		'
 		Me.Label161.BackColor = System.Drawing.Color.Transparent
-		Me.Label161.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label161.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label161.ForeColor = System.Drawing.Color.Black
 		Me.Label161.Location = New System.Drawing.Point(233, 110)
 		Me.Label161.Name = "Label161"
@@ -11637,7 +11657,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskCBTTimeMax
 		'
-		Me.NBTaskCBTTimeMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskCBTTimeMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskCBTTimeMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskCBTTimeMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskCBTTimeMax.Location = New System.Drawing.Point(183, 110)
 		Me.NBTaskCBTTimeMax.Maximum = New Decimal(New Integer() {600, 0, 0, 0})
 		Me.NBTaskCBTTimeMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11648,7 +11668,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskCBTTimeMin
 		'
-		Me.NBTaskCBTTimeMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskCBTTimeMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskCBTTimeMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskCBTTimeMin", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskCBTTimeMin.Location = New System.Drawing.Point(117, 111)
 		Me.NBTaskCBTTimeMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
 		Me.NBTaskCBTTimeMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11660,7 +11680,7 @@ Partial Class FrmSettings
 		'Label162
 		'
 		Me.Label162.BackColor = System.Drawing.Color.Transparent
-		Me.Label162.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label162.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label162.ForeColor = System.Drawing.Color.Black
 		Me.Label162.Location = New System.Drawing.Point(167, 110)
 		Me.Label162.Name = "Label162"
@@ -11672,7 +11692,7 @@ Partial Class FrmSettings
 		'Label163
 		'
 		Me.Label163.BackColor = System.Drawing.Color.Transparent
-		Me.Label163.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label163.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label163.ForeColor = System.Drawing.Color.Black
 		Me.Label163.Location = New System.Drawing.Point(12, 111)
 		Me.Label163.Name = "Label163"
@@ -11684,7 +11704,7 @@ Partial Class FrmSettings
 		'Label158
 		'
 		Me.Label158.BackColor = System.Drawing.Color.Transparent
-		Me.Label158.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label158.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label158.ForeColor = System.Drawing.Color.Black
 		Me.Label158.Location = New System.Drawing.Point(233, 87)
 		Me.Label158.Name = "Label158"
@@ -11695,7 +11715,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskEdgeHoldTimeMax
 		'
-		Me.NBTaskEdgeHoldTimeMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgeHoldTimeMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskEdgeHoldTimeMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgeHoldTimeMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskEdgeHoldTimeMax.Location = New System.Drawing.Point(183, 87)
 		Me.NBTaskEdgeHoldTimeMax.Maximum = New Decimal(New Integer() {600, 0, 0, 0})
 		Me.NBTaskEdgeHoldTimeMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11706,7 +11726,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskEdgeHoldTimeMin
 		'
-		Me.NBTaskEdgeHoldTimeMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgeHoldTimeMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskEdgeHoldTimeMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgeHoldTimeMin", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskEdgeHoldTimeMin.Location = New System.Drawing.Point(117, 88)
 		Me.NBTaskEdgeHoldTimeMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
 		Me.NBTaskEdgeHoldTimeMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11718,7 +11738,7 @@ Partial Class FrmSettings
 		'Label159
 		'
 		Me.Label159.BackColor = System.Drawing.Color.Transparent
-		Me.Label159.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label159.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label159.ForeColor = System.Drawing.Color.Black
 		Me.Label159.Location = New System.Drawing.Point(167, 87)
 		Me.Label159.Name = "Label159"
@@ -11730,7 +11750,7 @@ Partial Class FrmSettings
 		'Label160
 		'
 		Me.Label160.BackColor = System.Drawing.Color.Transparent
-		Me.Label160.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label160.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label160.ForeColor = System.Drawing.Color.Black
 		Me.Label160.Location = New System.Drawing.Point(12, 88)
 		Me.Label160.Name = "Label160"
@@ -11741,7 +11761,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskEdgesMax
 		'
-		Me.NBTaskEdgesMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgesMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskEdgesMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgesMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskEdgesMax.Location = New System.Drawing.Point(183, 64)
 		Me.NBTaskEdgesMax.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
 		Me.NBTaskEdgesMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11752,7 +11772,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskEdgesMin
 		'
-		Me.NBTaskEdgesMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgesMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskEdgesMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskEdgesMin", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskEdgesMin.Location = New System.Drawing.Point(117, 65)
 		Me.NBTaskEdgesMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
 		Me.NBTaskEdgesMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11764,7 +11784,7 @@ Partial Class FrmSettings
 		'Label119
 		'
 		Me.Label119.BackColor = System.Drawing.Color.Transparent
-		Me.Label119.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label119.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label119.ForeColor = System.Drawing.Color.Black
 		Me.Label119.Location = New System.Drawing.Point(167, 64)
 		Me.Label119.Name = "Label119"
@@ -11776,7 +11796,7 @@ Partial Class FrmSettings
 		'Label157
 		'
 		Me.Label157.BackColor = System.Drawing.Color.Transparent
-		Me.Label157.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label157.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label157.ForeColor = System.Drawing.Color.Black
 		Me.Label157.Location = New System.Drawing.Point(12, 65)
 		Me.Label157.Name = "Label157"
@@ -11788,7 +11808,7 @@ Partial Class FrmSettings
 		'Label151
 		'
 		Me.Label151.BackColor = System.Drawing.Color.Transparent
-		Me.Label151.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label151.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label151.ForeColor = System.Drawing.Color.Black
 		Me.Label151.Location = New System.Drawing.Point(233, 41)
 		Me.Label151.Name = "Label151"
@@ -11799,7 +11819,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskStrokingTimeMax
 		'
-		Me.NBTaskStrokingTimeMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokingTimeMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskStrokingTimeMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokingTimeMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskStrokingTimeMax.Location = New System.Drawing.Point(183, 41)
 		Me.NBTaskStrokingTimeMax.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
 		Me.NBTaskStrokingTimeMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11810,7 +11830,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskStrokingTimeMin
 		'
-		Me.NBTaskStrokingTimeMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokingTimeMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskStrokingTimeMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokingTimeMin", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskStrokingTimeMin.Location = New System.Drawing.Point(117, 42)
 		Me.NBTaskStrokingTimeMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
 		Me.NBTaskStrokingTimeMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11822,7 +11842,7 @@ Partial Class FrmSettings
 		'Label154
 		'
 		Me.Label154.BackColor = System.Drawing.Color.Transparent
-		Me.Label154.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label154.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label154.ForeColor = System.Drawing.Color.Black
 		Me.Label154.Location = New System.Drawing.Point(167, 41)
 		Me.Label154.Name = "Label154"
@@ -11834,7 +11854,7 @@ Partial Class FrmSettings
 		'Label155
 		'
 		Me.Label155.BackColor = System.Drawing.Color.Transparent
-		Me.Label155.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label155.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label155.ForeColor = System.Drawing.Color.Black
 		Me.Label155.Location = New System.Drawing.Point(12, 42)
 		Me.Label155.Name = "Label155"
@@ -11845,7 +11865,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskStrokesMax
 		'
-		Me.NBTaskStrokesMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokesMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskStrokesMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokesMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskStrokesMax.Location = New System.Drawing.Point(183, 18)
 		Me.NBTaskStrokesMax.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
 		Me.NBTaskStrokesMax.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11856,7 +11876,7 @@ Partial Class FrmSettings
 		'
 		'NBTaskStrokesMin
 		'
-		Me.NBTaskStrokesMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokesMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBTaskStrokesMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "TaskStrokesMin", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBTaskStrokesMin.Location = New System.Drawing.Point(117, 19)
 		Me.NBTaskStrokesMin.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
 		Me.NBTaskStrokesMin.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -11868,7 +11888,7 @@ Partial Class FrmSettings
 		'Label146
 		'
 		Me.Label146.BackColor = System.Drawing.Color.Transparent
-		Me.Label146.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label146.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label146.ForeColor = System.Drawing.Color.Black
 		Me.Label146.Location = New System.Drawing.Point(167, 18)
 		Me.Label146.Name = "Label146"
@@ -11880,7 +11900,7 @@ Partial Class FrmSettings
 		'Label149
 		'
 		Me.Label149.BackColor = System.Drawing.Color.Transparent
-		Me.Label149.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label149.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label149.ForeColor = System.Drawing.Color.Black
 		Me.Label149.Location = New System.Drawing.Point(12, 19)
 		Me.Label149.Name = "Label149"
@@ -11898,13 +11918,13 @@ Partial Class FrmSettings
 		Me.GroupBox10.Name = "GroupBox10"
 		Me.GroupBox10.Size = New System.Drawing.Size(291, 54)
 		Me.GroupBox10.TabIndex = 170
-		Me.GroupBox10.TabStop = false
+		Me.GroupBox10.TabStop = False
 		Me.GroupBox10.Text = "Tease Slideshow"
 		'
 		'Label112
 		'
 		Me.Label112.BackColor = System.Drawing.Color.Transparent
-		Me.Label112.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label112.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label112.ForeColor = System.Drawing.Color.Black
 		Me.Label112.Location = New System.Drawing.Point(233, 21)
 		Me.Label112.Name = "Label112"
@@ -11925,7 +11945,7 @@ Partial Class FrmSettings
 		'Label6
 		'
 		Me.Label6.BackColor = System.Drawing.Color.Transparent
-		Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label6.ForeColor = System.Drawing.Color.Black
 		Me.Label6.Location = New System.Drawing.Point(9, 21)
 		Me.Label6.Name = "Label6"
@@ -11963,13 +11983,13 @@ Partial Class FrmSettings
 		Me.GroupBox57.Name = "GroupBox57"
 		Me.GroupBox57.Size = New System.Drawing.Size(223, 308)
 		Me.GroupBox57.TabIndex = 169
-		Me.GroupBox57.TabStop = false
+		Me.GroupBox57.TabStop = False
 		Me.GroupBox57.Text = "Tease"
 		'
 		'Label139
 		'
 		Me.Label139.BackColor = System.Drawing.Color.Transparent
-		Me.Label139.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label139.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label139.ForeColor = System.Drawing.Color.Black
 		Me.Label139.Location = New System.Drawing.Point(175, 171)
 		Me.Label139.Name = "Label139"
@@ -11989,7 +12009,7 @@ Partial Class FrmSettings
 		'LBLVtf
 		'
 		Me.LBLVtf.BackColor = System.Drawing.Color.Transparent
-		Me.LBLVtf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLVtf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLVtf.ForeColor = System.Drawing.Color.Black
 		Me.LBLVtf.Location = New System.Drawing.Point(128, 261)
 		Me.LBLVtf.Name = "LBLVtf"
@@ -12001,7 +12021,7 @@ Partial Class FrmSettings
 		'LBLStf
 		'
 		Me.LBLStf.BackColor = System.Drawing.Color.Transparent
-		Me.LBLStf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLStf.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLStf.ForeColor = System.Drawing.Color.Black
 		Me.LBLStf.Location = New System.Drawing.Point(130, 220)
 		Me.LBLStf.Name = "LBLStf"
@@ -12012,7 +12032,7 @@ Partial Class FrmSettings
 		'
 		'SliderSTF
 		'
-		Me.SliderSTF.AutoSize = false
+		Me.SliderSTF.AutoSize = False
 		Me.SliderSTF.LargeChange = 1
 		Me.SliderSTF.Location = New System.Drawing.Point(130, 199)
 		Me.SliderSTF.Maximum = 5
@@ -12024,7 +12044,7 @@ Partial Class FrmSettings
 		'
 		'TauntSlider
 		'
-		Me.TauntSlider.AutoSize = false
+		Me.TauntSlider.AutoSize = False
 		Me.TauntSlider.LargeChange = 1
 		Me.TauntSlider.Location = New System.Drawing.Point(130, 240)
 		Me.TauntSlider.Maximum = 9
@@ -12037,7 +12057,7 @@ Partial Class FrmSettings
 		'Label106
 		'
 		Me.Label106.BackColor = System.Drawing.Color.Transparent
-		Me.Label106.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label106.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label106.ForeColor = System.Drawing.Color.Black
 		Me.Label106.Location = New System.Drawing.Point(6, 243)
 		Me.Label106.Name = "Label106"
@@ -12048,30 +12068,30 @@ Partial Class FrmSettings
 		'
 		'CBTauntCycleDD
 		'
-		Me.CBTauntCycleDD.AutoSize = true
+		Me.CBTauntCycleDD.AutoSize = True
 		Me.CBTauntCycleDD.ForeColor = System.Drawing.Color.Black
 		Me.CBTauntCycleDD.Location = New System.Drawing.Point(9, 140)
 		Me.CBTauntCycleDD.Name = "CBTauntCycleDD"
 		Me.CBTauntCycleDD.Size = New System.Drawing.Size(176, 17)
 		Me.CBTauntCycleDD.TabIndex = 185
 		Me.CBTauntCycleDD.Text = "Domme Decide Based on Level"
-		Me.CBTauntCycleDD.UseVisualStyleBackColor = true
+		Me.CBTauntCycleDD.UseVisualStyleBackColor = True
 		'
 		'CBTeaseLengthDD
 		'
-		Me.CBTeaseLengthDD.AutoSize = true
+		Me.CBTeaseLengthDD.AutoSize = True
 		Me.CBTeaseLengthDD.ForeColor = System.Drawing.Color.Black
 		Me.CBTeaseLengthDD.Location = New System.Drawing.Point(9, 69)
 		Me.CBTeaseLengthDD.Name = "CBTeaseLengthDD"
 		Me.CBTeaseLengthDD.Size = New System.Drawing.Size(176, 17)
 		Me.CBTeaseLengthDD.TabIndex = 184
 		Me.CBTeaseLengthDD.Text = "Domme Decide Based on Level"
-		Me.CBTeaseLengthDD.UseVisualStyleBackColor = true
+		Me.CBTeaseLengthDD.UseVisualStyleBackColor = True
 		'
 		'Label103
 		'
 		Me.Label103.BackColor = System.Drawing.Color.Transparent
-		Me.Label103.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label103.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label103.ForeColor = System.Drawing.Color.Black
 		Me.Label103.Location = New System.Drawing.Point(175, 117)
 		Me.Label103.Name = "Label103"
@@ -12093,7 +12113,7 @@ Partial Class FrmSettings
 		'Label105
 		'
 		Me.Label105.BackColor = System.Drawing.Color.Transparent
-		Me.Label105.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label105.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label105.ForeColor = System.Drawing.Color.Black
 		Me.Label105.Location = New System.Drawing.Point(6, 117)
 		Me.Label105.Name = "Label105"
@@ -12105,7 +12125,7 @@ Partial Class FrmSettings
 		'Label101
 		'
 		Me.Label101.BackColor = System.Drawing.Color.Transparent
-		Me.Label101.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label101.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label101.ForeColor = System.Drawing.Color.Black
 		Me.Label101.Location = New System.Drawing.Point(175, 93)
 		Me.Label101.Name = "Label101"
@@ -12127,7 +12147,7 @@ Partial Class FrmSettings
 		'Label102
 		'
 		Me.Label102.BackColor = System.Drawing.Color.Transparent
-		Me.Label102.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label102.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label102.ForeColor = System.Drawing.Color.Black
 		Me.Label102.Location = New System.Drawing.Point(6, 93)
 		Me.Label102.Name = "Label102"
@@ -12139,7 +12159,7 @@ Partial Class FrmSettings
 		'Label97
 		'
 		Me.Label97.BackColor = System.Drawing.Color.Transparent
-		Me.Label97.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label97.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label97.ForeColor = System.Drawing.Color.Black
 		Me.Label97.Location = New System.Drawing.Point(175, 46)
 		Me.Label97.Name = "Label97"
@@ -12161,7 +12181,7 @@ Partial Class FrmSettings
 		'Label99
 		'
 		Me.Label99.BackColor = System.Drawing.Color.Transparent
-		Me.Label99.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label99.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label99.ForeColor = System.Drawing.Color.Black
 		Me.Label99.Location = New System.Drawing.Point(6, 46)
 		Me.Label99.Name = "Label99"
@@ -12173,7 +12193,7 @@ Partial Class FrmSettings
 		'Label96
 		'
 		Me.Label96.BackColor = System.Drawing.Color.Transparent
-		Me.Label96.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label96.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label96.ForeColor = System.Drawing.Color.Black
 		Me.Label96.Location = New System.Drawing.Point(175, 20)
 		Me.Label96.Name = "Label96"
@@ -12195,7 +12215,7 @@ Partial Class FrmSettings
 		'Label95
 		'
 		Me.Label95.BackColor = System.Drawing.Color.Transparent
-		Me.Label95.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label95.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label95.ForeColor = System.Drawing.Color.Black
 		Me.Label95.Location = New System.Drawing.Point(6, 20)
 		Me.Label95.Name = "Label95"
@@ -12207,7 +12227,7 @@ Partial Class FrmSettings
 		'Label49
 		'
 		Me.Label49.BackColor = System.Drawing.Color.Transparent
-		Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label49.ForeColor = System.Drawing.Color.Black
 		Me.Label49.Location = New System.Drawing.Point(6, 207)
 		Me.Label49.Name = "Label49"
@@ -12219,7 +12239,7 @@ Partial Class FrmSettings
 		'Label141
 		'
 		Me.Label141.BackColor = System.Drawing.Color.Transparent
-		Me.Label141.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label141.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label141.ForeColor = System.Drawing.Color.Black
 		Me.Label141.Location = New System.Drawing.Point(6, 163)
 		Me.Label141.Name = "Label141"
@@ -12241,13 +12261,13 @@ Partial Class FrmSettings
 		Me.GBRangeRuinChance.Name = "GBRangeRuinChance"
 		Me.GBRangeRuinChance.Size = New System.Drawing.Size(166, 122)
 		Me.GBRangeRuinChance.TabIndex = 168
-		Me.GBRangeRuinChance.TabStop = false
+		Me.GBRangeRuinChance.TabStop = False
 		Me.GBRangeRuinChance.Text = "Ruin Chance"
 		'
 		'Label90
 		'
 		Me.Label90.BackColor = System.Drawing.Color.Transparent
-		Me.Label90.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label90.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label90.ForeColor = System.Drawing.Color.Black
 		Me.Label90.Location = New System.Drawing.Point(6, 94)
 		Me.Label90.Name = "Label90"
@@ -12258,7 +12278,7 @@ Partial Class FrmSettings
 		'
 		'NBRuinSometimes
 		'
-		Me.NBRuinSometimes.Enabled = false
+		Me.NBRuinSometimes.Enabled = False
 		Me.NBRuinSometimes.Location = New System.Drawing.Point(113, 68)
 		Me.NBRuinSometimes.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
 		Me.NBRuinSometimes.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -12270,7 +12290,7 @@ Partial Class FrmSettings
 		'Label91
 		'
 		Me.Label91.BackColor = System.Drawing.Color.Transparent
-		Me.Label91.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label91.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label91.ForeColor = System.Drawing.Color.Black
 		Me.Label91.Location = New System.Drawing.Point(6, 68)
 		Me.Label91.Name = "Label91"
@@ -12282,7 +12302,7 @@ Partial Class FrmSettings
 		'Label92
 		'
 		Me.Label92.BackColor = System.Drawing.Color.Transparent
-		Me.Label92.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label92.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label92.ForeColor = System.Drawing.Color.Black
 		Me.Label92.Location = New System.Drawing.Point(6, 42)
 		Me.Label92.Name = "Label92"
@@ -12293,7 +12313,7 @@ Partial Class FrmSettings
 		'
 		'NBRuinRarely
 		'
-		Me.NBRuinRarely.Enabled = false
+		Me.NBRuinRarely.Enabled = False
 		Me.NBRuinRarely.Location = New System.Drawing.Point(113, 94)
 		Me.NBRuinRarely.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
 		Me.NBRuinRarely.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -12304,7 +12324,7 @@ Partial Class FrmSettings
 		'
 		'NBRuinOften
 		'
-		Me.NBRuinOften.Enabled = false
+		Me.NBRuinOften.Enabled = False
 		Me.NBRuinOften.Location = New System.Drawing.Point(113, 42)
 		Me.NBRuinOften.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
 		Me.NBRuinOften.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -12315,14 +12335,14 @@ Partial Class FrmSettings
 		'
 		'CBRangeRuin
 		'
-		Me.CBRangeRuin.AutoSize = true
+		Me.CBRangeRuin.AutoSize = True
 		Me.CBRangeRuin.ForeColor = System.Drawing.Color.Black
 		Me.CBRangeRuin.Location = New System.Drawing.Point(9, 19)
 		Me.CBRangeRuin.Name = "CBRangeRuin"
 		Me.CBRangeRuin.Size = New System.Drawing.Size(99, 17)
 		Me.CBRangeRuin.TabIndex = 159
 		Me.CBRangeRuin.Text = "Domme Decide"
-		Me.CBRangeRuin.UseVisualStyleBackColor = true
+		Me.CBRangeRuin.UseVisualStyleBackColor = True
 		'
 		'GroupBox17
 		'
@@ -12332,7 +12352,7 @@ Partial Class FrmSettings
 		Me.GroupBox17.Name = "GroupBox17"
 		Me.GroupBox17.Size = New System.Drawing.Size(291, 190)
 		Me.GroupBox17.TabIndex = 0
-		Me.GroupBox17.TabStop = false
+		Me.GroupBox17.TabStop = False
 		Me.GroupBox17.Text = "Video Teases"
 		'
 		'GroupBox19
@@ -12351,13 +12371,13 @@ Partial Class FrmSettings
 		Me.GroupBox19.Name = "GroupBox19"
 		Me.GroupBox19.Size = New System.Drawing.Size(279, 66)
 		Me.GroupBox19.TabIndex = 2
-		Me.GroupBox19.TabStop = false
+		Me.GroupBox19.TabStop = False
 		Me.GroupBox19.Text = "Red Light, Green Light"
 		'
 		'Label110
 		'
 		Me.Label110.BackColor = System.Drawing.Color.Transparent
-		Me.Label110.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label110.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label110.ForeColor = System.Drawing.Color.Black
 		Me.Label110.Location = New System.Drawing.Point(227, 39)
 		Me.Label110.Name = "Label110"
@@ -12369,7 +12389,7 @@ Partial Class FrmSettings
 		'Label111
 		'
 		Me.Label111.BackColor = System.Drawing.Color.Transparent
-		Me.Label111.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label111.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label111.ForeColor = System.Drawing.Color.Black
 		Me.Label111.Location = New System.Drawing.Point(227, 16)
 		Me.Label111.Name = "Label111"
@@ -12405,7 +12425,7 @@ Partial Class FrmSettings
 		'Label26
 		'
 		Me.Label26.BackColor = System.Drawing.Color.Transparent
-		Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label26.ForeColor = System.Drawing.Color.Black
 		Me.Label26.Location = New System.Drawing.Point(161, 38)
 		Me.Label26.Name = "Label26"
@@ -12425,7 +12445,7 @@ Partial Class FrmSettings
 		'Label28
 		'
 		Me.Label28.BackColor = System.Drawing.Color.Transparent
-		Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label28.ForeColor = System.Drawing.Color.Black
 		Me.Label28.Location = New System.Drawing.Point(161, 15)
 		Me.Label28.Name = "Label28"
@@ -12437,7 +12457,7 @@ Partial Class FrmSettings
 		'Label27
 		'
 		Me.Label27.BackColor = System.Drawing.Color.Transparent
-		Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label27.ForeColor = System.Drawing.Color.Black
 		Me.Label27.Location = New System.Drawing.Point(6, 39)
 		Me.Label27.Name = "Label27"
@@ -12449,7 +12469,7 @@ Partial Class FrmSettings
 		'Label29
 		'
 		Me.Label29.BackColor = System.Drawing.Color.Transparent
-		Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label29.ForeColor = System.Drawing.Color.Black
 		Me.Label29.Location = New System.Drawing.Point(6, 16)
 		Me.Label29.Name = "Label29"
@@ -12475,13 +12495,13 @@ Partial Class FrmSettings
 		Me.GroupBox18.Name = "GroupBox18"
 		Me.GroupBox18.Size = New System.Drawing.Size(279, 88)
 		Me.GroupBox18.TabIndex = 1
-		Me.GroupBox18.TabStop = false
+		Me.GroupBox18.TabStop = False
 		Me.GroupBox18.Text = "Censorship Sucks"
 		'
 		'Label108
 		'
 		Me.Label108.BackColor = System.Drawing.Color.Transparent
-		Me.Label108.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label108.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label108.ForeColor = System.Drawing.Color.Black
 		Me.Label108.Location = New System.Drawing.Point(227, 39)
 		Me.Label108.Name = "Label108"
@@ -12493,7 +12513,7 @@ Partial Class FrmSettings
 		'Label109
 		'
 		Me.Label109.BackColor = System.Drawing.Color.Transparent
-		Me.Label109.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label109.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label109.ForeColor = System.Drawing.Color.Black
 		Me.Label109.Location = New System.Drawing.Point(227, 16)
 		Me.Label109.Name = "Label109"
@@ -12504,7 +12524,7 @@ Partial Class FrmSettings
 		'
 		'NBCensorShowMin
 		'
-		Me.NBCensorShowMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "NBCensorShowMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBCensorShowMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "NBCensorShowMin", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBCensorShowMin.Location = New System.Drawing.Point(111, 15)
 		Me.NBCensorShowMin.Maximum = New Decimal(New Integer() {180, 0, 0, 0})
 		Me.NBCensorShowMin.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -12515,7 +12535,7 @@ Partial Class FrmSettings
 		'
 		'NBCensorHideMax
 		'
-		Me.NBCensorHideMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "NBCensorHideMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBCensorHideMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "NBCensorHideMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBCensorHideMax.Location = New System.Drawing.Point(177, 38)
 		Me.NBCensorHideMax.Maximum = New Decimal(New Integer() {300, 0, 0, 0})
 		Me.NBCensorHideMax.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -12526,7 +12546,7 @@ Partial Class FrmSettings
 		'
 		'NBCensorHideMin
 		'
-		Me.NBCensorHideMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "NBCensorHideMin", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBCensorHideMin.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "NBCensorHideMin", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBCensorHideMin.Location = New System.Drawing.Point(111, 38)
 		Me.NBCensorHideMin.Maximum = New Decimal(New Integer() {180, 0, 0, 0})
 		Me.NBCensorHideMin.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -12537,22 +12557,22 @@ Partial Class FrmSettings
 		'
 		'CBCensorConstant
 		'
-		Me.CBCensorConstant.AutoSize = true
+		Me.CBCensorConstant.AutoSize = True
 		Me.CBCensorConstant.Checked = Global.Tease_AI.My.MySettings.Default.CBCensorConstant
-		Me.CBCensorConstant.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBCensorConstant", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.CBCensorConstant.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.CBCensorConstant.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBCensorConstant", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.CBCensorConstant.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.CBCensorConstant.ForeColor = System.Drawing.Color.Black
 		Me.CBCensorConstant.Location = New System.Drawing.Point(6, 65)
 		Me.CBCensorConstant.Name = "CBCensorConstant"
 		Me.CBCensorConstant.Size = New System.Drawing.Size(263, 17)
 		Me.CBCensorConstant.TabIndex = 157
 		Me.CBCensorConstant.Text = "Censorship Bar Always Visible During Video Tease"
-		Me.CBCensorConstant.UseVisualStyleBackColor = true
+		Me.CBCensorConstant.UseVisualStyleBackColor = True
 		'
 		'Label25
 		'
 		Me.Label25.BackColor = System.Drawing.Color.Transparent
-		Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label25.ForeColor = System.Drawing.Color.Black
 		Me.Label25.Location = New System.Drawing.Point(161, 15)
 		Me.Label25.Name = "Label25"
@@ -12564,7 +12584,7 @@ Partial Class FrmSettings
 		'Label20
 		'
 		Me.Label20.BackColor = System.Drawing.Color.Transparent
-		Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label20.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label20.ForeColor = System.Drawing.Color.Black
 		Me.Label20.Location = New System.Drawing.Point(6, 39)
 		Me.Label20.Name = "Label20"
@@ -12576,7 +12596,7 @@ Partial Class FrmSettings
 		'Label19
 		'
 		Me.Label19.BackColor = System.Drawing.Color.Transparent
-		Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label19.ForeColor = System.Drawing.Color.Black
 		Me.Label19.Location = New System.Drawing.Point(161, 38)
 		Me.Label19.Name = "Label19"
@@ -12588,7 +12608,7 @@ Partial Class FrmSettings
 		'Label24
 		'
 		Me.Label24.BackColor = System.Drawing.Color.Transparent
-		Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label24.ForeColor = System.Drawing.Color.Black
 		Me.Label24.Location = New System.Drawing.Point(6, 16)
 		Me.Label24.Name = "Label24"
@@ -12599,7 +12619,7 @@ Partial Class FrmSettings
 		'
 		'NBCensorShowMax
 		'
-		Me.NBCensorShowMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "NBCensorShowMax", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.NBCensorShowMax.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Tease_AI.My.MySettings.Default, "NBCensorShowMax", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
 		Me.NBCensorShowMax.Location = New System.Drawing.Point(177, 15)
 		Me.NBCensorShowMax.Maximum = New Decimal(New Integer() {300, 0, 0, 0})
 		Me.NBCensorShowMax.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
@@ -12621,13 +12641,13 @@ Partial Class FrmSettings
 		Me.GBRangeOrgasmChance.Name = "GBRangeOrgasmChance"
 		Me.GBRangeOrgasmChance.Size = New System.Drawing.Size(166, 122)
 		Me.GBRangeOrgasmChance.TabIndex = 167
-		Me.GBRangeOrgasmChance.TabStop = false
+		Me.GBRangeOrgasmChance.TabStop = False
 		Me.GBRangeOrgasmChance.Text = "Orgasm Chance"
 		'
 		'Label89
 		'
 		Me.Label89.BackColor = System.Drawing.Color.Transparent
-		Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label89.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label89.ForeColor = System.Drawing.Color.Black
 		Me.Label89.Location = New System.Drawing.Point(6, 94)
 		Me.Label89.Name = "Label89"
@@ -12638,7 +12658,7 @@ Partial Class FrmSettings
 		'
 		'NBAllowSometimes
 		'
-		Me.NBAllowSometimes.Enabled = false
+		Me.NBAllowSometimes.Enabled = False
 		Me.NBAllowSometimes.Location = New System.Drawing.Point(113, 68)
 		Me.NBAllowSometimes.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
 		Me.NBAllowSometimes.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -12650,7 +12670,7 @@ Partial Class FrmSettings
 		'Label86
 		'
 		Me.Label86.BackColor = System.Drawing.Color.Transparent
-		Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label86.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label86.ForeColor = System.Drawing.Color.Black
 		Me.Label86.Location = New System.Drawing.Point(6, 68)
 		Me.Label86.Name = "Label86"
@@ -12662,7 +12682,7 @@ Partial Class FrmSettings
 		'Label82
 		'
 		Me.Label82.BackColor = System.Drawing.Color.Transparent
-		Me.Label82.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label82.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label82.ForeColor = System.Drawing.Color.Black
 		Me.Label82.Location = New System.Drawing.Point(6, 42)
 		Me.Label82.Name = "Label82"
@@ -12673,7 +12693,7 @@ Partial Class FrmSettings
 		'
 		'NBAllowRarely
 		'
-		Me.NBAllowRarely.Enabled = false
+		Me.NBAllowRarely.Enabled = False
 		Me.NBAllowRarely.Location = New System.Drawing.Point(113, 94)
 		Me.NBAllowRarely.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
 		Me.NBAllowRarely.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -12684,7 +12704,7 @@ Partial Class FrmSettings
 		'
 		'NBAllowOften
 		'
-		Me.NBAllowOften.Enabled = false
+		Me.NBAllowOften.Enabled = False
 		Me.NBAllowOften.Location = New System.Drawing.Point(113, 42)
 		Me.NBAllowOften.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
 		Me.NBAllowOften.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
@@ -12695,14 +12715,14 @@ Partial Class FrmSettings
 		'
 		'CBRangeOrgasm
 		'
-		Me.CBRangeOrgasm.AutoSize = true
+		Me.CBRangeOrgasm.AutoSize = True
 		Me.CBRangeOrgasm.ForeColor = System.Drawing.Color.Black
 		Me.CBRangeOrgasm.Location = New System.Drawing.Point(9, 19)
 		Me.CBRangeOrgasm.Name = "CBRangeOrgasm"
 		Me.CBRangeOrgasm.Size = New System.Drawing.Size(99, 17)
 		Me.CBRangeOrgasm.TabIndex = 159
 		Me.CBRangeOrgasm.Text = "Domme Decide"
-		Me.CBRangeOrgasm.UseVisualStyleBackColor = true
+		Me.CBRangeOrgasm.UseVisualStyleBackColor = True
 		'
 		'PictureBox8
 		'
@@ -12713,12 +12733,12 @@ Partial Class FrmSettings
 		Me.PictureBox8.Size = New System.Drawing.Size(160, 19)
 		Me.PictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
 		Me.PictureBox8.TabIndex = 166
-		Me.PictureBox8.TabStop = false
+		Me.PictureBox8.TabStop = False
 		'
 		'Label38
 		'
 		Me.Label38.BackColor = System.Drawing.Color.Transparent
-		Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label38.ForeColor = System.Drawing.Color.Black
 		Me.Label38.Location = New System.Drawing.Point(7, 6)
 		Me.Label38.Name = "Label38"
@@ -12784,68 +12804,68 @@ Partial Class FrmSettings
 		'
 		'BTNPlaylistCtrlZ
 		'
-		Me.BTNPlaylistCtrlZ.Enabled = false
+		Me.BTNPlaylistCtrlZ.Enabled = False
 		Me.BTNPlaylistCtrlZ.Location = New System.Drawing.Point(621, 21)
 		Me.BTNPlaylistCtrlZ.Name = "BTNPlaylistCtrlZ"
 		Me.BTNPlaylistCtrlZ.Size = New System.Drawing.Size(44, 23)
 		Me.BTNPlaylistCtrlZ.TabIndex = 202
 		Me.BTNPlaylistCtrlZ.Text = "Undo"
-		Me.BTNPlaylistCtrlZ.UseVisualStyleBackColor = true
+		Me.BTNPlaylistCtrlZ.UseVisualStyleBackColor = True
 		'
 		'RadioPlaylistRegScripts
 		'
-		Me.RadioPlaylistRegScripts.AutoSize = true
+		Me.RadioPlaylistRegScripts.AutoSize = True
 		Me.RadioPlaylistRegScripts.Location = New System.Drawing.Point(228, 372)
 		Me.RadioPlaylistRegScripts.Name = "RadioPlaylistRegScripts"
 		Me.RadioPlaylistRegScripts.Size = New System.Drawing.Size(127, 17)
 		Me.RadioPlaylistRegScripts.TabIndex = 201
 		Me.RadioPlaylistRegScripts.Text = "Show Regular Scripts"
-		Me.RadioPlaylistRegScripts.UseVisualStyleBackColor = true
+		Me.RadioPlaylistRegScripts.UseVisualStyleBackColor = True
 		'
 		'RadioPlaylistScripts
 		'
-		Me.RadioPlaylistScripts.AutoSize = true
-		Me.RadioPlaylistScripts.Checked = true
+		Me.RadioPlaylistScripts.AutoSize = True
+		Me.RadioPlaylistScripts.Checked = True
 		Me.RadioPlaylistScripts.Location = New System.Drawing.Point(62, 372)
 		Me.RadioPlaylistScripts.Name = "RadioPlaylistScripts"
 		Me.RadioPlaylistScripts.Size = New System.Drawing.Size(122, 17)
 		Me.RadioPlaylistScripts.TabIndex = 200
-		Me.RadioPlaylistScripts.TabStop = true
+		Me.RadioPlaylistScripts.TabStop = True
 		Me.RadioPlaylistScripts.Text = "Show Playlist Scripts"
-		Me.RadioPlaylistScripts.UseVisualStyleBackColor = true
+		Me.RadioPlaylistScripts.UseVisualStyleBackColor = True
 		'
 		'BTNPlaylistEnd
 		'
 		Me.BTNPlaylistEnd.BackColor = System.Drawing.Color.LightGray
-		Me.BTNPlaylistEnd.Enabled = false
-		Me.BTNPlaylistEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.BTNPlaylistEnd.Enabled = False
+		Me.BTNPlaylistEnd.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.BTNPlaylistEnd.ForeColor = System.Drawing.Color.Black
 		Me.BTNPlaylistEnd.Location = New System.Drawing.Point(165, 21)
 		Me.BTNPlaylistEnd.Name = "BTNPlaylistEnd"
 		Me.BTNPlaylistEnd.Size = New System.Drawing.Size(44, 23)
 		Me.BTNPlaylistEnd.TabIndex = 199
 		Me.BTNPlaylistEnd.Text = "End"
-		Me.BTNPlaylistEnd.UseVisualStyleBackColor = false
+		Me.BTNPlaylistEnd.UseVisualStyleBackColor = False
 		'
 		'BTNPlaylistClearAll
 		'
-		Me.BTNPlaylistClearAll.Enabled = false
+		Me.BTNPlaylistClearAll.Enabled = False
 		Me.BTNPlaylistClearAll.Location = New System.Drawing.Point(296, 21)
 		Me.BTNPlaylistClearAll.Name = "BTNPlaylistClearAll"
 		Me.BTNPlaylistClearAll.Size = New System.Drawing.Size(78, 23)
 		Me.BTNPlaylistClearAll.TabIndex = 198
 		Me.BTNPlaylistClearAll.Text = "Clear All"
-		Me.BTNPlaylistClearAll.UseVisualStyleBackColor = true
+		Me.BTNPlaylistClearAll.UseVisualStyleBackColor = True
 		'
 		'BTNPlaylistSave
 		'
-		Me.BTNPlaylistSave.Enabled = false
+		Me.BTNPlaylistSave.Enabled = False
 		Me.BTNPlaylistSave.Location = New System.Drawing.Point(621, 369)
 		Me.BTNPlaylistSave.Name = "BTNPlaylistSave"
 		Me.BTNPlaylistSave.Size = New System.Drawing.Size(44, 23)
 		Me.BTNPlaylistSave.TabIndex = 197
 		Me.BTNPlaylistSave.Text = "Save"
-		Me.BTNPlaylistSave.UseVisualStyleBackColor = true
+		Me.BTNPlaylistSave.UseVisualStyleBackColor = True
 		'
 		'Button7
 		'
@@ -12854,7 +12874,7 @@ Partial Class FrmSettings
 		Me.Button7.Size = New System.Drawing.Size(78, 23)
 		Me.Button7.TabIndex = 196
 		Me.Button7.Text = "Add Random"
-		Me.Button7.UseVisualStyleBackColor = true
+		Me.Button7.UseVisualStyleBackColor = True
 		'
 		'WBPlaylist
 		'
@@ -12866,8 +12886,8 @@ Partial Class FrmSettings
 		'
 		'Label80
 		'
-		Me.Label80.AutoSize = true
-		Me.Label80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label80.AutoSize = True
+		Me.Label80.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label80.Location = New System.Drawing.Point(410, 27)
 		Me.Label80.Name = "Label80"
 		Me.Label80.Size = New System.Drawing.Size(47, 13)
@@ -12877,8 +12897,8 @@ Partial Class FrmSettings
 		'LBLPlaylIstLink
 		'
 		Me.LBLPlaylIstLink.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLPlaylIstLink.Enabled = false
-		Me.LBLPlaylIstLink.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLPlaylIstLink.Enabled = False
+		Me.LBLPlaylIstLink.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLPlaylIstLink.Location = New System.Drawing.Point(128, 22)
 		Me.LBLPlaylIstLink.Name = "LBLPlaylIstLink"
 		Me.LBLPlaylIstLink.Size = New System.Drawing.Size(34, 21)
@@ -12889,8 +12909,8 @@ Partial Class FrmSettings
 		'LBLPlaylistModule
 		'
 		Me.LBLPlaylistModule.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLPlaylistModule.Enabled = false
-		Me.LBLPlaylistModule.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLPlaylistModule.Enabled = False
+		Me.LBLPlaylistModule.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLPlaylistModule.Location = New System.Drawing.Point(76, 22)
 		Me.LBLPlaylistModule.Name = "LBLPlaylistModule"
 		Me.LBLPlaylistModule.Size = New System.Drawing.Size(50, 21)
@@ -12902,7 +12922,7 @@ Partial Class FrmSettings
 		'
 		Me.LBLPLaylistStart.BackColor = System.Drawing.Color.Green
 		Me.LBLPLaylistStart.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLPLaylistStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLPLaylistStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLPLaylistStart.ForeColor = System.Drawing.Color.White
 		Me.LBLPLaylistStart.Location = New System.Drawing.Point(38, 22)
 		Me.LBLPLaylistStart.Name = "LBLPLaylistStart"
@@ -12913,8 +12933,8 @@ Partial Class FrmSettings
 		'
 		'LBPlaylist
 		'
-		Me.LBPlaylist.AllowDrop = true
-		Me.LBPlaylist.FormattingEnabled = true
+		Me.LBPlaylist.AllowDrop = True
+		Me.LBPlaylist.FormattingEnabled = True
 		Me.LBPlaylist.Location = New System.Drawing.Point(413, 56)
 		Me.LBPlaylist.Name = "LBPlaylist"
 		Me.LBPlaylist.Size = New System.Drawing.Size(252, 290)
@@ -12956,8 +12976,8 @@ Partial Class FrmSettings
 		Me.Label88.Name = "Label88"
 		Me.Label88.Size = New System.Drawing.Size(194, 53)
 		Me.Label88.TabIndex = 173
-		Me.Label88.Text = "Preview:  Enter any line with a Keyword and press # to generate a random sentence"& _ 
-    " the domme return."
+		Me.Label88.Text = "Preview:  Enter any line with a Keyword and press # to generate a random sentence" &
+	" the domme return."
 		Me.Label88.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'TBKeywordPreview
@@ -12971,13 +12991,13 @@ Partial Class FrmSettings
 		'
 		'Button37
 		'
-		Me.Button37.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Button37.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Button37.Location = New System.Drawing.Point(638, 358)
 		Me.Button37.Name = "Button37"
 		Me.Button37.Size = New System.Drawing.Size(47, 50)
 		Me.Button37.TabIndex = 171
 		Me.Button37.Text = "#"
-		Me.Button37.UseVisualStyleBackColor = true
+		Me.Button37.UseVisualStyleBackColor = True
 		'
 		'Button50
 		'
@@ -12986,7 +13006,7 @@ Partial Class FrmSettings
 		Me.Button50.Size = New System.Drawing.Size(194, 23)
 		Me.Button50.TabIndex = 169
 		Me.Button50.Text = "Refresh and Clear Keyword List"
-		Me.Button50.UseVisualStyleBackColor = true
+		Me.Button50.UseVisualStyleBackColor = True
 		'
 		'Button22
 		'
@@ -12995,7 +13015,7 @@ Partial Class FrmSettings
 		Me.Button22.Size = New System.Drawing.Size(47, 23)
 		Me.Button22.TabIndex = 167
 		Me.Button22.Text = "Save"
-		Me.Button22.UseVisualStyleBackColor = true
+		Me.Button22.UseVisualStyleBackColor = True
 		'
 		'TBKeyWords
 		'
@@ -13006,11 +13026,11 @@ Partial Class FrmSettings
 		'
 		'LBKeyWords
 		'
-		Me.LBKeyWords.FormattingEnabled = true
+		Me.LBKeyWords.FormattingEnabled = True
 		Me.LBKeyWords.Location = New System.Drawing.Point(6, 36)
 		Me.LBKeyWords.Name = "LBKeyWords"
 		Me.LBKeyWords.Size = New System.Drawing.Size(194, 316)
-		Me.LBKeyWords.Sorted = true
+		Me.LBKeyWords.Sorted = True
 		Me.LBKeyWords.TabIndex = 165
 		'
 		'RTBKeyWords
@@ -13045,11 +13065,11 @@ Partial Class FrmSettings
 		Me.Button9.Size = New System.Drawing.Size(215, 23)
 		Me.Button9.TabIndex = 176
 		Me.Button9.Text = "Response Template"
-		Me.Button9.UseVisualStyleBackColor = true
+		Me.Button9.UseVisualStyleBackColor = True
 		'
 		'RTBResponsesKEY
 		'
-		Me.RTBResponsesKEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.RTBResponsesKEY.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.RTBResponsesKEY.Location = New System.Drawing.Point(217, 36)
 		Me.RTBResponsesKEY.Name = "RTBResponsesKEY"
 		Me.RTBResponsesKEY.Size = New System.Drawing.Size(468, 40)
@@ -13063,7 +13083,7 @@ Partial Class FrmSettings
 		Me.Button4.Size = New System.Drawing.Size(194, 23)
 		Me.Button4.TabIndex = 174
 		Me.Button4.Text = "Refresh and Clear Response List"
-		Me.Button4.UseVisualStyleBackColor = true
+		Me.Button4.UseVisualStyleBackColor = True
 		'
 		'Button5
 		'
@@ -13072,7 +13092,7 @@ Partial Class FrmSettings
 		Me.Button5.Size = New System.Drawing.Size(47, 23)
 		Me.Button5.TabIndex = 173
 		Me.Button5.Text = "Save"
-		Me.Button5.UseVisualStyleBackColor = true
+		Me.Button5.UseVisualStyleBackColor = True
 		'
 		'TBResponses
 		'
@@ -13083,11 +13103,11 @@ Partial Class FrmSettings
 		'
 		'LBResponses
 		'
-		Me.LBResponses.FormattingEnabled = true
+		Me.LBResponses.FormattingEnabled = True
 		Me.LBResponses.Location = New System.Drawing.Point(6, 36)
 		Me.LBResponses.Name = "LBResponses"
 		Me.LBResponses.Size = New System.Drawing.Size(194, 355)
-		Me.LBResponses.Sorted = true
+		Me.LBResponses.Sorted = True
 		Me.LBResponses.TabIndex = 171
 		'
 		'RTBResponses
@@ -13116,7 +13136,7 @@ Partial Class FrmSettings
 		'
 		'RTBVideoMod
 		'
-		Me.RTBVideoMod.Enabled = false
+		Me.RTBVideoMod.Enabled = False
 		Me.RTBVideoMod.Location = New System.Drawing.Point(167, 17)
 		Me.RTBVideoMod.Name = "RTBVideoMod"
 		Me.RTBVideoMod.Size = New System.Drawing.Size(525, 286)
@@ -13132,13 +13152,13 @@ Partial Class FrmSettings
 		Me.GroupBox29.Name = "GroupBox29"
 		Me.GroupBox29.Size = New System.Drawing.Size(692, 92)
 		Me.GroupBox29.TabIndex = 66
-		Me.GroupBox29.TabStop = false
+		Me.GroupBox29.TabStop = False
 		Me.GroupBox29.Text = "Description"
 		'
 		'Label51
 		'
 		Me.Label51.BackColor = System.Drawing.Color.Transparent
-		Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label51.ForeColor = System.Drawing.Color.Black
 		Me.Label51.Location = New System.Drawing.Point(6, 16)
 		Me.Label51.Name = "Label51"
@@ -13149,13 +13169,13 @@ Partial Class FrmSettings
 		'
 		'BTNVideoModClear
 		'
-		Me.BTNVideoModClear.Enabled = false
+		Me.BTNVideoModClear.Enabled = False
 		Me.BTNVideoModClear.Location = New System.Drawing.Point(6, 227)
 		Me.BTNVideoModClear.Name = "BTNVideoModClear"
 		Me.BTNVideoModClear.Size = New System.Drawing.Size(155, 35)
 		Me.BTNVideoModClear.TabIndex = 153
 		Me.BTNVideoModClear.Text = "Clear Text and Select New Video Tease Type/Script"
-		Me.BTNVideoModClear.UseVisualStyleBackColor = true
+		Me.BTNVideoModClear.UseVisualStyleBackColor = True
 		'
 		'GroupBox28
 		'
@@ -13164,13 +13184,13 @@ Partial Class FrmSettings
 		Me.GroupBox28.Name = "GroupBox28"
 		Me.GroupBox28.Size = New System.Drawing.Size(155, 46)
 		Me.GroupBox28.TabIndex = 148
-		Me.GroupBox28.TabStop = false
+		Me.GroupBox28.TabStop = False
 		Me.GroupBox28.Text = "Video Tease Type"
 		'
 		'CBVTType
 		'
 		Me.CBVTType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-		Me.CBVTType.FormattingEnabled = true
+		Me.CBVTType.FormattingEnabled = True
 		Me.CBVTType.Items.AddRange(New Object() {"Avoid The Edge", "Censorship Sucks", "Red Light Green Light"})
 		Me.CBVTType.Location = New System.Drawing.Point(9, 15)
 		Me.CBVTType.Name = "CBVTType"
@@ -13184,7 +13204,7 @@ Partial Class FrmSettings
 		Me.BTNVideoModLoad.Size = New System.Drawing.Size(155, 35)
 		Me.BTNVideoModLoad.TabIndex = 152
 		Me.BTNVideoModLoad.Text = "Load Script"
-		Me.BTNVideoModLoad.UseVisualStyleBackColor = true
+		Me.BTNVideoModLoad.UseVisualStyleBackColor = True
 		'
 		'GroupBox30
 		'
@@ -13193,12 +13213,12 @@ Partial Class FrmSettings
 		Me.GroupBox30.Name = "GroupBox30"
 		Me.GroupBox30.Size = New System.Drawing.Size(155, 100)
 		Me.GroupBox30.TabIndex = 149
-		Me.GroupBox30.TabStop = false
+		Me.GroupBox30.TabStop = False
 		Me.GroupBox30.Text = "Script"
 		'
 		'LBVidScript
 		'
-		Me.LBVidScript.FormattingEnabled = true
+		Me.LBVidScript.FormattingEnabled = True
 		Me.LBVidScript.Location = New System.Drawing.Point(9, 20)
 		Me.LBVidScript.Name = "LBVidScript"
 		Me.LBVidScript.Size = New System.Drawing.Size(137, 69)
@@ -13206,13 +13226,13 @@ Partial Class FrmSettings
 		'
 		'BTNVideoModSave
 		'
-		Me.BTNVideoModSave.Enabled = false
+		Me.BTNVideoModSave.Enabled = False
 		Me.BTNVideoModSave.Location = New System.Drawing.Point(6, 268)
 		Me.BTNVideoModSave.Name = "BTNVideoModSave"
 		Me.BTNVideoModSave.Size = New System.Drawing.Size(155, 35)
 		Me.BTNVideoModSave.TabIndex = 151
 		Me.BTNVideoModSave.Text = "Save Changes"
-		Me.BTNVideoModSave.UseVisualStyleBackColor = true
+		Me.BTNVideoModSave.UseVisualStyleBackColor = True
 		'
 		'TabPage15
 		'
@@ -13303,13 +13323,13 @@ Partial Class FrmSettings
 		Me.GroupBox34.Name = "GroupBox34"
 		Me.GroupBox34.Size = New System.Drawing.Size(683, 107)
 		Me.GroupBox34.TabIndex = 66
-		Me.GroupBox34.TabStop = false
+		Me.GroupBox34.TabStop = False
 		Me.GroupBox34.Text = "Description"
 		'
 		'Label52
 		'
 		Me.Label52.BackColor = System.Drawing.Color.Transparent
-		Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label52.ForeColor = System.Drawing.Color.Black
 		Me.Label52.Location = New System.Drawing.Point(6, 16)
 		Me.Label52.Name = "Label52"
@@ -13333,7 +13353,7 @@ Partial Class FrmSettings
 		Me.Button26.Size = New System.Drawing.Size(120, 23)
 		Me.Button26.TabIndex = 174
 		Me.Button26.Text = "Clear Fields"
-		Me.Button26.UseVisualStyleBackColor = true
+		Me.Button26.UseVisualStyleBackColor = True
 		'
 		'Label56
 		'
@@ -13354,7 +13374,7 @@ Partial Class FrmSettings
 		'
 		'LBGlitModScripts
 		'
-		Me.LBGlitModScripts.FormattingEnabled = true
+		Me.LBGlitModScripts.FormattingEnabled = True
 		Me.LBGlitModScripts.Location = New System.Drawing.Point(27, 106)
 		Me.LBGlitModScripts.Name = "LBGlitModScripts"
 		Me.LBGlitModScripts.Size = New System.Drawing.Size(136, 186)
@@ -13371,7 +13391,7 @@ Partial Class FrmSettings
 		'
 		'LBLGlitModDomType
 		'
-		Me.LBLGlitModDomType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLGlitModDomType.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLGlitModDomType.Location = New System.Drawing.Point(191, 103)
 		Me.LBLGlitModDomType.Name = "LBLGlitModDomType"
 		Me.LBLGlitModDomType.Size = New System.Drawing.Size(123, 23)
@@ -13386,12 +13406,12 @@ Partial Class FrmSettings
 		Me.Button29.Size = New System.Drawing.Size(120, 23)
 		Me.Button29.TabIndex = 151
 		Me.Button29.Text = "Save Glitter File"
-		Me.Button29.UseVisualStyleBackColor = true
+		Me.Button29.UseVisualStyleBackColor = True
 		'
 		'CBGlitModType
 		'
 		Me.CBGlitModType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-		Me.CBGlitModType.FormattingEnabled = true
+		Me.CBGlitModType.FormattingEnabled = True
 		Me.CBGlitModType.Items.AddRange(New Object() {"Tease", "Egotist", "Trivia", "Daily", "Custom 1", "Custom 2"})
 		Me.CBGlitModType.Location = New System.Drawing.Point(27, 35)
 		Me.CBGlitModType.Name = "CBGlitModType"
@@ -13452,30 +13472,30 @@ Partial Class FrmSettings
 		Me.GroupBox62.Name = "GroupBox62"
 		Me.GroupBox62.Size = New System.Drawing.Size(277, 107)
 		Me.GroupBox62.TabIndex = 178
-		Me.GroupBox62.TabStop = false
+		Me.GroupBox62.TabStop = False
 		Me.GroupBox62.Text = "Language"
 		'
 		'RBGerman
 		'
-		Me.RBGerman.AutoSize = true
+		Me.RBGerman.AutoSize = True
 		Me.RBGerman.Location = New System.Drawing.Point(180, 20)
 		Me.RBGerman.Name = "RBGerman"
 		Me.RBGerman.Size = New System.Drawing.Size(65, 17)
 		Me.RBGerman.TabIndex = 1
 		Me.RBGerman.Text = "Deutsch"
-		Me.RBGerman.UseVisualStyleBackColor = true
+		Me.RBGerman.UseVisualStyleBackColor = True
 		'
 		'RBEnglish
 		'
-		Me.RBEnglish.AutoSize = true
-		Me.RBEnglish.Checked = true
+		Me.RBEnglish.AutoSize = True
+		Me.RBEnglish.Checked = True
 		Me.RBEnglish.Location = New System.Drawing.Point(36, 19)
 		Me.RBEnglish.Name = "RBEnglish"
 		Me.RBEnglish.Size = New System.Drawing.Size(59, 17)
 		Me.RBEnglish.TabIndex = 0
-		Me.RBEnglish.TabStop = true
+		Me.RBEnglish.TabStop = True
 		Me.RBEnglish.Text = "English"
-		Me.RBEnglish.UseVisualStyleBackColor = true
+		Me.RBEnglish.UseVisualStyleBackColor = True
 		'
 		'GroupBox33
 		'
@@ -13489,7 +13509,7 @@ Partial Class FrmSettings
 		Me.GroupBox33.Name = "GroupBox33"
 		Me.GroupBox33.Size = New System.Drawing.Size(277, 159)
 		Me.GroupBox33.TabIndex = 177
-		Me.GroupBox33.TabStop = false
+		Me.GroupBox33.TabStop = False
 		Me.GroupBox33.Text = "System States"
 		'
 		'BTNOfflineMode
@@ -13499,13 +13519,13 @@ Partial Class FrmSettings
 		Me.BTNOfflineMode.Size = New System.Drawing.Size(99, 23)
 		Me.BTNOfflineMode.TabIndex = 180
 		Me.BTNOfflineMode.Text = "Toggle"
-		Me.BTNOfflineMode.UseVisualStyleBackColor = true
+		Me.BTNOfflineMode.UseVisualStyleBackColor = True
 		'
 		'LBLOfflineMode
 		'
 		Me.LBLOfflineMode.BackColor = System.Drawing.Color.LightGray
 		Me.LBLOfflineMode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLOfflineMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLOfflineMode.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLOfflineMode.ForeColor = System.Drawing.Color.Red
 		Me.LBLOfflineMode.Location = New System.Drawing.Point(120, 70)
 		Me.LBLOfflineMode.Name = "LBLOfflineMode"
@@ -13518,7 +13538,7 @@ Partial Class FrmSettings
 		'
 		Me.Label140.BackColor = System.Drawing.Color.LightGray
 		Me.Label140.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.Label140.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label140.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label140.Location = New System.Drawing.Point(17, 70)
 		Me.Label140.Name = "Label140"
 		Me.Label140.Size = New System.Drawing.Size(98, 23)
@@ -13533,13 +13553,13 @@ Partial Class FrmSettings
 		Me.Button11.Size = New System.Drawing.Size(99, 23)
 		Me.Button11.TabIndex = 177
 		Me.Button11.Text = "Toggle"
-		Me.Button11.UseVisualStyleBackColor = true
+		Me.Button11.UseVisualStyleBackColor = True
 		'
 		'LBLChastityState
 		'
 		Me.LBLChastityState.BackColor = System.Drawing.Color.LightGray
 		Me.LBLChastityState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.LBLChastityState.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLChastityState.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLChastityState.ForeColor = System.Drawing.Color.Red
 		Me.LBLChastityState.Location = New System.Drawing.Point(120, 33)
 		Me.LBLChastityState.Name = "LBLChastityState"
@@ -13552,7 +13572,7 @@ Partial Class FrmSettings
 		'
 		Me.Label120.BackColor = System.Drawing.Color.LightGray
 		Me.Label120.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-		Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label120.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label120.Location = New System.Drawing.Point(17, 33)
 		Me.Label120.Name = "Label120"
 		Me.Label120.Size = New System.Drawing.Size(98, 23)
@@ -13572,7 +13592,7 @@ Partial Class FrmSettings
 		Me.GroupBox27.Name = "GroupBox27"
 		Me.GroupBox27.Size = New System.Drawing.Size(279, 117)
 		Me.GroupBox27.TabIndex = 176
-		Me.GroupBox27.TabStop = false
+		Me.GroupBox27.TabStop = False
 		Me.GroupBox27.Text = "Session Images"
 		'
 		'Button6
@@ -13582,7 +13602,7 @@ Partial Class FrmSettings
 		Me.Button6.Size = New System.Drawing.Size(117, 23)
 		Me.Button6.TabIndex = 176
 		Me.Button6.Text = "Delete All Files"
-		Me.Button6.UseVisualStyleBackColor = true
+		Me.Button6.UseVisualStyleBackColor = True
 		'
 		'LBLSesSpace
 		'
@@ -13598,7 +13618,7 @@ Partial Class FrmSettings
 		Me.Button3.Size = New System.Drawing.Size(117, 23)
 		Me.Button3.TabIndex = 175
 		Me.Button3.Text = "Open Folder"
-		Me.Button3.UseVisualStyleBackColor = true
+		Me.Button3.UseVisualStyleBackColor = True
 		'
 		'LBLSesFiles
 		'
@@ -13609,7 +13629,7 @@ Partial Class FrmSettings
 		'
 		'Label125
 		'
-		Me.Label125.AutoSize = true
+		Me.Label125.AutoSize = True
 		Me.Label125.Location = New System.Drawing.Point(17, 53)
 		Me.Label125.Name = "Label125"
 		Me.Label125.Size = New System.Drawing.Size(120, 13)
@@ -13618,7 +13638,7 @@ Partial Class FrmSettings
 		'
 		'Label124
 		'
-		Me.Label124.AutoSize = true
+		Me.Label124.AutoSize = True
 		Me.Label124.Location = New System.Drawing.Point(17, 24)
 		Me.Label124.Name = "Label124"
 		Me.Label124.Size = New System.Drawing.Size(126, 13)
@@ -13641,18 +13661,18 @@ Partial Class FrmSettings
 		Me.GroupBox20.Name = "GroupBox20"
 		Me.GroupBox20.Size = New System.Drawing.Size(408, 230)
 		Me.GroupBox20.TabIndex = 174
-		Me.GroupBox20.TabStop = false
+		Me.GroupBox20.TabStop = False
 		Me.GroupBox20.Text = "Maintenance"
 		'
 		'Button1
 		'
-		Me.Button1.Enabled = false
+		Me.Button1.Enabled = False
 		Me.Button1.Location = New System.Drawing.Point(270, 19)
 		Me.Button1.Name = "Button1"
 		Me.Button1.Size = New System.Drawing.Size(121, 23)
 		Me.Button1.TabIndex = 176
 		Me.Button1.Text = "Reset Settings"
-		Me.Button1.UseVisualStyleBackColor = true
+		Me.Button1.UseVisualStyleBackColor = True
 		'
 		'BTNMaintenanceScripts
 		'
@@ -13661,7 +13681,7 @@ Partial Class FrmSettings
 		Me.BTNMaintenanceScripts.Size = New System.Drawing.Size(121, 23)
 		Me.BTNMaintenanceScripts.TabIndex = 175
 		Me.BTNMaintenanceScripts.Text = "Audit Scripts"
-		Me.BTNMaintenanceScripts.UseVisualStyleBackColor = true
+		Me.BTNMaintenanceScripts.UseVisualStyleBackColor = True
 		'
 		'BTNMaintenanceRefresh
 		'
@@ -13670,11 +13690,11 @@ Partial Class FrmSettings
 		Me.BTNMaintenanceRefresh.Size = New System.Drawing.Size(121, 23)
 		Me.BTNMaintenanceRefresh.TabIndex = 7
 		Me.BTNMaintenanceRefresh.Text = "Refresh URL Files"
-		Me.BTNMaintenanceRefresh.UseVisualStyleBackColor = true
+		Me.BTNMaintenanceRefresh.UseVisualStyleBackColor = True
 		'
 		'Label117
 		'
-		Me.Label117.AutoSize = true
+		Me.Label117.AutoSize = True
 		Me.Label117.Location = New System.Drawing.Point(15, 182)
 		Me.Label117.Name = "Label117"
 		Me.Label117.Size = New System.Drawing.Size(84, 13)
@@ -13683,7 +13703,7 @@ Partial Class FrmSettings
 		'
 		'Label116
 		'
-		Me.Label116.AutoSize = true
+		Me.Label116.AutoSize = True
 		Me.Label116.Location = New System.Drawing.Point(15, 140)
 		Me.Label116.Name = "Label116"
 		Me.Label116.Size = New System.Drawing.Size(85, 13)
@@ -13699,13 +13719,13 @@ Partial Class FrmSettings
 		'
 		'BTNMaintenanceCancel
 		'
-		Me.BTNMaintenanceCancel.Enabled = false
+		Me.BTNMaintenanceCancel.Enabled = False
 		Me.BTNMaintenanceCancel.Location = New System.Drawing.Point(270, 48)
 		Me.BTNMaintenanceCancel.Name = "BTNMaintenanceCancel"
 		Me.BTNMaintenanceCancel.Size = New System.Drawing.Size(121, 23)
 		Me.BTNMaintenanceCancel.TabIndex = 3
 		Me.BTNMaintenanceCancel.Text = "Cancel"
-		Me.BTNMaintenanceCancel.UseVisualStyleBackColor = true
+		Me.BTNMaintenanceCancel.UseVisualStyleBackColor = True
 		'
 		'PBMaintenance
 		'
@@ -13730,7 +13750,7 @@ Partial Class FrmSettings
 		Me.BTNMaintenanceRebuild.Size = New System.Drawing.Size(121, 23)
 		Me.BTNMaintenanceRebuild.TabIndex = 0
 		Me.BTNMaintenanceRebuild.Text = "Rebuild URL Files"
-		Me.BTNMaintenanceRebuild.UseVisualStyleBackColor = true
+		Me.BTNMaintenanceRebuild.UseVisualStyleBackColor = True
 		'
 		'WebToy
 		'
@@ -13750,12 +13770,12 @@ Partial Class FrmSettings
 		Me.GroupBox15.Name = "GroupBox15"
 		Me.GroupBox15.Size = New System.Drawing.Size(408, 159)
 		Me.GroupBox15.TabIndex = 173
-		Me.GroupBox15.TabStop = false
+		Me.GroupBox15.TabStop = False
 		Me.GroupBox15.Text = "Web-Controlled Sex Toy"
 		'
 		'Label115
 		'
-		Me.Label115.AutoSize = true
+		Me.Label115.AutoSize = True
 		Me.Label115.Location = New System.Drawing.Point(12, 58)
 		Me.Label115.Name = "Label115"
 		Me.Label115.Size = New System.Drawing.Size(54, 13)
@@ -13778,7 +13798,7 @@ Partial Class FrmSettings
 		'
 		'Label114
 		'
-		Me.Label114.AutoSize = true
+		Me.Label114.AutoSize = True
 		Me.Label114.Location = New System.Drawing.Point(12, 17)
 		Me.Label114.Name = "Label114"
 		Me.Label114.Size = New System.Drawing.Size(54, 13)
@@ -13794,12 +13814,12 @@ Partial Class FrmSettings
 		Me.PictureBox9.Size = New System.Drawing.Size(160, 19)
 		Me.PictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
 		Me.PictureBox9.TabIndex = 166
-		Me.PictureBox9.TabStop = false
+		Me.PictureBox9.TabStop = False
 		'
 		'Label148
 		'
 		Me.Label148.BackColor = System.Drawing.Color.Transparent
-		Me.Label148.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label148.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label148.ForeColor = System.Drawing.Color.Black
 		Me.Label148.Location = New System.Drawing.Point(7, 6)
 		Me.Label148.Name = "Label148"
@@ -13884,7 +13904,7 @@ Partial Class FrmSettings
 		Me.BTNDebugHoldEdgeTimer.Size = New System.Drawing.Size(75, 23)
 		Me.BTNDebugHoldEdgeTimer.TabIndex = 14
 		Me.BTNDebugHoldEdgeTimer.Text = "Set to 5"
-		Me.BTNDebugHoldEdgeTimer.UseVisualStyleBackColor = true
+		Me.BTNDebugHoldEdgeTimer.UseVisualStyleBackColor = True
 		'
 		'GroupBox26
 		'
@@ -13903,7 +13923,7 @@ Partial Class FrmSettings
 		Me.GroupBox26.Name = "GroupBox26"
 		Me.GroupBox26.Size = New System.Drawing.Size(346, 178)
 		Me.GroupBox26.TabIndex = 0
-		Me.GroupBox26.TabStop = false
+		Me.GroupBox26.TabStop = False
 		Me.GroupBox26.Text = "Taunt Cycle"
 		'
 		'LBLCycleDebugCountdown
@@ -13923,7 +13943,7 @@ Partial Class FrmSettings
 		Me.Button19.Size = New System.Drawing.Size(146, 30)
 		Me.Button19.TabIndex = 9
 		Me.Button19.Text = "Countdown to 5 Seconds"
-		Me.Button19.UseVisualStyleBackColor = true
+		Me.Button19.UseVisualStyleBackColor = True
 		'
 		'BTNDebugTauntsClear
 		'
@@ -13932,7 +13952,7 @@ Partial Class FrmSettings
 		Me.BTNDebugTauntsClear.Size = New System.Drawing.Size(146, 30)
 		Me.BTNDebugTauntsClear.TabIndex = 8
 		Me.BTNDebugTauntsClear.Text = "Clear"
-		Me.BTNDebugTauntsClear.UseVisualStyleBackColor = true
+		Me.BTNDebugTauntsClear.UseVisualStyleBackColor = True
 		'
 		'TBDebugTaunts3
 		'
@@ -13957,55 +13977,55 @@ Partial Class FrmSettings
 		'
 		'RBDebugTaunts3
 		'
-		Me.RBDebugTaunts3.AutoSize = true
+		Me.RBDebugTaunts3.AutoSize = True
 		Me.RBDebugTaunts3.Location = New System.Drawing.Point(127, 41)
 		Me.RBDebugTaunts3.Name = "RBDebugTaunts3"
 		Me.RBDebugTaunts3.Size = New System.Drawing.Size(59, 17)
 		Me.RBDebugTaunts3.TabIndex = 4
 		Me.RBDebugTaunts3.Text = "3 Lines"
-		Me.RBDebugTaunts3.UseVisualStyleBackColor = true
+		Me.RBDebugTaunts3.UseVisualStyleBackColor = True
 		'
 		'RBDebugTaunts2
 		'
-		Me.RBDebugTaunts2.AutoSize = true
+		Me.RBDebugTaunts2.AutoSize = True
 		Me.RBDebugTaunts2.Location = New System.Drawing.Point(66, 41)
 		Me.RBDebugTaunts2.Name = "RBDebugTaunts2"
 		Me.RBDebugTaunts2.Size = New System.Drawing.Size(59, 17)
 		Me.RBDebugTaunts2.TabIndex = 3
 		Me.RBDebugTaunts2.Text = "2 Lines"
-		Me.RBDebugTaunts2.UseVisualStyleBackColor = true
+		Me.RBDebugTaunts2.UseVisualStyleBackColor = True
 		'
 		'RBDebugTaunts1
 		'
-		Me.RBDebugTaunts1.AutoSize = true
-		Me.RBDebugTaunts1.Checked = true
+		Me.RBDebugTaunts1.AutoSize = True
+		Me.RBDebugTaunts1.Checked = True
 		Me.RBDebugTaunts1.Location = New System.Drawing.Point(7, 41)
 		Me.RBDebugTaunts1.Name = "RBDebugTaunts1"
 		Me.RBDebugTaunts1.Size = New System.Drawing.Size(54, 17)
 		Me.RBDebugTaunts1.TabIndex = 2
-		Me.RBDebugTaunts1.TabStop = true
+		Me.RBDebugTaunts1.TabStop = True
 		Me.RBDebugTaunts1.Text = "1 Line"
-		Me.RBDebugTaunts1.UseVisualStyleBackColor = true
+		Me.RBDebugTaunts1.UseVisualStyleBackColor = True
 		'
 		'CBDebugTauntsEndless
 		'
-		Me.CBDebugTauntsEndless.AutoSize = true
+		Me.CBDebugTauntsEndless.AutoSize = True
 		Me.CBDebugTauntsEndless.Location = New System.Drawing.Point(7, 150)
 		Me.CBDebugTauntsEndless.Name = "CBDebugTauntsEndless"
 		Me.CBDebugTauntsEndless.Size = New System.Drawing.Size(92, 17)
 		Me.CBDebugTauntsEndless.TabIndex = 1
 		Me.CBDebugTauntsEndless.Text = "Endless Cycle"
-		Me.CBDebugTauntsEndless.UseVisualStyleBackColor = true
+		Me.CBDebugTauntsEndless.UseVisualStyleBackColor = True
 		'
 		'CBDebugTaunts
 		'
-		Me.CBDebugTaunts.AutoSize = true
+		Me.CBDebugTaunts.AutoSize = True
 		Me.CBDebugTaunts.Location = New System.Drawing.Point(7, 20)
 		Me.CBDebugTaunts.Name = "CBDebugTaunts"
 		Me.CBDebugTaunts.Size = New System.Drawing.Size(174, 17)
 		Me.CBDebugTaunts.TabIndex = 0
 		Me.CBDebugTaunts.Text = "Enable Taunt Cycle Debugging"
-		Me.CBDebugTaunts.UseVisualStyleBackColor = true
+		Me.CBDebugTaunts.UseVisualStyleBackColor = True
 		'
 		'BTNDebugStrokeTauntTimer
 		'
@@ -14014,7 +14034,7 @@ Partial Class FrmSettings
 		Me.BTNDebugStrokeTauntTimer.Size = New System.Drawing.Size(75, 23)
 		Me.BTNDebugStrokeTauntTimer.TabIndex = 8
 		Me.BTNDebugStrokeTauntTimer.Text = "Set to 5"
-		Me.BTNDebugStrokeTauntTimer.UseVisualStyleBackColor = true
+		Me.BTNDebugStrokeTauntTimer.UseVisualStyleBackColor = True
 		'
 		'LBLDebugHoldEdgeTime
 		'
@@ -14043,7 +14063,7 @@ Partial Class FrmSettings
 		Me.BTNDebugStrokeTime.Size = New System.Drawing.Size(75, 23)
 		Me.BTNDebugStrokeTime.TabIndex = 2
 		Me.BTNDebugStrokeTime.Text = "Set to 5"
-		Me.BTNDebugStrokeTime.UseVisualStyleBackColor = true
+		Me.BTNDebugStrokeTime.UseVisualStyleBackColor = True
 		'
 		'BTNDebugEdgeTauntTimer
 		'
@@ -14052,7 +14072,7 @@ Partial Class FrmSettings
 		Me.BTNDebugEdgeTauntTimer.Size = New System.Drawing.Size(75, 23)
 		Me.BTNDebugEdgeTauntTimer.TabIndex = 11
 		Me.BTNDebugEdgeTauntTimer.Text = "Set to 5"
-		Me.BTNDebugEdgeTauntTimer.UseVisualStyleBackColor = true
+		Me.BTNDebugEdgeTauntTimer.UseVisualStyleBackColor = True
 		'
 		'LBLDebugTeaseTime
 		'
@@ -14094,7 +14114,7 @@ Partial Class FrmSettings
 		Me.BTNDebugTeaseTimer.Size = New System.Drawing.Size(75, 23)
 		Me.BTNDebugTeaseTimer.TabIndex = 5
 		Me.BTNDebugTeaseTimer.Text = "Set to 5"
-		Me.BTNDebugTeaseTimer.UseVisualStyleBackColor = true
+		Me.BTNDebugTeaseTimer.UseVisualStyleBackColor = True
 		'
 		'Label142
 		'
@@ -14162,7 +14182,7 @@ Partial Class FrmSettings
 		Me.Button33.Size = New System.Drawing.Size(75, 23)
 		Me.Button33.TabIndex = 1
 		Me.Button33.Text = "LoadState"
-		Me.Button33.UseVisualStyleBackColor = true
+		Me.Button33.UseVisualStyleBackColor = True
 		'
 		'Button24
 		'
@@ -14171,7 +14191,7 @@ Partial Class FrmSettings
 		Me.Button24.Size = New System.Drawing.Size(75, 23)
 		Me.Button24.TabIndex = 0
 		Me.Button24.Text = "SaveState"
-		Me.Button24.UseVisualStyleBackColor = true
+		Me.Button24.UseVisualStyleBackColor = True
 		'
 		'TabPage5
 		'
@@ -14205,27 +14225,27 @@ Partial Class FrmSettings
 		'
 		'Label130
 		'
-		Me.Label130.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label130.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label130.Location = New System.Drawing.Point(361, 314)
 		Me.Label130.Name = "Label130"
 		Me.Label130.Size = New System.Drawing.Size(254, 54)
 		Me.Label130.TabIndex = 176
-		Me.Label130.Text = "q55x8x"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Stefaf"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"OxiKlein"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
+		Me.Label130.Text = "q55x8x" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Stefaf" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "OxiKlein" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
 		Me.Label130.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
 		'Label123
 		'
-		Me.Label123.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label123.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label123.Location = New System.Drawing.Point(81, 314)
 		Me.Label123.Name = "Label123"
 		Me.Label123.Size = New System.Drawing.Size(254, 54)
 		Me.Label123.TabIndex = 175
-		Me.Label123.Text = "pepsifreak"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Daragorn"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Ambossli"
+		Me.Label123.Text = "pepsifreak" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Daragorn" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Ambossli"
 		Me.Label123.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
 		'Label69
 		'
-		Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label69.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label69.Location = New System.Drawing.Point(35, 295)
 		Me.Label69.Name = "Label69"
 		Me.Label69.Size = New System.Drawing.Size(638, 22)
@@ -14235,17 +14255,17 @@ Partial Class FrmSettings
 		'
 		'Label113
 		'
-		Me.Label113.AutoSize = true
+		Me.Label113.AutoSize = True
 		Me.Label113.Location = New System.Drawing.Point(4, 417)
 		Me.Label113.Name = "Label113"
 		Me.Label113.Size = New System.Drawing.Size(452, 13)
 		Me.Label113.TabIndex = 173
-		Me.Label113.Text = "All content contained in or viewed through this program are property of their res"& _ 
-    "pective owners."
+		Me.Label113.Text = "All content contained in or viewed through this program are property of their res" &
+	"pective owners."
 		'
 		'Label40
 		'
-		Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 12!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label40.Location = New System.Drawing.Point(35, 273)
 		Me.Label40.Name = "Label40"
 		Me.Label40.Size = New System.Drawing.Size(638, 24)
@@ -14255,19 +14275,19 @@ Partial Class FrmSettings
 		'
 		'Label35
 		'
-		Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label35.Location = New System.Drawing.Point(32, 107)
 		Me.Label35.Name = "Label35"
 		Me.Label35.Size = New System.Drawing.Size(641, 77)
 		Me.Label35.TabIndex = 170
-		Me.Label35.Text = "This program is freeware. It may be freely distributed."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Do not package or dist"& _ 
-    "ribute this program with any scripts or additional content."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Please distribute a"& _ 
-    "dditional files separately."
+		Me.Label35.Text = "This program is freeware. It may be freely distributed." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Do not package or dist" &
+	"ribute this program with any scripts or additional content." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please distribute a" &
+	"dditional files separately."
 		Me.Label35.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
 		'Label33
 		'
-		Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label33.Location = New System.Drawing.Point(32, 191)
 		Me.Label33.Name = "Label33"
 		Me.Label33.Size = New System.Drawing.Size(641, 77)
@@ -14277,7 +14297,7 @@ Partial Class FrmSettings
 		'
 		'Label17
 		'
-		Me.Label17.AutoSize = true
+		Me.Label17.AutoSize = True
 		Me.Label17.Location = New System.Drawing.Point(522, 78)
 		Me.Label17.Name = "Label17"
 		Me.Label17.Size = New System.Drawing.Size(93, 13)
@@ -14286,7 +14306,7 @@ Partial Class FrmSettings
 		'
 		'Label3
 		'
-		Me.Label3.AutoSize = true
+		Me.Label3.AutoSize = True
 		Me.Label3.Location = New System.Drawing.Point(489, 417)
 		Me.Label3.Name = "Label3"
 		Me.Label3.Size = New System.Drawing.Size(215, 13)
@@ -14302,18 +14322,18 @@ Partial Class FrmSettings
 		Me.PictureBox3.Size = New System.Drawing.Size(531, 58)
 		Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
 		Me.PictureBox3.TabIndex = 166
-		Me.PictureBox3.TabStop = false
+		Me.PictureBox3.TabStop = False
 		'
 		'Label41
 		'
-		Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 9!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label41.Location = New System.Drawing.Point(35, 372)
 		Me.Label41.Name = "Label41"
 		Me.Label41.Size = New System.Drawing.Size(638, 39)
 		Me.Label41.TabIndex = 172
-		Me.Label41.Text = "Thank you to everyone who has provided help and feedback."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"Thank you to the commu"& _ 
-    "nity who's been supportive of my work over the years. Tease AI exists because of"& _ 
-    " you."&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)
+		Me.Label41.Text = "Thank you to everyone who has provided help and feedback." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Thank you to the commu" &
+	"nity who's been supportive of my work over the years. Tease AI exists because of" &
+	" you." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
 		Me.Label41.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
 		'GroupBox47
@@ -14326,7 +14346,7 @@ Partial Class FrmSettings
 		Me.GroupBox47.Name = "GroupBox47"
 		Me.GroupBox47.Size = New System.Drawing.Size(310, 190)
 		Me.GroupBox47.TabIndex = 63
-		Me.GroupBox47.TabStop = false
+		Me.GroupBox47.TabStop = False
 		Me.GroupBox47.Text = "Boobs and Butts Paths"
 		'
 		'GroupBox41
@@ -14336,20 +14356,20 @@ Partial Class FrmSettings
 		Me.GroupBox41.Name = "GroupBox41"
 		Me.GroupBox41.Size = New System.Drawing.Size(298, 74)
 		Me.GroupBox41.TabIndex = 153
-		Me.GroupBox41.TabStop = false
+		Me.GroupBox41.TabStop = False
 		Me.GroupBox41.Text = "Butts"
 		'
 		'Button34
 		'
 		Me.Button34.BackColor = System.Drawing.Color.LightGray
-		Me.Button34.Font = New System.Drawing.Font("Wingdings", 10!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2,Byte))
+		Me.Button34.Font = New System.Drawing.Font("Wingdings", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(2, Byte))
 		Me.Button34.ForeColor = System.Drawing.Color.Black
 		Me.Button34.Location = New System.Drawing.Point(85, 25)
 		Me.Button34.Name = "Button34"
 		Me.Button34.Size = New System.Drawing.Size(34, 28)
 		Me.Button34.TabIndex = 131
 		Me.Button34.Text = "1"
-		Me.Button34.UseVisualStyleBackColor = false
+		Me.Button34.UseVisualStyleBackColor = False
 		'
 		'GroupBox40
 		'
@@ -14357,7 +14377,7 @@ Partial Class FrmSettings
 		Me.GroupBox40.Name = "GroupBox40"
 		Me.GroupBox40.Size = New System.Drawing.Size(298, 74)
 		Me.GroupBox40.TabIndex = 152
-		Me.GroupBox40.TabStop = false
+		Me.GroupBox40.TabStop = False
 		Me.GroupBox40.Text = "Boobs"
 		'
 		'GroupBox44
@@ -14369,13 +14389,13 @@ Partial Class FrmSettings
 		Me.GroupBox44.Name = "GroupBox44"
 		Me.GroupBox44.Size = New System.Drawing.Size(310, 92)
 		Me.GroupBox44.TabIndex = 65
-		Me.GroupBox44.TabStop = false
+		Me.GroupBox44.TabStop = False
 		Me.GroupBox44.Text = "Description"
 		'
 		'Label100
 		'
 		Me.Label100.BackColor = System.Drawing.Color.Transparent
-		Me.Label100.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label100.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label100.ForeColor = System.Drawing.Color.Black
 		Me.Label100.Location = New System.Drawing.Point(11, 16)
 		Me.Label100.Name = "Label100"
@@ -14401,12 +14421,12 @@ Partial Class FrmSettings
 		Me.GroupBox6.Name = "GroupBox6"
 		Me.GroupBox6.Size = New System.Drawing.Size(283, 102)
 		Me.GroupBox6.TabIndex = 156
-		Me.GroupBox6.TabStop = false
+		Me.GroupBox6.TabStop = False
 		Me.GroupBox6.Text = "Performance"
 		'
 		'Label4
 		'
-		Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label4.Location = New System.Drawing.Point(26, 16)
 		Me.Label4.Name = "Label4"
 		Me.Label4.Size = New System.Drawing.Size(77, 17)
@@ -14416,7 +14436,7 @@ Partial Class FrmSettings
 		'
 		'LBLAvgEdgeStroking
 		'
-		Me.LBLAvgEdgeStroking.AutoSize = true
+		Me.LBLAvgEdgeStroking.AutoSize = True
 		Me.LBLAvgEdgeStroking.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
 		Me.LBLAvgEdgeStroking.Location = New System.Drawing.Point(113, 68)
 		Me.LBLAvgEdgeStroking.Name = "LBLAvgEdgeStroking"
@@ -14437,7 +14457,7 @@ Partial Class FrmSettings
 		'Label94
 		'
 		Me.Label94.BackColor = System.Drawing.Color.Transparent
-		Me.Label94.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label94.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label94.ForeColor = System.Drawing.Color.Black
 		Me.Label94.Location = New System.Drawing.Point(189, 16)
 		Me.Label94.Name = "Label94"
@@ -14458,7 +14478,7 @@ Partial Class FrmSettings
 		'Label65
 		'
 		Me.Label65.BackColor = System.Drawing.Color.Transparent
-		Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label65.ForeColor = System.Drawing.Color.Black
 		Me.Label65.Location = New System.Drawing.Point(103, 16)
 		Me.Label65.Name = "Label65"
@@ -14469,7 +14489,7 @@ Partial Class FrmSettings
 		'
 		'LBLAvgEdgeNoTouch
 		'
-		Me.LBLAvgEdgeNoTouch.AutoSize = true
+		Me.LBLAvgEdgeNoTouch.AutoSize = True
 		Me.LBLAvgEdgeNoTouch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
 		Me.LBLAvgEdgeNoTouch.Location = New System.Drawing.Point(215, 68)
 		Me.LBLAvgEdgeNoTouch.Name = "LBLAvgEdgeNoTouch"
@@ -14490,7 +14510,7 @@ Partial Class FrmSettings
 		'Label14
 		'
 		Me.Label14.BackColor = System.Drawing.Color.Transparent
-		Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label14.ForeColor = System.Drawing.Color.Black
 		Me.Label14.Location = New System.Drawing.Point(25, 48)
 		Me.Label14.Name = "Label14"
@@ -14501,7 +14521,7 @@ Partial Class FrmSettings
 		'
 		'Label13
 		'
-		Me.Label13.AutoSize = true
+		Me.Label13.AutoSize = True
 		Me.Label13.Location = New System.Drawing.Point(177, 68)
 		Me.Label13.Name = "Label13"
 		Me.Label13.Size = New System.Drawing.Size(32, 13)
@@ -14511,7 +14531,7 @@ Partial Class FrmSettings
 		'
 		'Label1
 		'
-		Me.Label1.AutoSize = true
+		Me.Label1.AutoSize = True
 		Me.Label1.Location = New System.Drawing.Point(28, 68)
 		Me.Label1.Name = "Label1"
 		Me.Label1.Size = New System.Drawing.Size(79, 13)
@@ -14531,14 +14551,14 @@ Partial Class FrmSettings
 		Me.GroupBox21.Name = "GroupBox21"
 		Me.GroupBox21.Size = New System.Drawing.Size(316, 136)
 		Me.GroupBox21.TabIndex = 66
-		Me.GroupBox21.TabStop = false
+		Me.GroupBox21.TabStop = False
 		Me.GroupBox21.Text = "Description"
 		'
 		'Label153
 		'
 		Me.Label153.BackColor = System.Drawing.Color.Transparent
 		Me.Label153.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.Label153.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label153.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label153.ForeColor = System.Drawing.Color.Black
 		Me.Label153.Location = New System.Drawing.Point(78, 94)
 		Me.Label153.Name = "Label153"
@@ -14550,21 +14570,21 @@ Partial Class FrmSettings
 		'LBLRangeSettingsDescription
 		'
 		Me.LBLRangeSettingsDescription.BackColor = System.Drawing.Color.Transparent
-		Me.LBLRangeSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLRangeSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLRangeSettingsDescription.ForeColor = System.Drawing.Color.Black
 		Me.LBLRangeSettingsDescription.Location = New System.Drawing.Point(6, 16)
 		Me.LBLRangeSettingsDescription.Name = "LBLRangeSettingsDescription"
 		Me.LBLRangeSettingsDescription.Size = New System.Drawing.Size(680, 117)
 		Me.LBLRangeSettingsDescription.TabIndex = 62
-		Me.LBLRangeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
-    "n."
+		Me.LBLRangeSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio" &
+	"n."
 		Me.LBLRangeSettingsDescription.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'Label156
 		'
 		Me.Label156.BackColor = System.Drawing.Color.Transparent
 		Me.Label156.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.Label156.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.Label156.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.Label156.ForeColor = System.Drawing.Color.Black
 		Me.Label156.Location = New System.Drawing.Point(133, 23)
 		Me.Label156.Name = "Label156"
@@ -14582,26 +14602,26 @@ Partial Class FrmSettings
 		Me.GroupBox12.Name = "GroupBox12"
 		Me.GroupBox12.Size = New System.Drawing.Size(171, 124)
 		Me.GroupBox12.TabIndex = 65
-		Me.GroupBox12.TabStop = false
+		Me.GroupBox12.TabStop = False
 		Me.GroupBox12.Text = "Description"
 		'
 		'LBLSubSettingsDescription
 		'
 		Me.LBLSubSettingsDescription.BackColor = System.Drawing.Color.Transparent
-		Me.LBLSubSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+		Me.LBLSubSettingsDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
 		Me.LBLSubSettingsDescription.ForeColor = System.Drawing.Color.Black
 		Me.LBLSubSettingsDescription.Location = New System.Drawing.Point(10, 19)
 		Me.LBLSubSettingsDescription.Name = "LBLSubSettingsDescription"
 		Me.LBLSubSettingsDescription.Size = New System.Drawing.Size(150, 89)
 		Me.LBLSubSettingsDescription.TabIndex = 62
-		Me.LBLSubSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio"& _ 
-    "n."
+		Me.LBLSubSettingsDescription.Text = "Hover over any setting in the menu for a more detailed description of its functio" &
+	"n."
 		'
 		'OpenFileDialog1
 		'
 		Me.OpenFileDialog1.FileName = "OpenFileDialog1"
-		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file"& _ 
-    "s (*.*)|*.*"
+		Me.OpenFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png|BMP Files (*.bmp)|*.bmp|All file" &
+	"s (*.*)|*.*"
 		Me.OpenFileDialog1.Title = "Select an image file"
 		'
 		'GetColor
@@ -14644,12 +14664,12 @@ Partial Class FrmSettings
 		Me.GroupBox65.Name = "GroupBox65"
 		Me.GroupBox65.Size = New System.Drawing.Size(259, 117)
 		Me.GroupBox65.TabIndex = 157
-		Me.GroupBox65.TabStop = false
+		Me.GroupBox65.TabStop = False
 		Me.GroupBox65.Text = "Text to Speech"
 		'
 		'Label136
 		'
-		Me.Label136.AutoSize = true
+		Me.Label136.AutoSize = True
 		Me.Label136.Location = New System.Drawing.Point(14, 52)
 		Me.Label136.Name = "Label136"
 		Me.Label136.Size = New System.Drawing.Size(45, 13)
@@ -14658,7 +14678,7 @@ Partial Class FrmSettings
 		'
 		'Label134
 		'
-		Me.Label134.AutoSize = true
+		Me.Label134.AutoSize = True
 		Me.Label134.Location = New System.Drawing.Point(141, 52)
 		Me.Label134.Name = "Label134"
 		Me.Label134.Size = New System.Drawing.Size(33, 13)
@@ -14687,24 +14707,24 @@ Partial Class FrmSettings
 		Me.ComboBox1.BackColor = System.Drawing.SystemColors.Window
 		Me.ComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
 		Me.ComboBox1.ForeColor = System.Drawing.SystemColors.WindowText
-		Me.ComboBox1.FormattingEnabled = true
+		Me.ComboBox1.FormattingEnabled = True
 		Me.ComboBox1.Location = New System.Drawing.Point(71, 16)
 		Me.ComboBox1.Name = "ComboBox1"
 		Me.ComboBox1.Size = New System.Drawing.Size(178, 21)
 		Me.ComboBox1.TabIndex = 29
-		Me.ComboBox1.TabStop = false
+		Me.ComboBox1.TabStop = False
 		'
 		'CheckBox1
 		'
-		Me.CheckBox1.AutoSize = true
+		Me.CheckBox1.AutoSize = True
 		Me.CheckBox1.ForeColor = System.Drawing.Color.Black
 		Me.CheckBox1.Location = New System.Drawing.Point(10, 18)
 		Me.CheckBox1.Name = "CheckBox1"
 		Me.CheckBox1.Size = New System.Drawing.Size(59, 17)
 		Me.CheckBox1.TabIndex = 28
-		Me.CheckBox1.TabStop = false
+		Me.CheckBox1.TabStop = False
 		Me.CheckBox1.Text = "Enable"
-		Me.CheckBox1.UseVisualStyleBackColor = true
+		Me.CheckBox1.UseVisualStyleBackColor = True
 		'
 		'Label135
 		'
@@ -14731,7 +14751,7 @@ Partial Class FrmSettings
 		Me.TxbImgUrlHardcore.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TxbImgUrlHardcore.Location = New System.Drawing.Point(116, 6)
 		Me.TxbImgUrlHardcore.Name = "TxbImgUrlHardcore"
-		Me.TxbImgUrlHardcore.ReadOnly = true
+		Me.TxbImgUrlHardcore.ReadOnly = True
 		Me.TxbImgUrlHardcore.Size = New System.Drawing.Size(189, 20)
 		Me.TxbImgUrlHardcore.TabIndex = 145
 		'
@@ -14742,7 +14762,7 @@ Partial Class FrmSettings
 		Me.TextBox2.Dock = System.Windows.Forms.DockStyle.Fill
 		Me.TextBox2.Location = New System.Drawing.Point(116, 34)
 		Me.TextBox2.Name = "TextBox2"
-		Me.TextBox2.ReadOnly = true
+		Me.TextBox2.ReadOnly = True
 		Me.TextBox2.Size = New System.Drawing.Size(189, 20)
 		Me.TextBox2.TabIndex = 145
 		'
@@ -14751,13 +14771,13 @@ Partial Class FrmSettings
 		Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
 		Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
 		Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
-		Me.BWURLFiles.WorkerReportsProgress = true
-		Me.BWURLFiles.WorkerSupportsCancellation = true
+		Me.BWURLFiles.WorkerReportsProgress = True
+		Me.BWURLFiles.WorkerSupportsCancellation = True
 		'
 		'FrmSettings
 		'
-		Me.AllowDrop = true
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6!, 13!)
+		Me.AllowDrop = True
+		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.ClientSize = New System.Drawing.Size(727, 465)
 		Me.Controls.Add(Me.GroupBox65)
@@ -14767,342 +14787,344 @@ Partial Class FrmSettings
 		Me.Controls.Add(Me.GroupBox12)
 		Me.Controls.Add(Me.GroupBox21)
 		Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
-		Me.MaximizeBox = false
-		Me.MinimizeBox = false
+		Me.MaximizeBox = False
+		Me.MinimizeBox = False
 		Me.Name = "FrmSettings"
-		Me.ShowIcon = false
+		Me.ShowIcon = False
 		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
 		Me.Text = "Tease AI Settings"
-		Me.SettingsPanel.ResumeLayout(false)
-		Me.SettingsTabs.ResumeLayout(false)
-		Me.TabPage1.ResumeLayout(false)
-		Me.PNLGeneralSettings.ResumeLayout(false)
-		Me.PNLGeneralSettings.PerformLayout
-		Me.GroupBox64.ResumeLayout(false)
-		Me.GroupBox64.PerformLayout
-		Me.GBDommeImages.ResumeLayout(false)
-		Me.GBDommeImages.PerformLayout
-		CType(Me.slideshowNumBox,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBGeneralTextToSpeech.ResumeLayout(false)
-		Me.GBGeneralTextToSpeech.PerformLayout
-		CType(Me.SliderVRate,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.SliderVVolume,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBSafeword.ResumeLayout(false)
-		Me.GBSafeword.PerformLayout
-		Me.GBGeneralSystem.ResumeLayout(false)
-		Me.GBGeneralSystem.PerformLayout
-		Me.GBGeneralImages.ResumeLayout(false)
-		Me.GBGeneralImages.PerformLayout
-		CType(Me.PictureBox2,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBGeneralSettings.ResumeLayout(false)
-		Me.GBGeneralSettings.PerformLayout
-		Me.GBSubFont.ResumeLayout(false)
-		CType(Me.NBFontSize,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBDommeFont.ResumeLayout(false)
-		CType(Me.NBFontSizeD,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TabPage2.ResumeLayout(false)
-		Me.Panel3.ResumeLayout(false)
-		Me.Panel3.PerformLayout
-		CType(Me.PictureBox4,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBDomTypingStyle.ResumeLayout(false)
-		Me.GBDomTypingStyle.PerformLayout
-		CType(Me.NBTypoChance,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox63.ResumeLayout(false)
-		Me.GroupBox63.PerformLayout
-		Me.GBDomRanges.ResumeLayout(false)
-		CType(Me.NBDomMoodMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBDomMoodMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBSubAgeMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBSubAgeMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBSelfAgeMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBSelfAgeMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBAvgCockMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBAvgCockMin,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBDomStats.ResumeLayout(false)
-		Me.GBDomStats.PerformLayout
-		CType(Me.NBEmpathy,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBDomBirthdayDay,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.domageNumBox,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBDomBirthdayMonth,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.domlevelNumBox,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBDomPersonality.ResumeLayout(false)
-		Me.GBDomPersonality.PerformLayout
-		Me.GBDomOrgasms.ResumeLayout(false)
-		Me.GBDomOrgasms.PerformLayout
-		CType(Me.orgasmsPerNumBox,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBDomPetNames.ResumeLayout(false)
-		Me.GBDomPetNames.PerformLayout
-		Me.TabPage10.ResumeLayout(false)
-		Me.Panel2.ResumeLayout(false)
-		Me.GroupBox22.ResumeLayout(false)
-		CType(Me.NBWritingTaskMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBWritingTaskMin,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox45.ResumeLayout(false)
-		CType(Me.CBTSlider,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox35.ResumeLayout(false)
-		Me.GroupBox39.ResumeLayout(false)
-		Me.GroupBox39.PerformLayout
-		Me.GroupBox38.ResumeLayout(false)
-		Me.GroupBox38.PerformLayout
-		Me.GroupBox37.ResumeLayout(false)
-		Me.GroupBox37.PerformLayout
-		Me.GroupBox36.ResumeLayout(false)
-		Me.GroupBox36.PerformLayout
-		Me.GroupBox13.ResumeLayout(false)
-		Me.GroupBox7.ResumeLayout(false)
-		Me.GroupBox7.PerformLayout
-		CType(Me.NBExtremeHoldMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBExtremeHoldMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBLongHoldMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBLongHoldMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBLongEdge,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBHoldTheEdgeMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBHoldTheEdgeMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.PictureBox12,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox32.ResumeLayout(false)
-		Me.GroupBox32.PerformLayout
-		CType(Me.NBBirthdayDay,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.subAgeNumBox,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBBirthdayMonth,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.CockSizeNumBox,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TabPage16.ResumeLayout(false)
-		Me.Panel9.ResumeLayout(false)
-		Me.GroupBox31.ResumeLayout(false)
-		Me.TCScripts.ResumeLayout(false)
-		Me.TabPage21.ResumeLayout(false)
-		Me.TabPage17.ResumeLayout(false)
-		Me.TabPage18.ResumeLayout(false)
-		Me.TabPage19.ResumeLayout(false)
-		Me.GroupBox42.ResumeLayout(false)
-		CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox43.ResumeLayout(false)
-		Me.TabPage7.ResumeLayout(false)
-		Me.TabControl4.ResumeLayout(false)
-		Me.TpImagesUrlFiles.ResumeLayout(false)
-		Me.TpImagesUrlFiles.PerformLayout
-		Me.GroupBox66.ResumeLayout(false)
-		CType(Me.PBURLPreview,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TpImagesGenre.ResumeLayout(false)
-		Me.GrbImageUrlFiles.ResumeLayout(false)
-		Me.TlpImageUrls.ResumeLayout(false)
-		Me.TlpImageUrls.PerformLayout
-		Me.GbxImagesGenre.ResumeLayout(false)
-		Me.TableLayoutPanel1.ResumeLayout(false)
-		Me.TableLayoutPanel1.PerformLayout
-		Me.TabPage33.ResumeLayout(false)
-		Me.TabControl5.ResumeLayout(false)
-		Me.TabPage34.ResumeLayout(false)
-		Me.TabPage34.PerformLayout
-		CType(Me.ImageTagPictureBox,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TabPage35.ResumeLayout(false)
-		Me.TabPage35.PerformLayout
-		Me.GroupBox55.ResumeLayout(false)
-		Me.GroupBox55.PerformLayout
-		Me.GroupBox53.ResumeLayout(false)
-		Me.GroupBox53.PerformLayout
-		Me.GroupBox49.ResumeLayout(false)
-		Me.GroupBox49.PerformLayout
-		Me.GroupBox46.ResumeLayout(false)
-		Me.GroupBox46.PerformLayout
-		Me.GroupBox54.ResumeLayout(false)
-		Me.GroupBox54.PerformLayout
-		Me.GroupBox51.ResumeLayout(false)
-		Me.GroupBox51.PerformLayout
-		Me.GroupBox50.ResumeLayout(false)
-		Me.GroupBox50.PerformLayout
-		Me.GroupBox48.ResumeLayout(false)
-		Me.GroupBox48.PerformLayout
-		Me.TabPage11.ResumeLayout(false)
-		Me.Panel7.ResumeLayout(false)
-		Me.Panel7.PerformLayout
-		CType(Me.PictureBox5,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.WebPictureBox,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TpVideoSettings.ResumeLayout(false)
-		Me.PnlVideoSettings.ResumeLayout(false)
-		CType(Me.PbBannerVideoSettings,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GbxVideoGeneralD.ResumeLayout(false)
-		Me.GbxVideoGeneralD.PerformLayout
-		Me.GbxVideoSpecialD.ResumeLayout(false)
-		Me.GbxVideoSpecialD.PerformLayout
-		Me.GbxVideoGenreD.ResumeLayout(false)
-		Me.GbxVideoGenreD.PerformLayout
-		Me.GbxVideoDescription.ResumeLayout(false)
-		Me.GbxVideoGeneral.ResumeLayout(false)
-		Me.GbxVideoGeneral.PerformLayout
-		Me.GbxVideoSpecial.ResumeLayout(false)
-		Me.GbxVideoSpecial.PerformLayout
-		Me.GbxVideoGenre.ResumeLayout(false)
-		Me.GbxVideoGenre.PerformLayout
-		Me.TabPage20.ResumeLayout(false)
-		Me.TabControl1.ResumeLayout(false)
-		Me.TabPage22.ResumeLayout(false)
-		Me.PNLGlitter.ResumeLayout(false)
-		Me.PNLGlitter.PerformLayout
-		Me.GBGlitterD.ResumeLayout(false)
-		Me.GBGlitterD.PerformLayout
-		CType(Me.GlitterSlider,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.GlitterAV,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBGlitter1.ResumeLayout(false)
-		Me.GBGlitter1.PerformLayout
-		CType(Me.GlitterSlider1,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.GlitterAV1,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBGlitter3.ResumeLayout(false)
-		Me.GBGlitter3.PerformLayout
-		CType(Me.GlitterSlider3,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.GlitterAV3,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBGlitter2.ResumeLayout(false)
-		Me.GBGlitter2.PerformLayout
-		CType(Me.GlitterSlider2,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.GlitterAV2,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TpGames.ResumeLayout(false)
-		Me.TpGames.PerformLayout
-		Me.GbxCardsGold.ResumeLayout(false)
-		Me.GbxCardsGold.PerformLayout
-		CType(Me.GP6,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.GP2,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.GP5,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.GP1,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.GP3,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.GP4,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GbxCardsBackground.ResumeLayout(false)
-		CType(Me.CardBack,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GbxCardsBronze.ResumeLayout(false)
-		Me.GbxCardsBronze.PerformLayout
-		CType(Me.BP3,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.BP6,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.BP5,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.BP2,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.BP4,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.BP1,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GbxCardsSilver.ResumeLayout(false)
-		Me.GbxCardsSilver.PerformLayout
-		CType(Me.SP6,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.SP2,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.SP5,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.SP1,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.SP3,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.SP4,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TabPage6.ResumeLayout(false)
-		Me.Panel10.ResumeLayout(false)
-		Me.Panel10.PerformLayout
-		CType(Me.NBWishlistCost,System.ComponentModel.ISupportInitialize).EndInit
-		Me.PNLWishList.ResumeLayout(false)
-		CType(Me.WishlistCostSilver,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.WishlistCostGold,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.WishlistPreview,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TabPage26.ResumeLayout(false)
-		Me.Panel12.ResumeLayout(false)
-		Me.GroupBox9.ResumeLayout(false)
-		CType(Me.PictureBox10,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox5.ResumeLayout(false)
-		Me.GroupBox5.PerformLayout
-		Me.GroupBox11.ResumeLayout(false)
-		Me.GroupBox1.ResumeLayout(false)
-		CType(Me.PBBackgroundPreview,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TabPage4.ResumeLayout(false)
-		Me.Panel6.ResumeLayout(false)
-		Me.GroupBox69.ResumeLayout(false)
-		Me.GroupBox69.PerformLayout
-		CType(Me.TypeSpeedSlider,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox68.ResumeLayout(false)
-		CType(Me.NBTasksMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTasksMin,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox67.ResumeLayout(false)
-		CType(Me.NBTaskCBTTimeMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTaskCBTTimeMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTaskEdgeHoldTimeMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTaskEdgeHoldTimeMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTaskEdgesMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTaskEdgesMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTaskStrokingTimeMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTaskStrokingTimeMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTaskStrokesMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTaskStrokesMin,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox10.ResumeLayout(false)
-		CType(Me.NBNextImageChance,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox57.ResumeLayout(false)
-		Me.GroupBox57.PerformLayout
-		CType(Me.NBTauntEdging,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.SliderSTF,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.TauntSlider,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTauntCycleMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTauntCycleMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTeaseLengthMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBTeaseLengthMin,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBRangeRuinChance.ResumeLayout(false)
-		Me.GBRangeRuinChance.PerformLayout
-		CType(Me.NBRuinSometimes,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBRuinRarely,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBRuinOften,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox17.ResumeLayout(false)
-		Me.GroupBox19.ResumeLayout(false)
-		CType(Me.NBGreenLightMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBGreenLightMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBRedLightMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBRedLightMin,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox18.ResumeLayout(false)
-		Me.GroupBox18.PerformLayout
-		CType(Me.NBCensorShowMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBCensorHideMax,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBCensorHideMin,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBCensorShowMax,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GBRangeOrgasmChance.ResumeLayout(false)
-		Me.GBRangeOrgasmChance.PerformLayout
-		CType(Me.NBAllowSometimes,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBAllowRarely,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.NBAllowOften,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.PictureBox8,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TabPage13.ResumeLayout(false)
-		Me.TabControl2.ResumeLayout(false)
-		Me.TabPage27.ResumeLayout(false)
-		Me.TabPage27.PerformLayout
-		Me.TabPage14.ResumeLayout(false)
-		Me.TabPage14.PerformLayout
-		Me.TabPage24.ResumeLayout(false)
-		Me.TabPage24.PerformLayout
-		Me.TabPage8.ResumeLayout(false)
-		Me.GroupBox29.ResumeLayout(false)
-		Me.GroupBox28.ResumeLayout(false)
-		Me.GroupBox30.ResumeLayout(false)
-		Me.TabPage15.ResumeLayout(false)
-		Me.TabPage15.PerformLayout
-		Me.GroupBox34.ResumeLayout(false)
-		Me.TabPage25.ResumeLayout(false)
-		Me.Panel11.ResumeLayout(false)
-		Me.GroupBox62.ResumeLayout(false)
-		Me.GroupBox62.PerformLayout
-		Me.GroupBox33.ResumeLayout(false)
-		Me.GroupBox27.ResumeLayout(false)
-		Me.GroupBox27.PerformLayout
-		Me.GroupBox20.ResumeLayout(false)
-		Me.GroupBox20.PerformLayout
-		Me.GroupBox15.ResumeLayout(false)
-		Me.GroupBox15.PerformLayout
-		CType(Me.PictureBox9,System.ComponentModel.ISupportInitialize).EndInit
-		Me.TabPage28.ResumeLayout(false)
-		Me.TabControl3.ResumeLayout(false)
-		Me.TabPage29.ResumeLayout(false)
-		Me.GroupBox26.ResumeLayout(false)
-		Me.GroupBox26.PerformLayout
-		Me.TabPage30.ResumeLayout(false)
-		Me.TabPage5.ResumeLayout(false)
-		Me.Panel5.ResumeLayout(false)
-		Me.Panel5.PerformLayout
-		CType(Me.PictureBox3,System.ComponentModel.ISupportInitialize).EndInit
-		Me.GroupBox47.ResumeLayout(false)
-		Me.GroupBox41.ResumeLayout(false)
-		Me.GroupBox44.ResumeLayout(false)
-		Me.GroupBox6.ResumeLayout(false)
-		Me.GroupBox6.PerformLayout
-		Me.GroupBox21.ResumeLayout(false)
-		Me.GroupBox12.ResumeLayout(false)
-		Me.GroupBox65.ResumeLayout(false)
-		Me.GroupBox65.PerformLayout
-		CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).EndInit
-		CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).EndInit
-		Me.ResumeLayout(false)
+		Me.SettingsPanel.ResumeLayout(False)
+		Me.SettingsTabs.ResumeLayout(False)
+		Me.TabPage1.ResumeLayout(False)
+		Me.PNLGeneralSettings.ResumeLayout(False)
+		Me.PNLGeneralSettings.PerformLayout()
+		Me.GroupBox64.ResumeLayout(False)
+		Me.GroupBox64.PerformLayout()
+		Me.GBDommeImages.ResumeLayout(False)
+		Me.GBDommeImages.PerformLayout()
+		CType(Me.slideshowNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBGeneralTextToSpeech.ResumeLayout(False)
+		Me.GBGeneralTextToSpeech.PerformLayout()
+		CType(Me.SliderVRate, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SliderVVolume, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBSafeword.ResumeLayout(False)
+		Me.GBSafeword.PerformLayout()
+		Me.GBGeneralSystem.ResumeLayout(False)
+		Me.GBGeneralSystem.PerformLayout()
+		Me.GBGeneralImages.ResumeLayout(False)
+		Me.GBGeneralImages.PerformLayout()
+		CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBGeneralSettings.ResumeLayout(False)
+		Me.GBGeneralSettings.PerformLayout()
+		Me.GBSubFont.ResumeLayout(False)
+		CType(Me.NBFontSize, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBDommeFont.ResumeLayout(False)
+		CType(Me.NBFontSizeD, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TabPage2.ResumeLayout(False)
+		Me.Panel3.ResumeLayout(False)
+		Me.Panel3.PerformLayout()
+		CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBDomTypingStyle.ResumeLayout(False)
+		Me.GBDomTypingStyle.PerformLayout()
+		CType(Me.NBTypoChance, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox63.ResumeLayout(False)
+		Me.GroupBox63.PerformLayout()
+		Me.GBDomRanges.ResumeLayout(False)
+		CType(Me.NBDomMoodMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBDomMoodMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBSubAgeMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBSubAgeMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBSelfAgeMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBSelfAgeMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBAvgCockMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBAvgCockMin, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBDomStats.ResumeLayout(False)
+		Me.GBDomStats.PerformLayout()
+		CType(Me.NBEmpathy, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBDomBirthdayDay, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.domageNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBDomBirthdayMonth, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.domlevelNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBDomPersonality.ResumeLayout(False)
+		Me.GBDomPersonality.PerformLayout()
+		Me.GBDomOrgasms.ResumeLayout(False)
+		Me.GBDomOrgasms.PerformLayout()
+		CType(Me.orgasmsPerNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBDomPetNames.ResumeLayout(False)
+		Me.GBDomPetNames.PerformLayout()
+		Me.TabPage10.ResumeLayout(False)
+		Me.Panel2.ResumeLayout(False)
+		Me.GroupBox22.ResumeLayout(False)
+		CType(Me.NBWritingTaskMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBWritingTaskMin, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox45.ResumeLayout(False)
+		CType(Me.CBTSlider, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox35.ResumeLayout(False)
+		Me.GroupBox39.ResumeLayout(False)
+		Me.GroupBox39.PerformLayout()
+		Me.GroupBox38.ResumeLayout(False)
+		Me.GroupBox38.PerformLayout()
+		Me.GroupBox37.ResumeLayout(False)
+		Me.GroupBox37.PerformLayout()
+		Me.GroupBox36.ResumeLayout(False)
+		Me.GroupBox36.PerformLayout()
+		Me.GroupBox13.ResumeLayout(False)
+		Me.GroupBox7.ResumeLayout(False)
+		Me.GroupBox7.PerformLayout()
+		CType(Me.NBExtremeHoldMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBExtremeHoldMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBLongHoldMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBLongHoldMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBLongEdge, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBHoldTheEdgeMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBHoldTheEdgeMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox12, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox32.ResumeLayout(False)
+		Me.GroupBox32.PerformLayout()
+		CType(Me.NBBirthdayDay, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.subAgeNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBBirthdayMonth, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.CockSizeNumBox, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TabPage16.ResumeLayout(False)
+		Me.Panel9.ResumeLayout(False)
+		Me.GroupBox31.ResumeLayout(False)
+		Me.TCScripts.ResumeLayout(False)
+		Me.TabPage21.ResumeLayout(False)
+		Me.TabPage17.ResumeLayout(False)
+		Me.TabPage18.ResumeLayout(False)
+		Me.TabPage19.ResumeLayout(False)
+		Me.GroupBox42.ResumeLayout(False)
+		CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox43.ResumeLayout(False)
+		Me.TabPage7.ResumeLayout(False)
+		Me.TabControl4.ResumeLayout(False)
+		Me.TpImagesUrlFiles.ResumeLayout(False)
+		Me.TpImagesUrlFiles.PerformLayout()
+		Me.GroupBox66.ResumeLayout(False)
+		CType(Me.PBURLPreview, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TpImagesGenre.ResumeLayout(False)
+		Me.GrbImageUrlFiles.ResumeLayout(False)
+		Me.TlpImageUrls.ResumeLayout(False)
+		Me.TlpImageUrls.PerformLayout()
+		Me.GbxImagesGenre.ResumeLayout(False)
+		Me.TableLayoutPanel1.ResumeLayout(False)
+		Me.TableLayoutPanel1.PerformLayout()
+		Me.TabPage33.ResumeLayout(False)
+		Me.TabControl5.ResumeLayout(False)
+		Me.TabPage34.ResumeLayout(False)
+		Me.TabPage34.PerformLayout()
+		CType(Me.ImageTagPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TabPage35.ResumeLayout(False)
+		Me.TabPage35.PerformLayout()
+		Me.GroupBox55.ResumeLayout(False)
+		Me.GroupBox55.PerformLayout()
+		Me.GroupBox53.ResumeLayout(False)
+		Me.GroupBox53.PerformLayout()
+		Me.GroupBox49.ResumeLayout(False)
+		Me.GroupBox49.PerformLayout()
+		Me.GroupBox46.ResumeLayout(False)
+		Me.GroupBox46.PerformLayout()
+		Me.GroupBox54.ResumeLayout(False)
+		Me.GroupBox54.PerformLayout()
+		Me.GroupBox51.ResumeLayout(False)
+		Me.GroupBox51.PerformLayout()
+		Me.GroupBox50.ResumeLayout(False)
+		Me.GroupBox50.PerformLayout()
+		Me.GroupBox48.ResumeLayout(False)
+		Me.GroupBox48.PerformLayout()
+		Me.TabPage11.ResumeLayout(False)
+		Me.Panel7.ResumeLayout(False)
+		Me.Panel7.PerformLayout()
+		CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.WebPictureBox, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TpVideoSettings.ResumeLayout(False)
+		Me.PnlVideoSettings.ResumeLayout(False)
+		CType(Me.PbBannerVideoSettings, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GbxVideoGeneralD.ResumeLayout(False)
+		Me.GbxVideoGeneralD.PerformLayout()
+		Me.GbxVideoSpecialD.ResumeLayout(False)
+		Me.GbxVideoSpecialD.PerformLayout()
+		Me.GbxVideoGenreD.ResumeLayout(False)
+		Me.GbxVideoGenreD.PerformLayout()
+		Me.GbxVideoDescription.ResumeLayout(False)
+		Me.GbxVideoGeneral.ResumeLayout(False)
+		Me.GbxVideoGeneral.PerformLayout()
+		Me.GbxVideoSpecial.ResumeLayout(False)
+		Me.GbxVideoSpecial.PerformLayout()
+		Me.GbxVideoGenre.ResumeLayout(False)
+		Me.GbxVideoGenre.PerformLayout()
+		Me.TabPage20.ResumeLayout(False)
+		Me.TabControl1.ResumeLayout(False)
+		Me.TabPage22.ResumeLayout(False)
+		Me.PNLGlitter.ResumeLayout(False)
+		Me.PNLGlitter.PerformLayout()
+		Me.GBGlitterD.ResumeLayout(False)
+		Me.GBGlitterD.PerformLayout()
+		Me.GrbGlitterfeed.ResumeLayout(False)
+		Me.GrbGlitterfeed.PerformLayout()
+		CType(Me.GlitterSlider, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GlitterAV, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBGlitter1.ResumeLayout(False)
+		Me.GBGlitter1.PerformLayout()
+		CType(Me.GlitterSlider1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GlitterAV1, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBGlitter3.ResumeLayout(False)
+		Me.GBGlitter3.PerformLayout()
+		CType(Me.GlitterSlider3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GlitterAV3, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBGlitter2.ResumeLayout(False)
+		Me.GBGlitter2.PerformLayout()
+		CType(Me.GlitterSlider2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GlitterAV2, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TpGames.ResumeLayout(False)
+		Me.TpGames.PerformLayout()
+		Me.GbxCardsGold.ResumeLayout(False)
+		Me.GbxCardsGold.PerformLayout()
+		CType(Me.GP6, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP5, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.GP4, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GbxCardsBackground.ResumeLayout(False)
+		CType(Me.CardBack, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GbxCardsBronze.ResumeLayout(False)
+		Me.GbxCardsBronze.PerformLayout()
+		CType(Me.BP3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP6, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP5, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP4, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.BP1, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GbxCardsSilver.ResumeLayout(False)
+		Me.GbxCardsSilver.PerformLayout()
+		CType(Me.SP6, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP2, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP5, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP3, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SP4, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TabPage6.ResumeLayout(False)
+		Me.Panel10.ResumeLayout(False)
+		Me.Panel10.PerformLayout()
+		CType(Me.NBWishlistCost, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.PNLWishList.ResumeLayout(False)
+		CType(Me.WishlistCostSilver, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.WishlistCostGold, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.WishlistPreview, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TabPage26.ResumeLayout(False)
+		Me.Panel12.ResumeLayout(False)
+		Me.GroupBox9.ResumeLayout(False)
+		CType(Me.PictureBox10, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox5.ResumeLayout(False)
+		Me.GroupBox5.PerformLayout()
+		Me.GroupBox11.ResumeLayout(False)
+		Me.GroupBox1.ResumeLayout(False)
+		CType(Me.PBBackgroundPreview, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TabPage4.ResumeLayout(False)
+		Me.Panel6.ResumeLayout(False)
+		Me.GroupBox69.ResumeLayout(False)
+		Me.GroupBox69.PerformLayout()
+		CType(Me.TypeSpeedSlider, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox68.ResumeLayout(False)
+		CType(Me.NBTasksMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTasksMin, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox67.ResumeLayout(False)
+		CType(Me.NBTaskCBTTimeMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTaskCBTTimeMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTaskEdgeHoldTimeMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTaskEdgeHoldTimeMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTaskEdgesMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTaskEdgesMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTaskStrokingTimeMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTaskStrokingTimeMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTaskStrokesMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTaskStrokesMin, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox10.ResumeLayout(False)
+		CType(Me.NBNextImageChance, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox57.ResumeLayout(False)
+		Me.GroupBox57.PerformLayout()
+		CType(Me.NBTauntEdging, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.SliderSTF, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.TauntSlider, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTauntCycleMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTauntCycleMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTeaseLengthMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBTeaseLengthMin, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBRangeRuinChance.ResumeLayout(False)
+		Me.GBRangeRuinChance.PerformLayout()
+		CType(Me.NBRuinSometimes, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBRuinRarely, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBRuinOften, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox17.ResumeLayout(False)
+		Me.GroupBox19.ResumeLayout(False)
+		CType(Me.NBGreenLightMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBGreenLightMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBRedLightMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBRedLightMin, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox18.ResumeLayout(False)
+		Me.GroupBox18.PerformLayout()
+		CType(Me.NBCensorShowMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBCensorHideMax, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBCensorHideMin, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBCensorShowMax, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBRangeOrgasmChance.ResumeLayout(False)
+		Me.GBRangeOrgasmChance.PerformLayout()
+		CType(Me.NBAllowSometimes, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBAllowRarely, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.NBAllowOften, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.PictureBox8, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TabPage13.ResumeLayout(False)
+		Me.TabControl2.ResumeLayout(False)
+		Me.TabPage27.ResumeLayout(False)
+		Me.TabPage27.PerformLayout()
+		Me.TabPage14.ResumeLayout(False)
+		Me.TabPage14.PerformLayout()
+		Me.TabPage24.ResumeLayout(False)
+		Me.TabPage24.PerformLayout()
+		Me.TabPage8.ResumeLayout(False)
+		Me.GroupBox29.ResumeLayout(False)
+		Me.GroupBox28.ResumeLayout(False)
+		Me.GroupBox30.ResumeLayout(False)
+		Me.TabPage15.ResumeLayout(False)
+		Me.TabPage15.PerformLayout()
+		Me.GroupBox34.ResumeLayout(False)
+		Me.TabPage25.ResumeLayout(False)
+		Me.Panel11.ResumeLayout(False)
+		Me.GroupBox62.ResumeLayout(False)
+		Me.GroupBox62.PerformLayout()
+		Me.GroupBox33.ResumeLayout(False)
+		Me.GroupBox27.ResumeLayout(False)
+		Me.GroupBox27.PerformLayout()
+		Me.GroupBox20.ResumeLayout(False)
+		Me.GroupBox20.PerformLayout()
+		Me.GroupBox15.ResumeLayout(False)
+		Me.GroupBox15.PerformLayout()
+		CType(Me.PictureBox9, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.TabPage28.ResumeLayout(False)
+		Me.TabControl3.ResumeLayout(False)
+		Me.TabPage29.ResumeLayout(False)
+		Me.GroupBox26.ResumeLayout(False)
+		Me.GroupBox26.PerformLayout()
+		Me.TabPage30.ResumeLayout(False)
+		Me.TabPage5.ResumeLayout(False)
+		Me.Panel5.ResumeLayout(False)
+		Me.Panel5.PerformLayout()
+		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox47.ResumeLayout(False)
+		Me.GroupBox41.ResumeLayout(False)
+		Me.GroupBox44.ResumeLayout(False)
+		Me.GroupBox6.ResumeLayout(False)
+		Me.GroupBox6.PerformLayout()
+		Me.GroupBox21.ResumeLayout(False)
+		Me.GroupBox12.ResumeLayout(False)
+		Me.GroupBox65.ResumeLayout(False)
+		Me.GroupBox65.PerformLayout()
+		CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
+		CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.ResumeLayout(False)
 
-End Sub
+	End Sub
 	Friend WithEvents SettingsPanel As System.Windows.Forms.Panel
 	Friend WithEvents SettingsTabs As System.Windows.Forms.TabControl
 	Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
@@ -15787,7 +15809,6 @@ End Sub
 	Friend WithEvents CBGlitterFeedOff As System.Windows.Forms.RadioButton
 	Friend WithEvents CBGlitterFeedScripts As System.Windows.Forms.RadioButton
 	Friend WithEvents CBGlitterFeed As System.Windows.Forms.RadioButton
-	Friend WithEvents Label118 As System.Windows.Forms.Label
 	Friend WithEvents GroupBox33 As System.Windows.Forms.GroupBox
 	Friend WithEvents Button11 As System.Windows.Forms.Button
 	Friend WithEvents LBLChastityState As System.Windows.Forms.Label
@@ -16186,4 +16207,5 @@ End Sub
 	Friend WithEvents BTNLocalTagDir As Button
 	Friend WithEvents CBLockOrgasmChances As CheckBox
 	Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+	Friend WithEvents GrbGlitterfeed As GroupBox
 End Class
