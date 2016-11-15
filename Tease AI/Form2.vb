@@ -2963,30 +2963,22 @@ SkipDeserializing:
 
 	Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitterD.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.GlitterNCDommeColor = GetColor.Color
 			LBLGlitterNCDomme.ForeColor = GetColor.Color
-			My.Settings.GlitterNCDomme = Color2Html(GetColor.Color)
 		End If
 	End Sub
 	Private Sub Button27_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter1.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.GlitterNC1Color = GetColor.Color
 			LBLGlitterNC1.ForeColor = GetColor.Color
-			My.Settings.GlitterNC1 = Color2Html(GetColor.Color)
 		End If
 	End Sub
 	Private Sub Button4_Click_3(sender As System.Object, e As System.EventArgs) Handles BTNGlitter2.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.GlitterNC2Color = GetColor.Color
-			LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
-			My.Settings.GlitterNC2 = Color2Html(GetColor.Color)
+			LBLGlitterNC2.ForeColor = GetColor.Color
 		End If
 	End Sub
 	Private Sub Button26_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter3.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
-			My.Settings.GlitterNC3Color = GetColor.Color
 			LBLGlitterNC3.ForeColor = GetColor.Color
-			My.Settings.GlitterNC3 = Color2Html(GetColor.Color)
 		End If
 	End Sub
 
@@ -3117,8 +3109,8 @@ SkipDeserializing:
 			If My.Settings.CBGlitterFeedScripts = True Then SettingsList.Add("Glitter Feed: Scripts")
 			If My.Settings.CBGlitterFeedOff = True Then SettingsList.Add("Glitter Feed: Off")
 
-			SettingsList.Add("Short Name: " & TBGlitterShortName.Text)
-			SettingsList.Add("Domme Color: " & LBLGlitterNCDomme.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Short Name: " & My.Settings.GlitterSN)
+			SettingsList.Add("Domme Color: " & My.Settings.GlitterNCDommeColor.ToArgb.ToString)
 			SettingsList.Add("Tease: " & My.Settings.CBTease)
 			SettingsList.Add("Egotist: " & My.Settings.CBEgotist)
 			SettingsList.Add("Trivia: " & My.Settings.CBTrivia)
@@ -3129,19 +3121,19 @@ SkipDeserializing:
 
 			SettingsList.Add("Contact 1 Enabled: " & My.Settings.CBGlitter1)
 			SettingsList.Add("Contact 1 Name: " & My.Settings.Glitter1)
-			SettingsList.Add("Contact 1 Color: " & LBLGlitterNC1.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Contact 1 Color: " & My.Settings.GlitterNC1Color.ToArgb.ToString)
 			SettingsList.Add("Contact 1 Image Directory: " & My.Settings.Contact1ImageDir)
 			SettingsList.Add("Contact 1 Post Frequency: " & My.Settings.Glitter1Slider)
 
 			SettingsList.Add("Contact 2 Enabled: " & My.Settings.CBGlitter2)
 			SettingsList.Add("Contact 2 Name: " & My.Settings.Glitter2)
-			SettingsList.Add("Contact 2 Color: " & LBLGlitterNC2.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Contact 2 Color: " & My.Settings.GlitterNC2Color.ToArgb.ToString)
 			SettingsList.Add("Contact 2 Image Directory: " & My.Settings.Contact2ImageDir)
 			SettingsList.Add("Contact 2 Post Frequency: " & My.Settings.Glitter2Slider)
 
 			SettingsList.Add("Contact 3 Enabled: " & My.Settings.CBGlitter3)
 			SettingsList.Add("Contact 3 Name: " & My.Settings.Glitter3)
-			SettingsList.Add("Contact 3 Color: " & LBLGlitterNC3.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Contact 3 Color: " & My.Settings.GlitterNC3Color.ToArgb.ToString)
 			SettingsList.Add("Contact 3 Image Directory: " & My.Settings.Contact3ImageDir)
 			SettingsList.Add("Contact 3 Post Frequency: " & My.Settings.Glitter3Slider)
 
@@ -3166,7 +3158,7 @@ SkipDeserializing:
 	End Sub
 
 	Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
-
+		'ISSUE: Loading a corrupted textfile results in half loaded Glitter settings.
 		OpenSettingsDialog.Title = "Select a Glitter settings file"
 		OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
 
@@ -3193,10 +3185,10 @@ SkipDeserializing:
 				If CheckState = "Scripts" Then My.Settings.CBGlitterFeedScripts = True
 				If CheckState = "Off" Then My.Settings.CBGlitterFeedOff = True
 
-				TBGlitterShortName.Text = SettingsList(1).Replace("Short Name: ", "")
+				My.Settings.GlitterSN = SettingsList(1).Replace("Short Name: ", "")
 
 				Dim GlitterColor As Color = Color.FromArgb(SettingsList(2).Replace("Domme Color: ", ""))
-				LBLGlitterNCDomme.ForeColor = GlitterColor
+				My.Settings.GlitterNCDommeColor = GlitterColor
 
 				My.Settings.CBTease = SettingsList(3).Replace("Tease: ", "")
 				My.Settings.CBEgotist = SettingsList(4).Replace("Egotist: ", "")
@@ -3210,21 +3202,21 @@ SkipDeserializing:
 				My.Settings.CBGlitter1 = SettingsList(10).Replace("Contact 1 Enabled: ", "")
 				My.Settings.Glitter1 = SettingsList(11).Replace("Contact 1 Name: ", "")
 				GlitterColor = Color.FromArgb(SettingsList(12).Replace("Contact 1 Color: ", ""))
-				LBLGlitterNC1.ForeColor = GlitterColor
+				My.Settings.GlitterNC1Color = GlitterColor
 				My.Settings.Contact1ImageDir = SettingsList(13).Replace("Contact 1 Image Directory: ", "")
 				My.Settings.Glitter1Slider = SettingsList(14).Replace("Contact 1 Post Frequency: ", "")
 
 				My.Settings.CBGlitter2 = SettingsList(15).Replace("Contact 2 Enabled: ", "")
 				My.Settings.Glitter2 = SettingsList(16).Replace("Contact 2 Name: ", "")
 				GlitterColor = Color.FromArgb(SettingsList(17).Replace("Contact 2 Color: ", ""))
-				LBLGlitterNC2.ForeColor = GlitterColor
+				My.Settings.GlitterNC2Color = GlitterColor
 				My.Settings.Contact2ImageDir = SettingsList(18).Replace("Contact 2 Image Directory: ", "")
 				My.Settings.Glitter2Slider = SettingsList(19).Replace("Contact 2 Post Frequency: ", "")
 
 				My.Settings.CBGlitter3 = SettingsList(20).Replace("Contact 3 Enabled: ", "")
 				My.Settings.Glitter3 = SettingsList(21).Replace("Contact 3 Name: ", "")
 				GlitterColor = Color.FromArgb(SettingsList(22).Replace("Contact 3 Color: ", ""))
-				LBLGlitterNC3.ForeColor = GlitterColor
+				My.Settings.GlitterNC3Color = GlitterColor
 				My.Settings.Contact3ImageDir = SettingsList(23).Replace("Contact 3 Image Directory: ", "")
 				My.Settings.Glitter3Slider = SettingsList(24).Replace("Contact 3 Post Frequency: ", "")
 
@@ -3253,92 +3245,11 @@ SkipDeserializing:
 				End Try
 
 
-				SaveGlitterSettings()
-
 			Catch
 				MessageBox.Show(Me, "This Glitter settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				LoadGlitterSettings()
 			End Try
 
 		End If
-	End Sub
-	'TODO-Next Remove method.
-	Public Sub SaveGlitterSettings()
-
-		'If CBGlitterFeed.Checked = True Then
-		'	My.Settings.CBGlitterFeed = True
-		'	My.Settings.CBGlitterFeedScripts = False
-		'	My.Settings.CBGlitterFeedOff = False
-		'End If
-		'If CBGlitterFeedScripts.Checked = True Then
-		'	My.Settings.CBGlitterFeed = False
-		'	My.Settings.CBGlitterFeedScripts = True
-		'	My.Settings.CBGlitterFeedOff = False
-		'End If
-		'If CBGlitterFeedOff.Checked = True Then
-		'	My.Settings.CBGlitterFeed = False
-		'	My.Settings.CBGlitterFeedScripts = False
-		'	My.Settings.CBGlitterFeedOff = True
-		'End If
-
-
-		My.Settings.GlitterNCDommeColor = LBLGlitterNCDomme.ForeColor
-
-		'My.Settings.CBTease = CBTease.Checked
-		'My.Settings.CBEgotist = CBEgotist.Checked
-		'My.Settings.CBTrivia = CBTrivia.Checked
-		'My.Settings.CBDaily = CBDaily.Checked
-		'My.Settings.CBCustom1 = CBCustom1.Checked
-		'My.Settings.CBCustom2 = CBCustom2.Checked
-		'My.Settings.GlitterDSlider = GlitterSlider.Value
-
-		'My.Settings.CBGlitter1 = CBGlitter1.Checked
-		'My.Settings.Glitter1 = TBGlitter1.Text
-		My.Settings.GlitterNC1Color = LBLGlitterNC1.ForeColor
-		'My.Settings.Contact1ImageDir = LBLContact1ImageDir.Text
-
-		'My.Settings.CBGlitter2 = CBGlitter2.Checked
-		'My.Settings.Glitter2 = TBGlitter2.Text
-		My.Settings.GlitterNC2Color = LBLGlitterNC2.ForeColor
-		'My.Settings.Contact2ImageDir = LBLContact2ImageDir.Text
-
-		'My.Settings.CBGlitter3 = CBGlitter3.Checked
-		'My.Settings.Glitter3 = TBGlitter3.Text
-		My.Settings.GlitterNC3Color = LBLGlitterNC3.ForeColor
-		'My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
-
-	End Sub
-
-	'TODO-Next: Remove method
-	Public Sub LoadGlitterSettings()
-
-		'If My.Settings.CBGlitterFeed = True Then CBGlitterFeed.Checked = True
-		'If My.Settings.CBGlitterFeedScripts = True Then CBGlitterFeedScripts.Checked = True
-		'If My.Settings.CBGlitterFeedOff = True Then CBGlitterFeedOff.Checked = True
-
-
-		LBLGlitterNCDomme.ForeColor = My.Settings.GlitterNCDommeColor
-
-		'CBTease.Checked = My.Settings.CBTease
-		'CBEgotist.Checked = My.Settings.CBEgotist
-		'CBTrivia.Checked = My.Settings.CBTrivia
-		'CBDaily.Checked = My.Settings.CBDaily
-		'CBCustom1.Checked = My.Settings.CBCustom1
-		'CBCustom2.Checked = My.Settings.CBCustom2
-		'GlitterSlider.Value = My.Settings.GlitterDSlider
-
-		'TBGlitter1.Text = My.Settings.Glitter1
-		LBLGlitterNC1.ForeColor = My.Settings.GlitterNC1Color
-		'LBLContact1ImageDir.Text = My.Settings.Contact1ImageDir
-
-		'TBGlitter2.Text = My.Settings.Glitter2
-		LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
-		'LBLContact2ImageDir.Text = My.Settings.Contact2ImageDir
-
-		'TBGlitter3.Text = My.Settings.Glitter3
-		LBLGlitterNC3.ForeColor = My.Settings.GlitterNC3Color
-		'LBLContact3ImageDir.Text = My.Settings.Contact3ImageDir
-
 	End Sub
 
 #End Region ' Glitter

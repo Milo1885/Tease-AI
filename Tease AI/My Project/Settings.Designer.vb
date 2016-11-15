@@ -665,150 +665,102 @@ Namespace My
                 Me("Glitter3") = value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("#0080FF")>  _
-        Public Property GlitterNCDomme() As String
-            Get
-                Return CType(Me("GlitterNCDomme"),String)
-            End Get
-            Set
-                Me("GlitterNCDomme") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("#FF0080")>  _
-        Public Property GlitterNC1() As String
-            Get
-                Return CType(Me("GlitterNC1"),String)
-            End Get
-            Set
-                Me("GlitterNC1") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("#8080C0")>  _
-        Public Property GlitterNC2() As String
-            Get
-                Return CType(Me("GlitterNC2"),String)
-            End Get
-            Set
-                Me("GlitterNC2") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("#0080C0")>  _
-        Public Property GlitterNC3() As String
-            Get
-                Return CType(Me("GlitterNC3"),String)
-            End Get
-            Set
-                Me("GlitterNC3") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("0, 128, 255")>  _
-        Public Property GlitterNCDommeColor() As Global.System.Drawing.Color
-            Get
-                Return CType(Me("GlitterNCDommeColor"),Global.System.Drawing.Color)
-            End Get
-            Set
-                Me("GlitterNCDommeColor") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("255, 0, 128")>  _
-        Public Property GlitterNC1Color() As Global.System.Drawing.Color
-            Get
-                Return CType(Me("GlitterNC1Color"),Global.System.Drawing.Color)
-            End Get
-            Set
-                Me("GlitterNC1Color") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("128, 128, 192")>  _
-        Public Property GlitterNC2Color() As Global.System.Drawing.Color
-            Get
-                Return CType(Me("GlitterNC2Color"),Global.System.Drawing.Color)
-            End Get
-            Set
-                Me("GlitterNC2Color") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("255, 128, 255")>  _
-        Public Property GlitterNC3Color() As Global.System.Drawing.Color
-            Get
-                Return CType(Me("GlitterNC3Color"),Global.System.Drawing.Color)
-            End Get
-            Set
-                Me("GlitterNC3Color") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property GlitterDSlider() As Integer
-            Get
-                Return CType(Me("GlitterDSlider"),Integer)
-            End Get
-            Set
-                Me("GlitterDSlider") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property Glitter1Slider() As Integer
-            Get
-                Return CType(Me("Glitter1Slider"),Integer)
-            End Get
-            Set
-                Me("Glitter1Slider") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property Glitter2Slider() As Integer
-            Get
-                Return CType(Me("Glitter2Slider"),Integer)
-            End Get
-            Set
-                Me("Glitter2Slider") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("5")>  _
-        Public Property Glitter3Slider() As Integer
-            Get
-                Return CType(Me("Glitter3Slider"),Integer)
-            End Get
-            Set
-                Me("Glitter3Slider") = value
-            End Set
-        End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("0, 128, 255")>
+		Public Property GlitterNCDommeColor() As Global.System.Drawing.Color
+			Get
+				Return CType(Me("GlitterNCDommeColor"), Global.System.Drawing.Color)
+			End Get
+			Set
+				Me("GlitterNCDommeColor") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("255, 0, 128")>
+		Public Property GlitterNC1Color() As Global.System.Drawing.Color
+			Get
+				Return CType(Me("GlitterNC1Color"), Global.System.Drawing.Color)
+			End Get
+			Set
+				Me("GlitterNC1Color") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("128, 128, 192")>
+		Public Property GlitterNC2Color() As Global.System.Drawing.Color
+			Get
+				Return CType(Me("GlitterNC2Color"), Global.System.Drawing.Color)
+			End Get
+			Set
+				Me("GlitterNC2Color") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("255, 128, 255")>
+		Public Property GlitterNC3Color() As Global.System.Drawing.Color
+			Get
+				Return CType(Me("GlitterNC3Color"), Global.System.Drawing.Color)
+			End Get
+			Set
+				Me("GlitterNC3Color") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
+		Public Property GlitterDSlider() As Integer
+			Get
+				Return CType(Me("GlitterDSlider"), Integer)
+			End Get
+			Set
+				Me("GlitterDSlider") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
+		Public Property Glitter1Slider() As Integer
+			Get
+				Return CType(Me("Glitter1Slider"), Integer)
+			End Get
+			Set
+				Me("Glitter1Slider") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
+		Public Property Glitter2Slider() As Integer
+			Get
+				Return CType(Me("Glitter2Slider"), Integer)
+			End Get
+			Set
+				Me("Glitter2Slider") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("5")>
+		Public Property Glitter3Slider() As Integer
+			Get
+				Return CType(Me("Glitter3Slider"), Integer)
+			End Get
+			Set
+				Me("Glitter3Slider") = Value
+			End Set
+		End Property
 
 		<Global.System.Configuration.UserScopedSettingAttribute(),
 		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
@@ -4360,15 +4312,15 @@ Namespace My
 		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
 		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
 		Public Property CBGlitterFeedOff() As Boolean
-            Get
-                Return CType(Me("CBGlitterFeedOff"),Boolean)
-            End Get
-            Set
-                Me("CBGlitterFeedOff") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+			Get
+				Return CType(Me("CBGlitterFeedOff"), Boolean)
+			End Get
+			Set
+				Me("CBGlitterFeedOff") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property CBGlitterFeedScripts() As Boolean

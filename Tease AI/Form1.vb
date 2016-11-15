@@ -7357,7 +7357,7 @@ CensorConstant:
 
 		Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
-		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNCDomme & """><b>" & domName.Text & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
+		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNCDommeColor) & """><b>" & domName.Text & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
 		StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText & "</font><br><br>"
 
 		'Debug.Print(GlitterImageAV)
@@ -7562,7 +7562,7 @@ StatusUpdate1:
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
 		If ssh.StatusChance1 < My.Settings.Glitter1Slider * 10 And My.Settings.CBGlitter1 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC1 & """><b>" & My.Settings.Glitter1 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC1Color) & """><b>" & My.Settings.Glitter1 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText1 & "</font><br><br>"
 
 
@@ -7585,7 +7585,7 @@ StatusUpdate2:
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
 		If ssh.StatusChance2 < My.Settings.Glitter2Slider * 10 And My.Settings.CBGlitter2 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC2 & """><b>" & My.Settings.Glitter2 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC2Color) & """><b>" & My.Settings.Glitter2 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText2 & "</font><br><br>"
 
 
@@ -7608,7 +7608,7 @@ StatusUpdate3:
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
 		If ssh.StatusChance3 < My.Settings.Glitter3Slider * 10 And My.Settings.CBGlitter3 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC3 & """><b>" & My.Settings.Glitter3 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC3Color) & """><b>" & My.Settings.Glitter3 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText3 & "</font><br><br>"
 
 
