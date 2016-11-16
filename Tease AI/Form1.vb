@@ -451,52 +451,19 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 		Me.ActiveControl = Me.chatBox
 
-
-		'If My.Settings.CBGlitterFeed = False And My.Settings.CBGlitterFeedScripts = False And My.Settings.CBGlitterFeedOff = False Then
-		'My.Settings.CBGlitterFeedOff = True
-		'End If
-
-		'QUESTION: (1885) Don't know what to do about these settings. The radio buttons staunchly refuse to be DataBound and non-DataBound settings don't currently save, so ¯\_(ツ)_/¯
-		'ANSWER: (Stefaf) I'll take a look at this based on this link: http://stackoverflow.com/questions/11405020/radio-buttons-and-databinding-in-vb-net
-		'TODO-Next-Stefaf: Add Databinding to RadioButtons.
-		If My.Settings.CBGlitterFeed = True Then FrmSettings.CBGlitterFeed.Checked = True
-		If My.Settings.CBGlitterFeedScripts = True Then FrmSettings.CBGlitterFeedScripts.Checked = True
-		If My.Settings.CBGlitterFeedOff = True Then FrmSettings.CBGlitterFeedOff.Checked = True
-
-		'TODO-Next-Stefaf: Optimize Code
-		If My.Settings.CBTease = True Then
-			FrmSettings.CBTease.Checked = True
-		Else
-			FrmSettings.CBTease.Checked = False
+		'################## Validate RadioButtons #################
+		If My.Settings.CBGlitterFeedOff Then
+			My.Settings.CBGlitterFeed = False
+			My.Settings.CBGlitterFeedScripts = False
+		ElseIf My.Settings.CBGlitterFeed
+			' No need to unset My.Settings.CBGlitterFeedOff. 
+			' If it would be true, this branch Is unreachable
+			My.Settings.CBGlitterFeedScripts = False
+		ElseIf My.Settings.CBGlitterFeed = False _
+		AndAlso My.Settings.CBGlitterFeedOff = False _
+		AndAlso My.Settings.CBGlitterFeedScripts = False Then
+			My.Settings.CBGlitterFeedOff = True
 		End If
-		If My.Settings.CBEgotist = True Then
-			FrmSettings.CBEgotist.Checked = True
-		Else
-			FrmSettings.CBEgotist.Checked = False
-		End If
-		If My.Settings.CBTrivia = True Then
-			FrmSettings.CBTrivia.Checked = True
-		Else
-			FrmSettings.CBTrivia.Checked = False
-		End If
-		If My.Settings.CBDaily = True Then
-			FrmSettings.CBDaily.Checked = True
-		Else
-			FrmSettings.CBDaily.Checked = False
-		End If
-		If My.Settings.CBCustom1 = True Then
-			FrmSettings.CBCustom1.Checked = True
-		Else
-			FrmSettings.CBCustom1.Checked = False
-		End If
-		If My.Settings.CBCustom2 = True Then
-			FrmSettings.CBCustom2.Checked = True
-		Else
-			FrmSettings.CBCustom2.Checked = False
-		End If
-
-
-
 
 
 		FrmSplash.PBSplash.Value += 1
@@ -7390,7 +7357,7 @@ CensorConstant:
 
 		Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
-		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNCDomme & """><b>" & domName.Text & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
+		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNCDommeColor) & """><b>" & domName.Text & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
 		StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText & "</font><br><br>"
 
 		'Debug.Print(GlitterImageAV)
@@ -7595,7 +7562,7 @@ StatusUpdate1:
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
 		If ssh.StatusChance1 < My.Settings.Glitter1Slider * 10 And My.Settings.CBGlitter1 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC1 & """><b>" & My.Settings.Glitter1 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S1Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC1Color) & """><b>" & My.Settings.Glitter1 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText1 & "</font><br><br>"
 
 
@@ -7618,7 +7585,7 @@ StatusUpdate2:
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
 		If ssh.StatusChance2 < My.Settings.Glitter2Slider * 10 And My.Settings.CBGlitter2 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC2 & """><b>" & My.Settings.Glitter2 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S2Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC2Color) & """><b>" & My.Settings.Glitter2 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText2 & "</font><br><br>"
 
 
@@ -7641,7 +7608,7 @@ StatusUpdate3:
 		TextColor = Color2Html(My.Settings.ChatTextColor)
 
 		If ssh.StatusChance3 < My.Settings.Glitter3Slider * 10 And My.Settings.CBGlitter3 = True Then
-			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & My.Settings.GlitterNC3 & """><b>" & My.Settings.Glitter3 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
+			StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 32; height: 32; border: 0;"" src=""" & S3Pic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNC3Color) & """><b>" & My.Settings.Glitter3 & "</b></font><br> <font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br>" ' & "<font face=""Cambria"" size=""2"" color=""DarkGray"">" & TimeOfDay & "</font><br>"
 			StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText3 & "</font><br><br>"
 
 
@@ -7783,37 +7750,37 @@ StatusUpdateEnd:
 
 				ssh.UpdateList.Clear()
 
-				If FrmSettings.CBTease.Checked = True Then
+				If My.Settings.CBTease = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Tease\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBEgotist.Checked = True Then
+				If My.Settings.CBEgotist = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Egotist\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBTrivia.Checked = True Then
+				If My.Settings.CBTrivia = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Trivia\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBDaily.Checked = True Then
+				If My.Settings.CBDaily = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Daily\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBCustom1.Checked = True Then
+				If My.Settings.CBCustom1 = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Custom 1\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next
 				End If
 
-				If FrmSettings.CBCustom2.Checked = True Then
+				If My.Settings.CBCustom2 = True Then
 					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Custom 2\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 						ssh.UpdateList.Add(foundFile)
 					Next

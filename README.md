@@ -8,11 +8,13 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 # Changelog - Patch 54.5.1
 
-	Added Features:
+Added Features:
 		
-	Bugfixes:
+Bugfixes:
 
-	Miscellaneous:
+* Miscellaneous:
+	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.
+
 	
 # Changelog - Patch 54.5.0	
 
@@ -59,7 +61,7 @@ Miscellaneous:
 	Removed several unused variables.
 	SettingsForm VideoSettings GUI reworked.
 	SettingsForm ImageSettings GUI reworked.
-	SettingsForm Apps-Games GUI reworked. Still WIP -> Unchanged references causing sometimes glitter names to be blank in chat.
+	SettingsForm Apps-Games GUI reworked.
 	Suspending/Resuming/Resetting Session reworked.
 		Now all necessary data is stored into a single binary *.save file. This includes all Variables, Flags, Slideshows, TimerStates and regular Data. By Holding down the control key while clicking suspend or resume the user is asked for a custom file to save to or load from.
 	Reworked Code to Display Images.
