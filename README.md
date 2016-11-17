@@ -8,12 +8,15 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 # Changelog - Patch 54.5.1
 
-Added Features:
+* Added Features:
 		
-Bugfixes:
+* Bugfixes:
+	* After using an ImageCommand the slideshow was locked.
+	* Filtering code was unable to handle parametrized command filters and image commands.
 
 * Miscellaneous:
 	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.
+	* Optimized performance of @ShowTaggedImage code.
 
 	
 # Changelog - Patch 54.5.0	
