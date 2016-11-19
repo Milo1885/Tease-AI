@@ -4,16 +4,21 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 # Todo:
 
 Stefaf: Integration of Class myDirectory: Status ongoing.
-	Testrun to sort Lists like Win-Explorer: Status Initial
+	Testrun to sort Lists like Win-Explorer: initialized in v0.54.5.1
 	
 # Changelog - Patch 54.5.1
 
-Added Features:
+* Added Features:
+	* Added new sorting method to sort file lists like the Windows file Explorer does.
 		
-Bugfixes:
+* Bugfixes:
+	* After using an ImageCommand the slideshow was locked.
+	* Filtering code was unable to handle parametrized command filters and image commands.
+	* The slideshow folder check method forced to include slideshow subdirectories, even if the directory was valid. 
 
 * Miscellaneous:
 	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.
+	* Optimized performance of @ShowTaggedImage code.
 
 	
 # Changelog - Patch 54.5.0	

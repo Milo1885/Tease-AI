@@ -147,9 +147,9 @@ checkFolder:
 
 				For Each folder In myDirectory.GetDirectories(rtnPath).ToList
 					If My.Settings.CBSlideshowSubDir Then
-						imgCount += myDirectory.GetFilesImages(rtnPath, SearchOption.AllDirectories).Count
+						imgCount += myDirectory.GetFilesImages(folder, SearchOption.AllDirectories).Count
 					Else
-						imgCount += myDirectory.GetFilesImages(rtnPath, SearchOption.TopDirectoryOnly).Count
+						imgCount += myDirectory.GetFilesImages(folder, SearchOption.TopDirectoryOnly).Count
 					End If
 					If imgCount > 0 Then Exit For
 				Next
