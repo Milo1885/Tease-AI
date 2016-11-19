@@ -7892,9 +7892,9 @@ StatusUpdateEnd:
 		End If
 
 		StringClean = StringClean.Replace("#SubName", subName.Text)
-		Debug.Print("StringClean = " & StringClean)
+
 		StringClean = StringClean.Replace("#DomName", domName.Text)
-		Debug.Print("StringClean = " & StringClean)
+
 		StringClean = StringClean.Replace("#DomHonorific", FrmSettings.TBHonorific.Text)
 
 		StringClean = StringClean.Replace("#DomAge", FrmSettings.domageNumBox.Value)
@@ -7970,8 +7970,6 @@ StatusUpdateEnd:
 
 		StringClean = StringClean.Replace("#CBTCockCount", ssh.CBTCockCount)
 		StringClean = StringClean.Replace("#CBTBallsCount", ssh.CBTBallsCount)
-
-		Debug.Print("Test")
 
 		If My.Settings.OrgasmsLocked = True Then
 			StringClean = StringClean.Replace("#OrgasmLockDate", My.Settings.OrgasmLockDate.Date.ToString())
@@ -8374,133 +8372,134 @@ StatusUpdateEnd:
 
 
 
-
 	Public Function PoundClean(ByVal StringClean As String) As String
+#If TRACE Then
+		Dim TS As New TraceSwitch("PoundClean", "")
 
-		'Debug.Print("StringClean = " & StringClean)
-
-		'DeepClean:
-
-
-		StringClean = SysKeywordClean(StringClean)
-
-		Debug.Print("PoundClean System Keyword Checkpoint")
-
-
-		'TDOD: Optimze Code "TextedTags"
-		ssh.FoundTag = "NULL"
-		Dim slide As ContactData = ssh.SlideshowMain
-		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
-
-		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
-
-		If (ssh.SlideshowLoaded = True And mainPictureBox.Image IsNot Nothing And DomWMP.Visible = False) _
-		AndAlso File.Exists(TagFilePath) Then
-			' Read all lines of the given file.
-			Dim TagList As List(Of String) = Txt2List(TagFilePath)
-
-			Try
-				For t As Integer = 0 To TagList.Count - 1
-					'Debug.Print("TagList(t) = " & TagList(t))
-					If TagList(t).Contains(Path.GetFileName(slide.CurrentImage)) Then
-						ssh.FoundTag = TagList(t)
-						Dim FoundTagSplit As String() = Split(ssh.FoundTag)
-						For j As Integer = 0 To FoundTagSplit.Length - 1
-							If FoundTagSplit(j).Contains("TagGarment") Then
-								ssh.TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
-								ssh.TagGarment = ssh.TagGarment.Replace("-", " ")
-							End If
-
-							If FoundTagSplit(j).Contains("TagUnderwear") Then
-								ssh.TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
-								ssh.TagUnderwear = ssh.TagUnderwear.Replace("-", " ")
-							End If
-
-							If FoundTagSplit(j).Contains("TagTattoo") Then
-								ssh.TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
-								ssh.TagTattoo = ssh.TagTattoo.Replace("-", " ")
-							End If
-
-							If FoundTagSplit(j).Contains("TagSexToy") Then
-								ssh.TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
-								ssh.TagSexToy = ssh.TagSexToy.Replace("-", " ")
-							End If
-
-							If FoundTagSplit(j).Contains("TagFurniture") Then
-								ssh.TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
-								ssh.TagFurniture = ssh.TagFurniture.Replace("-", " ")
-							End If
-
-						Next
-						Exit For
-					End If
-				Next
-			Catch
-			End Try
+		If TS.TraceVerbose Then
+			Trace.WriteLine("============= PoundClean(String) =============")
+			Trace.Indent()
+			Trace.WriteLine(String.Format("StartValue: ""{0}""", StringClean))
+		ElseIf TS.TraceInfo Then
+			Trace.WriteLine(String.Format("PoundClean(String) parsing: ""{0}""", StringClean))
+			Trace.Indent()
 		End If
 
+		Dim sw As New Stopwatch
+		Dim StartTime As Date = Now
+		sw.Start()
+#End If
 
-		'Debug.Print("TagGarment = " & TagGarment)
-		'Debug.Print("TagUnderwear = " & TagUnderwear)
-		'Debug.Print("TagTattoo = " & TagTattoo)
-		'Debug.Print("TagSexToy = " & TagSexToy)
-		'Debug.Print("TagFurniture = " & TagFurniture)
-		'Debug.Print("FoundTag = " & FoundTag)
+		Dim OrgString As String = StringClean
+		Dim Recurrence As Integer = 0
+
+		Do While Recurrence < 5 AndAlso (StringClean.Contains("#") Or StringClean.Contains("@Tag"))
+			Recurrence += 1
+
+#If TRACE Then
+			If TS.TraceVerbose Then
+				Trace.WriteLine(String.Format("Starting scan run {0} on ""{1}""", Recurrence, StringClean))
+				Trace.Indent()
+			End If
+#End If
+
+			StringClean = SysKeywordClean(StringClean)
+#If TRACE Then
+			If TS.TraceVerbose Then Trace.WriteLine(String.Format("System keywords cleaned: ""{0}""", StringClean))
+#End If
 
 
-		StringClean = StringClean.Replace("#TagGarment", ssh.TagGarment)
-		StringClean = StringClean.Replace("#TagUnderwear", ssh.TagUnderwear)
-		StringClean = StringClean.Replace("#TagTattoo", ssh.TagTattoo)
-		StringClean = StringClean.Replace("#TagSexToy", ssh.TagSexToy)
-		StringClean = StringClean.Replace("#TagFurniture", ssh.TagFurniture)
+			'Bug: TextedTags have to be applied after the image is displayed.
+			ssh.FoundTag = "NULL"
+			Dim slide As ContactData = ssh.SlideshowMain
+			If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
+
+			Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
+
+			If (ssh.SlideshowLoaded = True And mainPictureBox.Image IsNot Nothing And DomWMP.Visible = False) _
+			AndAlso File.Exists(TagFilePath) Then
+				' Read all lines of the given file.
+				Dim TagList As List(Of String) = Txt2List(TagFilePath)
+
+				Try
+					For t As Integer = 0 To TagList.Count - 1
+						'Debug.Print("TagList(t) = " & TagList(t))
+						If TagList(t).Contains(Path.GetFileName(slide.CurrentImage)) Then
+							ssh.FoundTag = TagList(t)
+							Dim FoundTagSplit As String() = Split(ssh.FoundTag)
+							For j As Integer = 0 To FoundTagSplit.Length - 1
+								If FoundTagSplit(j).Contains("TagGarment") Then
+									ssh.TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
+									ssh.TagGarment = ssh.TagGarment.Replace("-", " ")
+								End If
+
+								If FoundTagSplit(j).Contains("TagUnderwear") Then
+									ssh.TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
+									ssh.TagUnderwear = ssh.TagUnderwear.Replace("-", " ")
+								End If
+
+								If FoundTagSplit(j).Contains("TagTattoo") Then
+									ssh.TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
+									ssh.TagTattoo = ssh.TagTattoo.Replace("-", " ")
+								End If
+
+								If FoundTagSplit(j).Contains("TagSexToy") Then
+									ssh.TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
+									ssh.TagSexToy = ssh.TagSexToy.Replace("-", " ")
+								End If
+
+								If FoundTagSplit(j).Contains("TagFurniture") Then
+									ssh.TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
+									ssh.TagFurniture = ssh.TagFurniture.Replace("-", " ")
+								End If
+
+							Next
+							Exit For
+						End If
+					Next
+				Catch
+				End Try
+			End If
+
+
+			'Debug.Print("TagGarment = " & TagGarment)
+			'Debug.Print("TagUnderwear = " & TagUnderwear)
+			'Debug.Print("TagTattoo = " & TagTattoo)
+			'Debug.Print("TagSexToy = " & TagSexToy)
+			'Debug.Print("TagFurniture = " & TagFurniture)
+			'Debug.Print("FoundTag = " & FoundTag)
+
+
+			StringClean = StringClean.Replace("#TagGarment", ssh.TagGarment)
+			StringClean = StringClean.Replace("#TagUnderwear", ssh.TagUnderwear)
+			StringClean = StringClean.Replace("#TagTattoo", ssh.TagTattoo)
+			StringClean = StringClean.Replace("#TagSexToy", ssh.TagSexToy)
+			StringClean = StringClean.Replace("#TagFurniture", ssh.TagFurniture)
 SkipTextedTags:
 
-		If StringClean.Contains("#") Or StringClean.Contains("@Tag") Then
+			If StringClean.Contains("#") Or StringClean.Contains("@Tag") Then
 
+				Dim re As New Regex("#[#\w\d\+\-_]+", RegexOptions.IgnoreCase)
+				Dim mc As MatchCollection = re.Matches(StringClean)
 
-			Dim PoundArray() As String = Split(StringClean)
+				For Each keyword As Match In mc
+#If TRACE Then
+					If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", keyword.Value))
+#End If
 
+					Dim filepath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & keyword.Value & ".txt"
 
-			For i As Integer = 0 To PoundArray.Length - 1
-				Debug.Print("PoundArray(i) = " & PoundArray(i))
-				'Debug.Print("PoundArray.Length = " & PoundArray.Length)
-
-				If PoundArray(i) = "" Then GoTo PoundBreak
-				If PoundArray(i).Substring(0, 1) = "#" Then
-
-					'DoItHere:
-
-					' PoundArray(i) = SysKeywordClean(PoundArray(i))
-
-					'If Not PoundArray(i).Contains("#") Then GoTo PoundBreak
-
-
-					PoundArray(i) = PoundArray(i).Replace(".", "")
-					PoundArray(i) = PoundArray(i).Replace(",", "")
-					PoundArray(i) = PoundArray(i).Replace("""", "")
-					PoundArray(i) = PoundArray(i).Replace(")", "")
-					PoundArray(i) = PoundArray(i).Replace("!", "")
-					PoundArray(i) = PoundArray(i).Replace("?", "")
-					PoundArray(i) = PoundArray(i).Replace(":", "")
-					PoundArray(i) = PoundArray(i).Replace(";", "")
-					PoundArray(i) = PoundArray(i).Replace("'s", "")
-
-					If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & PoundArray(i) & ".txt") Then
-						Dim filePath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & PoundArray(i) & ".txt"
-						Dim lines As List(Of String) = Txt2List(filePath)
-
-
+					If Directory.Exists(Path.GetDirectoryName(filepath)) AndAlso File.Exists(filepath) Then
+						Dim lines As List(Of String) = Txt2List(filepath)
 
 						Try
 							lines = FilterList(lines)
 							Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
-							'Debug.Print("PoundLine = " & PoundLine)
-							'Debug.Print("PoundVal = " & PoundVal)
-							StringClean = StringClean.Replace(PoundArray(i), lines(PoundVal))
+							StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
 						Catch ex As Exception
-							Log.WriteError("Error Processing file: " & filePath, ex,
-										   "Tease AI did not return a valid line while parsing Command Filters")
-							StringClean = "ERROR: Tease AI did not return a valid line while parsing Command Filters"
+							Log.WriteError("Error Processing vocabulary file: " & filepath, ex,
+											"Tease AI did not return a valid line while parsing vocabulary file.")
+							StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
 						End Try
 
 						StringClean = StringClean.Replace("TagFace", "")
@@ -8520,33 +8519,49 @@ SkipTextedTags:
 						StringClean = StringClean.Replace("TagSeeThrough", "")
 						StringClean = StringClean.Replace("TagAllFours", "")
 
-						'If PoundArray(i).Contains("#") Then GoTo DoItHere
-
 					Else
+						StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
 
-						StringClean = StringClean.Replace(PoundArray(i), "<font color=""red"">" & PoundArray(i) & "</font>")
-
-						Dim lazytext As String = "Unable to find the vocabulary file: """ & PoundArray(i) & """"
+						Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
 						Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
 
 					End If
 
-				End If
 
-PoundBreak:
+				Next
 
-			Next
+			End If
+#If Trace Then
+			Trace.Unindent()
+#End If
+		Loop
 
-			'PoundBreak:
+		If StringClean.Contains("#") Then
+#If TRACE Then
+			If TS.TraceError Then
+				Trace.WriteLine("PoundClean(String): Stopping scan, maximum allowed scan depth reached.")
+				Trace.Indent()
+				Trace.WriteLine(String.Format("StartValue: ""{0}""", OrgString))
+				Trace.WriteLine(String.Format("EndValue:   ""{0}""", StringClean))
+				Trace.Unindent()
+			End If
+#End If
+			Log.WriteError("Maximum allowed Vocabulary depth reached for line:" & OrgString & vbCrLf &
+						   "Aborted Cleaning at: " & StringClean,
+						   New StackOverflowException("PoundClean infinite loop protection"), "PoundClean(String)")
+		Else
+#If TRACE Then
+			If TS.TraceVerbose Then
+				Trace.WriteLine(String.Format("EndValue: ""{0}""", StringClean))
+				Trace.WriteLine(String.Format("Duration: {0}ms", (Now - StartTime).TotalMilliseconds.ToString))
+			End If
+#End If
 
 		End If
 
-		'Debug.Print("StringClean = " & StringClean)
-
-		'If StringClean.Contains("#") Then GoTo DeepClean
-
-BadVocabBreak:
-
+#If trace Then
+		Trace.Unindent()
+#End If
 		Return StringClean
 	End Function
 
@@ -8829,7 +8844,7 @@ RinseLatherRepeat:
 			If tmpImageLocationList.Count > 0 Then
 				tmpImgToShow = tmpImageLocationList(New Random().Next(0, tmpImageLocationList.Count))
 			Else
-				Log.Write("No images found For Command: @ShowLocalImage(" & LocalFlag & ")")
+				Trace.WriteLine("failed to execute Command: @ShowLocalImage(" & LocalFlag & ") No images found.")
 			End If
 
 			ShowImage(tmpImgToShow, False)
@@ -13570,6 +13585,7 @@ VTSkip:
 	''' This Function should be ThreadSafe (Microsoft would propably disagree, but who really understands Threadsafty... ;-) )
 	'''   </remarks>
 	Public Function GetDommeImage(ByVal DomTag As String) As String
+		'BUG: DommeTag alternation results in "nonsense talking".
 		Try
 			Dim slide As ContactData = ssh.SlideshowMain
 			Dim __targetFolder As String = Path.GetDirectoryName(slide.CurrentImage)
@@ -13689,7 +13705,7 @@ retry_NextStage:
 							' So, here is a simple workaround to override this, while debugging. Only change the 
 							' statement after AndAlso, otherwise it will behave wrong in the final programm.
 							If Debugger.IsAttached AndAlso 1 = 1 Then Return ""
-							Log.Write("No DommeImage found for Tags: '" & ___DomTag_Base & "' in directory: '" & __targetFolder & "'")
+							Trace.WriteLine("No DommeImage found for Tags: '" & ___DomTag_Base & "' in directory: '" & __targetFolder & "'")
 						End If
                         ' Copy Matches to editable Container
                         Dim ___FoundFiles As New List(Of String)
@@ -13723,7 +13739,7 @@ Skip_RandomFile:
 						If File.Exists(__targetFolder & "\" & ___FileName) Then
 							' File Found: Return absolute path
 							If ___DomTag_Base <> ___DomTag_Work Then _
-									Log.Write("DommeTags have been altered in order to retrieve results: " &
+									Trace.WriteLine("DommeTags have been altered in order to retrieve results: " &
 									___DomTag_Base & " => " & ___DomTag_Work & " in Directory: " & __targetFolder)
 							Return DirectCast(__targetFolder & "\" & ___FileName, String)
 						Else
@@ -13731,7 +13747,7 @@ Skip_RandomFile:
 							'                           Try-Finding-Another File
 							'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 							' File not Found: Get next in List
-							Log.Write(String.Format(
+							Trace.WriteLine(String.Format(
 										"DommeImage '{0}' not found, please check your DommeTags for directory '{1}'.",
 										 ___FileName, __targetFolder))
 
@@ -13972,7 +13988,7 @@ SkipTextedTags:
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 		' No need to go further on an empty file.
 		If ListClean.Count <= 0 Then
-			Log.Write("FilterList started with empty List. Skipping filter.")
+			Trace.WriteLine("FilterList started with empty List. Skipping filter.")
 			Return ListClean
 		End If
 
@@ -14018,7 +14034,7 @@ SkipTextedTags:
 			If ListClean(i).Contains("###-INVALID-###") Then ListClean.RemoveAt(i)
 		Next
 
-
+		'BUG: Texted Tags are not working.
 		For x As Integer = 0 To ListClean.Count - 1
 			ListClean(x) = ListClean(x).Replace("#TagGarment", ssh.TagGarment.Replace("-", " "))
 			ListClean(x) = ListClean(x).Replace("#TagUnderwear", ssh.TagUnderwear.Replace("-", " "))
