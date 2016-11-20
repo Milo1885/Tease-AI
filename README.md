@@ -16,6 +16,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* After using an ImageCommand the slideshow was locked.
 	* Filtering code was unable to handle parametrized command filters and image commands.
 	* The slideshow folder check method forced to include slideshow subdirectories, even if the directory was valid. 
+	* Vitalsub didn't read calorie items from the file at startup
 
 * Miscellaneous:
 	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.
@@ -25,7 +26,6 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 ### Know Issues:
 * DommeTag alternation is causing nonsense most of the time.
 * Texted imagetags are not working.
-* Vitalsub can't read the calorie items from the file anymore.
 * MouseOver LblDomImagedir causes unhandled exception.
 
 	
