@@ -17,6 +17,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* Filtering code was unable to handle parametrized command filters and image commands.
 	* The slideshow folder check method forced to include slideshow subdirectories, even if the directory was valid. 
 	* Vitalsub didn't read calorie items from file at startup.
+	* MouseOver LblDomImagedir caused an unhandled exception.
 
 * Miscellaneous:
 	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.
@@ -26,7 +27,6 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 ### Known Issues:
 * DommeTag alternation is causing nonsense most of the time.
 * Texted imagetags are not working.
-* MouseOver LblDomImagedir causes unhandled exception.
 
 	
 # Changelog - Patch 54.5.0	
