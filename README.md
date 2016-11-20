@@ -10,6 +10,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 * Added Features:
 	* Added new sorting method to sort file lists like the Windows file Explorer does.
+	* PoundClean reworked to support system keywords as parameters inside of vocabulary files. In order to prevent infinite loops, the maximum allowed depth is limited to 5 times. Tip: take a look at the logfile to see how it's working.
 		
 * Bugfixes:
 	* After using an ImageCommand the slideshow was locked.
@@ -19,6 +20,13 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 * Miscellaneous:
 	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.
 	* Optimized performance of @ShowTaggedImage code.
+	* Enhanced logging: It is now possible to customize the logging without the need to recompile. Simply open up Tease-AI.exe.config using a text editor and edit the switch values as described in the file - keep in mind to backup the file before. ;-) Added rollover function, if the log file is bigger as 2 MB. Instead of deleting the complete file, now only the top entries are deleted.
+
+### Know Issues:
+* DommeTag alternation is causing nonsense most of the time.
+* Texted imagetags are not working.
+* Vitalsub can't read the calorie items from the file anymore.
+* MouseOver LblDomImagedir causes unhandled exception.
 
 	
 # Changelog - Patch 54.5.0	

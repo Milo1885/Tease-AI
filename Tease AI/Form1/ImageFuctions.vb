@@ -1017,8 +1017,9 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 				' Dispose the Image from RAM
 				ClearMainPictureBox()
 				If rtnInt < 1 Then Throw New Exception("The URL was not successfully deleted.")
-
-				Log.Write("Deleted image-link: " & tmpPath)
+#If TRACE Then
+				Trace.WriteLine("Deleted image-link: " & tmpPath)
+#End If
 				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 				' Online Images - End
 				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -1075,7 +1076,9 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 				' Delete the File from disk
 				My.Computer.FileSystem.DeleteFile(tmpPath)
 
-				Log.Write("Deleted local File: " & tmpPath)
+#If TRACE Then
+				Trace.WriteLine("Deleted local File: " & tmpPath)
+#End If
 
 				If File.Exists(tmpPath) Then Throw New Exception("The image was not successfully deleted.")
 				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲

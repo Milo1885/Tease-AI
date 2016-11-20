@@ -29,6 +29,9 @@ Namespace My
 		End Property
 
 		Private Sub MyApplication_Startup(sender As Object, e As StartupEventArgs) Handles Me.Startup
+			Trace.Listeners.Add(New Log.TextTraceListener("log.txt"))
+			Trace.WriteLine("Application V" & Application.Info.Version.ToString & " started")
+
             ' Load or import a specific user.config-file.
             MySettings.StartupCheck()
 

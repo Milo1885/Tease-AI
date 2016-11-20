@@ -3065,6 +3065,7 @@ SkipDeserializing:
 	End Sub
 
 	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact1ImageDir.MouseHover, LBLContact2ImageDir.MouseHover, LBLContact3ImageDir.MouseHover, LBLDomImageDir.MouseHover
+		'BUG: MouseOver LblDomImagedir causes exception.
 		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
 	End Sub
 
