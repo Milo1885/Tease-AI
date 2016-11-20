@@ -1471,7 +1471,7 @@ retryStart:
 				'github patch end
 
 				If TaskList.Count > 0 Then
-					If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+					If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 						LoadDommeImageFolder()
 					End If
 					ssh.BeforeTease = True
@@ -1636,7 +1636,7 @@ NoPlaylistStartFile:
 					If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
 					ssh.LastScriptCountdown = ssh.randomizer.Next(3, 5 * FrmSettings.domlevelNumBox.Value)
 
-					If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+					If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 						LoadDommeImageFolder()
 					End If
 
@@ -18526,7 +18526,7 @@ restartInstantly:
 
 			ssh.StrokeTauntVal = -1
 
-			If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+			If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 				LoadDommeImageFolder()
 			End If
 
@@ -20178,7 +20178,7 @@ restartInstantly:
 
 			ssh.FileText = SilverList(ssh.randomizer.Next(0, SilverList.Count))
 
-			If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+			If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 				LoadDommeImageFolder()
 			End If
 
@@ -20214,7 +20214,7 @@ restartInstantly:
 
 			ssh.FileText = GoldList(ssh.randomizer.Next(0, GoldList.Count))
 
-			If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+			If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 				LoadDommeImageFolder()
 			End If
 
@@ -20494,7 +20494,7 @@ restartInstantly:
 
 			ssh.FileText = VitalList(ssh.randomizer.Next(0, VitalList.Count))
 
-			If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+			If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 				LoadDommeImageFolder()
 			End If
 

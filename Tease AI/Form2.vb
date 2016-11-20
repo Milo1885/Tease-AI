@@ -160,8 +160,6 @@ Public Class FrmSettings
 
 		Debug.Print("FRM2 STAGE Two reached")
 
-		LBLDomImageDir.Text = My.Settings.DomImageDir
-
 		Debug.Print("FrmSettingsLoading = " & FrmSettingsLoading)
 
 
@@ -446,7 +444,7 @@ Public Class FrmSettings
 		WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
 
 
-		For Each tmptbx As TextBox In New List(Of TextBox) From {LBLContact1ImageDir, LBLContact2ImageDir, LBLContact3ImageDir}
+		For Each tmptbx As TextBox In New List(Of TextBox) From {TbxContact1ImageDir, TbxContact2ImageDir, TbxContact3ImageDir, TbxDomImageDir}
 			If tmptbx.DataBindings("Text") Is Nothing Then
 				Throw New Exception("There is no databinding set on """ & tmptbx.Name &
 					"""'s text-property. Set the databinding and recompile!")
@@ -2934,8 +2932,8 @@ SkipDeserializing:
 
 	Private Sub BTNDomImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			LBLDomImageDir.Text = FolderBrowserDialog1.SelectedPath
-			My.Settings.DomImageDir = LBLDomImageDir.Text
+			My.Settings.DomImageDir = FolderBrowserDialog1.SelectedPath
+			My.Application.Session.SlideshowMain = New ContactData(ContactType.Domme)
 		End If
 	End Sub
 
@@ -3064,8 +3062,7 @@ SkipDeserializing:
 		TTDir.SetToolTip(sender, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
 	End Sub
 
-	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact1ImageDir.MouseHover, LBLContact2ImageDir.MouseHover, LBLContact3ImageDir.MouseHover, LBLDomImageDir.MouseHover
-		'BUG: MouseOver LblDomImagedir causes exception.
+	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover
 		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
 	End Sub
 
@@ -3078,17 +3075,17 @@ SkipDeserializing:
 	End Sub
 
 	Private Sub BtnContact1ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDirClear.Click
-		My.Settings.ResetField(LBLContact1ImageDir, "Text")
+		My.Settings.ResetField(TbxContact1ImageDir, "Text")
 		My.Application.Session.SlideshowContact1 = New ContactData()
 	End Sub
 
 	Private Sub BtnContact2ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact2ImageDirClear.Click
-		My.Settings.ResetField(LBLContact2ImageDir, "Text")
+		My.Settings.ResetField(TbxContact2ImageDir, "Text")
 		My.Application.Session.SlideshowContact2 = New ContactData()
 	End Sub
 
 	Private Sub BtnContact3ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact3ImageDirClear.Click
-		My.Settings.ResetField(LBLContact3ImageDir, "Text")
+		My.Settings.ResetField(TbxContact3ImageDir, "Text")
 		My.Application.Session.SlideshowContact3 = New ContactData()
 	End Sub
 
