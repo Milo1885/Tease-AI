@@ -39,7 +39,7 @@ Partial Class FrmSettings
 		Me.offRadio = New System.Windows.Forms.RadioButton()
 		Me.BTNDomImageDir = New System.Windows.Forms.Button()
 		Me.timedRadio = New System.Windows.Forms.RadioButton()
-		Me.LBLDomImageDir = New System.Windows.Forms.Label()
+		Me.TbxDomImageDir = New System.Windows.Forms.TextBox()
 		Me.GBGeneralTextToSpeech = New System.Windows.Forms.GroupBox()
 		Me.LBLVRate = New System.Windows.Forms.Label()
 		Me.Label93 = New System.Windows.Forms.Label()
@@ -658,9 +658,9 @@ Partial Class FrmSettings
 		Me.Label122 = New System.Windows.Forms.Label()
 		Me.GBGlitterD = New System.Windows.Forms.GroupBox()
 		Me.GrbGlitterfeed = New System.Windows.Forms.GroupBox()
+		Me.CBGlitterFeedScripts = New System.Windows.Forms.RadioButton()
 		Me.CBGlitterFeed = New System.Windows.Forms.RadioButton()
 		Me.CBGlitterFeedOff = New System.Windows.Forms.RadioButton()
-		Me.CBGlitterFeedScripts = New System.Windows.Forms.RadioButton()
 		Me.BTNGlitterD = New System.Windows.Forms.Button()
 		Me.LBLGlitterNCDomme = New System.Windows.Forms.Label()
 		Me.LBLGlitterSlider = New System.Windows.Forms.Label()
@@ -676,7 +676,7 @@ Partial Class FrmSettings
 		Me.GBGlitter1 = New System.Windows.Forms.GroupBox()
 		Me.BtnContact1ImageDirClear = New System.Windows.Forms.Button()
 		Me.BtnContact1ImageDir = New System.Windows.Forms.Button()
-		Me.LBLContact1ImageDir = New System.Windows.Forms.TextBox()
+		Me.TbxContact1ImageDir = New System.Windows.Forms.TextBox()
 		Me.BTNGlitter1 = New System.Windows.Forms.Button()
 		Me.LBLGlitterNC1 = New System.Windows.Forms.Label()
 		Me.LBLGlitterSlider1 = New System.Windows.Forms.Label()
@@ -687,7 +687,7 @@ Partial Class FrmSettings
 		Me.GBGlitter3 = New System.Windows.Forms.GroupBox()
 		Me.BtnContact3ImageDirClear = New System.Windows.Forms.Button()
 		Me.BtnContact3ImageDir = New System.Windows.Forms.Button()
-		Me.LBLContact3ImageDir = New System.Windows.Forms.TextBox()
+		Me.TbxContact3ImageDir = New System.Windows.Forms.TextBox()
 		Me.BTNGlitter3 = New System.Windows.Forms.Button()
 		Me.LBLGlitterNC3 = New System.Windows.Forms.Label()
 		Me.LBLGlitterSlider3 = New System.Windows.Forms.Label()
@@ -698,7 +698,7 @@ Partial Class FrmSettings
 		Me.GBGlitter2 = New System.Windows.Forms.GroupBox()
 		Me.BtnContact2ImageDirClear = New System.Windows.Forms.Button()
 		Me.BtnContact2ImageDir = New System.Windows.Forms.Button()
-		Me.LBLContact2ImageDir = New System.Windows.Forms.TextBox()
+		Me.TbxContact2ImageDir = New System.Windows.Forms.TextBox()
 		Me.BTNGlitter2 = New System.Windows.Forms.Button()
 		Me.LBLGlitterNC2 = New System.Windows.Forms.Label()
 		Me.LBLGlitterSlider2 = New System.Windows.Forms.Label()
@@ -1496,7 +1496,7 @@ Partial Class FrmSettings
 		Me.GBDommeImages.Controls.Add(Me.offRadio)
 		Me.GBDommeImages.Controls.Add(Me.BTNDomImageDir)
 		Me.GBDommeImages.Controls.Add(Me.timedRadio)
-		Me.GBDommeImages.Controls.Add(Me.LBLDomImageDir)
+		Me.GBDommeImages.Controls.Add(Me.TbxDomImageDir)
 		Me.GBDommeImages.ForeColor = System.Drawing.Color.Black
 		Me.GBDommeImages.Location = New System.Drawing.Point(224, 179)
 		Me.GBDommeImages.Name = "GBDommeImages"
@@ -1581,19 +1581,19 @@ Partial Class FrmSettings
 		Me.timedRadio.TabIndex = 19
 		Me.timedRadio.UseVisualStyleBackColor = True
 		'
-		'LBLDomImageDir
+		'TbxDomImageDir
 		'
-		Me.LBLDomImageDir.BackColor = System.Drawing.Color.Transparent
-		Me.LBLDomImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLDomImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "DomImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLDomImageDir.ForeColor = System.Drawing.Color.Black
-		Me.LBLDomImageDir.Location = New System.Drawing.Point(6, 73)
-		Me.LBLDomImageDir.Name = "LBLDomImageDir"
-		Me.LBLDomImageDir.Size = New System.Drawing.Size(198, 17)
-		Me.LBLDomImageDir.TabIndex = 0
-		Me.LBLDomImageDir.Text = Global.Tease_AI.My.MySettings.Default.DomImageDir
-		Me.LBLDomImageDir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+		Me.TbxDomImageDir.BackColor = System.Drawing.Color.LightGray
+		Me.TbxDomImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxDomImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "DomImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxDomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxDomImageDir.ForeColor = System.Drawing.Color.Black
+		Me.TbxDomImageDir.Location = New System.Drawing.Point(6, 73)
+		Me.TbxDomImageDir.Name = "TbxDomImageDir"
+		Me.TbxDomImageDir.ReadOnly = True
+		Me.TbxDomImageDir.Size = New System.Drawing.Size(198, 20)
+		Me.TbxDomImageDir.TabIndex = 0
+		Me.TbxDomImageDir.Text = Global.Tease_AI.My.MySettings.Default.DomImageDir
 		'
 		'GBGeneralTextToSpeech
 		'
@@ -9666,6 +9666,20 @@ Partial Class FrmSettings
 		Me.GrbGlitterfeed.TabStop = False
 		Me.GrbGlitterfeed.Text = "Glitterfeeds"
 		'
+		'CBGlitterFeedScripts
+		'
+		Me.CBGlitterFeedScripts.AutoSize = True
+		Me.CBGlitterFeedScripts.BackColor = System.Drawing.Color.Transparent
+		Me.CBGlitterFeedScripts.Checked = Global.Tease_AI.My.MySettings.Default.CBGlitterFeedScripts
+		Me.CBGlitterFeedScripts.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitterFeedScripts", True))
+		Me.CBGlitterFeedScripts.Location = New System.Drawing.Point(79, 11)
+		Me.CBGlitterFeedScripts.Margin = New System.Windows.Forms.Padding(0)
+		Me.CBGlitterFeedScripts.Name = "CBGlitterFeedScripts"
+		Me.CBGlitterFeedScripts.Size = New System.Drawing.Size(57, 17)
+		Me.CBGlitterFeedScripts.TabIndex = 146
+		Me.CBGlitterFeedScripts.Text = "Scripts"
+		Me.CBGlitterFeedScripts.UseVisualStyleBackColor = False
+		'
 		'CBGlitterFeed
 		'
 		Me.CBGlitterFeed.AutoSize = True
@@ -9692,20 +9706,6 @@ Partial Class FrmSettings
 		Me.CBGlitterFeedOff.TabStop = True
 		Me.CBGlitterFeedOff.Text = "Off"
 		Me.CBGlitterFeedOff.UseVisualStyleBackColor = True
-		'
-		'CBGlitterFeedScripts
-		'
-		Me.CBGlitterFeedScripts.AutoSize = True
-		Me.CBGlitterFeedScripts.BackColor = System.Drawing.Color.Transparent
-		Me.CBGlitterFeedScripts.Checked = Global.Tease_AI.My.MySettings.Default.CBGlitterFeedScripts
-		Me.CBGlitterFeedScripts.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitterFeedScripts", True))
-		Me.CBGlitterFeedScripts.Location = New System.Drawing.Point(79, 11)
-		Me.CBGlitterFeedScripts.Margin = New System.Windows.Forms.Padding(0)
-		Me.CBGlitterFeedScripts.Name = "CBGlitterFeedScripts"
-		Me.CBGlitterFeedScripts.Size = New System.Drawing.Size(57, 17)
-		Me.CBGlitterFeedScripts.TabIndex = 146
-		Me.CBGlitterFeedScripts.Text = "Scripts"
-		Me.CBGlitterFeedScripts.UseVisualStyleBackColor = False
 		'
 		'BTNGlitterD
 		'
@@ -9865,7 +9865,7 @@ Partial Class FrmSettings
 		Me.GBGlitter1.BackColor = System.Drawing.Color.LightGray
 		Me.GBGlitter1.Controls.Add(Me.BtnContact1ImageDirClear)
 		Me.GBGlitter1.Controls.Add(Me.BtnContact1ImageDir)
-		Me.GBGlitter1.Controls.Add(Me.LBLContact1ImageDir)
+		Me.GBGlitter1.Controls.Add(Me.TbxContact1ImageDir)
 		Me.GBGlitter1.Controls.Add(Me.BTNGlitter1)
 		Me.GBGlitter1.Controls.Add(Me.LBLGlitterNC1)
 		Me.GBGlitter1.Controls.Add(Me.LBLGlitterSlider1)
@@ -9904,21 +9904,21 @@ Partial Class FrmSettings
 		Me.BtnContact1ImageDir.Text = "Set Contact1 Images Directory"
 		Me.BtnContact1ImageDir.UseVisualStyleBackColor = False
 		'
-		'LBLContact1ImageDir
+		'TbxContact1ImageDir
 		'
-		Me.LBLContact1ImageDir.BackColor = System.Drawing.Color.LightGray
-		Me.LBLContact1ImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLContact1ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact1ImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLContact1ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLContact1ImageDir.ForeColor = System.Drawing.Color.Black
-		Me.LBLContact1ImageDir.Location = New System.Drawing.Point(9, 121)
-		Me.LBLContact1ImageDir.MaximumSize = New System.Drawing.Size(2, 17)
-		Me.LBLContact1ImageDir.MinimumSize = New System.Drawing.Size(204, 17)
-		Me.LBLContact1ImageDir.Name = "LBLContact1ImageDir"
-		Me.LBLContact1ImageDir.ReadOnly = True
-		Me.LBLContact1ImageDir.Size = New System.Drawing.Size(204, 17)
-		Me.LBLContact1ImageDir.TabIndex = 176
-		Me.LBLContact1ImageDir.Text = Global.Tease_AI.My.MySettings.Default.Contact1ImageDir
+		Me.TbxContact1ImageDir.BackColor = System.Drawing.Color.LightGray
+		Me.TbxContact1ImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxContact1ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact1ImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxContact1ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxContact1ImageDir.ForeColor = System.Drawing.Color.Black
+		Me.TbxContact1ImageDir.Location = New System.Drawing.Point(9, 121)
+		Me.TbxContact1ImageDir.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxContact1ImageDir.MinimumSize = New System.Drawing.Size(204, 17)
+		Me.TbxContact1ImageDir.Name = "TbxContact1ImageDir"
+		Me.TbxContact1ImageDir.ReadOnly = True
+		Me.TbxContact1ImageDir.Size = New System.Drawing.Size(204, 17)
+		Me.TbxContact1ImageDir.TabIndex = 176
+		Me.TbxContact1ImageDir.Text = Global.Tease_AI.My.MySettings.Default.Contact1ImageDir
 		'
 		'BTNGlitter1
 		'
@@ -10013,7 +10013,7 @@ Partial Class FrmSettings
 		Me.GBGlitter3.BackColor = System.Drawing.Color.LightGray
 		Me.GBGlitter3.Controls.Add(Me.BtnContact3ImageDirClear)
 		Me.GBGlitter3.Controls.Add(Me.BtnContact3ImageDir)
-		Me.GBGlitter3.Controls.Add(Me.LBLContact3ImageDir)
+		Me.GBGlitter3.Controls.Add(Me.TbxContact3ImageDir)
 		Me.GBGlitter3.Controls.Add(Me.BTNGlitter3)
 		Me.GBGlitter3.Controls.Add(Me.LBLGlitterNC3)
 		Me.GBGlitter3.Controls.Add(Me.LBLGlitterSlider3)
@@ -10052,21 +10052,21 @@ Partial Class FrmSettings
 		Me.BtnContact3ImageDir.Text = "Set Contact3 Images Directory"
 		Me.BtnContact3ImageDir.UseVisualStyleBackColor = False
 		'
-		'LBLContact3ImageDir
+		'TbxContact3ImageDir
 		'
-		Me.LBLContact3ImageDir.BackColor = System.Drawing.Color.LightGray
-		Me.LBLContact3ImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLContact3ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact3ImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLContact3ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLContact3ImageDir.ForeColor = System.Drawing.Color.Black
-		Me.LBLContact3ImageDir.Location = New System.Drawing.Point(9, 121)
-		Me.LBLContact3ImageDir.MaximumSize = New System.Drawing.Size(2, 17)
-		Me.LBLContact3ImageDir.MinimumSize = New System.Drawing.Size(204, 17)
-		Me.LBLContact3ImageDir.Name = "LBLContact3ImageDir"
-		Me.LBLContact3ImageDir.ReadOnly = True
-		Me.LBLContact3ImageDir.Size = New System.Drawing.Size(204, 17)
-		Me.LBLContact3ImageDir.TabIndex = 178
-		Me.LBLContact3ImageDir.Text = Global.Tease_AI.My.MySettings.Default.Contact3ImageDir
+		Me.TbxContact3ImageDir.BackColor = System.Drawing.Color.LightGray
+		Me.TbxContact3ImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxContact3ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact3ImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxContact3ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxContact3ImageDir.ForeColor = System.Drawing.Color.Black
+		Me.TbxContact3ImageDir.Location = New System.Drawing.Point(9, 121)
+		Me.TbxContact3ImageDir.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxContact3ImageDir.MinimumSize = New System.Drawing.Size(204, 17)
+		Me.TbxContact3ImageDir.Name = "TbxContact3ImageDir"
+		Me.TbxContact3ImageDir.ReadOnly = True
+		Me.TbxContact3ImageDir.Size = New System.Drawing.Size(204, 17)
+		Me.TbxContact3ImageDir.TabIndex = 178
+		Me.TbxContact3ImageDir.Text = Global.Tease_AI.My.MySettings.Default.Contact3ImageDir
 		'
 		'BTNGlitter3
 		'
@@ -10161,7 +10161,7 @@ Partial Class FrmSettings
 		Me.GBGlitter2.BackColor = System.Drawing.Color.LightGray
 		Me.GBGlitter2.Controls.Add(Me.BtnContact2ImageDirClear)
 		Me.GBGlitter2.Controls.Add(Me.BtnContact2ImageDir)
-		Me.GBGlitter2.Controls.Add(Me.LBLContact2ImageDir)
+		Me.GBGlitter2.Controls.Add(Me.TbxContact2ImageDir)
 		Me.GBGlitter2.Controls.Add(Me.BTNGlitter2)
 		Me.GBGlitter2.Controls.Add(Me.LBLGlitterNC2)
 		Me.GBGlitter2.Controls.Add(Me.LBLGlitterSlider2)
@@ -10200,21 +10200,21 @@ Partial Class FrmSettings
 		Me.BtnContact2ImageDir.Text = "Set Contact2 Images Directory"
 		Me.BtnContact2ImageDir.UseVisualStyleBackColor = False
 		'
-		'LBLContact2ImageDir
+		'TbxContact2ImageDir
 		'
-		Me.LBLContact2ImageDir.BackColor = System.Drawing.Color.LightGray
-		Me.LBLContact2ImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-		Me.LBLContact2ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact2ImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-		Me.LBLContact2ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-		Me.LBLContact2ImageDir.ForeColor = System.Drawing.Color.Black
-		Me.LBLContact2ImageDir.Location = New System.Drawing.Point(9, 121)
-		Me.LBLContact2ImageDir.MaximumSize = New System.Drawing.Size(2, 17)
-		Me.LBLContact2ImageDir.MinimumSize = New System.Drawing.Size(204, 17)
-		Me.LBLContact2ImageDir.Name = "LBLContact2ImageDir"
-		Me.LBLContact2ImageDir.ReadOnly = True
-		Me.LBLContact2ImageDir.Size = New System.Drawing.Size(204, 17)
-		Me.LBLContact2ImageDir.TabIndex = 178
-		Me.LBLContact2ImageDir.Text = Global.Tease_AI.My.MySettings.Default.Contact2ImageDir
+		Me.TbxContact2ImageDir.BackColor = System.Drawing.Color.LightGray
+		Me.TbxContact2ImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxContact2ImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "Contact2ImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxContact2ImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxContact2ImageDir.ForeColor = System.Drawing.Color.Black
+		Me.TbxContact2ImageDir.Location = New System.Drawing.Point(9, 121)
+		Me.TbxContact2ImageDir.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxContact2ImageDir.MinimumSize = New System.Drawing.Size(204, 17)
+		Me.TbxContact2ImageDir.Name = "TbxContact2ImageDir"
+		Me.TbxContact2ImageDir.ReadOnly = True
+		Me.TbxContact2ImageDir.Size = New System.Drawing.Size(204, 17)
+		Me.TbxContact2ImageDir.TabIndex = 178
+		Me.TbxContact2ImageDir.Text = Global.Tease_AI.My.MySettings.Default.Contact2ImageDir
 		'
 		'BTNGlitter2
 		'
@@ -15568,7 +15568,7 @@ Partial Class FrmSettings
 	Friend WithEvents CBICaptions As System.Windows.Forms.CheckBox
 	Friend WithEvents GBDommeImages As System.Windows.Forms.GroupBox
 	Friend WithEvents BTNDomImageDir As System.Windows.Forms.Button
-	Friend WithEvents LBLDomImageDir As System.Windows.Forms.Label
+	Friend WithEvents TbxDomImageDir As System.Windows.Forms.TextBox
 	Friend WithEvents TabPage16 As System.Windows.Forms.TabPage
 	Friend WithEvents Panel9 As System.Windows.Forms.Panel
 	Friend WithEvents TCScripts As System.Windows.Forms.TabControl
@@ -15801,11 +15801,11 @@ Partial Class FrmSettings
 	Friend WithEvents RadioPlaylistRegScripts As System.Windows.Forms.RadioButton
 	Friend WithEvents RadioPlaylistScripts As System.Windows.Forms.RadioButton
 	Friend WithEvents BtnContact1ImageDir As System.Windows.Forms.Button
-	Friend WithEvents LBLContact1ImageDir As System.Windows.Forms.TextBox
+	Friend WithEvents TbxContact1ImageDir As System.Windows.Forms.TextBox
 	Friend WithEvents BtnContact3ImageDir As System.Windows.Forms.Button
-	Friend WithEvents LBLContact3ImageDir As System.Windows.Forms.TextBox
+	Friend WithEvents TbxContact3ImageDir As System.Windows.Forms.TextBox
 	Friend WithEvents BtnContact2ImageDir As System.Windows.Forms.Button
-	Friend WithEvents LBLContact2ImageDir As System.Windows.Forms.TextBox
+	Friend WithEvents TbxContact2ImageDir As System.Windows.Forms.TextBox
 	Friend WithEvents CBGlitterFeedOff As System.Windows.Forms.RadioButton
 	Friend WithEvents CBGlitterFeedScripts As System.Windows.Forms.RadioButton
 	Friend WithEvents CBGlitterFeed As System.Windows.Forms.RadioButton

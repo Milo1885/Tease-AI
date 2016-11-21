@@ -5151,7 +5151,7 @@ Card9:
 
 		Form1.ssh.StrokeTauntVal = -1
 
-		If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And Form1.ssh.SlideshowLoaded = False Then
+		If Directory.Exists(My.Settings.DomImageDir) And Form1.ssh.SlideshowLoaded = False Then
 			Form1.LoadDommeImageFolder()
 		End If
 

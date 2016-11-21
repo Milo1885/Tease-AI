@@ -282,844 +282,882 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 
 	Private Sub Form1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+		Try
+retryStart:
+			FrmSplash.PBSplash.Value = 0
+			Debug.Print("Form 2 Opened")
 
-		Debug.Print("Form 2 Opened")
-
-		Dim tv As Version = My.Application.Info.Version
-		Me.Text = String.Format("Tease A.I. - PATCH {0}.{1}{2}",
+			Dim tv As Version = My.Application.Info.Version
+			Me.Text = String.Format("Tease A.I. - PATCH {0}.{1}{2}",
 								tv.Minor,
 								tv.Build,
 								If(tv.MinorRevision > 0, "." & tv.MinorRevision, ""))
 
-		FormLoading = True
+			FormLoading = True
 
-		FrmSplash.Show()
+			FrmSplash.Show()
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking orgasm limit..."     ' 1
-		FrmSplash.Refresh()
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Checking orgasm limit..."     ' 1
+			FrmSplash.Refresh()
 
-		If My.Settings.OrgasmLockDate = Nothing Then My.Settings.OrgasmLockDate = FormatDateTime(Now, DateFormat.ShortDate)
-		Debug.Print("OrgasmLockDate = " & My.Settings.OrgasmLockDate)
-
-
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Clearing Metronome settings..."
-		FrmSplash.Refresh()
+			If My.Settings.OrgasmLockDate = Nothing Then My.Settings.OrgasmLockDate = FormatDateTime(Now, DateFormat.ShortDate)
+			Debug.Print("OrgasmLockDate = " & My.Settings.OrgasmLockDate)
 
 
-		StrokePace = 0
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking terms and conditions..."
-		FrmSplash.Refresh()
-
-
-		' If My.Settings.TCAgreed = True Then
-		'frmApps.ClearAgree()
-		'End If
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Clearing Metronome settings..."
+			FrmSplash.Refresh()
 
 
-		If My.Settings.TC2Agreed = False Then
-			Form7.Show()
+			StrokePace = 0
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Checking terms and conditions..."
+			FrmSplash.Refresh()
+
+
+			' If My.Settings.TCAgreed = True Then
+			'frmApps.ClearAgree()
+			'End If
+
+
+			If My.Settings.TC2Agreed = False Then
+				Form7.Show()
+				Do
+					Application.DoEvents()
+				Loop Until My.Settings.TC2Agreed = True
+			End If
+
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
+			FrmSplash.Refresh()
+
+			Dim PersonType As String
+
+			'dompersonalityComboBox.Items.Clear()
+
+			Debug.Print(My.Settings.DomPersonality)
+			'dompersonalityComboBox.Text = My.Settings.DomPersonality
+
+			'dompersonalityComboBox.Text = My.Settings.DomPersonality
+
+
+			For Each Dir As String In myDirectory.GetDirectories(Application.StartupPath & "\Scripts\")
+				PersonType = Dir
+
+				Dim DirSplit As String() = PersonType.Split("\")
+				PersonType = DirSplit(DirSplit.Length - 1)
+				Debug.Print("PersonType = " & PersonType)
+				'Do While PersonType.Contains("\")
+				'PersonType = PersonType.Remove(0, 1)
+				'Loop
+				Try
+					dompersonalitycombobox.Items.Add(PersonType)
+				Catch
+				End Try
+			Next
+
+			If dompersonalitycombobox.Items.Count < 1 Then
+				MessageBox.Show(Me, "No domme Personalities were found! Many aspects of this program will not work correctly until at least one Personality is installed.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+			Else
+				Try
+					dompersonalitycombobox.Text = My.Settings.DomPersonality
+				Catch ex As Exception
+					dompersonalitycombobox.Text = dompersonalitycombobox.Items(0)
+				End Try
+			End If
+
+
+			FrmSettings.FrmSettingsLoading = True
+
+			FrmSettings.FrmSettingStartUp()
+
 			Do
 				Application.DoEvents()
-			Loop Until My.Settings.TC2Agreed = True
-		End If
+			Loop Until FrmSettings.FrmSettingsLoading = False
 
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking installed Personalities..."
-		FrmSplash.Refresh()
+			ssh.StrokeTimeTotal = My.Settings.StrokeTimeTotal
+			StrokeTimeTotalTimer.Start()
 
-		Dim PersonType As String
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Calculating total stroke time..."
+			FrmSplash.Refresh()
 
-		'dompersonalityComboBox.Items.Clear()
-
-		Debug.Print(My.Settings.DomPersonality)
-		'dompersonalityComboBox.Text = My.Settings.DomPersonality
-
-		'dompersonalityComboBox.Text = My.Settings.DomPersonality
+			Dim STT As TimeSpan = TimeSpan.FromSeconds(ssh.StrokeTimeTotal)
+			FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{0:0000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
 
 
-		For Each Dir As String In myDirectory.GetDirectories(Application.StartupPath & "\Scripts\")
-			PersonType = Dir
+			ssh.DomTask = "Null"
+			ssh.DomChat = "Null"
 
-			Dim DirSplit As String() = PersonType.Split("\")
-			PersonType = DirSplit(DirSplit.Length - 1)
-			Debug.Print("PersonType = " & PersonType)
-			'Do While PersonType.Contains("\")
-			'PersonType = PersonType.Remove(0, 1)
-			'Loop
-			Try
-				dompersonalitycombobox.Items.Add(PersonType)
-			Catch
-			End Try
-		Next
+			ssh.CBTBallsFirst = True
+			ssh.CBTCockFirst = True
+			ssh.CBTBothFirst = True
+			ssh.CustomTaskFirst = True
 
-		If dompersonalitycombobox.Items.Count < 1 Then
-			MessageBox.Show(Me, "No domme Personalities were found! Many aspects of this program will not work correctly until at least one Personality is installed.", "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-		Else
-			Try
-				dompersonalitycombobox.Text = My.Settings.DomPersonality
-			Catch ex As Exception
-				dompersonalitycombobox.Text = dompersonalitycombobox.Items(0)
-			End Try
-		End If
+			CoInternetSetFeatureEnabled(DISABLE_SOUNDS, SET_FEATURE_ON_PROCESS, True)
+
+			ssh.Chat = ""
+			IsTypingTimer.Start()
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Domme and Sub avatar images..."
+			FrmSplash.Refresh()
+
+			If File.Exists(My.Settings.DomAvatarSave) Then domAvatar.Image = Image.FromFile(My.Settings.DomAvatarSave)
+			'If File.Exists(My.Settings.SubAvatarSave) Then subAvatar.Image = Image.FromFile(My.Settings.SubAvatarSave)
 
 
-		FrmSettings.FrmSettingsLoading = True
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Checking recent slideshows..."
+			FrmSplash.Refresh()
 
-		FrmSettings.FrmSettingStartUp()
+			For Each path As String In My.Settings.RecentSlideshows
+				If Directory.Exists(path) Then ImageFolderComboBox.Items.Add(path)
+			Next
+			' because Specialized.StringCollections are crap, 
+			' we have to clear And refill it using For-Each...
+			My.Settings.RecentSlideshows.Clear()
 
-		Do
-			Application.DoEvents()
-		Loop Until FrmSettings.FrmSettingsLoading = False
+			For Each comboitem As String In ImageFolderComboBox.Items
+				My.Settings.RecentSlideshows.Add(comboitem)
+			Next
 
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Checking local videos..."
+			FrmSplash.Refresh()
 
-		ssh.StrokeTimeTotal = My.Settings.StrokeTimeTotal
-		StrokeTimeTotalTimer.Start()
+			' Checks all folders and Sets the VideoCount as LabelText
+			FrmSettings.Video_CheckAllFolders()
 
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Calculating total stroke time..."
-		FrmSplash.Refresh()
+			ssh.VideoType = "General"
 
-		Dim STT As TimeSpan = TimeSpan.FromSeconds(ssh.StrokeTimeTotal)
-		FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{0:0000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Glitter avatar images..."
+			FrmSplash.Refresh()
 
+			If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Image = Image.FromFile(My.Settings.GlitterAV)
+			If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Image = Image.FromFile(My.Settings.GlitterAV1)
+			If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Image = Image.FromFile(My.Settings.GlitterAV2)
+			If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Image = Image.FromFile(My.Settings.GlitterAV3)
 
-		ssh.DomTask = "Null"
-		ssh.DomChat = "Null"
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Glitter settings..."
+			FrmSplash.Refresh()
 
-		ssh.CBTBallsFirst = True
-		ssh.CBTCockFirst = True
-		ssh.CBTBothFirst = True
-		ssh.CustomTaskFirst = True
+			ssh.UpdatesTick = 120
+			UpdatesTimer.Start()
 
-		CoInternetSetFeatureEnabled(DISABLE_SOUNDS, SET_FEATURE_ON_PROCESS, True)
+			Me.ActiveControl = Me.chatBox
 
-		ssh.Chat = ""
-		IsTypingTimer.Start()
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Domme and Sub avatar images..."
-		FrmSplash.Refresh()
-
-		If File.Exists(My.Settings.DomAvatarSave) Then domAvatar.Image = Image.FromFile(My.Settings.DomAvatarSave)
-		'If File.Exists(My.Settings.SubAvatarSave) Then subAvatar.Image = Image.FromFile(My.Settings.SubAvatarSave)
-
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking recent slideshows..."
-		FrmSplash.Refresh()
-
-		For Each path As String In My.Settings.RecentSlideshows
-			If Directory.Exists(path) Then ImageFolderComboBox.Items.Add(path)
-		Next
-		' because Specialized.StringCollections are crap, 
-		' we have to clear And refill it using For-Each...
-		My.Settings.RecentSlideshows.Clear()
-
-		For Each comboitem As String In ImageFolderComboBox.Items
-			My.Settings.RecentSlideshows.Add(comboitem)
-		Next
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking local videos..."
-		FrmSplash.Refresh()
-
-		' Checks all folders and Sets the VideoCount as LabelText
-		FrmSettings.Video_CheckAllFolders()
-
-		ssh.VideoType = "General"
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Glitter avatar images..."
-		FrmSplash.Refresh()
-
-		If File.Exists(My.Settings.GlitterAV) Then FrmSettings.GlitterAV.Image = Image.FromFile(My.Settings.GlitterAV)
-		If File.Exists(My.Settings.GlitterAV1) Then FrmSettings.GlitterAV1.Image = Image.FromFile(My.Settings.GlitterAV1)
-		If File.Exists(My.Settings.GlitterAV2) Then FrmSettings.GlitterAV2.Image = Image.FromFile(My.Settings.GlitterAV2)
-		If File.Exists(My.Settings.GlitterAV3) Then FrmSettings.GlitterAV3.Image = Image.FromFile(My.Settings.GlitterAV3)
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Glitter settings..."
-		FrmSplash.Refresh()
-
-		ssh.UpdatesTick = 120
-		UpdatesTimer.Start()
-
-		Me.ActiveControl = Me.chatBox
-
-		'################## Validate RadioButtons #################
-		If My.Settings.CBGlitterFeedOff Then
-			My.Settings.CBGlitterFeed = False
-			My.Settings.CBGlitterFeedScripts = False
-		ElseIf My.Settings.CBGlitterFeed
-			' No need to unset My.Settings.CBGlitterFeedOff. 
-			' If it would be true, this branch Is unreachable
-			My.Settings.CBGlitterFeedScripts = False
-		ElseIf My.Settings.CBGlitterFeed = False _
+			'################## Validate RadioButtons #################
+			If My.Settings.CBGlitterFeedOff Then
+				My.Settings.CBGlitterFeed = False
+				My.Settings.CBGlitterFeedScripts = False
+			ElseIf My.Settings.CBGlitterFeed
+				' No need to unset My.Settings.CBGlitterFeedOff. 
+				' If it would be true, this branch Is unreachable
+				My.Settings.CBGlitterFeedScripts = False
+			ElseIf My.Settings.CBGlitterFeed = False _
 		AndAlso My.Settings.CBGlitterFeedOff = False _
 		AndAlso My.Settings.CBGlitterFeedScripts = False Then
-			My.Settings.CBGlitterFeedOff = True
-		End If
-
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading names..."
-		FrmSplash.Refresh()
-
-
-
-		If My.Settings.DomName <> "" Then domName.Text = My.Settings.DomName
-		If My.Settings.SubName <> "" Then subName.Text = My.Settings.SubName
-
-
-		FrmSettings.petnameBox1.Text = My.Settings.pnSetting1
-		FrmSettings.petnameBox2.Text = My.Settings.pnSetting2
-		FrmSettings.petnameBox3.Text = My.Settings.pnSetting3
-		FrmSettings.petnameBox4.Text = My.Settings.pnSetting4
-		FrmSettings.petnameBox5.Text = My.Settings.pnSetting5
-		FrmSettings.petnameBox6.Text = My.Settings.pnSetting6
-		FrmSettings.petnameBox7.Text = My.Settings.pnSetting7
-		FrmSettings.petnameBox8.Text = My.Settings.pnSetting8
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading General settings..."
-		FrmSplash.Refresh()
-
-		If My.Settings.CBTimeStamps = True Then
-			FrmSettings.timestampCheckBox.Checked = True
-		Else
-			FrmSettings.timestampCheckBox.Checked = False
-		End If
-
-		If My.Settings.CBShowNames = True Then
-			FrmSettings.shownamesCheckBox.Checked = True
-		Else
-			FrmSettings.shownamesCheckBox.Checked = False
-		End If
-
-		If My.Settings.CBInstantType = True Then
-			FrmSettings.typeinstantlyCheckBox.Checked = True
-		Else
-			FrmSettings.typeinstantlyCheckBox.Checked = False
-		End If
-
-		FrmSettings.CBWebtease.Checked = My.Settings.CBWebtease
-
-		If FrmSettings.CBWebtease.Checked = True Then WebteaseModeToolStripMenuItem.Checked = True
-
-
-		FrmSettings.CBInputIcon.Checked = My.Settings.CBInputIcon
-
-		If My.Settings.CBBlogImageMain = True Then
-			FrmSettings.CBBlogImageWindow.Checked = True
-		Else
-			FrmSettings.CBBlogImageWindow.Checked = False
-		End If
-
-		If My.Settings.CBSlideshowSubDir = True Then
-			FrmSettings.CBSlideshowSubDir.Checked = True
-		Else
-			FrmSettings.CBSlideshowSubDir.Checked = False
-		End If
-
-		If My.Settings.CBSlideshowRandom = True Then
-			FrmSettings.CBSlideshowRandom.Checked = True
-		Else
-			FrmSettings.CBSlideshowRandom.Checked = False
-		End If
-
-		If My.Settings.CBStretchLandscape = True Then
-			FrmSettings.landscapeCheckBox.Checked = True
-		Else
-			FrmSettings.landscapeCheckBox.Checked = False
-		End If
-
-
-		If My.Settings.CBSettingsPause = True Then
-			FrmSettings.CBSettingsPause.Checked = True
-		Else
-			FrmSettings.CBSettingsPause.Checked = False
-		End If
-
-
-		If My.Settings.CBAutosaveChatlog = True Then
-			FrmSettings.CBAutosaveChatlog.Checked = True
-		Else
-			FrmSettings.CBAutosaveChatlog.Checked = False
-		End If
-
-		If My.Settings.CBExitSaveChatlog = True Then
-			FrmSettings.CBSaveChatlogExit.Checked = True
-		Else
-			FrmSettings.CBSaveChatlogExit.Checked = False
-		End If
-
-		If My.Settings.CBImageInfo = True Then
-			FrmSettings.CBImageInfo.Checked = True
-		Else
-			FrmSettings.CBImageInfo.Checked = False
-		End If
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Domme settings..."
-		FrmSplash.Refresh()
-
-		FrmSettings.domageNumBox.Value = My.Settings.DomAge
-
-		If My.Settings.DomLevel <> 0 Then FrmSettings.domlevelNumBox.Value = My.Settings.DomLevel
-
-		If FrmSettings.domlevelNumBox.Value = 1 Then FrmSettings.DomLevelDescLabel.Text = "Gentle"
-		If FrmSettings.domlevelNumBox.Value = 2 Then FrmSettings.DomLevelDescLabel.Text = "Lenient"
-		If FrmSettings.domlevelNumBox.Value = 3 Then FrmSettings.DomLevelDescLabel.Text = "Tease"
-		If FrmSettings.domlevelNumBox.Value = 4 Then FrmSettings.DomLevelDescLabel.Text = "Rough"
-		If FrmSettings.domlevelNumBox.Value = 5 Then FrmSettings.DomLevelDescLabel.Text = "Sadistic"
-
-		FrmSettings.NBDomBirthdayMonth.Value = My.Settings.DomBirthMonth
-		FrmSettings.NBDomBirthdayDay.Value = My.Settings.DomBirthDay
-
-		FrmSettings.TBDomHairColor.Text = My.Settings.DomHair
-		FrmSettings.domhairlengthComboBox.Text = My.Settings.DomHairLength
-		FrmSettings.TBDomEyeColor.Text = My.Settings.DomEyes
-		FrmSettings.boobComboBox.Text = My.Settings.DomCup
-		FrmSettings.dompubichairComboBox.Text = My.Settings.DomPubicHair
-
-		Debug.Print("Find Exception begin")
-
-		If My.Settings.DomTattoos = True Then
-			FrmSettings.CBDomTattoos.Checked = True
-		Else
-			FrmSettings.CBDomTattoos.Checked = False
-		End If
-
-		If My.Settings.DomFreckles = True Then
-			FrmSettings.CBDomFreckles.Checked = True
-		Else
-			FrmSettings.CBDomFreckles.Checked = False
-		End If
-
-
-
-
-		Debug.Print("Find Exception")
-
-		If My.Settings.DomCrazy = True Then
-			FrmSettings.crazyCheckBox.Checked = True
-		Else
-			FrmSettings.crazyCheckBox.Checked = False
-		End If
-
-		If My.Settings.DomVulgar = True Then
-			FrmSettings.vulgarCheckBox.Checked = True
-		Else
-			FrmSettings.vulgarCheckBox.Checked = False
-		End If
-
-		If My.Settings.DomSupremacist = True Then
-			FrmSettings.supremacistCheckBox.Checked = True
-		Else
-			FrmSettings.supremacistCheckBox.Checked = False
-		End If
-
-		If My.Settings.DomLowercase = True Then
-			FrmSettings.LCaseCheckBox.Checked = True
-		Else
-			FrmSettings.LCaseCheckBox.Checked = False
-		End If
-
-		If My.Settings.DomNoApostrophes = True Then
-			FrmSettings.apostropheCheckBox.Checked = True
-		Else
-			FrmSettings.apostropheCheckBox.Checked = False
-		End If
-
-		If My.Settings.DomNoCommas = True Then
-			FrmSettings.commaCheckBox.Checked = True
-		Else
-			FrmSettings.commaCheckBox.Checked = False
-		End If
-
-		If My.Settings.DomNoPeriods = True Then
-			FrmSettings.periodCheckBox.Checked = True
-		Else
-			FrmSettings.periodCheckBox.Checked = False
-		End If
-
-		If My.Settings.DomMeMyMine = True Then
-			FrmSettings.CBMeMyMine.Checked = True
-		Else
-			FrmSettings.CBMeMyMine.Checked = False
-		End If
-
-
-
-		FrmSettings.TBEmote.Text = My.Settings.TBEmote
-		FrmSettings.TBEmoteEnd.Text = My.Settings.TBEmoteEnd
-
-		If FrmSettings.TBEmote.Text = "" Then FrmSettings.TBEmote.Text = "*"
-		If FrmSettings.TBEmoteEnd.Text = "" Then FrmSettings.TBEmoteEnd.Text = "*"
-
-		FrmSettings.alloworgasmComboBox.Text = My.Settings.OrgasmAllow
-		FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
-
-
-
-		If My.Settings.DomDenialEnd = True Then
-			FrmSettings.CBDomDenialEnds.Checked = True
-		Else
-			FrmSettings.CBDomDenialEnds.Checked = False
-		End If
-
-		If My.Settings.DomOrgasmEnd = True Then
-			FrmSettings.CBDomOrgasmEnds.Checked = True
-		Else
-			FrmSettings.CBDomOrgasmEnds.Checked = False
-		End If
-
-
-		FrmSettings.orgasmsPerNumBox.Value = My.Settings.DomOrgasmPer
-		FrmSettings.orgasmsperComboBox.Text = My.Settings.DomPerMonth
-
-		If My.Settings.DomLock = True Then
-			FrmSettings.orgasmsperlockButton.Enabled = False
-			FrmSettings.orgasmlockrandombutton.Enabled = False
-			FrmSettings.limitcheckbox.Checked = True
-			FrmSettings.limitcheckbox.Enabled = False
-			FrmSettings.orgasmsPerNumBox.Enabled = False
-			FrmSettings.orgasmsperComboBox.Enabled = False
-		End If
-
-		FrmSettings.NBDomMoodMin.Value = My.Settings.DomMoodMin
-		FrmSettings.NBDomMoodMax.Value = My.Settings.DomMoodMax
-		FrmSettings.NBAvgCockMin.Value = My.Settings.AvgCockMin
-		FrmSettings.NBAvgCockMax.Value = My.Settings.AvgCockMax
-		FrmSettings.NBSelfAgeMin.Value = My.Settings.SelfAgeMin
-		FrmSettings.NBSelfAgeMax.Value = My.Settings.SelfAgeMax
-		FrmSettings.NBSubAgeMin.Value = My.Settings.SubAgeMin
-		FrmSettings.NBSubAgeMax.Value = My.Settings.SubAgeMax
-
-
-		Debug.Print("Find Exception end")
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking Glitter scripts..."
-		FrmSplash.Refresh()
-
-		'FrmSettings.LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
-
-		Try
-			FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
-		Catch
-			FrmSettings.LBLGlitModDomType.Text = "Error!"
-		End Try
-
-		Try
-			Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\" & FrmSettings.CBGlitModType.Text & "\")
-			Dim GlitterScriptCount As Integer
-			FrmSettings.LBGlitModScripts.Items.Clear()
-			For Each file As String In files
-				GlitterScriptCount += 1
-				FrmSettings.LBGlitModScripts.Items.Add(Path.GetFileName(file).Replace(".txt", ""))
-			Next
-			FrmSettings.LBLGlitModScriptCount.Text = FrmSettings.CBGlitModType.Text & " Scripts Found (" & GlitterScriptCount & ")"
-		Catch
-			FrmSettings.LBLGlitModScriptCount.Text = "No Scripts Found!"
-		End Try
-
-
-		FrmSettings.NBWritingTaskMin.Value = My.Settings.NBWritingTaskMin
-		FrmSettings.NBWritingTaskMax.Value = My.Settings.NBWritingTaskMax
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Image settings..."
-		FrmSplash.Refresh()
-
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Sub settings..."
-		FrmSplash.Refresh()
-
-		FrmSettings.CockSizeNumBox.Value = My.Settings.SubCockSize
-		FrmSettings.subAgeNumBox.Value = My.Settings.SubAge
-
-		FrmSettings.TBGreeting.Text = My.Settings.SubGreeting
-		FrmSettings.TBYes.Text = My.Settings.SubYes
-		FrmSettings.TBNo.Text = My.Settings.SubNo
-		FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
-
-		If FrmSettings.TBHonorific.Text = "" Or FrmSettings.TBHonorific.Text Is Nothing Then FrmSettings.TBHonorific.Text = "Mistress"
-
-		If My.Settings.CBUseHonor = True Then
-			FrmSettings.CBHonorificInclude.Checked = True
-		Else
-			FrmSettings.CBHonorificInclude.Checked = False
-		End If
-
-		If My.Settings.CBCapHonor = True Then
-			FrmSettings.CBHonorificCapitalized.Checked = True
-		Else
-			FrmSettings.CBHonorificCapitalized.Checked = False
-		End If
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Range settings..."
-		FrmSplash.Refresh()
-
-		FrmSettings.SliderSTF.Value = My.Settings.TimerSTF
-		If FrmSettings.SliderSTF.Value = 1 Then FrmSettings.LBLStf.Text = "Preoccupied"
-		If FrmSettings.SliderSTF.Value = 2 Then FrmSettings.LBLStf.Text = "Distracted"
-		If FrmSettings.SliderSTF.Value = 3 Then FrmSettings.LBLStf.Text = "Normal"
-		If FrmSettings.SliderSTF.Value = 4 Then FrmSettings.LBLStf.Text = "Talkative"
-		If FrmSettings.SliderSTF.Value = 5 Then FrmSettings.LBLStf.Text = "Verbose"
-
-		FrmSettings.TauntSlider.Value = My.Settings.TimerVTF
-		If FrmSettings.TauntSlider.Value = 1 Then FrmSettings.LBLVtf.Text = "Preoccupied"
-		If FrmSettings.TauntSlider.Value = 2 Or FrmSettings.TauntSlider.Value = 3 Then FrmSettings.LBLVtf.Text = "Distracted"
-		If FrmSettings.TauntSlider.Value = 4 Or FrmSettings.TauntSlider.Value = 5 Then FrmSettings.LBLVtf.Text = "Normal"
-		If FrmSettings.TauntSlider.Value = 6 Or FrmSettings.TauntSlider.Value = 7 Or FrmSettings.TauntSlider.Value = 8 Then FrmSettings.LBLVtf.Text = "Talkative"
-		If FrmSettings.TauntSlider.Value = 9 Or FrmSettings.TauntSlider.Value = 10 Then FrmSettings.LBLVtf.Text = "Verbose"
-
-		FrmSettings.NBBirthdayMonth.Value = My.Settings.SubBirthMonth
-		FrmSettings.NBBirthdayDay.Value = My.Settings.SubBirthDay
-		FrmSettings.TBSubHairColor.Text = My.Settings.SubHair
-		FrmSettings.TBSubEyeColor.Text = My.Settings.SubEyes
-
-
-		FrmSettings.FontComboBoxD.Text = My.Settings.DomFont
-		FrmSettings.NBFontSizeD.Text = My.Settings.DomFontSize
-		FrmSettings.FontComboBox.Text = My.Settings.SubFont
-		FrmSettings.NBFontSize.Text = My.Settings.SubFontSize
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Configuring media player..."
-		FrmSplash.Refresh()
-
-		DomWMP.Height = SplitContainer1.Panel1.Height + 60
-
-		If My.Settings.DomAVStretch = False Then domAvatar.SizeMode = PictureBoxSizeMode.Zoom
-		'If My.Settings.SubAvStretch = False Then subAvatar.SizeMode = PictureBoxSizeMode.Zoom
-
-		ssh.HoldEdgeTimeTotal = My.Settings.HoldEdgeTimeTotal
-
-		BTNFileTransferOpen.Visible = False
-		BTNFIleTransferDismiss.Visible = False
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Initializing Games window..."
-		FrmSplash.Refresh()
-
-
-		Try
-			RefreshCards()
-		Catch
-		End Try
-
-		ssh.GoldTokens = My.Settings.GoldTokens
-		ssh.SilverTokens = My.Settings.SilverTokens
-		ssh.BronzeTokens = My.Settings.BronzeTokens
-
-		If My.Settings.Patch45Tokens = False Then
-			ssh.BronzeTokens += 100
-			My.Settings.Patch45Tokens = True
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-		End If
-
-		If ssh.BronzeTokens < 0 Then
-			ssh.BronzeTokens = 0
-		End If
-
-		If ssh.SilverTokens < 0 Then
-			ssh.SilverTokens = 0
-		End If
-
-		If ssh.GoldTokens < 0 Then
-			ssh.GoldTokens = 0
-		End If
-
-
-
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking previous orgasms..."
-		FrmSplash.Refresh()
-
-		If My.Settings.LastOrgasm = Nothing Then
-			My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-		End If
-
-		FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm.ToString()
-
-		If My.Settings.LastRuined = Nothing Then
-			My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-		End If
-
-		FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined.ToString()
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking current date..."
-		FrmSplash.Refresh()
-
-		If CompareDates(My.Settings.DateStamp) <> 0 Then
-
-			Dim LoginChance As Integer = ssh.randomizer.Next(1, 101)
-			Dim LoginAmt As Integer
-
-			If LoginChance = 100 Then LoginAmt = 100
-			If LoginChance < 100 Then LoginAmt = 50
-			If LoginChance < 91 Then LoginAmt = 25
-			If LoginChance < 76 Then LoginAmt = 10
-			If LoginChance < 51 Then LoginAmt = 5
-
-
-
-			TeaseAINotify.BalloonTipText = "Daily login bonus: You've received " & LoginAmt & " tokens!"
-			TeaseAINotify.Text = "Tease AI"
-			TeaseAINotify.ShowBalloonTip(5000)
-
-			'MessageBox.Show(Me, "You've received 5 Bronze tokens!", "Daily Login Bonus", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			My.Settings.DateStamp = FormatDateTime(Now, DateFormat.ShortDate)
-			ssh.BronzeTokens += LoginAmt
-			SaveTokens()
-		End If
-
-		Debug.Print("Break here?")
-
-
-		If CompareDates(My.Settings.WishlistDate) <> 0 Then
-			My.Settings.ClearWishlist = False
-		End If
-		Debug.Print("Test?")
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Calculating average edge information..."
-		FrmSplash.Refresh()
-
-		ssh.AvgEdgeStroking = My.Settings.AvgEdgeStroking
-		ssh.AvgEdgeNoTouch = My.Settings.AvgEdgeNoTouch
-		ssh.AvgEdgeCount = My.Settings.AvgEdgeCount
-		ssh.AvgEdgeCountRest = My.Settings.AvgEdgeCountRest
-
-
-
-		If My.Settings.AvgEdgeCount > 4 Then
-			Dim TS1 As TimeSpan = TimeSpan.FromSeconds(ssh.AvgEdgeStroking)
-			FrmSettings.LBLAvgEdgeStroking.Text = String.Format("{0:00}:{1:00}", TS1.Minutes, TS1.Seconds)
-		Else
-			FrmSettings.LBLAvgEdgeStroking.Text = "WAIT"
-		End If
-
-
-		If My.Settings.AvgEdgeCountRest > 4 Then
-			Dim TS2 As TimeSpan = TimeSpan.FromSeconds(ssh.AvgEdgeNoTouch)
-			FrmSettings.LBLAvgEdgeNoTouch.Text = String.Format("{0:00}:{1:00}", TS2.Minutes, TS2.Seconds)
-		Else
-			FrmSettings.LBLAvgEdgeNoTouch.Text = "WAIT"
-		End If
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Domme Personality..."
-		FrmSplash.Refresh()
-
-		ssh.DomPersonality = dompersonalitycombobox.Text
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Clearing temporary flags..."
-		FrmSplash.Refresh()
-
-		If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\") Then
-			My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
-		End If
-
-		System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\")
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
-		FrmSplash.Refresh()
-
-		Try
-			ssh.SlideshowMain = New ContactData(ContactType.Domme)
-			ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
-			ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
-			ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
-		Catch ex As Exception
-
-		End Try
-
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
-			Dim ContactList As New List(Of String)
-			ContactList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt")
-			FrmSettings.GBGlitter1.Text = PoundClean(ContactList(0))
-			FrmSettings.GBGlitter2.Text = PoundClean(ContactList(1))
-			FrmSettings.GBGlitter3.Text = PoundClean(ContactList(2))
-		Else
-			FrmSettings.GBGlitter1.Text = "Contact 1"
-			FrmSettings.GBGlitter2.Text = "Contact 2"
-			FrmSettings.GBGlitter3.Text = "Contact 3"
-		End If
-
-		If My.Settings.Chastity = False Then
-			FrmSettings.LBLChastityState.Text = "OFF"
-			FrmSettings.LBLChastityState.ForeColor = Color.Red
-		Else
-			FrmSettings.LBLChastityState.Text = "ON"
-			FrmSettings.LBLChastityState.ForeColor = Color.Green
-		End If
-
-		WMPTimer.Start()
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading Shorthands..."
-		FrmSplash.Refresh()
-
-		CBShortcuts.Checked = My.Settings.Shortcuts
-		CBHideShortcuts.Checked = My.Settings.ShowShortcuts
-		GetShortcutChecked()
-
-		TBShortYes.Text = My.Settings.ShortYes
-		TBShortNo.Text = My.Settings.ShortNo
-		TBShortEdge.Text = My.Settings.ShortEdge
-		TBShortSpeedUp.Text = My.Settings.ShortSpeedUp
-		TBShortSlowDown.Text = My.Settings.ShortSlowDown
-		TBShortStop.Text = My.Settings.ShortStop
-		TBShortStroke.Text = My.Settings.ShortStroke
-		TBShortCum.Text = My.Settings.ShortCum
-		TBShortGreet.Text = My.Settings.ShortGreet
-		TBShortSafeword.Text = My.Settings.ShortSafeword
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Checking saved dimensions..."
-		FrmSplash.Refresh()
-		'===============================================================================
-		'								Restore View
-		'===============================================================================
-		CloseApp(Nothing)
-
-		RestoreFormPosition()
-
-		If File.Exists(My.Settings.BackgroundImage) Then
-			Me.PnlLayoutForm.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
-		Else
-			Me.PnlLayoutForm.BackgroundImage = Nothing
-		End If
-
-		If My.Settings.BackgroundStretch Then PnlLayoutForm.BackgroundImageLayout = ImageLayout.Stretch
-		If My.Settings.CBDateTransparent Then PNLDate.BackColor = Color.Transparent
-
-		' Setting the Checked-State will raise the Control's CheckedChanged-Event.
-		SwitchSidesToolStripMenuItem.Checked = My.Settings.MirrorWindows
-		SidepanelToolStripMenuItem.Checked = My.Settings.DisplaySidePanel
-		LazySubAVToolStripMenuItem.Checked = My.Settings.LazySubAV
-		MaximizeImageToolStripMenuItem.Checked = My.Settings.MaximizeMediaWindow
-		SideChatToolStripMenuItem1.Checked = My.Settings.SideChat
-
-		'----------------------------------------
-		' Restore View - End
-		'----------------------------------------
-
-
-		TeaseAIClock.Start()
-
-		FrmSplash.PBSplash.Value += 1
-		FrmSplash.LBLSplash.Text = "Loading theme..."
-		FrmSplash.Refresh()
-
-		LBLCalorie.Text = My.Settings.CaloriesConsumed
-		Debug.Print("HOW MANY FUCKING CALORIES!!!! " & My.Settings.CaloriesConsumed)
-
-		If File.Exists(Application.StartupPath & "\System\VitalSub\ExerciseList.cld") Then
-			LoadExercise()
-		End If
-
-		ssh.CaloriesConsumed = My.Settings.CaloriesConsumed
-
-		If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then
-			' Read the given File, convert List(of String) to Array and add it to ListboxItems.
-			LBCalorie.Items.AddRange(Txt2List(Application.StartupPath & "\System\VitalSub\CalorieItems.txt").ToArray)
-			LBLCalorie.Text = ssh.CaloriesConsumed
-		Else
-			ssh.CaloriesConsumed = 0
-			My.Settings.CaloriesConsumed = 0
-			LBLCalorie.Text = ssh.CaloriesConsumed
-		End If
-
-
-		CBVitalSub.Checked = My.Settings.VitalSub
-
-		If CBVitalSub.Checked = True Then
-			CBVitalSub.ForeColor = Color.LightGreen
-			CBVitalSub.Text = "VitalSub Active"
-		Else
-			CBVitalSub.ForeColor = Color.Red
-			CBVitalSub.Text = "VitalSub Inactive"
-		End If
-
-		CBVitalSubDomTask.Checked = My.Settings.VitalSubAssignments
-
-		NBMinPace.Value = My.Settings.MinPace
-		NBMaxPace.Value = My.Settings.MaxPace
-
-
-		CBMetronome.Checked = My.Settings.MetroOn
-
-
-		FrmSettings.CBMuteMedia.Checked = My.Settings.MuteMedia
-
-
-		FormLoading = False
-
-		Control.CheckForIllegalCrossThreadCalls = False
-
-		MetroThread = New Thread(AddressOf MetronomeTick) With {.Name = "Metronome-Thread"}
-		MetroThread.IsBackground = True
-		MetroThread.Start()
-
-
-
-		BTNLS1.Text = My.Settings.LS1
-
-		BTNLS2.Text = My.Settings.LS2
-
-		BTNLS3.Text = My.Settings.LS3
-
-		BTNLS4.Text = My.Settings.LS4
-
-		BTNLS5.Text = My.Settings.LS5
-
-
-
-
-		'ImageThread.Start()
-
-		FrmSplash.Close()
-		FrmSplash.Dispose()
-
-
-
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted") Then
-			If CompareDatesWithTime(GetDate("SYS_OrgasmRestricted")) <> 1 Then
-				My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted")
-				ssh.OrgasmRestricted = False
-			Else
-				ssh.OrgasmRestricted = True
+				My.Settings.CBGlitterFeedOff = True
 			End If
-		End If
 
 
-		ssh.Activate(Me)
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading names..."
+			FrmSplash.Refresh()
 
-		FormFinishedLoading = True
 
-		'TabControl1.ColorScheme.TabBackground = Color.Transparent
-		'TabControl1.ColorScheme.TabBackground2 = Color.Transparent
-		'TabControl1.BackColor = Color.Transparent
-		My.Settings.Save()
-		Debug.Print("Form1 Loading Finished")
 
+			If My.Settings.DomName <> "" Then domName.Text = My.Settings.DomName
+			If My.Settings.SubName <> "" Then subName.Text = My.Settings.SubName
+
+
+			FrmSettings.petnameBox1.Text = My.Settings.pnSetting1
+			FrmSettings.petnameBox2.Text = My.Settings.pnSetting2
+			FrmSettings.petnameBox3.Text = My.Settings.pnSetting3
+			FrmSettings.petnameBox4.Text = My.Settings.pnSetting4
+			FrmSettings.petnameBox5.Text = My.Settings.pnSetting5
+			FrmSettings.petnameBox6.Text = My.Settings.pnSetting6
+			FrmSettings.petnameBox7.Text = My.Settings.pnSetting7
+			FrmSettings.petnameBox8.Text = My.Settings.pnSetting8
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading General settings..."
+			FrmSplash.Refresh()
+
+			If My.Settings.CBTimeStamps = True Then
+				FrmSettings.timestampCheckBox.Checked = True
+			Else
+				FrmSettings.timestampCheckBox.Checked = False
+			End If
+
+			If My.Settings.CBShowNames = True Then
+				FrmSettings.shownamesCheckBox.Checked = True
+			Else
+				FrmSettings.shownamesCheckBox.Checked = False
+			End If
+
+			If My.Settings.CBInstantType = True Then
+				FrmSettings.typeinstantlyCheckBox.Checked = True
+			Else
+				FrmSettings.typeinstantlyCheckBox.Checked = False
+			End If
+
+			FrmSettings.CBWebtease.Checked = My.Settings.CBWebtease
+
+			If FrmSettings.CBWebtease.Checked = True Then WebteaseModeToolStripMenuItem.Checked = True
+
+
+			FrmSettings.CBInputIcon.Checked = My.Settings.CBInputIcon
+
+			If My.Settings.CBBlogImageMain = True Then
+				FrmSettings.CBBlogImageWindow.Checked = True
+			Else
+				FrmSettings.CBBlogImageWindow.Checked = False
+			End If
+
+			If My.Settings.CBSlideshowSubDir = True Then
+				FrmSettings.CBSlideshowSubDir.Checked = True
+			Else
+				FrmSettings.CBSlideshowSubDir.Checked = False
+			End If
+
+			If My.Settings.CBSlideshowRandom = True Then
+				FrmSettings.CBSlideshowRandom.Checked = True
+			Else
+				FrmSettings.CBSlideshowRandom.Checked = False
+			End If
+
+			If My.Settings.CBStretchLandscape = True Then
+				FrmSettings.landscapeCheckBox.Checked = True
+			Else
+				FrmSettings.landscapeCheckBox.Checked = False
+			End If
+
+
+			If My.Settings.CBSettingsPause = True Then
+				FrmSettings.CBSettingsPause.Checked = True
+			Else
+				FrmSettings.CBSettingsPause.Checked = False
+			End If
+
+
+			If My.Settings.CBAutosaveChatlog = True Then
+				FrmSettings.CBAutosaveChatlog.Checked = True
+			Else
+				FrmSettings.CBAutosaveChatlog.Checked = False
+			End If
+
+			If My.Settings.CBExitSaveChatlog = True Then
+				FrmSettings.CBSaveChatlogExit.Checked = True
+			Else
+				FrmSettings.CBSaveChatlogExit.Checked = False
+			End If
+
+			If My.Settings.CBImageInfo = True Then
+				FrmSettings.CBImageInfo.Checked = True
+			Else
+				FrmSettings.CBImageInfo.Checked = False
+			End If
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Domme settings..."
+			FrmSplash.Refresh()
+
+			FrmSettings.domageNumBox.Value = My.Settings.DomAge
+
+			If My.Settings.DomLevel <> 0 Then FrmSettings.domlevelNumBox.Value = My.Settings.DomLevel
+
+			If FrmSettings.domlevelNumBox.Value = 1 Then FrmSettings.DomLevelDescLabel.Text = "Gentle"
+			If FrmSettings.domlevelNumBox.Value = 2 Then FrmSettings.DomLevelDescLabel.Text = "Lenient"
+			If FrmSettings.domlevelNumBox.Value = 3 Then FrmSettings.DomLevelDescLabel.Text = "Tease"
+			If FrmSettings.domlevelNumBox.Value = 4 Then FrmSettings.DomLevelDescLabel.Text = "Rough"
+			If FrmSettings.domlevelNumBox.Value = 5 Then FrmSettings.DomLevelDescLabel.Text = "Sadistic"
+
+			FrmSettings.NBDomBirthdayMonth.Value = My.Settings.DomBirthMonth
+			FrmSettings.NBDomBirthdayDay.Value = My.Settings.DomBirthDay
+
+			FrmSettings.TBDomHairColor.Text = My.Settings.DomHair
+			FrmSettings.domhairlengthComboBox.Text = My.Settings.DomHairLength
+			FrmSettings.TBDomEyeColor.Text = My.Settings.DomEyes
+			FrmSettings.boobComboBox.Text = My.Settings.DomCup
+			FrmSettings.dompubichairComboBox.Text = My.Settings.DomPubicHair
+
+			Debug.Print("Find Exception begin")
+
+			If My.Settings.DomTattoos = True Then
+				FrmSettings.CBDomTattoos.Checked = True
+			Else
+				FrmSettings.CBDomTattoos.Checked = False
+			End If
+
+			If My.Settings.DomFreckles = True Then
+				FrmSettings.CBDomFreckles.Checked = True
+			Else
+				FrmSettings.CBDomFreckles.Checked = False
+			End If
+
+
+
+
+			Debug.Print("Find Exception")
+
+			If My.Settings.DomCrazy = True Then
+				FrmSettings.crazyCheckBox.Checked = True
+			Else
+				FrmSettings.crazyCheckBox.Checked = False
+			End If
+
+			If My.Settings.DomVulgar = True Then
+				FrmSettings.vulgarCheckBox.Checked = True
+			Else
+				FrmSettings.vulgarCheckBox.Checked = False
+			End If
+
+			If My.Settings.DomSupremacist = True Then
+				FrmSettings.supremacistCheckBox.Checked = True
+			Else
+				FrmSettings.supremacistCheckBox.Checked = False
+			End If
+
+			If My.Settings.DomLowercase = True Then
+				FrmSettings.LCaseCheckBox.Checked = True
+			Else
+				FrmSettings.LCaseCheckBox.Checked = False
+			End If
+
+			If My.Settings.DomNoApostrophes = True Then
+				FrmSettings.apostropheCheckBox.Checked = True
+			Else
+				FrmSettings.apostropheCheckBox.Checked = False
+			End If
+
+			If My.Settings.DomNoCommas = True Then
+				FrmSettings.commaCheckBox.Checked = True
+			Else
+				FrmSettings.commaCheckBox.Checked = False
+			End If
+
+			If My.Settings.DomNoPeriods = True Then
+				FrmSettings.periodCheckBox.Checked = True
+			Else
+				FrmSettings.periodCheckBox.Checked = False
+			End If
+
+			If My.Settings.DomMeMyMine = True Then
+				FrmSettings.CBMeMyMine.Checked = True
+			Else
+				FrmSettings.CBMeMyMine.Checked = False
+			End If
+
+
+
+			FrmSettings.TBEmote.Text = My.Settings.TBEmote
+			FrmSettings.TBEmoteEnd.Text = My.Settings.TBEmoteEnd
+
+			If FrmSettings.TBEmote.Text = "" Then FrmSettings.TBEmote.Text = "*"
+			If FrmSettings.TBEmoteEnd.Text = "" Then FrmSettings.TBEmoteEnd.Text = "*"
+
+			FrmSettings.alloworgasmComboBox.Text = My.Settings.OrgasmAllow
+			FrmSettings.ruinorgasmComboBox.Text = My.Settings.OrgasmRuin
+
+
+
+			If My.Settings.DomDenialEnd = True Then
+				FrmSettings.CBDomDenialEnds.Checked = True
+			Else
+				FrmSettings.CBDomDenialEnds.Checked = False
+			End If
+
+			If My.Settings.DomOrgasmEnd = True Then
+				FrmSettings.CBDomOrgasmEnds.Checked = True
+			Else
+				FrmSettings.CBDomOrgasmEnds.Checked = False
+			End If
+
+
+			FrmSettings.orgasmsPerNumBox.Value = My.Settings.DomOrgasmPer
+			FrmSettings.orgasmsperComboBox.Text = My.Settings.DomPerMonth
+
+			If My.Settings.DomLock = True Then
+				FrmSettings.orgasmsperlockButton.Enabled = False
+				FrmSettings.orgasmlockrandombutton.Enabled = False
+				FrmSettings.limitcheckbox.Checked = True
+				FrmSettings.limitcheckbox.Enabled = False
+				FrmSettings.orgasmsPerNumBox.Enabled = False
+				FrmSettings.orgasmsperComboBox.Enabled = False
+			End If
+
+			FrmSettings.NBDomMoodMin.Value = My.Settings.DomMoodMin
+			FrmSettings.NBDomMoodMax.Value = My.Settings.DomMoodMax
+			FrmSettings.NBAvgCockMin.Value = My.Settings.AvgCockMin
+			FrmSettings.NBAvgCockMax.Value = My.Settings.AvgCockMax
+			FrmSettings.NBSelfAgeMin.Value = My.Settings.SelfAgeMin
+			FrmSettings.NBSelfAgeMax.Value = My.Settings.SelfAgeMax
+			FrmSettings.NBSubAgeMin.Value = My.Settings.SubAgeMin
+			FrmSettings.NBSubAgeMax.Value = My.Settings.SubAgeMax
+
+
+			Debug.Print("Find Exception end")
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Checking Glitter scripts..."
+			FrmSplash.Refresh()
+
+			'FrmSettings.LblGlitterSettingsDescription.Text = "Hover the cursor over any setting in the menu for a more detailed description of its function."
+
+			Try
+				FrmSettings.LBLGlitModDomType.Text = dompersonalitycombobox.Text
+			Catch
+				FrmSettings.LBLGlitModDomType.Text = "Error!"
+			End Try
+
+			Try
+				Dim files() As String = myDirectory.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\" & FrmSettings.CBGlitModType.Text & "\")
+				Dim GlitterScriptCount As Integer
+				FrmSettings.LBGlitModScripts.Items.Clear()
+				For Each file As String In files
+					GlitterScriptCount += 1
+					FrmSettings.LBGlitModScripts.Items.Add(Path.GetFileName(file).Replace(".txt", ""))
+				Next
+				FrmSettings.LBLGlitModScriptCount.Text = FrmSettings.CBGlitModType.Text & " Scripts Found (" & GlitterScriptCount & ")"
+			Catch
+				FrmSettings.LBLGlitModScriptCount.Text = "No Scripts Found!"
+			End Try
+
+
+			FrmSettings.NBWritingTaskMin.Value = My.Settings.NBWritingTaskMin
+			FrmSettings.NBWritingTaskMax.Value = My.Settings.NBWritingTaskMax
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Image settings..."
+			FrmSplash.Refresh()
+
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Sub settings..."
+			FrmSplash.Refresh()
+
+			FrmSettings.CockSizeNumBox.Value = My.Settings.SubCockSize
+			FrmSettings.subAgeNumBox.Value = My.Settings.SubAge
+
+			FrmSettings.TBGreeting.Text = My.Settings.SubGreeting
+			FrmSettings.TBYes.Text = My.Settings.SubYes
+			FrmSettings.TBNo.Text = My.Settings.SubNo
+			FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
+
+			If FrmSettings.TBHonorific.Text = "" Or FrmSettings.TBHonorific.Text Is Nothing Then FrmSettings.TBHonorific.Text = "Mistress"
+
+			If My.Settings.CBUseHonor = True Then
+				FrmSettings.CBHonorificInclude.Checked = True
+			Else
+				FrmSettings.CBHonorificInclude.Checked = False
+			End If
+
+			If My.Settings.CBCapHonor = True Then
+				FrmSettings.CBHonorificCapitalized.Checked = True
+			Else
+				FrmSettings.CBHonorificCapitalized.Checked = False
+			End If
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Range settings..."
+			FrmSplash.Refresh()
+
+			FrmSettings.SliderSTF.Value = My.Settings.TimerSTF
+			If FrmSettings.SliderSTF.Value = 1 Then FrmSettings.LBLStf.Text = "Preoccupied"
+			If FrmSettings.SliderSTF.Value = 2 Then FrmSettings.LBLStf.Text = "Distracted"
+			If FrmSettings.SliderSTF.Value = 3 Then FrmSettings.LBLStf.Text = "Normal"
+			If FrmSettings.SliderSTF.Value = 4 Then FrmSettings.LBLStf.Text = "Talkative"
+			If FrmSettings.SliderSTF.Value = 5 Then FrmSettings.LBLStf.Text = "Verbose"
+
+			FrmSettings.TauntSlider.Value = My.Settings.TimerVTF
+			If FrmSettings.TauntSlider.Value = 1 Then FrmSettings.LBLVtf.Text = "Preoccupied"
+			If FrmSettings.TauntSlider.Value = 2 Or FrmSettings.TauntSlider.Value = 3 Then FrmSettings.LBLVtf.Text = "Distracted"
+			If FrmSettings.TauntSlider.Value = 4 Or FrmSettings.TauntSlider.Value = 5 Then FrmSettings.LBLVtf.Text = "Normal"
+			If FrmSettings.TauntSlider.Value = 6 Or FrmSettings.TauntSlider.Value = 7 Or FrmSettings.TauntSlider.Value = 8 Then FrmSettings.LBLVtf.Text = "Talkative"
+			If FrmSettings.TauntSlider.Value = 9 Or FrmSettings.TauntSlider.Value = 10 Then FrmSettings.LBLVtf.Text = "Verbose"
+
+			FrmSettings.NBBirthdayMonth.Value = My.Settings.SubBirthMonth
+			FrmSettings.NBBirthdayDay.Value = My.Settings.SubBirthDay
+			FrmSettings.TBSubHairColor.Text = My.Settings.SubHair
+			FrmSettings.TBSubEyeColor.Text = My.Settings.SubEyes
+
+
+			FrmSettings.FontComboBoxD.Text = My.Settings.DomFont
+			FrmSettings.NBFontSizeD.Text = My.Settings.DomFontSize
+			FrmSettings.FontComboBox.Text = My.Settings.SubFont
+			FrmSettings.NBFontSize.Text = My.Settings.SubFontSize
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Configuring media player..."
+			FrmSplash.Refresh()
+
+			DomWMP.Height = SplitContainer1.Panel1.Height + 60
+
+			If My.Settings.DomAVStretch = False Then domAvatar.SizeMode = PictureBoxSizeMode.Zoom
+			'If My.Settings.SubAvStretch = False Then subAvatar.SizeMode = PictureBoxSizeMode.Zoom
+
+			ssh.HoldEdgeTimeTotal = My.Settings.HoldEdgeTimeTotal
+
+			BTNFileTransferOpen.Visible = False
+			BTNFIleTransferDismiss.Visible = False
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Initializing Games window..."
+			FrmSplash.Refresh()
+
+
+			Try
+				RefreshCards()
+			Catch
+			End Try
+
+			ssh.GoldTokens = My.Settings.GoldTokens
+			ssh.SilverTokens = My.Settings.SilverTokens
+			ssh.BronzeTokens = My.Settings.BronzeTokens
+
+			If My.Settings.Patch45Tokens = False Then
+				ssh.BronzeTokens += 100
+				My.Settings.Patch45Tokens = True
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+			End If
+
+			If ssh.BronzeTokens < 0 Then
+				ssh.BronzeTokens = 0
+			End If
+
+			If ssh.SilverTokens < 0 Then
+				ssh.SilverTokens = 0
+			End If
+
+			If ssh.GoldTokens < 0 Then
+				ssh.GoldTokens = 0
+			End If
+
+
+
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Checking previous orgasms..."
+			FrmSplash.Refresh()
+
+			If My.Settings.LastOrgasm = Nothing Then
+				My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
+			End If
+
+			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm.ToString()
+
+			If My.Settings.LastRuined = Nothing Then
+				My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
+			End If
+
+			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined.ToString()
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Checking current date..."
+			FrmSplash.Refresh()
+
+			If CompareDates(My.Settings.DateStamp) <> 0 Then
+
+				Dim LoginChance As Integer = ssh.randomizer.Next(1, 101)
+				Dim LoginAmt As Integer
+
+				If LoginChance = 100 Then LoginAmt = 100
+				If LoginChance < 100 Then LoginAmt = 50
+				If LoginChance < 91 Then LoginAmt = 25
+				If LoginChance < 76 Then LoginAmt = 10
+				If LoginChance < 51 Then LoginAmt = 5
+
+
+
+				TeaseAINotify.BalloonTipText = "Daily login bonus: You've received " & LoginAmt & " tokens!"
+				TeaseAINotify.Text = "Tease AI"
+				TeaseAINotify.ShowBalloonTip(5000)
+
+				'MessageBox.Show(Me, "You've received 5 Bronze tokens!", "Daily Login Bonus", MessageBoxButtons.OK, MessageBoxIcon.Information)
+				My.Settings.DateStamp = FormatDateTime(Now, DateFormat.ShortDate)
+				ssh.BronzeTokens += LoginAmt
+				SaveTokens()
+			End If
+
+			Debug.Print("Break here?")
+
+
+			If CompareDates(My.Settings.WishlistDate) <> 0 Then
+				My.Settings.ClearWishlist = False
+			End If
+			Debug.Print("Test?")
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Calculating average edge information..."
+			FrmSplash.Refresh()
+
+			ssh.AvgEdgeStroking = My.Settings.AvgEdgeStroking
+			ssh.AvgEdgeNoTouch = My.Settings.AvgEdgeNoTouch
+			ssh.AvgEdgeCount = My.Settings.AvgEdgeCount
+			ssh.AvgEdgeCountRest = My.Settings.AvgEdgeCountRest
+
+
+
+			If My.Settings.AvgEdgeCount > 4 Then
+				Dim TS1 As TimeSpan = TimeSpan.FromSeconds(ssh.AvgEdgeStroking)
+				FrmSettings.LBLAvgEdgeStroking.Text = String.Format("{0:00}:{1:00}", TS1.Minutes, TS1.Seconds)
+			Else
+				FrmSettings.LBLAvgEdgeStroking.Text = "WAIT"
+			End If
+
+
+			If My.Settings.AvgEdgeCountRest > 4 Then
+				Dim TS2 As TimeSpan = TimeSpan.FromSeconds(ssh.AvgEdgeNoTouch)
+				FrmSettings.LBLAvgEdgeNoTouch.Text = String.Format("{0:00}:{1:00}", TS2.Minutes, TS2.Seconds)
+			Else
+				FrmSettings.LBLAvgEdgeNoTouch.Text = "WAIT"
+			End If
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Domme Personality..."
+			FrmSplash.Refresh()
+
+			ssh.DomPersonality = dompersonalitycombobox.Text
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Clearing temporary flags..."
+			FrmSplash.Refresh()
+
+			If Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\") Then
+				My.Computer.FileSystem.DeleteDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\", FileIO.DeleteDirectoryOption.DeleteAllContents)
+			End If
+
+			System.IO.Directory.CreateDirectory(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\")
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
+			FrmSplash.Refresh()
+
+			Try
+				ssh.SlideshowMain = New ContactData(ContactType.Domme)
+				ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
+				ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
+				ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
+			Catch ex As Exception
+
+			End Try
+
+
+			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
+				Dim ContactList As New List(Of String)
+				ContactList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt")
+				FrmSettings.GBGlitter1.Text = PoundClean(ContactList(0))
+				FrmSettings.GBGlitter2.Text = PoundClean(ContactList(1))
+				FrmSettings.GBGlitter3.Text = PoundClean(ContactList(2))
+			Else
+				FrmSettings.GBGlitter1.Text = "Contact 1"
+				FrmSettings.GBGlitter2.Text = "Contact 2"
+				FrmSettings.GBGlitter3.Text = "Contact 3"
+			End If
+
+			If My.Settings.Chastity = False Then
+				FrmSettings.LBLChastityState.Text = "OFF"
+				FrmSettings.LBLChastityState.ForeColor = Color.Red
+			Else
+				FrmSettings.LBLChastityState.Text = "ON"
+				FrmSettings.LBLChastityState.ForeColor = Color.Green
+			End If
+
+			WMPTimer.Start()
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading Shorthands..."
+			FrmSplash.Refresh()
+
+			CBShortcuts.Checked = My.Settings.Shortcuts
+			CBHideShortcuts.Checked = My.Settings.ShowShortcuts
+			GetShortcutChecked()
+
+			TBShortYes.Text = My.Settings.ShortYes
+			TBShortNo.Text = My.Settings.ShortNo
+			TBShortEdge.Text = My.Settings.ShortEdge
+			TBShortSpeedUp.Text = My.Settings.ShortSpeedUp
+			TBShortSlowDown.Text = My.Settings.ShortSlowDown
+			TBShortStop.Text = My.Settings.ShortStop
+			TBShortStroke.Text = My.Settings.ShortStroke
+			TBShortCum.Text = My.Settings.ShortCum
+			TBShortGreet.Text = My.Settings.ShortGreet
+			TBShortSafeword.Text = My.Settings.ShortSafeword
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Checking saved dimensions..."
+			FrmSplash.Refresh()
+			'===============================================================================
+			'								Restore View
+			'===============================================================================
+			CloseApp(Nothing)
+
+			RestoreFormPosition()
+
+			If File.Exists(My.Settings.BackgroundImage) Then
+				Me.PnlLayoutForm.BackgroundImage = Image.FromFile(My.Settings.BackgroundImage)
+			Else
+				Me.PnlLayoutForm.BackgroundImage = Nothing
+			End If
+
+			If My.Settings.BackgroundStretch Then PnlLayoutForm.BackgroundImageLayout = ImageLayout.Stretch
+			If My.Settings.CBDateTransparent Then PNLDate.BackColor = Color.Transparent
+
+			' Setting the Checked-State will raise the Control's CheckedChanged-Event.
+			SwitchSidesToolStripMenuItem.Checked = My.Settings.MirrorWindows
+			SidepanelToolStripMenuItem.Checked = My.Settings.DisplaySidePanel
+			LazySubAVToolStripMenuItem.Checked = My.Settings.LazySubAV
+			MaximizeImageToolStripMenuItem.Checked = My.Settings.MaximizeMediaWindow
+			SideChatToolStripMenuItem1.Checked = My.Settings.SideChat
+
+			'----------------------------------------
+			' Restore View - End
+			'----------------------------------------
+
+			TeaseAIClock.Start()
+
+			FrmSplash.PBSplash.Value += 1
+			FrmSplash.LBLSplash.Text = "Loading VitalSub..."
+			FrmSplash.Refresh()
+			'===============================================================================
+			'								Vital sub
+			'===============================================================================
+			LBLCalorie.Text = My.Settings.CaloriesConsumed
+			Debug.Print("VitalSub: Calories consumed: " & My.Settings.CaloriesConsumed)
+
+			Dim VsubDir As String = Application.StartupPath & "\System\VitalSub"
+
+			If Not Directory.Exists(VsubDir) Then Directory.CreateDirectory(VsubDir)
+
+			If File.Exists(Application.StartupPath & "\System\VitalSub\ExerciseList.cld") Then
+				LoadExercise()
+			End If
+
+			ssh.CaloriesConsumed = My.Settings.CaloriesConsumed
+
+			If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieList.txt") Then
+				For Each str As String In Txt2List(Application.StartupPath & "\System\VitalSub\CalorieList.txt")
+					ComboBoxCalorie.Items.Add(str)
+				Next
+			End If
+
+			If File.Exists(Application.StartupPath & "\System\VitalSub\CalorieItems.txt") Then
+				' Read the given File, convert List(of String) to Array and add it to ListboxItems.
+				LBCalorie.Items.AddRange(Txt2List(Application.StartupPath & "\System\VitalSub\CalorieItems.txt").ToArray)
+				LBLCalorie.Text = ssh.CaloriesConsumed
+			Else
+				ssh.CaloriesConsumed = 0
+				My.Settings.CaloriesConsumed = 0
+				LBLCalorie.Text = ssh.CaloriesConsumed
+			End If
+
+
+			CBVitalSub.Checked = My.Settings.VitalSub
+
+			If CBVitalSub.Checked = True Then
+				CBVitalSub.ForeColor = Color.LightGreen
+				CBVitalSub.Text = "VitalSub Active"
+			Else
+				CBVitalSub.ForeColor = Color.Red
+				CBVitalSub.Text = "VitalSub Inactive"
+			End If
+
+			CBVitalSubDomTask.Checked = My.Settings.VitalSubAssignments
+			'----------------------------------------
+			' Vital sub - End
+			'----------------------------------------
+
+			NBMinPace.Value = My.Settings.MinPace
+			NBMaxPace.Value = My.Settings.MaxPace
+
+
+			CBMetronome.Checked = My.Settings.MetroOn
+
+
+			FrmSettings.CBMuteMedia.Checked = My.Settings.MuteMedia
+
+
+			FormLoading = False
+
+			Control.CheckForIllegalCrossThreadCalls = False
+
+			MetroThread = New Thread(AddressOf MetronomeTick) With {.Name = "Metronome-Thread"}
+			MetroThread.IsBackground = True
+			MetroThread.Start()
+
+
+
+			BTNLS1.Text = My.Settings.LS1
+
+			BTNLS2.Text = My.Settings.LS2
+
+			BTNLS3.Text = My.Settings.LS3
+
+			BTNLS4.Text = My.Settings.LS4
+
+			BTNLS5.Text = My.Settings.LS5
+
+
+
+
+			'ImageThread.Start()
+
+			FrmSplash.Close()
+			FrmSplash.Dispose()
+
+
+
+			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted") Then
+				If CompareDatesWithTime(GetDate("SYS_OrgasmRestricted")) <> 1 Then
+					My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted")
+					ssh.OrgasmRestricted = False
+				Else
+					ssh.OrgasmRestricted = True
+				End If
+			End If
+
+
+			ssh.Activate(Me)
+
+			FormFinishedLoading = True
+
+			'TabControl1.ColorScheme.TabBackground = Color.Transparent
+			'TabControl1.ColorScheme.TabBackground2 = Color.Transparent
+			'TabControl1.BackColor = Color.Transparent
+			My.Settings.Save()
+			Trace.WriteLine("Startup has been completed")
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message, ex, "Exception occurred on startup")
+
+			Dim btn As MessageBoxButtons = If(Debugger.IsAttached, MessageBoxButtons.AbortRetryIgnore, MessageBoxButtons.RetryCancel)
+
+			Dim b As MsgBoxResult =
+					MessageBox.Show("An exception occurred on startup. Tease-AI is unable to work correctly until this error is fixed." &
+									vbCrLf & vbCrLf &
+									ex.Message &
+									vbCrLf & vbCrLf &
+									"Further details were written to the error log.", "Startup failed",
+									btn, MessageBoxIcon.Hand)
+
+			If b = MsgBoxResult.Abort Or b = MsgBoxResult.Cancel Then
+				Process.GetCurrentProcess().Kill()
+			ElseIf b = MsgBoxResult.Retry
+				GoTo retryStart
+			End If
+
+		End Try
 	End Sub
 
 	<Obsolete("Do not use anymore")>
@@ -1433,7 +1471,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 				'github patch end
 
 				If TaskList.Count > 0 Then
-					If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+					If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 						LoadDommeImageFolder()
 					End If
 					ssh.BeforeTease = True
@@ -1598,7 +1636,7 @@ NoPlaylistStartFile:
 					If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
 					ssh.LastScriptCountdown = ssh.randomizer.Next(3, 5 * FrmSettings.domlevelNumBox.Value)
 
-					If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+					If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 						LoadDommeImageFolder()
 					End If
 
@@ -18488,7 +18526,7 @@ restartInstantly:
 
 			ssh.StrokeTauntVal = -1
 
-			If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+			If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 				LoadDommeImageFolder()
 			End If
 
@@ -20140,7 +20178,7 @@ restartInstantly:
 
 			ssh.FileText = SilverList(ssh.randomizer.Next(0, SilverList.Count))
 
-			If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+			If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 				LoadDommeImageFolder()
 			End If
 
@@ -20176,7 +20214,7 @@ restartInstantly:
 
 			ssh.FileText = GoldList(ssh.randomizer.Next(0, GoldList.Count))
 
-			If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+			If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 				LoadDommeImageFolder()
 			End If
 
@@ -20456,7 +20494,7 @@ restartInstantly:
 
 			ssh.FileText = VitalList(ssh.randomizer.Next(0, VitalList.Count))
 
-			If Directory.Exists(FrmSettings.LBLDomImageDir.Text) And ssh.SlideshowLoaded = False Then
+			If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
 				LoadDommeImageFolder()
 			End If
 
