@@ -6627,16 +6627,6 @@ Retry:
 
 
 
-				'Debug.Print("TempScriptCount = 0")
-
-				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomTask.Contains("@NewBlogImage") And ssh.SlideshowLoaded = True And ssh.CustomSlideEnabled = False And ssh.RapidFire = False Then
-					'If FrmSettings.teaseRadio.Checked = True And JustShowedBlogImage = False And TeaseVideo = False And Not DomTask.Contains("@NewBlogImage") Then
-
-					'Question (Stefaf):  Isn't selecting an image at this point redundant?
-					ssh.DomPic = ssh.SlideshowMain.NavigateNextTease()
-
-				End If
-
 
 				'BlankLineLoop:
 
@@ -8697,8 +8687,9 @@ RinseLatherRepeat:
 			End If
 
 		If StringClean.Contains("@NewDommeSlideshow") Then
+			'TODO: Add Support for contact slideshows.
 			ssh.SlideshowMain.LoadNew()
-			ssh.DomPic = ssh.SlideshowMain.CurrentImage
+			ssh.SlideshowMain.CurrentImage()
 			StringClean = StringClean.Replace("@NewDommeSlideshow", "")
 		End If
 
