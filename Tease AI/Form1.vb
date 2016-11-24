@@ -5358,10 +5358,9 @@ NoResponse:
 						' ######################## Risky Pick #########################
 						FrmCardList.PBRiskyPic.Image = Image.FromFile(ContactToUse.NavigateNextTease)
 
-					ElseIf ssh.DommeImageFound = True Then
+					ElseIf Not String.IsNullOrWhiteSpace(ssh.DommeImageSTR) Then
 						' ######################## Domme Tags #########################
 						ShowImage(ssh.DommeImageSTR, True)
-						ssh.DommeImageFound = False
 
 					ElseIf ShowPicture = True AndAlso ContactToUse IsNot Nothing Then
 						' ######################## Slideshow ##########################
@@ -5385,6 +5384,7 @@ DommeSlideshowFallback:
 								   ex, "Display Image")
 					ClearMainPictureBox()
 				Finally
+					ssh.DommeImageSTR = ""
 					ssh.JustShowedBlogImage = False
 					ssh.JustShowedSlideshowImage = False
 					ShowPicture = False
@@ -6053,10 +6053,9 @@ NullResponseLine2:
 						' ######################## Risky Pick #########################
 						FrmCardList.PBRiskyPic.Image = Image.FromFile(ContactToUse.NavigateNextTease)
 
-					ElseIf ssh.DommeImageFound = True Then
+					ElseIf Not String.IsNullOrWhiteSpace(ssh.DommeImagestr) Then
 						' ######################## Domme Tags #########################
 						ShowImage(ssh.DommeImageSTR, True)
-						ssh.DommeImageFound = False
 
 					ElseIf ShowPicture = True AndAlso ContactToUse IsNot Nothing Then
 						' ################### Variable Slideshow ######################
@@ -6080,6 +6079,7 @@ DommeSlideshowFallback:
 									ex, "Display Image")
 					ClearMainPictureBox()
 				Finally
+					ssh.DommeImageSTR = ""
 					ssh.JustShowedBlogImage = False
 					ssh.JustShowedSlideshowImage = False
 					ShowPicture = False
@@ -8680,11 +8680,9 @@ RinseLatherRepeat:
 			Else
 				ssh.DommeImageSTR = ""
 			End If
-			' Check the Result 
-			If ssh.DommeImageSTR <> "" Then ssh.DommeImageFound = True
-				' Clean the Text.
-				StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
-			End If
+			' Clean the Text.
+			StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
+		End If
 
 		If StringClean.Contains("@NewDommeSlideshow") Then
 			'TODO: Add Support for contact slideshows.
@@ -8703,8 +8701,6 @@ RinseLatherRepeat:
 				ssh.DommeImageSTR = ""
 			End If
 
-			' Check the Result 
-			If ssh.DommeImageSTR <> "" Then ssh.DommeImageFound = True Else ssh.DommeImageFound = False
 			StringClean = StringClean.Replace("@DomTag(" & TagFlag & ")", "")
 		End If
 

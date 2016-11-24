@@ -321,7 +321,8 @@ Public Class SessionState
 	Public Property CustomSlideEnabled As Boolean
 	<Category("Images")> <Description("Stores all images and genre informations for CustomSlideshow")>
 	Public Property CustomSlideshow As New CustomSlideshow
-	<Category("Images")> Public Property DommeImageFound As Boolean
+	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
+	<Category("Images")> <Browsable(False)> Public Property DommeImageFound As Boolean
 	<Category("Images")> Public Property DommeImageSTR As String
 	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
 	<Category("Images")> <Browsable(False)> Public Property DomPic As String
