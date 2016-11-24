@@ -323,6 +323,8 @@ Public Class SessionState
 	Public Property CustomSlideshow As New CustomSlideshow
 	<Category("Images")> Public Property DommeImageFound As Boolean
 	<Category("Images")> Public Property DommeImageSTR As String
+	'TODO-Next(Stefaf): Removed functional useless Member DomPic
+	<Obsolete("Obsolete as of v0.54.5.1. Do not include in new code. It will be removed from executing code.")>
 	<Category("Images")> Public Property DomPic As String
 	<Category("Images")> Public Property JustShowedBlogImage As Boolean = False
 	<Category("Images")> Public Property JustShowedSlideshowImage As Boolean = False

@@ -31,6 +31,10 @@ Public Class Form1
 	Dim FormFinishedLoading As Boolean = False
 
 
+	'TODO: Use a custom class to pass data between ScriptParsing methods.
+	<Obsolete("QND-Implementation of ContactData.GetTaggedImage. ")>
+	Dim ContactToUse As ContactData
+
 	Dim sshSyncLock As New Object
 	''' <summary>
 	''' Shorthand Property to access My.Application.Session
@@ -4767,7 +4771,6 @@ CancelGoto:
 
 		ssh.DomTyping = True
 		Dim ShowPicture As Boolean = False
-		Dim ContactToUse As ContactData = Nothing
 
 
 		' Let the program know that the domme is currently typing
@@ -5002,7 +5005,13 @@ NullResponse:
 				Dim LoopBuffer As Integer = 0
 
 
+#If TRACE Then
+				Dim sw As New Stopwatch
+				sw.Start()
 
+				Trace.WriteLine("Timer1 Parse Line: " & ssh.DomTask)
+				Trace.Indent()
+#End If
 				Do
 					LoopBuffer += 1
 
@@ -5019,7 +5028,10 @@ NullResponse:
 					If LoopBuffer > 4 Then Exit Do
 
 				Loop Until Not ssh.DomTask.Contains("#") And Not ssh.DomTask.Contains("@")
-
+#If TRACE Then
+				Trace.Unindent()
+				Trace.WriteLine("Timer1 finished - Duration: " & sw.ElapsedMilliseconds & "ms")
+#End If
 
 
 
@@ -5344,7 +5356,7 @@ NoResponse:
 
 					ElseIf ssh.RiskyDeal = True Then
 						' ######################## Risky Pick #########################
-						FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.DomPic)
+						FrmCardList.PBRiskyPic.Image = Image.FromFile(ContactToUse.NavigateNextTease)
 
 					ElseIf ssh.DommeImageFound = True Then
 						' ######################## Domme Tags #########################
@@ -5634,7 +5646,6 @@ DommeSlideshowFallback:
 
 	Private Sub SendTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SendTimer.Tick
 
-		Dim ContactToUse As ContactData = Nothing
 
 		If ssh.DomChat.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
 		If ssh.DomChat.Contains("@NullResponse") Then
@@ -6040,7 +6051,7 @@ NullResponseLine2:
 
 					ElseIf ssh.RiskyDeal = True Then
 						' ######################## Risky Pick #########################
-						FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.DomPic)
+						FrmCardList.PBRiskyPic.Image = Image.FromFile(ContactToUse.NavigateNextTease)
 
 					ElseIf ssh.DommeImageFound = True Then
 						' ######################## Domme Tags #########################
@@ -8673,13 +8684,17 @@ RinseLatherRepeat:
 
 		If StringClean.Contains("@DommeTag(") Then
 			Dim TagFlag As String = GetParentheses(StringClean, "@DommeTag(")
-			' Try to get a Domme Image for the given Tags.
-			ssh.DommeImageSTR = GetDommeImage(TagFlag)
+			'QND-Implemented: ContactData.GetTaggedImage
+			If ContactToUse IsNot Nothing Then
+				ssh.DommeImageSTR = ContactToUse.GetTaggedImage(TagFlag, True)
+			Else
+				ssh.DommeImageSTR = ""
+			End If
 			' Check the Result 
 			If ssh.DommeImageSTR <> "" Then ssh.DommeImageFound = True
-			' Clean the Text.
-			StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
-		End If
+				' Clean the Text.
+				StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
+			End If
 
 		If StringClean.Contains("@NewDommeSlideshow") Then
 			ssh.SlideshowMain.LoadNew()
@@ -8690,7 +8705,13 @@ RinseLatherRepeat:
 		If StringClean.Contains("@DomTag(") Then
 			Dim TagFlag As String = GetParentheses(StringClean, "@DomTag(")
 			' Try to get a Domme Image for the given Tags.
-			ssh.DommeImageSTR = GetDommeImage(TagFlag)
+			'QND-Implemented: ContactData.GetTaggedImage
+			If ContactToUse IsNot Nothing Then
+				ssh.DommeImageSTR = ContactToUse.GetTaggedImage(TagFlag, True)
+			Else
+				ssh.DommeImageSTR = ""
+			End If
+
 			' Check the Result 
 			If ssh.DommeImageSTR <> "" Then ssh.DommeImageFound = True Else ssh.DommeImageFound = False
 			StringClean = StringClean.Replace("@DomTag(" & TagFlag & ")", "")
@@ -13593,238 +13614,6 @@ VTSkip:
 
 	End Function
 
-	''' ========================================================================================================= 
-	''' <summary>
-	''' Searches for a DommeImage, that is tagged with the given Domme Tags.
-	''' This Function is running timeconsuming Regex and IO Operations in a differnt Task.
-	''' </summary>
-	''' <param name="DomTag">The DommeTags, to Search for.</param>
-	''' <returns>Returns a String representing the ImageLocation for the found image. If none was found it will 
-	''' return an empty string.</returns>
-	''' <remarks>
-	''' It is possible to Exclude Tags from Search <br></br>
-	''' Examples: <br></br>
-	''' You want to show a butt without feet, you can enter "Ass, NotFeet".<br></br>
-	''' You want to show a closeup face without boobs: "Face, NotBoobs, Closeup"<br></br>
-	''' If there is no image found for the specified Tags, the Tags will be altered and searched again:<br></br>
-	''' The order of alternation is: <br></br>
-	''' 1. Remove: Furniture, SexToy, Tattoo
-	''' 2. Remove: Closeup, Sideview<br></br>
-	''' 3. Change: Naked -> GarmentCovering <br></br>
-	''' 4. Change: GarmentCovering -> HalfDressed <br></br>
-	''' 5. Change: HalfDressed -> FullDressed <br></br>
-	''' 6. Change: HandsCovering -> GarmentCovering <br></br>
-	''' 7. Remove: Excluded Tags from the BaseTags <br></br>
-	''' 8-12: Same as 1-6 without Excluded tags. If there are no excluded tags this will be skipped.<br></br>
-	''' 13. Change: FullDressed -> HalfDressed <br></br>
-	''' 14. Change: HalfDressed -> GarmentCovering <br></br>
-	''' Before each step there is a check, if it could alter the result. If it won't the Step is skipped.<br></br> 
-	''' The Tag-Order, case and count doesn't matter. 
-	''' This Function should be ThreadSafe (Microsoft would propably disagree, but who really understands Threadsafty... ;-) )
-	'''   </remarks>
-	Public Function GetDommeImage(ByVal DomTag As String) As String
-		'BUG: DommeTag alternation results in "nonsense talking".
-		Try
-			Dim slide As ContactData = ssh.SlideshowMain
-			Dim __targetFolder As String = Path.GetDirectoryName(slide.CurrentImage)
-			' Set a local function reference to the global instance. Otherwise the global 
-			' instance is out of parallel Tasks scope! The result would be an empty reference.
-			Dim __session As SessionState = ssh
-
-			If File.Exists(__targetFolder & "\ImageTags.txt") Then
-				Dim task1 As Tasks.Task(Of String) = Tasks.Task.Factory.StartNew(
-					Function() As String
-                        '×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
-                        '                           Parallel Task - Beyond this Line: INVOKE IS REQUIRED...
-                        CheckForIllegalCrossThreadCalls = True  ' Plz Leave it True, and inform me, if there is an error
-                        Dim ___retryStage As Integer = 0
-						Dim ___DomTag_Base As String = DomTag
-						Dim ___DomTag_Work As String = ___DomTag_Base
-
-                        ' Load Taglist for current Slideshow
-                        Dim ___TagList As New List(Of String)
-						___TagList = Txt2List(__targetFolder & "\ImageTags.txt")
-retry_WithExclusion:
-                        ' Convert all overgiven DommeTags to Regex with positive Lookahead
-                        Dim ___matchpattern As String = "(?<TAG>[\w]+)[,\s]*"    ' MatchPattern to get all overgiven DommeTags 
-                        Dim ___replacementstring As String = "(?=.*Tag${TAG})"   ' ReplatePattern, Replace every Tag, with positve LookAhead
-                        ' Execute: Search Words in Overgiven Tags and warp them in the ReplacePattern.
-                        Dim ___TagPattern As String = RegularExpressions.Regex.Replace(___DomTag_Work, ___matchpattern, ___replacementstring,
-																						RegularExpressions.RegexOptions.IgnoreCase)
-
-                        ' Convert every DommeTag starting with "Not" to negativ Lookahead
-                        ___matchpattern = "(\?=\.\*\bTagNot)"         ' MatchPattern FindAllTag start with "Not" 
-                        ___replacementstring = "?!.*"              ' ReplatePattern, Replace those Tags, with Negative LookAhead
-                        ' Execute: Search Words in Overgiven Tags and warp them in the ReplacePattern.
-                        ___TagPattern = RegularExpressions.Regex.Replace(___TagPattern, ___matchpattern, ___replacementstring,
-																	  RegularExpressions.RegexOptions.IgnoreCase)
-
-                        ' Define the Regex to search for the desired Dommetags, return only Filenames.
-                        Dim ___re As New RegularExpressions.Regex("(?:^.*(?:\.jpg|jpeg|png|bmp|gif)){1}" & ___TagPattern,
-																	RegularExpressions.RegexOptions.IgnoreCase _
-																	Or RegularExpressions.RegexOptions.Multiline)
-                        ' Get the Matches.
-                        Dim ___mc As RegularExpressions.MatchCollection = ___re.Matches(String.Join(vbCrLf, ___TagList))
-
-retry_NextStage:
-						' If there are no images for the given Tags and we didn't try to alternate the Tags
-						' Then alternate the Tags.
-						If ___mc.Count <= 0 AndAlso ___retryStage <= 14 Then
-                            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-                            '                             TAG-Alternation-Start
-                            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-                            ' No Match for Current TagSet found => try differnt variations
-                            Select Case ___retryStage
-								Case 0, 7
-                                    ' Remove Accessories
-                                    ___matchpattern = "(?:\bFurniture\b)|(?:\bSexToy\b)|(?:\bTattoo\b)"
-									___replacementstring = ""
-								Case 1, 8
-                                    ' Remove View-Tag
-                                    ___matchpattern = "(?:\bCloseUP\b)|(?:\bSideview\b)"
-									___replacementstring = ""
-								Case 2, 9
-                                    ' Increase Clothing
-                                    ___matchpattern = "\bNaked\b"
-									___replacementstring = "GarmentCovering"
-								Case 3, 10
-                                    ' Increase Clothing
-                                    ___matchpattern = "\bGarmentCovering\b"
-									___replacementstring = "HalfDressed"
-								Case 4, 11
-                                    ' Increase Clothing
-                                    ___matchpattern = "\bHalfDressed\b"
-									___replacementstring = "FullyDressed"
-								Case 5, 12
-                                    ' Increase Clothing
-                                    ___matchpattern = "\bHandsCovering\b"
-									___replacementstring = "GarmentCovering"
-								Case 6
-                                    ' Use BaseTags, remove Exclusions and Start again
-                                    ___DomTag_Work = ___DomTag_Base
-									___matchpattern = "\bNot[\w]*\b"
-									___replacementstring = ""
-								Case 13
-                                    ' Decrease Clothing
-                                    ___matchpattern = "\bFullyDressed\b"
-									___replacementstring = "HalfDressed"
-								Case 14
-                                    ' Decrease Clothing
-                                    ___matchpattern = "\bHalfDressed\b"
-									___replacementstring = "GarmentCovering"
-							End Select
-							___retryStage += 1
-                            ' Save the actual TagList for comparison. We want to know if this Tag-Replacemtent will give another result.
-                            Dim ___DomTag_Temp As String = ___DomTag_Work
-							___DomTag_Work = RegularExpressions.Regex.Replace(___DomTag_Work, ___matchpattern, ___replacementstring,
-																			 RegularExpressions.RegexOptions.IgnoreCase)
-
-                            ' IF:    actual Stage is remove excluded Tags
-                            ' And:   there are none
-                            ' Then:  Set Stage to 11 to skip unnecessary searches
-                            If ___retryStage = 6 _
-							AndAlso ___DomTag_Work = ___DomTag_Temp _
-							Then ___retryStage = 13
-
-                            ' IF:   Check if the Expression changed the TagList
-                            ' Then: Start Search with new Tags.
-                            ' Else: Skip Search and jump to next Stage.
-                            If ___DomTag_Work <> ___DomTag_Temp _
-							Then GoTo retry_WithExclusion _
-							Else GoTo retry_NextStage
-                            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-                            '             TAG-Alternation-END 
-                            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-                        ElseIf ___mc.Count <= 0
-							' No Images Found and Tag-alternation didn't get any results => interrupt task
-							' Beware: If the debugger is attached VS will beef about an "Unhandled Exception".
-							'			Stupid Programm... This exacly what we want. We want to crash the thread,
-							'			otherwise we can't evaluate task1.IsFaulted to rethrow the Exception...
-							' So, here is a simple workaround to override this, while debugging. Only change the 
-							' statement after AndAlso, otherwise it will behave wrong in the final programm.
-							If Debugger.IsAttached AndAlso 1 = 1 Then Return ""
-							Trace.WriteLine("No DommeImage found for Tags: '" & ___DomTag_Base & "' in directory: '" & __targetFolder & "'")
-						End If
-                        ' Copy Matches to editable Container
-                        Dim ___FoundFiles As New List(Of String)
-						For Each File As RegularExpressions.Capture In ___mc
-							___FoundFiles.Add(File.Value)
-						Next
-FileNotFound_GetNext:
-						Dim ___FileName As String = ""
-						Dim ___CurrDist As Integer = 999999
-						'############################### Get nearest Image ###############################
-						For Each ___ForFile As String In ___FoundFiles
-							' Calculate the distance of ListIndex from the FoundFile to CurrentImage
-							Dim ___FileDist As Integer = slide.ImageList.IndexOf(__targetFolder & "\" & ___ForFile) - slide.ImageList.Count
-							' Convert negative values to positive by multipling (-) x (-) = (+) 
-							If ___FileDist < 0 Then ___FileDist *= -1
-							' Check if the distance is bigger than the previous one
-							If ___FileDist < ___CurrDist Then
-								' Yes: We will set this file and save its distance
-								___FileName = ___ForFile
-								___CurrDist = ___FileDist
-							Else
-								' As for the ___FoundFiles-List is in the Same order as ImageFileNames-List
-								' We can stop searching, when the value is getting bigger.
-								Exit For
-							End If
-						Next
-						If __session.randomizer.Next(0, 100) <= 99 Then GoTo Skip_RandomFile ' 1% can be a nice surprise
-						'########################+####### Get random Image ###############################
-						___FileName = ___FoundFiles.Item(__session.randomizer.Next(0, ___FoundFiles.Count))
-Skip_RandomFile:
-						If File.Exists(__targetFolder & "\" & ___FileName) Then
-							' File Found: Return absolute path
-							If ___DomTag_Base <> ___DomTag_Work Then _
-									Trace.WriteLine("DommeTags have been altered in order to retrieve results: " &
-									___DomTag_Base & " => " & ___DomTag_Work & " in Directory: " & __targetFolder)
-							Return DirectCast(__targetFolder & "\" & ___FileName, String)
-						Else
-							'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-							'                           Try-Finding-Another File
-							'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-							' File not Found: Get next in List
-							Trace.WriteLine(String.Format(
-										"DommeImage '{0}' not found, please check your DommeTags for directory '{1}'.",
-										 ___FileName, __targetFolder))
-
-                            ' Loop through ___FoundFiles until it's empty. Then interrupt Task
-                            If ___FoundFiles.Count > 0 Then
-                                ' Remove not found File from Container and try another File.
-                                ___FoundFiles.Remove(___FileName)
-								GoTo FileNotFound_GetNext
-							Else
-								Throw New Exception("No available DommeImage found. Tags were found, but none of the " &
-													"files could be localized. Please Check your TagFile for Directory: " & __targetFolder)
-							End If
-                            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-                            '             Try-Finding-Another File
-                            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-                        End If
-						'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Task °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-				End Function)
-
-                ' Wait for Task to end, Withour freezing UI
-                Do Until task1.IsCompleted Or task1.IsFaulted
-					Application.DoEvents()
-				Loop
-                ' Check if there was an exception, if yes rethrow it.
-                If task1.IsFaulted Then Throw task1.Exception.InnerException
-
-				Return task1.Result
-
-			End If
-		Catch ex As Exception
-            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            '                                            All Errors
-            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            Log.WriteError("Exception in GetDommeImage()", ex, "")
-			Debug.Print(ex.Message)
-			Return ""
-		End Try
-	End Function
-
 	Public Function GetLocalImage(Optional ByVal IncludeTags As List(Of String) = Nothing,
 								  Optional ByVal ExcludeTags As List(Of String) = Nothing) As String
 
@@ -13965,7 +13754,13 @@ Skip_RandomFile:
 
 
 	Public Function FilterList(ByVal ListClean As List(Of String)) As List(Of String)
+#If TRACE Then
+		Dim sw As New Stopwatch
+		sw.Start()
 
+		Trace.WriteLine("FilterList Started")
+		Trace.Indent()
+#End If
 		'TDOD: Optimze Code "TextedTags"
 		ssh.FoundTag = "NULL"
 		Dim slide As ContactData = ssh.SlideshowMain
@@ -14087,6 +13882,11 @@ SkipTextedTags:
 		'If Not ListClean(i).Contains("###-INVALID-###") Then FilteredList.Add(ListClean(i))
 		'Next
 
+#If TRACE Then
+		Trace.Unindent()
+		Trace.WriteLine("FilterList finished - Duration: " & sw.ElapsedMilliseconds & "ms")
+#End If
+
 		Return ListClean
 
 	End Function
@@ -14105,10 +13905,22 @@ SkipTextedTags:
 				' This line has to be sorted out, if there are no corresponding images tagged 
 				' with "glaring".
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'ISSUE: @DomTag() is not filtered out 
 				If FilterString.Contains("@DommeTag(") Then
-					Dim g As String = "breakpoint"
-					Debug.Print("Domme Return -= " & GetDommeImage(GetParentheses(FilterString, "@DommeTag(")))
-					If GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = "" Or ssh.LockImage = True Then Return False
+					'QND-Implemented: ContactData.GetTaggedImage
+					If ssh.LockImage = True Then
+						Return False
+					ElseIf FilterString.ToLower.Contains("@contact1") Then
+						If ssh.SlideshowContact1.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
+					ElseIf FilterString.ToLower.Contains("@contact2") Then
+						If ssh.SlideshowContact2.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
+					ElseIf FilterString.ToLower.Contains("@contact3") Then
+						If ssh.SlideshowContact3.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
+					ElseIf ContactToUse IsNot Nothing Then
+						If ContactToUse.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
+					Else
+						Return False
+					End If
 				End If
 
 				If FilterString.Contains("@ImageTag(") Then
@@ -14887,7 +14699,8 @@ SkipTextedTags:
 						Case "@ApathyLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@ApathyLevel("), FrmSettings.NBEmpathy)
 						Case "@Variable[".ToUpper : Condition = CheckVariable(FilterString)
 						Case "@CheckDate(".ToUpper : Condition = CheckDateList(FilterString)
-						Case "@DommeTag(".ToUpper : Condition = GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = False Or ssh.LockImage = True
+						'QND-Implemented: ContactData.GetTaggedImage
+						'Case "@DommeTag(".ToUpper : Condition = GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = False Or ssh.LockImage = True
 						Case "@ImageTag(".ToUpper : Condition = GetLocalImage(FilterString)
 						Case Else
 							'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
