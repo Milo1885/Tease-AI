@@ -11,6 +11,10 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 * Added Features:
 	* Added new sorting method to sort file lists like the Windows file Explorer does.
 	* PoundClean reworked to support system keywords as parameters inside of vocabulary files. In order to prevent infinite loops, the maximum allowed depth is limited to 5 times. Tip: take a look at the logfile to see how it's working.
+	* All Contacts and Domme are able to use @DommeTag(). 
+
+* Removed Features:
+	* @DommeTag() doesn't alternate the given tags to return a result. (stefaf) The idea was worth to try. 
 		
 * Bugfixes:
 	* After using an ImageCommand the slideshow was locked.
@@ -18,6 +22,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* The slideshow folder check method forced to include slideshow subdirectories, even if the directory was valid. 
 	* Vitalsub didn't read calorie items from file at startup.
 	* MouseOver LblDomImagedir caused an unhandled exception.
+	* RiskyPick Images haven't been updated.
 
 * Miscellaneous:
 	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.

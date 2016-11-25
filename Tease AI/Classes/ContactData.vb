@@ -1,5 +1,6 @@
 ﻿Imports System.IO
-
+Imports System.Runtime.Serialization
+Imports System.Text.RegularExpressions
 
 Public Enum ContactType
 	[Nothing]
@@ -80,6 +81,8 @@ Public Class ContactData
 		End Get
 	End Property
 
+	<NonSerialized> <OptionalField>
+	Dim ImageTagCache As New Dictionary(Of String, ImageTagCacheItem)(StringComparison.OrdinalIgnoreCase)
 
 	Sub New()
 	End Sub
@@ -88,6 +91,37 @@ Public Class ContactData
 		Contact = type
 		Check_ImageDir(type)
 	End Sub
+
+	''' <summary>
+	''' Fixes errors caused by missing optional fields after deserialisation.
+	''' </summary>
+	''' <param name="sc"></param>
+	<OnDeserialized>
+	Sub OnDeserialized(sc As StreamingContext)
+		If ImageTagCache Is Nothing Then ImageTagCache = New Dictionary(Of String, ImageTagCacheItem)(StringComparison.OrdinalIgnoreCase)
+	End Sub
+
+	Friend Function Check_ImageDir(tp As ContactType)
+		Dim def As String = getDefaultFolder(tp)
+		Dim val As String = getCurrentBaseFolder(tp)
+		Dim text As String = ""
+
+		If tp = ContactType.Domme Then : text = "Domme"
+		ElseIf tp = ContactType.Contact1 Then : text = "Contact 1"
+		ElseIf tp = ContactType.Contact2 Then : text = "Contact 2"
+		ElseIf tp = ContactType.Contact3 Then : text = "Contact 3"
+		End If
+
+		val = FolderCheck(text, val, def)
+
+		SetBaseFolder(tp, val)
+
+		If val = def Then
+			Return False
+		Else
+			Return True
+		End If
+	End Function
 
 	Function FolderCheck(ByVal directoryDescription As String,
 												ByVal directoryPath As String,
@@ -180,6 +214,14 @@ checkFolder:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			Throw
 		End Try
+	End Function
+
+	Friend Function GetRandom(tp As ContactType) As List(Of String)
+		If Check_ImageDir(tp) Then
+			Return LoadRandom(getCurrentBaseFolder(tp))
+		Else
+			Return New List(Of String)
+		End If
 	End Function
 
 	Function LoadRandom(ByVal baseDirectory As String) As List(Of String)
@@ -364,37 +406,219 @@ nextSubDir:
 		End If
 	End Function
 
+#Region "Tagged Image"
+
+	''' <summary>
+	''' Used for caching tagged image results.
+	''' </summary>
+	Private Class ImageTagCacheItem
+		Friend TagImageList As New List(Of String)
+		Friend LastPicked As String = ""
+
+		Sub New()
+		End Sub
+	End Class
+
+	''' ========================================================================================================= 
+	''' <summary>
+	''' Searches for a tagged with the given Tags.
+	''' </summary>
+	''' <param name="ImageTags">The Tags, to search for.</param>
+	''' <returns>Returns a String representing the ImageLocation for the found image. If none was found it will 
+	''' return an empty string.</returns>
+	Public Function GetTaggedImage(ByVal ImageTags As String, Optional ByVal RememberResult As Boolean = False) As String
+		GetTaggedImage = ""
+#If TRACE Then
+		Dim Ts As New TraceSwitch("GetTaggedImage", "")
+		Ts.Level = TraceLevel.Error
+
+		Dim sw As New Stopwatch
+		sw.Start()
+#End If
+		Try
+#If TRACE Then
+			If Ts.TraceVerbose Then
+				Trace.WriteLine("================ GetTaggedImage ================")
+				Trace.Indent()
+				Trace.WriteLine(String.Format("Get image for Tag ""{0}""", ImageTags))
+			ElseIf Ts.Level = TraceLevel.Info Then
+				Trace.Write(String.Format("Get image for Tag ""{0}""", ImageTags))
+			End If
+#End If
+			Dim ImagePaths As ImageTagCacheItem = GetImageListByTag(ImageTags)
+
+tryNextImage:
+			'===================================================================
+			'                         Get nearest Image 
+			Dim CurrImgIndex As Integer = ImageList.IndexOf(CurrentImage)
+			Dim rtnPath As String = ""
+			Dim CurrDist As Integer = 999999
+
+			For Each str As String In ImagePaths.TagImageList
+				Dim IndexInList As Integer = ImageList.IndexOf(str)
+				' Calculate the distance of ListIndex from the FoundFile to CurrentImage
+				Dim FileDist As Integer = IndexInList - CurrImgIndex
+				' Convert negative values to positive by multipling (-) x (-) = (+) 
+				If FileDist < 0 Then FileDist *= -1
+				' Check if the distance is bigger than the previous one
+				If FileDist <= CurrDist Then
+					' Yes: We will set this file and save its distance
+SetForwardImage:
+					rtnPath = str
+					CurrDist = FileDist
+				ElseIf ImagePaths.LastPicked = rtnPath AndAlso New Random().Next(0, 101) > 60 Then
+					' The last Picked image is the same as last time.
+					GoTo SetForwardImage
+				Else
+					' As the list is in the Same order as the Slideshow-List,
+					' we can stop searching, when the value is getting bigger.
+					Exit For
+				End If
+			Next
+
+			'===================================================================
+			'								Check result
+			If String.IsNullOrWhiteSpace(rtnPath) Then
+				' ############### List was empty ################
+				Exit Function
+			ElseIf Not File.Exists(rtnPath) Then
+				' ############### Image Not found ###############
+#If TRACE Then
+				If Ts.TraceVerbose Then Trace.WriteLine(String.Format("Image not found - remove from cache: ""{0}""", rtnPath))
+#End If
+				ImageTagCache(ImageTags).TagImageList.Remove(rtnPath)
+				GoTo tryNextImage
+			Else
+				' ################ image found ##################
+#If TRACE Then
+				If Ts.TraceVerbose Then Trace.WriteLine("Distance of image = " & CurrDist)
+#End If
+				If RememberResult Then ImagePaths.LastPicked = rtnPath
+				Return rtnPath
+
+			End If
+		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError("Exception in GetDommeImage()", ex, "")
+		Finally
+			'⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
+#If TRACE Then
+			If Ts.TraceVerbose Then
+				Trace.WriteLine("Foundimage: " & GetTaggedImage)
+				Trace.WriteLine("Duration: " & sw.ElapsedMilliseconds & "ms")
+				Trace.Unindent()
+			ElseIf Ts.TraceInfo Then
+				Trace.WriteLine(String.Format(" - Duration: {0}ms - Result: ""{1}""",
+												  sw.ElapsedMilliseconds, GetTaggedImage))
+			End If
+#End If
+		End Try
+	End Function
+
+	Private Function GetImageListByTag(ByVal ImageTags As String) As ImageTagCacheItem
+		Try
+#If TRACE Then
+			Dim Ts As New TraceSwitch("GetTaggedImage", "")
+			Ts.Level = TraceLevel.Verbose
+#End If
+
+			Dim TargetFolder As String = Path.GetDirectoryName(CurrentImage) & Path.DirectorySeparatorChar
+			Dim TagListFile As String = TargetFolder & "ImageTags.txt"
+
+redo:
+			If Not File.Exists(TagListFile) Then
+				'===================================================================
+				'							No Tag File
+				Return New ImageTagCacheItem
+			ElseIf ImageTagCache.Keys.Contains(ImageTags) Then
+				'===================================================================
+				'						Previous cached result
+#If TRACE Then
+				If Ts.TraceVerbose Then Trace.WriteLine("Loading DommeTags from Cache.")
+#End If
+				Dim rtnItem As ImageTagCacheItem = ImageTagCache(ImageTags)
+
+				If rtnItem.TagImageList.Count = 0 Then
+					' ´############## List was empty ################
+					Return New ImageTagCacheItem
+				ElseIf Not rtnItem.TagImageList(0).StartsWith(TargetFolder)
+					' ################ Wrong folder #################
+					ImageTagCache.Remove(ImageTags)
+					GoTo redo
+				Else
+					' ################# All fine ####################
+					Return rtnItem
+				End If
+			Else
+				'===================================================================
+				'							 Read from File 
+#If TRACE Then
+				If Ts.TraceVerbose Then Trace.WriteLine("Loading ImageTags from File.")
+#End If
+				Dim Include As New List(Of String)
+				Dim Exclude As New List(Of String)
+				Dim PathList As List(Of String) = Txt2List(TagListFile)
+				Dim ValidExt As String() = Split(".jpg|.jpeg|.bmp|.png|.gif", "|")
+
+				' Replace case insensitive "not", to safely assign tags to their lists
+				ImageTags = Regex.Replace(ImageTags, "\b(not)", "--", RegexOptions.IgnoreCase)
+
+				' Seperate Tags in given string.
+				Dim S As String() = ImageTags.Split({",", " "}, StringSplitOptions.RemoveEmptyEntries)
+
+				' Assign tags to lists.
+				S.ToList.ForEach(Sub(x)
+									 If x.StartsWith("--") Then
+										 Exclude.Add(x.Replace("--", ""))
+									 Else
+										 Include.Add(x)
+									 End If
+								 End Sub)
+
+				' Filter the List.
+				PathList.RemoveAll(Function(x)
+									   ' Remove if given include tags are missing
+									   For Each tag As String In Include
+										   If Not x.Contains(tag) Then Return True
+									   Next
+									   ' Remove if given exclude tags are present
+									   For Each notTag As String In Exclude
+										   If x.Contains(notTag) Then Return True
+									   Next
+									   ' Remove all without valid extension
+									   Dim Ext As String = Path.GetExtension(Split(x)(0)).ToLower
+									   If Not ValidExt.Contains(Ext) Then Return True
+									   'Everything fine keep file
+									   Return False
+								   End Function)
+
+				'############################### Extract Filepaths ###############################
+				' Extract filepaths from list. An empty list doesn't matter here.
+				Dim re As New Regex("(?:^.*(?:\.jpg|jpeg|png|bmp|gif)){1}",
+									RegexOptions.IgnoreCase Or RegexOptions.Multiline)
+				' Get the Matches. Since we can't search a generic list, we join it. 
+				Dim mc As MatchCollection = re.Matches(String.Join(vbCrLf, PathList))
+
+				' Write the the ImagePaths back to list.
+				PathList.Clear()
+				For Each ma As Match In mc
+					PathList.Add(TargetFolder & ma.Value)
+				Next
+
+				' Add new item to cache and exit.
+				GetImageListByTag = New ImageTagCacheItem() With {.TagImageList = PathList}
+				ImageTagCache.Add(ImageTags, GetImageListByTag)
+				Return GetImageListByTag
+			End If
+		Catch ex As Exception
+			Throw
+		End Try
+	End Function
+
 #End Region
 
-	Friend Function Check_ImageDir(tp As ContactType)
-		Dim def As String = getDefaultFolder(tp)
-		Dim val As String = getCurrentBaseFolder(tp)
-		Dim text As String = ""
-
-		If tp = ContactType.Domme Then : text = "Domme"
-		ElseIf tp = ContactType.Contact1 Then : text = "Contact 1"
-		ElseIf tp = ContactType.Contact2 Then : text = "Contact 2"
-		ElseIf tp = ContactType.Contact3 Then : text = "Contact 3"
-		End If
-
-		val = FolderCheck(text, val, def)
-
-		SetBaseFolder(tp, val)
-
-		If val = def Then
-			Return False
-		Else
-			Return True
-		End If
-	End Function
-
-	Friend Function GetRandom(tp As ContactType) As List(Of String)
-		If Check_ImageDir(tp) Then
-			Return LoadRandom(getCurrentBaseFolder(tp))
-		Else
-			Return New List(Of String)
-		End If
-	End Function
-
+#End Region
 
 End Class
