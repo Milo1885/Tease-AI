@@ -44,23 +44,11 @@ Public NotInheritable Class myDirectory
 	Private Shared Function Sort(SortObject As Object)
 		If TypeOf SortObject Is Array Then
 			'################## Arrays ###################
-			Try
-				Array.Sort(DirectCast(SortObject, Array), New LogicalStringComparer)
-				Return SortObject
-			Catch ex As Exception
-			End Try
-
 			Array.Sort(DirectCast(SortObject, Array))
 			Return SortObject
 
 		ElseIf TypeOf SortObject Is List(Of String)
 			'############## List(of String) ##############
-			Try
-				DirectCast(SortObject, List(Of String)).Sort(New LogicalStringComparer)
-				Return SortObject
-			Catch ex As Exception
-			End Try
-
 			DirectCast(SortObject, List(Of String)).Sort()
 			Return SortObject
 
