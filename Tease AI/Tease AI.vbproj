@@ -107,7 +107,6 @@
     </Compile>
     <Compile Include="Classes\Common.vb" />
     <Compile Include="Classes\Log.vb" />
-    <Compile Include="Classes\LogicalStringComparer.vb" />
     <Compile Include="Classes\Mode.vb" />
     <Compile Include="Classes\My.Watchdog.vb" />
     <Compile Include="Classes\myDirectory.vb" />

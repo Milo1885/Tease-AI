@@ -155,6 +155,18 @@
     <Setting Name="Glitter3" Type="System.String" Scope="User">
       <Value Profile="(Default)">Contact 3</Value>
     </Setting>
+    <Setting Name="GlitterNCDomme" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#0080FF</Value>
+    </Setting>
+    <Setting Name="GlitterNC1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#FF0080</Value>
+    </Setting>
+    <Setting Name="GlitterNC2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#8080C0</Value>
+    </Setting>
+    <Setting Name="GlitterNC3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">#0080C0</Value>
+    </Setting>
     <Setting Name="GlitterNCDommeColor" Type="System.Drawing.Color" Scope="User">
       <Value Profile="(Default)">0, 128, 255</Value>
     </Setting>
@@ -180,7 +192,7 @@
       <Value Profile="(Default)">5</Value>
     </Setting>
     <Setting Name="CBGlitterFeed" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="CBGlitter1" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -1068,7 +1080,7 @@
       <Value Profile="(Default)">No Path Selected</Value>
     </Setting>
     <Setting Name="CBGlitterFeedOff" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CBGlitterFeedScripts" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -1176,7 +1188,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SplitterPosition" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">706</Value>
+      <Value Profile="(Default)">686</Value>
     </Setting>
     <Setting Name="MirrorWindows" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -1415,10 +1427,6 @@
     <Setting Name="TypeSpeed" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">50</Value>
     </Setting>
-    <Setting Name="RecentSlideshows" Type="System.Collections.Specialized.StringCollection" Scope="User">
-      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Value>
-    </Setting>
     <Setting Name="LockOrgasmChances" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -1427,6 +1435,10 @@
     </Setting>
     <Setting Name="DisplaySidePanel" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RecentSlideshows" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" /&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

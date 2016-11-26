@@ -4,35 +4,15 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 # Todo:
 
 Stefaf: Integration of Class myDirectory: Status ongoing.
-	Testrun to sort Lists like Win-Explorer: initialized in v0.54.5.1
+	Testrun to sort Lists like Win-Explorer: Status Initial
 	
 # Changelog - Patch 54.5.1
 
-* Added Features:
-	* Added new sorting method to sort file lists like the Windows file Explorer does.
-	* PoundClean reworked to support system keywords as parameters inside of vocabulary files. In order to prevent infinite loops, the maximum allowed depth is limited to 5 times. Tip: take a look at the logfile to see how it's working.
-	* All Contacts and Domme are able to use @DommeTag(). 
-
-* Removed Features:
-	* @DommeTag() doesn't alternate the given tags to return a result. (stefaf) The idea was worth to try. 
+	Added Features:
 		
-* Bugfixes:
-	* After using an ImageCommand the slideshow was locked.
-	* Filtering code was unable to handle parametrized command filters and image commands.
-	* The slideshow folder check method forced to include slideshow subdirectories, even if the directory was valid. 
-	* Vitalsub didn't read calorie items from file at startup.
-	* MouseOver LblDomImagedir caused an unhandled exception.
-	* RiskyPick Images haven't been updated.
+	Bugfixes:
 
-* Miscellaneous:
-	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.
-	* Optimized performance of @ShowTaggedImage code.
-	* Enhanced logging: It is now possible to customize the logging without the need to recompile. Simply open up Tease-AI.exe.config using a text editor and edit the switch values as described in the file - keep in mind to backup the file before. ;-) Added rollover function, if the log file is bigger as 2 MB. Instead of deleting the complete file, now only the top entries are deleted.
-
-### Known Issues:
-* DommeTag alternation is causing nonsense most of the time.
-* Texted imagetags are not working.
-
+	Miscellaneous:
 	
 # Changelog - Patch 54.5.0	
 
@@ -79,7 +59,7 @@ Miscellaneous:
 	Removed several unused variables.
 	SettingsForm VideoSettings GUI reworked.
 	SettingsForm ImageSettings GUI reworked.
-	SettingsForm Apps-Games GUI reworked.
+	SettingsForm Apps-Games GUI reworked. Still WIP -> Unchanged references causing sometimes glitter names to be blank in chat.
 	Suspending/Resuming/Resetting Session reworked.
 		Now all necessary data is stored into a single binary *.save file. This includes all Variables, Flags, Slideshows, TimerStates and regular Data. By Holding down the control key while clicking suspend or resume the user is asked for a custom file to save to or load from.
 	Reworked Code to Display Images.

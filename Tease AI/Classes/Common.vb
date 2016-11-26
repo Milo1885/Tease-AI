@@ -94,17 +94,13 @@ Public Class Common
 
 			FswChache.Add(tmpString, tmpFsw)
 		Catch ex As Exception
-			Log.WriteError("TxtCache: Unable to Create FileSystemWatcher for:" & Filepath, ex, "TxtCache Create FileSystemWatcher")
+			Debug.Print("Unable to Create FileSystemWatcher for:" & Filepath)
 		End Try
 	End Sub
 
 	Private Shared Sub UpdateTextfileCache(sender As Object, e As FileSystemEventArgs)
 		If TxtCache.Keys.Contains(e.FullPath.ToLower) Then
-
-#If TRACE Then
-			Dim TS As New TraceSwitch("TxtCache", "")
-			If TS.TraceInfo Then Trace.WriteLine("TxtCache: Removing modified file from cache:  " & e.FullPath, "TxtCache")
-#End If
+			Debug.Print("Removing modified file from cache:  " & e.FullPath)
 			TxtCache.Remove(e.FullPath.ToLower)
 		End If
 	End Sub
@@ -129,9 +125,6 @@ Public Class Common
 	''' <remarks>This Method will create the given DirectoryStructure for the given
 	''' Filepath if it doesn't exist.</remarks>
 	Friend Shared Function Txt2List(ByVal GetText As String) As List(Of String)
-#If TRACE Then
-		Dim TS As New TraceSwitch("TxtCache", "")
-#End If
 		Try
 			If GetText Is Nothing Then
 				Throw New ArgumentNullException("The given filepath was NULL.")
@@ -144,9 +137,7 @@ Public Class Common
 			Dim TextList As New List(Of String)
 
 			If TxtCache.Keys.Contains(GetText.ToLower) Then
-#If TRACE Then
-				If TS.TraceInfo Then Trace.WriteLine("Loading cached Text-File: " & GetText, "TxtCache")
-#End If
+				Log.Write("Loading cached Text-File: " & GetText, 5)
 
 				Txt2List = TxtCache(GetText.ToLower).ToList
 
@@ -160,9 +151,7 @@ Public Class Common
 			' Check if the given Directory exists. MyDirectory.Exists will 
 			' try to create the directory, if it's an App-sub-dir.
 			If myDirectory.Exists(Path.GetDirectoryName(Path.GetFullPath(GetText))) Then
-#If TRACE Then
-				If TS.TraceInfo Then Trace.Write("Reading Text-File: " & GetText, "TxtCache")
-#End If
+				Log.Write("Reading Text-File: " & GetText, 5)
 				If File.Exists(GetText) Then
 
 					Using TextReader As New StreamReader(GetText)

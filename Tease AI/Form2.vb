@@ -160,6 +160,8 @@ Public Class FrmSettings
 
 		Debug.Print("FRM2 STAGE Two reached")
 
+		LBLDomImageDir.Text = My.Settings.DomImageDir
+
 		Debug.Print("FrmSettingsLoading = " & FrmSettingsLoading)
 
 
@@ -444,7 +446,7 @@ Public Class FrmSettings
 		WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
 
 
-		For Each tmptbx As TextBox In New List(Of TextBox) From {TbxContact1ImageDir, TbxContact2ImageDir, TbxContact3ImageDir, TbxDomImageDir}
+		For Each tmptbx As TextBox In New List(Of TextBox) From {LBLContact1ImageDir, LBLContact2ImageDir, LBLContact3ImageDir}
 			If tmptbx.DataBindings("Text") Is Nothing Then
 				Throw New Exception("There is no databinding set on """ & tmptbx.Name &
 					"""'s text-property. Set the databinding and recompile!")
@@ -1311,27 +1313,25 @@ Public Class FrmSettings
 
 	End Sub
 
+    Private Sub domlevelNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.LostFocus
+        ' My.Settings.DomLevel = domlevelNumBox.Value
+        My.Application.Session.domLevel = domlevelNumBox.Value
+    End Sub
 
-	Private Sub domlevelNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.LostFocus
-		My.Settings.DomLevel = domlevelNumBox.Value
-	End Sub
+    Private Sub NBEmpathy_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBEmpathy.LostFocus
+        'My.Settings.DomEmpathy = NBEmpathy.Value
+        My.Application.Session.domEmpathy = NBEmpathy.Value
+    End Sub
 
-	Private Sub alloworgasmComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles alloworgasmComboBox.LostFocus
-
-
-
-		My.Settings.OrgasmAllow = alloworgasmComboBox.Text
-	End Sub
+    Private Sub alloworgasmComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles alloworgasmComboBox.LostFocus
+        '  My.Settings.OrgasmAllow = alloworgasmComboBox.Text
+        My.Application.Session.orgasmAllow = alloworgasmComboBox.Text
+    End Sub
 
 	Private Sub ruinorgasmComboBox_SelectedIndexChanged(sender As System.Object, e As System.EventArgs) Handles ruinorgasmComboBox.LostFocus
-
-
-
-		My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
-
-
-
-	End Sub
+        ' My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
+        My.Application.Session.orgasmRuin = ruinorgasmComboBox.Text
+    End Sub
 
 	Private Sub domageNumBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles domageNumBox.LostFocus
 		My.Settings.DomAge = domageNumBox.Value
@@ -1589,7 +1589,24 @@ Public Class FrmSettings
 		'LblDommeSettingsDescription.Text = "When this is checked, the domme won't use commas when she types."
 	End Sub
 
-	Private Sub periodCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles periodCheckBox.LostFocus
+    Private Sub GiveUpContinueCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles GiveUpContinueCheckBox.LostFocus
+        If GiveUpContinueCheckBox.Checked = True Then
+            'My.Settings.GiveUpContinue = True
+            My.Application.Session.GiveUpContinue = True
+        Else
+            ' My.Settings.GiveUpContinue = False
+            My.Application.Session.GiveUpContinue = False
+        End If
+    End Sub
+
+    Private Sub GiveUpContinueCheckBox_MouseHover(sender As System.Object, e As System.EventArgs) Handles GiveUpContinueCheckBox.MouseHover
+
+        TTDir.SetToolTip(GiveUpContinueCheckBox, "When this is checked, an allowed give up during a module or link, will continue the script instead of interrupting it and moving to a new link.")
+
+        'LblDommeSettingsDescription.Text = "When this is checked, the domme won't use periods when she types."
+    End Sub
+
+    Private Sub periodCheckBox_LostFocus(sender As System.Object, e As System.EventArgs) Handles periodCheckBox.LostFocus
 		If periodCheckBox.Checked = True Then
 			My.Settings.DomNoPeriods = True
 		Else
@@ -1886,31 +1903,14 @@ Public Class FrmSettings
 		TTDir.SetToolTip(BTNLoadDomSet, "Click to load a custom Domme Settings file you have previously created.")
 	End Sub
 
-
-	Private Sub NBEmpathy_LostFocus(sender As System.Object, e As System.EventArgs) Handles NBEmpathy.LostFocus
-
-		If NBEmpathy.Value = 1 Then My.Settings.DomEmpathy = 1
-		If NBEmpathy.Value = 2 Then My.Settings.DomEmpathy = 2
-		If NBEmpathy.Value = 3 Then My.Settings.DomEmpathy = 3
-		If NBEmpathy.Value = 4 Then My.Settings.DomEmpathy = 4
-		If NBEmpathy.Value = 5 Then My.Settings.DomEmpathy = 5
-
-
-		Debug.Print(My.Settings.DomEmpathy)
-
-
-
-
-	End Sub
-
-	Private Sub domlevelNumBox_ValueChanged(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.ValueChanged
+    Private Sub domlevelNumBox_ValueChanged(sender As System.Object, e As System.EventArgs) Handles domlevelNumBox.ValueChanged
 		If FrmSettingsLoading = False Then
 			If domlevelNumBox.Value = 1 Then DomLevelDescLabel.Text = "Gentle"
 			If domlevelNumBox.Value = 2 Then DomLevelDescLabel.Text = "Lenient"
 			If domlevelNumBox.Value = 3 Then DomLevelDescLabel.Text = "Tease"
 			If domlevelNumBox.Value = 4 Then DomLevelDescLabel.Text = "Rough"
-			If domlevelNumBox.Value = 5 Then DomLevelDescLabel.Text = "Sadistic"
-		End If
+            If domlevelNumBox.Value = 5 Then DomLevelDescLabel.Text = "Sadistic"
+        End If
 	End Sub
 
 	Private Sub NBEmpathy_ValueChanged(sender As System.Object, e As System.EventArgs) Handles NBEmpathy.ValueChanged
@@ -1919,8 +1919,8 @@ Public Class FrmSettings
 			If NBEmpathy.Value = 2 Then LBLEmpathy.Text = "Caring"
 			If NBEmpathy.Value = 3 Then LBLEmpathy.Text = "Moderate"
 			If NBEmpathy.Value = 4 Then LBLEmpathy.Text = "Cruel"
-			If NBEmpathy.Value = 5 Then LBLEmpathy.Text = "Merciless"
-		End If
+            If NBEmpathy.Value = 5 Then LBLEmpathy.Text = "Merciless"
+        End If
 	End Sub
 
 #End Region ' Domme
@@ -2932,8 +2932,8 @@ SkipDeserializing:
 
 	Private Sub BTNDomImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BTNDomImageDir.Click
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
-			My.Settings.DomImageDir = FolderBrowserDialog1.SelectedPath
-			My.Application.Session.SlideshowMain = New ContactData(ContactType.Domme)
+			LBLDomImageDir.Text = FolderBrowserDialog1.SelectedPath
+			My.Settings.DomImageDir = LBLDomImageDir.Text
 		End If
 	End Sub
 
@@ -2961,45 +2961,76 @@ SkipDeserializing:
 
 	Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitterD.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
+			My.Settings.GlitterNCDommeColor = GetColor.Color
 			LBLGlitterNCDomme.ForeColor = GetColor.Color
+			My.Settings.GlitterNCDomme = Color2Html(GetColor.Color)
 		End If
 	End Sub
 	Private Sub Button27_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter1.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
+			My.Settings.GlitterNC1Color = GetColor.Color
 			LBLGlitterNC1.ForeColor = GetColor.Color
+			My.Settings.GlitterNC1 = Color2Html(GetColor.Color)
 		End If
 	End Sub
 	Private Sub Button4_Click_3(sender As System.Object, e As System.EventArgs) Handles BTNGlitter2.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
-			LBLGlitterNC2.ForeColor = GetColor.Color
+			My.Settings.GlitterNC2Color = GetColor.Color
+			LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
+			My.Settings.GlitterNC2 = Color2Html(GetColor.Color)
 		End If
 	End Sub
 	Private Sub Button26_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitter3.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
+			My.Settings.GlitterNC3Color = GetColor.Color
 			LBLGlitterNC3.ForeColor = GetColor.Color
+			My.Settings.GlitterNC3 = Color2Html(GetColor.Color)
 		End If
 	End Sub
 
-	Private Sub CBGlitterFeed_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitterFeed.Click, CBGlitterFeedScripts.Click, CBGlitterFeedOff.Click
-		If Form1.FormLoading = False Then
-			' In order to prevent wrong values, we have to change the DataSourceUpdateMode.
-			' Since the Designer will reset this value, we have to undo this changes.
-			For Each ob As RadioButton In {CBGlitterFeed, CBGlitterFeedOff, CBGlitterFeedScripts}
-				ob.DataBindings("Checked").DataSourceUpdateMode = DataSourceUpdateMode.OnValidation
-			Next
-
-			' Set the desired Value manually - Didn't know it is that much of a problem to databind RadioButtons.
-			' This Solution ensures the ui to display the current value, whenever and whatever thread changed in and
-			' it saves correctly. The only issue could be, when setting a value, while forgetting to disable the others.
-			Dim checked As Boolean = CType(sender, RadioButton).Checked
-			My.Settings.CBGlitterFeed = If(sender Is CBGlitterFeed, checked, False)
-			My.Settings.CBGlitterFeedOff = If(sender Is CBGlitterFeedOff, checked, False)
-			My.Settings.CBGlitterFeedScripts = If(sender Is CBGlitterFeedScripts, checked, False)
-
-			Debug.Print("Set RadioButton Values")
-			Debug.Print(CBGlitterFeed.Checked)
-			Debug.Print(CBGlitterFeedScripts.Checked)
-			Debug.Print(CBGlitterFeedOff.Checked)
+	Private Sub GlitterSlider_Scroll(sender As System.Object, e As System.EventArgs) Handles GlitterSlider.Scroll
+		My.Settings.GlitterDSlider = GlitterSlider.Value
+	End Sub
+	Private Sub CBTease_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTease.CheckedChanged
+		If CBTease.Checked = True Then
+			My.Settings.CBTease = True
+		Else
+			My.Settings.CBTease = False
+		End If
+	End Sub
+	Private Sub CBEgotist_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBEgotist.CheckedChanged
+		If CBEgotist.Checked = True Then
+			My.Settings.CBEgotist = True
+		Else
+			My.Settings.CBEgotist = False
+		End If
+	End Sub
+	Private Sub CBTrivia_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBTrivia.CheckedChanged
+		If CBTrivia.Checked = True Then
+			My.Settings.CBTrivia = True
+		Else
+			My.Settings.CBTrivia = False
+		End If
+	End Sub
+	Private Sub CBDaily_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBDaily.CheckedChanged
+		If CBDaily.Checked = True Then
+			My.Settings.CBDaily = True
+		Else
+			My.Settings.CBDaily = False
+		End If
+	End Sub
+	Private Sub CBCustom1_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCustom1.CheckedChanged
+		If CBCustom1.Checked = True Then
+			My.Settings.CBCustom1 = True
+		Else
+			My.Settings.CBCustom1 = False
+		End If
+	End Sub
+	Private Sub CBCustom2_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBCustom2.CheckedChanged
+		If CBCustom2.Checked = True Then
+			My.Settings.CBCustom2 = True
+		Else
+			My.Settings.CBCustom2 = False
 		End If
 	End Sub
 
@@ -3062,7 +3093,7 @@ SkipDeserializing:
 		TTDir.SetToolTip(sender, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
 	End Sub
 
-	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover
+	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles LBLContact1ImageDir.MouseHover, LBLContact2ImageDir.MouseHover, LBLContact3ImageDir.MouseHover, LBLDomImageDir.MouseHover
 		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
 	End Sub
 
@@ -3075,17 +3106,17 @@ SkipDeserializing:
 	End Sub
 
 	Private Sub BtnContact1ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDirClear.Click
-		My.Settings.ResetField(TbxContact1ImageDir, "Text")
+		My.Settings.ResetField(LBLContact1ImageDir, "Text")
 		My.Application.Session.SlideshowContact1 = New ContactData()
 	End Sub
 
 	Private Sub BtnContact2ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact2ImageDirClear.Click
-		My.Settings.ResetField(TbxContact2ImageDir, "Text")
+		My.Settings.ResetField(LBLContact2ImageDir, "Text")
 		My.Application.Session.SlideshowContact2 = New ContactData()
 	End Sub
 
 	Private Sub BtnContact3ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact3ImageDirClear.Click
-		My.Settings.ResetField(TbxContact3ImageDir, "Text")
+		My.Settings.ResetField(LBLContact3ImageDir, "Text")
 		My.Application.Session.SlideshowContact3 = New ContactData()
 	End Sub
 
@@ -3105,34 +3136,34 @@ SkipDeserializing:
 
 			If My.Settings.CBGlitterFeed = True Then SettingsList.Add("Glitter Feed: On")
 			If My.Settings.CBGlitterFeedScripts = True Then SettingsList.Add("Glitter Feed: Scripts")
-			If My.Settings.CBGlitterFeedOff = True Then SettingsList.Add("Glitter Feed: Off")
+			If CBGlitterFeedOff.Checked = True Then SettingsList.Add("Glitter Feed: Off")
 
-			SettingsList.Add("Short Name: " & My.Settings.GlitterSN)
-			SettingsList.Add("Domme Color: " & My.Settings.GlitterNCDommeColor.ToArgb.ToString)
-			SettingsList.Add("Tease: " & My.Settings.CBTease)
-			SettingsList.Add("Egotist: " & My.Settings.CBEgotist)
-			SettingsList.Add("Trivia: " & My.Settings.CBTrivia)
-			SettingsList.Add("Daily: " & My.Settings.CBDaily)
-			SettingsList.Add("Custom 1: " & My.Settings.CBCustom1)
-			SettingsList.Add("Custom 2: " & My.Settings.CBCustom2)
+			SettingsList.Add("Short Name: " & TBGlitterShortName.Text)
+			SettingsList.Add("Domme Color: " & LBLGlitterNCDomme.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Tease: " & CBTease.Checked)
+			SettingsList.Add("Egotist: " & CBEgotist.Checked)
+			SettingsList.Add("Trivia: " & CBTrivia.Checked)
+			SettingsList.Add("Daily: " & CBDaily.Checked)
+			SettingsList.Add("Custom 1: " & CBCustom1.Checked)
+			SettingsList.Add("Custom 2: " & CBCustom2.Checked)
 			SettingsList.Add("Domme Post Frequency: " & My.Settings.GlitterDSlider)
 
-			SettingsList.Add("Contact 1 Enabled: " & My.Settings.CBGlitter1)
-			SettingsList.Add("Contact 1 Name: " & My.Settings.Glitter1)
-			SettingsList.Add("Contact 1 Color: " & My.Settings.GlitterNC1Color.ToArgb.ToString)
-			SettingsList.Add("Contact 1 Image Directory: " & My.Settings.Contact1ImageDir)
+			SettingsList.Add("Contact 1 Enabled: " & CBGlitter1.Checked)
+			SettingsList.Add("Contact 1 Name: " & TBGlitter1.Text)
+			SettingsList.Add("Contact 1 Color: " & LBLGlitterNC1.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Contact 1 Image Directory: " & LBLContact1ImageDir.Text)
 			SettingsList.Add("Contact 1 Post Frequency: " & My.Settings.Glitter1Slider)
 
-			SettingsList.Add("Contact 2 Enabled: " & My.Settings.CBGlitter2)
-			SettingsList.Add("Contact 2 Name: " & My.Settings.Glitter2)
-			SettingsList.Add("Contact 2 Color: " & My.Settings.GlitterNC2Color.ToArgb.ToString)
-			SettingsList.Add("Contact 2 Image Directory: " & My.Settings.Contact2ImageDir)
+			SettingsList.Add("Contact 2 Enabled: " & CBGlitter2.Checked)
+			SettingsList.Add("Contact 2 Name: " & TBGlitter2.Text)
+			SettingsList.Add("Contact 2 Color: " & LBLGlitterNC2.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Contact 2 Image Directory: " & LBLContact2ImageDir.Text)
 			SettingsList.Add("Contact 2 Post Frequency: " & My.Settings.Glitter2Slider)
 
-			SettingsList.Add("Contact 3 Enabled: " & My.Settings.CBGlitter3)
-			SettingsList.Add("Contact 3 Name: " & My.Settings.Glitter3)
-			SettingsList.Add("Contact 3 Color: " & My.Settings.GlitterNC3Color.ToArgb.ToString)
-			SettingsList.Add("Contact 3 Image Directory: " & My.Settings.Contact3ImageDir)
+			SettingsList.Add("Contact 3 Enabled: " & CBGlitter3.Checked)
+			SettingsList.Add("Contact 3 Name: " & TBGlitter3.Text)
+			SettingsList.Add("Contact 3 Color: " & LBLGlitterNC3.ForeColor.ToArgb.ToString)
+			SettingsList.Add("Contact 3 Image Directory: " & LBLContact3ImageDir.Text)
 			SettingsList.Add("Contact 3 Post Frequency: " & My.Settings.Glitter3Slider)
 
 			SettingsList.Add("Domme AV: " & My.Settings.GlitterAV)
@@ -3156,7 +3187,7 @@ SkipDeserializing:
 	End Sub
 
 	Private Sub Button15_Click(sender As System.Object, e As System.EventArgs) Handles Button15.Click
-		'ISSUE: Loading a corrupted textfile results in half loaded Glitter settings.
+
 		OpenSettingsDialog.Title = "Select a Glitter settings file"
 		OpenSettingsDialog.InitialDirectory = Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\System\"
 
@@ -3181,42 +3212,42 @@ SkipDeserializing:
 				Dim CheckState As String = SettingsList(0).Replace("Glitter Feed: ", "")
 				If CheckState = "On" Then My.Settings.CBGlitterFeed = True
 				If CheckState = "Scripts" Then My.Settings.CBGlitterFeedScripts = True
-				If CheckState = "Off" Then My.Settings.CBGlitterFeedOff = True
+				If CheckState = "Off" Then CBGlitterFeedOff.Checked = True
 
-				My.Settings.GlitterSN = SettingsList(1).Replace("Short Name: ", "")
+				TBGlitterShortName.Text = SettingsList(1).Replace("Short Name: ", "")
 
 				Dim GlitterColor As Color = Color.FromArgb(SettingsList(2).Replace("Domme Color: ", ""))
-				My.Settings.GlitterNCDommeColor = GlitterColor
+				LBLGlitterNCDomme.ForeColor = GlitterColor
 
-				My.Settings.CBTease = SettingsList(3).Replace("Tease: ", "")
-				My.Settings.CBEgotist = SettingsList(4).Replace("Egotist: ", "")
-				My.Settings.CBTrivia = SettingsList(5).Replace("Trivia: ", "")
-				My.Settings.CBDaily = SettingsList(6).Replace("Daily: ", "")
-				My.Settings.CBCustom1 = SettingsList(7).Replace("Custom 1: ", "")
-				My.Settings.CBCustom2 = SettingsList(8).Replace("Custom 2: ", "")
-				My.Settings.GlitterDSlider = CInt(SettingsList(9).Replace("Domme Post Frequency: ", ""))
+				CBTease.Checked = SettingsList(3).Replace("Tease: ", "")
+				CBEgotist.Checked = SettingsList(4).Replace("Egotist: ", "")
+				CBTrivia.Checked = SettingsList(5).Replace("Trivia: ", "")
+				CBDaily.Checked = SettingsList(6).Replace("Daily: ", "")
+				CBCustom1.Checked = SettingsList(7).Replace("Custom 1: ", "")
+				CBCustom2.Checked = SettingsList(8).Replace("Custom 2: ", "")
+				GlitterSlider.Value = SettingsList(9).Replace("Domme Post Frequency: ", "")
 
 
-				My.Settings.CBGlitter1 = SettingsList(10).Replace("Contact 1 Enabled: ", "")
-				My.Settings.Glitter1 = SettingsList(11).Replace("Contact 1 Name: ", "")
+				CBGlitter1.Checked = SettingsList(10).Replace("Contact 1 Enabled: ", "")
+				TBGlitter1.Text = SettingsList(11).Replace("Contact 1 Name: ", "")
 				GlitterColor = Color.FromArgb(SettingsList(12).Replace("Contact 1 Color: ", ""))
-				My.Settings.GlitterNC1Color = GlitterColor
-				My.Settings.Contact1ImageDir = SettingsList(13).Replace("Contact 1 Image Directory: ", "")
-				My.Settings.Glitter1Slider = SettingsList(14).Replace("Contact 1 Post Frequency: ", "")
+				LBLGlitterNC1.ForeColor = GlitterColor
+				LBLContact1ImageDir.Text = SettingsList(13).Replace("Contact 1 Image Directory: ", "")
+				GlitterSlider1.Value = SettingsList(14).Replace("Contact 1 Post Frequency: ", "")
 
-				My.Settings.CBGlitter2 = SettingsList(15).Replace("Contact 2 Enabled: ", "")
-				My.Settings.Glitter2 = SettingsList(16).Replace("Contact 2 Name: ", "")
+				CBGlitter2.Checked = SettingsList(15).Replace("Contact 2 Enabled: ", "")
+				TBGlitter2.Text = SettingsList(16).Replace("Contact 2 Name: ", "")
 				GlitterColor = Color.FromArgb(SettingsList(17).Replace("Contact 2 Color: ", ""))
-				My.Settings.GlitterNC2Color = GlitterColor
-				My.Settings.Contact2ImageDir = SettingsList(18).Replace("Contact 2 Image Directory: ", "")
-				My.Settings.Glitter2Slider = SettingsList(19).Replace("Contact 2 Post Frequency: ", "")
+				LBLGlitterNC2.ForeColor = GlitterColor
+				LBLContact2ImageDir.Text = SettingsList(18).Replace("Contact 2 Image Directory: ", "")
+				GlitterSlider2.Value = SettingsList(19).Replace("Contact 2 Post Frequency: ", "")
 
-				My.Settings.CBGlitter3 = SettingsList(20).Replace("Contact 3 Enabled: ", "")
-				My.Settings.Glitter3 = SettingsList(21).Replace("Contact 3 Name: ", "")
+				CBGlitter3.Checked = SettingsList(20).Replace("Contact 3 Enabled: ", "")
+				TBGlitter3.Text = SettingsList(21).Replace("Contact 3 Name: ", "")
 				GlitterColor = Color.FromArgb(SettingsList(22).Replace("Contact 3 Color: ", ""))
-				My.Settings.GlitterNC3Color = GlitterColor
-				My.Settings.Contact3ImageDir = SettingsList(23).Replace("Contact 3 Image Directory: ", "")
-				My.Settings.Glitter3Slider = SettingsList(24).Replace("Contact 3 Post Frequency: ", "")
+				LBLGlitterNC3.ForeColor = GlitterColor
+				LBLContact3ImageDir.Text = SettingsList(23).Replace("Contact 3 Image Directory: ", "")
+				GlitterSlider3.Value = SettingsList(24).Replace("Contact 3 Post Frequency: ", "")
 
 				Try
 					GlitterAV.Image = Image.FromFile(SettingsList(25).Replace("Domme AV: ", ""))
@@ -3243,11 +3274,90 @@ SkipDeserializing:
 				End Try
 
 
+				SaveGlitterSettings()
+
 			Catch
 				MessageBox.Show(Me, "This Glitter settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				LoadGlitterSettings()
 			End Try
 
 		End If
+	End Sub
+
+	Public Sub SaveGlitterSettings()
+
+		If CBGlitterFeed.Checked = True Then
+			My.Settings.CBGlitterFeed = True
+			My.Settings.CBGlitterFeedScripts = False
+			My.Settings.CBGlitterFeedOff = False
+		End If
+		If CBGlitterFeedScripts.Checked = True Then
+			My.Settings.CBGlitterFeed = False
+			My.Settings.CBGlitterFeedScripts = True
+			My.Settings.CBGlitterFeedOff = False
+		End If
+		If CBGlitterFeedOff.Checked = True Then
+			My.Settings.CBGlitterFeed = False
+			My.Settings.CBGlitterFeedScripts = False
+			My.Settings.CBGlitterFeedOff = True
+		End If
+
+
+		My.Settings.GlitterNCDommeColor = LBLGlitterNCDomme.ForeColor
+
+		My.Settings.CBTease = CBTease.Checked
+		My.Settings.CBEgotist = CBEgotist.Checked
+		My.Settings.CBTrivia = CBTrivia.Checked
+		My.Settings.CBDaily = CBDaily.Checked
+		My.Settings.CBCustom1 = CBCustom1.Checked
+		My.Settings.CBCustom2 = CBCustom2.Checked
+		My.Settings.GlitterDSlider = GlitterSlider.Value
+
+		My.Settings.CBGlitter1 = CBGlitter1.Checked
+		My.Settings.Glitter1 = TBGlitter1.Text
+		My.Settings.GlitterNC1Color = LBLGlitterNC1.ForeColor
+		My.Settings.Contact1ImageDir = LBLContact1ImageDir.Text
+
+		My.Settings.CBGlitter2 = CBGlitter2.Checked
+		My.Settings.Glitter2 = TBGlitter2.Text
+		My.Settings.GlitterNC2Color = LBLGlitterNC2.ForeColor
+		My.Settings.Contact2ImageDir = LBLContact2ImageDir.Text
+
+		My.Settings.Glitter3 = TBGlitter3.Text
+		My.Settings.GlitterNC3Color = LBLGlitterNC3.ForeColor
+		My.Settings.Contact3ImageDir = LBLContact3ImageDir.Text
+
+	End Sub
+
+	Public Sub LoadGlitterSettings()
+
+		If My.Settings.CBGlitterFeed = True Then CBGlitterFeed.Checked = True
+		If My.Settings.CBGlitterFeedScripts = True Then CBGlitterFeedScripts.Checked = True
+		If My.Settings.CBGlitterFeedOff = True Then CBGlitterFeedOff.Checked = True
+
+
+		LBLGlitterNCDomme.ForeColor = My.Settings.GlitterNCDommeColor
+
+		CBTease.Checked = My.Settings.CBTease
+		CBEgotist.Checked = My.Settings.CBEgotist
+		CBTrivia.Checked = My.Settings.CBTrivia
+		CBDaily.Checked = My.Settings.CBDaily
+		CBCustom1.Checked = My.Settings.CBCustom1
+		CBCustom2.Checked = My.Settings.CBCustom2
+		GlitterSlider.Value = My.Settings.GlitterDSlider
+
+		TBGlitter1.Text = My.Settings.Glitter1
+		LBLGlitterNC1.ForeColor = My.Settings.GlitterNC1Color
+		LBLContact1ImageDir.Text = My.Settings.Contact1ImageDir
+
+		TBGlitter2.Text = My.Settings.Glitter2
+		LBLGlitterNC2.ForeColor = My.Settings.GlitterNC2Color
+		LBLContact2ImageDir.Text = My.Settings.Contact2ImageDir
+
+		TBGlitter3.Text = My.Settings.Glitter3
+		LBLGlitterNC3.ForeColor = My.Settings.GlitterNC3Color
+		LBLContact3ImageDir.Text = My.Settings.Contact3ImageDir
+
 	End Sub
 
 #End Region ' Glitter
@@ -7490,8 +7600,8 @@ checkFolder:
 			SettingsList.Add("Degrading: " & degradingCheckBox.Checked)
 
 			SettingsList.Add("Typo Chance: " & NBTypoChance.Value)
-
-			Dim SettingsString As String = ""
+            SettingsList.Add("Give Up Continue: " & GiveUpContinueCheckBox.Checked)
+            Dim SettingsString As String = ""
 
 			For i As Integer = 0 To SettingsList.Count - 1
 				SettingsString = SettingsString & SettingsList(i)
@@ -7551,7 +7661,9 @@ checkFolder:
 				petnameBox7.Text = SettingsList(22).Replace("Pet Name 7: ", "")
 				petnameBox8.Text = SettingsList(23).Replace("Pet Name 8: ", "")
 
-				alloworgasmComboBox.Text = SettingsList(24).Replace("Allows Orgasms: ", "")
+                GiveUpContinueCheckBox.Checked = My.Settings.GiveUpContinue
+
+                alloworgasmComboBox.Text = SettingsList(24).Replace("Allows Orgasms: ", "")
 				ruinorgasmComboBox.Text = SettingsList(25).Replace("Ruins Orgasms: ", "")
 				CBDomDenialEnds.Checked = SettingsList(26).Replace("Denial Ends: ", "")
 				CBDomOrgasmEnds.Checked = SettingsList(27).Replace("Orgasm Ends: ", "")
@@ -7624,7 +7736,9 @@ checkFolder:
 		My.Settings.pnSetting7 = petnameBox7.Text
 		My.Settings.pnSetting8 = petnameBox8.Text
 
-		My.Settings.OrgasmAllow = alloworgasmComboBox.Text
+        My.Settings.GiveUpContinue = GiveUpContinueCheckBox.Checked
+
+        My.Settings.OrgasmAllow = alloworgasmComboBox.Text
 		My.Settings.OrgasmRuin = ruinorgasmComboBox.Text
 		My.Settings.LockOrgasmChances = CBLockOrgasmChances.Checked
 		My.Settings.DomDenialEnd = CBDomDenialEnds.Checked
@@ -10064,6 +10178,16 @@ checkFolder:
 	Private Sub Button33_Click(sender As System.Object, e As System.EventArgs) Handles Button33.Click
 	End Sub
 
+	Private Sub CBGlitterFeed_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles CBGlitterFeed.CheckedChanged, CBGlitterFeedScripts.CheckedChanged, CBGlitterFeedOff.CheckedChanged
+		If Form1.FormLoading = False Then
+
+			My.Settings.CBGlitterFeed = CBGlitterFeed.Checked
+			My.Settings.CBGlitterFeedScripts = CBGlitterFeedScripts.Checked
+			My.Settings.CBGlitterFeedOff = CBGlitterFeedOff.Checked
+
+		End If
+	End Sub
+
 	Public Sub SaveDommeTags()
 
 		Dim TempImageDir As String = Path.GetFileName(CurrentImageTagImage)
@@ -10164,122 +10288,122 @@ checkFolder:
 	End Sub
 
 
-	Public Sub LoadDommeTags()
+    Public Sub LoadDommeTags()
 
-		If File.Exists(TagImageFolder & "\ImageTags.txt") Then
+        If File.Exists(TagImageFolder & "\ImageTags.txt") Then
 
-			Dim TagCheckList As New List(Of String)
-			TagCheckList = Txt2List(TagImageFolder & "\ImageTags.txt")
-			TagCheckList = StripBlankLines(TagCheckList)
+            Dim TagCheckList As New List(Of String)
+            TagCheckList = Txt2List(TagImageFolder & "\ImageTags.txt")
+            TagCheckList = StripBlankLines(TagCheckList)
 
-			For i As Integer = 0 To TagCheckList.Count - 1
-				If TagCheckList(i).Contains(Path.GetFileName(CurrentImageTagImage)) Then
-					CBTagFace.Checked = False
-					CBTagBoobs.Checked = False
-					CBTagPussy.Checked = False
-					CBTagAss.Checked = False
-					CBTagLegs.Checked = False
-					CBTagFeet.Checked = False
-					CBTagFullyDressed.Checked = False
-					CBTagHalfDressed.Checked = False
-					CBTagGarmentCovering.Checked = False
-					CBTagHandsCovering.Checked = False
-					CBTagNaked.Checked = False
-					CBTagSideView.Checked = False
-					CBTagCloseUp.Checked = False
-					CBTagMasturbating.Checked = False
-					CBTagSucking.Checked = False
-					CBTagPiercing.Checked = False
-					CBTagGarment.Checked = False
-					CBTagUnderwear.Checked = False
-					CBTagTattoo.Checked = False
-					CBTagSexToy.Checked = False
-					CBTagFurniture.Checked = False
-					CBTagSmiling.Checked = False
-					CBTagGlaring.Checked = False
-					CBTagSeeThrough.Checked = False
-					CBTagAllFours.Checked = False
-					TBTagGarment.Text = ""
-					TBTagUnderwear.Text = ""
-					TBTagTattoo.Text = ""
-					TBTagSexToy.Text = ""
-					TBTagFurniture.Text = ""
+            For i As Integer = 0 To TagCheckList.Count - 1
+                If TagCheckList(i).Contains(Path.GetFileName(CurrentImageTagImage)) Then
+                    CBTagFace.Checked = False
+                    CBTagBoobs.Checked = False
+                    CBTagPussy.Checked = False
+                    CBTagAss.Checked = False
+                    CBTagLegs.Checked = False
+                    CBTagFeet.Checked = False
+                    CBTagFullyDressed.Checked = False
+                    CBTagHalfDressed.Checked = False
+                    CBTagGarmentCovering.Checked = False
+                    CBTagHandsCovering.Checked = False
+                    CBTagNaked.Checked = False
+                    CBTagSideView.Checked = False
+                    CBTagCloseUp.Checked = False
+                    CBTagMasturbating.Checked = False
+                    CBTagSucking.Checked = False
+                    CBTagPiercing.Checked = False
+                    CBTagGarment.Checked = False
+                    CBTagUnderwear.Checked = False
+                    CBTagTattoo.Checked = False
+                    CBTagSexToy.Checked = False
+                    CBTagFurniture.Checked = False
+                    CBTagSmiling.Checked = False
+                    CBTagGlaring.Checked = False
+                    CBTagSeeThrough.Checked = False
+                    CBTagAllFours.Checked = False
+                    TBTagGarment.Text = ""
+                    TBTagUnderwear.Text = ""
+                    TBTagTattoo.Text = ""
+                    TBTagSexToy.Text = ""
+                    TBTagFurniture.Text = ""
 
-					If TagCheckList(i).Contains("TagFace") Then CBTagFace.Checked = True
-					If TagCheckList(i).Contains("TagBoobs") Then CBTagBoobs.Checked = True
-					If TagCheckList(i).Contains("TagPussy") Then CBTagPussy.Checked = True
-					If TagCheckList(i).Contains("TagAss") Then CBTagAss.Checked = True
-					If TagCheckList(i).Contains("TagLegs") Then CBTagLegs.Checked = True
-					If TagCheckList(i).Contains("TagFeet") Then CBTagFeet.Checked = True
-					If TagCheckList(i).Contains("TagFullyDressed") Then CBTagFullyDressed.Checked = True
-					If TagCheckList(i).Contains("TagHalfDressed") Then CBTagHalfDressed.Checked = True
-					If TagCheckList(i).Contains("TagGarmentCovering") Then CBTagGarmentCovering.Checked = True
-					If TagCheckList(i).Contains("TagHandsCovering") Then CBTagHandsCovering.Checked = True
-					If TagCheckList(i).Contains("TagNaked") Then CBTagNaked.Checked = True
-					If TagCheckList(i).Contains("TagSideView") Then CBTagSideView.Checked = True
-					If TagCheckList(i).Contains("TagCloseUp") Then CBTagCloseUp.Checked = True
-					If TagCheckList(i).Contains("TagMasturbating") Then CBTagMasturbating.Checked = True
-					If TagCheckList(i).Contains("TagSucking") Then CBTagSucking.Checked = True
-					If TagCheckList(i).Contains("TagPiercing") Then CBTagPiercing.Checked = True
-					If TagCheckList(i).Contains("TagSmiling") Then CBTagSmiling.Checked = True
-					If TagCheckList(i).Contains("TagGlaring") Then CBTagGlaring.Checked = True
-					If TagCheckList(i).Contains("TagSeeThrough") Then CBTagSeeThrough.Checked = True
-					If TagCheckList(i).Contains("TagAllFours") Then CBTagAllFours.Checked = True
+                    If TagCheckList(i).Contains("TagFace") Then CBTagFace.Checked = True
+                    If TagCheckList(i).Contains("TagBoobs") Then CBTagBoobs.Checked = True
+                    If TagCheckList(i).Contains("TagPussy") Then CBTagPussy.Checked = True
+                    If TagCheckList(i).Contains("TagAss") Then CBTagAss.Checked = True
+                    If TagCheckList(i).Contains("TagLegs") Then CBTagLegs.Checked = True
+                    If TagCheckList(i).Contains("TagFeet") Then CBTagFeet.Checked = True
+                    If TagCheckList(i).Contains("TagFullyDressed") Then CBTagFullyDressed.Checked = True
+                    If TagCheckList(i).Contains("TagHalfDressed") Then CBTagHalfDressed.Checked = True
+                    If TagCheckList(i).Contains("TagGarmentCovering") Then CBTagGarmentCovering.Checked = True
+                    If TagCheckList(i).Contains("TagHandsCovering") Then CBTagHandsCovering.Checked = True
+                    If TagCheckList(i).Contains("TagNaked") Then CBTagNaked.Checked = True
+                    If TagCheckList(i).Contains("TagSideView") Then CBTagSideView.Checked = True
+                    If TagCheckList(i).Contains("TagCloseUp") Then CBTagCloseUp.Checked = True
+                    If TagCheckList(i).Contains("TagMasturbating") Then CBTagMasturbating.Checked = True
+                    If TagCheckList(i).Contains("TagSucking") Then CBTagSucking.Checked = True
+                    If TagCheckList(i).Contains("TagPiercing") Then CBTagPiercing.Checked = True
+                    If TagCheckList(i).Contains("TagSmiling") Then CBTagSmiling.Checked = True
+                    If TagCheckList(i).Contains("TagGlaring") Then CBTagGlaring.Checked = True
+                    If TagCheckList(i).Contains("TagSeeThrough") Then CBTagSeeThrough.Checked = True
+                    If TagCheckList(i).Contains("TagAllFours") Then CBTagAllFours.Checked = True
 
-					If TagCheckList(i).Contains("TagGarment") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagGarment") Then
-								TBTagGarment.Text = TagSplit(j).Replace("TagGarment", "")
-								CBTagGarment.Checked = True
-							End If
-						Next
-					End If
+                    If TagCheckList(i).Contains("TagGarment") Then
+                        Dim TagSplit As String() = Split(TagCheckList(i))
+                        For j As Integer = 0 To TagSplit.Length - 1
+                            If TagSplit(j).Contains("TagGarment") Then
+                                TBTagGarment.Text = TagSplit(j).Replace("TagGarment", "")
+                                CBTagGarment.Checked = True
+                            End If
+                        Next
+                    End If
 
-					If TagCheckList(i).Contains("TagUnderwear") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagUnderwear") Then
-								TBTagUnderwear.Text = TagSplit(j).Replace("TagUnderwear", "")
-								CBTagUnderwear.Checked = True
-							End If
-						Next
-					End If
+                    If TagCheckList(i).Contains("TagUnderwear") Then
+                        Dim TagSplit As String() = Split(TagCheckList(i))
+                        For j As Integer = 0 To TagSplit.Length - 1
+                            If TagSplit(j).Contains("TagUnderwear") Then
+                                TBTagUnderwear.Text = TagSplit(j).Replace("TagUnderwear", "")
+                                CBTagUnderwear.Checked = True
+                            End If
+                        Next
+                    End If
 
-					If TagCheckList(i).Contains("TagTattoo") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagTattoo") Then
-								TBTagTattoo.Text = TagSplit(j).Replace("TagTattoo", "")
-								CBTagTattoo.Checked = True
-							End If
-						Next
-					End If
+                    If TagCheckList(i).Contains("TagTattoo") Then
+                        Dim TagSplit As String() = Split(TagCheckList(i))
+                        For j As Integer = 0 To TagSplit.Length - 1
+                            If TagSplit(j).Contains("TagTattoo") Then
+                                TBTagTattoo.Text = TagSplit(j).Replace("TagTattoo", "")
+                                CBTagTattoo.Checked = True
+                            End If
+                        Next
+                    End If
 
-					If TagCheckList(i).Contains("TagSexToy") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagSexToy") Then
-								TBTagSexToy.Text = TagSplit(j).Replace("TagSexToy", "")
-								CBTagSexToy.Checked = True
-							End If
-						Next
-					End If
+                    If TagCheckList(i).Contains("TagSexToy") Then
+                        Dim TagSplit As String() = Split(TagCheckList(i))
+                        For j As Integer = 0 To TagSplit.Length - 1
+                            If TagSplit(j).Contains("TagSexToy") Then
+                                TBTagSexToy.Text = TagSplit(j).Replace("TagSexToy", "")
+                                CBTagSexToy.Checked = True
+                            End If
+                        Next
+                    End If
 
-					If TagCheckList(i).Contains("TagFurniture") Then
-						Dim TagSplit As String() = Split(TagCheckList(i))
-						For j As Integer = 0 To TagSplit.Length - 1
-							If TagSplit(j).Contains("TagFurniture") Then
-								TBTagFurniture.Text = TagSplit(j).Replace("TagFurniture", "")
-								CBTagFurniture.Checked = True
-							End If
-						Next
-					End If
+                    If TagCheckList(i).Contains("TagFurniture") Then
+                        Dim TagSplit As String() = Split(TagCheckList(i))
+                        For j As Integer = 0 To TagSplit.Length - 1
+                            If TagSplit(j).Contains("TagFurniture") Then
+                                TBTagFurniture.Text = TagSplit(j).Replace("TagFurniture", "")
+                                CBTagFurniture.Checked = True
+                            End If
+                        Next
+                    End If
 
-				End If
-			Next
-		End If
+                End If
+            Next
+        End If
 
-	End Sub
+    End Sub
 
 End Class

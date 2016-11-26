@@ -5,10 +5,87 @@
 ''' </summary>
 Public Class Log
 
+	''' <summary>
+	''' Writes Data to a Logfifile
+	''' </summary>
+	''' <param name="text">The Text to append to file.</param>
+	''' 
+	''' <param name="stackDepth">Determines the maximum depth of Stacktrace 
+	''' written with the Message.</param>
+	Public Shared Sub Write(ByVal text As String, Optional ByVal stackDepth As Integer = 0)
+		'╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩╩
+		'
+		'	                       Write Data to Logfile
+		'
+		'╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦╦
+		Try
+			Dim Logfile As String = Application.StartupPath & "\log.txt"
+			Dim StList As List(Of String) = Environment.StackTrace.Replace(vbLf, "").Split(vbCrLf).ToList
+
+			' Remove fist 3 Items, Because its the Call-Depth of Environment.StackTrace() and Write(String)
+			StList.RemoveRange(0, 3)
+
+			' Save the StackTraceCount for printing
+			Dim StackCountOrg As Integer = StList.Count
+
+			' Trim Stacktrace
+			If stackDepth > 0 AndAlso StList.Count > stackDepth Then
+				StList.RemoveRange(stackDepth - 1, StList.Count - stackDepth)
+			End If
+
+			Dim StString As String = String.Join(vbCrLf & vbTab, StList)
+Restart:
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+			'                               Check File
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+			If File.Exists(Logfile) = False Then
+				'===============================================================================
+				' Create new file
+				'===============================================================================
+				Using sw As New StreamWriter(Logfile)
+					sw.Write("=========================== LogFile Created =============================" & vbCrLf &
+							 "File Date: " & Now.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
+							 "If you want to remove the Stacktrace: Use NotePad++ and search Regex with" & vbCrLf &
+							 "MatchPattern: \t@>~@>~[^\a]*?~<@~<@+?\r\n" & vbCrLf &
+							 "ReplacePatten: Leave it Empty" & vbCrLf &
+							 "=========================== LogFile Created =============================" & vbCrLf & vbCrLf)
+				End Using
+			Else
+				'===============================================================================
+				' Delete File if Size > 2 MB
+				'===============================================================================
+				Dim MyFile As New FileInfo(Logfile)
+				Dim FileSize As Long = MyFile.Length
+				If FileSize > 2097152 Then
+					File.Delete(Logfile)
+					GoTo Restart
+				End If
+			End If
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			' CheckFile - End
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			'===============================================================================
+			' Write Text
+			'===============================================================================
+			Using fs1 As New FileStream(Logfile, FileMode.Append, FileAccess.Write)
+				Using s1 As New StreamWriter(fs1)
+					s1.Write(Now.ToString("yyyy-MM-dd HH:mm:ss") & " " & text & vbCrLf)
+					If stackDepth > 0 Then
+						s1.Write(vbTab & "@>~@>~~~~~~~~~~~~Application.StackTrace (" & stackDepth & "/" & StackCountOrg & ")~~~~~~~~~~~~~~~~~~" & vbCrLf)
+						s1.Write(vbTab & StString & vbCrLf)
+						s1.Write(vbTab & "~~~~~~~~~~~~~~~~~Application.StackTrace (" & stackDepth & "/" & StackCountOrg & ")~~~~~~~~~~~~~<@~<@" & vbCrLf)
+					End If
+				End Using
+			End Using
+		Catch ex As Exception
+			Trace.Write("Log-Error: " & ex.Message)
+		End Try
+	End Sub
+
 	Friend Shared Sub WriteError(ByVal msg As String,
    ByVal Exception As Exception, ByVal title As String)
 		Try
-			Trace.Write("Exception occured: " & msg)
+			Write("Exception occured: " & msg)
 			Dim TargetFilePath As String = Application.StartupPath &
 			"\ErrorLogs\" & Today.ToString("yyyy-MM-dd") & "_errorlog.txt"
 
@@ -70,154 +147,5 @@ next_innerException:
 
 		Return rtnTExt
 	End Function
-
-	Public Class TextTraceListener
-		Inherits TraceListener
-
-		Private LogPath As String
-
-		Private Shared LogStreamSynclock As New Object
-
-		<DebuggerStepThrough>
-		Private Sub FileWrite(ParamArray text As String())
-			SyncLock LogStreamSynclock
-				CheckFile()
-
-				Using fs As New FileStream(LogPath, FileMode.Append, FileAccess.Write), sw As New StreamWriter(fs)
-					Dim indent As String = GetIndent()
-					For Each str As String In text
-						If str IsNot Nothing Then sw.WriteLine(Now.ToString() & " " & indent & str)
-					Next
-				End Using
-			End SyncLock
-		End Sub
-
-		<DebuggerStepThrough>
-		Private Sub FileWriteLine(ParamArray text As String())
-			SyncLock LogStreamSynclock
-				CheckFile()
-
-				Using fs As New FileStream(LogPath, FileMode.Append, FileAccess.Write), sw As New StreamWriter(fs)
-					Dim indent As String = GetIndent()
-					For Each str As String In text
-						If str IsNot Nothing Then sw.WriteLine(Now.ToString() & " " & indent & str)
-					Next
-				End Using
-			End SyncLock
-		End Sub
-
-
-		<DebuggerStepThrough>
-		Sub New(filePath As String)
-			If Path.IsPathRooted(filePath) Then
-				LogPath = filePath
-			Else
-				LogPath = Application.StartupPath & Path.DirectorySeparatorChar.ToString & filePath
-			End If
-
-			Me.NeedIndent = True
-		End Sub
-
-
-		Private Sub CheckFile()
-			If Not Directory.Exists(Path.GetDirectoryName(LogPath)) Then _
-				Directory.CreateDirectory(Path.GetDirectoryName(LogPath))
-restart:
-			If File.Exists(LogPath) = False Then
-				'===============================================================================
-				' Create new file
-				'===============================================================================
-
-				File.WriteAllText(LogPath,
-								"=========================== LogFile Created =============================" & vbCrLf &
-								"File Date: " & Now.ToString("yyyy-MM-dd HH:mm:ss") & vbCrLf &
-								"If you want to remove the Stacktrace: Use NotePad++ and search Regex with" & vbCrLf &
-								"MatchPattern: \t@>~@>~[^\a]*?~<@~<@+?\r\n" & vbCrLf &
-								"ReplacePatten: Leave it Empty" & vbCrLf &
-								"=========================== LogFile Created =============================" & vbCrLf)
-			Else
-				'===============================================================================
-				' Delete File if Size > 2 MB
-				'===============================================================================
-				Dim MyFile As New FileInfo(LogPath)
-				Dim FileSize As Long = MyFile.Length
-				If FileSize > 2097152 Then
-
-					Dim Lines As List(Of String) = File.ReadAllLines(LogPath).ToList
-					Dim HeaderLines As Integer = 6
-
-					Dim DeleteCount As Integer = (Lines.Count - HeaderLines) * 0.1
-
-					If DeleteCount < 1 Then
-						File.Delete(LogPath)
-					Else
-						Lines.RemoveRange(HeaderLines + 1, DeleteCount)
-						File.WriteAllLines(LogPath, Lines)
-					End If
-					GoTo restart
-				End If
-
-			End If
-		End Sub
-
-		<DebuggerStepThrough>
-		Private Function GetIndent() As String
-			GetIndent = ""
-
-			For i = 0 To Me.IndentLevel - 1
-				For z = 0 To Me.IndentSize - 1
-					GetIndent &= " "
-				Next
-			Next
-		End Function
-
-		<DebuggerStepThrough>
-		Private Function GetStackTrace(ByVal stackdepth As Integer) As String
-			Dim StList As List(Of String) = Environment.StackTrace.Replace(vbLf, "").Split(vbCrLf).ToList
-
-			' Remove fist 5 Items, Because its the Call-Depth of Environment.StackTrace() and TraceStuff
-			StList.RemoveRange(0, 5)
-
-			' Save the StackTraceCount for printing
-			Dim StackCountOrg As Integer = StList.Count
-
-			' Trim Stacktrace
-			If stackdepth > 0 AndAlso StList.Count > stackdepth Then
-				StList.RemoveRange(stackdepth - 1, StList.Count - stackdepth)
-			End If
-
-			Return GetIndent() & "    " & "@>~@>~~~~~~~~~~~~Application.StackTrace (" & stackdepth & "/" & StackCountOrg & ")~~~~~~~~~~~~~~~~~~" & vbCrLf &
-					GetIndent() & "    " & String.Join(vbCrLf & "    " & GetIndent(), StList) & vbCrLf &
-					GetIndent() & "    " & "~~~~~~~~~~~~~~~~~Application.StackTrace (" & stackdepth & "/" & StackCountOrg & ")~~~~~~~~~~~~~<@~<@"
-
-		End Function
-
-		<DebuggerStepThrough>
-		Public Overrides Sub Write(message As String)
-			CheckFile()
-			FileWrite(message)
-		End Sub
-
-		<DebuggerStepThrough>
-		Public Overrides Sub WriteLine(message As String)
-			CheckFile()
-			FileWriteLine(message)
-		End Sub
-
-		<DebuggerStepThrough>
-		Public Overrides Sub WriteLine(message As String, category As String)
-			CheckFile()
-
-			If category.StartsWith("TxtCache") Then
-				Dim ts As TraceSwitch = New TraceSwitch("TxtCache", "")
-				Dim stacktrace As String = If(ts.TraceVerbose, GetStackTrace(5), Nothing)
-				FileWriteLine(New String() {category & ": " & message, stacktrace})
-			Else
-				FileWriteLine(message)
-			End If
-
-		End Sub
-
-	End Class
 
 End Class
