@@ -6617,232 +6617,121 @@ Retry:
 		ssh.StrokeTauntTick -= 1
 
 		FrmSettings.LBLDebugStrokeTauntTime.Text = ssh.StrokeTauntTick
-		'Debug.Print("StrokeTauntTick = " & StrokeTauntTick)
 
-		If ssh.StrokeTauntTick = 0 Then
+		If ssh.StrokeTauntTick > 0 Then
+			' #################### Time hasn't come #######################
+			Exit Sub
 
-			' TauntText = Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\StrokeTaunts.txt"
+		ElseIf ssh.TempScriptCount <= 0 AndAlso FrmSettings.CBDebugTaunts.Checked Then
+			' ###################### Debug Taunt ##########################
 
-			If ssh.TempScriptCount = 0 Then
+			Dim Lines As New List(Of String)
 
+			Dim TmpString As String = FrmSettings.TBDebugTaunts1.Text
+			If Not String.IsNullOrWhiteSpace(TmpString) Then Lines.Add(TmpString)
 
+			TmpString = FrmSettings.TBDebugTaunts2.Text
+			If Not String.IsNullOrWhiteSpace(TmpString) Then Lines.Add(TmpString)
 
+			TmpString = FrmSettings.TBDebugTaunts3.Text
+			If Not String.IsNullOrWhiteSpace(TmpString) Then Lines.Add(TmpString)
 
-				'BlankLineLoop:
+			Dim Count As Integer = 1
+			If FrmSettings.RBDebugTaunts2.Checked Then Count = 2
+			If FrmSettings.RBDebugTaunts3.Checked Then Count = 3
 
-				Dim TauntFile As String
-				TauntFile = "StrokeTaunts"
-				If My.Settings.Chastity = True Then TauntFile = "ChastityTaunts"
-				If ssh.GlitterTease = True Then TauntFile = "GlitterTaunts"
-				' ### Debug
-				'TauntFile = "StrokeTaunts"
-
-				ssh.TauntTextCount = 0
-				ssh.ScriptCount = 0
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\", FileIO.SearchOption.SearchTopLevelOnly, TauntFile & "_*.txt")
-					ssh.ScriptCount += 1
-				Next
-
-				'Dim LinScript As Integer
-				' LinSelected = False
-
-				'For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Linear Taunts", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-				'LinScript += 1
-				'Next
-
-				Dim TauntTempVal As Integer = ssh.randomizer.Next(1, 101)
-
-				'If LinScript = 0 Then
-
-				If TauntTempVal < 45 Then
-					TauntTempVal = 1
-				Else
-					TauntTempVal = ssh.randomizer.Next(1, ssh.ScriptCount + 1)
-				End If
-
-				If FrmSettings.CBDebugTaunts.Checked = True Then
-					If FrmSettings.RBDebugTaunts1.Checked = True Then TauntTempVal = 1
-					If FrmSettings.RBDebugTaunts2.Checked = True Then TauntTempVal = 2
-					If FrmSettings.RBDebugTaunts3.Checked = True Then TauntTempVal = 3
-				End If
+			Do Until Lines.Count >= Count
+				Lines.Add("Tease-AI: Debug taunt line missing.")
+			Loop
 
 
-				'Else
+			ssh.TauntText = "Debug-Menu"
+			ssh.TauntLines = Lines
+			ssh.TauntTextCount = 0
+			ssh.TempScriptCount = Lines.Count
 
-				'If TauntTempVal < 11 Then
-				'LinSelected = True
-				'End If
+		ElseIf ssh.TempScriptCount <= 0 Then
+			' ##################### Taunt from File #######################
 
-				'If TauntTempVal > 10 And TauntTempVal < 51 Then
+			Dim tauntFile As String = "StrokeTaunts"
+			If My.Settings.Chastity = True Then TauntFile = "ChastityTaunts"
+			If ssh.GlitterTease = True Then TauntFile = "GlitterTaunts"
 
-				'### Debug - Why was this here? O.o
-				'TauntTempVal = 1  <--- Why?
+			Dim FileList As List(Of String) = myDirectory.GetFiles(ssh.Folders.Personality & "\Stroke\", TauntFile & "_*.txt", SearchOption.TopDirectoryOnly).ToList
 
+			Do While FileList.Count > 0
+				Dim FilePath As String = FileList(ssh.randomizer.Next(0, FileList.Count))
+				Dim FileName As String = Path.GetFileNameWithoutExtension(FilePath)
 
+				' Determine GroupSize 
+				Dim GroupSize As Integer = 1 ' 1-based
+				Dim LastChar As Char = FileName(FileName.Count - 1)
+				If IsNumeric(LastChar) Then GroupSize = CInt(LastChar.ToString)
+				ssh.StrokeTauntCount = GroupSize
 
-				'End If
-
-				'If TauntTempVal > 50 Then
-				'TauntTempVal = randomizer.Next(1, ScriptCount + 1)
-				'End If
-
-
-				' End If
-
-				'### Debug
-				'TauntTempVal = 3
-
-				' If LinSelected = False Then
-				ssh.StrokeTauntCount = TauntTempVal
-				ssh.ScriptCount = 0
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\", FileIO.SearchOption.SearchTopLevelOnly, TauntFile & "_*.txt")
-					ssh.ScriptCount += 1
-					If TauntTempVal = ssh.ScriptCount Then ssh.TauntText = foundFile
-				Next
-				ssh.ScriptCount = TauntTempVal
-				'End If
-
-			End If
-
-			'Debug.Print("ScriptCount = " & ScriptCount)
-
-			'Debug.Print("TempScriptCOunt = " & TempScriptCount)
-
-
-
-
-
-			' ##############################################################################################################
-
-
-
-
-
-
-			If ssh.TempScriptCount = 0 Then 'And LinSelected = False Then
-
-				' Uneseccary for txt2List creates a new List(of ) instance.
-				ssh.TauntLines.Clear()
-				' Read all lines of given File.
-				ssh.TauntLines = Txt2List(ssh.TauntText)
-				ssh.TauntTextTotal = ssh.TauntLines.Count
-
-				ssh.TauntTextTotal -= 1
+				Dim lines As List(Of String) = Txt2List(FilePath)
 
 				ssh.StrokeFilter = True
-
-
-
-				Try
-					ssh.TauntLines = FilterList(ssh.TauntLines)
-					Dim g As String = "BreakPoint"
-				Catch ex As Exception
-					Log.WriteError("Tease AI did not return a valid Taunt from file: " &
-								   ssh.TauntText, ex, "StrokeTauntTimer.Tick")
-					ssh.DomTask = "ERROR: Tease AI did not return a valid Taunt"
-				End Try
-
+				Dim linesFiltered As List(Of String) = FilterList(lines)
 				ssh.StrokeFilter = False
 
-				ssh.TauntTextTotal = ssh.TauntLines.Count
 
-				'Debug.Print("TauntTextTotal = " & TauntTextTotal)
+				If linesFiltered.Count > 0 AndAlso linesFiltered.Count >= GroupSize Then
 
+					Dim GroupCount = linesFiltered.Count / GroupSize ' 1-based
+					Dim RndGroup As Integer = ssh.randomizer.Next(1, GroupCount + 1) - 1 ' 0-based
+					Dim ScriptLine As Integer = RndGroup * GroupSize
 
-			End If
+					ssh.TauntText = FilePath
+					ssh.TauntLines = linesFiltered
+					ssh.TauntTextCount = ScriptLine
+					ssh.TempScriptCount = GroupSize - 1
 
+					Exit Do
+				Else
+					ssh.TauntText = ""
+					ssh.TauntLines = New List(Of String)
+					ssh.TauntTextCount = 0
+					ssh.TempScriptCount = 0
 
+					FileList.Remove(FilePath)
+				End If
+			Loop
 
-
-			'##############################################################################################################
-
-
-
-			If ssh.TempScriptCount = 0 Then ' And LinSelected = False Then
-				'Debug.Print("Equal called")
-				ssh.TempScriptCount = ssh.ScriptCount
-				ssh.TauntTextTotal /= ssh.ScriptCount
-				ssh.TauntTextCount = ssh.randomizer.Next(0, ssh.TauntTextTotal) * ssh.ScriptCount
-				If FrmSettings.CBDebugTaunts.Checked = True Then ssh.TauntTextCount = 0
-			Else
-				'Debug.Print("Not equal called")
-				ssh.TauntTextCount += 1
-			End If
-
-			' If TempScriptCount = 0 And LinSelected = True Then
-			'Dim LinList As New List(Of String)
-
-			'            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Linear Taunts", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-			'LinList.Add(foundFile)
-			'Next
-
-			'FileText = LinList(randomizer.Next(0, LinList.Count))
-
-			'LinList.Clear()
-
-			'LinList = Txt2List(FileText)
-
-			'TempScriptCount = LinList.Count
-			'LinLine = TempScriptCount
-
-
-			'End If
-
+		Else
+			' ##################### Next Taunt line #######################
+			ssh.TauntTextCount += 1
 			ssh.TempScriptCount -= 1
+		End If
 
-
-
-
-			'Debug.Print("TauntTextCount = " & TauntTextCount)
-
-
-
-
+		If ssh.TauntLines.Count > 0 Then
+			
 			Try
 				ssh.DomTask = ssh.TauntLines(ssh.TauntTextCount)
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Taunt from file: " &
-								   ssh.TauntText, ex, "StrokeTauntTimer.Tick")
+									   ssh.TauntText, ex, "StrokeTauntTimer.Tick")
 				ssh.DomTask = "ERROR: Tease AI did not return a valid Taunt"
 			End Try
 
 
-			If FrmSettings.CBDebugTaunts.Checked = True Then
-				ssh.DomTask = ""
-				If ssh.TauntTextCount = 0 Then ssh.DomTask = FrmSettings.TBDebugTaunts1.Text
-				If ssh.TauntTextCount = 1 Then ssh.DomTask = FrmSettings.TBDebugTaunts2.Text
-				If ssh.TauntTextCount = 2 Then ssh.DomTask = FrmSettings.TBDebugTaunts3.Text
-				If ssh.DomTask = "" Then ssh.DomTask = "@SystemMessage ERROR: Debug field is currently blank"
-			End If
-
-			If ssh.DomTask.Contains("@ShowTaggedImage") Then ssh.JustShowedBlogImage = True
-
-			'If DomTask = "" Then GoTo BlankLineLoop
 
 			If InStr(UCase(ssh.DomTask), UCase("@CBT")) <> 0 Then
 				CBTScript()
 			Else
 				TypingDelayGeneric()
 			End If
+		End If
 
 
-
-			If ssh.TempScriptCount = 0 Then
-				If FrmSettings.SliderSTF.Value = 1 Then ssh.StrokeTauntTick = ssh.randomizer.Next(120, 241)
-				If FrmSettings.SliderSTF.Value = 2 Then ssh.StrokeTauntTick = ssh.randomizer.Next(75, 121)
-				If FrmSettings.SliderSTF.Value = 3 Then ssh.StrokeTauntTick = ssh.randomizer.Next(45, 76)
-				If FrmSettings.SliderSTF.Value = 4 Then ssh.StrokeTauntTick = ssh.randomizer.Next(25, 46)
-				If FrmSettings.SliderSTF.Value = 5 Then ssh.StrokeTauntTick = ssh.randomizer.Next(15, 26)
-				'StrokeTauntTick = randomizer.Next(11, 21)
-			Else
-				ssh.StrokeTauntTick = ssh.randomizer.Next(5, 9)
-			End If
-
-
-
-
-
-
+		If ssh.TempScriptCount = 0 Then
+			If FrmSettings.SliderSTF.Value = 1 Then ssh.StrokeTauntTick = ssh.randomizer.Next(120, 241)
+			If FrmSettings.SliderSTF.Value = 2 Then ssh.StrokeTauntTick = ssh.randomizer.Next(75, 121)
+			If FrmSettings.SliderSTF.Value = 3 Then ssh.StrokeTauntTick = ssh.randomizer.Next(45, 76)
+			If FrmSettings.SliderSTF.Value = 4 Then ssh.StrokeTauntTick = ssh.randomizer.Next(25, 46)
+			If FrmSettings.SliderSTF.Value = 5 Then ssh.StrokeTauntTick = ssh.randomizer.Next(15, 26)
+		Else
+			ssh.StrokeTauntTick = ssh.randomizer.Next(5, 9)
 		End If
 
 
@@ -6852,26 +6741,34 @@ Retry:
 	End Sub
 
 	Public Sub CBTScript()
+		Try
+			Dim FilePath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBT.txt"
 
-		Dim CBTAmount As Integer
+			If Not Directory.Exists(Path.GetDirectoryName(FilePath)) OrElse Not File.Exists(FilePath) Then
+				Throw New Exception("TEASE-AI: unable to locate CBT-File: " & FilePath)
+			Else
 
-		ssh.CBT = True
-		ssh.YesOrNo = True
-		Dim CBTCount As Integer
+				Dim lines As List(Of String) = Txt2List(FilePath)
+				If lines.Count = 0 Then Throw New Exception("TEASE-AI: CBT-file is empty: " & FilePath)
 
-		Dim lines As List(Of String) = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\CBT\CBT.txt")
-		CBTCount += lines.Count
+				lines = FilterList(lines)
+				If lines.Count = 0 Then Throw New Exception("TEASE-AI: No available lines in CBT-file: " & FilePath)
 
-		CBTCount = ssh.randomizer.Next(0, CBTCount)
+				Dim CBTCount As Integer
 
-		ssh.DomTask = lines(CBTCount)
+				CBTCount = ssh.randomizer.Next(0, lines.Count)
 
-		CBTAmount = ssh.randomizer.Next(1, 6) * 2 * FrmSettings.domlevelNumBox.Value
-		ssh.DomTask = ssh.DomTask.Replace("#CBTAmount", CBTAmount)
+				ssh.DomTask = lines(CBTCount)
+				ssh.CBT = True
+				ssh.YesOrNo = True
+			End If
 
-		TypingDelayGeneric()
-
-
+		Catch ex As Exception
+			ssh.DomTask = ex.Message
+			Log.WriteError(ex.Message, ex, "CBTScript()")
+		Finally
+			TypingDelayGeneric()
+		End Try
 	End Sub
 
 
