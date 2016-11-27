@@ -6665,8 +6665,22 @@ Retry:
 
 				' Determine GroupSize 
 				Dim GroupSize As Integer = 1 ' 1-based
-				Dim LastChar As Char = FileName(FileName.Count - 1)
-				If IsNumeric(LastChar) Then GroupSize = CInt(LastChar.ToString)
+
+				If FileName.Length > 4 Then
+					' get the last 4 numeric chars in filename and convert them to a number
+					Dim TmpString As String = ""
+
+					For i = FileName.Length - 1 To FileName.Length - 4 Step -1
+						If IsNumeric(FileName(i)) Then
+							TmpString = FileName(i) & TmpString
+						Else
+							Exit For
+						End If
+					Next
+
+					If IsNumeric(TmpString) Then GroupSize = CInt(TmpString)
+				End If
+
 				ssh.StrokeTauntCount = GroupSize
 
 				Dim lines As List(Of String) = Txt2List(FilePath)
