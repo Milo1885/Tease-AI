@@ -61,21 +61,30 @@ Public Class SessionState
 	<Category("Video")> Public Property TempStrokeTauntVal As Integer
 	<Category("Video")> Public Property TempFileText As String
 
+#Region "Taunts"
+
+	''' <summary> Gets or sets the remaining taunt lines </summary>
+	<Category("Taunts")> <Description("Remaining taunt lines")>
+	Public Property TempScriptCount As Integer
+
+	''' <summary>Gets or Sets if a taunt demanded CBT.</summary>
+	<Category("Taunts")> <Description("Indicates if a taunt demanded CBT. CBT-Tasks are taken from ""[Personality Path]\CBT\CBT.txt"". The calling line in Taunt-file is completly replaced.")>
+	Public Property CBT As Boolean
+
+	''' <summary> Gets or sets time until next taunt.</summary>
+	<Category("Taunts")> <Description("Time until next taunt")>
+	Public Property StrokeTauntTick As Integer
+
 	''' <summary>Gets or sets the current TauntFile path.</summary>
-	<Category("Taunts")> <Description("Path of current Taunt-file")>
+	<Category("Taunts")> <Description("Current path to Taunt-file")>
 	Public Property TauntText As String
 
 	''' <summary>Gets or sets the length of a taunt group.</summary>
-	<Category("Taunts")> <Description("Current line group size.")>
+	<Category("Taunts")> <Description("Current taunt size.")>
 	Public Property StrokeTauntCount As Integer
 
-	''' <summary> Duplicate of <see cref="TauntLines"/>.Count </summary>
-	<Category("Taunts")> <Browsable(False)>
-	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
-	Public Property TauntTextTotal As Integer
-
 	''' <summary>Gets or sets the current taunt lines. </summary>
-	<Category("Taunts")> <Description("Current taunt lines.")>
+	<Category("Taunts")> <Description("Current taunt file lines.")>
 	<Editor(EditorGenericStringList, GetType(UITypeEditor))>
 	Public Property TauntLines As New List(Of String)
 
@@ -84,8 +93,24 @@ Public Class SessionState
 	Public Property StrokeFilter As Boolean
 
 	''' <summary> Gets or Sets the current taunt line index. </summary>
-	<Category("Taunts")> <Description("The current taunt line index.")>
+	<Category("Taunts")> <Description("Current taunt line index.")>
 	Public Property TauntTextCount As Integer
+
+#Region "Obsolete"
+
+	''' <summary> Duplicate of <see cref="TauntLines"/>.Count </summary>
+	<Category("Taunts")> <Browsable(False)>
+	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
+	Public Property TauntTextTotal As Integer
+
+	''' <summary>Stores the number of taunt files, to determine taunt size.</summary>
+	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.")>
+	<Category("Taunts")> <Browsable(False)>
+	Public Property ScriptCount As Integer
+
+#End Region
+
+#End Region
 
 
 	<Category("Script")> Public Property FileText As String
@@ -142,9 +167,6 @@ Public Class SessionState
 	Public Property TempHypno As String
 
 	Public Property StrokeTick As Integer
-	''' <summary> Gets or sets time until next taunt.</summary>
-	<Category("Taunts")> <Description("Time until next taunt")>
-	Public Property StrokeTauntTick As Integer
 
 
 
@@ -161,10 +183,6 @@ Public Class SessionState
 	<Description("True if sub has been asked a Yes/No Question.")>
 	Public Property YesOrNo As Boolean = False
 	Public Property GotoFlag As Boolean
-
-	''' <summary>Gets or Sets if a taunt demanded CBT.</summary>
-	<Category("Taunts")> <Description("Indicates if a taunt demanded CBT. CBT-Tasks are taken from ""[Personality Path]\CBT\CBT.txt"". The calling line in Taunt-file is completly replaced.")>
-	Public Property CBT As Boolean
 
 	Public Property RunningScript As Boolean
 
@@ -252,11 +270,6 @@ Public Class SessionState
 	Public Property LocalTagImageList As New List(Of String)
 
 	Public Property PetName As String
-	''' <summary>Stores the number of taunt files, to determine taunt size.</summary>
-	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.")>
-	<Category("Taunts")> <Browsable(False)>
-	Public Property ScriptCount As Integer
-	<Category("Taunts")> Public Property TempScriptCount As Integer
 
 	Public Property SlideshowTimerTick As Integer
 
