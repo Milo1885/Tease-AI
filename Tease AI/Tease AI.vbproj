@@ -117,6 +117,7 @@
     <Compile Include="Classes\SessionState.FileClass.vb" />
     <Compile Include="Classes\SessionState.FoldersClass.vb" />
     <Compile Include="Classes\State.vb" />
+    <Compile Include="Classes\TauntProcessingObject.vb" />
     <Compile Include="Classes\teaseAI_Timer.vb">
       <SubType>Component</SubType>
     </Compile>

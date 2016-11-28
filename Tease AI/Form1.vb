@@ -6053,7 +6053,7 @@ NullResponseLine2:
 						' ######################## Risky Pick #########################
 						FrmCardList.PBRiskyPic.Image = Image.FromFile(ContactToUse.NavigateNextTease)
 
-					ElseIf Not String.IsNullOrWhiteSpace(ssh.DommeImagestr) Then
+					ElseIf Not String.IsNullOrWhiteSpace(ssh.DommeImageSTR) Then
 						' ######################## Domme Tags #########################
 						ShowImage(ssh.DommeImageSTR, True)
 
@@ -6654,63 +6654,47 @@ Retry:
 			' ##################### Taunt from File #######################
 
 			Dim tauntFile As String = "StrokeTaunts"
-			If My.Settings.Chastity = True Then TauntFile = "ChastityTaunts"
-			If ssh.GlitterTease = True Then TauntFile = "GlitterTaunts"
+			If My.Settings.Chastity = True Then tauntFile = "ChastityTaunts"
+			If ssh.GlitterTease = True Then tauntFile = "GlitterTaunts"
 
-			Dim FileList As List(Of String) = myDirectory.GetFiles(ssh.Folders.Personality & "\Stroke\", TauntFile & "_*.txt", SearchOption.TopDirectoryOnly).ToList
+			' Read all tauntfiles and get available.
+			Dim TauntFiles As New List(Of TauntProcessingObject)
 
-			Do While FileList.Count > 0
-				Dim FilePath As String = FileList(ssh.randomizer.Next(0, FileList.Count))
-				Dim FileName As String = Path.GetFileNameWithoutExtension(FilePath)
-
-				' Determine GroupSize 
-				Dim GroupSize As Integer = 1 ' 1-based
-
-				If FileName.Length > 4 Then
-					' get the last 4 numeric chars in filename and convert them to a number
-					Dim TmpString As String = ""
-
-					For i = FileName.Length - 1 To FileName.Length - 4 Step -1
-						If IsNumeric(FileName(i)) Then
-							TmpString = FileName(i) & TmpString
-						Else
-							Exit For
-						End If
-					Next
-
-					If IsNumeric(TmpString) Then GroupSize = CInt(TmpString)
-				End If
-
-				ssh.StrokeTauntCount = GroupSize
-
-				Dim lines As List(Of String) = Txt2List(FilePath)
-
-				ssh.StrokeFilter = True
-				Dim linesFiltered As List(Of String) = FilterList(lines)
-				ssh.StrokeFilter = False
+			For Each str As String In myDirectory.GetFiles(ssh.Folders.Personality & "\Stroke\", tauntFile & "_*.txt", SearchOption.TopDirectoryOnly)
+				Dim Taunt As New TauntProcessingObject(str, Me)
+				If Taunt.Avaialable Then TauntFiles.Add(Taunt)
+			Next
 
 
-				If linesFiltered.Count > 0 AndAlso linesFiltered.Count >= GroupSize Then
+			If TauntFiles.Count = 0 Then
+				' No Taunt available
+				ssh.TauntText = ""
+				ssh.TauntLines = New List(Of String)
+				ssh.TauntTextCount = 0
+				ssh.TempScriptCount = 0
+			Else
+				' Taunt available
+				Dim TauntToUse As TauntProcessingObject
 
-					Dim GroupCount = linesFiltered.Count / GroupSize ' 1-based
-					Dim RndGroup As Integer = ssh.randomizer.Next(1, GroupCount + 1) - 1 ' 0-based
-					Dim ScriptLine As Integer = RndGroup * GroupSize
+				' Increase chance of one line taunt
+				Dim OneLineChance As Integer = ssh.randomizer.Next(0, 101)
 
-					ssh.TauntText = FilePath
-					ssh.TauntLines = linesFiltered
-					ssh.TauntTextCount = ScriptLine
-					ssh.TempScriptCount = GroupSize - 1
-
-					Exit Do
+				If OneLineChance < 45 _
+				AndAlso TauntFiles.Find(Function(x) x.TauntSize = 1) IsNot Nothing Then
+					' 1 line taunts available, force to use it.
+					Dim OneLiners As List(Of TauntProcessingObject) = TauntFiles.Where(Function(x) x.TauntSize = 1).ToList
+					TauntToUse = OneLiners(ssh.randomizer.Next(0, OneLiners.Count))
 				Else
-					ssh.TauntText = ""
-					ssh.TauntLines = New List(Of String)
-					ssh.TauntTextCount = 0
-					ssh.TempScriptCount = 0
-
-					FileList.Remove(FilePath)
+					' Pick a random taunt size.
+					TauntToUse = TauntFiles(ssh.randomizer.Next(0, TauntFiles.Count))
 				End If
-			Loop
+
+				ssh.TauntText = TauntToUse.FilePath
+				ssh.TauntLines = TauntToUse.Lines
+				ssh.TauntTextCount = TauntToUse.RandomTauntLine
+				ssh.TempScriptCount = TauntToUse.TauntSize - 1
+
+			End If
 
 		Else
 			' ##################### Next Taunt line #######################
@@ -6719,7 +6703,7 @@ Retry:
 		End If
 
 		If ssh.TauntLines.Count > 0 Then
-			
+
 			Try
 				ssh.DomTask = ssh.TauntLines(ssh.TauntTextCount)
 			Catch ex As Exception
@@ -6753,6 +6737,7 @@ Retry:
 
 
 	End Sub
+
 
 	Public Sub CBTScript()
 		Try
@@ -8135,10 +8120,10 @@ StatusUpdateEnd:
 		'BUG: #RandomSlideshowCategory does not work! The Variable RandomSlideshowCategory is never set.
 		If StringClean.Contains("#RandomSlideshowCategory") Then StringClean = StringClean.Replace("#RandomSlideshowCategory", ssh.RandomSlideshowCategory)
 
-        '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-        '                                   ImageCount
-        '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-        If StringClean.Contains("#LocalImageCount") Then
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		'                                   ImageCount
+		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+		If StringClean.Contains("#LocalImageCount") Then
 			Dim temp As Dictionary(Of ImageGenre, ImageDataContainer) = GetImageData()
 			Dim counter As Integer = 0
 
@@ -8481,7 +8466,7 @@ SkipTextedTags:
 				Next
 
 			End If
-#If Trace Then
+#If TRACE Then
 			Trace.Unindent()
 #End If
 		Loop
@@ -8509,7 +8494,7 @@ SkipTextedTags:
 
 		End If
 
-#If trace Then
+#If TRACE Then
 		Trace.Unindent()
 #End If
 		Return StringClean
@@ -16994,16 +16979,16 @@ saveImage:
 
 	Private Sub PicStripTSMIremoveFromURL_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIremoveFromURL.Click
 		Try
-            ' Lock Control
-            PicStripTSMIremoveFromURL.Enabled = False
+			' Lock Control
+			PicStripTSMIremoveFromURL.Enabled = False
 
 			' Remove from URL-Files.
 			RemoveFromUrlFiles(ssh.ImageLocation)
 		Catch ex As Exception
-            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            '						       All Errors
-            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while deleting URL-From files.")
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'						       All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while deleting URL-From files.")
 			MsgBox("An Exception Occured while deleting the URL from Files." & vbCrLf _
 				   & ex.Message, MsgBoxStyle.Exclamation, "Delete URL from Files")
 		End Try
