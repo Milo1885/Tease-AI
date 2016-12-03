@@ -10,12 +10,12 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 * Added Features:
 	* Added new sorting method to sort file lists like the Windows file Explorer does.
-	* PoundClean reworked to support system keywords as parameters inside of vocabulary files. In order to prevent infinite loops, the maximum allowed depth is limited to 5 times. Tip: take a look at the logfile to see how it's working.
+	* PoundClean reworked to support system keywords as parameters inside vocabulary files. In order to prevent infinite loops, the maximum allowed depth is limited to 5 times. Tip: take a look at the logfile to see how it's working.
 	* All Contacts and Domme are able to use @DommeTag(). 
-	* Chastity, Glitter and Taunt-files reworked to increase fault tolerance and correct line grouping. 2c588ffed4f03f17813d3e5bd290a3351b9bb8b2 
+	* Chastity, Glitter and Taunt-files reworked to increase fault tolerance and correct line grouping. 2c588ffed4f03f17813d3e5bd290a3351b9bb8b2. It tries with a 45% chance to pick a 1-line-taunt. Otherwise it picks randomly from all available taunt sizes. 
 
 * Removed Features:
-	* @DommeTag() doesn't alternate the given tags to return a result. (stefaf) The idea was worth to try. 
+	* @DommeTag() doesn't alternate the given tags to return a result. (stefaf) The idea was worth a try. 
 		
 * Bugfixes:
 	* After using an ImageCommand the slideshow was locked.
@@ -24,6 +24,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* Vitalsub didn't read calorie items from file at startup.
 	* MouseOver LblDomImagedir caused an unhandled exception.
 	* RiskyPick Images haven't been updated.
+	* Custom text tags (#TagGarment, #TagUnderwear etc.) for images fixed. Note: The new code will set data for the current displayed image and not leftover data from filtering, as in the old code. Make sure to set that data for your Images!
 
 * Miscellaneous:
 	* GUI-Rework Settings Glitter-Tab -> Databindings Complete.
@@ -31,7 +32,6 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* Enhanced logging: It is now possible to customize the logging without the need to recompile. Simply open up Tease-AI.exe.config using a text editor and edit the switch values as described in the file - keep in mind to backup the file before. ;-) Added rollover function, if the log file is bigger as 2 MB. Instead of deleting the complete file, now only the top entries are deleted.
 
 ### Known Issues:
-* Texted imagetags are not working.
 * @BookmarkModule 
 	* causes a script freeze at EOF, when taunts are interrupted. (Occured in Debug->Run Script)
 	* seem to break if a miniscript (and maybe others) is called during the taunt.
