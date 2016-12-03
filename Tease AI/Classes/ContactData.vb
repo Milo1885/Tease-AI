@@ -51,13 +51,13 @@ Public Class ContactData
 		End Get
 	End Property
 
-	Public ReadOnly Property TypeFont As String  '= FrmSettings.FontComboBoxD.Text
+	Public ReadOnly Property TypeFont As String
 		Get
 			Return My.Settings.DomFont
 		End Get
 	End Property
 
-	Public ReadOnly Property TypeSize As Integer '= FrmSettings.NBFontSizeD.Value
+	Public ReadOnly Property TypeSize As Integer
 		Get
 			Return My.Settings.DomFontSize
 		End Get
@@ -307,13 +307,19 @@ nextSubDir:
 	Friend Sub LoadNew()
 		Me.ImageList = GetRandom(Me.Contact)
 		Me.Index = 0
+		ImageTagCache.Clear()
+		LastreturnedImage = ""
 	End Sub
 
 	Sub CheckInit()
 		If Me.Index = -1 And Me.Contact <> ContactType.Nothing Then Me.LoadNew()
+		LastreturnedImage = ""
 	End Sub
 
 #Region "Navigation"
+
+	<NonSerialized>
+	Dim LastreturnedImage As String
 
 	Friend Function CurrentImage() As String
 		If ImageList.Count > 0 And Index > -1 Then
@@ -408,9 +414,7 @@ nextSubDir:
 
 #Region "Tagged Image"
 
-	''' <summary>
-	''' Used for caching tagged image results.
-	''' </summary>
+	''' <summary>Used to cache tagged image results. </summary>
 	Private Class ImageTagCacheItem
 		Friend TagImageList As New List(Of String)
 		Friend LastPicked As String = ""
@@ -494,6 +498,7 @@ SetForwardImage:
 				If Ts.TraceVerbose Then Trace.WriteLine("Distance of image = " & CurrDist)
 #End If
 				If RememberResult Then ImagePaths.LastPicked = rtnPath
+				LastreturnedImage = rtnPath
 				Return rtnPath
 
 			End If
@@ -517,6 +522,8 @@ SetForwardImage:
 		End Try
 	End Function
 
+	''' <summary>Returns a list of filepaths for the given tags.</summary>
+	''' <param name="ImageTags">The tags to retrieve the list.</param>
 	Private Function GetImageListByTag(ByVal ImageTags As String) As ImageTagCacheItem
 		Try
 #If TRACE Then
@@ -535,6 +542,7 @@ redo:
 			ElseIf ImageTagCache.Keys.Contains(ImageTags) Then
 				'===================================================================
 				'						Previous cached result
+
 #If TRACE Then
 				If Ts.TraceVerbose Then Trace.WriteLine("Loading DommeTags from Cache.")
 #End If
@@ -617,8 +625,62 @@ redo:
 		End Try
 	End Function
 
-#End Region
+#End Region ' Tagged images
 
-#End Region
+#End Region ' Image navigation
+
+
+	Friend Function ApplyTextedTags(ByVal ModifyString As String) As String
+		ApplyTextedTags = ModifyString
+		Try
+			' ################### Get displayed Image #####################
+			Dim DisplayedImage As String
+
+			If String.IsNullOrWhiteSpace(LastreturnedImage) Then
+				DisplayedImage = CurrentImage()
+			Else
+				DisplayedImage = LastreturnedImage
+			End If
+
+			' #################### Get line for image #####################
+			Dim TagFilePath As String = Path.GetDirectoryName(DisplayedImage) & "\ImageTags.txt"
+			Dim FileName As String = Path.GetFileName(DisplayedImage)
+
+			If Not File.Exists(TagFilePath) Then Exit Function
+
+			' Read tagfile and find line for displayed image.
+			Dim Line As String = Txt2List(TagFilePath).Find(Function(x) x.StartsWith(FileName, StringComparison.OrdinalIgnoreCase))
+			If Line Is Nothing Then Exit Function
+
+			' ################### Create Regex Pattern ####################
+			'
+			' Named Group <ident> is the identifier for replacement. Joined from StringArray.
+			'		TagGarment is used twice. Therefore it searches for "TagGarment" not followed by "Covering".
+			'
+			' Named group <value> is the value to replace the identifier with. 	Allows all chars except whitespaces.
+			Dim Pattern As String = String.Format("(?<ident>{0})(?<value>[^\s]+)",
+												  Join({"TagGarment(?!Covering)",
+														"TagUnderwear",
+														"TagTattoo",
+														"TagSexToy",
+														"TagFurniture"}, "|"))
+
+			' ################ Find and replace matches ###################
+			Dim re As Regex = New Regex(Pattern, RegexOptions.IgnoreCase)
+			Dim mc As MatchCollection = re.Matches(Line)
+
+			For Each Tag As Match In mc
+				ApplyTextedTags = ApplyTextedTags.Replace("#" & Tag.Groups("ident").Value,
+														  Tag.Groups("value").Value.Replace("-", " "))
+			Next
+
+			' Replace remaining tag-keywords to mask missing tags.
+			ApplyTextedTags = ApplyTextedTags.Replace("#Tag", "")
+
+		Catch ex As Exception
+			Log.WriteError(ex.Message, ex, "ApplyTextedTags(String)")
+		End Try
+
+	End Function
 
 End Class

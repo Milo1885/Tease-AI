@@ -305,12 +305,33 @@ Public Class SessionState
 	<Category("Games - TnA")> Public Property AssImage As Boolean = False
 	<Category("Games - TnA")> Public Property BoobImage As Boolean = False
 
-	<Category("Tags")> Public Property FoundTag As String = "Null"
-	<Category("Tags")> Public Property TagGarment As String = "NULL"
-	<Category("Tags")> Public Property TagUnderwear As String = "NULL"
-	<Category("Tags")> Public Property TagTattoo As String = "NULL"
-	<Category("Tags")> Public Property TagSexToy As String = "NULL"
-	<Category("Tags")> Public Property TagFurniture As String = "NULL"
+#Region "Tags:  all deprecated"
+
+	<Category("Tags")> <Browsable(False)>
+	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
+	Public Property FoundTag As String = "Null"
+
+	<Category("Tags")> <Browsable(False)>
+	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
+	Public Property TagGarment As String = "NULL"
+
+	<Category("Tags")> <Browsable(False)>
+	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
+	Public Property TagUnderwear As String = "NULL"
+
+	<Category("Tags")> <Browsable(False)>
+	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
+	Public Property TagTattoo As String = "NULL"
+
+	<Category("Tags")> <Browsable(False)>
+	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
+	Public Property TagSexToy As String = "NULL"
+
+	<Category("Tags")> <Browsable(False)>
+	<Obsolete("Deprecated as of v0.54.5.1. Left for serialization version tolerance.", True)>
+	Public Property TagFurniture As String = "NULL"
+
+#End Region ' Tags
 
 	<Category("Bookmark")> Public Property BookmarkModule As Boolean = False
 	<Category("Bookmark")> Public Property BookmarkModuleFile As String
@@ -347,9 +368,14 @@ Public Class SessionState
 	Public Property CustomSlideshow As New CustomSlideshow
 	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
 	<Category("Images")> <Browsable(False)> Public Property DommeImageFound As Boolean
-	<Category("Images")> Public Property DommeImageSTR As String
+
+	<Category("Images")>
+	<Obsolete("DommeImageSTR is obsolete. Do not implement in new code.")>
+	Public Property DommeImageSTR As String
+
 	<Obsolete("Obsolete as of v0.54.5.1. Left for version tolerance.", True)>
 	<Category("Images")> <Browsable(False)> Public Property DomPic As String
+	<Obsolete("JustShowedBlogImage is obsolete. Do not implement in new code.")>
 	<Category("Images")> Public Property JustShowedBlogImage As Boolean = False
 	<Category("Images")> Public Property JustShowedSlideshowImage As Boolean = False
 	<Category("Images")> Public Property LockImage As Boolean

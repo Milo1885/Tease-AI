@@ -804,8 +804,6 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 			If TypeOf e.Error Is TimeoutException Then Debug.Print(e.Error.Message)
 			If e.Error IsNot Nothing Then Exit Sub
 
-			ssh.JustShowedBlogImage = True
-
 			If e.Cancelled Then
 				MainPictureboxSetImage(New Bitmap(Image.FromFile(pathImageErrorOnLoading)), "")
 				Exit Sub

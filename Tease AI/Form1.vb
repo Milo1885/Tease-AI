@@ -5262,9 +5262,6 @@ NullResponse:
 					If ssh.SysMes = True Then
 						ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & ssh.DomTask & "</b><br></font></body>"
 						ssh.SysMes = False
-						ChatText.DocumentText = ssh.Chat
-						ChatText2.DocumentText = ssh.Chat
-						ChatReadyState()
 						GoTo EndSysMes
 					End If
 
@@ -5272,9 +5269,6 @@ NullResponse:
 						ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""" &
 						   TypeColor & """><b><i>" & ssh.DomTask & "</i></b><br></font></body>"
 						ssh.EmoMes = False
-						ChatText.DocumentText = ssh.Chat
-						ChatText2.DocumentText = ssh.Chat
-						ChatReadyState()
 						GoTo EndSysMes
 					End If
 
@@ -5297,9 +5291,6 @@ NullResponse:
 						End If
 
 
-						ChatText.DocumentText = ssh.Chat
-						ChatText2.DocumentText = ssh.Chat
-						ChatReadyState()
 
 						If ssh.RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
 						  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & ssh.DomTask & "<br></font></body>"
@@ -5321,9 +5312,6 @@ NullResponse:
 
 
 						ssh.TypeToggle = 0
-						ChatText.DocumentText = ssh.Chat
-						ChatText2.DocumentText = ssh.Chat
-						ChatReadyState()
 
 						If ssh.RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
 						  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & ssh.DomTask & "<br></font></body>"
@@ -5331,14 +5319,6 @@ NullResponse:
 					End If
 
 EndSysMes:
-
-
-
-					ScrollChatDown()
-
-					If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
-
-					' Dsplay the next picture in the slideshow as the domme responds if "With Tease" radio button is checked
 
 
 
@@ -5372,6 +5352,13 @@ DommeSlideshowFallback:
 						ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 					End If
 
+					If ssh.DomTask <> "" AndAlso ContactToUse IsNot Nothing AndAlso ShowPicture Then
+						' Apply texted Tags, after displaying an image.
+						Dim OutputOrg As String = ssh.DomTask
+						ssh.DomTask = ContactToUse.ApplyTextedTags(OutputOrg)
+						ssh.Chat = ssh.Chat.Replace(OutputOrg, ssh.DomTask)
+					End If
+
 				Catch ex As Exception When ContactToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
 					ContactToUse = Nothing
@@ -5390,9 +5377,17 @@ DommeSlideshowFallback:
 					ShowPicture = False
 				End Try
 
+				' #################### Update ChatText ########################
+				' Since ssh.Chat is not modified on NullResponse etc. we can display it every time.
+				' --> This will disallow to scroll up in chat.
+				ChatText.DocumentText = ssh.Chat
+				ChatText2.DocumentText = ssh.Chat
+				ChatReadyState()
+				ScrollChatDown()
 
+				If My.Settings.CBAutosaveChatlog Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
 
-
+				' ####################### TTS Output ##########################
 				If FrmSettings.TTSCheckBox.Checked = True _
 				And TTSVoice <> "No voices installed" _
 				And ssh.DomTask <> "" Then
@@ -5968,9 +5963,6 @@ TryNextWithTease:
 				If ssh.SysMes = True Then
 					ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & ssh.DomChat & "</b><br></font></body>"
 					ssh.SysMes = False
-					ChatText.DocumentText = ssh.Chat
-					ChatText2.DocumentText = ssh.Chat
-					ChatReadyState()
 					GoTo EndSysMes
 				End If
 
@@ -5978,9 +5970,6 @@ TryNextWithTease:
 					ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""" &
 			  TypeColor & """><b><i>" & ssh.DomChat & "</i></b><br></font></body>"
 					ssh.EmoMes = False
-					ChatText.DocumentText = ssh.Chat
-					ChatText2.DocumentText = ssh.Chat
-					ChatReadyState()
 					GoTo EndSysMes
 				End If
 
@@ -6003,9 +5992,6 @@ TryNextWithTease:
 					End If
 
 
-					ChatText.DocumentText = ssh.Chat
-					ChatText2.DocumentText = ssh.Chat
-					ChatReadyState()
 
 					If ssh.RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
 			  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & ssh.DomChat & "<br></font></body>"
@@ -6021,9 +6007,6 @@ TryNextWithTease:
 					End If
 
 					ssh.TypeToggle = 0
-					ChatText.DocumentText = ssh.Chat
-					ChatText2.DocumentText = ssh.Chat
-					ChatReadyState()
 
 					If ssh.RiskyDeal = True Then FrmCardList.WBRiskyChat.DocumentText = "<body style=""word-wrap:break-word;""><font face=""Cambria"" size=""3"" font color=""" &
 			  TypeColor & """><b>" & TypeName & ": </b></font><font face=""" & TypeFont & """ size=""" & TypeSize & """ color=""" & TextColor & """>" & ssh.DomChat & "<br></font></body>"
@@ -6032,12 +6015,6 @@ TryNextWithTease:
 
 EndSysMes:
 
-
-
-				ScrollChatDown()
-
-
-				If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
 
 				ssh.SubWroteLast = False
 
@@ -6067,6 +6044,12 @@ DommeSlideshowFallback:
 						ShowImage(ssh.SlideshowMain.NavigateNextTease, True)
 					End If
 
+					If ssh.DomChat <> "" AndAlso ContactToUse IsNot Nothing AndAlso ShowPicture Then
+						' Apply texted Tags, after displaying an image.
+						Dim OutputOrg As String = ssh.DomChat
+						ssh.DomChat = ContactToUse.ApplyTextedTags(OutputOrg)
+						ssh.Chat = ssh.Chat.Replace(OutputOrg, ssh.DomChat)
+					End If
 				Catch ex As Exception When ContactToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
 					ContactToUse = Nothing
@@ -6085,6 +6068,17 @@ DommeSlideshowFallback:
 					ShowPicture = False
 				End Try
 
+				' #################### Update ChatText ########################
+				' Since ssh.Chat is not modified on NullResponse etc. we can display it every time.
+				' --> This will disallow to scroll up in chat.
+				ChatText.DocumentText = ssh.Chat
+				ChatText2.DocumentText = ssh.Chat
+				ChatReadyState()
+				ScrollChatDown()
+
+				If My.Settings.CBAutosaveChatlog Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
+
+				' ####################### TTS Output ##########################
 				If FrmSettings.TTSCheckBox.Checked = True _
 				And TTSVoice <> "No voices installed" _
 				And ssh.DomChat <> "" Then
@@ -6648,7 +6642,7 @@ Retry:
 			ssh.TauntText = "Debug-Menu"
 			ssh.TauntLines = Lines
 			ssh.TauntTextCount = 0
-			ssh.TempScriptCount = Lines.Count
+			ssh.TempScriptCount = Lines.Count - 1
 
 		ElseIf ssh.TempScriptCount <= 0 Then
 			' ##################### Taunt from File #######################
@@ -8328,7 +8322,12 @@ StatusUpdateEnd:
 		Dim OrgString As String = StringClean
 		Dim Recurrence As Integer = 0
 
-		Do While Recurrence < 5 AndAlso (StringClean.Contains("#") Or StringClean.Contains("@Tag"))
+		' Create Regex-Pattern to find #Keywords and exclude custom imagetags.
+		Dim ExcludeKeywords As String() = {"TagGarment", "TagUnderwear", "TagTattoo", "TagSexToy", "TagFurniture"}
+		Dim Pattern As String = String.Format("##*(?!{0})[\w\d\+\-_]+", Join(ExcludeKeywords, "|"))
+		Dim RegexKeyWords As New Regex(Pattern)
+
+		Do While Recurrence < 5 AndAlso RegexKeyWords.IsMatch(StringClean)
 			Recurrence += 1
 
 #If TRACE Then
@@ -8343,135 +8342,48 @@ StatusUpdateEnd:
 			If TS.TraceVerbose Then Trace.WriteLine(String.Format("System keywords cleaned: ""{0}""", StringClean))
 #End If
 
+			' Find all remaining #Keywords.
+			Dim re As New Regex(Pattern, RegexOptions.IgnoreCase)
+			Dim mc As MatchCollection = re.Matches(StringClean)
 
-			'Bug: TextedTags have to be applied after the image is displayed.
-			ssh.FoundTag = "NULL"
-			Dim slide As ContactData = ssh.SlideshowMain
-			If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
-
-			Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
-
-			If (ssh.SlideshowLoaded = True And mainPictureBox.Image IsNot Nothing And DomWMP.Visible = False) _
-			AndAlso File.Exists(TagFilePath) Then
-				' Read all lines of the given file.
-				Dim TagList As List(Of String) = Txt2List(TagFilePath)
-
-				Try
-					For t As Integer = 0 To TagList.Count - 1
-						'Debug.Print("TagList(t) = " & TagList(t))
-						If TagList(t).Contains(Path.GetFileName(slide.CurrentImage)) Then
-							ssh.FoundTag = TagList(t)
-							Dim FoundTagSplit As String() = Split(ssh.FoundTag)
-							For j As Integer = 0 To FoundTagSplit.Length - 1
-								If FoundTagSplit(j).Contains("TagGarment") Then
-									ssh.TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
-									ssh.TagGarment = ssh.TagGarment.Replace("-", " ")
-								End If
-
-								If FoundTagSplit(j).Contains("TagUnderwear") Then
-									ssh.TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
-									ssh.TagUnderwear = ssh.TagUnderwear.Replace("-", " ")
-								End If
-
-								If FoundTagSplit(j).Contains("TagTattoo") Then
-									ssh.TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
-									ssh.TagTattoo = ssh.TagTattoo.Replace("-", " ")
-								End If
-
-								If FoundTagSplit(j).Contains("TagSexToy") Then
-									ssh.TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
-									ssh.TagSexToy = ssh.TagSexToy.Replace("-", " ")
-								End If
-
-								If FoundTagSplit(j).Contains("TagFurniture") Then
-									ssh.TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
-									ssh.TagFurniture = ssh.TagFurniture.Replace("-", " ")
-								End If
-
-							Next
-							Exit For
-						End If
-					Next
-				Catch
-				End Try
-			End If
-
-
-			'Debug.Print("TagGarment = " & TagGarment)
-			'Debug.Print("TagUnderwear = " & TagUnderwear)
-			'Debug.Print("TagTattoo = " & TagTattoo)
-			'Debug.Print("TagSexToy = " & TagSexToy)
-			'Debug.Print("TagFurniture = " & TagFurniture)
-			'Debug.Print("FoundTag = " & FoundTag)
-
-
-			StringClean = StringClean.Replace("#TagGarment", ssh.TagGarment)
-			StringClean = StringClean.Replace("#TagUnderwear", ssh.TagUnderwear)
-			StringClean = StringClean.Replace("#TagTattoo", ssh.TagTattoo)
-			StringClean = StringClean.Replace("#TagSexToy", ssh.TagSexToy)
-			StringClean = StringClean.Replace("#TagFurniture", ssh.TagFurniture)
-SkipTextedTags:
-
-			If StringClean.Contains("#") Or StringClean.Contains("@Tag") Then
-
-				Dim re As New Regex("#[#\w\d\+\-_]+", RegexOptions.IgnoreCase)
-				Dim mc As MatchCollection = re.Matches(StringClean)
-
-				For Each keyword As Match In mc
+			' Try to get content from file.
+			For Each keyword As Match In mc
 #If TRACE Then
-					If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", keyword.Value))
+				If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", keyword.Value))
 #End If
 
-					Dim filepath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & keyword.Value & ".txt"
+				Dim filepath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & keyword.Value & ".txt"
 
-					If Directory.Exists(Path.GetDirectoryName(filepath)) AndAlso File.Exists(filepath) Then
-						Dim lines As List(Of String) = Txt2List(filepath)
+				If Directory.Exists(Path.GetDirectoryName(filepath)) AndAlso File.Exists(filepath) Then
+					Dim lines As List(Of String) = Txt2List(filepath)
 
-						Try
-							lines = FilterList(lines)
-							Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
-							StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
-						Catch ex As Exception
-							Log.WriteError("Error Processing vocabulary file: " & filepath, ex,
-											"Tease AI did not return a valid line while parsing vocabulary file.")
-							StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
-						End Try
+					Try
+						lines = FilterList(lines)
+						Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
+						StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
+					Catch ex As Exception
+						Log.WriteError("Error Processing vocabulary file: " & filepath, ex,
+										"Tease AI did not return a valid line while parsing vocabulary file.")
+						StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
+					End Try
 
-						StringClean = StringClean.Replace("TagFace", "")
-						StringClean = StringClean.Replace("TagBoobs", "")
-						StringClean = StringClean.Replace("TagPussy", "")
-						StringClean = StringClean.Replace("TagAss", "")
-						StringClean = StringClean.Replace("TagFeet", "")
-						StringClean = StringClean.Replace("TagFullyDressed", "")
-						StringClean = StringClean.Replace("TagHalfDressed", "")
-						StringClean = StringClean.Replace("TagNaked", "")
-						StringClean = StringClean.Replace("TagSideView", "")
-						StringClean = StringClean.Replace("TagCloseUp", "")
-						StringClean = StringClean.Replace("TagMasturbating", "")
-						StringClean = StringClean.Replace("TagSucking", "")
-						StringClean = StringClean.Replace("TagSmiling", "")
-						StringClean = StringClean.Replace("TagGlaring", "")
-						StringClean = StringClean.Replace("TagSeeThrough", "")
-						StringClean = StringClean.Replace("TagAllFours", "")
+				Else
+					StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
 
-					Else
-						StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
+					Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
+					Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
 
-						Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
-						Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
-
-					End If
+				End If
 
 
-				Next
+			Next
 
-			End If
 #If TRACE Then
 			Trace.Unindent()
 #End If
 		Loop
 
-		If StringClean.Contains("#") Then
+		If RegexKeyWords.IsMatch(StringClean) Then
 #If TRACE Then
 			If TS.TraceError Then
 				Trace.WriteLine("PoundClean(String): Stopping scan, maximum allowed scan depth reached.")
@@ -13644,56 +13556,6 @@ VTSkip:
 		Trace.WriteLine("FilterList Started")
 		Trace.Indent()
 #End If
-		'TDOD: Optimze Code "TextedTags"
-		ssh.FoundTag = "NULL"
-		Dim slide As ContactData = ssh.SlideshowMain
-		If slide.CurrentImage = String.Empty Then GoTo SkipTextedTags
-
-		Dim TagFilePath As String = Path.GetDirectoryName(slide.CurrentImage) & "\ImageTags.txt"
-
-		If (ssh.SlideshowLoaded = True And mainPictureBox.Image IsNot Nothing And DomWMP.Visible = False) _
-		AndAlso File.Exists(TagFilePath) Then
-			Try
-				Dim TagList As List(Of String) = Txt2List(TagFilePath)
-
-				For t As Integer = 0 To TagList.Count - 1
-					'Debug.Print("TagList(t) = " & TagList(t))
-					If TagList(t).Contains(Path.GetFileName(slide.CurrentImage)) Then
-						ssh.FoundTag = TagList(t)
-						Dim FoundTagSplit As String() = Split(ssh.FoundTag)
-						For j As Integer = 0 To FoundTagSplit.Length - 1
-							If FoundTagSplit(j).Contains("TagGarment") Then
-								ssh.TagGarment = FoundTagSplit(j).Replace("TagGarment", "")
-								ssh.TagGarment = ssh.TagGarment.Replace("-", " ")
-							End If
-
-							If FoundTagSplit(j).Contains("TagUnderwear") Then
-								ssh.TagUnderwear = FoundTagSplit(j).Replace("TagUnderwear", "")
-								ssh.TagUnderwear = ssh.TagUnderwear.Replace("-", " ")
-							End If
-
-							If FoundTagSplit(j).Contains("TagTattoo") Then
-								ssh.TagTattoo = FoundTagSplit(j).Replace("TagTattoo", "")
-								ssh.TagTattoo = ssh.TagTattoo.Replace("-", " ")
-							End If
-
-							If FoundTagSplit(j).Contains("TagSexToy") Then
-								ssh.TagSexToy = FoundTagSplit(j).Replace("TagSexToy", "")
-								ssh.TagSexToy = ssh.TagSexToy.Replace("-", " ")
-							End If
-
-							If FoundTagSplit(j).Contains("TagFurniture") Then
-								ssh.TagFurniture = FoundTagSplit(j).Replace("TagFurniture", "")
-								ssh.TagFurniture = ssh.TagFurniture.Replace("-", " ")
-							End If
-						Next
-						Exit For
-					End If
-				Next
-			Catch
-			End Try
-		End If
-SkipTextedTags:
 
 		Dim FilterPass As Boolean
 		Dim ListIncrement As Integer = 1
@@ -13750,15 +13612,6 @@ SkipTextedTags:
 			If ListClean(i).Contains("###-INVALID-###") Then ListClean.RemoveAt(i)
 		Next
 
-		'BUG: Texted Tags are not working.
-		For x As Integer = 0 To ListClean.Count - 1
-			ListClean(x) = ListClean(x).Replace("#TagGarment", ssh.TagGarment.Replace("-", " "))
-			ListClean(x) = ListClean(x).Replace("#TagUnderwear", ssh.TagUnderwear.Replace("-", " "))
-			ListClean(x) = ListClean(x).Replace("#TagTattoo", ssh.TagTattoo.Replace("-", " "))
-			ListClean(x) = ListClean(x).Replace("#TagSexToy", ssh.TagSexToy.Replace("-", " "))
-			ListClean(x) = ListClean(x).Replace("#TagFurniture", ssh.TagFurniture.Replace("-", " "))
-		Next
-
 		Dim FilteredList As New List(Of String)
 
 		'For i As Integer = 0 To ListClean.Count - 1
@@ -13778,6 +13631,21 @@ SkipTextedTags:
 	Public Function GetFilter(ByVal FilterString As String, Optional ByVal Linear As Boolean = False) As Boolean
 		Dim OrgFilterString As String = FilterString
 		Try
+			Dim FilterContact As ContactData
+			Dim Comp As IEqualityComparer = StringComparer.OrdinalIgnoreCase
+
+			If FilterString.ToLower.Contains("@contact1") Then
+				FilterContact = ssh.SlideshowContact1
+			ElseIf FilterString.ToLower.Contains("@contact2") Then
+				FilterContact = ssh.SlideshowContact2
+			ElseIf FilterString.ToLower.Contains("@contact3") Then
+				FilterContact = ssh.SlideshowContact3
+			ElseIf ContactToUse IsNot Nothing Then
+				FilterContact = ContactToUse
+			Else
+				FilterContact = ssh.SlideshowMain
+			End If
+
 			If Linear = False Then
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 				'							Commands to sort out
@@ -13793,16 +13661,8 @@ SkipTextedTags:
 					'QND-Implemented: ContactData.GetTaggedImage
 					If ssh.LockImage = True Then
 						Return False
-					ElseIf FilterString.ToLower.Contains("@contact1") Then
-						If ssh.SlideshowContact1.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
-					ElseIf FilterString.ToLower.Contains("@contact2") Then
-						If ssh.SlideshowContact2.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
-					ElseIf FilterString.ToLower.Contains("@contact3") Then
-						If ssh.SlideshowContact3.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
-					ElseIf ContactToUse IsNot Nothing Then
-						If ContactToUse.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
 					Else
-						Return False
+						If FilterContact.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
 					End If
 				End If
 
@@ -14038,30 +13898,6 @@ SkipTextedTags:
 			If FilterString.ToLower.Contains("@ddd+cup") Then
 				If FrmSettings.boobComboBox.Text <> "DDD+" Or ssh.JustShowedBlogImage = True Then Return False
 			End If
-
-			If FilterString.ToLower.Contains("@tagface") And Not ssh.FoundTag.ToLower.Contains("tagface") Then Return False
-			If FilterString.ToLower.Contains("@tagboobs") And Not ssh.FoundTag.ToLower.Contains("tagboobs") Then Return False
-			If FilterString.ToLower.Contains("@tagpussy") And Not ssh.FoundTag.ToLower.Contains("tagpussy") Then Return False
-			If FilterString.ToLower.Contains("@tagass") And Not ssh.FoundTag.ToLower.Contains("tagass") Then Return False
-			If FilterString.ToLower.Contains("@tagfeet") And Not ssh.FoundTag.ToLower.Contains("tagfeet") Then Return False
-			If FilterString.ToLower.Contains("@taglegs") And Not ssh.FoundTag.ToLower.Contains("taglegs") Then Return False
-			If FilterString.ToLower.Contains("@tagmasturbating") And Not ssh.FoundTag.ToLower.Contains("tagmasturbating") Then Return False
-			If FilterString.ToLower.Contains("@tagsucking") And Not ssh.FoundTag.ToLower.Contains("tagsucking") Then Return False
-			If FilterString.ToLower.Contains("@tagfullydressed") And Not ssh.FoundTag.ToLower.Contains("tagfullydressed") Then Return False
-			If FilterString.ToLower.Contains("@taghalfdressed") And Not ssh.FoundTag.ToLower.Contains("taghalfdressed") Then Return False
-			If FilterString.ToLower.Contains("@taggarmentcovering") And Not ssh.FoundTag.ToLower.Contains("taggarmentcovering") Then Return False
-			If FilterString.ToLower.Contains("@taghandscovering") And Not ssh.FoundTag.ToLower.Contains("taghandscovering") Then Return False
-			If FilterString.ToLower.Contains("@tagnaked") And Not ssh.FoundTag.ToLower.Contains("tagnaked") Then Return False
-			If FilterString.ToLower.Contains("@tagsideview") And Not ssh.FoundTag.ToLower.Contains("tagsideview") Then Return False
-			If FilterString.ToLower.Contains("@tagcloseup") And Not ssh.FoundTag.ToLower.Contains("tagcloseup") Then Return False
-			If FilterString.ToLower.Contains("@tagpiercing") And Not ssh.FoundTag.ToLower.Contains("tagpiercing") Then Return False
-			If FilterString.ToLower.Contains("@tagsmiling") And Not ssh.FoundTag.ToLower.Contains("tagsmiling") Then Return False
-			If FilterString.ToLower.Contains("@tagglaring") And Not ssh.FoundTag.ToLower.Contains("tagglaring") Then Return False
-			If FilterString.ToLower.Contains("@taggarment") And Not ssh.FoundTag.ToLower.Contains("taggarment") Then Return False
-			If FilterString.ToLower.Contains("@tagunderwear") And Not ssh.FoundTag.ToLower.Contains("tagunderwear") Then Return False
-			If FilterString.ToLower.Contains("@tagtattoo") And Not ssh.FoundTag.ToLower.Contains("tagtattoo") Then Return False
-			If FilterString.ToLower.Contains("@tagsextoy") And Not ssh.FoundTag.ToLower.Contains("tagsextoy") Then Return False
-			If FilterString.ToLower.Contains("@tagfurniture") And Not ssh.FoundTag.ToLower.Contains("tagfurniture") Then Return False
 
 			If FilterString.ToLower.Contains("@cocksmall") And FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value Then Return False
 			If FilterString.ToLower.Contains("@cockaverage") Then
@@ -14370,29 +14206,7 @@ SkipTextedTags:
 				.Add("@ChristmasDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
 				.Add("@NewYearsEve", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31)
 				.Add("@NewYearsDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
-				.Add("@TagFace", Not ssh.FoundTag.Contains("TagFace"))
-				.Add("@TagBoobs", Not ssh.FoundTag.Contains("TagBoobs"))
-				.Add("@TagPussy", Not ssh.FoundTag.Contains("TagPussy"))
-				.Add("@TagAss", Not ssh.FoundTag.Contains("TagAss"))
-				.Add("@TagFeet", Not ssh.FoundTag.Contains("TagFeet"))
-				.Add("@TagLegs", Not ssh.FoundTag.Contains("TagLegs"))
-				.Add("@TagMasturbating", Not ssh.FoundTag.Contains("TagMasturbating"))
-				.Add("@TagSucking", Not ssh.FoundTag.Contains("TagSucking"))
-				.Add("@TagFullyDressed", Not ssh.FoundTag.Contains("TagFullyDressed"))
-				.Add("@TagHalfDressed", Not ssh.FoundTag.Contains("TagHalfDressed"))
-				.Add("@TagGarmentCovering", Not ssh.FoundTag.Contains("TagGarmentCovering"))
-				.Add("@TagHandsCovering", Not ssh.FoundTag.Contains("TagHandsCovering"))
-				.Add("@TagNaked", Not ssh.FoundTag.Contains("TagNaked"))
-				.Add("@TagSideView", Not ssh.FoundTag.Contains("TagSideView"))
-				.Add("@TagCloseUp", Not ssh.FoundTag.Contains("TagCloseUp"))
-				.Add("@TagPiercing", Not ssh.FoundTag.Contains("TagPiercing"))
-				.Add("@TagSmiling", Not ssh.FoundTag.Contains("TagSmiling"))
-				.Add("@TagGlaring", Not ssh.FoundTag.Contains("TagGlaring"))
-				.Add("@TagGarment", Not ssh.FoundTag.Contains("TagGarment"))
-				.Add("@TagUnderwear", Not ssh.FoundTag.Contains("TagUnderwear"))
-				.Add("@TagTattoo", Not ssh.FoundTag.Contains("TagTattoo"))
-				.Add("@TagSexToy", Not ssh.FoundTag.Contains("TagSexToy"))
-				.Add("@TagFurniture", Not ssh.FoundTag.Contains("TagFurniture"))
+
 				.Add("@FirstRound", ssh.FirstRound = False)
 				.Add("@NotFirstRound", ssh.FirstRound = True)
 				.Add("@StrokeSpeedMax", StrokePace < NBMaxPace.Value)
@@ -14457,7 +14271,7 @@ SkipTextedTags:
 				.Add("@SubNotCircumcised", FrmSettings.CBSubCircumcised.Checked = True)
 				.Add("@SubPierced", FrmSettings.CBSubPierced.Checked = False)
 				.Add("@SubNotPierced", FrmSettings.CBSubPierced.Checked = True)
-				.Add("@ShowTaggedImage", ssh.LocalTagImageList.Count = 0) '=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> For this Condition the tags have be loaded before.
+				'.Add("@ShowTaggedImage", ssh.LocalTagImageList.Count = 0) '=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> For this Condition the tags have be loaded before.
 				.Add("@BeforeTease", ssh.BeforeTease = False)
 				.Add("@OrgasmDenied", ssh.OrgasmDenied = False)
 				.Add("@OrgasmAllowed", ssh.OrgasmAllowed = False)
