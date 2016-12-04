@@ -1164,6 +1164,31 @@ retryStart:
 		End Try
 	End Sub
 
+	Private Sub Form1_PreviewKeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
+		If e.KeyCode = (Keys.F Or Keys.Control) Then
+			FullscreenToolStripMenuItem_Click(Nothing, Nothing)
+		ElseIf e.Alt AndAlso MainMenuStrip.Visible = False Then
+			MainMenuStrip.Visible = True
+			MainMenuStrip.Focus()
+		ElseIf e.Alt AndAlso FormBorderStyle = Windows.Forms.FormBorderStyle.None Then
+			MainMenuStrip.Visible = False
+		End If
+	End Sub
+
+	Private Sub Form1_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd, Me.Resize
+		If Me.IsHandleCreated = False Then Exit Sub
+		If Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None Then
+			Exit Sub
+		ElseIf Me.WindowState = FormWindowState.Maximized Then
+			My.Settings.WindowHeight = 0
+			My.Settings.WindowWidth = 0
+		Else
+			My.Settings.WindowHeight = Me.Height
+			My.Settings.WindowWidth = Me.Width
+		End If
+
+	End Sub
+
 	<Obsolete("Do not use anymore")>
 	Public Sub ResetButton()
 
@@ -14493,6 +14518,36 @@ VTSkip:
 		End If
 	End Sub
 
+	Public Sub ScrollChatDown()
+
+		Try
+			ChatText.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
+		Catch
+		End Try
+
+		Try
+			ChatText2.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
+		Catch
+		End Try
+
+	End Sub
+
+	Public Sub ClearChat()
+
+		ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """></body>"
+		ChatText.DocumentText = ssh.Chat
+		ChatText2.DocumentText = ssh.Chat
+		ChatReadyState()
+
+	End Sub
+
+	Public Sub ChatReadyState()
+		While ChatText.ReadyState <> WebBrowserReadyState.Complete Or ChatText2.ReadyState <> WebBrowserReadyState.Complete
+			Application.DoEvents()
+		End While
+		ScrollChatDown()
+	End Sub
+
 #End Region ' Chatbox
 
 #Region "------------------------------------ Avoid the Edge --------------------------------------------"
@@ -16906,21 +16961,6 @@ saveImage:
 
 	End Sub
 
-	Public Sub ScrollChatDown()
-
-		Try
-			ChatText.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
-
-		Try
-			ChatText2.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
-
-	End Sub
-
-
 
 
 	Private Sub StatusUpdates_DocumentCompleted(sender As Object, e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles StatusUpdates.DocumentCompleted
@@ -17216,6 +17256,12 @@ restartInstantly:
 
 
 #Region "------------------------------------------------------ MenuStuff -----------------------------------------------------"
+
+	Private Sub MenuStrip2_Leave(sender As System.Object, e As System.EventArgs) Handles MenuStrip2.Leave
+		If FormBorderStyle = Windows.Forms.FormBorderStyle.None Then
+			MainMenuStrip.Visible = False
+		End If
+	End Sub
 
 #Region "-------------------------------------------------------- File --------------------------------------------------------"
 
@@ -18047,8 +18093,6 @@ restartInstantly:
 			ssh.ScriptTick = 1
 			ScriptTimer.Start()
 
-			ApplyThemeColor()
-
 		End If
 
 	End Sub
@@ -18080,21 +18124,6 @@ restartInstantly:
 
 
 #End Region ' Menu
-
-
-	Private Sub Form1_ResizeEnd(sender As Object, e As System.EventArgs) Handles Me.ResizeEnd, Me.Resize
-		If Me.IsHandleCreated = False Then Exit Sub
-		If Me.FormBorderStyle = Windows.Forms.FormBorderStyle.None Then
-			Exit Sub
-		ElseIf Me.WindowState = FormWindowState.Maximized Then
-			My.Settings.WindowHeight = 0
-			My.Settings.WindowWidth = 0
-		Else
-			My.Settings.WindowHeight = Me.Height
-			My.Settings.WindowWidth = Me.Width
-		End If
-
-	End Sub
 
 
 
@@ -18234,8 +18263,6 @@ restartInstantly:
 
 	End Sub
 
-	Public Sub ApplyThemeColor()
-	End Sub
 
 
 
@@ -20033,7 +20060,8 @@ restartInstantly:
 #End Region ' Vital Sub
 
 	Public Sub MetronomeTick()
-
+		'×××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××××
+		'											Metronome-Thread
 		Dim wavFilepath As String = Application.StartupPath & "\Audio\System\metronome.wav"
 		Dim MetroSoundPlayer As Media.SoundPlayer = Nothing
 		Dim wavStream As MemoryStream
@@ -20077,6 +20105,7 @@ playLoop:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'TODO: MetronomeExceptions: Add possibility to restart the thread.
 		End Try
+		'°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°° END of Thread °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 	End Sub
 
 #Region "-------------------------------------------------- Metronome-App -----------------------------------------------------"
@@ -20378,22 +20407,6 @@ playLoop:
 		CloseApp(Nothing)
 	End Sub
 
-	Public Sub ClearChat()
-
-		ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """></body>"
-		ChatText.DocumentText = ssh.Chat
-		ChatText2.DocumentText = ssh.Chat
-		ChatReadyState()
-
-	End Sub
-
-	Public Sub ChatReadyState()
-		While ChatText.ReadyState <> WebBrowserReadyState.Complete Or ChatText2.ReadyState <> WebBrowserReadyState.Complete
-			Application.DoEvents()
-		End While
-		ScrollChatDown()
-	End Sub
-
 
 	Public Function GetIf(ByVal CompareString As String) As Boolean
 
@@ -20464,22 +20477,6 @@ playLoop:
 		Return Len(StringClean) - Len(Replace(StringClean, Character, ""))
 	End Function
 
-	Private Sub Form1_PreviewKeyDown(sender As System.Object, e As System.Windows.Forms.KeyEventArgs) Handles MyBase.KeyDown
-		If e.KeyCode = (Keys.F Or Keys.Control) Then
-			FullscreenToolStripMenuItem_Click(Nothing, Nothing)
-		ElseIf e.Alt AndAlso MainMenuStrip.Visible = False Then
-			MainMenuStrip.Visible = True
-			MainMenuStrip.Focus()
-		ElseIf e.Alt AndAlso FormBorderStyle = Windows.Forms.FormBorderStyle.None Then
-			MainMenuStrip.Visible = False
-		End If
-	End Sub
-
-	Private Sub MenuStrip2_Leave(sender As System.Object, e As System.EventArgs) Handles MenuStrip2.Leave
-		If FormBorderStyle = Windows.Forms.FormBorderStyle.None Then
-			MainMenuStrip.Visible = False
-		End If
-	End Sub
 
 
 End Class

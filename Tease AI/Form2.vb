@@ -9707,7 +9707,6 @@ checkFolder:
 				MessageBox.Show(Me, "This Theme settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			End Try
 
-			Form1.ApplyThemeColor()
 
 
 		End If
@@ -9736,7 +9735,9 @@ checkFolder:
 	Private Sub CheckBox1_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBFlipBack.CheckedChanged
 
 		Try
-			If Form1.FormLoading = False And Form1.ApplyingTheme = False Then Form1.ApplyThemeColor()
+			If Form1.FormLoading = False And Form1.ApplyingTheme = False Then
+				'TODO: implement Flip Background
+			End If
 		Catch
 		End Try
 
