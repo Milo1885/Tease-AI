@@ -3825,7 +3825,7 @@ AcceptAnswer:
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 					Throw New ArgumentOutOfRangeException("The Miniscript-Goto-Destination """ & ssh.FileGoto &
 														  """ in file """ & GotoText & """ was not found.", ex)
-				Catch ex As ArgumentOutOfRangeException When ssh.MiniScript = True
+				Catch ex As ArgumentOutOfRangeException When ssh.MiniScript = False
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 					'                                 ArgumentOutOfRangeException - Regular Script
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
@@ -3833,8 +3833,6 @@ AcceptAnswer:
 														  """ in file """ & GotoText & """ was not found.", ex)
 				End Try
 
-				'QUESTION (stefaf): Is this line an error?
-				ssh.StrokeTauntVal = gotoline
 
 				If ssh.MiniScript = True Then
 					ssh.MiniTauntVal = gotoline
