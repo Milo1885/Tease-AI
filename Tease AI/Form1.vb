@@ -30,7 +30,6 @@ Public Class Form1
 	Friend FormLoading As Boolean = True
 	Dim FormFinishedLoading As Boolean = False
 
-
 	'TODO: Use a custom class to pass data between ScriptParsing methods.
 	<Obsolete("QND-Implementation of ContactData.GetTaggedImage. ")>
 	Dim ContactToUse As ContactData
@@ -4018,11 +4017,6 @@ AcceptAnswer:
 
 	Public Sub RunFileText()
 
-
-		'Debug.Print("ReturnFlag = " & ReturnFlag)
-
-		'If ReturnFlag = True Then GoTo ReturnCalled
-
 		Debug.Print("SaidHello = " & ssh.SaidHello)
 		If ssh.SaidHello = False Then Return
 
@@ -4089,7 +4083,7 @@ ReturnCalled:
 
 
 		Try
-			If ssh.RunningScript = False And ssh.AvoidTheEdgeGame = False And ssh.ReturnFlag = False Then
+			If ssh.RunningScript = False And ssh.AvoidTheEdgeGame = False And ssh.CallReturns.Count() = 0 Then
 				Debug.Print("End Check StrokeTauntVal = " & ssh.StrokeTauntVal)
 
 
@@ -4267,12 +4261,11 @@ NonModuleEnd:
 					DomWMP.Ctlcontrols.stop()
 					BTNHypnoGenStart.Text = "Guide Me!"
 				End If
-				If ssh.ReturnFlag = True Then
-					ssh.ReturnFlag = False
-					ssh.FileText = ssh.ReturnFileText
-					ssh.StrokeTauntVal = ssh.ReturnStrokeTauntVal
 
 
+				If ssh.CallReturns.Count() > 0 Then
+
+					ssh.CallReturns.Pop().resumeState()
 					'github patch begin
 					'If ReturnSubState = "Stroking" Then
 					'If SubStroking = False Then
@@ -4286,7 +4279,6 @@ NonModuleEnd:
 					'If ReturnSubState = "Edging" Then
 
 					'github patch end
-
 					If ssh.ReturnSubState = "Stroking" Then
 						If My.Settings.Chastity = True Then
 							'DomTask = "Now as I was saying @StartTaunts"
@@ -4304,7 +4296,6 @@ NonModuleEnd:
 						End If
 					End If
 					If ssh.ReturnSubState = "Edging" Then
-
 						If ssh.SubEdging = False Then
 							'DomTask = "Start getting yourself to the edge again @Edge"
 							ssh.DomTask = "#Return_Edging"
@@ -5605,7 +5596,7 @@ DommeSlideshowFallback:
 
 
 
-					If ssh.ReturnFlag Then
+					If ssh.CallReturns.Count() > 0 Then
 						ssh.ShowModule = True
 						ScriptTimer.Start()
 					ElseIf ssh.TeaseTick < 1 And ssh.Playlist = False Then
@@ -6241,7 +6232,7 @@ DommeSlideshowFallback:
 
 					'FrmSettings.LBLOrgasmCountdown.Text = LastScriptCountdown
 
-					If ssh.ReturnFlag Then
+					If ssh.CallReturns.Count() > 0 Then
 						ssh.ShowModule = True
 						ScriptTimer.Start()
 					ElseIf ssh.TeaseTick < 1 And ssh.Playlist = False Then
@@ -11102,6 +11093,11 @@ OrgasmDecided:
 				VideoTauntTimer.Stop()
 				EdgeCountTimer.Stop()
 
+				'if we use an interrupt we have to clear all the values stored in the @CallReturn array because @Interrupts stop everything
+				'and then moves to a link (otherwise we'd have the program going back to these @CallReturn the next time a new @CallReturn is called)
+				ssh.CallReturns.Clear()
+
+
 				ssh.FileText = InterruptClean
 				ssh.LockImage = False
 				If ssh.SlideshowLoaded = True Then
@@ -12228,10 +12224,8 @@ VTSkip:
 
 		If StringClean.Contains("@CallReturn(") Then
 
-
-			ssh.ReturnFileText = ssh.FileText
-			ssh.ReturnStrokeTauntVal = ssh.StrokeTauntVal
 			GetSubState()
+			ssh.CallReturns.Push(New SessionState.StackedCallReturn(ssh))
 
 			StrokeTimer.Stop()
 			StrokeTauntTimer.Stop()
@@ -12261,36 +12255,35 @@ VTSkip:
 			End If
 
 			'StopEverything()
-			ssh.ReturnFlag = True
 
 
 			Dim CheckFlag As String = GetParentheses(StringClean, "@CallReturn(")
-			Dim CallReplace As String = CheckFlag
+				Dim CallReplace As String = CheckFlag
 
-			If CheckFlag.Contains(",") Then
+				If CheckFlag.Contains(",") Then
 
-				CheckFlag = FixCommas(CheckFlag)
+					CheckFlag = FixCommas(CheckFlag)
 
-				Dim CallSplit As String() = CheckFlag.Split(",")
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
-				ssh.FileGoto = CallSplit(1)
-				ssh.SkipGotoLine = True
-				GetGoto()
+					Dim CallSplit As String() = CheckFlag.Split(",")
+					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
+					ssh.FileGoto = CallSplit(1)
+					ssh.SkipGotoLine = True
+					GetGoto()
 
-			Else
+				Else
 
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
-				ssh.StrokeTauntVal = -1
+					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
+					ssh.StrokeTauntVal = -1
+
+				End If
+				ssh.ScriptTick = 2
+				ScriptTimer.Start()
+
+				StringClean = StringClean.Replace("@CallReturn(" & CallReplace & ")", "")
 
 			End If
-			ssh.ScriptTick = 2
-			ScriptTimer.Start()
 
-			StringClean = StringClean.Replace("@CallReturn(" & CallReplace & ")", "")
-
-		End If
-
-		If StringClean.Contains("@Call(") Then
+			If StringClean.Contains("@Call(") Then
 
 			Dim CheckFlag As String = GetParentheses(StringClean, "@Call(")
 			Dim CallReplace As String = CheckFlag

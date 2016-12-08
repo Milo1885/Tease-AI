@@ -416,7 +416,7 @@ Public Class SessionState
 	Public Property ReturnFileText As String
 	Public Property ReturnStrokeTauntVal As String
 	Public Property ReturnSubState As String
-	Public Property ReturnFlag As Boolean
+	Public Property returnFlag As Boolean
 
 	Public Property SessionEdges As Integer
 
@@ -634,6 +634,7 @@ Public Class SessionState
 
 	<NonSerialized> <OptionalField> Friend Files As New FileClass(Me)
 	<NonSerialized> <OptionalField> Friend Folders As New FoldersClass(Me)
+	<OptionalField> Friend CallReturns As New Stack()
 
 	<NonSerialized> Dim ActivationForm As Form1
 
@@ -718,7 +719,14 @@ Public Class SessionState
 		' Marked as <NonSerialized> <OptionalField> have to be initialized on every deserialization.
 		If Files Is Nothing Then Files = New FileClass(Me)
 		If Folders Is Nothing Then Folders = New FoldersClass(Me)
-
+		If CallReturns Is Nothing Then CallReturns = New Stack()
+		If returnFlag Then
+			Dim oldReturn = New StackedCallReturn(Me)
+			oldReturn.ReturnFileText = Me.ReturnFileText
+			oldReturn.ReturnState = Me.ReturnSubState
+			oldReturn.ReturnStrokeTauntVal = CInt(Me.ReturnStrokeTauntVal)
+			CallReturns.Push(oldReturn)
+		End If
 	End Sub
 
 #End Region

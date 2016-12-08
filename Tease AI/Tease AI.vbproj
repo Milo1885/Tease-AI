@@ -105,6 +105,7 @@
     <Compile Include="Classes\BackgroundWorkerSyncable.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\SessionState.StackedCallReturn.vb" />
     <Compile Include="Classes\Common.vb" />
     <Compile Include="Classes\Log.vb" />
     <Compile Include="Classes\LogicalStringComparer.vb" />
