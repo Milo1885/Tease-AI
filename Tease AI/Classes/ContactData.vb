@@ -308,18 +308,18 @@ nextSubDir:
 		Me.ImageList = GetRandom(Me.Contact)
 		Me.Index = 0
 		ImageTagCache.Clear()
-		LastreturnedImage = ""
+		LastTaggedImage = ""
 	End Sub
 
 	Sub CheckInit()
 		If Me.Index = -1 And Me.Contact <> ContactType.Nothing Then Me.LoadNew()
-		LastreturnedImage = ""
+		LastTaggedImage = ""
 	End Sub
 
 #Region "Navigation"
 
 	<NonSerialized>
-	Dim LastreturnedImage As String
+	Dim LastTaggedImage As String
 
 	Friend Function CurrentImage() As String
 		If ImageList.Count > 0 And Index > -1 Then
@@ -427,10 +427,11 @@ nextSubDir:
 	''' <summary>
 	''' Searches for a tagged with the given Tags.
 	''' </summary>
-	''' <param name="ImageTags">The Tags, to search for.</param>
+	''' <param name="imageTags">The Tags, to search for.</param>
+	''' <param name="rememberResult">If set to true the result is written to cache.</param>
 	''' <returns>Returns a String representing the ImageLocation for the found image. If none was found it will 
 	''' return an empty string.</returns>
-	Public Function GetTaggedImage(ByVal ImageTags As String, Optional ByVal RememberResult As Boolean = False) As String
+	Public Function GetTaggedImage(ByVal imageTags As String, Optional ByVal rememberResult As Boolean = False) As String
 		GetTaggedImage = ""
 #If TRACE Then
 		Dim Ts As New TraceSwitch("GetTaggedImage", "")
@@ -444,12 +445,12 @@ nextSubDir:
 			If Ts.TraceVerbose Then
 				Trace.WriteLine("================ GetTaggedImage ================")
 				Trace.Indent()
-				Trace.WriteLine(String.Format("Get image for Tag ""{0}""", ImageTags))
+				Trace.WriteLine(String.Format("Get image for Tag ""{0}""", imageTags))
 			ElseIf Ts.Level = TraceLevel.Info Then
-				Trace.Write(String.Format("Get image for Tag ""{0}""", ImageTags))
+				Trace.Write(String.Format("Get image for Tag ""{0}""", imageTags))
 			End If
 #End If
-			Dim ImagePaths As ImageTagCacheItem = GetImageListByTag(ImageTags)
+			Dim ImagePaths As ImageTagCacheItem = GetImageListByTag(imageTags)
 
 tryNextImage:
 			'===================================================================
@@ -490,15 +491,15 @@ SetForwardImage:
 #If TRACE Then
 				If Ts.TraceVerbose Then Trace.WriteLine(String.Format("Image not found - remove from cache: ""{0}""", rtnPath))
 #End If
-				ImageTagCache(ImageTags).TagImageList.Remove(rtnPath)
+				ImageTagCache(imageTags).TagImageList.Remove(rtnPath)
 				GoTo tryNextImage
 			Else
 				' ################ image found ##################
 #If TRACE Then
 				If Ts.TraceVerbose Then Trace.WriteLine("Distance of image = " & CurrDist)
 #End If
-				If RememberResult Then ImagePaths.LastPicked = rtnPath
-				LastreturnedImage = rtnPath
+				If rememberResult Then ImagePaths.LastPicked = rtnPath
+				LastTaggedImage = rtnPath
 				Return rtnPath
 
 			End If
@@ -523,13 +524,19 @@ SetForwardImage:
 	End Function
 
 	''' <summary>Returns a list of filepaths for the given tags.</summary>
-	''' <param name="ImageTags">The tags to retrieve the list.</param>
-	Private Function GetImageListByTag(ByVal ImageTags As String) As ImageTagCacheItem
+	''' <param name="imageTags">The tags to retrieve the list.</param>
+	''' <return>Returns a list of files for the given tags.</return>
+	Private Function GetImageListByTag(ByVal imageTags As String) As ImageTagCacheItem
+		' Set default value to return.
+		GetImageListByTag = New ImageTagCacheItem()
+
 		Try
 #If TRACE Then
 			Dim Ts As New TraceSwitch("GetTaggedImage", "")
 			Ts.Level = TraceLevel.Verbose
 #End If
+
+			If String.IsNullOrWhiteSpace(CurrentImage) Then Exit Function
 
 			Dim TargetFolder As String = Path.GetDirectoryName(CurrentImage) & Path.DirectorySeparatorChar
 			Dim TagListFile As String = TargetFolder & "ImageTags.txt"
@@ -538,22 +545,22 @@ redo:
 			If Not File.Exists(TagListFile) Then
 				'===================================================================
 				'							No Tag File
-				Return New ImageTagCacheItem
-			ElseIf ImageTagCache.Keys.Contains(ImageTags) Then
+				Exit Function
+			ElseIf ImageTagCache.Keys.Contains(imageTags) Then
 				'===================================================================
 				'						Previous cached result
 
 #If TRACE Then
 				If Ts.TraceVerbose Then Trace.WriteLine("Loading DommeTags from Cache.")
 #End If
-				Dim rtnItem As ImageTagCacheItem = ImageTagCache(ImageTags)
+				Dim rtnItem As ImageTagCacheItem = ImageTagCache(imageTags)
 
 				If rtnItem.TagImageList.Count = 0 Then
 					' ´############## List was empty ################
-					Return New ImageTagCacheItem
+					Exit Function
 				ElseIf Not rtnItem.TagImageList(0).StartsWith(TargetFolder)
 					' ################ Wrong folder #################
-					ImageTagCache.Remove(ImageTags)
+					ImageTagCache.Remove(imageTags)
 					GoTo redo
 				Else
 					' ################# All fine ####################
@@ -571,10 +578,10 @@ redo:
 				Dim ValidExt As String() = Split(".jpg|.jpeg|.bmp|.png|.gif", "|")
 
 				' Replace case insensitive "not", to safely assign tags to their lists
-				ImageTags = Regex.Replace(ImageTags, "\b(not)", "--", RegexOptions.IgnoreCase)
+				imageTags = Regex.Replace(imageTags, "\b(not)", "--", RegexOptions.IgnoreCase)
 
 				' Seperate Tags in given string.
-				Dim S As String() = ImageTags.Split({",", " "}, StringSplitOptions.RemoveEmptyEntries)
+				Dim S As String() = imageTags.Split({",", " "}, StringSplitOptions.RemoveEmptyEntries)
 
 				' Assign tags to lists.
 				S.ToList.ForEach(Sub(x)
@@ -617,7 +624,7 @@ redo:
 
 				' Add new item to cache and exit.
 				GetImageListByTag = New ImageTagCacheItem() With {.TagImageList = PathList}
-				ImageTagCache.Add(ImageTags, GetImageListByTag)
+				ImageTagCache.Add(imageTags, GetImageListByTag)
 				Return GetImageListByTag
 			End If
 		Catch ex As Exception
@@ -630,16 +637,16 @@ redo:
 #End Region ' Image navigation
 
 
-	Friend Function ApplyTextedTags(ByVal ModifyString As String) As String
-		ApplyTextedTags = ModifyString
+	Friend Function ApplyTextedTags(ByVal modifyString As String) As String
+		ApplyTextedTags = modifyString
 		Try
 			' ################### Get displayed Image #####################
 			Dim DisplayedImage As String
 
-			If String.IsNullOrWhiteSpace(LastreturnedImage) Then
+			If String.IsNullOrWhiteSpace(LastTaggedImage) Then
 				DisplayedImage = CurrentImage()
 			Else
-				DisplayedImage = LastreturnedImage
+				DisplayedImage = LastTaggedImage
 			End If
 
 			' #################### Get line for image #####################

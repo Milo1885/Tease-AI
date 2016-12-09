@@ -59,7 +59,7 @@ Public Class TauntProcessingObject
 	''' <returns>Returns true, if taunt has valid lines and right ammount.</returns>
 	ReadOnly Property Avaialable As Boolean
 		Get
-			If Lines.Count > 0 AndAlso Lines.Count >= TauntSize Then
+			If (Lines.Count > 0 And TauntSize > 0) AndAlso Lines.Count >= TauntSize Then
 				Return True
 			Else
 				Return False

@@ -1,20 +1,18 @@
 ﻿# Tease-AI
 Tease AI is adult-oriented software that aims to create an interactive tease and denial experience by emulating an online chat session with a domme. 
 
-Daragorn TestLine
-
 # Todo:
 
 Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: initialized in v0.54.5.1
 	
-# Changelog - Patch 54.5.1
+# Changelog - Patch 54.6.0
 
 * Added Features:
 	* Added new sorting method to sort file lists like the Windows file Explorer does.
 	* PoundClean reworked to support system keywords as parameters inside vocabulary files. In order to prevent infinite loops, the maximum allowed depth is limited to 5 times. Tip: take a look at the logfile to see how it's working.
-	* All Contacts and Domme are able to use @DommeTag(). 
- 
+	* All Contacts and Domme are able to use @DommeTag(). Usage: @Contact2 Your text to display @DommeTag(Face, NotFeet)
+	* Added nested @CallReturn()-support.
 
 * Removed Features:
 	* @DommeTag() doesn't alternate the given tags to return a result. (stefaf) The idea was worth a try. 
@@ -36,9 +34,12 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* Chastity, Glitter and Taunt-files reworked to increase fault tolerance and correct line grouping. 2c588ffed4f03f17813d3e5bd290a3351b9bb8b2. It tries with a 45% chance to pick a 1-line-taunt. Otherwise it picks randomly from all available taunt sizes.
 
 ### Known Issues:
+* Using a background image slows down GDI+ a lot.
 * @BookmarkModule 
 	* causes a script freeze at EOF, when taunts are interrupted. (Occured in Debug->Run Script)
 	* seem to break if a miniscript (and maybe others) is called during the taunt.
+	* Modes are not restored on returning.
+* @CallReturn doesn't restore any of the modes. (@YesMode, @NoMode etc.)
 
 	
 # Changelog - Patch 54.5.0	

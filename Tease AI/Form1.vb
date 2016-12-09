@@ -30,6 +30,7 @@ Public Class Form1
 	Friend FormLoading As Boolean = True
 	Dim FormFinishedLoading As Boolean = False
 
+
 	'TODO: Use a custom class to pass data between ScriptParsing methods.
 	<Obsolete("QND-Implementation of ContactData.GetTaggedImage. ")>
 	Dim ContactToUse As ContactData
@@ -12258,32 +12259,32 @@ VTSkip:
 
 
 			Dim CheckFlag As String = GetParentheses(StringClean, "@CallReturn(")
-				Dim CallReplace As String = CheckFlag
+			Dim CallReplace As String = CheckFlag
 
-				If CheckFlag.Contains(",") Then
+			If CheckFlag.Contains(",") Then
 
-					CheckFlag = FixCommas(CheckFlag)
+				CheckFlag = FixCommas(CheckFlag)
 
-					Dim CallSplit As String() = CheckFlag.Split(",")
-					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
-					ssh.FileGoto = CallSplit(1)
-					ssh.SkipGotoLine = True
-					GetGoto()
+				Dim CallSplit As String() = CheckFlag.Split(",")
+				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
+				ssh.FileGoto = CallSplit(1)
+				ssh.SkipGotoLine = True
+				GetGoto()
 
-				Else
+			Else
 
-					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
-					ssh.StrokeTauntVal = -1
-
-				End If
-				ssh.ScriptTick = 2
-				ScriptTimer.Start()
-
-				StringClean = StringClean.Replace("@CallReturn(" & CallReplace & ")", "")
+				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
+				ssh.StrokeTauntVal = -1
 
 			End If
+			ssh.ScriptTick = 2
+			ScriptTimer.Start()
 
-			If StringClean.Contains("@Call(") Then
+			StringClean = StringClean.Replace("@CallReturn(" & CallReplace & ")", "")
+
+		End If
+
+		If StringClean.Contains("@Call(") Then
 
 			Dim CheckFlag As String = GetParentheses(StringClean, "@Call(")
 			Dim CallReplace As String = CheckFlag
@@ -13647,14 +13648,22 @@ VTSkip:
 	Public Function GetFilter(ByVal FilterString As String, Optional ByVal Linear As Boolean = False) As Boolean
 		Dim OrgFilterString As String = FilterString
 		Try
+			'######################### Determine filtering Contact ###########################
 			Dim FilterContact As ContactData
-			Dim Comp As IEqualityComparer = StringComparer.OrdinalIgnoreCase
+			Dim ActiveContacts As New List(Of String)
 
-			If FilterString.ToLower.Contains("@contact1") Then
+			For Each match As Match In Regex.Matches(ssh.Group, "[d\d](?=[^\+\-]*)", RegexOptions.IgnoreCase)
+				' Pattern Description:
+				' [d\d]: All Numbers and letter "D"
+				' (?=[^\+\-]*): not followed by "+" or "-" (Future indicator for joining and leaving contacts.)
+				ActiveContacts.Add(match.Value)
+			Next
+
+			If FilterString.Includes("@Contact1") AndAlso ActiveContacts.Contains("1") Then
 				FilterContact = ssh.SlideshowContact1
-			ElseIf FilterString.ToLower.Contains("@contact2") Then
+			ElseIf FilterString.Includes("@Contact2") AndAlso ActiveContacts.Contains("2") Then
 				FilterContact = ssh.SlideshowContact2
-			ElseIf FilterString.ToLower.Contains("@contact3") Then
+			ElseIf FilterString.Includes("@Contact3") AndAlso ActiveContacts.Contains("3") Then
 				FilterContact = ssh.SlideshowContact3
 			ElseIf ContactToUse IsNot Nothing Then
 				FilterContact = ContactToUse
@@ -13673,7 +13682,7 @@ VTSkip:
 				' with "glaring".
 				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 				'ISSUE: @DomTag() is not filtered out 
-				If FilterString.Contains("@DommeTag(") Then
+				If FilterString.Includes("@DommeTag(") Then
 					'QND-Implemented: ContactData.GetTaggedImage
 					If ssh.LockImage = True Then
 						Return False
