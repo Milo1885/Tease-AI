@@ -5275,7 +5275,7 @@ NullResponse:
 
 
 					If ssh.SysMes = True Then
-						ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & ssh.DomTask & "</b><br></font></body>"
+						ChatAddSystemMessage(ssh.DomTask, False)
 						ssh.SysMes = False
 						GoTo EndSysMes
 					End If
@@ -5976,7 +5976,7 @@ TryNextWithTease:
 				Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
 				If ssh.SysMes = True Then
-					ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & ssh.DomChat & "</b><br></font></body>"
+					ChatAddSystemMessage(ssh.DomChat, False)
 					ssh.SysMes = False
 					GoTo EndSysMes
 				End If
@@ -8314,8 +8314,6 @@ StatusUpdateEnd:
 
 	End Function
 
-
-
 	Public Function PoundClean(ByVal StringClean As String) As String
 #If TRACE Then
 		Dim TS As New TraceSwitch("PoundClean", "")
@@ -8340,6 +8338,11 @@ StatusUpdateEnd:
 		' Create Regex-Pattern to find #Keywords and exclude custom imagetags.
 		Dim ExcludeKeywords As String() = {"TagGarment", "TagUnderwear", "TagTattoo", "TagSexToy", "TagFurniture"}
 		Dim Pattern As String = String.Format("##*(?!{0})[\w\d\+\-_]+", Join(ExcludeKeywords, "|"))
+
+		' Append included non-Keywords to pattern.
+		Dim NonKeywordInclude As String() = {"@RT\(", "@RandomText\("}
+		Pattern &= If(NonKeywordInclude.Length = 0, "", "|" & String.Join("|", NonKeywordInclude))
+
 		Dim RegexKeyWords As New Regex(Pattern)
 
 		Do While Recurrence < 5 AndAlso RegexKeyWords.IsMatch(StringClean)
@@ -14518,6 +14521,25 @@ VTSkip:
 		End If
 	End Sub
 
+	''' <summary>Appends a system message to chat and prints it if desired. </summary>
+	''' <param name="messageText">Messagetext to append to chat.</param>
+	''' <param name="printChat">If true the chatwindow is refreshed and reprinted.</param>
+	Public Sub ChatAddSystemMessage(messageText As String, Optional printChat As Boolean = True)
+		ChatAppend("<span style=""color: steelblue; font-weight: bold; "">" & messageText & "</span>", printChat)
+		'ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
+	End Sub
+
+	Public Sub ChatAppend(elementText As String, Optional printChat As Boolean = True)
+		ssh.Chat &= elementText & "<br>" & vbCrLf
+		If printChat Then Me.PrintChat()
+	End Sub
+
+	Friend Sub PrintChat()
+		ChatText.DocumentText = ssh.Chat
+		ChatText2.DocumentText = ssh.Chat
+		ChatReadyState()
+	End Sub
+
 	Public Sub ScrollChatDown()
 
 		Try
@@ -17151,17 +17173,11 @@ restartInstantly:
 			If Not ssh.Group.Contains("1") Then
 				ssh.Group = ssh.Group & "1"
 				ssh.GlitterTease = True
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter1 & " has joined the Chat room</b>" & "<br></font></body>"
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
+				ChatAddSystemMessage(My.Settings.Glitter1 & " has joined the Chat room")
 			Else
 				ssh.Group = ssh.Group.Replace("1", "")
 				If ssh.Group = "D" Then ssh.GlitterTease = False
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter1 & " has left the Chat room</b>" & "<br></font></body>"
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
+				ChatAddSystemMessage(My.Settings.Glitter1 & " has left the Chat room")
 			End If
 		End If
 
@@ -17176,17 +17192,11 @@ restartInstantly:
 			If Not ssh.Group.Contains("2") Then
 				ssh.Group = ssh.Group & "2"
 				ssh.GlitterTease = True
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter2 & " has joined the Chat room</b>" & "<br></font></body>"
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
+				ChatAddSystemMessage(My.Settings.Glitter2 & " has joined the Chat room")
 			Else
 				ssh.Group = ssh.Group.Replace("2", "")
 				If ssh.Group = "D" Then ssh.GlitterTease = False
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter2 & " has left the Chat room</b>" & "<br></font></body>"
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
+				ChatAddSystemMessage(My.Settings.Glitter2 & " has left the Chat room")
 			End If
 		End If
 
@@ -17201,17 +17211,11 @@ restartInstantly:
 			If Not ssh.Group.Contains("3") Then
 				ssh.Group = ssh.Group & "3"
 				ssh.GlitterTease = True
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter3 & " has joined the Chat room</b>" & "<br></font></body>"
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
+				ChatAddSystemMessage(My.Settings.Glitter3 & " has joined the Chat room")
 			Else
 				ssh.Group = ssh.Group.Replace("3", "")
 				If ssh.Group = "D" Then ssh.GlitterTease = False
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & My.Settings.Glitter3 & " has left the Chat room</b>" & "<br></font></body>"
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
+				ChatAddSystemMessage(My.Settings.Glitter3 & " has left the Chat room")
 			End If
 		End If
 
@@ -17228,17 +17232,11 @@ restartInstantly:
 			If Not ssh.Group.Contains("D") Then
 				ssh.Group = ssh.Group & "D"
 				If ssh.Group = "D" Then ssh.GlitterTease = False
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & domName.Text & " has joined the Chat room</b>" & "<br></font></body>"
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
+				ChatAddSystemMessage(domName.Text & " has joined the Chat room")
 			Else
 				ssh.Group = ssh.Group.Replace("D", "")
 				ssh.GlitterTease = True
-				ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & domName.Text & " has left the Chat room</b>" & "<br></font></body>"
-				ChatText.DocumentText = ssh.Chat
-				ChatText2.DocumentText = ssh.Chat
-				ChatReadyState()
+				ChatAddSystemMessage(domName.Text & " has left the Chat room")
 			End If
 		End If
 
