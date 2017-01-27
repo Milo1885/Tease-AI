@@ -209,27 +209,7 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 
 			End Try
 
-
-			Dim TempDate As String
-			Dim TempDateNow As DateTime = DateTime.Now
-
-			TempDate = TempDateNow.ToString("MM.dd.yyyy hhmm")
-
-			'Github Patch Begin
-
-			' If FrmSettings.CBSaveChatlogExit.Checked = True Then
-
-			'If (Not System.IO.Directory.Exists(Application.StartupPath & "\Chatlogs\")) Then
-			'System.IO.Directory.CreateDirectory(Application.StartupPath & "\Chatlogs\")
-			'End If
-
-			'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\" & TempDate & " chatlog.html", ChatText.DocumentText, False)
-
-			'End If
-
-			' Github Patch End
-
-			SaveChatLog(TempDate)
+			SaveChatLog(False)
 
 			Try
 				FrmSettings.Close()
@@ -259,14 +239,22 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 		End Try
 	End Sub
 
-	Private Sub SaveChatLog(LogDate As String)
+	Private Sub SaveChatLog(IsAutosave As Boolean)
 		If FrmSettings.CBSaveChatlogExit.Checked = True And ChatText.DocumentText.Length > 36 Then
+
+			Dim filename As String
 
 			If (Not System.IO.Directory.Exists(Application.StartupPath & "\Chatlogs\")) Then
 				System.IO.Directory.CreateDirectory(Application.StartupPath & "\Chatlogs\")
 			End If
 
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\" & LogDate & " chatlog.html", ChatText.DocumentText, False)
+			If IsAutoSave = True Then
+				filename = "Autosave.html"
+			Else
+				filename = DateTime.Now.ToString("MM.dd.yyyy hhmm") & " chatlog.html"
+			End If
+
+			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\" & filename, ChatText.DocumentText, False)
 
 		End If
 	End Sub
@@ -1194,12 +1182,7 @@ retryStart:
 
 		ScriptTimer.Stop()
 
-		Dim TempDate As String
-		Dim TempDateNow As DateTime = DateTime.Now
-
-		TempDate = TempDateNow.ToString("MM.dd.yyyy hhmm")
-
-		SaveChatLog(TempDate)
+		SaveChatLog(False)
 
 		ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
 		ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
@@ -1411,7 +1394,7 @@ retryStart:
 			chatBox.Text = ""
 			ChatBox2.Text = ""
 
-			If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
+			SaveChatLog(True)
 
 			Return
 		End If
@@ -1456,7 +1439,7 @@ retryStart:
 
 		ScrollChatDown()
 
-		If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
+		SaveChatLog(True)
 
 		If ssh.IsTyping = True Then
 
@@ -1766,7 +1749,7 @@ WritingTaskLine:
 
 				End If
 
-				If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
+				SaveChatLog(True)
 
 				If ssh.IsTyping = True Then
 
@@ -1839,7 +1822,7 @@ WritingTaskLine:
 
 				End If
 
-				If FrmSettings.CBAutosaveChatlog.Checked = True Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
+				SaveChatLog(True)
 
 				If ssh.IsTyping = True Then
 
@@ -5400,7 +5383,7 @@ DommeSlideshowFallback:
 				ChatReadyState()
 				ScrollChatDown()
 
-				If My.Settings.CBAutosaveChatlog Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
+				SaveChatLog(True)
 
 				' ####################### TTS Output ##########################
 				If FrmSettings.TTSCheckBox.Checked = True _
@@ -6091,7 +6074,7 @@ DommeSlideshowFallback:
 				ChatReadyState()
 				ScrollChatDown()
 
-				If My.Settings.CBAutosaveChatlog Then My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
+				SaveChatLog(True)
 
 				' ####################### TTS Output ##########################
 				If FrmSettings.TTSCheckBox.Checked = True _
@@ -10934,6 +10917,7 @@ OrgasmDecided:
 			'My.Settings.Sys_SubLeftEarly = 0
 			'StopEverything()
 			'ResetButton()
+			SaveChatLog(False)
 			ssh.Reset()
 			FrmSettings.LockOrgasmChances(False)
 			ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
