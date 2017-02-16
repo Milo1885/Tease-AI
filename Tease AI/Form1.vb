@@ -240,21 +240,18 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 	End Sub
 
 	Private Sub SaveChatLog(IsAutosave As Boolean)
-		If FrmSettings.CBSaveChatlogExit.Checked = True And ChatText.DocumentText.Length > 36 Then
-
-			Dim filename As String
+		If ChatText.DocumentText.Length > 300 Then
 
 			If (Not System.IO.Directory.Exists(Application.StartupPath & "\Chatlogs\")) Then
 				System.IO.Directory.CreateDirectory(Application.StartupPath & "\Chatlogs\")
 			End If
 
-			If IsAutoSave = True Then
-				filename = "Autosave.html"
-			Else
-				filename = DateTime.Now.ToString("MM.dd.yyyy hhmm") & " chatlog.html"
-			End If
+			If IsAutosave = True And FrmSettings.CBAutosaveChatlog.Checked = True Then
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\Autosave.html", ChatText.DocumentText, False)
 
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\" & filename, ChatText.DocumentText, False)
+			ElseIf IsAutosave = False And FrmSettings.CBSaveChatlogExit.Checked = True Then
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Chatlogs\" & DateTime.Now.ToString("MM.dd.yyyy hhmm") & " chatlog.html", ChatText.DocumentText, False)
+			End If
 
 		End If
 	End Sub
