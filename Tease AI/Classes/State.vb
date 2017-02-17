@@ -735,7 +735,12 @@ Public Class SessionState
 	<OnDeserialized>
 	Sub onDeserialized_FixFields(sc As StreamingContext)
 		' Suppress obsolete warnings.
-#Disable Warning BC40000
+
+        '#Disable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
+
+#If _MSC_VER > 1600 Then
+    #Disable Warning BC40000
+#End If
 
 		' Marked as <NonSerialized> <OptionalField> have to be initialized on every deserialization.
 		If Files Is Nothing Then Files = New FileClass(Me)
@@ -753,7 +758,12 @@ Public Class SessionState
 		End If
 		
 		' Unsuppress obsolete warnings 
-#Enable Warning BC40000
+        '#Enable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
+
+#If _MSC_VER > 1600 Then
+    #Enable Warning BC40000
+#End If
+
 	End Sub
 
 #End Region

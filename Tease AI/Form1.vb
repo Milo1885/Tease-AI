@@ -13792,383 +13792,411 @@ VTSkip:
 				End If
 			End If
 
-			If FilterString.Contains("@Flag(") Or FilterString.Contains("@NotFlag(") Then
-				Dim result As Boolean = True
-				Dim writeFlag As String
-				Dim splitFlag As String()
+            If FilterString.Contains("@Flag(") Or FilterString.Contains("@NotFlag(") Then
+                Dim result As Boolean = True
+                Dim writeFlag As String
+                Dim splitFlag As String()
 
-				If FilterString.Contains("@Flag(") Then
-					writeFlag = GetParentheses(FilterString, "@Flag(")
-					writeFlag = FixCommas(writeFlag)
-					splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
+                If FilterString.Contains("@Flag(") Then
+                    writeFlag = GetParentheses(FilterString, "@Flag(")
+                    writeFlag = FixCommas(writeFlag)
+                    splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
 
-					For Each s In splitFlag
-						If Not FlagExists(s) Then
-							result = False
-							Exit For
-						End If
-					Next
-				End If
-				If result = False Then Return result
+                    For Each s In splitFlag
+                        If Not FlagExists(s) Then
+                            result = False
+                            Exit For
+                        End If
+                    Next
+                End If
+                If result = False Then Return result
 
-				If FilterString.Contains("@NotFlag(") Then
-					writeFlag = GetParentheses(FilterString, "@NotFlag(")
-					writeFlag = FixCommas(writeFlag)
-					splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
+                If FilterString.Contains("@NotFlag(") Then
+                    writeFlag = GetParentheses(FilterString, "@NotFlag(")
+                    writeFlag = FixCommas(writeFlag)
+                    splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
+                    result = False
+                    For Each s In splitFlag
+                        If result Then
+                            If FlagExists(s) Then
+                                result = False
+                                Exit For
+                            End If
+                        Else
+                            If FlagExists(s) Then
+                                result = False
+                            Else
+                                result = True
+                            End If
+                        End If
+                    Next
+                End If
+                Return result
+            End If
 
-					For Each s In splitFlag
-						If FlagExists(s) Then
-							result = False
-							Exit For
-						End If
-					Next
-				End If
-				Return result
-			End If
+            If FilterString.Contains("@FlagOr(") Then
+                Dim result As Boolean = True
+                Dim writeFlag As String
+                Dim splitFlag As String()
 
-			If FilterString.Contains("@CheckDate(") And Linear = False Then
-				If CheckDateList(FilterString) = False Then Return False
-			End If
+                If FilterString.Contains("@FlagOr(") Then
+                    writeFlag = GetParentheses(FilterString, "@FlagOr(")
+                    writeFlag = FixCommas(writeFlag)
+                    splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
 
-			If FilterString.Contains("@Month(") Then
-				If GetMatch(FilterString, "@Month(", DateAndTime.Now.Month) = False Then Return False
-			End If
+                    For Each s In splitFlag
+                        If FlagExists(s) Then
+                            result = True
+                            Exit For
+                        End If
+                    Next
+                End If
+                If result = True Then Return result
+            End If
 
-			If FilterString.Contains("@Day(") Then
-				If GetMatch(FilterString, "@Day(", DateAndTime.Now.Day) = False Then Return False
-			End If
+            If FilterString.Contains("@CheckDate(") And Linear = False Then
+                If CheckDateList(FilterString) = False Then Return False
+            End If
 
-			If FilterString.Contains("@SetModule(") Then
-				If ssh.SetModule <> "" Or ssh.BookmarkModule = True Then Return False
-			End If
-			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			' Possible space Filters - End
-			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+            If FilterString.Contains("@Month(") Then
+                If GetMatch(FilterString, "@Month(", DateAndTime.Now.Month) = False Then Return False
+            End If
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'								Single word filters
-			' This section contains single word command filters. 
-			' Since there are some legacy commands, which are filters and also instructions, 
-			' this section will ignore all @Statements after @NullResponse or the first 
-			' word not starting with "@" (0x40)
-			'
-			' Beware: destroys the original FilterString-Value!
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			Dim FilterList As String()
+            If FilterString.Contains("@Day(") Then
+                If GetMatch(FilterString, "@Day(", DateAndTime.Now.Day) = False Then Return False
+            End If
 
-			FilterList = FilterString.Split(" ")
-			FilterString = ""
+            If FilterString.Contains("@SetModule(") Then
+                If ssh.SetModule <> "" Or ssh.BookmarkModule = True Then Return False
+            End If
+            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+            ' Possible space Filters - End
+            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
-			For f As Integer = 0 To FilterList.Count - 1
-				If Not FilterList(f).StartsWith("@") Or FilterList(f).Contains("@NullResponse") Then
-					Exit For
-				End If
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '								Single word filters
+            ' This section contains single word command filters. 
+            ' Since there are some legacy commands, which are filters and also instructions, 
+            ' this section will ignore all @Statements after @NullResponse or the first 
+            ' word not starting with "@" (0x40)
+            '
+            ' Beware: destroys the original FilterString-Value!
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            Dim FilterList As String()
 
-				FilterString = FilterString & FilterList(f) & " "
-			Next
+            FilterList = FilterString.Split(" ")
+            FilterString = ""
 
-			If FilterString = "" Then Return True
+            For f As Integer = 0 To FilterList.Count - 1
+                If Not FilterList(f).StartsWith("@") Or FilterList(f).Contains("@NullResponse") Then
+                    Exit For
+                End If
 
-			If FilterString.ToLower.Contains("@crazy") And FrmSettings.crazyCheckBox.Checked = False Then Return False
-			If FilterString.ToLower.Contains("@vulgar") And FrmSettings.vulgarCheckBox.Checked = False Then Return False
-			If FilterString.ToLower.Contains("@supremacist") And FrmSettings.supremacistCheckBox.Checked = False Then Return False
-			If FilterString.ToLower.Contains("@sadistic") And FrmSettings.sadisticCheckBox.Checked = False Then Return False
-			If FilterString.ToLower.Contains("@degrading") And FrmSettings.degradingCheckBox.Checked = False Then Return False
+                FilterString = FilterString & FilterList(f) & " "
+            Next
 
-			If FilterString.ToLower.Contains("@dommelevel1") And FrmSettings.domlevelNumBox.Value <> 1 Then Return False
-			If FilterString.ToLower.Contains("@dommelevel2") And FrmSettings.domlevelNumBox.Value <> 2 Then Return False
-			If FilterString.ToLower.Contains("@dommelevel3") And FrmSettings.domlevelNumBox.Value <> 3 Then Return False
-			If FilterString.ToLower.Contains("@dommelevel4") And FrmSettings.domlevelNumBox.Value <> 4 Then Return False
-			If FilterString.ToLower.Contains("@dommelevel5") And FrmSettings.domlevelNumBox.Value <> 5 Then Return False
+            If FilterString = "" Then Return True
 
-			If FilterString.ToLower.Contains("@selfyoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then Return False
-			If FilterString.ToLower.Contains("@selfold") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then Return False
-			If FilterString.ToLower.Contains("@selfyoung") Or FilterString.ToLower.Contains("@selfold") Then
-				If ssh.VideoTease = True Or ssh.TeaseVideo = True Then Return False
-			End If
-			If FilterString.ToLower.Contains("@subyoung") And FrmSettings.subAgeNumBox.Value > FrmSettings.NBSubAgeMin.Value - 1 Then Return False
-			If FilterString.ToLower.Contains("@subold") And FrmSettings.subAgeNumBox.Value < FrmSettings.NBSubAgeMax.Value + 1 Then Return False
+            If FilterString.ToLower.Contains("@crazy") And FrmSettings.crazyCheckBox.Checked = False Then Return False
+            If FilterString.ToLower.Contains("@vulgar") And FrmSettings.vulgarCheckBox.Checked = False Then Return False
+            If FilterString.ToLower.Contains("@supremacist") And FrmSettings.supremacistCheckBox.Checked = False Then Return False
+            If FilterString.ToLower.Contains("@sadistic") And FrmSettings.sadisticCheckBox.Checked = False Then Return False
+            If FilterString.ToLower.Contains("@degrading") And FrmSettings.degradingCheckBox.Checked = False Then Return False
 
-			If FilterString.ToLower.Contains("@acup") Then
-				If FrmSettings.boobComboBox.Text <> "A" Or ssh.JustShowedBlogImage = True Then Return False
-			End If
-			If FilterString.ToLower.Contains("@bcup") Then
-				If FrmSettings.boobComboBox.Text <> "B" Or ssh.JustShowedBlogImage = True Then Return False
-			End If
-			If FilterString.ToLower.Contains("@ccup") Then
-				If FrmSettings.boobComboBox.Text <> "C" Or ssh.JustShowedBlogImage = True Then Return False
-			End If
-			If FilterString.ToLower.Contains("@dcup") Then
-				If FrmSettings.boobComboBox.Text <> "D" Or ssh.JustShowedBlogImage = True Then Return False
-			End If
-			If FilterString.ToLower.Contains("@ddcup") Then
-				If FrmSettings.boobComboBox.Text <> "DD" Or ssh.JustShowedBlogImage = True Then Return False
-			End If
-			If FilterString.ToLower.Contains("@ddd+cup") Then
-				If FrmSettings.boobComboBox.Text <> "DDD+" Or ssh.JustShowedBlogImage = True Then Return False
-			End If
+            If FilterString.ToLower.Contains("@dommelevel1") And FrmSettings.domlevelNumBox.Value <> 1 Then Return False
+            If FilterString.ToLower.Contains("@dommelevel2") And FrmSettings.domlevelNumBox.Value <> 2 Then Return False
+            If FilterString.ToLower.Contains("@dommelevel3") And FrmSettings.domlevelNumBox.Value <> 3 Then Return False
+            If FilterString.ToLower.Contains("@dommelevel4") And FrmSettings.domlevelNumBox.Value <> 4 Then Return False
+            If FilterString.ToLower.Contains("@dommelevel5") And FrmSettings.domlevelNumBox.Value <> 5 Then Return False
 
-			If FilterString.ToLower.Contains("@cocksmall") And FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value Then Return False
-			If FilterString.ToLower.Contains("@cockaverage") Then
-				If FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value Then Return False
-			End If
+            If FilterString.ToLower.Contains("@selfyoung") And FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1 Then Return False
+            If FilterString.ToLower.Contains("@selfold") And FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1 Then Return False
+            If FilterString.ToLower.Contains("@selfyoung") Or FilterString.ToLower.Contains("@selfold") Then
+                If ssh.VideoTease = True Or ssh.TeaseVideo = True Then Return False
+            End If
+            If FilterString.ToLower.Contains("@subyoung") And FrmSettings.subAgeNumBox.Value > FrmSettings.NBSubAgeMin.Value - 1 Then Return False
+            If FilterString.ToLower.Contains("@subold") And FrmSettings.subAgeNumBox.Value < FrmSettings.NBSubAgeMax.Value + 1 Then Return False
 
-			If FilterString.ToLower.Contains("@cocklarge") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+            If FilterString.ToLower.Contains("@acup") Then
+                If FrmSettings.boobComboBox.Text <> "A" Or ssh.JustShowedBlogImage = True Then Return False
+            End If
+            If FilterString.ToLower.Contains("@bcup") Then
+                If FrmSettings.boobComboBox.Text <> "B" Or ssh.JustShowedBlogImage = True Then Return False
+            End If
+            If FilterString.ToLower.Contains("@ccup") Then
+                If FrmSettings.boobComboBox.Text <> "C" Or ssh.JustShowedBlogImage = True Then Return False
+            End If
+            If FilterString.ToLower.Contains("@dcup") Then
+                If FrmSettings.boobComboBox.Text <> "D" Or ssh.JustShowedBlogImage = True Then Return False
+            End If
+            If FilterString.ToLower.Contains("@ddcup") Then
+                If FrmSettings.boobComboBox.Text <> "DD" Or ssh.JustShowedBlogImage = True Then Return False
+            End If
+            If FilterString.ToLower.Contains("@ddd+cup") Then
+                If FrmSettings.boobComboBox.Text <> "DDD+" Or ssh.JustShowedBlogImage = True Then Return False
+            End If
 
-			If FilterString.ToLower.Contains("@dombirthday") Then
-				If FrmSettings.NBDomBirthdayMonth.Value <> Month(Date.Now) Or FrmSettings.NBDomBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then Return False
-			End If
+            If FilterString.ToLower.Contains("@cocksmall") And FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value Then Return False
+            If FilterString.ToLower.Contains("@cockaverage") Then
+                If FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value Then Return False
+            End If
 
-			If FilterString.ToLower.Contains("@subbirthday") Then
-				If FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) Or FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then Return False
-			End If
+            If FilterString.ToLower.Contains("@cocklarge") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
 
-			If FilterString.ToLower.Contains("@valentinesday") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
-			If FilterString.ToLower.Contains("@christmaseve") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
-			If FilterString.ToLower.Contains("@christmasday") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
-			If FilterString.ToLower.Contains("@newyearseve") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
-			If FilterString.ToLower.Contains("@newyearsday") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+            If FilterString.ToLower.Contains("@dombirthday") Then
+                If FrmSettings.NBDomBirthdayMonth.Value <> Month(Date.Now) Or FrmSettings.NBDomBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then Return False
+            End If
 
-			If FilterString.ToLower.Contains("@firstround") And ssh.FirstRound = False Then Return False
-			If FilterString.ToLower.Contains("@notfirstround") And ssh.FirstRound = True Then Return False
+            If FilterString.ToLower.Contains("@subbirthday") Then
+                If FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) Or FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now) Then Return False
+            End If
 
-			If FilterString.ToLower.Contains("@strokespeedmax") And StrokePace < NBMaxPace.Value Then Return False
-			If FilterString.ToLower.Contains("@strokespeedmin") And StrokePace < NBMinPace.Value Then Return False
-			If FilterString.ToLower.Contains("@strokefaster") Or FilterString.ToLower.Contains("@strokefastest") Then
-				If StrokePace = NBMaxPace.Value Or ssh.WorshipMode = True Then Return False
-			End If
-			If FilterString.ToLower.Contains("@strokeslower") Or FilterString.ToLower.Contains("@strokeslowest") Then
-				If StrokePace = NBMinPace.Value Or ssh.WorshipMode = True Then Return False
-			End If
+            If FilterString.ToLower.Contains("@valentinesday") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+            If FilterString.ToLower.Contains("@christmaseve") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+            If FilterString.ToLower.Contains("@christmasday") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+            If FilterString.ToLower.Contains("@newyearseve") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
+            If FilterString.ToLower.Contains("@newyearsday") And FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value Then Return False
 
-			If FilterString.ToLower.Contains("@alwaysallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Always Allows" Then Return False
-			If FilterString.ToLower.Contains("@oftenallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Often Allows" Then Return False
-			If FilterString.ToLower.Contains("@sometimesallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows" Then Return False
-			If FilterString.ToLower.Contains("@rarelyallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows" Then Return False
-			If FilterString.ToLower.Contains("@neverallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Never Allows" Then Return False
+            If FilterString.ToLower.Contains("@firstround") And ssh.FirstRound = False Then Return False
+            If FilterString.ToLower.Contains("@notfirstround") And ssh.FirstRound = True Then Return False
 
-			If FilterString.ToLower.Contains("@alwaysruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins" Then Return False
-			If FilterString.ToLower.Contains("@oftenruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins" Then Return False
-			If FilterString.ToLower.Contains("@sometimesruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins" Then Return False
-			If FilterString.ToLower.Contains("@rarelyruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins" Then Return False
-			If FilterString.ToLower.Contains("@neverruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins" Then Return False
+            If FilterString.ToLower.Contains("@strokespeedmax") And StrokePace < NBMaxPace.Value Then Return False
+            If FilterString.ToLower.Contains("@strokespeedmin") And StrokePace < NBMinPace.Value Then Return False
+            If FilterString.ToLower.Contains("@strokefaster") Or FilterString.ToLower.Contains("@strokefastest") Then
+                If StrokePace = NBMaxPace.Value Or ssh.WorshipMode = True Then Return False
+            End If
+            If FilterString.ToLower.Contains("@strokeslower") Or FilterString.ToLower.Contains("@strokeslowest") Then
+                If StrokePace = NBMinPace.Value Or ssh.WorshipMode = True Then Return False
+            End If
 
-			If FilterString.ToLower.Contains("@notalwaysallowsorgasm") And FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then Return False
-			If FilterString.ToLower.Contains("@notneverallowsorgasm") And FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then Return False
-			If FilterString.ToLower.Contains("@notalwaysruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then Return False
-			If FilterString.ToLower.Contains("@notneverruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then Return False
+            If FilterString.ToLower.Contains("@alwaysallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Always Allows" Then Return False
+            If FilterString.ToLower.Contains("@oftenallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Often Allows" Then Return False
+            If FilterString.ToLower.Contains("@sometimesallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows" Then Return False
+            If FilterString.ToLower.Contains("@rarelyallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows" Then Return False
+            If FilterString.ToLower.Contains("@neverallowsorgasm") And FrmSettings.alloworgasmComboBox.Text <> "Never Allows" Then Return False
 
-			If FilterString.Contains("@LongEdge") Then
-				If ssh.LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False Then Return False
-			End If
-			If FilterString.Contains("@InterruptLongEdge") Then
-				If ssh.LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or ssh.TeaseTick < 1 Or ssh.RiskyEdges = True Then Return False
-			End If
+            If FilterString.ToLower.Contains("@alwaysruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins" Then Return False
+            If FilterString.ToLower.Contains("@oftenruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins" Then Return False
+            If FilterString.ToLower.Contains("@sometimesruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins" Then Return False
+            If FilterString.ToLower.Contains("@rarelyruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins" Then Return False
+            If FilterString.ToLower.Contains("@neverruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins" Then Return False
 
-			If FilterString.Contains("@1MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 60 Or ssh.HoldEdgeTime > 119 Then Return False
-			End If
-			If FilterString.Contains("@2MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 120 Or ssh.HoldEdgeTime > 179 Then Return False
-			End If
-			If FilterString.Contains("@3MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 180 Or ssh.HoldEdgeTime > 239 Then Return False
-			End If
-			If FilterString.Contains("@4MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 240 Or ssh.HoldEdgeTime > 299 Then Return False
-			End If
-			If FilterString.Contains("@5MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 300 Or ssh.HoldEdgeTime > 599 Then Return False
-			End If
-			If FilterString.Contains("@10MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 600 Or ssh.HoldEdgeTime > 899 Then Return False
-			End If
-			If FilterString.Contains("@15MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 900 Or ssh.HoldEdgeTime > 1799 Then Return False
-			End If
-			If FilterString.Contains("@30MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 1800 Or ssh.HoldEdgeTime > 2699 Then Return False
-			End If
-			If FilterString.Contains("@45MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 2700 Or ssh.HoldEdgeTime > 3599 Then Return False
-			End If
-			If FilterString.Contains("@60MinuteHold") Then
-				If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 3600 Then Return False
-			End If
+            If FilterString.ToLower.Contains("@notalwaysallowsorgasm") And FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then Return False
+            If FilterString.ToLower.Contains("@notneverallowsorgasm") And FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then Return False
+            If FilterString.ToLower.Contains("@notalwaysruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then Return False
+            If FilterString.ToLower.Contains("@notneverruinsorgasm") And FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then Return False
 
-			If FilterString.Contains("@CBTLevel1") And FrmSettings.CBTSlider.Value <> 1 Then Return False
-			If FilterString.Contains("@CBTLevel2") And FrmSettings.CBTSlider.Value <> 2 Then Return False
-			If FilterString.Contains("@CBTLevel3") And FrmSettings.CBTSlider.Value <> 3 Then Return False
-			If FilterString.Contains("@CBTLevel4") And FrmSettings.CBTSlider.Value <> 4 Then Return False
-			If FilterString.Contains("@CBTLevel5") And FrmSettings.CBTSlider.Value <> 5 Then Return False
-			If FilterString.Contains("@SubCircumcised") And FrmSettings.CBSubCircumcised.Checked = False Then Return False
-			If FilterString.Contains("@SubNotCircumcised") And FrmSettings.CBSubCircumcised.Checked = True Then Return False
-			If FilterString.Contains("@SubPierced") And FrmSettings.CBSubPierced.Checked = False Then Return False
-			If FilterString.Contains("@SubNotPierced") And FrmSettings.CBSubPierced.Checked = True Then Return False
-			If FilterString.Contains("@BeforeTease") And ssh.BeforeTease = False Then Return False
-			If FilterString.Contains("@OrgasmDenied") And ssh.OrgasmDenied = False Then Return False
-			If FilterString.Contains("@OrgasmAllowed") And ssh.OrgasmAllowed = False Then Return False
-			If FilterString.Contains("@OrgasmRuined") And ssh.OrgasmRuined = False Then Return False
+            If FilterString.Contains("@LongEdge") Then
+                If ssh.LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False Then Return False
+            End If
+            If FilterString.Contains("@InterruptLongEdge") Then
+                If ssh.LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or ssh.TeaseTick < 1 Or ssh.RiskyEdges = True Then Return False
+            End If
 
-			If FilterString.Contains("@ApathyLevel1") And FrmSettings.NBEmpathy.Value <> 1 Then Return False
-			If FilterString.Contains("@ApathyLevel2") And FrmSettings.NBEmpathy.Value <> 2 Then Return False
-			If FilterString.Contains("@ApathyLevel3") And FrmSettings.NBEmpathy.Value <> 3 Then Return False
-			If FilterString.Contains("@ApathyLevel4") And FrmSettings.NBEmpathy.Value <> 4 Then Return False
-			If FilterString.Contains("@ApathyLevel5") And FrmSettings.NBEmpathy.Value <> 5 Then Return False
-			If FilterString.Contains("@InChastity") And My.Settings.Chastity = False Then Return False
-			If FilterString.Contains("@NotInChastity") And My.Settings.Chastity = True Then Return False
-			If FilterString.Contains("@HasChastity") And FrmSettings.CBOwnChastity.Checked = False Then Return False
-			If FilterString.Contains("@DoesNotHaveChastity") And FrmSettings.CBOwnChastity.Checked = True Then Return False
-			If FilterString.Contains("@ChastityPA") And FrmSettings.CBChastityPA.Checked = False Then Return False
-			If FilterString.Contains("@ChastitySpikes") And FrmSettings.CBChastitySpikes.Checked = False Then Return False
-			If FilterString.Contains("@VitalSub") And CBVitalSub.Checked = False Then Return False
-			If FilterString.Contains("@VitalSubAssignment") Then
-				If CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False Then Return False
-			End If
+            If FilterString.Contains("@1MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 60 Or ssh.HoldEdgeTime > 119 Then Return False
+            End If
+            If FilterString.Contains("@2MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 120 Or ssh.HoldEdgeTime > 179 Then Return False
+            End If
+            If FilterString.Contains("@3MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 180 Or ssh.HoldEdgeTime > 239 Then Return False
+            End If
+            If FilterString.Contains("@4MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 240 Or ssh.HoldEdgeTime > 299 Then Return False
+            End If
+            If FilterString.Contains("@5MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 300 Or ssh.HoldEdgeTime > 599 Then Return False
+            End If
+            If FilterString.Contains("@10MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 600 Or ssh.HoldEdgeTime > 899 Then Return False
+            End If
+            If FilterString.Contains("@15MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 900 Or ssh.HoldEdgeTime > 1799 Then Return False
+            End If
+            If FilterString.Contains("@30MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 1800 Or ssh.HoldEdgeTime > 2699 Then Return False
+            End If
+            If FilterString.Contains("@45MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 2700 Or ssh.HoldEdgeTime > 3599 Then Return False
+            End If
+            If FilterString.Contains("@60MinuteHold") Then
+                If ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 3600 Then Return False
+            End If
 
-			If FilterString.Contains("@RuinTaunt") Then
-				If ssh.EdgeToRuin = False Or ssh.EdgeToRuinSecret = True Then Return False
-			End If
+            If FilterString.Contains("@CBTLevel1") And FrmSettings.CBTSlider.Value <> 1 Then Return False
+            If FilterString.Contains("@CBTLevel2") And FrmSettings.CBTSlider.Value <> 2 Then Return False
+            If FilterString.Contains("@CBTLevel3") And FrmSettings.CBTSlider.Value <> 3 Then Return False
+            If FilterString.Contains("@CBTLevel4") And FrmSettings.CBTSlider.Value <> 4 Then Return False
+            If FilterString.Contains("@CBTLevel5") And FrmSettings.CBTSlider.Value <> 5 Then Return False
+            If FilterString.Contains("@SubCircumcised") And FrmSettings.CBSubCircumcised.Checked = False Then Return False
+            If FilterString.Contains("@SubNotCircumcised") And FrmSettings.CBSubCircumcised.Checked = True Then Return False
+            If FilterString.Contains("@SubPierced") And FrmSettings.CBSubPierced.Checked = False Then Return False
+            If FilterString.Contains("@SubNotPierced") And FrmSettings.CBSubPierced.Checked = True Then Return False
+            If FilterString.Contains("@BeforeTease") And ssh.BeforeTease = False Then Return False
+            If FilterString.Contains("@OrgasmDenied") And ssh.OrgasmDenied = False Then Return False
+            If FilterString.Contains("@OrgasmAllowed") And ssh.OrgasmAllowed = False Then Return False
+            If FilterString.Contains("@OrgasmRuined") And ssh.OrgasmRuined = False Then Return False
 
-			If FilterString.Contains("@VideoHardcore") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "Hardcore" Then Return False
-			End If
-			If FilterString.Contains("@VideoSoftcore") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "Softcore" Then Return False
-			End If
-			If FilterString.Contains("@VideoLesbian") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "Lesbian" Then Return False
-			End If
-			If FilterString.Contains("@VideoBlowjob") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "Blowjob" Then Return False
-			End If
-			If FilterString.Contains("@VideoFemdom") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "Femdom" Then Return False
-			End If
-			If FilterString.Contains("@VideoFemsub") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "Femsub" Then Return False
-			End If
-			If FilterString.Contains("@VideoGeneral") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "General" Then Return False
-			End If
+            If FilterString.Contains("@ApathyLevel1") And FrmSettings.NBEmpathy.Value <> 1 Then Return False
+            If FilterString.Contains("@ApathyLevel2") And FrmSettings.NBEmpathy.Value <> 2 Then Return False
+            If FilterString.Contains("@ApathyLevel3") And FrmSettings.NBEmpathy.Value <> 3 Then Return False
+            If FilterString.Contains("@ApathyLevel4") And FrmSettings.NBEmpathy.Value <> 4 Then Return False
+            If FilterString.Contains("@ApathyLevel5") And FrmSettings.NBEmpathy.Value <> 5 Then Return False
+            If FilterString.Contains("@InChastity") And My.Settings.Chastity = False Then Return False
+            If FilterString.Contains("@NotInChastity") And My.Settings.Chastity = True Then Return False
+            If FilterString.Contains("@HasChastity") And FrmSettings.CBOwnChastity.Checked = False Then Return False
+            If FilterString.Contains("@DoesNotHaveChastity") And FrmSettings.CBOwnChastity.Checked = True Then Return False
+            If FilterString.Contains("@ChastityPA") And FrmSettings.CBChastityPA.Checked = False Then Return False
+            If FilterString.Contains("@ChastitySpikes") And FrmSettings.CBChastitySpikes.Checked = False Then Return False
+            If FilterString.Contains("@VitalSub") And CBVitalSub.Checked = False Then Return False
+            If FilterString.Contains("@VitalSubAssignment") Then
+                If CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False Then Return False
+            End If
 
-			If FilterString.Contains("@VideoHardcoreDomme") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "HardcoreD" Then Return False
-			End If
-			If FilterString.Contains("@VideoSoftcoreDomme") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "SoftcoreD" Then Return False
-			End If
-			If FilterString.Contains("@VideoLesbianDomme") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "LesbianD" Then Return False
-			End If
-			If FilterString.Contains("@VideoBlowjobDomme") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "BlowjobD" Then Return False
-			End If
-			If FilterString.Contains("@VideoFemdomDomme") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "FemdomD" Then Return False
-			End If
-			If FilterString.Contains("@VideoFemsubDomme") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "FemsubD" Then Return False
-			End If
-			If FilterString.Contains("@VideoGeneralDomme") Then
-				If ssh.VideoTease = False Or ssh.VideoType <> "GeneralD" Then Return False
-			End If
+            If FilterString.Contains("@RuinTaunt") Then
+                If ssh.EdgeToRuin = False Or ssh.EdgeToRuinSecret = True Then Return False
+            End If
 
-			If FilterString.Contains("@CockTorture") And FrmSettings.CBCBTCock.Checked = False Then Return False
-			If FilterString.Contains("@BallTorture") And FrmSettings.CBCBTBalls.Checked = False Then Return False
-			If FilterString.Contains("@BallTorture0") And ssh.CBTBallsCount <> 0 Then Return False
-			If FilterString.Contains("@BallTorture1") And ssh.CBTBallsCount <> 1 Then Return False
-			If FilterString.Contains("@BallTorture2") And ssh.CBTBallsCount <> 2 Then Return False
-			If FilterString.Contains("@BallTorture3") And ssh.CBTBallsCount <> 3 Then Return False
-			If FilterString.Contains("@BallTorture4+") And ssh.CBTBallsCount < 4 Then Return False
-			If FilterString.Contains("@CockTorture0") And ssh.CBTCockCount <> 0 Then Return False
-			If FilterString.Contains("@CockTorture1") And ssh.CBTCockCount <> 1 Then Return False
-			If FilterString.Contains("@CockTorture2") And ssh.CBTCockCount <> 2 Then Return False
-			If FilterString.Contains("@CockTorture3") And ssh.CBTCockCount <> 3 Then Return False
-			If FilterString.Contains("@CockTorture4+") And ssh.CBTCockCount < 4 Then Return False
+            If FilterString.Contains("@VideoHardcore") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "Hardcore" Then Return False
+            End If
+            If FilterString.Contains("@VideoSoftcore") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "Softcore" Then Return False
+            End If
+            If FilterString.Contains("@VideoLesbian") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "Lesbian" Then Return False
+            End If
+            If FilterString.Contains("@VideoBlowjob") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "Blowjob" Then Return False
+            End If
+            If FilterString.Contains("@VideoFemdom") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "Femdom" Then Return False
+            End If
+            If FilterString.Contains("@VideoFemsub") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "Femsub" Then Return False
+            End If
+            If FilterString.Contains("@VideoGeneral") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "General" Then Return False
+            End If
 
-			If FilterString.Contains("@Stroking") Or FilterString.Contains("@SubStroking") Then
-				If ssh.SubStroking = False Then Return False
-			End If
+            If FilterString.Contains("@VideoHardcoreDomme") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "HardcoreD" Then Return False
+            End If
+            If FilterString.Contains("@VideoSoftcoreDomme") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "SoftcoreD" Then Return False
+            End If
+            If FilterString.Contains("@VideoLesbianDomme") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "LesbianD" Then Return False
+            End If
+            If FilterString.Contains("@VideoBlowjobDomme") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "BlowjobD" Then Return False
+            End If
+            If FilterString.Contains("@VideoFemdomDomme") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "FemdomD" Then Return False
+            End If
+            If FilterString.Contains("@VideoFemsubDomme") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "FemsubD" Then Return False
+            End If
+            If FilterString.Contains("@VideoGeneralDomme") Then
+                If ssh.VideoTease = False Or ssh.VideoType <> "GeneralD" Then Return False
+            End If
 
-			If FilterString.Contains("@NotStroking") Or FilterString.Contains("@SubNotStroking") Then
-				If ssh.SubStroking = True Then Return False
-			End If
+            If FilterString.Contains("@CockTorture") And FrmSettings.CBCBTCock.Checked = False Then Return False
+            If FilterString.Contains("@BallTorture") And FrmSettings.CBCBTBalls.Checked = False Then Return False
+            If FilterString.Contains("@BallTorture0") And ssh.CBTBallsCount <> 0 Then Return False
+            If FilterString.Contains("@BallTorture1") And ssh.CBTBallsCount <> 1 Then Return False
+            If FilterString.Contains("@BallTorture2") And ssh.CBTBallsCount <> 2 Then Return False
+            If FilterString.Contains("@BallTorture3") And ssh.CBTBallsCount <> 3 Then Return False
+            If FilterString.Contains("@BallTorture4+") And ssh.CBTBallsCount < 4 Then Return False
+            If FilterString.Contains("@CockTorture0") And ssh.CBTCockCount <> 0 Then Return False
+            If FilterString.Contains("@CockTorture1") And ssh.CBTCockCount <> 1 Then Return False
+            If FilterString.Contains("@CockTorture2") And ssh.CBTCockCount <> 2 Then Return False
+            If FilterString.Contains("@CockTorture3") And ssh.CBTCockCount <> 3 Then Return False
+            If FilterString.Contains("@CockTorture4+") And ssh.CBTCockCount < 4 Then Return False
 
-			If FilterString.Contains("@Edging") Or FilterString.Contains("@SubEdging") Then
-				If ssh.SubEdging = False Then Return False
-			End If
+            If FilterString.Contains("@Stroking") Or FilterString.Contains("@SubStroking") Then
+                If ssh.SubStroking = False Then Return False
+            End If
 
-			If FilterString.Contains("@NotEdging") Or FilterString.Contains("@SubNotEdging") Then
-				If ssh.SubEdging = True Then Return False
-			End If
+            If FilterString.Contains("@NotStroking") Or FilterString.Contains("@SubNotStroking") Then
+                If ssh.SubStroking = True Then Return False
+            End If
 
-			If FilterString.Contains("@HoldingTheEdge") Or FilterString.Contains("@SubHoldingTheEdge") Then
-				If ssh.SubHoldingEdge = False Then Return False
-			End If
+            If FilterString.Contains("@Edging") Or FilterString.Contains("@SubEdging") Then
+                If ssh.SubEdging = False Then Return False
+            End If
 
-			If FilterString.Contains("@NotHoldingTheEdge") Or FilterString.Contains("@SubNotHoldingTheEdge") Then
-				If ssh.SubHoldingEdge = True Then Return False
-			End If
+            If FilterString.Contains("@NotEdging") Or FilterString.Contains("@SubNotEdging") Then
+                If ssh.SubEdging = True Then Return False
+            End If
 
-			If FilterString.Contains("@Morning") And ssh.GeneralTime <> "Morning" Then Return False
-			If FilterString.Contains("@Afternoon") And ssh.GeneralTime <> "Afternoon" Then Return False
-			If FilterString.Contains("@Night") And ssh.GeneralTime <> "Night" Then Return False
-			If FilterString.Contains("@GoodMood") And ssh.DommeMood <= FrmSettings.NBDomMoodMax.Value Then Return False
-			If FilterString.Contains("@BadMood") And ssh.DommeMood >= FrmSettings.NBDomMoodMin.Value Then Return False
-			If FilterString.Contains("@NeutralMood") Then
-				If ssh.DommeMood > FrmSettings.NBDomMoodMax.Value Or ssh.DommeMood < FrmSettings.NBDomMoodMin.Value Then Return False
-			End If
+            If FilterString.Contains("@HoldingTheEdge") Or FilterString.Contains("@SubHoldingTheEdge") Then
+                If ssh.SubHoldingEdge = False Then Return False
+            End If
 
-			If FilterString.Contains("@OrgasmRestricted") And ssh.OrgasmRestricted = False Then Return False
-			If FilterString.Contains("@OrgasmNotRestricted") And ssh.OrgasmRestricted = True Then Return False
-			If FilterString.Contains("@SubWorshipping") And ssh.WorshipMode = False Then Return False
-			If FilterString.Contains("@SubNotWorshipping") And ssh.WorshipMode = True Then Return False
-			If FilterString.Contains("@LongHold") Then
-				If ssh.LongHold = False Or ssh.SubHoldingEdge = False Then Return False
-			End If
+            If FilterString.Contains("@NotHoldingTheEdge") Or FilterString.Contains("@SubNotHoldingTheEdge") Then
+                If ssh.SubHoldingEdge = True Then Return False
+            End If
 
-			If FilterString.Contains("@ExtremeHold") Then
-				If ssh.ExtremeHold = False Or ssh.SubHoldingEdge = False Then Return False
-			End If
+            If FilterString.Contains("@Morning") And ssh.GeneralTime <> "Morning" Then Return False
+            If FilterString.Contains("@Afternoon") And ssh.GeneralTime <> "Afternoon" Then Return False
+            If FilterString.Contains("@Night") And ssh.GeneralTime <> "Night" Then Return False
+            If FilterString.Contains("@GoodMood") And ssh.DommeMood <= FrmSettings.NBDomMoodMax.Value Then Return False
+            If FilterString.Contains("@BadMood") And ssh.DommeMood >= FrmSettings.NBDomMoodMin.Value Then Return False
+            If FilterString.Contains("@NeutralMood") Then
+                If ssh.DommeMood > FrmSettings.NBDomMoodMax.Value Or ssh.DommeMood < FrmSettings.NBDomMoodMin.Value Then Return False
+            End If
 
-			If FilterString.Contains("@AssWorship") Then
-				If ssh.WorshipTarget <> "Ass" Or ssh.WorshipMode = False Then Return False
-			End If
+            If FilterString.Contains("@OrgasmRestricted") And ssh.OrgasmRestricted = False Then Return False
+            If FilterString.Contains("@OrgasmNotRestricted") And ssh.OrgasmRestricted = True Then Return False
+            If FilterString.Contains("@SubWorshipping") And ssh.WorshipMode = False Then Return False
+            If FilterString.Contains("@SubNotWorshipping") And ssh.WorshipMode = True Then Return False
+            If FilterString.Contains("@LongHold") Then
+                If ssh.LongHold = False Or ssh.SubHoldingEdge = False Then Return False
+            End If
 
-			If FilterString.Contains("@BoobWorship") Then
-				If ssh.WorshipTarget <> "Boobs" Or ssh.WorshipMode = False Then Return False
-			End If
+            If FilterString.Contains("@ExtremeHold") Then
+                If ssh.ExtremeHold = False Or ssh.SubHoldingEdge = False Then Return False
+            End If
 
-			If FilterString.Contains("@PussyWorship") Then
-				If ssh.WorshipTarget <> "Pussy" Or ssh.WorshipMode = False Then Return False
-			End If
+            If FilterString.Contains("@AssWorship") Then
+                If ssh.WorshipTarget <> "Ass" Or ssh.WorshipMode = False Then Return False
+            End If
 
-			If FilterString.Contains("@Contact1") Then
-				If ssh.GlitterTease = False Or Not ssh.Group.Contains("1") Then Return False
-			End If
+            If FilterString.Contains("@BoobWorship") Then
+                If ssh.WorshipTarget <> "Boobs" Or ssh.WorshipMode = False Then Return False
+            End If
 
-			If FilterString.Contains("@Contact2") Then
-				If ssh.GlitterTease = False Or Not ssh.Group.Contains("2") Then Return False
-			End If
+            If FilterString.Contains("@PussyWorship") Then
+                If ssh.WorshipTarget <> "Pussy" Or ssh.WorshipMode = False Then Return False
+            End If
 
-			If FilterString.Contains("@Contact3") Then
-				If ssh.GlitterTease = False Or Not ssh.Group.Contains("3") Then Return False
-			End If
+            If FilterString.Contains("@Contact1") Then
+                If ssh.GlitterTease = False Or Not ssh.Group.Contains("1") Then Return False
+            End If
 
-			If FilterString.Contains("@Info") Then Return False
-			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			' Single word filters - End
-			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			Return True
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'                                            All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(String.Format("Exceoption occured while checking line ""{0}"".", OrgFilterString),
-										 ex, "GetFilter(String, Boolean)")
-			Return False
-		End Try
+            If FilterString.Contains("@Contact2") Then
+                If ssh.GlitterTease = False Or Not ssh.Group.Contains("2") Then Return False
+            End If
+
+            If FilterString.Contains("@Contact3") Then
+                If ssh.GlitterTease = False Or Not ssh.Group.Contains("3") Then Return False
+            End If
+
+            If FilterString.Contains("@Info") Then Return False
+            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+            ' Single word filters - End
+            '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+            Return True
+        Catch ex As Exception
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            '                                            All Errors
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            Log.WriteError(String.Format("Exceoption occured while checking line ""{0}"".", OrgFilterString),
+                    ex, "GetFilter(String, Boolean)")
+            Return False
+        End Try
 	End Function
 
 
