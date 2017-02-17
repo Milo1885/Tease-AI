@@ -6,6 +6,19 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: initialized in v0.54.5.1
 	
+# Changelog - Patch 54.7.0
+
+* Added Features:
+    * @FlagOr() Command Filter. Check multiple flags and will read the line if any of them are present. For example, @FlagOr(Flag1, Flag2) - If Flag1 or Flag 2 exists, then Tease AI will read the line.
+
+* Bugfixes:
+    * @RT() and @RandomText() were not working correctly (Stefaf)
+	* @NotFlag() was only checking for any flags not to be present when parsing multiple flags instead of all flags not to be present. (dariobrun) 	
+	
+* Miscellaneous:
+    * Minor edits to State.vb so I could compile it using VS 2010 (Notay)
+	* Cleaned up code for saving chatlogs (pepsifreak)
+	
 # Changelog - Patch 54.6.0
 
 * Added Features:
