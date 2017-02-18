@@ -9,11 +9,18 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 # Changelog - Patch 54.7.0
 
 * Added Features:
-    * @FlagOr() Command Filter. Check multiple flags and will read the line if any of them are present. For example, @FlagOr(Flag1, Flag2) - If Flag1 or Flag 2 exists, then Tease AI will read the line.
+    * @CountVar[] Command. Allows you to connect a timer to a specified Variable that will change its value by 1 every second.
+	  Usage:
+	  @CountVar[VarName] - Begins a timer that adds 1 to VarName every second
+      @CountVar[VarName, down] - Begins a timer that subtracts 1 from VarName every second
+      @CountVar[VarName, stop] - Stops any timer associated with VarName (up or down)
+	* @FlagOr() Command Filter. Check multiple flags and will read the line if any of them are present. For example, @FlagOr(Flag1, Flag2) - If Flag1 or Flag 2 exists, then Tease AI will read the line. (dariobrun) 
 
 * Bugfixes:
     * @RT() and @RandomText() were not working correctly (Stefaf)
-	* @NotFlag() was only checking for any flags not to be present when parsing multiple flags instead of all flags not to be present. (dariobrun) 	
+	* @NotFlag() was only checking for any flags not to be present when parsing multiple flags instead of all flags not to be present. (dariobrun)
+    * Certain local genre images were not using their subdirectories correctly. (dariobrun)
+    * Local Boob images were not using their subdirectories correctly. (dariobrun) 	
 	
 * Miscellaneous:
     * Minor edits to State.vb so I could compile it using VS 2010 (Notay)

@@ -550,7 +550,10 @@ Public Class SessionState
 	<Description("If True stroking continues when sub is on edge.")>
 	Public Property TauntEdging As Boolean = False
 
-	Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
+    Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
+
+    Public Property CountDownList As New List(Of String)
+    Public Property CountUpList As New List(Of String)
 
 #Region "----------------------------------- Only for Serialization -------------------------------------"
 

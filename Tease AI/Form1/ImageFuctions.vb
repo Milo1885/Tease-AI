@@ -393,59 +393,59 @@ NoneFound:
 					.SYS_NoPornAllowed = SysNoPornAllowed
 				})
 
-			.Add(ImageGenre.Boobs, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Boobs,
-					.LocalDirectory = If(My.Settings.CBIBoobs, My.Settings.LBLBoobPath, ""),
-					.LocalSubDirectories = My.Settings.CBButtSubDir,
-					.UrlFile = If(My.Settings.UrlFileBoobsEnabled, My.Settings.UrlFileBoobs, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+            .Add(ImageGenre.Boobs, New ImageDataContainer With
+              {
+              .Name = ImageGenre.Boobs,
+              .LocalDirectory = If(My.Settings.CBIBoobs, My.Settings.LBLBoobPath, ""),
+              .LocalSubDirectories = My.Settings.CBBoobSubDir,
+              .UrlFile = If(My.Settings.UrlFileBoobsEnabled, My.Settings.UrlFileBoobs, ""),
+              .SYS_NoPornAllowed = SysNoPornAllowed
+             })
 
-			.Add(ImageGenre.Hardcore, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Hardcore,
-					.LocalDirectory = If(My.Settings.CBIHardcore, My.Settings.IHardcore, ""),
-					.LocalSubDirectories = My.Settings.CBHardcore,
-					.UrlFile = If(My.Settings.UrlFileHardcoreEnabled, My.Settings.UrlFileHardcore, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+            .Add(ImageGenre.Hardcore, New ImageDataContainer With
+              {
+              .Name = ImageGenre.Hardcore,
+              .LocalDirectory = If(My.Settings.CBIHardcore, My.Settings.IHardcore, ""),
+              .LocalSubDirectories = My.Settings.IHardcoreSD,
+              .UrlFile = If(My.Settings.UrlFileHardcoreEnabled, My.Settings.UrlFileHardcore, ""),
+              .SYS_NoPornAllowed = SysNoPornAllowed
+             })
 
-			.Add(ImageGenre.Softcore, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Softcore,
-					.LocalDirectory = If(My.Settings.CBISoftcore, My.Settings.ISoftcore, ""),
-					.LocalSubDirectories = My.Settings.CBSoftcore,
-					.UrlFile = If(My.Settings.UrlFileSoftcoreEnabled, My.Settings.UrlFileSoftcore, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+            .Add(ImageGenre.Softcore, New ImageDataContainer With
+              {
+              .Name = ImageGenre.Softcore,
+              .LocalDirectory = If(My.Settings.CBISoftcore, My.Settings.ISoftcore, ""),
+              .LocalSubDirectories = My.Settings.ISoftcoreSD,
+              .UrlFile = If(My.Settings.UrlFileSoftcoreEnabled, My.Settings.UrlFileSoftcore, ""),
+              .SYS_NoPornAllowed = SysNoPornAllowed
+             })
 
-			.Add(ImageGenre.Lesbian, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Lesbian,
-					.LocalDirectory = If(My.Settings.CBILesbian, My.Settings.ILesbian, ""),
-					.LocalSubDirectories = My.Settings.CBLesbian,
-					.UrlFile = If(My.Settings.UrlFileLesbianEnabled, My.Settings.UrlFileLesbian, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+            .Add(ImageGenre.Lesbian, New ImageDataContainer With
+              {
+              .Name = ImageGenre.Lesbian,
+              .LocalDirectory = If(My.Settings.CBILesbian, My.Settings.ILesbian, ""),
+              .LocalSubDirectories = My.Settings.ILesbianSD,
+              .UrlFile = If(My.Settings.UrlFileLesbianEnabled, My.Settings.UrlFileLesbian, ""),
+              .SYS_NoPornAllowed = SysNoPornAllowed
+             })
 
-			.Add(ImageGenre.Blowjob, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Blowjob,
-					.LocalDirectory = If(My.Settings.CBIBlowjob, My.Settings.IBlowjob, ""),
-					.LocalSubDirectories = My.Settings.CBBlowjob,
-					.UrlFile = If(My.Settings.UrlFileBlowjobEnabled, My.Settings.UrlFileBlowjob, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+            .Add(ImageGenre.Blowjob, New ImageDataContainer With
+              {
+              .Name = ImageGenre.Blowjob,
+              .LocalDirectory = If(My.Settings.CBIBlowjob, My.Settings.IBlowjob, ""),
+              .LocalSubDirectories = My.Settings.IBlowjobSD,
+              .UrlFile = If(My.Settings.UrlFileBlowjobEnabled, My.Settings.UrlFileBlowjob, ""),
+              .SYS_NoPornAllowed = SysNoPornAllowed
+             })
 
-			.Add(ImageGenre.Femdom, New ImageDataContainer With
-				 {
-					.Name = ImageGenre.Femdom,
-					.LocalDirectory = If(My.Settings.CBIFemdom, My.Settings.IFemdom, ""),
-					.LocalSubDirectories = My.Settings.CBFemdom,
-					.UrlFile = If(My.Settings.UrlFileFemdomEnabled, My.Settings.UrlFileFemdom, ""),
-					.SYS_NoPornAllowed = SysNoPornAllowed
-				})
+            .Add(ImageGenre.Femdom, New ImageDataContainer With
+              {
+              .Name = ImageGenre.Femdom,
+              .LocalDirectory = If(My.Settings.CBIFemdom, My.Settings.IFemdom, ""),
+              .LocalSubDirectories = My.Settings.IFemdomSD,
+              .UrlFile = If(My.Settings.UrlFileFemdomEnabled, My.Settings.UrlFileFemdom, ""),
+              .SYS_NoPornAllowed = SysNoPornAllowed
+             })
 
 			.Add(ImageGenre.Lezdom, New ImageDataContainer With
 				 {

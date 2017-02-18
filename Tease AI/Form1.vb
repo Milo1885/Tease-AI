@@ -12820,7 +12820,64 @@ VTSkip:
 			Else
 				StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "")
 			End If
-		End If
+        End If
+
+        If StringClean.Contains("@CountVar[") Then
+
+            Dim CountFlag As String = GetParentheses(StringClean, "@CountVar[")
+
+            If CountFlag.Contains(",") Then
+
+                CountFlag = FixCommas(CountFlag)
+                Dim CountArray() As String = CountFlag.Split(",")
+
+                If CountArray(1).ToLower.Contains("stop") Then
+                    If ssh.CountDownList.Count > 0 Then
+                        For i As Integer = ssh.CountDownList.Count - 1 To 0 Step -1
+                            If ssh.CountDownList(i).Contains(CountArray(0)) Then ssh.CountDownList.RemoveAt(i)
+                        Next
+                    End If
+                    If ssh.CountUpList.Count > 0 Then
+                        For i As Integer = ssh.CountUpList.Count - 1 To 0 Step -1
+                            If ssh.CountUpList(i).Contains(CountArray(0)) Then ssh.CountUpList.RemoveAt(i)
+                        Next
+                    End If
+
+                Else
+
+                    If CountArray(1).ToLower.Contains("down") Then
+                        ssh.CountDownList.Add(CountArray(0))
+                        If ssh.CountUpList.Count > 0 Then
+                            For i As Integer = ssh.CountUpList.Count - 1 To 0 Step -1
+                                If ssh.CountUpList(i).Contains(CountArray(0)) Then ssh.CountUpList.RemoveAt(i)
+                            Next
+                        End If
+                    Else
+                        ssh.CountUpList.Add(CountArray(0))
+                        If ssh.CountDownList.Count > 0 Then
+                            For i As Integer = ssh.CountDownList.Count - 1 To 0 Step -1
+                                If ssh.CountDownList(i).Contains(CountArray(0)) Then ssh.CountDownList.RemoveAt(i)
+                            Next
+                        End If
+                    End If
+
+                End If
+
+            Else
+
+                ssh.CountUpList.Add(CountFlag)
+                If ssh.CountDownList.Count > 0 Then
+                    For i As Integer = ssh.CountDownList.Count - 1 To 0 Step -1
+                        If ssh.CountDownList(i).Contains(CountFlag) Then ssh.CountDownList.RemoveAt(i)
+                    Next
+                End If
+
+            End If
+
+            StringClean = StringClean.Replace("@CountVar[" & GetParentheses(StringClean, "@CountVar[") & "]", "")
+        End If
+
+
 
 		If StringClean.Contains("@Debug") Then
 
@@ -13864,6 +13921,10 @@ VTSkip:
 
             If FilterString.Contains("@Day(") Then
                 If GetMatch(FilterString, "@Day(", DateAndTime.Now.Day) = False Then Return False
+            End If
+
+            If FilterString.Contains("@DayOfWeek(") Then
+                If GetMatch(FilterString, "@DayOfWeek(", WeekdayName(Weekday(DateAndTime.Now))) = False Then Return False
             End If
 
             If FilterString.Contains("@SetModule(") Then
@@ -17078,11 +17139,12 @@ saveImage:
 			If CFClean.Contains("Or[") Then CFClean = CFClean.Replace("Or[" & GetParentheses(CFClean, "Or[", 2) & "]", "")
 		End If
 
-		For Each com As String In New List(Of String) From
-				{"@Cup(", "@AllowsOrgasm(", "@RuinsOrgasm(", "@DommeLevel(",
-				"@ApathyLevel(", "@Month(", "@Day(", "@Flag(", "@NotFlag("}
-			If CFClean.Contains(com) Then CFClean = CFClean.Replace(com & GetParentheses(CFClean, com) & ")", "")
-		Next
+        For Each com As String In New List(Of String) From
+          {"@Cup(", "@AllowsOrgasm(", "@RuinsOrgasm(", "@DommeLevel(",
+          "@ApathyLevel(", "@Month(", "@Day(", "@Flag(", "@NotFlag(",
+          "@DayOfWeek("}
+            If CFClean.Contains(com) Then CFClean = CFClean.Replace(com & GetParentheses(CFClean, com) & ")", "")
+        Next
 
 		'===============================================================================
 		'					  Clean all other remaining @Commands
@@ -18218,7 +18280,47 @@ restartInstantly:
 			If DDiff > 4 And DDiff < 12 Then ssh.GeneralTime = "Afternoon"
 			If DDiff > -21 And DDiff < -11 Then ssh.GeneralTime = "Afternoon"
 
-		End If
+        End If
+
+        If ssh.CountUpList.Count > 0 Then
+
+            For i As Integer = 0 To ssh.CountUpList.Count - 1
+                Dim Val1 As Integer
+
+                'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
+                If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountUpList(i)) Then
+                    Val1 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountUpList(i)))
+                Else
+                    Val1 = 0
+                End If
+
+                Val1 += 1
+
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountUpList(i), Val1, False)
+
+            Next
+
+        End If
+
+        If ssh.CountDownList.Count > 0 Then
+
+            For i As Integer = 0 To ssh.CountDownList.Count - 1
+                Dim Val1 As Integer
+
+                'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
+                If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountDownList(i)) Then
+                    Val1 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountDownList(i)))
+                Else
+                    Val1 = 0
+                End If
+
+                Val1 -= 1
+
+                My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.CountDownList(i), Val1, False)
+
+            Next
+
+        End If
 
 		' #DEBUG
 
