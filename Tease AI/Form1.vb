@@ -273,6 +273,10 @@ ByVal lpstrReturnString As String, ByVal uReturnLength As Integer, ByVal hwndCal
 	Private Sub Form1_Load(sender As Object, e As System.EventArgs) Handles Me.Load
 		Try
 retryStart:
+			ssh.dommePresent = True
+			ssh.contact1Present = False
+			ssh.contact2Present = False
+			ssh.contact3Present = False
 			FrmSplash.PBSplash.Value = 0
 			Debug.Print("Form 2 Opened")
 
@@ -464,7 +468,10 @@ retryStart:
 
 
 
-			If My.Settings.DomName <> "" Then domName.Text = My.Settings.DomName
+			If My.Settings.DomName <> "" Then
+				ssh.tempDomName = My.Settings.DomName
+				domName.Text = ssh.tempDomName
+			End If
 			If My.Settings.SubName <> "" Then subName.Text = My.Settings.SubName
 
 
@@ -936,6 +943,7 @@ retryStart:
 				ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
 				ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
 				ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
+				ssh.SlideshowContactRandom = New ContactData(ContactType.Random)
 			Catch ex As Exception
 
 			End Try
@@ -1234,6 +1242,10 @@ retryStart:
 
 
 
+		ssh.dommePresent = True
+		ssh.contact1Present = False
+		ssh.contact2Present = False
+		ssh.contact3Present = False
 
 		TeaseTimer.Stop()
 
@@ -1440,8 +1452,8 @@ retryStart:
 
 		If ssh.IsTyping = True Then
 
-			ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
-			ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
+			ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
+			ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
 			ChatReadyState()
 		End If
 
@@ -1537,6 +1549,8 @@ retryStart:
 								Dim DomU As String = UCase(ssh.DomChat.Substring(0, 1))
 								ssh.DomChat = ssh.DomChat.Remove(0, 1)
 								ssh.DomChat = DomU & ssh.DomChat
+								ssh.nameErrors += 1
+								ssh.wrongAttempt = True
 							End If
 							TypingDelay()
 							Return
@@ -1544,11 +1558,12 @@ retryStart:
 
 
 
-
 						If FrmSettings.CBHonorificCapitalized.Checked = True Then
 							If WordExists(ssh.ChatString, Capitalize(FrmSettings.TBHonorific.Text)) = False Then
 								'If Not ChatString.Contains(FrmSettings.TBHonorific.Text) Then
 								ssh.DomChat = "#CapitalizeHonorific"
+								ssh.nameErrors += 1
+								ssh.wrongAttempt = True
 								TypingDelay()
 								Return
 							End If
@@ -1750,8 +1765,8 @@ WritingTaskLine:
 
 				If ssh.IsTyping = True Then
 
-					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
-					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
+					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
+					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
 					ChatReadyState()
 				End If
 
@@ -1823,8 +1838,8 @@ WritingTaskLine:
 
 				If ssh.IsTyping = True Then
 
-					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
-					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & domName.Text & " is typing...</i></font>"
+					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
+					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
 					ChatReadyState()
 				End If
 
@@ -2601,7 +2616,7 @@ EdgeSkip:
 		'If BeforeTease = True And CBDebugAwareness.Checked = False Then Return
 
 		Dim CheckResponse As String = UCase(ssh.ChatString)
-		CheckResponse = CheckResponse.Replace(UCase(domName.Text), "")
+		CheckResponse = CheckResponse.Replace(UCase(ssh.tempDomName), "")
 		CheckResponse = CheckResponse.Replace(UCase(FrmSettings.TBHonorific.Text), "")
 		CheckResponse = CheckResponse.Replace("!", "")
 		CheckResponse = CheckResponse.Replace("?", "")
@@ -3153,12 +3168,14 @@ FoundResponse:
 		AddResponse = False
 
 		If My.Settings.Chastity = True Then
+			If ssh.CBTCockFlag Then
+				SubState = "CBT Cock"
+				GoTo FoundState
+			ElseIf ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Then
+				SubState = "CBT Balls"
+				GoTo FoundState
+			End If
 			SubState = "Chastity"
-			GoTo FoundState
-		End If
-
-		If ssh.BeforeTease = True Then
-			SubState = "Before Tease"
 			GoTo FoundState
 		End If
 
@@ -3194,6 +3211,11 @@ FoundResponse:
 
 		If ssh.SubStroking = True Then
 			SubState = "Sub Stroking"
+			GoTo FoundState
+		End If
+
+		If ssh.BeforeTease = True Then
+			SubState = "Before Tease"
 			GoTo FoundState
 		End If
 
@@ -3574,6 +3596,8 @@ NullSkip:
 									Dim DomU As String = UCase(ssh.DomChat.Substring(0, 1))
 									ssh.DomChat = ssh.DomChat.Remove(0, 1)
 									ssh.DomChat = DomU & ssh.DomChat
+									ssh.nameErrors += 1
+									ssh.wrongAttempt = True
 								End If
 								TypingDelay()
 								Return
@@ -3581,6 +3605,8 @@ NullSkip:
 							If FrmSettings.CBHonorificCapitalized.Checked = True Then
 								If Not ssh.ChatString.Contains(FrmSettings.TBHonorific.Text) Then
 									ssh.DomChat = "#DomHonorific"
+									ssh.nameErrors += 1
+									ssh.wrongAttempt = True
 									TypingDelay()
 									Return
 								End If
@@ -3636,8 +3662,6 @@ NullSkip:
 			Dim SplitParts As String() = Splits(0).Split(New Char() {","c})
 
 			For i As Integer = 0 To SplitParts.Length - 1
-
-
 				If UCase(TempChatString).Contains(UCase(SplitParts(i))) Then
 
 					If ssh.CheckYes = True Or ssh.CheckNo = True Then
@@ -3648,6 +3672,8 @@ NullSkip:
 									Dim DomU As String = UCase(ssh.DomChat.Substring(0, 1))
 									ssh.DomChat = ssh.DomChat.Remove(0, 1)
 									ssh.DomChat = DomU & ssh.DomChat
+									ssh.nameErrors += 1
+									ssh.wrongAttempt = True
 								End If
 								TypingDelay()
 								Return
@@ -3655,22 +3681,15 @@ NullSkip:
 							If FrmSettings.CBHonorificCapitalized.Checked = True Then
 								If Not ssh.ChatString.Contains(FrmSettings.TBHonorific.Text) Then
 									ssh.DomChat = "#CapitalizeHonorific"
+									ssh.nameErrors += 1
+									ssh.wrongAttempt = True
 									TypingDelay()
 									Return
 								End If
 							End If
 						End If
 					End If
-
-					'Splits(0) = ""
-					'DomChat = Join(Splits, Nothing)
-
-					'DomChat = Join(Splits, "]")
-					'DomChat = DomChat.Replace(ChatReplace, "")
-
 					ssh.DomChat = ChatReplace
-
-					'DomChat = Splits(1)
 					GoTo FoundAnswer
 				End If
 			Next
@@ -3687,6 +3706,7 @@ FoundAnswer:
 		ssh.YesOrNo = False
 		YesOrNoLanguageCheck()
 
+		ssh.foundAnswer = True
 
 
 		If ssh.MiniScript = True Then
@@ -3703,6 +3723,11 @@ FoundAnswer:
 NothingFound:
 
 		If InStr(UCase(lines(line)), UCase("DifferentAnswer")) <> 0 Then
+			If ssh.wrongAttempt Then
+				ssh.wrongAttempt = False
+			Else
+				If (ssh.nameErrors > 0) Then ssh.nameErrors -= 1
+			End If
 
 DifferentAnswer:
 			ssh.DomChat = lines(line)
@@ -3717,6 +3742,11 @@ LoopAnswer:
 
 
 		If InStr(UCase(lines(line)), UCase("AcceptAnswer")) <> 0 Then
+			If ssh.wrongAttempt Then
+				ssh.wrongAttempt = False
+			Else
+				If (ssh.nameErrors > 0) Then ssh.nameErrors -= 1
+			End If
 AcceptAnswer:
 			ssh.DomChat = lines(TempLineVal)
 			' TimedAnswerTimer.Stop()
@@ -4082,7 +4112,9 @@ ReturnCalled:
 				Else
 					If Not ssh.StrokeTauntVal > lines.Count - 1 Then
 						If lines(ssh.StrokeTauntVal) = "@End" Then
-							If ssh.ShowModule = True Then ssh.ModuleEnd = True
+							If ssh.CallReturns.Count = 0 Then
+								If ssh.ShowModule = True Then ssh.ModuleEnd = True
+							End If
 						End If
 					End If
 				End If
@@ -4131,7 +4163,21 @@ ReturnCalled:
 		'End If
 
 		' ### Debug
-
+	If ssh.nameErrors >= 3 And ssh.foundAnswer = True And ssh.wrongAttempt = True Then
+			ssh.DomChat = "#WrongHonorific"
+			TypingDelay()
+			If FrmSettings.CBCBTBalls.Checked = True Then
+				ssh.CBTBallsActive = True
+				ssh.CBTBallsFlag = True
+				ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
+			End If
+			ssh.YesOrNo = False
+			ssh.foundAnswer = False
+			ssh.wrongAttempt = False
+			ssh.StrokeTauntVal -= 1
+			Return
+		End If
+		
 ModuleEnd:
 
 		If ssh.ModuleEnd = True And ssh.AvoidTheEdgeGame = False Then
@@ -4818,11 +4864,11 @@ CancelGoto:
 				If ssh.RiskyDeal = True Then FrmCardList.LblRiskType.Visible = True
 				If ssh.NullResponse = False Then
 					ssh.IsTyping = True
-					Dim TypingName As String = domName.Text
+					Dim TypingName As String = ssh.tempDomName
 					If ssh.DomTask.Contains("@Contact1") Then TypingName = My.Settings.Glitter1
 					If ssh.DomTask.Contains("@Contact2") Then TypingName = My.Settings.Glitter2
 					If ssh.DomTask.Contains("@Contact3") Then TypingName = My.Settings.Glitter3
-					'If TypingName <> domName.Text Then JustShowedBlogImage = True
+					'If TypingName <> ssh.tempDomName Then JustShowedBlogImage = True
 
 					If ssh.DomTask.Contains("@EmoteMessage") Then ssh.EmoMes = True
 
@@ -4971,12 +5017,14 @@ NullResponse:
 				' Set LineSpeaker for typo corrections.
 				Dim LineSpeaker As String = ""
 
-				If ContactToUse.Equals(ssh.SlideshowContact1) Then
-					LineSpeaker = "@Contact1 "
-				ElseIf ContactToUse.Equals(ssh.SlideshowContact2) Then
-					LineSpeaker = "@Contact2 "
-				ElseIf ContactToUse.Equals(ssh.SlideshowContact3) Then
-					LineSpeaker = "@Contact3 "
+				If ssh.dommePresent Then
+					If ContactToUse.Equals(ssh.SlideshowContact1) Then
+						LineSpeaker = "@Contact1 "
+					ElseIf ContactToUse.Equals(ssh.SlideshowContact2) Then
+						LineSpeaker = "@Contact2 "
+					ElseIf ContactToUse.Equals(ssh.SlideshowContact3) Then
+						LineSpeaker = "@Contact3 "
+					End If
 				End If
 
 
@@ -5537,7 +5585,6 @@ DommeSlideshowFallback:
 
 
 				If ssh.SubGaveUp = True Then
-
 					ssh.SubGaveUp = False
 
 					ssh.AskedToGiveUpSection = False
@@ -5579,20 +5626,30 @@ DommeSlideshowFallback:
 
 					If ssh.CallReturns.Count() > 0 Then
 						ssh.ShowModule = True
+						ssh.AskedToGiveUpSection = False
 						ScriptTimer.Start()
-					ElseIf ssh.TeaseTick < 1 And ssh.Playlist = False Then
-						ssh.StrokeTauntVal = -1
-						RunLastScript()
-					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
-						ssh.StrokeTauntVal = -1
-						RunModuleScript(False)
+
+
+
+
+
+
 					Else
-						ssh.StrokeTauntVal = -1
-						RunLinkScript()
+						If ssh.TeaseTick < 1 And ssh.Playlist = False Then
+							ssh.StrokeTauntVal = -1
+							RunLastScript()
+						ElseIf WasStroking And Not WasEdging And Not WasHolding Then
+							ssh.StrokeTauntVal = -1
+							RunModuleScript(False)
+						ElseIf ssh.giveUpReturn Then
+							ssh.ShowModule = True
+							ssh.AskedToGiveUpSection = False
+							ScriptTimer.Start()
+						Else
+							ssh.StrokeTauntVal = -1
+							RunLinkScript()
+						End If
 					End If
-
-
-
 				End If
 
 
@@ -5675,7 +5732,7 @@ DommeSlideshowFallback:
 
 				If ssh.RiskyDeal = True Then FrmCardList.LblRiskType.Visible = True
 				ssh.IsTyping = True
-				Dim TypingName As String = domName.Text
+				Dim TypingName As String = ssh.tempDomName
 				If ssh.DomChat.Contains("@Contact1") Then TypingName = My.Settings.Glitter1
 				If ssh.DomChat.Contains("@Contact2") Then TypingName = My.Settings.Glitter2
 				If ssh.DomChat.Contains("@Contact3") Then TypingName = My.Settings.Glitter3
@@ -6215,16 +6272,29 @@ DommeSlideshowFallback:
 
 					If ssh.CallReturns.Count() > 0 Then
 						ssh.ShowModule = True
+						ssh.AskedToGiveUpSection = False
 						ScriptTimer.Start()
-					ElseIf ssh.TeaseTick < 1 And ssh.Playlist = False Then
-						ssh.StrokeTauntVal = -1
-						RunLastScript()
-					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
-						ssh.StrokeTauntVal = -1
-						RunModuleScript(False)
+
+
+
+
+
+
 					Else
-						ssh.StrokeTauntVal = -1
-						RunLinkScript()
+						If ssh.TeaseTick < 1 And ssh.Playlist = False Then
+							ssh.StrokeTauntVal = -1
+							RunLastScript()
+						ElseIf WasStroking And Not WasEdging And Not WasHolding Then
+							ssh.StrokeTauntVal = -1
+							RunModuleScript(False)
+						ElseIf ssh.giveUpReturn Then
+							ssh.ShowModule = True
+							ssh.AskedToGiveUpSection = False
+							ScriptTimer.Start()
+						Else
+							ssh.StrokeTauntVal = -1
+							RunLinkScript()
+						End If
 					End If
 
 				End If
@@ -7286,7 +7356,7 @@ CensorConstant:
 
 		Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
-		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNCDommeColor) & """><b>" & domName.Text & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
+		StatusName = StatusUpdates.DocumentText & "<img class=""floatright"" style="" float: left; width: 48; height: 48; border: 0;"" src=""" & DPic & """> <font face=""Cambria"" size=""3"" color=""" & Color2Html(My.Settings.GlitterNCDommeColor) & """><b>" & ssh.tempDomName & "</b></font> <br><font face=""Cambria"" size=""2"" color=""DarkGray"">" & Date.Today & "</font><br><br>"
 		StatusUpdates.DocumentText = StatusName & "<font face=""Cambria"" size=""2"" color=""" & TextColor & """>" & ssh.StatusText & "</font><br><br>"
 
 		'Debug.Print(GlitterImageAV)
@@ -7817,7 +7887,7 @@ StatusUpdateEnd:
 
 		StringClean = StringClean.Replace("#SubName", subName.Text)
 
-		StringClean = StringClean.Replace("#DomName", domName.Text)
+		StringClean = StringClean.Replace("#DomName", ssh.tempDomName)
 
 		StringClean = StringClean.Replace("#DomHonorific", FrmSettings.TBHonorific.Text)
 
@@ -8492,8 +8562,10 @@ RinseLatherRepeat:
 
 		If StringClean.Contains("@NewDommeSlideshow") Then
 			'TODO: Add Support for contact slideshows.
-			ssh.SlideshowMain.LoadNew()
-			ssh.SlideshowMain.CurrentImage()
+	
+	
+			ssh.newSlideshow = True
+			LoadDommeImageFolder()	
 			StringClean = StringClean.Replace("@NewDommeSlideshow", "")
 		End If
 
@@ -9623,7 +9695,7 @@ TaskCleanSet:
 			ssh.BronzeTokens += 1
 			My.Settings.BronzeTokens = ssh.BronzeTokens
 			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 1 Bronze token!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show(Me, ssh.tempDomName & " has given you 1 Bronze token!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add1Token", "")
 		End If
 
@@ -9631,7 +9703,7 @@ TaskCleanSet:
 			ssh.BronzeTokens += 3
 			My.Settings.BronzeTokens = ssh.BronzeTokens
 			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 3 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show(Me, ssh.tempDomName & " has given you 3 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add3Tokens", "")
 		End If
 
@@ -9640,14 +9712,14 @@ TaskCleanSet:
 			My.Settings.BronzeTokens = ssh.BronzeTokens
 			FrmCardList.UpdateBronzeTokens()
 			StringClean = StringClean.Replace("@Add5Tokens", "")
-			MessageBox.Show(Me, domName.Text & " has given you 5 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show(Me, ssh.tempDomName & " has given you 5 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 		End If
 
 		If StringClean.Contains("@Add10Tokens") Then
 			ssh.BronzeTokens += 10
 			My.Settings.BronzeTokens = ssh.BronzeTokens
 			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 10 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show(Me, ssh.tempDomName & " has given you 10 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add10Tokens", "")
 		End If
 
@@ -9655,7 +9727,7 @@ TaskCleanSet:
 			ssh.BronzeTokens += 25
 			My.Settings.BronzeTokens = ssh.BronzeTokens
 			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 25 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show(Me, ssh.tempDomName & " has given you 25 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add25Tokens", "")
 		End If
 
@@ -9663,7 +9735,7 @@ TaskCleanSet:
 			ssh.BronzeTokens += 50
 			My.Settings.BronzeTokens = ssh.BronzeTokens
 			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 50 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show(Me, ssh.tempDomName & " has given you 50 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add50Tokens", "")
 		End If
 
@@ -9671,7 +9743,7 @@ TaskCleanSet:
 			ssh.BronzeTokens += 100
 			My.Settings.BronzeTokens = ssh.BronzeTokens
 			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has given you 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show(Me, ssh.tempDomName & " has given you 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@Add50Tokens", "")
 		End If
 
@@ -9679,7 +9751,7 @@ TaskCleanSet:
 			ssh.BronzeTokens -= 100
 			My.Settings.BronzeTokens = ssh.BronzeTokens
 			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, domName.Text & " has taken 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			MessageBox.Show(Me, ssh.tempDomName & " has taken 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			StringClean = StringClean.Replace("@@Remove100Tokens", "")
 		End If
 
@@ -10897,6 +10969,7 @@ OrgasmDecided:
 						PicStripTSMIdommeSlideshow.Enabled = True
 					End If
 					ssh.SubGaveUp = True
+					If ssh.TasksCount >= 1 Then ssh.TasksCount = 0
 					ssh.FirstRound = False
 				Else
 					' you can't give up
@@ -11853,8 +11926,8 @@ ExternalAudio:
 		If StringClean.Contains("@AddTeaseTime(") Then
 
 			Dim OriginalFlag As String = ""
-
-			If TeaseTimer.Enabled = True Then
+			'I dont think this should work only when teaseTimer is enabled...what if i want to addteasetime somehow during an end script? (removing this, will allow for this too)
+			'If TeaseTimer.Enabled = True Then
 
 				Dim TeaseFlag As String = GetParentheses(StringClean, "@AddTeaseTime(")
 				OriginalFlag = TeaseFlag
@@ -11874,10 +11947,13 @@ ExternalAudio:
 					TeaseSeconds = Val(TeaseFlag)
 					If UCase(GetParentheses(StringClean, "@AddTeaseTime(")).Contains("M") Then TeaseSeconds *= 60
 					If UCase(GetParentheses(StringClean, "@AddTeaseTime(")).Contains("H") Then TeaseSeconds *= 3600
+				
+				
 				End If
 				ssh.TeaseTick += TeaseSeconds
-			End If
-			StringClean = StringClean.Replace("@AddTeaseTime(" & OriginalFlag & ")", "")
+				If ssh.LastScript Then ssh.LastScript = False
+				If Not TeaseTimer.Enabled Then TeaseTimer.Enabled = True
+				StringClean = StringClean.Replace("@AddTeaseTime(" & OriginalFlag & ")", "")
 		End If
 
 		If StringClean.Contains("@RemoveTeaseTime(") Then
@@ -11912,17 +11988,20 @@ ExternalAudio:
 		End If
 
 		If StringClean.Contains("@AddTeaseTime") Then
-			If TeaseTimer.Enabled = True Then
-				If FrmSettings.CBTeaseLengthDD.Checked = True Then
-					If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick += ssh.randomizer.Next(10, 16) * 60
-					If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick += ssh.randomizer.Next(15, 21) * 60
-					If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick += ssh.randomizer.Next(20, 31) * 60
-					If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick += ssh.randomizer.Next(30, 46) * 60
-					If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick += ssh.randomizer.Next(45, 61) * 60
-				Else
-					ssh.TeaseTick += ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
-				End If
+			'same as before about the teasetimer
+			'	If TeaseTimer.Enabled = True Then
+			If FrmSettings.CBTeaseLengthDD.Checked = True Then
+				If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick += ssh.randomizer.Next(10, 16) * 60
+				If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick += ssh.randomizer.Next(15, 21) * 60
+				If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick += ssh.randomizer.Next(20, 31) * 60
+				If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick += ssh.randomizer.Next(30, 46) * 60
+				If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick += ssh.randomizer.Next(45, 61) * 60
+			Else
+				ssh.TeaseTick += ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+
 			End If
+			If ssh.LastScript Then ssh.LastScript = False
+			If Not TeaseTimer.Enabled Then TeaseTimer.Enabled = True
 			StringClean = StringClean.Replace("@AddTeaseTime", "")
 		End If
 
@@ -11950,34 +12029,110 @@ ExternalAudio:
 			StringClean = StringClean.Replace("@RTOff", "")
 		End If
 
-		If StringClean.Contains("@AddContact1") Or StringClean.Contains("@RemoveContact1") Then
-			ssh.AddContactTick = 2
-			Contact1Timer.Start()
+	
+
+		If StringClean.Contains("@GlitterTease1") Then
+			ssh.glitterDommeNumber = 1
+			LoadDommeImageFolder()
+			StringClean = StringClean.Replace("@GlitterTease1", "")
+		End If
+
+		If StringClean.Contains("@GlitterTease2") Then
+			ssh.glitterDommeNumber = 2
+			LoadDommeImageFolder()
+			StringClean = StringClean.Replace("@GlitterTease2", "")
+		End If
+
+		If StringClean.Contains("@GlitterTease3") Then
+			ssh.glitterDommeNumber = 3
+			LoadDommeImageFolder()
+			StringClean = StringClean.Replace("@GlitterTease3", "")
+		End If
+
+		If StringClean.Contains("@DommeTease") Then
+			ssh.glitterDommeNumber = 0
+			LoadDommeImageFolder()
+			StringClean = StringClean.Replace("@DommeTease", "")
+		End If
+
+		If StringClean.Contains("@RandomTease") Then
+			ssh.glitterDommeNumber = 4
+			LoadDommeImageFolder()
+			StringClean = StringClean.Replace("@RandomTease", "")
+		End If
+
+		If StringClean.Contains("@AddContact1") Then
+			If Not ssh.contact1Present Then
+				ssh.contact1Present = True
+				ssh.AddContactTick = 2
+				Contact1Timer.Start()
+			End If
 			StringClean = StringClean.Replace("@AddContact1", "")
+		End If
+
+		If StringClean.Contains("@RemoveContact1") Then
+			If ssh.contact1Present Then
+				ssh.contact1Present = False
+				ssh.AddContactTick = 2
+				Contact1Timer.Start()
+			End If
 			StringClean = StringClean.Replace("@RemoveContact1", "")
 		End If
 
-		If StringClean.Contains("@AddContact2") Or StringClean.Contains("@RemoveContact2") Then
-			ssh.AddContactTick = 2
-			Contact2Timer.Start()
+		If StringClean.Contains("@AddContact2") Then
+			If Not ssh.contact2Present Then
+				ssh.contact2Present = True
+				ssh.AddContactTick = 2
+				Contact2Timer.Start()
+			End If
 			StringClean = StringClean.Replace("@AddContact2", "")
+		End If
+
+		If StringClean.Contains("@RemoveContact2") Then
+			If ssh.contact2Present Then
+				ssh.contact2Present = False
+				ssh.AddContactTick = 2
+				Contact2Timer.Start()
+			End If
 			StringClean = StringClean.Replace("@RemoveContact2", "")
 		End If
 
-		If StringClean.Contains("@AddContact3") Or StringClean.Contains("@RemoveContact3") Then
-			ssh.AddContactTick = 2
-			Contact3Timer.Start()
+		If StringClean.Contains("@AddContact3") Then
+			If Not ssh.contact3Present Then
+				ssh.contact3Present = True
+				ssh.AddContactTick = 2
+				Contact3Timer.Start()
+			End If
 			StringClean = StringClean.Replace("@AddContact3", "")
+		End If
+
+		If StringClean.Contains("@RemoveContact3") Then
+			If ssh.contact3Present Then
+				ssh.contact3Present = False
+				ssh.AddContactTick = 2
+				Contact3Timer.Start()
+			End If
 			StringClean = StringClean.Replace("@RemoveContact3", "")
 		End If
 
-		If StringClean.Contains("@AddDomme") Or StringClean.Contains("@RemoveDomme") Then
-			ssh.AddContactTick = 2
-			DommeTimer.Start()
+		If StringClean.Contains("@AddDomme") Then
+			If Not ssh.dommePresent Then
+				ssh.dommePresent = True
+				ssh.AddContactTick = 2
+				DommeTimer.Start()
+			End If
 			StringClean = StringClean.Replace("@AddDomme", "")
-			StringClean = StringClean.Replace("@RemoveDomme", "")
+
 		End If
 
+		If StringClean.Contains("@RemoveDomme") Then
+			If ssh.dommePresent Then
+				ssh.dommePresent = False
+				ssh.AddContactTick = 2
+				DommeTimer.Start()
+			End If
+			StringClean = StringClean.Replace("@RemoveDomme", "")
+		End If
 
 		If StringClean.Contains("@NullResponse") Then
 			ssh.NullResponse = True
@@ -12320,7 +12475,20 @@ VTSkip:
 			StringClean = StringClean.Replace("@CallRandom(" & CallReplace & ")", "")
 		End If
 
+		If StringClean.Contains("@RandomLink") Then
+			RunLinkScript()
+			StringClean = StringClean.Replace("@RandomLink", "")
+		End If
 
+		If StringClean.Contains("@RandomModule") Then
+			If ssh.SubEdging Or ssh.SubHoldingEdge Then
+				RunModuleScript(True)
+			Else
+				RunModuleScript(False)
+			End If
+			StringClean = StringClean.Replace("@RandomModule", "")
+		End If
+		
 		If StringClean.Contains("@RapidCodeOn") Then
 			ssh.RapidCode = True
 			StringClean = StringClean.Replace("@RapidCodeOn", "")
@@ -13890,7 +14058,6 @@ VTSkip:
                 End If
                 Return result
             End If
-
             If FilterString.Contains("@FlagOr(") Then
 				Dim result As Boolean = False
 				Dim writeFlag As String
@@ -13926,7 +14093,6 @@ VTSkip:
             If FilterString.Contains("@DayOfWeek(") Then
                 If GetMatch(FilterString, "@DayOfWeek(", WeekdayName(Weekday(DateAndTime.Now))) = False Then Return False
             End If
-
             If FilterString.Contains("@SetModule(") Then
                 If ssh.SetModule <> "" Or ssh.BookmarkModule = True Then Return False
             End If
@@ -13952,7 +14118,6 @@ VTSkip:
                 If Not FilterList(f).StartsWith("@") Or FilterList(f).Contains("@NullResponse") Then
                     Exit For
                 End If
-
                 FilterString = FilterString & FilterList(f) & " "
             Next
 
@@ -15756,9 +15921,9 @@ Night:
 		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
 		If FrmSettings.CBHonorificInclude.Checked = True Then
-			ssh.TaskText = ssh.TaskText & FrmSettings.TBHonorific.Text & " " & domName.Text
+			ssh.TaskText = ssh.TaskText & FrmSettings.TBHonorific.Text & " " & ssh.tempDomName
 		Else
-			ssh.TaskText = ssh.TaskText & domName.Text
+			ssh.TaskText = ssh.TaskText & ssh.tempDomName
 		End If
 
 		ssh.TaskText = System.Text.RegularExpressions.Regex.Replace(ssh.TaskText, "[ ]{2,}", " ")
@@ -15773,7 +15938,7 @@ Night:
 
 		ssh.TaskText = ""
 
-		LBLFileTransfer.Text = domName.Text & " is sending you a file!"
+		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
 		PNLFileTransfer.Visible = True
 		PNLFileTransfer.BringToFront()
 
@@ -15964,7 +16129,7 @@ PoundLoop:
 		PNLFileTransfer.Visible = False
 		BTNFileTransferOpen.Visible = False
 		BTNFIleTransferDismiss.Visible = False
-		LBLFileTransfer.Text = domName.Text & " is sending you a file!"
+		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
 		PBFileTransfer.Value = 0
 
 	End Sub
@@ -15986,7 +16151,7 @@ PoundLoop:
 		PNLFileTransfer.Visible = False
 		BTNFileTransferOpen.Visible = False
 		BTNFIleTransferDismiss.Visible = False
-		LBLFileTransfer.Text = domName.Text & " is sending you a file!"
+		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
 		PBFileTransfer.Value = 0
 
 	End Sub
@@ -17000,10 +17165,9 @@ saveImage:
 
 		If ssh.SlideshowLoaded = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Then Return
 
-		Try
-			ssh.SlideshowMain.LoadNew()
-			ShowImage(ssh.SlideshowMain.NavigateFirst, True)
-
+		Try	
+			ssh.newSlideshow = True
+			LoadDommeImageFolder()
 		Catch
 
 		End Try
@@ -17034,7 +17198,36 @@ saveImage:
 
 
 	Public Sub LoadDommeImageFolder()
-		ssh.SlideshowMain.LoadNew()
+		'check which domme should be loaded
+		If Not ssh.newSlideshow Then
+			If ssh.glitterDommeNumber = 0 Then
+				ssh.SlideshowMain = New ContactData(ContactType.Domme)
+			ElseIf ssh.glitterDommeNumber = 1 Then
+				ssh.SlideshowMain = New ContactData(ContactType.Contact1)
+			ElseIf ssh.glitterDommeNumber = 2 Then
+				ssh.SlideshowMain = New ContactData(ContactType.Contact2)
+			ElseIf ssh.glitterDommeNumber = 3 Then
+				ssh.SlideshowMain = New ContactData(ContactType.Contact3)
+			ElseIf ssh.glitterDommeNumber = 4 Then
+				ssh.SlideshowMain = New ContactData(ContactType.Random)
+			End If
+			'check if the #DomHonorific file has some flags to determine which honorific to use with the current domme
+			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\#DomHonorific.txt") Then
+				Dim filePath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\#DomHonorific.txt"
+				Dim lines As List(Of String) = Txt2List(filePath)
+				lines = FilterList(lines)
+				Dim randomize As Integer = ssh.randomizer.Next(0, lines.Count)
+				Dim chosen As String = lines(randomize)
+				Dim words() As String = Split(chosen, ")")
+				FrmSettings.TBHonorific.Text = words(1)
+			Else
+				FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
+			End If
+		End If
+		ssh.SlideshowMain.LoadNew(ssh.newSlideshow)
+		ssh.tempDomName = ssh.SlideshowMain.TypeName
+		ssh.newSlideshow = False
+
 		ShowImage(ssh.SlideshowMain.CurrentImage, False)
 		ssh.SlideshowLoaded = True
 		ssh.JustShowedBlogImage = False
@@ -17303,11 +17496,11 @@ restartInstantly:
 			If Not ssh.Group.Contains("D") Then
 				ssh.Group = ssh.Group & "D"
 				If ssh.Group = "D" Then ssh.GlitterTease = False
-				ChatAddSystemMessage(domName.Text & " has joined the Chat room")
+				ChatAddSystemMessage(ssh.tempDomName & " has joined the Chat room")
 			Else
 				ssh.Group = ssh.Group.Replace("D", "")
 				ssh.GlitterTease = True
-				ChatAddSystemMessage(domName.Text & " has left the Chat room")
+				ChatAddSystemMessage(ssh.tempDomName & " has left the Chat room")
 			End If
 		End If
 
@@ -17627,7 +17820,7 @@ restartInstantly:
 
 			If My.Settings.ClearWishlist = True Then
 
-				MessageBox.Show(Me, "You have already purchased " & domName.Text & "'s Wishlist item for today!" & Environment.NewLine & Environment.NewLine &
+				MessageBox.Show(Me, "You have already purchased " & ssh.tempDomName & "'s Wishlist item for today!" & Environment.NewLine & Environment.NewLine &
 								"Please check back again tomorrow!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 				Return
 			End If
@@ -17655,7 +17848,7 @@ restartInstantly:
 
 				End If
 
-				LBLWishlistDom.Text = domName.Text & "'s Wishlist"
+				LBLWishlistDom.Text = ssh.tempDomName & "'s Wishlist"
 				LBLWishlistDate.Text = FormatDateTime(Now, DateFormat.ShortDate).ToString()
 				WishlistCostGold.Visible = False
 				WishlistCostSilver.Visible = False
@@ -17704,7 +17897,7 @@ restartInstantly:
 				If WishlistCostGold.Visible = True Then
 					If ssh.GoldTokens >= Val(LBLWishlistCost.Text) Then
 						BTNWishlist.Enabled = True
-						BTNWishlist.Text = "Purchase for " & domName.Text
+						BTNWishlist.Text = "Purchase for " & ssh.tempDomName
 					Else
 						BTNWishlist.Enabled = False
 						BTNWishlist.Text = "Not Enough Tokens!"
@@ -17714,7 +17907,7 @@ restartInstantly:
 				If WishlistCostSilver.Visible = True Then
 					If ssh.SilverTokens >= Val(LBLWishlistCost.Text) Then
 						BTNWishlist.Enabled = True
-						BTNWishlist.Text = "Purchase for " & domName.Text
+						BTNWishlist.Text = "Purchase for " & ssh.tempDomName
 					Else
 						BTNWishlist.Enabled = False
 						BTNWishlist.Text = "Not Enough Tokens!"
@@ -17735,7 +17928,7 @@ restartInstantly:
 
 
 
-				LBLWishlistDom.Text = domName.Text & "'s Wishlist"
+				LBLWishlistDom.Text = ssh.tempDomName & "'s Wishlist"
 				LBLWishlistDate.Text = FormatDateTime(Now, DateFormat.ShortDate).ToString()
 				LBLWishlistBronze.Text = ssh.BronzeTokens
 				LBLWishlistSilver.Text = ssh.SilverTokens
@@ -17789,7 +17982,7 @@ restartInstantly:
 
 			If WishlistCostGold.Visible = True Then
 				If ssh.GoldTokens >= Val(LBLWishlistCost.Text) Then
-					BTNWishlist.Text = "Purchase for " & domName.Text
+					BTNWishlist.Text = "Purchase for " & ssh.tempDomName
 					BTNWishlist.Enabled = True
 				Else
 					BTNWishlist.Text = "Not Enough Tokens!"
@@ -17800,7 +17993,7 @@ restartInstantly:
 			If WishlistCostSilver.Visible = True Then
 				Debug.Print("Silver Called")
 				If ssh.SilverTokens >= Val(LBLWishlistCost.Text) Then
-					BTNWishlist.Text = "Purchase for " & domName.Text
+					BTNWishlist.Text = "Purchase for " & ssh.tempDomName
 					BTNWishlist.Enabled = True
 				Else
 					BTNWishlist.Text = "Not Enough Tokens!"
@@ -18331,7 +18524,7 @@ restartInstantly:
 		If ssh.StrokeFaster = True Then
 			If ssh.SubStroking = True And ssh.SubEdging = False And ssh.SubHoldingEdge = False Then
 				Debug.Print("Stroke Faster")
-				Dim Stroke123 As Integer = ssh.randomizer.Next(1, 4)
+				Dim Stroke123 As Integer = ssh.randomizer.Next(3, 8)
 				Stroke123 = Stroke123 * 50
 				StrokePace = StrokePace - Stroke123
 				If StrokePace < NBMaxPace.Value Then StrokePace = NBMaxPace.Value
@@ -18343,7 +18536,7 @@ restartInstantly:
 		If ssh.StrokeSlower = True Then
 			If ssh.SubStroking = True And ssh.SubEdging = False And ssh.SubHoldingEdge = False Then
 				Debug.Print("Stroke Slower")
-				Dim Stroke123 As Integer = ssh.randomizer.Next(1, 4)
+				Dim Stroke123 As Integer = ssh.randomizer.Next(3, 8)
 				Stroke123 = Stroke123 * 50
 				StrokePace = StrokePace + Stroke123
 				If StrokePace > NBMinPace.Value Then StrokePace = NBMinPace.Value
@@ -19789,7 +19982,7 @@ restartInstantly:
 			ssh.SilverTokens -= Val(LBLWishlistCost.Text)
 			My.Settings.SilverTokens = ssh.SilverTokens
 
-			'LBLWishListText.Text = "You purchased this item for " & domName.Text & " on " & CDate(DateString) & "."
+			'LBLWishListText.Text = "You purchased this item for " & ssh.tempDomName & " on " & CDate(DateString) & "."
 			'My.Settings.WishlistNote = LBLWishListText.Text
 
 			My.Settings.ClearWishlist = True
@@ -19803,7 +19996,7 @@ restartInstantly:
 			LBLWishListName.Text = ""
 			WishlistPreview.Visible = False
 			LBLWishlistCost.Text = ""
-			LBLWishListText.Text = "Thank you for your purchase! " & domName.Text & " has been notified of your generous gift. Please check back again tomorrow for a new item!"
+			LBLWishListText.Text = "Thank you for your purchase! " & ssh.tempDomName & " has been notified of your generous gift. Please check back again tomorrow for a new item!"
 			BTNWishlist.Enabled = False
 			BTNWishlist.Text = ""
 

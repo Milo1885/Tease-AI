@@ -8,6 +8,7 @@ Public Enum ContactType
 	Contact1
 	Contact2
 	Contact3
+	Random
 End Enum
 
 <Serializable>
@@ -15,6 +16,7 @@ Public Class ContactData
 
 	Public Property Contact As ContactType = ContactType.Nothing
 
+	Private Property tempBaseFolder As String = ""
 	Public Property ImageFolder As String = ""
 
 	Public Property ImageList As New List(Of String)
@@ -31,6 +33,8 @@ Public Class ContactData
 				Return My.Settings.Glitter2
 			ElseIf Contact = ContactType.Contact3 Then
 				Return My.Settings.Glitter3
+			ElseIf Contact = ContactType.Random Then
+				Return ImageFolder.Substring(ImageFolder.LastIndexOf("\") + 1).Trim
 			Else
 				Return My.Settings.DomName
 			End If
@@ -110,6 +114,7 @@ Public Class ContactData
 		ElseIf tp = ContactType.Contact1 Then : text = "Contact 1"
 		ElseIf tp = ContactType.Contact2 Then : text = "Contact 2"
 		ElseIf tp = ContactType.Contact3 Then : text = "Contact 3"
+		ElseIf tp = ContactType.Random Then : text = "Random"
 		End If
 
 		val = FolderCheck(text, val, def)
@@ -216,20 +221,29 @@ checkFolder:
 		End Try
 	End Function
 
-	Friend Function GetRandom(tp As ContactType) As List(Of String)
-		If Check_ImageDir(tp) Then
-			Return LoadRandom(getCurrentBaseFolder(tp))
-		Else
-			Return New List(Of String)
-		End If
+	Friend Function GetRandom(tp As ContactType, newFolder As Boolean) As List(Of String)
+		'no need to check again since you already checked when creating the contact
+		'If Check_ImageDir(tp) Then
+		Return LoadRandom(getCurrentBaseFolder(tp), newFolder)
+		'Else
+		'	Return New List(Of String)
+		'End If
 	End Function
 
-	Function LoadRandom(ByVal baseDirectory As String) As List(Of String)
+	Function LoadRandom(ByVal baseDirectory As String, newFolder As Boolean) As List(Of String)
 		If Directory.Exists(baseDirectory) = False Then _
 			Throw New DirectoryNotFoundException("The given slideshow base diretory """ & baseDirectory & """ was not found.")
+	Dim currPath As String
+
+		If Contact = ContactType.Random And Not newFolder Then
+			currPath = myDirectory.GetDirectories(baseDirectory).ElementAt(New Random().Next(0, myDirectory.GetDirectories(baseDirectory).Count - 1))
+			tempBaseFolder = currPath
+		Else
+			currPath = baseDirectory
+		End If
 
 		' Read all subdirectories in base folder.
-		Dim subDirs As List(Of String) = myDirectory.GetDirectories(baseDirectory).ToList
+		Dim subDirs As List(Of String) = myDirectory.GetDirectories(currPath).ToList
 		Dim exclude As New List(Of String)
 nextSubDir:
 		' Check if there are folders left.
@@ -239,7 +253,7 @@ nextSubDir:
 			exclude.Remove(first)
 			subDirs.Add(first)
 		ElseIf subDirs.Count <= 0 And exclude.Count = 0 Then
-			Throw New DirectoryNotFoundException("There are no subdirectories conataining images in """ & baseDirectory & """.")
+			Throw New DirectoryNotFoundException("There are no subdirectories conataining images in """ & currPath & """.")
 		End If
 
 		' Get a random folder in base directory.
@@ -267,6 +281,7 @@ nextSubDir:
 		Else
 			' Imagefiles found -> Everything fine and done
 			RecentFolders.Add(rndFolder)
+			ImageFolder = currPath
 			Return imageFiles
 		End If
 
@@ -284,6 +299,8 @@ nextSubDir:
 				Return "Contact2ImageDir"
 			Case ContactType.Contact3
 				Return "Contact3ImageDir"
+			Case ContactType.Random
+				Return "RandomImageDir"
 			Case Else
 				Throw New NotImplementedException
 		End Select
@@ -294,7 +311,11 @@ nextSubDir:
 	End Function
 
 	Function getCurrentBaseFolder(ByVal tp As ContactType) As String
-		Return My.Settings(getMySettingsMember(tp))
+		If tempBaseFolder <> "" Then
+			Return tempBaseFolder
+		Else
+			Return My.Settings(getMySettingsMember(tp))
+		End If
 	End Function
 
 	Sub SetBaseFolder(ByVal tp As ContactType, ByVal path As String)
@@ -304,15 +325,15 @@ nextSubDir:
 #End Region
 
 
-	Friend Sub LoadNew()
-		Me.ImageList = GetRandom(Me.Contact)
+	Friend Sub LoadNew(newFolder As Boolean)
+		Me.ImageList = GetRandom(Me.Contact, newFolder)
 		Me.Index = 0
 		ImageTagCache.Clear()
 		LastTaggedImage = ""
 	End Sub
 
 	Sub CheckInit()
-		If Me.Index = -1 And Me.Contact <> ContactType.Nothing Then Me.LoadNew()
+		If Me.Index = -1 And Me.Contact <> ContactType.Nothing Then Me.LoadNew(False)
 		LastTaggedImage = ""
 	End Sub
 
@@ -348,7 +369,7 @@ nextSubDir:
 			Return String.Empty
 		ElseIf Index >= ImageList.Count - 1 AndAlso My.Settings.CBNewSlideshow Then
 			' End of Slideshow load new one
-			LoadNew()
+			LoadNew(False)
 		ElseIf Index >= ImageList.Count - 1 Then
 			' End of Slideshow return last image
 			Index = ImageList.Count - 1
@@ -372,7 +393,7 @@ nextSubDir:
 			If Index < 0 Then Index = 0
 		ElseIf Index >= ImageList.Count - 1 AndAlso My.Settings.CBNewSlideshow Then
 			' End of Slideshow start new
-			LoadNew()
+			LoadNew(False)
 		ElseIf Index >= ImageList.Count - 1 Then
 			' End of Slideshow return last
 			Index = ImageList.Count - 1
@@ -654,7 +675,7 @@ redo:
 			Dim FileName As String = Path.GetFileName(DisplayedImage)
 
 			If Not File.Exists(TagFilePath) Then Exit Function
-
+		
 			' Read tagfile and find line for displayed image.
 			Dim Line As String = Txt2List(TagFilePath).Find(Function(x) x.StartsWith(FileName, StringComparison.OrdinalIgnoreCase))
 			If Line Is Nothing Then Exit Function

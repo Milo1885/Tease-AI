@@ -1176,7 +1176,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SplitterPosition" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">580</Value>
+      <Value Profile="(Default)">528</Value>
     </Setting>
     <Setting Name="MirrorWindows" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

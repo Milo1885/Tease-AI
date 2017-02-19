@@ -411,6 +411,9 @@ Public Class FrmSettings
 
 		CBAuditStartup.Checked = My.Settings.AuditStartup
 
+		sadisticCheckBox.Checked = My.Settings.DomSadistic
+		degradingCheckBox.Checked = My.Settings.DomDegrading
+		giveupCheckBox.Checked = My.Settings.GiveUpReturn
 		If CBAuditStartup.Checked = True Then AuditScripts()
 
 
@@ -444,7 +447,7 @@ Public Class FrmSettings
 		WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
 
 
-		For Each tmptbx As TextBox In New List(Of TextBox) From {TbxContact1ImageDir, TbxContact2ImageDir, TbxContact3ImageDir, TbxDomImageDir}
+		For Each tmptbx As TextBox In New List(Of TextBox) From {TbxContact1ImageDir, TbxContact2ImageDir, TbxContact3ImageDir, TbxDomImageDir, TbxRandomImageDir}
 			If tmptbx.DataBindings("Text") Is Nothing Then
 				Throw New Exception("There is no databinding set on """ & tmptbx.Name &
 					"""'s text-property. Set the databinding and recompile!")
@@ -2958,7 +2961,13 @@ SkipDeserializing:
 		End If
 	End Sub
 
-
+	Private Sub BtnRandomImageDir_Click(sender As System.Object, e As System.EventArgs) Handles BtnRandomImageDir.Click
+		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
+			My.Settings.RandomImageDir = FolderBrowserDialog1.SelectedPath
+			My.Application.Session.SlideshowContactRandom = New ContactData(ContactType.Random)
+		End If
+	End Sub
+	
 	Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitterD.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			LBLGlitterNCDomme.ForeColor = GetColor.Color
@@ -3062,11 +3071,11 @@ SkipDeserializing:
 		TTDir.SetToolTip(sender, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
 	End Sub
 
-	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover
+	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover, TbxRandomImageDir.MouseHover
 		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
 	End Sub
 
-	Private Sub Button2_MouseHover(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDir.MouseHover, BtnContact2ImageDir.MouseHover, BtnContact3ImageDir.MouseHover
+	Private Sub Button2_MouseHover(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDir.MouseHover, BtnContact2ImageDir.MouseHover, BtnContact3ImageDir.MouseHover, BtnRandomImageDir.MouseHover
 
 		If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory containing several image" & Environment.NewLine &
 "set folders of the same model you're using as your contact.")
@@ -3089,6 +3098,10 @@ SkipDeserializing:
 		My.Application.Session.SlideshowContact3 = New ContactData()
 	End Sub
 
+	Private Sub BtnRandomImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnRandomImageDirClear.Click
+		My.Settings.ResetField(TbxRandomImageDir, "Text")
+		My.Application.Session.SlideshowContactRandom = New ContactData()
+	End Sub
 	Private Sub Button16_Click(sender As System.Object, e As System.EventArgs) Handles Button16.Click
 
 		SaveSettingsDialog.Title = "Select a location to save current Glitter settings"
@@ -3140,7 +3153,7 @@ SkipDeserializing:
 			SettingsList.Add("Contact 2 AV: " & My.Settings.GlitterAV2)
 			SettingsList.Add("Contact 3 AV: " & My.Settings.GlitterAV3)
 
-
+			SettingsList.Add("Random Friend Image Directory: " & My.Settings.RandomImageDir)
 
 			Dim SettingsString As String = ""
 
@@ -3241,7 +3254,7 @@ SkipDeserializing:
 					My.Settings.GlitterAV3 = SettingsList(28).Replace("Contact 3 AV: ", "")
 				Catch
 				End Try
-
+				My.Settings.RandomImageDir = SettingsList(29).Replace("Random Friend Image Directory: ", "")
 
 			Catch
 				MessageBox.Show(Me, "This Glitter settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -5719,12 +5732,10 @@ checkFolder:
 
 	End Sub
 
-
-
-
-
-
-
+	Private Sub giveupCheckBox_CheckedChanged(sender As Object, e As System.EventArgs) Handles giveupCheckBox.MouseClick
+		My.Settings.GiveUpReturn = giveupCheckBox.Checked
+		My.Settings.Save()
+	End Sub
 	Private Sub NBWritingTaskMin_LostFocus(sender As Object, e As System.EventArgs) Handles NBWritingTaskMin.LostFocus
 		My.Settings.NBWritingTaskMin = NBWritingTaskMin.Value
 	End Sub
@@ -7615,6 +7626,7 @@ checkFolder:
 		My.Settings.DomSupremacist = supremacistCheckBox.Checked
 		My.Settings.DomSadistic = sadisticCheckBox.Checked
 		My.Settings.DomDegrading = degradingCheckBox.Checked
+		My.Settings.GiveUpReturn = giveupCheckBox.Checked
 		My.Settings.pnSetting1 = petnameBox1.Text
 		My.Settings.pnSetting2 = petnameBox2.Text
 		My.Settings.pnSetting3 = petnameBox3.Text
@@ -7671,6 +7683,7 @@ checkFolder:
 		supremacistCheckBox.Checked = My.Settings.DomSupremacist
 		sadisticCheckBox.Checked = My.Settings.DomSadistic
 		degradingCheckBox.Checked = My.Settings.DomDegrading
+		giveupCheckBox.Checked = My.Settings.GiveUpReturn
 		petnameBox1.Text = My.Settings.pnSetting1
 		petnameBox2.Text = My.Settings.pnSetting2
 		petnameBox3.Text = My.Settings.pnSetting3
@@ -10282,5 +10295,4 @@ checkFolder:
 		End If
 
 	End Sub
-
 End Class
