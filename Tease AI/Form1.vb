@@ -13892,8 +13892,8 @@ VTSkip:
             End If
 
             If FilterString.Contains("@FlagOr(") Then
-                Dim result As Boolean = True
-                Dim writeFlag As String
+				Dim result As Boolean = False
+				Dim writeFlag As String
                 Dim splitFlag As String()
 
                 If FilterString.Contains("@FlagOr(") Then
@@ -13908,8 +13908,8 @@ VTSkip:
                         End If
                     Next
                 End If
-                If result = True Then Return result
-            End If
+				Return result
+			End If
 
             If FilterString.Contains("@CheckDate(") And Linear = False Then
                 If CheckDateList(FilterString) = False Then Return False
