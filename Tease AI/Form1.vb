@@ -13990,7 +13990,10 @@ VTSkip:
 			End If
 			If FilterString.Contains("@ApathyLevel(") Then
 				If FilterCheck(GetParentheses(FilterString, "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then Return False
-			End If
+            End If
+            If FilterString.Contains("@DommeLevel(") Then
+                If FilterCheck(GetParentheses(FilterString, "@DommeLevel("), FrmSettings.domlevelNumBox) = False Then Return False
+            End If
 			If FilterString.Contains("@Cup(") Then
 				If FilterCheck(GetParentheses(FilterString, "@Cup("), FrmSettings.boobComboBox) = False Then Return False
 			End If
@@ -14044,23 +14047,24 @@ VTSkip:
                     For Each s In splitFlag
                         If result Then
                             If FlagExists(s) Then
-                                result = False
+                                result = True
                                 Exit For
                             End If
                         Else
                             If FlagExists(s) Then
-                                result = False
-                            Else
                                 result = True
+                            Else
+                                result = False
                             End If
                         End If
                     Next
                 End If
-                Return result
+                If result = True Then Return False
             End If
+            
             If FilterString.Contains("@FlagOr(") Then
-				Dim result As Boolean = False
-				Dim writeFlag As String
+		            Dim result As Boolean = False
+                Dim writeFlag As String
                 Dim splitFlag As String()
 
                 If FilterString.Contains("@FlagOr(") Then
@@ -14075,8 +14079,8 @@ VTSkip:
                         End If
                     Next
                 End If
-				Return result
-			End If
+                If result = False Then Return result
+            End If
 
             If FilterString.Contains("@CheckDate(") And Linear = False Then
                 If CheckDateList(FilterString) = False Then Return False
@@ -17335,7 +17339,7 @@ saveImage:
         For Each com As String In New List(Of String) From
           {"@Cup(", "@AllowsOrgasm(", "@RuinsOrgasm(", "@DommeLevel(",
           "@ApathyLevel(", "@Month(", "@Day(", "@Flag(", "@NotFlag(",
-          "@DayOfWeek("}
+          "@DayOfWeek(", "@FlagOr("}
             If CFClean.Contains(com) Then CFClean = CFClean.Replace(com & GetParentheses(CFClean, com) & ")", "")
         Next
 
