@@ -18,6 +18,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	  * Requires the following System Vocabulary files:
 	  * #SYS_HonorificPunish - The domme admonishes you for not addressing her correctly (immediately precedes the punishment)
 	  * #SYS_CapitalizeHonorific - The domme points out that she was not addressed correctly (immediately after failing to capitalize the honorific)
+	  * #SYS_MissingHonorific - The domme points out that you did not use the honorific in such a way to get you to immediately correct yourself. This file replaces the hardcoded "what?" response that Tease AI used before. 
 	
 * Added Commands:
 	* @CountVar[] - Allows you to connect a timer to a specified Variable that will change its value by 1 every second.
@@ -65,6 +66,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
     * Tweaked values of stroking speed changes instructed by the domme to make them slightly more profound (dariobrun)
     * Minor edits to State.vb so I could compile it using VS 2010 (Notay)
 	* Cleaned up code for saving chatlogs (pepsifreak)
+	* Changed the message displayed after unpacking an AI Box 
 	
 # Changelog - Patch 54.6.0
 

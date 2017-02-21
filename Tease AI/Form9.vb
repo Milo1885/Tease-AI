@@ -540,7 +540,7 @@ FoundScriptType:
 
 		Try
 			If GetaiBoxList(NextCycle) = "[aiBox Empty]" Then
-				MessageBox.Show(Me, "The domme's consciousness has escaped this AI Box!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(Me, "AI Box unpacking complete!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 				BTNSaveFile.Enabled = False
 				BTNSkipFile.Enabled = False
 				LBLFileName.Text = ""
@@ -551,7 +551,7 @@ FoundScriptType:
 				Return
 			End If
 		Catch
-			MessageBox.Show(Me, "The domme's consciousness has escaped this AI Box!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(Me, "AI Box unpacking complete!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			BTNSaveFile.Enabled = False
 			BTNSkipFile.Enabled = False
 			LBLFileName.Text = ""
@@ -596,7 +596,7 @@ FoundScriptType:
 
 		Try
 			If GetaiBoxList(NextCycle) = "[aiBox Empty]" Then
-				MessageBox.Show(Me, "The domme's consciousness has escaped this AI Box!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(Me, "AI Box unpacking complete!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 				BTNSaveFile.Enabled = False
 				BTNSkipFile.Enabled = False
 				LBLFileName.Text = ""
@@ -607,7 +607,7 @@ FoundScriptType:
 				Return
 			End If
 		Catch
-			MessageBox.Show(Me, "The domme's consciousness has escaped this AI Box!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(Me, "AI Box unpacking complete!", "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 			BTNSaveFile.Enabled = False
 			BTNSkipFile.Enabled = False
 			LBLFileName.Text = ""
