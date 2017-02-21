@@ -1176,7 +1176,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="SplitterPosition" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">528</Value>
+      <Value Profile="(Default)">498</Value>
     </Setting>
     <Setting Name="MirrorWindows" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -1427,6 +1427,18 @@
     </Setting>
     <Setting Name="DisplaySidePanel" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="DomCFNM" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GiveUpReturn" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RandomImageDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CBRandomDomme" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

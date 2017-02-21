@@ -9,20 +9,52 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 # Changelog - Patch 54.7.0
 
 * Added Features:
-    * @CountVar[] Command. Allows you to connect a timer to a specified Variable that will change its value by 1 every second.
+    * Can now set a directory for Random Dommes in General Settings. This should point to location containing folders named after individual models, and each of those folders should contain folders with imagesets of that model. Tease AI will then chose a folder at random for the pictures, and the name of the model's folder for the domme's name. (dariobrun)
+	* Added checkbox in General Settings to begin any new session with a Random Domme.
+	* Domme Personality settings now include a checkbox for CFNM (Clothed Female Nude Male). This is meant to allow taunts where the domme points out that the user will never see her naked, eg. This should be checked when using models with non-nude picture sets for the domme.
+	* Added "Continue Current Script After Giving Up" option in Domme Settings. When you "give up" in Tease AI, the program normally moves on to a random Link script. When this option is checked, the script you're on will continue to play out instead. (dariobrun)
+	* If options are set to use and/or capitalize the Domm'es honorific and the user fails to do so enough times, the domme will administer a CBT punishment (dariobrun)
+	  Requires the following System Vocabulary files:
+	  #SYS_HonorificPunish - The domme admonishes you for not addressing her correctly (immediately precedes the punishment)
+	  #SYS_CapitalizeHonorific - The domme points out that she was not addressed correctly (immediately after failing to capitalize the honorific)
+	
+* Added Commands:
+	* @CountVar[] - Allows you to connect a timer to a specified Variable that will change its value by 1 every second.
 	  Usage:
 	  @CountVar[VarName] - Begins a timer that adds 1 to VarName every second
       @CountVar[VarName, down] - Begins a timer that subtracts 1 from VarName every second
       @CountVar[VarName, stop] - Stops any timer associated with VarName (up or down)
-	* @FlagOr() Command Filter. Check multiple flags and will read the line if any of them are present. For example, @FlagOr(Flag1, Flag2) - If Flag1 or Flag 2 exists, then Tease AI will read the line. (dariobrun) 
+	  
+	* @SetDomme() - Changes the active domme (name and slideshow) to the specified option. (dariobrun)
+      Usage:
+      @SetDomme(1) - Changes the domme to Contact 1 (Can also use @SetDomme(Contact1), @SetDomme(Glitter 1), etc. All that matters is the number)
+      @SetDomme(2) - Changes the domme to Contact 2
+      @SetDomme(3) - Changes the domme to Contact 3
+      @SetDomme(Domme) - Changes back to the original domme specified in Domme Images Directory	 
+      @SetDomme(Random) - Changes to a Random Domme as specified in the Random Domme Images Directory
+	  
+	  If @SetDomme() does not contain a valid value, the original domme will be used.
 
+      @SetDomme() replaces @GlitterTease1, @GlitterTease2, @GlitterTease3, @DommeTease and @RandomTease. These Commands will be left in the code for compatibility purposes.
+
+    * @RandomModule - Run a random Module (dariobrun)
+
+    * @RandomLink - Run a random Link (dariobrun)	
+	
+*Added Command Filters:	
+	* @FlagOr() Command Filter. Check multiple flags and will read the line if any of them are present. For example, @FlagOr(Flag1, Flag2) - If Flag1 or Flag 2 exists, then Tease AI will read the line. (dariobrun) 
+    
+	* @CFNM Command Filter. When used, will only show lines with this Command Filter if the CFNM box is checked in the Domme Personality settings.
+	
 * Bugfixes:
     * @RT() and @RandomText() were not working correctly (Stefaf)
 	* @NotFlag() was only checking for any flags not to be present when parsing multiple flags instead of all flags not to be present. (dariobrun)
     * Certain local genre images were not using their subdirectories correctly. (dariobrun)
-    * Local Boob images were not using their subdirectories correctly. (dariobrun) 	
+    * Local Boob images were not using their subdirectories correctly. (dariobrun) 
+    * @RemoveContactX on a Contact that was not present would add them, Commands that add and remove Contacts now check to see if they are present (dariobrun)	
 	
 * Miscellaneous:
+    * Tweaked values of stroking speed changes instructed by the domme to make them slightly more profound (dariobrun)
     * Minor edits to State.vb so I could compile it using VS 2010 (Notay)
 	* Cleaned up code for saving chatlogs (pepsifreak)
 	

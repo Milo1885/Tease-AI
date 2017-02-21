@@ -412,8 +412,10 @@ Public Class FrmSettings
 		CBAuditStartup.Checked = My.Settings.AuditStartup
 
 		sadisticCheckBox.Checked = My.Settings.DomSadistic
-		degradingCheckBox.Checked = My.Settings.DomDegrading
-		giveupCheckBox.Checked = My.Settings.GiveUpReturn
+        degradingCheckBox.Checked = My.Settings.DomDegrading
+        CFNMCheckBox.Checked = My.Settings.DomCFNM
+        CBRandomDomme.Checked = My.Settings.CBRandomDomme
+        giveupCheckBox.Checked = My.Settings.GiveUpReturn
 		If CBAuditStartup.Checked = True Then AuditScripts()
 
 
@@ -3071,9 +3073,9 @@ SkipDeserializing:
 		TTDir.SetToolTip(sender, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
 	End Sub
 
-	Private Sub LBLContact1ImageDir_MouseHover(sender As Object, e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover, TbxRandomImageDir.MouseHover
-		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
-	End Sub
+    Private Sub LBLContact1ImageDir_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover
+        TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
+    End Sub
 
 	Private Sub Button2_MouseHover(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDir.MouseHover, BtnContact2ImageDir.MouseHover, BtnContact3ImageDir.MouseHover, BtnRandomImageDir.MouseHover
 
@@ -7625,7 +7627,8 @@ checkFolder:
 		My.Settings.DomVulgar = vulgarCheckBox.Checked
 		My.Settings.DomSupremacist = supremacistCheckBox.Checked
 		My.Settings.DomSadistic = sadisticCheckBox.Checked
-		My.Settings.DomDegrading = degradingCheckBox.Checked
+        My.Settings.DomDegrading = degradingCheckBox.Checked
+        My.Settings.DomCFNM = CFNMCheckBox.Checked
 		My.Settings.GiveUpReturn = giveupCheckBox.Checked
 		My.Settings.pnSetting1 = petnameBox1.Text
 		My.Settings.pnSetting2 = petnameBox2.Text
@@ -7682,7 +7685,8 @@ checkFolder:
 		vulgarCheckBox.Checked = My.Settings.DomVulgar
 		supremacistCheckBox.Checked = My.Settings.DomSupremacist
 		sadisticCheckBox.Checked = My.Settings.DomSadistic
-		degradingCheckBox.Checked = My.Settings.DomDegrading
+        degradingCheckBox.Checked = My.Settings.DomDegrading
+        CFNMCheckBox.Checked = My.Settings.DomCFNM
 		giveupCheckBox.Checked = My.Settings.GiveUpReturn
 		petnameBox1.Text = My.Settings.pnSetting1
 		petnameBox2.Text = My.Settings.pnSetting2
@@ -9923,6 +9927,13 @@ checkFolder:
 		My.Settings.DomDegrading = degradingCheckBox.Checked
 	End Sub
 
+    Private Sub CFNMCheckBox_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CFNMCheckBox.LostFocus
+        My.Settings.DomCFNM = CFNMCheckBox.Checked
+    End Sub
+
+    Private Sub CBRandomDomme_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CBRandomDomme.LostFocus
+        My.Settings.CBRandomDomme = CBRandomDomme.Checked
+    End Sub
 
 	Private Sub CBWebtease_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBWebtease.CheckedChanged
 		If CBWebtease.Checked = True Then
@@ -10295,4 +10306,6 @@ checkFolder:
 		End If
 
 	End Sub
+
+   
 End Class
