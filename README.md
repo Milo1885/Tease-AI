@@ -14,28 +14,28 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* Domme Personality settings now include a checkbox for CFNM (Clothed Female Nude Male). This is meant to allow taunts where the domme points out that the user will never see her naked, eg. This should be checked when using models with non-nude picture sets for the domme.
 	* Added "Continue Current Script After Giving Up" option in Domme Settings. When you "give up" in Tease AI, the program normally moves on to a random Link script. When this option is checked, the script you're on will continue to play out instead. (dariobrun)
 	* If options are set to use and/or capitalize the Domm'es honorific and the user fails to do so enough times, the domme will administer a CBT punishment (dariobrun)
-	  Requires the following System Vocabulary files:
-	  #SYS_HonorificPunish - The domme admonishes you for not addressing her correctly (immediately precedes the punishment)
-	  #SYS_CapitalizeHonorific - The domme points out that she was not addressed correctly (immediately after failing to capitalize the honorific)
+	  * Requires the following System Vocabulary files:
+	  * #SYS_HonorificPunish - The domme admonishes you for not addressing her correctly (immediately precedes the punishment)
+	  * #SYS_CapitalizeHonorific - The domme points out that she was not addressed correctly (immediately after failing to capitalize the honorific)
 	
 * Added Commands:
 	* @CountVar[] - Allows you to connect a timer to a specified Variable that will change its value by 1 every second.
-	  Usage:
-	  @CountVar[VarName] - Begins a timer that adds 1 to VarName every second
-      @CountVar[VarName, down] - Begins a timer that subtracts 1 from VarName every second
-      @CountVar[VarName, stop] - Stops any timer associated with VarName (up or down)
+	  * Usage:
+	  * @CountVar[VarName] - Begins a timer that adds 1 to VarName every second
+      * @CountVar[VarName, down] - Begins a timer that subtracts 1 from VarName every second
+      * @CountVar[VarName, stop] - Stops any timer associated with VarName (up or down)
 	  
 	* @SetDomme() - Changes the active domme (name and slideshow) to the specified option. (dariobrun)
-      Usage:
-      @SetDomme(1) - Changes the domme to Contact 1 (Can also use @SetDomme(Contact1), @SetDomme(Glitter 1), etc. All that matters is the number)
-      @SetDomme(2) - Changes the domme to Contact 2
-      @SetDomme(3) - Changes the domme to Contact 3
-      @SetDomme(Domme) - Changes back to the original domme specified in Domme Images Directory	 
-      @SetDomme(Random) - Changes to a Random Domme as specified in the Random Domme Images Directory
+      * Usage:
+      * @SetDomme(1) - Changes the domme to Contact 1 (Can also use @SetDomme(Contact1), @SetDomme(Glitter 1), etc. All that matters is the number)
+      * @SetDomme(2) - Changes the domme to Contact 2
+      * @SetDomme(3) - Changes the domme to Contact 3
+      * @SetDomme(Domme) - Changes back to the original domme specified in Domme Images Directory	 
+      * @SetDomme(Random) - Changes to a Random Domme as specified in the Random Domme Images Directory
 	  
-	  If @SetDomme() does not contain a valid value, the original domme will be used.
+	  * If @SetDomme() does not contain a valid value, the original domme will be used.
 
-      @SetDomme() replaces @GlitterTease1, @GlitterTease2, @GlitterTease3, @DommeTease and @RandomTease. These Commands will be left in the code for compatibility purposes.
+      * @SetDomme() replaces @GlitterTease1, @GlitterTease2, @GlitterTease3, @DommeTease and @RandomTease. These Commands will be left in the code for compatibility purposes.
 
     * @RandomModule - Run a random Module (dariobrun)
 
