@@ -4787,7 +4787,17 @@ CancelGoto:
 		End If
 		ssh.TypeDelay = ssh.StringLength
 		If ssh.TypeDelay > 60 Then ssh.TypeDelay = 60
-		If FrmSettings.typeinstantlyCheckBox.Checked = True Or ssh.RapidCode = True = True Then ssh.TypeDelay = 0
+        If FrmSettings.typeinstantlyCheckBox.Checked = True Or ssh.RapidCode = True = True Then ssh.TypeDelay = 0
+        If ssh.TypeDelay <> 0 Then
+            If GetCharCount(ssh.DomChat, "@RT(") <> 0 Then
+                ssh.TypeDelay /= GetCharCount(ssh.DomChat, ",")
+                ssh.TypeDelay *= GetCharCount(ssh.DomChat, "@RT(")
+            End If
+            If GetCharCount(ssh.DomChat, "@RandomText(") <> 0 Then
+                ssh.TypeDelay /= GetCharCount(ssh.DomChat, ",")
+                ssh.TypeDelay *= GetCharCount(ssh.DomChat, "@RandomText(")
+            End If
+        End If
 		SendTimer.Start()
 
 
@@ -4801,7 +4811,17 @@ CancelGoto:
 		ssh.TypeDelay = ssh.StringLength
 		If ssh.TypeDelay > 60 Then ssh.TypeDelay = 60
 		If FrmSettings.typeinstantlyCheckBox.Checked = True Or ssh.RapidCode = True = True Then ssh.TypeDelay = 0
-		If ssh.HypnoGen = True And CBHypnoGenNoText.Checked = True Then ssh.TypeDelay = 0
+        If ssh.HypnoGen = True And CBHypnoGenNoText.Checked = True Then ssh.TypeDelay = 0
+        If ssh.TypeDelay <> 0 Then
+            If GetCharCount(ssh.DomTask, "@RT(") <> 0 Then
+                ssh.TypeDelay /= GetCharCount(ssh.DomTask, ",")
+                ssh.TypeDelay *= GetCharCount(ssh.DomTask, "@RT(")
+            End If
+            If GetCharCount(ssh.DomTask, "@RandomText(") <> 0 Then
+                ssh.TypeDelay /= GetCharCount(ssh.DomTask, ",")
+                ssh.TypeDelay *= GetCharCount(ssh.DomTask, "@RandomText(")
+            End If
+        End If
 		Timer1.Start()
 
 	End Sub

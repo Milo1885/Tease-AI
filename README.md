@@ -9,6 +9,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 # Changelog - Patch 54.7.0
 
 * Added Features:
+    * Tease AI now tries to determine an appropriate "DomName is typing..." delay length for lines containing one or more @RT()/@RandomText() Commands.
     * Can now set a directory for Random Dommes in General Settings. This should point to location containing folders named after individual models, and each of those folders should contain folders with imagesets of that model. Tease AI will then chose a folder at random for the pictures, and the name of the model's folder for the domme's name. (dariobrun)
 	* Added checkbox in General Settings to begin any new session with a Random Domme.
 	* Domme Personality settings now include a checkbox for CFNM (Clothed Female Nude Male). This is meant to allow taunts where the domme points out that the user will never see her naked, eg. This should be checked when using models with non-nude picture sets for the domme.
@@ -42,9 +43,16 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
     * @RandomLink - Run a random Link (dariobrun)	
 	
 *Added Command Filters:	
-	* @FlagOr() Command Filter. Check multiple flags and will read the line if any of them are present. For example, @FlagOr(Flag1, Flag2) - If Flag1 or Flag 2 exists, then Tease AI will read the line. (dariobrun) 
+    * @DayOfWeek() - Will only show lines if the current day of the week is specified.
+      * Usage:
+      * @DayOfWeek(Friday) - Will only show the line if the current day is Friday
+      * @DayOfWeek(Monday, Tuesday) - Will only show the line if the current day is Monday or Tuesday
+      * @DayOfWeek(Monday, Not) - Will only show the line if the current day is NOT Monday
+      * @DayOfWeek(Saturday, Sunday, Not) - Will only show the line if the current day is neither Saturday or Sunday	  
+
+	* @FlagOr() - Check multiple flags and will read the line if any of them are present. For example, @FlagOr(Flag1, Flag2) - If Flag1 or Flag 2 exists, then Tease AI will read the line. (dariobrun) 
     
-	* @CFNM Command Filter. When used, will only show lines with this Command Filter if the CFNM box is checked in the Domme Personality settings.
+	* @CFNM - When used, will only show lines with this Command Filter if the CFNM box is checked in the Domme Personality settings.
 	
 * Bugfixes:
     * @RT() and @RandomText() were not working correctly (Stefaf)
