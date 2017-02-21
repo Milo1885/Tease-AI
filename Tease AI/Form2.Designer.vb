@@ -652,7 +652,10 @@ Partial Class FrmSettings
 		Me.TabControl1 = New System.Windows.Forms.TabControl()
 		Me.TabPage22 = New System.Windows.Forms.TabPage()
 		Me.PNLGlitter = New System.Windows.Forms.Panel()
+		Me.TbxRandomImageDir = New System.Windows.Forms.TextBox()
 		Me.Button15 = New System.Windows.Forms.Button()
+		Me.BtnRandomImageDir = New System.Windows.Forms.Button()
+		Me.BtnRandomImageDirClear = New System.Windows.Forms.Button()
 		Me.Button16 = New System.Windows.Forms.Button()
 		Me.Label121 = New System.Windows.Forms.Label()
 		Me.Label122 = New System.Windows.Forms.Label()
@@ -1062,6 +1065,8 @@ Partial Class FrmSettings
 		Me.Label3 = New System.Windows.Forms.Label()
 		Me.PictureBox3 = New System.Windows.Forms.PictureBox()
 		Me.Label41 = New System.Windows.Forms.Label()
+		Me.GBGiveUp = New System.Windows.Forms.GroupBox()
+		Me.giveupCheckBox = New System.Windows.Forms.CheckBox()
 		Me.GroupBox47 = New System.Windows.Forms.GroupBox()
 		Me.GroupBox41 = New System.Windows.Forms.GroupBox()
 		Me.Button34 = New System.Windows.Forms.Button()
@@ -1357,6 +1362,7 @@ Partial Class FrmSettings
 		Me.TabPage5.SuspendLayout()
 		Me.Panel5.SuspendLayout()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GBGiveUp.SuspendLayout()
 		Me.GroupBox47.SuspendLayout()
 		Me.GroupBox41.SuspendLayout()
 		Me.GroupBox44.SuspendLayout()
@@ -2147,6 +2153,7 @@ Partial Class FrmSettings
 		'
 		Me.Panel3.BackColor = System.Drawing.Color.LightGray
 		Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.Panel3.Controls.Add(Me.GBGiveUp)
 		Me.Panel3.Controls.Add(Me.BTNLoadDomSet)
 		Me.Panel3.Controls.Add(Me.BTNSaveDomSet)
 		Me.Panel3.Controls.Add(Me.Label127)
@@ -9560,7 +9567,10 @@ Partial Class FrmSettings
 		'PNLGlitter
 		'
 		Me.PNLGlitter.BackColor = System.Drawing.Color.LightGray
+		Me.PNLGlitter.Controls.Add(Me.TbxRandomImageDir)
 		Me.PNLGlitter.Controls.Add(Me.Button15)
+		Me.PNLGlitter.Controls.Add(Me.BtnRandomImageDir)
+		Me.PNLGlitter.Controls.Add(Me.BtnRandomImageDirClear)
 		Me.PNLGlitter.Controls.Add(Me.Button16)
 		Me.PNLGlitter.Controls.Add(Me.Label121)
 		Me.PNLGlitter.Controls.Add(Me.Label122)
@@ -9572,6 +9582,22 @@ Partial Class FrmSettings
 		Me.PNLGlitter.Name = "PNLGlitter"
 		Me.PNLGlitter.Size = New System.Drawing.Size(708, 404)
 		Me.PNLGlitter.TabIndex = 91
+		'
+		'TbxRandomImageDir
+		'
+		Me.TbxRandomImageDir.BackColor = System.Drawing.Color.LightGray
+		Me.TbxRandomImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+		Me.TbxRandomImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "RandomImageDir", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.TbxRandomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.TbxRandomImageDir.ForeColor = System.Drawing.Color.Black
+		Me.TbxRandomImageDir.Location = New System.Drawing.Point(244, 332)
+		Me.TbxRandomImageDir.MaximumSize = New System.Drawing.Size(2, 17)
+		Me.TbxRandomImageDir.MinimumSize = New System.Drawing.Size(204, 17)
+		Me.TbxRandomImageDir.Name = "TbxRandomImageDir"
+		Me.TbxRandomImageDir.ReadOnly = True
+		Me.TbxRandomImageDir.Size = New System.Drawing.Size(204, 17)
+		Me.TbxRandomImageDir.TabIndex = 182
+		Me.TbxRandomImageDir.Text = "No Path Selected"
 		'
 		'Button15
 		'
@@ -9589,6 +9615,30 @@ Partial Class FrmSettings
 		Me.Button15.Size = New System.Drawing.Size(30, 26)
 		Me.Button15.TabIndex = 163
 		Me.Button15.UseVisualStyleBackColor = False
+		'
+		'BtnRandomImageDir
+		'
+		Me.BtnRandomImageDir.BackColor = System.Drawing.Color.LightGray
+		Me.BtnRandomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BtnRandomImageDir.ForeColor = System.Drawing.Color.Black
+		Me.BtnRandomImageDir.Location = New System.Drawing.Point(16, 329)
+		Me.BtnRandomImageDir.Name = "BtnRandomImageDir"
+		Me.BtnRandomImageDir.Size = New System.Drawing.Size(192, 22)
+		Me.BtnRandomImageDir.TabIndex = 182
+		Me.BtnRandomImageDir.Text = "Set Random Friend Main Directory"
+		Me.BtnRandomImageDir.UseVisualStyleBackColor = False
+		'
+		'BtnRandomImageDirClear
+		'
+		Me.BtnRandomImageDirClear.BackColor = System.Drawing.Color.LightGray
+		Me.BtnRandomImageDirClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.BtnRandomImageDirClear.ForeColor = System.Drawing.Color.Black
+		Me.BtnRandomImageDirClear.Location = New System.Drawing.Point(485, 329)
+		Me.BtnRandomImageDirClear.Name = "BtnRandomImageDirClear"
+		Me.BtnRandomImageDirClear.Size = New System.Drawing.Size(39, 22)
+		Me.BtnRandomImageDirClear.TabIndex = 181
+		Me.BtnRandomImageDirClear.Text = "Clear"
+		Me.BtnRandomImageDirClear.UseVisualStyleBackColor = False
 		'
 		'Button16
 		'
@@ -14336,6 +14386,28 @@ Partial Class FrmSettings
 	" you." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
 		Me.Label41.TextAlign = System.Drawing.ContentAlignment.TopCenter
 		'
+		'GBGiveUp
+		'
+		Me.GBGiveUp.Controls.Add(Me.giveupCheckBox)
+		Me.GBGiveUp.Location = New System.Drawing.Point(455, 344)
+		Me.GBGiveUp.Name = "GBGiveUp"
+		Me.GBGiveUp.Size = New System.Drawing.Size(234, 48)
+		Me.GBGiveUp.TabIndex = 42
+		Me.GBGiveUp.TabStop = False
+		Me.GBGiveUp.Text = "Give Up"
+		'
+		'giveupCheckBox
+		'
+		Me.giveupCheckBox.AutoSize = True
+		Me.giveupCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+		Me.giveupCheckBox.ForeColor = System.Drawing.Color.Black
+		Me.giveupCheckBox.Location = New System.Drawing.Point(16, 19)
+		Me.giveupCheckBox.Name = "giveupCheckBox"
+		Me.giveupCheckBox.Size = New System.Drawing.Size(135, 17)
+		Me.giveupCheckBox.TabIndex = 38
+		Me.giveupCheckBox.Text = "Give up continue script"
+		Me.giveupCheckBox.UseVisualStyleBackColor = True
+		'
 		'GroupBox47
 		'
 		Me.GroupBox47.BackColor = System.Drawing.Color.LightGray
@@ -15111,6 +15183,8 @@ Partial Class FrmSettings
 		Me.Panel5.ResumeLayout(False)
 		Me.Panel5.PerformLayout()
 		CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GBGiveUp.ResumeLayout(False)
+		Me.GBGiveUp.PerformLayout()
 		Me.GroupBox47.ResumeLayout(False)
 		Me.GroupBox41.ResumeLayout(False)
 		Me.GroupBox44.ResumeLayout(False)
@@ -15806,6 +15880,9 @@ Partial Class FrmSettings
 	Friend WithEvents TbxContact3ImageDir As System.Windows.Forms.TextBox
 	Friend WithEvents BtnContact2ImageDir As System.Windows.Forms.Button
 	Friend WithEvents TbxContact2ImageDir As System.Windows.Forms.TextBox
+	Friend WithEvents TbxRandomImageDir As System.Windows.Forms.TextBox
+	Friend WithEvents BtnRandomImageDir As System.Windows.Forms.Button
+	Friend WithEvents BtnRandomImageDirClear As System.Windows.Forms.Button
 	Friend WithEvents CBGlitterFeedOff As System.Windows.Forms.RadioButton
 	Friend WithEvents CBGlitterFeedScripts As System.Windows.Forms.RadioButton
 	Friend WithEvents CBGlitterFeed As System.Windows.Forms.RadioButton
@@ -16208,4 +16285,6 @@ Partial Class FrmSettings
 	Friend WithEvents CBLockOrgasmChances As CheckBox
 	Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 	Friend WithEvents GrbGlitterfeed As GroupBox
+	Friend WithEvents GBGiveUp As GroupBox
+	Friend WithEvents giveupCheckBox As CheckBox
 End Class

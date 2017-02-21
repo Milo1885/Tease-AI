@@ -58,6 +58,7 @@ Public Class SessionState
 	Public Property Responding As Boolean
 
 	Public Property StrokeTauntVal As Integer = -1
+	Public Property newSlideshow As Boolean = False
 	<Category("Video")> Public Property TempStrokeTauntVal As Integer
 	<Category("Video")> Public Property TempFileText As String
 
@@ -107,6 +108,9 @@ Public Class SessionState
 	Public Property TaskText As String
 	Public Property TaskTextDir As String
 
+	Public Property nameErrors As Integer = 0
+	Public Property wrongAttempt As Boolean
+	Public Property foundAnswer As Boolean
 
 	Public Property ResponseFile As String
 	Public Property ResponseLine As Integer
@@ -137,6 +141,7 @@ Public Class SessionState
 	Public Property AFK As Boolean
 
 
+	Public Property glitterDommeNumber As Integer = 0
 	Public Property HypnoGen As Boolean
 	Public Property Induction As Boolean
 	Public Property TempHypno As String
@@ -177,6 +182,7 @@ Public Class SessionState
 	Public Property ShowModule As Boolean = False
 	Public Property ModuleEnd As Boolean
 
+	Public Property giveUpReturn As Boolean
 	Public Property DivideText As Boolean
 
 	Public Property HoldEdgeTick As Integer
@@ -386,7 +392,7 @@ Public Class SessionState
 	<Category("Images")> Public Property SlideshowContact1 As ContactData
 	<Category("Images")> Public Property SlideshowContact2 As ContactData
 	<Category("Images")> Public Property SlideshowContact3 As ContactData
-
+	<Category("Images")> Public Property SlideshowContactRandom As ContactData
 	<Category("Custom Task")> Public Property CustomTask As Boolean
 	<Category("Custom Task")> Public Property CustomTaskFirst As Boolean = True
 	<Category("Custom Task")> Public Property CustomTaskText As String
@@ -404,7 +410,10 @@ Public Class SessionState
 	Public Property Group As String = "D"
 	Public Property GlitterTease As Boolean
 	Public Property AddContactTick As Integer
-
+	Public Property contact1Present As Boolean
+	Public Property contact2Present As Boolean
+	Public Property contact3Present As Boolean
+	Public Property dommePresent As Boolean = True
 	Public Property Contact1Edge As Boolean
 	Public Property Contact2Edge As Boolean
 	Public Property Contact3Edge As Boolean
@@ -413,6 +422,7 @@ Public Class SessionState
 	Public Property Contact2Stroke As Boolean
 	Public Property Contact3Stroke As Boolean
 
+	Public Property tempDomName As String
 #Region "@CallReturn("
 
 	''' <summary>Gets or sets current stack for @CallReturn( command.</summary>
@@ -694,12 +704,14 @@ Public Class SessionState
 		AvgEdgeCount = My.Settings.AvgEdgeCount
 		AvgEdgeCountRest = My.Settings.AvgEdgeCountRest
 
+		giveUpReturn = My.Settings.GiveUpReturn
 		DommeMood = randomizer.Next(My.Settings.DomMoodMin, My.Settings.DomMoodMax + 1)
 
 		SlideshowMain = New ContactData(ContactType.Domme)
 		SlideshowContact1 = New ContactData(ContactType.Contact1)
 		SlideshowContact2 = New ContactData(ContactType.Contact2)
 		SlideshowContact3 = New ContactData(ContactType.Contact3)
+		SlideshowContactRandom = New ContactData(ContactType.Random)
 
 		CaloriesConsumed = My.Settings.CaloriesConsumed
 
@@ -1224,6 +1236,7 @@ Public Class SessionState
 		End If
 		' Called from Controls UI-Thread -> Execute Code.
 
+		FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
 		Dispose()
 
 		If ActivationForm IsNot Nothing Then
