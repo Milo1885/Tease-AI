@@ -3077,13 +3077,21 @@ SkipDeserializing:
         TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
     End Sub
 
-	Private Sub Button2_MouseHover(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDir.MouseHover, BtnContact2ImageDir.MouseHover, BtnContact3ImageDir.MouseHover, BtnRandomImageDir.MouseHover
+    Private Sub Button2_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnContact1ImageDir.MouseHover, BtnContact2ImageDir.MouseHover, BtnContact3ImageDir.MouseHover
 
-		If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory containing several image" & Environment.NewLine &
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory containing several image" & Environment.NewLine &
 "set folders of the same model you're using as your contact.")
-		If RBGerman.Checked = True Then TTDir.SetToolTip(sender, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
-"Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
-	End Sub
+        If RBGerman.Checked = True Then TTDir.SetToolTip(sender, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+      "Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+    End Sub
+
+    Private Sub btnRandomImage_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnRandomImageDir.MouseHover
+
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory for random dommes." & Environment.NewLine &
+"Each model should have her own directory containing folders of different imagesets.")
+        If RBGerman.Checked = True Then TTDir.SetToolTip(sender, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+      "Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+    End Sub
 
 	Private Sub BtnContact1ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDirClear.Click
 		My.Settings.ResetField(TbxContact1ImageDir, "Text")
