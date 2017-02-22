@@ -12403,6 +12403,10 @@ VTSkip:
             GetSubState()
             ssh.CallReturns.Push(New SessionState.StackedCallReturn(ssh))
 
+            ssh.GotoFlag = False
+
+            ssh.FileGoto = ""
+
             StrokeTimer.Stop()
             StrokeTauntTimer.Stop()
             CensorshipTimer.Stop()
@@ -17241,19 +17245,7 @@ saveImage:
             ElseIf ssh.glitterDommeNumber = 4 Then
                 ssh.SlideshowMain = New ContactData(ContactType.Random)
             End If
-			'check if the #DomHonorific file has some flags to determine which honorific to use with the current domme
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\#DomHonorific.txt") Then
-				Dim filePath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\#DomHonorific.txt"
-				Dim lines As List(Of String) = Txt2List(filePath)
-				lines = FilterList(lines)
-				Dim randomize As Integer = ssh.randomizer.Next(0, lines.Count)
-				Dim chosen As String = lines(randomize)
-				Dim words() As String = Split(chosen, ")")
-				FrmSettings.TBHonorific.Text = words(1)
-			Else
-				FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
-			End If
-		End If
+        End If
 		ssh.SlideshowMain.LoadNew(ssh.newSlideshow)
 		ssh.tempDomName = ssh.SlideshowMain.TypeName
 		ssh.newSlideshow = False
