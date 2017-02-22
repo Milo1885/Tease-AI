@@ -10,6 +10,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 * Added Features:
     * Tease AI now tries to determine an appropriate "DomName is typing..." delay length for lines containing one or more @RT()/@RandomText() Commands.
+	* Commas can now be used in @RT() by typing ",,". When parsing @RT() collections, Tease AI will treat any double comma as a single comma in the domme's output.
+	  * For example, @RT(Look,, I don't want to talk about it, Listen,, we're not discussing this right now, Sorry,, not going there right now)
     * Can now set a directory for Random Dommes in General Settings. This should point to location containing folders named after individual models, and each of those folders should contain folders with imagesets of that model. Tease AI will then chose a folder at random for the pictures, and the name of the model's folder for the domme's name. (dariobrun)
 	* Added checkbox in General Settings to begin any new session with a Random Domme.
 	* Domme Personality settings now include a checkbox for CFNM (Clothed Female Nude Male). This is meant to allow taunts where the domme points out that the user will never see her naked, eg. This should be checked when using models with non-nude picture sets for the domme.

@@ -7861,13 +7861,13 @@ StatusUpdateEnd:
 
 					Dim TempText As String = GetParentheses(RandArray(i), "@RandomText(")
 					Dim OriginalRand As String = TempText
-
+                    TempText = TempText.Replace(",,", "###INSERT-COMMA###")
 					If TempText.Contains(",") Then
 						TempText = FixCommas(TempText)
 						Dim TextArray As String() = TempText.Split(",")
 						TempText = TextArray(ssh.randomizer.Next(0, TextArray.Count))
 					End If
-
+                    TempText = TempText.Replace("###INSERT-COMMA###", ",")
 					StringClean = StringClean.Replace("@RandomText(" & OriginalRand & ")", TempText)
 
 				End If
@@ -7882,12 +7882,14 @@ StatusUpdateEnd:
 				If RandArray(i).Contains("@RT(") Then
 					RandArray(i) = RandArray(i) & ")"
 					Dim TempText As String = GetParentheses(RandArray(i), "@RT(")
-					Dim OriginalRand As String = TempText
+                    Dim OriginalRand As String = TempText
+                    TempText = TempText.Replace(",,", "###INSERT-COMMA###")
 					If TempText.Contains(",") Then
 						TempText = FixCommas(TempText)
 						Dim TextArray As String() = TempText.Split(",")
 						TempText = TextArray(ssh.randomizer.Next(0, TextArray.Count))
-					End If
+                    End If
+                    TempText = TempText.Replace("###INSERT-COMMA###", ",")
 					StringClean = StringClean.Replace("@RT(" & OriginalRand & ")", TempText)
 				End If
 			Next
