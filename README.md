@@ -9,6 +9,12 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 # Changelog - Patch 54.7.0
 
 * Added Features:
+    * Added "Validate All System Files" button to the General settings panel. Rather than updating the Personality Framework with any new System Files, and expecting people to update each Personality
+	  one at a time manually if they missed any updates, the Personality Framework will now be stored in root\System\System Files\.
+
+	  By clicking "Validate All System Files", Tease AI automatically searches all installed Personalities and copies over any System files that are missing. I'll need to include the Personality Framework in every patch, but this
+      turns the problem of updating/validating these files across multiple Personalities into a one-click solution for the user.
+	  
     * Tease AI now tries to determine an appropriate "DomName is typing..." delay length for lines containing one or more @RT()/@RandomText() Commands.
 	* Commas can now be used in @RT() by typing ",,". When parsing @RT() collections, Tease AI will treat any double comma as a single comma in the domme's output.
 	  * For example, @RT(Look,, I don't want to talk about it, Listen,, we're not discussing this right now, Sorry,, not going there right now)

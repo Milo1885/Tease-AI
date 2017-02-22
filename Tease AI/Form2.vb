@@ -3087,8 +3087,8 @@ SkipDeserializing:
 
     Private Sub btnRandomImage_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnRandomImageDir.MouseHover
 
-        If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory for random dommes." & Environment.NewLine &
-"Each model should have her own directory containing folders of different imagesets.")
+        If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory for random dommes. Each model " & Environment.NewLine &
+"should have her own directory containing folders of different imagesets.")
         If RBGerman.Checked = True Then TTDir.SetToolTip(sender, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
       "Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
     End Sub
@@ -10316,4 +10316,34 @@ checkFolder:
 	End Sub
 
    
+    Private Sub BTNValidateSystemFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNValidateSystemFiles.Click
+
+        Dim ValidateCount As Integer
+
+        For Each Dir As String In myDirectory.GetDirectories(Application.StartupPath & "\Scripts\")
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\System\System Files\", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
+                If Not File.Exists(Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", "")) Then
+                    If Not System.IO.Directory.Exists(Path.GetDirectoryName(Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", ""))) Then
+                        System.IO.Directory.CreateDirectory(Path.GetDirectoryName(Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", "")))
+                    End If
+                    System.IO.File.Copy(foundFile, Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", ""))
+                    ValidateCount += 1
+                End If
+            Next
+        Next
+
+        Dim output As String = "All Personalities have been validated!" & Environment.NewLine & Environment.NewLine & ValidateCount & " System Files were added."
+        output = output.Replace(Environment.NewLine & "1 System Files were added.", Environment.NewLine & "1 System File was added.")
+
+        MessageBox.Show(output, "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+    End Sub
+
+
+    Private Sub BTNValidateSystemFiles_CheckedChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNValidateSystemFiles.MouseHover
+
+        TTDir.SetToolTip(BTNValidateSystemFiles, "Searches each installed Personality and automatically" & Environment.NewLine & "creates any missing System Files in the correct folders.")
+
+    End Sub
+
 End Class

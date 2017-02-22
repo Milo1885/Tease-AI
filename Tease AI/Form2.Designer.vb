@@ -1114,6 +1114,8 @@ Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 Me.TextBox2 = New System.Windows.Forms.TextBox()
 Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
+Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+Me.BTNValidateSystemFiles = New System.Windows.Forms.Button()
 Me.SettingsPanel.SuspendLayout
 Me.SettingsTabs.SuspendLayout
 Me.TabPage1.SuspendLayout
@@ -1375,6 +1377,7 @@ Me.GroupBox12.SuspendLayout
 Me.GroupBox65.SuspendLayout
 CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).BeginInit
 CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).BeginInit
+Me.GroupBox3.SuspendLayout
 Me.SuspendLayout
 '
 'SettingsPanel
@@ -1425,6 +1428,7 @@ Me.TabPage1.Text = "General"
 '
 Me.PNLGeneralSettings.BackColor = System.Drawing.Color.LightGray
 Me.PNLGeneralSettings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+Me.PNLGeneralSettings.Controls.Add(Me.GroupBox3)
 Me.PNLGeneralSettings.Controls.Add(Me.GroupBox2)
 Me.PNLGeneralSettings.Controls.Add(Me.BtnImportSettings)
 Me.PNLGeneralSettings.Controls.Add(Me.LblImportSettings)
@@ -14869,6 +14873,28 @@ Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
 Me.BWURLFiles.WorkerReportsProgress = true
 Me.BWURLFiles.WorkerSupportsCancellation = true
 '
+'GroupBox3
+'
+Me.GroupBox3.Controls.Add(Me.BTNValidateSystemFiles)
+Me.GroupBox3.Location = New System.Drawing.Point(7, 365)
+Me.GroupBox3.Name = "GroupBox3"
+Me.GroupBox3.Size = New System.Drawing.Size(211, 65)
+Me.GroupBox3.TabIndex = 184
+Me.GroupBox3.TabStop = false
+Me.GroupBox3.Text = "System Files"
+'
+'BTNValidateSystemFiles
+'
+Me.BTNValidateSystemFiles.BackColor = System.Drawing.Color.LightGray
+Me.BTNValidateSystemFiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.BTNValidateSystemFiles.ForeColor = System.Drawing.Color.Black
+Me.BTNValidateSystemFiles.Location = New System.Drawing.Point(10, 26)
+Me.BTNValidateSystemFiles.Name = "BTNValidateSystemFiles"
+Me.BTNValidateSystemFiles.Size = New System.Drawing.Size(190, 22)
+Me.BTNValidateSystemFiles.TabIndex = 183
+Me.BTNValidateSystemFiles.Text = "Validate All System Files"
+Me.BTNValidateSystemFiles.UseVisualStyleBackColor = false
+'
 'FrmSettings
 '
 Me.AllowDrop = true
@@ -15221,6 +15247,7 @@ Me.GroupBox65.ResumeLayout(false)
 Me.GroupBox65.PerformLayout
 CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).EndInit
 CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).EndInit
+Me.GroupBox3.ResumeLayout(false)
 Me.ResumeLayout(false)
 
 End Sub
@@ -16314,4 +16341,6 @@ End Sub
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
     Friend WithEvents TbxRandomImageDir As System.Windows.Forms.TextBox
     Friend WithEvents CBRandomDomme As System.Windows.Forms.CheckBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents BTNValidateSystemFiles As System.Windows.Forms.Button
 End Class
