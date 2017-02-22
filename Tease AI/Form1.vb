@@ -14061,66 +14061,46 @@ VTSkip:
 				End If
 			End If
 
-            If FilterString.Contains("@Flag(") Or FilterString.Contains("@NotFlag(") Then
-                Dim result As Boolean = True
+            If FilterString.Contains("@Flag(") Then
                 Dim writeFlag As String
                 Dim splitFlag As String()
-
-                If FilterString.Contains("@Flag(") Then
-                    writeFlag = GetParentheses(FilterString, "@Flag(")
-                    writeFlag = FixCommas(writeFlag)
-                    splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
-
-                    For Each s In splitFlag
-                        If Not FlagExists(s) Then
-                            result = False
-                            Exit For
-                        End If
-                    Next
-                End If
-                If result = False Then Return result
-
-                If FilterString.Contains("@NotFlag(") Then
-                    writeFlag = GetParentheses(FilterString, "@NotFlag(")
-                    writeFlag = FixCommas(writeFlag)
-                    splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
-                    result = False
-                    For Each s In splitFlag
-                        If result Then
-                            If FlagExists(s) Then
-                                result = True
-                                Exit For
-                            End If
-                        Else
-                            If FlagExists(s) Then
-                                result = True
-                            Else
-                                result = False
-                            End If
-                        End If
-                    Next
-                End If
-                If result = True Then Return False
+                writeFlag = GetParentheses(FilterString, "@Flag(")
+                writeFlag = FixCommas(writeFlag)
+                splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
+                For Each s In splitFlag
+                    If Not FlagExists(s) Then
+                        Return False
+                    End If
+                Next
             End If
-            
-            If FilterString.Contains("@FlagOr(") Then
-		            Dim result As Boolean = False
+
+            If FilterString.Contains("@NotFlag(") Then
                 Dim writeFlag As String
                 Dim splitFlag As String()
+                writeFlag = GetParentheses(FilterString, "@NotFlag(")
+                writeFlag = FixCommas(writeFlag)
+                splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
+                For Each s In splitFlag
+                    If FlagExists(s) Then
+                        Return False
+                    End If
+                Next
+            End If
 
-                If FilterString.Contains("@FlagOr(") Then
-                    writeFlag = GetParentheses(FilterString, "@FlagOr(")
-                    writeFlag = FixCommas(writeFlag)
-                    splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
-
-                    For Each s In splitFlag
-                        If FlagExists(s) Then
-                            result = True
-                            Exit For
-                        End If
-                    Next
-                End If
-                If result = False Then Return result
+            If FilterString.Contains("@FlagOr(") Then
+                Dim writeFlag As String
+                Dim splitFlag As String()
+                writeFlag = GetParentheses(FilterString, "@FlagOr(")
+                writeFlag = FixCommas(writeFlag)
+                splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
+                Dim result As Boolean = False
+                For Each s In splitFlag
+                    If FlagExists(s) Then
+                        result = True
+                        Exit For
+                    End If
+                Next
+                If Not result Then Return False
             End If
 
             If FilterString.Contains("@CheckDate(") And Linear = False Then

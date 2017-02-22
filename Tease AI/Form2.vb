@@ -3073,7 +3073,7 @@ SkipDeserializing:
 		TTDir.SetToolTip(sender, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
 	End Sub
 
-    Private Sub LBLContact1ImageDir_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover
+    Private Sub LBLContact1ImageDir_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover, TbxRandomImageDir.MouseHover
         TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
     End Sub
 
