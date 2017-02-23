@@ -28,9 +28,11 @@ Me.SettingsPanel = New System.Windows.Forms.Panel()
 Me.SettingsTabs = New System.Windows.Forms.TabControl()
 Me.TabPage1 = New System.Windows.Forms.TabPage()
 Me.PNLGeneralSettings = New System.Windows.Forms.Panel()
+Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+Me.BTNValidateSystemFiles = New System.Windows.Forms.Button()
 Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-Me.CBRandomDomme = New System.Windows.Forms.CheckBox()
 Me.TbxRandomImageDir = New System.Windows.Forms.TextBox()
+Me.CBRandomDomme = New System.Windows.Forms.CheckBox()
 Me.BtnRandomImageDir = New System.Windows.Forms.Button()
 Me.BtnRandomImageDirClear = New System.Windows.Forms.Button()
 Me.BtnImportSettings = New System.Windows.Forms.Button()
@@ -1113,13 +1115,19 @@ Me.Label135 = New System.Windows.Forms.Label()
 Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 Me.TextBox2 = New System.Windows.Forms.TextBox()
+Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+Me.BTNDomChangeDomme = New System.Windows.Forms.Button()
+Me.BTNDomChangeContact2 = New System.Windows.Forms.Button()
+Me.BTNDomChangeContact3 = New System.Windows.Forms.Button()
+Me.BTNDomChangeRandom = New System.Windows.Forms.Button()
+Me.BTNDomChangeContact1 = New System.Windows.Forms.Button()
+Me.LBLCurrentDomme = New System.Windows.Forms.Label()
 Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
-Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-Me.BTNValidateSystemFiles = New System.Windows.Forms.Button()
 Me.SettingsPanel.SuspendLayout
 Me.SettingsTabs.SuspendLayout
 Me.TabPage1.SuspendLayout
 Me.PNLGeneralSettings.SuspendLayout
+Me.GroupBox3.SuspendLayout
 Me.GroupBox2.SuspendLayout
 Me.GroupBox64.SuspendLayout
 Me.GBDommeImages.SuspendLayout
@@ -1377,7 +1385,7 @@ Me.GroupBox12.SuspendLayout
 Me.GroupBox65.SuspendLayout
 CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).BeginInit
 CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).BeginInit
-Me.GroupBox3.SuspendLayout
+Me.GroupBox4.SuspendLayout
 Me.SuspendLayout
 '
 'SettingsPanel
@@ -1446,12 +1454,33 @@ Me.PNLGeneralSettings.Name = "PNLGeneralSettings"
 Me.PNLGeneralSettings.Size = New System.Drawing.Size(708, 437)
 Me.PNLGeneralSettings.TabIndex = 0
 '
+'GroupBox3
+'
+Me.GroupBox3.Controls.Add(Me.BTNValidateSystemFiles)
+Me.GroupBox3.Location = New System.Drawing.Point(7, 365)
+Me.GroupBox3.Name = "GroupBox3"
+Me.GroupBox3.Size = New System.Drawing.Size(211, 65)
+Me.GroupBox3.TabIndex = 184
+Me.GroupBox3.TabStop = false
+Me.GroupBox3.Text = "System Files"
+'
+'BTNValidateSystemFiles
+'
+Me.BTNValidateSystemFiles.BackColor = System.Drawing.Color.LightGray
+Me.BTNValidateSystemFiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.BTNValidateSystemFiles.ForeColor = System.Drawing.Color.Black
+Me.BTNValidateSystemFiles.Location = New System.Drawing.Point(10, 26)
+Me.BTNValidateSystemFiles.Name = "BTNValidateSystemFiles"
+Me.BTNValidateSystemFiles.Size = New System.Drawing.Size(190, 22)
+Me.BTNValidateSystemFiles.TabIndex = 183
+Me.BTNValidateSystemFiles.Text = "Validate All System Files"
+Me.BTNValidateSystemFiles.UseVisualStyleBackColor = false
+'
 'GroupBox2
 '
-Me.GroupBox2.Controls.Add(Me.CBRandomDomme)
 Me.GroupBox2.Controls.Add(Me.TbxRandomImageDir)
+Me.GroupBox2.Controls.Add(Me.CBRandomDomme)
 Me.GroupBox2.Controls.Add(Me.BtnRandomImageDir)
-Me.GroupBox2.Controls.Add(Me.BtnRandomImageDirClear)
 Me.GroupBox2.Location = New System.Drawing.Point(224, 313)
 Me.GroupBox2.Name = "GroupBox2"
 Me.GroupBox2.Size = New System.Drawing.Size(210, 117)
@@ -1459,29 +1488,26 @@ Me.GroupBox2.TabIndex = 183
 Me.GroupBox2.TabStop = false
 Me.GroupBox2.Text = "Random Domme"
 '
+'TbxRandomImageDir
+'
+Me.TbxRandomImageDir.BackColor = System.Drawing.Color.LightGray
+Me.TbxRandomImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+Me.TbxRandomImageDir.Location = New System.Drawing.Point(10, 50)
+Me.TbxRandomImageDir.Name = "TbxRandomImageDir"
+Me.TbxRandomImageDir.ReadOnly = true
+Me.TbxRandomImageDir.Size = New System.Drawing.Size(190, 20)
+Me.TbxRandomImageDir.TabIndex = 185
+Me.TbxRandomImageDir.Text = "No Path Selected"
+'
 'CBRandomDomme
 '
 Me.CBRandomDomme.AutoSize = true
-Me.CBRandomDomme.Location = New System.Drawing.Point(6, 83)
+Me.CBRandomDomme.Location = New System.Drawing.Point(10, 83)
 Me.CBRandomDomme.Name = "CBRandomDomme"
 Me.CBRandomDomme.Size = New System.Drawing.Size(191, 17)
 Me.CBRandomDomme.TabIndex = 184
 Me.CBRandomDomme.Text = "Always Start With Random Domme"
 Me.CBRandomDomme.UseVisualStyleBackColor = true
-'
-'TbxRandomImageDir
-'
-Me.TbxRandomImageDir.BackColor = System.Drawing.Color.LightGray
-Me.TbxRandomImageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-Me.TbxRandomImageDir.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Tease_AI.My.MySettings.Default, "DomImageDir", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-Me.TbxRandomImageDir.Font = New System.Drawing.Font("Microsoft Sans Serif", 8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-Me.TbxRandomImageDir.ForeColor = System.Drawing.Color.Black
-Me.TbxRandomImageDir.Location = New System.Drawing.Point(10, 49)
-Me.TbxRandomImageDir.Name = "TbxRandomImageDir"
-Me.TbxRandomImageDir.ReadOnly = true
-Me.TbxRandomImageDir.Size = New System.Drawing.Size(145, 20)
-Me.TbxRandomImageDir.TabIndex = 183
-Me.TbxRandomImageDir.Text = Global.Tease_AI.My.MySettings.Default.DomImageDir
 '
 'BtnRandomImageDir
 '
@@ -1500,7 +1526,7 @@ Me.BtnRandomImageDir.UseVisualStyleBackColor = false
 Me.BtnRandomImageDirClear.BackColor = System.Drawing.Color.LightGray
 Me.BtnRandomImageDirClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
 Me.BtnRandomImageDirClear.ForeColor = System.Drawing.Color.Black
-Me.BtnRandomImageDirClear.Location = New System.Drawing.Point(161, 47)
+Me.BtnRandomImageDirClear.Location = New System.Drawing.Point(804, 212)
 Me.BtnRandomImageDirClear.Name = "BtnRandomImageDirClear"
 Me.BtnRandomImageDirClear.Size = New System.Drawing.Size(39, 22)
 Me.BtnRandomImageDirClear.TabIndex = 181
@@ -1613,12 +1639,12 @@ Me.CBNewSlideshow.AutoSize = true
 Me.CBNewSlideshow.Checked = true
 Me.CBNewSlideshow.CheckState = System.Windows.Forms.CheckState.Checked
 Me.CBNewSlideshow.ForeColor = System.Drawing.Color.Black
-Me.CBNewSlideshow.Location = New System.Drawing.Point(4, 100)
+Me.CBNewSlideshow.Location = New System.Drawing.Point(10, 100)
 Me.CBNewSlideshow.Name = "CBNewSlideshow"
-Me.CBNewSlideshow.Size = New System.Drawing.Size(200, 17)
+Me.CBNewSlideshow.Size = New System.Drawing.Size(187, 17)
 Me.CBNewSlideshow.TabIndex = 18
 Me.CBNewSlideshow.TabStop = false
-Me.CBNewSlideshow.Text = "Load New Slideshow When Finished"
+Me.CBNewSlideshow.Text = "Load New Slideshow When Done"
 Me.CBNewSlideshow.UseVisualStyleBackColor = true
 '
 'offRadio
@@ -9659,6 +9685,7 @@ Me.TabPage22.Text = "Glitter"
 'PNLGlitter
 '
 Me.PNLGlitter.BackColor = System.Drawing.Color.LightGray
+Me.PNLGlitter.Controls.Add(Me.GroupBox4)
 Me.PNLGlitter.Controls.Add(Me.Button15)
 Me.PNLGlitter.Controls.Add(Me.Button16)
 Me.PNLGlitter.Controls.Add(Me.Label121)
@@ -14865,6 +14892,90 @@ Me.TextBox2.ReadOnly = true
 Me.TextBox2.Size = New System.Drawing.Size(189, 20)
 Me.TextBox2.TabIndex = 145
 '
+'GroupBox4
+'
+Me.GroupBox4.Controls.Add(Me.LBLCurrentDomme)
+Me.GroupBox4.Controls.Add(Me.BTNDomChangeContact1)
+Me.GroupBox4.Controls.Add(Me.BTNDomChangeRandom)
+Me.GroupBox4.Controls.Add(Me.BTNDomChangeContact3)
+Me.GroupBox4.Controls.Add(Me.BTNDomChangeContact2)
+Me.GroupBox4.Controls.Add(Me.BTNDomChangeDomme)
+Me.GroupBox4.Location = New System.Drawing.Point(7, 307)
+Me.GroupBox4.Name = "GroupBox4"
+Me.GroupBox4.Size = New System.Drawing.Size(344, 85)
+Me.GroupBox4.TabIndex = 167
+Me.GroupBox4.TabStop = false
+Me.GroupBox4.Text = "Change Current Domme"
+'
+'BTNDomChangeDomme
+'
+Me.BTNDomChangeDomme.BackColor = System.Drawing.Color.LightGray
+Me.BTNDomChangeDomme.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.BTNDomChangeDomme.ForeColor = System.Drawing.Color.Black
+Me.BTNDomChangeDomme.Location = New System.Drawing.Point(6, 19)
+Me.BTNDomChangeDomme.Name = "BTNDomChangeDomme"
+Me.BTNDomChangeDomme.Size = New System.Drawing.Size(108, 24)
+Me.BTNDomChangeDomme.TabIndex = 168
+Me.BTNDomChangeDomme.Text = "Domme"
+Me.BTNDomChangeDomme.UseVisualStyleBackColor = false
+'
+'BTNDomChangeContact2
+'
+Me.BTNDomChangeContact2.BackColor = System.Drawing.Color.LightGray
+Me.BTNDomChangeContact2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.BTNDomChangeContact2.ForeColor = System.Drawing.Color.Black
+Me.BTNDomChangeContact2.Location = New System.Drawing.Point(116, 49)
+Me.BTNDomChangeContact2.Name = "BTNDomChangeContact2"
+Me.BTNDomChangeContact2.Size = New System.Drawing.Size(108, 24)
+Me.BTNDomChangeContact2.TabIndex = 170
+Me.BTNDomChangeContact2.Text = "Contact 2"
+Me.BTNDomChangeContact2.UseVisualStyleBackColor = false
+'
+'BTNDomChangeContact3
+'
+Me.BTNDomChangeContact3.BackColor = System.Drawing.Color.LightGray
+Me.BTNDomChangeContact3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.BTNDomChangeContact3.ForeColor = System.Drawing.Color.Black
+Me.BTNDomChangeContact3.Location = New System.Drawing.Point(226, 49)
+Me.BTNDomChangeContact3.Name = "BTNDomChangeContact3"
+Me.BTNDomChangeContact3.Size = New System.Drawing.Size(108, 24)
+Me.BTNDomChangeContact3.TabIndex = 171
+Me.BTNDomChangeContact3.Text = "Contact 3"
+Me.BTNDomChangeContact3.UseVisualStyleBackColor = false
+'
+'BTNDomChangeRandom
+'
+Me.BTNDomChangeRandom.BackColor = System.Drawing.Color.LightGray
+Me.BTNDomChangeRandom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.BTNDomChangeRandom.ForeColor = System.Drawing.Color.Black
+Me.BTNDomChangeRandom.Location = New System.Drawing.Point(116, 19)
+Me.BTNDomChangeRandom.Name = "BTNDomChangeRandom"
+Me.BTNDomChangeRandom.Size = New System.Drawing.Size(108, 24)
+Me.BTNDomChangeRandom.TabIndex = 172
+Me.BTNDomChangeRandom.Text = "Random"
+Me.BTNDomChangeRandom.UseVisualStyleBackColor = false
+'
+'BTNDomChangeContact1
+'
+Me.BTNDomChangeContact1.BackColor = System.Drawing.Color.LightGray
+Me.BTNDomChangeContact1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+Me.BTNDomChangeContact1.ForeColor = System.Drawing.Color.Black
+Me.BTNDomChangeContact1.Location = New System.Drawing.Point(6, 49)
+Me.BTNDomChangeContact1.Name = "BTNDomChangeContact1"
+Me.BTNDomChangeContact1.Size = New System.Drawing.Size(108, 24)
+Me.BTNDomChangeContact1.TabIndex = 173
+Me.BTNDomChangeContact1.Text = "Contact 1"
+Me.BTNDomChangeContact1.UseVisualStyleBackColor = false
+'
+'LBLCurrentDomme
+'
+Me.LBLCurrentDomme.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+Me.LBLCurrentDomme.Location = New System.Drawing.Point(230, 19)
+Me.LBLCurrentDomme.Name = "LBLCurrentDomme"
+Me.LBLCurrentDomme.Size = New System.Drawing.Size(104, 24)
+Me.LBLCurrentDomme.TabIndex = 168
+Me.LBLCurrentDomme.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+'
 'BWURLFiles
 '
 Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
@@ -14872,28 +14983,6 @@ Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
 Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
 Me.BWURLFiles.WorkerReportsProgress = true
 Me.BWURLFiles.WorkerSupportsCancellation = true
-'
-'GroupBox3
-'
-Me.GroupBox3.Controls.Add(Me.BTNValidateSystemFiles)
-Me.GroupBox3.Location = New System.Drawing.Point(7, 365)
-Me.GroupBox3.Name = "GroupBox3"
-Me.GroupBox3.Size = New System.Drawing.Size(211, 65)
-Me.GroupBox3.TabIndex = 184
-Me.GroupBox3.TabStop = false
-Me.GroupBox3.Text = "System Files"
-'
-'BTNValidateSystemFiles
-'
-Me.BTNValidateSystemFiles.BackColor = System.Drawing.Color.LightGray
-Me.BTNValidateSystemFiles.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
-Me.BTNValidateSystemFiles.ForeColor = System.Drawing.Color.Black
-Me.BTNValidateSystemFiles.Location = New System.Drawing.Point(10, 26)
-Me.BTNValidateSystemFiles.Name = "BTNValidateSystemFiles"
-Me.BTNValidateSystemFiles.Size = New System.Drawing.Size(190, 22)
-Me.BTNValidateSystemFiles.TabIndex = 183
-Me.BTNValidateSystemFiles.Text = "Validate All System Files"
-Me.BTNValidateSystemFiles.UseVisualStyleBackColor = false
 '
 'FrmSettings
 '
@@ -14904,6 +14993,7 @@ Me.ClientSize = New System.Drawing.Size(727, 465)
 Me.Controls.Add(Me.GroupBox65)
 Me.Controls.Add(Me.GroupBox44)
 Me.Controls.Add(Me.GroupBox47)
+Me.Controls.Add(Me.BtnRandomImageDirClear)
 Me.Controls.Add(Me.SettingsPanel)
 Me.Controls.Add(Me.GroupBox12)
 Me.Controls.Add(Me.GroupBox21)
@@ -14919,6 +15009,7 @@ Me.SettingsTabs.ResumeLayout(false)
 Me.TabPage1.ResumeLayout(false)
 Me.PNLGeneralSettings.ResumeLayout(false)
 Me.PNLGeneralSettings.PerformLayout
+Me.GroupBox3.ResumeLayout(false)
 Me.GroupBox2.ResumeLayout(false)
 Me.GroupBox2.PerformLayout
 Me.GroupBox64.ResumeLayout(false)
@@ -15247,7 +15338,7 @@ Me.GroupBox65.ResumeLayout(false)
 Me.GroupBox65.PerformLayout
 CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).EndInit
 CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).EndInit
-Me.GroupBox3.ResumeLayout(false)
+Me.GroupBox4.ResumeLayout(false)
 Me.ResumeLayout(false)
 
 End Sub
@@ -16339,8 +16430,15 @@ End Sub
 	Friend WithEvents GBGiveUp As GroupBox
     Friend WithEvents giveupCheckBox As CheckBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents TbxRandomImageDir As System.Windows.Forms.TextBox
     Friend WithEvents CBRandomDomme As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents BTNValidateSystemFiles As System.Windows.Forms.Button
+    Friend WithEvents TbxRandomImageDir As System.Windows.Forms.TextBox
+    Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
+    Friend WithEvents BTNDomChangeContact1 As System.Windows.Forms.Button
+    Friend WithEvents BTNDomChangeRandom As System.Windows.Forms.Button
+    Friend WithEvents BTNDomChangeContact3 As System.Windows.Forms.Button
+    Friend WithEvents BTNDomChangeContact2 As System.Windows.Forms.Button
+    Friend WithEvents BTNDomChangeDomme As System.Windows.Forms.Button
+    Friend WithEvents LBLCurrentDomme As System.Windows.Forms.Label
 End Class

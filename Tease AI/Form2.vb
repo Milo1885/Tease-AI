@@ -449,12 +449,12 @@ Public Class FrmSettings
 		WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
 
 
-		For Each tmptbx As TextBox In New List(Of TextBox) From {TbxContact1ImageDir, TbxContact2ImageDir, TbxContact3ImageDir, TbxDomImageDir, TbxRandomImageDir}
-			If tmptbx.DataBindings("Text") Is Nothing Then
-				Throw New Exception("There is no databinding set on """ & tmptbx.Name &
-					"""'s text-property. Set the databinding and recompile!")
-			End If
-		Next
+        For Each tmptbx As TextBox In New List(Of TextBox) From {TbxContact1ImageDir, TbxContact2ImageDir, TbxContact3ImageDir, TbxDomImageDir}
+            If tmptbx.DataBindings("Text") Is Nothing Then
+                Throw New Exception("There is no databinding set on """ & tmptbx.Name &
+                 """'s text-property. Set the databinding and recompile!")
+            End If
+        Next
 
 		For Each tmptbx As CheckBox In New List(Of CheckBox) From {CBGlitter1, CBGlitter2, CBGlitter3}
 			If tmptbx.DataBindings("Checked") Is Nothing Then
@@ -462,6 +462,8 @@ Public Class FrmSettings
 					"""'s checked-property. Set the databinding and recompile!")
 			End If
 		Next
+
+        TbxRandomImageDir.Text = My.Settings.RandomImageDir
 
 		If My.Settings.TeaseAILanguage = "English" Then EnglishMenu()
 		If My.Settings.TeaseAILanguage = "German" Then GermanMenu()
@@ -2967,8 +2969,9 @@ SkipDeserializing:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			My.Settings.RandomImageDir = FolderBrowserDialog1.SelectedPath
 			My.Application.Session.SlideshowContactRandom = New ContactData(ContactType.Random)
-		End If
-	End Sub
+            TbxRandomImageDir.Text = My.Settings.RandomImageDir
+        End If
+    End Sub
 	
 	Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitterD.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
@@ -10346,4 +10349,28 @@ checkFolder:
 
     End Sub
 
+    Private Sub BTNDomChangeDomme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeDomme.Click
+        Ssh.glitterDommeNumber = 0
+        Form1.LoadDommeImageFolder()
+    End Sub
+
+    Private Sub BTNDomChangeRandom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeRandom.Click
+        Ssh.glitterDommeNumber = 4
+        Form1.LoadDommeImageFolder()
+    End Sub
+
+    Private Sub BTNDomChangeContact1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact1.Click
+        Ssh.glitterDommeNumber = 1
+        Form1.LoadDommeImageFolder()
+    End Sub
+
+    Private Sub BTNDomChangeContact2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact2.Click
+        Ssh.glitterDommeNumber = 2
+        Form1.LoadDommeImageFolder()
+    End Sub
+
+    Private Sub BTNDomChangeContact3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact3.Click
+        Ssh.glitterDommeNumber = 3
+        Form1.LoadDommeImageFolder()
+    End Sub
 End Class

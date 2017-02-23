@@ -20,6 +20,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	  * For example, @RT(Look,, I don't want to talk about it, Listen,, we're not discussing this right now, Sorry,, not going there right now)
     * Can now set a directory for Random Dommes in General Settings. This should point to location containing folders named after individual models, and each of those folders should contain folders with imagesets of that model. Tease AI will then chose a folder at random for the pictures, and the name of the model's folder for the domme's name. (dariobrun)
 	* Added checkbox in General Settings to begin any new session with a Random Domme.
+	* Added Change Current Domme buttons in Settings->Apps->Glitter. This allows to set the currently active domme at any time the session is active.
 	* Domme Personality settings now include a checkbox for CFNM (Clothed Female Nude Male). This is meant to allow taunts where the domme points out that the user will never see her naked, eg. This should be checked when using models with non-nude picture sets for the domme.
 	* Added "Continue Current Script After Giving Up" option in Domme Settings. When you "give up" in Tease AI, the program normally moves on to a random Link script. When this option is checked, the script you're on will continue to play out instead. (dariobrun)
 	* If options are set to use and/or capitalize the Domm'es honorific and the user fails to do so enough times, the domme will administer a CBT punishment (dariobrun)

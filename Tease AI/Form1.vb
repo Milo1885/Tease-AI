@@ -17241,7 +17241,7 @@ saveImage:
 		'check which domme should be loaded
 		If Not ssh.newSlideshow Then
             If ssh.glitterDommeNumber = 0 Then
-                If FrmSettings.CBRandomDomme.Checked = False Then
+                If FrmSettings.CBRandomDomme.Checked = False Or ssh.SaidHello = True Then
                     ssh.SlideshowMain = New ContactData(ContactType.Domme)
                 Else
                     ssh.SlideshowMain = New ContactData(ContactType.Random)
@@ -17257,7 +17257,8 @@ saveImage:
             End If
         End If
 		ssh.SlideshowMain.LoadNew(ssh.newSlideshow)
-		ssh.tempDomName = ssh.SlideshowMain.TypeName
+        ssh.tempDomName = ssh.SlideshowMain.TypeName
+        FrmSettings.LBLCurrentDomme.Text = ssh.tempDomName
 		ssh.newSlideshow = False
 
 		ShowImage(ssh.SlideshowMain.CurrentImage, False)
