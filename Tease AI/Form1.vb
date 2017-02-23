@@ -4786,18 +4786,18 @@ CancelGoto:
 			ssh.DomChat = OfflineConversion(ssh.DomChat)
 		End If
 		ssh.TypeDelay = ssh.StringLength
-		If ssh.TypeDelay > 60 Then ssh.TypeDelay = 60
         If FrmSettings.typeinstantlyCheckBox.Checked = True Or ssh.RapidCode = True = True Then ssh.TypeDelay = 0
         If ssh.TypeDelay <> 0 Then
             If GetCharCount(ssh.DomChat, "@RT(") <> 0 Then
-                ssh.TypeDelay /= GetCharCount(ssh.DomChat, ",")
-                ssh.TypeDelay *= GetCharCount(ssh.DomChat, "@RT(")
+                ssh.TypeDelay /= GetCharCount(ssh.DomChat, ",") + 1
+                ssh.TypeDelay *= GetSubstringCount(ssh.DomChat, "@RT(")
             End If
             If GetCharCount(ssh.DomChat, "@RandomText(") <> 0 Then
-                ssh.TypeDelay /= GetCharCount(ssh.DomChat, ",")
-                ssh.TypeDelay *= GetCharCount(ssh.DomChat, "@RandomText(")
+                ssh.TypeDelay /= GetCharCount(ssh.DomChat, ",") + 1
+                ssh.TypeDelay *= GetSubstringCount(ssh.DomChat, "@RandomText(")
             End If
         End If
+        If ssh.TypeDelay > 60 Then ssh.TypeDelay = 60
 		SendTimer.Start()
 
 
@@ -4809,20 +4809,20 @@ CancelGoto:
 			ssh.DomTask = OfflineConversion(ssh.DomTask)
 		End If
 		ssh.TypeDelay = ssh.StringLength
-		If ssh.TypeDelay > 60 Then ssh.TypeDelay = 60
-		If FrmSettings.typeinstantlyCheckBox.Checked = True Or ssh.RapidCode = True = True Then ssh.TypeDelay = 0
+        If FrmSettings.typeinstantlyCheckBox.Checked = True Or ssh.RapidCode = True = True Then ssh.TypeDelay = 0
         If ssh.HypnoGen = True And CBHypnoGenNoText.Checked = True Then ssh.TypeDelay = 0
         If ssh.TypeDelay <> 0 Then
             If GetCharCount(ssh.DomTask, "@RT(") <> 0 Then
-                ssh.TypeDelay /= GetCharCount(ssh.DomTask, ",")
-                ssh.TypeDelay *= GetCharCount(ssh.DomTask, "@RT(")
+                ssh.TypeDelay /= GetCharCount(ssh.DomTask, ",") + 1
+                ssh.TypeDelay *= GetSubstringCount(ssh.DomTask, "@RT(")
             End If
             If GetCharCount(ssh.DomTask, "@RandomText(") <> 0 Then
-                ssh.TypeDelay /= GetCharCount(ssh.DomTask, ",")
-                ssh.TypeDelay *= GetCharCount(ssh.DomTask, "@RandomText(")
+                ssh.TypeDelay /= GetCharCount(ssh.DomTask, ",") + 1
+                ssh.TypeDelay *= GetSubstringCount(ssh.DomTask, "@RandomText(")
             End If
         End If
-		Timer1.Start()
+        If ssh.TypeDelay > 60 Then ssh.TypeDelay = 60
+        Timer1.Start()
 
 	End Sub
 
@@ -12398,6 +12398,40 @@ VTSkip:
             StringClean = StringClean.Replace("@EmoteMessage ", "")
         End If
 
+
+
+
+
+
+
+
+        If StringClean.Contains("@MiniScript(") Then
+
+            Dim MiniTemp As String = GetParentheses(StringClean, "@MiniScript(")
+            Dim Mini2CR As String = "\Custom\Miniscripts\" & MiniTemp & ".txt"
+
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & Mini2CR) Then
+                StringClean = StringClean.Replace("@MiniScript(" & MiniTemp & ")", "@CallReturn(" & Mini2CR & ")")
+            Else
+                StringClean = StringClean.Replace("@MiniScript(" & MiniTemp & ")", "")
+            End If
+
+            ' With @CallReturn() now tentatively in complete working order, @MiniScript() is being converted to @CallReturn() here in code - 1885
+
+            'If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\MiniScripts\" & MiniTemp & ".txt") Then ' And MiniScript = False Then
+            'ssh.MiniScript = True
+            'ssh.MiniScriptText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\MiniScripts\" & MiniTemp & ".txt"
+            'ssh.MiniTauntVal = -1
+            'ssh.MiniTimerCheck = ScriptTimer.Enabled
+            'ssh.ScriptTick = 2
+            'ScriptTimer.Start()
+            'End If
+            'StringClean = StringClean.Replace("@MiniScript(" & MiniTemp & ")", "")
+
+        End If
+
+
+
         If StringClean.Contains("@CallReturn(") Then
 
             GetSubState()
@@ -12796,30 +12830,6 @@ VTSkip:
         If StringClean.Contains("@ClearWorship") Then
             ssh.WorshipTarget = ""
             StringClean = StringClean.Replace("@ClearWorship", "")
-        End If
-
-
-
-
-
-
-
-
-        If StringClean.Contains("@MiniScript(") Then
-
-            Dim MiniTemp As String = GetParentheses(StringClean, "@MiniScript(")
-
-
-            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\MiniScripts\" & MiniTemp & ".txt") Then ' And MiniScript = False Then
-                ssh.MiniScript = True
-                ssh.MiniScriptText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\MiniScripts\" & MiniTemp & ".txt"
-                ssh.MiniTauntVal = -1
-                ssh.MiniTimerCheck = ScriptTimer.Enabled
-                ssh.ScriptTick = 2
-                ScriptTimer.Start()
-            End If
-
-            StringClean = StringClean.Replace("@MiniScript(" & MiniTemp & ")", "")
         End If
 
 
@@ -20799,7 +20809,19 @@ playLoop:
 
 	Public Function GetCharCount(ByVal StringClean As String, ByVal Character As String) As Integer
 		Return Len(StringClean) - Len(Replace(StringClean, Character, ""))
-	End Function
+    End Function
+
+    Public Function GetSubstringCount(ByVal StringClean As String, ByVal Substring As String) As Integer
+
+        Dim SubstringCount As Integer = 0
+        For i As Integer = 0 To StringClean.Length - 1
+            If StringClean.Substring(i).StartsWith(Substring) Then
+                SubstringCount += 1
+            End If
+        Next
+        Return SubstringCount
+
+    End Function
 
 
 

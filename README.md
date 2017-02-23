@@ -64,6 +64,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* @CFNM - When used, will only show lines with this Command Filter if the CFNM box is checked in the Domme Personality settings.
 	
 * Bugfixes:
+    * @CallReturn() would cause the program to crash if used when Tease AI last parsed a line containing @Goto(). Use of @CallReturn should be much more stable. (dariobrun)
+	* @MiniScript() Command re-written to utilize @CallReturn()'s stability improvements
     * @RT() and @RandomText() were not working correctly (Stefaf)
 	* @NotFlag() was only checking for any flags not to be present when parsing multiple flags instead of all flags not to be present. (dariobrun)
     * Certain local genre images were not using their subdirectories correctly. (dariobrun)
