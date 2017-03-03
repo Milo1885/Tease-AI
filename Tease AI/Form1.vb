@@ -16807,6 +16807,8 @@ RestartFunction:
 		FrmSettings.LBLDebugTeaseTime.Text = ssh.TeaseTick
 		'Debug.Print("TeaseTick = " & TeaseTick)
 
+		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
 		ssh.TeaseTick -= 1
 
 		If ssh.TeaseTick < 1 Then TeaseTimer.Stop()
