@@ -798,6 +798,8 @@ Me.Label59 = New System.Windows.Forms.Label()
 Me.Label50 = New System.Windows.Forms.Label()
 Me.TabPage25 = New System.Windows.Forms.TabPage()
 Me.Panel11 = New System.Windows.Forms.Panel()
+Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+Me.CBOutputErrors = New System.Windows.Forms.CheckBox()
 Me.GroupBox62 = New System.Windows.Forms.GroupBox()
 Me.RBGerman = New System.Windows.Forms.RadioButton()
 Me.RBEnglish = New System.Windows.Forms.RadioButton()
@@ -927,9 +929,6 @@ Me.Label135 = New System.Windows.Forms.Label()
 Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 Me.TextBox2 = New System.Windows.Forms.TextBox()
-Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
-Me.GroupBox8 = New System.Windows.Forms.GroupBox()
-Me.CBOutputErrors = New System.Windows.Forms.CheckBox()
 Me.CBMuteMedia = New System.Windows.Forms.CheckBox()
 Me.TbxDomImageDir = New System.Windows.Forms.TextBox()
 Me.LBLSubColor = New System.Windows.Forms.Label()
@@ -1125,6 +1124,7 @@ Me.NBCensorHideMax = New System.Windows.Forms.NumericUpDown()
 Me.NBCensorHideMin = New System.Windows.Forms.NumericUpDown()
 Me.CBCensorConstant = New System.Windows.Forms.CheckBox()
 Me.NBCensorShowMax = New System.Windows.Forms.NumericUpDown()
+Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
 Me.SettingsPanel.SuspendLayout
 Me.SettingsTabs.SuspendLayout
 Me.TabPage1.SuspendLayout
@@ -1327,6 +1327,7 @@ Me.TabPage15.SuspendLayout
 Me.GroupBox34.SuspendLayout
 Me.TabPage25.SuspendLayout
 Me.Panel11.SuspendLayout
+Me.GroupBox8.SuspendLayout
 Me.GroupBox62.SuspendLayout
 Me.GroupBox33.SuspendLayout
 Me.GroupBox27.SuspendLayout
@@ -1350,7 +1351,6 @@ Me.GroupBox12.SuspendLayout
 Me.GroupBox65.SuspendLayout
 CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).BeginInit
 CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).BeginInit
-Me.GroupBox8.SuspendLayout
 CType(Me.GlitterSlider,System.ComponentModel.ISupportInitialize).BeginInit
 CType(Me.GlitterSlider1,System.ComponentModel.ISupportInitialize).BeginInit
 CType(Me.GlitterSlider3,System.ComponentModel.ISupportInitialize).BeginInit
@@ -11001,6 +11001,30 @@ Me.Panel11.Name = "Panel11"
 Me.Panel11.Size = New System.Drawing.Size(708, 437)
 Me.Panel11.TabIndex = 92
 '
+'GroupBox8
+'
+Me.GroupBox8.Controls.Add(Me.CBOutputErrors)
+Me.GroupBox8.Location = New System.Drawing.Point(420, 268)
+Me.GroupBox8.Name = "GroupBox8"
+Me.GroupBox8.Size = New System.Drawing.Size(279, 100)
+Me.GroupBox8.TabIndex = 179
+Me.GroupBox8.TabStop = false
+Me.GroupBox8.Text = "System Information"
+'
+'CBOutputErrors
+'
+Me.CBOutputErrors.AutoSize = true
+Me.CBOutputErrors.Checked = true
+Me.CBOutputErrors.CheckState = System.Windows.Forms.CheckState.Checked
+Me.CBOutputErrors.ForeColor = System.Drawing.Color.Black
+Me.CBOutputErrors.Location = New System.Drawing.Point(17, 33)
+Me.CBOutputErrors.Name = "CBOutputErrors"
+Me.CBOutputErrors.Size = New System.Drawing.Size(213, 17)
+Me.CBOutputErrors.TabIndex = 29
+Me.CBOutputErrors.TabStop = false
+Me.CBOutputErrors.Text = "Output Error Messages to Chat Window"
+Me.CBOutputErrors.UseVisualStyleBackColor = true
+'
 'GroupBox62
 '
 Me.GroupBox62.Controls.Add(Me.RBGerman)
@@ -12314,38 +12338,6 @@ Me.TextBox2.Name = "TextBox2"
 Me.TextBox2.ReadOnly = true
 Me.TextBox2.Size = New System.Drawing.Size(189, 20)
 Me.TextBox2.TabIndex = 145
-'
-'BWURLFiles
-'
-Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
-Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
-Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
-Me.BWURLFiles.WorkerReportsProgress = true
-Me.BWURLFiles.WorkerSupportsCancellation = true
-'
-'GroupBox8
-'
-Me.GroupBox8.Controls.Add(Me.CBOutputErrors)
-Me.GroupBox8.Location = New System.Drawing.Point(420, 268)
-Me.GroupBox8.Name = "GroupBox8"
-Me.GroupBox8.Size = New System.Drawing.Size(279, 100)
-Me.GroupBox8.TabIndex = 179
-Me.GroupBox8.TabStop = false
-Me.GroupBox8.Text = "System Information"
-'
-'CBOutputErrors
-'
-Me.CBOutputErrors.AutoSize = true
-Me.CBOutputErrors.Checked = true
-Me.CBOutputErrors.CheckState = System.Windows.Forms.CheckState.Checked
-Me.CBOutputErrors.ForeColor = System.Drawing.Color.Black
-Me.CBOutputErrors.Location = New System.Drawing.Point(17, 33)
-Me.CBOutputErrors.Name = "CBOutputErrors"
-Me.CBOutputErrors.Size = New System.Drawing.Size(213, 17)
-Me.CBOutputErrors.TabIndex = 29
-Me.CBOutputErrors.TabStop = false
-Me.CBOutputErrors.Text = "Output Error Messages to Chat Window"
-Me.CBOutputErrors.UseVisualStyleBackColor = true
 '
 'CBMuteMedia
 '
@@ -15012,6 +15004,14 @@ Me.NBCensorShowMax.Size = New System.Drawing.Size(44, 20)
 Me.NBCensorShowMax.TabIndex = 152
 Me.NBCensorShowMax.Value = Global.Tease_AI.My.MySettings.Default.NBCensorShowMax
 '
+'BWURLFiles
+'
+Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
+Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
+Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
+Me.BWURLFiles.WorkerReportsProgress = true
+Me.BWURLFiles.WorkerSupportsCancellation = true
+'
 'FrmSettings
 '
 Me.AllowDrop = true
@@ -15298,6 +15298,8 @@ Me.TabPage15.PerformLayout
 Me.GroupBox34.ResumeLayout(false)
 Me.TabPage25.ResumeLayout(false)
 Me.Panel11.ResumeLayout(false)
+Me.GroupBox8.ResumeLayout(false)
+Me.GroupBox8.PerformLayout
 Me.GroupBox62.ResumeLayout(false)
 Me.GroupBox62.PerformLayout
 Me.GroupBox33.ResumeLayout(false)
@@ -15329,8 +15331,6 @@ Me.GroupBox65.ResumeLayout(false)
 Me.GroupBox65.PerformLayout
 CType(Me.TrackBar1,System.ComponentModel.ISupportInitialize).EndInit
 CType(Me.TrackBar2,System.ComponentModel.ISupportInitialize).EndInit
-Me.GroupBox8.ResumeLayout(false)
-Me.GroupBox8.PerformLayout
 CType(Me.GlitterSlider,System.ComponentModel.ISupportInitialize).EndInit
 CType(Me.GlitterSlider1,System.ComponentModel.ISupportInitialize).EndInit
 CType(Me.GlitterSlider3,System.ComponentModel.ISupportInitialize).EndInit

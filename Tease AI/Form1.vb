@@ -8205,8 +8205,24 @@ StatusUpdateEnd:
 
 		End If
 
-		'BUG: #RandomSlideshowCategory does not work! The Variable RandomSlideshowCategory is never set.
-		If StringClean.Contains("#RandomSlideshowCategory") Then StringClean = StringClean.Replace("#RandomSlideshowCategory", ssh.RandomSlideshowCategory)
+        If StringClean.Contains("#RandomSlideshowCategory") Then
+            Dim RanCat As New List(Of String)
+
+            If FrmSettings.CBIHardcore.Checked = True Then RanCat.Add("Hardcore")
+            If FrmSettings.CBISoftcore.Checked = True Then RanCat.Add("Softcore")
+            If FrmSettings.CBILesbian.Checked = True Then RanCat.Add("Lesbian")
+            If FrmSettings.CBIBlowjob.Checked = True Then RanCat.Add("Blowjob")
+            If FrmSettings.CBIFemdom.Checked = True Then RanCat.Add("Femdom")
+            If FrmSettings.CBILezdom.Checked = True Then RanCat.Add("Lezdom")
+            If FrmSettings.CBIHentai.Checked = True Then RanCat.Add("Hentai")
+            If FrmSettings.CBIGay.Checked = True Then RanCat.Add("Gay")
+            If FrmSettings.CBIMaledom.Checked = True Then RanCat.Add("Maledom")
+            If FrmSettings.CBICaptions.Checked = True Then RanCat.Add("Captions")
+            If FrmSettings.CBIGeneral.Checked = True Then RanCat.Add("General")
+
+            StringClean = StringClean.Replace("#RandomSlideshowCategory", RanCat(ssh.randomizer.Next(0, RanCat.Count)))
+        End If
+
 
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 		'                                   ImageCount
@@ -13267,31 +13283,31 @@ VTSkip:
 
         Return StringClean
 
-	End Function
+    End Function
 
 #Region "-------------------------------------------- Webtoy --------------------------------------------"
 
-	Public Sub ActivateWebToy()
+    Public Sub ActivateWebToy()
 
-		If FrmSettings.TBWebStart.Text <> "" Then
-			Try
-				FrmSettings.WebToy.Navigate(FrmSettings.TBWebStart.Text)
-			Catch
-			End Try
-		End If
+        If FrmSettings.TBWebStart.Text <> "" Then
+            Try
+                FrmSettings.WebToy.Navigate(FrmSettings.TBWebStart.Text)
+            Catch
+            End Try
+        End If
 
-	End Sub
+    End Sub
 
-	Public Sub DeactivateWebToy()
+    Public Sub DeactivateWebToy()
 
-		If FrmSettings.TBWebStart.Text <> "" Then
-			Try
-				FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
-			Catch
-			End Try
-		End If
+        If FrmSettings.TBWebStart.Text <> "" Then
+            Try
+                FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
+            Catch
+            End Try
+        End If
 
-	End Sub
+    End Sub
 
 #End Region ' WebToy
 
@@ -13299,331 +13315,331 @@ VTSkip:
 
 #Region "---------------------------------------- Script-Flags ------------------------------------------"
 
-	''' <summary>Creates the given flag.</summary>
-	''' <param name="FlagName">The flag name to set.</param>
-	''' <param name="Temp">If set to true, the flag is temporary set otherwise permanent.</param>
-	Friend Sub CreateFlag(ByVal FlagName As String, Optional ByVal Temp As Boolean = False)
-		If Temp = False Then
-			FlagName = ssh.Folders.Flags & FlagName
-		Else
-			FlagName = ssh.Folders.TempFlags & FlagName
-		End If
+    ''' <summary>Creates the given flag.</summary>
+    ''' <param name="FlagName">The flag name to set.</param>
+    ''' <param name="Temp">If set to true, the flag is temporary set otherwise permanent.</param>
+    Friend Sub CreateFlag(ByVal FlagName As String, Optional ByVal Temp As Boolean = False)
+        If Temp = False Then
+            FlagName = ssh.Folders.Flags & FlagName
+        Else
+            FlagName = ssh.Folders.TempFlags & FlagName
+        End If
 
-		Using fs As New FileStream(FlagName, FileMode.Create) : End Using
+        Using fs As New FileStream(FlagName, FileMode.Create) : End Using
 
-	End Sub
-	''' <summary>Deletes the given flag. Deletes permanent and temporary flags.</summary>
-	''' <param name="FlagName">The name of the flag to delete.</param>
-	Friend Sub DeleteFlag(ByVal FlagName As String)
+    End Sub
+    ''' <summary>Deletes the given flag. Deletes permanent and temporary flags.</summary>
+    ''' <param name="FlagName">The name of the flag to delete.</param>
+    Friend Sub DeleteFlag(ByVal FlagName As String)
 
-		If File.Exists(ssh.Folders.Flags & FlagName) Then _
-			File.Delete(ssh.Folders.Flags & FlagName)
+        If File.Exists(ssh.Folders.Flags & FlagName) Then _
+         File.Delete(ssh.Folders.Flags & FlagName)
 
-		If File.Exists(ssh.Folders.TempFlags & FlagName) Then _
-			File.Delete(ssh.Folders.TempFlags & FlagName)
+        If File.Exists(ssh.Folders.TempFlags & FlagName) Then _
+         File.Delete(ssh.Folders.TempFlags & FlagName)
 
-	End Sub
-	''' <summary> Checks if the given flag is set, permanent and temporary.</summary>
-	''' <param name="FlagName">The flag name to search for.</param>
-	''' <returns>Returns true if a permanent or temporary flag with the name is found.</returns>
-	Friend Function FlagExists(ByVal FlagName As String) As Boolean
+    End Sub
+    ''' <summary> Checks if the given flag is set, permanent and temporary.</summary>
+    ''' <param name="FlagName">The flag name to search for.</param>
+    ''' <returns>Returns true if a permanent or temporary flag with the name is found.</returns>
+    Friend Function FlagExists(ByVal FlagName As String) As Boolean
 
-		If File.Exists(ssh.Folders.Flags & FlagName) OrElse
-			File.Exists(ssh.Folders.TempFlags & FlagName) Then
-			Return True
-		Else
-			Return False
-		End If
+        If File.Exists(ssh.Folders.Flags & FlagName) OrElse
+         File.Exists(ssh.Folders.TempFlags & FlagName) Then
+            Return True
+        Else
+            Return False
+        End If
 
-	End Function
+    End Function
 
 #End Region ' Script-Flags
 
 #Region "------------------------------------- Script-Variables -----------------------------------------"
 
-	Public Function SetVariable(ByVal VarName As String, ByVal VarValue As String)
+    Public Function SetVariable(ByVal VarName As String, ByVal VarValue As String)
 
-		My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName, VarValue, False)
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName, VarValue, False)
 
-	End Function
+    End Function
 
-	Public Function DeleteVariable(ByVal FlagDir As String)
+    Public Function DeleteVariable(ByVal FlagDir As String)
 
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagDir) Then _
-					My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagDir)
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagDir) Then _
+           My.Computer.FileSystem.DeleteFile(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagDir)
 
-	End Function
+    End Function
 
-	Public Function ChangeVariable(ByVal ChangeVar As String, ByVal ChangeVal1 As String, ByVal ChangeOperator As String, ByVal ChangeVal2 As String)
+    Public Function ChangeVariable(ByVal ChangeVar As String, ByVal ChangeVal1 As String, ByVal ChangeOperator As String, ByVal ChangeVal2 As String)
 
-		Dim Val1 As Integer
-		Dim Val2 As Integer
+        Dim Val1 As Integer
+        Dim Val2 As Integer
 
-		If IsNumeric(ChangeVal1) = False Then
-			'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1) Then
-				Val1 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1))
-			Else
-				Val1 = 0
-			End If
-		Else
-			Val1 = Val(ChangeVal1)
-		End If
+        If IsNumeric(ChangeVal1) = False Then
+            'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1) Then
+                Val1 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1))
+            Else
+                Val1 = 0
+            End If
+        Else
+            Val1 = Val(ChangeVal1)
+        End If
 
-		If IsNumeric(ChangeVal2) = False Then
-			'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2) Then
-				Val2 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2))
-			Else
-				Val2 = 0
-			End If
-		Else
-			Val2 = Val(ChangeVal2)
-		End If
+        If IsNumeric(ChangeVal2) = False Then
+            'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
+            If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2) Then
+                Val2 = Val(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2))
+            Else
+                Val2 = 0
+            End If
+        Else
+            Val2 = Val(ChangeVal2)
+        End If
 
-		ssh.ScriptOperator = "Null"
-		If ChangeOperator.Contains("+") Then ssh.ScriptOperator = "Add"
-		If ChangeOperator.Contains("-") Then ssh.ScriptOperator = "Subtract"
-		If ChangeOperator.Contains("*") Then ssh.ScriptOperator = "Multiply"
-		If ChangeOperator.Contains("/") Then ssh.ScriptOperator = "Divide"
+        ssh.ScriptOperator = "Null"
+        If ChangeOperator.Contains("+") Then ssh.ScriptOperator = "Add"
+        If ChangeOperator.Contains("-") Then ssh.ScriptOperator = "Subtract"
+        If ChangeOperator.Contains("*") Then ssh.ScriptOperator = "Multiply"
+        If ChangeOperator.Contains("/") Then ssh.ScriptOperator = "Divide"
 
-		Dim ChangeVal As Integer = 0
+        Dim ChangeVal As Integer = 0
 
-		If ssh.ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
-		If ssh.ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
-		If ssh.ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
-		If ssh.ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
+        If ssh.ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
+        If ssh.ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
+        If ssh.ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
+        If ssh.ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
 
-		My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
+        My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
 
-	End Function
+    End Function
 
-	Public Function GetVariable(ByVal VarName As String) As String
+    Public Function GetVariable(ByVal VarName As String) As String
 
-		Dim VarGet As String
-		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			'### DEBUG
+        Dim VarGet As String
+        'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
+            '### DEBUG
 
-			' VarGet = Val(VarReader.ReadLine())
+            ' VarGet = Val(VarReader.ReadLine())
 
-			VarGet = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName)
-		Else
-			VarGet = 0
-		End If
+            VarGet = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName)
+        Else
+            VarGet = 0
+        End If
 
-		Return VarGet
-
-
-	End Function
-
-	Public Function CheckVariable(ByVal StringCLean As String) As Boolean
-
-		Do
-
-			Dim SCIfVar As String() = Split(StringCLean)
-			Dim SCGotVar As String = "Null"
-
-			For i As Integer = 0 To SCIfVar.Length - 1
-				If SCIfVar(i).Contains("@Variable[") Then
-					Dim IFJoin As Integer = 0
-					If Not SCIfVar(i).Contains("] ") Then
-						Do
-							IFJoin += 1
-							SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
-							SCIfVar(i + IFJoin) = ""
-						Loop Until SCIfVar(i).Contains("] ") Or SCIfVar(i).EndsWith("]")
-					End If
-					SCGotVar = SCIfVar(i).Trim
-					SCIfVar(i) = ""
-					StringCLean = Join(SCIfVar)
-					Do
-						StringCLean = StringCLean.Replace("  ", " ")
-					Loop Until Not StringCLean.Contains("  ")
-					Exit For
-				End If
-			Next
-
-			If SCGotVar.Contains("]And[") Then
-
-				Dim AndCheck As Boolean = True
-
-				For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
-					If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = False Then
-						AndCheck = False
-						Exit For
-					End If
-					SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]And", "")
-				Next
-
-				Return AndCheck
-
-			ElseIf SCGotVar.Contains("]Or[") Then
-
-				Dim OrCheck As Boolean = False
-
-				For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
-					If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = True Then
-						OrCheck = True
-						Exit For
-					End If
-					SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]Or", "")
-				Next
-
-				Return OrCheck
-
-			Else
-
-				If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = True Then
-
-					Return True
-
-				Else
-
-					Return False
-
-				End If
-
-			End If
-
-		Loop Until Not StringCLean.Contains("@Variable")
+        Return VarGet
 
 
-	End Function
+    End Function
+
+    Public Function CheckVariable(ByVal StringCLean As String) As Boolean
+
+        Do
+
+            Dim SCIfVar As String() = Split(StringCLean)
+            Dim SCGotVar As String = "Null"
+
+            For i As Integer = 0 To SCIfVar.Length - 1
+                If SCIfVar(i).Contains("@Variable[") Then
+                    Dim IFJoin As Integer = 0
+                    If Not SCIfVar(i).Contains("] ") Then
+                        Do
+                            IFJoin += 1
+                            SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
+                            SCIfVar(i + IFJoin) = ""
+                        Loop Until SCIfVar(i).Contains("] ") Or SCIfVar(i).EndsWith("]")
+                    End If
+                    SCGotVar = SCIfVar(i).Trim
+                    SCIfVar(i) = ""
+                    StringCLean = Join(SCIfVar)
+                    Do
+                        StringCLean = StringCLean.Replace("  ", " ")
+                    Loop Until Not StringCLean.Contains("  ")
+                    Exit For
+                End If
+            Next
+
+            If SCGotVar.Contains("]And[") Then
+
+                Dim AndCheck As Boolean = True
+
+                For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
+                    If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = False Then
+                        AndCheck = False
+                        Exit For
+                    End If
+                    SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]And", "")
+                Next
+
+                Return AndCheck
+
+            ElseIf SCGotVar.Contains("]Or[") Then
+
+                Dim OrCheck As Boolean = False
+
+                For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
+                    If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = True Then
+                        OrCheck = True
+                        Exit For
+                    End If
+                    SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]Or", "")
+                Next
+
+                Return OrCheck
+
+            Else
+
+                If GetIf("[" & GetParentheses(SCGotVar, "@Variable[", 2) & "]") = True Then
+
+                    Return True
+
+                Else
+
+                    Return False
+
+                End If
+
+            End If
+
+        Loop Until Not StringCLean.Contains("@Variable")
+
+
+    End Function
 
 #End Region ' Script-Variables
 
 #Region "---------------------------------------- Script-Dates ------------------------------------------"
 
-	Public Function GetDate(ByVal VarName As String) As Date
+    Public Function GetDate(ByVal VarName As String) As Date
 
-		Dim VarGet As String
-		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
-		Else
-			VarGet = FormatDateTime(Now, DateFormat.GeneralDate)
-		End If
+        Dim VarGet As String
+        'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
+            VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
+        Else
+            VarGet = FormatDateTime(Now, DateFormat.GeneralDate)
+        End If
 
-		Return VarGet
-
-
-	End Function
-
-	Public Function GetTime(ByVal VarName As String) As Date
-
-		Dim VarGet As String
-		'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
-			VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
-		Else
-			VarGet = FormatDateTime(Now, DateFormat.LongTime)
-		End If
-
-		Return VarGet
+        Return VarGet
 
 
-	End Function
+    End Function
 
-	Public Function CheckDateList(ByVal DateString As String, Optional ByVal Linear As Boolean = False) As Boolean
+    Public Function GetTime(ByVal VarName As String) As Date
 
-		Dim DateFlag As String = GetParentheses(DateString, "@CheckDate(")
+        Dim VarGet As String
+        'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName) Then
+            VarGet = CDate(TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName))
+        Else
+            VarGet = FormatDateTime(Now, DateFormat.LongTime)
+        End If
 
-		If DateFlag.Contains(",") Then
+        Return VarGet
 
-			DateFlag = FixCommas(DateFlag)
 
-			Dim DateArray() As String = DateFlag.Split(",")
-			Dim DDiff As Long = 18855881
-			Dim DDiff2 As Long = 18855881
+    End Function
 
-			Dim DCompare As Long
-			Dim DCompare2 As Long
+    Public Function CheckDateList(ByVal DateString As String, Optional ByVal Linear As Boolean = False) As Boolean
 
-			If Linear = False Then
+        Dim DateFlag As String = GetParentheses(DateString, "@CheckDate(")
 
-				If DateArray.Count = 2 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(1))
-					DCompare = GetDateCompare(DateArray(0), DateArray(1))
-					If DDiff >= DCompare Then Return True
-					Return False
-				End If
+        If DateFlag.Contains(",") Then
 
-				If DateArray.Count = 3 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(1))
-					DCompare = GetDateCompare(DateArray(0), DateArray(1))
-					DDiff2 = GetDateDifference(DateArray(0), DateArray(2))
-					DCompare2 = GetDateCompare(DateArray(0), DateArray(2))
-					If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
-					Return False
-				End If
+            DateFlag = FixCommas(DateFlag)
 
-			Else
+            Dim DateArray() As String = DateFlag.Split(",")
+            Dim DDiff As Long = 18855881
+            Dim DDiff2 As Long = 18855881
 
-				If DateArray.Count = 2 Then
-					If CompareDatesWithTime(GetDate(DateArray(0))) <> 1 Then Return True
-					Return False
-				End If
+            Dim DCompare As Long
+            Dim DCompare2 As Long
 
-				If DateArray.Count = 3 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(1))
-					DCompare = GetDateCompare(DateArray(0), DateArray(1))
-					If DDiff >= DCompare Then Return True
-					Return False
-				End If
+            If Linear = False Then
 
-				If DateArray.Count = 4 Then
-					DDiff = GetDateDifference(DateArray(0), DateArray(1))
-					DCompare = GetDateCompare(DateArray(0), DateArray(1))
-					DDiff2 = GetDateDifference(DateArray(0), DateArray(2))
-					DCompare2 = GetDateCompare(DateArray(0), DateArray(2))
-					If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
-					Return False
-				End If
+                If DateArray.Count = 2 Then
+                    DDiff = GetDateDifference(DateArray(0), DateArray(1))
+                    DCompare = GetDateCompare(DateArray(0), DateArray(1))
+                    If DDiff >= DCompare Then Return True
+                    Return False
+                End If
 
-			End If
+                If DateArray.Count = 3 Then
+                    DDiff = GetDateDifference(DateArray(0), DateArray(1))
+                    DCompare = GetDateCompare(DateArray(0), DateArray(1))
+                    DDiff2 = GetDateDifference(DateArray(0), DateArray(2))
+                    DCompare2 = GetDateCompare(DateArray(0), DateArray(2))
+                    If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
+                    Return False
+                End If
 
-		Else
-			If CompareDatesWithTime(GetDate(DateFlag)) <> 1 Then Return True
-			Return False
-		End If
+            Else
 
-		Return False
+                If DateArray.Count = 2 Then
+                    If CompareDatesWithTime(GetDate(DateArray(0))) <> 1 Then Return True
+                    Return False
+                End If
 
-	End Function
+                If DateArray.Count = 3 Then
+                    DDiff = GetDateDifference(DateArray(0), DateArray(1))
+                    DCompare = GetDateCompare(DateArray(0), DateArray(1))
+                    If DDiff >= DCompare Then Return True
+                    Return False
+                End If
 
-	Public Function GetDateDifference(ByVal DateVar As String, ByVal DateString As String) As Long
+                If DateArray.Count = 4 Then
+                    DDiff = GetDateDifference(DateArray(0), DateArray(1))
+                    DCompare = GetDateCompare(DateArray(0), DateArray(1))
+                    DDiff2 = GetDateDifference(DateArray(0), DateArray(2))
+                    DCompare2 = GetDateCompare(DateArray(0), DateArray(2))
+                    If DDiff >= DCompare And DDiff2 <= DCompare2 Then Return True
+                    Return False
+                End If
 
-		Dim DDiff As Long = 0
+            End If
 
-		If UCase(DateString).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateVar), Now)
-		If UCase(DateString).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateVar), Now) * 60
-		If UCase(DateString).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateVar), Now) * 3600
-		If UCase(DateString).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateVar), Now) * 86400
-		If UCase(DateString).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateVar), Now) * 604800
-		If UCase(DateString).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateVar), Now) * 2629746
-		If UCase(DateString).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateVar), Now) * 31536000
+        Else
+            If CompareDatesWithTime(GetDate(DateFlag)) <> 1 Then Return True
+            Return False
+        End If
 
-		Return DDiff
+        Return False
 
-	End Function
+    End Function
 
-	Public Function GetDateCompare(ByVal DateVar As String, ByVal DateString As String) As Long
+    Public Function GetDateDifference(ByVal DateVar As String, ByVal DateString As String) As Long
 
-		Dim DDiff As Long = 0
-		Dim Amount As Long = Val(DateString)
+        Dim DDiff As Long = 0
 
-		If UCase(DateString).Contains("SECOND") Then DDiff = Amount
-		If UCase(DateString).Contains("MINUTE") Then DDiff = Amount * 60
-		If UCase(DateString).Contains("HOUR") Then DDiff = Amount * 3600
-		If UCase(DateString).Contains("DAY") Then DDiff = Amount * 86400
-		If UCase(DateString).Contains("WEEK") Then DDiff = Amount * 604800
-		If UCase(DateString).Contains("MONTH") Then DDiff = Amount * 2629746
-		If UCase(DateString).Contains("YEAR") Then DDiff = Amount * 31536000
+        If UCase(DateString).Contains("SECOND") Then DDiff = DateDiff(DateInterval.Second, GetDate(DateVar), Now)
+        If UCase(DateString).Contains("MINUTE") Then DDiff = DateDiff(DateInterval.Minute, GetDate(DateVar), Now) * 60
+        If UCase(DateString).Contains("HOUR") Then DDiff = DateDiff(DateInterval.Hour, GetDate(DateVar), Now) * 3600
+        If UCase(DateString).Contains("DAY") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateVar), Now) * 86400
+        If UCase(DateString).Contains("WEEK") Then DDiff = DateDiff(DateInterval.Day, GetDate(DateVar), Now) * 604800
+        If UCase(DateString).Contains("MONTH") Then DDiff = DateDiff(DateInterval.Month, GetDate(DateVar), Now) * 2629746
+        If UCase(DateString).Contains("YEAR") Then DDiff = DateDiff(DateInterval.Year, GetDate(DateVar), Now) * 31536000
 
-		Return DDiff
+        Return DDiff
 
-	End Function
+    End Function
+
+    Public Function GetDateCompare(ByVal DateVar As String, ByVal DateString As String) As Long
+
+        Dim DDiff As Long = 0
+        Dim Amount As Long = Val(DateString)
+
+        If UCase(DateString).Contains("SECOND") Then DDiff = Amount
+        If UCase(DateString).Contains("MINUTE") Then DDiff = Amount * 60
+        If UCase(DateString).Contains("HOUR") Then DDiff = Amount * 3600
+        If UCase(DateString).Contains("DAY") Then DDiff = Amount * 86400
+        If UCase(DateString).Contains("WEEK") Then DDiff = Amount * 604800
+        If UCase(DateString).Contains("MONTH") Then DDiff = Amount * 2629746
+        If UCase(DateString).Contains("YEAR") Then DDiff = Amount * 31536000
+
+        Return DDiff
+
+    End Function
 
 #End Region ' Script-Dates
 
@@ -13631,462 +13647,462 @@ VTSkip:
 
 
 
-	Public Function GetParentheses(ByVal ParenCheck As String, ByVal CommandCheck As String, Optional ByVal Iterations As Integer = 1) As String
+    Public Function GetParentheses(ByVal ParenCheck As String, ByVal CommandCheck As String, Optional ByVal Iterations As Integer = 1) As String
 
 
 
-		Dim ParenFlag As String = ParenCheck
-		Dim ParenStart As Integer = ParenFlag.IndexOf(CommandCheck) + CommandCheck.Length
-		'githib patch Dim ParenType As String
+        Dim ParenFlag As String = ParenCheck
+        Dim ParenStart As Integer = ParenFlag.IndexOf(CommandCheck) + CommandCheck.Length
+        'githib patch Dim ParenType As String
 
-		Dim ParenType As String = Nothing
+        Dim ParenType As String = Nothing
 
-		' #### CHECK ALL GETPAREN!
-		'If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "(" Then ParenType = ")"
-		'If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "[" Then ParenType = "]"
+        ' #### CHECK ALL GETPAREN!
+        'If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "(" Then ParenType = ")"
+        'If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "[" Then ParenType = "]"
 
-		If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "(" Then
-			ParenType = ")"
-		End If
-		If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "[" Then
-			ParenType = "]"
-		End If
+        If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "(" Then
+            ParenType = ")"
+        End If
+        If CommandCheck.Substring(CommandCheck.Length - 1, 1) = "[" Then
+            ParenType = "]"
+        End If
 
 
 
-		'ParenFlag = ParenFlag.Substring(ParenStart, ParenFlag.Length - ParenStart)
+        'ParenFlag = ParenFlag.Substring(ParenStart, ParenFlag.Length - ParenStart)
 
-		'Dim ParenEnd As Integer = ParenFlag.IndexOf(ParenType, ParenStart)
-		Dim ParenEnd As Integer = GetNthIndex(ParenFlag, ParenType, ParenStart, Iterations)
+        'Dim ParenEnd As Integer = ParenFlag.IndexOf(ParenType, ParenStart)
+        Dim ParenEnd As Integer = GetNthIndex(ParenFlag, ParenType, ParenStart, Iterations)
 
-		Debug.Print("ParenEnd = " & ParenEnd)
+        Debug.Print("ParenEnd = " & ParenEnd)
 
-		If ParenEnd = -1 Then ParenEnd = ParenFlag.Length
-		ParenFlag = ParenFlag.Substring(ParenStart, ParenEnd - ParenStart)
+        If ParenEnd = -1 Then ParenEnd = ParenFlag.Length
+        ParenFlag = ParenFlag.Substring(ParenStart, ParenEnd - ParenStart)
 
-		'ParenFlag = ParenFlag.Split(")")(0)
-		'ParenFlag = ParenFlag.Split(ParenType)(0)
-		'ParenFlag = ParenFlag.Replace(ParenType, "")
-		'ParenFlag = ParenFlag.Substring(0, ParenFlag.Length - 1)
-		Debug.Print("ParenFlag = " & ParenFlag)
+        'ParenFlag = ParenFlag.Split(")")(0)
+        'ParenFlag = ParenFlag.Split(ParenType)(0)
+        'ParenFlag = ParenFlag.Replace(ParenType, "")
+        'ParenFlag = ParenFlag.Substring(0, ParenFlag.Length - 1)
+        Debug.Print("ParenFlag = " & ParenFlag)
 
-		Return ParenFlag
+        Return ParenFlag
 
 
-	End Function
+    End Function
 
-	Public Function GetNthIndex(searchString As String, charToFind As Char, startIndex As Integer, n As Integer) As Integer
-		Dim charIndexPair = searchString.Select(Function(c, i) New With {.Character = c, .Index = i}) _
-										.Where(Function(x) x.Character = charToFind And x.Index > startIndex) _
-										.ElementAtOrDefault(n - 1)
-		Return If(charIndexPair IsNot Nothing, charIndexPair.Index, -1)
-	End Function
+    Public Function GetNthIndex(ByVal searchString As String, ByVal charToFind As Char, ByVal startIndex As Integer, ByVal n As Integer) As Integer
+        Dim charIndexPair = searchString.Select(Function(c, i) New With {.Character = c, .Index = i}) _
+                .Where(Function(x) x.Character = charToFind And x.Index > startIndex) _
+                .ElementAtOrDefault(n - 1)
+        Return If(charIndexPair IsNot Nothing, charIndexPair.Index, -1)
+    End Function
 
-	Public Function FixCommas(ByVal CommaString) As String
+    Public Function FixCommas(ByVal CommaString) As String
 
-		CommaString = CommaString.replace(", ", ",")
-		CommaString = CommaString.replace(" ,", ",")
+        CommaString = CommaString.replace(", ", ",")
+        CommaString = CommaString.replace(" ,", ",")
 
-		Return CommaString
+        Return CommaString
 
-	End Function
+    End Function
 
-	Public Function GetEdgeHoldMinutes(ByVal HoldTime As Integer) As Boolean
+    Public Function GetEdgeHoldMinutes(ByVal HoldTime As Integer) As Boolean
 
-		Dim HoldEdgeCheck As Boolean = False
+        Dim HoldEdgeCheck As Boolean = False
 
-		If ssh.HoldEdgeTime >= HoldTime * 60 Then HoldEdgeCheck = True
+        If ssh.HoldEdgeTime >= HoldTime * 60 Then HoldEdgeCheck = True
 
-		Return HoldEdgeCheck
+        Return HoldEdgeCheck
 
 
-	End Function
+    End Function
 
-	Public Function GetLocalImage(Optional ByVal IncludeTags As List(Of String) = Nothing,
-								  Optional ByVal ExcludeTags As List(Of String) = Nothing) As String
+    Public Function GetLocalImage(Optional ByVal IncludeTags As List(Of String) = Nothing,
+             Optional ByVal ExcludeTags As List(Of String) = Nothing) As String
 
 
-		If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
-			' Read all lines of given file.
-			ssh.LocalTagImageList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+        If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+            ' Read all lines of given file.
+            ssh.LocalTagImageList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
 
 
-			Dim ValidExt As String() = Split(".jpg|.jpeg|.bmp|.png|.gif", "|")
+            Dim ValidExt As String() = Split(".jpg|.jpeg|.bmp|.png|.gif", "|")
 
-			ssh.LocalTagImageList.RemoveAll(Function(x)
-												' Remove if given include tags are missing
-												If IncludeTags IsNot Nothing Then
-													For Each tag As String In IncludeTags
-														If Not x.Contains(tag.Replace("@", "")) Then Return True
-													Next
-												End If
-												' Remove if given exclude tags are present
-												If ExcludeTags IsNot Nothing Then
-													For Each tag As String In ExcludeTags
-														If x.Contains(tag.Replace("@", "")) Then Return True
-													Next
-												End If
-												' Remove all without valid extension
-												Dim Ext As String = Path.GetExtension(Split(x)(0)).ToLower
-												If Not ValidExt.Contains(Ext) Then Return True
-												'Everything fine keep file
-												Return False
-											End Function)
+            ssh.LocalTagImageList.RemoveAll(Function(x)
+                                                ' Remove if given include tags are missing
+                                                If IncludeTags IsNot Nothing Then
+                                                    For Each tag As String In IncludeTags
+                                                        If Not x.Contains(tag.Replace("@", "")) Then Return True
+                                                    Next
+                                                End If
+                                                ' Remove if given exclude tags are present
+                                                If ExcludeTags IsNot Nothing Then
+                                                    For Each tag As String In ExcludeTags
+                                                        If x.Contains(tag.Replace("@", "")) Then Return True
+                                                    Next
+                                                End If
+                                                ' Remove all without valid extension
+                                                Dim Ext As String = Path.GetExtension(Split(x)(0)).ToLower
+                                                If Not ValidExt.Contains(Ext) Then Return True
+                                                'Everything fine keep file
+                                                Return False
+                                            End Function)
 
-			Do While ssh.LocalTagImageList.Count > 0
-				Dim rndNumber As Integer = ssh.randomizer.Next(0, ssh.LocalTagImageList.Count)
-				' TODO: GetLocalImage: Add space char (0x20) support for filepaths.
-				Dim Filepath As String = Split(ssh.LocalTagImageList(rndNumber))(0)
+            Do While ssh.LocalTagImageList.Count > 0
+                Dim rndNumber As Integer = ssh.randomizer.Next(0, ssh.LocalTagImageList.Count)
+                ' TODO: GetLocalImage: Add space char (0x20) support for filepaths.
+                Dim Filepath As String = Split(ssh.LocalTagImageList(rndNumber))(0)
 
-				If Directory.Exists(Path.GetDirectoryName(Filepath)) _
-				AndAlso File.Exists(Filepath) Then
-					Return Filepath
-				Else
-					ssh.LocalTagImageList.RemoveAt(rndNumber)
-				End If
-			Loop
-		End If
+                If Directory.Exists(Path.GetDirectoryName(Filepath)) _
+                AndAlso File.Exists(Filepath) Then
+                    Return Filepath
+                Else
+                    ssh.LocalTagImageList.RemoveAt(rndNumber)
+                End If
+            Loop
+        End If
 
-		Return String.Empty
-	End Function
+        Return String.Empty
+    End Function
 
-	Public Function GetLocalImage(ByVal LocTag As String) As String
-		'TODO-Next: @ImageTag() Implement optimized @ShowTaggedImage code.
-		If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+    Public Function GetLocalImage(ByVal LocTag As String) As String
+        'TODO-Next: @ImageTag() Implement optimized @ShowTaggedImage code.
+        If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
 
 
-			Dim TagList As New List(Of String)
-			TagList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+            Dim TagList As New List(Of String)
+            TagList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
 
-			LocTag = LocTag.Replace(" ,", ",")
-			LocTag = LocTag.Replace(", ", ",")
+            LocTag = LocTag.Replace(" ,", ",")
+            LocTag = LocTag.Replace(", ", ",")
 
-			Dim LocTagArray As String() = LocTag.Split(",")
+            Dim LocTagArray As String() = LocTag.Split(",")
 
-			Dim LocTag1 As String = " "
-			Dim LocTag2 As String = " "
-			Dim LocTag3 As String = " "
+            Dim LocTag1 As String = " "
+            Dim LocTag2 As String = " "
+            Dim LocTag3 As String = " "
 
-			For i As Integer = 0 To LocTagArray.Count - 1
-				If i = 0 Then LocTag1 = "Tag" & LocTagArray(0)
-				If i = 1 Then LocTag2 = "Tag" & LocTagArray(1)
-				If i = 2 Then LocTag3 = "Tag" & LocTagArray(2)
-			Next
+            For i As Integer = 0 To LocTagArray.Count - 1
+                If i = 0 Then LocTag1 = "Tag" & LocTagArray(0)
+                If i = 1 Then LocTag2 = "Tag" & LocTagArray(1)
+                If i = 2 Then LocTag3 = "Tag" & LocTagArray(2)
+            Next
 
 
-			Dim TaggedList As New List(Of String)
+            Dim TaggedList As New List(Of String)
 
-			For i As Integer = 0 To TagList.Count - 1
-				If TagList(i).Contains(LocTag1) And TagList(i).Contains(LocTag2) And TagList(i).Contains(LocTag3) Then
-					TaggedList.Add(TagList(i))
-				End If
-			Next
+            For i As Integer = 0 To TagList.Count - 1
+                If TagList(i).Contains(LocTag1) And TagList(i).Contains(LocTag2) And TagList(i).Contains(LocTag3) Then
+                    TaggedList.Add(TagList(i))
+                End If
+            Next
 
-			If TaggedList.Count > 0 Then
+            If TaggedList.Count > 0 Then
 
-				Dim PicArray As String() = TaggedList(ssh.randomizer.Next(0, TaggedList.Count)).Split
-				Dim PicDir As String = ""
+                Dim PicArray As String() = TaggedList(ssh.randomizer.Next(0, TaggedList.Count)).Split
+                Dim PicDir As String = ""
 
-				For p As Integer = 0 To PicArray.Count - 1
-					PicDir = PicDir & PicArray(p) & " "
-					If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
-				Next
+                For p As Integer = 0 To PicArray.Count - 1
+                    PicDir = PicDir & PicArray(p) & " "
+                    If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
+                Next
 
-				Return PicDir
+                Return PicDir
 
-			Else
-				Return String.Empty
+            Else
+                Return String.Empty
 
-			End If
+            End If
 
-		End If
-	End Function
+        End If
+    End Function
 
 
-	Friend Sub ContactEdgeCheck(ByVal EdgeCheck As String)
-		If EdgeCheck.Contains("@Contact1") Then ssh.Contact1Edge = True
-		If EdgeCheck.Contains("@Contact2") Then ssh.Contact2Edge = True
-		If EdgeCheck.Contains("@Contact3") Then ssh.Contact3Edge = True
-	End Sub
+    Friend Sub ContactEdgeCheck(ByVal EdgeCheck As String)
+        If EdgeCheck.Contains("@Contact1") Then ssh.Contact1Edge = True
+        If EdgeCheck.Contains("@Contact2") Then ssh.Contact2Edge = True
+        If EdgeCheck.Contains("@Contact3") Then ssh.Contact3Edge = True
+    End Sub
 
-	Public Sub DisableContactStroke()
-		ssh.Contact1Stroke = False
-		ssh.Contact2Stroke = False
-		ssh.Contact3Stroke = False
-	End Sub
+    Public Sub DisableContactStroke()
+        ssh.Contact1Stroke = False
+        ssh.Contact2Stroke = False
+        ssh.Contact3Stroke = False
+    End Sub
 
-	Public Sub GetSubState()
+    Public Sub GetSubState()
 
-		ssh.ReturnSubState = "Rest"
-		If ssh.SubStroking = True Then ssh.ReturnSubState = "Stroking"
-		If ssh.SubEdging = True Then ssh.ReturnSubState = "Edging"
-		If ssh.SubHoldingEdge = True Then ssh.ReturnSubState = "Holding The Edge"
-		If ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Then ssh.ReturnSubState = "CBTBalls"
-		If ssh.CBTCockFlag = True Then ssh.ReturnSubState = "CBTCock"
-		If ssh.CensorshipGame = True Then ssh.ReturnSubState = "Censorship Sucks"
-		If ssh.AvoidTheEdgeGame = True Then ssh.ReturnSubState = "Avoid The Edge"
-		If ssh.RLGLGame = True Then ssh.ReturnSubState = "RLGL"
+        ssh.ReturnSubState = "Rest"
+        If ssh.SubStroking = True Then ssh.ReturnSubState = "Stroking"
+        If ssh.SubEdging = True Then ssh.ReturnSubState = "Edging"
+        If ssh.SubHoldingEdge = True Then ssh.ReturnSubState = "Holding The Edge"
+        If ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Then ssh.ReturnSubState = "CBTBalls"
+        If ssh.CBTCockFlag = True Then ssh.ReturnSubState = "CBTCock"
+        If ssh.CensorshipGame = True Then ssh.ReturnSubState = "Censorship Sucks"
+        If ssh.AvoidTheEdgeGame = True Then ssh.ReturnSubState = "Avoid The Edge"
+        If ssh.RLGLGame = True Then ssh.ReturnSubState = "RLGL"
 
 
 
-	End Sub
+    End Sub
 
-	Public Sub EdgePace()
+    Public Sub EdgePace()
 
-		StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMaxPace.Value + 151)
-		If StrokePace > NBMinPace.Value Then StrokePace = NBMinPace.Value
-		StrokePace = 50 * Math.Round(StrokePace / 50)
+        StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMaxPace.Value + 151)
+        If StrokePace > NBMinPace.Value Then StrokePace = NBMinPace.Value
+        StrokePace = 50 * Math.Round(StrokePace / 50)
 
-	End Sub
+    End Sub
 
 
 
-	Public Function FilterList(ByVal ListClean As List(Of String)) As List(Of String)
+    Public Function FilterList(ByVal ListClean As List(Of String)) As List(Of String)
 #If TRACE Then
-		Dim sw As New Stopwatch
-		sw.Start()
+        Dim sw As New Stopwatch
+        sw.Start()
 
-		Trace.WriteLine("FilterList Started")
-		Trace.Indent()
+        Trace.WriteLine("FilterList Started")
+        Trace.Indent()
 #End If
 
-		Dim FilterPass As Boolean
-		Dim ListIncrement As Integer = 1
-		If ssh.StrokeFilter = True Then ListIncrement = ssh.StrokeTauntCount
+        Dim FilterPass As Boolean
+        Dim ListIncrement As Integer = 1
+        If ssh.StrokeFilter = True Then ListIncrement = ssh.StrokeTauntCount
 
-		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-		'		Check if Grouped-Lines-Files have the right amount of Lines
-		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-		' No need to go further on an empty file.
-		If ListClean.Count <= 0 Then
-			Trace.WriteLine("FilterList started with empty List. Skipping filter.")
-			Return ListClean
-		End If
+        '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        '		Check if Grouped-Lines-Files have the right amount of Lines
+        '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+        ' No need to go further on an empty file.
+        If ListClean.Count <= 0 Then
+            Trace.WriteLine("FilterList started with empty List. Skipping filter.")
+            Return ListClean
+        End If
 
-		' To Avoid DivideByZeroException 
-		If ListIncrement <= 0 Then
-			Dim lazyText As String = "FilterList Started With LineGroupingValue """ & ListIncrement & """. "
+        ' To Avoid DivideByZeroException 
+        If ListIncrement <= 0 Then
+            Dim lazyText As String = "FilterList Started With LineGroupingValue """ & ListIncrement & """. "
             Log.WriteError(lazyText, New ArgumentOutOfRangeException(lazyText), "FilterList Cancelled")
             If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & lazyText & "</font>", False)
-			Return ListClean
-		End If
+            Return ListClean
+        End If
 
-		' Divide List.Count by StrokeTauntSize and get the Remainder.
-		Dim InvalidLineCount As Integer = ListClean.Count Mod ListIncrement
+        ' Divide List.Count by StrokeTauntSize and get the Remainder.
+        Dim InvalidLineCount As Integer = ListClean.Count Mod ListIncrement
 
-		' If there is a Remainder, the file has not the desired Line.Count.
-		If InvalidLineCount > 0 Then
-			' So delete the Lines of the last and hopefully uncomplete Group. 
-			ListClean.RemoveRange(ListClean.Count - InvalidLineCount, InvalidLineCount)
-		End If
-		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-		'		Grouped-Lines-Check-END 
-		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+        ' If there is a Remainder, the file has not the desired Line.Count.
+        If InvalidLineCount > 0 Then
+            ' So delete the Lines of the last and hopefully uncomplete Group. 
+            ListClean.RemoveRange(ListClean.Count - InvalidLineCount, InvalidLineCount)
+        End If
+        '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+        '		Grouped-Lines-Check-END 
+        '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
-		For i As Integer = 0 To ListClean.Count - 1 Step ListIncrement
+        For i As Integer = 0 To ListClean.Count - 1 Step ListIncrement
 
-			FilterPass = True
+            FilterPass = True
 
-			For x As Integer = 0 To ListIncrement - 1
-				If GetFilter(ListClean(i + x)) = False Then
-					FilterPass = False
-					Exit For
-				End If
-			Next
+            For x As Integer = 0 To ListIncrement - 1
+                If GetFilter(ListClean(i + x)) = False Then
+                    FilterPass = False
+                    Exit For
+                End If
+            Next
 
-			If FilterPass = False Then
-				For x As Integer = 0 To ListIncrement - 1
-					ListClean(i + x) = ListClean(i + x) & "###-INVALID-###"
-				Next
-			End If
+            If FilterPass = False Then
+                For x As Integer = 0 To ListIncrement - 1
+                    ListClean(i + x) = ListClean(i + x) & "###-INVALID-###"
+                Next
+            End If
 
-		Next
+        Next
 
-		For i As Integer = ListClean.Count - 1 To 0 Step -1
-			If ListClean(i).Contains("###-INVALID-###") Then ListClean.RemoveAt(i)
-		Next
+        For i As Integer = ListClean.Count - 1 To 0 Step -1
+            If ListClean(i).Contains("###-INVALID-###") Then ListClean.RemoveAt(i)
+        Next
 
-		Dim FilteredList As New List(Of String)
+        Dim FilteredList As New List(Of String)
 
-		'For i As Integer = 0 To ListClean.Count - 1
-		'If Not ListClean(i).Contains("###-INVALID-###") Then FilteredList.Add(ListClean(i))
-		'Next
+        'For i As Integer = 0 To ListClean.Count - 1
+        'If Not ListClean(i).Contains("###-INVALID-###") Then FilteredList.Add(ListClean(i))
+        'Next
 
 #If TRACE Then
-		Trace.Unindent()
-		Trace.WriteLine("FilterList finished - Duration: " & sw.ElapsedMilliseconds & "ms")
+        Trace.Unindent()
+        Trace.WriteLine("FilterList finished - Duration: " & sw.ElapsedMilliseconds & "ms")
 #End If
 
-		Return ListClean
+        Return ListClean
 
-	End Function
+    End Function
 
 
-	Public Function GetFilter(ByVal FilterString As String, Optional ByVal Linear As Boolean = False) As Boolean
-		Dim OrgFilterString As String = FilterString
-		Try
-			'######################### Determine filtering Contact ###########################
-			Dim FilterContact As ContactData
-			Dim ActiveContacts As New List(Of String)
+    Public Function GetFilter(ByVal FilterString As String, Optional ByVal Linear As Boolean = False) As Boolean
+        Dim OrgFilterString As String = FilterString
+        Try
+            '######################### Determine filtering Contact ###########################
+            Dim FilterContact As ContactData
+            Dim ActiveContacts As New List(Of String)
 
-			For Each match As Match In Regex.Matches(ssh.Group, "[d\d](?=[^\+\-]*)", RegexOptions.IgnoreCase)
-				' Pattern Description:
-				' [d\d]: All Numbers and letter "D"
-				' (?=[^\+\-]*): not followed by "+" or "-" (Future indicator for joining and leaving contacts.)
-				ActiveContacts.Add(match.Value)
-			Next
+            For Each match As Match In Regex.Matches(ssh.Group, "[d\d](?=[^\+\-]*)", RegexOptions.IgnoreCase)
+                ' Pattern Description:
+                ' [d\d]: All Numbers and letter "D"
+                ' (?=[^\+\-]*): not followed by "+" or "-" (Future indicator for joining and leaving contacts.)
+                ActiveContacts.Add(match.Value)
+            Next
 
-			If FilterString.Includes("@Contact1") AndAlso ActiveContacts.Contains("1") Then
-				FilterContact = ssh.SlideshowContact1
-			ElseIf FilterString.Includes("@Contact2") AndAlso ActiveContacts.Contains("2") Then
-				FilterContact = ssh.SlideshowContact2
-			ElseIf FilterString.Includes("@Contact3") AndAlso ActiveContacts.Contains("3") Then
-				FilterContact = ssh.SlideshowContact3
-			ElseIf ContactToUse IsNot Nothing Then
-				FilterContact = ContactToUse
-			Else
-				FilterContact = ssh.SlideshowMain
-			End If
+            If FilterString.Includes("@Contact1") AndAlso ActiveContacts.Contains("1") Then
+                FilterContact = ssh.SlideshowContact1
+            ElseIf FilterString.Includes("@Contact2") AndAlso ActiveContacts.Contains("2") Then
+                FilterContact = ssh.SlideshowContact2
+            ElseIf FilterString.Includes("@Contact3") AndAlso ActiveContacts.Contains("3") Then
+                FilterContact = ssh.SlideshowContact3
+            ElseIf ContactToUse IsNot Nothing Then
+                FilterContact = ContactToUse
+            Else
+                FilterContact = ssh.SlideshowMain
+            End If
 
-			If Linear = False Then
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				'							Commands to sort out
-				' This Section contains @Commands, which are able to disqualify vocabulary lines.
-				'
-				' Example-line: "Whatever Text to display @DommeTag(Glaring)"
-				'
-				' This line has to be sorted out, if there are no corresponding images tagged 
-				' with "glaring".
-				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-				'ISSUE: @DomTag() is not filtered out 
-				If FilterString.Includes("@DommeTag(") Then
-					'QND-Implemented: ContactData.GetTaggedImage
-					If ssh.LockImage = True Then
-						Return False
-					Else
-						If FilterContact.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
-					End If
-				End If
+            If Linear = False Then
+                '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+                '							Commands to sort out
+                ' This Section contains @Commands, which are able to disqualify vocabulary lines.
+                '
+                ' Example-line: "Whatever Text to display @DommeTag(Glaring)"
+                '
+                ' This line has to be sorted out, if there are no corresponding images tagged 
+                ' with "glaring".
+                '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+                'ISSUE: @DomTag() is not filtered out 
+                If FilterString.Includes("@DommeTag(") Then
+                    'QND-Implemented: ContactData.GetTaggedImage
+                    If ssh.LockImage = True Then
+                        Return False
+                    Else
+                        If FilterContact.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
+                    End If
+                End If
 
-				If FilterString.Contains("@ImageTag(") Then
-					If GetLocalImage(GetParentheses(FilterString, "@ImageTag(")) = String.Empty Then Return False
-				End If
+                If FilterString.Contains("@ImageTag(") Then
+                    If GetLocalImage(GetParentheses(FilterString, "@ImageTag(")) = String.Empty Then Return False
+                End If
 
-				' ################## @Show-Category-Image #####################
-				If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
-					If Not GetImageData(ImageGenre.Blog).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowBlowjobImage") Then
-					If Not GetImageData(ImageGenre.Blowjob).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
-					If Not GetImageData(ImageGenre.Boobs).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
-					If Not GetImageData(ImageGenre.Butt).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowCaptionsImage") Then
-					If Not GetImageData(ImageGenre.Captions).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowDislikedImage") Then
-					If Not GetImageData(ImageGenre.Disliked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowFemdomImage") Then
-					If Not GetImageData(ImageGenre.Femdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowGayImage") Then
-					If Not GetImageData(ImageGenre.Gay).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowGeneralImage") Then
-					If Not GetImageData(ImageGenre.General).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowHardcoreImage") Then
-					If Not GetImageData(ImageGenre.Hardcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowHentaiImage") Then
-					If Not GetImageData(ImageGenre.Hentai).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowLesbianImage") Then
-					If Not GetImageData(ImageGenre.Lesbian).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowLezdomImage") Then
-					If Not GetImageData(ImageGenre.Lezdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowLikedImage") Then
-					If Not GetImageData(ImageGenre.Liked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowLocalImage") Then
-					If FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True Then Return False
-				End If
-				If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
-					If ssh.CustomSlideEnabled = True Or ssh.LockImage = True Then Return False
-				End If
-				'TODO: Add ImageDataContainerUsage to filter @ShowLocalImage correct.
-				If FilterString.Contains("@ShowLocalImage") And My.Settings.CBIHardcore = False And My.Settings.CBISoftcore = False And My.Settings.CBILesbian = False And
-			   My.Settings.CBIBlowjob = False And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And
-				  My.Settings.CBIGay = False And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False Then Return False
+                ' ################## @Show-Category-Image #####################
+                If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
+                    If Not GetImageData(ImageGenre.Blog).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowBlowjobImage") Then
+                    If Not GetImageData(ImageGenre.Blowjob).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
+                    If Not GetImageData(ImageGenre.Boobs).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
+                    If Not GetImageData(ImageGenre.Butt).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowCaptionsImage") Then
+                    If Not GetImageData(ImageGenre.Captions).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowDislikedImage") Then
+                    If Not GetImageData(ImageGenre.Disliked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowFemdomImage") Then
+                    If Not GetImageData(ImageGenre.Femdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowGayImage") Then
+                    If Not GetImageData(ImageGenre.Gay).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowGeneralImage") Then
+                    If Not GetImageData(ImageGenre.General).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowHardcoreImage") Then
+                    If Not GetImageData(ImageGenre.Hardcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowHentaiImage") Then
+                    If Not GetImageData(ImageGenre.Hentai).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowLesbianImage") Then
+                    If Not GetImageData(ImageGenre.Lesbian).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowLezdomImage") Then
+                    If Not GetImageData(ImageGenre.Lezdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowLikedImage") Then
+                    If Not GetImageData(ImageGenre.Liked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowLocalImage") Then
+                    If FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True Then Return False
+                End If
+                If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
+                    If ssh.CustomSlideEnabled = True Or ssh.LockImage = True Then Return False
+                End If
+                'TODO: Add ImageDataContainerUsage to filter @ShowLocalImage correct.
+                If FilterString.Contains("@ShowLocalImage") And My.Settings.CBIHardcore = False And My.Settings.CBISoftcore = False And My.Settings.CBILesbian = False And
+                  My.Settings.CBIBlowjob = False And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And
+                  My.Settings.CBIGay = False And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False Then Return False
 
-				If FilterString.Contains("@ShowTaggedImage") Then
-					Dim Tags As List(Of String) = FilterString.Split() _
-									.Select(Function(s) s.Trim()) _
-									.Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList
+                If FilterString.Contains("@ShowTaggedImage") Then
+                    Dim Tags As List(Of String) = FilterString.Split() _
+                        .Select(Function(s) s.Trim()) _
+                        .Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList
 
-					If GetLocalImage(Tags, Nothing) = String.Empty Then Return False
-				End If
+                    If GetLocalImage(Tags, Nothing) = String.Empty Then Return False
+                End If
 
-				If FilterString.Contains("@ShowMaledomImage") Then
-					If Not GetImageData(ImageGenre.Maledom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				If FilterString.Contains("@ShowSoftcoreImage") Then
-					If Not GetImageData(ImageGenre.Softcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
-				End If
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-				' Disqualifying @Commands - End
-				'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-			End If
+                If FilterString.Contains("@ShowMaledomImage") Then
+                    If Not GetImageData(ImageGenre.Maledom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                If FilterString.Contains("@ShowSoftcoreImage") Then
+                    If Not GetImageData(ImageGenre.Softcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+                End If
+                '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+                ' Disqualifying @Commands - End
+                '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+            End If
 
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-			'							Possible space Filters
-			' This Section Contains @CommandFilters which allow space chars (0x20).
-			' 
-			' Example: "@Cup(A, B) Whatever Text to display"
-			' Mostly all perametrized command filters allow space chars in parameters.
-			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+            '							Possible space Filters
+            ' This Section Contains @CommandFilters which allow space chars (0x20).
+            ' 
+            ' Example: "@Cup(A, B) Whatever Text to display"
+            ' Mostly all perametrized command filters allow space chars in parameters.
+            '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
-			If FilterString.Contains("@AllowsOrgasm(") Then
-				If FilterCheck(GetParentheses(FilterString, "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox) = False Then Return False
-			End If
-			If FilterString.Contains("@ApathyLevel(") Then
-				If FilterCheck(GetParentheses(FilterString, "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then Return False
+            If FilterString.Contains("@AllowsOrgasm(") Then
+                If FilterCheck(GetParentheses(FilterString, "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox) = False Then Return False
+            End If
+            If FilterString.Contains("@ApathyLevel(") Then
+                If FilterCheck(GetParentheses(FilterString, "@ApathyLevel("), FrmSettings.NBEmpathy) = False Then Return False
             End If
             If FilterString.Contains("@DommeLevel(") Then
                 If FilterCheck(GetParentheses(FilterString, "@DommeLevel("), FrmSettings.domlevelNumBox) = False Then Return False
             End If
-			If FilterString.Contains("@Cup(") Then
-				If FilterCheck(GetParentheses(FilterString, "@Cup("), FrmSettings.boobComboBox) = False Then Return False
-			End If
-			If FilterString.Contains("@RuinsOrgasm(") Then
-				If FilterCheck(GetParentheses(FilterString, "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox) = False Then Return False
-			End If
-			If FilterString.Contains("@Variable[") Then
-				If CheckVariable(FilterString) = False Then Return False
-			End If
+            If FilterString.Contains("@Cup(") Then
+                If FilterCheck(GetParentheses(FilterString, "@Cup("), FrmSettings.boobComboBox) = False Then Return False
+            End If
+            If FilterString.Contains("@RuinsOrgasm(") Then
+                If FilterCheck(GetParentheses(FilterString, "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox) = False Then Return False
+            End If
+            If FilterString.Contains("@Variable[") Then
+                If CheckVariable(FilterString) = False Then Return False
+            End If
 
-			If FilterString.Contains("@Group(") Then
-				Dim GroupCheck As String = GetParentheses(FilterString, "@Group(")
-				If GroupCheck.Contains("D") Then
-					If ssh.GlitterTease = False Or Not ssh.Group.Contains("D") Then Return False
-				End If
-				If GroupCheck.Contains("1") Then
-					If ssh.GlitterTease = False Or Not ssh.Group.Contains("1") Then Return False
-				End If
-				If GroupCheck.Contains("2") Then
-					If ssh.GlitterTease = False Or Not ssh.Group.Contains("2") Then Return False
-				End If
-				If GroupCheck.Contains("3") Then
-					If ssh.GlitterTease = False Or Not ssh.Group.Contains("3") Then Return False
-				End If
-			End If
+            If FilterString.Contains("@Group(") Then
+                Dim GroupCheck As String = GetParentheses(FilterString, "@Group(")
+                If GroupCheck.Contains("D") Then
+                    If ssh.GlitterTease = False Or Not ssh.Group.Contains("D") Then Return False
+                End If
+                If GroupCheck.Contains("1") Then
+                    If ssh.GlitterTease = False Or Not ssh.Group.Contains("1") Then Return False
+                End If
+                If GroupCheck.Contains("2") Then
+                    If ssh.GlitterTease = False Or Not ssh.Group.Contains("2") Then Return False
+                End If
+                If GroupCheck.Contains("3") Then
+                    If ssh.GlitterTease = False Or Not ssh.Group.Contains("3") Then Return False
+                End If
+            End If
 
             If FilterString.Contains("@Flag(") Then
                 Dim writeFlag As String
@@ -14477,561 +14493,561 @@ VTSkip:
             If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
             Return False
         End Try
-	End Function
+    End Function
 
 
-	Public Function GetFilter2(ByVal FilterString As String) As Boolean
+    Public Function GetFilter2(ByVal FilterString As String) As Boolean
 
 
-		Dim __ConditionDic As New Dictionary(Of String, Boolean)(System.StringComparer.OrdinalIgnoreCase)
-		Try
-			'===============================================================================
-			'							Dictionary Setup Description
-			' 1st Parameter: "Key" this is the Command as String preceded with @
-			' 2nd Parameter: "Value" These are the conditions that must be met to EXCLUDE a line.
-			'
-			'		 If "Value" is "True", all lines containing "Key" will be excuded.
-			'
-			'===============================================================================
-			With __ConditionDic
-				.Add("@Crazy", FrmSettings.crazyCheckBox.Checked = False)
-				.Add("@Vulgar", FrmSettings.vulgarCheckBox.Checked = False)
-				.Add("@Supremacist", FrmSettings.supremacistCheckBox.Checked = False)
-				.Add("@Sadistic", FrmSettings.sadisticCheckBox.Checked = False)
-				.Add("@Degrading", FrmSettings.degradingCheckBox.Checked = False)
-				.Add("@DommeLevel1", FrmSettings.domlevelNumBox.Value <> 1)
-				.Add("@DommeLevel2", FrmSettings.domlevelNumBox.Value <> 2)
-				.Add("@DommeLevel3", FrmSettings.domlevelNumBox.Value <> 3)
-				.Add("@DommeLevel4", FrmSettings.domlevelNumBox.Value <> 4)
-				.Add("@DommeLevel5", FrmSettings.domlevelNumBox.Value <> 5)
-				.Add("@SelfYoung", FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1)
-				.Add("@SelfOld", FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1)
-				.Add("@ACup", FrmSettings.boobComboBox.Text <> "A" Or ssh.JustShowedBlogImage = True)
-				.Add("@BCup", FrmSettings.boobComboBox.Text <> "B" Or ssh.JustShowedBlogImage = True)
-				.Add("@CCup", FrmSettings.boobComboBox.Text <> "C" Or ssh.JustShowedBlogImage = True)
-				.Add("@DCup", FrmSettings.boobComboBox.Text <> "D" Or ssh.JustShowedBlogImage = True)
-				.Add("@DDCup", FrmSettings.boobComboBox.Text <> "DD" Or ssh.JustShowedBlogImage = True)
-				.Add("@DDD+Cup", FrmSettings.boobComboBox.Text <> "DDD+" Or ssh.JustShowedBlogImage = True)
-				.Add("@CockSmall", FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value)
-				.Add("@CockLarge", FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value)
-				.Add("@CockAverage", FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value)
-				.Add("@SubYoung", FrmSettings.subAgeNumBox.Value >= FrmSettings.NBSubAgeMin.Value)
-				.Add("@SubOld", FrmSettings.subAgeNumBox.Value <= FrmSettings.NBSubAgeMax.Value)
-				.Add("@SubBirthday", FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now))
-				.Add("@ValentinesDay", Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14)
-				.Add("@ChristmasEve", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24)
-				.Add("@ChristmasDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
-				.Add("@NewYearsEve", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31)
-				.Add("@NewYearsDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
+        Dim __ConditionDic As New Dictionary(Of String, Boolean)(System.StringComparer.OrdinalIgnoreCase)
+        Try
+            '===============================================================================
+            '							Dictionary Setup Description
+            ' 1st Parameter: "Key" this is the Command as String preceded with @
+            ' 2nd Parameter: "Value" These are the conditions that must be met to EXCLUDE a line.
+            '
+            '		 If "Value" is "True", all lines containing "Key" will be excuded.
+            '
+            '===============================================================================
+            With __ConditionDic
+                .Add("@Crazy", FrmSettings.crazyCheckBox.Checked = False)
+                .Add("@Vulgar", FrmSettings.vulgarCheckBox.Checked = False)
+                .Add("@Supremacist", FrmSettings.supremacistCheckBox.Checked = False)
+                .Add("@Sadistic", FrmSettings.sadisticCheckBox.Checked = False)
+                .Add("@Degrading", FrmSettings.degradingCheckBox.Checked = False)
+                .Add("@DommeLevel1", FrmSettings.domlevelNumBox.Value <> 1)
+                .Add("@DommeLevel2", FrmSettings.domlevelNumBox.Value <> 2)
+                .Add("@DommeLevel3", FrmSettings.domlevelNumBox.Value <> 3)
+                .Add("@DommeLevel4", FrmSettings.domlevelNumBox.Value <> 4)
+                .Add("@DommeLevel5", FrmSettings.domlevelNumBox.Value <> 5)
+                .Add("@SelfYoung", FrmSettings.domageNumBox.Value > FrmSettings.NBSelfAgeMin.Value - 1)
+                .Add("@SelfOld", FrmSettings.domageNumBox.Value < FrmSettings.NBSelfAgeMax.Value + 1)
+                .Add("@ACup", FrmSettings.boobComboBox.Text <> "A" Or ssh.JustShowedBlogImage = True)
+                .Add("@BCup", FrmSettings.boobComboBox.Text <> "B" Or ssh.JustShowedBlogImage = True)
+                .Add("@CCup", FrmSettings.boobComboBox.Text <> "C" Or ssh.JustShowedBlogImage = True)
+                .Add("@DCup", FrmSettings.boobComboBox.Text <> "D" Or ssh.JustShowedBlogImage = True)
+                .Add("@DDCup", FrmSettings.boobComboBox.Text <> "DD" Or ssh.JustShowedBlogImage = True)
+                .Add("@DDD+Cup", FrmSettings.boobComboBox.Text <> "DDD+" Or ssh.JustShowedBlogImage = True)
+                .Add("@CockSmall", FrmSettings.CockSizeNumBox.Value >= FrmSettings.NBAvgCockMin.Value)
+                .Add("@CockLarge", FrmSettings.CockSizeNumBox.Value <= FrmSettings.NBAvgCockMax.Value)
+                .Add("@CockAverage", FrmSettings.CockSizeNumBox.Value < FrmSettings.NBAvgCockMin.Value Or FrmSettings.CockSizeNumBox.Value > FrmSettings.NBAvgCockMax.Value)
+                .Add("@SubYoung", FrmSettings.subAgeNumBox.Value >= FrmSettings.NBSubAgeMin.Value)
+                .Add("@SubOld", FrmSettings.subAgeNumBox.Value <= FrmSettings.NBSubAgeMax.Value)
+                .Add("@SubBirthday", FrmSettings.NBBirthdayMonth.Value <> Month(Date.Now) And FrmSettings.NBBirthdayDay.Value <> DateAndTime.Day(Date.Now))
+                .Add("@ValentinesDay", Month(Date.Now) <> 2 And DateAndTime.Day(Date.Now) <> 14)
+                .Add("@ChristmasEve", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 24)
+                .Add("@ChristmasDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
+                .Add("@NewYearsEve", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 31)
+                .Add("@NewYearsDay", Month(Date.Now) <> 12 And DateAndTime.Day(Date.Now) <> 25)
 
-				.Add("@FirstRound", ssh.FirstRound = False)
-				.Add("@NotFirstRound", ssh.FirstRound = True)
-				.Add("@StrokeSpeedMax", StrokePace < NBMaxPace.Value)
-				.Add("@StrokeSpeedMin", StrokePace > NBMinPace.Value)
-				.Add("@StrokeFaster", StrokePace = NBMaxPace.Value Or ssh.WorshipMode = True)
-				.Add("@StrokeFastest", StrokePace = NBMaxPace.Value Or ssh.WorshipMode = True)
-				.Add("@StrokeSlower", StrokePace = NBMinPace.Value Or ssh.WorshipMode = True)
-				.Add("@StrokeSlowest", StrokePace = NBMinPace.Value Or ssh.WorshipMode = True)
-				.Add("@AlwaysAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Always Allows")
-				.Add("@OftenAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Often Allows")
-				.Add("@SometimesAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows")
-				.Add("@RarelyAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows")
-				.Add("@NeverAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Never Allows")
-				.Add("@AlwaysRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins")
-				.Add("@OftenRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins")
-				.Add("@SometimesRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins")
-				.Add("@RarelyRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins")
-				.Add("@NeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins")
-				.Add("@NotAlwaysAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text = "Always Allows")
-				.Add("@NotNeverAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text = "Never Allows")
-				.Add("@NotAlwaysRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Always Ruins")
-				.Add("@NotNeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Never Allows")
-				.Add("@LongEdge", ssh.LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False)
-				.Add("@InterruptLongEdge", ssh.LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or ssh.TeaseTick < 1 Or ssh.RiskyEdges = True)
-				.Add("@ShowHardcoreImage", Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowSoftcoreImage", Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowLesbianImage", Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowBlowjobImage", Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowFemdomImage", Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowLezdomImage", Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowHentaiImage", Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowGayImage", Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowMaledomImage", Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowCaptionsImage", Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowGeneralImage", Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@ShowBlogImage", FrmSettings.URLFileList.CheckedItems.Count = 0 Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
-				.Add("@NewBlogImage", __ConditionDic("@ShowBlogImage")) ' duplicate Command, lets get the Value af the other one.
-				.Add("@ShowLocalImage", FlagExists("SYS_NoPornAllowed") = True Or ssh.CustomSlideEnabled = True Or ssh.LockImage = True _
-					  Or (My.Settings.CBIHardcore = False And My.Settings.CBISoftcore = False And My.Settings.CBILesbian = False And My.Settings.CBIBlowjob = False _
-					   And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And My.Settings.CBIGay = False _
-					   And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False))
-				'.Add("@ShowButtImage", Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
-				'.Add("@ShowButtsImage", __ConditionDic("@ShowButtImage")) ' duplicate Command, lets get the Value af the other one.
-				'.Add("@ShowBoobImage", Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
-				'.Add("@ShowBoobsImage", __ConditionDic("@ShowBoobImage")) ' duplicate Command, lets get the Value af the other one.
-				.Add("@1MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 60 Or ssh.HoldEdgeTime > 119)
-				.Add("@2MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 120 Or ssh.HoldEdgeTime > 179)
-				.Add("@3MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 180 Or ssh.HoldEdgeTime > 239)
-				.Add("@4MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 240 Or ssh.HoldEdgeTime > 299)
-				.Add("@5MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 300 Or ssh.HoldEdgeTime > 599)
-				.Add("@10MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 600 Or ssh.HoldEdgeTime > 899)
-				.Add("@15MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 900 Or ssh.HoldEdgeTime > 1799)
-				.Add("@30MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 1800 Or ssh.HoldEdgeTime > 2699)
-				.Add("@45MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 2700 Or ssh.HoldEdgeTime > 3599)
-				.Add("@60MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 3600)
-				.Add("@CBTLevel1", FrmSettings.CBTSlider.Value <> 1)
-				.Add("@CBTLevel2", FrmSettings.CBTSlider.Value <> 2)
-				.Add("@CBTLevel3", FrmSettings.CBTSlider.Value <> 3)
-				.Add("@CBTLevel4", FrmSettings.CBTSlider.Value <> 4)
-				.Add("@CBTLevel5", FrmSettings.CBTSlider.Value <> 5)
-				.Add("@SubCircumcised", FrmSettings.CBSubCircumcised.Checked = False)
-				.Add("@SubNotCircumcised", FrmSettings.CBSubCircumcised.Checked = True)
-				.Add("@SubPierced", FrmSettings.CBSubPierced.Checked = False)
-				.Add("@SubNotPierced", FrmSettings.CBSubPierced.Checked = True)
-				'.Add("@ShowTaggedImage", ssh.LocalTagImageList.Count = 0) '=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> For this Condition the tags have be loaded before.
-				.Add("@BeforeTease", ssh.BeforeTease = False)
-				.Add("@OrgasmDenied", ssh.OrgasmDenied = False)
-				.Add("@OrgasmAllowed", ssh.OrgasmAllowed = False)
-				.Add("@OrgasmRuined", ssh.OrgasmRuined = False)
-				.Add("@ApathyLevel1", FrmSettings.NBEmpathy.Value <> 1)
-				.Add("@ApathyLevel2", FrmSettings.NBEmpathy.Value <> 2)
-				.Add("@ApathyLevel3", FrmSettings.NBEmpathy.Value <> 3)
-				.Add("@ApathyLevel4", FrmSettings.NBEmpathy.Value <> 4)
-				.Add("@ApathyLevel5", FrmSettings.NBEmpathy.Value <> 5)
-				.Add("@InChastity", My.Settings.Chastity = False)
-				.Add("@NotInChastity", My.Settings.Chastity = True)
-				.Add("@HasChastity", FrmSettings.CBOwnChastity.Checked = False)
-				.Add("@DoesNotHaveChastity", FrmSettings.CBOwnChastity.Checked = True)
-				.Add("@ChastityPA", FrmSettings.CBChastityPA.Checked = False)
-				.Add("@ChastitySpikes", FrmSettings.CBChastitySpikes.Checked = False)
-				.Add("@VitalSub", CBVitalSub.Checked = False)
-				.Add("@VitalSubAssignment", CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False)
-				.Add("@RuinTaunt", ssh.EdgeToRuin = False Or ssh.EdgeToRuinSecret = True)
-				.Add("@ShowLikedImage", Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt"))
-				.Add("@ShowDislikedImage", Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt"))
-				.Add("@VideoHardcore", ssh.VideoTease = False Or ssh.VideoType <> "Hardcore")
-				.Add("@VideoSoftcore", ssh.VideoTease = False Or ssh.VideoType <> "Softcore")
-				.Add("@VideoLesbian", ssh.VideoTease = False Or ssh.VideoType <> "Lesbian")
-				.Add("@VideoBlowjob", ssh.VideoTease = False Or ssh.VideoType <> "Blowjob")
-				.Add("@VideoFemdom", ssh.VideoTease = False Or ssh.VideoType <> "Femdom")
-				.Add("@VideoFemsub", ssh.VideoTease = False Or ssh.VideoType <> "Femsub")
-				.Add("@VideoGeneral", ssh.VideoTease = False Or ssh.VideoType <> "General")
-				.Add("@VideoHardcoreDomme", ssh.VideoTease = False Or ssh.VideoType <> "HardcoreD")
-				.Add("@VideoSoftcoreDomme", ssh.VideoTease = False Or ssh.VideoType <> "SoftcoreD")
-				.Add("@VideoLesbianDomme", ssh.VideoTease = False Or ssh.VideoType <> "LesbianD")
-				.Add("@VideoBlowjobDomme", ssh.VideoTease = False Or ssh.VideoType <> "BlowjobD")
-				.Add("@VideoFemdomDomme", ssh.VideoTease = False Or ssh.VideoType <> "FemdomD")
-				.Add("@VideoFemsubDomme", ssh.VideoTease = False Or ssh.VideoType <> "FemsubD")
-				.Add("@VideoGeneralDomme", ssh.VideoTease = False Or ssh.VideoType <> "GeneralD")
-				.Add("@CockTorture", FrmSettings.CBCBTCock.Checked = False)
-				.Add("@BallTorture", FrmSettings.CBCBTBalls.Checked = False)
-				.Add("@BallTorture0", ssh.CBTBallsCount <> 0)
-				.Add("@BallTorture1", ssh.CBTBallsCount <> 1)
-				.Add("@BallTorture2", ssh.CBTBallsCount <> 2)
-				.Add("@BallTorture3", ssh.CBTBallsCount <> 3)
-				.Add("@BallTorture4+", ssh.CBTBallsCount < 4)
-				.Add("@CockTorture0", ssh.CBTCockCount <> 0)
-				.Add("@CockTorture1", ssh.CBTCockCount <> 1)
-				.Add("@CockTorture2", ssh.CBTCockCount <> 2)
-				.Add("@CockTorture3", ssh.CBTCockCount <> 3)
-				.Add("@CockTorture4+", ssh.CBTCockCount < 4)
-				.Add("@Contact1", ssh.GlitterTease = False Or Not ssh.Group.Contains("1"))
-				.Add("@Contact2", ssh.GlitterTease = False Or Not ssh.Group.Contains("2"))
-				.Add("@Contact3", ssh.GlitterTease = False Or Not ssh.Group.Contains("3"))
-				.Add("@Stroking", ssh.SubStroking = False)
-				.Add("@SubStroking", ssh.SubStroking = False)
-				.Add("@NotStroking", ssh.SubStroking = True)
-				.Add("@SubNotStroking", ssh.SubStroking = True)
-				.Add("@Edging", ssh.SubEdging = False)
-				.Add("@SubEdging", ssh.SubEdging = False)
-				.Add("@NotEdging", ssh.SubEdging = True)
-				.Add("@SubNotEdging", ssh.SubEdging = True)
-				.Add("@HoldingTheEdge", ssh.SubHoldingEdge = False)
-				.Add("@SubHoldingTheEdge", ssh.SubHoldingEdge = False)
-				.Add("@NotHoldingTheEdge", ssh.SubHoldingEdge = True)
-				.Add("@SubNotHoldingTheEdge", ssh.SubHoldingEdge = True)
-				.Add("@Morning", ssh.GeneralTime <> "Morning")
-				.Add("@Afternoon", ssh.GeneralTime <> "Afternoon")
-				.Add("@Night", ssh.GeneralTime <> "Night")
-				.Add("@GoodMood", ssh.DommeMood <= FrmSettings.NBDomMoodMax.Value)
-				.Add("@BadMood", ssh.DommeMood >= FrmSettings.NBDomMoodMin.Value)
-				.Add("@NeutralMood", ssh.DommeMood > FrmSettings.NBDomMoodMax.Value Or ssh.DommeMood < FrmSettings.NBDomMoodMin.Value)
-				.Add("@SetModule(", ssh.SetModule <> "" Or ssh.BookmarkModule = True) ' I wonder if this will work.
-				.Add("@OrgasmRestricted", ssh.OrgasmRestricted = False)
-				.Add("@OrgasmNotRestricted", ssh.OrgasmRestricted = True)
-				.Add("@SubWorshipping", ssh.WorshipMode = False)
-				.Add("@SubNotWorshipping", ssh.WorshipMode = True)
-				.Add("@LongHold", ssh.LongHold = False Or ssh.SubHoldingEdge = False)
-				.Add("@ExtremeHold", ssh.ExtremeHold = False Or ssh.SubHoldingEdge = False)
-				.Add("@AssWorship", ssh.WorshipTarget <> "Ass" Or ssh.WorshipMode = False)
-				.Add("@BoobWorship", ssh.WorshipTarget <> "Boobs" Or ssh.WorshipMode = False)
-				.Add("@PussyWorship", ssh.WorshipTarget <> "Pussy" Or ssh.WorshipMode = False)
-			End With
-		Catch ex As ArgumentException
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'	                ArgumentException => Will occur everytime until you fix Source Code!
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Debug.Print("Error on initializing FilterList." & vbCrLf & ex.Message & vbCrLf & ex.StackTrace)
-			MsgBox("Error on initializing FilterList. This Error occurs, If you try to add a duplikace Key to the dictionary." &
-				"This error is major issue in Code and will occur everytime until you fix this Error. For there is no point in " &
-				"further executing the Code, the application will exit after closing this Message." & vbCrLf &
-				ex.Message & vbCrLf & ex.StackTrace, MsgBoxStyle.Critical, "Source Code Error")
-			Application.Exit()
-		End Try
-
-
-		Try
-			' Declare a new regex Instance, for detecting the parameters in a line.
-			' Allowed chars for Commands are:		 A-Z a-z 0-9 @ 
-			' Allowed Brackets are :				( [
-			' Minimum length is 3 Chars, maximum Command length has no restriction.
-			Dim __re As Regex = New Regex("@[@\w\d+]{3,}[\(\[]*", RegexOptions.IgnoreCase)
+                .Add("@FirstRound", ssh.FirstRound = False)
+                .Add("@NotFirstRound", ssh.FirstRound = True)
+                .Add("@StrokeSpeedMax", StrokePace < NBMaxPace.Value)
+                .Add("@StrokeSpeedMin", StrokePace > NBMinPace.Value)
+                .Add("@StrokeFaster", StrokePace = NBMaxPace.Value Or ssh.WorshipMode = True)
+                .Add("@StrokeFastest", StrokePace = NBMaxPace.Value Or ssh.WorshipMode = True)
+                .Add("@StrokeSlower", StrokePace = NBMinPace.Value Or ssh.WorshipMode = True)
+                .Add("@StrokeSlowest", StrokePace = NBMinPace.Value Or ssh.WorshipMode = True)
+                .Add("@AlwaysAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Always Allows")
+                .Add("@OftenAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Often Allows")
+                .Add("@SometimesAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Sometimes Allows")
+                .Add("@RarelyAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Rarely Allows")
+                .Add("@NeverAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text <> "Never Allows")
+                .Add("@AlwaysRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Always Ruins")
+                .Add("@OftenRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Often Ruins")
+                .Add("@SometimesRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Sometimes Ruins")
+                .Add("@RarelyRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Rarely Ruins")
+                .Add("@NeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text <> "Never Ruins")
+                .Add("@NotAlwaysAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text = "Always Allows")
+                .Add("@NotNeverAllowsOrgasm", FrmSettings.alloworgasmComboBox.Text = "Never Allows")
+                .Add("@NotAlwaysRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Always Ruins")
+                .Add("@NotNeverRuinsOrgasm", FrmSettings.ruinorgasmComboBox.Text = "Never Allows")
+                .Add("@LongEdge", ssh.LongEdge = False Or FrmSettings.CBLongEdgeTaunts.Checked = False)
+                .Add("@InterruptLongEdge", ssh.LongEdge = False Or FrmSettings.CBLongEdgeInterrupts.Checked = False Or ssh.TeaseTick < 1 Or ssh.RiskyEdges = True)
+                .Add("@ShowHardcoreImage", Not Directory.Exists(My.Settings.IHardcore) Or My.Settings.CBIHardcore = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowSoftcoreImage", Not Directory.Exists(My.Settings.ISoftcore) Or My.Settings.CBISoftcore = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowLesbianImage", Not Directory.Exists(My.Settings.ILesbian) Or My.Settings.CBILesbian = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowBlowjobImage", Not Directory.Exists(My.Settings.IBlowjob) Or My.Settings.CBIBlowjob = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowFemdomImage", Not Directory.Exists(My.Settings.IFemdom) Or My.Settings.CBIFemdom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowLezdomImage", Not Directory.Exists(My.Settings.ILezdom) Or My.Settings.CBILezdom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowHentaiImage", Not Directory.Exists(My.Settings.IHentai) Or My.Settings.CBIHentai = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowGayImage", Not Directory.Exists(My.Settings.IGay) Or My.Settings.CBIGay = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowMaledomImage", Not Directory.Exists(My.Settings.IMaledom) Or My.Settings.CBIMaledom = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowCaptionsImage", Not Directory.Exists(My.Settings.ICaptions) Or My.Settings.CBICaptions = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowGeneralImage", Not Directory.Exists(My.Settings.IGeneral) Or My.Settings.CBIGeneral = False Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@ShowBlogImage", FrmSettings.URLFileList.CheckedItems.Count = 0 Or ssh.CustomSlideEnabled = True Or FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True)
+                .Add("@NewBlogImage", __ConditionDic("@ShowBlogImage")) ' duplicate Command, lets get the Value af the other one.
+                .Add("@ShowLocalImage", FlagExists("SYS_NoPornAllowed") = True Or ssh.CustomSlideEnabled = True Or ssh.LockImage = True _
+                   Or (My.Settings.CBIHardcore = False And My.Settings.CBISoftcore = False And My.Settings.CBILesbian = False And My.Settings.CBIBlowjob = False _
+                    And My.Settings.CBIFemdom = False And My.Settings.CBILezdom = False And My.Settings.CBIHentai = False And My.Settings.CBIGay = False _
+                    And My.Settings.CBIMaledom = False And My.Settings.CBICaptions = False And My.Settings.CBIGeneral = False))
+                '.Add("@ShowButtImage", Not Directory.Exists(FrmSettings.LBLButtPath.Text) And Not File.Exists(FrmSettings.LBLButtURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
+                '.Add("@ShowButtsImage", __ConditionDic("@ShowButtImage")) ' duplicate Command, lets get the Value af the other one.
+                '.Add("@ShowBoobImage", Not Directory.Exists(FrmSettings.LBLBoobPath.Text) And Not File.Exists(FrmSettings.LBLBoobURL.Text) Or FlagExists("SYS_NoPornAllowed") = True Or CustomSlideshow = True Or LockImage = True)
+                '.Add("@ShowBoobsImage", __ConditionDic("@ShowBoobImage")) ' duplicate Command, lets get the Value af the other one.
+                .Add("@1MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 60 Or ssh.HoldEdgeTime > 119)
+                .Add("@2MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 120 Or ssh.HoldEdgeTime > 179)
+                .Add("@3MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 180 Or ssh.HoldEdgeTime > 239)
+                .Add("@4MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 240 Or ssh.HoldEdgeTime > 299)
+                .Add("@5MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 300 Or ssh.HoldEdgeTime > 599)
+                .Add("@10MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 600 Or ssh.HoldEdgeTime > 899)
+                .Add("@15MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 900 Or ssh.HoldEdgeTime > 1799)
+                .Add("@30MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 1800 Or ssh.HoldEdgeTime > 2699)
+                .Add("@45MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 2700 Or ssh.HoldEdgeTime > 3599)
+                .Add("@60MinuteHold", ssh.SubHoldingEdge = False Or ssh.HoldEdgeTime < 3600)
+                .Add("@CBTLevel1", FrmSettings.CBTSlider.Value <> 1)
+                .Add("@CBTLevel2", FrmSettings.CBTSlider.Value <> 2)
+                .Add("@CBTLevel3", FrmSettings.CBTSlider.Value <> 3)
+                .Add("@CBTLevel4", FrmSettings.CBTSlider.Value <> 4)
+                .Add("@CBTLevel5", FrmSettings.CBTSlider.Value <> 5)
+                .Add("@SubCircumcised", FrmSettings.CBSubCircumcised.Checked = False)
+                .Add("@SubNotCircumcised", FrmSettings.CBSubCircumcised.Checked = True)
+                .Add("@SubPierced", FrmSettings.CBSubPierced.Checked = False)
+                .Add("@SubNotPierced", FrmSettings.CBSubPierced.Checked = True)
+                '.Add("@ShowTaggedImage", ssh.LocalTagImageList.Count = 0) '=>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> For this Condition the tags have be loaded before.
+                .Add("@BeforeTease", ssh.BeforeTease = False)
+                .Add("@OrgasmDenied", ssh.OrgasmDenied = False)
+                .Add("@OrgasmAllowed", ssh.OrgasmAllowed = False)
+                .Add("@OrgasmRuined", ssh.OrgasmRuined = False)
+                .Add("@ApathyLevel1", FrmSettings.NBEmpathy.Value <> 1)
+                .Add("@ApathyLevel2", FrmSettings.NBEmpathy.Value <> 2)
+                .Add("@ApathyLevel3", FrmSettings.NBEmpathy.Value <> 3)
+                .Add("@ApathyLevel4", FrmSettings.NBEmpathy.Value <> 4)
+                .Add("@ApathyLevel5", FrmSettings.NBEmpathy.Value <> 5)
+                .Add("@InChastity", My.Settings.Chastity = False)
+                .Add("@NotInChastity", My.Settings.Chastity = True)
+                .Add("@HasChastity", FrmSettings.CBOwnChastity.Checked = False)
+                .Add("@DoesNotHaveChastity", FrmSettings.CBOwnChastity.Checked = True)
+                .Add("@ChastityPA", FrmSettings.CBChastityPA.Checked = False)
+                .Add("@ChastitySpikes", FrmSettings.CBChastitySpikes.Checked = False)
+                .Add("@VitalSub", CBVitalSub.Checked = False)
+                .Add("@VitalSubAssignment", CBVitalSub.Checked = False Or CBVitalSubDomTask.Checked = False)
+                .Add("@RuinTaunt", ssh.EdgeToRuin = False Or ssh.EdgeToRuinSecret = True)
+                .Add("@ShowLikedImage", Not File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt"))
+                .Add("@ShowDislikedImage", Not File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt"))
+                .Add("@VideoHardcore", ssh.VideoTease = False Or ssh.VideoType <> "Hardcore")
+                .Add("@VideoSoftcore", ssh.VideoTease = False Or ssh.VideoType <> "Softcore")
+                .Add("@VideoLesbian", ssh.VideoTease = False Or ssh.VideoType <> "Lesbian")
+                .Add("@VideoBlowjob", ssh.VideoTease = False Or ssh.VideoType <> "Blowjob")
+                .Add("@VideoFemdom", ssh.VideoTease = False Or ssh.VideoType <> "Femdom")
+                .Add("@VideoFemsub", ssh.VideoTease = False Or ssh.VideoType <> "Femsub")
+                .Add("@VideoGeneral", ssh.VideoTease = False Or ssh.VideoType <> "General")
+                .Add("@VideoHardcoreDomme", ssh.VideoTease = False Or ssh.VideoType <> "HardcoreD")
+                .Add("@VideoSoftcoreDomme", ssh.VideoTease = False Or ssh.VideoType <> "SoftcoreD")
+                .Add("@VideoLesbianDomme", ssh.VideoTease = False Or ssh.VideoType <> "LesbianD")
+                .Add("@VideoBlowjobDomme", ssh.VideoTease = False Or ssh.VideoType <> "BlowjobD")
+                .Add("@VideoFemdomDomme", ssh.VideoTease = False Or ssh.VideoType <> "FemdomD")
+                .Add("@VideoFemsubDomme", ssh.VideoTease = False Or ssh.VideoType <> "FemsubD")
+                .Add("@VideoGeneralDomme", ssh.VideoTease = False Or ssh.VideoType <> "GeneralD")
+                .Add("@CockTorture", FrmSettings.CBCBTCock.Checked = False)
+                .Add("@BallTorture", FrmSettings.CBCBTBalls.Checked = False)
+                .Add("@BallTorture0", ssh.CBTBallsCount <> 0)
+                .Add("@BallTorture1", ssh.CBTBallsCount <> 1)
+                .Add("@BallTorture2", ssh.CBTBallsCount <> 2)
+                .Add("@BallTorture3", ssh.CBTBallsCount <> 3)
+                .Add("@BallTorture4+", ssh.CBTBallsCount < 4)
+                .Add("@CockTorture0", ssh.CBTCockCount <> 0)
+                .Add("@CockTorture1", ssh.CBTCockCount <> 1)
+                .Add("@CockTorture2", ssh.CBTCockCount <> 2)
+                .Add("@CockTorture3", ssh.CBTCockCount <> 3)
+                .Add("@CockTorture4+", ssh.CBTCockCount < 4)
+                .Add("@Contact1", ssh.GlitterTease = False Or Not ssh.Group.Contains("1"))
+                .Add("@Contact2", ssh.GlitterTease = False Or Not ssh.Group.Contains("2"))
+                .Add("@Contact3", ssh.GlitterTease = False Or Not ssh.Group.Contains("3"))
+                .Add("@Stroking", ssh.SubStroking = False)
+                .Add("@SubStroking", ssh.SubStroking = False)
+                .Add("@NotStroking", ssh.SubStroking = True)
+                .Add("@SubNotStroking", ssh.SubStroking = True)
+                .Add("@Edging", ssh.SubEdging = False)
+                .Add("@SubEdging", ssh.SubEdging = False)
+                .Add("@NotEdging", ssh.SubEdging = True)
+                .Add("@SubNotEdging", ssh.SubEdging = True)
+                .Add("@HoldingTheEdge", ssh.SubHoldingEdge = False)
+                .Add("@SubHoldingTheEdge", ssh.SubHoldingEdge = False)
+                .Add("@NotHoldingTheEdge", ssh.SubHoldingEdge = True)
+                .Add("@SubNotHoldingTheEdge", ssh.SubHoldingEdge = True)
+                .Add("@Morning", ssh.GeneralTime <> "Morning")
+                .Add("@Afternoon", ssh.GeneralTime <> "Afternoon")
+                .Add("@Night", ssh.GeneralTime <> "Night")
+                .Add("@GoodMood", ssh.DommeMood <= FrmSettings.NBDomMoodMax.Value)
+                .Add("@BadMood", ssh.DommeMood >= FrmSettings.NBDomMoodMin.Value)
+                .Add("@NeutralMood", ssh.DommeMood > FrmSettings.NBDomMoodMax.Value Or ssh.DommeMood < FrmSettings.NBDomMoodMin.Value)
+                .Add("@SetModule(", ssh.SetModule <> "" Or ssh.BookmarkModule = True) ' I wonder if this will work.
+                .Add("@OrgasmRestricted", ssh.OrgasmRestricted = False)
+                .Add("@OrgasmNotRestricted", ssh.OrgasmRestricted = True)
+                .Add("@SubWorshipping", ssh.WorshipMode = False)
+                .Add("@SubNotWorshipping", ssh.WorshipMode = True)
+                .Add("@LongHold", ssh.LongHold = False Or ssh.SubHoldingEdge = False)
+                .Add("@ExtremeHold", ssh.ExtremeHold = False Or ssh.SubHoldingEdge = False)
+                .Add("@AssWorship", ssh.WorshipTarget <> "Ass" Or ssh.WorshipMode = False)
+                .Add("@BoobWorship", ssh.WorshipTarget <> "Boobs" Or ssh.WorshipMode = False)
+                .Add("@PussyWorship", ssh.WorshipTarget <> "Pussy" Or ssh.WorshipMode = False)
+            End With
+        Catch ex As ArgumentException
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            '	                ArgumentException => Will occur everytime until you fix Source Code!
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            Debug.Print("Error on initializing FilterList." & vbCrLf & ex.Message & vbCrLf & ex.StackTrace)
+            MsgBox("Error on initializing FilterList. This Error occurs, If you try to add a duplikace Key to the dictionary." &
+             "This error is major issue in Code and will occur everytime until you fix this Error. For there is no point in " &
+             "further executing the Code, the application will exit after closing this Message." & vbCrLf &
+             ex.Message & vbCrLf & ex.StackTrace, MsgBoxStyle.Critical, "Source Code Error")
+            Application.Exit()
+        End Try
 
 
-			' Execute regex on current line, to find all containing Commands
-			Dim mc As MatchCollection = __re.Matches(FilterString)
-
-			For Each m As Match In mc
-				If __ConditionDic.Keys.Contains(m.Value) AndAlso __ConditionDic(m.Value) Then
-					'===============================================================================
-					'					Known Command - DELETE Condition = TRUE
-					'===============================================================================
-					' The Command is known and his delete condition is True -> delete line
-					Return False
-
-				ElseIf __ConditionDic.Keys.Contains(m.Value) = False Then
-					'===============================================================================
-					'						Unknown Command / BracketCommand
-					'===============================================================================
-					Dim Condition As Boolean = False
-
-					Select Case m.Value.ToUpper
-						Case "@DommeLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@DommeLevel("), FrmSettings.domlevelNumBox)
-						Case "@Cup(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@Cup("), FrmSettings.boobComboBox)
-						Case "@AllowsOrgasm(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox)
-						Case "@RuinsOrgasm(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox)
-						Case "@ApathyLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@ApathyLevel("), FrmSettings.NBEmpathy)
-						Case "@Variable[".ToUpper : Condition = CheckVariable(FilterString)
-						Case "@CheckDate(".ToUpper : Condition = CheckDateList(FilterString)
-						'QND-Implemented: ContactData.GetTaggedImage
-						'Case "@DommeTag(".ToUpper : Condition = GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = False Or ssh.LockImage = True
-						Case "@ImageTag(".ToUpper : Condition = GetLocalImage(FilterString)
-						Case Else
-							'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
-							'					Unknown Command => goto next Match
-							'<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
-							Dim f As String = "" ' Debug line to add the ability to set a breakpoint.
-							Exit For
-					End Select
-					' The Command is known and his delete condition is True -> delete line
-					If Condition Then Return False
-				End If
-			Next ' of Regex matches (Commands)
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'                                            All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'TODO: Once implemented rethrow all exceptions.
-			'Throw
-		End Try
-
-		Return True
+        Try
+            ' Declare a new regex Instance, for detecting the parameters in a line.
+            ' Allowed chars for Commands are:		 A-Z a-z 0-9 @ 
+            ' Allowed Brackets are :				( [
+            ' Minimum length is 3 Chars, maximum Command length has no restriction.
+            Dim __re As Regex = New Regex("@[@\w\d+]{3,}[\(\[]*", RegexOptions.IgnoreCase)
 
 
+            ' Execute regex on current line, to find all containing Commands
+            Dim mc As MatchCollection = __re.Matches(FilterString)
+
+            For Each m As Match In mc
+                If __ConditionDic.Keys.Contains(m.Value) AndAlso __ConditionDic(m.Value) Then
+                    '===============================================================================
+                    '					Known Command - DELETE Condition = TRUE
+                    '===============================================================================
+                    ' The Command is known and his delete condition is True -> delete line
+                    Return False
+
+                ElseIf __ConditionDic.Keys.Contains(m.Value) = False Then
+                    '===============================================================================
+                    '						Unknown Command / BracketCommand
+                    '===============================================================================
+                    Dim Condition As Boolean = False
+
+                    Select Case m.Value.ToUpper
+                        Case "@DommeLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@DommeLevel("), FrmSettings.domlevelNumBox)
+                        Case "@Cup(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@Cup("), FrmSettings.boobComboBox)
+                        Case "@AllowsOrgasm(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@AllowsOrgasm("), FrmSettings.alloworgasmComboBox)
+                        Case "@RuinsOrgasm(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox)
+                        Case "@ApathyLevel(".ToUpper : Condition = FilterCheck(GetParentheses(FilterString, "@ApathyLevel("), FrmSettings.NBEmpathy)
+                        Case "@Variable[".ToUpper : Condition = CheckVariable(FilterString)
+                        Case "@CheckDate(".ToUpper : Condition = CheckDateList(FilterString)
+                            'QND-Implemented: ContactData.GetTaggedImage
+                            'Case "@DommeTag(".ToUpper : Condition = GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = False Or ssh.LockImage = True
+                        Case "@ImageTag(".ToUpper : Condition = GetLocalImage(FilterString)
+                        Case Else
+                            '<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
+                            '					Unknown Command => goto next Match
+                            '<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
+                            Dim f As String = "" ' Debug line to add the ability to set a breakpoint.
+                            Exit For
+                    End Select
+                    ' The Command is known and his delete condition is True -> delete line
+                    If Condition Then Return False
+                End If
+            Next ' of Regex matches (Commands)
+        Catch ex As Exception
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            '                                            All Errors
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            'TODO: Once implemented rethrow all exceptions.
+            'Throw
+        End Try
+
+        Return True
 
 
-	End Function
+
+
+    End Function
 
 
 #Region "---------------------------------------------------- Chatbox ---------------------------------------------------------"
 
-	Private Sub ChatText_DocumentCompleted(sender As Object, e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText.DocumentCompleted
-		ScrollChatDown()
-	End Sub
+    Private Sub ChatText_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText.DocumentCompleted
+        ScrollChatDown()
+    End Sub
 
 
-	Private Sub ChatText2_DocumentCompleted(sender As Object, e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText2.DocumentCompleted
-		Try
-			ChatText2.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
-	End Sub
+    Private Sub ChatText2_DocumentCompleted(ByVal sender As Object, ByVal e As System.Windows.Forms.WebBrowserDocumentCompletedEventArgs) Handles ChatText2.DocumentCompleted
+        Try
+            ChatText2.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
+        Catch
+        End Try
+    End Sub
 
-	Private Sub chatBox_DragDrop(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragDrop
-		chatBox.Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
-		sendButton.PerformClick()
-	End Sub
+    Private Sub chatBox_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragDrop
+        chatBox.Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+        sendButton.PerformClick()
+    End Sub
 
-	Private Sub chatBox2_DragDrop(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles ChatBox2.DragDrop
-		chatBox.Text = ""
-		ChatBox2.Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
-		sendButton.PerformClick()
-	End Sub
+    Private Sub chatBox2_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles ChatBox2.DragDrop
+        chatBox.Text = ""
+        ChatBox2.Text = CType(e.Data.GetData(DataFormats.FileDrop), Array).GetValue(0).ToString
+        sendButton.PerformClick()
+    End Sub
 
-	Private Sub chatBox_DragEnter(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragEnter
-		If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
-			e.Effect = DragDropEffects.Copy
-		End If
-	End Sub
+    Private Sub chatBox_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles chatBox.DragEnter
+        If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
 
-	Private Sub chatBox2_DragEnter(sender As Object, e As System.Windows.Forms.DragEventArgs) Handles ChatBox2.DragEnter
-		If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
-			e.Effect = DragDropEffects.Copy
-		End If
-	End Sub
+    Private Sub chatBox2_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles ChatBox2.DragEnter
+        If (e.Data.GetDataPresent(DataFormats.FileDrop)) Then
+            e.Effect = DragDropEffects.Copy
+        End If
+    End Sub
 
-	Private Sub chatbox_KeyDown(sender As Object, e As KeyEventArgs) Handles chatBox.KeyDown
-		If e.KeyCode = Keys.Return Then
-			sendButton.PerformClick()
-			e.SuppressKeyPress = True
-		End If
-	End Sub
+    Private Sub chatbox_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles chatBox.KeyDown
+        If e.KeyCode = Keys.Return Then
+            sendButton.PerformClick()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
 
-	Private Sub chatbox2_KeyDown(sender As Object, e As KeyEventArgs) Handles ChatBox2.KeyDown
-		If e.KeyCode = Keys.Return Then
-			sendButton.PerformClick()
-			e.SuppressKeyPress = True
-		End If
-	End Sub
+    Private Sub chatbox2_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles ChatBox2.KeyDown
+        If e.KeyCode = Keys.Return Then
+            sendButton.PerformClick()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
 
-	Private Sub chatBox_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles chatBox.KeyPress
-		If e.KeyChar = Chr(13) Then
-			e.Handled = True
-			' sendButton.PerformClick()
-			e.KeyChar = Chr(0)
-		End If
-	End Sub
+    Private Sub chatBox_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles chatBox.KeyPress
+        If e.KeyChar = Chr(13) Then
+            e.Handled = True
+            ' sendButton.PerformClick()
+            e.KeyChar = Chr(0)
+        End If
+    End Sub
 
-	Private Sub chatBox2_KeyPress(sender As Object, e As System.Windows.Forms.KeyPressEventArgs) Handles ChatBox2.KeyPress
-		If e.KeyChar = Chr(13) Then
-			e.Handled = True
-			' sendButton.PerformClick()
-			e.KeyChar = Chr(0)
-		End If
-	End Sub
+    Private Sub chatBox2_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles ChatBox2.KeyPress
+        If e.KeyChar = Chr(13) Then
+            e.Handled = True
+            ' sendButton.PerformClick()
+            e.KeyChar = Chr(0)
+        End If
+    End Sub
 
-	''' <summary>Appends a system message to chat and prints it if desired. </summary>
-	''' <param name="messageText">Messagetext to append to chat.</param>
-	''' <param name="printChat">If true the chatwindow is refreshed and reprinted.</param>
-	Public Sub ChatAddSystemMessage(messageText As String, Optional printChat As Boolean = True)
-		ChatAppend("<span style=""color: steelblue; font-weight: bold; "">" & messageText & "</span>", printChat)
-		'ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
-	End Sub
+    ''' <summary>Appends a system message to chat and prints it if desired. </summary>
+    ''' <param name="messageText">Messagetext to append to chat.</param>
+    ''' <param name="printChat">If true the chatwindow is refreshed and reprinted.</param>
+    Public Sub ChatAddSystemMessage(ByVal messageText As String, Optional ByVal printChat As Boolean = True)
+        ChatAppend("<span style=""color: steelblue; font-weight: bold; "">" & messageText & "</span>", printChat)
+        'ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
+    End Sub
 
-	Public Sub ChatAppend(elementText As String, Optional printChat As Boolean = True)
-		ssh.Chat &= elementText & "<br>" & vbCrLf
-		If printChat Then Me.PrintChat()
-	End Sub
+    Public Sub ChatAppend(ByVal elementText As String, Optional ByVal printChat As Boolean = True)
+        ssh.Chat &= elementText & "<br>" & vbCrLf
+        If printChat Then Me.PrintChat()
+    End Sub
 
-	Friend Sub PrintChat()
-		ChatText.DocumentText = ssh.Chat
-		ChatText2.DocumentText = ssh.Chat
-		ChatReadyState()
-	End Sub
+    Friend Sub PrintChat()
+        ChatText.DocumentText = ssh.Chat
+        ChatText2.DocumentText = ssh.Chat
+        ChatReadyState()
+    End Sub
 
-	Public Sub ScrollChatDown()
+    Public Sub ScrollChatDown()
 
-		Try
-			ChatText.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
+        Try
+            ChatText.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
+        Catch
+        End Try
 
-		Try
-			ChatText2.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
-		Catch
-		End Try
+        Try
+            ChatText2.Document.Window.ScrollTo(Int16.MaxValue, Int16.MaxValue)
+        Catch
+        End Try
 
-	End Sub
+    End Sub
 
-	Public Sub ClearChat()
+    Public Sub ClearChat()
 
-		ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """></body>"
-		ChatText.DocumentText = ssh.Chat
-		ChatText2.DocumentText = ssh.Chat
-		ChatReadyState()
+        ssh.Chat = "<body bgcolor=""" & Color2Html(My.Settings.ChatWindowColor) & """></body>"
+        ChatText.DocumentText = ssh.Chat
+        ChatText2.DocumentText = ssh.Chat
+        ChatReadyState()
 
-	End Sub
+    End Sub
 
-	Public Sub ChatReadyState()
-		While ChatText.ReadyState <> WebBrowserReadyState.Complete Or ChatText2.ReadyState <> WebBrowserReadyState.Complete
-			Application.DoEvents()
-		End While
-		ScrollChatDown()
-	End Sub
+    Public Sub ChatReadyState()
+        While ChatText.ReadyState <> WebBrowserReadyState.Complete Or ChatText2.ReadyState <> WebBrowserReadyState.Complete
+            Application.DoEvents()
+        End While
+        ScrollChatDown()
+    End Sub
 
 #End Region ' Chatbox
 
 #Region "------------------------------------ Avoid the Edge --------------------------------------------"
 
-	Private Sub AvoidTheEdge_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdge.Tick
+    Private Sub AvoidTheEdge_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AvoidTheEdge.Tick
 
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
-		If ssh.DomTyping = True Then Return
-		If ssh.DomTypeCheck = True And ssh.AvoidTheEdgeTick < 6 Then Return
-		If chatBox.Text <> "" And ssh.AvoidTheEdgeTick < 6 Then Return
-		If ChatBox2.Text <> "" And ssh.AvoidTheEdgeTick < 6 Then Return
-		If ssh.FollowUp <> "" And ssh.AvoidTheEdgeTick < 6 Then Return
+        If ssh.DomTyping = True Then Return
+        If ssh.DomTypeCheck = True And ssh.AvoidTheEdgeTick < 6 Then Return
+        If chatBox.Text <> "" And ssh.AvoidTheEdgeTick < 6 Then Return
+        If ChatBox2.Text <> "" And ssh.AvoidTheEdgeTick < 6 Then Return
+        If ssh.FollowUp <> "" And ssh.AvoidTheEdgeTick < 6 Then Return
 
-		ssh.AvoidTheEdgeTick -= 1
+        ssh.AvoidTheEdgeTick -= 1
 
-		If ssh.AvoidTheEdgeTick < 1 Then
-
-
-
-			Dim AvoidTheEdgeVideo As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\AvoidTheEdge.txt"
-			If ssh.DommeVideo = True Then AvoidTheEdgeVideo = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\AvoidTheEdgeD.txt"
-
-			Dim AvoidTheEdgeLineStart As Integer
-			Dim AvoidTheEdgeLineEnd As Integer
-
-
-			If File.Exists(AvoidTheEdgeVideo) Then
-			Else
-				If ssh.DommeVideo = True Then
-					MsgBox("AvoidTheEdgeD.txt is missing!", , "Error!")
-				Else
-					MsgBox("AvoidTheEdge.txt is missing!", , "Error!")
-				End If
-				Return
-			End If
+        If ssh.AvoidTheEdgeTick < 1 Then
 
 
 
-			If ssh.AvoidTheEdgeStroking = False Then
+            Dim AvoidTheEdgeVideo As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\AvoidTheEdge.txt"
+            If ssh.DommeVideo = True Then AvoidTheEdgeVideo = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\AvoidTheEdgeD.txt"
+
+            Dim AvoidTheEdgeLineStart As Integer
+            Dim AvoidTheEdgeLineEnd As Integer
 
 
-				'CensorshipTick = randomizer.Next(NBCensorHideMin.Value, NBCensorHideMax.Value + 1)
-
-				ssh.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
-
-				' If AvoidTheEdgeLineTemp > TauntSlider.Value * 5 Then
-				'Return
-				'End If
-
-				Using ioFileA As New StreamReader(AvoidTheEdgeVideo)
-					Dim linesA As New List(Of String)
-					Dim TempAvoidTheEdgeLine As Integer
-
-					TempAvoidTheEdgeLine = -1
-					While ioFileA.Peek <> -1
-						TempAvoidTheEdgeLine += 1
-						linesA.Add(ioFileA.ReadLine())
-						If ssh.VideoType = "Hardcore" And linesA(TempAvoidTheEdgeLine) = "[HardcoreStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Hardcore" And linesA(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Softcore" And linesA(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Softcore" And linesA(TempAvoidTheEdgeLine) = "[LesbianStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Lesbian" And linesA(TempAvoidTheEdgeLine) = "[LesbianStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Lesbian" And linesA(TempAvoidTheEdgeLine) = "[BlowjobStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Blowjob" And linesA(TempAvoidTheEdgeLine) = "[BlowjobStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Blowjob" And linesA(TempAvoidTheEdgeLine) = "[FemdomStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Femdom" And linesA(TempAvoidTheEdgeLine) = "[FemdomStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Femdom" And linesA(TempAvoidTheEdgeLine) = "[FemsubStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Femsub" And linesA(TempAvoidTheEdgeLine) = "[FemsubStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Femsub" And linesA(TempAvoidTheEdgeLine) = "[JOIStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "JOI" And linesA(TempAvoidTheEdgeLine) = "[JOIStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "JOI" And linesA(TempAvoidTheEdgeLine) = "[CHStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "CH" And linesA(TempAvoidTheEdgeLine) = "[CHStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "CH" And linesA(TempAvoidTheEdgeLine) = "[GeneralStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "General" And linesA(TempAvoidTheEdgeLine) = "[GeneralStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "General" And linesA(TempAvoidTheEdgeLine) = "[StrokingEnd]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					End While
-
-				End Using
-
-			Else
+            If File.Exists(AvoidTheEdgeVideo) Then
+            Else
+                If ssh.DommeVideo = True Then
+                    MsgBox("AvoidTheEdgeD.txt is missing!", , "Error!")
+                Else
+                    MsgBox("AvoidTheEdge.txt is missing!", , "Error!")
+                End If
+                Return
+            End If
 
 
+
+            If ssh.AvoidTheEdgeStroking = False Then
+
+
+                'CensorshipTick = randomizer.Next(NBCensorHideMin.Value, NBCensorHideMax.Value + 1)
+
+                ssh.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
+
+                ' If AvoidTheEdgeLineTemp > TauntSlider.Value * 5 Then
+                'Return
+                'End If
+
+                Using ioFileA As New StreamReader(AvoidTheEdgeVideo)
+                    Dim linesA As New List(Of String)
+                    Dim TempAvoidTheEdgeLine As Integer
+
+                    TempAvoidTheEdgeLine = -1
+                    While ioFileA.Peek <> -1
+                        TempAvoidTheEdgeLine += 1
+                        linesA.Add(ioFileA.ReadLine())
+                        If ssh.VideoType = "Hardcore" And linesA(TempAvoidTheEdgeLine) = "[HardcoreStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Hardcore" And linesA(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Softcore" And linesA(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Softcore" And linesA(TempAvoidTheEdgeLine) = "[LesbianStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Lesbian" And linesA(TempAvoidTheEdgeLine) = "[LesbianStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Lesbian" And linesA(TempAvoidTheEdgeLine) = "[BlowjobStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Blowjob" And linesA(TempAvoidTheEdgeLine) = "[BlowjobStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Blowjob" And linesA(TempAvoidTheEdgeLine) = "[FemdomStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Femdom" And linesA(TempAvoidTheEdgeLine) = "[FemdomStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Femdom" And linesA(TempAvoidTheEdgeLine) = "[FemsubStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Femsub" And linesA(TempAvoidTheEdgeLine) = "[FemsubStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Femsub" And linesA(TempAvoidTheEdgeLine) = "[JOIStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "JOI" And linesA(TempAvoidTheEdgeLine) = "[JOIStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "JOI" And linesA(TempAvoidTheEdgeLine) = "[CHStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "CH" And linesA(TempAvoidTheEdgeLine) = "[CHStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "CH" And linesA(TempAvoidTheEdgeLine) = "[GeneralStrokingOn]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "General" And linesA(TempAvoidTheEdgeLine) = "[GeneralStrokingOff]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "General" And linesA(TempAvoidTheEdgeLine) = "[StrokingEnd]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                    End While
+
+                End Using
+
+            Else
 
 
 
 
-				ssh.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
-
-				Using ioFileB As New StreamReader(AvoidTheEdgeVideo)
-					Dim linesB As New List(Of String)
-					Dim TempAvoidTheEdgeLine As Integer
-
-					TempAvoidTheEdgeLine = -1
-					While ioFileB.Peek <> -1
-						TempAvoidTheEdgeLine += 1
-						linesB.Add(ioFileB.ReadLine())
-						If ssh.VideoType = "Hardcore" And linesB(TempAvoidTheEdgeLine) = "[HardcoreStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Hardcore" And linesB(TempAvoidTheEdgeLine) = "[HardcoreStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Softcore" And linesB(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Softcore" And linesB(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Lesbian" And linesB(TempAvoidTheEdgeLine) = "[LesbianStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Lesbian" And linesB(TempAvoidTheEdgeLine) = "[LesbianStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Blowjob" And linesB(TempAvoidTheEdgeLine) = "[BlowjobStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Blowjob" And linesB(TempAvoidTheEdgeLine) = "[BlowjobStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Femdom" And linesB(TempAvoidTheEdgeLine) = "[FemdomStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Femdom" And linesB(TempAvoidTheEdgeLine) = "[FemdomStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Femsub" And linesB(TempAvoidTheEdgeLine) = "[FemsubStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "Femsub" And linesB(TempAvoidTheEdgeLine) = "[FemsubStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "JOI" And linesB(TempAvoidTheEdgeLine) = "[JOIStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "JOI" And linesB(TempAvoidTheEdgeLine) = "[JOIStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "CH" And linesB(TempAvoidTheEdgeLine) = "[CHStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "CH" And linesB(TempAvoidTheEdgeLine) = "[CHStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-						If ssh.VideoType = "General" And linesB(TempAvoidTheEdgeLine) = "[GeneralStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
-						If ssh.VideoType = "General" And linesB(TempAvoidTheEdgeLine) = "[GeneralStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
-					End While
-
-				End Using
-
-			End If
-
-			Dim ioFile As New StreamReader(AvoidTheEdgeVideo)
-			Dim lines As New List(Of String)
-			While ioFile.Peek <> -1
-				lines.Add(ioFile.ReadLine())
-			End While
-
-			Dim AvoidTheEdgeLine As Integer
-
-			'Debug.Print("AvoidTheEdgeLineStart = " & AvoidTheEdgeLineStart)
-			'Debug.Print("AvoidTheEdgeLineEnd = " & AvoidTheEdgeLineEnd)
-
-			AvoidTheEdgeLine = ssh.randomizer.Next(AvoidTheEdgeLineStart + 1, AvoidTheEdgeLineEnd)
-
-			ssh.DomTask = lines(AvoidTheEdgeLine)
-
-			TypingDelayGeneric()
 
 
+                ssh.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
+
+                Using ioFileB As New StreamReader(AvoidTheEdgeVideo)
+                    Dim linesB As New List(Of String)
+                    Dim TempAvoidTheEdgeLine As Integer
+
+                    TempAvoidTheEdgeLine = -1
+                    While ioFileB.Peek <> -1
+                        TempAvoidTheEdgeLine += 1
+                        linesB.Add(ioFileB.ReadLine())
+                        If ssh.VideoType = "Hardcore" And linesB(TempAvoidTheEdgeLine) = "[HardcoreStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Hardcore" And linesB(TempAvoidTheEdgeLine) = "[HardcoreStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Softcore" And linesB(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Softcore" And linesB(TempAvoidTheEdgeLine) = "[SoftcoreStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Lesbian" And linesB(TempAvoidTheEdgeLine) = "[LesbianStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Lesbian" And linesB(TempAvoidTheEdgeLine) = "[LesbianStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Blowjob" And linesB(TempAvoidTheEdgeLine) = "[BlowjobStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Blowjob" And linesB(TempAvoidTheEdgeLine) = "[BlowjobStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Femdom" And linesB(TempAvoidTheEdgeLine) = "[FemdomStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Femdom" And linesB(TempAvoidTheEdgeLine) = "[FemdomStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Femsub" And linesB(TempAvoidTheEdgeLine) = "[FemsubStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "Femsub" And linesB(TempAvoidTheEdgeLine) = "[FemsubStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "JOI" And linesB(TempAvoidTheEdgeLine) = "[JOIStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "JOI" And linesB(TempAvoidTheEdgeLine) = "[JOIStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "CH" And linesB(TempAvoidTheEdgeLine) = "[CHStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "CH" And linesB(TempAvoidTheEdgeLine) = "[CHStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "General" And linesB(TempAvoidTheEdgeLine) = "[GeneralStrokingOn]" Then AvoidTheEdgeLineStart = TempAvoidTheEdgeLine
+                        If ssh.VideoType = "General" And linesB(TempAvoidTheEdgeLine) = "[GeneralStrokingOff]" Then AvoidTheEdgeLineEnd = TempAvoidTheEdgeLine
+                    End While
+
+                End Using
+
+            End If
+
+            Dim ioFile As New StreamReader(AvoidTheEdgeVideo)
+            Dim lines As New List(Of String)
+            While ioFile.Peek <> -1
+                lines.Add(ioFile.ReadLine())
+            End While
+
+            Dim AvoidTheEdgeLine As Integer
+
+            'Debug.Print("AvoidTheEdgeLineStart = " & AvoidTheEdgeLineStart)
+            'Debug.Print("AvoidTheEdgeLineEnd = " & AvoidTheEdgeLineEnd)
+
+            AvoidTheEdgeLine = ssh.randomizer.Next(AvoidTheEdgeLineStart + 1, AvoidTheEdgeLineEnd)
+
+            ssh.DomTask = lines(AvoidTheEdgeLine)
+
+            TypingDelayGeneric()
 
 
-		End If
-
-	End Sub
-
-	Private Sub AvoidTheEdgeResume_Tick(sender As System.Object, e As System.EventArgs) Handles AvoidTheEdgeResume.Tick
-
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-
-		If ssh.DomTyping = True Then Return
-		If ssh.DomTypeCheck = True And ssh.AtECountdown < 6 Then Return
-		If chatBox.Text <> "" And ssh.AtECountdown < 6 Then Return
-		If ChatBox2.Text <> "" And ssh.AtECountdown < 6 Then Return
-
-		ssh.AtECountdown -= 1
-		'Debug.Print("AtECountdown = " & AtECountdown)
-
-		If ssh.AtECountdown < 1 Then
-			AvoidTheEdgeResume.Stop()
-
-			ssh.FileGoto = "NoAvoidTheEdgeInstructions"
-			ssh.SkipGotoLine = True
-			GetGoto()
-			'domVLC.playlist.play()
-			DomWMP.Ctlcontrols.play()
-			HandleScripts()
-			ScriptTimer.Start()
 
 
-		End If
+        End If
+
+    End Sub
+
+    Private Sub AvoidTheEdgeResume_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AvoidTheEdgeResume.Tick
+
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
+        If ssh.DomTyping = True Then Return
+        If ssh.DomTypeCheck = True And ssh.AtECountdown < 6 Then Return
+        If chatBox.Text <> "" And ssh.AtECountdown < 6 Then Return
+        If ChatBox2.Text <> "" And ssh.AtECountdown < 6 Then Return
+
+        ssh.AtECountdown -= 1
+        'Debug.Print("AtECountdown = " & AtECountdown)
+
+        If ssh.AtECountdown < 1 Then
+            AvoidTheEdgeResume.Stop()
+
+            ssh.FileGoto = "NoAvoidTheEdgeInstructions"
+            ssh.SkipGotoLine = True
+            GetGoto()
+            'domVLC.playlist.play()
+            DomWMP.Ctlcontrols.play()
+            HandleScripts()
+            ScriptTimer.Start()
 
 
-	End Sub
+        End If
+
+
+    End Sub
 
 #End Region ' Avoid the Edge
 
@@ -15040,705 +15056,705 @@ VTSkip:
 
 
 
-	Private Sub BtnToggleImageVideo_Click(sender As System.Object, e As System.EventArgs) Handles BtnToggleImageVideo.Click
+    Private Sub BtnToggleImageVideo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnToggleImageVideo.Click
 
 
-		If mainPictureBox.Visible = True Then
-			DomWMP.Visible = True
-			mainPictureBox.Visible = False
-		Else
-			mainPictureBox.Visible = True
-			DomWMP.Visible = False
-		End If
+        If mainPictureBox.Visible = True Then
+            DomWMP.Visible = True
+            mainPictureBox.Visible = False
+        Else
+            mainPictureBox.Visible = True
+            DomWMP.Visible = False
+        End If
 
-	End Sub
+    End Sub
 
 
-	Public Sub RunModuleScript(IsEdging As Boolean)
+    Public Sub RunModuleScript(ByVal IsEdging As Boolean)
 
-		ssh.ShowModule = True
+        ssh.ShowModule = True
 
-		ssh.TauntEdging = False
+        ssh.TauntEdging = False
 
-		ssh.AskedToGiveUpSection = False
-		Dim ModuleList As New List(Of String)
-		ModuleList.Clear()
+        ssh.AskedToGiveUpSection = False
+        Dim ModuleList As New List(Of String)
+        ModuleList.Clear()
 
-		Dim ChastityModuleCheck As String = "*.txt"
-		If My.Settings.Chastity = True And Not IsEdging Then
-			ssh.AskedToSpeedUp = False
-			ssh.AskedToSlowDown = False
-			ssh.SubStroking = False
-			ssh.SubEdging = False
-			ssh.SubHoldingEdge = False
-			StrokeTimer.Stop()
-			StrokeTauntTimer.Stop()
-			EdgeTauntTimer.Stop()
-			HoldEdgeTauntTimer.Stop()
-			ChastityModuleCheck = "*_CHASTITY.txt"
-		End If
+        Dim ChastityModuleCheck As String = "*.txt"
+        If My.Settings.Chastity = True And Not IsEdging Then
+            ssh.AskedToSpeedUp = False
+            ssh.AskedToSlowDown = False
+            ssh.SubStroking = False
+            ssh.SubEdging = False
+            ssh.SubHoldingEdge = False
+            StrokeTimer.Stop()
+            StrokeTauntTimer.Stop()
+            EdgeTauntTimer.Stop()
+            HoldEdgeTauntTimer.Stop()
+            ChastityModuleCheck = "*_CHASTITY.txt"
+        End If
 
-		If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistModuleFile
+        If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistModuleFile
 
-		If ssh.Playlist = False Or ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Random Module") Then
+        If ssh.Playlist = False Or ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Random Module") Then
 
 
 NoPlaylistModuleFile:
 
-			If ssh.SetModule <> "" Then
+            If ssh.SetModule <> "" Then
 
-				ssh.FileText = ssh.SetModule
-			Else
+                ssh.FileText = ssh.SetModule
+            Else
 
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, ChastityModuleCheck)
-					Dim TempModule As String = foundFile
-					TempModule = Path.GetFileName(TempModule).Replace(".txt", "")
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\", FileIO.SearchOption.SearchTopLevelOnly, ChastityModuleCheck)
+                    Dim TempModule As String = foundFile
+                    TempModule = Path.GetFileName(TempModule).Replace(".txt", "")
 
-					If IsEdging Then
+                    If IsEdging Then
 
-						Do Until Not TempModule.Contains("\")
-							TempModule = TempModule.Remove(0, 1)
-						Loop
-					End If
+                        Do Until Not TempModule.Contains("\")
+                            TempModule = TempModule.Remove(0, 1)
+                        Loop
+                    End If
 
-					For x As Integer = 0 To FrmSettings.CLBModuleList.Items.Count - 1
-						If My.Settings.Chastity = True Then
-							If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") Then
-								ModuleList.Add(foundFile)
-							End If
-						ElseIf IsEdging Then
-							If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And foundFile.Contains("_EDGING") Then
-								ModuleList.Add(foundFile)
-							End If
-						Else
-							If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") And Not foundFile.Contains("_CHASTITY") Then
-								ModuleList.Add(foundFile)
-							End If
-						End If
-					Next
-				Next
+                    For x As Integer = 0 To FrmSettings.CLBModuleList.Items.Count - 1
+                        If My.Settings.Chastity = True Then
+                            If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") Then
+                                ModuleList.Add(foundFile)
+                            End If
+                        ElseIf IsEdging Then
+                            If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And foundFile.Contains("_EDGING") Then
+                                ModuleList.Add(foundFile)
+                            End If
+                        Else
+                            If FrmSettings.CLBModuleList.Items(x) = TempModule And FrmSettings.CLBModuleList.GetItemChecked(x) = True And Not foundFile.Contains("_EDGING") And Not foundFile.Contains("_CHASTITY") Then
+                                ModuleList.Add(foundFile)
+                            End If
+                        End If
+                    Next
+                Next
 
-				If ModuleList.Count < 1 Then
-					If My.Settings.Chastity = True Then
-						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module_CHASTITY.txt"
-					ElseIf IsEdging Then
-						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module_EDGING.txt"
-					Else
-						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module.txt"
-					End If
-				Else
-					ssh.FileText = ModuleList(ssh.randomizer.Next(0, ModuleList.Count))
-				End If
-			End If
+                If ModuleList.Count < 1 Then
+                    If My.Settings.Chastity = True Then
+                        ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module_CHASTITY.txt"
+                    ElseIf IsEdging Then
+                        ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module_EDGING.txt"
+                    Else
+                        ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Module.txt"
+                    End If
+                Else
+                    ssh.FileText = ModuleList(ssh.randomizer.Next(0, ModuleList.Count))
+                End If
+            End If
 
-		Else
-			If ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\" & ssh.PlaylistFile(ssh.PlaylistCurrent)
-				ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
-				ssh.FileText = ssh.FileText & ".txt"
-			Else
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\Modules\" & ssh.PlaylistFile(ssh.PlaylistCurrent) & ".txt"
-			End If
+        Else
+            If ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
+                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\" & ssh.PlaylistFile(ssh.PlaylistCurrent)
+                ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
+                ssh.FileText = ssh.FileText & ".txt"
+            Else
+                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\Modules\" & ssh.PlaylistFile(ssh.PlaylistCurrent) & ".txt"
+            End If
 
-		End If
+        End If
 
-		ssh.SetModule = ""
+        ssh.SetModule = ""
 
-		ssh.DomTask = ssh.DomTask.Replace("@Module", "")
-
-
-		If ssh.SetModuleGoto <> "" Then
-			ssh.FileGoto = ssh.SetModuleGoto
-			ssh.SkipGotoLine = True
-			GetGoto()
-			ssh.SetModuleGoto = ""
-		Else
-			ssh.StrokeTauntVal = -1
-		End If
-
-		If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
-
-		If Not IsEdging Then
-
-			If ssh.Playlist = True Then ssh.BookmarkModule = False
-
-			If ssh.BookmarkModule = True Then
-				ssh.BookmarkModule = False
-				ssh.FileText = ssh.BookmarkModuleFile
-				ssh.StrokeTauntVal = ssh.BookmarkModuleLine
-			End If
-
-			ssh.ScriptTick = 3
-
-		Else
-			ssh.ScriptTick = 4
-		End If
-
-		ScriptTimer.Start()
-	End Sub
+        ssh.DomTask = ssh.DomTask.Replace("@Module", "")
 
 
+        If ssh.SetModuleGoto <> "" Then
+            ssh.FileGoto = ssh.SetModuleGoto
+            ssh.SkipGotoLine = True
+            GetGoto()
+            ssh.SetModuleGoto = ""
+        Else
+            ssh.StrokeTauntVal = -1
+        End If
 
-	Public Sub RunLinkScript()
+        If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
 
-		Debug.Print("RunLinkScript() Called")
+        If Not IsEdging Then
 
-		ClearModes()
+            If ssh.Playlist = True Then ssh.BookmarkModule = False
 
-		If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistLinkFile
+            If ssh.BookmarkModule = True Then
+                ssh.BookmarkModule = False
+                ssh.FileText = ssh.BookmarkModuleFile
+                ssh.StrokeTauntVal = ssh.BookmarkModuleLine
+            End If
 
-		If ssh.Playlist = False Or ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Random Link") Then
+            ssh.ScriptTick = 3
+
+        Else
+            ssh.ScriptTick = 4
+        End If
+
+        ScriptTimer.Start()
+    End Sub
+
+
+
+    Public Sub RunLinkScript()
+
+        Debug.Print("RunLinkScript() Called")
+
+        ClearModes()
+
+        If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistLinkFile
+
+        If ssh.Playlist = False Or ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Random Link") Then
 
 
 NoPlaylistLinkFile:
 
 
-			Debug.Print("SetLink = " & ssh.SetLink)
+            Debug.Print("SetLink = " & ssh.SetLink)
 
 
-			If ssh.SetLink <> "" Then
-				Debug.Print("SetLink Called")
-				ssh.FileText = ssh.SetLink
-			Else
+            If ssh.SetLink <> "" Then
+                Debug.Print("SetLink Called")
+                ssh.FileText = ssh.SetLink
+            Else
 
 
-				Dim LinkList As New List(Of String)
-				LinkList.Clear()
+                Dim LinkList As New List(Of String)
+                LinkList.Clear()
 
 
-				Dim ChastityLinkCheck As String
-				If My.Settings.Chastity = True Then
-					ChastityLinkCheck = "*_CHASTITY.txt"
-				Else
-					ChastityLinkCheck = "*.txt"
-				End If
+                Dim ChastityLinkCheck As String
+                If My.Settings.Chastity = True Then
+                    ChastityLinkCheck = "*_CHASTITY.txt"
+                Else
+                    ChastityLinkCheck = "*.txt"
+                End If
 
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, ChastityLinkCheck)
-					Dim TempLink As String = foundFile
-					TempLink = TempLink.Replace(".txt", "")
-					Do Until Not TempLink.Contains("\")
-						TempLink = TempLink.Remove(0, 1)
-					Loop
-					For x As Integer = 0 To FrmSettings.CLBLinkList.Items.Count - 1
-						If My.Settings.Chastity = True Then
-							If FrmSettings.CLBLinkList.Items(x) = TempLink And FrmSettings.CLBLinkList.GetItemChecked(x) = True Then
-								LinkList.Add(foundFile)
-							End If
-						Else
-							If FrmSettings.CLBLinkList.Items(x) = TempLink And FrmSettings.CLBLinkList.GetItemChecked(x) = True And Not TempLink.Contains("_CHASTITY") Then
-								LinkList.Add(foundFile)
-							End If
-						End If
+                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, ChastityLinkCheck)
+                    Dim TempLink As String = foundFile
+                    TempLink = TempLink.Replace(".txt", "")
+                    Do Until Not TempLink.Contains("\")
+                        TempLink = TempLink.Remove(0, 1)
+                    Loop
+                    For x As Integer = 0 To FrmSettings.CLBLinkList.Items.Count - 1
+                        If My.Settings.Chastity = True Then
+                            If FrmSettings.CLBLinkList.Items(x) = TempLink And FrmSettings.CLBLinkList.GetItemChecked(x) = True Then
+                                LinkList.Add(foundFile)
+                            End If
+                        Else
+                            If FrmSettings.CLBLinkList.Items(x) = TempLink And FrmSettings.CLBLinkList.GetItemChecked(x) = True And Not TempLink.Contains("_CHASTITY") Then
+                                LinkList.Add(foundFile)
+                            End If
+                        End If
 
-					Next
-				Next
+                    Next
+                Next
 
-				If LinkList.Count < 1 Then
-					If My.Settings.Chastity = True Then
-						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Link_CHASTITY.txt"
-					Else
-						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Link.txt"
-					End If
-				Else
-					ssh.FileText = LinkList(ssh.randomizer.Next(0, LinkList.Count))
-				End If
+                If LinkList.Count < 1 Then
+                    If My.Settings.Chastity = True Then
+                        ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Link_CHASTITY.txt"
+                    Else
+                        ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Link.txt"
+                    End If
+                Else
+                    ssh.FileText = LinkList(ssh.randomizer.Next(0, LinkList.Count))
+                End If
 
-			End If
+            End If
 
-		Else
-			Debug.Print("Playlist Link Called")
-			If ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Link\" & ssh.PlaylistFile(ssh.PlaylistCurrent)
-				ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
-				ssh.FileText = ssh.FileText & ".txt"
-			Else
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\Link\" & ssh.PlaylistFile(ssh.PlaylistCurrent) & ".txt"
-			End If
+        Else
+            Debug.Print("Playlist Link Called")
+            If ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
+                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Link\" & ssh.PlaylistFile(ssh.PlaylistCurrent)
+                ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
+                ssh.FileText = ssh.FileText & ".txt"
+            Else
+                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\Link\" & ssh.PlaylistFile(ssh.PlaylistCurrent) & ".txt"
+            End If
 
-		End If
+        End If
 
-		ssh.SetLink = ""
-		Debug.Print("SetLink = " & ssh.SetLink)
-
-
-		If ssh.WorshipMode = False Then
-			ssh.LockImage = False
-			If ssh.SlideshowLoaded = True Then
-				nextButton.Enabled = True
-				previousButton.Enabled = True
-				PicStripTSMIdommeSlideshow.Enabled = True
-			End If
-		End If
+        ssh.SetLink = ""
+        Debug.Print("SetLink = " & ssh.SetLink)
 
 
-		If ssh.SetLinkGoto <> "" Then
-			ssh.FileGoto = ssh.SetLinkGoto
-			ssh.SkipGotoLine = True
-			GetGoto()
-			ssh.SetLinkGoto = ""
-		Else
-			ssh.StrokeTauntVal = -1
-		End If
+        If ssh.WorshipMode = False Then
+            ssh.LockImage = False
+            If ssh.SlideshowLoaded = True Then
+                nextButton.Enabled = True
+                previousButton.Enabled = True
+                PicStripTSMIdommeSlideshow.Enabled = True
+            End If
+        End If
 
 
-		If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
-		If ssh.Playlist = True Then ssh.BookmarkLink = False
-
-		If ssh.BookmarkLink = True Then
-			ssh.BookmarkLink = False
-			ssh.FileText = ssh.BookmarkLinkFile
-			ssh.StrokeTauntVal = ssh.BookmarkLinkLine
-		End If
-
-		Debug.Print("Link FileText Called")
+        If ssh.SetLinkGoto <> "" Then
+            ssh.FileGoto = ssh.SetLinkGoto
+            ssh.SkipGotoLine = True
+            GetGoto()
+            ssh.SetLinkGoto = ""
+        Else
+            ssh.StrokeTauntVal = -1
+        End If
 
 
-		ssh.ScriptTick = 3
-		ScriptTimer.Start()
+        If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
+        If ssh.Playlist = True Then ssh.BookmarkLink = False
+
+        If ssh.BookmarkLink = True Then
+            ssh.BookmarkLink = False
+            ssh.FileText = ssh.BookmarkLinkFile
+            ssh.StrokeTauntVal = ssh.BookmarkLinkLine
+        End If
+
+        Debug.Print("Link FileText Called")
 
 
-	End Sub
+        ssh.ScriptTick = 3
+        ScriptTimer.Start()
 
 
-
-	Public Sub RunLastScript()
-
-		ClearModes()
-
-		'My.Settings.Sys_SubLeftEarly = 0
-
-		'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_SubLeftEarly", "0", False)
-
-		SetVariable("SYS_SubLeftEarly", 0)
-
-		SetVariable("SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1)
-
-
-		'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1, False)
+    End Sub
 
 
 
-		'Debug.Print("RunLastScript() Called")
+    Public Sub RunLastScript()
 
-		If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistEndFile
+        ClearModes()
 
-		If ssh.Playlist = False Or ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Random End") Then
+        'My.Settings.Sys_SubLeftEarly = 0
+
+        'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_SubLeftEarly", "0", False)
+
+        SetVariable("SYS_SubLeftEarly", 0)
+
+        SetVariable("SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1)
+
+
+        'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_EndTotal", Val(GetVariable("SYS_EndTotal")) + 1, False)
+
+
+
+        'Debug.Print("RunLastScript() Called")
+
+        If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistEndFile
+
+        If ssh.Playlist = False Or ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Random End") Then
 
 NoPlaylistEndFile:
 
-			Dim EndList As New List(Of String)
-			EndList.Clear()
+            Dim EndList As New List(Of String)
+            EndList.Clear()
 
-			Dim ChastityEndCheck As String
-			If My.Settings.Chastity = True Then
-				ChastityEndCheck = "*_CHASTITY.txt"
-			Else
-				ChastityEndCheck = "*.txt"
-			End If
+            Dim ChastityEndCheck As String
+            If My.Settings.Chastity = True Then
+                ChastityEndCheck = "*_CHASTITY.txt"
+            Else
+                ChastityEndCheck = "*.txt"
+            End If
 
-			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, ChastityEndCheck)
-				Dim TempEnd As String = foundFile
-				TempEnd = TempEnd.Replace(".txt", "")
-				Do Until Not TempEnd.Contains("\")
-					TempEnd = TempEnd.Remove(0, 1)
-				Loop
-				For x As Integer = 0 To FrmSettings.CLBEndList.Items.Count - 1
-					If My.Settings.Chastity = True Then
-						If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And Not TempEnd.Contains("_BEG") And Not TempEnd.Contains("_RESTRICTED") Then
-							EndList.Add(foundFile)
-						End If
-					Else
+            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, ChastityEndCheck)
+                Dim TempEnd As String = foundFile
+                TempEnd = TempEnd.Replace(".txt", "")
+                Do Until Not TempEnd.Contains("\")
+                    TempEnd = TempEnd.Remove(0, 1)
+                Loop
+                For x As Integer = 0 To FrmSettings.CLBEndList.Items.Count - 1
+                    If My.Settings.Chastity = True Then
+                        If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And Not TempEnd.Contains("_BEG") And Not TempEnd.Contains("_RESTRICTED") Then
+                            EndList.Add(foundFile)
+                        End If
+                    Else
 
-						If ssh.OrgasmRestricted = True Then
-							If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And TempEnd.Contains("_RESTRICTED") Then
-								EndList.Add(foundFile)
-							End If
-						Else
-							If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And Not TempEnd.Contains("_BEG") And Not TempEnd.Contains("_CHASTITY") _
-								And Not TempEnd.Contains("_RESTRICTED") Then
-								EndList.Add(foundFile)
-							End If
-						End If
-					End If
-				Next
-			Next
-
-
-			If EndList.Count < 1 Then
-				If My.Settings.Chastity = True Then
-					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End_CHASTITY.txt"
-				Else
-					If ssh.OrgasmRestricted = True Then
-						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End_RESTRICTED.txt"
-					Else
-						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End.txt"
-					End If
-				End If
-			Else
-				ssh.FileText = EndList(ssh.randomizer.Next(0, EndList.Count))
-			End If
-
-		Else
-			If ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\End\" & ssh.PlaylistFile(ssh.PlaylistCurrent)
-				ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
-				ssh.FileText = ssh.FileText & ".txt"
-			Else
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\End\" & ssh.PlaylistFile(ssh.PlaylistCurrent) & ".txt"
-			End If
-		End If
-
-		If ssh.WorshipMode = False Then
-			If ssh.SlideshowLoaded = True Then
-				nextButton.Enabled = True
-				previousButton.Enabled = True
-				PicStripTSMIdommeSlideshow.Enabled = True
-			End If
-			ssh.LockImage = False
-		End If
+                        If ssh.OrgasmRestricted = True Then
+                            If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And TempEnd.Contains("_RESTRICTED") Then
+                                EndList.Add(foundFile)
+                            End If
+                        Else
+                            If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And Not TempEnd.Contains("_BEG") And Not TempEnd.Contains("_CHASTITY") _
+                             And Not TempEnd.Contains("_RESTRICTED") Then
+                                EndList.Add(foundFile)
+                            End If
+                        End If
+                    End If
+                Next
+            Next
 
 
-		ssh.StrokeTauntVal = -1
+            If EndList.Count < 1 Then
+                If My.Settings.Chastity = True Then
+                    ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End_CHASTITY.txt"
+                Else
+                    If ssh.OrgasmRestricted = True Then
+                        ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End_RESTRICTED.txt"
+                    Else
+                        ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End.txt"
+                    End If
+                End If
+            Else
+                ssh.FileText = EndList(ssh.randomizer.Next(0, EndList.Count))
+            End If
 
-		ssh.LastScript = True
+        Else
+            If ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
+                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\End\" & ssh.PlaylistFile(ssh.PlaylistCurrent)
+                ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
+                ssh.FileText = ssh.FileText & ".txt"
+            Else
+                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\End\" & ssh.PlaylistFile(ssh.PlaylistCurrent) & ".txt"
+            End If
+        End If
 
-
-		ssh.ScriptTick = 3
-		ScriptTimer.Start()
-
-	End Sub
-
-	Public Sub RunLastBegScript()
-
-		ClearModes()
-
-		'Debug.Print("RunLastBegScript() Called")
-		Dim EndList As New List(Of String)
-		EndList.Clear()
-
-		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-			Dim TempEnd As String = foundFile
-			TempEnd = TempEnd.Replace(".txt", "")
-			Do Until Not TempEnd.Contains("\")
-				TempEnd = TempEnd.Remove(0, 1)
-			Loop
-			For x As Integer = 0 To FrmSettings.CLBEndList.Items.Count - 1
-
-				If ssh.OrgasmRestricted = False Then
-
-					If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And TempEnd.Contains("_BEG") Then
-						EndList.Add(foundFile)
-					End If
-				Else
-					If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And TempEnd.Contains("_RESTRICTED") Then
-						EndList.Add(foundFile)
-					End If
-
-				End If
-
-			Next
-		Next
+        If ssh.WorshipMode = False Then
+            If ssh.SlideshowLoaded = True Then
+                nextButton.Enabled = True
+                previousButton.Enabled = True
+                PicStripTSMIdommeSlideshow.Enabled = True
+            End If
+            ssh.LockImage = False
+        End If
 
 
-		If EndList.Count < 1 Then
+        ssh.StrokeTauntVal = -1
 
-			If ssh.OrgasmRestricted = False Then
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End_BEG.txt"
-			Else
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End_RESTRICTED.txt"
-			End If
-		Else
-			ssh.FileText = EndList(ssh.randomizer.Next(0, EndList.Count))
-		End If
-
-		ssh.LockImage = False
-		If ssh.SlideshowLoaded = True Then
-			nextButton.Enabled = True
-			previousButton.Enabled = True
-			PicStripTSMIdommeSlideshow.Enabled = True
-		End If
-
-		ssh.StrokeTauntVal = -1
-		ssh.ScriptTick = 4
-		ScriptTimer.Start()
-		ssh.LastScript = True
-
-		'RunFileText()
-
-	End Sub
-
-	Public Sub StopEverything()
-
-		ScriptTimer.Stop()
-		StrokeTimer.Stop()
-		StrokeTauntTimer.Stop()
-		CensorshipTimer.Stop()
-		RLGLTimer.Stop()
-		TnASlides.Stop()
-		AvoidTheEdge.Stop()
-		EdgeTauntTimer.Stop()
-		HoldEdgeTimer.Stop()
-		HoldEdgeTauntTimer.Stop()
-		AvoidTheEdgeTaunts.Stop()
-		RLGLTauntTimer.Stop()
-		VideoTauntTimer.Stop()
-		EdgeCountTimer.Stop()
-
-		ssh.SubStroking = False
-		ssh.SubEdging = False
-		ssh.SubHoldingEdge = False
-		ssh.AskedToSpeedUp = False
-		ssh.AskedToSlowDown = False
-
-		ssh.WorshipMode = False
-		ssh.WorshipTarget = ""
-		ssh.LongHold = False
-		ssh.ExtremeHold = False
-
-		ssh.MiniScript = False
-
-		' Unlock OrgasmChances
-		FrmSettings.LockOrgasmChances(False)
-
-		ClearModes()
+        ssh.LastScript = True
 
 
-		If FrmSettings.TBWebStop.Text <> "" Then
-			Try
-				FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
-			Catch
-			End Try
-		End If
+        ssh.ScriptTick = 3
+        ScriptTimer.Start()
 
-		StrokePace = 0
+    End Sub
 
-	End Sub
+    Public Sub RunLastBegScript()
+
+        ClearModes()
+
+        'Debug.Print("RunLastBegScript() Called")
+        Dim EndList As New List(Of String)
+        EndList.Clear()
+
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\End\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+            Dim TempEnd As String = foundFile
+            TempEnd = TempEnd.Replace(".txt", "")
+            Do Until Not TempEnd.Contains("\")
+                TempEnd = TempEnd.Remove(0, 1)
+            Loop
+            For x As Integer = 0 To FrmSettings.CLBEndList.Items.Count - 1
+
+                If ssh.OrgasmRestricted = False Then
+
+                    If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And TempEnd.Contains("_BEG") Then
+                        EndList.Add(foundFile)
+                    End If
+                Else
+                    If FrmSettings.CLBEndList.Items(x) = TempEnd And FrmSettings.CLBEndList.GetItemChecked(x) = True And TempEnd.Contains("_RESTRICTED") Then
+                        EndList.Add(foundFile)
+                    End If
+
+                End If
+
+            Next
+        Next
 
 
-	Private Sub EdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeTauntTimer.Tick
+        If EndList.Count < 1 Then
 
-		If MultipleEdgesTimer.Enabled = True Then Return
-		If ssh.MiniScript = True Then Return
-		If ssh.InputFlag = True Then Return
+            If ssh.OrgasmRestricted = False Then
+                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End_BEG.txt"
+            Else
+                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\End_RESTRICTED.txt"
+            End If
+        Else
+            ssh.FileText = EndList(ssh.randomizer.Next(0, EndList.Count))
+        End If
 
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+        ssh.LockImage = False
+        If ssh.SlideshowLoaded = True Then
+            nextButton.Enabled = True
+            previousButton.Enabled = True
+            PicStripTSMIdommeSlideshow.Enabled = True
+        End If
 
-		If ssh.DomTyping = True Then Return
-		If ssh.DomTypeCheck = True And ssh.EdgeTauntInt < 6 Then Return
-		If chatBox.Text <> "" And ssh.EdgeTauntInt < 6 Then Return
-		If ChatBox2.Text <> "" And ssh.EdgeTauntInt < 6 Then Return
+        ssh.StrokeTauntVal = -1
+        ssh.ScriptTick = 4
+        ScriptTimer.Start()
+        ssh.LastScript = True
 
-		FrmSettings.LBLDebugEdgeTauntTime.Text = ssh.EdgeTauntInt
+        'RunFileText()
 
-		'Debug.Print("EdgeTauntIn = " & EdgeTauntInt)
+    End Sub
 
-		ssh.EdgeTauntInt -= 1
+    Public Sub StopEverything()
 
-		If ssh.EdgeTauntInt < 1 Then
+        ScriptTimer.Stop()
+        StrokeTimer.Stop()
+        StrokeTauntTimer.Stop()
+        CensorshipTimer.Stop()
+        RLGLTimer.Stop()
+        TnASlides.Stop()
+        AvoidTheEdge.Stop()
+        EdgeTauntTimer.Stop()
+        HoldEdgeTimer.Stop()
+        HoldEdgeTauntTimer.Stop()
+        AvoidTheEdgeTaunts.Stop()
+        RLGLTauntTimer.Stop()
+        VideoTauntTimer.Stop()
+        EdgeCountTimer.Stop()
 
-			Dim File2Read As String = ""
+        ssh.SubStroking = False
+        ssh.SubEdging = False
+        ssh.SubHoldingEdge = False
+        ssh.AskedToSpeedUp = False
+        ssh.AskedToSlowDown = False
 
-			If ssh.GlitterTease = False Then
-				File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\Edge.txt"
-			Else
-				File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\GroupEdge.txt"
-			End If
+        ssh.WorshipMode = False
+        ssh.WorshipTarget = ""
+        ssh.LongHold = False
+        ssh.ExtremeHold = False
 
-			'Read all lines of the given file.
-			Dim ETLines As List(Of String) = Txt2List(File2Read)
+        ssh.MiniScript = False
 
-			Try
-				ETLines = FilterList(ETLines)
-				ssh.DomTask = ETLines(ssh.randomizer.Next(0, ETLines.Count))
-			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Edge Taunt from file: " &
-							   File2Read, ex, "EdgeTauntTimer.Tick")
+        ' Unlock OrgasmChances
+        FrmSettings.LockOrgasmChances(False)
+
+        ClearModes()
+
+
+        If FrmSettings.TBWebStop.Text <> "" Then
+            Try
+                FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
+            Catch
+            End Try
+        End If
+
+        StrokePace = 0
+
+    End Sub
+
+
+    Private Sub EdgeTauntTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EdgeTauntTimer.Tick
+
+        If MultipleEdgesTimer.Enabled = True Then Return
+        If ssh.MiniScript = True Then Return
+        If ssh.InputFlag = True Then Return
+
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
+        If ssh.DomTyping = True Then Return
+        If ssh.DomTypeCheck = True And ssh.EdgeTauntInt < 6 Then Return
+        If chatBox.Text <> "" And ssh.EdgeTauntInt < 6 Then Return
+        If ChatBox2.Text <> "" And ssh.EdgeTauntInt < 6 Then Return
+
+        FrmSettings.LBLDebugEdgeTauntTime.Text = ssh.EdgeTauntInt
+
+        'Debug.Print("EdgeTauntIn = " & EdgeTauntInt)
+
+        ssh.EdgeTauntInt -= 1
+
+        If ssh.EdgeTauntInt < 1 Then
+
+            Dim File2Read As String = ""
+
+            If ssh.GlitterTease = False Then
+                File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\Edge.txt"
+            Else
+                File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Edge\GroupEdge.txt"
+            End If
+
+            'Read all lines of the given file.
+            Dim ETLines As List(Of String) = Txt2List(File2Read)
+
+            Try
+                ETLines = FilterList(ETLines)
+                ssh.DomTask = ETLines(ssh.randomizer.Next(0, ETLines.Count))
+            Catch ex As Exception
+                Log.WriteError("Tease AI did not return a valid Edge Taunt from file: " &
+                      File2Read, ex, "EdgeTauntTimer.Tick")
                 ssh.DomTask = "ERROR: Tease AI did not return a valid Edge Taunt from file: " & File2Read
-			End Try
+            End Try
 
-			TypingDelayGeneric()
+            TypingDelayGeneric()
 
-			ssh.EdgeTauntInt = ssh.randomizer.Next(30, 46)
+            ssh.EdgeTauntInt = ssh.randomizer.Next(30, 46)
 
-		End If
+        End If
 
-	End Sub
+    End Sub
 
 #Region "--------------------------------------- Hold the Edge ------------------------------------------"
 
-	Private Sub HoldEdgeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTimer.Tick
+    Private Sub HoldEdgeTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HoldEdgeTimer.Tick
 
-		If ssh.MiniScript = True Then Return
+        If ssh.MiniScript = True Then Return
 
-		'Debug.Print("HoldEdgeTick = " & HoldEdgeTick)
+        'Debug.Print("HoldEdgeTick = " & HoldEdgeTick)
 
-		ssh.HoldEdgeTime += 1
-		ssh.HoldEdgeTimeTotal += 1
+        ssh.HoldEdgeTime += 1
+        ssh.HoldEdgeTimeTotal += 1
 
-		My.Settings.HoldEdgeTimeTotal = ssh.HoldEdgeTimeTotal
+        My.Settings.HoldEdgeTimeTotal = ssh.HoldEdgeTimeTotal
 
-		If ssh.InputFlag = True Then Return
+        If ssh.InputFlag = True Then Return
 
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-
-
-		'If DomTyping = True Then Return
-		If ssh.DomTypeCheck = True And ssh.HoldEdgeTick < 4 Then Return
-		If chatBox.Text <> "" And ssh.HoldEdgeTick < 4 Then Return
-		If ChatBox2.Text <> "" And ssh.HoldEdgeTick < 4 Then Return
-		If ssh.FollowUp <> "" And ssh.HoldEdgeTick < 4 Then Return
-
-		ssh.HoldEdgeTick -= 1
-
-		FrmSettings.LBLDebugHoldEdgeTime.Text = ssh.HoldEdgeTick
-		'Debug.Print("HoldEdgeTick = " & HoldEdgeTick)
-
-		If ssh.HoldEdgeTick < 1 Then
-
-			'stop
-			ssh.LongHold = False
-			ssh.ExtremeHold = False
-			ssh.WorshipMode = False
-			ssh.WorshipTarget = ""
-
-			'If OrgasmAllowed = True Then GoTo AllowedOrgasm
-			'If EdgeToRuin = True Or OrgasmRuined = True Then GoTo RuinedOrgasm
-
-			If ssh.EdgeToRuin = True Or ssh.OrgasmRuined = True Then
-				ssh.LastOrgasmType = "RUINED"
-				ssh.OrgasmRuined = False
-				GoTo RuinedOrgasm
-			End If
-
-			If ssh.OrgasmAllowed = True Then
-				ssh.LastOrgasmType = "ALLOWED"
-				ssh.OrgasmAllowed = False
-				GoTo AllowedOrgasm
-			End If
-
-			If ssh.OrgasmDenied = True Then
-
-				ssh.LastOrgasmType = "DENIED"
-
-				If FrmSettings.CBDomDenialEnds.Checked = False And ssh.TeaseTick < 1 Then
-
-					Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
-
-					If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Then
-						ssh.SubEdging = False
-						ssh.SubStroking = False
-						EdgeTauntTimer.Stop()
-
-						Dim RepeatList As New List(Of String)
-
-						For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Denial Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-							RepeatList.Add(foundFile)
-						Next
-
-						If RepeatList.Count < 1 Then GoTo NoRepeatFiles
-
-						If FrmSettings.CBTeaseLengthDD.Checked = True Then
-							If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
-							If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
-							If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
-							If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
-							If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
-						Else
-							ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
-						End If
-
-						TeaseTimer.Start()
-
-						'ShowModule = True
-						ssh.StrokeTauntVal = -1
-						ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
-						ssh.ScriptTick = 2
-						ScriptTimer.Start()
-						ssh.OrgasmDenied = False
-						ssh.OrgasmYesNo = False
-						ssh.EndTease = False
-						Return
-					End If
-
-				End If
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
 
-			End If
+        'If DomTyping = True Then Return
+        If ssh.DomTypeCheck = True And ssh.HoldEdgeTick < 4 Then Return
+        If chatBox.Text <> "" And ssh.HoldEdgeTick < 4 Then Return
+        If ChatBox2.Text <> "" And ssh.HoldEdgeTick < 4 Then Return
+        If ssh.FollowUp <> "" And ssh.HoldEdgeTick < 4 Then Return
+
+        ssh.HoldEdgeTick -= 1
+
+        FrmSettings.LBLDebugHoldEdgeTime.Text = ssh.HoldEdgeTick
+        'Debug.Print("HoldEdgeTick = " & HoldEdgeTick)
+
+        If ssh.HoldEdgeTick < 1 Then
+
+            'stop
+            ssh.LongHold = False
+            ssh.ExtremeHold = False
+            ssh.WorshipMode = False
+            ssh.WorshipTarget = ""
+
+            'If OrgasmAllowed = True Then GoTo AllowedOrgasm
+            'If EdgeToRuin = True Or OrgasmRuined = True Then GoTo RuinedOrgasm
+
+            If ssh.EdgeToRuin = True Or ssh.OrgasmRuined = True Then
+                ssh.LastOrgasmType = "RUINED"
+                ssh.OrgasmRuined = False
+                GoTo RuinedOrgasm
+            End If
+
+            If ssh.OrgasmAllowed = True Then
+                ssh.LastOrgasmType = "ALLOWED"
+                ssh.OrgasmAllowed = False
+                GoTo AllowedOrgasm
+            End If
+
+            If ssh.OrgasmDenied = True Then
+
+                ssh.LastOrgasmType = "DENIED"
+
+                If FrmSettings.CBDomDenialEnds.Checked = False And ssh.TeaseTick < 1 Then
+
+                    Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
+
+                    If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Then
+                        ssh.SubEdging = False
+                        ssh.SubStroking = False
+                        EdgeTauntTimer.Stop()
+
+                        Dim RepeatList As New List(Of String)
+
+                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Denial Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                            RepeatList.Add(foundFile)
+                        Next
+
+                        If RepeatList.Count < 1 Then GoTo NoRepeatFiles
+
+                        If FrmSettings.CBTeaseLengthDD.Checked = True Then
+                            If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
+                            If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
+                            If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
+                            If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
+                            If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
+                        Else
+                            ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+                        End If
+
+                        TeaseTimer.Start()
+
+                        'ShowModule = True
+                        ssh.StrokeTauntVal = -1
+                        ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
+                        ssh.ScriptTick = 2
+                        ScriptTimer.Start()
+                        ssh.OrgasmDenied = False
+                        ssh.OrgasmYesNo = False
+                        ssh.EndTease = False
+                        Return
+                    End If
+
+                End If
+
+
+            End If
 
 NoRepeatFiles:
 
-			HoldEdgeTimer.Stop()
-			HoldEdgeTauntTimer.Stop()
-			ssh.SubHoldingEdge = False
-			ssh.SubStroking = False
-			ssh.OrgasmYesNo = False
-			ssh.DomTask = "#StopStroking"
-			If ssh.Contact1Edge = True Then
-				ssh.DomTask = "@Contact1 #StopStroking"
-				ssh.Contact1Edge = False
-			End If
-			If ssh.Contact2Edge = True Then
-				ssh.DomTask = "@Contact2 #StopStroking"
-				ssh.Contact2Edge = False
-			End If
-			If ssh.Contact3Edge = True Then
-				ssh.DomTask = "@Contact3 #StopStroking"
-				ssh.Contact3Edge = False
-			End If
-			TypingDelayGeneric()
-			Return
+            HoldEdgeTimer.Stop()
+            HoldEdgeTauntTimer.Stop()
+            ssh.SubHoldingEdge = False
+            ssh.SubStroking = False
+            ssh.OrgasmYesNo = False
+            ssh.DomTask = "#StopStroking"
+            If ssh.Contact1Edge = True Then
+                ssh.DomTask = "@Contact1 #StopStroking"
+                ssh.Contact1Edge = False
+            End If
+            If ssh.Contact2Edge = True Then
+                ssh.DomTask = "@Contact2 #StopStroking"
+                ssh.Contact2Edge = False
+            End If
+            If ssh.Contact3Edge = True Then
+                ssh.DomTask = "@Contact3 #StopStroking"
+                ssh.Contact3Edge = False
+            End If
+            TypingDelayGeneric()
+            Return
 
 RuinedOrgasm:
 
-			My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
+            My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
+            FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
 
-			If FrmSettings.CBDomOrgasmEnds.Checked = False And ssh.OrgasmRuined = True And ssh.TeaseTick < 1 Then
+            If FrmSettings.CBDomOrgasmEnds.Checked = False And ssh.OrgasmRuined = True And ssh.TeaseTick < 1 Then
 
-				Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
+                Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-				If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Then
+                If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Then
 
-					EdgeTauntTimer.Stop()
-					HoldEdgeTimer.Stop()
-					HoldEdgeTauntTimer.Stop()
-					ssh.SubHoldingEdge = False
-					ssh.SubStroking = False
-					ssh.EdgeToRuin = False
-					ssh.EdgeToRuinSecret = True
+                    EdgeTauntTimer.Stop()
+                    HoldEdgeTimer.Stop()
+                    HoldEdgeTauntTimer.Stop()
+                    ssh.SubHoldingEdge = False
+                    ssh.SubStroking = False
+                    ssh.EdgeToRuin = False
+                    ssh.EdgeToRuinSecret = True
 
-					Dim RepeatList As New List(Of String)
+                    Dim RepeatList As New List(Of String)
 
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Ruin Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						RepeatList.Add(foundFile)
-					Next
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Ruin Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                        RepeatList.Add(foundFile)
+                    Next
 
-					If RepeatList.Count < 1 Then GoTo NoRepeatRFiles
+                    If RepeatList.Count < 1 Then GoTo NoRepeatRFiles
 
 
-					If FrmSettings.CBTeaseLengthDD.Checked = True Then
-						If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
-						If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
-						If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
-						If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
-						If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
-					Else
-						ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
-					End If
-					TeaseTimer.Start()
+                    If FrmSettings.CBTeaseLengthDD.Checked = True Then
+                        If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
+                        If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
+                        If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
+                        If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
+                        If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
+                    Else
+                        ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+                    End If
+                    TeaseTimer.Start()
 
-					'ShowModule = True
-					ssh.StrokeTauntVal = -1
-					ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
-					ssh.ScriptTick = 2
-					ScriptTimer.Start()
-					ssh.OrgasmRuined = False
-					ssh.OrgasmYesNo = False
-					ssh.EndTease = False
-					Return
-				End If
+                    'ShowModule = True
+                    ssh.StrokeTauntVal = -1
+                    ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
+                    ssh.ScriptTick = 2
+                    ScriptTimer.Start()
+                    ssh.OrgasmRuined = False
+                    ssh.OrgasmYesNo = False
+                    ssh.EndTease = False
+                    Return
+                End If
 
-			End If
+            End If
 
 
 
@@ -15746,639 +15762,639 @@ NoRepeatRFiles:
 
 
 
-			ssh.DomTypeCheck = True
-			HoldEdgeTimer.Stop()
-			HoldEdgeTauntTimer.Stop()
-			ssh.SubHoldingEdge = False
-			ssh.SubStroking = False
-			ssh.EdgeToRuin = False
-			ssh.EdgeToRuinSecret = True
-			ssh.OrgasmYesNo = False
-			ssh.DomChat = "#RuinYourOrgasm"
-			If ssh.Contact1Edge = True Then
-				ssh.DomChat = "@Contact1 #RuinYourOrgasm"
-				ssh.Contact1Edge = False
-			End If
-			If ssh.Contact2Edge = True Then
-				ssh.DomChat = "@Contact2 #RuinYourOrgasm"
-				ssh.Contact2Edge = False
-			End If
-			If ssh.Contact3Edge = True Then
-				ssh.DomChat = "@Contact3 #RuinYourOrgasm"
-				ssh.Contact3Edge = False
-			End If
-			TypingDelay()
-			Return
+            ssh.DomTypeCheck = True
+            HoldEdgeTimer.Stop()
+            HoldEdgeTauntTimer.Stop()
+            ssh.SubHoldingEdge = False
+            ssh.SubStroking = False
+            ssh.EdgeToRuin = False
+            ssh.EdgeToRuinSecret = True
+            ssh.OrgasmYesNo = False
+            ssh.DomChat = "#RuinYourOrgasm"
+            If ssh.Contact1Edge = True Then
+                ssh.DomChat = "@Contact1 #RuinYourOrgasm"
+                ssh.Contact1Edge = False
+            End If
+            If ssh.Contact2Edge = True Then
+                ssh.DomChat = "@Contact2 #RuinYourOrgasm"
+                ssh.Contact2Edge = False
+            End If
+            If ssh.Contact3Edge = True Then
+                ssh.DomChat = "@Contact3 #RuinYourOrgasm"
+                ssh.Contact3Edge = False
+            End If
+            TypingDelay()
+            Return
 
 AllowedOrgasm:
 
-			If My.Settings.OrgasmsLocked = True Then
+            If My.Settings.OrgasmsLocked = True Then
 
-				If My.Settings.OrgasmsRemaining < 1 Then
+                If My.Settings.OrgasmsRemaining < 1 Then
 
-					Dim NoCumList As New List(Of String)
+                    Dim NoCumList As New List(Of String)
 
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Out of Orgasms\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						NoCumList.Add(foundFile)
-					Next
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Out of Orgasms\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                        NoCumList.Add(foundFile)
+                    Next
 
-					If NoCumList.Count < 1 Then GoTo NoNoCumFiles
-
-
-					HoldEdgeTimer.Stop()
-					HoldEdgeTauntTimer.Stop()
-					ssh.SubHoldingEdge = False
-					ssh.SubStroking = False
-					ssh.OrgasmYesNo = False
-					'ShowModule = True
-					ssh.StrokeTauntVal = -1
-					ssh.FileText = NoCumList(ssh.randomizer.Next(0, NoCumList.Count))
-					ssh.ScriptTick = 2
-					ScriptTimer.Start()
-					Return
-				End If
+                    If NoCumList.Count < 1 Then GoTo NoNoCumFiles
 
 
-				My.Settings.OrgasmsRemaining -= 1
+                    HoldEdgeTimer.Stop()
+                    HoldEdgeTauntTimer.Stop()
+                    ssh.SubHoldingEdge = False
+                    ssh.SubStroking = False
+                    ssh.OrgasmYesNo = False
+                    'ShowModule = True
+                    ssh.StrokeTauntVal = -1
+                    ssh.FileText = NoCumList(ssh.randomizer.Next(0, NoCumList.Count))
+                    ssh.ScriptTick = 2
+                    ScriptTimer.Start()
+                    Return
+                End If
 
 
-			End If
+                My.Settings.OrgasmsRemaining -= 1
+
+
+            End If
 
 NoNoCumFiles:
 
 
-			My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
+            My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
+            FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
 
-			If FrmSettings.CBDomOrgasmEnds.Checked = False And ssh.TeaseTick < 1 Then
+            If FrmSettings.CBDomOrgasmEnds.Checked = False And ssh.TeaseTick < 1 Then
 
-				Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
+                Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-				If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Then
+                If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Then
 
-					HoldEdgeTimer.Stop()
-					HoldEdgeTauntTimer.Stop()
-					ssh.SubHoldingEdge = False
-					ssh.SubStroking = False
-					ssh.EdgeToRuin = False
-					ssh.EdgeToRuinSecret = True
-					EdgeTauntTimer.Stop()
+                    HoldEdgeTimer.Stop()
+                    HoldEdgeTauntTimer.Stop()
+                    ssh.SubHoldingEdge = False
+                    ssh.SubStroking = False
+                    ssh.EdgeToRuin = False
+                    ssh.EdgeToRuinSecret = True
+                    EdgeTauntTimer.Stop()
 
-					Dim RepeatList As New List(Of String)
+                    Dim RepeatList As New List(Of String)
 
-					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Orgasm Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-						RepeatList.Add(foundFile)
-					Next
+                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Orgasm Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+                        RepeatList.Add(foundFile)
+                    Next
 
-					If RepeatList.Count < 1 Then GoTo NoRepeatOFiles
+                    If RepeatList.Count < 1 Then GoTo NoRepeatOFiles
 
 
-					If FrmSettings.CBTeaseLengthDD.Checked = True Then
-						If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
-						If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
-						If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
-						If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
-						If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
-					Else
-						ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
-					End If
-					TeaseTimer.Start()
+                    If FrmSettings.CBTeaseLengthDD.Checked = True Then
+                        If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
+                        If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
+                        If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
+                        If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
+                        If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
+                    Else
+                        ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+                    End If
+                    TeaseTimer.Start()
 
-					'ShowModule = True
-					ssh.StrokeTauntVal = -1
-					ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
-					ssh.ScriptTick = 2
-					ScriptTimer.Start()
-					ssh.OrgasmAllowed = False
-					ssh.OrgasmYesNo = False
-					ssh.EndTease = False
-					Return
-				End If
+                    'ShowModule = True
+                    ssh.StrokeTauntVal = -1
+                    ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
+                    ssh.ScriptTick = 2
+                    ScriptTimer.Start()
+                    ssh.OrgasmAllowed = False
+                    ssh.OrgasmYesNo = False
+                    ssh.EndTease = False
+                    Return
+                End If
 
-			End If
+            End If
 
 
 
 NoRepeatOFiles:
 
 
-			ssh.DomTypeCheck = True
-			HoldEdgeTimer.Stop()
-			HoldEdgeTauntTimer.Stop()
-			ssh.SubHoldingEdge = False
-			ssh.SubStroking = False
-			ssh.OrgasmYesNo = False
-			'OrgasmAllowed = False
-			ssh.DomChat = "#CumForMe"
-			If ssh.Contact1Edge = True Then
-				ssh.DomChat = "@Contact1 #CumForMe"
-				ssh.Contact1Edge = False
-			End If
-			If ssh.Contact2Edge = True Then
-				ssh.DomChat = "@Contact2 #CumForMe"
-				ssh.Contact2Edge = False
-			End If
-			If ssh.Contact3Edge = True Then
-				ssh.DomChat = "@Contact3 #CumForMe"
-				ssh.Contact3Edge = False
-			End If
-			TypingDelay()
-			Return
+            ssh.DomTypeCheck = True
+            HoldEdgeTimer.Stop()
+            HoldEdgeTauntTimer.Stop()
+            ssh.SubHoldingEdge = False
+            ssh.SubStroking = False
+            ssh.OrgasmYesNo = False
+            'OrgasmAllowed = False
+            ssh.DomChat = "#CumForMe"
+            If ssh.Contact1Edge = True Then
+                ssh.DomChat = "@Contact1 #CumForMe"
+                ssh.Contact1Edge = False
+            End If
+            If ssh.Contact2Edge = True Then
+                ssh.DomChat = "@Contact2 #CumForMe"
+                ssh.Contact2Edge = False
+            End If
+            If ssh.Contact3Edge = True Then
+                ssh.DomChat = "@Contact3 #CumForMe"
+                ssh.Contact3Edge = False
+            End If
+            TypingDelay()
+            Return
 
-		End If
+        End If
 
-	End Sub
+    End Sub
 
-	Private Sub HoldEdgeTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles HoldEdgeTauntTimer.Tick
+    Private Sub HoldEdgeTauntTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles HoldEdgeTauntTimer.Tick
 
-		If ssh.MiniScript = True Then Return
-		If ssh.InputFlag = True Then Return
+        If ssh.MiniScript = True Then Return
+        If ssh.InputFlag = True Then Return
 
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
-		If ssh.DomTyping = True Then Return
-		If ssh.DomTypeCheck = True And ssh.EdgeTauntInt < 6 Then Return
-		If chatBox.Text <> "" And ssh.EdgeTauntInt < 6 Then Return
-		If ChatBox2.Text <> "" And ssh.EdgeTauntInt < 6 Then Return
+        If ssh.DomTyping = True Then Return
+        If ssh.DomTypeCheck = True And ssh.EdgeTauntInt < 6 Then Return
+        If chatBox.Text <> "" And ssh.EdgeTauntInt < 6 Then Return
+        If ChatBox2.Text <> "" And ssh.EdgeTauntInt < 6 Then Return
 
-		ssh.EdgeTauntInt -= 1
+        ssh.EdgeTauntInt -= 1
 
-		If ssh.EdgeTauntInt < 1 Then
+        If ssh.EdgeTauntInt < 1 Then
 
-			Dim File2Read As String = ""
+            Dim File2Read As String = ""
 
-			If ssh.GlitterTease = False Then
-				File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\HoldTheEdge\HoldTheEdge.txt"
-			Else
-				File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\HoldTheEdge\GroupHoldTheEdge.txt"
-			End If
+            If ssh.GlitterTease = False Then
+                File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\HoldTheEdge\HoldTheEdge.txt"
+            Else
+                File2Read = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\HoldTheEdge\GroupHoldTheEdge.txt"
+            End If
 
-			' Read all lines of given file.
-			Dim ETLines As List(Of String) = Txt2List(File2Read)
+            ' Read all lines of given file.
+            Dim ETLines As List(Of String) = Txt2List(File2Read)
 
-			Try
-				ETLines = FilterList(ETLines)
-				ssh.DomTask = ETLines(ssh.randomizer.Next(0, ETLines.Count))
-			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Hold the Edge Taunt from file: " &
-							   File2Read, ex, "HoldEdgeTauntTimer.Tick")
+            Try
+                ETLines = FilterList(ETLines)
+                ssh.DomTask = ETLines(ssh.randomizer.Next(0, ETLines.Count))
+            Catch ex As Exception
+                Log.WriteError("Tease AI did not return a valid Hold the Edge Taunt from file: " &
+                      File2Read, ex, "HoldEdgeTauntTimer.Tick")
                 ssh.DomTask = "ERROR: Tease AI did not return a valid Hold the Edge Taunt from file: " & File2Read
-			End Try
+            End Try
 
-			TypingDelayGeneric()
+            TypingDelayGeneric()
 
-			ssh.EdgeTauntInt = ssh.randomizer.Next(15, 31)
+            ssh.EdgeTauntInt = ssh.randomizer.Next(15, 31)
 
 
-		End If
+        End If
 
-	End Sub
+    End Sub
 
 #End Region ' Hold the Edge
 
-	Public Sub CreateTaskLetter()
+    Public Sub CreateTaskLetter()
 
-		Dim TaskEntry As String
+        Dim TaskEntry As String
 
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Greeting.txt")
-		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Greeting.txt")
+        ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Intro.txt")
-		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Intro.txt")
+        ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
-		If ssh.GeneralTime = "Afternoon" Then GoTo Afternoon
-		If ssh.GeneralTime = "Night" Then GoTo Night
+        If ssh.GeneralTime = "Afternoon" Then GoTo Afternoon
+        If ssh.GeneralTime = "Night" Then GoTo Night
 
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_1.txt")
-		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_1.txt")
+        ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_1-2.txt")
-		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_1-2.txt")
+        ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
 Afternoon:
 
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_2.txt")
-		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_2.txt")
+        ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_2-3.txt")
-		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Link_2-3.txt")
+        ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
 Night:
 
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_3.txt")
-		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Task_3.txt")
+        ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Outro.txt")
-		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Outro.txt")
+        ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
-		TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Signature.txt")
-		ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
+        TaskEntry = CleanTaskLines(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Tasks\Signature.txt")
+        ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
-		If FrmSettings.CBHonorificInclude.Checked = True Then
-			ssh.TaskText = ssh.TaskText & FrmSettings.TBHonorific.Text & " " & ssh.tempDomName
-		Else
-			ssh.TaskText = ssh.TaskText & ssh.tempDomName
-		End If
+        If FrmSettings.CBHonorificInclude.Checked = True Then
+            ssh.TaskText = ssh.TaskText & FrmSettings.TBHonorific.Text & " " & ssh.tempDomName
+        Else
+            ssh.TaskText = ssh.TaskText & ssh.tempDomName
+        End If
 
-		ssh.TaskText = System.Text.RegularExpressions.Regex.Replace(ssh.TaskText, "[ ]{2,}", " ")
+        ssh.TaskText = System.Text.RegularExpressions.Regex.Replace(ssh.TaskText, "[ ]{2,}", " ")
 
-		Dim TempDate As String
-		Dim TempDateNow As DateTime = DateTime.Now
+        Dim TempDate As String
+        Dim TempDateNow As DateTime = DateTime.Now
 
-		TempDate = TempDateNow.ToString("M dd")
+        TempDate = TempDateNow.ToString("M dd")
 
-		ssh.TaskTextDir = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Received Files\Tasks for " & TempDate & ".txt"
-		My.Computer.FileSystem.WriteAllText(ssh.TaskTextDir, ssh.TaskText, False)
+        ssh.TaskTextDir = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Received Files\Tasks for " & TempDate & ".txt"
+        My.Computer.FileSystem.WriteAllText(ssh.TaskTextDir, ssh.TaskText, False)
 
-		ssh.TaskText = ""
+        ssh.TaskText = ""
 
-		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
-		PNLFileTransfer.Visible = True
-		PNLFileTransfer.BringToFront()
+        LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
+        PNLFileTransfer.Visible = True
+        PNLFileTransfer.BringToFront()
 
-		StupidTimer.Start()
+        StupidTimer.Start()
 
-		Debug.Print("<><><><><><><><><><><><><><><><><><><><><>")
-		Debug.Print("Created " & ssh.GeneralTime & " Task Letter")
-		Debug.Print("<><><><><><><><><><><><><><><><><><><><><>")
+        Debug.Print("<><><><><><><><><><><><><><><><><><><><><>")
+        Debug.Print("Created " & ssh.GeneralTime & " Task Letter")
+        Debug.Print("<><><><><><><><><><><><><><><><><><><><><>")
 
-	End Sub
+    End Sub
 
-	Public Function CleanTaskLines(ByVal dir As String) As String
-		Try
-			Dim TaskLines As List(Of String) = Txt2List(dir)
-			Dim TaskEntry As String
-			Dim TaskArray As String()
-			Dim TaskList As New List(Of String)
+    Public Function CleanTaskLines(ByVal dir As String) As String
+        Try
+            Dim TaskLines As List(Of String) = Txt2List(dir)
+            Dim TaskEntry As String
+            Dim TaskArray As String()
+            Dim TaskList As New List(Of String)
 
-			TaskLines = FilterList(TaskLines)
-			If TaskLines.Count = 0 Then Throw New ArgumentException("The given file: """ & dir & """ was returned empty.")
+            TaskLines = FilterList(TaskLines)
+            If TaskLines.Count = 0 Then Throw New ArgumentException("The given file: """ & dir & """ was returned empty.")
 
-			TaskEntry = TaskLines(ssh.randomizer.Next(0, TaskLines.Count))
+            TaskEntry = TaskLines(ssh.randomizer.Next(0, TaskLines.Count))
 
 
-			Dim LoopBuffer As Integer
+            Dim LoopBuffer As Integer
 
-			TaskArray = TaskEntry.Split(" ")
-			For i As Integer = 0 To TaskArray.Count - 1
-				TaskList.Add(TaskArray(i))
-			Next
-			TaskEntry = ""
-			For i As Integer = 0 To TaskList.Count - 1
-				Try
-					LoopBuffer = 0
+            TaskArray = TaskEntry.Split(" ")
+            For i As Integer = 0 To TaskArray.Count - 1
+                TaskList.Add(TaskArray(i))
+            Next
+            TaskEntry = ""
+            For i As Integer = 0 To TaskList.Count - 1
+                Try
+                    LoopBuffer = 0
 
 PoundLoop:
-					LoopBuffer += 1
+                    LoopBuffer += 1
 
-					TaskList(i) = TaskList(i).Replace(". #Emote", " #Emote")
-					TaskList(i) = TaskList(i).Replace(". #Grin", " #Grin")
-					TaskList(i) = TaskList(i).Replace(". #Lol", " #Lol.")
+                    TaskList(i) = TaskList(i).Replace(". #Emote", " #Emote")
+                    TaskList(i) = TaskList(i).Replace(". #Grin", " #Grin")
+                    TaskList(i) = TaskList(i).Replace(". #Lol", " #Lol.")
 
-					TaskList(i) = PoundClean(TaskList(i))
-					If TaskEntry.Contains("#") And LoopBuffer < 6 Then GoTo PoundLoop
+                    TaskList(i) = PoundClean(TaskList(i))
+                    If TaskEntry.Contains("#") And LoopBuffer < 6 Then GoTo PoundLoop
 
-					TaskEntry = TaskEntry & TaskList(i) & " "
-				Catch
-				End Try
-			Next
+                    TaskEntry = TaskEntry & TaskList(i) & " "
+                Catch
+                End Try
+            Next
 
-			Dim int As Integer
+            Dim int As Integer
 
-			If TaskEntry.Contains("#TaskEdges") Then
-				Do
-					int = ssh.randomizer.Next(FrmSettings.NBTaskEdgesMin.Value, FrmSettings.NBTaskEdgesMax.Value + 1)
-					If int > 5 Then int = 5 * Math.Round(int / 5)
-					TaskEntry = TaskEntry.Replace("#TaskEdges", int)
-				Loop Until Not TaskEntry.Contains("#TaskEdges")
-			End If
+            If TaskEntry.Contains("#TaskEdges") Then
+                Do
+                    int = ssh.randomizer.Next(FrmSettings.NBTaskEdgesMin.Value, FrmSettings.NBTaskEdgesMax.Value + 1)
+                    If int > 5 Then int = 5 * Math.Round(int / 5)
+                    TaskEntry = TaskEntry.Replace("#TaskEdges", int)
+                Loop Until Not TaskEntry.Contains("#TaskEdges")
+            End If
 
-			If TaskEntry.Contains("#TaskStrokes") Then
-				Do
-					int = ssh.randomizer.Next(FrmSettings.NBTaskStrokesMin.Value, FrmSettings.NBTaskStrokesMax.Value + 1)
-					If int > 10 Then int = 10 * Math.Round(int / 10)
-					TaskEntry = TaskEntry.Replace("#TaskStrokes", int)
-				Loop Until Not TaskEntry.Contains("#TaskStrokes")
-			End If
+            If TaskEntry.Contains("#TaskStrokes") Then
+                Do
+                    int = ssh.randomizer.Next(FrmSettings.NBTaskStrokesMin.Value, FrmSettings.NBTaskStrokesMax.Value + 1)
+                    If int > 10 Then int = 10 * Math.Round(int / 10)
+                    TaskEntry = TaskEntry.Replace("#TaskStrokes", int)
+                Loop Until Not TaskEntry.Contains("#TaskStrokes")
+            End If
 
-			If TaskEntry.Contains("#TaskHours") Then
-				Do
-					int = ssh.randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1) + FrmSettings.domlevelNumBox.Value
-					TaskEntry = TaskEntry.Replace("#TaskHours", int)
-				Loop Until Not TaskEntry.Contains("#TaskHours")
-			End If
+            If TaskEntry.Contains("#TaskHours") Then
+                Do
+                    int = ssh.randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1) + FrmSettings.domlevelNumBox.Value
+                    TaskEntry = TaskEntry.Replace("#TaskHours", int)
+                Loop Until Not TaskEntry.Contains("#TaskHours")
+            End If
 
-			If TaskEntry.Contains("#TaskMinutes") Then
-				Do
-					int = ssh.randomizer.Next(5, 13) * FrmSettings.domlevelNumBox.Value
-					TaskEntry = TaskEntry.Replace("#TaskMinutes", int)
-				Loop Until Not TaskEntry.Contains("#TaskMinutes")
-			End If
+            If TaskEntry.Contains("#TaskMinutes") Then
+                Do
+                    int = ssh.randomizer.Next(5, 13) * FrmSettings.domlevelNumBox.Value
+                    TaskEntry = TaskEntry.Replace("#TaskMinutes", int)
+                Loop Until Not TaskEntry.Contains("#TaskMinutes")
+            End If
 
-			If TaskEntry.Contains("#TaskSeconds") Then
-				Do
-					int = ssh.randomizer.Next(10, 30) * FrmSettings.domlevelNumBox.Value * ssh.randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1)
-					TaskEntry = TaskEntry.Replace("#TaskSeconds", int)
-				Loop Until Not TaskEntry.Contains("#TaskSeconds")
-			End If
+            If TaskEntry.Contains("#TaskSeconds") Then
+                Do
+                    int = ssh.randomizer.Next(10, 30) * FrmSettings.domlevelNumBox.Value * ssh.randomizer.Next(1, FrmSettings.domlevelNumBox.Value + 1)
+                    TaskEntry = TaskEntry.Replace("#TaskSeconds", int)
+                Loop Until Not TaskEntry.Contains("#TaskSeconds")
+            End If
 
-			If TaskEntry.Contains("#TaskAmountLarge") Then
-				Do
-					int = (ssh.randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) * 2
-					If int > 5 Then int = 5 * Math.Round(int / 5)
-					TaskEntry = TaskEntry.Replace("#TaskAmountLarge", int)
-				Loop Until Not TaskEntry.Contains("#TaskAmountLarge")
-			End If
+            If TaskEntry.Contains("#TaskAmountLarge") Then
+                Do
+                    int = (ssh.randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value) * 2
+                    If int > 5 Then int = 5 * Math.Round(int / 5)
+                    TaskEntry = TaskEntry.Replace("#TaskAmountLarge", int)
+                Loop Until Not TaskEntry.Contains("#TaskAmountLarge")
+            End If
 
-			If TaskEntry.Contains("#TaskAmountSmall") Then
-				Do
-					int = (ssh.randomizer.Next(5, 11) * FrmSettings.domlevelNumBox.Value) / 2
-					If int > 5 Then int = 5 * Math.Round(int / 5)
-					TaskEntry = TaskEntry.Replace("#TaskAmountSmall", int)
-				Loop Until Not TaskEntry.Contains("#TaskAmountSmall")
-			End If
+            If TaskEntry.Contains("#TaskAmountSmall") Then
+                Do
+                    int = (ssh.randomizer.Next(5, 11) * FrmSettings.domlevelNumBox.Value) / 2
+                    If int > 5 Then int = 5 * Math.Round(int / 5)
+                    TaskEntry = TaskEntry.Replace("#TaskAmountSmall", int)
+                Loop Until Not TaskEntry.Contains("#TaskAmountSmall")
+            End If
 
-			If TaskEntry.Contains("#TaskAmount") Then
-				Do
-					int = ssh.randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value
-					If int > 5 Then int = 5 * Math.Round(int / 5)
-					TaskEntry = TaskEntry.Replace("#TaskAmount", int)
-				Loop Until Not TaskEntry.Contains("#TaskAmount")
-			End If
+            If TaskEntry.Contains("#TaskAmount") Then
+                Do
+                    int = ssh.randomizer.Next(15, 26) * FrmSettings.domlevelNumBox.Value
+                    If int > 5 Then int = 5 * Math.Round(int / 5)
+                    TaskEntry = TaskEntry.Replace("#TaskAmount", int)
+                Loop Until Not TaskEntry.Contains("#TaskAmount")
+            End If
 
-			If TaskEntry.Contains("#TaskStrokingTime") Then
-				Do
-					int = ssh.randomizer.Next(FrmSettings.NBTaskStrokingTimeMin.Value, FrmSettings.NBTaskStrokingTimeMax.Value + 1)
-					int *= 60
-					Dim TConvert As String = ConvertSeconds(int)
-					TaskEntry = TaskEntry.Replace("#TaskStrokingTime", TConvert)
-				Loop Until Not TaskEntry.Contains("#TaskStrokingTime")
-			End If
+            If TaskEntry.Contains("#TaskStrokingTime") Then
+                Do
+                    int = ssh.randomizer.Next(FrmSettings.NBTaskStrokingTimeMin.Value, FrmSettings.NBTaskStrokingTimeMax.Value + 1)
+                    int *= 60
+                    Dim TConvert As String = ConvertSeconds(int)
+                    TaskEntry = TaskEntry.Replace("#TaskStrokingTime", TConvert)
+                Loop Until Not TaskEntry.Contains("#TaskStrokingTime")
+            End If
 
-			If TaskEntry.Contains("#TaskHoldTheEdgeTime") Then
-				Do
-					int = ssh.randomizer.Next(FrmSettings.NBTaskEdgeHoldTimeMin.Value, FrmSettings.NBTaskEdgeHoldTimeMax.Value + 1)
-					int *= 60
-					Dim TConvert As String = ConvertSeconds(int)
-					TaskEntry = TaskEntry.Replace("#TaskHoldTheEdgeTime", TConvert)
-				Loop Until Not TaskEntry.Contains("#TaskHoldTheEdgeTime")
-			End If
+            If TaskEntry.Contains("#TaskHoldTheEdgeTime") Then
+                Do
+                    int = ssh.randomizer.Next(FrmSettings.NBTaskEdgeHoldTimeMin.Value, FrmSettings.NBTaskEdgeHoldTimeMax.Value + 1)
+                    int *= 60
+                    Dim TConvert As String = ConvertSeconds(int)
+                    TaskEntry = TaskEntry.Replace("#TaskHoldTheEdgeTime", TConvert)
+                Loop Until Not TaskEntry.Contains("#TaskHoldTheEdgeTime")
+            End If
 
-			If TaskEntry.Contains("#TaskCBTTime") Then
-				Do
-					int = ssh.randomizer.Next(FrmSettings.NBTaskCBTTimeMin.Value, FrmSettings.NBTaskCBTTimeMax.Value + 1)
-					int *= 60
-					Dim TConvert As String = ConvertSeconds(int)
-					TaskEntry = TaskEntry.Replace("#TaskCBTTime", TConvert)
-				Loop Until Not TaskEntry.Contains("#TaskCBTTime")
-			End If
+            If TaskEntry.Contains("#TaskCBTTime") Then
+                Do
+                    int = ssh.randomizer.Next(FrmSettings.NBTaskCBTTimeMin.Value, FrmSettings.NBTaskCBTTimeMax.Value + 1)
+                    int *= 60
+                    Dim TConvert As String = ConvertSeconds(int)
+                    TaskEntry = TaskEntry.Replace("#TaskCBTTime", TConvert)
+                Loop Until Not TaskEntry.Contains("#TaskCBTTime")
+            End If
 
-			TaskEntry = TaskEntry.Replace("<font color=""red"">", "")
-			TaskEntry = TaskEntry.Replace("</font>", "")
-			TaskEntry = TaskEntry.Replace("#Null", "")
+            TaskEntry = TaskEntry.Replace("<font color=""red"">", "")
+            TaskEntry = TaskEntry.Replace("</font>", "")
+            TaskEntry = TaskEntry.Replace("#Null", "")
 
-			LoopBuffer = 0
+            LoopBuffer = 0
 
-			Do
-				LoopBuffer += 1
-				If LoopBuffer > 4 Then Exit Do
-				TaskEntry = PoundClean(TaskEntry)
-			Loop Until Not TaskEntry.Contains("#") And Not TaskEntry.Contains("@RT(") And Not TaskEntry.Contains("@RandomText(")
-
-
-			TaskEntry = CommandClean(TaskEntry, True)
-
-			TaskEntry = StripCommands(TaskEntry)
-
-			TaskEntry = Trim(TaskEntry)
-
-			If TaskEntry.Contains("*") Then
-				TaskEntry = TaskEntry.Replace(". *", " *")
-				Dim EmoToggle As Boolean = True
-				For i As Integer = TaskEntry.Length - 1 To 0 Step -1
-					If TaskEntry.Substring(i, 1) = "*" Then
-						If EmoToggle = False Then
-							EmoToggle = True
-							TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
-						Else
-							EmoToggle = False
-							TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
-						End If
-					End If
-				Next
-			End If
-
-			Return TaskEntry
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'                                            All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError("Error occurred during file processing:  """ & dir & """", ex, "CleanTaskLines(String)")
-			Return "ERROR: Tease AI did not return a valid Task line"
-		End Try
-	End Function
-
-	Private Sub BTNFIleTransferDismiss_Click(sender As System.Object, e As System.EventArgs) Handles BTNFIleTransferDismiss.Click
-
-		PNLFileTransfer.Visible = False
-		BTNFileTransferOpen.Visible = False
-		BTNFIleTransferDismiss.Visible = False
-		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
-		PBFileTransfer.Value = 0
-
-	End Sub
-
-	Public Function ShellExecute(ByVal File As String) As Boolean
-		Dim myProcess As New Process
-		myProcess.StartInfo.FileName = File
-		myProcess.StartInfo.UseShellExecute = True
-		myProcess.StartInfo.RedirectStandardOutput = False
-		myProcess.Start()
-		myProcess.Dispose()
-	End Function
+            Do
+                LoopBuffer += 1
+                If LoopBuffer > 4 Then Exit Do
+                TaskEntry = PoundClean(TaskEntry)
+            Loop Until Not TaskEntry.Contains("#") And Not TaskEntry.Contains("@RT(") And Not TaskEntry.Contains("@RandomText(")
 
 
-	Public Sub BTNFileTransferOpen_Click(sender As System.Object, e As System.EventArgs) Handles BTNFileTransferOpen.Click
+            TaskEntry = CommandClean(TaskEntry, True)
 
-		ShellExecute(ssh.TaskTextDir)
+            TaskEntry = StripCommands(TaskEntry)
 
-		PNLFileTransfer.Visible = False
-		BTNFileTransferOpen.Visible = False
-		BTNFIleTransferDismiss.Visible = False
-		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
-		PBFileTransfer.Value = 0
+            TaskEntry = Trim(TaskEntry)
 
-	End Sub
+            If TaskEntry.Contains("*") Then
+                TaskEntry = TaskEntry.Replace(". *", " *")
+                Dim EmoToggle As Boolean = True
+                For i As Integer = TaskEntry.Length - 1 To 0 Step -1
+                    If TaskEntry.Substring(i, 1) = "*" Then
+                        If EmoToggle = False Then
+                            EmoToggle = True
+                            TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmote.Text)
+                        Else
+                            EmoToggle = False
+                            TaskEntry = TaskEntry.Remove(i, 1).Insert(i, FrmSettings.TBEmoteEnd.Text)
+                        End If
+                    End If
+                Next
+            End If
+
+            Return TaskEntry
+        Catch ex As Exception
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            '                                            All Errors
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            Log.WriteError("Error occurred during file processing:  """ & dir & """", ex, "CleanTaskLines(String)")
+            Return "ERROR: Tease AI did not return a valid Task line"
+        End Try
+    End Function
+
+    Private Sub BTNFIleTransferDismiss_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNFIleTransferDismiss.Click
+
+        PNLFileTransfer.Visible = False
+        BTNFileTransferOpen.Visible = False
+        BTNFIleTransferDismiss.Visible = False
+        LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
+        PBFileTransfer.Value = 0
+
+    End Sub
+
+    Public Function ShellExecute(ByVal File As String) As Boolean
+        Dim myProcess As New Process
+        myProcess.StartInfo.FileName = File
+        myProcess.StartInfo.UseShellExecute = True
+        myProcess.StartInfo.RedirectStandardOutput = False
+        myProcess.Start()
+        myProcess.Dispose()
+    End Function
+
+
+    Public Sub BTNFileTransferOpen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNFileTransferOpen.Click
+
+        ShellExecute(ssh.TaskTextDir)
+
+        PNLFileTransfer.Visible = False
+        BTNFileTransferOpen.Visible = False
+        BTNFIleTransferDismiss.Visible = False
+        LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
+        PBFileTransfer.Value = 0
+
+    End Sub
 
 
 
-	Private Sub SlideshowTimer_Tick(sender As System.Object, e As System.EventArgs) Handles SlideshowTimer.Tick
-		'TODO: Remove CrossForm data access
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+    Private Sub SlideshowTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SlideshowTimer.Tick
+        'TODO: Remove CrossForm data access
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
-		If ssh.SlideshowLoaded = False Or FrmSettings.timedRadio.Checked = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Or ssh.JustShowedBlogImage = True Or ssh.CustomSlideEnabled = True Then Return
+        If ssh.SlideshowLoaded = False Or FrmSettings.timedRadio.Checked = False Or ssh.TeaseVideo = True Or ssh.LockImage = True Or ssh.JustShowedBlogImage = True Or ssh.CustomSlideEnabled = True Then Return
 
-		ssh.SlideshowTimerTick -= 1
+        ssh.SlideshowTimerTick -= 1
 
-		If ssh.SlideshowTimerTick < 1 Then
+        If ssh.SlideshowTimerTick < 1 Then
 
 TryNext:
-			If My.Settings.CBSlideshowRandom Then
-				ssh.SlideshowMain.NavigateNextTease()
-			Else
-				ssh.SlideshowMain.NavigateForward()
-			End If
+            If My.Settings.CBSlideshowRandom Then
+                ssh.SlideshowMain.NavigateNextTease()
+            Else
+                ssh.SlideshowMain.NavigateForward()
+            End If
 
 
-			If Not (File.Exists(ssh.SlideshowMain.CurrentImage) _
-					Or isURL(ssh.SlideshowMain.CurrentImage)) Then
-				ClearMainPictureBox()
-				Exit Sub
-			End If
+            If Not (File.Exists(ssh.SlideshowMain.CurrentImage) _
+              Or isURL(ssh.SlideshowMain.CurrentImage)) Then
+                ClearMainPictureBox()
+                Exit Sub
+            End If
 
-			Try
-				ShowImage(ssh.SlideshowMain.CurrentImage, True)
-				ssh.JustShowedBlogImage = False
-				ssh.JustShowedSlideshowImage = True
+            Try
+                ShowImage(ssh.SlideshowMain.CurrentImage, True)
+                ssh.JustShowedBlogImage = False
+                ssh.JustShowedSlideshowImage = True
 
-			Catch
-				GoTo TryNext
-			End Try
-
-
-			ssh.SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
-		End If
-
-	End Sub
-
-	Public Sub GetEdgeTickCheck()
-
-		If ssh.AlreadyStrokingEdge = True Then
-
-			If ssh.AvgEdgeCount < 5 Then
-				ssh.EdgeTickCheck = 60
-			Else
-				ssh.EdgeTickCheck = ssh.AvgEdgeStroking
-			End If
-
-		Else
-
-			If ssh.AvgEdgeCountRest < 5 Then
-				ssh.EdgeTickCheck = 300
-			Else
-				ssh.EdgeTickCheck = ssh.AvgEdgeNoTouch
-			End If
-
-		End If
-
-	End Sub
+            Catch
+                GoTo TryNext
+            End Try
 
 
+            ssh.SlideshowTimerTick = FrmSettings.slideshowNumBox.Value
+        End If
 
-	Private Sub EdgeCountTimer_Tick(sender As System.Object, e As System.EventArgs) Handles EdgeCountTimer.Tick
+    End Sub
 
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+    Public Sub GetEdgeTickCheck()
 
-		ssh.EdgeCountTick += 1
+        If ssh.AlreadyStrokingEdge = True Then
 
-		If FrmSettings.CBEdgeUseAvg.Checked = True Then
-			If ssh.EdgeCountTick > ssh.EdgeTickCheck Then ssh.LongEdge = True
-		Else
-			If ssh.EdgeCountTick > FrmSettings.NBLongEdge.Value * 60 Then ssh.LongEdge = True
-		End If
+            If ssh.AvgEdgeCount < 5 Then
+                ssh.EdgeTickCheck = 60
+            Else
+                ssh.EdgeTickCheck = ssh.AvgEdgeStroking
+            End If
 
+        Else
 
-		Dim m As Integer = TimeSpan.FromSeconds(ssh.EdgeCountTick).Minutes
-		Dim s As Integer = TimeSpan.FromSeconds(ssh.EdgeCountTick).Seconds
+            If ssh.AvgEdgeCountRest < 5 Then
+                ssh.EdgeTickCheck = 300
+            Else
+                ssh.EdgeTickCheck = ssh.AvgEdgeNoTouch
+            End If
 
+        End If
 
-		Dim TST As TimeSpan = TimeSpan.FromSeconds(ssh.EdgeCountTick)
-
-		''Debug.Print("{0:c} : {1:c}", TST.Minutes, TST.Seconds)
+    End Sub
 
 
 
-		'Debug.Print("EdgeCountTick = " & String.Format("{0:00}:{1:00}", TST.Minutes, TST.Seconds))
-	End Sub
+    Private Sub EdgeCountTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EdgeCountTimer.Tick
 
-	Private Sub StrokeTimeTotalTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+        ssh.EdgeCountTick += 1
 
-		If ssh.SubStroking = False Then Return
-
-		ssh.StrokeTimeTotal += 1
-		'Debug.Print("StrokeTimeTotal = " & StrokeTimeTotal)
-
-		My.Settings.StrokeTimeTotal = ssh.StrokeTimeTotal
-
-		Dim STT As TimeSpan = TimeSpan.FromSeconds(ssh.StrokeTimeTotal)
-
-		'LBLStrokeTimeTotal.Text = String.Format("{0:000} D {1:00} H {2:00} M {3:00} S", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
-		FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{0:0000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
+        If FrmSettings.CBEdgeUseAvg.Checked = True Then
+            If ssh.EdgeCountTick > ssh.EdgeTickCheck Then ssh.LongEdge = True
+        Else
+            If ssh.EdgeCountTick > FrmSettings.NBLongEdge.Value * 60 Then ssh.LongEdge = True
+        End If
 
 
-	End Sub
+        Dim m As Integer = TimeSpan.FromSeconds(ssh.EdgeCountTick).Minutes
+        Dim s As Integer = TimeSpan.FromSeconds(ssh.EdgeCountTick).Seconds
 
+
+        Dim TST As TimeSpan = TimeSpan.FromSeconds(ssh.EdgeCountTick)
+
+        ''Debug.Print("{0:c} : {1:c}", TST.Minutes, TST.Seconds)
 
 
 
+        'Debug.Print("EdgeCountTick = " & String.Format("{0:00}:{1:00}", TST.Minutes, TST.Seconds))
+    End Sub
+
+    Private Sub StrokeTimeTotalTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
+
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
+        If ssh.SubStroking = False Then Return
+
+        ssh.StrokeTimeTotal += 1
+        'Debug.Print("StrokeTimeTotal = " & StrokeTimeTotal)
+
+        My.Settings.StrokeTimeTotal = ssh.StrokeTimeTotal
+
+        Dim STT As TimeSpan = TimeSpan.FromSeconds(ssh.StrokeTimeTotal)
+
+        'LBLStrokeTimeTotal.Text = String.Format("{0:000} D {1:00} H {2:00} M {3:00} S", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
+        FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{0:0000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
 
 
-	Private Sub TnAFastSlides_Tick(sender As System.Object, e As System.EventArgs) Handles TnASlides.Tick
-		Dim tmpSw As New Stopwatch
+    End Sub
+
+
+
+
+
+
+    Private Sub TnAFastSlides_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TnASlides.Tick
+        Dim tmpSw As New Stopwatch
 
 RestartFunction:
-		tmpSw.Restart()
-		Try
-			If ssh.BoobList.Count < 1 Then Throw New Exception("No Boobs-images loaded.")
-			If ssh.AssList.Count < 1 Then Throw New Exception("No Butt-images loaded.")
+        tmpSw.Restart()
+        Try
+            If ssh.BoobList.Count < 1 Then Throw New Exception("No Boobs-images loaded.")
+            If ssh.AssList.Count < 1 Then Throw New Exception("No Butt-images loaded.")
 
-			Dim tmpImageToShow As String = ""
-			Dim tmpLateSet As Boolean
+            Dim tmpImageToShow As String = ""
+            Dim tmpLateSet As Boolean
 
-			If New Random().Next(0, 101) < 51 Then
-				tmpImageToShow = ssh.BoobList(ssh.randomizer.Next(0, ssh.BoobList.Count))
-				tmpLateSet = True
-			Else
-				tmpImageToShow = ssh.AssList(ssh.randomizer.Next(0, ssh.AssList.Count))
-				tmpLateSet = False
-			End If
+            If New Random().Next(0, 101) < 51 Then
+                tmpImageToShow = ssh.BoobList(ssh.randomizer.Next(0, ssh.BoobList.Count))
+                tmpLateSet = True
+            Else
+                tmpImageToShow = ssh.AssList(ssh.randomizer.Next(0, ssh.AssList.Count))
+                tmpLateSet = False
+            End If
 
-			Try
-				ShowImage(tmpImageToShow, True)
+            Try
+                ShowImage(tmpImageToShow, True)
 
-				If tmpLateSet Then
-					ssh.BoobImage = True
-					ssh.AssImage = False
-				Else
-					ssh.BoobImage = False
-					ssh.AssImage = True
-				End If
+                If tmpLateSet Then
+                    ssh.BoobImage = True
+                    ssh.AssImage = False
+                Else
+                    ssh.BoobImage = False
+                    ssh.AssImage = True
+                End If
 
-				' If the elapsed time to load an image was longer as the Timer.Interval
-				' we restart the function instantly, to avoid an unnecessary delay.
-				' If it took way too long and the Timer was stopped during imagedownload, 
-				' we dont want the timer to restart.
-				If tmpSw.ElapsedMilliseconds > TnASlides.Interval And TnASlides.Enabled Then
-					GoTo RestartFunction
-				End If
-			Catch ex As Exception
-				' @@@@@@@@@@@@@@@@ Exception while loading image @@@@@@@@@@@@@@@@@
-				' Remove the ImagePath and retry.
-				ssh.BoobList.RemoveAll(Function(x) x.Contains(tmpImageToShow))
-				ssh.AssList.RemoveAll(Function(x) x.Contains(tmpImageToShow))
-				GoTo RestartFunction
-			End Try
-		Catch ex As Exception
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			'                                            All Errors
-			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			TnASlides.Stop()
+                ' If the elapsed time to load an image was longer as the Timer.Interval
+                ' we restart the function instantly, to avoid an unnecessary delay.
+                ' If it took way too long and the Timer was stopped during imagedownload, 
+                ' we dont want the timer to restart.
+                If tmpSw.ElapsedMilliseconds > TnASlides.Interval And TnASlides.Enabled Then
+                    GoTo RestartFunction
+                End If
+            Catch ex As Exception
+                ' @@@@@@@@@@@@@@@@ Exception while loading image @@@@@@@@@@@@@@@@@
+                ' Remove the ImagePath and retry.
+                ssh.BoobList.RemoveAll(Function(x) x.Contains(tmpImageToShow))
+                ssh.AssList.RemoveAll(Function(x) x.Contains(tmpImageToShow))
+                GoTo RestartFunction
+            End Try
+        Catch ex As Exception
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            '                                            All Errors
+            '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+            TnASlides.Stop()
             Log.WriteError(ex.Message & vbCrLf & "TnA Slideshow will stop.", ex, "Exception in TnASlides.Tick occured")
             If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Exception in TnASlides.Tick occured</font>", False)
-		End Try
-	End Sub
+        End Try
+    End Sub
 
 
 
@@ -16390,245 +16406,245 @@ RestartFunction:
 
 #Region "---------------------------------------------------- Domme-WMP -------------------------------------------------------"
 
-	Private Sub DomWMP_PlayStateChange(sender As Object, e As AxWMPLib._WMPOCXEvents_PlayStateChangeEvent) Handles DomWMP.PlayStateChange
+    Private Sub DomWMP_PlayStateChange(ByVal sender As Object, ByVal e As AxWMPLib._WMPOCXEvents_PlayStateChangeEvent) Handles DomWMP.PlayStateChange
 
 
-		If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
-			If FrmSettings.CBMuteMedia.Checked = True Then
-				DomWMP.settings.mute = True
-			End If
-		End If
+        If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
+            If FrmSettings.CBMuteMedia.Checked = True Then
+                DomWMP.settings.mute = True
+            End If
+        End If
 
 
-		If (DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped) Then
-			'Debug.Print("WMP Stopped Called")
+        If (DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped) Then
+            'Debug.Print("WMP Stopped Called")
 
-			VideoTimer.Stop()
+            VideoTimer.Stop()
 
-			ssh.EdgeVideo = False
-			ssh.YesVideo = False
-			ssh.NoVideo_Mode = False
-			ssh.CameVideo = False
-			ssh.RuinedVideo = False
+            ssh.EdgeVideo = False
+            ssh.YesVideo = False
+            ssh.NoVideo_Mode = False
+            ssh.CameVideo = False
+            ssh.RuinedVideo = False
 
-			DomWMP.currentPlaylist.clear()
-
-
-			If ssh.CensorshipGame = True Then
-				CensorshipTimer.Stop()
-				CensorshipBar.Visible = False
-				ssh.CensorshipGame = False
-				ssh.VideoTease = False
-
-				If ssh.RandomizerVideoTease = True Then
-					ScriptTimer.Stop()
-					ssh.SaidHello = False
-					ssh.RandomizerVideoTease = False
-					StopEverything()
-					Return
-				End If
-
-				RunFileText()
-			End If
-
-			If ssh.AvoidTheEdgeGame = True Then
-
-				ssh.TeaseVideo = False
-				ssh.AvoidTheEdgeGame = False
-				ssh.AvoidTheEdgeStroking = False
-				AvoidTheEdgeTaunts.Stop()
-				ssh.VideoTease = False
-				ssh.SubStroking = False
+            DomWMP.currentPlaylist.clear()
 
 
-				Debug.Print("TempStrokeTauntVal = " & ssh.TempStrokeTauntVal)
-				Debug.Print("TempFileText = " & ssh.TempFileText)
+            If ssh.CensorshipGame = True Then
+                CensorshipTimer.Stop()
+                CensorshipBar.Visible = False
+                ssh.CensorshipGame = False
+                ssh.VideoTease = False
+
+                If ssh.RandomizerVideoTease = True Then
+                    ScriptTimer.Stop()
+                    ssh.SaidHello = False
+                    ssh.RandomizerVideoTease = False
+                    StopEverything()
+                    Return
+                End If
+
+                RunFileText()
+            End If
+
+            If ssh.AvoidTheEdgeGame = True Then
+
+                ssh.TeaseVideo = False
+                ssh.AvoidTheEdgeGame = False
+                ssh.AvoidTheEdgeStroking = False
+                AvoidTheEdgeTaunts.Stop()
+                ssh.VideoTease = False
+                ssh.SubStroking = False
 
 
-				If ssh.RandomizerVideoTease = True Then
-					ScriptTimer.Stop()
-					ssh.SaidHello = False
-					ssh.RandomizerVideoTease = False
-					StopEverything()
-					Return
-				End If
-
-				ssh.StrokeTauntVal = ssh.TempStrokeTauntVal
-				ssh.FileText = ssh.TempFileText
-
-				ssh.ScriptTick = 2
-				ScriptTimer.Start()
-
-				'RunFileText()
+                Debug.Print("TempStrokeTauntVal = " & ssh.TempStrokeTauntVal)
+                Debug.Print("TempFileText = " & ssh.TempFileText)
 
 
+                If ssh.RandomizerVideoTease = True Then
+                    ScriptTimer.Stop()
+                    ssh.SaidHello = False
+                    ssh.RandomizerVideoTease = False
+                    StopEverything()
+                    Return
+                End If
 
+                ssh.StrokeTauntVal = ssh.TempStrokeTauntVal
+                ssh.FileText = ssh.TempFileText
 
-				'AvoidTheEdge.Stop()
-				'AvoidTheEdgeGame = False
-				'SkipGotoLine = True
-				'If AvoidTheEdgeTimerTick < 1 Then
-				'FileGoto = "(AvoidTheEdge Video Stop)"
-				'Else
-				'   FileGoto = "(AvoidTheEdge Video Continue)"
-				'End If
-				'GetGoto()
-				'RunFileText()
-			End If
+                ssh.ScriptTick = 2
+                ScriptTimer.Start()
 
-			If ssh.RLGLGame = True Then
-				RLGLTimer.Stop()
-				RLGLTauntTimer.Stop()
-				ssh.RLGLGame = False
-				ssh.VideoTease = False
-				ssh.SubStroking = False
-
-
-				If ssh.RandomizerVideoTease = True Then
-					ScriptTimer.Stop()
-					ssh.SaidHello = False
-					ssh.RandomizerVideoTease = False
-					StopEverything()
-					Return
-				End If
-
-				ssh.ScriptTick = 1
-				ScriptTimer.Start()
-
-				Return
-			End If
-
-
-			If ssh.TeaseVideo = True Then
-				ssh.TeaseVideo = False
-				DomWMP.Ctlcontrols.pause()
-				RunFileText()
-			End If
-
-
-			If ssh.LockVideo = False Then
-				mainPictureBox.Visible = True
-				DomWMP.Visible = False
-			End If
-
-
-		End If
-
-	End Sub
-
-	Private Sub WMPTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WMPTimer.Tick
-
-
-		If DomWMP.currentPlaylist.count <> 0 Then
-			Try
-				Dim VideoLength As Integer = DomWMP.currentMedia.duration
-				Dim VideoRemaining As Integer = Math.Floor(DomWMP.currentMedia.duration - DomWMP.Ctlcontrols.currentPosition)
-
-				Debug.Print("Video Length = " & VideoLength)
-				Debug.Print("Video Remaining = " & VideoRemaining)
-			Catch
-			End Try
-		End If
+                'RunFileText()
 
 
 
 
+                'AvoidTheEdge.Stop()
+                'AvoidTheEdgeGame = False
+                'SkipGotoLine = True
+                'If AvoidTheEdgeTimerTick < 1 Then
+                'FileGoto = "(AvoidTheEdge Video Stop)"
+                'Else
+                '   FileGoto = "(AvoidTheEdge Video Continue)"
+                'End If
+                'GetGoto()
+                'RunFileText()
+            End If
 
-		If ssh.DomTypeCheck = True Or DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped Or DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused Then Return
-
-		'Debug.Print("New movie loaded: " & DomWMP.URL.ToString)
-
-		ssh.VidFile = Path.GetFileName(DomWMP.URL.ToString)
-
-		Dim VidSplit As String() = ssh.VidFile.Split(".")
-		ssh.VidFile = ""
-		For i As Integer = 0 To VidSplit.Count - 2
-			ssh.VidFile = ssh.VidFile + VidSplit(i)
-		Next
-		'Debug.Print(VidFile)
-		If ssh.VidFile = "" Then Exit Sub
-		If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & ssh.VidFile & ".txt") Then
-			Dim SubCheck As String()
-			Dim PlayPos As Integer
-			Dim WMPPos As Integer = Math.Ceiling(DomWMP.Ctlcontrols.currentPosition)
-
-			Dim SubList As New List(Of String)
-			SubList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & ssh.VidFile & ".txt")
-
-			If Not SubList Is Nothing Then
-				For i As Integer = 0 To SubList.Count - 1
-					SubCheck = SubList(i).Split("]")
-					SubCheck(0) = SubCheck(0).Replace("[", "")
-					Dim SubCheck2 As String() = SubCheck(0).Split(":")
-
-					PlayPos = SubCheck2(0) * 3600
-					PlayPos += SubCheck2(1) * 60
-					PlayPos += SubCheck2(2)
-
-					If WMPPos = PlayPos Then
-						ssh.DomTask = SubCheck(1)
-						TypingDelayGeneric()
-						Debug.Print(SubList(i))
-					End If
-				Next
-			End If
-		End If
+            If ssh.RLGLGame = True Then
+                RLGLTimer.Stop()
+                RLGLTauntTimer.Stop()
+                ssh.RLGLGame = False
+                ssh.VideoTease = False
+                ssh.SubStroking = False
 
 
-	End Sub
+                If ssh.RandomizerVideoTease = True Then
+                    ScriptTimer.Stop()
+                    ssh.SaidHello = False
+                    ssh.RandomizerVideoTease = False
+                    StopEverything()
+                    Return
+                End If
+
+                ssh.ScriptTick = 1
+                ScriptTimer.Start()
+
+                Return
+            End If
+
+
+            If ssh.TeaseVideo = True Then
+                ssh.TeaseVideo = False
+                DomWMP.Ctlcontrols.pause()
+                RunFileText()
+            End If
+
+
+            If ssh.LockVideo = False Then
+                mainPictureBox.Visible = True
+                DomWMP.Visible = False
+            End If
+
+
+        End If
+
+    End Sub
+
+    Private Sub WMPTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WMPTimer.Tick
+
+
+        If DomWMP.currentPlaylist.count <> 0 Then
+            Try
+                Dim VideoLength As Integer = DomWMP.currentMedia.duration
+                Dim VideoRemaining As Integer = Math.Floor(DomWMP.currentMedia.duration - DomWMP.Ctlcontrols.currentPosition)
+
+                Debug.Print("Video Length = " & VideoLength)
+                Debug.Print("Video Remaining = " & VideoRemaining)
+            Catch
+            End Try
+        End If
+
+
+
+
+
+        If ssh.DomTypeCheck = True Or DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped Or DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused Then Return
+
+        'Debug.Print("New movie loaded: " & DomWMP.URL.ToString)
+
+        ssh.VidFile = Path.GetFileName(DomWMP.URL.ToString)
+
+        Dim VidSplit As String() = ssh.VidFile.Split(".")
+        ssh.VidFile = ""
+        For i As Integer = 0 To VidSplit.Count - 2
+            ssh.VidFile = ssh.VidFile + VidSplit(i)
+        Next
+        'Debug.Print(VidFile)
+        If ssh.VidFile = "" Then Exit Sub
+        If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & ssh.VidFile & ".txt") Then
+            Dim SubCheck As String()
+            Dim PlayPos As Integer
+            Dim WMPPos As Integer = Math.Ceiling(DomWMP.Ctlcontrols.currentPosition)
+
+            Dim SubList As New List(Of String)
+            SubList = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Scripts\" & ssh.VidFile & ".txt")
+
+            If Not SubList Is Nothing Then
+                For i As Integer = 0 To SubList.Count - 1
+                    SubCheck = SubList(i).Split("]")
+                    SubCheck(0) = SubCheck(0).Replace("[", "")
+                    Dim SubCheck2 As String() = SubCheck(0).Split(":")
+
+                    PlayPos = SubCheck2(0) * 3600
+                    PlayPos += SubCheck2(1) * 60
+                    PlayPos += SubCheck2(2)
+
+                    If WMPPos = PlayPos Then
+                        ssh.DomTask = SubCheck(1)
+                        TypingDelayGeneric()
+                        Debug.Print(SubList(i))
+                    End If
+                Next
+            End If
+        End If
+
+
+    End Sub
 
 #End Region 'Domme-WMP
 
-	Private Sub domAvatar_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles domAvatar.MouseEnter
-		If FrmSettings.Visible = False And FrmCardList.Visible = False Then domAvatar.Focus()
-	End Sub
+    Private Sub domAvatar_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles domAvatar.MouseEnter
+        If FrmSettings.Visible = False And FrmCardList.Visible = False Then domAvatar.Focus()
+    End Sub
 
-	Private Sub domAvatar_MouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles domAvatar.MouseWheel
+    Private Sub domAvatar_MouseWheel(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles domAvatar.MouseWheel
 
 
 
-		If domAvatar.SizeMode = PictureBoxSizeMode.StretchImage Then
-			domAvatar.SizeMode = PictureBoxSizeMode.Zoom
-			My.Settings.DomAVStretch = False
-		Else
-			domAvatar.SizeMode = PictureBoxSizeMode.StretchImage
-			My.Settings.DomAVStretch = True
-		End If
+        If domAvatar.SizeMode = PictureBoxSizeMode.StretchImage Then
+            domAvatar.SizeMode = PictureBoxSizeMode.Zoom
+            My.Settings.DomAVStretch = False
+        Else
+            domAvatar.SizeMode = PictureBoxSizeMode.StretchImage
+            My.Settings.DomAVStretch = True
+        End If
 
-	End Sub
+    End Sub
 
 
-	Private Sub WaitTimer_Tick(sender As System.Object, e As System.EventArgs) Handles WaitTimer.Tick
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+    Private Sub WaitTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WaitTimer.Tick
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
 
-		If ssh.DomTypeCheck = True Or ssh.YesOrNo = True Then Return
+        If ssh.DomTypeCheck = True Or ssh.YesOrNo = True Then Return
 
-		'Debug.Print("WaitTick = " & WaitTick)
+        'Debug.Print("WaitTick = " & WaitTick)
 
-		ssh.WaitTick -= 1
+        ssh.WaitTick -= 1
 
-		If ssh.WaitTick < 1 Then
-			WaitTimer.Stop()
-			ssh.ScriptTick = 1
-		End If
+        If ssh.WaitTick < 1 Then
+            WaitTimer.Stop()
+            ssh.ScriptTick = 1
+        End If
 
 
-	End Sub
+    End Sub
 
-	Private Sub StupidTimer_Tick(sender As System.Object, e As System.EventArgs) Handles StupidTimer.Tick
+    Private Sub StupidTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StupidTimer.Tick
 
-		If PBFileTransfer.Value = PBFileTransfer.Maximum Then
-			StupidTimer.Enabled = False
+        If PBFileTransfer.Value = PBFileTransfer.Maximum Then
+            StupidTimer.Enabled = False
 
-			LBLFileTransfer.Text = "Download complete!"
-			BTNFileTransferOpen.Visible = True
-			BTNFIleTransferDismiss.Visible = True
-			Exit Sub
-		End If
+            LBLFileTransfer.Text = "Download complete!"
+            BTNFileTransferOpen.Visible = True
+            BTNFIleTransferDismiss.Visible = True
+            Exit Sub
+        End If
 
-		PBFileTransfer.Value += 1
+        PBFileTransfer.Value += 1
 
-	End Sub
+    End Sub
 
 
 
@@ -16639,37 +16655,37 @@ RestartFunction:
 
 
 
-	Public Sub SaveExercise()
+    Public Sub SaveExercise()
 
-		If FormLoading = True Then Return
+        If FormLoading = True Then Return
 
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\System\VitalSub\ExerciseList.cld", IO.FileMode.Create)
-		Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
-		For i = 0 To CLBExercise.Items.Count - 1
-			BinaryWriter.Write(CStr(CLBExercise.Items(i)))
-			BinaryWriter.Write(CBool(CLBExercise.GetItemChecked(i)))
-		Next
-		BinaryWriter.Close()
-		FileStream.Dispose()
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\System\VitalSub\ExerciseList.cld", IO.FileMode.Create)
+        Dim BinaryWriter As New System.IO.BinaryWriter(FileStream)
+        For i = 0 To CLBExercise.Items.Count - 1
+            BinaryWriter.Write(CStr(CLBExercise.Items(i)))
+            BinaryWriter.Write(CBool(CLBExercise.GetItemChecked(i)))
+        Next
+        BinaryWriter.Close()
+        FileStream.Dispose()
 
-	End Sub
+    End Sub
 
-	Public Sub LoadExercise()
+    Public Sub LoadExercise()
 
-		CLBExercise.Items.Clear()
-		Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\System\VitalSub\ExerciseList.cld", IO.FileMode.Open)
-		Dim BinaryReader As New System.IO.BinaryReader(FileStream)
-		CLBExercise.BeginUpdate()
-		Do While FileStream.Position < FileStream.Length
-			CLBExercise.Items.Add(BinaryReader.ReadString)
-			CLBExercise.SetItemChecked(CLBExercise.Items.Count - 1, BinaryReader.ReadBoolean)
-		Loop
-		CLBExercise.EndUpdate()
-		BinaryReader.Close()
-		FileStream.Dispose()
+        CLBExercise.Items.Clear()
+        Dim FileStream As New System.IO.FileStream(Application.StartupPath & "\System\VitalSub\ExerciseList.cld", IO.FileMode.Open)
+        Dim BinaryReader As New System.IO.BinaryReader(FileStream)
+        CLBExercise.BeginUpdate()
+        Do While FileStream.Position < FileStream.Length
+            CLBExercise.Items.Add(BinaryReader.ReadString)
+            CLBExercise.SetItemChecked(CLBExercise.Items.Count - 1, BinaryReader.ReadBoolean)
+        Loop
+        CLBExercise.EndUpdate()
+        BinaryReader.Close()
+        FileStream.Dispose()
 
 
-	End Sub
+    End Sub
 
 
 
@@ -16679,51 +16695,51 @@ RestartFunction:
 
 
 
-	Public Sub RefreshCards()
+    Public Sub RefreshCards()
 
-		FrmCardList.GoldN1.Text = FrmSettings.GN1.Text
-		FrmCardList.GoldN2.Text = FrmSettings.GN2.Text
-		FrmCardList.GoldN3.Text = FrmSettings.GN3.Text
-		FrmCardList.GoldN4.Text = FrmSettings.GN4.Text
-		FrmCardList.GoldN5.Text = FrmSettings.GN5.Text
-		FrmCardList.GoldN6.Text = FrmSettings.GN6.Text
+        FrmCardList.GoldN1.Text = FrmSettings.GN1.Text
+        FrmCardList.GoldN2.Text = FrmSettings.GN2.Text
+        FrmCardList.GoldN3.Text = FrmSettings.GN3.Text
+        FrmCardList.GoldN4.Text = FrmSettings.GN4.Text
+        FrmCardList.GoldN5.Text = FrmSettings.GN5.Text
+        FrmCardList.GoldN6.Text = FrmSettings.GN6.Text
 
-		FrmCardList.GoldP1.Image = Image.FromFile(My.Settings.GP1)
-		FrmCardList.GoldP2.Image = Image.FromFile(My.Settings.GP2)
-		FrmCardList.GoldP3.Image = Image.FromFile(My.Settings.GP3)
-		FrmCardList.GoldP4.Image = Image.FromFile(My.Settings.GP4)
-		FrmCardList.GoldP5.Image = Image.FromFile(My.Settings.GP5)
-		FrmCardList.GoldP6.Image = Image.FromFile(My.Settings.GP6)
+        FrmCardList.GoldP1.Image = Image.FromFile(My.Settings.GP1)
+        FrmCardList.GoldP2.Image = Image.FromFile(My.Settings.GP2)
+        FrmCardList.GoldP3.Image = Image.FromFile(My.Settings.GP3)
+        FrmCardList.GoldP4.Image = Image.FromFile(My.Settings.GP4)
+        FrmCardList.GoldP5.Image = Image.FromFile(My.Settings.GP5)
+        FrmCardList.GoldP6.Image = Image.FromFile(My.Settings.GP6)
 
-		FrmCardList.SilverN1.Text = FrmSettings.SN1.Text
-		FrmCardList.SilverN2.Text = FrmSettings.SN2.Text
-		FrmCardList.SilverN3.Text = FrmSettings.SN3.Text
-		FrmCardList.SilverN4.Text = FrmSettings.SN4.Text
-		FrmCardList.SilverN5.Text = FrmSettings.SN5.Text
-		FrmCardList.SilverN6.Text = FrmSettings.SN6.Text
+        FrmCardList.SilverN1.Text = FrmSettings.SN1.Text
+        FrmCardList.SilverN2.Text = FrmSettings.SN2.Text
+        FrmCardList.SilverN3.Text = FrmSettings.SN3.Text
+        FrmCardList.SilverN4.Text = FrmSettings.SN4.Text
+        FrmCardList.SilverN5.Text = FrmSettings.SN5.Text
+        FrmCardList.SilverN6.Text = FrmSettings.SN6.Text
 
-		FrmCardList.SilverP1.Image = Image.FromFile(My.Settings.SP1)
-		FrmCardList.SilverP2.Image = Image.FromFile(My.Settings.SP2)
-		FrmCardList.SilverP3.Image = Image.FromFile(My.Settings.SP3)
-		FrmCardList.SilverP4.Image = Image.FromFile(My.Settings.SP4)
-		FrmCardList.SilverP5.Image = Image.FromFile(My.Settings.SP5)
-		FrmCardList.SilverP6.Image = Image.FromFile(My.Settings.SP6)
+        FrmCardList.SilverP1.Image = Image.FromFile(My.Settings.SP1)
+        FrmCardList.SilverP2.Image = Image.FromFile(My.Settings.SP2)
+        FrmCardList.SilverP3.Image = Image.FromFile(My.Settings.SP3)
+        FrmCardList.SilverP4.Image = Image.FromFile(My.Settings.SP4)
+        FrmCardList.SilverP5.Image = Image.FromFile(My.Settings.SP5)
+        FrmCardList.SilverP6.Image = Image.FromFile(My.Settings.SP6)
 
-		FrmCardList.BronzeN1.Text = FrmSettings.BN1.Text
-		FrmCardList.BronzeN2.Text = FrmSettings.BN2.Text
-		FrmCardList.BronzeN3.Text = FrmSettings.BN3.Text
-		FrmCardList.BronzeN4.Text = FrmSettings.BN4.Text
-		FrmCardList.BronzeN5.Text = FrmSettings.BN5.Text
-		FrmCardList.BronzeN6.Text = FrmSettings.BN6.Text
+        FrmCardList.BronzeN1.Text = FrmSettings.BN1.Text
+        FrmCardList.BronzeN2.Text = FrmSettings.BN2.Text
+        FrmCardList.BronzeN3.Text = FrmSettings.BN3.Text
+        FrmCardList.BronzeN4.Text = FrmSettings.BN4.Text
+        FrmCardList.BronzeN5.Text = FrmSettings.BN5.Text
+        FrmCardList.BronzeN6.Text = FrmSettings.BN6.Text
 
-		FrmCardList.BronzeP1.Image = Image.FromFile(My.Settings.BP1)
-		FrmCardList.BronzeP2.Image = Image.FromFile(My.Settings.BP2)
-		FrmCardList.BronzeP3.Image = Image.FromFile(My.Settings.BP3)
-		FrmCardList.BronzeP4.Image = Image.FromFile(My.Settings.BP4)
-		FrmCardList.BronzeP5.Image = Image.FromFile(My.Settings.BP5)
-		FrmCardList.BronzeP6.Image = Image.FromFile(My.Settings.BP6)
+        FrmCardList.BronzeP1.Image = Image.FromFile(My.Settings.BP1)
+        FrmCardList.BronzeP2.Image = Image.FromFile(My.Settings.BP2)
+        FrmCardList.BronzeP3.Image = Image.FromFile(My.Settings.BP3)
+        FrmCardList.BronzeP4.Image = Image.FromFile(My.Settings.BP4)
+        FrmCardList.BronzeP5.Image = Image.FromFile(My.Settings.BP5)
+        FrmCardList.BronzeP6.Image = Image.FromFile(My.Settings.BP6)
 
-	End Sub
+    End Sub
 
 
 
@@ -16732,13 +16748,13 @@ RestartFunction:
 
 
 
-	Public Sub SaveTokens()
+    Public Sub SaveTokens()
 
-		My.Settings.BronzeTokens = ssh.BronzeTokens
-		My.Settings.SilverTokens = ssh.SilverTokens
-		My.Settings.GoldTokens = ssh.GoldTokens
+        My.Settings.BronzeTokens = ssh.BronzeTokens
+        My.Settings.SilverTokens = ssh.SilverTokens
+        My.Settings.GoldTokens = ssh.GoldTokens
 
-	End Sub
+    End Sub
 
 
 
@@ -16756,57 +16772,55 @@ RestartFunction:
 
 
 
-	Private Sub VideoTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles VideoTauntTimer.Tick
+    Private Sub VideoTauntTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles VideoTauntTimer.Tick
 
-		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-		If ssh.MiniScript = True Then Return
+        'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+        If ssh.MiniScript = True Then Return
 
-		If ssh.DomTyping = True Then Return
-		If ssh.DomTypeCheck = True And ssh.VideoTauntTick < 6 Then Return
-		If chatBox.Text <> "" And ssh.VideoTauntTick < 6 Then Return
-		If ChatBox2.Text <> "" And ssh.VideoTauntTick < 6 Then Return
+        If ssh.DomTyping = True Then Return
+        If ssh.DomTypeCheck = True And ssh.VideoTauntTick < 6 Then Return
+        If chatBox.Text <> "" And ssh.VideoTauntTick < 6 Then Return
+        If ChatBox2.Text <> "" And ssh.VideoTauntTick < 6 Then Return
 
-		ssh.VideoTauntTick -= 1
+        ssh.VideoTauntTick -= 1
 
 
-		If ssh.VideoTauntTick < 1 Then
+        If ssh.VideoTauntTick < 1 Then
 
-			Dim FrequencyTemp As Integer = ssh.randomizer.Next(1, 101)
-			If FrequencyTemp > FrmSettings.TauntSlider.Value * 5 Then
-				ssh.VideoTauntTick = ssh.randomizer.Next(20, 31)
-				Return
-			End If
+            Dim FrequencyTemp As Integer = ssh.randomizer.Next(1, 101)
+            If FrequencyTemp > FrmSettings.TauntSlider.Value * 5 Then
+                ssh.VideoTauntTick = ssh.randomizer.Next(20, 31)
+                Return
+            End If
 
-			Dim VTDir As String
+            Dim VTDir As String
 
-			If ssh.RLGLGame = True Then VTDir = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Taunts.txt"
-			'TODO: Prevent File.Exits() with String.Empty
-			If Not File.Exists(VTDir) Then Return
+            If ssh.RLGLGame = True Then VTDir = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Video\Red Light Green Light\Taunts.txt"
+            'TODO: Prevent File.Exits() with String.Empty
+            If Not File.Exists(VTDir) Then Return
 
-			' Read all lines of the given file.
-			Dim VTList As List(Of String) = Txt2List(VTDir)
+            ' Read all lines of the given file.
+            Dim VTList As List(Of String) = Txt2List(VTDir)
 
-			Try
-				VTList = FilterList(VTList)
-				If VTList.Count < 1 Then Return
-				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
-			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
-							   VTDir, ex, "VideoTaunTimer.Tick")
+            Try
+                VTList = FilterList(VTList)
+                If VTList.Count < 1 Then Return
+                ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
+            Catch ex As Exception
+                Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+                      VTDir, ex, "VideoTaunTimer.Tick")
                 ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file: " & VTDir
-			End Try
+            End Try
 
-			TypingDelayGeneric()
-
-
-
-			ssh.VideoTauntTick = ssh.randomizer.Next(20, 31)
+            TypingDelayGeneric()
 
 
-		End If
+
+            ssh.VideoTauntTick = ssh.randomizer.Next(20, 31)
 
 
+        End If
 
 
 
@@ -16814,23 +16828,25 @@ RestartFunction:
 
 
 
-	End Sub
-
-	Private Sub TeaseTimer_Tick(sender As System.Object, e As System.EventArgs) Handles TeaseTimer.Tick
 
 
-		FrmSettings.LBLDebugTeaseTime.Text = ssh.TeaseTick
-		'Debug.Print("TeaseTick = " & TeaseTick)
+    End Sub
 
-		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
-
-		ssh.TeaseTick -= 1
-
-		If ssh.TeaseTick < 1 Then TeaseTimer.Stop()
+    Private Sub TeaseTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TeaseTimer.Tick
 
 
+        FrmSettings.LBLDebugTeaseTime.Text = ssh.TeaseTick
+        'Debug.Print("TeaseTick = " & TeaseTick)
 
-	End Sub
+        If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then Return
+
+        ssh.TeaseTick -= 1
+
+        If ssh.TeaseTick < 1 Then TeaseTimer.Stop()
+
+
+
+    End Sub
 
 	Public Sub RLGLTauntTimer_Tick(sender As System.Object, e As System.EventArgs) Handles RLGLTauntTimer.Tick
 		'TODO: Merge redundant code: VideoTauntTimer_Tick, RLGLTauntTimer_Tick, AvoidTheEdgeTaunts_Tick

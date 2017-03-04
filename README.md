@@ -10,7 +10,10 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 
 * Added Features:
 	* Added "Output Error Message to Chat Window" option to Misc Settings. Whereever possible, Error messages that are sent to the Errorlogs will be displayed in the chat window as well. Certain error messages that were already displayed to the chat window now have adsditional details. 
-		
+
+* Bugfixes:
+    * The System Keyword #RandomSlideshowCategory should now work as intended.
+	
 * Miscellaneous:
     * The background timer for the length of the tease session will now pause when the Settings window is open and the "Pause Program When Settings Menu is Visible" option is checked (pepsifreak)
 	
