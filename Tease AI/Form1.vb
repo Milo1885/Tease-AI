@@ -8220,7 +8220,12 @@ StatusUpdateEnd:
             If FrmSettings.CBICaptions.Checked = True Then RanCat.Add("Captions")
             If FrmSettings.CBIGeneral.Checked = True Then RanCat.Add("General")
 
-            StringClean = StringClean.Replace("#RandomSlideshowCategory", RanCat(ssh.randomizer.Next(0, RanCat.Count)))
+            If RanCat.Count < 1 Then
+                ChatAddSystemMessage("ERROR: #RandomSlideshowCategory called but no local images have been set.")
+            Else
+                StringClean = StringClean.Replace("#RandomSlideshowCategory", RanCat(ssh.randomizer.Next(0, RanCat.Count)))
+            End If
+
         End If
 
 
