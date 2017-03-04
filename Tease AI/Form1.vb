@@ -3465,7 +3465,7 @@ FoundState:
 		Catch ex As Exception
 			Log.WriteError("Tease AI did not return a valid Response line from file: " &
 						   ssh.ResponseFile, ex, "ReponseClean(String)")
-			CleanResponse = "ERROR: Tease AI did not return a valid Response line"
+            CleanResponse = "ERROR: Tease AI did not return a valid Response line from file: " & ssh.ResponseFile
 		End Try
 
 
@@ -3922,7 +3922,7 @@ AcceptAnswer:
 		Catch ex As Exception
 			Log.WriteError("Tease AI did not return a valid @CBTBalls line from file: " &
 						   File2Read, ex, "CBTBalls()")
-			ssh.DomTask = "ERROR: Tease AI did not return a valid @CBTBalls line"
+            ssh.DomTask = "ERROR: Tease AI did not return a valid @CBTBalls line from file: " & File2Read
 		End Try
 
 		ssh.CBTBallsFirst = False
@@ -3950,7 +3950,7 @@ AcceptAnswer:
 		Catch ex As Exception
 			Log.WriteError("Tease AI did not return a valid @CBTCock line from file: " &
 						   File2Read, ex, "CBTCock()")
-			ssh.DomTask = "ERROR: Tease AI did not return a valid @CBTCock line"
+            ssh.DomTask = "ERROR: Tease AI did not return a valid @CBTCock line from file: " & File2Read
 		End Try
 
 		ssh.CBTCockFirst = False
@@ -3991,7 +3991,7 @@ AcceptAnswer:
 		Catch ex As Exception
 			Log.WriteError("Tease AI did not return a valid @CBT line from file: " &
 						   File2Read, ex, "CBTBoth()")
-			ssh.DomTask = "ERROR: Tease AI did not return a valid @CBT line"
+            ssh.DomTask = "ERROR: Tease AI did not return a valid @CBT line from file: " & File2Read
 		End Try
 
 		ssh.CBTBothFirst = False
@@ -4015,8 +4015,8 @@ AcceptAnswer:
 			CustomList = FilterList(CustomList)
 			ssh.DomTask = CustomList(ssh.randomizer.Next(0, CustomList.Count))
 		Catch ex As Exception
-			Log.WriteError("Tease AI did not return a valid Custom Taks line from file: " & File2Read, ex, "RunCustomTask()")
-			ssh.DomTask = "ERROR: Tease AI did not return a valid Custom Task line"
+            Log.WriteError("Tease AI did not return a valid Custom Task line from file: " & File2Read, ex, "RunCustomTask()")
+            ssh.DomTask = "ERROR: Tease AI did not return a valid Custom Task line from file: " & File2Read
 		End Try
 
 		ssh.CustomTaskFirst = False
@@ -4768,7 +4768,8 @@ SkipGotoSearch:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """")
+            Log.WriteError(ex.Message, ex, "Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "::: Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """</font>", False)
 			Throw
 		End Try
 
@@ -5425,13 +5426,16 @@ DommeSlideshowFallback:
 				Catch ex As Exception When ContactToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
 					ContactToUse = Nothing
-					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
-								   ex, "Display Image")
+                    Log.WriteError("Error occurred while displaying image. Performing Fallback.",
+                          ex, "Display Image")
+                    If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
+                    ChatAddSystemMessage(ex.ToString, False)
 					GoTo DommeSlideshowFallback
 				Catch ex As Exception
 					'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
-					Log.WriteError("Error occurred while displaying image. Fallback Failed.",
-								   ex, "Display Image")
+                    Log.WriteError("Error occurred while displaying image. Fallback Failed.",
+                          ex, "Display Image")
+                    If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 					ClearMainPictureBox()
 				Finally
 					ssh.DommeImageSTR = ""
@@ -6125,13 +6129,15 @@ DommeSlideshowFallback:
 				Catch ex As Exception When ContactToUse IsNot ssh.SlideshowMain
 					'@@@@@@@@@@@@@@ Exception - Try Fallback @@@@@@@@@@@@@@@@@@
 					ContactToUse = Nothing
-					Log.WriteError("Error occurred while displaying image. Performing Fallback.",
-									ex, "Display Image")
+                    Log.WriteError("Error occurred while displaying image. Performing Fallback.",
+                        ex, "Display Image")
+                    If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 					GoTo DommeSlideshowFallback
 				Catch ex As Exception
 					'@@@@@@@@@@@@@@@@@@@@@@@ Exception @@@@@@@@@@@@@@@@@@@@@@@@
-					Log.WriteError("Error occurred while displaying image. Fallback Failed.",
-									ex, "Display Image")
+                    Log.WriteError("Error occurred while displaying image. Fallback Failed.",
+                        ex, "Display Image")
+                    If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 					ClearMainPictureBox()
 				Finally
 					ssh.DommeImageSTR = ""
@@ -6550,7 +6556,8 @@ Retry:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Move in slideshow Failed")
+            Log.WriteError(ex.Message, ex, "Move in slideshow Failed")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 			MessageBox.Show(ex.Message, "Move in Slideshow failed", MessageBoxButtons.OK, MessageBoxIcon.Error)
 		End Try
 	End Sub
@@ -6788,7 +6795,7 @@ Retry:
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Taunt from file: " &
 									   ssh.TauntText, ex, "StrokeTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Taunt"
+                ssh.DomTask = "ERROR: Tease AI did not return a valid Taunt from file: " & ssh.TauntText
 			End Try
 
 
@@ -6842,10 +6849,10 @@ Retry:
 			End If
 
 		Catch ex As Exception
-			ssh.DomTask = ex.Message
-			Log.WriteError(ex.Message, ex, "CBTScript()")
-		Finally
-			TypingDelayGeneric()
+            ssh.DomTask = ex.Message
+            Log.WriteError(ex.Message, ex, "CBTScript()")
+        Finally
+            TypingDelayGeneric()
 		End Try
 	End Sub
 
@@ -7236,7 +7243,7 @@ CensorConstant:
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Censorship Sucks line from file: " &
 							   CensorVideo, ex, "CensorshipTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Censorship Sucks line"
+                ssh.DomTask = "ERROR: Tease AI did not return a valid Censorship Sucks line from file: " & CensorVideo
 			End Try
 
 			TypingDelayGeneric()
@@ -7290,7 +7297,7 @@ CensorConstant:
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid RLGL line from file: " &
 							   file2read, ex, "RLGLTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid RLGL line"
+                ssh.DomTask = "ERROR: Tease AI did not return a valid RLGL line from file: " & file2read
 			End Try
 
 			TypingDelayGeneric()
@@ -8534,8 +8541,9 @@ RinseLatherRepeat:
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 					'                   All Errors
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-					Log.WriteError("Command @DeleteLocalImage was unable to delete the image.",
-								   ex, "@DeleteLocalImage failed")
+                    Log.WriteError("Command @DeleteLocalImage was unable to delete the image.",
+                          ex, "@DeleteLocalImage failed")
+                    If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 				End Try
 			End If
 			StringClean = StringClean.Replace("@DeleteLocalImage", "")
@@ -8552,8 +8560,9 @@ RinseLatherRepeat:
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 					'                   All Errors
 					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-					Log.WriteError("Command @DeleteImage was unable to delete the image.",
-								   ex, "@DeleteImage failed")
+                    Log.WriteError("Command @DeleteImage was unable to delete the image.",
+                          ex, "@DeleteImage failed")
+                    If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
 				End Try
 			End If
 			StringClean = StringClean.Replace("@DeleteImage", "")
@@ -8890,7 +8899,8 @@ ShowedBlogImage:
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Log.WriteError("Command @ShowImage[] was unable to display the image.",
 				   ex, "Error at @ShowImage[]")
-				MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error at @ShowImage[]")
+                'MsgBox(ex.Message, MsgBoxStyle.Exclamation, "Error at @ShowImage[]")
+                If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error at @ShowImage[]</font>", False)
 			End Try
 			StringClean = StringClean.Replace("@ShowImage[" & GetParentheses(StringClean, "@ShowImage[") & "]", "")
 		End If
@@ -8922,8 +8932,9 @@ ShowedBlogImage:
 
 				TnASlides.Start()
 			Catch ex As Exception
-				Log.WriteError("Unable to start TnA Slideshow: " & vbCrLf &
-					  ex.Message, ex, "CommandClean()")
+                Log.WriteError("Unable to start TnA Slideshow: " & vbCrLf &
+                   ex.Message, ex, "CommandClean()")
+                If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Unable to start TnA Slideshow</font>", False)
 			End Try
 
 			StringClean = StringClean.Replace("@TnAFastSlides", "")
@@ -9091,7 +9102,8 @@ ShowedBlogImage:
 				GetGoto()
 			Else
 				Dim lazytext As String = "@GotoSlideshow can't determine the current CustomSlideshow image. Please make sure to start it before using @GotoSlideshow."
-				Log.WriteError(lazytext, New NullReferenceException(lazytext), "@GotoSlideshow")
+                Log.WriteError(lazytext, New NullReferenceException(lazytext), "@GotoSlideshow")
+                If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: @GotoSlideshow can't determine the current CustomSlideshow image. Please make sure to start it before using @GotoSlideshow</font>", False)
 			End If
 
 			StringClean = StringClean.Replace("@GotoSlideshow", "")
@@ -13854,7 +13866,8 @@ VTSkip:
 		' To Avoid DivideByZeroException 
 		If ListIncrement <= 0 Then
 			Dim lazyText As String = "FilterList Started With LineGroupingValue """ & ListIncrement & """. "
-			Log.WriteError(lazyText, New ArgumentOutOfRangeException(lazyText), "FilterList Cancelled")
+            Log.WriteError(lazyText, New ArgumentOutOfRangeException(lazyText), "FilterList Cancelled")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & lazyText & "</font>", False)
 			Return ListClean
 		End If
 
@@ -14459,8 +14472,9 @@ VTSkip:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             '                                            All Errors
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            Log.WriteError(String.Format("Exceoption occured while checking line ""{0}"".", OrgFilterString),
+            Log.WriteError(String.Format("Exception occured while checking line ""{0}"".", OrgFilterString),
                     ex, "GetFilter(String, Boolean)")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
             Return False
         End Try
 	End Function
@@ -15539,7 +15553,7 @@ NoPlaylistEndFile:
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Edge Taunt from file: " &
 							   File2Read, ex, "EdgeTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Edge Taunt"
+                ssh.DomTask = "ERROR: Tease AI did not return a valid Edge Taunt from file: " & File2Read
 			End Try
 
 			TypingDelayGeneric()
@@ -15908,7 +15922,7 @@ NoRepeatOFiles:
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Hold the Edge Taunt from file: " &
 							   File2Read, ex, "HoldEdgeTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Hold the Edge Taunt"
+                ssh.DomTask = "ERROR: Tease AI did not return a valid Hold the Edge Taunt from file: " & File2Read
 			End Try
 
 			TypingDelayGeneric()
@@ -16361,7 +16375,8 @@ RestartFunction:
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			TnASlides.Stop()
-			Log.WriteError(ex.Message & vbCrLf & "TnA Slideshow will stop.", ex, "Exception in TnASlieds.Tick occured")
+            Log.WriteError(ex.Message & vbCrLf & "TnA Slideshow will stop.", ex, "Exception in TnASlides.Tick occured")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Exception in TnASlides.Tick occured</font>", False)
 		End Try
 	End Sub
 
@@ -16779,7 +16794,7 @@ RestartFunction:
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
 							   VTDir, ex, "VideoTaunTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
+                ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file: " & VTDir
 			End Try
 
 			TypingDelayGeneric()
@@ -16854,7 +16869,7 @@ RestartFunction:
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
 							   VTDir, ex, "RLGLTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
+                ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file: " & VTDir
 			End Try
 			TypingDelayGeneric()
 
@@ -16907,7 +16922,7 @@ RestartFunction:
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
 							   VTDir, ex, "AvoidTheEdgeTaunts.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt"
+                ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file: " & VTDir
 			End Try
 			TypingDelayGeneric()
 
@@ -20825,7 +20840,6 @@ playLoop:
         Return SubstringCount
 
     End Function
-
 
 
 End Class

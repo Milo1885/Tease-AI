@@ -6,6 +6,15 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: initialized in v0.54.5.1
 	
+# Changelog - Patch 54.8.0
+
+* Added Features:
+	* Added "Output Error Message to Chat Window" option to Misc Settings. Whereever possible, Error messages that are sent to the Errorlogs will be displayed in the chat window as well. Certain error messages that were already displayed to the chat window now have adsditional details. 
+		
+* Miscellaneous:
+    * The background timer for the length of the tease session will now pause when the Settings window is open and the "Pause Program When Settings Menu is Visible" option is checked (pepsifreak)
+	
+	
 # Changelog - Patch 54.7.0
 
 * Added Features:

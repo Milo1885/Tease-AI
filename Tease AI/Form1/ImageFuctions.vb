@@ -131,8 +131,9 @@ Partial Class Form1
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				'                                            All Errors
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-				Log.WriteError("Failed to fetch ImageList for genre." & Name.ToString & " : " & ex.Message, ex,
-							   "Excetion at: " & Name.ToString & ".ToList()")
+                Log.WriteError("Failed to fetch ImageList for genre." & Name.ToString & " : " & ex.Message, ex,
+                      "Exception at: " & Name.ToString & ".ToList()")
+                If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Failed to fetch Imagelist for genre. See Errorlogs for more information.</font>", False)
 				Return New List(Of String)
 			End Try
 			Return rtnList
@@ -199,7 +200,8 @@ Partial Class Form1
 
 						rtnList.AddRange(addlist)
 					Catch ex As Exception
-						Log.WriteError(ex.Message, ex, "Error occured while loading Likelist")
+                        Log.WriteError(ex.Message, ex, "Error occured while loading Likelist")
+                        If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error occurred while loading Likelist</font>", False)
 						GoTo exitEmpty
 					End Try
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -219,7 +221,8 @@ Partial Class Form1
 
 						rtnList.AddRange(addlist)
 					Catch ex As Exception
-						Log.WriteError(ex.Message, ex, "Error occured while loading Dislikelist")
+                        Log.WriteError(ex.Message, ex, "Error occured while loading Dislikelist")
+                        If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error occurred while loading Dislikelist</font>", False)
 						GoTo exitEmpty
 					End Try
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -272,8 +275,9 @@ Partial Class Form1
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				'                                            All Errors
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-				Log.WriteError("Failed to fetch ImageList for genre." & Name.ToString & " and Source." & Type.ToString & " : " & ex.Message, ex,
-							   "Excetion at: " & Name.ToString & ".ToList(" & Type.ToString & ")")
+                Log.WriteError("Failed to fetch ImageList for genre." & Name.ToString & " and Source." & Type.ToString & " : " & ex.Message, ex,
+                      "Exception at: " & Name.ToString & ".ToList(" & Type.ToString & ")")
+                If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Failed to fetch Imagelist. See Errorlogs for more information.</font>", False)
 				Return New List(Of String)
 			End Try
 exitEmpty:
@@ -300,7 +304,8 @@ exitEmpty:
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				'						       All Errors
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-				Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while choosing a random Image.")
+                Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while choosing a random Image.")
+                If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error while choosing a random Image.</font>", False)
 			End Try
 NoneFound:
 			' Return the Error-Image FilePath
@@ -330,7 +335,8 @@ NoneFound:
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				'						       All Errors
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-				Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while choosing a random Image.")
+                Log.WriteError(ex.Message & vbCrLf & ToString(), ex, "Error while choosing a random Image.")
+                If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error while choosing a random Image.</font>", False)
 			End Try
 NoneFound:
 			' Return an Error-Image FilePath
@@ -621,12 +627,14 @@ NoNeFound:
 			' ===================== NULL Reference =======================
 			FetchContainer.ImageLocation = pathImageErrorOnLoading
 			Dim lazyText As String = "The given imagepath was NULL."
-			Log.WriteError(lazyText, New ArgumentNullException(lazyText), "ShowImage with no valid imagepath.")
+            Log.WriteError(lazyText, New ArgumentNullException(lazyText), "ShowImage with no valid imagepath.")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & lazyText & " :::: ShowImage with no valid imagepath.</font>", False)
 		ElseIf ImageToShow = "" Then
 			' ====================== String.Empty ========================
 			FetchContainer.ImageLocation = pathImageErrorOnLoading
 			Dim lazyText As String = "The given imagepath was empty."
-			Log.WriteError(lazyText, New ArgumentException(lazyText), "ShowImage with no valid imagepath.")
+            Log.WriteError(lazyText, New ArgumentException(lazyText), "ShowImage with no valid imagepath.")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & lazyText & " :::: ShowImage with no valid imagepath.</font>", False)
 		Else
 			' ======================== All fine ==========================
 			FetchContainer.ImageLocation = ImageToShow
@@ -643,8 +651,9 @@ NoNeFound:
 		Try
 			If WaitToFinish Then BWimageFetcher.WaitToFinish()
 		Catch ex As Exception
-			Log.WriteError("Error occurred while displaying image. Fallback Failed.",
-							 ex, "ShowImage(String, Boolean)")
+            Log.WriteError("Error occurred while displaying image. Fallback Failed.",
+                 ex, "ShowImage(String, Boolean)")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error occurred while displaying image. Fallback failed.</font>", False)
 		End Try
 
 	End Sub
@@ -749,17 +758,19 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 				'										All Errors - !first! time
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Debug.Print("ImageFetch - DoWork - 1st Exception perfomaing fallback")
-				Log.WriteError("Error loading Image: """ & .ImageLocation & """", ex,
-						"Error loading image. Performing fallback to errorimage.")
-				.ImageLocation = errorimagepath
+                Log.WriteError("Error loading Image: """ & .ImageLocation & """", ex,
+                  "Error loading image. Performing fallback to errorimage.")
+                If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error loading image: " & .ImageLocation & "</font>", False)
+                .ImageLocation = errorimagepath
 				GoTo retryLocal
 			Catch ex As Exception
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				'										All Errors - 2nd time
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				Debug.Print("ImageFetch - DoWork - 2nd Exception - fallback failed.")
-				Log.WriteError("Fallback to errorimage """ & .ImageLocation & """ failed ",
-						ex, "Error loading image")
+                Log.WriteError("Fallback to errorimage """ & .ImageLocation & """ failed ",
+                  ex, "Error loading image")
+                If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Fallback to errorimage """ & .ImageLocation & """ failed </font>", False)
 			End Try
 		End With
 
@@ -827,8 +838,9 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                     All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError("An Exception occurred while displaying image: " & vbCrLf & ex.Message,
-					 ex, "Error Displaying image.")
+            Log.WriteError("An Exception occurred while displaying image: " & vbCrLf & ex.Message,
+               ex, "Error Displaying image.")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: An exception occurred while displaying image</font>", False)
 		End Try
 	End Sub
 
@@ -908,8 +920,9 @@ retryLocal: ' If an exception occures the function is restarted and the Errorima
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError("Unable to set image in MainPictureBox: " & ex.Message,
-								ex, "MainPictureboxSetImage")
+            Log.WriteError("Unable to set image in MainPictureBox: " & ex.Message,
+                 ex, "MainPictureboxSetImage")
+            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Unable to set image in MainPictureBox</font>", False)
 		End Try
 	End Sub
 

@@ -94,7 +94,8 @@ Public Class Common
 
 			FswChache.Add(tmpString, tmpFsw)
 		Catch ex As Exception
-			Log.WriteError("TxtCache: Unable to Create FileSystemWatcher for:" & Filepath, ex, "TxtCache Create FileSystemWatcher")
+            Log.WriteError("TxtCache: Unable to Create FileSystemWatcher for:" & Filepath, ex, "TxtCache Create FileSystemWatcher")
+            If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Unable to Create FileSystemWatcher for: " & Filepath & ".</font>", False)
 		End Try
 	End Sub
 
@@ -189,7 +190,8 @@ Public Class Common
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'						       All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Error loading TextFile: """ & GetText & """")
+            Log.WriteError(ex.Message, ex, "Error loading TextFile: """ & GetText & """")
+            If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error loading TextFile: " & GetText & "</font>", False)
 		End Try
 		Return New List(Of String)
 	End Function
@@ -228,7 +230,8 @@ Public Class Common
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'						       All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Error loading TextLine:  " & GetText)
+            Log.WriteError(ex.Message, ex, "Error loading TextLine:  " & GetText)
+            If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error loading TextLine: " & GetText & "</font>", False)
 		End Try
 		Return ""
 	End Function
@@ -266,8 +269,9 @@ Public Class Common
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'						       All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError(ex.Message, ex, "Error removing TextLine: """ & Searchpattern &
-						   """ from file """ & Filepath & """")
+            Log.WriteError(ex.Message, ex, "Error removing TextLine: """ & Searchpattern &
+                  """ from file """ & Filepath & """")
+            If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error removing TextLine: " & Searchpattern & " from file: " & Filepath & "</font>", False)
 			Return 0
 		End Try
 	End Function
@@ -380,7 +384,8 @@ Public Class Common
 			'                               All Errors - But image was loaded so return it.
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			Debug.Print("Exception while saving image: """ & uri & "")
-			Log.WriteError("Exception while saving image:  """ & uri & "", ex, "Exception while saving image")
+            Log.WriteError("Exception while saving image:  """ & uri & "", ex, "Exception while saving image")
+            If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Exception while saving image: " & uri & "</font>", False)
 			Return rtnImage
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨

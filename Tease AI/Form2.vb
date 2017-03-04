@@ -415,6 +415,7 @@ Public Class FrmSettings
         degradingCheckBox.Checked = My.Settings.DomDegrading
         CFNMCheckBox.Checked = My.Settings.DomCFNM
         CBRandomDomme.Checked = My.Settings.CBRandomDomme
+        CBOutputErrors.Checked = My.Settings.CBOutputErrors
         giveupCheckBox.Checked = My.Settings.GiveUpReturn
 		If CBAuditStartup.Checked = True Then AuditScripts()
 
@@ -10372,5 +10373,9 @@ checkFolder:
     Private Sub BTNDomChangeContact3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact3.Click
         Ssh.glitterDommeNumber = 3
         Form1.LoadDommeImageFolder()
+    End Sub
+
+    Private Sub CBOutputErrors_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CBOutputErrors.LostFocus
+        My.Settings.CBOutputErrors = CBOutputErrors.Checked
     End Sub
 End Class

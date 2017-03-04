@@ -528,7 +528,8 @@ SetForwardImage:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			Log.WriteError("Exception in GetDommeImage()", ex, "")
+            Log.WriteError("Exception in GetDommeImage()", ex, "")
+            If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Exception in GetDommeImage().</font>", False)
 		Finally
 			'⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑ Finally ⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑⚑
 #If TRACE Then
@@ -706,7 +707,8 @@ redo:
 			ApplyTextedTags = ApplyTextedTags.Replace("#Tag", "")
 
 		Catch ex As Exception
-			Log.WriteError(ex.Message, ex, "ApplyTextedTags(String)")
+            Log.WriteError(ex.Message, ex, "ApplyTextedTags(String)")
+            If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: ApplyTextedTags(String).</font>", False)
 		End Try
 
 	End Function

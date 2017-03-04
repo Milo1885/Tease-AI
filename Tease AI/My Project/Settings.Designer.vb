@@ -5795,6 +5795,18 @@ Namespace My
                 Me("CBRandomDomme") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBOutputErrors() As Boolean
+            Get
+                Return CType(Me("CBOutputErrors"),Boolean)
+            End Get
+            Set
+                Me("CBOutputErrors") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
