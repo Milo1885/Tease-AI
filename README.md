@@ -11,7 +11,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 * Added Features:
 	* Added "Output Error Message to Chat Window" option to Misc Settings. Whereever possible, Error messages that are sent to the Errorlogs will be displayed in the chat window as well. Certain error messages that were already displayed to the chat window now have adsditional details. 
 	
-	*Added @SecondSession command to force the Orgasm/Ruin/Denial Continue interrupt scripts if the user has the option "X always ends tease" unchecked when the current session ends, thus starting a second session.
+	* Added @SecondSession command to force the Orgasm/Ruin/Denial Continue interrupt scripts if the user has the option "X always ends tease" unchecked when the current session ends, thus starting a second session.
 
 * Bugfixes:
     * The System Keyword #RandomSlideshowCategory should now work as intended.
