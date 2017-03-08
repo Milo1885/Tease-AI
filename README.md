@@ -9,6 +9,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 # Changelog - Patch 54.8.0
 
 * Added Features:
+	* Added "Change URL File Servers" function to Maintenance options in thhe Miscellaneous Settings tab. This will replace the specified "Replace" string with the specified "With" string in an URL Files, as well as Liked and Disliked Image URLs. You should only use numbers in these text fields, as Tease AI will automatically add ".media" to avoid changing file names instead of just the server. So if you enter 41 in the Replace box, and 40 in the With box, all URLS in all URL Files that start with "41.media.tumblr.com" will be replaced with "40.media.tumblr.com". After a little testing, I was able to get rid of every "Error Loading Image" error I was getting by changing 41 to 40, 67 to 68, 65 to 66 and 36 to 37.     
+	
 	* Added "Output Error Message to Chat Window" option to Misc Settings. Whereever possible, Error messages that are sent to the Errorlogs will be displayed in the chat window as well. Certain error messages that were already displayed to the chat window now have adsditional details. 
 
 * Bugfixes:

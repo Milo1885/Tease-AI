@@ -10378,4 +10378,115 @@ checkFolder:
     Private Sub CBOutputErrors_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CBOutputErrors.LostFocus
         My.Settings.CBOutputErrors = CBOutputErrors.Checked
     End Sub
+
+    Private Sub BTNURLFileReplace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNURLFileReplace.Click
+
+        If TBURLFileReplace.Text = "" Or TBURLFileWith.Text = "" Then
+            MessageBox.Show("Please enter the text to be replaced!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            Exit Sub
+        End If
+
+        Dim ReplaceCount As Integer = 0
+
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\URL Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+
+            
+            Dim CheckFiles As String() = File.ReadAllLines(foundFile)
+
+            Dim GoodLines As New List(Of String)
+
+            For Each line As String In CheckFiles
+                If line.Contains(TBURLFileReplace.Text & ".media") Then
+                    line = line.Replace(TBURLFileReplace.Text & ".media", TBURLFileWith.Text & ".media")
+                    ReplaceCount += 1
+                    GoodLines.Add(line)
+                Else
+                    GoodLines.Add(line)
+                End If
+            Next
+
+            Dim fs As New FileStream(foundFile, FileMode.Create)
+            Dim sw As New StreamWriter(fs)
+
+
+            For i As Integer = 0 To GoodLines.Count - 1
+                If i <> GoodLines.Count - 1 Then
+                    sw.WriteLine(GoodLines(i))
+                Else
+                    sw.Write(GoodLines(i))
+                End If
+            Next
+
+            sw.Close()
+            sw.Dispose()
+
+            fs.Close()
+            fs.Dispose()
+
+
+        Next
+
+
+        If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
+            Dim CheckFiles As String() = File.ReadAllLines(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
+            Dim GoodLines As New List(Of String)
+            For Each line As String In CheckFiles
+                If line.Contains(TBURLFileReplace.Text & ".media") Then
+                    line = line.Replace(TBURLFileReplace.Text & ".media", TBURLFileWith.Text & ".media")
+                    ReplaceCount += 1
+                    GoodLines.Add(line)
+                Else
+                    GoodLines.Add(line)
+                End If
+            Next
+            Dim fs As New FileStream(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FileMode.Create)
+            Dim sw As New StreamWriter(fs)
+            For i As Integer = 0 To GoodLines.Count - 1
+                If i <> GoodLines.Count - 1 Then
+                    sw.WriteLine(GoodLines(i))
+                Else
+                    sw.Write(GoodLines(i))
+                End If
+            Next
+            sw.Close()
+            sw.Dispose()
+            fs.Close()
+            fs.Dispose()
+        End If
+
+        If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
+            Dim CheckFiles As String() = File.ReadAllLines(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
+            Dim GoodLines As New List(Of String)
+            For Each line As String In CheckFiles
+                If line.Contains(TBURLFileReplace.Text & ".media") Then
+                    line = line.Replace(TBURLFileReplace.Text & ".media", TBURLFileWith.Text & ".media")
+                    ReplaceCount += 1
+                    GoodLines.Add(line)
+                Else
+                    GoodLines.Add(line)
+                End If
+            Next
+            Dim fs As New FileStream(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FileMode.Create)
+            Dim sw As New StreamWriter(fs)
+            For i As Integer = 0 To GoodLines.Count - 1
+                If i <> GoodLines.Count - 1 Then
+                    sw.WriteLine(GoodLines(i))
+                Else
+                    sw.Write(GoodLines(i))
+                End If
+            Next
+            sw.Close()
+            sw.Dispose()
+            fs.Close()
+            fs.Dispose()
+        End If
+        
+
+
+
+        MessageBox.Show("All URL File servers have been successfully replaced!" & Environment.NewLine & Environment.NewLine & ReplaceCount & " image locations have been changed.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+
+    End Sub
 End Class
