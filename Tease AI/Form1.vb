@@ -7324,16 +7324,16 @@ CensorConstant:
 
 		If ssh.UpdateStage > 0 Then GoTo StatusUpdateBegin
 
-		ssh.StatusText = ssh.UpdateList(ssh.randomizer.Next(0, ssh.UpdateList.Count))
+		Dim StatusFile = ssh.UpdateList(ssh.randomizer.Next(0, ssh.UpdateList.Count))
 
 		For i As Integer = 0 To ssh.UpdateList.Count - 1
 			Debug.Print(i & ". " & ssh.UpdateList(i))
 		Next
-		Debug.Print("STatusText = " & ssh.StatusText)
+		Debug.Print("STatusText = " & StatusFile)
 		Debug.Print("Clear stage 1")
 
 		' Read all lines of the given File.
-		Dim lines As List(Of String) = Txt2List(ssh.StatusText)
+		Dim lines As List(Of String) = Txt2List(StatusFile)
 
 
 		For i As Integer = lines.Count - 1 To 0 Step -1
@@ -7390,6 +7390,7 @@ CensorConstant:
 		Debug.Print("Clear Stage 2")
 
 
+		Dim LoopCounter As Integer = 0
 
 
 		Dim StatusLines1 As New List(Of String)
@@ -7429,8 +7430,15 @@ CensorConstant:
 
 		Do
 			ssh.StatusText2 = StatusLines2(ssh.randomizer.Next(0, StatusLines2.Count))
-		Loop Until ssh.StatusText2 <> ssh.StatusText1
+			LoopCounter += 1
+		Loop Until ssh.StatusText2 <> ssh.StatusText1 Or LoopCounter = 10
 
+		If LoopCounter = 10 Then
+			ssh.StatusText2 = "ERROR: Tease AI could not return a unique comment"
+			Dim StatusError = "Tease AI could not return a unique comment for Contact2 in file: " & StatusFile
+			Trace.WriteLine(StatusError)
+			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & StatusError & "</font>", False)
+		End If
 
 		Dim StatusLines3 As New List(Of String)
 		For i As Integer = 1 To lines.Count - 1
@@ -7446,9 +7454,19 @@ CensorConstant:
 
 		StatusLines3 = StatusClean(StatusLines3)
 
+		LoopCounter = 0
+
 		Do
 			ssh.StatusText3 = StatusLines3(ssh.randomizer.Next(0, StatusLines3.Count))
-		Loop Until ssh.StatusText3 <> ssh.StatusText2 And ssh.StatusText3 <> ssh.StatusText1
+			LoopCounter += 1
+		Loop Until ssh.StatusText3 <> ssh.StatusText2 And ssh.StatusText3 <> ssh.StatusText1 Or LoopCounter = 10
+
+		If LoopCounter = 10 Then
+			ssh.StatusText3 = "ERROR: Tease AI could not return a unique comment"
+			Dim StatusError = "Tease AI could not return a unique comment for Contact3 in file: " & StatusFile
+			Trace.WriteLine(StatusError)
+			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & StatusError & "</font>", False)
+		End If
 
 		''Debug.Print("StatusLine = " & StatusLine)
 
