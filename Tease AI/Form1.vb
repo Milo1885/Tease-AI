@@ -2194,7 +2194,8 @@ WritingTaskLine:
 
 							Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-							If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Then
+							If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
+								ssh.SecondSession = False
 								ssh.SubEdging = False
 								ssh.SubStroking = False
 								EdgeTauntTimer.Stop()
@@ -2274,8 +2275,9 @@ RuinedOrgasm:
 
 					Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-					If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Then
+					If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
 
+						ssh.SecondSession = False
 						ssh.SubEdging = False
 						ssh.SubStroking = False
 						ssh.EdgeToRuin = False
@@ -2394,7 +2396,8 @@ NoNoCumFiles:
 
 					Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-					If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Then
+					If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
+						ssh.SecondSession = False
 						ssh.SubEdging = False
 						ssh.SubStroking = False
 						EdgeTauntTimer.Stop()
@@ -15686,43 +15689,44 @@ NoPlaylistEndFile:
 
                     Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-                    If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Then
-                        ssh.SubEdging = False
-                        ssh.SubStroking = False
-                        EdgeTauntTimer.Stop()
+					If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
+						ssh.SecondSession = False
+						ssh.SubEdging = False
+						ssh.SubStroking = False
+						EdgeTauntTimer.Stop()
 
-                        Dim RepeatList As New List(Of String)
+						Dim RepeatList As New List(Of String)
 
-                        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Denial Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-                            RepeatList.Add(foundFile)
-                        Next
+						For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Denial Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+							RepeatList.Add(foundFile)
+						Next
 
-                        If RepeatList.Count < 1 Then GoTo NoRepeatFiles
+						If RepeatList.Count < 1 Then GoTo NoRepeatFiles
 
-                        If FrmSettings.CBTeaseLengthDD.Checked = True Then
-                            If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
-                            If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
-                            If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
-                            If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
-                            If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
-                        Else
-                            ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
-                        End If
+						If FrmSettings.CBTeaseLengthDD.Checked = True Then
+							If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
+							If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
+							If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
+							If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
+							If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
+						Else
+							ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+						End If
 
-                        TeaseTimer.Start()
+						TeaseTimer.Start()
 
                         'ShowModule = True
                         ssh.StrokeTauntVal = -1
-                        ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
-                        ssh.ScriptTick = 2
-                        ScriptTimer.Start()
-                        ssh.OrgasmDenied = False
-                        ssh.OrgasmYesNo = False
-                        ssh.EndTease = False
-                        Return
-                    End If
+						ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
+						ssh.ScriptTick = 2
+						ScriptTimer.Start()
+						ssh.OrgasmDenied = False
+						ssh.OrgasmYesNo = False
+						ssh.EndTease = False
+						Return
+					End If
 
-                End If
+				End If
 
 
             End If
@@ -15759,48 +15763,49 @@ RuinedOrgasm:
 
                 Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-                If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Then
+				If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
 
-                    EdgeTauntTimer.Stop()
-                    HoldEdgeTimer.Stop()
-                    HoldEdgeTauntTimer.Stop()
-                    ssh.SubHoldingEdge = False
-                    ssh.SubStroking = False
-                    ssh.EdgeToRuin = False
-                    ssh.EdgeToRuinSecret = True
+					EdgeTauntTimer.Stop()
+					HoldEdgeTimer.Stop()
+					HoldEdgeTauntTimer.Stop()
+					ssh.SecondSession = False
+					ssh.SubHoldingEdge = False
+					ssh.SubStroking = False
+					ssh.EdgeToRuin = False
+					ssh.EdgeToRuinSecret = True
 
-                    Dim RepeatList As New List(Of String)
+					Dim RepeatList As New List(Of String)
 
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Ruin Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-                        RepeatList.Add(foundFile)
-                    Next
+					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Ruin Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+						RepeatList.Add(foundFile)
+					Next
 
-                    If RepeatList.Count < 1 Then GoTo NoRepeatRFiles
+					If RepeatList.Count < 1 Then GoTo NoRepeatRFiles
 
 
-                    If FrmSettings.CBTeaseLengthDD.Checked = True Then
-                        If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
-                        If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
-                        If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
-                        If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
-                        If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
-                    Else
-                        ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
-                    End If
-                    TeaseTimer.Start()
+					If FrmSettings.CBTeaseLengthDD.Checked = True Then
+						If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
+						If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
+						If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
+						If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
+						If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
+					Else
+						ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+					End If
+					TeaseTimer.Start()
 
                     'ShowModule = True
                     ssh.StrokeTauntVal = -1
-                    ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
-                    ssh.ScriptTick = 2
-                    ScriptTimer.Start()
-                    ssh.OrgasmRuined = False
-                    ssh.OrgasmYesNo = False
-                    ssh.EndTease = False
-                    Return
-                End If
+					ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
+					ssh.ScriptTick = 2
+					ScriptTimer.Start()
+					ssh.OrgasmRuined = False
+					ssh.OrgasmYesNo = False
+					ssh.EndTease = False
+					Return
+				End If
 
-            End If
+			End If
 
 
 
@@ -15876,48 +15881,49 @@ NoNoCumFiles:
 
                 Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-                If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Then
+				If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
 
-                    HoldEdgeTimer.Stop()
-                    HoldEdgeTauntTimer.Stop()
-                    ssh.SubHoldingEdge = False
-                    ssh.SubStroking = False
-                    ssh.EdgeToRuin = False
-                    ssh.EdgeToRuinSecret = True
-                    EdgeTauntTimer.Stop()
+					HoldEdgeTimer.Stop()
+					HoldEdgeTauntTimer.Stop()
+					ssh.SecondSession = False
+					ssh.SubHoldingEdge = False
+					ssh.SubStroking = False
+					ssh.EdgeToRuin = False
+					ssh.EdgeToRuinSecret = True
+					EdgeTauntTimer.Stop()
 
-                    Dim RepeatList As New List(Of String)
+					Dim RepeatList As New List(Of String)
 
-                    For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Orgasm Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-                        RepeatList.Add(foundFile)
-                    Next
+					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Orgasm Continue\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+						RepeatList.Add(foundFile)
+					Next
 
-                    If RepeatList.Count < 1 Then GoTo NoRepeatOFiles
+					If RepeatList.Count < 1 Then GoTo NoRepeatOFiles
 
 
-                    If FrmSettings.CBTeaseLengthDD.Checked = True Then
-                        If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
-                        If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
-                        If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
-                        If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
-                        If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
-                    Else
-                        ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
-                    End If
-                    TeaseTimer.Start()
+					If FrmSettings.CBTeaseLengthDD.Checked = True Then
+						If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
+						If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
+						If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
+						If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
+						If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
+					Else
+						ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+					End If
+					TeaseTimer.Start()
 
                     'ShowModule = True
                     ssh.StrokeTauntVal = -1
-                    ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
-                    ssh.ScriptTick = 2
-                    ScriptTimer.Start()
-                    ssh.OrgasmAllowed = False
-                    ssh.OrgasmYesNo = False
-                    ssh.EndTease = False
-                    Return
-                End If
+					ssh.FileText = RepeatList(ssh.randomizer.Next(0, RepeatList.Count))
+					ssh.ScriptTick = 2
+					ScriptTimer.Start()
+					ssh.OrgasmAllowed = False
+					ssh.OrgasmYesNo = False
+					ssh.EndTease = False
+					Return
+				End If
 
-            End If
+			End If
 
 
 

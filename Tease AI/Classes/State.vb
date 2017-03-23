@@ -550,6 +550,8 @@ Public Class SessionState
 	Public Property CameGotoLine As String
 	Public Property RuinedGotoLine As String
 
+	Public Property SecondSession As Boolean
+
 	''' <summary>
 	''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
 	''' </summary>
