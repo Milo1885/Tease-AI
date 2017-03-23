@@ -506,10 +506,11 @@ Public Class SessionState
 	Public Property WorshipMode As Boolean = False
 	Public Property WorshipTarget As String = ""
 
+	Public Property HoldTaunts As Boolean = False
 	Public Property LongHold As Boolean = False
 	Public Property ExtremeHold As Boolean = False
-	<Obsolete("LongTaunts-Member is not used right now.")>
 	Public LongTaunts As Boolean
+	Public ExtremeTaunts As Boolean
 
 
 

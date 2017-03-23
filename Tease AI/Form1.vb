@@ -10347,6 +10347,9 @@ TaskCleanSet:
 			ssh.WorshipTarget = ""
 			ssh.LongHold = False
 			ssh.ExtremeHold = False
+			ssh.HoldTaunts = False
+			ssh.LongTaunts = False
+			ssh.ExtremeTaunts = False
 			StrokeTimer.Stop()
 			StrokeTauntTimer.Stop()
 			StrokePace = 0
@@ -10456,8 +10459,10 @@ TaskCleanSet:
 				ssh.EdgeHold = True
 				ssh.ExtremeHold = True
 			End If
-			If GetMatch(StringClean, "@Edge(", "HoldTaunts") = True Then
+			If GetMatch(StringClean, "@Edge(", "HoldTaunts") = True And ssh.EdgeHold = True Then
 				If ssh.LongHold = True Then ssh.LongTaunts = True
+				If ssh.ExtremeHold = True Then ssh.ExtremeTaunts = True
+				If ssh.LongTaunts = False And ssh.ExtremeTaunts = False Then ssh.HoldTaunts = True
 			End If
 
 		End If
@@ -14476,7 +14481,19 @@ VTSkip:
 
             If FilterString.Contains("@ExtremeHold") Then
                 If ssh.ExtremeHold = False Or ssh.SubHoldingEdge = False Then Return False
-            End If
+			End If
+
+			If FilterString.Contains("@HoldTaunt") Then
+				If ssh.HoldTaunts = False Then Return False
+			End If
+
+			If FilterString.Contains("@LongTaunt") Then
+				If ssh.LongTaunts = False Then Return False
+			End If
+
+			If FilterString.Contains("@ExtremeTaunt") Then
+				If ssh.ExtremeTaunts = False Then Return False
+			End If
 
             If FilterString.Contains("@AssWorship") Then
                 If ssh.WorshipTarget <> "Ass" Or ssh.WorshipMode = False Then Return False
@@ -15532,7 +15549,10 @@ NoPlaylistEndFile:
         ssh.WorshipMode = False
         ssh.WorshipTarget = ""
         ssh.LongHold = False
-        ssh.ExtremeHold = False
+		ssh.ExtremeHold = False
+		ssh.HoldTaunts = False
+		ssh.LongTaunts = False
+		ssh.ExtremeTaunts = False
 
         ssh.MiniScript = False
 
@@ -15636,7 +15656,10 @@ NoPlaylistEndFile:
 
             'stop
             ssh.LongHold = False
-            ssh.ExtremeHold = False
+			ssh.ExtremeHold = False
+			ssh.HoldTaunts = False
+			ssh.LongTaunts = False
+			ssh.ExtremeTaunts = False
             ssh.WorshipMode = False
             ssh.WorshipTarget = ""
 

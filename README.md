@@ -13,7 +13,14 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 	* Added "Output Error Message to Chat Window" option to Misc Settings. Whereever possible, Error messages that are sent to the Errorlogs will be displayed in the chat window as well. Certain error messages that were already displayed to the chat window now have adsditional details. 
 
+* Command Filters:
+    * @HoldTaunt - Will only display the line if the user is edging, will hold the edge once he reaches it and has been called by using "HoldTaunts" in the @Edge() Command. For example, @Edge(Hold, HoldTaunts). This is to allow the domme to taunt the user about the edge he's about to hold.
+    * @LongTaunt - Will only display the line if the user is edging, will hold a long edge once he reaches it and has been called by using "HoldTaunts" in the @Edge() Command. For example, @Edge(LongHold, HoldTaunts)
+	* @ExtremeTaunt - Will only display the line if the user is edging, will hold an extreme edge once he reaches it and has been called by using "HoldTaunts" in the @Edge() Command. For example, @Edge(ExtremeHold, HoldTaunts)
+	
+	
 * Bugfixes:
+    * Prevent endless loop in statuses (pepsifreak)
     * The System Keyword #RandomSlideshowCategory should now work as intended.
 	
 * Miscellaneous:
