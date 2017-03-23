@@ -20613,6 +20613,8 @@ playLoop:
 
 		If ssh.MultipleEdgesTick < 1 Then
 
+			ssh.EdgeTauntInt = ssh.randomizer.Next(20, 31)
+
 			MultipleEdgesTimer.Stop()
 
 			ssh.DomChat = "#SYS_MultipleEdgesStart"
