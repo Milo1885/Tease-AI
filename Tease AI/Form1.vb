@@ -15564,7 +15564,15 @@ NoPlaylistEndFile:
 		ssh.LongTaunts = False
 		ssh.ExtremeTaunts = False
 
-        ssh.MiniScript = False
+		ssh.MiniScript = False
+
+		ssh.CBTBallsActive = False
+		ssh.CBTBallsFlag = False
+		ssh.CBTCockActive = False
+		ssh.CBTCockFlag = False
+		ssh.CBTBothActive = False
+		ssh.CBTBothFlag = False
+		ssh.CustomTaskActive = False
 
         ' Unlock OrgasmChances
         FrmSettings.LockOrgasmChances(False)
