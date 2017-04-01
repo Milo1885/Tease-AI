@@ -4699,9 +4699,9 @@ NonModuleEnd:
 	End Sub
 
 	Public Sub GetGoto()
-		'BUG: @Goto Command is sometimes searching in the wrong file. Description: https://milovana.com/forum/viewtopic.php?f=2&t=15776&p=219171#p219169
 
-		'If FileGoto = "" Then GoTo CancelGoto
+		Dim ReplaceGoto As String = ""
+		Dim ReplaceX As Integer = 1
 
 		ssh.GotoFlag = True
 
@@ -4773,14 +4773,69 @@ SkipGotoSearch:
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             Log.WriteError(ex.Message, ex, "Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """")
-            If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "::: Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """</font>", False)
-			Throw
+
+			Dim GotoLikeList As New List(Of String)
+			GotoLikeList = Txt2List(GotoText)
+
+			' BreakPoint 
+			Do
+
+				For i As Integer = 0 To GotoLikeList.Count - 1
+					If GotoLikeList(i).Substring(0, 1) = "(" Then
+						If GetLikeValue(GotoLikeList(i), ssh.FileGoto) = ReplaceX Then
+							ReplaceX = 1885
+							ReplaceGoto = GotoLikeList(i)
+							Exit For
+						End If
+					End If
+				Next
+
+				ReplaceX += 1
+				Application.DoEvents()
+
+			Loop Until ReplaceX > 5
+
+			'If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "::: Exception occured finding GotoLabel """ & ssh.FileGoto & """ in file """ & GotoText & """</font>", False)
+			'Throw
 		End Try
+
+		If ReplaceGoto <> "" Then
+			ReplaceX = 1
+			ssh.FileGoto = ReplaceGoto
+			ReplaceGoto = ""
+			GoTo SkipGotoSearch
+		End If
 
 CancelGoto:
 
 		ssh.GotoDommeLevel = False
 		ssh.SkipGotoLine = False
+
+		If ReplaceX <> 1 Then
+			StopEverything()
+			ssh.CallReturns.Clear()
+			If ssh.LastScript = False Then
+				If ssh.BeforeTease = True Then
+					ssh.BeforeTease = False
+					If FrmSettings.CBTeaseLengthDD.Checked = True Then
+						If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
+						If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
+						If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
+						If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
+						If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
+					Else
+						ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+					End If
+				End If
+				RunLinkScript()
+			Else
+				ChatAddSystemMessage("Error: @Goto() could not find a valid Goto Label. Since this is the final cycle, the session will now end.")
+				SetVariable("SYS_SubLeftEarly", 0)
+				SaveChatLog(False)
+				ssh.Reset()
+				FrmSettings.LockOrgasmChances(False)
+			End If
+		End If
 
 	End Sub
 
@@ -11132,6 +11187,8 @@ OrgasmDecided:
 
 			If EdgeList.Count > 0 Then
 
+				GotoClear()
+
 				ssh.SubEdging = False
 				ssh.SubHoldingEdge = False
 				EdgeTauntTimer.Stop()
@@ -11176,6 +11233,8 @@ OrgasmDecided:
 
 			If StrokeList.Count > 0 Then
 
+				GotoClear()
+
 				ssh.CBTCockFlag = False
 				ssh.CBTBallsFlag = False
 				ssh.CBTBothFlag = False
@@ -11216,6 +11275,8 @@ OrgasmDecided:
 			InterruptClean = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\" & InterruptS(0) & ".txt"
 
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\" & InterruptS(0) & ".txt") Then
+
+				GotoClear()
 
 				ssh.FirstRound = False
 				ssh.CBTCockFlag = False
@@ -12503,9 +12564,7 @@ VTSkip:
             GetSubState()
             ssh.CallReturns.Push(New SessionState.StackedCallReturn(ssh))
 
-            ssh.GotoFlag = False
-
-            ssh.FileGoto = ""
+			GotoClear()
 
             StrokeTimer.Stop()
             StrokeTauntTimer.Stop()
@@ -12580,6 +12639,7 @@ VTSkip:
 
             Else
 
+				GotoClear()
                 ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
                 ssh.StrokeTauntVal = -1
 
@@ -12607,9 +12667,10 @@ VTSkip:
                 If RandomFile.Count < 1 Then
                     MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine &
                       Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Else
-                    ssh.FileText = RandomFile(ssh.randomizer.Next(0, RandomFile.Count))
-                    ssh.StrokeTauntVal = -1
+				Else
+					GotoClear()
+					ssh.FileText = RandomFile(ssh.randomizer.Next(0, RandomFile.Count))
+					ssh.StrokeTauntVal = -1
                 End If
             End If
             StringClean = StringClean.Replace("@CallRandom(" & CallReplace & ")", "")
@@ -17461,12 +17522,12 @@ saveImage:
 			If CFClean.Contains("Or[") Then CFClean = CFClean.Replace("Or[" & GetParentheses(CFClean, "Or[", 2) & "]", "")
 		End If
 
-        For Each com As String In New List(Of String) From
-          {"@Cup(", "@AllowsOrgasm(", "@RuinsOrgasm(", "@DommeLevel(",
-          "@ApathyLevel(", "@Month(", "@Day(", "@Flag(", "@NotFlag(",
-          "@DayOfWeek(", "@FlagOr("}
-            If CFClean.Contains(com) Then CFClean = CFClean.Replace(com & GetParentheses(CFClean, com) & ")", "")
-        Next
+		For Each com As String In New List(Of String) From
+		  {"@Cup(", "@AllowsOrgasm(", "@RuinsOrgasm(", "@DommeLevel(",
+		  "@ApathyLevel(", "@Month(", "@Day(", "@Flag(", "@NotFlag(",
+		  "@DayOfWeek(", "@FlagOr("}
+			If CFClean.Contains(com) Then CFClean = CFClean.Replace(com & GetParentheses(CFClean, com) & ")", "")
+		Next
 
 		'===============================================================================
 		'					  Clean all other remaining @Commands
@@ -20920,8 +20981,53 @@ playLoop:
         Next
         Return SubstringCount
 
-    End Function
+	End Function
 
+	Public Function GetLikeValue(ByVal s As String, ByVal t As String) As Integer
+
+		s = s.ToLower
+		t = t.ToLower
+
+		Dim n As Integer = s.Length
+		Dim m As Integer = t.Length
+		Dim d(n + 1, m + 1) As Integer
+
+		If n = 0 Then
+			Return m
+		End If
+		If m = 0 Then
+			Return n
+		End If
+
+		Dim i As Integer
+		Dim j As Integer
+
+		For i = 0 To n
+			d(i, 0) = i
+		Next
+		For j = 0 To m
+			d(0, j) = j
+		Next
+		For i = 1 To n
+			For j = 1 To m
+				Dim cost As Integer
+				If t(j - 1) = s(i - 1) Then
+					cost = 0
+				Else
+					cost = 1
+				End If
+				d(i, j) = Math.Min(Math.Min(d(i - 1, j) + 1, d(i, j - 1) + 1), d(i - 1, j - 1) + cost)
+			Next
+		Next
+		Return d(n, m)
+	End Function
+
+	Private Sub GotoClear()
+
+		ssh.GotoFlag = False
+		ssh.FileGoto = ""
+
+	End Sub
 
 End Class
 
