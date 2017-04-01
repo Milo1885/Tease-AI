@@ -4987,12 +4987,12 @@ SkipIsTyping:
 
 
 				If FrmSettings.teaseRadio.Checked = True And ssh.JustShowedBlogImage = False And ssh.TeaseVideo = False And Not ssh.DomTask.Contains("@NewBlogImage") And ssh.NullResponse = False _
-					 And ssh.SlideshowLoaded = True And Not ssh.DomTask.Contains("@ShowButtImage") And Not ssh.DomTask.Contains("@ShowBoobsImage") And Not ssh.DomTask.Contains("@ShowButtsImage") _
-					 And Not ssh.DomTask.Contains("@ShowBoobsImage") And ssh.LockImage = False And ssh.CustomSlideEnabled = False And ssh.RapidFire = False _
-					 And UCase(ssh.DomTask) <> "<B>TEASE AI HAS BEEN RESET</B>" And ssh.JustShowedSlideshowImage = False Then
+				  And ssh.SlideshowLoaded = True And Not ssh.DomTask.Contains("@ShowButtImage") And Not ssh.DomTask.Contains("@ShowBoobsImage") And Not ssh.DomTask.Contains("@ShowButtsImage") _
+				  And Not ssh.DomTask.Contains("@ShowBoobsImage") And ssh.LockImage = False And ssh.CustomSlideEnabled = False And ssh.RapidFire = False _
+				  And UCase(ssh.DomTask) <> "<B>TEASE AI HAS BEEN RESET</B>" And ssh.JustShowedSlideshowImage = False And ssh.MultiTauntPictureHold = False Then
 					If ssh.SubStroking = False Or ssh.SubEdging = True Or ssh.SubHoldingEdge = True Then
 						' Begin Next Button
-
+						ssh.MultiTauntPictureHold = False
 						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
 
@@ -6784,12 +6784,18 @@ Retry:
 				ssh.TauntTextCount = TauntToUse.RandomTauntLine
 				ssh.TempScriptCount = TauntToUse.TauntSize - 1
 
+				ssh.MultiTauntPictureHold = False
+
 			End If
 
 		Else
 			' ##################### Next Taunt line #######################
 			ssh.TauntTextCount += 1
+
+			If ssh.TempScriptCount > 0 Then ssh.MultiTauntPictureHold = True
+
 			ssh.TempScriptCount -= 1
+
 		End If
 
 		If ssh.TauntLines.Count > 0 Then
@@ -6798,8 +6804,8 @@ Retry:
 				ssh.DomTask = ssh.TauntLines(ssh.TauntTextCount)
 			Catch ex As Exception
 				Log.WriteError("Tease AI did not return a valid Taunt from file: " &
-									   ssh.TauntText, ex, "StrokeTauntTimer.Tick")
-                ssh.DomTask = "ERROR: Tease AI did not return a valid Taunt from file: " & ssh.TauntText
+						ssh.TauntText, ex, "StrokeTauntTimer.Tick")
+				ssh.DomTask = "ERROR: Tease AI did not return a valid Taunt from file: " & ssh.TauntText
 			End Try
 
 

@@ -28,6 +28,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* The System Keyword #RandomSlideshowCategory should now work as intended.
 	
 * Miscellaneous:
+    * The picture will no longer change in the middle of StrokeTaunts that are more than one line 
     * The background timer for the length of the tease session will now pause when the Settings window is open and the "Pause Program When Settings Menu is Visible" option is checked (pepsifreak)
 	* The timer for edge taunts now resets after each edge during Multiple Edges
 	

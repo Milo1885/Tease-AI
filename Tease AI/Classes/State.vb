@@ -565,7 +565,10 @@ Public Class SessionState
     Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
 
     Public Property CountDownList As New List(Of String)
-    Public Property CountUpList As New List(Of String)
+	Public Property CountUpList As New List(Of String)
+
+	Public Property MultiTauntPictureHold As Boolean
+
 
 #Region "----------------------------------- Only for Serialization -------------------------------------"
 
