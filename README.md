@@ -24,7 +24,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 * Bugfixes:
     * @EdgeHold() and similar Commands did not make the user hold the edge for the specified amount of time
     * Prevent endless loop in statuses (pepsifreak)
-    * The System Keyword #RandomSlideshowCategory should now work as intended.
+    * Refined the "Always Start With Random Domme" option
+	* The System Keyword #RandomSlideshowCategory should now work as intended.
 	
 * Miscellaneous:
     * The background timer for the length of the tease session will now pause when the Settings window is open and the "Pause Program When Settings Menu is Visible" option is checked (pepsifreak)

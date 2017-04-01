@@ -1661,6 +1661,7 @@ NoPlaylistStartFile:
 					ssh.LastScriptCountdown = ssh.randomizer.Next(3, 5 * FrmSettings.domlevelNumBox.Value)
 
 					If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
+						If FrmSettings.CBRandomDomme.Checked = True Then ssh.glitterDommeNumber = 4
 						LoadDommeImageFolder()
 					End If
 
@@ -17326,21 +17327,17 @@ saveImage:
 		'check which domme should be loaded
 		If Not ssh.newSlideshow Then
             If ssh.glitterDommeNumber = 0 Then
-                If FrmSettings.CBRandomDomme.Checked = False Or ssh.SaidHello = True Then
-                    ssh.SlideshowMain = New ContactData(ContactType.Domme)
-                Else
-                    ssh.SlideshowMain = New ContactData(ContactType.Random)
-                End If
-            ElseIf ssh.glitterDommeNumber = 1 Then
-                ssh.SlideshowMain = New ContactData(ContactType.Contact1)
-            ElseIf ssh.glitterDommeNumber = 2 Then
-                ssh.SlideshowMain = New ContactData(ContactType.Contact2)
-            ElseIf ssh.glitterDommeNumber = 3 Then
-                ssh.SlideshowMain = New ContactData(ContactType.Contact3)
-            ElseIf ssh.glitterDommeNumber = 4 Then
-                ssh.SlideshowMain = New ContactData(ContactType.Random)
-            End If
-        End If
+				ssh.SlideshowMain = New ContactData(ContactType.Domme)
+			ElseIf ssh.glitterDommeNumber = 1 Then
+				ssh.SlideshowMain = New ContactData(ContactType.Contact1)
+			ElseIf ssh.glitterDommeNumber = 2 Then
+				ssh.SlideshowMain = New ContactData(ContactType.Contact2)
+			ElseIf ssh.glitterDommeNumber = 3 Then
+				ssh.SlideshowMain = New ContactData(ContactType.Contact3)
+			ElseIf ssh.glitterDommeNumber = 4 Then
+				ssh.SlideshowMain = New ContactData(ContactType.Random)
+			End If
+		End If
 		ssh.SlideshowMain.LoadNew(ssh.newSlideshow)
         ssh.tempDomName = ssh.SlideshowMain.TypeName
         FrmSettings.LBLCurrentDomme.Text = ssh.tempDomName
