@@ -22,6 +22,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 	
 * Bugfixes:
+    * @EdgeHold() and similar Commands did not make the user hold the edge for the specified amount of time
     * Prevent endless loop in statuses (pepsifreak)
     * The System Keyword #RandomSlideshowCategory should now work as intended.
 	

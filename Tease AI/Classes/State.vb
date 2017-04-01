@@ -469,7 +469,6 @@ Public Class SessionState
 	<Description("True if Interrupts are disabled.")> Public Property DoNotDisturb As Boolean
 
 	Public Property EdgeHoldSeconds As Integer
-	<Obsolete("Never set to true")>
 	Public EdgeHoldFlag As Boolean
 
 

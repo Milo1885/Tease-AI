@@ -10539,7 +10539,7 @@ TaskCleanSet:
 
 			End If
 
-			EdgeHoldFlag = True
+			ssh.EdgeHoldFlag = True
 
 			ContactEdgeCheck(StringClean)
 			Edge()
@@ -10605,7 +10605,7 @@ TaskCleanSet:
 
 			End If
 
-			EdgeHoldFlag = True
+			ssh.EdgeHoldFlag = True
 
 			ContactEdgeCheck(StringClean)
 			Edge()
@@ -10674,7 +10674,7 @@ TaskCleanSet:
 
 			End If
 
-			EdgeHoldFlag = True
+			ssh.EdgeHoldFlag = True
 
 
 			ContactEdgeCheck(StringClean)
