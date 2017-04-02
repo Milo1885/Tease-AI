@@ -2557,7 +2557,7 @@ DebugAwareness:
 
 		If ssh.InputFlag = True And ssh.DomTypeCheck = False Then
 			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ssh.InputString, ssh.ChatString, False)
-			ssh.InputFlag = False
+			'ssh.InputFlag = False
 		End If
 
 		' Remove commas and apostrophes from user's entered text
@@ -2606,6 +2606,10 @@ EdgeSkip:
 
 		Debug.Print("DomResponse Called")
 
+		If ssh.InputFlag = True Then
+			ssh.InputFlag = False
+			Return
+		End If
 
 		If ssh.EdgeNOT = True Then
 			ssh.EdgeNOT = False

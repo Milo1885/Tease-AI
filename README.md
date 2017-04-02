@@ -27,6 +27,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
     * @EdgeHold() and similar Commands did not make the user hold the edge for the specified amount of time
     * Prevent endless loop in statuses (pepsifreak)
     * Refined the "Always Start With Random Domme" option
+	* Response Files were still being parsed when @InputVar[] was active
 	* The System Keyword #RandomSlideshowCategory should now work as intended.
 	
 * Miscellaneous:
