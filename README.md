@@ -35,6 +35,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
     * The background timer for the length of the tease session will now pause when the Settings window is open and the "Pause Program When Settings Menu is Visible" option is checked (pepsifreak)
 	* The timer for edge taunts now resets after each edge during Multiple Edges
 	* Commas are no longer affected when auditing scripts
+	* Blank lines are now only removed from URL Files when auditing scripts
 	* CBT\Custom Task were missing from StopEverything() sub-routine (dariobrun)  
 	
 	

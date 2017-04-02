@@ -8925,11 +8925,11 @@ checkFolder:
 			Dim GoodLines As New List(Of String)
 
 			For Each line As String In CheckFiles
-				If Not line = "" Then
-					GoodLines.Add(line)
-				Else
-					BlankAudit += 1
-				End If
+				'If Not line = "" Then
+				GoodLines.Add(line)
+				'Else
+				'BlankAudit += 1
+				'End If
 			Next
 
 			For i As Integer = 0 To GoodLines.Count - 1
