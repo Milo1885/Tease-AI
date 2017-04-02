@@ -8945,27 +8945,6 @@ checkFolder:
 						GoodLines(i) = GoodLines(i).Replace("[ ", "[")
 					Loop Until Not GoodLines(i).Contains("[ ")
 				End If
-				If GoodLines(i).Contains(",,") Then
-					ErrorAudit += 1
-					Do
-
-						GoodLines(i) = GoodLines(i).Replace(",,", ",")
-					Loop Until Not GoodLines(i).Contains(",,")
-				End If
-				If GoodLines(i).Contains(",]") Then
-					ErrorAudit += 1
-					Do
-
-						GoodLines(i) = GoodLines(i).Replace(",]", "]")
-					Loop Until Not GoodLines(i).Contains(",]")
-				End If
-				If GoodLines(i).Contains(" ,") Then
-					ErrorAudit += 1
-					Do
-
-						GoodLines(i) = GoodLines(i).Replace(" ,", ",")
-					Loop Until Not GoodLines(i).Contains(" ,")
-				End If
 				If foundFile.Contains("Suffering") Then Debug.Print(GoodLines(i))
 
 				If GoodLines(i).Contains("@ShowBoobImage") Then
