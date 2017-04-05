@@ -24,6 +24,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 	
 * Bugfixes:
+    * When Tease AI parses a Vocabulary file with no valid lines, it will now highlight the Vocabularly filename in orange instead of causing a crash. This works similarly to how the program will currently highlight the Keyword in red if it does not exist at all (dariobrun) 
     * @EdgeHold() and similar Commands did not make the user hold the edge for the specified amount of time
     * Prevent endless loop in statuses (pepsifreak)
     * Refined the "Always Start With Random Domme" option

@@ -8562,15 +8562,30 @@ StatusUpdateEnd:
 				If Directory.Exists(Path.GetDirectoryName(filepath)) AndAlso File.Exists(filepath) Then
 					Dim lines As List(Of String) = Txt2List(filepath)
 
-					Try
-						lines = FilterList(lines)
+
+					lines = FilterList(lines)
+
+					If lines.Count > 0 Then
+
 						Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
+
 						StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
-					Catch ex As Exception
-						Log.WriteError("Error Processing vocabulary file: " & filepath, ex,
-										"Tease AI did not return a valid line while parsing vocabulary file.")
-						StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
-					End Try
+
+					Else
+
+						StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
+
+					End If
+
+					'Try
+					'lines = FilterList(lines)
+					'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
+					'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
+					'Catch ex As Exception
+					'Log.WriteError("Error Processing vocabulary file: " & filepath, ex,
+					' "Tease AI did not return a valid line while parsing vocabulary file.")
+					'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
+					'End Try
 
 				Else
 					StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
