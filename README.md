@@ -28,7 +28,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
     * Prevent endless loop in statuses (pepsifreak)
     * Refined the "Always Start With Random Domme" option
 	* Response Files were still being parsed when @InputVar[] was active
-	* The System Keyword #RandomSlideshowCategory should now work as intended.
+	* The System Keyword #RandomSlideshowCategory should now work as intended
+	* Giving up during the first round did not display [First Round] Responses
 	
 * Miscellaneous:
     * The picture will no longer change in the middle of StrokeTaunts that are more than one line 

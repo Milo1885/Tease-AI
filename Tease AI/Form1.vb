@@ -11117,7 +11117,7 @@ OrgasmDecided:
 					End If
 					ssh.SubGaveUp = True
 					If ssh.TasksCount >= 1 Then ssh.TasksCount = 0
-					ssh.FirstRound = False
+					'ssh.FirstRound = False
 				Else
 					' you can't give up
 					ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\GiveUpDENIED.txt"
@@ -15188,7 +15188,7 @@ VTSkip:
     Public Sub RunModuleScript(ByVal IsEdging As Boolean)
 
         ssh.ShowModule = True
-
+		ssh.FirstRound = False
         ssh.TauntEdging = False
 
         ssh.AskedToGiveUpSection = False
@@ -15313,7 +15313,7 @@ NoPlaylistModuleFile:
     Public Sub RunLinkScript()
 
         Debug.Print("RunLinkScript() Called")
-
+		ssh.FirstRound = False
         ClearModes()
 
         If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistLinkFile
@@ -15435,7 +15435,7 @@ NoPlaylistLinkFile:
     Public Sub RunLastScript()
 
         ClearModes()
-
+		ssh.FirstRound = False
         'My.Settings.Sys_SubLeftEarly = 0
 
         'My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalityComboBox.Text & "\System\Variables\SYS_SubLeftEarly", "0", False)
