@@ -31,23 +31,27 @@ Partial Class SessionState
 
         Public Property GotoStatus As Boolean = False
 
-        Public Property LineGoTo As String = ""
+		Public Property LineGoTo As String = ""
+
+		Public Property ReturnState As String = ""
 
         ''' <summary>Creates a new instance with given parameters.</summary>
 
-        Sub New(ByVal session As SessionState, ByVal filepath As String, ByVal line As Integer, ByVal goToStatus As Boolean, ByVal lineGoTo As String)
+        Sub New(ByVal session As SessionState, ByVal filepath As String, ByVal line As Integer, ByVal goToStatus As Boolean, ByVal lineGoTo As String, returnState As String)
 
-            Me.Session = session
+			Me.Session = session
 
-            Me.FilePath = filepath
+			Me.FilePath = filepath
 
-            Me.Line = line
+			Me.Line = line
 
-            Me.GotoStatus = goToStatus
+			Me.GotoStatus = goToStatus
 
-            Me.LineGoTo = lineGoTo
+			Me.LineGoTo = lineGoTo
 
-        End Sub
+			Me.ReturnState = returnState
+
+		End Sub
 
 	End Class
 

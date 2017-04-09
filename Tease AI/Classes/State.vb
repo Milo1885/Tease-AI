@@ -276,6 +276,7 @@ Public Class SessionState
 	Public Property LastScript As Boolean
 
 	Public Property SaidHello As Boolean = False
+	Public Property justStarted As Boolean = False
 
 
 	Public Property AvgEdgeStroking As Integer
@@ -287,6 +288,7 @@ Public Class SessionState
 	Public Property EdgeTickCheck As Integer
 
 	Public Property EdgeNOT As Boolean
+	Public Property isLink As Boolean
 
 	Public Property AlreadyStrokingEdge As Boolean
 

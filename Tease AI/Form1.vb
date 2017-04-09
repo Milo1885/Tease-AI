@@ -1564,10 +1564,11 @@ retryStart:
 
 					Debug.Print("CHeck")
 
+					'If checkSubAnswer("hi") = 1 Then
+					Debug.Print("CHeck")
+					ssh.justStarted = True
 					ssh.SaidHello = True
 					ssh.BeforeTease = True
-
-
 
 					If FrmSettings.CBTeaseLengthDD.Checked = True Then
 
@@ -1662,8 +1663,8 @@ NoPlaylistStartFile:
 					ssh.ScriptTick = 3
 					ScriptTimer.Start()
 
-
 				End If
+				'End If
 
 
 			Next
@@ -2597,6 +2598,15 @@ EdgeSkip:
 	Public Sub DomResponse()
 
 		Debug.Print("DomResponse Called")
+		If ssh.justStarted Then
+			ssh.justStarted = False
+		Else
+			'preparation for check answer
+			'If checkSubAnswer() = 0 Then
+			'checkForPunish()
+			'Return
+			'End If
+		End If
 
 		If ssh.InputFlag = True Then
 			ssh.InputFlag = False
@@ -3079,6 +3089,11 @@ DebugAwarenessStep2:
 				ssh.CustomTaskFirst = True
 				ssh.ScriptTick = 3
 				ScriptTimer.Start()
+				If ssh.YesOrNo Then
+					ssh.DomChat = "#SYS_ReturnAnswer"
+					TypingDelay()
+					Return
+				End If
 			End If
 		End If
 
@@ -4099,7 +4114,7 @@ ReturnCalled:
 
 
 				If ssh.MiniScript = True Then
-					If lines(ssh.MiniTauntVal) = "@End" Then
+					If lines(ssh.MiniTauntVal) = "@End" Or ssh.MiniTauntVal >= lines.Count Then
 						ssh.MiniScript = False
 						If ssh.MiniTimerCheck = True Then
 							ssh.ScriptTick = 3
@@ -4110,10 +4125,20 @@ ReturnCalled:
 						Return
 					End If
 				Else
-					If Not ssh.StrokeTauntVal > lines.Count - 1 Then
-						If lines(ssh.StrokeTauntVal) = "@End" Then
-							If ssh.CallReturns.Count = 0 Then
-								If ssh.ShowModule = True Then ssh.ModuleEnd = True
+					'end the scripts anyway if it reaches the last line, even if the user forgot to use the @End command
+					If lines(ssh.StrokeTauntVal) = "@End" Or ssh.StrokeTauntVal >= lines.Count Then
+						If ssh.CallReturns.Count = 0 Then
+							If ssh.ShowModule = True Then ssh.ModuleEnd = True
+						End If
+						'if we reached the end of the script and we are in a link or in the beforeTease, and we forget to use the @StartStroking/Taunt
+						'it will automatically do it to avoid session errors
+						If (ssh.isLink Or ssh.BeforeTease) And ssh.SubStroking = False Then
+							ssh.isLink = False
+							If My.Settings.Chastity Then
+								ssh.DomChat = "@NullResponse @StartTaunts"
+							Else
+								ssh.DomChat = "@NullResponse @StartStroking"
+								TypingDelay()
 							End If
 						End If
 					End If
@@ -4162,21 +4187,8 @@ ReturnCalled:
 		'Return
 		'End If
 
-		' ### Debug
-		If ssh.nameErrors >= 3 And ssh.foundAnswer = True And ssh.wrongAttempt = True Then
-			ssh.DomChat = "#SYS_HonorificPunish"
-			TypingDelay()
-			If FrmSettings.CBCBTBalls.Checked = True Then
-				ssh.CBTBallsActive = True
-				ssh.CBTBallsFlag = True
-				ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
-			End If
-			ssh.YesOrNo = False
-			ssh.foundAnswer = False
-			ssh.wrongAttempt = False
-			ssh.StrokeTauntVal -= 1
-			Return
-		End If
+		' ### DebugPrivate Sub checkForPunish()
+		checkForPunish()
 
 ModuleEnd:
 
@@ -4291,80 +4303,8 @@ NonModuleEnd:
 
 
 				If ssh.CallReturns.Count() > 0 Then
-
-					ssh.CallReturns.Pop().resumeState()
-					'github patch begin
-					'If ReturnSubState = "Stroking" Then
-					'If SubStroking = False Then
-					'DomTask = "Get back to stroking @StartStroking"
-					'TypingDelayGeneric()
-					'Else
-					' StrokeTimer.Start()
-					' StrokeTauntTimer.Start()
-					'End If
-					'End If
-					'If ReturnSubState = "Edging" Then
-
-					'github patch end
-					If ssh.ReturnSubState = "Stroking" Then
-						If My.Settings.Chastity = True Then
-							'DomTask = "Now as I was saying @StartTaunts"
-							ssh.DomTask = "#Return_Chastity"
-							TypingDelayGeneric()
-						Else
-							If ssh.SubStroking = False Then
-								'DomTask = "Get back to stroking @StartStroking"
-								ssh.DomTask = "#Return_Stroking"
-								TypingDelayGeneric()
-							Else
-								StrokeTimer.Start()
-								StrokeTauntTimer.Start()
-							End If
-						End If
-					End If
-					If ssh.ReturnSubState = "Edging" Then
-						If ssh.SubEdging = False Then
-							'DomTask = "Start getting yourself to the edge again @Edge"
-							ssh.DomTask = "#Return_Edging"
-							'SubStroking = True
-							TypingDelayGeneric()
-						Else
-							EdgeTauntTimer.Start()
-							EdgeCountTimer.Start()
-						End If
-					End If
-					If ssh.ReturnSubState = "Holding The Edge" Then
-						If ssh.SubEdging = False Then
-							'DomTask = "Start getting yourself to the edge again @EdgeHold"
-							ssh.DomTask = "#Return_Holding"
-							'SubStroking = True
-							TypingDelayGeneric()
-						Else
-							HoldEdgeTimer.Start()
-							HoldEdgeTauntTimer.Start()
-						End If
-					End If
-					If ssh.ReturnSubState = "CBTBalls" Then
-						'DomTask = "Now let's get back to busting those #Balls @CBTBalls"
-						ssh.DomTask = "#Return_CBTBalls"
-						ssh.CBTBallsFirst = False
-						TypingDelayGeneric()
-					End If
-					If ssh.ReturnSubState = "CBTCock" Then
-						'DomTask = "Now let's get back to abusing that #Cock @CBTCock"
-						ssh.DomTask = "#Return_CBTCock"
-						ssh.CBTCockFirst = False
-						TypingDelayGeneric()
-					End If
-					If ssh.ReturnSubState = "Rest" Then
-						ssh.DomTypeCheck = True
-						ssh.ScriptTick = 5
-						ScriptTimer.Start()
-						'DomTask = "Now as I was saying"
-						ssh.DomTask = "#Return_Rest"
-						TypingDelayGeneric()
-						Return
-					End If
+					handleCallReturn()
+					If ssh.ShowModule Then Return
 				End If
 				ScriptTimer.Stop()
 				Return
@@ -4393,13 +4333,7 @@ NonModuleEnd:
 			Debug.Print("CHeck")
 
 
-
-
-
 			ssh.DomTask = (lines(line).Trim)
-
-
-
 
 
 			ssh.StringLength = 1
@@ -5662,62 +5596,34 @@ DommeSlideshowFallback:
 					ssh.ModuleEnd = False
 					ssh.ShowModule = False
 
-					'DelayFlag = True
-					'DelayTick = randomizer.Next(3, 6)
-
-					'DelayTimer.Start()
-
-					'Do
-					'   Application.DoEvents()
-					'Loop Until DelayFlag = False
-
-					'LastScriptCountdown -= 1
-					'Debug.Print("LastScriptCountdown = " & LastScriptCountdown)
-
-					'FrmSettings.LBLOrgasmCountdown.Text = LastScriptCountdown
-
-					'StrokeTauntVal = -1
-
-					'If TeaseTick < 1 And Playlist = False Then
-					'RunLastScript()
-					'ElseIf WasStroking Then
-					'RunModuleScript(False)
-					'Else
-					'RunLinkScript()
-					'End If
-
-
-
 					If ssh.CallReturns.Count() > 0 Then
-						ssh.ShowModule = True
-						ssh.AskedToGiveUpSection = False
-						ScriptTimer.Start()
-
-
-
-
-
-
-					Else
-						If ssh.TeaseTick < 1 And ssh.Playlist = False Then
-							ssh.StrokeTauntVal = -1
-							RunLastScript()
-						ElseIf WasStroking And Not WasEdging And Not WasHolding Then
-							ssh.StrokeTauntVal = -1
-							RunModuleScript(False)
-						ElseIf ssh.giveUpReturn Then
+						'if giveupreturn is on, we continue with the script after the give up
+						If ssh.giveUpReturn Then
 							ssh.ShowModule = True
 							ssh.AskedToGiveUpSection = False
 							ScriptTimer.Start()
+							Return
+							'else we reset all the callreturns and move to a link/end/module as expected from the give up
 						Else
-							ssh.StrokeTauntVal = -1
-							RunLinkScript()
+							ssh.CallReturns.Clear()
 						End If
 					End If
+
+					If ssh.TeaseTick < 1 And ssh.Playlist = False Then
+						ssh.StrokeTauntVal = -1
+						RunLastScript()
+					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
+						ssh.StrokeTauntVal = -1
+						RunModuleScript(False)
+					ElseIf ssh.giveUpReturn Then
+						ssh.ShowModule = True
+						ssh.AskedToGiveUpSection = False
+						ScriptTimer.Start()
+					Else
+						ssh.StrokeTauntVal = -1
+						RunLinkScript()
+					End If
 				End If
-
-
-
 			End If
 		End If
 
@@ -6264,20 +6170,21 @@ DommeSlideshowFallback:
 				If ssh.CBTBothActive = True Then ssh.CBTBothActive = False
 
 
+				'i think these shouldn't be dealt with here....they are already dealt during domresponse, doing it also here will just
+				'halve the number of tasks actually because it will be diminisher here and then also in the domme repsonse
 
-				If ssh.CBTCockFlag = True Or ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Or ssh.CustomTask = True Then
-					ssh.TasksCount -= 1
-					If ssh.TasksCount < 1 Then
-						ssh.CBTCockFlag = False
-						ssh.CBTBallsFlag = False
-						ssh.CBTBothFlag = False
-						ssh.CustomTask = False
-						ssh.CBTBallsFirst = True
-						ssh.CBTCockFirst = True
-						ssh.CBTBothFirst = True
-						ssh.CustomTaskFirst = True
-					End If
-				End If
+				'If ssh.CBTCockFlag = True Or ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Or ssh.CustomTask = True Then
+				'ssh.TasksCount -= 1
+				'If ssh.TasksCount < 1 Then
+				'ssh.CBTCockFlag = False
+				'		ssh.CBTBallsFlag = False
+				'ssh.CBTBothFlag = False
+				'ssh.CustomTask = False
+				'ssh.CBTBallsFirst = True
+				'ssh.CBTCockFirst = True
+				'		ssh.CBTBothFirst = True
+				'ssh.CustomTaskFirst = True
+				'End If
 
 				If ssh.CBTCockFlag = True Then
 					CBTCock()
@@ -6333,36 +6240,35 @@ DommeSlideshowFallback:
 					'FrmSettings.LBLOrgasmCountdown.Text = LastScriptCountdown
 
 					If ssh.CallReturns.Count() > 0 Then
-						ssh.ShowModule = True
-						ssh.AskedToGiveUpSection = False
-						ScriptTimer.Start()
-
-
-
-
-
-
-					Else
-						If ssh.TeaseTick < 1 And ssh.Playlist = False Then
-							ssh.StrokeTauntVal = -1
-							RunLastScript()
-						ElseIf WasStroking And Not WasEdging And Not WasHolding Then
-							ssh.StrokeTauntVal = -1
-							RunModuleScript(False)
-						ElseIf ssh.giveUpReturn Then
+						'if giveupreturn is on, we continue with the script after the give up
+						If ssh.giveUpReturn Then
 							ssh.ShowModule = True
 							ssh.AskedToGiveUpSection = False
 							ScriptTimer.Start()
+							Return
+							'else we reset all the callreturns and move to a link/end/module as expected from the give up
 						Else
-							ssh.StrokeTauntVal = -1
-							RunLinkScript()
+							ssh.CallReturns.Clear()
 						End If
 					End If
 
+					If ssh.TeaseTick < 1 And ssh.Playlist = False Then
+						ssh.StrokeTauntVal = -1
+						RunLastScript()
+					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
+						ssh.StrokeTauntVal = -1
+						RunModuleScript(False)
+					ElseIf ssh.giveUpReturn Then
+						ssh.ShowModule = True
+						ssh.AskedToGiveUpSection = False
+						ScriptTimer.Start()
+					Else
+						ssh.StrokeTauntVal = -1
+						RunLinkScript()
+					End If
 				End If
 			End If
 		End If
-
 	End Sub
 
 
@@ -8941,7 +8847,7 @@ RinseLatherRepeat:
 						 "Please make sure the directory exists and it is spelled correctly in the script.")
 					End If
 
-					If tmpFilter = "*" Then
+					If tmpFilter = "*" Or tmpFilter = "*.*" Then
 						ImageList = myDirectory.GetFilesImages(tmpDir)
 					Else
 						ImageList = Directory.GetFiles(tmpDir, tmpFilter, SearchOption.TopDirectoryOnly).ToList
@@ -11519,7 +11425,14 @@ OrgasmDecided:
 
 		If StringClean.Contains("@PlayCensorshipSucks") Then
 
-			RandomVideo()
+			If StringClean.Contains("@PlayCensorshipSucks[") Then
+				Dim videoFlag As String = GetParentheses(StringClean, "@PlayCensorshipSucks[")
+				selectVideo(videoFlag)
+				StringClean = StringClean.Replace("@PlayCensorshipSucks[" & videoFlag & "]", "")
+			Else
+				RandomVideo()
+				StringClean = StringClean.Replace("@PlayCensorshipSucks", "")
+			End If
 
 			If ssh.NoVideo = False Then
 				ssh.ScriptVideoTease = "Censorship Sucks"
@@ -11563,8 +11476,14 @@ OrgasmDecided:
 
 		If StringClean.Contains("@PlayAvoidTheEdge") Then
 			' #### Reboot
-
-			RandomVideo()
+			If StringClean.Contains("@PlayAvoidTheEdge[") Then
+				Dim videoFlag As String = GetParentheses(StringClean, "@PlayAvoidTheEdge[")
+				selectVideo(videoFlag)
+				StringClean = StringClean.Replace("@PlayAvoidTheEdge[" & videoFlag & "]", "")
+			Else
+				RandomVideo()
+				StringClean = StringClean.Replace("@PlayAvoidTheEdge", "")
+			End If
 
 			If ssh.NoVideo = False Then
 
@@ -11605,8 +11524,14 @@ OrgasmDecided:
 
 		If StringClean.Contains("@PlayRedLightGreenLight") Then
 			' #### Reboot
-
-			RandomVideo()
+			If StringClean.Contains("@PlayRedLightGreenLight[") Then
+				Dim videoFlag As String = GetParentheses(StringClean, "@PlayRedLightGreenLight[")
+				selectVideo(videoFlag)
+				StringClean = StringClean.Replace("@PlayRedLightGreenLight[" & videoFlag & "]", "")
+			Else
+				RandomVideo()
+				StringClean = StringClean.Replace("@PlayRedLightGreenLight", "")
+			End If
 
 			If ssh.NoVideo = False Then
 
@@ -11634,125 +11559,14 @@ OrgasmDecided:
 		End If
 
 		If StringClean.Contains("@PlayVideo[") Then
+			Dim videoFlag As String = GetParentheses(StringClean, "@PlayVideo[")
+			selectVideo(videoFlag)
 
-			Dim VideoFlag As String = GetParentheses(StringClean, "@PlayVideo[")
-			Dim VideoClean As String
-
-			If StringClean.Contains("@JumpVideo") Then
-				ssh.JumpVideo = True
-				StringClean = StringClean.Replace("@JumpVideo", "")
-			End If
-
-			If VideoFlag.Contains(":\") Then
-				VideoClean = VideoFlag
-
-				If File.Exists(VideoClean) Then
-					DomWMP.URL = VideoClean
-					DomWMP.Visible = True
-					mainPictureBox.Visible = False
-					ssh.TeaseVideo = True
-
-					If ssh.JumpVideo = True Then
-
-						Do
-							Application.DoEvents()
-						Loop Until (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying)
-
-						Dim VideoLength As Integer = DomWMP.currentMedia.duration
-						Dim VidLow As Integer = VideoLength * 0.4
-						Dim VidHigh As Integer = VideoLength * 0.9
-						Dim VidPoint As Integer = ssh.randomizer.Next(VidLow, VidHigh)
-
-						DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
-
-					End If
-
-					ssh.JumpVideo = False
-
-				Else
-					MessageBox.Show(Me, Path.GetFileName(VideoClean) & " was not found in " & Path.GetDirectoryName(VideoClean) & "!" & Environment.NewLine & Environment.NewLine &
-					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				End If
-
-				GoTo ExternalVideo
-
+			If ssh.NoVideo = False Then
+				ssh.TeaseVideo = True
 			Else
-				VideoClean = Application.StartupPath & "\Video\" & VideoFlag
-				VideoClean = VideoClean.Replace("\\", "\")
+				MessageBox.Show(Me, "No videos were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			End If
-
-
-
-			Debug.Print("VideoFlag = " & VideoFlag)
-
-			If VideoClean.Contains("*") Then
-
-				Dim VideoList As New List(Of String)
-
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Path.GetDirectoryName(VideoClean), FileIO.SearchOption.SearchTopLevelOnly, Path.GetFileName(VideoClean))
-					VideoList.Add(foundFile)
-				Next
-
-				If VideoList.Count > 0 Then
-					DomWMP.URL = VideoList(ssh.randomizer.Next(0, VideoList.Count))
-					DomWMP.Visible = True
-					mainPictureBox.Visible = False
-					ssh.TeaseVideo = True
-
-					If ssh.JumpVideo = True Then
-
-						Do
-							Application.DoEvents()
-						Loop Until (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying)
-
-						Dim VideoLength As Integer = DomWMP.currentMedia.duration
-						Dim VidLow As Integer = VideoLength * 0.4
-						Dim VidHigh As Integer = VideoLength * 0.9
-						Dim VidPoint As Integer = ssh.randomizer.Next(VidLow, VidHigh)
-
-						DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
-
-					End If
-
-					ssh.JumpVideo = False
-				Else
-					MessageBox.Show(Me, "No videos matching " & Path.GetFileName(VideoClean) & " were found in " & Path.GetDirectoryName(VideoClean) & "!" & Environment.NewLine & Environment.NewLine &
-					  "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				End If
-
-			Else
-
-				If File.Exists(VideoClean) Then
-					DomWMP.URL = VideoClean
-					DomWMP.Visible = True
-					mainPictureBox.Visible = False
-					ssh.TeaseVideo = True
-
-					If ssh.JumpVideo = True Then
-
-						Do
-							Application.DoEvents()
-						Loop Until (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying)
-
-						Dim VideoLength As Integer = DomWMP.currentMedia.duration
-						Dim VidLow As Integer = VideoLength * 0.4
-						Dim VidHigh As Integer = VideoLength * 0.9
-						Dim VidPoint As Integer = ssh.randomizer.Next(VidLow, VidHigh)
-
-						DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
-
-					End If
-
-					ssh.JumpVideo = False
-
-				Else
-					MessageBox.Show(Me, Path.GetFileName(VideoClean) & " was not found in " & Application.StartupPath & "\Video!" & Environment.NewLine & Environment.NewLine &
-					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				End If
-
-			End If
-
-ExternalVideo:
 
 			StringClean = StringClean.Replace("@PlayVideo[" & VideoFlag & "]", "")
 		End If
@@ -12571,7 +12385,7 @@ VTSkip:
 
 			GetSubState()
 			ssh.CallReturns.Push(New SessionState.StackedCallReturn(ssh))
-
+			ssh.YesOrNo = False
 			GotoClear()
 
 			StrokeTimer.Stop()
@@ -15205,9 +15019,9 @@ VTSkip:
     End Sub
 
 
-    Public Sub RunModuleScript(ByVal IsEdging As Boolean)
-
-        ssh.ShowModule = True
+	Public Sub RunModuleScript(ByVal IsEdging As Boolean)
+		ssh.isLink = False
+		ssh.ShowModule = True
 		ssh.FirstRound = False
         ssh.TauntEdging = False
 
@@ -15330,9 +15144,10 @@ NoPlaylistModuleFile:
 
 
 
-    Public Sub RunLinkScript()
+	Public Sub RunLinkScript()
+		ssh.isLink = True
 
-        Debug.Print("RunLinkScript() Called")
+		Debug.Print("RunLinkScript() Called")
 		ssh.FirstRound = False
         ClearModes()
 
@@ -21044,7 +20859,81 @@ playLoop:
 	Private Sub GotoClear()
 		ssh.GotoFlag = False
 		ssh.FileGoto = ""
+	End Sub
 
+	Private Sub handleCallReturn()
+		ssh.CallReturns.Pop().resumeState()
+		If ssh.ReturnSubState = "Stroking" Then
+			If My.Settings.Chastity = True Then
+				'DomTask = "Now as I was saying @StartTaunts"
+				If ssh.CallReturns.Count() = 0 Then
+					ssh.DomTask = "#Return_Chastity"
+				Else
+					ssh.DomTask = "@NullResponse"
+				End If
+				TypingDelayGeneric()
+			Else
+				If ssh.SubStroking = False Then
+					'DomTask = "Get back to stroking @StartStroking"
+					If ssh.CallReturns.Count() = 0 Then
+						ssh.DomTask = "#Return_Stroking"
+					Else
+						ssh.DomTask = "@NullResponse"
+					End If
+					TypingDelayGeneric()
+				Else
+					If Not ssh.ShowModule Then
+						StrokeTimer.Start()
+						StrokeTauntTimer.Start()
+					End If
+				End If
+			End If
+		ElseIf ssh.ReturnSubState = "Edging" Then
+			If ssh.SubEdging = False Then
+				'DomTask = "Start getting yourself to the edge again @Edge"
+				ssh.DomTask = "#Return_Edging"
+				'SubStroking = True
+				TypingDelayGeneric()
+			Else
+				EdgeTauntTimer.Start()
+				EdgeCountTimer.Start()
+			End If
+		ElseIf ssh.ReturnSubState = "Holding The Edge" Then
+			If ssh.SubEdging = False Then
+				'DomTask = "Start getting yourself to the edge again @EdgeHold"
+				ssh.DomTask = "#Return_Holding"
+				'SubStroking = True
+				TypingDelayGeneric()
+			Else
+				HoldEdgeTimer.Start()
+				HoldEdgeTauntTimer.Start()
+			End If
+		ElseIf ssh.ReturnSubState = "CBTBalls" Then
+			'DomTask = "Now let's get back to busting those #Balls @CBTBalls"
+			ssh.DomTask = "#Return_CBTBalls"
+			ssh.CBTBallsFirst = False
+			TypingDelayGeneric()
+		ElseIf ssh.ReturnSubState = "CBTCock" Then
+			'DomTask = "Now let's get back to abusing that #Cock @CBTCock"
+			ssh.DomTask = "#Return_CBTCock"
+			ssh.CBTCockFirst = False
+			TypingDelayGeneric()
+		ElseIf ssh.ReturnSubState = "Rest" Then
+			ssh.DomTypeCheck = True
+			ssh.ScriptTick = 2
+			ScriptTimer.Start()
+			'DomTask = "Now as I was saying"
+			'If StrComp(tempStatus, ssh.ReturnSubState) <> 0 Then
+			'ssh.DomTask = "#Return_Rest"
+			'Else
+			If ssh.YesOrNo Then
+				ssh.DomTask = "#SYS_ReturnAnswer"
+			Else
+				ssh.DomTask = "@NullResponse"
+			End If
+			'End If
+			TypingDelayGeneric()
+		End If
 	End Sub
 
 	Public Sub setStartName()
@@ -21107,6 +20996,142 @@ playLoop:
 		End If
 		Return stringToCheck
 	End Function
+
+	Private Sub checkForPunish()
+		If ssh.nameErrors >= 3 And ssh.wrongAttempt = True Then
+			ssh.DomChat = ""
+			If ssh.contactToUse.Equals(ssh.SlideshowContact1) Then
+				ssh.DomChat = "@Contact1 "
+			ElseIf ssh.contactToUse.Equals(ssh.SlideshowContact2) Then
+				ssh.DomChat = "@Contact2 "
+			ElseIf ssh.contactToUse.Equals(ssh.SlideshowContact3) Then
+				ssh.DomChat = "@Contact3 "
+			End If
+			ssh.DomChat += "#SYS_HonorificPunish"
+			ssh.wrongAttempt = False
+		End If
+		TypingDelay()
+	End Sub
+
+
+	Private Sub selectVideo(StringClean As String)
+
+		Dim VideoClean As String
+
+		If StringClean.Contains("@JumpVideo") Then
+			ssh.JumpVideo = True
+			StringClean = StringClean.Replace("@JumpVideo", "")
+		End If
+
+		If StringClean.Contains(":\") Then
+			VideoClean = StringClean
+
+			If File.Exists(VideoClean) Then
+				DomWMP.URL = VideoClean
+				DomWMP.Visible = True
+				mainPictureBox.Visible = False
+				ssh.TeaseVideo = True
+
+				If ssh.JumpVideo = True Then
+
+					Do
+						Application.DoEvents()
+					Loop Until (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying)
+
+					Dim VideoLength As Integer = DomWMP.currentMedia.duration
+					Dim VidLow As Integer = VideoLength * 0.4
+					Dim VidHigh As Integer = VideoLength * 0.9
+					Dim VidPoint As Integer = ssh.randomizer.Next(VidLow, VidHigh)
+
+					DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
+
+				End If
+
+				ssh.JumpVideo = False
+
+			Else
+				MessageBox.Show(Me, Path.GetFileName(VideoClean) & " was not found in " & Path.GetDirectoryName(VideoClean) & "!" & Environment.NewLine & Environment.NewLine &
+					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			End If
+
+			GoTo ExternalVideo
+
+		Else
+			VideoClean = Application.StartupPath & "\Video\" & StringClean
+			VideoClean = VideoClean.Replace("\\", "\")
+		End If
+
+
+
+		Debug.Print("VideoFlag = " & StringClean)
+
+		If VideoClean.Contains("*") Then
+
+			Dim VideoList As New List(Of String)
+
+			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Path.GetDirectoryName(VideoClean), FileIO.SearchOption.SearchTopLevelOnly, Path.GetFileName(VideoClean))
+				VideoList.Add(foundFile)
+			Next
+
+			If VideoList.Count > 0 Then
+				DomWMP.URL = VideoList(ssh.randomizer.Next(0, VideoList.Count))
+				DomWMP.Visible = True
+				mainPictureBox.Visible = False
+
+				If ssh.JumpVideo = True Then
+
+					Do
+						Application.DoEvents()
+					Loop Until (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying)
+
+					Dim VideoLength As Integer = DomWMP.currentMedia.duration
+					Dim VidLow As Integer = VideoLength * 0.4
+					Dim VidHigh As Integer = VideoLength * 0.9
+					Dim VidPoint As Integer = ssh.randomizer.Next(VidLow, VidHigh)
+
+					DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
+
+				End If
+
+				ssh.JumpVideo = False
+			Else
+				MessageBox.Show(Me, "No videos matching " & Path.GetFileName(VideoClean) & " were found in " & Path.GetDirectoryName(VideoClean) & "!" & Environment.NewLine & Environment.NewLine &
+					  "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			End If
+
+		Else
+
+			If File.Exists(VideoClean) Then
+				DomWMP.URL = VideoClean
+				DomWMP.Visible = True
+				mainPictureBox.Visible = False
+
+				If ssh.JumpVideo = True Then
+
+					Do
+						Application.DoEvents()
+					Loop Until (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying)
+
+					Dim VideoLength As Integer = DomWMP.currentMedia.duration
+					Dim VidLow As Integer = VideoLength * 0.4
+					Dim VidHigh As Integer = VideoLength * 0.9
+					Dim VidPoint As Integer = ssh.randomizer.Next(VidLow, VidHigh)
+
+					DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
+
+				End If
+
+				ssh.JumpVideo = False
+
+			Else
+				MessageBox.Show(Me, Path.GetFileName(VideoClean) & " was not found in " & Application.StartupPath & "\Video!" & Environment.NewLine & Environment.NewLine &
+					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			End If
+
+		End If
+
+ExternalVideo:
+	End Sub
 
 End Class
 
