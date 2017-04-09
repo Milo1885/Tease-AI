@@ -2021,8 +2021,56 @@ Namespace My
                 Me("SubHonorific") = value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("")>
+		Public Property G1Honorific() As String
+			Get
+				Return CType(Me("G1Honorific"), String)
+			End Get
+			Set
+				Me("G1Honorific") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("")>
+		Public Property G2Honorific() As String
+			Get
+				Return CType(Me("G2Honorific"), String)
+			End Get
+			Set
+				Me("G2Honorific") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("")>
+		Public Property G3Honorific() As String
+			Get
+				Return CType(Me("G3Honorific"), String)
+			End Get
+			Set
+				Me("G3Honorific") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("")>
+		Public Property RandomHonorific() As String
+			Get
+				Return CType(Me("RandomHonorific"), String)
+			End Get
+			Set
+				Me("RandomHonorific") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property CBUseHonor() As Boolean

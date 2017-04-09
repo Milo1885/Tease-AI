@@ -736,6 +736,10 @@ retryStart:
 			FrmSettings.TBYes.Text = My.Settings.SubYes
 			FrmSettings.TBNo.Text = My.Settings.SubNo
 			FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
+			FrmSettings.G1Honorific.Text = My.Settings.G1Honorific
+			FrmSettings.G2Honorific.Text = My.Settings.G2Honorific
+			FrmSettings.G3Honorific.Text = My.Settings.G3Honorific
+			FrmSettings.RandomHonorific.Text = My.Settings.RandomHonorific
 
 			If FrmSettings.TBHonorific.Text = "" Or FrmSettings.TBHonorific.Text Is Nothing Then FrmSettings.TBHonorific.Text = "Mistress"
 
@@ -1357,16 +1361,16 @@ retryStart:
 
 		If CBShortcuts.Checked = True Then
 
-			If UCase(ssh.ChatString) = UCase(TBShortYes.Text) Then ssh.ChatString = "Yes " & FrmSettings.TBHonorific.Text
-			If UCase(ssh.ChatString) = UCase(TBShortNo.Text) Then ssh.ChatString = "No " & FrmSettings.TBHonorific.Text
+			If UCase(ssh.ChatString) = UCase(TBShortYes.Text) Then ssh.ChatString = "Yes " & ssh.tempHonorific
+			If UCase(ssh.ChatString) = UCase(TBShortNo.Text) Then ssh.ChatString = "No " & ssh.tempHonorific
 			If UCase(ssh.ChatString) = UCase(TBShortEdge.Text) Then ssh.ChatString = "On the edge"
 			If UCase(ssh.ChatString) = UCase(TBShortSpeedUp.Text) Then ssh.ChatString = "Let me speed up"
 			If UCase(ssh.ChatString) = UCase(TBShortSlowDown.Text) Then ssh.ChatString = "Let me slow down"
 			If UCase(ssh.ChatString) = UCase(TBShortStop.Text) Then ssh.ChatString = "Let me stop"
 			If UCase(ssh.ChatString) = UCase(TBShortStroke.Text) Then ssh.ChatString = "May I start stroking?"
 			If UCase(ssh.ChatString) = UCase(TBShortCum.Text) Then ssh.ChatString = "Please let me cum!"
-			If UCase(ssh.ChatString) = UCase(TBShortGreet.Text) Then ssh.ChatString = "Hello " & FrmSettings.TBHonorific.Text
-			If UCase(ssh.ChatString) = UCase(TBShortSafeword.Text) Then ssh.ChatString = FrmSettings.TBSafeword.Text
+			If UCase(ssh.ChatString) = UCase(TBShortGreet.Text) Then ssh.ChatString = "Hello " & ssh.tempHonorific
+			If UCase(ssh.ChatString) = UCase(TBShortSafeword.Text) Then ssh.ChatString = ssh.tempHonorific
 
 		End If
 
@@ -1528,7 +1532,7 @@ retryStart:
 
 					If FrmSettings.CBHonorificInclude.Checked = True Then
 
-						If WordExists(UCase(ssh.ChatString), UCase(FrmSettings.TBHonorific.Text)) = False Then
+						If WordExists(UCase(ssh.ChatString), UCase(ssh.tempHonorific)) = False Then
 
 							'If InStr(UCase(ChatString), (UCase(FrmSettings.TBHonorific.Text))) = 0 Then
 							'If Not UCase(ChatString).Contains(UCase(FrmSettings.TBHonorific.Text)) Then
@@ -1547,7 +1551,7 @@ retryStart:
 
 
 						If FrmSettings.CBHonorificCapitalized.Checked = True Then
-							If WordExists(ssh.ChatString, Capitalize(FrmSettings.TBHonorific.Text)) = False Then
+							If WordExists(ssh.ChatString, Capitalize(ssh.tempHonorific)) = False Then
 								'If Not ChatString.Contains(FrmSettings.TBHonorific.Text) Then
 								ssh.DomChat = "#SYS_CapitalizeHonorific"
 								ssh.nameErrors += 1
@@ -2613,7 +2617,7 @@ EdgeSkip:
 
 		Dim CheckResponse As String = UCase(ssh.ChatString)
 		CheckResponse = CheckResponse.Replace(UCase(ssh.tempDomName), "")
-		CheckResponse = CheckResponse.Replace(UCase(FrmSettings.TBHonorific.Text), "")
+		CheckResponse = CheckResponse.Replace(UCase(ssh.tempHonorific), "")
 		CheckResponse = CheckResponse.Replace("!", "")
 		CheckResponse = CheckResponse.Replace("?", "")
 		CheckResponse = CheckResponse.Replace(".", "")
@@ -3586,7 +3590,7 @@ NullSkip:
 
 					If ssh.CheckYes = True Or ssh.CheckNo = True Then
 						If FrmSettings.CBHonorificInclude.Checked = True Then
-							If Not UCase(TempChatString).Contains(UCase(FrmSettings.TBHonorific.Text)) Then
+							If Not UCase(TempChatString).Contains(UCase(ssh.tempHonorific)) Then
 								ssh.DomChat = SplitParts(i) & " #SYS_MissingHonorific"
 								If FrmSettings.LCaseCheckBox.Checked = False Then
 									Dim DomU As String = UCase(ssh.DomChat.Substring(0, 1))
@@ -3599,7 +3603,7 @@ NullSkip:
 								Return
 							End If
 							If FrmSettings.CBHonorificCapitalized.Checked = True Then
-								If Not ssh.ChatString.Contains(FrmSettings.TBHonorific.Text) Then
+								If Not ssh.ChatString.Contains(ssh.tempHonorific) Then
 									ssh.DomChat = "#DomHonorific"
 									ssh.nameErrors += 1
 									ssh.wrongAttempt = True
@@ -3612,7 +3616,7 @@ NullSkip:
 
 					'Splits(0) = ""
 					'DomChat = Join(Splits, "]")
-					ssh.DomChat = ChatReplace
+					ssh.DomChat = updateDommeName(ChatReplace)
 
 					' DomChat = Splits(1)
 					GoTo FoundAnswer
@@ -3662,7 +3666,7 @@ NullSkip:
 
 					If ssh.CheckYes = True Or ssh.CheckNo = True Then
 						If FrmSettings.CBHonorificInclude.Checked = True Then
-							If Not UCase(TempChatString).Contains(UCase(FrmSettings.TBHonorific.Text)) Then
+							If Not UCase(TempChatString).Contains(UCase(ssh.tempHonorific)) Then
 								ssh.DomChat = SplitParts(i) & " #SYS_MissingHonorific"
 								If FrmSettings.LCaseCheckBox.Checked = False Then
 									Dim DomU As String = UCase(ssh.DomChat.Substring(0, 1))
@@ -3675,7 +3679,7 @@ NullSkip:
 								Return
 							End If
 							If FrmSettings.CBHonorificCapitalized.Checked = True Then
-								If Not ssh.ChatString.Contains(FrmSettings.TBHonorific.Text) Then
+								If Not ssh.ChatString.Contains(ssh.tempHonorific) Then
 									ssh.DomChat = "#SYS_CapitalizeHonorific"
 									ssh.nameErrors += 1
 									ssh.wrongAttempt = True
@@ -3685,7 +3689,7 @@ NullSkip:
 							End If
 						End If
 					End If
-					ssh.DomChat = ChatReplace
+					ssh.DomChat = updateDommeName(ChatReplace)
 					GoTo FoundAnswer
 				End If
 			Next
@@ -4902,17 +4906,6 @@ CancelGoto:
 			ssh.RapidCode = False
 		End If
 
-
-		If Not ssh.Group.Contains("D") And Not ssh.DomTask.Contains("@Contact1") And Not ssh.DomTask.Contains("@Contact2") And Not ssh.DomTask.Contains("@Contact3") Then
-			Dim GroupList As New List(Of String)
-			GroupList.Clear()
-			If ssh.Group.Contains("1") Then GroupList.Add(" @Contact1 ")
-			If ssh.Group.Contains("2") Then GroupList.Add(" @Contact2 ")
-			If ssh.Group.Contains("3") Then GroupList.Add(" @Contact3 ")
-			ssh.DomTask = ssh.DomTask & GroupList(ssh.randomizer.Next(0, GroupList.Count))
-		End If
-
-
 		If ssh.NullResponse = True Then
 			Timer1.Stop()
 			GoTo NullResponse
@@ -4936,11 +4929,7 @@ CancelGoto:
 				If ssh.RiskyDeal = True Then FrmCardList.LblRiskType.Visible = True
 				If ssh.NullResponse = False Then
 					ssh.IsTyping = True
-					Dim TypingName As String = ssh.tempDomName
-					If ssh.DomTask.Contains("@Contact1") Then TypingName = My.Settings.Glitter1
-					If ssh.DomTask.Contains("@Contact2") Then TypingName = My.Settings.Glitter2
-					If ssh.DomTask.Contains("@Contact3") Then TypingName = My.Settings.Glitter3
-					'If TypingName <> ssh.tempDomName Then JustShowedBlogImage = True
+					ssh.DomTask = updateDommeName(ssh.DomTask)
 
 					If ssh.DomTask.Contains("@EmoteMessage") Then ssh.EmoMes = True
 
@@ -4954,14 +4943,14 @@ CancelGoto:
 
 					If FrmSettings.CBWebtease.Checked = True Then
 
-						ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
-						ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
+						ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & ssh.tempDomName & " is typing...</i><center></font>"
+						ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & ssh.tempDomName & " is typing...</i><center></font>"
 						ChatReadyState()
 
 					Else
 
-						ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-						ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
+						ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
+						ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
 						ChatReadyState()
 
 					End If
@@ -5776,14 +5765,14 @@ DommeSlideshowFallback:
 			ssh.RapidCode = False
 		End If
 
-		If Not ssh.Group.Contains("D") And Not ssh.DomChat.Contains("@Contact1") And Not ssh.DomChat.Contains("@Contact2") And Not ssh.DomChat.Contains("@Contact3") Then
-			Dim GroupList As New List(Of String)
-			GroupList.Clear()
-			If ssh.Group.Contains("1") Then GroupList.Add(" @Contact1 ")
-			If ssh.Group.Contains("2") Then GroupList.Add(" @Contact2 ")
-			If ssh.Group.Contains("3") Then GroupList.Add(" @Contact3 ")
-			ssh.DomChat = ssh.DomChat & GroupList(ssh.randomizer.Next(0, GroupList.Count))
-		End If
+		'If Not ssh.Group.Contains("D") And Not ssh.DomChat.Contains("@Contact1") And Not ssh.DomChat.Contains("@Contact2") And Not ssh.DomChat.Contains("@Contact3") Then
+		'Dim GroupList As New List(Of String)
+		'	GroupList.Clear()
+		'If ssh.Group.Contains("1") Then GroupList.Add(" @Contact1 ")
+		'If ssh.Group.Contains("2") Then GroupList.Add(" @Contact2 ")
+		'If ssh.Group.Contains("3") Then GroupList.Add(" @Contact3 ")
+		'	ssh.DomChat = ssh.DomChat & GroupList(ssh.randomizer.Next(0, GroupList.Count))
+		'End If
 
 		If ssh.NullResponse = True Then
 			SendTimer.Stop()
@@ -5807,10 +5796,6 @@ DommeSlideshowFallback:
 
 				If ssh.RiskyDeal = True Then FrmCardList.LblRiskType.Visible = True
 				ssh.IsTyping = True
-				Dim TypingName As String = ssh.tempDomName
-				If ssh.DomChat.Contains("@Contact1") Then TypingName = My.Settings.Glitter1
-				If ssh.DomChat.Contains("@Contact2") Then TypingName = My.Settings.Glitter2
-				If ssh.DomChat.Contains("@Contact3") Then TypingName = My.Settings.Glitter3
 
 				If ssh.DomChat.Contains("@EmoteMessage") Then ssh.EmoMes = True
 
@@ -5822,14 +5807,14 @@ DommeSlideshowFallback:
 
 				If FrmSettings.CBWebtease.Checked = True Then
 
-					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
-					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & TypingName & " is typing...</i><center></font>"
+					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & ssh.tempDomName & " is typing...</i><center></font>"
+					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><center><i>" & ssh.tempDomName & " is typing...</i><center></font>"
 					ChatReadyState()
 
 				Else
 
-					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
-					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & TypingName & " is typing...</i></font>"
+					ChatText.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
+					ChatText2.DocumentText = ssh.Chat & "<font color=""DimGray""><i>" & ssh.tempDomName & " is typing...</i></font>"
 					ChatReadyState()
 
 				End If
@@ -7966,7 +7951,17 @@ StatusUpdateEnd:
 
 		StringClean = StringClean.Replace("#DomName", ssh.tempDomName)
 
-		StringClean = StringClean.Replace("#DomHonorific", FrmSettings.TBHonorific.Text)
+		If StringClean.Contains("#Contact1Honorific") Then StringClean = StringClean.Replace("#Contact1Honorific", My.Settings.G1Honorific)
+
+		If StringClean.Contains("#Contact2Honorific") Then StringClean = StringClean.Replace("#Contact2Honorific", My.Settings.G2Honorific)
+
+		If StringClean.Contains("#Contact3Honorific") Then StringClean = StringClean.Replace("#Contact3Honorific", My.Settings.G3Honorific)
+
+		If ssh.dommePresent = True Then
+			StringClean = StringClean.Replace("#DomHonorific", ssh.replaceHonorific)
+		Else
+			StringClean = StringClean.Replace("#DomHonorific", ssh.tempHonorific)
+		End If
 
 		StringClean = StringClean.Replace("#DomAge", FrmSettings.domageNumBox.Value)
 
@@ -12221,7 +12216,8 @@ ExternalAudio:
 		End If
 
 		If StringClean.Contains("@RemoveContact1") Then
-			If ssh.contact1Present Then
+			'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
+			If ssh.contact1Present And (ssh.dommePresent Or ssh.contact2Present Or ssh.contact3Present) Then
 				ssh.contact1Present = False
 				ssh.AddContactTick = 2
 				Contact1Timer.Start()
@@ -12239,7 +12235,8 @@ ExternalAudio:
 		End If
 
 		If StringClean.Contains("@RemoveContact2") Then
-			If ssh.contact2Present Then
+			'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
+			If ssh.contact2Present And (ssh.dommePresent Or ssh.contact1Present Or ssh.contact3Present) Then
 				ssh.contact2Present = False
 				ssh.AddContactTick = 2
 				Contact2Timer.Start()
@@ -12257,7 +12254,8 @@ ExternalAudio:
 		End If
 
 		If StringClean.Contains("@RemoveContact3") Then
-			If ssh.contact3Present Then
+			'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
+			If ssh.contact3Present And (ssh.dommePresent Or ssh.contact1Present Or ssh.contact2Present) Then
 				ssh.contact3Present = False
 				ssh.AddContactTick = 2
 				Contact3Timer.Start()
@@ -12276,7 +12274,8 @@ ExternalAudio:
 		End If
 
 		If StringClean.Contains("@RemoveDomme") Then
-			If ssh.dommePresent Then
+			'security measure: only remove the domme if another contact is already present, to prevent crashes due to no contact being present
+			If ssh.dommePresent And (ssh.contact1Present Or ssh.contact2Present Or ssh.contact3Present) Then
 				ssh.dommePresent = False
 				ssh.AddContactTick = 2
 				DommeTimer.Start()
@@ -16106,8 +16105,8 @@ Night:
         ssh.TaskText = ssh.TaskText & TaskEntry & " " & Environment.NewLine & Environment.NewLine
 
         If FrmSettings.CBHonorificInclude.Checked = True Then
-            ssh.TaskText = ssh.TaskText & FrmSettings.TBHonorific.Text & " " & ssh.tempDomName
-        Else
+			ssh.TaskText = ssh.TaskText & ssh.tempHonorific & " " & ssh.tempDomName
+		Else
             ssh.TaskText = ssh.TaskText & ssh.tempDomName
         End If
 
@@ -17391,17 +17390,23 @@ saveImage:
 			If ssh.glitterDommeNumber = 0 Then
 				If FrmSettings.CBRandomDomme.Checked = False Then
 					ssh.SlideshowMain = New ContactData(ContactType.Domme)
+					ssh.replaceHonorific = My.Settings.SubHonorific
 				Else
 					ssh.SlideshowMain = New ContactData(ContactType.Random)
+					ssh.replaceHonorific = My.Settings.RandomHonorific
 				End If
 			ElseIf ssh.glitterDommeNumber = 1 Then
 				ssh.SlideshowMain = New ContactData(ContactType.Contact1)
+				ssh.replaceHonorific = My.Settings.G1Honorific
 			ElseIf ssh.glitterDommeNumber = 2 Then
 				ssh.SlideshowMain = New ContactData(ContactType.Contact2)
+				ssh.replaceHonorific = My.Settings.G2Honorific
 			ElseIf ssh.glitterDommeNumber = 3 Then
 				ssh.SlideshowMain = New ContactData(ContactType.Contact3)
+				ssh.replaceHonorific = My.Settings.G3Honorific
 			ElseIf ssh.glitterDommeNumber = 4 Then
 				ssh.SlideshowMain = New ContactData(ContactType.Random)
+				ssh.replaceHonorific = My.Settings.RandomHonorific
 			End If
 			ssh.contactToUse = ssh.SlideshowMain
 		End If
@@ -19590,7 +19595,7 @@ restartInstantly:
 
 	Private Sub BTNYes_Click(sender As System.Object, e As System.EventArgs) Handles BTNYes.Click, Button2.Click
 		Try
-			chatBox.Text = "Yes " & FrmSettings.TBHonorific.Text
+			chatBox.Text = "Yes " & ssh.tempHonorific
 		Catch
 			chatBox.Text = "Yes"
 		End Try
@@ -19600,7 +19605,7 @@ restartInstantly:
 
 	Private Sub BTNNo_Click(sender As System.Object, e As System.EventArgs) Handles BTNNo.Click, Button3.Click
 		Try
-			chatBox.Text = "No " & FrmSettings.TBHonorific.Text
+			chatBox.Text = "No " & ssh.tempHonorific
 		Catch
 			chatBox.Text = "No"
 		End Try
@@ -19647,7 +19652,7 @@ restartInstantly:
 		End If
 
 		Try
-			chatBox.Text = "Hello " & FrmSettings.TBHonorific.Text
+			chatBox.Text = "Hello " & ssh.tempHonorific
 		Catch
 			chatBox.Text = "Hello"
 		End Try
@@ -20141,7 +20146,7 @@ restartInstantly:
 		ssh.PlaylistFile = StripBlankLines(ssh.PlaylistFile)
 		ssh.PlaylistCurrent = 0
 		Try
-			chatBox.Text = "Hello " & FrmSettings.TBHonorific.Text
+			chatBox.Text = "Hello " & ssh.tempHonorific
 		Catch
 			chatBox.Text = "Hello"
 		End Try
@@ -21027,10 +21032,60 @@ playLoop:
 		If My.Settings.DomName <> "" Then
 			ssh.tempDomName = My.Settings.DomName
 			domName.Text = ssh.tempDomName
-			'ssh.tempHonorific = My.Settings.SubHonorific
+			ssh.tempHonorific = My.Settings.SubHonorific
+			ssh.replaceHonorific = ssh.tempHonorific
 		End If
 		If My.Settings.SubName <> "" Then subName.Text = My.Settings.SubName
 		FrmSettings.LBLCurrentDomme.Text = ssh.tempDomName
 	End Sub
+
+
+	Private Function updateDommeName(stringToCheck As String) As String
+		'deals with situation in which the domme is not present
+		If Not ssh.Group.Contains("D") And Not stringToCheck.Contains("@Contact1") And Not stringToCheck.Contains("@Contact2") And Not stringToCheck.Contains("@Contact3") And Not stringToCheck.Contains("@RandomContact") Then
+			Dim GroupList As New List(Of String)
+			GroupList.Clear()
+			If ssh.Group.Contains("1") Then GroupList.Add(" @Contact1 ")
+			If ssh.Group.Contains("2") Then GroupList.Add(" @Contact2 ")
+			If ssh.Group.Contains("3") Then GroupList.Add(" @Contact3 ")
+			stringToCheck = stringToCheck & GroupList(ssh.randomizer.Next(0, GroupList.Count))
+		End If
+
+		ssh.contactToUse = ssh.SlideshowMain
+		ssh.tempDomName = ssh.SlideshowMain.TypeName
+		ssh.tempHonorific = ssh.SlideshowMain.TypeHonorific
+		If stringToCheck.Contains("@Contact1") Then
+			ssh.tempDomName = My.Settings.Glitter1
+			ssh.tempHonorific = My.Settings.G1Honorific
+			ssh.contactToUse = ssh.SlideshowContact1
+		ElseIf stringToCheck.Contains("@Contact2") Then
+			ssh.tempDomName = My.Settings.Glitter2
+			ssh.tempHonorific = My.Settings.G2Honorific
+			ssh.contactToUse = ssh.SlideshowContact2
+		ElseIf stringToCheck.Contains("@Contact3") Then
+			ssh.tempDomName = My.Settings.Glitter3
+			ssh.tempHonorific = My.Settings.G3Honorific
+			ssh.contactToUse = ssh.SlideshowContact3
+			'ElseIf stringToCheck.Contains("@RandomContact") Then
+			'	Dim casual As Integer = 0
+			'	casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
+			'	Select Case ssh.currentlyPresentContacts(casual)
+			'Case ssh.SlideshowContact1.TypeName
+			'	ssh.tempDomName = My.Settings.Glitter1
+			'		ssh.tempHonorific = My.Settings.G1Honorific
+			'ssh.contactToUse = ssh.SlideshowContact1
+			'Case ssh.SlideshowContact2.TypeName
+			'		ssh.tempDomName = My.Settings.Glitter2
+			'ssh.tempHonorific = My.Settings.G2Honorific
+			'ssh.contactToUse = ssh.SlideshowContact2
+			'Case ssh.SlideshowContact3.TypeName
+			'ssh.tempDomName = My.Settings.Glitter3
+			'ssh.tempHonorific = My.Settings.G3Honorific
+			'ssh.contactToUse = ssh.SlideshowContact3
+			'Case Else
+			'End Select
+		End If
+		Return stringToCheck
+	End Function
 End Class
 

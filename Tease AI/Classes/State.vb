@@ -424,6 +424,9 @@ Public Class SessionState
 	Public Property Contact3Stroke As Boolean
 
 	Public Property tempDomName As String
+	Public Property tempHonorific As String
+	Public Property replaceHonorific As String
+
 #Region "@CallReturn("
 
 	''' <summary>Gets or sets current stack for @CallReturn( command.</summary>

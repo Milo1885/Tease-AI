@@ -6261,6 +6261,23 @@ checkFolder:
 	Private Sub TBHonorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBHonorific.LostFocus
 		If TBHonorific.Text = "" Or TBHonorific.Text Is Nothing Then TBHonorific.Text = "Mistress"
 		My.Settings.SubHonorific = TBHonorific.Text
+		Ssh.tempHonorific = TBHonorific.Text
+	End Sub
+
+	Private Sub G1Honorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles G1Honorific.LostFocus
+		My.Settings.G1Honorific = G1Honorific.Text
+	End Sub
+
+	Private Sub G2Honorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles G2Honorific.LostFocus
+		My.Settings.G2Honorific = G2Honorific.Text
+	End Sub
+
+	Private Sub G3Honorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles G3Honorific.LostFocus
+		My.Settings.G3Honorific = G3Honorific.Text
+	End Sub
+
+	Private Sub RandomHonorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles RandomHonorific.LostFocus
+		My.Settings.RandomHonorific = RandomHonorific.Text
 	End Sub
 
 	Private Sub CBHonorificInclude_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBHonorificInclude.LostFocus
@@ -8210,6 +8227,34 @@ checkFolder:
 	Private Sub TBHonorific_MouseHover(sender As Object, e As System.EventArgs) Handles TBHonorific.MouseHover
 
 		TTDir.SetToolTip(TBHonorific, "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc.")
+
+		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
+	End Sub
+
+	Private Sub G1Honorific_MouseHover(sender As Object, e As System.EventArgs) Handles G1Honorific.MouseHover
+
+		TTDir.SetToolTip(G1Honorific, "Enter an honorific to use for the contact, such as Mistress, Goddess, Princess, etc.")
+
+		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
+	End Sub
+
+	Private Sub G2Honorific_MouseHover(sender As Object, e As System.EventArgs) Handles G2Honorific.MouseHover
+
+		TTDir.SetToolTip(G2Honorific, "Enter an honorific to use for the contact, such as Mistress, Goddess, Princess, etc.")
+
+		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
+	End Sub
+
+	Private Sub G3Honorific_MouseHover(sender As Object, e As System.EventArgs) Handles G3Honorific.MouseHover
+
+		TTDir.SetToolTip(G3Honorific, "Enter an honorific to use for the contact, such as Mistress, Goddess, Princess, etc.")
+
+		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
+	End Sub
+
+	Private Sub RandomHonorific_MouseHover(sender As Object, e As System.EventArgs) Handles RandomHonorific.MouseHover
+
+		TTDir.SetToolTip(RandomHonorific, "Enter an honorific to use for the contact, such as Mistress, Goddess, Princess, etc.")
 
 		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
 	End Sub

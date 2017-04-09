@@ -41,6 +41,22 @@ Public Class ContactData
 		End Get
 	End Property
 
+	Public ReadOnly Property TypeHonorific As String
+		Get
+			If Contact = ContactType.Contact1 Then
+				Return My.Settings.G1Honorific
+			ElseIf Contact = ContactType.Contact2 Then
+				Return My.Settings.G2Honorific
+			ElseIf Contact = ContactType.Contact3 Then
+				Return My.Settings.G3Honorific
+			ElseIf Contact = ContactType.Random Then
+				Return My.Settings.RandomHonorific
+			Else
+				Return My.Settings.SubHonorific
+			End If
+		End Get
+	End Property
+
 	Public ReadOnly Property TypeColorHtml As String
 		Get
 			If Contact = ContactType.Contact1 Then
