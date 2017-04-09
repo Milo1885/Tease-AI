@@ -236,7 +236,7 @@ checkFolder:
 	Dim currPath As String
 
 		If Contact = ContactType.Random And Not newFolder Then
-			currPath = myDirectory.GetDirectories(baseDirectory).ElementAt(New Random().Next(0, myDirectory.GetDirectories(baseDirectory).Count - 1))
+			currPath = myDirectory.GetDirectories(baseDirectory).ElementAt(New Random().Next(0, myDirectory.GetDirectories(baseDirectory).Count))
 			tempBaseFolder = currPath
 		Else
 			currPath = baseDirectory

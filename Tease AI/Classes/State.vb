@@ -183,6 +183,7 @@ Public Class SessionState
 	Public Property ModuleEnd As Boolean
 
 	Public Property giveUpReturn As Boolean
+	Public Property contactToUse As ContactData
 	Public Property DivideText As Boolean
 
 	Public Property HoldEdgeTick As Integer
