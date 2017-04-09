@@ -184,6 +184,7 @@ Public Class SessionState
 
 	Public Property giveUpReturn As Boolean
 	Public Property contactToUse As ContactData
+	Public Property currentlyPresentContacts As List(Of String)
 	Public Property DivideText As Boolean
 
 	Public Property HoldEdgeTick As Integer
@@ -721,6 +722,8 @@ Public Class SessionState
 		SlideshowContact2 = New ContactData(ContactType.Contact2)
 		SlideshowContact3 = New ContactData(ContactType.Contact3)
 		SlideshowContactRandom = New ContactData(ContactType.Random)
+		currentlyPresentContacts = New List(Of String)
+		currentlyPresentContacts.Add(SlideshowMain.TypeName)
 
 		CaloriesConsumed = My.Settings.CaloriesConsumed
 
@@ -1058,6 +1061,7 @@ Public Class SessionState
 			If SlideshowContact1 Is Nothing Then SlideshowContact1 = New ContactData(ContactType.Contact1)
 			If SlideshowContact2 Is Nothing Then SlideshowContact2 = New ContactData(ContactType.Contact2)
 			If SlideshowContact3 Is Nothing Then SlideshowContact3 = New ContactData(ContactType.Contact3)
+			If currentlyPresentContacts.Count = 0 Then currentlyPresentContacts.Add(SlideshowMain.TypeName)
 
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			'							Set Picturebox & WMP

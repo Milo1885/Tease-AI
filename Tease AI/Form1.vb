@@ -5051,7 +5051,7 @@ NullResponse:
 					ssh.DomTask = ssh.DomTask.Replace(WriteFlag, PoundClean(WriteFlag))
 				End If
 
-				If ssh.DomTask.Contains("@Contact1") Or ssh.DomTask.Contains("@Contact2") Or ssh.DomTask.Contains("@Contact3") Then ssh.SubWroteLast = True
+				If ssh.DomTask.Contains("@Contact1") Or ssh.DomTask.Contains("@Contact2") Or ssh.DomTask.Contains("@Contact3") Or ssh.DomTask.Contains("@RandomContact") Then ssh.SubWroteLast = True
 
 				'################### Gather Response Data #################
 				'TODO-Next: Test Code
@@ -5902,7 +5902,7 @@ TryNextWithTease:
 					ssh.DomChat = ssh.DomChat.Replace(WriteFlag, PoundClean(WriteFlag))
 				End If
 
-				If ssh.DomChat.Contains("@Contact1") Or ssh.DomChat.Contains("@Contact2") Or ssh.DomChat.Contains("@Contact3") Then ssh.SubWroteLast = True
+				If ssh.DomChat.Contains("@Contact1") Or ssh.DomChat.Contains("@Contact2") Or ssh.DomChat.Contains("@Contact3") Or ssh.DomChat.Contains("@RandomContact") Then ssh.SubWroteLast = True
 
 
 				'################### Gather Response Data #################
@@ -10257,7 +10257,6 @@ TaskCleanSet:
 
 
 		If StringClean.Contains("@StartStroking") Then
-
 			If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_FirstRun") Then
 				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
 				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_FirstRun", SetDate, False)
@@ -10271,9 +10270,27 @@ TaskCleanSet:
 				Catch
 				End Try
 			End If
-			If StringClean.Contains("@Contact1") Then ssh.Contact1Stroke = True
-			If StringClean.Contains("@Contact2") Then ssh.Contact2Stroke = True
-			If StringClean.Contains("@Contact3") Then ssh.Contact3Stroke = True
+
+			If StringClean.Contains("@Contact1") Then
+				ssh.Contact1Stroke = True
+			ElseIf StringClean.Contains("@Contact2") Then
+				ssh.Contact2Stroke = True
+			ElseIf StringClean.Contains("@Contact3") Then
+				ssh.Contact3Stroke = True
+			ElseIf StringClean.Contains("@RandomContact") Then
+				Dim casual As Integer = 0
+				casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
+				Select Case ssh.currentlyPresentContacts(casual)
+					Case ssh.SlideshowContact1.TypeName
+						ssh.Contact1Stroke = True
+					Case ssh.SlideshowContact2.TypeName
+						ssh.Contact2Stroke = True
+					Case ssh.SlideshowContact3.TypeName
+						ssh.Contact3Stroke = True
+					Case Else
+				End Select
+			End If
+
 			ssh.AskedToGiveUpSection = False
 			ssh.AskedToSpeedUp = False
 			ssh.AskedToSlowDown = False
@@ -10314,9 +10331,6 @@ TaskCleanSet:
 				ssh.StrokeTick = ssh.randomizer.Next(FrmSettings.NBTauntCycleMin.Value * 60, FrmSettings.NBTauntCycleMax.Value * 60)
 				If ssh.WorshipMode = True Then ssh.StrokeTick = FrmSettings.NBTauntCycleMax.Value * 60
 			End If
-
-
-
 			ssh.StrokeTauntTick = ssh.randomizer.Next(11, 21)
 			'StrokeThread = New Thread(AddressOf StrokeLoop)
 			'StrokeThread.IsBackground = True
@@ -12208,6 +12222,7 @@ ExternalAudio:
 
 		If StringClean.Contains("@AddContact1") Then
 			If Not ssh.contact1Present Then
+				ssh.currentlyPresentContacts.Add(ssh.SlideshowContact1.TypeName)
 				ssh.contact1Present = True
 				ssh.AddContactTick = 2
 				Contact1Timer.Start()
@@ -12218,6 +12233,7 @@ ExternalAudio:
 		If StringClean.Contains("@RemoveContact1") Then
 			'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
 			If ssh.contact1Present And (ssh.dommePresent Or ssh.contact2Present Or ssh.contact3Present) Then
+				ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact1.TypeName)
 				ssh.contact1Present = False
 				ssh.AddContactTick = 2
 				Contact1Timer.Start()
@@ -12227,6 +12243,7 @@ ExternalAudio:
 
 		If StringClean.Contains("@AddContact2") Then
 			If Not ssh.contact2Present Then
+				ssh.currentlyPresentContacts.Add(ssh.SlideshowContact2.TypeName)
 				ssh.contact2Present = True
 				ssh.AddContactTick = 2
 				Contact2Timer.Start()
@@ -12237,6 +12254,7 @@ ExternalAudio:
 		If StringClean.Contains("@RemoveContact2") Then
 			'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
 			If ssh.contact2Present And (ssh.dommePresent Or ssh.contact1Present Or ssh.contact3Present) Then
+				ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact2.TypeName)
 				ssh.contact2Present = False
 				ssh.AddContactTick = 2
 				Contact2Timer.Start()
@@ -12246,6 +12264,7 @@ ExternalAudio:
 
 		If StringClean.Contains("@AddContact3") Then
 			If Not ssh.contact3Present Then
+				ssh.currentlyPresentContacts.Add(ssh.SlideshowContact3.TypeName)
 				ssh.contact3Present = True
 				ssh.AddContactTick = 2
 				Contact3Timer.Start()
@@ -12256,6 +12275,7 @@ ExternalAudio:
 		If StringClean.Contains("@RemoveContact3") Then
 			'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
 			If ssh.contact3Present And (ssh.dommePresent Or ssh.contact1Present Or ssh.contact2Present) Then
+				ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact3.TypeName)
 				ssh.contact3Present = False
 				ssh.AddContactTick = 2
 				Contact3Timer.Start()
@@ -12265,6 +12285,7 @@ ExternalAudio:
 
 		If StringClean.Contains("@AddDomme") Then
 			If Not ssh.dommePresent Then
+				ssh.currentlyPresentContacts.Add(ssh.SlideshowMain.TypeName)
 				ssh.dommePresent = True
 				ssh.AddContactTick = 2
 				DommeTimer.Start()
@@ -12276,6 +12297,7 @@ ExternalAudio:
 		If StringClean.Contains("@RemoveDomme") Then
 			'security measure: only remove the domme if another contact is already present, to prevent crashes due to no contact being present
 			If ssh.dommePresent And (ssh.contact1Present Or ssh.contact2Present Or ssh.contact3Present) Then
+				ssh.currentlyPresentContacts.Remove(ssh.SlideshowMain.TypeName)
 				ssh.dommePresent = False
 				ssh.AddContactTick = 2
 				DommeTimer.Start()
@@ -13905,9 +13927,25 @@ VTSkip:
 
 
 	Friend Sub ContactEdgeCheck(ByVal EdgeCheck As String)
-		If EdgeCheck.Contains("@Contact1") Then ssh.Contact1Edge = True
-		If EdgeCheck.Contains("@Contact2") Then ssh.Contact2Edge = True
-		If EdgeCheck.Contains("@Contact3") Then ssh.Contact3Edge = True
+		If EdgeCheck.Contains("@Contact1") Then
+			ssh.Contact1Edge = True
+		ElseIf EdgeCheck.Contains("@Contact2") Then
+			ssh.Contact2Edge = True
+		ElseIf EdgeCheck.Contains("@Contact3") Then
+			ssh.Contact3Edge = True
+		ElseIf EdgeCheck.Contains("@RandomContact") Then
+			Dim casual As Integer = 0
+			casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
+			Select Case ssh.currentlyPresentContacts(casual)
+				Case ssh.SlideshowContact1.TypeName
+					ssh.Contact1Edge = True
+				Case ssh.SlideshowContact2.TypeName
+					ssh.Contact2Edge = True
+				Case ssh.SlideshowContact3.TypeName
+					ssh.Contact3Edge = True
+				Case Else
+			End Select
+		End If
 	End Sub
 
 	Public Sub DisableContactStroke()
@@ -17365,24 +17403,6 @@ saveImage:
 #End Region ' DommeSlideshow
 
 #End Region ' PictureStrip
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	Public Sub LoadDommeImageFolder()
 		'check which domme should be loaded
@@ -21066,26 +21086,27 @@ playLoop:
 			ssh.tempDomName = My.Settings.Glitter3
 			ssh.tempHonorific = My.Settings.G3Honorific
 			ssh.contactToUse = ssh.SlideshowContact3
-			'ElseIf stringToCheck.Contains("@RandomContact") Then
-			'	Dim casual As Integer = 0
-			'	casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
-			'	Select Case ssh.currentlyPresentContacts(casual)
-			'Case ssh.SlideshowContact1.TypeName
-			'	ssh.tempDomName = My.Settings.Glitter1
-			'		ssh.tempHonorific = My.Settings.G1Honorific
-			'ssh.contactToUse = ssh.SlideshowContact1
-			'Case ssh.SlideshowContact2.TypeName
-			'		ssh.tempDomName = My.Settings.Glitter2
-			'ssh.tempHonorific = My.Settings.G2Honorific
-			'ssh.contactToUse = ssh.SlideshowContact2
-			'Case ssh.SlideshowContact3.TypeName
-			'ssh.tempDomName = My.Settings.Glitter3
-			'ssh.tempHonorific = My.Settings.G3Honorific
-			'ssh.contactToUse = ssh.SlideshowContact3
-			'Case Else
-			'End Select
+		ElseIf stringToCheck.Contains("@RandomContact") Then
+			Dim casual As Integer = 0
+			casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
+			Select Case ssh.currentlyPresentContacts(casual)
+				Case ssh.SlideshowContact1.TypeName
+					ssh.tempDomName = My.Settings.Glitter1
+					ssh.tempHonorific = My.Settings.G1Honorific
+					ssh.contactToUse = ssh.SlideshowContact1
+				Case ssh.SlideshowContact2.TypeName
+					ssh.tempDomName = My.Settings.Glitter2
+					ssh.tempHonorific = My.Settings.G2Honorific
+					ssh.contactToUse = ssh.SlideshowContact2
+				Case ssh.SlideshowContact3.TypeName
+					ssh.tempDomName = My.Settings.Glitter3
+					ssh.tempHonorific = My.Settings.G3Honorific
+					ssh.contactToUse = ssh.SlideshowContact3
+				Case Else
+			End Select
 		End If
 		Return stringToCheck
 	End Function
+
 End Class
 
