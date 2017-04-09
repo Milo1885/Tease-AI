@@ -558,6 +558,8 @@ Public Class SessionState
 
 	Public Property SecondSession As Boolean
 
+	Public Property checkAnswers As subAnswers
+
 	''' <summary>
 	''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
 	''' </summary>
@@ -728,7 +730,7 @@ Public Class SessionState
 		currentlyPresentContacts.Add(SlideshowMain.TypeName)
 
 		CaloriesConsumed = My.Settings.CaloriesConsumed
-
+		checkAnswers = New subAnswers(Me)
 	End Sub
 
 #End Region ' Constructors
@@ -1262,5 +1264,22 @@ Public Class SessionState
 		End If
 	End Function
 
+	Public Function obtainSplitParts(splitMe As String, isChat As Boolean) As String()
+		splitMe = "[" & splitMe & "] Null"
+		Dim Splits As String() = splitMe.Split(New Char() {"]"c})
+		Splits(0) = Splits(0).Replace("[", "")
+		Do
+			Splits(0) = Splits(0).Replace("  ", " ")
+			Splits(0) = Splits(0).Replace(" ,", ",")
+			Splits(0) = Splits(0).Replace(", ", ",")
+			Splits(0) = Splits(0).Replace("'", "")
+		Loop Until Not Splits(0).Contains("  ") And Not Splits(0).Contains(", ") And Not Splits(0).Contains(" ,") And Not Splits(0).Contains("'")
+		If isChat Then
+			'che(32) is the code for empty space
+			Return Splits(0).Split(New Char() {Chr(32), ","c})
+		Else
+			Return Splits(0).Split(New Char() {","c})
+		End If
+	End Function
 End Class
 

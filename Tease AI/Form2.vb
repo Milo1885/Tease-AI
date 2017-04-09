@@ -6248,14 +6248,22 @@ checkFolder:
 
 	Private Sub TBGreeting_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBGreeting.LostFocus
 		My.Settings.SubGreeting = TBGreeting.Text
+		Ssh.checkAnswers = New subAnswers(Ssh)
 	End Sub
 
 	Private Sub TBYes_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBYes.LostFocus
 		My.Settings.SubYes = TBYes.Text
+		Ssh.checkAnswers = New subAnswers(Ssh)
 	End Sub
 
 	Private Sub TBNo_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBNo.LostFocus
 		My.Settings.SubNo = TBNo.Text
+		Ssh.checkAnswers = New subAnswers(Ssh)
+	End Sub
+
+	Private Sub TBSorry_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBSorry.LostFocus
+		My.Settings.SubSorry = TBSorry.Text
+		Ssh.checkAnswers = New subAnswers(Ssh)
 	End Sub
 
 	Private Sub TBHonorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBHonorific.LostFocus

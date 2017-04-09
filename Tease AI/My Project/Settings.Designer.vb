@@ -2009,8 +2009,20 @@ Namespace My
                 Me("SubNo") = value
             End Set
         End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),
+		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		 Global.System.Configuration.DefaultSettingValueAttribute("sorry, apologize, excuse")>
+		Public Property SubSorry() As String
+			Get
+				Return CType(Me("SubSorry"), String)
+			End Get
+			Set
+				Me("SubSorry") = Value
+			End Set
+		End Property
+
+		<Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("Mistress")>  _
         Public Property SubHonorific() As String

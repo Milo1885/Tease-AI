@@ -735,6 +735,7 @@ retryStart:
 			FrmSettings.TBGreeting.Text = My.Settings.SubGreeting
 			FrmSettings.TBYes.Text = My.Settings.SubYes
 			FrmSettings.TBNo.Text = My.Settings.SubNo
+			FrmSettings.TBSorry.Text = My.Settings.SubSorry
 			FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
 			FrmSettings.G1Honorific.Text = My.Settings.G1Honorific
 			FrmSettings.G2Honorific.Text = My.Settings.G2Honorific
@@ -1564,107 +1565,107 @@ retryStart:
 
 					Debug.Print("CHeck")
 
-					'If checkSubAnswer("hi") = 1 Then
-					Debug.Print("CHeck")
-					ssh.justStarted = True
-					ssh.SaidHello = True
-					ssh.BeforeTease = True
+					If checkSubAnswer("hi") = 1 Then
+						Debug.Print("CHeck")
+						ssh.justStarted = True
+						ssh.SaidHello = True
+						ssh.BeforeTease = True
 
-					If FrmSettings.CBTeaseLengthDD.Checked = True Then
-
-
-						If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
-						If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
-						If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
-						If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
-						If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
+						If FrmSettings.CBTeaseLengthDD.Checked = True Then
 
 
-					Else
+							If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick = ssh.randomizer.Next(10, 16) * 60
+							If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick = ssh.randomizer.Next(15, 21) * 60
+							If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick = ssh.randomizer.Next(20, 31) * 60
+							If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick = ssh.randomizer.Next(30, 46) * 60
+							If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick = ssh.randomizer.Next(45, 61) * 60
 
-						ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
 
-					End If
+						Else
+
+							ssh.TeaseTick = ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+
+						End If
 
 
-					TeaseTimer.Start()
+						TeaseTimer.Start()
 
-					' Lock Orgasm Chances if setting is activated. 
-					If My.Settings.LockOrgasmChances Then _
+						' Lock Orgasm Chances if setting is activated. 
+						If My.Settings.LockOrgasmChances Then _
 						FrmSettings.LockOrgasmChances(True)
 
-					If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistStartFile
+						If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistStartFile
 
-					If ssh.Playlist = False Or ssh.PlaylistFile(0).Contains("Random Start") Then
+						If ssh.Playlist = False Or ssh.PlaylistFile(0).Contains("Random Start") Then
 
 NoPlaylistStartFile:
 
-						Dim StartList As New List(Of String)
-						StartList.Clear()
+							Dim StartList As New List(Of String)
+							StartList.Clear()
 
-						Dim ChastityStartCheck As String
-						If My.Settings.Chastity = True Then
-							ChastityStartCheck = "*_CHASTITY.txt"
-						Else
-							ChastityStartCheck = "*.txt"
-						End If
-
-						For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, ChastityStartCheck)
-							Dim TempStart As String = foundFile
-							TempStart = TempStart.Replace(".txt", "")
-							Do Until Not TempStart.Contains("\")
-								TempStart = TempStart.Remove(0, 1)
-							Loop
-							For x As Integer = 0 To FrmSettings.CLBStartList.Items.Count - 1
-								If My.Settings.Chastity = True Then
-									If FrmSettings.CLBStartList.Items(x) = TempStart And FrmSettings.CLBStartList.GetItemChecked(x) = True Then
-										StartList.Add(foundFile)
-									End If
-								Else
-									If FrmSettings.CLBStartList.Items(x) = TempStart And FrmSettings.CLBStartList.GetItemChecked(x) = True And Not TempStart.Contains("_CHASTITY") Then
-										StartList.Add(foundFile)
-									End If
-								End If
-
-							Next
-						Next
-
-						If StartList.Count < 1 Then
+							Dim ChastityStartCheck As String
 							If My.Settings.Chastity = True Then
-								ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Start_CHASTITY.txt"
+								ChastityStartCheck = "*_CHASTITY.txt"
 							Else
-								ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Start.txt"
+								ChastityStartCheck = "*.txt"
 							End If
+
+							For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Start\", FileIO.SearchOption.SearchTopLevelOnly, ChastityStartCheck)
+								Dim TempStart As String = foundFile
+								TempStart = TempStart.Replace(".txt", "")
+								Do Until Not TempStart.Contains("\")
+									TempStart = TempStart.Remove(0, 1)
+								Loop
+								For x As Integer = 0 To FrmSettings.CLBStartList.Items.Count - 1
+									If My.Settings.Chastity = True Then
+										If FrmSettings.CLBStartList.Items(x) = TempStart And FrmSettings.CLBStartList.GetItemChecked(x) = True Then
+											StartList.Add(foundFile)
+										End If
+									Else
+										If FrmSettings.CLBStartList.Items(x) = TempStart And FrmSettings.CLBStartList.GetItemChecked(x) = True And Not TempStart.Contains("_CHASTITY") Then
+											StartList.Add(foundFile)
+										End If
+									End If
+
+								Next
+							Next
+
+							If StartList.Count < 1 Then
+								If My.Settings.Chastity = True Then
+									ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Start_CHASTITY.txt"
+								Else
+									ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Start.txt"
+								End If
+							Else
+								ssh.FileText = StartList(ssh.randomizer.Next(0, StartList.Count))
+							End If
+
 						Else
-							ssh.FileText = StartList(ssh.randomizer.Next(0, StartList.Count))
+							Debug.Print("Start situation found")
+							If ssh.PlaylistFile(0).Contains("Regular-TeaseAI-Script") Then
+								ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Start\" & ssh.PlaylistFile(0)
+								ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
+								ssh.FileText = ssh.FileText & ".txt"
+							Else
+								ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\Start\" & ssh.PlaylistFile(0) & ".txt"
+							End If
 						End If
 
-					Else
-						Debug.Print("Start situation found")
-						If ssh.PlaylistFile(0).Contains("Regular-TeaseAI-Script") Then
-							ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Start\" & ssh.PlaylistFile(0)
-							ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
-							ssh.FileText = ssh.FileText & ".txt"
-						Else
-							ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\Start\" & ssh.PlaylistFile(0) & ".txt"
+						If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
+						ssh.LastScriptCountdown = ssh.randomizer.Next(3, 5 * FrmSettings.domlevelNumBox.Value)
+
+						If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
+							If FrmSettings.CBRandomDomme.Checked = True Then ssh.glitterDommeNumber = 4
+							LoadDommeImageFolder()
 						End If
+
+
+						ssh.StrokeTauntVal = -1
+						ssh.ScriptTick = 3
+						ScriptTimer.Start()
+
 					End If
-
-					If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
-					ssh.LastScriptCountdown = ssh.randomizer.Next(3, 5 * FrmSettings.domlevelNumBox.Value)
-
-					If Directory.Exists(My.Settings.DomImageDir) And ssh.SlideshowLoaded = False Then
-						If FrmSettings.CBRandomDomme.Checked = True Then ssh.glitterDommeNumber = 4
-						LoadDommeImageFolder()
-					End If
-
-
-					ssh.StrokeTauntVal = -1
-					ssh.ScriptTick = 3
-					ScriptTimer.Start()
-
 				End If
-				'End If
 
 
 			Next
@@ -2601,11 +2602,10 @@ EdgeSkip:
 		If ssh.justStarted Then
 			ssh.justStarted = False
 		Else
-			'preparation for check answer
-			'If checkSubAnswer() = 0 Then
-			'checkForPunish()
-			'Return
-			'End If
+			If checkSubAnswer() = 0 Then
+				checkForPunish()
+				Return
+			End If
 		End If
 
 		If ssh.InputFlag = True Then
@@ -3534,9 +3534,6 @@ NullSkip:
 		End If
 
 
-
-		Dim AcceptLine As Integer
-
 		' Read all lines of File
 		Dim lines As List(Of String) = Txt2List(dir)
 		Dim line As Integer
@@ -3547,12 +3544,10 @@ NullSkip:
 			line = ssh.StrokeTauntVal
 		End If
 
-		AcceptLine = 0
 
 		Dim TempLineVal As Integer
 		Do
 			line += 1
-			AcceptLine += 1
 		Loop Until InStr(UCase(lines(line)), UCase("@AcceptAnswer")) <> 0 Or InStr(UCase(lines(line)), UCase("@DifferentAnswer")) <> 0
 
 
@@ -3565,156 +3560,51 @@ NullSkip:
 		End If
 
 		Dim CheckLines As String
-
-
-		Do
-			line += 1
-
-			CheckLines = lines(line)
-
-
-			ssh.CheckYes = False
-			ssh.CheckNo = False
-
-			If UCase(CheckLines).Contains(UCase("[yes]")) Then ssh.CheckYes = True
-			If UCase(CheckLines).Contains(UCase("[no]")) Then ssh.CheckNo = True
-
-
-			Dim Splits As String() = CheckLines.Split(New Char() {"]"c})
-			Splits(0) = Splits(0).Replace("[", "")
-
-			Dim ChatReplace As String = CheckLines.Replace("[" & Splits(0) & "]", "")
-
-			If ssh.CheckYes = True Then Splits(0) = FrmSettings.TBYes.Text
-			If ssh.CheckNo = True Then Splits(0) = FrmSettings.TBNo.Text
-
-
-
-			Do
-				Splits(0) = Splits(0).Replace("  ", " ")
-				Splits(0) = Splits(0).Replace(" ,", ",")
-				Splits(0) = Splits(0).Replace(", ", ",")
-				Splits(0) = Splits(0).Replace("'", "")
-			Loop Until Not Splits(0).Contains("  ") And Not Splits(0).Contains(", ") And Not Splits(0).Contains(" ,") And Not Splits(0).Contains("'")
-
-			Dim SplitParts As String() = Splits(0).Split(New Char() {","c})
-
-			For i As Integer = 0 To SplitParts.Length - 1
-
-				If UCase(TempChatString) = (UCase(SplitParts(i))) Then
-
-					If ssh.CheckYes = True Or ssh.CheckNo = True Then
-						If FrmSettings.CBHonorificInclude.Checked = True Then
-							If Not UCase(TempChatString).Contains(UCase(ssh.tempHonorific)) Then
-								ssh.DomChat = SplitParts(i) & " #SYS_MissingHonorific"
-								If FrmSettings.LCaseCheckBox.Checked = False Then
-									Dim DomU As String = UCase(ssh.DomChat.Substring(0, 1))
-									ssh.DomChat = ssh.DomChat.Remove(0, 1)
-									ssh.DomChat = DomU & ssh.DomChat
-									ssh.nameErrors += 1
-									ssh.wrongAttempt = True
-								End If
-								TypingDelay()
-								Return
-							End If
-							If FrmSettings.CBHonorificCapitalized.Checked = True Then
-								If Not ssh.ChatString.Contains(ssh.tempHonorific) Then
-									ssh.DomChat = "#DomHonorific"
-									ssh.nameErrors += 1
-									ssh.wrongAttempt = True
-									TypingDelay()
-									Return
-								End If
-							End If
-						End If
-					End If
-
-					'Splits(0) = ""
-					'DomChat = Join(Splits, "]")
-					ssh.DomChat = updateDommeName(ChatReplace)
-
-					' DomChat = Splits(1)
-					GoTo FoundAnswer
-				End If
-			Next
-
-		Loop Until InStr(UCase(lines(line)), UCase("@DifferentAnswer")) <> 0 Or InStr(UCase(lines(line)), UCase("@AcceptAnswer")) <> 0
-
-		If ssh.MiniScript = True Then
-			line = ssh.MiniTauntVal
-		Else
-			line = ssh.StrokeTauntVal
-		End If
+		Dim ChatReplace As String
 
 		Do
 			line += 1
-
 			CheckLines = lines(line)
-
-			ssh.CheckYes = False
-			ssh.CheckNo = False
-
-			If UCase(CheckLines).Contains(UCase("[yes]")) Then ssh.CheckYes = True
-			If UCase(CheckLines).Contains(UCase("[no]")) Then ssh.CheckNo = True
-
-
+			Dim checkResult As Integer = -1
 
 			Dim Splits As String() = CheckLines.Split(New Char() {"]"c})
 			Splits(0) = Splits(0).Replace("[", "")
+			ChatReplace = CheckLines.Replace("[" & Splits(0) & "]", "")
 
-			Dim ChatReplace As String = CheckLines.Replace("[" & Splits(0) & "]", "")
-
-			If ssh.CheckYes = True Then Splits(0) = FrmSettings.TBYes.Text
-			If ssh.CheckNo = True Then Splits(0) = FrmSettings.TBNo.Text
-
-			Do
-				Splits(0) = Splits(0).Replace("  ", " ")
-				Splits(0) = Splits(0).Replace(" ,", ",")
-				Splits(0) = Splits(0).Replace(", ", ",")
-				Splits(0) = Splits(0).Replace("'", "")
-			Loop Until Not Splits(0).Contains("  ") And Not Splits(0).Contains(", ") And Not Splits(0).Contains(" ,") And Not Splits(0).Contains("'")
-
-			Dim SplitParts As String() = Splits(0).Split(New Char() {","c})
-
-			For i As Integer = 0 To SplitParts.Length - 1
-				If UCase(TempChatString).Contains(UCase(SplitParts(i))) Then
-
-					If ssh.CheckYes = True Or ssh.CheckNo = True Then
-						If FrmSettings.CBHonorificInclude.Checked = True Then
-							If Not UCase(TempChatString).Contains(UCase(ssh.tempHonorific)) Then
-								ssh.DomChat = SplitParts(i) & " #SYS_MissingHonorific"
-								If FrmSettings.LCaseCheckBox.Checked = False Then
-									Dim DomU As String = UCase(ssh.DomChat.Substring(0, 1))
-									ssh.DomChat = ssh.DomChat.Remove(0, 1)
-									ssh.DomChat = DomU & ssh.DomChat
-									ssh.nameErrors += 1
-									ssh.wrongAttempt = True
-								End If
-								TypingDelay()
-								Return
-							End If
-							If FrmSettings.CBHonorificCapitalized.Checked = True Then
-								If Not ssh.ChatString.Contains(ssh.tempHonorific) Then
-									ssh.DomChat = "#SYS_CapitalizeHonorific"
-									ssh.nameErrors += 1
-									ssh.wrongAttempt = True
-									TypingDelay()
-									Return
-								End If
-							End If
-						End If
-					End If
-					ssh.DomChat = updateDommeName(ChatReplace)
-					GoTo FoundAnswer
+			'we check to see if what the user wrote contains one of the keywords for the different yes/no/etc responses
+			'this is useful if the script contains something like [yes,maybe] as an answer option
+			'if the user write maybe then it will not need to use the honorific but if he writes yes, instead, it will check the honorific
+			If Not ssh.checkAnswers.containListedWords(ssh.ChatString) Then
+				checkResult = checkSubAnswer(Splits(0))
+			Else
+				If UCase(CheckLines).Contains(UCase("[yes")) Or UCase(CheckLines).Contains(UCase("yes]")) Then
+					checkResult = checkSubAnswer("yes")
+				ElseIf UCase(CheckLines).Contains(UCase("[no")) Or UCase(CheckLines).Contains(UCase("no]")) Then
+					checkResult = checkSubAnswer("no")
+				ElseIf UCase(CheckLines).Contains(UCase("[hi")) Or UCase(CheckLines).Contains(UCase("hi]")) Or UCase(CheckLines).Contains(UCase("[hello")) Or UCase(CheckLines).Contains(UCase("hello]")) Then
+					checkResult = checkSubAnswer("hi")
+				ElseIf UCase(CheckLines).Contains(UCase("[sorry")) Or UCase(CheckLines).Contains(UCase("sorry]")) Then
+					checkResult = checkSubAnswer("sorry")
+				ElseIf UCase(CheckLines).Contains(UCase("[thank")) Or UCase(CheckLines).Contains(UCase("thank ")) Then
+					checkResult = checkSubAnswer("thanks")
+				ElseIf UCase(CheckLines).Contains(UCase("[please")) Or UCase(CheckLines).Contains(UCase("please]")) Then
+					checkResult = checkSubAnswer("please")
 				End If
-			Next
+			End If
+
+			If checkResult = 1 Then
+				GoTo FoundAnswer
+			ElseIf checkResult = 0 Then
+				checkForPunish()
+				Return
+			End If
 
 		Loop Until InStr(UCase(lines(line)), UCase("@DifferentAnswer")) <> 0 Or InStr(UCase(lines(line)), UCase("@AcceptAnswer")) <> 0
 
 		GoTo NothingFound
 
 FoundAnswer:
-
+		ssh.DomChat = updateDommeName(ChatReplace)
 		If ssh.DomChat.Contains("@NullResponse") Then ssh.NullResponse = True
 		If ssh.DomChat.Contains("@LoopAnswer") Then GoTo LoopAnswer
 
@@ -3736,13 +3626,11 @@ FoundAnswer:
 
 
 NothingFound:
-
+		If checkSubAnswer() = 0 Then
+			checkForPunish()
+			Return
+		End If
 		If InStr(UCase(lines(line)), UCase("DifferentAnswer")) <> 0 Then
-			If ssh.wrongAttempt Then
-				ssh.wrongAttempt = False
-			Else
-				If (ssh.nameErrors > 0) Then ssh.nameErrors -= 1
-			End If
 
 DifferentAnswer:
 			ssh.DomChat = lines(line)
@@ -3757,11 +3645,7 @@ LoopAnswer:
 
 
 		If InStr(UCase(lines(line)), UCase("AcceptAnswer")) <> 0 Then
-			If ssh.wrongAttempt Then
-				ssh.wrongAttempt = False
-			Else
-				If (ssh.nameErrors > 0) Then ssh.nameErrors -= 1
-			End If
+
 AcceptAnswer:
 			ssh.DomChat = lines(TempLineVal)
 			' TimedAnswerTimer.Stop()
@@ -4188,7 +4072,6 @@ ReturnCalled:
 		'End If
 
 		' ### DebugPrivate Sub checkForPunish()
-		checkForPunish()
 
 ModuleEnd:
 
@@ -21133,5 +21016,93 @@ playLoop:
 ExternalVideo:
 	End Sub
 
+	'return -1 if word to check was not present, 0 if something in the honorific is wrong, 1 if all is ok
+	Private Function checkSubAnswer(Optional caseToCheck As String = "") As Integer
+		ssh.DomChat = ""
+		If Not IsNothing(ssh.contactToUse) Then
+			If ssh.contactToUse.Equals(ssh.SlideshowContact1) Then
+				ssh.DomChat = "@Contact1 "
+			ElseIf ssh.contactToUse.Equals(ssh.SlideshowContact2) Then
+				ssh.DomChat = "@Contact2 "
+			ElseIf ssh.contactToUse.Equals(ssh.SlideshowContact3) Then
+				ssh.DomChat = "@Contact3 "
+			End If
+		End If
+		Dim checkfor As New List(Of String)
+		Dim checkForHonorific As Boolean = True
+		Dim splitChat As String()
+		splitChat = ssh.obtainSplitParts(ssh.ChatString, True)
+
+		'checkanswers is a new class which stores all the saved settings for hi,yes,no,sorry words that the used has chosen
+		'if we don't have a specific word to check for, we check for them all (this is used anytime the sub write anything)
+		If caseToCheck = "" Then
+			checkfor = ssh.checkAnswers.returnAll
+			'the next two are used when there is a question from the domme
+			'if there is the specific yes/no/hi/sorry answers, we check if the sub uses the honorific as expected
+		ElseIf caseToCheck = "yes" Or caseToCheck = "no" Or caseToCheck = "hi" Or caseToCheck = "sorry" Or caseToCheck = "please" Or caseToCheck = "thanks" Then
+			checkfor.Add(ssh.checkAnswers.returnWords(caseToCheck))
+		Else
+			'otherwise we check only to see if he wrote exactly what he was supposed to do
+			checkfor.Add(caseToCheck)
+			checkForHonorific = False
+			'so we don't split the response but check the whole phrase (we "split" for an unused char so it is basically impossible the user will use it)
+			splitChat = ssh.ChatString.Split(New Char() {"§"})
+		End If
+
+		For i = 0 To checkfor.Count - 1
+			Dim SplitParts As String() = ssh.obtainSplitParts(checkfor(i), False)
+
+			For n As Integer = 0 To SplitParts.Length - 1
+				For m As Integer = 0 To splitChat.Length - 1
+					Dim condition As Boolean
+					If checkForHonorific Then
+						'this will make so that the #Sys_MissingHonorific will respond using the word that triggered it (i.e. yes what? sure what? etc)
+						condition = UCase(splitChat(m)) = UCase(SplitParts(n))
+					Else
+						'but if we are not checking for honorific (i.e. an answer to a specific question) we just check it the needed words are present
+						'in the sub answer
+						condition = UCase(splitChat(m)).Contains(UCase(SplitParts(n)))
+					End If
+
+					If condition Then
+						If checkForHonorific Then
+							If FrmSettings.CBHonorificInclude.Checked = True Then
+								If WordExists(UCase(ssh.ChatString), UCase(ssh.tempHonorific)) = False Then
+									ssh.DomChat += SplitParts(n) & " #SYS_MissingHonorific"
+									If FrmSettings.LCaseCheckBox.Checked = False Then
+										Dim DomU As String = UCase(ssh.DomChat.Substring(0, 1))
+										ssh.DomChat = ssh.DomChat.Remove(0, 1)
+										ssh.DomChat = DomU & ssh.DomChat
+										ssh.nameErrors += 1
+										ssh.wrongAttempt = True
+									End If
+									TypingDelay()
+									Return 0
+								End If
+
+								If FrmSettings.CBHonorificCapitalized.Checked = True Then
+									If WordExists(ssh.ChatString, Capitalize(ssh.tempHonorific)) = False Then
+										'If Not ChatString.Contains(FrmSettings.TBHonorific.Text) Then
+										ssh.DomChat += "#SYS_CapitalizeHonorific"
+										ssh.nameErrors += 1
+										ssh.wrongAttempt = True
+										TypingDelay()
+										Return 0
+									End If
+								End If
+							End If
+							If ssh.wrongAttempt Then
+								ssh.wrongAttempt = False
+							Else
+								If (ssh.nameErrors > 0) Then ssh.nameErrors -= 1
+							End If
+						End If
+						Return 1
+					End If
+				Next
+			Next
+		Next
+		Return -1
+	End Function
 End Class
 
