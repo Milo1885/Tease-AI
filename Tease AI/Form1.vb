@@ -4813,6 +4813,7 @@ SkipIsTyping:
 				'################## Display a Slideimage? #################
 				'TODO: Optimize Code. Since images loaded by the Backgroundworker are prioritized, this section can be shrinked down.
 				If ssh.DomTask.Contains("@ImageTag") Then ssh.JustShowedBlogImage = True
+				If ssh.DomTask.Contains("@ImageTagOr") Then ssh.JustShowedBlogImage = True
 
 				If ssh.DomTask.Contains("@ShowHardcoreImage") Then ssh.JustShowedBlogImage = True
 				If ssh.DomTask.Contains("@ShowSoftcoreImage") Then ssh.JustShowedBlogImage = True
@@ -8483,6 +8484,12 @@ RinseLatherRepeat:
 			Dim TagFlag As String = GetParentheses(StringClean, "@ImageTag(")
 			ShowImage(GetLocalImage(TagFlag), False)
 			StringClean = StringClean.Replace("@ImageTag(" & TagFlag & ")", "")
+		End If
+
+		If StringClean.Contains("@ImageTagOr(") Then
+			Dim TagFlag As String = GetParentheses(StringClean, "@ImageTagOr(")
+			ShowImage(GetLocalImageOr(TagFlag), False)
+			StringClean = StringClean.Replace("@ImageTagOr(" & TagFlag & ")", "")
 		End If
 
 		If StringClean.Contains("@ShowImage") And Not StringClean.Contains("@ShowImage[") Then
@@ -13616,6 +13623,48 @@ VTSkip:
 		End If
 	End Function
 
+	Public Function GetLocalImageOr(ByVal LocTag As String) As String
+		If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+
+
+			Dim TagList As New List(Of String)
+			TagList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+
+			LocTag = LocTag.Replace(" ,", ",")
+			LocTag = LocTag.Replace(", ", ",")
+
+			Dim LocTagArray As String() = LocTag.Split(",")
+
+			Dim TaggedList As New List(Of String)
+
+			For i As Integer = 0 To TagList.Count - 1
+				For n As Integer = 0 To LocTagArray.Count - 1
+					If TagList(i).Contains(LocTagArray(n)) Then
+						TaggedList.Add(TagList(i))
+						Exit For
+					End If
+				Next
+			Next
+
+			If TaggedList.Count > 0 Then
+
+				Dim PicArray As String() = TaggedList(ssh.randomizer.Next(0, TaggedList.Count)).Split
+				Dim PicDir As String = ""
+
+				For p As Integer = 0 To PicArray.Count - 1
+					PicDir = PicDir & PicArray(p) & " "
+					If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
+				Next
+
+				Return PicDir
+
+			Else
+				Return String.Empty
+
+			End If
+
+		End If
+	End Function
 
 	Friend Sub ContactEdgeCheck(ByVal EdgeCheck As String)
 		If EdgeCheck.Contains("@Contact1") Then
@@ -13798,9 +13847,13 @@ VTSkip:
                     End If
                 End If
 
-                If FilterString.Contains("@ImageTag(") Then
-                    If GetLocalImage(GetParentheses(FilterString, "@ImageTag(")) = String.Empty Then Return False
-                End If
+				If FilterString.Contains("@ImageTag(") Then
+					If GetLocalImage(GetParentheses(FilterString, "@ImageTag(")) = String.Empty Then Return False
+				End If
+
+				If FilterString.Contains("@ImageTagOr(") Then
+					If GetLocalImageOr(GetParentheses(FilterString, "@ImageTagOr(")) = String.Empty Then Return False
+				End If
 
                 ' ################## @Show-Category-Image #####################
                 If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
@@ -14558,7 +14611,8 @@ VTSkip:
                             'QND-Implemented: ContactData.GetTaggedImage
                             'Case "@DommeTag(".ToUpper : Condition = GetDommeImage(GetParentheses(FilterString, "@DommeTag(")) = False Or ssh.LockImage = True
                         Case "@ImageTag(".ToUpper : Condition = GetLocalImage(FilterString)
-                        Case Else
+						Case "@ImageTagOr(".ToUpper : Condition = GetLocalImageOr(FilterString)
+						Case Else
                             '<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
                             '					Unknown Command => goto next Match
                             '<= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <= <=
