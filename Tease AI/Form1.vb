@@ -13583,23 +13583,17 @@ VTSkip:
 
 			Dim LocTagArray As String() = LocTag.Split(",")
 
-			Dim LocTag1 As String = " "
-			Dim LocTag2 As String = " "
-			Dim LocTag3 As String = " "
-
-			For i As Integer = 0 To LocTagArray.Count - 1
-				If i = 0 Then LocTag1 = "Tag" & LocTagArray(0)
-				If i = 1 Then LocTag2 = "Tag" & LocTagArray(1)
-				If i = 2 Then LocTag3 = "Tag" & LocTagArray(2)
-			Next
-
-
 			Dim TaggedList As New List(Of String)
 
 			For i As Integer = 0 To TagList.Count - 1
-				If TagList(i).Contains(LocTag1) And TagList(i).Contains(LocTag2) And TagList(i).Contains(LocTag3) Then
-					TaggedList.Add(TagList(i))
-				End If
+				Dim addImg As Boolean = True
+				For n As Integer = 0 To LocTagArray.Count - 1
+					If Not TagList(i).Contains(LocTagArray(n)) Then
+						addImg = False
+						Exit For
+					End If
+					If addImg Then TaggedList.Add(TagList(i))
+				Next
 			Next
 
 			If TaggedList.Count > 0 Then
