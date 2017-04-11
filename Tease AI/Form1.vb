@@ -19399,7 +19399,7 @@ restartInstantly:
 	End Sub
 
 	Private Sub BTNAskToCum_Click(sender As System.Object, e As System.EventArgs) Handles BTNAskToCum.Click, Button9.Click
-		chatBox.Text = "Please let me cum!"
+		chatBox.Text = "Please let me cum" & ssh.tempHonorific
 		sendButton.PerformClick()
 	End Sub
 
