@@ -1369,9 +1369,9 @@ retryStart:
 			If UCase(ssh.ChatString) = UCase(TBShortSlowDown.Text) Then ssh.ChatString = "Let me slow down"
 			If UCase(ssh.ChatString) = UCase(TBShortStop.Text) Then ssh.ChatString = "Let me stop"
 			If UCase(ssh.ChatString) = UCase(TBShortStroke.Text) Then ssh.ChatString = "May I start stroking?"
-			If UCase(ssh.ChatString) = UCase(TBShortCum.Text) Then ssh.ChatString = "Please let me cum!"
+			If UCase(ssh.ChatString) = UCase(TBShortCum.Text) Then ssh.ChatString = "Please let me cum" & ssh.tempHonorific
 			If UCase(ssh.ChatString) = UCase(TBShortGreet.Text) Then ssh.ChatString = "Hello " & ssh.tempHonorific
-			If UCase(ssh.ChatString) = UCase(TBShortSafeword.Text) Then ssh.ChatString = ssh.tempHonorific
+			If UCase(ssh.ChatString) = UCase(TBShortSafeword.Text) Then ssh.ChatString = FrmSettings.TBSafeword.Text
 
 		End If
 
@@ -7706,8 +7706,8 @@ StatusUpdateEnd:
 
 		If StringClean.Contains("@RT(") Then
 			Dim replace As String() = {"@RT(", "@RandomText("}
+			Dim RandArray As String() = StringClean.Split("@")
 			For a = 0 To replace.Length() - 1
-				Dim RandArray As String() = StringClean.Split(replace(a))
 				For i As Integer = 0 To RandArray.Count - 1
 					RandArray(i) = "@" & RandArray(i)
 					If RandArray(i).Contains(replace(a)) Then
@@ -8388,6 +8388,38 @@ StatusUpdateEnd:
 		End If
 
 RinseLatherRepeat:
+
+		If StringClean.Contains("@FollowUp(") And ssh.FollowUp = "" Then
+			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(", StringClean.Split(")").Length - 1)
+			StringClean = StringClean.Replace("@FollowUp(" & ssh.FollowUp & ")", "")
+		End If
+
+
+		If StringClean.Contains("@FollowUp") And ssh.FollowUp = "" Then
+
+			Dim FollowTemp As String
+			Dim TSStartIndex As Integer
+			Dim TSEndIndex As Integer
+
+			TSStartIndex = StringClean.IndexOf("@FollowUp") + 9
+			TSEndIndex = StringClean.IndexOf("@FollowUp") + 11
+
+			FollowTemp = StringClean.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim
+
+			Dim FollowVal As Integer
+
+			FollowVal = Val(FollowTemp)
+
+			ssh.TempVal = ssh.randomizer.Next(1, 101)
+
+			Dim FollowLineTemp As String
+			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(", StringClean.Split(")").Length - 1)
+
+			If ssh.TempVal <= FollowVal Then ssh.FollowUp = FollowLineTemp
+
+			StringClean = StringClean.Replace("@FollowUp" & FollowTemp & "(" & FollowLineTemp & ")", "")
+
+		End If
 
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 		'									ImageCommands
@@ -12589,46 +12621,13 @@ VTSkip:
 		End If
 
 
-        'If StringClean.Contains("@RandomText(") Then
-        'Dim TempText As String = GetParentheses(StringClean, "@RandomText(")
-        'TempText = FixCommas(TempText)
-        'Dim TextArray As String() = TempText.Split(",")
-        'TempText = TextArray(randomizer.Next(0, TextArray.Count))
-        'StringClean = StringClean.Replace("@RandomText(" & GetParentheses(StringClean, "@RandomText(") & ")", TempText)
-        'End If
-
-
-        If StringClean.Contains("@FollowUp(") And ssh.FollowUp = "" Then
-			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(", StringClean.Split(")").Length - 1)
-			StringClean = StringClean.Replace("@FollowUp(" & ssh.FollowUp & ")", "")
-		End If
-
-
-		If StringClean.Contains("@FollowUp") And ssh.FollowUp = "" Then
-
-			Dim FollowTemp As String
-			Dim TSStartIndex As Integer
-			Dim TSEndIndex As Integer
-
-			TSStartIndex = StringClean.IndexOf("@FollowUp") + 9
-			TSEndIndex = StringClean.IndexOf("@FollowUp") + 11
-
-			FollowTemp = StringClean.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim
-
-			Dim FollowVal As Integer
-
-			FollowVal = Val(FollowTemp)
-
-			ssh.TempVal = ssh.randomizer.Next(1, 101)
-
-			Dim FollowLineTemp As String
-			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(", StringClean.Split(")").Length - 1)
-
-			If ssh.TempVal <= FollowVal Then ssh.FollowUp = FollowLineTemp
-
-			StringClean = StringClean.Replace("@FollowUp" & FollowTemp & "(" & FollowLineTemp & ")", "")
-
-		End If
+		'If StringClean.Contains("@RandomText(") Then
+		'Dim TempText As String = GetParentheses(StringClean, "@RandomText(")
+		'TempText = FixCommas(TempText)
+		'Dim TextArray As String() = TempText.Split(",")
+		'TempText = TextArray(randomizer.Next(0, TextArray.Count))
+		'StringClean = StringClean.Replace("@RandomText(" & GetParentheses(StringClean, "@RandomText(") & ")", TempText)
+		'End If
 
 		If StringClean.Contains("@Worship(") Then
 			Dim WorshipTemp As String = GetParentheses(StringClean, "@Worship(")
