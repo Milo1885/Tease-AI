@@ -1369,7 +1369,7 @@ retryStart:
 			If UCase(ssh.ChatString) = UCase(TBShortSlowDown.Text) Then ssh.ChatString = "Let me slow down"
 			If UCase(ssh.ChatString) = UCase(TBShortStop.Text) Then ssh.ChatString = "Let me stop"
 			If UCase(ssh.ChatString) = UCase(TBShortStroke.Text) Then ssh.ChatString = "May I start stroking?"
-			If UCase(ssh.ChatString) = UCase(TBShortCum.Text) Then ssh.ChatString = "Please let me cum" & ssh.tempHonorific
+			If UCase(ssh.ChatString) = UCase(TBShortCum.Text) Then ssh.ChatString = "Please let me cum " & ssh.tempHonorific
 			If UCase(ssh.ChatString) = UCase(TBShortGreet.Text) Then ssh.ChatString = "Hello " & ssh.tempHonorific
 			If UCase(ssh.ChatString) = UCase(TBShortSafeword.Text) Then ssh.ChatString = FrmSettings.TBSafeword.Text
 
@@ -19399,7 +19399,7 @@ restartInstantly:
 	End Sub
 
 	Private Sub BTNAskToCum_Click(sender As System.Object, e As System.EventArgs) Handles BTNAskToCum.Click, Button9.Click
-		chatBox.Text = "Please let me cum" & ssh.tempHonorific
+		chatBox.Text = "Please let me cum " & ssh.tempHonorific
 		sendButton.PerformClick()
 	End Sub
 
