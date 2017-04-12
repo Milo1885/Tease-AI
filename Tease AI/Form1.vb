@@ -11395,13 +11395,13 @@ OrgasmDecided:
 
 		If StringClean.Contains("@EdgingHold") Then
 
-			ssh.DomTypeCheck = True
+			'ssh.DomTypeCheck = True
 			ssh.SubEdging = False
 			ssh.SubStroking = False
 			ssh.SubHoldingEdge = True
 			EdgeTauntTimer.Stop()
-			'DomChat = "#HoldTheEdge"
-			'TypingDelay()
+			ssh.DomChat = "#HoldTheEdge"
+			TypingDelay()
 
 			ssh.HoldEdgeTick = ssh.HoldEdgeChance
 
@@ -11432,9 +11432,9 @@ OrgasmDecided:
 			HoldEdgeTimer.Start()
 			HoldEdgeTauntTimer.Start()
 
-			Do
-				Application.DoEvents()
-			Loop Until ssh.DomTypeCheck = False
+			'Do
+			'Application.DoEvents()
+			'Loop Until ssh.DomTypeCheck = False
 
 
 			StringClean = StringClean.Replace("@EdgingHold", "")
@@ -11446,12 +11446,8 @@ OrgasmDecided:
 			ssh.SubEdging = False
 			ssh.SubStroking = False
 			EdgeTauntTimer.Stop()
-			'DomChat = "#StopStrokingEdge"
-			'TypingDelay()
-
-			Do
-				Application.DoEvents()
-			Loop Until ssh.DomTypeCheck = False
+			ssh.DomChat = "#StopStrokingEdge"
+			TypingDelay()
 
 			StringClean = StringClean.Replace("@EdgingStop", "")
 		End If
@@ -11525,9 +11521,9 @@ OrgasmDecided:
 
 			End If
 
-			Do
-				Application.DoEvents()
-			Loop Until ssh.DomTypeCheck = False
+			'Do
+			'Application.DoEvents()
+			'Loop Until ssh.DomTypeCheck = False
 
 
 			StringClean = StringClean.Replace("@DecideEdge", "")
@@ -14108,49 +14104,49 @@ VTSkip:
 
                 ' ################## @Show-Category-Image #####################
                 If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
-                    If Not GetImageData(ImageGenre.Blog).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Blog).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowBlowjobImage") Then
-                    If Not GetImageData(ImageGenre.Blowjob).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Blowjob).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowBoobImage") Then
-                    If Not GetImageData(ImageGenre.Boobs).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Boobs).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowButtsImage") Then
-                    If Not GetImageData(ImageGenre.Butt).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Butt).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowCaptionsImage") Then
-                    If Not GetImageData(ImageGenre.Captions).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Captions).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowDislikedImage") Then
-                    If Not GetImageData(ImageGenre.Disliked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Disliked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowFemdomImage") Then
-                    If Not GetImageData(ImageGenre.Femdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Femdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowGayImage") Then
-                    If Not GetImageData(ImageGenre.Gay).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Gay).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowGeneralImage") Then
-                    If Not GetImageData(ImageGenre.General).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.General).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowHardcoreImage") Then
-                    If Not GetImageData(ImageGenre.Hardcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Hardcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowHentaiImage") Then
-                    If Not GetImageData(ImageGenre.Hentai).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Hentai).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowLesbianImage") Then
-                    If Not GetImageData(ImageGenre.Lesbian).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Lesbian).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowLezdomImage") Then
-                    If Not GetImageData(ImageGenre.Lezdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Lezdom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowLikedImage") Then
-                    If Not GetImageData(ImageGenre.Liked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Liked).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowLocalImage") Then
-                    If FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True Then Return False
+					If FlagExists("SYS_NoPornAllowed") = True Or ssh.LockImage = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowLocalImage") Or FilterString.Contains("@ShowButtImage") Or FilterString.Contains("@ShowBoobsImage") Or FilterString.Contains("@ShowButtsImage") Or FilterString.Contains("@ShowBoobsImage") Then
                     If ssh.CustomSlideEnabled = True Or ssh.LockImage = True Then Return False
@@ -14165,14 +14161,14 @@ VTSkip:
                         .Select(Function(s) s.Trim()) _
                         .Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList
 
-                    If GetLocalImage(Tags, Nothing) = String.Empty Then Return False
+					If GetLocalImage(Tags, Nothing) = String.Empty Or mainPictureBox.Visible = False Then Return False
                 End If
 
                 If FilterString.Contains("@ShowMaledomImage") Then
-                    If Not GetImageData(ImageGenre.Maledom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Maledom).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 If FilterString.Contains("@ShowSoftcoreImage") Then
-                    If Not GetImageData(ImageGenre.Softcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Then Return False
+					If Not GetImageData(ImageGenre.Softcore).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
                 End If
                 '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
                 ' Disqualifying @Commands - End
