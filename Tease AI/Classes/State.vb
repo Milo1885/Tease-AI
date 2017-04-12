@@ -429,6 +429,7 @@ Public Class SessionState
 	Public Property tempDomName As String
 	Public Property tempHonorific As String
 	Public Property replaceHonorific As String
+	Public Property shortName As String
 
 #Region "@CallReturn("
 

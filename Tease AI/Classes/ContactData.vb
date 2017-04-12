@@ -57,6 +57,15 @@ Public Class ContactData
 		End Get
 	End Property
 
+	Public ReadOnly Property ShortName As String
+		Get
+			If Contact = ContactType.Domme Then
+				Return My.Settings.GlitterSN
+			Else
+				Return TypeName
+			End If
+		End Get
+	End Property
 	Public ReadOnly Property TypeColorHtml As String
 		Get
 			If Contact = ContactType.Contact1 Then

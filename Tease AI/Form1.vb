@@ -2627,7 +2627,7 @@ EdgeSkip:
 
 		Dim CheckResponse As String = UCase(ssh.ChatString)
 		CheckResponse = CheckResponse.Replace(UCase(ssh.tempDomName), "")
-		CheckResponse = CheckResponse.Replace(UCase(ssh.tempHonorific), "")
+		If ssh.tempHonorific <> "" Then CheckResponse = CheckResponse.Replace(UCase(ssh.tempHonorific), "")
 		CheckResponse = CheckResponse.Replace("!", "")
 		CheckResponse = CheckResponse.Replace("?", "")
 		CheckResponse = CheckResponse.Replace(".", "")
@@ -4844,15 +4844,13 @@ SkipIsTyping:
 				  And ssh.SlideshowLoaded = True And Not ssh.DomTask.Contains("@ShowButtImage") And Not ssh.DomTask.Contains("@ShowBoobsImage") And Not ssh.DomTask.Contains("@ShowButtsImage") _
 				  And Not ssh.DomTask.Contains("@ShowBoobsImage") And ssh.LockImage = False And ssh.CustomSlideEnabled = False And ssh.RapidFire = False _
 				  And UCase(ssh.DomTask) <> "<B>TEASE AI HAS BEEN RESET</B>" And ssh.JustShowedSlideshowImage = False And ssh.MultiTauntPictureHold = False Then
-					If ssh.SubStroking = False Or ssh.SubEdging = True Or ssh.SubHoldingEdge = True Then
-						' Begin Next Button
-						ssh.MultiTauntPictureHold = False
-						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+					' Begin Next Button
+					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
 
 
 
-					End If
+
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 					ShowPicture = True
@@ -5260,9 +5258,9 @@ NoResponse:
 						' ######################## Risky Pick #########################
 						FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.contactToUse.NavigateNextTease)
 
-					ElseIf Not String.IsNullOrWhiteSpace(ssh.DommeImageSTR) Then
+						'ElseIf Not String.IsNullOrWhiteSpace(ssh.DommeImageSTR) Then
 						' ######################## Domme Tags #########################
-						ShowImage(ssh.DommeImageSTR, True)
+						'	ShowImage(ssh.DommeImageSTR, True)
 
 					ElseIf ShowPicture = True AndAlso ssh.contactToUse IsNot Nothing Then
 						' ######################## Slideshow ##########################
@@ -5932,9 +5930,9 @@ NullResponseLine2:
 						' ######################## Risky Pick #########################
 						FrmCardList.PBRiskyPic.Image = Image.FromFile(ssh.contactToUse.NavigateNextTease)
 
-					ElseIf Not String.IsNullOrWhiteSpace(ssh.DommeImageSTR) Then
+						'ElseIf Not String.IsNullOrWhiteSpace(ssh.DommeImageSTR) Then
 						' ######################## Domme Tags #########################
-						ShowImage(ssh.DommeImageSTR, True)
+						'ShowImage(ssh.DommeImageSTR, True)
 
 					ElseIf ShowPicture = True AndAlso ssh.contactToUse IsNot Nothing Then
 						' ################### Variable Slideshow ######################
@@ -7704,7 +7702,7 @@ StatusUpdateEnd:
 
 	Public Function SysKeywordClean(ByVal StringClean As String) As String
 
-		If StringClean.Contains("@RT(") Then
+		If StringClean.Contains("@RT(") Or StringClean.Contains("@RandomText(") Then
 			Dim replace As String() = {"@RT(", "@RandomText("}
 			Dim RandArray As String() = StringClean.Split("@")
 			For a = 0 To replace.Length() - 1
@@ -7815,7 +7813,7 @@ StatusUpdateEnd:
 
 		' StringClean = StringClean.Replace("#SubWritingTaskRAND", randomizer.Next(NBWritingTaskMin.Value / 10, (NBWritingTaskMax.Value / 10) + 1)) * 10
 
-		StringClean = StringClean.Replace("#ShortName", My.Settings.GlitterSN)
+		StringClean = StringClean.Replace("#ShortName", ssh.shortName)
 
 		StringClean = StringClean.Replace("#GlitterContact1", My.Settings.Glitter1)
 		StringClean = StringClean.Replace("#Contact1", My.Settings.Glitter1)
@@ -8387,10 +8385,9 @@ StatusUpdateEnd:
 			GoTo TaskCleanSet
 		End If
 
-RinseLatherRepeat:
 
 		If StringClean.Contains("@FollowUp(") And ssh.FollowUp = "" Then
-			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(", StringClean.Split(")").Length - 1)
+			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(")
 			StringClean = StringClean.Replace("@FollowUp(" & ssh.FollowUp & ")", "")
 		End If
 
@@ -8413,7 +8410,7 @@ RinseLatherRepeat:
 			ssh.TempVal = ssh.randomizer.Next(1, 101)
 
 			Dim FollowLineTemp As String
-			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(", StringClean.Split(")").Length - 1)
+			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(")
 
 			If ssh.TempVal <= FollowVal Then ssh.FollowUp = FollowLineTemp
 
@@ -8421,6 +8418,7 @@ RinseLatherRepeat:
 
 		End If
 
+RinseLatherRepeat:
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 		'									ImageCommands
 		' - Make sure you call all Display ImageFunctions before executing @LockImages.
@@ -14950,6 +14948,7 @@ VTSkip:
 
 
 	Public Sub RunModuleScript(ByVal IsEdging As Boolean)
+		If ssh.MultiTauntPictureHold Then ssh.MultiTauntPictureHold = False
 		ssh.isLink = False
 		ssh.ShowModule = True
 		ssh.FirstRound = False
@@ -15075,129 +15074,130 @@ NoPlaylistModuleFile:
 
 
 	Public Sub RunLinkScript()
+		If ssh.MultiTauntPictureHold Then ssh.MultiTauntPictureHold = False
 		ssh.isLink = True
 
 		Debug.Print("RunLinkScript() Called")
 		ssh.FirstRound = False
-        ClearModes()
+		ClearModes()
 
-        If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistLinkFile
+		If ssh.PlaylistFile.Count = 0 Then GoTo NoPlaylistLinkFile
 
-        If ssh.Playlist = False Or ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Random Link") Then
+		If ssh.Playlist = False Or ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Random Link") Then
 
 
 NoPlaylistLinkFile:
 
 
-            Debug.Print("SetLink = " & ssh.SetLink)
+			Debug.Print("SetLink = " & ssh.SetLink)
 
 
-            If ssh.SetLink <> "" Then
-                Debug.Print("SetLink Called")
-                ssh.FileText = ssh.SetLink
-            Else
+			If ssh.SetLink <> "" Then
+				Debug.Print("SetLink Called")
+				ssh.FileText = ssh.SetLink
+			Else
 
 
-                Dim LinkList As New List(Of String)
-                LinkList.Clear()
+				Dim LinkList As New List(Of String)
+				LinkList.Clear()
 
 
-                Dim ChastityLinkCheck As String
-                If My.Settings.Chastity = True Then
-                    ChastityLinkCheck = "*_CHASTITY.txt"
-                Else
-                    ChastityLinkCheck = "*.txt"
-                End If
+				Dim ChastityLinkCheck As String
+				If My.Settings.Chastity = True Then
+					ChastityLinkCheck = "*_CHASTITY.txt"
+				Else
+					ChastityLinkCheck = "*.txt"
+				End If
 
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, ChastityLinkCheck)
-                    Dim TempLink As String = foundFile
-                    TempLink = TempLink.Replace(".txt", "")
-                    Do Until Not TempLink.Contains("\")
-                        TempLink = TempLink.Remove(0, 1)
-                    Loop
-                    For x As Integer = 0 To FrmSettings.CLBLinkList.Items.Count - 1
-                        If My.Settings.Chastity = True Then
-                            If FrmSettings.CLBLinkList.Items(x) = TempLink And FrmSettings.CLBLinkList.GetItemChecked(x) = True Then
-                                LinkList.Add(foundFile)
-                            End If
-                        Else
-                            If FrmSettings.CLBLinkList.Items(x) = TempLink And FrmSettings.CLBLinkList.GetItemChecked(x) = True And Not TempLink.Contains("_CHASTITY") Then
-                                LinkList.Add(foundFile)
-                            End If
-                        End If
+				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Link\", FileIO.SearchOption.SearchTopLevelOnly, ChastityLinkCheck)
+					Dim TempLink As String = foundFile
+					TempLink = TempLink.Replace(".txt", "")
+					Do Until Not TempLink.Contains("\")
+						TempLink = TempLink.Remove(0, 1)
+					Loop
+					For x As Integer = 0 To FrmSettings.CLBLinkList.Items.Count - 1
+						If My.Settings.Chastity = True Then
+							If FrmSettings.CLBLinkList.Items(x) = TempLink And FrmSettings.CLBLinkList.GetItemChecked(x) = True Then
+								LinkList.Add(foundFile)
+							End If
+						Else
+							If FrmSettings.CLBLinkList.Items(x) = TempLink And FrmSettings.CLBLinkList.GetItemChecked(x) = True And Not TempLink.Contains("_CHASTITY") Then
+								LinkList.Add(foundFile)
+							End If
+						End If
 
-                    Next
-                Next
+					Next
+				Next
 
-                If LinkList.Count < 1 Then
-                    If My.Settings.Chastity = True Then
-                        ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Link_CHASTITY.txt"
-                    Else
-                        ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Link.txt"
-                    End If
-                Else
-                    ssh.FileText = LinkList(ssh.randomizer.Next(0, LinkList.Count))
-                End If
+				If LinkList.Count < 1 Then
+					If My.Settings.Chastity = True Then
+						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Link_CHASTITY.txt"
+					Else
+						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Scripts\Link.txt"
+					End If
+				Else
+					ssh.FileText = LinkList(ssh.randomizer.Next(0, LinkList.Count))
+				End If
 
-            End If
+			End If
 
-        Else
-            Debug.Print("Playlist Link Called")
-            If ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
-                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Link\" & ssh.PlaylistFile(ssh.PlaylistCurrent)
-                ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
-                ssh.FileText = ssh.FileText & ".txt"
-            Else
-                ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\Link\" & ssh.PlaylistFile(ssh.PlaylistCurrent) & ".txt"
-            End If
+		Else
+			Debug.Print("Playlist Link Called")
+			If ssh.PlaylistFile(ssh.PlaylistCurrent).Contains("Regular-TeaseAI-Script") Then
+				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Stroke\Link\" & ssh.PlaylistFile(ssh.PlaylistCurrent)
+				ssh.FileText = ssh.FileText.Replace(" Regular-TeaseAI-Script", "")
+				ssh.FileText = ssh.FileText & ".txt"
+			Else
+				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Playlist\Link\" & ssh.PlaylistFile(ssh.PlaylistCurrent) & ".txt"
+			End If
 
-        End If
+		End If
 
-        ssh.SetLink = ""
-        Debug.Print("SetLink = " & ssh.SetLink)
-
-
-        If ssh.WorshipMode = False Then
-            ssh.LockImage = False
-            If ssh.SlideshowLoaded = True Then
-                nextButton.Enabled = True
-                previousButton.Enabled = True
-                PicStripTSMIdommeSlideshow.Enabled = True
-            End If
-        End If
+		ssh.SetLink = ""
+		Debug.Print("SetLink = " & ssh.SetLink)
 
 
-        If ssh.SetLinkGoto <> "" Then
-            ssh.FileGoto = ssh.SetLinkGoto
-            ssh.SkipGotoLine = True
-            GetGoto()
-            ssh.SetLinkGoto = ""
-        Else
-            ssh.StrokeTauntVal = -1
-        End If
+		If ssh.WorshipMode = False Then
+			ssh.LockImage = False
+			If ssh.SlideshowLoaded = True Then
+				nextButton.Enabled = True
+				previousButton.Enabled = True
+				PicStripTSMIdommeSlideshow.Enabled = True
+			End If
+		End If
 
 
-        If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
-        If ssh.Playlist = True Then ssh.BookmarkLink = False
-
-        If ssh.BookmarkLink = True Then
-            ssh.BookmarkLink = False
-            ssh.FileText = ssh.BookmarkLinkFile
-            ssh.StrokeTauntVal = ssh.BookmarkLinkLine
-        End If
-
-        Debug.Print("Link FileText Called")
+		If ssh.SetLinkGoto <> "" Then
+			ssh.FileGoto = ssh.SetLinkGoto
+			ssh.SkipGotoLine = True
+			GetGoto()
+			ssh.SetLinkGoto = ""
+		Else
+			ssh.StrokeTauntVal = -1
+		End If
 
 
-        ssh.ScriptTick = 3
-        ScriptTimer.Start()
+		If ssh.Playlist = True Then ssh.PlaylistCurrent += 1
+		If ssh.Playlist = True Then ssh.BookmarkLink = False
+
+		If ssh.BookmarkLink = True Then
+			ssh.BookmarkLink = False
+			ssh.FileText = ssh.BookmarkLinkFile
+			ssh.StrokeTauntVal = ssh.BookmarkLinkLine
+		End If
+
+		Debug.Print("Link FileText Called")
 
 
-    End Sub
+		ssh.ScriptTick = 3
+		ScriptTimer.Start()
+
+
+	End Sub
 
 
 
-    Public Sub RunLastScript()
+	Public Sub RunLastScript()
 
         ClearModes()
 		ssh.FirstRound = False
@@ -17177,6 +17177,7 @@ saveImage:
 		End If
 		ssh.SlideshowMain.LoadNew(ssh.newSlideshow)
 		ssh.tempDomName = ssh.SlideshowMain.TypeName
+		ssh.shortName = ssh.SlideshowMain.ShortName
 		Me.domName.Text = ssh.tempDomName
 		FrmSettings.LBLCurrentDomme.Text = ssh.tempDomName
 		ssh.newSlideshow = False
@@ -17449,11 +17450,11 @@ restartInstantly:
 			If Not ssh.Group.Contains("D") Then
 				ssh.Group = ssh.Group & "D"
 				If ssh.Group = "D" Then ssh.GlitterTease = False
-				ChatAddSystemMessage(ssh.tempDomName & " has joined the Chat room")
+				ChatAddSystemMessage(ssh.SlideshowMain.TypeName & " has joined the Chat room")
 			Else
 				ssh.Group = ssh.Group.Replace("D", "")
 				ssh.GlitterTease = True
-				ChatAddSystemMessage(ssh.tempDomName & " has left the Chat room")
+				ChatAddSystemMessage(ssh.SlideshowMain.TypeName & " has left the Chat room")
 			End If
 		End If
 
@@ -20792,6 +20793,7 @@ playLoop:
 	End Sub
 
 	Private Sub handleCallReturn()
+		If ssh.MultiTauntPictureHold Then ssh.MultiTauntPictureHold = False
 		ssh.CallReturns.Pop().resumeState()
 		If ssh.ReturnSubState = "Stroking" Then
 			If My.Settings.Chastity = True Then
@@ -20873,6 +20875,7 @@ playLoop:
 			domName.Text = ssh.tempDomName
 			ssh.tempHonorific = My.Settings.SubHonorific
 			ssh.replaceHonorific = ssh.tempHonorific
+			ssh.shortName = My.Settings.GlitterSN
 		End If
 		If My.Settings.SubName <> "" Then subName.Text = My.Settings.SubName
 		FrmSettings.LBLCurrentDomme.Text = ssh.tempDomName
@@ -20893,18 +20896,22 @@ playLoop:
 		ssh.contactToUse = ssh.SlideshowMain
 		ssh.tempDomName = ssh.SlideshowMain.TypeName
 		ssh.tempHonorific = ssh.SlideshowMain.TypeHonorific
+		ssh.shortName = ssh.SlideshowMain.ShortName
 		If stringToCheck.Contains("@Contact1") Then
 			ssh.tempDomName = My.Settings.Glitter1
 			ssh.tempHonorific = My.Settings.G1Honorific
 			ssh.contactToUse = ssh.SlideshowContact1
+			ssh.shortName = ssh.SlideshowContact1.ShortName
 		ElseIf stringToCheck.Contains("@Contact2") Then
 			ssh.tempDomName = My.Settings.Glitter2
 			ssh.tempHonorific = My.Settings.G2Honorific
 			ssh.contactToUse = ssh.SlideshowContact2
+			ssh.shortName = ssh.SlideshowContact2.ShortName
 		ElseIf stringToCheck.Contains("@Contact3") Then
 			ssh.tempDomName = My.Settings.Glitter3
 			ssh.tempHonorific = My.Settings.G3Honorific
 			ssh.contactToUse = ssh.SlideshowContact3
+			ssh.shortName = ssh.SlideshowContact3.ShortName
 		ElseIf stringToCheck.Contains("@RandomContact") Then
 			Dim casual As Integer = 0
 			casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
@@ -20913,14 +20920,17 @@ playLoop:
 					ssh.tempDomName = My.Settings.Glitter1
 					ssh.tempHonorific = My.Settings.G1Honorific
 					ssh.contactToUse = ssh.SlideshowContact1
+					ssh.shortName = ssh.SlideshowContact1.ShortName
 				Case ssh.SlideshowContact2.TypeName
 					ssh.tempDomName = My.Settings.Glitter2
 					ssh.tempHonorific = My.Settings.G2Honorific
 					ssh.contactToUse = ssh.SlideshowContact2
+					ssh.shortName = ssh.SlideshowContact2.ShortName
 				Case ssh.SlideshowContact3.TypeName
 					ssh.tempDomName = My.Settings.Glitter3
 					ssh.tempHonorific = My.Settings.G3Honorific
 					ssh.contactToUse = ssh.SlideshowContact3
+					ssh.shortName = ssh.SlideshowContact3.ShortName
 				Case Else
 			End Select
 		End If
