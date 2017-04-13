@@ -11901,15 +11901,15 @@ ExternalAudio:
 			StringClean = StringClean.Replace("@RTOff", "")
 		End If
 
-		If StringClean.Contains("@VoiceOn") Then
-			FrmSettings.TTSCheckBox.Checked = True
-			StringClean = StringClean.Replace("@VoiceOn", "")
-		End If
+		'	If StringClean.Contains("@VoiceOn") Then
+		'	FrmSettings.TTSCheckBox.Checked = True
+		'	StringClean = StringClean.Replace("@VoiceOn", "")
+		'End If
 
-		If StringClean.Contains("@VoiceOff") Then
-			FrmSettings.TTSCheckBox.Checked = False
-			StringClean = StringClean.Replace("@VoiceOff", "")
-		End If
+		'If StringClean.Contains("@VoiceOff") Then
+		'	FrmSettings.TTSCheckBox.Checked = False
+		'	StringClean = StringClean.Replace("@VoiceOff", "")
+		'	End If
 
 		If StringClean.Contains("@GlitterTease1") Then
 			ssh.glitterDommeNumber = 1
