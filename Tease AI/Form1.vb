@@ -5553,6 +5553,7 @@ DommeSlideshowFallback:
 			ssh.RapidCode = False
 		End If
 
+		'updateDommeName(ssh.DomChat)
 		'If Not ssh.Group.Contains("D") And Not ssh.DomChat.Contains("@Contact1") And Not ssh.DomChat.Contains("@Contact2") And Not ssh.DomChat.Contains("@Contact3") Then
 		'Dim GroupList As New List(Of String)
 		'	GroupList.Clear()
@@ -13952,23 +13953,32 @@ VTSkip:
                 If CheckVariable(FilterString) = False Then Return False
             End If
 
-            If FilterString.Contains("@Group(") Then
-                Dim GroupCheck As String = GetParentheses(FilterString, "@Group(")
-                If GroupCheck.Contains("D") Then
-                    If ssh.GlitterTease = False Or Not ssh.Group.Contains("D") Then Return False
-                End If
-                If GroupCheck.Contains("1") Then
-                    If ssh.GlitterTease = False Or Not ssh.Group.Contains("1") Then Return False
-                End If
-                If GroupCheck.Contains("2") Then
-                    If ssh.GlitterTease = False Or Not ssh.Group.Contains("2") Then Return False
-                End If
-                If GroupCheck.Contains("3") Then
-                    If ssh.GlitterTease = False Or Not ssh.Group.Contains("3") Then Return False
-                End If
-            End If
+			If FilterString.Contains("@Group(") Then
+				Dim GroupCheck As String = GetParentheses(FilterString, "@Group(")
+				Dim grouparray() As String = GroupCheck.Split(",")
+				Dim b As Boolean = False
+				For i As Integer = 0 To grouparray.Length - 1
+					If grouparray(i) = ssh.Group Then
+						b = True
+						Exit For
+					End If
+				Next
+				If b = False Then Return False
+				'	If GroupCheck.Contains("D") Then
+				'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("D") Then Return False
+				'End If
+				'	If GroupCheck.Contains("1") Then
+				'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("1") Then Return False
+				'End If
+				'	If GroupCheck.Contains("2") Then
+				'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("2") Then Return False
+				'	End If
+				'	If GroupCheck.Contains("3") Then
+				'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("3") Then Return False
+				'End If
+			End If
 
-            If FilterString.Contains("@Flag(") Then
+			If FilterString.Contains("@Flag(") Then
                 Dim writeFlag As String
                 Dim splitFlag As String()
                 writeFlag = GetParentheses(FilterString, "@Flag(")
@@ -20896,22 +20906,18 @@ playLoop:
 		ssh.contactToUse = ssh.SlideshowMain
 		ssh.tempDomName = ssh.SlideshowMain.TypeName
 		ssh.tempHonorific = ssh.SlideshowMain.TypeHonorific
-		ssh.shortName = ssh.SlideshowMain.ShortName
 		If stringToCheck.Contains("@Contact1") Then
 			ssh.tempDomName = My.Settings.Glitter1
 			ssh.tempHonorific = My.Settings.G1Honorific
 			ssh.contactToUse = ssh.SlideshowContact1
-			ssh.shortName = ssh.SlideshowContact1.ShortName
 		ElseIf stringToCheck.Contains("@Contact2") Then
 			ssh.tempDomName = My.Settings.Glitter2
 			ssh.tempHonorific = My.Settings.G2Honorific
 			ssh.contactToUse = ssh.SlideshowContact2
-			ssh.shortName = ssh.SlideshowContact2.ShortName
 		ElseIf stringToCheck.Contains("@Contact3") Then
 			ssh.tempDomName = My.Settings.Glitter3
 			ssh.tempHonorific = My.Settings.G3Honorific
 			ssh.contactToUse = ssh.SlideshowContact3
-			ssh.shortName = ssh.SlideshowContact3.ShortName
 		ElseIf stringToCheck.Contains("@RandomContact") Then
 			Dim casual As Integer = 0
 			casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
@@ -20920,17 +20926,14 @@ playLoop:
 					ssh.tempDomName = My.Settings.Glitter1
 					ssh.tempHonorific = My.Settings.G1Honorific
 					ssh.contactToUse = ssh.SlideshowContact1
-					ssh.shortName = ssh.SlideshowContact1.ShortName
 				Case ssh.SlideshowContact2.TypeName
 					ssh.tempDomName = My.Settings.Glitter2
 					ssh.tempHonorific = My.Settings.G2Honorific
 					ssh.contactToUse = ssh.SlideshowContact2
-					ssh.shortName = ssh.SlideshowContact2.ShortName
 				Case ssh.SlideshowContact3.TypeName
 					ssh.tempDomName = My.Settings.Glitter3
 					ssh.tempHonorific = My.Settings.G3Honorific
 					ssh.contactToUse = ssh.SlideshowContact3
-					ssh.shortName = ssh.SlideshowContact3.ShortName
 				Case Else
 			End Select
 		End If
