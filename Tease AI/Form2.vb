@@ -3797,7 +3797,7 @@ trypreviousimage:
                     Try
 
                         ' Run Backgroundworker
-                        Dim __tmpResult As URL_File_BGW.MaintainUrlResult = BWURLFiles.RefreshURLFilesAsync()
+                        Dim __tmpResult As URL_File_BGW.MaintainUrlFilesResult = BWURLFiles.RefreshURLFilesAsync()
 
                         ' Activate the URL-Files
                         __tmpResult.MaintainedUrlFiles.ForEach(AddressOf URL_File_Set)
@@ -3833,7 +3833,7 @@ trypreviousimage:
                     '**************************************************************************************************************
                     Try
                         ' Run Backgroundworker
-                        Dim __tmpResult As URL_File_BGW.MaintainUrlResult = BWURLFiles.RebuildURLFilesAsync()
+                        Dim __tmpResult As URL_File_BGW.MaintainUrlFilesResult = BWURLFiles.RebuildURLFilesAsync()
 
                         ' Activate the URL-Files
                         __tmpResult.MaintainedUrlFiles.ForEach(AddressOf URL_File_Set)
@@ -3893,15 +3893,17 @@ trypreviousimage:
 	''' </summary>
 	''' <param name="sender"></param>
 	''' <param name="e"></param>
-	Private Sub BWURLFiles_URLCreate_User_Interactions(ByVal sender As URL_File_BGW, ByRef e As URL_File_BGW.UserActions) Handles BWURLFiles.URL_FileCreate_UserInteractions
+	Private Sub BWURLFiles_UserInteractions(ByVal sender As Object, ByRef e As EventArgs) Handles BWURLFiles.UserInteractions
 		If Me.InvokeRequired Then
-			Dim Callbak As New URL_File_BGW.URL_FileCreate_UserInteractions_Delegate(AddressOf BWURLFiles_URLCreate_User_Interactions)
+			Dim Callbak As New URL_File_BGW.UserInteractionsDelegate(AddressOf BWURLFiles_UserInteractions)
 			Me.Invoke(Callbak, sender, e)
 		Else
-			e.ReviewImages = CBWIReview.Checked
-			e.ApproveImage = ApproveImage
-			e.SaveImages = CBWISaveToDisk.Checked
-			e.ImgSaveDir = TBWIDirectory.Text
+			With DirectCast(e, URL_File_BGW.UserActions)
+				.ReviewImages = CBWIReview.Checked
+				.ApproveImage = ApproveImage
+				.SaveImages = CBWISaveToDisk.Checked
+				.ImgSaveDir = TBWIDirectory.Text
+			End With
 		End If
 	End Sub
 
@@ -3911,20 +3913,20 @@ trypreviousimage:
     ''' </summary>
     ''' <param name="Sender"></param>
     ''' <param name="e"></param>
-    Private Sub BWURLFiles_ProgressChanged(ByVal Sender As Object, ByRef e As URL_File_BGW.URL_File_ProgressChangedEventArgs) Handles BWURLFiles.URL_File_ProgressChanged
+    Private Sub BWURLFiles_ProgressChanged(ByVal Sender As Object, ByRef e As URL_File_BGW.ProgressChangedEventArgs) Handles BWURLFiles.ProgressChanged
 		If Me.InvokeRequired Then
             ' Beware: Event is fired in Worker Thread, so you need to do a Function Callback.
-            Dim CallBack As New URL_File_BGW.URL_File_ProgressChanged_Delegate(AddressOf BWURLFiles_ProgressChanged)
+            Dim CallBack As New URL_File_BGW.ProgressChangedDelegate(AddressOf BWURLFiles_ProgressChanged)
 			Me.Invoke(CallBack, Sender, e)
 		Else
             ' Reset remanent Marker for Image Approval
             If ApproveImage <> 0 Then ApproveImage = 0
 			Select Case e.CurrentTask
-				Case URL_File_Tasks.CreateURLFile
+				Case Tasks.CreateURLFile
                     '===============================================================================
                     '                           Create URL-File
                     '===============================================================================
-                    Select Case e.ActStage
+                    Select Case e.CurrentStage
                         ' ------------------------ Image Approval -------------------------------
                         Case WorkingStages.ImageApproval
 							If e.ImageToReview IsNot Nothing Then
@@ -3945,21 +3947,22 @@ trypreviousimage:
 						Case Else
                             ' ---------------------- Everthing else ------------------------------
                             ' Refresh Progressbars
-                            WebImageProgressBar.Maximum = e.BlogPageTotal + 1
-							WebImageProgressBar.Value = e.BlogPage
-                            ' Disable Image Approval-UI
-                            BTNWIContinue.Enabled = False
+                            WebImageProgressBar.Maximum = e.ImageCountTotal + 1
+							WebImageProgressBar.Value = e.ImageCount
+							' Disable Image Approval-UI
+							BTNWIContinue.Enabled = False
 							BTNWIAddandContinue.Enabled = False
                             ' Inform User about BGW-State
-                            LBLWebImageCount.Text = String.Format("{0}/{1} ({2})", e.BlogPage, e.BlogPageTotal, e.ImageCount)
+                            LBLWebImageCount.Text = String.Format("{0}/{1}", e.ImageCount, e.ImageCountTotal)
 					End Select
 				Case Else
                     '===============================================================================
                     '                           Refresh URL-File
                     '===============================================================================
                     LBLMaintenance.Text = e.InfoText
-					PBCurrent.Maximum = e.BlogPageTotal
-					PBCurrent.Value = e.BlogPage
+					PBCurrent.Maximum = e.ImageCountTotal
+					PBCurrent.Value = e.ImageCount
+					PBCurrent.Refresh()
 					PBMaintenance.Maximum = e.OverallProgressTotal
 					PBMaintenance.Value = e.OverallProgress
 			End Select
