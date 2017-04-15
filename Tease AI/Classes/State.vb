@@ -519,14 +519,6 @@ Public Class SessionState
 	Public LongTaunts As Boolean
 	Public ExtremeTaunts As Boolean
 
-
-
-	<Category("MiniScript")> Public Property MiniScript As Boolean = False
-	<Category("MiniScript")> Public Property MiniScriptText As String
-	<Category("MiniScript")> Public Property MiniTauntVal As Integer
-	<Category("MiniScript")> Public Property MiniTimerCheck As Boolean
-
-
 	Public Property EdgeGoto As Boolean = False
 	Public Property EdgeMessage As Boolean = False
 	Public Property EdgeVideo As Boolean = False
