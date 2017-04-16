@@ -564,9 +564,9 @@ Public Class SessionState
 	<Description("If True stroking continues when sub is on edge.")>
 	Public Property TauntEdging As Boolean = False
 
-    Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
+	Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
 
-    Public Property CountDownList As New List(Of String)
+	Public Property CountDownList As New List(Of String)
 	Public Property CountUpList As New List(Of String)
 
 	Public Property MultiTauntPictureHold As Boolean
@@ -760,7 +760,7 @@ Public Class SessionState
 	Sub onDeserialized_FixFields(sc As StreamingContext)
 		' Suppress obsolete warnings.
 
-        '#Disable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
+		'#Disable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
 
 #If _MSC_VER > 1600 Then
     #Disable Warning BC40000
@@ -780,9 +780,9 @@ Public Class SessionState
 			oldReturn.Line = CInt(Me.ReturnStrokeTauntVal)
 			CallReturns.Push(oldReturn)
 		End If
-		
+
 		' Unsuppress obsolete warnings 
-        '#Enable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
+		'#Enable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
 
 #If _MSC_VER > 1600 Then
     #Enable Warning BC40000
