@@ -7,7 +7,7 @@
 		Dim yesOrNostate As Boolean
 
 		'store all the modes variables so we can reset them on coming back
-		Dim edgeMode, ruinMode, cameMode, yesMode, noMode As Mode
+		Dim edgeMode, ruinMode, cameMode, yesMode, noMode As New Mode()
 		Dim customModes As New Dictionary(Of String, Mode)
 
 		Sub New(session As SessionState)
