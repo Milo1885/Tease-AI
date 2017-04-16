@@ -119,6 +119,7 @@ next_innerException:
 		End Sub
 
 
+		<DebuggerStepThrough>
 		Private Sub CheckFile()
 			If Not Directory.Exists(Path.GetDirectoryName(LogPath)) Then _
 				Directory.CreateDirectory(Path.GetDirectoryName(LogPath))
