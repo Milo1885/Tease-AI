@@ -1940,33 +1940,33 @@ WritingTaskLine:
 			End If
 
 
-			If ssh.EdgeVideo = True Then
+			If ssh.edgeMode.VideoMode = True Then
 				ssh.SessionEdges += 1
-				ssh.EdgeVideo = False
+				ssh.edgeMode.VideoMode = False
 				ssh.TeaseVideo = False
 				VideoTimer.Stop()
 				DomWMP.Visible = False
 				DomWMP.Ctlcontrols.stop()
 				mainPictureBox.Visible = True
-				ssh.FileGoto = ssh.EdgeGotoLine
+				ssh.FileGoto = ssh.edgeMode.GotoLine
 				ssh.SkipGotoLine = True
 				GetGoto()
 				Return
 			End If
 
-			If ssh.EdgeGoto = True Then
+			If ssh.edgeMode.GotoMode = True Then
 				ssh.SessionEdges += 1
-				ssh.EdgeGoto = False
-				ssh.FileGoto = ssh.EdgeGotoLine
+				ssh.edgeMode.GotoMode = False
+				ssh.FileGoto = ssh.edgeMode.GotoLine
 				ssh.SkipGotoLine = True
 				GetGoto()
 				Return
 			End If
 
-			If ssh.EdgeMessage = True Then
+			If ssh.edgeMode.MessageMode = True Then
 				ssh.SessionEdges += 1
-				ssh.EdgeMessage = False
-				ssh.ChatString = ssh.EdgeMessageText
+				ssh.edgeMode.MessageMode = False
+				ssh.ChatString = ssh.edgeMode.MessageText
 				GoTo DebugAwareness
 			End If
 
@@ -2564,16 +2564,16 @@ DebugAwareness:
 
 
 		If UCase(ssh.ChatString) = UCase("CAME") Or UCase(ssh.ChatString) = UCase("I CAME") Or UCase(ssh.ChatString) = UCase("JUST CAME") Or UCase(ssh.ChatString) = UCase("I JUST CAME") Then
-			If ssh.CameMessage = True Then
-				ssh.CameMessage = False
-				ssh.ChatString = ssh.CameMessageText
+			If ssh.cameMode.MessageMode = True Then
+				ssh.cameMode.MessageMode = False
+				ssh.ChatString = ssh.cameMode.MessageText
 			End If
 		End If
 
 		If UCase(ssh.ChatString) = UCase("RUINED") Or UCase(ssh.ChatString) = UCase("I RUINED") Or UCase(ssh.ChatString) = UCase("RUINED IT") Or UCase(ssh.ChatString) = UCase("I RUINED IT") Then
-			If ssh.RuinedMessage = True Then
-				ssh.RuinedMessage = False
-				ssh.ChatString = ssh.RuinedMessageText
+			If ssh.ruinMode.MessageMode = True Then
+				ssh.ruinMode.MessageMode = False
+				ssh.ChatString = ssh.ruinMode.MessageText
 			End If
 		End If
 
@@ -2660,27 +2660,27 @@ EdgeSkip:
 		End Try
 
 		If UCase(CheckResponse) = UCase("CAME") Or UCase(CheckResponse) = UCase("I CAME") Then
-			If ssh.CameGoto = True Then
-				ssh.CameGoto = False
+			If ssh.cameMode.GotoMode = True Then
+				ssh.cameMode.GotoMode = False
 				WaitTimer.Stop()
 				If TimeoutTimer.Enabled = True Then
 					TimeoutTimer.Stop()
 					ssh.YesOrNo = False
 					ssh.InputFlag = False
 				End If
-				ssh.FileGoto = ssh.CameGotoLine
+				ssh.FileGoto = ssh.cameMode.GotoLine
 				ssh.SkipGotoLine = True
 				GetGoto()
 				Return
 			End If
-			If ssh.CameVideo = True Then
-				ssh.CameVideo = False
+			If ssh.cameMode.VideoMode = True Then
+				ssh.cameMode.VideoMode = False
 				ssh.TeaseVideo = False
 				VideoTimer.Stop()
 				DomWMP.Visible = False
 				DomWMP.Ctlcontrols.stop()
 				mainPictureBox.Visible = True
-				ssh.FileGoto = ssh.CameGotoLine
+				ssh.FileGoto = ssh.cameMode.GotoLine
 				ssh.SkipGotoLine = True
 				GetGoto()
 				Return
@@ -2689,27 +2689,27 @@ EdgeSkip:
 
 
 		If UCase(CheckResponse) = UCase("RUINED") Or UCase(CheckResponse) = UCase("I RUINED") Or UCase(CheckResponse) = UCase("RUINED IT") Or UCase(CheckResponse) = UCase("I RUINED IT") Then
-			If ssh.RuinedGoto = True Then
-				ssh.RuinedGoto = False
+			If ssh.ruinMode.GotoMode = True Then
+				ssh.ruinMode.GotoMode = False
 				WaitTimer.Stop()
 				If TimeoutTimer.Enabled = True Then
 					TimeoutTimer.Stop()
 					ssh.YesOrNo = False
 					ssh.InputFlag = False
 				End If
-				ssh.FileGoto = ssh.RuinedGotoLine
+				ssh.FileGoto = ssh.ruinMode.GotoLine
 				ssh.SkipGotoLine = True
 				GetGoto()
 				Return
 			End If
-			If ssh.RuinedVideo = True Then
-				ssh.RuinedVideo = False
+			If ssh.ruinMode.VideoMode = True Then
+				ssh.ruinMode.VideoMode = False
 				ssh.TeaseVideo = False
 				VideoTimer.Stop()
 				DomWMP.Visible = False
 				DomWMP.Ctlcontrols.stop()
 				mainPictureBox.Visible = True
-				ssh.FileGoto = ssh.RuinedGotoLine
+				ssh.FileGoto = ssh.ruinMode.GotoLine
 				ssh.SkipGotoLine = True
 				GetGoto()
 				Return
@@ -2758,41 +2758,41 @@ EdgeSkip:
 			YesSplit = YesSplit.Replace("'", "")
 		Loop Until Not YesSplit.Contains("  ") And Not YesSplit.Contains(", ") And Not YesSplit.Contains(" ,") And Not YesSplit.Contains("'")
 
-		If ssh.YesGoto = True Then
+		If ssh.yesMode.GotoMode = True Then
 			Dim SplitParts As String() = YesSplit.Split(New Char() {","c})
 			For i As Integer = 0 To SplitParts.Count - 1
 				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
-					ssh.YesGoto = False
+					ssh.yesMode.GotoMode = False
 					WaitTimer.Stop()
 					If TimeoutTimer.Enabled = True Then
 						TimeoutTimer.Stop()
 						ssh.YesOrNo = False
 						ssh.InputFlag = False
 					End If
-					ssh.FileGoto = ssh.YesGotoLine
+					ssh.FileGoto = ssh.yesMode.GotoLine
 					ssh.SkipGotoLine = True
 					GetGoto()
 				End If
 			Next
-			If ssh.YesGoto = False Then Return
+			If ssh.yesMode.GotoMode = False Then Return
 		End If
 
-		If ssh.YesVideo = True Then
+		If ssh.yesMode.VideoMode = True Then
 			Dim SplitParts As String() = YesSplit.Split(New Char() {","c})
 			For i As Integer = 0 To SplitParts.Count - 1
 				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
-					ssh.YesVideo = False
+					ssh.yesMode.VideoMode = False
 					ssh.TeaseVideo = False
 					VideoTimer.Stop()
 					DomWMP.Visible = False
 					DomWMP.Ctlcontrols.stop()
 					mainPictureBox.Visible = True
-					ssh.FileGoto = ssh.YesGotoLine
+					ssh.FileGoto = ssh.yesMode.GotoLine
 					ssh.SkipGotoLine = True
 					GetGoto()
 				End If
 			Next
-			If ssh.YesVideo = False Then Return
+			If ssh.yesMode.VideoMode = False Then Return
 		End If
 
 		If ssh.ResponseYes <> "" And File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ssh.ResponseYes & ".txt") Then
@@ -2826,41 +2826,41 @@ EdgeSkip:
 			NoSplit = NoSplit.Replace("'", "")
 		Loop Until Not NoSplit.Contains("  ") And Not NoSplit.Contains(", ") And Not NoSplit.Contains(" ,") And Not NoSplit.Contains("'")
 
-		If ssh.NoGoto = True Then
+		If ssh.noMode.GotoMode = True Then
 			Dim SplitParts As String() = NoSplit.Split(New Char() {","c})
 			For i As Integer = 0 To SplitParts.Count - 1
 				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
-					ssh.NoGoto = False
+					ssh.noMode.GotoMode = False
 					WaitTimer.Stop()
 					If TimeoutTimer.Enabled = True Then
 						TimeoutTimer.Stop()
 						ssh.YesOrNo = False
 						ssh.InputFlag = False
 					End If
-					ssh.FileGoto = ssh.NoGotoLine
+					ssh.FileGoto = ssh.noMode.GotoLine
 					ssh.SkipGotoLine = True
 					GetGoto()
 				End If
 			Next
-			If ssh.NoGoto = False Then Return
+			If ssh.noMode.GotoMode = False Then Return
 		End If
 
-		If ssh.NoVideo_Mode = True Then
+		If ssh.noMode.VideoMode = True Then
 			Dim SplitParts As String() = NoSplit.Split(New Char() {","c})
 			For i As Integer = 0 To SplitParts.Count - 1
 				If UCase(CheckResponse) = UCase(SplitParts(i)) Then
-					ssh.NoVideo_Mode = False
+					ssh.noMode.VideoMode = False
 					ssh.TeaseVideo = False
 					VideoTimer.Stop()
 					DomWMP.Visible = False
 					DomWMP.Ctlcontrols.stop()
 					mainPictureBox.Visible = True
-					ssh.FileGoto = ssh.NoGotoLine
+					ssh.FileGoto = ssh.noMode.GotoLine
 					ssh.SkipGotoLine = True
 					GetGoto()
 				End If
 			Next
-			If ssh.NoVideo_Mode = False Then Return
+			If ssh.noMode.VideoMode = False Then Return
 		End If
 
 		If ssh.ResponseNo <> "" And File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\" & ssh.ResponseNo & ".txt") Then
@@ -3934,16 +3934,18 @@ ReturnCalled:
 
 				'end the scripts anyway if it reaches the last line, even if the user forgot to use the @End command
 				If lines(ssh.StrokeTauntVal) = "@End" Or ssh.StrokeTauntVal >= lines.Count Then
-					If ssh.CallReturns.Count = 0 Then If ssh.ShowModule = False Then ssh.ModuleEnd = True
-					'if we reached the end of the script and we are in a link or in the beforeTease, and we forget to use the @StartStroking/Taunt
-					'it will automatically do it to avoid session errors
-					If (ssh.isLink Or ssh.BeforeTease) And ssh.SubStroking = False Then
-						ssh.isLink = False
-						If My.Settings.Chastity Then
-							ssh.DomChat = "@NullResponse @StartTaunts"
-						Else
-							ssh.DomChat = "@NullResponse @StartStroking"
-							TypingDelay()
+					If ssh.CallReturns.Count = 0 Then
+						If ssh.ShowModule = False Then ssh.ModuleEnd = True
+						'if we reached the end of the script and we are in a link or in the beforeTease, and we forget to use the @StartStroking/Taunt
+						'it will automatically do it to avoid session errors
+						If (ssh.isLink Or ssh.BeforeTease) And ssh.SubStroking = False Then
+							ssh.isLink = False
+							If My.Settings.Chastity Then
+								ssh.DomChat = "@NullResponse @StartTaunts"
+							Else
+								ssh.DomChat = "@NullResponse @StartStroking"
+								TypingDelay()
+							End If
 						End If
 					End If
 				End If
@@ -10173,24 +10175,22 @@ TaskCleanSet:
 			Dim EdgeArray As String() = EdgeFlag.Split(",")
 
 			If UCase(EdgeArray(0)).Contains("GOTO") Then
-				ssh.EdgeGoto = True
-				ssh.EdgeGotoLine = EdgeArray(1)
+				ssh.edgeMode.GotoMode = True
+				ssh.edgeMode.GotoLine = EdgeArray(1)
 			End If
 
 			If UCase(EdgeArray(0)).Contains("MESSAGE") Then
-				ssh.EdgeMessage = True
-				ssh.EdgeMessageText = EdgeArray(1)
+				ssh.edgeMode.MessageMode = True
+				ssh.edgeMode.MessageText = EdgeArray(1)
 			End If
 
 			If UCase(EdgeArray(0)).Contains("VIDEO") Then
-				ssh.EdgeVideo = True
-				ssh.EdgeGotoLine = EdgeArray(1)
+				ssh.edgeMode.VideoMode = True
+				ssh.edgeMode.GotoLine = EdgeArray(1)
 			End If
 
 			If UCase(EdgeArray(0)).Contains("NORMAL") Then
-				ssh.EdgeGoto = False
-				ssh.EdgeMessage = False
-				ssh.EdgeVideo = False
+				ssh.edgeMode.Clear()
 			End If
 
 			StringClean = StringClean.Replace("@EdgeMode(" & GetParentheses(StringClean, "@EdgeMode(") & ")", "")
@@ -12506,18 +12506,17 @@ VTSkip:
 			Dim YesArray As String() = YesFlag.Split(",")
 
 			If UCase(YesArray(0)).Contains("GOTO") Then
-				ssh.YesGoto = True
-				ssh.YesGotoLine = YesArray(1)
+				ssh.yesMode.GotoMode = True
+				ssh.yesMode.GotoLine = YesArray(1)
 			End If
 
 			If UCase(YesArray(0)).Contains("VIDEO") Then
-				ssh.YesVideo = True
-				ssh.YesGotoLine = YesArray(1)
+				ssh.yesMode.VideoMode = True
+				ssh.yesMode.GotoLine = YesArray(1)
 			End If
 
 			If UCase(YesArray(0)).Contains("NORMAL") Then
-				ssh.YesGoto = False
-				ssh.YesVideo = False
+				ssh.yesMode.Clear()
 			End If
 
 			StringClean = StringClean.Replace("@YesMode(" & GetParentheses(StringClean, "@YesMode(") & ")", "")
@@ -12530,18 +12529,17 @@ VTSkip:
 			Dim NoArray As String() = NoFlag.Split(",")
 
 			If UCase(NoArray(0)).Contains("GOTO") Then
-				ssh.NoGoto = True
-				ssh.NoGotoLine = NoArray(1)
+				ssh.noMode.GotoMode = True
+				ssh.noMode.GotoLine = NoArray(1)
 			End If
 
 			If UCase(NoArray(0)).Contains("VIDEO") Then
-				ssh.NoVideo_Mode = True
-				ssh.NoGotoLine = NoArray(1)
+				ssh.noMode.VideoMode = True
+				ssh.noMode.GotoLine = NoArray(1)
 			End If
 
 			If UCase(NoArray(0)).Contains("NORMAL") Then
-				ssh.NoGoto = False
-				ssh.NoVideo_Mode = False
+				ssh.noMode.Clear()
 			End If
 
 			StringClean = StringClean.Replace("@NoMode(" & GetParentheses(StringClean, "@NoMode(") & ")", "")
@@ -12554,24 +12552,22 @@ VTSkip:
 			Dim CameArray As String() = CameFlag.Split(",")
 
 			If UCase(CameArray(0)).Contains("GOTO") Then
-				ssh.CameGoto = True
-				ssh.CameGotoLine = CameArray(1)
+				ssh.cameMode.GotoMode = True
+				ssh.cameMode.GotoLine = CameArray(1)
 			End If
 
 			If UCase(CameArray(0)).Contains("MESSAGE") Then
-				ssh.CameMessage = True
-				ssh.CameMessageText = CameArray(1)
+				ssh.cameMode.MessageMode = True
+				ssh.cameMode.MessageText = CameArray(1)
 			End If
 
 			If UCase(CameArray(0)).Contains("VIDEO") Then
-				ssh.CameVideo = True
-				ssh.CameGotoLine = CameArray(1)
+				ssh.cameMode.VideoMode = True
+				ssh.cameMode.GotoLine = CameArray(1)
 			End If
 
 			If UCase(CameArray(0)).Contains("NORMAL") Then
-				ssh.CameGoto = False
-				ssh.CameMessage = False
-				ssh.CameVideo = False
+				ssh.cameMode.Clear()
 			End If
 
 			StringClean = StringClean.Replace("@CameMode(" & GetParentheses(StringClean, "@CameMode(") & ")", "")
@@ -12584,24 +12580,22 @@ VTSkip:
 			Dim RuinedArray As String() = RuinedFlag.Split(",")
 
 			If UCase(RuinedArray(0)).Contains("GOTO") Then
-				ssh.RuinedGoto = True
-				ssh.RuinedGotoLine = RuinedArray(1)
+				ssh.ruinMode.GotoMode = True
+				ssh.ruinMode.GotoLine = RuinedArray(1)
 			End If
 
 			If UCase(RuinedArray(0)).Contains("MESSAGE") Then
-				ssh.RuinedMessage = True
-				ssh.RuinedMessageText = RuinedArray(1)
+				ssh.ruinMode.MessageMode = True
+				ssh.ruinMode.MessageText = RuinedArray(1)
 			End If
 
 			If UCase(RuinedArray(0)).Contains("VIDEO") Then
-				ssh.RuinedVideo = True
-				ssh.RuinedGotoLine = RuinedArray(1)
+				ssh.ruinMode.VideoMode = True
+				ssh.ruinMode.GotoLine = RuinedArray(1)
 			End If
 
 			If UCase(RuinedArray(0)).Contains("NORMAL") Then
-				ssh.RuinedGoto = False
-				ssh.RuinedMessage = False
-				ssh.RuinedVideo = False
+				ssh.ruinMode.Clear()
 			End If
 
 			StringClean = StringClean.Replace("@RuinedMode(" & GetParentheses(StringClean, "@RuinedMode(") & ")", "")
@@ -13498,11 +13492,11 @@ VTSkip:
 
 	Public Function FilterList(ByVal ListClean As List(Of String)) As List(Of String)
 #If TRACE Then
-        Dim sw As New Stopwatch
-        sw.Start()
+		Dim sw As New Stopwatch
+		sw.Start()
 
-        Trace.WriteLine("FilterList Started")
-        Trace.Indent()
+		Trace.WriteLine("FilterList Started")
+		Trace.Indent()
 #End If
 
 		Dim FilterPass As Boolean
@@ -13568,8 +13562,8 @@ VTSkip:
 		'Next
 
 #If TRACE Then
-        Trace.Unindent()
-        Trace.WriteLine("FilterList finished - Duration: " & sw.ElapsedMilliseconds & "ms")
+		Trace.Unindent()
+		Trace.WriteLine("FilterList finished - Duration: " & sw.ElapsedMilliseconds & "ms")
 #End If
 		'If ListClean.Count = 0 Then ListClean.Add("test")
 		Return ListClean
@@ -14741,7 +14735,6 @@ VTSkip:
 		ssh.ShowModule = True
 		ssh.FirstRound = False
 		ssh.TauntEdging = False
-		ssh.MultiTauntPictureHold = False
 
 		ssh.AskedToGiveUpSection = False
 		Dim ModuleList As New List(Of String)
@@ -16101,11 +16094,11 @@ RestartFunction:
 
             VideoTimer.Stop()
 
-			ssh.EdgeVideo = False
-			ssh.YesVideo = False
-			ssh.NoVideo_Mode = False
-			ssh.CameVideo = False
-			ssh.RuinedVideo = False
+			ssh.edgeMode.VideoMode = False
+			ssh.yesMode.VideoMode = False
+			ssh.noMode.VideoMode = False
+			ssh.cameMode.VideoMode = False
+			ssh.ruinMode.VideoMode = False
 
 			DomWMP.currentPlaylist.clear()
 
@@ -17328,7 +17321,7 @@ restartInstantly:
 				Dim fsd As New SaveFileDialog With {.Filter = "Saved Session|*" & Path.GetExtension(SavedSessionDefaultPath) & "",
 													.InitialDirectory = Path.GetDirectoryName(SavedSessionDefaultPath),
 													.Title = "Select a destination to safe the sessin to.",
-													.filename = Now.ToString("yy-MM-dd_HH-mm-ss") & "_" & dompersonalitycombobox.Text,
+													.FileName = Now.ToString("yy-MM-dd_HH-mm-ss") & "_" & dompersonalitycombobox.Text,
 													.AddExtension = True,
 													.CheckPathExists = True,
 													.OverwritePrompt = True,
@@ -20349,23 +20342,12 @@ playLoop:
 	End Function
 
 	Public Sub ClearModes()
-
-		ssh.EdgeGoto = False
-		ssh.YesGoto = False
-		ssh.NoGoto = False
-		ssh.CameGoto = False
-		ssh.RuinedGoto = False
-		ssh.EdgeVideo = False
-		ssh.YesVideo = False
-		ssh.NoVideo_Mode = False
-		ssh.CameVideo = False
-		ssh.RuinedVideo = False
-		ssh.EdgeMessage = False
-		ssh.CameMessage = False
-		ssh.RuinedMessage = False
+		ssh.edgeMode.Clear()
+		ssh.cameMode.Clear()
+		ssh.ruinMode.Clear()
+		ssh.yesMode.Clear()
+		ssh.noMode.Clear()
 		ssh.Modes.Clear()
-
-
 	End Sub
 
 

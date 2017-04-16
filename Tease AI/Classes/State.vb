@@ -519,39 +519,68 @@ Public Class SessionState
 	Public LongTaunts As Boolean
 	Public ExtremeTaunts As Boolean
 
-	Public Property EdgeGoto As Boolean = False
-	Public Property EdgeMessage As Boolean = False
-	Public Property EdgeVideo As Boolean = False
-
-	Public Property EdgeMessageText As String
-	Public Property EdgeGotoLine As String
-
 	<Category("Multiple Edges")> Public Property MultipleEdges As Boolean
 	<Category("Multiple Edges")> Public Property MultipleEdgesAmount As Integer
 	<Category("Multiple Edges")> Public Property MultipleEdgesInterval As Integer
 	<Category("Multiple Edges")> Public Property MultipleEdgesTick As Integer
 	<Category("Multiple Edges")> Public Property MultipleEdgesMetronome As String = ""
 
+#Region "Modes"
+	Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
+	Public Property edgeMode As New Mode()
+	Public Property cameMode As New Mode()
+	Public Property ruinMode As New Mode()
+	Public Property yesMode As New Mode()
+	Public Property noMode As New Mode()
+
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
+	Public Property EdgeGoto As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
+	Public Property EdgeMessage As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
+	Public Property EdgeVideo As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
+	Public Property EdgeMessageText As String
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
+	Public Property EdgeGotoLine As String
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property YesGoto As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property YesVideo As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property NoGoto As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property NoVideo_Mode As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property CameGoto As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property CameVideo As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property CameMessage As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property CameMessageText As String
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property RuinedGoto As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property RuinedVideo As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property RuinedMessage As Boolean = False
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property RuinedMessageText As String
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property YesGotoLine As String
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property NoGotoLine As String
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property CameGotoLine As String
+	<Obsolete("Deprecated as of v0.58 Left for serialization version tolerance.")>
 	Public Property RuinedGotoLine As String
+#End Region
 
 	Public Property SecondSession As Boolean
 
 	Public Property checkAnswers As subAnswers
+
 
 	''' <summary>
 	''' Set to true if the sub is on the edge and the domme had decided to not to stop stroking.
@@ -563,8 +592,6 @@ Public Class SessionState
 	''' </remarks>
 	<Description("If True stroking continues when sub is on edge.")>
 	Public Property TauntEdging As Boolean = False
-
-	Public Property Modes As New Dictionary(Of String, Mode)(System.StringComparer.OrdinalIgnoreCase)
 
 	Public Property CountDownList As New List(Of String)
 	Public Property CountUpList As New List(Of String)
@@ -781,6 +808,46 @@ Public Class SessionState
 			CallReturns.Push(oldReturn)
 		End If
 
+		If edgeMode Is Nothing Then
+			edgeMode = New Mode()
+			edgeMode.GotoMode = EdgeGoto
+			edgeMode.GotoLine = EdgeGotoLine
+			edgeMode.VideoMode = EdgeVideo
+			edgeMode.MessageMode = EdgeMessage
+			edgeMode.MessageText = EdgeMessageText
+		End If
+
+		If cameMode Is Nothing Then
+			cameMode = New Mode()
+			cameMode.GotoMode = CameGoto
+			cameMode.GotoLine = CameGotoLine
+			cameMode.VideoMode = CameVideo
+			cameMode.MessageMode = CameMessage
+			cameMode.MessageText = CameMessageText
+		End If
+
+		If ruinMode Is Nothing Then
+			ruinMode = New Mode()
+			ruinMode.GotoMode = RuinedGoto
+			ruinMode.GotoLine = RuinedGotoLine
+			ruinMode.VideoMode = RuinedVideo
+			ruinMode.MessageMode = RuinedMessage
+			ruinMode.MessageText = RuinedMessageText
+		End If
+
+		If yesMode Is Nothing Then
+			yesMode = New Mode()
+			yesMode.GotoMode = YesGoto
+			yesMode.GotoLine = YesGotoLine
+			yesMode.VideoMode = YesVideo
+		End If
+
+		If noMode Is Nothing Then
+			noMode = New Mode()
+			noMode.GotoMode = NoGoto
+			noMode.GotoLine = NoGotoLine
+			noMode.VideoMode = NoVideo
+		End If
 		' Unsuppress obsolete warnings 
 		'#Enable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
 
