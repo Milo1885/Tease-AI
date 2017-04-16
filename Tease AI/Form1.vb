@@ -11306,7 +11306,7 @@ OrgasmDecided:
 				ssh.SubHoldingEdge = False
 				StrokeTimer.Stop()
 				StrokeTauntTimer.Stop()
-
+				ssh.MultiTauntPictureHold = False
 				CensorshipTimer.Stop()
 				RLGLTimer.Stop()
 				TnASlides.Stop()
@@ -12603,6 +12603,8 @@ VTSkip:
             ssh.CBTBothFlag = False
             ssh.CustomTaskActive = False
 
+			ssh.MultiTauntPictureHold = False
+
             If Not ssh.SubGaveUp Then
                 ssh.SubEdging = False
                 ssh.SubHoldingEdge = False
@@ -12642,6 +12644,8 @@ VTSkip:
             Dim CheckFlag As String = GetParentheses(StringClean, "@Call(")
             Dim CallReplace As String = CheckFlag
 
+			ssh.MultiTauntPictureHold = False
+
             If CheckFlag.Contains(",") Then
 
                 CheckFlag = FixCommas(CheckFlag)
@@ -12673,20 +12677,21 @@ VTSkip:
             If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag) Then
                 MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not exist!" & Environment.NewLine & Environment.NewLine &
                  Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Else
-                Dim RandomFile As New List(Of String)
-                RandomFile.Clear()
-                For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-                    RandomFile.Add(foundFile)
-                Next
-                If RandomFile.Count < 1 Then
-                    MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine &
-                      Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+			Else
+				ssh.MultiTauntPictureHold = False
+				Dim RandomFile As New List(Of String)
+				RandomFile.Clear()
+				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+					RandomFile.Add(foundFile)
+				Next
+				If RandomFile.Count < 1 Then
+					MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine &
+					  Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 				Else
 					GotoClear()
 					ssh.FileText = RandomFile(ssh.randomizer.Next(0, RandomFile.Count))
 					ssh.StrokeTauntVal = -1
-                End If
+				End If
             End If
             StringClean = StringClean.Replace("@CallRandom(" & CallReplace & ")", "")
         End If
@@ -15200,7 +15205,8 @@ VTSkip:
 
         ssh.ShowModule = True
 		ssh.FirstRound = False
-        ssh.TauntEdging = False
+		ssh.TauntEdging = False
+		ssh.MultiTauntPictureHold = False
 
         ssh.AskedToGiveUpSection = False
         Dim ModuleList As New List(Of String)
