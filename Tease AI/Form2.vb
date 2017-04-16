@@ -37,11 +37,9 @@ Public Class FrmSettings
 	Dim LocalTagCount As Integer
 
 
-	Public WebImage As String
-	Public WebImageFile As StreamReader
 	Public WebImageLines As New List(Of String)
 	Public WebImageLine As Integer
-	Public WebImageLineTotal As Integer
+	''' <summary>Current opened url filepath. </summary>
 	Public WebImagePath As String
 	Public ApproveImage As Integer = 0
 
@@ -412,11 +410,11 @@ Public Class FrmSettings
 		CBAuditStartup.Checked = My.Settings.AuditStartup
 
 		sadisticCheckBox.Checked = My.Settings.DomSadistic
-        degradingCheckBox.Checked = My.Settings.DomDegrading
-        CFNMCheckBox.Checked = My.Settings.DomCFNM
-        CBRandomDomme.Checked = My.Settings.CBRandomDomme
-        CBOutputErrors.Checked = My.Settings.CBOutputErrors
-        giveupCheckBox.Checked = My.Settings.GiveUpReturn
+		degradingCheckBox.Checked = My.Settings.DomDegrading
+		CFNMCheckBox.Checked = My.Settings.DomCFNM
+		CBRandomDomme.Checked = My.Settings.CBRandomDomme
+		CBOutputErrors.Checked = My.Settings.CBOutputErrors
+		giveupCheckBox.Checked = My.Settings.GiveUpReturn
 		If CBAuditStartup.Checked = True Then AuditScripts()
 
 
@@ -450,12 +448,12 @@ Public Class FrmSettings
 		WBPlaylist.Navigate(Application.StartupPath & "\Scripts\" & Form1.dompersonalitycombobox.Text & "\Playlist\Start\")
 
 
-        For Each tmptbx As TextBox In New List(Of TextBox) From {TbxContact1ImageDir, TbxContact2ImageDir, TbxContact3ImageDir, TbxDomImageDir}
-            If tmptbx.DataBindings("Text") Is Nothing Then
-                Throw New Exception("There is no databinding set on """ & tmptbx.Name &
-                 """'s text-property. Set the databinding and recompile!")
-            End If
-        Next
+		For Each tmptbx As TextBox In New List(Of TextBox) From {TbxContact1ImageDir, TbxContact2ImageDir, TbxContact3ImageDir, TbxDomImageDir}
+			If tmptbx.DataBindings("Text") Is Nothing Then
+				Throw New Exception("There is no databinding set on """ & tmptbx.Name &
+				 """'s text-property. Set the databinding and recompile!")
+			End If
+		Next
 
 		For Each tmptbx As CheckBox In New List(Of CheckBox) From {CBGlitter1, CBGlitter2, CBGlitter3}
 			If tmptbx.DataBindings("Checked") Is Nothing Then
@@ -464,7 +462,7 @@ Public Class FrmSettings
 			End If
 		Next
 
-        TbxRandomImageDir.Text = My.Settings.RandomImageDir
+		TbxRandomImageDir.Text = My.Settings.RandomImageDir
 
 		If My.Settings.TeaseAILanguage = "English" Then EnglishMenu()
 		If My.Settings.TeaseAILanguage = "German" Then GermanMenu()
@@ -2970,10 +2968,10 @@ SkipDeserializing:
 		If (FolderBrowserDialog1.ShowDialog() = DialogResult.OK) Then
 			My.Settings.RandomImageDir = FolderBrowserDialog1.SelectedPath
 			My.Application.Session.SlideshowContactRandom = New ContactData(ContactType.Random)
-            TbxRandomImageDir.Text = My.Settings.RandomImageDir
-        End If
-    End Sub
-	
+			TbxRandomImageDir.Text = My.Settings.RandomImageDir
+		End If
+	End Sub
+
 	Private Sub Button35_Click(sender As System.Object, e As System.EventArgs) Handles BTNGlitterD.Click
 		If GetColor.ShowDialog() = DialogResult.OK Then
 			LBLGlitterNCDomme.ForeColor = GetColor.Color
@@ -3077,25 +3075,25 @@ SkipDeserializing:
 		TTDir.SetToolTip(sender, "This button allows you to change the color of this contact's name as it appears in the Glitter app.")
 	End Sub
 
-    Private Sub LBLContact1ImageDir_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover, TbxRandomImageDir.MouseHover
-        TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
-    End Sub
+	Private Sub LBLContact1ImageDir_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles TbxContact1ImageDir.MouseHover, TbxContact2ImageDir.MouseHover, TbxContact3ImageDir.MouseHover, TbxDomImageDir.MouseHover, TbxRandomImageDir.MouseHover
+		TTDir.SetToolTip(sender, CType(sender, TextBox).Text)
+	End Sub
 
-    Private Sub Button2_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnContact1ImageDir.MouseHover, BtnContact2ImageDir.MouseHover, BtnContact3ImageDir.MouseHover
+	Private Sub Button2_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnContact1ImageDir.MouseHover, BtnContact2ImageDir.MouseHover, BtnContact3ImageDir.MouseHover
 
-        If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory containing several image" & Environment.NewLine &
+		If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory containing several image" & Environment.NewLine &
 "set folders of the same model you're using as your contact.")
-        If RBGerman.Checked = True Then TTDir.SetToolTip(sender, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
-      "Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
-    End Sub
+		If RBGerman.Checked = True Then TTDir.SetToolTip(sender, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+	  "Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+	End Sub
 
-    Private Sub btnRandomImage_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnRandomImageDir.MouseHover
+	Private Sub btnRandomImage_MouseHover(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnRandomImageDir.MouseHover
 
-        If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory for random dommes. Each model " & Environment.NewLine &
+		If RBEnglish.Checked = True Then TTDir.SetToolTip(sender, "Use this button to select a directory for random dommes. Each model " & Environment.NewLine &
 "should have her own directory containing folders of different imagesets.")
-        If RBGerman.Checked = True Then TTDir.SetToolTip(sender, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
-      "Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
-    End Sub
+		If RBGerman.Checked = True Then TTDir.SetToolTip(sender, "Benutze diese Schaltfläche um einen Ordner zu wählen, welcher mehre" & Environment.NewLine &
+	  "Bildersets von dem selben Model enthält, die du als Kontakt benutzt.")
+	End Sub
 
 	Private Sub BtnContact1ImageDirClear_Click(sender As System.Object, e As System.EventArgs) Handles BtnContact1ImageDirClear.Click
 		My.Settings.ResetField(TbxContact1ImageDir, "Text")
@@ -3459,7 +3457,6 @@ SkipDeserializing:
 			End If
 		End If
 
-
 	End Sub
 
 	Private Sub BTNWIAddandContinue_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIAddandContinue.Click
@@ -3474,133 +3471,21 @@ SkipDeserializing:
 		If BWURLFiles.IsBusy Then BWURLFiles.CancelAsync()
 	End Sub
 
-	Private Sub BTNWIRemove_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIRemove.Click
-
-
-		WebImageLines.Remove(WebImageLines(WebImageLine))
-
-
-		If WebImageLine = WebImageLines.Count Then WebImageLine = 0
-		'
-		'Else
-		'WebImageLine += 1
-		'End If
-
-		Try
-			WebPictureBox.Image.Dispose()
-		Catch
-		End Try
-
-		WebPictureBox.Image = Nothing
-		GC.Collect()
-
-		WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
-
-		Debug.Print(WebImageLines(WebImageLine))
-
-		My.Computer.FileSystem.DeleteFile(WebImagePath)
-
-		If File.Exists(WebImagePath) Then
-			Debug.Print("File Exists")
-		Else
-			Debug.Print("Nope")
-		End If
-
-		My.Computer.FileSystem.WriteAllText(WebImagePath, String.Join(Environment.NewLine, WebImageLines), False)
-
-	End Sub
-
-	Private Sub BTNWILiked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWILiked.Click
-
-
-		If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & WebImageLines(WebImageLine), True)
-		Else
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", WebImageLines(WebImageLine), True)
-		End If
-
-
-	End Sub
-
-	Private Sub BTNWIDisliked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIDisliked.Click
-
-		If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & WebImageLines(WebImageLine), True)
-		Else
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", WebImageLines(WebImageLine), True)
-		End If
-
-	End Sub
-
-	Private Sub WebPictureBox_MouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles WebPictureBox.MouseWheel
-
-		Select Case e.Delta
-			Case -120 'Scrolling down
-				WebImageLine += 1
-
-				If WebImageLine > WebImageLineTotal - 1 Then
-					WebImageLine = WebImageLineTotal
-					MsgBox("No more images to display!", , "Warning!")
-					Return
-				End If
-
-				Try
-					WebPictureBox.Image.Dispose()
-				Catch
-				End Try
-				WebPictureBox.Image = Nothing
-				GC.Collect()
-
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
-				LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
-			Case 120 'Scrolling up
-				WebImageLine -= 1
-
-				If WebImageLine < 0 Then
-					WebImageLine = 0
-					MsgBox("No more images to display!", , "Warning!")
-					Return
-				End If
-
-				Try
-					WebPictureBox.Image.Dispose()
-				Catch
-				End Try
-				WebPictureBox.Image = Nothing
-				GC.Collect()
-				WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
-				LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
-		End Select
-
-
-	End Sub
-
-	Private Sub PictureBox1_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles WebPictureBox.MouseEnter
-		WebPictureBox.Focus()
-	End Sub
-
-
-	Private Sub Button36_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIOpenURL.Click
+	Private Sub BtnWiOpenURL_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIOpenURL.Click
 
 		WebImageFileDialog.InitialDirectory = Application.StartupPath & "\Images\System\URL Files"
 
 		If (WebImageFileDialog.ShowDialog = Windows.Forms.DialogResult.OK) Then
 
-			WebImageFile = New IO.StreamReader(WebImageFileDialog.FileName)
+			WebImageLines.Clear()
+			WebImageLine = 0
+
+			WebImageLines = File.ReadAllLines(WebImageFileDialog.FileName).ToList
+
 			WebImagePath = WebImageFileDialog.FileName
 
-			WebImageLines.Clear()
-
-			WebImageLine = 0
-			WebImageLineTotal = 0
-
-			While WebImageFile.Peek <> -1
-				WebImageLineTotal += 1
-				WebImageLines.Add(WebImageFile.ReadLine())
-			End While
-
 			Try
-				WebPictureBox.Image.Dispose()
+				If WebPictureBox.Image IsNot Nothing Then WebPictureBox.Image.Dispose()
 			Catch
 			End Try
 			WebPictureBox.Image = Nothing
@@ -3612,10 +3497,7 @@ SkipDeserializing:
 				MessageBox.Show(Me, "Failed to load URL File image!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
 			End Try
 
-			WebImageFile.Close()
-			WebImageFile.Dispose()
-
-			LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
+			LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLines.Count
 
 
 			BTNWINext.Enabled = True
@@ -3625,74 +3507,137 @@ SkipDeserializing:
 			BTNWIDisliked.Enabled = True
 			BTNWISave.Enabled = True
 
-
 		End If
-
-
-
-
 	End Sub
 
-
-	Private Sub Button35_Click_2(sender As System.Object, e As System.EventArgs) Handles BTNWINext.Click
+	Private Sub BtnWiNavigate_Click(sender As System.Object, e As System.EventArgs) Handles BTNWINext.Click, BTNWIPrevious.Click
 
 TryNextImage:
-
-		WebImageLine += 1
-
-		If WebImageLine > WebImageLineTotal - 1 Then
-			WebImageLine = WebImageLineTotal
-			MsgBox("No more images to display!", , "Warning!")
-			Return
-		End If
-
 		Try
-			WebPictureBox.Image.Dispose()
+			If WebPictureBox.Image IsNot Nothing Then WebPictureBox.Image.Dispose()
 		Catch
 		End Try
+
+		If sender Is BTNWINext Then
+			' ---> navigate forward
+			WebImageLine += 1
+
+			If WebImageLine > WebImageLines.Count - 1 Then
+				WebImageLine = WebImageLines.Count - 1
+				MsgBox("No more images to display!", , "Warning!")
+				Return
+			End If
+		Else
+			' <--- navigate backwards
+			WebImageLine -= 1
+
+			If WebImageLine < 0 Then
+				WebImageLine = 0
+				MsgBox("No more images to display!", , "Warning!")
+				Return
+			End If
+
+		End If
+
 
 		WebPictureBox.Image = Nothing
 		GC.Collect()
 		Try
-			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
-			LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
+			WebPictureBox.Image = New Bitmap(New MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
+
+			LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLines.Count
+		Catch ex As Net.WebException
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                           Webexceptions
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			Clipboard.SetText(WebImageLines(WebImageLine))
+			If MessageBox.Show("Exception occured while requesting:" &
+							vbCrLf & WebImageLines(WebImageLine) &
+							vbCrLf &
+							vbCrLf & ex.Message &
+							vbCrLf &
+							vbCrLf & "The requested url has been copied to clipboard. " &
+							vbCrLf & "Do you want to remove this url from list?",
+							"Webexception occured",
+							MessageBoxButtons.YesNo) = DialogResult.Yes Then
+				BTNWIRemove.PerformClick()
+			End If
+
+			GoTo TryNextImage
 		Catch ex As Exception
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+			'                                            All Errors
+			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			GoTo TryNextImage
 		End Try
-
-
-
 	End Sub
 
-	Private Sub Button18_Click_2(sender As System.Object, e As System.EventArgs) Handles BTNWIPrevious.Click
+	Private Sub BtnWiRemove_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIRemove.Click
 
-trypreviousimage:
+		Debug.Print(WebImageLines(WebImageLine))
+
+		WebImageLines.Remove(WebImageLines(WebImageLine))
+
+		File.Delete(WebImagePath)
+		File.WriteAllLines(WebImagePath, WebImageLines)
 
 		WebImageLine -= 1
+		BTNWINext.PerformClick()
+	End Sub
 
-		If WebImageLine < 0 Then
-			WebImageLine = 0
-			MsgBox("No more images to display!", , "Warning!")
-			Return
+	Private Sub BtnWiLiked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWILiked.Click
+
+		Dim FilePath As String = Application.StartupPath & "\Images\System\LikedImageURLs.txt"
+
+		If File.Exists(FilePath) Then
+			File.AppendAllText(FilePath, vbCrLf & WebImageLines(WebImageLine))
+		Else
+			File.WriteAllText(FilePath, WebImageLines(WebImageLine))
 		End If
-
-		Try
-			WebPictureBox.Image.Dispose()
-		Catch
-		End Try
-
-		WebPictureBox.Image = Nothing
-		GC.Collect()
-		Try
-			WebPictureBox.Image = New System.Drawing.Bitmap(New IO.MemoryStream(New System.Net.WebClient().DownloadData(WebImageLines(WebImageLine))))
-			LBLWebImageCount.Text = WebImageLine + 1 & "/" & WebImageLineTotal
-		Catch ex As Exception
-			GoTo trypreviousimage
-		End Try
 
 	End Sub
 
-	Private Sub Button37_Click(sender As System.Object, e As System.EventArgs) Handles BTNWISave.Click
+	Private Sub BtnWiDisliked_Click(sender As System.Object, e As System.EventArgs) Handles BTNWIDisliked.Click
+
+		Dim FilePath As String = Application.StartupPath & "\Images\System\DislikedImageURLs.txt"
+
+		If File.Exists(FilePath) Then
+			File.AppendAllText(FilePath, vbCrLf & WebImageLines(WebImageLine))
+		Else
+			File.WriteAllText(FilePath, WebImageLines(WebImageLine))
+		End If
+
+	End Sub
+
+	Private Sub WebPictureBox_MouseWheel(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles WebPictureBox.MouseWheel
+
+		Select Case e.Delta
+			Case -120 'Scrolling down -> next image
+				BTNWINext.PerformClick()
+			Case 120 'Scrolling up -> prevoius image
+				BTNWIPrevious.PerformClick()
+		End Select
+
+	End Sub
+
+	Private Sub WebPictureBox_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles WebPictureBox.MouseEnter
+		WebPictureBox.Focus()
+	End Sub
+
+	Private Sub LBLWebImageCount_DoubleClick(sender As Object, e As EventArgs) Handles LBLWebImageCount.DoubleClick
+		Dim TmpInt As Integer
+
+		If Integer.TryParse(InputBox("Enter a number to navigate to:", "Jump to image"), TmpInt) Then
+			WebImageLine = TmpInt - 2 ' Zero based and navigating forward to display image.
+
+			If WebImageLine > WebImageLines.Count Then WebImageLine = WebImageLines.Count - 2
+			If WebImageLine < -1 Then WebImageLine = -1
+
+			BTNWINext.PerformClick()
+		End If
+	End Sub
+
+	Private Sub BtnWiSave_Click(sender As System.Object, e As System.EventArgs) Handles BTNWISave.Click
 
 		If WebPictureBox.Image Is Nothing Then
 			MsgBox("Nothing to save!", , "Error!")
@@ -3706,8 +3651,7 @@ trypreviousimage:
 
 
 		Try
-
-			WebImage = WebImageLines(WebImageLine)
+			Dim WebImage As String = WebImageLines(WebImageLine)
 
 			Dim DirSplit As String() = WebImage.Split("/")
 			WebImage = DirSplit(DirSplit.Length - 1)
@@ -3803,16 +3747,16 @@ trypreviousimage:
                         __tmpResult.MaintainedUrlFiles.ForEach(AddressOf URL_File_Set)
 
 						If __tmpResult.Cancelled Then
-							MessageBox.Show(Me, "Refreshing URL-File has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL-Files." &
+							MessageBox.Show(Me, "Refreshing URL files has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL files." &
 											vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added.",
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 						ElseIf __tmpResult.ErrorText.Capacity > 0
-							MessageBox.Show(Me, "URL Files have been refreshed with errors!" &
+							MessageBox.Show(Me, "URL files have been refreshed with errors!" &
 											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added." &
 											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 						Else
-							MessageBox.Show(Me, "All URL Files have been refreshed!" &
+							MessageBox.Show(Me, "URL files have been refreshed!" &
 											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added.",
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 						End If
@@ -3839,17 +3783,17 @@ trypreviousimage:
                         __tmpResult.MaintainedUrlFiles.ForEach(AddressOf URL_File_Set)
 
 						If __tmpResult.Cancelled Then
-							MessageBox.Show(Me, "Rebuilding URL-File has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL-Files." &
+							MessageBox.Show(Me, "Rebuilding URL-Files has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL-Files." &
 											vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed.",
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 						ElseIf __tmpResult.ErrorText.Capacity > 0
-							MessageBox.Show(Me, "URL Files have been rebuilded with errors!" &
+							MessageBox.Show(Me, "URL Files have been rebuild with errors!" &
 											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed." &
 											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total." &
 											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 						Else
-							MessageBox.Show(Me, "All URL Files have been rebuilded!" &
+							MessageBox.Show(Me, "URL files have been rebuild!" &
 											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed." &
 											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total.",
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -3947,8 +3891,8 @@ trypreviousimage:
 						Case Else
                             ' ---------------------- Everthing else ------------------------------
                             ' Refresh Progressbars
-                            WebImageProgressBar.Maximum = e.ImageCountTotal + 1
-							WebImageProgressBar.Value = e.ImageCount
+                            WebImageProgressBar.Maximum = e.BlogPageTotal
+							WebImageProgressBar.Value = e.BlogPage
 							' Disable Image Approval-UI
 							BTNWIContinue.Enabled = False
 							BTNWIAddandContinue.Enabled = False
@@ -3960,8 +3904,8 @@ trypreviousimage:
                     '                           Refresh URL-File
                     '===============================================================================
                     LBLMaintenance.Text = e.InfoText
-					PBCurrent.Maximum = e.ImageCountTotal
-					PBCurrent.Value = e.ImageCount
+					PBCurrent.Maximum = e.BlogPageTotal
+					PBCurrent.Value = e.BlogPage
 					PBCurrent.Refresh()
 					PBMaintenance.Maximum = e.OverallProgressTotal
 					PBMaintenance.Value = e.OverallProgress
@@ -7642,8 +7586,8 @@ checkFolder:
 		My.Settings.DomVulgar = vulgarCheckBox.Checked
 		My.Settings.DomSupremacist = supremacistCheckBox.Checked
 		My.Settings.DomSadistic = sadisticCheckBox.Checked
-        My.Settings.DomDegrading = degradingCheckBox.Checked
-        My.Settings.DomCFNM = CFNMCheckBox.Checked
+		My.Settings.DomDegrading = degradingCheckBox.Checked
+		My.Settings.DomCFNM = CFNMCheckBox.Checked
 		My.Settings.GiveUpReturn = giveupCheckBox.Checked
 		My.Settings.pnSetting1 = petnameBox1.Text
 		My.Settings.pnSetting2 = petnameBox2.Text
@@ -7700,8 +7644,8 @@ checkFolder:
 		vulgarCheckBox.Checked = My.Settings.DomVulgar
 		supremacistCheckBox.Checked = My.Settings.DomSupremacist
 		sadisticCheckBox.Checked = My.Settings.DomSadistic
-        degradingCheckBox.Checked = My.Settings.DomDegrading
-        CFNMCheckBox.Checked = My.Settings.DomCFNM
+		degradingCheckBox.Checked = My.Settings.DomDegrading
+		CFNMCheckBox.Checked = My.Settings.DomCFNM
 		giveupCheckBox.Checked = My.Settings.GiveUpReturn
 		petnameBox1.Text = My.Settings.pnSetting1
 		petnameBox2.Text = My.Settings.pnSetting2
@@ -9921,13 +9865,13 @@ checkFolder:
 		My.Settings.DomDegrading = degradingCheckBox.Checked
 	End Sub
 
-    Private Sub CFNMCheckBox_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CFNMCheckBox.LostFocus
-        My.Settings.DomCFNM = CFNMCheckBox.Checked
-    End Sub
+	Private Sub CFNMCheckBox_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CFNMCheckBox.LostFocus
+		My.Settings.DomCFNM = CFNMCheckBox.Checked
+	End Sub
 
-    Private Sub CBRandomDomme_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CBRandomDomme.LostFocus
-        My.Settings.CBRandomDomme = CBRandomDomme.Checked
-    End Sub
+	Private Sub CBRandomDomme_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CBRandomDomme.LostFocus
+		My.Settings.CBRandomDomme = CBRandomDomme.Checked
+	End Sub
 
 	Private Sub CBWebtease_CheckedChanged_1(sender As System.Object, e As System.EventArgs) Handles CBWebtease.CheckedChanged
 		If CBWebtease.Checked = True Then
@@ -10301,174 +10245,174 @@ checkFolder:
 
 	End Sub
 
-   
-    Private Sub BTNValidateSystemFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNValidateSystemFiles.Click
 
-        Dim ValidateCount As Integer
+	Private Sub BTNValidateSystemFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNValidateSystemFiles.Click
 
-        For Each Dir As String In myDirectory.GetDirectories(Application.StartupPath & "\Scripts\")
-            For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\System\System Files\", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
-                If Not File.Exists(Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", "")) Then
-                    If Not System.IO.Directory.Exists(Path.GetDirectoryName(Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", ""))) Then
-                        System.IO.Directory.CreateDirectory(Path.GetDirectoryName(Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", "")))
-                    End If
-                    System.IO.File.Copy(foundFile, Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", ""))
-                    ValidateCount += 1
-                End If
-            Next
-        Next
+		Dim ValidateCount As Integer
 
-        Dim output As String = "All Personalities have been validated!" & Environment.NewLine & Environment.NewLine & ValidateCount & " System Files were added."
-        output = output.Replace(Environment.NewLine & "1 System Files were added.", Environment.NewLine & "1 System File was added.")
+		For Each Dir As String In myDirectory.GetDirectories(Application.StartupPath & "\Scripts\")
+			For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\System\System Files\", FileIO.SearchOption.SearchAllSubDirectories, "*.*")
+				If Not File.Exists(Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", "")) Then
+					If Not System.IO.Directory.Exists(Path.GetDirectoryName(Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", ""))) Then
+						System.IO.Directory.CreateDirectory(Path.GetDirectoryName(Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", "")))
+					End If
+					System.IO.File.Copy(foundFile, Dir & "\" & foundFile.Replace(Application.StartupPath & "\System\System Files\", ""))
+					ValidateCount += 1
+				End If
+			Next
+		Next
 
-        MessageBox.Show(output, "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+		Dim output As String = "All Personalities have been validated!" & Environment.NewLine & Environment.NewLine & ValidateCount & " System Files were added."
+		output = output.Replace(Environment.NewLine & "1 System Files were added.", Environment.NewLine & "1 System File was added.")
 
-    End Sub
+		MessageBox.Show(output, "Finished!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-
-    Private Sub BTNValidateSystemFiles_CheckedChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNValidateSystemFiles.MouseHover
-
-        TTDir.SetToolTip(BTNValidateSystemFiles, "Searches each installed Personality and automatically" & Environment.NewLine & "creates any missing System Files in the correct folders.")
-
-    End Sub
-
-    Private Sub BTNDomChangeDomme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeDomme.Click
-        Ssh.glitterDommeNumber = 0
-        Form1.LoadDommeImageFolder()
-    End Sub
-
-    Private Sub BTNDomChangeRandom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeRandom.Click
-        Ssh.glitterDommeNumber = 4
-        Form1.LoadDommeImageFolder()
-    End Sub
-
-    Private Sub BTNDomChangeContact1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact1.Click
-        Ssh.glitterDommeNumber = 1
-        Form1.LoadDommeImageFolder()
-    End Sub
-
-    Private Sub BTNDomChangeContact2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact2.Click
-        Ssh.glitterDommeNumber = 2
-        Form1.LoadDommeImageFolder()
-    End Sub
-
-    Private Sub BTNDomChangeContact3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact3.Click
-        Ssh.glitterDommeNumber = 3
-        Form1.LoadDommeImageFolder()
-    End Sub
-
-    Private Sub CBOutputErrors_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CBOutputErrors.LostFocus
-        My.Settings.CBOutputErrors = CBOutputErrors.Checked
-    End Sub
-
-    Private Sub BTNURLFileReplace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNURLFileReplace.Click
-
-        If TBURLFileReplace.Text = "" Or TBURLFileWith.Text = "" Then
-            MessageBox.Show("Please enter the text to be replaced!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            Exit Sub
-        End If
-
-        Dim ReplaceCount As Integer = 0
-
-        For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\URL Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-
-            
-            Dim CheckFiles As String() = File.ReadAllLines(foundFile)
-
-            Dim GoodLines As New List(Of String)
-
-            For Each line As String In CheckFiles
-                If line.Contains(TBURLFileReplace.Text & ".media") Then
-                    line = line.Replace(TBURLFileReplace.Text & ".media", TBURLFileWith.Text & ".media")
-                    ReplaceCount += 1
-                    GoodLines.Add(line)
-                Else
-                    GoodLines.Add(line)
-                End If
-            Next
-
-            Dim fs As New FileStream(foundFile, FileMode.Create)
-            Dim sw As New StreamWriter(fs)
+	End Sub
 
 
-            For i As Integer = 0 To GoodLines.Count - 1
-                If i <> GoodLines.Count - 1 Then
-                    sw.WriteLine(GoodLines(i))
-                Else
-                    sw.Write(GoodLines(i))
-                End If
-            Next
+	Private Sub BTNValidateSystemFiles_CheckedChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNValidateSystemFiles.MouseHover
 
-            sw.Close()
-            sw.Dispose()
+		TTDir.SetToolTip(BTNValidateSystemFiles, "Searches each installed Personality and automatically" & Environment.NewLine & "creates any missing System Files in the correct folders.")
 
-            fs.Close()
-            fs.Dispose()
+	End Sub
 
+	Private Sub BTNDomChangeDomme_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeDomme.Click
+		Ssh.glitterDommeNumber = 0
+		Form1.LoadDommeImageFolder()
+	End Sub
 
-        Next
+	Private Sub BTNDomChangeRandom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeRandom.Click
+		Ssh.glitterDommeNumber = 4
+		Form1.LoadDommeImageFolder()
+	End Sub
 
+	Private Sub BTNDomChangeContact1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact1.Click
+		Ssh.glitterDommeNumber = 1
+		Form1.LoadDommeImageFolder()
+	End Sub
 
-        If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-            Dim CheckFiles As String() = File.ReadAllLines(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
-            Dim GoodLines As New List(Of String)
-            For Each line As String In CheckFiles
-                If line.Contains(TBURLFileReplace.Text & ".media") Then
-                    line = line.Replace(TBURLFileReplace.Text & ".media", TBURLFileWith.Text & ".media")
-                    ReplaceCount += 1
-                    GoodLines.Add(line)
-                Else
-                    GoodLines.Add(line)
-                End If
-            Next
-            Dim fs As New FileStream(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FileMode.Create)
-            Dim sw As New StreamWriter(fs)
-            For i As Integer = 0 To GoodLines.Count - 1
-                If i <> GoodLines.Count - 1 Then
-                    sw.WriteLine(GoodLines(i))
-                Else
-                    sw.Write(GoodLines(i))
-                End If
-            Next
-            sw.Close()
-            sw.Dispose()
-            fs.Close()
-            fs.Dispose()
-        End If
+	Private Sub BTNDomChangeContact2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact2.Click
+		Ssh.glitterDommeNumber = 2
+		Form1.LoadDommeImageFolder()
+	End Sub
 
-        If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-            Dim CheckFiles As String() = File.ReadAllLines(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
-            Dim GoodLines As New List(Of String)
-            For Each line As String In CheckFiles
-                If line.Contains(TBURLFileReplace.Text & ".media") Then
-                    line = line.Replace(TBURLFileReplace.Text & ".media", TBURLFileWith.Text & ".media")
-                    ReplaceCount += 1
-                    GoodLines.Add(line)
-                Else
-                    GoodLines.Add(line)
-                End If
-            Next
-            Dim fs As New FileStream(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FileMode.Create)
-            Dim sw As New StreamWriter(fs)
-            For i As Integer = 0 To GoodLines.Count - 1
-                If i <> GoodLines.Count - 1 Then
-                    sw.WriteLine(GoodLines(i))
-                Else
-                    sw.Write(GoodLines(i))
-                End If
-            Next
-            sw.Close()
-            sw.Dispose()
-            fs.Close()
-            fs.Dispose()
-        End If
-        
+	Private Sub BTNDomChangeContact3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNDomChangeContact3.Click
+		Ssh.glitterDommeNumber = 3
+		Form1.LoadDommeImageFolder()
+	End Sub
+
+	Private Sub CBOutputErrors_LostFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles CBOutputErrors.LostFocus
+		My.Settings.CBOutputErrors = CBOutputErrors.Checked
+	End Sub
+
+	Private Sub BTNURLFileReplace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNURLFileReplace.Click
+
+		If TBURLFileReplace.Text = "" Or TBURLFileWith.Text = "" Then
+			MessageBox.Show("Please enter the text to be replaced!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+			Exit Sub
+		End If
+
+		Dim ReplaceCount As Integer = 0
+
+		For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Images\System\URL Files\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
 
 
+			Dim CheckFiles As String() = File.ReadAllLines(foundFile)
 
-        MessageBox.Show("All URL File servers have been successfully replaced!" & Environment.NewLine & Environment.NewLine & ReplaceCount & " image locations have been changed.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			Dim GoodLines As New List(Of String)
+
+			For Each line As String In CheckFiles
+				If line.Contains(TBURLFileReplace.Text & ".media") Then
+					line = line.Replace(TBURLFileReplace.Text & ".media", TBURLFileWith.Text & ".media")
+					ReplaceCount += 1
+					GoodLines.Add(line)
+				Else
+					GoodLines.Add(line)
+				End If
+			Next
+
+			Dim fs As New FileStream(foundFile, FileMode.Create)
+			Dim sw As New StreamWriter(fs)
+
+
+			For i As Integer = 0 To GoodLines.Count - 1
+				If i <> GoodLines.Count - 1 Then
+					sw.WriteLine(GoodLines(i))
+				Else
+					sw.Write(GoodLines(i))
+				End If
+			Next
+
+			sw.Close()
+			sw.Dispose()
+
+			fs.Close()
+			fs.Dispose()
+
+
+		Next
+
+
+		If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
+			Dim CheckFiles As String() = File.ReadAllLines(Application.StartupPath & "\Images\System\LikedImageURLs.txt")
+			Dim GoodLines As New List(Of String)
+			For Each line As String In CheckFiles
+				If line.Contains(TBURLFileReplace.Text & ".media") Then
+					line = line.Replace(TBURLFileReplace.Text & ".media", TBURLFileWith.Text & ".media")
+					ReplaceCount += 1
+					GoodLines.Add(line)
+				Else
+					GoodLines.Add(line)
+				End If
+			Next
+			Dim fs As New FileStream(Application.StartupPath & "\Images\System\LikedImageURLs.txt", FileMode.Create)
+			Dim sw As New StreamWriter(fs)
+			For i As Integer = 0 To GoodLines.Count - 1
+				If i <> GoodLines.Count - 1 Then
+					sw.WriteLine(GoodLines(i))
+				Else
+					sw.Write(GoodLines(i))
+				End If
+			Next
+			sw.Close()
+			sw.Dispose()
+			fs.Close()
+			fs.Dispose()
+		End If
+
+		If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
+			Dim CheckFiles As String() = File.ReadAllLines(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
+			Dim GoodLines As New List(Of String)
+			For Each line As String In CheckFiles
+				If line.Contains(TBURLFileReplace.Text & ".media") Then
+					line = line.Replace(TBURLFileReplace.Text & ".media", TBURLFileWith.Text & ".media")
+					ReplaceCount += 1
+					GoodLines.Add(line)
+				Else
+					GoodLines.Add(line)
+				End If
+			Next
+			Dim fs As New FileStream(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", FileMode.Create)
+			Dim sw As New StreamWriter(fs)
+			For i As Integer = 0 To GoodLines.Count - 1
+				If i <> GoodLines.Count - 1 Then
+					sw.WriteLine(GoodLines(i))
+				Else
+					sw.Write(GoodLines(i))
+				End If
+			Next
+			sw.Close()
+			sw.Dispose()
+			fs.Close()
+			fs.Dispose()
+		End If
 
 
 
-    End Sub
+
+		MessageBox.Show("All URL File servers have been successfully replaced!" & Environment.NewLine & Environment.NewLine & ReplaceCount & " image locations have been changed.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+
+	End Sub
 End Class

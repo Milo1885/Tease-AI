@@ -19,7 +19,7 @@ Namespace URL_Files
 	Public Enum WorkingStages
 		Started = 0
 		Dupe_Liste = 10
-		Scraping = 50
+		Processing = 50
 		Blog_Scraping = 60
 		''' <summary>
 		''' The BGW is waiting for an Userinput, what to to with the Image. If you use a remanent Variable to feeed it don't forget to reset it.
@@ -266,6 +266,8 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 			Public CurrentTask As Tasks = Tasks.Idle
 			Public CurrentStage As WorkingStages = WorkingStages.Completed
 			Public InfoText As String = Nothing
+			Public BlogPage As Integer = 0
+			Public BlogPageTotal
 			Public ImageCount As Integer = 0
 			Public ImageCountTotal As Integer = 0
 			Public ImageToReview As Image = Nothing
@@ -280,16 +282,20 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 		''' <param name="imageCountTotal"></param>
 		''' <param name="currentStage"></param>
 		''' <param name="imageToReview"></param>
-		Private Shadows Sub OnProgressChanged(ByVal imageCount As Integer,
-													ByVal imageCountTotal As Integer,
-													ByVal currentStage As WorkingStages,
-													ByVal imageToReview As Image)
+		Private Shadows Sub OnProgressChanged(ByVal blogPage As Integer,
+											  ByVal blogPageTotal As Integer,
+											  ByVal imageCount As Integer,
+											  ByVal imageCountTotal As Integer,
+											  ByVal currentStage As WorkingStages,
+											  ByVal imageToReview As Image)
 			If currentStage = WorkingStages.Writing_File Then ImageCountAdded += imageCount
 			Dim e As New ProgressChangedEventArgs With
 				{
 				.CurrentTask = Me.Work,
 				.CurrentStage = currentStage,
 				.InfoText = Me.InfoText,
+				.BlogPage = blogPage,
+				.BlogPageTotal = blogPageTotal,
 				.ImageCount = imageCount,
 				.ImageCountTotal = imageCountTotal,
 				.OverallProgress = Me.OverallProgress,
@@ -498,7 +504,7 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 			'===============================================================================
 			' Declaration of variables
 			'===============================================================================
-			Me.OnProgressChanged(0, 0, WorkingStages.Started, Nothing)
+			Me.OnProgressChanged(0, 0, 0, 0, WorkingStages.Started, Nothing)
 			If Me.CancellationPending = True Then Return Nothing
 
 			Dim ImageCountAdded As Integer = 0
@@ -540,124 +546,177 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 				DislikeList = ReadFileContent(_DislikeListPath)
 
 
+				Dim BlogCycle As Integer = 0
+				Dim BlogCycleSize As Integer = 50
+				Dim TotalPostCount As Integer = -1
 
-				Dim ImageURLs As List(Of String) = TumblrGetImageURLs(imageBlogUrl)
+				Do
+					' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+					If Me.CancellationPending AndAlso TotalPostCount = -1 Then Return New CreateUrlFileResult With {.Cancelled = True}
+					If Me.CancellationPending Then GoTo ExitScrape
 
-				' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-				If Me.CancellationPending Then Return New CreateUrlFileResult With {.Cancelled = True}
+					'===============================================================================
+					'								Fetch XML Sitemap
+					'===============================================================================
+					Dim doc As XmlDocument = New XmlDocument()
+					Dim ImageURLs As New List(Of String)
 
+					Request = WebRequest.Create(imageBlogUrl & "/api/read?start=" & BlogCycle & "&num=" & BlogCycleSize)
+					Response = Request.GetResponse()
 
-				For i = 0 To ImageURLs.Count - 1
-					Dim TempImg As Bitmap = Nothing
-					Dim ImageUrl As String = ImageURLs(i)
+					Dim Reader As New XmlTextReader(Response.GetResponseStream)
+					doc.Load(Reader)
+					Request.Abort() ' Otherwise you cant't run it a seccond time on the same URL that session!
+					Response.Close()
 
-					Try
-						' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-						If Me.CancellationPending Then GoTo ExitScrape
+					' Get total post count on first run.
+					If TotalPostCount = -1 Then
+						Me.OnProgressChanged(0, 0, 0, 0, WorkingStages.Blog_Scraping, Nothing)
 
-						Me.OnProgressChanged(i + 1, ImageURLs.Count, WorkingStages.Blog_Scraping, Nothing)
-						'===============================================================================
-						'                         Check what to do with URL
-						'===============================================================================
-						If DislikeList.Contains(ImageUrl) Or UrlListNew.Contains(ImageUrl) Then
-							'############################ ALL - Disliked & Added #############################
-							' Always skip disliked and already added URLs.
-							GoTo NextImage
-						ElseIf Me.Work = Tasks.RebuildURLFiles AndAlso UrlListOld.Contains(ImageUrl) Then
-							'########################### URL-Rebuild - Known URL #############################
-							' If rebuilding URL-File add only previous known links.
-							UrlListNew.Add(ImageUrl)                            ' Add to new list
-							GoTo NextImage                                      ' No Saving or Reviewing    
-						ElseIf Me.Work = Tasks.RebuildURLFiles
-							'########################## URL-Rebuild - Unknown URL ############################
-							' If rebuilding URL-File skip previous unkwown URLs.
-							GoTo NextImage
-						ElseIf Me.Work = Tasks.RefreshURLFiles AndAlso UrlListOld.Contains(ImageUrl)
-							'############################# Refresh - Known URL ###############################
-							' If refreshing URL-File stop scraping at first known URL.
-							GoTo ExitScrape
-						ElseIf UrlListOld.Contains(ImageUrl)
-							'############################## Create - Known URL ###############################
-							UrlListNew.Add(ImageUrl)                            ' Add to new list
-							GoTo NextImage                                      ' No Saving or Reviewing    
+						For Each node As XmlNode In doc.DocumentElement.SelectNodes("//posts")
+							TotalPostCount = CInt(node.Attributes.ItemOf("total").InnerText)
+						Next
+					Else
+						Me.OnProgressChanged(BlogCycle / BlogCycleSize + 1,
+											 Math.Ceiling(TotalPostCount / BlogCycleSize),
+											 0, ImageURLs.Count,
+											 WorkingStages.Blog_Scraping, Nothing)
+					End If
+
+					' Read all image urls in given range.
+					For Each photoNode As XmlNode In doc.DocumentElement.SelectNodes("//photo-url")
+						If CInt(photoNode.Attributes.ItemOf("max-width").InnerText) = 1280 Then
+							ImageURLs.Add(photoNode.InnerXml)
 						End If
-						'===============================================================================
-						'                                 Review Image
-						'===============================================================================
-						If ReviewImages = True Then
-							' Downlaod Image
-							TempImg = New Bitmap(New IO.MemoryStream(New WebClient().DownloadData(ImageUrl)))
+					Next
 
-							' Report to MainApplication, the BGW is waiting for the Image Approval.
-							Me.OnProgressChanged(i + 1, ImageURLs.Count, WorkingStages.ImageApproval, TempImg)
+					Me.OnProgressChanged(BlogCycle / BlogCycleSize + 1,
+										 Math.Ceiling(TotalPostCount / BlogCycleSize),
+										 0, ImageURLs.Count,
+										 WorkingStages.Blog_Scraping, Nothing)
 
-							' Wait For User Approval
-							Do
-								Application.DoEvents()
-								' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-								If Me.CancellationPending Then GoTo ExitScrape
-							Loop Until ApproveImage <> ImageApprovalStates.Pending
 
-							' If Img declined and DislikeFile is set, write URL to DislikeFile
-							If ApproveImage = ImageApprovalStates.Declined _
-							And _DislikeListPath <> String.Empty Then
-								' Add the URL to DislikeList
-								DislikeList.Add(ImageUrl)
-								' If DislikeFile exists: Append URL Else create new File
-								If File.Exists(_DislikeListPath) Then
-									My.Computer.FileSystem.WriteAllText(_DislikeListPath, Environment.NewLine & ImageUrl, True)
-								Else
-									My.Computer.FileSystem.WriteAllText(_DislikeListPath, ImageUrl, True)
-								End If
+					For i = 0 To ImageURLs.Count - 1
+						Dim TempImg As Bitmap = Nothing
+						Dim ImageUrl As String = ImageURLs(i)
+
+						Try
+							' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+							If Me.CancellationPending Then GoTo ExitScrape
+
+							Me.OnProgressChanged(BlogCycle / BlogCycleSize + 1,
+												 Math.Ceiling(TotalPostCount / BlogCycleSize),
+												 i + 1, ImageURLs.Count,
+												 WorkingStages.Processing, Nothing)
+
+							'===============================================================================
+							'                         Check what to do with URL
+							'===============================================================================
+							If DislikeList.Contains(ImageUrl) Or UrlListNew.Contains(ImageUrl) Then
+								'############################ ALL - Disliked & Added #############################
+								' Always skip disliked and already added URLs.
+								GoTo NextImage
+							ElseIf Me.Work = Tasks.RebuildURLFiles AndAlso UrlListOld.Contains(ImageUrl) Then
+								'########################### URL-Rebuild - Known URL #############################
+								' If rebuilding URL-File add only previous known links.
+								UrlListNew.Add(ImageUrl)                            ' Add to new list
+								GoTo NextImage                                      ' No Saving or Reviewing    
+							ElseIf Me.Work = Tasks.RebuildURLFiles
+								'########################## URL-Rebuild - Unknown URL ############################
+								' If rebuilding URL-File skip previous unkwown URLs.
+								GoTo NextImage
+							ElseIf Me.Work = Tasks.RefreshURLFiles AndAlso UrlListOld.Contains(ImageUrl)
+								'############################# Refresh - Known URL ###############################
+								' If refreshing URL-File stop scraping at first known URL.
+								GoTo ExitScrape
+							ElseIf UrlListOld.Contains(ImageUrl)
+								'############################## Create - Known URL ###############################
+								UrlListNew.Add(ImageUrl)                            ' Add to new list
+								GoTo NextImage                                      ' No Saving or Reviewing    
 							End If
-						End If
+							'===============================================================================
+							'                                 Review Image
+							'===============================================================================
+							If ReviewImages = True Then
+								' Downlaod Image
+								TempImg = New Bitmap(New IO.MemoryStream(New WebClient().DownloadData(ImageUrl)))
 
-						'===============================================================================
-						'                                 Image Approved
-						'===============================================================================
-						If ApproveImage = ImageApprovalStates.Approved Or ReviewImages = False Then
-							' --------------------------SAVE IMAGE TO DISK --------------------------
-							If SaveImages = True Then
-								Dim TmpImagePath As String = ImageUrl
-								Dim TmpDirSplit As String() = TmpImagePath.Split("/")
-								TmpImagePath = TmpDirSplit(TmpDirSplit.Length - 1)
+								' Report to MainApplication, the BGW is waiting for the Image Approval.
+								Me.OnProgressChanged(BlogCycle / BlogCycleSize + 1,
+												 Math.Ceiling(TotalPostCount / BlogCycleSize),
+												 i + 1, ImageURLs.Count,
+												 WorkingStages.Processing, TempImg)
 
-								Dim imgDir As String = ImageSaveDir
-								If Not File.Exists(imgDir & "\" & TmpImagePath.Replace("\\", "\")) Then
-									' Downloaded Picture already for Review?
-									If TempImg IsNot Nothing Then
-										' YES: Save it from Stream
-										TempImg.Save(imgDir & "\" & TmpImagePath.Replace("\\", "\"))
+								' Wait For User Approval
+								Do
+									Application.DoEvents()
+									' >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Cancel <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+									If Me.CancellationPending Then GoTo ExitScrape
+								Loop Until ApproveImage <> ImageApprovalStates.Pending
+
+								' If Img declined and DislikeFile is set, write URL to DislikeFile
+								If ApproveImage = ImageApprovalStates.Declined _
+							And _DislikeListPath <> String.Empty Then
+									' Add the URL to DislikeList
+									DislikeList.Add(ImageUrl)
+									' If DislikeFile exists: Append URL Else create new File
+									If File.Exists(_DislikeListPath) Then
+										My.Computer.FileSystem.WriteAllText(_DislikeListPath, Environment.NewLine & ImageUrl, True)
 									Else
-										' NO: Go download it.
-										My.Computer.Network.DownloadFile(ImageUrl, imgDir & "\" & TmpImagePath.Replace("\\", "\"))
+										My.Computer.FileSystem.WriteAllText(_DislikeListPath, ImageUrl, True)
 									End If
 								End If
 							End If
-							' -------------------------- ADD IMAGE TO LIST --------------------------
-							UrlListNew.Add(ImageUrl)
-							ImageCountAdded += 1
-						End If
-					Catch ex As WebException
-						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨ WebException ▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-						' On a Webexception like a 404,410 and stuff like that, goto next image.
-						GoTo NextImage
-					Catch ex As Exception
-						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-						'						       All Errors
-						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-						' On any other Error, we want to write the data and Exit.
-						ExCache = ex
-						GoTo ExitScrape
-					End Try
+
+							'===============================================================================
+							'                                 Image Approved
+							'===============================================================================
+							If ApproveImage = ImageApprovalStates.Approved Or ReviewImages = False Then
+								' --------------------------SAVE IMAGE TO DISK --------------------------
+								If SaveImages = True Then
+									Dim TmpImagePath As String = ImageUrl
+									Dim TmpDirSplit As String() = TmpImagePath.Split("/")
+									TmpImagePath = TmpDirSplit(TmpDirSplit.Length - 1)
+
+									Dim imgDir As String = ImageSaveDir
+									If Not File.Exists(imgDir & "\" & TmpImagePath.Replace("\\", "\")) Then
+										' Downloaded Picture already for Review?
+										If TempImg IsNot Nothing Then
+											' YES: Save it from Stream
+											TempImg.Save(imgDir & "\" & TmpImagePath.Replace("\\", "\"))
+										Else
+											' NO: Go download it.
+											My.Computer.Network.DownloadFile(ImageUrl, imgDir & "\" & TmpImagePath.Replace("\\", "\"))
+										End If
+									End If
+								End If
+								' -------------------------- ADD IMAGE TO LIST --------------------------
+								UrlListNew.Add(ImageUrl)
+								ImageCountAdded += 1
+							End If
+						Catch ex As WebException
+							'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨ WebException ▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+							' On a Webexception like a 404,410 and stuff like that, goto next image.
+							GoTo NextImage
+						Catch ex As Exception
+							'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+							'						       All Errors
+							'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+							' On any other Error, we want to write the data and Exit.
+							ExCache = ex
+							GoTo ExitScrape
+						End Try
 NextImage:
-					TempImg = Nothing ' Reset Image
-				Next
+						TempImg = Nothing ' Reset Image
+					Next
+
+					BlogCycle += BlogCycleSize
+				Loop Until BlogCycle >= TotalPostCount
 
 				' Alternate ImageCounting on URL-FileRebuild.
 				If Me.Work = Tasks.RebuildURLFiles Then ImageCountAdded = UrlListOld.Count - UrlListNew.Count
 ExitScrape:
-				Me.OnProgressChanged(100, 100, WorkingStages.Writing_File, Nothing)
+				Me.OnProgressChanged(100, 100, 0, 0, WorkingStages.Writing_File, Nothing)
 
 				' IF:   Work is Cancelled? Or do we refresh the file? Or did an Error occur?
 				' Then: Write a combined copy of  new and old List
@@ -693,7 +752,7 @@ RetryDeleteFile:
 				File.WriteAllText(TargetFilePath, String.Join(vbCrLf, UrlListFinal))
 
 
-				Me.OnProgressChanged(0, 0, WorkingStages.Completed, Nothing)
+				Me.OnProgressChanged(0, 0, 0, 0, WorkingStages.Completed, Nothing)
 
 				Return New CreateUrlFileResult With {.Cancelled = Me.CancellationPending,
 					.Filename = TargetFileName,
@@ -737,7 +796,7 @@ RetryDeleteFile:
 				Debug.Print("ImageBlogURL = " & blogURL)
 
 				Dim BlogCycle As Integer = 0
-				Dim BlogCycleSize As Integer = 5000
+				Dim BlogCycleSize As Integer = 50
 				Dim TotalPostCount As Integer = -1
 
 				Do
@@ -762,6 +821,9 @@ RetryDeleteFile:
 					' Read all image urls in given range.
 					For Each photoNode As XmlNode In doc.DocumentElement.SelectNodes("//photo-url")
 						If CInt(photoNode.Attributes.ItemOf("max-width").InnerText) = 1280 Then
+							If rtnList.Contains(photoNode.InnerXml) Then
+								Dim t = 0
+							End If
 							rtnList.Add(photoNode.InnerXml)
 						End If
 					Next
@@ -814,6 +876,27 @@ RetryDeleteFile:
 
 					' Get all TxtFiles in specified Folder 
 					.MaintainedUrlFiles.AddRange(My.Computer.FileSystem.GetFiles(Me._ImageURLFileDir, FileIO.SearchOption.SearchTopLevelOnly, "*.txt"))
+
+					' Display selection dialog 
+					Dim ff As New SelectURLFileDialog(.MaintainedUrlFiles)
+
+					If Not ff.ShowDialog = DialogResult.OK Then
+						Me.CancelAsync()
+					Else
+						Dim NewList As New List(Of String)
+
+						For Each tmpStr As String In .MaintainedUrlFiles
+							If ff.SelectedItems.Contains(Path.GetFileName(tmpStr)) Then
+								NewList.Add(tmpStr)
+							End If
+						Next
+
+						.MaintainedUrlFiles.Clear()
+						.MaintainedUrlFiles.AddRange(NewList)
+					End If
+
+					ff.Dispose()
+
 					For i = 0 To .MaintainedUrlFiles.Count - 1
 						' Extract Name and set Infotext, for UI and Debug
 						Dim ___tmpFileName As String = Path.GetFileName(.MaintainedUrlFiles(i)).Replace(".txt", "")
@@ -866,6 +949,88 @@ RetryDeleteFile:
 			End With
 
 		End Function
+
+	End Class
+
+	Class SelectURLFileDialog
+		Inherits Form
+
+		Dim lbSel As ListBox
+		Dim BtnOk As Button
+		Dim BtnCn As Button
+
+		Dim StoredItems As List(Of String)
+
+		Public Property SelectionMode As SelectionMode
+			Get
+				Return lbSel.SelectionMode
+			End Get
+			Set(value As SelectionMode)
+				lbSel.SelectionMode = value
+			End Set
+		End Property
+
+		Public ReadOnly Property SelectedItems As ListBox.SelectedObjectCollection
+			Get
+				SelectedItems = New ListBox.SelectedObjectCollection(lbSel)
+
+				For Each tmpStr As String In StoredItems
+					If lbSel.SelectedItems.Contains(Path.GetFileName(tmpStr)) Then
+						SelectedItems.Add(tmpStr)
+					End If
+				Next
+
+			End Get
+		End Property
+
+		Sub New(listItems As List(Of String))
+			Dim Marg As Integer = 8
+
+			StartPosition = FormStartPosition.CenterParent
+			FormBorderStyle = FormBorderStyle.SizableToolWindow
+			Size = New Size(350, 400)
+			Text = "Select URL files."
+			TopMost = True
+			Padding = New Padding(8)
+
+			lbSel = New ListBox With
+				{
+				.SelectionMode = SelectionMode.MultiExtended,
+				.Sorted = True,
+				.Dock = DockStyle.Top, .Anchor = AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top Or AnchorStyles.Bottom
+				}
+
+			Dim AsBtn As AnchorStyles = AnchorStyles.Right Or AnchorStyles.Bottom
+
+			BtnOk = New Button With {.Text = "OK", .DialogResult = DialogResult.OK, .Anchor = AsBtn}
+			BtnCn = New Button With {.Text = "Cancel", .DialogResult = DialogResult.Cancel, .Anchor = AsBtn}
+
+			Controls.AddRange({lbSel, BtnOk, BtnCn})
+			BtnOk.Location = New Point(ClientRectangle.Width - BtnOk.Width - BtnCn.Width - Marg * 2,
+									   ClientRectangle.Height - BtnOk.Height - Marg)
+
+			BtnCn.Location = New Point(ClientRectangle.Width - BtnCn.Width - Marg,
+									   ClientRectangle.Height - BtnCn.Height - Marg)
+			lbSel.Size = New Size(ClientRectangle.Width - Marg * 2,
+								  ClientRectangle.Height - BtnCn.Height - Marg * 2 - Marg / 2)
+			lbSel.Location = New Point(Marg, Marg)
+
+			' Store unedited items, because the listbox displays only the filename.
+			StoredItems = listItems
+
+			' Add items and select all.
+			For Each TmpStr In listItems
+				lbSel.Items.Add(Path.GetFileName(TmpStr))
+			Next
+
+			For i = 0 To lbSel.Items.Count - 1
+				lbSel.SetSelected(i, True)
+			Next
+
+			' Set OK as standard button.
+			BtnOk.Select()
+		End Sub
+
 
 	End Class
 

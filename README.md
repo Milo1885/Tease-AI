@@ -40,6 +40,8 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* Commas are no longer affected when auditing scripts
 	* Blank lines are now only removed from URL Files when auditing scripts
 	* CBT\Custom Task were missing from StopEverything() sub-routine (dariobrun)  
+	* Added dialog to select certain url files, when refreshing or rebuilding url files
+	* Added possibilty to jump to a certain image, when browsing an url file. Simply double click the bottom left label and a prompt will appear. 
 	
 	
 # Changelog - Patch 54.7.0
