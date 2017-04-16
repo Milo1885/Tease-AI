@@ -763,7 +763,7 @@ Public Class SessionState
 		'#Disable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
 
 #If _MSC_VER > 1600 Then
-    #Disable Warning BC40000
+#Disable Warning BC40000
 #End If
 
 		' Marked as <NonSerialized> <OptionalField> have to be initialized on every deserialization.
@@ -785,7 +785,7 @@ Public Class SessionState
 		'#Enable Warning BC40000 - I can't compile this in VS2010. Changed to the three lines below as per Notay's advice - 1885
 
 #If _MSC_VER > 1600 Then
-    #Enable Warning BC40000
+#Enable Warning BC40000
 #End If
 
 	End Sub
@@ -802,7 +802,7 @@ Public Class SessionState
 	''' <remarks>This function is invoked on the given Form's UI-Thread.</remarks>
 	Sub FetchFormData(ByVal serializeForm As Form1)
 		If serializeForm IsNot Nothing _
-		AndAlso serializeForm.InvokeRequired Then
+	AndAlso serializeForm.InvokeRequired Then
 			' Calling from another Thread -> Invoke on controls UI-Thread
 			Dim Act As Action(Of Form1) = Sub(s1) FetchFormData(s1)
 			serializeForm.Invoke(Act)
@@ -891,7 +891,7 @@ Public Class SessionState
 			'								Get Flags
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			If serialized_Flags Is Nothing Then _
-							serialized_Flags = New List(Of String)
+						serialized_Flags = New List(Of String)
 
 			serialized_Flags.Clear()
 
@@ -903,7 +903,7 @@ Public Class SessionState
 
 			' Get temporary Flags
 			If serialized_FlagsTemp Is Nothing Then _
-							serialized_FlagsTemp = New List(Of String)
+						serialized_FlagsTemp = New List(Of String)
 			serialized_FlagsTemp.Clear()
 
 			If Directory.Exists(Folders.TempFlags) Then
@@ -916,7 +916,7 @@ Public Class SessionState
 			'								Get Variables
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 			If serialized_Variables Is Nothing Then _
-							serialized_Variables = New Dictionary(Of String, String)
+						serialized_Variables = New Dictionary(Of String, String)
 
 			serialized_Variables.Clear()
 
@@ -940,7 +940,7 @@ Public Class SessionState
 	Friend Sub Activate(ByVal activateForm As Form1)
 		' Check if InvokeIsRequired
 		If activateForm IsNot Nothing _
-		AndAlso activateForm.InvokeRequired Then
+	AndAlso activateForm.InvokeRequired Then
 			' Calling from another Thread -> Invoke on controls UI-Thread
 			Dim Act As Action(Of Form1) = Sub(s1) Activate(s1)
 			activateForm.Invoke(Act)
@@ -1013,7 +1013,7 @@ Public Class SessionState
 
 				For Each fn As String In serialized_Variables.Keys
 					My.Computer.FileSystem.WriteAllText(Folders.Variables & fn,
-													serialized_Variables(fn), False)
+												serialized_Variables(fn), False)
 				Next
 			End If
 
@@ -1031,7 +1031,7 @@ Public Class SessionState
 
 				For Each fn As String In serialized_Flags
 					Using fs As New FileStream(Folders.Flags & fn,
-											   FileMode.Create) : End Using
+											FileMode.Create) : End Using
 				Next
 			End If
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -1048,7 +1048,7 @@ Public Class SessionState
 			If serialized_FlagsTemp.Count > 0 Then
 				For Each fn As String In serialized_FlagsTemp
 					Using fs As New FileStream(Folders.TempFlags & fn,
-											   FileMode.Create) : End Using
+											FileMode.Create) : End Using
 				Next
 			End If
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -1192,8 +1192,8 @@ Public Class SessionState
 		Try
 			' Check if InvokeIsRequired
 			If setActive = True _
-			AndAlso ActivationForm IsNot Nothing _
-			AndAlso ActivationForm.InvokeRequired Then
+		AndAlso ActivationForm IsNot Nothing _
+		AndAlso ActivationForm.InvokeRequired Then
 				' Calling from another Thread -> Invoke on controls UI-Thread
 				Dim Act As Action(Of String, Boolean) = Sub(s1, s2) Load(s1, s2)
 				ActivationForm.Invoke(Act)
@@ -1202,7 +1202,7 @@ Public Class SessionState
 			' Called from Controls UI-Thread -> Execute Code.
 
 			If setActive AndAlso ActivationForm Is Nothing Then _
-			Throw New InvalidOperationException("It is impossible to reactivate a not activated session.")
+		Throw New InvalidOperationException("It is impossible to reactivate a not activated session.")
 
 
 			Dim tmpState As SessionState = DirectCast(BinaryDeserialize(filepath), SessionState)
@@ -1240,7 +1240,7 @@ Public Class SessionState
 	Public Function Reset() As Boolean
 		' Check if InvokeIsRequired
 		If ActivationForm IsNot Nothing _
-		AndAlso ActivationForm.InvokeRequired Then
+	AndAlso ActivationForm.InvokeRequired Then
 			' Calling from another Thread -> Invoke on controls UI-Thread
 			Return CType(ActivationForm.UIThread(AddressOf Reset), Boolean)
 		End If
