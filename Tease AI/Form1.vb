@@ -2582,7 +2582,7 @@ DebugAwareness:
 		If ssh.YesOrNo = True And ssh.SubEdging = True Then GoTo EdgeSkip
 		If ssh.YesOrNo = True And ssh.SubHoldingEdge = True Then GoTo EdgeSkip
 
-		If ssh.YesOrNo = True And ssh.OrgasmYesNo = False And ssh.DomTypeCheck = False Then
+		If ssh.YesOrNo = True And ssh.OrgasmYesNo = False And ssh.DomTypeCheck = False And ssh.TasksCount <= 0 Then
 			YesOrNoQuestions()
 			Return
 		End If
@@ -3934,19 +3934,17 @@ ReturnCalled:
 
 				'end the scripts anyway if it reaches the last line, even if the user forgot to use the @End command
 				If lines(ssh.StrokeTauntVal) = "@End" Or ssh.StrokeTauntVal >= lines.Count Then
-					If ssh.CallReturns.Count = 0 Then
-						If ssh.ShowModule = False Then ssh.ModuleEnd = True
-						'if we reached the end of the script and we are in a link or in the beforeTease, and we forget to use the @StartStroking/Taunt
-						'it will automatically do it to avoid session errors
-						If (ssh.isLink Or ssh.BeforeTease) And ssh.SubStroking = False Then
-							ssh.isLink = False
-							If My.Settings.Chastity Then
-								ssh.DomChat = "@NullResponse @StartTaunts"
-							Else
-								ssh.DomChat = "@NullResponse @StartStroking"
-								TypingDelay()
-							End If
+					If ssh.ShowModule = True Then ssh.ModuleEnd = True
+					'if we reached the end of the script and we are in a link or in the beforeTease, and we forget to use the @StartStroking/Taunt
+					'it will automatically do it to avoid session errors
+					If (ssh.isLink Or ssh.BeforeTease) And ssh.SubStroking = False Then
+						ssh.isLink = False
+						If My.Settings.Chastity Then
+							ssh.DomChat = "@NullResponse @StartTaunts"
+						Else
+							ssh.DomChat = "@NullResponse @StartStroking"
 						End If
+						TypingDelay()
 					End If
 				End If
 			End If
@@ -5340,6 +5338,11 @@ DommeSlideshowFallback:
 
 
 				If ssh.SubGaveUp = True Then
+					If ssh.YesOrNo And ssh.giveUpReturn Then
+						ssh.DomChat = "#SYS_ReturnAnswer"
+						TypingDelay()
+					End If
+
 					ssh.SubGaveUp = False
 
 					ssh.AskedToGiveUpSection = False
@@ -5366,16 +5369,16 @@ DommeSlideshowFallback:
 						End If
 					End If
 
-					If ssh.TeaseTick < 1 And ssh.Playlist = False Then
+					If ssh.giveUpReturn Then
+						ssh.ShowModule = True
+						ssh.AskedToGiveUpSection = False
+						ScriptTimer.Start()
+					ElseIf ssh.TeaseTick < 1 And ssh.Playlist = False Then
 						ssh.StrokeTauntVal = -1
 						RunLastScript()
 					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
 						ssh.StrokeTauntVal = -1
 						RunModuleScript(False)
-					ElseIf ssh.giveUpReturn Then
-						ssh.ShowModule = True
-						ssh.AskedToGiveUpSection = False
-						ScriptTimer.Start()
 					Else
 						ssh.StrokeTauntVal = -1
 						RunLinkScript()
@@ -5934,34 +5937,22 @@ DommeSlideshowFallback:
 
 				'i think these shouldn't be dealt with here....they are already dealt during domresponse, doing it also here will just
 				'halve the number of tasks actually because it will be diminisher here and then also in the domme repsonse
+				If ssh.TasksCount > 0 Then
+					If ssh.CBTCockFlag = True Then
+						CBTCock()
+					End If
 
-				'If ssh.CBTCockFlag = True Or ssh.CBTBallsFlag = True Or ssh.CBTBothFlag = True Or ssh.CustomTask = True Then
-				'ssh.TasksCount -= 1
-				'If ssh.TasksCount < 1 Then
-				'ssh.CBTCockFlag = False
-				'		ssh.CBTBallsFlag = False
-				'ssh.CBTBothFlag = False
-				'ssh.CustomTask = False
-				'ssh.CBTBallsFirst = True
-				'ssh.CBTCockFirst = True
-				'		ssh.CBTBothFirst = True
-				'ssh.CustomTaskFirst = True
-				'End If
+					If ssh.CBTBallsFlag = True Then
+						CBTBalls()
+					End If
 
-				If ssh.CBTCockFlag = True Then
-					CBTCock()
-				End If
+					If ssh.CBTBothFlag = True Then
+						CBTBoth()
+					End If
 
-				If ssh.CBTBallsFlag = True Then
-					CBTBalls()
-				End If
-
-				If ssh.CBTBothFlag = True Then
-					CBTBoth()
-				End If
-
-				If ssh.CustomTask = True Then
-					RunCustomTask()
+					If ssh.CustomTask = True Then
+						RunCustomTask()
+					End If
 				End If
 
 				If ssh.YesOrNo = False And ssh.Responding = False Then
@@ -5973,7 +5964,10 @@ DommeSlideshowFallback:
 				ssh.Responding = False
 
 				If ssh.SubGaveUp = True Then
-
+					If ssh.YesOrNo And ssh.giveUpReturn Then
+						ssh.DomChat = "#SYS_ReturnAnswer"
+						TypingDelay()
+					End If
 					ssh.SubGaveUp = False
 
 					ssh.AskedToGiveUpSection = False
@@ -6014,16 +6008,16 @@ DommeSlideshowFallback:
 						End If
 					End If
 
-					If ssh.TeaseTick < 1 And ssh.Playlist = False Then
+					If ssh.giveUpReturn Then
+						ssh.ShowModule = True
+						ssh.AskedToGiveUpSection = False
+						ScriptTimer.Start()
+					ElseIf ssh.TeaseTick < 1 And ssh.Playlist = False Then
 						ssh.StrokeTauntVal = -1
 						RunLastScript()
 					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
 						ssh.StrokeTauntVal = -1
 						RunModuleScript(False)
-					ElseIf ssh.giveUpReturn Then
-						ssh.ShowModule = True
-						ssh.AskedToGiveUpSection = False
-						ScriptTimer.Start()
 					Else
 						ssh.StrokeTauntVal = -1
 						RunLinkScript()
@@ -8202,17 +8196,18 @@ StatusUpdateEnd:
 						StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
 
 					Else
-
-						StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
-
+						If My.Settings.CBOutputErrors = True Then
+							StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
+						Else
+							StringClean = StringClean.Replace(keyword.Value, "")
+						End If
 					End If
-
 					'Try
 					'lines = FilterList(lines)
 					'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
 					'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
 					'Catch ex As Exception
-					'Log.WriteError("Error Processing vocabulary file: " & filepath, ex,
+					'Log.WriteError("Error Processing vocabulary file:  " & filepath, ex,
 					' "Tease AI did not return a valid line while parsing vocabulary file.")
 					'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
 					'End Try
@@ -15187,7 +15182,7 @@ NoPlaylistEndFile:
         ' Unlock OrgasmChances
         FrmSettings.LockOrgasmChances(False)
 
-		ClearModes()
+		If Not ssh.giveUpReturn Then ClearModes()
 
 
 		If FrmSettings.TBWebStop.Text <> "" Then
@@ -20564,24 +20559,19 @@ playLoop:
 		If ssh.MultiTauntPictureHold Then ssh.MultiTauntPictureHold = False
 		ssh.CallReturns.Pop().resumeState()
 		If ssh.ReturnSubState = "Stroking" Then
-			If My.Settings.Chastity = True Then
-				'DomTask = "Now as I was saying @StartTaunts"
+			If ssh.SubStroking = False Then
 				If ssh.CallReturns.Count() = 0 Then
-					ssh.DomTask = "#Return_Chastity"
+					If My.Settings.Chastity = True Then
+						'DomTask = "Now as I was saying @StartTaunts"
+						ssh.DomTask = "#Return_Chastity"
+					Else
+						'DomTask = "Get back to stroking @StartStroking"
+						ssh.DomTask = "#Return_Stroking"
+					End If
 				Else
 					ssh.DomTask = "@NullResponse"
 				End If
 				TypingDelayGeneric()
-			Else
-				If ssh.SubStroking = False Then
-					'DomTask = "Get back to stroking @StartStroking"
-					If ssh.CallReturns.Count() = 0 Then
-						ssh.DomTask = "#Return_Stroking"
-					Else
-						ssh.DomTask = "@NullResponse"
-					End If
-					TypingDelayGeneric()
-				End If
 				If Not ssh.ShowModule Then
 					StrokeTimer.Start()
 					StrokeTauntTimer.Start()
@@ -20621,16 +20611,12 @@ playLoop:
 			ssh.DomTypeCheck = True
 			ssh.ScriptTick = 2
 			ScriptTimer.Start()
-			'DomTask = "Now as I was saying"
-			'If StrComp(tempStatus, ssh.ReturnSubState) <> 0 Then
-			'ssh.DomTask = "#Return_Rest"
-			'Else
+			ssh.ShowModule = True
 			If ssh.YesOrNo Then
 				ssh.DomTask = "#SYS_ReturnAnswer"
 			Else
 				ssh.DomTask = "@NullResponse"
 			End If
-			'End If
 			TypingDelayGeneric()
 		End If
 	End Sub
