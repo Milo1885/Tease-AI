@@ -1713,7 +1713,6 @@ WritingTaskLine:
 
 		If ssh.WritingTaskFlag = True Then
 
-
 			If ssh.ChatString = LBLWritingTaskText.Text Then
 
 				ssh.WritingTaskLinesWritten += 1
@@ -1865,7 +1864,7 @@ WritingTaskLine:
 				End If
 
 			End If
-
+			If ssh.randomWriteTask Then setWriteTask()
 		End If
 
 		If ssh.AFK = True Then Return
@@ -2600,6 +2599,12 @@ EdgeSkip:
 	End Sub
 
 	Public Sub DomResponse()
+		If ssh.WritingTaskFlag Then Return
+
+		If ssh.dontCheck Then
+			ssh.dontCheck = False
+			Return
+		End If
 
 		Debug.Print("DomResponse Called")
 		If ssh.justStarted Then
@@ -3592,14 +3597,14 @@ NullSkip:
 		GoTo NothingFound
 
 FoundAnswer:
-		ssh.DomChat = updateDommeName(ChatReplace)
+		updateDommeName(ChatReplace)
+		ssh.DomChat = ChatReplace
 		If ssh.DomChat.Contains("@NullResponse") Then ssh.NullResponse = True
 		If ssh.DomChat.Contains("@LoopAnswer") Then GoTo LoopAnswer
 
 		ssh.YesOrNo = False
 		YesOrNoLanguageCheck()
 
-		ssh.foundAnswer = True
 
 		If ssh.GotoFlag = False Then ssh.StrokeTauntVal = TempLineVal
 
@@ -4615,7 +4620,7 @@ CancelGoto:
 				If ssh.RiskyDeal = True Then FrmCardList.LblRiskType.Visible = True
 				If ssh.NullResponse = False Then
 					ssh.IsTyping = True
-					ssh.DomTask = updateDommeName(ssh.DomTask)
+					updateDommeName(ssh.DomTask)
 
 					If ssh.DomTask.Contains("@EmoteMessage") Then ssh.EmoMes = True
 
@@ -4732,8 +4737,13 @@ NullResponse:
 
 
 				If ssh.DomTask.Contains("@WritingTask(") Then
-					Dim WriteFlag As String = GetParentheses(ssh.DomTask, "@WritingTask(")
-					ssh.DomTask = ssh.DomTask.Replace(WriteFlag, PoundClean(WriteFlag))
+					ssh.currentWriteTask = GetParentheses(ssh.DomTask, "@WritingTask(")
+					ssh.DomTask = ssh.DomTask.Replace(ssh.currentWriteTask, PoundClean(ssh.currentWriteTask))
+				End If
+
+				If ssh.DomTask.Contains("@WritingTaskRandom(") Then
+					ssh.currentWriteTask = GetParentheses(ssh.DomTask, "@WritingTaskRandom(")
+					ssh.DomTask = ssh.DomTask.Replace(ssh.currentWriteTask, PoundClean(ssh.currentWriteTask))
 				End If
 
 				If ssh.DomTask.Contains("@Contact1") Or ssh.DomTask.Contains("@Contact2") Or ssh.DomTask.Contains("@Contact3") Or ssh.DomTask.Contains("@RandomContact") Then ssh.SubWroteLast = True
@@ -5565,8 +5575,13 @@ TryNextWithTease:
 
 
 				If ssh.DomChat.Contains("@WritingTask(") Then
-					Dim WriteFlag As String = GetParentheses(ssh.DomChat, "@WritingTask(")
-					ssh.DomChat = ssh.DomChat.Replace(WriteFlag, PoundClean(WriteFlag))
+					ssh.currentWriteTask = GetParentheses(ssh.DomChat, "@WritingTask(")
+					ssh.DomChat = ssh.DomChat.Replace(ssh.currentWriteTask, PoundClean(ssh.currentWriteTask))
+				End If
+
+				If ssh.DomChat.Contains("@WritingTaskRandom(") Then
+					ssh.currentWriteTask = GetParentheses(ssh.DomChat, "@WritingTaskRandom(")
+					ssh.DomChat = ssh.DomChat.Replace(ssh.currentWriteTask, PoundClean(ssh.currentWriteTask))
 				End If
 
 				If ssh.DomChat.Contains("@Contact1") Or ssh.DomChat.Contains("@Contact2") Or ssh.DomChat.Contains("@Contact3") Or ssh.DomChat.Contains("@RandomContact") Then ssh.SubWroteLast = True
@@ -8268,7 +8283,7 @@ StatusUpdateEnd:
 
 
 		If StringClean.Contains("@FollowUp(") And ssh.FollowUp = "" Then
-			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(")
+			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(", StringClean.Split(")").Length - 1)
 			StringClean = StringClean.Replace("@FollowUp(" & ssh.FollowUp & ")", "")
 		End If
 
@@ -8291,7 +8306,7 @@ StatusUpdateEnd:
 			ssh.TempVal = ssh.randomizer.Next(1, 101)
 
 			Dim FollowLineTemp As String
-			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(")
+			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(", StringClean.Split(")").Length - 1)
 
 			If ssh.TempVal <= FollowVal Then ssh.FollowUp = FollowLineTemp
 
@@ -10587,19 +10602,19 @@ OrgasmDecided:
 
 
 
-		If StringClean.Contains("@WritingTask(") Then
+		If StringClean.Contains("@WritingTask(") Or StringClean.Contains("@WritingTaskRandom(") Then
+			If StringClean.Contains("@WritingTask(") Then
+				ssh.randomWriteTask = False
+				StringClean = StringClean.Replace("@WritingTask", "")
+			Else
+				ssh.randomWriteTask = True
+				StringClean = StringClean.Replace("@WritingTaskRandom", "")
+			End If
 
 			ssh.WritingTaskFlag = True
-
-			Dim WTTempString As String() = Split(StringClean, "@WritingTask(", 2)
-			Dim WTTemp As String() = Split(WTTempString(1), ")")
-			LBLWritingTaskText.Text = WTTemp(0)
-			LBLWritingTaskText.Text = StripCommands(LBLWritingTaskText.Text)
-			LBLWritingTaskText.Text = StripFormat(LBLWritingTaskText.Text)
-			LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace("  ", " ")
+			setWriteTask()
 
 			Dim WritingTaskVal As Integer = Val(LBLWritingTaskText.Text)
-			'Debug.Print("WritingTaskVal = " & WritingTaskVal)
 
 			If WritingTaskVal = 0 Then
 				ssh.WritingTaskLinesAmount = ssh.randomizer.Next(FrmSettings.NBWritingTaskMin.Value, FrmSettings.NBWritingTaskMax.Value)
@@ -10626,7 +10641,6 @@ OrgasmDecided:
 
 			LBLMistakesAllowed.Text = ssh.WritingTaskMistakesAllowed
 			LBLMistakesMade.Text = "0"
-			StringClean = StringClean.Replace("@WritingTask", "")
 			'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times."
 			ssh.WritingTaskLinesRemaining = ssh.WritingTaskLinesAmount
 			ssh.WritingTaskLinesWritten = 0
@@ -16947,9 +16961,10 @@ saveImage:
 		ssh.SlideshowMain.LoadNew(ssh.newSlideshow)
 		ssh.tempDomName = ssh.SlideshowMain.TypeName
 		If ssh.tempDomName <> My.Settings.DomName Then
-			Dim avatarImage As String = checkForImage("avatar.*", ssh.SlideshowMain.ImageFolder)
+			Dim avatarImage As String = checkForImage("/avatar.*", ssh.SlideshowMain.getCurrentBaseFolder(ssh.SlideshowMain.Contact))
 			If avatarImage = "" Then avatarImage = ssh.SlideshowMain.ImageList(ssh.randomizer.Next(0, ssh.SlideshowMain.ImageList().Count - 1))
 			domAvatar.Image = Image.FromFile(avatarImage)
+			ssh.domAvatarImage = domAvatar.Image
 		End If
 		ssh.shortName = ssh.SlideshowMain.ShortName
 		Me.domName.Text = ssh.tempDomName
@@ -17388,6 +17403,7 @@ restartInstantly:
 			ssh.Load(filename, True)
 			Me.domName.Text = ssh.tempDomName
 			FrmSettings.LBLCurrentDomme.Text = ssh.tempDomName
+			domAvatar.Image = ssh.domAvatarImage
 			If ssh.SaidHello And My.Settings.LockOrgasmChances Then _
 				FrmSettings.LockOrgasmChances(True)
 
@@ -20422,8 +20438,10 @@ playLoop:
 	End Sub
 
 	Public Sub ClearWriteTask()
+		ssh.dontCheck = True
 		ssh.WritingTaskCurrentTime = 0
 		ssh.WritingTaskFlag = False
+		ssh.randomWriteTask = False
 		chatBox.ShortcutsEnabled = True
 		ChatBox2.ShortcutsEnabled = True
 		CloseApp(Nothing)
@@ -20576,6 +20594,11 @@ playLoop:
 					StrokeTimer.Start()
 					StrokeTauntTimer.Start()
 				End If
+			Else
+				If Not ssh.ShowModule Then
+					StrokeTimer.Start()
+					StrokeTauntTimer.Start()
+				End If
 			End If
 		ElseIf ssh.ReturnSubState = "Edging" Then
 			If ssh.SubEdging = False Then
@@ -20637,7 +20660,7 @@ playLoop:
 	End Sub
 
 
-	Private Function updateDommeName(stringToCheck As String) As String
+	Private Function updateDommeName(stringToCheck As String)
 		'remove eventual @ContactX present in a @FollowUp() inside the line
 		If stringToCheck.Contains("@FollowUp") Then
 			Dim remove As String
@@ -20689,7 +20712,7 @@ playLoop:
 				Case Else
 			End Select
 		End If
-		Return stringToCheck
+		'Return stringToCheck
 	End Function
 
 	Private Sub checkForPunish()
@@ -21022,6 +21045,13 @@ ShowedBlogImage:
 			End If
 		End If
 		customVocabLines.Clear()
+	End Sub
+
+	Private Sub setWriteTask()
+		LBLWritingTaskText.Text = PoundClean(ssh.currentWriteTask)
+		LBLWritingTaskText.Text = StripCommands(LBLWritingTaskText.Text)
+		LBLWritingTaskText.Text = StripFormat(LBLWritingTaskText.Text)
+		LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace("  ", " ")
 	End Sub
 End Class
 

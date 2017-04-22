@@ -110,7 +110,6 @@ Public Class SessionState
 
 	Public Property nameErrors As Integer = 0
 	Public Property wrongAttempt As Boolean
-	Public Property foundAnswer As Boolean
 
 	Public Property ResponseFile As String
 	Public Property ResponseLine As Integer
@@ -430,6 +429,10 @@ Public Class SessionState
 	Public Property tempHonorific As String
 	Public Property replaceHonorific As String
 	Public Property shortName As String
+	Public Property domAvatarImage As Image
+	Public Property currentWriteTask As String
+	Public Property randomWriteTask As Boolean
+	Public Property dontCheck As Boolean
 
 #Region "@CallReturn("
 

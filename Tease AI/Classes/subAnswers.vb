@@ -11,7 +11,7 @@ Public Class subAnswers
 		checkList.Add(My.Settings.SubNo)
 		checkList.Add(My.Settings.SubSorry)
 		checkList.Add("please")
-		checkList.Add("thank,thanks,thank you")
+		checkList.Add("thank,thanks")
 	End Sub
 
 	Public Function returnWords(s As String) As String
