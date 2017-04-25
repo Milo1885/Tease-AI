@@ -8370,6 +8370,18 @@ RinseLatherRepeat:
 			StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
 		End If
 
+		If StringClean.Contains("@DommeTagOr(") Then
+			Dim TagFlag As String = GetParentheses(StringClean, "@DommeTagOr(")
+			'QND-Implemented: ContactData.GetTaggedImage
+			If ssh.contactToUse IsNot Nothing Then
+				ssh.DommeImageSTR = GetLocalImageOr(TagFlag, True)
+			Else
+				ssh.DommeImageSTR = ""
+			End If
+			' Clean the Text.
+			StringClean = StringClean.Replace("@DommeTagOr(" & TagFlag & ")", "")
+		End If
+
 		If StringClean.Contains("@NewDommeSlideshow") Then
 			'TODO: Add Support for contact slideshows.
 			ssh.newSlideshow = True
@@ -8388,6 +8400,19 @@ RinseLatherRepeat:
 			End If
 
 			StringClean = StringClean.Replace("@DomTag(" & TagFlag & ")", "")
+		End If
+
+		If StringClean.Contains("@DomTagOr(") Then
+			Dim TagFlag As String = GetParentheses(StringClean, "@DomTagOr(")
+			' Try to get a Domme Image for the given Tags.
+			'QND-Implemented: ContactData.GetTaggedImage
+			If ssh.contactToUse IsNot Nothing Then
+				ssh.DommeImageSTR = GetLocalImageOr(TagFlag, True)
+			Else
+				ssh.DommeImageSTR = ""
+			End If
+
+			StringClean = StringClean.Replace("@DomTagOr(" & TagFlag & ")", "")
 		End If
 
 		If StringClean.Contains("@ImageTag(") Then
@@ -13621,10 +13646,8 @@ VTSkip:
                 ' This line has to be sorted out, if there are no corresponding images tagged 
                 ' with "glaring".
                 '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-                'ISSUE: @DomTag() is not filtered out 
                 If FilterString.Includes("@DommeTag(") Then
-                    'QND-Implemented: ContactData.GetTaggedImage
-                    If ssh.LockImage = True Then
+					If ssh.LockImage = True Then
 						Return False
 					Else
 						If GetLocalImage(GetParentheses(FilterString, "@DommeTag("), True) = String.Empty Then Return False
@@ -13632,11 +13655,26 @@ VTSkip:
 				End If
 
 				If FilterString.Includes("@DommeTagOr(") Then
-                    'QND-Implemented: ContactData.GetTaggedImage
-                    If ssh.LockImage = True Then
+					If ssh.LockImage = True Then
 						Return False
 					Else
-						If GetLocalImageOr(GetParentheses(FilterString, "@DommeTag("), True) = String.Empty Then Return False
+						If GetLocalImageOr(GetParentheses(FilterString, "@DommeTagOr("), True) = String.Empty Then Return False
+					End If
+				End If
+
+				If FilterString.Includes("@DomTag(") Then
+					If ssh.LockImage = True Then
+						Return False
+					Else
+						If GetLocalImage(GetParentheses(FilterString, "@DomTag("), True) = String.Empty Then Return False
+					End If
+				End If
+
+				If FilterString.Includes("@DomTagOr(") Then
+					If ssh.LockImage = True Then
+						Return False
+					Else
+						If GetLocalImageOr(GetParentheses(FilterString, "@DomTagOr("), True) = String.Empty Then Return False
 					End If
 				End If
 
