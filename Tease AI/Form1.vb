@@ -12119,7 +12119,6 @@ VTSkip:
 
 
 		If StringClean.Contains("@CallReturn(") Then
-
 			GetSubState()
 			ssh.CallReturns.Push(New SessionState.StackedCallReturn(ssh))
 			ssh.YesOrNo = False
@@ -12154,27 +12153,48 @@ VTSkip:
 				ssh.SubHoldingEdge = False
 			End If
 
-            'StopEverything()
-
-
-            Dim CheckFlag As String = GetParentheses(StringClean, "@CallReturn(")
+			Dim CheckFlag As String = GetParentheses(StringClean, "@CallReturn(")
 			Dim CallReplace As String = CheckFlag
 
-			If CheckFlag.Contains(",") Then
-
-				CheckFlag = FixCommas(CheckFlag)
-
-				Dim CallSplit As String() = CheckFlag.Split(",")
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
-				ssh.FileGoto = CallSplit(1)
-				ssh.SkipGotoLine = True
-				GetGoto()
-
+			If CheckFlag.Contains("*") Then
+				Dim checkArray() As String = CheckFlag.Split("*")
+				CheckFlag = checkArray(0)
+				If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag) Then
+					MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not exist!" & Environment.NewLine & Environment.NewLine &
+					 Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+				Else
+					ssh.MultiTauntPictureHold = False
+					Dim RandomFile As New List(Of String)
+					RandomFile.Clear()
+					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+						RandomFile.Add(foundFile)
+					Next
+					If RandomFile.Count < 1 Then
+						MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine &
+						  Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+					Else
+						GotoClear()
+						ssh.FileText = RandomFile(ssh.randomizer.Next(0, RandomFile.Count))
+						ssh.StrokeTauntVal = -1
+					End If
+				End If
 			Else
+				If CheckFlag.Contains(",") Then
 
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
-				ssh.StrokeTauntVal = -1
+					CheckFlag = FixCommas(CheckFlag)
 
+					Dim CallSplit As String() = CheckFlag.Split(",")
+					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
+					ssh.FileGoto = CallSplit(1)
+					ssh.SkipGotoLine = True
+					GetGoto()
+
+				Else
+
+					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
+					ssh.StrokeTauntVal = -1
+
+				End If
 			End If
 			ssh.ScriptTick = 2
 			ScriptTimer.Start()
@@ -13411,11 +13431,11 @@ VTSkip:
 					PicDir = PicDir & PicArray(p) & " "
 					If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
 				Next
-
+				If isDommeTag Then PicDir = Path.GetDirectoryName(ssh.SlideshowMain.CurrentImage) & Path.DirectorySeparatorChar & PicDir
 				Return PicDir
 
-			Else
-				Return String.Empty
+				Else
+					Return String.Empty
 
 			End If
 
@@ -13464,7 +13484,7 @@ VTSkip:
 					PicDir = PicDir & PicArray(p) & " "
 					If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
 				Next
-
+				If isDommeTag Then PicDir = Path.GetDirectoryName(ssh.SlideshowMain.CurrentImage) & Path.DirectorySeparatorChar & PicDir
 				Return PicDir
 
 			Else
