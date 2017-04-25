@@ -14558,9 +14558,9 @@ VTSkip:
     ''' <param name="messageText">Messagetext to append to chat.</param>
     ''' <param name="printChat">If true the chatwindow is refreshed and reprinted.</param>
     Public Sub ChatAddSystemMessage(ByVal messageText As String, Optional ByVal printChat As Boolean = True)
-		ChatAppend("<span style=""color steelblue; font-weight: bold; "">" & messageText & "</span>", printChat)
-        'ssh.Chat = "<body style=""word-wrapbreak-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
-    End Sub
+		ChatAppend("<span style=""color: steelblue; font-weight: bold; "">" & messageText & "</span>", printChat)
+		'ssh.Chat = "<body style=""word-wrapbreak-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
+	End Sub
 
 	Public Sub ChatAppend(ByVal elementText As String, Optional ByVal printChat As Boolean = True)
 		ssh.Chat &= elementText & "<br>" & vbCrLf
