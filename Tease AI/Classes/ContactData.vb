@@ -611,6 +611,7 @@ redo:
 
 				If rtnItem.TagImageList.Count = 0 Then
 					' ´############## List was empty ################
+
 					Exit Function
 				ElseIf Not rtnItem.TagImageList(0).StartsWith(TargetFolder)
 					' ################ Wrong folder #################

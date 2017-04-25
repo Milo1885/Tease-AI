@@ -183,7 +183,7 @@ Public Class SessionState
 
 	Public Property giveUpReturn As Boolean
 	Public Property contactToUse As ContactData
-	Public Property currentlyPresentContacts As List(Of String)
+	Public Property currentlyPresentContacts As List(Of String) = New List(Of String)
 	Public Property DivideText As Boolean
 
 	Public Property HoldEdgeTick As Integer
@@ -425,9 +425,9 @@ Public Class SessionState
 	Public Property Contact2Stroke As Boolean
 	Public Property Contact3Stroke As Boolean
 
-	Public Property tempDomName As String
+	Public Property tempDomName As String = ""
 	Public Property tempHonorific As String
-	Public Property replaceHonorific As String
+	Public Property tempDomHonorific As String
 	Public Property shortName As String
 	Public Property domAvatarImage As Image
 	Public Property currentWriteTask As String
@@ -744,13 +744,13 @@ Public Class SessionState
 		giveUpReturn = My.Settings.GiveUpReturn
 		DommeMood = randomizer.Next(My.Settings.DomMoodMin, My.Settings.DomMoodMax + 1)
 
-		SlideshowMain = New ContactData(ContactType.Domme)
-		SlideshowContact1 = New ContactData(ContactType.Contact1)
-		SlideshowContact2 = New ContactData(ContactType.Contact2)
-		SlideshowContact3 = New ContactData(ContactType.Contact3)
-		SlideshowContactRandom = New ContactData(ContactType.Random)
-		currentlyPresentContacts = New List(Of String)
-		currentlyPresentContacts.Add(SlideshowMain.TypeName)
+		'SlideshowMain = New ContactData(ContactType.Domme)
+		'SlideshowContact1 = New ContactData(ContactType.Contact1)
+		'SlideshowContact2 = New ContactData(ContactType.Contact2)
+		'SlideshowContact3 = New ContactData(ContactType.Contact3)
+		'SlideshowContactRandom = New ContactData(ContactType.Random)
+		'currentlyPresentContacts = New List(Of String)
+		'currentlyPresentContacts.Add(SlideshowMain.TypeName)
 
 		CaloriesConsumed = My.Settings.CaloriesConsumed
 		checkAnswers = New subAnswers(Me)

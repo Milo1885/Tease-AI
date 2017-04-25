@@ -461,7 +461,6 @@ retryStart:
 			FrmSplash.LBLSplash.Text = "Loading names..."
 			FrmSplash.Refresh()
 
-			setStartName()
 
 			FrmSettings.petnameBox1.Text = My.Settings.pnSetting1
 			FrmSettings.petnameBox2.Text = My.Settings.pnSetting2
@@ -931,16 +930,7 @@ retryStart:
 			FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
 			FrmSplash.Refresh()
 
-			Try
-				ssh.SlideshowMain = New ContactData(ContactType.Domme)
-				ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
-				ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
-				ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
-				ssh.SlideshowContactRandom = New ContactData(ContactType.Random)
-			Catch ex As Exception
-
-			End Try
-
+			setStartName()
 
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
 				Dim ContactList As New List(Of String)
@@ -2610,7 +2600,7 @@ EdgeSkip:
 		If ssh.justStarted Then
 			ssh.justStarted = False
 		Else
-			If checkSubAnswer() = 0 Then
+			If checkSubAnswer(, False) = 0 Then
 				checkForPunish()
 				Return
 			End If
@@ -5384,13 +5374,10 @@ DommeSlideshowFallback:
 						ssh.AskedToGiveUpSection = False
 						ScriptTimer.Start()
 					ElseIf ssh.TeaseTick < 1 And ssh.Playlist = False Then
-						ssh.StrokeTauntVal = -1
 						RunLastScript()
 					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
-						ssh.StrokeTauntVal = -1
 						RunModuleScript(False)
 					Else
-						ssh.StrokeTauntVal = -1
 						RunLinkScript()
 					End If
 				End If
@@ -5437,6 +5424,7 @@ DommeSlideshowFallback:
 		If ssh.DomChat.Contains("@SlideshowOff") Then CustomSlideshowTimer.Stop()
 		If ssh.DomChat.Contains("@NullResponse") Then
 			ssh.NullResponse = True
+			ssh.JustShowedBlogImage = True
 		Else
 			ssh.RapidCode = False
 		End If
@@ -5557,15 +5545,12 @@ NullResponseLine:
 					And ssh.SlideshowLoaded = True And Not ssh.DomChat.Contains("@ShowButtImage") And Not ssh.DomChat.Contains("@ShowBoobsImage") And Not ssh.DomChat.Contains("@ShowButtsImage") _
 					And Not ssh.DomChat.Contains("@ShowBoobImage") And ssh.LockImage = False And ssh.CustomSlideEnabled = False And ssh.RapidFire = False _
 					And UCase(ssh.DomChat) <> "<B>TEASE AI HAS BEEN RESET</B>" And ssh.JustShowedSlideshowImage = False Then
-					If ssh.SubStroking = False Or ssh.SubEdging = True Or ssh.SubHoldingEdge = True Then
-						' Begin Next Button
+					' Begin Next Button
 
-						' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 TryNextWithTease:
 
 
-
-					End If
 					' @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
@@ -6028,13 +6013,10 @@ DommeSlideshowFallback:
 						ssh.AskedToGiveUpSection = False
 						ScriptTimer.Start()
 					ElseIf ssh.TeaseTick < 1 And ssh.Playlist = False Then
-						ssh.StrokeTauntVal = -1
 						RunLastScript()
 					ElseIf WasStroking And Not WasEdging And Not WasHolding Then
-						ssh.StrokeTauntVal = -1
 						RunModuleScript(False)
 					Else
-						ssh.StrokeTauntVal = -1
 						RunLinkScript()
 					End If
 				End If
@@ -7631,6 +7613,8 @@ StatusUpdateEnd:
 
 		StringClean = StringClean.Replace("#DomName", ssh.tempDomName)
 
+		StringClean = StringClean.Replace("#MainDom", My.Settings.DomName)
+
 		If StringClean.Contains("#Contact1Honorific") Then StringClean = StringClean.Replace("#Contact1Honorific", My.Settings.G1Honorific)
 
 		If StringClean.Contains("#Contact2Honorific") Then StringClean = StringClean.Replace("#Contact2Honorific", My.Settings.G2Honorific)
@@ -7638,9 +7622,9 @@ StatusUpdateEnd:
 		If StringClean.Contains("#Contact3Honorific") Then StringClean = StringClean.Replace("#Contact3Honorific", My.Settings.G3Honorific)
 
 		If ssh.dommePresent = True Then
-			StringClean = StringClean.Replace("#DomHonorific", ssh.replaceHonorific)
-		Else
 			StringClean = StringClean.Replace("#DomHonorific", ssh.tempHonorific)
+		Else
+			StringClean = StringClean.Replace("#DomHonorific", My.Settings.SubHonorific)
 		End If
 
 		StringClean = StringClean.Replace("#DomAge", FrmSettings.domageNumBox.Value)
@@ -8378,7 +8362,7 @@ RinseLatherRepeat:
 			Dim TagFlag As String = GetParentheses(StringClean, "@DommeTag(")
 			'QND-Implemented: ContactData.GetTaggedImage
 			If ssh.contactToUse IsNot Nothing Then
-				ssh.DommeImageSTR = ssh.contactToUse.GetTaggedImage(TagFlag, True)
+				ssh.DommeImageSTR = GetLocalImage(TagFlag, True)
 			Else
 				ssh.DommeImageSTR = ""
 			End If
@@ -8398,7 +8382,7 @@ RinseLatherRepeat:
 			' Try to get a Domme Image for the given Tags.
 			'QND-Implemented: ContactData.GetTaggedImage
 			If ssh.contactToUse IsNot Nothing Then
-				ssh.DommeImageSTR = ssh.contactToUse.GetTaggedImage(TagFlag, True)
+				ssh.DommeImageSTR = GetLocalImage(TagFlag, True)
 			Else
 				ssh.DommeImageSTR = ""
 			End If
@@ -10817,7 +10801,7 @@ OrgasmDecided:
 		End If
 
 		If StringClean.Contains("@InterruptLongEdge") Then
-
+			ssh.isLink = False
 			Dim EdgeList As New List(Of String)
 
 			For Each EdgeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Long Edge\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
@@ -10857,7 +10841,7 @@ OrgasmDecided:
 		End If
 
 		If StringClean.Contains("@InterruptStartStroking") Then
-
+			ssh.isLink = False
 			If ssh.CensorshipGame = True Or ssh.AvoidTheEdgeGame = True Or ssh.RLGLGame = True Then
 				StringClean = "Ask me later"
 				GoTo VTSkip
@@ -10906,6 +10890,7 @@ OrgasmDecided:
 		End If
 
 		If StringClean.Contains("@Interrupt(") Then
+			ssh.isLink = False
 			Dim InterruptClean As String = StringClean
 			Dim StartIndex As Integer = InterruptClean.IndexOf("@Interrupt(") + 11
 			For i As Integer = 1 To StartIndex
@@ -13356,18 +13341,28 @@ VTSkip:
 		Return String.Empty
 	End Function
 
-	Public Function GetLocalImage(ByVal LocTag As String) As String
+	Public Function GetLocalImage(ByVal LocTag As String, Optional isDommeTag As Boolean = False) As String
+		Dim fileToCheck As String = Application.StartupPath & "\Images\System\LocalImageTags.txt"
+		If isDommeTag Then
+			fileToCheck = Path.GetDirectoryName(ssh.SlideshowMain.CurrentImage) & Path.DirectorySeparatorChar & "ImageTags.txt"
+		End If
+
         'TODO-Next: @ImageTag() Implement optimized @ShowTaggedImage code.
-        If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+        If File.Exists(fileToCheck) Then
 
 
 			Dim TagList As New List(Of String)
-			TagList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+			TagList = Txt2List(fileToCheck)
 
 			LocTag = LocTag.Replace(" ,", ",")
 			LocTag = LocTag.Replace(", ", ",")
 
 			Dim LocTagArray As String() = LocTag.Split(",")
+			If isDommeTag Then
+				For i As Integer = 0 To LocTagArray.Count - 1
+					LocTagArray(i) = "Tag" & LocTagArray(i)
+				Next
+			End If
 
 			Dim TaggedList As New List(Of String)
 
@@ -13402,17 +13397,27 @@ VTSkip:
 		End If
 	End Function
 
-	Public Function GetLocalImageOr(ByVal LocTag As String) As String
-		If File.Exists(Application.StartupPath & "\Images\System\LocalImageTags.txt") Then
+	Public Function GetLocalImageOr(ByVal LocTag As String, Optional isDommeTag As Boolean = False) As String
+		Dim fileToCheck As String = Application.StartupPath & "\Images\System\LocalImageTags.txt"
+		If isDommeTag Then
+			fileToCheck = Path.GetDirectoryName(ssh.SlideshowMain.CurrentImage) & Path.DirectorySeparatorChar & "ImageTags.txt"
+		End If
+
+		If File.Exists(fileToCheck) Then
 
 
 			Dim TagList As New List(Of String)
-			TagList = Txt2List(Application.StartupPath & "\Images\System\LocalImageTags.txt")
+			TagList = Txt2List(fileToCheck)
 
 			LocTag = LocTag.Replace(" ,", ",")
 			LocTag = LocTag.Replace(", ", ",")
 
 			Dim LocTagArray As String() = LocTag.Split(",")
+			If isDommeTag Then
+				For i As Integer = 0 To LocTagArray.Count - 1
+					LocTagArray(i) = "Tag" & LocTagArray(i)
+				Next
+			End If
 
 			Dim TaggedList As New List(Of String)
 
@@ -13622,16 +13627,33 @@ VTSkip:
                     If ssh.LockImage = True Then
 						Return False
 					Else
-						If FilterContact.GetTaggedImage(GetParentheses(FilterString, "@DommeTag(")) = "" Then Return False
+						If GetLocalImage(GetParentheses(FilterString, "@DommeTag("), True) = String.Empty Then Return False
+					End If
+				End If
+
+				If FilterString.Includes("@DommeTagOr(") Then
+                    'QND-Implemented: ContactData.GetTaggedImage
+                    If ssh.LockImage = True Then
+						Return False
+					Else
+						If GetLocalImageOr(GetParentheses(FilterString, "@DommeTag("), True) = String.Empty Then Return False
 					End If
 				End If
 
 				If FilterString.Contains("@ImageTag(") Then
-					If GetLocalImage(GetParentheses(FilterString, "@ImageTag(")) = String.Empty Then Return False
+					If ssh.LockImage = True Then
+						Return False
+					Else
+						If GetLocalImage(GetParentheses(FilterString, "@ImageTag(")) = String.Empty Then Return False
+					End If
 				End If
 
 				If FilterString.Contains("@ImageTagOr(") Then
-					If GetLocalImageOr(GetParentheses(FilterString, "@ImageTagOr(")) = String.Empty Then Return False
+					If ssh.LockImage = True Then
+						Return False
+					Else
+						If GetLocalImageOr(GetParentheses(FilterString, "@ImageTagOr(")) = String.Empty Then Return False
+					End If
 				End If
 
                 ' ################## @Show-Category-Image #####################
@@ -13711,7 +13733,7 @@ VTSkip:
             '							Possible space Filters
             ' This Section Contains @CommandFilters which allow space chars (0x20).
             ' 
-            ' Example: "@Cup(A, B) Whatever Text to display"
+            ' Example: "@Cup(A, B) Whatever Text To display"
             ' Mostly all perametrized command filters allow space chars in parameters.
             '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
@@ -14155,9 +14177,9 @@ VTSkip:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             '                                            All Errors
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            Log.WriteError(String.Format("Exception occured while checking line ""{0}"".", OrgFilterString),
+            Log.WriteError(String.Format("Exception occured While checking line ""{0}"".", OrgFilterString),
 					ex, "GetFilter(String, Boolean)")
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
+			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">Error " & ex.Message & "</font>", False)
 			Return False
 		End Try
 	End Function
@@ -14356,7 +14378,7 @@ VTSkip:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             Debug.Print("Error on initializing FilterList." & vbCrLf & ex.Message & vbCrLf & ex.StackTrace)
 			MsgBox("Error on initializing FilterList. This Error occurs, If you try to add a duplikace Key to the dictionary." &
-			 "This error is major issue in Code and will occur everytime until you fix this Error. For there is no point in " &
+			 "This error Is major issue in Code And will occur everytime until you fix this Error. For there Is no point in " &
 			 "further executing the Code, the application will exit after closing this Message." & vbCrLf &
 			 ex.Message & vbCrLf & ex.StackTrace, MsgBoxStyle.Critical, "Source Code Error")
 			Application.Exit()
@@ -14498,8 +14520,8 @@ VTSkip:
     ''' <param name="messageText">Messagetext to append to chat.</param>
     ''' <param name="printChat">If true the chatwindow is refreshed and reprinted.</param>
     Public Sub ChatAddSystemMessage(ByVal messageText As String, Optional ByVal printChat As Boolean = True)
-		ChatAppend("<span style=""color: steelblue; font-weight: bold; "">" & messageText & "</span>", printChat)
-        'ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
+		ChatAppend("<span style=""color steelblue; font-weight: bold; "">" & messageText & "</span>", printChat)
+        'ssh.Chat = "<body style=""word-wrapbreak-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
     End Sub
 
 	Public Sub ChatAppend(ByVal elementText As String, Optional ByVal printChat As Boolean = True)
@@ -14573,9 +14595,9 @@ VTSkip:
 			If File.Exists(AvoidTheEdgeVideo) Then
 			Else
 				If ssh.DommeVideo = True Then
-					MsgBox("AvoidTheEdgeD.txt is missing!", , "Error!")
+					MsgBox("AvoidTheEdgeD.txt Is missing!", , "Error!")
 				Else
-					MsgBox("AvoidTheEdge.txt is missing!", , "Error!")
+					MsgBox("AvoidTheEdge.txt Is missing!", , "Error!")
 				End If
 				Return
 			End If
@@ -14740,6 +14762,7 @@ VTSkip:
 
 	Public Sub RunModuleScript(ByVal IsEdging As Boolean)
 		If ssh.MultiTauntPictureHold Then ssh.MultiTauntPictureHold = False
+		ssh.StrokeTauntVal = -1
 		ssh.isLink = False
 		ssh.ShowModule = True
 		ssh.FirstRound = False
@@ -14865,6 +14888,7 @@ NoPlaylistModuleFile:
 
 
 	Public Sub RunLinkScript()
+		ssh.StrokeTauntVal = -1
 		If ssh.MultiTauntPictureHold Then ssh.MultiTauntPictureHold = False
 		ssh.isLink = True
 		Debug.Print("RunLinkScript() Called")
@@ -14989,6 +15013,7 @@ NoPlaylistLinkFile:
 
 	Public Sub RunLastScript()
 
+		ssh.StrokeTauntVal = -1
 		ClearModes()
 		ssh.FirstRound = False
         'My.Settings.Sys_SubLeftEarly = 0
@@ -15095,7 +15120,7 @@ NoPlaylistEndFile:
 	End Sub
 
 	Public Sub RunLastBegScript()
-
+		ssh.StrokeTauntVal = -1
 		ClearModes()
 
         'Debug.Print("RunLastBegScript() Called")
@@ -15246,9 +15271,9 @@ NoPlaylistEndFile:
 				ETLines = FilterList(ETLines)
 				ssh.DomTask = ETLines(ssh.randomizer.Next(0, ETLines.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Edge Taunt from file: " &
+				Log.WriteError("Tease AI did Not return a valid Edge Taunt from file " &
 					  File2Read, ex, "EdgeTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Edge Taunt from file: " & File2Read
+				ssh.DomTask = "ERROR Tease AI did Not return a valid Edge Taunt from file:  " & File2Read
 			End Try
 
 			TypingDelayGeneric()
@@ -15618,9 +15643,9 @@ NoRepeatOFiles:
 				ETLines = FilterList(ETLines)
 				ssh.DomTask = ETLines(ssh.randomizer.Next(0, ETLines.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Hold the Edge Taunt from file: " &
+				Log.WriteError("Tease AI did Not return a valid Hold the Edge Taunt from file " &
 					  File2Read, ex, "HoldEdgeTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Hold the Edge Taunt from file: " & File2Read
+				ssh.DomTask = "ERROR Tease AI did Not return a valid Hold the Edge Taunt from file:  " & File2Read
 			End Try
 
 			TypingDelayGeneric()
@@ -15690,7 +15715,7 @@ Night:
 
 		ssh.TaskText = ""
 
-		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
+		LBLFileTransfer.Text = ssh.tempDomName & " Is sending you a file!"
 		PNLFileTransfer.Visible = True
 		PNLFileTransfer.BringToFront()
 
@@ -15710,7 +15735,7 @@ Night:
 			Dim TaskList As New List(Of String)
 
 			TaskLines = FilterList(TaskLines)
-			If TaskLines.Count = 0 Then Throw New ArgumentException("The given file: """ & dir & """ was returned empty.")
+			If TaskLines.Count = 0 Then Throw New ArgumentException("The given file """ & dir & """ was returned empty.")
 
 			TaskEntry = TaskLines(ssh.randomizer.Next(0, TaskLines.Count))
 
@@ -15871,8 +15896,8 @@ PoundLoop:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             '                                            All Errors
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            Log.WriteError("Error occurred during file processing:  """ & dir & """", ex, "CleanTaskLines(String)")
-			Return "ERROR: Tease AI did not return a valid Task line"
+            Log.WriteError("Error occurred during file processing  """ & dir & """", ex, "CleanTaskLines(String)")
+			Return "ERROR Tease AI did Not return a valid Task line"
 		End Try
 	End Function
 
@@ -15881,7 +15906,7 @@ PoundLoop:
 		PNLFileTransfer.Visible = False
 		BTNFileTransferOpen.Visible = False
 		BTNFIleTransferDismiss.Visible = False
-		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
+		LBLFileTransfer.Text = ssh.tempDomName & " Is sending you a file!"
 		PBFileTransfer.Value = 0
 
 	End Sub
@@ -15903,7 +15928,7 @@ PoundLoop:
 		PNLFileTransfer.Visible = False
 		BTNFileTransferOpen.Visible = False
 		BTNFIleTransferDismiss.Visible = False
-		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
+		LBLFileTransfer.Text = ssh.tempDomName & " Is sending you a file!"
 		PBFileTransfer.Value = 0
 
 	End Sub
@@ -15992,11 +16017,11 @@ TryNext:
 
 		Dim TST As TimeSpan = TimeSpan.FromSeconds(ssh.EdgeCountTick)
 
-        ''Debug.Print("{0:c} : {1:c}", TST.Minutes, TST.Seconds)
+        ''Debug.Print("{0: c} : {1:c}", TST.Minutes, TST.Seconds)
 
 
 
-        'Debug.Print("EdgeCountTick = " & String.Format("{0:00}:{1:00}", TST.Minutes, TST.Seconds))
+        'Debug.Print("EdgeCountTick = " & String.Format("{000}:{1:00}", TST.Minutes, TST.Seconds))
     End Sub
 
 	Private Sub StrokeTimeTotalTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
@@ -16012,8 +16037,8 @@ TryNext:
 
 		Dim STT As TimeSpan = TimeSpan.FromSeconds(ssh.StrokeTimeTotal)
 
-        'LBLStrokeTimeTotal.Text = String.Format("{0:000} D {1:00} H {2:00} M {3:00} S", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
-        FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{0:0000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
+        'LBLStrokeTimeTotal.Text = String.Format("{0000} D {1:00} H {2:00} M {3:00} S", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
+        FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{00000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
 
 
 	End Sub
@@ -16074,7 +16099,7 @@ RestartFunction:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             TnASlides.Stop()
 			Log.WriteError(ex.Message & vbCrLf & "TnA Slideshow will stop.", ex, "Exception in TnASlides.Tick occured")
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Exception in TnASlides.Tick occured</font>", False)
+			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR " & ex.Message & " : Exception in TnASlides.Tick occured</font>", False)
 		End Try
 	End Sub
 
@@ -16234,7 +16259,7 @@ RestartFunction:
 
 		If ssh.DomTypeCheck = True Or DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped Or DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused Then Return
 
-        'Debug.Print("New movie loaded: " & DomWMP.URL.ToString)
+        'Debug.Print("New movie loaded " & DomWMP.URL.ToString)
 
         ssh.VidFile = Path.GetFileName(DomWMP.URL.ToString)
 
@@ -16257,7 +16282,7 @@ RestartFunction:
 				For i As Integer = 0 To SubList.Count - 1
 					SubCheck = SubList(i).Split("]")
 					SubCheck(0) = SubCheck(0).Replace("[", "")
-					Dim SubCheck2 As String() = SubCheck(0).Split(":")
+					Dim SubCheck2 As String() = SubCheck(0).Split("")
 
 					PlayPos = SubCheck2(0) * 3600
 					PlayPos += SubCheck2(1) * 60
@@ -16489,9 +16514,9 @@ RestartFunction:
 				If VTList.Count < 1 Then Return
 				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+				Log.WriteError("Tease AI did Not return a valid Video Taunt from file " &
 					  VTDir, ex, "VideoTaunTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file: " & VTDir
+				ssh.DomTask = "ERROR Tease AI did Not return a valid Video Taunt from file:  " & VTDir
 			End Try
 
 			TypingDelayGeneric()
@@ -16563,9 +16588,9 @@ RestartFunction:
 				If VTList.Count < 1 Then Return
 				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+				Log.WriteError("Tease AI did Not return a valid Video Taunt from file " &
 							   VTDir, ex, "RLGLTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file: " & VTDir
+				ssh.DomTask = "ERROR Tease AI did Not return a valid Video Taunt from file:  " & VTDir
 			End Try
 			TypingDelayGeneric()
 
@@ -16616,9 +16641,9 @@ RestartFunction:
 				If VTList.Count < 1 Then Return
 				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+				Log.WriteError("Tease AI did Not return a valid Video Taunt from file " &
 							   VTDir, ex, "AvoidTheEdgeTaunts.Tick")
-				ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file: " & VTDir
+				ssh.DomTask = "ERROR Tease AI did Not return a valid Video Taunt from file:  " & VTDir
 			End Try
 			TypingDelayGeneric()
 
@@ -16769,7 +16794,7 @@ retry:
 				Else
 					Exit Sub
 				End If
-			Else : Throw New NotImplementedException("Action for this button is not implemented.")
+			Else : Throw New NotImplementedException("Action for this button Is Not implemented.")
 			End If
 
 			If Directory.Exists(BlogPath) = False Then
@@ -16826,21 +16851,21 @@ saveImage:
 			ElseIf tmpTsmi Is PicStripTSMIdislikeImage Then
 				tmpFilePath = pathDislikeList
 			Else
-				Throw New NotImplementedException("This Toolstripmenuitem is not implemented yet")
+				Throw New NotImplementedException("This Toolstripmenuitem Is Not implemented yet")
 			End If
 
 
 			If tmpTsmi.Checked Then
 				' Remove from the given file 
-				lazytext = "remove path from file :" & tmpFilePath
+				lazytext = "remove path from file " & tmpFilePath
 				TxtRemoveLine(tmpFilePath, ssh.ImageLocation)
 				tmpTsmi.Checked = False
 			ElseIf File.Exists(tmpFilePath) Then
-				lazytext = "append path  to file :" & tmpFilePath
+				lazytext = "append path  to file " & tmpFilePath
 				' Append to existing file 
 				My.Computer.FileSystem.WriteAllText(tmpFilePath, Environment.NewLine & ssh.ImageLocation, True)
 			Else
-				lazytext = "add path to new file :" & tmpFilePath
+				lazytext = "add path to New file " & tmpFilePath
 				' create a new file
 				My.Computer.FileSystem.WriteAllText(tmpFilePath, ssh.ImageLocation, True)
 			End If
@@ -16878,7 +16903,7 @@ saveImage:
 	Private Sub PicStripTSMIdommeSlideshowGoToLast_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshowGoToLast.Click
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu Or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -16895,7 +16920,7 @@ saveImage:
 	Private Sub PicStripTSMIdommeSlideshow_GoToFirst_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshow_GoToFirst.Click
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu Or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -16912,7 +16937,7 @@ saveImage:
 	Private Sub PicStripTSMIdommeSlideshowLoadNewSlideshow_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshowLoadNewSlideshow.Click
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu Or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -16938,28 +16963,29 @@ saveImage:
 			If ssh.glitterDommeNumber = 0 Then
 				If FrmSettings.CBRandomDomme.Checked = False Then
 					ssh.SlideshowMain = New ContactData(ContactType.Domme)
-					ssh.replaceHonorific = My.Settings.SubHonorific
+					ssh.tempHonorific = My.Settings.SubHonorific
 				Else
 					ssh.SlideshowMain = New ContactData(ContactType.Random)
-					ssh.replaceHonorific = My.Settings.RandomHonorific
+					ssh.tempHonorific = PoundClean(My.Settings.RandomHonorific)
 				End If
 			ElseIf ssh.glitterDommeNumber = 1 Then
 				ssh.SlideshowMain = New ContactData(ContactType.Contact1)
-				ssh.replaceHonorific = My.Settings.G1Honorific
+				ssh.tempHonorific = My.Settings.G1Honorific
 			ElseIf ssh.glitterDommeNumber = 2 Then
 				ssh.SlideshowMain = New ContactData(ContactType.Contact2)
-				ssh.replaceHonorific = My.Settings.G2Honorific
+				ssh.tempHonorific = My.Settings.G2Honorific
 			ElseIf ssh.glitterDommeNumber = 3 Then
 				ssh.SlideshowMain = New ContactData(ContactType.Contact3)
-				ssh.replaceHonorific = My.Settings.G3Honorific
+				ssh.tempHonorific = My.Settings.G3Honorific
 			ElseIf ssh.glitterDommeNumber = 4 Then
 				ssh.SlideshowMain = New ContactData(ContactType.Random)
-				ssh.replaceHonorific = My.Settings.RandomHonorific
+				ssh.tempHonorific = PoundClean(My.Settings.RandomHonorific)
 			End If
 			ssh.contactToUse = ssh.SlideshowMain
 		End If
 		ssh.SlideshowMain.LoadNew(ssh.newSlideshow)
 		ssh.tempDomName = ssh.SlideshowMain.TypeName
+		ssh.tempDomHonorific = ssh.tempHonorific
 		If ssh.tempDomName <> My.Settings.DomName Then
 			Dim avatarImage As String = checkForImage("/avatar.*", ssh.SlideshowMain.getCurrentBaseFolder(ssh.SlideshowMain.Contact))
 			If avatarImage = "" Then avatarImage = ssh.SlideshowMain.ImageList(ssh.randomizer.Next(0, ssh.SlideshowMain.ImageList().Count - 1))
@@ -17023,7 +17049,7 @@ saveImage:
 	Public Function CompareDates(ByVal CheckDate As Date) As Integer
 
 		Dim result As Integer = DateTime.Compare(FormatDateTime(CheckDate, DateFormat.ShortDate), FormatDateTime(Now, DateFormat.ShortDate))
-		Debug.Print("Compare dates: " & FormatDateTime(CheckDate, DateFormat.ShortDate) & " <-> " & FormatDateTime(Now, DateFormat.ShortDate) & " = " & result)
+		Debug.Print("Compare dates " & FormatDateTime(CheckDate, DateFormat.ShortDate) & " <-> " & FormatDateTime(Now, DateFormat.ShortDate) & " = " & result)
 		Return result
 
 	End Function
@@ -17031,7 +17057,7 @@ saveImage:
 	Public Function CompareDatesWithTime(ByVal CheckDate As Date) As Integer
 
 		Dim result As Integer = DateTime.Compare(FormatDateTime(CheckDate, DateFormat.GeneralDate), FormatDateTime(Now, DateFormat.GeneralDate))
-		Debug.Print("Compare dates: " & FormatDateTime(CheckDate, DateFormat.GeneralDate) & " <-> " & FormatDateTime(Now, DateFormat.GeneralDate) & " = " & result)
+		Debug.Print("Compare dates " & FormatDateTime(CheckDate, DateFormat.GeneralDate) & " <-> " & FormatDateTime(Now, DateFormat.GeneralDate) & " = " & result)
 		Return result
 
 	End Function
@@ -17319,7 +17345,7 @@ restartInstantly:
 			Dim filename As String = SavedSessionDefaultPath
 
 			If ssh.SaidHello = False Then
-				MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!",
+				MessageBox.Show(Me, "Tease AI Is Not currently running a session!", "Error!",
 								MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				Exit Sub
 			End If
@@ -17359,7 +17385,7 @@ restartInstantly:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			MessageBox.Show(Me, "An error occurred and the state did not save correctly!" &
+			MessageBox.Show(Me, "An error occurred And the state did Not save correctly!" &
 							vbCrLf & vbCrLf & ex.Message,
 							"Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 		End Try
@@ -17388,7 +17414,7 @@ restartInstantly:
 				'						Check if default-File exists
 				'===============================================================================
 			ElseIf Not File.Exists(filename) Then
-				MessageBox.Show(Me, Path.GetFileName(SavedSessionDefaultPath) & " could not be found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				MessageBox.Show(Me, Path.GetFileName(SavedSessionDefaultPath) & " could Not be found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				Exit Sub
 			End If
 
@@ -17403,7 +17429,7 @@ restartInstantly:
 			ssh.Load(filename, True)
 			Me.domName.Text = ssh.tempDomName
 			FrmSettings.LBLCurrentDomme.Text = ssh.tempDomName
-			domAvatar.Image = ssh.domAvatarImage
+			If Not IsNothing(ssh.domAvatarImage) Then domAvatar.Image = ssh.domAvatarImage
 			If ssh.SaidHello And My.Settings.LockOrgasmChances Then _
 				FrmSettings.LockOrgasmChances(True)
 
@@ -17411,7 +17437,7 @@ restartInstantly:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			MessageBox.Show(Me, "An error occurred and the state was not loaded correctly!" &
+			MessageBox.Show(Me, "An error occurred And the state was Not loaded correctly!" &
 							vbCrLf & vbCrLf & ex.Message,
 							"Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 		End Try
@@ -17420,7 +17446,7 @@ restartInstantly:
 	Private Sub ResetSessionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ResetSessionToolStripMenuItem.Click
 
 		If ssh.SaidHello = False Then
-			MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			MessageBox.Show(Me, "Tease AI Is Not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
 
@@ -17568,7 +17594,7 @@ restartInstantly:
 				MessageBox.Show(Me, "You have already purchased " & ssh.tempDomName & "'s Wishlist item for today!" & Environment.NewLine & Environment.NewLine &
 								"Please check back again tomorrow!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
 				Return
-			End If
+						End If
 
 
 
@@ -17576,7 +17602,7 @@ restartInstantly:
 
 
 
-			If CompareDates(My.Settings.WishlistDate) <> 0 Then
+						If CompareDates(My.Settings.WishlistDate) <> 0 Then
 
 
 				Dim WishList As New List(Of String)
@@ -20645,6 +20671,16 @@ playLoop:
 	End Sub
 
 	Public Sub setStartName()
+		Try
+			ssh.SlideshowMain = New ContactData(ContactType.Domme)
+			ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
+			ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
+			ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
+			ssh.SlideshowContactRandom = New ContactData(ContactType.Random)
+		Catch ex As Exception
+		End Try
+		If ssh.currentlyPresentContacts.Count = 0 Then ssh.currentlyPresentContacts.Add(ssh.SlideshowMain.TypeName)
+
 		If File.Exists(My.Settings.DomAvatarSave) Then domAvatar.Image = Image.FromFile(My.Settings.DomAvatarSave)
 		customVocabLines = New List(Of String)
 		ssh.contactToUse = ssh.SlideshowMain
@@ -20652,7 +20688,7 @@ playLoop:
 			ssh.tempDomName = My.Settings.DomName
 			domName.Text = ssh.tempDomName
 			ssh.tempHonorific = My.Settings.SubHonorific
-			ssh.replaceHonorific = ssh.tempHonorific
+			ssh.tempDomHonorific = ssh.tempHonorific
 			ssh.shortName = My.Settings.GlitterSN
 		End If
 		If My.Settings.SubName <> "" Then subName.Text = My.Settings.SubName
@@ -20680,34 +20716,34 @@ playLoop:
 
 		ssh.contactToUse = ssh.SlideshowMain
 		ssh.tempDomName = ssh.SlideshowMain.TypeName
-		ssh.tempHonorific = ssh.SlideshowMain.TypeHonorific
+		ssh.tempHonorific = ssh.tempDomHonorific
 		If stringToCheck.Contains("@Contact1") Then
-			ssh.tempDomName = My.Settings.Glitter1
-			ssh.tempHonorific = My.Settings.G1Honorific
+			ssh.tempDomName = ssh.SlideshowContact1.TypeName
+			ssh.tempHonorific = ssh.SlideshowContact1.TypeHonorific
 			ssh.contactToUse = ssh.SlideshowContact1
 		ElseIf stringToCheck.Contains("@Contact2") Then
-			ssh.tempDomName = My.Settings.Glitter2
-			ssh.tempHonorific = My.Settings.G2Honorific
+			ssh.tempDomName = ssh.SlideshowContact2.TypeName
+			ssh.tempHonorific = ssh.SlideshowContact2.TypeHonorific
 			ssh.contactToUse = ssh.SlideshowContact2
 		ElseIf stringToCheck.Contains("@Contact3") Then
-			ssh.tempDomName = My.Settings.Glitter3
-			ssh.tempHonorific = My.Settings.G3Honorific
+			ssh.tempDomName = ssh.SlideshowContact3.TypeName
+			ssh.tempHonorific = ssh.SlideshowContact3.TypeHonorific
 			ssh.contactToUse = ssh.SlideshowContact3
 		ElseIf stringToCheck.Contains("@RandomContact") Then
 			Dim casual As Integer = 0
 			casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
 			Select Case ssh.currentlyPresentContacts(casual)
 				Case ssh.SlideshowContact1.TypeName
-					ssh.tempDomName = My.Settings.Glitter1
-					ssh.tempHonorific = My.Settings.G1Honorific
+					ssh.tempDomName = ssh.SlideshowContact1.TypeName
+					ssh.tempHonorific = ssh.SlideshowContact1.TypeHonorific
 					ssh.contactToUse = ssh.SlideshowContact1
 				Case ssh.SlideshowContact2.TypeName
-					ssh.tempDomName = My.Settings.Glitter2
-					ssh.tempHonorific = My.Settings.G2Honorific
+					ssh.tempDomName = ssh.SlideshowContact2.TypeName
+					ssh.tempHonorific = ssh.SlideshowContact2.TypeHonorific
 					ssh.contactToUse = ssh.SlideshowContact2
 				Case ssh.SlideshowContact3.TypeName
-					ssh.tempDomName = My.Settings.Glitter3
-					ssh.tempHonorific = My.Settings.G3Honorific
+					ssh.tempDomName = ssh.SlideshowContact3.TypeName
+					ssh.tempHonorific = ssh.SlideshowContact3.TypeHonorific
 					ssh.contactToUse = ssh.SlideshowContact3
 				Case Else
 			End Select
@@ -20852,7 +20888,9 @@ ExternalVideo:
 	End Sub
 
 	'return -1 if word to check was not present, 0 if something in the honorific is wrong, 1 if all is ok
-	Private Function checkSubAnswer(Optional caseToCheck As String = "") As Integer
+	'we don't reduce errors number when doing the checks for what the sub writes in chat (so we reduce them only when asked a direct question)
+	'otherwise it will be nearly impossible to be punished since each phrase not using it would reduce the count
+	Private Function checkSubAnswer(Optional caseToCheck As String = "", Optional reduceErrors As Boolean = True) As Integer
 		ssh.DomChat = ""
 		If Not IsNothing(ssh.contactToUse) Then
 			If ssh.contactToUse.Equals(ssh.SlideshowContact1) Then
@@ -20867,6 +20905,7 @@ ExternalVideo:
 		Dim checkForHonorific As Boolean = True
 		Dim splitChat As String()
 		splitChat = ssh.obtainSplitParts(ssh.ChatString, True)
+
 
 		'checkanswers is a new class which stores all the saved settings for hi,yes,no,sorry words that the used has chosen
 		'if we don't have a specific word to check for, we check for them all (this is used anytime the sub write anything)
@@ -20911,6 +20950,7 @@ ExternalVideo:
 										ssh.nameErrors += 1
 										ssh.wrongAttempt = True
 									End If
+									ssh.JustShowedBlogImage = True
 									TypingDelay()
 									Return 0
 								End If
@@ -20921,15 +20961,19 @@ ExternalVideo:
 										ssh.DomChat += "#SYS_CapitalizeHonorific"
 										ssh.nameErrors += 1
 										ssh.wrongAttempt = True
+										ssh.JustShowedBlogImage = True
 										TypingDelay()
 										Return 0
 									End If
+									'we only reduce the errors if we were responding a question, not everytime we write...the sub need to remember to use the honorific :D
+									If reduceErrors Then
+										If ssh.wrongAttempt Then
+											ssh.wrongAttempt = False
+										Else
+											If (ssh.nameErrors > 0) Then ssh.nameErrors -= 1
+										End If
+									End If
 								End If
-							End If
-							If ssh.wrongAttempt Then
-								ssh.wrongAttempt = False
-							Else
-								If (ssh.nameErrors > 0) Then ssh.nameErrors -= 1
 							End If
 						End If
 						Return 1
