@@ -6,6 +6,13 @@
 		'store if the user was in yesorno mode when callreturn was called
 		Dim yesOrNostate As Boolean
 
+		'store wheter we are currently running a module or we are in a stroking cycle
+		Dim showingModule As Boolean
+
+		'store the isLink status (useful for the "safenet" that will allow to start the stroke cycle even if the script doesn't contain a @StartStroking/Taunt
+		'when it reaches the end of a link/beforeScript)
+		Dim isALink As Boolean
+
 		'store all the modes variables so we can reset them on coming back
 		Dim edgeMode, ruinMode, cameMode, yesMode, noMode As New Mode()
 		Dim customModes As New Dictionary(Of String, Mode)
@@ -19,6 +26,8 @@
 			yesMode = session.yesMode
 			noMode = session.noMode
 			customModes = session.Modes
+			showingModule = session.ShowModule
+			isALink = session.isLink
 		End Sub
         Sub resumeState()
             Session.StrokeTauntVal = Line
@@ -33,6 +42,8 @@
 			Session.yesMode = yesMode
 			Session.noMode = noMode
 			Session.Modes = customModes
+			Session.ShowModule = showingModule
+			Session.isLink = isALink
 		End Sub
     End Class
 End Class

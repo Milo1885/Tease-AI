@@ -3928,7 +3928,7 @@ ReturnCalled:
 				Debug.Print("End Check StrokeTauntVal = " & ssh.StrokeTauntVal)
 
 				'end the scripts anyway if it reaches the last line, even if the user forgot to use the @End command
-				If lines(ssh.StrokeTauntVal) = "@End" Or ssh.StrokeTauntVal >= lines.Count Then
+				If ssh.StrokeTauntVal >= lines.Count Or lines(ssh.StrokeTauntVal) = "@End" Then
 					If ssh.ShowModule = True Then ssh.ModuleEnd = True
 					'if we reached the end of the script and we are in a link or in the beforeTease, and we forget to use the @StartStroking/Taunt
 					'it will automatically do it to avoid session errors
@@ -4032,7 +4032,7 @@ ModuleEnd:
 				Return
 			End If
 
-			If lines(line) = "@End" Then
+			If lines(line) = "@End" Or ssh.StrokeTauntVal > lines.Count Then
 
 NonModuleEnd:
 
@@ -8389,6 +8389,21 @@ RinseLatherRepeat:
 			StringClean = StringClean.Replace("@NewDommeSlideshow", "")
 		End If
 
+		If StringClean.Contains("@NewContact1Slideshow") Then
+			If ssh.contact1Present Then ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
+			StringClean = StringClean.Replace("@NewContact1Slideshow", "")
+		End If
+
+		If StringClean.Contains("@NewContact2Slideshow") Then
+			If ssh.contact2Present Then ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
+			StringClean = StringClean.Replace("@NewContact2Slideshow", "")
+		End If
+
+		If StringClean.Contains("@NewContact3Slideshow") Then
+			If ssh.contact3Present Then ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
+			StringClean = StringClean.Replace("@NewContact3Slideshow", "")
+		End If
+
 		If StringClean.Contains("@DomTag(") Then
 			Dim TagFlag As String = GetParentheses(StringClean, "@DomTag(")
 			' Try to get a Domme Image for the given Tags.
@@ -10663,10 +10678,10 @@ OrgasmDecided:
 
 				'determines how many secs are given for writing each line, depending on line length and typespeed value selected by the user in the settings
 				'(between 0,54 and 0,75 secs per character in the sentence at slowest typingspeed and between 0.18 and 0.25 at fastest typing speed)
-				secs = (ssh.randomizer.Next(15, 25) / My.Settings.TypeSpeed) * LBLWritingTaskText.Text.Length
+				secs = (ssh.randomizer.Next(15, 25) / My.Settings.TypeSpeed) * (LBLWritingTaskText.Text.Length - 3)
 				'determines how much time is given (in seconds) to complete the @WritingTask() depending on how many lines you have to write and a small bonus to give some
 				'more time for very short lines
-				ssh.WritingTaskCurrentTime = 5 + secs * ssh.WritingTaskLinesAmount
+				ssh.WritingTaskCurrentTime = 15 + secs * ssh.WritingTaskLinesAmount
 
 				LBLWritingTask.Text = "Write the following line " & ssh.WritingTaskLinesAmount & " times" & vbCrLf & "In " & ConvertSeconds(ssh.WritingTaskCurrentTime)
 				LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
@@ -10827,6 +10842,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@InterruptLongEdge") Then
 			ssh.isLink = False
+			ssh.BeforeTease = False
 			Dim EdgeList As New List(Of String)
 
 			For Each EdgeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Long Edge\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
@@ -10867,6 +10883,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@InterruptStartStroking") Then
 			ssh.isLink = False
+			ssh.BeforeTease = False
 			If ssh.CensorshipGame = True Or ssh.AvoidTheEdgeGame = True Or ssh.RLGLGame = True Then
 				StringClean = "Ask me later"
 				GoTo VTSkip
@@ -10916,6 +10933,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@Interrupt(") Then
 			ssh.isLink = False
+			ssh.BeforeTease = False
 			Dim InterruptClean As String = StringClean
 			Dim StartIndex As Integer = InterruptClean.IndexOf("@Interrupt(") + 11
 			For i As Integer = 1 To StartIndex
@@ -11327,20 +11345,9 @@ OrgasmDecided:
 			' Github Patch Dim AudioClean As String = Application.StartupPath & "\Video\" & AudioFlag
 			Dim AudioClean As String
 
-			If AudioFlag.Contains(":\") And Not AudioFlag.Contains("*") Then
+			If AudioFlag.Contains(":\") Then
 				AudioClean = AudioFlag
-
-				If File.Exists(AudioClean) Then
-					DomWMP.URL = AudioClean
-				Else
-					MessageBox.Show(Me, Path.GetFileName(AudioClean) & " was not found in " & Path.GetDirectoryName(AudioClean) & "!" & Environment.NewLine & Environment.NewLine &
-					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-				End If
-
-				GoTo ExternalAudio
-
 			Else
-
 				AudioClean = Application.StartupPath & "\Audio\" & AudioFlag
 				AudioClean = AudioClean.Replace("\\", "\")
 			End If
@@ -11791,6 +11798,7 @@ ExternalAudio:
 				ssh.AddContactTick = 2
 				Contact1Timer.Start()
 			End If
+			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
 			StringClean = StringClean.Replace("@AddContact1", "")
 		End If
 
@@ -11812,6 +11820,7 @@ ExternalAudio:
 				ssh.AddContactTick = 2
 				Contact2Timer.Start()
 			End If
+			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
 			StringClean = StringClean.Replace("@AddContact2", "")
 		End If
 
@@ -11833,6 +11842,7 @@ ExternalAudio:
 				ssh.AddContactTick = 2
 				Contact3Timer.Start()
 			End If
+			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
 			StringClean = StringClean.Replace("@AddContact3", "")
 		End If
 
@@ -12119,11 +12129,16 @@ VTSkip:
 
 
 		If StringClean.Contains("@CallReturn(") Then
+			Dim CheckFlag As String = GetParentheses(StringClean, "@CallReturn(")
+			Dim CallReplace As String = CheckFlag
+
+			If (CheckFlag.StartsWith("/") Or CheckFlag.StartsWith("\")) And Not (CheckFlag.StartsWith("//") Or CheckFlag.StartsWith("\\")) Then CheckFlag = CheckFlag.Remove(0, 1)
+			CheckFlag = CheckFlag.Replace("/", "\")
+
 			GetSubState()
 			ssh.CallReturns.Push(New SessionState.StackedCallReturn(ssh))
 			ssh.YesOrNo = False
 			GotoClear()
-
 			StrokeTimer.Stop()
 			StrokeTauntTimer.Stop()
 			CensorshipTimer.Stop()
@@ -12152,9 +12167,6 @@ VTSkip:
 				ssh.SubEdging = False
 				ssh.SubHoldingEdge = False
 			End If
-
-			Dim CheckFlag As String = GetParentheses(StringClean, "@CallReturn(")
-			Dim CallReplace As String = CheckFlag
 
 			If CheckFlag.Contains("*") Then
 				Dim checkArray() As String = CheckFlag.Split("*")
@@ -12198,7 +12210,8 @@ VTSkip:
 			End If
 			ssh.ScriptTick = 2
 			ScriptTimer.Start()
-
+			ssh.ShowModule = True
+			ssh.isLink = False
 			StringClean = StringClean.Replace("@CallReturn(" & CallReplace & ")", "")
 
 		End If
@@ -12206,6 +12219,9 @@ VTSkip:
 		If StringClean.Contains("@Call(") Then
 
 			Dim CheckFlag As String = GetParentheses(StringClean, "@Call(")
+			If (CheckFlag.StartsWith("/") Or CheckFlag.StartsWith("\")) And Not (CheckFlag.StartsWith("//") Or CheckFlag.StartsWith("\\")) Then CheckFlag = CheckFlag.Remove(0, 1)
+			CheckFlag = CheckFlag.Replace("/", "\")
+
 			Dim CallReplace As String = CheckFlag
 
 			ssh.MultiTauntPictureHold = False
@@ -12227,15 +12243,20 @@ VTSkip:
 				ssh.StrokeTauntVal = -1
 
 			End If
-
+			ssh.ShowModule = True
+			ssh.isLink = False
+			ssh.ScriptTick = 2
+			ScriptTimer.Start()
 			StringClean = StringClean.Replace("@Call(" & CallReplace & ")", "")
-
 		End If
 
 
 		If StringClean.Contains("@CallRandom(") Then
 
 			Dim CheckFlag As String = GetParentheses(StringClean, "@CallRandom(")
+			If (CheckFlag.StartsWith("/") Or CheckFlag.StartsWith("\")) And Not (CheckFlag.StartsWith("//") Or CheckFlag.StartsWith("\\")) Then CheckFlag = CheckFlag.Remove(0, 1)
+			CheckFlag = CheckFlag.Replace("/", "\")
+
 			Dim CallReplace As String = CheckFlag
 
 			If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag) Then
@@ -12257,6 +12278,10 @@ VTSkip:
 					ssh.StrokeTauntVal = -1
 				End If
 			End If
+			ssh.ShowModule = True
+			ssh.isLink = False
+			ssh.ScriptTick = 2
+			ScriptTimer.Start()
 			StringClean = StringClean.Replace("@CallRandom(" & CallReplace & ")", "")
 		End If
 
@@ -14949,6 +14974,7 @@ NoPlaylistModuleFile:
 		ssh.StrokeTauntVal = -1
 		If ssh.MultiTauntPictureHold Then ssh.MultiTauntPictureHold = False
 		ssh.isLink = True
+		ssh.ShowModule = True
 		Debug.Print("RunLinkScript() Called")
 		ssh.FirstRound = False
 		ClearModes()
@@ -17490,7 +17516,7 @@ restartInstantly:
 			If Not IsNothing(ssh.domAvatarImage) Then domAvatar.Image = ssh.domAvatarImage
 			If ssh.SaidHello And My.Settings.LockOrgasmChances Then _
 				FrmSettings.LockOrgasmChances(True)
-
+			ScriptTimer.Start()
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
@@ -20670,18 +20696,26 @@ playLoop:
 						'DomTask = "Get back to stroking @StartStroking"
 						ssh.DomTask = "#Return_Stroking"
 					End If
+					If Not ssh.ShowModule Then
+						StrokeTimer.Start()
+						StrokeTauntTimer.Start()
+					End If
 				Else
 					ssh.DomTask = "@NullResponse"
+					ScriptTimer.Start()
+					ssh.ScriptTick = 2
 				End If
 				TypingDelayGeneric()
-				If Not ssh.ShowModule Then
-					StrokeTimer.Start()
-					StrokeTauntTimer.Start()
-				End If
 			Else
-				If Not ssh.ShowModule Then
-					StrokeTimer.Start()
-					StrokeTauntTimer.Start()
+				If ssh.CallReturns.Count() = 0 Then
+					If Not ssh.ShowModule Then
+						StrokeTimer.Start()
+						StrokeTauntTimer.Start()
+					End If
+				Else
+					ssh.DomTask = "@NullResponse"
+					ssh.ScriptTick = 2
+					ScriptTimer.Start()
 				End If
 			End If
 		ElseIf ssh.ReturnSubState = "Edging" Then
@@ -20718,7 +20752,6 @@ playLoop:
 			ssh.DomTypeCheck = True
 			ssh.ScriptTick = 2
 			ScriptTimer.Start()
-			ssh.ShowModule = True
 			If ssh.YesOrNo Then
 				ssh.DomTask = "#SYS_ReturnAnswer"
 			Else
@@ -20837,37 +20870,6 @@ playLoop:
 
 		If StringClean.Contains(":\") Then
 			VideoClean = StringClean
-
-			If File.Exists(VideoClean) Then
-				DomWMP.URL = VideoClean
-				DomWMP.Visible = True
-				mainPictureBox.Visible = False
-				ssh.TeaseVideo = True
-
-				If ssh.JumpVideo = True Then
-
-					Do
-						Application.DoEvents()
-					Loop Until (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying)
-
-					Dim VideoLength As Integer = DomWMP.currentMedia.duration
-					Dim VidLow As Integer = VideoLength * 0.4
-					Dim VidHigh As Integer = VideoLength * 0.9
-					Dim VidPoint As Integer = ssh.randomizer.Next(VidLow, VidHigh)
-
-					DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
-
-				End If
-
-				ssh.JumpVideo = False
-
-			Else
-				MessageBox.Show(Me, Path.GetFileName(VideoClean) & " was not found in " & Path.GetDirectoryName(VideoClean) & "!" & Environment.NewLine & Environment.NewLine &
-					"Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			End If
-
-			GoTo ExternalVideo
-
 		Else
 			VideoClean = Application.StartupPath & "\Video\" & StringClean
 			VideoClean = VideoClean.Replace("\\", "\")
@@ -21045,7 +21047,7 @@ ExternalVideo:
 	Private Function checkForImage(ImageToShow As String, Optional imageDir As String = "") As String
 		Dim tmpImgLoc As String = ""
 		Dim throwException As Boolean = False
-		If imageDir = "" Then
+		If imageDir = "" And Not (ImageToShow.Contains(":\") Or ImageToShow.Contains(":/")) Then
 			imageDir = Application.StartupPath & "\Images\"
 			throwException = True
 		End If

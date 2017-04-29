@@ -31,6 +31,7 @@ Partial Class FrmSettings
 		Me.GroupBox3 = New System.Windows.Forms.GroupBox()
 		Me.BTNValidateSystemFiles = New System.Windows.Forms.Button()
 		Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+		Me.Label170 = New System.Windows.Forms.Label()
 		Me.RandomHonorific = New System.Windows.Forms.TextBox()
 		Me.TbxRandomImageDir = New System.Windows.Forms.TextBox()
 		Me.CBRandomDomme = New System.Windows.Forms.CheckBox()
@@ -1142,7 +1143,8 @@ Partial Class FrmSettings
 		Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 		Me.TextBox2 = New System.Windows.Forms.TextBox()
 		Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
-		Me.Label170 = New System.Windows.Forms.Label()
+		Me.GroupBox14 = New System.Windows.Forms.GroupBox()
+		Me.alwaysNewSlideshow = New System.Windows.Forms.CheckBox()
 		Me.SettingsPanel.SuspendLayout()
 		Me.SettingsTabs.SuspendLayout()
 		Me.TabPage1.SuspendLayout()
@@ -1408,6 +1410,7 @@ Partial Class FrmSettings
 		Me.GroupBox65.SuspendLayout()
 		CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).BeginInit()
+		Me.GroupBox14.SuspendLayout()
 		Me.SuspendLayout()
 		'
 		'SettingsPanel
@@ -1511,6 +1514,15 @@ Partial Class FrmSettings
 		Me.GroupBox2.TabIndex = 183
 		Me.GroupBox2.TabStop = False
 		Me.GroupBox2.Text = "Random Domme"
+		'
+		'Label170
+		'
+		Me.Label170.Location = New System.Drawing.Point(7, 95)
+		Me.Label170.Name = "Label170"
+		Me.Label170.Size = New System.Drawing.Size(59, 18)
+		Me.Label170.TabIndex = 28
+		Me.Label170.Text = "Honorific"
+		Me.Label170.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
 		'
 		'RandomHonorific
 		'
@@ -9727,6 +9739,7 @@ Partial Class FrmSettings
 		'PNLGlitter
 		'
 		Me.PNLGlitter.BackColor = System.Drawing.Color.LightGray
+		Me.PNLGlitter.Controls.Add(Me.GroupBox14)
 		Me.PNLGlitter.Controls.Add(Me.GroupBox4)
 		Me.PNLGlitter.Controls.Add(Me.Button15)
 		Me.PNLGlitter.Controls.Add(Me.Button16)
@@ -15205,14 +15218,30 @@ Partial Class FrmSettings
 		Me.BWURLFiles.WorkerReportsProgress = True
 		Me.BWURLFiles.WorkerSupportsCancellation = True
 		'
-		'Label170
+		'GroupBox14
 		'
-		Me.Label170.Location = New System.Drawing.Point(7, 95)
-		Me.Label170.Name = "Label170"
-		Me.Label170.Size = New System.Drawing.Size(59, 18)
-		Me.Label170.TabIndex = 28
-		Me.Label170.Text = "Honorific"
-		Me.Label170.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+		Me.GroupBox14.BackColor = System.Drawing.Color.LightGray
+		Me.GroupBox14.Controls.Add(Me.alwaysNewSlideshow)
+		Me.GroupBox14.Location = New System.Drawing.Point(364, 315)
+		Me.GroupBox14.Name = "GroupBox14"
+		Me.GroupBox14.Size = New System.Drawing.Size(297, 77)
+		Me.GroupBox14.TabIndex = 182
+		Me.GroupBox14.TabStop = False
+		Me.GroupBox14.Text = "General Contact Settings"
+		'
+		'alwaysNewSlideshow
+		'
+		Me.alwaysNewSlideshow.AutoSize = True
+		Me.alwaysNewSlideshow.Checked = Global.Tease_AI.My.MySettings.Default.CBGlitter3
+		Me.alwaysNewSlideshow.CheckState = System.Windows.Forms.CheckState.Checked
+		Me.alwaysNewSlideshow.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Tease_AI.My.MySettings.Default, "CBGlitter3", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+		Me.alwaysNewSlideshow.ForeColor = System.Drawing.Color.Black
+		Me.alwaysNewSlideshow.Location = New System.Drawing.Point(6, 33)
+		Me.alwaysNewSlideshow.Name = "alwaysNewSlideshow"
+		Me.alwaysNewSlideshow.Size = New System.Drawing.Size(281, 17)
+		Me.alwaysNewSlideshow.TabIndex = 151
+		Me.alwaysNewSlideshow.Text = "Always load new slideshow when using @AddContact"
+		Me.alwaysNewSlideshow.UseVisualStyleBackColor = True
 		'
 		'FrmSettings
 		'
@@ -15573,6 +15602,8 @@ Partial Class FrmSettings
 		Me.GroupBox65.PerformLayout()
 		CType(Me.TrackBar1, System.ComponentModel.ISupportInitialize).EndInit()
 		CType(Me.TrackBar2, System.ComponentModel.ISupportInitialize).EndInit()
+		Me.GroupBox14.ResumeLayout(False)
+		Me.GroupBox14.PerformLayout()
 		Me.ResumeLayout(False)
 
 	End Sub
@@ -16695,4 +16726,6 @@ Partial Class FrmSettings
 	Friend WithEvents Label168 As Label
 	Friend WithEvents Label169 As Label
 	Friend WithEvents Label170 As Label
+	Friend WithEvents GroupBox14 As GroupBox
+	Friend WithEvents alwaysNewSlideshow As CheckBox
 End Class

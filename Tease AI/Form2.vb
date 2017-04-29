@@ -414,6 +414,7 @@ Public Class FrmSettings
 		CFNMCheckBox.Checked = My.Settings.DomCFNM
 		CBRandomDomme.Checked = My.Settings.CBRandomDomme
 		CBOutputErrors.Checked = My.Settings.CBOutputErrors
+		alwaysNewSlideshow.Checked = My.Settings.AlwaysNewSlideshow
 		giveupCheckBox.Checked = My.Settings.GiveUpReturn
 		If CBAuditStartup.Checked = True Then AuditScripts()
 
@@ -10358,6 +10359,10 @@ checkFolder:
 		My.Settings.CBOutputErrors = CBOutputErrors.Checked
 	End Sub
 
+	Private Sub alwaysNewSlideshow_CheckedChanged(sender As Object, e As EventArgs) Handles alwaysNewSlideshow.CheckedChanged
+		My.Settings.AlwaysNewSlideshow = alwaysNewSlideshow.Checked
+	End Sub
+
 	Private Sub BTNURLFileReplace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNURLFileReplace.Click
 
 		If TBURLFileReplace.Text = "" Or TBURLFileWith.Text = "" Then
@@ -10468,4 +10473,5 @@ checkFolder:
 
 
 	End Sub
+
 End Class
