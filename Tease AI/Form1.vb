@@ -8174,52 +8174,54 @@ StatusUpdateEnd:
 			If StringClean.Contains("@CustomMode(") Then
 				controlCustom = GetParentheses(StringClean, "@CustomMode(")
 			End If
-			' Try to get content from file.
+			' Try to get content from file but avoid changing twice the same vocab if it is present in more than one istance in the regex
+			Dim lastKey As String = "emptyString"
 			For Each keyword As Match In mc
+				If Not lastKey.Equals(keyword.ToString) Then
 #If TRACE Then
-				If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", keyword.Value))
+					If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", keyword.Value))
 #End If
 
-				Dim filepath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & keyword.Value & ".txt"
+					Dim filepath As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\" & keyword.Value & ".txt"
 
-				If Directory.Exists(Path.GetDirectoryName(filepath)) AndAlso File.Exists(filepath) Then
-					Dim lines As List(Of String) = Txt2List(filepath)
+					If Directory.Exists(Path.GetDirectoryName(filepath)) AndAlso File.Exists(filepath) Then
+						Dim lines As List(Of String) = Txt2List(filepath)
 
 
-					lines = FilterList(lines)
-					If controlCustom.Contains(keyword.ToString) Then customVocabLines = lines
-					If lines.Count > 0 Then
+						lines = FilterList(lines)
+						If controlCustom.Contains(keyword.ToString) Then customVocabLines = lines
+						If lines.Count > 0 Then
 
-						Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
+							Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
 
-						StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
+							StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
+
+						Else
+							If My.Settings.CBOutputErrors = True Then
+								StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
+							Else
+								StringClean = StringClean.Replace(keyword.Value, "")
+							End If
+						End If
+						'Try
+						'lines = FilterList(lines)
+						'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
+						'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
+						'Catch ex As Exception
+						'Log.WriteError("Error Processing vocabulary file:  " & filepath, ex,
+						' "Tease AI did not return a valid line while parsing vocabulary file.")
+						'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
+						'End Try
 
 					Else
-						If My.Settings.CBOutputErrors = True Then
-							StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
-						Else
-							StringClean = StringClean.Replace(keyword.Value, "")
-						End If
+						StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
+
+						Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
+						Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
+
 					End If
-					'Try
-					'lines = FilterList(lines)
-					'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
-					'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
-					'Catch ex As Exception
-					'Log.WriteError("Error Processing vocabulary file:  " & filepath, ex,
-					' "Tease AI did not return a valid line while parsing vocabulary file.")
-					'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
-					'End Try
-
-				Else
-					StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
-
-					Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
-					Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
-
 				End If
-
-
+				lastKey = keyword.ToString
 			Next
 
 #If TRACE Then
@@ -8267,7 +8269,9 @@ StatusUpdateEnd:
 
 
 		If StringClean.Contains("@FollowUp(") And ssh.FollowUp = "" Then
-			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(", StringClean.Split(")").Length - 1)
+			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(", StringClean.Split(")").Count - 1)
+			'if there is a leftover ) (might happen in very complex followUp) we remove it
+			If ssh.FollowUp.EndsWith(")") Then ssh.FollowUp = ssh.FollowUp.Remove(ssh.FollowUp.Length - 1, 1)
 			StringClean = StringClean.Replace("@FollowUp(" & ssh.FollowUp & ")", "")
 		End If
 
@@ -8290,7 +8294,9 @@ StatusUpdateEnd:
 			ssh.TempVal = ssh.randomizer.Next(1, 101)
 
 			Dim FollowLineTemp As String
-			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(", StringClean.Split(")").Length - 1)
+			FollowLineTemp = GetParentheses(StringClean, "@FollowUp" & FollowTemp & "(", StringClean.Split(")").Count - 1)
+			'if there is a leftover ) (might happen in very complex followUp) we remove it
+			If FollowLineTemp.EndsWith(")") Then FollowLineTemp = FollowLineTemp.Remove(FollowLineTemp.Length - 1, 1)
 
 			If ssh.TempVal <= FollowVal Then ssh.FollowUp = FollowLineTemp
 
