@@ -4027,7 +4027,7 @@ ModuleEnd:
 
 			Debug.Print("CHeck")
 
-			If GetFilter(lines(line), True) = False Then
+			If GetFilter(lines(line)) = False Then
 				RunFileText()
 				Return
 			End If
@@ -4809,6 +4809,7 @@ NullResponse:
 					ssh.DomTask = ssh.DomTask.Replace("#Null", "")
 					ssh.DomTask = PoundClean(ssh.DomTask)
 					If ssh.DomTask.Contains("@EmoteMessage") Then ssh.EmoMes = True
+					If ssh.DomTask.Contains("@SystemMessage") Then ssh.SysMes = True
 					ssh.DomTask = CommandClean(ssh.DomTask)
 					ssh.DomTask = StripCommands(ssh.DomTask)
 					ssh.DomTask = ssh.DomTask.Replace("#Null", "")
@@ -8267,7 +8268,6 @@ StatusUpdateEnd:
 			GoTo TaskCleanSet
 		End If
 
-
 		If StringClean.Contains("@FollowUp(") And ssh.FollowUp = "" Then
 			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(", StringClean.Split(")").Count - 1)
 			'if there is a leftover ) (might happen in very complex followUp) we remove it
@@ -8301,6 +8301,87 @@ StatusUpdateEnd:
 			If ssh.TempVal <= FollowVal Then ssh.FollowUp = FollowLineTemp
 
 			StringClean = StringClean.Replace("@FollowUp" & FollowTemp & "(" & FollowLineTemp & ")", "")
+
+		End If
+		' The @If[] Command allows you to compare Variables and go to a specific line if the statement is true. The correct format is @If[VarName]>[varName2]Then(Goto Line)
+		' For example, If[StrokeTotal]>[1000]Then(Thousand Strokes) would check if the Variable "StrokeTotal" is greater than 1000, and go to (Thousand Strokes) if so. 
+		' The @If[] Command can compare any combination of Variables and numeric values with = (or ==), <>, >, <, >= and <= . String Variables can be compared with = (or ==) and <> 
+		' More than one @If[] Command can be used per line. Tease AI will move to the line specified by whichever true statement happened last in the line.
+
+		If StringClean.Contains("@If[") Then
+
+			Do
+
+				Dim SCIfVar As String() = Split(StringClean)
+				Dim SCGotVar As String = "Null"
+
+				For i As Integer = 0 To SCIfVar.Length - 1
+					If SCIfVar(i).Contains("@If[") Then
+						Dim IFJoin As Integer = 0
+						If Not SCIfVar(i).Contains(")") Then
+							Do
+								IFJoin += 1
+								SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
+								SCIfVar(i + IFJoin) = ""
+							Loop Until SCIfVar(i).Contains(")")
+						End If
+						SCGotVar = SCIfVar(i)
+						SCIfVar(i) = ""
+						StringClean = Join(SCIfVar)
+						Do
+							StringClean = StringClean.Replace("  ", " ")
+						Loop Until Not StringClean.Contains("  ")
+						Exit For
+					End If
+				Next
+
+				If SCGotVar.Contains("]And[") Then
+
+					Dim AndCheck As Boolean = True
+
+					For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
+						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = False Then
+							AndCheck = False
+							Exit For
+						End If
+						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]And", "")
+					Next
+
+					If AndCheck = True Then
+						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+						ssh.SkipGotoLine = True
+						GetGoto()
+					End If
+
+				ElseIf SCGotVar.Contains("]Or[") Then
+
+					Dim OrCheck As Boolean = False
+
+					For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
+						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+							OrCheck = True
+							Exit For
+						End If
+						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]Or", "")
+					Next
+
+					If OrCheck = True Then
+						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+						ssh.SkipGotoLine = True
+						GetGoto()
+					End If
+
+				Else
+
+					If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+						ssh.SkipGotoLine = True
+						GetGoto()
+					End If
+
+				End If
+
+			Loop Until Not StringClean.Contains("@If")
 
 		End If
 
@@ -9769,88 +9850,6 @@ TaskCleanSet:
 				End If
 
 			Next
-
-		End If
-
-		' The @If[] Command allows you to compare Variables and go to a specific line if the statement is true. The correct format is @If[VarName]>[varName2]Then(Goto Line)
-		' For example, If[StrokeTotal]>[1000]Then(Thousand Strokes) would check if the Variable "StrokeTotal" is greater than 1000, and go to (Thousand Strokes) if so. 
-		' The @If[] Command can compare any combination of Variables and numeric values with = (or ==), <>, >, <, >= and <= . String Variables can be compared with = (or ==) and <> 
-		' More than one @If[] Command can be used per line. Tease AI will move to the line specified by whichever true statement happened last in the line.
-
-		If StringClean.Contains("@If[") Then
-
-			Do
-
-				Dim SCIfVar As String() = Split(StringClean)
-				Dim SCGotVar As String = "Null"
-
-				For i As Integer = 0 To SCIfVar.Length - 1
-					If SCIfVar(i).Contains("@If[") Then
-						Dim IFJoin As Integer = 0
-						If Not SCIfVar(i).Contains(")") Then
-							Do
-								IFJoin += 1
-								SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
-								SCIfVar(i + IFJoin) = ""
-							Loop Until SCIfVar(i).Contains(")")
-						End If
-						SCGotVar = SCIfVar(i)
-						SCIfVar(i) = ""
-						StringClean = Join(SCIfVar)
-						Do
-							StringClean = StringClean.Replace("  ", " ")
-						Loop Until Not StringClean.Contains("  ")
-						Exit For
-					End If
-				Next
-
-				If SCGotVar.Contains("]And[") Then
-
-					Dim AndCheck As Boolean = True
-
-					For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
-						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = False Then
-							AndCheck = False
-							Exit For
-						End If
-						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]And", "")
-					Next
-
-					If AndCheck = True Then
-						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-						ssh.SkipGotoLine = True
-						GetGoto()
-					End If
-
-				ElseIf SCGotVar.Contains("]Or[") Then
-
-					Dim OrCheck As Boolean = False
-
-					For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
-						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
-							OrCheck = True
-							Exit For
-						End If
-						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]Or", "")
-					Next
-
-					If OrCheck = True Then
-						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-						ssh.SkipGotoLine = True
-						GetGoto()
-					End If
-
-				Else
-
-					If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
-						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-						ssh.SkipGotoLine = True
-						GetGoto()
-					End If
-
-				End If
-
-			Loop Until Not StringClean.Contains("@If")
 
 		End If
 
