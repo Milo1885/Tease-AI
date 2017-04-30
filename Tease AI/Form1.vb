@@ -12901,35 +12901,6 @@ VTSkip:
 			StringClean = StringClean.Replace("@CheckStrokingState", "")
 		End If
 
-        'The @SetGroup Command is a defunct Command that was created when implementing new Glitter features. It has no use in the current build of Tease AI.
-
-        If StringClean.Contains("@SetGroup(") Then
-
-			Dim WF As String = UCase(GetParentheses(StringClean, "@SetGroup("))
-
-			If WF.Contains("D") And Not WF.Contains("1") And Not WF.Contains("2") And Not WF.Contains("3") Then ssh.Group = "D"
-			If WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And Not WF.Contains("3") Then ssh.Group = "D1"
-			If WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then ssh.Group = "D12"
-			If WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then ssh.Group = "D13"
-			If WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then ssh.Group = "D23"
-			If WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then ssh.Group = "D123"
-
-			If Not WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And Not WF.Contains("3") Then ssh.Group = "1"
-			If Not WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then ssh.Group = "12"
-			If Not WF.Contains("D") And WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then ssh.Group = "123"
-
-			If WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then ssh.Group = "D2"
-			If Not WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And Not WF.Contains("3") Then ssh.Group = "2"
-			If Not WF.Contains("D") And Not WF.Contains("1") And WF.Contains("2") And WF.Contains("3") Then ssh.Group = "23"
-
-			If WF.Contains("D") And Not WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then ssh.Group = "D3"
-			If Not WF.Contains("D") And Not WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then ssh.Group = "3"
-			If Not WF.Contains("D") And WF.Contains("1") And Not WF.Contains("2") And WF.Contains("3") Then ssh.Group = "13"
-
-			StringClean = StringClean.Replace("@SetGroup(" & WF & ")", "")
-
-		End If
-
 		Debug.Print("Command Clean Complete")
 
 		Return StringClean
@@ -13420,7 +13391,7 @@ VTSkip:
 	Public Function GetLocalImage(ByVal LocTag As String, Optional isDommeTag As Boolean = False) As String
 		Dim fileToCheck As String = Application.StartupPath & "\Images\System\LocalImageTags.txt"
 		If isDommeTag Then
-			fileToCheck = Path.GetDirectoryName(ssh.SlideshowMain.CurrentImage) & Path.DirectorySeparatorChar & "ImageTags.txt"
+			fileToCheck = Path.GetDirectoryName(ssh.contactToUse.CurrentImage) & Path.DirectorySeparatorChar & "ImageTags.txt"
 		End If
 
         'TODO-Next: @ImageTag() Implement optimized @ShowTaggedImage code.
@@ -13462,7 +13433,7 @@ VTSkip:
 					PicDir = PicDir & PicArray(p) & " "
 					If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
 				Next
-				If isDommeTag Then PicDir = Path.GetDirectoryName(ssh.SlideshowMain.CurrentImage) & Path.DirectorySeparatorChar & PicDir
+				If isDommeTag Then PicDir = Path.GetDirectoryName(ssh.contactToUse.CurrentImage) & Path.DirectorySeparatorChar & PicDir
 				Return PicDir
 
 				Else
@@ -13476,7 +13447,7 @@ VTSkip:
 	Public Function GetLocalImageOr(ByVal LocTag As String, Optional isDommeTag As Boolean = False) As String
 		Dim fileToCheck As String = Application.StartupPath & "\Images\System\LocalImageTags.txt"
 		If isDommeTag Then
-			fileToCheck = Path.GetDirectoryName(ssh.SlideshowMain.CurrentImage) & Path.DirectorySeparatorChar & "ImageTags.txt"
+			fileToCheck = Path.GetDirectoryName(ssh.contactToUse.CurrentImage) & Path.DirectorySeparatorChar & "ImageTags.txt"
 		End If
 
 		If File.Exists(fileToCheck) Then
@@ -13515,7 +13486,7 @@ VTSkip:
 					PicDir = PicDir & PicArray(p) & " "
 					If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
 				Next
-				If isDommeTag Then PicDir = Path.GetDirectoryName(ssh.SlideshowMain.CurrentImage) & Path.DirectorySeparatorChar & PicDir
+				If isDommeTag Then PicDir = Path.GetDirectoryName(ssh.contactToUse.CurrentImage) & Path.DirectorySeparatorChar & PicDir
 				Return PicDir
 
 			Else
@@ -13688,16 +13659,88 @@ VTSkip:
 			End If
 
 			If Linear = False Then
-                '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-                '							Commands to sort out
-                ' This Section contains @Commands, which are able to disqualify vocabulary lines.
-                '
-                ' Example-line: "Whatever Text to display @DommeTag(Glaring)"
-                '
-                ' This line has to be sorted out, if there are no corresponding images tagged 
-                ' with "glaring".
-                '▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-                If FilterString.Includes("@DommeTag(") Then
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+				'							Commands to sort out
+				' This Section contains @Commands, which are able to disqualify vocabulary lines.
+				'
+				' Example-line: "Whatever Text to display @DommeTag(Glaring)"
+				'
+				' This line has to be sorted out, if there are no corresponding images tagged 
+				' with "glaring".
+				'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+
+				If FilterString.Contains("@Flag(") Then
+					Dim writeFlag As String
+					Dim splitFlag As String()
+					writeFlag = GetParentheses(FilterString, "@Flag(")
+					writeFlag = FixCommas(writeFlag)
+					splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
+					For Each s In splitFlag
+						If Not FlagExists(s) Then
+							Return False
+						End If
+					Next
+				End If
+
+				If FilterString.Contains("@NotFlag(") Then
+					Dim writeFlag As String
+					Dim splitFlag As String()
+					writeFlag = GetParentheses(FilterString, "@NotFlag(")
+					writeFlag = FixCommas(writeFlag)
+					splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
+					For Each s In splitFlag
+						If FlagExists(s) Then
+							Return False
+						End If
+					Next
+				End If
+
+				If FilterString.Contains("@FlagOr(") Then
+					Dim writeFlag As String
+					Dim splitFlag As String()
+					writeFlag = GetParentheses(FilterString, "@FlagOr(")
+					writeFlag = FixCommas(writeFlag)
+					splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
+					Dim result As Boolean = False
+					For Each s In splitFlag
+						If FlagExists(s) Then
+							result = True
+							Exit For
+						End If
+					Next
+					If Not result Then Return False
+				End If
+
+				If FilterString.Contains("@Variable[") Then
+					If CheckVariable(FilterString) = False Then Return False
+				End If
+
+				If FilterString.Contains("@Group(") Then
+					Dim GroupCheck As String = GetParentheses(FilterString, "@Group(")
+					Dim grouparray() As String = GroupCheck.Split(",")
+					Dim b As Boolean = False
+					For i As Integer = 0 To grouparray.Length - 1
+						If grouparray(i) = ssh.Group Then
+							b = True
+							Exit For
+						End If
+					Next
+					If b = False Then Return False
+					'	If GroupCheck.Contains("D") Then
+					'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("D") Then Return False
+					'End If
+					'	If GroupCheck.Contains("1") Then
+					'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("1") Then Return False
+					'End If
+					'	If GroupCheck.Contains("2") Then
+					'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("2") Then Return False
+					'	End If
+					'	If GroupCheck.Contains("3") Then
+					'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("3") Then Return False
+					'End If
+				End If
+
+				If FilterString.Includes("@DommeTag(") Then
 					If ssh.LockImage = True Then
 						Return False
 					Else
@@ -13840,76 +13883,6 @@ VTSkip:
 			End If
 			If FilterString.Contains("@RuinsOrgasm(") Then
 				If FilterCheck(GetParentheses(FilterString, "@RuinsOrgasm("), FrmSettings.ruinorgasmComboBox) = False Then Return False
-			End If
-			If FilterString.Contains("@Variable[") Then
-				If CheckVariable(FilterString) = False Then Return False
-			End If
-
-			If FilterString.Contains("@Group(") Then
-				Dim GroupCheck As String = GetParentheses(FilterString, "@Group(")
-				Dim grouparray() As String = GroupCheck.Split(",")
-				Dim b As Boolean = False
-				For i As Integer = 0 To grouparray.Length - 1
-					If grouparray(i) = ssh.Group Then
-						b = True
-						Exit For
-					End If
-				Next
-				If b = False Then Return False
-				'	If GroupCheck.Contains("D") Then
-				'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("D") Then Return False
-				'End If
-				'	If GroupCheck.Contains("1") Then
-				'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("1") Then Return False
-				'End If
-				'	If GroupCheck.Contains("2") Then
-				'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("2") Then Return False
-				'	End If
-				'	If GroupCheck.Contains("3") Then
-				'	If ssh.GlitterTease = False Or Not ssh.Group.Contains("3") Then Return False
-				'End If
-			End If
-
-			If FilterString.Contains("@Flag(") Then
-				Dim writeFlag As String
-				Dim splitFlag As String()
-				writeFlag = GetParentheses(FilterString, "@Flag(")
-				writeFlag = FixCommas(writeFlag)
-				splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
-				For Each s In splitFlag
-					If Not FlagExists(s) Then
-						Return False
-					End If
-				Next
-			End If
-
-			If FilterString.Contains("@NotFlag(") Then
-				Dim writeFlag As String
-				Dim splitFlag As String()
-				writeFlag = GetParentheses(FilterString, "@NotFlag(")
-				writeFlag = FixCommas(writeFlag)
-				splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
-				For Each s In splitFlag
-					If FlagExists(s) Then
-						Return False
-					End If
-				Next
-			End If
-
-			If FilterString.Contains("@FlagOr(") Then
-				Dim writeFlag As String
-				Dim splitFlag As String()
-				writeFlag = GetParentheses(FilterString, "@FlagOr(")
-				writeFlag = FixCommas(writeFlag)
-				splitFlag = writeFlag.Split({","}, StringSplitOptions.RemoveEmptyEntries)
-				Dim result As Boolean = False
-				For Each s In splitFlag
-					If FlagExists(s) Then
-						result = True
-						Exit For
-					End If
-				Next
-				If Not result Then Return False
 			End If
 
 			If FilterString.Contains("@CheckDate(") And Linear = False Then
@@ -20793,7 +20766,7 @@ playLoop:
 	End Sub
 
 
-	Private Function updateDommeName(stringToCheck As String)
+	Private Function updateDommeName(ByVal stringToCheck As String)
 		'remove eventual @ContactX present in a @FollowUp() inside the line
 		If stringToCheck.Contains("@FollowUp") Then
 			Dim remove As String

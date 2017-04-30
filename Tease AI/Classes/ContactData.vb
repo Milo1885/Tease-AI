@@ -119,6 +119,7 @@ Public Class ContactData
 	Sub New(ByVal type As ContactType)
 		Contact = type
 		Check_ImageDir(type)
+		CheckInit()
 	End Sub
 
 	''' <summary>
