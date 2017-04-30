@@ -8396,17 +8396,17 @@ RinseLatherRepeat:
 		End If
 
 		If StringClean.Contains("@NewContact1Slideshow") Then
-			If ssh.contact1Present Then ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
+			If ssh.contact1Present Then ssh.SlideshowContact1.LoadNew(False)
 			StringClean = StringClean.Replace("@NewContact1Slideshow", "")
 		End If
 
 		If StringClean.Contains("@NewContact2Slideshow") Then
-			If ssh.contact2Present Then ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
+			If ssh.contact2Present Then ssh.SlideshowContact2.LoadNew(False)
 			StringClean = StringClean.Replace("@NewContact2Slideshow", "")
 		End If
 
 		If StringClean.Contains("@NewContact3Slideshow") Then
-			If ssh.contact3Present Then ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
+			If ssh.contact3Present Then ssh.SlideshowContact3.LoadNew(False)
 			StringClean = StringClean.Replace("@NewContact3Slideshow", "")
 		End If
 
@@ -11801,10 +11801,10 @@ ExternalAudio:
 			If Not ssh.contact1Present Then
 				ssh.currentlyPresentContacts.Add(ssh.SlideshowContact1.TypeName)
 				ssh.contact1Present = True
-				ssh.AddContactTick = 2
+				'ssh.AddContactTick = 2
 				Contact1Timer.Start()
 			End If
-			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
+			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact1.LoadNew(False)
 			StringClean = StringClean.Replace("@AddContact1", "")
 		End If
 
@@ -11813,7 +11813,7 @@ ExternalAudio:
 			If ssh.contact1Present And (ssh.dommePresent Or ssh.contact2Present Or ssh.contact3Present) Then
 				ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact1.TypeName)
 				ssh.contact1Present = False
-				ssh.AddContactTick = 2
+				'ssh.AddContactTick = 2
 				Contact1Timer.Start()
 			End If
 			StringClean = StringClean.Replace("@RemoveContact1", "")
@@ -11823,10 +11823,10 @@ ExternalAudio:
 			If Not ssh.contact2Present Then
 				ssh.currentlyPresentContacts.Add(ssh.SlideshowContact2.TypeName)
 				ssh.contact2Present = True
-				ssh.AddContactTick = 2
+				'ssh.AddContactTick = 2
 				Contact2Timer.Start()
 			End If
-			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
+			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact2.LoadNew(False)
 			StringClean = StringClean.Replace("@AddContact2", "")
 		End If
 
@@ -11845,10 +11845,10 @@ ExternalAudio:
 			If Not ssh.contact3Present Then
 				ssh.currentlyPresentContacts.Add(ssh.SlideshowContact3.TypeName)
 				ssh.contact3Present = True
-				ssh.AddContactTick = 2
+				'ssh.AddContactTick = 2
 				Contact3Timer.Start()
 			End If
-			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
+			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact3.LoadNew(False)
 			StringClean = StringClean.Replace("@AddContact3", "")
 		End If
 
@@ -11857,7 +11857,7 @@ ExternalAudio:
 			If ssh.contact3Present And (ssh.dommePresent Or ssh.contact1Present Or ssh.contact2Present) Then
 				ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact3.TypeName)
 				ssh.contact3Present = False
-				ssh.AddContactTick = 2
+				'ssh.AddContactTick = 2
 				Contact3Timer.Start()
 			End If
 			StringClean = StringClean.Replace("@RemoveContact3", "")
@@ -11867,7 +11867,7 @@ ExternalAudio:
 			If Not ssh.dommePresent Then
 				ssh.currentlyPresentContacts.Add(ssh.SlideshowMain.TypeName)
 				ssh.dommePresent = True
-				ssh.AddContactTick = 2
+				'ssh.AddContactTick = 2
 				DommeTimer.Start()
 			End If
 			StringClean = StringClean.Replace("@AddDomme", "")
@@ -11879,7 +11879,7 @@ ExternalAudio:
 			If ssh.dommePresent And (ssh.contact1Present Or ssh.contact2Present Or ssh.contact3Present) Then
 				ssh.currentlyPresentContacts.Remove(ssh.SlideshowMain.TypeName)
 				ssh.dommePresent = False
-				ssh.AddContactTick = 2
+				'ssh.AddContactTick = 2
 				DommeTimer.Start()
 			End If
 			StringClean = StringClean.Replace("@RemoveDomme", "")
@@ -17262,10 +17262,10 @@ restartInstantly:
 
 	Private Sub Contact1Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact1Timer.Tick
 
-		ssh.AddContactTick -= 1
+		'	ssh.AddContactTick -= 1
 
-		If ssh.AddContactTick < 1 Then
-			Contact1Timer.Stop()
+		'	If ssh.AddContactTick < 1 Then
+		Contact1Timer.Stop()
 			If Not ssh.Group.Contains("1") Then
 				ssh.Group = ssh.Group & "1"
 				ssh.GlitterTease = True
@@ -17275,16 +17275,16 @@ restartInstantly:
 				If ssh.Group = "D" Then ssh.GlitterTease = False
 				ChatAddSystemMessage(My.Settings.Glitter1 & " has left the Chat room")
 			End If
-		End If
+		'	End If
 
 	End Sub
 
 	Private Sub Contact2Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact2Timer.Tick
 
-		ssh.AddContactTick -= 1
+		'	ssh.AddContactTick -= 1
 
-		If ssh.AddContactTick < 1 Then
-			Contact2Timer.Stop()
+		'	If ssh.AddContactTick < 1 Then
+		Contact2Timer.Stop()
 			If Not ssh.Group.Contains("2") Then
 				ssh.Group = ssh.Group & "2"
 				ssh.GlitterTease = True
@@ -17294,16 +17294,16 @@ restartInstantly:
 				If ssh.Group = "D" Then ssh.GlitterTease = False
 				ChatAddSystemMessage(My.Settings.Glitter2 & " has left the Chat room")
 			End If
-		End If
+		'	End If
 
 	End Sub
 
 	Private Sub Contact3Timer_Tick(sender As System.Object, e As System.EventArgs) Handles Contact3Timer.Tick
 
-		ssh.AddContactTick -= 1
+		'	ssh.AddContactTick -= 1
 
-		If ssh.AddContactTick < 1 Then
-			Contact3Timer.Stop()
+		'	If ssh.AddContactTick < 1 Then
+		Contact3Timer.Stop()
 			If Not ssh.Group.Contains("3") Then
 				ssh.Group = ssh.Group & "3"
 				ssh.GlitterTease = True
@@ -17313,7 +17313,7 @@ restartInstantly:
 				If ssh.Group = "D" Then ssh.GlitterTease = False
 				ChatAddSystemMessage(My.Settings.Glitter3 & " has left the Chat room")
 			End If
-		End If
+		'	End If
 
 	End Sub
 
@@ -17321,10 +17321,10 @@ restartInstantly:
 
 	Private Sub DommeTimer_Tick(sender As System.Object, e As System.EventArgs) Handles DommeTimer.Tick
 
-		ssh.AddContactTick -= 1
+		'	ssh.AddContactTick -= 1
 
-		If ssh.AddContactTick < 1 Then
-			DommeTimer.Stop()
+		'	If ssh.AddContactTick < 1 Then
+		DommeTimer.Stop()
 			If Not ssh.Group.Contains("D") Then
 				ssh.Group = ssh.Group & "D"
 				If ssh.Group = "D" Then ssh.GlitterTease = False
@@ -17334,7 +17334,7 @@ restartInstantly:
 				ssh.GlitterTease = True
 				ChatAddSystemMessage(ssh.SlideshowMain.TypeName & " has left the Chat room")
 			End If
-		End If
+		'	End If
 
 	End Sub
 
