@@ -8480,6 +8480,19 @@ RinseLatherRepeat:
 				Continue For
 			End If
 
+			If commandsList(num).Contains("DommeTagAny(") Then
+				Dim TagFlag As String = GetParentheses(StringClean, "@DommeTagAny(")
+				'QND-Implemented: ContactData.GetTaggedImage
+				If ssh.contactToUse IsNot Nothing Then
+					ssh.DommeImageSTR = GetLocalImageAny(TagFlag, True)
+				Else
+					ssh.DommeImageSTR = ""
+				End If
+				' Clean the Text.
+				StringClean = StringClean.Replace("@DommeTagAny(" & TagFlag & ")", "")
+				Continue For
+			End If
+
 			If commandsList(num).Contains("NewDommeSlideshow") Then
 				'TODO: Add Support for contact slideshows.
 				ssh.newSlideshow = True
@@ -8545,6 +8558,13 @@ RinseLatherRepeat:
 				Dim TagFlag As String = GetParentheses(StringClean, "@ImageTagOr(")
 				ShowImage(GetLocalImageOr(TagFlag), False)
 				StringClean = StringClean.Replace("@ImageTagOr(" & TagFlag & ")", "")
+				Continue For
+			End If
+
+			If commandsList(num).Contains("ImageTagAny(") Then
+				Dim TagFlag As String = GetParentheses(StringClean, "@ImageTagAny(")
+				ShowImage(GetLocalImageAny(TagFlag), False)
+				StringClean = StringClean.Replace("@ImageTagAny(" & TagFlag & ")", "")
 				Continue For
 			End If
 
@@ -13616,6 +13636,55 @@ VTSkip:
 
 		End If
 	End Function
+	Public Function GetLocalImageAny(ByVal LocTag As String, Optional isDommeTag As Boolean = False) As String
+		Dim fileToCheck As String = Application.StartupPath & "\Images\System\LocalImageTags.txt"
+		If isDommeTag Then
+			fileToCheck = Path.GetDirectoryName(ssh.contactToUse.CurrentImage) & Path.DirectorySeparatorChar & "ImageTags.txt"
+		End If
+
+		If File.Exists(fileToCheck) Then
+
+
+			Dim TagList As New List(Of String)
+			TagList = Txt2List(fileToCheck)
+
+			LocTag = LocTag.Replace(" ,", ",")
+			LocTag = LocTag.Replace(", ", ",")
+
+			Dim LocTagArray As String() = LocTag.Split(",")
+			If isDommeTag Then
+				For i As Integer = 0 To LocTagArray.Count - 1
+					LocTagArray(i) = "Tag" & LocTagArray(i)
+				Next
+			End If
+
+			Dim TaggedList As New List(Of String)
+
+			For i As Integer = 0 To TagList.Count - 1
+				For n As Integer = 0 To LocTagArray.Count - 1
+					If TagList(i).Contains(LocTagArray(n)) Then TaggedList.Add(TagList(i))
+				Next
+			Next
+
+			If TaggedList.Count > 0 Then
+
+				Dim PicArray As String() = TaggedList(ssh.randomizer.Next(0, TaggedList.Count)).Split
+				Dim PicDir As String = ""
+
+				For p As Integer = 0 To PicArray.Count - 1
+					PicDir = PicDir & PicArray(p) & " "
+					If UCase(PicDir).Contains(".JPG") Or UCase(PicDir).Contains(".JPEG") Or UCase(PicDir).Contains(".PNG") Or UCase(PicDir).Contains(".BMP") Or UCase(PicDir).Contains(".GIF") Then Exit For
+				Next
+				If isDommeTag Then PicDir = Path.GetDirectoryName(ssh.contactToUse.CurrentImage) & Path.DirectorySeparatorChar & PicDir
+				Return PicDir
+
+			Else
+				Return String.Empty
+
+			End If
+
+		End If
+	End Function
 
 	Friend Sub ContactEdgeCheck(ByVal EdgeCheck As String)
 		If EdgeCheck.Contains("@Contact1") Then
@@ -13795,6 +13864,14 @@ VTSkip:
 					End If
 				End If
 
+				If FilterString.Includes("@DommeTagAny(") Then
+					If ssh.LockImage = True Then
+						Return False
+					Else
+						If GetLocalImageAny(GetParentheses(FilterString, "@DommeTagAny("), True) = String.Empty Then Return False
+					End If
+				End If
+
 				If FilterString.Includes("@DomTag(") Then
 					If ssh.LockImage = True Then
 						Return False
@@ -13808,6 +13885,14 @@ VTSkip:
 						Return False
 					Else
 						If GetLocalImageOr(GetParentheses(FilterString, "@DomTagOr("), True) = String.Empty Then Return False
+					End If
+				End If
+
+				If FilterString.Includes("@DomTagAny(") Then
+					If ssh.LockImage = True Then
+						Return False
+					Else
+						If GetLocalImageAny(GetParentheses(FilterString, "@DomTagAny("), True) = String.Empty Then Return False
 					End If
 				End If
 
@@ -13827,8 +13912,16 @@ VTSkip:
 					End If
 				End If
 
-                ' ################## @Show-Category-Image #####################
-                If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
+				If FilterString.Contains("@ImageTagAny(") Then
+					If ssh.LockImage = True Then
+						Return False
+					Else
+						If GetLocalImageAny(GetParentheses(FilterString, "@ImageTagAny(")) = String.Empty Then Return False
+					End If
+				End If
+
+				' ################## @Show-Category-Image #####################
+				If FilterString.Contains("@ShowBlogImage") Or FilterString.Contains("@NewBlogImage") Then
 					If Not GetImageData(ImageGenre.Blog).IsAvailable Or ssh.LockImage = True Or ssh.CustomSlideEnabled = True Or mainPictureBox.Visible = False Then Return False
 				End If
 				If FilterString.Contains("@ShowBlowjobImage") Then
