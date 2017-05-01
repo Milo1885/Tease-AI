@@ -8263,19 +8263,23 @@ StatusUpdateEnd:
 
 		Debug.Print("Stringclean Intro = " & StringClean)
 
+		Dim commandsList() As String = StringClean.Split("@")
+		'		For num As Integer = 1 To commandsList.Count - 1
+		'		GoTo goingTo(commandlist(num))
 		If TaskClean = True Then
 			Debug.Print("Tasks CommandClean")
 			GoTo TaskCleanSet
 		End If
-
+followUp:
 		If StringClean.Contains("@FollowUp(") And ssh.FollowUp = "" Then
 			ssh.FollowUp = GetParentheses(StringClean, "@FollowUp(", StringClean.Split(")").Count - 1)
 			'if there is a leftover ) (might happen in very complex followUp) we remove it
 			If ssh.FollowUp.EndsWith(")") Then ssh.FollowUp = ssh.FollowUp.Remove(ssh.FollowUp.Length - 1, 1)
 			StringClean = StringClean.Replace("@FollowUp(" & ssh.FollowUp & ")", "")
+			'	Continue For
 		End If
 
-
+followUpXX:
 		If StringClean.Contains("@FollowUp") And ssh.FollowUp = "" Then
 
 			Dim FollowTemp As String
@@ -8301,7 +8305,7 @@ StatusUpdateEnd:
 			If ssh.TempVal <= FollowVal Then ssh.FollowUp = FollowLineTemp
 
 			StringClean = StringClean.Replace("@FollowUp" & FollowTemp & "(" & FollowLineTemp & ")", "")
-
+			'Continue For
 		End If
 		' The @If[] Command allows you to compare Variables and go to a specific line if the statement is true. The correct format is @If[VarName]>[varName2]Then(Goto Line)
 		' For example, If[StrokeTotal]>[1000]Then(Thousand Strokes) would check if the Variable "StrokeTotal" is greater than 1000, and go to (Thousand Strokes) if so. 
@@ -8310,2826 +8314,2749 @@ StatusUpdateEnd:
 
 		If StringClean.Contains("@If[") Then
 
-			Do
+				Do
 
-				Dim SCIfVar As String() = Split(StringClean)
-				Dim SCGotVar As String = "Null"
+					Dim SCIfVar As String() = Split(StringClean)
+					Dim SCGotVar As String = "Null"
 
-				For i As Integer = 0 To SCIfVar.Length - 1
-					If SCIfVar(i).Contains("@If[") Then
-						Dim IFJoin As Integer = 0
-						If Not SCIfVar(i).Contains(")") Then
+					For i As Integer = 0 To SCIfVar.Length - 1
+						If SCIfVar(i).Contains("@If[") Then
+							Dim IFJoin As Integer = 0
+							If Not SCIfVar(i).Contains(")") Then
+								Do
+									IFJoin += 1
+									SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
+									SCIfVar(i + IFJoin) = ""
+								Loop Until SCIfVar(i).Contains(")")
+							End If
+							SCGotVar = SCIfVar(i)
+							SCIfVar(i) = ""
+							StringClean = Join(SCIfVar)
 							Do
-								IFJoin += 1
-								SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
-								SCIfVar(i + IFJoin) = ""
-							Loop Until SCIfVar(i).Contains(")")
-						End If
-						SCGotVar = SCIfVar(i)
-						SCIfVar(i) = ""
-						StringClean = Join(SCIfVar)
-						Do
-							StringClean = StringClean.Replace("  ", " ")
-						Loop Until Not StringClean.Contains("  ")
-						Exit For
-					End If
-				Next
-
-				If SCGotVar.Contains("]And[") Then
-
-					Dim AndCheck As Boolean = True
-
-					For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
-						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = False Then
-							AndCheck = False
+								StringClean = StringClean.Replace("  ", " ")
+							Loop Until Not StringClean.Contains("  ")
 							Exit For
 						End If
-						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]And", "")
 					Next
 
-					If AndCheck = True Then
-						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-						ssh.SkipGotoLine = True
-						GetGoto()
-					End If
+					If SCGotVar.Contains("]And[") Then
 
-				ElseIf SCGotVar.Contains("]Or[") Then
+						Dim AndCheck As Boolean = True
 
-					Dim OrCheck As Boolean = False
+						For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
+							If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = False Then
+								AndCheck = False
+								Exit For
+							End If
+							SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]And", "")
+						Next
 
-					For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
+						If AndCheck = True Then
+							ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+							ssh.SkipGotoLine = True
+							GetGoto()
+						End If
+
+					ElseIf SCGotVar.Contains("]Or[") Then
+
+						Dim OrCheck As Boolean = False
+
+						For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
+							If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+								OrCheck = True
+								Exit For
+							End If
+							SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]Or", "")
+						Next
+
+						If OrCheck = True Then
+							ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+							ssh.SkipGotoLine = True
+							GetGoto()
+						End If
+
+					Else
+
 						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
-							OrCheck = True
-							Exit For
+							ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+							ssh.SkipGotoLine = True
+							GetGoto()
 						End If
-						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]Or", "")
-					Next
 
-					If OrCheck = True Then
-						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-						ssh.SkipGotoLine = True
-						GetGoto()
 					End If
 
-				Else
+				Loop Until Not StringClean.Contains("@If")
 
-					If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
-						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-						ssh.SkipGotoLine = True
-						GetGoto()
-					End If
-
-				End If
-
-			Loop Until Not StringClean.Contains("@If")
-
-		End If
+			End If
 
 RinseLatherRepeat:
-		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-		'									ImageCommands
-		' - Make sure you call all Display ImageFunctions before executing @LockImages.
-		'	If you don't, FilterList() will return a wrong list of lines =>
-		'		=> The Domme is talking about an image, but she never showed one.
-		'		=> She is talking about an new image, but never showed one.
-		' - Call @DeleteLocalImage before you start to display a new Image, because they 
-		'	are loaded and displayed async. Otherwise it will delete the wrong image!
-		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
+			'									ImageCommands
+			' - Make sure you call all Display ImageFunctions before executing @LockImages.
+			'	If you don't, FilterList() will return a wrong list of lines =>
+			'		=> The Domme is talking about an image, but she never showed one.
+			'		=> She is talking about an new image, but never showed one.
+			' - Call @DeleteLocalImage before you start to display a new Image, because they 
+			'	are loaded and displayed async. Otherwise it will delete the wrong image!
+			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
-		' @DeleteLocalImage: Deletes the current displayed local image from filesystem, 
-		' LiskedList, DislikedList and LocalImageTagList,  if the  current Image is 
-		' not an image in the Domme- or Contacts-Image directory or their subdirectories.
-		If StringClean.Contains("@DeleteLocalImage") Then
-			If My.Settings.DomDeleteMedia = True Then
-				Try
-					DeleteCurrentImage(True)
-				Catch ex As Exception
-					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-					'                   All Errors
-					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-					Log.WriteError("Command @DeleteLocalImage was unable to delete the image.",
-						  ex, "@DeleteLocalImage failed")
-					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
-				End Try
-			End If
-			StringClean = StringClean.Replace("@DeleteLocalImage", "")
-		End If
-
-		' @DeleteImage: Deletes the current displayed image from filesystem, LiskedList, 
-		' DislikedList, LocalImageTagList and URL-Files, if the  current Image is 
-		' not an image in the Domme- or Contacts-Image directory or their subdirectories.
-		If StringClean.Contains("@DeleteImage") Then
-			If My.Settings.DomDeleteMedia = True Then
-				Try
-					DeleteCurrentImage(False)
-				Catch ex As Exception
-					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-					'                   All Errors
-					'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-					Log.WriteError("Command @DeleteImage was unable to delete the image.",
-						  ex, "@DeleteImage failed")
-					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
-				End Try
-			End If
-			StringClean = StringClean.Replace("@DeleteImage", "")
-		End If
-
-		' The @UnlockImages Command allows the Domme Slideshow to resume functioning as normal.
-		If StringClean.Contains("@UnlockImages") Then
-			If ssh.SlideshowLoaded = True Then
-				nextButton.Enabled = True
-				previousButton.Enabled = True
-				PicStripTSMIdommeSlideshow.Enabled = True
-			End If
-			ssh.LockImage = False
-			StringClean = StringClean.Replace("@UnlockImages", "")
-		End If
-
-		If StringClean.Contains("@DommeTag(") Then
-			Dim TagFlag As String = GetParentheses(StringClean, "@DommeTag(")
-			'QND-Implemented: ContactData.GetTaggedImage
-			If ssh.contactToUse IsNot Nothing Then
-				ssh.DommeImageSTR = GetLocalImage(TagFlag, True)
-			Else
-				ssh.DommeImageSTR = ""
-			End If
-			' Clean the Text.
-			StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
-		End If
-
-		If StringClean.Contains("@DommeTagOr(") Then
-			Dim TagFlag As String = GetParentheses(StringClean, "@DommeTagOr(")
-			'QND-Implemented: ContactData.GetTaggedImage
-			If ssh.contactToUse IsNot Nothing Then
-				ssh.DommeImageSTR = GetLocalImageOr(TagFlag, True)
-			Else
-				ssh.DommeImageSTR = ""
-			End If
-			' Clean the Text.
-			StringClean = StringClean.Replace("@DommeTagOr(" & TagFlag & ")", "")
-		End If
-
-		If StringClean.Contains("@NewDommeSlideshow") Then
-			'TODO: Add Support for contact slideshows.
-			ssh.newSlideshow = True
-			LoadDommeImageFolder()
-			StringClean = StringClean.Replace("@NewDommeSlideshow", "")
-		End If
-
-		If StringClean.Contains("@NewContact1Slideshow") Then
-			If ssh.contact1Present Then ssh.SlideshowContact1.LoadNew(False)
-			StringClean = StringClean.Replace("@NewContact1Slideshow", "")
-		End If
-
-		If StringClean.Contains("@NewContact2Slideshow") Then
-			If ssh.contact2Present Then ssh.SlideshowContact2.LoadNew(False)
-			StringClean = StringClean.Replace("@NewContact2Slideshow", "")
-		End If
-
-		If StringClean.Contains("@NewContact3Slideshow") Then
-			If ssh.contact3Present Then ssh.SlideshowContact3.LoadNew(False)
-			StringClean = StringClean.Replace("@NewContact3Slideshow", "")
-		End If
-
-		If StringClean.Contains("@DomTag(") Then
-			Dim TagFlag As String = GetParentheses(StringClean, "@DomTag(")
-			' Try to get a Domme Image for the given Tags.
-			'QND-Implemented: ContactData.GetTaggedImage
-			If ssh.contactToUse IsNot Nothing Then
-				ssh.DommeImageSTR = GetLocalImage(TagFlag, True)
-			Else
-				ssh.DommeImageSTR = ""
-			End If
-
-			StringClean = StringClean.Replace("@DomTag(" & TagFlag & ")", "")
-		End If
-
-		If StringClean.Contains("@DomTagOr(") Then
-			Dim TagFlag As String = GetParentheses(StringClean, "@DomTagOr(")
-			' Try to get a Domme Image for the given Tags.
-			'QND-Implemented: ContactData.GetTaggedImage
-			If ssh.contactToUse IsNot Nothing Then
-				ssh.DommeImageSTR = GetLocalImageOr(TagFlag, True)
-			Else
-				ssh.DommeImageSTR = ""
-			End If
-
-			StringClean = StringClean.Replace("@DomTagOr(" & TagFlag & ")", "")
-		End If
-
-		If StringClean.Contains("@ImageTag(") Then
-			Dim TagFlag As String = GetParentheses(StringClean, "@ImageTag(")
-			ShowImage(GetLocalImage(TagFlag), False)
-			StringClean = StringClean.Replace("@ImageTag(" & TagFlag & ")", "")
-		End If
-
-		If StringClean.Contains("@ImageTagOr(") Then
-			Dim TagFlag As String = GetParentheses(StringClean, "@ImageTagOr(")
-			ShowImage(GetLocalImageOr(TagFlag), False)
-			StringClean = StringClean.Replace("@ImageTagOr(" & TagFlag & ")", "")
-		End If
-
-		If StringClean.Contains("@ShowImage") And Not StringClean.Contains("@ShowImage[") Then
-			ShowImage(GetRandomImage(), False)
-			StringClean = StringClean.Replace("@ShowImage", "")
-		End If
-
-		If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
-			ShowImage(GetImageData(ImageGenre.Butt).Random(), False)
-
-			StringClean = StringClean.Replace("@ShowButtImage", "")
-			StringClean = StringClean.Replace("@ShowButtsImage", "")
-		End If
-
-		If StringClean.Contains("@ShowBoobsImage") Or StringClean.Contains("@ShowBoobImage") Then
-			ShowImage(GetImageData(ImageGenre.Boobs).Random(), False)
-
-			StringClean = StringClean.Replace("@ShowBoobsImage", "")
-			StringClean = StringClean.Replace("@ShowBoobImage", "")
-		End If
-
-		If StringClean.Contains("@ShowHardcoreImage") Then
-			ShowImage(GetImageData(ImageGenre.Hardcore).Random(), False)
-			StringClean = StringClean.Replace("@ShowHardcoreImage", "")
-		End If
-
-		If StringClean.Contains("@ShowSoftcoreImage") Then
-			ShowImage(GetImageData(ImageGenre.Softcore).Random(), False)
-			StringClean = StringClean.Replace("@ShowSoftcoreImage", "")
-		End If
-
-		If StringClean.Contains("@ShowLesbianImage") Then
-			ShowImage(GetImageData(ImageGenre.Lesbian).Random(), False)
-			StringClean = StringClean.Replace("@ShowLesbianImage", "")
-		End If
-
-		If StringClean.Contains("@ShowBlowjobImage") Then
-			ShowImage(GetImageData(ImageGenre.Blowjob).Random(), False)
-			StringClean = StringClean.Replace("@ShowBlowjobImage", "")
-		End If
-
-		If StringClean.Contains("@ShowFemdomImage") Then
-			ShowImage(GetImageData(ImageGenre.Femdom).Random(), False)
-			StringClean = StringClean.Replace("@ShowFemdomImage", "")
-		End If
-
-		If StringClean.Contains("@ShowLezdomImage") Then
-			ShowImage(GetImageData(ImageGenre.Lezdom).Random(), False)
-			StringClean = StringClean.Replace("@ShowLezdomImage", "")
-		End If
-
-		If StringClean.Contains("@ShowHentaiImage") Then
-			ShowImage(GetImageData(ImageGenre.Hentai).Random(), False)
-			StringClean = StringClean.Replace("@ShowHentaiImage", "")
-		End If
-
-		If StringClean.Contains("@ShowGayImage") Then
-			ShowImage(GetImageData(ImageGenre.Gay).Random(), False)
-			StringClean = StringClean.Replace("@ShowGayImage", "")
-		End If
-
-		If StringClean.Contains("@ShowMaledomImage") Then
-			ShowImage(GetImageData(ImageGenre.Maledom).Random(), False)
-			StringClean = StringClean.Replace("@ShowMaledomImage", "")
-		End If
-
-		If StringClean.Contains("@ShowCaptionsImage") Then
-			ShowImage(GetImageData(ImageGenre.Captions).Random(), False)
-			StringClean = StringClean.Replace("@ShowCaptionsImage", "")
-		End If
-
-		If StringClean.Contains("@ShowGeneralImage") Then
-			ShowImage(GetImageData(ImageGenre.General).Random(), False)
-			StringClean = StringClean.Replace("@ShowGeneralImage", "")
-		End If
-
-		If StringClean.Contains("@ShowLikedImage") Then
-			ShowImage(GetImageData(ImageGenre.Liked).Random(), False)
-			StringClean = StringClean.Replace("@ShowLikedImage", "")
-		End If
-
-		If StringClean.Contains("@ShowDislikedImage") Then
-			ShowImage(GetImageData(ImageGenre.Disliked).Random(), False)
-			StringClean = StringClean.Replace("@ShowDislikedImage", "")
-		End If
-
-		If StringClean.Contains("@ShowBlogImage") Then
-			ShowImage(GetImageData(ImageGenre.Blog).Random(), False)
-			StringClean = StringClean.Replace("@ShowBlogImage", "")
-		End If
-
-		' The @NewBlogImage Command is a defunct Command that has been replaced by @ShowBlogImage
-		If StringClean.Contains("@NewBlogImage") Then
-			ShowImage(GetImageData(ImageGenre.Blog).Random(), False)
-			StringClean = StringClean.Replace("@NewBlogImage", "")
-		End If
-
-		If StringClean.Contains("@ShowLocalImage") And Not StringClean.Contains("@ShowLocalImage(") Then
-			ShowImage(GetRandomImage(ImageSourceType.Local), False)
-			StringClean = StringClean.Replace("@ShowLocalImage", "")
-		End If
-
-		'===============================================================================
-		'								@ShowLocalImage()
-		'===============================================================================
-		If StringClean.Contains("@ShowLocalImage(") Then
-			Dim LocalFlag As String = GetParentheses(StringClean, "@ShowLocalImage(")
-			LocalFlag = FixCommas(LocalFlag)
-
-			Dim tmpListGenre As List(Of String) = LocalFlag.Split(",").ToList
-
-			If LocalFlag.ToUpper.Contains("NOT") Then
-				' =============== Invert the Content in Brackets ===============
-				' Declare a String containing all available ImageGenres
-				Dim CompareFlag As String = "Hardcore, Softcore, Lesbian, Blowjob, Femdom, Lezdom, Hentai, Gay, Maledom, Captions, General, Butts, Boobs"
-
-				' Remove Imagegenre, when there are no local Images available or it is in the inverting bracket
-				For i As Integer = tmpListGenre.Count - 1 To 0 Step -1
-					If tmpListGenre(i).ToUpper.Contains("HARDCORE") Or Not GetImageData(ImageGenre.Hardcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hardcore, ", "")
-					If tmpListGenre(i).ToUpper.Contains("SOFTCORE") Or Not GetImageData(ImageGenre.Softcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Softcore, ", "")
-					If tmpListGenre(i).ToUpper.Contains("LESBIAN") Or Not GetImageData(ImageGenre.Lesbian).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lesbian, ", "")
-					If tmpListGenre(i).ToUpper.Contains("BLOWJOB") Or Not GetImageData(ImageGenre.Blowjob).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Blowjob, ", "")
-					If tmpListGenre(i).ToUpper.Contains("FEMDOM") Or Not GetImageData(ImageGenre.Femdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Femdom, ", "")
-					If tmpListGenre(i).ToUpper.Contains("LEZDOM") Or Not GetImageData(ImageGenre.Lezdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lezdom, ", "")
-					If tmpListGenre(i).ToUpper.Contains("HENTAI") Or Not GetImageData(ImageGenre.Hentai).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hentai, ", "")
-					If tmpListGenre(i).ToUpper.Contains("GAY") Or Not GetImageData(ImageGenre.Gay).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Gay, ", "")
-					If tmpListGenre(i).ToUpper.Contains("MALEDOM") Or Not GetImageData(ImageGenre.Maledom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Maledom, ", "")
-					If tmpListGenre(i).ToUpper.Contains("CAPTIONS") Or Not GetImageData(ImageGenre.Captions).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Captions, ", "")
-					If tmpListGenre(i).ToUpper.Contains("GENERAL") Or Not GetImageData(ImageGenre.General).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("General, ", "")
-					If tmpListGenre(i).ToUpper.Contains("BUTT") Or Not GetImageData(ImageGenre.Butt).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Butts, ", "")
-					If tmpListGenre(i).ToUpper.Contains("BUTTS") Then CompareFlag = CompareFlag.Replace("Butts, ", "")
-					If tmpListGenre(i).ToUpper.Contains("BOOB") Or Not GetImageData(ImageGenre.Boobs).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Boobs", "")
-					If tmpListGenre(i).ToUpper.Contains("BOOBS") Then CompareFlag = CompareFlag.Replace("Boobs", "")
-				Next
-
-				' Set the inverted Array.
-				tmpListGenre = CompareFlag.Split(", ").ToList
-			End If
-
-			' Pick a random entry from list
-			Debug.Print("@ShowLocalImage() LocalFLag original = " & LocalFlag)
-			Debug.Print("@ShowLocalImage() LocalFLag modified = " & String.Join(", ", tmpListGenre))
-
-			' generate a list of all available Local Images. This way it is most 
-			' likely, to get an image.
-			Dim tmpImageLocationList As New List(Of String)
-
-			For Each tmpStr As String In tmpListGenre
-				If tmpStr.ToUpper.Contains("HARDCORE") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hardcore).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("SOFTCORE") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Softcore).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("LESBIAN") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lesbian).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("BLOWJOB") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Blowjob).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("FEMDOM") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Femdom).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("LEZDOM") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lezdom).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("HENTAI") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hentai).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("GAY") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Gay).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("MALEDOM") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Maledom).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("CAPTION") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Captions).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("GENERAL") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.General).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("BUTT") Or tmpStr.ToUpper.Contains("BUTTS") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Butt).ToList(ImageSourceType.Local))
-				ElseIf tmpStr.ToUpper.Contains("BOOB") Or tmpStr.ToUpper.Contains("BOOBS") Then
-					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Boobs).ToList(ImageSourceType.Local))
+			' @DeleteLocalImage: Deletes the current displayed local image from filesystem, 
+			' LiskedList, DislikedList and LocalImageTagList,  if the  current Image is 
+			' not an image in the Domme- or Contacts-Image directory or their subdirectories.
+			If StringClean.Contains("@DeleteLocalImage") Then
+				If My.Settings.DomDeleteMedia = True Then
+					Try
+						DeleteCurrentImage(True)
+					Catch ex As Exception
+						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+						'                   All Errors
+						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+						Log.WriteError("Command @DeleteLocalImage was unable to delete the image.",
+							  ex, "@DeleteLocalImage failed")
+						If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
+					End Try
 				End If
-			Next
-			' Declare a string for the Image to show - initialize with error Image
-			Dim tmpImgToShow As String = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-			' If there are images, overwrite the error image.
-			If tmpImageLocationList.Count > 0 Then
-				tmpImgToShow = tmpImageLocationList(New Random().Next(0, tmpImageLocationList.Count))
-			Else
-				Trace.WriteLine("failed to execute Command: @ShowLocalImage(" & LocalFlag & ") No images found.")
+				StringClean = StringClean.Replace("@DeleteLocalImage", "")
 			End If
 
-			ShowImage(tmpImgToShow, False)
-
-			StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
-		End If
-		'----------------------------------------
-		' @ShowLocalImage()- End
-		'----------------------------------------
-		'===============================================================================
-		'								@ShowTaggedImage
-		'===============================================================================
-		If StringClean.Contains("@ShowTaggedImage") Then
-			Dim Tags As List(Of String) = StringClean.Split() _
-									.Select(Function(s) s.Trim()) _
-									.Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList
-
-			Dim FoundString As String = GetLocalImage(Tags, Nothing)
-
-			'TODO: @ShowTaggedImage - Add a dedicated ErrorImage when there are no tagged images.
-			If FoundString = String.Empty Then FoundString = pathImageErrorNoLocalImages
-
-			ssh.JustShowedBlogImage = True
-			ShowImage(FoundString, False)
-
-			Tags.ForEach(Sub(x) StringClean = StringClean.Replace(x, ""))
-			StringClean = StringClean.Replace("@ShowTaggedImage", "")
-		End If
-		'----------------------------------------
-		' @ShowTaggedImage - End
-		'----------------------------------------
-		'===============================================================================
-		'									@ShowImage[]
-		'===============================================================================
-		If StringClean.Contains("@ShowImage[") Then
-			Dim ImageToShow As String = GetParentheses(StringClean, "@ShowImage[")
-			ShowImage(checkForImage(ImageToShow), False)
-			StringClean = StringClean.Replace("@ShowImage[" & GetParentheses(StringClean, "@ShowImage[") & "]", "")
-		End If
-		'----------------------------------------
-		' @ShowImage[]- End
-		'----------------------------------------
-		'===============================================================================
-		'								Legacy TnA-Slideshow
-		'===============================================================================
-		' TODO: Rework TnA-Game to use CustomSlideshow instead of its own code.
-		' @TnAFastSlides starts a fast slideshow with Boobs and Butts. Use with local images, to avoid the download delay. otherwise the images will stutter.
-		' @TnASlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per second.
-		' @TnASlowSlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per 5 seconds.
-
-		If StringClean.Contains("@TnAFastSlides") Or StringClean.Contains("@TnASlowSlides") Or StringClean.Contains("@TnASlides") Then
-			If StringClean.Contains("@TnAFastSlides") Then TnASlides.Interval = 334
-			If StringClean.Contains("@TnASlides") Then TnASlides.Interval = 1000
-			If StringClean.Contains("@TnASlowSlides") Then TnASlides.Interval = 5000
-
-			Try
-				ssh.BoobList.Clear()
-				ssh.AssList.Clear()
-
-				If ssh.BoobList.Count < 1 Then ssh.BoobList = GetImageData(ImageGenre.Boobs).ToList
-				If ssh.AssList.Count < 1 Then ssh.AssList = GetImageData(ImageGenre.Butt).ToList
-
-				If ssh.BoobList.Count < 1 Then Throw New Exception("No Boobs-images found.")
-				If ssh.AssList.Count < 1 Then Throw New Exception("No Butt-images found.")
-
-				TnASlides.Start()
-			Catch ex As Exception
-				Log.WriteError("Unable to start TnA Slideshow: " & vbCrLf &
-				   ex.Message, ex, "CommandClean()")
-				If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Unable to start TnA Slideshow</font>", False)
-			End Try
-
-			StringClean = StringClean.Replace("@TnAFastSlides", "")
-			StringClean = StringClean.Replace("@TnASlowSlides", "")
-			StringClean = StringClean.Replace("@TnASlides", "")
-		End If
-
-		If StringClean.Contains("@CheckTnA") Then
-			TnASlides.Stop()
-
-			'Debug.Print("@CheckTnA called ::: AssImage = " & AssImage & " ::: BoobImage = " & BoobImage)
-			If ssh.AssImage = True Then ssh.FileGoto = "(Butt)"
-			If ssh.BoobImage = True Then ssh.FileGoto = "(Boobs)"
-			ssh.SkipGotoLine = True
-			GetGoto()
-			StringClean = StringClean.Replace("@CheckTnA", "")
-		End If
-
-		If StringClean.Contains("@StopTnA") Then
-			TnASlides.Stop()
-			ssh.BoobList.Clear()
-			ssh.BoobImage = False
-			ssh.AssList.Clear()
-			ssh.AssImage = False
-			StringClean = StringClean.Replace("@StopTnA", "")
-		End If
-		'----------------------------------------
-		' TnA-Slideshow - End
-		'----------------------------------------
-		'===============================================================================
-		'								Slideshow
-		'===============================================================================
-		If StringClean.Contains("@Slideshow(") Then
-			Dim SlideFlag As String = StringClean
-
-			Dim SlideStart As Integer
-
-			SlideStart = SlideFlag.IndexOf("@Slideshow(") + 11
-			SlideFlag = SlideFlag.Substring(SlideStart, SlideFlag.Length - SlideStart)
-			SlideFlag = SlideFlag.Split(")")(0)
-			SlideFlag = SlideFlag.Replace("@Slideshow(", "")
-
-			ssh.CustomSlideshow.Clear()
-
-			If SlideFlag.ToLower.Contains("hardcore") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Hardcore).ToList(), ImageGenre.Hardcore)
+			' @DeleteImage: Deletes the current displayed image from filesystem, LiskedList, 
+			' DislikedList, LocalImageTagList and URL-Files, if the  current Image is 
+			' not an image in the Domme- or Contacts-Image directory or their subdirectories.
+			If StringClean.Contains("@DeleteImage") Then
+				If My.Settings.DomDeleteMedia = True Then
+					Try
+						DeleteCurrentImage(False)
+					Catch ex As Exception
+						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+						'                   All Errors
+						'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
+						Log.WriteError("Command @DeleteImage was unable to delete the image.",
+							  ex, "@DeleteImage failed")
+						If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & "</font>", False)
+					End Try
+				End If
+				StringClean = StringClean.Replace("@DeleteImage", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("softcore") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Softcore).ToList(), ImageGenre.Softcore)
+			' The @UnlockImages Command allows the Domme Slideshow to resume functioning as normal.
+			If StringClean.Contains("@UnlockImages") Then
+				If ssh.SlideshowLoaded = True Then
+					nextButton.Enabled = True
+					previousButton.Enabled = True
+					PicStripTSMIdommeSlideshow.Enabled = True
+				End If
+				ssh.LockImage = False
+				StringClean = StringClean.Replace("@UnlockImages", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("lesbian") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Lesbian).ToList(), ImageGenre.Lesbian)
+			If StringClean.Contains("@DommeTag(") Then
+				Dim TagFlag As String = GetParentheses(StringClean, "@DommeTag(")
+				'QND-Implemented: ContactData.GetTaggedImage
+				If ssh.contactToUse IsNot Nothing Then
+					ssh.DommeImageSTR = GetLocalImage(TagFlag, True)
+				Else
+					ssh.DommeImageSTR = ""
+				End If
+				' Clean the Text.
+				StringClean = StringClean.Replace("@DommeTag(" & TagFlag & ")", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("blowjob") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Blowjob).ToList(), ImageGenre.Blowjob)
+			If StringClean.Contains("@DommeTagOr(") Then
+				Dim TagFlag As String = GetParentheses(StringClean, "@DommeTagOr(")
+				'QND-Implemented: ContactData.GetTaggedImage
+				If ssh.contactToUse IsNot Nothing Then
+					ssh.DommeImageSTR = GetLocalImageOr(TagFlag, True)
+				Else
+					ssh.DommeImageSTR = ""
+				End If
+				' Clean the Text.
+				StringClean = StringClean.Replace("@DommeTagOr(" & TagFlag & ")", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("femdom") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Femdom).ToList(), ImageGenre.Femdom)
+			If StringClean.Contains("@NewDommeSlideshow") Then
+				'TODO: Add Support for contact slideshows.
+				ssh.newSlideshow = True
+				LoadDommeImageFolder()
+				StringClean = StringClean.Replace("@NewDommeSlideshow", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("lezdom") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Lezdom).ToList(), ImageGenre.Lezdom)
+			If StringClean.Contains("@NewContact1Slideshow") Then
+				If ssh.contact1Present Then ssh.SlideshowContact1.LoadNew(False)
+				StringClean = StringClean.Replace("@NewContact1Slideshow", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("hentai") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Hentai).ToList(), ImageGenre.Hentai)
+			If StringClean.Contains("@NewContact2Slideshow") Then
+				If ssh.contact2Present Then ssh.SlideshowContact2.LoadNew(False)
+				StringClean = StringClean.Replace("@NewContact2Slideshow", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("gay") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Gay).ToList(), ImageGenre.Gay)
+			If StringClean.Contains("@NewContact3Slideshow") Then
+				If ssh.contact3Present Then ssh.SlideshowContact3.LoadNew(False)
+				StringClean = StringClean.Replace("@NewContact3Slideshow", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("maledom") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Maledom).ToList(), ImageGenre.Maledom)
+			If StringClean.Contains("@DomTag(") Then
+				Dim TagFlag As String = GetParentheses(StringClean, "@DomTag(")
+				' Try to get a Domme Image for the given Tags.
+				'QND-Implemented: ContactData.GetTaggedImage
+				If ssh.contactToUse IsNot Nothing Then
+					ssh.DommeImageSTR = GetLocalImage(TagFlag, True)
+				Else
+					ssh.DommeImageSTR = ""
+				End If
+
+				StringClean = StringClean.Replace("@DomTag(" & TagFlag & ")", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("captions") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Captions).ToList(), ImageGenre.Captions)
+			If StringClean.Contains("@DomTagOr(") Then
+				Dim TagFlag As String = GetParentheses(StringClean, "@DomTagOr(")
+				' Try to get a Domme Image for the given Tags.
+				'QND-Implemented: ContactData.GetTaggedImage
+				If ssh.contactToUse IsNot Nothing Then
+					ssh.DommeImageSTR = GetLocalImageOr(TagFlag, True)
+				Else
+					ssh.DommeImageSTR = ""
+				End If
+
+				StringClean = StringClean.Replace("@DomTagOr(" & TagFlag & ")", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("general") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.General).ToList(), ImageGenre.General)
+			If StringClean.Contains("@ImageTag(") Then
+				Dim TagFlag As String = GetParentheses(StringClean, "@ImageTag(")
+				ShowImage(GetLocalImage(TagFlag), False)
+				StringClean = StringClean.Replace("@ImageTag(" & TagFlag & ")", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("boob") Or LCase(SlideFlag).Contains("boobs") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Boobs).ToList(), ImageGenre.Boobs)
+			If StringClean.Contains("@ImageTagOr(") Then
+				Dim TagFlag As String = GetParentheses(StringClean, "@ImageTagOr(")
+				ShowImage(GetLocalImageOr(TagFlag), False)
+				StringClean = StringClean.Replace("@ImageTagOr(" & TagFlag & ")", "")
 			End If
 
-			If SlideFlag.ToLower.Contains("butt") Or LCase(SlideFlag).Contains("butts") Then
-				ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Butt).ToList(), ImageGenre.Butt)
+			If StringClean.Contains("@ShowImage") And Not StringClean.Contains("@ShowImage[") Then
+				ShowImage(GetRandomImage(), False)
+				StringClean = StringClean.Replace("@ShowImage", "")
 			End If
 
+			If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
+				ShowImage(GetImageData(ImageGenre.Butt).Random(), False)
 
-			CustomSlideshowTimer.Interval = 1000
-			If LCase(SlideFlag).Contains("slow") Then CustomSlideshowTimer.Interval = 5000
-			If LCase(SlideFlag).Contains("fast") Then CustomSlideshowTimer.Interval = 500
-
-
-			StringClean = StringClean.Replace("@Slideshow(" & SlideFlag & ")", "")
-		End If
-
-		If StringClean.Contains("@SlideshowOn") Then
-			If ssh.CustomSlideshow.Count > 0 Then
-				ssh.CustomSlideEnabled = True
-				CustomSlideshowTimer.Start()
+				StringClean = StringClean.Replace("@ShowButtImage", "")
+				StringClean = StringClean.Replace("@ShowButtsImage", "")
 			End If
-			StringClean = StringClean.Replace("@SlideshowOn", "")
-		End If
 
-		If StringClean.Contains("@SlideshowOff") Then
-			ssh.CustomSlideEnabled = False
-			CustomSlideshowTimer.Stop()
-			StringClean = StringClean.Replace("@SlideshowOff", "")
-		End If
+			If StringClean.Contains("@ShowBoobsImage") Or StringClean.Contains("@ShowBoobImage") Then
+				ShowImage(GetImageData(ImageGenre.Boobs).Random(), False)
 
-		If StringClean.Contains("@SlideshowFirst") Then
-			ssh.CustomSlideEnabled = True
-			ShowImage(ssh.CustomSlideshow.FirstImage, False)
-			StringClean = StringClean.Replace("@SlideshowFirst", "")
-		End If
+				StringClean = StringClean.Replace("@ShowBoobsImage", "")
+				StringClean = StringClean.Replace("@ShowBoobImage", "")
+			End If
 
-		If StringClean.Contains("@SlideshowLast") Then
-			ssh.CustomSlideEnabled = True
-			ShowImage(ssh.CustomSlideshow.LastImage, False)
-			StringClean = StringClean.Replace("@SlideshowLast", "")
-		End If
+			If StringClean.Contains("@ShowHardcoreImage") Then
+				ShowImage(GetImageData(ImageGenre.Hardcore).Random(), False)
+				StringClean = StringClean.Replace("@ShowHardcoreImage", "")
+			End If
 
-		If StringClean.Contains("@SlideshowNext") Then
-			ssh.CustomSlideEnabled = True
-			ShowImage(ssh.CustomSlideshow.NextImage, False)
-			StringClean = StringClean.Replace("@SlideshowNext", "")
-		End If
+			If StringClean.Contains("@ShowSoftcoreImage") Then
+				ShowImage(GetImageData(ImageGenre.Softcore).Random(), False)
+				StringClean = StringClean.Replace("@ShowSoftcoreImage", "")
+			End If
 
-		If StringClean.Contains("@SlideshowPrevious") Then
-			ssh.CustomSlideEnabled = True
-			ShowImage(ssh.CustomSlideshow.PreviousImage, False)
-			StringClean = StringClean.Replace("@SlideshowPrevious", "")
-		End If
+			If StringClean.Contains("@ShowLesbianImage") Then
+				ShowImage(GetImageData(ImageGenre.Lesbian).Random(), False)
+				StringClean = StringClean.Replace("@ShowLesbianImage", "")
+			End If
 
-		If StringClean.Contains("@GotoSlideshow") Then
-			Dim ImageString As String = ssh.CustomSlideshow.CurrentImage
+			If StringClean.Contains("@ShowBlowjobImage") Then
+				ShowImage(GetImageData(ImageGenre.Blowjob).Random(), False)
+				StringClean = StringClean.Replace("@ShowBlowjobImage", "")
+			End If
 
-			If ImageString IsNot Nothing OrElse ImageString = "" Then
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Hardcore Then ssh.FileGoto = "(Hardcore)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Softcore Then ssh.FileGoto = "(Softcore)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Lesbian Then ssh.FileGoto = "(Lesbian)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Blowjob Then ssh.FileGoto = "(Blowjob)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Femdom Then ssh.FileGoto = "(Femdom)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Lezdom Then ssh.FileGoto = "(Lezdom)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Hentai Then ssh.FileGoto = "(Hentai)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Gay Then ssh.FileGoto = "(Gay)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Maledom Then ssh.FileGoto = "(Maledom)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Captions Then ssh.FileGoto = "(Captions)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.General Then ssh.FileGoto = "(General)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Boobs Then ssh.FileGoto = "(Boobs)"
-				If ssh.CustomSlideshow(ImageString) = ImageGenre.Butt Then ssh.FileGoto = "(Butts)"
+			If StringClean.Contains("@ShowFemdomImage") Then
+				ShowImage(GetImageData(ImageGenre.Femdom).Random(), False)
+				StringClean = StringClean.Replace("@ShowFemdomImage", "")
+			End If
 
-				Debug.Print("GotoSlideshow called, FileGoto = " & ssh.FileGoto)
+			If StringClean.Contains("@ShowLezdomImage") Then
+				ShowImage(GetImageData(ImageGenre.Lezdom).Random(), False)
+				StringClean = StringClean.Replace("@ShowLezdomImage", "")
+			End If
 
+			If StringClean.Contains("@ShowHentaiImage") Then
+				ShowImage(GetImageData(ImageGenre.Hentai).Random(), False)
+				StringClean = StringClean.Replace("@ShowHentaiImage", "")
+			End If
+
+			If StringClean.Contains("@ShowGayImage") Then
+				ShowImage(GetImageData(ImageGenre.Gay).Random(), False)
+				StringClean = StringClean.Replace("@ShowGayImage", "")
+			End If
+
+			If StringClean.Contains("@ShowMaledomImage") Then
+				ShowImage(GetImageData(ImageGenre.Maledom).Random(), False)
+				StringClean = StringClean.Replace("@ShowMaledomImage", "")
+			End If
+
+			If StringClean.Contains("@ShowCaptionsImage") Then
+				ShowImage(GetImageData(ImageGenre.Captions).Random(), False)
+				StringClean = StringClean.Replace("@ShowCaptionsImage", "")
+			End If
+
+			If StringClean.Contains("@ShowGeneralImage") Then
+				ShowImage(GetImageData(ImageGenre.General).Random(), False)
+				StringClean = StringClean.Replace("@ShowGeneralImage", "")
+			End If
+
+			If StringClean.Contains("@ShowLikedImage") Then
+				ShowImage(GetImageData(ImageGenre.Liked).Random(), False)
+				StringClean = StringClean.Replace("@ShowLikedImage", "")
+			End If
+
+			If StringClean.Contains("@ShowDislikedImage") Then
+				ShowImage(GetImageData(ImageGenre.Disliked).Random(), False)
+				StringClean = StringClean.Replace("@ShowDislikedImage", "")
+			End If
+
+			If StringClean.Contains("@ShowBlogImage") Then
+				ShowImage(GetImageData(ImageGenre.Blog).Random(), False)
+				StringClean = StringClean.Replace("@ShowBlogImage", "")
+			End If
+
+			' The @NewBlogImage Command is a defunct Command that has been replaced by @ShowBlogImage
+			If StringClean.Contains("@NewBlogImage") Then
+				ShowImage(GetImageData(ImageGenre.Blog).Random(), False)
+				StringClean = StringClean.Replace("@NewBlogImage", "")
+			End If
+
+			If StringClean.Contains("@ShowLocalImage") And Not StringClean.Contains("@ShowLocalImage(") Then
+				ShowImage(GetRandomImage(ImageSourceType.Local), False)
+				StringClean = StringClean.Replace("@ShowLocalImage", "")
+			End If
+
+			'===============================================================================
+			'								@ShowLocalImage()
+			'===============================================================================
+			If StringClean.Contains("@ShowLocalImage(") Then
+				Dim LocalFlag As String = GetParentheses(StringClean, "@ShowLocalImage(")
+				LocalFlag = FixCommas(LocalFlag)
+
+				Dim tmpListGenre As List(Of String) = LocalFlag.Split(",").ToList
+
+				If LocalFlag.ToUpper.Contains("NOT") Then
+					' =============== Invert the Content in Brackets ===============
+					' Declare a String containing all available ImageGenres
+					Dim CompareFlag As String = "Hardcore, Softcore, Lesbian, Blowjob, Femdom, Lezdom, Hentai, Gay, Maledom, Captions, General, Butts, Boobs"
+
+					' Remove Imagegenre, when there are no local Images available or it is in the inverting bracket
+					For i As Integer = tmpListGenre.Count - 1 To 0 Step -1
+						If tmpListGenre(i).ToUpper.Contains("HARDCORE") Or Not GetImageData(ImageGenre.Hardcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hardcore, ", "")
+						If tmpListGenre(i).ToUpper.Contains("SOFTCORE") Or Not GetImageData(ImageGenre.Softcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Softcore, ", "")
+						If tmpListGenre(i).ToUpper.Contains("LESBIAN") Or Not GetImageData(ImageGenre.Lesbian).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lesbian, ", "")
+						If tmpListGenre(i).ToUpper.Contains("BLOWJOB") Or Not GetImageData(ImageGenre.Blowjob).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Blowjob, ", "")
+						If tmpListGenre(i).ToUpper.Contains("FEMDOM") Or Not GetImageData(ImageGenre.Femdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Femdom, ", "")
+						If tmpListGenre(i).ToUpper.Contains("LEZDOM") Or Not GetImageData(ImageGenre.Lezdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lezdom, ", "")
+						If tmpListGenre(i).ToUpper.Contains("HENTAI") Or Not GetImageData(ImageGenre.Hentai).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hentai, ", "")
+						If tmpListGenre(i).ToUpper.Contains("GAY") Or Not GetImageData(ImageGenre.Gay).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Gay, ", "")
+						If tmpListGenre(i).ToUpper.Contains("MALEDOM") Or Not GetImageData(ImageGenre.Maledom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Maledom, ", "")
+						If tmpListGenre(i).ToUpper.Contains("CAPTIONS") Or Not GetImageData(ImageGenre.Captions).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Captions, ", "")
+						If tmpListGenre(i).ToUpper.Contains("GENERAL") Or Not GetImageData(ImageGenre.General).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("General, ", "")
+						If tmpListGenre(i).ToUpper.Contains("BUTT") Or Not GetImageData(ImageGenre.Butt).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Butts, ", "")
+						If tmpListGenre(i).ToUpper.Contains("BUTTS") Then CompareFlag = CompareFlag.Replace("Butts, ", "")
+						If tmpListGenre(i).ToUpper.Contains("BOOB") Or Not GetImageData(ImageGenre.Boobs).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Boobs", "")
+						If tmpListGenre(i).ToUpper.Contains("BOOBS") Then CompareFlag = CompareFlag.Replace("Boobs", "")
+					Next
+
+					' Set the inverted Array.
+					tmpListGenre = CompareFlag.Split(", ").ToList
+				End If
+
+				' Pick a random entry from list
+				Debug.Print("@ShowLocalImage() LocalFLag original = " & LocalFlag)
+				Debug.Print("@ShowLocalImage() LocalFLag modified = " & String.Join(", ", tmpListGenre))
+
+				' generate a list of all available Local Images. This way it is most 
+				' likely, to get an image.
+				Dim tmpImageLocationList As New List(Of String)
+
+				For Each tmpStr As String In tmpListGenre
+					If tmpStr.ToUpper.Contains("HARDCORE") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hardcore).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("SOFTCORE") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Softcore).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("LESBIAN") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lesbian).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("BLOWJOB") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Blowjob).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("FEMDOM") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Femdom).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("LEZDOM") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lezdom).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("HENTAI") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hentai).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("GAY") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Gay).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("MALEDOM") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Maledom).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("CAPTION") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Captions).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("GENERAL") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.General).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("BUTT") Or tmpStr.ToUpper.Contains("BUTTS") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Butt).ToList(ImageSourceType.Local))
+					ElseIf tmpStr.ToUpper.Contains("BOOB") Or tmpStr.ToUpper.Contains("BOOBS") Then
+						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Boobs).ToList(ImageSourceType.Local))
+					End If
+				Next
+				' Declare a string for the Image to show - initialize with error Image
+				Dim tmpImgToShow As String = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+				' If there are images, overwrite the error image.
+				If tmpImageLocationList.Count > 0 Then
+					tmpImgToShow = tmpImageLocationList(New Random().Next(0, tmpImageLocationList.Count))
+				Else
+					Trace.WriteLine("failed to execute Command: @ShowLocalImage(" & LocalFlag & ") No images found.")
+				End If
+
+				ShowImage(tmpImgToShow, False)
+
+				StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
+			End If
+			'----------------------------------------
+			' @ShowLocalImage()- End
+			'----------------------------------------
+			'===============================================================================
+			'								@ShowTaggedImage
+			'===============================================================================
+			If StringClean.Contains("@ShowTaggedImage") Then
+				Dim Tags As List(Of String) = StringClean.Split() _
+										.Select(Function(s) s.Trim()) _
+										.Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList
+
+				Dim FoundString As String = GetLocalImage(Tags, Nothing)
+
+				'TODO: @ShowTaggedImage - Add a dedicated ErrorImage when there are no tagged images.
+				If FoundString = String.Empty Then FoundString = pathImageErrorNoLocalImages
+
+				ssh.JustShowedBlogImage = True
+				ShowImage(FoundString, False)
+
+				Tags.ForEach(Sub(x) StringClean = StringClean.Replace(x, ""))
+				StringClean = StringClean.Replace("@ShowTaggedImage", "")
+			End If
+			'----------------------------------------
+			' @ShowTaggedImage - End
+			'----------------------------------------
+			'===============================================================================
+			'									@ShowImage[]
+			'===============================================================================
+			If StringClean.Contains("@ShowImage[") Then
+				Dim ImageToShow As String = GetParentheses(StringClean, "@ShowImage[")
+				ShowImage(checkForImage(ImageToShow), False)
+				StringClean = StringClean.Replace("@ShowImage[" & GetParentheses(StringClean, "@ShowImage[") & "]", "")
+			End If
+			'----------------------------------------
+			' @ShowImage[]- End
+			'----------------------------------------
+			'===============================================================================
+			'								Legacy TnA-Slideshow
+			'===============================================================================
+			' TODO: Rework TnA-Game to use CustomSlideshow instead of its own code.
+			' @TnAFastSlides starts a fast slideshow with Boobs and Butts. Use with local images, to avoid the download delay. otherwise the images will stutter.
+			' @TnASlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per second.
+			' @TnASlowSlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per 5 seconds.
+
+			If StringClean.Contains("@TnAFastSlides") Or StringClean.Contains("@TnASlowSlides") Or StringClean.Contains("@TnASlides") Then
+				If StringClean.Contains("@TnAFastSlides") Then TnASlides.Interval = 334
+				If StringClean.Contains("@TnASlides") Then TnASlides.Interval = 1000
+				If StringClean.Contains("@TnASlowSlides") Then TnASlides.Interval = 5000
+
+				Try
+					ssh.BoobList.Clear()
+					ssh.AssList.Clear()
+
+					If ssh.BoobList.Count < 1 Then ssh.BoobList = GetImageData(ImageGenre.Boobs).ToList
+					If ssh.AssList.Count < 1 Then ssh.AssList = GetImageData(ImageGenre.Butt).ToList
+
+					If ssh.BoobList.Count < 1 Then Throw New Exception("No Boobs-images found.")
+					If ssh.AssList.Count < 1 Then Throw New Exception("No Butt-images found.")
+
+					TnASlides.Start()
+				Catch ex As Exception
+					Log.WriteError("Unable to start TnA Slideshow: " & vbCrLf &
+					   ex.Message, ex, "CommandClean()")
+					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Unable to start TnA Slideshow</font>", False)
+				End Try
+
+				StringClean = StringClean.Replace("@TnAFastSlides", "")
+				StringClean = StringClean.Replace("@TnASlowSlides", "")
+				StringClean = StringClean.Replace("@TnASlides", "")
+			End If
+
+			If StringClean.Contains("@CheckTnA") Then
+				TnASlides.Stop()
+
+				'Debug.Print("@CheckTnA called ::: AssImage = " & AssImage & " ::: BoobImage = " & BoobImage)
+				If ssh.AssImage = True Then ssh.FileGoto = "(Butt)"
+				If ssh.BoobImage = True Then ssh.FileGoto = "(Boobs)"
 				ssh.SkipGotoLine = True
 				GetGoto()
-			Else
-				Dim lazytext As String = "@GotoSlideshow can't determine the current CustomSlideshow image. Please make sure to start it before using @GotoSlideshow."
-				Log.WriteError(lazytext, New NullReferenceException(lazytext), "@GotoSlideshow")
-				If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: @GotoSlideshow can't determine the current CustomSlideshow image. Please make sure to start it before using @GotoSlideshow</font>", False)
+				StringClean = StringClean.Replace("@CheckTnA", "")
 			End If
 
-			StringClean = StringClean.Replace("@GotoSlideshow", "")
-		End If
-		'----------------------------------------
-		' Slideshow - End
-		'----------------------------------------
-		' This Command will not work in the same line, because the Images are loaded async and not available yet.
-		If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", ssh.ImageLocation)
+			If StringClean.Contains("@StopTnA") Then
+				TnASlides.Stop()
+				ssh.BoobList.Clear()
+				ssh.BoobImage = False
+				ssh.AssList.Clear()
+				ssh.AssImage = False
+				StringClean = StringClean.Replace("@StopTnA", "")
+			End If
+			'----------------------------------------
+			' TnA-Slideshow - End
+			'----------------------------------------
+			'===============================================================================
+			'								Slideshow
+			'===============================================================================
+			If StringClean.Contains("@Slideshow(") Then
+				Dim SlideFlag As String = StringClean
 
-		' The @LockImages Commnd prevents the Domme Slideshow from moving forward or back when set to "Tease" or "Timed". Manual operation of Domme Slideshow images is still allowed,
-		' and pictures displayed through other means will still work. Images are automatically unlocked whenever Tease AI moves into a Link script, an End script, any Interrupt occurs
-		' (including Long Edge and Start Stroking) or when the sub gives up.
+				Dim SlideStart As Integer
 
-		If StringClean.Contains("@LockImages") Then
-			ssh.LockImage = True
-			nextButton.Enabled = False
-			previousButton.Enabled = False
-			PicStripTSMIdommeSlideshow.Enabled = False
-			StringClean = StringClean.Replace("@LockImages", "")
-		End If
-		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-		'			ImageCommands - End
-		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+				SlideStart = SlideFlag.IndexOf("@Slideshow(") + 11
+				SlideFlag = SlideFlag.Substring(SlideStart, SlideFlag.Length - SlideStart)
+				SlideFlag = SlideFlag.Split(")")(0)
+				SlideFlag = SlideFlag.Replace("@Slideshow(", "")
 
-		' The @Chance Command gives a chance to either jump to the line specified, or move to the next line as normal. The odds of jumping to the specified line are indicated in the Command
-		' itself. For example, @Chance50(Domme Instructions) would have a 50% chance of jumping to (Domme Instructions).
+				ssh.CustomSlideshow.Clear()
 
-		If StringClean.Contains("@Chance") Then
+				If SlideFlag.ToLower.Contains("hardcore") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Hardcore).ToList(), ImageGenre.Hardcore)
+				End If
 
-			Dim ChanceTemp As String
-			Dim TSStartIndex As Integer
-			Dim TSEndIndex As Integer
+				If SlideFlag.ToLower.Contains("softcore") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Softcore).ToList(), ImageGenre.Softcore)
+				End If
 
-			TSStartIndex = StringClean.IndexOf("@Chance") + 7
-			TSEndIndex = StringClean.IndexOf("@Chance") + 9
+				If SlideFlag.ToLower.Contains("lesbian") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Lesbian).ToList(), ImageGenre.Lesbian)
+				End If
 
-			ChanceTemp = StringClean.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim
+				If SlideFlag.ToLower.Contains("blowjob") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Blowjob).ToList(), ImageGenre.Blowjob)
+				End If
 
-			Dim ChanceVal As Integer
+				If SlideFlag.ToLower.Contains("femdom") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Femdom).ToList(), ImageGenre.Femdom)
+				End If
 
-			ChanceVal = Val(ChanceTemp)
+				If SlideFlag.ToLower.Contains("lezdom") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Lezdom).ToList(), ImageGenre.Lezdom)
+				End If
 
-			ssh.TempVal = ssh.randomizer.Next(1, 101)
+				If SlideFlag.ToLower.Contains("hentai") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Hentai).ToList(), ImageGenre.Hentai)
+				End If
 
-			Dim ChanceString As String = StringClean.Substring(TSStartIndex + 2, StringClean.Length - (TSStartIndex + 2)).Trim
+				If SlideFlag.ToLower.Contains("gay") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Gay).ToList(), ImageGenre.Gay)
+				End If
 
-			Dim ChanceSplit As String() = Split(ChanceString, ")")
+				If SlideFlag.ToLower.Contains("maledom") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Maledom).ToList(), ImageGenre.Maledom)
+				End If
+
+				If SlideFlag.ToLower.Contains("captions") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Captions).ToList(), ImageGenre.Captions)
+				End If
+
+				If SlideFlag.ToLower.Contains("general") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.General).ToList(), ImageGenre.General)
+				End If
+
+				If SlideFlag.ToLower.Contains("boob") Or LCase(SlideFlag).Contains("boobs") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Boobs).ToList(), ImageGenre.Boobs)
+				End If
+
+				If SlideFlag.ToLower.Contains("butt") Or LCase(SlideFlag).Contains("butts") Then
+					ssh.CustomSlideshow.AddRange(GetImageData(ImageGenre.Butt).ToList(), ImageGenre.Butt)
+				End If
 
 
-			Debug.Print("CHanceCheck = " & "@Chance" & ChanceTemp & ChanceSplit(0) & ")")
-			StringClean = StringClean.Replace("@Chance" & ChanceTemp & ChanceSplit(0) & ")", "")
+				CustomSlideshowTimer.Interval = 1000
+				If LCase(SlideFlag).Contains("slow") Then CustomSlideshowTimer.Interval = 5000
+				If LCase(SlideFlag).Contains("fast") Then CustomSlideshowTimer.Interval = 500
 
-			If ssh.TempVal <= ChanceVal Then
 
-				ssh.FileGoto = ChanceSplit(0) & ")"
-				ssh.SkipGotoLine = True
+				StringClean = StringClean.Replace("@Slideshow(" & SlideFlag & ")", "")
+			End If
 
-				If ssh.YesOrNo = True Then
-					GetGotoChat()
-				Else
+			If StringClean.Contains("@SlideshowOn") Then
+				If ssh.CustomSlideshow.Count > 0 Then
+					ssh.CustomSlideEnabled = True
+					CustomSlideshowTimer.Start()
+				End If
+				StringClean = StringClean.Replace("@SlideshowOn", "")
+			End If
+
+			If StringClean.Contains("@SlideshowOff") Then
+				ssh.CustomSlideEnabled = False
+				CustomSlideshowTimer.Stop()
+				StringClean = StringClean.Replace("@SlideshowOff", "")
+			End If
+
+			If StringClean.Contains("@SlideshowFirst") Then
+				ssh.CustomSlideEnabled = True
+				ShowImage(ssh.CustomSlideshow.FirstImage, False)
+				StringClean = StringClean.Replace("@SlideshowFirst", "")
+			End If
+
+			If StringClean.Contains("@SlideshowLast") Then
+				ssh.CustomSlideEnabled = True
+				ShowImage(ssh.CustomSlideshow.LastImage, False)
+				StringClean = StringClean.Replace("@SlideshowLast", "")
+			End If
+
+			If StringClean.Contains("@SlideshowNext") Then
+				ssh.CustomSlideEnabled = True
+				ShowImage(ssh.CustomSlideshow.NextImage, False)
+				StringClean = StringClean.Replace("@SlideshowNext", "")
+			End If
+
+			If StringClean.Contains("@SlideshowPrevious") Then
+				ssh.CustomSlideEnabled = True
+				ShowImage(ssh.CustomSlideshow.PreviousImage, False)
+				StringClean = StringClean.Replace("@SlideshowPrevious", "")
+			End If
+
+			If StringClean.Contains("@GotoSlideshow") Then
+				Dim ImageString As String = ssh.CustomSlideshow.CurrentImage
+
+				If ImageString IsNot Nothing OrElse ImageString = "" Then
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Hardcore Then ssh.FileGoto = "(Hardcore)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Softcore Then ssh.FileGoto = "(Softcore)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Lesbian Then ssh.FileGoto = "(Lesbian)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Blowjob Then ssh.FileGoto = "(Blowjob)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Femdom Then ssh.FileGoto = "(Femdom)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Lezdom Then ssh.FileGoto = "(Lezdom)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Hentai Then ssh.FileGoto = "(Hentai)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Gay Then ssh.FileGoto = "(Gay)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Maledom Then ssh.FileGoto = "(Maledom)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Captions Then ssh.FileGoto = "(Captions)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.General Then ssh.FileGoto = "(General)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Boobs Then ssh.FileGoto = "(Boobs)"
+					If ssh.CustomSlideshow(ImageString) = ImageGenre.Butt Then ssh.FileGoto = "(Butts)"
+
+					Debug.Print("GotoSlideshow called, FileGoto = " & ssh.FileGoto)
+
+					ssh.SkipGotoLine = True
 					GetGoto()
+				Else
+					Dim lazytext As String = "@GotoSlideshow can't determine the current CustomSlideshow image. Please make sure to start it before using @GotoSlideshow."
+					Log.WriteError(lazytext, New NullReferenceException(lazytext), "@GotoSlideshow")
+					If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: @GotoSlideshow can't determine the current CustomSlideshow image. Please make sure to start it before using @GotoSlideshow</font>", False)
+				End If
+
+				StringClean = StringClean.Replace("@GotoSlideshow", "")
+			End If
+			'----------------------------------------
+			' Slideshow - End
+			'----------------------------------------
+			' This Command will not work in the same line, because the Images are loaded async and not available yet.
+			If StringClean.Contains("@CurrentImage") Then StringClean = StringClean.Replace("@CurrentImage", ssh.ImageLocation)
+
+			' The @LockImages Commnd prevents the Domme Slideshow from moving forward or back when set to "Tease" or "Timed". Manual operation of Domme Slideshow images is still allowed,
+			' and pictures displayed through other means will still work. Images are automatically unlocked whenever Tease AI moves into a Link script, an End script, any Interrupt occurs
+			' (including Long Edge and Start Stroking) or when the sub gives up.
+
+			If StringClean.Contains("@LockImages") Then
+				ssh.LockImage = True
+				nextButton.Enabled = False
+				previousButton.Enabled = False
+				PicStripTSMIdommeSlideshow.Enabled = False
+				StringClean = StringClean.Replace("@LockImages", "")
+			End If
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			'			ImageCommands - End
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+
+			' The @Chance Command gives a chance to either jump to the line specified, or move to the next line as normal. The odds of jumping to the specified line are indicated in the Command
+			' itself. For example, @Chance50(Domme Instructions) would have a 50% chance of jumping to (Domme Instructions).
+
+			If StringClean.Contains("@Chance") Then
+
+				Dim ChanceTemp As String
+				Dim TSStartIndex As Integer
+				Dim TSEndIndex As Integer
+
+				TSStartIndex = StringClean.IndexOf("@Chance") + 7
+				TSEndIndex = StringClean.IndexOf("@Chance") + 9
+
+				ChanceTemp = StringClean.Substring(TSStartIndex, TSEndIndex - TSStartIndex).Trim
+
+				Dim ChanceVal As Integer
+
+				ChanceVal = Val(ChanceTemp)
+
+				ssh.TempVal = ssh.randomizer.Next(1, 101)
+
+				Dim ChanceString As String = StringClean.Substring(TSStartIndex + 2, StringClean.Length - (TSStartIndex + 2)).Trim
+
+				Dim ChanceSplit As String() = Split(ChanceString, ")")
+
+
+				Debug.Print("CHanceCheck = " & "@Chance" & ChanceTemp & ChanceSplit(0) & ")")
+				StringClean = StringClean.Replace("@Chance" & ChanceTemp & ChanceSplit(0) & ")", "")
+
+				If ssh.TempVal <= ChanceVal Then
+
+					ssh.FileGoto = ChanceSplit(0) & ")"
+					ssh.SkipGotoLine = True
+
+					If ssh.YesOrNo = True Then
+						GetGotoChat()
+					Else
+						GetGoto()
+					End If
+
 				End If
 
 			End If
 
-		End If
+			' The @CheckFlag() Command checks to see if a Flag has previously been created by @SetFlag or @TempFlag, and goes to the appropriate line if it has. If you use @CheckFlag() with just the name of
+			' the flag itself, such as @CheckFlag(FlagName) , then Tease AI will move to the line (FlagName) if that Flag exists. However, you can also specify a line to go to if that Flag is found by using
+			' a comma, such as @CheckFlag(FlagName, Domme Instructions) . In this case, Tease AI would move to the line (Domme Instructions) if the Flag "FlagName" exists. You can use as many @CheckFlag()
+			' Commands per line that you wish. When specifiying a line to go to in a @CheckFlag Command, never put it in its own parentheses (For example, @CheckFlag(FlagName, Domme Instructions) is correct,
+			' @CheckFlag(FlagName, (Domme Instructions)) is incorrect. 
 
-		' The @CheckFlag() Command checks to see if a Flag has previously been created by @SetFlag or @TempFlag, and goes to the appropriate line if it has. If you use @CheckFlag() with just the name of
-		' the flag itself, such as @CheckFlag(FlagName) , then Tease AI will move to the line (FlagName) if that Flag exists. However, you can also specify a line to go to if that Flag is found by using
-		' a comma, such as @CheckFlag(FlagName, Domme Instructions) . In this case, Tease AI would move to the line (Domme Instructions) if the Flag "FlagName" exists. You can use as many @CheckFlag()
-		' Commands per line that you wish. When specifiying a line to go to in a @CheckFlag Command, never put it in its own parentheses (For example, @CheckFlag(FlagName, Domme Instructions) is correct,
-		' @CheckFlag(FlagName, (Domme Instructions)) is incorrect. 
+			If StringClean.Contains("@CheckFlag") Then
 
-		If StringClean.Contains("@CheckFlag") Then
+				Dim CheckArray As String() = StringClean.Split(")")
 
-			Dim CheckArray As String() = StringClean.Split(")")
+				For i As Integer = 0 To CheckArray.Count - 1
 
-			For i As Integer = 0 To CheckArray.Count - 1
+					If CheckArray(i).Contains("@CheckFlag(") Then
 
-				If CheckArray(i).Contains("@CheckFlag(") Then
+						CheckArray(i) = CheckArray(i) & ")"
 
-					CheckArray(i) = CheckArray(i) & ")"
+						Dim CheckFlag As String = GetParentheses(CheckArray(i), "@CheckFlag(")
+						Dim OriginalCheck As String = CheckFlag
 
-					Dim CheckFlag As String = GetParentheses(CheckArray(i), "@CheckFlag(")
-					Dim OriginalCheck As String = CheckFlag
+						If CheckFlag.Contains(",") Then
 
-					If CheckFlag.Contains(",") Then
+							CheckFlag = CheckFlag.Replace(", ", ",")
+							CheckFlag = CheckFlag.Replace(" ,", ",")
+
+							Dim FlagArray() As String = CheckFlag.Split(",")
+
+							If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & FlagArray(0)) Or
+							  File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagArray(0)) Then
+								ssh.SkipGotoLine = True
+								ssh.FileGoto = FlagArray(1)
+								GetGoto()
+							End If
+
+						Else
+
+							If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & CheckFlag) Or
+							 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & CheckFlag) Then
+								ssh.SkipGotoLine = True
+								ssh.FileGoto = CheckFlag
+								GetGoto()
+							End If
+
+						End If
+
+						' CHECK FOR OTHER POSSIBLE CHECKARRAY BUGS
+						'CheckArray(i) = CheckArray(i).Replace("@CheckFlag(" & OriginalCheck & ")", "")
+
+						StringClean = StringClean.Replace("@CheckFlag(" & OriginalCheck & ")", "")
+
+					End If
+
+				Next
+
+				' StringClean = Join(CheckArray, Nothing)
+
+			End If
+
+
+TaskCleanSet:
+
+
+			' The @SetFlag() Command creates a Flag in System\Flags. You can use multiple @SetFlag() Commands in the same line to set multiple flags at once (For example, @SetFlag(Flag1) @SetFlag(Flag2)).
+			' You can also set multiple flags at once by separating them in single @SetFlag() Commands with a comma (For example, @SetFlag(Flag1, Flag2, Flag3)).
+
+			If StringClean.Contains("@SetFlag(") Then
+
+				Dim SetArray As String() = StringClean.Split(")")
+
+				For i As Integer = 0 To SetArray.Count - 1
+
+					If SetArray(i).Contains("@SetFlag(") Then
+
+						SetArray(i) = SetArray(i) & ")"
+
+						Dim SetFlag As String = GetParentheses(SetArray(i), "@SetFlag(")
+						Dim OriginalSet As String = SetFlag
+
+						If SetFlag.Contains(",") Then
+
+							SetFlag = SetFlag.Replace(", ", ",")
+							SetFlag = SetFlag.Replace(" ,", ",")
+
+							Dim FlagArray() As String = SetFlag.Split(",")
+
+							For x As Integer = 0 To FlagArray.Count - 1
+
+								CreateFlag(FlagArray(x))
+
+							Next
+
+						Else
+
+							CreateFlag(SetFlag)
+
+						End If
+
+						'SetArray(i) = SetArray(i).Replace("@SetFlag(" & OriginalSet & ")", "")
+
+						StringClean = StringClean.Replace("@SetFlag(" & OriginalSet & ")", "")
+
+					End If
+
+				Next
+
+				'StringClean = Join(SetArray, Nothing)
+
+			End If
+
+			' The @TempFlag() Command creates a Flag in System\Flags\Temp. These work like @SetFlag() Commands, the only difference is that Flags set this way are deleted the next time Tease AI is run.
+			' You can use multiple @TempFlag() Commands in the same line to set multiple flags at once (For example, @TempFlag(Flag1) @TempFlag(Flag2)).
+			' You can also set multiple flags at once by separating them in single @TempFlag() Commands with a comma (For example, @TempFlag(Flag1, Flag2, Flag3)).
+
+			If StringClean.Contains("@TempFlag(") Then
+
+				Dim TempArray As String() = StringClean.Split(")")
+
+				For i As Integer = 0 To TempArray.Count - 1
+
+					If TempArray(i).Contains("@TempFlag(") Then
+
+						TempArray(i) = TempArray(i) & ")"
+
+						Dim TempFlag As String = GetParentheses(TempArray(i), "@TempFlag(")
+						Dim OriginalTemp As String = TempFlag
+
+						If TempFlag.Contains(",") Then
+
+							TempFlag = TempFlag.Replace(", ", ",")
+							TempFlag = TempFlag.Replace(" ,", ",")
+
+							Dim FlagArray() As String = TempFlag.Split(",")
+
+							For x As Integer = 0 To FlagArray.Count - 1
+
+								CreateFlag(FlagArray(x), True)
+
+							Next
+
+						Else
+
+							CreateFlag(TempFlag, True)
+
+						End If
+
+						'TempArray(i) = TempArray(i).Replace("@TempFlag(" & OriginalTemp & ")", "")
+
+						StringClean = StringClean.Replace("@TempFlag(" & OriginalTemp & ")", "")
+
+					End If
+
+				Next
+
+				'StringClean = Join(TempArray, Nothing)
+
+			End If
+
+			' The @DeleteFlag() Command deletes specified Flags in System\Flags and System\Flags\Temp.
+			' You can use multiple @DeleteFlag() Commands in the same line to delete multiple flags at once (For example, @DeleteFlag(Flag1) @DeleteFlag(Flag2)).
+			' You can also delete multiple flags at once by separating them in single @DeleteFlag() Commands with a comma (For example, @DeleteFlag(Flag1, Flag2, Flag3)).
+
+
+			If StringClean.Contains("@DeleteFlag(") Then
+
+				Dim DeleteArray As String() = StringClean.Split(")")
+
+				For i As Integer = 0 To DeleteArray.Count - 1
+
+					If DeleteArray(i).Contains("@DeleteFlag(") Then
+
+						DeleteArray(i) = DeleteArray(i) & ")"
+
+						Dim DFlag As String = GetParentheses(DeleteArray(i), "@DeleteFlag(")
+						Dim OriginalDelete As String = DFlag
+
+						If DFlag.Contains(",") Then
+
+							DFlag = FixCommas(DFlag)
+
+							Dim FlagArray() As String = DFlag.Split(",")
+
+							For x As Integer = 0 To FlagArray.Count - 1
+
+								DeleteFlag(FlagArray(x))
+
+							Next
+
+						Else
+
+							DeleteFlag(DFlag)
+
+						End If
+
+						' DeleteArray(i) = DeleteArray(i).Replace("@DeleteFlag(" & OriginalDelete & ")", "")
+
+						StringClean = StringClean.Replace("@DeleteFlag(" & OriginalDelete & ")", "")
+
+					End If
+
+				Next
+
+				'StringClean = Join(DeleteArray, Nothing)
+
+			End If
+
+			' The @SetVar[] Command is used to set a Variable and store it in System\Variables. The syntax for using @SetVar[] is @SetVar[VariableName]=[Value].
+			' For example, @SetVar[MyNumber]=[12] would save the Variable "MyNumber" as a value of 12. You can also set string Variables this way, such as @SetVar[MyString]=[lasagna]
+			' Multiple @SetVar[] Commands may be used per line if you wish.
+			' Variable names CANNOT contain spaces or any character not supported by Windows file naming conventions \ / : * ? " < > |
+
+			If StringClean.Contains("@SetVar[") Then
+
+				Dim VarArray As String() = StringClean.Split
+
+				For i As Integer = 0 To VarArray.Count - 1
+
+					Dim SCGotVar As String = "NULL"
+
+					If VarArray(i).Contains("@SetVar[") Then
+						SCGotVar = VarArray(i)
+						VarArray(i) = ""
+
+						SCGotVar = SCGotVar.Replace("@SetVar[", "")
+
+						Dim SCGotVarSplit As String() = Split(SCGotVar, "]")
+
+						Dim VarName As String = SCGotVarSplit(0)
+
+						SCGotVarSplit(0) = ""
+
+						SCGotVar = Join(SCGotVarSplit)
+
+						SCGotVar = SCGotVar.Replace("=[", "")
+						SCGotVar = SCGotVar.Replace(" ", "")
+
+						My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName, SCGotVar, False)
+
+					End If
+
+				Next
+
+				StringClean = Join(VarArray)
+
+			End If
+
+			' The @SetDate() Command allows you to set a time and date that's a specified amount of time in the future from the current time and date. Correct format is @SetDate(VarName, TimeAmount) .
+			' For example, @SetDate(EdgingStop, 1 Hour) would set a Variable called "EdgingStop" whose value is 1 hour away from the current time and date. As another example, @SetDate(NextOrgasmChance, 2 Weeks)
+			' would create a Variable called "NextOrgasmChance" whose value is 2 weeks from the current date.
+			' The available time increments are - Seconds, Minutes, Hours, Days, Weeks, Months and Years. When designating an amount of time, capitalization and pluralization do not matter. If no increment is
+			' specified, "Days" will be used.
+
+			If StringClean.Contains("@SetDate(") Then
+
+				Dim CheckArray As String() = StringClean.Split(")")
+				Dim OriginalCheck As String
+
+				For i As Integer = 0 To CheckArray.Count - 1
+
+					If CheckArray(i).Contains("@SetDate(") Then
+
+						'CheckArray(i) = CheckArray(i) & "]"
+
+						Dim CheckFlag As String = GetParentheses(CheckArray(i), "@SetDate(")
+						OriginalCheck = CheckFlag
+
+						Debug.Print("Original Check = " & OriginalCheck)
 
 						CheckFlag = CheckFlag.Replace(", ", ",")
 						CheckFlag = CheckFlag.Replace(" ,", ",")
 
 						Dim FlagArray() As String = CheckFlag.Split(",")
 
-						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & FlagArray(0)) Or
-						  File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & FlagArray(0)) Then
-							ssh.SkipGotoLine = True
-							ssh.FileGoto = FlagArray(1)
-							GetGoto()
-						End If
+						Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
 
-					Else
+						If UCase(FlagArray(1)).Contains(UCase("SECOND")) Then SetDate = DateAdd(DateInterval.Second, Val(FlagArray(1)), SetDate)
+						If UCase(FlagArray(1)).Contains(UCase("MINUTE")) Then SetDate = DateAdd(DateInterval.Minute, Val(FlagArray(1)), SetDate)
+						If UCase(FlagArray(1)).Contains(UCase("HOUR")) Then SetDate = DateAdd(DateInterval.Hour, Val(FlagArray(1)), SetDate)
+						If UCase(FlagArray(1)).Contains(UCase("DAY")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
+						If UCase(FlagArray(1)).Contains(UCase("WEEK")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)) * 7, SetDate)
+						If UCase(FlagArray(1)).Contains(UCase("MONTH")) Then SetDate = DateAdd(DateInterval.Month, Val(FlagArray(1)), SetDate)
+						If UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Year, Val(FlagArray(1)), SetDate)
 
-						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\" & CheckFlag) Or
-						 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Flags\Temp\" & CheckFlag) Then
-							ssh.SkipGotoLine = True
-							ssh.FileGoto = CheckFlag
-							GetGoto()
-						End If
+						If Not UCase(FlagArray(1)).Contains(UCase("SECOND")) And Not UCase(FlagArray(1)).Contains(UCase("MINUTE")) And Not UCase(FlagArray(1)).Contains(UCase("HOUR")) _
+						 And Not UCase(FlagArray(1)).Contains(UCase("DAY")) And Not UCase(FlagArray(1)).Contains(UCase("WEEK")) And Not UCase(FlagArray(1)).Contains(UCase("MONTH")) _
+						 And Not UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
 
-					End If
+						My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagArray(0), FormatDateTime(SetDate, DateFormat.GeneralDate), False)
 
-					' CHECK FOR OTHER POSSIBLE CHECKARRAY BUGS
-					'CheckArray(i) = CheckArray(i).Replace("@CheckFlag(" & OriginalCheck & ")", "")
+						Debug.Print("CheckArray(i) = " & CheckArray(i))
 
-					StringClean = StringClean.Replace("@CheckFlag(" & OriginalCheck & ")", "")
+						' CheckArray(i) = CheckArray(i).Replace("@SetDate(" & OriginalCheck, "")
 
-				End If
-
-			Next
-
-			' StringClean = Join(CheckArray, Nothing)
-
-		End If
-
-
-TaskCleanSet:
-
-
-		' The @SetFlag() Command creates a Flag in System\Flags. You can use multiple @SetFlag() Commands in the same line to set multiple flags at once (For example, @SetFlag(Flag1) @SetFlag(Flag2)).
-		' You can also set multiple flags at once by separating them in single @SetFlag() Commands with a comma (For example, @SetFlag(Flag1, Flag2, Flag3)).
-
-		If StringClean.Contains("@SetFlag(") Then
-
-			Dim SetArray As String() = StringClean.Split(")")
-
-			For i As Integer = 0 To SetArray.Count - 1
-
-				If SetArray(i).Contains("@SetFlag(") Then
-
-					SetArray(i) = SetArray(i) & ")"
-
-					Dim SetFlag As String = GetParentheses(SetArray(i), "@SetFlag(")
-					Dim OriginalSet As String = SetFlag
-
-					If SetFlag.Contains(",") Then
-
-						SetFlag = SetFlag.Replace(", ", ",")
-						SetFlag = SetFlag.Replace(" ,", ",")
-
-						Dim FlagArray() As String = SetFlag.Split(",")
-
-						For x As Integer = 0 To FlagArray.Count - 1
-
-							CreateFlag(FlagArray(x))
-
-						Next
-
-					Else
-
-						CreateFlag(SetFlag)
+						StringClean = StringClean.Replace("@SetDate(" & OriginalCheck & ")", "")
 
 					End If
 
-					'SetArray(i) = SetArray(i).Replace("@SetFlag(" & OriginalSet & ")", "")
+				Next
 
-					StringClean = StringClean.Replace("@SetFlag(" & OriginalSet & ")", "")
+				'StringClean = Join(CheckArray, Nothing)
 
-				End If
+			End If
 
-			Next
 
-			'StringClean = Join(SetArray, Nothing)
+			' The @RoundVar Command is used to take an existing Variable and round it by the amount specified. The correct format is @Round[VarName]=[RoundAmount]
+			' For example, @RoundVar[StrokeTotal]=[10] wound round the Variable "StrokeTotal" by 10.
+			' @Round[] will only round the and save Variable, it will not display it. More than one @Round[] Command can be used per line
 
-		End If
 
-		' The @TempFlag() Command creates a Flag in System\Flags\Temp. These work like @SetFlag() Commands, the only difference is that Flags set this way are deleted the next time Tease AI is run.
-		' You can use multiple @TempFlag() Commands in the same line to set multiple flags at once (For example, @TempFlag(Flag1) @TempFlag(Flag2)).
-		' You can also set multiple flags at once by separating them in single @TempFlag() Commands with a comma (For example, @TempFlag(Flag1, Flag2, Flag3)).
+			If StringClean.Contains("@RoundVar[") Then
 
-		If StringClean.Contains("@TempFlag(") Then
+				Dim VarArray As String() = StringClean.Split
 
-			Dim TempArray As String() = StringClean.Split(")")
+				For i As Integer = 0 To VarArray.Count - 1
 
-			For i As Integer = 0 To TempArray.Count - 1
+					Dim SCGotVar As String = "NULL"
 
-				If TempArray(i).Contains("@TempFlag(") Then
-
-					TempArray(i) = TempArray(i) & ")"
-
-					Dim TempFlag As String = GetParentheses(TempArray(i), "@TempFlag(")
-					Dim OriginalTemp As String = TempFlag
-
-					If TempFlag.Contains(",") Then
-
-						TempFlag = TempFlag.Replace(", ", ",")
-						TempFlag = TempFlag.Replace(" ,", ",")
-
-						Dim FlagArray() As String = TempFlag.Split(",")
-
-						For x As Integer = 0 To FlagArray.Count - 1
-
-							CreateFlag(FlagArray(x), True)
-
-						Next
-
-					Else
-
-						CreateFlag(TempFlag, True)
-
+					If VarArray(i).Contains("@RoundVar[") Then
+						SCGotVar = VarArray(i)
+						VarArray(i) = ""
 					End If
 
-					'TempArray(i) = TempArray(i).Replace("@TempFlag(" & OriginalTemp & ")", "")
-
-					StringClean = StringClean.Replace("@TempFlag(" & OriginalTemp & ")", "")
-
-				End If
-
-			Next
-
-			'StringClean = Join(TempArray, Nothing)
-
-		End If
-
-		' The @DeleteFlag() Command deletes specified Flags in System\Flags and System\Flags\Temp.
-		' You can use multiple @DeleteFlag() Commands in the same line to delete multiple flags at once (For example, @DeleteFlag(Flag1) @DeleteFlag(Flag2)).
-		' You can also delete multiple flags at once by separating them in single @DeleteFlag() Commands with a comma (For example, @DeleteFlag(Flag1, Flag2, Flag3)).
-
-
-		If StringClean.Contains("@DeleteFlag(") Then
-
-			Dim DeleteArray As String() = StringClean.Split(")")
-
-			For i As Integer = 0 To DeleteArray.Count - 1
-
-				If DeleteArray(i).Contains("@DeleteFlag(") Then
-
-					DeleteArray(i) = DeleteArray(i) & ")"
-
-					Dim DFlag As String = GetParentheses(DeleteArray(i), "@DeleteFlag(")
-					Dim OriginalDelete As String = DFlag
-
-					If DFlag.Contains(",") Then
-
-						DFlag = FixCommas(DFlag)
-
-						Dim FlagArray() As String = DFlag.Split(",")
-
-						For x As Integer = 0 To FlagArray.Count - 1
-
-							DeleteFlag(FlagArray(x))
-
-						Next
-
-					Else
-
-						DeleteFlag(DFlag)
-
-					End If
-
-					' DeleteArray(i) = DeleteArray(i).Replace("@DeleteFlag(" & OriginalDelete & ")", "")
-
-					StringClean = StringClean.Replace("@DeleteFlag(" & OriginalDelete & ")", "")
-
-				End If
-
-			Next
-
-			'StringClean = Join(DeleteArray, Nothing)
-
-		End If
-
-		' The @SetVar[] Command is used to set a Variable and store it in System\Variables. The syntax for using @SetVar[] is @SetVar[VariableName]=[Value].
-		' For example, @SetVar[MyNumber]=[12] would save the Variable "MyNumber" as a value of 12. You can also set string Variables this way, such as @SetVar[MyString]=[lasagna]
-		' Multiple @SetVar[] Commands may be used per line if you wish.
-		' Variable names CANNOT contain spaces or any character not supported by Windows file naming conventions \ / : * ? " < > |
-
-		If StringClean.Contains("@SetVar[") Then
-
-			Dim VarArray As String() = StringClean.Split
-
-			For i As Integer = 0 To VarArray.Count - 1
-
-				Dim SCGotVar As String = "NULL"
-
-				If VarArray(i).Contains("@SetVar[") Then
-					SCGotVar = VarArray(i)
-					VarArray(i) = ""
-
-					SCGotVar = SCGotVar.Replace("@SetVar[", "")
+					SCGotVar = SCGotVar.Replace("@RoundVar[", "")
 
 					Dim SCGotVarSplit As String() = Split(SCGotVar, "]")
 
 					Dim VarName As String = SCGotVarSplit(0)
+					Dim Val1 As Integer
 
-					SCGotVarSplit(0) = ""
+					Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName
 
-					SCGotVar = Join(SCGotVarSplit)
 
-					SCGotVar = SCGotVar.Replace("=[", "")
-					SCGotVar = SCGotVar.Replace(" ", "")
+					'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
+					If File.Exists(VarCheck) Then
+						' Read first line of the given file.
+						Val1 = CInt(TxtReadLine(VarCheck))
 
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName, SCGotVar, False)
+						SCGotVarSplit(0) = ""
 
+						SCGotVar = Join(SCGotVarSplit)
+
+						SCGotVar = SCGotVar.Replace("=[", "")
+						SCGotVar = SCGotVar.Replace(" ", "")
+
+						Dim VarValue As Integer = Val(SCGotVar)
+
+						Val1 = VarValue * Math.Round(Val1 / VarValue)
+
+						My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName, Val1, False)
+
+					End If
+
+					' StringClean = StringClean.Replace("@RoundVar[" & OriginalCheck & ")", "")
+
+				Next
+
+				StringClean = Join(VarArray)
+
+			End If
+
+			' The @ChangeVar[] Command is used to Value of a new or existing Variable and round it by the amount specified. The correct format is @ChangeVar[VarName]=[Value1]+[Value2]
+			' For example, @ChangeVar[StrokeTotal]=[StrokeTotal]+[100] would add 100 to the current value of "StrokeTotal" and save it. If "StrokeTotal" did not previously exist, then it would be created
+			' with a value of 100 in this case, since nothing + 100 equals 100. You can use @ChangeVar[] to add, subtract, multiply or divide with the operators +, -, * and /
+			'More than one @ChangeVar[] Command can be used per line.
+
+			If StringClean.Contains("@ChangeVar[") Then
+
+				Dim ChangeArray As String() = StringClean.Split
+
+				For i As Integer = 0 To ChangeArray.Count - 1
+
+					Debug.Print("CHangeVar ChangeArray(i) = " & ChangeArray(i))
+
+					If ChangeArray(i).Contains("@ChangeVar[") Then
+
+						Dim ChangeFlag As String = ChangeArray(i)
+						Dim ChangeStart As Integer = ChangeFlag.IndexOf("@ChangeVar[") + 11
+
+						Dim ChangeVar As String
+						Dim ChangeVal1 As String
+						Dim ChangeVal2 As String
+						Dim ChangeOperator As String
+
+						Dim Val1 As Integer
+						Dim Val2 As Integer
+
+						ChangeFlag = ChangeArray(i).Substring(ChangeStart, ChangeArray(i).Length - ChangeStart)
+						ChangeVar = ChangeFlag.Split("]")(0)
+						ChangeVal1 = ChangeFlag.Split("]")(1)
+						ChangeVal2 = ChangeFlag.Split("]")(2)
+						ChangeOperator = ChangeFlag.Split("]")(2)
+
+						ChangeArray(i) = ChangeArray(i).Replace("@ChangeVar[" & ChangeVar & "]" & ChangeVal1 & "]" & ChangeVal2 & "]", "")
+
+						ChangeVar = ChangeVar.Replace("@ChangeVar[", "")
+						ChangeVal1 = ChangeVal1.Replace("=[", "")
+						ChangeVal2 = ChangeVal2.Replace("+[", "")
+						ChangeVal2 = ChangeVal2.Replace("-[", "")
+						ChangeVal2 = ChangeVal2.Replace("*[", "")
+						ChangeVal2 = ChangeVal2.Replace("/[", "")
+
+						'@ChangeVar[TB_EdgeHoldingOwed   ]    =[TB_EdgeHoldingOwed    ]     -[1       ]
+
+						If IsNumeric(ChangeVal1) = False Then
+							'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
+							If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1) Then
+								Val1 = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1)
+							Else
+								Val1 = 0
+							End If
+						Else
+							Val1 = Val(ChangeVal1)
+						End If
+
+						If IsNumeric(ChangeVal2) = False Then
+							'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
+							If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2) Then
+								Val2 = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2)
+							Else
+								Val2 = 0
+							End If
+						Else
+							Val2 = Val(ChangeVal2)
+						End If
+
+						ssh.ScriptOperator = "Null"
+						If ChangeOperator.Contains("+") Then ssh.ScriptOperator = "Add"
+						If ChangeOperator.Contains("-") Then ssh.ScriptOperator = "Subtract"
+						If ChangeOperator.Contains("*") Then ssh.ScriptOperator = "Multiply"
+						If ChangeOperator.Contains("/") Then ssh.ScriptOperator = "Divide"
+
+						Dim ChangeVal As Integer = 0
+
+						If ssh.ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
+						If ssh.ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
+						If ssh.ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
+						If ssh.ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
+
+						My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
+
+					End If
+
+				Next
+
+			End If
+
+			' The @ShowVar[] Command is used to show the value of an existing Variable. The correct format is @ShowVar[VarName]
+			' More than one @ShowVar[] Commands can be used per line
+
+			If StringClean.Contains("@ShowVar[") Then
+
+				Dim VarSplit As String() = StringClean.Split("]")
+
+				For i As Integer = 0 To VarSplit.Count - 1
+
+					If VarSplit(i).Contains("@ShowVar[") Then
+
+						Dim VarString As String = VarSplit(i) & "]"
+
+						Dim VarFlag As String = GetParentheses(VarString, "@ShowVar[")
+						Debug.Print("VarFlag = " & VarFlag)
+						Dim VarFlag2 As String = GetVariable(VarFlag)
+						Debug.Print("VarFlag2 = " & VarFlag2)
+						' StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
+
+						Debug.Print("Try this shit       @ShowVar[" & VarFlag & "]")
+
+						StringClean = StringClean.Replace("@ShowVar[" & VarFlag & "]", VarFlag2)
+
+					End If
+
+				Next
+
+			End If
+
+
+			If StringClean.Contains("@ChastityOn") Then
+				My.Settings.Chastity = True
+				FrmSettings.LBLChastityState.Text = "ON"
+				FrmSettings.LBLChastityState.ForeColor = Color.Green
+				StringClean = StringClean.Replace("@ChastityOn", "")
+			End If
+
+			If StringClean.Contains("@ChastityOff") Then
+				My.Settings.Chastity = False
+				FrmSettings.LBLChastityState.Text = "OFF"
+				FrmSettings.LBLChastityState.ForeColor = Color.Red
+				StringClean = StringClean.Replace("@ChastityOff", "")
+			End If
+
+			If StringClean.Contains("@AddTokens(") Then
+
+				Dim TokenFlag As String = GetParentheses(StringClean, "@AddTokens(")
+				TokenFlag = FixCommas(TokenFlag)
+				Dim TokenAdd As Integer
+
+				If TokenFlag.Contains(",") Then
+					Dim TokenArray As String() = TokenFlag.Split(",")
+					For i As Integer = 0 To TokenArray.Count - 1
+						TokenAdd = Val(TokenArray(i))
+						If UCase(TokenArray(i)).Contains("B") Then ssh.BronzeTokens += TokenAdd
+						If UCase(TokenArray(i)).Contains("S") Then ssh.SilverTokens += TokenAdd
+						If UCase(TokenArray(i)).Contains("G") Then ssh.GoldTokens += TokenAdd
+					Next
+				Else
+					TokenAdd = Val(TokenFlag)
+					If UCase(TokenFlag).Contains("B") Then ssh.BronzeTokens += TokenAdd
+					If UCase(TokenFlag).Contains("S") Then ssh.SilverTokens += TokenAdd
+					If UCase(TokenFlag).Contains("G") Then ssh.GoldTokens += TokenAdd
 				End If
 
-			Next
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				My.Settings.SilverTokens = ssh.SilverTokens
+				My.Settings.GoldTokens = ssh.GoldTokens
 
-			StringClean = Join(VarArray)
 
-		End If
+				StringClean = StringClean.Replace("@AddTokens(" & TokenFlag & ")", "")
 
-		' The @SetDate() Command allows you to set a time and date that's a specified amount of time in the future from the current time and date. Correct format is @SetDate(VarName, TimeAmount) .
-		' For example, @SetDate(EdgingStop, 1 Hour) would set a Variable called "EdgingStop" whose value is 1 hour away from the current time and date. As another example, @SetDate(NextOrgasmChance, 2 Weeks)
-		' would create a Variable called "NextOrgasmChance" whose value is 2 weeks from the current date.
-		' The available time increments are - Seconds, Minutes, Hours, Days, Weeks, Months and Years. When designating an amount of time, capitalization and pluralization do not matter. If no increment is
-		' specified, "Days" will be used.
+			End If
 
-		If StringClean.Contains("@SetDate(") Then
 
-			Dim CheckArray As String() = StringClean.Split(")")
-			Dim OriginalCheck As String
+			If StringClean.Contains("@RemoveTokens(") Then
 
-			For i As Integer = 0 To CheckArray.Count - 1
+				Dim TokenFlag As String = GetParentheses(StringClean, "@RemoveTokens(")
+				TokenFlag = FixCommas(TokenFlag)
+				Dim TokenRemove As Integer
 
-				If CheckArray(i).Contains("@SetDate(") Then
+				If TokenFlag.Contains(",") Then
+					Dim TokenArray As String() = TokenFlag.Split(",")
+					For i As Integer = 0 To TokenArray.Count - 1
+						TokenRemove = Val(TokenArray(i))
+						If UCase(TokenArray(i)).Contains("B") Then ssh.BronzeTokens -= TokenRemove
+						If UCase(TokenArray(i)).Contains("S") Then ssh.SilverTokens -= TokenRemove
+						If UCase(TokenArray(i)).Contains("G") Then ssh.GoldTokens -= TokenRemove
+					Next
+				Else
+					TokenRemove = Val(TokenFlag)
+					If UCase(TokenFlag).Contains("B") Then ssh.BronzeTokens -= TokenRemove
+					If UCase(TokenFlag).Contains("S") Then ssh.SilverTokens -= TokenRemove
+					If UCase(TokenFlag).Contains("G") Then ssh.GoldTokens -= TokenRemove
+				End If
 
-					'CheckArray(i) = CheckArray(i) & "]"
+				If ssh.BronzeTokens < 0 Then ssh.BronzeTokens = 0
+				If ssh.SilverTokens < 0 Then ssh.SilverTokens = 0
+				If ssh.GoldTokens < 0 Then ssh.GoldTokens = 0
 
-					Dim CheckFlag As String = GetParentheses(CheckArray(i), "@SetDate(")
-					OriginalCheck = CheckFlag
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				My.Settings.SilverTokens = ssh.SilverTokens
+				My.Settings.GoldTokens = ssh.GoldTokens
 
-					Debug.Print("Original Check = " & OriginalCheck)
+
+				StringClean = StringClean.Replace("@RemoveTokens(" & TokenFlag & ")", "")
+
+			End If
+
+			If StringClean.Contains("@Add1Token") Then
+				ssh.BronzeTokens += 1
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				FrmCardList.UpdateBronzeTokens()
+				MessageBox.Show(Me, ssh.tempDomName & " has given you 1 Bronze token!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+				StringClean = StringClean.Replace("@Add1Token", "")
+			End If
+
+			If StringClean.Contains("@Add3Tokens") Then
+				ssh.BronzeTokens += 3
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				FrmCardList.UpdateBronzeTokens()
+				MessageBox.Show(Me, ssh.tempDomName & " has given you 3 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+				StringClean = StringClean.Replace("@Add3Tokens", "")
+			End If
+
+			If StringClean.Contains("@Add5Tokens") Then
+				ssh.BronzeTokens += 5
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				FrmCardList.UpdateBronzeTokens()
+				StringClean = StringClean.Replace("@Add5Tokens", "")
+				MessageBox.Show(Me, ssh.tempDomName & " has given you 5 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+			End If
+
+			If StringClean.Contains("@Add10Tokens") Then
+				ssh.BronzeTokens += 10
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				FrmCardList.UpdateBronzeTokens()
+				MessageBox.Show(Me, ssh.tempDomName & " has given you 10 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+				StringClean = StringClean.Replace("@Add10Tokens", "")
+			End If
+
+			If StringClean.Contains("@Add25Tokens") Then
+				ssh.BronzeTokens += 25
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				FrmCardList.UpdateBronzeTokens()
+				MessageBox.Show(Me, ssh.tempDomName & " has given you 25 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+				StringClean = StringClean.Replace("@Add25Tokens", "")
+			End If
+
+			If StringClean.Contains("@Add50Tokens") Then
+				ssh.BronzeTokens += 50
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				FrmCardList.UpdateBronzeTokens()
+				MessageBox.Show(Me, ssh.tempDomName & " has given you 50 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+				StringClean = StringClean.Replace("@Add50Tokens", "")
+			End If
+
+			If StringClean.Contains("@Add100Tokens") Then
+				ssh.BronzeTokens += 100
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				FrmCardList.UpdateBronzeTokens()
+				MessageBox.Show(Me, ssh.tempDomName & " has given you 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+				StringClean = StringClean.Replace("@Add50Tokens", "")
+			End If
+
+			If StringClean.Contains("@Remove100Tokens") Then
+				ssh.BronzeTokens -= 100
+				My.Settings.BronzeTokens = ssh.BronzeTokens
+				FrmCardList.UpdateBronzeTokens()
+				MessageBox.Show(Me, ssh.tempDomName & " has taken 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+				StringClean = StringClean.Replace("@@Remove100Tokens", "")
+			End If
+
+
+			If StringClean.Contains("@UpdateOrgasm") Then
+				My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
+
+				'Github Patch
+				If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
+
+				FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
+				StringClean = StringClean.Replace("@UpdateOrgasm", "")
+			End If
+
+			If StringClean.Contains("@UpdateRuined") Then
+				My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
+
+				' GithubPatch
+				If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
+
+				FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
+				StringClean = StringClean.Replace("@UpdateRuined", "")
+			End If
+
+			If StringClean.Contains("@DeleteVar[") Then
+
+				Dim DeleteArray As String() = StringClean.Split("]")
+
+				For i As Integer = 0 To DeleteArray.Count - 1
+
+					If DeleteArray(i).Contains("@DeleteVar[") Then
+
+						DeleteArray(i) = DeleteArray(i) & "]"
+
+						Dim DFlag As String = GetParentheses(DeleteArray(i), "@DeleteVar[")
+						Dim OriginalDelete As String = DFlag
+
+						If DFlag.Contains(",") Then
+
+							DFlag = FixCommas(DFlag)
+
+							Dim FlagArray() As String = DFlag.Split(",")
+
+							For x As Integer = 0 To FlagArray.Count - 1
+
+								DeleteVariable(FlagArray(x))
+
+							Next
+
+						Else
+
+							DeleteVariable(DFlag)
+
+						End If
+
+						'DeleteArray(i) = DeleteArray(i).Replace("@DeleteVar[" & OriginalDelete & "]", "")
+
+						StringClean = StringClean.Replace("@DeleteVar[" & OriginalDelete & "]", "")
+
+					End If
+
+				Next
+
+				'StringClean = Join(DeleteArray, Nothing)
+
+			End If
+
+			If StringClean.Contains("@PornAllowedOff") Then
+				CreateFlag("SYS_NoPornAllowed")
+				StringClean = StringClean.Replace("@PornAllowedOff", "")
+			End If
+
+			If StringClean.Contains("@PornAllowedOn") Then
+				DeleteFlag("SYS_NoPornAllowed")
+				StringClean = StringClean.Replace("@PornAllowedOn", "")
+			End If
+
+			If StringClean.Contains("@RestrictOrgasm(") Then
+
+				Dim CheckFlag As String = GetParentheses(StringClean, "@RestrictOrgasm(")
+
+				If CheckFlag.Contains(",") Then
 
 					CheckFlag = CheckFlag.Replace(", ", ",")
 					CheckFlag = CheckFlag.Replace(" ,", ",")
 
 					Dim FlagArray() As String = CheckFlag.Split(",")
 
+					Dim Seconds1 As Integer = Val(FlagArray(0))
+					Dim Seconds2 As Integer = Val(FlagArray(1))
+
+					If UCase(FlagArray(0)).Contains(UCase("MINUTE")) Then Seconds1 *= 60
+					If UCase(FlagArray(0)).Contains(UCase("HOUR")) Then Seconds1 *= 3600
+					If UCase(FlagArray(0)).Contains(UCase("DAY")) Then Seconds1 *= 86400
+					If UCase(FlagArray(0)).Contains(UCase("WEEK")) Then Seconds1 *= 604800
+					If UCase(FlagArray(0)).Contains(UCase("MONTH")) Then Seconds1 *= 2419200
+					If UCase(FlagArray(0)).Contains(UCase("YEAR")) Then Seconds1 *= 29030400
+
+					If UCase(FlagArray(1)).Contains(UCase("MINUTE")) Then Seconds2 *= 60
+					If UCase(FlagArray(1)).Contains(UCase("HOUR")) Then Seconds2 *= 3600
+					If UCase(FlagArray(1)).Contains(UCase("DAY")) Then Seconds2 *= 86400
+					If UCase(FlagArray(1)).Contains(UCase("WEEK")) Then Seconds2 *= 604800
+					If UCase(FlagArray(1)).Contains(UCase("MONTH")) Then Seconds2 *= 2419200
+					If UCase(FlagArray(1)).Contains(UCase("YEAR")) Then Seconds2 *= 29030400
+
+					Dim TotalSeconds As Integer = ssh.randomizer.Next(Seconds1, Seconds2 + 1)
+
 					Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
 
-					If UCase(FlagArray(1)).Contains(UCase("SECOND")) Then SetDate = DateAdd(DateInterval.Second, Val(FlagArray(1)), SetDate)
-					If UCase(FlagArray(1)).Contains(UCase("MINUTE")) Then SetDate = DateAdd(DateInterval.Minute, Val(FlagArray(1)), SetDate)
-					If UCase(FlagArray(1)).Contains(UCase("HOUR")) Then SetDate = DateAdd(DateInterval.Hour, Val(FlagArray(1)), SetDate)
-					If UCase(FlagArray(1)).Contains(UCase("DAY")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
-					If UCase(FlagArray(1)).Contains(UCase("WEEK")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)) * 7, SetDate)
-					If UCase(FlagArray(1)).Contains(UCase("MONTH")) Then SetDate = DateAdd(DateInterval.Month, Val(FlagArray(1)), SetDate)
-					If UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Year, Val(FlagArray(1)), SetDate)
+					SetDate = DateAdd(DateInterval.Second, TotalSeconds, SetDate)
+					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
 
-					If Not UCase(FlagArray(1)).Contains(UCase("SECOND")) And Not UCase(FlagArray(1)).Contains(UCase("MINUTE")) And Not UCase(FlagArray(1)).Contains(UCase("HOUR")) _
-					 And Not UCase(FlagArray(1)).Contains(UCase("DAY")) And Not UCase(FlagArray(1)).Contains(UCase("WEEK")) And Not UCase(FlagArray(1)).Contains(UCase("MONTH")) _
-					 And Not UCase(FlagArray(1)).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(FlagArray(1)), SetDate)
-
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & FlagArray(0), FormatDateTime(SetDate, DateFormat.GeneralDate), False)
-
-					Debug.Print("CheckArray(i) = " & CheckArray(i))
-
-					' CheckArray(i) = CheckArray(i).Replace("@SetDate(" & OriginalCheck, "")
-
-					StringClean = StringClean.Replace("@SetDate(" & OriginalCheck & ")", "")
-
-				End If
-
-			Next
-
-			'StringClean = Join(CheckArray, Nothing)
-
-		End If
-
-
-		' The @RoundVar Command is used to take an existing Variable and round it by the amount specified. The correct format is @Round[VarName]=[RoundAmount]
-		' For example, @RoundVar[StrokeTotal]=[10] wound round the Variable "StrokeTotal" by 10.
-		' @Round[] will only round the and save Variable, it will not display it. More than one @Round[] Command can be used per line
-
-
-		If StringClean.Contains("@RoundVar[") Then
-
-			Dim VarArray As String() = StringClean.Split
-
-			For i As Integer = 0 To VarArray.Count - 1
-
-				Dim SCGotVar As String = "NULL"
-
-				If VarArray(i).Contains("@RoundVar[") Then
-					SCGotVar = VarArray(i)
-					VarArray(i) = ""
-				End If
-
-				SCGotVar = SCGotVar.Replace("@RoundVar[", "")
-
-				Dim SCGotVarSplit As String() = Split(SCGotVar, "]")
-
-				Dim VarName As String = SCGotVarSplit(0)
-				Dim Val1 As Integer
-
-				Dim VarCheck As String = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName
-
-
-				'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
-				If File.Exists(VarCheck) Then
-					' Read first line of the given file.
-					Val1 = CInt(TxtReadLine(VarCheck))
-
-					SCGotVarSplit(0) = ""
-
-					SCGotVar = Join(SCGotVarSplit)
-
-					SCGotVar = SCGotVar.Replace("=[", "")
-					SCGotVar = SCGotVar.Replace(" ", "")
-
-					Dim VarValue As Integer = Val(SCGotVar)
-
-					Val1 = VarValue * Math.Round(Val1 / VarValue)
-
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & VarName, Val1, False)
-
-				End If
-
-				' StringClean = StringClean.Replace("@RoundVar[" & OriginalCheck & ")", "")
-
-			Next
-
-			StringClean = Join(VarArray)
-
-		End If
-
-		' The @ChangeVar[] Command is used to Value of a new or existing Variable and round it by the amount specified. The correct format is @ChangeVar[VarName]=[Value1]+[Value2]
-		' For example, @ChangeVar[StrokeTotal]=[StrokeTotal]+[100] would add 100 to the current value of "StrokeTotal" and save it. If "StrokeTotal" did not previously exist, then it would be created
-		' with a value of 100 in this case, since nothing + 100 equals 100. You can use @ChangeVar[] to add, subtract, multiply or divide with the operators +, -, * and /
-		'More than one @ChangeVar[] Command can be used per line.
-
-		If StringClean.Contains("@ChangeVar[") Then
-
-			Dim ChangeArray As String() = StringClean.Split
-
-			For i As Integer = 0 To ChangeArray.Count - 1
-
-				Debug.Print("CHangeVar ChangeArray(i) = " & ChangeArray(i))
-
-				If ChangeArray(i).Contains("@ChangeVar[") Then
-
-					Dim ChangeFlag As String = ChangeArray(i)
-					Dim ChangeStart As Integer = ChangeFlag.IndexOf("@ChangeVar[") + 11
-
-					Dim ChangeVar As String
-					Dim ChangeVal1 As String
-					Dim ChangeVal2 As String
-					Dim ChangeOperator As String
-
-					Dim Val1 As Integer
-					Dim Val2 As Integer
-
-					ChangeFlag = ChangeArray(i).Substring(ChangeStart, ChangeArray(i).Length - ChangeStart)
-					ChangeVar = ChangeFlag.Split("]")(0)
-					ChangeVal1 = ChangeFlag.Split("]")(1)
-					ChangeVal2 = ChangeFlag.Split("]")(2)
-					ChangeOperator = ChangeFlag.Split("]")(2)
-
-					ChangeArray(i) = ChangeArray(i).Replace("@ChangeVar[" & ChangeVar & "]" & ChangeVal1 & "]" & ChangeVal2 & "]", "")
-
-					ChangeVar = ChangeVar.Replace("@ChangeVar[", "")
-					ChangeVal1 = ChangeVal1.Replace("=[", "")
-					ChangeVal2 = ChangeVal2.Replace("+[", "")
-					ChangeVal2 = ChangeVal2.Replace("-[", "")
-					ChangeVal2 = ChangeVal2.Replace("*[", "")
-					ChangeVal2 = ChangeVal2.Replace("/[", "")
-
-					'@ChangeVar[TB_EdgeHoldingOwed   ]    =[TB_EdgeHoldingOwed    ]     -[1       ]
-
-					If IsNumeric(ChangeVal1) = False Then
-						'TODO: Remove unsecure IO.Access to file, for there is no DirectoryCheck.
-						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1) Then
-							Val1 = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal1)
-						Else
-							Val1 = 0
-						End If
-					Else
-						Val1 = Val(ChangeVal1)
-					End If
-
-					If IsNumeric(ChangeVal2) = False Then
-						'TODO: Remove unsecure IO.Access To file, for there is no DirectoryCheck.
-						If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2) Then
-							Val2 = TxtReadLine(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVal2)
-						Else
-							Val2 = 0
-						End If
-					Else
-						Val2 = Val(ChangeVal2)
-					End If
-
-					ssh.ScriptOperator = "Null"
-					If ChangeOperator.Contains("+") Then ssh.ScriptOperator = "Add"
-					If ChangeOperator.Contains("-") Then ssh.ScriptOperator = "Subtract"
-					If ChangeOperator.Contains("*") Then ssh.ScriptOperator = "Multiply"
-					If ChangeOperator.Contains("/") Then ssh.ScriptOperator = "Divide"
-
-					Dim ChangeVal As Integer = 0
-
-					If ssh.ScriptOperator = "Add" Then ChangeVal = Val1 + Val2
-					If ssh.ScriptOperator = "Subtract" Then ChangeVal = Val1 - Val2
-					If ssh.ScriptOperator = "Multiply" Then ChangeVal = Val1 * Val2
-					If ssh.ScriptOperator = "Divide" Then ChangeVal = Val1 / Val2
-
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\" & ChangeVar, ChangeVal, False)
-
-				End If
-
-			Next
-
-		End If
-
-		' The @ShowVar[] Command is used to show the value of an existing Variable. The correct format is @ShowVar[VarName]
-		' More than one @ShowVar[] Commands can be used per line
-
-		If StringClean.Contains("@ShowVar[") Then
-
-			Dim VarSplit As String() = StringClean.Split("]")
-
-			For i As Integer = 0 To VarSplit.Count - 1
-
-				If VarSplit(i).Contains("@ShowVar[") Then
-
-					Dim VarString As String = VarSplit(i) & "]"
-
-					Dim VarFlag As String = GetParentheses(VarString, "@ShowVar[")
-					Debug.Print("VarFlag = " & VarFlag)
-					Dim VarFlag2 As String = GetVariable(VarFlag)
-					Debug.Print("VarFlag2 = " & VarFlag2)
-					' StringClean = StringClean.Replace("#Var[" & VarFlag & "]", VarFlag2)
-
-					Debug.Print("Try this shit       @ShowVar[" & VarFlag & "]")
-
-					StringClean = StringClean.Replace("@ShowVar[" & VarFlag & "]", VarFlag2)
-
-				End If
-
-			Next
-
-		End If
-
-
-		If StringClean.Contains("@ChastityOn") Then
-			My.Settings.Chastity = True
-			FrmSettings.LBLChastityState.Text = "ON"
-			FrmSettings.LBLChastityState.ForeColor = Color.Green
-			StringClean = StringClean.Replace("@ChastityOn", "")
-		End If
-
-		If StringClean.Contains("@ChastityOff") Then
-			My.Settings.Chastity = False
-			FrmSettings.LBLChastityState.Text = "OFF"
-			FrmSettings.LBLChastityState.ForeColor = Color.Red
-			StringClean = StringClean.Replace("@ChastityOff", "")
-		End If
-
-		If StringClean.Contains("@AddTokens(") Then
-
-			Dim TokenFlag As String = GetParentheses(StringClean, "@AddTokens(")
-			TokenFlag = FixCommas(TokenFlag)
-			Dim TokenAdd As Integer
-
-			If TokenFlag.Contains(",") Then
-				Dim TokenArray As String() = TokenFlag.Split(",")
-				For i As Integer = 0 To TokenArray.Count - 1
-					TokenAdd = Val(TokenArray(i))
-					If UCase(TokenArray(i)).Contains("B") Then ssh.BronzeTokens += TokenAdd
-					If UCase(TokenArray(i)).Contains("S") Then ssh.SilverTokens += TokenAdd
-					If UCase(TokenArray(i)).Contains("G") Then ssh.GoldTokens += TokenAdd
-				Next
-			Else
-				TokenAdd = Val(TokenFlag)
-				If UCase(TokenFlag).Contains("B") Then ssh.BronzeTokens += TokenAdd
-				If UCase(TokenFlag).Contains("S") Then ssh.SilverTokens += TokenAdd
-				If UCase(TokenFlag).Contains("G") Then ssh.GoldTokens += TokenAdd
-			End If
-
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			My.Settings.SilverTokens = ssh.SilverTokens
-			My.Settings.GoldTokens = ssh.GoldTokens
-
-
-			StringClean = StringClean.Replace("@AddTokens(" & TokenFlag & ")", "")
-
-		End If
-
-
-		If StringClean.Contains("@RemoveTokens(") Then
-
-			Dim TokenFlag As String = GetParentheses(StringClean, "@RemoveTokens(")
-			TokenFlag = FixCommas(TokenFlag)
-			Dim TokenRemove As Integer
-
-			If TokenFlag.Contains(",") Then
-				Dim TokenArray As String() = TokenFlag.Split(",")
-				For i As Integer = 0 To TokenArray.Count - 1
-					TokenRemove = Val(TokenArray(i))
-					If UCase(TokenArray(i)).Contains("B") Then ssh.BronzeTokens -= TokenRemove
-					If UCase(TokenArray(i)).Contains("S") Then ssh.SilverTokens -= TokenRemove
-					If UCase(TokenArray(i)).Contains("G") Then ssh.GoldTokens -= TokenRemove
-				Next
-			Else
-				TokenRemove = Val(TokenFlag)
-				If UCase(TokenFlag).Contains("B") Then ssh.BronzeTokens -= TokenRemove
-				If UCase(TokenFlag).Contains("S") Then ssh.SilverTokens -= TokenRemove
-				If UCase(TokenFlag).Contains("G") Then ssh.GoldTokens -= TokenRemove
-			End If
-
-			If ssh.BronzeTokens < 0 Then ssh.BronzeTokens = 0
-			If ssh.SilverTokens < 0 Then ssh.SilverTokens = 0
-			If ssh.GoldTokens < 0 Then ssh.GoldTokens = 0
-
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			My.Settings.SilverTokens = ssh.SilverTokens
-			My.Settings.GoldTokens = ssh.GoldTokens
-
-
-			StringClean = StringClean.Replace("@RemoveTokens(" & TokenFlag & ")", "")
-
-		End If
-
-		If StringClean.Contains("@Add1Token") Then
-			ssh.BronzeTokens += 1
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, ssh.tempDomName & " has given you 1 Bronze token!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add1Token", "")
-		End If
-
-		If StringClean.Contains("@Add3Tokens") Then
-			ssh.BronzeTokens += 3
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, ssh.tempDomName & " has given you 3 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add3Tokens", "")
-		End If
-
-		If StringClean.Contains("@Add5Tokens") Then
-			ssh.BronzeTokens += 5
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			FrmCardList.UpdateBronzeTokens()
-			StringClean = StringClean.Replace("@Add5Tokens", "")
-			MessageBox.Show(Me, ssh.tempDomName & " has given you 5 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-		End If
-
-		If StringClean.Contains("@Add10Tokens") Then
-			ssh.BronzeTokens += 10
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, ssh.tempDomName & " has given you 10 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add10Tokens", "")
-		End If
-
-		If StringClean.Contains("@Add25Tokens") Then
-			ssh.BronzeTokens += 25
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, ssh.tempDomName & " has given you 25 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add25Tokens", "")
-		End If
-
-		If StringClean.Contains("@Add50Tokens") Then
-			ssh.BronzeTokens += 50
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, ssh.tempDomName & " has given you 50 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add50Tokens", "")
-		End If
-
-		If StringClean.Contains("@Add100Tokens") Then
-			ssh.BronzeTokens += 100
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, ssh.tempDomName & " has given you 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@Add50Tokens", "")
-		End If
-
-		If StringClean.Contains("@Remove100Tokens") Then
-			ssh.BronzeTokens -= 100
-			My.Settings.BronzeTokens = ssh.BronzeTokens
-			FrmCardList.UpdateBronzeTokens()
-			MessageBox.Show(Me, ssh.tempDomName & " has taken 100 Bronze tokens!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-			StringClean = StringClean.Replace("@@Remove100Tokens", "")
-		End If
-
-
-		If StringClean.Contains("@UpdateOrgasm") Then
-			My.Settings.LastOrgasm = FormatDateTime(Now, DateFormat.ShortDate)
-
-			'Github Patch
-			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
-
-			FrmSettings.LBLLastOrgasm.Text = My.Settings.LastOrgasm
-			StringClean = StringClean.Replace("@UpdateOrgasm", "")
-		End If
-
-		If StringClean.Contains("@UpdateRuined") Then
-			My.Settings.LastRuined = FormatDateTime(Now, DateFormat.ShortDate)
-
-			' GithubPatch
-			If My.Settings.OrgasmsLocked = True Then My.Settings.OrgasmsRemaining -= 1
-
-			FrmSettings.LBLLastRuined.Text = My.Settings.LastRuined
-			StringClean = StringClean.Replace("@UpdateRuined", "")
-		End If
-
-		If StringClean.Contains("@DeleteVar[") Then
-
-			Dim DeleteArray As String() = StringClean.Split("]")
-
-			For i As Integer = 0 To DeleteArray.Count - 1
-
-				If DeleteArray(i).Contains("@DeleteVar[") Then
-
-					DeleteArray(i) = DeleteArray(i) & "]"
-
-					Dim DFlag As String = GetParentheses(DeleteArray(i), "@DeleteVar[")
-					Dim OriginalDelete As String = DFlag
-
-					If DFlag.Contains(",") Then
-
-						DFlag = FixCommas(DFlag)
-
-						Dim FlagArray() As String = DFlag.Split(",")
-
-						For x As Integer = 0 To FlagArray.Count - 1
-
-							DeleteVariable(FlagArray(x))
-
-						Next
-
-					Else
-
-						DeleteVariable(DFlag)
-
-					End If
-
-					'DeleteArray(i) = DeleteArray(i).Replace("@DeleteVar[" & OriginalDelete & "]", "")
-
-					StringClean = StringClean.Replace("@DeleteVar[" & OriginalDelete & "]", "")
-
-				End If
-
-			Next
-
-			'StringClean = Join(DeleteArray, Nothing)
-
-		End If
-
-		If StringClean.Contains("@PornAllowedOff") Then
-			CreateFlag("SYS_NoPornAllowed")
-			StringClean = StringClean.Replace("@PornAllowedOff", "")
-		End If
-
-		If StringClean.Contains("@PornAllowedOn") Then
-			DeleteFlag("SYS_NoPornAllowed")
-			StringClean = StringClean.Replace("@PornAllowedOn", "")
-		End If
-
-		If StringClean.Contains("@RestrictOrgasm(") Then
-
-			Dim CheckFlag As String = GetParentheses(StringClean, "@RestrictOrgasm(")
-
-			If CheckFlag.Contains(",") Then
-
-				CheckFlag = CheckFlag.Replace(", ", ",")
-				CheckFlag = CheckFlag.Replace(" ,", ",")
-
-				Dim FlagArray() As String = CheckFlag.Split(",")
-
-				Dim Seconds1 As Integer = Val(FlagArray(0))
-				Dim Seconds2 As Integer = Val(FlagArray(1))
-
-				If UCase(FlagArray(0)).Contains(UCase("MINUTE")) Then Seconds1 *= 60
-				If UCase(FlagArray(0)).Contains(UCase("HOUR")) Then Seconds1 *= 3600
-				If UCase(FlagArray(0)).Contains(UCase("DAY")) Then Seconds1 *= 86400
-				If UCase(FlagArray(0)).Contains(UCase("WEEK")) Then Seconds1 *= 604800
-				If UCase(FlagArray(0)).Contains(UCase("MONTH")) Then Seconds1 *= 2419200
-				If UCase(FlagArray(0)).Contains(UCase("YEAR")) Then Seconds1 *= 29030400
-
-				If UCase(FlagArray(1)).Contains(UCase("MINUTE")) Then Seconds2 *= 60
-				If UCase(FlagArray(1)).Contains(UCase("HOUR")) Then Seconds2 *= 3600
-				If UCase(FlagArray(1)).Contains(UCase("DAY")) Then Seconds2 *= 86400
-				If UCase(FlagArray(1)).Contains(UCase("WEEK")) Then Seconds2 *= 604800
-				If UCase(FlagArray(1)).Contains(UCase("MONTH")) Then Seconds2 *= 2419200
-				If UCase(FlagArray(1)).Contains(UCase("YEAR")) Then Seconds2 *= 29030400
-
-				Dim TotalSeconds As Integer = ssh.randomizer.Next(Seconds1, Seconds2 + 1)
-
-				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
-
-				SetDate = DateAdd(DateInterval.Second, TotalSeconds, SetDate)
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
-
-			Else
-
-				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
-
-				If UCase(CheckFlag).Contains(UCase("SECOND")) Then SetDate = DateAdd(DateInterval.Second, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("MINUTE")) Then SetDate = DateAdd(DateInterval.Minute, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("HOUR")) Then SetDate = DateAdd(DateInterval.Hour, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("DAY")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("WEEK")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag) * 7, SetDate)
-				If UCase(CheckFlag).Contains(UCase("MONTH")) Then SetDate = DateAdd(DateInterval.Month, Val(CheckFlag), SetDate)
-				If UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Year, Val(CheckFlag), SetDate)
-
-				If Not UCase(CheckFlag).Contains(UCase("SECOND")) And Not UCase(CheckFlag).Contains(UCase("MINUTE")) And Not UCase(CheckFlag).Contains(UCase("HOUR")) _
-				 And Not UCase(CheckFlag).Contains(UCase("DAY")) And Not UCase(CheckFlag).Contains(UCase("WEEK")) And Not UCase(CheckFlag).Contains(UCase("MONTH")) _
-				 And Not UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
-
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
-
-			End If
-			ssh.OrgasmRestricted = True
-			StringClean = StringClean.Replace("@RestrictOrgasm(" & GetParentheses(StringClean, "@RestrictOrgasm(") & ")", "")
-		End If
-
-		If StringClean.Contains("@RestrictOrgasm") Then
-			ssh.OrgasmRestricted = True
-			StringClean = StringClean.Replace("@RestrictOrgasm", "")
-		End If
-
-		If StringClean.Contains("@DecreaseOrgasmChance") Then
-
-			If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FrmSettings.alloworgasmComboBox.Text = "Never Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
-
-			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
-
-			StringClean = StringClean.Replace("@DecreaseOrgasmChance", "")
-		End If
-
-		If StringClean.Contains("@IncreaseOrgasmChance") Then
-
-			If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FrmSettings.alloworgasmComboBox.Text = "Always Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows"
-			If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
-
-			My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
-
-			StringClean = StringClean.Replace("@IncreaseOrgasmChance", "")
-		End If
-
-		If StringClean.Contains("@DecreaseRuinChance") Then
-
-			If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Never Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
-
-			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
-
-			StringClean = StringClean.Replace("@DecreaseRuinChance", "")
-		End If
-
-		If StringClean.Contains("@IncreaseRuinChance") Then
-
-			If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Always Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins"
-			If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
-
-			My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
-
-			StringClean = StringClean.Replace("@IncreaseRuinChance", "")
-		End If
-
-		'@@@@@@@@@@@@@@@@@@@@@@ TASKCLEAN END
-
-		If TaskClean = True Then Return StringClean
-
-
-		' The @CheckDate() Command checks a previously saved Variable created with the @SetDate() Command and goes to the specified line if the current time and date is on or after the date in the Variable.
-		' Correct format is @CheckDate(VarName, Goto Line) . For example, @CheckDate(NoPorn, Look At Porn Again) will go to the line (Look At Porn Again) if the current time and date has passed the value set
-		' for the Variable "NoPorn" by @SetDate()
-
-		If StringClean.Contains("@CheckDate(") Then
-
-			Dim CheckArray As String() = StringClean.Split(")")
-
-			For i As Integer = 0 To CheckArray.Count - 1
-
-				If CheckArray(i).Contains("@CheckDate(") Then
-
-					If CheckDateList(CheckArray(i), True) = True Then
-						Dim DateFlag As String = GetParentheses(CheckArray(i), "@CheckDate(")
-						DateFlag = FixCommas(DateFlag)
-						Dim DateArray As String() = DateFlag.Split(",")
-						ssh.SkipGotoLine = True
-						ssh.FileGoto = DateArray(DateArray.Count - 1).Replace(")", "")
-						GetGoto()
-					End If
-
-					StringClean = StringClean.Replace("@CheckDate(" & GetParentheses(CheckArray(i), "@CheckDate(") & ")", "")
-
-				End If
-
-			Next
-
-		End If
-
-		' The @InputVar[] stops script progression and waits for the user to input his next message. Whatever the user types next will be saved as a Variable named whatever you specify in the brackets.
-		' For example, if the script's line was "What's your favorite food? @InputVar[FavoriteFood]", and the user typed "lo mein", then "lo mein" would be saved as the Variable "FavoriteFood". If the
-		' user has checked "Show Icon During Input Questions" in the General Settings tab, then the domme's question will be accompanied by a small question mark icon to let the user know that their next
-		' response will be saved verbatim. @InputVar[] will pause Linear Scripts, as well as countdowns and taunts for Stroking, Edging and Holding The Edge.
-
-		If StringClean.Contains("@InputVar[") Then
-
-			ssh.InputString = GetParentheses(StringClean, "@InputVar[").Replace("]", "")
-			ssh.InputFlag = True
-			If FrmSettings.CBInputIcon.Checked = True Then ssh.InputIcon = True
-
-			StringClean = StringClean.Replace("@InputVar[" & ssh.InputString & "]", "")
-
-		End If
-
-
-		' The @DislikeBlogImage Command takes the URL of the most recently viewed blog image and adds it to the "Disliked" list located in [Tease AI Root Directory]\Images\System\DislikedImageURLS.txt
-
-		If StringClean.Contains("@DislikeBlogImage") Then
-
-			If ssh.ImageLocation <> "" Then
-
-				If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & ssh.ImageLocation, True)
 				Else
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", ssh.ImageLocation, True)
+
+					Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
+
+					If UCase(CheckFlag).Contains(UCase("SECOND")) Then SetDate = DateAdd(DateInterval.Second, Val(CheckFlag), SetDate)
+					If UCase(CheckFlag).Contains(UCase("MINUTE")) Then SetDate = DateAdd(DateInterval.Minute, Val(CheckFlag), SetDate)
+					If UCase(CheckFlag).Contains(UCase("HOUR")) Then SetDate = DateAdd(DateInterval.Hour, Val(CheckFlag), SetDate)
+					If UCase(CheckFlag).Contains(UCase("DAY")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
+					If UCase(CheckFlag).Contains(UCase("WEEK")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag) * 7, SetDate)
+					If UCase(CheckFlag).Contains(UCase("MONTH")) Then SetDate = DateAdd(DateInterval.Month, Val(CheckFlag), SetDate)
+					If UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Year, Val(CheckFlag), SetDate)
+
+					If Not UCase(CheckFlag).Contains(UCase("SECOND")) And Not UCase(CheckFlag).Contains(UCase("MINUTE")) And Not UCase(CheckFlag).Contains(UCase("HOUR")) _
+					 And Not UCase(CheckFlag).Contains(UCase("DAY")) And Not UCase(CheckFlag).Contains(UCase("WEEK")) And Not UCase(CheckFlag).Contains(UCase("MONTH")) _
+					 And Not UCase(CheckFlag).Contains(UCase("YEAR")) Then SetDate = DateAdd(DateInterval.Day, Val(CheckFlag), SetDate)
+
+					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_OrgasmRestricted", FormatDateTime(SetDate, DateFormat.GeneralDate), False)
+
 				End If
-				StringClean = StringClean.Replace("@DislikeBlogImage", "")
+				ssh.OrgasmRestricted = True
+				StringClean = StringClean.Replace("@RestrictOrgasm(" & GetParentheses(StringClean, "@RestrictOrgasm(") & ")", "")
 			End If
 
-		End If
+			If StringClean.Contains("@RestrictOrgasm") Then
+				ssh.OrgasmRestricted = True
+				StringClean = StringClean.Replace("@RestrictOrgasm", "")
+			End If
 
-		' The @LikeBlogImage Command takes the URL of the most recently viewed blog image and adds it to the "Liked" list located in [Tease AI Root Directory]\Images\System\LikedImageURLS.txt
+			If StringClean.Contains("@DecreaseOrgasmChance") Then
 
-		If StringClean.Contains("@LikeBlogImage") Then
+				If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FrmSettings.alloworgasmComboBox.Text = "Never Allows"
+				If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
+				If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows"
+				If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
 
-			If ssh.ImageLocation <> "" Then
+				My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
 
-				If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & ssh.ImageLocation, True)
-				Else
-					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", ssh.ImageLocation, True)
+				StringClean = StringClean.Replace("@DecreaseOrgasmChance", "")
+			End If
+
+			If StringClean.Contains("@IncreaseOrgasmChance") Then
+
+				If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then FrmSettings.alloworgasmComboBox.Text = "Always Allows"
+				If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then FrmSettings.alloworgasmComboBox.Text = "Often Allows"
+				If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows"
+				If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then FrmSettings.alloworgasmComboBox.Text = "Rarely Allows"
+
+				My.Settings.OrgasmAllow = FrmSettings.alloworgasmComboBox.Text
+
+				StringClean = StringClean.Replace("@IncreaseOrgasmChance", "")
+			End If
+
+			If StringClean.Contains("@DecreaseRuinChance") Then
+
+				If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Never Ruins"
+				If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
+				If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins"
+				If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
+
+				My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
+
+				StringClean = StringClean.Replace("@DecreaseRuinChance", "")
+			End If
+
+			If StringClean.Contains("@IncreaseRuinChance") Then
+
+				If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Always Ruins"
+				If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Often Ruins"
+				If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins"
+				If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins"
+
+				My.Settings.OrgasmRuin = FrmSettings.ruinorgasmComboBox.Text
+
+				StringClean = StringClean.Replace("@IncreaseRuinChance", "")
+			End If
+
+			'@@@@@@@@@@@@@@@@@@@@@@ TASKCLEAN END
+
+			If TaskClean = True Then Return StringClean
+
+
+			' The @CheckDate() Command checks a previously saved Variable created with the @SetDate() Command and goes to the specified line if the current time and date is on or after the date in the Variable.
+			' Correct format is @CheckDate(VarName, Goto Line) . For example, @CheckDate(NoPorn, Look At Porn Again) will go to the line (Look At Porn Again) if the current time and date has passed the value set
+			' for the Variable "NoPorn" by @SetDate()
+
+			If StringClean.Contains("@CheckDate(") Then
+
+				Dim CheckArray As String() = StringClean.Split(")")
+
+				For i As Integer = 0 To CheckArray.Count - 1
+
+					If CheckArray(i).Contains("@CheckDate(") Then
+
+						If CheckDateList(CheckArray(i), True) = True Then
+							Dim DateFlag As String = GetParentheses(CheckArray(i), "@CheckDate(")
+							DateFlag = FixCommas(DateFlag)
+							Dim DateArray As String() = DateFlag.Split(",")
+							ssh.SkipGotoLine = True
+							ssh.FileGoto = DateArray(DateArray.Count - 1).Replace(")", "")
+							GetGoto()
+						End If
+
+						StringClean = StringClean.Replace("@CheckDate(" & GetParentheses(CheckArray(i), "@CheckDate(") & ")", "")
+
+					End If
+
+				Next
+
+			End If
+
+			' The @InputVar[] stops script progression and waits for the user to input his next message. Whatever the user types next will be saved as a Variable named whatever you specify in the brackets.
+			' For example, if the script's line was "What's your favorite food? @InputVar[FavoriteFood]", and the user typed "lo mein", then "lo mein" would be saved as the Variable "FavoriteFood". If the
+			' user has checked "Show Icon During Input Questions" in the General Settings tab, then the domme's question will be accompanied by a small question mark icon to let the user know that their next
+			' response will be saved verbatim. @InputVar[] will pause Linear Scripts, as well as countdowns and taunts for Stroking, Edging and Holding The Edge.
+
+			If StringClean.Contains("@InputVar[") Then
+
+				ssh.InputString = GetParentheses(StringClean, "@InputVar[").Replace("]", "")
+				ssh.InputFlag = True
+				If FrmSettings.CBInputIcon.Checked = True Then ssh.InputIcon = True
+
+				StringClean = StringClean.Replace("@InputVar[" & ssh.InputString & "]", "")
+
+			End If
+
+
+			' The @DislikeBlogImage Command takes the URL of the most recently viewed blog image and adds it to the "Disliked" list located in [Tease AI Root Directory]\Images\System\DislikedImageURLS.txt
+
+			If StringClean.Contains("@DislikeBlogImage") Then
+
+				If ssh.ImageLocation <> "" Then
+
+					If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
+						My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", Environment.NewLine & ssh.ImageLocation, True)
+					Else
+						My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\DislikedImageURLs.txt", ssh.ImageLocation, True)
+					End If
+					StringClean = StringClean.Replace("@DislikeBlogImage", "")
 				End If
-				StringClean = StringClean.Replace("@LikeBlogImage", "")
+
 			End If
 
-		End If
+			' The @LikeBlogImage Command takes the URL of the most recently viewed blog image and adds it to the "Liked" list located in [Tease AI Root Directory]\Images\System\LikedImageURLS.txt
 
-		Debug.Print("SubStroking = " & ssh.SubStroking)
-		Debug.Print("SubEdging = " & ssh.SubEdging)
-		Debug.Print("SubHoldingEdge = " & ssh.SubHoldingEdge)
+			If StringClean.Contains("@LikeBlogImage") Then
 
-		'  ╔═╗┌┬┐┬─┐┌─┐┬┌─┌─┐╔═╗┌─┐┌─┐┌┬┐┌─┐┬─┐
-		'  ╚═╗ │ ├┬┘│ │├┴┐├┤ ╠╣ ├─┤└─┐ │ ├┤ ├┬┘
-		'  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚  ┴ ┴└─┘ ┴ └─┘┴└─
+				If ssh.ImageLocation <> "" Then
 
-		If StringClean.Contains("@StrokeFaster") Then
-			ssh.StrokeFaster = True
-			StringClean = StringClean.Replace("@StrokeFaster", "")
-		End If
+					If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
+						My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", Environment.NewLine & ssh.ImageLocation, True)
+					Else
+						My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Images\System\LikedImageURLs.txt", ssh.ImageLocation, True)
+					End If
+					StringClean = StringClean.Replace("@LikeBlogImage", "")
+				End If
 
-		'  ╔═╗┌┬┐┬─┐┌─┐┬┌─┌─┐╔═╗┬  ┌─┐┬ ┬┌─┐┬─┐
-		'  ╚═╗ │ ├┬┘│ │├┴┐├┤ ╚═╗│  │ ││││├┤ ├┬┘
-		'  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚═╝┴─┘└─┘└┴┘└─┘┴└─
-
-		If StringClean.Contains("@StrokeSlower") Then
-			ssh.StrokeSlower = True
-			StringClean = StringClean.Replace("@StrokeSlower", "")
-		End If
-
-		'  ╔═╗┌┬┐┬─┐┌─┐┬┌─┌─┐╔═╗┌─┐┌─┐┌┬┐┌─┐┌─┐┌┬┐
-		'  ╚═╗ │ ├┬┘│ │├┴┐├┤ ╠╣ ├─┤└─┐ │ ├┤ └─┐ │ 
-		'  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚  ┴ ┴└─┘ ┴ └─┘└─┘ ┴ 
-
-		If StringClean.Contains("@StrokeFastest") Then
-			ssh.StrokeFastest = True
-			StringClean = StringClean.Replace("@StrokeFastest", "")
-		End If
-
-		'  ╔═╗┌┬┐┬─┐┌─┐┬┌─┌─┐╔═╗┬  ┌─┐┬ ┬┌─┐┌─┐┌┬┐
-		'  ╚═╗ │ ├┬┘│ │├┴┐├┤ ╚═╗│  │ ││││├┤ └─┐ │ 
-		'  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚═╝┴─┘└─┘└┴┘└─┘└─┘ ┴ 
-
-		If StringClean.Contains("@StrokeSlowest") Then
-			ssh.StrokeSlowest = True
-			StringClean = StringClean.Replace("@StrokeSlowest", "")
-		End If
-
-
-		If StringClean.Contains("@StartStroking") Then
-			If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_FirstRun") Then
-				Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
-				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_FirstRun", SetDate, False)
 			End If
 
-			SetVariable("SYS_StrokeRound", Val(GetVariable("SYS_StrokeRound")) + 1)
+			Debug.Print("SubStroking = " & ssh.SubStroking)
+			Debug.Print("SubEdging = " & ssh.SubEdging)
+			Debug.Print("SubHoldingEdge = " & ssh.SubHoldingEdge)
 
-			If FrmSettings.TBWebStart.Text <> "" Then
-				Try
-					FrmSettings.WebToy.Navigate(FrmSettings.TBWebStart.Text)
-				Catch
-				End Try
+			'  ╔═╗┌┬┐┬─┐┌─┐┬┌─┌─┐╔═╗┌─┐┌─┐┌┬┐┌─┐┬─┐
+			'  ╚═╗ │ ├┬┘│ │├┴┐├┤ ╠╣ ├─┤└─┐ │ ├┤ ├┬┘
+			'  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚  ┴ ┴└─┘ ┴ └─┘┴└─
+
+			If StringClean.Contains("@StrokeFaster") Then
+				ssh.StrokeFaster = True
+				StringClean = StringClean.Replace("@StrokeFaster", "")
 			End If
 
-			If StringClean.Contains("@Contact1") Then
-				ssh.Contact1Stroke = True
-			ElseIf StringClean.Contains("@Contact2") Then
-				ssh.Contact2Stroke = True
-			ElseIf StringClean.Contains("@Contact3") Then
-				ssh.Contact3Stroke = True
-			ElseIf StringClean.Contains("@RandomContact") Then
-				Dim casual As Integer = 0
-				casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
-				Select Case ssh.currentlyPresentContacts(casual)
-					Case ssh.SlideshowContact1.TypeName
-						ssh.Contact1Stroke = True
-					Case ssh.SlideshowContact2.TypeName
-						ssh.Contact2Stroke = True
-					Case ssh.SlideshowContact3.TypeName
-						ssh.Contact3Stroke = True
-					Case Else
-				End Select
+			'  ╔═╗┌┬┐┬─┐┌─┐┬┌─┌─┐╔═╗┬  ┌─┐┬ ┬┌─┐┬─┐
+			'  ╚═╗ │ ├┬┘│ │├┴┐├┤ ╚═╗│  │ ││││├┤ ├┬┘
+			'  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚═╝┴─┘└─┘└┴┘└─┘┴└─
+
+			If StringClean.Contains("@StrokeSlower") Then
+				ssh.StrokeSlower = True
+				StringClean = StringClean.Replace("@StrokeSlower", "")
 			End If
 
-			ssh.AskedToGiveUpSection = False
-			ssh.AskedToSpeedUp = False
-			ssh.AskedToSlowDown = False
-			ssh.BeforeTease = False
-			ssh.SubStroking = True
-			ssh.ShowModule = False
-			'StrokeCycle = -1
-			If ssh.StartStrokingCount = 0 Then ssh.FirstRound = True
-			'If FirstRound = True Then My.Settings.Sys_SubLeftEarly += 1
-			If ssh.FirstRound = True Then SetVariable("SYS_SubLeftEarly", Val(GetVariable("SYS_SubLeftEarly")) + 1)
-			ssh.StartStrokingCount += 1
-			StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
-			StrokePace = 50 * Math.Round(StrokePace / 50)
+			'  ╔═╗┌┬┐┬─┐┌─┐┬┌─┌─┐╔═╗┌─┐┌─┐┌┬┐┌─┐┌─┐┌┬┐
+			'  ╚═╗ │ ├┬┘│ │├┴┐├┤ ╠╣ ├─┤└─┐ │ ├┤ └─┐ │ 
+			'  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚  ┴ ┴└─┘ ┴ └─┘└─┘ ┴ 
 
-			If ssh.WorshipMode = True Then
-				StrokePace = NBMinPace.Value
+			If StringClean.Contains("@StrokeFastest") Then
+				ssh.StrokeFastest = True
+				StringClean = StringClean.Replace("@StrokeFastest", "")
+			End If
+
+			'  ╔═╗┌┬┐┬─┐┌─┐┬┌─┌─┐╔═╗┬  ┌─┐┬ ┬┌─┐┌─┐┌┬┐
+			'  ╚═╗ │ ├┬┘│ │├┴┐├┤ ╚═╗│  │ ││││├┤ └─┐ │ 
+			'  ╚═╝ ┴ ┴└─└─┘┴ ┴└─┘╚═╝┴─┘└─┘└┴┘└─┘└─┘ ┴ 
+
+			If StringClean.Contains("@StrokeSlowest") Then
 				ssh.StrokeSlowest = True
+				StringClean = StringClean.Replace("@StrokeSlowest", "")
 			End If
 
-			ClearModes()
 
-			If FrmSettings.CBTauntCycleDD.Checked = True Then
-				If FrmSettings.domlevelNumBox.Value = 1 Then ssh.StrokeTick = ssh.randomizer.Next(1, 3) * 60
-				If FrmSettings.domlevelNumBox.Value = 2 Then ssh.StrokeTick = ssh.randomizer.Next(1, 4) * 60
-				If FrmSettings.domlevelNumBox.Value = 3 Then ssh.StrokeTick = ssh.randomizer.Next(3, 6) * 60
-				If FrmSettings.domlevelNumBox.Value = 4 Then ssh.StrokeTick = ssh.randomizer.Next(4, 8) * 60
-				If FrmSettings.domlevelNumBox.Value = 5 Then ssh.StrokeTick = ssh.randomizer.Next(5, 11) * 60
+			If StringClean.Contains("@StartStroking") Then
+				If Not File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_FirstRun") Then
+					Dim SetDate As Date = FormatDateTime(Now, DateFormat.GeneralDate)
+					My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\SYS_FirstRun", SetDate, False)
+				End If
+
+				SetVariable("SYS_StrokeRound", Val(GetVariable("SYS_StrokeRound")) + 1)
+
+				If FrmSettings.TBWebStart.Text <> "" Then
+					Try
+						FrmSettings.WebToy.Navigate(FrmSettings.TBWebStart.Text)
+					Catch
+					End Try
+				End If
+
+				If StringClean.Contains("@Contact1") Then
+					ssh.Contact1Stroke = True
+				ElseIf StringClean.Contains("@Contact2") Then
+					ssh.Contact2Stroke = True
+				ElseIf StringClean.Contains("@Contact3") Then
+					ssh.Contact3Stroke = True
+				ElseIf StringClean.Contains("@RandomContact") Then
+					Dim casual As Integer = 0
+					casual = ssh.randomizer.Next(0, ssh.currentlyPresentContacts.Count)
+					Select Case ssh.currentlyPresentContacts(casual)
+						Case ssh.SlideshowContact1.TypeName
+							ssh.Contact1Stroke = True
+						Case ssh.SlideshowContact2.TypeName
+							ssh.Contact2Stroke = True
+						Case ssh.SlideshowContact3.TypeName
+							ssh.Contact3Stroke = True
+						Case Else
+					End Select
+				End If
+
+				ssh.AskedToGiveUpSection = False
+				ssh.AskedToSpeedUp = False
+				ssh.AskedToSlowDown = False
+				ssh.BeforeTease = False
+				ssh.SubStroking = True
+				ssh.ShowModule = False
+				'StrokeCycle = -1
+				If ssh.StartStrokingCount = 0 Then ssh.FirstRound = True
+				'If FirstRound = True Then My.Settings.Sys_SubLeftEarly += 1
+				If ssh.FirstRound = True Then SetVariable("SYS_SubLeftEarly", Val(GetVariable("SYS_SubLeftEarly")) + 1)
+				ssh.StartStrokingCount += 1
+				StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+				StrokePace = 50 * Math.Round(StrokePace / 50)
 
 				If ssh.WorshipMode = True Then
-					If FrmSettings.domlevelNumBox.Value = 1 Then ssh.StrokeTick = 180
-					If FrmSettings.domlevelNumBox.Value = 2 Then ssh.StrokeTick = 240
-					If FrmSettings.domlevelNumBox.Value = 3 Then ssh.StrokeTick = 360
-					If FrmSettings.domlevelNumBox.Value = 4 Then ssh.StrokeTick = 480
-					If FrmSettings.domlevelNumBox.Value = 5 Then ssh.StrokeTick = 600
+					StrokePace = NBMinPace.Value
+					ssh.StrokeSlowest = True
 				End If
 
-			Else
-				ssh.StrokeTick = ssh.randomizer.Next(FrmSettings.NBTauntCycleMin.Value * 60, FrmSettings.NBTauntCycleMax.Value * 60)
-				If ssh.WorshipMode = True Then ssh.StrokeTick = FrmSettings.NBTauntCycleMax.Value * 60
+				ClearModes()
+
+				If FrmSettings.CBTauntCycleDD.Checked = True Then
+					If FrmSettings.domlevelNumBox.Value = 1 Then ssh.StrokeTick = ssh.randomizer.Next(1, 3) * 60
+					If FrmSettings.domlevelNumBox.Value = 2 Then ssh.StrokeTick = ssh.randomizer.Next(1, 4) * 60
+					If FrmSettings.domlevelNumBox.Value = 3 Then ssh.StrokeTick = ssh.randomizer.Next(3, 6) * 60
+					If FrmSettings.domlevelNumBox.Value = 4 Then ssh.StrokeTick = ssh.randomizer.Next(4, 8) * 60
+					If FrmSettings.domlevelNumBox.Value = 5 Then ssh.StrokeTick = ssh.randomizer.Next(5, 11) * 60
+
+					If ssh.WorshipMode = True Then
+						If FrmSettings.domlevelNumBox.Value = 1 Then ssh.StrokeTick = 180
+						If FrmSettings.domlevelNumBox.Value = 2 Then ssh.StrokeTick = 240
+						If FrmSettings.domlevelNumBox.Value = 3 Then ssh.StrokeTick = 360
+						If FrmSettings.domlevelNumBox.Value = 4 Then ssh.StrokeTick = 480
+						If FrmSettings.domlevelNumBox.Value = 5 Then ssh.StrokeTick = 600
+					End If
+
+				Else
+					ssh.StrokeTick = ssh.randomizer.Next(FrmSettings.NBTauntCycleMin.Value * 60, FrmSettings.NBTauntCycleMax.Value * 60)
+					If ssh.WorshipMode = True Then ssh.StrokeTick = FrmSettings.NBTauntCycleMax.Value * 60
+				End If
+				ssh.StrokeTauntTick = ssh.randomizer.Next(11, 21)
+				'StrokeThread = New Thread(AddressOf StrokeLoop)
+				'StrokeThread.IsBackground = True
+				'StrokeThread.SetApartmentState(ApartmentState.STA)
+				'StrokeThread.Start()
+				StrokeTimer.Start()
+				StrokeTauntTimer.Start()
+				StringClean = StringClean.Replace("@StartStroking", "")
 			End If
-			ssh.StrokeTauntTick = ssh.randomizer.Next(11, 21)
-			'StrokeThread = New Thread(AddressOf StrokeLoop)
-			'StrokeThread.IsBackground = True
-			'StrokeThread.SetApartmentState(ApartmentState.STA)
-			'StrokeThread.Start()
-			StrokeTimer.Start()
-			StrokeTauntTimer.Start()
-			StringClean = StringClean.Replace("@StartStroking", "")
-		End If
 
-		If StringClean.Contains("@StartTaunts") Then
-			ssh.AskedToGiveUpSection = False
-			ssh.AskedToSpeedUp = False
-			ssh.AskedToSlowDown = False
-			ssh.BeforeTease = False
-			ssh.SubStroking = True
-			ssh.ShowModule = False
-			'StrokeCycle = -1
-			If ssh.StartStrokingCount = 0 Then ssh.FirstRound = True
-			ssh.StartStrokingCount += 1
-			' github patch StrokePace = 0
-			' github patch StrokePaceTimer.Interval = StrokePace
+			If StringClean.Contains("@StartTaunts") Then
+				ssh.AskedToGiveUpSection = False
+				ssh.AskedToSpeedUp = False
+				ssh.AskedToSlowDown = False
+				ssh.BeforeTease = False
+				ssh.SubStroking = True
+				ssh.ShowModule = False
+				'StrokeCycle = -1
+				If ssh.StartStrokingCount = 0 Then ssh.FirstRound = True
+				ssh.StartStrokingCount += 1
+				' github patch StrokePace = 0
+				' github patch StrokePaceTimer.Interval = StrokePace
 
-			ClearModes()
+				ClearModes()
 
-			If FrmSettings.CBTauntCycleDD.Checked = True Then
-				If FrmSettings.domlevelNumBox.Value = 1 Then ssh.StrokeTick = ssh.randomizer.Next(1, 3) * 60
-				If FrmSettings.domlevelNumBox.Value = 2 Then ssh.StrokeTick = ssh.randomizer.Next(1, 4) * 60
-				If FrmSettings.domlevelNumBox.Value = 3 Then ssh.StrokeTick = ssh.randomizer.Next(3, 6) * 60
-				If FrmSettings.domlevelNumBox.Value = 4 Then ssh.StrokeTick = ssh.randomizer.Next(4, 8) * 60
-				If FrmSettings.domlevelNumBox.Value = 5 Then ssh.StrokeTick = ssh.randomizer.Next(5, 11) * 60
-			Else
-				ssh.StrokeTick = ssh.randomizer.Next(FrmSettings.NBTauntCycleMin.Value * 60, FrmSettings.NBTauntCycleMax.Value * 60)
+				If FrmSettings.CBTauntCycleDD.Checked = True Then
+					If FrmSettings.domlevelNumBox.Value = 1 Then ssh.StrokeTick = ssh.randomizer.Next(1, 3) * 60
+					If FrmSettings.domlevelNumBox.Value = 2 Then ssh.StrokeTick = ssh.randomizer.Next(1, 4) * 60
+					If FrmSettings.domlevelNumBox.Value = 3 Then ssh.StrokeTick = ssh.randomizer.Next(3, 6) * 60
+					If FrmSettings.domlevelNumBox.Value = 4 Then ssh.StrokeTick = ssh.randomizer.Next(4, 8) * 60
+					If FrmSettings.domlevelNumBox.Value = 5 Then ssh.StrokeTick = ssh.randomizer.Next(5, 11) * 60
+				Else
+					ssh.StrokeTick = ssh.randomizer.Next(FrmSettings.NBTauntCycleMin.Value * 60, FrmSettings.NBTauntCycleMax.Value * 60)
+				End If
+				ssh.StrokeTauntTick = ssh.randomizer.Next(11, 21)
+				StrokeTimer.Start()
+				StrokeTauntTimer.Start()
+				StringClean = StringClean.Replace("@StartTaunts", "")
 			End If
-			ssh.StrokeTauntTick = ssh.randomizer.Next(11, 21)
-			StrokeTimer.Start()
-			StrokeTauntTimer.Start()
-			StringClean = StringClean.Replace("@StartTaunts", "")
-		End If
 
-		If StringClean.Contains("@StopStroking") Then
-			If FrmSettings.TBWebStop.Text <> "" Then
-				Try
-					FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
-				Catch
-				End Try
+			If StringClean.Contains("@StopStroking") Then
+				If FrmSettings.TBWebStop.Text <> "" Then
+					Try
+						FrmSettings.WebToy.Navigate(FrmSettings.TBWebStop.Text)
+					Catch
+					End Try
+				End If
+				If ssh.Contact1Stroke = True Then
+					StringClean = StringClean & "@Contact1"
+					ssh.Contact1Stroke = False
+				End If
+				If ssh.Contact2Stroke = True Then
+					StringClean = StringClean & "@Contact2"
+					ssh.Contact2Stroke = False
+				End If
+				If ssh.Contact3Stroke = True Then
+					StringClean = StringClean & "@Contact3"
+					ssh.Contact3Stroke = False
+				End If
+				ssh.AskedToSpeedUp = False
+				ssh.AskedToSlowDown = False
+				ssh.SubStroking = False
+				ssh.SubEdging = False
+				ssh.SubHoldingEdge = False
+				ssh.WorshipMode = False
+				ssh.WorshipTarget = ""
+				ssh.LongHold = False
+				ssh.ExtremeHold = False
+				ssh.HoldTaunts = False
+				ssh.LongTaunts = False
+				ssh.ExtremeTaunts = False
+				StrokeTimer.Stop()
+				StrokeTauntTimer.Stop()
+				StrokePace = 0
+				EdgeTauntTimer.Stop()
+				HoldEdgeTauntTimer.Stop()
+				StringClean = StringClean.Replace("@StopStroking", "")
 			End If
-			If ssh.Contact1Stroke = True Then
-				StringClean = StringClean & "@Contact1"
-				ssh.Contact1Stroke = False
+
+			If StringClean.Contains("@StopTaunts") Then
+				ssh.AskedToSpeedUp = False
+				ssh.AskedToSlowDown = False
+				ssh.SubStroking = False
+				ssh.SubEdging = False
+				ssh.SubHoldingEdge = False
+				StrokeTimer.Stop()
+				StrokeTauntTimer.Stop()
+				EdgeTauntTimer.Stop()
+				HoldEdgeTauntTimer.Stop()
+				StringClean = StringClean.Replace("@StopTaunts", "")
 			End If
-			If ssh.Contact2Stroke = True Then
-				StringClean = StringClean & "@Contact2"
-				ssh.Contact2Stroke = False
+
+
+			If StringClean.Contains("@LongHold(") Then
+				Dim HoldInt As Integer = Val(GetParentheses(StringClean, "@LongHold("))
+				ssh.TempVal = ssh.randomizer.Next(0, 101)
+				If ssh.TempVal <= HoldInt Then ssh.LongHold = True
+
+				StringClean = StringClean.Replace("@LongHold(" & GetParentheses(StringClean, "@LongHold(") & ")", "")
 			End If
-			If ssh.Contact3Stroke = True Then
-				StringClean = StringClean & "@Contact3"
-				ssh.Contact3Stroke = False
+
+			If StringClean.Contains("@ExtremeHold(") Then
+				Dim HoldInt As Integer = Val(GetParentheses(StringClean, "@ExtremeHold("))
+				ssh.TempVal = ssh.randomizer.Next(0, 101)
+				If ssh.TempVal <= HoldInt Then ssh.ExtremeHold = True
+
+				StringClean = StringClean.Replace("@ExtremeHold(" & GetParentheses(StringClean, "@ExtremeHold(") & ")", "")
 			End If
-			ssh.AskedToSpeedUp = False
-			ssh.AskedToSlowDown = False
-			ssh.SubStroking = False
-			ssh.SubEdging = False
-			ssh.SubHoldingEdge = False
-			ssh.WorshipMode = False
-			ssh.WorshipTarget = ""
-			ssh.LongHold = False
-			ssh.ExtremeHold = False
-			ssh.HoldTaunts = False
-			ssh.LongTaunts = False
-			ssh.ExtremeTaunts = False
-			StrokeTimer.Stop()
-			StrokeTauntTimer.Stop()
-			StrokePace = 0
-			EdgeTauntTimer.Stop()
-			HoldEdgeTauntTimer.Stop()
-			StringClean = StringClean.Replace("@StopStroking", "")
-		End If
 
-		If StringClean.Contains("@StopTaunts") Then
-			ssh.AskedToSpeedUp = False
-			ssh.AskedToSlowDown = False
-			ssh.SubStroking = False
-			ssh.SubEdging = False
-			ssh.SubHoldingEdge = False
-			StrokeTimer.Stop()
-			StrokeTauntTimer.Stop()
-			EdgeTauntTimer.Stop()
-			HoldEdgeTauntTimer.Stop()
-			StringClean = StringClean.Replace("@StopTaunts", "")
-		End If
+			If StringClean.Contains("@LongHold") Then
+				ssh.LongHold = True
+				StringClean = StringClean.Replace("@LongHold", "")
+			End If
 
+			If StringClean.Contains("@ExtremeHold") Then
+				ssh.ExtremeHold = True
+				StringClean = StringClean.Replace("@ExtremeHold", "")
+			End If
 
-		If StringClean.Contains("@LongHold(") Then
-			Dim HoldInt As Integer = Val(GetParentheses(StringClean, "@LongHold("))
-			ssh.TempVal = ssh.randomizer.Next(0, 101)
-			If ssh.TempVal <= HoldInt Then ssh.LongHold = True
+			If StringClean.Contains("@MultipleEdges(") Then
 
-			StringClean = StringClean.Replace("@LongHold(" & GetParentheses(StringClean, "@LongHold(") & ")", "")
-		End If
+				If StringClean.Contains("@Edg") Then
 
-		If StringClean.Contains("@ExtremeHold(") Then
-			Dim HoldInt As Integer = Val(GetParentheses(StringClean, "@ExtremeHold("))
-			ssh.TempVal = ssh.randomizer.Next(0, 101)
-			If ssh.TempVal <= HoldInt Then ssh.ExtremeHold = True
+					Dim EdgeFlag As String = GetParentheses(StringClean, "@MultipleEdges(")
+					EdgeFlag = FixCommas(EdgeFlag)
+					Dim EdgeArray As String() = EdgeFlag.Split(",")
 
-			StringClean = StringClean.Replace("@ExtremeHold(" & GetParentheses(StringClean, "@ExtremeHold(") & ")", "")
-		End If
+					If EdgeArray.Count = 3 Then
 
-		If StringClean.Contains("@LongHold") Then
-			ssh.LongHold = True
-			StringClean = StringClean.Replace("@LongHold", "")
-		End If
+						If ssh.randomizer.Next(1, 101) < Val(EdgeArray(2)) Then
+							ssh.MultipleEdges = True
+							ssh.MultipleEdgesAmount = Val(EdgeArray(0))
+							ssh.MultipleEdgesInterval = Val(EdgeArray(1))
+						End If
 
-		If StringClean.Contains("@ExtremeHold") Then
-			ssh.ExtremeHold = True
-			StringClean = StringClean.Replace("@ExtremeHold", "")
-		End If
+					Else
 
-		If StringClean.Contains("@MultipleEdges(") Then
-
-			If StringClean.Contains("@Edg") Then
-
-				Dim EdgeFlag As String = GetParentheses(StringClean, "@MultipleEdges(")
-				EdgeFlag = FixCommas(EdgeFlag)
-				Dim EdgeArray As String() = EdgeFlag.Split(",")
-
-				If EdgeArray.Count = 3 Then
-
-					If ssh.randomizer.Next(1, 101) < Val(EdgeArray(2)) Then
 						ssh.MultipleEdges = True
 						ssh.MultipleEdgesAmount = Val(EdgeArray(0))
 						ssh.MultipleEdgesInterval = Val(EdgeArray(1))
+
 					End If
+
+				End If
+
+				StringClean = StringClean.Replace("@MultipleEdges(" & GetParentheses(StringClean, "@MultipleEdges(") & ")", "")
+
+			End If
+
+
+			If StringClean.Contains("@Edge(") Then
+
+				ContactEdgeCheck(StringClean)
+
+				Edge()
+
+				If GetMatch(StringClean, "@Edge(", "Hold") = True Then ssh.EdgeHold = True
+				If GetMatch(StringClean, "@Edge(", "NoHold") = True Then ssh.EdgeNoHold = True
+				If ssh.EdgeHold = True And ssh.EdgeNoHold = True Then ssh.EdgeHold = False
+
+				If GetMatch(StringClean, "@Edge(", "Deny") = True Then ssh.OrgasmDenied = True
+
+				If GetMatch(StringClean, "@Edge(", "Orgasm") = True Then ssh.OrgasmAllowed = True
+
+				If GetMatch(StringClean, "@Edge(", "Ruin") = True Then ssh.OrgasmRuined = True
+
+				If ssh.OrgasmAllowed = True And ssh.OrgasmRuined = True Then ssh.OrgasmRuined = False
+
+				If GetMatch(StringClean, "@Edge(", "RuinTaunts") = True Then
+					If ssh.EdgeToRuin = True Then ssh.EdgeToRuinSecret = False
+				End If
+
+				If GetMatch(StringClean, "@Edge(", "LongHold") = True Then
+					ssh.EdgeHold = True
+					ssh.LongHold = True
+				End If
+				If GetMatch(StringClean, "@Edge(", "ExtremeHold") = True Then
+					ssh.EdgeHold = True
+					ssh.ExtremeHold = True
+				End If
+				If GetMatch(StringClean, "@Edge(", "HoldTaunts") = True And ssh.EdgeHold = True Then
+					If ssh.LongHold = True Then ssh.LongTaunts = True
+					If ssh.ExtremeHold = True Then ssh.ExtremeTaunts = True
+					If ssh.LongTaunts = False And ssh.ExtremeTaunts = False Then ssh.HoldTaunts = True
+				End If
+
+			End If
+
+
+
+			If StringClean.Contains("@EdgeMode(") Then
+
+				Dim EdgeFlag As String = GetParentheses(StringClean, "@EdgeMode(")
+				EdgeFlag = FixCommas(EdgeFlag)
+				Dim EdgeArray As String() = EdgeFlag.Split(",")
+
+				If UCase(EdgeArray(0)).Contains("GOTO") Then
+					ssh.edgeMode.GotoMode = True
+					ssh.edgeMode.GotoLine = EdgeArray(1)
+				End If
+
+				If UCase(EdgeArray(0)).Contains("MESSAGE") Then
+					ssh.edgeMode.MessageMode = True
+					ssh.edgeMode.MessageText = EdgeArray(1)
+				End If
+
+				If UCase(EdgeArray(0)).Contains("VIDEO") Then
+					ssh.edgeMode.VideoMode = True
+					ssh.edgeMode.GotoLine = EdgeArray(1)
+				End If
+
+				If UCase(EdgeArray(0)).Contains("NORMAL") Then
+					ssh.edgeMode.Clear()
+				End If
+
+				StringClean = StringClean.Replace("@EdgeMode(" & GetParentheses(StringClean, "@EdgeMode(") & ")", "")
+			End If
+
+			If StringClean.Contains("@EdgeToRuinNoHoldNoSecret") Then
+				ContactEdgeCheck(StringClean)
+				Edge()
+				ssh.EdgeToRuin = True
+				ssh.EdgeToRuinSecret = False
+				StringClean = StringClean.Replace("@EdgeToRuinNoHoldNoSecret", "")
+			End If
+
+			If StringClean.Contains("@EdgeToRuinHoldNoSecret(") Then
+
+				Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")
+
+				If EdgeHoldFlag.Contains(",") Then
+
+					EdgeHoldFlag = FixCommas(EdgeHoldFlag)
+
+					Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
+
+					Dim Edge1 As Integer = Val(EdgeFlagArray(0))
+					Dim Edge2 As Integer = Val(EdgeFlagArray(1))
+
+					If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
+					If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
+
+					If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
+					If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
+
+					ssh.EdgeHoldSeconds = ssh.randomizer.Next(Edge1, Edge2 + 1)
 
 				Else
 
-					ssh.MultipleEdges = True
-					ssh.MultipleEdgesAmount = Val(EdgeArray(0))
-					ssh.MultipleEdgesInterval = Val(EdgeArray(1))
+					ssh.EdgeHoldSeconds = Val(EdgeHoldFlag)
+					If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("M") Then ssh.EdgeHoldSeconds *= 60
+					If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("H") Then ssh.EdgeHoldSeconds *= 3600
 
 				End If
 
-			End If
+				ssh.EdgeHoldFlag = True
 
-			StringClean = StringClean.Replace("@MultipleEdges(" & GetParentheses(StringClean, "@MultipleEdges(") & ")", "")
-
-		End If
-
-
-		If StringClean.Contains("@Edge(") Then
-
-			ContactEdgeCheck(StringClean)
-
-			Edge()
-
-			If GetMatch(StringClean, "@Edge(", "Hold") = True Then ssh.EdgeHold = True
-			If GetMatch(StringClean, "@Edge(", "NoHold") = True Then ssh.EdgeNoHold = True
-			If ssh.EdgeHold = True And ssh.EdgeNoHold = True Then ssh.EdgeHold = False
-
-			If GetMatch(StringClean, "@Edge(", "Deny") = True Then ssh.OrgasmDenied = True
-
-			If GetMatch(StringClean, "@Edge(", "Orgasm") = True Then ssh.OrgasmAllowed = True
-
-			If GetMatch(StringClean, "@Edge(", "Ruin") = True Then ssh.OrgasmRuined = True
-
-			If ssh.OrgasmAllowed = True And ssh.OrgasmRuined = True Then ssh.OrgasmRuined = False
-
-			If GetMatch(StringClean, "@Edge(", "RuinTaunts") = True Then
-				If ssh.EdgeToRuin = True Then ssh.EdgeToRuinSecret = False
-			End If
-
-			If GetMatch(StringClean, "@Edge(", "LongHold") = True Then
+				ContactEdgeCheck(StringClean)
+				Edge()
 				ssh.EdgeHold = True
-				ssh.LongHold = True
+				ssh.EdgeToRuin = True
+				ssh.EdgeToRuinSecret = False
+				StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret(" & GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(") & ")", "")
 			End If
-			If GetMatch(StringClean, "@Edge(", "ExtremeHold") = True Then
+
+
+
+			If StringClean.Contains("@EdgeToRuinHoldNoSecret") Then
+				ContactEdgeCheck(StringClean)
+				Edge()
 				ssh.EdgeHold = True
-				ssh.ExtremeHold = True
-			End If
-			If GetMatch(StringClean, "@Edge(", "HoldTaunts") = True And ssh.EdgeHold = True Then
-				If ssh.LongHold = True Then ssh.LongTaunts = True
-				If ssh.ExtremeHold = True Then ssh.ExtremeTaunts = True
-				If ssh.LongTaunts = False And ssh.ExtremeTaunts = False Then ssh.HoldTaunts = True
+				ssh.EdgeToRuin = True
+				ssh.EdgeToRuinSecret = False
+				StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret", "")
 			End If
 
-		End If
-
-
-
-		If StringClean.Contains("@EdgeMode(") Then
-
-			Dim EdgeFlag As String = GetParentheses(StringClean, "@EdgeMode(")
-			EdgeFlag = FixCommas(EdgeFlag)
-			Dim EdgeArray As String() = EdgeFlag.Split(",")
-
-			If UCase(EdgeArray(0)).Contains("GOTO") Then
-				ssh.edgeMode.GotoMode = True
-				ssh.edgeMode.GotoLine = EdgeArray(1)
+			If StringClean.Contains("@EdgeToRuinNoSecret") Then
+				ContactEdgeCheck(StringClean)
+				Edge()
+				ssh.EdgeToRuinSecret = False
+				ssh.EdgeToRuin = True
+				StringClean = StringClean.Replace("@EdgeToRuinNoSecret", "")
 			End If
 
-			If UCase(EdgeArray(0)).Contains("MESSAGE") Then
-				ssh.edgeMode.MessageMode = True
-				ssh.edgeMode.MessageText = EdgeArray(1)
+			If StringClean.Contains("@EdgeToRuinNoHold") Then
+				ContactEdgeCheck(StringClean)
+				Edge()
+				ssh.EdgeNoHold = True
+				ssh.EdgeToRuin = True
+				StringClean = StringClean.Replace("@EdgeToRuinNoHold", "")
 			End If
 
-			If UCase(EdgeArray(0)).Contains("VIDEO") Then
-				ssh.edgeMode.VideoMode = True
-				ssh.edgeMode.GotoLine = EdgeArray(1)
-			End If
+			If StringClean.Contains("@EdgeToRuinHold(") Then
 
-			If UCase(EdgeArray(0)).Contains("NORMAL") Then
-				ssh.edgeMode.Clear()
-			End If
+				Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeToRuinHold(")
 
-			StringClean = StringClean.Replace("@EdgeMode(" & GetParentheses(StringClean, "@EdgeMode(") & ")", "")
-		End If
+				If EdgeHoldFlag.Contains(",") Then
 
-		If StringClean.Contains("@EdgeToRuinNoHoldNoSecret") Then
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeToRuin = True
-			ssh.EdgeToRuinSecret = False
-			StringClean = StringClean.Replace("@EdgeToRuinNoHoldNoSecret", "")
-		End If
+					EdgeHoldFlag = FixCommas(EdgeHoldFlag)
 
-		If StringClean.Contains("@EdgeToRuinHoldNoSecret(") Then
+					Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
 
-			Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")
+					Dim Edge1 As Integer = Val(EdgeFlagArray(0))
+					Dim Edge2 As Integer = Val(EdgeFlagArray(1))
 
-			If EdgeHoldFlag.Contains(",") Then
+					If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
+					If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
 
-				EdgeHoldFlag = FixCommas(EdgeHoldFlag)
+					If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
+					If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
 
-				Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
+					ssh.EdgeHoldSeconds = ssh.randomizer.Next(Edge1, Edge2 + 1)
 
-				Dim Edge1 As Integer = Val(EdgeFlagArray(0))
-				Dim Edge2 As Integer = Val(EdgeFlagArray(1))
+				Else
 
-				If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
-				If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
+					ssh.EdgeHoldSeconds = Val(EdgeHoldFlag)
+					If UCase(GetParentheses(StringClean, "@EdgeToRuinHold(")).Contains("M") Then ssh.EdgeHoldSeconds *= 60
+					If UCase(GetParentheses(StringClean, "@EdgeToRuinHold(")).Contains("H") Then ssh.EdgeHoldSeconds *= 3600
 
-				If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
-				If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
-
-				ssh.EdgeHoldSeconds = ssh.randomizer.Next(Edge1, Edge2 + 1)
-
-			Else
-
-				ssh.EdgeHoldSeconds = Val(EdgeHoldFlag)
-				If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("M") Then ssh.EdgeHoldSeconds *= 60
-				If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("H") Then ssh.EdgeHoldSeconds *= 3600
-
-			End If
-
-			ssh.EdgeHoldFlag = True
-
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeHold = True
-			ssh.EdgeToRuin = True
-			ssh.EdgeToRuinSecret = False
-			StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret(" & GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(") & ")", "")
-		End If
-
-
-
-		If StringClean.Contains("@EdgeToRuinHoldNoSecret") Then
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeHold = True
-			ssh.EdgeToRuin = True
-			ssh.EdgeToRuinSecret = False
-			StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret", "")
-		End If
-
-		If StringClean.Contains("@EdgeToRuinNoSecret") Then
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeToRuinSecret = False
-			ssh.EdgeToRuin = True
-			StringClean = StringClean.Replace("@EdgeToRuinNoSecret", "")
-		End If
-
-		If StringClean.Contains("@EdgeToRuinNoHold") Then
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeNoHold = True
-			ssh.EdgeToRuin = True
-			StringClean = StringClean.Replace("@EdgeToRuinNoHold", "")
-		End If
-
-		If StringClean.Contains("@EdgeToRuinHold(") Then
-
-			Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeToRuinHold(")
-
-			If EdgeHoldFlag.Contains(",") Then
-
-				EdgeHoldFlag = FixCommas(EdgeHoldFlag)
-
-				Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
-
-				Dim Edge1 As Integer = Val(EdgeFlagArray(0))
-				Dim Edge2 As Integer = Val(EdgeFlagArray(1))
-
-				If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
-				If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
-
-				If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
-				If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
-
-				ssh.EdgeHoldSeconds = ssh.randomizer.Next(Edge1, Edge2 + 1)
-
-			Else
-
-				ssh.EdgeHoldSeconds = Val(EdgeHoldFlag)
-				If UCase(GetParentheses(StringClean, "@EdgeToRuinHold(")).Contains("M") Then ssh.EdgeHoldSeconds *= 60
-				If UCase(GetParentheses(StringClean, "@EdgeToRuinHold(")).Contains("H") Then ssh.EdgeHoldSeconds *= 3600
-
-			End If
-
-			ssh.EdgeHoldFlag = True
-
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeHold = True
-			ssh.EdgeToRuin = True
-
-			StringClean = StringClean.Replace("@EdgeToRuinHold(" & GetParentheses(StringClean, "@EdgeToRuinHold(") & ")", "")
-		End If
-
-		If StringClean.Contains("@EdgeToRuinHold") Then
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeHold = True
-			ssh.EdgeToRuin = True
-			StringClean = StringClean.Replace("@EdgeToRuinHold", "")
-		End If
-
-		If StringClean.Contains("@EdgeToRuin") Then
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeToRuin = True
-			StringClean = StringClean.Replace("@EdgeToRuin", "")
-		End If
-
-		If StringClean.Contains("@EdgeNoHold") Then
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeNoHold = True
-			StringClean = StringClean.Replace("@EdgeNoHold", "")
-		End If
-
-
-		' The Commands @EdgeHold(), @EdgeToRuinHold() and @EdgeToRuinHoldNoSecret() allow you to specify the amount of time the edge is held. The defualt is in seconds, but you can use Minutes and Hours as well
-		' For example: @EdgeHold(60) would have the domme make you hold the edge for 60 seconds
-		' @EdgeHold(3 Minutes) or @EdgeHold(3 M) - Domme will make you hold the edge for three minutes
-		' @EdgeHold(2 Hours) - Domme will make you hold the edge for 2 hours. Good luck :D
-		'
-		'You can also set a time range using a comma. For example, @EdgeHold(2 Minutes, 5 Minutes) - the domme would make you hold it a random amount of time bwteen 2 and 5 minutes.
-
-		If StringClean.Contains("@EdgeHold(") Then
-
-			Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeHold(")
-
-			If EdgeHoldFlag.Contains(",") Then
-
-				EdgeHoldFlag = FixCommas(EdgeHoldFlag)
-
-				Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
-
-				Dim Edge1 As Integer = Val(EdgeFlagArray(0))
-				Dim Edge2 As Integer = Val(EdgeFlagArray(1))
-
-				If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
-				If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
-
-				If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
-				If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
-
-				ssh.EdgeHoldSeconds = ssh.randomizer.Next(Edge1, Edge2 + 1)
-
-			Else
-
-				ssh.EdgeHoldSeconds = Val(EdgeHoldFlag)
-				If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("M") Then ssh.EdgeHoldSeconds *= 60
-				If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("H") Then ssh.EdgeHoldSeconds *= 3600
-
-			End If
-
-			ssh.EdgeHoldFlag = True
-
-
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeHold = True
-			StringClean = StringClean.Replace("@EdgeHold(" & GetParentheses(StringClean, "@EdgeHold(") & ")", "")
-
-		End If
-
-
-		If StringClean.Contains("@EdgeHold") Then
-			ContactEdgeCheck(StringClean)
-			Edge()
-			ssh.EdgeHold = True
-			StringClean = StringClean.Replace("@EdgeHold", "")
-		End If
-
-		If StringClean.Contains("@Edge") Then
-			ContactEdgeCheck(StringClean)
-			Edge()
-			StringClean = StringClean.Replace("@Edge", "")
-		End If
-
-		If StringClean.Contains("@CBTBalls") Then
-			If FrmSettings.CBCBTBalls.Checked = True Then
-				ssh.CBTBallsActive = True
-				ssh.CBTBallsFlag = True
-				ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
-			End If
-			StringClean = StringClean.Replace("@CBTBalls", "")
-		End If
-
-		If StringClean.Contains("@CBTCock") Then
-			If FrmSettings.CBCBTCock.Checked = True Then
-				ssh.CBTCockActive = True
-				ssh.CBTCockFlag = True
-				ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
-			End If
-			StringClean = StringClean.Replace("@CBTCock", "")
-		End If
-
-		If StringClean.Contains("@CBT") And Not StringClean.Contains("@CBTLevel") Then
-
-			If FrmSettings.CBCBTCock.Checked = True And FrmSettings.CBCBTBalls.Checked = True Then
-				ssh.CBTBothActive = True
-				ssh.CBTBothFlag = True
-				ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
-			End If
-
-			StringClean = StringClean.Replace("@CBT", "")
-		End If
-
-
-		' The @CustomTask() Command works similarly to @CBTBalls and @CBTCock. It allows the user to have the domme run custom instructions from scripts located in Custom\Tasks. For example,
-		' @CustomTask(Spanking) would pull its first instruction from Custom\Tasks\Spanking_First.txt, and all subsequent instructions would be pulled from Custom\Tasks\Spanking.txt.
-
-		If StringClean.Contains("@CustomTask(") Then
-
-			Dim CustomFlag As String = GetParentheses(StringClean, "@CustomTask(")
-
-			CustomFlag = FixCommas(CustomFlag)
-
-			Dim CustomArray As String() = CustomFlag.Split(",")
-
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & "_First.txt") And
-			 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & ".txt") Then
-				ssh.CustomTask = True
-				ssh.CustomTaskActive = True
-				ssh.CustomTaskText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & ".txt"
-				ssh.CustomTaskTextFirst = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & "_First.txt"
-			End If
-
-			If CustomArray.Count > 1 Then
-				ssh.TasksCount = Val(CustomArray(1))
-			Else
-				ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
-			End If
-
-
-			StringClean = StringClean.Replace("@CustomTask(" & GetParentheses(StringClean, "@CustomTask(") & ")", "")
-
-		End If
-
-
-		If StringClean.Contains("@DecideOrgasm") Then
-
-			ssh.OrgasmDenied = False
-			ssh.OrgasmAllowed = False
-			ssh.OrgasmRuined = False
-
-			Dim AllowGoto As String = "Orgasm Allow"
-			Dim RuinGoto As String = "Orgasm Ruin"
-			Dim DenyGoto As String = "Orgasm Deny"
-
-			If StringClean.Contains("@DecideOrgasm(") Then
-
-				Dim OrgasmFlag As String = GetParentheses(StringClean, "@DecideOrgasm(")
-				OrgasmFlag = FixCommas(OrgasmFlag)
-				Dim OrgasmArray As String() = OrgasmFlag.Split(",")
-
-				If OrgasmArray.Count = 3 Then
-					AllowGoto = OrgasmArray(0)
-					RuinGoto = OrgasmArray(1)
-					DenyGoto = OrgasmArray(2)
 				End If
 
+				ssh.EdgeHoldFlag = True
+
+				ContactEdgeCheck(StringClean)
+				Edge()
+				ssh.EdgeHold = True
+				ssh.EdgeToRuin = True
+
+				StringClean = StringClean.Replace("@EdgeToRuinHold(" & GetParentheses(StringClean, "@EdgeToRuinHold(") & ")", "")
+			End If
+
+			If StringClean.Contains("@EdgeToRuinHold") Then
+				ContactEdgeCheck(StringClean)
+				Edge()
+				ssh.EdgeHold = True
+				ssh.EdgeToRuin = True
+				StringClean = StringClean.Replace("@EdgeToRuinHold", "")
+			End If
+
+			If StringClean.Contains("@EdgeToRuin") Then
+				ContactEdgeCheck(StringClean)
+				Edge()
+				ssh.EdgeToRuin = True
+				StringClean = StringClean.Replace("@EdgeToRuin", "")
+			End If
+
+			If StringClean.Contains("@EdgeNoHold") Then
+				ContactEdgeCheck(StringClean)
+				Edge()
+				ssh.EdgeNoHold = True
+				StringClean = StringClean.Replace("@EdgeNoHold", "")
 			End If
 
 
-			If FrmSettings.alloworgasmComboBox.Text = "Always Allows" And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then
-				ssh.FileGoto = RuinGoto
-				ssh.OrgasmRuined = True
-				GoTo OrgasmDecided
+			' The Commands @EdgeHold(), @EdgeToRuinHold() and @EdgeToRuinHoldNoSecret() allow you to specify the amount of time the edge is held. The defualt is in seconds, but you can use Minutes and Hours as well
+			' For example: @EdgeHold(60) would have the domme make you hold the edge for 60 seconds
+			' @EdgeHold(3 Minutes) or @EdgeHold(3 M) - Domme will make you hold the edge for three minutes
+			' @EdgeHold(2 Hours) - Domme will make you hold the edge for 2 hours. Good luck :D
+			'
+			'You can also set a time range using a comma. For example, @EdgeHold(2 Minutes, 5 Minutes) - the domme would make you hold it a random amount of time bwteen 2 and 5 minutes.
+
+			If StringClean.Contains("@EdgeHold(") Then
+
+				Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeHold(")
+
+				If EdgeHoldFlag.Contains(",") Then
+
+					EdgeHoldFlag = FixCommas(EdgeHoldFlag)
+
+					Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
+
+					Dim Edge1 As Integer = Val(EdgeFlagArray(0))
+					Dim Edge2 As Integer = Val(EdgeFlagArray(1))
+
+					If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
+					If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
+
+					If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
+					If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
+
+					ssh.EdgeHoldSeconds = ssh.randomizer.Next(Edge1, Edge2 + 1)
+
+				Else
+
+					ssh.EdgeHoldSeconds = Val(EdgeHoldFlag)
+					If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("M") Then ssh.EdgeHoldSeconds *= 60
+					If UCase(GetParentheses(StringClean, "@EdgeHold(")).Contains("H") Then ssh.EdgeHoldSeconds *= 3600
+
+				End If
+
+				ssh.EdgeHoldFlag = True
+
+
+				ContactEdgeCheck(StringClean)
+				Edge()
+				ssh.EdgeHold = True
+				StringClean = StringClean.Replace("@EdgeHold(" & GetParentheses(StringClean, "@EdgeHold(") & ")", "")
+
 			End If
 
-			Dim OrgasmInt As Integer = ssh.randomizer.Next(1, 101)
-			'Debug.Print("OrgasmInt =" & OrgasmInt)
-			Dim OrgasmThreshold As Integer
 
-			If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then OrgasmThreshold = 0
-			If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then OrgasmThreshold = 1000
+			If StringClean.Contains("@EdgeHold") Then
+				ContactEdgeCheck(StringClean)
+				Edge()
+				ssh.EdgeHold = True
+				StringClean = StringClean.Replace("@EdgeHold", "")
+			End If
 
-			If FrmSettings.CBRangeOrgasm.Checked = True Then
-				If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then OrgasmThreshold = 20
-				If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then OrgasmThreshold = 50
-				If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then OrgasmThreshold = 75
-			Else
-				If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then OrgasmThreshold = FrmSettings.NBAllowRarely.Value
-				If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then OrgasmThreshold = FrmSettings.NBAllowSometimes.Value
-				If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then OrgasmThreshold = FrmSettings.NBAllowOften.Value
+			If StringClean.Contains("@Edge") Then
+				ContactEdgeCheck(StringClean)
+				Edge()
+				StringClean = StringClean.Replace("@Edge", "")
+			End If
+
+			If StringClean.Contains("@CBTBalls") Then
+				If FrmSettings.CBCBTBalls.Checked = True Then
+					ssh.CBTBallsActive = True
+					ssh.CBTBallsFlag = True
+					ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
+				End If
+				StringClean = StringClean.Replace("@CBTBalls", "")
+			End If
+
+			If StringClean.Contains("@CBTCock") Then
+				If FrmSettings.CBCBTCock.Checked = True Then
+					ssh.CBTCockActive = True
+					ssh.CBTCockFlag = True
+					ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
+				End If
+				StringClean = StringClean.Replace("@CBTCock", "")
+			End If
+
+			If StringClean.Contains("@CBT") And Not StringClean.Contains("@CBTLevel") Then
+
+				If FrmSettings.CBCBTCock.Checked = True And FrmSettings.CBCBTBalls.Checked = True Then
+					ssh.CBTBothActive = True
+					ssh.CBTBothFlag = True
+					ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
+				End If
+
+				StringClean = StringClean.Replace("@CBT", "")
 			End If
 
 
-			If OrgasmInt > OrgasmThreshold Then
-				ssh.FileGoto = DenyGoto
-				ssh.OrgasmDenied = True
-				GoTo OrgasmDecided
+			' The @CustomTask() Command works similarly to @CBTBalls and @CBTCock. It allows the user to have the domme run custom instructions from scripts located in Custom\Tasks. For example,
+			' @CustomTask(Spanking) would pull its first instruction from Custom\Tasks\Spanking_First.txt, and all subsequent instructions would be pulled from Custom\Tasks\Spanking.txt.
+
+			If StringClean.Contains("@CustomTask(") Then
+
+				Dim CustomFlag As String = GetParentheses(StringClean, "@CustomTask(")
+
+				CustomFlag = FixCommas(CustomFlag)
+
+				Dim CustomArray As String() = CustomFlag.Split(",")
+
+				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & "_First.txt") And
+				 File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & ".txt") Then
+					ssh.CustomTask = True
+					ssh.CustomTaskActive = True
+					ssh.CustomTaskText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & ".txt"
+					ssh.CustomTaskTextFirst = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Tasks\" & CustomArray(0) & "_First.txt"
+				End If
+
+				If CustomArray.Count > 1 Then
+					ssh.TasksCount = Val(CustomArray(1))
+				Else
+					ssh.TasksCount = ssh.randomizer.Next(FrmSettings.NBTasksMin.Value, FrmSettings.NBTasksMax.Value + 1)
+				End If
+
+
+				StringClean = StringClean.Replace("@CustomTask(" & GetParentheses(StringClean, "@CustomTask(") & ")", "")
+
 			End If
 
-			Dim RuinInt As Integer = ssh.randomizer.Next(1, 101)
-			'Debug.Print("OrgasmInt =" & OrgasmInt)
-			Dim RuinThreshold As Integer
 
-			If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then RuinThreshold = 0
-			If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then RuinThreshold = 1000
+			If StringClean.Contains("@DecideOrgasm") Then
+
+				ssh.OrgasmDenied = False
+				ssh.OrgasmAllowed = False
+				ssh.OrgasmRuined = False
+
+				Dim AllowGoto As String = "Orgasm Allow"
+				Dim RuinGoto As String = "Orgasm Ruin"
+				Dim DenyGoto As String = "Orgasm Deny"
+
+				If StringClean.Contains("@DecideOrgasm(") Then
+
+					Dim OrgasmFlag As String = GetParentheses(StringClean, "@DecideOrgasm(")
+					OrgasmFlag = FixCommas(OrgasmFlag)
+					Dim OrgasmArray As String() = OrgasmFlag.Split(",")
+
+					If OrgasmArray.Count = 3 Then
+						AllowGoto = OrgasmArray(0)
+						RuinGoto = OrgasmArray(1)
+						DenyGoto = OrgasmArray(2)
+					End If
+
+				End If
 
 
-			If FrmSettings.CBRangeRuin.Checked = True Then
-				If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then RuinThreshold = 20
-				If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then RuinThreshold = 50
-				If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then RuinThreshold = 75
-			Else
-				If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then RuinThreshold = FrmSettings.NBRuinRarely.Value
-				If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then RuinThreshold = FrmSettings.NBRuinSometimes.Value
-				If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then RuinThreshold = FrmSettings.NBRuinOften.Value
-			End If
+				If FrmSettings.alloworgasmComboBox.Text = "Always Allows" And FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then
+					ssh.FileGoto = RuinGoto
+					ssh.OrgasmRuined = True
+					GoTo OrgasmDecided
+				End If
+
+				Dim OrgasmInt As Integer = ssh.randomizer.Next(1, 101)
+				'Debug.Print("OrgasmInt =" & OrgasmInt)
+				Dim OrgasmThreshold As Integer
+
+				If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then OrgasmThreshold = 0
+				If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then OrgasmThreshold = 1000
+
+				If FrmSettings.CBRangeOrgasm.Checked = True Then
+					If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then OrgasmThreshold = 20
+					If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then OrgasmThreshold = 50
+					If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then OrgasmThreshold = 75
+				Else
+					If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then OrgasmThreshold = FrmSettings.NBAllowRarely.Value
+					If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then OrgasmThreshold = FrmSettings.NBAllowSometimes.Value
+					If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then OrgasmThreshold = FrmSettings.NBAllowOften.Value
+				End If
 
 
-			If RuinInt > RuinThreshold Then
-				ssh.FileGoto = AllowGoto
-				ssh.OrgasmAllowed = True
-			Else
-				ssh.FileGoto = RuinGoto
-				ssh.OrgasmRuined = True
-			End If
+				If OrgasmInt > OrgasmThreshold Then
+					ssh.FileGoto = DenyGoto
+					ssh.OrgasmDenied = True
+					GoTo OrgasmDecided
+				End If
+
+				Dim RuinInt As Integer = ssh.randomizer.Next(1, 101)
+				'Debug.Print("OrgasmInt =" & OrgasmInt)
+				Dim RuinThreshold As Integer
+
+				If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then RuinThreshold = 0
+				If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then RuinThreshold = 1000
+
+
+				If FrmSettings.CBRangeRuin.Checked = True Then
+					If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then RuinThreshold = 20
+					If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then RuinThreshold = 50
+					If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then RuinThreshold = 75
+				Else
+					If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then RuinThreshold = FrmSettings.NBRuinRarely.Value
+					If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then RuinThreshold = FrmSettings.NBRuinSometimes.Value
+					If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then RuinThreshold = FrmSettings.NBRuinOften.Value
+				End If
+
+
+				If RuinInt > RuinThreshold Then
+					ssh.FileGoto = AllowGoto
+					ssh.OrgasmAllowed = True
+				Else
+					ssh.FileGoto = RuinGoto
+					ssh.OrgasmRuined = True
+				End If
 
 OrgasmDecided:
 
-			ssh.SkipGotoLine = True
-			GetGoto()
+				ssh.SkipGotoLine = True
+				GetGoto()
 
-			StringClean = StringClean.Replace("@DecideOrgasm", "")
-		End If
-
-
-		If StringClean.Contains("@OrgasmRuin") Then
-			ssh.FileGoto = "Orgasm Ruin"
-			ssh.OrgasmRuined = True
-			ssh.SkipGotoLine = True
-			GetGoto()
-			StringClean = StringClean.Replace("@OrgasmRuin", "")
-		End If
-
-		If StringClean.Contains("@OrgasmDeny") Then
-			ssh.FileGoto = "Orgasm Deny"
-			ssh.OrgasmDenied = True
-			ssh.SkipGotoLine = True
-			GetGoto()
-			StringClean = StringClean.Replace("@OrgasmDeny", "")
-		End If
-
-		If StringClean.Contains("@OrgasmAllow") Then
-			ssh.FileGoto = "Orgasm Allow"
-			ssh.OrgasmAllowed = True
-			ssh.SkipGotoLine = True
-			GetGoto()
-			StringClean = StringClean.Replace("@OrgasmAllow", "")
-		End If
+				StringClean = StringClean.Replace("@DecideOrgasm", "")
+			End If
 
 
+			If StringClean.Contains("@OrgasmRuin") Then
+				ssh.FileGoto = "Orgasm Ruin"
+				ssh.OrgasmRuined = True
+				ssh.SkipGotoLine = True
+				GetGoto()
+				StringClean = StringClean.Replace("@OrgasmRuin", "")
+			End If
 
-		' The @Glitter Command allows to specify a specfic script from the domme's Apps\Glitter\Script directory, which will then immediately play out in the Glitter app. For example, @Glitter(About to Ruin)
-		' would run the Glitter script in Apps\Glitter\Script\About to Ruin.txt.
+			If StringClean.Contains("@OrgasmDeny") Then
+				ssh.FileGoto = "Orgasm Deny"
+				ssh.OrgasmDenied = True
+				ssh.SkipGotoLine = True
+				GetGoto()
+				StringClean = StringClean.Replace("@OrgasmDeny", "")
+			End If
 
-		If StringClean.Contains("@Glitter(") Then
+			If StringClean.Contains("@OrgasmAllow") Then
+				ssh.FileGoto = "Orgasm Allow"
+				ssh.OrgasmAllowed = True
+				ssh.SkipGotoLine = True
+				GetGoto()
+				StringClean = StringClean.Replace("@OrgasmAllow", "")
+			End If
 
-			' GitHub Patch: Dim GlitterFlag As Integer = GetParentheses(StringClean, "@Glitter(")
-			Dim GlitterFlag As String = GetParentheses(StringClean, "@Glitter(")
 
-			If My.Settings.CBGlitterFeedOff = False And ssh.UpdatingPost = False Then
-				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt") And ssh.UpdatingPost = False Then
-					ssh.UpdateList.Clear()
-					ssh.UpdateList.Add(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt")
-					StatusUpdatePost()
+
+			' The @Glitter Command allows to specify a specfic script from the domme's Apps\Glitter\Script directory, which will then immediately play out in the Glitter app. For example, @Glitter(About to Ruin)
+			' would run the Glitter script in Apps\Glitter\Script\About to Ruin.txt.
+
+			If StringClean.Contains("@Glitter(") Then
+
+				' GitHub Patch: Dim GlitterFlag As Integer = GetParentheses(StringClean, "@Glitter(")
+				Dim GlitterFlag As String = GetParentheses(StringClean, "@Glitter(")
+
+				If My.Settings.CBGlitterFeedOff = False And ssh.UpdatingPost = False Then
+					If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt") And ssh.UpdatingPost = False Then
+						ssh.UpdateList.Clear()
+						ssh.UpdateList.Add(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Script\" & GlitterFlag & ".txt")
+						StatusUpdatePost()
+					End If
 				End If
+
+				StringClean = StringClean.Replace("@Glitter(" & GlitterFlag & ")", "")
+
 			End If
 
-			StringClean = StringClean.Replace("@Glitter(" & GlitterFlag & ")", "")
-
-		End If
 
 
+			If StringClean.Contains("@WritingTask(") Or StringClean.Contains("@WritingTaskRandom(") Then
+				If StringClean.Contains("@WritingTask(") Then
+					ssh.randomWriteTask = False
+					StringClean = StringClean.Replace("@WritingTask", "")
+				Else
+					ssh.randomWriteTask = True
+					StringClean = StringClean.Replace("@WritingTaskRandom", "")
+				End If
 
-		If StringClean.Contains("@WritingTask(") Or StringClean.Contains("@WritingTaskRandom(") Then
-			If StringClean.Contains("@WritingTask(") Then
-				ssh.randomWriteTask = False
-				StringClean = StringClean.Replace("@WritingTask", "")
-			Else
-				ssh.randomWriteTask = True
-				StringClean = StringClean.Replace("@WritingTaskRandom", "")
+				ssh.WritingTaskFlag = True
+				setWriteTask()
+
+				Dim WritingTaskVal As Integer = Val(LBLWritingTaskText.Text)
+
+				If WritingTaskVal = 0 Then
+					ssh.WritingTaskLinesAmount = ssh.randomizer.Next(FrmSettings.NBWritingTaskMin.Value, FrmSettings.NBWritingTaskMax.Value)
+					ssh.WritingTaskLinesAmount = 5 * Math.Round(ssh.WritingTaskLinesAmount / 5)
+				Else
+					ssh.WritingTaskLinesAmount = WritingTaskVal
+					LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace(WritingTaskVal, "")
+				End If
+
+				LBLLinesWritten.Text = "0"
+				LBLLinesRemaining.Text = ssh.WritingTaskLinesAmount
+
+				If PNLWritingTask.Visible = False Then
+					CloseApp(PNLWritingTask)
+				End If
+
+				'WritingTaskMistakesAllowed = randomizer.Next(3, 9)
+
+				'determine error numbers based on numbers of lines to write
+				ssh.WritingTaskMistakesAllowed = ssh.randomizer.Next(ssh.WritingTaskLinesAmount / 10, ssh.WritingTaskLinesAmount / 3)
+				'clamps the value between 2 and 10 errors
+				ssh.WritingTaskMistakesAllowed = Math.Max(2, ssh.WritingTaskMistakesAllowed)
+				ssh.WritingTaskMistakesAllowed = Math.Min(ssh.WritingTaskMistakesAllowed, 10)
+
+				LBLMistakesAllowed.Text = ssh.WritingTaskMistakesAllowed
+				LBLMistakesMade.Text = "0"
+				'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times."
+				ssh.WritingTaskLinesRemaining = ssh.WritingTaskLinesAmount
+				ssh.WritingTaskLinesWritten = 0
+				ssh.WritingTaskMistakesMade = 0
+				chatBox.ShortcutsEnabled = False
+				ChatBox2.ShortcutsEnabled = False
+
+				If My.Settings.TimedWriting = True Then
+
+					Dim secs As Single
+
+					'determines how many secs are given for writing each line, depending on line length and typespeed value selected by the user in the settings
+					'(between 0,54 and 0,75 secs per character in the sentence at slowest typingspeed and between 0.18 and 0.25 at fastest typing speed)
+					secs = (ssh.randomizer.Next(15, 25) / My.Settings.TypeSpeed) * (LBLWritingTaskText.Text.Length - 3)
+					'determines how much time is given (in seconds) to complete the @WritingTask() depending on how many lines you have to write and a small bonus to give some
+					'more time for very short lines
+					ssh.WritingTaskCurrentTime = 15 + secs * ssh.WritingTaskLinesAmount
+
+					LBLWritingTask.Text = "Write the following line " & ssh.WritingTaskLinesAmount & " times" & vbCrLf & "In " & ConvertSeconds(ssh.WritingTaskCurrentTime)
+					LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
+				Else
+					LBLWritingTask.Text = "Write the following line " & ssh.WritingTaskLinesAmount & " times"
+					LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
+				End If
+
 			End If
 
-			ssh.WritingTaskFlag = True
-			setWriteTask()
+			If StringClean.Contains("@CheckJOIVideo") Then
 
-			Dim WritingTaskVal As Integer = Val(LBLWritingTaskText.Text)
-
-			If WritingTaskVal = 0 Then
-				ssh.WritingTaskLinesAmount = ssh.randomizer.Next(FrmSettings.NBWritingTaskMin.Value, FrmSettings.NBWritingTaskMax.Value)
-				ssh.WritingTaskLinesAmount = 5 * Math.Round(ssh.WritingTaskLinesAmount / 5)
-			Else
-				ssh.WritingTaskLinesAmount = WritingTaskVal
-				LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace(WritingTaskVal, "")
-			End If
-
-			LBLLinesWritten.Text = "0"
-			LBLLinesRemaining.Text = ssh.WritingTaskLinesAmount
-
-			If PNLWritingTask.Visible = False Then
-				CloseApp(PNLWritingTask)
-			End If
-
-			'WritingTaskMistakesAllowed = randomizer.Next(3, 9)
-
-			'determine error numbers based on numbers of lines to write
-			ssh.WritingTaskMistakesAllowed = ssh.randomizer.Next(ssh.WritingTaskLinesAmount / 10, ssh.WritingTaskLinesAmount / 3)
-			'clamps the value between 2 and 10 errors
-			ssh.WritingTaskMistakesAllowed = Math.Max(2, ssh.WritingTaskMistakesAllowed)
-			ssh.WritingTaskMistakesAllowed = Math.Min(ssh.WritingTaskMistakesAllowed, 10)
-
-			LBLMistakesAllowed.Text = ssh.WritingTaskMistakesAllowed
-			LBLMistakesMade.Text = "0"
-			'LBLWritingTask.Text = "Write the following line " & WritingTaskLinesAmount & " times."
-			ssh.WritingTaskLinesRemaining = ssh.WritingTaskLinesAmount
-			ssh.WritingTaskLinesWritten = 0
-			ssh.WritingTaskMistakesMade = 0
-			chatBox.ShortcutsEnabled = False
-			ChatBox2.ShortcutsEnabled = False
-
-			If My.Settings.TimedWriting = True Then
-
-				Dim secs As Single
-
-				'determines how many secs are given for writing each line, depending on line length and typespeed value selected by the user in the settings
-				'(between 0,54 and 0,75 secs per character in the sentence at slowest typingspeed and between 0.18 and 0.25 at fastest typing speed)
-				secs = (ssh.randomizer.Next(15, 25) / My.Settings.TypeSpeed) * (LBLWritingTaskText.Text.Length - 3)
-				'determines how much time is given (in seconds) to complete the @WritingTask() depending on how many lines you have to write and a small bonus to give some
-				'more time for very short lines
-				ssh.WritingTaskCurrentTime = 15 + secs * ssh.WritingTaskLinesAmount
-
-				LBLWritingTask.Text = "Write the following line " & ssh.WritingTaskLinesAmount & " times" & vbCrLf & "In " & ConvertSeconds(ssh.WritingTaskCurrentTime)
-				LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
-			Else
-				LBLWritingTask.Text = "Write the following line " & ssh.WritingTaskLinesAmount & " times"
-				LBLWritingTask.Text = LBLWritingTask.Text.Replace("line 1 times", "line 1 time")
-			End If
-
-		End If
-
-		If StringClean.Contains("@CheckJOIVideo") Then
-
-			If Directory.Exists(My.Settings.VideoJOI) Or Directory.Exists(My.Settings.VideoJOID) Then
-				If FrmSettings.LblVideoJOITotal.Text <> "0" Or FrmSettings.LblVideoJOITotalD.Text <> "0" Then
+				If Directory.Exists(My.Settings.VideoJOI) Or Directory.Exists(My.Settings.VideoJOID) Then
+					If FrmSettings.LblVideoJOITotal.Text <> "0" Or FrmSettings.LblVideoJOITotalD.Text <> "0" Then
+					Else
+						ssh.SkipGotoLine = True
+						ssh.FileGoto = "No JOI Found"
+						GetGoto()
+					End If
 				Else
 					ssh.SkipGotoLine = True
 					ssh.FileGoto = "No JOI Found"
 					GetGoto()
 				End If
-			Else
-				ssh.SkipGotoLine = True
-				ssh.FileGoto = "No JOI Found"
-				GetGoto()
+
+				StringClean = StringClean.Replace("@CheckJOIVideo", "")
+
 			End If
 
-			StringClean = StringClean.Replace("@CheckJOIVideo", "")
 
-		End If
+			If StringClean.Contains("@PlayJOIVideo") Then
 
+				If Directory.Exists(My.Settings.VideoJOI) Or Directory.Exists(My.Settings.VideoJOID) Then
 
-		If StringClean.Contains("@PlayJOIVideo") Then
-
-			If Directory.Exists(My.Settings.VideoJOI) Or Directory.Exists(My.Settings.VideoJOID) Then
-
-				ssh.TeaseVideo = True
-				PlayRandomJOI()
-			End If
-
-			StringClean = StringClean.Replace("@PlayJOIVideo", "")
-
-		End If
-
-		If StringClean.Contains("@PlayCHVideo") Then
-
-			If Directory.Exists(My.Settings.VideoCH) Or Directory.Exists(My.Settings.VideoCH) Then
-
-				ssh.TeaseVideo = True
-				PlayRandomCH()
-			End If
-
-			StringClean = StringClean.Replace("@PlayCHVideo", "")
-
-		End If
-
-
-
-
-		If StringClean.Contains("@GiveUpCheck") Then
-
-
-			If ssh.AskedToGiveUpSection = True Then
-
-				If ssh.SubGaveUp = True Then
-					ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\GiveUpREHASH.txt"
-				Else
-					ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\GiveUpREPEAT.txt"
+					ssh.TeaseVideo = True
+					PlayRandomJOI()
 				End If
-				'StringClean = ResponseClean(StringClean)
 
-			Else
+				StringClean = StringClean.Replace("@PlayJOIVideo", "")
 
-				ssh.AskedToGiveUpSection = True
-				ssh.AskedToGiveUp = True
+			End If
 
-				Dim GiveUpCheck As Integer
+			If StringClean.Contains("@PlayCHVideo") Then
 
-				If FrmSettings.NBEmpathy.Value = 1 Then GiveUpCheck = 0
-				If FrmSettings.NBEmpathy.Value = 2 Then GiveUpCheck = 25
-				If FrmSettings.NBEmpathy.Value = 3 Then GiveUpCheck = 50
-				If FrmSettings.NBEmpathy.Value = 4 Then GiveUpCheck = 75
-				If FrmSettings.NBEmpathy.Value = 5 Then GiveUpCheck = 1000
+				If Directory.Exists(My.Settings.VideoCH) Or Directory.Exists(My.Settings.VideoCH) Then
 
-				Dim GiveUpVal As Integer = ssh.randomizer.Next(1, 101)
+					ssh.TeaseVideo = True
+					PlayRandomCH()
+				End If
 
-				'If GiveUpVal > GiveUpCheck Then
-				If GiveUpVal > GiveUpCheck And Not ssh.LastScript Then
-					' you can give up
-					ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\GiveUpALLOWED.txt"
+				StringClean = StringClean.Replace("@PlayCHVideo", "")
+
+			End If
+
+
+
+
+			If StringClean.Contains("@GiveUpCheck") Then
+
+
+				If ssh.AskedToGiveUpSection = True Then
+
+					If ssh.SubGaveUp = True Then
+						ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\GiveUpREHASH.txt"
+					Else
+						ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\GiveUpREPEAT.txt"
+					End If
+					'StringClean = ResponseClean(StringClean)
+
+				Else
+
+					ssh.AskedToGiveUpSection = True
+					ssh.AskedToGiveUp = True
+
+					Dim GiveUpCheck As Integer
+
+					If FrmSettings.NBEmpathy.Value = 1 Then GiveUpCheck = 0
+					If FrmSettings.NBEmpathy.Value = 2 Then GiveUpCheck = 25
+					If FrmSettings.NBEmpathy.Value = 3 Then GiveUpCheck = 50
+					If FrmSettings.NBEmpathy.Value = 4 Then GiveUpCheck = 75
+					If FrmSettings.NBEmpathy.Value = 5 Then GiveUpCheck = 1000
+
+					Dim GiveUpVal As Integer = ssh.randomizer.Next(1, 101)
+
+					'If GiveUpVal > GiveUpCheck Then
+					If GiveUpVal > GiveUpCheck And Not ssh.LastScript Then
+						' you can give up
+						ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\GiveUpALLOWED.txt"
+						ssh.LockImage = False
+						If ssh.SlideshowLoaded = True Then
+							nextButton.Enabled = True
+							previousButton.Enabled = True
+							PicStripTSMIdommeSlideshow.Enabled = True
+						End If
+						ssh.SubGaveUp = True
+						If ssh.TasksCount >= 1 Then ssh.TasksCount = 0
+						'ssh.FirstRound = False
+					Else
+						' you can't give up
+						ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\GiveUpDENIED.txt"
+					End If
+
+
+
+				End If
+
+				StringClean = ResponseClean(StringClean)
+
+			End If
+
+
+			If StringClean.Contains("@EndTease") Then
+				SetVariable("SYS_SubLeftEarly", 0)
+				'My.Settings.Sys_SubLeftEarly = 0
+				'StopEverything()
+				'ResetButton()
+				SaveChatLog(False)
+				ssh.Reset()
+				FrmSettings.LockOrgasmChances(False)
+				ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
+				ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
+				setStartName()
+				StringClean = StringClean.Replace("@EndTease", "")
+			End If
+
+			If StringClean.Contains("@FinishTease") Then
+				ssh.TeaseTick = 0
+				StringClean = StringClean.Replace("@FinishTease", "")
+			End If
+
+			If StringClean.Contains("@DommeLevelDown") Then
+				If FrmSettings.domlevelNumBox.Value > 1 Then
+					FrmSettings.domlevelNumBox.Value -= 1
+				End If
+				StringClean = StringClean.Replace("@DommeLevelDown", "")
+			End If
+
+			If StringClean.Contains("@ApathyLevelDown") Then
+				If FrmSettings.NBEmpathy.Value > 1 Then
+					FrmSettings.NBEmpathy.Value -= 1
+				End If
+				StringClean = StringClean.Replace("@ApathyLevelDown", "")
+			End If
+
+			If StringClean.Contains("@DommeLevelUp") Then
+				If FrmSettings.domlevelNumBox.Value < 5 Then
+					FrmSettings.domlevelNumBox.Value += 1
+				End If
+				StringClean = StringClean.Replace("@DommeLevelUp", "")
+			End If
+
+			If StringClean.Contains("@ApathyLevelUp") Then
+				If FrmSettings.NBEmpathy.Value < 5 Then
+					FrmSettings.NBEmpathy.Value += 1
+				End If
+				StringClean = StringClean.Replace("@ApathyLevelUp", "")
+			End If
+
+			If StringClean.Contains("@InterruptLongEdge") Then
+				ssh.isLink = False
+				ssh.BeforeTease = False
+				Dim EdgeList As New List(Of String)
+
+				For Each EdgeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Long Edge\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+					'Debug.Print("EdgeFile = " & EdgeFile)
+					EdgeList.Add(EdgeFile)
+				Next
+
+				'Debug.Print("EdgeList.Count = " & EdgeList.Count)
+
+				If EdgeList.Count > 0 Then
+
+					GotoClear()
+
+					ssh.SubEdging = False
+					ssh.SubHoldingEdge = False
+					EdgeTauntTimer.Stop()
+					StrokeTimer.Stop()
+					StrokeTauntTimer.Stop()
+					ssh.FileText = EdgeList(ssh.randomizer.Next(0, EdgeList.Count))
 					ssh.LockImage = False
 					If ssh.SlideshowLoaded = True Then
 						nextButton.Enabled = True
 						previousButton.Enabled = True
 						PicStripTSMIdommeSlideshow.Enabled = True
 					End If
-					ssh.SubGaveUp = True
-					If ssh.TasksCount >= 1 Then ssh.TasksCount = 0
-					'ssh.FirstRound = False
+					ssh.StrokeTauntVal = -1
+					ssh.ScriptTick = 3
+					ScriptTimer.Start()
+					ssh.ShowModule = True
+
 				Else
-					' you can't give up
-					ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\GiveUpDENIED.txt"
+					MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Long Edge!" & Environment.NewLine _
+					 & Environment.NewLine & "Please make sure at lease one LongEdge_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				End If
+				StringClean = StringClean.Replace("@InterruptLongEdge", "")
+				ssh.JustShowedBlogImage = True
+			End If
+
+			If StringClean.Contains("@InterruptStartStroking") Then
+				ssh.isLink = False
+				ssh.BeforeTease = False
+				If ssh.CensorshipGame = True Or ssh.AvoidTheEdgeGame = True Or ssh.RLGLGame = True Then
+					StringClean = "Ask me later"
+					GoTo VTSkip
 				End If
 
+				Dim StrokeList As New List(Of String)
 
+				For Each StrokeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Start Stroking\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+					'Debug.Print("EdgeFile = " & EdgeFile)
+					StrokeList.Add(StrokeFile)
+				Next
 
-			End If
+				'Debug.Print("EdgeList.Count = " & EdgeList.Count)
 
-			StringClean = ResponseClean(StringClean)
+				If StrokeList.Count > 0 Then
 
-		End If
+					GotoClear()
 
+					ssh.CBTCockFlag = False
+					ssh.CBTBallsFlag = False
+					ssh.CBTBothFlag = False
+					ssh.CustomTask = False
+					ssh.SubEdging = False
+					ssh.SubHoldingEdge = False
+					EdgeTauntTimer.Stop()
+					StrokeTimer.Stop()
+					StrokeTauntTimer.Stop()
+					ssh.FileText = StrokeList(ssh.randomizer.Next(0, StrokeList.Count))
+					ssh.LockImage = False
+					If ssh.SlideshowLoaded = True Then
+						nextButton.Enabled = True
+						previousButton.Enabled = True
+						PicStripTSMIdommeSlideshow.Enabled = True
+					End If
+					ssh.StrokeTauntVal = -1
+					ssh.ScriptTick = 3
+					ScriptTimer.Start()
+					ssh.ShowModule = True
 
-		If StringClean.Contains("@EndTease") Then
-			SetVariable("SYS_SubLeftEarly", 0)
-			'My.Settings.Sys_SubLeftEarly = 0
-			'StopEverything()
-			'ResetButton()
-			SaveChatLog(False)
-			ssh.Reset()
-			FrmSettings.LockOrgasmChances(False)
-			ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
-			ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
-			setStartName()
-			StringClean = StringClean.Replace("@EndTease", "")
-		End If
-
-		If StringClean.Contains("@FinishTease") Then
-			ssh.TeaseTick = 0
-			StringClean = StringClean.Replace("@FinishTease", "")
-		End If
-
-		If StringClean.Contains("@DommeLevelDown") Then
-			If FrmSettings.domlevelNumBox.Value > 1 Then
-				FrmSettings.domlevelNumBox.Value -= 1
-			End If
-			StringClean = StringClean.Replace("@DommeLevelDown", "")
-		End If
-
-		If StringClean.Contains("@ApathyLevelDown") Then
-			If FrmSettings.NBEmpathy.Value > 1 Then
-				FrmSettings.NBEmpathy.Value -= 1
-			End If
-			StringClean = StringClean.Replace("@ApathyLevelDown", "")
-		End If
-
-		If StringClean.Contains("@DommeLevelUp") Then
-			If FrmSettings.domlevelNumBox.Value < 5 Then
-				FrmSettings.domlevelNumBox.Value += 1
-			End If
-			StringClean = StringClean.Replace("@DommeLevelUp", "")
-		End If
-
-		If StringClean.Contains("@ApathyLevelUp") Then
-			If FrmSettings.NBEmpathy.Value < 5 Then
-				FrmSettings.NBEmpathy.Value += 1
-			End If
-			StringClean = StringClean.Replace("@ApathyLevelUp", "")
-		End If
-
-		If StringClean.Contains("@InterruptLongEdge") Then
-			ssh.isLink = False
-			ssh.BeforeTease = False
-			Dim EdgeList As New List(Of String)
-
-			For Each EdgeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Long Edge\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-				'Debug.Print("EdgeFile = " & EdgeFile)
-				EdgeList.Add(EdgeFile)
-			Next
-
-			'Debug.Print("EdgeList.Count = " & EdgeList.Count)
-
-			If EdgeList.Count > 0 Then
-
-				GotoClear()
-
-				ssh.SubEdging = False
-				ssh.SubHoldingEdge = False
-				EdgeTauntTimer.Stop()
-				StrokeTimer.Stop()
-				StrokeTauntTimer.Stop()
-				ssh.FileText = EdgeList(ssh.randomizer.Next(0, EdgeList.Count))
-				ssh.LockImage = False
-				If ssh.SlideshowLoaded = True Then
-					nextButton.Enabled = True
-					previousButton.Enabled = True
-					PicStripTSMIdommeSlideshow.Enabled = True
+				Else
+					MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Start Stroking!" & Environment.NewLine _
+					 & Environment.NewLine & "Please make sure at lease one StartStroking_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
-				ssh.StrokeTauntVal = -1
-				ssh.ScriptTick = 3
-				ScriptTimer.Start()
-				ssh.ShowModule = True
-
-			Else
-				MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Long Edge!" & Environment.NewLine _
-				 & Environment.NewLine & "Please make sure at lease one LongEdge_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			End If
-			StringClean = StringClean.Replace("@InterruptLongEdge", "")
-			ssh.JustShowedBlogImage = True
-		End If
-
-		If StringClean.Contains("@InterruptStartStroking") Then
-			ssh.isLink = False
-			ssh.BeforeTease = False
-			If ssh.CensorshipGame = True Or ssh.AvoidTheEdgeGame = True Or ssh.RLGLGame = True Then
-				StringClean = "Ask me later"
-				GoTo VTSkip
+				StringClean = StringClean.Replace("@InterruptStartStroking", "")
+				ssh.JustShowedBlogImage = True
 			End If
 
-			Dim StrokeList As New List(Of String)
+			If StringClean.Contains("@Interrupt(") Then
+				ssh.isLink = False
+				ssh.BeforeTease = False
+				Dim InterruptClean As String = StringClean
+				Dim StartIndex As Integer = InterruptClean.IndexOf("@Interrupt(") + 11
+				For i As Integer = 1 To StartIndex
+					InterruptClean = InterruptClean.Remove(0, 1)
+				Next
+				Dim InterruptS As String() = InterruptClean.Split(")")
+				InterruptClean = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\" & InterruptS(0) & ".txt"
 
-			For Each StrokeFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Start Stroking\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-				'Debug.Print("EdgeFile = " & EdgeFile)
-				StrokeList.Add(StrokeFile)
-			Next
+				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\" & InterruptS(0) & ".txt") Then
 
-			'Debug.Print("EdgeList.Count = " & EdgeList.Count)
+					GotoClear()
 
-			If StrokeList.Count > 0 Then
+					ssh.FirstRound = False
+					ssh.CBTCockFlag = False
+					ssh.CBTBallsFlag = False
+					ssh.CBTBothFlag = False
+					ssh.CustomTask = False
+					ssh.SubEdging = False
+					ssh.SubHoldingEdge = False
+					StrokeTimer.Stop()
+					StrokeTauntTimer.Stop()
+					ssh.MultiTauntPictureHold = False
+					CensorshipTimer.Stop()
+					RLGLTimer.Stop()
+					TnASlides.Stop()
+					AvoidTheEdge.Stop()
+					EdgeTauntTimer.Stop()
+					HoldEdgeTimer.Stop()
+					HoldEdgeTauntTimer.Stop()
+					AvoidTheEdgeTaunts.Stop()
+					RLGLTauntTimer.Stop()
+					VideoTauntTimer.Stop()
+					EdgeCountTimer.Stop()
 
-				GotoClear()
+					'if we use an interrupt we have to clear all the values stored in the @CallReturn array because @Interrupts stop everything
+					'and then moves to a link (otherwise we'd have the program going back to these @CallReturn the next time a new @CallReturn is called)
+					ssh.CallReturns.Clear()
 
-				ssh.CBTCockFlag = False
-				ssh.CBTBallsFlag = False
-				ssh.CBTBothFlag = False
-				ssh.CustomTask = False
-				ssh.SubEdging = False
-				ssh.SubHoldingEdge = False
-				EdgeTauntTimer.Stop()
-				StrokeTimer.Stop()
-				StrokeTauntTimer.Stop()
-				ssh.FileText = StrokeList(ssh.randomizer.Next(0, StrokeList.Count))
-				ssh.LockImage = False
-				If ssh.SlideshowLoaded = True Then
-					nextButton.Enabled = True
-					previousButton.Enabled = True
-					PicStripTSMIdommeSlideshow.Enabled = True
+
+					ssh.FileText = InterruptClean
+					ssh.LockImage = False
+					If ssh.SlideshowLoaded = True Then
+						nextButton.Enabled = True
+						previousButton.Enabled = True
+						PicStripTSMIdommeSlideshow.Enabled = True
+					End If
+					ssh.StrokeTauntVal = -1
+					ssh.ScriptTick = 3
+					ScriptTimer.Start()
+					ssh.ShowModule = True
+
+				Else
+					MessageBox.Show(Me, InterruptS(0) & ".txt was not found in " & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt!" & Environment.NewLine _
+					 & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
-				ssh.StrokeTauntVal = -1
-				ssh.ScriptTick = 3
-				ScriptTimer.Start()
-				ssh.ShowModule = True
-
-			Else
-				MessageBox.Show(Me, "No files were found in " & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\Start Stroking!" & Environment.NewLine _
-				 & Environment.NewLine & "Please make sure at lease one StartStroking_ file exists.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			End If
-			StringClean = StringClean.Replace("@InterruptStartStroking", "")
-			ssh.JustShowedBlogImage = True
-		End If
-
-		If StringClean.Contains("@Interrupt(") Then
-			ssh.isLink = False
-			ssh.BeforeTease = False
-			Dim InterruptClean As String = StringClean
-			Dim StartIndex As Integer = InterruptClean.IndexOf("@Interrupt(") + 11
-			For i As Integer = 1 To StartIndex
-				InterruptClean = InterruptClean.Remove(0, 1)
-			Next
-			Dim InterruptS As String() = InterruptClean.Split(")")
-			InterruptClean = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\" & InterruptS(0) & ".txt"
-
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt\" & InterruptS(0) & ".txt") Then
-
-				GotoClear()
-
-				ssh.FirstRound = False
-				ssh.CBTCockFlag = False
-				ssh.CBTBallsFlag = False
-				ssh.CBTBothFlag = False
-				ssh.CustomTask = False
-				ssh.SubEdging = False
-				ssh.SubHoldingEdge = False
-				StrokeTimer.Stop()
-				StrokeTauntTimer.Stop()
-				ssh.MultiTauntPictureHold = False
-				CensorshipTimer.Stop()
-				RLGLTimer.Stop()
-				TnASlides.Stop()
-				AvoidTheEdge.Stop()
-				EdgeTauntTimer.Stop()
-				HoldEdgeTimer.Stop()
-				HoldEdgeTauntTimer.Stop()
-				AvoidTheEdgeTaunts.Stop()
-				RLGLTauntTimer.Stop()
-				VideoTauntTimer.Stop()
-				EdgeCountTimer.Stop()
-
-				'if we use an interrupt we have to clear all the values stored in the @CallReturn array because @Interrupts stop everything
-				'and then moves to a link (otherwise we'd have the program going back to these @CallReturn the next time a new @CallReturn is called)
-				ssh.CallReturns.Clear()
-
-
-				ssh.FileText = InterruptClean
-				ssh.LockImage = False
-				If ssh.SlideshowLoaded = True Then
-					nextButton.Enabled = True
-					previousButton.Enabled = True
-					PicStripTSMIdommeSlideshow.Enabled = True
-				End If
-				ssh.StrokeTauntVal = -1
-				ssh.ScriptTick = 3
-				ScriptTimer.Start()
-				ssh.ShowModule = True
-
-			Else
-				MessageBox.Show(Me, InterruptS(0) & ".txt was not found in " & Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Interrupt!" & Environment.NewLine _
-				 & Environment.NewLine & "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			End If
-			StringClean = StringClean.Replace("@Interrupt(" & InterruptS(0) & ")", "")
-			'Debug.Print("StringClean INterrupt Remove = " & "@Interrupt(" & InterruptS(0) & ")")
-			ssh.JustShowedBlogImage = True
-		End If
-
-		If StringClean.Contains("@BookmarkModule") Then
-			ssh.BookmarkModule = True
-			ssh.BookmarkModuleFile = ssh.FileText
-			ssh.BookmarkModuleLine = ssh.StrokeTauntVal + 1
-			StringClean = StringClean.Replace("@BookmarkModule", "")
-		End If
-
-		If StringClean.Contains("@BookmarkLink") Then
-			ssh.BookmarkLink = True
-			ssh.BookmarkLinkFile = ssh.FileText
-			ssh.BookmarkLinkLine = ssh.StrokeTauntVal + 1
-			StringClean = StringClean.Replace("@BookmarkLink", "")
-		End If
-
-		If StringClean.Contains("@AFKOn") Then
-			ssh.AFK = True
-			StringClean = StringClean.Replace("@AFKOn", "")
-		End If
-
-		If StringClean.Contains("@AFKOff") Then
-			ssh.AFK = False
-			StringClean = StringClean.Replace("@AFKOff", "")
-		End If
-
-		If StringClean.Contains("@Wait(") Then
-
-			Dim WaitFlag As String = GetParentheses(StringClean, "Wait(")
-			Dim WaitSeconds As Integer = Val(WaitFlag)
-
-			If UCase(WaitFlag).Contains("M") Then WaitSeconds *= 60
-			If UCase(WaitFlag).Contains("H") Then WaitSeconds *= 3600
-
-			ssh.WaitTick = WaitSeconds
-			WaitTimer.Start()
-
-			StringClean = StringClean.Replace("@Wait(" & WaitFlag & ")", "")
-
-		End If
-
-
-
-		If StringClean.Contains("@SendDailyTasks") Then
-			CreateTaskLetter()
-			StringClean = StringClean.Replace("@SendDailyTasks", "")
-		End If
-
-		If StringClean.Contains("@EdgingHold") Then
-
-			'ssh.DomTypeCheck = True
-			ssh.SubEdging = False
-			ssh.SubStroking = False
-			ssh.SubHoldingEdge = True
-			EdgeTauntTimer.Stop()
-			ssh.DomChat = "#HoldTheEdge"
-			TypingDelay()
-
-			ssh.HoldEdgeTick = ssh.HoldEdgeChance
-
-			Dim HoldEdgeMin As Integer = FrmSettings.NBHoldTheEdgeMin.Value
-			If FrmSettings.LBLMinHold.Text = "minutes" Then HoldEdgeMin *= 60
-
-			Dim HoldEdgeMax As Integer = FrmSettings.NBHoldTheEdgeMax.Value
-			If FrmSettings.LBLMaxHold.Text = "minutes" Then HoldEdgeMax *= 60
-
-			If ssh.ExtremeHold = True Then
-				HoldEdgeMin = FrmSettings.NBExtremeHoldMin.Value * 60
-				HoldEdgeMax = FrmSettings.NBExtremeHoldMax.Value * 60
+				StringClean = StringClean.Replace("@Interrupt(" & InterruptS(0) & ")", "")
+				'Debug.Print("StringClean INterrupt Remove = " & "@Interrupt(" & InterruptS(0) & ")")
+				ssh.JustShowedBlogImage = True
 			End If
 
-			If ssh.LongHold = True Then
-				HoldEdgeMin = FrmSettings.NBLongHoldMin.Value * 60
-				HoldEdgeMax = FrmSettings.NBLongHoldMax.Value * 60
+			If StringClean.Contains("@BookmarkModule") Then
+				ssh.BookmarkModule = True
+				ssh.BookmarkModuleFile = ssh.FileText
+				ssh.BookmarkModuleLine = ssh.StrokeTauntVal + 1
+				StringClean = StringClean.Replace("@BookmarkModule", "")
+			End If
+
+			If StringClean.Contains("@BookmarkLink") Then
+				ssh.BookmarkLink = True
+				ssh.BookmarkLinkFile = ssh.FileText
+				ssh.BookmarkLinkLine = ssh.StrokeTauntVal + 1
+				StringClean = StringClean.Replace("@BookmarkLink", "")
+			End If
+
+			If StringClean.Contains("@AFKOn") Then
+				ssh.AFK = True
+				StringClean = StringClean.Replace("@AFKOn", "")
+			End If
+
+			If StringClean.Contains("@AFKOff") Then
+				ssh.AFK = False
+				StringClean = StringClean.Replace("@AFKOff", "")
+			End If
+
+			If StringClean.Contains("@Wait(") Then
+
+				Dim WaitFlag As String = GetParentheses(StringClean, "Wait(")
+				Dim WaitSeconds As Integer = Val(WaitFlag)
+
+				If UCase(WaitFlag).Contains("M") Then WaitSeconds *= 60
+				If UCase(WaitFlag).Contains("H") Then WaitSeconds *= 3600
+
+				ssh.WaitTick = WaitSeconds
+				WaitTimer.Start()
+
+				StringClean = StringClean.Replace("@Wait(" & WaitFlag & ")", "")
+
 			End If
 
 
-			If HoldEdgeMax < HoldEdgeMin Then HoldEdgeMax = HoldEdgeMin + 1
 
-			ssh.HoldEdgeTick = ssh.randomizer.Next(HoldEdgeMin, HoldEdgeMax + 1)
-			If ssh.HoldEdgeTick < 10 Then ssh.HoldEdgeTick = 10
+			If StringClean.Contains("@SendDailyTasks") Then
+				CreateTaskLetter()
+				StringClean = StringClean.Replace("@SendDailyTasks", "")
+			End If
 
-			ssh.HoldEdgeTime = 0
+			If StringClean.Contains("@EdgingHold") Then
 
-			HoldEdgeTimer.Start()
-			HoldEdgeTauntTimer.Start()
-
-			'Do
-			'Application.DoEvents()
-			'Loop Until ssh.DomTypeCheck = False
-
-
-			StringClean = StringClean.Replace("@EdgingHold", "")
-		End If
-
-		If StringClean.Contains("@EdgingStop") Then
-
-			ssh.DomTypeCheck = True
-			ssh.SubEdging = False
-			ssh.SubStroking = False
-			EdgeTauntTimer.Stop()
-			ssh.DomChat = "#StopStrokingEdge"
-			TypingDelay()
-
-			StringClean = StringClean.Replace("@EdgingStop", "")
-		End If
-
-		'Github Patch  If StringClean.Contains("@EdgingDecide") Then
-		If StringClean.Contains("@DecideEdge") Then
-
-			ssh.TempVal = ssh.randomizer.Next(0, 101)
-
-			If ssh.TempVal < 51 Then
-
-				ssh.DomTypeCheck = True
+				'ssh.DomTypeCheck = True
 				ssh.SubEdging = False
 				ssh.SubStroking = False
 				ssh.SubHoldingEdge = True
 				EdgeTauntTimer.Stop()
-				StrokePace = 0
 				ssh.DomChat = "#HoldTheEdge"
-				If ssh.Contact1Stroke = True Then
-					ssh.DomChat = "@Contact1 #HoldTheEdge"
-					' Github Patch Contact1Stroke = False
-				End If
-				If ssh.Contact2Stroke = True Then
-					ssh.DomChat = "@Contact2 #HoldTheEdge"
-					' Github Patch Contact2Stroke = False
-				End If
-				If ssh.Contact3Stroke = True Then
-					ssh.DomChat = "@Contact3 #HoldTheEdge"
-					' Github Patch Contact3Stroke = False
-				End If
 				TypingDelay()
 
 				ssh.HoldEdgeTick = ssh.HoldEdgeChance
@@ -11139,6 +11066,17 @@ OrgasmDecided:
 
 				Dim HoldEdgeMax As Integer = FrmSettings.NBHoldTheEdgeMax.Value
 				If FrmSettings.LBLMaxHold.Text = "minutes" Then HoldEdgeMax *= 60
+
+				If ssh.ExtremeHold = True Then
+					HoldEdgeMin = FrmSettings.NBExtremeHoldMin.Value * 60
+					HoldEdgeMax = FrmSettings.NBExtremeHoldMax.Value * 60
+				End If
+
+				If ssh.LongHold = True Then
+					HoldEdgeMin = FrmSettings.NBLongHoldMin.Value * 60
+					HoldEdgeMax = FrmSettings.NBLongHoldMax.Value * 60
+				End If
+
 
 				If HoldEdgeMax < HoldEdgeMin Then HoldEdgeMax = HoldEdgeMin + 1
 
@@ -11150,532 +11088,565 @@ OrgasmDecided:
 				HoldEdgeTimer.Start()
 				HoldEdgeTauntTimer.Start()
 
-			Else
+				'Do
+				'Application.DoEvents()
+				'Loop Until ssh.DomTypeCheck = False
+
+
+				StringClean = StringClean.Replace("@EdgingHold", "")
+			End If
+
+			If StringClean.Contains("@EdgingStop") Then
 
 				ssh.DomTypeCheck = True
 				ssh.SubEdging = False
 				ssh.SubStroking = False
 				EdgeTauntTimer.Stop()
 				ssh.DomChat = "#StopStrokingEdge"
-				If ssh.Contact1Stroke = True Then
-					ssh.DomChat = "@Contact1 #StopStrokingEdge"
-					ssh.Contact1Stroke = False
-				End If
-				If ssh.Contact2Stroke = True Then
-					ssh.DomChat = "@Contact2 #StopStrokingEdge"
-					ssh.Contact2Stroke = False
-				End If
-				If ssh.Contact3Stroke = True Then
-					ssh.DomChat = "@Contact3 #StopStrokingEdge"
-					ssh.Contact3Stroke = False
-				End If
 				TypingDelay()
 
+				StringClean = StringClean.Replace("@EdgingStop", "")
 			End If
 
-			'Do
-			'Application.DoEvents()
-			'Loop Until ssh.DomTypeCheck = False
+			'Github Patch  If StringClean.Contains("@EdgingDecide") Then
+			If StringClean.Contains("@DecideEdge") Then
+
+				ssh.TempVal = ssh.randomizer.Next(0, 101)
+
+				If ssh.TempVal < 51 Then
+
+					ssh.DomTypeCheck = True
+					ssh.SubEdging = False
+					ssh.SubStroking = False
+					ssh.SubHoldingEdge = True
+					EdgeTauntTimer.Stop()
+					StrokePace = 0
+					ssh.DomChat = "#HoldTheEdge"
+					If ssh.Contact1Stroke = True Then
+						ssh.DomChat = "@Contact1 #HoldTheEdge"
+						' Github Patch Contact1Stroke = False
+					End If
+					If ssh.Contact2Stroke = True Then
+						ssh.DomChat = "@Contact2 #HoldTheEdge"
+						' Github Patch Contact2Stroke = False
+					End If
+					If ssh.Contact3Stroke = True Then
+						ssh.DomChat = "@Contact3 #HoldTheEdge"
+						' Github Patch Contact3Stroke = False
+					End If
+					TypingDelay()
+
+					ssh.HoldEdgeTick = ssh.HoldEdgeChance
+
+					Dim HoldEdgeMin As Integer = FrmSettings.NBHoldTheEdgeMin.Value
+					If FrmSettings.LBLMinHold.Text = "minutes" Then HoldEdgeMin *= 60
+
+					Dim HoldEdgeMax As Integer = FrmSettings.NBHoldTheEdgeMax.Value
+					If FrmSettings.LBLMaxHold.Text = "minutes" Then HoldEdgeMax *= 60
+
+					If HoldEdgeMax < HoldEdgeMin Then HoldEdgeMax = HoldEdgeMin + 1
+
+					ssh.HoldEdgeTick = ssh.randomizer.Next(HoldEdgeMin, HoldEdgeMax + 1)
+					If ssh.HoldEdgeTick < 10 Then ssh.HoldEdgeTick = 10
+
+					ssh.HoldEdgeTime = 0
+
+					HoldEdgeTimer.Start()
+					HoldEdgeTauntTimer.Start()
+
+				Else
+
+					ssh.DomTypeCheck = True
+					ssh.SubEdging = False
+					ssh.SubStroking = False
+					EdgeTauntTimer.Stop()
+					ssh.DomChat = "#StopStrokingEdge"
+					If ssh.Contact1Stroke = True Then
+						ssh.DomChat = "@Contact1 #StopStrokingEdge"
+						ssh.Contact1Stroke = False
+					End If
+					If ssh.Contact2Stroke = True Then
+						ssh.DomChat = "@Contact2 #StopStrokingEdge"
+						ssh.Contact2Stroke = False
+					End If
+					If ssh.Contact3Stroke = True Then
+						ssh.DomChat = "@Contact3 #StopStrokingEdge"
+						ssh.Contact3Stroke = False
+					End If
+					TypingDelay()
+
+				End If
+
+				'Do
+				'Application.DoEvents()
+				'Loop Until ssh.DomTypeCheck = False
 
 
-			StringClean = StringClean.Replace("@DecideEdge", "")
-		End If
-
-		If StringClean.Contains("@CheckVideo") Then
-			ssh.VideoCheck = True
-			RandomVideo()
-			If ssh.NoVideo = True Then
-				ssh.FileGoto = "(No Videos Found)"
-			Else
-				ssh.FileGoto = "(Videos Found)"
+				StringClean = StringClean.Replace("@DecideEdge", "")
 			End If
-			ssh.VideoCheck = False
-			ssh.NoVideo = False
-			ssh.SkipGotoLine = True
-			GetGoto()
-			StringClean = StringClean.Replace("@CheckVideo", "")
-		End If
 
-		If StringClean.Contains("@PlayCensorshipSucks") Then
-
-			If StringClean.Contains("@PlayCensorshipSucks[") Then
-				Dim videoFlag As String = GetParentheses(StringClean, "@PlayCensorshipSucks[")
-				selectVideo(videoFlag)
-				StringClean = StringClean.Replace("@PlayCensorshipSucks[" & videoFlag & "]", "")
-			Else
+			If StringClean.Contains("@CheckVideo") Then
+				ssh.VideoCheck = True
 				RandomVideo()
+				If ssh.NoVideo = True Then
+					ssh.FileGoto = "(No Videos Found)"
+				Else
+					ssh.FileGoto = "(Videos Found)"
+				End If
+				ssh.VideoCheck = False
+				ssh.NoVideo = False
+				ssh.SkipGotoLine = True
+				GetGoto()
+				StringClean = StringClean.Replace("@CheckVideo", "")
+			End If
+
+			If StringClean.Contains("@PlayCensorshipSucks") Then
+
+				If StringClean.Contains("@PlayCensorshipSucks[") Then
+					Dim videoFlag As String = GetParentheses(StringClean, "@PlayCensorshipSucks[")
+					selectVideo(videoFlag)
+					StringClean = StringClean.Replace("@PlayCensorshipSucks[" & videoFlag & "]", "")
+				Else
+					RandomVideo()
+					StringClean = StringClean.Replace("@PlayCensorshipSucks", "")
+				End If
+
+				If ssh.NoVideo = False Then
+					ssh.ScriptVideoTease = "Censorship Sucks"
+					ssh.ScriptVideoTeaseFlag = True
+					ssh.ScriptVideoTeaseFlag = False
+					ssh.CensorshipGame = True
+					ssh.VideoTease = True
+					ssh.CensorshipTick = ssh.randomizer.Next(FrmSettings.NBCensorHideMin.Value, FrmSettings.NBCensorHideMax.Value + 1)
+					CensorshipTimer.Start()
+				End If
+
 				StringClean = StringClean.Replace("@PlayCensorshipSucks", "")
 			End If
 
-			If ssh.NoVideo = False Then
-				ssh.ScriptVideoTease = "Censorship Sucks"
-				ssh.ScriptVideoTeaseFlag = True
-				ssh.ScriptVideoTeaseFlag = False
-				ssh.CensorshipGame = True
-				ssh.VideoTease = True
-				ssh.CensorshipTick = ssh.randomizer.Next(FrmSettings.NBCensorHideMin.Value, FrmSettings.NBCensorHideMax.Value + 1)
-				CensorshipTimer.Start()
+			If StringClean.Contains("@VitalSubAssignment") Then
+				' Read all lines of the given file.
+				Dim AssignList As List(Of String) = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\VitalSub\Assignments.txt")
+
+				Dim TempAssign As String
+
+				Try
+					AssignList = FilterList(AssignList)
+					TempAssign = AssignList(ssh.randomizer.Next(0, AssignList.Count))
+				Catch
+					TempAssign = "ERROR: VitalSub Assign"
+				End Try
+
+				Dim TempArray As String() = Split(TempAssign)
+
+				For i As Integer = TempArray.Count - 1 To 0 Step -1
+					If TempArray(i).Contains("@") Then TempArray(i) = ""
+				Next
+
+
+				CLBExercise.Items.Add(TempAssign)
+				SaveExercise()
+				CBVitalSubDomTask.Checked = False
+				My.Settings.VitalSubAssignments = False
+				StringClean = StringClean.Replace("@VitalSubAssignment", "")
 			End If
 
-			StringClean = StringClean.Replace("@PlayCensorshipSucks", "")
-		End If
+			If StringClean.Contains("@PlayAvoidTheEdge") Then
+				' #### Reboot
+				If StringClean.Contains("@PlayAvoidTheEdge[") Then
+					Dim videoFlag As String = GetParentheses(StringClean, "@PlayAvoidTheEdge[")
+					selectVideo(videoFlag)
+					StringClean = StringClean.Replace("@PlayAvoidTheEdge[" & videoFlag & "]", "")
+				Else
+					RandomVideo()
+					StringClean = StringClean.Replace("@PlayAvoidTheEdge", "")
+				End If
 
-		If StringClean.Contains("@VitalSubAssignment") Then
-			' Read all lines of the given file.
-			Dim AssignList As List(Of String) = Txt2List(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\VitalSub\Assignments.txt")
+				If ssh.NoVideo = False Then
 
-			Dim TempAssign As String
+					ScriptTimer.Stop()
+					ssh.SubStroking = True
+					ssh.TempStrokeTauntVal = ssh.StrokeTauntVal
+					ssh.TempFileText = ssh.FileText
+					ssh.ScriptVideoTease = "Avoid The Edge"
+					ssh.ScriptVideoTeaseFlag = True
+					ssh.AvoidTheEdgeStroking = True
+					ssh.AvoidTheEdgeGame = True
+					ssh.ScriptVideoTeaseFlag = False
+					ssh.VideoTease = True
+					ssh.StartStrokingCount += 1
+					StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+					StrokePace = 50 * Math.Round(StrokePace / 50)
+					ssh.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
+					AvoidTheEdgeTaunts.Start()
 
-			Try
-				AssignList = FilterList(AssignList)
-				TempAssign = AssignList(ssh.randomizer.Next(0, AssignList.Count))
-			Catch
-				TempAssign = "ERROR: VitalSub Assign"
-			End Try
+				End If
 
-			Dim TempArray As String() = Split(TempAssign)
-
-			For i As Integer = TempArray.Count - 1 To 0 Step -1
-				If TempArray(i).Contains("@") Then TempArray(i) = ""
-			Next
-
-
-			CLBExercise.Items.Add(TempAssign)
-			SaveExercise()
-			CBVitalSubDomTask.Checked = False
-			My.Settings.VitalSubAssignments = False
-			StringClean = StringClean.Replace("@VitalSubAssignment", "")
-		End If
-
-		If StringClean.Contains("@PlayAvoidTheEdge") Then
-			' #### Reboot
-			If StringClean.Contains("@PlayAvoidTheEdge[") Then
-				Dim videoFlag As String = GetParentheses(StringClean, "@PlayAvoidTheEdge[")
-				selectVideo(videoFlag)
-				StringClean = StringClean.Replace("@PlayAvoidTheEdge[" & videoFlag & "]", "")
-			Else
-				RandomVideo()
 				StringClean = StringClean.Replace("@PlayAvoidTheEdge", "")
 			End If
 
-			If ssh.NoVideo = False Then
-
+			If StringClean.Contains("@ResumeAvoidTheEdge") Then
+				DomWMP.Ctlcontrols.play()
 				ScriptTimer.Stop()
-				ssh.SubStroking = True
-				ssh.TempStrokeTauntVal = ssh.StrokeTauntVal
-				ssh.TempFileText = ssh.FileText
-				ssh.ScriptVideoTease = "Avoid The Edge"
-				ssh.ScriptVideoTeaseFlag = True
 				ssh.AvoidTheEdgeStroking = True
-				ssh.AvoidTheEdgeGame = True
-				ssh.ScriptVideoTeaseFlag = False
-				ssh.VideoTease = True
+				ssh.SubStroking = True
 				ssh.StartStrokingCount += 1
+				ssh.VideoTease = True
 				StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
 				StrokePace = 50 * Math.Round(StrokePace / 50)
 				ssh.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
 				AvoidTheEdgeTaunts.Start()
-
+				StringClean = StringClean.Replace("@ResumeAvoidTheEdge", "")
 			End If
 
-			StringClean = StringClean.Replace("@PlayAvoidTheEdge", "")
-		End If
+			If StringClean.Contains("@PlayRedLightGreenLight") Then
+				' #### Reboot
+				If StringClean.Contains("@PlayRedLightGreenLight[") Then
+					Dim videoFlag As String = GetParentheses(StringClean, "@PlayRedLightGreenLight[")
+					selectVideo(videoFlag)
+					StringClean = StringClean.Replace("@PlayRedLightGreenLight[" & videoFlag & "]", "")
+				Else
+					RandomVideo()
+					StringClean = StringClean.Replace("@PlayRedLightGreenLight", "")
+				End If
 
-		If StringClean.Contains("@ResumeAvoidTheEdge") Then
-			DomWMP.Ctlcontrols.play()
-			ScriptTimer.Stop()
-			ssh.AvoidTheEdgeStroking = True
-			ssh.SubStroking = True
-			ssh.StartStrokingCount += 1
-			ssh.VideoTease = True
-			StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
-			StrokePace = 50 * Math.Round(StrokePace / 50)
-			ssh.AvoidTheEdgeTick = 120 / FrmSettings.TauntSlider.Value
-			AvoidTheEdgeTaunts.Start()
-			StringClean = StringClean.Replace("@ResumeAvoidTheEdge", "")
-		End If
+				If ssh.NoVideo = False Then
 
-		If StringClean.Contains("@PlayRedLightGreenLight") Then
-			' #### Reboot
-			If StringClean.Contains("@PlayRedLightGreenLight[") Then
-				Dim videoFlag As String = GetParentheses(StringClean, "@PlayRedLightGreenLight[")
-				selectVideo(videoFlag)
-				StringClean = StringClean.Replace("@PlayRedLightGreenLight[" & videoFlag & "]", "")
-			Else
-				RandomVideo()
+					ScriptTimer.Stop()
+					ssh.SubStroking = True
+					ssh.TempStrokeTauntVal = ssh.StrokeTauntVal
+					ssh.TempFileText = ssh.FileText
+					ssh.ScriptVideoTease = "RLGL"
+					ssh.ScriptVideoTeaseFlag = True
+					'AvoidTheEdgeStroking = True
+					ssh.RLGLGame = True
+
+					ssh.ScriptVideoTeaseFlag = False
+					ssh.VideoTease = True
+					ssh.RLGLTick = ssh.randomizer.Next(FrmSettings.NBGreenLightMin.Value, FrmSettings.NBGreenLightMax.Value + 1)
+					RLGLTimer.Start()
+					ssh.StartStrokingCount += 1
+					StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
+					StrokePace = 50 * Math.Round(StrokePace / 50)
+					'VideoTauntTick = randomizer.Next(20, 31)
+					'VideoTauntTimer.Start()
+
+				End If
 				StringClean = StringClean.Replace("@PlayRedLightGreenLight", "")
 			End If
 
-			If ssh.NoVideo = False Then
+			If StringClean.Contains("@PlayVideo[") Then
+				Dim videoFlag As String = GetParentheses(StringClean, "@PlayVideo[")
+				selectVideo(videoFlag)
 
-				ScriptTimer.Stop()
-				ssh.SubStroking = True
-				ssh.TempStrokeTauntVal = ssh.StrokeTauntVal
-				ssh.TempFileText = ssh.FileText
-				ssh.ScriptVideoTease = "RLGL"
-				ssh.ScriptVideoTeaseFlag = True
-				'AvoidTheEdgeStroking = True
-				ssh.RLGLGame = True
-
-				ssh.ScriptVideoTeaseFlag = False
-				ssh.VideoTease = True
-				ssh.RLGLTick = ssh.randomizer.Next(FrmSettings.NBGreenLightMin.Value, FrmSettings.NBGreenLightMax.Value + 1)
-				RLGLTimer.Start()
-				ssh.StartStrokingCount += 1
-				StrokePace = ssh.randomizer.Next(NBMaxPace.Value, NBMinPace.Value + 1)
-				StrokePace = 50 * Math.Round(StrokePace / 50)
-				'VideoTauntTick = randomizer.Next(20, 31)
-				'VideoTauntTimer.Start()
-
-			End If
-			StringClean = StringClean.Replace("@PlayRedLightGreenLight", "")
-		End If
-
-		If StringClean.Contains("@PlayVideo[") Then
-			Dim videoFlag As String = GetParentheses(StringClean, "@PlayVideo[")
-			selectVideo(videoFlag)
-
-			If ssh.NoVideo = False Then
-				ssh.TeaseVideo = True
-			Else
-				MessageBox.Show(Me, "No videos were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			End If
-
-			StringClean = StringClean.Replace("@PlayVideo[" & videoFlag & "]", "")
-		End If
-
-		If StringClean.Contains("@PlayAudio[") Then
-
-			Dim AudioFlag As String = GetParentheses(StringClean, "@PlayAudio[")
-			' Github Patch Dim AudioClean As String = Application.StartupPath & "\Video\" & AudioFlag
-			Dim AudioClean As String
-
-			If AudioFlag.Contains(":\") Then
-				AudioClean = AudioFlag
-			Else
-				AudioClean = Application.StartupPath & "\Audio\" & AudioFlag
-				AudioClean = AudioClean.Replace("\\", "\")
-			End If
-
-
-
-			If AudioClean.Contains("*") Then
-
-				Dim AudioList As New List(Of String)
-
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Path.GetDirectoryName(AudioClean), FileIO.SearchOption.SearchTopLevelOnly, Path.GetFileName(AudioClean))
-					AudioList.Add(foundFile)
-				Next
-
-				If AudioList.Count > 0 Then
-					DomWMP.URL = AudioList(ssh.randomizer.Next(0, AudioList.Count))
+				If ssh.NoVideo = False Then
+					ssh.TeaseVideo = True
 				Else
-					MessageBox.Show(Me, "No audio files matching " & Path.GetFileName(AudioClean) & " were found in " & Path.GetDirectoryName(AudioClean) & "!" & Environment.NewLine & Environment.NewLine &
-					  "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					MessageBox.Show(Me, "No videos were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				End If
 
-			Else
+				StringClean = StringClean.Replace("@PlayVideo[" & videoFlag & "]", "")
+			End If
 
+			If StringClean.Contains("@PlayAudio[") Then
 
-				If File.Exists(AudioClean) Then
-					DomWMP.URL = AudioClean
+				Dim AudioFlag As String = GetParentheses(StringClean, "@PlayAudio[")
+				' Github Patch Dim AudioClean As String = Application.StartupPath & "\Video\" & AudioFlag
+				Dim AudioClean As String
+
+				If AudioFlag.Contains(":\") Then
+					AudioClean = AudioFlag
 				Else
-					MessageBox.Show(Me, Path.GetFileName(AudioClean) & " was not found in " & Application.StartupPath & "\Audio!" & Environment.NewLine & Environment.NewLine &
-					 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					AudioClean = Application.StartupPath & "\Audio\" & AudioFlag
+					AudioClean = AudioClean.Replace("\\", "\")
 				End If
 
-			End If
+
+
+				If AudioClean.Contains("*") Then
+
+					Dim AudioList As New List(Of String)
+
+					For Each foundFile As String In My.Computer.FileSystem.GetFiles(Path.GetDirectoryName(AudioClean), FileIO.SearchOption.SearchTopLevelOnly, Path.GetFileName(AudioClean))
+						AudioList.Add(foundFile)
+					Next
+
+					If AudioList.Count > 0 Then
+						DomWMP.URL = AudioList(ssh.randomizer.Next(0, AudioList.Count))
+					Else
+						MessageBox.Show(Me, "No audio files matching " & Path.GetFileName(AudioClean) & " were found in " & Path.GetDirectoryName(AudioClean) & "!" & Environment.NewLine & Environment.NewLine &
+						  "Please make sure that valid files exist and that the wildcards are applied correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					End If
+
+				Else
+
+
+					If File.Exists(AudioClean) Then
+						DomWMP.URL = AudioClean
+					Else
+						MessageBox.Show(Me, Path.GetFileName(AudioClean) & " was not found in " & Application.StartupPath & "\Audio!" & Environment.NewLine & Environment.NewLine &
+						 "Please make sure the file exists and that it is spelled correctly in the script.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+					End If
+
+				End If
 
 ExternalAudio:
 
-			StringClean = StringClean.Replace("@PlayAudio[" & AudioFlag & "]", "")
+				StringClean = StringClean.Replace("@PlayAudio[" & AudioFlag & "]", "")
 
-		End If
-
-
-		If StringClean.Contains("@PlayVideo(") Then
+			End If
 
 
-			Dim VidFlag As String = GetParentheses(StringClean, "@PlayVideo(")
-			Dim VidInt As Integer = Val(VidFlag)
-			If UCase(VidFlag).Contains("M") Then VidInt *= 60
+			If StringClean.Contains("@PlayVideo(") Then
+
+
+				Dim VidFlag As String = GetParentheses(StringClean, "@PlayVideo(")
+				Dim VidInt As Integer = Val(VidFlag)
+				If UCase(VidFlag).Contains("M") Then VidInt *= 60
+
+				If StringClean.Contains("@JumpVideo") Then
+					ssh.JumpVideo = True
+					StringClean = StringClean.Replace("@JumpVideo", "")
+				End If
+
+				ssh.RandomizerVideo = True
+				RandomVideo()
+
+				If ssh.NoVideo = False Then
+					ssh.TeaseVideo = True
+					ssh.VideoTick = VidInt
+					VideoTimer.Start()
+				Else
+					MessageBox.Show(Me, "No videos were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				End If
+
+				ssh.RandomizerVideo = False
+				StringClean = StringClean.Replace("@PlayVideo", "")
+			End If
+
+
+
+
+
+			If StringClean.Contains("@PlayVideo") Then
+
+				If StringClean.Contains("@JumpVideo") Then
+					ssh.JumpVideo = True
+					StringClean = StringClean.Replace("@JumpVideo", "")
+				End If
+
+				ssh.RandomizerVideo = True
+				RandomVideo()
+
+				If ssh.NoVideo = False Then
+					ssh.TeaseVideo = True
+				Else
+					MessageBox.Show(Me, "No videos were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				End If
+
+				ssh.RandomizerVideo = False
+				StringClean = StringClean.Replace("@PlayVideo", "")
+			End If
 
 			If StringClean.Contains("@JumpVideo") Then
-				ssh.JumpVideo = True
+
+				If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
+					Dim VideoLength As Integer = DomWMP.currentMedia.duration
+					Dim VidLow As Integer = VideoLength * 0.4
+					Dim VidHigh As Integer = VideoLength * 0.9
+					Dim VidPoint As Integer = ssh.randomizer.Next(VidLow, VidHigh)
+
+					Debug.Print("VidLow = " & VidLow)
+					Debug.Print("VidHigh = " & VidHigh)
+					Debug.Print("VidPoint = " & VidPoint)
+
+					DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
+
+				End If
 				StringClean = StringClean.Replace("@JumpVideo", "")
 			End If
 
-			ssh.RandomizerVideo = True
-			RandomVideo()
 
-			If ssh.NoVideo = False Then
-				ssh.TeaseVideo = True
-				ssh.VideoTick = VidInt
-				VideoTimer.Start()
-			Else
-				MessageBox.Show(Me, "No videos were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			End If
+			If StringClean.Contains("@AddStrokeTime(") Then
 
-			ssh.RandomizerVideo = False
-			StringClean = StringClean.Replace("@PlayVideo", "")
-		End If
+				Dim OriginalFlag As String = ""
 
+				If StrokeTimer.Enabled = True Then
 
+					Dim StrokeFlag As String = GetParentheses(StringClean, "@AddStrokeTime(")
+					OriginalFlag = StrokeFlag
+					Dim StrokeSeconds As Integer
 
-
-
-		If StringClean.Contains("@PlayVideo") Then
-
-			If StringClean.Contains("@JumpVideo") Then
-				ssh.JumpVideo = True
-				StringClean = StringClean.Replace("@JumpVideo", "")
-			End If
-
-			ssh.RandomizerVideo = True
-			RandomVideo()
-
-			If ssh.NoVideo = False Then
-				ssh.TeaseVideo = True
-			Else
-				MessageBox.Show(Me, "No videos were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-			End If
-
-			ssh.RandomizerVideo = False
-			StringClean = StringClean.Replace("@PlayVideo", "")
-		End If
-
-		If StringClean.Contains("@JumpVideo") Then
-
-			If (DomWMP.playState = WMPLib.WMPPlayState.wmppsPlaying) Then
-				Dim VideoLength As Integer = DomWMP.currentMedia.duration
-				Dim VidLow As Integer = VideoLength * 0.4
-				Dim VidHigh As Integer = VideoLength * 0.9
-				Dim VidPoint As Integer = ssh.randomizer.Next(VidLow, VidHigh)
-
-				Debug.Print("VidLow = " & VidLow)
-				Debug.Print("VidHigh = " & VidHigh)
-				Debug.Print("VidPoint = " & VidPoint)
-
-				DomWMP.Ctlcontrols.currentPosition = VideoLength - VidPoint
-
-			End If
-			StringClean = StringClean.Replace("@JumpVideo", "")
-		End If
-
-
-		If StringClean.Contains("@AddStrokeTime(") Then
-
-			Dim OriginalFlag As String = ""
-
-			If StrokeTimer.Enabled = True Then
-
-				Dim StrokeFlag As String = GetParentheses(StringClean, "@AddStrokeTime(")
-				OriginalFlag = StrokeFlag
-				Dim StrokeSeconds As Integer
-
-				If StrokeFlag.Contains(",") Then
-					StrokeFlag = FixCommas(StrokeFlag)
-					Dim StrokeFlagArray As String() = StrokeFlag.Split(",")
-					Dim Stroke1 As Integer = Val(StrokeFlagArray(0))
-					Dim Stroke2 As Integer = Val(StrokeFlagArray(1))
-					If UCase(StrokeFlagArray(0)).Contains("M") Then Stroke1 *= 60
-					If UCase(StrokeFlagArray(1)).Contains("M") Then Stroke2 *= 60
-					If UCase(StrokeFlagArray(0)).Contains("H") Then Stroke1 *= 3600
-					If UCase(StrokeFlagArray(1)).Contains("H") Then Stroke2 *= 3600
-					StrokeSeconds = ssh.randomizer.Next(Stroke1, Stroke2 + 1)
-				Else
-					StrokeSeconds = Val(StrokeFlag)
-					If UCase(GetParentheses(StringClean, "@AddStrokeTime(")).Contains("M") Then StrokeSeconds *= 60
-					If UCase(GetParentheses(StringClean, "@AddStrokeTime(")).Contains("H") Then StrokeSeconds *= 3600
+					If StrokeFlag.Contains(",") Then
+						StrokeFlag = FixCommas(StrokeFlag)
+						Dim StrokeFlagArray As String() = StrokeFlag.Split(",")
+						Dim Stroke1 As Integer = Val(StrokeFlagArray(0))
+						Dim Stroke2 As Integer = Val(StrokeFlagArray(1))
+						If UCase(StrokeFlagArray(0)).Contains("M") Then Stroke1 *= 60
+						If UCase(StrokeFlagArray(1)).Contains("M") Then Stroke2 *= 60
+						If UCase(StrokeFlagArray(0)).Contains("H") Then Stroke1 *= 3600
+						If UCase(StrokeFlagArray(1)).Contains("H") Then Stroke2 *= 3600
+						StrokeSeconds = ssh.randomizer.Next(Stroke1, Stroke2 + 1)
+					Else
+						StrokeSeconds = Val(StrokeFlag)
+						If UCase(GetParentheses(StringClean, "@AddStrokeTime(")).Contains("M") Then StrokeSeconds *= 60
+						If UCase(GetParentheses(StringClean, "@AddStrokeTime(")).Contains("H") Then StrokeSeconds *= 3600
+					End If
+					ssh.StrokeTick += StrokeSeconds
 				End If
-				ssh.StrokeTick += StrokeSeconds
+				StringClean = StringClean.Replace("@AddStrokeTime(" & OriginalFlag & ")", "")
 			End If
-			StringClean = StringClean.Replace("@AddStrokeTime(" & OriginalFlag & ")", "")
-		End If
 
-		If StringClean.Contains("@RemoveStrokeTime(") Then
+			If StringClean.Contains("@RemoveStrokeTime(") Then
 
-			Dim OriginalFlag As String = ""
+				Dim OriginalFlag As String = ""
 
-			If StrokeTimer.Enabled = True Then
+				If StrokeTimer.Enabled = True Then
 
-				Dim StrokeFlag As String = GetParentheses(StringClean, "@RemoveStrokeTime(")
-				OriginalFlag = StrokeFlag
-				Dim StrokeSeconds As Integer
+					Dim StrokeFlag As String = GetParentheses(StringClean, "@RemoveStrokeTime(")
+					OriginalFlag = StrokeFlag
+					Dim StrokeSeconds As Integer
 
-				If StrokeFlag.Contains(",") Then
-					StrokeFlag = FixCommas(StrokeFlag)
-					Dim StrokeFlagArray As String() = StrokeFlag.Split(",")
-					Dim Stroke1 As Integer = Val(StrokeFlagArray(0))
-					Dim Stroke2 As Integer = Val(StrokeFlagArray(1))
-					If UCase(StrokeFlagArray(0)).Contains("M") Then Stroke1 *= 60
-					If UCase(StrokeFlagArray(1)).Contains("M") Then Stroke2 *= 60
-					If UCase(StrokeFlagArray(0)).Contains("H") Then Stroke1 *= 3600
-					If UCase(StrokeFlagArray(1)).Contains("H") Then Stroke2 *= 3600
-					StrokeSeconds = ssh.randomizer.Next(Stroke1, Stroke2 + 1)
-				Else
-					StrokeSeconds = Val(StrokeFlag)
-					If UCase(GetParentheses(StringClean, "@RemoveStrokeTime(")).Contains("M") Then StrokeSeconds *= 60
-					If UCase(GetParentheses(StringClean, "@RemoveStrokeTime(")).Contains("H") Then StrokeSeconds *= 3600
+					If StrokeFlag.Contains(",") Then
+						StrokeFlag = FixCommas(StrokeFlag)
+						Dim StrokeFlagArray As String() = StrokeFlag.Split(",")
+						Dim Stroke1 As Integer = Val(StrokeFlagArray(0))
+						Dim Stroke2 As Integer = Val(StrokeFlagArray(1))
+						If UCase(StrokeFlagArray(0)).Contains("M") Then Stroke1 *= 60
+						If UCase(StrokeFlagArray(1)).Contains("M") Then Stroke2 *= 60
+						If UCase(StrokeFlagArray(0)).Contains("H") Then Stroke1 *= 3600
+						If UCase(StrokeFlagArray(1)).Contains("H") Then Stroke2 *= 3600
+						StrokeSeconds = ssh.randomizer.Next(Stroke1, Stroke2 + 1)
+					Else
+						StrokeSeconds = Val(StrokeFlag)
+						If UCase(GetParentheses(StringClean, "@RemoveStrokeTime(")).Contains("M") Then StrokeSeconds *= 60
+						If UCase(GetParentheses(StringClean, "@RemoveStrokeTime(")).Contains("H") Then StrokeSeconds *= 3600
+					End If
+					ssh.StrokeTick -= StrokeSeconds
+					If ssh.StrokeTick < 0 Then ssh.StrokeTick = 5
 				End If
-				ssh.StrokeTick -= StrokeSeconds
-				If ssh.StrokeTick < 0 Then ssh.StrokeTick = 5
+				StringClean = StringClean.Replace("@RemoveStrokeTime(" & OriginalFlag & ")", "")
 			End If
-			StringClean = StringClean.Replace("@RemoveStrokeTime(" & OriginalFlag & ")", "")
-		End If
 
 
 
-		If StringClean.Contains("@AddStrokeTime") Then
-			If StrokeTimer.Enabled = True Then
-				If FrmSettings.CBTauntCycleDD.Checked = True Then
-					If FrmSettings.domlevelNumBox.Value = 1 Then ssh.StrokeTick += ssh.randomizer.Next(1, 3) * 60
-					If FrmSettings.domlevelNumBox.Value = 2 Then ssh.StrokeTick += ssh.randomizer.Next(1, 4) * 60
-					If FrmSettings.domlevelNumBox.Value = 3 Then ssh.StrokeTick += ssh.randomizer.Next(3, 6) * 60
-					If FrmSettings.domlevelNumBox.Value = 4 Then ssh.StrokeTick += ssh.randomizer.Next(4, 8) * 60
-					If FrmSettings.domlevelNumBox.Value = 5 Then ssh.StrokeTick += ssh.randomizer.Next(5, 11) * 60
-				Else
-					ssh.StrokeTick += ssh.randomizer.Next(FrmSettings.NBTauntCycleMin.Value * 60, FrmSettings.NBTauntCycleMax.Value * 60)
+			If StringClean.Contains("@AddStrokeTime") Then
+				If StrokeTimer.Enabled = True Then
+					If FrmSettings.CBTauntCycleDD.Checked = True Then
+						If FrmSettings.domlevelNumBox.Value = 1 Then ssh.StrokeTick += ssh.randomizer.Next(1, 3) * 60
+						If FrmSettings.domlevelNumBox.Value = 2 Then ssh.StrokeTick += ssh.randomizer.Next(1, 4) * 60
+						If FrmSettings.domlevelNumBox.Value = 3 Then ssh.StrokeTick += ssh.randomizer.Next(3, 6) * 60
+						If FrmSettings.domlevelNumBox.Value = 4 Then ssh.StrokeTick += ssh.randomizer.Next(4, 8) * 60
+						If FrmSettings.domlevelNumBox.Value = 5 Then ssh.StrokeTick += ssh.randomizer.Next(5, 11) * 60
+					Else
+						ssh.StrokeTick += ssh.randomizer.Next(FrmSettings.NBTauntCycleMin.Value * 60, FrmSettings.NBTauntCycleMax.Value * 60)
+					End If
 				End If
+				StringClean = StringClean.Replace("@AddStrokeTime", "")
 			End If
-			StringClean = StringClean.Replace("@AddStrokeTime", "")
-		End If
 
-		If StringClean.Contains("@RemoveStrokeTime") Then
-			If StrokeTimer.Enabled = True Then
-				ssh.StrokeTick -= ssh.StrokeTick / 2
-			End If
-			StringClean = StringClean.Replace("@RemoveStrokeTime", "")
-		End If
-
-
-		If StringClean.Contains("@AddEdgeHoldTime(") Then
-
-			Dim OriginalFlag As String = ""
-
-			If HoldEdgeTimer.Enabled = True Then
-
-				Dim HoldEdgeFlag As String = GetParentheses(StringClean, "@AddEdgeHoldTime(")
-				OriginalFlag = HoldEdgeFlag
-				Dim HoldEdgeSeconds As Integer
-
-				If HoldEdgeFlag.Contains(",") Then
-					HoldEdgeFlag = FixCommas(HoldEdgeFlag)
-					Dim HoldEdgeFlagArray As String() = HoldEdgeFlag.Split(",")
-					Dim HoldEdge1 As Integer = Val(HoldEdgeFlagArray(0))
-					Dim HoldEdge2 As Integer = Val(HoldEdgeFlagArray(1))
-					If UCase(HoldEdgeFlagArray(0)).Contains("M") Then HoldEdge1 *= 60
-					If UCase(HoldEdgeFlagArray(1)).Contains("M") Then HoldEdge2 *= 60
-					If UCase(HoldEdgeFlagArray(0)).Contains("H") Then HoldEdge1 *= 3600
-					If UCase(HoldEdgeFlagArray(1)).Contains("H") Then HoldEdge2 *= 3600
-					HoldEdgeSeconds = ssh.randomizer.Next(HoldEdge1, HoldEdge2 + 1)
-				Else
-					HoldEdgeSeconds = Val(HoldEdgeFlag)
-					If UCase(GetParentheses(StringClean, "@AddEdgeHoldTime(")).Contains("M") Then HoldEdgeSeconds *= 60
-					If UCase(GetParentheses(StringClean, "@AddEdgeHoldTime(")).Contains("H") Then HoldEdgeSeconds *= 3600
+			If StringClean.Contains("@RemoveStrokeTime") Then
+				If StrokeTimer.Enabled = True Then
+					ssh.StrokeTick -= ssh.StrokeTick / 2
 				End If
-				ssh.HoldEdgeTick += HoldEdgeSeconds
+				StringClean = StringClean.Replace("@RemoveStrokeTime", "")
 			End If
-			StringClean = StringClean.Replace("@AddEdgeHoldTime(" & OriginalFlag & ")", "")
-		End If
 
-		If StringClean.Contains("@RemoveEdgeHoldTime(") Then
 
-			Dim OriginalFlag As String = ""
+			If StringClean.Contains("@AddEdgeHoldTime(") Then
 
-			If HoldEdgeTimer.Enabled = True Then
+				Dim OriginalFlag As String = ""
 
-				Dim HoldEdgeFlag As String = GetParentheses(StringClean, "@RemoveEdgeHoldTime(")
-				OriginalFlag = HoldEdgeFlag
-				Dim HoldEdgeSeconds As Integer
+				If HoldEdgeTimer.Enabled = True Then
 
-				If HoldEdgeFlag.Contains(",") Then
-					HoldEdgeFlag = FixCommas(HoldEdgeFlag)
-					Dim HoldEdgeFlagArray As String() = HoldEdgeFlag.Split(",")
-					Dim HoldEdge1 As Integer = Val(HoldEdgeFlagArray(0))
-					Dim HoldEdge2 As Integer = Val(HoldEdgeFlagArray(1))
-					If UCase(HoldEdgeFlagArray(0)).Contains("M") Then HoldEdge1 *= 60
-					If UCase(HoldEdgeFlagArray(1)).Contains("M") Then HoldEdge2 *= 60
-					If UCase(HoldEdgeFlagArray(0)).Contains("H") Then HoldEdge1 *= 3600
-					If UCase(HoldEdgeFlagArray(1)).Contains("H") Then HoldEdge2 *= 3600
-					HoldEdgeSeconds = ssh.randomizer.Next(HoldEdge1, HoldEdge2 + 1)
-				Else
-					HoldEdgeSeconds = Val(HoldEdgeFlag)
-					If UCase(GetParentheses(StringClean, "@RemoveEdgeHoldTime(")).Contains("M") Then HoldEdgeSeconds *= 60
-					If UCase(GetParentheses(StringClean, "@RemoveEdgeHoldTime(")).Contains("H") Then HoldEdgeSeconds *= 3600
+					Dim HoldEdgeFlag As String = GetParentheses(StringClean, "@AddEdgeHoldTime(")
+					OriginalFlag = HoldEdgeFlag
+					Dim HoldEdgeSeconds As Integer
+
+					If HoldEdgeFlag.Contains(",") Then
+						HoldEdgeFlag = FixCommas(HoldEdgeFlag)
+						Dim HoldEdgeFlagArray As String() = HoldEdgeFlag.Split(",")
+						Dim HoldEdge1 As Integer = Val(HoldEdgeFlagArray(0))
+						Dim HoldEdge2 As Integer = Val(HoldEdgeFlagArray(1))
+						If UCase(HoldEdgeFlagArray(0)).Contains("M") Then HoldEdge1 *= 60
+						If UCase(HoldEdgeFlagArray(1)).Contains("M") Then HoldEdge2 *= 60
+						If UCase(HoldEdgeFlagArray(0)).Contains("H") Then HoldEdge1 *= 3600
+						If UCase(HoldEdgeFlagArray(1)).Contains("H") Then HoldEdge2 *= 3600
+						HoldEdgeSeconds = ssh.randomizer.Next(HoldEdge1, HoldEdge2 + 1)
+					Else
+						HoldEdgeSeconds = Val(HoldEdgeFlag)
+						If UCase(GetParentheses(StringClean, "@AddEdgeHoldTime(")).Contains("M") Then HoldEdgeSeconds *= 60
+						If UCase(GetParentheses(StringClean, "@AddEdgeHoldTime(")).Contains("H") Then HoldEdgeSeconds *= 3600
+					End If
+					ssh.HoldEdgeTick += HoldEdgeSeconds
 				End If
-				ssh.HoldEdgeTick -= HoldEdgeSeconds
-				If ssh.HoldEdgeTick < 5 Then ssh.HoldEdgeTick = 5
+				StringClean = StringClean.Replace("@AddEdgeHoldTime(" & OriginalFlag & ")", "")
 			End If
-			StringClean = StringClean.Replace("@RemoveEdgeHoldTime(" & OriginalFlag & ")", "")
-		End If
 
+			If StringClean.Contains("@RemoveEdgeHoldTime(") Then
 
-		If StringClean.Contains("@AddEdgeHoldTime") Then
+				Dim OriginalFlag As String = ""
 
-			If HoldEdgeTimer.Enabled = True Then
-				Dim HoldEdgeMin As Integer = FrmSettings.NBHoldTheEdgeMin.Value
-				If FrmSettings.LBLMinHold.Text = "minutes" Then HoldEdgeMin *= 60
+				If HoldEdgeTimer.Enabled = True Then
 
-				Dim HoldEdgeMax As Integer = FrmSettings.NBHoldTheEdgeMax.Value
-				If FrmSettings.LBLMaxHold.Text = "minutes" Then HoldEdgeMax *= 60
+					Dim HoldEdgeFlag As String = GetParentheses(StringClean, "@RemoveEdgeHoldTime(")
+					OriginalFlag = HoldEdgeFlag
+					Dim HoldEdgeSeconds As Integer
 
-				If HoldEdgeMax < HoldEdgeMin Then HoldEdgeMax = HoldEdgeMin + 1
-
-				ssh.HoldEdgeTick += ssh.randomizer.Next(HoldEdgeMin, HoldEdgeMax + 1)
-				If ssh.HoldEdgeTick < 10 Then ssh.HoldEdgeTick = 10
+					If HoldEdgeFlag.Contains(",") Then
+						HoldEdgeFlag = FixCommas(HoldEdgeFlag)
+						Dim HoldEdgeFlagArray As String() = HoldEdgeFlag.Split(",")
+						Dim HoldEdge1 As Integer = Val(HoldEdgeFlagArray(0))
+						Dim HoldEdge2 As Integer = Val(HoldEdgeFlagArray(1))
+						If UCase(HoldEdgeFlagArray(0)).Contains("M") Then HoldEdge1 *= 60
+						If UCase(HoldEdgeFlagArray(1)).Contains("M") Then HoldEdge2 *= 60
+						If UCase(HoldEdgeFlagArray(0)).Contains("H") Then HoldEdge1 *= 3600
+						If UCase(HoldEdgeFlagArray(1)).Contains("H") Then HoldEdge2 *= 3600
+						HoldEdgeSeconds = ssh.randomizer.Next(HoldEdge1, HoldEdge2 + 1)
+					Else
+						HoldEdgeSeconds = Val(HoldEdgeFlag)
+						If UCase(GetParentheses(StringClean, "@RemoveEdgeHoldTime(")).Contains("M") Then HoldEdgeSeconds *= 60
+						If UCase(GetParentheses(StringClean, "@RemoveEdgeHoldTime(")).Contains("H") Then HoldEdgeSeconds *= 3600
+					End If
+					ssh.HoldEdgeTick -= HoldEdgeSeconds
+					If ssh.HoldEdgeTick < 5 Then ssh.HoldEdgeTick = 5
+				End If
+				StringClean = StringClean.Replace("@RemoveEdgeHoldTime(" & OriginalFlag & ")", "")
 			End If
-			StringClean = StringClean.Replace("@AddEdgeHoldTime", "")
-		End If
 
-		If StringClean.Contains("@RemoveEdgeHoldTime") Then
-			If HoldEdgeTimer.Enabled = True Then
-				ssh.HoldEdgeTick = ssh.HoldEdgeTick / 2
-				If ssh.HoldEdgeTick < 10 Then ssh.HoldEdgeTick = 10
+
+			If StringClean.Contains("@AddEdgeHoldTime") Then
+
+				If HoldEdgeTimer.Enabled = True Then
+					Dim HoldEdgeMin As Integer = FrmSettings.NBHoldTheEdgeMin.Value
+					If FrmSettings.LBLMinHold.Text = "minutes" Then HoldEdgeMin *= 60
+
+					Dim HoldEdgeMax As Integer = FrmSettings.NBHoldTheEdgeMax.Value
+					If FrmSettings.LBLMaxHold.Text = "minutes" Then HoldEdgeMax *= 60
+
+					If HoldEdgeMax < HoldEdgeMin Then HoldEdgeMax = HoldEdgeMin + 1
+
+					ssh.HoldEdgeTick += ssh.randomizer.Next(HoldEdgeMin, HoldEdgeMax + 1)
+					If ssh.HoldEdgeTick < 10 Then ssh.HoldEdgeTick = 10
+				End If
+				StringClean = StringClean.Replace("@AddEdgeHoldTime", "")
 			End If
-			StringClean = StringClean.Replace("@RemoveEdgeHoldTime", "")
-		End If
 
-		If StringClean.Contains("@AddTeaseTime(") Then
-
-			Dim OriginalFlag As String = ""
-			'I dont think this should work only when teaseTimer is enabled...what if i want to addteasetime somehow during an end script? (removing this, will allow for this too) - dariobrun
-			'If TeaseTimer.Enabled = True Then
-
-			Dim TeaseFlag As String = GetParentheses(StringClean, "@AddTeaseTime(")
-			OriginalFlag = TeaseFlag
-			Dim TeaseSeconds As Integer
-
-			If TeaseFlag.Contains(",") Then
-				TeaseFlag = FixCommas(TeaseFlag)
-				Dim TeaseFlagArray As String() = TeaseFlag.Split(",")
-				Dim Tease1 As Integer = Val(TeaseFlagArray(0))
-				Dim Tease2 As Integer = Val(TeaseFlagArray(1))
-				If UCase(TeaseFlagArray(0)).Contains("M") Then Tease1 *= 60
-				If UCase(TeaseFlagArray(1)).Contains("M") Then Tease2 *= 60
-				If UCase(TeaseFlagArray(0)).Contains("H") Then Tease1 *= 3600
-				If UCase(TeaseFlagArray(1)).Contains("H") Then Tease2 *= 3600
-				TeaseSeconds = ssh.randomizer.Next(Tease1, Tease2 + 1)
-			Else
-				TeaseSeconds = Val(TeaseFlag)
-				If UCase(GetParentheses(StringClean, "@AddTeaseTime(")).Contains("M") Then TeaseSeconds *= 60
-				If UCase(GetParentheses(StringClean, "@AddTeaseTime(")).Contains("H") Then TeaseSeconds *= 3600
-
-
+			If StringClean.Contains("@RemoveEdgeHoldTime") Then
+				If HoldEdgeTimer.Enabled = True Then
+					ssh.HoldEdgeTick = ssh.HoldEdgeTick / 2
+					If ssh.HoldEdgeTick < 10 Then ssh.HoldEdgeTick = 10
+				End If
+				StringClean = StringClean.Replace("@RemoveEdgeHoldTime", "")
 			End If
-			ssh.TeaseTick += TeaseSeconds
-			If ssh.LastScript Then ssh.LastScript = False
-			If Not TeaseTimer.Enabled Then TeaseTimer.Enabled = True
-			StringClean = StringClean.Replace("@AddTeaseTime(" & OriginalFlag & ")", "")
-		End If
 
-		If StringClean.Contains("@RemoveTeaseTime(") Then
+			If StringClean.Contains("@AddTeaseTime(") Then
 
-			Dim OriginalFlag As String = ""
+				Dim OriginalFlag As String = ""
+				'I dont think this should work only when teaseTimer is enabled...what if i want to addteasetime somehow during an end script? (removing this, will allow for this too) - dariobrun
+				'If TeaseTimer.Enabled = True Then
 
-			If TeaseTimer.Enabled = True Then
-
-				Dim TeaseFlag As String = GetParentheses(StringClean, "@RemoveTeaseTime(")
+				Dim TeaseFlag As String = GetParentheses(StringClean, "@AddTeaseTime(")
 				OriginalFlag = TeaseFlag
 				Dim TeaseSeconds As Integer
 
@@ -11691,491 +11662,612 @@ ExternalAudio:
 					TeaseSeconds = ssh.randomizer.Next(Tease1, Tease2 + 1)
 				Else
 					TeaseSeconds = Val(TeaseFlag)
-					If UCase(GetParentheses(StringClean, "@RemoveTeaseTime(")).Contains("M") Then TeaseSeconds *= 60
-					If UCase(GetParentheses(StringClean, "@RemoveTeaseTime(")).Contains("H") Then TeaseSeconds *= 3600
+					If UCase(GetParentheses(StringClean, "@AddTeaseTime(")).Contains("M") Then TeaseSeconds *= 60
+					If UCase(GetParentheses(StringClean, "@AddTeaseTime(")).Contains("H") Then TeaseSeconds *= 3600
+
+
 				End If
-				ssh.TeaseTick -= TeaseSeconds
-				If ssh.TeaseTick < 5 Then ssh.TeaseTick = 5
+				ssh.TeaseTick += TeaseSeconds
+				If ssh.LastScript Then ssh.LastScript = False
+				If Not TeaseTimer.Enabled Then TeaseTimer.Enabled = True
+				StringClean = StringClean.Replace("@AddTeaseTime(" & OriginalFlag & ")", "")
 			End If
-			StringClean = StringClean.Replace("@RemoveTeaseTime(" & OriginalFlag & ")", "")
-		End If
 
-		If StringClean.Contains("@AddTeaseTime") Then
-			'same as before about the teasetimer
-			'	If TeaseTimer.Enabled = True Then
-			If FrmSettings.CBTeaseLengthDD.Checked = True Then
-				If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick += ssh.randomizer.Next(10, 16) * 60
-				If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick += ssh.randomizer.Next(15, 21) * 60
-				If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick += ssh.randomizer.Next(20, 31) * 60
-				If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick += ssh.randomizer.Next(30, 46) * 60
-				If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick += ssh.randomizer.Next(45, 61) * 60
-			Else
-				ssh.TeaseTick += ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+			If StringClean.Contains("@RemoveTeaseTime(") Then
+
+				Dim OriginalFlag As String = ""
+
+				If TeaseTimer.Enabled = True Then
+
+					Dim TeaseFlag As String = GetParentheses(StringClean, "@RemoveTeaseTime(")
+					OriginalFlag = TeaseFlag
+					Dim TeaseSeconds As Integer
+
+					If TeaseFlag.Contains(",") Then
+						TeaseFlag = FixCommas(TeaseFlag)
+						Dim TeaseFlagArray As String() = TeaseFlag.Split(",")
+						Dim Tease1 As Integer = Val(TeaseFlagArray(0))
+						Dim Tease2 As Integer = Val(TeaseFlagArray(1))
+						If UCase(TeaseFlagArray(0)).Contains("M") Then Tease1 *= 60
+						If UCase(TeaseFlagArray(1)).Contains("M") Then Tease2 *= 60
+						If UCase(TeaseFlagArray(0)).Contains("H") Then Tease1 *= 3600
+						If UCase(TeaseFlagArray(1)).Contains("H") Then Tease2 *= 3600
+						TeaseSeconds = ssh.randomizer.Next(Tease1, Tease2 + 1)
+					Else
+						TeaseSeconds = Val(TeaseFlag)
+						If UCase(GetParentheses(StringClean, "@RemoveTeaseTime(")).Contains("M") Then TeaseSeconds *= 60
+						If UCase(GetParentheses(StringClean, "@RemoveTeaseTime(")).Contains("H") Then TeaseSeconds *= 3600
+					End If
+					ssh.TeaseTick -= TeaseSeconds
+					If ssh.TeaseTick < 5 Then ssh.TeaseTick = 5
+				End If
+				StringClean = StringClean.Replace("@RemoveTeaseTime(" & OriginalFlag & ")", "")
+			End If
+
+			If StringClean.Contains("@AddTeaseTime") Then
+				'same as before about the teasetimer
+				'	If TeaseTimer.Enabled = True Then
+				If FrmSettings.CBTeaseLengthDD.Checked = True Then
+					If FrmSettings.domlevelNumBox.Value = 1 Then ssh.TeaseTick += ssh.randomizer.Next(10, 16) * 60
+					If FrmSettings.domlevelNumBox.Value = 2 Then ssh.TeaseTick += ssh.randomizer.Next(15, 21) * 60
+					If FrmSettings.domlevelNumBox.Value = 3 Then ssh.TeaseTick += ssh.randomizer.Next(20, 31) * 60
+					If FrmSettings.domlevelNumBox.Value = 4 Then ssh.TeaseTick += ssh.randomizer.Next(30, 46) * 60
+					If FrmSettings.domlevelNumBox.Value = 5 Then ssh.TeaseTick += ssh.randomizer.Next(45, 61) * 60
+				Else
+					ssh.TeaseTick += ssh.randomizer.Next(FrmSettings.NBTeaseLengthMin.Value * 60, FrmSettings.NBTeaseLengthMax.Value * 60)
+
+				End If
+				If ssh.LastScript Then ssh.LastScript = False
+				If Not TeaseTimer.Enabled Then TeaseTimer.Enabled = True
+				StringClean = StringClean.Replace("@AddTeaseTime", "")
+			End If
+
+			If StringClean.Contains("@RemoveTeaseTime") Then
+				If TeaseTimer.Enabled = True Then
+					ssh.TeaseTick = ssh.TeaseTick / 2
+				End If
+				StringClean = StringClean.Replace("@RemoveTeaseTime", "")
+			End If
+
+			If StringClean.Contains("@PlaylistOff") Then
+				ssh.Playlist = False
+				StringClean = StringClean.Replace("@PlaylistOff", "")
+			End If
+
+			If StringClean.Contains("@RapidTextOn") Or StringClean.Contains("@RTOn") Then
+				ssh.RapidFire = True
+				StringClean = StringClean.Replace("@RapidTextOn", "")
+				StringClean = StringClean.Replace("@RTOn", "")
+			End If
+
+			If StringClean.Contains("@RapidTextOff") Or StringClean.Contains("@RTOff") Then
+				ssh.RapidFire = False
+				StringClean = StringClean.Replace("@RapidTextOff", "")
+				StringClean = StringClean.Replace("@RTOff", "")
+			End If
+
+			If StringClean.Contains("@VoiceOn") Then
+				FrmSettings.TTSCheckBox.Checked = True
+				StringClean = StringClean.Replace("@VoiceOn", "")
+			End If
+
+			If StringClean.Contains("@VoiceOff") Then
+				FrmSettings.TTSCheckBox.Checked = False
+				StringClean = StringClean.Replace("@VoiceOff", "")
+			End If
+
+			If StringClean.Contains("@GlitterTease1") Then
+				ssh.glitterDommeNumber = 1
+				LoadDommeImageFolder()
+				StringClean = StringClean.Replace("@GlitterTease1", "")
+			End If
+
+			If StringClean.Contains("@GlitterTease2") Then
+				ssh.glitterDommeNumber = 2
+				LoadDommeImageFolder()
+				StringClean = StringClean.Replace("@GlitterTease2", "")
+			End If
+
+			If StringClean.Contains("@GlitterTease3") Then
+				ssh.glitterDommeNumber = 3
+				LoadDommeImageFolder()
+				StringClean = StringClean.Replace("@GlitterTease3", "")
+			End If
+
+			If StringClean.Contains("@DommeTease") Then
+				ssh.glitterDommeNumber = 0
+				LoadDommeImageFolder()
+				StringClean = StringClean.Replace("@DommeTease", "")
+			End If
+
+			If StringClean.Contains("@RandomTease") Then
+				ssh.glitterDommeNumber = 4
+				LoadDommeImageFolder()
+				StringClean = StringClean.Replace("@RandomTease", "")
+			End If
+
+			If StringClean.Contains("@SetDomme(") Then
+
+				Dim DommeFlag As String = GetParentheses(StringClean, "@SetDomme(")
+				ssh.glitterDommeNumber = 0
+				If DommeFlag.Contains("1") Then ssh.glitterDommeNumber = 1
+				If DommeFlag.Contains("2") Then ssh.glitterDommeNumber = 2
+				If DommeFlag.Contains("3") Then ssh.glitterDommeNumber = 3
+				If DommeFlag.Contains("0") Or DommeFlag.ToLower.Contains("domme") Then ssh.glitterDommeNumber = 0
+				If DommeFlag.Contains("4") Or DommeFlag.ToLower.Contains("random") Then ssh.glitterDommeNumber = 4
+				LoadDommeImageFolder()
+
+				StringClean = StringClean.Replace("@SetDomme(" & GetParentheses(StringClean, "@SetDomme(") & ")", "")
+			End If
+
+			If StringClean.Contains("@AddContact1") Then
+				If Not ssh.contact1Present Then
+					ssh.currentlyPresentContacts.Add(ssh.SlideshowContact1.TypeName)
+					ssh.contact1Present = True
+					'ssh.AddContactTick = 2
+					Contact1Timer.Start()
+				End If
+				If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact1.LoadNew(False)
+				StringClean = StringClean.Replace("@AddContact1", "")
+			End If
+
+			If StringClean.Contains("@RemoveContact1") Then
+				'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
+				If ssh.contact1Present And (ssh.dommePresent Or ssh.contact2Present Or ssh.contact3Present) Then
+					ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact1.TypeName)
+					ssh.contact1Present = False
+					'ssh.AddContactTick = 2
+					Contact1Timer.Start()
+				End If
+				StringClean = StringClean.Replace("@RemoveContact1", "")
+			End If
+
+			If StringClean.Contains("@AddContact2") Then
+				If Not ssh.contact2Present Then
+					ssh.currentlyPresentContacts.Add(ssh.SlideshowContact2.TypeName)
+					ssh.contact2Present = True
+					'ssh.AddContactTick = 2
+					Contact2Timer.Start()
+				End If
+				If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact2.LoadNew(False)
+				StringClean = StringClean.Replace("@AddContact2", "")
+			End If
+
+			If StringClean.Contains("@RemoveContact2") Then
+				'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
+				If ssh.contact2Present And (ssh.dommePresent Or ssh.contact1Present Or ssh.contact3Present) Then
+					ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact2.TypeName)
+					ssh.contact2Present = False
+					ssh.AddContactTick = 2
+					Contact2Timer.Start()
+				End If
+				StringClean = StringClean.Replace("@RemoveContact2", "")
+			End If
+
+			If StringClean.Contains("@AddContact3") Then
+				If Not ssh.contact3Present Then
+					ssh.currentlyPresentContacts.Add(ssh.SlideshowContact3.TypeName)
+					ssh.contact3Present = True
+					'ssh.AddContactTick = 2
+					Contact3Timer.Start()
+				End If
+				If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact3.LoadNew(False)
+				StringClean = StringClean.Replace("@AddContact3", "")
+			End If
+
+			If StringClean.Contains("@RemoveContact3") Then
+				'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
+				If ssh.contact3Present And (ssh.dommePresent Or ssh.contact1Present Or ssh.contact2Present) Then
+					ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact3.TypeName)
+					ssh.contact3Present = False
+					'ssh.AddContactTick = 2
+					Contact3Timer.Start()
+				End If
+				StringClean = StringClean.Replace("@RemoveContact3", "")
+			End If
+
+			If StringClean.Contains("@AddDomme") Then
+				If Not ssh.dommePresent Then
+					ssh.currentlyPresentContacts.Add(ssh.SlideshowMain.TypeName)
+					ssh.dommePresent = True
+					'ssh.AddContactTick = 2
+					DommeTimer.Start()
+				End If
+				StringClean = StringClean.Replace("@AddDomme", "")
 
 			End If
-			If ssh.LastScript Then ssh.LastScript = False
-			If Not TeaseTimer.Enabled Then TeaseTimer.Enabled = True
-			StringClean = StringClean.Replace("@AddTeaseTime", "")
-		End If
 
-		If StringClean.Contains("@RemoveTeaseTime") Then
-			If TeaseTimer.Enabled = True Then
-				ssh.TeaseTick = ssh.TeaseTick / 2
+			If StringClean.Contains("@RemoveDomme") Then
+				'security measure: only remove the domme if another contact is already present, to prevent crashes due to no contact being present
+				If ssh.dommePresent And (ssh.contact1Present Or ssh.contact2Present Or ssh.contact3Present) Then
+					ssh.currentlyPresentContacts.Remove(ssh.SlideshowMain.TypeName)
+					ssh.dommePresent = False
+					'ssh.AddContactTick = 2
+					DommeTimer.Start()
+				End If
+				StringClean = StringClean.Replace("@RemoveDomme", "")
 			End If
-			StringClean = StringClean.Replace("@RemoveTeaseTime", "")
-		End If
 
-		If StringClean.Contains("@PlaylistOff") Then
-			ssh.Playlist = False
-			StringClean = StringClean.Replace("@PlaylistOff", "")
-		End If
-
-		If StringClean.Contains("@RapidTextOn") Or StringClean.Contains("@RTOn") Then
-			ssh.RapidFire = True
-			StringClean = StringClean.Replace("@RapidTextOn", "")
-			StringClean = StringClean.Replace("@RTOn", "")
-		End If
-
-		If StringClean.Contains("@RapidTextOff") Or StringClean.Contains("@RTOff") Then
-			ssh.RapidFire = False
-			StringClean = StringClean.Replace("@RapidTextOff", "")
-			StringClean = StringClean.Replace("@RTOff", "")
-		End If
-
-		If StringClean.Contains("@VoiceOn") Then
-			FrmSettings.TTSCheckBox.Checked = True
-			StringClean = StringClean.Replace("@VoiceOn", "")
-		End If
-
-		If StringClean.Contains("@VoiceOff") Then
-			FrmSettings.TTSCheckBox.Checked = False
-			StringClean = StringClean.Replace("@VoiceOff", "")
-		End If
-
-		If StringClean.Contains("@GlitterTease1") Then
-			ssh.glitterDommeNumber = 1
-			LoadDommeImageFolder()
-			StringClean = StringClean.Replace("@GlitterTease1", "")
-		End If
-
-		If StringClean.Contains("@GlitterTease2") Then
-			ssh.glitterDommeNumber = 2
-			LoadDommeImageFolder()
-			StringClean = StringClean.Replace("@GlitterTease2", "")
-		End If
-
-		If StringClean.Contains("@GlitterTease3") Then
-			ssh.glitterDommeNumber = 3
-			LoadDommeImageFolder()
-			StringClean = StringClean.Replace("@GlitterTease3", "")
-		End If
-
-		If StringClean.Contains("@DommeTease") Then
-			ssh.glitterDommeNumber = 0
-			LoadDommeImageFolder()
-			StringClean = StringClean.Replace("@DommeTease", "")
-		End If
-
-		If StringClean.Contains("@RandomTease") Then
-			ssh.glitterDommeNumber = 4
-			LoadDommeImageFolder()
-			StringClean = StringClean.Replace("@RandomTease", "")
-		End If
-
-		If StringClean.Contains("@SetDomme(") Then
-
-			Dim DommeFlag As String = GetParentheses(StringClean, "@SetDomme(")
-			ssh.glitterDommeNumber = 0
-			If DommeFlag.Contains("1") Then ssh.glitterDommeNumber = 1
-			If DommeFlag.Contains("2") Then ssh.glitterDommeNumber = 2
-			If DommeFlag.Contains("3") Then ssh.glitterDommeNumber = 3
-			If DommeFlag.Contains("0") Or DommeFlag.ToLower.Contains("domme") Then ssh.glitterDommeNumber = 0
-			If DommeFlag.Contains("4") Or DommeFlag.ToLower.Contains("random") Then ssh.glitterDommeNumber = 4
-			LoadDommeImageFolder()
-
-			StringClean = StringClean.Replace("@SetDomme(" & GetParentheses(StringClean, "@SetDomme(") & ")", "")
-		End If
-
-		If StringClean.Contains("@AddContact1") Then
-			If Not ssh.contact1Present Then
-				ssh.currentlyPresentContacts.Add(ssh.SlideshowContact1.TypeName)
-				ssh.contact1Present = True
-				'ssh.AddContactTick = 2
-				Contact1Timer.Start()
+			If StringClean.Contains("@NullResponse") Then
+				ssh.NullResponse = True
+				StringClean = StringClean.Replace("@NullResponse", "")
+				'Debug.Print("NullResponse Called")
 			End If
-			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact1.LoadNew(False)
-			StringClean = StringClean.Replace("@AddContact1", "")
-		End If
-
-		If StringClean.Contains("@RemoveContact1") Then
-			'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
-			If ssh.contact1Present And (ssh.dommePresent Or ssh.contact2Present Or ssh.contact3Present) Then
-				ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact1.TypeName)
-				ssh.contact1Present = False
-				'ssh.AddContactTick = 2
-				Contact1Timer.Start()
-			End If
-			StringClean = StringClean.Replace("@RemoveContact1", "")
-		End If
-
-		If StringClean.Contains("@AddContact2") Then
-			If Not ssh.contact2Present Then
-				ssh.currentlyPresentContacts.Add(ssh.SlideshowContact2.TypeName)
-				ssh.contact2Present = True
-				'ssh.AddContactTick = 2
-				Contact2Timer.Start()
-			End If
-			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact2.LoadNew(False)
-			StringClean = StringClean.Replace("@AddContact2", "")
-		End If
-
-		If StringClean.Contains("@RemoveContact2") Then
-			'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
-			If ssh.contact2Present And (ssh.dommePresent Or ssh.contact1Present Or ssh.contact3Present) Then
-				ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact2.TypeName)
-				ssh.contact2Present = False
-				ssh.AddContactTick = 2
-				Contact2Timer.Start()
-			End If
-			StringClean = StringClean.Replace("@RemoveContact2", "")
-		End If
-
-		If StringClean.Contains("@AddContact3") Then
-			If Not ssh.contact3Present Then
-				ssh.currentlyPresentContacts.Add(ssh.SlideshowContact3.TypeName)
-				ssh.contact3Present = True
-				'ssh.AddContactTick = 2
-				Contact3Timer.Start()
-			End If
-			If My.Settings.AlwaysNewSlideshow Then ssh.SlideshowContact3.LoadNew(False)
-			StringClean = StringClean.Replace("@AddContact3", "")
-		End If
-
-		If StringClean.Contains("@RemoveContact3") Then
-			'security measure: only remove the contact if another contact is already present, to prevent crashes due to no contact being present
-			If ssh.contact3Present And (ssh.dommePresent Or ssh.contact1Present Or ssh.contact2Present) Then
-				ssh.currentlyPresentContacts.Remove(ssh.SlideshowContact3.TypeName)
-				ssh.contact3Present = False
-				'ssh.AddContactTick = 2
-				Contact3Timer.Start()
-			End If
-			StringClean = StringClean.Replace("@RemoveContact3", "")
-		End If
-
-		If StringClean.Contains("@AddDomme") Then
-			If Not ssh.dommePresent Then
-				ssh.currentlyPresentContacts.Add(ssh.SlideshowMain.TypeName)
-				ssh.dommePresent = True
-				'ssh.AddContactTick = 2
-				DommeTimer.Start()
-			End If
-			StringClean = StringClean.Replace("@AddDomme", "")
-
-		End If
-
-		If StringClean.Contains("@RemoveDomme") Then
-			'security measure: only remove the domme if another contact is already present, to prevent crashes due to no contact being present
-			If ssh.dommePresent And (ssh.contact1Present Or ssh.contact2Present Or ssh.contact3Present) Then
-				ssh.currentlyPresentContacts.Remove(ssh.SlideshowMain.TypeName)
-				ssh.dommePresent = False
-				'ssh.AddContactTick = 2
-				DommeTimer.Start()
-			End If
-			StringClean = StringClean.Replace("@RemoveDomme", "")
-		End If
-
-		If StringClean.Contains("@NullResponse") Then
-			ssh.NullResponse = True
-			StringClean = StringClean.Replace("@NullResponse", "")
-            'Debug.Print("NullResponse Called")
-        End If
 
 VTSkip:
 
-		If StringClean.Contains("@SpeedUpCheck") Then
+			If StringClean.Contains("@SpeedUpCheck") Then
 
-			If ssh.AskedToSpeedUp = True Then
-				ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpREPEAT.txt"
-				StringClean = ResponseClean(StringClean)
-
-			Else
-
-				If StrokePace < 201 Then
-					ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpMAX.txt"
+				If ssh.AskedToSpeedUp = True Then
+					ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpREPEAT.txt"
 					StringClean = ResponseClean(StringClean)
 
 				Else
 
-					Dim SpeedUpCheck As Integer
-
-					If FrmSettings.domlevelNumBox.Value = 1 Then SpeedUpCheck = 70
-					If FrmSettings.domlevelNumBox.Value = 2 Then SpeedUpCheck = 40
-					If FrmSettings.domlevelNumBox.Value = 3 Then SpeedUpCheck = 60
-					If FrmSettings.domlevelNumBox.Value = 4 Then SpeedUpCheck = 50
-					If FrmSettings.domlevelNumBox.Value = 5 Then SpeedUpCheck = 65
-
-					Dim SpeedUpVal As Integer = ssh.randomizer.Next(1, 101)
-
-					If SpeedUpVal > SpeedUpCheck Then
-
-                        ' you can speed up
-                        ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpALLOWED.txt"
+					If StrokePace < 201 Then
+						ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpMAX.txt"
+						StringClean = ResponseClean(StringClean)
 
 					Else
 
-                        ' you can't speed up
-                        ssh.AskedToSpeedUp = True
-						ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpDENIED.txt"
+						Dim SpeedUpCheck As Integer
+
+						If FrmSettings.domlevelNumBox.Value = 1 Then SpeedUpCheck = 70
+						If FrmSettings.domlevelNumBox.Value = 2 Then SpeedUpCheck = 40
+						If FrmSettings.domlevelNumBox.Value = 3 Then SpeedUpCheck = 60
+						If FrmSettings.domlevelNumBox.Value = 4 Then SpeedUpCheck = 50
+						If FrmSettings.domlevelNumBox.Value = 5 Then SpeedUpCheck = 65
+
+						Dim SpeedUpVal As Integer = ssh.randomizer.Next(1, 101)
+
+						If SpeedUpVal > SpeedUpCheck Then
+
+							' you can speed up
+							ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpALLOWED.txt"
+
+						Else
+
+							' you can't speed up
+							ssh.AskedToSpeedUp = True
+							ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SpeedUpDENIED.txt"
+
+						End If
+
+						StringClean = ResponseClean(StringClean)
 
 					End If
 
-					StringClean = ResponseClean(StringClean)
-
 				End If
 
+				StringClean = StringClean.Replace("@SpeedUpCheck", "")
+				GoTo RinseLatherRepeat
 			End If
 
-			StringClean = StringClean.Replace("@SpeedUpCheck", "")
-			GoTo RinseLatherRepeat
-		End If
 
+			If StringClean.Contains("@SlowDownCheck") Then
 
-		If StringClean.Contains("@SlowDownCheck") Then
-
-			If ssh.AskedToSpeedUp = True Then
-				ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownREPEAT.txt"
-				StringClean = ResponseClean(StringClean)
-
-			Else
-
-				If StrokePace > 999 Then
-					ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownMIN.txt"
+				If ssh.AskedToSpeedUp = True Then
+					ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownREPEAT.txt"
 					StringClean = ResponseClean(StringClean)
 
 				Else
 
-					Dim SpeedUpCheck As Integer
-
-					If FrmSettings.domlevelNumBox.Value = 1 Then SpeedUpCheck = 70
-					If FrmSettings.domlevelNumBox.Value = 2 Then SpeedUpCheck = 40
-					If FrmSettings.domlevelNumBox.Value = 3 Then SpeedUpCheck = 60
-					If FrmSettings.domlevelNumBox.Value = 4 Then SpeedUpCheck = 50
-					If FrmSettings.domlevelNumBox.Value = 5 Then SpeedUpCheck = 65
-
-					Dim SpeedUpVal As Integer = ssh.randomizer.Next(1, 101)
-
-					If SpeedUpVal > SpeedUpCheck Then
-
-                        ' you can speed up
-                        ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownALLOWED.txt"
+					If StrokePace > 999 Then
+						ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownMIN.txt"
+						StringClean = ResponseClean(StringClean)
 
 					Else
 
-                        ' you can't speed up
-                        ssh.AskedToSpeedUp = True
-						ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownDENIED.txt"
+						Dim SpeedUpCheck As Integer
+
+						If FrmSettings.domlevelNumBox.Value = 1 Then SpeedUpCheck = 70
+						If FrmSettings.domlevelNumBox.Value = 2 Then SpeedUpCheck = 40
+						If FrmSettings.domlevelNumBox.Value = 3 Then SpeedUpCheck = 60
+						If FrmSettings.domlevelNumBox.Value = 4 Then SpeedUpCheck = 50
+						If FrmSettings.domlevelNumBox.Value = 5 Then SpeedUpCheck = 65
+
+						Dim SpeedUpVal As Integer = ssh.randomizer.Next(1, 101)
+
+						If SpeedUpVal > SpeedUpCheck Then
+
+							' you can speed up
+							ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownALLOWED.txt"
+
+						Else
+
+							' you can't speed up
+							ssh.AskedToSpeedUp = True
+							ssh.ResponseFile = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Vocabulary\Responses\System\SlowDownDENIED.txt"
+
+						End If
+
+						StringClean = ResponseClean(StringClean)
 
 					End If
 
-					StringClean = ResponseClean(StringClean)
-
 				End If
 
+				StringClean = StringClean.Replace("@SlowDownCheck", "")
+				GoTo RinseLatherRepeat
+
 			End If
 
-			StringClean = StringClean.Replace("@SlowDownCheck", "")
-			GoTo RinseLatherRepeat
 
-		End If
-
-
-		If StringClean.Contains("@PlayRiskyPick") Then
-			ssh.RiskyDeal = True
-            'FrmCardList.RiskyRound += 1
-            FrmCardList.TCGames.SelectTab(2)
-			FrmCardList.Show()
-			FrmCardList.Focus()
-			FrmCardList.InitializeRiskyDeal()
-			StringClean = StringClean.Replace("@PlayRiskyPick", "")
-            'Debug.Print("NullResponse Called")
-        End If
-
-		If StringClean.Contains("@ChooseRiskyPick") Then
-			ssh.RiskyDelay = True
-			If FrmCardList.BTNRisk1.Text <> "" Then FrmCardList.BTNRisk1.Enabled = True
-			If FrmCardList.BTNRisk2.Text <> "" Then FrmCardList.BTNRisk2.Enabled = True
-			If FrmCardList.BTNRisk3.Text <> "" Then FrmCardList.BTNRisk3.Enabled = True
-			If FrmCardList.BTNRisk4.Text <> "" Then FrmCardList.BTNRisk4.Enabled = True
-			If FrmCardList.BTNRisk5.Text <> "" Then FrmCardList.BTNRisk5.Enabled = True
-			If FrmCardList.BTNRisk6.Text <> "" Then FrmCardList.BTNRisk6.Enabled = True
-			If FrmCardList.BTNRisk7.Text <> "" Then FrmCardList.BTNRisk7.Enabled = True
-			If FrmCardList.BTNRisk8.Text <> "" Then FrmCardList.BTNRisk8.Enabled = True
-			If FrmCardList.BTNRisk9.Text <> "" Then FrmCardList.BTNRisk9.Enabled = True
-			If FrmCardList.BTNRisk10.Text <> "" Then FrmCardList.BTNRisk10.Enabled = True
-
-			If FrmCardList.BTNRisk11.Text <> "" Then FrmCardList.BTNRisk11.Enabled = True
-			If FrmCardList.BTNRisk12.Text <> "" Then FrmCardList.BTNRisk12.Enabled = True
-			If FrmCardList.BTNRisk13.Text <> "" Then FrmCardList.BTNRisk13.Enabled = True
-			If FrmCardList.BTNRisk14.Text <> "" Then FrmCardList.BTNRisk14.Enabled = True
-			If FrmCardList.BTNRisk15.Text <> "" Then FrmCardList.BTNRisk15.Enabled = True
-			If FrmCardList.BTNRisk16.Text <> "" Then FrmCardList.BTNRisk16.Enabled = True
-			If FrmCardList.BTNRisk17.Text <> "" Then FrmCardList.BTNRisk17.Enabled = True
-			If FrmCardList.BTNRisk18.Text <> "" Then FrmCardList.BTNRisk18.Enabled = True
-			If FrmCardList.BTNRisk19.Text <> "" Then FrmCardList.BTNRisk19.Enabled = True
-			If FrmCardList.BTNRisk20.Text <> "" Then FrmCardList.BTNRisk20.Enabled = True
-
-			If FrmCardList.BTNRisk21.Text <> "" Then FrmCardList.BTNRisk21.Enabled = True
-			If FrmCardList.BTNRisk22.Text <> "" Then FrmCardList.BTNRisk22.Enabled = True
-			If FrmCardList.BTNRisk23.Text <> "" Then FrmCardList.BTNRisk23.Enabled = True
-			If FrmCardList.BTNRisk24.Text <> "" Then FrmCardList.BTNRisk24.Enabled = True
-
-			FrmCardList.RiskyChoiceCount = 0
-			FrmCardList.RiskyRound += 1
-			FrmCardList.RiskyPickCount = 0
-			FrmCardList.RiskyChoices.Clear()
-			FrmCardList.ClearCaseLabelsOffer()
-            'FrmCardList.Show()
-            'FrmCardList.TCGames.SelectTab(4)
-            'FrmCardList.Focus()
-
-            StringClean = StringClean.Replace("@ChooseRiskyPick", "")
-            'Debug.Print("NullResponse Called")
-        End If
-
-
-		If StringClean.Contains("@CheckRiskyPick") Then
-            'FrmCardList.Focus()
-            FrmCardList.CheckRiskyPick()
-			StringClean = StringClean.Replace("@CheckRiskyPick", "")
-            'Debug.Print("NullResponse Called")
-        End If
-
-		If StringClean.Contains("@FinalRiskyPick") Then
-            'FrmCardList.Focus()
-            FrmCardList.BTNRiskIt.Text = "LAST CASE"
-			FrmCardList.BTNPickIt.Text = "MY CASE"
-			StringClean = StringClean.Replace("@FinalRiskyPick", "")
-            'Debug.Print("NullResponse Called")
-        End If
-
-		If StringClean.Contains("@ClearRiskyLabels") Then
-            'FrmCardList.Focus()
-            FrmCardList.ClearCaseLabelsOffer()
-			StringClean = StringClean.Replace("@ClearRiskyLabels", "")
-            'Debug.Print("NullResponse Called")
-        End If
-
-		If StringClean.Contains("@RiskyPayout") Then
-			If FrmSettings.CBGameSounds.Checked = True And File.Exists(Application.StartupPath & "\Audio\System\PayoutSmall.wav") Then
-				FrmCardList.GameWMP.settings.setMode("loop", False)
-				FrmCardList.GameWMP.settings.volume = 20
-				FrmCardList.GameWMP.URL = Application.StartupPath & "\Audio\System\PayoutSmall.wav"
-			End If
-			ssh.BronzeTokens += FrmCardList.TokensPaid
-			FrmCardList.LBLRiskTokens.Text = ssh.BronzeTokens
-			My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\RP_Edges", FrmCardList.EdgesOwed, False)
-			StringClean = StringClean.Replace("@RiskyPayout", "")
-		End If
-
-		If StringClean.Contains("@CloseRiskyPick") Then
-			FrmCardList.CloseRiskyPick()
-			StringClean = StringClean.Replace("@CloseRiskyPick", "")
-		End If
-
-		If StringClean.Contains("@RevealLastCase") Then
-			FrmCardList.RevealLastCase()
-			StringClean = StringClean.Replace("@RevealLastCase", "")
-		End If
-
-		If StringClean.Contains("@RevealUserCase") Then
-			FrmCardList.RevealUserCase()
-			StringClean = StringClean.Replace("@RevealUserCase", "")
-		End If
-
-		If StringClean.Contains("@RiskyState") Then
-			If FrmCardList.RiskyState = True Then
-				ssh.FileGoto = "(Risky Game)"
-			Else
-				ssh.FileGoto = "(Risky Tease)"
-			End If
-			FrmCardList.RiskyState = False
-			ssh.SkipGotoLine = True
-			GetGoto()
-			StringClean = StringClean.Replace("@RiskyState", "")
-		End If
-
-		If StringClean.Contains("@SystemMessage ") Then
-			StringClean = StringClean.Replace("@SystemMessage ", "")
-		End If
-
-		If StringClean.Contains("@EmoteMessage ") Then
-			StringClean = StringClean.Replace("@EmoteMessage ", "")
-		End If
-
-
-
-
-
-
-
-
-		If StringClean.Contains("@MiniScript(") Then
-
-			Dim MiniTemp As String = GetParentheses(StringClean, "@MiniScript(")
-			Dim Mini2CR As String = "\Custom\Miniscripts\" & MiniTemp & ".txt"
-
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & Mini2CR) Then
-				StringClean = StringClean.Replace("@MiniScript(" & MiniTemp & ")", "@CallReturn(" & Mini2CR & ")")
-			Else
-				StringClean = StringClean.Replace("@MiniScript(" & MiniTemp & ")", "")
-			End If
-		End If
-
-
-
-		If StringClean.Contains("@CallReturn(") Then
-			Dim CheckFlag As String = GetParentheses(StringClean, "@CallReturn(")
-			Dim CallReplace As String = CheckFlag
-
-			If (CheckFlag.StartsWith("/") Or CheckFlag.StartsWith("\")) And Not (CheckFlag.StartsWith("//") Or CheckFlag.StartsWith("\\")) Then CheckFlag = CheckFlag.Remove(0, 1)
-			CheckFlag = CheckFlag.Replace("/", "\")
-
-			GetSubState()
-			ssh.CallReturns.Push(New SessionState.StackedCallReturn(ssh))
-			ssh.YesOrNo = False
-			GotoClear()
-			StrokeTimer.Stop()
-			StrokeTauntTimer.Stop()
-			CensorshipTimer.Stop()
-			RLGLTimer.Stop()
-			TnASlides.Stop()
-			AvoidTheEdge.Stop()
-			EdgeTauntTimer.Stop()
-			HoldEdgeTimer.Stop()
-			HoldEdgeTauntTimer.Stop()
-			AvoidTheEdgeTaunts.Stop()
-			RLGLTauntTimer.Stop()
-			VideoTauntTimer.Stop()
-			EdgeCountTimer.Stop()
-
-			ssh.CBTBallsActive = False
-			ssh.CBTBallsFlag = False
-			ssh.CBTCockActive = False
-			ssh.CBTCockFlag = False
-			ssh.CBTBothActive = False
-			ssh.CBTBothFlag = False
-			ssh.CustomTaskActive = False
-
-			ssh.MultiTauntPictureHold = False
-
-			If Not ssh.SubGaveUp Then
-				ssh.SubEdging = False
-				ssh.SubHoldingEdge = False
+			If StringClean.Contains("@PlayRiskyPick") Then
+				ssh.RiskyDeal = True
+				'FrmCardList.RiskyRound += 1
+				FrmCardList.TCGames.SelectTab(2)
+				FrmCardList.Show()
+				FrmCardList.Focus()
+				FrmCardList.InitializeRiskyDeal()
+				StringClean = StringClean.Replace("@PlayRiskyPick", "")
+				'Debug.Print("NullResponse Called")
 			End If
 
-			If CheckFlag.Contains("*") Then
-				Dim checkArray() As String = CheckFlag.Split("*")
-				CheckFlag = checkArray(0)
+			If StringClean.Contains("@ChooseRiskyPick") Then
+				ssh.RiskyDelay = True
+				If FrmCardList.BTNRisk1.Text <> "" Then FrmCardList.BTNRisk1.Enabled = True
+				If FrmCardList.BTNRisk2.Text <> "" Then FrmCardList.BTNRisk2.Enabled = True
+				If FrmCardList.BTNRisk3.Text <> "" Then FrmCardList.BTNRisk3.Enabled = True
+				If FrmCardList.BTNRisk4.Text <> "" Then FrmCardList.BTNRisk4.Enabled = True
+				If FrmCardList.BTNRisk5.Text <> "" Then FrmCardList.BTNRisk5.Enabled = True
+				If FrmCardList.BTNRisk6.Text <> "" Then FrmCardList.BTNRisk6.Enabled = True
+				If FrmCardList.BTNRisk7.Text <> "" Then FrmCardList.BTNRisk7.Enabled = True
+				If FrmCardList.BTNRisk8.Text <> "" Then FrmCardList.BTNRisk8.Enabled = True
+				If FrmCardList.BTNRisk9.Text <> "" Then FrmCardList.BTNRisk9.Enabled = True
+				If FrmCardList.BTNRisk10.Text <> "" Then FrmCardList.BTNRisk10.Enabled = True
+
+				If FrmCardList.BTNRisk11.Text <> "" Then FrmCardList.BTNRisk11.Enabled = True
+				If FrmCardList.BTNRisk12.Text <> "" Then FrmCardList.BTNRisk12.Enabled = True
+				If FrmCardList.BTNRisk13.Text <> "" Then FrmCardList.BTNRisk13.Enabled = True
+				If FrmCardList.BTNRisk14.Text <> "" Then FrmCardList.BTNRisk14.Enabled = True
+				If FrmCardList.BTNRisk15.Text <> "" Then FrmCardList.BTNRisk15.Enabled = True
+				If FrmCardList.BTNRisk16.Text <> "" Then FrmCardList.BTNRisk16.Enabled = True
+				If FrmCardList.BTNRisk17.Text <> "" Then FrmCardList.BTNRisk17.Enabled = True
+				If FrmCardList.BTNRisk18.Text <> "" Then FrmCardList.BTNRisk18.Enabled = True
+				If FrmCardList.BTNRisk19.Text <> "" Then FrmCardList.BTNRisk19.Enabled = True
+				If FrmCardList.BTNRisk20.Text <> "" Then FrmCardList.BTNRisk20.Enabled = True
+
+				If FrmCardList.BTNRisk21.Text <> "" Then FrmCardList.BTNRisk21.Enabled = True
+				If FrmCardList.BTNRisk22.Text <> "" Then FrmCardList.BTNRisk22.Enabled = True
+				If FrmCardList.BTNRisk23.Text <> "" Then FrmCardList.BTNRisk23.Enabled = True
+				If FrmCardList.BTNRisk24.Text <> "" Then FrmCardList.BTNRisk24.Enabled = True
+
+				FrmCardList.RiskyChoiceCount = 0
+				FrmCardList.RiskyRound += 1
+				FrmCardList.RiskyPickCount = 0
+				FrmCardList.RiskyChoices.Clear()
+				FrmCardList.ClearCaseLabelsOffer()
+				'FrmCardList.Show()
+				'FrmCardList.TCGames.SelectTab(4)
+				'FrmCardList.Focus()
+
+				StringClean = StringClean.Replace("@ChooseRiskyPick", "")
+				'Debug.Print("NullResponse Called")
+			End If
+
+
+			If StringClean.Contains("@CheckRiskyPick") Then
+				'FrmCardList.Focus()
+				FrmCardList.CheckRiskyPick()
+				StringClean = StringClean.Replace("@CheckRiskyPick", "")
+				'Debug.Print("NullResponse Called")
+			End If
+
+			If StringClean.Contains("@FinalRiskyPick") Then
+				'FrmCardList.Focus()
+				FrmCardList.BTNRiskIt.Text = "LAST CASE"
+				FrmCardList.BTNPickIt.Text = "MY CASE"
+				StringClean = StringClean.Replace("@FinalRiskyPick", "")
+				'Debug.Print("NullResponse Called")
+			End If
+
+			If StringClean.Contains("@ClearRiskyLabels") Then
+				'FrmCardList.Focus()
+				FrmCardList.ClearCaseLabelsOffer()
+				StringClean = StringClean.Replace("@ClearRiskyLabels", "")
+				'Debug.Print("NullResponse Called")
+			End If
+
+			If StringClean.Contains("@RiskyPayout") Then
+				If FrmSettings.CBGameSounds.Checked = True And File.Exists(Application.StartupPath & "\Audio\System\PayoutSmall.wav") Then
+					FrmCardList.GameWMP.settings.setMode("loop", False)
+					FrmCardList.GameWMP.settings.volume = 20
+					FrmCardList.GameWMP.URL = Application.StartupPath & "\Audio\System\PayoutSmall.wav"
+				End If
+				ssh.BronzeTokens += FrmCardList.TokensPaid
+				FrmCardList.LBLRiskTokens.Text = ssh.BronzeTokens
+				My.Computer.FileSystem.WriteAllText(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\System\Variables\RP_Edges", FrmCardList.EdgesOwed, False)
+				StringClean = StringClean.Replace("@RiskyPayout", "")
+			End If
+
+			If StringClean.Contains("@CloseRiskyPick") Then
+				FrmCardList.CloseRiskyPick()
+				StringClean = StringClean.Replace("@CloseRiskyPick", "")
+			End If
+
+			If StringClean.Contains("@RevealLastCase") Then
+				FrmCardList.RevealLastCase()
+				StringClean = StringClean.Replace("@RevealLastCase", "")
+			End If
+
+			If StringClean.Contains("@RevealUserCase") Then
+				FrmCardList.RevealUserCase()
+				StringClean = StringClean.Replace("@RevealUserCase", "")
+			End If
+
+			If StringClean.Contains("@RiskyState") Then
+				If FrmCardList.RiskyState = True Then
+					ssh.FileGoto = "(Risky Game)"
+				Else
+					ssh.FileGoto = "(Risky Tease)"
+				End If
+				FrmCardList.RiskyState = False
+				ssh.SkipGotoLine = True
+				GetGoto()
+				StringClean = StringClean.Replace("@RiskyState", "")
+			End If
+
+			If StringClean.Contains("@SystemMessage ") Then
+				StringClean = StringClean.Replace("@SystemMessage ", "")
+			End If
+
+			If StringClean.Contains("@EmoteMessage ") Then
+				StringClean = StringClean.Replace("@EmoteMessage ", "")
+			End If
+
+
+
+
+
+
+
+
+			If StringClean.Contains("@MiniScript(") Then
+
+				Dim MiniTemp As String = GetParentheses(StringClean, "@MiniScript(")
+				Dim Mini2CR As String = "\Custom\Miniscripts\" & MiniTemp & ".txt"
+
+				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & Mini2CR) Then
+					StringClean = StringClean.Replace("@MiniScript(" & MiniTemp & ")", "@CallReturn(" & Mini2CR & ")")
+				Else
+					StringClean = StringClean.Replace("@MiniScript(" & MiniTemp & ")", "")
+				End If
+			End If
+
+
+
+			If StringClean.Contains("@CallReturn(") Then
+				Dim CheckFlag As String = GetParentheses(StringClean, "@CallReturn(")
+				Dim CallReplace As String = CheckFlag
+
+				If (CheckFlag.StartsWith("/") Or CheckFlag.StartsWith("\")) And Not (CheckFlag.StartsWith("//") Or CheckFlag.StartsWith("\\")) Then CheckFlag = CheckFlag.Remove(0, 1)
+				CheckFlag = CheckFlag.Replace("/", "\")
+
+				GetSubState()
+				ssh.CallReturns.Push(New SessionState.StackedCallReturn(ssh))
+				ssh.YesOrNo = False
+				GotoClear()
+				StrokeTimer.Stop()
+				StrokeTauntTimer.Stop()
+				CensorshipTimer.Stop()
+				RLGLTimer.Stop()
+				TnASlides.Stop()
+				AvoidTheEdge.Stop()
+				EdgeTauntTimer.Stop()
+				HoldEdgeTimer.Stop()
+				HoldEdgeTauntTimer.Stop()
+				AvoidTheEdgeTaunts.Stop()
+				RLGLTauntTimer.Stop()
+				VideoTauntTimer.Stop()
+				EdgeCountTimer.Stop()
+
+				ssh.CBTBallsActive = False
+				ssh.CBTBallsFlag = False
+				ssh.CBTCockActive = False
+				ssh.CBTCockFlag = False
+				ssh.CBTBothActive = False
+				ssh.CBTBothFlag = False
+				ssh.CustomTaskActive = False
+
+				ssh.MultiTauntPictureHold = False
+
+				If Not ssh.SubGaveUp Then
+					ssh.SubEdging = False
+					ssh.SubHoldingEdge = False
+				End If
+
+				If CheckFlag.Contains("*") Then
+					Dim checkArray() As String = CheckFlag.Split("*")
+					CheckFlag = checkArray(0)
+					If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag) Then
+						MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not exist!" & Environment.NewLine & Environment.NewLine &
+						 Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+					Else
+						ssh.MultiTauntPictureHold = False
+						Dim RandomFile As New List(Of String)
+						RandomFile.Clear()
+						For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
+							RandomFile.Add(foundFile)
+						Next
+						If RandomFile.Count < 1 Then
+							MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine &
+							  Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+						Else
+							GotoClear()
+							ssh.FileText = RandomFile(ssh.randomizer.Next(0, RandomFile.Count))
+							ssh.StrokeTauntVal = -1
+						End If
+					End If
+				Else
+					If CheckFlag.Contains(",") Then
+
+						CheckFlag = FixCommas(CheckFlag)
+
+						Dim CallSplit As String() = CheckFlag.Split(",")
+						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
+						ssh.FileGoto = CallSplit(1)
+						ssh.SkipGotoLine = True
+						GetGoto()
+
+					Else
+
+						ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
+						ssh.StrokeTauntVal = -1
+
+					End If
+				End If
+				ssh.ScriptTick = 2
+				ScriptTimer.Start()
+				ssh.ShowModule = True
+				ssh.isLink = False
+				StringClean = StringClean.Replace("@CallReturn(" & CallReplace & ")", "")
+
+			End If
+
+			If StringClean.Contains("@Call(") Then
+
+				Dim CheckFlag As String = GetParentheses(StringClean, "@Call(")
+				If (CheckFlag.StartsWith("/") Or CheckFlag.StartsWith("\")) And Not (CheckFlag.StartsWith("//") Or CheckFlag.StartsWith("\\")) Then CheckFlag = CheckFlag.Remove(0, 1)
+				CheckFlag = CheckFlag.Replace("/", "\")
+
+				Dim CallReplace As String = CheckFlag
+
+				ssh.MultiTauntPictureHold = False
+
+				If CheckFlag.Contains(",") Then
+
+					CheckFlag = FixCommas(CheckFlag)
+
+					Dim CallSplit As String() = CheckFlag.Split(",")
+					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
+					ssh.FileGoto = CallSplit(1)
+					ssh.SkipGotoLine = True
+					GetGoto()
+
+				Else
+
+					GotoClear()
+					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
+					ssh.StrokeTauntVal = -1
+
+				End If
+				ssh.ShowModule = True
+				ssh.isLink = False
+				ssh.ScriptTick = 2
+				ScriptTimer.Start()
+				StringClean = StringClean.Replace("@Call(" & CallReplace & ")", "")
+			End If
+
+
+			If StringClean.Contains("@CallRandom(") Then
+
+				Dim CheckFlag As String = GetParentheses(StringClean, "@CallRandom(")
+				If (CheckFlag.StartsWith("/") Or CheckFlag.StartsWith("\")) And Not (CheckFlag.StartsWith("//") Or CheckFlag.StartsWith("\\")) Then CheckFlag = CheckFlag.Remove(0, 1)
+				CheckFlag = CheckFlag.Replace("/", "\")
+
+				Dim CallReplace As String = CheckFlag
+
 				If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag) Then
 					MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not exist!" & Environment.NewLine & Environment.NewLine &
 					 Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
@@ -12195,713 +12287,629 @@ VTSkip:
 						ssh.StrokeTauntVal = -1
 					End If
 				End If
-			Else
-				If CheckFlag.Contains(",") Then
+				ssh.ShowModule = True
+				ssh.isLink = False
+				ssh.ScriptTick = 2
+				ScriptTimer.Start()
+				StringClean = StringClean.Replace("@CallRandom(" & CallReplace & ")", "")
+			End If
 
-					CheckFlag = FixCommas(CheckFlag)
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+			'			@RandomLink and @RandomModule provided by dariobrun. I want to run different usage scenarios to better understand how to describe them to the users. They'll be in the code
+			'           as of 54.7.0, but probably won't be included in the Milovana patch notes until at least 54.8 - 1885
+			'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
-					Dim CallSplit As String() = CheckFlag.Split(",")
-					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
-					ssh.FileGoto = CallSplit(1)
+			If StringClean.Contains("@RandomLink") Then
+				RunLinkScript()
+				StringClean = StringClean.Replace("@RandomLink", "")
+			End If
+
+			If StringClean.Contains("@RandomModule") Then
+				If ssh.SubEdging Or ssh.SubHoldingEdge Then
+					RunModuleScript(True)
+				Else
+					RunModuleScript(False)
+				End If
+				StringClean = StringClean.Replace("@RandomModule", "")
+			End If
+
+			If StringClean.Contains("@RapidCodeOn") Then
+				ssh.RapidCode = True
+				StringClean = StringClean.Replace("@RapidCodeOn", "")
+			End If
+
+			If StringClean.Contains("@RapidCodeOff") Then
+				ssh.RapidCode = False
+				StringClean = StringClean.Replace("@RapidCodeOff", "")
+			End If
+
+			If StringClean.Contains("@InterruptsOff") Then
+				ssh.DoNotDisturb = True
+				StringClean = StringClean.Replace("@InterruptsOff", "")
+			End If
+
+			If StringClean.Contains("@InterruptsOn") Then
+				ssh.DoNotDisturb = False
+				StringClean = StringClean.Replace("@InterruptsOn", "")
+			End If
+
+
+			If StringClean.Contains("@NoTypo") Then
+				ssh.TypoSwitch = 0
+				StringClean = StringClean.Replace("@NoTypo", "")
+			End If
+
+			If StringClean.Contains("@ForceTypo") Then
+				ssh.TypoSwitch = 2
+				StringClean = StringClean.Replace("@ForceTypo", "")
+			End If
+
+			If StringClean.Contains("@TyposOff") Then
+				ssh.TyposDisabled = True
+				StringClean = StringClean.Replace("@TyposOff", "")
+			End If
+
+			If StringClean.Contains("@TyposOn") Then
+				ssh.TyposDisabled = False
+				StringClean = StringClean.Replace("@TyposOn", "")
+			End If
+
+			If StringClean.Contains("@GoodMood(") Then
+
+				Dim MoodFlag As String = GetParentheses(StringClean, "@GoodMood(")
+
+				If ssh.DommeMood > FrmSettings.NBDomMoodMax.Value Then
+					ssh.FileGoto = MoodFlag
 					ssh.SkipGotoLine = True
 					GetGoto()
-
-				Else
-
-					ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
-					ssh.StrokeTauntVal = -1
-
 				End If
+
+				StringClean = StringClean.Replace("@GoodMood(" & MoodFlag & ")", "")
 			End If
-			ssh.ScriptTick = 2
-			ScriptTimer.Start()
-			ssh.ShowModule = True
-			ssh.isLink = False
-			StringClean = StringClean.Replace("@CallReturn(" & CallReplace & ")", "")
 
-		End If
+			If StringClean.Contains("@BadMood(") Then
 
-		If StringClean.Contains("@Call(") Then
+				Dim MoodFlag As String = GetParentheses(StringClean, "@BadMood(")
 
-			Dim CheckFlag As String = GetParentheses(StringClean, "@Call(")
-			If (CheckFlag.StartsWith("/") Or CheckFlag.StartsWith("\")) And Not (CheckFlag.StartsWith("//") Or CheckFlag.StartsWith("\\")) Then CheckFlag = CheckFlag.Remove(0, 1)
-			CheckFlag = CheckFlag.Replace("/", "\")
-
-			Dim CallReplace As String = CheckFlag
-
-			ssh.MultiTauntPictureHold = False
-
-			If CheckFlag.Contains(",") Then
-
-				CheckFlag = FixCommas(CheckFlag)
-
-				Dim CallSplit As String() = CheckFlag.Split(",")
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CallSplit(0)
-				ssh.FileGoto = CallSplit(1)
-				ssh.SkipGotoLine = True
-				GetGoto()
-
-			Else
-
-				GotoClear()
-				ssh.FileText = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag
-				ssh.StrokeTauntVal = -1
-
-			End If
-			ssh.ShowModule = True
-			ssh.isLink = False
-			ssh.ScriptTick = 2
-			ScriptTimer.Start()
-			StringClean = StringClean.Replace("@Call(" & CallReplace & ")", "")
-		End If
-
-
-		If StringClean.Contains("@CallRandom(") Then
-
-			Dim CheckFlag As String = GetParentheses(StringClean, "@CallRandom(")
-			If (CheckFlag.StartsWith("/") Or CheckFlag.StartsWith("\")) And Not (CheckFlag.StartsWith("//") Or CheckFlag.StartsWith("\\")) Then CheckFlag = CheckFlag.Remove(0, 1)
-			CheckFlag = CheckFlag.Replace("/", "\")
-
-			Dim CallReplace As String = CheckFlag
-
-			If Not Directory.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag) Then
-				MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not exist!" & Environment.NewLine & Environment.NewLine &
-				 Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-			Else
-				ssh.MultiTauntPictureHold = False
-				Dim RandomFile As New List(Of String)
-				RandomFile.Clear()
-				For Each foundFile As String In My.Computer.FileSystem.GetFiles(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag & "\", FileIO.SearchOption.SearchTopLevelOnly, "*.txt")
-					RandomFile.Add(foundFile)
-				Next
-				If RandomFile.Count < 1 Then
-					MessageBox.Show(Me, "The current script attempted to @Call from a directory that does not contain any scripts!" & Environment.NewLine & Environment.NewLine &
-					  Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\" & CheckFlag, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-				Else
-					GotoClear()
-					ssh.FileText = RandomFile(ssh.randomizer.Next(0, RandomFile.Count))
-					ssh.StrokeTauntVal = -1
+				If ssh.DommeMood < FrmSettings.NBDomMoodMin.Value Then
+					ssh.FileGoto = MoodFlag
+					ssh.SkipGotoLine = True
+					GetGoto()
 				End If
-			End If
-			ssh.ShowModule = True
-			ssh.isLink = False
-			ssh.ScriptTick = 2
-			ScriptTimer.Start()
-			StringClean = StringClean.Replace("@CallRandom(" & CallReplace & ")", "")
-		End If
 
-        '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-        '			@RandomLink and @RandomModule provided by dariobrun. I want to run different usage scenarios to better understand how to describe them to the users. They'll be in the code
-        '           as of 54.7.0, but probably won't be included in the Milovana patch notes until at least 54.8 - 1885
-        '▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
-
-        If StringClean.Contains("@RandomLink") Then
-			RunLinkScript()
-			StringClean = StringClean.Replace("@RandomLink", "")
-		End If
-
-		If StringClean.Contains("@RandomModule") Then
-			If ssh.SubEdging Or ssh.SubHoldingEdge Then
-				RunModuleScript(True)
-			Else
-				RunModuleScript(False)
-			End If
-			StringClean = StringClean.Replace("@RandomModule", "")
-		End If
-
-		If StringClean.Contains("@RapidCodeOn") Then
-			ssh.RapidCode = True
-			StringClean = StringClean.Replace("@RapidCodeOn", "")
-		End If
-
-		If StringClean.Contains("@RapidCodeOff") Then
-			ssh.RapidCode = False
-			StringClean = StringClean.Replace("@RapidCodeOff", "")
-		End If
-
-		If StringClean.Contains("@InterruptsOff") Then
-			ssh.DoNotDisturb = True
-			StringClean = StringClean.Replace("@InterruptsOff", "")
-		End If
-
-		If StringClean.Contains("@InterruptsOn") Then
-			ssh.DoNotDisturb = False
-			StringClean = StringClean.Replace("@InterruptsOn", "")
-		End If
-
-
-		If StringClean.Contains("@NoTypo") Then
-			ssh.TypoSwitch = 0
-			StringClean = StringClean.Replace("@NoTypo", "")
-		End If
-
-		If StringClean.Contains("@ForceTypo") Then
-			ssh.TypoSwitch = 2
-			StringClean = StringClean.Replace("@ForceTypo", "")
-		End If
-
-		If StringClean.Contains("@TyposOff") Then
-			ssh.TyposDisabled = True
-			StringClean = StringClean.Replace("@TyposOff", "")
-		End If
-
-		If StringClean.Contains("@TyposOn") Then
-			ssh.TyposDisabled = False
-			StringClean = StringClean.Replace("@TyposOn", "")
-		End If
-
-		If StringClean.Contains("@GoodMood(") Then
-
-			Dim MoodFlag As String = GetParentheses(StringClean, "@GoodMood(")
-
-			If ssh.DommeMood > FrmSettings.NBDomMoodMax.Value Then
-				ssh.FileGoto = MoodFlag
-				ssh.SkipGotoLine = True
-				GetGoto()
+				StringClean = StringClean.Replace("@BadMood(" & MoodFlag & ")", "")
 			End If
 
-			StringClean = StringClean.Replace("@GoodMood(" & MoodFlag & ")", "")
-		End If
+			If StringClean.Contains("@NeutralMood(") Then
 
-		If StringClean.Contains("@BadMood(") Then
+				Dim MoodFlag As String = GetParentheses(StringClean, "@NeutralMood(")
 
-			Dim MoodFlag As String = GetParentheses(StringClean, "@BadMood(")
+				If ssh.DommeMood >= FrmSettings.NBDomMoodMin.Value And ssh.DommeMood <= FrmSettings.NBDomMoodMax.Value Then
+					ssh.FileGoto = MoodFlag
+					ssh.SkipGotoLine = True
+					GetGoto()
+				End If
 
-			If ssh.DommeMood < FrmSettings.NBDomMoodMin.Value Then
-				ssh.FileGoto = MoodFlag
-				ssh.SkipGotoLine = True
-				GetGoto()
+				StringClean = StringClean.Replace("@NeutralMood(" & MoodFlag & ")", "")
 			End If
 
-			StringClean = StringClean.Replace("@BadMood(" & MoodFlag & ")", "")
-		End If
-
-		If StringClean.Contains("@NeutralMood(") Then
-
-			Dim MoodFlag As String = GetParentheses(StringClean, "@NeutralMood(")
-
-			If ssh.DommeMood >= FrmSettings.NBDomMoodMin.Value And ssh.DommeMood <= FrmSettings.NBDomMoodMax.Value Then
-				ssh.FileGoto = MoodFlag
-				ssh.SkipGotoLine = True
-				GetGoto()
+			If StringClean.Contains("@MoodUp") Then
+				ssh.DommeMood += 1
+				If ssh.DommeMood > 10 Then ssh.DommeMood = 10
+				StringClean = StringClean.Replace("@MoodUp", "")
 			End If
 
-			StringClean = StringClean.Replace("@NeutralMood(" & MoodFlag & ")", "")
-		End If
+			If StringClean.Contains("@MoodDown") Then
+				ssh.DommeMood -= 1
+				If ssh.DommeMood < 1 Then ssh.DommeMood = 1
+				StringClean = StringClean.Replace("@MoodDown", "")
+			End If
 
-		If StringClean.Contains("@MoodUp") Then
-			ssh.DommeMood += 1
-			If ssh.DommeMood > 10 Then ssh.DommeMood = 10
-			StringClean = StringClean.Replace("@MoodUp", "")
-		End If
+			If StringClean.Contains("@MoodBest") Then
+				ssh.DommeMood = 10
+				StringClean = StringClean.Replace("@MoodBest", "")
+			End If
 
-		If StringClean.Contains("@MoodDown") Then
-			ssh.DommeMood -= 1
-			If ssh.DommeMood < 1 Then ssh.DommeMood = 1
-			StringClean = StringClean.Replace("@MoodDown", "")
-		End If
+			If StringClean.Contains("@MoodWorst") Then
+				ssh.DommeMood = 1
+				StringClean = StringClean.Replace("@MoodWorst", "")
+			End If
 
-		If StringClean.Contains("@MoodBest") Then
-			ssh.DommeMood = 10
-			StringClean = StringClean.Replace("@MoodBest", "")
-		End If
+			If StringClean.Contains("@Timeout(") Then
 
-		If StringClean.Contains("@MoodWorst") Then
-			ssh.DommeMood = 1
-			StringClean = StringClean.Replace("@MoodWorst", "")
-		End If
-
-		If StringClean.Contains("@Timeout(") Then
-
-			Dim TimeFlag As String = GetParentheses(StringClean, "@Timeout(")
+			Dim TimeFlag As String = GetParentheses(StringClean, "@Timeout(", StringClean.Split(")").Count - 1)
+			'if there is a leftover ) (might happen in very complex followUp) we remove it
+			If TimeFlag.EndsWith(")") Then TimeFlag = TimeFlag.Remove(TimeFlag.Length - 1, 1)
 			Dim OriginalFlag As String = TimeFlag
+			TimeFlag = StripCommands(TimeFlag)
+
 
 			TimeFlag = FixCommas(TimeFlag)
 
-			Dim TimeArray As String() = TimeFlag.Split(",")
+				Dim TimeArray As String() = TimeFlag.Split(",")
 
-			ssh.FileGoto = TimeArray(1)
-			ssh.TimeoutTick = Val(TimeArray(0))
-			TimeoutTimer.Start()
+				ssh.FileGoto = TimeArray(1)
+				ssh.TimeoutTick = Val(TimeArray(0))
+				TimeoutTimer.Start()
 
-			StringClean = StringClean.Replace("@Timeout(" & OriginalFlag & ")", "")
-		End If
+				StringClean = StringClean.Replace("@Timeout(" & OriginalFlag & ")", "")
+			End If
 
-		If StringClean.Contains("@BallTorture+1") Then
-			ssh.CBTBallsCount += 1
-			StringClean = StringClean.Replace("@BallTorture+1", "")
-		End If
+			If StringClean.Contains("@BallTorture+1") Then
+				ssh.CBTBallsCount += 1
+				StringClean = StringClean.Replace("@BallTorture+1", "")
+			End If
 
-		If StringClean.Contains("@CockTorture+1") Then
-			ssh.CBTCockCount += 1
-			StringClean = StringClean.Replace("@CockTorture+1", "")
-		End If
-
-
-		If StringClean.Contains("@EndTaunts") Then
-			ssh.StrokeTick = 0
-			StringClean = StringClean.Replace("@EndTaunts", "")
-		End If
-
-
-		If StringClean.Contains("@ResponseYes(") Then
-			ssh.ResponseYes = GetParentheses(StringClean, "@ResponseYes(")
-			StringClean = StringClean.Replace("@ResponseYes(" & GetParentheses(StringClean, "@ResponseYes(") & ")", "")
-		End If
-
-		If StringClean.Contains("@ResponseNo(") Then
-			ssh.ResponseNo = GetParentheses(StringClean, "@ResponseNo(")
-			StringClean = StringClean.Replace("@ResponseNo(" & GetParentheses(StringClean, "@ResponseNo(") & ")", "")
-		End If
-
-
-		If StringClean.Contains("@SetModule(") Then
-			Dim TempMod As String = GetParentheses(StringClean, "@SetModule(")
-
-			If TempMod.Contains(",") Then
-				TempMod = FixCommas(TempMod)
-				Dim TempArray As String() = TempMod.Split(",")
-				TempMod = TempArray(0)
-				ssh.SetModuleGoto = TempArray(1)
-
+			If StringClean.Contains("@CockTorture+1") Then
+				ssh.CBTCockCount += 1
+				StringClean = StringClean.Replace("@CockTorture+1", "")
 			End If
 
 
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Modules\" & TempMod & ".txt") Then
-				ssh.SetModule = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Modules\" & TempMod & ".txt"
-			End If
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\" & TempMod & ".txt") Then
-				ssh.SetModule = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\" & TempMod & ".txt"
+			If StringClean.Contains("@EndTaunts") Then
+				ssh.StrokeTick = 0
+				StringClean = StringClean.Replace("@EndTaunts", "")
 			End If
 
-			If ssh.SetModule = "" Then ssh.SetModuleGoto = ""
 
-			StringClean = StringClean.Replace("@SetModule(" & GetParentheses(StringClean, "@SetModule(") & ")", "")
-		End If
-
-		If StringClean.Contains("@SetLink(") Then
-			Dim TempMod As String = GetParentheses(StringClean, "@SetLink(")
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Link\" & TempMod & ".txt") Then
-				ssh.SetLink = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Link\" & TempMod & ".txt"
+			If StringClean.Contains("@ResponseYes(") Then
+				ssh.ResponseYes = GetParentheses(StringClean, "@ResponseYes(")
+				StringClean = StringClean.Replace("@ResponseYes(" & GetParentheses(StringClean, "@ResponseYes(") & ")", "")
 			End If
-			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Link\" & TempMod & ".txt") Then
-				ssh.SetLink = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Link\" & TempMod & ".txt"
+
+			If StringClean.Contains("@ResponseNo(") Then
+				ssh.ResponseNo = GetParentheses(StringClean, "@ResponseNo(")
+				StringClean = StringClean.Replace("@ResponseNo(" & GetParentheses(StringClean, "@ResponseNo(") & ")", "")
 			End If
-			StringClean = StringClean.Replace("@SetLink(" & GetParentheses(StringClean, "@SetLink(") & ")", "")
-		End If
 
 
-        'If StringClean.Contains("@RandomText(") Then
-        'Dim TempText As String = GetParentheses(StringClean, "@RandomText(")
-        'TempText = FixCommas(TempText)
-        'Dim TextArray As String() = TempText.Split(",")
-        'TempText = TextArray(randomizer.Next(0, TextArray.Count))
-        'StringClean = StringClean.Replace("@RandomText(" & GetParentheses(StringClean, "@RandomText(") & ")", TempText)
-        'End If
+			If StringClean.Contains("@SetModule(") Then
+				Dim TempMod As String = GetParentheses(StringClean, "@SetModule(")
 
-        If StringClean.Contains("@Worship(") Then
-			Dim WorshipTemp As String = GetParentheses(StringClean, "@Worship(")
-			Debug.Print("Worship Paren = " & WorshipTemp)
-			If UCase(WorshipTemp) = "ASS" Then ssh.WorshipTarget = "Ass"
-			If UCase(WorshipTemp) = "BOOBS" Then ssh.WorshipTarget = "Boobs"
-			If UCase(WorshipTemp) = "PUSSY" Then ssh.WorshipTarget = "Pussy"
-			ssh.WorshipMode = True
-			StringClean = StringClean.Replace("@Worship(" & GetParentheses(StringClean, "@Worship(") & ")", "")
-		End If
+				If TempMod.Contains(",") Then
+					TempMod = FixCommas(TempMod)
+					Dim TempArray As String() = TempMod.Split(",")
+					TempMod = TempArray(0)
+					ssh.SetModuleGoto = TempArray(1)
 
-		If StringClean.Contains("@WorshipOn") Then
-			ssh.WorshipMode = True
-			StringClean = StringClean.Replace("@WorshipOn", "")
-		End If
-
-		If StringClean.Contains("@WorshipOff") Then
-			ssh.WorshipMode = False
-			ssh.WorshipTarget = ""
-			StringClean = StringClean.Replace("@WorshipOff", "")
-		End If
-
-        ' If StringClean.Contains("@AssWorship") Then
-        'WorshipTarget = "Ass"
-        'StringClean = StringClean.Replace("@AssWorship", "")
-        'End If
-
-        'If StringClean.Contains("@BoobWorship") Then
-        'WorshipTarget = "Boobs"
-        'StringClean = StringClean.Replace("@BoobWorship", "")
-        'End If
-
-        'If StringClean.Contains("@PussyWorship") Then
-        'WorshipTarget = "Pussy"
-        'StringClean = StringClean.Replace("@PussyWorship", "")
-        'End If
-
-        If StringClean.Contains("@ClearWorship") Then
-			ssh.WorshipTarget = ""
-			StringClean = StringClean.Replace("@ClearWorship", "")
-		End If
-
-
-		If StringClean.Contains("@CheckFile(") Then
-
-			Dim FileFlag As String = GetParentheses(StringClean, "@CheckFile(")
-			FileFlag = FixCommas(FileFlag)
-
-			Dim FileArray As String() = FileFlag.Split(",")
-
-			If FileArray.Count = 2 Or FileArray.Count = 3 Then
-
-				If File.Exists(FileArray(0)) Then
-					ssh.SkipGotoLine = True
-					ssh.FileGoto = FileArray(1)
-					GetGoto()
 				End If
 
-				If Not File.Exists(FileArray(0)) And FileArray.Count = 3 Then
-					ssh.SkipGotoLine = True
-					ssh.FileGoto = FileArray(2)
-					GetGoto()
+
+				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Modules\" & TempMod & ".txt") Then
+					ssh.SetModule = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Modules\" & TempMod & ".txt"
+				End If
+				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\" & TempMod & ".txt") Then
+					ssh.SetModule = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Modules\" & TempMod & ".txt"
 				End If
 
+				If ssh.SetModule = "" Then ssh.SetModuleGoto = ""
+
+				StringClean = StringClean.Replace("@SetModule(" & GetParentheses(StringClean, "@SetModule(") & ")", "")
 			End If
 
-			StringClean = StringClean.Replace("@CheckFile(" & GetParentheses(StringClean, "@CheckFile(") & ")", "")
-		End If
-
-
-		If StringClean.Contains("@YesMode(") Then
-
-			Dim YesFlag As String = GetParentheses(StringClean, "@YesMode(")
-			YesFlag = FixCommas(YesFlag)
-			Dim YesArray As String() = YesFlag.Split(",")
-
-			If UCase(YesArray(0)).Contains("GOTO") Then
-				ssh.yesMode.GotoMode = True
-				ssh.yesMode.GotoLine = YesArray(1)
-			End If
-
-			If UCase(YesArray(0)).Contains("VIDEO") Then
-				ssh.yesMode.VideoMode = True
-				ssh.yesMode.GotoLine = YesArray(1)
-			End If
-
-			If UCase(YesArray(0)).Contains("NORMAL") Then
-				ssh.yesMode.Clear()
-			End If
-
-			StringClean = StringClean.Replace("@YesMode(" & GetParentheses(StringClean, "@YesMode(") & ")", "")
-		End If
-
-		If StringClean.Contains("@NoMode(") Then
-
-			Dim NoFlag As String = GetParentheses(StringClean, "@NoMode(")
-			NoFlag = FixCommas(NoFlag)
-			Dim NoArray As String() = NoFlag.Split(",")
-
-			If UCase(NoArray(0)).Contains("GOTO") Then
-				ssh.noMode.GotoMode = True
-				ssh.noMode.GotoLine = NoArray(1)
-			End If
-
-			If UCase(NoArray(0)).Contains("VIDEO") Then
-				ssh.noMode.VideoMode = True
-				ssh.noMode.GotoLine = NoArray(1)
-			End If
-
-			If UCase(NoArray(0)).Contains("NORMAL") Then
-				ssh.noMode.Clear()
-			End If
-
-			StringClean = StringClean.Replace("@NoMode(" & GetParentheses(StringClean, "@NoMode(") & ")", "")
-		End If
-
-		If StringClean.Contains("@CameMode(") Then
-
-			Dim CameFlag As String = GetParentheses(StringClean, "@CameMode(")
-			CameFlag = FixCommas(CameFlag)
-			Dim CameArray As String() = CameFlag.Split(",")
-
-			If UCase(CameArray(0)).Contains("GOTO") Then
-				ssh.cameMode.GotoMode = True
-				ssh.cameMode.GotoLine = CameArray(1)
-			End If
-
-			If UCase(CameArray(0)).Contains("MESSAGE") Then
-				ssh.cameMode.MessageMode = True
-				ssh.cameMode.MessageText = CameArray(1)
-			End If
-
-			If UCase(CameArray(0)).Contains("VIDEO") Then
-				ssh.cameMode.VideoMode = True
-				ssh.cameMode.GotoLine = CameArray(1)
-			End If
-
-			If UCase(CameArray(0)).Contains("NORMAL") Then
-				ssh.cameMode.Clear()
-			End If
-
-			StringClean = StringClean.Replace("@CameMode(" & GetParentheses(StringClean, "@CameMode(") & ")", "")
-		End If
-
-		If StringClean.Contains("@RuinedMode(") Then
-
-			Dim RuinedFlag As String = GetParentheses(StringClean, "@RuinedMode(")
-			RuinedFlag = FixCommas(RuinedFlag)
-			Dim RuinedArray As String() = RuinedFlag.Split(",")
-
-			If UCase(RuinedArray(0)).Contains("GOTO") Then
-				ssh.ruinMode.GotoMode = True
-				ssh.ruinMode.GotoLine = RuinedArray(1)
-			End If
-
-			If UCase(RuinedArray(0)).Contains("MESSAGE") Then
-				ssh.ruinMode.MessageMode = True
-				ssh.ruinMode.MessageText = RuinedArray(1)
-			End If
-
-			If UCase(RuinedArray(0)).Contains("VIDEO") Then
-				ssh.ruinMode.VideoMode = True
-				ssh.ruinMode.GotoLine = RuinedArray(1)
-			End If
-
-			If UCase(RuinedArray(0)).Contains("NORMAL") Then
-				ssh.ruinMode.Clear()
-			End If
-
-			StringClean = StringClean.Replace("@RuinedMode(" & GetParentheses(StringClean, "@RuinedMode(") & ")", "")
-		End If
-
-		If StringClean.Contains("@CustomMode(") Then
-			updateMode(StringClean, ssh.Modes)
-			StringClean = StringClean.Replace("@CustomMode(" & GetParentheses(StringClean, "@CustomMode(") & ")", "")
-		End If
-
-
-		If StringClean.Contains("@ClearModes") Then
-			ClearModes()
-			StringClean = StringClean.Replace("@ClearModes", "")
-		End If
-
-
-		If StringClean.Contains("@LockVideo") Then
-			ssh.LockVideo = True
-			StringClean = StringClean.Replace("@LockVideo", "")
-		End If
-
-		If StringClean.Contains("@UnlockVideo") Then
-			ssh.LockVideo = False
-			mainPictureBox.Visible = True
-			DomWMP.Visible = False
-			StringClean = StringClean.Replace("@UnlockVideo", "")
-		End If
-
-		If StringClean.Contains("@ClearChat") Then
-			ClearChat()
-			StringClean = StringClean.Replace("@ClearChat", "")
-		End If
-
-		If StringClean.Contains("@ChatImage[") Then
-			Dim ImageDir As String = Application.StartupPath & "\Images\" & GetParentheses(StringClean, "@ChatImage[")
-			ImageDir = ImageDir.Replace("/", "\")
-			ImageDir = ImageDir.Replace("\\", "\")
-
-
-			If File.Exists(ImageDir.Split(",")(0)) Then
-
-				If GetCharCount(ImageDir, ",") = 2 Then
-
-					Dim PicAttributes As String() = GetArrayString(ImageDir)
-
-					StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "<img id=""ChatPic"" src=""" & PicAttributes(0) & """ width=" & PicAttributes(1) &
-					 " height=" & PicAttributes(2) & """/>")
-
-				Else
-					StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "<img id=""ChatPic"" src=""" & ImageDir & """/>")
+			If StringClean.Contains("@SetLink(") Then
+				Dim TempMod As String = GetParentheses(StringClean, "@SetLink(")
+				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Link\" & TempMod & ".txt") Then
+					ssh.SetLink = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Custom\Link\" & TempMod & ".txt"
 				End If
-
-			Else
-				StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "")
+				If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Link\" & TempMod & ".txt") Then
+					ssh.SetLink = Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Link\" & TempMod & ".txt"
+				End If
+				StringClean = StringClean.Replace("@SetLink(" & GetParentheses(StringClean, "@SetLink(") & ")", "")
 			End If
-		End If
 
-		If StringClean.Contains("@CountVar[") Then
 
-			Dim CountFlag As String = GetParentheses(StringClean, "@CountVar[")
+			'If StringClean.Contains("@RandomText(") Then
+			'Dim TempText As String = GetParentheses(StringClean, "@RandomText(")
+			'TempText = FixCommas(TempText)
+			'Dim TextArray As String() = TempText.Split(",")
+			'TempText = TextArray(randomizer.Next(0, TextArray.Count))
+			'StringClean = StringClean.Replace("@RandomText(" & GetParentheses(StringClean, "@RandomText(") & ")", TempText)
+			'End If
 
-			If CountFlag.Contains(",") Then
+			If StringClean.Contains("@Worship(") Then
+				Dim WorshipTemp As String = GetParentheses(StringClean, "@Worship(")
+				Debug.Print("Worship Paren = " & WorshipTemp)
+				If UCase(WorshipTemp) = "ASS" Then ssh.WorshipTarget = "Ass"
+				If UCase(WorshipTemp) = "BOOBS" Then ssh.WorshipTarget = "Boobs"
+				If UCase(WorshipTemp) = "PUSSY" Then ssh.WorshipTarget = "Pussy"
+				ssh.WorshipMode = True
+				StringClean = StringClean.Replace("@Worship(" & GetParentheses(StringClean, "@Worship(") & ")", "")
+			End If
 
-				CountFlag = FixCommas(CountFlag)
-				Dim CountArray() As String = CountFlag.Split(",")
+			If StringClean.Contains("@WorshipOn") Then
+				ssh.WorshipMode = True
+				StringClean = StringClean.Replace("@WorshipOn", "")
+			End If
 
-				If CountArray(1).ToLower.Contains("stop") Then
-					If ssh.CountDownList.Count > 0 Then
-						For i As Integer = ssh.CountDownList.Count - 1 To 0 Step -1
-							If ssh.CountDownList(i).Contains(CountArray(0)) Then ssh.CountDownList.RemoveAt(i)
-						Next
-					End If
-					If ssh.CountUpList.Count > 0 Then
-						For i As Integer = ssh.CountUpList.Count - 1 To 0 Step -1
-							If ssh.CountUpList(i).Contains(CountArray(0)) Then ssh.CountUpList.RemoveAt(i)
-						Next
+			If StringClean.Contains("@WorshipOff") Then
+				ssh.WorshipMode = False
+				ssh.WorshipTarget = ""
+				StringClean = StringClean.Replace("@WorshipOff", "")
+			End If
+
+			' If StringClean.Contains("@AssWorship") Then
+			'WorshipTarget = "Ass"
+			'StringClean = StringClean.Replace("@AssWorship", "")
+			'End If
+
+			'If StringClean.Contains("@BoobWorship") Then
+			'WorshipTarget = "Boobs"
+			'StringClean = StringClean.Replace("@BoobWorship", "")
+			'End If
+
+			'If StringClean.Contains("@PussyWorship") Then
+			'WorshipTarget = "Pussy"
+			'StringClean = StringClean.Replace("@PussyWorship", "")
+			'End If
+
+			If StringClean.Contains("@ClearWorship") Then
+				ssh.WorshipTarget = ""
+				StringClean = StringClean.Replace("@ClearWorship", "")
+			End If
+
+
+			If StringClean.Contains("@CheckFile(") Then
+
+				Dim FileFlag As String = GetParentheses(StringClean, "@CheckFile(")
+				FileFlag = FixCommas(FileFlag)
+
+				Dim FileArray As String() = FileFlag.Split(",")
+
+				If FileArray.Count = 2 Or FileArray.Count = 3 Then
+
+					If File.Exists(FileArray(0)) Then
+						ssh.SkipGotoLine = True
+						ssh.FileGoto = FileArray(1)
+						GetGoto()
 					End If
 
-				Else
+					If Not File.Exists(FileArray(0)) And FileArray.Count = 3 Then
+						ssh.SkipGotoLine = True
+						ssh.FileGoto = FileArray(2)
+						GetGoto()
+					End If
 
-					If CountArray(1).ToLower.Contains("down") Then
-						ssh.CountDownList.Add(CountArray(0))
-						If ssh.CountUpList.Count > 0 Then
-							For i As Integer = ssh.CountUpList.Count - 1 To 0 Step -1
-								If ssh.CountUpList(i).Contains(CountArray(0)) Then ssh.CountUpList.RemoveAt(i)
-							Next
-						End If
+				End If
+
+				StringClean = StringClean.Replace("@CheckFile(" & GetParentheses(StringClean, "@CheckFile(") & ")", "")
+			End If
+
+
+			If StringClean.Contains("@YesMode(") Then
+
+				Dim YesFlag As String = GetParentheses(StringClean, "@YesMode(")
+				YesFlag = FixCommas(YesFlag)
+				Dim YesArray As String() = YesFlag.Split(",")
+
+				If UCase(YesArray(0)).Contains("GOTO") Then
+					ssh.yesMode.GotoMode = True
+					ssh.yesMode.GotoLine = YesArray(1)
+				End If
+
+				If UCase(YesArray(0)).Contains("VIDEO") Then
+					ssh.yesMode.VideoMode = True
+					ssh.yesMode.GotoLine = YesArray(1)
+				End If
+
+				If UCase(YesArray(0)).Contains("NORMAL") Then
+					ssh.yesMode.Clear()
+				End If
+
+				StringClean = StringClean.Replace("@YesMode(" & GetParentheses(StringClean, "@YesMode(") & ")", "")
+			End If
+
+			If StringClean.Contains("@NoMode(") Then
+
+				Dim NoFlag As String = GetParentheses(StringClean, "@NoMode(")
+				NoFlag = FixCommas(NoFlag)
+				Dim NoArray As String() = NoFlag.Split(",")
+
+				If UCase(NoArray(0)).Contains("GOTO") Then
+					ssh.noMode.GotoMode = True
+					ssh.noMode.GotoLine = NoArray(1)
+				End If
+
+				If UCase(NoArray(0)).Contains("VIDEO") Then
+					ssh.noMode.VideoMode = True
+					ssh.noMode.GotoLine = NoArray(1)
+				End If
+
+				If UCase(NoArray(0)).Contains("NORMAL") Then
+					ssh.noMode.Clear()
+				End If
+
+				StringClean = StringClean.Replace("@NoMode(" & GetParentheses(StringClean, "@NoMode(") & ")", "")
+			End If
+
+			If StringClean.Contains("@CameMode(") Then
+
+				Dim CameFlag As String = GetParentheses(StringClean, "@CameMode(")
+				CameFlag = FixCommas(CameFlag)
+				Dim CameArray As String() = CameFlag.Split(",")
+
+				If UCase(CameArray(0)).Contains("GOTO") Then
+					ssh.cameMode.GotoMode = True
+					ssh.cameMode.GotoLine = CameArray(1)
+				End If
+
+				If UCase(CameArray(0)).Contains("MESSAGE") Then
+					ssh.cameMode.MessageMode = True
+					ssh.cameMode.MessageText = CameArray(1)
+				End If
+
+				If UCase(CameArray(0)).Contains("VIDEO") Then
+					ssh.cameMode.VideoMode = True
+					ssh.cameMode.GotoLine = CameArray(1)
+				End If
+
+				If UCase(CameArray(0)).Contains("NORMAL") Then
+					ssh.cameMode.Clear()
+				End If
+
+				StringClean = StringClean.Replace("@CameMode(" & GetParentheses(StringClean, "@CameMode(") & ")", "")
+			End If
+
+			If StringClean.Contains("@RuinedMode(") Then
+
+				Dim RuinedFlag As String = GetParentheses(StringClean, "@RuinedMode(")
+				RuinedFlag = FixCommas(RuinedFlag)
+				Dim RuinedArray As String() = RuinedFlag.Split(",")
+
+				If UCase(RuinedArray(0)).Contains("GOTO") Then
+					ssh.ruinMode.GotoMode = True
+					ssh.ruinMode.GotoLine = RuinedArray(1)
+				End If
+
+				If UCase(RuinedArray(0)).Contains("MESSAGE") Then
+					ssh.ruinMode.MessageMode = True
+					ssh.ruinMode.MessageText = RuinedArray(1)
+				End If
+
+				If UCase(RuinedArray(0)).Contains("VIDEO") Then
+					ssh.ruinMode.VideoMode = True
+					ssh.ruinMode.GotoLine = RuinedArray(1)
+				End If
+
+				If UCase(RuinedArray(0)).Contains("NORMAL") Then
+					ssh.ruinMode.Clear()
+				End If
+
+				StringClean = StringClean.Replace("@RuinedMode(" & GetParentheses(StringClean, "@RuinedMode(") & ")", "")
+			End If
+
+			If StringClean.Contains("@CustomMode(") Then
+				updateMode(StringClean, ssh.Modes)
+				StringClean = StringClean.Replace("@CustomMode(" & GetParentheses(StringClean, "@CustomMode(") & ")", "")
+			End If
+
+
+			If StringClean.Contains("@ClearModes") Then
+				ClearModes()
+				StringClean = StringClean.Replace("@ClearModes", "")
+			End If
+
+
+			If StringClean.Contains("@LockVideo") Then
+				ssh.LockVideo = True
+				StringClean = StringClean.Replace("@LockVideo", "")
+			End If
+
+			If StringClean.Contains("@UnlockVideo") Then
+				ssh.LockVideo = False
+				mainPictureBox.Visible = True
+				DomWMP.Visible = False
+				StringClean = StringClean.Replace("@UnlockVideo", "")
+			End If
+
+			If StringClean.Contains("@ClearChat") Then
+				ClearChat()
+				StringClean = StringClean.Replace("@ClearChat", "")
+			End If
+
+			If StringClean.Contains("@ChatImage[") Then
+				Dim ImageDir As String = Application.StartupPath & "\Images\" & GetParentheses(StringClean, "@ChatImage[")
+				ImageDir = ImageDir.Replace("/", "\")
+				ImageDir = ImageDir.Replace("\\", "\")
+
+
+				If File.Exists(ImageDir.Split(",")(0)) Then
+
+					If GetCharCount(ImageDir, ",") = 2 Then
+
+						Dim PicAttributes As String() = GetArrayString(ImageDir)
+
+						StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "<img id=""ChatPic"" src=""" & PicAttributes(0) & """ width=" & PicAttributes(1) &
+						 " height=" & PicAttributes(2) & """/>")
+
 					Else
-						ssh.CountUpList.Add(CountArray(0))
+						StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "<img id=""ChatPic"" src=""" & ImageDir & """/>")
+					End If
+
+				Else
+					StringClean = StringClean.Replace("@ChatImage[" & GetParentheses(StringClean, "@ChatImage[") & "]", "")
+				End If
+			End If
+
+			If StringClean.Contains("@CountVar[") Then
+
+				Dim CountFlag As String = GetParentheses(StringClean, "@CountVar[")
+
+				If CountFlag.Contains(",") Then
+
+					CountFlag = FixCommas(CountFlag)
+					Dim CountArray() As String = CountFlag.Split(",")
+
+					If CountArray(1).ToLower.Contains("stop") Then
 						If ssh.CountDownList.Count > 0 Then
 							For i As Integer = ssh.CountDownList.Count - 1 To 0 Step -1
 								If ssh.CountDownList(i).Contains(CountArray(0)) Then ssh.CountDownList.RemoveAt(i)
 							Next
 						End If
+						If ssh.CountUpList.Count > 0 Then
+							For i As Integer = ssh.CountUpList.Count - 1 To 0 Step -1
+								If ssh.CountUpList(i).Contains(CountArray(0)) Then ssh.CountUpList.RemoveAt(i)
+							Next
+						End If
+
+					Else
+
+						If CountArray(1).ToLower.Contains("down") Then
+							ssh.CountDownList.Add(CountArray(0))
+							If ssh.CountUpList.Count > 0 Then
+								For i As Integer = ssh.CountUpList.Count - 1 To 0 Step -1
+									If ssh.CountUpList(i).Contains(CountArray(0)) Then ssh.CountUpList.RemoveAt(i)
+								Next
+							End If
+						Else
+							ssh.CountUpList.Add(CountArray(0))
+							If ssh.CountDownList.Count > 0 Then
+								For i As Integer = ssh.CountDownList.Count - 1 To 0 Step -1
+									If ssh.CountDownList(i).Contains(CountArray(0)) Then ssh.CountDownList.RemoveAt(i)
+								Next
+							End If
+						End If
+
+					End If
+
+				Else
+
+					ssh.CountUpList.Add(CountFlag)
+					If ssh.CountDownList.Count > 0 Then
+						For i As Integer = ssh.CountDownList.Count - 1 To 0 Step -1
+							If ssh.CountDownList(i).Contains(CountFlag) Then ssh.CountDownList.RemoveAt(i)
+						Next
 					End If
 
 				End If
 
-			Else
-
-				ssh.CountUpList.Add(CountFlag)
-				If ssh.CountDownList.Count > 0 Then
-					For i As Integer = ssh.CountDownList.Count - 1 To 0 Step -1
-						If ssh.CountDownList(i).Contains(CountFlag) Then ssh.CountDownList.RemoveAt(i)
-					Next
-				End If
-
+				StringClean = StringClean.Replace("@CountVar[" & GetParentheses(StringClean, "@CountVar[") & "]", "")
 			End If
 
-			StringClean = StringClean.Replace("@CountVar[" & GetParentheses(StringClean, "@CountVar[") & "]", "")
-		End If
 
 
+			If StringClean.Contains("@Debug") Then
 
-		If StringClean.Contains("@Debug") Then
+				'Dim wy As Long = DateDiff(DateInterval.Day, Val(GetVariable("TB_AFKSlideshow")), Date.Now)
 
-            'Dim wy As Long = DateDiff(DateInterval.Day, Val(GetVariable("TB_AFKSlideshow")), Date.Now)
-
-            MsgBox(GetParentheses("Testing If - @If[42]>[7]Then(Go here) okay", "@If["))
-			MsgBox(GetParentheses("Testing If2 - @If[42]>[7]Then(Go here) okay", "@If[", 2))
-			MsgBox(GetParentheses("Testing If2 - @If(candle) okay", "@If("))
-			MsgBox(GetParentheses("Testing If2 - @If(candle)and(wax) okay", "@If(", 2))
-
-
-            'MsgBox(GetVariable("Sys_EndTotal") & " less than 30? " & CheckVariable("@Variable[Sys_EndTotal]<[30] blah blah blah"))
-            StringClean = StringClean.Replace("@Debug", "")
-		End If
+				MsgBox(GetParentheses("Testing If - @If[42]>[7]Then(Go here) okay", "@If["))
+				MsgBox(GetParentheses("Testing If2 - @If[42]>[7]Then(Go here) okay", "@If[", 2))
+				MsgBox(GetParentheses("Testing If2 - @If(candle) okay", "@If("))
+				MsgBox(GetParentheses("Testing If2 - @If(candle)and(wax) okay", "@If(", 2))
 
 
-		If StringClean.Contains("@GotoDommeOrgasm") Then
-
-            'Debug.Print("GotoDommeOrgasmCalled")
-
-
-            If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then ssh.FileGoto = "(Never Allows)"
-			If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then ssh.FileGoto = "(Rarely Allows)"
-			If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then ssh.FileGoto = "(Sometimes Allows)"
-			If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then ssh.FileGoto = "(Often Allows)"
-			If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then ssh.FileGoto = "(Always Allows)"
-
-            'Debug.Print(FileGoto)
-
-            ssh.SkipGotoLine = True
-			GetGoto()
-
-			StringClean = StringClean.Replace("@GotoDommeOrgasm", "")
-
-		End If
-
-		If StringClean.Contains("@GotoDommeRuin") Then
-
-			Debug.Print("GotoDommeRuinedCalled")
+				'MsgBox(GetVariable("Sys_EndTotal") & " less than 30? " & CheckVariable("@Variable[Sys_EndTotal]<[30] blah blah blah"))
+				StringClean = StringClean.Replace("@Debug", "")
+			End If
 
 
-			If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then ssh.FileGoto = "(Never Ruins)"
-			If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then ssh.FileGoto = "(Rarely Ruins)"
-			If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then ssh.FileGoto = "(Sometimes Ruins)"
-			If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then ssh.FileGoto = "(Often Ruins)"
-			If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then ssh.FileGoto = "(Always Ruins)"
+			If StringClean.Contains("@GotoDommeOrgasm") Then
 
-            'Debug.Print(FileGoto)
-
-            ssh.SkipGotoLine = True
-			GetGoto()
-
-			StringClean = StringClean.Replace("@GotoDommeRuin", "")
-
-		End If
-
-		If StringClean.Contains("@GotoDommeApathy") Then
-
-            'Debug.Print("GotoDommeApathyCalled")
+				'Debug.Print("GotoDommeOrgasmCalled")
 
 
-            If FrmSettings.NBEmpathy.Value = 1 Then ssh.FileGoto = "(ApathyLevel1)"
-			If FrmSettings.NBEmpathy.Value = 2 Then ssh.FileGoto = "(ApathyLevel2)"
-			If FrmSettings.NBEmpathy.Value = 3 Then ssh.FileGoto = "(ApathyLevel3)"
-			If FrmSettings.NBEmpathy.Value = 4 Then ssh.FileGoto = "(ApathyLevel4)"
-			If FrmSettings.NBEmpathy.Value = 5 Then ssh.FileGoto = "(ApathyLevel5)"
+				If FrmSettings.alloworgasmComboBox.Text = "Never Allows" Then ssh.FileGoto = "(Never Allows)"
+				If FrmSettings.alloworgasmComboBox.Text = "Rarely Allows" Then ssh.FileGoto = "(Rarely Allows)"
+				If FrmSettings.alloworgasmComboBox.Text = "Sometimes Allows" Then ssh.FileGoto = "(Sometimes Allows)"
+				If FrmSettings.alloworgasmComboBox.Text = "Often Allows" Then ssh.FileGoto = "(Often Allows)"
+				If FrmSettings.alloworgasmComboBox.Text = "Always Allows" Then ssh.FileGoto = "(Always Allows)"
 
-            'Debug.Print(FileGoto)
+				'Debug.Print(FileGoto)
 
-            ssh.SkipGotoLine = True
-			GetGoto()
-
-			StringClean = StringClean.Replace("@GotoDommeApathy", "")
-
-		End If
-
-		If StringClean.Contains("@GotoDommeLevel") Then
-
-			If FrmSettings.domlevelNumBox.Value = 1 Then ssh.FileGoto = "(DommeLevel1)"
-			If FrmSettings.domlevelNumBox.Value = 2 Then ssh.FileGoto = "(DommeLevel2)"
-			If FrmSettings.domlevelNumBox.Value = 3 Then ssh.FileGoto = "(DommeLevel3)"
-			If FrmSettings.domlevelNumBox.Value = 4 Then ssh.FileGoto = "(DommeLevel4)"
-			If FrmSettings.domlevelNumBox.Value = 5 Then ssh.FileGoto = "(DommeLevel5)"
-
-            'Debug.Print(FileGoto)
-
-            ssh.SkipGotoLine = True
-			GetGoto()
-
-			StringClean = StringClean.Replace("@GotoDommeLevel", "")
-
-		End If
-
-
-		If StringClean.Contains("@CheckBnB") Then
-			If Not GetImageData(ImageGenre.Boobs).IsAvailable Or Not GetImageData(ImageGenre.Butt).IsAvailable Then
-				ssh.FileGoto = "(No BnB)"
 				ssh.SkipGotoLine = True
 				GetGoto()
+
+				StringClean = StringClean.Replace("@GotoDommeOrgasm", "")
+
 			End If
-			StringClean = StringClean.Replace("@CheckBnB", "")
-		End If
+
+			If StringClean.Contains("@GotoDommeRuin") Then
+
+				Debug.Print("GotoDommeRuinedCalled")
 
 
+				If FrmSettings.ruinorgasmComboBox.Text = "Never Ruins" Then ssh.FileGoto = "(Never Ruins)"
+				If FrmSettings.ruinorgasmComboBox.Text = "Rarely Ruins" Then ssh.FileGoto = "(Rarely Ruins)"
+				If FrmSettings.ruinorgasmComboBox.Text = "Sometimes Ruins" Then ssh.FileGoto = "(Sometimes Ruins)"
+				If FrmSettings.ruinorgasmComboBox.Text = "Often Ruins" Then ssh.FileGoto = "(Often Ruins)"
+				If FrmSettings.ruinorgasmComboBox.Text = "Always Ruins" Then ssh.FileGoto = "(Always Ruins)"
 
+				'Debug.Print(FileGoto)
 
+				ssh.SkipGotoLine = True
+				GetGoto()
 
+				StringClean = StringClean.Replace("@GotoDommeRuin", "")
 
-
-		If StringClean.Contains("@CheckStrokingState") Then
-            'If SubStroking = True Then
-            If ssh.SubStroking = True Or ssh.SubEdging = True Or ssh.SubHoldingEdge = True Then
-				ssh.FileGoto = "(Sub Stroking)"
-			Else
-				ssh.FileGoto = "(Sub Not Stroking)"
 			End If
-			ssh.SkipGotoLine = True
-			GetGoto()
-			StringClean = StringClean.Replace("@CheckStrokingState", "")
-		End If
 
-		Debug.Print("Command Clean Complete")
+			If StringClean.Contains("@GotoDommeApathy") Then
 
+				'Debug.Print("GotoDommeApathyCalled")
+
+
+				If FrmSettings.NBEmpathy.Value = 1 Then ssh.FileGoto = "(ApathyLevel1)"
+				If FrmSettings.NBEmpathy.Value = 2 Then ssh.FileGoto = "(ApathyLevel2)"
+				If FrmSettings.NBEmpathy.Value = 3 Then ssh.FileGoto = "(ApathyLevel3)"
+				If FrmSettings.NBEmpathy.Value = 4 Then ssh.FileGoto = "(ApathyLevel4)"
+				If FrmSettings.NBEmpathy.Value = 5 Then ssh.FileGoto = "(ApathyLevel5)"
+
+				'Debug.Print(FileGoto)
+
+				ssh.SkipGotoLine = True
+				GetGoto()
+
+				StringClean = StringClean.Replace("@GotoDommeApathy", "")
+
+			End If
+
+			If StringClean.Contains("@GotoDommeLevel") Then
+
+				If FrmSettings.domlevelNumBox.Value = 1 Then ssh.FileGoto = "(DommeLevel1)"
+				If FrmSettings.domlevelNumBox.Value = 2 Then ssh.FileGoto = "(DommeLevel2)"
+				If FrmSettings.domlevelNumBox.Value = 3 Then ssh.FileGoto = "(DommeLevel3)"
+				If FrmSettings.domlevelNumBox.Value = 4 Then ssh.FileGoto = "(DommeLevel4)"
+				If FrmSettings.domlevelNumBox.Value = 5 Then ssh.FileGoto = "(DommeLevel5)"
+
+				'Debug.Print(FileGoto)
+
+				ssh.SkipGotoLine = True
+				GetGoto()
+
+				StringClean = StringClean.Replace("@GotoDommeLevel", "")
+
+			End If
+
+
+			If StringClean.Contains("@CheckBnB") Then
+				If Not GetImageData(ImageGenre.Boobs).IsAvailable Or Not GetImageData(ImageGenre.Butt).IsAvailable Then
+					ssh.FileGoto = "(No BnB)"
+					ssh.SkipGotoLine = True
+					GetGoto()
+				End If
+				StringClean = StringClean.Replace("@CheckBnB", "")
+			End If
+
+
+
+
+
+
+
+			If StringClean.Contains("@CheckStrokingState") Then
+				'If SubStroking = True Then
+				If ssh.SubStroking = True Or ssh.SubEdging = True Or ssh.SubHoldingEdge = True Then
+					ssh.FileGoto = "(Sub Stroking)"
+				Else
+					ssh.FileGoto = "(Sub Not Stroking)"
+				End If
+				ssh.SkipGotoLine = True
+				GetGoto()
+				StringClean = StringClean.Replace("@CheckStrokingState", "")
+			End If
+
+			Debug.Print("Command Clean Complete")
+		'Next
 		Return StringClean
 
 	End Function
@@ -20769,7 +20777,9 @@ playLoop:
 		'remove eventual @ContactX present in a @FollowUp() inside the line
 		If stringToCheck.Contains("@FollowUp") Then
 			Dim remove As String
-			remove = GetParentheses(stringToCheck, "@FollowUp(")
+			remove = GetParentheses(stringToCheck, "@FollowUp(", stringToCheck.Split(")").Count - 1)
+			'if there is a leftover ) (might happen in very complex followUp) we remove it
+			If remove.EndsWith(")") Then remove = remove.Remove(remove.Length - 1, 1)
 			stringToCheck = stringToCheck.Replace("@FollowUp(" & remove & ")", "")
 		End If
 
@@ -21135,5 +21145,11 @@ ShowedBlogImage:
 		LBLWritingTaskText.Text = StripFormat(LBLWritingTaskText.Text)
 		LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace("  ", " ")
 	End Sub
+
+	Private Function goingTo(commandToCheck As String) As String
+		If commandToCheck.Contains("followUp(") Then Return "followUp"
+		If commandToCheck.Contains("followUp") Then Return "followUpXX"
+		Return ""
+	End Function
 End Class
 
