@@ -8313,81 +8313,82 @@ followUpXX:
 		' More than one @If[] Command can be used per line. Tease AI will move to the line specified by whichever true statement happened last in the line.
 
 		If StringClean.Contains("@If[") Then
+			If StringClean.Contains("]AND[") Then StringClean = StringClean.Replace("]AND[", "]And[")
+			If StringClean.Contains("]OR[") Then StringClean = StringClean.Replace("]OR[", "]Or[")
+			Do
 
-				Do
+				Dim SCIfVar As String() = Split(StringClean)
+				Dim SCGotVar As String = "Null"
 
-					Dim SCIfVar As String() = Split(StringClean)
-					Dim SCGotVar As String = "Null"
-
-					For i As Integer = 0 To SCIfVar.Length - 1
-						If SCIfVar(i).Contains("@If[") Then
-							Dim IFJoin As Integer = 0
-							If Not SCIfVar(i).Contains(")") Then
-								Do
-									IFJoin += 1
-									SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
-									SCIfVar(i + IFJoin) = ""
-								Loop Until SCIfVar(i).Contains(")")
-							End If
-							SCGotVar = SCIfVar(i)
-							SCIfVar(i) = ""
-							StringClean = Join(SCIfVar)
+				For i As Integer = 0 To SCIfVar.Length - 1
+					If SCIfVar(i).Contains("@If[") Then
+						Dim IFJoin As Integer = 0
+						If Not SCIfVar(i).Contains(")") Then
 							Do
-								StringClean = StringClean.Replace("  ", " ")
-							Loop Until Not StringClean.Contains("  ")
+								IFJoin += 1
+								SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
+								SCIfVar(i + IFJoin) = ""
+							Loop Until SCIfVar(i).Contains(")")
+						End If
+						SCGotVar = SCIfVar(i)
+						SCIfVar(i) = ""
+						StringClean = Join(SCIfVar)
+						Do
+							StringClean = StringClean.Replace("  ", " ")
+						Loop Until Not StringClean.Contains("  ")
+						Exit For
+					End If
+				Next
+
+				If SCGotVar.Contains("]And[") Then
+
+					Dim AndCheck As Boolean = True
+
+					For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
+						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = False Then
+							AndCheck = False
 							Exit For
 						End If
+						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]And", "")
 					Next
 
-					If SCGotVar.Contains("]And[") Then
-
-						Dim AndCheck As Boolean = True
-
-						For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
-							If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = False Then
-								AndCheck = False
-								Exit For
-							End If
-							SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]And", "")
-						Next
-
-						If AndCheck = True Then
-							ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-							ssh.SkipGotoLine = True
-							GetGoto()
-						End If
-
-					ElseIf SCGotVar.Contains("]Or[") Then
-
-						Dim OrCheck As Boolean = False
-
-						For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
-							If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
-								OrCheck = True
-								Exit For
-							End If
-							SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]Or", "")
-						Next
-
-						If OrCheck = True Then
-							ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-							ssh.SkipGotoLine = True
-							GetGoto()
-						End If
-
-					Else
-
-						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
-							ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-							ssh.SkipGotoLine = True
-							GetGoto()
-						End If
-
+					If AndCheck = True Then
+						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+						ssh.SkipGotoLine = True
+						GetGoto()
 					End If
 
-				Loop Until Not StringClean.Contains("@If")
+				ElseIf SCGotVar.Contains("]Or[") Then
 
-			End If
+					Dim OrCheck As Boolean = False
+
+					For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
+						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+							OrCheck = True
+							Exit For
+						End If
+						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]Or", "")
+					Next
+
+					If OrCheck = True Then
+						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+						ssh.SkipGotoLine = True
+						GetGoto()
+					End If
+
+				Else
+
+					If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+						ssh.SkipGotoLine = True
+						GetGoto()
+					End If
+
+				End If
+
+			Loop Until Not StringClean.Contains("@If")
+
+		End If
 
 RinseLatherRepeat:
 			'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -13063,7 +13064,8 @@ VTSkip:
 	End Function
 
 	Public Function CheckVariable(ByVal StringCLean As String) As Boolean
-
+		If StringCLean.Contains("]AND[") Then StringCLean = StringCLean.Replace("]AND[", "]And[")
+		If StringCLean.Contains("]OR[") Then StringCLean = StringCLean.Replace("]OR[", "]Or[")
 		Do
 
 			Dim SCIfVar As String() = Split(StringCLean)
