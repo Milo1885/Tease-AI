@@ -5869,8 +5869,8 @@ Namespace My
 		End Property
 
 		<Global.System.Configuration.UserScopedSettingAttribute(),
-	Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-	Global.System.Configuration.DefaultSettingValueAttribute("True")>
+		Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
+		Global.System.Configuration.DefaultSettingValueAttribute("False")>
 		Public Property AlwaysNewSlideshow() As Boolean
 			Get
 				Return CType(Me("AlwaysNewSlideshow"), Boolean)

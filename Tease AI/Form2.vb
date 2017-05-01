@@ -3167,6 +3167,7 @@ SkipDeserializing:
 			SettingsList.Add("Contact 3 AV: " & My.Settings.GlitterAV3)
 
 			SettingsList.Add("Random Friend Image Directory: " & My.Settings.RandomImageDir)
+			SettingsList.Add("Always New Contact Slideshow: " & My.Settings.AlwaysNewSlideshow)
 
 			Dim SettingsString As String = ""
 
@@ -3268,6 +3269,7 @@ SkipDeserializing:
 				Catch
 				End Try
 				My.Settings.RandomImageDir = SettingsList(29).Replace("Random Friend Image Directory: ", "")
+				My.Settings.AlwaysNewSlideshow = SettingsList(30).Replace("Always New Contact Slideshow: ", "")
 
 			Catch
 				MessageBox.Show(Me, "This Glitter settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
