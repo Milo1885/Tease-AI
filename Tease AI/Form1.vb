@@ -13529,15 +13529,18 @@ VTSkip:
 
 			Dim TaggedList As New List(Of String)
 
+			Dim addImg As Boolean
 			For i As Integer = 0 To TagList.Count - 1
-				Dim addImg As Boolean = True
 				For n As Integer = 0 To LocTagArray.Count - 1
 					If Not TagList(i).Contains(LocTagArray(n)) Then
 						addImg = False
 						Exit For
+					Else
+						addImg = True
+						Continue For
 					End If
-					If addImg Then TaggedList.Add(TagList(i))
 				Next
+				If addImg Then TaggedList.Add(TagList(i))
 			Next
 
 			If TaggedList.Count > 0 Then
@@ -13584,16 +13587,17 @@ VTSkip:
 
 			Dim TaggedList As New List(Of String)
 
-			For i As Integer = 0 To TagList.Count - 1
-				For n As Integer = 0 To LocTagArray.Count - 1
-					If TagList(i).Contains(LocTagArray(n)) Then
-						TaggedList.Add(TagList(i))
-						Exit For
-					End If
-				Next
+			For n As Integer = 0 To LocTagArray.Count - 1
+				If TaggedList.Count = 0 Then
+					For i As Integer = 0 To TagList.Count - 1
+						If TagList(i).Contains(LocTagArray(n)) Then
+							TaggedList.Add(TagList(i))
+						End If
+					Next
+				End If
 			Next
 
-			If TaggedList.Count > 0 Then
+		If TaggedList.Count > 0 Then
 
 				Dim PicArray As String() = TaggedList(ssh.randomizer.Next(0, TaggedList.Count)).Split
 				Dim PicDir As String = ""
