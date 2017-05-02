@@ -8464,6 +8464,7 @@ RinseLatherRepeat:
 				'QND-Implemented: ContactData.GetTaggedImage
 				If ssh.contactToUse IsNot Nothing Then
 					ssh.DommeImageSTR = GetLocalImage(TagFlag, True)
+					If ssh.DommeImageSTR = String.Empty Then ssh.DommeImageSTR = GetLocalImageOr(TagFlag, True)
 				Else
 					ssh.DommeImageSTR = ""
 				End If
@@ -8530,6 +8531,7 @@ RinseLatherRepeat:
 				'QND-Implemented: ContactData.GetTaggedImage
 				If ssh.contactToUse IsNot Nothing Then
 					ssh.DommeImageSTR = GetLocalImage(TagFlag, True)
+					If ssh.DommeImageSTR = String.Empty Then ssh.DommeImageSTR = GetLocalImageOr(TagFlag, True)
 				Else
 					ssh.DommeImageSTR = ""
 				End If
