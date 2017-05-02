@@ -10867,7 +10867,7 @@ OrgasmDecided:
 				ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
 				setStartName()
 				StringClean = StringClean.Replace("@EndTease", "")
-				Continue For
+				Exit For
 			End If
 
 			If commandsList(num).Contains("@FinishTease") Then
@@ -20963,10 +20963,15 @@ playLoop:
 	Public Sub setStartName()
 		Try
 			ssh.SlideshowMain = New ContactData(ContactType.Domme)
+			ssh.SlideshowMain.LoadNew(False)
 			ssh.SlideshowContact1 = New ContactData(ContactType.Contact1)
+			ssh.SlideshowContact1.LoadNew(False)
 			ssh.SlideshowContact2 = New ContactData(ContactType.Contact2)
+			ssh.SlideshowContact2.LoadNew(False)
 			ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
+			ssh.SlideshowContact3.LoadNew(False)
 			ssh.SlideshowContactRandom = New ContactData(ContactType.Random)
+			ssh.SlideshowContactRandom.LoadNew(True)
 		Catch ex As Exception
 		End Try
 		If ssh.currentlyPresentContacts.Count = 0 Then ssh.currentlyPresentContacts.Add(ssh.SlideshowMain.TypeName)
