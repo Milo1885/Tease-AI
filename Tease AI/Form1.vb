@@ -930,7 +930,6 @@ retryStart:
 			FrmSplash.LBLSplash.Text = "Loading Glitter Contact image slideshows..."
 			FrmSplash.Refresh()
 
-			setStartName()
 
 			If File.Exists(Application.StartupPath & "\Scripts\" & dompersonalitycombobox.Text & "\Apps\Glitter\Contact_Descriptions.txt") Then
 				Dim ContactList As New List(Of String)
@@ -1114,6 +1113,7 @@ retryStart:
 			'TabControl1.ColorScheme.TabBackground2 = Color.Transparent
 			'TabControl1.BackColor = Color.Transparent
 			My.Settings.Save()
+			setStartName()
 			Trace.WriteLine("Startup has been completed")
 		Catch ex As Exception
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
@@ -20971,7 +20971,7 @@ playLoop:
 			ssh.SlideshowContact3 = New ContactData(ContactType.Contact3)
 			ssh.SlideshowContact3.LoadNew(False)
 			ssh.SlideshowContactRandom = New ContactData(ContactType.Random)
-			ssh.SlideshowContactRandom.LoadNew(True)
+			ssh.SlideshowContactRandom.LoadNew(False)
 		Catch ex As Exception
 		End Try
 		If ssh.currentlyPresentContacts.Count = 0 Then ssh.currentlyPresentContacts.Add(ssh.SlideshowMain.TypeName)
