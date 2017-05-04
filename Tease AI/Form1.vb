@@ -14194,7 +14194,7 @@ VTSkip:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             Log.WriteError(String.Format("Exception occured While checking line ""{0}"".", OrgFilterString),
 					ex, "GetFilter(String, Boolean)")
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">Error " & ex.Message & "</font>", False)
+			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">Error: " & ex.Message & "</font>", False)
 			Return False
 		End Try
 	End Function
@@ -14536,7 +14536,7 @@ VTSkip:
     ''' <param name="printChat">If true the chatwindow is refreshed and reprinted.</param>
     Public Sub ChatAddSystemMessage(ByVal messageText As String, Optional ByVal printChat As Boolean = True)
 		ChatAppend("<span style=""color: steelblue; font-weight: bold; "">" & messageText & "</span>", printChat)
-		'ssh.Chat = "<body style=""word-wrapbreak-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
+		'ssh.Chat = "<body style=""word-wrap:break-word;"">" & "<font face=""" & "Cambria" & """ size=""" & "3" & """ color=""#000000"">" & ssh.Chat & "<font color=""SteelBlue""><b>" & messageText & "</b>" & "<br></font></body>"
 	End Sub
 
 	Public Sub ChatAppend(ByVal elementText As String, Optional ByVal printChat As Boolean = True)
@@ -15289,7 +15289,7 @@ NoPlaylistEndFile:
 			Catch ex As Exception
 				Log.WriteError("Tease AI did Not return a valid Edge Taunt from file " &
 					  File2Read, ex, "EdgeTauntTimer.Tick")
-				ssh.DomTask = "ERROR Tease AI did Not return a valid Edge Taunt from file:  " & File2Read
+				ssh.DomTask = "ERROR: Tease AI did Not return a valid Edge Taunt from file:  " & File2Read
 			End Try
 
 			TypingDelayGeneric()
@@ -15659,9 +15659,9 @@ NoRepeatOFiles:
 				ETLines = FilterList(ETLines)
 				ssh.DomTask = ETLines(ssh.randomizer.Next(0, ETLines.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did Not return a valid Hold the Edge Taunt from file " &
-					  File2Read, ex, "HoldEdgeTauntTimer.Tick")
-				ssh.DomTask = "ERROR Tease AI did Not return a valid Hold the Edge Taunt from file:  " & File2Read
+				Log.WriteError("Tease AI did Not return a valid Hold the Edge Taunt from file: " &
+	   File2Read, ex, "HoldEdgeTauntTimer.Tick")
+				ssh.DomTask = "ERROR: Tease AI did Not return a valid Hold the Edge Taunt from file:  " & File2Read
 			End Try
 
 			TypingDelayGeneric()
@@ -15751,7 +15751,7 @@ Night:
 			Dim TaskList As New List(Of String)
 
 			TaskLines = FilterList(TaskLines)
-			If TaskLines.Count = 0 Then Throw New ArgumentException("The given file """ & dir & """ was returned empty.")
+			If TaskLines.Count = 0 Then Throw New ArgumentException("The given file: """ & dir & """ was returned empty.")
 
 			TaskEntry = TaskLines(ssh.randomizer.Next(0, TaskLines.Count))
 
@@ -15913,7 +15913,7 @@ PoundLoop:
             '                                            All Errors
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             Log.WriteError("Error occurred during file processing  """ & dir & """", ex, "CleanTaskLines(String)")
-			Return "ERROR Tease AI did Not return a valid Task line"
+			Return "ERROR: Tease AI did Not return a valid Task line"
 		End Try
 	End Function
 
@@ -16037,7 +16037,7 @@ TryNext:
 
 
 
-        'Debug.Print("EdgeCountTick = " & String.Format("{000}:{1:00}", TST.Minutes, TST.Seconds))
+		'Debug.Print("EdgeCountTick = " & String.Format("{0:00}:{1:00}", TST.Minutes, TST.Seconds))
     End Sub
 
 	Private Sub StrokeTimeTotalTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StrokeTimeTotalTimer.Tick
@@ -16053,8 +16053,8 @@ TryNext:
 
 		Dim STT As TimeSpan = TimeSpan.FromSeconds(ssh.StrokeTimeTotal)
 
-        'LBLStrokeTimeTotal.Text = String.Format("{0000} D {1:00} H {2:00} M {3:00} S", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
-        FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{00000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
+		'LBLStrokeTimeTotal.Text = String.Format("{0:000} D {1:00} H {2:00} M {3:00} S", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
+		FrmSettings.LBLStrokeTimeTotal.Text = String.Format("{0:0000}:{1:00}:{2:00}:{3:00}", STT.Days, STT.Hours, STT.Minutes, STT.Seconds)
 
 
 	End Sub
@@ -16115,7 +16115,7 @@ RestartFunction:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             TnASlides.Stop()
 			Log.WriteError(ex.Message & vbCrLf & "TnA Slideshow will stop.", ex, "Exception in TnASlides.Tick occured")
-			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR " & ex.Message & " : Exception in TnASlides.Tick occured</font>", False)
+			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " : Exception in TnASlides.Tick occured</font>", False)
 		End Try
 	End Sub
 
@@ -16275,7 +16275,7 @@ RestartFunction:
 
 		If ssh.DomTypeCheck = True Or DomWMP.playState = WMPLib.WMPPlayState.wmppsStopped Or DomWMP.playState = WMPLib.WMPPlayState.wmppsPaused Then Return
 
-        'Debug.Print("New movie loaded " & DomWMP.URL.ToString)
+		'Debug.Print("New movie loaded: " & DomWMP.URL.ToString)
 
         ssh.VidFile = Path.GetFileName(DomWMP.URL.ToString)
 
@@ -16298,7 +16298,7 @@ RestartFunction:
 				For i As Integer = 0 To SubList.Count - 1
 					SubCheck = SubList(i).Split("]")
 					SubCheck(0) = SubCheck(0).Replace("[", "")
-					Dim SubCheck2 As String() = SubCheck(0).Split("")
+					Dim SubCheck2 As String() = SubCheck(0).Split(":")
 
 					PlayPos = SubCheck2(0) * 3600
 					PlayPos += SubCheck2(1) * 60
@@ -16530,9 +16530,9 @@ RestartFunction:
 				If VTList.Count < 1 Then Return
 				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did Not return a valid Video Taunt from file " &
-					  VTDir, ex, "VideoTaunTimer.Tick")
-				ssh.DomTask = "ERROR Tease AI did Not return a valid Video Taunt from file:  " & VTDir
+				Log.WriteError("Tease AI did Not return a valid Video Taunt from file: " &
+				VTDir, ex, "VideoTauntTimer.Tick")
+				ssh.DomTask = "ERROR: Tease AI did Not return a valid Video Taunt from file: " & VTDir
 			End Try
 
 			TypingDelayGeneric()
@@ -16604,9 +16604,9 @@ RestartFunction:
 				If VTList.Count < 1 Then Return
 				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did Not return a valid Video Taunt from file " &
-							   VTDir, ex, "RLGLTauntTimer.Tick")
-				ssh.DomTask = "ERROR Tease AI did Not return a valid Video Taunt from file:  " & VTDir
+				Log.WriteError("Tease AI did Not return a valid Video Taunt from file: " &
+				VTDir, ex, "RLGLTauntTimer.Tick")
+				ssh.DomTask = "ERROR: Tease AI did Not return a valid Video Taunt from file:  " & VTDir
 			End Try
 			TypingDelayGeneric()
 
@@ -16657,9 +16657,9 @@ RestartFunction:
 				If VTList.Count < 1 Then Return
 				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did Not return a valid Video Taunt from file " &
-							   VTDir, ex, "AvoidTheEdgeTaunts.Tick")
-				ssh.DomTask = "ERROR Tease AI did Not return a valid Video Taunt from file:  " & VTDir
+				Log.WriteError("Tease AI did Not return a valid Video Taunt from file: " &
+				VTDir, ex, "AvoidTheEdgeTaunts.Tick")
+				ssh.DomTask = "ERROR: Tease AI did Not return a valid Video Taunt from file:  " & VTDir
 			End Try
 			TypingDelayGeneric()
 
@@ -16873,15 +16873,15 @@ saveImage:
 
 			If tmpTsmi.Checked Then
 				' Remove from the given file 
-				lazytext = "remove path from file " & tmpFilePath
+				lazytext = "remove path from file: " & tmpFilePath
 				TxtRemoveLine(tmpFilePath, ssh.ImageLocation)
 				tmpTsmi.Checked = False
 			ElseIf File.Exists(tmpFilePath) Then
-				lazytext = "append path  to file " & tmpFilePath
+				lazytext = "append path  to file: " & tmpFilePath
 				' Append to existing file 
 				My.Computer.FileSystem.WriteAllText(tmpFilePath, Environment.NewLine & ssh.ImageLocation, True)
 			Else
-				lazytext = "add path to New file " & tmpFilePath
+				lazytext = "add path to New file: " & tmpFilePath
 				' create a new file
 				My.Computer.FileSystem.WriteAllText(tmpFilePath, ssh.ImageLocation, True)
 			End If
@@ -17065,7 +17065,7 @@ saveImage:
 	Public Function CompareDates(ByVal CheckDate As Date) As Integer
 
 		Dim result As Integer = DateTime.Compare(FormatDateTime(CheckDate, DateFormat.ShortDate), FormatDateTime(Now, DateFormat.ShortDate))
-		Debug.Print("Compare dates " & FormatDateTime(CheckDate, DateFormat.ShortDate) & " <-> " & FormatDateTime(Now, DateFormat.ShortDate) & " = " & result)
+		Debug.Print("Compare dates: " & FormatDateTime(CheckDate, DateFormat.ShortDate) & " <-> " & FormatDateTime(Now, DateFormat.ShortDate) & " = " & result)
 		Return result
 
 	End Function
@@ -17073,7 +17073,7 @@ saveImage:
 	Public Function CompareDatesWithTime(ByVal CheckDate As Date) As Integer
 
 		Dim result As Integer = DateTime.Compare(FormatDateTime(CheckDate, DateFormat.GeneralDate), FormatDateTime(Now, DateFormat.GeneralDate))
-		Debug.Print("Compare dates " & FormatDateTime(CheckDate, DateFormat.GeneralDate) & " <-> " & FormatDateTime(Now, DateFormat.GeneralDate) & " = " & result)
+		Debug.Print("Compare dates: " & FormatDateTime(CheckDate, DateFormat.GeneralDate) & " <-> " & FormatDateTime(Now, DateFormat.GeneralDate) & " = " & result)
 		Return result
 
 	End Function
