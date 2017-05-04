@@ -41,6 +41,31 @@ Public Class ContactData
 		End Get
 	End Property
 
+	Public ReadOnly Property TypeHonorific As String
+		Get
+			If Contact = ContactType.Contact1 Then
+				Return My.Settings.G1Honorific
+			ElseIf Contact = ContactType.Contact2 Then
+				Return My.Settings.G2Honorific
+			ElseIf Contact = ContactType.Contact3 Then
+				Return My.Settings.G3Honorific
+			ElseIf Contact = ContactType.Random Then
+				Return My.Settings.RandomHonorific
+			Else
+				Return My.Settings.SubHonorific
+			End If
+		End Get
+	End Property
+
+	Public ReadOnly Property ShortName As String
+		Get
+			If Contact = ContactType.Domme Then
+				Return My.Settings.GlitterSN
+			Else
+				Return TypeName
+			End If
+		End Get
+	End Property
 	Public ReadOnly Property TypeColorHtml As String
 		Get
 			If Contact = ContactType.Contact1 Then
@@ -236,7 +261,7 @@ checkFolder:
 	Dim currPath As String
 
 		If Contact = ContactType.Random And Not newFolder Then
-			currPath = myDirectory.GetDirectories(baseDirectory).ElementAt(New Random().Next(0, myDirectory.GetDirectories(baseDirectory).Count - 1))
+			currPath = myDirectory.GetDirectories(baseDirectory).ElementAt(New Random().Next(0, myDirectory.GetDirectories(baseDirectory).Count))
 			tempBaseFolder = currPath
 		Else
 			currPath = baseDirectory
@@ -479,29 +504,36 @@ tryNextImage:
 			Dim CurrImgIndex As Integer = ImageList.IndexOf(CurrentImage)
 			Dim rtnPath As String = ""
 			Dim CurrDist As Integer = 999999
+			'this function was constantly giving the same pic over and over to me
+			'i just changed to give a random image with the required tag.
+			'now it correctly changes the pic and avoid the repetition over and over
 
-			For Each str As String In ImagePaths.TagImageList
-				Dim IndexInList As Integer = ImageList.IndexOf(str)
-				' Calculate the distance of ListIndex from the FoundFile to CurrentImage
-				Dim FileDist As Integer = IndexInList - CurrImgIndex
-				' Convert negative values to positive by multipling (-) x (-) = (+) 
-				If FileDist < 0 Then FileDist *= -1
-				' Check if the distance is bigger than the previous one
-				If FileDist <= CurrDist Then
-					' Yes: We will set this file and save its distance
+			'For Each str As String In ImagePaths.TagImageList
+			'Dim IndexInList As Integer = ImageList.IndexOf(str)
+			' Calculate the distance of ListIndex from the FoundFile to CurrentImage
+			'Dim FileDist As Integer = IndexInList - CurrImgIndex
+			' Convert negative values to positive by multipling (-) x (-) = (+) 
+			'If FileDist < 0 Then FileDist *= -1
+			' Check if the distance is bigger than the previous one
+			'If FileDist <= CurrDist Then
+			' Yes: We will set this file and save its distance
 SetForwardImage:
-					rtnPath = str
-					CurrDist = FileDist
-				ElseIf ImagePaths.LastPicked = rtnPath AndAlso New Random().Next(0, 101) > 60 Then
-					' The last Picked image is the same as last time.
-					GoTo SetForwardImage
-				Else
-					' As the list is in the Same order as the Slideshow-List,
-					' we can stop searching, when the value is getting bigger.
-					Exit For
-				End If
-			Next
-
+			'		rtnPath = str
+			'CurrDist = FileDist
+			'ElseIf ImagePaths.LastPicked = rtnPath AndAlso New Random().Next(0, 101) > 60 Then
+			' The last Picked image is the same as last time.
+			'GoTo SetForwardImage
+			'Else
+			' As the list is in the Same order as the Slideshow-List,
+			' we can stop searching, when the value is getting bigger.
+			'Exit For
+			'End If
+			'Next
+			If ImagePaths.TagImageList.Count <> 0 Then
+				rtnPath = ImagePaths.TagImageList.ElementAt(New Random().Next(0, ImagePaths.TagImageList.Count))
+			Else
+				rtnPath = ImagePaths.LastPicked
+			End If
 			'===================================================================
 			'								Check result
 			If String.IsNullOrWhiteSpace(rtnPath) Then
@@ -579,6 +611,7 @@ redo:
 
 				If rtnItem.TagImageList.Count = 0 Then
 					' ´############## List was empty ################
+
 					Exit Function
 				ElseIf Not rtnItem.TagImageList(0).StartsWith(TargetFolder)
 					' ################ Wrong folder #################

@@ -414,6 +414,7 @@ Public Class FrmSettings
 		CFNMCheckBox.Checked = My.Settings.DomCFNM
 		CBRandomDomme.Checked = My.Settings.CBRandomDomme
 		CBOutputErrors.Checked = My.Settings.CBOutputErrors
+		alwaysNewSlideshow.Checked = My.Settings.AlwaysNewSlideshow
 		giveupCheckBox.Checked = My.Settings.GiveUpReturn
 		If CBAuditStartup.Checked = True Then AuditScripts()
 
@@ -3166,6 +3167,7 @@ SkipDeserializing:
 			SettingsList.Add("Contact 3 AV: " & My.Settings.GlitterAV3)
 
 			SettingsList.Add("Random Friend Image Directory: " & My.Settings.RandomImageDir)
+			SettingsList.Add("Always New Contact Slideshow: " & My.Settings.AlwaysNewSlideshow)
 
 			Dim SettingsString As String = ""
 
@@ -3267,6 +3269,7 @@ SkipDeserializing:
 				Catch
 				End Try
 				My.Settings.RandomImageDir = SettingsList(29).Replace("Random Friend Image Directory: ", "")
+				My.Settings.AlwaysNewSlideshow = SettingsList(30).Replace("Always New Contact Slideshow: ", "")
 
 			Catch
 				MessageBox.Show(Me, "This Glitter settings file is invalid or has been edited incorrectly!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
@@ -3750,8 +3753,8 @@ TryNextImage:
 							MessageBox.Show(Me, "Refreshing URL files has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL files." &
 											vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added.",
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-						ElseIf __tmpResult.ErrorText.Capacity > 0
-							MessageBox.Show(Me, "URL files have been refreshed with errors!" &
+						ElseIf __tmpResult.ErrorText.Capacity > 0 Then
+							MessageBox.Show(Me, "URL Files have been refreshed with errors!" &
 											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " new URLs have been added." &
 											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -3786,8 +3789,8 @@ TryNextImage:
 							MessageBox.Show(Me, "Rebuilding URL-Files has been aborted after " & __tmpResult.MaintainedUrlFiles.Count & " URL-Files." &
 											vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed.",
 											"Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
-						ElseIf __tmpResult.ErrorText.Capacity > 0
-							MessageBox.Show(Me, "URL Files have been rebuild with errors!" &
+						ElseIf __tmpResult.ErrorText.Capacity > 0 Then
+							MessageBox.Show(Me, "URL Files have been rebuilded with errors!" &
 											vbCrLf & vbCrLf & __tmpResult.ModifiedLinkCount & " dead URLs have been removed." &
 											vbCrLf & vbCrLf & __tmpResult.LinkCountTotal & " URLs in total." &
 											vbCrLf & vbCrLf & String.Join(vbCrLf, __tmpResult.ErrorText),
@@ -3893,8 +3896,8 @@ TryNextImage:
                             ' Refresh Progressbars
                             WebImageProgressBar.Maximum = e.BlogPageTotal
 							WebImageProgressBar.Value = e.BlogPage
-							' Disable Image Approval-UI
-							BTNWIContinue.Enabled = False
+                            ' Disable Image Approval-UI
+                            BTNWIContinue.Enabled = False
 							BTNWIAddandContinue.Enabled = False
                             ' Inform User about BGW-State
                             LBLWebImageCount.Text = String.Format("{0}/{1}", e.ImageCount, e.ImageCountTotal)
@@ -3981,7 +3984,7 @@ checkFolder:
 			Else
 				GoTo set_default
 			End If
-		ElseIf count_top = 0 And count_all > count_top And subDirectories = False
+		ElseIf count_top = 0 And count_all > count_top And subDirectories = False Then
 			' ======================== none in top, but in sub ->enable sub? ======================
 			If MessageBox.Show(ActiveForm,
 			   "The directory """ & directoryPath & """ doesn't contain images, but it's " &
@@ -6195,19 +6198,44 @@ checkFolder:
 
 	Private Sub TBGreeting_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBGreeting.LostFocus
 		My.Settings.SubGreeting = TBGreeting.Text
+		Ssh.checkAnswers = New subAnswers(Ssh)
 	End Sub
 
 	Private Sub TBYes_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBYes.LostFocus
 		My.Settings.SubYes = TBYes.Text
+		Ssh.checkAnswers = New subAnswers(Ssh)
 	End Sub
 
 	Private Sub TBNo_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBNo.LostFocus
 		My.Settings.SubNo = TBNo.Text
+		Ssh.checkAnswers = New subAnswers(Ssh)
+	End Sub
+
+	Private Sub TBSorry_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBSorry.LostFocus
+		My.Settings.SubSorry = TBSorry.Text
+		Ssh.checkAnswers = New subAnswers(Ssh)
 	End Sub
 
 	Private Sub TBHonorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles TBHonorific.LostFocus
 		If TBHonorific.Text = "" Or TBHonorific.Text Is Nothing Then TBHonorific.Text = "Mistress"
 		My.Settings.SubHonorific = TBHonorific.Text
+		Ssh.tempHonorific = TBHonorific.Text
+	End Sub
+
+	Private Sub G1Honorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles G1Honorific.LostFocus
+		My.Settings.G1Honorific = G1Honorific.Text
+	End Sub
+
+	Private Sub G2Honorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles G2Honorific.LostFocus
+		My.Settings.G2Honorific = G2Honorific.Text
+	End Sub
+
+	Private Sub G3Honorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles G3Honorific.LostFocus
+		My.Settings.G3Honorific = G3Honorific.Text
+	End Sub
+
+	Private Sub RandomHonorific_LostFocus(sender As System.Object, e As System.EventArgs) Handles RandomHonorific.LostFocus
+		My.Settings.RandomHonorific = RandomHonorific.Text
 	End Sub
 
 	Private Sub CBHonorificInclude_LostFocus(sender As System.Object, e As System.EventArgs) Handles CBHonorificInclude.LostFocus
@@ -8157,6 +8185,34 @@ checkFolder:
 	Private Sub TBHonorific_MouseHover(sender As Object, e As System.EventArgs) Handles TBHonorific.MouseHover
 
 		TTDir.SetToolTip(TBHonorific, "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc.")
+
+		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
+	End Sub
+
+	Private Sub G1Honorific_MouseHover(sender As Object, e As System.EventArgs) Handles G1Honorific.MouseHover
+
+		TTDir.SetToolTip(G1Honorific, "Enter an honorific to use for the contact, such as Mistress, Goddess, Princess, etc.")
+
+		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
+	End Sub
+
+	Private Sub G2Honorific_MouseHover(sender As Object, e As System.EventArgs) Handles G2Honorific.MouseHover
+
+		TTDir.SetToolTip(G2Honorific, "Enter an honorific to use for the contact, such as Mistress, Goddess, Princess, etc.")
+
+		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
+	End Sub
+
+	Private Sub G3Honorific_MouseHover(sender As Object, e As System.EventArgs) Handles G3Honorific.MouseHover
+
+		TTDir.SetToolTip(G3Honorific, "Enter an honorific to use for the contact, such as Mistress, Goddess, Princess, etc.")
+
+		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
+	End Sub
+
+	Private Sub RandomHonorific_MouseHover(sender As Object, e As System.EventArgs) Handles RandomHonorific.MouseHover
+
+		TTDir.SetToolTip(RandomHonorific, "Enter an honorific to use for the contact, such as Mistress, Goddess, Princess, etc.")
 
 		'LBLSubSettingsDescription.Text = "Enter an honorific to use for the domme, such as Mistress, Goddess, Princess, etc."
 	End Sub
@@ -10305,6 +10361,10 @@ checkFolder:
 		My.Settings.CBOutputErrors = CBOutputErrors.Checked
 	End Sub
 
+	Private Sub alwaysNewSlideshow_CheckedChanged(sender As Object, e As EventArgs) Handles alwaysNewSlideshow.CheckedChanged
+		My.Settings.AlwaysNewSlideshow = alwaysNewSlideshow.Checked
+	End Sub
+
 	Private Sub BTNURLFileReplace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNURLFileReplace.Click
 
 		If TBURLFileReplace.Text = "" Or TBURLFileWith.Text = "" Then
@@ -10415,4 +10475,5 @@ checkFolder:
 
 
 	End Sub
+
 End Class
