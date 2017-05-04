@@ -8260,8 +8260,8 @@ StatusUpdateEnd:
 	End Function
 
 	Public Function CommandClean(ByVal StringClean As String, Optional ByVal TaskClean As Boolean = False) As String
-		Do
-			Debug.Print("Stringclean Intro = " & StringClean)
+
+		Debug.Print("Stringclean Intro = " & StringClean)
 
 
 			If TaskClean = True Then
@@ -8549,12 +8549,7 @@ RinseLatherRepeat:
 				StringClean = StringClean.Replace("@ImageTagAny(" & TagFlag & ")", "")
 			End If
 
-			If StringClean.Contains("@ShowImage") Then
-				ShowImage(GetRandomImage(), False)
-				StringClean = StringClean.Replace("@ShowImage", "")
-			End If
-
-			If StringClean.Contains("@ShowButtImage") Then
+		If StringClean.Contains("@ShowButtImage") Then
 				ShowImage(GetImageData(ImageGenre.Butt).Random(), False)
 
 				StringClean = StringClean.Replace("@ShowButtImage", "")
@@ -8644,105 +8639,106 @@ RinseLatherRepeat:
 				StringClean = StringClean.Replace("@NewBlogImage", "")
 			End If
 
-			If StringClean.Contains("@ShowLocalImage") Then
-				ShowImage(GetRandomImage(ImageSourceType.Local), False)
-				StringClean = StringClean.Replace("@ShowLocalImage", "")
-			End If
+		'===============================================================================
+		'								@ShowLocalImage()
+		'===============================================================================
+		If StringClean.Contains("@ShowLocalImage(") Then
+			Dim LocalFlag As String = GetParentheses(StringClean, "@ShowLocalImage(")
+			LocalFlag = FixCommas(LocalFlag)
 
-			'===============================================================================
-			'								@ShowLocalImage()
-			'===============================================================================
-			If StringClean.Contains("@ShowLocalImage(") Then
-				Dim LocalFlag As String = GetParentheses(StringClean, "@ShowLocalImage(")
-				LocalFlag = FixCommas(LocalFlag)
+			Dim tmpListGenre As List(Of String) = LocalFlag.Split(",").ToList
 
-				Dim tmpListGenre As List(Of String) = LocalFlag.Split(",").ToList
+			If LocalFlag.ToUpper.Contains("NOT") Then
+				' =============== Invert the Content in Brackets ===============
+				' Declare a String containing all available ImageGenres
+				Dim CompareFlag As String = "Hardcore, Softcore, Lesbian, Blowjob, Femdom, Lezdom, Hentai, Gay, Maledom, Captions, General, Butts, Boobs"
 
-				If LocalFlag.ToUpper.Contains("NOT") Then
-					' =============== Invert the Content in Brackets ===============
-					' Declare a String containing all available ImageGenres
-					Dim CompareFlag As String = "Hardcore, Softcore, Lesbian, Blowjob, Femdom, Lezdom, Hentai, Gay, Maledom, Captions, General, Butts, Boobs"
-
-					' Remove Imagegenre, when there are no local Images available or it is in the inverting bracket
-					For i As Integer = tmpListGenre.Count - 1 To 0 Step -1
-						If tmpListGenre(i).ToUpper.Contains("HARDCORE") Or Not GetImageData(ImageGenre.Hardcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hardcore, ", "")
-						If tmpListGenre(i).ToUpper.Contains("SOFTCORE") Or Not GetImageData(ImageGenre.Softcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Softcore, ", "")
-						If tmpListGenre(i).ToUpper.Contains("LESBIAN") Or Not GetImageData(ImageGenre.Lesbian).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lesbian, ", "")
-						If tmpListGenre(i).ToUpper.Contains("BLOWJOB") Or Not GetImageData(ImageGenre.Blowjob).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Blowjob, ", "")
-						If tmpListGenre(i).ToUpper.Contains("FEMDOM") Or Not GetImageData(ImageGenre.Femdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Femdom, ", "")
-						If tmpListGenre(i).ToUpper.Contains("LEZDOM") Or Not GetImageData(ImageGenre.Lezdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lezdom, ", "")
-						If tmpListGenre(i).ToUpper.Contains("HENTAI") Or Not GetImageData(ImageGenre.Hentai).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hentai, ", "")
-						If tmpListGenre(i).ToUpper.Contains("GAY") Or Not GetImageData(ImageGenre.Gay).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Gay, ", "")
-						If tmpListGenre(i).ToUpper.Contains("MALEDOM") Or Not GetImageData(ImageGenre.Maledom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Maledom, ", "")
-						If tmpListGenre(i).ToUpper.Contains("CAPTIONS") Or Not GetImageData(ImageGenre.Captions).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Captions, ", "")
-						If tmpListGenre(i).ToUpper.Contains("GENERAL") Or Not GetImageData(ImageGenre.General).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("General, ", "")
-						If tmpListGenre(i).ToUpper.Contains("BUTT") Or Not GetImageData(ImageGenre.Butt).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Butts, ", "")
-						If tmpListGenre(i).ToUpper.Contains("BUTTS") Then CompareFlag = CompareFlag.Replace("Butts, ", "")
-						If tmpListGenre(i).ToUpper.Contains("BOOB") Or Not GetImageData(ImageGenre.Boobs).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Boobs", "")
-						If tmpListGenre(i).ToUpper.Contains("BOOBS") Then CompareFlag = CompareFlag.Replace("Boobs", "")
-					Next
-
-					' Set the inverted Array.
-					tmpListGenre = CompareFlag.Split(", ").ToList
-				End If
-
-				' Pick a random entry from list
-				Debug.Print("@ShowLocalImage() LocalFLag original = " & LocalFlag)
-				Debug.Print("@ShowLocalImage() LocalFLag modified = " & String.Join(", ", tmpListGenre))
-
-				' generate a list of all available Local Images. This way it is most 
-				' likely, to get an image.
-				Dim tmpImageLocationList As New List(Of String)
-
-				For Each tmpStr As String In tmpListGenre
-					If tmpStr.ToUpper.Contains("HARDCORE") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hardcore).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("SOFTCORE") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Softcore).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("LESBIAN") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lesbian).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("BLOWJOB") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Blowjob).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("FEMDOM") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Femdom).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("LEZDOM") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lezdom).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("HENTAI") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hentai).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("GAY") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Gay).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("MALEDOM") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Maledom).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("CAPTION") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Captions).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("GENERAL") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.General).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("BUTT") Or tmpStr.ToUpper.Contains("BUTTS") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Butt).ToList(ImageSourceType.Local))
-					ElseIf tmpStr.ToUpper.Contains("BOOB") Or tmpStr.ToUpper.Contains("BOOBS") Then
-						tmpImageLocationList.AddRange(GetImageData(ImageGenre.Boobs).ToList(ImageSourceType.Local))
-					End If
+				' Remove Imagegenre, when there are no local Images available or it is in the inverting bracket
+				For i As Integer = tmpListGenre.Count - 1 To 0 Step -1
+					If tmpListGenre(i).ToUpper.Contains("HARDCORE") Or Not GetImageData(ImageGenre.Hardcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hardcore, ", "")
+					If tmpListGenre(i).ToUpper.Contains("SOFTCORE") Or Not GetImageData(ImageGenre.Softcore).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Softcore, ", "")
+					If tmpListGenre(i).ToUpper.Contains("LESBIAN") Or Not GetImageData(ImageGenre.Lesbian).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lesbian, ", "")
+					If tmpListGenre(i).ToUpper.Contains("BLOWJOB") Or Not GetImageData(ImageGenre.Blowjob).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Blowjob, ", "")
+					If tmpListGenre(i).ToUpper.Contains("FEMDOM") Or Not GetImageData(ImageGenre.Femdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Femdom, ", "")
+					If tmpListGenre(i).ToUpper.Contains("LEZDOM") Or Not GetImageData(ImageGenre.Lezdom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Lezdom, ", "")
+					If tmpListGenre(i).ToUpper.Contains("HENTAI") Or Not GetImageData(ImageGenre.Hentai).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Hentai, ", "")
+					If tmpListGenre(i).ToUpper.Contains("GAY") Or Not GetImageData(ImageGenre.Gay).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Gay, ", "")
+					If tmpListGenre(i).ToUpper.Contains("MALEDOM") Or Not GetImageData(ImageGenre.Maledom).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Maledom, ", "")
+					If tmpListGenre(i).ToUpper.Contains("CAPTIONS") Or Not GetImageData(ImageGenre.Captions).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Captions, ", "")
+					If tmpListGenre(i).ToUpper.Contains("GENERAL") Or Not GetImageData(ImageGenre.General).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("General, ", "")
+					If tmpListGenre(i).ToUpper.Contains("BUTT") Or Not GetImageData(ImageGenre.Butt).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Butts, ", "")
+					If tmpListGenre(i).ToUpper.Contains("BUTTS") Then CompareFlag = CompareFlag.Replace("Butts, ", "")
+					If tmpListGenre(i).ToUpper.Contains("BOOB") Or Not GetImageData(ImageGenre.Boobs).IsAvailable(ImageSourceType.Local) Then CompareFlag = CompareFlag.Replace("Boobs", "")
+					If tmpListGenre(i).ToUpper.Contains("BOOBS") Then CompareFlag = CompareFlag.Replace("Boobs", "")
 				Next
-				' Declare a string for the Image to show - initialize with error Image
-				Dim tmpImgToShow As String = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
-				' If there are images, overwrite the error image.
-				If tmpImageLocationList.Count > 0 Then
-					tmpImgToShow = tmpImageLocationList(New Random().Next(0, tmpImageLocationList.Count))
-				Else
-					Trace.WriteLine("failed to execute Command: @ShowLocalImage(" & LocalFlag & ") No images found.")
-				End If
 
-				ShowImage(tmpImgToShow, False)
-
-				StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
+				' Set the inverted Array.
+				tmpListGenre = CompareFlag.Split(", ").ToList
 			End If
-			'----------------------------------------
-			' @ShowLocalImage()- End
-			'----------------------------------------
-			'===============================================================================
-			'								@ShowTaggedImage
-			'===============================================================================
-			If StringClean.Contains("@ShowTaggedImage") Then
+
+			' Pick a random entry from list
+			Debug.Print("@ShowLocalImage() LocalFLag original = " & LocalFlag)
+			Debug.Print("@ShowLocalImage() LocalFLag modified = " & String.Join(", ", tmpListGenre))
+
+			' generate a list of all available Local Images. This way it is most 
+			' likely, to get an image.
+			Dim tmpImageLocationList As New List(Of String)
+
+			For Each tmpStr As String In tmpListGenre
+				If tmpStr.ToUpper.Contains("HARDCORE") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hardcore).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("SOFTCORE") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Softcore).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("LESBIAN") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lesbian).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("BLOWJOB") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Blowjob).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("FEMDOM") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Femdom).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("LEZDOM") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Lezdom).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("HENTAI") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Hentai).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("GAY") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Gay).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("MALEDOM") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Maledom).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("CAPTION") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Captions).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("GENERAL") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.General).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("BUTT") Or tmpStr.ToUpper.Contains("BUTTS") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Butt).ToList(ImageSourceType.Local))
+				ElseIf tmpStr.ToUpper.Contains("BOOB") Or tmpStr.ToUpper.Contains("BOOBS") Then
+					tmpImageLocationList.AddRange(GetImageData(ImageGenre.Boobs).ToList(ImageSourceType.Local))
+				End If
+			Next
+			' Declare a string for the Image to show - initialize with error Image
+			Dim tmpImgToShow As String = Application.StartupPath & "\Images\System\NoLocalImagesFound.jpg"
+			' If there are images, overwrite the error image.
+			If tmpImageLocationList.Count > 0 Then
+				tmpImgToShow = tmpImageLocationList(New Random().Next(0, tmpImageLocationList.Count))
+			Else
+				Trace.WriteLine("failed to execute Command: @ShowLocalImage(" & LocalFlag & ") No images found.")
+			End If
+
+			ShowImage(tmpImgToShow, False)
+
+			StringClean = StringClean.Replace("@ShowLocalImage(" & GetParentheses(StringClean, "@ShowLocalImage(") & ")", "")
+		End If
+		'----------------------------------------
+		' @ShowLocalImage()- End
+		'----------------------------------------
+
+		If StringClean.Contains("@ShowLocalImage") Then
+			ShowImage(GetRandomImage(ImageSourceType.Local), False)
+			StringClean = StringClean.Replace("@ShowLocalImage", "")
+		End If
+
+		'===============================================================================
+		'								@ShowTaggedImage
+		'===============================================================================
+		If StringClean.Contains("@ShowTaggedImage") Then
 				Dim Tags As List(Of String) = StringClean.Split() _
 										.Select(Function(s) s.Trim()) _
 										.Where(Function(w) CType(w, String).StartsWith("@Tag")).ToList
@@ -8758,29 +8754,34 @@ RinseLatherRepeat:
 				Tags.ForEach(Sub(x) StringClean = StringClean.Replace(x, ""))
 				StringClean = StringClean.Replace("@ShowTaggedImage", "")
 			End If
-			'----------------------------------------
-			' @ShowTaggedImage - End
-			'----------------------------------------
-			'===============================================================================
-			'									@ShowImage[]
-			'===============================================================================
-			If StringClean.Contains("@ShowImage[") Then
-				Dim ImageToShow As String = GetParentheses(StringClean, "@ShowImage[")
-				ShowImage(checkForImage(ImageToShow), False)
-				StringClean = StringClean.Replace("@ShowImage[" & GetParentheses(StringClean, "@ShowImage[") & "]", "")
-			End If
-			'----------------------------------------
-			' @ShowImage[]- End
-			'----------------------------------------
-			'===============================================================================
-			'								Legacy TnA-Slideshow
-			'===============================================================================
-			' TODO: Rework TnA-Game to use CustomSlideshow instead of its own code.
-			' @TnAFastSlides starts a fast slideshow with Boobs and Butts. Use with local images, to avoid the download delay. otherwise the images will stutter.
-			' @TnASlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per second.
-			' @TnASlowSlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per 5 seconds.
+		'----------------------------------------
+		' @ShowTaggedImage - End
+		'----------------------------------------
+		'===============================================================================
+		'									@ShowImage[]
+		'===============================================================================
+		If StringClean.Contains("@ShowImage[") Then
+			Dim ImageToShow As String = GetParentheses(StringClean, "@ShowImage[")
+			ShowImage(checkForImage(ImageToShow), False)
+			StringClean = StringClean.Replace("@ShowImage[" & GetParentheses(StringClean, "@ShowImage[") & "]", "")
+		End If
 
-			If StringClean.Contains("@TnAFastSlides") Or StringClean.Contains("@TnASlowSlides") Or StringClean.Contains("@TnASlides") Then
+		If StringClean.Contains("@ShowImage") Then
+			ShowImage(GetRandomImage(), False)
+			StringClean = StringClean.Replace("@ShowImage", "")
+		End If
+		'----------------------------------------
+		' @ShowImage[]- End
+		'----------------------------------------
+		'===============================================================================
+		'								Legacy TnA-Slideshow
+		'===============================================================================
+		' TODO: Rework TnA-Game to use CustomSlideshow instead of its own code.
+		' @TnAFastSlides starts a fast slideshow with Boobs and Butts. Use with local images, to avoid the download delay. otherwise the images will stutter.
+		' @TnASlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per second.
+		' @TnASlowSlides starts a slideshow with boobs and butts. the Speed is fixed at 1 image per 5 seconds.
+
+		If StringClean.Contains("@TnAFastSlides") Or StringClean.Contains("@TnASlowSlides") Or StringClean.Contains("@TnASlides") Then
 				If StringClean.Contains("@TnAFastSlides") Then TnASlides.Interval = 334
 				If StringClean.Contains("@TnASlides") Then TnASlides.Interval = 1000
 				If StringClean.Contains("@TnASlowSlides") Then TnASlides.Interval = 5000
@@ -10183,55 +10184,53 @@ TaskCleanSet:
 				StringClean = StringClean.Replace("@EdgeMode(" & GetParentheses(StringClean, "@EdgeMode(") & ")", "")
 			End If
 
-			If StringClean.Contains("@EdgeToRuinNoHoldNoSecret") Then
-				ContactEdgeCheck(StringClean)
-				Edge()
-				ssh.EdgeToRuin = True
-				ssh.EdgeToRuinSecret = False
-				StringClean = StringClean.Replace("@EdgeToRuinNoHoldNoSecret", "")
+		If StringClean.Contains("@EdgeToRuinHoldNoSecret(") Then
+			Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")
+
+			If EdgeHoldFlag.Contains(",") Then
+
+				EdgeHoldFlag = FixCommas(EdgeHoldFlag)
+
+				Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
+
+				Dim Edge1 As Integer = Val(EdgeFlagArray(0))
+				Dim Edge2 As Integer = Val(EdgeFlagArray(1))
+
+				If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
+				If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
+
+				If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
+				If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
+
+				ssh.EdgeHoldSeconds = ssh.randomizer.Next(Edge1, Edge2 + 1)
+
+			Else
+
+				ssh.EdgeHoldSeconds = Val(EdgeHoldFlag)
+				If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("M") Then ssh.EdgeHoldSeconds *= 60
+				If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("H") Then ssh.EdgeHoldSeconds *= 3600
+
 			End If
 
-			If StringClean.Contains("@EdgeToRuinHoldNoSecret(") Then
-				Dim EdgeHoldFlag As String = GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")
+			ssh.EdgeHoldFlag = True
 
-				If EdgeHoldFlag.Contains(",") Then
+			ContactEdgeCheck(StringClean)
+			Edge()
+			ssh.EdgeHold = True
+			ssh.EdgeToRuin = True
+			ssh.EdgeToRuinSecret = False
+			StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret(" & GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(") & ")", "")
+		End If
 
-					EdgeHoldFlag = FixCommas(EdgeHoldFlag)
+		If StringClean.Contains("@EdgeToRuinNoHoldNoSecret") Then
+			ContactEdgeCheck(StringClean)
+			Edge()
+			ssh.EdgeToRuin = True
+			ssh.EdgeToRuinSecret = False
+			StringClean = StringClean.Replace("@EdgeToRuinNoHoldNoSecret", "")
+		End If
 
-					Dim EdgeFlagArray As String() = EdgeHoldFlag.Split(",")
-
-					Dim Edge1 As Integer = Val(EdgeFlagArray(0))
-					Dim Edge2 As Integer = Val(EdgeFlagArray(1))
-
-					If UCase(EdgeFlagArray(0)).Contains("M") Then Edge1 *= 60
-					If UCase(EdgeFlagArray(1)).Contains("M") Then Edge2 *= 60
-
-					If UCase(EdgeFlagArray(0)).Contains("H") Then Edge1 *= 3600
-					If UCase(EdgeFlagArray(1)).Contains("H") Then Edge2 *= 3600
-
-					ssh.EdgeHoldSeconds = ssh.randomizer.Next(Edge1, Edge2 + 1)
-
-				Else
-
-					ssh.EdgeHoldSeconds = Val(EdgeHoldFlag)
-					If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("M") Then ssh.EdgeHoldSeconds *= 60
-					If UCase(GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(")).Contains("H") Then ssh.EdgeHoldSeconds *= 3600
-
-				End If
-
-				ssh.EdgeHoldFlag = True
-
-				ContactEdgeCheck(StringClean)
-				Edge()
-				ssh.EdgeHold = True
-				ssh.EdgeToRuin = True
-				ssh.EdgeToRuinSecret = False
-				StringClean = StringClean.Replace("@EdgeToRuinHoldNoSecret(" & GetParentheses(StringClean, "@EdgeToRuinHoldNoSecret(") & ")", "")
-			End If
-
-
-
-			If StringClean.Contains("@EdgeToRuinHoldNoSecret") Then
+		If StringClean.Contains("@EdgeToRuinHoldNoSecret") Then
 				ContactEdgeCheck(StringClean)
 				Edge()
 				ssh.EdgeHold = True
@@ -11834,8 +11833,8 @@ VTSkip:
 				End If
 
 				StringClean = StringClean.Replace("@SpeedUpCheck", "")
-				'GoTo RinseLatherRepeat
-			End If
+			GoTo RinseLatherRepeat
+		End If
 
 
 			If StringClean.Contains("@SlowDownCheck") Then
@@ -11881,10 +11880,10 @@ VTSkip:
 				End If
 
 				StringClean = StringClean.Replace("@SlowDownCheck", "")
-				'GoTo RinseLatherRepeat
-			End If
+			GoTo RinseLatherRepeat
+		End If
 
-			If StringClean.Contains("@PlayRiskyPick") Then
+		If StringClean.Contains("@PlayRiskyPick") Then
 				ssh.RiskyDeal = True
 				'FrmCardList.RiskyRound += 1
 				FrmCardList.TCGames.SelectTab(2)
@@ -12778,8 +12777,7 @@ VTSkip:
 				StringClean = StringClean.Replace("@CheckStrokingState", "")
 			End If
 
-			Debug.Print("Command Clean Complete")
-		Loop Until Not StringClean.Contains("@")
+		Debug.Print("Command Clean Complete")
 
 		Return StringClean
 	End Function
