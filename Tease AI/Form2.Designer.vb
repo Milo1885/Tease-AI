@@ -1143,8 +1143,8 @@ Me.Label135 = New System.Windows.Forms.Label()
 Me.TrackBar2 = New System.Windows.Forms.TrackBar()
 Me.TxbImgUrlHardcore = New System.Windows.Forms.TextBox()
 Me.TextBox2 = New System.Windows.Forms.TextBox()
-Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
 Me.Label169 = New System.Windows.Forms.Label()
+Me.BWURLFiles = New Tease_AI.URL_Files.URL_File_BGW()
 Me.SettingsPanel.SuspendLayout
 Me.SettingsTabs.SuspendLayout
 Me.TabPage1.SuspendLayout
@@ -12519,7 +12519,7 @@ Me.Label97.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 'NBTeaseLengthMax
 '
 Me.NBTeaseLengthMax.Location = New System.Drawing.Point(130, 45)
-Me.NBTeaseLengthMax.Maximum = New Decimal(New Integer() {720, 0, 0, 0})
+Me.NBTeaseLengthMax.Maximum = New Decimal(New Integer() {1440, 0, 0, 0})
 Me.NBTeaseLengthMax.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
 Me.NBTeaseLengthMax.Name = "NBTeaseLengthMax"
 Me.NBTeaseLengthMax.Size = New System.Drawing.Size(44, 20)
@@ -12553,7 +12553,7 @@ Me.Label96.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
 'NBTeaseLengthMin
 '
 Me.NBTeaseLengthMin.Location = New System.Drawing.Point(130, 19)
-Me.NBTeaseLengthMin.Maximum = New Decimal(New Integer() {360, 0, 0, 0})
+Me.NBTeaseLengthMin.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
 Me.NBTeaseLengthMin.Minimum = New Decimal(New Integer() {5, 0, 0, 0})
 Me.NBTeaseLengthMin.Name = "NBTeaseLengthMin"
 Me.NBTeaseLengthMin.Size = New System.Drawing.Size(44, 20)
@@ -15227,14 +15227,6 @@ Me.TextBox2.ReadOnly = true
 Me.TextBox2.Size = New System.Drawing.Size(189, 20)
 Me.TextBox2.TabIndex = 145
 '
-'BWURLFiles
-'
-Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
-Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
-Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
-Me.BWURLFiles.WorkerReportsProgress = true
-Me.BWURLFiles.WorkerSupportsCancellation = true
-'
 'Label169
 '
 Me.Label169.BackColor = System.Drawing.Color.Transparent
@@ -15246,6 +15238,14 @@ Me.Label169.Size = New System.Drawing.Size(114, 19)
 Me.Label169.TabIndex = 182
 Me.Label169.Text = "Contact Honorific"
 Me.Label169.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+'
+'BWURLFiles
+'
+Me.BWURLFiles.DislikeListPath = "Images\System\DislikedImageURLs.txt"
+Me.BWURLFiles.ImageURLFileDir = "Images\System\URL Files\"
+Me.BWURLFiles.LikeListPath = "Images\System\LikedImageURLs.txt"
+Me.BWURLFiles.WorkerReportsProgress = true
+Me.BWURLFiles.WorkerSupportsCancellation = true
 '
 'FrmSettings
 '

@@ -11771,6 +11771,14 @@ ExternalAudio:
 			StringClean = StringClean.Replace("@RemoveDomme", "")
 		End If
 
+		If StringClean.Contains("@ContinueSession") Or StringClean.Contains("@SecondSession") Then
+			If FrmSettings.CBDomDenialEnds.Checked = False And FrmSettings.CBDomOrgasmEnds.Checked = False Then
+				ssh.SecondSession = True
+			End If
+			StringClean = StringClean.Replace("@ContinueSession", "")
+			StringClean = StringClean.Replace("@SecondSession", "")
+		End If
+
 		If StringClean.Contains("@NullResponse") Then
 			ssh.NullResponse = True
 			StringClean = StringClean.Replace("@NullResponse", "")
