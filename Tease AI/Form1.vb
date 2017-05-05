@@ -448,7 +448,7 @@ retryStart:
 				My.Settings.CBGlitterFeedScripts = False
 			ElseIf My.Settings.CBGlitterFeed Then
 				' No need to unset My.Settings.CBGlitterFeedOff. 
-				' If it would be true, this branch Is unreachable
+				' If it would be true, this branch is unreachable
 				My.Settings.CBGlitterFeedScripts = False
 			ElseIf My.Settings.CBGlitterFeed = False _
 		AndAlso My.Settings.CBGlitterFeedOff = False _
@@ -8549,19 +8549,19 @@ RinseLatherRepeat:
 				StringClean = StringClean.Replace("@ImageTagAny(" & TagFlag & ")", "")
 			End If
 
-		If StringClean.Contains("@ShowButtImage") Then
-				ShowImage(GetImageData(ImageGenre.Butt).Random(), False)
+		If StringClean.Contains("@ShowButtImage") Or StringClean.Contains("@ShowButtsImage") Then
+			ShowImage(GetImageData(ImageGenre.Butt).Random(), False)
 
-				StringClean = StringClean.Replace("@ShowButtImage", "")
-				StringClean = StringClean.Replace("@ShowButtsImage", "")
-			End If
+			StringClean = StringClean.Replace("@ShowButtImage", "")
+			StringClean = StringClean.Replace("@ShowButtsImage", "")
+		End If
 
-			If StringClean.Contains("@ShowBoobsImage") Then
-				ShowImage(GetImageData(ImageGenre.Boobs).Random(), False)
+		If StringClean.Contains("@ShowBoobsImage") Or StringClean.Contains("@ShowBoobImage") Then
+			ShowImage(GetImageData(ImageGenre.Boobs).Random(), False)
 
-				StringClean = StringClean.Replace("@ShowBoobsImage", "")
-				StringClean = StringClean.Replace("@ShowBoobImage", "")
-			End If
+			StringClean = StringClean.Replace("@ShowBoobsImage", "")
+			StringClean = StringClean.Replace("@ShowBoobImage", "")
+		End If
 
 			If StringClean.Contains("@ShowHardcoreImage") Then
 				ShowImage(GetImageData(ImageGenre.Hardcore).Random(), False)
@@ -11640,16 +11640,6 @@ ExternalAudio:
 				StringClean = StringClean.Replace("@RTOff", "")
 			End If
 
-			'	If StringClean.Contains("@VoiceOn") Then
-			'	FrmSettings.TTSCheckBox.Checked = True
-			'		StringClean = StringClean.Replace("@VoiceOn", "")
-			'	End If
-
-			'	If StringClean.Contains("@VoiceOff") Then
-			'			FrmSettings.TTSCheckBox.Checked = False
-			'	StringClean = StringClean.Replace("@VoiceOff", "")
-			'	End If
-
 			If StringClean.Contains("@GlitterTease1") Then
 				ssh.glitterDommeNumber = 1
 				LoadDommeImageFolder()
@@ -14192,8 +14182,8 @@ VTSkip:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             '                                            All Errors
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-            Log.WriteError(String.Format("Exception occured While checking line ""{0}"".", OrgFilterString),
-					ex, "GetFilter(String, Boolean)")
+			Log.WriteError(String.Format("Exception occured while checking line ""{0}"".", OrgFilterString),
+	 ex, "GetFilter(String, Boolean)")
 			If My.Settings.CBOutputErrors = True And ssh.SaidHello = True Then ChatAddSystemMessage("<font color=""red"">Error: " & ex.Message & "</font>", False)
 			Return False
 		End Try
@@ -14393,7 +14383,7 @@ VTSkip:
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             Debug.Print("Error on initializing FilterList." & vbCrLf & ex.Message & vbCrLf & ex.StackTrace)
 			MsgBox("Error on initializing FilterList. This Error occurs, If you try to add a duplikace Key to the dictionary." &
-			 "This error Is major issue in Code And will occur everytime until you fix this Error. For there Is no point in " &
+			 "This error is major issue in Code And will occur everytime until you fix this Error. For there is no point in " &
 			 "further executing the Code, the application will exit after closing this Message." & vbCrLf &
 			 ex.Message & vbCrLf & ex.StackTrace, MsgBoxStyle.Critical, "Source Code Error")
 			Application.Exit()
@@ -14610,9 +14600,9 @@ VTSkip:
 			If File.Exists(AvoidTheEdgeVideo) Then
 			Else
 				If ssh.DommeVideo = True Then
-					MsgBox("AvoidTheEdgeD.txt Is missing!", , "Error!")
+					MsgBox("AvoidTheEdgeD.txt is missing!", , "Error!")
 				Else
-					MsgBox("AvoidTheEdge.txt Is missing!", , "Error!")
+					MsgBox("AvoidTheEdge.txt is missing!", , "Error!")
 				End If
 				Return
 			End If
@@ -15287,9 +15277,9 @@ NoPlaylistEndFile:
 				ETLines = FilterList(ETLines)
 				ssh.DomTask = ETLines(ssh.randomizer.Next(0, ETLines.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did Not return a valid Edge Taunt from file " &
-					  File2Read, ex, "EdgeTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did Not return a valid Edge Taunt from file:  " & File2Read
+				Log.WriteError("Tease AI did not return a valid Edge Taunt from file " &
+	   File2Read, ex, "EdgeTauntTimer.Tick")
+				ssh.DomTask = "ERROR: Tease AI did not return a valid Edge Taunt from file:  " & File2Read
 			End Try
 
 			TypingDelayGeneric()
@@ -15659,9 +15649,9 @@ NoRepeatOFiles:
 				ETLines = FilterList(ETLines)
 				ssh.DomTask = ETLines(ssh.randomizer.Next(0, ETLines.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did Not return a valid Hold the Edge Taunt from file: " &
-	   File2Read, ex, "HoldEdgeTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did Not return a valid Hold the Edge Taunt from file:  " & File2Read
+				Log.WriteError("Tease AI did not return a valid Hold the Edge Taunt from file: " &
+	File2Read, ex, "HoldEdgeTauntTimer.Tick")
+				ssh.DomTask = "ERROR: Tease AI did not return a valid Hold the Edge Taunt from file:  " & File2Read
 			End Try
 
 			TypingDelayGeneric()
@@ -15731,7 +15721,7 @@ Night:
 
 		ssh.TaskText = ""
 
-		LBLFileTransfer.Text = ssh.tempDomName & " Is sending you a file!"
+		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
 		PNLFileTransfer.Visible = True
 		PNLFileTransfer.BringToFront()
 
@@ -15913,7 +15903,7 @@ PoundLoop:
             '                                            All Errors
             '▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
             Log.WriteError("Error occurred during file processing  """ & dir & """", ex, "CleanTaskLines(String)")
-			Return "ERROR: Tease AI did Not return a valid Task line"
+			Return "ERROR: Tease AI did not return a valid Task line"
 		End Try
 	End Function
 
@@ -15922,7 +15912,7 @@ PoundLoop:
 		PNLFileTransfer.Visible = False
 		BTNFileTransferOpen.Visible = False
 		BTNFIleTransferDismiss.Visible = False
-		LBLFileTransfer.Text = ssh.tempDomName & " Is sending you a file!"
+		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
 		PBFileTransfer.Value = 0
 
 	End Sub
@@ -15944,7 +15934,7 @@ PoundLoop:
 		PNLFileTransfer.Visible = False
 		BTNFileTransferOpen.Visible = False
 		BTNFIleTransferDismiss.Visible = False
-		LBLFileTransfer.Text = ssh.tempDomName & " Is sending you a file!"
+		LBLFileTransfer.Text = ssh.tempDomName & " is sending you a file!"
 		PBFileTransfer.Value = 0
 
 	End Sub
@@ -16530,9 +16520,9 @@ RestartFunction:
 				If VTList.Count < 1 Then Return
 				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did Not return a valid Video Taunt from file: " &
-				VTDir, ex, "VideoTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did Not return a valid Video Taunt from file: " & VTDir
+				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+	VTDir, ex, "VideoTauntTimer.Tick")
+				ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file: " & VTDir
 			End Try
 
 			TypingDelayGeneric()
@@ -16604,9 +16594,9 @@ RestartFunction:
 				If VTList.Count < 1 Then Return
 				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did Not return a valid Video Taunt from file: " &
-				VTDir, ex, "RLGLTauntTimer.Tick")
-				ssh.DomTask = "ERROR: Tease AI did Not return a valid Video Taunt from file:  " & VTDir
+				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+	VTDir, ex, "RLGLTauntTimer.Tick")
+				ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file:  " & VTDir
 			End Try
 			TypingDelayGeneric()
 
@@ -16657,9 +16647,9 @@ RestartFunction:
 				If VTList.Count < 1 Then Return
 				ssh.DomTask = VTList(ssh.randomizer.Next(0, VTList.Count))
 			Catch ex As Exception
-				Log.WriteError("Tease AI did Not return a valid Video Taunt from file: " &
-				VTDir, ex, "AvoidTheEdgeTaunts.Tick")
-				ssh.DomTask = "ERROR: Tease AI did Not return a valid Video Taunt from file:  " & VTDir
+				Log.WriteError("Tease AI did not return a valid Video Taunt from file: " &
+	VTDir, ex, "AvoidTheEdgeTaunts.Tick")
+				ssh.DomTask = "ERROR: Tease AI did not return a valid Video Taunt from file:  " & VTDir
 			End Try
 			TypingDelayGeneric()
 
@@ -16810,7 +16800,7 @@ retry:
 				Else
 					Exit Sub
 				End If
-			Else : Throw New NotImplementedException("Action for this button Is Not implemented.")
+			Else : Throw New NotImplementedException("Action for this button is not implemented.")
 			End If
 
 			If Directory.Exists(BlogPath) = False Then
@@ -16867,7 +16857,7 @@ saveImage:
 			ElseIf tmpTsmi Is PicStripTSMIdislikeImage Then
 				tmpFilePath = pathDislikeList
 			Else
-				Throw New NotImplementedException("This Toolstripmenuitem Is Not implemented yet")
+				Throw New NotImplementedException("This Toolstripmenuitem is not implemented yet")
 			End If
 
 
@@ -16919,7 +16909,7 @@ saveImage:
 	Private Sub PicStripTSMIdommeSlideshowGoToLast_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshowGoToLast.Click
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu Or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -16936,7 +16926,7 @@ saveImage:
 	Private Sub PicStripTSMIdommeSlideshow_GoToFirst_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshow_GoToFirst.Click
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu Or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -16953,7 +16943,7 @@ saveImage:
 	Private Sub PicStripTSMIdommeSlideshowLoadNewSlideshow_Click(sender As System.Object, e As System.EventArgs) Handles PicStripTSMIdommeSlideshowLoadNewSlideshow.Click
 
 		If FrmSettings.CBSettingsPause.Checked = True And FrmSettings.SettingsPanel.Visible = True Then
-			MsgBox("Please close the settings menu Or disable ""Pause Program When Settings Menu Is Visible"" option first!", , "Warning!")
+			MsgBox("Please close the settings menu or disable ""Pause Program When Settings Menu is Visible"" option first!", , "Warning!")
 			Return
 		End If
 
@@ -17361,8 +17351,8 @@ restartInstantly:
 			Dim filename As String = SavedSessionDefaultPath
 
 			If ssh.SaidHello = False Then
-				MessageBox.Show(Me, "Tease AI Is Not currently running a session!", "Error!",
-								MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!",
+  MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				Exit Sub
 			End If
 
@@ -17401,9 +17391,9 @@ restartInstantly:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			MessageBox.Show(Me, "An error occurred And the state did Not save correctly!" &
-							vbCrLf & vbCrLf & ex.Message,
-							"Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			MessageBox.Show(Me, "An error occurred and the state did not save correctly!" &
+	vbCrLf & vbCrLf & ex.Message,
+	"Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 		End Try
 	End Sub
 
@@ -17430,7 +17420,7 @@ restartInstantly:
 				'						Check if default-File exists
 				'===============================================================================
 			ElseIf Not File.Exists(filename) Then
-				MessageBox.Show(Me, Path.GetFileName(SavedSessionDefaultPath) & " could Not be found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+				MessageBox.Show(Me, Path.GetFileName(SavedSessionDefaultPath) & " could not be found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 				Exit Sub
 			End If
 
@@ -17453,16 +17443,16 @@ restartInstantly:
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 			'                                            All Errors
 			'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
-			MessageBox.Show(Me, "An error occurred And the state was Not loaded correctly!" &
-							vbCrLf & vbCrLf & ex.Message,
-							"Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			MessageBox.Show(Me, "An error occurred and the state was not loaded correctly!" &
+	vbCrLf & vbCrLf & ex.Message,
+	"Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 		End Try
 	End Sub
 
 	Private Sub ResetSessionToolStripMenuItem_Click(sender As System.Object, e As System.EventArgs) Handles ResetSessionToolStripMenuItem.Click
 
 		If ssh.SaidHello = False Then
-			MessageBox.Show(Me, "Tease AI Is Not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+			MessageBox.Show(Me, "Tease AI is not currently running a session!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			Return
 		End If
 
