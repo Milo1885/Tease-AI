@@ -16335,9 +16335,14 @@ RestartFunction:
 					PlayPos += SubCheck2(2)
 
 					If WMPPos = PlayPos Then
-						ssh.DomTask = SubCheck(1)
-						TypingDelayGeneric()
-						Debug.Print(SubList(i))
+						If (SubCheck(1).Contains("@Contact1") And ssh.contact1Present = False) Or (SubCheck(1).Contains("@Contact2") And ssh.contact2Present = False) _
+						   Or (SubCheck(1).Contains("@Contact3") And ssh.contact3Present = False) Then
+							'I'm positive I'm doing this the hard way -.-
+						Else
+							ssh.DomTask = SubCheck(1)
+							TypingDelayGeneric()
+							Debug.Print(SubList(i))
+						End If
 					End If
 				Next
 			End If
