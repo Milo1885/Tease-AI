@@ -2221,6 +2221,8 @@ WritingTaskLine:
 								ssh.OrgasmYesNo = False
 								ssh.EndTease = False
 								Return
+							Else
+								If ssh.LastScript = True Then ssh.EndTease = True
 							End If
 
 						End If
@@ -2305,6 +2307,8 @@ RuinedOrgasm:
 						ssh.OrgasmYesNo = False
 						ssh.EndTease = False
 						Return
+					Else
+						If ssh.LastScript = True Then ssh.EndTease = True
 					End If
 
 				End If
@@ -2335,6 +2339,7 @@ NoRepeatRFiles:
 					ssh.Contact3Edge = False
 				End If
 				TypingDelay()
+				If ssh.LastScript = True Then ssh.EndTease = True
 				Return
 
 AllowedOrgasm:
@@ -2423,6 +2428,8 @@ NoNoCumFiles:
 						ssh.OrgasmYesNo = False
 						ssh.EndTease = False
 						Return
+					Else
+						If ssh.LastScript = True Then ssh.EndTease = True
 					End If
 
 				End If
@@ -2458,6 +2465,7 @@ NoRepeatOFiles:
 					ssh.Contact3Edge = False
 				End If
 				TypingDelay()
+				If ssh.LastScript = True Then ssh.EndTease = True
 				Return
 
 
@@ -4039,7 +4047,14 @@ NonModuleEnd:
 				If ssh.RiskyEdges = True Then ssh.RiskyEdges = False
 				If ssh.LastScript = True Then
 					ssh.LastScript = False
-					ssh.EndTease = True
+					Dim SaveChat As String = ssh.Chat
+					SaveChatLog(False)
+					ssh.Reset()
+					FrmSettings.LockOrgasmChances(False)
+					mainPictureBox.Image = Nothing
+					ChatText.DocumentText = SaveChat
+					ChatText2.DocumentText = SaveChat
+					Exit Sub
 				End If
 				If ssh.HypnoGen = True Then
 					If ssh.Induction = True Then
@@ -5041,7 +5056,6 @@ NullResponse:
 
 				'SUGGESTION: (Stefaf) All Writing to the Chatbox and Wating for fetched Images shoud be in a separat Function. 
 
-
 				Dim TextColor As String = Color2Html(My.Settings.ChatTextColor)
 
 				If ssh.NullResponse = False And ssh.DomTask <> "" Then
@@ -5337,6 +5351,16 @@ DommeSlideshowFallback:
 
 				ssh.GotoFlag = False
 
+				If ssh.EndSession = True Then
+					ssh.EndSession = False
+					Dim SaveChat As String = ssh.Chat
+					SaveChatLog(False)
+					ssh.Reset()
+					FrmSettings.LockOrgasmChances(False)
+					mainPictureBox.Image = Nothing
+					ChatText.DocumentText = SaveChat
+					ChatText2.DocumentText = SaveChat
+				End If
 
 				If ssh.SubGaveUp = True Then
 					If ssh.YesOrNo And ssh.giveUpReturn Then
@@ -5963,6 +5987,17 @@ DommeSlideshowFallback:
 				End If
 
 				ssh.Responding = False
+
+				If ssh.EndSession = True Then
+					ssh.EndSession = False
+					Dim SaveChat As String = ssh.Chat
+					SaveChatLog(False)
+					ssh.Reset()
+					FrmSettings.LockOrgasmChances(False)
+					mainPictureBox.Image = Nothing
+					ChatText.DocumentText = SaveChat
+					ChatText2.DocumentText = SaveChat
+				End If
 
 				If ssh.SubGaveUp = True Then
 					If ssh.YesOrNo And ssh.giveUpReturn Then
@@ -10716,16 +10751,7 @@ OrgasmDecided:
 
 
 		If StringClean.Contains("@EndTease") Then
-			SetVariable("SYS_SubLeftEarly", 0)
-			'My.Settings.Sys_SubLeftEarly = 0
-			'StopEverything()
-			'ResetButton()
-			SaveChatLog(False)
-			ssh.Reset()
-			FrmSettings.LockOrgasmChances(False)
-			ssh.DomTask = "@SystemMessage <b>Tease AI has been reset</b>"
-			ssh.DomChat = "@SystemMessage <b>Tease AI has been reset</b>"
-			'setStartName()
+			ssh.EndSession = True
 			StringClean = StringClean.Replace("@EndTease", "")
 		End If
 
@@ -15394,6 +15420,8 @@ NoPlaylistEndFile:
 						ssh.OrgasmYesNo = False
 						ssh.EndTease = False
 						Return
+					Else
+						If ssh.LastScript = True Then ssh.EndTease = True
 					End If
 
 				End If
@@ -15473,6 +15501,8 @@ RuinedOrgasm:
 					ssh.OrgasmYesNo = False
 					ssh.EndTease = False
 					Return
+				Else
+					If ssh.LastScript = True Then ssh.EndTease = True
 				End If
 
 			End If
@@ -15591,6 +15621,8 @@ NoNoCumFiles:
 					ssh.OrgasmYesNo = False
 					ssh.EndTease = False
 					Return
+				Else
+					If ssh.LastScript = True Then ssh.EndTease = True
 				End If
 
 			End If

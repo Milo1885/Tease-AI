@@ -601,6 +601,8 @@ Public Class SessionState
 
 	Public Property MultiTauntPictureHold As Boolean
 
+	Public Property EndSession As Boolean
+
 
 #Region "----------------------------------- Only for Serialization -------------------------------------"
 
@@ -1320,7 +1322,8 @@ Public Class SessionState
 		End If
         ' Called from Controls UI-Thread -> Execute Code.
 
-        FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
+		FrmSettings.TBHonorific.Text = My.Settings.SubHonorific
+
 		Dispose()
 
 		If ActivationForm IsNot Nothing Then
