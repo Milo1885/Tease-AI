@@ -2009,20 +2009,8 @@ Namespace My
                 Me("SubNo") = value
             End Set
         End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("sorry, apologize, excuse")>
-		Public Property SubSorry() As String
-			Get
-				Return CType(Me("SubSorry"), String)
-			End Get
-			Set
-				Me("SubSorry") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("Mistress")>  _
         Public Property SubHonorific() As String
@@ -2033,56 +2021,8 @@ Namespace My
                 Me("SubHonorific") = value
             End Set
         End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property G1Honorific() As String
-			Get
-				Return CType(Me("G1Honorific"), String)
-			End Get
-			Set
-				Me("G1Honorific") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property G2Honorific() As String
-			Get
-				Return CType(Me("G2Honorific"), String)
-			End Get
-			Set
-				Me("G2Honorific") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property G3Honorific() As String
-			Get
-				Return CType(Me("G3Honorific"), String)
-			End Get
-			Set
-				Me("G3Honorific") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("")>
-		Public Property RandomHonorific() As String
-			Get
-				Return CType(Me("RandomHonorific"), String)
-			End Get
-			Set
-				Me("RandomHonorific") = Value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),  _
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property CBUseHonor() As Boolean
@@ -4219,7 +4159,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property AuditStartup() As Boolean
             Get
                 Return CType(Me("AuditStartup"),Boolean)
@@ -5855,31 +5795,91 @@ Namespace My
                 Me("CBRandomDomme") = value
             End Set
         End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		 Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		 Global.System.Configuration.DefaultSettingValueAttribute("True")>
-		Public Property CBOutputErrors() As Boolean
-			Get
-				Return CType(Me("CBOutputErrors"), Boolean)
-			End Get
-			Set
-				Me("CBOutputErrors") = value
-			End Set
-		End Property
-
-		<Global.System.Configuration.UserScopedSettingAttribute(),
-		Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),
-		Global.System.Configuration.DefaultSettingValueAttribute("False")>
-		Public Property AlwaysNewSlideshow() As Boolean
-			Get
-				Return CType(Me("AlwaysNewSlideshow"), Boolean)
-			End Get
-			Set
-				Me("AlwaysNewSlideshow") = Value
-			End Set
-		End Property
-	End Class
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property CBOutputErrors() As Boolean
+            Get
+                Return CType(Me("CBOutputErrors"),Boolean)
+            End Get
+            Set
+                Me("CBOutputErrors") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property G1Honorific() As String
+            Get
+                Return CType(Me("G1Honorific"),String)
+            End Get
+            Set
+                Me("G1Honorific") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property G2Honorific() As String
+            Get
+                Return CType(Me("G2Honorific"),String)
+            End Get
+            Set
+                Me("G2Honorific") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property G3Honorific() As String
+            Get
+                Return CType(Me("G3Honorific"),String)
+            End Get
+            Set
+                Me("G3Honorific") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property RandomHonorific() As String
+            Get
+                Return CType(Me("RandomHonorific"),String)
+            End Get
+            Set
+                Me("RandomHonorific") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("sorry, apologize, excuse")>  _
+        Public Property SubSorry() As String
+            Get
+                Return CType(Me("SubSorry"),String)
+            End Get
+            Set
+                Me("SubSorry") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property AlwaysNewSlideshow() As Boolean
+            Get
+                Return CType(Me("AlwaysNewSlideshow"),Boolean)
+            End Get
+            Set
+                Me("AlwaysNewSlideshow") = value
+            End Set
+        End Property
+    End Class
 End Namespace
 
 Namespace My

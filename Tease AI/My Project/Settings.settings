@@ -1029,7 +1029,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="AuditStartup" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="WishlistDate" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)" />
@@ -1442,6 +1442,24 @@
     </Setting>
     <Setting Name="CBOutputErrors" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="G1Honorific" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="G2Honorific" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="G3Honorific" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="RandomHonorific" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SubSorry" Type="System.String" Scope="User">
+      <Value Profile="(Default)">sorry, apologize, excuse</Value>
+    </Setting>
+    <Setting Name="AlwaysNewSlideshow" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
