@@ -2181,7 +2181,7 @@ WritingTaskLine:
 
 							Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-							If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
+							If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Or (ssh.SecondSession And FrmSettings.CBDomDenialEnds.Checked = False) Then
 								ssh.SecondSession = False
 								ssh.SubEdging = False
 								ssh.SubStroking = False
@@ -2262,7 +2262,7 @@ RuinedOrgasm:
 
 					Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-					If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
+					If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Or (ssh.SecondSession And FrmSettings.CBDomDenialEnds.Checked = False) Then
 
 						ssh.SecondSession = False
 						ssh.SubEdging = False
@@ -2383,7 +2383,7 @@ NoNoCumFiles:
 
 					Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-					If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
+					If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Or (ssh.SecondSession And FrmSettings.CBDomDenialEnds.Checked = False) Then
 						ssh.SecondSession = False
 						ssh.SubEdging = False
 						ssh.SubStroking = False
@@ -15359,7 +15359,7 @@ NoPlaylistEndFile:
 
 					Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-					If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
+					If RepeatChance < 10 * FrmSettings.domlevelNumBox.Value Or (ssh.SecondSession And FrmSettings.CBDomDenialEnds.Checked = False) Then
 						ssh.SecondSession = False
 						ssh.SubEdging = False
 						ssh.SubStroking = False
@@ -15433,7 +15433,7 @@ RuinedOrgasm:
 
 				Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-				If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
+				If RepeatChance < 8 * FrmSettings.domlevelNumBox.Value Or (ssh.SecondSession And FrmSettings.CBDomDenialEnds.Checked = False) Then
 
 					EdgeTauntTimer.Stop()
 					HoldEdgeTimer.Stop()
@@ -15551,7 +15551,7 @@ NoNoCumFiles:
 
 				Dim RepeatChance As Integer = ssh.randomizer.Next(0, 101)
 
-				If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Or ssh.SecondSession Then
+				If RepeatChance < 4 * FrmSettings.domlevelNumBox.Value Or (ssh.SecondSession And FrmSettings.CBDomDenialEnds.Checked = False) Then
 
 					HoldEdgeTimer.Stop()
 					HoldEdgeTauntTimer.Stop()
