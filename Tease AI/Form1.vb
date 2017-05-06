@@ -7647,7 +7647,11 @@ StatusUpdateEnd:
 
 		StringClean = StringClean.Replace("#SubName", subName.Text)
 
-		StringClean = StringClean.Replace("#DomName", ssh.tempDomName)
+		If Not ssh.SlideshowMain Is Nothing Then
+			StringClean = StringClean.Replace("#DomName", ssh.SlideshowMain.TypeName)
+		Else
+			StringClean = StringClean.Replace("#DomName", ssh.tempDomName)
+		End If
 
 		StringClean = StringClean.Replace("#MainDom", My.Settings.DomName)
 
@@ -8233,29 +8237,32 @@ StatusUpdateEnd:
 							StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
 
 						Else
-							If My.Settings.CBOutputErrors = True Then
-								StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
-							Else
-								StringClean = StringClean.Replace(keyword.Value, "")
-							End If
+
+							StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
+
+							'If My.Settings.CBOutputErrors = True Then
+							'StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
+							'Else
+							'StringClean = StringClean.Replace(keyword.Value, "")
+							'End If
 						End If
-						'Try
-						'lines = FilterList(lines)
-						'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
-						'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
-						'Catch ex As Exception
-						'Log.WriteError("Error Processing vocabulary file:  " & filepath, ex,
-						' "Tease AI did not return a valid line while parsing vocabulary file.")
-						'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
-						'End Try
+					'Try
+					'lines = FilterList(lines)
+					'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
+					'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
+					'Catch ex As Exception
+					'Log.WriteError("Error Processing vocabulary file:  " & filepath, ex,
+					' "Tease AI did not return a valid line while parsing vocabulary file.")
+					'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
+					'End Try
 
-					Else
-						StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
+				Else
+					StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
 
-						Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
-						Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
+					Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
+					Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
 
-					End If
+				End If
 				End If
 				lastKey = keyword.ToString
 			Next
@@ -8338,87 +8345,7 @@ StatusUpdateEnd:
 
 			StringClean = StringClean.Replace("@FollowUp" & FollowTemp & "(" & FollowLineTemp & ")", "")
 		End If
-		' The @If[] Command allows you to compare Variables and go to a specific line if the statement is true. The correct format is @If[VarName]>[varName2]Then(Goto Line)
-		' For example, If[StrokeTotal]>[1000]Then(Thousand Strokes) would check if the Variable "StrokeTotal" is greater than 1000, and go to (Thousand Strokes) if so. 
-		' The @If[] Command can compare any combination of Variables and numeric values with = (or ==), <>, >, <, >= and <= . String Variables can be compared with = (or ==) and <> 
-		' More than one @If[] Command can be used per line. Tease AI will move to the line specified by whichever true statement happened last in the line.
-
-		If StringClean.Contains("@If[") Then
-			If StringClean.Contains("]AND[") Then StringClean = StringClean.Replace("]AND[", "]And[")
-			If StringClean.Contains("]OR[") Then StringClean = StringClean.Replace("]OR[", "]Or[")
-			Do
-
-				Dim SCIfVar As String() = Split(StringClean)
-				Dim SCGotVar As String = "Null"
-
-				For i As Integer = 0 To SCIfVar.Length - 1
-					If SCIfVar(i).Contains("@If[") Then
-						Dim IFJoin As Integer = 0
-						If Not SCIfVar(i).Contains(")") Then
-							Do
-								IFJoin += 1
-								SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
-								SCIfVar(i + IFJoin) = ""
-							Loop Until SCIfVar(i).Contains(")")
-						End If
-						SCGotVar = SCIfVar(i)
-						SCIfVar(i) = ""
-						StringClean = Join(SCIfVar)
-						Do
-							StringClean = StringClean.Replace("  ", " ")
-						Loop Until Not StringClean.Contains("  ")
-						Exit For
-					End If
-				Next
-
-				If SCGotVar.Contains("]And[") Then
-
-					Dim AndCheck As Boolean = True
-
-					For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
-						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = False Then
-							AndCheck = False
-							Exit For
-						End If
-						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]And", "")
-					Next
-
-					If AndCheck = True Then
-						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-						ssh.SkipGotoLine = True
-						GetGoto()
-					End If
-
-				ElseIf SCGotVar.Contains("]Or[") Then
-
-					Dim OrCheck As Boolean = False
-
-					For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
-						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
-							OrCheck = True
-							Exit For
-						End If
-						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]Or", "")
-					Next
-
-					If OrCheck = True Then
-						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-						ssh.SkipGotoLine = True
-						GetGoto()
-					End If
-
-				Else
-
-					If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
-						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
-						ssh.SkipGotoLine = True
-						GetGoto()
-					End If
-
-				End If
-
-			Loop Until Not StringClean.Contains("If")
-		End If
+		
 
 RinseLatherRepeat:
 		'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
@@ -9845,6 +9772,88 @@ TaskCleanSet:
 				End If
 
 			Next
+		End If
+
+		' The @If[] Command allows you to compare Variables and go to a specific line if the statement is true. The correct format is @If[VarName]>[varName2]Then(Goto Line)
+		' For example, If[StrokeTotal]>[1000]Then(Thousand Strokes) would check if the Variable "StrokeTotal" is greater than 1000, and go to (Thousand Strokes) if so. 
+		' The @If[] Command can compare any combination of Variables and numeric values with = (or ==), <>, >, <, >= and <= . String Variables can be compared with = (or ==) and <> 
+		' More than one @If[] Command can be used per line. Tease AI will move to the line specified by whichever true statement happened last in the line.
+
+		If StringClean.Contains("@If[") Then
+			If StringClean.Contains("]AND[") Then StringClean = StringClean.Replace("]AND[", "]And[")
+			If StringClean.Contains("]OR[") Then StringClean = StringClean.Replace("]OR[", "]Or[")
+			Do
+
+				Dim SCIfVar As String() = Split(StringClean)
+				Dim SCGotVar As String = "Null"
+
+				For i As Integer = 0 To SCIfVar.Length - 1
+					If SCIfVar(i).Contains("@If[") Then
+						Dim IFJoin As Integer = 0
+						If Not SCIfVar(i).Contains(")") Then
+							Do
+								IFJoin += 1
+								SCIfVar(i) = SCIfVar(i) & " " & SCIfVar(i + IFJoin)
+								SCIfVar(i + IFJoin) = ""
+							Loop Until SCIfVar(i).Contains(")")
+						End If
+						SCGotVar = SCIfVar(i)
+						SCIfVar(i) = ""
+						StringClean = Join(SCIfVar)
+						Do
+							StringClean = StringClean.Replace("  ", " ")
+						Loop Until Not StringClean.Contains("  ")
+						Exit For
+					End If
+				Next
+
+				If SCGotVar.Contains("]And[") Then
+
+					Dim AndCheck As Boolean = True
+
+					For x As Integer = 0 To SCGotVar.Replace("]And[", "").Count - 1
+						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = False Then
+							AndCheck = False
+							Exit For
+						End If
+						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]And", "")
+					Next
+
+					If AndCheck = True Then
+						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+						ssh.SkipGotoLine = True
+						GetGoto()
+					End If
+
+				ElseIf SCGotVar.Contains("]Or[") Then
+
+					Dim OrCheck As Boolean = False
+
+					For x As Integer = 0 To SCGotVar.Replace("]Or[", "").Count - 1
+						If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+							OrCheck = True
+							Exit For
+						End If
+						SCGotVar = SCGotVar.Replace("[" & GetParentheses(SCGotVar, "@If[", 2) & "]Or", "")
+					Next
+
+					If OrCheck = True Then
+						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+						ssh.SkipGotoLine = True
+						GetGoto()
+					End If
+
+				Else
+
+					If GetIf("[" & GetParentheses(SCGotVar, "@If[", 2) & "]") = True Then
+						ssh.FileGoto = GetParentheses(SCGotVar, "Then(")
+						ssh.SkipGotoLine = True
+						GetGoto()
+					End If
+
+				End If
+
+			Loop Until Not StringClean.Contains("If")
 		End If
 
 		' The @InputVar[] stops script progression and waits for the user to input his next message. Whatever the user types next will be saved as a Variable named whatever you specify in the brackets.

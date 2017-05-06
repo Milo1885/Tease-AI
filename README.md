@@ -16,11 +16,11 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 	* Added "Output Error Message to Chat Window" option to Misc Settings. Whereever possible, Error messages that are sent to the Errorlogs will be displayed in the chat window as well. Certain error messages that were already displayed to the chat window now have adsditional details. 
 
-	* Honorifics are now checked every time you write, not just when answering yes or no questions. (dariobrun)
+	* Honorifics are now checked for please, thanks and sorry, not only yes\no\hi. Words\Phrases for "sorry" can now be set in Sub Settings. (dariobrun)
 
 	* Changes to the punishment after failing too many times to use the honorific: now you will not get an automatic @CBT but you can decide what happens in the #SYS_HonorificPunish vocab. You can even use @CallReturn() to deal with it, for example. (dariobrun)
 	
-    * Contacts can now use their own honorifics (dariobrun)
+    * Contacts can now use their own honorifics. These can be set in Settings->Apps->Glitter. The starting values will be blank, so Contacts will not check for honorifics unless you add them (add Honorific Must be Included with Key Phrases" is checked) (dariobrun)
 
 	* CustomMode() can now use Vocabulary files. For example, @CustomMode(#Finished, Goto, Finished Task) would goto the line (Finished Task) if the user said any of the lines inside #Finished (dariobrun)
 
@@ -64,6 +64,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* #Contact1Honorific - Will be replaced with the honorific set for Contact 1 (dariobrun)
     * #Contact2Honorific - Will be replaced with the honorific set for Contact 2 (dariobrun)
     * #Contact3Honorific - Will be replaced with the honorific set for Contact 3 (dariobrun)
+    * #MainDom - #DomName will refer to the current main domme in the session. So, for example if you are doing a randomcontact/glittercontact session, during that session it will refer to her. #MainDom, instead, will always refer to the main domme name no matter what kind of session you are doing (dariobrun)
 	
 * Bugfixes:
 
@@ -72,7 +73,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
     * @ShowImage[dir\*] and @ShowImage[dir\*.*] will now only return a random image file as opposed to any file type (dariobrun)
     * @FollowUp() would activate Commands inside follow up lines before the lines were displayed (dariobrun) 
     * Contacts will only be removed from the room if someone else is present, preventing crashes arising from a session with 0 particpants left (dariobrun)
-    * @Group() Command Filter would not react correctly to certain combinations (dariobrun)
+    * @Group() Command Filter showed lines incorrectly. For instance, @Group(1) was being read in any situation in which 1 was present (so also D1,D123,12 etc etc). @Group() can now use multiple groups. For example, @Group(1,D1,123) will read this line both in case of group1, group D1 and group123 (dariobrun)
 	* Tag Commands can now search for an indefinite number of tags instead of just 3 (dariobrun)
 	* @ImageTag(a,b,c,d,e) previously would return an image even if it just had a,b,c (and wouldn't check for d and e). Now it shows an image only it has all a,b,c,d,e (dariobrun)
     * Prevent endless loop in statuses (pepsifreak)
@@ -98,12 +99,15 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	* Lines containing Commands that show Blog\Genre\Boobs\Butt\Liked\Disliked images will now be filtered out if the picture window is not visible (such as when a video is playing)
 	* End of tease and @EndTease no longer clear the chat window or display that Tease AI has been reset
     * Increased Tease Length Minimum and Maximum upper ranges to accommodate longer runtimes when using Spicy
+    * Program will automatically start a stroke/tauntcycle if it reaches the end of a link script or the beforetease script even if the user forgot to use @End and @StartStroking/Taunts, to prevent session from blocking (dariobrun) 
     * @CallReturn() can now call a random file using wildcards. For example, @CallReturn(dir\*) or @CallReturn(dir\*.txt)
-    * @PlayAudio[], @PlayVideo[] and @ShowImage[] can now use files outside the relative Tease AI directory by using the full path name. For example, @PlayAudio[C:\dir\subdir\name.extension]. This is not recommended for scripts that you wish to share. You can also use wildcards with these Commands to show random media files. For example, @PlayVideo[c:\dir\subdir\*] (dariobrun)
+    * @PlayAudio[], @PlayVideo[] and @ShowImage[] can now use files outside the relative Tease AI directory by using the full path name. For example, @PlayAudio[C:\dir\subdir\name.extension]. This is not recommended for scripts that you wish to share. You can also use wildcards with these Commands to show random media files. For example, @PlayVideo[c:\dir\subdir\*]. This also works with @PlayAvoidTheEdge[], @PlayCensorshipSucks[] and @PlayRedLightGreenLight[] (dariobrun)
     * Audit Scripts on Startup is now off by default
     * Commas are no longer affected when auditing scripts
 	* Blank lines are now only removed from URL Files when auditing scripts
     * #DomHonorific will be replaced with the appropriate Contact\Random honorific if a different domme has been set for the session (dariobrun)
+    * Honorifics for Random Dommes can be set in Settings->Apps->Glitter. #Vocabulary files can be used for either further randomization (dariobrun)
+    * All modes are now stored when using a callreturn and resumed when going back (dariobrun)
     * @TimeOut() can now be used with Vocabulary files to determine the time needed to trigger it (dariobrun)
 	* Streamlined the TTS commands and the fonttype/fontcolor/fontsze to use so that they are now tied to the contact currently speaking (dariobrun)
 	* ")" can now be used as a character inside @RT()\@RandomText() and @FollowUp() (dariobrun)
