@@ -68,7 +68,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 * Bugfixes:
 
-    * When Tease AI parses a Vocabulary file with no valid lines, it will now highlight the Vocabularly filename in orange instead of causing a crash. This works similarly to how the program will currently highlight the Keyword in red if it does not exist at all (dariobrun & 1885) 
+    * When Tease AI parses a Vocabulary file with no valid lines, it will now highlight the Vocabularly filename in orange instead of causing a crash. This works similarly to how the program will currently highlight the Keyword in red if it does not exist at all. This only applies if Output Errors to Chat Window is selected, otherwise the #Keyword will just be removed from the line (dariobrun & 1885) 
     * @EdgeHold() and similar Commands did not make the user hold the edge for the specified amount of time
     * @ShowImage[dir\*] and @ShowImage[dir\*.*] will now only return a random image file as opposed to any file type (dariobrun)
     * @FollowUp() would activate Commands inside follow up lines before the lines were displayed (dariobrun) 

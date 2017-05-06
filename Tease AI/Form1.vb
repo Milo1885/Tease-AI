@@ -8238,31 +8238,32 @@ StatusUpdateEnd:
 
 						Else
 
-							StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
-
-							'If My.Settings.CBOutputErrors = True Then
 							'StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
-							'Else
-							'StringClean = StringClean.Replace(keyword.Value, "")
-							'End If
+
+							If My.Settings.CBOutputErrors = True Then
+								StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
+							Else
+								StringClean = StringClean.Replace(keyword.Value, "")
+							End If
 						End If
-					'Try
-					'lines = FilterList(lines)
-					'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
-					'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
-					'Catch ex As Exception
-					'Log.WriteError("Error Processing vocabulary file:  " & filepath, ex,
-					' "Tease AI did not return a valid line while parsing vocabulary file.")
-					'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
-					'End Try
 
-				Else
-					StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
+						'Try
+						'lines = FilterList(lines)
+						'Dim PoundVal As Integer = ssh.randomizer.Next(0, lines.Count)
+						'StringClean = StringClean.Replace(keyword.Value, lines(PoundVal))
+						'Catch ex As Exception
+						'Log.WriteError("Error Processing vocabulary file:  " & filepath, ex,
+						' "Tease AI did not return a valid line while parsing vocabulary file.")
+						'StringClean = "ERROR: Tease AI did not return a valid line while parsing vocabulary file: " & keyword.Value
+						'End Try
 
-					Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
-					Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
+					Else
+						StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
 
-				End If
+						Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
+						Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
+
+					End If
 				End If
 				lastKey = keyword.ToString
 			Next
