@@ -10604,10 +10604,10 @@ OrgasmDecided:
 		If StringClean.Contains("@WritingTask(") Or StringClean.Contains("@WritingTaskRandom(") Then
 			If StringClean.Contains("@WritingTask(") Then
 				ssh.randomWriteTask = False
-				StringClean = StringClean.Replace("@WritingTask", "")
+				StringClean = StringClean.Replace("@WritingTask(" & GetParentheses(StringClean, "@WritingTask(") & ")", "")
 			Else
 				ssh.randomWriteTask = True
-				StringClean = StringClean.Replace("@WritingTaskRandom", "")
+				StringClean = StringClean.Replace("@WritingTaskRandom(" & GetParentheses(StringClean, "@WritingTaskRandom(") & ")", "")
 			End If
 
 			ssh.WritingTaskFlag = True
@@ -21130,6 +21130,7 @@ ShowedBlogImage:
 		LBLWritingTaskText.Text = StripCommands(LBLWritingTaskText.Text)
 		LBLWritingTaskText.Text = StripFormat(LBLWritingTaskText.Text)
 		LBLWritingTaskText.Text = LBLWritingTaskText.Text.Replace("  ", " ")
+		LBLWritingTaskText.Text = LBLWritingTaskText.Text.Trim
 	End Sub
 
 	Private Function goingTo(ByVal commandToCheck As String) As String
