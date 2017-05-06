@@ -43,10 +43,6 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
     @DommeTagOr(a,b)-->return images having a, if it doesn't find any, return images having b
     @DommeTagAny(a,b,)-->return images having either a or b
 
-now, in linear scripts (not in responses/vocabs) if @DommeTag(a,b) finds no picture to show, it will perform a @DommeTagOr(a,b) to try to find a pic having at least one of the tags present 
-
-(in the order a-->b) 
-
     * @RandomContact - Randomly assigns the line to one of the available Contacts in the room (dariobrun)
 
 	* @ContinueSession - Used during an End script to gaurantee that the session will continue. @ContinueSession will not activate if the user has "Denial Always Ends Tease" or "Orgasm Always Ends Tease" checked. (oxiklein)
