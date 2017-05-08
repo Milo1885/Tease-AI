@@ -6,6 +6,43 @@ Tease AI is adult-oriented software that aims to create an interactive tease and
 Stefaf: Integration of Class myDirectory: Status ongoing.
 	Testrun to sort Lists like Win-Explorer: initialized in v0.54.5.1
 	
+	
+# Changelog - Patch 54.9.0
+
+* Added Features:
+
+	* @PlayVideo() can now be used to specify video genres. For example:
+
+    @PlayVideo(Lesbian) - Plays a lesbian video
+    @PlayVideo(Blowjob, 30) - Plays 30 seconds of a blowjob video
+    @PlayVideo(10, Softcore) - Plays 10 seconds of as softcore video
+
+    The following genres may be specified: (Case doesn't matter, but @PlayVideo() only supports 1 genre to be specified)
+
+    Hardcore
+	Softcore
+	Lesbian
+	Blowjob
+	Femdom
+	Femsub
+	JOI
+	CH
+	General
+	Hardcore Domme
+	Softcore Domme
+	Lesbian Domme
+	Blowjob Domme
+	Femdom Domme
+	Femsub Domme
+	JOI Domme
+	CH Domme
+	General Domme
+	
+* Miscellaneous:
+
+    * Filtering process optimized to work in one pass instead of three (dariobrun)	
+	
+	
 # Changelog - Patch 54.8.0
 
 * Added Features:

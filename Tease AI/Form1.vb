@@ -6615,23 +6615,23 @@ Retry:
 		'======================================================================================
 		'									Genre Videos
 		'======================================================================================
-		If My.Settings.CBHardcore = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoHardcore))
+		If My.Settings.CBHardcore = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "HARDCORE") Then _
+		__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoHardcore))
 
-		If My.Settings.CBSoftcore = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoSoftcore))
+		If My.Settings.CBSoftcore = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "SOFTCORE") Then _
+		__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoSoftcore))
 
-		If My.Settings.CBLesbian = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoLesbian))
+		If My.Settings.CBLesbian = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "LESBIAN") Then _
+		__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoLesbian))
 
-		If My.Settings.CBBlowjob = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoBlowjob))
+		If My.Settings.CBBlowjob = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "BLOWJOB") Then _
+		__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoBlowjob))
 
-		If My.Settings.CBFemdom = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemdom))
+		If My.Settings.CBFemdom = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "FEMDOM") Then _
+		__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemdom))
 
-		If My.Settings.CBFemsub = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemsub))
+		If My.Settings.CBFemsub = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "FEMSUB") Then _
+		__TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemsub))
 
 		If ssh.NoSpecialVideo = True Then GoTo SkipSpecial
 
@@ -6644,39 +6644,39 @@ Retry:
 		'======================================================================================
 		'								Special - Videos
 		'======================================================================================
-		If My.Settings.CBJOI = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOI))
+		If My.Settings.CBJOI = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "JOI") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOI))
 
-		If My.Settings.CBCH = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCH))
+		If My.Settings.CBCH = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "CH") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCH))
 
 SkipSpecial:
 		'======================================================================================
 		'									General Videos
 		'======================================================================================
-		If My.Settings.CBGeneral = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoGeneral))
+		If My.Settings.CBGeneral = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "GENERAL") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoGeneral))
 
 		'======================================================================================
 		'									Domme - Videos
 		'======================================================================================
-		If My.Settings.CBHardcoreD = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoHardcoreD))
+		If My.Settings.CBHardcoreD = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "HARDCORE DOMME") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoHardcoreD))
 
-		If My.Settings.CBSoftcoreD = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoSoftcoreD))
+		If My.Settings.CBSoftcoreD = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "SOFTCORE DOMME") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoSoftcoreD))
 
-		If My.Settings.CBLesbianD = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoLesbianD))
+		If My.Settings.CBLesbianD = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "LESBIAN DOMME") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoLesbianD))
 
-		If My.Settings.CBBlowjobD = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoBlowjobD))
+		If My.Settings.CBBlowjobD = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "BLOWJOB DOMME") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoBlowjobD))
 
-		If My.Settings.CBFemdomD = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemdomD))
+		If My.Settings.CBFemdomD = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "FEMDOM DOMME") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemdomD))
 
-		If My.Settings.CBFemsubD = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemsubD))
+		If My.Settings.CBFemsubD = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "FEMSUB DOMME") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoFemsubD))
 
 		If ssh.NoSpecialVideo = True Then GoTo SkipSpecialD
 		If ssh.ScriptVideoTeaseFlag = True Then
@@ -6688,20 +6688,20 @@ SkipSpecial:
 		'======================================================================================
 		'								Domme - Special - Videos
 		'======================================================================================
-		If My.Settings.CBJOID = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOID))
+		If My.Settings.CBJOID = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "JOI DOMME") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoJOID))
 
-		If My.Settings.CBCHD = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCHD))
+		If My.Settings.CBCHD = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "CH DOMME") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoCHD))
 
 SkipSpecialD:
 		'======================================================================================
 		'								Domme - General Videos
 		'======================================================================================
-		If My.Settings.CBGeneralD = True Then _
-		 __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoGeneralD))
+		If My.Settings.CBGeneralD = True And (ssh.VideoGenre = "ALL" Or ssh.VideoGenre = "GENERAL DOMME") Then _
+   __TotalFiles.AddRange(myDirectory.GetFilesVideo(My.Settings.VideoGeneralD))
 
-
+		ssh.VideoGenre = "ALL"
 
 		If __TotalFiles.Count = 0 Then Exit Sub
 
@@ -11131,6 +11131,7 @@ OrgasmDecided:
 
 		If StringClean.Contains("@CheckVideo") Then
 			ssh.VideoCheck = True
+			ssh.VideoGenre = "ALL"
 			RandomVideo()
 			If ssh.NoVideo = True Then
 				ssh.FileGoto = "(No Videos Found)"
@@ -11151,6 +11152,7 @@ OrgasmDecided:
 				selectVideo(videoFlag)
 				StringClean = StringClean.Replace("@PlayCensorshipSucks[" & videoFlag & "]", "")
 			Else
+				ssh.VideoGenre = "ALL"
 				RandomVideo()
 				StringClean = StringClean.Replace("@PlayCensorshipSucks", "")
 			End If
@@ -11201,6 +11203,7 @@ OrgasmDecided:
 				selectVideo(videoFlag)
 				StringClean = StringClean.Replace("@PlayAvoidTheEdge[" & videoFlag & "]", "")
 			Else
+				ssh.VideoGenre = "ALL"
 				RandomVideo()
 				StringClean = StringClean.Replace("@PlayAvoidTheEdge", "")
 			End If
@@ -11247,6 +11250,7 @@ OrgasmDecided:
 				selectVideo(videoFlag)
 				StringClean = StringClean.Replace("@PlayRedLightGreenLight[" & videoFlag & "]", "")
 			Else
+				ssh.VideoGenre = "ALL"
 				RandomVideo()
 				StringClean = StringClean.Replace("@PlayRedLightGreenLight", "")
 			End If
@@ -11329,10 +11333,46 @@ ExternalAudio:
 
 		If StringClean.Contains("@PlayVideo(") Then
 
+			ssh.VideoGenre = "ALL"
+			Dim VidInt As Integer = 0
 
 			Dim VidFlag As String = GetParentheses(StringClean, "@PlayVideo(")
-			Dim VidInt As Integer = Val(VidFlag)
-			If UCase(VidFlag).Contains("M") Then VidInt *= 60
+
+			If VidFlag.Contains(",") Then VidFlag = FixCommas(VidFlag)
+			Dim FlagArray As String() = VidFlag.Split(",")
+
+			For i As Integer = 0 To FlagArray.Count - 1
+
+				If Val(FlagArray(i)) > 0 Then
+					VidInt = Val(FlagArray(i))
+					If UCase(FlagArray(i)).Contains("M") Then VidInt *= 60
+				End If
+
+				If UCase(FlagArray(i)).Contains("HARDCORE") Then ssh.VideoGenre = "HARDCORE"
+				If UCase(FlagArray(i)).Contains("SOFTCORE") Then ssh.VideoGenre = "SOFTCORE"
+				If UCase(FlagArray(i)).Contains("LESBIAN") Then ssh.VideoGenre = "LESBIAN"
+				If UCase(FlagArray(i)).Contains("BLOWJOB") Then ssh.VideoGenre = "BLOWJOB"
+				If UCase(FlagArray(i)).Contains("FEMDOM") Then ssh.VideoGenre = "FEMDOM"
+				If UCase(FlagArray(i)).Contains("FEMSUB") Then ssh.VideoGenre = "FEMSUB"
+				If UCase(FlagArray(i)).Contains("JOI") Then ssh.VideoGenre = "JOI"
+				If UCase(FlagArray(i)).Contains("CH") Then ssh.VideoGenre = "CH"
+				If UCase(FlagArray(i)).Contains("GENERAL") Then ssh.VideoGenre = "GENERAL"
+
+				If UCase(FlagArray(i)).Contains("HARDCORE DOMME") Then ssh.VideoGenre = "HARDCORE DOMME"
+				If UCase(FlagArray(i)).Contains("SOFTCORE DOMME") Then ssh.VideoGenre = "SOFTCORE DOMME"
+				If UCase(FlagArray(i)).Contains("LESBIAN DOMME") Then ssh.VideoGenre = "LESBIAN DOMME"
+				If UCase(FlagArray(i)).Contains("BLOWJOB DOMME") Then ssh.VideoGenre = "BLOWJOB DOMME"
+				If UCase(FlagArray(i)).Contains("FEMDOM DOMME") Then ssh.VideoGenre = "FEMDOM DOMME"
+				If UCase(FlagArray(i)).Contains("FEMSUB DOMME") Then ssh.VideoGenre = "FEMSUB DOMME"
+				If UCase(FlagArray(i)).Contains("JOI DOMME") Then ssh.VideoGenre = "JOI DOMME"
+				If UCase(FlagArray(i)).Contains("CH DOMME") Then ssh.VideoGenre = "CH DOMME"
+				If UCase(FlagArray(i)).Contains("GENERAL DOMME") Then ssh.VideoGenre = "GENERAL DOMME"
+
+			Next
+
+
+			'Dim VidInt As Integer = Val(VidFlag)
+			'If UCase(VidFlag).Contains("M") Then VidInt *= 60
 
 			If StringClean.Contains("@JumpVideo") Then
 				ssh.JumpVideo = True
@@ -11344,8 +11384,10 @@ ExternalAudio:
 
 			If ssh.NoVideo = False Then
 				ssh.TeaseVideo = True
-				ssh.VideoTick = VidInt
-				VideoTimer.Start()
+				If VidInt > 0 Then
+					ssh.VideoTick = VidInt
+					VideoTimer.Start()
+				End If
 			Else
 				MessageBox.Show(Me, "No videos were found!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Hand)
 			End If
@@ -11359,6 +11401,8 @@ ExternalAudio:
 
 
 		If StringClean.Contains("@PlayVideo") Then
+
+			ssh.VideoGenre = "ALL"
 
 			If StringClean.Contains("@JumpVideo") Then
 				ssh.JumpVideo = True
@@ -13556,41 +13600,69 @@ VTSkip:
 		'		Grouped-Lines-Check-END 
 		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
-		For i As Integer = 0 To ListClean.Count - 1 Step ListIncrement
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		' NEW FilterList TEST Begin
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
-			FilterPass = True
-
-			For x As Integer = 0 To ListIncrement - 1
+		For i As Integer = ListClean.Count - ListIncrement To 0 Step -ListIncrement
+			For x As Integer = ListIncrement - 1 To 0 Step -1
 				If GetFilter(ListClean(i + x)) = False Then
-					FilterPass = False
+					For n As Integer = ListIncrement - 1 To 0 Step -1
+						ListClean.RemoveAt(i + n)
+					Next
 					Exit For
 				End If
 			Next
-
-			If FilterPass = False Then
-				For x As Integer = 0 To ListIncrement - 1
-					ListClean(i + x) = ListClean(i + x) & "###-INVALID-###"
-				Next
-			End If
-
 		Next
 
-		For i As Integer = ListClean.Count - 1 To 0 Step -1
-			If ListClean(i).Contains("###-INVALID-###") Then ListClean.RemoveAt(i)
-		Next
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		' NEW FilterList TEST End
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
-		'Dim FilteredList As New List(Of String)
 
-		'For i As Integer = 0 To ListClean.Count - 1
-		'If Not ListClean(i).Contains("###-INVALID-###") Then FilteredList.Add(ListClean(i))
-		'Next
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		' Current FilterList Begin
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+
+				'For i As Integer = 0 To ListClean.Count - 1 Step ListIncrement
+
+				'FilterPass = True
+
+				'For x As Integer = 0 To ListIncrement - 1
+				'If GetFilter(ListClean(i + x)) = False Then
+				'FilterPass = False
+				'Exit For
+				'End If
+				'Next
+
+				'If FilterPass = False Then
+				'For x As Integer = 0 To ListIncrement - 1
+				'ListClean(i + x) = ListClean(i + x) & "###-INVALID-###"
+				'Next
+				'End If
+
+				'Next
+
+				'For i As Integer = ListClean.Count - 1 To 0 Step -1
+				'If ListClean(i).Contains("###-INVALID-###") Then ListClean.RemoveAt(i)
+				'Next
+
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+		' Current FilterList End
+		'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
+
+				'Dim FilteredList As New List(Of String)
+
+				'For i As Integer = 0 To ListClean.Count - 1
+				'If Not ListClean(i).Contains("###-INVALID-###") Then FilteredList.Add(ListClean(i))
+				'Next
 
 #If TRACE Then
-		Trace.Unindent()
-		Trace.WriteLine("FilterList finished - Duration: " & sw.ElapsedMilliseconds & "ms")
+				Trace.Unindent()
+				Trace.WriteLine("FilterList finished - Duration: " & sw.ElapsedMilliseconds & "ms")
 #End If
-		'If ListClean.Count = 0 Then ListClean.Add("test")
-		Return ListClean
+				'If ListClean.Count = 0 Then ListClean.Add("test")
+				Return ListClean
 
 	End Function
 
@@ -19657,6 +19729,7 @@ restartInstantly:
 
 	Private Sub BTNRandomVideo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BTNRandomVideo.Click
 		ssh.RandomizerVideo = True
+		ssh.VideoGenre = "ALL"
 		RandomVideo()
 		ssh.RandomizerVideo = False
 	End Sub
@@ -19671,6 +19744,7 @@ restartInstantly:
 
 		ssh.ScriptVideoTease = "Censorship Sucks"
 		ssh.ScriptVideoTeaseFlag = True
+		ssh.VideoGenre = "ALL"
 		RandomVideo()
 		ssh.ScriptVideoTeaseFlag = False
 		ssh.CensorshipGame = True
@@ -19692,6 +19766,7 @@ restartInstantly:
 		ssh.ScriptVideoTeaseFlag = True
 		ssh.AvoidTheEdgeStroking = True
 		ssh.AvoidTheEdgeGame = True
+		ssh.VideoGenre = "ALL"
 		RandomVideo()
 		ssh.ScriptVideoTeaseFlag = False
 		ssh.VideoTease = True
@@ -19714,6 +19789,7 @@ restartInstantly:
 		ssh.ScriptVideoTeaseFlag = True
 		'AvoidTheEdgeStroking = True
 		ssh.RLGLGame = True
+		ssh.VideoGenre = "ALL"
 		RandomVideo()
 		ssh.ScriptVideoTeaseFlag = False
 		ssh.VideoTease = True

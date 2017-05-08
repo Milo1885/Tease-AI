@@ -2453,6 +2453,7 @@ SkipDeserializing:
 				If ScriptList(i).Contains("@CheckVideo") Then
 					If Not RTBScriptReq.Text.Contains("* At least one Genre or Domme Video path set and selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one Genre or Domme Video path set and selected *" & Environment.NewLine
 					Form1.ssh.VideoCheck = True
+					Form1.ssh.VideoGenre = "ALL"
 					Form1.RandomVideo()
 					If Form1.ssh.NoVideo = True Then ScriptReqFailed = True
 					Form1.ssh.VideoCheck = False
@@ -2464,6 +2465,7 @@ SkipDeserializing:
 					If Not RTBScriptReq.Text.Contains("* At least one non-Special Genre or Domme Video path set and selected *") Then RTBScriptReq.Text = RTBScriptReq.Text & "* At least one non-Special Genre or Domme Video path set and selected *" & Environment.NewLine
 					Form1.ssh.VideoCheck = True
 					Form1.ssh.NoSpecialVideo = True
+					Form1.ssh.VideoGenre = "ALL"
 					Form1.RandomVideo()
 					If Form1.ssh.NoVideo = True Then ScriptReqFailed = True
 					Form1.ssh.VideoCheck = False
@@ -2846,6 +2848,7 @@ SkipDeserializing:
 
 				If AvailList(j).Contains("@CheckVideo") Then
 					Form1.ssh.VideoCheck = True
+					Form1.ssh.VideoGenre = "ALL"
 					Form1.RandomVideo()
 					If Form1.ssh.NoVideo = True Then AvailFail = True
 					Form1.ssh.VideoCheck = False
@@ -2855,6 +2858,7 @@ SkipDeserializing:
 				If AvailList(j).Contains("@PlayCensorshipSucks") Or AvailList(j).Contains("@PlayAvoidTheEdge") Or AvailList(j).Contains("@PlayRedLightGreenLight") Then
 					Form1.ssh.VideoCheck = True
 					Form1.ssh.NoSpecialVideo = True
+					Form1.ssh.VideoGenre = "ALL"
 					Form1.RandomVideo()
 					If Form1.ssh.NoVideo = True Then AvailFail = True
 					Form1.ssh.VideoCheck = False

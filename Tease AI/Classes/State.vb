@@ -603,6 +603,8 @@ Public Class SessionState
 
 	Public Property EndSession As Boolean
 
+	Public Property VideoGenre As String
+
 
 #Region "----------------------------------- Only for Serialization -------------------------------------"
 
