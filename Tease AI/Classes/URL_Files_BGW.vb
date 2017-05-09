@@ -536,6 +536,7 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 				Dim TargetFileName As String
 				TargetFileName = imageBlogUrl
 				TargetFileName = TargetFileName.Replace("http://", "")
+				TargetFileName = TargetFileName.Replace("https://", "")
 				TargetFileName = TargetFileName.Replace("/", "")
 
 				Dim TargetFilePath As String = _ImageURLFileDir & TargetFileName & ".txt"
@@ -561,12 +562,15 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 					Dim doc As XmlDocument = New XmlDocument()
 					Dim ImageURLs As New List(Of String)
 
-					Request = WebRequest.Create(imageBlogUrl & "/api/read?start=" & BlogCycle & "&num=" & BlogCycleSize)
+					Dim ReadAPI As String = imageBlogUrl & "/api/read?start=" & BlogCycle & "&num=" & BlogCycleSize
+					ReadAPI = ReadAPI.Replace("//api", "/api")
+
+					Request = WebRequest.Create(ReadAPI)
 					Response = Request.GetResponse()
 
 					Dim Reader As New XmlTextReader(Response.GetResponseStream)
 					doc.Load(Reader)
-					Request.Abort() ' Otherwise you cant't run it a seccond time on the same URL that session!
+					Request.Abort()	' Otherwise you cant't run it a seccond time on the same URL that session!
 					Response.Close()
 
 					' Get total post count on first run.
@@ -578,9 +582,9 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 						Next
 					Else
 						Me.OnProgressChanged(BlogCycle / BlogCycleSize + 1,
-											 Math.Ceiling(TotalPostCount / BlogCycleSize),
-											 0, ImageURLs.Count,
-											 WorkingStages.Blog_Scraping, Nothing)
+							  Math.Ceiling(TotalPostCount / BlogCycleSize),
+							  0, ImageURLs.Count,
+							  WorkingStages.Blog_Scraping, Nothing)
 					End If
 
 					' Read all image urls in given range.
@@ -591,9 +595,9 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 					Next
 
 					Me.OnProgressChanged(BlogCycle / BlogCycleSize + 1,
-										 Math.Ceiling(TotalPostCount / BlogCycleSize),
-										 0, ImageURLs.Count,
-										 WorkingStages.Blog_Scraping, Nothing)
+						  Math.Ceiling(TotalPostCount / BlogCycleSize),
+						  0, ImageURLs.Count,
+						  WorkingStages.Blog_Scraping, Nothing)
 
 
 					For i = 0 To ImageURLs.Count - 1
@@ -605,9 +609,9 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 							If Me.CancellationPending Then GoTo ExitScrape
 
 							Me.OnProgressChanged(BlogCycle / BlogCycleSize + 1,
-												 Math.Ceiling(TotalPostCount / BlogCycleSize),
-												 i + 1, ImageURLs.Count,
-												 WorkingStages.Processing, Nothing)
+								  Math.Ceiling(TotalPostCount / BlogCycleSize),
+								  i + 1, ImageURLs.Count,
+								  WorkingStages.Processing, Nothing)
 
 							'===============================================================================
 							'                         Check what to do with URL
@@ -619,20 +623,20 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 							ElseIf Me.Work = Tasks.RebuildURLFiles AndAlso UrlListOld.Contains(ImageUrl) Then
 								'########################### URL-Rebuild - Known URL #############################
 								' If rebuilding URL-File add only previous known links.
-								UrlListNew.Add(ImageUrl)                            ' Add to new list
-								GoTo NextImage                                      ' No Saving or Reviewing    
-							ElseIf Me.Work = Tasks.RebuildURLFiles
+								UrlListNew.Add(ImageUrl)							' Add to new list
+								GoTo NextImage										' No Saving or Reviewing    
+							ElseIf Me.Work = Tasks.RebuildURLFiles Then
 								'########################## URL-Rebuild - Unknown URL ############################
 								' If rebuilding URL-File skip previous unkwown URLs.
 								GoTo NextImage
-							ElseIf Me.Work = Tasks.RefreshURLFiles AndAlso UrlListOld.Contains(ImageUrl)
+							ElseIf Me.Work = Tasks.RefreshURLFiles AndAlso UrlListOld.Contains(ImageUrl) Then
 								'############################# Refresh - Known URL ###############################
 								' If refreshing URL-File stop scraping at first known URL.
 								GoTo ExitScrape
-							ElseIf UrlListOld.Contains(ImageUrl)
+							ElseIf UrlListOld.Contains(ImageUrl) Then
 								'############################## Create - Known URL ###############################
-								UrlListNew.Add(ImageUrl)                            ' Add to new list
-								GoTo NextImage                                      ' No Saving or Reviewing    
+								UrlListNew.Add(ImageUrl)							' Add to new list
+								GoTo NextImage										' No Saving or Reviewing    
 							End If
 							'===============================================================================
 							'                                 Review Image
@@ -643,9 +647,9 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 
 								' Report to MainApplication, the BGW is waiting for the Image Approval.
 								Me.OnProgressChanged(BlogCycle / BlogCycleSize + 1,
-												 Math.Ceiling(TotalPostCount / BlogCycleSize),
-												 i + 1, ImageURLs.Count,
-												 WorkingStages.Processing, TempImg)
+									 Math.Ceiling(TotalPostCount / BlogCycleSize),
+									 i + 1, ImageURLs.Count,
+									 WorkingStages.Processing, TempImg)
 
 								' Wait For User Approval
 								Do
@@ -656,7 +660,7 @@ System.ComponentModel.Description("Gets or Sets the Filepath to the Likelist.")>
 
 								' If Img declined and DislikeFile is set, write URL to DislikeFile
 								If ApproveImage = ImageApprovalStates.Declined _
-							And _DislikeListPath <> String.Empty Then
+							   And _DislikeListPath <> String.Empty Then
 									' Add the URL to DislikeList
 									DislikeList.Add(ImageUrl)
 									' If DislikeFile exists: Append URL Else create new File
@@ -755,11 +759,11 @@ RetryDeleteFile:
 				Me.OnProgressChanged(0, 0, 0, 0, WorkingStages.Completed, Nothing)
 
 				Return New CreateUrlFileResult With {.Cancelled = Me.CancellationPending,
-					.Filename = TargetFileName,
-					.ImagesAdded = ImageCountAdded,
-					.ImagesTotal = UrlListFinal.Count,
-					._Error = ExCache
-					}
+				 .Filename = TargetFileName,
+				 .ImagesAdded = ImageCountAdded,
+				 .ImagesTotal = UrlListFinal.Count,
+				 ._Error = ExCache
+				 }
 			Catch ex As WebException
 				'▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨▨
 				'                                           Webexception

@@ -40,6 +40,7 @@ Stefaf: Integration of Class myDirectory: Status ongoing.
 	
 * Bugfixes:
 
+    * Create URL Files was not working
     * Keyword Error messages were causing the program to get temporarily stuck in a loop (dariobrun)
     * TTS was speaking the html color codes for Keyword Error messages
     * The program tried to process LikedImageURLs.txt and DislikedImageURLs.txt without first making sure they existed (dariobrun)	
