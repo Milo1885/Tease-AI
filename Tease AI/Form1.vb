@@ -8276,12 +8276,17 @@ StatusUpdateEnd:
 						'StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
 						wrongVocabs.Add(keyword.Value)
 						Dim wrong As String = keyword.Value
-						wrong = wrong.Remove(0, 1)
-						wrong = "Missing Vocab: " & wrong
-						StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & wrong & "</font>")
-						ssh.KeywordError = "<font color=""red"">" & wrong & "</font>"
-						Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
-						Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
+
+						If UCase(wrong) = "#NULL" Then
+							StringClean = StringClean.Replace(keyword.Value, "")
+						Else
+							wrong = wrong.Remove(0, 1)
+							wrong = "Missing Vocab: " & wrong
+							StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & wrong & "</font>")
+							ssh.KeywordError = "<font color=""red"">" & wrong & "</font>"
+							Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
+							Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
+						End If
 
 					End If
 				End If
