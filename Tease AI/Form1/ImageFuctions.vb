@@ -191,17 +191,19 @@ Partial Class Form1
 					'                                  Liked Images
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					Try
-						Dim addlist As List(Of String) = Txt2List(pathLikeList)
+						If File.Exists(Application.StartupPath & "\Images\System\LikedImageURLs.txt") Then
+							Dim addlist As List(Of String) = Txt2List(pathLikeList)
 
-						' Remove all URLs if Offline-Mode is activated
-						If OfflineMode Or Type = ImageSourceType.Local Then
-							addlist.RemoveAll(Function(x) isURL(x))
+							' Remove all URLs if Offline-Mode is activated
+							If OfflineMode Or Type = ImageSourceType.Local Then
+								addlist.RemoveAll(Function(x) isURL(x))
+							End If
+
+							rtnList.AddRange(addlist)
 						End If
-
-						rtnList.AddRange(addlist)
 					Catch ex As Exception
-                        Log.WriteError(ex.Message, ex, "Error occured while loading Likelist")
-                        If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error occurred while loading Likelist</font>", False)
+						Log.WriteError(ex.Message, ex, "Error occured while loading Likelist")
+						If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error occurred while loading Likelist</font>", False)
 						GoTo exitEmpty
 					End Try
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
@@ -212,17 +214,19 @@ Partial Class Form1
 					'                                Disliked Images
 					'▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 					Try
-						Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
+						If File.Exists(Application.StartupPath & "\Images\System\DislikedImageURLs.txt") Then
+							Dim addlist As List(Of String) = Txt2List(Application.StartupPath & "\Images\System\DislikedImageURLs.txt")
 
-						' Remove all URLs if Offline-Mode is activated
-						If OfflineMode Or Type = ImageSourceType.Local Then
-							addlist.RemoveAll(Function(x) isURL(x))
+							' Remove all URLs if Offline-Mode is activated
+							If OfflineMode Or Type = ImageSourceType.Local Then
+								addlist.RemoveAll(Function(x) isURL(x))
+							End If
+
+							rtnList.AddRange(addlist)
 						End If
-
-						rtnList.AddRange(addlist)
 					Catch ex As Exception
-                        Log.WriteError(ex.Message, ex, "Error occured while loading Dislikelist")
-                        If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error occurred while loading Dislikelist</font>", False)
+						Log.WriteError(ex.Message, ex, "Error occured while loading Dislikelist")
+						If My.Settings.CBOutputErrors = True Then Form1.ChatAddSystemMessage("<font color=""red"">ERROR: " & ex.Message & " :::: Error occurred while loading Dislikelist</font>", False)
 						GoTo exitEmpty
 					End Try
 					'▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲

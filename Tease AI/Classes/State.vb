@@ -605,6 +605,8 @@ Public Class SessionState
 
 	Public Property VideoGenre As String
 
+	Public Property KeywordError As String
+
 
 #Region "----------------------------------- Only for Serialization -------------------------------------"
 

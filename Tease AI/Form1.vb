@@ -3633,7 +3633,8 @@ LoopAnswer:
 		If InStr(UCase(lines(line)), UCase("AcceptAnswer")) <> 0 Then
 
 AcceptAnswer:
-			ssh.DomChat = lines(TempLineVal)
+			ssh.DomChat = lines(line)
+			'ssh.DomChat = lines(TempLineVal)
 			' TimedAnswerTimer.Stop()
 
 			ssh.DomChat = ssh.DomChat.Replace("@AcceptAnswer ", "")
@@ -8163,6 +8164,7 @@ StatusUpdateEnd:
 
 	Public Function PoundClean(ByVal StringClean As String) As String
 #If TRACE Then
+		Dim wrongVocabs As List(Of String) = New List(Of String)
 		Dim TS As New TraceSwitch("PoundClean", "")
 
 		If TS.TraceVerbose Then
@@ -8210,6 +8212,7 @@ StatusUpdateEnd:
 			' Find all remaining #Keywords.
 			Dim re As New Regex(Pattern, RegexOptions.IgnoreCase)
 			Dim mc As MatchCollection = re.Matches(StringClean)
+
 			Dim controlCustom As String = ""
 			If StringClean.Contains("@CustomMode(") Then
 				controlCustom = GetParentheses(StringClean, "@CustomMode(")
@@ -8217,7 +8220,15 @@ StatusUpdateEnd:
 			' Try to get content from file but avoid changing twice the same vocab if it is present in more than one istance in the regex
 			Dim lastKey As String = "emptyString"
 			For Each keyword As Match In mc
-				If Not lastKey.Equals(keyword.ToString) Then
+				Dim doNotContinue As Boolean = False
+				For i As Integer = 0 To wrongVocabs.Count - 1
+					If wrongVocabs(i) = keyword.Value Then
+						doNotContinue = True
+						Exit For
+					End If
+				Next
+
+				If Not lastKey.Equals(keyword.Value) Then
 #If TRACE Then
 					If TS.TraceVerbose Then Trace.WriteLine(String.Format("Applying vocabulary: ""{0}""", keyword.Value))
 #End If
@@ -8239,9 +8250,13 @@ StatusUpdateEnd:
 						Else
 
 							'StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
-
+							wrongVocabs.Add(keyword.Value)
+							Dim wrong As String = keyword.Value
+							wrong = wrong.Remove(0, 1)
+							wrong = "Vocab Error: " & wrong
 							If My.Settings.CBOutputErrors = True Then
-								StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & keyword.Value & "</font>")
+								StringClean = StringClean.Replace(keyword.Value, "<font color=""DarkOrange"">" & wrong & "</font>")
+								ssh.KeywordError = "<font color=""DarkOrange"">" & wrong & "</font>"
 							Else
 								StringClean = StringClean.Replace(keyword.Value, "")
 							End If
@@ -8258,14 +8273,19 @@ StatusUpdateEnd:
 						'End Try
 
 					Else
-						StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
-
+						'StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & keyword.Value & "</font>")
+						wrongVocabs.Add(keyword.Value)
+						Dim wrong As String = keyword.Value
+						wrong = wrong.Remove(0, 1)
+						wrong = "Missing Vocab: " & wrong
+						StringClean = StringClean.Replace(keyword.Value, "<font color=""red"">" & wrong & "</font>")
+						ssh.KeywordError = "<font color=""red"">" & wrong & "</font>"
 						Dim lazytext As String = "Unable to locate vocabulary file: """ & keyword.Value & """"
 						Log.WriteError(lazytext, New Exception(lazytext), "PoundClean(String)")
 
 					End If
 				End If
-				lastKey = keyword.ToString
+				lastKey = keyword.Value
 			Next
 
 #If TRACE Then
@@ -17267,6 +17287,10 @@ saveImage:
 		FormatClean = FormatClean.Replace("</u>", "")
 		FormatClean = FormatClean.Replace(FrmSettings.TBEmote.Text, "")
 		FormatClean = FormatClean.Replace(FrmSettings.TBEmoteEnd.Text, "")
+		If ssh.KeywordError <> "" Then
+			FormatClean = FormatClean.Replace(ssh.KeywordError, "")
+			ssh.KeywordError = ""
+		End If
 
 		Return FormatClean
 	End Function
